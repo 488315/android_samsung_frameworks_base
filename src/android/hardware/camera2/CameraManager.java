@@ -280,14 +280,8 @@ public final class CameraManager {
     }
 
     static /* synthetic */ Boolean lambda$isPublicId$0(String str) {
-        boolean z;
         try {
-            if (Integer.parseInt(str) >= 20 && 100 > Integer.parseInt(str)) {
-                z = false;
-                return Boolean.valueOf(z);
-            }
-            z = true;
-            return Boolean.valueOf(z);
+            return Boolean.valueOf(Integer.parseInt(str) < 20 || 100 <= Integer.parseInt(str));
         } catch (NumberFormatException unused) {
             return true;
         }
@@ -319,18 +313,18 @@ public final class CameraManager {
         }
 
         private synchronized void handleStateChange(DeviceState deviceState) {
-            boolean contains;
+            boolean zContains;
             if (this.mDeviceStateManagerFlags.deviceStatePropertyMigration()) {
-                contains = deviceState.hasProperty(11);
+                zContains = deviceState.hasProperty(11);
             } else {
-                contains = ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
+                zContains = ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
             }
-            this.mFoldedDeviceState = contains;
+            this.mFoldedDeviceState = zContains;
             Iterator<WeakReference<DeviceStateListener>> it = this.mDeviceStateListeners.iterator();
             while (it.hasNext()) {
                 DeviceStateListener deviceStateListener = it.next().get();
                 if (deviceStateListener != null) {
-                    deviceStateListener.onDeviceStateChanged(contains);
+                    deviceStateListener.onDeviceStateChanged(zContains);
                 } else {
                     it.remove();
                 }
@@ -381,7 +375,7 @@ public final class CameraManager {
     public void registerAvailabilityCallback(AvailabilityCallback availabilityCallback, Handler handler) {
         if (availabilityCallback != null) {
             availabilityCallback.mPackageName = this.mContext.getOpPackageName();
-            boolean z = false;
+            boolean zIsHiddenIdPermittedPackage = false;
             availabilityCallback.mIsRegisteredWhileServiceDown = false;
             ICameraService cameraService = CameraManagerGlobal.get().getCameraService();
             if (cameraService == null) {
@@ -389,13 +383,13 @@ public final class CameraManager {
                 availabilityCallback.mIsRegisteredWhileServiceDown = true;
             } else {
                 try {
-                    z = cameraService.isHiddenIdPermittedPackage(availabilityCallback.mPackageName);
+                    zIsHiddenIdPermittedPackage = cameraService.isHiddenIdPermittedPackage(availabilityCallback.mPackageName);
                 } catch (RemoteException e) {
                     availabilityCallback.mIsRegisteredWhileServiceDown = true;
                     Log.e(TAG, "Camera service is currently unavailable", e);
                 }
             }
-            availabilityCallback.mIsHiddenIdPermittedPackage = z;
+            availabilityCallback.mIsHiddenIdPermittedPackage = zIsHiddenIdPermittedPackage;
             Log.i(TAG, "registerAvailabilityCallback: Is device callback = " + this.mHasOpenCloseListenerPermission);
         }
         CameraManagerGlobal.get().registerAvailabilityCallback(availabilityCallback, CameraDeviceImpl.checkAndWrapHandler(handler), this.mHasOpenCloseListenerPermission, this.mContext.getDeviceId(), getDevicePolicyFromContext(this.mContext));
@@ -407,7 +401,7 @@ public final class CameraManager {
         }
         if (availabilityCallback != null) {
             availabilityCallback.mPackageName = this.mContext.getOpPackageName();
-            boolean z = false;
+            boolean zIsHiddenIdPermittedPackage = false;
             availabilityCallback.mIsRegisteredWhileServiceDown = false;
             ICameraService cameraService = CameraManagerGlobal.get().getCameraService();
             if (cameraService == null) {
@@ -415,13 +409,13 @@ public final class CameraManager {
                 availabilityCallback.mIsRegisteredWhileServiceDown = true;
             } else {
                 try {
-                    z = cameraService.isHiddenIdPermittedPackage(availabilityCallback.mPackageName);
+                    zIsHiddenIdPermittedPackage = cameraService.isHiddenIdPermittedPackage(availabilityCallback.mPackageName);
                 } catch (RemoteException e) {
                     availabilityCallback.mIsRegisteredWhileServiceDown = true;
                     Log.e(TAG, "Camera service is currently unavailable", e);
                 }
             }
-            availabilityCallback.mIsHiddenIdPermittedPackage = z;
+            availabilityCallback.mIsHiddenIdPermittedPackage = zIsHiddenIdPermittedPackage;
             Log.i(TAG, "registerAvailabilityCallback: Is device callback = " + this.mHasOpenCloseListenerPermission);
         }
         CameraManagerGlobal.get().registerAvailabilityCallback(availabilityCallback, executor, this.mHasOpenCloseListenerPermission, this.mContext.getDeviceId(), getDevicePolicyFromContext(this.mContext));
@@ -500,16 +494,16 @@ public final class CameraManager {
         if (this.mCameraIdToMultiResolutionStreamConfigurationMap.containsKey(str)) {
             return this.mCameraIdToMultiResolutionStreamConfigurationMap.get(str);
         }
-        HashMap hashMap = new HashMap();
-        this.mCameraIdToMultiResolutionStreamConfigurationMap.put(str, hashMap);
+        HashMap map = new HashMap();
+        this.mCameraIdToMultiResolutionStreamConfigurationMap.put(str, map);
         Boolean bool = (Boolean) cameraMetadataNative.get(CameraCharacteristics.SCALER_MULTI_RESOLUTION_STREAM_SUPPORTED);
         if (bool != null && bool.booleanValue()) {
             Set<String> physicalCameraIds = cameraMetadataNative.getPhysicalCameraIds();
             if (physicalCameraIds.size() == 0 && cameraMetadataNative.isUltraHighResolutionSensor()) {
                 StreamConfiguration[] streamConfigurationArr = (StreamConfiguration[]) cameraMetadataNative.get(CameraCharacteristics.SCALER_PHYSICAL_CAMERA_MULTI_RESOLUTION_STREAM_CONFIGURATIONS);
                 if (streamConfigurationArr != null) {
-                    hashMap.put(str, streamConfigurationArr);
-                    return hashMap;
+                    map.put(str, streamConfigurationArr);
+                    return map;
                 }
             } else {
                 try {
@@ -517,7 +511,7 @@ public final class CameraManager {
                         ICameraService iCameraService2 = iCameraService;
                         StreamConfiguration[] streamConfigurationArr2 = (StreamConfiguration[]) iCameraService2.getCameraCharacteristics(str2, this.mContext.getApplicationInfo().targetSdkVersion, 0, getClientAttribution(0, false), 0).get(CameraCharacteristics.SCALER_PHYSICAL_CAMERA_MULTI_RESOLUTION_STREAM_CONFIGURATIONS);
                         if (streamConfigurationArr2 != null) {
-                            hashMap.put(str2, streamConfigurationArr2);
+                            map.put(str2, streamConfigurationArr2);
                         }
                         iCameraService = iCameraService2;
                     }
@@ -526,7 +520,7 @@ public final class CameraManager {
                 }
             }
         }
-        return hashMap;
+        return map;
     }
 
     public CameraCharacteristics getCameraCharacteristics(String str) throws CameraAccessException {
@@ -538,7 +532,7 @@ public final class CameraManager {
     }
 
     private CameraCharacteristics getCameraCharacteristics(String str, int i) throws CameraAccessException {
-        CameraCharacteristics prepareCameraCharacteristics;
+        CameraCharacteristics cameraCharacteristicsPrepareCameraCharacteristics;
         if (CameraManagerGlobal.sCameraServiceDisabled) {
             throw new IllegalArgumentException("No cameras available on device");
         }
@@ -556,22 +550,24 @@ public final class CameraManager {
                     if (!this.mHiddenCameraPermittedState.booleanValue()) {
                         throw new IllegalArgumentException(String.format("Unknown camera ID %s", str));
                     }
-                }
-                try {
                     try {
-                        prepareCameraCharacteristics = prepareCameraCharacteristics(str, cameraService.getCameraCharacteristics(str, this.mContext.getApplicationInfo().targetSdkVersion, i, getClientAttribution(), getDevicePolicyFromContext(this.mContext)), cameraService);
-                    } catch (RemoteException e) {
-                        throw new CameraAccessException(2, "Camera service is currently unavailable", e);
+                        try {
+                            cameraCharacteristicsPrepareCameraCharacteristics = prepareCameraCharacteristics(str, cameraService.getCameraCharacteristics(str, this.mContext.getApplicationInfo().targetSdkVersion, i, getClientAttribution(), getDevicePolicyFromContext(this.mContext)), cameraService);
+                        } catch (ServiceSpecificException e) {
+                            throw ExceptionUtils.throwAsPublicException(e);
+                        }
+                    } catch (RemoteException e2) {
+                        throw new CameraAccessException(2, "Camera service is currently unavailable", e2);
                     }
-                } catch (ServiceSpecificException e2) {
-                    throw ExceptionUtils.throwAsPublicException(e2);
+                } else {
+                    cameraCharacteristicsPrepareCameraCharacteristics = prepareCameraCharacteristics(str, cameraService.getCameraCharacteristics(str, this.mContext.getApplicationInfo().targetSdkVersion, i, getClientAttribution(), getDevicePolicyFromContext(this.mContext)), cameraService);
                 }
             } catch (RemoteException e3) {
                 throw new CameraAccessException(2, "Camera service is currently unavailable", e3);
             }
         }
-        registerDeviceStateListener(prepareCameraCharacteristics);
-        return prepareCameraCharacteristics;
+        registerDeviceStateListener(cameraCharacteristicsPrepareCameraCharacteristics);
+        return cameraCharacteristicsPrepareCameraCharacteristics;
     }
 
     public CameraCharacteristics prepareCameraCharacteristics(String str, CameraMetadataNative cameraMetadataNative, ICameraService iCameraService) throws CameraAccessException {
@@ -601,11 +597,11 @@ public final class CameraManager {
     }
 
     public Map<String, CameraCharacteristics> getPhysicalIdToCharsMap(CameraCharacteristics cameraCharacteristics) throws CameraAccessException {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (String str : cameraCharacteristics.getPhysicalCameraIds()) {
-            hashMap.put(str, getCameraCharacteristics(str));
+            map.put(str, getCameraCharacteristics(str));
         }
-        return hashMap;
+        return map;
     }
 
     public CameraDevice.CameraDeviceSetup getCameraDeviceSetup(String str) throws CameraAccessException {
@@ -645,14 +641,14 @@ public final class CameraManager {
         if (i != -1) {
             attributionSource = attributionSource.withDeviceId(i);
         }
-        AttributionSourceState asState = attributionSource.asState();
+        AttributionSourceState attributionSourceStateAsState = attributionSource.asState();
         if (Flags.dataDeliveryPermissionChecks() && z) {
-            return asState;
+            return attributionSourceStateAsState;
         }
         AttributionSourceState attributionSourceState = new AttributionSourceState();
         attributionSourceState.uid = -1;
         attributionSourceState.pid = -1;
-        attributionSourceState.deviceId = asState.deviceId;
+        attributionSourceState.deviceId = attributionSourceStateAsState.deviceId;
         attributionSourceState.packageName = this.mContext.getOpPackageName();
         attributionSourceState.attributionTag = this.mContext.getAttributionTag();
         attributionSourceState.next = new AttributionSourceState[0];
@@ -672,34 +668,34 @@ public final class CameraManager {
         ICameraService cameraService;
         CameraCharacteristics cameraCharacteristics = getCameraCharacteristics(str);
         synchronized (this.mLock) {
-            ICameraDeviceUser iCameraDeviceUser = null;
+            ICameraDeviceUser iCameraDeviceUserConnectDevice = null;
             cameraDeviceImpl = new CameraDeviceImpl(str, stateCallback, executor, cameraCharacteristics, this, this.mContext.getApplicationInfo().targetSdkVersion, this.mContext, (Flags.cameraDeviceSetup() && CameraDeviceSetupImpl.isCameraDeviceSetupSupported(cameraCharacteristics)) ? getCameraDeviceSetupUnsafe(str) : null, z);
             CameraDeviceImpl.CameraDeviceCallbacks callbacks = cameraDeviceImpl.getCallbacks();
             try {
                 try {
                     cameraService = CameraManagerGlobal.get().getCameraService();
-                } catch (RemoteException unused) {
-                    ServiceSpecificException serviceSpecificException = new ServiceSpecificException(4, "Camera service is currently unavailable");
-                    cameraDeviceImpl.setRemoteFailure(serviceSpecificException);
-                    throw ExceptionUtils.throwAsPublicException(serviceSpecificException);
+                } catch (ServiceSpecificException e) {
+                    if (e.errorCode == 9) {
+                        throw new AssertionError("Should've gone down the shim path");
+                    }
+                    if (e.errorCode != 7 && e.errorCode != 8 && e.errorCode != 6 && e.errorCode != 4 && e.errorCode != 10) {
+                        throw ExceptionUtils.throwAsPublicException(e);
+                    }
+                    cameraDeviceImpl.setRemoteFailure(e);
+                    if (e.errorCode == 6 || e.errorCode == 4 || e.errorCode == 7) {
+                        throw ExceptionUtils.throwAsPublicException(e);
+                    }
                 }
-            } catch (ServiceSpecificException e) {
-                if (e.errorCode == 9) {
-                    throw new AssertionError("Should've gone down the shim path");
+                if (cameraService == null) {
+                    throw new ServiceSpecificException(4, "Camera service is currently unavailable");
                 }
-                if (e.errorCode != 7 && e.errorCode != 8 && e.errorCode != 6 && e.errorCode != 4 && e.errorCode != 10) {
-                    throw ExceptionUtils.throwAsPublicException(e);
-                }
-                cameraDeviceImpl.setRemoteFailure(e);
-                if (e.errorCode == 6 || e.errorCode == 4 || e.errorCode == 7) {
-                    throw ExceptionUtils.throwAsPublicException(e);
-                }
+                iCameraDeviceUserConnectDevice = cameraService.connectDevice(callbacks, str, i, this.mContext.getApplicationInfo().targetSdkVersion, i2, getClientAttribution(true), getDevicePolicyFromContext(this.mContext), z);
+                cameraDeviceImpl.setRemoteDevice(iCameraDeviceUserConnectDevice);
+            } catch (RemoteException unused) {
+                ServiceSpecificException serviceSpecificException = new ServiceSpecificException(4, "Camera service is currently unavailable");
+                cameraDeviceImpl.setRemoteFailure(serviceSpecificException);
+                throw ExceptionUtils.throwAsPublicException(serviceSpecificException);
             }
-            if (cameraService == null) {
-                throw new ServiceSpecificException(4, "Camera service is currently unavailable");
-            }
-            iCameraDeviceUser = cameraService.connectDevice(callbacks, str, i, this.mContext.getApplicationInfo().targetSdkVersion, i2, getClientAttribution(true), getDevicePolicyFromContext(this.mContext), z);
-            cameraDeviceImpl.setRemoteDevice(iCameraDeviceUser);
         }
         return cameraDeviceImpl;
     }
@@ -777,15 +773,15 @@ public final class CameraManager {
 
     public static int getRotationOverride(Context context) {
         PackageManager packageManager;
-        String str;
+        String opPackageName;
         if (context != null) {
             packageManager = context.getPackageManager();
-            str = context.getOpPackageName();
+            opPackageName = context.getOpPackageName();
         } else {
             packageManager = null;
-            str = null;
+            opPackageName = null;
         }
-        return getRotationOverride(context, packageManager, str);
+        return getRotationOverride(context, packageManager, opPackageName);
     }
 
     public static int getRotationOverride(Context context, PackageManager packageManager, String str) {
@@ -862,11 +858,11 @@ public final class CameraManager {
                     try {
                         CameraInjectionSessionImpl cameraInjectionSessionImpl = new CameraInjectionSessionImpl(injectionStatusCallback, executor);
                         cameraInjectionSessionImpl.setRemoteInjectionSession(cameraService.injectCamera(str, str2, str3, cameraInjectionSessionImpl.getCallback()));
-                    } catch (RemoteException unused) {
-                        throw ExceptionUtils.throwAsPublicException(new ServiceSpecificException(4, "Camera service is currently unavailable"));
+                    } catch (ServiceSpecificException e) {
+                        throw ExceptionUtils.throwAsPublicException(e);
                     }
-                } catch (ServiceSpecificException e) {
-                    throw ExceptionUtils.throwAsPublicException(e);
+                } catch (RemoteException unused) {
+                    throw ExceptionUtils.throwAsPublicException(new ServiceSpecificException(4, "Camera service is currently unavailable"));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1003,7 +999,7 @@ public final class CameraManager {
             }
             try {
                 service.linkToDeath(this, 0);
-                ICameraService asInterface = ICameraService.Stub.asInterface(service);
+                ICameraService iCameraServiceAsInterface = ICameraService.Stub.asInterface(service);
                 try {
                     CameraMetadataNative.setupGlobalVendorTagDescriptor();
                 } catch (ServiceSpecificException e) {
@@ -1011,7 +1007,7 @@ public final class CameraManager {
                 }
                 try {
                     addDeviceStatusHistoryLocked(TextUtils.formatSimple("connectCameraServiceLocked(E): tid(%d): mDeviceStatus size %d", Long.valueOf(Thread.currentThread().getId()), Integer.valueOf(this.mDeviceStatus.size())));
-                    for (CameraStatus cameraStatus : asInterface.addListener(this)) {
+                    for (CameraStatus cameraStatus : iCameraServiceAsInterface.addListener(this)) {
                         DeviceCameraInfo deviceCameraInfo = new DeviceCameraInfo(cameraStatus.cameraId, cameraStatus.deviceId);
                         onStatusChangedLocked(cameraStatus.status, deviceCameraInfo);
                         if (cameraStatus.unavailablePhysicalCameras != null) {
@@ -1023,14 +1019,14 @@ public final class CameraManager {
                             onCameraOpenedLocked(deviceCameraInfo, cameraStatus.clientPackage);
                         }
                     }
-                    this.mCameraService = asInterface;
+                    this.mCameraService = iCameraServiceAsInterface;
                     addDeviceStatusHistoryLocked(TextUtils.formatSimple("connectCameraServiceLocked(X): tid(%d): mDeviceStatus size %d", Long.valueOf(Thread.currentThread().getId()), Integer.valueOf(this.mDeviceStatus.size())));
                 } catch (RemoteException unused) {
                 } catch (ServiceSpecificException e2) {
                     throw new IllegalStateException("Failed to register a camera service listener", e2);
                 }
                 try {
-                    for (ConcurrentCameraIdCombination concurrentCameraIdCombination : asInterface.getConcurrentCameraIds()) {
+                    for (ConcurrentCameraIdCombination concurrentCameraIdCombination : iCameraServiceAsInterface.getConcurrentCameraIds()) {
                         Set<Pair<String, Integer>> concurrentCameraIdCombination2 = concurrentCameraIdCombination.getConcurrentCameraIdCombination();
                         ArraySet arraySet = new ArraySet();
                         for (Pair<String, Integer> pair : concurrentCameraIdCombination2) {
@@ -1066,10 +1062,10 @@ public final class CameraManager {
             try {
                 ArrayList arrayList = new ArrayList();
                 for (int i3 = 0; i3 < this.mDeviceStatus.size(); i3++) {
-                    int intValue = this.mDeviceStatus.valueAt(i3).intValue();
-                    DeviceCameraInfo keyAt = this.mDeviceStatus.keyAt(i3);
-                    if (intValue != 0 && intValue != 2 && !shouldHideCamera(i, i2, keyAt)) {
-                        arrayList.add(keyAt.mCameraId);
+                    int iIntValue = this.mDeviceStatus.valueAt(i3).intValue();
+                    DeviceCameraInfo deviceCameraInfoKeyAt = this.mDeviceStatus.keyAt(i3);
+                    if (iIntValue != 0 && iIntValue != 2 && !shouldHideCamera(i, i2, deviceCameraInfoKeyAt)) {
+                        arrayList.add(deviceCameraInfoKeyAt.mCameraId);
                     }
                 }
                 return (String[]) arrayList.toArray(new String[0]);
@@ -1098,7 +1094,7 @@ public final class CameraManager {
         private static void sortCameraIds(String[] strArr) {
             Arrays.sort(strArr, new Comparator<String>() { // from class: android.hardware.camera2.CameraManager.CameraManagerGlobal.1
                 @Override // java.util.Comparator
-                public int compare(String str, String str2) {
+                public int compare(String str, String str2) throws NumberFormatException {
                     int i;
                     int i2;
                     try {
@@ -1139,7 +1135,7 @@ public final class CameraManager {
         }
 
         public String[] getCameraIdListNoLazy(int i, int i2) {
-            String[] extractCameraIdListLocked;
+            String[] strArrExtractCameraIdListLocked;
             if (sCameraServiceDisabled) {
                 return new String[0];
             }
@@ -1184,15 +1180,15 @@ public final class CameraManager {
                 connectCameraServiceLocked();
                 try {
                     addDeviceStatusHistoryLocked(TextUtils.formatSimple("getCameraIdListNoLazy(E): tid(%d): mDeviceStatus size %d", Long.valueOf(Thread.currentThread().getId()), Integer.valueOf(this.mDeviceStatus.size())));
-                    CameraStatus[] addListener = this.mCameraService.addListener(stub);
+                    CameraStatus[] cameraStatusArrAddListener = this.mCameraService.addListener(stub);
                     this.mCameraService.removeListener(stub);
-                    for (CameraStatus cameraStatus : addListener) {
+                    for (CameraStatus cameraStatus : cameraStatusArrAddListener) {
                         onStatusChangedLocked(cameraStatus.status, new DeviceCameraInfo(cameraStatus.cameraId, cameraStatus.deviceId));
                     }
-                    Set<DeviceCameraInfo> keySet = this.mDeviceStatus.keySet();
+                    Set<DeviceCameraInfo> setKeySet = this.mDeviceStatus.keySet();
                     ArrayList<DeviceCameraInfo> arrayList = new ArrayList();
-                    for (DeviceCameraInfo deviceCameraInfo : keySet) {
-                        if (!cameraStatusesContains(addListener, deviceCameraInfo)) {
+                    for (DeviceCameraInfo deviceCameraInfo : setKeySet) {
+                        if (!cameraStatusesContains(cameraStatusArrAddListener, deviceCameraInfo)) {
                             arrayList.add(deviceCameraInfo);
                         }
                     }
@@ -1205,10 +1201,10 @@ public final class CameraManager {
                 } catch (ServiceSpecificException e) {
                     throw new IllegalStateException("Failed to register a camera service listener", e);
                 }
-                extractCameraIdListLocked = extractCameraIdListLocked(i, i2);
+                strArrExtractCameraIdListLocked = extractCameraIdListLocked(i, i2);
             }
-            sortCameraIds(extractCameraIdListLocked);
-            return (String[]) Arrays.stream(extractCameraIdListLocked).filter(new CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda11
+            sortCameraIds(strArrExtractCameraIdListLocked);
+            return (String[]) Arrays.stream(strArrExtractCameraIdListLocked).filter(new CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda11
                 @Override // java.util.function.IntFunction
                 public final Object apply(int i3) {
                     return CameraManager.CameraManagerGlobal.lambda$getCameraIdListNoLazy$0(i3);
@@ -1221,13 +1217,13 @@ public final class CameraManager {
         }
 
         public String[] getCameraIdList(int i, int i2) {
-            String[] extractCameraIdListLocked;
+            String[] strArrExtractCameraIdListLocked;
             synchronized (this.mLock) {
                 connectCameraServiceLocked();
-                extractCameraIdListLocked = extractCameraIdListLocked(i, i2);
+                strArrExtractCameraIdListLocked = extractCameraIdListLocked(i, i2);
             }
-            sortCameraIds(extractCameraIdListLocked);
-            return (String[]) Arrays.stream(extractCameraIdListLocked).filter(new CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda1
+            sortCameraIds(strArrExtractCameraIdListLocked);
+            return (String[]) Arrays.stream(strArrExtractCameraIdListLocked).filter(new CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda1
                 @Override // java.util.function.IntFunction
                 public final Object apply(int i3) {
                     return CameraManager.CameraManagerGlobal.lambda$getCameraIdList$1(i3);
@@ -1240,12 +1236,12 @@ public final class CameraManager {
         }
 
         public Set<Set<String>> getConcurrentCameraIds(int i, int i2) {
-            Set<Set<String>> extractConcurrentCameraIdListLocked;
+            Set<Set<String>> setExtractConcurrentCameraIdListLocked;
             synchronized (this.mLock) {
                 connectCameraServiceLocked();
-                extractConcurrentCameraIdListLocked = extractConcurrentCameraIdListLocked(i, i2);
+                setExtractConcurrentCameraIdListLocked = extractConcurrentCameraIdListLocked(i, i2);
             }
-            return extractConcurrentCameraIdListLocked;
+            return setExtractConcurrentCameraIdListLocked;
         }
 
         public boolean isConcurrentSessionConfigurationSupported(Map<String, SessionConfiguration> map, int i, AttributionSourceState attributionSourceState, int i2) throws CameraAccessException {
@@ -1387,54 +1383,54 @@ public final class CameraManager {
         }
 
         private void postSingleAccessPriorityChangeUpdate(final AvailabilityCallback availabilityCallback, Executor executor) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Objects.requireNonNull(availabilityCallback);
                 executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.AvailabilityCallback.this.onCameraAccessPrioritiesChanged();
+                        availabilityCallback.onCameraAccessPrioritiesChanged();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void postSingleCameraOpenedUpdate(final AvailabilityCallback availabilityCallback, Executor executor, final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.AvailabilityCallback.this.onCameraOpened(str, str2);
+                        availabilityCallback.onCameraOpened(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void postSingleCameraClosedUpdate(final AvailabilityCallback availabilityCallback, Executor executor, final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.AvailabilityCallback.this.onCameraClosed(str);
+                        availabilityCallback.onCameraClosed(str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void postSingleUpdate(final AvailabilityCallback availabilityCallback, Executor executor, final String str, final String str2, int i) {
-            long clearCallingIdentity;
+            long jClearCallingIdentity;
             if (CameraManager.isPublicId(str) || availabilityCallback == null || availabilityCallback.mIsHiddenIdPermittedPackage) {
                 Log.i(TAG, String.format("postSingleUpdate device: camera id %s status %s", str, cameraStatusToString(i)));
                 if (isAvailable(i)) {
-                    clearCallingIdentity = Binder.clearCallingIdentity();
+                    jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda9
                             @Override // java.lang.Runnable
@@ -1445,7 +1441,7 @@ public final class CameraManager {
                     } finally {
                     }
                 } else {
-                    clearCallingIdentity = Binder.clearCallingIdentity();
+                    jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda10
                             @Override // java.lang.Runnable
@@ -1476,26 +1472,26 @@ public final class CameraManager {
         }
 
         private void postSingleTorchUpdate(final TorchCallback torchCallback, Executor executor, final String str, final int i) {
-            long clearCallingIdentity;
+            long jClearCallingIdentity;
             Log.i(TAG, String.format("postSingleTorchUpdate device: camera id %s status %d", str, Integer.valueOf(i)));
             if (i == 1 || i == 2) {
-                clearCallingIdentity = Binder.clearCallingIdentity();
+                jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda7
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CameraManager.CameraManagerGlobal.lambda$postSingleTorchUpdate$6(CameraManager.TorchCallback.this, str, i);
+                            CameraManager.CameraManagerGlobal.lambda$postSingleTorchUpdate$6(torchCallback, str, i);
                         }
                     });
                 } finally {
                 }
             } else {
-                clearCallingIdentity = Binder.clearCallingIdentity();
+                jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda8
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CameraManager.CameraManagerGlobal.lambda$postSingleTorchUpdate$7(CameraManager.TorchCallback.this, str);
+                            CameraManager.CameraManagerGlobal.lambda$postSingleTorchUpdate$7(torchCallback, str);
                         }
                     });
                 } finally {
@@ -1514,32 +1510,32 @@ public final class CameraManager {
         }
 
         private void postSingleTorchStrengthLevelUpdate(final TorchCallback torchCallback, Executor executor, final String str, final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.TorchCallback.this.onTorchStrengthLevelChanged(str, i);
+                        torchCallback.onTorchStrengthLevelChanged(str, i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void updateCallbackLocked(AvailabilityCallback availabilityCallback, Executor executor) {
             for (int i = 0; i < this.mDeviceStatus.size(); i++) {
-                DeviceCameraInfo keyAt = this.mDeviceStatus.keyAt(i);
-                if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, keyAt)) {
-                    Integer valueAt = this.mDeviceStatus.valueAt(i);
-                    postSingleUpdate(availabilityCallback, executor, keyAt.mCameraId, null, valueAt.intValue());
+                DeviceCameraInfo deviceCameraInfoKeyAt = this.mDeviceStatus.keyAt(i);
+                if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, deviceCameraInfoKeyAt)) {
+                    Integer numValueAt = this.mDeviceStatus.valueAt(i);
+                    postSingleUpdate(availabilityCallback, executor, deviceCameraInfoKeyAt.mCameraId, null, numValueAt.intValue());
                     if (this.mHasOpenCloseListenerPermission) {
-                        postSemSingleUpdate(availabilityCallback, executor, keyAt.mCameraId, valueAt.intValue());
+                        postSemSingleUpdate(availabilityCallback, executor, deviceCameraInfoKeyAt.mCameraId, numValueAt.intValue());
                     }
-                    if ((isAvailable(valueAt.intValue()) || CameraManager.physicalCallbacksAreEnabledForUnavailableCamera()) && this.mUnavailablePhysicalDevices.containsKey(keyAt)) {
-                        Iterator<String> it = this.mUnavailablePhysicalDevices.get(keyAt).iterator();
+                    if ((isAvailable(numValueAt.intValue()) || CameraManager.physicalCallbacksAreEnabledForUnavailableCamera()) && this.mUnavailablePhysicalDevices.containsKey(deviceCameraInfoKeyAt)) {
+                        Iterator<String> it = this.mUnavailablePhysicalDevices.get(deviceCameraInfoKeyAt).iterator();
                         while (it.hasNext()) {
-                            postSingleUpdate(availabilityCallback, executor, keyAt.mCameraId, it.next(), 0);
+                            postSingleUpdate(availabilityCallback, executor, deviceCameraInfoKeyAt.mCameraId, it.next(), 0);
                         }
                     }
                 }
@@ -1547,23 +1543,23 @@ public final class CameraManager {
             if (this.mHasOpenCloseListenerPermission) {
                 Log.i(TAG, "updateCallbackLocked: post device state update");
                 for (int i2 = 0; i2 < this.mCameraDeviceStates.size(); i2++) {
-                    DeviceCameraInfo keyAt2 = this.mCameraDeviceStates.keyAt(i2);
-                    CameraDeviceState valueAt2 = this.mCameraDeviceStates.valueAt(i2);
-                    if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, keyAt2)) {
-                        postSemSingleCameraDeviceStateUpdate(availabilityCallback, executor, keyAt2.mCameraId, valueAt2);
+                    DeviceCameraInfo deviceCameraInfoKeyAt2 = this.mCameraDeviceStates.keyAt(i2);
+                    CameraDeviceState cameraDeviceStateValueAt = this.mCameraDeviceStates.valueAt(i2);
+                    if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, deviceCameraInfoKeyAt2)) {
+                        postSemSingleCameraDeviceStateUpdate(availabilityCallback, executor, deviceCameraInfoKeyAt2.mCameraId, cameraDeviceStateValueAt);
                     }
                 }
             }
             for (int i3 = 0; i3 < this.mOpenedDevices.size(); i3++) {
-                DeviceCameraInfo keyAt3 = this.mOpenedDevices.keyAt(i3);
-                if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, keyAt3)) {
-                    postSingleCameraOpenedUpdate(availabilityCallback, executor, keyAt3.mCameraId, this.mOpenedDevices.valueAt(i3));
+                DeviceCameraInfo deviceCameraInfoKeyAt3 = this.mOpenedDevices.keyAt(i3);
+                if (!shouldHideCamera(availabilityCallback.mDeviceId, availabilityCallback.mDevicePolicy, deviceCameraInfoKeyAt3)) {
+                    postSingleCameraOpenedUpdate(availabilityCallback, executor, deviceCameraInfoKeyAt3.mCameraId, this.mOpenedDevices.valueAt(i3));
                 }
             }
         }
 
         private void onStatusChangedLocked(int i, DeviceCameraInfo deviceCameraInfo) {
-            Integer put;
+            Integer numPut;
             CameraManagerGlobal cameraManagerGlobal;
             int i2;
             if (!validStatus(i)) {
@@ -1571,41 +1567,41 @@ public final class CameraManager {
                 return;
             }
             if (i == 0) {
-                put = this.mDeviceStatus.remove(deviceCameraInfo);
+                numPut = this.mDeviceStatus.remove(deviceCameraInfo);
                 this.mUnavailablePhysicalDevices.remove(deviceCameraInfo);
             } else {
-                put = this.mDeviceStatus.put(deviceCameraInfo, Integer.valueOf(i));
-                if (put == null) {
+                numPut = this.mDeviceStatus.put(deviceCameraInfo, Integer.valueOf(i));
+                if (numPut == null) {
                     this.mUnavailablePhysicalDevices.put(deviceCameraInfo, new ArrayList<>());
                 }
             }
-            if (put == null || put.intValue() != i) {
+            if (numPut == null || numPut.intValue() != i) {
                 int size = this.mCallbackMap.size();
                 int i3 = 0;
                 for (int i4 = 0; i4 < size; i4++) {
-                    Executor valueAt = this.mCallbackMap.valueAt(i4);
-                    AvailabilityCallback keyAt = this.mCallbackMap.keyAt(i4);
-                    if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo) && this.mHasOpenCloseListenerPermission) {
-                        postSemSingleUpdate(keyAt, valueAt, deviceCameraInfo.mCameraId, i);
+                    Executor executorValueAt = this.mCallbackMap.valueAt(i4);
+                    AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i4);
+                    if (!shouldHideCamera(availabilityCallbackKeyAt.mDeviceId, availabilityCallbackKeyAt.mDevicePolicy, deviceCameraInfo) && this.mHasOpenCloseListenerPermission) {
+                        postSemSingleUpdate(availabilityCallbackKeyAt, executorValueAt, deviceCameraInfo.mCameraId, i);
                     }
                 }
-                if (put == null || isAvailable(i) != isAvailable(put.intValue())) {
+                if (numPut == null || isAvailable(i) != isAvailable(numPut.intValue())) {
                     int size2 = this.mCallbackMap.size();
                     while (i3 < size2) {
-                        AvailabilityCallback keyAt2 = this.mCallbackMap.keyAt(i3);
-                        if (this.shouldHideCamera(keyAt2.mDeviceId, keyAt2.mDevicePolicy, deviceCameraInfo)) {
+                        AvailabilityCallback availabilityCallbackKeyAt2 = this.mCallbackMap.keyAt(i3);
+                        if (this.shouldHideCamera(availabilityCallbackKeyAt2.mDeviceId, availabilityCallbackKeyAt2.mDevicePolicy, deviceCameraInfo)) {
                             cameraManagerGlobal = this;
                             i2 = i;
                         } else {
-                            Executor valueAt2 = this.mCallbackMap.valueAt(i3);
+                            Executor executorValueAt2 = this.mCallbackMap.valueAt(i3);
                             cameraManagerGlobal = this;
                             int i5 = i;
-                            cameraManagerGlobal.postSingleUpdate(keyAt2, valueAt2, deviceCameraInfo.mCameraId, null, i5);
+                            cameraManagerGlobal.postSingleUpdate(availabilityCallbackKeyAt2, executorValueAt2, deviceCameraInfo.mCameraId, null, i5);
                             i2 = i5;
                             if (cameraManagerGlobal.isAvailable(i2) && cameraManagerGlobal.mUnavailablePhysicalDevices.containsKey(deviceCameraInfo)) {
                                 Iterator<String> it = cameraManagerGlobal.mUnavailablePhysicalDevices.get(deviceCameraInfo).iterator();
                                 while (it.hasNext()) {
-                                    cameraManagerGlobal.postSingleUpdate(keyAt2, valueAt2, deviceCameraInfo.mCameraId, it.next(), 0);
+                                    cameraManagerGlobal.postSingleUpdate(availabilityCallbackKeyAt2, executorValueAt2, deviceCameraInfo.mCameraId, it.next(), 0);
                                 }
                             }
                         }
@@ -1644,8 +1640,8 @@ public final class CameraManager {
             int size = this.mCallbackMap.size();
             int i3 = 0;
             while (i3 < size) {
-                AvailabilityCallback keyAt = this.mCallbackMap.keyAt(i3);
-                if (this.shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
+                AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i3);
+                if (this.shouldHideCamera(availabilityCallbackKeyAt.mDeviceId, availabilityCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
                     cameraManagerGlobal = this;
                     i2 = i;
                     str2 = str;
@@ -1653,7 +1649,7 @@ public final class CameraManager {
                     cameraManagerGlobal = this;
                     i2 = i;
                     str2 = str;
-                    cameraManagerGlobal.postSingleUpdate(keyAt, this.mCallbackMap.valueAt(i3), deviceCameraInfo.mCameraId, str2, i2);
+                    cameraManagerGlobal.postSingleUpdate(availabilityCallbackKeyAt, this.mCallbackMap.valueAt(i3), deviceCameraInfo.mCameraId, str2, i2);
                 }
                 i3++;
                 this = cameraManagerGlobal;
@@ -1664,9 +1660,9 @@ public final class CameraManager {
 
         private void updateTorchCallbackLocked(TorchCallback torchCallback, Executor executor) {
             for (int i = 0; i < this.mTorchStatus.size(); i++) {
-                DeviceCameraInfo keyAt = this.mTorchStatus.keyAt(i);
-                if (!shouldHideCamera(torchCallback.mDeviceId, torchCallback.mDevicePolicy, keyAt)) {
-                    postSingleTorchUpdate(torchCallback, executor, keyAt.mCameraId, this.mTorchStatus.valueAt(i).intValue());
+                DeviceCameraInfo deviceCameraInfoKeyAt = this.mTorchStatus.keyAt(i);
+                if (!shouldHideCamera(torchCallback.mDeviceId, torchCallback.mDevicePolicy, deviceCameraInfoKeyAt)) {
+                    postSingleTorchUpdate(torchCallback, executor, deviceCameraInfoKeyAt.mCameraId, this.mTorchStatus.valueAt(i).intValue());
                 }
             }
         }
@@ -1676,13 +1672,13 @@ public final class CameraManager {
                 Log.e(TAG, String.format("Ignoring invalid camera %s torch status 0x%x for device %d", deviceCameraInfo.mCameraId, Integer.valueOf(i), Integer.valueOf(deviceCameraInfo.mDeviceId)));
                 return;
             }
-            Integer put = this.mTorchStatus.put(deviceCameraInfo, Integer.valueOf(i));
-            if (put == null || put.intValue() != i) {
+            Integer numPut = this.mTorchStatus.put(deviceCameraInfo, Integer.valueOf(i));
+            if (numPut == null || numPut.intValue() != i) {
                 int size = this.mTorchCallbackMap.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    TorchCallback keyAt = this.mTorchCallbackMap.keyAt(i2);
-                    if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
-                        postSingleTorchUpdate(keyAt, this.mTorchCallbackMap.valueAt(i2), deviceCameraInfo.mCameraId, i);
+                    TorchCallback torchCallbackKeyAt = this.mTorchCallbackMap.keyAt(i2);
+                    if (!shouldHideCamera(torchCallbackKeyAt.mDeviceId, torchCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
+                        postSingleTorchUpdate(torchCallbackKeyAt, this.mTorchCallbackMap.valueAt(i2), deviceCameraInfo.mCameraId, i);
                     }
                 }
             }
@@ -1691,9 +1687,9 @@ public final class CameraManager {
         private void onTorchStrengthLevelChangedLocked(DeviceCameraInfo deviceCameraInfo, int i) {
             int size = this.mTorchCallbackMap.size();
             for (int i2 = 0; i2 < size; i2++) {
-                TorchCallback keyAt = this.mTorchCallbackMap.keyAt(i2);
-                if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
-                    postSingleTorchStrengthLevelUpdate(keyAt, this.mTorchCallbackMap.valueAt(i2), deviceCameraInfo.mCameraId, i);
+                TorchCallback torchCallbackKeyAt = this.mTorchCallbackMap.keyAt(i2);
+                if (!shouldHideCamera(torchCallbackKeyAt.mDeviceId, torchCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
+                    postSingleTorchStrengthLevelUpdate(torchCallbackKeyAt, this.mTorchCallbackMap.valueAt(i2), deviceCameraInfo.mCameraId, i);
                 }
             }
         }
@@ -1787,19 +1783,19 @@ public final class CameraManager {
         }
 
         private void onCameraOpenedLocked(DeviceCameraInfo deviceCameraInfo, String str) {
-            String put = this.mOpenedDevices.put(deviceCameraInfo, str);
-            if (put != null) {
-                if (put.equals(str)) {
-                    Log.w(TAG, "onCameraOpened was previously called for " + put + " and is now again called for the same package name, so no new client visible update will be sent");
+            String strPut = this.mOpenedDevices.put(deviceCameraInfo, str);
+            if (strPut != null) {
+                if (strPut.equals(str)) {
+                    Log.w(TAG, "onCameraOpened was previously called for " + strPut + " and is now again called for the same package name, so no new client visible update will be sent");
                     return;
                 }
-                Log.w(TAG, "onCameraOpened was previously called for " + put + " and is now called for " + str + " without onCameraClosed being called first");
+                Log.w(TAG, "onCameraOpened was previously called for " + strPut + " and is now called for " + str + " without onCameraClosed being called first");
             }
             int size = this.mCallbackMap.size();
             for (int i = 0; i < size; i++) {
-                AvailabilityCallback keyAt = this.mCallbackMap.keyAt(i);
-                if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
-                    postSingleCameraOpenedUpdate(keyAt, this.mCallbackMap.valueAt(i), deviceCameraInfo.mCameraId, str);
+                AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i);
+                if (!shouldHideCamera(availabilityCallbackKeyAt.mDeviceId, availabilityCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
+                    postSingleCameraOpenedUpdate(availabilityCallbackKeyAt, this.mCallbackMap.valueAt(i), deviceCameraInfo.mCameraId, str);
                 }
             }
         }
@@ -1815,9 +1811,9 @@ public final class CameraManager {
             this.mOpenedDevices.remove(deviceCameraInfo);
             int size = this.mCallbackMap.size();
             for (int i = 0; i < size; i++) {
-                AvailabilityCallback keyAt = this.mCallbackMap.keyAt(i);
-                if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
-                    postSingleCameraClosedUpdate(keyAt, this.mCallbackMap.valueAt(i), deviceCameraInfo.mCameraId);
+                AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i);
+                if (!shouldHideCamera(availabilityCallbackKeyAt.mDeviceId, availabilityCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
+                    postSingleCameraClosedUpdate(availabilityCallbackKeyAt, this.mCallbackMap.valueAt(i), deviceCameraInfo.mCameraId);
                 }
             }
         }
@@ -1832,26 +1828,26 @@ public final class CameraManager {
         }
 
         private void onCameraDeviceStateChangedLocked(CameraDeviceState cameraDeviceState, DeviceCameraInfo deviceCameraInfo) {
-            CameraDeviceState put = this.mCameraDeviceStates.put(deviceCameraInfo, cameraDeviceState);
-            if (put != null && put.equals(cameraDeviceState)) {
+            CameraDeviceState cameraDeviceStatePut = this.mCameraDeviceStates.put(deviceCameraInfo, cameraDeviceState);
+            if (cameraDeviceStatePut != null && cameraDeviceStatePut.equals(cameraDeviceState)) {
                 Log.i(TAG, String.format("CameraDevice (%s, %d) state changed to (%s), which is what it already was, skip callback", deviceCameraInfo.mCameraId, Integer.valueOf(deviceCameraInfo.mDeviceId), cameraDeviceState));
                 return;
             }
             int size = this.mSemCameraDeviceStateCallbackMap.size();
             for (int i = 0; i < size; i++) {
-                Executor valueAt = this.mSemCameraDeviceStateCallbackMap.valueAt(i);
-                SemCameraDeviceStateCallback keyAt = this.mSemCameraDeviceStateCallbackMap.keyAt(i);
-                if (!shouldHideCamera(keyAt.mDeviceId, keyAt.mDevicePolicy, deviceCameraInfo)) {
-                    postSingleCameraDeviceStateUpdate(keyAt, valueAt, deviceCameraInfo.mCameraId, cameraDeviceState);
+                Executor executorValueAt = this.mSemCameraDeviceStateCallbackMap.valueAt(i);
+                SemCameraDeviceStateCallback semCameraDeviceStateCallbackKeyAt = this.mSemCameraDeviceStateCallbackMap.keyAt(i);
+                if (!shouldHideCamera(semCameraDeviceStateCallbackKeyAt.mDeviceId, semCameraDeviceStateCallbackKeyAt.mDevicePolicy, deviceCameraInfo)) {
+                    postSingleCameraDeviceStateUpdate(semCameraDeviceStateCallbackKeyAt, executorValueAt, deviceCameraInfo.mCameraId, cameraDeviceState);
                 }
             }
             int size2 = this.mCallbackMap.size();
             for (int i2 = 0; i2 < size2; i2++) {
-                Executor valueAt2 = this.mCallbackMap.valueAt(i2);
-                AvailabilityCallback keyAt2 = this.mCallbackMap.keyAt(i2);
-                if (!shouldHideCamera(keyAt2.mDeviceId, keyAt2.mDevicePolicy, deviceCameraInfo) && this.mHasOpenCloseListenerPermission) {
+                Executor executorValueAt2 = this.mCallbackMap.valueAt(i2);
+                AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i2);
+                if (!shouldHideCamera(availabilityCallbackKeyAt.mDeviceId, availabilityCallbackKeyAt.mDevicePolicy, deviceCameraInfo) && this.mHasOpenCloseListenerPermission) {
                     Log.i(TAG, "onCameraDeviceStateChangedLocked: post device state update");
-                    postSemSingleCameraDeviceStateUpdate(keyAt2, valueAt2, deviceCameraInfo.mCameraId, cameraDeviceState);
+                    postSemSingleCameraDeviceStateUpdate(availabilityCallbackKeyAt, executorValueAt2, deviceCameraInfo.mCameraId, cameraDeviceState);
                 }
             }
         }
@@ -1880,13 +1876,13 @@ public final class CameraManager {
 
         private void updateSemCameraDeviceStateCallbackLocked(SemCameraDeviceStateCallback semCameraDeviceStateCallback, Executor executor) {
             for (int i = 0; i < this.mCameraDeviceStates.size(); i++) {
-                DeviceCameraInfo keyAt = this.mCameraDeviceStates.keyAt(i);
-                postSingleCameraDeviceStateUpdate(semCameraDeviceStateCallback, executor, keyAt.mCameraId, this.mCameraDeviceStates.valueAt(i));
+                DeviceCameraInfo deviceCameraInfoKeyAt = this.mCameraDeviceStates.keyAt(i);
+                postSingleCameraDeviceStateUpdate(semCameraDeviceStateCallback, executor, deviceCameraInfoKeyAt.mCameraId, this.mCameraDeviceStates.valueAt(i));
             }
         }
 
         private void postSingleCameraDeviceStateUpdate(final SemCameraDeviceStateCallback semCameraDeviceStateCallback, Executor executor, final String str, final CameraDeviceState cameraDeviceState) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable(this) { // from class: android.hardware.camera2.CameraManager.CameraManagerGlobal.3
                     @Override // java.lang.Runnable
@@ -1898,26 +1894,26 @@ public final class CameraManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void postSemSingleUpdate(final AvailabilityCallback availabilityCallback, Executor executor, final String str, final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.AvailabilityCallback.this.onSemCameraDeviceRawStatus(str, i);
+                        availabilityCallback.onSemCameraDeviceRawStatus(str, i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         private void postSemSingleCameraDeviceStateUpdate(final AvailabilityCallback availabilityCallback, Executor executor, final String str, final CameraDeviceState cameraDeviceState) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable(this) { // from class: android.hardware.camera2.CameraManager.CameraManagerGlobal.4
                     @Override // java.lang.Runnable
@@ -1959,7 +1955,7 @@ public final class CameraManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -1971,7 +1967,7 @@ public final class CameraManager {
                 this.mScheduler.schedule(new Runnable() { // from class: android.hardware.camera2.CameraManager$CameraManagerGlobal$$ExternalSyntheticLambda12
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CameraManager.CameraManagerGlobal.this.lambda$scheduleCameraServiceReconnectionLocked$10();
+                        this.f$0.lambda$scheduleCameraServiceReconnectionLocked$10();
                     }
                 }, 1000L, TimeUnit.MILLISECONDS);
             } catch (RejectedExecutionException e) {
@@ -1992,10 +1988,10 @@ public final class CameraManager {
                 try {
                     int size = this.mCallbackMap.size();
                     for (int i = 0; i < size; i++) {
-                        AvailabilityCallback keyAt = this.mCallbackMap.keyAt(i);
-                        if (keyAt.mIsRegisteredWhileServiceDown) {
-                            keyAt.mIsHiddenIdPermittedPackage = cameraService.isHiddenIdPermittedPackage(keyAt.mPackageName);
-                            keyAt.mIsRegisteredWhileServiceDown = false;
+                        AvailabilityCallback availabilityCallbackKeyAt = this.mCallbackMap.keyAt(i);
+                        if (availabilityCallbackKeyAt.mIsRegisteredWhileServiceDown) {
+                            availabilityCallbackKeyAt.mIsHiddenIdPermittedPackage = cameraService.isHiddenIdPermittedPackage(availabilityCallbackKeyAt.mPackageName);
+                            availabilityCallbackKeyAt.mIsRegisteredWhileServiceDown = false;
                         }
                     }
                 } catch (RemoteException e) {
@@ -2013,10 +2009,10 @@ public final class CameraManager {
                 }
                 this.mCameraService = null;
                 for (int size = this.mDeviceStatus.size() - 1; size >= 0; size--) {
-                    DeviceCameraInfo keyAt = this.mDeviceStatus.keyAt(size);
-                    onStatusChangedLocked(0, keyAt);
+                    DeviceCameraInfo deviceCameraInfoKeyAt = this.mDeviceStatus.keyAt(size);
+                    onStatusChangedLocked(0, deviceCameraInfoKeyAt);
                     if (this.mHasOpenCloseListenerPermission) {
-                        onCameraClosedLocked(keyAt);
+                        onCameraClosedLocked(deviceCameraInfoKeyAt);
                     }
                 }
                 for (int i = 0; i < this.mTorchStatus.size(); i++) {

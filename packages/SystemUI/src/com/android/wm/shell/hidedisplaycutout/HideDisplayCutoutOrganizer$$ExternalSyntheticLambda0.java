@@ -5,7 +5,6 @@ import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class HideDisplayCutoutOrganizer$$ExternalSyntheticLambda0 implements BiConsumer {
     public final /* synthetic */ HideDisplayCutoutOrganizer f$0;

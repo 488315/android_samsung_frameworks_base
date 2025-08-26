@@ -12,14 +12,13 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WindowVisibilityController implements VisibilityController {
     public final Choreographer choreographer;
     public final Lazy shadeWindowControllerHelper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.WindowVisibilityController$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return ((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) WindowVisibilityController.this.shadeWindowControllerLazy.get())).mHelper;
+            return ((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) this.f$0.shadeWindowControllerLazy.get())).mHelper;
         }
     });
     public final dagger.Lazy shadeWindowControllerLazy;
@@ -46,10 +45,10 @@ public final class WindowVisibilityController implements VisibilityController {
 
     @Override // com.android.systemui.keyguard.VisibilityController
     public final void registerFrameUpdateCallback(final Function0 function0) {
-        this.choreographer.postCallbackDelayed(3, new Runnable() { // from class: com.android.systemui.keyguard.WindowVisibilityController$registerFrameUpdateCallback$1
+        this.choreographer.postCallbackDelayed(3, new Runnable() { // from class: com.android.systemui.keyguard.WindowVisibilityController.registerFrameUpdateCallback.1
             @Override // java.lang.Runnable
             public final void run() {
-                Function0.this.invoke();
+                function0.invoke();
             }
         }, null, 0L);
     }

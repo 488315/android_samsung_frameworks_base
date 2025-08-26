@@ -332,7 +332,7 @@ public class TextToSpeech {
         Runnable runnable = new Runnable() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda13
             @Override // java.lang.Runnable
             public final void run() {
-                TextToSpeech.this.lambda$dispatchOnInit$0(i);
+                this.f$0.lambda$dispatchOnInit$0(i);
             }
         };
         Executor executor = this.mInitExecutor;
@@ -368,9 +368,7 @@ public class TextToSpeech {
                 runActionNoReconnect(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda12
                     @Override // android.speech.tts.TextToSpeech.Action
                     public final Object run(ITextToSpeechService iTextToSpeechService) {
-                        Object lambda$shutdown$1;
-                        lambda$shutdown$1 = TextToSpeech.this.lambda$shutdown$1(iTextToSpeechService);
-                        return lambda$shutdown$1;
+                        return this.f$0.lambda$shutdown$1(iTextToSpeechService);
                     }
                 }, null, UsbManager.USB_FUNCTION_SHUTDOWN, false);
             }
@@ -438,9 +436,7 @@ public class TextToSpeech {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda1
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$speak$2;
-                lambda$speak$2 = TextToSpeech.this.lambda$speak$2(charSequence, i, bundle, str, iTextToSpeechService);
-                return lambda$speak$2;
+                return this.f$0.lambda$speak$2(charSequence, i, bundle, str, iTextToSpeechService);
             }
         }, -1, "speak")).intValue();
     }
@@ -455,17 +451,15 @@ public class TextToSpeech {
     }
 
     @Deprecated
-    public int speak(String str, int i, HashMap<String, String> hashMap) {
-        return speak(str, i, convertParamsHashMaptoBundle(hashMap), hashMap == null ? null : hashMap.get(Engine.KEY_PARAM_UTTERANCE_ID));
+    public int speak(String str, int i, HashMap<String, String> map) {
+        return speak(str, i, convertParamsHashMaptoBundle(map), map == null ? null : map.get(Engine.KEY_PARAM_UTTERANCE_ID));
     }
 
     public int playEarcon(final String str, final int i, final Bundle bundle, final String str2) {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda10
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$playEarcon$3;
-                lambda$playEarcon$3 = TextToSpeech.this.lambda$playEarcon$3(str, i, bundle, str2, iTextToSpeechService);
-                return lambda$playEarcon$3;
+                return this.f$0.lambda$playEarcon$3(str, i, bundle, str2, iTextToSpeechService);
             }
         }, -1, "playEarcon")).intValue();
     }
@@ -480,17 +474,15 @@ public class TextToSpeech {
     }
 
     @Deprecated
-    public int playEarcon(String str, int i, HashMap<String, String> hashMap) {
-        return playEarcon(str, i, convertParamsHashMaptoBundle(hashMap), hashMap == null ? null : hashMap.get(Engine.KEY_PARAM_UTTERANCE_ID));
+    public int playEarcon(String str, int i, HashMap<String, String> map) {
+        return playEarcon(str, i, convertParamsHashMaptoBundle(map), map == null ? null : map.get(Engine.KEY_PARAM_UTTERANCE_ID));
     }
 
     public int playSilentUtterance(final long j, final int i, final String str) {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda2
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$playSilentUtterance$4;
-                lambda$playSilentUtterance$4 = TextToSpeech.this.lambda$playSilentUtterance$4(j, i, str, iTextToSpeechService);
-                return lambda$playSilentUtterance$4;
+                return this.f$0.lambda$playSilentUtterance$4(j, i, str, iTextToSpeechService);
             }
         }, -1, "playSilentUtterance")).intValue();
     }
@@ -501,8 +493,8 @@ public class TextToSpeech {
     }
 
     @Deprecated
-    public int playSilence(long j, int i, HashMap<String, String> hashMap) {
-        return playSilentUtterance(j, i, hashMap == null ? null : hashMap.get(Engine.KEY_PARAM_UTTERANCE_ID));
+    public int playSilence(long j, int i, HashMap<String, String> map) {
+        return playSilentUtterance(j, i, map == null ? null : map.get(Engine.KEY_PARAM_UTTERANCE_ID));
     }
 
     @Deprecated
@@ -534,9 +526,7 @@ public class TextToSpeech {
         return ((Boolean) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda17
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(iTextToSpeechService.isSpeaking());
-                return valueOf;
+                return Boolean.valueOf(iTextToSpeechService.isSpeaking());
             }
         }, false, "isSpeaking")).booleanValue();
     }
@@ -545,9 +535,7 @@ public class TextToSpeech {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda7
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$stop$7;
-                lambda$stop$7 = TextToSpeech.this.lambda$stop$7(iTextToSpeechService);
-                return lambda$stop$7;
+                return this.f$0.lambda$stop$7(iTextToSpeechService);
             }
         }, -1, "stop")).intValue();
     }
@@ -612,58 +600,56 @@ public class TextToSpeech {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda8
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$setLanguage$9;
-                lambda$setLanguage$9 = TextToSpeech.this.lambda$setLanguage$9(locale, iTextToSpeechService);
-                return lambda$setLanguage$9;
+                return this.f$0.lambda$setLanguage$9(locale, iTextToSpeechService);
             }
         }, -2, "setLanguage")).intValue();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ Integer lambda$setLanguage$9(Locale locale, ITextToSpeechService iTextToSpeechService) throws RemoteException {
-        String str;
-        String str2 = "";
+    public /* synthetic */ Integer lambda$setLanguage$9(Locale locale, ITextToSpeechService iTextToSpeechService) throws MissingResourceException, RemoteException {
+        String iSO3Language;
+        String iSO3Country = "";
         if (locale == null) {
             return -2;
         }
         try {
-            String iSO3Language = locale.getISO3Language();
+            String iSO3Language2 = locale.getISO3Language();
             try {
-                String iSO3Country = locale.getISO3Country();
+                String iSO3Country2 = locale.getISO3Country();
                 String variant = locale.getVariant();
-                int isLanguageAvailable = iTextToSpeechService.isLanguageAvailable(iSO3Language, iSO3Country, variant);
-                if (isLanguageAvailable >= 0) {
-                    String defaultVoiceNameFor = iTextToSpeechService.getDefaultVoiceNameFor(iSO3Language, iSO3Country, variant);
+                int iIsLanguageAvailable = iTextToSpeechService.isLanguageAvailable(iSO3Language2, iSO3Country2, variant);
+                if (iIsLanguageAvailable >= 0) {
+                    String defaultVoiceNameFor = iTextToSpeechService.getDefaultVoiceNameFor(iSO3Language2, iSO3Country2, variant);
                     if (TextUtils.isEmpty(defaultVoiceNameFor)) {
-                        Log.w(TAG, "Couldn't find the default voice for " + iSO3Language + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant);
+                        Log.w(TAG, "Couldn't find the default voice for " + iSO3Language2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant);
                         return -2;
                     }
                     if (iTextToSpeechService.loadVoice(getCallerIdentity(), defaultVoiceNameFor) == -1) {
-                        Log.w(TAG, "The service claimed " + iSO3Language + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant + " was available with voice name " + defaultVoiceNameFor + " but loadVoice returned ERROR");
+                        Log.w(TAG, "The service claimed " + iSO3Language2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant + " was available with voice name " + defaultVoiceNameFor + " but loadVoice returned ERROR");
                         return -2;
                     }
                     Voice voice = getVoice(iTextToSpeechService, defaultVoiceNameFor);
                     if (voice == null) {
-                        Log.w(TAG, "getDefaultVoiceNameFor returned " + defaultVoiceNameFor + " for locale " + iSO3Language + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant + " but getVoice returns null");
+                        Log.w(TAG, "getDefaultVoiceNameFor returned " + defaultVoiceNameFor + " for locale " + iSO3Language2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + iSO3Country2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + variant + " but getVoice returns null");
                         return -2;
                     }
                     try {
-                        str = voice.getLocale().getISO3Language();
+                        iSO3Language = voice.getLocale().getISO3Language();
                     } catch (MissingResourceException e) {
                         Log.w(TAG, "Couldn't retrieve ISO 639-2/T language code for locale: " + voice.getLocale(), e);
-                        str = "";
+                        iSO3Language = "";
                     }
                     try {
-                        str2 = voice.getLocale().getISO3Country();
+                        iSO3Country = voice.getLocale().getISO3Country();
                     } catch (MissingResourceException e2) {
                         Log.w(TAG, "Couldn't retrieve ISO 3166 country code for locale: " + voice.getLocale(), e2);
                     }
                     this.mParams.putString(Engine.KEY_PARAM_VOICE_NAME, defaultVoiceNameFor);
-                    this.mParams.putString("language", str);
-                    this.mParams.putString(Engine.KEY_PARAM_COUNTRY, str2);
+                    this.mParams.putString("language", iSO3Language);
+                    this.mParams.putString(Engine.KEY_PARAM_COUNTRY, iSO3Country);
                     this.mParams.putString(Engine.KEY_PARAM_VARIANT, voice.getLocale().getVariant());
                 }
-                return Integer.valueOf(isLanguageAvailable);
+                return Integer.valueOf(iIsLanguageAvailable);
             } catch (MissingResourceException e3) {
                 Log.w(TAG, "Couldn't retrieve ISO 3166 country code for locale: " + locale, e3);
                 return -2;
@@ -679,9 +665,7 @@ public class TextToSpeech {
         return (Locale) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda6
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Locale lambda$getLanguage$10;
-                lambda$getLanguage$10 = TextToSpeech.this.lambda$getLanguage$10(iTextToSpeechService);
-                return lambda$getLanguage$10;
+                return this.f$0.lambda$getLanguage$10(iTextToSpeechService);
             }
         }, null, "getLanguage");
     }
@@ -731,45 +715,41 @@ public class TextToSpeech {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda14
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$setVoice$13;
-                lambda$setVoice$13 = TextToSpeech.this.lambda$setVoice$13(voice, iTextToSpeechService);
-                return lambda$setVoice$13;
+                return this.f$0.lambda$setVoice$13(voice, iTextToSpeechService);
             }
         }, -2, "setVoice")).intValue();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ Integer lambda$setVoice$13(Voice voice, ITextToSpeechService iTextToSpeechService) throws RemoteException {
-        String str;
-        String str2 = "";
-        int loadVoice = iTextToSpeechService.loadVoice(getCallerIdentity(), voice.getName());
-        if (loadVoice == 0) {
+    public /* synthetic */ Integer lambda$setVoice$13(Voice voice, ITextToSpeechService iTextToSpeechService) throws MissingResourceException, RemoteException {
+        String iSO3Language;
+        String iSO3Country = "";
+        int iLoadVoice = iTextToSpeechService.loadVoice(getCallerIdentity(), voice.getName());
+        if (iLoadVoice == 0) {
             this.mParams.putString(Engine.KEY_PARAM_VOICE_NAME, voice.getName());
             try {
-                str = voice.getLocale().getISO3Language();
+                iSO3Language = voice.getLocale().getISO3Language();
             } catch (MissingResourceException e) {
                 Log.w(TAG, "Couldn't retrieve ISO 639-2/T language code for locale: " + voice.getLocale(), e);
-                str = "";
+                iSO3Language = "";
             }
             try {
-                str2 = voice.getLocale().getISO3Country();
+                iSO3Country = voice.getLocale().getISO3Country();
             } catch (MissingResourceException e2) {
                 Log.w(TAG, "Couldn't retrieve ISO 3166 country code for locale: " + voice.getLocale(), e2);
             }
-            this.mParams.putString("language", str);
-            this.mParams.putString(Engine.KEY_PARAM_COUNTRY, str2);
+            this.mParams.putString("language", iSO3Language);
+            this.mParams.putString(Engine.KEY_PARAM_COUNTRY, iSO3Country);
             this.mParams.putString(Engine.KEY_PARAM_VARIANT, voice.getLocale().getVariant());
         }
-        return Integer.valueOf(loadVoice);
+        return Integer.valueOf(iLoadVoice);
     }
 
     public Voice getVoice() {
         return (Voice) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda0
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Voice lambda$getVoice$14;
-                lambda$getVoice$14 = TextToSpeech.this.lambda$getVoice$14(iTextToSpeechService);
-                return lambda$getVoice$14;
+                return this.f$0.lambda$getVoice$14(iTextToSpeechService);
             }
         }, null, "getVoice");
     }
@@ -841,7 +821,7 @@ public class TextToSpeech {
         }, -2, "isLanguageAvailable")).intValue();
     }
 
-    static /* synthetic */ Integer lambda$isLanguageAvailable$16(Locale locale, ITextToSpeechService iTextToSpeechService) throws RemoteException {
+    static /* synthetic */ Integer lambda$isLanguageAvailable$16(Locale locale, ITextToSpeechService iTextToSpeechService) throws MissingResourceException, RemoteException {
         try {
             try {
                 return Integer.valueOf(iTextToSpeechService.isLanguageAvailable(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant()));
@@ -859,9 +839,7 @@ public class TextToSpeech {
         return ((Integer) runAction(new Action() { // from class: android.speech.tts.TextToSpeech$$ExternalSyntheticLambda5
             @Override // android.speech.tts.TextToSpeech.Action
             public final Object run(ITextToSpeechService iTextToSpeechService) {
-                Integer lambda$synthesizeToFile$17;
-                lambda$synthesizeToFile$17 = TextToSpeech.this.lambda$synthesizeToFile$17(charSequence, parcelFileDescriptor, bundle, str, iTextToSpeechService);
-                return lambda$synthesizeToFile$17;
+                return this.f$0.lambda$synthesizeToFile$17(charSequence, parcelFileDescriptor, bundle, str, iTextToSpeechService);
             }
         }, -1, "synthesizeToFile")).intValue();
     }
@@ -877,18 +855,18 @@ public class TextToSpeech {
             return -1;
         }
         try {
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, Enums.AUDIO_FORMAT_MPEGH);
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, Enums.AUDIO_FORMAT_MPEGH);
             try {
-                int synthesizeToFile = synthesizeToFile(charSequence, bundle, open, str);
-                open.close();
-                if (open != null) {
-                    open.close();
+                int iSynthesizeToFile = synthesizeToFile(charSequence, bundle, parcelFileDescriptorOpen, str);
+                parcelFileDescriptorOpen.close();
+                if (parcelFileDescriptorOpen != null) {
+                    parcelFileDescriptorOpen.close();
                 }
-                return synthesizeToFile;
+                return iSynthesizeToFile;
             } catch (Throwable th) {
-                if (open != null) {
+                if (parcelFileDescriptorOpen != null) {
                     try {
-                        open.close();
+                        parcelFileDescriptorOpen.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -905,26 +883,26 @@ public class TextToSpeech {
     }
 
     @Deprecated
-    public int synthesizeToFile(String str, HashMap<String, String> hashMap, String str2) {
-        return synthesizeToFile(str, convertParamsHashMaptoBundle(hashMap), new File(str2), hashMap.get(Engine.KEY_PARAM_UTTERANCE_ID));
+    public int synthesizeToFile(String str, HashMap<String, String> map, String str2) {
+        return synthesizeToFile(str, convertParamsHashMaptoBundle(map), new File(str2), map.get(Engine.KEY_PARAM_UTTERANCE_ID));
     }
 
-    private Bundle convertParamsHashMaptoBundle(HashMap<String, String> hashMap) {
-        if (hashMap == null || hashMap.isEmpty()) {
+    private Bundle convertParamsHashMaptoBundle(HashMap<String, String> map) {
+        if (map == null || map.isEmpty()) {
             return null;
         }
         Bundle bundle = new Bundle();
-        copyIntParam(bundle, hashMap, Engine.KEY_PARAM_STREAM);
-        copyIntParam(bundle, hashMap, "sessionId");
-        copyStringParam(bundle, hashMap, Engine.KEY_PARAM_UTTERANCE_ID);
-        copyFloatParam(bundle, hashMap, "volume");
-        copyFloatParam(bundle, hashMap, Engine.KEY_PARAM_PAN);
-        copyStringParam(bundle, hashMap, Engine.KEY_FEATURE_NETWORK_SYNTHESIS);
-        copyStringParam(bundle, hashMap, Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
-        copyIntParam(bundle, hashMap, Engine.KEY_FEATURE_NETWORK_TIMEOUT_MS);
-        copyIntParam(bundle, hashMap, Engine.KEY_FEATURE_NETWORK_RETRIES_COUNT);
+        copyIntParam(bundle, map, Engine.KEY_PARAM_STREAM);
+        copyIntParam(bundle, map, "sessionId");
+        copyStringParam(bundle, map, Engine.KEY_PARAM_UTTERANCE_ID);
+        copyFloatParam(bundle, map, "volume");
+        copyFloatParam(bundle, map, Engine.KEY_PARAM_PAN);
+        copyStringParam(bundle, map, Engine.KEY_FEATURE_NETWORK_SYNTHESIS);
+        copyStringParam(bundle, map, Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
+        copyIntParam(bundle, map, Engine.KEY_FEATURE_NETWORK_TIMEOUT_MS);
+        copyIntParam(bundle, map, Engine.KEY_FEATURE_NETWORK_RETRIES_COUNT);
         if (!TextUtils.isEmpty(this.mCurrentEngine)) {
-            for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
                 String key = entry.getKey();
                 if (key != null && key.startsWith(this.mCurrentEngine)) {
                     bundle.putString(key, entry.getValue());
@@ -988,15 +966,15 @@ public class TextToSpeech {
         return false;
     }
 
-    private void copyStringParam(Bundle bundle, HashMap<String, String> hashMap, String str) {
-        String str2 = hashMap.get(str);
+    private void copyStringParam(Bundle bundle, HashMap<String, String> map, String str) {
+        String str2 = map.get(str);
         if (str2 != null) {
             bundle.putString(str, str2);
         }
     }
 
-    private void copyIntParam(Bundle bundle, HashMap<String, String> hashMap, String str) {
-        String str2 = hashMap.get(str);
+    private void copyIntParam(Bundle bundle, HashMap<String, String> map, String str) {
+        String str2 = map.get(str);
         if (TextUtils.isEmpty(str2)) {
             return;
         }
@@ -1007,8 +985,8 @@ public class TextToSpeech {
         }
     }
 
-    private void copyFloatParam(Bundle bundle, HashMap<String, String> hashMap, String str) {
-        String str2 = hashMap.get(str);
+    private void copyFloatParam(Bundle bundle, HashMap<String, String> map, String str) {
+        String str2 = map.get(str);
         if (TextUtils.isEmpty(str2)) {
             return;
         }
@@ -1186,12 +1164,12 @@ public class TextToSpeech {
         }
 
         protected boolean clearServiceConnection() {
-            boolean z;
+            boolean zCancel;
             synchronized (TextToSpeech.this.mStartLock) {
                 SetupConnectionAsyncTask setupConnectionAsyncTask = this.mOnSetupConnectionAsyncTask;
-                z = false;
+                zCancel = false;
                 if (setupConnectionAsyncTask != null) {
-                    z = setupConnectionAsyncTask.cancel(false);
+                    zCancel = setupConnectionAsyncTask.cancel(false);
                     this.mOnSetupConnectionAsyncTask = null;
                 }
                 this.mService = null;
@@ -1199,7 +1177,7 @@ public class TextToSpeech {
                     TextToSpeech.this.mServiceConnection = null;
                 }
             }
-            return z;
+            return zCancel;
         }
 
         @Override // android.content.ServiceConnection
@@ -1270,13 +1248,13 @@ public class TextToSpeech {
 
         @Override // android.speech.tts.TextToSpeech.Connection
         boolean connect(String str) {
-            ITextToSpeechManager asInterface = ITextToSpeechManager.Stub.asInterface(ServiceManager.getService(Context.TEXT_TO_SPEECH_MANAGER_SERVICE));
-            if (asInterface == null) {
+            ITextToSpeechManager iTextToSpeechManagerAsInterface = ITextToSpeechManager.Stub.asInterface(ServiceManager.getService(Context.TEXT_TO_SPEECH_MANAGER_SERVICE));
+            if (iTextToSpeechManagerAsInterface == null) {
                 Log.e(TextToSpeech.TAG, "System service is not available!");
                 return false;
             }
             try {
-                asInterface.createSession(str, new ITextToSpeechSessionCallback.Stub() { // from class: android.speech.tts.TextToSpeech.SystemConnection.1
+                iTextToSpeechManagerAsInterface.createSession(str, new ITextToSpeechSessionCallback.Stub() { // from class: android.speech.tts.TextToSpeech.SystemConnection.1
                     @Override // android.speech.tts.ITextToSpeechSessionCallback
                     public void onConnected(ITextToSpeechSession iTextToSpeechSession, IBinder iBinder) {
                         SystemConnection.this.mSession = iTextToSpeechSession;
@@ -1348,22 +1326,22 @@ public class TextToSpeech {
         PackageManager packageManager = this.mContext.getPackageManager();
         Intent intent = new Intent(Engine.INTENT_ACTION_TTS_SERVICE);
         intent.setPackage(PRIVATE_ENGINE);
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 128);
-        return queryIntentServices != null && queryIntentServices.size() == 1;
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 128);
+        return listQueryIntentServices != null && listQueryIntentServices.size() == 1;
     }
 
     private boolean checkAuthority(String str) {
-        Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.samsung.SMT.LanguageProvider"), new String[]{"check_allowed_package"}, this.mContext.getPackageName(), new String[]{str}, null);
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.samsung.SMT.LanguageProvider"), new String[]{"check_allowed_package"}, this.mContext.getPackageName(), new String[]{str}, null);
         boolean z = false;
-        if (query != null) {
-            query.moveToFirst();
+        if (cursorQuery != null) {
+            cursorQuery.moveToFirst();
             do {
-                int columnIndex = query.getColumnIndex("allowed");
-                if (columnIndex >= 0 && "true".equals(query.getString(columnIndex))) {
+                int columnIndex = cursorQuery.getColumnIndex("allowed");
+                if (columnIndex >= 0 && "true".equals(cursorQuery.getString(columnIndex))) {
                     z = true;
                 }
-            } while (query.moveToNext());
-            query.close();
+            } while (cursorQuery.moveToNext());
+            cursorQuery.close();
         }
         return z;
     }

@@ -10,7 +10,10 @@ import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.statusbar.chips.StatusBarChipLogTags;
 import com.android.systemui.statusbar.chips.casttootherdevice.domain.interactor.MediaRouterChipInteractor;
+import com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel;
+import com.android.systemui.statusbar.chips.casttootherdevice.ui.view.EndCastScreenToOtherDeviceDialogDelegate;
 import com.android.systemui.statusbar.chips.casttootherdevice.ui.view.EndGenericCastToOtherDeviceDialogDelegate;
+import com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel;
 import com.android.systemui.statusbar.chips.mediaprojection.domain.interactor.MediaProjectionChipInteractor;
 import com.android.systemui.statusbar.chips.mediaprojection.domain.model.ProjectionChipModel;
 import com.android.systemui.statusbar.chips.mediaprojection.ui.view.EndMediaProjectionDialogHelper;
@@ -22,6 +25,8 @@ import com.android.systemui.statusbar.chips.ui.viewmodel.OngoingActivityChipView
 import com.android.systemui.statusbar.chips.ui.viewmodel.OngoingActivityChipViewModel$Companion$createDialogLaunchOnClickListener$1;
 import com.android.systemui.statusbar.chips.uievents.StatusBarChipsUiEventLogger;
 import com.android.systemui.util.time.SystemClock;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -36,7 +41,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CastToOtherDeviceChipViewModel implements OngoingActivityChipViewModel {
     public static final String TAG;
@@ -59,7 +63,6 @@ public final class CastToOtherDeviceChipViewModel implements OngoingActivityChip
     public static final DialogCuj DIALOG_CUJ = new DialogCuj(111, "Cast to other device");
     public static final DialogCuj DIALOG_CUJ_AUDIO_ONLY = new DialogCuj(111, "Cast to other device audio only");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,7 +72,6 @@ public final class CastToOtherDeviceChipViewModel implements OngoingActivityChip
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -116,7 +118,6 @@ public final class CastToOtherDeviceChipViewModel implements OngoingActivityChip
         final ReadonlyStateFlow readonlyStateFlow = mediaProjectionChipInteractor.projection;
         Flow flow = new Flow() { // from class: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -145,37 +146,102 @@ public final class CastToOtherDeviceChipViewModel implements OngoingActivityChip
                     this.this$0 = castToOtherDeviceChipViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                /* JADX WARN: Removed duplicated region for block: B:21:0x0115 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+                /* JADX WARN: Removed duplicated region for block: B:36:0x0115 A[RETURN] */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r25, kotlin.coroutines.Continuation r26) {
-                    /*
-                        Method dump skipped, instructions count: 287
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object timer;
+                    int i;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i2 = anonymousClass1.label;
+                        if ((i2 & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i2 - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i3 = anonymousClass1.label;
+                    if (i3 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ProjectionChipModel projectionChipModel = (ProjectionChipModel) obj;
+                        if (projectionChipModel instanceof ProjectionChipModel.NotProjecting) {
+                            timer = new OngoingActivityChipModel.Inactive(false, null, 3, null);
+                        } else {
+                            if (!(projectionChipModel instanceof ProjectionChipModel.Projecting)) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            ProjectionChipModel.Projecting projecting = (ProjectionChipModel.Projecting) projectionChipModel;
+                            int i4 = CastToOtherDeviceChipViewModel.WhenMappings.$EnumSwitchMapping$1[projecting.receiver.ordinal()];
+                            if (i4 == 1) {
+                                int i5 = CastToOtherDeviceChipViewModel.WhenMappings.$EnumSwitchMapping$0[projecting.contentType.ordinal()];
+                                CastToOtherDeviceChipViewModel castToOtherDeviceChipViewModel = this.this$0;
+                                if (i5 == 1) {
+                                    CastToOtherDeviceChipViewModel.Companion companion = CastToOtherDeviceChipViewModel.Companion;
+                                    castToOtherDeviceChipViewModel.getClass();
+                                    OngoingActivityChipModel.ChipIcon.SingleColorIcon singleColorIcon = new OngoingActivityChipModel.ChipIcon.SingleColorIcon(new Icon.Resource(CastToOtherDeviceChipViewModel.CAST_TO_OTHER_DEVICE_ICON, new ContentDescription.Resource(R.string.cast_screen_to_other_device_chip_accessibility_label)));
+                                    ColorsModel.Red red = ColorsModel.Red.INSTANCE;
+                                    long jElapsedRealtime = castToOtherDeviceChipViewModel.systemClock.elapsedRealtime();
+                                    Context context = castToOtherDeviceChipViewModel.context;
+                                    CastToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1 castToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1 = new CastToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1(castToOtherDeviceChipViewModel);
+                                    EndMediaProjectionDialogHelper endMediaProjectionDialogHelper = castToOtherDeviceChipViewModel.endMediaProjectionDialogHelper;
+                                    EndCastScreenToOtherDeviceDialogDelegate endCastScreenToOtherDeviceDialogDelegate = new EndCastScreenToOtherDeviceDialogDelegate(endMediaProjectionDialogHelper, context, castToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1, projecting);
+                                    InstanceId instanceId = castToOtherDeviceChipViewModel.instanceId;
+                                    OngoingActivityChipViewModel.Companion.getClass();
+                                    OngoingActivityChipViewModel$Companion$createDialogLaunchOnClickListener$1 ongoingActivityChipViewModel$Companion$createDialogLaunchOnClickListener$1 = new OngoingActivityChipViewModel$Companion$createDialogLaunchOnClickListener$1(castToOtherDeviceChipViewModel.logger, CastToOtherDeviceChipViewModel.TAG, castToOtherDeviceChipViewModel.uiEventLogger, instanceId, endCastScreenToOtherDeviceDialogDelegate, castToOtherDeviceChipViewModel.dialogTransitionAnimator, CastToOtherDeviceChipViewModel.DIALOG_CUJ);
+                                    new EndCastScreenToOtherDeviceDialogDelegate(endMediaProjectionDialogHelper, castToOtherDeviceChipViewModel.context, new CastToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1(castToOtherDeviceChipViewModel), projecting);
+                                    timer = new OngoingActivityChipModel.Active.Timer("CastToOtherDevice", true, singleColorIcon, red, jElapsedRealtime, null, false, ongoingActivityChipViewModel$Companion$createDialogLaunchOnClickListener$1, new OngoingActivityChipModel.ClickBehavior.ExpandAction(new OngoingActivityChipViewModel$Companion$$ExternalSyntheticLambda0()), null, false, false, castToOtherDeviceChipViewModel.instanceId, 3680, null);
+                                } else {
+                                    if (i5 != 2) {
+                                        throw new NoWhenBranchMatchedException();
+                                    }
+                                    timer = CastToOtherDeviceChipViewModel.access$createIconOnlyCastChip(castToOtherDeviceChipViewModel, null);
+                                }
+                                i = 1;
+                                anonymousClass1.label = i;
+                                if (this.$this_unsafeFlow.emit(timer, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i4 != 2) {
+                                    throw new NoWhenBranchMatchedException();
+                                }
+                                timer = new OngoingActivityChipModel.Inactive(false, null, 3, null);
+                            }
+                        }
+                        i = 1;
+                        anonymousClass1.label = i;
+                        if (this.$this_unsafeFlow.emit(timer, anonymousClass1) == coroutineSingletons) {
+                        }
+                    } else {
+                        if (i3 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion companion = SharingStarted.Companion;
         companion.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flow, coroutineScope, SharingStarted.Companion.Lazily, new OngoingActivityChipModel.Inactive(false, null, 3, null));
-        this.projectionChip = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flow, coroutineScope, SharingStarted.Companion.Lazily, new OngoingActivityChipModel.Inactive(false, null, 3, null));
+        this.projectionChip = readonlyStateFlowStateIn;
         final ReadonlyStateFlow readonlyStateFlow2 = mediaRouterChipInteractor.mediaRouterCastingState;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -204,92 +270,63 @@ public final class CastToOtherDeviceChipViewModel implements OngoingActivityChip
                     this.this$0 = castToOtherDeviceChipViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L5a
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel r6 = (com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel) r6
-                        boolean r7 = r6 instanceof com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel.DoingNothing
-                        if (r7 == 0) goto L41
-                        com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$Inactive r6 = new com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$Inactive
-                        r7 = 3
-                        r2 = 0
-                        r4 = 0
-                        r6.<init>(r4, r2, r7, r2)
-                        goto L4f
-                    L41:
-                        boolean r7 = r6 instanceof com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel.Casting
-                        if (r7 == 0) goto L5d
-                        com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel$Casting r6 = (com.android.systemui.statusbar.chips.casttootherdevice.domain.model.MediaRouterCastModel.Casting) r6
-                        java.lang.String r6 = r6.deviceName
-                        com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel r7 = r5.this$0
-                        com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$Active$IconOnly r6 = com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel.access$createIconOnlyCastChip(r7, r6)
-                    L4f:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r6, r0)
-                        if (r5 != r1) goto L5a
-                        return r1
-                    L5a:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    L5d:
-                        kotlin.NoWhenBranchMatchedException r5 = new kotlin.NoWhenBranchMatchedException
-                        r5.<init>()
-                        throw r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.chips.casttootherdevice.ui.viewmodel.CastToOtherDeviceChipViewModel$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object objAccess$createIconOnlyCastChip;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        MediaRouterCastModel mediaRouterCastModel = (MediaRouterCastModel) obj;
+                        if (mediaRouterCastModel instanceof MediaRouterCastModel.DoingNothing) {
+                            objAccess$createIconOnlyCastChip = new OngoingActivityChipModel.Inactive(false, null, 3, null);
+                        } else {
+                            if (!(mediaRouterCastModel instanceof MediaRouterCastModel.Casting)) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            objAccess$createIconOnlyCastChip = CastToOtherDeviceChipViewModel.access$createIconOnlyCastChip(this.this$0, ((MediaRouterCastModel.Casting) mediaRouterCastModel).deviceName);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(objAccess$createIconOnlyCastChip, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new OngoingActivityChipModel.Inactive(false, null, 3, null));
-        this.routerChip = stateIn2;
-        ReadonlyStateFlow stateIn3 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateIn, stateIn2, new CastToOtherDeviceChipViewModel$internalChip$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new OngoingActivityChipModel.Inactive(false, null, 3, null));
-        this.internalChip = stateIn3;
+        this.routerChip = readonlyStateFlowStateIn2;
+        ReadonlyStateFlow readonlyStateFlowStateIn3 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn, readonlyStateFlowStateIn2, new CastToOtherDeviceChipViewModel$internalChip$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new OngoingActivityChipModel.Inactive(false, null, 3, null));
+        this.internalChip = readonlyStateFlowStateIn3;
         ChipTransitionHelper chipTransitionHelper = new ChipTransitionHelper(coroutineScope);
         this.hideChipDuringDialogTransitionHelper = chipTransitionHelper;
-        this.chip = chipTransitionHelper.createChipFlow(stateIn3);
+        this.chip = chipTransitionHelper.createChipFlow(readonlyStateFlowStateIn3);
     }
 
     public static final OngoingActivityChipModel.Active.IconOnly access$createIconOnlyCastChip(CastToOtherDeviceChipViewModel castToOtherDeviceChipViewModel, String str) {

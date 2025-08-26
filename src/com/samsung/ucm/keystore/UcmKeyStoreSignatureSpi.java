@@ -57,20 +57,20 @@ public class UcmKeyStoreSignatureSpi extends SignatureSpi {
 
     @Override // java.security.SignatureSpi
     public void engineUpdate(ByteBuffer byteBuffer) {
-        byte[] bArr;
-        int i;
-        int remaining = byteBuffer.remaining();
+        byte[] bArrArray;
+        int iArrayOffset;
+        int iRemaining = byteBuffer.remaining();
         if (byteBuffer.hasArray()) {
-            bArr = byteBuffer.array();
-            i = byteBuffer.arrayOffset() + byteBuffer.position();
+            bArrArray = byteBuffer.array();
+            iArrayOffset = byteBuffer.arrayOffset() + byteBuffer.position();
             byteBuffer.position(byteBuffer.limit());
         } else {
-            bArr = new byte[remaining];
-            byteBuffer.get(bArr);
-            i = 0;
+            bArrArray = new byte[iRemaining];
+            byteBuffer.get(bArrArray);
+            iArrayOffset = 0;
         }
         try {
-            engineUpdateInternal(bArr, i, remaining);
+            engineUpdateInternal(bArrArray, iArrayOffset, iRemaining);
         } catch (SignatureException e) {
             throw new ProviderException("update() failed", e);
         }
@@ -128,12 +128,12 @@ public class UcmKeyStoreSignatureSpi extends SignatureSpi {
             throw new SignatureException("failed to connect ucm service");
         }
         try {
-            byte[] ucmSign = service.ucmSign(this.mKey.getAlias(), this.mStream.toByteArray(), this.mAlgorithm);
-            if (ucmSign == null) {
+            byte[] bArrUcmSign = service.ucmSign(this.mKey.getAlias(), this.mStream.toByteArray(), this.mAlgorithm);
+            if (bArrUcmSign == null) {
                 throw new SignatureException("output is null");
             }
             resetContext();
-            return ucmSign;
+            return bArrUcmSign;
         } catch (RemoteException e) {
             Log.e(TAG, "Remote Exception " + e);
             throw new SignatureException("RemoteException");

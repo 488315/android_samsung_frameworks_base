@@ -7,7 +7,6 @@ import android.view.WindowManager;
 import com.android.wm.shell.freeform.FreeformContainerFolderView;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FreeformContainerFolderView$MultiInstanceItemViewHolder$$ExternalSyntheticLambda1 implements View.OnHoverListener {
     public final /* synthetic */ int $r8$classId;

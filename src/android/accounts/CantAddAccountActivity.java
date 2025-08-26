@@ -20,9 +20,7 @@ public class CantAddAccountActivity extends Activity {
         ((TextView) findViewById(R.id.description)).lambda$setTextAsync$0(((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.CANT_ADD_ACCOUNT_MESSAGE, new Supplier() { // from class: android.accounts.CantAddAccountActivity$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$onCreate$0;
-                lambda$onCreate$0 = CantAddAccountActivity.this.lambda$onCreate$0();
-                return lambda$onCreate$0;
+                return this.f$0.lambda$onCreate$0();
             }
         }));
     }

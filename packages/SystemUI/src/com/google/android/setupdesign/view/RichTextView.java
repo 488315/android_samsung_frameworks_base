@@ -24,7 +24,6 @@ import com.google.android.setupdesign.span.BoldLinkSpan;
 import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.view.TouchableMovementMethod;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RichTextView extends AppCompatTextView implements LinkSpan.OnLinkClickListener {
     static Typeface spanTypeface;
@@ -79,7 +78,7 @@ public class RichTextView extends AppCompatTextView implements LinkSpan.OnLinkCl
 
     @Override // android.widget.TextView, android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
         MovementMethod movementMethod = getMovementMethod();
         if (movementMethod instanceof TouchableMovementMethod) {
             TouchableMovementMethod touchableMovementMethod = (TouchableMovementMethod) movementMethod;
@@ -87,7 +86,7 @@ public class RichTextView extends AppCompatTextView implements LinkSpan.OnLinkCl
                 return ((TouchableMovementMethod.TouchableLinkMovementMethod) touchableMovementMethod).lastEventResult;
             }
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     @Override // android.widget.TextView

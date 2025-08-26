@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AppLockNotificationControllerImpl implements AppLockNotificationController {
     public ActivityManager mActivityManager;
@@ -26,7 +25,6 @@ public class AppLockNotificationControllerImpl implements AppLockNotificationCon
     public final ListenerSet mListeners = new ListenerSet();
     public final ArrayList mAppLockActiveLockedPackages = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.policy.AppLockNotificationControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 extends ExecutorContentObserver {
         public final /* synthetic */ Handler val$mainHandler;
@@ -45,7 +43,7 @@ public class AppLockNotificationControllerImpl implements AppLockNotificationCon
             this.val$mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.policy.AppLockNotificationControllerImpl$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppLockNotificationControllerImpl.AnonymousClass1 anonymousClass1 = AppLockNotificationControllerImpl.AnonymousClass1.this;
+                    AppLockNotificationControllerImpl.AnonymousClass1 anonymousClass1 = this.f$0;
                     String str = string;
                     AppLockNotificationControllerImpl.this.mAppLockActiveLockedPackages.clear();
                     AppLockNotificationControllerImpl.this.mAppLockActiveLockedPackages.addAll(Arrays.asList(str));
@@ -70,7 +68,7 @@ public class AppLockNotificationControllerImpl implements AppLockNotificationCon
         executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.AppLockNotificationControllerImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AppLockNotificationControllerImpl.AnonymousClass1.this.onChange(true);
+                anonymousClass1.onChange(true);
             }
         });
     }

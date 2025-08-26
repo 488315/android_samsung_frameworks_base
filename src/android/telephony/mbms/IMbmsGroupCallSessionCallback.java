@@ -67,9 +67,9 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMbmsGroupCallSessionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsGroupCallSessionCallback)) {
-                return (IMbmsGroupCallSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMbmsGroupCallSessionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMbmsGroupCallSessionCallback)) {
+                return (IMbmsGroupCallSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,21 +105,21 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readInt, readString);
+                onError(i3, string);
             } else if (i == 2) {
                 ClassLoader classLoader = getClass().getClassLoader();
-                ArrayList readArrayList = parcel.readArrayList(classLoader);
-                ArrayList readArrayList2 = parcel.readArrayList(classLoader);
+                ArrayList arrayList = parcel.readArrayList(classLoader);
+                ArrayList arrayList2 = parcel.readArrayList(classLoader);
                 parcel.enforceNoDataAvail();
-                onAvailableSaisUpdated(readArrayList, readArrayList2);
+                onAvailableSaisUpdated(arrayList, arrayList2);
             } else if (i == 3) {
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onServiceInterfaceAvailable(readString2, readInt2);
+                onServiceInterfaceAvailable(string2, i4);
             } else if (i == 4) {
                 onMiddlewareReady();
             } else {
@@ -146,51 +146,51 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
             public void onError(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
             public void onAvailableSaisUpdated(List list, List list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
-                    obtain.writeList(list);
-                    obtain.writeList(list2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeList(list);
+                    parcelObtain.writeList(list2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
             public void onServiceInterfaceAvailable(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
             public void onMiddlewareReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -5,7 +5,6 @@ import dagger.internal.Providers;
 import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUICoroutinesModule_BgApplicationScopeFactory implements Provider {
     private final Provider applicationScopeProvider;
@@ -19,9 +18,9 @@ public final class SysUICoroutinesModule_BgApplicationScopeFactory implements Pr
     }
 
     public static CoroutineScope bgApplicationScope(SysUICoroutinesModule sysUICoroutinesModule, CoroutineScope coroutineScope, CoroutineContext coroutineContext) {
-        CoroutineScope bgApplicationScope = sysUICoroutinesModule.bgApplicationScope(coroutineScope, coroutineContext);
-        bgApplicationScope.getClass();
-        return bgApplicationScope;
+        CoroutineScope coroutineScopeBgApplicationScope = sysUICoroutinesModule.bgApplicationScope(coroutineScope, coroutineContext);
+        coroutineScopeBgApplicationScope.getClass();
+        return coroutineScopeBgApplicationScope;
     }
 
     public static SysUICoroutinesModule_BgApplicationScopeFactory create(SysUICoroutinesModule sysUICoroutinesModule, javax.inject.Provider provider, javax.inject.Provider provider2) {

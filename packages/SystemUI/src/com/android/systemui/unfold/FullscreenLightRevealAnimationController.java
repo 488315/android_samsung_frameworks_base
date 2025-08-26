@@ -21,7 +21,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FullscreenLightRevealAnimationController {
     public static final Companion Companion = null;
@@ -35,7 +34,6 @@ public final class FullscreenLightRevealAnimationController {
     public final String overlayTitle;
     public final ThreadFactory threadFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,11 +43,9 @@ public final class FullscreenLightRevealAnimationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RotationWatcher implements RotationChangeProvider.RotationListener {
         public RotationWatcher() {
         }
@@ -57,8 +53,8 @@ public final class FullscreenLightRevealAnimationController {
         @Override // com.android.systemui.unfold.updates.RotationChangeProvider.RotationListener
         public final void onRotationChanged(int i) {
             FullscreenLightRevealAnimationController fullscreenLightRevealAnimationController = FullscreenLightRevealAnimationController.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("FullscreenLightRevealAnimation#onRotationChanged");
             }
             try {
@@ -72,7 +68,7 @@ public final class FullscreenLightRevealAnimationController {
                 }
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }

@@ -96,12 +96,12 @@ public final class BinderCallHeavyHitterWatcher {
                     return;
                 }
                 int i2 = (int) (1.0f / f);
-                HeavyHitterSketch<Integer> newDefault = HeavyHitterSketch.newDefault();
-                float requiredValidationInputRatio = newDefault.getRequiredValidationInputRatio();
+                HeavyHitterSketch<Integer> heavyHitterSketchNewDefault = HeavyHitterSketch.newDefault();
+                float requiredValidationInputRatio = heavyHitterSketchNewDefault.getRequiredValidationInputRatio();
                 int i3 = !Float.isNaN(requiredValidationInputRatio) ? (int) (i * (1.0f - requiredValidationInputRatio)) : i;
                 try {
-                    newDefault.setConfig(i, i2);
-                    resetInternalLocked(binderCallHeavyHitterListener, newDefault, i3, i, f, i2);
+                    heavyHitterSketchNewDefault.setConfig(i, i2);
+                    resetInternalLocked(binderCallHeavyHitterListener, heavyHitterSketchNewDefault, i3, i, f, i2);
                 } catch (IllegalArgumentException unused) {
                     Log.w(TAG, "Invalid parameter to heavy hitter watcher: " + i + ", " + i2);
                 }
@@ -165,8 +165,8 @@ public final class BinderCallHeavyHitterWatcher {
                 if (heavyHitterSketch == null) {
                     return;
                 }
-                int hashCode = HeavyHitterContainer.hashCode(i, cls, i2);
-                heavyHitterSketch.add(Integer.valueOf(hashCode));
+                int iHashCode = HeavyHitterContainer.hashCode(i, cls, i2);
+                heavyHitterSketch.add(Integer.valueOf(iHashCode));
                 int i3 = this.mCurrentInputSize + 1;
                 this.mCurrentInputSize = i3;
                 int i4 = this.mInputSize;
@@ -175,12 +175,12 @@ public final class BinderCallHeavyHitterWatcher {
                     this.mCachedCandidateSet.addAll(this.mCachedCandidateList);
                     this.mCachedCandidateList.clear();
                 } else if (i3 > i4 && i3 < this.mTotalInputSize) {
-                    if (this.mCachedCandidateSet.contains(Integer.valueOf(hashCode)) && this.mHeavyHitterCandiates.indexOfKey(hashCode) < 0) {
-                        HeavyHitterContainer acquireHeavyHitterContainerLocked = acquireHeavyHitterContainerLocked();
-                        acquireHeavyHitterContainerLocked.mUid = i;
-                        acquireHeavyHitterContainerLocked.mClass = cls;
-                        acquireHeavyHitterContainerLocked.mCode = i2;
-                        this.mHeavyHitterCandiates.put(hashCode, acquireHeavyHitterContainerLocked);
+                    if (this.mCachedCandidateSet.contains(Integer.valueOf(iHashCode)) && this.mHeavyHitterCandiates.indexOfKey(iHashCode) < 0) {
+                        HeavyHitterContainer heavyHitterContainerAcquireHeavyHitterContainerLocked = acquireHeavyHitterContainerLocked();
+                        heavyHitterContainerAcquireHeavyHitterContainerLocked.mUid = i;
+                        heavyHitterContainerAcquireHeavyHitterContainerLocked.mClass = cls;
+                        heavyHitterContainerAcquireHeavyHitterContainerLocked.mCode = i2;
+                        this.mHeavyHitterCandiates.put(iHashCode, heavyHitterContainerAcquireHeavyHitterContainerLocked);
                     }
                 } else if (i3 == this.mTotalInputSize) {
                     if (this.mListener != null && (topHeavyHitters = heavyHitterSketch.getTopHeavyHitters(0, this.mCachedCandidateList, this.mCachedCandidateFrequencies)) != null && (size = topHeavyHitters.size()) > 0) {

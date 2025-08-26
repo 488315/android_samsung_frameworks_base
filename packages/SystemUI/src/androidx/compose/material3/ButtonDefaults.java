@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.ColorKt;
 import androidx.compose.ui.graphics.Shape;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ButtonDefaults {
     public static final PaddingValuesImpl ContentPadding;
@@ -37,14 +36,14 @@ public final class ButtonDefaults {
         Dp.Companion companion = Dp.Companion;
         ButtonSmallTokens.INSTANCE.getClass();
         float f4 = 8;
-        PaddingValuesImpl m122PaddingValuesa9UjIt4 = PaddingKt.m122PaddingValuesa9UjIt4(f, f4, f2, f4);
-        ContentPadding = m122PaddingValuesa9UjIt4;
-        PaddingKt.m122PaddingValuesa9UjIt4(f3, f4, f2, f4);
+        PaddingValuesImpl paddingValuesImplM123PaddingValuesa9UjIt4 = PaddingKt.m123PaddingValuesa9UjIt4(f, f4, f2, f4);
+        ContentPadding = paddingValuesImplM123PaddingValuesa9UjIt4;
+        PaddingKt.m123PaddingValuesa9UjIt4(f3, f4, f2, f4);
         float f5 = 12;
-        float f6 = m122PaddingValuesa9UjIt4.top;
-        float f7 = m122PaddingValuesa9UjIt4.bottom;
-        TextButtonContentPadding = PaddingKt.m122PaddingValuesa9UjIt4(f5, f6, f5, f7);
-        PaddingKt.m122PaddingValuesa9UjIt4(f5, f6, f3, f7);
+        float f6 = paddingValuesImplM123PaddingValuesa9UjIt4.top;
+        float f7 = paddingValuesImplM123PaddingValuesa9UjIt4.bottom;
+        TextButtonContentPadding = PaddingKt.m123PaddingValuesa9UjIt4(f5, f6, f5, f7);
+        PaddingKt.m123PaddingValuesa9UjIt4(f5, f6, f3, f7);
         MinWidth = 58;
         MinHeight = ButtonSmallTokens.ContainerHeight;
         ButtonXSmallTokens.INSTANCE.getClass();
@@ -70,7 +69,7 @@ public final class ButtonDefaults {
     }
 
     /* renamed from: buttonColors-ro_MJ88, reason: not valid java name */
-    public static ButtonColors m251buttonColorsro_MJ88(long j, long j2, Composer composer, int i) {
+    public static ButtonColors m252buttonColorsro_MJ88(long j, long j2, Composer composer, int i) {
         if ((i & 1) != 0) {
             Color.Companion.getClass();
             j = Color.Unspecified;
@@ -89,32 +88,30 @@ public final class ButtonDefaults {
             ComposerKt.traceEventStart("androidx.compose.material3.ButtonDefaults.buttonColors (Button.kt:1234)");
         }
         MaterialTheme.INSTANCE.getClass();
-        ButtonColors m250copyjRlVdoo = getDefaultButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m250copyjRlVdoo(j3, j4, j5, j5);
+        ButtonColors buttonColorsM251copyjRlVdoo = getDefaultButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m251copyjRlVdoo(j3, j4, j5, j5);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m250copyjRlVdoo;
+        return buttonColorsM251copyjRlVdoo;
     }
 
     public static ButtonColors getDefaultButtonColors$material3_release(ColorScheme colorScheme) {
-        long Color;
-        long Color2;
         ButtonColors buttonColors = colorScheme.defaultButtonColorsCached;
         if (buttonColors != null) {
             return buttonColors;
         }
         FilledButtonTokens.INSTANCE.getClass();
-        long fromToken = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.ContainerColor);
-        long fromToken2 = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.LabelTextColor);
-        Color = ColorKt.Color(Color.m461getRedimpl(r6), Color.m460getGreenimpl(r6), Color.m458getBlueimpl(r6), FilledButtonTokens.DisabledContainerOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.DisabledContainerColor)));
-        Color2 = ColorKt.Color(Color.m461getRedimpl(r8), Color.m460getGreenimpl(r8), Color.m458getBlueimpl(r8), FilledButtonTokens.DisabledLabelTextOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.DisabledLabelTextColor)));
-        ButtonColors buttonColors2 = new ButtonColors(fromToken, fromToken2, Color, Color2, null);
+        long jFromToken = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.ContainerColor);
+        long jFromToken2 = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.LabelTextColor);
+        long jFromToken3 = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.DisabledContainerColor);
+        long jColor = ColorKt.Color(Color.m463getRedimpl(jFromToken3), Color.m462getGreenimpl(jFromToken3), Color.m460getBlueimpl(jFromToken3), FilledButtonTokens.DisabledContainerOpacity, Color.m461getColorSpaceimpl(jFromToken3));
+        long jFromToken4 = ColorSchemeKt.fromToken(colorScheme, FilledButtonTokens.DisabledLabelTextColor);
+        ButtonColors buttonColors2 = new ButtonColors(jFromToken, jFromToken2, jColor, ColorKt.Color(Color.m463getRedimpl(jFromToken4), Color.m462getGreenimpl(jFromToken4), Color.m460getBlueimpl(jFromToken4), FilledButtonTokens.DisabledLabelTextOpacity, Color.m461getColorSpaceimpl(jFromToken4)), null);
         colorScheme.defaultButtonColorsCached = buttonColors2;
         return buttonColors2;
     }
 
     public static ButtonColors getDefaultOutlinedButtonColors$material3_release(ColorScheme colorScheme) {
-        long Color;
         ButtonColors buttonColors = colorScheme.defaultOutlinedButtonColorsCached;
         if (buttonColors != null) {
             return buttonColors;
@@ -122,25 +119,24 @@ public final class ButtonDefaults {
         Color.Companion.getClass();
         long j = Color.Transparent;
         OutlinedButtonTokens.INSTANCE.getClass();
-        long fromToken = ColorSchemeKt.fromToken(colorScheme, OutlinedButtonTokens.LabelTextColor);
-        Color = ColorKt.Color(Color.m461getRedimpl(r6), Color.m460getGreenimpl(r6), Color.m458getBlueimpl(r6), OutlinedButtonTokens.DisabledLabelTextOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, OutlinedButtonTokens.DisabledLabelTextColor)));
-        ButtonColors buttonColors2 = new ButtonColors(j, fromToken, j, Color, null);
+        long jFromToken = ColorSchemeKt.fromToken(colorScheme, OutlinedButtonTokens.LabelTextColor);
+        long jFromToken2 = ColorSchemeKt.fromToken(colorScheme, OutlinedButtonTokens.DisabledLabelTextColor);
+        ButtonColors buttonColors2 = new ButtonColors(j, jFromToken, j, ColorKt.Color(Color.m463getRedimpl(jFromToken2), Color.m462getGreenimpl(jFromToken2), Color.m460getBlueimpl(jFromToken2), OutlinedButtonTokens.DisabledLabelTextOpacity, Color.m461getColorSpaceimpl(jFromToken2)), null);
         colorScheme.defaultOutlinedButtonColorsCached = buttonColors2;
         return buttonColors2;
     }
 
     public static ButtonColors getDefaultTextButtonColors$material3_release(ColorScheme colorScheme) {
-        long Color;
         ButtonColors buttonColors = colorScheme.defaultTextButtonColorsCached;
         if (buttonColors != null) {
             return buttonColors;
         }
         Color.Companion.getClass();
         long j = Color.Transparent;
-        long fromToken = ColorSchemeKt.fromToken(colorScheme, ColorSchemeKeyTokens.Primary);
+        long jFromToken = ColorSchemeKt.fromToken(colorScheme, ColorSchemeKeyTokens.Primary);
         TextButtonTokens.INSTANCE.getClass();
-        Color = ColorKt.Color(Color.m461getRedimpl(r6), Color.m460getGreenimpl(r6), Color.m458getBlueimpl(r6), TextButtonTokens.DisabledLabelOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, TextButtonTokens.DisabledLabelColor)));
-        ButtonColors buttonColors2 = new ButtonColors(j, fromToken, j, Color, null);
+        long jFromToken2 = ColorSchemeKt.fromToken(colorScheme, TextButtonTokens.DisabledLabelColor);
+        ButtonColors buttonColors2 = new ButtonColors(j, jFromToken, j, ColorKt.Color(Color.m463getRedimpl(jFromToken2), Color.m462getGreenimpl(jFromToken2), Color.m460getBlueimpl(jFromToken2), TextButtonTokens.DisabledLabelOpacity, Color.m461getColorSpaceimpl(jFromToken2)), null);
         colorScheme.defaultTextButtonColorsCached = buttonColors2;
         return buttonColors2;
     }
@@ -158,7 +154,7 @@ public final class ButtonDefaults {
     }
 
     /* renamed from: outlinedButtonColors-ro_MJ88, reason: not valid java name */
-    public static ButtonColors m252outlinedButtonColorsro_MJ88(long j, Composer composer) {
+    public static ButtonColors m253outlinedButtonColorsro_MJ88(long j, Composer composer) {
         Color.Companion companion = Color.Companion;
         companion.getClass();
         long j2 = Color.Unspecified;
@@ -168,15 +164,15 @@ public final class ButtonDefaults {
             ComposerKt.traceEventStart("androidx.compose.material3.ButtonDefaults.outlinedButtonColors (Button.kt:1371)");
         }
         MaterialTheme.INSTANCE.getClass();
-        ButtonColors m250copyjRlVdoo = getDefaultOutlinedButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m250copyjRlVdoo(j2, j, j2, j2);
+        ButtonColors buttonColorsM251copyjRlVdoo = getDefaultOutlinedButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m251copyjRlVdoo(j2, j, j2, j2);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m250copyjRlVdoo;
+        return buttonColorsM251copyjRlVdoo;
     }
 
     /* renamed from: textButtonColors-ro_MJ88, reason: not valid java name */
-    public static ButtonColors m253textButtonColorsro_MJ88(long j, long j2, Composer composer, int i) {
+    public static ButtonColors m254textButtonColorsro_MJ88(long j, long j2, Composer composer, int i) {
         if ((i & 1) != 0) {
             Color.Companion.getClass();
             j = Color.Unspecified;
@@ -190,10 +186,10 @@ public final class ButtonDefaults {
             ComposerKt.traceEventStart("androidx.compose.material3.ButtonDefaults.textButtonColors (Button.kt:1414)");
         }
         MaterialTheme.INSTANCE.getClass();
-        ButtonColors m250copyjRlVdoo = getDefaultTextButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m250copyjRlVdoo(j3, j2, j4, j4);
+        ButtonColors buttonColorsM251copyjRlVdoo = getDefaultTextButtonColors$material3_release(MaterialTheme.getColorScheme(composer)).m251copyjRlVdoo(j3, j2, j4, j4);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m250copyjRlVdoo;
+        return buttonColorsM251copyjRlVdoo;
     }
 }

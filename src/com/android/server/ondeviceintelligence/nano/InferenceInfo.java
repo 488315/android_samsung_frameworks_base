@@ -63,38 +63,38 @@ public final class InferenceInfo extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         int i = this.uid;
         if (i != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
         }
         long j = this.startTimeMs;
         if (j != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(2, j);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(2, j);
         }
         long j2 = this.endTimeMs;
         if (j2 != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(3, j2);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(3, j2);
         }
         long j3 = this.suspendedTimeMs;
-        return j3 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt64Size(4, j3) : computeSerializedSize;
+        return j3 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt64Size(4, j3) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public InferenceInfo mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 8) {
+            if (tag == 8) {
                 this.uid = codedInputByteBufferNano.readInt32();
-            } else if (readTag == 16) {
+            } else if (tag == 16) {
                 this.startTimeMs = codedInputByteBufferNano.readInt64();
-            } else if (readTag == 24) {
+            } else if (tag == 24) {
                 this.endTimeMs = codedInputByteBufferNano.readInt64();
-            } else if (readTag != 32) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 32) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

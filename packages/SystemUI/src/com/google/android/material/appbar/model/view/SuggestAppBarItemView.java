@@ -2,6 +2,7 @@ package com.google.android.material.appbar.model.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +23,11 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SuggestAppBarItemView extends SuggestAppBarView {
     private ViewGroup rootView;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SuggestAppBarItemView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -58,10 +59,10 @@ public class SuggestAppBarItemView extends SuggestAppBarView {
     }
 
     @Override // com.google.android.material.appbar.model.view.SuggestAppBarView
-    public void inflate() {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_suggest_in_viewpager, (ViewGroup) this, false);
+    public void inflate() throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_suggest_in_viewpager, (ViewGroup) this, false);
         ImageButton imageButton = null;
-        ViewGroup viewGroup = inflate instanceof ViewGroup ? (ViewGroup) inflate : null;
+        ViewGroup viewGroup = viewInflate instanceof ViewGroup ? (ViewGroup) viewInflate : null;
         if (viewGroup == null) {
             return;
         }
@@ -92,12 +93,12 @@ public class SuggestAppBarItemView extends SuggestAppBarView {
     }
 
     @Override // com.google.android.material.appbar.model.view.SuggestAppBarView, com.google.android.material.appbar.model.view.AppBarView
-    public void updateResource(Context context) {
+    public void updateResource(Context context) throws Resources.NotFoundException {
         super.updateResource(context);
-        boolean isLightTheme = SeslMisc.isLightTheme(context);
+        boolean zIsLightTheme = SeslMisc.isLightTheme(context);
         ViewGroup viewGroup = this.rootView;
         if (viewGroup != null) {
-            viewGroup.setBackgroundTintList(ColorStateList.valueOf(context.getColor(isLightTheme ? R.color.sesl_viewpager_item_background : R.color.sesl_viewpager_item_background_dark)));
+            viewGroup.setBackgroundTintList(ColorStateList.valueOf(context.getColor(zIsLightTheme ? R.color.sesl_viewpager_item_background : R.color.sesl_viewpager_item_background_dark)));
         }
         TextView titleView = getTitleView();
         if (titleView != null) {
@@ -110,7 +111,7 @@ public class SuggestAppBarItemView extends SuggestAppBarView {
         this(context, (i & 2) != 0 ? null : attributeSet);
     }
 
-    public SuggestAppBarItemView(Context context, AttributeSet attributeSet) {
+    public SuggestAppBarItemView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         inflate();
     }

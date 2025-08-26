@@ -20,9 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.settingslib.Utils;
 import com.android.systemui.classifier.FalsingCollector;
+import com.android.systemui.wallet.ui.WalletCardCarousel;
 import com.android.systemui.wallet.ui.WalletScreenController;
+import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WalletView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -53,12 +54,12 @@ public class WalletView extends FrameLayout {
         if (falsingCollector != null) {
             falsingCollector.onTouchEvent(motionEvent);
         }
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         FalsingCollector falsingCollector2 = this.mFalsingCollector;
         if (falsingCollector2 != null) {
             falsingCollector2.onMotionEventComplete();
         }
-        return dispatchTouchEvent;
+        return zDispatchTouchEvent;
     }
 
     public Button getAppButton() {
@@ -94,9 +95,9 @@ public class WalletView extends FrameLayout {
         if (cardLabel == null) {
             cardLabel = "";
         }
-        String[] split = cardLabel.toString().split("\\n");
-        if (split.length == 2) {
-            str = split[0];
+        String[] strArrSplit = cardLabel.toString().split("\\n");
+        if (strArrSplit.length == 2) {
+            str = strArrSplit[0];
         } else {
             ?? cardLabel2 = qAWalletCardViewInfo.mWalletCard.getCardLabel();
             if (cardLabel2 != 0) {
@@ -134,9 +135,9 @@ public class WalletView extends FrameLayout {
         walletCardCarousel.mExpectedViewWidth = width;
         Resources resources = walletCardCarousel.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        int round = Math.round(Math.min(width, Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels)) * 0.69f);
-        walletCardCarousel.mCardWidthPx = round;
-        walletCardCarousel.mCardHeightPx = Math.round(round / 1.5909091f);
+        int iRound = Math.round(Math.min(width, Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels)) * 0.69f);
+        walletCardCarousel.mCardWidthPx = iRound;
+        walletCardCarousel.mCardHeightPx = Math.round(iRound / 1.5909091f);
         float f = walletCardCarousel.mCardWidthPx;
         walletCardCarousel.mCornerRadiusPx = 0.035714287f * f;
         walletCardCarousel.mCardMarginPx = Math.round(f * (-0.03f));
@@ -160,8 +161,8 @@ public class WalletView extends FrameLayout {
         if (cardLabel == null) {
             cardLabel = "";
         }
-        String[] split = cardLabel.toString().split("\\n");
-        String str = split.length == 2 ? split[1] : null;
+        String[] strArrSplit = cardLabel.toString().split("\\n");
+        String str = strArrSplit.length == 2 ? strArrSplit[1] : null;
         if (z2 || str == null) {
             this.mActionButton.setVisibility(8);
             return;
@@ -170,14 +171,14 @@ public class WalletView extends FrameLayout {
         this.mActionButton.setText(str);
         this.mActionButton.setOnClickListener(z ? this.mDeviceLockedActionOnClickListener : new View.OnClickListener() { // from class: com.android.systemui.wallet.ui.WalletView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
-                WalletCardViewInfo walletCardViewInfo2 = WalletCardViewInfo.this;
+            public final void onClick(View view) throws PendingIntent.CanceledException {
+                WalletCardViewInfo walletCardViewInfo2 = walletCardViewInfo;
                 int i = WalletView.$r8$clinit;
                 try {
-                    BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
-                    makeBasic.setInteractive(true);
-                    makeBasic.setPendingIntentBackgroundActivityStartMode(1);
-                    ((WalletScreenController.QAWalletCardViewInfo) walletCardViewInfo2).mWalletCard.getPendingIntent().send(makeBasic.toBundle());
+                    BroadcastOptions broadcastOptionsMakeBasic = BroadcastOptions.makeBasic();
+                    broadcastOptionsMakeBasic.setInteractive(true);
+                    broadcastOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
+                    ((WalletScreenController.QAWalletCardViewInfo) walletCardViewInfo2).mWalletCard.getPendingIntent().send(broadcastOptionsMakeBasic.toBundle());
                 } catch (PendingIntent.CanceledException unused) {
                     Log.w("WalletView", "Error sending pending intent for wallet card.");
                 }
@@ -185,25 +186,93 @@ public class WalletView extends FrameLayout {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x017c A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00c4  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void showCardCarousel(java.util.List r11, int r12, boolean r13, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 381
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallet.ui.WalletView.showCardCarousel(java.util.List, int, boolean, boolean):void");
+    public final void showCardCarousel(List list, int i, boolean z, boolean z2) {
+        boolean z3;
+        WalletCardCarousel walletCardCarousel = this.mCardCarousel;
+        boolean z4 = this.mIsDeviceLocked != z;
+        WalletCardCarousel.WalletCardCarouselAdapter walletCardCarouselAdapter = walletCardCarousel.mWalletCardCarouselAdapter;
+        List list2 = walletCardCarouselAdapter.mData;
+        walletCardCarouselAdapter.mData = list;
+        if (z4 || list2.size() != list.size()) {
+            walletCardCarouselAdapter.notifyDataSetChanged();
+            z3 = true;
+            break;
+        }
+        for (int i2 = 0; i2 < list.size(); i2++) {
+            WalletCardViewInfo walletCardViewInfo = (WalletCardViewInfo) list2.get(i2);
+            WalletCardViewInfo walletCardViewInfo2 = (WalletCardViewInfo) list.get(i2);
+            walletCardViewInfo.getClass();
+            if (!(walletCardViewInfo2 == null ? false : ((WalletScreenController.QAWalletCardViewInfo) walletCardViewInfo).mWalletCard.getCardId().equals(((WalletScreenController.QAWalletCardViewInfo) walletCardViewInfo2).mWalletCard.getCardId()))) {
+                walletCardCarouselAdapter.notifyDataSetChanged();
+                z3 = true;
+                break;
+            }
+        }
+        z3 = false;
+        walletCardCarousel.scrollToPosition(i);
+        WalletCardViewInfo walletCardViewInfo3 = (WalletCardViewInfo) list.get(i);
+        walletCardCarousel.mCardScrollListener.onCardScroll(walletCardViewInfo3, walletCardViewInfo3, 0.0f);
+        this.mIsDeviceLocked = z;
+        this.mIsUdfpsEnabled = z2;
+        this.mCardCarouselContainer.setVisibility(0);
+        this.mCardCarousel.setVisibility(0);
+        this.mErrorView.setVisibility(8);
+        this.mEmptyStateView.setVisibility(8);
+        ImageView imageView = this.mIcon;
+        Context context = ((FrameLayout) this).mContext;
+        Drawable drawable = ((WalletScreenController.QAWalletCardViewInfo) ((WalletCardViewInfo) list.get(i))).mIconDrawable;
+        if (drawable != null) {
+            drawable.setTint(Utils.getColorAttrDefaultColor(context, R.^attr-private.closeItemLayout, 0));
+        }
+        imageView.setImageDrawable(drawable);
+        TextView textView = this.mCardLabel;
+        WalletScreenController.QAWalletCardViewInfo qAWalletCardViewInfo = (WalletScreenController.QAWalletCardViewInfo) ((WalletCardViewInfo) list.get(i));
+        CharSequence cardLabel = qAWalletCardViewInfo.mWalletCard.getCardLabel();
+        CharSequence charSequence = "";
+        if (cardLabel == null) {
+            cardLabel = "";
+        }
+        CharSequence[] charSequenceArrSplit = cardLabel.toString().split("\\n");
+        if (charSequenceArrSplit.length == 2) {
+            charSequence = charSequenceArrSplit[0];
+        } else {
+            CharSequence cardLabel2 = qAWalletCardViewInfo.mWalletCard.getCardLabel();
+            if (cardLabel2 != null) {
+                charSequence = cardLabel2;
+            }
+        }
+        textView.setText(charSequence);
+        int i3 = getResources().getConfiguration().orientation;
+        if (i3 == 1) {
+            this.mAppButton.setVisibility(0);
+            this.mToolbarAppButton.setVisibility(8);
+            this.mCardLabel.setVisibility(0);
+            requireViewById(com.android.systemui.R.id.dynamic_placeholder).setVisibility(0);
+            this.mAppButton.setOnClickListener(this.mShowWalletAppOnClickListener);
+        } else if (i3 == 2) {
+            this.mToolbarAppButton.setVisibility(0);
+            this.mAppButton.setVisibility(8);
+            this.mCardLabel.setVisibility(8);
+            requireViewById(com.android.systemui.R.id.dynamic_placeholder).setVisibility(8);
+            this.mToolbarAppButton.setOnClickListener(this.mShowWalletAppOnClickListener);
+        }
+        WalletCardCarousel walletCardCarousel2 = this.mCardCarousel;
+        walletCardCarousel2.setAdapter(walletCardCarousel2.mWalletCardCarouselAdapter);
+        ViewGroup.LayoutParams layoutParams = this.mCardCarouselContainer.getLayoutParams();
+        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
+            ((ViewGroup.MarginLayoutParams) layoutParams).topMargin = getResources().getDimensionPixelSize(com.android.systemui.R.dimen.wallet_card_carousel_container_top_margin);
+        }
+        renderActionButton((WalletCardViewInfo) list.get(i), z, this.mIsUdfpsEnabled);
+        if (z3) {
+            View[] viewArr = {this.mIcon, this.mCardLabel, this.mActionButton};
+            for (int i4 = 0; i4 < 3; i4++) {
+                View view = viewArr[i4];
+                if (view.getVisibility() == 0) {
+                    view.setAlpha(0.0f);
+                    view.animate().alpha(1.0f).setDuration(100L).start();
+                }
+            }
+        }
     }
 
     public final void showEmptyStateView(Drawable drawable, CharSequence charSequence, CharSequence charSequence2, WalletScreenController$$ExternalSyntheticLambda4 walletScreenController$$ExternalSyntheticLambda4) {

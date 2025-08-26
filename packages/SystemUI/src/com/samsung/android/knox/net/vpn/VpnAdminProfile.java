@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class VpnAdminProfile implements Parcelable {
     public static final Parcelable.Creator<VpnAdminProfile> CREATOR = new Parcelable.Creator<VpnAdminProfile>() { // from class: com.samsung.android.knox.net.vpn.VpnAdminProfile.1

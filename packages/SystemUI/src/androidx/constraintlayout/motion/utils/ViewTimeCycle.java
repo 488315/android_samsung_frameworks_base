@@ -1,5 +1,6 @@
 package androidx.constraintlayout.motion.utils;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -14,11 +15,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ViewTimeCycle extends TimeCycleSplineSet {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AlphaSet extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -27,7 +26,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomSet extends ViewTimeCycle {
         public final String mAttributeName;
         public final SparseArray mConstraintAttributeList;
@@ -45,7 +43,7 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
 
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
-        public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
+        public final boolean setProperty(float f, long j, View view, KeyCache keyCache) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
             this.mCurveFit.getPos(f, this.mTempValues);
             float[] fArr = this.mTempValues;
             float f2 = fArr[fArr.length - 2];
@@ -61,7 +59,7 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
             float f4 = (float) ((((j2 * 1.0E-9d) * f2) + this.mLastCycle) % 1.0d);
             this.mLastCycle = f4;
             this.mLastTime = j;
-            float calcWave = calcWave(f4);
+            float fCalcWave = calcWave(f4);
             this.mContinue = false;
             int i = 0;
             while (true) {
@@ -72,7 +70,7 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
                 boolean z = this.mContinue;
                 float f5 = this.mTempValues[i];
                 this.mContinue = z | (((double) f5) != 0.0d);
-                fArr2[i] = (f5 * calcWave) + f3;
+                fArr2[i] = (f5 * fCalcWave) + f3;
                 i++;
             }
             CustomSupport.setInterpolatedValue((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0), view, this.mCache);
@@ -85,17 +83,17 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         @Override // androidx.constraintlayout.core.motion.utils.TimeCycleSplineSet
         public final void setup(int i) {
             int size = this.mConstraintAttributeList.size();
-            int numberOfInterpolatedValues = ((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0)).numberOfInterpolatedValues();
+            int iNumberOfInterpolatedValues = ((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0)).numberOfInterpolatedValues();
             double[] dArr = new double[size];
-            int i2 = numberOfInterpolatedValues + 2;
+            int i2 = iNumberOfInterpolatedValues + 2;
             this.mTempValues = new float[i2];
-            this.mCache = new float[numberOfInterpolatedValues];
+            this.mCache = new float[iNumberOfInterpolatedValues];
             double[][] dArr2 = (double[][]) Array.newInstance((Class<?>) Double.TYPE, size, i2);
             for (int i3 = 0; i3 < size; i3++) {
-                int keyAt = this.mConstraintAttributeList.keyAt(i3);
+                int iKeyAt = this.mConstraintAttributeList.keyAt(i3);
                 ConstraintAttribute constraintAttribute = (ConstraintAttribute) this.mConstraintAttributeList.valueAt(i3);
                 float[] fArr = (float[]) this.mWaveProperties.valueAt(i3);
-                dArr[i3] = keyAt * 0.01d;
+                dArr[i3] = iKeyAt * 0.01d;
                 constraintAttribute.getValuesToInterpolate(this.mTempValues);
                 int i4 = 0;
                 while (true) {
@@ -105,14 +103,13 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
                     }
                 }
                 double[] dArr3 = dArr2[i3];
-                dArr3[numberOfInterpolatedValues] = fArr[0];
-                dArr3[numberOfInterpolatedValues + 1] = fArr[1];
+                dArr3[iNumberOfInterpolatedValues] = fArr[0];
+                dArr3[iNumberOfInterpolatedValues + 1] = fArr[1];
             }
             this.mCurveFit = CurveFit.get(i, dArr, dArr2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ElevationSet extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -121,7 +118,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathRotate extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -129,12 +125,11 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProgressSet extends ViewTimeCycle {
         public boolean mNoMethod = false;
 
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
-        public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
+        public final boolean setProperty(float f, long j, View view, KeyCache keyCache) throws IllegalAccessException, Resources.NotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (view instanceof MotionLayout) {
                 ((MotionLayout) view).setProgress(get(f, j, view, keyCache));
@@ -162,7 +157,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationSet extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -171,7 +165,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationXset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -180,7 +173,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationYset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -189,7 +181,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScaleXset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -198,7 +189,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScaleYset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -207,7 +197,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationXset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -216,7 +205,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationYset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -225,7 +213,6 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationZset extends ViewTimeCycle {
         @Override // androidx.constraintlayout.motion.utils.ViewTimeCycle
         public final boolean setProperty(float f, long j, View view, KeyCache keyCache) {
@@ -254,37 +241,37 @@ public abstract class ViewTimeCycle extends TimeCycleSplineSet {
         this.mLastCycle = f3;
         String str = this.mType;
         if (keyCache.mMap.containsKey(view)) {
-            HashMap hashMap = (HashMap) keyCache.mMap.get(view);
-            if (hashMap == null) {
-                hashMap = new HashMap();
+            HashMap map = (HashMap) keyCache.mMap.get(view);
+            if (map == null) {
+                map = new HashMap();
             }
-            if (hashMap.containsKey(str)) {
-                float[] fArr2 = (float[]) hashMap.get(str);
-                if (fArr2 == null) {
-                    fArr2 = new float[0];
+            if (map.containsKey(str)) {
+                float[] fArrCopyOf = (float[]) map.get(str);
+                if (fArrCopyOf == null) {
+                    fArrCopyOf = new float[0];
                 }
-                if (fArr2.length <= 0) {
-                    fArr2 = Arrays.copyOf(fArr2, 1);
+                if (fArrCopyOf.length <= 0) {
+                    fArrCopyOf = Arrays.copyOf(fArrCopyOf, 1);
                 }
-                fArr2[0] = f3;
-                hashMap.put(str, fArr2);
+                fArrCopyOf[0] = f3;
+                map.put(str, fArrCopyOf);
             } else {
-                hashMap.put(str, new float[]{f3});
-                keyCache.mMap.put(view, hashMap);
+                map.put(str, new float[]{f3});
+                keyCache.mMap.put(view, map);
             }
         } else {
-            HashMap hashMap2 = new HashMap();
-            hashMap2.put(str, new float[]{f3});
-            keyCache.mMap.put(view, hashMap2);
+            HashMap map2 = new HashMap();
+            map2.put(str, new float[]{f3});
+            keyCache.mMap.put(view, map2);
         }
         this.mLastTime = j;
         float f4 = this.mCache[0];
-        float calcWave = (calcWave(this.mLastCycle) * f4) + this.mCache[2];
+        float fCalcWave = (calcWave(this.mLastCycle) * f4) + this.mCache[2];
         if (f4 == 0.0f && f2 == 0.0f) {
             z = false;
         }
         this.mContinue = z;
-        return calcWave;
+        return fCalcWave;
     }
 
     public abstract boolean setProperty(float f, long j, View view, KeyCache keyCache);

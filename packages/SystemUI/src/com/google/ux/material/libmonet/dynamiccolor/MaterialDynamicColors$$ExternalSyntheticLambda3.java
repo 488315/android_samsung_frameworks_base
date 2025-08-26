@@ -2,7 +2,6 @@ package com.google.ux.material.libmonet.dynamiccolor;
 
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambda3 implements Function {
     public final /* synthetic */ int $r8$classId;
@@ -38,9 +37,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
             case 10:
                 return dynamicScheme.secondaryPalette;
             case 11:
-                boolean isMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
+                boolean zIsMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
                 boolean z = dynamicScheme.isDark;
-                if (isMonochrome) {
+                if (zIsMonochrome) {
                     return Double.valueOf(z ? 10.0d : 90.0d);
                 }
                 return Double.valueOf(z ? 20.0d : 100.0d);
@@ -63,9 +62,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
             case 20:
                 return dynamicScheme.errorPalette;
             case 21:
-                boolean isMonochrome2 = MaterialDynamicColors.isMonochrome(dynamicScheme);
+                boolean zIsMonochrome2 = MaterialDynamicColors.isMonochrome(dynamicScheme);
                 boolean z2 = dynamicScheme.isDark;
-                if (isMonochrome2) {
+                if (zIsMonochrome2) {
                     return Double.valueOf(z2 ? 90.0d : 10.0d);
                 }
                 return Double.valueOf(z2 ? 90.0d : 30.0d);
@@ -78,9 +77,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
             case 24:
                 return dynamicScheme.secondaryPalette;
             case 25:
-                boolean isMonochrome3 = MaterialDynamicColors.isMonochrome(dynamicScheme);
+                boolean zIsMonochrome3 = MaterialDynamicColors.isMonochrome(dynamicScheme);
                 boolean z4 = dynamicScheme.isDark;
-                if (isMonochrome3) {
+                if (zIsMonochrome3) {
                     return Double.valueOf(z4 ? 10.0d : 100.0d);
                 }
                 return Double.valueOf(z4 ? 20.0d : 100.0d);

@@ -13,7 +13,6 @@ import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformAnimationLoader extends AnimationLoader {
     public FreeformAnimationLoader(MultiTaskingTransitionState multiTaskingTransitionState) {
@@ -35,18 +34,21 @@ public class FreeformAnimationLoader extends AnimationLoader {
 
     @Override // com.android.wm.shell.transition.AnimationLoader
     public final void loadAnimationIfPossible() {
-        Animation loadAnimationFromResources;
-        int i;
+        Animation animationLoadAnimationFromResources;
         ActivityManager.RunningTaskInfo runningTaskInfo;
-        Animation animation;
-        boolean z = CoreRune.MW_FREEFORM_MINIMIZE_SHELL_TRANSITION;
+        int i;
+        ActivityManager.RunningTaskInfo runningTaskInfo2;
+        Animation animationCreateMinimizeAnimation;
         MultiTaskingTransitionState multiTaskingTransitionState = this.mState;
-        if (z) {
+        if (multiTaskingTransitionState.mIsPopOverAnimationNeeded) {
+            return;
+        }
+        if (CoreRune.MW_FREEFORM_MINIMIZE_SHELL_TRANSITION) {
             int i2 = multiTaskingTransitionState.mMinimizeAnimState;
             DisplayController displayController = multiTaskingTransitionState.mDisplayController;
             if (i2 == 1) {
+                boolean z = false;
                 Rect rect = new Rect(multiTaskingTransitionState.getBounds());
-                boolean z2 = false;
                 PointF pointF = new PointF(rect.centerX(), rect.centerY());
                 if (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER) {
                     pointF.set(multiTaskingTransitionState.mMinimizePoint);
@@ -55,11 +57,11 @@ public class FreeformAnimationLoader extends AnimationLoader {
                     Rect rect2 = new Rect();
                     displayController.getDisplayLayout(multiTaskingTransitionState.mDisplayId).getStableBounds(rect2, false);
                     if (rect.left < rect2.left && multiTaskingTransitionState.mFreeformStashScale < 1.0f) {
-                        z2 = true;
+                        z = true;
                     }
                 }
-                animation = multiTaskingTransitionState.createMinimizeAnimation(false, pointF, rect, multiTaskingTransitionState.mFreeformStashScale, z2);
-                animation.setAnimationListener(new Animation.AnimationListener(multiTaskingTransitionState, multiTaskingTransitionState.mTaskId, pointF) { // from class: com.android.wm.shell.transition.MultiTaskingTransitionState.1
+                animationCreateMinimizeAnimation = multiTaskingTransitionState.createMinimizeAnimation(false, pointF, rect, multiTaskingTransitionState.mFreeformStashScale, z);
+                animationCreateMinimizeAnimation.setAnimationListener(new Animation.AnimationListener(multiTaskingTransitionState, multiTaskingTransitionState.mTaskId, pointF) { // from class: com.android.wm.shell.transition.MultiTaskingTransitionState.1
                     public final /* synthetic */ PointF val$targetPoint;
                     public final /* synthetic */ int val$taskId;
 
@@ -69,20 +71,20 @@ public class FreeformAnimationLoader extends AnimationLoader {
                     }
 
                     @Override // android.view.animation.Animation.AnimationListener
-                    public final void onAnimationEnd(Animation animation2) {
+                    public final void onAnimationEnd(Animation animation) {
                         MultiWindowManager.getInstance().notifyFreeformMinimizeAnimationEnd(this.val$taskId, this.val$targetPoint);
                     }
 
                     @Override // android.view.animation.Animation.AnimationListener
-                    public final void onAnimationRepeat(Animation animation2) {
+                    public final void onAnimationRepeat(Animation animation) {
                     }
 
                     @Override // android.view.animation.Animation.AnimationListener
-                    public final void onAnimationStart(Animation animation2) {
+                    public final void onAnimationStart(Animation animation) {
                     }
                 });
             } else {
-                boolean z3 = false;
+                boolean z2 = false;
                 if (i2 == 2) {
                     Rect rect3 = new Rect(multiTaskingTransitionState2.getBounds());
                     PointF pointF2 = new PointF();
@@ -95,46 +97,52 @@ public class FreeformAnimationLoader extends AnimationLoader {
                         Rect rect4 = new Rect();
                         displayController.getDisplayLayout(multiTaskingTransitionState2.mDisplayId).getStableBounds(rect4, false);
                         if (rect3.left < rect4.left && multiTaskingTransitionState2.mFreeformStashScale < 1.0f) {
-                            z3 = true;
+                            z2 = true;
                         }
                     }
-                    animation = multiTaskingTransitionState2.createMinimizeAnimation(true, pointF2, rect3, multiTaskingTransitionState2.mFreeformStashScale, z3);
+                    animationCreateMinimizeAnimation = multiTaskingTransitionState2.createMinimizeAnimation(true, pointF2, rect3, multiTaskingTransitionState2.mFreeformStashScale, z2);
                 } else {
-                    animation = null;
+                    animationCreateMinimizeAnimation = null;
                 }
             }
-            if (animation != null) {
-                multiTaskingTransitionState2.setAnimation(animation);
+            if (animationCreateMinimizeAnimation != null) {
+                multiTaskingTransitionState2.setAnimation(animationCreateMinimizeAnimation);
             }
             if (multiTaskingTransitionState2.mAnimationLoaded) {
                 return;
             }
         }
-        if (!CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION || (i = multiTaskingTransitionState2.mForceHidingTransit) == 0) {
-            boolean z4 = multiTaskingTransitionState2.mIsEnter;
-            int i3 = multiTaskingTransitionState2.isOpeningTransitionType() ? z4 ? R.anim.freeform_open_enter : R.anim.freeform_open_exit : multiTaskingTransitionState2.isClosingTransitionType() ? z4 ? R.anim.freeform_close_enter : R.anim.freeform_close_exit : -1;
-            if (i3 == -1 || (loadAnimationFromResources = multiTaskingTransitionState2.loadAnimationFromResources(i3)) == null) {
+        boolean z3 = CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION;
+        if (z3 && (i = multiTaskingTransitionState2.mForceHidingTransit) != 0) {
+            if (CoreRune.MW_CAPTION_FREEFORM_STASH && multiTaskingTransitionState2.mFreeformStashScale != 1.0f) {
+                multiTaskingTransitionState2.setAnimation(AnimationLoader.NO_ANIMATION);
                 return;
             }
-            if (((multiTaskingTransitionState2.isOpeningTransitionType() && z4) || (multiTaskingTransitionState2.isClosingTransitionType() && !z4)) && (loadAnimationFromResources instanceof AnimationSet)) {
-                addRoundedClipAnimation(multiTaskingTransitionState2.getBounds(), (AnimationSet) loadAnimationFromResources);
+            if (i == 4 || i == 3 || !((runningTaskInfo2 = multiTaskingTransitionState2.mTaskInfo) == null || runningTaskInfo2.isRunning || multiTaskingTransitionState2.mChange.getMode() != 2)) {
+                multiTaskingTransitionState2.setAnimation(AnimationLoader.NO_ANIMATION);
+                return;
             }
-            multiTaskingTransitionState2.setAnimation(loadAnimationFromResources);
+            Animation animationLoadAnimationFromResources2 = multiTaskingTransitionState2.loadAnimationFromResources(multiTaskingTransitionState2.mForceHidingTransit == 1 ? R.anim.freeform_window_force_hide_enter : R.anim.freeform_window_force_hide_exit);
+            if (animationLoadAnimationFromResources2 != null) {
+                animationLoadAnimationFromResources2.setInterpolator(InterpolatorUtils.SINE_OUT_60);
+                multiTaskingTransitionState2.setAnimation(animationLoadAnimationFromResources2);
+                return;
+            }
             return;
         }
-        if (CoreRune.MW_CAPTION_FREEFORM_STASH && multiTaskingTransitionState2.mFreeformStashScale != 1.0f) {
+        if (z3 && (runningTaskInfo = multiTaskingTransitionState2.mTaskInfo) != null && runningTaskInfo.isForceHidden) {
             multiTaskingTransitionState2.setAnimation(AnimationLoader.NO_ANIMATION);
             return;
         }
-        if (i == 4 || i == 3 || !((runningTaskInfo = multiTaskingTransitionState2.mTaskInfo) == null || runningTaskInfo.isRunning || multiTaskingTransitionState2.mChange.getMode() != 2)) {
-            multiTaskingTransitionState2.setAnimation(AnimationLoader.NO_ANIMATION);
+        boolean z4 = multiTaskingTransitionState2.mIsEnter;
+        int i3 = multiTaskingTransitionState2.isOpeningTransitionType() ? z4 ? R.anim.freeform_open_enter : R.anim.freeform_open_exit : multiTaskingTransitionState2.isClosingTransitionType() ? z4 ? R.anim.freeform_close_enter : R.anim.freeform_close_exit : -1;
+        if (i3 == -1 || (animationLoadAnimationFromResources = multiTaskingTransitionState2.loadAnimationFromResources(i3)) == null) {
             return;
         }
-        Animation loadAnimationFromResources2 = multiTaskingTransitionState2.loadAnimationFromResources(multiTaskingTransitionState2.mForceHidingTransit == 1 ? R.anim.freeform_window_force_hide_enter : R.anim.freeform_window_force_hide_exit);
-        if (loadAnimationFromResources2 != null) {
-            loadAnimationFromResources2.setInterpolator(InterpolatorUtils.SINE_OUT_60);
-            multiTaskingTransitionState2.setAnimation(loadAnimationFromResources2);
+        if (((multiTaskingTransitionState2.isOpeningTransitionType() && z4) || (multiTaskingTransitionState2.isClosingTransitionType() && !z4)) && (animationLoadAnimationFromResources instanceof AnimationSet)) {
+            addRoundedClipAnimation(multiTaskingTransitionState2.getBounds(), (AnimationSet) animationLoadAnimationFromResources);
         }
+        multiTaskingTransitionState2.setAnimation(animationLoadAnimationFromResources);
     }
 
     public final String toString() {

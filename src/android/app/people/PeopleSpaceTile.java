@@ -458,7 +458,7 @@ public class PeopleSpaceTile implements Parcelable {
     }
 
     public static Icon convertDrawableToIcon(Drawable drawable) {
-        Bitmap createBitmap;
+        Bitmap bitmapCreateBitmap;
         if (drawable == null) {
             return null;
         }
@@ -469,13 +469,13 @@ public class PeopleSpaceTile implements Parcelable {
             }
         }
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            createBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         } else {
-            createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         }
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return Icon.createWithBitmap(createBitmap);
+        return Icon.createWithBitmap(bitmapCreateBitmap);
     }
 }

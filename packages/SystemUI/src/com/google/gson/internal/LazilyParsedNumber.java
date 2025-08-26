@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamException;
 import java.math.BigDecimal;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LazilyParsedNumber extends Number {
     private final String value;
@@ -55,10 +54,10 @@ public final class LazilyParsedNumber extends Number {
             try {
                 return Integer.parseInt(this.value);
             } catch (NumberFormatException unused) {
-                return new BigDecimal(this.value).intValue();
+                return (int) Long.parseLong(this.value);
             }
         } catch (NumberFormatException unused2) {
-            return (int) Long.parseLong(this.value);
+            return new BigDecimal(this.value).intValue();
         }
     }
 

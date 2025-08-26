@@ -15,6 +15,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.InfoMediaManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
+import com.android.systemui.R;
 import com.android.systemui.broadcast.ActionReceiver$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.log.LogBuffer;
@@ -23,6 +24,7 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.media.controls.domain.pipeline.MediaDataManager;
 import com.android.systemui.media.controls.domain.pipeline.MediaDeviceManager;
+import com.android.systemui.media.controls.shared.MediaControlDrawables;
 import com.android.systemui.media.controls.shared.model.MediaData;
 import com.android.systemui.media.controls.shared.model.MediaDeviceData;
 import com.android.systemui.media.controls.util.LocalMediaManagerFactory;
@@ -45,7 +47,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDeviceManager implements MediaDataManager.Listener {
     public static final MediaDeviceData EMPTY_AND_DISABLED_MEDIA_DEVICE_DATA;
@@ -61,7 +62,6 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
     public final Set listeners = new LinkedHashSet();
     public final Map entries = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -98,19 +98,19 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             Entry entry2 = (Entry) entry.getValue();
             ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "  key=", str);
             MediaController mediaController = entry2.controller;
-            String str2 = null;
+            String volumeControlId = null;
             RoutingSessionInfo routingSessionForMediaController = mediaController != null ? ((MediaRouter2Manager) MediaDeviceManager.this.mr2manager.get()).getRoutingSessionForMediaController(mediaController) : null;
             List selectedRoutes = routingSessionForMediaController != null ? ((MediaRouter2Manager) MediaDeviceManager.this.mr2manager.get()).getSelectedRoutes(routingSessionForMediaController) : null;
             MediaDeviceData mediaDeviceData = entry2.current;
             printWriter.println("    current device is " + ((Object) (mediaDeviceData != null ? mediaDeviceData.name : null)));
             MediaController mediaController2 = entry2.controller;
-            Integer valueOf = (mediaController2 == null || (playbackInfo2 = mediaController2.getPlaybackInfo()) == null) ? null : Integer.valueOf(playbackInfo2.getPlaybackType());
-            printWriter.println("    PlaybackType=" + valueOf + " (1 for local, 2 for remote) cached=" + entry2.playbackType);
+            Integer numValueOf = (mediaController2 == null || (playbackInfo2 = mediaController2.getPlaybackInfo()) == null) ? null : Integer.valueOf(playbackInfo2.getPlaybackType());
+            printWriter.println("    PlaybackType=" + numValueOf + " (1 for local, 2 for remote) cached=" + entry2.playbackType);
             MediaController mediaController3 = entry2.controller;
             if (mediaController3 != null && (playbackInfo = mediaController3.getPlaybackInfo()) != null) {
-                str2 = playbackInfo.getVolumeControlId();
+                volumeControlId = playbackInfo.getVolumeControlId();
             }
-            printWriter.println("    volumeControlId=" + str2 + " cached= " + entry2.playbackVolumeControlId);
+            printWriter.println("    volumeControlId=" + volumeControlId + " cached= " + entry2.playbackVolumeControlId);
             StringBuilder sb = new StringBuilder("    routingSession=");
             sb.append(routingSessionForMediaController);
             printWriter.println(sb.toString());
@@ -141,15 +141,15 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             return;
         }
         MediaSession.Token token = mediaData.token;
-        MediaController create = token != null ? this.controllerFactory.create(token) : null;
-        MediaSession.Token sessionToken = create != null ? create.getSessionToken() : null;
+        MediaController mediaControllerCreate = token != null ? this.controllerFactory.create(token) : null;
+        MediaSession.Token sessionToken = mediaControllerCreate != null ? mediaControllerCreate.getSessionToken() : null;
         LocalMediaManagerFactory localMediaManagerFactory = this.localMediaManagerFactory;
         Context context = localMediaManagerFactory.context;
         String str3 = mediaData.packageName;
         LocalBluetoothManager localBluetoothManager = localMediaManagerFactory.localBluetoothManager;
         LocalMediaManager localMediaManager = new LocalMediaManager(localMediaManagerFactory.context, localBluetoothManager, InfoMediaManager.createInstance(context, str3, null, localBluetoothManager, sessionToken), str3);
         MediaMuteAwaitConnectionManagerFactory mediaMuteAwaitConnectionManagerFactory = this.muteAwaitConnectionManagerFactory;
-        Entry entry3 = new Entry(str, str2, create, localMediaManager, new MediaMuteAwaitConnectionManager(mediaMuteAwaitConnectionManagerFactory.mainExecutor, localMediaManager, mediaMuteAwaitConnectionManagerFactory.context, mediaMuteAwaitConnectionManagerFactory.deviceIconUtil, mediaMuteAwaitConnectionManagerFactory.logger));
+        Entry entry3 = new Entry(str, str2, mediaControllerCreate, localMediaManager, new MediaMuteAwaitConnectionManager(mediaMuteAwaitConnectionManagerFactory.mainExecutor, localMediaManager, mediaMuteAwaitConnectionManagerFactory.context, mediaMuteAwaitConnectionManagerFactory.deviceIconUtil, mediaMuteAwaitConnectionManagerFactory.logger));
         this.entries.put(str, entry3);
         MediaDeviceManager mediaDeviceManager = MediaDeviceManager.this;
         mediaDeviceManager.bgExecutor.execute(new MediaDeviceManager$Entry$start$1(entry3, mediaDeviceManager));
@@ -187,7 +187,6 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Entry extends MediaController.Callback implements LocalMediaManager.DeviceCallback, BluetoothLeBroadcast.Callback {
         public static final /* synthetic */ int $r8$clinit = 0;
         public AboutToConnectDevice aboutToConnectDeviceOverride;
@@ -195,7 +194,7 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onLocaleListChanged() {
                 int i = MediaDeviceManager.Entry.$r8$clinit;
-                MediaDeviceManager.Entry.this.updateCurrent();
+                this.this$0.updateCurrent();
             }
         };
         public final MediaController controller;
@@ -251,16 +250,16 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
 
         public final void onBroadcastMetadataChanged(int i, BluetoothLeBroadcastMetadata bluetoothLeBroadcastMetadata) {
             MediaDeviceLogger mediaDeviceLogger = MediaDeviceManager.this.logger;
-            String bluetoothLeBroadcastMetadata2 = bluetoothLeBroadcastMetadata.toString();
+            String string = bluetoothLeBroadcastMetadata.toString();
             mediaDeviceLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda0 = new MediaDeviceLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = mediaDeviceLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
-            logMessageImpl.str1 = bluetoothLeBroadcastMetadata2;
-            logBuffer.commit(obtain);
+            logMessageImpl.str1 = string;
+            logBuffer.commit(logMessageObtain);
             updateCurrent();
         }
 
@@ -270,11 +269,11 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             LogLevel logLevel = LogLevel.DEBUG;
             MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda0 = new MediaDeviceLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = mediaDeviceLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = "onBroadcastStartFailed";
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
 
         public final void onBroadcastStarted(int i, int i2) {
@@ -288,11 +287,11 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             LogLevel logLevel = LogLevel.DEBUG;
             MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda0 = new MediaDeviceLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = mediaDeviceLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = "onBroadcastStopFailed";
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
 
         public final void onBroadcastStopped(int i, int i2) {
@@ -315,7 +314,7 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
                 @Override // java.lang.Runnable
                 public final void run() {
                     Log.d("MediaDeviceManager", "onDeviceListUpdate()");
-                    MediaDeviceManager.Entry entry = MediaDeviceManager.Entry.this;
+                    MediaDeviceManager.Entry entry = this.this$0;
                     int i = MediaDeviceManager.Entry.$r8$clinit;
                     entry.updateCurrent();
                 }
@@ -328,7 +327,7 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
                 @Override // java.lang.Runnable
                 public final void run() {
                     Log.d("MediaDeviceManager", "onSelectedDeviceStateChanged()");
-                    MediaDeviceManager.Entry entry = MediaDeviceManager.Entry.this;
+                    MediaDeviceManager.Entry entry = this.this$0;
                     int i = MediaDeviceManager.Entry.$r8$clinit;
                     entry.updateCurrent();
                 }
@@ -340,40 +339,168 @@ public final class MediaDeviceManager implements MediaDataManager.Listener {
             mediaDeviceManager.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDeviceManager$Entry$stop$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    if (MediaDeviceManager.Entry.this.started) {
+                    if (this.this$0.started) {
                         Log.d("MediaDeviceManager", "stopScan()");
-                        MediaDeviceManager.Entry entry = MediaDeviceManager.Entry.this;
+                        MediaDeviceManager.Entry entry = this.this$0;
                         entry.started = false;
                         MediaController mediaController = entry.controller;
                         if (mediaController != null) {
                             mediaController.unregisterCallback(entry);
                         }
-                        MediaDeviceManager.Entry entry2 = MediaDeviceManager.Entry.this;
+                        MediaDeviceManager.Entry entry2 = this.this$0;
                         entry2.localMediaManager.unregisterCallback(entry2);
-                        MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = MediaDeviceManager.Entry.this.muteAwaitConnectionManager;
+                        MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = this.this$0.muteAwaitConnectionManager;
                         mediaMuteAwaitConnectionManager.audioManager.unregisterMuteAwaitConnectionCallback(mediaMuteAwaitConnectionManager.muteAwaitConnectionChangeListener);
-                        ((ConfigurationControllerImpl) mediaDeviceManager.configurationController).removeCallback(MediaDeviceManager.Entry.this.configListener);
+                        ((ConfigurationControllerImpl) mediaDeviceManager.configurationController).removeCallback(this.this$0.configListener);
                     }
                 }
             });
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:23:0x008f, code lost:
-        
-            if (r8 != null) goto L34;
-         */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0075  */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x008e  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0075  */
+        /* JADX WARN: Removed duplicated region for block: B:28:0x008e  */
+        /* JADX WARN: Removed duplicated region for block: B:30:0x0091  */
+        /* JADX WARN: Removed duplicated region for block: B:36:0x00c9  */
+        /* JADX WARN: Removed duplicated region for block: B:37:0x00ce  */
+        /* JADX WARN: Removed duplicated region for block: B:40:0x00e2  */
+        /* JADX WARN: Removed duplicated region for block: B:41:0x00e7  */
+        /* JADX WARN: Removed duplicated region for block: B:47:0x00f8  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final void updateCurrent() {
-            /*
-                Method dump skipped, instructions count: 473
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.domain.pipeline.MediaDeviceManager.Entry.updateCurrent():void");
+            MediaDeviceData mediaDeviceData;
+            final MediaDeviceData mediaDeviceData2;
+            CharSequence charSequence;
+            CharSequence charSequence2;
+            CharSequence charSequence3;
+            MediaDeviceData mediaDeviceData3;
+            MediaController.PlaybackInfo playbackInfo;
+            CharSequence charSequence4;
+            Drawable drawable;
+            Drawable drawable2;
+            MediaDevice currentConnectedDevice = this.localMediaManager.getCurrentConnectedDevice();
+            MediaDeviceData mediaDeviceData4 = currentConnectedDevice != null ? new MediaDeviceData(true, currentConnectedDevice.getIconWithoutBackground(), currentConnectedDevice.getName(), null, currentConnectedDevice.getId(), false, null, 72, null) : null;
+            MediaController mediaController = this.controller;
+            if (mediaController == null || (playbackInfo = mediaController.getPlaybackInfo()) == null || playbackInfo.getPlaybackType() != 2) {
+                AboutToConnectDevice aboutToConnectDevice = this.aboutToConnectDeviceOverride;
+                if (aboutToConnectDevice == null) {
+                    mediaDeviceData = null;
+                } else {
+                    MediaDevice mediaDevice = aboutToConnectDevice.fullMediaDevice;
+                    mediaDeviceData = mediaDevice != null ? new MediaDeviceData(true, mediaDevice.getIconWithoutBackground(), mediaDevice.getName(), null, mediaDevice.getId(), false, null, 72, null) : aboutToConnectDevice.backupMediaDeviceData;
+                }
+                mediaDeviceData2 = mediaDeviceData == null ? mediaDeviceData4 : mediaDeviceData;
+                MediaDeviceLogger mediaDeviceLogger = MediaDeviceManager.this.logger;
+                mediaDeviceLogger.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda0 = new MediaDeviceLogger$$ExternalSyntheticLambda0(5);
+                LogBuffer logBuffer = mediaDeviceLogger.buffer;
+                LogMessage logMessageObtain = logBuffer.obtain("MediaDeviceLog", logLevel, mediaDeviceLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = (mediaDeviceData == null || (charSequence2 = mediaDeviceData.name) == null) ? null : charSequence2.toString();
+                logMessageImpl.str2 = (mediaDeviceData4 == null || (charSequence = mediaDeviceData4.name) == null) ? null : charSequence.toString();
+                logBuffer.commit(logMessageObtain);
+            } else {
+                RoutingSessionInfo routingSessionForMediaController = ((MediaRouter2Manager) MediaDeviceManager.this.mr2manager.get()).getRoutingSessionForMediaController(this.controller);
+                if (routingSessionForMediaController != null) {
+                    MediaDeviceManager mediaDeviceManager = MediaDeviceManager.this;
+                    if (routingSessionForMediaController.getSelectedRoutes().size() > 1) {
+                        MediaControlDrawables mediaControlDrawables = MediaControlDrawables.INSTANCE;
+                        Context context = mediaDeviceManager.context;
+                        mediaControlDrawables.getClass();
+                        drawable2 = MediaControlDrawables.groupDevice;
+                        if (drawable2 == null) {
+                            drawable2 = context.getDrawable(R.drawable.ic_media_group_device);
+                            MediaControlDrawables.groupDevice = drawable2;
+                        }
+                    } else if (mediaDeviceData4 != null) {
+                        drawable2 = mediaDeviceData4.icon;
+                    } else {
+                        drawable = null;
+                        if (mediaDeviceData4 == null) {
+                            CharSequence name = routingSessionForMediaController.getName();
+                            if (name == null) {
+                                name = mediaDeviceData4.name;
+                            }
+                            mediaDeviceData2 = new MediaDeviceData(mediaDeviceData4.enabled, drawable, name, mediaDeviceData4.intent, mediaDeviceData4.id, mediaDeviceData4.showBroadcastButton, mediaDeviceData4.customMediaDeviceData);
+                        } else {
+                            mediaDeviceData2 = null;
+                        }
+                        if (mediaDeviceData2 == null) {
+                            MediaControlDrawables mediaControlDrawables2 = MediaControlDrawables.INSTANCE;
+                            Context context2 = MediaDeviceManager.this.context;
+                            mediaControlDrawables2.getClass();
+                            Drawable drawable3 = MediaControlDrawables.homeDevices;
+                            if (drawable3 == null) {
+                                drawable3 = context2.getDrawable(R.drawable.ic_media_home_devices);
+                                MediaControlDrawables.homeDevices = drawable3;
+                            }
+                            mediaDeviceData2 = new MediaDeviceData(false, drawable3, MediaDeviceManager.this.context.getString(R.string.media_seamless_other_device), null, null, false, null, 88, null);
+                        }
+                        MediaDeviceLogger mediaDeviceLogger2 = MediaDeviceManager.this.logger;
+                        CharSequence name2 = routingSessionForMediaController == null ? routingSessionForMediaController.getName() : null;
+                        mediaDeviceLogger2.getClass();
+                        LogLevel logLevel2 = LogLevel.DEBUG;
+                        MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda02 = new MediaDeviceLogger$$ExternalSyntheticLambda0(4);
+                        LogBuffer logBuffer2 = mediaDeviceLogger2.buffer;
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("MediaDeviceLog", logLevel2, mediaDeviceLogger$$ExternalSyntheticLambda02, null);
+                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                        logMessageImpl2.str1 = name2 == null ? name2.toString() : null;
+                        logMessageImpl2.str2 = (mediaDeviceData4 != null || (charSequence4 = mediaDeviceData4.name) == null) ? null : charSequence4.toString();
+                        logBuffer2.commit(logMessageObtain2);
+                    }
+                    drawable = drawable2;
+                    if (mediaDeviceData4 == null) {
+                    }
+                    if (mediaDeviceData2 == null) {
+                    }
+                    MediaDeviceLogger mediaDeviceLogger22 = MediaDeviceManager.this.logger;
+                    if (routingSessionForMediaController == null) {
+                    }
+                    mediaDeviceLogger22.getClass();
+                    LogLevel logLevel22 = LogLevel.DEBUG;
+                    MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda022 = new MediaDeviceLogger$$ExternalSyntheticLambda0(4);
+                    LogBuffer logBuffer22 = mediaDeviceLogger22.buffer;
+                    LogMessage logMessageObtain22 = logBuffer22.obtain("MediaDeviceLog", logLevel22, mediaDeviceLogger$$ExternalSyntheticLambda022, null);
+                    LogMessageImpl logMessageImpl22 = (LogMessageImpl) logMessageObtain22;
+                    logMessageImpl22.str1 = name2 == null ? name2.toString() : null;
+                    if (mediaDeviceData4 != null) {
+                        logMessageImpl22.str2 = (mediaDeviceData4 != null || (charSequence4 = mediaDeviceData4.name) == null) ? null : charSequence4.toString();
+                        logBuffer22.commit(logMessageObtain22);
+                    }
+                }
+            }
+            if (mediaDeviceData2 == null) {
+                mediaDeviceData2 = MediaDeviceManager.EMPTY_AND_DISABLED_MEDIA_DEVICE_DATA;
+            }
+            boolean z = mediaDeviceData2 != null && (mediaDeviceData3 = this.current) != null && mediaDeviceData2.enabled == mediaDeviceData3.enabled && Intrinsics.areEqual(mediaDeviceData2.name, mediaDeviceData3.name) && Intrinsics.areEqual(mediaDeviceData2.intent, mediaDeviceData3.intent) && Intrinsics.areEqual(mediaDeviceData2.id, mediaDeviceData3.id) && mediaDeviceData2.showBroadcastButton == mediaDeviceData3.showBroadcastButton;
+            if (!this.started || !z) {
+                this.current = mediaDeviceData2;
+                final MediaDeviceManager mediaDeviceManager2 = MediaDeviceManager.this;
+                mediaDeviceManager2.fgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDeviceManager$Entry$current$1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MediaDeviceManager mediaDeviceManager3 = mediaDeviceManager2;
+                        MediaDeviceManager.Entry entry = this;
+                        String str = entry.key;
+                        String str2 = entry.oldKey;
+                        MediaDeviceData mediaDeviceData5 = mediaDeviceData2;
+                        MediaDeviceData mediaDeviceData6 = MediaDeviceManager.EMPTY_AND_DISABLED_MEDIA_DEVICE_DATA;
+                        mediaDeviceManager3.processDevice(str, str2, mediaDeviceData5);
+                    }
+                });
+            }
+            MediaDeviceLogger mediaDeviceLogger3 = MediaDeviceManager.this.logger;
+            MediaDeviceData mediaDeviceData5 = this.current;
+            String string = (mediaDeviceData5 == null || (charSequence3 = mediaDeviceData5.name) == null) ? null : charSequence3.toString();
+            mediaDeviceLogger3.getClass();
+            LogLevel logLevel3 = LogLevel.DEBUG;
+            MediaDeviceLogger$$ExternalSyntheticLambda0 mediaDeviceLogger$$ExternalSyntheticLambda03 = new MediaDeviceLogger$$ExternalSyntheticLambda0(3);
+            LogBuffer logBuffer3 = mediaDeviceLogger3.buffer;
+            LogMessage logMessageObtain3 = logBuffer3.obtain("MediaDeviceLog", logLevel3, mediaDeviceLogger$$ExternalSyntheticLambda03, null);
+            ((LogMessageImpl) logMessageObtain3).str1 = string;
+            logBuffer3.commit(logMessageObtain3);
         }
 
         public final void onPlaybackStarted(int i, int i2) {

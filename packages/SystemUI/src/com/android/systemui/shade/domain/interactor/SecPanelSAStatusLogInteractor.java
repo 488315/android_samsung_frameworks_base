@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecPanelSAStatusLogInteractor {
     public final SharedPreferences.Editor editor;
@@ -55,7 +54,6 @@ public final class SecPanelSAStatusLogInteractor {
     public long oqpfwds;
     public final SecPanelSAStatusLogRepository repository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ SecQSExpansionStateInteractor $qsExpansionStateInteractor;
@@ -103,7 +101,6 @@ public final class SecPanelSAStatusLogInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -125,7 +122,6 @@ public final class SecPanelSAStatusLogInteractor {
         final Flow[] flowArr = {secPanelSAStatusLogRepository.openQuickPanelFromStatusBarInShade, secPanelSAStatusLogRepository.openQuickPanelFromStatusBarInKeyguard, secPanelSAStatusLogRepository.openQuickPanelFromWipeDownInShade, secPanelSAStatusLogRepository.openQuickPanelFromWipeDownInKeyguard, secPanelSAStatusLogRepository.openQuickPanelFromHorizontalSwipingInShade, secPanelSAStatusLogRepository.openQuickPanelFromHorizontalSwipingInKeyguard};
         FlowKt.launchIn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -160,81 +156,81 @@ public final class SecPanelSAStatusLogInteractor {
                         Object obj4 = objArr[2];
                         Object obj5 = objArr[3];
                         Object obj6 = objArr[4];
-                        long longValue = ((Number) objArr[5]).longValue();
-                        long longValue2 = ((Number) obj6).longValue();
-                        long longValue3 = ((Number) obj5).longValue();
-                        long longValue4 = ((Number) obj4).longValue();
-                        long longValue5 = ((Number) obj3).longValue();
-                        long longValue6 = ((Number) obj2).longValue();
-                        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1004 => SS: ", longValue6, " : SK: ");
-                        m.append(longValue5);
-                        Log.d("SecPanelSAStatusLogInteractor", m.toString());
-                        Log.d("SecPanelSAStatusLogInteractor", "QPBSE1004 => WDS: " + longValue4 + " : WDK: " + longValue3);
-                        StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1004 => HSS: ", longValue2, " : HSK: ");
-                        m2.append(longValue);
-                        Log.d("SecPanelSAStatusLogInteractor", m2.toString());
-                        Long l = new Long(longValue6);
+                        long jLongValue = ((Number) objArr[5]).longValue();
+                        long jLongValue2 = ((Number) obj6).longValue();
+                        long jLongValue3 = ((Number) obj5).longValue();
+                        long jLongValue4 = ((Number) obj4).longValue();
+                        long jLongValue5 = ((Number) obj3).longValue();
+                        long jLongValue6 = ((Number) obj2).longValue();
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1004 => SS: ", jLongValue6, " : SK: ");
+                        sbM.append(jLongValue5);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM.toString());
+                        Log.d("SecPanelSAStatusLogInteractor", "QPBSE1004 => WDS: " + jLongValue4 + " : WDK: " + jLongValue3);
+                        StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1004 => HSS: ", jLongValue2, " : HSK: ");
+                        sbM2.append(jLongValue);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM2.toString());
+                        Long l = new Long(jLongValue6);
                         if (l.longValue() == this.this$0.oqpfss) {
                             l = null;
                         }
                         if (l != null) {
-                            long longValue7 = l.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_status_bar_in_shade", longValue7);
+                            long jLongValue7 = l.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_status_bar_in_shade", jLongValue7);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor = this.this$0;
-                            secPanelSAStatusLogInteractor.oqpfss = longValue7;
+                            secPanelSAStatusLogInteractor.oqpfss = jLongValue7;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l2 = new Long(longValue5);
+                        Long l2 = new Long(jLongValue5);
                         if (l2.longValue() == this.this$0.oqpfsk) {
                             l2 = null;
                         }
                         if (l2 != null) {
-                            long longValue8 = l2.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_status_bar_in_keyguard", longValue8);
+                            long jLongValue8 = l2.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_status_bar_in_keyguard", jLongValue8);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor2 = this.this$0;
-                            secPanelSAStatusLogInteractor2.oqpfsk = longValue8;
+                            secPanelSAStatusLogInteractor2.oqpfsk = jLongValue8;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor2, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l3 = new Long(longValue4);
+                        Long l3 = new Long(jLongValue4);
                         if (l3.longValue() == this.this$0.oqpfwds) {
                             l3 = null;
                         }
                         if (l3 != null) {
-                            long longValue9 = l3.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_wipe_down_in_shade", longValue9);
+                            long jLongValue9 = l3.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_wipe_down_in_shade", jLongValue9);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor3 = this.this$0;
-                            secPanelSAStatusLogInteractor3.oqpfwds = longValue9;
+                            secPanelSAStatusLogInteractor3.oqpfwds = jLongValue9;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor3, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l4 = new Long(longValue3);
+                        Long l4 = new Long(jLongValue3);
                         if (l4.longValue() == this.this$0.oqpfwdk) {
                             l4 = null;
                         }
                         if (l4 != null) {
-                            long longValue10 = l4.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_wipe_down_in_keyguard", longValue10);
+                            long jLongValue10 = l4.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_wipe_down_in_keyguard", jLongValue10);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor4 = this.this$0;
-                            secPanelSAStatusLogInteractor4.oqpfwdk = longValue10;
+                            secPanelSAStatusLogInteractor4.oqpfwdk = jLongValue10;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor4, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l5 = new Long(longValue2);
+                        Long l5 = new Long(jLongValue2);
                         if (l5.longValue() == this.this$0.oqpfhss) {
                             l5 = null;
                         }
                         if (l5 != null) {
-                            long longValue11 = l5.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_horizontal_swiping_in_shade", longValue11);
+                            long jLongValue11 = l5.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_horizontal_swiping_in_shade", jLongValue11);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor5 = this.this$0;
-                            secPanelSAStatusLogInteractor5.oqpfhss = longValue11;
+                            secPanelSAStatusLogInteractor5.oqpfhss = jLongValue11;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor5, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l6 = new Long(longValue);
+                        Long l6 = new Long(jLongValue);
                         Long l7 = l6.longValue() == this.this$0.oqpfhsk ? null : l6;
                         if (l7 != null) {
-                            long longValue12 = l7.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_horizontal_swiping_in_keyguard", longValue12);
+                            long jLongValue12 = l7.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_horizontal_swiping_in_keyguard", jLongValue12);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor6 = this.this$0;
-                            secPanelSAStatusLogInteractor6.oqpfhsk = longValue12;
+                            secPanelSAStatusLogInteractor6.oqpfhsk = jLongValue12;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor6, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
                         this.this$0.editor.apply();
@@ -256,19 +252,18 @@ public final class SecPanelSAStatusLogInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }), coroutineScope);
         final Flow[] flowArr2 = {secPanelSAStatusLogRepository.openQuickPanelFrom1DepthStatusBarInShade, secPanelSAStatusLogRepository.openQuickPanelFrom1DepthStatusBarInKeyguard, secPanelSAStatusLogRepository.openQuickPanelFrom1DepthEtcInShade, secPanelSAStatusLogRepository.openQuickPanelFrom1DepthEtcInKeyguard, secPanelSAStatusLogRepository.openQuickPanelFrom2Depth, secPanelSAStatusLogRepository.openQuickPanelFrom2Depth2Finger};
         FlowKt.launchIn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$2$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -303,81 +298,81 @@ public final class SecPanelSAStatusLogInteractor {
                         Object obj4 = objArr[2];
                         Object obj5 = objArr[3];
                         Object obj6 = objArr[4];
-                        long longValue = ((Number) objArr[5]).longValue();
-                        long longValue2 = ((Number) obj6).longValue();
-                        long longValue3 = ((Number) obj5).longValue();
-                        long longValue4 = ((Number) obj4).longValue();
-                        long longValue5 = ((Number) obj3).longValue();
-                        long longValue6 = ((Number) obj2).longValue();
-                        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1003 => 1DSS: ", longValue6, " : 1DSK: ");
-                        m.append(longValue5);
-                        Log.d("SecPanelSAStatusLogInteractor", m.toString());
-                        Log.d("SecPanelSAStatusLogInteractor", "QPBSE1003 => 1DES: " + longValue4 + " : 1DEK: " + longValue3);
-                        StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1003 => 2D: ", longValue2, " : 2D2F: ");
-                        m2.append(longValue);
-                        Log.d("SecPanelSAStatusLogInteractor", m2.toString());
-                        Long l = new Long(longValue6);
+                        long jLongValue = ((Number) objArr[5]).longValue();
+                        long jLongValue2 = ((Number) obj6).longValue();
+                        long jLongValue3 = ((Number) obj5).longValue();
+                        long jLongValue4 = ((Number) obj4).longValue();
+                        long jLongValue5 = ((Number) obj3).longValue();
+                        long jLongValue6 = ((Number) obj2).longValue();
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1003 => 1DSS: ", jLongValue6, " : 1DSK: ");
+                        sbM.append(jLongValue5);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM.toString());
+                        Log.d("SecPanelSAStatusLogInteractor", "QPBSE1003 => 1DES: " + jLongValue4 + " : 1DEK: " + jLongValue3);
+                        StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPBSE1003 => 2D: ", jLongValue2, " : 2D2F: ");
+                        sbM2.append(jLongValue);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM2.toString());
+                        Long l = new Long(jLongValue6);
                         if (l.longValue() == this.this$0.oqpf1dss) {
                             l = null;
                         }
                         if (l != null) {
-                            long longValue7 = l.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_1depth_status_bar_in shade", longValue7);
+                            long jLongValue7 = l.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_1depth_status_bar_in shade", jLongValue7);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor = this.this$0;
-                            secPanelSAStatusLogInteractor.oqpf1dss = longValue7;
+                            secPanelSAStatusLogInteractor.oqpf1dss = jLongValue7;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor, SystemUIAnalytics.SID_QUICKPANEL_OPENED);
                         }
-                        Long l2 = new Long(longValue5);
+                        Long l2 = new Long(jLongValue5);
                         if (l2.longValue() == this.this$0.oqpf1dsk) {
                             l2 = null;
                         }
                         if (l2 != null) {
-                            long longValue8 = l2.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_1depth_status_bar_in_keyguard", longValue8);
+                            long jLongValue8 = l2.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_1depth_status_bar_in_keyguard", jLongValue8);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor2 = this.this$0;
-                            secPanelSAStatusLogInteractor2.oqpf1dsk = longValue8;
+                            secPanelSAStatusLogInteractor2.oqpf1dsk = jLongValue8;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor2, SystemUIAnalytics.SID_QUICKPANEL_OPENED);
                         }
-                        Long l3 = new Long(longValue4);
+                        Long l3 = new Long(jLongValue4);
                         if (l3.longValue() == this.this$0.oqpf1des) {
                             l3 = null;
                         }
                         if (l3 != null) {
-                            long longValue9 = l3.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_1depth_etc_in shade", longValue9);
+                            long jLongValue9 = l3.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_1depth_etc_in shade", jLongValue9);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor3 = this.this$0;
-                            secPanelSAStatusLogInteractor3.oqpf1des = longValue9;
+                            secPanelSAStatusLogInteractor3.oqpf1des = jLongValue9;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor3, SystemUIAnalytics.SID_QUICKPANEL_OPENED);
                         }
-                        Long l4 = new Long(longValue3);
+                        Long l4 = new Long(jLongValue3);
                         if (l4.longValue() == this.this$0.oqpf1dek) {
                             l4 = null;
                         }
                         if (l4 != null) {
-                            long longValue10 = l4.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_1depth_etc_in_keyguard", longValue10);
+                            long jLongValue10 = l4.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_1depth_etc_in_keyguard", jLongValue10);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor4 = this.this$0;
-                            secPanelSAStatusLogInteractor4.oqpf1dek = longValue10;
+                            secPanelSAStatusLogInteractor4.oqpf1dek = jLongValue10;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor4, SystemUIAnalytics.SID_QUICKPANEL_OPENED);
                         }
-                        Long l5 = new Long(longValue2);
+                        Long l5 = new Long(jLongValue2);
                         if (l5.longValue() == this.this$0.oqpf2d) {
                             l5 = null;
                         }
                         if (l5 != null) {
-                            long longValue11 = l5.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_2depth", longValue11);
+                            long jLongValue11 = l5.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_2depth", jLongValue11);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor5 = this.this$0;
-                            secPanelSAStatusLogInteractor5.oqpf2d = longValue11;
+                            secPanelSAStatusLogInteractor5.oqpf2d = jLongValue11;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor5, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
-                        Long l6 = new Long(longValue);
+                        Long l6 = new Long(jLongValue);
                         Long l7 = l6.longValue() == this.this$0.oqpf2d2f ? null : l6;
                         if (l7 != null) {
-                            long longValue12 = l7.longValue();
-                            this.this$0.editor.putLong("open_quick_panel_from_2depth_2finger", longValue12);
+                            long jLongValue12 = l7.longValue();
+                            this.this$0.editor.putLong("open_quick_panel_from_2depth_2finger", jLongValue12);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor6 = this.this$0;
-                            secPanelSAStatusLogInteractor6.oqpf2d2f = longValue12;
+                            secPanelSAStatusLogInteractor6.oqpf2d2f = jLongValue12;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor6, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
                         }
                         this.this$0.editor.apply();
@@ -399,19 +394,18 @@ public final class SecPanelSAStatusLogInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr3 = flowArr2;
-                Object combineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$2.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$2.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr3.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }), coroutineScope);
         final Flow[] flowArr3 = {secPanelSAStatusLogRepository.openNotificationPanelFromStatusbarInKeyguard, secPanelSAStatusLogRepository.openNotificationPanelFromStatusbarInShade, secPanelSAStatusLogRepository.openNotificationPanelFromSwipeDownInKeyguard, secPanelSAStatusLogRepository.openNotificationPanelFromSwipeDownInShade, secPanelSAStatusLogRepository.openNotificationPanelFromSwipeRightInKeyguard, secPanelSAStatusLogRepository.openNotificationPanelFromSwipeRightInShade};
         FlowKt.launchIn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$3$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -446,81 +440,81 @@ public final class SecPanelSAStatusLogInteractor {
                         Object obj4 = objArr[2];
                         Object obj5 = objArr[3];
                         Object obj6 = objArr[4];
-                        long longValue = ((Number) objArr[5]).longValue();
-                        long longValue2 = ((Number) obj6).longValue();
-                        long longValue3 = ((Number) obj5).longValue();
-                        long longValue4 = ((Number) obj4).longValue();
-                        long longValue5 = ((Number) obj3).longValue();
-                        long longValue6 = ((Number) obj2).longValue();
-                        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPNE0040 => SK: ", longValue6, " : SS: ");
-                        m.append(longValue5);
-                        Log.d("SecPanelSAStatusLogInteractor", m.toString());
-                        Log.d("SecPanelSAStatusLogInteractor", "QPNE0040 => SDK: " + longValue4 + " : SDS: " + longValue3);
-                        StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPNE0040 => SRK: ", longValue2, " : SRS: ");
-                        m2.append(longValue);
-                        Log.d("SecPanelSAStatusLogInteractor", m2.toString());
-                        Long l = new Long(longValue6);
+                        long jLongValue = ((Number) objArr[5]).longValue();
+                        long jLongValue2 = ((Number) obj6).longValue();
+                        long jLongValue3 = ((Number) obj5).longValue();
+                        long jLongValue4 = ((Number) obj4).longValue();
+                        long jLongValue5 = ((Number) obj3).longValue();
+                        long jLongValue6 = ((Number) obj2).longValue();
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPNE0040 => SK: ", jLongValue6, " : SS: ");
+                        sbM.append(jLongValue5);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM.toString());
+                        Log.d("SecPanelSAStatusLogInteractor", "QPNE0040 => SDK: " + jLongValue4 + " : SDS: " + jLongValue3);
+                        StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("QPNE0040 => SRK: ", jLongValue2, " : SRS: ");
+                        sbM2.append(jLongValue);
+                        Log.d("SecPanelSAStatusLogInteractor", sbM2.toString());
+                        Long l = new Long(jLongValue6);
                         if (l.longValue() == this.this$0.onpfsk) {
                             l = null;
                         }
                         if (l != null) {
-                            long longValue7 = l.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_statusbar_in_keyguard", longValue7);
+                            long jLongValue7 = l.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_statusbar_in_keyguard", jLongValue7);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor = this.this$0;
-                            secPanelSAStatusLogInteractor.onpfsk = longValue7;
+                            secPanelSAStatusLogInteractor.onpfsk = jLongValue7;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
-                        Long l2 = new Long(longValue5);
+                        Long l2 = new Long(jLongValue5);
                         if (l2.longValue() == this.this$0.onpfss) {
                             l2 = null;
                         }
                         if (l2 != null) {
-                            long longValue8 = l2.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_statusbar_in_shade", longValue8);
+                            long jLongValue8 = l2.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_statusbar_in_shade", jLongValue8);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor2 = this.this$0;
-                            secPanelSAStatusLogInteractor2.onpfss = longValue8;
+                            secPanelSAStatusLogInteractor2.onpfss = jLongValue8;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor2, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
-                        Long l3 = new Long(longValue4);
+                        Long l3 = new Long(jLongValue4);
                         if (l3.longValue() == this.this$0.onpfsdk) {
                             l3 = null;
                         }
                         if (l3 != null) {
-                            long longValue9 = l3.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_swipe_down_in_keyguard", longValue9);
+                            long jLongValue9 = l3.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_swipe_down_in_keyguard", jLongValue9);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor3 = this.this$0;
-                            secPanelSAStatusLogInteractor3.onpfsdk = longValue9;
+                            secPanelSAStatusLogInteractor3.onpfsdk = jLongValue9;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor3, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
-                        Long l4 = new Long(longValue3);
+                        Long l4 = new Long(jLongValue3);
                         if (l4.longValue() == this.this$0.onpfsds) {
                             l4 = null;
                         }
                         if (l4 != null) {
-                            long longValue10 = l4.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_swipe_down_in_shade", longValue10);
+                            long jLongValue10 = l4.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_swipe_down_in_shade", jLongValue10);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor4 = this.this$0;
-                            secPanelSAStatusLogInteractor4.onpfsds = longValue10;
+                            secPanelSAStatusLogInteractor4.onpfsds = jLongValue10;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor4, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
-                        Long l5 = new Long(longValue2);
+                        Long l5 = new Long(jLongValue2);
                         if (l5.longValue() == this.this$0.onpfsrk) {
                             l5 = null;
                         }
                         if (l5 != null) {
-                            long longValue11 = l5.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_swipe_right_in_keyguard", longValue11);
+                            long jLongValue11 = l5.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_swipe_right_in_keyguard", jLongValue11);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor5 = this.this$0;
-                            secPanelSAStatusLogInteractor5.onpfsrk = longValue11;
+                            secPanelSAStatusLogInteractor5.onpfsrk = jLongValue11;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor5, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
-                        Long l6 = new Long(longValue);
+                        Long l6 = new Long(jLongValue);
                         Long l7 = l6.longValue() == this.this$0.onpfsrs ? null : l6;
                         if (l7 != null) {
-                            long longValue12 = l7.longValue();
-                            this.this$0.editor.putLong("open_notification_panel_from_swipe_right_in_shade", longValue12);
+                            long jLongValue12 = l7.longValue();
+                            this.this$0.editor.putLong("open_notification_panel_from_swipe_right_in_shade", jLongValue12);
                             SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor6 = this.this$0;
-                            secPanelSAStatusLogInteractor6.onpfsrs = longValue12;
+                            secPanelSAStatusLogInteractor6.onpfsrs = jLongValue12;
                             SecPanelSAStatusLogInteractor.access$updateCurrentScreen(secPanelSAStatusLogInteractor6, SystemUIAnalytics.SID_NOTIFICATION_PANEL);
                         }
                         this.this$0.editor.apply();
@@ -542,13 +536,13 @@ public final class SecPanelSAStatusLogInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr4 = flowArr3;
-                Object combineInternal = CombineKt.combineInternal(flowArr4, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$3.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr4, new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor$_init_$lambda$39$$inlined$combine$3.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr4.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }), coroutineScope);
         FlowKt.launchIn(FlowKt.distinctUntilChanged(FlowKt.combine(secPanelSAStatusLogRepository.openNotificationPanelFromKeyguard, secPanelSAStatusLogRepository.openNotificationPanelFromHomescreen, secPanelSAStatusLogRepository.openNotificationPanelFromHun, secPanelSAStatusLogRepository.openNotificationPanelFromEtc, new SecPanelSAStatusLogInteractor$1$4(this, null))), coroutineScope);

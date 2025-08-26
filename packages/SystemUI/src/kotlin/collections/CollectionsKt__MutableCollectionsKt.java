@@ -12,7 +12,6 @@ import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableCollection;
 import kotlin.sequences.Sequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CollectionsKt__MutableCollectionsKt extends CollectionsKt__MutableCollectionsJVMKt {
     public static void addAll(Collection collection, Object[] objArr) {
@@ -27,7 +26,7 @@ public class CollectionsKt__MutableCollectionsKt extends CollectionsKt__MutableC
         Iterator it = iterable.iterator();
         boolean z2 = false;
         while (it.hasNext()) {
-            if (((Boolean) function1.mo779invoke(it.next())).booleanValue() == z) {
+            if (((Boolean) function1.mo781invoke(it.next())).booleanValue() == z) {
                 it.remove();
                 z2 = true;
             }
@@ -56,7 +55,7 @@ public class CollectionsKt__MutableCollectionsKt extends CollectionsKt__MutableC
             int i2 = 0;
             while (true) {
                 Object obj = list.get(i);
-                if (!((Boolean) function1.mo779invoke(obj)).booleanValue()) {
+                if (!((Boolean) function1.mo781invoke(obj)).booleanValue()) {
                     if (i2 != i) {
                         list.set(i2, obj);
                     }

@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.util.Log;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
+import com.android.compose.animation.scene.ObservableTransitionState;
 import com.android.keyguard.KeyguardSecurityModel;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -11,6 +12,7 @@ import com.android.systemui.NotiRune;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryInteractor;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.scene.domain.interactor.SceneInteractor;
+import com.android.systemui.scene.shared.model.Scenes;
 import com.android.systemui.statusbar.KeyguardBatteryStatus;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
@@ -37,12 +39,24 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.cover.CoverState;
 import java.util.Iterator;
 import java.util.List;
-import kotlin.sequences.FilteringSequence$iterator$1;
-import kotlin.sequences.Sequence;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
+import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class SensitiveContentCoordinatorImpl extends Invalidator implements SensitiveContentCoordinator, DynamicPrivacyController.Listener, OnBeforeRenderListListener {
@@ -66,6 +80,192 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
     private final SettingsHelper settingsHelper;
     private final StatusBarStateController statusBarStateController;
 
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$attach$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SensitiveContentCoordinatorImpl.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final ReadonlyStateFlow readonlyStateFlow = SensitiveContentCoordinatorImpl.this.sceneInteractor.transitionState;
+                final SensitiveContentCoordinatorImpl sensitiveContentCoordinatorImpl = SensitiveContentCoordinatorImpl.this;
+                Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$attach$1$invokeSuspend$$inlined$mapNotNull$1
+
+                    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$attach$1$invokeSuspend$$inlined$mapNotNull$1$2, reason: invalid class name */
+                    public final class AnonymousClass2<T> implements FlowCollector {
+                        final /* synthetic */ FlowCollector $this_unsafeFlow;
+                        final /* synthetic */ SensitiveContentCoordinatorImpl this$0;
+
+                        /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$attach$1$invokeSuspend$$inlined$mapNotNull$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector, SensitiveContentCoordinatorImpl sensitiveContentCoordinatorImpl) {
+                            this.$this_unsafeFlow = flowCollector;
+                            this.this$0 = sensitiveContentCoordinatorImpl;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                FlowCollector flowCollector = this.$this_unsafeFlow;
+                                Boolean bool = null;
+                                boolean zIsTransitioning$default = ObservableTransitionState.isTransitioning$default((ObservableTransitionState) obj, null, Scenes.Gone, 1);
+                                boolean zBooleanValue = ((Boolean) this.this$0.deviceEntryInteractor.isDeviceEntered.$$delegate_0.getValue()).booleanValue();
+                                if (zIsTransitioning$default && !zBooleanValue) {
+                                    bool = Boolean.TRUE;
+                                } else if (!zIsTransitioning$default) {
+                                    bool = Boolean.FALSE;
+                                }
+                                if (bool != null) {
+                                    anonymousClass1.label = 1;
+                                    if (flowCollector.emit(bool, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, sensitiveContentCoordinatorImpl), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                });
+                final SensitiveContentCoordinatorImpl sensitiveContentCoordinatorImpl2 = SensitiveContentCoordinatorImpl.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl.attach.1.2
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public /* bridge */ /* synthetic */ Object emit(Object obj2, Continuation continuation) {
+                        return emit(((Boolean) obj2).booleanValue(), continuation);
+                    }
+
+                    public final Object emit(boolean z, Continuation continuation) {
+                        sensitiveContentCoordinatorImpl2.inTransitionFromLockedToGone = z;
+                        sensitiveContentCoordinatorImpl2.invalidateList("inTransitionFromLockedToGoneChanged");
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (flowDistinctUntilChanged.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass1) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$attach$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SensitiveContentCoordinatorImpl.this.new AnonymousClass2(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                StateFlow stateFlow = (StateFlow) SensitiveContentCoordinatorImpl.this.deviceEntryInteractor.canSwipeToEnter$delegate.getValue();
+                final SensitiveContentCoordinatorImpl sensitiveContentCoordinatorImpl = SensitiveContentCoordinatorImpl.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl.attach.2.1
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Boolean bool, Continuation continuation) {
+                        boolean zBooleanValue = bool != null ? bool.booleanValue() : false;
+                        if (sensitiveContentCoordinatorImpl.canSwipeToEnter != zBooleanValue) {
+                            sensitiveContentCoordinatorImpl.canSwipeToEnter = zBooleanValue;
+                            sensitiveContentCoordinatorImpl.invalidateList("canSwipeToEnterChanged");
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (stateFlow.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass2) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$keyguardUpdateMonitorCallback$1] */
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$screenshareSecretFilter$1] */
     public SensitiveContentCoordinatorImpl(DynamicPrivacyController dynamicPrivacyController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardUpdateMonitor keyguardUpdateMonitor, StatusBarStateController statusBarStateController, KeyguardStateController keyguardStateController, SelectedUserInteractor selectedUserInteractor, SensitiveNotificationProtectionController sensitiveNotificationProtectionController, DeviceEntryInteractor deviceEntryInteractor, SceneInteractor sceneInteractor, CoroutineScope coroutineScope, SettingsHelper settingsHelper, AppLockNotificationController appLockNotificationController) {
@@ -85,21 +285,17 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
         this.onSensitiveStateChanged = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$onSensitiveStateChanged$1
             @Override // java.lang.Runnable
             public final void run() {
-                SensitiveContentCoordinatorImpl.this.invalidateList("onSensitiveStateChanged");
+                this.this$0.invalidateList("onSensitiveStateChanged");
             }
         };
         this.keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SensitiveContentCoordinatorImpl$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public void onKeyguardVisibilityChanged(boolean z) {
-                KeyguardStateController keyguardStateController2;
-                if (z) {
+                if (z || !((KeyguardStateControllerImpl) this.this$0.keyguardStateController).mKeyguardGoingAway) {
                     return;
                 }
-                keyguardStateController2 = SensitiveContentCoordinatorImpl.this.keyguardStateController;
-                if (((KeyguardStateControllerImpl) keyguardStateController2).mKeyguardGoingAway) {
-                    SensitiveContentCoordinatorImpl.this.needUpdateNext = true;
-                    SensitiveContentCoordinatorImpl.this.invalidateList("onKeyguardVisibilityChanged");
-                }
+                this.this$0.needUpdateNext = true;
+                this.this$0.invalidateList("onKeyguardVisibilityChanged");
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
@@ -230,9 +426,7 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
 
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
             public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
-                SensitiveNotificationProtectionController sensitiveNotificationProtectionController2;
-                sensitiveNotificationProtectionController2 = SensitiveContentCoordinatorImpl.this.sensitiveNotificationProtectionController;
-                return ((SensitiveNotificationProtectionControllerImpl) sensitiveNotificationProtectionController2).isSensitiveStateActive() && isSecret(notificationEntry);
+                return ((SensitiveNotificationProtectionControllerImpl) this.this$0.sensitiveNotificationProtectionController).isSensitiveStateActive() && isSecret(notificationEntry);
             }
         };
     }
@@ -252,78 +446,75 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
         this.keyguardUpdateMonitor.registerCallback(this.keyguardUpdateMonitorCallback);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00a5  */
     @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void onBeforeRenderList(List<? extends PipelineEntry> list) {
-        Sequence extractAllRepresentativeEntries;
+        boolean zShouldHideNotiForAppLock;
         boolean z;
         boolean z2;
         boolean z3;
-        boolean z4;
-        boolean z5 = NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE;
-        boolean z6 = false;
-        if (z5) {
+        boolean z4 = NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE;
+        boolean z5 = false;
+        if (z4) {
             this.keyguardUpdateMonitor.setHasRedactedNotifications(false);
         }
         if (!isKeyguardGoingAway() || this.needUpdateNext) {
-            boolean z7 = true;
+            boolean z6 = true;
             if (this.statusBarStateController.getState() == 1 && this.keyguardUpdateMonitor.getUserUnlockedWithBiometricAndIsBypassing(this.selectedUserInteractor.getSelectedUserId())) {
                 return;
             }
             this.needUpdateNext = false;
-            boolean isSensitiveStateActive = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).isSensitiveStateActive();
+            boolean zIsSensitiveStateActive = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).isSensitiveStateActive();
             NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = (NotificationLockscreenUserManagerImpl) this.lockscreenUserManager;
             int i = notificationLockscreenUserManagerImpl.mCurrentUserId;
-            boolean isLockscreenPublicMode = notificationLockscreenUserManagerImpl.isLockscreenPublicMode(i);
-            boolean z8 = (isLockscreenPublicMode && !((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).userAllowsPrivateNotificationsInPublic(i)) || isSensitiveStateActive;
-            boolean isDynamicallyUnlocked = this.dynamicPrivacyController.isDynamicallyUnlocked();
-            boolean isAllowPrivateNotificationsWhenUnsecure = z5 ? this.settingsHelper.isAllowPrivateNotificationsWhenUnsecure(i) : false;
-            extractAllRepresentativeEntries = SensitiveContentCoordinatorKt.extractAllRepresentativeEntries((List<? extends PipelineEntry>) list);
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(extractAllRepresentativeEntries, new SensitiveContentCoordinatorImpl$$ExternalSyntheticLambda0()));
-            while (filteringSequence$iterator$1.hasNext()) {
-                NotificationEntry notificationEntry = (NotificationEntry) filteringSequence$iterator$1.next();
+            boolean zIsLockscreenPublicMode = notificationLockscreenUserManagerImpl.isLockscreenPublicMode(i);
+            boolean z7 = (zIsLockscreenPublicMode && !((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).userAllowsPrivateNotificationsInPublic(i)) || zIsSensitiveStateActive;
+            boolean zIsDynamicallyUnlocked = this.dynamicPrivacyController.isDynamicallyUnlocked();
+            boolean zIsAllowPrivateNotificationsWhenUnsecure = z4 ? this.settingsHelper.isAllowPrivateNotificationsWhenUnsecure(i) : false;
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(SensitiveContentCoordinatorKt.extractAllRepresentativeEntries(list), new SensitiveContentCoordinatorImpl$$ExternalSyntheticLambda0()).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                NotificationEntry notificationEntry = (NotificationEntry) anonymousClass1.next();
                 int identifier = notificationEntry.mSbn.getUser().getIdentifier();
-                boolean z9 = (isLockscreenPublicMode || ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).isLockscreenPublicMode(identifier)) ? z7 : z6;
-                if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && isAllowPrivateNotificationsWhenUnsecure) {
-                    if (z9) {
-                        if (!isDynamicallyUnlocked) {
-                            z9 = z7;
-                        } else if (identifier != i && identifier != -1) {
-                            z9 = ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).mUsersWithSeparateWorkChallenge.get(identifier, z6);
-                        }
+                boolean z8 = (zIsLockscreenPublicMode || ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).isLockscreenPublicMode(identifier)) ? z6 : z5;
+                if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && zIsAllowPrivateNotificationsWhenUnsecure) {
+                    if (z8) {
+                        z8 = !zIsDynamicallyUnlocked ? z6 : (identifier == i || identifier == -1) ? z5 : ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).mUsersWithSeparateWorkChallenge.get(identifier, z5);
                     }
-                    z9 = z6;
                 }
-                boolean shouldProtectNotification = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).shouldProtectNotification(notificationEntry);
-                boolean z10 = ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).getRedactionType(notificationEntry) != 0 ? z7 : z6;
-                boolean z11 = (z9 && z10) ? z7 : z6;
+                boolean zShouldProtectNotification = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).shouldProtectNotification(notificationEntry);
+                boolean z9 = ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).getRedactionType(notificationEntry) != 0 ? z6 : z5;
+                boolean z10 = (z8 && z9) ? z6 : z5;
                 ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
-                if (expandableNotificationRow == null || expandableNotificationRow.isInsignificantSummary() != z7) {
+                if (expandableNotificationRow == null || expandableNotificationRow.isInsignificantSummary() != z6) {
                     if (NotiRune.NOTI_SUBSCREEN_NOTIFICATION_FIFTH) {
-                        notificationEntry.mUserPublic = z9;
+                        notificationEntry.mUserPublic = z8;
                     }
-                    boolean z12 = NotiRune.NOTI_STYLE_APP_LOCK;
-                    if (z12) {
-                        z = ((AppLockNotificationControllerImpl) this.appLockNotificationController).shouldHideNotiForAppLock(notificationEntry);
+                    boolean z11 = NotiRune.NOTI_STYLE_APP_LOCK;
+                    if (z11) {
+                        zShouldHideNotiForAppLock = ((AppLockNotificationControllerImpl) this.appLockNotificationController).shouldHideNotiForAppLock(notificationEntry);
                         ExpandableNotificationRow expandableNotificationRow2 = notificationEntry.row;
-                        if (expandableNotificationRow2 != null && expandableNotificationRow2.mShowPublicExpander != (!z)) {
-                            expandableNotificationRow2.mShowPublicExpander = z4;
-                            expandableNotificationRow2.mPublicLayout.updateExpandButtonsDuringLayout(z4, false);
+                        if (expandableNotificationRow2 != null && expandableNotificationRow2.mShowPublicExpander != (!zShouldHideNotiForAppLock)) {
+                            expandableNotificationRow2.mShowPublicExpander = z3;
+                            expandableNotificationRow2.mPublicLayout.updateExpandButtonsDuringLayout(z3, false);
                         }
                     } else {
-                        z = false;
+                        zShouldHideNotiForAppLock = false;
                     }
-                    notificationEntry.setSensitive(z11 || shouldProtectNotification || (z12 && z), z8);
-                    boolean z13 = z10 || shouldProtectNotification || (z12 && z);
-                    if (notificationEntry.mRawValueHide != z13) {
-                        notificationEntry.mRawValueHide = z13;
+                    notificationEntry.setSensitive(z10 || zShouldProtectNotification || (z11 && zShouldHideNotiForAppLock), z7);
+                    boolean z12 = z9 || zShouldProtectNotification || (z11 && zShouldHideNotiForAppLock);
+                    if (notificationEntry.mRawValueHide != z12) {
+                        notificationEntry.mRawValueHide = z12;
                         Iterator it = notificationEntry.mOnHideRawValueChangedListeners.iterator();
                         while (it.hasNext()) {
                             ((OngoingActivityDataHelper$mOnHideRawValueChangedListener$1) ((NotificationEntry.OnHideRawValueChangedListener) it.next())).getClass();
                             String str = OngoingActivityDataHelper.TAG;
-                            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("hide change : ", " | ", notificationEntry.mRawValueHide);
+                            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("hide change : ", " | ", notificationEntry.mRawValueHide);
                             String str2 = notificationEntry.mKey;
-                            m.append(str2);
-                            Log.i(str, m.toString());
+                            sbM.append(str2);
+                            Log.i(str, sbM.toString());
                             OngoingActivityDataHelper.INSTANCE.getClass();
                             OngoingActivityData ongoingActivityDataByKey = OngoingActivityDataHelper.getOngoingActivityDataByKey(str2);
                             if (ongoingActivityDataByKey != null) {
@@ -334,20 +525,20 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
                         }
                     }
                     ExpandableNotificationRow expandableNotificationRow3 = notificationEntry.row;
-                    if (expandableNotificationRow3 == null || expandableNotificationRow3.mShowPublicExpander == (!shouldProtectNotification)) {
-                        z2 = false;
+                    if (expandableNotificationRow3 == null || expandableNotificationRow3.mShowPublicExpander == (!zShouldProtectNotification)) {
+                        z = false;
                     } else {
-                        expandableNotificationRow3.mShowPublicExpander = z3;
-                        z2 = false;
-                        expandableNotificationRow3.mPublicLayout.updateExpandButtonsDuringLayout(z3, false);
+                        expandableNotificationRow3.mShowPublicExpander = z2;
+                        z = false;
+                        expandableNotificationRow3.mPublicLayout.updateExpandButtonsDuringLayout(z2, false);
                     }
-                    if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && !this.keyguardUpdateMonitor.hasRedactedNotifications() && z10) {
-                        this.keyguardUpdateMonitor.setHasRedactedNotifications(z10);
+                    if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && !this.keyguardUpdateMonitor.hasRedactedNotifications() && z9) {
+                        this.keyguardUpdateMonitor.setHasRedactedNotifications(z9);
                     }
-                    z6 = z2;
-                    z7 = true;
+                    z5 = z;
+                    z6 = true;
                 } else {
-                    notificationEntry.setSensitive(z6, z8);
+                    notificationEntry.setSensitive(z5, z7);
                 }
             }
         }

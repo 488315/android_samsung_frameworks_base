@@ -2,7 +2,6 @@ package com.android.systemui.keyguard.shared.model;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HelpFingerprintAuthenticationStatus extends FingerprintAuthenticationStatus {
     public final String msg;
@@ -26,9 +25,9 @@ public final class HelpFingerprintAuthenticationStatus extends FingerprintAuthen
     }
 
     public final int hashCode() {
-        int hashCode = Integer.hashCode(this.msgId) * 31;
+        int iHashCode = Integer.hashCode(this.msgId) * 31;
         String str = this.msg;
-        return hashCode + (str == null ? 0 : str.hashCode());
+        return iHashCode + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {

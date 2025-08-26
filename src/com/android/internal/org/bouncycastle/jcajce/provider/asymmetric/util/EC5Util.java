@@ -40,7 +40,7 @@ public class EC5Util {
         }
 
         private static Map createCurveMap() {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             Enumeration names = CustomNamedCurves.getNames();
             while (names.hasMoreElements()) {
                 String str = (String) names.nextElement();
@@ -48,13 +48,13 @@ public class EC5Util {
                 if (byNameLazy != null) {
                     ECCurve curve = byNameLazy.getCurve();
                     if (ECAlgorithms.isFpCurve(curve)) {
-                        hashMap.put(curve, CustomNamedCurves.getByNameLazy(str).getCurve());
+                        map.put(curve, CustomNamedCurves.getByNameLazy(str).getCurve());
                     }
                 }
             }
             ECCurve curve2 = CustomNamedCurves.getByNameLazy("Curve25519").getCurve();
-            hashMap.put(new ECCurve.Fp(curve2.getField().getCharacteristic(), curve2.getA().toBigInteger(), curve2.getB().toBigInteger(), curve2.getOrder(), curve2.getCofactor(), true), curve2);
-            return hashMap;
+            map.put(new ECCurve.Fp(curve2.getField().getCharacteristic(), curve2.getA().toBigInteger(), curve2.getB().toBigInteger(), curve2.getOrder(), curve2.getCofactor(), true), curve2);
+            return map;
         }
 
         static ECCurve substitute(ECCurve eCCurve) {
@@ -117,11 +117,11 @@ public class EC5Util {
             return null;
         }
         X9ECParameters x9ECParameters = X9ECParameters.getInstance(aSN1Sequence);
-        EllipticCurve convertCurve = convertCurve(eCCurve, x9ECParameters.getSeed());
+        EllipticCurve ellipticCurveConvertCurve = convertCurve(eCCurve, x9ECParameters.getSeed());
         if (x9ECParameters.getH() != null) {
-            return new ECParameterSpec(convertCurve, convertPoint(x9ECParameters.getG()), x9ECParameters.getN(), x9ECParameters.getH().intValue());
+            return new ECParameterSpec(ellipticCurveConvertCurve, convertPoint(x9ECParameters.getG()), x9ECParameters.getN(), x9ECParameters.getH().intValue());
         }
-        return new ECParameterSpec(convertCurve, convertPoint(x9ECParameters.getG()), x9ECParameters.getN(), 1);
+        return new ECParameterSpec(ellipticCurveConvertCurve, convertPoint(x9ECParameters.getG()), x9ECParameters.getN(), 1);
     }
 
     public static ECParameterSpec convertToSpec(X9ECParameters x9ECParameters) {
@@ -145,8 +145,8 @@ public class EC5Util {
         }
         ECFieldF2m eCFieldF2m = (ECFieldF2m) field;
         int m = eCFieldF2m.getM();
-        int[] convertMidTerms = ECUtil.convertMidTerms(eCFieldF2m.getMidTermsOfReductionPolynomial());
-        return new ECCurve.F2m(m, convertMidTerms[0], convertMidTerms[1], convertMidTerms[2], a, b, (BigInteger) null, (BigInteger) null);
+        int[] iArrConvertMidTerms = ECUtil.convertMidTerms(eCFieldF2m.getMidTermsOfReductionPolynomial());
+        return new ECCurve.F2m(m, iArrConvertMidTerms[0], iArrConvertMidTerms[1], iArrConvertMidTerms[2], a, b, (BigInteger) null, (BigInteger) null);
     }
 
     public static ECField convertField(FiniteField finiteField) {
@@ -159,23 +159,23 @@ public class EC5Util {
     }
 
     public static ECParameterSpec convertSpec(EllipticCurve ellipticCurve, com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec eCParameterSpec) {
-        ECPoint convertPoint = convertPoint(eCParameterSpec.getG());
+        ECPoint eCPointConvertPoint = convertPoint(eCParameterSpec.getG());
         if (eCParameterSpec instanceof ECNamedCurveParameterSpec) {
-            return new ECNamedCurveSpec(((ECNamedCurveParameterSpec) eCParameterSpec).getName(), ellipticCurve, convertPoint, eCParameterSpec.getN(), eCParameterSpec.getH());
+            return new ECNamedCurveSpec(((ECNamedCurveParameterSpec) eCParameterSpec).getName(), ellipticCurve, eCPointConvertPoint, eCParameterSpec.getN(), eCParameterSpec.getH());
         }
-        return new ECParameterSpec(ellipticCurve, convertPoint, eCParameterSpec.getN(), eCParameterSpec.getH().intValue());
+        return new ECParameterSpec(ellipticCurve, eCPointConvertPoint, eCParameterSpec.getN(), eCParameterSpec.getH().intValue());
     }
 
     public static com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec convertSpec(ECParameterSpec eCParameterSpec) {
-        ECCurve convertCurve = convertCurve(eCParameterSpec.getCurve());
-        com.android.internal.org.bouncycastle.math.ec.ECPoint convertPoint = convertPoint(convertCurve, eCParameterSpec.getGenerator());
+        ECCurve eCCurveConvertCurve = convertCurve(eCParameterSpec.getCurve());
+        com.android.internal.org.bouncycastle.math.ec.ECPoint eCPointConvertPoint = convertPoint(eCCurveConvertCurve, eCParameterSpec.getGenerator());
         BigInteger order = eCParameterSpec.getOrder();
-        BigInteger valueOf = BigInteger.valueOf(eCParameterSpec.getCofactor());
+        BigInteger bigIntegerValueOf = BigInteger.valueOf(eCParameterSpec.getCofactor());
         byte[] seed = eCParameterSpec.getCurve().getSeed();
         if (eCParameterSpec instanceof ECNamedCurveSpec) {
-            return new ECNamedCurveParameterSpec(((ECNamedCurveSpec) eCParameterSpec).getName(), convertCurve, convertPoint, order, valueOf, seed);
+            return new ECNamedCurveParameterSpec(((ECNamedCurveSpec) eCParameterSpec).getName(), eCCurveConvertCurve, eCPointConvertPoint, order, bigIntegerValueOf, seed);
         }
-        return new com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec(convertCurve, convertPoint, order, valueOf, seed);
+        return new com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec(eCCurveConvertCurve, eCPointConvertPoint, order, bigIntegerValueOf, seed);
     }
 
     public static com.android.internal.org.bouncycastle.math.ec.ECPoint convertPoint(ECParameterSpec eCParameterSpec, ECPoint eCPoint) {
@@ -187,7 +187,7 @@ public class EC5Util {
     }
 
     public static ECPoint convertPoint(com.android.internal.org.bouncycastle.math.ec.ECPoint eCPoint) {
-        com.android.internal.org.bouncycastle.math.ec.ECPoint normalize = eCPoint.normalize();
-        return new ECPoint(normalize.getAffineXCoord().toBigInteger(), normalize.getAffineYCoord().toBigInteger());
+        com.android.internal.org.bouncycastle.math.ec.ECPoint eCPointNormalize = eCPoint.normalize();
+        return new ECPoint(eCPointNormalize.getAffineXCoord().toBigInteger(), eCPointNormalize.getAffineYCoord().toBigInteger());
     }
 }

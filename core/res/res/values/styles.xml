@@ -1737,7 +1737,7 @@
         <item name="paddingBottom">0.0dip</item>
         <item name="divider">@drawable/action_bar_divider</item>
         <item name="height">?actionBarSize</item>
-        <item name="displayOptions">showHome|showTitle|useLogo</item>
+        <item name="displayOptions">useLogo|showHome|showTitle</item>
         <item name="titleTextStyle">@style/TextAppearance.Widget.ActionBar.Title</item>
         <item name="subtitleTextStyle">@style/TextAppearance.Widget.ActionBar.Subtitle</item>
         <item name="indeterminateProgressStyle">@style/Widget.ProgressBar.Small</item>
@@ -2527,6 +2527,8 @@
         <item name="semProgressNormalColor">@color/tw_progress_color_control_normal_dark</item>
         <item name="semSeekBarActivatedColor">@color/tw_seekbar_color_control_activated_dark</item>
         <item name="semSeekBarNormalColor">@color/tw_seekbar_color_control_normal_dark</item>
+        <item name="semSuggestionBackgroundColor">@color/tw_dialog_window_background_color_material_dark</item>
+        <item name="semSuggestionTextColor">@color/tw_dialog_title_text_color_material_dark</item>
         <item name="semThumbActivatedColor">@color/tw_thumb_color_control_activated_dark</item>
         <item name="semThumbDisabledColor">@color/tw_seekbar_disable_color_activated_dark</item>
         <item name="semTipPopupBackgroundColor">@color/sem_tip_popup_background_color_dark</item>
@@ -2845,6 +2847,8 @@
         <item name="semProgressNormalColor">@color/tw_progress_color_control_normal_light</item>
         <item name="semSeekBarActivatedColor">@color/tw_seekbar_color_control_activated_light</item>
         <item name="semSeekBarNormalColor">@color/tw_seekbar_color_control_normal_light</item>
+        <item name="semSuggestionBackgroundColor">@color/tw_dialog_window_background_color_material_light</item>
+        <item name="semSuggestionTextColor">@color/tw_dialog_title_text_color_material_light</item>
         <item name="semThumbActivatedColor">@color/tw_thumb_color_control_activated_light</item>
         <item name="semThumbDisabledColor">@color/tw_seekbar_disable_color_activated_light</item>
         <item name="semTipPopupBackgroundColor">@color/sem_tip_popup_background_color</item>
@@ -9175,7 +9179,7 @@
     </style>
     <style name="Widget.DeviceDefault.SuggestionButton" parent="@style/Widget.Material.SuggestionButton">
         <item name="textSize">@dimen/sem_suggestion_popup_button_text_size</item>
-        <item name="textColor">@color/sem_suggestion_popup_button_text_color</item>
+        <item name="textColor">?colorPrimaryDark</item>
         <item name="layout_height">wrap_content</item>
         <item name="textAllCaps">false</item>
     </style>

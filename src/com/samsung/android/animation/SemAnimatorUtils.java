@@ -25,9 +25,9 @@ public class SemAnimatorUtils {
     private static final boolean DEBUGGABLE_LOW = true;
 
     public static BitmapDrawable getBitmapDrawableFromView(View view) {
-        Bitmap createBitmap = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        view.draw(new Canvas(createBitmap));
-        return new BitmapDrawable(view.getResources(), createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmapCreateBitmap));
+        return new BitmapDrawable(view.getResources(), bitmapCreateBitmap);
     }
 
     static int getViewCenterX(View view) {

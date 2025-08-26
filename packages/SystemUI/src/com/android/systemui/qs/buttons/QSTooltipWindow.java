@@ -1,6 +1,7 @@
 package com.android.systemui.qs.buttons;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -12,11 +13,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.systemui.R;
+import com.android.systemui.qs.animator.QsAnimatorState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSTooltipWindow {
-    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(-1073672192);
+    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(-805236736);
     public static QSTooltipWindow sInstance;
     public final AnonymousClass1 handler = new Handler() { // from class: com.android.systemui.qs.buttons.QSTooltipWindow.1
         @Override // android.os.Handler
@@ -41,15 +42,15 @@ public class QSTooltipWindow {
         this.mContext = context;
         PopupWindow popupWindow = new PopupWindow(context);
         this.mTipWindow = popupWindow;
-        View inflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(R.layout.sec_qs_tooltip_layout, (ViewGroup) null);
-        this.mContentView = inflate;
-        this.mTooltipText = (TextView) inflate.findViewById(R.id.tooltip_text);
+        View viewInflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(R.layout.sec_qs_tooltip_layout, (ViewGroup) null);
+        this.mContentView = viewInflate;
+        this.mTooltipText = (TextView) viewInflate.findViewById(R.id.tooltip_text);
         popupWindow.setHeight(-2);
         popupWindow.setWidth(-2);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setTouchable(true);
         popupWindow.setFocusable(false);
-        popupWindow.setContentView(inflate);
+        popupWindow.setContentView(viewInflate);
         popupWindow.setSoftInputMode(3);
         popupWindow.setAnimationStyle(2132017227);
     }
@@ -73,7 +74,10 @@ public class QSTooltipWindow {
         return popupWindow != null && popupWindow.isShowing();
     }
 
-    public final void showToolTip(View view, int i) {
+    public final void showToolTip(View view, int i) throws Resources.NotFoundException {
+        if (QsAnimatorState.isDetailOpening || QsAnimatorState.isDetailShowing) {
+            return;
+        }
         this.mToolTipString = i;
         this.mTooltipText.setText(this.mContext.getResources().getString(this.mToolTipString));
         this.mTooltipText.setTextColor(this.mContext.getColor(R.color.tooltip_text_color));

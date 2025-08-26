@@ -23,16 +23,14 @@ public class KnoxInfoImpl {
     static HashMap<String, Long> cachedTime = new HashMap<>();
 
     public static synchronized Bundle getCachedKnoxInfo(Context context, String str) {
-        synchronized (KnoxInfoImpl.class) {
-            if (cachedTime.containsKey(str) && System.nanoTime() - cachedTime.get(str).longValue() < INTERVAL_NANO_SEC) {
-                return cached_knox_info.get(str);
-            }
-            Log.d(TAG, "put into cache");
-            Bundle knoxInfoForApp = getKnoxInfoForApp(context, str);
-            cachedTime.put(str, Long.valueOf(System.nanoTime()));
-            cached_knox_info.put(str, knoxInfoForApp);
-            return knoxInfoForApp;
+        if (cachedTime.containsKey(str) && System.nanoTime() - cachedTime.get(str).longValue() < INTERVAL_NANO_SEC) {
+            return cached_knox_info.get(str);
         }
+        Log.d(TAG, "put into cache");
+        Bundle knoxInfoForApp = getKnoxInfoForApp(context, str);
+        cachedTime.put(str, Long.valueOf(System.nanoTime()));
+        cached_knox_info.put(str, knoxInfoForApp);
+        return knoxInfoForApp;
     }
 
     public static Bundle getKnoxInfo() {
@@ -70,15 +68,15 @@ public class KnoxInfoImpl {
             if (mKnoxInfo == null) {
                 getKnoxInfo();
             }
-            int myUserId = UserHandle.myUserId();
+            int iMyUserId = UserHandle.myUserId();
             try {
-                mKnoxInfo.putInt(SmLib_IafdConstant.KEY_USER_ID, myUserId);
+                mKnoxInfo.putInt(SmLib_IafdConstant.KEY_USER_ID, iMyUserId);
                 if (!m_bIsKnoxInfoInitialized) {
-                    if (SemPersonaManager.isKnoxId(myUserId)) {
+                    if (SemPersonaManager.isKnoxId(iMyUserId)) {
                         mKnoxInfo.putString("isKnoxMode", "true");
                         IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
                         if (service != null) {
-                            if (service.isPackageAllowedToAccessExternalSdcard(myUserId, Binder.getCallingUid())) {
+                            if (service.isPackageAllowedToAccessExternalSdcard(iMyUserId, Binder.getCallingUid())) {
                                 mKnoxInfo.putString("isBlockExternalSD", "false");
                             } else {
                                 mKnoxInfo.putString("isBlockExternalSD", "true");
@@ -90,10 +88,10 @@ public class KnoxInfoImpl {
                         mKnoxInfo.putString("isBlockBluetoothMenu", "true");
                         mKnoxInfo.putString("isSamsungAccountBlocked", "true");
                     }
-                    if (SemPersonaManager.isDoEnabled(myUserId)) {
+                    if (SemPersonaManager.isDoEnabled(iMyUserId)) {
                         IEDMProxy service2 = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
                         if (service2 != null) {
-                            if (service2.isPackageAllowedToAccessExternalSdcard(myUserId, Binder.getCallingUid())) {
+                            if (service2.isPackageAllowedToAccessExternalSdcard(iMyUserId, Binder.getCallingUid())) {
                                 mKnoxInfo.putString("isBlockExternalSD", "false");
                             } else {
                                 mKnoxInfo.putString("isBlockExternalSD", "true");
@@ -103,7 +101,7 @@ public class KnoxInfoImpl {
                             mKnoxInfo.putString("isBlockExternalSD", "false");
                         }
                     }
-                    if (SemPersonaManager.isSecureFolderId(myUserId)) {
+                    if (SemPersonaManager.isSecureFolderId(iMyUserId)) {
                         mKnoxInfo.putString("isBlockExternalSD", "true");
                     }
                     mKnoxInfo.putString("isKioskModeEnabled", "false");
@@ -134,13 +132,13 @@ public class KnoxInfoImpl {
                     }
                 }
                 if ("getContainerLabel".equals(str)) {
-                    mKnoxInfo.putString("getContainerLabel", SemPersonaManager.getPersonaName(context, myUserId == 0 ? getWorkProfileUserId() : myUserId));
+                    mKnoxInfo.putString("getContainerLabel", SemPersonaManager.getPersonaName(context, iMyUserId == 0 ? getWorkProfileUserId() : iMyUserId));
                 }
                 if ("getContainerAppIcon".equals(str)) {
-                    mKnoxInfo.putByteArray("getContainerAppIcon", SemPersonaManager.getKnoxIcon(myUserId));
+                    mKnoxInfo.putByteArray("getContainerAppIcon", SemPersonaManager.getKnoxIcon(iMyUserId));
                 }
                 if ("getPersonalModeLabel".equals(str)) {
-                    String personalModeName = getPersonalModeName(myUserId);
+                    String personalModeName = getPersonalModeName(iMyUserId);
                     if (personalModeName != null && personalModeName.length() == 0) {
                         personalModeName = null;
                     }
@@ -155,9 +153,10 @@ public class KnoxInfoImpl {
                             Log.e(TAG, "failed to get focused Knox id", e);
                         }
                         mKnoxInfo.putInt("getActiveUserId", focusedKnoxId);
+                    } else {
+                        focusedKnoxId = 0;
+                        mKnoxInfo.putInt("getActiveUserId", focusedKnoxId);
                     }
-                    focusedKnoxId = 0;
-                    mKnoxInfo.putInt("getActiveUserId", focusedKnoxId);
                 }
                 if ("getWorkInfo".equals(str)) {
                     SemPersonaManager personaService2 = SemPersonaManager.getPersonaService(context);
@@ -166,8 +165,8 @@ public class KnoxInfoImpl {
                             List<Integer> knoxIds = personaService2.getKnoxIds(false);
                             if (knoxIds != null && knoxIds.size() != 0) {
                                 for (int i = 0; i < knoxIds.size(); i++) {
-                                    int intValue = knoxIds.get(i).intValue();
-                                    if (intValue != 0 && intValue < 150) {
+                                    int iIntValue = knoxIds.get(i).intValue();
+                                    if (iIntValue != 0 && iIntValue < 150) {
                                         mKnoxInfo.putInt("getWorkId", knoxIds.get(i).intValue());
                                     }
                                 }
@@ -186,19 +185,19 @@ public class KnoxInfoImpl {
                             if (knoxIds2 != null && knoxIds2.size() != 0) {
                                 mKnoxInfo.putInt("getContainerCount", knoxIds2.size());
                                 for (int i2 = 0; i2 < knoxIds2.size(); i2++) {
-                                    int intValue2 = knoxIds2.get(i2).intValue();
-                                    byte[] knoxIcon = SemPersonaManager.getKnoxIcon(intValue2);
-                                    String personaName = SemPersonaManager.getPersonaName(context, intValue2);
-                                    if (SemPersonaManager.isKnoxId(intValue2)) {
+                                    int iIntValue2 = knoxIds2.get(i2).intValue();
+                                    byte[] knoxIcon = SemPersonaManager.getKnoxIcon(iIntValue2);
+                                    String personaName = SemPersonaManager.getPersonaName(context, iIntValue2);
+                                    if (SemPersonaManager.isKnoxId(iIntValue2)) {
                                         mKnoxInfo.putInt("getContainerOrder_" + i2, 1);
                                     } else {
                                         Log.e(TAG, "getUserInfo returns null");
                                         mKnoxInfo.putInt("getContainerOrder_" + i2, 0);
                                     }
-                                    mKnoxInfo.putInt("getContainerId_" + i2, intValue2);
+                                    mKnoxInfo.putInt("getContainerId_" + i2, iIntValue2);
                                     mKnoxInfo.putString("getContainerLabel_" + i2, personaName);
                                     mKnoxInfo.putByteArray("getContainerAppIcon_" + i2, knoxIcon);
-                                    mKnoxInfo.putBoolean("isSecureFolder_" + i2, SemPersonaManager.isSecureFolderId(intValue2));
+                                    mKnoxInfo.putBoolean("isSecureFolder_" + i2, SemPersonaManager.isSecureFolderId(iIntValue2));
                                 }
                             }
                         } catch (Exception e3) {
@@ -209,21 +208,17 @@ public class KnoxInfoImpl {
                 }
                 if ("isSupportSecureFolder".equals(str)) {
                     SemPersonaManager personaService4 = SemPersonaManager.getPersonaService(context);
-                    if (personaService4 != null) {
-                        if (personaService4.isUserManaged()) {
-                            mKnoxInfo.putString("isSupportSecureFolder", "true");
-                        } else {
-                            mKnoxInfo.putString("isSupportSecureFolder", "false");
-                        }
+                    if (personaService4 != null && personaService4.isUserManaged()) {
+                        mKnoxInfo.putString("isSupportSecureFolder", "true");
                     } else {
                         mKnoxInfo.putString("isSupportSecureFolder", "false");
                     }
                 }
-                if ("isSupportImpKeyguard".equals(str)) {
-                    mKnoxInfo.putString("isSupportImpKeyguard", "true");
-                }
             } catch (Exception e4) {
                 Log.e(TAG, "failed to get mKnoxInfo", e4);
+            }
+            if ("isSupportImpKeyguard".equals(str)) {
+                mKnoxInfo.putString("isSupportImpKeyguard", "true");
             }
         }
         return mKnoxInfo;
@@ -243,16 +238,16 @@ public class KnoxInfoImpl {
         return mKnoxInfo;
     }
 
-    private static int getWorkProfileUserId() {
+    private static int getWorkProfileUserId() throws NumberFormatException {
         String str = SystemProperties.get(SemPersonaManager.PROPERTY_KNOX_CONTAINER_INFO);
         if (str != null && str.length() > 0) {
             for (String str2 : str.split(":")) {
-                String[] split = str2.split(",");
-                if (split != null && split.length == 2) {
-                    int parseInt = Integer.parseInt(split[0]);
-                    int parseInt2 = Integer.parseInt(split[1]);
-                    if (!SemPersonaManager.isSecureFolderId(parseInt) && (parseInt2 & 32) > 0) {
-                        return parseInt;
+                String[] strArrSplit = str2.split(",");
+                if (strArrSplit != null && strArrSplit.length == 2) {
+                    int i = Integer.parseInt(strArrSplit[0]);
+                    int i2 = Integer.parseInt(strArrSplit[1]);
+                    if (!SemPersonaManager.isSecureFolderId(i) && (i2 & 32) > 0) {
+                        return i;
                     }
                 }
             }

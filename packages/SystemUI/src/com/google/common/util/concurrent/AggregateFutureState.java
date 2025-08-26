@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import java.util.logging.Level;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AggregateFutureState extends AbstractFuture.TrustedFuture {
     public static final AtomicHelper ATOMIC_HELPER;
@@ -14,7 +13,6 @@ public abstract class AggregateFutureState extends AbstractFuture.TrustedFuture 
     public volatile int remaining;
     public volatile Set seenExceptions = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AtomicHelper {
         private AtomicHelper() {
         }
@@ -24,7 +22,6 @@ public abstract class AggregateFutureState extends AbstractFuture.TrustedFuture 
         public abstract int decrementAndGetRemainingCount(AggregateFuture aggregateFuture);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SafeAtomicHelper extends AtomicHelper {
         public final AtomicIntegerFieldUpdater remainingCountUpdater;
         public final AtomicReferenceFieldUpdater seenExceptionsUpdater;
@@ -46,7 +43,6 @@ public abstract class AggregateFutureState extends AbstractFuture.TrustedFuture 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SynchronizedAtomicHelper extends AtomicHelper {
         private SynchronizedAtomicHelper() {
             super();
@@ -72,18 +68,19 @@ public abstract class AggregateFutureState extends AbstractFuture.TrustedFuture 
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
-        AtomicHelper atomicHelper;
+        AtomicHelper safeAtomicHelper;
         Throwable th = null;
-        byte b = 0;
+        Object[] objArr = 0;
         try {
-            atomicHelper = new SafeAtomicHelper(AtomicReferenceFieldUpdater.newUpdater(AggregateFutureState.class, Set.class, "seenExceptions"), AtomicIntegerFieldUpdater.newUpdater(AggregateFutureState.class, "remaining"));
+            safeAtomicHelper = new SafeAtomicHelper(AtomicReferenceFieldUpdater.newUpdater(AggregateFutureState.class, Set.class, "seenExceptions"), AtomicIntegerFieldUpdater.newUpdater(AggregateFutureState.class, "remaining"));
         } catch (Throwable th2) {
             SynchronizedAtomicHelper synchronizedAtomicHelper = new SynchronizedAtomicHelper();
             th = th2;
-            atomicHelper = synchronizedAtomicHelper;
+            safeAtomicHelper = synchronizedAtomicHelper;
         }
-        ATOMIC_HELPER = atomicHelper;
+        ATOMIC_HELPER = safeAtomicHelper;
         if (th != null) {
             log.get().log(Level.SEVERE, "SafeAtomicHelper is broken!", th);
         }

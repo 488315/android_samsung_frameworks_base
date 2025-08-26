@@ -51,9 +51,9 @@ public interface IDreamOverlayCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDreamOverlayCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDreamOverlayCallback)) {
-                return (IDreamOverlayCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDreamOverlayCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDreamOverlayCallback)) {
+                return (IDreamOverlayCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface IDreamOverlayCallback extends IInterface {
             if (i == 1) {
                 onExitRequested();
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onRedirectWake(readBoolean);
+                onRedirectWake(z);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -112,24 +112,24 @@ public interface IDreamOverlayCallback extends IInterface {
 
             @Override // android.service.dreams.IDreamOverlayCallback
             public void onExitRequested() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDreamOverlayCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDreamOverlayCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamOverlayCallback
             public void onRedirectWake(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDreamOverlayCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDreamOverlayCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

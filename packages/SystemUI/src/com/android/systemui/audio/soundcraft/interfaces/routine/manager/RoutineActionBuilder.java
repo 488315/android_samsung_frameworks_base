@@ -21,7 +21,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.enums.EnumEntries;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoutineActionBuilder {
     public static final RoutineActionBuilder INSTANCE = new RoutineActionBuilder();
@@ -30,36 +29,36 @@ public final class RoutineActionBuilder {
     }
 
     public static HashMap buildBudsActions(EffectModel effectModel, String str) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         Boolean bool = effectModel.spatialAudio;
         if (bool != null) {
             ActionParamCreator actionParamCreator = ActionParamCreator.INSTANCE;
             BudsActionType budsActionType = BudsActionType.SPATIAL_AUDIO;
             BudsActionUtil budsActionUtil = BudsActionUtil.INSTANCE;
-            boolean booleanValue = bool.booleanValue();
+            boolean zBooleanValue = bool.booleanValue();
             Boolean bool2 = effectModel.headTracking;
-            boolean booleanValue2 = bool2 != null ? bool2.booleanValue() : false;
+            boolean zBooleanValue2 = bool2 != null ? bool2.booleanValue() : false;
             budsActionUtil.getClass();
-            String valueOf = String.valueOf(((booleanValue || booleanValue2) ? (!booleanValue || booleanValue2) ? (booleanValue && booleanValue2) ? SpatialAudioItem.SPATIAL_AND_HEAD_TRACKING : SpatialAudioItem.OFF : SpatialAudioItem.SPATIAL_ONLY : SpatialAudioItem.OFF).getPosition());
+            String strValueOf = String.valueOf(((zBooleanValue || zBooleanValue2) ? (!zBooleanValue || zBooleanValue2) ? (zBooleanValue && zBooleanValue2) ? SpatialAudioItem.SPATIAL_AND_HEAD_TRACKING : SpatialAudioItem.OFF : SpatialAudioItem.SPATIAL_ONLY : SpatialAudioItem.OFF).getPosition());
             actionParamCreator.getClass();
-            ActionParamCreator.putActionValue(hashMap, str, budsActionType, valueOf);
+            ActionParamCreator.putActionValue(map, str, budsActionType, strValueOf);
         }
         for (Equalizer equalizer : effectModel.equalizerList) {
             if (equalizer.getState()) {
                 ActionParamCreator actionParamCreator2 = ActionParamCreator.INSTANCE;
                 BudsActionType budsActionType2 = BudsActionType.EQUALIZER;
-                String valueOf2 = String.valueOf(effectModel.equalizerList.indexOf(equalizer));
+                String strValueOf2 = String.valueOf(effectModel.equalizerList.indexOf(equalizer));
                 actionParamCreator2.getClass();
-                ActionParamCreator.putActionValue(hashMap, str, budsActionType2, valueOf2);
+                ActionParamCreator.putActionValue(map, str, budsActionType2, strValueOf2);
                 Boolean bool3 = effectModel.voiceBoost;
                 if (bool3 != null) {
-                    ActionParamCreator.putActionValue(hashMap, str, BudsActionType.VOICE_BOOST, String.valueOf(bool3.booleanValue()));
+                    ActionParamCreator.putActionValue(map, str, BudsActionType.VOICE_BOOST, String.valueOf(bool3.booleanValue()));
                 }
                 Boolean bool4 = effectModel.volumeNormalization;
                 if (bool4 != null) {
-                    ActionParamCreator.putActionValue(hashMap, str, BudsActionType.VOLUME_NORMALIZATION, String.valueOf(bool4.booleanValue()));
+                    ActionParamCreator.putActionValue(map, str, BudsActionType.VOLUME_NORMALIZATION, String.valueOf(bool4.booleanValue()));
                 }
-                return hashMap;
+                return map;
             }
         }
         throw new NoSuchElementException("Collection contains no element matching the predicate.");
@@ -68,7 +67,7 @@ public final class RoutineActionBuilder {
     public static HashMap buildPhoneActions(EffectModel effectModel) {
         SoundAliveToggleEnum soundAliveToggleEnum;
         SoundAliveToggleEnum soundAliveToggleEnum2;
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         List list = effectModel.dolbyList;
         int i = -1;
         int i2 = 0;
@@ -113,7 +112,7 @@ public final class RoutineActionBuilder {
             parameterValues.put(phoneActionType.getParamTag(), routineActionValue);
             parameterValues.put(phoneActionType2.getParamTag(), routineActionValue2);
             Unit unit = Unit.INSTANCE;
-            hashMap.put(metaInfo, parameterValues);
+            map.put(metaInfo, parameterValues);
         }
         Iterator it3 = effectModel.equalizerList.iterator();
         while (true) {
@@ -130,38 +129,38 @@ public final class RoutineActionBuilder {
         PhoneActionType phoneActionType3 = PhoneActionType.EQUALIZER;
         String routineActionValue3 = ((SoundAliveEqEnum) SoundAliveEqEnum.$ENTRIES.get(i)).getRoutineActionValue();
         actionParamCreator2.getClass();
-        ActionParamCreator.putActionValue(hashMap, phoneActionType3, routineActionValue3);
+        ActionParamCreator.putActionValue(map, phoneActionType3, routineActionValue3);
         Boolean bool = effectModel.voiceBoost;
         if (bool != null) {
-            boolean booleanValue = bool.booleanValue();
+            boolean zBooleanValue = bool.booleanValue();
             PhoneActionType phoneActionType4 = PhoneActionType.VOICE_BOOST;
             SoundAliveToggleEnum.Companion.getClass();
-            if (booleanValue) {
+            if (zBooleanValue) {
                 soundAliveToggleEnum2 = SoundAliveToggleEnum.ON;
             } else {
-                if (booleanValue) {
+                if (zBooleanValue) {
                     throw new NoWhenBranchMatchedException();
                 }
                 soundAliveToggleEnum2 = SoundAliveToggleEnum.OFF;
             }
-            ActionParamCreator.putActionValue(hashMap, phoneActionType4, soundAliveToggleEnum2.getRoutineActionValue());
+            ActionParamCreator.putActionValue(map, phoneActionType4, soundAliveToggleEnum2.getRoutineActionValue());
         }
         Boolean bool2 = effectModel.volumeNormalization;
         if (bool2 == null) {
-            return hashMap;
+            return map;
         }
-        boolean booleanValue2 = bool2.booleanValue();
+        boolean zBooleanValue2 = bool2.booleanValue();
         PhoneActionType phoneActionType5 = PhoneActionType.VOLUME_NORMALIZATION;
         SoundAliveToggleEnum.Companion.getClass();
-        if (booleanValue2) {
+        if (zBooleanValue2) {
             soundAliveToggleEnum = SoundAliveToggleEnum.ON;
         } else {
-            if (booleanValue2) {
+            if (zBooleanValue2) {
                 throw new NoWhenBranchMatchedException();
             }
             soundAliveToggleEnum = SoundAliveToggleEnum.OFF;
         }
-        ActionParamCreator.putActionValue(hashMap, phoneActionType5, soundAliveToggleEnum.getRoutineActionValue());
-        return hashMap;
+        ActionParamCreator.putActionValue(map, phoneActionType5, soundAliveToggleEnum.getRoutineActionValue());
+        return map;
     }
 }

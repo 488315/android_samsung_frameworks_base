@@ -101,8 +101,8 @@ public class Image extends Content {
         if (i > 0 && i2 > 0) {
             setWidth(i);
             setHeight(i2);
-            int calculateInSampleSize = ImageUtil.calculateInSampleSize(i, i2, 3840, 3840);
-            setTargetSize(i / calculateInSampleSize, i2 / calculateInSampleSize);
+            int iCalculateInSampleSize = ImageUtil.calculateInSampleSize(i, i2, 3840, 3840);
+            setTargetSize(i / iCalculateInSampleSize, i2 / iCalculateInSampleSize);
         }
         return this;
     }

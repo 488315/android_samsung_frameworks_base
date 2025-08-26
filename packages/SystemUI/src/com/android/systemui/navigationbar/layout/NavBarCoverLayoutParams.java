@@ -7,7 +7,6 @@ import com.android.systemui.navigationbar.store.NavBarStateManager;
 import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.samsung.systemui.splugins.navigationbar.BarLayoutParams;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarCoverLayoutParams implements BarLayoutParams {
     public final Context context;
@@ -36,7 +35,7 @@ public final class NavBarCoverLayoutParams implements BarLayoutParams {
     @Override // com.samsung.systemui.splugins.navigationbar.BarLayoutParams
     public final int getBarHeight(boolean z, int i) {
         if (!BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN) {
-            return this.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
+            return this.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size);
         }
         if (((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode()) {
             return this.context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.large_cover_button_inset_height);
@@ -50,7 +49,7 @@ public final class NavBarCoverLayoutParams implements BarLayoutParams {
     @Override // com.samsung.systemui.splugins.navigationbar.BarLayoutParams
     public final int getBarInsetHeight(boolean z, int i) {
         if (!BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN) {
-            return this.context.getResources().getDimensionPixelSize(R.dimen.seekbar_track_progress_height_material);
+            return this.context.getResources().getDimensionPixelSize(R.dimen.select_dialog_drawable_padding_start_material);
         }
         if (((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode()) {
             return i == 0 ? this.context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.large_cover_button_inset_height) : this.context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.large_cover_gesture_height);

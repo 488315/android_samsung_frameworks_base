@@ -62,9 +62,9 @@ public class SignedData extends ASN1Object {
             z2 = false;
             z3 = false;
             while (objects.hasMoreElements()) {
-                Object nextElement = objects.nextElement();
-                if (nextElement instanceof ASN1TaggedObject) {
-                    ASN1TaggedObject aSN1TaggedObject = ASN1TaggedObject.getInstance(nextElement);
+                Object objNextElement = objects.nextElement();
+                if (objNextElement instanceof ASN1TaggedObject) {
+                    ASN1TaggedObject aSN1TaggedObject = ASN1TaggedObject.getInstance(objNextElement);
                     if (aSN1TaggedObject.getTagNo() == 1) {
                         z2 = true;
                     } else if (aSN1TaggedObject.getTagNo() == 2) {

@@ -75,14 +75,14 @@ public class Credentials {
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X509");
             ArrayList arrayList = new ArrayList();
             while (true) {
-                PemObject readPemObject = pemReader.readPemObject();
-                if (readPemObject == null) {
+                PemObject pemObject = pemReader.readPemObject();
+                if (pemObject == null) {
                     return arrayList;
                 }
-                if (readPemObject.getType().equals("CERTIFICATE")) {
-                    arrayList.add((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(readPemObject.getContent())));
+                if (pemObject.getType().equals("CERTIFICATE")) {
+                    arrayList.add((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(pemObject.getContent())));
                 } else {
-                    throw new IllegalArgumentException("Unknown type " + readPemObject.getType());
+                    throw new IllegalArgumentException("Unknown type " + pemObject.getType());
                 }
             }
         } finally {

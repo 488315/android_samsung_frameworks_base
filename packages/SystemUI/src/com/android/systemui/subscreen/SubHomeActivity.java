@@ -31,7 +31,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.wm.shell.shared.ShellTransitions;
 import dagger.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubHomeActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -137,7 +136,7 @@ public class SubHomeActivity extends Activity {
         getOnBackInvokedDispatcher().registerOnBackInvokedCallback(0, new OnBackInvokedCallback() { // from class: com.android.systemui.subscreen.SubHomeActivity$$ExternalSyntheticLambda0
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                SubHomeActivity subHomeActivity = SubHomeActivity.this;
+                SubHomeActivity subHomeActivity = this.f$0;
                 int i = SubHomeActivity.$r8$clinit;
                 subHomeActivity.getClass();
                 Log.d("SubHomeActivity", "onCreate: OnBackInvokedCallback");

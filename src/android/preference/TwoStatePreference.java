@@ -5,7 +5,10 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -109,81 +112,65 @@ public abstract class TwoStatePreference extends Preference {
 
     @Override // android.preference.Preference
     protected void onSetInitialValue(boolean z, Object obj) {
-        boolean booleanValue;
+        boolean zBooleanValue;
         if (z) {
-            booleanValue = getPersistedBoolean(this.mChecked);
+            zBooleanValue = getPersistedBoolean(this.mChecked);
         } else {
-            booleanValue = ((Boolean) obj).booleanValue();
+            zBooleanValue = ((Boolean) obj).booleanValue();
         }
-        setChecked(booleanValue);
+        setChecked(zBooleanValue);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0034  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0045  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void syncSummaryView(android.view.View r4) {
-        /*
-            r3 = this;
-            r0 = 16908304(0x1020010, float:2.3877274E-38)
-            android.view.View r4 = r4.findViewById(r0)
-            android.widget.TextView r4 = (android.widget.TextView) r4
-            if (r4 == 0) goto L50
-            boolean r0 = r3.mChecked
-            r1 = 0
-            if (r0 == 0) goto L1f
-            java.lang.CharSequence r0 = r3.mSummaryOn
-            boolean r0 = android.text.TextUtils.isEmpty(r0)
-            if (r0 != 0) goto L1f
-            java.lang.CharSequence r0 = r3.mSummaryOn
-            r4.lambda$setTextAsync$0(r0)
-        L1d:
-            r0 = r1
-            goto L32
-        L1f:
-            boolean r0 = r3.mChecked
-            if (r0 != 0) goto L31
-            java.lang.CharSequence r0 = r3.mSummaryOff
-            boolean r0 = android.text.TextUtils.isEmpty(r0)
-            if (r0 != 0) goto L31
-            java.lang.CharSequence r0 = r3.mSummaryOff
-            r4.lambda$setTextAsync$0(r0)
-            goto L1d
-        L31:
-            r0 = 1
-        L32:
-            if (r0 == 0) goto L42
-            java.lang.CharSequence r3 = r3.getSummary()
-            boolean r2 = android.text.TextUtils.isEmpty(r3)
-            if (r2 != 0) goto L42
-            r4.lambda$setTextAsync$0(r3)
-            r0 = r1
-        L42:
-            if (r0 != 0) goto L45
-            goto L47
-        L45:
-            r1 = 8
-        L47:
-            int r3 = r4.getVisibility()
-            if (r1 == r3) goto L50
-            r4.setVisibility(r1)
-        L50:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.preference.TwoStatePreference.syncSummaryView(android.view.View):void");
+    void syncSummaryView(View view) {
+        boolean z;
+        int i;
+        TextView textView = (TextView) view.findViewById(16908304);
+        if (textView == null) {
+            return;
+        }
+        if (this.mChecked && !TextUtils.isEmpty(this.mSummaryOn)) {
+            textView.lambda$setTextAsync$0(this.mSummaryOn);
+        } else if (!this.mChecked && !TextUtils.isEmpty(this.mSummaryOff)) {
+            textView.lambda$setTextAsync$0(this.mSummaryOff);
+        } else {
+            z = true;
+            if (z) {
+                CharSequence summary = getSummary();
+                if (!TextUtils.isEmpty(summary)) {
+                    textView.lambda$setTextAsync$0(summary);
+                    z = false;
+                }
+            }
+            i = z ? 8 : 0;
+            if (i == textView.getVisibility()) {
+                textView.setVisibility(i);
+                return;
+            }
+            return;
+        }
+        z = false;
+        if (z) {
+        }
+        if (z) {
+        }
+        if (i == textView.getVisibility()) {
+        }
     }
 
     @Override // android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.checked = isChecked();
         return savedState;
     }

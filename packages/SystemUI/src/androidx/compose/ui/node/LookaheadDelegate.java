@@ -16,7 +16,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implements Measurable {
     public MeasureResult _measureResult;
@@ -39,26 +38,26 @@ public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implem
         Map map;
         if (measureResult != null) {
             IntSize.Companion companion = IntSize.Companion;
-            lookaheadDelegate.m624setMeasuredSizeozmzZPI((measureResult.getHeight() & 4294967295L) | (measureResult.getWidth() << 32));
+            lookaheadDelegate.m626setMeasuredSizeozmzZPI((measureResult.getHeight() & 4294967295L) | (measureResult.getWidth() << 32));
             unit = Unit.INSTANCE;
         } else {
             unit = null;
         }
         if (unit == null) {
             IntSize.Companion.getClass();
-            lookaheadDelegate.m624setMeasuredSizeozmzZPI(0L);
+            lookaheadDelegate.m626setMeasuredSizeozmzZPI(0L);
         }
         if (!Intrinsics.areEqual(lookaheadDelegate._measureResult, measureResult) && measureResult != null && ((((map = lookaheadDelegate.oldAlignmentLines) != null && !map.isEmpty()) || !measureResult.getAlignmentLines().isEmpty()) && !Intrinsics.areEqual(measureResult.getAlignmentLines(), lookaheadDelegate.oldAlignmentLines))) {
             LookaheadPassDelegate lookaheadPassDelegate = lookaheadDelegate.coordinator.layoutNode.layoutDelegate.lookaheadPassDelegate;
             lookaheadPassDelegate.getClass();
             lookaheadPassDelegate.alignmentLines.onAlignmentsChanged();
-            Map map2 = lookaheadDelegate.oldAlignmentLines;
-            if (map2 == null) {
-                map2 = new LinkedHashMap();
-                lookaheadDelegate.oldAlignmentLines = map2;
+            Map linkedHashMap = lookaheadDelegate.oldAlignmentLines;
+            if (linkedHashMap == null) {
+                linkedHashMap = new LinkedHashMap();
+                lookaheadDelegate.oldAlignmentLines = linkedHashMap;
             }
-            map2.clear();
-            map2.putAll(measureResult.getAlignmentLines());
+            linkedHashMap.clear();
+            linkedHashMap.putAll(measureResult.getAlignmentLines());
         }
         lookaheadDelegate._measureResult = measureResult;
     }
@@ -127,12 +126,12 @@ public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implem
 
     @Override // androidx.compose.ui.node.LookaheadCapablePlaceable
     /* renamed from: getPosition-nOcc-ac */
-    public final long mo649getPositionnOccac() {
+    public final long mo651getPositionnOccac() {
         return this.position;
     }
 
     /* renamed from: getSize-YbymL2g$ui_release, reason: not valid java name */
-    public final long m650getSizeYbymL2g$ui_release() {
+    public final long m652getSizeYbymL2g$ui_release() {
         long j = (this.width << 32) | (this.height & 4294967295L);
         IntSize.Companion companion = IntSize.Companion;
         return j;
@@ -177,8 +176,8 @@ public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implem
 
     @Override // androidx.compose.ui.layout.Placeable
     /* renamed from: placeAt-f8xVGno */
-    public final void mo609placeAtf8xVGno(long j, float f, Function1 function1) {
-        m651placeSelfgyyYBs(j);
+    public final void mo611placeAtf8xVGno(long j, float f, Function1 function1) {
+        m653placeSelfgyyYBs(j);
         if (this.isShallowPlacing) {
             return;
         }
@@ -190,8 +189,8 @@ public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implem
     }
 
     /* renamed from: placeSelf--gyyYBs, reason: not valid java name */
-    public final void m651placeSelfgyyYBs(long j) {
-        if (!IntOffset.m849equalsimpl0(this.position, j)) {
+    public final void m653placeSelfgyyYBs(long j) {
+        if (!IntOffset.m851equalsimpl0(this.position, j)) {
             this.position = j;
             NodeCoordinator nodeCoordinator = this.coordinator;
             LookaheadPassDelegate lookaheadPassDelegate = nodeCoordinator.layoutNode.layoutDelegate.lookaheadPassDelegate;
@@ -207,23 +206,23 @@ public abstract class LookaheadDelegate extends LookaheadCapablePlaceable implem
     }
 
     /* renamed from: positionIn-iSbpLlY$ui_release, reason: not valid java name */
-    public final long m652positionIniSbpLlY$ui_release(LookaheadDelegate lookaheadDelegate, boolean z) {
+    public final long m654positionIniSbpLlY$ui_release(LookaheadDelegate lookaheadDelegate, boolean z) {
         IntOffset.Companion.getClass();
-        long j = 0;
+        long jM853plusqkQi6aY = 0;
         while (!this.equals(lookaheadDelegate)) {
             if (!this.isPlacedUnderMotionFrameOfReference || !z) {
-                j = IntOffset.m851plusqkQi6aY(j, this.position);
+                jM853plusqkQi6aY = IntOffset.m853plusqkQi6aY(jM853plusqkQi6aY, this.position);
             }
             NodeCoordinator nodeCoordinator = this.coordinator.wrappedBy;
             nodeCoordinator.getClass();
             this = nodeCoordinator.getLookaheadDelegate();
             this.getClass();
         }
-        return j;
+        return jM853plusqkQi6aY;
     }
 
     @Override // androidx.compose.ui.node.LookaheadCapablePlaceable
     public final void replace$ui_release() {
-        mo609placeAtf8xVGno(this.position, 0.0f, (Function1) null);
+        mo611placeAtf8xVGno(this.position, 0.0f, (Function1) null);
     }
 }

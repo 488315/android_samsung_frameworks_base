@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ParamsParser {
     private static final String ACTIVITY_NAME = "activityName";
@@ -50,9 +49,9 @@ public class ParamsParser {
                 }
             } else {
                 while (i < length) {
-                    JSONObject optJSONObject = jSONArray.optJSONObject(i);
-                    getJsonInfo(optJSONObject, ACTIVITY_NAME, arrayList2);
-                    getJsonInfo(optJSONObject, "packageName", arrayList);
+                    JSONObject jSONObjectOptJSONObject = jSONArray.optJSONObject(i);
+                    getJsonInfo(jSONObjectOptJSONObject, ACTIVITY_NAME, arrayList2);
+                    getJsonInfo(jSONObjectOptJSONObject, "packageName", arrayList);
                     i++;
                 }
             }
@@ -61,8 +60,8 @@ public class ParamsParser {
         }
     }
 
-    public static PackageInfoBixby getPackageInfoFromJson(String str) {
-        HashMap hashMap = new HashMap();
+    public static PackageInfoBixby getPackageInfoFromJson(String str) throws JSONException, NumberFormatException {
+        HashMap map = new HashMap();
         int i = 0;
         try {
             new JsonParser();
@@ -71,18 +70,18 @@ public class ParamsParser {
                 int length = jSONArray.length();
                 for (int i2 = 0; i2 < length; i2++) {
                     JSONObject jSONObject = jSONArray.getJSONObject(i2);
-                    Iterator<String> keys = jSONObject.keys();
-                    while (keys.hasNext()) {
-                        String obj = keys.next().toString();
-                        hashMap.put(obj, jSONObject.getString(obj));
+                    Iterator<String> itKeys = jSONObject.keys();
+                    while (itKeys.hasNext()) {
+                        String string = itKeys.next().toString();
+                        map.put(string, jSONObject.getString(string));
                     }
                 }
             } else {
                 JSONObject jSONObject2 = new JSONObject(str);
-                Iterator<String> keys2 = jSONObject2.keys();
-                while (keys2.hasNext()) {
-                    String obj2 = keys2.next().toString();
-                    hashMap.put(obj2, jSONObject2.getString(obj2));
+                Iterator<String> itKeys2 = jSONObject2.keys();
+                while (itKeys2.hasNext()) {
+                    String string2 = itKeys2.next().toString();
+                    map.put(string2, jSONObject2.getString(string2));
                 }
             }
         } catch (JSONException e) {
@@ -98,29 +97,29 @@ public class ParamsParser {
         String str9 = null;
         String str10 = null;
         String str11 = null;
-        for (String str12 : hashMap.keySet()) {
+        for (String str12 : map.keySet()) {
             if (str12.equals("packageName")) {
-                str2 = (String) hashMap.get(str12);
+                str2 = (String) map.get(str12);
             } else if (str12.equals(ACTIVITY_NAME)) {
-                str3 = (String) hashMap.get(str12);
+                str3 = (String) map.get(str12);
             } else if (str12.equals(PACKAGE_NAME2)) {
-                str4 = (String) hashMap.get(str12);
+                str4 = (String) map.get(str12);
             } else if (str12.equals(ACTIVITY_NAME2)) {
-                str5 = (String) hashMap.get(str12);
+                str5 = (String) map.get(str12);
             } else if (str12.equals("type")) {
-                str6 = (String) hashMap.get(str12);
+                str6 = (String) map.get(str12);
             } else if (str12.equals(MSG_STRING)) {
-                str7 = (String) hashMap.get(str12);
+                str7 = (String) map.get(str12);
             } else if (str12.equals(NOTI_ID)) {
-                str8 = (String) hashMap.get(str12);
+                str8 = (String) map.get(str12);
             } else if (str12.equals("position")) {
-                str9 = (String) hashMap.get(str12);
+                str9 = (String) map.get(str12);
             } else if (str12.equals(POSITION2)) {
-                str10 = (String) hashMap.get(str12);
+                str10 = (String) map.get(str12);
             } else if (str12.equals(CATEGORY)) {
-                str11 = (String) hashMap.get(str12);
+                str11 = (String) map.get(str12);
             } else if (str12.equals(TASK_ID)) {
-                i = Integer.parseInt((String) hashMap.get(str12));
+                i = Integer.parseInt((String) map.get(str12));
             }
         }
         PackageInfoBixby packageInfoBixby = new PackageInfoBixby();

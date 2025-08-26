@@ -18,7 +18,6 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$addTopCardGuts$listener$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationGuts extends FrameLayout {
     public int mActualHeight;
@@ -35,7 +34,6 @@ public class NotificationGuts extends FrameLayout {
     public OnHeightChangedListener mHeightListener;
     public boolean mNeedsFalsingProtection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimateCloseListener extends AnimatorListenerAdapter {
         public final GutsContent mGutsContent;
         public final View mView;
@@ -60,7 +58,6 @@ public class NotificationGuts extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimateOpenListener extends AnimatorListenerAdapter {
         public final Runnable mOnAnimationEnd;
 
@@ -82,7 +79,6 @@ public class NotificationGuts extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnHeightChangedListener {
         void onHeightChanged();
     }
@@ -132,7 +128,7 @@ public class NotificationGuts extends FrameLayout {
         View view = (View) getParent();
         if (view instanceof ExpandableNotificationRow) {
             ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) view;
-            View contentView = expandableNotificationRow.mIsSummaryWithChildren ? expandableNotificationRow.getContentView() : expandableNotificationRow.mEntry.isOngoingActivity() ? expandableNotificationRow.getContentView().findViewById(R.id.ongoing_activity_expand_custom_content) : expandableNotificationRow.getContentView().findViewById(16909884);
+            View contentView = expandableNotificationRow.mIsSummaryWithChildren ? expandableNotificationRow.getContentView() : expandableNotificationRow.mEntry.isOngoingActivity() ? expandableNotificationRow.getContentView().findViewById(R.id.ongoing_activity_expand_custom_content) : expandableNotificationRow.getContentView().findViewById(16909885);
             if (contentView != null) {
                 contentView.setAlpha(1.0f);
             }
@@ -280,7 +276,6 @@ public class NotificationGuts extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface GutsContent {
         int getActualHeight();
 

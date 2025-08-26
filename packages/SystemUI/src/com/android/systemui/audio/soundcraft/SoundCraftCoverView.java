@@ -17,14 +17,12 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.ArrayIterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftCoverView extends LinearLayout {
     public final PowerManager powerManager;
     public View view;
     public SoundCraftViewComponent viewComponent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,16 +71,16 @@ public final class SoundCraftCoverView extends LinearLayout {
             }
         }
         if (display != null) {
-            Context createWindowContext = getContext().createWindowContext(display, 2020, null);
-            if (createWindowContext == null) {
-                view = new View(createWindowContext);
+            Context contextCreateWindowContext = getContext().createWindowContext(display, 2020, null);
+            if (contextCreateWindowContext == null) {
+                view = new View(contextCreateWindowContext);
             } else {
                 Log.d("SoundCraftCoverView", "createDetailView, parent=null");
                 SoundCraftViewComponent soundCraftViewComponent2 = this.viewComponent;
                 if (soundCraftViewComponent2 == null) {
                     soundCraftViewComponent2 = null;
                 }
-                soundCraftViewComponent2.onCreate(createWindowContext, null);
+                soundCraftViewComponent2.onCreate(contextCreateWindowContext, null);
                 SoundCraftViewComponent soundCraftViewComponent3 = this.viewComponent;
                 if (soundCraftViewComponent3 == null) {
                     soundCraftViewComponent3 = null;

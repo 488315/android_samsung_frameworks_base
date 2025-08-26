@@ -19,9 +19,9 @@ public class APKContents {
     public APKContents(String str) {
         try {
             Trace.traceBegin(8192L, "APKContents#Constructor for " + str);
-            ApkAssets loadFromPath = ApkAssets.loadFromPath(str);
+            ApkAssets apkAssetsLoadFromPath = ApkAssets.loadFromPath(str);
             AssetManager.Builder builder = new AssetManager.Builder();
-            builder.addApkAssets(loadFromPath);
+            builder.addApkAssets(apkAssetsLoadFromPath);
             this.mAssetManager = builder.build();
             DisplayMetrics displayMetrics = new DisplayMetrics();
             displayMetrics.setToDefaults();

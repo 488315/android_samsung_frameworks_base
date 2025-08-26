@@ -23,7 +23,7 @@ public final class ConstrainDisplayApisConfig {
         updateCache();
         DeviceConfig.addOnPropertiesChangedListener("constrain_display_apis", BackgroundThread.getExecutor(), new DeviceConfig.OnPropertiesChangedListener() { // from class: android.content.pm.ConstrainDisplayApisConfig$$ExternalSyntheticLambda0
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                ConstrainDisplayApisConfig.this.lambda$new$0(properties);
+                this.f$0.lambda$new$0(properties);
             }
         });
     }
@@ -54,13 +54,13 @@ public final class ConstrainDisplayApisConfig {
         ArrayMap<String, Pair<Long, Long>> arrayMap = new ArrayMap<>();
         if (!str.isEmpty()) {
             for (String str2 : str.split(",")) {
-                List asList = Arrays.asList(str2.split(":", 3));
-                if (asList.size() != 3) {
+                List listAsList = Arrays.asList(str2.split(":", 3));
+                if (listAsList.size() != 3) {
                     Slog.w(TAG, "Invalid package entry in flag 'never/always_constrain_display_apis': " + str2);
                 } else {
-                    String str3 = (String) asList.get(0);
-                    String str4 = (String) asList.get(1);
-                    String str5 = (String) asList.get(2);
+                    String str3 = (String) listAsList.get(0);
+                    String str4 = (String) listAsList.get(1);
+                    String str5 = (String) listAsList.get(2);
                     try {
                         arrayMap.put(str3, new Pair<>(Long.valueOf(str4.isEmpty() ? Long.MIN_VALUE : Long.parseLong(str4)), Long.valueOf(str5.isEmpty() ? Long.MAX_VALUE : Long.parseLong(str5))));
                     } catch (NumberFormatException unused) {

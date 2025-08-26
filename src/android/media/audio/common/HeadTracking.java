@@ -49,30 +49,30 @@ public class HeadTracking implements Parcelable {
 
     @Override // android.os.Parcelable
     public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
+        int iDataPosition2 = parcel.dataPosition();
+        parcel.setDataPosition(iDataPosition);
+        parcel.writeInt(iDataPosition2 - iDataPosition);
+        parcel.setDataPosition(iDataPosition2);
     }
 
     public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
-        if (readInt >= 4) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
+        if (i >= 4) {
+            if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
         } else {
             try {
                 throw new BadParcelableException("Parcelable too small");
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -164,11 +164,11 @@ public class HeadTracking implements Parcelable {
         }
 
         public void readFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 0) {
-                _set(readInt, (float[]) parcel.createFixedArray(float[].class, 6));
+            int i = parcel.readInt();
+            if (i == 0) {
+                _set(i, (float[]) parcel.createFixedArray(float[].class, 6));
             } else {
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
             }
         }
 

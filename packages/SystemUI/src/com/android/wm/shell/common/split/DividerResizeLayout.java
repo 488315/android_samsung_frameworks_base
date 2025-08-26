@@ -6,6 +6,7 @@ import android.animation.RectEvaluator;
 import android.animation.ValueAnimator;
 import android.app.WindowConfiguration;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.WindowInsets;
 import android.view.WindowManager;
@@ -44,7 +46,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DividerResizeLayout extends FrameLayout {
     public static final long WINDOW_ALPHA_ANIM_DURATION;
@@ -84,7 +85,6 @@ public class DividerResizeLayout extends FrameLayout {
     public static final Interpolator SINE_OUT_60 = new PathInterpolator(0.17f, 0.17f, 0.4f, 1.0f);
     public static final Interpolator ONE_EASING = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultDividerResizeTarget extends DividerResizeTarget {
         public DefaultDividerResizeTarget(int i, ImageView imageView, ImageView imageView2, Rect rect) {
             super(i, imageView, imageView2, rect);
@@ -108,7 +108,6 @@ public class DividerResizeLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class DividerResizeTarget {
         public ValueAnimator mBlurAnimator;
         public final ImageView mBlurView;
@@ -270,9 +269,9 @@ public class DividerResizeLayout extends FrameLayout {
                 if (rect2.equals(rect)) {
                     return;
                 }
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                this.mBoundsAnimator = ofFloat;
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget.5
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                this.mBoundsAnimator = valueAnimatorOfFloat;
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget.5
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                         DividerResizeTarget.this.updateViewBounds(DividerResizeLayout.RECT_EVALUATOR.evaluate(((Float) valueAnimator2.getAnimatedValue()).floatValue(), rect2, DividerResizeTarget.this.mEndBounds));
@@ -303,9 +302,9 @@ public class DividerResizeLayout extends FrameLayout {
                 }
                 final Rect rect2 = new Rect(this.mOutlineInsets);
                 final Rect rect3 = z ? this.mOriginOutlineInsets : new Rect();
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                this.mOutlineInsetsAnimator = ofFloat;
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget.3
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                this.mOutlineInsetsAnimator = valueAnimatorOfFloat;
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget.3
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                         DividerResizeTarget.this.mOutlineInsets.set(DividerResizeLayout.RECT_EVALUATOR.evaluate(((Float) valueAnimator2.getAnimatedValue()).floatValue(), rect2, rect3));
@@ -333,83 +332,168 @@ public class DividerResizeLayout extends FrameLayout {
             return "DividerResizeTarget{" + SplitScreen.stageTypeToString(this.mStageType) + ", " + WindowConfiguration.stagePositionToString(this.mStageConfigPosition) + ", mOriginBounds=" + this.mOriginBounds + ", mInsets=" + this.mOriginOutlineInsets + ", Dir=" + this.mDirection;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:20:0x0093, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:29:0x0093, code lost:
         
             r7 = java.lang.Math.abs(r11.mScaleDownStartPosition - r11.mScaleDownEndPosition);
          */
-        /* JADX WARN: Code restructure failed: missing block: B:21:0x009c, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:30:0x009c, code lost:
         
             if (r7 != 0) goto L32;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:22:0x009e, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:31:0x009e, code lost:
         
             r10 = 1.0f;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:23:0x00c2, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:32:0x00a0, code lost:
+        
+            r10 = 0.9f;
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:33:0x00a7, code lost:
+        
+            if (isLeftOrTopDirection() == false) goto L37;
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:35:0x00ab, code lost:
+        
+            if (r0 > r11.mScaleDownEndPosition) goto L40;
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:38:0x00b0, code lost:
+        
+            if (r0 < r11.mScaleDownEndPosition) goto L40;
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:40:0x00b3, code lost:
+        
+            r10 = 0.9f + ((java.lang.Math.abs(r11.mScaleDownEndPosition - r0) / r7) * 0.100000024f);
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:41:0x00c2, code lost:
         
             r11.mBlurView.setScaleX(r10);
             r11.mBlurView.setScaleY(r10);
          */
-        /* JADX WARN: Code restructure failed: missing block: B:24:0x00a0, code lost:
-        
-            r10 = 0.9f;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:25:0x00a7, code lost:
-        
-            if (isLeftOrTopDirection() == false) goto L37;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:27:0x00ab, code lost:
-        
-            if (r0 > r11.mScaleDownEndPosition) goto L40;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:28:0x00b3, code lost:
-        
-            r10 = 0.9f + ((java.lang.Math.abs(r11.mScaleDownEndPosition - r0) / r7) * 0.100000024f);
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:30:0x00b0, code lost:
-        
-            if (r0 < r11.mScaleDownEndPosition) goto L40;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:51:0x0113, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:64:0x0113, code lost:
         
             r8 = 0.0f;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:52:0x0116, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:65:0x0116, code lost:
         
             if (r2.mIsMultiSplitActive != false) goto L79;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:54:0x011c, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:67:0x011c, code lost:
         
             if (isLeftOrTopDirection() == false) goto L71;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:56:0x0122, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:69:0x0122, code lost:
         
             if (r0 > r2.mResizeAlgorithm.mDismissStartThreshold) goto L74;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:57:0x012c, code lost:
-        
-            r8 = 0.32f;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:59:0x0129, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:72:0x0129, code lost:
         
             if (r0 < r2.mResizeAlgorithm.mDismissEndThreshold) goto L74;
          */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x0139  */
-        /* JADX WARN: Removed duplicated region for block: B:50:0x0141  */
+        /* JADX WARN: Code restructure failed: missing block: B:74:0x012c, code lost:
+        
+            r8 = 0.32f;
+         */
+        /* JADX WARN: Removed duplicated region for block: B:77:0x0139  */
+        /* JADX WARN: Removed duplicated region for block: B:78:0x0141  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void updateViewBounds(android.graphics.Rect r12) {
-            /*
-                Method dump skipped, instructions count: 542
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget.updateViewBounds(android.graphics.Rect):void");
+        public final void updateViewBounds(Rect rect) {
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mView.getLayoutParams();
+            ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) this.mBlurView.getLayoutParams();
+            int iWidth = rect.width();
+            marginLayoutParams.width = iWidth;
+            marginLayoutParams2.width = iWidth;
+            int iHeight = rect.height();
+            marginLayoutParams.height = iHeight;
+            marginLayoutParams2.height = iHeight;
+            int i = rect.left;
+            marginLayoutParams.leftMargin = i;
+            marginLayoutParams2.leftMargin = i;
+            int i2 = rect.top;
+            marginLayoutParams.topMargin = i2;
+            marginLayoutParams2.topMargin = i2;
+            this.mView.setLayoutParams(marginLayoutParams);
+            this.mBlurView.setLayoutParams(marginLayoutParams2);
+            boolean z = DividerResizeController.USE_GUIDE_VIEW_EFFECTS;
+            DividerResizeLayout dividerResizeLayout = DividerResizeLayout.this;
+            if (!z && this.mBlurView.getHeight() != 0 && this.mBlurView.getWidth() != 0) {
+                int direction = getDirection();
+                int top = direction != 1 ? direction != 2 ? direction != 3 ? direction != 4 ? -1 : this.mBlurView.getTop() : this.mBlurView.getLeft() : this.mBlurView.getBottom() : this.mBlurView.getRight();
+                float fMax = 1.0f;
+                if (dividerResizeLayout.mIsMultiSplitActive) {
+                    if (isLeftOrTopDirection()) {
+                        this.mBlurView.setScaleX(1.0f);
+                        this.mBlurView.setScaleY(1.0f);
+                    } else {
+                        this.mBlurView.setScaleX(1.0f);
+                        this.mBlurView.setScaleY(1.0f);
+                    }
+                }
+                if (!isLeftOrTopDirection() ? top >= this.mFadeOutStartPosition : top <= this.mFadeOutStartPosition) {
+                    this.mBlurView.setAlpha(1.0f);
+                } else {
+                    if (this.mBlurAnimator != null) {
+                        Log.d("DividerResizeLayout", "cancelBlurAnimation");
+                        this.mBlurAnimator.end();
+                    }
+                    int iAbs = Math.abs(this.mFadeOutStartPosition - this.mFadeOutEndPosition);
+                    if (iAbs != 0) {
+                        if (isLeftOrTopDirection()) {
+                            int iAbs2 = Math.abs(this.mFadeOutEndPosition - top);
+                            fMax = dividerResizeLayout.mIsMultiSplitActive ? Math.max(0.32f, iAbs2 / iAbs) : iAbs2 / iAbs;
+                        } else {
+                            int iAbs22 = Math.abs(this.mFadeOutEndPosition - top);
+                            if (dividerResizeLayout.mIsMultiSplitActive) {
+                            }
+                        }
+                    }
+                    this.mBlurView.setAlpha(fMax);
+                }
+            }
+            this.mView.invalidate();
+            this.mBlurView.invalidate();
+            if (DividerResizeController.USE_GUIDE_VIEW_EFFECTS && dividerResizeLayout.mGuideBarView != null) {
+                ViewGroup.MarginLayoutParams marginLayoutParams3 = (ViewGroup.MarginLayoutParams) this.mBlurView.getLayoutParams();
+                Rect rect2 = dividerResizeLayout.mGuideBarBounds;
+                int i3 = marginLayoutParams3.leftMargin;
+                int i4 = marginLayoutParams3.topMargin;
+                rect2.set(i3, i4, marginLayoutParams3.width + i3, marginLayoutParams3.height + i4);
+                int direction2 = getDirection();
+                if (direction2 == 1) {
+                    Rect rect3 = dividerResizeLayout.mGuideBarBounds;
+                    rect3.offset(rect3.width(), 0);
+                    Rect rect4 = dividerResizeLayout.mGuideBarBounds;
+                    rect4.right = rect4.left + dividerResizeLayout.mGuideViewBarThickness;
+                } else if (direction2 == 2) {
+                    Rect rect5 = dividerResizeLayout.mGuideBarBounds;
+                    rect5.offset(0, rect5.height());
+                    Rect rect6 = dividerResizeLayout.mGuideBarBounds;
+                    rect6.bottom = rect6.top + dividerResizeLayout.mGuideViewBarThickness;
+                } else if (direction2 == 3) {
+                    dividerResizeLayout.mGuideBarBounds.offset(-dividerResizeLayout.mGuideViewBarThickness, 0);
+                    Rect rect7 = dividerResizeLayout.mGuideBarBounds;
+                    rect7.right = rect7.left + dividerResizeLayout.mGuideViewBarThickness;
+                } else if (direction2 != 4) {
+                    dividerResizeLayout.mGuideBarBounds.setEmpty();
+                } else {
+                    dividerResizeLayout.mGuideBarBounds.offset(0, -dividerResizeLayout.mGuideViewBarThickness);
+                    Rect rect8 = dividerResizeLayout.mGuideBarBounds;
+                    rect8.bottom = rect8.top + dividerResizeLayout.mGuideViewBarThickness;
+                }
+                ViewGroup.MarginLayoutParams marginLayoutParams4 = (ViewGroup.MarginLayoutParams) dividerResizeLayout.mGuideBarView.getLayoutParams();
+                marginLayoutParams4.width = dividerResizeLayout.mGuideBarBounds.width();
+                marginLayoutParams4.height = dividerResizeLayout.mGuideBarBounds.height();
+                Rect rect9 = dividerResizeLayout.mGuideBarBounds;
+                marginLayoutParams4.leftMargin = rect9.left;
+                marginLayoutParams4.topMargin = rect9.top;
+                dividerResizeLayout.mGuideBarView.setLayoutParams(marginLayoutParams4);
+                dividerResizeLayout.mGuideBarView.invalidate();
+            }
+            Log.d("DividerResizeLayout", "updateViewBounds: " + rect + ", this=" + this);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MultiSplitDividerResizeTarget extends DividerResizeTarget {
         public int mInnerDirection;
         public int mInnerPosition;
@@ -454,11 +538,15 @@ public class DividerResizeLayout extends FrameLayout {
 
         @Override // com.android.wm.shell.common.split.DividerResizeLayout.DividerResizeTarget
         public final void initDirection() {
-            boolean isVerticalDivision = DividerResizeLayout.this.mSplitLayout.isVerticalDivision();
+            boolean zIsVerticalDivision = DividerResizeLayout.this.mSplitLayout.isVerticalDivision();
             int i = this.mStageConfigPosition;
-            this.mDirection = StageUtils.convertStagePositionToDockSide(isVerticalDivision ? i & 40 : i & 80);
+            this.mDirection = StageUtils.convertStagePositionToDockSide(zIsVerticalDivision ? i & 40 : i & 80);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:27:0x003e  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void initInnerDirection() {
             int i;
             DividerResizeLayout dividerResizeLayout = DividerResizeLayout.this;
@@ -468,17 +556,17 @@ public class DividerResizeLayout extends FrameLayout {
                     if (CoreRune.MW_PARALLEL_MULTI_SPLIT) {
                         SplitLayout splitLayout = dividerResizeLayout.mSplitLayout;
                         if (splitLayout.mParallelMultiSplit) {
-                            boolean isVerticalDivision = splitLayout.isVerticalDivision();
+                            boolean zIsVerticalDivision = splitLayout.isVerticalDivision();
                             i = 8;
-                            if (!isVerticalDivision) {
+                            if (!zIsVerticalDivision) {
                                 i = (i2 & 8) != 0 ? 16 : 64;
                             } else if ((i2 & 16) == 0) {
                                 i = 32;
                             }
-                            this.mInnerDirection = StageUtils.convertStagePositionToDockSide(i);
+                        } else {
+                            i = dividerResizeLayout.mSplitLayout.isVerticalDivision() ? i2 & 80 : i2 & 40;
                         }
                     }
-                    i = dividerResizeLayout.mSplitLayout.isVerticalDivision() ? i2 & 80 : i2 & 40;
                     this.mInnerDirection = StageUtils.convertStagePositionToDockSide(i);
                 }
             }
@@ -524,7 +612,6 @@ public class DividerResizeLayout extends FrameLayout {
         DividerResizeLayout dividerResizeLayout;
         int i2;
         DividerResizeTarget defaultDividerResizeTarget;
-        int i3;
         if (i == 0) {
             imageView3 = (ImageView) findViewById(R.id.main_view);
             imageView4 = (ImageView) findViewById(R.id.main_blur_view);
@@ -542,7 +629,7 @@ public class DividerResizeLayout extends FrameLayout {
                     Log.w("DividerResizeLayout", "createResizeTarget: failed, cannot found views");
                 }
                 DividerResizeController.ResizeAlgorithm resizeAlgorithm = this.mResizeAlgorithm;
-                if ((resizeAlgorithm.isInStartStashZone() || ((i3 = resizeAlgorithm.mSplitStashEndThreshold) > 0 && resizeAlgorithm.mTouchPosition > i3)) && !this.mIsMultiSplitActive) {
+                if ((resizeAlgorithm.isInStartStashZone() || resizeAlgorithm.isInEndStashZone()) && !this.mIsMultiSplitActive) {
                     if (this.mResizeAlgorithm.isInStartStashZone()) {
                         rect.left = Math.max(rect.left, 0);
                         rect.top = Math.max(rect.top, 0);
@@ -577,12 +664,16 @@ public class DividerResizeLayout extends FrameLayout {
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean gatherTransparentRegion(Region region) {
-        boolean gatherTransparentRegion = super.gatherTransparentRegion(region);
+        boolean zGatherTransparentRegion = super.gatherTransparentRegion(region);
         region.set(this.mTransparentRegion);
-        return gatherTransparentRegion;
+        return zGatherTransparentRegion;
     }
 
-    public final void init(DividerView dividerView, SplitLayout splitLayout, StageCoordinator stageCoordinator, DividerResizeController.ResizeAlgorithm resizeAlgorithm) {
+    /* JADX WARN: Removed duplicated region for block: B:53:0x015d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void init(DividerView dividerView, SplitLayout splitLayout, StageCoordinator stageCoordinator, DividerResizeController.ResizeAlgorithm resizeAlgorithm) throws Resources.NotFoundException {
         int i;
         setAlpha(0.0f);
         this.mDividerView = dividerView;
@@ -601,9 +692,9 @@ public class DividerResizeLayout extends FrameLayout {
         this.mRestrictedBounds.top = 0;
         boolean z = CoreRune.MW_MULTI_SPLIT_NATURAL_RESIZING;
         if (z) {
-            boolean isMultiSplitActive = this.mStageCoordinator.isMultiSplitActive();
-            this.mIsMultiSplitActive = isMultiSplitActive;
-            if (isMultiSplitActive) {
+            boolean zIsMultiSplitActive = this.mStageCoordinator.isMultiSplitActive();
+            this.mIsMultiSplitActive = zIsMultiSplitActive;
+            if (zIsMultiSplitActive) {
                 int cellHostStageType = this.mStageCoordinator.getCellHostStageType();
                 this.mCellHostStageType = cellHostStageType;
                 this.mHalfSplitStageType = cellHostStageType == 0 ? 1 : 0;
@@ -622,7 +713,7 @@ public class DividerResizeLayout extends FrameLayout {
         layoutParams3.multiWindowFlags = 64;
         layoutParams3.setTitle("DividerResizeLayout");
         if (!DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
-            int color = getContext().getResources().getColor(17171594, null);
+            int color = getContext().getResources().getColor(17171593, null);
             this.mBackgroundColor = color;
             setBackgroundColor(color);
         }
@@ -647,13 +738,12 @@ public class DividerResizeLayout extends FrameLayout {
             } else {
                 createResizeTarget(1);
             }
-        } else {
-            if (z && this.mIsMultiSplitActive) {
-                createResizeTarget(5);
-                if (this.mDividerView.mIsCellDivider) {
-                    createResizeTarget(this.mCellHostStageType);
-                }
+        } else if (z && this.mIsMultiSplitActive) {
+            createResizeTarget(5);
+            if (this.mDividerView.mIsCellDivider) {
+                createResizeTarget(this.mCellHostStageType);
             }
+        } else {
             createResizeTarget(0);
             createResizeTarget(1);
         }
@@ -684,7 +774,7 @@ public class DividerResizeLayout extends FrameLayout {
                         Log.w("DividerResizeLayout", "loadSnapshot: Failed to get snapshot for " + dividerResizeTarget);
                     } else {
                         dividerResizeTarget.mHasProtectedContent = surfaceFreezerSnapshot.hasProtectedContent();
-                        boolean containsSecureLayer = surfaceFreezerSnapshot.containsSecureLayer();
+                        boolean zContainsSecureLayer = surfaceFreezerSnapshot.containsSecureLayer();
                         if (dividerResizeTarget.mHasProtectedContent) {
                             dividerResizeTarget.mView.setBackgroundColor(dividerResizeLayout.getResources().getColor(R.color.protected_content_bg_color));
                             dividerResizeTarget.mBlurView.setBackgroundColor(dividerResizeLayout.getResources().getColor(R.color.protected_content_bg_color));
@@ -694,7 +784,7 @@ public class DividerResizeLayout extends FrameLayout {
                         } else if (surfaceFreezerSnapshot.getSnapshotBitmap() == null) {
                             Log.w("DividerResizeLayout", "loadSnapshot: Failed to get snapshot bitmap for " + dividerResizeTarget);
                         } else {
-                            Bitmap createSnapshotBitmapWithWallpaper = surfaceFreezerSnapshot.hasWallpaperBitmap() ? surfaceFreezerSnapshot.createSnapshotBitmapWithWallpaper(Color.argb(Math.round(Color.alpha(dividerResizeLayout.mBackgroundColor) * 0.9f), Color.red(dividerResizeLayout.mBackgroundColor), Color.green(dividerResizeLayout.mBackgroundColor), Color.blue(dividerResizeLayout.mBackgroundColor))) : surfaceFreezerSnapshot.getSnapshotBitmap();
+                            Bitmap bitmapCreateSnapshotBitmapWithWallpaper = surfaceFreezerSnapshot.hasWallpaperBitmap() ? surfaceFreezerSnapshot.createSnapshotBitmapWithWallpaper(Color.argb(Math.round(Color.alpha(dividerResizeLayout.mBackgroundColor) * 0.9f), Color.red(dividerResizeLayout.mBackgroundColor), Color.green(dividerResizeLayout.mBackgroundColor), Color.blue(dividerResizeLayout.mBackgroundColor))) : surfaceFreezerSnapshot.getSnapshotBitmap();
                             Context context = ((FrameLayout) dividerResizeLayout).mContext;
                             SemGfxImageFilter semGfxImageFilter = new SemGfxImageFilter();
                             float[] fArr = (context.getResources().getConfiguration().uiMode & 32) != 0 ? DARK_BLUR_PRESET : BLUR_PRESET;
@@ -705,15 +795,15 @@ public class DividerResizeLayout extends FrameLayout {
                             semGfxImageFilter.setCurveMaxX(fArr[4]);
                             semGfxImageFilter.setCurveMinY(fArr[5]);
                             semGfxImageFilter.setCurveMaxY(fArr[6]);
-                            Bitmap applyToBitmap = semGfxImageFilter.applyToBitmap(createSnapshotBitmapWithWallpaper);
-                            Log.d("DividerResizeLayout", "loadSnapshot: w=" + createSnapshotBitmapWithWallpaper.getWidth() + " h=" + createSnapshotBitmapWithWallpaper.getHeight());
-                            dividerResizeTarget.mView.setImageBitmap(createSnapshotBitmapWithWallpaper);
+                            Bitmap bitmapApplyToBitmap = semGfxImageFilter.applyToBitmap(bitmapCreateSnapshotBitmapWithWallpaper);
+                            Log.d("DividerResizeLayout", "loadSnapshot: w=" + bitmapCreateSnapshotBitmapWithWallpaper.getWidth() + " h=" + bitmapCreateSnapshotBitmapWithWallpaper.getHeight());
+                            dividerResizeTarget.mView.setImageBitmap(bitmapCreateSnapshotBitmapWithWallpaper);
                             ImageView imageView = dividerResizeTarget.mBlurView;
-                            if (applyToBitmap != null) {
-                                createSnapshotBitmapWithWallpaper = applyToBitmap;
+                            if (bitmapApplyToBitmap != null) {
+                                bitmapCreateSnapshotBitmapWithWallpaper = bitmapApplyToBitmap;
                             }
-                            imageView.setImageBitmap(createSnapshotBitmapWithWallpaper);
-                            if (containsSecureLayer) {
+                            imageView.setImageBitmap(bitmapCreateSnapshotBitmapWithWallpaper);
+                            if (zContainsSecureLayer) {
                                 WindowManager.LayoutParams layoutParams = dividerResizeLayout.mLp;
                                 int i2 = layoutParams.flags;
                                 if ((i2 & 8192) == 0) {
@@ -859,7 +949,7 @@ public class DividerResizeLayout extends FrameLayout {
                         return;
                     default:
                         float[] fArr = DividerResizeLayout.BLUR_PRESET;
-                        long currentTimeMillis = System.currentTimeMillis();
+                        long jCurrentTimeMillis = System.currentTimeMillis();
                         try {
                             if (!DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
                                 dividerResizeLayout.loadSnapshotsForResizeTarget();
@@ -872,7 +962,7 @@ public class DividerResizeLayout extends FrameLayout {
                             }
                             return;
                         } finally {
-                            Log.d("DividerResizeLayout", "mHeavyWorkRunnable, dur=" + (System.currentTimeMillis() - currentTimeMillis));
+                            Log.d("DividerResizeLayout", "mHeavyWorkRunnable, dur=" + (System.currentTimeMillis() - jCurrentTimeMillis));
                         }
                 }
             }
@@ -923,7 +1013,7 @@ public class DividerResizeLayout extends FrameLayout {
                         return;
                     default:
                         float[] fArr = DividerResizeLayout.BLUR_PRESET;
-                        long currentTimeMillis = System.currentTimeMillis();
+                        long jCurrentTimeMillis = System.currentTimeMillis();
                         try {
                             if (!DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
                                 dividerResizeLayout.loadSnapshotsForResizeTarget();
@@ -936,7 +1026,7 @@ public class DividerResizeLayout extends FrameLayout {
                             }
                             return;
                         } finally {
-                            Log.d("DividerResizeLayout", "mHeavyWorkRunnable, dur=" + (System.currentTimeMillis() - currentTimeMillis));
+                            Log.d("DividerResizeLayout", "mHeavyWorkRunnable, dur=" + (System.currentTimeMillis() - jCurrentTimeMillis));
                         }
                 }
             }

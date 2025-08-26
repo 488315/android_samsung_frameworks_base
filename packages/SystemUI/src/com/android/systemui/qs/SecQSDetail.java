@@ -2,6 +2,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -14,13 +15,13 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.qs.SecQSPanelControllerBase;
 import com.android.systemui.qs.animator.SecQSImplAnimatorBase;
+import com.android.systemui.qs.bar.ColoredBGHelper;
 import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSDetail extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,18 +36,21 @@ public class SecQSDetail extends LinearLayout {
     public final void onConfigurationChanged(final Configuration configuration) {
         super.onConfigurationChanged(configuration);
         ((ArrayList) this.mOnConfigurationChangedListeners).forEach(new Consumer() { // from class: com.android.systemui.qs.SecQSDetail$$ExternalSyntheticLambda0
+            /* JADX WARN: Removed duplicated region for block: B:52:0x00df  */
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 SecQSPanelController secQSPanelController;
                 SecQSPanelControllerBase.TileRecord tileRecord;
-                View view;
                 int i = 0;
                 Configuration configuration2 = configuration;
                 int i2 = SecQSDetail.$r8$clinit;
                 final SecQSDetailController secQSDetailController = ((SecQSDetailController$onConfigurationChangedListener$1) obj).this$0;
-                boolean applyNewConfig = secQSDetailController.configChanges.applyNewConfig(secQSDetailController.getContext().getResources());
+                boolean zApplyNewConfig = secQSDetailController.configChanges.applyNewConfig(secQSDetailController.getContext().getResources());
                 SecQSDetail secQSDetail = secQSDetailController.view;
-                if (applyNewConfig) {
+                if (zApplyNewConfig) {
                     secQSDetail.removeAllViews();
                     secQSDetail.addView((FrameLayout) LayoutInflater.from(secQSDetail.getContext()).inflate(R.layout.sec_qs_detail_container, (ViewGroup) secQSDetail, false));
                     secQSDetailController.updateViews(secQSDetail);
@@ -61,10 +65,10 @@ public class SecQSDetail extends LinearLayout {
                     secQSDetail.requestLayout();
                     if (secQSDetailController.qsAnimatorManager != null && SecQSImplAnimatorBase.isDetailVisible()) {
                         DetailAdapter detailAdapter2 = secQSDetailController.detailAdapter;
-                        boolean shouldUseFullScreen = detailAdapter2 != null ? detailAdapter2.shouldUseFullScreen() : false;
+                        boolean zShouldUseFullScreen = detailAdapter2 != null ? detailAdapter2.shouldUseFullScreen() : false;
                         DetailAdapter detailAdapter3 = secQSDetailController.detailAdapter;
-                        Integer valueOf = detailAdapter3 != null ? Integer.valueOf(detailAdapter3.getMetricsCategory()) : null;
-                        if (!shouldUseFullScreen) {
+                        Integer numValueOf = detailAdapter3 != null ? Integer.valueOf(detailAdapter3.getMetricsCategory()) : null;
+                        if (!zShouldUseFullScreen) {
                             secQSDetailController.setDetailExtendedContainerHeight();
                             DetailAdapter detailAdapter4 = secQSDetailController.detailAdapter;
                             if (detailAdapter4 != null) {
@@ -74,30 +78,37 @@ public class SecQSDetail extends LinearLayout {
                         }
                         DetailAdapter detailAdapter5 = secQSDetailController.detailAdapter;
                         if (detailAdapter5 != null) {
-                            View createDetailView = detailAdapter5.createDetailView(secQSDetailController.getContext(), (View) secQSDetailController.detailViews.get(valueOf != null ? valueOf.intValue() : 0), secQSDetailController.detailContent);
-                            if (createDetailView != null) {
-                                ViewGroup viewGroup = shouldUseFullScreen ? secQSDetailController.toViewGroup(R.id.qs_detail_full_screen_container) : secQSDetailController.detailContent;
+                            View viewCreateDetailView = detailAdapter5.createDetailView(secQSDetailController.getContext(), (View) secQSDetailController.detailViews.get(numValueOf != null ? numValueOf.intValue() : 0), secQSDetailController.detailContent);
+                            if (viewCreateDetailView != null) {
+                                ViewGroup viewGroup = zShouldUseFullScreen ? secQSDetailController.toViewGroup(R.id.qs_detail_full_screen_container) : secQSDetailController.detailContent;
                                 if (viewGroup != null) {
                                     viewGroup.removeAllViews();
-                                    viewGroup.addView(createDetailView);
+                                    viewGroup.addView(viewCreateDetailView);
                                 }
-                                secQSDetailController.detailViews.put(valueOf != null ? valueOf.intValue() : 0, createDetailView);
+                                secQSDetailController.detailViews.put(numValueOf != null ? numValueOf.intValue() : 0, viewCreateDetailView);
                                 DetailAdapter detailAdapter6 = secQSDetailController.detailAdapter;
                                 if (detailAdapter6 != null) {
                                     secQSDetailController.setupDetailFooter(detailAdapter6);
                                 }
                                 secQSDetailController.updateMarginAndPadding();
-                                if (!shouldUseFullScreen) {
+                                if (!zShouldUseFullScreen) {
                                     secQSDetailController.updateDetailButtonText();
                                     if (secQSDetailController.isDNDTile()) {
                                         secQSDetailController.updateDndDetail();
                                     }
                                 }
+                            } else {
+                                DetailAdapter detailAdapter7 = secQSDetailController.detailAdapter;
+                                Log.e("SecQSDetailController", "Tile = " + ((Object) (detailAdapter7 != null ? detailAdapter7.getTitle() : null)) + " detailView is null");
                             }
                         }
-                        DetailAdapter detailAdapter7 = secQSDetailController.detailAdapter;
-                        Log.e("SecQSDetailController", "Tile = " + ((Object) (detailAdapter7 != null ? detailAdapter7.getTitle() : null)) + " detailView is null");
                     }
+                    SecQSDetailContentView secQSDetailContentView = secQSDetailController.detailContentParent;
+                    if (secQSDetailContentView == null) {
+                        secQSDetailContentView = null;
+                    }
+                    ColoredBGHelper coloredBGHelper = secQSDetailController.coloredBGHelper;
+                    coloredBGHelper.setBackGroundDrawable(secQSDetailContentView, coloredBGHelper.getBGColor());
                 }
                 DetailAdapter detailAdapter8 = secQSDetailController.detailAdapter;
                 if (detailAdapter8 == null || !detailAdapter8.shouldUseFullScreen()) {
@@ -114,11 +125,10 @@ public class SecQSDetail extends LinearLayout {
                     return;
                 }
                 if (secQSDetailController.qsAnimatorManager != null && SecQSImplAnimatorBase.isDetailVisible()) {
-                    view = ((ViewController) secQSDetailController).mView;
-                    ((SecQSDetail) view).postDelayed(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$onConfigurationChangedListener$1$updateResources$1
+                    ((SecQSDetail) ((ViewController) secQSDetailController).mView).postDelayed(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$onConfigurationChangedListener$1$updateResources$1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            SecQSDetailController secQSDetailController2 = SecQSDetailController.this;
+                        public final void run() throws Resources.NotFoundException {
+                            SecQSDetailController secQSDetailController2 = secQSDetailController;
                             int i4 = SecQSDetailController.$r8$clinit;
                             secQSDetailController2.setDetailExtendedContainerHeight();
                         }
@@ -136,7 +146,7 @@ public class SecQSDetail extends LinearLayout {
                     secQSDetailController.currentRecord = tileRecord;
                 }
                 secQSDetailController.oldOrientation = configuration2.orientation;
-                secQSDetail.setTranslationX(SecQSDetailController.isLargeScreen$5() ? secQSDetailController.resourcePicker.getQsFrameX() : 0.0f);
+                secQSDetail.setTranslationX(SecQSDetailController.isLargeScreen$6() ? secQSDetailController.resourcePicker.getQsFrameX() : 0.0f);
                 secQSDetailController.updateMarginAndPadding();
             }
         });

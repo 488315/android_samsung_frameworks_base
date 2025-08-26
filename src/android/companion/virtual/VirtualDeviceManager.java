@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.app.PendingIntent;
 import android.companion.virtual.ActivityPolicyExemption;
 import android.companion.virtual.IVirtualDeviceListener;
-import android.companion.virtual.VirtualDeviceManager;
 import android.companion.virtual.audio.VirtualAudioDevice;
 import android.companion.virtual.camera.VirtualCamera;
 import android.companion.virtual.camera.VirtualCameraConfig;
@@ -515,16 +514,16 @@ public final class VirtualDeviceManager {
 
         @Override // android.companion.virtual.IVirtualDeviceListener
         public void onVirtualDeviceCreated(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceManager.VirtualDeviceListenerDelegate.this.lambda$onVirtualDeviceCreated$0(i);
+                        this.f$0.lambda$onVirtualDeviceCreated$0(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -535,16 +534,16 @@ public final class VirtualDeviceManager {
 
         @Override // android.companion.virtual.IVirtualDeviceListener
         public void onVirtualDeviceClosed(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceManager.VirtualDeviceListenerDelegate.this.lambda$onVirtualDeviceClosed$1(i);
+                        this.f$0.lambda$onVirtualDeviceClosed$1(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

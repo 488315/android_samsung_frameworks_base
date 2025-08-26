@@ -10,7 +10,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ChipStateSender {
     public static final /* synthetic */ ChipStateSender[] $VALUES;
@@ -29,7 +28,6 @@ public abstract class ChipStateSender {
     private final TransferStatus transferStatus;
     private final UiEventLogger.UiEventEnum uiEvent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,6 @@ public abstract class ChipStateSender {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class FAR_FROM_RECEIVER extends ChipStateSender {
         public FAR_FROM_RECEIVER(String str, int i) {
             super(str, i, 8, MediaTttSenderUiEvents.MEDIA_TTT_SENDER_FAR_FROM_RECEIVER, null, TransferStatus.TOO_FAR, null, null, 32, null);
@@ -65,7 +62,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender = new ChipStateSender("ALMOST_CLOSE_TO_START_CAST", 0) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.ALMOST_CLOSE_TO_START_CAST
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_ALMOST_CLOSE_TO_START_CAST;
-                Integer valueOf = Integer.valueOf(R.string.media_move_closer_to_start_cast);
+                Integer numValueOf = Integer.valueOf(R.string.media_move_closer_to_start_cast);
                 TransferStatus transferStatus = TransferStatus.NOT_STARTED;
                 TimeoutLength timeoutLength = TimeoutLength.LONG;
                 DefaultConstructorMarker defaultConstructorMarker = null;
@@ -81,7 +78,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender2 = new ChipStateSender("ALMOST_CLOSE_TO_END_CAST", 1) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.ALMOST_CLOSE_TO_END_CAST
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_ALMOST_CLOSE_TO_END_CAST;
-                Integer valueOf = Integer.valueOf(R.string.media_move_closer_to_end_cast);
+                Integer numValueOf = Integer.valueOf(R.string.media_move_closer_to_end_cast);
                 TransferStatus transferStatus = TransferStatus.NOT_STARTED;
                 TimeoutLength timeoutLength = TimeoutLength.LONG;
                 DefaultConstructorMarker defaultConstructorMarker = null;
@@ -97,7 +94,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender3 = new ChipStateSender("TRANSFER_TO_RECEIVER_TRIGGERED", 2) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_RECEIVER_TRIGGERED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_RECEIVER_TRIGGERED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_playing_different_device);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_playing_different_device);
                 TransferStatus transferStatus = TransferStatus.IN_PROGRESS;
                 SenderEndItem.Loading loading = SenderEndItem.Loading.INSTANCE;
                 TimeoutLength timeoutLength = TimeoutLength.LONG;
@@ -114,7 +111,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender4 = new ChipStateSender("TRANSFER_TO_THIS_DEVICE_TRIGGERED", 3) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_THIS_DEVICE_TRIGGERED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_THIS_DEVICE_TRIGGERED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_playing_this_device);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_playing_this_device);
                 TransferStatus transferStatus = TransferStatus.IN_PROGRESS;
                 SenderEndItem.Loading loading = SenderEndItem.Loading.INSTANCE;
                 TimeoutLength timeoutLength = TimeoutLength.LONG;
@@ -131,7 +128,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender5 = new ChipStateSender("TRANSFER_TO_RECEIVER_SUCCEEDED", 4) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_RECEIVER_SUCCEEDED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_RECEIVER_SUCCEEDED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_playing_different_device);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_playing_different_device);
                 TransferStatus transferStatus = TransferStatus.SUCCEEDED;
                 SenderEndItem.UndoButton undoButton = new SenderEndItem.UndoButton(MediaTttSenderUiEvents.MEDIA_TTT_SENDER_UNDO_TRANSFER_TO_RECEIVER_CLICKED, 3);
                 int i = 32;
@@ -149,7 +146,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender6 = new ChipStateSender("TRANSFER_TO_THIS_DEVICE_SUCCEEDED", 5) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_THIS_DEVICE_SUCCEEDED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_THIS_DEVICE_SUCCEEDED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_playing_this_device);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_playing_this_device);
                 TransferStatus transferStatus = TransferStatus.SUCCEEDED;
                 SenderEndItem.UndoButton undoButton = new SenderEndItem.UndoButton(MediaTttSenderUiEvents.MEDIA_TTT_SENDER_UNDO_TRANSFER_TO_THIS_DEVICE_CLICKED, 2);
                 int i = 32;
@@ -167,7 +164,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender7 = new ChipStateSender("TRANSFER_TO_RECEIVER_FAILED", 6) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_RECEIVER_FAILED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_RECEIVER_FAILED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_failed);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_failed);
                 TransferStatus transferStatus = TransferStatus.FAILED;
                 SenderEndItem.Error error = SenderEndItem.Error.INSTANCE;
                 int i = 32;
@@ -185,7 +182,7 @@ public abstract class ChipStateSender {
         ChipStateSender chipStateSender8 = new ChipStateSender("TRANSFER_TO_THIS_DEVICE_FAILED", 7) { // from class: com.android.systemui.media.taptotransfer.sender.ChipStateSender.TRANSFER_TO_THIS_DEVICE_FAILED
             {
                 MediaTttSenderUiEvents mediaTttSenderUiEvents = MediaTttSenderUiEvents.MEDIA_TTT_SENDER_TRANSFER_TO_THIS_DEVICE_FAILED;
-                Integer valueOf = Integer.valueOf(R.string.media_transfer_failed);
+                Integer numValueOf = Integer.valueOf(R.string.media_transfer_failed);
                 TransferStatus transferStatus = TransferStatus.FAILED;
                 SenderEndItem.Error error = SenderEndItem.Error.INSTANCE;
                 int i = 32;

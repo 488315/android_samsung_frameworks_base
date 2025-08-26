@@ -18,7 +18,6 @@ import com.android.internal.policy.ScreenDecorationsUtils;
 import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.animation.TransitionAnimator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 implements ActivityTransitionAnimator.Controller {
     public final /* synthetic */ ActivityTransitionAnimator.Controller $$delegate_0;
@@ -49,7 +48,7 @@ public final class ActivityTransitionAnimator$AnimationDelegate$startAnimation$c
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final TransitionAnimator.State createAnimatorState() {
-        float f;
+        float windowCornerRadius;
         if (this.$$delegate_0.isLaunching()) {
             return this.$delegate.createAnimatorState();
         }
@@ -61,22 +60,22 @@ public final class ActivityTransitionAnimator$AnimationDelegate$startAnimation$c
         int i3 = rectF != null ? (int) rectF.right : this.$windowBounds.right;
         int i4 = rectF != null ? (int) rectF.bottom : this.$windowBounds.bottom;
         Rect rect = this.$windowBounds;
-        float max = Math.max((i3 - i) / (rect.right - rect.left), (i4 - i2) / (rect.bottom - rect.top));
+        float fMax = Math.max((i3 - i) / (rect.right - rect.left), (i4 - i2) / (rect.bottom - rect.top));
         WindowAnimationState windowAnimationState2 = this.$windowState;
-        Float valueOf = windowAnimationState2 != null ? Float.valueOf(windowAnimationState2.topLeftRadius) : null;
-        if (valueOf != null) {
-            f = valueOf.floatValue() * max;
+        Float fValueOf = windowAnimationState2 != null ? Float.valueOf(windowAnimationState2.topLeftRadius) : null;
+        if (fValueOf != null) {
+            windowCornerRadius = fValueOf.floatValue() * fMax;
         } else {
             ActivityTransitionAnimator.AnimationDelegate animationDelegate = this.this$0;
             if (this.$isExpandingFullyAbove) {
-                f = ScreenDecorationsUtils.getWindowCornerRadius(animationDelegate.context);
+                windowCornerRadius = ScreenDecorationsUtils.getWindowCornerRadius(animationDelegate.context);
             } else {
                 animationDelegate.getClass();
-                f = 0.0f;
+                windowCornerRadius = 0.0f;
             }
         }
-        float f2 = f;
-        return new TransitionAnimator.State(i2, i4, i, i3, f2, f2);
+        float f = windowCornerRadius;
+        return new TransitionAnimator.State(i2, i4, i, i3, f, f);
     }
 
     @Override // com.android.systemui.animation.ActivityTransitionAnimator.Controller

@@ -46,9 +46,9 @@ public interface IBluetoothMidiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBluetoothMidiService)) {
-                return (IBluetoothMidiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBluetoothMidiService)) {
+                return (IBluetoothMidiService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,9 +77,9 @@ public interface IBluetoothMidiService extends IInterface {
             if (i == 1) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) parcel.readTypedObject(BluetoothDevice.CREATOR);
                 parcel.enforceNoDataAvail();
-                IBinder addBluetoothDevice = addBluetoothDevice(bluetoothDevice);
+                IBinder iBinderAddBluetoothDevice = addBluetoothDevice(bluetoothDevice);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(addBluetoothDevice);
+                parcel2.writeStrongBinder(iBinderAddBluetoothDevice);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,17 +103,17 @@ public interface IBluetoothMidiService extends IInterface {
 
             @Override // android.media.midi.IBluetoothMidiService
             public IBinder addBluetoothDevice(BluetoothDevice bluetoothDevice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothDevice, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothDevice, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

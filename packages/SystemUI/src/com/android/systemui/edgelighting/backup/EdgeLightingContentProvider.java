@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingContentProvider extends ContentProvider {
     public static final UriMatcher mUriMatcher;
@@ -59,7 +58,7 @@ public class EdgeLightingContentProvider extends ContentProvider {
     }
 
     public final void init() {
-        String str;
+        String strConcat;
         EdgeLightingSettingUtils.resetAppCustomColor(getContext());
         if (SystemProperties.getInt("ro.product.first_api_level", 0) < 31) {
             Context context = getContext();
@@ -67,62 +66,62 @@ public class EdgeLightingContentProvider extends ContentProvider {
             if (i != 0) {
                 Settings.System.putIntForUser(context.getContentResolver(), "edge_lighting_duration", i, -2);
                 context.getSharedPreferences("edge_lighting_shared_prefs", 0).edit().clear().commit();
-                str = "Brief fota | DurationOptions";
+                strConcat = "Brief fota | DurationOptions";
             } else {
-                str = "Brief fota";
+                strConcat = "Brief fota";
             }
             String stringForUser = Settings.System.getStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", -2);
             if (stringForUser == null) {
                 stringForUser = "";
             }
             final StringBuilder sb = new StringBuilder(stringForUser);
-            HashMap hashMap = (HashMap) context.getSharedPreferences("edge_lighting_custom_text_color", 0).getAll();
-            if (hashMap != null && hashMap.size() > 0) {
-                hashMap.forEach(new BiConsumer() { // from class: com.android.systemui.edgelighting.backup.EdgeLightingContentProvider$$ExternalSyntheticLambda0
+            HashMap map = (HashMap) context.getSharedPreferences("edge_lighting_custom_text_color", 0).getAll();
+            if (map != null && map.size() > 0) {
+                map.forEach(new BiConsumer() { // from class: com.android.systemui.edgelighting.backup.EdgeLightingContentProvider$$ExternalSyntheticLambda0
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
                         StringBuilder sb2 = sb;
                         boolean z = EdgeLightingContentProvider.DEBUG;
                         sb2.append((String) obj);
-                        String str2 = EdgeLightingContentProvider.END_DELEMETER;
-                        sb2.append(str2);
+                        String str = EdgeLightingContentProvider.END_DELEMETER;
+                        sb2.append(str);
                         sb2.append((Integer) obj2);
-                        sb2.append(str2);
+                        sb2.append(str);
                     }
                 });
                 Settings.System.putStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", sb.toString(), -2);
                 context.getSharedPreferences("edge_lighting_custom_text_color", 0).edit().clear().commit();
-                str = str.concat(" | CustomTextList");
+                strConcat = strConcat.concat(" | CustomTextList");
             }
             if (Settings.Global.getInt(context.getContentResolver(), "lighting_color_backup_version", 0) != 3) {
                 EdgeLightingSettingUtils.rematchingSimilarColorChip(context.getContentResolver(), EdgeLightingSettingUtils.getEdgeLightingBasicColorIndex(context.getContentResolver()));
-                str = str + " | ColotChipIndex";
+                strConcat = strConcat + " | ColotChipIndex";
             }
-            Slog.d("EdgeLightingContentProvider", str + " restore complete..");
+            Slog.d("EdgeLightingContentProvider", strConcat + " restore complete..");
         }
     }
 
     @Override // android.content.ContentProvider
-    public final Uri insert(Uri uri, ContentValues contentValues) {
+    public final Uri insert(Uri uri, ContentValues contentValues) throws PackageManager.NameNotFoundException, NumberFormatException {
         ApplicationInfo applicationInfo;
         boolean z;
         String str;
-        int match = mUriMatcher.match(uri);
-        if (match == 1) {
+        int iMatch = mUriMatcher.match(uri);
+        if (iMatch == 1) {
             String str2 = (String) contentValues.get("app_list");
             if (str2 != null) {
                 Slog.d("EdgeLightingContentProvider", "restoreEdgeLightingAppListValue");
-                SharedPreferences.Editor edit = getContext().getSharedPreferences("edge_lighting_settings", 0).edit();
+                SharedPreferences.Editor editorEdit = getContext().getSharedPreferences("edge_lighting_settings", 0).edit();
                 HashSet hashSet = new HashSet();
-                String[] split = str2.split(END_DELEMETER);
-                for (int i = 0; i < split.length; i++) {
+                String[] strArrSplit = str2.split(END_DELEMETER);
+                for (int i = 0; i < strArrSplit.length; i++) {
                     if (i == 0) {
-                        edit.putInt("version", Integer.parseInt(split[i]));
+                        editorEdit.putInt("version", Integer.parseInt(strArrSplit[i]));
                     } else if (i == 1) {
-                        edit.putBoolean("all_application", Boolean.parseBoolean(split[i]));
+                        editorEdit.putBoolean("all_application", Boolean.parseBoolean(strArrSplit[i]));
                     } else {
                         try {
-                            applicationInfo = getContext().getPackageManager().getApplicationInfo(split[i], 0);
+                            applicationInfo = getContext().getPackageManager().getApplicationInfo(strArrSplit[i], 0);
                             z = true;
                         } catch (PackageManager.NameNotFoundException unused) {
                             applicationInfo = null;
@@ -132,41 +131,41 @@ public class EdgeLightingContentProvider extends ContentProvider {
                             z = false;
                         }
                         if (z) {
-                            hashSet.add(split[i]);
+                            hashSet.add(strArrSplit[i]);
                         }
                     }
                     if (DEBUG) {
-                        Slog.d("EdgeLightingContentProvider", split[i]);
+                        Slog.d("EdgeLightingContentProvider", strArrSplit[i]);
                     }
                 }
                 if (hashSet.size() > 0) {
-                    edit.putStringSet("enable_list", hashSet);
+                    editorEdit.putStringSet("enable_list", hashSet);
                 }
-                edit.apply();
+                editorEdit.apply();
             }
-        } else if (match == 2) {
+        } else if (iMatch == 2) {
             String str3 = (String) contentValues.get("custom_color_list");
             if (str3 != null) {
                 Slog.d("EdgeLightingContentProvider", "restoreEdgeLightingCustomColorListValue");
                 EdgeLightingSettingUtils.resetAppCustomColor(getContext());
-                SharedPreferences.Editor edit2 = getContext().getSharedPreferences("edge_lighting_app_color", 0).edit();
+                SharedPreferences.Editor editorEdit2 = getContext().getSharedPreferences("edge_lighting_app_color", 0).edit();
                 for (String str4 : str3.split(END_DELEMETER)) {
-                    String[] split2 = str4.split(Pattern.quote(AND_DELEMETER));
-                    if (split2 != null && split2.length == 2) {
-                        if ("false".equals(split2[1]) || "true".equals(split2[1])) {
-                            edit2.putBoolean(split2[0], Boolean.parseBoolean(split2[1]));
+                    String[] strArrSplit2 = str4.split(Pattern.quote(AND_DELEMETER));
+                    if (strArrSplit2 != null && strArrSplit2.length == 2) {
+                        if ("false".equals(strArrSplit2[1]) || "true".equals(strArrSplit2[1])) {
+                            editorEdit2.putBoolean(strArrSplit2[0], Boolean.parseBoolean(strArrSplit2[1]));
                         } else {
-                            edit2.putInt(split2[0], Integer.parseInt(split2[1]));
+                            editorEdit2.putInt(strArrSplit2[0], Integer.parseInt(strArrSplit2[1]));
                         }
                         if (DEBUG) {
-                            Slog.d("EdgeLightingContentProvider", split2[0] + " " + split2[1]);
+                            Slog.d("EdgeLightingContentProvider", strArrSplit2[0] + " " + strArrSplit2[1]);
                         }
                     }
                 }
-                edit2.apply();
+                editorEdit2.apply();
                 return null;
             }
-        } else if (match == 3) {
+        } else if (iMatch == 3) {
             Object obj = contentValues.get("lighting_duration_option");
             if (obj != null) {
                 Settings.System.putIntForUser(getContext().getContentResolver(), "edge_lighting_duration", Integer.valueOf((String) obj).intValue(), -2);
@@ -180,20 +179,20 @@ public class EdgeLightingContentProvider extends ContentProvider {
                 Settings.System.putIntForUser(getContext().getContentResolver(), SettingsHelper.INDEX_EDGE_LIGHTING_ON, 0, -2);
                 return null;
             }
-        } else if (match == 4 && (str = (String) contentValues.get("custom_text_filter_color")) != null) {
+        } else if (iMatch == 4 && (str = (String) contentValues.get("custom_text_filter_color")) != null) {
             Slog.d("EdgeLightingContentProvider", "restoreEdgeLightingTextFilterColorListValue");
             EdgeLightingSettingUtils.resetAppCustomColor(getContext());
             for (String str5 : str.split(END_DELEMETER)) {
-                String[] split3 = str5.split(Pattern.quote(AND_DELEMETER));
-                if (split3 != null && split3.length == 2) {
+                String[] strArrSplit3 = str5.split(Pattern.quote(AND_DELEMETER));
+                if (strArrSplit3 != null && strArrSplit3.length == 2) {
                     Context context = getContext();
-                    String str6 = split3[0];
-                    int parseInt = Integer.parseInt(split3[1]);
-                    if (str6 != null) {
-                        str6 = str6.replace("\u2068", "").replace("\u2069", "");
+                    String strReplace = strArrSplit3[0];
+                    int i2 = Integer.parseInt(strArrSplit3[1]);
+                    if (strReplace != null) {
+                        strReplace = strReplace.replace("\u2068", "").replace("\u2069", "");
                     }
                     String stringForUser = Settings.System.getStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", -2);
-                    Settings.System.putStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(parseInt, stringForUser != null ? stringForUser : "", str6, ";", ";").toString(), -2);
+                    Settings.System.putStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i2, stringForUser != null ? stringForUser : "", strReplace, ";", ";").toString(), -2);
                 }
             }
         }
@@ -219,63 +218,63 @@ public class EdgeLightingContentProvider extends ContentProvider {
 
     @Override // android.content.ContentProvider
     public final Cursor query(Uri uri, String[] strArr, String str, String[] strArr2, String str2) {
-        String sb;
-        int match = mUriMatcher.match(uri);
-        if (match == 1) {
+        String string;
+        int iMatch = mUriMatcher.match(uri);
+        if (iMatch == 1) {
             MatrixCursor matrixCursor = new MatrixCursor(new String[]{"app_list"});
             SharedPreferences sharedPreferences = getContext().getSharedPreferences("edge_lighting_settings", 0);
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(sharedPreferences.getInt("version", 0));
-            sb2.append(END_DELEMETER);
-            sb2.append(sharedPreferences.getBoolean("all_application", true));
+            StringBuilder sb = new StringBuilder();
+            sb.append(sharedPreferences.getInt("version", 0));
+            sb.append(END_DELEMETER);
+            sb.append(sharedPreferences.getBoolean("all_application", true));
             Set<String> stringSet = sharedPreferences.getStringSet("enable_list", null);
             if (stringSet != null) {
                 Iterator<String> it = stringSet.iterator();
                 while (it.hasNext()) {
-                    sb2.append(END_DELEMETER);
-                    sb2.append(it.next());
+                    sb.append(END_DELEMETER);
+                    sb.append(it.next());
                 }
             }
-            matrixCursor.addRow(new String[]{sb2.toString()});
+            matrixCursor.addRow(new String[]{sb.toString()});
             return matrixCursor;
         }
-        if (match == 2) {
+        if (iMatch == 2) {
             MatrixCursor matrixCursor2 = new MatrixCursor(new String[]{"custom_color_list"});
-            StringBuilder sb3 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
             for (Map.Entry<String, ?> entry : getContext().getSharedPreferences("edge_lighting_app_color", 0).getAll().entrySet()) {
-                sb3.append(entry.getKey());
-                sb3.append(AND_DELEMETER);
-                sb3.append(entry.getValue());
-                sb3.append(END_DELEMETER);
+                sb2.append(entry.getKey());
+                sb2.append(AND_DELEMETER);
+                sb2.append(entry.getValue());
+                sb2.append(END_DELEMETER);
             }
-            matrixCursor2.addRow(new String[]{sb3.toString()});
+            matrixCursor2.addRow(new String[]{sb2.toString()});
             return matrixCursor2;
         }
-        if (match == 3) {
+        if (iMatch == 3) {
             MatrixCursor matrixCursor3 = new MatrixCursor(new String[]{"lighting_action_enable", "lighting_duration_option"});
             getContext();
             matrixCursor3.addRow(new String[]{"true", String.valueOf(EdgeLightingSettingUtils.loadEdgeLightingDurationOptionType(getContext()))});
             return matrixCursor3;
         }
-        if (match != 4) {
+        if (iMatch != 4) {
             return null;
         }
         MatrixCursor matrixCursor4 = new MatrixCursor(new String[]{"custom_text_filter_color"});
-        StringBuilder sb4 = new StringBuilder();
-        HashMap loadCustomTextList = EdgeLightingSettingUtils.loadCustomTextList(getContext());
-        if (loadCustomTextList == null) {
-            sb = "";
+        StringBuilder sb3 = new StringBuilder();
+        HashMap mapLoadCustomTextList = EdgeLightingSettingUtils.loadCustomTextList(getContext());
+        if (mapLoadCustomTextList == null) {
+            string = "";
         } else {
-            for (Map.Entry entry2 : loadCustomTextList.entrySet()) {
-                sb4.append((String) entry2.getKey());
-                sb4.append(AND_DELEMETER);
-                sb4.append(entry2.getValue());
-                sb4.append(END_DELEMETER);
+            for (Map.Entry entry2 : mapLoadCustomTextList.entrySet()) {
+                sb3.append((String) entry2.getKey());
+                sb3.append(AND_DELEMETER);
+                sb3.append(entry2.getValue());
+                sb3.append(END_DELEMETER);
             }
-            Slog.i("EdgeLightingContentProvider", "makeTextFilterColorListValue " + sb4.toString());
-            sb = sb4.toString();
+            Slog.i("EdgeLightingContentProvider", "makeTextFilterColorListValue " + sb3.toString());
+            string = sb3.toString();
         }
-        matrixCursor4.addRow(new String[]{sb});
+        matrixCursor4.addRow(new String[]{string});
         return matrixCursor4;
     }
 

@@ -35,7 +35,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PinInputRow {
     public final SnapshotStateList entries = new SnapshotStateList();
@@ -66,15 +65,15 @@ public final class PinInputRow {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.bouncer.ui.composable.PinInputRow.Content (PinInputDisplay.kt:367)");
             }
-            float dimensionResource = PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_pin_dot_size, composerImpl) * 32;
+            float fDimensionResource = PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_pin_dot_size, composerImpl) * 32;
             Dp.Companion companion = Dp.Companion;
             Modifier.Companion companion2 = Modifier.Companion;
-            Modifier clipToBounds = ClipKt.clipToBounds(SizeKt.wrapContentHeight$default(SizeKt.m143width3ABfNKs(companion2, dimensionResource), 3));
+            Modifier modifierClipToBounds = ClipKt.clipToBounds(SizeKt.wrapContentHeight$default(SizeKt.m144width3ABfNKs(companion2, fDimensionResource), 3));
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, clipToBounds);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierClipToBounds);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -88,26 +87,26 @@ public final class PinInputRow {
                 composerImpl.useNode();
             }
             Function2 function2 = ComposeUiNode.Companion.SetMeasurePolicy;
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, function2);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, function2);
             Function2 function22 = ComposeUiNode.Companion.SetResolvedCompositionLocals;
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, function22);
             Function2 function23 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function23);
             }
             Function2 function24 = ComposeUiNode.Companion.SetModifier;
-            Updater.m336setimpl(composerImpl, materializeModifier, function24);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, function24);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             BiasAlignment.Vertical vertical = Alignment.Companion.CenterVertically;
             ShapeAnimations shapeAnimations = this.shapeAnimations;
-            Modifier wrapContentSize$default = SizeKt.wrapContentSize$default(SizeKt.m130height3ABfNKs(companion2, shapeAnimations.shapeSize), null, 1);
+            Modifier modifierWrapContentSize$default = SizeKt.wrapContentSize$default(SizeKt.m131height3ABfNKs(companion2, shapeAnimations.shapeSize), null, 1);
             SnapshotStateList snapshotStateList = this.entries;
-            Modifier m128paddingqDBjuR0$default = PaddingKt.m128paddingqDBjuR0$default(wrapContentSize$default, 0.0f, 0.0f, shapeAnimations.shapeSize * Math.max(snapshotStateList.size() - 32, 0), 0.0f, 11);
+            Modifier modifierM129paddingqDBjuR0$default = PaddingKt.m129paddingqDBjuR0$default(modifierWrapContentSize$default, 0.0f, 0.0f, shapeAnimations.shapeSize * Math.max(snapshotStateList.size() - 32, 0), 0.0f, 11);
             Arrangement.INSTANCE.getClass();
             RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(Arrangement.Start, vertical, composerImpl, 48);
             int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, m128paddingqDBjuR0$default);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, modifierM129paddingqDBjuR0$default);
             composerImpl.startReusableNode();
             int i3 = i2;
             if (composerImpl.inserting) {
@@ -115,12 +114,12 @@ public final class PinInputRow {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, rowMeasurePolicy, function2);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope2, function22);
+            Updater.m337setimpl(composerImpl, rowMeasurePolicy, function2);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope2, function22);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash2))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash2, composerImpl, currentCompositeKeyHash2, function23);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier2, function24);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier2, function24);
             RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
             composerImpl.startReplaceGroup(2117625286);
             ListIterator listIterator = snapshotStateList.listIterator();
@@ -137,14 +136,14 @@ public final class PinInputRow {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.bouncer.ui.composable.PinInputRow$$ExternalSyntheticLambda1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.bouncer.ui.composable.PinInputRow$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    PinInputRow.this.Content(pinBouncerViewModel, modifier, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.Content(pinBouncerViewModel, modifier, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

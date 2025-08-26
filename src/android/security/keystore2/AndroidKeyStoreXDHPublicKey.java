@@ -25,9 +25,9 @@ public class AndroidKeyStoreXDHPublicKey extends AndroidKeyStorePublicKey implem
         if (bArr == null) {
             throw new IllegalArgumentException("empty encoded key.");
         }
-        int matchesPreamble = matchesPreamble(X509_PREAMBLE, bArr) | matchesPreamble(X509_PREAMBLE_WITH_NULL, bArr);
-        this.mPreambleLength = matchesPreamble;
-        if (matchesPreamble == 0) {
+        int iMatchesPreamble = matchesPreamble(X509_PREAMBLE, bArr) | matchesPreamble(X509_PREAMBLE_WITH_NULL, bArr);
+        this.mPreambleLength = iMatchesPreamble;
+        if (iMatchesPreamble == 0) {
             throw new IllegalArgumentException("Key size is not correct size");
         }
     }

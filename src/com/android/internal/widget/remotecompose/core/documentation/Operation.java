@@ -102,15 +102,15 @@ public class Operation {
     public int getSizeFields() {
         this.mVarSize = "";
         Iterator<OperationField> it = this.mFields.iterator();
-        int i = 0;
+        int iMax = 0;
         while (it.hasNext()) {
             OperationField next = it.next();
-            i += Math.max(0, next.getSize());
+            iMax += Math.max(0, next.getSize());
             if (next.getSize() < 0) {
                 this.mVarSize += " + " + next.getVarSize() + " x 4";
             }
         }
-        return i;
+        return iMax;
     }
 
     public String getDescription() {

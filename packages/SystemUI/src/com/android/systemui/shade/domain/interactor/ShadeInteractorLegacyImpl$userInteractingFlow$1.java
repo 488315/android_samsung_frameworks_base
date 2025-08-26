@@ -6,11 +6,12 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ StateFlow $expansion;
@@ -18,7 +19,6 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -53,7 +53,6 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -88,7 +87,6 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         /* synthetic */ float F$0;
@@ -141,152 +139,122 @@ final class ShadeInteractorLegacyImpl$userInteractingFlow$1 extends SuspendLambd
         return ((ShadeInteractorLegacyImpl$userInteractingFlow$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x006a, code lost:
-    
-        if (kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0078, code lost:
-    
-        if (r1.emit(r6, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x008b, code lost:
-    
-        if (kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x009e, code lost:
-    
-        if (kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x00ae, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x004d, code lost:
-    
-        if (r1.emit(r6, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x00ac, code lost:
-    
-        if (r1.emit(r6, r5) == r0) goto L30;
-     */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x009e -> B:7:0x00a1). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0050 A[PHI: r1
+      0x0050: PHI (r1v14 kotlinx.coroutines.flow.FlowCollector) = 
+      (r1v2 kotlinx.coroutines.flow.FlowCollector)
+      (r1v4 kotlinx.coroutines.flow.FlowCollector)
+      (r1v15 kotlinx.coroutines.flow.FlowCollector)
+     binds: [B:12:0x004d, B:10:0x0032, B:29:0x00ac] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x005a  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x007b A[PHI: r1
+      0x007b: PHI (r1v12 kotlinx.coroutines.flow.FlowCollector) = (r1v8 kotlinx.coroutines.flow.FlowCollector), (r1v13 kotlinx.coroutines.flow.FlowCollector) binds: [B:8:0x0022, B:20:0x0078] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x008e A[PHI: r1
+      0x008e: PHI (r1v11 kotlinx.coroutines.flow.FlowCollector) = (r1v10 kotlinx.coroutines.flow.FlowCollector), (r1v12 kotlinx.coroutines.flow.FlowCollector) binds: [B:7:0x0019, B:23:0x008b] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x00a1 A[PHI: r1
+      0x00a1: PHI (r1v15 kotlinx.coroutines.flow.FlowCollector) = (r1v11 kotlinx.coroutines.flow.FlowCollector), (r1v17 kotlinx.coroutines.flow.FlowCollector) binds: [B:26:0x009e, B:6:0x0010] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x00af  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:26:0x009e -> B:28:0x00a1). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 0
-            switch(r1) {
-                case 0: goto L3a;
-                case 1: goto L32;
-                case 2: goto L2a;
-                case 3: goto L22;
-                case 4: goto L19;
-                case 5: goto L10;
-                case 6: goto L32;
-                default: goto L8;
-            }
-        L8:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L10:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto La1
-        L19:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L8e
-        L22:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L7b
-        L2a:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L6d
-        L32:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L50
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.Object r6 = r5.L$0
-            r1 = r6
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            java.lang.Boolean r6 = java.lang.Boolean.FALSE
-            r5.L$0 = r1
-            r3 = 1
-            r5.label = r3
-            java.lang.Object r6 = r1.emit(r6, r5)
-            if (r6 != r0) goto L50
-            goto Lae
-        L50:
-            kotlin.coroutines.CoroutineContext r6 = r5.getContext()
-            boolean r6 = kotlinx.coroutines.JobKt.isActive(r6)
-            if (r6 == 0) goto Laf
-            kotlinx.coroutines.flow.Flow r6 = r5.$tracking
-            com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$1 r3 = new com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$1
-            r3.<init>(r2)
-            r5.L$0 = r1
-            r4 = 2
-            r5.label = r4
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5)
-            if (r6 != r0) goto L6d
-            goto Lae
-        L6d:
-            java.lang.Boolean r6 = java.lang.Boolean.TRUE
-            r5.L$0 = r1
-            r3 = 3
-            r5.label = r3
-            java.lang.Object r6 = r1.emit(r6, r5)
-            if (r6 != r0) goto L7b
-            goto Lae
-        L7b:
-            kotlinx.coroutines.flow.Flow r6 = r5.$tracking
-            com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$2 r3 = new com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$2
-            r3.<init>(r2)
-            r5.L$0 = r1
-            r4 = 4
-            r5.label = r4
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5)
-            if (r6 != r0) goto L8e
-            goto Lae
-        L8e:
-            kotlinx.coroutines.flow.StateFlow r6 = r5.$expansion
-            com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$3 r3 = new com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1$3
-            r3.<init>(r2)
-            r5.L$0 = r1
-            r4 = 5
-            r5.label = r4
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r6, r3, r5)
-            if (r6 != r0) goto La1
-            goto Lae
-        La1:
-            java.lang.Boolean r6 = java.lang.Boolean.FALSE
-            r5.L$0 = r1
-            r3 = 6
-            r5.label = r3
-            java.lang.Object r6 = r1.emit(r6, r5)
-            if (r6 != r0) goto L50
-        Lae:
-            return r0
-        Laf:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.domain.interactor.ShadeInteractorLegacyImpl$userInteractingFlow$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        FlowCollector flowCollector;
+        StateFlow stateFlow;
+        AnonymousClass3 anonymousClass3;
+        Flow flow;
+        AnonymousClass2 anonymousClass2;
+        Boolean bool;
+        Boolean bool2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        switch (this.label) {
+            case 0:
+                ResultKt.throwOnFailure(obj);
+                flowCollector = (FlowCollector) this.L$0;
+                Boolean bool3 = Boolean.FALSE;
+                this.L$0 = flowCollector;
+                this.label = 1;
+                if (flowCollector.emit(bool3, this) != coroutineSingletons) {
+                    if (JobKt.isActive(getContext())) {
+                        return Unit.INSTANCE;
+                    }
+                    Flow flow2 = this.$tracking;
+                    AnonymousClass1 anonymousClass1 = new AnonymousClass1(null);
+                    this.L$0 = flowCollector;
+                    this.label = 2;
+                    if (FlowKt.first(flow2, anonymousClass1, this) != coroutineSingletons) {
+                        bool = Boolean.TRUE;
+                        this.L$0 = flowCollector;
+                        this.label = 3;
+                        if (flowCollector.emit(bool, this) != coroutineSingletons) {
+                            flow = this.$tracking;
+                            anonymousClass2 = new AnonymousClass2(null);
+                            this.L$0 = flowCollector;
+                            this.label = 4;
+                            if (FlowKt.first(flow, anonymousClass2, this) != coroutineSingletons) {
+                                stateFlow = this.$expansion;
+                                anonymousClass3 = new AnonymousClass3(null);
+                                this.L$0 = flowCollector;
+                                this.label = 5;
+                                if (FlowKt.first(stateFlow, anonymousClass3, this) != coroutineSingletons) {
+                                    bool2 = Boolean.FALSE;
+                                    this.L$0 = flowCollector;
+                                    this.label = 6;
+                                    if (flowCollector.emit(bool2, this) != coroutineSingletons) {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return coroutineSingletons;
+            case 1:
+            case 6:
+                flowCollector = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                if (JobKt.isActive(getContext())) {
+                }
+                break;
+            case 2:
+                flowCollector = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                bool = Boolean.TRUE;
+                this.L$0 = flowCollector;
+                this.label = 3;
+                if (flowCollector.emit(bool, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 3:
+                flowCollector = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                flow = this.$tracking;
+                anonymousClass2 = new AnonymousClass2(null);
+                this.L$0 = flowCollector;
+                this.label = 4;
+                if (FlowKt.first(flow, anonymousClass2, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 4:
+                flowCollector = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                stateFlow = this.$expansion;
+                anonymousClass3 = new AnonymousClass3(null);
+                this.L$0 = flowCollector;
+                this.label = 5;
+                if (FlowKt.first(stateFlow, anonymousClass3, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 5:
+                flowCollector = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                bool2 = Boolean.FALSE;
+                this.L$0 = flowCollector;
+                this.label = 6;
+                if (flowCollector.emit(bool2, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            default:
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
     }
 }

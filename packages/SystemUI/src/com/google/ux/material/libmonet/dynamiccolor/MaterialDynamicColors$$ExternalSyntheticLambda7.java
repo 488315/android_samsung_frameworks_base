@@ -2,7 +2,6 @@ package com.google.ux.material.libmonet.dynamiccolor;
 
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambda7 implements Function {
     public final /* synthetic */ int $r8$classId;
@@ -48,9 +47,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
             case 14:
                 return dynamicScheme.tertiaryPalette;
             case 15:
-                boolean isMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
+                boolean zIsMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
                 boolean z2 = dynamicScheme.isDark;
-                if (isMonochrome) {
+                if (zIsMonochrome) {
                     return Double.valueOf(z2 ? 10.0d : 90.0d);
                 }
                 return Double.valueOf(z2 ? 20.0d : 100.0d);

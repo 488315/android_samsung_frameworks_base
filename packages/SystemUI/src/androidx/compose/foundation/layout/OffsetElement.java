@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OffsetElement extends ModifierNodeElement<OffsetNode> {
     public final boolean rtlAware;
@@ -32,7 +31,7 @@ final class OffsetElement extends ModifierNodeElement<OffsetNode> {
             return true;
         }
         OffsetElement offsetElement = obj instanceof OffsetElement ? (OffsetElement) obj : null;
-        return offsetElement != null && Dp.m836equalsimpl0(this.x, offsetElement.x) && Dp.m836equalsimpl0(this.y, offsetElement.y) && this.rtlAware == offsetElement.rtlAware;
+        return offsetElement != null && Dp.m838equalsimpl0(this.x, offsetElement.x) && Dp.m838equalsimpl0(this.y, offsetElement.y) && this.rtlAware == offsetElement.rtlAware;
     }
 
     public final int hashCode() {
@@ -52,13 +51,13 @@ final class OffsetElement extends ModifierNodeElement<OffsetNode> {
         OffsetNode offsetNode = (OffsetNode) node;
         float f = offsetNode.x;
         float f2 = this.x;
-        boolean m836equalsimpl0 = Dp.m836equalsimpl0(f, f2);
+        boolean zM838equalsimpl0 = Dp.m838equalsimpl0(f, f2);
         float f3 = this.y;
         boolean z = this.rtlAware;
-        if (!m836equalsimpl0 || !Dp.m836equalsimpl0(offsetNode.y, f3) || offsetNode.rtlAware != z) {
-            LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(offsetNode);
+        if (!zM838equalsimpl0 || !Dp.m838equalsimpl0(offsetNode.y, f3) || offsetNode.rtlAware != z) {
+            LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(offsetNode);
             LayoutNode.Companion companion = LayoutNode.Companion;
-            requireLayoutNode.requestRelayout$ui_release(false);
+            layoutNodeRequireLayoutNode.requestRelayout$ui_release(false);
         }
         offsetNode.x = f2;
         offsetNode.y = f3;

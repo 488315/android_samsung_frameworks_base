@@ -1,22 +1,27 @@
 package com.android.systemui.mediaprojection.permission;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.media.projection.MediaProjectionConfig;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
+import com.android.systemui.mediaprojection.MediaProjectionMetricsLogger;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShareToAppPermissionDialogDelegate extends BaseMediaProjectionPermissionDialogDelegate {
     public static final Companion Companion = new Companion(null);
     public final Runnable onCancelClicked;
     public final Consumer onStartRecordingClicked;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,87 +31,33 @@ public final class ShareToAppPermissionDialogDelegate extends BaseMediaProjectio
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ShareToAppPermissionDialogDelegate(android.content.Context r19, android.media.projection.MediaProjectionConfig r20, java.util.function.Consumer<com.android.systemui.mediaprojection.permission.BaseMediaProjectionPermissionDialogDelegate> r21, java.lang.Runnable r22, java.lang.String r23, boolean r24, int r25, com.android.systemui.mediaprojection.MediaProjectionMetricsLogger r26) {
-        /*
-            r18 = this;
-            com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate$Companion r0 = com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate.Companion
-            r0.getClass()
-            com.android.systemui.mediaprojection.permission.MediaProjectionPermissionUtils r0 = com.android.systemui.mediaprojection.permission.MediaProjectionPermissionUtils.INSTANCE
-            r0.getClass()
-            if (r24 != 0) goto L24
-            if (r20 == 0) goto L24
-            int r0 = r20.getRegionToCapture()
-            r1 = 1
-            if (r0 != r1) goto L24
-            r0 = 2131954951(0x7f130d07, float:1.9546416E38)
-            java.lang.Object[] r1 = new java.lang.Object[]{r23}
-            r2 = r19
-            java.lang.String r0 = r2.getString(r0, r1)
-        L22:
-            r7 = r0
-            goto L26
-        L24:
-            r0 = 0
-            goto L22
-        L26:
-            com.android.systemui.mediaprojection.permission.ScreenShareOption r1 = new com.android.systemui.mediaprojection.permission.ScreenShareOption
-            r6 = 0
-            r8 = 0
-            r2 = 0
-            r3 = 2131954950(0x7f130d06, float:1.9546414E38)
-            r4 = 2131954955(0x7f130d0b, float:1.9546424E38)
-            r5 = 2131954964(0x7f130d14, float:1.9546442E38)
-            r9 = 80
-            r10 = 0
-            r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10)
-            com.android.systemui.mediaprojection.permission.ScreenShareOption r8 = new com.android.systemui.mediaprojection.permission.ScreenShareOption
-            r14 = 0
-            r15 = 0
-            r9 = 1
-            r10 = 2131954949(0x7f130d05, float:1.9546412E38)
-            r11 = 2131954954(0x7f130d0a, float:1.9546422E38)
-            r12 = 2131954948(0x7f130d04, float:1.954641E38)
-            r13 = 0
-            r16 = 112(0x70, float:1.57E-43)
-            r17 = 0
-            r8.<init>(r9, r10, r11, r12, r13, r14, r15, r16, r17)
-            com.android.systemui.mediaprojection.permission.ScreenShareOption[] r0 = new com.android.systemui.mediaprojection.permission.ScreenShareOption[]{r1, r8}
-            java.util.List r0 = java.util.Arrays.asList(r0)
-            if (r7 == 0) goto L60
-            java.lang.Iterable r0 = (java.lang.Iterable) r0
-            java.util.List r0 = kotlin.collections.CollectionsKt___CollectionsKt.reversed(r0)
-        L60:
-            r1 = r0
-            r0 = 2131233470(0x7f080abe, float:1.8083078E38)
-            java.lang.Integer r5 = java.lang.Integer.valueOf(r0)
-            r6 = 0
-            r7 = 0
-            r8 = 96
-            r9 = 0
-            r0 = r18
-            r2 = r23
-            r3 = r25
-            r4 = r26
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9)
-            r1 = r21
-            r0.onStartRecordingClicked = r1
-            r1 = r22
-            r0.onCancelClicked = r1
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate.<init>(android.content.Context, android.media.projection.MediaProjectionConfig, java.util.function.Consumer, java.lang.Runnable, java.lang.String, boolean, int, com.android.systemui.mediaprojection.MediaProjectionMetricsLogger):void");
+    public ShareToAppPermissionDialogDelegate(Context context, MediaProjectionConfig mediaProjectionConfig, Consumer<BaseMediaProjectionPermissionDialogDelegate> consumer, Runnable runnable, String str, boolean z, int i, MediaProjectionMetricsLogger mediaProjectionMetricsLogger) {
+        Context context2;
+        String string;
+        Companion.getClass();
+        MediaProjectionPermissionUtils.INSTANCE.getClass();
+        if (z || mediaProjectionConfig == null || mediaProjectionConfig.getRegionToCapture() != 1) {
+            context2 = context;
+            string = null;
+        } else {
+            context2 = context;
+            string = context2.getString(R.string.media_projection_entry_app_permission_dialog_single_app_disabled, str);
+        }
+        String str2 = string;
+        Display display = context2.getDisplay();
+        ScreenShareOption screenShareOption = new ScreenShareOption(0, R.string.media_projection_entry_app_permission_dialog_option_text_single_app, R.string.media_projection_entry_app_permission_dialog_warning_single_app, R.string.media_projection_entry_generic_permission_dialog_continue_single_app, display != null ? display.getDisplayId() : 0, str2, null, 64, null);
+        Display display2 = context2.getDisplay();
+        List listAsList = Arrays.asList(screenShareOption, new ScreenShareOption(1, R.string.media_projection_entry_app_permission_dialog_option_text_entire_screen, R.string.media_projection_entry_app_permission_dialog_warning_entire_screen, R.string.media_projection_entry_app_permission_dialog_continue_entire_screen, display2 != null ? display2.getDisplayId() : 0, null, null, 96, null));
+        super(str2 != null ? CollectionsKt___CollectionsKt.reversed(listAsList) : listAsList, str, i, mediaProjectionMetricsLogger, Integer.valueOf(R.drawable.ic_present_to_all), null, 0, 96, null);
+        this.onStartRecordingClicked = consumer;
+        this.onCancelClicked = runnable;
     }
 
     @Override // com.android.systemui.mediaprojection.permission.BaseMediaProjectionPermissionDialogDelegate, com.android.systemui.statusbar.phone.DialogDelegate
     public final void onCreate(final AlertDialog alertDialog, Bundle bundle) {
         super.onCreate(alertDialog, bundle);
         setDialogTitle(BasicRune.MEDIA_PROJECTION_PERMISSION_CLAIM_CAPTURE ? R.string.media_projection_dialog_title_chn : R.string.media_projection_entry_app_permission_dialog_title);
-        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate$onCreate$1
+        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate.onCreate.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 ShareToAppPermissionDialogDelegate shareToAppPermissionDialogDelegate = ShareToAppPermissionDialogDelegate.this;
@@ -123,7 +74,7 @@ public final class ShareToAppPermissionDialogDelegate extends BaseMediaProjectio
             textView = null;
         }
         textView.setOnClickListener(new BaseMediaProjectionPermissionViewBinder$setStartButtonOnClickListener$1(baseMediaProjectionPermissionViewBinder, onClickListener));
-        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate$onCreate$2
+        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.mediaprojection.permission.ShareToAppPermissionDialogDelegate.onCreate.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 ShareToAppPermissionDialogDelegate.this.onCancelClicked.run();

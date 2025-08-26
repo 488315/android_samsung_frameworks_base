@@ -17,6 +17,7 @@ import android.view.Window;
 import com.samsung.android.core.AppJumpBlockTool;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /* loaded from: classes6.dex */
@@ -48,24 +49,26 @@ class IAFDServiceImpl {
         this.mHandler.handleMessage(message);
     }
 
-    private int getDualUserIdAndIsNoSettingsProvidersOfDual() {
+    private int getDualUserIdAndIsNoSettingsProvidersOfDual() throws InterruptedException, IOException, NumberFormatException {
         int i = 0;
         try {
-            Process exec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "dumpsys package com.android.providers.settings | grep User"});
-            exec.waitFor();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(exec.getInputStream()));
+            Process processExec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "dumpsys package com.android.providers.settings | grep User"});
+            processExec.waitFor();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processExec.getInputStream()));
             int i2 = 1000;
             while (true) {
-                String readLine = bufferedReader.readLine();
-                if (readLine == null) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
                     break;
                 }
                 i2--;
-                if (readLine.startsWith("    User ") && !readLine.startsWith("    User 0") && readLine.contains("installed=false")) {
-                    int parseInt = Integer.parseInt(readLine.substring(9, readLine.indexOf(58)));
-                    if (parseInt >= 0) {
-                        i = parseInt;
+                if (line.startsWith("    User ") && !line.startsWith("    User 0") && line.contains("installed=false")) {
+                    int i3 = Integer.parseInt(line.substring(9, line.indexOf(58)));
+                    if (i3 >= 0) {
+                        i = i3;
                     }
+                } else if (i2 < 0) {
+                    break;
                 }
             }
             bufferedReader.close();
@@ -96,11 +99,11 @@ class IAFDServiceImpl {
             }
             if (i == 2) {
                 Bundle data2 = message.getData();
-                boolean repairHandle = IAFDServiceImpl.this.mIAFDRepair.repairHandle(IAFDServiceImpl.this.mContext, data2);
+                boolean zRepairHandle = IAFDServiceImpl.this.mIAFDRepair.repairHandle(IAFDServiceImpl.this.mContext, data2);
                 if (data2.getString("repairTrigAPP", "vocApp").equals("vocApp") && data2.getInt("OneKeyRepairMode") == 1) {
                     Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("voc://view/faq?app=iafd"));
                     intent.putExtras(data2);
-                    intent.putExtra("repairResult", repairHandle);
+                    intent.putExtra("repairResult", zRepairHandle);
                     intent.addFlags(268435456);
                     IAFDServiceImpl.this.mContext.startActivity(intent);
                     return;
@@ -192,8 +195,8 @@ class IAFDServiceImpl {
                     dialogInterface.cancel();
                 }
             });
-            AlertDialog create = builder.create();
-            Window window = create.getWindow();
+            AlertDialog alertDialogCreate = builder.create();
+            Window window = alertDialogCreate.getWindow();
             window.setBackgroundDrawable(new ColorDrawable(0));
             window.setGravity(80);
             window.setType(2008);
@@ -203,7 +206,7 @@ class IAFDServiceImpl {
             gradientDrawable.setCornerRadius(50.0f);
             gradientDrawable.setStroke(5, -1);
             window.setBackgroundDrawable(gradientDrawable);
-            create.show();
+            alertDialogCreate.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

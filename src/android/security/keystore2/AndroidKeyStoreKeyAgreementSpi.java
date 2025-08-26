@@ -70,7 +70,7 @@ public class AndroidKeyStoreKeyAgreementSpi extends KeyAgreementSpi implements K
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean z) throws InvalidKeyException, IllegalStateException {
+    protected Key engineDoPhase(Key key, boolean z) throws IllegalStateException, InvalidKeyException {
         ensureKeystoreOperationInitialized();
         if (key == null) {
             throw new InvalidKeyException("key == null");
@@ -126,12 +126,12 @@ public class AndroidKeyStoreKeyAgreementSpi extends KeyAgreementSpi implements K
 
     @Override // javax.crypto.KeyAgreementSpi
     protected int engineGenerateSecret(byte[] bArr, int i) throws IllegalStateException, ShortBufferException {
-        byte[] engineGenerateSecret = engineGenerateSecret();
-        if (engineGenerateSecret.length > bArr.length - i) {
-            throw new ShortBufferException("Needed: " + engineGenerateSecret.length);
+        byte[] bArrEngineGenerateSecret = engineGenerateSecret();
+        if (bArrEngineGenerateSecret.length > bArr.length - i) {
+            throw new ShortBufferException("Needed: " + bArrEngineGenerateSecret.length);
         }
-        System.arraycopy(engineGenerateSecret, 0, bArr, i, engineGenerateSecret.length);
-        return engineGenerateSecret.length;
+        System.arraycopy(bArrEngineGenerateSecret, 0, bArr, i, bArrEngineGenerateSecret.length);
+        return bArrEngineGenerateSecret.length;
     }
 
     @Override // android.security.keystore.KeyStoreCryptoOperation
@@ -159,7 +159,7 @@ public class AndroidKeyStoreKeyAgreementSpi extends KeyAgreementSpi implements K
         this.mKey = null;
     }
 
-    private void ensureKeystoreOperationInitialized() throws InvalidKeyException, IllegalStateException {
+    private void ensureKeystoreOperationInitialized() throws IllegalStateException, InvalidKeyException {
         if (this.mKey == null) {
             throw new IllegalStateException("Not initialized");
         }

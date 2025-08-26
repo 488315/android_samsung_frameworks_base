@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NotificationsKt$scrollNotificationStack$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $remainingDelta;
@@ -20,7 +19,6 @@ final class NotificationsKt$scrollNotificationStack$2 extends SuspendLambda impl
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.notifications.ui.composable.NotificationsKt$scrollNotificationStack$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ int $remainingDelta;
@@ -54,11 +52,11 @@ final class NotificationsKt$scrollNotificationStack$2 extends SuspendLambda impl
                 int i2 = this.$remainingDelta;
                 this.label = 1;
                 ScrollState.Companion companion = ScrollState.Companion;
-                Object animateScrollBy = ScrollExtensionsKt.animateScrollBy(scrollState, i2 - scrollState.getValue(), new SpringSpec(0.0f, 0.0f, null, 7, null), this);
-                if (animateScrollBy != obj2) {
-                    animateScrollBy = Unit.INSTANCE;
+                Object objAnimateScrollBy = ScrollExtensionsKt.animateScrollBy(scrollState, i2 - scrollState.getValue(), new SpringSpec(0.0f, 0.0f, null, 7, null), this);
+                if (objAnimateScrollBy != obj2) {
+                    objAnimateScrollBy = Unit.INSTANCE;
                 }
-                if (animateScrollBy == obj2) {
+                if (objAnimateScrollBy == obj2) {
                     return obj2;
                 }
             } else {

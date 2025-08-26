@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PagerState$scrollToPage$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $page;
@@ -44,11 +43,11 @@ public final class PagerState$scrollToPage$2 extends SuspendLambda implements Fu
             ResultKt.throwOnFailure(obj);
             PagerState pagerState = this.this$0;
             this.label = 1;
-            Object waitForFirstLayout = pagerState.awaitLayoutModifier.waitForFirstLayout(this);
-            if (waitForFirstLayout != coroutineSingletons) {
-                waitForFirstLayout = Unit.INSTANCE;
+            Object objWaitForFirstLayout = pagerState.awaitLayoutModifier.waitForFirstLayout(this);
+            if (objWaitForFirstLayout != coroutineSingletons) {
+                objWaitForFirstLayout = Unit.INSTANCE;
             }
-            if (waitForFirstLayout == coroutineSingletons) {
+            if (objWaitForFirstLayout == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

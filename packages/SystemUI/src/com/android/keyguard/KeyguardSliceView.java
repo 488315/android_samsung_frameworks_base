@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSliceView extends LinearLayout {
     public boolean mHasHeader;
@@ -42,7 +41,6 @@ public class KeyguardSliceView extends LinearLayout {
     public int mTextColor;
     TextView mTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class KeyguardSliceTextView extends TextView {
         public KeyguardSliceTextView(Context context) {
             super(context, null, 0, R.style.TextAppearance_Keyguard_Secondary);
@@ -80,14 +78,13 @@ public class KeyguardSliceView extends LinearLayout {
         }
 
         public final void updatePadding() {
-            boolean isEmpty = TextUtils.isEmpty(getText());
+            boolean zIsEmpty = TextUtils.isEmpty(getText());
             int dimension = ((int) getContext().getResources().getDimension(R.dimen.widget_horizontal_padding)) / 2;
-            setPadding(0, dimension, 0, !isEmpty ? dimension : 0);
+            setPadding(0, dimension, 0, !zIsEmpty ? dimension : 0);
             setCompoundDrawablePadding((int) ((TextView) this).mContext.getResources().getDimension(R.dimen.widget_icon_padding));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Row extends LinearLayout {
         public final Set mKeyguardSliceTextViewSet;
         public LayoutTransition mLayoutTransition;
@@ -114,9 +111,9 @@ public class KeyguardSliceView extends LinearLayout {
             LayoutTransition layoutTransition = new LayoutTransition();
             this.mLayoutTransition = layoutTransition;
             layoutTransition.setDuration(550L);
-            ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(null, PropertyValuesHolder.ofInt("left", 0, 1), PropertyValuesHolder.ofInt("right", 0, 1));
-            this.mLayoutTransition.setAnimator(0, ofPropertyValuesHolder);
-            this.mLayoutTransition.setAnimator(1, ofPropertyValuesHolder);
+            ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(null, PropertyValuesHolder.ofInt("left", 0, 1), PropertyValuesHolder.ofInt("right", 0, 1));
+            this.mLayoutTransition.setAnimator(0, objectAnimatorOfPropertyValuesHolder);
+            this.mLayoutTransition.setAnimator(1, objectAnimatorOfPropertyValuesHolder);
             LayoutTransition layoutTransition2 = this.mLayoutTransition;
             Interpolator interpolator = Interpolators.ACCELERATE_DECELERATE;
             layoutTransition2.setInterpolator(0, interpolator);
@@ -125,10 +122,10 @@ public class KeyguardSliceView extends LinearLayout {
             this.mLayoutTransition.setStartDelay(1, 550L);
             this.mLayoutTransition.setAnimator(2, ObjectAnimator.ofFloat((Object) null, "alpha", 0.0f, 1.0f));
             this.mLayoutTransition.setInterpolator(2, Interpolators.ALPHA_IN);
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
             this.mLayoutTransition.setInterpolator(3, Interpolators.ALPHA_OUT);
             this.mLayoutTransition.setDuration(3, 137L);
-            this.mLayoutTransition.setAnimator(3, ofFloat);
+            this.mLayoutTransition.setAnimator(3, objectAnimatorOfFloat);
             this.mLayoutTransition.setAnimateParentHierarchy(false);
         }
 
@@ -242,18 +239,18 @@ public class KeyguardSliceView extends LinearLayout {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final Map showSlice(RowContent rowContent, List list) {
-        Drawable drawable;
+        Drawable drawableLoadDrawable;
         Trace.beginSection("KeyguardSliceView#showSlice");
         int i = 0;
         this.mHasHeader = rowContent != null;
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (this.mHasHeader) {
             this.mTitle.setVisibility(0);
             SliceItem sliceItem = rowContent.mTitleItem;
             this.mTitle.setText(sliceItem != null ? (CharSequence) sliceItem.mObj : null);
             SliceItem sliceItem2 = rowContent.mPrimaryAction;
             if (sliceItem2 != null && sliceItem2.getAction() != null) {
-                hashMap.put(this.mTitle, rowContent.mPrimaryAction.getAction());
+                map.put(this.mTitle, rowContent.mPrimaryAction.getAction());
             }
         } else {
             this.mTitle.setVisibility(8);
@@ -268,47 +265,47 @@ public class KeyguardSliceView extends LinearLayout {
         for (int i2 = z; i2 < size; i2++) {
             RowContent rowContent2 = (RowContent) list.get(i2);
             SliceItem sliceItem3 = rowContent2.mSliceItem;
-            Uri parse = Uri.parse(sliceItem3.getSlice().mUri);
-            KeyguardSliceTextView keyguardSliceTextView = (KeyguardSliceTextView) this.mRow.findViewWithTag(parse);
+            Uri uri = Uri.parse(sliceItem3.getSlice().mUri);
+            KeyguardSliceTextView keyguardSliceTextView = (KeyguardSliceTextView) this.mRow.findViewWithTag(uri);
             if (keyguardSliceTextView == null) {
                 keyguardSliceTextView = new KeyguardSliceTextView(((LinearLayout) this).mContext);
                 keyguardSliceTextView.setTextColor(textColor);
-                keyguardSliceTextView.setTag(parse);
+                keyguardSliceTextView.setTag(uri);
                 this.mRow.addView(keyguardSliceTextView, i2 - (this.mHasHeader ? 1 : 0));
             }
             SliceItem sliceItem4 = rowContent2.mPrimaryAction;
             PendingIntent action = sliceItem4 != null ? sliceItem4.getAction() : null;
-            hashMap.put(keyguardSliceTextView, action);
+            map.put(keyguardSliceTextView, action);
             SliceItem sliceItem5 = rowContent2.mTitleItem;
             keyguardSliceTextView.setText(sliceItem5 == null ? null : (CharSequence) sliceItem5.mObj);
             SliceItem sliceItem6 = rowContent2.mContentDescr;
             keyguardSliceTextView.setContentDescription(sliceItem6 != null ? (CharSequence) sliceItem6.mObj : null);
-            SliceItem find = SliceQuery.find(sliceItem3.getSlice(), "image", (String[]) null, (String[]) null);
-            if (find != null) {
+            SliceItem sliceItemFind = SliceQuery.find(sliceItem3.getSlice(), "image", (String[]) null, (String[]) null);
+            if (sliceItemFind != null) {
                 int i3 = this.mHasHeader ? this.mIconSizeWithHeader : this.mIconSize;
-                drawable = ((IconCompat) find.mObj).loadDrawable(((LinearLayout) this).mContext);
-                if (drawable != null) {
-                    if (drawable instanceof InsetDrawable) {
-                        drawable = ((InsetDrawable) drawable).getDrawable();
+                drawableLoadDrawable = ((IconCompat) sliceItemFind.mObj).loadDrawable(((LinearLayout) this).mContext);
+                if (drawableLoadDrawable != null) {
+                    if (drawableLoadDrawable instanceof InsetDrawable) {
+                        drawableLoadDrawable = ((InsetDrawable) drawableLoadDrawable).getDrawable();
                     }
-                    drawable.setBounds(0, 0, Math.max((int) ((drawable.getIntrinsicWidth() / drawable.getIntrinsicHeight()) * i3), 1), i3);
+                    drawableLoadDrawable.setBounds(0, 0, Math.max((int) ((drawableLoadDrawable.getIntrinsicWidth() / drawableLoadDrawable.getIntrinsicHeight()) * i3), 1), i3);
                 }
             } else {
-                drawable = null;
+                drawableLoadDrawable = null;
             }
-            keyguardSliceTextView.setCompoundDrawablesRelative(drawable, null, null, null);
+            keyguardSliceTextView.setCompoundDrawablesRelative(drawableLoadDrawable, null, null, null);
             keyguardSliceTextView.setOnClickListener(this.mOnClickListener);
             keyguardSliceTextView.setClickable(action != null);
         }
         while (i < this.mRow.getChildCount()) {
             View childAt = this.mRow.getChildAt(i);
-            if (!hashMap.containsKey(childAt)) {
+            if (!map.containsKey(childAt)) {
                 this.mRow.removeView(childAt);
                 i--;
             }
             i++;
         }
         Trace.endSection();
-        return hashMap;
+        return map;
     }
 }

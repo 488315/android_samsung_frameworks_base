@@ -3,29 +3,34 @@ package com.android.keyguard;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
+import androidx.core.app.NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController;
 import com.android.keyguard.KeyguardInputViewController;
 import com.android.keyguard.KeyguardSecurityModel;
+import com.android.systemui.Dependency;
+import com.android.systemui.LsRune;
+import com.android.systemui.R;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.Flags;
+import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecurityViewFlipperController extends ViewController {
     public final AsyncLayoutInflater mAsyncLayoutInflater;
     public final List mChildren;
     public final FeatureFlags mFeatureFlags;
     public final KeyguardInputViewController.Factory mKeyguardSecurityViewControllerFactory;
-    public final List mOnViewInflatedListeners;
+    public final HashMap mOnViewInflatedListenerMap;
     public final Set mSecurityModeInProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecurityViewFlipperController$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -96,7 +101,6 @@ public class KeyguardSecurityViewFlipperController extends ViewController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnViewInflatedCallback {
         void onViewInflated(KeyguardInputViewController keyguardInputViewController);
     }
@@ -106,19 +110,24 @@ public class KeyguardSecurityViewFlipperController extends ViewController {
         ((KeyguardSecurityViewFlipper) keyguardSecurityViewFlipperController.mView).addView(view);
         Log.d("KeyguardSecurityView", "asynchronouslyInflateView layoutId = " + i + " securityMode = " + securityMode);
         ((HashSet) keyguardSecurityViewFlipperController.mSecurityModeInProgress).remove(securityMode);
-        KeyguardInputViewController create = keyguardSecurityViewFlipperController.mKeyguardSecurityViewControllerFactory.create((KeyguardInputView) view, securityMode, keyguardSecurityCallback);
-        create.init();
-        ((ArrayList) keyguardSecurityViewFlipperController.mChildren).add(create);
-        synchronized (keyguardSecurityViewFlipperController.mOnViewInflatedListeners) {
-            arrayList = new ArrayList(keyguardSecurityViewFlipperController.mOnViewInflatedListeners);
-            ((ArrayList) keyguardSecurityViewFlipperController.mOnViewInflatedListeners).clear();
+        KeyguardInputViewController keyguardInputViewControllerCreate = keyguardSecurityViewFlipperController.mKeyguardSecurityViewControllerFactory.create((KeyguardInputView) view, securityMode, keyguardSecurityCallback);
+        keyguardInputViewControllerCreate.init();
+        ((ArrayList) keyguardSecurityViewFlipperController.mChildren).add(keyguardInputViewControllerCreate);
+        synchronized (keyguardSecurityViewFlipperController.mOnViewInflatedListenerMap) {
+            try {
+                List list = (List) keyguardSecurityViewFlipperController.mOnViewInflatedListenerMap.get(securityMode);
+                arrayList = list != null ? new ArrayList(list) : new ArrayList();
+                keyguardSecurityViewFlipperController.mOnViewInflatedListenerMap.remove(securityMode);
+            } catch (Throwable th) {
+                throw th;
+            }
         }
         int size = arrayList.size();
         int i2 = 0;
         while (i2 < size) {
             Object obj = arrayList.get(i2);
             i2++;
-            ((OnViewInflatedCallback) obj).onViewInflated(create);
+            ((OnViewInflatedCallback) obj).onViewInflated(keyguardInputViewControllerCreate);
         }
         FeatureFlags featureFlags = keyguardSecurityViewFlipperController.mFeatureFlags;
         Flags flags = Flags.INSTANCE;
@@ -128,7 +137,8 @@ public class KeyguardSecurityViewFlipperController extends ViewController {
     public KeyguardSecurityViewFlipperController(KeyguardSecurityViewFlipper keyguardSecurityViewFlipper, LayoutInflater layoutInflater, AsyncLayoutInflater asyncLayoutInflater, KeyguardInputViewController.Factory factory, EmergencyButtonController.Factory factory2, FeatureFlags featureFlags) {
         super(keyguardSecurityViewFlipper);
         this.mChildren = new ArrayList();
-        this.mOnViewInflatedListeners = new ArrayList();
+        new ArrayList();
+        this.mOnViewInflatedListenerMap = new HashMap();
         this.mSecurityModeInProgress = new HashSet();
         this.mKeyguardSecurityViewControllerFactory = factory;
         this.mAsyncLayoutInflater = asyncLayoutInflater;
@@ -140,68 +150,155 @@ public class KeyguardSecurityViewFlipperController extends ViewController {
         ((ArrayList) this.mChildren).clear();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0082, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x0096, code lost:
     
-        if (r12 != 4) goto L71;
+        if (r11 != 4) goto L75;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x008a, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x008c, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_pin_view_tablet;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x008f, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_pin_view;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0096, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L32;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0098, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_password_view_tablet;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x009b, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_password_view;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00a2, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x00a4, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_pattern_view_tablet;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00a7, code lost:
-    
-        r2 = com.android.systemui.R.layout.keyguard_sec_pattern_view;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0103, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L32;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x010a, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x0112, code lost:
-    
-        if (com.android.systemui.util.DeviceType.isTablet() != false) goto L36;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00a0  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00a3  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00ac  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00af  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00b8  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00bb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void getSecurityView(final com.android.keyguard.KeyguardSecurityModel.SecurityMode r10, final com.android.keyguard.KeyguardSecurityCallback r11, com.android.keyguard.KeyguardSecurityViewFlipperController.OnViewInflatedCallback r12) {
-        /*
-            Method dump skipped, instructions count: 340
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecurityViewFlipperController.getSecurityView(com.android.keyguard.KeyguardSecurityModel$SecurityMode, com.android.keyguard.KeyguardSecurityCallback, com.android.keyguard.KeyguardSecurityViewFlipperController$OnViewInflatedCallback):void");
+    public void getSecurityView(final KeyguardSecurityModel.SecurityMode securityMode, final KeyguardSecurityCallback keyguardSecurityCallback, OnViewInflatedCallback onViewInflatedCallback) throws InterruptedException {
+        ArrayList arrayList = (ArrayList) this.mChildren;
+        int size = arrayList.size();
+        final int i = 0;
+        int i2 = 0;
+        while (i2 < size) {
+            Object obj = arrayList.get(i2);
+            i2++;
+            KeyguardInputViewController keyguardInputViewController = (KeyguardInputViewController) obj;
+            if (keyguardInputViewController.mSecurityMode == securityMode) {
+                onViewInflatedCallback.onViewInflated(keyguardInputViewController);
+                return;
+            }
+        }
+        synchronized (this.mOnViewInflatedListenerMap) {
+            try {
+                this.mOnViewInflatedListenerMap.putIfAbsent(securityMode, new ArrayList());
+                List list = (List) this.mOnViewInflatedListenerMap.get(securityMode);
+                if (list != null) {
+                    list.add(onViewInflatedCallback);
+                }
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
+        if (((HashSet) this.mSecurityModeInProgress).contains(securityMode)) {
+            return;
+        }
+        ((HashSet) this.mSecurityModeInProgress).add(securityMode);
+        Log.d("KeyguardSecurityView", "getLayoutIdFor securityMode = " + securityMode);
+        switch (AnonymousClass1.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[securityMode.ordinal()]) {
+            case 1:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_sec_pattern_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_sec_pattern_view_tablet;
+                    break;
+                }
+            case 2:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_sec_pin_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_sec_pin_view_tablet;
+                    break;
+                }
+            case 3:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_sec_password_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_sec_password_view_tablet;
+                    break;
+                }
+            case 4:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_sec_sim_pin_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_sec_sim_pin_view_tablet;
+                    break;
+                }
+            case 5:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_sec_sim_puk_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_sec_sim_puk_view_tablet;
+                    break;
+                }
+            case 6:
+                if (LsRune.SECURITY_SIM_PERSO_LOCK) {
+                    i = R.layout.keyguard_sec_sim_perso_view;
+                    break;
+                }
+            case 7:
+                i = R.layout.keyguard_permanent_view;
+                break;
+            case 8:
+                if (LsRune.SECURITY_SWIPE_BOUNCER) {
+                    i = R.layout.keyguard_swipe_view;
+                    break;
+                }
+            case 9:
+                i = R.layout.keyguard_admin_view;
+                break;
+            case 10:
+                if (!DeviceType.isTablet()) {
+                    i = R.layout.keyguard_fmm_view;
+                    break;
+                } else {
+                    i = R.layout.keyguard_fmm_view_tablet;
+                    break;
+                }
+            case 11:
+                i = R.layout.keyguard_knox_guard_view;
+                break;
+            case 12:
+                i = R.layout.keyguard_carrier_view;
+                break;
+            case 13:
+                i = R.layout.keyguard_carrier_password_view;
+                break;
+            case 14:
+                i = R.layout.keyguard_ucm_view;
+                break;
+            case 15:
+                int prevCredentialType = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).getPrevCredentialType();
+                if (prevCredentialType != 1) {
+                    if (prevCredentialType != 2) {
+                        if (prevCredentialType != 3) {
+                            break;
+                        } else if (DeviceType.isTablet()) {
+                        }
+                    }
+                    if (DeviceType.isTablet()) {
+                    }
+                } else if (DeviceType.isTablet()) {
+                }
+                break;
+        }
+        if (i != 0) {
+            NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "inflating on bg thread id = ", " .", "KeyguardSecurityView");
+            AsyncLayoutInflater asyncLayoutInflater = this.mAsyncLayoutInflater;
+            asyncLayoutInflater.inflateInternal(i, (ViewGroup) this.mView, new AsyncLayoutInflater.OnInflateFinishedListener() { // from class: com.android.keyguard.KeyguardSecurityViewFlipperController$$ExternalSyntheticLambda0
+                @Override // androidx.asynclayoutinflater.view.AsyncLayoutInflater.OnInflateFinishedListener
+                public final void onInflateFinished(int i3, View view, ViewGroup viewGroup) {
+                    KeyguardSecurityViewFlipperController.$r8$lambda$dwzoxrh2ePlPnwmsrWRxF3KbrBc(this.f$0, i, securityMode, keyguardSecurityCallback, view);
+                }
+            }, asyncLayoutInflater.mInflater);
+        } else {
+            synchronized (this.mOnViewInflatedListenerMap) {
+                this.mOnViewInflatedListenerMap.remove(securityMode);
+            }
+        }
     }
 
     public final void reset$1() {

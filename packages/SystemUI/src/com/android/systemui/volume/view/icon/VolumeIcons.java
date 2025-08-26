@@ -6,7 +6,6 @@ import java.util.HashMap;
 import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeIcons {
     public static final HashMap MUTE_ICONS;
@@ -14,8 +13,8 @@ public final class VolumeIcons {
 
     static {
         new VolumeIcons();
-        Integer valueOf = Integer.valueOf(R.drawable.tw_ic_audio_sound_ringtone);
-        NORMAL_ICONS = MapsKt__MapsKt.hashMapOf(new Pair(2, valueOf), new Pair(3, Integer.valueOf(R.drawable.tw_ic_audio_media_note)), new Pair(1, Integer.valueOf(R.drawable.tw_ic_audio_system_mtrl)), new Pair(5, Integer.valueOf(R.drawable.tw_ic_audio_noti_mtrl)), new Pair(10, Integer.valueOf(R.drawable.tw_ic_audio_accessibility_mtrl)), new Pair(4, Integer.valueOf(R.drawable.tw_ic_audio_alarm_mtrl)), new Pair(0, Integer.valueOf(R.drawable.tw_ic_audio_call_mtrl)), new Pair(6, Integer.valueOf(R.drawable.tw_ic_audio_call_bt_mtrl)), new Pair(11, Integer.valueOf(R.drawable.tw_ic_ai_assistant)), new Pair(20, valueOf), new Pair(21, Integer.valueOf(R.drawable.tw_ic_audio_media_note)), new Pair(22, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)), new Pair(23, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)));
+        Integer numValueOf = Integer.valueOf(R.drawable.tw_ic_audio_sound_ringtone);
+        NORMAL_ICONS = MapsKt__MapsKt.hashMapOf(new Pair(2, numValueOf), new Pair(3, Integer.valueOf(R.drawable.tw_ic_audio_media_note)), new Pair(1, Integer.valueOf(R.drawable.tw_ic_audio_system_mtrl)), new Pair(5, Integer.valueOf(R.drawable.tw_ic_audio_noti_mtrl)), new Pair(10, Integer.valueOf(R.drawable.tw_ic_audio_accessibility_mtrl)), new Pair(4, Integer.valueOf(R.drawable.tw_ic_audio_alarm_mtrl)), new Pair(0, Integer.valueOf(R.drawable.tw_ic_audio_call_mtrl)), new Pair(6, Integer.valueOf(R.drawable.tw_ic_audio_call_bt_mtrl)), new Pair(11, Integer.valueOf(R.drawable.tw_ic_ai_assistant)), new Pair(20, numValueOf), new Pair(21, Integer.valueOf(R.drawable.tw_ic_audio_media_note)), new Pair(22, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)), new Pair(23, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)));
         MUTE_ICONS = MapsKt__MapsKt.hashMapOf(new Pair(2, Integer.valueOf(R.drawable.tw_ic_audio_mute_mtrl)), new Pair(3, Integer.valueOf(R.drawable.tw_ic_audio_media_mute_mtrl)), new Pair(1, Integer.valueOf(R.drawable.tw_ic_audio_system_mute_mtrl)), new Pair(5, Integer.valueOf(R.drawable.tw_ic_audio_noti_mute_mtrl)), new Pair(10, Integer.valueOf(R.drawable.tw_ic_audio_accessibility_mtrl)), new Pair(4, Integer.valueOf(R.drawable.tw_ic_audio_alarm_mtrl)), new Pair(0, Integer.valueOf(R.drawable.tw_ic_audio_call_mtrl)), new Pair(6, Integer.valueOf(R.drawable.tw_ic_audio_call_bt_mtrl)), new Pair(11, Integer.valueOf(R.drawable.tw_ic_ai_assistant)), new Pair(20, Integer.valueOf(R.drawable.tw_ic_audio_mute_mtrl)), new Pair(21, Integer.valueOf(R.drawable.tw_ic_audio_media_mute_mtrl)), new Pair(22, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)), new Pair(23, Integer.valueOf(R.drawable.tw_ic_audio_bluetooth_mtrl)));
     }
 

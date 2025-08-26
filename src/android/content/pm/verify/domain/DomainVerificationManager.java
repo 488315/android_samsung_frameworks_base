@@ -100,14 +100,14 @@ public final class DomainVerificationManager {
         try {
             return this.mDomainVerificationManager.getDomainVerificationInfo(str);
         } catch (Exception e) {
-            Exception rethrow = this.rethrow(e, str);
-            if (rethrow instanceof PackageManager.NameNotFoundException) {
-                throw ((PackageManager.NameNotFoundException) rethrow);
+            Exception excRethrow = this.rethrow(e, str);
+            if (excRethrow instanceof PackageManager.NameNotFoundException) {
+                throw ((PackageManager.NameNotFoundException) excRethrow);
             }
-            if (rethrow instanceof RuntimeException) {
-                throw ((RuntimeException) rethrow);
+            if (excRethrow instanceof RuntimeException) {
+                throw ((RuntimeException) excRethrow);
             }
-            throw new RuntimeException(rethrow);
+            throw new RuntimeException(excRethrow);
         }
     }
 
@@ -117,14 +117,14 @@ public final class DomainVerificationManager {
         try {
             return this.mDomainVerificationManager.setDomainVerificationStatus(uuid.toString(), new DomainSet(set), i);
         } catch (Exception e) {
-            Exception rethrow = this.rethrow(e, null);
-            if (rethrow instanceof PackageManager.NameNotFoundException) {
-                throw ((PackageManager.NameNotFoundException) rethrow);
+            Exception excRethrow = this.rethrow(e, null);
+            if (excRethrow instanceof PackageManager.NameNotFoundException) {
+                throw ((PackageManager.NameNotFoundException) excRethrow);
             }
-            if (rethrow instanceof RuntimeException) {
-                throw ((RuntimeException) rethrow);
+            if (excRethrow instanceof RuntimeException) {
+                throw ((RuntimeException) excRethrow);
             }
-            throw new RuntimeException(rethrow);
+            throw new RuntimeException(excRethrow);
         }
     }
 
@@ -133,14 +133,14 @@ public final class DomainVerificationManager {
         try {
             this.mDomainVerificationManager.setDomainVerificationLinkHandlingAllowed(str, z, this.mContext.getUserId());
         } catch (Exception e) {
-            Exception rethrow = rethrow(e, null);
-            if (rethrow instanceof PackageManager.NameNotFoundException) {
-                throw ((PackageManager.NameNotFoundException) rethrow);
+            Exception excRethrow = rethrow(e, null);
+            if (excRethrow instanceof PackageManager.NameNotFoundException) {
+                throw ((PackageManager.NameNotFoundException) excRethrow);
             }
-            if (rethrow instanceof RuntimeException) {
-                throw ((RuntimeException) rethrow);
+            if (excRethrow instanceof RuntimeException) {
+                throw ((RuntimeException) excRethrow);
             }
-            throw new RuntimeException(rethrow);
+            throw new RuntimeException(excRethrow);
         }
     }
 
@@ -150,14 +150,14 @@ public final class DomainVerificationManager {
         try {
             return this.mDomainVerificationManager.setDomainVerificationUserSelection(uuid.toString(), new DomainSet(set), z, this.mContext.getUserId());
         } catch (Exception e) {
-            Exception rethrow = this.rethrow(e, null);
-            if (rethrow instanceof PackageManager.NameNotFoundException) {
-                throw ((PackageManager.NameNotFoundException) rethrow);
+            Exception excRethrow = this.rethrow(e, null);
+            if (excRethrow instanceof PackageManager.NameNotFoundException) {
+                throw ((PackageManager.NameNotFoundException) excRethrow);
             }
-            if (rethrow instanceof RuntimeException) {
-                throw ((RuntimeException) rethrow);
+            if (excRethrow instanceof RuntimeException) {
+                throw ((RuntimeException) excRethrow);
             }
-            throw new RuntimeException(rethrow);
+            throw new RuntimeException(excRethrow);
         }
     }
 
@@ -165,14 +165,14 @@ public final class DomainVerificationManager {
         try {
             return this.mDomainVerificationManager.getDomainVerificationUserState(str, this.mContext.getUserId());
         } catch (Exception e) {
-            Exception rethrow = this.rethrow(e, str);
-            if (rethrow instanceof PackageManager.NameNotFoundException) {
-                throw ((PackageManager.NameNotFoundException) rethrow);
+            Exception excRethrow = this.rethrow(e, str);
+            if (excRethrow instanceof PackageManager.NameNotFoundException) {
+                throw ((PackageManager.NameNotFoundException) excRethrow);
             }
-            if (rethrow instanceof RuntimeException) {
-                throw ((RuntimeException) rethrow);
+            if (excRethrow instanceof RuntimeException) {
+                throw ((RuntimeException) excRethrow);
             }
-            throw new RuntimeException(rethrow);
+            throw new RuntimeException(excRethrow);
         }
     }
 

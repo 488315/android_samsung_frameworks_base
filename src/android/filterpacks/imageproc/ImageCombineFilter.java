@@ -34,7 +34,7 @@ public abstract class ImageCombineFilter extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void setupPorts() {
+    public void setupPorts() throws NoSuchFieldException {
         ImageCombineFilter imageCombineFilter;
         if (this.mParameterName != null) {
             try {
@@ -75,11 +75,11 @@ public abstract class ImageCombineFilter extends Filter {
             i++;
             i2++;
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(frameArr[0].getFormat());
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(frameArr[0].getFormat());
         updateProgramWithTarget(frameArr[0].getFormat().getTarget(), filterContext);
-        this.mProgram.process(frameArr, newFrame);
-        pushOutput(this.mOutputName, newFrame);
-        newFrame.release();
+        this.mProgram.process(frameArr, frameNewFrame);
+        pushOutput(this.mOutputName, frameNewFrame);
+        frameNewFrame.release();
     }
 
     protected void updateProgramWithTarget(int i, FilterContext filterContext) {

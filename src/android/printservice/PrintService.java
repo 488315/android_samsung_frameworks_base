@@ -172,16 +172,16 @@ public abstract class PrintService extends Service {
             int i = message.what;
             switch (i) {
                 case 1:
-                    PrinterDiscoverySession onCreatePrinterDiscoverySession = PrintService.this.onCreatePrinterDiscoverySession();
-                    if (onCreatePrinterDiscoverySession == null) {
+                    PrinterDiscoverySession printerDiscoverySessionOnCreatePrinterDiscoverySession = PrintService.this.onCreatePrinterDiscoverySession();
+                    if (printerDiscoverySessionOnCreatePrinterDiscoverySession == null) {
                         throw new NullPointerException("session cannot be null");
                     }
-                    if (onCreatePrinterDiscoverySession.getId() == PrintService.this.mLastSessionId) {
+                    if (printerDiscoverySessionOnCreatePrinterDiscoverySession.getId() == PrintService.this.mLastSessionId) {
                         throw new IllegalStateException("cannot reuse session instances");
                     }
-                    PrintService.this.mDiscoverySession = onCreatePrinterDiscoverySession;
-                    PrintService.this.mLastSessionId = onCreatePrinterDiscoverySession.getId();
-                    onCreatePrinterDiscoverySession.setObserver(PrintService.this.mClient);
+                    PrintService.this.mDiscoverySession = printerDiscoverySessionOnCreatePrinterDiscoverySession;
+                    PrintService.this.mLastSessionId = printerDiscoverySessionOnCreatePrinterDiscoverySession.getId();
+                    printerDiscoverySessionOnCreatePrinterDiscoverySession.setObserver(PrintService.this.mClient);
                     return;
                 case 2:
                     if (PrintService.this.mDiscoverySession != null) {

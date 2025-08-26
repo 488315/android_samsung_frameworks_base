@@ -37,14 +37,14 @@ public class SICBlockCipher extends StreamBlockCipher implements CTRModeCipher {
     public void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException {
         if (cipherParameters instanceof ParametersWithIV) {
             ParametersWithIV parametersWithIV = (ParametersWithIV) cipherParameters;
-            byte[] clone = Arrays.clone(parametersWithIV.getIV());
-            this.IV = clone;
+            byte[] bArrClone = Arrays.clone(parametersWithIV.getIV());
+            this.IV = bArrClone;
             int i = this.blockSize;
-            if (i < clone.length) {
+            if (i < bArrClone.length) {
                 throw new IllegalArgumentException("CTR/SIC mode requires IV no greater than: " + this.blockSize + " bytes.");
             }
             int i2 = 8 > i / 2 ? i / 2 : 8;
-            if (i - clone.length > i2) {
+            if (i - bArrClone.length > i2) {
                 throw new IllegalArgumentException("CTR/SIC mode requires IV of at least: " + (this.blockSize - i2) + " bytes.");
             }
             if (parametersWithIV.getParameters() != null) {
@@ -67,7 +67,7 @@ public class SICBlockCipher extends StreamBlockCipher implements CTRModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws DataLengthException, IllegalStateException {
+    public int processBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         if (this.byteCount != 0) {
             processBytes(bArr, i, this.blockSize, bArr2, i2);
             return this.blockSize;
@@ -88,7 +88,7 @@ public class SICBlockCipher extends StreamBlockCipher implements CTRModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamBlockCipher, com.android.internal.org.bouncycastle.crypto.StreamCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException {
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         byte b;
         if (i + i2 > bArr.length) {
             throw new DataLengthException("input buffer too small");
@@ -123,7 +123,7 @@ public class SICBlockCipher extends StreamBlockCipher implements CTRModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamBlockCipher
-    protected byte calculateByte(byte b) throws DataLengthException, IllegalStateException {
+    protected byte calculateByte(byte b) throws IllegalStateException, DataLengthException {
         int i = this.byteCount;
         if (i == 0) {
             checkLastIncrement();
@@ -267,7 +267,7 @@ public class SICBlockCipher extends StreamBlockCipher implements CTRModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.SkippingCipher
-    public long skip(long j) {
+    public long skip(long j) throws IllegalStateException, DataLengthException {
         adjustCounter(j);
         checkCounter();
         this.cipher.processBlock(this.counter, 0, this.counterOut, 0);

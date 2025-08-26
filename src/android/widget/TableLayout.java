@@ -28,8 +28,8 @@ public class TableLayout extends LinearLayout {
 
     public TableLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TableLayout);
-        String string = obtainStyledAttributes.getString(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TableLayout);
+        String string = typedArrayObtainStyledAttributes.getString(0);
         if (string != null) {
             if (string.charAt(0) == '*') {
                 this.mStretchAllColumns = true;
@@ -37,7 +37,7 @@ public class TableLayout extends LinearLayout {
                 this.mStretchableColumns = parseColumns(string);
             }
         }
-        String string2 = obtainStyledAttributes.getString(1);
+        String string2 = typedArrayObtainStyledAttributes.getString(1);
         if (string2 != null) {
             if (string2.charAt(0) == '*') {
                 this.mShrinkAllColumns = true;
@@ -45,21 +45,21 @@ public class TableLayout extends LinearLayout {
                 this.mShrinkableColumns = parseColumns(string2);
             }
         }
-        String string3 = obtainStyledAttributes.getString(2);
+        String string3 = typedArrayObtainStyledAttributes.getString(2);
         if (string3 != null) {
             this.mCollapsedColumns = parseColumns(string3);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         initTableLayout();
     }
 
-    private static SparseBooleanArray parseColumns(String str) {
+    private static SparseBooleanArray parseColumns(String str) throws NumberFormatException {
         SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
         for (String str2 : Pattern.compile("\\s*,\\s*").split(str)) {
             try {
-                int parseInt = Integer.parseInt(str2);
-                if (parseInt >= 0) {
-                    sparseBooleanArray.put(parseInt, true);
+                int i = Integer.parseInt(str2);
+                if (i >= 0) {
+                    sparseBooleanArray.put(i, true);
                 }
             } catch (NumberFormatException unused) {
             }
@@ -166,10 +166,10 @@ public class TableLayout extends LinearLayout {
             SparseBooleanArray sparseBooleanArray = this.mCollapsedColumns;
             int size = sparseBooleanArray.size();
             for (int i = 0; i < size; i++) {
-                int keyAt = sparseBooleanArray.keyAt(i);
-                boolean valueAt = sparseBooleanArray.valueAt(i);
-                if (valueAt) {
-                    tableRow.setColumnCollapsed(keyAt, valueAt);
+                int iKeyAt = sparseBooleanArray.keyAt(i);
+                boolean zValueAt = sparseBooleanArray.valueAt(i);
+                if (zValueAt) {
+                    tableRow.setColumnCollapsed(iKeyAt, zValueAt);
                 }
             }
         }
@@ -252,8 +252,8 @@ public class TableLayout extends LinearLayout {
                         System.arraycopy(columnsWidths, iArr2.length, this.mMaxWidths, iArr2.length, i4);
                     }
                     int[] iArr4 = this.mMaxWidths;
-                    int min = Math.min(length2, length);
-                    for (int i5 = 0; i5 < min; i5++) {
+                    int iMin = Math.min(length2, length);
+                    for (int i5 = 0; i5 < iMin; i5++) {
                         iArr4[i5] = Math.max(iArr4[i5], columnsWidths[i5]);
                     }
                 }
@@ -300,10 +300,10 @@ public class TableLayout extends LinearLayout {
         }
         int i6 = 0;
         for (int i7 = 0; i7 < size; i7++) {
-            int keyAt = sparseBooleanArray.keyAt(i7);
+            int iKeyAt = sparseBooleanArray.keyAt(i7);
             if (sparseBooleanArray.valueAt(i7)) {
-                if (keyAt < length) {
-                    iArr[keyAt] = iArr[keyAt] + i3;
+                if (iKeyAt < length) {
+                    iArr[iKeyAt] = iArr[iKeyAt] + i3;
                 } else {
                     i6++;
                 }
@@ -314,13 +314,13 @@ public class TableLayout extends LinearLayout {
         }
         int i8 = (i3 * i6) / (size - i6);
         for (int i9 = 0; i9 < size; i9++) {
-            int keyAt2 = sparseBooleanArray.keyAt(i9);
-            if (sparseBooleanArray.valueAt(i9) && keyAt2 < length) {
-                int i10 = iArr[keyAt2];
+            int iKeyAt2 = sparseBooleanArray.keyAt(i9);
+            if (sparseBooleanArray.valueAt(i9) && iKeyAt2 < length) {
+                int i10 = iArr[iKeyAt2];
                 if (i8 > i10) {
-                    iArr[keyAt2] = 0;
+                    iArr[iKeyAt2] = 0;
                 } else {
-                    iArr[keyAt2] = i10 + i8;
+                    iArr[iKeyAt2] = i10 + i8;
                 }
             }
         }

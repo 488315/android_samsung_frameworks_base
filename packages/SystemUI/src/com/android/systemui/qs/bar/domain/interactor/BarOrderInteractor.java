@@ -32,7 +32,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BarOrderInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,11 +47,10 @@ public final class BarOrderInteractor {
         @Override // com.android.systemui.settings.UserTracker.Callback
         public final void onUserChanged(int i, Context context) {
             int i2 = BarOrderInteractor.$r8$clinit;
-            BarOrderInteractor.this.initValuesAndApply(context, true);
+            this.this$0.initValuesAndApply(context, true);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,15 +72,14 @@ public final class BarOrderInteractor {
     }
 
     public final void applyBarOrder() {
-        Object valueOf;
+        Object objValueOf;
         QSPanelHost qSPanelHost = this.host;
         if (qSPanelHost == null || !qSPanelHost.isHeader()) {
             ArrayList barViewsByOrder = getBarViewsByOrder();
             ArrayList arrayList = new ArrayList();
-            BarOrderRepository barOrderRepository = this.repository;
-            List filteredNonEditBars = toFilteredNonEditBars(barOrderRepository.barOrder);
+            List listLoadBarOrderList = loadBarOrderList();
             ArrayList arrayList2 = new ArrayList();
-            ArrayList arrayList3 = (ArrayList) filteredNonEditBars;
+            ArrayList arrayList3 = (ArrayList) listLoadBarOrderList;
             int size = arrayList3.size();
             int i = 0;
             int i2 = 0;
@@ -96,6 +93,7 @@ public final class BarOrderInteractor {
                 }
             }
             arrayList.addAll(arrayList2);
+            BarOrderRepository barOrderRepository = this.repository;
             List list = barOrderRepository.nonEditableBars;
             ArrayList arrayList4 = new ArrayList();
             Iterator it = list.iterator();
@@ -114,11 +112,11 @@ public final class BarOrderInteractor {
                 BarItemImpl barItemImpl = (BarItemImpl) obj2;
                 if (barItemImpl instanceof VideoCallMicModeBar) {
                     arrayList.add(0, barItemImpl.getClass().getSimpleName());
-                    valueOf = Unit.INSTANCE;
+                    objValueOf = Unit.INSTANCE;
                 } else {
-                    valueOf = Boolean.valueOf(arrayList.add(barItemImpl.getClass().getSimpleName()));
+                    objValueOf = Boolean.valueOf(arrayList.add(barItemImpl.getClass().getSimpleName()));
                 }
-                arrayList5.add(valueOf);
+                arrayList5.add(objValueOf);
             }
             Log.d("BarOrderInteractor", "applyBarOrder " + arrayList);
             QSPanelHost qSPanelHost2 = this.host;
@@ -161,47 +159,113 @@ public final class BarOrderInteractor {
     }
 
     public final ArrayList getBarViewsByOrder() {
-        Object valueOf;
+        Object objValueOf;
         ArrayList arrayList = new ArrayList();
-        BarOrderRepository barOrderRepository = this.repository;
-        List filteredNonEditBars = toFilteredNonEditBars(barOrderRepository.barOrder);
+        List listLoadBarOrderList = loadBarOrderList();
         ArrayList arrayList2 = new ArrayList();
-        ArrayList arrayList3 = (ArrayList) filteredNonEditBars;
-        int size = arrayList3.size();
-        int i = 0;
-        while (i < size) {
-            Object obj = arrayList3.get(i);
-            i++;
-            BarItemImpl barItem = toBarItem((String) obj);
+        Iterator it = listLoadBarOrderList.iterator();
+        while (it.hasNext()) {
+            BarItemImpl barItem = toBarItem((String) it.next());
             View view = barItem != null ? barItem.mBarRootView : null;
             if (view != null) {
                 arrayList2.add(view);
             }
         }
         arrayList.addAll(arrayList2);
-        List list = barOrderRepository.nonEditableBars;
+        List list = this.repository.nonEditableBars;
+        ArrayList arrayList3 = new ArrayList();
+        Iterator it2 = list.iterator();
+        while (it2.hasNext()) {
+            BarItemImpl barItem2 = toBarItem((String) it2.next());
+            if (barItem2 != null) {
+                arrayList3.add(barItem2);
+            }
+        }
+        ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList3, 10));
+        int size = arrayList3.size();
+        int i = 0;
+        while (i < size) {
+            Object obj = arrayList3.get(i);
+            i++;
+            BarItemImpl barItemImpl = (BarItemImpl) obj;
+            if (barItemImpl instanceof VideoCallMicModeBar) {
+                arrayList.add(0, ((VideoCallMicModeBar) barItemImpl).mBarRootView);
+                objValueOf = Unit.INSTANCE;
+            } else {
+                objValueOf = Boolean.valueOf(arrayList.add(barItemImpl.mBarRootView));
+            }
+            arrayList4.add(objValueOf);
+        }
+        return arrayList;
+    }
+
+    public final ArrayList getShowingBarByOrder() {
+        Object objValueOf;
+        ArrayList arrayList = new ArrayList();
+        List listLoadBarOrderList = loadBarOrderList();
+        ArrayList arrayList2 = new ArrayList();
+        ArrayList arrayList3 = (ArrayList) listLoadBarOrderList;
+        int size = arrayList3.size();
+        int i = 0;
+        while (i < size) {
+            Object obj = arrayList3.get(i);
+            i++;
+            BarItemImpl barItem = toBarItem((String) obj);
+            if (barItem != null) {
+                arrayList2.add(barItem);
+            }
+        }
         ArrayList arrayList4 = new ArrayList();
+        int size2 = arrayList2.size();
+        int i2 = 0;
+        while (i2 < size2) {
+            Object obj2 = arrayList2.get(i2);
+            i2++;
+            if (((BarItemImpl) obj2).mShowing) {
+                arrayList4.add(obj2);
+            }
+        }
+        ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList4, 10));
+        int size3 = arrayList4.size();
+        int i3 = 0;
+        while (i3 < size3) {
+            Object obj3 = arrayList4.get(i3);
+            i3++;
+            arrayList5.add(Boolean.valueOf(arrayList.add(((BarItemImpl) obj3).mBarRootView)));
+        }
+        List list = this.repository.nonEditableBars;
+        ArrayList arrayList6 = new ArrayList();
         Iterator it = list.iterator();
         while (it.hasNext()) {
             BarItemImpl barItem2 = toBarItem((String) it.next());
             if (barItem2 != null) {
-                arrayList4.add(barItem2);
+                arrayList6.add(barItem2);
             }
         }
-        ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList4, 10));
-        int size2 = arrayList4.size();
-        int i2 = 0;
-        while (i2 < size2) {
-            Object obj2 = arrayList4.get(i2);
-            i2++;
-            BarItemImpl barItemImpl = (BarItemImpl) obj2;
+        ArrayList arrayList7 = new ArrayList();
+        int size4 = arrayList6.size();
+        int i4 = 0;
+        while (i4 < size4) {
+            Object obj4 = arrayList6.get(i4);
+            i4++;
+            if (((BarItemImpl) obj4).mShowing) {
+                arrayList7.add(obj4);
+            }
+        }
+        ArrayList arrayList8 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList7, 10));
+        int size5 = arrayList7.size();
+        int i5 = 0;
+        while (i5 < size5) {
+            Object obj5 = arrayList7.get(i5);
+            i5++;
+            BarItemImpl barItemImpl = (BarItemImpl) obj5;
             if (barItemImpl instanceof VideoCallMicModeBar) {
                 arrayList.add(0, ((VideoCallMicModeBar) barItemImpl).mBarRootView);
-                valueOf = Unit.INSTANCE;
+                objValueOf = Unit.INSTANCE;
             } else {
-                valueOf = Boolean.valueOf(arrayList.add(barItemImpl.mBarRootView));
+                objValueOf = Boolean.valueOf(arrayList.add(barItemImpl.mBarRootView));
             }
-            arrayList5.add(valueOf);
+            arrayList8.add(objValueOf);
         }
         return arrayList;
     }
@@ -217,21 +281,25 @@ public final class BarOrderInteractor {
             sendCollapsedRowStatusLog();
         }
         if (context.getResources().getConfiguration().orientation != 2 || QpRune.QUICK_TABLET || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor$initValuesAndApply$1
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor.initValuesAndApply.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     BarOrderInteractor.this.applyBarOrder();
                 }
             });
         } else {
-            flushBarParent();
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor$initValuesAndApply$2
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor.initValuesAndApply.2
                 @Override // java.lang.Runnable
                 public final void run() {
+                    BarOrderInteractor.this.flushBarParent();
                     BarOrderInteractor.this.makeLandscapeView(context);
                 }
             });
         }
+    }
+
+    public final List loadBarOrderList() {
+        return toFilteredNonEditBars(this.repository.barOrder);
     }
 
     public final void makeLandscapeView(Context context) {
@@ -313,11 +381,11 @@ public final class BarOrderInteractor {
     }
 
     public final void sendCollapsedRowStatusLog() {
-        SharedPreferences.Editor edit = this.systemUIContext.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
-        String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(this.repository.collapsedBarRow, "Number, ");
-        if (edit != null) {
-            edit.putString(SystemUIAnalytics.STATUS_QUICK_PANEL_COLLAPSED_ROW, m);
-            edit.apply();
+        SharedPreferences.Editor editorEdit = this.systemUIContext.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
+        String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(this.repository.collapsedBarRow, "Number, ");
+        if (editorEdit != null) {
+            editorEdit.putString(SystemUIAnalytics.STATUS_QUICK_PANEL_COLLAPSED_ROW, strM);
+            editorEdit.apply();
         }
     }
 
@@ -330,17 +398,15 @@ public final class BarOrderInteractor {
      */
     public final void sendOrderStatusLog() {
         int i = 0;
-        SharedPreferences.Editor edit = this.systemUIContext.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
-        Iterator it = ((ArrayList) toFilteredNonEditBars(this.repository.barOrder)).iterator();
+        SharedPreferences.Editor editorEdit = this.systemUIContext.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
         String str = "";
-        while (it.hasNext()) {
-            Object next = it.next();
+        for (Object obj : loadBarOrderList()) {
             int i2 = i + 1;
             if (i < 0) {
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
-            String str2 = (String) next;
+            String str2 = (String) obj;
             switch (str2.hashCode()) {
                 case -1967680040:
                     if (str2.equals("SmartViewLargeTileBar")) {
@@ -397,9 +463,9 @@ public final class BarOrderInteractor {
             }
             i = i2;
         }
-        if (edit != null) {
-            edit.putString(SystemUIAnalytics.STATUS_QUICK_PANEL_LAYOUT, str);
-            edit.apply();
+        if (editorEdit != null) {
+            editorEdit.putString(SystemUIAnalytics.STATUS_QUICK_PANEL_LAYOUT, str);
+            editorEdit.apply();
         }
     }
 
@@ -437,17 +503,17 @@ public final class BarOrderInteractor {
     }
 
     public final void updateLastShowingBar() {
-        Object obj;
+        Object objPrevious;
         View view;
-        List filteredNonEditBars = toFilteredNonEditBars(this.repository.barOrder);
+        List listLoadBarOrderList = loadBarOrderList();
         ArrayList arrayList = new ArrayList();
-        ArrayList arrayList2 = (ArrayList) filteredNonEditBars;
+        ArrayList arrayList2 = (ArrayList) listLoadBarOrderList;
         int size = arrayList2.size();
         int i = 0;
         while (i < size) {
-            Object obj2 = arrayList2.get(i);
+            Object obj = arrayList2.get(i);
             i++;
-            BarItemImpl barItem = toBarItem((String) obj2);
+            BarItemImpl barItem = toBarItem((String) obj);
             if (barItem != null) {
                 arrayList.add(barItem);
             }
@@ -455,30 +521,30 @@ public final class BarOrderInteractor {
         ListIterator listIterator = arrayList.listIterator(arrayList.size());
         while (true) {
             if (!listIterator.hasPrevious()) {
-                obj = null;
+                objPrevious = null;
                 break;
             }
-            obj = listIterator.previous();
-            BarItemImpl barItemImpl = (BarItemImpl) obj;
+            objPrevious = listIterator.previous();
+            BarItemImpl barItemImpl = (BarItemImpl) objPrevious;
             if (barItemImpl.isAvailable() && barItemImpl.mShowing && (view = barItemImpl.mBarRootView) != null && view.getVisibility() == 0) {
                 break;
             }
         }
-        BarItemImpl barItemImpl2 = (BarItemImpl) obj;
+        BarItemImpl barItemImpl2 = (BarItemImpl) objPrevious;
         if (barItemImpl2 == null) {
             return;
         }
         BarItemImpl barItemImpl3 = this.lastBar;
         if (barItemImpl3 == null || !barItemImpl3.equals(barItemImpl2)) {
             BarItemImpl barItemImpl4 = this.lastBar;
-            Integer valueOf = barItemImpl4 != null ? Integer.valueOf(barItemImpl4.orignBottomMargin()) : null;
+            Integer numValueOf = barItemImpl4 != null ? Integer.valueOf(barItemImpl4.orignBottomMargin()) : null;
             if (this.lastBar != null) {
-                int intValue = valueOf != null ? valueOf.intValue() : 0;
+                int iIntValue = numValueOf != null ? numValueOf.intValue() : 0;
                 BarItemImpl barItemImpl5 = this.lastBar;
                 View view2 = barItemImpl5 != null ? barItemImpl5.mBarRootView : null;
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) (view2 != null ? view2.getLayoutParams() : null);
-                if ((layoutParams == null || layoutParams.bottomMargin != intValue) && layoutParams != null) {
-                    layoutParams.bottomMargin = intValue;
+                if ((layoutParams == null || layoutParams.bottomMargin != iIntValue) && layoutParams != null) {
+                    layoutParams.bottomMargin = iIntValue;
                 }
             }
             this.lastBar = barItemImpl2;

@@ -100,9 +100,14 @@ public final class StreamConfigurationMap {
         this(streamConfigurationArr, streamConfigurationDurationArr, streamConfigurationDurationArr2, streamConfigurationArr2, streamConfigurationDurationArr3, streamConfigurationDurationArr4, streamConfigurationArr3, streamConfigurationDurationArr5, streamConfigurationDurationArr6, streamConfigurationArr4, streamConfigurationDurationArr7, streamConfigurationDurationArr8, streamConfigurationArr5, streamConfigurationDurationArr9, streamConfigurationDurationArr10, streamConfigurationArr6, streamConfigurationDurationArr11, streamConfigurationDurationArr12, highSpeedVideoConfigurationArr, reprocessFormatsMap, z, true);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0206  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x0209  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public StreamConfigurationMap(StreamConfiguration[] streamConfigurationArr, StreamConfigurationDuration[] streamConfigurationDurationArr, StreamConfigurationDuration[] streamConfigurationDurationArr2, StreamConfiguration[] streamConfigurationArr2, StreamConfigurationDuration[] streamConfigurationDurationArr3, StreamConfigurationDuration[] streamConfigurationDurationArr4, StreamConfiguration[] streamConfigurationArr3, StreamConfigurationDuration[] streamConfigurationDurationArr5, StreamConfigurationDuration[] streamConfigurationDurationArr6, StreamConfiguration[] streamConfigurationArr4, StreamConfigurationDuration[] streamConfigurationDurationArr7, StreamConfigurationDuration[] streamConfigurationDurationArr8, StreamConfiguration[] streamConfigurationArr5, StreamConfigurationDuration[] streamConfigurationDurationArr9, StreamConfigurationDuration[] streamConfigurationDurationArr10, StreamConfiguration[] streamConfigurationArr6, StreamConfigurationDuration[] streamConfigurationDurationArr11, StreamConfigurationDuration[] streamConfigurationDurationArr12, HighSpeedVideoConfiguration[] highSpeedVideoConfigurationArr, ReprocessFormatsMap reprocessFormatsMap, boolean z, boolean z2) {
         SparseIntArray sparseIntArray;
-        long j;
+        long duration;
         this.mOutputFormats = new SparseIntArray();
         this.mHighResOutputFormats = new SparseIntArray();
         this.mAllOutputFormats = new SparseIntArray();
@@ -185,13 +190,17 @@ public final class StreamConfigurationMap {
                 if (this.mListHighResolution) {
                     for (StreamConfigurationDuration streamConfigurationDuration : this.mMinFrameDurations) {
                         if (streamConfigurationDuration.getFormat() == format && streamConfigurationDuration.getWidth() == streamConfiguration.getSize().getWidth() && streamConfigurationDuration.getHeight() == streamConfiguration.getSize().getHeight()) {
-                            j = streamConfigurationDuration.getDuration();
+                            duration = streamConfigurationDuration.getDuration();
                             break;
                         }
                     }
+                    duration = 0;
+                    sparseIntArray = duration > DURATION_20FPS_NS ? this.mOutputFormats : this.mHighResOutputFormats;
+                } else {
+                    duration = 0;
+                    if (duration > DURATION_20FPS_NS) {
+                    }
                 }
-                j = 0;
-                sparseIntArray = j <= DURATION_20FPS_NS ? this.mOutputFormats : this.mHighResOutputFormats;
             } else {
                 sparseIntArray = this.mInputFormats;
             }
@@ -254,9 +263,9 @@ public final class StreamConfigurationMap {
         if (this.mHeicOutputFormats.size() <= 0) {
             return outputs;
         }
-        int[] copyOf = Arrays.copyOf(outputs, outputs.length + 1);
-        copyOf[outputs.length] = 1212500294;
-        return copyOf;
+        int[] iArrCopyOf = Arrays.copyOf(outputs, outputs.length + 1);
+        iArrCopyOf[outputs.length] = 1212500294;
+        return iArrCopyOf;
     }
 
     public int[] getInputFormats() {
@@ -269,9 +278,9 @@ public final class StreamConfigurationMap {
 
     public boolean isOutputSupportedFor(int i) {
         checkArgumentFormat(i);
-        int imageFormatToInternal = imageFormatToInternal(i);
-        int imageFormatToDataspace = imageFormatToDataspace(i);
-        return (Flags.cameraHeifGainmap() && imageFormatToDataspace == 4102) ? this.mHeicUltraHDROutputFormats.indexOfKey(imageFormatToInternal) >= 0 : imageFormatToDataspace == 4096 ? this.mDepthOutputFormats.indexOfKey(imageFormatToInternal) >= 0 : imageFormatToDataspace == 4098 ? this.mDynamicDepthOutputFormats.indexOfKey(imageFormatToInternal) >= 0 : imageFormatToDataspace == 4100 ? this.mHeicOutputFormats.indexOfKey(imageFormatToInternal) >= 0 : imageFormatToDataspace == 4101 ? this.mJpegROutputFormats.indexOfKey(imageFormatToInternal) >= 0 : getFormatsMap(true).indexOfKey(imageFormatToInternal) >= 0;
+        int iImageFormatToInternal = imageFormatToInternal(i);
+        int iImageFormatToDataspace = imageFormatToDataspace(i);
+        return (Flags.cameraHeifGainmap() && iImageFormatToDataspace == 4102) ? this.mHeicUltraHDROutputFormats.indexOfKey(iImageFormatToInternal) >= 0 : iImageFormatToDataspace == 4096 ? this.mDepthOutputFormats.indexOfKey(iImageFormatToInternal) >= 0 : iImageFormatToDataspace == 4098 ? this.mDynamicDepthOutputFormats.indexOfKey(iImageFormatToInternal) >= 0 : iImageFormatToDataspace == 4100 ? this.mHeicOutputFormats.indexOfKey(iImageFormatToInternal) >= 0 : iImageFormatToDataspace == 4101 ? this.mJpegROutputFormats.indexOfKey(iImageFormatToInternal) >= 0 : getFormatsMap(true).indexOfKey(iImageFormatToInternal) >= 0;
     }
 
     public static <T> boolean isOutputSupportedFor(Class<T> cls) {
@@ -285,7 +294,7 @@ public final class StreamConfigurationMap {
         Size surfaceSize = SurfaceUtils.getSurfaceSize(surface);
         int surfaceFormat = SurfaceUtils.getSurfaceFormat(surface);
         int surfaceDataspace = SurfaceUtils.getSurfaceDataspace(surface);
-        boolean isFlexibleConsumer = SurfaceUtils.isFlexibleConsumer(surface);
+        boolean zIsFlexibleConsumer = SurfaceUtils.isFlexibleConsumer(surface);
         if (surfaceDataspace == 4096) {
             streamConfigurationArr = this.mDepthConfigurations;
         } else if (surfaceDataspace == 4098) {
@@ -305,7 +314,7 @@ public final class StreamConfigurationMap {
                 if (streamConfiguration.getSize().equals(surfaceSize)) {
                     return true;
                 }
-                if (isFlexibleConsumer && streamConfiguration.getSize().getWidth() <= 1920) {
+                if (zIsFlexibleConsumer && streamConfiguration.getSize().getWidth() <= 1920) {
                     return true;
                 }
             }
@@ -315,24 +324,24 @@ public final class StreamConfigurationMap {
 
     public boolean isOutputSupportedFor(Size size, int i) {
         StreamConfiguration[] streamConfigurationArr;
-        int imageFormatToInternal = imageFormatToInternal(i);
-        int imageFormatToDataspace = imageFormatToDataspace(i);
-        if (imageFormatToDataspace == 4096) {
+        int iImageFormatToInternal = imageFormatToInternal(i);
+        int iImageFormatToDataspace = imageFormatToDataspace(i);
+        if (iImageFormatToDataspace == 4096) {
             streamConfigurationArr = this.mDepthConfigurations;
-        } else if (imageFormatToDataspace == 4098) {
+        } else if (iImageFormatToDataspace == 4098) {
             streamConfigurationArr = this.mDynamicDepthConfigurations;
-        } else if (imageFormatToDataspace == 4100) {
+        } else if (iImageFormatToDataspace == 4100) {
             streamConfigurationArr = this.mHeicConfigurations;
-        } else if (imageFormatToDataspace == 4101) {
+        } else if (iImageFormatToDataspace == 4101) {
             streamConfigurationArr = this.mJpegRConfigurations;
         } else {
             streamConfigurationArr = this.mConfigurations;
         }
-        if (Flags.cameraHeifGainmap() && imageFormatToDataspace == 4102) {
+        if (Flags.cameraHeifGainmap() && iImageFormatToDataspace == 4102) {
             streamConfigurationArr = this.mHeicUltraHDRConfigurations;
         }
         for (StreamConfiguration streamConfiguration : streamConfigurationArr) {
-            if (streamConfiguration.getFormat() == imageFormatToInternal && streamConfiguration.isOutput() && streamConfiguration.getSize().equals(size)) {
+            if (streamConfiguration.getFormat() == iImageFormatToInternal && streamConfiguration.isOutput() && streamConfiguration.getSize().equals(size)) {
                 return true;
             }
         }
@@ -351,8 +360,8 @@ public final class StreamConfigurationMap {
     }
 
     public Size[] getHighSpeedVideoSizes() {
-        Set<Size> keySet = this.mHighSpeedVideoSizeMap.keySet();
-        return (Size[]) keySet.toArray(new Size[keySet.size()]);
+        Set<Size> setKeySet = this.mHighSpeedVideoSizeMap.keySet();
+        return (Size[]) setKeySet.toArray(new Size[setKeySet.size()]);
     }
 
     public Range<Integer>[] getHighSpeedVideoFpsRangesFor(Size size) {
@@ -372,8 +381,8 @@ public final class StreamConfigurationMap {
     }
 
     public Range<Integer>[] getHighSpeedVideoFpsRanges() {
-        Set<Range<Integer>> keySet = this.mHighSpeedVideoFpsRangeMap.keySet();
-        return (Range[]) keySet.toArray(new Range[keySet.size()]);
+        Set<Range<Integer>> setKeySet = this.mHighSpeedVideoFpsRangeMap.keySet();
+        return (Range[]) setKeySet.toArray(new Range[setKeySet.size()]);
     }
 
     public Size[] getHighSpeedVideoSizesFor(Range<Integer> range) {
@@ -446,9 +455,9 @@ public final class StreamConfigurationMap {
 
     private int checkArgumentFormatSupported(int i, boolean z) {
         checkArgumentFormat(i);
-        int imageFormatToInternal = imageFormatToInternal(i);
-        int imageFormatToDataspace = imageFormatToDataspace(i);
-        if (!z ? this.mInputFormats.indexOfKey(imageFormatToInternal) >= 0 : !(!(Flags.cameraHeifGainmap() && imageFormatToDataspace == 4102 && this.mHeicUltraHDROutputFormats.indexOfKey(imageFormatToInternal) >= 0) && (imageFormatToDataspace != 4096 ? imageFormatToDataspace != 4098 ? imageFormatToDataspace != 4100 ? imageFormatToDataspace != 4101 ? this.mAllOutputFormats.indexOfKey(imageFormatToInternal) < 0 : this.mJpegROutputFormats.indexOfKey(imageFormatToInternal) < 0 : this.mHeicOutputFormats.indexOfKey(imageFormatToInternal) < 0 : this.mDynamicDepthOutputFormats.indexOfKey(imageFormatToInternal) < 0 : this.mDepthOutputFormats.indexOfKey(imageFormatToInternal) < 0))) {
+        int iImageFormatToInternal = imageFormatToInternal(i);
+        int iImageFormatToDataspace = imageFormatToDataspace(i);
+        if (!z ? this.mInputFormats.indexOfKey(iImageFormatToInternal) >= 0 : !(!(Flags.cameraHeifGainmap() && iImageFormatToDataspace == 4102 && this.mHeicUltraHDROutputFormats.indexOfKey(iImageFormatToInternal) >= 0) && (iImageFormatToDataspace != 4096 ? iImageFormatToDataspace != 4098 ? iImageFormatToDataspace != 4100 ? iImageFormatToDataspace != 4101 ? this.mAllOutputFormats.indexOfKey(iImageFormatToInternal) < 0 : this.mJpegROutputFormats.indexOfKey(iImageFormatToInternal) < 0 : this.mHeicOutputFormats.indexOfKey(iImageFormatToInternal) < 0 : this.mDynamicDepthOutputFormats.indexOfKey(iImageFormatToInternal) < 0 : this.mDepthOutputFormats.indexOfKey(iImageFormatToInternal) < 0))) {
             throw new IllegalArgumentException(String.format("format %x is not supported by this stream configuration map", Integer.valueOf(i)));
         }
         return i;
@@ -593,12 +602,16 @@ public final class StreamConfigurationMap {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0108  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private Size[] getInternalFormatSizes(int i, int i2, boolean z, boolean z2) {
         SparseIntArray sparseIntArray;
         boolean z3;
         StreamConfiguration[] streamConfigurationArr;
         StreamConfigurationDuration[] streamConfigurationDurationArr;
-        long j;
+        long duration;
         StreamConfigurationMap streamConfigurationMap = this;
         int i3 = i;
         int i4 = 0;
@@ -670,23 +683,24 @@ public final class StreamConfigurationMap {
                     int i7 = 0;
                     while (true) {
                         if (i7 >= streamConfigurationDurationArr.length) {
-                            j = 0;
+                            duration = 0;
                             break;
                         }
                         StreamConfigurationDuration streamConfigurationDuration = streamConfigurationDurationArr[i7];
                         if (streamConfigurationDuration.getFormat() == format && streamConfigurationDuration.getWidth() == streamConfiguration.getSize().getWidth() && streamConfigurationDuration.getHeight() == streamConfiguration.getSize().getHeight()) {
-                            j = streamConfigurationDuration.getDuration();
+                            duration = streamConfigurationDuration.getDuration();
                             break;
                         }
                         i7++;
                     }
                     if (i2 != 4096) {
-                        if (z2 != (j > DURATION_20FPS_NS)) {
+                        if (z2 != (duration > DURATION_20FPS_NS)) {
                         }
                     }
+                } else {
+                    sizeArr[i6] = streamConfiguration.getSize();
+                    i6++;
                 }
-                sizeArr[i6] = streamConfiguration.getSize();
-                i6++;
             }
             i4++;
             streamConfigurationMap = this;

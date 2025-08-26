@@ -19,7 +19,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 extends INoteTaskBubblesService.Stub {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +39,7 @@ public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 ext
         final Function1 function1 = new Function1() { // from class: com.android.systemui.notetask.NoteTaskBubblesController$NoteTaskBubblesService$onBind$1$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final Intent intent2 = intent;
                 final UserHandle userHandle2 = userHandle;
                 final Icon icon2 = icon;
@@ -56,7 +55,7 @@ public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 ext
                     @Override // java.lang.Runnable
                     public final void run() {
                         String str;
-                        BubbleController.BubblesImpl bubblesImpl2 = BubbleController.BubblesImpl.this;
+                        BubbleController.BubblesImpl bubblesImpl2 = bubblesImpl;
                         Intent intent3 = intent2;
                         UserHandle userHandle3 = userHandle2;
                         Icon icon3 = icon2;
@@ -79,10 +78,10 @@ public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 ext
                             BubbleData bubbleData = bubbleController.mBubbleData;
                             Bubble bubbleInStackWithKey = bubbleData.getBubbleInStackWithKey(noteBubbleKeyForApp);
                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
-                                String valueOf = String.valueOf(noteBubbleKeyForApp);
-                                String valueOf2 = String.valueOf(bubbleInStackWithKey);
+                                String strValueOf = String.valueOf(noteBubbleKeyForApp);
+                                String strValueOf2 = String.valueOf(bubbleInStackWithKey);
                                 BubbleStackView bubbleStackView = bubbleController.mStackView;
-                                ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -7114439641328373468L, 0, valueOf, valueOf2, String.valueOf(bubbleStackView != null ? Integer.valueOf(bubbleStackView.getVisibility()) : "null"), String.valueOf(bubbleController.mIsStatusBarShade));
+                                ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -7114439641328373468L, 0, strValueOf, strValueOf2, String.valueOf(bubbleStackView != null ? Integer.valueOf(bubbleStackView.getVisibility()) : "null"), String.valueOf(bubbleController.mIsStatusBarShade));
                             }
                             if (bubbleInStackWithKey == null) {
                                 Bubble overflowBubbleWithKey = bubbleData.getOverflowBubbleWithKey(noteBubbleKeyForApp);
@@ -126,7 +125,7 @@ public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 ext
         Consumer consumer = new Consumer() { // from class: com.android.systemui.notetask.NoteTaskBubblesController$sam$java_util_function_Consumer$0
             @Override // java.util.function.Consumer
             public final /* synthetic */ void accept(Object obj) {
-                Function1.this.mo779invoke(obj);
+                function1.mo781invoke(obj);
             }
         };
         final NoteTaskBubblesController.NoteTaskBubblesService noteTaskBubblesService = this.this$0;
@@ -134,7 +133,7 @@ public final class NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 ext
             @Override // java.lang.Runnable
             public final void run() {
                 DebugLogger debugLogger = DebugLogger.INSTANCE;
-                NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 noteTaskBubblesController$NoteTaskBubblesService$onBind$1 = NoteTaskBubblesController$NoteTaskBubblesService$onBind$1.this;
+                NoteTaskBubblesController$NoteTaskBubblesService$onBind$1 noteTaskBubblesController$NoteTaskBubblesService$onBind$1 = this.this$0;
                 boolean z = Build.IS_DEBUGGABLE;
                 Reflection.getOrCreateKotlinClass(noteTaskBubblesController$NoteTaskBubblesService$onBind$1.getClass()).getSimpleName();
             }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MultiSelectListPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat {
     public CharSequence[] mEntries;
@@ -16,7 +15,6 @@ public class MultiSelectListPreferenceDialogFragmentCompat extends PreferenceDia
     public final Set mNewValues = new HashSet();
     public boolean mPreferenceChanged;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.preference.MultiSelectListPreferenceDialogFragmentCompat$1, reason: invalid class name */
     public class AnonymousClass1 implements DialogInterface.OnMultiChoiceClickListener {
         public AnonymousClass1() {

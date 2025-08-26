@@ -50,7 +50,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformTaskTransitionObserver implements Transitions.TransitionObserver {
     public final Optional mDesksTransitionObserver;
@@ -72,7 +71,7 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.freeform.FreeformTaskTransitionObserver$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FreeformTaskTransitionObserver.this.onInit();
+                    this.f$0.onInit();
                 }
             }, this);
         }
@@ -190,10 +189,10 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
         this.mDesksTransitionObserver.ifPresent(new Consumer() { // from class: com.android.wm.shell.freeform.FreeformTaskTransitionObserver$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Object obj2;
                 ActivityManager.RunningTaskInfo taskInfo2;
                 Integer deskAtEnd;
-                Object obj3;
+                int i2;
+                Object next;
                 ActivityManager.RunningTaskInfo taskInfo3;
                 switch (i) {
                     case 0:
@@ -203,138 +202,129 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                         desksTransitionObserver.getClass();
                         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
                             Set<DeskTransition> set = (Set) desksTransitionObserver.deskTransitions.remove(iBinder2);
-                            Collection collection = (Set) ((LinkedHashMap) desksTransitionObserver.activeDeskTransitions).get(iBinder2);
-                            if (collection == null) {
-                                collection = new LinkedHashSet();
+                            Collection linkedHashSet = (Set) ((LinkedHashMap) desksTransitionObserver.activeDeskTransitions).get(iBinder2);
+                            if (linkedHashSet == null) {
+                                linkedHashSet = new LinkedHashSet();
                             }
                             if (set != null) {
                                 for (DeskTransition deskTransition : set) {
                                     DesksTransitionObserver.logD("Desk transition ready: %s", deskTransition);
                                     DesktopUserRepositories desktopUserRepositories = desksTransitionObserver.desktopUserRepositories;
                                     DesktopRepository current = desktopUserRepositories.getCurrent();
+                                    Object obj2 = null;
                                     if (!(deskTransition instanceof DeskTransition.RemoveDesk)) {
                                         boolean z = deskTransition instanceof DeskTransition.ActivateDesk;
-                                        int i2 = 0;
                                         DesksOrganizer desksOrganizer = desksTransitionObserver.desksOrganizer;
                                         if (z) {
-                                            Iterator it = transitionInfo2.getChanges().iterator();
-                                            while (true) {
-                                                if (it.hasNext()) {
-                                                    obj3 = it.next();
-                                                    TransitionInfo.Change change = (TransitionInfo.Change) obj3;
-                                                    change.getClass();
-                                                    int i3 = ((DeskTransition.ActivateDesk) deskTransition).deskId;
-                                                    ((RootTaskDesksOrganizer) desksOrganizer).getClass();
-                                                    ActivityManager.RunningTaskInfo taskInfo4 = change.getTaskInfo();
-                                                    if (taskInfo4 == null || taskInfo4.taskId != i3 || (taskInfo3 = change.getTaskInfo()) == null || !taskInfo3.isVisibleRequested || change.getMode() != 3) {
-                                                    }
-                                                } else {
-                                                    obj3 = null;
-                                                }
-                                            }
-                                            if (((TransitionInfo.Change) obj3) == null) {
-                                                DesksTransitionObserver.logD("Activating desk without transition change", new Object[0]);
-                                            }
                                             DeskTransition.ActivateDesk activateDesk = (DeskTransition.ActivateDesk) deskTransition;
-                                            int i4 = activateDesk.deskId;
-                                            int displayForDesk = current.desktopData.getDisplayForDesk(i4);
-                                            int i5 = activateDesk.displayId;
-                                            if (displayForDesk != i5) {
-                                                current.onDeskDisplayChanged(i4, i5);
-                                                OnDeskRemovedListener onDeskRemovedListener = activateDesk.onDeskRemovedListener;
-                                                if (onDeskRemovedListener != null) {
-                                                    ((DesktopDisplayEventHandler) onDeskRemovedListener).createDefaultDesksIfNeeded(Collections.singleton(Integer.valueOf(displayForDesk)), null);
+                                            int i3 = activateDesk.userId;
+                                            if (i3 == -1 || i3 == current.userId) {
+                                                Iterator it = transitionInfo2.getChanges().iterator();
+                                                while (true) {
+                                                    boolean zHasNext = it.hasNext();
+                                                    i2 = activateDesk.deskId;
+                                                    if (zHasNext) {
+                                                        next = it.next();
+                                                        TransitionInfo.Change change = (TransitionInfo.Change) next;
+                                                        change.getClass();
+                                                        ((RootTaskDesksOrganizer) desksOrganizer).getClass();
+                                                        ActivityManager.RunningTaskInfo taskInfo4 = change.getTaskInfo();
+                                                        if (taskInfo4 == null || taskInfo4.taskId != i2 || (taskInfo3 = change.getTaskInfo()) == null || !taskInfo3.isVisibleRequested || change.getMode() != 3) {
+                                                        }
+                                                    } else {
+                                                        next = null;
+                                                    }
                                                 }
+                                                if (((TransitionInfo.Change) next) == null) {
+                                                    DesksTransitionObserver.logD("Activating desk without transition change", new Object[0]);
+                                                }
+                                                int displayForDesk = current.desktopData.getDisplayForDesk(i2);
+                                                int i4 = activateDesk.displayId;
+                                                if (displayForDesk != i4) {
+                                                    current.onDeskDisplayChanged(i2, i4);
+                                                    OnDeskRemovedListener onDeskRemovedListener = activateDesk.onDeskRemovedListener;
+                                                    if (onDeskRemovedListener != null) {
+                                                        ((DesktopDisplayEventHandler) onDeskRemovedListener).createDefaultDesksIfNeeded(Collections.singleton(Integer.valueOf(displayForDesk)), null);
+                                                    }
+                                                }
+                                                current.setActiveDesk(i4, i2);
                                             }
-                                            current.setActiveDesk(i5, activateDesk.deskId);
                                         } else if (deskTransition instanceof DeskTransition.ActiveDeskWithTask) {
                                             Iterator it2 = transitionInfo2.getChanges().iterator();
                                             while (true) {
                                                 if (it2.hasNext()) {
-                                                    Object next = it2.next();
-                                                    TransitionInfo.Change change2 = (TransitionInfo.Change) next;
+                                                    Object next2 = it2.next();
+                                                    TransitionInfo.Change change2 = (TransitionInfo.Change) next2;
                                                     ActivityManager.RunningTaskInfo taskInfo5 = change2.getTaskInfo();
                                                     if (taskInfo5 != null) {
                                                         DeskTransition.ActiveDeskWithTask activeDeskWithTask = (DeskTransition.ActiveDeskWithTask) deskTransition;
-                                                        obj2 = (taskInfo5.taskId == activeDeskWithTask.enterTaskId && (taskInfo2 = change2.getTaskInfo()) != null && taskInfo2.isVisibleRequested && (deskAtEnd = ((RootTaskDesksOrganizer) desksOrganizer).getDeskAtEnd(change2)) != null && deskAtEnd.intValue() == activeDeskWithTask.deskId) ? next : null;
+                                                        if (taskInfo5.taskId == activeDeskWithTask.enterTaskId && (taskInfo2 = change2.getTaskInfo()) != null && taskInfo2.isVisibleRequested && (deskAtEnd = ((RootTaskDesksOrganizer) desksOrganizer).getDeskAtEnd(change2)) != null && deskAtEnd.intValue() == activeDeskWithTask.deskId) {
+                                                            obj2 = next2;
+                                                        }
                                                     }
                                                 }
                                             }
                                             if (((TransitionInfo.Change) obj2) != null) {
                                                 DeskTransition.ActiveDeskWithTask activeDeskWithTask2 = (DeskTransition.ActiveDeskWithTask) deskTransition;
-                                                int i6 = activeDeskWithTask2.displayId;
-                                                int i7 = activeDeskWithTask2.deskId;
-                                                current.setActiveDesk(i6, i7);
-                                                current.addTaskToDesk(activeDeskWithTask2.displayId, i7, activeDeskWithTask2.enterTaskId, true);
+                                                int i5 = activeDeskWithTask2.displayId;
+                                                int i6 = activeDeskWithTask2.deskId;
+                                                current.setActiveDesk(i5, i6);
+                                                current.addTaskToDesk(activeDeskWithTask2.displayId, i6, activeDeskWithTask2.enterTaskId, true);
                                             }
                                         } else if (deskTransition instanceof DeskTransition.DeactivateDesk) {
                                             desksTransitionObserver.handleDeactivateDeskTransition(transitionInfo2, (DeskTransition.DeactivateDesk) deskTransition);
+                                        } else if (deskTransition instanceof DeskTransition.ChangeDeskDisplay) {
+                                            DeskTransition.ChangeDeskDisplay changeDeskDisplay = (DeskTransition.ChangeDeskDisplay) deskTransition;
+                                            DesksTransitionObserver.logD("handleChangeDeskDisplay: %s", changeDeskDisplay);
+                                            int i7 = changeDeskDisplay.deskId;
+                                            Iterator it3 = desktopUserRepositories.getRepositoriesWithDeskId(i7).iterator();
+                                            while (it3.hasNext()) {
+                                                ((DesktopRepository) it3.next()).onDeskDisplayChanged(i7, changeDeskDisplay.displayId);
+                                            }
                                         } else {
-                                            boolean z2 = deskTransition instanceof DeskTransition.ChangeDeskDisplay;
+                                            if (!(deskTransition instanceof DeskTransition.RemoveDisplay)) {
+                                                throw new NoWhenBranchMatchedException();
+                                            }
+                                            final DeskTransition.RemoveDisplay removeDisplay = (DeskTransition.RemoveDisplay) deskTransition;
+                                            DesksTransitionObserver.logD("handleRemoveDisplay: %s", removeDisplay);
+                                            Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.multidesks.DesksTransitionObserver$$ExternalSyntheticLambda0
+                                                @Override // kotlin.jvm.functions.Function1
+                                                /* renamed from: invoke */
+                                                public final Object mo781invoke(Object obj3) {
+                                                    DesktopRepository.DesktopData desktopData;
+                                                    DesktopRepository desktopRepository = (DesktopRepository) obj3;
+                                                    int i8 = DesksTransitionObserver.$r8$clinit;
+                                                    int i9 = removeDisplay.displayId;
+                                                    Set allDeskIds = desktopRepository.getAllDeskIds();
+                                                    ArrayList arrayList = new ArrayList();
+                                                    Iterator it4 = allDeskIds.iterator();
+                                                    while (true) {
+                                                        boolean zHasNext2 = it4.hasNext();
+                                                        desktopData = desktopRepository.desktopData;
+                                                        if (!zHasNext2) {
+                                                            break;
+                                                        }
+                                                        Object next3 = it4.next();
+                                                        if (desktopData.getDisplayForDesk(((Number) next3).intValue()) == i9) {
+                                                            arrayList.add(next3);
+                                                        }
+                                                    }
+                                                    int size = arrayList.size();
+                                                    int i10 = 0;
+                                                    while (i10 < size) {
+                                                        Object obj4 = arrayList.get(i10);
+                                                        i10++;
+                                                        desktopRepository.removeDesk(((Number) obj4).intValue(), true);
+                                                    }
+                                                    desktopData.removeDisplay(i9);
+                                                    return Unit.INSTANCE;
+                                                }
+                                            };
                                             DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories.desktopRepoByUserId;
-                                            if (z2) {
-                                                DeskTransition.ChangeDeskDisplay changeDeskDisplay = (DeskTransition.ChangeDeskDisplay) deskTransition;
-                                                DesksTransitionObserver.logD("handleChangeDeskDisplay: %s", changeDeskDisplay);
-                                                int i8 = changeDeskDisplay.deskId;
-                                                LinkedHashSet linkedHashSet = new LinkedHashSet();
-                                                int size = desktopUserRepositories$desktopRepoByUserId$1.size();
-                                                while (i2 < size) {
-                                                    desktopUserRepositories$desktopRepoByUserId$1.keyAt(i2);
-                                                    DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i2);
-                                                    if (desktopRepository.getAllDeskIds().contains(Integer.valueOf(i8))) {
-                                                        linkedHashSet.add(desktopRepository);
-                                                    }
-                                                    i2++;
-                                                }
-                                                Iterator it3 = linkedHashSet.iterator();
-                                                while (it3.hasNext()) {
-                                                    ((DesktopRepository) it3.next()).onDeskDisplayChanged(i8, changeDeskDisplay.displayId);
-                                                }
-                                            } else {
-                                                if (!(deskTransition instanceof DeskTransition.RemoveDisplay)) {
-                                                    throw new NoWhenBranchMatchedException();
-                                                }
-                                                final DeskTransition.RemoveDisplay removeDisplay = (DeskTransition.RemoveDisplay) deskTransition;
-                                                DesksTransitionObserver.logD("handleRemoveDisplay: %s", removeDisplay);
-                                                Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.multidesks.DesksTransitionObserver$$ExternalSyntheticLambda0
-                                                    @Override // kotlin.jvm.functions.Function1
-                                                    /* renamed from: invoke */
-                                                    public final Object mo779invoke(Object obj4) {
-                                                        DesktopRepository.DesktopData desktopData;
-                                                        DesktopRepository desktopRepository2 = (DesktopRepository) obj4;
-                                                        int i9 = DesksTransitionObserver.$r8$clinit;
-                                                        int i10 = DeskTransition.RemoveDisplay.this.displayId;
-                                                        Set allDeskIds = desktopRepository2.getAllDeskIds();
-                                                        ArrayList arrayList = new ArrayList();
-                                                        Iterator it4 = allDeskIds.iterator();
-                                                        while (true) {
-                                                            boolean hasNext = it4.hasNext();
-                                                            desktopData = desktopRepository2.desktopData;
-                                                            if (!hasNext) {
-                                                                break;
-                                                            }
-                                                            Object next2 = it4.next();
-                                                            if (desktopData.getDisplayForDesk(((Number) next2).intValue()) == i10) {
-                                                                arrayList.add(next2);
-                                                            }
-                                                        }
-                                                        int size2 = arrayList.size();
-                                                        int i11 = 0;
-                                                        while (i11 < size2) {
-                                                            Object obj5 = arrayList.get(i11);
-                                                            i11++;
-                                                            desktopRepository2.removeDesk(((Number) obj5).intValue(), true);
-                                                        }
-                                                        desktopData.removeDisplay(i10);
-                                                        return Unit.INSTANCE;
-                                                    }
-                                                };
-                                                int size2 = desktopUserRepositories$desktopRepoByUserId$1.size();
-                                                while (i2 < size2) {
-                                                    desktopUserRepositories$desktopRepoByUserId$1.keyAt(i2);
-                                                    function1.mo779invoke((DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i2));
-                                                    i2++;
-                                                }
+                                            int size = desktopUserRepositories$desktopRepoByUserId$1.size();
+                                            for (int i8 = 0; i8 < size; i8++) {
+                                                desktopUserRepositories$desktopRepoByUserId$1.keyAt(i8);
+                                                function1.mo781invoke((DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i8));
                                             }
                                         }
                                     } else {
@@ -349,11 +339,11 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                                         }
                                     }
                                     if ((deskTransition instanceof DeskTransition.ActivateDesk) || (deskTransition instanceof DeskTransition.ActiveDeskWithTask)) {
-                                        collection.add(deskTransition);
+                                        linkedHashSet.add(deskTransition);
                                     }
                                 }
                             }
-                            desksTransitionObserver.activeDeskTransitions.put(iBinder2, collection);
+                            desksTransitionObserver.activeDeskTransitions.put(iBinder2, linkedHashSet);
                             return;
                         }
                         return;
@@ -388,7 +378,7 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
             });
         }
         final FocusTransitionObserver focusTransitionObserver = this.mFocusTransitionObserver;
-        SparseArray clone = focusTransitionObserver.mFocusedTaskOnDisplay.clone();
+        SparseArray sparseArrayClone = focusTransitionObserver.mFocusedTaskOnDisplay.clone();
         List changes = transitionInfo.getChanges();
         int i2 = 1;
         int size = changes.size() - 1;
@@ -407,7 +397,7 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                 } else {
                     boolean z = false;
                     int i4 = (change.getStartDisplayId() == -1 || change.getEndDisplayId() == -1 || change.getStartDisplayId() == change.getEndDisplayId()) ? 0 : i2;
-                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) clone.get(change.getStartDisplayId());
+                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) sparseArrayClone.get(change.getStartDisplayId());
                     if (runningTaskInfo2 != null && taskInfo2.taskId == runningTaskInfo2.taskId) {
                         z = true;
                     }
@@ -440,7 +430,7 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                 ((HashMap) focusTransitionObserver.mLocalListeners).forEach(new BiConsumer() { // from class: com.android.wm.shell.transition.FocusTransitionObserver$$ExternalSyntheticLambda3
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        FocusTransitionObserver focusTransitionObserver2 = FocusTransitionObserver.this;
+                        FocusTransitionObserver focusTransitionObserver2 = focusTransitionObserver;
                         focusTransitionObserver2.getClass();
                         ((Executor) obj2).execute(new FocusTransitionObserver$$ExternalSyntheticLambda0(focusTransitionObserver2, (FocusTransitionListener) obj, 1));
                     }
@@ -502,10 +492,10 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
         this.mDesksTransitionObserver.ifPresent(new Consumer() { // from class: com.android.wm.shell.freeform.FreeformTaskTransitionObserver$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Object obj2;
                 ActivityManager.RunningTaskInfo taskInfo22;
                 Integer deskAtEnd;
-                Object obj3;
+                int i22;
+                Object next;
                 ActivityManager.RunningTaskInfo taskInfo3;
                 switch (i5) {
                     case 0:
@@ -515,138 +505,129 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                         desksTransitionObserver.getClass();
                         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
                             Set<DeskTransition> set = (Set) desksTransitionObserver.deskTransitions.remove(iBinder2);
-                            Collection collection = (Set) ((LinkedHashMap) desksTransitionObserver.activeDeskTransitions).get(iBinder2);
-                            if (collection == null) {
-                                collection = new LinkedHashSet();
+                            Collection linkedHashSet = (Set) ((LinkedHashMap) desksTransitionObserver.activeDeskTransitions).get(iBinder2);
+                            if (linkedHashSet == null) {
+                                linkedHashSet = new LinkedHashSet();
                             }
                             if (set != null) {
                                 for (DeskTransition deskTransition : set) {
                                     DesksTransitionObserver.logD("Desk transition ready: %s", deskTransition);
                                     DesktopUserRepositories desktopUserRepositories = desksTransitionObserver.desktopUserRepositories;
                                     DesktopRepository current = desktopUserRepositories.getCurrent();
+                                    Object obj2 = null;
                                     if (!(deskTransition instanceof DeskTransition.RemoveDesk)) {
                                         boolean z3 = deskTransition instanceof DeskTransition.ActivateDesk;
-                                        int i22 = 0;
                                         DesksOrganizer desksOrganizer = desksTransitionObserver.desksOrganizer;
                                         if (z3) {
-                                            Iterator it = transitionInfo2.getChanges().iterator();
-                                            while (true) {
-                                                if (it.hasNext()) {
-                                                    obj3 = it.next();
-                                                    TransitionInfo.Change change3 = (TransitionInfo.Change) obj3;
-                                                    change3.getClass();
-                                                    int i32 = ((DeskTransition.ActivateDesk) deskTransition).deskId;
-                                                    ((RootTaskDesksOrganizer) desksOrganizer).getClass();
-                                                    ActivityManager.RunningTaskInfo taskInfo4 = change3.getTaskInfo();
-                                                    if (taskInfo4 == null || taskInfo4.taskId != i32 || (taskInfo3 = change3.getTaskInfo()) == null || !taskInfo3.isVisibleRequested || change3.getMode() != 3) {
-                                                    }
-                                                } else {
-                                                    obj3 = null;
-                                                }
-                                            }
-                                            if (((TransitionInfo.Change) obj3) == null) {
-                                                DesksTransitionObserver.logD("Activating desk without transition change", new Object[0]);
-                                            }
                                             DeskTransition.ActivateDesk activateDesk = (DeskTransition.ActivateDesk) deskTransition;
-                                            int i42 = activateDesk.deskId;
-                                            int displayForDesk = current.desktopData.getDisplayForDesk(i42);
-                                            int i52 = activateDesk.displayId;
-                                            if (displayForDesk != i52) {
-                                                current.onDeskDisplayChanged(i42, i52);
-                                                OnDeskRemovedListener onDeskRemovedListener = activateDesk.onDeskRemovedListener;
-                                                if (onDeskRemovedListener != null) {
-                                                    ((DesktopDisplayEventHandler) onDeskRemovedListener).createDefaultDesksIfNeeded(Collections.singleton(Integer.valueOf(displayForDesk)), null);
+                                            int i32 = activateDesk.userId;
+                                            if (i32 == -1 || i32 == current.userId) {
+                                                Iterator it = transitionInfo2.getChanges().iterator();
+                                                while (true) {
+                                                    boolean zHasNext = it.hasNext();
+                                                    i22 = activateDesk.deskId;
+                                                    if (zHasNext) {
+                                                        next = it.next();
+                                                        TransitionInfo.Change change3 = (TransitionInfo.Change) next;
+                                                        change3.getClass();
+                                                        ((RootTaskDesksOrganizer) desksOrganizer).getClass();
+                                                        ActivityManager.RunningTaskInfo taskInfo4 = change3.getTaskInfo();
+                                                        if (taskInfo4 == null || taskInfo4.taskId != i22 || (taskInfo3 = change3.getTaskInfo()) == null || !taskInfo3.isVisibleRequested || change3.getMode() != 3) {
+                                                        }
+                                                    } else {
+                                                        next = null;
+                                                    }
                                                 }
+                                                if (((TransitionInfo.Change) next) == null) {
+                                                    DesksTransitionObserver.logD("Activating desk without transition change", new Object[0]);
+                                                }
+                                                int displayForDesk = current.desktopData.getDisplayForDesk(i22);
+                                                int i42 = activateDesk.displayId;
+                                                if (displayForDesk != i42) {
+                                                    current.onDeskDisplayChanged(i22, i42);
+                                                    OnDeskRemovedListener onDeskRemovedListener = activateDesk.onDeskRemovedListener;
+                                                    if (onDeskRemovedListener != null) {
+                                                        ((DesktopDisplayEventHandler) onDeskRemovedListener).createDefaultDesksIfNeeded(Collections.singleton(Integer.valueOf(displayForDesk)), null);
+                                                    }
+                                                }
+                                                current.setActiveDesk(i42, i22);
                                             }
-                                            current.setActiveDesk(i52, activateDesk.deskId);
                                         } else if (deskTransition instanceof DeskTransition.ActiveDeskWithTask) {
                                             Iterator it2 = transitionInfo2.getChanges().iterator();
                                             while (true) {
                                                 if (it2.hasNext()) {
-                                                    Object next = it2.next();
-                                                    TransitionInfo.Change change22 = (TransitionInfo.Change) next;
+                                                    Object next2 = it2.next();
+                                                    TransitionInfo.Change change22 = (TransitionInfo.Change) next2;
                                                     ActivityManager.RunningTaskInfo taskInfo5 = change22.getTaskInfo();
                                                     if (taskInfo5 != null) {
                                                         DeskTransition.ActiveDeskWithTask activeDeskWithTask = (DeskTransition.ActiveDeskWithTask) deskTransition;
-                                                        obj2 = (taskInfo5.taskId == activeDeskWithTask.enterTaskId && (taskInfo22 = change22.getTaskInfo()) != null && taskInfo22.isVisibleRequested && (deskAtEnd = ((RootTaskDesksOrganizer) desksOrganizer).getDeskAtEnd(change22)) != null && deskAtEnd.intValue() == activeDeskWithTask.deskId) ? next : null;
+                                                        if (taskInfo5.taskId == activeDeskWithTask.enterTaskId && (taskInfo22 = change22.getTaskInfo()) != null && taskInfo22.isVisibleRequested && (deskAtEnd = ((RootTaskDesksOrganizer) desksOrganizer).getDeskAtEnd(change22)) != null && deskAtEnd.intValue() == activeDeskWithTask.deskId) {
+                                                            obj2 = next2;
+                                                        }
                                                     }
                                                 }
                                             }
                                             if (((TransitionInfo.Change) obj2) != null) {
                                                 DeskTransition.ActiveDeskWithTask activeDeskWithTask2 = (DeskTransition.ActiveDeskWithTask) deskTransition;
-                                                int i6 = activeDeskWithTask2.displayId;
-                                                int i7 = activeDeskWithTask2.deskId;
-                                                current.setActiveDesk(i6, i7);
-                                                current.addTaskToDesk(activeDeskWithTask2.displayId, i7, activeDeskWithTask2.enterTaskId, true);
+                                                int i52 = activeDeskWithTask2.displayId;
+                                                int i6 = activeDeskWithTask2.deskId;
+                                                current.setActiveDesk(i52, i6);
+                                                current.addTaskToDesk(activeDeskWithTask2.displayId, i6, activeDeskWithTask2.enterTaskId, true);
                                             }
                                         } else if (deskTransition instanceof DeskTransition.DeactivateDesk) {
                                             desksTransitionObserver.handleDeactivateDeskTransition(transitionInfo2, (DeskTransition.DeactivateDesk) deskTransition);
+                                        } else if (deskTransition instanceof DeskTransition.ChangeDeskDisplay) {
+                                            DeskTransition.ChangeDeskDisplay changeDeskDisplay = (DeskTransition.ChangeDeskDisplay) deskTransition;
+                                            DesksTransitionObserver.logD("handleChangeDeskDisplay: %s", changeDeskDisplay);
+                                            int i7 = changeDeskDisplay.deskId;
+                                            Iterator it3 = desktopUserRepositories.getRepositoriesWithDeskId(i7).iterator();
+                                            while (it3.hasNext()) {
+                                                ((DesktopRepository) it3.next()).onDeskDisplayChanged(i7, changeDeskDisplay.displayId);
+                                            }
                                         } else {
-                                            boolean z22 = deskTransition instanceof DeskTransition.ChangeDeskDisplay;
+                                            if (!(deskTransition instanceof DeskTransition.RemoveDisplay)) {
+                                                throw new NoWhenBranchMatchedException();
+                                            }
+                                            final DeskTransition.RemoveDisplay removeDisplay = (DeskTransition.RemoveDisplay) deskTransition;
+                                            DesksTransitionObserver.logD("handleRemoveDisplay: %s", removeDisplay);
+                                            Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.multidesks.DesksTransitionObserver$$ExternalSyntheticLambda0
+                                                @Override // kotlin.jvm.functions.Function1
+                                                /* renamed from: invoke */
+                                                public final Object mo781invoke(Object obj3) {
+                                                    DesktopRepository.DesktopData desktopData;
+                                                    DesktopRepository desktopRepository = (DesktopRepository) obj3;
+                                                    int i8 = DesksTransitionObserver.$r8$clinit;
+                                                    int i9 = removeDisplay.displayId;
+                                                    Set allDeskIds = desktopRepository.getAllDeskIds();
+                                                    ArrayList arrayList3 = new ArrayList();
+                                                    Iterator it4 = allDeskIds.iterator();
+                                                    while (true) {
+                                                        boolean zHasNext2 = it4.hasNext();
+                                                        desktopData = desktopRepository.desktopData;
+                                                        if (!zHasNext2) {
+                                                            break;
+                                                        }
+                                                        Object next3 = it4.next();
+                                                        if (desktopData.getDisplayForDesk(((Number) next3).intValue()) == i9) {
+                                                            arrayList3.add(next3);
+                                                        }
+                                                    }
+                                                    int size2 = arrayList3.size();
+                                                    int i10 = 0;
+                                                    while (i10 < size2) {
+                                                        Object obj4 = arrayList3.get(i10);
+                                                        i10++;
+                                                        desktopRepository.removeDesk(((Number) obj4).intValue(), true);
+                                                    }
+                                                    desktopData.removeDisplay(i9);
+                                                    return Unit.INSTANCE;
+                                                }
+                                            };
                                             DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories.desktopRepoByUserId;
-                                            if (z22) {
-                                                DeskTransition.ChangeDeskDisplay changeDeskDisplay = (DeskTransition.ChangeDeskDisplay) deskTransition;
-                                                DesksTransitionObserver.logD("handleChangeDeskDisplay: %s", changeDeskDisplay);
-                                                int i8 = changeDeskDisplay.deskId;
-                                                LinkedHashSet linkedHashSet = new LinkedHashSet();
-                                                int size2 = desktopUserRepositories$desktopRepoByUserId$1.size();
-                                                while (i22 < size2) {
-                                                    desktopUserRepositories$desktopRepoByUserId$1.keyAt(i22);
-                                                    DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i22);
-                                                    if (desktopRepository.getAllDeskIds().contains(Integer.valueOf(i8))) {
-                                                        linkedHashSet.add(desktopRepository);
-                                                    }
-                                                    i22++;
-                                                }
-                                                Iterator it3 = linkedHashSet.iterator();
-                                                while (it3.hasNext()) {
-                                                    ((DesktopRepository) it3.next()).onDeskDisplayChanged(i8, changeDeskDisplay.displayId);
-                                                }
-                                            } else {
-                                                if (!(deskTransition instanceof DeskTransition.RemoveDisplay)) {
-                                                    throw new NoWhenBranchMatchedException();
-                                                }
-                                                final DeskTransition.RemoveDisplay removeDisplay = (DeskTransition.RemoveDisplay) deskTransition;
-                                                DesksTransitionObserver.logD("handleRemoveDisplay: %s", removeDisplay);
-                                                Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.multidesks.DesksTransitionObserver$$ExternalSyntheticLambda0
-                                                    @Override // kotlin.jvm.functions.Function1
-                                                    /* renamed from: invoke */
-                                                    public final Object mo779invoke(Object obj4) {
-                                                        DesktopRepository.DesktopData desktopData;
-                                                        DesktopRepository desktopRepository2 = (DesktopRepository) obj4;
-                                                        int i9 = DesksTransitionObserver.$r8$clinit;
-                                                        int i10 = DeskTransition.RemoveDisplay.this.displayId;
-                                                        Set allDeskIds = desktopRepository2.getAllDeskIds();
-                                                        ArrayList arrayList3 = new ArrayList();
-                                                        Iterator it4 = allDeskIds.iterator();
-                                                        while (true) {
-                                                            boolean hasNext = it4.hasNext();
-                                                            desktopData = desktopRepository2.desktopData;
-                                                            if (!hasNext) {
-                                                                break;
-                                                            }
-                                                            Object next2 = it4.next();
-                                                            if (desktopData.getDisplayForDesk(((Number) next2).intValue()) == i10) {
-                                                                arrayList3.add(next2);
-                                                            }
-                                                        }
-                                                        int size22 = arrayList3.size();
-                                                        int i11 = 0;
-                                                        while (i11 < size22) {
-                                                            Object obj5 = arrayList3.get(i11);
-                                                            i11++;
-                                                            desktopRepository2.removeDesk(((Number) obj5).intValue(), true);
-                                                        }
-                                                        desktopData.removeDisplay(i10);
-                                                        return Unit.INSTANCE;
-                                                    }
-                                                };
-                                                int size22 = desktopUserRepositories$desktopRepoByUserId$1.size();
-                                                while (i22 < size22) {
-                                                    desktopUserRepositories$desktopRepoByUserId$1.keyAt(i22);
-                                                    function1.mo779invoke((DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i22));
-                                                    i22++;
-                                                }
+                                            int size2 = desktopUserRepositories$desktopRepoByUserId$1.size();
+                                            for (int i8 = 0; i8 < size2; i8++) {
+                                                desktopUserRepositories$desktopRepoByUserId$1.keyAt(i8);
+                                                function1.mo781invoke((DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i8));
                                             }
                                         }
                                     } else {
@@ -661,11 +642,11 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
                                         }
                                     }
                                     if ((deskTransition instanceof DeskTransition.ActivateDesk) || (deskTransition instanceof DeskTransition.ActiveDeskWithTask)) {
-                                        collection.add(deskTransition);
+                                        linkedHashSet.add(deskTransition);
                                     }
                                 }
                             }
-                            desksTransitionObserver.activeDeskTransitions.put(iBinder2, collection);
+                            desksTransitionObserver.activeDeskTransitions.put(iBinder2, linkedHashSet);
                             return;
                         }
                         return;
@@ -698,6 +679,9 @@ public class FreeformTaskTransitionObserver implements Transitions.TransitionObs
     public final void onTransitionStarting(IBinder iBinder) {
         if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue()) {
             this.mDesktopImmersiveController.ifPresent(new FreeformTaskTransitionObserver$$ExternalSyntheticLambda13());
+        }
+        if (CoreRune.MW_CAPTION) {
+            this.mWindowDecorViewModel.onTransitionStarting(iBinder);
         }
     }
 }

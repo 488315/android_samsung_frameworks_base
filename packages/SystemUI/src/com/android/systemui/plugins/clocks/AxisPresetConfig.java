@@ -8,14 +8,12 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AxisPresetConfig {
     public static final int $stable = 8;
     private final IndexedStyle current;
     private final List<Group> groups;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Group {
         public static final int $stable = 8;
         private final Drawable icon;
@@ -77,7 +75,6 @@ public final class AxisPresetConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IndexedStyle {
         public static final int $stable = 8;
         private final int groupIndex;
@@ -150,10 +147,10 @@ public final class AxisPresetConfig {
             int i = this.groupIndex;
             int i2 = this.presetIndex;
             ClockAxisStyle clockAxisStyle = this.style;
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "IndexedStyle(groupIndex=", ", presetIndex=", ", style=");
-            m.append(clockAxisStyle);
-            m.append(")");
-            return m.toString();
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "IndexedStyle(groupIndex=", ", presetIndex=", ", style=");
+            sbM.append(clockAxisStyle);
+            sbM.append(")");
+            return sbM.toString();
         }
     }
 
@@ -231,9 +228,9 @@ public final class AxisPresetConfig {
     }
 
     public int hashCode() {
-        int hashCode = this.groups.hashCode() * 31;
+        int iHashCode = this.groups.hashCode() * 31;
         IndexedStyle indexedStyle = this.current;
-        return hashCode + (indexedStyle == null ? 0 : indexedStyle.hashCode());
+        return iHashCode + (indexedStyle == null ? 0 : indexedStyle.hashCode());
     }
 
     public String toString() {

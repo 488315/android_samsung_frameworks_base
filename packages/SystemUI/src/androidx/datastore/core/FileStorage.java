@@ -1,6 +1,7 @@
 package androidx.datastore.core;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import kotlin.Unit;
@@ -8,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FileStorage implements Storage {
     public static final Set activeFiles;
@@ -17,7 +17,6 @@ public final class FileStorage implements Storage {
     public final Function0 produceFile;
     public final Serializer serializer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,7 +39,7 @@ public final class FileStorage implements Storage {
     }
 
     @Override // androidx.datastore.core.Storage
-    public final StorageConnection createConnection() {
+    public final StorageConnection createConnection() throws IOException {
         final File canonicalFile = ((File) this.produceFile.invoke()).getCanonicalFile();
         synchronized (activeFilesLock) {
             String absolutePath = canonicalFile.getAbsolutePath();
@@ -51,7 +50,7 @@ public final class FileStorage implements Storage {
             absolutePath.getClass();
             set.add(absolutePath);
         }
-        return new FileStorageConnection(canonicalFile, this.serializer, (InterProcessCoordinator) this.coordinatorProducer.mo779invoke(canonicalFile), new Function0() { // from class: androidx.datastore.core.FileStorage$$ExternalSyntheticLambda1
+        return new FileStorageConnection(canonicalFile, this.serializer, (InterProcessCoordinator) this.coordinatorProducer.mo781invoke(canonicalFile), new Function0() { // from class: androidx.datastore.core.FileStorage$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 File file = canonicalFile;

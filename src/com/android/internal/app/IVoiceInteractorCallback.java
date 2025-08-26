@@ -89,9 +89,9 @@ public interface IVoiceInteractorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceInteractorCallback)) {
-                return (IVoiceInteractorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceInteractorCallback)) {
+                return (IVoiceInteractorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -133,43 +133,43 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IVoiceInteractorRequest asInterface = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deliverConfirmationResult(asInterface, readBoolean, bundle);
+                    deliverConfirmationResult(iVoiceInteractorRequestAsInterface, z, bundle);
                     return true;
                 case 2:
-                    IVoiceInteractorRequest asInterface2 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean2 = parcel.readBoolean();
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface2 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z2 = parcel.readBoolean();
                     VoiceInteractor.PickOptionRequest.Option[] optionArr = (VoiceInteractor.PickOptionRequest.Option[]) parcel.createTypedArray(VoiceInteractor.PickOptionRequest.Option.CREATOR);
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deliverPickOptionResult(asInterface2, readBoolean2, optionArr, bundle2);
+                    deliverPickOptionResult(iVoiceInteractorRequestAsInterface2, z2, optionArr, bundle2);
                     return true;
                 case 3:
-                    IVoiceInteractorRequest asInterface3 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface3 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deliverCompleteVoiceResult(asInterface3, bundle3);
+                    deliverCompleteVoiceResult(iVoiceInteractorRequestAsInterface3, bundle3);
                     return true;
                 case 4:
-                    IVoiceInteractorRequest asInterface4 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface4 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deliverAbortVoiceResult(asInterface4, bundle4);
+                    deliverAbortVoiceResult(iVoiceInteractorRequestAsInterface4, bundle4);
                     return true;
                 case 5:
-                    IVoiceInteractorRequest asInterface5 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean3 = parcel.readBoolean();
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface5 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z3 = parcel.readBoolean();
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deliverCommandResult(asInterface5, readBoolean3, bundle5);
+                    deliverCommandResult(iVoiceInteractorRequestAsInterface5, z3, bundle5);
                     return true;
                 case 6:
-                    IVoiceInteractorRequest asInterface6 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractorRequest iVoiceInteractorRequestAsInterface6 = IVoiceInteractorRequest.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deliverCancel(asInterface6);
+                    deliverCancel(iVoiceInteractorRequestAsInterface6);
                     return true;
                 case 7:
                     destroy();
@@ -197,93 +197,93 @@ public interface IVoiceInteractorCallback extends IInterface {
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverConfirmationResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverPickOptionResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, VoiceInteractor.PickOptionRequest.Option[] optionArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedArray(optionArr, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedArray(optionArr, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverCompleteVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverAbortVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverCommandResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void deliverCancel(IVoiceInteractorRequest iVoiceInteractorRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractorRequest);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractorRequest);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
             public void destroy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

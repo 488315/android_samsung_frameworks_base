@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ResourceId;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.media.TtmlUtils;
@@ -27,6 +28,7 @@ import android.view.inspector.PropertyReader;
 import android.widget.AbsListView;
 import android.widget.RemoteViews;
 import com.android.internal.R;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -143,11 +145,11 @@ public class RelativeLayout extends ViewGroup {
     }
 
     private void initFromAttributes(Context context, AttributeSet attributeSet, int i, int i2) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RelativeLayout, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.RelativeLayout, attributeSet, obtainStyledAttributes, i, i2);
-        this.mIgnoreGravity = obtainStyledAttributes.getResourceId(1, -1);
-        this.mGravity = obtainStyledAttributes.getInt(0, this.mGravity);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RelativeLayout, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.RelativeLayout, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mIgnoreGravity = typedArrayObtainStyledAttributes.getResourceId(1, -1);
+        this.mGravity = typedArrayObtainStyledAttributes.getInt(0, this.mGravity);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private void queryCompatibilityModes(Context context) {
@@ -234,18 +236,244 @@ public class RelativeLayout extends ViewGroup {
         dependencyGraph.getSortedViews(this.mSortedHorizontalChildren, RULES_HORIZONTAL);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:61:0x012a  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x012a  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x0146  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x0164  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r28, int r29) {
-        /*
-            Method dump skipped, instructions count: 843
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.RelativeLayout.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int i3;
+        boolean z;
+        int i4 = 0;
+        if (this.mDirtyHierarchy) {
+            this.mDirtyHierarchy = false;
+            sortChildren();
+        }
+        int mode = View.MeasureSpec.getMode(i);
+        int mode2 = View.MeasureSpec.getMode(i2);
+        int size = View.MeasureSpec.getSize(i);
+        int size2 = View.MeasureSpec.getSize(i2);
+        if (mode == 0) {
+            size = -1;
+        }
+        if (mode2 == 0) {
+            size2 = -1;
+        }
+        int iResolveSize = mode == 1073741824 ? size : 0;
+        int iResolveSize2 = mode2 == 1073741824 ? size2 : 0;
+        int i5 = this.mGravity;
+        int i6 = 8388615 & i5;
+        boolean z2 = (i6 == 8388611 || i6 == 0) ? false : true;
+        int i7 = i5 & 112;
+        boolean z3 = (i7 == 48 || i7 == 0) ? false : true;
+        View viewFindViewById = ((z2 || z3) && (i3 = this.mIgnoreGravity) != -1) ? findViewById(i3) : null;
+        boolean z4 = mode != 1073741824;
+        boolean z5 = mode2 != 1073741824;
+        int layoutDirection = getLayoutDirection();
+        if (isLayoutRtl() && size == -1) {
+            size = 65536;
+        }
+        View[] viewArr = this.mSortedHorizontalChildren;
+        int length = viewArr.length;
+        boolean z6 = false;
+        while (i4 < length) {
+            View view = viewArr[i4];
+            int i8 = i4;
+            if (view.getVisibility() != 8) {
+                LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
+                applyHorizontalSizeRules(layoutParams, size, layoutParams.getRules(layoutDirection));
+                measureChildHorizontal(view, layoutParams, size, size2);
+                if (positionChildHorizontal(view, layoutParams, size, z4)) {
+                    z6 = true;
+                }
+            }
+            i4 = i8 + 1;
+        }
+        View[] viewArr2 = this.mSortedVerticalChildren;
+        int length2 = viewArr2.length;
+        int i9 = getContext().getApplicationInfo().targetSdkVersion;
+        int iMax = Integer.MIN_VALUE;
+        int iMax2 = Integer.MIN_VALUE;
+        int iMin = Integer.MAX_VALUE;
+        int iMin2 = Integer.MAX_VALUE;
+        int i10 = 0;
+        boolean z7 = false;
+        while (i10 < length2) {
+            boolean z8 = z4;
+            View view2 = viewArr2[i10];
+            View[] viewArr3 = viewArr2;
+            boolean z9 = z3;
+            if (view2.getVisibility() != 8) {
+                LayoutParams layoutParams2 = (LayoutParams) view2.getLayoutParams();
+                applyVerticalSizeRules(layoutParams2, size2, view2.getBaseline());
+                measureChild(view2, layoutParams2, size, size2);
+                if (positionChildVertical(view2, layoutParams2, size2, z5)) {
+                    z7 = true;
+                }
+                if (z8) {
+                    if (!isLayoutRtl()) {
+                        z = z5;
+                        if (i9 < 19) {
+                            iResolveSize = Math.max(iResolveSize, layoutParams2.mRight);
+                        } else {
+                            iResolveSize = Math.max(iResolveSize, layoutParams2.mRight + layoutParams2.rightMargin);
+                        }
+                    } else if (i9 < 19) {
+                        iResolveSize = Math.max(iResolveSize, size - layoutParams2.mLeft);
+                        z = z5;
+                    } else {
+                        z = z5;
+                        iResolveSize = Math.max(iResolveSize, (size - layoutParams2.mLeft) + layoutParams2.leftMargin);
+                    }
+                    if (z) {
+                    }
+                    if (view2 == viewFindViewById) {
+                        iMin2 = Math.min(iMin2, layoutParams2.mLeft - layoutParams2.leftMargin);
+                        iMin = Math.min(iMin, layoutParams2.mTop - layoutParams2.topMargin);
+                        if (view2 == viewFindViewById) {
+                            iMax = Math.max(iMax, layoutParams2.mRight + layoutParams2.rightMargin);
+                            iMax2 = Math.max(iMax2, layoutParams2.mBottom + layoutParams2.bottomMargin);
+                        }
+                    }
+                } else {
+                    z = z5;
+                    if (z) {
+                        if (i9 < 19) {
+                            iResolveSize2 = Math.max(iResolveSize2, layoutParams2.mBottom);
+                        } else {
+                            iResolveSize2 = Math.max(iResolveSize2, layoutParams2.mBottom + layoutParams2.bottomMargin);
+                        }
+                    }
+                    if (view2 == viewFindViewById || z9) {
+                        iMin2 = Math.min(iMin2, layoutParams2.mLeft - layoutParams2.leftMargin);
+                        iMin = Math.min(iMin, layoutParams2.mTop - layoutParams2.topMargin);
+                    }
+                    if (view2 == viewFindViewById || z2) {
+                        iMax = Math.max(iMax, layoutParams2.mRight + layoutParams2.rightMargin);
+                        iMax2 = Math.max(iMax2, layoutParams2.mBottom + layoutParams2.bottomMargin);
+                    }
+                }
+            } else {
+                z = z5;
+            }
+            i10++;
+            z4 = z8;
+            viewArr2 = viewArr3;
+            z3 = z9;
+            z5 = z;
+        }
+        boolean z10 = z4;
+        View[] viewArr4 = viewArr2;
+        boolean z11 = z5;
+        boolean z12 = z3;
+        int i11 = iMax2;
+        int i12 = iMin;
+        int i13 = iMin2;
+        LayoutParams layoutParams3 = null;
+        int i14 = 0;
+        View view3 = null;
+        while (i14 < length2) {
+            View view4 = viewArr4[i14];
+            int i15 = i12;
+            int i16 = i11;
+            if (view4.getVisibility() != 8) {
+                LayoutParams layoutParams4 = (LayoutParams) view4.getLayoutParams();
+                if (view3 == null || layoutParams3 == null || compareLayoutPosition(layoutParams4, layoutParams3) < 0) {
+                    layoutParams3 = layoutParams4;
+                    view3 = view4;
+                }
+            }
+            i14++;
+            i11 = i16;
+            i12 = i15;
+        }
+        int i17 = i12;
+        int i18 = i11;
+        this.mBaselineView = view3;
+        if (z10) {
+            int iMax3 = iResolveSize + this.mPaddingRight;
+            if (this.mLayoutParams != null && this.mLayoutParams.width >= 0) {
+                iMax3 = Math.max(iMax3, this.mLayoutParams.width);
+            }
+            iResolveSize = resolveSize(Math.max(iMax3, getSuggestedMinimumWidth()), i);
+            if (z6) {
+                for (int i19 = 0; i19 < length2; i19++) {
+                    View view5 = viewArr4[i19];
+                    if (view5.getVisibility() != 8) {
+                        LayoutParams layoutParams5 = (LayoutParams) view5.getLayoutParams();
+                        int[] rules = layoutParams5.getRules(layoutDirection);
+                        if (rules[13] != 0 || rules[14] != 0) {
+                            centerHorizontal(view5, layoutParams5, iResolveSize);
+                        } else if (rules[11] != 0) {
+                            int measuredWidth = view5.getMeasuredWidth();
+                            layoutParams5.mLeft = (iResolveSize - this.mPaddingRight) - measuredWidth;
+                            layoutParams5.mRight = layoutParams5.mLeft + measuredWidth;
+                        }
+                    }
+                }
+            }
+        }
+        if (z11) {
+            int iMax4 = iResolveSize2 + this.mPaddingBottom;
+            if (this.mLayoutParams != null && this.mLayoutParams.height >= 0) {
+                iMax4 = Math.max(iMax4, this.mLayoutParams.height);
+            }
+            iResolveSize2 = resolveSize(Math.max(iMax4, getSuggestedMinimumHeight()), i2);
+            if (z7) {
+                for (int i20 = 0; i20 < length2; i20++) {
+                    View view6 = viewArr4[i20];
+                    if (view6.getVisibility() != 8) {
+                        LayoutParams layoutParams6 = (LayoutParams) view6.getLayoutParams();
+                        int[] rules2 = layoutParams6.getRules(layoutDirection);
+                        if (rules2[13] != 0 || rules2[15] != 0) {
+                            centerVertical(view6, layoutParams6, iResolveSize2);
+                        } else if (rules2[12] != 0) {
+                            int measuredHeight = view6.getMeasuredHeight();
+                            layoutParams6.mTop = (iResolveSize2 - this.mPaddingBottom) - measuredHeight;
+                            layoutParams6.mBottom = layoutParams6.mTop + measuredHeight;
+                        }
+                    }
+                }
+            }
+        }
+        if (z2 || z12) {
+            Rect rect = this.mSelfBounds;
+            rect.set(this.mPaddingLeft, this.mPaddingTop, iResolveSize - this.mPaddingRight, iResolveSize2 - this.mPaddingBottom);
+            Rect rect2 = this.mContentBounds;
+            Gravity.apply(this.mGravity, iMax - i13, i18 - i17, rect, rect2, layoutDirection);
+            int i21 = rect2.left - i13;
+            int i22 = rect2.top - i17;
+            if (i21 != 0 || i22 != 0) {
+                for (int i23 = 0; i23 < length2; i23++) {
+                    View view7 = viewArr4[i23];
+                    if (view7.getVisibility() != 8 && view7 != viewFindViewById) {
+                        LayoutParams layoutParams7 = (LayoutParams) view7.getLayoutParams();
+                        if (z2) {
+                            layoutParams7.mLeft += i21;
+                            layoutParams7.mRight += i21;
+                        }
+                        if (z12) {
+                            layoutParams7.mTop += i22;
+                            layoutParams7.mBottom += i22;
+                        }
+                    }
+                }
+            }
+        }
+        if (isLayoutRtl()) {
+            int i24 = size - iResolveSize;
+            for (int i25 = 0; i25 < length2; i25++) {
+                View view8 = viewArr4[i25];
+                if (view8.getVisibility() != 8) {
+                    LayoutParams layoutParams8 = (LayoutParams) view8.getLayoutParams();
+                    layoutParams8.mLeft -= i24;
+                    layoutParams8.mRight -= i24;
+                }
+            }
+        }
+        setMeasuredDimension(iResolveSize, iResolveSize2);
     }
 
     private int compareLayoutPosition(LayoutParams layoutParams, LayoutParams layoutParams2) {
@@ -258,24 +486,24 @@ public class RelativeLayout extends ViewGroup {
     }
 
     private void measureChildHorizontal(View view, LayoutParams layoutParams, int i, int i2) {
-        int max;
-        int makeMeasureSpec;
+        int iMax;
+        int iMakeMeasureSpec;
         int childMeasureSpec = getChildMeasureSpec(layoutParams.mLeft, layoutParams.mRight, layoutParams.width, layoutParams.leftMargin, layoutParams.rightMargin, this.mPaddingLeft, this.mPaddingRight, i);
         if (i2 < 0 && !this.mAllowBrokenMeasureSpecs) {
             if (layoutParams.height >= 0) {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, 1073741824);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, 1073741824);
             } else {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
             }
         } else {
             if (this.mMeasureVerticalWithPaddingMargin) {
-                max = Math.max(0, (((i2 - this.mPaddingTop) - this.mPaddingBottom) - layoutParams.topMargin) - layoutParams.bottomMargin);
+                iMax = Math.max(0, (((i2 - this.mPaddingTop) - this.mPaddingBottom) - layoutParams.topMargin) - layoutParams.bottomMargin);
             } else {
-                max = Math.max(0, i2);
+                iMax = Math.max(0, i2);
             }
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(max, layoutParams.height != -1 ? Integer.MIN_VALUE : 1073741824);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(iMax, layoutParams.height != -1 ? Integer.MIN_VALUE : 1073741824);
         }
-        view.measure(childMeasureSpec, makeMeasureSpec);
+        view.measure(childMeasureSpec, iMakeMeasureSpec);
     }
 
     private int getChildMeasureSpec(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
@@ -284,8 +512,10 @@ public class RelativeLayout extends ViewGroup {
         if (z && !this.mAllowBrokenMeasureSpecs) {
             if (i != Integer.MIN_VALUE && i2 != Integer.MIN_VALUE) {
                 i3 = Math.max(0, i2 - i);
-            } else if (i3 < 0) {
-                i3 = 0;
+            } else {
+                if (i3 < 0) {
+                    i3 = 0;
+                }
                 return View.MeasureSpec.makeMeasureSpec(i3, i9);
             }
             i9 = 1073741824;
@@ -293,14 +523,14 @@ public class RelativeLayout extends ViewGroup {
         }
         int i10 = (i2 == Integer.MIN_VALUE ? (i8 - i7) - i5 : i2) - (i == Integer.MIN_VALUE ? i6 + i4 : i);
         if (i != Integer.MIN_VALUE && i2 != Integer.MIN_VALUE) {
-            r2 = z ? 0 : 1073741824;
+            i = z ? 0 : 1073741824;
             i3 = Math.max(0, i10);
         } else if (i3 >= 0) {
             if (i10 >= 0) {
                 i3 = Math.min(i10, i3);
             }
         } else if (i3 == -1) {
-            r2 = z ? 0 : 1073741824;
+            i = z ? 0 : 1073741824;
             i3 = Math.max(0, i10);
         } else {
             if (i3 != -2 || i10 < 0) {
@@ -311,7 +541,7 @@ public class RelativeLayout extends ViewGroup {
             }
             return View.MeasureSpec.makeMeasureSpec(i3, i9);
         }
-        i9 = r2;
+        i9 = i;
         return View.MeasureSpec.makeMeasureSpec(i3, i9);
     }
 
@@ -498,7 +728,7 @@ public class RelativeLayout extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int childCount = getChildCount();
         if (!this.mAppWidgetImmersiveEnabled) {
             for (int i5 = 0; i5 < childCount; i5++) {
@@ -624,88 +854,88 @@ public class RelativeLayout extends ViewGroup {
             this.mInitialRules = new int[22];
             this.mRulesChanged = false;
             this.mIsRtlCompatibilityMode = false;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RelativeLayout_Layout);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RelativeLayout_Layout);
             this.mIsRtlCompatibilityMode = context.getApplicationInfo().targetSdkVersion < 17 || !context.getApplicationInfo().hasRtlSupport();
             int[] iArr = this.mRules;
             int[] iArr2 = this.mInitialRules;
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 switch (index) {
                     case 0:
-                        iArr[0] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[0] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 1:
-                        iArr[1] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[1] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 2:
-                        iArr[2] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[2] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 3:
-                        iArr[3] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[3] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 4:
-                        iArr[4] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[4] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 5:
-                        iArr[5] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[5] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 6:
-                        iArr[6] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[6] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 7:
-                        iArr[7] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[7] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 8:
-                        iArr[8] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[8] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 9:
-                        iArr[9] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[9] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 10:
-                        iArr[10] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[10] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 11:
-                        iArr[11] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[11] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 12:
-                        iArr[12] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[12] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 13:
-                        iArr[13] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[13] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 14:
-                        iArr[14] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[14] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 15:
-                        iArr[15] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[15] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 16:
-                        this.alignWithParent = obtainStyledAttributes.getBoolean(index, false);
+                        this.alignWithParent = typedArrayObtainStyledAttributes.getBoolean(index, false);
                         break;
                     case 17:
-                        iArr[16] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[16] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 18:
-                        iArr[17] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[17] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 19:
-                        iArr[18] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[18] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 20:
-                        iArr[19] = obtainStyledAttributes.getResourceId(index, 0);
+                        iArr[19] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                         break;
                     case 21:
-                        iArr[20] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[20] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                     case 22:
-                        iArr[21] = obtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
+                        iArr[21] = typedArrayObtainStyledAttributes.getBoolean(index, false) ? -1 : 0;
                         break;
                 }
             }
             this.mRulesChanged = true;
             System.arraycopy(iArr, 0, iArr2, 0, 22);
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(int i, int i2) {
@@ -898,7 +1128,7 @@ public class RelativeLayout extends ViewGroup {
         }
 
         @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
-        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
             super.encodeProperties(viewHierarchyEncoder);
             viewHierarchyEncoder.addProperty("layout:alignWithParent", this.alignWithParent);
         }
@@ -1014,33 +1244,33 @@ public class RelativeLayout extends ViewGroup {
 
         void add(View view) {
             int id = view.getId();
-            Node acquire = Node.acquire(view);
+            Node nodeAcquire = Node.acquire(view);
             if (id != -1) {
-                this.mKeyNodes.put(id, acquire);
+                this.mKeyNodes.put(id, nodeAcquire);
             }
-            this.mNodes.add(acquire);
+            this.mNodes.add(nodeAcquire);
         }
 
         void getSortedViews(View[] viewArr, int... iArr) {
-            ArrayDeque<Node> findRoots = findRoots(iArr);
+            ArrayDeque<Node> arrayDequeFindRoots = findRoots(iArr);
             int i = 0;
             while (true) {
-                Node pollLast = findRoots.pollLast();
-                if (pollLast == null) {
+                Node nodePollLast = arrayDequeFindRoots.pollLast();
+                if (nodePollLast == null) {
                     break;
                 }
-                View view = pollLast.view;
+                View view = nodePollLast.view;
                 int id = view.getId();
                 int i2 = i + 1;
                 viewArr[i] = view;
-                ArrayMap<Node, DependencyGraph> arrayMap = pollLast.dependents;
+                ArrayMap<Node, DependencyGraph> arrayMap = nodePollLast.dependents;
                 int size = arrayMap.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    Node keyAt = arrayMap.keyAt(i3);
-                    SparseArray<Node> sparseArray = keyAt.dependencies;
+                    Node nodeKeyAt = arrayMap.keyAt(i3);
+                    SparseArray<Node> sparseArray = nodeKeyAt.dependencies;
                     sparseArray.remove(id);
                     if (sparseArray.size() == 0) {
-                        findRoots.add(keyAt);
+                        arrayDequeFindRoots.add(nodeKeyAt);
                     }
                 }
                 i = i2;
@@ -1093,12 +1323,12 @@ public class RelativeLayout extends ViewGroup {
             }
 
             static Node acquire(View view) {
-                Node acquire = sPool.acquire();
-                if (acquire == null) {
-                    acquire = new Node();
+                Node nodeAcquire = sPool.acquire();
+                if (nodeAcquire == null) {
+                    nodeAcquire = new Node();
                 }
-                acquire.view = view;
-                return acquire;
+                nodeAcquire.view = view;
+                return nodeAcquire;
             }
 
             void release() {
@@ -1175,11 +1405,11 @@ public class RelativeLayout extends ViewGroup {
                     if (RelativeLayout.this.mAppWidgetListView == null || RelativeLayout.this.mAppWidgetToolBar == null) {
                         return;
                     }
-                    int intValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
-                    int i = -(intValue - ReleaseScrollRunnable.this.mLastOffset);
+                    int iIntValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                    int i = -(iIntValue - ReleaseScrollRunnable.this.mLastOffset);
                     RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(i);
                     RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(i);
-                    ReleaseScrollRunnable.this.mLastOffset = intValue;
+                    ReleaseScrollRunnable.this.mLastOffset = iIntValue;
                 }
             });
             this.mExpandOffsetAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.RelativeLayout.ReleaseScrollRunnable.2
@@ -1234,12 +1464,12 @@ public class RelativeLayout extends ViewGroup {
             this.mExpandOffsetAnimator.setIntValues(0, RelativeLayout.this.mAppWidgetToolBar.getHeight());
             this.mExpandOffsetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.RelativeLayout.ExpandTopBarRunnable.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator valueAnimator2) {
+                public void onAnimationUpdate(ValueAnimator valueAnimator2) throws Resources.NotFoundException {
                     if (RelativeLayout.this.mAppWidgetListView == null || RelativeLayout.this.mAppWidgetToolBar == null) {
                         return;
                     }
-                    int intValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
-                    int i = intValue - ExpandTopBarRunnable.this.mLastOffset;
+                    int iIntValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                    int i = iIntValue - ExpandTopBarRunnable.this.mLastOffset;
                     if (RelativeLayout.this.mAppWidgetToolBar.getTop() == 0) {
                         return;
                     }
@@ -1249,7 +1479,7 @@ public class RelativeLayout extends ViewGroup {
                     RelativeLayout.this.mAppWidgetListView.scrollListBy(i);
                     RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(i);
                     RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(i);
-                    ExpandTopBarRunnable.this.mLastOffset = intValue;
+                    ExpandTopBarRunnable.this.mLastOffset = iIntValue;
                 }
             });
             this.mExpandOffsetAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.RelativeLayout.ExpandTopBarRunnable.2

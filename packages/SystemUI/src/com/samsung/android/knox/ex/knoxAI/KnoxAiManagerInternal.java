@@ -15,7 +15,6 @@ import com.samsung.android.knox.ex.knoxAI.IDecryptFramework;
 import com.samsung.android.knox.ex.knoxAI.IKeyProvisioningCallback;
 import com.samsung.android.knox.ex.knoxAI.KnoxAiManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxAiManagerInternal {
     public static final int CONN_MAX_WAIT_TIME = 2500;
@@ -55,19 +54,15 @@ public class KnoxAiManagerInternal {
     }
 
     public static synchronized KnoxAiManagerInternal getInstance(Context context) {
-        KnoxAiManagerInternal knoxAiManagerInternal;
-        synchronized (KnoxAiManagerInternal.class) {
-            try {
-                if (sKnoxAiManagerInternal == null) {
-                    sKnoxAiManagerInternal = new KnoxAiManagerInternal(context);
-                }
-                sKnoxAiManagerInternal.bindKFAServiceInstance();
-                knoxAiManagerInternal = sKnoxAiManagerInternal;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sKnoxAiManagerInternal == null) {
+                sKnoxAiManagerInternal = new KnoxAiManagerInternal(context);
             }
+            sKnoxAiManagerInternal.bindKFAServiceInstance();
+        } catch (Throwable th) {
+            throw th;
         }
-        return knoxAiManagerInternal;
+        return sKnoxAiManagerInternal;
     }
 
     public final boolean bindKFAServiceInstance() {
@@ -75,9 +70,9 @@ public class KnoxAiManagerInternal {
         intent.setAction("action.decrypt");
         intent.setPackage("com.samsung.android.app.kfa");
         intent.putExtra("binder", "decrypt");
-        boolean bindService = this.mContext.bindService(intent, this.mKFAConn, 1);
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("getKFAServiceInstance trying to bind, status: ", TAG, bindService);
-        return bindService;
+        boolean zBindService = this.mContext.bindService(intent, this.mKFAConn, 1);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("getKFAServiceInstance trying to bind, status: ", TAG, zBindService);
+        return zBindService;
     }
 
     public KnoxAiManager.ErrorCodes close(long j) {
@@ -162,14 +157,14 @@ public class KnoxAiManagerInternal {
         synchronized (this) {
             try {
                 IDecryptFramework iDecryptFramework = this.mDecryptFwService;
-                boolean z = true;
+                boolean zPingBinder = true;
                 if (iDecryptFramework == null) {
                     Log.d(TAG, "getKFAServiceInstance service is null");
                 } else {
-                    IBinder asBinder = iDecryptFramework.asBinder();
-                    z = asBinder != null ? true ^ asBinder.pingBinder() : false;
+                    IBinder iBinderAsBinder = iDecryptFramework.asBinder();
+                    zPingBinder = iBinderAsBinder != null ? true ^ iBinderAsBinder.pingBinder() : false;
                 }
-                if (z) {
+                if (zPingBinder) {
                     Log.d(TAG, "getKFAServiceInstance trying to rebind from client");
                     this.mDecryptFwService = null;
                     IBinder service = ServiceManager.getService("KFAService");

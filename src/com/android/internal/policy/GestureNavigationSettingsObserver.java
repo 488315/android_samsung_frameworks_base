@@ -42,7 +42,7 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         this.mBgHandler.post(new Runnable() { // from class: com.android.internal.policy.GestureNavigationSettingsObserver$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                GestureNavigationSettingsObserver.this.lambda$register$1();
+                this.f$0.lambda$register$1();
             }
         });
     }
@@ -59,7 +59,7 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         DeviceConfig.addOnPropertiesChangedListener("systemui", new Executor() { // from class: com.android.internal.policy.GestureNavigationSettingsObserver$$ExternalSyntheticLambda1
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
-                GestureNavigationSettingsObserver.this.lambda$register$0(runnable);
+                this.f$0.lambda$register$0(runnable);
             }
         }, this.mOnPropertiesChangedListener);
     }
@@ -73,7 +73,7 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         this.mBgHandler.post(new Runnable() { // from class: com.android.internal.policy.GestureNavigationSettingsObserver$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                GestureNavigationSettingsObserver.this.lambda$registerForCallingUser$3();
+                this.f$0.lambda$registerForCallingUser$3();
             }
         });
     }
@@ -87,7 +87,7 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         DeviceConfig.addOnPropertiesChangedListener("systemui", new Executor() { // from class: com.android.internal.policy.GestureNavigationSettingsObserver$$ExternalSyntheticLambda4
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
-                GestureNavigationSettingsObserver.this.lambda$registerForCallingUser$2(runnable);
+                this.f$0.lambda$registerForCallingUser$2(runnable);
             }
         }, this.mOnPropertiesChangedListener);
     }
@@ -101,7 +101,7 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         this.mBgHandler.post(new Runnable() { // from class: com.android.internal.policy.GestureNavigationSettingsObserver$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                GestureNavigationSettingsObserver.this.lambda$unregister$4();
+                this.f$0.lambda$unregister$4();
             }
         });
     }

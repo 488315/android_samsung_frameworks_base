@@ -1,7 +1,6 @@
 package android.os;
 
 import android.content.Context;
-import android.os.SystemVibrator;
 import android.os.Vibrator;
 import android.os.vibrator.VendorVibrationSession;
 import android.os.vibrator.VibratorInfoFactory;
@@ -72,9 +71,9 @@ public class SystemVibrator extends Vibrator {
                 }
                 vibratorInfoArr[i] = vibrator.getInfo();
             }
-            VibratorInfo create = VibratorInfoFactory.create(-1, vibratorInfoArr);
-            this.mVibratorInfo = create;
-            return create;
+            VibratorInfo vibratorInfoCreate = VibratorInfoFactory.create(-1, vibratorInfoArr);
+            this.mVibratorInfo = vibratorInfoCreate;
+            return vibratorInfoCreate;
         }
     }
 
@@ -252,7 +251,7 @@ public class SystemVibrator extends Vibrator {
             executor.execute(new Runnable() { // from class: android.os.SystemVibrator$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VendorVibrationSession.Callback.this.onFinished(5);
+                    callback.onFinished(5);
                 }
             });
             return;
@@ -263,7 +262,7 @@ public class SystemVibrator extends Vibrator {
             executor.execute(new Runnable() { // from class: android.os.SystemVibrator$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VendorVibrationSession.Callback.this.onFinished(5);
+                    callback.onFinished(5);
                 }
             });
         } else {
@@ -379,7 +378,7 @@ public class SystemVibrator extends Vibrator {
             this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibrator$MultiVibratorStateListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemVibrator.MultiVibratorStateListener.this.lambda$onVibrating$0(i, z);
+                    this.f$0.lambda$onVibrating$0(i, z);
                 }
             });
         }

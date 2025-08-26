@@ -21,7 +21,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.1
                 @Override // java.lang.Runnable
@@ -30,7 +30,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -39,7 +39,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.2
                 @Override // java.lang.Runnable
@@ -48,7 +48,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -57,7 +57,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.3
                 @Override // java.lang.Runnable
@@ -66,7 +66,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -75,7 +75,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.4
                 @Override // java.lang.Runnable
@@ -84,7 +84,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -93,7 +93,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.5
                 @Override // java.lang.Runnable
@@ -102,7 +102,7 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

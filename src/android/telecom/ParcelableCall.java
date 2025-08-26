@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import com.android.internal.telecom.IVideoProvider;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,44 +17,44 @@ public final class ParcelableCall implements Parcelable {
     public static final Parcelable.Creator<ParcelableCall> CREATOR = new Parcelable.Creator<ParcelableCall>() { // from class: android.telecom.ParcelableCall.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public ParcelableCall createFromParcel(Parcel parcel) {
+        public ParcelableCall createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
             ClassLoader classLoader = ParcelableCall.class.getClassLoader();
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             DisconnectCause disconnectCause = (DisconnectCause) parcel.readParcelable(classLoader, DisconnectCause.class);
             ArrayList arrayList = new ArrayList();
             parcel.readList(arrayList, classLoader, String.class);
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            long readLong = parcel.readLong();
-            Uri createFromParcel = Uri.CREATOR.createFromParcel(parcel);
-            int readInt4 = parcel.readInt();
-            String readString2 = parcel.readString();
-            int readInt5 = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            long j = parcel.readLong();
+            Uri uriCreateFromParcel = Uri.CREATOR.createFromParcel(parcel);
+            int i4 = parcel.readInt();
+            String string2 = parcel.readString();
+            int i5 = parcel.readInt();
             GatewayInfo gatewayInfo = (GatewayInfo) parcel.readParcelable(classLoader, GatewayInfo.class);
             PhoneAccountHandle phoneAccountHandle = (PhoneAccountHandle) parcel.readParcelable(classLoader, PhoneAccountHandle.class);
             boolean z = parcel.readByte() == 1;
-            IVideoProvider asInterface = IVideoProvider.Stub.asInterface(parcel.readStrongBinder());
-            String readString3 = parcel.readString();
+            IVideoProvider iVideoProviderAsInterface = IVideoProvider.Stub.asInterface(parcel.readStrongBinder());
+            String string3 = parcel.readString();
             ArrayList arrayList2 = new ArrayList();
             boolean z2 = z;
             parcel.readList(arrayList2, classLoader, String.class);
             StatusHints statusHints = (StatusHints) parcel.readParcelable(classLoader, StatusHints.class);
-            int readInt6 = parcel.readInt();
+            int i6 = parcel.readInt();
             ArrayList arrayList3 = new ArrayList();
             parcel.readList(arrayList3, classLoader, String.class);
-            Bundle readBundle = parcel.readBundle(classLoader);
-            Bundle readBundle2 = parcel.readBundle(classLoader);
-            int readInt7 = parcel.readInt();
+            Bundle bundle = parcel.readBundle(classLoader);
+            Bundle bundle2 = parcel.readBundle(classLoader);
+            int i7 = parcel.readInt();
             boolean z3 = parcel.readByte() == 1;
             ParcelableRttCall parcelableRttCall = (ParcelableRttCall) parcel.readParcelable(classLoader, ParcelableRttCall.class);
             boolean z4 = z3;
-            long readLong2 = parcel.readLong();
-            int readInt8 = parcel.readInt();
-            int readInt9 = parcel.readInt();
-            String readString4 = parcel.readString();
-            String readString5 = parcel.readString();
-            return new ParcelableCallBuilder().setId(readString).setState(readInt).setDisconnectCause(disconnectCause).setCannedSmsResponses(arrayList).setCapabilities(readInt2).setProperties(readInt3).setSupportedAudioRoutes(readInt7).setConnectTimeMillis(readLong).setHandle(createFromParcel).setHandlePresentation(readInt4).setCallerDisplayName(readString2).setCallerDisplayNamePresentation(readInt5).setGatewayInfo(gatewayInfo).setAccountHandle(phoneAccountHandle).setIsVideoCallProviderChanged(z2).setVideoCallProvider(asInterface).setIsRttCallChanged(z4).setRttCall(parcelableRttCall).setParentCallId(readString3).setChildCallIds(arrayList2).setStatusHints(statusHints).setVideoState(readInt6).setConferenceableCallIds(arrayList3).setIntentExtras(readBundle).setExtras(readBundle2).setCreationTimeMillis(readLong2).setCallDirection(readInt8).setCallerNumberVerificationStatus(readInt9).setContactDisplayName(readString4).setActiveChildCallId(readString5).setContactPhotoUri((Uri) parcel.readParcelable(classLoader, Uri.class)).setAssociatedUser((UserHandle) parcel.readParcelable(classLoader, UserHandle.class)).createParcelableCall();
+            long j2 = parcel.readLong();
+            int i8 = parcel.readInt();
+            int i9 = parcel.readInt();
+            String string4 = parcel.readString();
+            String string5 = parcel.readString();
+            return new ParcelableCallBuilder().setId(string).setState(i).setDisconnectCause(disconnectCause).setCannedSmsResponses(arrayList).setCapabilities(i2).setProperties(i3).setSupportedAudioRoutes(i7).setConnectTimeMillis(j).setHandle(uriCreateFromParcel).setHandlePresentation(i4).setCallerDisplayName(string2).setCallerDisplayNamePresentation(i5).setGatewayInfo(gatewayInfo).setAccountHandle(phoneAccountHandle).setIsVideoCallProviderChanged(z2).setVideoCallProvider(iVideoProviderAsInterface).setIsRttCallChanged(z4).setRttCall(parcelableRttCall).setParentCallId(string3).setChildCallIds(arrayList2).setStatusHints(statusHints).setVideoState(i6).setConferenceableCallIds(arrayList3).setIntentExtras(bundle).setExtras(bundle2).setCreationTimeMillis(j2).setCallDirection(i8).setCallerNumberVerificationStatus(i9).setContactDisplayName(string4).setActiveChildCallId(string5).setContactPhotoUri((Uri) parcel.readParcelable(classLoader, Uri.class)).setAssociatedUser((UserHandle) parcel.readParcelable(classLoader, UserHandle.class)).createParcelableCall();
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

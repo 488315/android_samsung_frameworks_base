@@ -33,7 +33,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MagneticNotificationRowManagerImpl implements MagneticNotificationRowManager {
     public static final List MAGNETIC_TRANSLATION_MULTIPLIERS;
@@ -52,7 +51,6 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
     public final SpringForce snapForce = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(550.0f, 0.6f);
     public final SpringForce attachForce = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(800.0f, 0.95f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,12 +60,10 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DirectionEstimator {
         public final ArrayDeque translationBuffer = new ArrayDeque();
         public boolean acceptTranslations = true;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -94,7 +90,6 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State {
         public static final /* synthetic */ State[] $VALUES;
         public static final State DETACHED;
@@ -128,7 +123,6 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -156,9 +150,9 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
 
     static {
         new Companion(null);
-        Float valueOf = Float.valueOf(0.04f);
-        Float valueOf2 = Float.valueOf(0.12f);
-        MAGNETIC_TRANSLATION_MULTIPLIERS = Arrays.asList(valueOf, valueOf2, Float.valueOf(0.5f), valueOf2, valueOf);
+        Float fValueOf = Float.valueOf(0.04f);
+        Float fValueOf2 = Float.valueOf(0.12f);
+        MAGNETIC_TRANSLATION_MULTIPLIERS = Arrays.asList(fValueOf, fValueOf2, Float.valueOf(0.5f), fValueOf2, fValueOf);
         new VibrationAttributes.Builder().setUsage(18).setFlags(8).build();
     }
 
@@ -184,7 +178,7 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
 
     @Override // com.android.systemui.statusbar.notification.stack.MagneticNotificationRowManager
     public final void onMagneticInteractionEnd(ExpandableNotificationRow expandableNotificationRow, Float f) {
-        Object obj;
+        Object next;
         this.translationOffset = 0.0f;
         DirectionEstimator directionEstimator = this.detachDirectionEstimator;
         directionEstimator.translationBuffer.clear();
@@ -193,16 +187,16 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             Iterator it = this.currentMagneticListeners.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 } else {
-                    obj = it.next();
-                    if (Intrinsics.areEqual((MagneticRowListener) obj, expandableNotificationRow.mMagneticRowListener)) {
+                    next = it.next();
+                    if (Intrinsics.areEqual((MagneticRowListener) next, expandableNotificationRow.mMagneticRowListener)) {
                         break;
                     }
                 }
             }
-            MagneticRowListener magneticRowListener = (MagneticRowListener) obj;
+            MagneticRowListener magneticRowListener = (MagneticRowListener) next;
             if (magneticRowListener != null) {
                 ((ExpandableView.AnonymousClass2) magneticRowListener).cancelMagneticAnimations();
                 return;
@@ -221,9 +215,9 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             if (i != 4) {
                 return;
             }
-            MagneticRowListener swipedListener = swipedListener(this.currentMagneticListeners);
-            if (swipedListener != null) {
-                ((ExpandableView.AnonymousClass2) swipedListener).cancelMagneticAnimations();
+            MagneticRowListener magneticRowListenerSwipedListener = swipedListener(this.currentMagneticListeners);
+            if (magneticRowListenerSwipedListener != null) {
+                ((ExpandableView.AnonymousClass2) magneticRowListenerSwipedListener).cancelMagneticAnimations();
             }
             this.currentState = State.IDLE;
         }
@@ -279,11 +273,11 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             LogLevel logLevel = LogLevel.ERROR;
             NotificationRowLogger$$ExternalSyntheticLambda0 notificationRowLogger$$ExternalSyntheticLambda0 = new NotificationRowLogger$$ExternalSyntheticLambda0(11);
             LogBuffer logBuffer = notificationRowLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.str2 = state.name();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             return;
         }
         this.translationOffset = 0.0f;
@@ -294,15 +288,15 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         NotificationRoundnessManager notificationRoundnessManager = this.notificationRoundnessManager;
         notificationRoundnessManager.setViewsAffectedBySwipe(null, null, null);
         this.notificationTargetsHelper.getClass();
-        RoundableTargets findRoundableTargets = NotificationTargetsHelper.findRoundableTargets(expandableNotificationRow, notificationStackScrollLayout, notificationSectionsManager);
-        notificationRoundnessManager.setViewsAffectedBySwipe(findRoundableTargets.before, findRoundableTargets.swiped, findRoundableTargets.after);
+        RoundableTargets roundableTargetsFindRoundableTargets = NotificationTargetsHelper.findRoundableTargets(expandableNotificationRow, notificationStackScrollLayout, notificationSectionsManager);
+        notificationRoundnessManager.setViewsAffectedBySwipe(roundableTargetsFindRoundableTargets.before, roundableTargetsFindRoundableTargets.swiped, roundableTargetsFindRoundableTargets.after);
         int size = MAGNETIC_TRANSLATION_MULTIPLIERS.size();
         ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow.mNotificationParent;
         NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow2 != null ? expandableNotificationRow2.mChildrenContainer : null;
         List list = SequencesKt___SequencesKt.toList(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new ViewGroupKt$children$1(notificationStackScrollLayout), new Function1() { // from class: com.android.systemui.statusbar.notification.stack.NotificationTargetsHelper$findMagneticTargets$$inlined$filterIsInstance$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(obj instanceof ExpandableView);
             }
         }), new NotificationTargetsHelper$$ExternalSyntheticLambda0(0)));
@@ -330,7 +324,7 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         }
         int i4 = size / 2;
         arrayList3.set(i4, expandableNotificationRow.mMagneticRowListener);
-        int indexOf = list.indexOf(expandableNotificationRow);
+        int iIndexOf = list.indexOf(expandableNotificationRow);
         int size3 = (arrayList3.size() / 2) - 1;
         int size4 = (arrayList3.size() / 2) + 1;
         if (1 <= i4) {
@@ -340,7 +334,7 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             boolean z2 = true;
             while (true) {
                 if (z) {
-                    ExpandableView expandableView = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(indexOf - i7, list);
+                    ExpandableView expandableView = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(iIndexOf - i7, list);
                     if (expandableView == null || (!NotificationTargetsHelper.isValidMagneticBoundary(expandableView) && notificationSectionsManager.beginsSection(expandableNotificationRow, expandableView))) {
                         expandableView = null;
                     }
@@ -355,7 +349,7 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
                     }
                 }
                 if (z2) {
-                    ExpandableView expandableView2 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(indexOf + i7, list);
+                    ExpandableView expandableView2 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(iIndexOf + i7, list);
                     if (expandableView2 == null || (!NotificationTargetsHelper.isValidMagneticBoundary(expandableView2) && notificationSectionsManager.beginsSection(expandableView2, expandableNotificationRow))) {
                         expandableView2 = null;
                     }
@@ -399,8 +393,8 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         if (!Intrinsics.areEqual(expandableNotificationRow.mMagneticRowListener, swipedListener(this.currentMagneticListeners))) {
             return false;
         }
-        MagneticRowListener swipedListener = swipedListener(this.currentMagneticListeners);
-        boolean canExpandableViewBeDismissed = swipedListener != null ? ExpandableView.this.canExpandableViewBeDismissed() : false;
+        MagneticRowListener magneticRowListenerSwipedListener = swipedListener(this.currentMagneticListeners);
+        boolean zCanExpandableViewBeDismissed = magneticRowListenerSwipedListener != null ? ExpandableView.this.canExpandableViewBeDismissed() : false;
         float f2 = f - this.translationOffset;
         int i = WhenMappings.$EnumSwitchMapping$0[this.currentState.ordinal()];
         if (i == 1) {
@@ -411,17 +405,17 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             LogLevel logLevel = LogLevel.ERROR;
             NotificationRowLogger$$ExternalSyntheticLambda0 notificationRowLogger$$ExternalSyntheticLambda0 = new NotificationRowLogger$$ExternalSyntheticLambda0(13);
             LogBuffer logBuffer = notificationRowLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.str2 = state.name();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             return false;
         }
         DirectionEstimator directionEstimator = this.detachDirectionEstimator;
         if (i == 2) {
             directionEstimator.recordTranslation(f2);
-            pullTargets(f2, canExpandableViewBeDismissed);
+            pullTargets(f2, zCanExpandableViewBeDismissed);
             this.currentState = State.PULLING;
             return true;
         }
@@ -434,32 +428,32 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             }
             directionEstimator.recordTranslation(f2);
             if (Math.abs(f2) > this.magneticAttachThreshold) {
-                MagneticRowListener swipedListener2 = swipedListener(this.currentMagneticListeners);
-                if (swipedListener2 != null) {
-                    ((ExpandableView.AnonymousClass2) swipedListener2).setMagneticTranslation(f2, false);
+                MagneticRowListener magneticRowListenerSwipedListener2 = swipedListener(this.currentMagneticListeners);
+                if (magneticRowListenerSwipedListener2 != null) {
+                    ((ExpandableView.AnonymousClass2) magneticRowListenerSwipedListener2).setMagneticTranslation(f2, false);
                 }
                 return true;
             }
             this.translationOffset += f2;
             directionEstimator.translationBuffer.clear();
             directionEstimator.acceptTranslations = true;
-            float coerceIn = RangesKt___RangesKt.coerceIn(Math.abs(f3 * 0.0f) / this.magneticDetachThreshold, 0.0f, 0.8f);
+            float fCoerceIn = RangesKt___RangesKt.coerceIn(Math.abs(f3 * 0.0f) / this.magneticDetachThreshold, 0.0f, 0.8f);
             Roundable roundable = notificationRoundnessManager.mViewBeforeSwipedView;
             SourceType$Companion$from$1 sourceType$Companion$from$1 = NotificationRoundnessManager.DISMISS_ANIMATION;
             if (roundable != null) {
-                roundable.requestBottomRoundness(coerceIn, sourceType$Companion$from$1, true);
+                roundable.requestBottomRoundness(fCoerceIn, sourceType$Companion$from$1, true);
             }
             ExpandableNotificationRow expandableNotificationRow2 = notificationRoundnessManager.mSwipedView;
             if (expandableNotificationRow2 != null) {
-                expandableNotificationRow2.requestRoundness(coerceIn, coerceIn, sourceType$Companion$from$1, true);
+                expandableNotificationRow2.requestRoundness(fCoerceIn, fCoerceIn, sourceType$Companion$from$1, true);
             }
             Roundable roundable2 = notificationRoundnessManager.mViewAfterSwipedView;
             if (roundable2 != null) {
-                roundable2.requestTopRoundness(coerceIn, sourceType$Companion$from$1, true);
+                roundable2.requestTopRoundness(fCoerceIn, sourceType$Companion$from$1, true);
             }
-            MagneticRowListener swipedListener3 = swipedListener(this.currentMagneticListeners);
-            if (swipedListener3 != null) {
-                ExpandableView.AnonymousClass2 anonymousClass2 = (ExpandableView.AnonymousClass2) swipedListener3;
+            MagneticRowListener magneticRowListenerSwipedListener3 = swipedListener(this.currentMagneticListeners);
+            if (magneticRowListenerSwipedListener3 != null) {
+                ExpandableView.AnonymousClass2 anonymousClass2 = (ExpandableView.AnonymousClass2) magneticRowListenerSwipedListener3;
                 anonymousClass2.cancelMagneticAnimations();
                 ExpandableView expandableView = ExpandableView.this;
                 expandableView.cancelTranslationAnimations();
@@ -475,21 +469,21 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             return true;
         }
         directionEstimator.recordTranslation(f2);
-        float coerceIn2 = RangesKt___RangesKt.coerceIn(Math.abs(f3 * f2) / this.magneticDetachThreshold, 0.0f, 0.8f);
+        float fCoerceIn2 = RangesKt___RangesKt.coerceIn(Math.abs(f3 * f2) / this.magneticDetachThreshold, 0.0f, 0.8f);
         Roundable roundable3 = notificationRoundnessManager.mViewBeforeSwipedView;
         SourceType$Companion$from$1 sourceType$Companion$from$12 = NotificationRoundnessManager.DISMISS_ANIMATION;
         if (roundable3 != null) {
-            roundable3.requestBottomRoundness(coerceIn2, sourceType$Companion$from$12, false);
+            roundable3.requestBottomRoundness(fCoerceIn2, sourceType$Companion$from$12, false);
         }
         ExpandableNotificationRow expandableNotificationRow3 = notificationRoundnessManager.mSwipedView;
         if (expandableNotificationRow3 != null) {
-            expandableNotificationRow3.requestRoundness(coerceIn2, coerceIn2, sourceType$Companion$from$12, false);
+            expandableNotificationRow3.requestRoundness(fCoerceIn2, fCoerceIn2, sourceType$Companion$from$12, false);
         }
         Roundable roundable4 = notificationRoundnessManager.mViewAfterSwipedView;
         if (roundable4 != null) {
-            roundable4.requestTopRoundness(coerceIn2, sourceType$Companion$from$12, false);
+            roundable4.requestTopRoundness(fCoerceIn2, sourceType$Companion$from$12, false);
         }
-        if (!canExpandableViewBeDismissed) {
+        if (!zCanExpandableViewBeDismissed) {
             pullTargets(f2, false);
             return true;
         }
@@ -501,16 +495,16 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
         ArrayDeque arrayDeque = directionEstimator.translationBuffer;
         if (!arrayDeque.isEmpty()) {
             Iterator it = arrayDeque.iterator();
-            float f4 = 0.0f;
+            float fFloatValue = 0.0f;
             while (it.hasNext()) {
-                f4 += ((Number) it.next()).floatValue();
+                fFloatValue += ((Number) it.next()).floatValue();
             }
-            Math.signum(f4 / arrayDeque.size);
+            Math.signum(fFloatValue / arrayDeque.size);
         }
         snapNeighborsBack(null);
-        MagneticRowListener swipedListener4 = swipedListener(this.currentMagneticListeners);
-        if (swipedListener4 != null) {
-            ExpandableView.AnonymousClass2 anonymousClass22 = (ExpandableView.AnonymousClass2) swipedListener4;
+        MagneticRowListener magneticRowListenerSwipedListener4 = swipedListener(this.currentMagneticListeners);
+        if (magneticRowListenerSwipedListener4 != null) {
+            ExpandableView.AnonymousClass2 anonymousClass22 = (ExpandableView.AnonymousClass2) magneticRowListenerSwipedListener4;
             anonymousClass22.cancelMagneticAnimations();
             ExpandableView expandableView2 = ExpandableView.this;
             expandableView2.cancelTranslationAnimations();
@@ -549,15 +543,15 @@ public final class MagneticNotificationRowManagerImpl implements MagneticNotific
             }
             MagneticRowListener magneticRowListener = (MagneticRowListener) obj;
             if (magneticRowListener != null && i != this.currentMagneticListeners.size() / 2) {
-                Float valueOf = f != null ? Float.valueOf(f.floatValue() * ((Number) MAGNETIC_TRANSLATION_MULTIPLIERS.get(i)).floatValue()) : null;
+                Float fValueOf = f != null ? Float.valueOf(f.floatValue() * ((Number) MAGNETIC_TRANSLATION_MULTIPLIERS.get(i)).floatValue()) : null;
                 ExpandableView.AnonymousClass2 anonymousClass2 = (ExpandableView.AnonymousClass2) magneticRowListener;
                 anonymousClass2.cancelMagneticAnimations();
-                float floatValue = valueOf != null ? valueOf.floatValue() : 0.0f;
+                float fFloatValue = fValueOf != null ? fValueOf.floatValue() : 0.0f;
                 ExpandableView expandableView = ExpandableView.this;
                 expandableView.cancelTranslationAnimations();
                 SpringAnimation springAnimation = expandableView.mMagneticAnimator;
                 springAnimation.mSpring = this.snapForce;
-                springAnimation.mVelocity = floatValue;
+                springAnimation.mVelocity = fFloatValue;
                 springAnimation.animateToFinalPosition(0.0f);
             }
             i = i2;

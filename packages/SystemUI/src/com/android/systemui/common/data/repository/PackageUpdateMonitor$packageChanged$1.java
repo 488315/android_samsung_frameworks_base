@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class PackageUpdateMonitor$packageChanged$1 extends AdaptedFunctionReference implements Function2 {
     public PackageUpdateMonitor$packageChanged$1(Object obj) {
@@ -27,8 +26,8 @@ final /* synthetic */ class PackageUpdateMonitor$packageChanged$1 extends Adapte
         LogLevel logLevel = LogLevel.DEBUG;
         PackageUpdateLogger$$ExternalSyntheticLambda0 packageUpdateLogger$$ExternalSyntheticLambda0 = new PackageUpdateLogger$$ExternalSyntheticLambda0();
         LogBuffer logBuffer = packageUpdateLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("PackageChangeRepoLog", logLevel, packageUpdateLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("PackageChangeRepoLog", logLevel, packageUpdateLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = packageChangeModel.getPackageName();
         if (packageChangeModel instanceof PackageChangeModel.Installed) {
             str = "installed";
@@ -49,7 +48,7 @@ final /* synthetic */ class PackageUpdateMonitor$packageChanged$1 extends Adapte
         }
         logMessageImpl.str2 = str;
         logMessageImpl.int1 = packageChangeModel.getPackageUid();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

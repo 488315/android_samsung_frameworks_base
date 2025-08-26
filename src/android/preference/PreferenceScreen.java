@@ -40,13 +40,13 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
         super(context, attributeSet, 16842891);
         this.mLayoutResId = R.layout.preference_list_fragment;
         this.mDialogFitsSystemWindows = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.PreferenceScreen, 16842891, 0);
-        this.mLayoutResId = obtainStyledAttributes.getResourceId(1, this.mLayoutResId);
-        if (obtainStyledAttributes.hasValueOrEmpty(0)) {
-            this.mDividerDrawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.PreferenceScreen, 16842891, 0);
+        this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(1, this.mLayoutResId);
+        if (typedArrayObtainStyledAttributes.hasValueOrEmpty(0)) {
+            this.mDividerDrawable = typedArrayObtainStyledAttributes.getDrawable(0);
             this.mDividerSpecified = true;
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void setDialogFitsSystemWindows(boolean z) {
@@ -92,9 +92,9 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
         if (listView != null) {
             listView.setAdapter((ListAdapter) null);
         }
-        View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(this.mLayoutResId, (ViewGroup) null);
-        View findViewById = inflate.findViewById(16908310);
-        ListView listView2 = (ListView) inflate.findViewById(16908298);
+        View viewInflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(this.mLayoutResId, (ViewGroup) null);
+        View viewFindViewById = viewInflate.findViewById(16908310);
+        ListView listView2 = (ListView) viewInflate.findViewById(16908298);
         this.mListView = listView2;
         if (this.mDialogFitsSystemWindows) {
             listView2.setFitsSystemWindows(true);
@@ -107,17 +107,17 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
         Dialog dialog = new Dialog(context, context.getThemeResId());
         this.mDialog = dialog;
         if (TextUtils.isEmpty(title)) {
-            if (findViewById != null) {
-                findViewById.setVisibility(8);
+            if (viewFindViewById != null) {
+                viewFindViewById.setVisibility(8);
             }
             dialog.getWindow().requestFeature(1);
-        } else if (findViewById instanceof TextView) {
-            ((TextView) findViewById).lambda$setTextAsync$0(title);
-            findViewById.setVisibility(0);
+        } else if (viewFindViewById instanceof TextView) {
+            ((TextView) viewFindViewById).lambda$setTextAsync$0(title);
+            viewFindViewById.setVisibility(0);
         } else {
             dialog.setTitle(title);
         }
-        dialog.setContentView(inflate);
+        dialog.setContentView(viewInflate);
         dialog.setOnDismissListener(this);
         if (bundle != null) {
             dialog.onRestoreInstanceState(bundle);
@@ -149,12 +149,12 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
 
     @Override // android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.isDialogShowing = true;
         savedState.dialogBundle = dialog.onSaveInstanceState();
         return savedState;

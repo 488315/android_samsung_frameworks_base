@@ -38,9 +38,9 @@ public interface IClientCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IClientCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClientCallback)) {
-                return (IClientCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IClientCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClientCallback)) {
+                return (IClientCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,10 +67,10 @@ public interface IClientCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onClients(readStrongBinder, readBoolean);
+                onClients(strongBinder, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -94,14 +94,14 @@ public interface IClientCallback extends IInterface {
 
             @Override // android.os.IClientCallback
             public void onClients(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IClientCallback.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IClientCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

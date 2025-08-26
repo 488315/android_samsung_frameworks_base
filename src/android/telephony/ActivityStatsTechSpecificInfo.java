@@ -12,11 +12,11 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ActivityStatsTechSpecificInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             int[] iArr = new int[5];
             parcel.readIntArray(iArr);
-            return new ActivityStatsTechSpecificInfo(readInt, readInt2, iArr, parcel.readInt());
+            return new ActivityStatsTechSpecificInfo(i, i2, iArr, parcel.readInt());
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

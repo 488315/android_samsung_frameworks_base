@@ -15,7 +15,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SizeAnimationModifierNode$animateTo$data$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $targetSize;
@@ -50,11 +49,11 @@ final class SizeAnimationModifierNode$animateTo$data$1$1 extends SuspendLambda i
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             Animatable animatable = this.$this_apply.anim;
-            IntSize m859boximpl = IntSize.m859boximpl(this.$targetSize);
+            IntSize intSizeM861boximpl = IntSize.m861boximpl(this.$targetSize);
             AnimationSpec animationSpec = this.this$0.animationSpec;
             this.label = 1;
             sizeAnimationModifierNode$animateTo$data$1$1 = this;
-            obj = Animatable.animateTo$default(animatable, m859boximpl, animationSpec, null, null, sizeAnimationModifierNode$animateTo$data$1$1, 12);
+            obj = Animatable.animateTo$default(animatable, intSizeM861boximpl, animationSpec, null, null, sizeAnimationModifierNode$animateTo$data$1$1, 12);
             if (obj == coroutineSingletons) {
                 return coroutineSingletons;
             }
@@ -67,7 +66,7 @@ final class SizeAnimationModifierNode$animateTo$data$1$1 extends SuspendLambda i
         }
         AnimationResult animationResult = (AnimationResult) obj;
         if (animationResult.endReason == AnimationEndReason.Finished && (function2 = sizeAnimationModifierNode$animateTo$data$1$1.this$0.listener) != null) {
-            function2.invoke(IntSize.m859boximpl(sizeAnimationModifierNode$animateTo$data$1$1.$this_apply.startSize), ((SnapshotMutableStateImpl) animationResult.endState.value$delegate).getValue());
+            function2.invoke(IntSize.m861boximpl(sizeAnimationModifierNode$animateTo$data$1$1.$this_apply.startSize), ((SnapshotMutableStateImpl) animationResult.endState.value$delegate).getValue());
         }
         return Unit.INSTANCE;
     }

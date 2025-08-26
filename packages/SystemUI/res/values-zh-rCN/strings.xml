@@ -1256,6 +1256,7 @@
     <string name="delete_blob_text">删除共享数据</string>
     <string name="demo_mode">系统界面演示模式</string>
     <string name="demote_explain_text">“%1$s”将不再显示实时动态。您可以随时在“设置”中更改这项设置。</string>
+    <string name="desktop_label">桌面 %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">将窗口最大化或恢复大小</string>
     <string name="desktop_mode_a11y_action_snap_left">调整应用窗口大小并贴靠左侧</string>
     <string name="desktop_mode_a11y_action_snap_right">调整应用窗口大小并贴靠右侧</string>
@@ -1310,6 +1311,17 @@
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">如何在平板电脑上打开触控板</string>
     <string name="dex_touchpad_dialog_pinch">用两根手指捏合</string>
     <string name="dex_touchpad_dialog_pinch_desc">放大或缩小</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">使用 S Pen 在常用的应用程序中书写或绘画。当您将 S Pen 放在手机屏幕上时，光标将跳到显示器上的该点。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">使用 S Pen 在常用的应用程序中书写或绘画。当您将 S Pen 放在平板电脑屏幕上时，光标将跳到显示器上的该点。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">选择对象、打开应用程序、激活按钮及更多 (左键单击)</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">在任何方向上滚动</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">点击并拖动</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">点击</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">S Pen 光标</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">长按</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">选择屏幕上的对象</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">在屏幕上移动对象或选择文本</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">长按并拖动</string>
     <string name="dex_touchpad_dialog_swipe">用两根手指滑动</string>
     <string name="dex_touchpad_dialog_swipe_desc">在任何方向上滚动</string>
     <string name="dex_touchpad_dialog_swipe_left_right">用三根手指向左或向右滑动</string>
@@ -1351,6 +1363,7 @@
     <string name="disconnect_smart_view">是否断开 Smart View 的连接？</string>
     <string name="dismiss_dialog">关闭</string>
     <string name="dismissible_keyguard_swipe">向上滑动即可继续</string>
+    <string name="display_disconnected_to_change_user">显示器断开连接才能更改用户。</string>
     <string name="divider_panel_app_pair_to_edge">将一键分屏添加至侧屏幕面板</string>
     <string name="divider_panel_change_layout">更改布局</string>
     <string name="divider_panel_rotate_clockwise">顺时针旋转</string>
@@ -1408,6 +1421,7 @@
     <string name="drop_now_to_open_in_fullscreen_view">现在放置即可在全屏视图中打开</string>
     <string name="dropdown_menu">下拉菜单</string>
     <string name="durationMinutes">%d 分钟</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">使用 Smart View 时会隐藏桌面工作空间。</string>
     <string name="edge_feeds_preview_not_selected_tts">%s未选择。</string>
     <string name="edge_feeds_preview_selected_tts">已选择%s。</string>
     <string name="edge_lighting_action_description">侧屏闪光效果一次</string>
@@ -2622,6 +2636,7 @@
     <string name="ksh_group_system_notifications">通知</string>
     <string name="ksh_group_system_popup_view">弹出视图</string>
     <string name="ksh_group_system_recents">最近使用</string>
+    <string name="ksh_group_system_running_apps">正在运行的应用程序</string>
     <string name="ksh_group_system_screen_off">屏幕关闭</string>
     <string name="ksh_group_system_show_emojis">显示表情符号</string>
     <string name="ksh_group_system_show_hanja_input">显示汉字输入</string>
@@ -3173,9 +3188,13 @@
     <string name="music_share_description_second_line">如果您和朋友都有 Galaxy Buds，你们可以一起听音乐。</string>
     <string name="mw_caption_button_text_open_in_browser">在浏览器中打开</string>
     <string name="mw_caption_button_text_remove_from_workspace">从工作空间中移除</string>
+    <string name="mw_caption_button_text_restart_app">重新启动应用程序以优化布局</string>
     <string name="mw_caption_button_text_send_to_other_display">发送至其他显示设备</string>
     <string name="mw_caption_button_text_snap_to_left">向左对齐</string>
     <string name="mw_caption_button_text_snap_to_right">向右对齐</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">由于您的手机温度过高，桌面工作空间已隐藏。待设备降温后将恢复显示。</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">由于屏幕放大比例过高，无法将此应用程序切换至桌面工作空间。请更改屏幕缩放设置后重试。</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">使用 Smart View 时无法将应用程序更改为桌面视图。</string>
     <string name="nav_bar">导航栏</string>
     <string name="nav_bar_layout">布局</string>
     <string name="navigation_menu">导航菜单</string>
@@ -3494,7 +3513,7 @@
     <string name="private_dns_mode_opportunistic_button">自动 (推荐)</string>
     <string name="private_dns_mode_opportunistic_description">使用推荐的安全 DNS 服务器。如果安全 DNS 服务器不可用，则将改用网络的默认服务器。</string>
     <string name="private_dns_mode_provider">私密 DNS 提供商主机名</string>
-    <string name="private_dns_mode_provider_description">设置您自己的私密 DNS 提供商。如果您设置的 DNS 提供商不可用，您的手机将根本无法连接到至联网。</string>
+    <string name="private_dns_mode_provider_description">设置您自己的私密 DNS 提供商。如果您设置的 DNS 提供商不可用，您的手机将无法连接到互联网。</string>
     <string name="private_dns_mode_provider_failure">无法连接</string>
     <string name="private_dns_mode_provider_hostname_hint">请输入 DNS 提供商的主机名</string>
     <string name="process_kernel_label">Android 操作系统</string>
@@ -3522,6 +3541,7 @@
     <string name="qs_custom_action_move_to_bottom">移动至底部</string>
     <string name="qs_custom_action_move_to_top">移动至顶部</string>
     <string name="qs_custom_action_move_up">向上移动</string>
+    <string name="qs_custom_action_radio_button">单选按钮</string>
     <string name="qs_custom_action_removed_done">%s按钮已移除</string>
     <string name="qs_customizer_settings">面板设置</string>
     <string name="qs_detail_flashlight_title">手电筒</string>
@@ -3616,6 +3636,7 @@
     <string name="qs_record_issue_label">录制问题</string>
     <string name="qs_record_issue_start">开始</string>
     <string name="qs_record_issue_stop">停止</string>
+    <string name="qs_reset_complete">重置完成。</string>
     <string name="qs_sensor_privacy_dialog_cancel">取消</string>
     <string name="qs_sensor_privacy_dialog_turn_on">打开</string>
     <string name="qs_sensor_privacy_dialog_unblock">解除阻止</string>
@@ -3894,7 +3915,6 @@
     <string name="retail_demo_reset_title">需要输入密码</string>
     <string name="retry_face">重试人脸识别身份验证</string>
     <string name="reverse_folding_alert_view_warning_text">打开手机并从左侧折叠。</string>
-    <string name="reverse_folding_order_guide_text">先折叠左侧。</string>
     <string name="right_icon">向右图标</string>
     <string name="right_keycode">向右键码</string>
     <string name="right_nav_bar_button_type">其他向右按钮类型</string>
@@ -4114,6 +4134,7 @@
     <string name="sec_decor_button_text_caption_pin">将选项菜单固定至顶部</string>
     <string name="sec_decor_button_text_caption_unpin">取消固定选项菜单</string>
     <string name="sec_decor_button_text_close">关闭</string>
+    <string name="sec_decor_button_text_enter_full_screen">全屏</string>
     <string name="sec_decor_button_text_exit_full_screen">退出全屏</string>
     <string name="sec_decor_button_text_freeform">在弹出视图中打开</string>
     <string name="sec_decor_button_text_maximize">最大化</string>
@@ -4129,6 +4150,7 @@
     <string name="sec_decor_button_text_window_pin">置顶窗口</string>
     <string name="sec_decor_button_text_window_unpin">取消固定窗口</string>
     <string name="sec_decor_handle_text">快捷选项</string>
+    <string name="sec_decor_window_handle">窗口触钮</string>
     <string name="sec_default_app">设置为默认</string>
     <string name="sec_devices_and_media_control">设备控制和媒体输出按钮</string>
     <string name="sec_dlg_turn_on">打开</string>
@@ -4914,11 +4936,11 @@
     <string name="unable_to_turn_on_being_used_by_app">无法打开闪光灯，因为%s正在使用灯光。</string>
     <string name="unable_to_turn_on_being_used_by_camera">有其他应用程序正在使用灯光时无法打开闪光灯</string>
     <string name="unable_to_turn_on_by_high_temperature">温度过高，已关闭闪光灯。请等待手机冷却再使用闪光灯。</string>
-    <string name="unintentional_lcd_on_alert_title">意外触摸保护</string>
+    <string name="unintentional_lcd_on_alert_title">防误触保护</string>
     <string name="unintentional_lcd_on_alert_window_body">保护您的手机不受意外触摸的干扰。</string>
     <string name="unintentional_lcd_on_alert_window_body2">为防止发生这种情况，请保持手机顶部干净无杂物。</string>
     <string name="unintentional_lcd_on_alert_window_body2_tablet">为防止发生这种情况，请保持平板电脑顶部干净无杂物。</string>
-    <string name="unintentional_lcd_on_alert_window_body_drag_to_unlock">向上滑动可解除意外触摸保护。</string>
+    <string name="unintentional_lcd_on_alert_window_body_drag_to_unlock">向上滑动可解除防误触保护。</string>
     <string name="unintentional_lcd_on_alert_window_body_ear_proximity">当手机放在口袋或包中等较暗的地方时，可防止意外触摸打开屏幕。</string>
     <string name="unintentional_lcd_on_alert_window_body_ear_proximity_tablet">当平板电脑放在口袋或包中等较暗的地方时，可防止意外触摸打开屏幕。</string>
     <string name="unintentional_lcd_on_alert_window_body_tablet">保护您的平板电脑不受意外触摸的干扰。</string>
@@ -5363,7 +5385,7 @@ WLAN 地址 (BSSID)
     <string name="zen_mode_and_condition">%1$s（%2$s）</string>
     <string name="zen_mode_do_not_disturb_name">勿扰</string>
     <string name="zen_mode_duration_always_prompt_title">每次询问</string>
-    <string name="zen_mode_duration_settings_summary">【免打扰】会将所有来电、通知和其他提醒静音，但您选择允许的除外。</string>
+    <string name="zen_mode_duration_settings_summary">【免打扰】会将所有来电、通知和其他提醒静音，但您选择允许的设置除外。</string>
     <string name="zen_mode_duration_settings_title">持续时间</string>
     <string name="zen_mode_enable_dialog_turn_on">打开</string>
     <string name="zen_mode_forever">直到我将其关闭</string>

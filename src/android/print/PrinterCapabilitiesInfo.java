@@ -137,9 +137,9 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     /* JADX INFO: Access modifiers changed from: private */
     public static void enforceValidMask(int i, IntConsumer intConsumer) {
         while (i > 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
-            intConsumer.accept(numberOfTrailingZeros);
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
+            intConsumer.accept(iNumberOfTrailingZeros);
         }
     }
 
@@ -150,20 +150,20 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         this.mMinMargins = (PrintAttributes.Margins) Preconditions.checkNotNull(readMargins(parcel));
         readMediaSizes(parcel);
         readResolutions(parcel);
-        int readInt = parcel.readInt();
-        this.mColorModes = readInt;
-        enforceValidMask(readInt, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda0
+        int i = parcel.readInt();
+        this.mColorModes = i;
+        enforceValidMask(i, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.IntConsumer
-            public final void accept(int i) {
-                PrintAttributes.enforceValidColorMode(i);
+            public final void accept(int i2) {
+                PrintAttributes.enforceValidColorMode(i2);
             }
         });
-        int readInt2 = parcel.readInt();
-        this.mDuplexModes = readInt2;
-        enforceValidMask(readInt2, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda1
+        int i2 = parcel.readInt();
+        this.mDuplexModes = i2;
+        enforceValidMask(i2, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda1
             @Override // java.util.function.IntConsumer
-            public final void accept(int i) {
-                PrintAttributes.enforceValidDuplexMode(i);
+            public final void accept(int i3) {
+                PrintAttributes.enforceValidDuplexMode(i3);
             }
         });
         readDefaults(parcel);
@@ -183,11 +183,11 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
 
     public int hashCode() {
         PrintAttributes.Margins margins = this.mMinMargins;
-        int hashCode = ((margins == null ? 0 : margins.hashCode()) + 31) * 31;
+        int iHashCode = ((margins == null ? 0 : margins.hashCode()) + 31) * 31;
         List<PrintAttributes.MediaSize> list = this.mMediaSizes;
-        int hashCode2 = (hashCode + (list == null ? 0 : list.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (list == null ? 0 : list.hashCode())) * 31;
         List<PrintAttributes.Resolution> list2 = this.mResolutions;
-        return ((((((hashCode2 + (list2 != null ? list2.hashCode() : 0)) * 31) + this.mColorModes) * 31) + this.mDuplexModes) * 31) + Arrays.hashCode(this.mDefaults);
+        return ((((((iHashCode2 + (list2 != null ? list2.hashCode() : 0)) * 31) + this.mColorModes) * 31) + this.mDuplexModes) * 31) + Arrays.hashCode(this.mDefaults);
     }
 
     public boolean equals(Object obj) {
@@ -234,12 +234,12 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         sb.append('[');
         int i = this.mColorModes;
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
             if (sb.length() > 1) {
                 sb.append(", ");
             }
-            sb.append(PrintAttributes.colorModeToString(numberOfTrailingZeros));
+            sb.append(PrintAttributes.colorModeToString(iNumberOfTrailingZeros));
         }
         sb.append(']');
         return sb.toString();
@@ -250,12 +250,12 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         sb.append('[');
         int i = this.mDuplexModes;
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
             if (sb.length() > 1) {
                 sb.append(", ");
             }
-            sb.append(PrintAttributes.duplexModeToString(numberOfTrailingZeros));
+            sb.append(PrintAttributes.duplexModeToString(iNumberOfTrailingZeros));
         }
         sb.append(']');
         return sb.toString();
@@ -275,11 +275,11 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     }
 
     private void readMediaSizes(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt > 0 && this.mMediaSizes == null) {
+        int i = parcel.readInt();
+        if (i > 0 && this.mMediaSizes == null) {
             this.mMediaSizes = new ArrayList();
         }
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.mMediaSizes.add(PrintAttributes.MediaSize.createFromParcel(parcel));
         }
     }
@@ -298,11 +298,11 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     }
 
     private void readResolutions(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt > 0 && this.mResolutions == null) {
+        int i = parcel.readInt();
+        if (i > 0 && this.mResolutions == null) {
             this.mResolutions = new ArrayList();
         }
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.mResolutions.add(PrintAttributes.Resolution.createFromParcel(parcel));
         }
     }
@@ -324,9 +324,9 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     }
 
     private void readDefaults(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            this.mDefaults[i] = parcel.readInt();
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            this.mDefaults[i2] = parcel.readInt();
         }
     }
 

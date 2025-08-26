@@ -17,7 +17,6 @@ import java.util.function.LongConsumer;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LogUtil {
     private static final double DIVIDE_TIME = 1000000.0d;
@@ -195,9 +194,9 @@ public final class LogUtil {
     }
 
     public static final void execTime(Runnable runnable, int i, String str, String str2, Object... objArr) {
-        int startTime = startTime(-1);
+        int iStartTime = startTime(-1);
         runnable.run();
-        endTime(startTime, i, str, str2, objArr);
+        endTime(iStartTime, i, str, str2, objArr);
     }
 
     public static final String getCaller(int i) {
@@ -225,8 +224,8 @@ public final class LogUtil {
         }
         int i = StringCompanionObject.$r8$clinit;
         Locale locale = Locale.US;
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-        return String.format(locale, str, Arrays.copyOf(copyOf, copyOf.length));
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+        return String.format(locale, str, Arrays.copyOf(objArrCopyOf, objArrCopyOf.length));
     }
 
     private static final int getNextKey() {
@@ -237,26 +236,34 @@ public final class LogUtil {
         return i;
     }
 
+    public static final String getOX(boolean z) {
+        return z ? "(O)" : "(X)";
+    }
+
+    public static final String getVIG(int i) {
+        return i != 0 ? i != 4 ? i != 8 ? "(N)" : "(G)" : "(I)" : "(V)";
+    }
+
     public static final void i(String str, String str2, Object... objArr) {
         Log.i(str, getMsg(str2, Arrays.copyOf(objArr, objArr.length)));
     }
 
     private static final void internalEndTime(int i, int i2, LongConsumer longConsumer, String str, String str2, Object... objArr) {
-        Long remove = beginTimes.remove(Integer.valueOf(i));
-        if (remove != null) {
-            long elapsedTime = elapsedTime(remove.longValue());
-            if (elapsedTime >= i2 || i2 == 0 || longConsumer != null) {
+        Long lRemove = beginTimes.remove(Integer.valueOf(i));
+        if (lRemove != null) {
+            long jElapsedTime = elapsedTime(lRemove.longValue());
+            if (jElapsedTime >= i2 || i2 == 0 || longConsumer != null) {
                 if (str2 != null && objArr.length != 0) {
                     int i3 = StringCompanionObject.$r8$clinit;
                     Locale locale = Locale.US;
-                    Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-                    str2 = String.format(locale, str2, Arrays.copyOf(copyOf, copyOf.length));
+                    Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+                    str2 = String.format(locale, str2, Arrays.copyOf(objArrCopyOf, objArrCopyOf.length));
                 }
                 if (str != null && str2 != null) {
-                    w(str, str2 + " / elapsed time: " + elapsedTime + "ms", new Object[0]);
+                    w(str, str2 + " / elapsed time: " + jElapsedTime + "ms", new Object[0]);
                 }
                 if (longConsumer != null) {
-                    longConsumer.accept(elapsedTime);
+                    longConsumer.accept(jElapsedTime);
                 }
             }
         }
@@ -265,19 +272,19 @@ public final class LogUtil {
     private static final void internalLapTime(int i, LongConsumer longConsumer, String str, String str2, Object... objArr) {
         Long l = beginTimes.get(Integer.valueOf(i));
         if (l != null) {
-            long longValue = l.longValue();
+            long jLongValue = l.longValue();
             if (objArr.length != 0 && str2 != null) {
                 int i2 = StringCompanionObject.$r8$clinit;
                 Locale locale = Locale.US;
-                Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-                str2 = String.format(locale, str2, Arrays.copyOf(copyOf, copyOf.length));
+                Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+                str2 = String.format(locale, str2, Arrays.copyOf(objArrCopyOf, objArrCopyOf.length));
             }
-            long elapsedTime = elapsedTime(longValue);
+            long jElapsedTime = elapsedTime(jLongValue);
             if (str != null) {
-                w(str, ((Object) str2) + " / lap time: " + elapsedTime + "ms", new Object[0]);
+                w(str, ((Object) str2) + " / lap time: " + jElapsedTime + "ms", new Object[0]);
             }
             if (longConsumer != null) {
-                longConsumer.accept(elapsedTime);
+                longConsumer.accept(jElapsedTime);
             }
         }
     }
@@ -291,8 +298,8 @@ public final class LogUtil {
             if (objArr.length != 0) {
                 int i2 = StringCompanionObject.$r8$clinit;
                 Locale locale = Locale.US;
-                Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-                str2 = String.format(locale, str2, Arrays.copyOf(copyOf, copyOf.length));
+                Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+                str2 = String.format(locale, str2, Arrays.copyOf(objArrCopyOf, objArrCopyOf.length));
             }
             d(str, str2.concat(" / started"), new Object[0]);
         }

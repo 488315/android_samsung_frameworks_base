@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class VolumeDialogControllerImpl$$ExternalSyntheticLambda9 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -86,20 +85,20 @@ public final /* synthetic */ class VolumeDialogControllerImpl$$ExternalSynthetic
                 VolumeDialogController.State state = volumeDialogControllerImpl.mState;
                 if (num != null) {
                     if (!state.states.contains(99)) {
-                        VolumeDialogController.StreamState streamStateW = volumeDialogControllerImpl.streamStateW(99);
-                        streamStateW.dynamic = true;
+                        VolumeDialogController.StreamState streamStateStreamStateW = volumeDialogControllerImpl.streamStateW(99);
+                        streamStateStreamStateW.dynamic = true;
                         AudioSharingInteractor audioSharingInteractor = volumeDialogControllerImpl.mAudioSharingInteractor;
                         audioSharingInteractor.getClass();
-                        streamStateW.levelMin = 0;
-                        streamStateW.levelMax = audioSharingInteractor.getVolumeMax();
-                        streamStateW.routedToBluetooth = true;
-                        if (streamStateW.level != num.intValue()) {
-                            streamStateW.level = num.intValue();
+                        streamStateStreamStateW.levelMin = 0;
+                        streamStateStreamStateW.levelMax = audioSharingInteractor.getVolumeMax();
+                        streamStateStreamStateW.routedToBluetooth = true;
+                        if (streamStateStreamStateW.level != num.intValue()) {
+                            streamStateStreamStateW.level = num.intValue();
                         }
                         String string = volumeDialogControllerImpl.mContext.getString(R.string.audio_sharing_description);
-                        if (!Objects.equals(streamStateW.remoteLabel, string)) {
-                            streamStateW.name = -1;
-                            streamStateW.remoteLabel = string;
+                        if (!Objects.equals(streamStateStreamStateW.remoteLabel, string)) {
+                            streamStateStreamStateW.name = -1;
+                            streamStateStreamStateW.remoteLabel = string;
                         }
                         Slog.d(str5, "updateState, new audio sharing stream volume = " + num);
                         c.onStateChanged(state);

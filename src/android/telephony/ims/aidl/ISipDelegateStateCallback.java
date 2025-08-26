@@ -79,9 +79,9 @@ public interface ISipDelegateStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipDelegateStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISipDelegateStateCallback)) {
-                return (ISipDelegateStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipDelegateStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISipDelegateStateCallback)) {
+                return (ISipDelegateStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -120,10 +120,10 @@ public interface ISipDelegateStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISipDelegate asInterface = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(FeatureTagState.CREATOR);
+                ISipDelegate iSipDelegateAsInterface = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FeatureTagState.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCreated(asInterface, createTypedArrayList);
+                onCreated(iSipDelegateAsInterface, arrayListCreateTypedArrayList);
             } else if (i == 2) {
                 DelegateRegistrationState delegateRegistrationState = (DelegateRegistrationState) parcel.readTypedObject(DelegateRegistrationState.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -137,9 +137,9 @@ public interface ISipDelegateStateCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onConfigurationChanged(sipDelegateConfiguration);
             } else if (i == 5) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onDestroyed(readInt);
+                onDestroyed(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -164,62 +164,62 @@ public interface ISipDelegateStateCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
             public void onCreated(ISipDelegate iSipDelegate, List<FeatureTagState> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSipDelegate);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSipDelegate);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
             public void onFeatureTagRegistrationChanged(DelegateRegistrationState delegateRegistrationState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(delegateRegistrationState, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(delegateRegistrationState, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
             public void onImsConfigurationChanged(SipDelegateImsConfiguration sipDelegateImsConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDelegateImsConfiguration, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDelegateImsConfiguration, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
             public void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDelegateConfiguration, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDelegateConfiguration, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
             public void onDestroyed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

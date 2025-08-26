@@ -1,6 +1,5 @@
 package com.android.systemui.statusbar.phone.ongoingactivity;
 
-import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -22,14 +21,13 @@ import android.service.notification.StatusBarNotification;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.PathInterpolator;
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.external.kotlinx.collections.immutable.internal.ListImplementation$$ExternalSyntheticOutline0;
-import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.preference.PreferenceGroupAdapter$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +50,7 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.facewidget.plugin.FaceWidgetNotificationControllerWrapper;
+import com.android.systemui.keyguard.LifecycleScreenStatusProvider;
 import com.android.systemui.media.MediaType;
 import com.android.systemui.media.SecMediaHost;
 import com.android.systemui.media.SecMediaPlayerData;
@@ -63,6 +62,7 @@ import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.shared.system.TaskStackChangeListener;
 import com.android.systemui.shared.system.TaskStackChangeListeners;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
+import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
 import com.android.systemui.statusbar.NotificationRemoteInputManager;
 import com.android.systemui.statusbar.notification.collection.NotifCollection;
 import com.android.systemui.statusbar.notification.collection.NotifPipeline;
@@ -72,13 +72,13 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.No
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener;
+import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.IndicatorGardenPresenter;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.NotificationIconAreaController;
+import com.android.systemui.statusbar.phone.TouchInterceptFrameLayout;
 import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
-import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$$ExternalSyntheticLambda0;
-import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingChipAdapter;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
@@ -86,6 +86,7 @@ import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.window.StatusBarWindowStateController;
 import com.android.systemui.unfold.updates.screen.ScreenStatusProvider;
+import com.android.systemui.util.Assert;
 import com.android.systemui.util.NotificationSAUtil;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
@@ -112,7 +113,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingActivityController implements IOngoingObserver, CoreStartable, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -178,7 +178,6 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
     public final OngoingActivityController$userChangedListener$1 userChangedListener;
     public final NotificationLockscreenUserManager userManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -258,9 +257,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         settingsHelper.registerCallback(onChangedCallback, Settings.System.getUriFor(SettingsHelper.INDEX_MEDIA_ONGOING));
         this.mLinearLayoutManager = new LinearLayoutManager(context);
         this.mStatusBarState = 0;
-        Looper myLooper = Looper.myLooper();
-        myLooper.getClass();
-        this.mediaPauseTimerHandler = new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        looperMyLooper.getClass();
+        this.mediaPauseTimerHandler = new Handler(looperMyLooper);
         this.isScreenTurnedOn = true;
         this.delayedEntry = new ConcurrentLinkedQueue();
         this.isNightMode = context.getResources().getConfiguration().isNightModeActive();
@@ -270,7 +269,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             @Override // java.lang.Runnable
             public final void run() {
                 OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
-                NotificationLockscreenUserManager notificationLockscreenUserManager2 = OngoingActivityController.this.userManager;
+                NotificationLockscreenUserManager notificationLockscreenUserManager2 = this.this$0.userManager;
                 ongoingActivityDataHelper.getClass();
                 CopyOnWriteArrayList copyOnWriteArrayList = OngoingActivityDataHelper.pipEnabledComponentNameList;
                 if (copyOnWriteArrayList.size() != 0) {
@@ -287,20 +286,23 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                 int i9;
-                int i10;
-                OngoingChipAdapter ongoingChipAdapter = OngoingActivityController.this.mOngoingChipAdapter;
-                if (ongoingChipAdapter == null || (i10 = ongoingChipAdapter.enableMaxWidth) == (i9 = i3 - i)) {
-                    return;
-                }
-                String m = ListImplementation$$ExternalSyntheticOutline0.m(i10, i9, "updateEnableMaxWidth : ", " -:> ");
-                String str = ongoingChipAdapter.TAG;
-                Log.d(str, m);
-                ongoingChipAdapter.enableMaxWidth = i9;
-                if (ongoingChipAdapter.marqueeState == OngoingChipAdapter.MarqueeState.INIT) {
-                    ongoingChipAdapter.notifyDataSetChanged();
-                } else {
-                    Log.i(str, "updateEnableMaxWidth() set MarqueeState.WAIT_FINISH");
-                    ongoingChipAdapter.marqueeState = OngoingChipAdapter.MarqueeState.WAIT_FINISH;
+                OngoingChipAdapter ongoingChipAdapter = this.this$0.mOngoingChipAdapter;
+                if (ongoingChipAdapter != null) {
+                    int i10 = i3 - i;
+                    Integer num = ongoingChipAdapter.mStatusBarState;
+                    if (num == null || num.intValue() != 0 || (i9 = ongoingChipAdapter.enableMaxWidth) == i10) {
+                        return;
+                    }
+                    String strM = ListImplementation$$ExternalSyntheticOutline0.m(i9, i10, "updateEnableMaxWidth : ", " -:> ");
+                    String str = ongoingChipAdapter.TAG;
+                    Log.d(str, strM);
+                    ongoingChipAdapter.enableMaxWidth = i10;
+                    if (ongoingChipAdapter.marqueeState == OngoingChipAdapter.MarqueeState.INIT || ongoingChipAdapter.needProcessOrientationChanged) {
+                        ongoingChipAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.i(str, "updateEnableMaxWidth() set MarqueeState.WAIT_FINISH");
+                        ongoingChipAdapter.marqueeState = OngoingChipAdapter.MarqueeState.WAIT_FINISH;
+                    }
                 }
             }
         };
@@ -308,7 +310,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             @Override // com.android.systemui.statusbar.NotificationLockscreenUserManager.UserChangedListener
             public final void onCurrentProfilesChanged(SparseArray sparseArray) {
                 OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
-                NotificationLockscreenUserManager notificationLockscreenUserManager2 = OngoingActivityController.this.userManager;
+                NotificationLockscreenUserManager notificationLockscreenUserManager2 = this.this$0.userManager;
                 ongoingActivityDataHelper.getClass();
                 OngoingActivityDataHelper.updateOngoingList(notificationLockscreenUserManager2);
             }
@@ -319,11 +321,11 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 super.getItemOffsets(rect, view, recyclerView, state);
                 recyclerView.getClass();
                 if (RecyclerView.getChildAdapterPosition(view) != state.getItemCount() - 1) {
-                    OngoingActivityController ongoingActivityController = OngoingActivityController.this;
-                    int m = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(ongoingActivityController.mContext);
-                    ongoingActivityController.mLayoutMode = m;
+                    OngoingActivityController ongoingActivityController = this.this$0;
+                    int iM = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(ongoingActivityController.mContext);
+                    ongoingActivityController.mLayoutMode = iM;
                     IndicatorScaleGardener indicatorScaleGardener2 = ongoingActivityController.indicatorScaleGardener;
-                    if (m != 1) {
+                    if (iM != 1) {
                         rect.left = (int) ((ongoingActivityController.mContext.getResources().getDimensionPixelOffset(R.dimen.ongoing_activity_chip_layer_offset) - ongoingActivityController.mContext.getResources().getDimensionPixelOffset(R.dimen.ongoing_activity_chip_min_width)) * indicatorScaleGardener2.getLatestScaleModel(ongoingActivityController.mContext).ratio);
                     } else {
                         rect.right = (int) ((ongoingActivityController.mContext.getResources().getDimensionPixelOffset(R.dimen.ongoing_activity_chip_layer_offset) - ongoingActivityController.mContext.getResources().getDimensionPixelOffset(R.dimen.ongoing_activity_chip_min_width)) * indicatorScaleGardener2.getLatestScaleModel(ongoingActivityController.mContext).ratio);
@@ -333,17 +335,17 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         };
         this.notifListener = new NotifCollectionListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$notifListener$1
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
-            public final void onEntryAdded(NotificationEntry notificationEntry) {
+            public final void onEntryAdded(NotificationEntry notificationEntry) throws Exception {
                 onEntryUpdated(notificationEntry);
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
-            public final void onEntryRemoved(NotificationEntry notificationEntry, int i) {
+            public final void onEntryRemoved(NotificationEntry notificationEntry, int i) throws Exception {
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 ConcurrentHashMap concurrentHashMap = OngoingActivityDataHelper.onlyShownNowbarItemMap;
-                boolean containsKey = concurrentHashMap.containsKey(notificationEntry.mKey);
+                boolean zContainsKey = concurrentHashMap.containsKey(notificationEntry.mKey);
                 String str = notificationEntry.mKey;
-                if (containsKey) {
+                if (zContainsKey) {
                     MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("OnlyShownNowbar - onEntryRemoved() ", str, "{OngoingActivityController}");
                     String key = notificationEntry.mSbn.getKey();
                     Log.i(OngoingActivityDataHelper.TAG, "removeNowbarItemOnlyShownNowbar()");
@@ -351,7 +353,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                     OngoingActivityDataHelper.notifyRemoveItemNowbarObservers(key);
                 }
                 if (notificationEntry.isOngoingActivity() || (NotiRune.NOTI_ONGOING_GEMINI_DEMO && OngoingActivityDataHelper.isExceptionalOngoingActivity(notificationEntry))) {
-                    OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                    OngoingActivityController ongoingActivityController = this.this$0;
                     MediaSessions$H$$ExternalSyntheticOutline0.m("onEntryRemoved() ", str, " is removed remove is ", ongoingActivityController.isUpdateNotAllowed ? "NOT allowed" : "allowed", "{OngoingActivityController}");
                     if (ongoingActivityController.isUpdateNotAllowed) {
                         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onEntryRemoved() add delayedEntry for removed. ", str, "{OngoingActivityController}");
@@ -366,11 +368,11 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
-            public final void onEntryUpdated(NotificationEntry notificationEntry) {
+            public final void onEntryUpdated(NotificationEntry notificationEntry) throws Exception {
                 Parcelable[] parcelableArray;
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 int size = OngoingActivityDataHelper.hiddenOngoingActivityDataList.size() + OngoingActivityDataHelper.mOngoingActivityLists.size();
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 if (size == 0) {
                     Log.i("{OngoingActivityController}", "onEntryUpdated and OA data is empty. So update latest task info");
                     Iterator<ActivityManager.RunningTaskInfo> it = ((ActivityManager) ongoingActivityController.mContext.getSystemService("activity")).getRunningTasks(1).iterator();
@@ -384,9 +386,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 }
                 OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
                 ongoingActivityDataHelper.getClass();
-                boolean isOnlyShownNowbar = OngoingActivityDataHelper.isOnlyShownNowbar(notificationEntry);
+                boolean zIsOnlyShownNowbar = OngoingActivityDataHelper.isOnlyShownNowbar(notificationEntry);
                 String str = notificationEntry.mKey;
-                if (isOnlyShownNowbar) {
+                if (zIsOnlyShownNowbar) {
                     MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("OnlyShownNowbar - onEntryUpdated() ", str, "{OngoingActivityController}");
                     Context context2 = ongoingActivityController.mContext;
                     OngoingActivityData ongoingActivityData = new OngoingActivityData(notificationEntry, notificationEntry.mSbn, context2);
@@ -427,31 +429,31 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                     return;
                 }
                 List<Notification.MessagingStyle.Message> messagesFromBundleArray = Notification.MessagingStyle.Message.getMessagesFromBundleArray(parcelableArray);
-                String obj = messagesFromBundleArray.size() > 0 ? ((Notification.MessagingStyle.Message) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, messagesFromBundleArray)).getText().toString() : "";
-                Log.i("{OngoingActivityController}", "triggerTest " + obj);
-                if (!obj.equals("morning")) {
-                    if (obj.equalsIgnoreCase("7")) {
+                String string = messagesFromBundleArray.size() > 0 ? ((Notification.MessagingStyle.Message) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, messagesFromBundleArray)).getText().toString() : "";
+                Log.i("{OngoingActivityController}", "triggerTest " + string);
+                if (!string.equals("morning")) {
+                    if (string.equalsIgnoreCase("7")) {
                         Context context3 = ongoingActivityController.mContext;
                         Intent intent = new Intent("com.google.android.samples.ambient.app.test.SIMULATE_GAMES");
                         intent.setPackage("com.google.android.samples.ambient.app.test");
                         context3.sendBroadcast(intent);
-                    } else if (obj.equalsIgnoreCase("8")) {
+                    } else if (string.equalsIgnoreCase("8")) {
                         Context context4 = ongoingActivityController.mContext;
                         Intent intent2 = new Intent("com.google.android.samples.ambient.app.test.END_WRITE_SESSION");
                         intent2.setPackage("com.google.android.samples.ambient.app.test");
                         context4.sendBroadcast(intent2);
-                    } else if (obj.equalsIgnoreCase("1")) {
+                    } else if (string.equalsIgnoreCase("1")) {
                         Context context5 = ongoingActivityController.mContext;
                         Intent intent3 = new Intent("order.complete.baemin");
                         intent3.setPackage("com.example.sanavditest");
                         context5.sendBroadcast(intent3);
-                    } else if (obj.equalsIgnoreCase("2")) {
+                    } else if (string.equalsIgnoreCase("2")) {
                         Context context6 = ongoingActivityController.mContext;
                         Intent intent4 = new Intent("start.delievery");
                         intent4.setPackage("com.example.sanavditest");
                         context6.sendBroadcast(intent4);
                     } else {
-                        if (!obj.equalsIgnoreCase("3")) {
+                        if (!string.equalsIgnoreCase("3")) {
                             notificationEntry.mBlockVisible = false;
                             return;
                         }
@@ -466,11 +468,11 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         };
         this.statusBarStateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$statusBarStateListener$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
-            public final void onExpandedChanged(boolean z) {
-                RecyclerView.ViewHolder viewHolder;
+            public final void onExpandedChanged(boolean z) throws Exception {
+                RecyclerView.ViewHolder viewHolderFindViewHolderForPosition;
                 View childAt;
                 Log.d("{OngoingActivityController}", "onExpandedChanged : shade is ".concat(z ? ServiceTuple.BASIC_STATUS_OPEN : "close"));
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 if (ongoingActivityController.mIsPanelOpen != z) {
                     ongoingActivityController.mIsPanelOpen = z;
                     if (z) {
@@ -480,11 +482,11 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                             RecyclerView recyclerView = ongoingActivityController.mCapsuleRecyclerView;
                             if (recyclerView != null) {
                                 ongoingActivityController.mOngoingChipAdapter.getClass();
-                                viewHolder = recyclerView.findViewHolderForPosition(r2.getItemCount() - 1, false);
+                                viewHolderFindViewHolderForPosition = recyclerView.findViewHolderForPosition(r2.getItemCount() - 1, false);
                             } else {
-                                viewHolder = null;
+                                viewHolderFindViewHolderForPosition = null;
                             }
-                            OngoingChipAdapter.ChipViewHolder chipViewHolder = viewHolder instanceof OngoingChipAdapter.ChipViewHolder ? (OngoingChipAdapter.ChipViewHolder) viewHolder : null;
+                            OngoingChipAdapter.ChipViewHolder chipViewHolder = viewHolderFindViewHolderForPosition instanceof OngoingChipAdapter.ChipViewHolder ? (OngoingChipAdapter.ChipViewHolder) viewHolderFindViewHolderForPosition : null;
                             if (chipViewHolder != null && (childAt = chipViewHolder.mExpandedInfo.getChildAt(0)) != null) {
                                 childAt.setSelected(false);
                             }
@@ -498,25 +500,30 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             }
 
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
-            public final void onStateChanged(int i) {
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+            public final void onStateChanged(int i) throws Exception {
+                OngoingActivityController ongoingActivityController = this.this$0;
+                Log.i("{OngoingActivityController}", "onStateChanged: status bar state " + ongoingActivityController.mStatusBarState + "-->" + i);
                 Integer num = ongoingActivityController.mStatusBarState;
                 if (num != null && num.intValue() == i) {
                     return;
                 }
                 ongoingActivityController.mStatusBarState = Integer.valueOf(i);
+                OngoingChipAdapter ongoingChipAdapter = ongoingActivityController.mOngoingChipAdapter;
+                if (ongoingChipAdapter != null) {
+                    ongoingChipAdapter.mStatusBarState = Integer.valueOf(i);
+                }
                 if (i != 0) {
                     OngoingCardController ongoingCardController = ongoingActivityController.mOngoingCardController;
                     if (ongoingCardController != null) {
                         ongoingCardController.onDestroy(false);
                     }
                 } else {
-                    OngoingChipAdapter ongoingChipAdapter = ongoingActivityController.mOngoingChipAdapter;
-                    if (ongoingChipAdapter != null) {
-                        ongoingChipAdapter.isKeyguardGoneNow = true;
+                    OngoingChipAdapter ongoingChipAdapter2 = ongoingActivityController.mOngoingChipAdapter;
+                    if (ongoingChipAdapter2 != null) {
+                        ongoingChipAdapter2.isKeyguardGoneNow = true;
                     }
-                    if (ongoingChipAdapter != null) {
-                        ongoingChipAdapter.notifyDataSetChanged();
+                    if (ongoingChipAdapter2 != null) {
+                        ongoingChipAdapter2.notifyDataSetChanged();
                     }
                 }
                 ongoingActivityController.updateParentViewVisibility(false);
@@ -526,24 +533,28 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         this.configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onConfigChanged(Configuration configuration) {
+                OngoingChipAdapter ongoingChipAdapter;
                 Log.i("{OngoingActivityController}", "onConfigChanged()!! - " + configuration);
                 int i = OngoingActivityController.$r8$clinit;
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 ongoingActivityController.updateParentViewVisibility(true);
                 if (configuration != null) {
                     Configuration configuration2 = ongoingActivityController.mConfig;
                     boolean z = configuration2.fontScale == configuration.fontScale;
-                    boolean areEqual = Intrinsics.areEqual(configuration2.getLocales().get(0), configuration.getLocales().get(0));
+                    boolean zAreEqual = Intrinsics.areEqual(configuration2.getLocales().get(0), configuration.getLocales().get(0));
                     Configuration configuration3 = ongoingActivityController.mConfig;
                     boolean z2 = configuration3.densityDpi != configuration.densityDpi;
                     boolean z3 = configuration3.orientation != configuration.orientation;
-                    if (!z || z2 || !areEqual || z3) {
+                    if (!z || z2 || !zAreEqual || z3) {
                         ongoingActivityController.reinflateMediaFrame();
                         OngoingCardController ongoingCardController = ongoingActivityController.mOngoingCardController;
                         if ((ongoingCardController != null ? ongoingCardController.oaCardState : null) == OngoingCardController.OaCardState.DISPLAY) {
                             OngoingActivityDataHelper.INSTANCE.getClass();
                             OngoingActivityDataHelper.updateMediaProgressAndMarqueeStateIfNeeded(null, null);
                         }
+                    }
+                    if (z3 && (ongoingChipAdapter = ongoingActivityController.mOngoingChipAdapter) != null) {
+                        ongoingChipAdapter.needProcessOrientationChanged = true;
                     }
                 }
                 if (MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(ongoingActivityController.mContext) != ongoingActivityController.mLayoutMode) {
@@ -558,13 +569,13 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                     }
                 }
                 configuration.getClass();
-                boolean isNightModeActive = configuration.isNightModeActive();
-                if (ongoingActivityController.isNightMode != isNightModeActive) {
+                boolean zIsNightModeActive = configuration.isNightModeActive();
+                if (ongoingActivityController.isNightMode != zIsNightModeActive) {
                     OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
                     Context context2 = ongoingActivityController.mContext;
                     ongoingActivityDataHelper.getClass();
                     OngoingActivityDataHelper.updateOngoingActivityViews(context2, false, true);
-                    ongoingActivityController.isNightMode = isNightModeActive;
+                    ongoingActivityController.isNightMode = zIsNightModeActive;
                 }
                 ongoingActivityController.mConfig = new Configuration(configuration);
             }
@@ -572,7 +583,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onDensityOrFontScaleChanged() {
                 ViewGroup.LayoutParams layoutParams;
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 float f = ongoingActivityController.indicatorScaleGardener.getLatestScaleModel(ongoingActivityController.mContext).ratio;
                 RecyclerView recyclerView = ongoingActivityController.mCapsuleRecyclerView;
                 if (recyclerView != null && (layoutParams = recyclerView.getLayoutParams()) != null) {
@@ -588,7 +599,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             public final void onDisplayDeviceTypeChanged() {
                 if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
                     onDensityOrFontScaleChanged();
-                    OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                    OngoingActivityController ongoingActivityController = this.this$0;
                     View view = ongoingActivityController.mParentView;
                     if (view == null) {
                         view = null;
@@ -602,19 +613,19 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             @Override // com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener
             public final void onOngoingCallStateChanged() {
                 Log.d("{OngoingActivityController}", "onOngoingCallStateChanged() animate:true");
-                OngoingActivityController.this.update$8();
+                this.this$0.update$1$1();
             }
         };
         this.screenListener = new ScreenStatusProvider.ScreenListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$screenListener$1
             @Override // com.android.systemui.unfold.updates.screen.ScreenStatusProvider.ScreenListener
             public final void onScreenTurnedOn() {
-                OngoingActivityController.this.isScreenTurnedOn = true;
+                this.this$0.isScreenTurnedOn = true;
             }
 
             @Override // com.android.systemui.unfold.updates.screen.ScreenStatusProvider.ScreenListener
             public final void onScreenTurningOff() {
                 Log.d("{OngoingActivityController}", " screen OFF ");
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 ongoingActivityController.isScreenTurnedOn = false;
                 OngoingCardController ongoingCardController = ongoingActivityController.mOngoingCardController;
                 if (ongoingCardController != null) {
@@ -638,7 +649,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         this.mediaPanelVisibilityListener = new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$mediaPanelVisibilityListener$1
             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
             public final void onMediaVisibilityChanged(boolean z) {
-                OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                OngoingActivityController ongoingActivityController = this.this$0;
                 Log.i("MediaOngoingActivity", "onMediaVisibilityChanged. isMediaVisible:" + ongoingActivityController.isMediaVisible + ", visible:" + z);
                 if (ongoingActivityController.isMediaVisible == z) {
                     return;
@@ -663,7 +674,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 Log.i("MediaOngoingActivity", "60sec timer expired. removeAllMediaRunnable run media : " + OngoingActivityDataHelper.getMediaData());
                 if (OngoingActivityDataHelper.getMediaData() != null) {
-                    OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                    OngoingActivityController ongoingActivityController = this.this$0;
                     SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) ongoingActivityController.mediaHost.mMediaPlayerData.get(MediaType.OA);
                     if (secMediaPlayerData != null) {
                         Iterator it = secMediaPlayerData.getMediaData().iterator();
@@ -680,15 +691,16 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 OngoingActivityData mediaData = OngoingActivityDataHelper.getMediaData();
                 if (mediaData != null) {
-                    OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                    OngoingActivityController ongoingActivityController = this.this$0;
                     Log.i("MediaOngoingActivity", " dismissMediaRunnable dismiss!");
+                    mediaData.mDismissRequested = true;
                     ongoingActivityController.notifCollection.dismissOngoingActivityNotification(mediaData.mNotiID);
                 }
             }
         };
     }
 
-    public static final ActivityManager.RunningTaskInfo access$getTaskInfo(OngoingActivityController ongoingActivityController, int i) {
+    public static final ActivityManager.RunningTaskInfo access$getTaskInfo(OngoingActivityController ongoingActivityController, int i) throws SecurityException {
         List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) ongoingActivityController.mContext.getSystemService("activity")).getRunningTasks(3);
         for (ActivityManager.RunningTaskInfo runningTaskInfo : runningTasks) {
             if (runningTaskInfo.taskId == i) {
@@ -699,9 +711,8 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         return null;
     }
 
-    public static final void access$removeOngoingActivityData(NotificationEntry notificationEntry, OngoingActivityController ongoingActivityController) {
+    public static final void access$removeOngoingActivityData(final NotificationEntry notificationEntry, final OngoingActivityController ongoingActivityController) throws Exception {
         boolean z;
-        View view;
         OngoingCardController ongoingCardController = ongoingActivityController.mOngoingCardController;
         if (ongoingCardController == null) {
             OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
@@ -713,6 +724,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         }
         String key = notificationEntry.mSbn.getKey();
         CardStackView cardStackView = ongoingCardController.mCardStackView;
+        int i = 0;
         if (cardStackView.removingSbnId.equals(key)) {
             KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Clear removingSbnId:", key, "{OngoingActivityCardStackView}");
             cardStackView.removingSbnId = "";
@@ -734,7 +746,6 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         String key2 = notificationEntry.mSbn.getKey();
         ongoingActivityDataHelper3.getClass();
         Iterator it = OngoingActivityDataHelper.mOngoingActivityLists.iterator();
-        int i = 0;
         while (true) {
             if (!it.hasNext()) {
                 i = -1;
@@ -756,118 +767,24 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             return;
         }
         Log.i("{OngoingActivityController}", "removeOngoingActivityData. position:" + i + ". Remove TOP card entry");
-        final OngoingCardController ongoingCardController2 = ongoingActivityController.mOngoingCardController;
+        OngoingCardController ongoingCardController2 = ongoingActivityController.mOngoingCardController;
         if (ongoingCardController2 != null) {
-            final OngoingActivityController$$ExternalSyntheticLambda0 ongoingActivityController$$ExternalSyntheticLambda0 = new OngoingActivityController$$ExternalSyntheticLambda0(notificationEntry, ongoingActivityController);
-            ongoingCardController2.onAllowStateChanged(true);
-            final CardStackView cardStackView2 = ongoingCardController2.mCardStackView;
-            Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$$ExternalSyntheticLambda4
+            ongoingCardController2.runCardRemoveAnimation(new Function0() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    OngoingActivityController$$ExternalSyntheticLambda0.this.invoke();
-                    Log.i("{OngoingExpandedPipController}", "runCardRemoveAnimation call onAllowStateChanged(false)");
-                    ongoingCardController2.onAllowStateChanged(false);
+                    int i3 = OngoingActivityController.$r8$clinit;
+                    OngoingActivityDataHelper ongoingActivityDataHelper5 = OngoingActivityDataHelper.INSTANCE;
+                    StatusBarNotification statusBarNotification4 = notificationEntry.mSbn;
+                    ongoingActivityDataHelper5.getClass();
+                    OngoingActivityDataHelper.removeOngoingActivityByKey(statusBarNotification4.getKey());
+                    ongoingActivityController.updateParentViewVisibility(true);
                     return Unit.INSTANCE;
                 }
-            };
-            cardStackView2.getClass();
-            Log.i("{OngoingActivityCardStackView}", "removeTopCardAnimation()");
-            OngoingActivityDataHelper.INSTANCE.getClass();
-            if (OngoingActivityDataHelper.mOngoingActivityLists.size() != 0) {
-                NotificationSAUtil.sendOALog(SystemUIAnalytics.OAID_ONGOING_SWIPE_TO_SEE_OTHER_ACTIVITY, OngoingActivityDataHelper.getDataByIndex(0).mNotificationEntry);
-            }
-            if (cardStackView2.gutsDisplay) {
-                cardStackView2.disableTopCardGuts(true);
-            }
-            cardStackView2.isAnimating = true;
-            CustomAnimationSet customAnimationSet = new CustomAnimationSet(new CardStackView$$ExternalSyntheticLambda0(cardStackView2, 3));
-            customAnimationSet.additionalEndListener = function0;
-            final View childAt = cardStackView2.getChildAt(cardStackView2.getTopViewIndex());
-            if (childAt == null) {
-                Log.e("{OngoingActivityCardStackView}", "removeAnimationSet get topView fail");
-                function0.invoke();
-                return;
-            }
-            Log.i("{OngoingActivityCardStackView}", "removeAnimationSet run()");
-            OngoingCardAdapter ongoingCardAdapter = cardStackView2.adapter;
-            ongoingCardAdapter.getClass();
-            OngoingCardController$$ExternalSyntheticLambda0 ongoingCardController$$ExternalSyntheticLambda0 = ongoingCardAdapter.getMediaCardView;
-            if (ongoingCardController$$ExternalSyntheticLambda0 == null) {
-                Log.e("MediaOngoingActivity", "getMediaCard. lambda is not initialized");
-                view = null;
-            } else {
-                view = (View) ongoingCardController$$ExternalSyntheticLambda0.mo779invoke(Unit.INSTANCE);
-            }
-            if (Intrinsics.areEqual(view, childAt)) {
-                CardStackView.getBaseColorView(childAt).setBackground(cardStackView2.getContext().getResources().getDrawable(R.drawable.sec_ongoing_card_bg));
-            }
-            DynamicAnimation.AnonymousClass4 anonymousClass4 = DynamicAnimation.SCALE_X;
-            customAnimationSet.add(childAt, anonymousClass4, 0.7f, 0.875f, 400.0f, 0L);
-            DynamicAnimation.AnonymousClass5 anonymousClass5 = DynamicAnimation.SCALE_Y;
-            customAnimationSet.add(childAt, anonymousClass5, 0.7f, 0.875f, 400.0f, 0L);
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat.setDuration(250L);
-            PathInterpolator pathInterpolator = CardStackView.cardRemoveAlphaInterpolator;
-            ofFloat.setInterpolator(pathInterpolator);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeTopCardAnimation$2$1$1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float floatValue = ((Float) ofFloat.getAnimatedValue()).floatValue();
-                    CardStackView cardStackView3 = cardStackView2;
-                    View view2 = childAt;
-                    CardStackView.Companion companion = CardStackView.Companion;
-                    cardStackView3.getClass();
-                    CardStackView.getBaseColorView(view2).setAlpha(floatValue);
-                }
             });
-            customAnimationSet.add(50L, ofFloat);
-            View childAt2 = cardStackView2.getChildAt(cardStackView2.getTopViewIndex());
-            final ViewGroup viewGroup = childAt2 != null ? (ViewGroup) childAt2.findViewWithTag("BottomCardShadowView") : null;
-            final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat2.setDuration(100L);
-            ofFloat2.setInterpolator(pathInterpolator);
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeTopCardAnimation$2$2$1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float floatValue = ((Float) ofFloat2.getAnimatedValue()).floatValue();
-                    ViewGroup viewGroup2 = viewGroup;
-                    if (viewGroup2 != null) {
-                        viewGroup2.setAlpha(floatValue);
-                    }
-                }
-            });
-            customAnimationSet.add(0L, ofFloat2);
-            if (cardStackView2.getTopViewIndex() > 0) {
-                final View childAt3 = cardStackView2.getChildAt(cardStackView2.getTopViewIndex() - 1);
-                CardStackView.ViewStatus viewStatus = (CardStackView.ViewStatus) cardStackView2.startViewStatusList.get(cardStackView2.getTopViewIndex());
-                childAt3.setScaleX(0.92f);
-                childAt3.setScaleY(0.92f);
-                customAnimationSet.add(childAt3, DynamicAnimation.X, viewStatus.point.x, 0.8131728f, 200.0f, 250L);
-                customAnimationSet.add(childAt3, DynamicAnimation.Y, viewStatus.point.y, 0.8131728f, 200.0f, 250L);
-                customAnimationSet.add(childAt3, anonymousClass4, viewStatus.scaleX, 0.8131728f, 200.0f, 250L);
-                customAnimationSet.add(childAt3, anonymousClass5, viewStatus.scaleY, 0.8131728f, 200.0f, 250L);
-                final ValueAnimator ofFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
-                ofFloat3.setDuration(300L);
-                ofFloat3.setInterpolator(pathInterpolator);
-                ofFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeTopCardAnimation$2$3$1
-                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        float floatValue = ((Float) ofFloat3.getAnimatedValue()).floatValue();
-                        CardStackView cardStackView3 = cardStackView2;
-                        View view2 = childAt3;
-                        view2.getClass();
-                        CardStackView.Companion companion = CardStackView.Companion;
-                        cardStackView3.getClass();
-                        CardStackView.getBaseColorView(view2).setAlpha(floatValue);
-                    }
-                });
-                customAnimationSet.add(0L, ofFloat3);
-            }
-            customAnimationSet.start();
         }
     }
 
-    public static final void access$updateOngoingActivityData(NotificationEntry notificationEntry, OngoingActivityController ongoingActivityController) {
+    public static final void access$updateOngoingActivityData(NotificationEntry notificationEntry, OngoingActivityController ongoingActivityController) throws Throwable {
         OngoingActivityData ongoingActivityData;
         Throwable th;
         int i;
@@ -923,17 +840,17 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                             CollectionsKt__CollectionsKt.throwIndexOverflow();
                             throw th3;
                         }
-                        Notification.Action action = (Notification.Action) obj;
+                        Notification.Action actionBuild = (Notification.Action) obj;
                         if (i2 == 0) {
                             th = th2;
-                            action = new Notification.Action.Builder(Icon.createWithResource(context, R.drawable.ongoing_btn_cancel), action.title, action.actionIntent).build();
+                            actionBuild = new Notification.Action.Builder(Icon.createWithResource(context, R.drawable.ongoing_btn_cancel), actionBuild.title, actionBuild.actionIntent).build();
                         } else if (i2 != 1) {
                             th = th2;
                         } else {
-                            Bundle extras = action.getExtras();
-                            boolean areEqual = Intrinsics.areEqual(extras != null ? extras.getString("LIVE_NOTIFICATION_ACTION_KEY") : th2, "ACTION_CONVERSATION_HOLD");
+                            Bundle extras = actionBuild.getExtras();
+                            boolean zAreEqual = Intrinsics.areEqual(extras != null ? extras.getString("LIVE_NOTIFICATION_ACTION_KEY") : th2, "ACTION_CONVERSATION_HOLD");
                             OngoingActivityDataHelper ongoingActivityDataHelper3 = OngoingActivityDataHelper.INSTANCE;
-                            if (areEqual) {
+                            if (zAreEqual) {
                                 ongoingActivityDataHelper3.getClass();
                                 OngoingActivityDataHelper.geminiPlayStateChanged(true);
                                 i = R.drawable.ic_ongoing_pause;
@@ -943,10 +860,10 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                                 i = R.drawable.ic_gemini_live;
                             }
                             th = th2;
-                            action = new Notification.Action.Builder(Icon.createWithResource(context, i), action.title, action.actionIntent).build();
+                            actionBuild = new Notification.Action.Builder(Icon.createWithResource(context, i), actionBuild.title, actionBuild.actionIntent).build();
                         }
-                        action.getClass();
-                        arrayList.set(i2, action);
+                        actionBuild.getClass();
+                        arrayList.set(i2, actionBuild);
                         i2 = i4;
                         th2 = th;
                     }
@@ -967,11 +884,11 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 ongoingActivityData.mExpandedChipText = notification2.getShortCriticalText();
                 ongoingActivityData.mNowbarPrimaryInfo = ongoingActivityData.mPrimaryInfo;
                 ongoingActivityData.mNowbarSecondaryInfo = notification2.getShortCriticalText();
-                Icon icon = (Icon) notification2.extras.getParcelable("android.largeIcon", Icon.class);
-                if (icon == null) {
-                    icon = notification2.getSmallIcon();
+                Icon smallIcon = (Icon) notification2.extras.getParcelable("android.largeIcon", Icon.class);
+                if (smallIcon == null) {
+                    smallIcon = notification2.getSmallIcon();
                 }
-                ongoingActivityData.mNowbarIcon = icon;
+                ongoingActivityData.mNowbarIcon = smallIcon;
             }
             Log.i(OngoingActivityDataHelper.TAG, "updateOngoingActivity data: " + ongoingActivityData);
             OngoingActivityDataHelper.pendingOngoingActivityDataList.put(ongoingActivityData.mNotiID, ongoingActivityData);
@@ -1026,9 +943,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         printWriter.println("   Showing list");
         Iterator it2 = OngoingActivityDataHelper.mOngoingActivityLists.iterator();
         while (true) {
-            boolean hasNext = it2.hasNext();
+            boolean zHasNext = it2.hasNext();
             ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             OngoingActivityData ongoingActivityData = (OngoingActivityData) it2.next();
@@ -1074,26 +991,256 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         return new Notification.Builder(this.mContext, notificationChannel.getId()).setSmallIcon(17304559).setContentTitle("MediaOngoingActivity").setChannelId(notificationChannel.getId()).setColor(16777215).addExtras(bundle).setVisibility(1).build();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00d2  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x00c0  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x00c0  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x00c4  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x00c7  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x00d2  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x00f4  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00fb  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0105  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x0123  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x012c  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x0135  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initCapsuleLayout(android.view.View r22, android.view.View r23) {
-        /*
-            Method dump skipped, instructions count: 387
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController.initCapsuleLayout(android.view.View, android.view.View):void");
+    public final void initCapsuleLayout(View view, View view2) {
+        ConfigurationController configurationController;
+        OngoingActivityController$configurationListener$1 ongoingActivityController$configurationListener$1;
+        ViewGroup viewGroup;
+        TouchInterceptFrameLayout touchInterceptFrameLayout;
+        RecyclerView recyclerView;
+        RecyclerView recyclerView2;
+        RecyclerView recyclerView3;
+        LinearLayoutManager linearLayoutManager;
+        RecyclerView recyclerView4;
+        RecyclerView recyclerView5;
+        View view3;
+        ViewGroup viewGroup2;
+        Log.i("{OngoingActivityController}", "initCapsuleLayout() " + this.mOngoingChipAdapter + " : " + this.mCapsuleRecyclerView);
+        View view4 = this.mParentView;
+        OngoingActivityController$ongoingChipItemDecoration$1 ongoingActivityController$ongoingChipItemDecoration$1 = this.ongoingChipItemDecoration;
+        ScreenStatusProvider screenStatusProvider = this.screenStatusProvider;
+        OngoingActivityController$screenListener$1 ongoingActivityController$screenListener$1 = this.screenListener;
+        OngoingActivityController$mediaPanelVisibilityListener$1 ongoingActivityController$mediaPanelVisibilityListener$1 = this.mediaPanelVisibilityListener;
+        SecMediaHost secMediaHost = this.mediaHost;
+        OngoingActivityController$userChangedListener$1 ongoingActivityController$userChangedListener$1 = this.userChangedListener;
+        NotificationLockscreenUserManager notificationLockscreenUserManager = this.userManager;
+        OngoingActivityController$containerOnLayoutChangeListener$1 ongoingActivityController$containerOnLayoutChangeListener$1 = this.containerOnLayoutChangeListener;
+        ConfigurationController configurationController2 = this.configurationController;
+        OngoingActivityController$configurationListener$1 ongoingActivityController$configurationListener$12 = this.configurationListener;
+        OngoingActivityController$ongoingCallListener$1 ongoingActivityController$ongoingCallListener$1 = this.ongoingCallListener;
+        OngoingCallController ongoingCallController = this.ongoingCallController;
+        OngoingActivityController$statusBarStateListener$1 ongoingActivityController$statusBarStateListener$1 = this.statusBarStateListener;
+        StatusBarStateController statusBarStateController = this.statusBarStateController;
+        CommonNotifCollection commonNotifCollection = this.commonNotifCollection;
+        OngoingActivityController$notifListener$1 ongoingActivityController$notifListener$1 = this.notifListener;
+        if (view4 == null) {
+            configurationController = configurationController2;
+            if (this.mStatusBar == null) {
+                ongoingActivityController$configurationListener$1 = ongoingActivityController$configurationListener$12;
+            }
+            this.mParentView = view;
+            touchInterceptFrameLayout = !(view instanceof TouchInterceptFrameLayout) ? (TouchInterceptFrameLayout) view : null;
+            if (touchInterceptFrameLayout != null) {
+                touchInterceptFrameLayout.customClickListener = new View.OnClickListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController.initCapsuleLayout.1
+                    @Override // android.view.View.OnClickListener
+                    public final void onClick(View view5) {
+                        if (OngoingActivityController.this.blockClickListener) {
+                            Log.d("{OngoingActivityController}", "OnClick Ongoing Chip! - Avoid as blockClickListener -> true");
+                            return;
+                        }
+                        OngoingActivityDataHelper.INSTANCE.getClass();
+                        CopyOnWriteArrayList copyOnWriteArrayList = OngoingActivityDataHelper.mOngoingActivityLists;
+                        Log.d("{OngoingActivityController}", "OnClick Ongoing Chip! dataSize : " + copyOnWriteArrayList.size());
+                        if (copyOnWriteArrayList.size() != 0) {
+                            NotificationSAUtil.sendOALog(SystemUIAnalytics.OAID_ONGOING_SHOW_EXPAND_VIEW, OngoingActivityDataHelper.getDataByIndex(0).mNotificationEntry);
+                        }
+                        if (copyOnWriteArrayList.size() > 0) {
+                            Log.d("{OngoingActivityController}", " top Data is " + OngoingActivityDataHelper.getDataByIndex(0));
+                        }
+                        OngoingActivityController ongoingActivityController = OngoingActivityController.this;
+                        if (ongoingActivityController.mOngoingCardController != null) {
+                            Log.i("{OngoingActivityController}", "createCardController mOngoingCardController != null. return");
+                        } else {
+                            Context context = ongoingActivityController.mContext;
+                            RecyclerView recyclerView6 = ongoingActivityController.mCapsuleRecyclerView;
+                            recyclerView6.getClass();
+                            OngoingCardController ongoingCardController = new OngoingCardController(context, ongoingActivityController.activityStarter, recyclerView6, ongoingActivityController.mIndicatorGardenPresenter, ongoingActivityController.indicatorScaleGardener, ongoingActivityController.configurationController, ongoingActivityController.broadcastDispatcher, ongoingActivityController.notifCollection, ongoingActivityController.remoteInputManager, ongoingActivityController.statusBarWindowStateController, new OngoingActivityController$$ExternalSyntheticLambda2(ongoingActivityController, 0), ongoingActivityController.mediaHost, ongoingActivityController.mediaDataManager, ongoingActivityController.faceWidgetNotificationControllerWrapper);
+                            ongoingActivityController.mOngoingCardController = ongoingCardController;
+                            ongoingCardController.onStateEventListeners.add(new OngoingActivityController$createCardController$2(ongoingActivityController));
+                            OngoingCardController ongoingCardController2 = ongoingActivityController.mOngoingCardController;
+                            if (ongoingCardController2 != null) {
+                                ongoingCardController2.setMediaCardView = new OngoingActivityController$$ExternalSyntheticLambda2(ongoingActivityController, 1);
+                                ongoingCardController2.getMediaCardView = new OngoingActivityController$$ExternalSyntheticLambda2(ongoingActivityController, 2);
+                                ongoingCardController2.isMediaPlaying = new OngoingActivityController$$ExternalSyntheticLambda2(ongoingActivityController, 3);
+                            }
+                            OngoingChipAdapter ongoingChipAdapter = ongoingActivityController.mOngoingChipAdapter;
+                            if (ongoingChipAdapter != null) {
+                                ongoingChipAdapter.notifyDataSetChanged();
+                            }
+                            OngoingChipAdapter ongoingChipAdapter2 = ongoingActivityController.mOngoingChipAdapter;
+                            if (ongoingChipAdapter2 != null) {
+                                ongoingChipAdapter2.marqueePair = null;
+                            }
+                            OngoingCardController ongoingCardController3 = ongoingActivityController.mOngoingCardController;
+                            if (ongoingCardController3 != null) {
+                                Log.d("{OngoingExpandedPipController}", "expandAnimation oaCardState:" + ongoingCardController3.oaCardState);
+                                ongoingCardController3.setCardState(OngoingCardController.OaCardState.EXPAND);
+                                Log.d("{OngoingExpandedPipController}", "watchSelfValidation start");
+                                ongoingCardController3.isWatchSelfValidationProc = true;
+                                ongoingCardController3.selfValidationHandler.removeCallbacks(ongoingCardController3.selfDestroyRunnable);
+                                ongoingCardController3.selfValidationHandler.postDelayed(ongoingCardController3.selfDestroyRunnable, 4000L);
+                                ongoingCardController3.mCardStackView.setVisibility(4);
+                                CardStackView cardStackView = ongoingCardController3.mCardStackView;
+                                ViewGroup viewGroup3 = ongoingCardController3.mExpandedView;
+                                int width = ongoingCardController3.mCapsule.getWidth();
+                                int height = ongoingCardController3.mCapsule.getHeight();
+                                OngoingCardController$expandAnimation$1$1 ongoingCardController$expandAnimation$1$1 = new OngoingCardController$expandAnimation$1$1(ongoingCardController3);
+                                if (cardStackView.getChildCount() == 0) {
+                                    Log.d("{OngoingActivityCardStackView}", "expandAnimation add expand info");
+                                    cardStackView.decorView = viewGroup3;
+                                    cardStackView.pendingWidth = width;
+                                    cardStackView.pendingHeight = height;
+                                    cardStackView.pendingOnStartListener = ongoingCardController$expandAnimation$1$1;
+                                    cardStackView.pendingAnimation = true;
+                                }
+                            } else {
+                                Log.i("{OngoingActivityController}", "OngoingCardController create fail");
+                            }
+                        }
+                        if (view5 != null) {
+                            view5.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(80));
+                        }
+                        OngoingChipAdapter ongoingChipAdapter3 = OngoingActivityController.this.mOngoingChipAdapter;
+                        if (ongoingChipAdapter3 != null) {
+                            ongoingChipAdapter3.marqueePair = null;
+                        }
+                    }
+                };
+            }
+            this.mStatusBar = view2;
+            if (touchInterceptFrameLayout != null) {
+                touchInterceptFrameLayout.touchForwardView = view2;
+            }
+            view.getClass();
+            this.mCapsuleRecyclerView = (RecyclerView) view.findViewById(R.id.capsule_recyclerview);
+            this.mOngoingChipAdapter = new OngoingChipAdapter(this.mContext, this.indicatorScaleGardener, this.notificationIconAreaController);
+            recyclerView = this.mCapsuleRecyclerView;
+            if (recyclerView != null) {
+                recyclerView.setFocusable(false);
+            }
+            recyclerView2 = this.mCapsuleRecyclerView;
+            if (recyclerView2 != null) {
+                recyclerView2.setAdapter(this.mOngoingChipAdapter);
+            }
+            recyclerView3 = this.mCapsuleRecyclerView;
+            if (recyclerView3 != null) {
+                recyclerView3.mHasFixedSize = true;
+            }
+            LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this.mContext);
+            this.mLinearLayoutManager = linearLayoutManager2;
+            linearLayoutManager2.setOrientation(0);
+            this.mLinearLayoutManager.setStackFromEnd(true);
+            linearLayoutManager = this.mLinearLayoutManager;
+            linearLayoutManager.assertNotInLayoutOrScroll(null);
+            if (true != linearLayoutManager.mReverseLayout) {
+                linearLayoutManager.mReverseLayout = true;
+                linearLayoutManager.requestLayout();
+            }
+            recyclerView4 = this.mCapsuleRecyclerView;
+            if (recyclerView4 != null) {
+                recyclerView4.setLayoutManager(this.mLinearLayoutManager);
+            }
+            recyclerView5 = this.mCapsuleRecyclerView;
+            if (recyclerView5 != null) {
+                recyclerView5.addItemDecoration(ongoingActivityController$ongoingChipItemDecoration$1);
+            }
+            ((NotifPipeline) commonNotifCollection).addCollectionListener(ongoingActivityController$notifListener$1);
+            OngoingActivityDataHelper.INSTANCE.getClass();
+            ((ArrayList) OngoingActivityDataHelper.observers).add(this);
+            statusBarStateController.addCallback(ongoingActivityController$statusBarStateListener$1);
+            ongoingCallController.addCallback((OngoingCallListener) ongoingActivityController$ongoingCallListener$1);
+            ((ConfigurationControllerImpl) configurationController).addCallback(ongoingActivityController$configurationListener$1);
+            view3 = this.mStatusBar;
+            if (view3 != null && (viewGroup2 = (ViewGroup) view3.findViewById(R.id.samsung_notification_indicator_container)) != null) {
+                viewGroup2.addOnLayoutChangeListener(ongoingActivityController$containerOnLayoutChangeListener$1);
+            }
+            ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).addUserChangedListener(ongoingActivityController$userChangedListener$1);
+            OngoingActivityDataHelper.updateOngoingList(notificationLockscreenUserManager);
+            secMediaHost.mVisibilityListeners.add(ongoingActivityController$mediaPanelVisibilityListener$1);
+            ((LifecycleScreenStatusProvider) screenStatusProvider).addCallback(ongoingActivityController$screenListener$1);
+        }
+        configurationController = configurationController2;
+        RecyclerView recyclerView6 = this.mCapsuleRecyclerView;
+        if (recyclerView6 != null) {
+            recyclerView6.removeItemDecoration(ongoingActivityController$ongoingChipItemDecoration$1);
+        }
+        NotifCollection notifCollection = ((NotifPipeline) commonNotifCollection).mNotifCollection;
+        notifCollection.getClass();
+        Assert.isMainThread();
+        notifCollection.mNotifCollectionListeners.remove(ongoingActivityController$notifListener$1);
+        OngoingActivityDataHelper.INSTANCE.getClass();
+        ((ArrayList) OngoingActivityDataHelper.observers).remove(this);
+        statusBarStateController.removeCallback(ongoingActivityController$statusBarStateListener$1);
+        ongoingCallController.removeCallback((OngoingCallListener) ongoingActivityController$ongoingCallListener$1);
+        ((ConfigurationControllerImpl) configurationController).removeCallback(ongoingActivityController$configurationListener$12);
+        View view5 = this.mStatusBar;
+        ongoingActivityController$configurationListener$1 = ongoingActivityController$configurationListener$12;
+        if (view5 != null && (viewGroup = (ViewGroup) view5.findViewById(R.id.samsung_notification_indicator_container)) != null) {
+            viewGroup.removeOnLayoutChangeListener(ongoingActivityController$containerOnLayoutChangeListener$1);
+        }
+        ((ArrayList) ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mListeners).remove(ongoingActivityController$userChangedListener$1);
+        secMediaHost.mVisibilityListeners.remove(ongoingActivityController$mediaPanelVisibilityListener$1);
+        ((LifecycleScreenStatusProvider) screenStatusProvider).removeCallback(ongoingActivityController$screenListener$1);
+        this.mParentView = view;
+        if (!(view instanceof TouchInterceptFrameLayout)) {
+        }
+        if (touchInterceptFrameLayout != null) {
+        }
+        this.mStatusBar = view2;
+        if (touchInterceptFrameLayout != null) {
+        }
+        view.getClass();
+        this.mCapsuleRecyclerView = (RecyclerView) view.findViewById(R.id.capsule_recyclerview);
+        this.mOngoingChipAdapter = new OngoingChipAdapter(this.mContext, this.indicatorScaleGardener, this.notificationIconAreaController);
+        recyclerView = this.mCapsuleRecyclerView;
+        if (recyclerView != null) {
+        }
+        recyclerView2 = this.mCapsuleRecyclerView;
+        if (recyclerView2 != null) {
+        }
+        recyclerView3 = this.mCapsuleRecyclerView;
+        if (recyclerView3 != null) {
+        }
+        LinearLayoutManager linearLayoutManager22 = new LinearLayoutManager(this.mContext);
+        this.mLinearLayoutManager = linearLayoutManager22;
+        linearLayoutManager22.setOrientation(0);
+        this.mLinearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager = this.mLinearLayoutManager;
+        linearLayoutManager.assertNotInLayoutOrScroll(null);
+        if (true != linearLayoutManager.mReverseLayout) {
+        }
+        recyclerView4 = this.mCapsuleRecyclerView;
+        if (recyclerView4 != null) {
+        }
+        recyclerView5 = this.mCapsuleRecyclerView;
+        if (recyclerView5 != null) {
+        }
+        ((NotifPipeline) commonNotifCollection).addCollectionListener(ongoingActivityController$notifListener$1);
+        OngoingActivityDataHelper.INSTANCE.getClass();
+        ((ArrayList) OngoingActivityDataHelper.observers).add(this);
+        statusBarStateController.addCallback(ongoingActivityController$statusBarStateListener$1);
+        ongoingCallController.addCallback((OngoingCallListener) ongoingActivityController$ongoingCallListener$1);
+        ((ConfigurationControllerImpl) configurationController).addCallback(ongoingActivityController$configurationListener$1);
+        view3 = this.mStatusBar;
+        if (view3 != null) {
+            viewGroup2.addOnLayoutChangeListener(ongoingActivityController$containerOnLayoutChangeListener$1);
+        }
+        ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).addUserChangedListener(ongoingActivityController$userChangedListener$1);
+        OngoingActivityDataHelper.updateOngoingList(notificationLockscreenUserManager);
+        secMediaHost.mVisibilityListeners.add(ongoingActivityController$mediaPanelVisibilityListener$1);
+        ((LifecycleScreenStatusProvider) screenStatusProvider).addCallback(ongoingActivityController$screenListener$1);
     }
 
     public final void killGhost() {
@@ -1104,10 +1251,10 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
         ongoingActivityDataHelper2.getClass();
         Iterator it = OngoingActivityDataHelper.mOngoingActivityLists.iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
             str = OngoingActivityDataHelper.TAG;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             OngoingActivityData ongoingActivityData = (OngoingActivityData) it.next();
@@ -1188,12 +1335,12 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
     }
 
     @Override // com.android.systemui.CoreStartable
-    public final void start() {
+    public final void start() throws SecurityException {
         ActivityManager.RunningTaskInfo runningTaskInfo;
         ComponentName componentName;
-        ((HeadsUpManagerImpl) this.headsUpManager).addListener(new OnHeadsUpChangedListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$start$1
+        ((HeadsUpManagerImpl) this.headsUpManager).addListener(new OnHeadsUpChangedListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController.start.1
             @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
-            public final void onHeadsUpPinnedModeChanged(boolean z) {
+            public final void onHeadsUpPinnedModeChanged(boolean z) throws Exception {
                 OngoingCardController ongoingCardController;
                 OngoingActivityController ongoingActivityController = OngoingActivityController.this;
                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m(" onHeadsUpPinnedModeChanged - ", " : ", "{OngoingActivityController}", ongoingActivityController.mIsHeadsUpPinned, z);
@@ -1206,9 +1353,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                 }
             }
         });
-        this.taskStackChangeListeners.registerTaskStackListener(new TaskStackChangeListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$start$2
+        this.taskStackChangeListeners.registerTaskStackListener(new TaskStackChangeListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController.start.2
             @Override // com.android.systemui.shared.system.TaskStackChangeListener
-            public final void onActivityPinned(int i, String str) {
+            public final void onActivityPinned(int i, String str) throws SecurityException {
                 ComponentName componentName2;
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 if (OngoingActivityDataHelper.hiddenOngoingActivityDataList.size() + OngoingActivityDataHelper.mOngoingActivityLists.size() == 0) {
@@ -1216,9 +1363,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                     return;
                 }
                 OngoingActivityController ongoingActivityController = OngoingActivityController.this;
-                ActivityManager.RunningTaskInfo access$getTaskInfo = OngoingActivityController.access$getTaskInfo(ongoingActivityController, i);
-                Log.i("{OngoingActivityController}", "onActivityPinned packageName:" + str + ", baseActivity:" + (access$getTaskInfo != null ? access$getTaskInfo.baseActivity : null));
-                if (access$getTaskInfo == null || (componentName2 = access$getTaskInfo.baseActivity) == null) {
+                ActivityManager.RunningTaskInfo runningTaskInfoAccess$getTaskInfo = OngoingActivityController.access$getTaskInfo(ongoingActivityController, i);
+                Log.i("{OngoingActivityController}", "onActivityPinned packageName:" + str + ", baseActivity:" + (runningTaskInfoAccess$getTaskInfo != null ? runningTaskInfoAccess$getTaskInfo.baseActivity : null));
+                if (runningTaskInfoAccess$getTaskInfo == null || (componentName2 = runningTaskInfoAccess$getTaskInfo.baseActivity) == null) {
                     return;
                 }
                 ongoingActivityController.mHandler.removeCallbacks(ongoingActivityController.clearPipRunnable);
@@ -1240,7 +1387,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             }
 
             @Override // com.android.systemui.shared.system.TaskStackChangeListener
-            public final void onTaskFocusChanged(int i, boolean z) {
+            public final void onTaskFocusChanged(int i, boolean z) throws Exception {
                 ComponentName componentName2;
                 if (z) {
                     OngoingActivityDataHelper.INSTANCE.getClass();
@@ -1249,9 +1396,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                         return;
                     }
                     OngoingActivityController ongoingActivityController = OngoingActivityController.this;
-                    ActivityManager.RunningTaskInfo access$getTaskInfo = OngoingActivityController.access$getTaskInfo(ongoingActivityController, i);
-                    Log.i("{OngoingActivityController}", "onTaskFocusChanged focused:" + z + ", baseActivity:" + (access$getTaskInfo != null ? access$getTaskInfo.baseActivity : null));
-                    if (access$getTaskInfo != null && (componentName2 = access$getTaskInfo.baseActivity) != null) {
+                    ActivityManager.RunningTaskInfo runningTaskInfoAccess$getTaskInfo = OngoingActivityController.access$getTaskInfo(ongoingActivityController, i);
+                    Log.i("{OngoingActivityController}", "onTaskFocusChanged focused:" + z + ", baseActivity:" + (runningTaskInfoAccess$getTaskInfo != null ? runningTaskInfoAccess$getTaskInfo.baseActivity : null));
+                    if (runningTaskInfoAccess$getTaskInfo != null && (componentName2 = runningTaskInfoAccess$getTaskInfo.baseActivity) != null) {
                         OngoingActivityDataHelper.setBaseActivityComponentName(componentName2, ongoingActivityController.userManager);
                         OngoingCardController ongoingCardController = ongoingActivityController.mOngoingCardController;
                         if (ongoingCardController != null) {
@@ -1272,7 +1419,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
     }
 
     public final void startMarqueeAnimation() {
-        this.mediaPauseTimerHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$startMarqueeAnimation$1
+        this.mediaPauseTimerHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController.startMarqueeAnimation.1
             @Override // java.lang.Runnable
             public final void run() {
                 OngoingChipAdapter ongoingChipAdapter = OngoingActivityController.this.mOngoingChipAdapter;
@@ -1298,7 +1445,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
     }
 
     @Override // com.android.systemui.statusbar.phone.ongoingactivity.IOngoingObserver
-    public final void update$8() {
+    public final void update$1$1() {
         Log.d("{OngoingActivityController}", "update()");
         updateParentViewVisibility(true);
         updateAdapter();
@@ -1339,7 +1486,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                     ?? r2 = (String) obj;
                     int i3 = OngoingActivityController.$r8$clinit;
                     if (((OngoingActivityData) obj2).mIsMediaOngoingData) {
-                        Ref$ObjectRef.this.element = r2;
+                        ref$ObjectRef.element = r2;
                     }
                     return Unit.INSTANCE;
                 }
@@ -1347,7 +1494,7 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             concurrentHashMap.forEach(new BiConsumer() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController$sam$java_util_function_BiConsumer$0
                 @Override // java.util.function.BiConsumer
                 public final /* synthetic */ void accept(Object obj, Object obj2) {
-                    Function2.this.invoke(obj, obj2);
+                    function2.invoke(obj, obj2);
                 }
             });
             Log.d("MediaOngoingActivity", "mediadata is not added yet. so we try to find it from pending list. and it is " + ref$ObjectRef.element);
@@ -1355,9 +1502,9 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
             if (charSequence == null || charSequence.length() == 0) {
                 return;
             }
-            Object remove = concurrentHashMap.remove(ref$ObjectRef.element);
-            remove.getClass();
-            NotificationEntry notificationEntry = ((OngoingActivityData) remove).mNotificationEntry;
+            Object objRemove = concurrentHashMap.remove(ref$ObjectRef.element);
+            objRemove.getClass();
+            NotificationEntry notificationEntry = ((OngoingActivityData) objRemove).mNotificationEntry;
             if (notificationEntry != null && notificationEntry.mIsPlayingMediaOngoingActivity.booleanValue() != (z2 = this.isMediaPlaying)) {
                 notificationEntry.mIsPlayingMediaOngoingActivity = Boolean.valueOf(z2);
             }

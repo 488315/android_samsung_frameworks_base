@@ -46,9 +46,9 @@ public interface ISelectionsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISelectionsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISelectionsCallback)) {
-                return (ISelectionsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISelectionsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISelectionsCallback)) {
+                return (ISelectionsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface ISelectionsCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ContentSelection.CREATOR);
+                int i3 = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ContentSelection.CREATOR);
                 parcel.enforceNoDataAvail();
-                onContentSelectionsAvailable(readInt, createTypedArrayList);
+                onContentSelectionsAvailable(i3, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface ISelectionsCallback extends IInterface {
 
             @Override // android.app.contentsuggestions.ISelectionsCallback
             public void onContentSelectionsAvailable(int i, List<ContentSelection> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISelectionsCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISelectionsCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

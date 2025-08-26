@@ -21,70 +21,48 @@ public class PEMUtil {
         this._footer2 = "-----END X509 " + str + "-----";
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0021, code lost:
-    
-        if (r3.length() == 0) goto L27;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private java.lang.String readLine(java.io.InputStream r4) throws java.io.IOException {
-        /*
-            r3 = this;
-            java.lang.StringBuffer r3 = new java.lang.StringBuffer
-            r3.<init>()
-        L5:
-            int r0 = r4.read()
-            r1 = 13
-            if (r0 == r1) goto L1b
-            r2 = 10
-            if (r0 == r2) goto L1b
-            if (r0 < 0) goto L1b
-            if (r0 != r1) goto L16
-            goto L5
-        L16:
-            char r0 = (char) r0
-            r3.append(r0)
-            goto L5
-        L1b:
-            if (r0 < 0) goto L23
-            int r1 = r3.length()
-            if (r1 == 0) goto L5
-        L23:
-            if (r0 >= 0) goto L27
-            r3 = 0
-            return r3
-        L27:
-            java.lang.String r3 = r3.toString()
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.PEMUtil.readLine(java.io.InputStream):java.lang.String");
+    private String readLine(InputStream inputStream) throws IOException {
+        int i;
+        StringBuffer stringBuffer = new StringBuffer();
+        while (true) {
+            i = inputStream.read();
+            if (i == 13 || i == 10 || i < 0) {
+                if (i < 0 || stringBuffer.length() != 0) {
+                    break;
+                }
+            } else if (i != 13) {
+                stringBuffer.append((char) i);
+            }
+        }
+        if (i < 0) {
+            return null;
+        }
+        return stringBuffer.toString();
     }
 
     ASN1Sequence readPEMObject(InputStream inputStream) throws IOException {
-        String readLine;
+        String line;
         StringBuffer stringBuffer = new StringBuffer();
         do {
-            readLine = readLine(inputStream);
-            if (readLine == null || readLine.startsWith(this._header1)) {
+            line = readLine(inputStream);
+            if (line == null || line.startsWith(this._header1)) {
                 break;
             }
-        } while (!readLine.startsWith(this._header2));
+        } while (!line.startsWith(this._header2));
         while (true) {
-            String readLine2 = readLine(inputStream);
-            if (readLine2 == null || readLine2.startsWith(this._footer1) || readLine2.startsWith(this._footer2)) {
+            String line2 = readLine(inputStream);
+            if (line2 == null || line2.startsWith(this._footer1) || line2.startsWith(this._footer2)) {
                 break;
             }
-            stringBuffer.append(readLine2);
+            stringBuffer.append(line2);
         }
         if (stringBuffer.length() == 0) {
             return null;
         }
-        ASN1Primitive readObject = new ASN1InputStream(Base64.decode(stringBuffer.toString())).readObject();
-        if (!(readObject instanceof ASN1Sequence)) {
+        ASN1Primitive object = new ASN1InputStream(Base64.decode(stringBuffer.toString())).readObject();
+        if (!(object instanceof ASN1Sequence)) {
             throw new IOException("malformed PEM data encountered");
         }
-        return (ASN1Sequence) readObject;
+        return (ASN1Sequence) object;
     }
 }

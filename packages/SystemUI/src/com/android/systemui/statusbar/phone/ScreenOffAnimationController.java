@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import kotlin.collections.ArraysKt___ArraysKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ScreenOffAnimationController implements WakefulnessLifecycle.Observer {
     public final List animations;
@@ -16,8 +15,8 @@ public final class ScreenOffAnimationController implements WakefulnessLifecycle.
 
     public ScreenOffAnimationController(Optional<SysUIUnfoldComponent> optional, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, WakefulnessLifecycle wakefulnessLifecycle) {
         this.wakefulnessLifecycle = wakefulnessLifecycle;
-        SysUIUnfoldComponent orElse = optional.orElse(null);
-        this.animations = ArraysKt___ArraysKt.filterNotNull(new ScreenOffAnimation[]{orElse != null ? orElse.getFoldAodAnimationController() : null, unlockedScreenOffAnimationController});
+        SysUIUnfoldComponent sysUIUnfoldComponentOrElse = optional.orElse(null);
+        this.animations = ArraysKt___ArraysKt.filterNotNull(new ScreenOffAnimation[]{sysUIUnfoldComponentOrElse != null ? sysUIUnfoldComponentOrElse.getFoldAodAnimationController() : null, unlockedScreenOffAnimationController});
     }
 
     public final boolean isKeyguardShowDelayed() {

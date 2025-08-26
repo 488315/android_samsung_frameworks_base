@@ -9,14 +9,12 @@ import java.util.Objects;
 import java.util.function.Supplier;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class AbstractProxyReflection {
     public final Class mBaseClass;
     public final String mClassName;
     public final Object mProxyInstance;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InvocationHooker implements InvocationHandler {
         public InvocationHooker() {
         }
@@ -40,11 +38,11 @@ public abstract class AbstractProxyReflection {
             Object obj2 = abstractProxyReflection.mProxyInstance;
             Objects.requireNonNull(obj2, (Supplier<String>) supplier);
             HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(17, 37);
-            Class<?> cls = obj2.getClass();
-            HashCodeBuilder.reflectionAppend(obj2, cls, hashCodeBuilder, strArr);
-            while (cls.getSuperclass() != null) {
-                cls = cls.getSuperclass();
-                HashCodeBuilder.reflectionAppend(obj2, cls, hashCodeBuilder, strArr);
+            Class<?> superclass = obj2.getClass();
+            HashCodeBuilder.reflectionAppend(obj2, superclass, hashCodeBuilder, strArr);
+            while (superclass.getSuperclass() != null) {
+                superclass = superclass.getSuperclass();
+                HashCodeBuilder.reflectionAppend(obj2, superclass, hashCodeBuilder, strArr);
             }
             return Integer.valueOf(hashCodeBuilder.iTotal);
         }

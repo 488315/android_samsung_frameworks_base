@@ -7,7 +7,6 @@ import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotStateKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ScrollableStateKt {
     public static final ScrollableState ScrollableState(Function1 function1) {
@@ -18,11 +17,11 @@ public abstract class ScrollableStateKt {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.foundation.gestures.rememberScrollableState (ScrollableState.kt:159)");
         }
-        final MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function1, composer);
+        final MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function1, composer);
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
+        if (objRememberedValue == Composer.Companion.Empty) {
             DefaultScrollableState defaultScrollableState = new DefaultScrollableState(new Function1() { // from class: androidx.compose.foundation.gestures.ScrollableStateKt$rememberScrollableState$1$1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 /* JADX WARN: Multi-variable type inference failed */
@@ -32,14 +31,14 @@ public abstract class ScrollableStateKt {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    return (Float) ((Function1) rememberUpdatedState.getValue()).mo779invoke(Float.valueOf(((Number) obj).floatValue()));
+                public final Object mo781invoke(Object obj) {
+                    return (Float) ((Function1) mutableStateRememberUpdatedState.getValue()).mo781invoke(Float.valueOf(((Number) obj).floatValue()));
                 }
             });
             composerImpl.updateRememberedValue(defaultScrollableState);
-            rememberedValue = defaultScrollableState;
+            objRememberedValue = defaultScrollableState;
         }
-        ScrollableState scrollableState = (ScrollableState) rememberedValue;
+        ScrollableState scrollableState = (ScrollableState) objRememberedValue;
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }

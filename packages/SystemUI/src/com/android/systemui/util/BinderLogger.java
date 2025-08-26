@@ -20,7 +20,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.random.Random;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BinderLogger implements CoreStartable, Binder.ProxyTransactListener {
     private static final String AOSP_SOURCE_FILE_MARKER = "go/retraceme ";
@@ -34,14 +33,12 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class BinderTransactionAnalysis {
         public static final Companion Companion = new Companion(null);
         private final boolean isSystemUi;
         private final String logMessage;
         private final String traceMessage;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -85,9 +82,9 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
 
         public BinderTransactionAnalysis(boolean z, StackTraceElement stackTraceElement, StackTraceElement stackTraceElement2) {
             this.isSystemUi = z;
-            String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(z ? BinderLogger.Companion.getSimpleCallRefWithFileAndLineNumber(stackTraceElement) : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(BinderLogger.Companion.getSimpleCallRef(stackTraceElement), "()"), " -> ", BinderLogger.Companion.getBinderCallRef(stackTraceElement2));
-            this.logMessage = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Blocking binder transaction detected", !z ? ", but the call did not originate from System UI" : "", ": ", m);
-            this.traceMessage = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(z ? "sysui" : "core", ": ", m);
+            String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(z ? BinderLogger.Companion.getSimpleCallRefWithFileAndLineNumber(stackTraceElement) : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(BinderLogger.Companion.getSimpleCallRef(stackTraceElement), "()"), " -> ", BinderLogger.Companion.getBinderCallRef(stackTraceElement2));
+            this.logMessage = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Blocking binder transaction detected", !z ? ", but the call did not originate from System UI" : "", ": ", strM);
+            this.traceMessage = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(z ? "sysui" : "core", ": ", strM);
         }
 
         public final String getLogMessage() {
@@ -103,7 +100,6 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -120,8 +116,8 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
         private final String getBinderClassName(StackTraceElement stackTraceElement) {
             String className = stackTraceElement.getClassName();
             className.getClass();
-            int indexOf$default = StringsKt__StringsKt.indexOf$default(className, "$Stub$Proxy", 0, false, 6);
-            return indexOf$default > 0 ? className.substring(0, indexOf$default) : className;
+            int iIndexOf$default = StringsKt__StringsKt.indexOf$default(className, "$Stub$Proxy", 0, false, 6);
+            return iIndexOf$default > 0 ? className.substring(0, iIndexOf$default) : className;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -140,11 +136,11 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
             return ReorderTile$$ExternalSyntheticOutline0.m(stackTraceElement.getLineNumber(), ")", SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("at ", BinderLogger.Companion.getSimpleCallRef(stackTraceElement), "(", stackTraceElement.getFileName(), ":"));
         }
 
-        private final String getSimpleClassName(StackTraceElement stackTraceElement) {
+        private final String getSimpleClassName(StackTraceElement stackTraceElement) throws ClassNotFoundException {
             Class<?> cls = Class.forName(stackTraceElement.getClassName());
             String canonicalName = cls.getCanonicalName();
-            String substring = canonicalName != null ? canonicalName.substring(cls.getPackageName().length() + 1) : null;
-            return substring == null ? stackTraceElement.getClassName() : substring;
+            String strSubstring = canonicalName != null ? canonicalName.substring(cls.getPackageName().length() + 1) : null;
+            return strSubstring == null ? stackTraceElement.getClassName() : strSubstring;
         }
 
         private Companion() {
@@ -184,16 +180,16 @@ public final class BinderLogger implements CoreStartable, Binder.ProxyTransactLi
         if ((i2 & 1) != 0 || !ThreadUtils.isMainThread()) {
             return null;
         }
-        BinderTransactionAnalysis fromStackTrace = BinderTransactionAnalysis.Companion.fromStackTrace(new Throwable().getStackTrace());
+        BinderTransactionAnalysis binderTransactionAnalysisFromStackTrace = BinderTransactionAnalysis.Companion.fromStackTrace(new Throwable().getStackTrace());
         Random.Default.getClass();
-        int nextInt = Random.defaultRandom.nextInt();
-        Trace.asyncTraceForTrackBegin(4096L, TRACK_NAME, fromStackTrace.getTraceMessage(), nextInt);
-        if (fromStackTrace.isSystemUi()) {
-            StrictMode.noteSlowCall(fromStackTrace.getLogMessage());
+        int iNextInt = Random.defaultRandom.nextInt();
+        Trace.asyncTraceForTrackBegin(4096L, TRACK_NAME, binderTransactionAnalysisFromStackTrace.getTraceMessage(), iNextInt);
+        if (binderTransactionAnalysisFromStackTrace.isSystemUi()) {
+            StrictMode.noteSlowCall(binderTransactionAnalysisFromStackTrace.getLogMessage());
         } else {
-            fromStackTrace.getLogMessage();
+            binderTransactionAnalysisFromStackTrace.getLogMessage();
         }
-        return Integer.valueOf(nextInt);
+        return Integer.valueOf(iNextInt);
     }
 
     @Override // com.android.systemui.CoreStartable

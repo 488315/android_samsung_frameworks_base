@@ -31,7 +31,7 @@ public class Reference {
         this.name = str;
     }
 
-    static Reference read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Reference read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         Reference reference = new Reference();
         String attributeValue = xmlPullParser.getAttributeValue(null, "name");

@@ -13,7 +13,6 @@ import androidx.core.content.res.TypedArrayUtils;
 import androidx.transition.Transition;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TransitionSet extends Transition {
     public int mChangeFlags;
@@ -22,7 +21,6 @@ public class TransitionSet extends Transition {
     public boolean mStarted;
     public ArrayList mTransitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TransitionSetListener extends TransitionListenerAdapter {
         public final TransitionSet mTransitionSet;
 
@@ -296,19 +294,87 @@ public class TransitionSet extends Transition {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:44:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:74:? A[RETURN, SYNTHETIC] */
     @Override // androidx.transition.Transition
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setCurrentPlayTimeMillis(long r20, long r22) {
-        /*
-            Method dump skipped, instructions count: 225
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.transition.TransitionSet.setCurrentPlayTimeMillis(long, long):void");
+    public final void setCurrentPlayTimeMillis(long j, long j2) {
+        long j3;
+        long j4 = this.mTotalDuration;
+        long j5 = 0;
+        if (this.mParent != null) {
+            if (j < 0 && j2 < 0) {
+                return;
+            }
+            if (j > j4 && j2 > j4) {
+                return;
+            }
+        }
+        boolean z = j < j2;
+        if ((j >= 0 && j2 < 0) || (j <= j4 && j2 > j4)) {
+            this.mEnded = false;
+            notifyFromTransition(this, Transition$TransitionNotification$$ExternalSyntheticLambda0.ON_START, z);
+        }
+        if (!this.mPlayTogether) {
+            int size = 1;
+            while (true) {
+                if (size >= this.mTransitions.size()) {
+                    size = this.mTransitions.size();
+                    break;
+                } else if (((Transition) this.mTransitions.get(size)).mSeekOffsetInParent > j2) {
+                    break;
+                } else {
+                    size++;
+                }
+            }
+            int i = size - 1;
+            if (j >= j2) {
+                while (i < this.mTransitions.size()) {
+                    Transition transition = (Transition) this.mTransitions.get(i);
+                    long j6 = transition.mSeekOffsetInParent;
+                    j3 = j5;
+                    long j7 = j - j6;
+                    if (j7 < j3) {
+                        break;
+                    }
+                    transition.setCurrentPlayTimeMillis(j7, j2 - j6);
+                    i++;
+                    j5 = j3;
+                }
+            } else {
+                j3 = 0;
+                while (i >= 0) {
+                    Transition transition2 = (Transition) this.mTransitions.get(i);
+                    long j8 = transition2.mSeekOffsetInParent;
+                    long j9 = j - j8;
+                    transition2.setCurrentPlayTimeMillis(j9, j2 - j8);
+                    if (j9 >= 0) {
+                        break;
+                    } else {
+                        i--;
+                    }
+                }
+            }
+            if (this.mParent == null) {
+                if ((j <= j4 || j2 > j4) && (j >= 0 || j2 < j3)) {
+                    return;
+                }
+                if (j > j4) {
+                    this.mEnded = true;
+                }
+                notifyFromTransition(this, Transition$TransitionNotification$$ExternalSyntheticLambda0.ON_END, z);
+                return;
+            }
+            return;
+        }
+        for (int i2 = 0; i2 < this.mTransitions.size(); i2++) {
+            ((Transition) this.mTransitions.get(i2)).setCurrentPlayTimeMillis(j, j2);
+        }
+        j3 = j5;
+        if (this.mParent == null) {
+        }
     }
 
     @Override // androidx.transition.Transition
@@ -385,25 +451,25 @@ public class TransitionSet extends Transition {
 
     @Override // androidx.transition.Transition
     public final String toString(String str) {
-        String transition = super.toString(str);
+        String string = super.toString(str);
         for (int i = 0; i < this.mTransitions.size(); i++) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(transition, "\n");
-            m.append(((Transition) this.mTransitions.get(i)).toString(str + "  "));
-            transition = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n");
+            sbM.append(((Transition) this.mTransitions.get(i)).toString(str + "  "));
+            string = sbM.toString();
         }
-        return transition;
+        return string;
     }
 
     @Override // androidx.transition.Transition
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final Transition mo898clone() {
-        TransitionSet transitionSet = (TransitionSet) super.mo898clone();
+    public final Transition mo900clone() {
+        TransitionSet transitionSet = (TransitionSet) super.mo900clone();
         transitionSet.mTransitions = new ArrayList();
         int size = this.mTransitions.size();
         for (int i = 0; i < size; i++) {
-            Transition mo898clone = ((Transition) this.mTransitions.get(i)).mo898clone();
-            transitionSet.mTransitions.add(mo898clone);
-            mo898clone.mParent = transitionSet;
+            Transition transitionMo900clone = ((Transition) this.mTransitions.get(i)).mo900clone();
+            transitionSet.mTransitions.add(transitionMo900clone);
+            transitionMo900clone.mParent = transitionSet;
         }
         return transitionSet;
     }
@@ -414,8 +480,8 @@ public class TransitionSet extends Transition {
         this.mPlayTogether = true;
         this.mStarted = false;
         this.mChangeFlags = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.TRANSITION_SET);
-        setOrdering(TypedArrayUtils.getNamedInt(obtainStyledAttributes, (XmlResourceParser) attributeSet, "transitionOrdering", 0, 0));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.TRANSITION_SET);
+        setOrdering(TypedArrayUtils.getNamedInt(typedArrayObtainStyledAttributes, (XmlResourceParser) attributeSet, "transitionOrdering", 0, 0));
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

@@ -7,11 +7,9 @@ import com.android.systemui.volume.panel.component.mediaoutput.shared.model.Medi
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SliderType {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AudioSharingStream implements SliderType {
         static {
             new AudioSharingStream();
@@ -33,7 +31,6 @@ public interface SliderType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaDeviceCast implements SliderType {
         public final MediaDeviceSession session;
 
@@ -57,7 +54,6 @@ public interface SliderType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Stream implements SliderType {
         public final int stream;
 

@@ -235,17 +235,17 @@ public class InsetsSourceControl implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
-        long start2 = protoOutputStream.start(1146756268034L);
+        long jStart = protoOutputStream.start(j);
+        long jStart2 = protoOutputStream.start(1146756268034L);
         protoOutputStream.write(1120986464257L, this.mSurfacePosition.x);
         protoOutputStream.write(1120986464258L, this.mSurfacePosition.y);
-        protoOutputStream.end(start2);
+        protoOutputStream.end(jStart2);
         SurfaceControl surfaceControl = this.mLeash;
         if (surfaceControl != null) {
             surfaceControl.dumpDebug(protoOutputStream, 1146756268035L);
         }
         protoOutputStream.write(1120986464260L, this.mType);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static class Array implements Parcelable {

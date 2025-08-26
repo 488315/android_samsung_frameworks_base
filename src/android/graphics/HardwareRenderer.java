@@ -35,6 +35,7 @@ import sun.misc.Cleaner;
 public class HardwareRenderer {
     public static final int CACHE_LIMIT_DEFAULT = 0;
     public static final int CACHE_LIMIT_HIGHER_BIG = 3;
+    public static final int CACHE_LIMIT_HIGHER_HUGE = 4;
     public static final int CACHE_LIMIT_HIGHER_MID = 2;
     public static final int CACHE_LIMIT_HIGHER_SMALL = 1;
     private static final String CACHE_PATH_SHADERS = "com.android.opengl.shaders_cache";
@@ -100,7 +101,8 @@ public class HardwareRenderer {
 
     public static native void disableVsync();
 
-    protected static native boolean isWebViewOverlaysEnabled();
+    /* JADX INFO: Access modifiers changed from: protected */
+    public static native boolean isWebViewOverlaysEnabled();
 
     private static native void nAddObserver(long j, long j2);
 
@@ -177,6 +179,12 @@ public class HardwareRenderer {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nRotateProcessStatsBuffer();
+
+    private static native long nSemGetCurrentResourceCacheMax();
+
+    private static native long nSemGetCurrentResourceCacheUsage();
+
+    private static native int nSemGetResourceCacheLimit();
 
     private static native boolean nSemSetResourceCacheLimit(int i);
 
@@ -267,16 +275,16 @@ public class HardwareRenderer {
 
     public HardwareRenderer() {
         ProcessInitializer.sInstance.initUsingContext();
-        RenderNode adopt = RenderNode.adopt(nCreateRootRenderNode());
-        this.mRootNode = adopt;
-        adopt.setClipToBounds(false);
-        long nCreateProxy = nCreateProxy(true ^ this.mOpaque, this.mRootNode.mNativeRenderNode);
-        this.mNativeProxy = nCreateProxy;
-        if (nCreateProxy == 0) {
+        RenderNode renderNodeAdopt = RenderNode.adopt(nCreateRootRenderNode());
+        this.mRootNode = renderNodeAdopt;
+        renderNodeAdopt.setClipToBounds(false);
+        long jNCreateProxy = nCreateProxy(true ^ this.mOpaque, this.mRootNode.mNativeRenderNode);
+        this.mNativeProxy = jNCreateProxy;
+        if (jNCreateProxy == 0) {
             throw new OutOfMemoryError("Unable to create hardware renderer");
         }
-        Cleaner.create(this, new DestroyContextRunnable(nCreateProxy));
-        ProcessInitializer.sInstance.init(nCreateProxy);
+        Cleaner.create(this, new DestroyContextRunnable(jNCreateProxy));
+        ProcessInitializer.sInstance.init(jNCreateProxy);
     }
 
     public void destroy() {
@@ -302,9 +310,9 @@ public class HardwareRenderer {
     }
 
     public void setContentRoot(RenderNode renderNode) {
-        RecordingCanvas beginRecording = this.mRootNode.beginRecording();
+        RecordingCanvas recordingCanvasBeginRecording = this.mRootNode.beginRecording();
         if (renderNode != null) {
-            beginRecording.drawRenderNode(renderNode);
+            recordingCanvasBeginRecording.drawRenderNode(renderNode);
         }
         this.mRootNode.endRecording();
     }
@@ -364,11 +372,11 @@ public class HardwareRenderer {
         }
 
         public int syncAndDraw() {
-            int syncAndDrawFrame = HardwareRenderer.this.syncAndDrawFrame(this.mFrameInfo);
-            if (this.mWaitForPresent && (syncAndDrawFrame & 8) == 0) {
+            int iSyncAndDrawFrame = HardwareRenderer.this.syncAndDrawFrame(this.mFrameInfo);
+            if (this.mWaitForPresent && (iSyncAndDrawFrame & 8) == 0) {
                 HardwareRenderer.this.fence();
             }
-            return syncAndDrawFrame;
+            return iSyncAndDrawFrame;
         }
     }
 
@@ -681,6 +689,18 @@ public class HardwareRenderer {
         return nSemSetResourceCacheLimit(i);
     }
 
+    public static int semGetResourceCacheLimit() {
+        return nSemGetResourceCacheLimit();
+    }
+
+    public static long semGetCurrentResourceCacheUsage() {
+        return nSemGetCurrentResourceCacheUsage();
+    }
+
+    public static long semGetCurrentResourceCacheMax() {
+        return nSemGetCurrentResourceCacheMax();
+    }
+
     public static void trimCaches(int i) {
         nTrimCaches(i);
     }
@@ -913,29 +933,29 @@ public class HardwareRenderer {
             int physicalHeight = mode.getPhysicalHeight();
             OverlayProperties overlaySupport = display.getOverlaySupport();
             int i2 = physicalHeight;
-            int i3 = dataSpace;
-            int i4 = physicalWidth;
-            int i5 = 0;
-            while (i5 < displays.length) {
-                Display display2 = displays[i5];
-                if (i3 == 0 && (preferredWideGamutColorSpace = display2.getPreferredWideGamutColorSpace()) != null) {
-                    i3 = preferredWideGamutColorSpace.getDataSpace();
+            int dataSpace2 = dataSpace;
+            int i3 = physicalWidth;
+            int i4 = 0;
+            while (i4 < displays.length) {
+                Display display2 = displays[i4];
+                if (dataSpace2 == 0 && (preferredWideGamutColorSpace = display2.getPreferredWideGamutColorSpace()) != null) {
+                    dataSpace2 = preferredWideGamutColorSpace.getDataSpace();
                 }
                 Display.Mode[] supportedModes = display2.getSupportedModes();
-                for (int i6 = i; i6 < supportedModes.length; i6++) {
-                    Display.Mode mode2 = supportedModes[i6];
+                for (int i5 = i; i5 < supportedModes.length; i5++) {
+                    Display.Mode mode2 = supportedModes[i5];
                     int physicalWidth2 = mode2.getPhysicalWidth();
                     int physicalHeight2 = mode2.getPhysicalHeight();
-                    if (physicalWidth2 * physicalHeight2 > i4 * i2) {
+                    if (physicalWidth2 * physicalHeight2 > i3 * i2) {
                         i2 = physicalHeight2;
-                        i4 = physicalWidth2;
+                        i3 = physicalWidth2;
                     }
                 }
-                i5++;
+                i4++;
                 i = 0;
             }
-            Log.d(HardwareRenderer.LOG_TAG, "Set largestWidth and largestHeight as physical resolution. (" + i4 + "x" + i2 + NavigationBarInflaterView.KEY_CODE_END);
-            HardwareRenderer.nInitDisplayInfo(i4, i2, display.getRefreshRate(), i3, display.getAppVsyncOffsetNanos(), display.getPresentationDeadlineNanos(), overlaySupport.isCombinationSupported(411107328, 22), overlaySupport.isCombinationSupported(DataSpace.pack(655360, 8388608, 402653184), 59), overlaySupport.isMixedColorSpacesSupported());
+            Log.d(HardwareRenderer.LOG_TAG, "Set largestWidth and largestHeight as physical resolution. (" + i3 + "x" + i2 + NavigationBarInflaterView.KEY_CODE_END);
+            HardwareRenderer.nInitDisplayInfo(i3, i2, display.getRefreshRate(), dataSpace2, display.getAppVsyncOffsetNanos(), display.getPresentationDeadlineNanos(), overlaySupport.isCombinationSupported(411107328, 22), overlaySupport.isCombinationSupported(DataSpace.pack(655360, 8388608, 402653184), 59), overlaySupport.isMixedColorSpacesSupported());
             this.mDisplayInitialized = true;
         }
 
@@ -947,9 +967,9 @@ public class HardwareRenderer {
 
         private void requestBuffer() {
             try {
-                ParcelFileDescriptor requestBufferForProcess = this.mGraphicsStatsService.requestBufferForProcess(this.mPackageName, this.mGraphicsStatsCallback);
-                HardwareRenderer.nSetProcessStatsBuffer(requestBufferForProcess.getFd());
-                requestBufferForProcess.close();
+                ParcelFileDescriptor parcelFileDescriptorRequestBufferForProcess = this.mGraphicsStatsService.requestBufferForProcess(this.mPackageName, this.mGraphicsStatsCallback);
+                HardwareRenderer.nSetProcessStatsBuffer(parcelFileDescriptorRequestBufferForProcess.getFd());
+                parcelFileDescriptorRequestBufferForProcess.close();
             } catch (Throwable th) {
                 Log.w(HardwareRenderer.LOG_TAG, "Could not acquire gfx stats buffer", th);
             }

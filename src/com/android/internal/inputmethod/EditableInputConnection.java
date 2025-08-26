@@ -175,9 +175,9 @@ public final class EditableInputConnection extends BaseInputConnection implement
             return super.commitText(charSequence, i);
         }
         textView.resetErrorChangedFlag();
-        boolean commitText = super.commitText(charSequence, i);
+        boolean zCommitText = super.commitText(charSequence, i);
         this.mTextView.hideErrorIfUnchanged();
-        return commitText;
+        return zCommitText;
     }
 
     @Override // android.view.inputmethod.InputConnection
@@ -223,23 +223,23 @@ public final class EditableInputConnection extends BaseInputConnection implement
 
     @Override // android.view.inputmethod.InputConnection
     public void performHandwritingGesture(HandwritingGesture handwritingGesture, Executor executor, final IntConsumer intConsumer) {
-        final int performHandwritingInsertModeGesture;
+        final int iPerformHandwritingInsertModeGesture;
         if (handwritingGesture instanceof SelectGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingSelectGesture((SelectGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingSelectGesture((SelectGesture) handwritingGesture);
         } else if (handwritingGesture instanceof SelectRangeGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingSelectRangeGesture((SelectRangeGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingSelectRangeGesture((SelectRangeGesture) handwritingGesture);
         } else if (handwritingGesture instanceof DeleteGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingDeleteGesture((DeleteGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingDeleteGesture((DeleteGesture) handwritingGesture);
         } else if (handwritingGesture instanceof DeleteRangeGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingDeleteRangeGesture((DeleteRangeGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingDeleteRangeGesture((DeleteRangeGesture) handwritingGesture);
         } else if (handwritingGesture instanceof InsertGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingInsertGesture((InsertGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingInsertGesture((InsertGesture) handwritingGesture);
         } else if (handwritingGesture instanceof RemoveSpaceGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingRemoveSpaceGesture((RemoveSpaceGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingRemoveSpaceGesture((RemoveSpaceGesture) handwritingGesture);
         } else if (handwritingGesture instanceof JoinOrSplitGesture) {
-            performHandwritingInsertModeGesture = this.mTextView.performHandwritingJoinOrSplitGesture((JoinOrSplitGesture) handwritingGesture);
+            iPerformHandwritingInsertModeGesture = this.mTextView.performHandwritingJoinOrSplitGesture((JoinOrSplitGesture) handwritingGesture);
         } else {
-            performHandwritingInsertModeGesture = handwritingGesture instanceof InsertModeGesture ? this.mTextView.performHandwritingInsertModeGesture((InsertModeGesture) handwritingGesture) : 2;
+            iPerformHandwritingInsertModeGesture = handwritingGesture instanceof InsertModeGesture ? this.mTextView.performHandwritingInsertModeGesture((InsertModeGesture) handwritingGesture) : 2;
         }
         if (executor == null || intConsumer == null) {
             return;
@@ -247,7 +247,7 @@ public final class EditableInputConnection extends BaseInputConnection implement
         executor.execute(new Runnable() { // from class: com.android.internal.inputmethod.EditableInputConnection$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                intConsumer.accept(performHandwritingInsertModeGesture);
+                intConsumer.accept(iPerformHandwritingInsertModeGesture);
             }
         });
     }
@@ -259,7 +259,7 @@ public final class EditableInputConnection extends BaseInputConnection implement
 
     @Override // android.view.inputmethod.DumpableInputConnection
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         Editable editable = getEditable();
         if (editable != null) {
             int selectionStart = Selection.getSelectionStart(editable);
@@ -268,6 +268,6 @@ public final class EditableInputConnection extends BaseInputConnection implement
             protoOutputStream.write(1120986464260L, selectionEnd);
         }
         protoOutputStream.write(1120986464261L, getCursorCapsMode(0));
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

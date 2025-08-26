@@ -45,9 +45,9 @@ public interface ISemContinuitySimpleListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemContinuitySimpleListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemContinuitySimpleListener)) {
-                return (ISemContinuitySimpleListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemContinuitySimpleListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemContinuitySimpleListener)) {
+                return (ISemContinuitySimpleListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface ISemContinuitySimpleListener extends IInterface {
 
             @Override // com.samsung.android.continuity.ISemContinuitySimpleListener
             public void onNotify(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemContinuitySimpleListener.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemContinuitySimpleListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

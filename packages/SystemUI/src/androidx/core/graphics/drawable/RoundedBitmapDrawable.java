@@ -12,7 +12,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RoundedBitmapDrawable extends Drawable {
     public final Bitmap mBitmap;
@@ -146,12 +145,12 @@ public abstract class RoundedBitmapDrawable extends Drawable {
         RoundedBitmapDrawable roundedBitmapDrawable;
         if (this.mApplyGravity) {
             if (this.mIsCircular) {
-                int min = Math.min(this.mBitmapWidth, this.mBitmapHeight);
+                int iMin = Math.min(this.mBitmapWidth, this.mBitmapHeight);
                 roundedBitmapDrawable = this;
-                roundedBitmapDrawable.gravityCompatApply(getBounds(), this.mDstRect, this.mGravity, min, min);
-                int min2 = Math.min(roundedBitmapDrawable.mDstRect.width(), roundedBitmapDrawable.mDstRect.height());
-                roundedBitmapDrawable.mDstRect.inset(Math.max(0, (roundedBitmapDrawable.mDstRect.width() - min2) / 2), Math.max(0, (roundedBitmapDrawable.mDstRect.height() - min2) / 2));
-                roundedBitmapDrawable.mCornerRadius = min2 * 0.5f;
+                roundedBitmapDrawable.gravityCompatApply(getBounds(), this.mDstRect, this.mGravity, iMin, iMin);
+                int iMin2 = Math.min(roundedBitmapDrawable.mDstRect.width(), roundedBitmapDrawable.mDstRect.height());
+                roundedBitmapDrawable.mDstRect.inset(Math.max(0, (roundedBitmapDrawable.mDstRect.width() - iMin2) / 2), Math.max(0, (roundedBitmapDrawable.mDstRect.height() - iMin2) / 2));
+                roundedBitmapDrawable.mCornerRadius = iMin2 * 0.5f;
             } else {
                 roundedBitmapDrawable = this;
                 roundedBitmapDrawable.gravityCompatApply(roundedBitmapDrawable.getBounds(), roundedBitmapDrawable.mDstRect, roundedBitmapDrawable.mGravity, roundedBitmapDrawable.mBitmapWidth, roundedBitmapDrawable.mBitmapHeight);

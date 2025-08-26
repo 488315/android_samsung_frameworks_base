@@ -26,7 +26,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ControlsActivity extends ComponentActivity {
     public final BroadcastDispatcher broadcastDispatcher;
@@ -98,16 +97,16 @@ public class ControlsActivity extends ComponentActivity {
             public final void onReceive(Context context, Intent intent2) {
                 String action = intent2.getAction();
                 if (Intrinsics.areEqual(action, "android.intent.action.SCREEN_OFF") || Intrinsics.areEqual(action, "android.intent.action.DREAMING_STARTED")) {
-                    ControlsActivity.this.finish();
+                    this.this$0.finish();
                 }
             }
         };
-        IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_OFF", "android.intent.action.DREAMING_STARTED");
+        IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_OFF", "android.intent.action.DREAMING_STARTED");
         ControlsActivity$initBroadcastReceiver$1 controlsActivity$initBroadcastReceiver$1 = this.broadcastReceiver;
         if (controlsActivity$initBroadcastReceiver$1 == null) {
             controlsActivity$initBroadcastReceiver$1 = null;
         }
-        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, controlsActivity$initBroadcastReceiver$1, m, null, null, 0, null, 60);
+        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, controlsActivity$initBroadcastReceiver$1, intentFilterM, null, null, 0, null, 60);
     }
 
     @Override // android.app.Activity
@@ -138,7 +137,7 @@ public class ControlsActivity extends ComponentActivity {
         if (!this.keyguardStateController.isUnlocked()) {
             throw null;
         }
-        new Runnable() { // from class: com.android.systemui.controls.ui.ControlsActivity$onStart$2
+        new Runnable() { // from class: com.android.systemui.controls.ui.ControlsActivity.onStart.2
             @Override // java.lang.Runnable
             public final void run() {
                 ControlsActivity.this.finishOrReturnToDream();

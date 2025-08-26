@@ -7,7 +7,6 @@ import com.android.systemui.volume.VolumeDependency;
 import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConfigurationWrapper {
     public final Context context;
@@ -19,7 +18,6 @@ public final class ConfigurationWrapper {
     public boolean nightMode;
     public int orientation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,17 +53,17 @@ public final class ConfigurationWrapper {
         int i = context.getResources().getConfiguration().densityDpi;
         float f = this.context.getResources().getConfiguration().fontScale;
         Locale locale = this.context.getResources().getConfiguration().locale;
-        boolean isNightMode = ContextUtils.isNightMode(this.context);
+        boolean zIsNightMode = ContextUtils.isNightMode(this.context);
         LogWrapper logWrapper = this.log;
-        logWrapper.d("ConfigurationWrapper", "this=" + this + " / density=" + i + ", fontScale=" + f + ", locale=" + locale + ", nightMode=" + isNightMode);
-        if (i == this.density && f == this.fontScale && locale == this.locale && isNightMode == this.nightMode) {
+        logWrapper.d("ConfigurationWrapper", "this=" + this + " / density=" + i + ", fontScale=" + f + ", locale=" + locale + ", nightMode=" + zIsNightMode);
+        if (i == this.density && f == this.fontScale && locale == this.locale && zIsNightMode == this.nightMode) {
             return false;
         }
         logWrapper.d("ConfigurationWrapper", "density or font or scale has been changed!");
         this.density = i;
         this.fontScale = f;
         this.locale = locale;
-        this.nightMode = isNightMode;
+        this.nightMode = zIsNightMode;
         return true;
     }
 
@@ -74,14 +72,14 @@ public final class ConfigurationWrapper {
         Context context = this.context;
         contextUtils.getClass();
         int i = context.getResources().getConfiguration().semDisplayDeviceType;
-        Integer valueOf = Integer.valueOf(i);
+        Integer numValueOf = Integer.valueOf(i);
         if (this.displayType == i) {
-            valueOf = null;
+            numValueOf = null;
         }
-        if (valueOf == null) {
+        if (numValueOf == null) {
             return false;
         }
-        this.displayType = valueOf.intValue();
+        this.displayType = numValueOf.intValue();
         return true;
     }
 
@@ -90,14 +88,14 @@ public final class ConfigurationWrapper {
         Context context = this.context;
         contextUtils.getClass();
         int i = context.getResources().getConfiguration().orientation;
-        Integer valueOf = Integer.valueOf(i);
+        Integer numValueOf = Integer.valueOf(i);
         if (this.orientation == i) {
-            valueOf = null;
+            numValueOf = null;
         }
-        if (valueOf == null) {
+        if (numValueOf == null) {
             return false;
         }
-        this.orientation = valueOf.intValue();
+        this.orientation = numValueOf.intValue();
         this.log.d("ConfigurationWrapper", "orientation has been changed!");
         return true;
     }
@@ -109,15 +107,15 @@ public final class ConfigurationWrapper {
         float f = this.fontScale;
         Locale locale = this.locale;
         int i3 = this.displayType;
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("[ nightMode=", i, ", orientation=", z, ", density=");
-        m.append(i2);
-        m.append(", fontScale=");
-        m.append(f);
-        m.append(", locale=");
-        m.append(locale);
-        m.append(", displayType=");
-        m.append(i3);
-        m.append(" ]");
-        return m.toString();
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("[ nightMode=", i, ", orientation=", z, ", density=");
+        sbM.append(i2);
+        sbM.append(", fontScale=");
+        sbM.append(f);
+        sbM.append(", locale=");
+        sbM.append(locale);
+        sbM.append(", displayType=");
+        sbM.append(i3);
+        sbM.append(" ]");
+        return sbM.toString();
     }
 }

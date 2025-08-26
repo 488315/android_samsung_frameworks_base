@@ -11,7 +11,6 @@ import dagger.Lazy;
 import java.util.Map;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSFactoryImpl implements QSFactory {
     public final Provider mCustomTileFactoryProvider;
@@ -27,30 +26,30 @@ public class QSFactoryImpl implements QSFactory {
     @Override // com.android.systemui.plugins.qs.QSFactory
     public final QSTile createTile(String str) {
         Lazy lazy = this.mQsHostLazy;
-        QSTileImpl qSTileImpl = null;
+        QSTileImpl qSTileImplCreate = null;
         if (((QSHost) lazy.get()).isUnsupportedTile(str)) {
             MotionLayout$$ExternalSyntheticOutline0.m("Unsupported tile spec: ", str, "QSFactory");
         } else if (this.mTileMap.containsKey(str)) {
-            qSTileImpl = (QSTileImpl) ((Provider) this.mTileMap.get(str)).get();
+            qSTileImplCreate = (QSTileImpl) ((Provider) this.mTileMap.get(str)).get();
         } else if (str.startsWith("custom(")) {
             DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass36 anonymousClass36 = (DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass36) this.mCustomTileFactoryProvider.get();
             Context userContext = ((QSHost) lazy.get()).getUserContext();
             if (!str.startsWith("custom(") || !str.endsWith(")")) {
                 throw new IllegalArgumentException("Bad custom tile spec: ".concat(str));
             }
-            String substring = str.substring(7, str.length() - 1);
-            if (substring.isEmpty()) {
+            String strSubstring = str.substring(7, str.length() - 1);
+            if (strSubstring.isEmpty()) {
                 throw new IllegalArgumentException("Empty custom tile spec action");
             }
-            qSTileImpl = anonymousClass36.create(substring, userContext);
+            qSTileImplCreate = anonymousClass36.create(strSubstring, userContext);
         } else {
             Log.w("QSFactory", "No stock tile spec: ".concat(str));
         }
-        if (qSTileImpl != null) {
-            qSTileImpl.initialize();
-            qSTileImpl.postStale();
-            qSTileImpl.setTileSpec(str);
+        if (qSTileImplCreate != null) {
+            qSTileImplCreate.initialize();
+            qSTileImplCreate.postStale();
+            qSTileImplCreate.setTileSpec(str);
         }
-        return qSTileImpl;
+        return qSTileImplCreate;
     }
 }

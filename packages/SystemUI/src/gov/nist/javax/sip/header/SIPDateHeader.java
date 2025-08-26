@@ -7,7 +7,6 @@ import com.android.systemui.bixby2.controller.NotificationController$$ExternalSy
 import java.util.Calendar;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SIPDateHeader extends SIPHeader implements Header {
     private static final long serialVersionUID = 1734186339037274664L;
@@ -54,16 +53,16 @@ public class SIPDateHeader extends SIPHeader implements Header {
         } else {
             str4 = "" + sIPDate.second;
         }
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sIPDate.sipWkDay != null ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(""), sIPDate.sipWkDay, ", ") : "", str, " ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sIPDate.sipWkDay != null ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(""), sIPDate.sipWkDay, ", ") : "", str, " ");
         if (sIPDate.sipMonth != null) {
-            m = TransitionKt$$ExternalSyntheticOutline0.m(PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m), sIPDate.sipMonth, " ");
+            strM = TransitionKt$$ExternalSyntheticOutline0.m(PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM), sIPDate.sipMonth, " ");
         }
-        StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-        m2.append(sIPDate.year);
-        m2.append(" ");
-        m2.append(str2);
-        m2.append(":");
-        return NotificationController$$ExternalSyntheticOutline0.m(m2, str3, ":", str4, " GMT");
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+        sbM.append(sIPDate.year);
+        sbM.append(" ");
+        sbM.append(str2);
+        sbM.append(":");
+        return NotificationController$$ExternalSyntheticOutline0.m(sbM, str3, ":", str4, " GMT");
     }
 
     public final void setDate(Calendar calendar) {

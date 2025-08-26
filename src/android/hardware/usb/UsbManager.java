@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.IDisplayPortAltModeInfoListener;
-import android.hardware.usb.UsbManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Binder;
 import android.os.Bundle;
@@ -314,34 +313,34 @@ public class UsbManager {
     }
 
     static {
-        HashMap hashMap = new HashMap();
-        FUNCTION_NAME_TO_CODE = hashMap;
+        HashMap map = new HashMap();
+        FUNCTION_NAME_TO_CODE = map;
         sUsbOperationCount = new AtomicInteger();
-        hashMap.put(USB_FUNCTION_MTP, 4L);
-        hashMap.put(USB_FUNCTION_PTP, 16L);
-        hashMap.put(USB_FUNCTION_RNDIS, 32L);
-        hashMap.put("midi", 8L);
-        hashMap.put("accessory", 2L);
-        hashMap.put(USB_FUNCTION_AUDIO_SOURCE, 64L);
-        hashMap.put("adb", 1L);
-        hashMap.put(USB_FUNCTION_NCM, 1024L);
-        hashMap.put(USB_FUNCTION_UVC, 128L);
-        hashMap.put(USB_FUNCTION_DIAG, 2048L);
-        hashMap.put(USB_FUNCTION_SEC_CHARGING, 262144L);
-        hashMap.put(USB_FUNCTION_ACM, 4096L);
-        hashMap.put("dm", 8192L);
-        hashMap.put(USB_FUNCTION_DM1, 1048576L);
-        hashMap.put(USB_FUNCTION_SERIAL_CDEV, 16384L);
-        hashMap.put(USB_FUNCTION_DPL, 32768L);
-        hashMap.put(USB_FUNCTION_UTS, 65536L);
-        hashMap.put(USB_FUNCTION_RMNET, 131072L);
-        hashMap.put(USB_FUNCTION_MASS_STORAGE, 524288L);
-        hashMap.put(USB_FUNCTION_CONN_GADGET, 4194304L);
-        hashMap.put(USB_FUNCTION_DIAG_MDM, 8388608L);
-        hashMap.put(USB_FUNCTION_QDSS, 16777216L);
-        hashMap.put(USB_FUNCTION_QDSS_MDM, 33554432L);
-        hashMap.put(USB_FUNCTION_MBIM, 67108864L);
-        hashMap.put(USB_FUNCTION_SHUTDOWN, 134217728L);
+        map.put(USB_FUNCTION_MTP, 4L);
+        map.put(USB_FUNCTION_PTP, 16L);
+        map.put(USB_FUNCTION_RNDIS, 32L);
+        map.put("midi", 8L);
+        map.put("accessory", 2L);
+        map.put(USB_FUNCTION_AUDIO_SOURCE, 64L);
+        map.put("adb", 1L);
+        map.put(USB_FUNCTION_NCM, 1024L);
+        map.put(USB_FUNCTION_UVC, 128L);
+        map.put(USB_FUNCTION_DIAG, 2048L);
+        map.put(USB_FUNCTION_SEC_CHARGING, 262144L);
+        map.put(USB_FUNCTION_ACM, 4096L);
+        map.put("dm", 8192L);
+        map.put(USB_FUNCTION_DM1, 1048576L);
+        map.put(USB_FUNCTION_SERIAL_CDEV, 16384L);
+        map.put(USB_FUNCTION_DPL, 32768L);
+        map.put(USB_FUNCTION_UTS, 65536L);
+        map.put(USB_FUNCTION_RMNET, 131072L);
+        map.put(USB_FUNCTION_MASS_STORAGE, 524288L);
+        map.put(USB_FUNCTION_CONN_GADGET, 4194304L);
+        map.put(USB_FUNCTION_DIAG_MDM, 8388608L);
+        map.put(USB_FUNCTION_QDSS, 16777216L);
+        map.put(USB_FUNCTION_QDSS_MDM, 33554432L);
+        map.put(USB_FUNCTION_MBIM, 67108864L);
+        map.put(USB_FUNCTION_SHUTDOWN, 134217728L);
         DEFAULT_MODES = new int[]{2, 4, 6, 0, 1};
     }
 
@@ -356,20 +355,20 @@ public class UsbManager {
                 for (Map.Entry entry : UsbManager.this.mDisplayPortListeners.entrySet()) {
                     Executor executor = (Executor) entry.getValue();
                     final DisplayPortAltModeInfoListener displayPortAltModeInfoListener = (DisplayPortAltModeInfoListener) entry.getKey();
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         try {
                             executor.execute(new Runnable() { // from class: android.hardware.usb.UsbManager$DisplayPortAltModeInfoDispatchingListener$$ExternalSyntheticLambda0
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    UsbManager.DisplayPortAltModeInfoListener.this.onDisplayPortAltModeInfoChanged(str, displayPortAltModeInfo);
+                                    displayPortAltModeInfoListener.onDisplayPortAltModeInfoChanged(str, displayPortAltModeInfo);
                                 }
                             });
                         } catch (Exception e) {
                             Slog.e(UsbManager.TAG, "Exception during onDisplayPortAltModeInfoChanged from executor: " + executor, e);
                         }
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             }
@@ -451,23 +450,23 @@ public class UsbManager {
 
         @Override // java.io.FileInputStream, java.io.InputStream
         public int read() throws IOException {
-            int read = super.read();
-            checkError(read);
-            return read;
+            int i = super.read();
+            checkError(i);
+            return i;
         }
 
         @Override // java.io.FileInputStream, java.io.InputStream
         public int read(byte[] bArr) throws IOException {
-            int read = super.read(bArr);
-            checkError(read);
-            return read;
+            int i = super.read(bArr);
+            checkError(i);
+            return i;
         }
 
         @Override // java.io.FileInputStream, java.io.InputStream
         public int read(byte[] bArr, int i, int i2) throws IOException {
-            int read = super.read(bArr, i, i2);
-            checkError(read);
-            return read;
+            int i3 = super.read(bArr, i, i2);
+            checkError(i3);
+            return i3;
         }
 
         private void checkError(int i) throws IOException {
@@ -526,32 +525,32 @@ public class UsbManager {
     }
 
     public HashMap<String, UsbDevice> getDeviceList() {
-        HashMap<String, UsbDevice> hashMap = new HashMap<>();
+        HashMap<String, UsbDevice> map = new HashMap<>();
         if (this.mService != null) {
             Bundle bundle = new Bundle();
             try {
                 this.mService.getDeviceList(bundle);
                 for (String str : bundle.keySet()) {
-                    hashMap.put(str, (UsbDevice) bundle.get(str));
+                    map.put(str, (UsbDevice) bundle.get(str));
                 }
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        return hashMap;
+        return map;
     }
 
     public UsbDeviceConnection openDevice(UsbDevice usbDevice) {
         try {
             String deviceName = usbDevice.getDeviceName();
-            ParcelFileDescriptor openDevice = this.mService.openDevice(deviceName, this.mContext.getPackageName());
-            if (openDevice == null) {
+            ParcelFileDescriptor parcelFileDescriptorOpenDevice = this.mService.openDevice(deviceName, this.mContext.getPackageName());
+            if (parcelFileDescriptorOpenDevice == null) {
                 return null;
             }
             UsbDeviceConnection usbDeviceConnection = new UsbDeviceConnection(usbDevice);
-            boolean open = usbDeviceConnection.open(deviceName, openDevice, this.mContext);
-            openDevice.close();
-            if (open) {
+            boolean zOpen = usbDeviceConnection.open(deviceName, parcelFileDescriptorOpenDevice, this.mContext);
+            parcelFileDescriptorOpenDevice.close();
+            if (zOpen) {
                 return usbDeviceConnection;
             }
             return null;
@@ -719,11 +718,11 @@ public class UsbManager {
             Log.d(TAG, "setCurrentFunctions", new Exception("who's calling?"));
         }
         Log.d(TAG, "setCurrentFunction: functions=" + usbFunctionsToString(j));
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
         try {
-            this.mService.setCurrentFunctions(j, incrementAndGet);
+            this.mService.setCurrentFunctions(j, iIncrementAndGet);
         } catch (RemoteException e) {
-            Log.e(TAG, "setCurrentFunctions: failed to call setCurrentFunctions. functions:" + j + ", opId:" + incrementAndGet, e);
+            Log.e(TAG, "setCurrentFunctions: failed to call setCurrentFunctions. functions:" + j + ", opId:" + iIncrementAndGet, e);
             throw e.rethrowFromSystemServer();
         }
     }
@@ -736,11 +735,11 @@ public class UsbManager {
             Log.d(TAG, "setCurrentFunctions", new Exception("who's calling?"));
         }
         Log.d(TAG, "setCurrentFunction(String): functions=" + str);
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
         try {
-            this.mService.setCurrentFunction(str, z, incrementAndGet);
+            this.mService.setCurrentFunction(str, z, iIncrementAndGet);
         } catch (RemoteException e) {
-            Log.e(TAG, "setCurrentFunction: failed to call setCurrentFunction. functions:" + str + ", opId:" + incrementAndGet, e);
+            Log.e(TAG, "setCurrentFunction: failed to call setCurrentFunction. functions:" + str + ", opId:" + iIncrementAndGet, e);
             throw e.rethrowFromSystemServer();
         }
     }
@@ -1126,17 +1125,17 @@ public class UsbManager {
         if (str == null || str.equals("none")) {
             return 0L;
         }
-        long j = 0;
+        long jLongValue = 0;
         for (String str2 : str.split(",")) {
             Map<String, Long> map = FUNCTION_NAME_TO_CODE;
             if (map.containsKey(str2)) {
-                j |= map.get(str2).longValue();
+                jLongValue |= map.get(str2).longValue();
             } else if (str2.length() > 0) {
                 Log.d(TAG, "usbFunctionsFromString: Invalid usb functions=" + str);
                 return 0L;
             }
         }
-        return j;
+        return jLongValue;
     }
 
     public boolean isUsbBlocked() {

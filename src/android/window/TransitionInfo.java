@@ -60,7 +60,7 @@ public final class TransitionInfo implements Parcelable {
     public static final int FLAG_FILLS_TASK = 1024;
     public static final int FLAG_FIRST_CUSTOM = 16777216;
     public static final int FLAG_IN_TASK_WITH_EMBEDDED_ACTIVITY = 512;
-    public static final int FLAG_IS_ACTIVITY = 33554432;
+    public static final int FLAG_IS_ACTIVITY = 64;
     public static final int FLAG_IS_BEHIND_STARTING_WINDOW = 16384;
     public static final int FLAG_IS_DISPLAY = 32;
     public static final int FLAG_IS_FIXED_PORTRAIT = Integer.MIN_VALUE;
@@ -497,7 +497,7 @@ public final class TransitionInfo implements Parcelable {
             sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
             sb.append("FLAG_IS_TASK_DISPLAY_AREA");
         }
-        if (CoreRune.MW_SHELL_TRANSITION && (33554432 & i) != 0) {
+        if (CoreRune.MW_SHELL_TRANSITION && (i & 64) != 0) {
             sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
             sb.append("IS_ACTIVITY");
         }
@@ -537,7 +537,7 @@ public final class TransitionInfo implements Parcelable {
         if (change.getLastParent() != null && !change.getLastParent().equals(change.getParent())) {
             return true;
         }
-        if (change.getMode() == 6 || change.hasFlags(512)) {
+        if ((change.getMode() == 6 && (change.mConfiguration.windowConfiguration.getWindowingMode() != 5 || !change.mConfiguration.windowConfiguration.isAlwaysOnTop())) || change.hasFlags(512)) {
             return false;
         }
         Change change2 = transitionInfo.getChange(change.getParent());
@@ -557,7 +557,7 @@ public final class TransitionInfo implements Parcelable {
                 change.mSnapshot.release();
                 change.mSnapshot = null;
             }
-            if (CoreRune.MW_SHELL_CHANGE_TRANSITION && change.mChangeLeash != null) {
+            if (CoreRune.MW_SHELL_CHANGE_TRANSITION && change.mChangeLeash != null && change.mReleaseChangeLeashAllowed) {
                 change.mChangeLeash.release();
                 change.mChangeLeash = null;
             }
@@ -657,6 +657,7 @@ public final class TransitionInfo implements Parcelable {
         private final PointF mMinimizePoint;
         private int mMode;
         private WindowContainerToken mParent;
+        private boolean mReleaseChangeLeashAllowed;
         private boolean mResumedAffordance;
         private int mRotationAnimation;
         private boolean mSkipDefaultTransition;
@@ -724,6 +725,7 @@ public final class TransitionInfo implements Parcelable {
             this.mChangeTransitMode = 0;
             this.mChangeStartOutsets = new Rect();
             this.mChangeEndOutsets = new Rect();
+            this.mReleaseChangeLeashAllowed = true;
             this.mInsetsForRecentsTransition = new Rect();
             this.mForceHidingTransit = 0;
             this.mMinimizeAnimState = 0;
@@ -769,6 +771,7 @@ public final class TransitionInfo implements Parcelable {
             this.mChangeStartOutsets = rect3;
             Rect rect4 = new Rect();
             this.mChangeEndOutsets = rect4;
+            this.mReleaseChangeLeashAllowed = true;
             Rect rect5 = new Rect();
             this.mInsetsForRecentsTransition = rect5;
             this.mForceHidingTransit = 0;
@@ -1351,6 +1354,10 @@ public final class TransitionInfo implements Parcelable {
 
         public void setChangeLeash(SurfaceControl surfaceControl) {
             this.mChangeLeash = surfaceControl;
+        }
+
+        public void setReleaseChangeLeashAllowed(boolean z) {
+            this.mReleaseChangeLeashAllowed = z;
         }
 
         public int getChangeTransitMode() {

@@ -48,9 +48,9 @@ public interface ICredentialStoreFactory extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICredentialStoreFactory.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICredentialStoreFactory)) {
-                return (ICredentialStoreFactory) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICredentialStoreFactory.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICredentialStoreFactory)) {
+                return (ICredentialStoreFactory) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,9 +77,9 @@ public interface ICredentialStoreFactory extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ICredentialStore credentialStore = getCredentialStore(readInt);
+                ICredentialStore credentialStore = getCredentialStore(i3);
                 parcel2.writeNoException();
                 parcel2.writeStrongInterface(credentialStore);
                 return true;
@@ -105,17 +105,17 @@ public interface ICredentialStoreFactory extends IInterface {
 
             @Override // android.security.identity.ICredentialStoreFactory
             public ICredentialStore getCredentialStore(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialStoreFactory.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICredentialStore.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialStoreFactory.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICredentialStore.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

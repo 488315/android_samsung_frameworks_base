@@ -5,12 +5,10 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KeyInfo {
     public static Map<String, KEY> KEYMAP = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum KEY {
         NONE("", 0, "", ""),
         EASY_MUTE("easy_mute", 29, "com.samsung.android.knox.permission.KNOX_DEVICE_CONFIGURATION", ""),

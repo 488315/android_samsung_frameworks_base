@@ -2,14 +2,12 @@ package androidx.constraintlayout.core.motion.utils;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ArcCurveFit extends CurveFit {
     public final Arc[] mArcs;
     public final boolean mExtrapolate = true;
     public final double[] mTime;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Arc {
         public static final double[] sOurPercent = new double[91];
         public final double mArcDistance;
@@ -61,9 +59,9 @@ public class ArcCurveFit extends CurveFit {
                 this.mX2 = d5;
                 this.mY1 = d4;
                 this.mY2 = d6;
-                double hypot = Math.hypot(d9, d8);
-                this.mArcDistance = hypot;
-                this.mArcVelocity = hypot * d11;
+                double dHypot = Math.hypot(d9, d8);
+                this.mArcDistance = dHypot;
+                this.mArcVelocity = dHypot * d11;
                 this.mEllipseCenterX = d8 / d10;
                 this.mEllipseCenterY = d9 / d10;
                 return;
@@ -75,9 +73,9 @@ public class ArcCurveFit extends CurveFit {
             this.mEllipseCenterX = z2 ? d5 : d7;
             this.mEllipseCenterY = z2 ? d4 : d6;
             double d12 = d4 - d6;
+            double dHypot2 = 0.0d;
             double d13 = 0.0d;
             double d14 = 0.0d;
-            double d15 = 0.0d;
             int i2 = 0;
             while (true) {
                 dArr = sOurPercent;
@@ -86,20 +84,20 @@ public class ArcCurveFit extends CurveFit {
                 }
                 boolean z3 = z;
                 double radians = Math.toRadians((i2 * 90.0d) / 90);
-                double sin = Math.sin(radians) * d8;
-                double cos = Math.cos(radians) * d12;
+                double dSin = Math.sin(radians) * d8;
+                double dCos = Math.cos(radians) * d12;
                 if (i2 > 0) {
-                    d13 += Math.hypot(sin - d14, cos - d15);
-                    dArr[i2] = d13;
+                    dHypot2 += Math.hypot(dSin - d13, dCos - d14);
+                    dArr[i2] = dHypot2;
                 }
                 i2++;
-                d15 = cos;
-                d14 = sin;
+                d14 = dCos;
+                d13 = dSin;
                 z = z3;
             }
-            this.mArcDistance = d13;
+            this.mArcDistance = dHypot2;
             for (int i3 = 0; i3 < 91; i3++) {
-                dArr[i3] = dArr[i3] / d13;
+                dArr[i3] = dArr[i3] / dHypot2;
             }
             int i4 = 0;
             while (true) {
@@ -109,16 +107,16 @@ public class ArcCurveFit extends CurveFit {
                     return;
                 }
                 double length = i4 / (dArr2.length - 1);
-                int binarySearch = Arrays.binarySearch(dArr, length);
-                if (binarySearch >= 0) {
-                    dArr2[i4] = binarySearch / 90;
-                } else if (binarySearch == -1) {
+                int iBinarySearch = Arrays.binarySearch(dArr, length);
+                if (iBinarySearch >= 0) {
+                    dArr2[i4] = iBinarySearch / 90;
+                } else if (iBinarySearch == -1) {
                     dArr2[i4] = 0.0d;
                 } else {
-                    int i5 = -binarySearch;
+                    int i5 = -iBinarySearch;
                     int i6 = i5 - 2;
-                    double d16 = dArr[i6];
-                    dArr2[i4] = (((length - d16) / (dArr[i5 - 1] - d16)) + i6) / 90;
+                    double d15 = dArr[i6];
+                    dArr2[i4] = (((length - d15) / (dArr[i5 - 1] - d15)) + i6) / 90;
                 }
                 i4++;
             }
@@ -126,15 +124,15 @@ public class ArcCurveFit extends CurveFit {
 
         public final double getDX() {
             double d = this.mEllipseA * this.mTmpCosAngle;
-            double hypot = this.mArcVelocity / Math.hypot(d, (-this.mEllipseB) * this.mTmpSinAngle);
-            return this.mVertical ? (-d) * hypot : d * hypot;
+            double dHypot = this.mArcVelocity / Math.hypot(d, (-this.mEllipseB) * this.mTmpSinAngle);
+            return this.mVertical ? (-d) * dHypot : d * dHypot;
         }
 
         public final double getDY() {
             double d = this.mEllipseA * this.mTmpCosAngle;
             double d2 = (-this.mEllipseB) * this.mTmpSinAngle;
-            double hypot = this.mArcVelocity / Math.hypot(d, d2);
-            return this.mVertical ? (-d2) * hypot : d2 * hypot;
+            double dHypot = this.mArcVelocity / Math.hypot(d, d2);
+            return this.mVertical ? (-d2) * dHypot : d2 * dHypot;
         }
 
         public final double getLinearX(double d) {
@@ -178,82 +176,58 @@ public class ArcCurveFit extends CurveFit {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x002f, code lost:
-    
-        if (r5 == 1) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0036  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ArcCurveFit(int[] r23, double[] r24, double[][] r25) {
-        /*
-            r22 = this;
-            r0 = r22
-            r1 = r24
-            r0.<init>()
-            r2 = 1
-            r0.mExtrapolate = r2
-            r0.mTime = r1
-            int r3 = r1.length
-            int r3 = r3 - r2
-            androidx.constraintlayout.core.motion.utils.ArcCurveFit$Arc[] r3 = new androidx.constraintlayout.core.motion.utils.ArcCurveFit.Arc[r3]
-            r0.mArcs = r3
-            r3 = 0
-            r5 = r2
-            r6 = r5
-            r4 = r3
-        L16:
-            androidx.constraintlayout.core.motion.utils.ArcCurveFit$Arc[] r7 = r0.mArcs
-            int r8 = r7.length
-            if (r4 >= r8) goto L58
-            r8 = r23[r4]
-            r9 = 3
-            if (r8 == 0) goto L38
-            if (r8 == r2) goto L36
-            r10 = 2
-            if (r8 == r10) goto L34
-            if (r8 == r9) goto L2f
-            r9 = 4
-            if (r8 == r9) goto L38
-            r9 = 5
-            if (r8 == r9) goto L38
-            r9 = r6
-            goto L38
-        L2f:
-            if (r5 != r2) goto L36
-            goto L34
-        L32:
-            r9 = r5
-            goto L38
-        L34:
-            r5 = r10
-            goto L32
-        L36:
-            r5 = r2
-            goto L32
-        L38:
-            androidx.constraintlayout.core.motion.utils.ArcCurveFit$Arc r8 = new androidx.constraintlayout.core.motion.utils.ArcCurveFit$Arc
-            r10 = r1[r4]
-            int r6 = r4 + 1
-            r12 = r1[r6]
-            r14 = r25[r4]
-            r16 = r14
-            r14 = r16[r3]
-            r16 = r16[r2]
-            r18 = r25[r6]
-            r20 = r18
-            r18 = r20[r3]
-            r20 = r20[r2]
-            r8.<init>(r9, r10, r12, r14, r16, r18, r20)
-            r7[r4] = r8
-            r4 = r6
-            r6 = r9
-            goto L16
-        L58:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.core.motion.utils.ArcCurveFit.<init>(int[], double[], double[][]):void");
+    public ArcCurveFit(int[] iArr, double[] dArr, double[][] dArr2) {
+        this.mTime = dArr;
+        this.mArcs = new Arc[dArr.length - 1];
+        int i = 1;
+        int i2 = 1;
+        int i3 = 0;
+        while (true) {
+            Arc[] arcArr = this.mArcs;
+            if (i3 >= arcArr.length) {
+                return;
+            }
+            int i4 = iArr[i3];
+            int i5 = 3;
+            if (i4 != 0) {
+                if (i4 == 1) {
+                    i = 1;
+                    i5 = i;
+                } else {
+                    if (i4 != 2) {
+                        if (i4 != 3) {
+                            i5 = 4;
+                            if (i4 != 4) {
+                                i5 = 5;
+                                if (i4 != 5) {
+                                    i5 = i2;
+                                }
+                            }
+                        } else {
+                            if (i == 1) {
+                            }
+                            i5 = i;
+                        }
+                    }
+                    i = 2;
+                    i5 = i;
+                }
+            }
+            double d = dArr[i3];
+            int i6 = i3 + 1;
+            double d2 = dArr[i6];
+            double[] dArr3 = dArr2[i3];
+            double d3 = dArr3[0];
+            double d4 = dArr3[1];
+            double[] dArr4 = dArr2[i6];
+            arcArr[i3] = new Arc(i5, d, d2, d3, d4, dArr4[0], dArr4[1]);
+            i3 = i6;
+            i2 = i5;
+        }
     }
 
     @Override // androidx.constraintlayout.core.motion.utils.CurveFit

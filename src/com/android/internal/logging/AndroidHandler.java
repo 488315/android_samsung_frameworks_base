@@ -52,9 +52,9 @@ public class AndroidHandler extends Handler {
         if (length <= 23) {
             return str;
         }
-        int lastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR) + 1;
-        if (length - lastIndexOf <= 23) {
-            return str.substring(lastIndexOf);
+        int iLastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR) + 1;
+        if (length - iLastIndexOf <= 23) {
+            return str.substring(iLastIndexOf);
         }
         return str.substring(str.length() - 23);
     }
@@ -62,10 +62,10 @@ public class AndroidHandler extends Handler {
     @Override // java.util.logging.Handler
     public void publish(LogRecord logRecord) {
         int androidLevel = getAndroidLevel(logRecord.getLevel());
-        String loggerNameToTag = loggerNameToTag(logRecord.getLoggerName());
-        if (Log.isLoggable(loggerNameToTag, androidLevel)) {
+        String strLoggerNameToTag = loggerNameToTag(logRecord.getLoggerName());
+        if (Log.isLoggable(strLoggerNameToTag, androidLevel)) {
             try {
-                Log.println(androidLevel, loggerNameToTag, getFormatter().format(logRecord));
+                Log.println(androidLevel, strLoggerNameToTag, getFormatter().format(logRecord));
             } catch (RuntimeException e) {
                 Log.e("AndroidHandler", "Error logging message.", e);
             }
@@ -84,13 +84,13 @@ public class AndroidHandler extends Handler {
     }
 
     static int getAndroidLevel(Level level) {
-        int intValue = level.intValue();
-        if (intValue >= 1000) {
+        int iIntValue = level.intValue();
+        if (iIntValue >= 1000) {
             return 6;
         }
-        if (intValue >= 900) {
+        if (iIntValue >= 900) {
             return 5;
         }
-        return intValue >= 800 ? 4 : 3;
+        return iIntValue >= 800 ? 4 : 3;
     }
 }

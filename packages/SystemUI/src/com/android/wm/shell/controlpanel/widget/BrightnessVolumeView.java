@@ -47,7 +47,6 @@ import com.sec.ims.presence.ServiceTuple;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessVolumeView extends ConstraintLayout {
     public static final boolean mIsFold = ControlPanelUtils.isTypeFold();
@@ -87,7 +86,6 @@ public class BrightnessVolumeView extends ConstraintLayout {
     public final ImageView mWaveL;
     public final ImageView mWaveS;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.controlpanel.widget.BrightnessVolumeView$5, reason: invalid class name */
     public class AnonymousClass5 implements SeslSeekBar.OnSeekBarChangeListener {
         public AnonymousClass5() {
@@ -132,7 +130,6 @@ public class BrightnessVolumeView extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IconMotion {
         public final Handler mHandler = new Handler(Looper.getMainLooper());
         public Runnable mIconRunnable;
@@ -143,10 +140,10 @@ public class BrightnessVolumeView extends ConstraintLayout {
         }
 
         public static Animator getVibrationAnimator(View view, float f, float f2, int i) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
-            ofFloat.setDuration(i);
-            ofFloat.setInterpolator(new LinearInterpolator());
-            return ofFloat;
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
+            objectAnimatorOfFloat.setDuration(i);
+            objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+            return objectAnimatorOfFloat;
         }
 
         public final void startMaxAnimation(int i, View view, View view2, View view3, View view4, View view5, View view6, boolean z) {
@@ -163,20 +160,20 @@ public class BrightnessVolumeView extends ConstraintLayout {
                 dimensionPixelSize2 = this.mResources.getDimensionPixelSize(R.dimen.flex_panel_volume_sound_icon_wave_s_max_x);
                 dimensionPixelSize3 = this.mResources.getDimensionPixelSize(R.dimen.flex_panel_volume_sound_icon_wave_l_max_x);
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.5f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.5f);
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playTogether(ofFloat);
-            animatorSet.playTogether(ofFloat2);
+            animatorSet.playTogether(objectAnimatorOfFloat);
+            animatorSet.playTogether(objectAnimatorOfFloat2);
             animatorSet.setDuration(z ? 0L : 150L);
             animatorSet.setInterpolator(new LinearInterpolator());
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
-            ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimensionPixelSize2);
-            ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimensionPixelSize3);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
+            ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimensionPixelSize2);
+            ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimensionPixelSize3);
             AnimatorSet animatorSet2 = new AnimatorSet();
-            animatorSet2.playTogether(ofFloat3);
-            animatorSet2.playTogether(ofFloat4);
-            animatorSet2.playTogether(ofFloat5);
+            animatorSet2.playTogether(objectAnimatorOfFloat3);
+            animatorSet2.playTogether(objectAnimatorOfFloat4);
+            animatorSet2.playTogether(objectAnimatorOfFloat5);
             animatorSet2.setDuration(z ? 0L : 200L);
             animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
             AnimatorSet animatorSet3 = new AnimatorSet();
@@ -201,11 +198,11 @@ public class BrightnessVolumeView extends ConstraintLayout {
                 dimensionPixelSize2 = this.mResources.getDimensionPixelSize(R.dimen.flex_panel_volume_sound_icon_wave_s_mid_x);
                 dimensionPixelSize3 = this.mResources.getDimensionPixelSize(R.dimen.flex_panel_volume_sound_icon_wave_l_mid_x);
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playTogether(ofFloat);
-            animatorSet.playTogether(ofFloat2);
+            animatorSet.playTogether(objectAnimatorOfFloat);
+            animatorSet.playTogether(objectAnimatorOfFloat2);
             if (z) {
                 i3 = 1;
                 j = 0;
@@ -218,24 +215,24 @@ public class BrightnessVolumeView extends ConstraintLayout {
             float[] fArr = new float[2];
             fArr[0] = view.getX();
             fArr[i3] = dimensionPixelSize;
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", fArr);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", fArr);
             float[] fArr2 = new float[2];
             fArr2[0] = view2.getX();
             fArr2[i3] = dimensionPixelSize2;
-            ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", fArr2);
+            ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", fArr2);
             float[] fArr3 = new float[2];
             fArr3[0] = view3.getX();
             fArr3[i3] = dimensionPixelSize3;
-            ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", fArr3);
+            ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", fArr3);
             AnimatorSet animatorSet2 = new AnimatorSet();
             Animator[] animatorArr = new Animator[i3];
-            animatorArr[0] = ofFloat3;
+            animatorArr[0] = objectAnimatorOfFloat3;
             animatorSet2.playTogether(animatorArr);
             Animator[] animatorArr2 = new Animator[i3];
-            animatorArr2[0] = ofFloat4;
+            animatorArr2[0] = objectAnimatorOfFloat4;
             animatorSet2.playTogether(animatorArr2);
             Animator[] animatorArr3 = new Animator[i3];
-            animatorArr3[0] = ofFloat5;
+            animatorArr3[0] = objectAnimatorOfFloat5;
             animatorSet2.playTogether(animatorArr3);
             animatorSet2.setDuration(z ? 0L : 200L);
             animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
@@ -271,16 +268,16 @@ public class BrightnessVolumeView extends ConstraintLayout {
             } else {
                 f = 0.0f;
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
             AnimatorSet animatorSet2 = new AnimatorSet();
-            animatorSet2.playTogether(ofFloat);
-            animatorSet2.playTogether(ofFloat2);
+            animatorSet2.playTogether(objectAnimatorOfFloat);
+            animatorSet2.playTogether(objectAnimatorOfFloat2);
             animatorSet2.setDuration(z ? 0L : 100L);
             animatorSet2.setInterpolator(new LinearInterpolator());
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
             AnimatorSet animatorSet3 = new AnimatorSet();
-            animatorSet3.playTogether(ofFloat3);
+            animatorSet3.playTogether(objectAnimatorOfFloat3);
             if (i == 2) {
                 animatorSet3.playTogether(ObjectAnimator.ofFloat(view2, "x", view2.getX(), this.mResources.getDimensionPixelSize(R.dimen.flex_panel_volume_sound_icon_wave_s_min_x)));
             }
@@ -319,20 +316,20 @@ public class BrightnessVolumeView extends ConstraintLayout {
                 view2.setVisibility(4);
                 view3.setVisibility(4);
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playTogether(ofFloat);
-            animatorSet.playTogether(ofFloat2);
+            animatorSet.playTogether(objectAnimatorOfFloat);
+            animatorSet.playTogether(objectAnimatorOfFloat2);
             animatorSet.setDuration(z ? 0L : 100L);
             animatorSet.setInterpolator(new LinearInterpolator());
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
-            ofFloat3.setDuration(z ? 0L : 200L);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, ofFloat3);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
+            objectAnimatorOfFloat3.setDuration(z ? 0L : 200L);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, objectAnimatorOfFloat3);
             this.mHandler.removeCallbacks(this.mIconRunnable);
             AnimatorSet animatorSet2 = new AnimatorSet();
             animatorSet2.playTogether(animatorSet);
-            animatorSet2.playTogether(ofFloat3);
+            animatorSet2.playTogether(objectAnimatorOfFloat3);
             animatorSet2.start();
             if (z) {
                 return;
@@ -466,16 +463,16 @@ public class BrightnessVolumeView extends ConstraintLayout {
                         float f = brightnessVolumeView3.mCurrentVolumeLevel;
                         if (BrightnessVolumeView.mIsFold) {
                             float y = brightnessVolumeView3.mVolumeSeekBarStartTouch - motionEvent.getY();
-                            float abs = Math.abs(y);
+                            float fAbs = Math.abs(y);
                             BrightnessVolumeView brightnessVolumeView4 = BrightnessVolumeView.this;
-                            if (abs > brightnessVolumeView4.mTouchSlop) {
+                            if (fAbs > brightnessVolumeView4.mTouchSlop) {
                                 f += y * brightnessVolumeView4.mVolumeSeekBarScale;
                             }
                         } else {
                             float x = motionEvent.getX() - BrightnessVolumeView.this.mVolumeSeekBarStartTouch;
-                            float abs2 = Math.abs(x);
+                            float fAbs2 = Math.abs(x);
                             BrightnessVolumeView brightnessVolumeView5 = BrightnessVolumeView.this;
-                            if (abs2 > brightnessVolumeView5.mTouchSlop) {
+                            if (fAbs2 > brightnessVolumeView5.mTouchSlop) {
                                 f = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(brightnessVolumeView5.mContext) == 1 ? f - (x * BrightnessVolumeView.this.mVolumeSeekBarScale) : f + (x * BrightnessVolumeView.this.mVolumeSeekBarScale);
                             }
                         }
@@ -809,9 +806,9 @@ public class BrightnessVolumeView extends ConstraintLayout {
                 ColorStateList colorStateList3 = ContextCompat.getColorStateList(R.color.seekbar_background_color_expand, this.mContext);
                 if (z) {
                     int i7 = this.mStreamType;
-                    int semGetEarProtectLimit = ((AudioManager.semGetEarProtectLimit() - 1) * 100) + 9;
+                    int iSemGetEarProtectLimit = ((AudioManager.semGetEarProtectLimit() - 1) * 100) + 9;
                     int streamVolume = this.mAudioManager.getStreamVolume(i7);
-                    if (semGetEarProtectLimit > 0 && semGetEarProtectLimit < streamVolume * 100) {
+                    if (iSemGetEarProtectLimit > 0 && iSemGetEarProtectLimit < streamVolume * 100) {
                         colorStateList = ContextCompat.getColorStateList(R.color.brightness_volume_other_color, this.mContext);
                         colorStateList2 = ContextCompat.getColorStateList(R.color.brightness_volume_other_color, this.mContext);
                         colorStateList3 = ContextCompat.getColorStateList(R.color.brightness_volume_other_color_background, this.mContext);
@@ -826,11 +823,11 @@ public class BrightnessVolumeView extends ConstraintLayout {
                 this.mVolumeSeekBar.setProgressTintList(colorStateList2);
                 this.mVolumeSeekBar.setThumbTintList(colorStateList2);
                 this.mVolumeSeekBar.setProgressBackgroundTintList(colorStateList3);
-                int semGetCurrentDeviceType = this.mAudioManager.semGetCurrentDeviceType();
-                ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(semGetCurrentDeviceType, "setVolumeIcon currentDeviceType : ", "BrightnessVolumeView");
-                if (semGetCurrentDeviceType != 3 && semGetCurrentDeviceType != 22 && semGetCurrentDeviceType != 4) {
-                    if (semGetCurrentDeviceType != 23) {
-                        if (semGetCurrentDeviceType != 8 && semGetCurrentDeviceType != 7) {
+                int iSemGetCurrentDeviceType = this.mAudioManager.semGetCurrentDeviceType();
+                ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iSemGetCurrentDeviceType, "setVolumeIcon currentDeviceType : ", "BrightnessVolumeView");
+                if (iSemGetCurrentDeviceType != 3 && iSemGetCurrentDeviceType != 22 && iSemGetCurrentDeviceType != 4) {
+                    if (iSemGetCurrentDeviceType != 23) {
+                        if (iSemGetCurrentDeviceType != 8 && iSemGetCurrentDeviceType != 7) {
                             this.mMediaVolumeAnimatedIconLayout.setVisibility(0);
                             this.mVolumeIcon.setVisibility(4);
                             if (this.mAudioManager.getStreamVolume(3) == 0) {
@@ -858,7 +855,7 @@ public class BrightnessVolumeView extends ConstraintLayout {
                                 bluetoothDevice = null;
                                 if (i8 < length) {
                                     audioDeviceInfo = devices[i8];
-                                    if (audioDeviceInfo.getType() != semGetCurrentDeviceType || (audioDeviceInfo.getType() != 8 && audioDeviceInfo.getType() != 7)) {
+                                    if (audioDeviceInfo.getType() != iSemGetCurrentDeviceType || (audioDeviceInfo.getType() != 8 && audioDeviceInfo.getType() != 7)) {
                                         i8++;
                                     }
                                 } else {
@@ -878,13 +875,13 @@ public class BrightnessVolumeView extends ConstraintLayout {
                                 if (bluetoothDevice != null) {
                                     this.mVolumeIcon.setVisibility(0);
                                     this.mMediaVolumeAnimatedIconLayout.setVisibility(4);
-                                    byte[] semGetManufacturerDeviceIconIndex = bluetoothDevice.semGetManufacturerDeviceIconIndex();
-                                    short shortValue = ((semGetManufacturerDeviceIconIndex == null || semGetManufacturerDeviceIconIndex.length < 2) ? (short) 0 : Short.valueOf((short) ((semGetManufacturerDeviceIconIndex[1] & 255) | (semGetManufacturerDeviceIconIndex[0] << 8)))).shortValue();
-                                    if (shortValue == 5381) {
+                                    byte[] bArrSemGetManufacturerDeviceIconIndex = bluetoothDevice.semGetManufacturerDeviceIconIndex();
+                                    short sShortValue = ((bArrSemGetManufacturerDeviceIconIndex == null || bArrSemGetManufacturerDeviceIconIndex.length < 2) ? (short) 0 : Short.valueOf((short) ((bArrSemGetManufacturerDeviceIconIndex[1] & 255) | (bArrSemGetManufacturerDeviceIconIndex[0] << 8)))).shortValue();
+                                    if (sShortValue == 5381) {
                                         this.mVolumeIcon.setImageDrawable(this.mContext.getDrawable(R.drawable.tw_ic_audio_buds3_solid));
-                                    } else if (shortValue == 5379 || shortValue == 5380) {
+                                    } else if (sShortValue == 5379 || sShortValue == 5380) {
                                         this.mVolumeIcon.setImageDrawable(this.mContext.getDrawable(R.drawable.tw_ic_audio_buds_solid));
-                                    } else if (shortValue == 10242) {
+                                    } else if (sShortValue == 10242) {
                                         this.mVolumeIcon.setImageDrawable(this.mContext.getDrawable(R.drawable.ic_galaxy_home_mini));
                                     } else {
                                         this.mVolumeIcon.setImageDrawable(this.mContext.getDrawable(R.drawable.ic_audio_bluetooth));

@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.RemoteAction;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +19,10 @@ import android.view.ViewRootImpl;
 import android.view.WindowManager;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
+import com.android.wm.shell.common.DisplayController;
+import com.android.wm.shell.common.DisplayInsetsController;
 import com.android.wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.common.ImeListener;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SystemWindows;
 import com.android.wm.shell.common.pip.PipBoundsState;
@@ -32,12 +36,12 @@ import com.android.wm.shell.shared.animation.Interpolators;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhonePipMenuController implements PipMenuController, PipTransitionState.PipTransitionStateChangedListener {
     public List mAppActions;
     public RemoteAction mCloseAction;
     public final Context mContext;
+    public boolean mIsImeVisible;
     public SurfaceControl mLeash;
     public final ShellExecutor mMainExecutor;
     public final Handler mMainHandler;
@@ -53,7 +57,6 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
     public final ArrayList mListeners = new ArrayList();
     public final AnonymousClass1 mMediaActionListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip2.phone.PhonePipMenuController$1, reason: invalid class name */
     public class AnonymousClass1 implements PipMediaController.ActionListener {
         public AnonymousClass1() {
@@ -68,14 +71,13 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip2.phone.PhonePipMenuController$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    public PhonePipMenuController(Context context, PipBoundsState pipBoundsState, PipMediaController pipMediaController, SystemWindows systemWindows, PipUiEventLogger pipUiEventLogger, PipTaskListener pipTaskListener, PipTransitionState pipTransitionState, PipDisplayLayoutState pipDisplayLayoutState, ShellExecutor shellExecutor, Handler handler) {
+    public PhonePipMenuController(Context context, PipBoundsState pipBoundsState, PipMediaController pipMediaController, SystemWindows systemWindows, PipUiEventLogger pipUiEventLogger, PipTaskListener pipTaskListener, PipTransitionState pipTransitionState, DisplayController displayController, DisplayInsetsController displayInsetsController, PipDisplayLayoutState pipDisplayLayoutState, ShellExecutor shellExecutor, Handler handler) {
         this.mContext = context;
         this.mPipBoundsState = pipBoundsState;
         this.mMediaController = pipMediaController;
@@ -89,7 +91,7 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
         PipBoundsState.OnPipComponentChangedListener onPipComponentChangedListener = new PipBoundsState.OnPipComponentChangedListener() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController$$ExternalSyntheticLambda0
             @Override // com.android.wm.shell.common.pip.PipBoundsState.OnPipComponentChangedListener
             public final void onPipComponentChanged() {
-                PhonePipMenuController phonePipMenuController = PhonePipMenuController.this;
+                PhonePipMenuController phonePipMenuController = this.f$0;
                 List list = phonePipMenuController.mAppActions;
                 if (list != null) {
                     list.clear();
@@ -101,10 +103,16 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
             ((ArrayList) pipBoundsState.mOnPipComponentChangedListeners).add(onPipComponentChangedListener);
         }
         AnonymousClass2 anonymousClass2 = new AnonymousClass2();
-        if (((ArrayList) pipTaskListener.mPipParamsChangedListeners).contains(anonymousClass2)) {
-            return;
+        if (!((ArrayList) pipTaskListener.mPipParamsChangedListeners).contains(anonymousClass2)) {
+            ((ArrayList) pipTaskListener.mPipParamsChangedListeners).add(anonymousClass2);
         }
-        ((ArrayList) pipTaskListener.mPipParamsChangedListeners).add(anonymousClass2);
+        int i = pipDisplayLayoutState.mDisplayId;
+        displayInsetsController.addInsetsChangedListener(i, new ImeListener(displayController, i) { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController.3
+            @Override // com.android.wm.shell.common.ImeListener
+            public final void onImeVisibilityChanged(boolean z, int i2) {
+                PhonePipMenuController.this.mIsImeVisible = z;
+            }
+        });
     }
 
     @Override // com.android.wm.shell.common.pip.PipMenuController
@@ -118,10 +126,10 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
         }
         PipMenuView pipMenuView2 = new PipMenuView(this.mContext, this, this.mMainExecutor, this.mMainHandler, this.mPipUiEventLogger);
         this.mPipMenuView = pipMenuView2;
-        pipMenuView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController.3
+        pipMenuView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController.4
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                view.getViewRootImpl().addSurfaceChangedCallback(new ViewRootImpl.SurfaceChangedCallback() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController.3.1
+                view.getViewRootImpl().addSurfaceChangedCallback(new ViewRootImpl.SurfaceChangedCallback() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController.4.1
                     public final void surfaceCreated(SurfaceControl.Transaction transaction) {
                         PhonePipMenuController phonePipMenuController = PhonePipMenuController.this;
                         SurfaceControl viewSurface = phonePipMenuController.mSystemWindows.getViewSurface(phonePipMenuController.mPipMenuView);
@@ -174,7 +182,7 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
         this.mLeash = null;
     }
 
-    public final Size getEstimatedMinMenuSize() {
+    public final Size getEstimatedMinMenuSize() throws Resources.NotFoundException {
         PipMenuView pipMenuView = this.mPipMenuView;
         if (pipMenuView == null) {
             return null;
@@ -257,14 +265,14 @@ public class PhonePipMenuController implements PipMenuController, PipTransitionS
             pipMenuView.mMenuContainerAnimator = new AnimatorSet();
             View view = pipMenuView.mMenuContainer;
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), 1.0f);
-            ofFloat.addUpdateListener(pipMenuView.mMenuBgUpdateListener);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), 1.0f);
+            objectAnimatorOfFloat.addUpdateListener(pipMenuView.mMenuBgUpdateListener);
             View view2 = pipMenuView.mSettingsButton;
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view2, (Property<View, Float>) property, view2.getAlpha(), 1.0f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view2, (Property<View, Float>) property, view2.getAlpha(), 1.0f);
             View view3 = pipMenuView.mDismissButton;
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view3, (Property<View, Float>) property, view3.getAlpha(), 1.0f);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view3, (Property<View, Float>) property, view3.getAlpha(), 1.0f);
             if (i == 1) {
-                pipMenuView.mMenuContainerAnimator.playTogether(ofFloat, ofFloat2, ofFloat3);
+                pipMenuView.mMenuContainerAnimator.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3);
             }
             pipMenuView.mMenuContainerAnimator.setInterpolator(Interpolators.ALPHA_IN);
             pipMenuView.mMenuContainerAnimator.setDuration(125L);

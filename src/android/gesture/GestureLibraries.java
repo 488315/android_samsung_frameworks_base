@@ -58,7 +58,7 @@ public final class GestureLibraries {
         }
 
         @Override // android.gesture.GestureLibrary
-        public boolean save() {
+        public boolean save() throws Throwable {
             boolean z = true;
             if (!this.mStore.hasChanged()) {
                 return true;
@@ -88,7 +88,7 @@ public final class GestureLibraries {
         }
 
         @Override // android.gesture.GestureLibrary
-        public boolean load() {
+        public boolean load() throws Throwable {
             File file = this.mPath;
             boolean z = true;
             if (file != null) {
@@ -98,9 +98,9 @@ public final class GestureLibraries {
                     } catch (IOException e) {
                         Log.d(GestureConstants.LOG_TAG, "Could not load the gesture library from " + this.mPath, e);
                     }
-                    return z;
+                } else {
+                    z = false;
                 }
-                z = false;
                 return z;
             }
             try {
@@ -133,7 +133,7 @@ public final class GestureLibraries {
         }
 
         @Override // android.gesture.GestureLibrary
-        public boolean load() {
+        public boolean load() throws Throwable {
             Context context = this.mContext.get();
             if (context == null) {
                 return false;

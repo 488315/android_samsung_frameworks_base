@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.popup.util.PopupUIUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SimTrayProtectionData {
     private Context mContext;
@@ -28,7 +27,7 @@ public class SimTrayProtectionData {
     }
 
     public int getBodyMessageInsertingSimCard() {
-        return this.mContext.getResources().getBoolean(R.bool.config_enableCustomeSimTrayPopupText) ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_model_Q5_type : (BasicRune.POPUPUI_MODEL_TYPE_WINNER || PopupUIUtil.SIM_CARD_TRAY_STYLE_FLIP_CHC_MODEL) ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_model_winner_type : PopupUIUtil.SIM_CARD_TRAY_STYLE_FOLD_TYPE ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_Q6_type : PopupUIUtil.SIM_CARD_TRAY_STYLE_FLIP_TYPE ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_folder_type : this.mContext.getResources().getBoolean(R.bool.config_enableSimTrayPopupText) ? BasicRune.POPUPUI_FOLDERBLE_TYPE_FOLD ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_layer_folder_type : R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_layer_type : BasicRune.POPUPUI_FOLDERBLE_TYPE_FOLD ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_folder_type : R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_type;
+        return this.mContext.getResources().getBoolean(R.bool.config_enableCustomeSimTrayPopupText) ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_model_Q5_type : (BasicRune.POPUPUI_MODEL_TYPE_WINNER || PopupUIUtil.SIM_CARD_TRAY_STYLE_FLIP_CHC_MODEL) ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_model_winner_type : (PopupUIUtil.SIM_CARD_TRAY_STYLE_FOLD_TYPE || PopupUIUtil.SIM_CARD_TRAY_STYLE_Q7M_MODEL) ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_Q6_type : PopupUIUtil.SIM_CARD_TRAY_STYLE_FLIP_TYPE ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_folder_type : this.mContext.getResources().getBoolean(R.bool.config_enableSimTrayPopupText) ? BasicRune.POPUPUI_FOLDERBLE_TYPE_FOLD ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_layer_folder_type : R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_layer_type : BasicRune.POPUPUI_FOLDERBLE_TYPE_FOLD ? R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_folder_type : R.string.sim_card_tray_protection_dialog_body_inserting_sim_card_normal_type;
     }
 
     public int getBodyMessageNoSimCard() {

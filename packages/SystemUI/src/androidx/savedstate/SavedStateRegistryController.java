@@ -10,7 +10,6 @@ import androidx.savedstate.SavedStateRegistry;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SavedStateRegistryController {
     public static final Companion Companion = new Companion(null);
@@ -18,7 +17,6 @@ public final class SavedStateRegistryController {
     public final SavedStateRegistryOwner owner;
     public final SavedStateRegistry savedStateRegistry;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,7 +50,7 @@ public final class SavedStateRegistryController {
             public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
                 int i = SavedStateRegistry.$r8$clinit;
                 Lifecycle.Event event2 = Lifecycle.Event.ON_START;
-                SavedStateRegistry savedStateRegistry2 = SavedStateRegistry.this;
+                SavedStateRegistry savedStateRegistry2 = savedStateRegistry;
                 if (event == event2) {
                     savedStateRegistry2.isAllowingSavingState = true;
                 } else if (event == Lifecycle.Event.ON_STOP) {

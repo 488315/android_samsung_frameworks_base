@@ -25,7 +25,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserFileManagerImpl implements UserFileManager, CoreStartable {
     public static final Companion Companion = new Companion(null);
@@ -35,14 +34,13 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if (Intrinsics.areEqual(intent.getAction(), "android.intent.action.USER_REMOVED")) {
-                UserFileManagerImpl.this.clearDeletedUserData$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                this.this$0.clearDeletedUserData$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             }
         }
     };
     public final Context context;
     public final UserManager userManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,7 +71,7 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
             Companion.getClass();
             arrayList.add("__USER_" + i + "_");
         }
-        File[] listFiles = file.listFiles(new FilenameFilter() { // from class: com.android.systemui.settings.UserFileManagerImpl$deleteFiles$filesToDelete$1
+        File[] fileArrListFiles = file.listFiles(new FilenameFilter() { // from class: com.android.systemui.settings.UserFileManagerImpl$deleteFiles$filesToDelete$1
             @Override // java.io.FilenameFilter
             public final boolean accept(File file2, String str) {
                 str.getClass();
@@ -90,11 +88,11 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
                 return arrayList2.isEmpty();
             }
         });
-        if (listFiles == null) {
+        if (fileArrListFiles == null) {
             KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Empty directory: ", file.getPath(), "UserFileManagerImpl");
             return;
         }
-        for (File file2 : listFiles) {
+        for (File file2 : fileArrListFiles) {
             KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Deleting file: ", file2.getPath(), "UserFileManagerImpl");
             try {
                 file2.delete();
@@ -109,9 +107,9 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
             return;
         }
         File parentFile = file.getParentFile();
-        boolean areEqual = Intrinsics.areEqual(file.getName(), "UserFileManager");
+        boolean zAreEqual = Intrinsics.areEqual(file.getName(), "UserFileManager");
         file.delete();
-        if (areEqual) {
+        if (zAreEqual) {
             return;
         }
         deleteParentDirsIfEmpty(parentFile);
@@ -133,9 +131,9 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
         this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.settings.UserFileManagerImpl$clearDeletedUserData$1
             @Override // java.lang.Runnable
             public final void run() {
-                UserFileManagerImpl userFileManagerImpl = UserFileManagerImpl.this;
+                UserFileManagerImpl userFileManagerImpl = this.this$0;
                 UserFileManagerImpl.access$deleteFiles(userFileManagerImpl, userFileManagerImpl.context.getFilesDir());
-                UserFileManagerImpl.access$deleteFiles(UserFileManagerImpl.this, new File(UserFileManagerImpl.this.context.getDataDir(), "shared_prefs"));
+                UserFileManagerImpl.access$deleteFiles(this.this$0, new File(this.this$0.context.getDataDir(), "shared_prefs"));
             }
         });
     }
@@ -144,23 +142,23 @@ public final class UserFileManagerImpl implements UserFileManager, CoreStartable
         File filesDir = this.context.getFilesDir();
         Companion.getClass();
         File file = new File(filesDir, Companion.createFile(i, str).getPath());
-        File buildPath = new UserHandle(i).isSystem() ? null : Environment.buildPath(this.context.getFilesDir(), new String[]{"UserFileManager", String.valueOf(i), "files", str});
-        if (buildPath != null) {
-            migrate(file, buildPath);
+        File fileBuildPath = new UserHandle(i).isSystem() ? null : Environment.buildPath(this.context.getFilesDir(), new String[]{"UserFileManager", String.valueOf(i), "files", str});
+        if (fileBuildPath != null) {
+            migrate(file, fileBuildPath);
         }
         return file;
     }
 
     public final SharedPreferences getSharedPreferences$1(int i, String str) {
         Companion.getClass();
-        File createFile = Companion.createFile(i, str);
-        File buildPath = new UserHandle(i).isSystem() ? null : Environment.buildPath(this.context.getFilesDir(), new String[]{"UserFileManager", String.valueOf(i), "shared_prefs", str.concat(".xml")});
-        if (buildPath != null) {
-            File buildPath2 = Environment.buildPath(this.context.getDataDir(), new String[]{"shared_prefs", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(createFile.getPath(), ".xml")});
-            buildPath2.getClass();
-            migrate(buildPath2, buildPath);
+        File fileCreateFile = Companion.createFile(i, str);
+        File fileBuildPath = new UserHandle(i).isSystem() ? null : Environment.buildPath(this.context.getFilesDir(), new String[]{"UserFileManager", String.valueOf(i), "shared_prefs", str.concat(".xml")});
+        if (fileBuildPath != null) {
+            File fileBuildPath2 = Environment.buildPath(this.context.getDataDir(), new String[]{"shared_prefs", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(fileCreateFile.getPath(), ".xml")});
+            fileBuildPath2.getClass();
+            migrate(fileBuildPath2, fileBuildPath);
         }
-        return this.context.getSharedPreferences(createFile.getPath(), 0);
+        return this.context.getSharedPreferences(fileCreateFile.getPath(), 0);
     }
 
     @Override // com.android.systemui.CoreStartable

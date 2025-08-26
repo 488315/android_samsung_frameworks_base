@@ -15,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GroupedRecentTaskSaveController {
     public final File mGroupedRecentSaveFile;
@@ -24,7 +23,7 @@ public class GroupedRecentTaskSaveController {
     public final GroupedRecentTaskSaveController$$ExternalSyntheticLambda0 mSaveGroupedRecentTasks = new Runnable() { // from class: com.android.wm.shell.recents.GroupedRecentTaskSaveController$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            GroupedRecentTaskSaveController groupedRecentTaskSaveController = GroupedRecentTaskSaveController.this;
+            GroupedRecentTaskSaveController groupedRecentTaskSaveController = this.f$0;
             try {
                 FileWriter fileWriter = new FileWriter(groupedRecentTaskSaveController.mGroupedRecentSaveFile, false);
                 try {

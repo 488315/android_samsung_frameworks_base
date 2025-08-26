@@ -325,14 +325,14 @@ public class ZoomButtonsController implements View.OnTouchListener {
             return true;
         }
         dismissControlsDelayed(ZOOM_CONTROLS_TIMEOUT);
-        View view2 = this.mTouchTargetView;
+        View viewFindViewForTouch = this.mTouchTargetView;
         if (action == 0) {
-            view2 = findViewForTouch((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
-            setTouchTargetView(view2);
+            viewFindViewForTouch = findViewForTouch((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
+            setTouchTargetView(viewFindViewForTouch);
         } else if (action == 1 || action == 3) {
             setTouchTargetView(null);
         }
-        if (view2 == null) {
+        if (viewFindViewForTouch == null) {
             return false;
         }
         int[] iArr = this.mContainerRawLocation;
@@ -340,20 +340,20 @@ public class ZoomButtonsController implements View.OnTouchListener {
         int[] iArr2 = this.mTouchTargetWindowLocation;
         int i2 = i + iArr2[0];
         int i3 = iArr[1] + iArr2[1];
-        MotionEvent obtain = MotionEvent.obtain(motionEvent);
+        MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
         int[] iArr3 = this.mOwnerViewRawLocation;
-        obtain.offsetLocation(iArr3[0] - i2, iArr3[1] - i3);
-        float x = obtain.getX();
-        float y = obtain.getY();
+        motionEventObtain.offsetLocation(iArr3[0] - i2, iArr3[1] - i3);
+        float x = motionEventObtain.getX();
+        float y = motionEventObtain.getY();
         if (x < 0.0f && x > -20.0f) {
-            obtain.offsetLocation(-x, 0.0f);
+            motionEventObtain.offsetLocation(-x, 0.0f);
         }
         if (y < 0.0f && y > -20.0f) {
-            obtain.offsetLocation(0.0f, -y);
+            motionEventObtain.offsetLocation(0.0f, -y);
         }
-        boolean dispatchTouchEvent = view2.dispatchTouchEvent(obtain);
-        obtain.recycle();
-        return dispatchTouchEvent;
+        boolean zDispatchTouchEvent = viewFindViewForTouch.dispatchTouchEvent(motionEventObtain);
+        motionEventObtain.recycle();
+        return zDispatchTouchEvent;
     }
 
     private void setTouchTargetView(View view) {
@@ -377,9 +377,9 @@ public class ZoomButtonsController implements View.OnTouchListener {
                 if (rect.contains(i3, i4)) {
                     return childAt;
                 }
-                int min = (i3 < rect.left || i3 > rect.right) ? Math.min(Math.abs(rect.left - i3), Math.abs(i3 - rect.right)) : 0;
-                int min2 = (i4 < rect.top || i4 > rect.bottom) ? Math.min(Math.abs(rect.top - i4), Math.abs(i4 - rect.bottom)) : 0;
-                int i6 = (min * min) + (min2 * min2);
+                int iMin = (i3 < rect.left || i3 > rect.right) ? Math.min(Math.abs(rect.left - i3), Math.abs(i3 - rect.right)) : 0;
+                int iMin2 = (i4 < rect.top || i4 > rect.bottom) ? Math.min(Math.abs(rect.top - i4), Math.abs(i4 - rect.bottom)) : 0;
+                int i6 = (iMin * iMin) + (iMin2 * iMin2);
                 if (i6 < this.mTouchPaddingScaledSq && i6 < i5) {
                     view = childAt;
                     i5 = i6;

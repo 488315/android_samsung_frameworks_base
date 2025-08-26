@@ -12,10 +12,12 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
+import kotlinx.coroutines.ChildHandle;
+import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.internal.ScopeCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SafeCollector<T> extends ContinuationImpl implements FlowCollector {
     public final CoroutineContext collectContext;
@@ -34,8 +36,8 @@ public final class SafeCollector<T> extends ContinuationImpl implements FlowColl
     @Override // kotlinx.coroutines.flow.FlowCollector
     public final Object emit(Object obj, Continuation continuation) {
         try {
-            Object emit = emit(continuation, obj);
-            return emit == CoroutineSingletons.COROUTINE_SUSPENDED ? emit : Unit.INSTANCE;
+            Object objEmit = emit(continuation, obj);
+            return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
         } catch (Throwable th) {
             this.lastEmissionContext = new DownstreamExceptionContext(th, continuation.getContext());
             throw th;
@@ -64,9 +66,9 @@ public final class SafeCollector<T> extends ContinuationImpl implements FlowColl
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(obj);
-        if (m3422exceptionOrNullimpl != null) {
-            this.lastEmissionContext = new DownstreamExceptionContext(m3422exceptionOrNullimpl, getContext());
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.lastEmissionContext = new DownstreamExceptionContext(thM3442exceptionOrNullimpl, getContext());
         }
         Continuation continuation = this.completion_;
         if (continuation != null) {
@@ -82,81 +84,40 @@ public final class SafeCollector<T> extends ContinuationImpl implements FlowColl
         if (coroutineContext != context) {
             if (!(coroutineContext instanceof DownstreamExceptionContext)) {
                 if (((Number) context.fold(0, new Function2() { // from class: kotlinx.coroutines.flow.internal.SafeCollector_commonKt$$ExternalSyntheticLambda0
-                    /* JADX WARN: Code restructure failed: missing block: B:26:0x0032, code lost:
-                    
-                        if (r2 == null) goto L17;
-                     */
+                    /* JADX WARN: Removed duplicated region for block: B:6:0x001d  */
                     @Override // kotlin.jvm.functions.Function2
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object invoke(java.lang.Object r3, java.lang.Object r4) {
-                        /*
-                            r2 = this;
-                            java.lang.Integer r3 = (java.lang.Integer) r3
-                            int r3 = r3.intValue()
-                            kotlin.coroutines.CoroutineContext$Element r4 = (kotlin.coroutines.CoroutineContext.Element) r4
-                            kotlin.coroutines.CoroutineContext$Key r0 = r4.getKey()
-                            kotlinx.coroutines.flow.internal.SafeCollector r2 = kotlinx.coroutines.flow.internal.SafeCollector.this
-                            kotlin.coroutines.CoroutineContext r2 = r2.collectContext
-                            kotlin.coroutines.CoroutineContext$Element r2 = r2.get(r0)
-                            kotlinx.coroutines.Job$Key r1 = kotlinx.coroutines.Job.Key
-                            if (r0 == r1) goto L20
-                            if (r4 == r2) goto L1d
-                            r3 = -2147483648(0xffffffff80000000, float:-0.0)
-                            goto L34
-                        L1d:
-                            int r3 = r3 + 1
-                            goto L34
-                        L20:
-                            kotlinx.coroutines.Job r2 = (kotlinx.coroutines.Job) r2
-                            kotlinx.coroutines.Job r4 = (kotlinx.coroutines.Job) r4
-                        L24:
-                            r0 = 0
-                            if (r4 != 0) goto L29
-                            r4 = r0
-                            goto L30
-                        L29:
-                            if (r4 != r2) goto L2c
-                            goto L30
-                        L2c:
-                            boolean r1 = r4 instanceof kotlinx.coroutines.internal.ScopeCoroutine
-                            if (r1 != 0) goto L5e
-                        L30:
-                            if (r4 != r2) goto L39
-                            if (r2 != 0) goto L1d
-                        L34:
-                            java.lang.Integer r2 = java.lang.Integer.valueOf(r3)
-                            return r2
-                        L39:
-                            java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                            java.lang.String r1 = "Flow invariant is violated:\n\t\tEmission from another coroutine is detected.\n\t\tChild of "
-                            r0.<init>(r1)
-                            r0.append(r4)
-                            java.lang.String r4 = ", expected child of "
-                            r0.append(r4)
-                            r0.append(r2)
-                            java.lang.String r2 = ".\n\t\tFlowCollector is not thread-safe and concurrent emissions are prohibited.\n\t\tTo mitigate this restriction please use 'channelFlow' builder instead of 'flow'"
-                            r0.append(r2)
-                            java.lang.String r2 = r0.toString()
-                            java.lang.String r2 = r2.toString()
-                            r3.<init>(r2)
-                            throw r3
-                        L5e:
-                            kotlinx.coroutines.internal.ScopeCoroutine r4 = (kotlinx.coroutines.internal.ScopeCoroutine) r4
-                            kotlinx.atomicfu.AtomicRef r4 = r4._parentHandle
-                            java.lang.Object r4 = r4.value
-                            kotlinx.coroutines.ChildHandle r4 = (kotlinx.coroutines.ChildHandle) r4
-                            if (r4 == 0) goto L6d
-                            kotlinx.coroutines.Job r4 = r4.getParent()
-                            goto L24
-                        L6d:
-                            r4 = r0
-                            goto L24
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.flow.internal.SafeCollector_commonKt$$ExternalSyntheticLambda0.invoke(java.lang.Object, java.lang.Object):java.lang.Object");
+                    public final Object invoke(Object obj2, Object obj3) {
+                        int iIntValue = ((Integer) obj2).intValue();
+                        CoroutineContext.Element element = (CoroutineContext.Element) obj3;
+                        CoroutineContext.Key key = element.getKey();
+                        CoroutineContext.Element element2 = this.f$0.collectContext.get(key);
+                        if (key != Job.Key) {
+                            iIntValue = element != element2 ? Integer.MIN_VALUE : iIntValue + 1;
+                        } else {
+                            Job job = (Job) element2;
+                            Job parent = (Job) element;
+                            while (true) {
+                                if (parent != null) {
+                                    if (parent == job || !(parent instanceof ScopeCoroutine)) {
+                                        break;
+                                    }
+                                    ChildHandle childHandle = (ChildHandle) ((ScopeCoroutine) parent)._parentHandle.value;
+                                    parent = childHandle != null ? childHandle.getParent() : null;
+                                } else {
+                                    parent = null;
+                                    break;
+                                }
+                            }
+                            if (parent != job) {
+                                throw new IllegalStateException(("Flow invariant is violated:\n\t\tEmission from another coroutine is detected.\n\t\tChild of " + parent + ", expected child of " + job + ".\n\t\tFlowCollector is not thread-safe and concurrent emissions are prohibited.\n\t\tTo mitigate this restriction please use 'channelFlow' builder instead of 'flow'").toString());
+                            }
+                            if (job != null) {
+                            }
+                        }
+                        return Integer.valueOf(iIntValue);
                     }
                 })).intValue() == this.collectContextSize) {
                     this.lastEmissionContext = context;
@@ -171,10 +132,10 @@ public final class SafeCollector<T> extends ContinuationImpl implements FlowColl
         Function3 function3 = SafeCollectorKt.emitFun;
         FlowCollector flowCollector = this.collector;
         ((SafeCollectorKt$emitFun$1) function3).getClass();
-        Object emit = flowCollector.emit(obj, this);
-        if (!Intrinsics.areEqual(emit, CoroutineSingletons.COROUTINE_SUSPENDED)) {
+        Object objEmit = flowCollector.emit(obj, this);
+        if (!Intrinsics.areEqual(objEmit, CoroutineSingletons.COROUTINE_SUSPENDED)) {
             this.completion_ = null;
         }
-        return emit;
+        return objEmit;
     }
 }

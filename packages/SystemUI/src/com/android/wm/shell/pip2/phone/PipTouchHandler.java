@@ -1,6 +1,7 @@
 package com.android.wm.shell.pip2.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -40,7 +41,6 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTouchHandler implements PipTransitionState.PipTransitionStateChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -79,7 +79,6 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
     public float mSavedSnapFraction = -1.0f;
     public final Rect mTmpBounds = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultPipTouchGesture extends PipTouchGesture {
         public final PointF mDelta;
         public PipPerfHintController.PipHighPerfSession mPipHighPerfSession;
@@ -96,7 +95,6 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipMenuListener {
         public /* synthetic */ PipMenuListener(PipTouchHandler pipTouchHandler, int i) {
             this();
@@ -111,8 +109,8 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
         this.mContext = context;
         this.mShellCommandHandler = shellCommandHandler;
         this.mMainExecutor = shellExecutor;
-        PipPerfHintController orElse = optional.orElse(null);
-        this.mPipPerfHintController = orElse;
+        PipPerfHintController pipPerfHintControllerOrElse = optional.orElse(null);
+        this.mPipPerfHintController = pipPerfHintControllerOrElse;
         this.mAccessibilityManager = (AccessibilityManager) context.getSystemService(AccessibilityManager.class);
         this.mPipBoundsAlgorithm = pipBoundsAlgorithm;
         this.mPipBoundsState = pipBoundsState;
@@ -120,7 +118,7 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
         pipTransitionState.addPipTransitionStateChangedListener(new PipTransitionState.PipTransitionStateChangedListener() { // from class: com.android.wm.shell.pip2.phone.PipTouchHandler$$ExternalSyntheticLambda0
             @Override // com.android.wm.shell.pip2.phone.PipTransitionState.PipTransitionStateChangedListener
             public final void onPipTransitionStateChanged(int i2, int i3, Bundle bundle) {
-                PipTouchHandler.this.onPipTransitionStateChanged(i2, i3, bundle);
+                this.f$0.onPipTransitionStateChanged(i2, i3, bundle);
             }
         });
         this.mSizeSpecSource = sizeSpecSource;
@@ -142,9 +140,9 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 int i2 = PipTouchHandler.$r8$clinit;
-                return PipTouchHandler.this.getMovementBounds((Rect) obj);
+                return this.f$0.getMovementBounds((Rect) obj);
             }
-        }, pipDisplayLayoutState, pipDesktopState, shellExecutor, orElse);
+        }, pipDisplayLayoutState, pipDesktopState, shellExecutor, pipPerfHintControllerOrElse);
         PipTouchHandler$$ExternalSyntheticLambda5 pipTouchHandler$$ExternalSyntheticLambda5 = new PipTouchHandler$$ExternalSyntheticLambda5(this, 0);
         if (!((ArrayList) pipBoundsState.mOnAspectRatioChangedCallbacks).contains(pipTouchHandler$$ExternalSyntheticLambda5)) {
             ((ArrayList) pipBoundsState.mOnAspectRatioChangedCallbacks).add(pipTouchHandler$$ExternalSyntheticLambda5);
@@ -156,7 +154,7 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
         }
     }
 
-    public final void animateToNormalSize(PipMenuView$$ExternalSyntheticLambda0 pipMenuView$$ExternalSyntheticLambda0) {
+    public final void animateToNormalSize(PipMenuView$$ExternalSyntheticLambda0 pipMenuView$$ExternalSyntheticLambda0) throws Resources.NotFoundException {
         PipResizeGestureHandler pipResizeGestureHandler = this.mPipResizeGestureHandler;
         PipBoundsState pipBoundsState = this.mPipBoundsState;
         pipResizeGestureHandler.mUserResizeBounds.set(pipBoundsState.getBounds());
@@ -174,27 +172,27 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
 
     public final void animateToUnexpandedState(Rect rect) {
         PipMotionHelper pipMotionHelper = this.mMotionHelper;
-        float f = this.mSavedSnapFraction;
+        float snapFraction = this.mSavedSnapFraction;
         Rect movementBounds = getMovementBounds(rect);
         Rect movementBounds2 = getMovementBounds(this.mPipBoundsState.getBounds());
         PipBoundsState pipBoundsState = pipMotionHelper.mPipBoundsState;
         PipSnapAlgorithm pipSnapAlgorithm = pipMotionHelper.mSnapAlgorithm;
-        if (f < 0.0f) {
-            f = pipSnapAlgorithm.getSnapFraction(pipBoundsState.mStashedState, new Rect(pipBoundsState.getBounds()), movementBounds2);
+        if (snapFraction < 0.0f) {
+            snapFraction = pipSnapAlgorithm.getSnapFraction(pipBoundsState.mStashedState, new Rect(pipBoundsState.getBounds()), movementBounds2);
         }
-        float f2 = f;
+        float f = snapFraction;
         int i = pipBoundsState.mStashedState;
         int i2 = pipBoundsState.mStashOffset;
         PipDisplayLayoutState pipDisplayLayoutState = pipBoundsState.mPipDisplayLayoutState;
         Rect displayBounds = pipDisplayLayoutState.getDisplayBounds();
         Rect rect2 = pipDisplayLayoutState.getDisplayLayout().mStableInsets;
         pipSnapAlgorithm.getClass();
-        PipSnapAlgorithm.applySnapFraction(rect, movementBounds, f2, i, i2, displayBounds, rect2);
+        PipSnapAlgorithm.applySnapFraction(rect, movementBounds, f, i, i2, displayBounds, rect2);
         pipMotionHelper.resizeAndAnimatePipUnchecked(rect);
         this.mSavedSnapFraction = -1.0f;
     }
 
-    public final Rect getAdjustedNormalBounds() {
+    public final Rect getAdjustedNormalBounds() throws Resources.NotFoundException {
         Size estimatedMinMenuSize = this.mMenuController.getEstimatedMinMenuSize();
         Size defaultSize = ((PhoneSizeSpecSource) this.mSizeSpecSource).getDefaultSize(this.mPipBoundsState.mAspectRatio);
         return this.mPipBoundsAlgorithm.adjustNormalBoundsToFitMenu(new Rect(0, 0, defaultSize.getWidth(), defaultSize.getHeight()), estimatedMinMenuSize);
@@ -244,7 +242,7 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
                 pipInputConsumer.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipInputConsumer$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipInputConsumer pipInputConsumer2 = PipInputConsumer.this;
+                        PipInputConsumer pipInputConsumer2 = pipInputConsumer;
                         InputChannel inputChannel2 = inputChannel;
                         pipInputConsumer2.getClass();
                         pipInputConsumer2.mInputEventReceiver = pipInputConsumer2.new InputEventReceiver(inputChannel2, Looper.myLooper(), Choreographer.getInstance());
@@ -297,11 +295,11 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
 
     public final void sendAccessibilityHoverEvent(int i) {
         if (this.mAccessibilityManager.isEnabled()) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain(i);
-            obtain.setImportantForAccessibility(true);
-            obtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID);
-            obtain.setWindowId(-3);
-            this.mAccessibilityManager.sendAccessibilityEvent(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(i);
+            accessibilityEventObtain.setImportantForAccessibility(true);
+            accessibilityEventObtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID);
+            accessibilityEventObtain.setWindowId(-3);
+            this.mAccessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
         }
     }
 
@@ -336,7 +334,7 @@ public class PipTouchHandler implements PipTransitionState.PipTransitionStateCha
         }
     }
 
-    public final boolean willResizeMenu() {
+    public final boolean willResizeMenu() throws Resources.NotFoundException {
         if (!this.mEnableResize) {
             return false;
         }

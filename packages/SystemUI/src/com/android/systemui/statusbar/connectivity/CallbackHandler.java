@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CallbackHandler extends Handler implements NetworkController.EmergencyListener, SignalCallback {
     public static final SimpleDateFormat SSDF = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
@@ -114,17 +113,17 @@ public class CallbackHandler extends Handler implements NetworkController.Emerge
 
     @Override // com.android.systemui.statusbar.connectivity.SignalCallback
     public final void setConnectivityStatus(final boolean z, final boolean z2, final boolean z3) {
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("setConnectivityStatus: noDefaultNetwork=", ",noValidatedNetwork=", ",noNetworksAvailable=", z, z2);
-        m.append(z3);
-        String sb = m.toString();
-        if (!sb.equals(this.mLastCallback)) {
-            this.mLastCallback = sb;
-            recordLastCallback(SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + sb + ",");
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("setConnectivityStatus: noDefaultNetwork=", ",noValidatedNetwork=", ",noNetworksAvailable=", z, z2);
+        sbM.append(z3);
+        String string = sbM.toString();
+        if (!string.equals(this.mLastCallback)) {
+            this.mLastCallback = string;
+            recordLastCallback(SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + string + ",");
         }
         post(new Runnable() { // from class: com.android.systemui.statusbar.connectivity.CallbackHandler$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                CallbackHandler callbackHandler = CallbackHandler.this;
+                CallbackHandler callbackHandler = this.f$0;
                 boolean z4 = z;
                 boolean z5 = z2;
                 boolean z6 = z3;
@@ -176,10 +175,10 @@ public class CallbackHandler extends Handler implements NetworkController.Emerge
     public final void setSubs(List list) {
         StringBuilder sb = new StringBuilder("setSubs: subs=");
         sb.append(list == null ? "" : list.toString());
-        String sb2 = sb.toString();
-        if (!sb2.equals(this.mLastCallback)) {
-            this.mLastCallback = sb2;
-            recordLastCallback(SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + sb2 + ",");
+        String string = sb.toString();
+        if (!string.equals(this.mLastCallback)) {
+            this.mLastCallback = string;
+            recordLastCallback(SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + string + ",");
         }
         obtainMessage(1, list).sendToTarget();
     }

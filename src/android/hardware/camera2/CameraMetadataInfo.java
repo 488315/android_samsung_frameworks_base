@@ -89,13 +89,13 @@ public final class CameraMetadataInfo implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Long.valueOf(parcel.readLong()));
-        } else if (readInt == 1) {
-            _set(readInt, (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Long.valueOf(parcel.readLong()));
+        } else if (i == 1) {
+            _set(i, (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

@@ -10,11 +10,9 @@ import androidx.constraintlayout.widget.ConstraintAttribute;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CustomSupport {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.motion.utils.CustomSupport$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$widget$ConstraintAttribute$AttributeType;
@@ -58,7 +56,7 @@ public class CustomSupport {
         return (i2 & (i2 >> 31)) + 255;
     }
 
-    public static void setInterpolatedValue(ConstraintAttribute constraintAttribute, View view, float[] fArr) {
+    public static void setInterpolatedValue(ConstraintAttribute constraintAttribute, View view, float[] fArr) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Class<?> cls = view.getClass();
         String str = "set" + constraintAttribute.getName();
         try {
@@ -72,9 +70,9 @@ public class CustomSupport {
                     return;
                 case 3:
                     Method method = cls.getMethod(str, Drawable.class);
-                    int clamp = (clamp((int) (((float) Math.pow(fArr[0], 0.45454545454545453d)) * 255.0f)) << 16) | (clamp((int) (fArr[3] * 255.0f)) << 24) | (clamp((int) (((float) Math.pow(fArr[1], 0.45454545454545453d)) * 255.0f)) << 8) | clamp((int) (((float) Math.pow(fArr[2], 0.45454545454545453d)) * 255.0f));
+                    int iClamp = (clamp((int) (((float) Math.pow(fArr[0], 0.45454545454545453d)) * 255.0f)) << 16) | (clamp((int) (fArr[3] * 255.0f)) << 24) | (clamp((int) (((float) Math.pow(fArr[1], 0.45454545454545453d)) * 255.0f)) << 8) | clamp((int) (((float) Math.pow(fArr[2], 0.45454545454545453d)) * 255.0f));
                     ColorDrawable colorDrawable = new ColorDrawable();
-                    colorDrawable.setColor(clamp);
+                    colorDrawable.setColor(iClamp);
                     method.invoke(view, colorDrawable);
                     return;
                 case 4:
@@ -96,20 +94,20 @@ public class CustomSupport {
                     return;
             }
         } catch (IllegalAccessException e) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Cannot access method ", str, " on View \"");
-            m.append(Debug.getName(view));
-            m.append("\"");
-            Log.e("CustomSupport", m.toString(), e);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Cannot access method ", str, " on View \"");
+            sbM.append(Debug.getName(view));
+            sbM.append("\"");
+            Log.e("CustomSupport", sbM.toString(), e);
         } catch (NoSuchMethodException e2) {
-            StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("No method ", str, " on View \"");
-            m2.append(Debug.getName(view));
-            m2.append("\"");
-            Log.e("CustomSupport", m2.toString(), e2);
+            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("No method ", str, " on View \"");
+            sbM2.append(Debug.getName(view));
+            sbM2.append("\"");
+            Log.e("CustomSupport", sbM2.toString(), e2);
         } catch (InvocationTargetException e3) {
-            StringBuilder m3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Cannot invoke method ", str, " on View \"");
-            m3.append(Debug.getName(view));
-            m3.append("\"");
-            Log.e("CustomSupport", m3.toString(), e3);
+            StringBuilder sbM3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Cannot invoke method ", str, " on View \"");
+            sbM3.append(Debug.getName(view));
+            sbM3.append("\"");
+            Log.e("CustomSupport", sbM3.toString(), e3);
         }
     }
 }

@@ -21,7 +21,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ZenIconLoader {
     public static final Drawable MISSING = new ColorDrawable();
@@ -42,7 +41,7 @@ public class ZenIconLoader {
                     }
                     return Futures.immediateFuture(drawable);
                 }
-                ListenableFuture submit = ((AbstractListeningExecutorService) this.mBackgroundExecutor).submit(new Callable() { // from class: com.android.settingslib.notification.modes.ZenIconLoader$$ExternalSyntheticLambda2
+                ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) this.mBackgroundExecutor).submit(new Callable() { // from class: com.android.settingslib.notification.modes.ZenIconLoader$$ExternalSyntheticLambda2
                     @Override // java.util.concurrent.Callable
                     public final Object call() {
                         Context context2 = context;
@@ -60,16 +59,16 @@ public class ZenIconLoader {
                     }
                 });
                 int i = FluentFuture.$r8$clinit;
-                FluentFuture forwardingFluentFuture = submit instanceof FluentFuture ? (FluentFuture) submit : new ForwardingFluentFuture(submit);
+                FluentFuture forwardingFluentFuture = listenableFutureSubmit instanceof FluentFuture ? (FluentFuture) listenableFutureSubmit : new ForwardingFluentFuture(listenableFutureSubmit);
                 ZenIconLoader$$ExternalSyntheticLambda1 zenIconLoader$$ExternalSyntheticLambda1 = new ZenIconLoader$$ExternalSyntheticLambda1(key);
-                Executor directExecutor = MoreExecutors.directExecutor();
+                Executor executorDirectExecutor = MoreExecutors.directExecutor();
                 forwardingFluentFuture.getClass();
                 AbstractCatchingFuture.CatchingFuture catchingFuture = new AbstractCatchingFuture.CatchingFuture(forwardingFluentFuture, Exception.class, zenIconLoader$$ExternalSyntheticLambda1);
-                forwardingFluentFuture.addListener(catchingFuture, MoreExecutors.rejectionPropagatingExecutor(directExecutor, catchingFuture));
+                forwardingFluentFuture.addListener(catchingFuture, MoreExecutors.rejectionPropagatingExecutor(executorDirectExecutor, catchingFuture));
                 return Futures.transform(catchingFuture, new Function() { // from class: com.android.settingslib.notification.modes.ZenIconLoader$$ExternalSyntheticLambda4
                     @Override // com.google.common.base.Function
                     public final Object apply(Object obj) {
-                        ZenIconLoader zenIconLoader = ZenIconLoader.this;
+                        ZenIconLoader zenIconLoader = this.f$0;
                         ZenIcon.Key key2 = key;
                         Drawable drawable2 = (Drawable) obj;
                         synchronized (zenIconLoader.mCache) {

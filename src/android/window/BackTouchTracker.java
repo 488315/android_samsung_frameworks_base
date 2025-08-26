@@ -115,7 +115,7 @@ public class BackTouchTracker {
     public float getProgress(float f) {
         float f2;
         float f3 = this.mTriggerBack ? this.mInitTouchX : this.mStartThresholdX;
-        float max = Math.max(0.0f, this.mSwipeEdge == 0 ? f - f3 : f3 - f);
+        float fMax = Math.max(0.0f, this.mSwipeEdge == 0 ? f - f3 : f3 - f);
         float f4 = this.mLinearDistance;
         float maxDistance = getMaxDistance();
         if (maxDistance == 0.0f) {
@@ -123,13 +123,13 @@ public class BackTouchTracker {
         }
         if (f4 < maxDistance) {
             float f5 = maxDistance - f4;
-            float f6 = (this.mNonLinearFactor * f5) + f4;
-            if (max > f4) {
-                f6 = MathUtils.lerp(f6, maxDistance, (max - f4) / f5);
+            float fLerp = (this.mNonLinearFactor * f5) + f4;
+            if (fMax > f4) {
+                fLerp = MathUtils.lerp(fLerp, maxDistance, (fMax - f4) / f5);
             }
-            f2 = max / f6;
+            f2 = fMax / fLerp;
         } else {
-            f2 = max / maxDistance;
+            f2 = fMax / maxDistance;
         }
         return MathUtils.constrain(f2, 0.0f, 1.0f);
     }

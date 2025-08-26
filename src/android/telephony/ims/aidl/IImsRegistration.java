@@ -102,9 +102,9 @@ public interface IImsRegistration extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsRegistration.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsRegistration)) {
-                return (IImsRegistration) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsRegistration.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsRegistration)) {
+                return (IImsRegistration) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -155,30 +155,30 @@ public interface IImsRegistration extends IInterface {
                     parcel2.writeInt(registrationTechnology);
                     return true;
                 case 2:
-                    IImsRegistrationCallback asInterface = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addRegistrationCallback(asInterface);
+                    addRegistrationCallback(iImsRegistrationCallbackAsInterface);
                     return true;
                 case 3:
-                    IImsRegistrationCallback asInterface2 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface2 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeRegistrationCallback(asInterface2);
+                    removeRegistrationCallback(iImsRegistrationCallbackAsInterface2);
                     return true;
                 case 4:
-                    IImsRegistrationCallback asInterface3 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface3 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addEmergencyRegistrationCallback(asInterface3);
+                    addEmergencyRegistrationCallback(iImsRegistrationCallbackAsInterface3);
                     return true;
                 case 5:
-                    IImsRegistrationCallback asInterface4 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface4 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeEmergencyRegistrationCallback(asInterface4);
+                    removeEmergencyRegistrationCallback(iImsRegistrationCallbackAsInterface4);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    triggerFullNetworkRegistration(readInt, readString);
+                    triggerFullNetworkRegistration(i3, string);
                     return true;
                 case 7:
                     triggerUpdateSipDelegateRegistration();
@@ -187,9 +187,9 @@ public interface IImsRegistration extends IInterface {
                     triggerSipDelegateDeregistration();
                     return true;
                 case 9:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    triggerDeregistration(readInt2);
+                    triggerDeregistration(i4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -214,111 +214,111 @@ public interface IImsRegistration extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public int getRegistrationTechnology() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void addRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void removeRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void addEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void removeEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void triggerFullNetworkRegistration(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void triggerUpdateSipDelegateRegistration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void triggerSipDelegateDeregistration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
             public void triggerDeregistration(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

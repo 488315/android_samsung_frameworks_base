@@ -1,13 +1,19 @@
 package com.android.systemui.scene.domain.startable;
 
 import com.android.compose.animation.scene.ContentKey;
+import com.android.compose.animation.scene.ObservableTransitionState;
+import com.android.compose.animation.scene.OverlayKey;
+import com.android.compose.animation.scene.SceneKey;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryInteractor;
 import com.android.systemui.keyguard.domain.interactor.BiometricUnlockInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
+import com.android.systemui.keyguard.shared.model.BiometricUnlockMode;
+import com.android.systemui.keyguard.shared.model.BiometricUnlockModel;
 import com.android.systemui.scene.domain.interactor.SceneContainerOcclusionInteractor;
 import com.android.systemui.scene.domain.interactor.SceneInteractor;
+import com.android.systemui.scene.domain.startable.ScrimStartable;
 import com.android.systemui.scene.shared.model.Overlays;
 import com.android.systemui.scene.shared.model.Scenes;
 import com.android.systemui.settings.brightness.domain.interactor.BrightnessMirrorShowingInteractorPassThrough;
@@ -16,6 +22,10 @@ import com.android.systemui.statusbar.phone.ScrimController;
 import com.android.systemui.statusbar.phone.ScrimState;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import java.util.Collection;
+import java.util.Set;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -32,7 +42,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScrimStartable implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +51,6 @@ public final class ScrimStartable implements CoreStartable {
     public final ScrimStartable$special$$inlined$map$1 scrimState;
     public final StatusBarKeyguardViewManager statusBarKeyguardViewManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Model {
         public final ScrimState scrimState;
         public final boolean unlocking;
@@ -84,11 +92,10 @@ public final class ScrimStartable implements CoreStartable {
         ReadonlyStateFlow readonlyStateFlow3 = keyguardInteractor.isDozing;
         ReadonlyStateFlow readonlyStateFlow4 = biometricUnlockInteractor.unlockState;
         ReadonlyStateFlow readonlyStateFlow5 = brightnessMirrorShowingInteractorPassThrough.isShowing;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ScrimStartable$scrimState$1(this, null));
-        final Flow[] flowArr = {readonlyStateFlow, readonlyStateFlow2, stateFlow, sceneInteractor.currentOverlays, sceneInteractor.transitionState, readonlyStateFlow3, keyguardInteractor.isDreaming, readonlyStateFlow4, readonlyStateFlow5, keyguardInteractor.isPulsing, conflatedCallbackFlow};
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ScrimStartable$scrimState$1(this, null));
+        final Flow[] flowArr = {readonlyStateFlow, readonlyStateFlow2, stateFlow, sceneInteractor.currentOverlays, sceneInteractor.transitionState, readonlyStateFlow3, keyguardInteractor.isDreaming, readonlyStateFlow4, readonlyStateFlow5, keyguardInteractor.isPulsing, flowConflatedCallbackFlow};
         final FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new Flow() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -110,52 +117,171 @@ public final class ScrimStartable implements CoreStartable {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:42:0x0126, code lost:
-                
-                    if (com.android.systemui.scene.domain.startable.ScrimStartable.isShade(r11.toScene) != false) goto L68;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:52:0x013d, code lost:
-                
-                    if (com.android.systemui.scene.domain.startable.ScrimStartable.isShade(r11.toOverlay) != false) goto L68;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:58:0x0154, code lost:
-                
-                    if (com.android.systemui.scene.domain.startable.ScrimStartable.isShade(r11.toContent) != false) goto L68;
-                 */
+                /* JADX WARN: Removed duplicated region for block: B:119:0x0226 A[RETURN] */
                 /* JADX WARN: Removed duplicated region for block: B:19:0x00ad  */
-                /* JADX WARN: Removed duplicated region for block: B:26:0x00e6  */
-                /* JADX WARN: Removed duplicated region for block: B:32:0x00fb  */
-                /* JADX WARN: Removed duplicated region for block: B:46:0x0226 A[RETURN] */
-                /* JADX WARN: Removed duplicated region for block: B:63:0x0167  */
+                /* JADX WARN: Removed duplicated region for block: B:31:0x00db A[EDGE_INSN: B:31:0x00db->B:32:0x00dc BREAK  A[LOOP:0: B:25:0x00c1->B:124:?]] */
+                /* JADX WARN: Removed duplicated region for block: B:38:0x00f0  */
+                /* JADX WARN: Removed duplicated region for block: B:41:0x00fb  */
+                /* JADX WARN: Removed duplicated region for block: B:69:0x0159  */
+                /* JADX WARN: Removed duplicated region for block: B:72:0x0167  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invokeSuspend(java.lang.Object r20) {
-                    /*
-                        Method dump skipped, instructions count: 554
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                public final Object invokeSuspend(Object obj) {
+                    boolean z;
+                    boolean z2;
+                    ScrimStartable.Model model;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        FlowCollector flowCollector = (FlowCollector) this.L$0;
+                        Object[] objArr = (Object[]) this.L$1;
+                        boolean zBooleanValue = ((Boolean) objArr[0]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) objArr[1]).booleanValue();
+                        SceneKey sceneKey = (SceneKey) objArr[2];
+                        Set set = (Set) objArr[3];
+                        ObservableTransitionState observableTransitionState = (ObservableTransitionState) objArr[4];
+                        boolean zBooleanValue3 = ((Boolean) objArr[5]).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) objArr[6]).booleanValue();
+                        BiometricUnlockModel biometricUnlockModel = (BiometricUnlockModel) objArr[7];
+                        boolean zBooleanValue5 = ((Boolean) objArr[8]).booleanValue();
+                        boolean zBooleanValue6 = ((Boolean) objArr[9]).booleanValue();
+                        boolean zBooleanValue7 = ((Boolean) objArr[10]).booleanValue();
+                        boolean zContains = set.contains(Overlays.Bouncer);
+                        if (observableTransitionState instanceof ObservableTransitionState.Transition.ChangeScene) {
+                            ObservableTransitionState.Transition.ChangeScene changeScene = (ObservableTransitionState.Transition.ChangeScene) observableTransitionState;
+                            z = zContains;
+                            if (Intrinsics.areEqual(changeScene.fromScene, Scenes.Lockscreen)) {
+                                boolean z3 = Intrinsics.areEqual(changeScene.toScene, Scenes.Gone);
+                                ScrimStartable scrimStartable = this.this$0;
+                                int i2 = ScrimStartable.$r8$clinit;
+                                scrimStartable.getClass();
+                                if (ScrimStartable.isShade(sceneKey)) {
+                                    Set<OverlayKey> set2 = set;
+                                    if (!(set2 instanceof Collection) || !set2.isEmpty()) {
+                                        for (OverlayKey overlayKey : set2) {
+                                            this.this$0.getClass();
+                                            if (ScrimStartable.isShade(overlayKey)) {
+                                                z2 = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    z2 = false;
+                                    model = null;
+                                    boolean zIsIdle$default = ObservableTransitionState.isIdle$default(observableTransitionState, Scenes.Communal, null, 2);
+                                    boolean z4 = zBooleanValue && (biometricUnlockModel.mode == BiometricUnlockMode.WAKE_AND_UNLOCK || z3);
+                                    if (!this.this$0.alternateBouncerInteractor.isVisibleState()) {
+                                        ScrimStartable scrimStartable2 = this.this$0;
+                                        if (z3) {
+                                            scrimStartable2.statusBarKeyguardViewManager.onKeyguardFadedAway();
+                                        } else {
+                                            scrimStartable2.getClass();
+                                        }
+                                        this.this$0.getClass();
+                                        if (!(observableTransitionState instanceof ObservableTransitionState.Idle)) {
+                                            if (observableTransitionState instanceof ObservableTransitionState.Transition.ChangeScene) {
+                                                ObservableTransitionState.Transition.ChangeScene changeScene2 = (ObservableTransitionState.Transition.ChangeScene) observableTransitionState;
+                                                if (ScrimStartable.isShade(changeScene2.fromScene) || !ScrimStartable.isShade(changeScene2.toScene)) {
+                                                    model = new ScrimStartable.Model(ScrimState.KEYGUARD, z4);
+                                                }
+                                            } else if (observableTransitionState instanceof ObservableTransitionState.Transition.ReplaceOverlay) {
+                                                ObservableTransitionState.Transition.ReplaceOverlay replaceOverlay = (ObservableTransitionState.Transition.ReplaceOverlay) observableTransitionState;
+                                                if (ScrimStartable.isShade(replaceOverlay.fromOverlay) || !ScrimStartable.isShade(replaceOverlay.toOverlay)) {
+                                                }
+                                            } else {
+                                                if (!(observableTransitionState instanceof ObservableTransitionState.Transition.ShowOrHideOverlay)) {
+                                                    throw new NoWhenBranchMatchedException();
+                                                }
+                                                ObservableTransitionState.Transition.ShowOrHideOverlay showOrHideOverlay = (ObservableTransitionState.Transition.ShowOrHideOverlay) observableTransitionState;
+                                                if (ScrimStartable.isShade(showOrHideOverlay.fromContent) || !ScrimStartable.isShade(showOrHideOverlay.toContent)) {
+                                                }
+                                            }
+                                        }
+                                    } else if (z && !z4) {
+                                        model = new ScrimStartable.Model(this.this$0.statusBarKeyguardViewManager.primaryBouncerNeedsScrimming() ? ScrimState.BOUNCER_SCRIMMED : ScrimState.BOUNCER, false);
+                                    } else if (zBooleanValue5) {
+                                        model = new ScrimStartable.Model(ScrimState.BRIGHTNESS_MIRROR, z4);
+                                    } else if (z2 && !zBooleanValue) {
+                                        model = new ScrimStartable.Model(ScrimState.SHADE_LOCKED, z4);
+                                    } else if (zBooleanValue6) {
+                                        model = new ScrimStartable.Model(ScrimState.PULSING, z4);
+                                    } else if (zBooleanValue7) {
+                                        model = new ScrimStartable.Model(ScrimState.OFF, z4);
+                                    } else if (zBooleanValue3 && !z4) {
+                                        ScrimStartable scrimStartable3 = this.this$0;
+                                        if (z3) {
+                                            scrimStartable3.statusBarKeyguardViewManager.onKeyguardFadedAway();
+                                        } else {
+                                            scrimStartable3.getClass();
+                                        }
+                                        model = new ScrimStartable.Model(ScrimState.AOD, false);
+                                    } else if (zIsIdle$default) {
+                                        model = (zBooleanValue || !zBooleanValue4 || z4) ? new ScrimStartable.Model(ScrimState.GLANCEABLE_HUB, z4) : new ScrimStartable.Model(ScrimState.GLANCEABLE_HUB_OVER_DREAM, false);
+                                    } else if (!zBooleanValue && !z4 && !zBooleanValue2) {
+                                        model = new ScrimStartable.Model(ScrimState.KEYGUARD, false);
+                                    } else if (zBooleanValue || z4 || !zBooleanValue4) {
+                                        ScrimStartable scrimStartable4 = this.this$0;
+                                        if (ObservableTransitionState.isIdle$default(observableTransitionState, Scenes.Gone, null, 2)) {
+                                            scrimStartable4.statusBarKeyguardViewManager.onKeyguardFadedAway();
+                                        } else {
+                                            scrimStartable4.getClass();
+                                        }
+                                        model = new ScrimStartable.Model(ScrimState.UNLOCKED, z4);
+                                    } else {
+                                        model = new ScrimStartable.Model(ScrimState.DREAMING, false);
+                                    }
+                                    this.label = 1;
+                                    if (flowCollector.emit(model, this) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                } else {
+                                    z2 = true;
+                                    model = null;
+                                    boolean zIsIdle$default2 = ObservableTransitionState.isIdle$default(observableTransitionState, Scenes.Communal, null, 2);
+                                    if (zBooleanValue) {
+                                        if (!this.this$0.alternateBouncerInteractor.isVisibleState()) {
+                                        }
+                                        this.label = 1;
+                                        if (flowCollector.emit(model, this) == coroutineSingletons) {
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            z = zContains;
+                        }
+                        ScrimStartable scrimStartable5 = this.this$0;
+                        int i22 = ScrimStartable.$r8$clinit;
+                        scrimStartable5.getClass();
+                        if (ScrimStartable.isShade(sceneKey)) {
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }, new ScrimStartable$scrimState$3(this, null));
         this.scrimState = new Flow() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -182,70 +308,47 @@ public final class ScrimStartable implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1$2$1 r0 = (com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1$2$1 r0 = new com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.scene.domain.startable.ScrimStartable$Model r5 = (com.android.systemui.scene.domain.startable.ScrimStartable.Model) r5
-                        if (r5 == 0) goto L39
-                        com.android.systemui.statusbar.phone.ScrimState r5 = r5.scrimState
-                        goto L3a
-                    L39:
-                        r5 = 0
-                    L3a:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.domain.startable.ScrimStartable$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ScrimStartable.Model model = (ScrimStartable.Model) obj;
+                        ScrimState scrimState = model != null ? model.scrimState : null;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(scrimState, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$onEach$$inlined$unsafeTransform$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
     }

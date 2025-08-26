@@ -75,7 +75,7 @@ public class DeltaCertificateTool {
         if (array[5] == null) {
             array[5] = aSN1Sequence2.getObjectAt(5);
         }
-        ExtensionsGenerator extractExtensions = extractExtensions(aSN1Sequence2);
+        ExtensionsGenerator extensionsGeneratorExtractExtensions = extractExtensions(aSN1Sequence2);
         if (i < aSN1Sequence.size() - 1) {
             ASN1TaggedObject aSN1TaggedObject2 = ASN1TaggedObject.getInstance(aSN1Sequence.getObjectAt(i));
             if (aSN1TaggedObject2.getTagNo() != 4) {
@@ -83,11 +83,11 @@ public class DeltaCertificateTool {
             }
             ASN1Sequence aSN1Sequence3 = ASN1Sequence.getInstance(aSN1TaggedObject2, false);
             for (int i3 = 0; i3 != aSN1Sequence3.size(); i3++) {
-                extractExtensions.replaceExtension(Extension.getInstance(aSN1Sequence3.getObjectAt(i3)));
+                extensionsGeneratorExtractExtensions.replaceExtension(Extension.getInstance(aSN1Sequence3.getObjectAt(i3)));
             }
-            array[7] = new DERTaggedObject(3, extractExtensions.generate());
-        } else if (!extractExtensions.isEmpty()) {
-            array[7] = new DERTaggedObject(3, extractExtensions.generate());
+            array[7] = new DERTaggedObject(3, extensionsGeneratorExtractExtensions.generate());
+        } else if (!extensionsGeneratorExtractExtensions.isEmpty()) {
+            array[7] = new DERTaggedObject(3, extensionsGeneratorExtractExtensions.generate());
         } else {
             array[7] = null;
         }

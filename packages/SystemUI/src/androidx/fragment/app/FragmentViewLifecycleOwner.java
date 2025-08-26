@@ -18,7 +18,6 @@ import androidx.savedstate.SavedStateRegistry;
 import androidx.savedstate.SavedStateRegistryController;
 import androidx.savedstate.SavedStateRegistryOwner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentViewLifecycleOwner implements HasDefaultViewModelProviderFactory, SavedStateRegistryOwner, ViewModelStoreOwner {
     public ViewModelProvider.Factory mDefaultFactory;
@@ -116,9 +115,9 @@ public class FragmentViewLifecycleOwner implements HasDefaultViewModelProviderFa
         if (this.mLifecycleRegistry == null) {
             this.mLifecycleRegistry = new LifecycleRegistry(this);
             SavedStateRegistryController.Companion.getClass();
-            SavedStateRegistryController create = SavedStateRegistryController.Companion.create(this);
-            this.mSavedStateRegistryController = create;
-            create.performAttach();
+            SavedStateRegistryController savedStateRegistryControllerCreate = SavedStateRegistryController.Companion.create(this);
+            this.mSavedStateRegistryController = savedStateRegistryControllerCreate;
+            savedStateRegistryControllerCreate.performAttach();
             this.mRestoreViewSavedStateRunnable.run();
         }
     }

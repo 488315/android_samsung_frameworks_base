@@ -6,7 +6,6 @@ import com.android.systemui.display.data.repository.DisplayWindowPropertiesRepos
 import com.android.systemui.display.data.repository.DisplayWindowPropertiesRepositoryImpl;
 import com.android.systemui.display.shared.model.DisplayWindowProperties;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarPerDisplayConfigurationStateProvider implements PerDisplayInstanceProvider {
     public final DisplayWindowPropertiesRepository displayWindowPropertiesRepository;

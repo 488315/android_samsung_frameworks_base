@@ -10,7 +10,6 @@ import androidx.savedstate.SavedStateRegistryOwner;
 import java.util.LinkedHashMap;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SavedStateHandleSupport {
     public static final SavedStateHandleSupport$SAVED_STATE_REGISTRY_OWNER_KEY$1 SAVED_STATE_REGISTRY_OWNER_KEY = new CreationExtras.Key() { // from class: androidx.lifecycle.SavedStateHandleSupport$SAVED_STATE_REGISTRY_OWNER_KEY$1
@@ -57,9 +56,9 @@ public abstract class SavedStateHandleSupport {
             savedStateHandlesProvider.restoredState = null;
         }
         companion.getClass();
-        SavedStateHandle createHandle = SavedStateHandle.Companion.createHandle(bundle3, bundle);
-        savedStateHandlesVM.handles.put(str, createHandle);
-        return createHandle;
+        SavedStateHandle savedStateHandleCreateHandle = SavedStateHandle.Companion.createHandle(bundle3, bundle);
+        savedStateHandlesVM.handles.put(str, savedStateHandleCreateHandle);
+        return savedStateHandleCreateHandle;
     }
 
     public static final void enableSavedStateHandles(SavedStateRegistryOwner savedStateRegistryOwner) {

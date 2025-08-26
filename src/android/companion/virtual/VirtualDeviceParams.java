@@ -1,7 +1,6 @@
 package android.companion.virtual;
 
 import android.annotation.SystemApi;
-import android.companion.virtual.VirtualDeviceParams;
 import android.companion.virtual.sensor.IVirtualSensorCallback;
 import android.companion.virtual.sensor.VirtualSensor;
 import android.companion.virtual.sensor.VirtualSensorCallback;
@@ -17,6 +16,7 @@ import android.util.ArraySet;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import com.android.internal.hidden_from_bootclasspath.android.companion.virtualdevice.flags.Flags;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -264,7 +264,7 @@ public final class VirtualDeviceParams implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mLockState);
         parcel.writeArraySet(this.mUsersWithMatchingAccounts);
         parcel.writeInt(this.mDefaultNavigationPolicy);
@@ -305,11 +305,11 @@ public final class VirtualDeviceParams implements Parcelable {
     }
 
     public int hashCode() {
-        int hash = Objects.hash(Integer.valueOf(this.mLockState), this.mUsersWithMatchingAccounts, this.mCrossTaskNavigationExemptions, Integer.valueOf(this.mDefaultNavigationPolicy), this.mActivityPolicyExemptions, Integer.valueOf(this.mDefaultActivityPolicy), this.mName, this.mDevicePolicies, this.mHomeComponent, this.mInputMethodComponent, Integer.valueOf(this.mAudioPlaybackSessionId), Integer.valueOf(this.mAudioRecordingSessionId), Long.valueOf(this.mDimDuration), Long.valueOf(this.mScreenOffTimeout));
+        int iHash = Objects.hash(Integer.valueOf(this.mLockState), this.mUsersWithMatchingAccounts, this.mCrossTaskNavigationExemptions, Integer.valueOf(this.mDefaultNavigationPolicy), this.mActivityPolicyExemptions, Integer.valueOf(this.mDefaultActivityPolicy), this.mName, this.mDevicePolicies, this.mHomeComponent, this.mInputMethodComponent, Integer.valueOf(this.mAudioPlaybackSessionId), Integer.valueOf(this.mAudioRecordingSessionId), Long.valueOf(this.mDimDuration), Long.valueOf(this.mScreenOffTimeout));
         for (int i = 0; i < this.mDevicePolicies.size(); i++) {
-            hash = (((hash * 31) + this.mDevicePolicies.keyAt(i)) * 31) + this.mDevicePolicies.valueAt(i);
+            iHash = (((iHash * 31) + this.mDevicePolicies.keyAt(i)) * 31) + this.mDevicePolicies.valueAt(i);
         }
-        return hash;
+        return iHash;
     }
 
     public String toString() {
@@ -374,12 +374,12 @@ public final class VirtualDeviceParams implements Parcelable {
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
             public void onConfigurationChanged(final VirtualSensor virtualSensor, final boolean z, int i, int i2) {
-                final Duration ofNanos = Duration.ofNanos(TimeUnit.MICROSECONDS.toNanos(i));
-                final Duration ofNanos2 = Duration.ofNanos(TimeUnit.MICROSECONDS.toNanos(i2));
+                final Duration durationOfNanos = Duration.ofNanos(TimeUnit.MICROSECONDS.toNanos(i));
+                final Duration durationOfNanos2 = Duration.ofNanos(TimeUnit.MICROSECONDS.toNanos(i2));
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceParams$Builder$VirtualSensorCallbackDelegate$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceParams.Builder.VirtualSensorCallbackDelegate.this.lambda$onConfigurationChanged$0(virtualSensor, z, ofNanos, ofNanos2);
+                        this.f$0.lambda$onConfigurationChanged$0(virtualSensor, z, durationOfNanos, durationOfNanos2);
                     }
                 });
             }
@@ -398,7 +398,7 @@ public final class VirtualDeviceParams implements Parcelable {
                 executor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceParams$Builder$VirtualSensorCallbackDelegate$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceParams.Builder.VirtualSensorCallbackDelegate.this.lambda$onDirectChannelCreated$1(i, sharedMemory);
+                        this.f$0.lambda$onDirectChannelCreated$1(i, sharedMemory);
                     }
                 });
             }
@@ -417,7 +417,7 @@ public final class VirtualDeviceParams implements Parcelable {
                 executor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceParams$Builder$VirtualSensorCallbackDelegate$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceParams.Builder.VirtualSensorCallbackDelegate.this.lambda$onDirectChannelDestroyed$2(i);
+                        this.f$0.lambda$onDirectChannelDestroyed$2(i);
                     }
                 });
             }
@@ -436,7 +436,7 @@ public final class VirtualDeviceParams implements Parcelable {
                 executor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceParams$Builder$VirtualSensorCallbackDelegate$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceParams.Builder.VirtualSensorCallbackDelegate.this.lambda$onDirectChannelConfigured$3(i, virtualSensor, i2, i3);
+                        this.f$0.lambda$onDirectChannelConfigured$3(i, virtualSensor, i2, i3);
                     }
                 });
             }

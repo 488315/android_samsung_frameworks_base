@@ -3,16 +3,27 @@ package com.android.wm.shell.bubbles;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.LocusId;
+import android.content.pm.ShortcutInfo;
+import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 import androidx.appcompat.app.AlertController$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
+import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
+import com.android.systemui.wmshell.BubblesManager;
+import com.android.systemui.wmshell.BubblesManager$5$$ExternalSyntheticLambda1;
 import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.bubbles.BubbleLogger;
+import com.android.wm.shell.bubbles.BubbleOverflowContainerView;
+import com.android.wm.shell.bubbles.storage.BubbleEntity;
+import com.android.wm.shell.bubbles.storage.BubbleVolatileRepository;
+import com.android.wm.shell.bubbles.storage.BubbleVolatileRepository$$ExternalSyntheticLambda0;
+import com.android.wm.shell.bubbles.storage.BubbleVolatileRepositoryKt$sam$java_util_function_Predicate$0;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.bubbles.BubbleBarLocation;
 import java.util.ArrayList;
@@ -26,7 +37,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleData {
     public static final Comparator BUBBLES_BY_SORT_KEY_DESCENDING = Comparator.comparing(new BubbleData$$ExternalSyntheticLambda0()).reversed();
@@ -55,11 +65,9 @@ public class BubbleData {
     public TimeSource mTimeSource = new BubbleData$$ExternalSyntheticLambda3();
     public final HashMap mSuppressedGroupKeys = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TimeSource {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Update {
         public Bubble addedBubble;
         public Bubble addedOverflowBubble;
@@ -162,33 +170,379 @@ public class BubbleData {
     public final void dismissBubbleWithKey(int i, String str) {
         Bubble bubbleInStackWithKey;
         ((BubbleData$$ExternalSyntheticLambda3) this.mTimeSource).getClass();
-        long currentTimeMillis = System.currentTimeMillis();
-        if (i != 18 || (bubbleInStackWithKey = getBubbleInStackWithKey(str)) == null || Math.max(bubbleInStackWithKey.mLastUpdated, bubbleInStackWithKey.mLastAccessed) <= currentTimeMillis) {
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (i != 18 || (bubbleInStackWithKey = getBubbleInStackWithKey(str)) == null || Math.max(bubbleInStackWithKey.mLastUpdated, bubbleInStackWithKey.mLastAccessed) <= jCurrentTimeMillis) {
             doRemove(i, str);
             dispatchPendingChanges();
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x0088, code lost:
-    
-        if ((android.provider.Settings.Secure.getInt(r4.context.getContentResolver(), "force_show_bubbles_user_education", 0) != 0) != false) goto L49;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x008c, code lost:
-    
-        if (r20.mExpanded == false) goto L53;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x008f  */
     /* JADX WARN: Type inference failed for: r15v6, types: [com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda28] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void dispatchPendingChanges() {
-        /*
-            Method dump skipped, instructions count: 1394
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleData.dispatchPendingChanges():void");
+        ArrayList arrayList;
+        int i;
+        BubbleStackView bubbleStackView;
+        BadgedImageView badgedImageView;
+        BadgedImageView badgedImageView2;
+        if (this.mListener != null) {
+            Update update = this.mStateChange;
+            if (update.expandedChanged || update.selectionChanged || update.addedBubble != null || update.updatedBubble != null || !((ArrayList) update.removedBubbles).isEmpty() || update.addedOverflowBubble != null || update.removedOverflowBubble != null || update.orderChanged || update.suppressedBubble != null || update.unsuppressedBubble != null || update.suppressedSummaryChanged || update.suppressedSummaryGroup != null || update.mBubbleBarLocation != null || update.showOverflowChanged) {
+                Update update2 = this.mStateChange;
+                BubbleViewProvider bubbleViewProvider = this.mSelectedBubble;
+                if (bubbleViewProvider != null) {
+                    BubbleEducationController bubbleEducationController = this.mEducationController;
+                    if (Settings.Secure.getInt(bubbleEducationController.context.getContentResolver(), "force_hide_bubbles_user_education", 0) == 0) {
+                        if (bubbleViewProvider instanceof Bubble ? ((Bubble) bubbleViewProvider).isChat() : false) {
+                            if (bubbleEducationController.prefs.getBoolean("HasSeenBubblesOnboarding", false)) {
+                                if ((Settings.Secure.getInt(bubbleEducationController.context.getContentResolver(), "force_show_bubbles_user_education", 0) != 0) != false) {
+                                }
+                            } else {
+                                boolean z = this.mExpanded ? false : true;
+                                update2.shouldShowEducation = z;
+                                BubbleController.AnonymousClass10 anonymousClass10 = this.mListener;
+                                Update update3 = this.mStateChange;
+                                anonymousClass10.getClass();
+                                final boolean z2 = true;
+                                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
+                                    Bubble bubble = update3.addedBubble;
+                                    String strValueOf = String.valueOf(bubble != null ? bubble.mKey : "null");
+                                    boolean z3 = !((ArrayList) update3.removedBubbles).isEmpty();
+                                    Bubble bubble2 = update3.updatedBubble;
+                                    String strValueOf2 = String.valueOf(bubble2 != null ? bubble2.mKey : "null");
+                                    boolean z4 = update3.orderChanged;
+                                    boolean z5 = update3.expandedChanged;
+                                    boolean z6 = update3.expanded;
+                                    boolean z7 = update3.selectionChanged;
+                                    BubbleViewProvider bubbleViewProvider2 = update3.selectedBubble;
+                                    String strValueOf3 = String.valueOf(bubbleViewProvider2 != null ? bubbleViewProvider2.getKey() : "null");
+                                    Bubble bubble3 = update3.suppressedBubble;
+                                    String strValueOf4 = String.valueOf(bubble3 != null ? bubble3.mKey : "null");
+                                    Bubble bubble4 = update3.unsuppressedBubble;
+                                    String strValueOf5 = String.valueOf(bubble4 != null ? bubble4.mKey : "null");
+                                    boolean z8 = update3.shouldShowEducation;
+                                    boolean z9 = update3.showOverflowChanged;
+                                    BubbleBarLocation bubbleBarLocation = update3.mBubbleBarLocation;
+                                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, 1730797934466383175L, 15744972, strValueOf, Boolean.valueOf(z3), strValueOf2, Boolean.valueOf(z4), Boolean.valueOf(z5), Boolean.valueOf(z6), Boolean.valueOf(z7), strValueOf3, strValueOf4, strValueOf5, Boolean.valueOf(z8), Boolean.valueOf(z9), String.valueOf(bubbleBarLocation != null ? bubbleBarLocation.toString() : "null"));
+                                }
+                                BubbleController.this.ensureBubbleViewsAndWindowCreated();
+                                BubbleController.this.loadOverflowBubblesFromDisk();
+                                if (update3.showOverflowChanged) {
+                                    BubbleController.AnonymousClass8 anonymousClass8 = BubbleController.this.mBubbleViewCallback;
+                                    update3.overflowBubbles.isEmpty();
+                                    anonymousClass8.getClass();
+                                }
+                                BubbleData bubbleData = BubbleController.this.mBubbleData;
+                                BubbleOverflow bubbleOverflow = bubbleData.mOverflow;
+                                if (bubbleOverflow != null) {
+                                    Iterator<Bubble> it = bubbleData.getOverflowBubbles().iterator();
+                                    while (true) {
+                                        if (!it.hasNext()) {
+                                            bubbleOverflow.showDot = false;
+                                            BadgedImageView badgedImageView3 = bubbleOverflow.overflowBtn;
+                                            if (badgedImageView3 != null && badgedImageView3.getVisibility() == 0 && (badgedImageView = bubbleOverflow.overflowBtn) != null) {
+                                                badgedImageView.updateDotVisibility(true);
+                                            }
+                                        } else if (it.next().showDot()) {
+                                            bubbleOverflow.showDot = true;
+                                            BadgedImageView badgedImageView4 = bubbleOverflow.overflowBtn;
+                                            if (badgedImageView4 != null && badgedImageView4.getVisibility() == 0 && (badgedImageView2 = bubbleOverflow.overflowBtn) != null) {
+                                                badgedImageView2.updateDotVisibility(true);
+                                            }
+                                        }
+                                    }
+                                }
+                                BubbleOverflowContainerView.AnonymousClass2 anonymousClass2 = BubbleController.this.mOverflowListener;
+                                if (anonymousClass2 != null) {
+                                    anonymousClass2.getClass();
+                                    Bubble bubble5 = update3.removedOverflowBubble;
+                                    BubbleOverflowContainerView bubbleOverflowContainerView = BubbleOverflowContainerView.this;
+                                    if (bubble5 != null) {
+                                        bubble5.cleanupViews();
+                                        int iIndexOf = ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).indexOf(bubble5);
+                                        ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).remove(bubble5);
+                                        bubbleOverflowContainerView.mAdapter.notifyItemRemoved(iIndexOf);
+                                    }
+                                    Bubble bubble6 = update3.addedOverflowBubble;
+                                    if (bubble6 != null) {
+                                        int iIndexOf2 = ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).indexOf(bubble6);
+                                        if (iIndexOf2 > 0) {
+                                            ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).remove(bubble6);
+                                            ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).add(0, bubble6);
+                                            bubbleOverflowContainerView.mAdapter.notifyItemMoved(iIndexOf2, 0);
+                                        } else {
+                                            ((ArrayList) bubbleOverflowContainerView.mOverflowBubbles).add(0, bubble6);
+                                            bubbleOverflowContainerView.mAdapter.notifyItemInserted(0);
+                                        }
+                                    }
+                                    bubbleOverflowContainerView.updateEmptyStateVisibility();
+                                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
+                                        ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, 2347520435196804818L, 0, String.valueOf(bubble6 != null ? bubble6.mKey : "null"), String.valueOf(bubble5 != null ? bubble5.mKey : "null"));
+                                    }
+                                }
+                                ArrayList arrayList2 = new ArrayList(update3.removedBubbles);
+                                ArrayList arrayList3 = new ArrayList();
+                                int size = arrayList2.size();
+                                int i2 = 0;
+                                while (i2 < size) {
+                                    Object obj = arrayList2.get(i2);
+                                    i2++;
+                                    Pair pair = (Pair) obj;
+                                    final Bubble bubble7 = (Bubble) pair.first;
+                                    int iIntValue = ((Integer) pair.second).intValue();
+                                    final BubbleStackView bubbleStackView2 = BubbleController.this.mStackView;
+                                    if (bubbleStackView2 != 0) {
+                                        if (bubbleStackView2.mIsExpanded && bubbleStackView2.getBubbleCount() == 1) {
+                                            bubbleStackView2.mRemovingLastBubbleWhileExpanded = true;
+                                            final BadgedImageView badgedImageView5 = bubble7.mIconView;
+                                            final BubbleViewProvider bubbleViewProvider3 = bubbleStackView2.mExpandedBubble;
+                                            bubbleStackView2.showScrim(false, new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda28
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    BubbleStackView bubbleStackView3 = bubbleStackView2;
+                                                    Bubble bubble8 = bubble7;
+                                                    BadgedImageView badgedImageView6 = badgedImageView5;
+                                                    BubbleViewProvider bubbleViewProvider4 = bubbleViewProvider3;
+                                                    bubbleStackView3.mRemovingLastBubbleWhileExpanded = false;
+                                                    bubble8.cleanupExpandedView(true);
+                                                    if (badgedImageView6 != null) {
+                                                        bubbleStackView3.mBubbleContainer.removeView(badgedImageView6);
+                                                    }
+                                                    bubble8.cleanupViews();
+                                                    bubbleStackView3.updateExpandedView();
+                                                    if (bubbleViewProvider4 == bubbleStackView3.mExpandedBubble) {
+                                                        bubbleStackView3.mExpandedBubble = null;
+                                                    }
+                                                }
+                                            });
+                                            bubbleStackView2.logBubbleEvent(bubble7, 5);
+                                        } else {
+                                            if (bubbleStackView2.getBubbleCount() == 1) {
+                                                bubbleStackView2.mExpandedBubble = null;
+                                            }
+                                            int i3 = 0;
+                                            while (true) {
+                                                if (i3 < bubbleStackView2.getBubbleCount()) {
+                                                    View childAt = bubbleStackView2.mBubbleContainer.getChildAt(i3);
+                                                    if (childAt instanceof BadgedImageView) {
+                                                        BubbleViewProvider bubbleViewProvider4 = ((BadgedImageView) childAt).mBubble;
+                                                        if ((bubbleViewProvider4 != null ? bubbleViewProvider4.getKey() : null).equals(bubble7.mKey)) {
+                                                            bubbleStackView2.mBubbleContainer.removeViewAt(i3);
+                                                            if (bubbleStackView2.mBubbleData.hasOverflowBubbleWithKey(bubble7.mKey)) {
+                                                                bubble7.cleanupExpandedView(true);
+                                                            } else {
+                                                                bubble7.cleanupViews();
+                                                            }
+                                                            bubbleStackView2.updateExpandedView();
+                                                            if (bubbleStackView2.getBubbleCount() == 0 && !bubbleStackView2.mIsExpanded) {
+                                                                bubbleStackView2.mStackAnimationController.setStackPosition(bubbleStackView2.mPositioner.getRestingPosition());
+                                                                bubbleStackView2.mDismissView.hide();
+                                                            }
+                                                            bubbleStackView2.logBubbleEvent(bubble7, 5);
+                                                        }
+                                                    }
+                                                    i3++;
+                                                } else if ((bubble7.mFlags & 8) != 0) {
+                                                    bubble7.cleanupViews();
+                                                    bubbleStackView2.logBubbleEvent(bubble7, 5);
+                                                } else {
+                                                    Log.w("Bubbles", "was asked to remove Bubble, but didn't find the view! " + bubble7);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (iIntValue != 8 && iIntValue != 14) {
+                                        if (iIntValue == 5 || iIntValue == 12) {
+                                            arrayList3.add(bubble7);
+                                        }
+                                        if (!BubbleController.this.mBubbleData.hasBubbleInStackWithKey(bubble7.mKey)) {
+                                            if (BubbleController.this.mBubbleData.hasOverflowBubbleWithKey(bubble7.mKey) || !(!bubble7.showInShade() || iIntValue == 5 || iIntValue == 9)) {
+                                                if (bubble7.mIsBubble) {
+                                                    BubbleController.this.setIsBubble(bubble7, false);
+                                                }
+                                                BubblesManager.AnonymousClass5 anonymousClass5 = BubbleController.this.mSysuiProxy;
+                                                anonymousClass5.val$sysuiMainExecutor.execute(new BubblesManager$5$$ExternalSyntheticLambda1(anonymousClass5, bubble7.mKey, 0));
+                                            } else {
+                                                BubblesManager.AnonymousClass5 anonymousClass52 = BubbleController.this.mSysuiProxy;
+                                                anonymousClass52.val$sysuiMainExecutor.execute(new BubblesManager$5$$ExternalSyntheticLambda1(anonymousClass52, bubble7.mKey, 2));
+                                            }
+                                        }
+                                    }
+                                }
+                                BubbleController bubbleController = BubbleController.this;
+                                BubbleDataRepository bubbleDataRepository = bubbleController.mDataRepository;
+                                int i4 = bubbleController.mCurrentUserId;
+                                bubbleDataRepository.getClass();
+                                List listTransform = BubbleDataRepository.transform(arrayList3);
+                                BubbleVolatileRepository bubbleVolatileRepository = bubbleDataRepository.volatileRepository;
+                                synchronized (bubbleVolatileRepository) {
+                                    try {
+                                        ArrayList arrayList4 = new ArrayList();
+                                        arrayList = (ArrayList) listTransform;
+                                        int size2 = arrayList.size();
+                                        int i5 = 0;
+                                        while (i5 < size2) {
+                                            Object obj2 = arrayList.get(i5);
+                                            i5++;
+                                            if (bubbleVolatileRepository.getEntities(i4).removeIf(new BubbleVolatileRepositoryKt$sam$java_util_function_Predicate$0(new BubbleVolatileRepository$$ExternalSyntheticLambda0((BubbleEntity) obj2, 1)))) {
+                                                arrayList4.add(obj2);
+                                            }
+                                        }
+                                        bubbleVolatileRepository.uncache(arrayList4);
+                                    } finally {
+                                    }
+                                }
+                                if (!arrayList.isEmpty()) {
+                                    BubbleDataRepository.persistToDisk$default(bubbleDataRepository);
+                                }
+                                Bubble bubble8 = update3.addedBubble;
+                                if (bubble8 != null) {
+                                    BubbleController bubbleController2 = BubbleController.this;
+                                    BubbleDataRepository bubbleDataRepository2 = bubbleController2.mDataRepository;
+                                    int i6 = bubbleController2.mCurrentUserId;
+                                    bubbleDataRepository2.getClass();
+                                    List listTransform2 = BubbleDataRepository.transform(Collections.singletonList(bubble8));
+                                    bubbleDataRepository2.volatileRepository.addBubbles(i6, listTransform2);
+                                    if (!((ArrayList) listTransform2).isEmpty()) {
+                                        BubbleDataRepository.persistToDisk$default(bubbleDataRepository2);
+                                    }
+                                    BubbleController.AnonymousClass8 anonymousClass82 = BubbleController.this.mBubbleViewCallback;
+                                    Bubble bubble9 = update3.addedBubble;
+                                    BubbleStackView bubbleStackView3 = BubbleController.this.mStackView;
+                                    if (bubbleStackView3 != null) {
+                                        bubbleStackView3.addBubble(bubble9);
+                                    }
+                                }
+                                Bubble bubble10 = update3.updatedBubble;
+                                if (bubble10 != null && (bubbleStackView = BubbleController.this.mStackView) != null) {
+                                    bubbleStackView.animateInFlyoutForBubble(bubble10);
+                                    bubbleStackView.requestUpdate();
+                                    bubbleStackView.logBubbleEvent(bubble10, 2);
+                                }
+                                Bubble bubble11 = update3.suppressedBubble;
+                                if (bubble11 != null) {
+                                    BubbleController.this.mBubbleViewCallback.suppressionChanged(bubble11, true);
+                                }
+                                Bubble bubble12 = update3.unsuppressedBubble;
+                                if (bubble12 != null) {
+                                    BubbleController.this.mBubbleViewCallback.suppressionChanged(bubble12, false);
+                                }
+                                boolean z10 = update3.expandedChanged && !update3.expanded;
+                                if (update3.orderChanged) {
+                                    BubbleController bubbleController3 = BubbleController.this;
+                                    BubbleDataRepository bubbleDataRepository3 = bubbleController3.mDataRepository;
+                                    int i7 = bubbleController3.mCurrentUserId;
+                                    List list = update3.bubbles;
+                                    bubbleDataRepository3.getClass();
+                                    List listTransform3 = BubbleDataRepository.transform(list);
+                                    bubbleDataRepository3.volatileRepository.addBubbles(i7, listTransform3);
+                                    if (!((ArrayList) listTransform3).isEmpty()) {
+                                        BubbleDataRepository.persistToDisk$default(bubbleDataRepository3);
+                                    }
+                                    BubbleController.AnonymousClass8 anonymousClass83 = BubbleController.this.mBubbleViewCallback;
+                                    List list2 = update3.bubbles;
+                                    boolean z11 = !z10;
+                                    BubbleStackView bubbleStackView4 = BubbleController.this.mStackView;
+                                    if (bubbleStackView4 != null) {
+                                        if (bubbleStackView4.mIsGestureInProgress) {
+                                            bubbleStackView4.mShouldReorderBubblesAfterGestureCompletes = true;
+                                        } else {
+                                            bubbleStackView4.updateBubbleOrderInternal(list2, z11);
+                                        }
+                                    }
+                                }
+                                if (z10) {
+                                    i = 0;
+                                    BubbleController.this.mBubbleViewCallback.expansionChanged(false);
+                                    final BubblesManager.AnonymousClass5 anonymousClass53 = BubbleController.this.mSysuiProxy;
+                                    Executor executor = anonymousClass53.val$sysuiMainExecutor;
+                                    final Object[] objArr = 0 == true ? 1 : 0;
+                                    executor.execute(new Runnable() { // from class: com.android.systemui.wmshell.BubblesManager$5$$ExternalSyntheticLambda6
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            BubblesManager.AnonymousClass5 anonymousClass54 = anonymousClass53;
+                                            ((NotificationShadeWindowControllerImpl) BubblesManager.this.mNotificationShadeWindowController).setRequestTopUi("Bubbles", objArr);
+                                        }
+                                    });
+                                } else {
+                                    i = 0;
+                                }
+                                if (update3.selectionChanged) {
+                                    BubbleController.AnonymousClass8 anonymousClass84 = BubbleController.this.mBubbleViewCallback;
+                                    BubbleViewProvider bubbleViewProvider5 = update3.selectedBubble;
+                                    BubbleStackView bubbleStackView5 = BubbleController.this.mStackView;
+                                    if (bubbleStackView5 != null) {
+                                        bubbleStackView5.setSelectedBubble(bubbleViewProvider5);
+                                    }
+                                }
+                                if (update3.expandedChanged && update3.expanded) {
+                                    BubbleController.this.mBubbleViewCallback.expansionChanged(true);
+                                    final BubblesManager.AnonymousClass5 anonymousClass54 = BubbleController.this.mSysuiProxy;
+                                    anonymousClass54.val$sysuiMainExecutor.execute(new Runnable() { // from class: com.android.systemui.wmshell.BubblesManager$5$$ExternalSyntheticLambda6
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            BubblesManager.AnonymousClass5 anonymousClass542 = anonymousClass54;
+                                            ((NotificationShadeWindowControllerImpl) BubblesManager.this.mNotificationShadeWindowController).setRequestTopUi("Bubbles", z2);
+                                        }
+                                    });
+                                }
+                                BubblesManager.AnonymousClass5 anonymousClass55 = BubbleController.this.mSysuiProxy;
+                                anonymousClass55.val$sysuiMainExecutor.execute(new BubblesManager$5$$ExternalSyntheticLambda1(anonymousClass55, "BubbleData.Listener.applyUpdate", 3));
+                                BubbleController.this.updateBubbleViews();
+                                BubbleController.BubblesImpl.CachedState cachedState = BubbleController.this.mImpl.mCachedState;
+                                synchronized (cachedState) {
+                                    try {
+                                        if (update3.selectionChanged) {
+                                            BubbleViewProvider bubbleViewProvider6 = update3.selectedBubble;
+                                            cachedState.mSelectedBubbleKey = bubbleViewProvider6 != null ? bubbleViewProvider6.getKey() : null;
+                                        }
+                                        if (update3.expandedChanged) {
+                                            cachedState.mIsStackExpanded = update3.expanded;
+                                        }
+                                        if (update3.suppressedSummaryChanged) {
+                                            String str = (String) BubbleController.this.mBubbleData.mSuppressedGroupKeys.get(update3.suppressedSummaryGroup);
+                                            if (str != null) {
+                                                cachedState.mSuppressedGroupToNotifKeys.put(update3.suppressedSummaryGroup, str);
+                                            } else {
+                                                cachedState.mSuppressedGroupToNotifKeys.remove(update3.suppressedSummaryGroup);
+                                            }
+                                        }
+                                        cachedState.mTmpBubbles.clear();
+                                        cachedState.mTmpBubbles.addAll(update3.bubbles);
+                                        cachedState.mTmpBubbles.addAll(update3.overflowBubbles);
+                                        cachedState.mSuppressedBubbleKeys.clear();
+                                        cachedState.mShortcutIdToBubble.clear();
+                                        cachedState.mNoteBubbleTaskIds.clear();
+                                        ArrayList arrayList5 = cachedState.mTmpBubbles;
+                                        int size3 = arrayList5.size();
+                                        while (i < size3) {
+                                            Object obj3 = arrayList5.get(i);
+                                            i++;
+                                            Bubble bubble13 = (Bubble) obj3;
+                                            HashMap map = cachedState.mShortcutIdToBubble;
+                                            ShortcutInfo shortcutInfo = bubble13.mShortcutInfo;
+                                            map.put(shortcutInfo != null ? shortcutInfo.getId() : bubble13.mMetadataShortcutId, bubble13);
+                                            cachedState.updateBubbleSuppressedState(bubble13);
+                                            if (bubble13.isNote()) {
+                                                cachedState.mNoteBubbleTaskIds.put(bubble13.mKey, Integer.valueOf(bubble13.getTaskId()));
+                                            }
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                BubbleController.this.getClass();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        this.mStateChange = new Update(this.mBubbles, this.mOverflowBubbles, 0);
     }
 
     public final void doRemove(int i, String str) {
@@ -299,9 +653,9 @@ public class BubbleData {
         }
         this.mStateChange.suppressedBubble = bubble;
         bubble.setSuppressBubble(true);
-        int indexOf = ((ArrayList) this.mBubbles).indexOf(bubble);
-        this.mStateChange.orderChanged = ((ArrayList) this.mBubbles).size() - 1 != indexOf;
-        ((ArrayList) this.mBubbles).remove(indexOf);
+        int iIndexOf = ((ArrayList) this.mBubbles).indexOf(bubble);
+        this.mStateChange.orderChanged = ((ArrayList) this.mBubbles).size() - 1 != iIndexOf;
+        ((ArrayList) this.mBubbles).remove(iIndexOf);
         if (Objects.equals(this.mSelectedBubble, bubble)) {
             if (((ArrayList) this.mBubbles).isEmpty()) {
                 this.mSelectedBubble = null;
@@ -339,77 +693,46 @@ public class BubbleData {
         return getBubbleWithPredicate(this.mBubbles, new BubbleData$$ExternalSyntheticLambda1(str, 3));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0062 A[PHI: r1
+      0x0062: PHI (r1v1 com.android.wm.shell.bubbles.Bubble) = (r1v0 com.android.wm.shell.bubbles.Bubble), (r1v3 com.android.wm.shell.bubbles.Bubble) binds: [B:6:0x000f, B:18:0x004c] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.wm.shell.bubbles.Bubble getOrCreateBubble(com.android.wm.shell.bubbles.BubbleEntry r9, com.android.wm.shell.bubbles.Bubble r10) {
-        /*
-            r8 = this;
-            if (r10 == 0) goto L5
-            java.lang.String r0 = r10.mKey
-            goto Lb
-        L5:
-            android.service.notification.StatusBarNotification r0 = r9.mSbn
-            java.lang.String r0 = r0.getKey()
-        Lb:
-            com.android.wm.shell.bubbles.Bubble r1 = r8.getBubbleInStackWithKey(r0)
-            if (r1 != 0) goto L62
-            com.android.wm.shell.bubbles.Bubble r1 = r8.getBubbleInStackWithKey(r0)
-            if (r1 == 0) goto L18
-            goto L4c
-        L18:
-            com.android.wm.shell.bubbles.Bubble r1 = r8.getOverflowBubbleWithKey(r0)
-            if (r1 == 0) goto L3c
-            java.util.List r2 = r8.mOverflowBubbles
-            java.util.ArrayList r2 = (java.util.ArrayList) r2
-            r2.remove(r1)
-            java.util.List r2 = r8.mOverflowBubbles
-            java.util.ArrayList r2 = (java.util.ArrayList) r2
-            r2.remove(r1)
-            java.util.List r2 = r8.mOverflowBubbles
-            java.util.ArrayList r2 = (java.util.ArrayList) r2
-            boolean r2 = r2.isEmpty()
-            if (r2 == 0) goto L4c
-            com.android.wm.shell.bubbles.BubbleData$Update r2 = r8.mStateChange
-            r3 = 1
-            r2.showOverflowChanged = r3
-            goto L4c
-        L3c:
-            java.util.HashMap r2 = r8.mPendingBubbles
-            boolean r2 = r2.containsKey(r0)
-            if (r2 == 0) goto L4c
-            java.util.HashMap r1 = r8.mPendingBubbles
-            java.lang.Object r1 = r1.get(r0)
-            com.android.wm.shell.bubbles.Bubble r1 = (com.android.wm.shell.bubbles.Bubble) r1
-        L4c:
-            if (r1 != 0) goto L62
-            if (r9 == 0) goto L60
-            com.android.wm.shell.bubbles.Bubble r2 = new com.android.wm.shell.bubbles.Bubble
-            com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda5 r4 = r8.mBubbleMetadataFlagListener
-            com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda5 r5 = r8.mCancelledListener
-            java.util.concurrent.Executor r6 = r8.mMainExecutor
-            java.util.concurrent.Executor r7 = r8.mBgExecutor
-            r3 = r9
-            r2.<init>(r3, r4, r5, r6, r7)
-            r10 = r2
-            goto L64
-        L60:
-            r3 = r9
-            goto L64
-        L62:
-            r3 = r9
-            r10 = r1
-        L64:
-            if (r3 == 0) goto L69
-            r10.setEntry(r3)
-        L69:
-            java.util.HashMap r8 = r8.mPendingBubbles
-            r8.put(r0, r10)
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleData.getOrCreateBubble(com.android.wm.shell.bubbles.BubbleEntry, com.android.wm.shell.bubbles.Bubble):com.android.wm.shell.bubbles.Bubble");
+    public final Bubble getOrCreateBubble(BubbleEntry bubbleEntry, Bubble bubble) {
+        BubbleEntry bubbleEntry2;
+        String key = bubble != null ? bubble.mKey : bubbleEntry.mSbn.getKey();
+        Bubble bubbleInStackWithKey = getBubbleInStackWithKey(key);
+        if (bubbleInStackWithKey != null) {
+            bubbleEntry2 = bubbleEntry;
+            bubble = bubbleInStackWithKey;
+        } else {
+            bubbleInStackWithKey = getBubbleInStackWithKey(key);
+            if (bubbleInStackWithKey == null) {
+                bubbleInStackWithKey = getOverflowBubbleWithKey(key);
+                if (bubbleInStackWithKey != null) {
+                    ((ArrayList) this.mOverflowBubbles).remove(bubbleInStackWithKey);
+                    ((ArrayList) this.mOverflowBubbles).remove(bubbleInStackWithKey);
+                    if (((ArrayList) this.mOverflowBubbles).isEmpty()) {
+                        this.mStateChange.showOverflowChanged = true;
+                    }
+                } else if (this.mPendingBubbles.containsKey(key)) {
+                    bubbleInStackWithKey = (Bubble) this.mPendingBubbles.get(key);
+                }
+            }
+            if (bubbleInStackWithKey == null) {
+                if (bubbleEntry != null) {
+                    bubbleEntry2 = bubbleEntry;
+                    bubble = new Bubble(bubbleEntry2, this.mBubbleMetadataFlagListener, this.mCancelledListener, this.mMainExecutor, this.mBgExecutor);
+                } else {
+                    bubbleEntry2 = bubbleEntry;
+                }
+            }
+        }
+        if (bubbleEntry2 != null) {
+            bubble.setEntry(bubbleEntry2);
+        }
+        this.mPendingBubbles.put(key, bubble);
+        return bubble;
     }
 
     public final Bubble getOverflowBubbleWithKey(String str) {
@@ -454,6 +777,10 @@ public class BubbleData {
         return this.mSuppressedGroupKeys.containsKey(str);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:55:0x013a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void notificationEntryUpdated(Bubble bubble, boolean z, boolean z2, BubbleBarLocation bubbleBarLocation) {
         this.mPendingBubbles.remove(bubble.mKey);
         String str = bubble.mKey;
@@ -482,10 +809,10 @@ public class BubbleData {
             }
             this.mStateChange.updatedBubble = bubble;
             if (!this.mExpanded && !z3) {
-                int indexOf = ((ArrayList) this.mBubbles).indexOf(bubble);
+                int iIndexOf = ((ArrayList) this.mBubbles).indexOf(bubble);
                 ((ArrayList) this.mBubbles).remove(bubble);
                 ((ArrayList) this.mBubbles).add(0, bubble);
-                this.mStateChange.orderChanged = indexOf != 0;
+                this.mStateChange.orderChanged = iIndexOf != 0;
                 setSelectedBubbleInternal((BubbleViewProvider) ((ArrayList) this.mBubbles).get(0));
             }
         }
@@ -501,19 +828,18 @@ public class BubbleData {
         bubble.setShowDot(!z4);
         LocusId locusId = bubble.mLocusId;
         if (locusId != null) {
-            boolean containsKey = this.mSuppressedBubbles.containsKey(locusId);
-            if (containsKey) {
+            boolean zContainsKey = this.mSuppressedBubbles.containsKey(locusId);
+            if (zContainsKey) {
                 int i = bubble.mFlags;
                 if ((i & 8) == 0 || (i & 4) == 0) {
                     this.mSuppressedBubbles.remove(locusId);
                     doUnsuppress(bubble);
-                }
-            }
-            if (!containsKey) {
-                int i2 = bubble.mFlags;
-                if ((i2 & 8) != 0 || ((i2 & 4) != 0 && this.mVisibleLocusIds.contains(locusId))) {
-                    this.mSuppressedBubbles.put(locusId, bubble);
-                    doSuppress(bubble);
+                } else if (!zContainsKey) {
+                    int i2 = bubble.mFlags;
+                    if ((i2 & 8) != 0 || ((i2 & 4) != 0 && this.mVisibleLocusIds.contains(locusId))) {
+                        this.mSuppressedBubbles.put(locusId, bubble);
+                        doSuppress(bubble);
+                    }
                 }
             }
         }
@@ -550,7 +876,7 @@ public class BubbleData {
                 bubbleViewInfoTask.mCancelled.set(true);
             }
             if (((ArrayList) this.mOverflowBubbles).size() == this.mMaxOverflowBubbles + 1) {
-                Bubble bubble2 = (Bubble) AlertController$$ExternalSyntheticOutline0.m((ArrayList) this.mOverflowBubbles, 1);
+                Bubble bubble2 = (Bubble) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.mOverflowBubbles);
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
                     ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -6275330112042878428L, 0, String.valueOf(bubble2.mKey));
                 }

@@ -13,13 +13,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KClass;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ViewModelProvider {
     public static final Companion Companion = new Companion(null);
     public final ViewModelProviderImpl impl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,7 +54,6 @@ public class ViewModelProvider {
         return this.impl.getViewModel$lifecycle_viewmodel_release(kClass, "androidx.lifecycle.ViewModelProvider.DefaultKey:".concat(qualifiedName));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AndroidViewModelFactory extends NewInstanceFactory {
         public static AndroidViewModelFactory _instance;
         public final Application application;
@@ -64,7 +61,6 @@ public class ViewModelProvider {
         public static final ViewModelProvider$AndroidViewModelFactory$Companion$APPLICATION_KEY$1 APPLICATION_KEY = new CreationExtras.Key() { // from class: androidx.lifecycle.ViewModelProvider$AndroidViewModelFactory$Companion$APPLICATION_KEY$1
         };
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -130,10 +126,8 @@ public class ViewModelProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -163,13 +157,11 @@ public class ViewModelProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NewInstanceFactory implements Factory {
         public static final Companion Companion = new Companion(null);
         public static final ViewModelProviders.ViewModelKey VIEW_MODEL_KEY = ViewModelProviders.ViewModelKey.INSTANCE;
         public static NewInstanceFactory _instance;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -213,64 +205,38 @@ public class ViewModelProvider {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ViewModelProvider(androidx.lifecycle.ViewModelStoreOwner r4) {
-        /*
-            r3 = this;
-            androidx.lifecycle.ViewModelStore r0 = r4.getViewModelStore()
-            androidx.lifecycle.viewmodel.internal.ViewModelProviders r1 = androidx.lifecycle.viewmodel.internal.ViewModelProviders.INSTANCE
-            r1.getClass()
-            boolean r1 = r4 instanceof androidx.lifecycle.HasDefaultViewModelProviderFactory
-            if (r1 == 0) goto L15
-            r2 = r4
-            androidx.lifecycle.HasDefaultViewModelProviderFactory r2 = (androidx.lifecycle.HasDefaultViewModelProviderFactory) r2
-            androidx.lifecycle.ViewModelProvider$Factory r2 = r2.getDefaultViewModelProviderFactory()
-            goto L17
-        L15:
-            androidx.lifecycle.viewmodel.internal.DefaultViewModelProviderFactory r2 = androidx.lifecycle.viewmodel.internal.DefaultViewModelProviderFactory.INSTANCE
-        L17:
-            if (r1 == 0) goto L20
-            androidx.lifecycle.HasDefaultViewModelProviderFactory r4 = (androidx.lifecycle.HasDefaultViewModelProviderFactory) r4
-            androidx.lifecycle.viewmodel.CreationExtras r4 = r4.getDefaultViewModelCreationExtras()
-            goto L22
-        L20:
-            androidx.lifecycle.viewmodel.CreationExtras$Empty r4 = androidx.lifecycle.viewmodel.CreationExtras.Empty.INSTANCE
-        L22:
-            r3.<init>(r0, r2, r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.lifecycle.ViewModelProvider.<init>(androidx.lifecycle.ViewModelStoreOwner):void");
+    public ViewModelProvider(ViewModelStoreOwner viewModelStoreOwner) {
+        Factory defaultViewModelProviderFactory;
+        CreationExtras defaultViewModelCreationExtras;
+        ViewModelStore viewModelStore = viewModelStoreOwner.getViewModelStore();
+        ViewModelProviders.INSTANCE.getClass();
+        boolean z = viewModelStoreOwner instanceof HasDefaultViewModelProviderFactory;
+        if (z) {
+            defaultViewModelProviderFactory = ((HasDefaultViewModelProviderFactory) viewModelStoreOwner).getDefaultViewModelProviderFactory();
+        } else {
+            defaultViewModelProviderFactory = DefaultViewModelProviderFactory.INSTANCE;
+        }
+        if (z) {
+            defaultViewModelCreationExtras = ((HasDefaultViewModelProviderFactory) viewModelStoreOwner).getDefaultViewModelCreationExtras();
+        } else {
+            defaultViewModelCreationExtras = CreationExtras.Empty.INSTANCE;
+        }
+        this(viewModelStore, defaultViewModelProviderFactory, defaultViewModelCreationExtras);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ViewModelProvider(androidx.lifecycle.ViewModelStoreOwner r3, androidx.lifecycle.ViewModelProvider.Factory r4) {
-        /*
-            r2 = this;
-            androidx.lifecycle.ViewModelStore r0 = r3.getViewModelStore()
-            androidx.lifecycle.viewmodel.internal.ViewModelProviders r1 = androidx.lifecycle.viewmodel.internal.ViewModelProviders.INSTANCE
-            r1.getClass()
-            boolean r1 = r3 instanceof androidx.lifecycle.HasDefaultViewModelProviderFactory
-            if (r1 == 0) goto L14
-            androidx.lifecycle.HasDefaultViewModelProviderFactory r3 = (androidx.lifecycle.HasDefaultViewModelProviderFactory) r3
-            androidx.lifecycle.viewmodel.CreationExtras r3 = r3.getDefaultViewModelCreationExtras()
-            goto L16
-        L14:
-            androidx.lifecycle.viewmodel.CreationExtras$Empty r3 = androidx.lifecycle.viewmodel.CreationExtras.Empty.INSTANCE
-        L16:
-            r2.<init>(r0, r4, r3)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.lifecycle.ViewModelProvider.<init>(androidx.lifecycle.ViewModelStoreOwner, androidx.lifecycle.ViewModelProvider$Factory):void");
+    public ViewModelProvider(ViewModelStoreOwner viewModelStoreOwner, Factory factory) {
+        CreationExtras defaultViewModelCreationExtras;
+        ViewModelStore viewModelStore = viewModelStoreOwner.getViewModelStore();
+        ViewModelProviders.INSTANCE.getClass();
+        if (viewModelStoreOwner instanceof HasDefaultViewModelProviderFactory) {
+            defaultViewModelCreationExtras = ((HasDefaultViewModelProviderFactory) viewModelStoreOwner).getDefaultViewModelCreationExtras();
+        } else {
+            defaultViewModelCreationExtras = CreationExtras.Empty.INSTANCE;
+        }
+        this(viewModelStore, factory, defaultViewModelCreationExtras);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnRequeryFactory {
         public void onRequery(ViewModel viewModel) {
         }

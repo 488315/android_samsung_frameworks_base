@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ SecTileQueryHelper f$0;
@@ -38,8 +37,8 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 
     @Override // java.lang.Runnable
     public final void run() {
         String str;
-        QSTile.State state;
-        Drawable loadIcon;
+        QSTile.State stateCopy;
+        Drawable drawableLoadIcon;
         Bundle bundle;
         SecTileQueryHelper secTileQueryHelper = this.f$0;
         QSHost qSHost = this.f$1;
@@ -48,9 +47,9 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 
         PackageManager packageManager = secTileQueryHelper.mContext.getPackageManager();
         Intent intent = new Intent("android.service.quicksettings.action.QS_TILE");
         UserTrackerImpl userTrackerImpl = (UserTrackerImpl) secTileQueryHelper.mUserTracker;
-        List<ResolveInfo> queryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(intent, 128, userTrackerImpl.getUserId());
+        List<ResolveInfo> listQueryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(intent, 128, userTrackerImpl.getUserId());
         secTileQueryHelper.mContext.getString(R.string.quick_settings_tiles_stock);
-        for (ResolveInfo resolveInfo : queryIntentServicesAsUser) {
+        for (ResolveInfo resolveInfo : listQueryIntentServicesAsUser) {
             ComponentName componentName = new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
             ServiceInfo serviceInfo = resolveInfo.serviceInfo;
             Bundle bundle2 = serviceInfo.metaData;
@@ -60,7 +59,7 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 
                     }
                 }
             }
-            CharSequence loadLabel = resolveInfo.serviceInfo.applicationInfo.loadLabel(packageManager);
+            CharSequence charSequenceLoadLabel = resolveInfo.serviceInfo.applicationInfo.loadLabel(packageManager);
             String spec = CustomTile.toSpec(componentName);
             if (qSHost.isUnsupportedTile(spec)) {
                 str = "addPackageTiles : isUnsupportedTile : ";
@@ -80,19 +79,19 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 
                     int i = 0;
                     while (true) {
                         if (i >= size) {
-                            state = null;
+                            stateCopy = null;
                             break;
                         }
                         Object obj = arrayList.get(i);
                         i++;
                         QSTile qSTile = (QSTile) obj;
                         if (spec.equals(qSTile.getTileSpec())) {
-                            state = qSTile.getState().copy();
+                            stateCopy = qSTile.getState().copy();
                             break;
                         }
                     }
-                    if (state != null) {
-                        secTileQueryHelper.addTile(spec, loadLabel, state, false);
+                    if (stateCopy != null) {
+                        secTileQueryHelper.addTile(spec, charSequenceLoadLabel, stateCopy, false);
                     } else {
                         ServiceInfo serviceInfo2 = resolveInfo.serviceInfo;
                         if (serviceInfo2.icon != 0 || serviceInfo2.applicationInfo.icon != 0) {
@@ -103,32 +102,32 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda0 
                                 if (i2 == 0) {
                                     i2 = serviceInfo3.applicationInfo.icon;
                                 }
-                                Icon createWithResource = i2 != 0 ? Icon.createWithResource(serviceInfo3.packageName, i2) : null;
-                                loadIcon = createWithResource != null ? createWithResource.loadDrawableAsUser(secTileQueryHelper.mContext, userId) : resolveInfo.serviceInfo.loadIcon(packageManager);
+                                Icon iconCreateWithResource = i2 != 0 ? Icon.createWithResource(serviceInfo3.packageName, i2) : null;
+                                drawableLoadIcon = iconCreateWithResource != null ? iconCreateWithResource.loadDrawableAsUser(secTileQueryHelper.mContext, userId) : resolveInfo.serviceInfo.loadIcon(packageManager);
                             } catch (Exception unused) {
-                                loadIcon = resolveInfo.serviceInfo.loadIcon(packageManager);
+                                drawableLoadIcon = resolveInfo.serviceInfo.loadIcon(packageManager);
                             }
-                            if ("android.permission.BIND_QUICK_SETTINGS_TILE".equals(resolveInfo.serviceInfo.permission) && loadIcon != null) {
-                                loadIcon.mutate();
-                                loadIcon.setTint(secTileQueryHelper.mContext.getColor(android.R.color.white));
-                                CharSequence loadLabel2 = resolveInfo.serviceInfo.loadLabel(packageManager);
-                                String charSequence = loadLabel2 != null ? loadLabel2.toString() : "null";
-                                QSTile.State state2 = new QSTile.State();
-                                state2.state = 1;
-                                state2.label = charSequence;
-                                state2.contentDescription = charSequence;
+                            if ("android.permission.BIND_QUICK_SETTINGS_TILE".equals(resolveInfo.serviceInfo.permission) && drawableLoadIcon != null) {
+                                drawableLoadIcon.mutate();
+                                drawableLoadIcon.setTint(secTileQueryHelper.mContext.getColor(android.R.color.white));
+                                CharSequence charSequenceLoadLabel2 = resolveInfo.serviceInfo.loadLabel(packageManager);
+                                String string = charSequenceLoadLabel2 != null ? charSequenceLoadLabel2.toString() : "null";
+                                QSTile.State state = new QSTile.State();
+                                state.state = 1;
+                                state.label = string;
+                                state.contentDescription = string;
                                 try {
                                     bundle = secTileQueryHelper.mContext.getPackageManager().getServiceInfo(CustomTile.getComponentFromSpec(spec), 786560).metaData;
                                 } catch (PackageManager.NameNotFoundException unused2) {
                                 }
-                                if (bundle != null && !"".equals(bundle.getString("android.service.quicksettings.SEM_DEFAULT_TILE_NAME", ""))) {
-                                    state2.icon = new QSTileImpl.DrawableIcon(loadIcon);
-                                    secTileQueryHelper.addTile(spec, loadLabel, state2, false);
+                                if (bundle == null || "".equals(bundle.getString("android.service.quicksettings.SEM_DEFAULT_TILE_NAME", ""))) {
+                                    ScalingDrawableWrapper scalingDrawableWrapper = new ScalingDrawableWrapper(drawableLoadIcon, SecurityUtils$$ExternalSyntheticOutline0.m(secTileQueryHelper.mContext, R.dimen.qs_non_sec_customtile_icon_resize_ratio, secTileQueryHelper.mResourcePicker.getTileIconSize(secTileQueryHelper.mContext) / drawableLoadIcon.getIntrinsicWidth()));
+                                    scalingDrawableWrapper.mCloneDrawable = drawableLoadIcon.getConstantState().newDrawable();
+                                    state.icon = new QSTileImpl.DrawableIcon(scalingDrawableWrapper, secTileQueryHelper.mContext);
+                                } else {
+                                    state.icon = new QSTileImpl.DrawableIcon(drawableLoadIcon);
                                 }
-                                ScalingDrawableWrapper scalingDrawableWrapper = new ScalingDrawableWrapper(loadIcon, SecurityUtils$$ExternalSyntheticOutline0.m(secTileQueryHelper.mContext, R.dimen.qs_non_sec_customtile_icon_resize_ratio, secTileQueryHelper.mResourcePicker.getTileIconSize(secTileQueryHelper.mContext) / loadIcon.getIntrinsicWidth()));
-                                scalingDrawableWrapper.mCloneDrawable = loadIcon.getConstantState().newDrawable();
-                                state2.icon = new QSTileImpl.DrawableIcon(scalingDrawableWrapper, secTileQueryHelper.mContext);
-                                secTileQueryHelper.addTile(spec, loadLabel, state2, false);
+                                secTileQueryHelper.addTile(spec, charSequenceLoadLabel, state, false);
                             }
                         }
                     }

@@ -9,12 +9,14 @@ import com.android.internal.logging.InstanceId;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaData {
     public final List actions;
@@ -46,7 +48,6 @@ public final class MediaData {
     public final MediaSession.Token token;
     public final int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -126,49 +127,113 @@ public final class MediaData {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.userId) * 31, 31, this.initialized);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.userId) * 31, 31, this.initialized);
         String str = this.app;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         Icon icon = this.appIcon;
-        int hashCode2 = (hashCode + (icon == null ? 0 : icon.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (icon == null ? 0 : icon.hashCode())) * 31;
         CharSequence charSequence = this.artist;
-        int hashCode3 = (hashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         CharSequence charSequence2 = this.song;
-        int hashCode4 = (hashCode3 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
         Icon icon2 = this.artwork;
-        int m2 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionsToShowInCompact, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actions, (hashCode4 + (icon2 == null ? 0 : icon2.hashCode())) * 31, 31), 31);
+        int iM2 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionsToShowInCompact, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actions, (iHashCode4 + (icon2 == null ? 0 : icon2.hashCode())) * 31, 31), 31);
         MediaButton mediaButton = this.semanticActions;
-        int m3 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((m2 + (mediaButton == null ? 0 : mediaButton.hashCode())) * 31, 31, this.packageName);
+        int iM3 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iM2 + (mediaButton == null ? 0 : mediaButton.hashCode())) * 31, 31, this.packageName);
         MediaSession.Token token = this.token;
-        int hashCode5 = (m3 + (token == null ? 0 : token.hashCode())) * 31;
+        int iHashCode5 = (iM3 + (token == null ? 0 : token.hashCode())) * 31;
         PendingIntent pendingIntent = this.clickIntent;
-        int hashCode6 = (hashCode5 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
         MediaDeviceData mediaDeviceData = this.device;
-        int m4 = TransitionData$$ExternalSyntheticOutline0.m((hashCode6 + (mediaDeviceData == null ? 0 : mediaDeviceData.hashCode())) * 31, 31, this.active);
+        int iM4 = TransitionData$$ExternalSyntheticOutline0.m((iHashCode6 + (mediaDeviceData == null ? 0 : mediaDeviceData.hashCode())) * 31, 31, this.active);
         Runnable runnable = this.resumeAction;
-        int m5 = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.playbackLocation, (m4 + (runnable == null ? 0 : runnable.hashCode())) * 31, 31), 31, this.resumption);
+        int iM5 = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.playbackLocation, (iM4 + (runnable == null ? 0 : runnable.hashCode())) * 31, 31), 31, this.resumption);
         String str2 = this.notificationKey;
-        int m6 = TransitionData$$ExternalSyntheticOutline0.m((m5 + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.hasCheckedForResume);
+        int iM6 = TransitionData$$ExternalSyntheticOutline0.m((iM5 + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.hasCheckedForResume);
         Boolean bool = this.isPlaying;
-        int m7 = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.appUid, (this.instanceId.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((m6 + (bool == null ? 0 : bool.hashCode())) * 31, 31, this.isClearable), 31, this.lastActive), 31, this.createdTimestampMillis)) * 31, 31), 31, this.isExplicit);
+        int iM7 = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.appUid, (this.instanceId.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iM6 + (bool == null ? 0 : bool.hashCode())) * 31, 31, this.isClearable), 31, this.lastActive), 31, this.createdTimestampMillis)) * 31, 31), 31, this.isExplicit);
         Double d = this.resumeProgress;
-        return m7 + (d != null ? d.hashCode() : 0);
+        return iM7 + (d != null ? d.hashCode() : 0);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x00f6, code lost:
-    
-        if (r3 == null) goto L30;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00f8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String toString() {
-        /*
-            Method dump skipped, instructions count: 624
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.shared.model.MediaData.toString():java.lang.String");
+    public final String toString() {
+        StringBuilder sb;
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append(" [ USERID : " + this.userId + " ]");
+        sb2.append(" [ INITIALIZED : " + this.initialized + " ]");
+        String str = this.app;
+        if (str != null) {
+            sb2.append(" [ APP : " + str + " ]");
+        }
+        CharSequence charSequence = this.artist;
+        if (charSequence != null) {
+            sb2.append(" [ ARTIST : " + ((Object) charSequence) + " ]");
+        }
+        CharSequence charSequence2 = this.song;
+        if (charSequence2 != null) {
+            sb2.append(" [ SONG : " + ((Object) charSequence2) + " ]");
+        }
+        sb2.append(" [ ACTIONS : ");
+        MediaButton mediaButton = this.semanticActions;
+        if (mediaButton == null) {
+            Iterator it = this.actions.iterator();
+            while (it.hasNext()) {
+                sb2.append(((Object) ((MediaNotificationAction) it.next()).contentDescription) + ", ");
+            }
+            Unit unit = Unit.INSTANCE;
+        } else {
+            MediaAction mediaAction = mediaButton.custom0;
+            if (mediaAction != null) {
+                sb2.append(((Object) mediaAction.contentDescription) + ", ");
+            }
+            MediaAction mediaAction2 = mediaButton.prevOrCustom;
+            if (mediaAction2 != null) {
+                sb2.append(((Object) mediaAction2.contentDescription) + ", ");
+            }
+            MediaAction mediaAction3 = mediaButton.playOrPause;
+            if (mediaAction3 != null) {
+                sb2.append(((Object) mediaAction3.contentDescription) + ", ");
+            }
+            MediaAction mediaAction4 = mediaButton.nextOrCustom;
+            if (mediaAction4 != null) {
+                sb2.append(((Object) mediaAction4.contentDescription) + ", ");
+            }
+            MediaAction mediaAction5 = mediaButton.custom1;
+            if (mediaAction5 != null) {
+                sb2.append(String.valueOf(mediaAction5.contentDescription));
+                sb = sb2;
+            } else {
+                sb = null;
+            }
+            if (sb == null) {
+            }
+        }
+        sb2.append(" ]");
+        sb2.append(" [ ACTIONSTOSHOWINCOMPACT : " + this.actionsToShowInCompact + " ]");
+        sb2.append(" [ PACKAGENAME : " + this.packageName + " ]");
+        MediaDeviceData mediaDeviceData = this.device;
+        if (mediaDeviceData != null) {
+            sb2.append(" [ DEVICE : " + ((Object) mediaDeviceData.name) + " ]");
+            sb2.append(" [ SECMEDIADEVICEDATA : " + mediaDeviceData.customMediaDeviceData.deviceType + " ]");
+        }
+        sb2.append(" [ ACTIVE : " + this.active + " ]");
+        sb2.append(" [ PLAYBACKLOCATION : " + this.playbackLocation + " ]");
+        sb2.append(" [ RESUMPTION : " + this.resumption + " ]");
+        String str2 = this.notificationKey;
+        if (str2 != null) {
+            sb2.append(" [ NOTIFICATIONKEY : " + str2 + " ]");
+        }
+        sb2.append(" [ HASCHECKFORRESUME : " + this.hasCheckedForResume + " ]");
+        sb2.append(" [ ISPLAYING : " + this.isPlaying + " ]");
+        sb2.append(" [ ISCLEARABLE : " + this.isClearable + " ]");
+        sb2.append(" [ LASTACTIVE : " + new Timestamp(this.lastActive) + " ]");
+        sb2.append(" [ INSTANCEID : " + this.instanceId.getId() + " ]");
+        sb2.append(" [ APPUID : " + this.appUid + " ]");
+        return sb2.toString();
     }
 
     public MediaData(int i, boolean z, String str, Icon icon, CharSequence charSequence, CharSequence charSequence2, Icon icon2, List<MediaNotificationAction> list, List<Integer> list2, MediaButton mediaButton, String str2, MediaSession.Token token, PendingIntent pendingIntent, MediaDeviceData mediaDeviceData, boolean z2, Runnable runnable, int i2, boolean z3, String str3, boolean z4, Boolean bool, boolean z5, long j, long j2, InstanceId instanceId, int i3, boolean z6, Double d) {

@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiDisplaySystemEventChipAnimationController implements SystemEventChipAnimationController {
     public final SystemEventChipAnimationControllerStore controllerStore;
@@ -43,9 +42,9 @@ public final class MultiDisplaySystemEventChipAnimationController implements Sys
 
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController, com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     public final SpringAnimatorSet onSystemEventAnimationBegin(boolean z, boolean z2) {
-        List controllersForAllDisplays = controllersForAllDisplays();
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(controllersForAllDisplays, 10));
-        ArrayList arrayList2 = (ArrayList) controllersForAllDisplays;
+        List listControllersForAllDisplays = controllersForAllDisplays();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listControllersForAllDisplays, 10));
+        ArrayList arrayList2 = (ArrayList) listControllersForAllDisplays;
         int size = arrayList2.size();
         int i = 0;
         while (i < size) {
@@ -60,9 +59,9 @@ public final class MultiDisplaySystemEventChipAnimationController implements Sys
 
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController, com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     public final SpringAnimatorSet onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
-        List controllersForAllDisplays = controllersForAllDisplays();
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(controllersForAllDisplays, 10));
-        ArrayList arrayList2 = (ArrayList) controllersForAllDisplays;
+        List listControllersForAllDisplays = controllersForAllDisplays();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listControllersForAllDisplays, 10));
+        ArrayList arrayList2 = (ArrayList) listControllersForAllDisplays;
         int size = arrayList2.size();
         int i = 0;
         while (i < size) {
@@ -97,7 +96,11 @@ public final class MultiDisplaySystemEventChipAnimationController implements Sys
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            multiDisplaySystemEventChipAnimationController$$ExternalSyntheticLambda0.mo779invoke((SystemEventChipAnimationController) obj);
+            multiDisplaySystemEventChipAnimationController$$ExternalSyntheticLambda0.mo781invoke((SystemEventChipAnimationController) obj);
         }
+    }
+
+    @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController
+    public final void removeBatteryAnim() {
     }
 }

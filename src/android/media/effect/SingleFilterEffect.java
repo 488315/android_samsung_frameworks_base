@@ -19,21 +19,21 @@ public class SingleFilterEffect extends FilterEffect {
         this.mLocked = false;
         this.mInputName = str2;
         this.mOutputName = str3;
-        Filter createFilterByClass = FilterFactory.sharedFactory().createFilterByClass(cls, cls.getSimpleName());
-        createFilterByClass.initWithAssignmentList(objArr);
-        this.mFunction = new FilterFunction(getFilterContext(), createFilterByClass);
+        Filter filterCreateFilterByClass = FilterFactory.sharedFactory().createFilterByClass(cls, cls.getSimpleName());
+        filterCreateFilterByClass.initWithAssignmentList(objArr);
+        this.mFunction = new FilterFunction(getFilterContext(), filterCreateFilterByClass);
     }
 
     @Override // android.media.effect.Effect
     public void apply(int i, int i2, int i3, int i4) {
         beginGLEffect();
-        Frame frameFromTexture = frameFromTexture(i, i2, i3);
-        Frame frameFromTexture2 = frameFromTexture(i4, i2, i3);
-        Frame executeWithArgList = this.mFunction.executeWithArgList(this.mInputName, frameFromTexture);
-        frameFromTexture2.setDataFromFrame(executeWithArgList);
-        frameFromTexture.release();
-        frameFromTexture2.release();
-        executeWithArgList.release();
+        Frame frameFrameFromTexture = frameFromTexture(i, i2, i3);
+        Frame frameFrameFromTexture2 = frameFromTexture(i4, i2, i3);
+        Frame frameExecuteWithArgList = this.mFunction.executeWithArgList(this.mInputName, frameFrameFromTexture);
+        frameFrameFromTexture2.setDataFromFrame(frameExecuteWithArgList);
+        frameFrameFromTexture.release();
+        frameFrameFromTexture2.release();
+        frameExecuteWithArgList.release();
         endGLEffect();
     }
 

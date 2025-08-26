@@ -62,13 +62,13 @@ public class MessagingTextMessage extends ImageFloatingTextView implements Messa
 
     static MessagingMessage createMessage(IMessagingLayout iMessagingLayout, Notification.MessagingStyle.Message message, boolean z) {
         MessagingLinearLayout messagingLinearLayout = iMessagingLayout.getMessagingLinearLayout();
-        MessagingTextMessage acquire = sInstancePool.acquire();
-        if (acquire == null) {
-            acquire = (MessagingTextMessage) LayoutInflater.from(iMessagingLayout.getContext()).inflate(R.layout.notification_template_messaging_text_message, (ViewGroup) messagingLinearLayout, false);
-            acquire.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
+        MessagingTextMessage messagingTextMessage = (MessagingTextMessage) sInstancePool.acquire();
+        if (messagingTextMessage == null) {
+            messagingTextMessage = (MessagingTextMessage) LayoutInflater.from(iMessagingLayout.getContext()).inflate(R.layout.notification_template_messaging_text_message, (ViewGroup) messagingLinearLayout, false);
+            messagingTextMessage.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
         }
-        acquire.setMessage(message, z);
-        return acquire;
+        messagingTextMessage.setMessage(message, z);
+        return messagingTextMessage;
     }
 
     @Override // com.android.internal.widget.MessagingMessage, com.android.internal.widget.MessagingLinearLayout.MessagingChild
@@ -116,11 +116,11 @@ public class MessagingTextMessage extends ImageFloatingTextView implements Messa
     @Override // com.android.internal.widget.MessagingMessage
     public void finalizeInflate() {
         try {
-            CharSequence charSequence = this.mPrecomputedText;
-            if (charSequence == null) {
-                charSequence = getState().getMessage().getText();
+            CharSequence text = this.mPrecomputedText;
+            if (text == null) {
+                text = getState().getMessage().getText();
             }
-            lambda$setTextAsync$0(charSequence);
+            lambda$setTextAsync$0(text);
         } catch (IllegalArgumentException e) {
             Log.wtf(TAG, "PrecomputedText setText failed for TextView:" + this, e);
             this.mPrecomputedText = null;

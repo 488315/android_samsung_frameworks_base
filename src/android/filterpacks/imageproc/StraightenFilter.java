@@ -46,9 +46,9 @@ public class StraightenFilter extends Filter {
 
     public void initProgram(FilterContext filterContext, int i) {
         if (i == 3) {
-            ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-            createIdentity.setMaximumTileSize(this.mTileSize);
-            this.mProgram = createIdentity;
+            ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+            shaderProgramCreateIdentity.setMaximumTileSize(this.mTileSize);
+            this.mProgram = shaderProgramCreateIdentity;
             this.mTarget = i;
             return;
         }
@@ -64,8 +64,8 @@ public class StraightenFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
@@ -74,15 +74,15 @@ public class StraightenFilter extends Filter {
             this.mHeight = format.getHeight();
             updateParameters();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void updateParameters() {
-        float cos = (float) Math.cos(this.mAngle * DEGREE_TO_RADIAN);
-        float sin = (float) Math.sin(this.mAngle * DEGREE_TO_RADIAN);
+        float fCos = (float) Math.cos(this.mAngle * DEGREE_TO_RADIAN);
+        float fSin = (float) Math.sin(this.mAngle * DEGREE_TO_RADIAN);
         float f = this.mMaxAngle;
         if (f <= 0.0f) {
             throw new RuntimeException("Max angle is out of range (0-180).");
@@ -91,25 +91,25 @@ public class StraightenFilter extends Filter {
             f = 90.0f;
         }
         this.mMaxAngle = f;
-        float f2 = -cos;
+        float f2 = -fCos;
         int i = this.mWidth;
         int i2 = this.mHeight;
-        float f3 = -sin;
-        Point point = new Point((i * f2) + (i2 * sin), (i * f3) - (i2 * cos));
+        float f3 = -fSin;
+        Point point = new Point((i * f2) + (i2 * fSin), (i * f3) - (i2 * fCos));
         int i3 = this.mWidth;
         int i4 = this.mHeight;
-        Point point2 = new Point((i3 * cos) + (i4 * sin), (i3 * sin) - (i4 * cos));
+        Point point2 = new Point((i3 * fCos) + (i4 * fSin), (i3 * fSin) - (i4 * fCos));
         int i5 = this.mWidth;
         int i6 = this.mHeight;
-        Point point3 = new Point((f2 * i5) - (i6 * sin), (f3 * i5) + (i6 * cos));
+        Point point3 = new Point((f2 * i5) - (i6 * fSin), (f3 * i5) + (i6 * fCos));
         int i7 = this.mWidth;
         int i8 = this.mHeight;
-        Point point4 = new Point((i7 * cos) - (i8 * sin), (sin * i7) + (cos * i8));
-        float min = Math.min(this.mWidth / Math.max(Math.abs(point.x), Math.abs(point2.x)), this.mHeight / Math.max(Math.abs(point.y), Math.abs(point2.y))) * 0.5f;
-        point.set(((point.x * min) / this.mWidth) + 0.5f, ((point.y * min) / this.mHeight) + 0.5f);
-        point2.set(((point2.x * min) / this.mWidth) + 0.5f, ((point2.y * min) / this.mHeight) + 0.5f);
-        point3.set(((point3.x * min) / this.mWidth) + 0.5f, ((point3.y * min) / this.mHeight) + 0.5f);
-        point4.set(((point4.x * min) / this.mWidth) + 0.5f, ((min * point4.y) / this.mHeight) + 0.5f);
+        Point point4 = new Point((i7 * fCos) - (i8 * fSin), (fSin * i7) + (fCos * i8));
+        float fMin = Math.min(this.mWidth / Math.max(Math.abs(point.x), Math.abs(point2.x)), this.mHeight / Math.max(Math.abs(point.y), Math.abs(point2.y))) * 0.5f;
+        point.set(((point.x * fMin) / this.mWidth) + 0.5f, ((point.y * fMin) / this.mHeight) + 0.5f);
+        point2.set(((point2.x * fMin) / this.mWidth) + 0.5f, ((point2.y * fMin) / this.mHeight) + 0.5f);
+        point3.set(((point3.x * fMin) / this.mWidth) + 0.5f, ((point3.y * fMin) / this.mHeight) + 0.5f);
+        point4.set(((point4.x * fMin) / this.mWidth) + 0.5f, ((fMin * point4.y) / this.mHeight) + 0.5f);
         ((ShaderProgram) this.mProgram).setSourceRegion(new Quad(point, point2, point3, point4));
     }
 }

@@ -52,9 +52,9 @@ public interface INearbyMediaDevicesProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INearbyMediaDevicesProvider.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INearbyMediaDevicesProvider)) {
-                return (INearbyMediaDevicesProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INearbyMediaDevicesProvider.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INearbyMediaDevicesProvider)) {
+                return (INearbyMediaDevicesProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,13 +84,13 @@ public interface INearbyMediaDevicesProvider extends IInterface {
                 return true;
             }
             if (i == 3) {
-                INearbyMediaDevicesUpdateCallback asInterface = INearbyMediaDevicesUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
+                INearbyMediaDevicesUpdateCallback iNearbyMediaDevicesUpdateCallbackAsInterface = INearbyMediaDevicesUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerNearbyDevicesCallback(asInterface);
+                registerNearbyDevicesCallback(iNearbyMediaDevicesUpdateCallbackAsInterface);
             } else if (i == 4) {
-                INearbyMediaDevicesUpdateCallback asInterface2 = INearbyMediaDevicesUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
+                INearbyMediaDevicesUpdateCallback iNearbyMediaDevicesUpdateCallbackAsInterface2 = INearbyMediaDevicesUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterNearbyDevicesCallback(asInterface2);
+                unregisterNearbyDevicesCallback(iNearbyMediaDevicesUpdateCallbackAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface INearbyMediaDevicesProvider extends IInterface {
 
             @Override // android.media.INearbyMediaDevicesProvider
             public void registerNearbyDevicesCallback(INearbyMediaDevicesUpdateCallback iNearbyMediaDevicesUpdateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INearbyMediaDevicesProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iNearbyMediaDevicesUpdateCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INearbyMediaDevicesProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iNearbyMediaDevicesUpdateCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.INearbyMediaDevicesProvider
             public void unregisterNearbyDevicesCallback(INearbyMediaDevicesUpdateCallback iNearbyMediaDevicesUpdateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INearbyMediaDevicesProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iNearbyMediaDevicesUpdateCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INearbyMediaDevicesProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iNearbyMediaDevicesUpdateCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

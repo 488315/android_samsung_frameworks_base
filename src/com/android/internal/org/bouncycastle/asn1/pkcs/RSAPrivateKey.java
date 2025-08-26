@@ -54,8 +54,8 @@ public class RSAPrivateKey extends ASN1Object {
         this.otherPrimeInfos = null;
         Enumeration objects = aSN1Sequence.getObjects();
         ASN1Integer aSN1Integer = (ASN1Integer) objects.nextElement();
-        int intValueExact = aSN1Integer.intValueExact();
-        if (intValueExact < 0 || intValueExact > 1) {
+        int iIntValueExact = aSN1Integer.intValueExact();
+        if (iIntValueExact < 0 || iIntValueExact > 1) {
             throw new IllegalArgumentException("wrong version for RSA private key");
         }
         this.version = aSN1Integer.getValue();

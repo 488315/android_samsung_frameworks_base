@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceUnlockedInteractor$deviceEntryRestrictionReason$1$1 extends SuspendLambda implements Function5 {
     final /* synthetic */ DeviceEntryFaceAuthInteractor $faceAuthInteractor;
@@ -33,14 +32,14 @@ final class DeviceUnlockedInteractor$deviceEntryRestrictionReason$1$1 extends Su
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
         DeviceUnlockedInteractor$deviceEntryRestrictionReason$1$1 deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1 = new DeviceUnlockedInteractor$deviceEntryRestrictionReason$1$1(this.this$0, this.$faceAuthInteractor, this.$trustEnabled, (Continuation) obj5);
         deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.L$0 = (AuthenticationFlags) obj;
-        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$0 = booleanValue;
-        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$1 = booleanValue2;
-        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$2 = booleanValue3;
+        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$0 = zBooleanValue;
+        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$1 = zBooleanValue2;
+        deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.Z$2 = zBooleanValue3;
         return deviceUnlockedInteractor$deviceEntryRestrictionReason$1$1.invokeSuspend(Unit.INSTANCE);
     }
 

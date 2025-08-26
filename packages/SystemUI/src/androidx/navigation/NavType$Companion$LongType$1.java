@@ -3,7 +3,6 @@ package androidx.navigation;
 import android.os.Bundle;
 import kotlin.text.CharsKt__CharJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavType$Companion$LongType$1 extends NavType {
     public NavType$Companion$LongType$1() {
@@ -21,17 +20,17 @@ public final class NavType$Companion$LongType$1 extends NavType {
     }
 
     @Override // androidx.navigation.NavType
-    public final Object parseValue(String str) {
-        long parseLong;
-        String substring = str.endsWith("L") ? str.substring(0, str.length() - 1) : str;
+    public final Object parseValue(String str) throws NumberFormatException {
+        long j;
+        String strSubstring = str.endsWith("L") ? str.substring(0, str.length() - 1) : str;
         if (str.startsWith("0x")) {
-            String substring2 = substring.substring(2);
+            String strSubstring2 = strSubstring.substring(2);
             CharsKt__CharJVMKt.checkRadix(16);
-            parseLong = Long.parseLong(substring2, 16);
+            j = Long.parseLong(strSubstring2, 16);
         } else {
-            parseLong = Long.parseLong(substring);
+            j = Long.parseLong(strSubstring);
         }
-        return Long.valueOf(parseLong);
+        return Long.valueOf(j);
     }
 
     @Override // androidx.navigation.NavType

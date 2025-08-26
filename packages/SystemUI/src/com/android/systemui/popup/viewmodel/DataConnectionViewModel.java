@@ -13,7 +13,6 @@ import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.popup.view.PopupUIAlertDialog;
 import com.android.systemui.popup.view.PopupUIAlertDialogFactory;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataConnectionViewModel implements PopupUIViewModel {
     private static final String TAG = "DataConnectionViewModel";
@@ -62,9 +61,9 @@ public class DataConnectionViewModel implements PopupUIViewModel {
             boolean booleanExtra = this.mIntentWrapper.getBooleanExtra(intent, PopupUIUtil.EXTRA_DATA_CONNECTION_ERROR_NO_SIGNAL_RETRY_ENABLE, false);
             PendingIntent parcelableExtra = this.mIntentWrapper.getParcelableExtra(intent, PopupUIUtil.EXTRA_DATA_CONNECTION_ERROR_NO_SIGNAL_RETRY_PENDING_INTENT);
             LogWrapper logWrapper = this.mLogWrapper;
-            StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("show : ", intExtra, ", ", booleanExtra, ", ");
-            m.append(parcelableExtra != null);
-            logWrapper.d(TAG, m.toString());
+            StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("show : ", intExtra, ", ", booleanExtra, ", ");
+            sbM.append(parcelableExtra != null);
+            logWrapper.d(TAG, sbM.toString());
             PopupUIAlertDialog dataConnectionDialog = this.mDialogFactory.getDataConnectionDialog(intExtra, booleanExtra, parcelableExtra);
             this.mDataConnectionErrorDialog = dataConnectionDialog;
             if (dataConnectionDialog != null) {

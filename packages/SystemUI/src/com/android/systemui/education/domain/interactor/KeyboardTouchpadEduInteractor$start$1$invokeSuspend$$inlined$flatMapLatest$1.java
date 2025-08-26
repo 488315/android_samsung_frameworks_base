@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyboardTouchpadEduInteractor$start$1$invokeSuspend$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -51,9 +50,9 @@ public final class KeyboardTouchpadEduInteractor$start$1$invokeSuspend$$inlined$
             if (eduDeviceConnectionTime.keyboardFirstConnectionTime != null) {
                 arrayList.add(this.this$0.contextualEducationInteractor.allAppsGestureModelFlow);
             }
-            ChannelLimitedFlowMerge merge = FlowKt.merge(arrayList);
+            ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(arrayList);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, merge, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, channelLimitedFlowMergeMerge, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

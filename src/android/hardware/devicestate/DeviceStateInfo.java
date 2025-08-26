@@ -85,10 +85,10 @@ public final class DeviceStateInfo implements Parcelable {
     }
 
     private DeviceStateInfo(Parcel parcel) {
-        int readInt = parcel.readInt();
-        ArrayList<DeviceState> arrayList = new ArrayList<>(readInt);
-        for (int i = 0; i < readInt; i++) {
-            arrayList.add(i, new DeviceState((DeviceState.Configuration) Objects.requireNonNull((DeviceState.Configuration) parcel.readTypedObject(DeviceState.Configuration.CREATOR))));
+        int i = parcel.readInt();
+        ArrayList<DeviceState> arrayList = new ArrayList<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            arrayList.add(i2, new DeviceState((DeviceState.Configuration) Objects.requireNonNull((DeviceState.Configuration) parcel.readTypedObject(DeviceState.Configuration.CREATOR))));
         }
         this.supportedStates = arrayList;
         this.baseState = new DeviceState((DeviceState.Configuration) Objects.requireNonNull((DeviceState.Configuration) parcel.readTypedObject(DeviceState.Configuration.CREATOR)));

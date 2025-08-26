@@ -12,14 +12,10 @@ final class HalService {
     }
 
     private static synchronized XidlHalService getService() {
-        XidlHalService xidlHalService;
-        synchronized (HalService.class) {
-            if (sService == null) {
-                sService = XidlHalService.makeHalService();
-            }
-            xidlHalService = sService;
+        if (sService == null) {
+            sService = XidlHalService.makeHalService();
         }
-        return xidlHalService;
+        return sService;
     }
 
     private static <T> T checkNotNullState(T t) {

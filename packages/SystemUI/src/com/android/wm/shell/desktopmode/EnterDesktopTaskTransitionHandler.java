@@ -26,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class EnterDesktopTaskTransitionHandler implements Transitions.TransitionHandler {
     public final InteractionJankMonitor mInteractionJankMonitor;
@@ -36,7 +35,6 @@ public class EnterDesktopTaskTransitionHandler implements Transitions.Transition
     public final Supplier mTransactionSupplier;
     public final Transitions mTransitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.EnterDesktopTaskTransitionHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -56,7 +54,7 @@ public class EnterDesktopTaskTransitionHandler implements Transitions.Transition
             shellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.EnterDesktopTaskTransitionHandler$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Transitions.TransitionFinishCallback transitionFinishCallback2 = Transitions.TransitionFinishCallback.this;
+                    Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     int i = EnterDesktopTaskTransitionHandler.AnonymousClass1.$r8$clinit;
                     transitionFinishCallback2.onTransitionFinished(null);
                 }
@@ -77,12 +75,16 @@ public class EnterDesktopTaskTransitionHandler implements Transitions.Transition
     public final IBinder moveToDesktop(WindowContainerTransaction windowContainerTransaction, DesktopModeTransitionSource desktopModeTransitionSource) {
         int i = DesktopModeTransitionTypes.$r8$clinit;
         int i2 = DesktopModeTransitionTypes.WhenMappings.$EnumSwitchMapping$0[desktopModeTransitionSource.ordinal()];
-        IBinder startTransition = this.mTransitions.startTransition(i2 != 1 ? i2 != 2 ? i2 != 3 ? VolteConstants.ErrorCode.CALL_STATUS_CONF_START_SESSION_FAILURE : VolteConstants.ErrorCode.CALL_SESSION_TIMEOUT : VolteConstants.ErrorCode.CALL_SESSION_TERMINATED : VolteConstants.ErrorCode.CALL_SESSION_ABORT, windowContainerTransaction, this);
-        ((ArrayList) this.mPendingTransitionTokens).add(startTransition);
-        return startTransition;
+        IBinder iBinderStartTransition = this.mTransitions.startTransition(i2 != 1 ? i2 != 2 ? i2 != 3 ? VolteConstants.ErrorCode.CALL_STATUS_CONF_START_SESSION_FAILURE : VolteConstants.ErrorCode.CALL_SESSION_TIMEOUT : VolteConstants.ErrorCode.CALL_SESSION_TERMINATED : VolteConstants.ErrorCode.CALL_SESSION_ABORT, windowContainerTransaction, this);
+        ((ArrayList) this.mPendingTransitionTokens).add(iBinderStartTransition);
+        return iBinderStartTransition;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0044  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
         ActivityManager.RunningTaskInfo taskInfo;
         boolean z;
@@ -99,17 +101,19 @@ public class EnterDesktopTaskTransitionHandler implements Transitions.Transition
                         final ActivityManager.RunningTaskInfo taskInfo3 = change.getTaskInfo();
                         if (this.mOnTaskResizeAnimationListener == null) {
                             Slog.e("EnterDesktopTaskTransitionHandler", "onTaskResizeAnimationListener is not available for this transition");
+                            z = false;
+                            z2 |= z;
                         } else {
                             transaction.setPosition(leash, startAbsBounds.left, startAbsBounds.top).setWindowCrop(leash, startAbsBounds.width(), startAbsBounds.height()).show(leash);
                             this.mOnTaskResizeAnimationListener.onAnimationStart(taskInfo3.taskId, transaction, startAbsBounds);
-                            final ValueAnimator ofObject = ValueAnimator.ofObject(new RectEvaluator(), change.getStartAbsBounds(), change.getEndAbsBounds());
-                            ofObject.setDuration(336L);
+                            final ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new RectEvaluator(), change.getStartAbsBounds(), change.getEndAbsBounds());
+                            valueAnimatorOfObject.setDuration(336L);
                             final SurfaceControl.Transaction transaction3 = (SurfaceControl.Transaction) this.mTransactionSupplier.get();
-                            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.EnterDesktopTaskTransitionHandler$$ExternalSyntheticLambda1
+                            valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.EnterDesktopTaskTransitionHandler$$ExternalSyntheticLambda1
                                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                    EnterDesktopTaskTransitionHandler enterDesktopTaskTransitionHandler = EnterDesktopTaskTransitionHandler.this;
-                                    ValueAnimator valueAnimator2 = ofObject;
+                                    EnterDesktopTaskTransitionHandler enterDesktopTaskTransitionHandler = this.f$0;
+                                    ValueAnimator valueAnimator2 = valueAnimatorOfObject;
                                     SurfaceControl.Transaction transaction4 = transaction3;
                                     SurfaceControl surfaceControl = leash;
                                     ActivityManager.RunningTaskInfo runningTaskInfo = taskInfo3;
@@ -119,15 +123,16 @@ public class EnterDesktopTaskTransitionHandler implements Transitions.Transition
                                     enterDesktopTaskTransitionHandler.mOnTaskResizeAnimationListener.onBoundsChange(runningTaskInfo.taskId, transaction4, rect);
                                 }
                             });
-                            ofObject.addListener(new AnonymousClass1(taskInfo3, transitionFinishCallback));
-                            ofObject.start();
+                            valueAnimatorOfObject.addListener(new AnonymousClass1(taskInfo3, transitionFinishCallback));
+                            valueAnimatorOfObject.start();
                             z = true;
                             z2 |= z;
                         }
                     }
+                } else {
+                    z = false;
+                    z2 |= z;
                 }
-                z = false;
-                z2 |= z;
             }
         }
         if (z2 && transitionInfo.getType() == 1101) {

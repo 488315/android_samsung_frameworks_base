@@ -8,6 +8,7 @@ import android.app.ActivityOptions;
 import android.app.ActivityTaskManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Presentation;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,15 +34,20 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.util.Slog;
+import android.view.Choreographer;
 import android.view.Display;
 import android.view.IRemoteAnimationFinishedCallback;
 import android.view.IRemoteAnimationRunner;
 import android.view.RemoteAnimationTarget;
 import android.view.SurfaceControl;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.policy.IKeyguardDrawnCallback;
 import com.android.internal.statusbar.IStatusBarService;
@@ -50,9 +56,14 @@ import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.IRemoteLockMonitorCallback;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.RemoteLockInfo;
+import com.android.keyguard.ConnectedDisplayKeyguardPresentation;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardConstants$KeyguardDismissActionType;
 import com.android.keyguard.KeyguardDisplayManager;
 import com.android.keyguard.KeyguardPluginControllerImpl$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardScreenSaver;
+import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecurityModel;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -68,15 +79,19 @@ import com.android.systemui.aod.AODAmbientWallpaperHelper;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.doze.PluginAODManager;
 import com.android.systemui.dreams.ui.viewmodel.DreamViewModel;
+import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.KeyguardFoldController;
 import com.android.systemui.keyguard.KeyguardUnlockInfo;
 import com.android.systemui.keyguard.KeyguardViewMediator;
+import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorCallback;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.log.SamsungServiceLogger;
 import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.plugins.subscreen.PluginSubScreen;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.sensor.PickupController;
 import com.android.systemui.sensor.PickupController$baseSensorListener$1;
@@ -91,6 +106,8 @@ import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.notification.collection.NotifPipeline;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.notifcollection.CommonNotifCollection;
+import com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener;
+import com.android.systemui.statusbar.notification.collection.notifcollection.UpdateSource;
 import com.android.systemui.statusbar.notification.domain.interactor.ActiveNotificationsInteractor;
 import com.android.systemui.statusbar.phone.BiometricUnlockController;
 import com.android.systemui.statusbar.phone.CentralSurfaces;
@@ -117,6 +134,7 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.feature.SemCscFeature;
+import com.samsung.android.knox.custom.SystemManager;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.android.os.SemDvfsManager;
 import com.sec.ims.volte2.data.VolteConstants;
@@ -130,18 +148,22 @@ import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.ArrayIterator;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.reflect.KFunction;
 import kotlin.text.CharsKt__CharJVMKt;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediatorHelper, CommandQueue.Callbacks {
     public final Lazy CANCEL_KEYGUARD_EXIT_ANIM$delegate;
@@ -202,6 +224,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
     public final InteractionJankMonitor interactionJankMonitor;
     public boolean isAODShowStateCbRegistered;
     public boolean isScreenOnByFoldOpen;
+    public boolean isTaskWithEmbeddedOrStartingWindow;
     public final KeyguardDisplayManager keyguardDisplayManager;
     public final Lazy keyguardInteractor$delegate;
     public final KeyguardVisibilityMonitor keyguardVisibilityMonitor;
@@ -377,13 +400,13 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         this.delayedDrawnRunnable = new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$delayedDrawnRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardViewMediatorHelperImpl.this.notifyDrawn();
+                this.$tmp0.notifyDrawn();
             }
         };
         this.aodShowStateCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$aodShowStateCallback$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                KeyguardViewMediatorHelperImpl.logD$1("onAODShowStateChanged: " + KeyguardViewMediatorHelperImpl.this.settingsHelper.isAODShown());
+                KeyguardViewMediatorHelperImpl.logD$1("onAODShowStateChanged: " + this.$tmp0.settingsHelper.isAODShown());
             }
         };
         this.firstKeyguardShown = true;
@@ -392,17 +415,17 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         this.carrierLock = new Object();
         this.remoteLockMonitorCallback = new IRemoteLockMonitorCallback.Stub() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$remoteLockMonitorCallback$1
             public final void changeRemoteLockState(RemoteLockInfo remoteLockInfo) {
-                int remoteLockType = KeyguardViewMediatorHelperImpl.this.updateMonitor.getRemoteLockType();
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                int remoteLockType = this.this$0.updateMonitor.getRemoteLockType();
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 int i3 = remoteLockInfo.lockType;
                 boolean z = remoteLockInfo.lockState;
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(remoteLockType, i3, "changeRemoteLockState data=", " -> ", " enableLock=");
-                m.append(z);
-                String sb = m.toString();
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(remoteLockType, i3, "changeRemoteLockState data=", " -> ", " enableLock=");
+                sbM.append(z);
+                String string = sbM.toString();
                 keyguardViewMediatorHelperImpl.getClass();
-                KeyguardViewMediatorHelperImpl.logD$1(sb);
-                KeyguardViewMediatorHelperImpl.this.updateMonitor.updateRemoteLockInfo(remoteLockInfo);
-                KeyguardViewMediatorHelperImpl.access$notifyRemoteLockRequested(KeyguardViewMediatorHelperImpl.this, remoteLockInfo);
+                KeyguardViewMediatorHelperImpl.logD$1(string);
+                this.this$0.updateMonitor.updateRemoteLockInfo(remoteLockInfo);
+                KeyguardViewMediatorHelperImpl.access$notifyRemoteLockRequested(this.this$0, remoteLockInfo);
             }
 
             public final int checkRemoteLockPassword(byte[] bArr) {
@@ -413,31 +436,31 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 String action = intent.getAction();
-                KeyguardViewMediatorHelperImpl.this.getClass();
+                this.this$0.getClass();
                 KeyguardViewMediatorHelperImpl.logD$1("onReceive: " + action);
                 if ("com.samsung.keyguard.CLEAR_LOCK".equals(action)) {
-                    KeyguardViewMediatorHelperImpl.this.adjustStatusBarLocked$2();
-                    KeyguardViewMediatorHelperImpl.this.resetStateLocked$2();
+                    this.this$0.adjustStatusBarLocked$2();
+                    this.this$0.resetStateLocked$2();
                 }
             }
         };
         this.broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$broadcastReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                int userId = ((UserTrackerImpl) KeyguardViewMediatorHelperImpl.this.userTracker).getUserId();
+                int userId = ((UserTrackerImpl) this.this$0.userTracker).getUserId();
                 if ("com.samsung.pen.INSERT".equals(intent.getAction())) {
                     boolean booleanExtra = intent.getBooleanExtra("penInsert", true);
-                    KeyguardViewMediatorHelperImpl.this.getClass();
+                    this.this$0.getClass();
                     KeyguardViewMediatorHelperImpl.logD$1("ACTION_PEN_INSERT intent is received. penInsert=" + booleanExtra);
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                     if (KeyguardViewMediatorHelperImpl.access$canBeDismissedWhenSpenDetached(keyguardViewMediatorHelperImpl, intent, keyguardViewMediatorHelperImpl.isSecure$2(), booleanExtra)) {
-                        Handler handler$1 = KeyguardViewMediatorHelperImpl.this.getHandler$1();
-                        final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = KeyguardViewMediatorHelperImpl.this;
+                        Handler handler$1 = this.this$0.getHandler$1();
+                        final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.this$0;
                         handler$1.postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$broadcastReceiver$1$onReceive$1
                             @Override // java.lang.Runnable
                             public final void run() {
                                 KeyguardUnlockInfo.setUnlockTrigger(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_SPEN_DETACHED);
-                                ((KeyguardViewMediator) KeyguardViewMediatorHelperImpl.this.viewMediatorLazy.get()).dismiss(null, null);
+                                ((KeyguardViewMediator) keyguardViewMediatorHelperImpl2.viewMediatorLazy.get()).dismiss(null, null);
                             }
                         }, 100L);
                         return;
@@ -445,81 +468,84 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     return;
                 }
                 if ("com.samsung.internal.policy.impl.Keyguard.PCW_LOCKED".equals(intent.getAction())) {
-                    KeyguardViewMediatorHelperImpl.this.updateMonitor.updateFMMLock(userId, false);
-                    boolean isFMMLock = KeyguardViewMediatorHelperImpl.this.updateMonitor.isFMMLock();
-                    KeyguardViewMediatorHelperImpl.this.getClass();
-                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_FMM_LOCKED is received isFMMLock : " + isFMMLock);
-                    if (isFMMLock) {
-                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = KeyguardViewMediatorHelperImpl.this;
+                    this.this$0.updateMonitor.updateFMMLock(userId, false);
+                    boolean zIsFMMLock = this.this$0.updateMonitor.isFMMLock();
+                    this.this$0.getClass();
+                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_FMM_LOCKED is received isFMMLock : " + zIsFMMLock);
+                    if (zIsFMMLock) {
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this.this$0;
                         KeyguardViewMediatorHelperImpl.access$notifyRemoteLockRequested(keyguardViewMediatorHelperImpl3, keyguardViewMediatorHelperImpl3.fmmLock);
                         return;
                     }
                     return;
                 }
                 if ("com.samsung.internal.policy.impl.Keyguard.PCW_UNLOCKED".equals(intent.getAction())) {
-                    KeyguardViewMediatorHelperImpl.this.getHandler$1().removeMessages(VolteConstants.ErrorCode.CALL_SESSION_ABORT, KeyguardViewMediatorHelperImpl.this.fmmLock);
-                    KeyguardViewMediatorHelperImpl.this.updateMonitor.updateFMMLock(userId, false);
-                    boolean isFMMLock2 = KeyguardViewMediatorHelperImpl.this.updateMonitor.isFMMLock();
-                    KeyguardViewMediatorHelperImpl.this.getClass();
-                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_FMM_UNLOCKED is received isFMMLock : " + isFMMLock2);
-                    if (isFMMLock2 || !KeyguardViewMediatorHelperImpl.this.isShowing$1()) {
+                    this.this$0.getHandler$1().removeMessages(VolteConstants.ErrorCode.CALL_SESSION_ABORT, this.this$0.fmmLock);
+                    this.this$0.updateMonitor.updateFMMLock(userId, false);
+                    boolean zIsFMMLock2 = this.this$0.updateMonitor.isFMMLock();
+                    this.this$0.getClass();
+                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_FMM_UNLOCKED is received isFMMLock : " + zIsFMMLock2);
+                    if (zIsFMMLock2 || !this.this$0.isShowing$1()) {
                         return;
                     }
-                    if (KeyguardViewMediatorHelperImpl.this.isSecure$2()) {
-                        KeyguardViewMediatorHelperImpl.this.resetStateLocked$2();
+                    if (this.this$0.isSecure$2()) {
+                        this.this$0.resetStateLocked$2();
                     } else {
                         KeyguardUnlockInfo.setUnlockTriggerByRemoteLock(0);
-                        ((KeyguardViewMediator) r6.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) KeyguardViewMediatorHelperImpl.this.userTracker).getUserId());
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = this.this$0;
+                        ((KeyguardViewMediator) keyguardViewMediatorHelperImpl4.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) keyguardViewMediatorHelperImpl4.userTracker).getUserId());
                     }
-                    KeyguardViewMediatorHelperImpl.this.pm.wakeUp(SystemClock.uptimeMillis());
+                    this.this$0.pm.wakeUp(SystemClock.uptimeMillis());
                     return;
                 }
                 if ("com.sec.android.FindingLostPhonePlus.SUBSCRIBE".equals(intent.getAction())) {
-                    KeyguardViewMediatorHelperImpl.this.updateMonitor.updateCarrierLock(userId);
-                    boolean isCarrierLock = KeyguardViewMediatorHelperImpl.this.updateMonitor.isCarrierLock();
-                    KeyguardViewMediatorHelperImpl.this.getClass();
-                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_CARRIER_LOCK_SUBSCRIBE is received isCarrierLock : " + isCarrierLock);
-                    if (isCarrierLock) {
-                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = KeyguardViewMediatorHelperImpl.this;
-                        KeyguardViewMediatorHelperImpl.access$notifyRemoteLockRequested(keyguardViewMediatorHelperImpl4, keyguardViewMediatorHelperImpl4.carrierLock);
+                    this.this$0.updateMonitor.updateCarrierLock(userId);
+                    boolean zIsCarrierLock = this.this$0.updateMonitor.isCarrierLock();
+                    this.this$0.getClass();
+                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_CARRIER_LOCK_SUBSCRIBE is received isCarrierLock : " + zIsCarrierLock);
+                    if (zIsCarrierLock) {
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = this.this$0;
+                        KeyguardViewMediatorHelperImpl.access$notifyRemoteLockRequested(keyguardViewMediatorHelperImpl5, keyguardViewMediatorHelperImpl5.carrierLock);
                         return;
                     }
                     return;
                 }
                 if ("com.sec.android.FindingLostPhonePlus.CANCEL".equals(intent.getAction())) {
-                    KeyguardViewMediatorHelperImpl.this.getHandler$1().removeMessages(VolteConstants.ErrorCode.CALL_SESSION_ABORT, KeyguardViewMediatorHelperImpl.this.carrierLock);
-                    KeyguardViewMediatorHelperImpl.this.updateMonitor.updateCarrierLock(userId);
-                    boolean isCarrierLock2 = KeyguardViewMediatorHelperImpl.this.updateMonitor.isCarrierLock();
-                    KeyguardViewMediatorHelperImpl.this.getClass();
-                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_CARRIER_LOCK_CANCEL is received isCarrierLock : " + isCarrierLock2);
-                    if (isCarrierLock2) {
-                        KeyguardViewMediatorHelperImpl.this.getClass();
+                    this.this$0.getHandler$1().removeMessages(VolteConstants.ErrorCode.CALL_SESSION_ABORT, this.this$0.carrierLock);
+                    this.this$0.updateMonitor.updateCarrierLock(userId);
+                    boolean zIsCarrierLock2 = this.this$0.updateMonitor.isCarrierLock();
+                    this.this$0.getClass();
+                    KeyguardViewMediatorHelperImpl.logD$1("ACTION_CARRIER_LOCK_CANCEL is received isCarrierLock : " + zIsCarrierLock2);
+                    if (zIsCarrierLock2) {
+                        this.this$0.getClass();
                         Log.d("KeyguardViewMediator", "Carrier Lock is enabled");
                         return;
                     }
-                    KeyguardViewMediatorHelperImpl.this.lockPatternUtils.saveRemoteLockPassword(1, (byte[]) null, userId);
-                    if (KeyguardViewMediatorHelperImpl.this.isShowing$1()) {
-                        if (KeyguardViewMediatorHelperImpl.this.isSecure$2()) {
-                            KeyguardViewMediatorHelperImpl.this.resetStateLocked$2();
+                    this.this$0.lockPatternUtils.saveRemoteLockPassword(1, (byte[]) null, userId);
+                    if (this.this$0.isShowing$1()) {
+                        if (this.this$0.isSecure$2()) {
+                            this.this$0.resetStateLocked$2();
                         } else {
-                            ((KeyguardViewMediator) r6.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) KeyguardViewMediatorHelperImpl.this.userTracker).getUserId());
+                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl6 = this.this$0;
+                            ((KeyguardViewMediator) keyguardViewMediatorHelperImpl6.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) keyguardViewMediatorHelperImpl6.userTracker).getUserId());
                         }
-                        KeyguardViewMediatorHelperImpl.this.pm.wakeUp(SystemClock.uptimeMillis());
+                        this.this$0.pm.wakeUp(SystemClock.uptimeMillis());
                         return;
                     }
                     return;
                 }
                 if (LsRune.KEYGUARD_HOMEHUB && "android.intent.action.DOCK_EVENT".equals(intent.getAction())) {
                     int intExtra = intent.getIntExtra("pogo_plugged", 0);
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = KeyguardViewMediatorHelperImpl.this;
-                    if (keyguardViewMediatorHelperImpl5.pogoPlugged != intExtra) {
-                        keyguardViewMediatorHelperImpl5.pogoPlugged = intExtra;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl7 = this.this$0;
+                    if (keyguardViewMediatorHelperImpl7.pogoPlugged != intExtra) {
+                        keyguardViewMediatorHelperImpl7.pogoPlugged = intExtra;
                     }
-                    if (keyguardViewMediatorHelperImpl5.pogoPlugged == 0 || !keyguardViewMediatorHelperImpl5.isShowing$1()) {
+                    if (keyguardViewMediatorHelperImpl7.pogoPlugged == 0 || !keyguardViewMediatorHelperImpl7.isShowing$1()) {
                         return;
                     }
-                    if (!KeyguardViewMediatorHelperImpl.this.isSecure$2() || KeyguardViewMediatorHelperImpl.this.updateMonitor.getUserCanSkipBouncer(userId)) {
-                        ((KeyguardViewMediator) r5.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) KeyguardViewMediatorHelperImpl.this.userTracker).getUserId());
+                    if (!this.this$0.isSecure$2() || this.this$0.updateMonitor.getUserCanSkipBouncer(userId)) {
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl8 = this.this$0;
+                        ((KeyguardViewMediator) keyguardViewMediatorHelperImpl8.viewMediatorLazy.get()).mViewMediatorCallback.keyguardDone(((UserTrackerImpl) keyguardViewMediatorHelperImpl8.userTracker).getUserId());
                         return;
                     }
                     return;
@@ -562,15 +588,13 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         this.updateCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$updateCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onFinishedGoingToSleep(int i3) {
-                SettingsHelper settingsHelper2;
-                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
-                settingsHelper2 = keyguardViewMediatorHelperImpl.settingsHelper;
-                if (settingsHelper2.isScreenOffMemoEnabled()) {
+                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
+                if (keyguardViewMediatorHelperImpl.settingsHelper.isScreenOffMemoEnabled()) {
                     keyguardViewMediatorHelperImpl.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$updateCallback$1$onFinishedGoingToSleep$1
                         @Override // java.lang.Runnable
                         public final void run() {
                             Log.i("KeyguardViewMediator", "onFinishedGoingToSleep : ACTION_SNOTE_SCREEN_OFF");
-                            KeyguardViewMediatorHelperImpl.this.context.sendBroadcast(new Intent("com.samsung.android.snote.SCREEN_OFF").setPackage("com.samsung.android.app.notes"));
+                            keyguardViewMediatorHelperImpl.context.sendBroadcast(new Intent("com.samsung.android.snote.SCREEN_OFF").setPackage("com.samsung.android.app.notes"));
                         }
                     });
                 }
@@ -578,19 +602,19 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onPhoneStateChanged(int i3) {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 ViewMediatorProvider viewMediatorProvider = keyguardViewMediatorHelperImpl.viewMediatorProvider;
                 if (viewMediatorProvider == null) {
                     viewMediatorProvider = null;
                 }
-                String str = (String) viewMediatorProvider.updatePhoneState.mo779invoke(null);
+                String str = (String) viewMediatorProvider.updatePhoneState.mo781invoke(null);
                 String str2 = i3 != 0 ? i3 != 1 ? i3 != 2 ? null : TelephonyManager.EXTRA_STATE_OFFHOOK : TelephonyManager.EXTRA_STATE_RINGING : TelephonyManager.EXTRA_STATE_IDLE;
                 KeyguardViewMediatorHelperImpl.logD$1("onPhoneStateChanged " + str + " > " + str2);
                 if (str2 == null || Intrinsics.areEqual(str, str2)) {
                     return;
                 }
                 ViewMediatorProvider viewMediatorProvider2 = keyguardViewMediatorHelperImpl.viewMediatorProvider;
-                (viewMediatorProvider2 != null ? viewMediatorProvider2 : null).updatePhoneState.mo779invoke(str2);
+                (viewMediatorProvider2 != null ? viewMediatorProvider2 : null).updatePhoneState.mo781invoke(str2);
                 dagger.Lazy lazy15 = keyguardViewMediatorHelperImpl.pluginAODManagerLazy;
                 ((PluginAODManager) lazy15.get()).mCurrentPhoneState = i3;
                 ((PluginAODManager) lazy15.get()).updateAnimateScreenOff();
@@ -598,13 +622,13 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSecurityViewChanged(KeyguardSecurityModel.SecurityMode securityMode) {
-                KeyguardViewMediatorHelperImpl.this.adjustStatusBarLocked$2();
+                this.this$0.adjustStatusBarLocked$2();
             }
         };
         this.knoxStateCallback = new KnoxStateMonitorCallback() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$knoxStateCallback$1
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             public final void onDPMPasswordChanged() {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 keyguardViewMediatorHelperImpl.getClass();
                 Log.d("KeyguardViewMediator", "received DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_PASSWORD_CHANGED!!");
                 if (keyguardViewMediatorHelperImpl.isShowing$1()) {
@@ -619,7 +643,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             public final void onDoKeyguard(int i3) {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 keyguardViewMediatorHelperImpl.getClass();
                 Log.d("KeyguardViewMediator", "received EnterpriseDeviceManager.ACTION_DO_KEYGUARD_INTERNAL!!");
                 if (((UserTrackerImpl) keyguardViewMediatorHelperImpl.userTracker).getUserId() == i3) {
@@ -629,7 +653,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             public final void onEnableUCMLock() {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 keyguardViewMediatorHelperImpl.getClass();
                 Log.d("KeyguardViewMediator", "received onEnableUCMLock!!");
                 if (keyguardViewMediatorHelperImpl.isShowing$1()) {
@@ -641,7 +665,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             public final void onUpdateAdminLock() {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 keyguardViewMediatorHelperImpl.getClass();
                 Log.d("KeyguardViewMediator", "received onUpdateAdminLock!!");
                 if (!((KnoxStateMonitorImpl) keyguardViewMediatorHelperImpl.knoxStateMonitor).isAdminLockEnabled()) {
@@ -661,7 +685,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     if (viewMediatorProvider == null) {
                         viewMediatorProvider = null;
                     }
-                    viewMediatorProvider.setHiding.mo779invoke(Boolean.FALSE);
+                    viewMediatorProvider.setHiding.mo781invoke(Boolean.FALSE);
                 }
                 keyguardViewMediatorHelperImpl.resetStateLocked$2();
             }
@@ -696,7 +720,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         });
         this.occludeAnimationRunner = new IRemoteAnimationRunner.Stub() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$occludeAnimationRunner$1
             public final void onAnimationCancelled() {
-                KeyguardViewMediatorHelperImpl.this.getClass();
+                this.this$0.getClass();
                 Log.d("KeyguardViewMediator", "Occlude animation cancelled by WM.");
             }
 
@@ -705,8 +729,8 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 KeyguardEditModeController keyguardEditModeController2;
                 RemoteAnimationTarget remoteAnimationTarget;
                 ActivityManager.RunningTaskInfo runningTaskInfo;
-                KeyguardViewMediatorHelperImpl.this.lastOccludedApp = (remoteAnimationTargetArr == null || (remoteAnimationTarget = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr)) == null || (runningTaskInfo = remoteAnimationTarget.taskInfo) == null) ? null : runningTaskInfo.topActivity;
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                this.this$0.lastOccludedApp = (remoteAnimationTargetArr == null || (remoteAnimationTarget = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr)) == null || (runningTaskInfo = remoteAnimationTarget.taskInfo) == null) ? null : runningTaskInfo.topActivity;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 ComponentName componentName = keyguardViewMediatorHelperImpl.lastOccludedApp;
                 if (componentName != null) {
                     String packageName = componentName.getPackageName();
@@ -717,23 +741,23 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     str = null;
                 }
                 KeyguardViewMediatorHelperImpl.logD$1("occludeAnimationRunner app=" + str);
-                ComponentName componentName2 = KeyguardViewMediatorHelperImpl.this.lastOccludedApp;
+                ComponentName componentName2 = this.this$0.lastOccludedApp;
                 if (!BriefNowBarController.SUGGESTION_ACTIVITY.equals(componentName2 != null ? componentName2.getClassName() : null)) {
-                    ComponentName componentName3 = KeyguardViewMediatorHelperImpl.this.lastOccludedApp;
+                    ComponentName componentName3 = this.this$0.lastOccludedApp;
                     if (!BriefNowBarController.SUGGESTION_ONBOARDING_ACTIVITY.equals(componentName3 != null ? componentName3.getClassName() : null)) {
-                        if (KeyguardViewMediatorHelperImpl.this.isScreenOn()) {
-                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = KeyguardViewMediatorHelperImpl.this;
+                        if (this.this$0.isScreenOn()) {
+                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.this$0;
                             if ((keyguardViewMediatorHelperImpl2.lastOccludedApp != null || (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY && keyguardViewMediatorHelperImpl2.isScreenOnByFoldOpen)) && (((keyguardEditModeController2 = keyguardViewMediatorHelperImpl2.editModeController) == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController2).isEditMode) && !((KeyguardStateControllerImpl) keyguardViewMediatorHelperImpl2.stateController).mOccluded)) {
                                 if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
                                     keyguardViewMediatorHelperImpl2.isScreenOnByFoldOpen = false;
                                 }
                                 SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-                                ((KeyguardSurfaceControllerImpl) KeyguardViewMediatorHelperImpl.this.surfaceControllerLazy.get()).setKeyguardSurfaceAppearAmount(transaction, true);
+                                ((KeyguardSurfaceControllerImpl) this.this$0.surfaceControllerLazy.get()).setKeyguardSurfaceAppearAmount(transaction, true);
                                 transaction.apply();
                                 transaction.close();
                             }
                         }
-                        ((KeyguardViewMediator) KeyguardViewMediatorHelperImpl.this.viewMediatorLazy.get()).setOccluded(true, false);
+                        ((KeyguardViewMediator) this.this$0.viewMediatorLazy.get()).setOccluded(true, false);
                         if (iRemoteAnimationFinishedCallback != null) {
                             iRemoteAnimationFinishedCallback.onAnimationFinished();
                             return;
@@ -741,15 +765,15 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                         return;
                     }
                 }
-                BriefNowBarController briefNowBarController = (BriefNowBarController) KeyguardViewMediatorHelperImpl.this.briefNowBarControllerLazy.get();
-                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = KeyguardViewMediatorHelperImpl.this;
+                BriefNowBarController briefNowBarController = (BriefNowBarController) this.this$0.briefNowBarControllerLazy.get();
+                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this.this$0;
                 if (briefNowBarController.startCircleAnimation(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$occludeAnimationRunner$1$onAnimationStart$2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardViewMediatorHelperImpl.this.getClass();
+                        keyguardViewMediatorHelperImpl3.getClass();
                         Log.d("KeyguardViewMediator", "occludeAnimationRunner finished circle animation");
-                        KeyguardSurfaceControllerImpl.setKeyguardSurfaceAppearAmount$default((KeyguardSurfaceControllerImpl) KeyguardViewMediatorHelperImpl.this.surfaceControllerLazy.get(), null, 6);
-                        ((KeyguardViewMediator) KeyguardViewMediatorHelperImpl.this.viewMediatorLazy.get()).setOccluded(true, false);
+                        KeyguardSurfaceControllerImpl.setKeyguardSurfaceAppearAmount$default((KeyguardSurfaceControllerImpl) keyguardViewMediatorHelperImpl3.surfaceControllerLazy.get(), null, 6);
+                        ((KeyguardViewMediator) keyguardViewMediatorHelperImpl3.viewMediatorLazy.get()).setOccluded(true, false);
                         IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback2 = iRemoteAnimationFinishedCallback;
                         if (iRemoteAnimationFinishedCallback2 != null) {
                             iRemoteAnimationFinishedCallback2.onAnimationFinished();
@@ -758,7 +782,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 })) {
                     return;
                 }
-                ((KeyguardViewMediator) KeyguardViewMediatorHelperImpl.this.viewMediatorLazy.get()).setOccluded(true, false);
+                ((KeyguardViewMediator) this.this$0.viewMediatorLazy.get()).setOccluded(true, false);
                 if (iRemoteAnimationFinishedCallback != null) {
                     iRemoteAnimationFinishedCallback.onAnimationFinished();
                 }
@@ -766,7 +790,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         };
         this.unoccluedAnimationRunner = new IRemoteAnimationRunner.Stub() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$unoccluedAnimationRunner$1
             public final void onAnimationCancelled() {
-                KeyguardViewMediatorHelperImpl.this.getClass();
+                this.this$0.getClass();
                 Log.d("KeyguardViewMediator", "Unocclude animation cancelled.");
             }
 
@@ -790,39 +814,39 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     RemoteAnimationTarget remoteAnimationTarget3 = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr);
                     componentName = (remoteAnimationTarget3 == null || (runningTaskInfo = remoteAnimationTarget3.taskInfo) == null) ? null : runningTaskInfo.realActivity;
                 }
-                boolean z = componentName == null || componentName.equals(KeyguardViewMediatorHelperImpl.this.lastOccludedApp);
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
-                String m = componentName != null ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName()) : null;
-                boolean isScreenOn = KeyguardViewMediatorHelperImpl.this.isScreenOn();
-                StringBuilder m2 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("UnoccluedAnimationRunner app=", m, " keepLeash=", ", isScreenOn()=", z);
-                m2.append(isScreenOn);
-                String sb = m2.toString();
+                boolean z = componentName == null || componentName.equals(this.this$0.lastOccludedApp);
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
+                String strM = componentName != null ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName()) : null;
+                boolean zIsScreenOn = this.this$0.isScreenOn();
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("UnoccluedAnimationRunner app=", strM, " keepLeash=", ", isScreenOn()=", z);
+                sbM.append(zIsScreenOn);
+                String string = sbM.toString();
                 keyguardViewMediatorHelperImpl.getClass();
-                KeyguardViewMediatorHelperImpl.logD$1(sb);
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = KeyguardViewMediatorHelperImpl.this;
+                KeyguardViewMediatorHelperImpl.logD$1(string);
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.this$0;
                 keyguardViewMediatorHelperImpl2.lastOccludedApp = null;
                 ((KeyguardViewMediator) keyguardViewMediatorHelperImpl2.viewMediatorLazy.get()).setOccluded(false, false);
                 RemoteAnimationTarget remoteAnimationTarget4 = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr);
                 boolean z2 = ((remoteAnimationTarget4 != null ? remoteAnimationTarget4.taskInfo : null) == null || (remoteAnimationTarget = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr)) == null || (runningTaskInfo2 = remoteAnimationTarget.taskInfo) == null || runningTaskInfo2.topActivityType != 5) ? false : true;
                 RemoteAnimationTarget remoteAnimationTarget5 = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr);
                 if (remoteAnimationTarget5 != null) {
-                    ViewMediatorProvider viewMediatorProvider = KeyguardViewMediatorHelperImpl.this.viewMediatorProvider;
+                    ViewMediatorProvider viewMediatorProvider = this.this$0.viewMediatorProvider;
                     if (viewMediatorProvider == null) {
                         viewMediatorProvider = null;
                     }
-                    viewMediatorProvider.setRemoteAnimationTarget.mo779invoke(remoteAnimationTarget5);
+                    viewMediatorProvider.setRemoteAnimationTarget.mo781invoke(remoteAnimationTarget5);
                 }
                 Log.d("KeyguardViewMediator", "unoccludeAnimationRunner: isDream=" + z2);
                 if (z2) {
-                    ViewMediatorProvider viewMediatorProvider2 = KeyguardViewMediatorHelperImpl.this.viewMediatorProvider;
+                    ViewMediatorProvider viewMediatorProvider2 = this.this$0.viewMediatorProvider;
                     if (viewMediatorProvider2 == null) {
                         viewMediatorProvider2 = null;
                     }
-                    viewMediatorProvider2.initAlphaForAnimationTargets.mo779invoke(remoteAnimationTargetArr2);
-                    ((DreamViewModel) KeyguardViewMediatorHelperImpl.this.dreamViewModelLazy.get()).startTransitionFromDream();
+                    viewMediatorProvider2.initAlphaForAnimationTargets.mo781invoke(remoteAnimationTargetArr2);
+                    ((DreamViewModel) this.this$0.dreamViewModelLazy.get()).startTransitionFromDream();
                     if (iRemoteAnimationFinishedCallback != null) {
-                        ViewMediatorProvider viewMediatorProvider3 = KeyguardViewMediatorHelperImpl.this.viewMediatorProvider;
-                        (viewMediatorProvider3 != null ? viewMediatorProvider3 : null).setUnoccludeFinishedCallback.mo779invoke(iRemoteAnimationFinishedCallback);
+                        ViewMediatorProvider viewMediatorProvider3 = this.this$0.viewMediatorProvider;
+                        (viewMediatorProvider3 != null ? viewMediatorProvider3 : null).setUnoccludeFinishedCallback.mo781invoke(iRemoteAnimationFinishedCallback);
                         return;
                     }
                     return;
@@ -837,16 +861,16 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     return;
                 }
                 final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-                if (!z && !KeyguardViewMediatorHelperImpl.this.isScreenOn()) {
+                if (!z && !this.this$0.isScreenOn()) {
                     ?? transaction = new SurfaceControl.Transaction();
                     transaction.setAlpha(surfaceControl, 0.0f);
                     transaction.apply();
                     ref$ObjectRef.element = transaction;
                 }
-                KeyguardEditModeController keyguardEditModeController2 = KeyguardViewMediatorHelperImpl.this.editModeController;
+                KeyguardEditModeController keyguardEditModeController2 = this.this$0.editModeController;
                 long j = (keyguardEditModeController2 == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController2).isEditMode) ? 50L : 250L;
                 KeyguardViewMediatorHelperImpl.logD$1("keepSurfaceDuration=" + j);
-                KeyguardViewMediatorHelperImpl.this.getHandler$1().postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$unoccluedAnimationRunner$1$onAnimationStart$5
+                this.this$0.getHandler$1().postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$unoccluedAnimationRunner$1$onAnimationStart$5
                     /* JADX WARN: Multi-variable type inference failed */
                     @Override // java.lang.Runnable
                     public final void run() {
@@ -861,9 +885,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         };
         this.aodAppearAnimationRunner = new IRemoteAnimationRunner.Stub() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$aodAppearAnimationRunner$1
             public final void onAnimationCancelled() {
-                KeyguardViewMediatorHelperImpl.this.getClass();
+                this.this$0.getClass();
                 Log.d("KeyguardViewMediator", "AOD Appear animation cancelled by WM.");
-                ValueAnimator valueAnimator = KeyguardViewMediatorHelperImpl.this.aodAppearAnimator;
+                ValueAnimator valueAnimator = this.this$0.aodAppearAnimator;
                 if (valueAnimator != null) {
                     valueAnimator.cancel();
                 }
@@ -871,7 +895,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
             /* JADX WARN: Type inference failed for: r4v0, types: [T, android.view.RemoteAnimationTarget] */
             public final void onAnimationStart(int i3, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
-                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                 boolean z = keyguardViewMediatorHelperImpl.needKeyguardAppearAnimation;
                 keyguardViewMediatorHelperImpl.needKeyguardAppearAnimation = false;
                 if (KeyguardViewMediatorHelperImplKt.IS_SAFE_MODE_ENABLED) {
@@ -879,9 +903,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 } else if (remoteAnimationTargetArr == null || remoteAnimationTargetArr.length == 0) {
                     Log.d("KeyguardViewMediator", "handleOnAnimationStart: No apps provided to the Appear Animation runner; skipping appear animation.");
                 } else {
-                    boolean shouldPlayUnlockedScreenOffAnimation = keyguardViewMediatorHelperImpl.unlockedScreenOffAnimationHelper.shouldPlayUnlockedScreenOffAnimation();
-                    Log.d("KeyguardViewMediator", "handleOnAnimationStart: shouldPlayUnlockedScreenOffAnimation=" + shouldPlayUnlockedScreenOffAnimation + ", playKeyguardAppearAnimation=" + z);
-                    if (shouldPlayUnlockedScreenOffAnimation || z) {
+                    boolean zShouldPlayUnlockedScreenOffAnimation = keyguardViewMediatorHelperImpl.unlockedScreenOffAnimationHelper.shouldPlayUnlockedScreenOffAnimation();
+                    Log.d("KeyguardViewMediator", "handleOnAnimationStart: shouldPlayUnlockedScreenOffAnimation=" + zShouldPlayUnlockedScreenOffAnimation + ", playKeyguardAppearAnimation=" + z);
+                    if (zShouldPlayUnlockedScreenOffAnimation || z) {
                         final List mutableList = ArraysKt___ArraysKt.toMutableList(remoteAnimationTargetArr);
                         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
                         final Ref$ObjectRef ref$ObjectRef2 = new Ref$ObjectRef();
@@ -890,11 +914,11 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                             int length = remoteAnimationTargetArr2.length;
                             for (int i4 = 0; i4 < length; i4++) {
                                 ?? r4 = remoteAnimationTargetArr2[i4];
-                                Integer valueOf = r4 != 0 ? Integer.valueOf(((RemoteAnimationTarget) r4).mode) : null;
-                                if (valueOf != null && valueOf.intValue() == 0) {
+                                Integer numValueOf = r4 != 0 ? Integer.valueOf(((RemoteAnimationTarget) r4).mode) : null;
+                                if (numValueOf != null && numValueOf.intValue() == 0) {
                                     ref$ObjectRef.element = r4;
                                     KeyguardViewMediatorHelperImplKt.aodAppearWallpaperOpeningTarget = r4;
-                                } else if (valueOf != null && valueOf.intValue() == 1) {
+                                } else if (numValueOf != null && numValueOf.intValue() == 1) {
                                     ref$ObjectRef2.element = r4;
                                 }
                             }
@@ -905,17 +929,17 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                             public final void run() {
                                 ActivityManager.RunningTaskInfo runningTaskInfo;
                                 ComponentName componentName;
-                                ValueAnimator valueAnimator = KeyguardViewMediatorHelperImpl.this.aodAppearAnimator;
+                                ValueAnimator valueAnimator = keyguardViewMediatorHelperImpl.aodAppearAnimator;
                                 if (valueAnimator != null) {
                                     valueAnimator.cancel();
                                 }
-                                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = KeyguardViewMediatorHelperImpl.this;
+                                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = keyguardViewMediatorHelperImpl;
                                 keyguardViewMediatorHelperImpl2.aodAppearAnimationFrameCount = 0;
                                 keyguardViewMediatorHelperImpl2.aodAppearAnimator = ValueAnimator.ofFloat(0.0f, 1.0f);
                                 final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
                                 RemoteAnimationTarget remoteAnimationTarget = (RemoteAnimationTarget) ref$ObjectRef2.element;
                                 if (remoteAnimationTarget != null) {
-                                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = KeyguardViewMediatorHelperImpl.this;
+                                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = keyguardViewMediatorHelperImpl;
                                     List<RemoteAnimationTarget> list = mutableList;
                                     keyguardViewMediatorHelperImpl3.getClass();
                                     if (list != null) {
@@ -924,13 +948,18 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                                                 break;
                                             }
                                         }
+                                        SurfaceControl surfaceControl = remoteAnimationTarget.leash;
+                                        surfaceControl.getClass();
+                                        transaction.setAlpha(surfaceControl, 0.0f);
+                                        transaction.apply();
+                                    } else {
+                                        SurfaceControl surfaceControl2 = remoteAnimationTarget.leash;
+                                        surfaceControl2.getClass();
+                                        transaction.setAlpha(surfaceControl2, 0.0f);
+                                        transaction.apply();
                                     }
-                                    SurfaceControl surfaceControl = remoteAnimationTarget.leash;
-                                    surfaceControl.getClass();
-                                    transaction.setAlpha(surfaceControl, 0.0f);
-                                    transaction.apply();
                                 }
-                                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = KeyguardViewMediatorHelperImpl.this;
+                                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = keyguardViewMediatorHelperImpl;
                                 ValueAnimator valueAnimator2 = keyguardViewMediatorHelperImpl4.aodAppearAnimator;
                                 if (valueAnimator2 != null) {
                                     final List list2 = mutableList;
@@ -945,9 +974,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                                             Ref$ObjectRef ref$ObjectRef4 = ref$ObjectRef3;
                                             KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = keyguardViewMediatorHelperImpl4;
                                             for (RemoteAnimationTarget remoteAnimationTarget3 : list3) {
-                                                SurfaceControl surfaceControl2 = remoteAnimationTarget3 != null ? remoteAnimationTarget3.leash : null;
-                                                surfaceControl2.getClass();
-                                                transaction2.setAlpha(surfaceControl2, 1 - ((Float) valueAnimator3.getAnimatedValue()).floatValue());
+                                                SurfaceControl surfaceControl3 = remoteAnimationTarget3 != null ? remoteAnimationTarget3.leash : null;
+                                                surfaceControl3.getClass();
+                                                transaction2.setAlpha(surfaceControl3, 1 - ((Float) valueAnimator3.getAnimatedValue()).floatValue());
                                             }
                                             T t = ref$ObjectRef4.element;
                                             if (t != 0) {
@@ -967,7 +996,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                                             if (iRemoteAnimationFinishedCallback3 != null) {
                                                 iRemoteAnimationFinishedCallback3.onAnimationFinished();
                                             }
-                                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = KeyguardViewMediatorHelperImpl.this;
+                                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = keyguardViewMediatorHelperImpl4;
                                             keyguardViewMediatorHelperImpl5.aodAppearAnimationFrameCount = 0;
                                             keyguardViewMediatorHelperImpl5.aodAppearAnimator = null;
                                         }
@@ -975,12 +1004,12 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                                         public final void onAnimationEnd(Animator animator) {
                                             super.onAnimationEnd(animator);
-                                            Log.i("KeyguardViewMediator", "aodAppearAnimator onAnimationEnd aodAppearAnimationFrameCount=" + KeyguardViewMediatorHelperImpl.this.aodAppearAnimationFrameCount);
+                                            Log.i("KeyguardViewMediator", "aodAppearAnimator onAnimationEnd aodAppearAnimationFrameCount=" + keyguardViewMediatorHelperImpl4.aodAppearAnimationFrameCount);
                                             IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback3 = iRemoteAnimationFinishedCallback2;
                                             if (iRemoteAnimationFinishedCallback3 != null) {
                                                 iRemoteAnimationFinishedCallback3.onAnimationFinished();
                                             }
-                                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = KeyguardViewMediatorHelperImpl.this;
+                                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = keyguardViewMediatorHelperImpl4;
                                             keyguardViewMediatorHelperImpl5.aodAppearAnimationFrameCount = 0;
                                             keyguardViewMediatorHelperImpl5.aodAppearAnimator = null;
                                         }
@@ -1005,28 +1034,28 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         boolean z3 = false;
         boolean booleanExtra = intent.getBooleanExtra("isBoot", false);
         dagger.Lazy lazy = keyguardViewMediatorHelperImpl.viewMediatorLazy;
-        boolean isScreenOn = ((KeyguardViewMediator) lazy.get()).getViewMediatorCallback().isScreenOn();
-        boolean isShowingAndNotOccluded = ((KeyguardViewMediator) lazy.get()).isShowingAndNotOccluded();
-        boolean isScreenOffMemoRunning = keyguardViewMediatorHelperImpl.updateMonitor.isScreenOffMemoRunning();
-        boolean hasPenDetachmentOption = keyguardViewMediatorHelperImpl.settingsHelper.hasPenDetachmentOption();
-        if (isShowingAndNotOccluded && !z && !z2 && isScreenOn && !booleanExtra && !isScreenOffMemoRunning && hasPenDetachmentOption) {
+        boolean zIsScreenOn = ((KeyguardViewMediator) lazy.get()).getViewMediatorCallback().isScreenOn();
+        boolean zIsShowingAndNotOccluded = ((KeyguardViewMediator) lazy.get()).isShowingAndNotOccluded();
+        boolean zIsScreenOffMemoRunning = keyguardViewMediatorHelperImpl.updateMonitor.isScreenOffMemoRunning();
+        boolean zHasPenDetachmentOption = keyguardViewMediatorHelperImpl.settingsHelper.hasPenDetachmentOption();
+        if (zIsShowingAndNotOccluded && !z && !z2 && zIsScreenOn && !booleanExtra && !zIsScreenOffMemoRunning && zHasPenDetachmentOption) {
             z3 = true;
         }
-        if (!z3 && isShowingAndNotOccluded && !z && !z2 && isScreenOn) {
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("canBeDismissedWhenSpenDetached isBoot=", ", isScreenOffMemoRunning=", ", hasPenDetachOpt=", booleanExtra, isScreenOffMemoRunning);
-            m.append(hasPenDetachmentOption);
-            logD$1(m.toString());
+        if (!z3 && zIsShowingAndNotOccluded && !z && !z2 && zIsScreenOn) {
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("canBeDismissedWhenSpenDetached isBoot=", ", isScreenOffMemoRunning=", ", hasPenDetachOpt=", booleanExtra, zIsScreenOffMemoRunning);
+            sbM.append(zHasPenDetachmentOption);
+            logD$1(sbM.toString());
         }
         return z3;
     }
 
     public static final void access$notifyRemoteLockRequested(KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl, Object obj) {
         keyguardViewMediatorHelperImpl.removeMessage(VolteConstants.ErrorCode.CALL_SESSION_ABORT);
-        Message obtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(VolteConstants.ErrorCode.CALL_SESSION_ABORT, obj);
+        Message messageObtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(VolteConstants.ErrorCode.CALL_SESSION_ABORT, obj);
         if (obj instanceof RemoteLockInfo) {
-            keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(obtainMessage);
+            keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(messageObtainMessage);
         } else {
-            keyguardViewMediatorHelperImpl.getHandler$1().sendMessageDelayed(obtainMessage, 100L);
+            keyguardViewMediatorHelperImpl.getHandler$1().sendMessageDelayed(messageObtainMessage, 100L);
         }
     }
 
@@ -1074,7 +1103,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         if (viewMediatorProvider == null) {
             viewMediatorProvider = null;
         }
-        viewMediatorProvider.doKeyguardLocked.mo779invoke(bundle);
+        viewMediatorProvider.doKeyguardLocked.mo781invoke(bundle);
     }
 
     public final void enableLooperLogController(int i, long j) {
@@ -1102,63 +1131,817 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         return ((Number) this.SHOW$delegate.getValue()).intValue();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:103:0x0142, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:323:0x0632, code lost:
     
-        if ((r0 & r2) == r2) goto L66;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:310:0x056f, code lost:
-    
-        if ((r5 & r3) == r3) goto L294;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:311:0x0590, code lost:
-    
-        com.android.systemui.keyguard.Log.d("KeyguardViewMediator", "handleNotifyScreenTurningOn");
-        notifyDrawn();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:312:0x059a, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:318:0x0586, code lost:
-    
-        if (r3 != false) goto L294;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:321:0x058e, code lost:
-    
-        if (r17.fastUnlockController.isFastWakeAndUnlockMode() == false) goto L294;
+        if (r19.fastUnlockController.isFastWakeAndUnlockMode() == false) goto L324;
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v10, types: [T, android.view.SurfaceControl] */
+    /* JADX WARN: Removed duplicated region for block: B:259:0x04e8  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x016f  */
+    /* JADX WARN: Type inference failed for: r10v7, types: [T, android.view.SurfaceControl] */
+    /* JADX WARN: Type inference failed for: r11v9, types: [T, android.view.SurfaceControl] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleSecMessage(android.os.Message r18) {
-        /*
-            Method dump skipped, instructions count: 2134
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.handleSecMessage(android.os.Message):void");
+    public final void handleSecMessage(Message message) {
+        Display display;
+        boolean z;
+        int i;
+        boolean z2;
+        SurfaceControl surfaceControl;
+        boolean z3;
+        KeyguardFixedRotationMonitor keyguardFixedRotationMonitor;
+        boolean z4;
+        Pair pair;
+        boolean zBooleanValue;
+        IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback;
+        RemoteAnimationTarget[] remoteAnimationTargetArr;
+        boolean z5;
+        boolean z6;
+        int i2 = message.what;
+        if (i2 == 1101) {
+            Object obj = message.obj;
+            Log.d("KeyguardViewMediator", "handleRemoteLockRequested");
+            if (!(obj instanceof RemoteLockInfo) || ((RemoteLockInfo) obj).lockState) {
+                if (isShowing$1()) {
+                    resetStateLocked$2();
+                } else {
+                    doKeyguardLocked$2(null);
+                }
+                this.pm.wakeUp(SystemClock.uptimeMillis());
+                return;
+            }
+            if (this.updateMonitor.getRemoteLockType() == -1 && ((KeyguardViewMediator) this.viewMediatorLazy.get()).isSecure()) {
+                resetStateLocked$2();
+                return;
+            }
+            return;
+        }
+        if (i2 == 1102) {
+            Log.d("KeyguardViewMediator", "handleLaunchPersoLock");
+            getHandler$1().removeMessages(VolteConstants.ErrorCode.CALL_SESSION_TERMINATED);
+            synchronized (this.lock$delegate.getValue()) {
+                try {
+                    if (isShowing$1()) {
+                        removeMessage(((Number) this.KEYGUARD_DONE$delegate.getValue()).intValue());
+                        removeMessage(((Number) this.HIDE$delegate.getValue()).intValue());
+                        if (((KeyguardViewMediator) this.viewMediatorLazy.get()).isHiding()) {
+                            ViewMediatorProvider viewMediatorProvider = this.viewMediatorProvider;
+                            (viewMediatorProvider != null ? viewMediatorProvider : null).setHiding.mo781invoke(Boolean.FALSE);
+                        }
+                        resetStateLocked$2();
+                    } else {
+                        Log.d("KeyguardViewMediator", "doKeyguardLocked");
+                        removeMessage(((Number) this.KEYGUARD_DONE_DRAWING$delegate.getValue()).intValue());
+                        doKeyguardLocked$2(null);
+                    }
+                    Unit unit = Unit.INSTANCE;
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+            return;
+        }
+        if (i2 == 1201) {
+            Log.d("KeyguardViewMediator", "handleBootCompleted");
+            if (LsRune.SUBSCREEN_UI) {
+                final SubScreenManager subScreenManager = this.subScreenManager;
+                subScreenManager.getClass();
+                android.util.Log.d("SubScreenManager", "onBootCompleted() ");
+                if (subScreenManager.mSubDisplay == null) {
+                    android.util.Log.d("SubScreenManager", "init() ");
+                    Display[] displays = subScreenManager.mDisplayManager.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
+                    if (displays != null) {
+                        RecyclerView$$ExternalSyntheticOutline0.m(displays.length, "SubScreenManager", new StringBuilder("getSubDisplay() : length "));
+                        for (Display display2 : displays) {
+                            if (display2 == null) {
+                                android.util.Log.i("SubScreenManager", "Do not show SubScreen UI on null display");
+                            } else {
+                                if (display2.getDisplayId() == 1) {
+                                    android.util.Log.i("SubScreenManager", "Show SubScreen UI on this display " + display2);
+                                    display = display2;
+                                    break;
+                                }
+                                android.util.Log.i("SubScreenManager", "Do not show SubScreen UI on this display " + display2);
+                            }
+                        }
+                        display = null;
+                    } else {
+                        display = null;
+                    }
+                    subScreenManager.mSubDisplay = display;
+                    subScreenManager.initWindow();
+                    subScreenManager.mDumpManager.registerNormalDumpable("SubScreenManager", subScreenManager);
+                    if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
+                        subScreenManager.mNotifPipeline.addCollectionListener(new NotifCollectionListener() { // from class: com.android.systemui.subscreen.SubScreenManager.6
+                            public AnonymousClass6() {
+                            }
+
+                            @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
+                            public final void onEntryAdded(NotificationEntry notificationEntry) {
+                                PluginSubScreen pluginSubScreen = SubScreenManager.this.mSubScreenPlugin;
+                                if (pluginSubScreen == null) {
+                                    Log.w("SubScreenManager", "onEntryAdded() no plugin");
+                                } else {
+                                    pluginSubScreen.onEntryAdded(notificationEntry.mKey, notificationEntry.mSbn);
+                                }
+                            }
+
+                            @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
+                            public final void onEntryRemoved(NotificationEntry notificationEntry, int i3) {
+                                PluginSubScreen pluginSubScreen = SubScreenManager.this.mSubScreenPlugin;
+                                if (pluginSubScreen == null) {
+                                    Log.w("SubScreenManager", "onEntryRemoved() no plugin");
+                                } else {
+                                    pluginSubScreen.onEntryRemoved(notificationEntry.mSbn, i3);
+                                }
+                            }
+
+                            @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
+                            public final void onEntryUpdated(NotificationEntry notificationEntry, UpdateSource updateSource) {
+                                PluginSubScreen pluginSubScreen = SubScreenManager.this.mSubScreenPlugin;
+                                if (pluginSubScreen == null) {
+                                    Log.w("SubScreenManager", " onEntryUpdated () no plugin");
+                                } else {
+                                    pluginSubScreen.onEntryUpdated(notificationEntry.mSbn);
+                                }
+                            }
+                        });
+                        return;
+                    }
+                    return;
+                }
+                return;
+            }
+            return;
+        }
+        if (i2 == 1301) {
+            try {
+                IStatusBarService barService = getBarService();
+                if (barService != null) {
+                    int i3 = this.disableFlags;
+                    CharsKt__CharJVMKt.checkRadix(16);
+                    logD$1("adjustStatusBarLocked - ADJUST_STATUS_BAR : flags=0x" + Integer.toString(i3, 16));
+                    barService.disable(this.disableFlags, this.token, this.context.getPackageName());
+                    return;
+                }
+                return;
+            } catch (RemoteException e) {
+                Slog.w("KeyguardViewMediator", "adjustStatusBarLocked - ADJUST_STATUS_BAR - disable failed", e);
+                KeyguardDumpLog.log("KeyguardViewMediator", LogLevel.WARNING, "adjustStatusBarLocked - ADJUST_STATUS_BAR - disable failed", e);
+                return;
+            }
+        }
+        switch (i2) {
+            case 1001:
+                handleSetPendingIntentAfterUnlock(message.getData());
+                return;
+            case 1002:
+                Object obj2 = message.obj;
+                IKeyguardDrawnCallback iKeyguardDrawnCallback = obj2 != null ? (IKeyguardDrawnCallback) obj2 : null;
+                if (iKeyguardDrawnCallback == null) {
+                    if (this.fastUnlockController.isFastWakeAndUnlockMode()) {
+                        KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.fastUnlockController;
+                        int mode = keyguardFastBioUnlockController.getMode();
+                        int i4 = KeyguardFastBioUnlockController.MODE_FLAG_ENABLED;
+                        if (keyguardFastBioUnlockController.isMode(i4) && (KeyguardFastBioUnlockController.MODE_FLAG_FRAME_COMMIT & mode) == 0) {
+                            int i5 = KeyguardFastBioUnlockController.MODE_FLAG_FRAME_REQUEST;
+                            if ((mode & i5) != i5) {
+                            }
+                            Log.d("KeyguardViewMediator", "handleNotifyScreenTurningOn");
+                            notifyDrawn();
+                            return;
+                        }
+                        KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = this.fastUnlockController;
+                        int mode2 = keyguardFastBioUnlockController2.getMode();
+                        if (keyguardFastBioUnlockController2.isMode(i4)) {
+                            int i6 = KeyguardFastBioUnlockController.MODE_FLAG_FRAME_COMMIT;
+                            z = (mode2 & i6) == i6;
+                            if (!z) {
+                            }
+                            Log.d("KeyguardViewMediator", "handleNotifyScreenTurningOn");
+                            notifyDrawn();
+                            return;
+                        }
+                        if (!z) {
+                        }
+                        Log.d("KeyguardViewMediator", "handleNotifyScreenTurningOn");
+                        notifyDrawn();
+                        return;
+                    }
+                    break;
+                }
+                synchronized (this.lock$delegate.getValue()) {
+                    try {
+                        boolean zHasMessages = getHandler$1().hasMessages(getSHOW());
+                        boolean z7 = ((BiometricUnlockController) this.biometricUnlockControllerLazy.get()).mMode != 0;
+                        long jElapsedRealtime = this.lastShowingTime != 0 ? SystemClock.elapsedRealtime() - this.lastShowingTime : 0L;
+                        boolean zIsFastWakeAndUnlockMode = this.fastUnlockController.isFastWakeAndUnlockMode();
+                        ViewMediatorProvider viewMediatorProvider2 = this.viewMediatorProvider;
+                        if (viewMediatorProvider2 == null) {
+                            viewMediatorProvider2 = null;
+                        }
+                        boolean zBooleanValue2 = ((Boolean) viewMediatorProvider2.hasPendingLock.invoke()).booleanValue();
+                        logD$1("handleNotifyScreenTurningOn fastWakeUnlockMode=" + zIsFastWakeAndUnlockMode + ", bioUnlock=" + z7 + " hasShow=" + zHasMessages + ", pendingLock=" + zBooleanValue2 + ", hasCb=" + (iKeyguardDrawnCallback != null) + ", interval=" + jElapsedRealtime + ", hasOccluded=" + hasOccludedMsg$1());
+                        if (iKeyguardDrawnCallback == null) {
+                            return;
+                        }
+                        if ((!this.fastUnlockController.needsBlankScreen && zIsFastWakeAndUnlockMode) || (!z7 && (zHasMessages || zBooleanValue2))) {
+                            this.drawnCallback = iKeyguardDrawnCallback;
+                        } else if (LsRune.KEYGUARD_DELAY_NOTIFY_DRAWN_PREMIUM_WATCH && !this.foldControllerImpl.isFoldOpened() && this.settingsHelper.isPremiumWatchEnabled() && ((hasOccludedMsg$1() || !((KeyguardViewMediator) this.viewMediatorLazy.get()).isShowingAndNotOccluded()) && this.keyguardVisibilityMonitor.isVisible())) {
+                            this.drawnCallback = iKeyguardDrawnCallback;
+                            this.keyguardVisibilityMonitor.addVisibilityChangedListener(new KeyguardViewMediatorHelperImplKt$sam$java_util_function_IntConsumer$0((Function1) this.visibilityListener));
+                            Log.d("KeyguardViewMediator", "delayed notifyDrawn caused by occluded");
+                            return;
+                        } else {
+                            if (jElapsedRealtime < 200 && !z7) {
+                                this.drawnCallback = iKeyguardDrawnCallback;
+                                getHandler$1().post(this.delayedDrawnRunnable);
+                                Log.d("KeyguardViewMediator", "delayed notifyDrawn");
+                                return;
+                            }
+                            notifyDrawn(iKeyguardDrawnCallback);
+                        }
+                        Unit unit2 = Unit.INSTANCE;
+                        return;
+                    } catch (Throwable th2) {
+                        throw th2;
+                    }
+                }
+            case 1003:
+                if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
+                    i = 1;
+                    if (message.arg1 == 1) {
+                        this.handleFoldOpenMsg = true;
+                    }
+                } else {
+                    i = 1;
+                }
+                KeyguardFoldControllerImpl keyguardFoldControllerImpl = this.foldControllerImpl;
+                keyguardFoldControllerImpl.getClass();
+                boolean z8 = message.arg1 == i;
+                boolean z9 = message.arg2 == 0;
+                KeyguardFoldControllerDependency keyguardFoldControllerDependency = keyguardFoldControllerImpl.dependency;
+                String str = "handleFoldMessage: isOpened=" + z8 + ", showing=" + keyguardFoldControllerImpl.getViewMediator().isShowingAndNotOccluded();
+                ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency).getClass();
+                Log.d("KeyguardFoldController", str);
+                if (!z9) {
+                    ((KeyguardFoldControllerConfigImpl) keyguardFoldControllerImpl.foldConfig).getClass();
+                    if (!LsRune.KEYGUARD_SUB_DISPLAY_LOCK) {
+                        ((KeyguardFoldControllerConfigImpl) keyguardFoldControllerImpl.foldConfig).getClass();
+                        if (LsRune.SUBSCREEN_WATCHFACE) {
+                            ((KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) keyguardFoldControllerImpl.viewMediatorHelper$delegate.getValue())).adjustStatusBarLocked$2();
+                        }
+                    } else if (z8) {
+                        KeyguardViewMediator viewMediator = keyguardFoldControllerImpl.getViewMediator();
+                        KeyguardFoldControllerDependency keyguardFoldControllerDependency2 = keyguardFoldControllerImpl.dependency;
+                        KeyguardUnlockInfo.UnlockTrigger unlockTrigger = KeyguardUnlockInfo.UnlockTrigger.TRIGGER_FOLD_OPENED;
+                        ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency2).getClass();
+                        KeyguardUnlockInfo.setUnlockTrigger(unlockTrigger);
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = viewMediator.mHelper;
+                        if (keyguardViewMediatorHelperImpl.getHandler$1().hasMessages(keyguardViewMediatorHelperImpl.getSHOW())) {
+                            keyguardFoldControllerImpl.setFoldOpenState(1);
+                            viewMediator.dismiss(null, null);
+                        } else if (viewMediator.isShowingAndNotOccluded()) {
+                            ((KeyguardFoldControllerConfigImpl) keyguardFoldControllerImpl.foldConfig).getClass();
+                            if (CscRune.SECURITY_SIM_PERM_DISABLED && keyguardFoldControllerImpl.updateMonitor.isIccBlockedPermanently()) {
+                                ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerImpl.dependency).getClass();
+                                Log.d("KeyguardFoldController", "dismiss failed. Permanent state.");
+                            } else {
+                                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = (KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) keyguardFoldControllerImpl.viewMediatorHelper$delegate.getValue());
+                                synchronized (keyguardViewMediatorHelperImpl2.lock$delegate.getValue()) {
+                                    if (keyguardViewMediatorHelperImpl2.hasOccludedMsg$1()) {
+                                        z2 = true == keyguardViewMediatorHelperImpl2.curIsOccluded;
+                                    }
+                                }
+                                if (z2) {
+                                    ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerImpl.dependency).getClass();
+                                    Log.d("KeyguardFoldController", "will handle occluded");
+                                } else {
+                                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = (KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) keyguardFoldControllerImpl.viewMediatorHelper$delegate.getValue());
+                                    keyguardViewMediatorHelperImpl3.getHandler$1().removeMessages(((Number) keyguardViewMediatorHelperImpl3.RESET$delegate.getValue()).intValue());
+                                    ViewMediatorProvider viewMediatorProvider3 = keyguardViewMediatorHelperImpl3.viewMediatorProvider;
+                                    if (viewMediatorProvider3 == null) {
+                                        viewMediatorProvider3 = null;
+                                    }
+                                    viewMediatorProvider3.resetPendingReset.invoke();
+                                    boolean zIsSecure = keyguardFoldControllerImpl.getViewMediator().isSecure();
+                                    if (!zIsSecure) {
+                                        KeyguardFoldControllerDependency keyguardFoldControllerDependency3 = keyguardFoldControllerImpl.dependency;
+                                        KeyguardSecurityModel.SecurityMode securityMode = KeyguardSecurityModel.SecurityMode.None;
+                                        ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency3).getClass();
+                                        KeyguardUnlockInfo.setAuthDetail(securityMode);
+                                    }
+                                    boolean userCanSkipBouncer = keyguardFoldControllerImpl.updateMonitor.getUserCanSkipBouncer(keyguardFoldControllerImpl.selectedUserInteractor.getSelectedUserId());
+                                    if (!zIsSecure || userCanSkipBouncer) {
+                                        keyguardFoldControllerImpl.setFoldOpenState((!keyguardFoldControllerImpl.getViewMediator().getViewMediatorCallback().isScreenOn() || keyguardFoldControllerImpl.wakeReason == 9) ? 3 : 2);
+                                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = (KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) keyguardFoldControllerImpl.viewMediatorHelper$delegate.getValue());
+                                        keyguardViewMediatorHelperImpl4.goingAwayWithAnimation = false;
+                                        ViewMediatorProvider viewMediatorProvider4 = keyguardViewMediatorHelperImpl4.viewMediatorProvider;
+                                        (viewMediatorProvider4 != null ? viewMediatorProvider4 : null).tryKeyguardDone.invoke();
+                                    } else {
+                                        keyguardFoldControllerImpl.setFoldOpenState(1);
+                                        ((KeyguardViewController) keyguardFoldControllerImpl.viewControllerLazy.get()).folderOpenAndDismiss();
+                                    }
+                                }
+                            }
+                        } else {
+                            viewMediator.maybeHandlePendingLock();
+                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = viewMediator.mHelper;
+                            if (keyguardViewMediatorHelperImpl5.getHandler$1().hasMessages(keyguardViewMediatorHelperImpl5.getSHOW())) {
+                                keyguardFoldControllerImpl.setFoldOpenState(1);
+                                viewMediator.dismiss(null, null);
+                            }
+                        }
+                    } else {
+                        KeyguardViewMediator viewMediator2 = keyguardFoldControllerImpl.getViewMediator();
+                        if (viewMediator2.isShowingAndNotOccluded()) {
+                            viewMediator2.getViewMediatorCallback().resetKeyguard();
+                        }
+                    }
+                }
+                keyguardFoldControllerImpl.onFoldStateChanged(keyguardFoldControllerImpl.normalRankedStateListeners, z8, z9, ((KeyguardFoldControllerConfigImpl) keyguardFoldControllerImpl.foldConfig).isDebug());
+                return;
+            case VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI /* 1004 */:
+                KeyguardViewMediator.StartKeyguardExitAnimParams startKeyguardExitAnimParams = (KeyguardViewMediator.StartKeyguardExitAnimParams) message.obj;
+                final Message messageObtainMessage = getHandler$1().obtainMessage(((Number) this.START_KEYGUARD_EXIT_ANIM$delegate.getValue()).intValue(), startKeyguardExitAnimParams);
+                if (isKeyguardHiding()) {
+                    boolean zIsDisabledUnlockAnimation = isDisabledUnlockAnimation(startKeyguardExitAnimParams);
+                    KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = this.fastUnlockController;
+                    if (zIsDisabledUnlockAnimation) {
+                        if (!keyguardFastBioUnlockController3.isFastWakeAndUnlockMode() || keyguardFastBioUnlockController3.isInvisibleAfterGoingAwayTransStarted) {
+                            if ((keyguardFastBioUnlockController3.isFastUnlockMode() || (keyguardFastBioUnlockController3.isFastWakeAndUnlockMode() && keyguardFastBioUnlockController3.isInvisibleAfterGoingAwayTransStarted)) && ((!this.settingsHelper.isEnabledFaceStayOnLock() && keyguardFastBioUnlockController3.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController3.biometricSourceType == BiometricSourceType.FACE) || (keyguardFastBioUnlockController3.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController3.biometricSourceType == BiometricSourceType.FINGERPRINT))) {
+                                KeyguardFixedRotationMonitor keyguardFixedRotationMonitor2 = this.fixedRotationMonitor;
+                                if (keyguardFixedRotationMonitor2.isFixedRotated()) {
+                                    IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback2 = startKeyguardExitAnimParams.mFinishedCallback;
+                                    if (iRemoteAnimationFinishedCallback2 != null) {
+                                        keyguardFixedRotationMonitor2.setPendingRunnable(new KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1(iRemoteAnimationFinishedCallback2, this));
+                                        startKeyguardExitAnimParams.mFinishedCallback = null;
+                                        startKeyguardExitAnimParams.mApps = null;
+                                    }
+                                    z3 = false;
+                                } else {
+                                    z3 = true;
+                                }
+                                String str2 = LsRune.VALUE_SUB_DISPLAY_POLICY;
+                                final boolean zIsFixedRotated = keyguardFixedRotationMonitor2.isFixedRotated();
+                                final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback3 = startKeyguardExitAnimParams.mFinishedCallback;
+                                final ArrayList arrayList = new ArrayList();
+                                final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
+                                final Ref$ObjectRef ref$ObjectRef2 = new Ref$ObjectRef();
+                                RemoteAnimationTarget[] remoteAnimationTargetArr2 = startKeyguardExitAnimParams.mWallpapers;
+                                if (remoteAnimationTargetArr2 != null) {
+                                    ArrayList arrayList2 = new ArrayList();
+                                    int length = remoteAnimationTargetArr2.length;
+                                    int i7 = 0;
+                                    while (i7 < length) {
+                                        KeyguardFixedRotationMonitor keyguardFixedRotationMonitor3 = keyguardFixedRotationMonitor2;
+                                        RemoteAnimationTarget remoteAnimationTarget = remoteAnimationTargetArr2[i7];
+                                        RemoteAnimationTarget[] remoteAnimationTargetArr3 = remoteAnimationTargetArr2;
+                                        if (remoteAnimationTarget.mode == 1) {
+                                            arrayList2.add(remoteAnimationTarget);
+                                        }
+                                        i7++;
+                                        keyguardFixedRotationMonitor2 = keyguardFixedRotationMonitor3;
+                                        remoteAnimationTargetArr2 = remoteAnimationTargetArr3;
+                                    }
+                                    keyguardFixedRotationMonitor = keyguardFixedRotationMonitor2;
+                                    ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
+                                    int size = arrayList2.size();
+                                    int i8 = 0;
+                                    while (i8 < size) {
+                                        Object obj3 = arrayList2.get(i8);
+                                        i8++;
+                                        ref$ObjectRef.element = ((RemoteAnimationTarget) obj3).leash;
+                                        arrayList3.add(Unit.INSTANCE);
+                                    }
+                                } else {
+                                    keyguardFixedRotationMonitor = keyguardFixedRotationMonitor2;
+                                }
+                                RemoteAnimationTarget[] remoteAnimationTargetArr4 = startKeyguardExitAnimParams.mWallpapers;
+                                if (remoteAnimationTargetArr4 != null) {
+                                    ArrayList arrayList4 = new ArrayList();
+                                    int length2 = remoteAnimationTargetArr4.length;
+                                    int i9 = 0;
+                                    while (i9 < length2) {
+                                        RemoteAnimationTarget remoteAnimationTarget2 = remoteAnimationTargetArr4[i9];
+                                        boolean z10 = z;
+                                        if (remoteAnimationTarget2.mode == 0) {
+                                            arrayList4.add(remoteAnimationTarget2);
+                                        }
+                                        i9++;
+                                        z = z10;
+                                    }
+                                    z4 = z;
+                                    ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList4, 10));
+                                    int size2 = arrayList4.size();
+                                    int i10 = 0;
+                                    while (i10 < size2) {
+                                        Object obj4 = arrayList4.get(i10);
+                                        i10++;
+                                        ref$ObjectRef2.element = ((RemoteAnimationTarget) obj4).leash;
+                                        arrayList5.add(Unit.INSTANCE);
+                                    }
+                                } else {
+                                    z4 = true;
+                                }
+                                RemoteAnimationTarget[] remoteAnimationTargetArr5 = startKeyguardExitAnimParams.mApps;
+                                if (remoteAnimationTargetArr5 != null) {
+                                    for (RemoteAnimationTarget remoteAnimationTarget3 : remoteAnimationTargetArr5) {
+                                        arrayList.add(remoteAnimationTarget3.leash);
+                                    }
+                                }
+                                if (!arrayList.isEmpty() && iRemoteAnimationFinishedCallback3 != null) {
+                                    final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                                    this.unlockAnimationExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$updateAppLeashAndKeyguardVisibility$6
+                                        /* JADX WARN: Multi-variable type inference failed */
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            Log.d("KeyguardViewMediator", "updateAppLeashAndKeyguardVisibility");
+                                            this.this$0.fastUnlockController.setForceInvisible(transaction);
+                                            SurfaceControl.Transaction transaction2 = transaction;
+                                            ArrayList arrayList6 = arrayList;
+                                            Ref$ObjectRef ref$ObjectRef3 = ref$ObjectRef;
+                                            Ref$ObjectRef ref$ObjectRef4 = ref$ObjectRef2;
+                                            int size3 = arrayList6.size();
+                                            int i11 = 0;
+                                            while (i11 < size3) {
+                                                Object obj5 = arrayList6.get(i11);
+                                                i11++;
+                                                SurfaceControl surfaceControl2 = (SurfaceControl) obj5;
+                                                transaction2.setAlpha(surfaceControl2, 1.0f);
+                                                transaction2.setVisibility(surfaceControl2, true);
+                                            }
+                                            SurfaceControl surfaceControl3 = (SurfaceControl) ref$ObjectRef3.element;
+                                            if (surfaceControl3 != null) {
+                                                Log.d("KeyguardViewMediator", "updateAppLeashAndKeyguardVisibility: closingWallpaperLeash invisible");
+                                                transaction2.setAlpha(surfaceControl3, 0.0f);
+                                            }
+                                            SurfaceControl surfaceControl4 = (SurfaceControl) ref$ObjectRef4.element;
+                                            if (surfaceControl4 != null) {
+                                                Log.d("KeyguardViewMediator", "updateAppLeashAndKeyguardVisibility: openingWallpaperLeash visible");
+                                                transaction2.setAlpha(surfaceControl4, 1.0f);
+                                            }
+                                            transaction2.apply();
+                                            if (zIsFixedRotated) {
+                                                return;
+                                            }
+                                            Choreographer choreographer = Choreographer.getInstance();
+                                            final SurfaceControl.Transaction transaction3 = transaction;
+                                            final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback4 = iRemoteAnimationFinishedCallback3;
+                                            choreographer.postCallback(1, new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$updateAppLeashAndKeyguardVisibility$6.2
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    transaction3.close();
+                                                    try {
+                                                        iRemoteAnimationFinishedCallback4.onAnimationFinished();
+                                                    } catch (RemoteException e2) {
+                                                        e2.printStackTrace();
+                                                    }
+                                                }
+                                            }, null);
+                                        }
+                                    });
+                                    if (!keyguardFixedRotationMonitor.isFixedRotated() && startKeyguardExitAnimParams.mFinishedCallback != null) {
+                                        startKeyguardExitAnimParams.mFinishedCallback = null;
+                                        startKeyguardExitAnimParams.mApps = new RemoteAnimationTarget[0];
+                                    }
+                                }
+                                pair = new Pair(Boolean.TRUE, Boolean.valueOf(z3));
+                            } else {
+                                z4 = true;
+                                Boolean bool = Boolean.FALSE;
+                                pair = new Pair(bool, bool);
+                            }
+                        } else if (keyguardFastBioUnlockController3.needsBlankScreen) {
+                            z5 = false;
+                            pair = new Pair(Boolean.valueOf(z5), Boolean.TRUE);
+                            z4 = true;
+                        } else {
+                            int mode3 = keyguardFastBioUnlockController3.getMode();
+                            if (keyguardFastBioUnlockController3.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED)) {
+                                int i11 = KeyguardFastBioUnlockController.MODE_FLAG_FRAME_COMMIT;
+                                if ((mode3 & i11) == i11) {
+                                }
+                                pair = new Pair(Boolean.valueOf(z5), Boolean.TRUE);
+                                z4 = true;
+                            }
+                            z5 = true;
+                            pair = new Pair(Boolean.valueOf(z5), Boolean.TRUE);
+                            z4 = true;
+                        }
+                        zBooleanValue = ((Boolean) pair.component1()).booleanValue();
+                        if (((Boolean) pair.component2()).booleanValue()) {
+                            IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback4 = startKeyguardExitAnimParams.mFinishedCallback;
+                            if (iRemoteAnimationFinishedCallback4 != null) {
+                                try {
+                                    iRemoteAnimationFinishedCallback4.onAnimationFinished();
+                                    iRemoteAnimationFinishedCallback = null;
+                                } catch (RemoteException unused) {
+                                    Slog.e("KeyguardViewMediator", "RemoteException");
+                                    iRemoteAnimationFinishedCallback = null;
+                                    KeyguardDumpLog.log("KeyguardViewMediator", LogLevel.ERROR, "RemoteException", null);
+                                }
+                                startKeyguardExitAnimParams.mFinishedCallback = iRemoteAnimationFinishedCallback;
+                                remoteAnimationTargetArr = iRemoteAnimationFinishedCallback;
+                            } else {
+                                remoteAnimationTargetArr = 0;
+                            }
+                            startKeyguardExitAnimParams.mApps = remoteAnimationTargetArr;
+                        }
+                        if (zBooleanValue) {
+                            Log.d("KeyguardViewMediator", "showForegroundImmediatelyIfNeeded returns true");
+                        }
+                    } else {
+                        z4 = true;
+                        zBooleanValue = false;
+                    }
+                    if (zBooleanValue) {
+                        Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$$ExternalSyntheticLambda23
+                            @Override // kotlin.jvm.functions.Function0
+                            public final Object invoke() {
+                                this.f$0.getHandler$1().handleMessage(messageObtainMessage);
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams = keyguardFastBioUnlockController3.delayedActionParams;
+                        if (delayedActionParams != null) {
+                            Handler handler = delayedActionParams.handler;
+                            KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 = delayedActionParams.runnableWrapper;
+                            if (handler.hasCallbacks(keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1)) {
+                                handler.removeCallbacks(keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1);
+                            }
+                            z6 = z4;
+                            delayedActionParams.isDiscard = z6;
+                        } else {
+                            z6 = z4;
+                        }
+                        KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams2 = new KeyguardFastBioUnlockController.DelayedActionParams(keyguardFastBioUnlockController3.mainHandler, function0, 50L);
+                        delayedActionParams2.start(z6);
+                        keyguardFastBioUnlockController3.delayedActionParams = delayedActionParams2;
+                        return;
+                    }
+                }
+                if (!((KeyguardViewMediator) this.viewMediatorLazy.get()).requestedShowSurfaceBehindKeyguard() && isDisabledUnlockAnimation(startKeyguardExitAnimParams) && startKeyguardExitAnimParams != null) {
+                    RemoteAnimationTarget[] remoteAnimationTargetArr6 = startKeyguardExitAnimParams.mApps;
+                    if (remoteAnimationTargetArr6 != null) {
+                        if (!(remoteAnimationTargetArr6.length == 0)) {
+                            SurfaceControl.Transaction transaction2 = new SurfaceControl.Transaction();
+                            boolean z11 = ((StatusBarStateControllerImpl) this.sysuiStatusBarStateController).mLeaveOpenOnKeyguardHide;
+                            dagger.Lazy lazy = this.surfaceControllerLazy;
+                            if (!z11) {
+                                KeyguardSurfaceControllerImpl.setKeyguardSurfaceAppearAmount$default((KeyguardSurfaceControllerImpl) lazy.get(), transaction2, 4);
+                            }
+                            ArrayIterator arrayIterator = new ArrayIterator(startKeyguardExitAnimParams.mApps);
+                            while (arrayIterator.hasNext()) {
+                                RemoteAnimationTarget remoteAnimationTarget4 = (RemoteAnimationTarget) arrayIterator.next();
+                                if (remoteAnimationTarget4 != null && (surfaceControl = remoteAnimationTarget4.leash) != null) {
+                                    ((KeyguardSurfaceControllerImpl) lazy.get()).getClass();
+                                    if (KeyguardSurfaceControllerImpl.isValid(surfaceControl, 1.0f)) {
+                                        Log.d("KeyguardSurface", "setLeashAppearAmount amount=1.0 hasTransaction=true");
+                                        try {
+                                            transaction2.setAlpha(surfaceControl, 1.0f).getClass();
+                                        } catch (Exception e2) {
+                                            Log.d("KeyguardSurface", "setLeashAppearAmount exception");
+                                            e2.printStackTrace();
+                                            Unit unit3 = Unit.INSTANCE;
+                                        }
+                                    }
+                                }
+                            }
+                            transaction2.apply();
+                            transaction2.close();
+                        }
+                        startKeyguardExitAnimParams.mApps = null;
+                    }
+                    IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback5 = startKeyguardExitAnimParams.mFinishedCallback;
+                    if (iRemoteAnimationFinishedCallback5 != null) {
+                        try {
+                            Log.d("KeyguardViewMediator", "keepOrDisableUnlockAnimation disabled");
+                            iRemoteAnimationFinishedCallback5.onAnimationFinished();
+                        } catch (RemoteException unused2) {
+                        }
+                        startKeyguardExitAnimParams.mFinishedCallback = null;
+                    }
+                }
+                this.pm.userActivity(SystemClock.uptimeMillis(), 2, 0);
+                if (isShowing$1() || this.hidingByDisabled) {
+                    getHandler$1().handleMessage(messageObtainMessage);
+                    return;
+                }
+                Log.w("KeyguardViewMediator", "no need to handle msg: " + messageObtainMessage.what);
+                try {
+                    IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback6 = startKeyguardExitAnimParams.mFinishedCallback;
+                    if (iRemoteAnimationFinishedCallback6 != null) {
+                        iRemoteAnimationFinishedCallback6.onAnimationFinished();
+                        return;
+                    }
+                    return;
+                } catch (RemoteException unused3) {
+                    return;
+                }
+            case 1005:
+                this.desktopManager.notifyOccluded(message.arg1 != 0);
+                KeyguardDisplayManager keyguardDisplayManager = this.keyguardDisplayManager;
+                boolean z12 = message.arg1 != 0;
+                keyguardDisplayManager.getClass();
+                android.util.Log.i("KeyguardDisplayManager", "notifyOccluded() occluded=" + z12);
+                KeyguardScreenSaver keyguardScreenSaver = keyguardDisplayManager.mKeyguardScreenSaver;
+                if (keyguardScreenSaver != null) {
+                    keyguardScreenSaver.dismiss();
+                    keyguardDisplayManager.mKeyguardScreenSaver = null;
+                }
+                z = !z12 && ((KeyguardStateControllerImpl) keyguardDisplayManager.mKeyguardStateController).mShowing;
+                keyguardDisplayManager.mShowing = z;
+                keyguardDisplayManager.mIsDexOccluded = z12;
+                keyguardDisplayManager.updateDisplays(z);
+                return;
+            case 1006:
+                if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
+                    SubScreenManager subScreenManager2 = this.subScreenManager;
+                    boolean z13 = message.arg1 != 0;
+                    subScreenManager2.getClass();
+                    StringBuilder sb = new StringBuilder("setCoverOccluded ");
+                    sb.append(z13);
+                    sb.append(", request Cover Bouncer : ");
+                    ActionBarContextView$$ExternalSyntheticOutline0.m(sb, subScreenManager2.mRequestBouncerForLauncherTask, "SubScreenManager");
+                    if (z13) {
+                        int i12 = 0;
+                        for (ActivityManager.RunningTaskInfo runningTaskInfo : subScreenManager2.mActivityManager.getRunningTasks(1)) {
+                            StringBuilder sb2 = new StringBuilder("Current running task: ");
+                            sb2.append(runningTaskInfo.topActivity);
+                            sb2.append(", ");
+                            KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb2, runningTaskInfo.isRunning, "SubScreenManager");
+                            ComponentName componentName = runningTaskInfo.topActivity;
+                            if (componentName != null && runningTaskInfo.isRunning) {
+                                i12++;
+                                String className = componentName.getClassName();
+                                KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("className  ", className, "SubScreenManager");
+                                if (!((ArrayList) subScreenManager2.mOccludedApps).contains(className)) {
+                                    ((ArrayList) subScreenManager2.mOccludedApps).add(className);
+                                }
+                            }
+                        }
+                        if (i12 == 0) {
+                            android.util.Log.w("SubScreenManager", "no running task");
+                        }
+                    } else {
+                        if (((ArrayList) subScreenManager2.mOccludedApps).isEmpty()) {
+                            android.util.Log.w("SubScreenManager", "no prev occluded app");
+                        } else {
+                            ArrayList arrayList6 = (ArrayList) subScreenManager2.mOccludedApps;
+                            int size3 = arrayList6.size();
+                            int i13 = 0;
+                            while (i13 < size3) {
+                                Object obj5 = arrayList6.get(i13);
+                                i13++;
+                                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("prev occluded app: ", (String) obj5, "SubScreenManager");
+                            }
+                        }
+                        ((ArrayList) subScreenManager2.mOccludedApps).clear();
+                        if (((KeyguardStateControllerImpl) subScreenManager2.mKeyguardStateController).mShowing && !subScreenManager2.mRequestBouncerForLauncherTask) {
+                            subScreenManager2.startSubHomeActivity();
+                        }
+                    }
+                    PluginSubScreen pluginSubScreen = subScreenManager2.mSubScreenPlugin;
+                    if (pluginSubScreen == null) {
+                        android.util.Log.w("SubScreenManager", "onCoverOccludedStateChanged() no plugin");
+                        return;
+                    } else {
+                        pluginSubScreen.onCoverOccludedStateChanged(z13);
+                        return;
+                    }
+                }
+                return;
+            default:
+                return;
+        }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0098, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:51:0x0098, code lost:
     
         if (((r1 != null ? r1.getBooleanExtra("showCoverToast", false) : false) || (r1 != null ? r1.getBooleanExtra("bio_extend_duration", false) : false) || (r1 != null ? r1.getBooleanExtra("runOnCover", false) : false)) != false) goto L52;
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0196  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x01a1  */
     /* JADX WARN: Type inference failed for: r4v9, types: [com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$handleSetPendingIntentAfterUnlock$2] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleSetPendingIntentAfterUnlock(android.os.Bundle r22) {
-        /*
-            Method dump skipped, instructions count: 593
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.handleSetPendingIntentAfterUnlock(android.os.Bundle):void");
+    public final void handleSetPendingIntentAfterUnlock(Bundle bundle) {
+        boolean z;
+        String stringExtra;
+        List listSplit$default;
+        String str;
+        final PendingIntent pendingIntent = (PendingIntent) bundle.getParcelable("PI");
+        final Intent intent = (Intent) bundle.getParcelable("FI");
+        boolean booleanExtra = intent != null ? intent.getBooleanExtra("ignoreKeyguardState", false) : false;
+        boolean booleanExtra2 = intent != null ? intent.getBooleanExtra("ignoreUnlock", false) : false;
+        String stringExtra2 = intent != null ? intent.getStringExtra("notificationKey") : null;
+        boolean booleanExtra3 = intent != null ? intent.getBooleanExtra("runOnCover", false) : false;
+        int intExtra = intent != null ? intent.getIntExtra("launchDisplayId", -1) : -1;
+        boolean z2 = LsRune.COVER_SUPPORTED;
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.updateMonitor;
+        if ((z2 && keyguardUpdateMonitor.isCoverClosed()) || (LsRune.SUBSCREEN_WATCHFACE && !this.foldControllerImpl.isFoldOpened())) {
+            boolean z3 = LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY;
+            if ((z3 || LsRune.SUBSCREEN_WATCHFACE) && booleanExtra3) {
+                keyguardUpdateMonitor.dispatchStartSubscreenBiometric(intent);
+            }
+            if (!z3) {
+            }
+            ((PluginAODManager) this.pluginAODManagerLazy.get()).showCoverToast(pendingIntent, intent);
+            return;
+        }
+        if (booleanExtra2) {
+            Log.d("KeyguardViewMediator", "handleSetPendingIntentAfterUnlock() ignoreUnlock");
+            startSetPendingIntent(pendingIntent, intent);
+            return;
+        }
+        if (!isShowing$1()) {
+            if (booleanExtra) {
+                startSetPendingIntent(pendingIntent, intent);
+                return;
+            }
+            ViewMediatorProvider viewMediatorProvider = this.viewMediatorProvider;
+            if (((Boolean) (viewMediatorProvider != null ? viewMediatorProvider : null).isExternallyEnabled.invoke()).booleanValue() || stringExtra2 == null) {
+                return;
+            }
+            startSetPendingIntent(pendingIntent, intent);
+            return;
+        }
+        dagger.Lazy lazy = this.viewMediatorLazy;
+        boolean zIsSecure = ((KeyguardViewMediator) lazy.get()).isSecure();
+        boolean booleanExtra4 = intent != null ? intent.getBooleanExtra("afterKeyguardGone", false) : false;
+        int selectedUserId = (stringExtra2 == null || (listSplit$default = StringsKt__StringsKt.split$default(stringExtra2, new String[]{"|"}, 0, 6)) == null || (str = (String) CollectionsKt___CollectionsKt.getOrNull(0, listSplit$default)) == null) ? this.selectedUserInteractor.getSelectedUserId() : Integer.parseInt(str);
+        if (!booleanExtra4 && ((KnoxStateMonitorImpl) this.knoxStateMonitor).isPersona(selectedUserId) && ((KeyguardViewMediator) lazy.get()).isSecure(selectedUserId)) {
+            booleanExtra4 = true;
+        }
+        boolean userHasTrust = keyguardUpdateMonitor.getUserHasTrust(((UserTrackerImpl) this.userTracker).getUserId());
+        boolean z4 = LsRune.SECURITY_SWIPE_BOUNCER;
+        boolean z5 = !z4 || (zIsSecure && !userHasTrust);
+        if (intent != null && (stringExtra = intent.getStringExtra("dismissType")) != null) {
+            int iHashCode = stringExtra.hashCode();
+            if (iHashCode != -934938715) {
+                if (iHashCode != -169343402) {
+                    if (iHashCode == 514447268 && stringExtra.equals("fingerprinterror")) {
+                        keyguardUpdateMonitor.setDismissActionType(KeyguardConstants$KeyguardDismissActionType.KEYGUARD_DISMISS_ACTION_FINGERPRINT_ERROR);
+                        z5 = true;
+                    }
+                } else if (stringExtra.equals("shutdown")) {
+                    keyguardUpdateMonitor.setDismissActionType(KeyguardConstants$KeyguardDismissActionType.KEYGUARD_DISMISS_ACTION_SHUTDOWN);
+                    z5 = true;
+                }
+            } else if (stringExtra.equals("reboot")) {
+                keyguardUpdateMonitor.setDismissActionType(KeyguardConstants$KeyguardDismissActionType.KEYGUARD_DISMISS_ACTION_REBOOT);
+                z5 = true;
+            }
+        }
+        KeyguardUnlockInfo.setUnlockTrigger(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_PENDING_INTENT);
+        boolean booleanExtra5 = intent != null ? intent.getBooleanExtra("dismissIfInsecure", z5) : false;
+        dagger.Lazy lazy2 = this.viewControllerLazy;
+        if (booleanExtra5 || (zIsSecure && !userHasTrust)) {
+            z = true;
+        } else if (z4) {
+            ((KeyguardViewController) lazy2.get()).setShowSwipeBouncer(true);
+            z = true;
+        } else {
+            z = false;
+        }
+        this.goingAwayWithAnimation = intent != null ? intent.getBooleanExtra("withAnimation", true) : true;
+        boolean booleanExtra6 = intent != null ? intent.getBooleanExtra("wakeAndUnlock", false) : false;
+        boolean z6 = this.goingAwayWithAnimation;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("handleSetPendingIntentAfterUnlock() : afterKeyguardGone=", " isInstantDismiss=", " withAnimation=", booleanExtra4, z);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z6, " wakeAndUnlock=", booleanExtra6, "launchDisplayId=");
+        sbM.append(intExtra);
+        Log.e("KeyguardViewMediator", sbM.toString());
+        KeyguardDisplayManager keyguardDisplayManager = this.keyguardDisplayManager;
+        if (!keyguardDisplayManager.isExternalDesktopWindowing() || intExtra == -1) {
+            ((KeyguardViewController) lazy2.get()).dismissWithAction(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.handleSetPendingIntentAfterUnlock.3
+                @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
+                public final boolean onDismiss() {
+                    KeyguardViewMediatorHelperImpl.this.startSetPendingIntent(pendingIntent, intent);
+                    return false;
+                }
+            }, null, booleanExtra4, z, booleanExtra6);
+            return;
+        }
+        ((KeyguardInteractor) this.keyguardInteractor$delegate.getValue()).setDismissActionForDex(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.handleSetPendingIntentAfterUnlock.2
+            @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
+            public final boolean onDismiss() {
+                KeyguardViewMediatorHelperImpl.this.startSetPendingIntent(pendingIntent, intent);
+                return false;
+            }
+        });
+        Integer numValueOf = Integer.valueOf(intExtra);
+        if (!keyguardDisplayManager.mPresentations.contains(intExtra)) {
+            android.util.Log.d("KeyguardDisplayManager", "There is no presentation for displayId=" + numValueOf);
+        } else {
+            Presentation presentation = (Presentation) keyguardDisplayManager.mPresentations.get(intExtra);
+            if (presentation instanceof ConnectedDisplayKeyguardPresentation) {
+                ((ConnectedDisplayKeyguardPresentation) presentation).showBouncer();
+            } else {
+                android.util.Log.d("KeyguardDisplayManager", "presentation window type casting failed!");
+            }
+        }
     }
 
     public final boolean hasOccludedMsg$1() {
@@ -1252,7 +2035,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         } else {
             i = 2;
             if (!((StatusBarStateControllerImpl) this.sysuiStatusBarStateController).mLeaveOpenOnKeyguardHide) {
-                i = ((startKeyguardExitAnimParams != null ? startKeyguardExitAnimParams.mApps : null) == null || startKeyguardExitAnimParams.mApps.length <= 1) ? this.disableRemoteUnlockAnimation ? 4 : (this.lastGoingAwayFlags & 2) == 2 ? 5 : this.settingsHelper.getTransitionAnimationScale() == 0.0f ? 6 : this.keyguardDisplayManager.isDesktopMode() ? 7 : ((ScrimController) this.scrimControllerLazy.get()).mState == ScrimState.SHADE_LOCKED ? 8 : KeyguardViewMediatorHelperImplKt.DEBUG_DISABLE_REMOTE_UNLOCK_ANIMATION ? 255 : 0 : 3;
+                i = ((startKeyguardExitAnimParams != null ? startKeyguardExitAnimParams.mApps : null) == null || startKeyguardExitAnimParams.mApps.length <= 1) ? this.disableRemoteUnlockAnimation ? 4 : (this.lastGoingAwayFlags & 2) == 2 ? 5 : this.settingsHelper.getTransitionAnimationScale() == 0.0f ? 6 : this.keyguardDisplayManager.isDesktopMode() ? 7 : ((ScrimController) this.scrimControllerLazy.get()).mState == ScrimState.SHADE_LOCKED ? 8 : this.isTaskWithEmbeddedOrStartingWindow ? 9 : KeyguardViewMediatorHelperImplKt.DEBUG_DISABLE_REMOTE_UNLOCK_ANIMATION ? 255 : 0 : 3;
             }
         }
         if (i == 0) {
@@ -1266,20 +2049,55 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         return this.settingsHelper.isEnabledBiometricUnlockVI();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x003c, code lost:
-    
-        if (r5 != false) goto L70;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean isKeyguardDisabled(boolean r9) {
-        /*
-            Method dump skipped, instructions count: 253
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.isKeyguardDisabled(boolean):boolean");
+    public final boolean isKeyguardDisabled(boolean z) {
+        CoverState coverState;
+        boolean z2;
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.updateMonitor;
+        if (keyguardUpdateMonitor.getRemoteLockType() != 3) {
+            KnoxStateMonitor knoxStateMonitor = this.knoxStateMonitor;
+            if (z) {
+                ((KnoxStateMonitorImpl) knoxStateMonitor).getClass();
+                if (((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isForcedLock()) {
+                    z2 = false;
+                } else {
+                    SystemManager systemManager = SystemManager.getInstance();
+                    z2 = systemManager != null && systemManager.getLockScreenOverrideMode() == 2;
+                    if (z2) {
+                        z2 = true;
+                    }
+                }
+                if (!z2) {
+                }
+                return true;
+            }
+            if ((keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.isUserUnlocked$1()) || !isKeyguardDisabledBySettings(true)) {
+                if (!z) {
+                    if (keyguardUpdateMonitor.isForcedLock()) {
+                        try {
+                            ActivityTaskManager.getService().stopSystemLockTaskMode();
+                        } catch (RemoteException unused) {
+                            Log.w("KeyguardViewMediator", "Failed to stop app pinning");
+                        }
+                    }
+                    BiometricUnlockController biometricUnlockController = (BiometricUnlockController) this.biometricUnlockControllerLazy.get();
+                    if (biometricUnlockController.hasPendingAuthentication() && biometricUnlockController.mPendingAuthenticated.biometricSourceType == BiometricSourceType.FINGERPRINT) {
+                        Log.d("KeyguardViewMediator", "keyguardDisabled: pending fingerprint auth");
+                    } else {
+                        KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) knoxStateMonitor;
+                        knoxStateMonitorImpl.getClass();
+                        if ((((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isForcedLock() || (knoxStateMonitorImpl.mCustomSdkMonitor.mKnoxCustomLockScreenOverrideMode & 2) == 0) ? false : true) {
+                            Log.d("KeyguardViewMediator", "keyguardDisabled: it is disabled by Knox");
+                        } else if (LsRune.COVER_SUPPORTED && (coverState = keyguardUpdateMonitor.getCoverState()) != null && coverState.attached && !coverState.getSwitchState() && this.settingsHelper.isAutomaticUnlockEnabled() && !((KeyguardViewMediator) this.viewMediatorLazy.get()).isSecure() && !this.keyguardDisplayManager.isExternalDesktopWindowing()) {
+                            Log.d("KeyguardViewMediator", "doKeyguard: not showing because cover is showing");
+                        } else if (LsRune.KEYGUARD_HOMEHUB && this.pogoPlugged != 0) {
+                            Log.d("KeyguardViewMediator", "keyguardDisabled: it is HomeHub device and pogo is plugged");
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public final boolean isKeyguardDisabledBySettings(boolean z) {
@@ -1465,14 +2283,14 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$registerSysDumpHeap$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardViewMediatorHelperImpl.this.sysDumpTrigger.getClass();
+                this.this$0.sysDumpTrigger.getClass();
             }
         });
     }
 
     public final void onSecurityPropertyUpdated() {
         if (isSecure$2()) {
-            this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$onSecurityPropertyUpdated$1
+            this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.onSecurityPropertyUpdated.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     SystemProperties.set("sys.locksecured", KeyguardViewMediatorHelperImpl.this.isShowing$1() ? "true" : "false");
@@ -1486,30 +2304,30 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
             this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$playSound$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    float semGetSituationVolume;
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                    float fSemGetSituationVolume;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                     SoundPool soundPool = keyguardViewMediatorHelperImpl.lockSounds;
                     if (soundPool != null) {
                         soundPool.stop(keyguardViewMediatorHelperImpl.lockSoundStreamId);
                     }
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = KeyguardViewMediatorHelperImpl.this;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.this$0;
                     keyguardViewMediatorHelperImpl2.uiSoundsStreamType = keyguardViewMediatorHelperImpl2.audioManager.getUiSoundsStreamType();
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = KeyguardViewMediatorHelperImpl.this;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this.this$0;
                     if (keyguardViewMediatorHelperImpl3.audioManager.isStreamMute(keyguardViewMediatorHelperImpl3.uiSoundsStreamType)) {
                         return;
                     }
                     if (LsRune.KEYGUARD_LOCK_SITUATION_VOLUME) {
-                        semGetSituationVolume = 1.0f;
+                        fSemGetSituationVolume = 1.0f;
                     } else {
-                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = KeyguardViewMediatorHelperImpl.this;
-                        semGetSituationVolume = keyguardViewMediatorHelperImpl4.audioManager.semGetSituationVolume(i == keyguardViewMediatorHelperImpl4.unlockSoundId ? 7 : 4, 0);
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl4 = this.this$0;
+                        fSemGetSituationVolume = keyguardViewMediatorHelperImpl4.audioManager.semGetSituationVolume(i == keyguardViewMediatorHelperImpl4.unlockSoundId ? 7 : 4, 0);
                     }
-                    float f = semGetSituationVolume;
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = KeyguardViewMediatorHelperImpl.this;
+                    float f = fSemGetSituationVolume;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl5 = this.this$0;
                     String str = "playSound " + i;
                     keyguardViewMediatorHelperImpl5.getClass();
                     KeyguardViewMediatorHelperImpl.logD$1(str);
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl6 = KeyguardViewMediatorHelperImpl.this;
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl6 = this.this$0;
                     SoundPool soundPool2 = keyguardViewMediatorHelperImpl6.lockSounds;
                     if (soundPool2 != null) {
                         keyguardViewMediatorHelperImpl6.lockSoundStreamId = soundPool2.play(i, f, f, 1, 0, 1.0f);
@@ -1540,7 +2358,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     public final void accept(Object obj) {
                         Boolean bool = (Boolean) obj;
                         if (bool != null) {
-                            KeyguardFoldControllerImpl.this.changeFoldState(bool.booleanValue());
+                            keyguardFoldControllerImpl.changeFoldState(bool.booleanValue());
                         }
                     }
                 }));
@@ -1549,11 +2367,11 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 keyguardFoldControllerImpl.addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$postHandleSystemReady$1
                     @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                     public final void onFoldStateChanged(boolean z3) {
-                        final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                        final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                         keyguardViewMediatorHelperImpl.getHandler$1().post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$postHandleSystemReady$1$onFoldStateChanged$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                ((KeyguardViewMediator) KeyguardViewMediatorHelperImpl.this.viewMediatorLazy.get()).getClass();
+                                ((KeyguardViewMediator) keyguardViewMediatorHelperImpl.viewMediatorLazy.get()).getClass();
                             }
                         });
                     }
@@ -1598,12 +2416,13 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                             if (viewMediatorProvider == null) {
                                 viewMediatorProvider = null;
                             }
-                            if (((Number) viewMediatorProvider.getDelayedShowingSequence.invoke()).intValue() >= 2 && (!LsRune.KEYGUARD_SUB_DISPLAY_LOCK || this.lastSleepReason != 4 || !this.foldControllerImpl.isFoldOpened())) {
+                            if (((Number) viewMediatorProvider.getDelayedShowingSequence.invoke()).intValue() < 2 || (LsRune.KEYGUARD_SUB_DISPLAY_LOCK && this.lastSleepReason == 4 && this.foldControllerImpl.isFoldOpened())) {
+                                notifyDrawn(iKeyguardDrawnCallback);
+                                this.drawnCallback = null;
+                                Unit unit = Unit.INSTANCE;
+                            } else {
                                 getHandler$1().post(this.delayedDrawnRunnable);
                             }
-                            notifyDrawn(iKeyguardDrawnCallback);
-                            this.drawnCallback = null;
-                            Unit unit = Unit.INSTANCE;
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -1628,19 +2447,19 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 if (i2 != 10) {
                     ((KeyguardViewMediator) lazy.get()).setDozing(false);
                 }
-                boolean isShowing$1 = isShowing$1();
-                boolean isHiding = ((KeyguardViewMediator) lazy.get()).isHiding();
-                boolean isSecure = ((KeyguardViewMediator) lazy.get()).isSecure();
+                boolean zIsShowing$1 = isShowing$1();
+                boolean zIsHiding = ((KeyguardViewMediator) lazy.get()).isHiding();
+                boolean zIsSecure = ((KeyguardViewMediator) lazy.get()).isSecure();
                 boolean z3 = LsRune.COVER_SUPPORTED;
                 KeyguardUpdateMonitor keyguardUpdateMonitor2 = this.updateMonitor;
                 if (z3) {
                     CoverState coverState = keyguardUpdateMonitor2.getCoverState();
-                    if (this.lastWakeReason == 103 && isShowing$1 && !isHiding && coverState != null && coverState.attached && coverState.getSwitchState() && this.settingsHelper.isAutomaticUnlockEnabled() && (this.switchingUserId == -1 ? !isSecure || keyguardUpdateMonitor2.getUserCanSkipBouncer(((UserTrackerImpl) this.userTracker).getUserId()) : !isSecure)) {
+                    if (this.lastWakeReason == 103 && zIsShowing$1 && !zIsHiding && coverState != null && coverState.attached && coverState.getSwitchState() && this.settingsHelper.isAutomaticUnlockEnabled() && (this.switchingUserId == -1 ? !zIsSecure || keyguardUpdateMonitor2.getUserCanSkipBouncer(((UserTrackerImpl) this.userTracker).getUserId()) : !zIsSecure)) {
                         ViewMediatorProvider viewMediatorProvider2 = this.viewMediatorProvider;
                         (viewMediatorProvider2 != null ? viewMediatorProvider2 : null).handleHide.invoke();
                     }
                 }
-                if (!isShowing$1 && !getHandler$1().hasMessages(getSHOW())) {
+                if (!zIsShowing$1 && !getHandler$1().hasMessages(getSHOW())) {
                     keyguardUpdateMonitor2.requestSessionClose();
                 } else if (keyguardUpdateMonitor2.isFingerprintOptionEnabled()) {
                     keyguardUpdateMonitor2.updateFingerprintListeningState(2);
@@ -1649,7 +2468,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     @Override // java.lang.Runnable
                     public final void run() {
                         String str;
-                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardViewMediatorHelperImpl.this;
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0;
                         int i3 = keyguardViewMediatorHelperImpl.lastWakeReason;
                         KeyguardViewMediatorHelperImpl.logD$1("updateSALogging " + i3);
                         String str2 = i3 != 1 ? i3 != 4 ? i3 != 7 ? (i3 == 9 || i3 == 103) ? "4" : i3 != 112 ? i3 != 113 ? "5" : "7" : "2" : "6" : "3" : "1";
@@ -1670,17 +2489,14 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 synchronized (this.lock$delegate.getValue()) {
                     try {
                         z = LsRune.KEYGUARD_SUB_DISPLAY_LOCK;
-                        if (z) {
-                            if (!getHandler$1().hasMessages(((Number) this.NOTIFY_STARTED_WAKING_UP$delegate.getValue()).intValue())) {
+                        if (!z || !getHandler$1().hasMessages(((Number) this.NOTIFY_STARTED_WAKING_UP$delegate.getValue()).intValue())) {
+                            if (isKeyguardHiding() && !this.hidingByDisabled) {
+                                Log.d("KeyguardViewMediator", "change mHiding = false");
+                                ViewMediatorProvider viewMediatorProvider3 = this.viewMediatorProvider;
+                                (viewMediatorProvider3 != null ? viewMediatorProvider3 : null).setHiding.mo781invoke(Boolean.FALSE);
                             }
-                            Unit unit2 = Unit.INSTANCE;
                         }
-                        if (isKeyguardHiding() && !this.hidingByDisabled) {
-                            Log.d("KeyguardViewMediator", "change mHiding = false");
-                            ViewMediatorProvider viewMediatorProvider3 = this.viewMediatorProvider;
-                            (viewMediatorProvider3 != null ? viewMediatorProvider3 : null).setHiding.mo779invoke(Boolean.FALSE);
-                        }
-                        Unit unit22 = Unit.INSTANCE;
+                        Unit unit2 = Unit.INSTANCE;
                     } catch (Throwable th2) {
                         throw th2;
                     }
@@ -1700,9 +2516,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 this.fixedRotationMonitor.cancel();
             } else if (i == ((Number) this.KEYGUARD_DONE_PENDING_TIMEOUT$delegate.getValue()).intValue()) {
                 ViewMediatorProvider viewMediatorProvider4 = this.viewMediatorProvider;
-                boolean booleanValue = ((Boolean) (viewMediatorProvider4 != null ? viewMediatorProvider4 : null).isKeyguardDonePending.invoke()).booleanValue();
-                logD$1("handleKeyguardDonePendingTimeout donePending=" + booleanValue);
-                if (booleanValue) {
+                boolean zBooleanValue = ((Boolean) (viewMediatorProvider4 != null ? viewMediatorProvider4 : null).isKeyguardDonePending.invoke()).booleanValue();
+                logD$1("handleKeyguardDonePendingTimeout donePending=" + zBooleanValue);
+                if (zBooleanValue) {
                     ((KeyguardViewMediator) this.viewMediatorLazy.get()).getViewMediatorCallback().readyForKeyguardDone();
                 }
             } else if (i == ((Number) this.KEYGUARD_TIMEOUT$delegate.getValue()).intValue()) {
@@ -1788,9 +2604,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         if (keyguardSysDumpTrigger.isEnabled()) {
             keyguardSysDumpTrigger.start(0, 4950L, -1L);
         }
-        boolean isEnabledFaceStayOnLock = this.settingsHelper.isEnabledFaceStayOnLock();
+        boolean zIsEnabledFaceStayOnLock = this.settingsHelper.isEnabledFaceStayOnLock();
         KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.fastUnlockController;
-        if ((!isEnabledFaceStayOnLock && keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController.biometricSourceType == BiometricSourceType.FACE) || (keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController.biometricSourceType == BiometricSourceType.FINGERPRINT)) {
+        if ((!zIsEnabledFaceStayOnLock && keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController.biometricSourceType == BiometricSourceType.FACE) || (keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED) && keyguardFastBioUnlockController.biometricSourceType == BiometricSourceType.FINGERPRINT)) {
             KeyguardFixedRotationMonitor keyguardFixedRotationMonitor = this.fixedRotationMonitor;
             if (!keyguardFixedRotationMonitor.isMonitorStarted) {
                 android.util.Log.d("KeyguardFixedRotation", NetworkAnalyticsConstants.DataPoints.OPEN_TIME);
@@ -1811,7 +2627,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImplKt$sam$java_lang_Runnable$0
                     @Override // java.lang.Runnable
                     public final /* synthetic */ void run() {
-                        Function0.this.invoke();
+                        keyguardViewMediatorHelperImpl$$ExternalSyntheticLambda0.invoke();
                     }
                 });
             }
@@ -1844,10 +2660,10 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
 
     public final void startSetPendingIntent(final PendingIntent pendingIntent, final Intent intent) {
         final String stringExtra = intent != null ? intent.getStringExtra("notificationKey") : null;
-        this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$startSetPendingIntent$1
+        this.uiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.startSetPendingIntent.1
             @Override // java.lang.Runnable
-            public final void run() {
-                int startTime = LogUtil.startTime(-1);
+            public final void run() throws PendingIntent.CanceledException {
+                int iStartTime = LogUtil.startTime(-1);
                 try {
                     PendingIntent pendingIntent2 = pendingIntent;
                     if (pendingIntent2 != null) {
@@ -1858,7 +2674,7 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                             ActivityManager.getService().resumeAppSwitches();
                         }
                         int intExtra = intent2 != null ? intent2.getIntExtra("launchDisplayId", -1) : -1;
-                        ActivityOptions makeBasic = ActivityOptions.makeBasic();
+                        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
                         if (intExtra != -1) {
                             Log.d("KeyguardViewMediator", "startSetPendingIntent to launchDisplayId " + intExtra);
                         } else {
@@ -1866,12 +2682,12 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                             display.getClass();
                             intExtra = display.getDisplayId();
                         }
-                        makeBasic.setLaunchDisplayId(intExtra);
-                        makeBasic.setPendingIntentBackgroundActivityStartMode(1);
+                        activityOptionsMakeBasic.setLaunchDisplayId(intExtra);
+                        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
                         if (str == null) {
-                            pendingIntent2.send(keyguardViewMediatorHelperImpl.context, 0, intent2, null, null, null, makeBasic.toBundle());
+                            pendingIntent2.send(keyguardViewMediatorHelperImpl.context, 0, intent2, null, null, null, activityOptionsMakeBasic.toBundle());
                         } else {
-                            pendingIntent2.send(null, 0, null, null, null, null, makeBasic.toBundle());
+                            pendingIntent2.send(null, 0, null, null, null, null, activityOptionsMakeBasic.toBundle());
                         }
                     }
                 } catch (Exception e) {
@@ -1881,9 +2697,9 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                 String str2 = stringExtra;
                 if (str2 != null) {
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this;
-                    String concat = "notificationKey=".concat(str2);
+                    String strConcat = "notificationKey=".concat(str2);
                     keyguardViewMediatorHelperImpl2.getClass();
-                    KeyguardViewMediatorHelperImpl.logD$1(concat);
+                    KeyguardViewMediatorHelperImpl.logD$1(strConcat);
                     NotificationEntry entry = ((NotifPipeline) ((CommonNotifCollection) keyguardViewMediatorHelperImpl2.commonNotifCollectionLazy.get())).mNotifCollection.getEntry(str2);
                     if (entry != null) {
                         try {
@@ -1896,10 +2712,10 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
                     }
                 }
                 final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this;
-                LogUtil.endTime(startTime, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$startSetPendingIntent$1.3
+                LogUtil.endTime(iStartTime, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.startSetPendingIntent.1.3
                     @Override // java.util.function.LongConsumer
                     public final void accept(long j) {
-                        KeyguardViewMediatorHelperImpl.this.getClass();
+                        keyguardViewMediatorHelperImpl3.getClass();
                         KeyguardViewMediatorHelperImpl.logD$1("startSetPendingIntent runnable " + j + "ms");
                     }
                 });
@@ -1912,98 +2728,39 @@ public final class KeyguardViewMediatorHelperImpl implements KeyguardViewMediato
         ((CommandQueue) Dependency.sDependency.getDependencyInner(CommandQueue.class)).animateCollapsePanels(0, true);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x006f, code lost:
-    
-        if (r5.lockPatternUtils.isLockScreenDisabled(r10) == false) goto L39;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0067  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updatePendingLock(int r6, long r7, boolean r9, int r10, com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda0 r11, com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9 r12) {
-        /*
-            r5 = this;
-            boolean r0 = com.android.systemui.LsRune.KEYGUARD_SUB_DISPLAY_COVER
-            r1 = 4
-            if (r0 == 0) goto L18
-            if (r6 != r1) goto L18
-            java.lang.String r0 = "net.mirrorlink.on"
-            java.lang.String r2 = ""
-            java.lang.String r0 = android.os.SystemProperties.get(r0, r2)
-            java.lang.String r2 = "1"
-            boolean r0 = kotlin.jvm.internal.Intrinsics.areEqual(r0, r2)
-            if (r0 != 0) goto L18
-            goto L71
-        L18:
-            r0 = 3
-            r2 = 0
-            r4 = 0
-            if (r6 != r0) goto L22
-            int r0 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-            if (r0 > 0) goto L4a
-        L22:
-            boolean r0 = com.android.systemui.LsRune.KEYGUARD_SUB_DISPLAY_LOCK
-            if (r0 == 0) goto L45
-            if (r6 != r1) goto L45
-            if (r0 == 0) goto L41
-            com.android.internal.widget.LockPatternUtils r0 = r5.lockPatternUtils
-            boolean r0 = r0.getFolderInstantlyLocks(r10)
-            if (r0 != 0) goto L45
-            dagger.Lazy r0 = r5.viewMediatorLazy
-            java.lang.Object r0 = r0.get()
-            com.android.systemui.keyguard.KeyguardViewMediator r0 = (com.android.systemui.keyguard.KeyguardViewMediator) r0
-            boolean r0 = r0.isSecure(r10)
-            if (r0 != 0) goto L41
-            goto L45
-        L41:
-            int r0 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-            if (r0 > 0) goto L4a
-        L45:
-            r0 = 2
-            if (r6 != r0) goto L69
-            if (r9 != 0) goto L69
-        L4a:
-            com.android.systemui.keyguard.ViewMediatorProvider r5 = r5.viewMediatorProvider
-            if (r5 == 0) goto L4f
-            goto L50
-        L4f:
-            r5 = r4
-        L50:
-            kotlin.jvm.functions.Function1 r5 = r5.updatePhoneState
-            java.lang.Object r5 = r5.mo779invoke(r4)
-            java.lang.String r5 = (java.lang.String) r5
-            java.lang.String r6 = android.telephony.TelephonyManager.EXTRA_STATE_OFFHOOK
-            boolean r5 = kotlin.jvm.internal.Intrinsics.areEqual(r5, r6)
-            if (r5 != 0) goto L67
-            int r5 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-            if (r5 > 0) goto L65
-            goto L71
-        L65:
-            r11 = r12
-            goto L71
-        L67:
-            r11 = r4
-            goto L71
-        L69:
-            com.android.internal.widget.LockPatternUtils r5 = r5.lockPatternUtils
-            boolean r5 = r5.isLockScreenDisabled(r10)
-            if (r5 != 0) goto L67
-        L71:
-            if (r11 == 0) goto L76
-            r11.run()
-        L76:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl.updatePendingLock(int, long, boolean, int, com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda0, com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9):void");
+    public final void updatePendingLock(int i, long j, boolean z, int i2, KeyguardViewMediator$$ExternalSyntheticLambda0 keyguardViewMediator$$ExternalSyntheticLambda0, KeyguardViewMediator$$ExternalSyntheticLambda9 keyguardViewMediator$$ExternalSyntheticLambda9) {
+        boolean z2;
+        if (!LsRune.KEYGUARD_SUB_DISPLAY_COVER || i != 4 || Intrinsics.areEqual(SystemProperties.get("net.mirrorlink.on", ""), "1")) {
+            if ((i == 3 && j > 0) || (((z2 = LsRune.KEYGUARD_SUB_DISPLAY_LOCK) && i == 4 && ((!z2 || (!this.lockPatternUtils.getFolderInstantlyLocks(i2) && ((KeyguardViewMediator) this.viewMediatorLazy.get()).isSecure(i2))) && j > 0)) || (i == 2 && !z))) {
+                ViewMediatorProvider viewMediatorProvider = this.viewMediatorProvider;
+                if (viewMediatorProvider == null) {
+                    viewMediatorProvider = null;
+                }
+                if (!Intrinsics.areEqual((String) viewMediatorProvider.updatePhoneState.mo781invoke(null), TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+                    if (j > 0) {
+                        keyguardViewMediator$$ExternalSyntheticLambda0 = keyguardViewMediator$$ExternalSyntheticLambda9;
+                    }
+                }
+            } else if (this.lockPatternUtils.isLockScreenDisabled(i2)) {
+                keyguardViewMediator$$ExternalSyntheticLambda0 = null;
+            }
+        }
+        if (keyguardViewMediator$$ExternalSyntheticLambda0 != null) {
+            keyguardViewMediator$$ExternalSyntheticLambda0.run();
+        }
     }
 
     public final void notifyDrawn(IKeyguardDrawnCallback iKeyguardDrawnCallback) {
-        long elapsedRealtime = SystemClock.elapsedRealtime() - this.screenTuringOnTime;
-        if (elapsedRealtime <= 0) {
-            elapsedRealtime = 0;
+        long jElapsedRealtime = SystemClock.elapsedRealtime() - this.screenTuringOnTime;
+        if (jElapsedRealtime <= 0) {
+            jElapsedRealtime = 0;
         }
-        logD$1("notifyDrawn " + elapsedRealtime + "ms");
+        logD$1("notifyDrawn " + jElapsedRealtime + "ms");
         try {
             iKeyguardDrawnCallback.onDrawn();
         } catch (RemoteException e) {

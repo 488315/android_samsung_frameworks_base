@@ -53,7 +53,7 @@ public class ExtensionSessionStatsAggregator {
         this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.utils.ExtensionSessionStatsAggregator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ExtensionSessionStatsAggregator.this.lambda$commit$0(z);
+                this.f$0.lambda$commit$0(z);
             }
         });
     }

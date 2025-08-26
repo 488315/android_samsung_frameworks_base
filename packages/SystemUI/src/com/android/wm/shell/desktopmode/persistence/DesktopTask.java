@@ -7,7 +7,6 @@ import com.google.protobuf.MessageLiteOrBuilder;
 import com.google.protobuf.Parser;
 import com.google.protobuf.RawMessageInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTask extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final DesktopTask DEFAULT_INSTANCE;
@@ -20,7 +19,6 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
     private int desktopTaskTilingState_ = 1;
     private int taskId_;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopTask$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -59,7 +57,6 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(int i) {
             this();
@@ -71,21 +68,21 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
     }
 
     /* renamed from: -$$Nest$msetDesktopTaskState, reason: not valid java name */
-    public static void m3244$$Nest$msetDesktopTaskState(DesktopTask desktopTask, DesktopTaskState desktopTaskState) {
+    public static void m3261$$Nest$msetDesktopTaskState(DesktopTask desktopTask, DesktopTaskState desktopTaskState) {
         desktopTask.getClass();
         desktopTask.desktopTaskState_ = desktopTaskState.getNumber();
         desktopTask.bitField0_ |= 2;
     }
 
     /* renamed from: -$$Nest$msetDesktopTaskTilingState, reason: not valid java name */
-    public static void m3245$$Nest$msetDesktopTaskTilingState(DesktopTask desktopTask, DesktopTaskTilingState desktopTaskTilingState) {
+    public static void m3262$$Nest$msetDesktopTaskTilingState(DesktopTask desktopTask, DesktopTaskTilingState desktopTaskTilingState) {
         desktopTask.getClass();
         desktopTask.desktopTaskTilingState_ = desktopTaskTilingState.getNumber();
         desktopTask.bitField0_ |= 4;
     }
 
     /* renamed from: -$$Nest$msetTaskId, reason: not valid java name */
-    public static void m3246$$Nest$msetTaskId(DesktopTask desktopTask, int i) {
+    public static void m3263$$Nest$msetTaskId(DesktopTask desktopTask, int i) {
         desktopTask.bitField0_ |= 1;
         desktopTask.taskId_ = i;
     }
@@ -109,7 +106,7 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
             case 1:
                 return new DesktopTask();
@@ -123,22 +120,22 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (DesktopTask.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:
@@ -163,8 +160,8 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
     }
 
     public final DesktopTaskTilingState getDesktopTaskTilingState() {
-        DesktopTaskTilingState forNumber = DesktopTaskTilingState.forNumber(this.desktopTaskTilingState_);
-        return forNumber == null ? DesktopTaskTilingState.NONE : forNumber;
+        DesktopTaskTilingState desktopTaskTilingStateForNumber = DesktopTaskTilingState.forNumber(this.desktopTaskTilingState_);
+        return desktopTaskTilingStateForNumber == null ? DesktopTaskTilingState.NONE : desktopTaskTilingStateForNumber;
     }
 
     public final int getTaskId() {

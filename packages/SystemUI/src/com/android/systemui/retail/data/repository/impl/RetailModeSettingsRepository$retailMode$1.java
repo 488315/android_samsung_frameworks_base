@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ GlobalSettings $globalSettings;
@@ -54,7 +53,7 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
 
                 @Override // android.database.ContentObserver
                 public final void onChange(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.$globalSettings.registerContentObserverSync("device_demo_mode", (ContentObserver) r1);
@@ -62,7 +61,7 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
             Function0 function0 = new Function0() { // from class: com.android.systemui.retail.data.repository.impl.RetailModeSettingsRepository$retailMode$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    GlobalSettings.this.unregisterContentObserverSync(r1);
+                    globalSettings.unregisterContentObserverSync(r1);
                     return Unit.INSTANCE;
                 }
             };

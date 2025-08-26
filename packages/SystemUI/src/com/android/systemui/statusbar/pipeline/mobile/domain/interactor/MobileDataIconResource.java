@@ -11,7 +11,6 @@ import java.util.Map;
 import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileDataIconResource {
     public final HashMap carrierIconOverrides;
@@ -97,56 +96,56 @@ public final class MobileDataIconResource {
     }
 
     public final Map mapIconSets(int i) {
-        HashMap hashMap = new HashMap();
-        hashMap.put(Integer.toString(0), TelephonyIcons.UNKNOWN);
-        hashMap.put(Integer.toString(1), TelephonyIcons.G);
-        hashMap.put(Integer.toString(2), TelephonyIcons.E);
-        String num = Integer.toString(4);
+        HashMap map = new HashMap();
+        map.put(Integer.toString(0), TelephonyIcons.UNKNOWN);
+        map.put(Integer.toString(1), TelephonyIcons.G);
+        map.put(Integer.toString(2), TelephonyIcons.E);
+        String string = Integer.toString(4);
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = TelephonyIcons.ONE_X;
-        hashMap.put(num, signalIcon$MobileIconGroup);
-        hashMap.put(Integer.toString(7), signalIcon$MobileIconGroup);
-        String num2 = Integer.toString(3);
+        map.put(string, signalIcon$MobileIconGroup);
+        map.put(Integer.toString(7), signalIcon$MobileIconGroup);
+        String string2 = Integer.toString(3);
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup2 = TelephonyIcons.THREE_G;
-        hashMap.put(num2, signalIcon$MobileIconGroup2);
-        hashMap.put(Integer.toString(5), signalIcon$MobileIconGroup2);
-        hashMap.put(Integer.toString(6), signalIcon$MobileIconGroup2);
-        hashMap.put(Integer.toString(12), signalIcon$MobileIconGroup2);
-        hashMap.put(Integer.toString(14), signalIcon$MobileIconGroup2);
-        hashMap.put(Integer.toString(17), signalIcon$MobileIconGroup2);
+        map.put(string2, signalIcon$MobileIconGroup2);
+        map.put(Integer.toString(5), signalIcon$MobileIconGroup2);
+        map.put(Integer.toString(6), signalIcon$MobileIconGroup2);
+        map.put(Integer.toString(12), signalIcon$MobileIconGroup2);
+        map.put(Integer.toString(14), signalIcon$MobileIconGroup2);
+        map.put(Integer.toString(17), signalIcon$MobileIconGroup2);
         CarrierInfraMediator.Conditions conditions = CarrierInfraMediator.Conditions.USE_HSPA_DATA_ICON;
         CarrierInfraMediator carrierInfraMediator = this.carrierInfraMediator;
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup3 = carrierInfraMediator.isEnabled(conditions, i, new Object[0]) ? TelephonyIcons.H : signalIcon$MobileIconGroup2;
-        hashMap.put(Integer.toString(8), signalIcon$MobileIconGroup3);
-        hashMap.put(Integer.toString(9), signalIcon$MobileIconGroup3);
-        hashMap.put(Integer.toString(10), signalIcon$MobileIconGroup3);
-        String num3 = Integer.toString(15);
+        map.put(Integer.toString(8), signalIcon$MobileIconGroup3);
+        map.put(Integer.toString(9), signalIcon$MobileIconGroup3);
+        map.put(Integer.toString(10), signalIcon$MobileIconGroup3);
+        String string3 = Integer.toString(15);
         if (carrierInfraMediator.isEnabled(conditions, i, new Object[0])) {
             signalIcon$MobileIconGroup2 = TelephonyIcons.H_PLUS;
         }
-        hashMap.put(num3, signalIcon$MobileIconGroup2);
+        map.put(string3, signalIcon$MobileIconGroup2);
         if (carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_LTE_INSTEAD_OF_4G, i, new Object[0])) {
-            String num4 = Integer.toString(13);
+            String string4 = Integer.toString(13);
             SignalIcon$MobileIconGroup signalIcon$MobileIconGroup4 = TelephonyIcons.LTE;
-            hashMap.put(num4, signalIcon$MobileIconGroup4);
-            hashMap.put(MobileMappings.toDisplayIconKey(1), carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_LTE_CA_ICON, i, new Object[0]) ? TelephonyIcons.LTE_PLUS : signalIcon$MobileIconGroup4);
-            hashMap.put(MobileMappings.toDisplayIconKey(2), signalIcon$MobileIconGroup4);
+            map.put(string4, signalIcon$MobileIconGroup4);
+            map.put(MobileMappings.toDisplayIconKey(1), carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_LTE_CA_ICON, i, new Object[0]) ? TelephonyIcons.LTE_PLUS : signalIcon$MobileIconGroup4);
+            map.put(MobileMappings.toDisplayIconKey(2), signalIcon$MobileIconGroup4);
         } else if (carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_4G_PLUS_INSTEAD_OF_4G, i, new Object[0])) {
-            String num5 = Integer.toString(13);
+            String string5 = Integer.toString(13);
             SignalIcon$MobileIconGroup signalIcon$MobileIconGroup5 = TelephonyIcons.FOUR_G_PLUS;
-            hashMap.put(num5, signalIcon$MobileIconGroup5);
-            hashMap.put(MobileMappings.toDisplayIconKey(1), signalIcon$MobileIconGroup5);
+            map.put(string5, signalIcon$MobileIconGroup5);
+            map.put(MobileMappings.toDisplayIconKey(1), signalIcon$MobileIconGroup5);
         } else {
-            String num6 = Integer.toString(13);
+            String string6 = Integer.toString(13);
             SignalIcon$MobileIconGroup signalIcon$MobileIconGroup6 = TelephonyIcons.FOUR_G;
-            hashMap.put(num6, signalIcon$MobileIconGroup6);
-            hashMap.put(MobileMappings.toDisplayIconKey(1), carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_LTE_CA_ICON, i, new Object[0]) ? carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_4_HALF_G_INSTEAD_OF_4G_PLUS, i, new Object[0]) ? TelephonyIcons.FOUR_HALF_G : TelephonyIcons.FOUR_G_PLUS : signalIcon$MobileIconGroup6);
-            hashMap.put(MobileMappings.toDisplayIconKey(2), signalIcon$MobileIconGroup6);
+            map.put(string6, signalIcon$MobileIconGroup6);
+            map.put(MobileMappings.toDisplayIconKey(1), carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_LTE_CA_ICON, i, new Object[0]) ? carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_4_HALF_G_INSTEAD_OF_4G_PLUS, i, new Object[0]) ? TelephonyIcons.FOUR_HALF_G : TelephonyIcons.FOUR_G_PLUS : signalIcon$MobileIconGroup6);
+            map.put(MobileMappings.toDisplayIconKey(2), signalIcon$MobileIconGroup6);
         }
         String displayIconKey = MobileMappings.toDisplayIconKey(5);
         CarrierInfraMediator.Conditions conditions2 = CarrierInfraMediator.Conditions.USE_5G_ONE_SHAPED_ICON;
-        hashMap.put(displayIconKey, carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G_PLUS : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_ENLARGED_PLUS : TelephonyIcons.NR_5G_CONNECTED_PLUS);
-        hashMap.put(Integer.toString(20), carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_VZW : TelephonyIcons.NR_5G_CONNECTED);
-        hashMap.put(MobileMappings.toDisplayIconKey(999), carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_VZW : TelephonyIcons.NR_5G_AVAILABLE);
-        return hashMap;
+        map.put(displayIconKey, carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G_PLUS : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_ENLARGED_PLUS : TelephonyIcons.NR_5G_CONNECTED_PLUS);
+        map.put(Integer.toString(20), carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_VZW : TelephonyIcons.NR_5G_CONNECTED);
+        map.put(MobileMappings.toDisplayIconKey(999), carrierInfraMediator.isEnabled(conditions2, i, new Object[0]) ? TelephonyIcons.NR_5G : carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_5G_ENLARGED_ICON, i, new Object[0]) ? TelephonyIcons.NR_5G_VZW : TelephonyIcons.NR_5G_AVAILABLE);
+        return map;
     }
 }

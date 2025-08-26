@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.android.wm.shell.pip2.phone.PipTransitionState;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipUiStateChangeController implements PipTransitionState.PipTransitionStateChangedListener {
     public Consumer mPictureInPictureUiStateConsumer;

@@ -25,14 +25,12 @@ import com.android.systemui.util.SettingsHelper;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSBlurPopUpMenu extends ListPopupWindow {
     public ListAdapter adapter;
     public PopupWindow.OnDismissListener dismissListener;
     public boolean onceShowed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PopUpContent {
         public boolean checked;
         public final String text;
@@ -43,7 +41,6 @@ public final class QSBlurPopUpMenu extends ListPopupWindow {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PopupListAdapter extends ArrayAdapter {
         public final int FONT_WEIGHT_REGULAR;
         public final int FONT_WEIGHT_SEMIBOLD;
@@ -62,7 +59,7 @@ public final class QSBlurPopUpMenu extends ListPopupWindow {
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
-        public final View getView(int i, View view, ViewGroup viewGroup) {
+        public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             Object item = getItem(i);
             item.getClass();
             PopUpContent popUpContent = (PopUpContent) item;
@@ -73,38 +70,38 @@ public final class QSBlurPopUpMenu extends ListPopupWindow {
             int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.qs_edit_popup_paddingVertical);
             getContext().getResources().getDimensionPixelSize(R.dimen.qs_edit_popup_paddingStart);
             int dimensionPixelSize2 = getContext().getResources().getDimensionPixelSize(R.dimen.qs_edit_popup_minHeight);
-            View inflate = LayoutInflater.from(getContext()).inflate(R.layout.qs_setting_edit_popup_item, viewGroup, false);
+            View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.qs_setting_edit_popup_item, viewGroup, false);
             if (this.popupList.size() <= 1) {
-                inflate.setPadding(inflate.getPaddingLeft(), dimensionPixelSize, inflate.getPaddingRight(), dimensionPixelSize);
+                viewInflate.setPadding(viewInflate.getPaddingLeft(), dimensionPixelSize, viewInflate.getPaddingRight(), dimensionPixelSize);
             } else if (i == 0) {
-                inflate.setMinimumHeight(dimensionPixelSize2);
-                inflate.setPadding(inflate.getPaddingLeft(), dimensionPixelSize, inflate.getPaddingRight(), 0);
+                viewInflate.setMinimumHeight(dimensionPixelSize2);
+                viewInflate.setPadding(viewInflate.getPaddingLeft(), dimensionPixelSize, viewInflate.getPaddingRight(), 0);
             } else if (i == this.popupList.size() - 1) {
-                inflate.setMinimumHeight(dimensionPixelSize2);
-                inflate.setPadding(inflate.getPaddingLeft(), 0, inflate.getPaddingRight(), dimensionPixelSize);
+                viewInflate.setMinimumHeight(dimensionPixelSize2);
+                viewInflate.setPadding(viewInflate.getPaddingLeft(), 0, viewInflate.getPaddingRight(), dimensionPixelSize);
             } else {
-                inflate.setMinimumHeight(dimensionPixelSize2 - dimensionPixelSize);
-                inflate.setPadding(inflate.getPaddingLeft(), 0, inflate.getPaddingRight(), 0);
+                viewInflate.setMinimumHeight(dimensionPixelSize2 - dimensionPixelSize);
+                viewInflate.setPadding(viewInflate.getPaddingLeft(), 0, viewInflate.getPaddingRight(), 0);
             }
-            TextView textView = (TextView) inflate.requireViewById(R.id.textView);
-            TextView textView2 = (TextView) inflate.requireViewById(R.id.textView);
+            TextView textView = (TextView) viewInflate.requireViewById(R.id.textView);
+            TextView textView2 = (TextView) viewInflate.requireViewById(R.id.textView);
             textView2.setText(popUpContent.text);
             textView2.setTextColor(textView2.getResources().getColor(R.color.qs_edit_content_text_color));
-            Typeface create = Typeface.create("sec", 0);
+            Typeface typefaceCreate = Typeface.create("sec", 0);
             if (z) {
-                textView.setTypeface(Typeface.create(create, this.FONT_WEIGHT_SEMIBOLD, false));
+                textView.setTypeface(Typeface.create(typefaceCreate, this.FONT_WEIGHT_SEMIBOLD, false));
             } else {
-                textView.setTypeface(Typeface.create(create, this.FONT_WEIGHT_REGULAR, false));
+                textView.setTypeface(Typeface.create(typefaceCreate, this.FONT_WEIGHT_REGULAR, false));
             }
-            ((ImageView) inflate.requireViewById(R.id.checked)).setVisibility(z ? 0 : 4);
-            ViewCompat.setAccessibilityDelegate(inflate, new AccessibilityDelegateCompat() { // from class: com.android.systemui.qs.customize.QSBlurPopUpMenu$PopupListAdapter$initializeAccessibilityNodeInfoForItem$1
+            ((ImageView) viewInflate.requireViewById(R.id.checked)).setVisibility(z ? 0 : 4);
+            ViewCompat.setAccessibilityDelegate(viewInflate, new AccessibilityDelegateCompat() { // from class: com.android.systemui.qs.customize.QSBlurPopUpMenu$PopupListAdapter$initializeAccessibilityNodeInfoForItem$1
                 @Override // androidx.core.view.AccessibilityDelegateCompat
                 public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
                     this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfoCompat.mInfo);
                     accessibilityNodeInfoCompat.mInfo.setSelected(z);
                 }
             });
-            return inflate;
+            return viewInflate;
         }
     }
 

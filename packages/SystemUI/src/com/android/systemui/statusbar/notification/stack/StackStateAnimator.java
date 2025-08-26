@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.Stack;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StackStateAnimator {
     public final AnonymousClass1 mAnimationProperties;
@@ -44,7 +43,6 @@ public class StackStateAnimator {
     public final AnimationFilter mAnimationFilter = new AnimationFilter();
     public final ArrayList mTransientViewsToRemove = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.StackStateAnimator$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimationProperties {
         public final StackStateAnimator$1$$ExternalSyntheticLambda0 mDynamicAnimationConsumer;

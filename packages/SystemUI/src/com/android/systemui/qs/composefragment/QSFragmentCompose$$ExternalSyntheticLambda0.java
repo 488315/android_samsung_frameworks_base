@@ -1,8 +1,13 @@
 package com.android.systemui.qs.composefragment;
 
+import androidx.compose.runtime.SnapshotMutableStateImpl;
+import com.android.systemui.plugins.qs.QS;
+import com.android.systemui.qs.composefragment.ui.NotificationScrimClipParams;
+import com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel;
+import java.util.function.Consumer;
+import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class QSFragmentCompose$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -13,118 +18,51 @@ public final /* synthetic */ class QSFragmentCompose$$ExternalSyntheticLambda0 i
         this.f$0 = obj;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0072, code lost:
-    
-        if (((java.lang.Boolean) (r3 != null ? r3 : null).isQsFullyExpanded$delegate.getValue()).booleanValue() == false) goto L32;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x007a  */
     @Override // kotlin.jvm.functions.Function0
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invoke() {
-        /*
-            r3 = this;
-            r0 = 0
-            java.lang.Object r1 = r3.f$0
-            int r3 = r3.$r8$classId
-            switch(r3) {
-                case 0: goto L91;
-                case 1: goto L82;
-                case 2: goto L56;
-                case 3: goto L45;
-                case 4: goto L12;
-                default: goto L8;
-            }
-        L8:
-            java.lang.Runnable r1 = (java.lang.Runnable) r1
-            int r3 = com.android.systemui.qs.composefragment.QSFragmentCompose.$r8$clinit
-            r1.run()
-            java.lang.Boolean r3 = java.lang.Boolean.TRUE
-            return r3
-        L12:
-            com.android.systemui.qs.composefragment.QSFragmentCompose r1 = (com.android.systemui.qs.composefragment.QSFragmentCompose) r1
-            kotlinx.coroutines.flow.StateFlowImpl r3 = r1.scrollListener
-            java.lang.Object r3 = r3.getValue()
-            com.android.systemui.plugins.qs.QS$ScrollListener r3 = (com.android.systemui.plugins.qs.QS.ScrollListener) r3
-            if (r3 == 0) goto L27
-            androidx.compose.foundation.ScrollState r2 = r1.scrollState
-            int r2 = r2.getValue()
-            r3.onQsPanelScrollChanged(r2)
-        L27:
-            kotlinx.coroutines.flow.StateFlowImpl r3 = r1.collapsedMediaVisibilityChangedListener
-            java.lang.Object r3 = r3.getValue()
-            java.util.function.Consumer r3 = (java.util.function.Consumer) r3
-            if (r3 == 0) goto L42
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel r1 = r1.viewModel
-            if (r1 != 0) goto L36
-            goto L37
-        L36:
-            r0 = r1
-        L37:
-            boolean r0 = r0.getQqsMediaVisible()
-            java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-            r3.accept(r0)
-        L42:
-            kotlin.Unit r3 = kotlin.Unit.INSTANCE
-            return r3
-        L45:
-            com.android.systemui.qs.composefragment.QSFragmentCompose r1 = (com.android.systemui.qs.composefragment.QSFragmentCompose) r1
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel r3 = r1.viewModel
-            if (r3 != 0) goto L4c
-            goto L4d
-        L4c:
-            r0 = r3
-        L4d:
-            androidx.compose.runtime.State r3 = r0.expansionState$delegate
-            java.lang.Object r3 = r3.getValue()
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$QSExpansionState r3 = (com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel.QSExpansionState) r3
-            return r3
-        L56:
-            com.android.systemui.qs.composefragment.QSFragmentCompose r1 = (com.android.systemui.qs.composefragment.QSFragmentCompose) r1
-            androidx.compose.foundation.ScrollState r3 = r1.scrollState
-            boolean r3 = r3.getCanScrollForward()
-            if (r3 == 0) goto L74
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel r3 = r1.viewModel
-            if (r3 != 0) goto L65
-            goto L66
-        L65:
-            r0 = r3
-        L66:
-            androidx.compose.runtime.State r3 = r0.isQsFullyExpanded$delegate
-            java.lang.Object r3 = r3.getValue()
-            java.lang.Boolean r3 = (java.lang.Boolean) r3
-            boolean r3 = r3.booleanValue()
-            if (r3 != 0) goto L7a
-        L74:
-            boolean r3 = r1.isCustomizing()
-            if (r3 == 0) goto L7c
-        L7a:
-            r3 = 1
-            goto L7d
-        L7c:
-            r3 = 0
-        L7d:
-            java.lang.Boolean r3 = java.lang.Boolean.valueOf(r3)
-            return r3
-        L82:
-            com.android.systemui.qs.composefragment.QSFragmentCompose r1 = (com.android.systemui.qs.composefragment.QSFragmentCompose) r1
-            com.android.systemui.qs.composefragment.QSFragmentCompose$notificationScrimClippingParams$1 r3 = r1.notificationScrimClippingParams
-            androidx.compose.runtime.MutableState r3 = r3.params$delegate
-            androidx.compose.runtime.SnapshotMutableStateImpl r3 = (androidx.compose.runtime.SnapshotMutableStateImpl) r3
-            java.lang.Object r3 = r3.getValue()
-            com.android.systemui.qs.composefragment.ui.NotificationScrimClipParams r3 = (com.android.systemui.qs.composefragment.ui.NotificationScrimClipParams) r3
-            return r3
-        L91:
-            com.android.systemui.qs.composefragment.QSFragmentCompose r1 = (com.android.systemui.qs.composefragment.QSFragmentCompose) r1
-            com.android.systemui.qs.composefragment.QSFragmentCompose$notificationScrimClippingParams$1 r3 = r1.notificationScrimClippingParams
-            androidx.compose.runtime.MutableState r3 = r3.isEnabled$delegate
-            androidx.compose.runtime.SnapshotMutableStateImpl r3 = (androidx.compose.runtime.SnapshotMutableStateImpl) r3
-            java.lang.Object r3 = r3.getValue()
-            java.lang.Boolean r3 = (java.lang.Boolean) r3
-            r3.booleanValue()
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.QSFragmentCompose$$ExternalSyntheticLambda0.invoke():java.lang.Object");
+    public final Object invoke() {
+        boolean z;
+        Object obj = this.f$0;
+        switch (this.$r8$classId) {
+            case 0:
+                Boolean bool = (Boolean) ((SnapshotMutableStateImpl) ((QSFragmentCompose) obj).notificationScrimClippingParams.isEnabled$delegate).getValue();
+                bool.booleanValue();
+                return bool;
+            case 1:
+                return (NotificationScrimClipParams) ((SnapshotMutableStateImpl) ((QSFragmentCompose) obj).notificationScrimClippingParams.params$delegate).getValue();
+            case 2:
+                QSFragmentCompose qSFragmentCompose = (QSFragmentCompose) obj;
+                if (qSFragmentCompose.scrollState.getCanScrollForward()) {
+                    QSFragmentComposeViewModel qSFragmentComposeViewModel = qSFragmentCompose.viewModel;
+                    if (!((Boolean) (qSFragmentComposeViewModel != null ? qSFragmentComposeViewModel : null).isQsFullyExpanded$delegate.getValue()).booleanValue()) {
+                    }
+                } else {
+                    z = qSFragmentCompose.isCustomizing();
+                }
+                return Boolean.valueOf(z);
+            case 3:
+                QSFragmentComposeViewModel qSFragmentComposeViewModel2 = ((QSFragmentCompose) obj).viewModel;
+                return (QSFragmentComposeViewModel.QSExpansionState) (qSFragmentComposeViewModel2 != null ? qSFragmentComposeViewModel2 : null).expansionState$delegate.getValue();
+            case 4:
+                QSFragmentCompose qSFragmentCompose2 = (QSFragmentCompose) obj;
+                QS.ScrollListener scrollListener = (QS.ScrollListener) qSFragmentCompose2.scrollListener.getValue();
+                if (scrollListener != null) {
+                    scrollListener.onQsPanelScrollChanged(qSFragmentCompose2.scrollState.getValue());
+                }
+                Consumer consumer = (Consumer) qSFragmentCompose2.collapsedMediaVisibilityChangedListener.getValue();
+                if (consumer != null) {
+                    QSFragmentComposeViewModel qSFragmentComposeViewModel3 = qSFragmentCompose2.viewModel;
+                    consumer.accept(Boolean.valueOf((qSFragmentComposeViewModel3 != null ? qSFragmentComposeViewModel3 : null).getQqsMediaVisible()));
+                }
+                return Unit.INSTANCE;
+            default:
+                int i = QSFragmentCompose.$r8$clinit;
+                ((Runnable) obj).run();
+                return Boolean.TRUE;
+        }
     }
 }

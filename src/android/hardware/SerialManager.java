@@ -26,10 +26,10 @@ public class SerialManager {
 
     public SerialPort openSerialPort(String str, int i) throws IOException {
         try {
-            ParcelFileDescriptor openSerialPort = this.mService.openSerialPort(str);
-            if (openSerialPort != null) {
+            ParcelFileDescriptor parcelFileDescriptorOpenSerialPort = this.mService.openSerialPort(str);
+            if (parcelFileDescriptorOpenSerialPort != null) {
                 SerialPort serialPort = new SerialPort(str);
-                serialPort.open(openSerialPort, i);
+                serialPort.open(parcelFileDescriptorOpenSerialPort, i);
                 return serialPort;
             }
             throw new IOException("Could not open serial port " + str);

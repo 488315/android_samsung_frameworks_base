@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = BcSmartspaceDataPlugin.ACTION, version = 1)
 /* loaded from: classes2.dex */
 public interface BcSmartspaceDataPlugin extends Plugin {
@@ -29,17 +28,14 @@ public interface BcSmartspaceDataPlugin extends Plugin {
     public static final String UI_SURFACE_MEDIA = "media_data_manager";
     public static final int VERSION = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SmartspaceEventNotifier {
         void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SmartspaceTargetListener {
         void onSmartspaceTargetsUpdated(List<? extends Parcelable> list);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TimeChangedDelegate {
         void register(Runnable runnable);
 
@@ -82,7 +78,6 @@ public interface BcSmartspaceDataPlugin extends Plugin {
         throw new UnsupportedOperationException("Not implemented by " + getClass());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface IntentStarter {
         default void startFromAction(SmartspaceAction smartspaceAction, View view, boolean z) {
             try {
@@ -113,7 +108,6 @@ public interface BcSmartspaceDataPlugin extends Plugin {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SmartspaceView {
         default int getCurrentCardTopPadding() {
             throw new UnsupportedOperationException("Not implemented by " + getClass());

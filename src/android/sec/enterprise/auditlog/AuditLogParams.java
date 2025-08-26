@@ -73,17 +73,17 @@ public class AuditLogParams implements Parcelable {
         parcel.writeInt(this.mParams.size());
         for (Object obj : this.mParams) {
             Objects.requireNonNull(obj);
-            int m = SecurityLogEvent$$ExternalSyntheticTypeSwitch1.m(obj, 0, SecurityLogEvent$$ExternalSyntheticTypeSwitch1.getSwitchCases());
-            if (m == 0) {
+            int iM = SecurityLogEvent$$ExternalSyntheticTypeSwitch1.m(obj, 0, SecurityLogEvent$$ExternalSyntheticTypeSwitch1.getSwitchCases());
+            if (iM == 0) {
                 parcel.writeInt(0);
                 parcel.writeInt(((Integer) obj).intValue());
-            } else if (m == 1) {
+            } else if (iM == 1) {
                 parcel.writeInt(1);
                 parcel.writeLong(((Long) obj).longValue());
-            } else if (m == 2) {
+            } else if (iM == 2) {
                 parcel.writeInt(2);
                 parcel.writeFloat(((Float) obj).floatValue());
-            } else if (m == 3) {
+            } else if (iM == 3) {
                 parcel.writeInt(3);
                 parcel.writeString((String) obj);
             }
@@ -91,16 +91,16 @@ public class AuditLogParams implements Parcelable {
     }
 
     private void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            int readInt2 = parcel.readInt();
-            if (readInt2 == 0) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            int i3 = parcel.readInt();
+            if (i3 == 0) {
                 this.mParams.add(Integer.valueOf(parcel.readInt()));
-            } else if (readInt2 == 1) {
+            } else if (i3 == 1) {
                 this.mParams.add(Long.valueOf(parcel.readLong()));
-            } else if (readInt2 == 2) {
+            } else if (i3 == 2) {
                 this.mParams.add(Float.valueOf(parcel.readFloat()));
-            } else if (readInt2 == 3) {
+            } else if (i3 == 3) {
                 this.mParams.add(parcel.readString());
             }
         }

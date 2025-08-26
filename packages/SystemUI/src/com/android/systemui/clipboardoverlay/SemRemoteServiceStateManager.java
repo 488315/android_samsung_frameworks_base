@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SemRemoteServiceStateManager {
     public static final ArrayList remoteServiceKeySet = new ArrayList(Arrays.asList("mcf_continuity_nearby_device_state", "samsungflow_clipboard_sync_state", "ltw_clipboard_sync_state", "multi_control_connection_state"));
@@ -24,7 +23,6 @@ public class SemRemoteServiceStateManager {
     public final Context mContext;
     public final HashMap mRemoteServiceStateMap;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectionStateClearHandler extends Handler {
         public ConnectionStateClearHandler(Looper looper) {
             super(looper);
@@ -55,7 +53,6 @@ public class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DexOnPcConnectionStateChangeObserver extends ContentObserver {
         public DexOnPcConnectionStateChangeObserver() {
             super(new Handler());
@@ -70,7 +67,6 @@ public class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LinkToWindowConnectionStateChangeObserver extends ContentObserver {
         public LinkToWindowConnectionStateChangeObserver() {
             super(new Handler());
@@ -85,7 +81,6 @@ public class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class McfContinuityConnectionStateChangeObserver extends ContentObserver {
         public McfContinuityConnectionStateChangeObserver() {
             super(new Handler());
@@ -100,7 +95,6 @@ public class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MultiControlConnectionStateChangeObserver extends ContentObserver {
         public MultiControlConnectionStateChangeObserver() {
             super(new Handler());
@@ -115,7 +109,6 @@ public class SemRemoteServiceStateManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SamsungFlowConnectionStateChangeObserver extends ContentObserver {
         public SamsungFlowConnectionStateChangeObserver() {
             super(new Handler());
@@ -133,9 +126,9 @@ public class SemRemoteServiceStateManager {
     public SemRemoteServiceStateManager(Context context, BroadcastSender broadcastSender) {
         this.mContext = context;
         this.mBoardcasteSender = broadcastSender;
-        HashMap hashMap = new HashMap();
-        this.mRemoteServiceStateMap = hashMap;
-        hashMap.put("dexonpc_connection_state", 0);
+        HashMap map = new HashMap();
+        this.mRemoteServiceStateMap = map;
+        map.put("dexonpc_connection_state", 0);
         ArrayList arrayList = remoteServiceKeySet;
         int size = arrayList.size();
         int i = 0;

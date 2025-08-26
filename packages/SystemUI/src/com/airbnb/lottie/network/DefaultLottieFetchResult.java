@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DefaultLottieFetchResult implements Closeable {
     public final HttpURLConnection connection;
@@ -21,7 +20,7 @@ public class DefaultLottieFetchResult implements Closeable {
         this.connection.disconnect();
     }
 
-    public final String error() {
+    public final String error() throws IOException {
         boolean z = false;
         try {
             if (this.connection.getResponseCode() / 100 == 2) {
@@ -43,9 +42,9 @@ public class DefaultLottieFetchResult implements Closeable {
             StringBuilder sb2 = new StringBuilder();
             while (true) {
                 try {
-                    String readLine = bufferedReader.readLine();
-                    if (readLine != null) {
-                        sb2.append(readLine);
+                    String line = bufferedReader.readLine();
+                    if (line != null) {
+                        sb2.append(line);
                         sb2.append('\n');
                     } else {
                         try {

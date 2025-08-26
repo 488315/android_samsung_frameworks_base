@@ -45,9 +45,9 @@ public interface IVirtualDeviceIntentInterceptor extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceIntentInterceptor.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDeviceIntentInterceptor)) {
-                return (IVirtualDeviceIntentInterceptor) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceIntentInterceptor.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDeviceIntentInterceptor)) {
+                return (IVirtualDeviceIntentInterceptor) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IVirtualDeviceIntentInterceptor extends IInterface {
 
             @Override // android.companion.virtual.IVirtualDeviceIntentInterceptor
             public void onIntentIntercepted(Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceIntentInterceptor.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceIntentInterceptor.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

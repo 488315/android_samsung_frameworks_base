@@ -256,9 +256,9 @@ public final class ContextHubManager {
 
     public List<HubDiscoveryInfo> findEndpoints(long j) {
         try {
-            List<HubEndpointInfo> findEndpoints = this.mService.findEndpoints(j);
-            ArrayList arrayList = new ArrayList(findEndpoints.size());
-            Iterator<HubEndpointInfo> it = findEndpoints.iterator();
+            List<HubEndpointInfo> listFindEndpoints = this.mService.findEndpoints(j);
+            ArrayList arrayList = new ArrayList(listFindEndpoints.size());
+            Iterator<HubEndpointInfo> it = listFindEndpoints.iterator();
             while (it.hasNext()) {
                 arrayList.add(new HubDiscoveryInfo(it.next()));
             }
@@ -273,9 +273,9 @@ public final class ContextHubManager {
             throw new IllegalArgumentException("Invalid service descriptor: " + str);
         }
         try {
-            List<HubEndpointInfo> findEndpointsWithService = this.mService.findEndpointsWithService(str);
-            ArrayList arrayList = new ArrayList(findEndpointsWithService.size());
-            for (HubEndpointInfo hubEndpointInfo : findEndpointsWithService) {
+            List<HubEndpointInfo> listFindEndpointsWithService = this.mService.findEndpointsWithService(str);
+            ArrayList arrayList = new ArrayList(listFindEndpointsWithService.size());
+            for (HubEndpointInfo hubEndpointInfo : listFindEndpointsWithService) {
                 for (HubServiceInfo hubServiceInfo : hubEndpointInfo.getServiceInfoCollection()) {
                     if (hubServiceInfo.getServiceDescriptor().equals(str)) {
                         arrayList.add(new HubDiscoveryInfo(hubEndpointInfo, hubServiceInfo));
@@ -316,7 +316,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$2$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass2.this.lambda$onEndpointsStarted$0(hubEndpointInfoArr, str, hubEndpointDiscoveryCallback, iContextHubService);
+                    this.f$0.lambda$onEndpointsStarted$0(hubEndpointInfoArr, str, hubEndpointDiscoveryCallback, iContextHubService);
                 }
             });
         }
@@ -346,7 +346,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass2.this.lambda$onEndpointsStopped$1(hubEndpointInfoArr, str, hubEndpointDiscoveryCallback, i, iContextHubService);
+                    this.f$0.lambda$onEndpointsStopped$1(hubEndpointInfoArr, str, hubEndpointDiscoveryCallback, i, iContextHubService);
                 }
             });
         }
@@ -399,13 +399,13 @@ public final class ContextHubManager {
     public void registerEndpointDiscoveryCallback(Executor executor, HubEndpointDiscoveryCallback hubEndpointDiscoveryCallback, long j) {
         Objects.requireNonNull(executor, "executor cannot be null");
         Objects.requireNonNull(hubEndpointDiscoveryCallback, "callback cannot be null");
-        IContextHubEndpointDiscoveryCallback createDiscoveryCallback = createDiscoveryCallback(this.mService, executor, hubEndpointDiscoveryCallback, null);
+        IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback = createDiscoveryCallback(this.mService, executor, hubEndpointDiscoveryCallback, null);
         try {
-            this.mService.registerEndpointDiscoveryCallbackId(j, createDiscoveryCallback);
+            this.mService.registerEndpointDiscoveryCallbackId(j, iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        this.mDiscoveryCallbacks.put(hubEndpointDiscoveryCallback, createDiscoveryCallback);
+        this.mDiscoveryCallbacks.put(hubEndpointDiscoveryCallback, iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback);
     }
 
     public void registerEndpointDiscoveryCallback(HubEndpointDiscoveryCallback hubEndpointDiscoveryCallback, String str) {
@@ -419,23 +419,23 @@ public final class ContextHubManager {
         if (str.isBlank()) {
             throw new IllegalArgumentException("Invalid service descriptor: " + str);
         }
-        IContextHubEndpointDiscoveryCallback createDiscoveryCallback = createDiscoveryCallback(this.mService, executor, hubEndpointDiscoveryCallback, str);
+        IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback = createDiscoveryCallback(this.mService, executor, hubEndpointDiscoveryCallback, str);
         try {
-            this.mService.registerEndpointDiscoveryCallbackDescriptor(str, createDiscoveryCallback);
+            this.mService.registerEndpointDiscoveryCallbackDescriptor(str, iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        this.mDiscoveryCallbacks.put(hubEndpointDiscoveryCallback, createDiscoveryCallback);
+        this.mDiscoveryCallbacks.put(hubEndpointDiscoveryCallback, iContextHubEndpointDiscoveryCallbackCreateDiscoveryCallback);
     }
 
     public void unregisterEndpointDiscoveryCallback(HubEndpointDiscoveryCallback hubEndpointDiscoveryCallback) {
         Objects.requireNonNull(hubEndpointDiscoveryCallback, "callback cannot be null");
-        IContextHubEndpointDiscoveryCallback remove = this.mDiscoveryCallbacks.remove(hubEndpointDiscoveryCallback);
-        if (remove == null) {
+        IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackRemove = this.mDiscoveryCallbacks.remove(hubEndpointDiscoveryCallback);
+        if (iContextHubEndpointDiscoveryCallbackRemove == null) {
             throw new IllegalArgumentException("Callback not previously registered");
         }
         try {
-            this.mService.unregisterEndpointDiscoveryCallback(remove);
+            this.mService.unregisterEndpointDiscoveryCallback(iContextHubEndpointDiscoveryCallbackRemove);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -501,7 +501,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onMessageFromNanoApp$0(ContextHubClientCallback.this, contextHubClient, nanoAppMessage);
+                    ContextHubManager.AnonymousClass3.lambda$onMessageFromNanoApp$0(contextHubClientCallback, contextHubClient, nanoAppMessage);
                 }
             });
         }
@@ -523,7 +523,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onHubReset$1(ContextHubClientCallback.this, contextHubClient);
+                    ContextHubManager.AnonymousClass3.lambda$onHubReset$1(contextHubClientCallback, contextHubClient);
                 }
             });
         }
@@ -541,7 +541,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onNanoAppAborted$2(ContextHubClientCallback.this, contextHubClient, j, i);
+                    ContextHubManager.AnonymousClass3.lambda$onNanoAppAborted$2(contextHubClientCallback, contextHubClient, j, i);
                 }
             });
         }
@@ -559,7 +559,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onNanoAppLoaded$3(ContextHubClientCallback.this, contextHubClient, j);
+                    ContextHubManager.AnonymousClass3.lambda$onNanoAppLoaded$3(contextHubClientCallback, contextHubClient, j);
                 }
             });
         }
@@ -577,7 +577,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onNanoAppUnloaded$4(ContextHubClientCallback.this, contextHubClient, j);
+                    ContextHubManager.AnonymousClass3.lambda$onNanoAppUnloaded$4(contextHubClientCallback, contextHubClient, j);
                 }
             });
         }
@@ -595,7 +595,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onNanoAppEnabled$5(ContextHubClientCallback.this, contextHubClient, j);
+                    ContextHubManager.AnonymousClass3.lambda$onNanoAppEnabled$5(contextHubClientCallback, contextHubClient, j);
                 }
             });
         }
@@ -613,7 +613,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onNanoAppDisabled$6(ContextHubClientCallback.this, contextHubClient, j);
+                    ContextHubManager.AnonymousClass3.lambda$onNanoAppDisabled$6(contextHubClientCallback, contextHubClient, j);
                 }
             });
         }
@@ -631,7 +631,7 @@ public final class ContextHubManager {
             executor.execute(new Runnable() { // from class: android.hardware.location.ContextHubManager$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContextHubManager.AnonymousClass3.lambda$onClientAuthorizationChanged$7(ContextHubClientCallback.this, contextHubClient, j, i);
+                    ContextHubManager.AnonymousClass3.lambda$onClientAuthorizationChanged$7(contextHubClientCallback, contextHubClient, j, i);
                 }
             });
         }
@@ -647,20 +647,20 @@ public final class ContextHubManager {
     }
 
     public ContextHubClient createClient(Context context, ContextHubInfo contextHubInfo, Executor executor, ContextHubClientCallback contextHubClientCallback) {
-        String currentPackageName;
+        String strCurrentPackageName;
         Objects.requireNonNull(contextHubClientCallback, "Callback cannot be null");
         Objects.requireNonNull(contextHubInfo, "ContextHubInfo cannot be null");
         Objects.requireNonNull(executor, "Executor cannot be null");
         ContextHubClient contextHubClient = new ContextHubClient(contextHubInfo, false);
-        IContextHubClientCallback createClientCallback = createClientCallback(contextHubClient, contextHubClientCallback, executor);
+        IContextHubClientCallback iContextHubClientCallbackCreateClientCallback = createClientCallback(contextHubClient, contextHubClientCallback, executor);
         String attributionTag = context != null ? context.getAttributionTag() : null;
         if (context != null) {
-            currentPackageName = context.getPackageName();
+            strCurrentPackageName = context.getPackageName();
         } else {
-            currentPackageName = ActivityThread.currentPackageName();
+            strCurrentPackageName = ActivityThread.currentPackageName();
         }
         try {
-            contextHubClient.setClientProxy(this.mService.createClient(contextHubInfo.getId(), createClientCallback, attributionTag, currentPackageName));
+            contextHubClient.setClientProxy(this.mService.createClient(contextHubInfo.getId(), iContextHubClientCallbackCreateClientCallback, attributionTag, strCurrentPackageName));
             return contextHubClient;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -698,11 +698,11 @@ public final class ContextHubManager {
         hubEndpoint.register(this.mService);
     }
 
-    public void openSession(HubEndpoint hubEndpoint, HubEndpointInfo hubEndpointInfo) {
+    public void openSession(HubEndpoint hubEndpoint, HubEndpointInfo hubEndpointInfo) throws Throwable {
         hubEndpoint.openSession(hubEndpointInfo, null);
     }
 
-    public void openSession(HubEndpoint hubEndpoint, HubEndpointInfo hubEndpointInfo, String str) {
+    public void openSession(HubEndpoint hubEndpoint, HubEndpointInfo hubEndpointInfo, String str) throws Throwable {
         hubEndpoint.openSession(hubEndpointInfo, str);
     }
 
@@ -785,7 +785,7 @@ public final class ContextHubManager {
                     ContextHubManager.this.mCallbackHandler.post(new Runnable() { // from class: android.hardware.location.ContextHubManager$4$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ContextHubManager.AnonymousClass4.this.lambda$onMessageReceipt$0(i, i2, contextHubMessage);
+                            this.f$0.lambda$onMessageReceipt$0(i, i2, contextHubMessage);
                         }
                     });
                 } else if (ContextHubManager.this.mLocalCallback != null) {

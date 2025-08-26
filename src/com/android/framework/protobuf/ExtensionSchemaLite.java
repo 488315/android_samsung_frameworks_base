@@ -41,7 +41,7 @@ final class ExtensionSchemaLite extends ExtensionSchema<GeneratedMessageLite.Ext
 
     @Override // com.android.framework.protobuf.ExtensionSchema
     <UT, UB> UB parseExtension(Object obj, Reader reader, Object obj2, ExtensionRegistryLite extensionRegistryLite, FieldSet<GeneratedMessageLite.ExtensionDescriptor> fieldSet, UB ub, UnknownFieldSchema<UT, UB> unknownFieldSchema) throws IOException {
-        Object valueOf;
+        Object objValueOf;
         Object field;
         ArrayList arrayList;
         GeneratedMessageLite.GeneratedExtension generatedExtension = (GeneratedMessageLite.GeneratedExtension) obj2;
@@ -112,108 +112,108 @@ final class ExtensionSchemaLite extends ExtensionSchema<GeneratedMessageLite.Ext
             return ub;
         }
         if (generatedExtension.getLiteType() == WireFormat.FieldType.ENUM) {
-            int readInt32 = reader.readInt32();
-            if (generatedExtension.descriptor.getEnumType().findValueByNumber(readInt32) == null) {
-                return (UB) SchemaUtil.storeUnknownEnum(obj, number, readInt32, ub, unknownFieldSchema);
+            int int32 = reader.readInt32();
+            if (generatedExtension.descriptor.getEnumType().findValueByNumber(int32) == null) {
+                return (UB) SchemaUtil.storeUnknownEnum(obj, number, int32, ub, unknownFieldSchema);
             }
-            valueOf = Integer.valueOf(readInt32);
+            objValueOf = Integer.valueOf(int32);
         } else {
             switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[generatedExtension.getLiteType().ordinal()]) {
                 case 1:
-                    valueOf = Double.valueOf(reader.readDouble());
+                    objValueOf = Double.valueOf(reader.readDouble());
                     break;
                 case 2:
-                    valueOf = Float.valueOf(reader.readFloat());
+                    objValueOf = Float.valueOf(reader.readFloat());
                     break;
                 case 3:
-                    valueOf = Long.valueOf(reader.readInt64());
+                    objValueOf = Long.valueOf(reader.readInt64());
                     break;
                 case 4:
-                    valueOf = Long.valueOf(reader.readUInt64());
+                    objValueOf = Long.valueOf(reader.readUInt64());
                     break;
                 case 5:
-                    valueOf = Integer.valueOf(reader.readInt32());
+                    objValueOf = Integer.valueOf(reader.readInt32());
                     break;
                 case 6:
-                    valueOf = Long.valueOf(reader.readFixed64());
+                    objValueOf = Long.valueOf(reader.readFixed64());
                     break;
                 case 7:
-                    valueOf = Integer.valueOf(reader.readFixed32());
+                    objValueOf = Integer.valueOf(reader.readFixed32());
                     break;
                 case 8:
-                    valueOf = Boolean.valueOf(reader.readBool());
+                    objValueOf = Boolean.valueOf(reader.readBool());
                     break;
                 case 9:
-                    valueOf = Integer.valueOf(reader.readUInt32());
+                    objValueOf = Integer.valueOf(reader.readUInt32());
                     break;
                 case 10:
-                    valueOf = Integer.valueOf(reader.readSFixed32());
+                    objValueOf = Integer.valueOf(reader.readSFixed32());
                     break;
                 case 11:
-                    valueOf = Long.valueOf(reader.readSFixed64());
+                    objValueOf = Long.valueOf(reader.readSFixed64());
                     break;
                 case 12:
-                    valueOf = Integer.valueOf(reader.readSInt32());
+                    objValueOf = Integer.valueOf(reader.readSInt32());
                     break;
                 case 13:
-                    valueOf = Long.valueOf(reader.readSInt64());
+                    objValueOf = Long.valueOf(reader.readSInt64());
                     break;
                 case 14:
                     throw new IllegalStateException("Shouldn't reach here.");
                 case 15:
-                    valueOf = reader.readBytes();
+                    objValueOf = reader.readBytes();
                     break;
                 case 16:
-                    valueOf = reader.readString();
+                    objValueOf = reader.readString();
                     break;
                 case 17:
                     if (!generatedExtension.isRepeated()) {
                         Object field2 = fieldSet.getField(generatedExtension.descriptor);
                         if (field2 instanceof GeneratedMessageLite) {
-                            Schema schemaFor = Protobuf.getInstance().schemaFor((Protobuf) field2);
+                            Schema schemaSchemaFor = Protobuf.getInstance().schemaFor((Protobuf) field2);
                             if (!((GeneratedMessageLite) field2).isMutable()) {
-                                Object newInstance = schemaFor.newInstance();
-                                schemaFor.mergeFrom(newInstance, field2);
-                                fieldSet.setField(generatedExtension.descriptor, newInstance);
-                                field2 = newInstance;
+                                Object objNewInstance = schemaSchemaFor.newInstance();
+                                schemaSchemaFor.mergeFrom(objNewInstance, field2);
+                                fieldSet.setField(generatedExtension.descriptor, objNewInstance);
+                                field2 = objNewInstance;
                             }
-                            reader.mergeGroupField(field2, schemaFor, extensionRegistryLite);
+                            reader.mergeGroupField(field2, schemaSchemaFor, extensionRegistryLite);
                             return ub;
                         }
                     }
-                    valueOf = reader.readGroup(generatedExtension.getMessageDefaultInstance().getClass(), extensionRegistryLite);
+                    objValueOf = reader.readGroup(generatedExtension.getMessageDefaultInstance().getClass(), extensionRegistryLite);
                     break;
                 case 18:
                     if (!generatedExtension.isRepeated()) {
                         Object field3 = fieldSet.getField(generatedExtension.descriptor);
                         if (field3 instanceof GeneratedMessageLite) {
-                            Schema schemaFor2 = Protobuf.getInstance().schemaFor((Protobuf) field3);
+                            Schema schemaSchemaFor2 = Protobuf.getInstance().schemaFor((Protobuf) field3);
                             if (!((GeneratedMessageLite) field3).isMutable()) {
-                                Object newInstance2 = schemaFor2.newInstance();
-                                schemaFor2.mergeFrom(newInstance2, field3);
-                                fieldSet.setField(generatedExtension.descriptor, newInstance2);
-                                field3 = newInstance2;
+                                Object objNewInstance2 = schemaSchemaFor2.newInstance();
+                                schemaSchemaFor2.mergeFrom(objNewInstance2, field3);
+                                fieldSet.setField(generatedExtension.descriptor, objNewInstance2);
+                                field3 = objNewInstance2;
                             }
-                            reader.mergeMessageField(field3, schemaFor2, extensionRegistryLite);
+                            reader.mergeMessageField(field3, schemaSchemaFor2, extensionRegistryLite);
                             return ub;
                         }
                     }
-                    valueOf = reader.readMessage(generatedExtension.getMessageDefaultInstance().getClass(), extensionRegistryLite);
+                    objValueOf = reader.readMessage(generatedExtension.getMessageDefaultInstance().getClass(), extensionRegistryLite);
                     break;
                 default:
-                    valueOf = null;
+                    objValueOf = null;
                     break;
             }
         }
         if (generatedExtension.isRepeated()) {
-            fieldSet.addRepeatedField(generatedExtension.descriptor, valueOf);
+            fieldSet.addRepeatedField(generatedExtension.descriptor, objValueOf);
             return ub;
         }
         int i = AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[generatedExtension.getLiteType().ordinal()];
         if ((i == 17 || i == 18) && (field = fieldSet.getField(generatedExtension.descriptor)) != null) {
-            valueOf = Internal.mergeMessage(field, valueOf);
+            objValueOf = Internal.mergeMessage(field, objValueOf);
         }
-        fieldSet.setField(generatedExtension.descriptor, valueOf);
+        fieldSet.setField(generatedExtension.descriptor, objValueOf);
         return ub;
     }
 
@@ -445,10 +445,10 @@ final class ExtensionSchemaLite extends ExtensionSchema<GeneratedMessageLite.Ext
     @Override // com.android.framework.protobuf.ExtensionSchema
     void parseMessageSetItem(ByteString byteString, Object obj, ExtensionRegistryLite extensionRegistryLite, FieldSet<GeneratedMessageLite.ExtensionDescriptor> fieldSet) throws IOException {
         GeneratedMessageLite.GeneratedExtension generatedExtension = (GeneratedMessageLite.GeneratedExtension) obj;
-        MessageLite.Builder newBuilderForType = generatedExtension.getMessageDefaultInstance().newBuilderForType();
-        CodedInputStream newCodedInput = byteString.newCodedInput();
-        newBuilderForType.mergeFrom(newCodedInput, extensionRegistryLite);
-        fieldSet.setField(generatedExtension.descriptor, newBuilderForType.buildPartial());
-        newCodedInput.checkLastTagWas(0);
+        MessageLite.Builder builderNewBuilderForType = generatedExtension.getMessageDefaultInstance().newBuilderForType();
+        CodedInputStream codedInputStreamNewCodedInput = byteString.newCodedInput();
+        builderNewBuilderForType.mergeFrom(codedInputStreamNewCodedInput, extensionRegistryLite);
+        fieldSet.setField(generatedExtension.descriptor, builderNewBuilderForType.buildPartial());
+        codedInputStreamNewCodedInput.checkLastTagWas(0);
     }
 }

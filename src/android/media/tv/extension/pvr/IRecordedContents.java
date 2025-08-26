@@ -61,9 +61,9 @@ public interface IRecordedContents extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.pvr.IRecordedContents");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecordedContents)) {
-                return (IRecordedContents) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.pvr.IRecordedContents");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecordedContents)) {
+                return (IRecordedContents) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,22 +96,22 @@ public interface IRecordedContents extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String[] createStringArray = parcel.createStringArray();
-                IDeleteRecordedContentsCallback asInterface = IDeleteRecordedContentsCallback.Stub.asInterface(parcel.readStrongBinder());
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                IDeleteRecordedContentsCallback iDeleteRecordedContentsCallbackAsInterface = IDeleteRecordedContentsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                deleteRecordedContents(createStringArray, asInterface);
+                deleteRecordedContents(strArrCreateStringArray, iDeleteRecordedContentsCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int recordedContentsLockInfoSync = getRecordedContentsLockInfoSync(readString);
+                int recordedContentsLockInfoSync = getRecordedContentsLockInfoSync(string);
                 parcel2.writeNoException();
                 parcel2.writeInt(recordedContentsLockInfoSync);
             } else if (i == 3) {
-                String readString2 = parcel.readString();
-                IGetInfoRecordedContentsCallback asInterface2 = IGetInfoRecordedContentsCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IGetInfoRecordedContentsCallback iGetInfoRecordedContentsCallbackAsInterface = IGetInfoRecordedContentsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getRecordedContentsLockInfoAsync(readString2, asInterface2);
+                getRecordedContentsLockInfoAsync(string2, iGetInfoRecordedContentsCallbackAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -137,49 +137,49 @@ public interface IRecordedContents extends IInterface {
 
             @Override // android.media.tv.extension.pvr.IRecordedContents
             public void deleteRecordedContents(String[] strArr, IDeleteRecordedContentsCallback iDeleteRecordedContentsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iDeleteRecordedContentsCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iDeleteRecordedContentsCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.pvr.IRecordedContents
             public int getRecordedContentsLockInfoSync(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.pvr.IRecordedContents
             public void getRecordedContentsLockInfoAsync(String str, IGetInfoRecordedContentsCallback iGetInfoRecordedContentsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iGetInfoRecordedContentsCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.pvr.IRecordedContents");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iGetInfoRecordedContentsCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

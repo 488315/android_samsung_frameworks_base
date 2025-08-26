@@ -26,7 +26,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class TvScreenKt {
     public static final void TvScreen(final Function1 function1, final MediaDeviceViewModel mediaDeviceViewModel, final DeviceAudioPathViewModel deviceAudioPathViewModel, Composer composer, final int i) {
@@ -53,18 +52,18 @@ public abstract class TvScreenKt {
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
-                    m3422exceptionOrNullimpl.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    thM3442exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;
                 }
-                ViewModelProvider.Factory factory = (ViewModelProvider.Factory) failure;
-                if (factory == null) {
-                    factory = ViewModelKt.createDaggerViewModelFactory(current);
+                ViewModelProvider.Factory factoryCreateDaggerViewModelFactory = (ViewModelProvider.Factory) failure;
+                if (factoryCreateDaggerViewModelFactory == null) {
+                    factoryCreateDaggerViewModelFactory = ViewModelKt.createDaggerViewModelFactory(current);
                 }
-                ViewModel viewModel = ViewModelKt.get(current, MediaDeviceViewModel.class, factory, defaultViewModelCreationExtras);
+                ViewModel viewModel = ViewModelKt.get(current, MediaDeviceViewModel.class, factoryCreateDaggerViewModelFactory, defaultViewModelCreationExtras);
                 composerImpl.end(false);
                 MediaDeviceViewModel mediaDeviceViewModel2 = (MediaDeviceViewModel) viewModel;
                 composerImpl.startReplaceGroup(1487631618);
@@ -80,15 +79,15 @@ public abstract class TvScreenKt {
                     int i4 = Result.$r8$clinit;
                     failure2 = new Result.Failure(th2);
                 }
-                Throwable m3422exceptionOrNullimpl2 = Result.m3422exceptionOrNullimpl(failure2);
-                if (m3422exceptionOrNullimpl2 != null) {
-                    m3422exceptionOrNullimpl2.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
+                if (thM3442exceptionOrNullimpl2 != null) {
+                    thM3442exceptionOrNullimpl2.printStackTrace();
                 }
-                ViewModelProvider.Factory factory2 = (ViewModelProvider.Factory) (failure2 instanceof Result.Failure ? null : failure2);
-                if (factory2 == null) {
-                    factory2 = ViewModelKt.createDaggerViewModelFactory(current2);
+                ViewModelProvider.Factory factoryCreateDaggerViewModelFactory2 = (ViewModelProvider.Factory) (failure2 instanceof Result.Failure ? null : failure2);
+                if (factoryCreateDaggerViewModelFactory2 == null) {
+                    factoryCreateDaggerViewModelFactory2 = ViewModelKt.createDaggerViewModelFactory(current2);
                 }
-                ViewModel viewModel2 = ViewModelKt.get(current2, DeviceAudioPathViewModel.class, factory2, defaultViewModelCreationExtras2);
+                ViewModel viewModel2 = ViewModelKt.get(current2, DeviceAudioPathViewModel.class, factoryCreateDaggerViewModelFactory2, defaultViewModelCreationExtras2);
                 composerImpl.end(false);
                 deviceAudioPathViewModel = (DeviceAudioPathViewModel) viewModel2;
                 mediaDeviceViewModel = mediaDeviceViewModel2;
@@ -99,49 +98,57 @@ public abstract class TvScreenKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.TvScreen (TvScreen.kt:19)");
             }
-            SnackbarScaffoldKt.SnackbarScaffold(null, null, null, ComposableLambdaKt.rememberComposableLambda(-1289229168, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1
+            SnackbarScaffoldKt.SnackbarScaffold(null, null, null, ComposableLambdaKt.rememberComposableLambda(-1289229168, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt.TvScreen.1
+                /* JADX WARN: Removed duplicated region for block: B:8:0x001f  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     Composer composer2 = (Composer) obj2;
                     if ((((Number) obj3).intValue() & 17) == 16) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
-                        }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.TvScreen.<anonymous> (TvScreen.kt:21)");
-                    }
-                    final MediaDeviceViewModel mediaDeviceViewModel3 = mediaDeviceViewModel;
-                    final DeviceAudioPathViewModel deviceAudioPathViewModel2 = deviceAudioPathViewModel;
-                    ContainerBoxKt.ContainerBox(false, null, null, null, ComposableLambdaKt.rememberComposableLambda(1041843797, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$TvScreen$1.1
-                        @Override // kotlin.jvm.functions.Function2
-                        public final Object invoke(Object obj4, Object obj5) {
-                            Composer composer3 = (Composer) obj4;
-                            if ((((Number) obj5).intValue() & 3) == 2) {
-                                ComposerImpl composerImpl3 = (ComposerImpl) composer3;
-                                if (composerImpl3.getSkipping()) {
-                                    composerImpl3.skipToGroupEnd();
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.TvScreen.<anonymous> (TvScreen.kt:21)");
+                            }
+                            final MediaDeviceViewModel mediaDeviceViewModel3 = mediaDeviceViewModel;
+                            final DeviceAudioPathViewModel deviceAudioPathViewModel2 = deviceAudioPathViewModel;
+                            ContainerBoxKt.ContainerBox(false, null, null, null, ComposableLambdaKt.rememberComposableLambda(1041843797, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt.TvScreen.1.1
+                                /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                                @Override // kotlin.jvm.functions.Function2
+                                /*
+                                    Code decompiled incorrectly, please refer to instructions dump.
+                                */
+                                public final Object invoke(Object obj4, Object obj5) {
+                                    Composer composer3 = (Composer) obj4;
+                                    if ((((Number) obj5).intValue() & 3) == 2) {
+                                        ComposerImpl composerImpl3 = (ComposerImpl) composer3;
+                                        if (composerImpl3.getSkipping()) {
+                                            composerImpl3.skipToGroupEnd();
+                                        } else {
+                                            if (ComposerKt.isTraceInProgress()) {
+                                                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.TvScreen.<anonymous>.<anonymous> (TvScreen.kt:22)");
+                                            }
+                                            ProvidedValue[] providedValueArr = {CompositionExtKt.LocalMediaInteraction.defaultProvidedValue$runtime_release(mediaDeviceViewModel3), CompositionExtKt.LocalAudioPathInteraction.defaultProvidedValue$runtime_release(deviceAudioPathViewModel2)};
+                                            ComposableSingletons$TvScreenKt.INSTANCE.getClass();
+                                            CompositionLocalKt.CompositionLocalProvider(providedValueArr, ComposableSingletons$TvScreenKt.f81lambda1, composer3, 56);
+                                            if (ComposerKt.isTraceInProgress()) {
+                                                ComposerKt.traceEventEnd();
+                                            }
+                                        }
+                                    }
                                     return Unit.INSTANCE;
                                 }
-                            }
-                            if (ComposerKt.isTraceInProgress()) {
-                                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.TvScreen.<anonymous>.<anonymous> (TvScreen.kt:22)");
-                            }
-                            ProvidedValue[] providedValueArr = {CompositionExtKt.LocalMediaInteraction.defaultProvidedValue$runtime_release(MediaDeviceViewModel.this), CompositionExtKt.LocalAudioPathInteraction.defaultProvidedValue$runtime_release(deviceAudioPathViewModel2)};
-                            ComposableSingletons$TvScreenKt.INSTANCE.getClass();
-                            CompositionLocalKt.CompositionLocalProvider(providedValueArr, ComposableSingletons$TvScreenKt.f81lambda1, composer3, 56);
+                            }, composer2), composer2, 24582);
+                            ContainerBoxKt.SettingButton(function1, false, null, null, composer2, 48, 12);
+                            ContainerBoxKt.ActionButton(function1, null, null, null, false, composer2, 24576);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
-                            return Unit.INSTANCE;
                         }
-                    }, composer2), composer2, 24582);
-                    ContainerBoxKt.SettingButton(Function1.this, false, null, null, composer2, 48, 12);
-                    ContainerBoxKt.ActionButton(Function1.this, null, null, null, false, composer2, 24576);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -150,19 +157,19 @@ public abstract class TvScreenKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(mediaDeviceViewModel, deviceAudioPathViewModel, i) { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(mediaDeviceViewModel, deviceAudioPathViewModel, i) { // from class: com.android.systemui.media.mediaoutput.compose.TvScreenKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ MediaDeviceViewModel f$1;
                 public final /* synthetic */ DeviceAudioPathViewModel f$2;
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     MediaDeviceViewModel mediaDeviceViewModel3 = this.f$1;
                     DeviceAudioPathViewModel deviceAudioPathViewModel2 = this.f$2;
-                    TvScreenKt.TvScreen(Function1.this, mediaDeviceViewModel3, deviceAudioPathViewModel2, (Composer) obj, updateChangedFlags);
+                    TvScreenKt.TvScreen(this.f$0, mediaDeviceViewModel3, deviceAudioPathViewModel2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

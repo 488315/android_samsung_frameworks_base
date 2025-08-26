@@ -72,9 +72,9 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
     }
 
     public void reverseTransition(int i) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         long j = this.mStartTimeMillis;
-        if (uptimeMillis - j > this.mDuration) {
+        if (jUptimeMillis - j > this.mDuration) {
             if (this.mTo == 0) {
                 this.mFrom = 0;
                 this.mTo = 255;
@@ -96,7 +96,7 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
         this.mReverse = !z;
         this.mFrom = this.mAlpha;
         this.mTo = z ? 255 : 0;
-        this.mDuration = (int) (!z ? uptimeMillis - j : this.mOriginalDuration - (uptimeMillis - j));
+        this.mDuration = (int) (!z ? jUptimeMillis - j : this.mOriginalDuration - (jUptimeMillis - j));
         this.mTransitionState = 0;
     }
 
@@ -109,10 +109,10 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
             this.mTransitionState = 1;
             z = false;
         } else if (i == 1 && this.mStartTimeMillis >= 0) {
-            float uptimeMillis = (SystemClock.uptimeMillis() - this.mStartTimeMillis) / this.mDuration;
-            z = uptimeMillis >= 1.0f;
-            float min = Math.min(uptimeMillis, 1.0f);
-            this.mAlpha = (int) (this.mFrom + ((this.mTo - r3) * min));
+            float fUptimeMillis = (SystemClock.uptimeMillis() - this.mStartTimeMillis) / this.mDuration;
+            z = fUptimeMillis >= 1.0f;
+            float fMin = Math.min(fUptimeMillis, 1.0f);
+            this.mAlpha = (int) (this.mFrom + ((this.mTo - r3) * fMin));
         } else {
             z = true;
         }
@@ -162,6 +162,7 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
             super(transitionState, transitionDrawable, resources);
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.LayerDrawable.LayerState, android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new TransitionDrawable(this, null);

@@ -157,87 +157,87 @@ public interface GnssLogsProto {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.numLocationReportProcessed;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
             }
             int i2 = this.percentageLocationFailure;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
             }
             int i3 = this.numTimeToFirstFixProcessed;
             if (i3 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
             }
             int i4 = this.meanTimeToFirstFixSecs;
             if (i4 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i4);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i4);
             }
             int i5 = this.standardDeviationTimeToFirstFixSecs;
             if (i5 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(5, i5);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(5, i5);
             }
             int i6 = this.numPositionAccuracyProcessed;
             if (i6 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(6, i6);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(6, i6);
             }
             int i7 = this.meanPositionAccuracyMeters;
             if (i7 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i7);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i7);
             }
             int i8 = this.standardDeviationPositionAccuracyMeters;
             if (i8 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(8, i8);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(8, i8);
             }
             int i9 = this.numTopFourAverageCn0Processed;
             if (i9 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(9, i9);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(9, i9);
             }
             if (Double.doubleToLongBits(this.meanTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(10, this.meanTopFourAverageCn0DbHz);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(10, this.meanTopFourAverageCn0DbHz);
             }
             if (Double.doubleToLongBits(this.standardDeviationTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(11, this.standardDeviationTopFourAverageCn0DbHz);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(11, this.standardDeviationTopFourAverageCn0DbHz);
             }
             PowerMetrics powerMetrics = this.powerMetrics;
             if (powerMetrics != null) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(12, powerMetrics);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(12, powerMetrics);
             }
             if (!this.hardwareRevision.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(13, this.hardwareRevision);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(13, this.hardwareRevision);
             }
             int i10 = this.numSvStatusProcessed;
             if (i10 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(14, i10);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(14, i10);
             }
             int i11 = this.numL5SvStatusProcessed;
             if (i11 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(15, i11);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(15, i11);
             }
             int i12 = this.numSvStatusUsedInFix;
             if (i12 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(16, i12);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(16, i12);
             }
             int i13 = this.numL5SvStatusUsedInFix;
             if (i13 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(17, i13);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(17, i13);
             }
             int i14 = this.numL5TopFourAverageCn0Processed;
             if (i14 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(18, i14);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(18, i14);
             }
             if (Double.doubleToLongBits(this.meanL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(19, this.meanL5TopFourAverageCn0DbHz);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(19, this.meanL5TopFourAverageCn0DbHz);
             }
-            return Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? computeSerializedSize + CodedOutputByteBufferNano.computeDoubleSize(20, this.standardDeviationL5TopFourAverageCn0DbHz) : computeSerializedSize;
+            return Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? iComputeSerializedSize + CodedOutputByteBufferNano.computeDoubleSize(20, this.standardDeviationL5TopFourAverageCn0DbHz) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public GnssLog mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                switch (readTag) {
+                int tag = codedInputByteBufferNano.readTag();
+                switch (tag) {
                     case 0:
                         break;
                     case 8:
@@ -304,7 +304,7 @@ public interface GnssLogsProto {
                         this.standardDeviationL5TopFourAverageCn0DbHz = codedInputByteBufferNano.readDouble();
                         break;
                     default:
-                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                             break;
                         } else {
                             break;
@@ -378,27 +378,27 @@ public interface GnssLogsProto {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             long j = this.loggingDurationMs;
             if (j != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
             }
             if (Double.doubleToLongBits(this.energyConsumedMah) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(2, this.energyConsumedMah);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(2, this.energyConsumedMah);
             }
             long[] jArr = this.timeInSignalQualityLevelMs;
             if (jArr == null || jArr.length <= 0) {
-                return computeSerializedSize;
+                return iComputeSerializedSize;
             }
             int i = 0;
-            int i2 = 0;
+            int iComputeInt64SizeNoTag = 0;
             while (true) {
                 long[] jArr2 = this.timeInSignalQualityLevelMs;
                 if (i < jArr2.length) {
-                    i2 += CodedOutputByteBufferNano.computeInt64SizeNoTag(jArr2[i]);
+                    iComputeInt64SizeNoTag += CodedOutputByteBufferNano.computeInt64SizeNoTag(jArr2[i]);
                     i++;
                 } else {
-                    return computeSerializedSize + i2 + jArr2.length;
+                    return iComputeSerializedSize + iComputeInt64SizeNoTag + jArr2.length;
                 }
             }
         }
@@ -406,15 +406,15 @@ public interface GnssLogsProto {
         @Override // com.android.framework.protobuf.nano.MessageNano
         public PowerMetrics mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 8) {
+                if (tag == 8) {
                     this.loggingDurationMs = codedInputByteBufferNano.readInt64();
-                } else if (readTag == 17) {
+                } else if (tag == 17) {
                     this.energyConsumedMah = codedInputByteBufferNano.readDouble();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 24);
                     long[] jArr = this.timeInSignalQualityLevelMs;
                     int length = jArr == null ? 0 : jArr.length;
@@ -430,12 +430,12 @@ public interface GnssLogsProto {
                     }
                     jArr2[length] = codedInputByteBufferNano.readInt64();
                     this.timeInSignalQualityLevelMs = jArr2;
-                } else if (readTag != 26) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 26) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int pushLimit = codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
+                    int iPushLimit = codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
                     int position = codedInputByteBufferNano.getPosition();
                     int i2 = 0;
                     while (codedInputByteBufferNano.getBytesUntilLimit() > 0) {
@@ -455,7 +455,7 @@ public interface GnssLogsProto {
                         length2++;
                     }
                     this.timeInSignalQualityLevelMs = jArr4;
-                    codedInputByteBufferNano.popLimit(pushLimit);
+                    codedInputByteBufferNano.popLimit(iPushLimit);
                 }
             }
             return this;

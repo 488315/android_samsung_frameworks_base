@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalTutorialInteractor$isTutorialAvailable$1 extends SuspendLambda implements Function4 {
     /* synthetic */ int I$0;
@@ -21,13 +20,13 @@ final class CommunalTutorialInteractor$isTutorialAvailable$1 extends SuspendLamb
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        int intValue = ((Number) obj3).intValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj3).intValue();
         CommunalTutorialInteractor$isTutorialAvailable$1 communalTutorialInteractor$isTutorialAvailable$1 = new CommunalTutorialInteractor$isTutorialAvailable$1((Continuation) obj4);
-        communalTutorialInteractor$isTutorialAvailable$1.Z$0 = booleanValue;
-        communalTutorialInteractor$isTutorialAvailable$1.Z$1 = booleanValue2;
-        communalTutorialInteractor$isTutorialAvailable$1.I$0 = intValue;
+        communalTutorialInteractor$isTutorialAvailable$1.Z$0 = zBooleanValue;
+        communalTutorialInteractor$isTutorialAvailable$1.Z$1 = zBooleanValue2;
+        communalTutorialInteractor$isTutorialAvailable$1.I$0 = iIntValue;
         return communalTutorialInteractor$isTutorialAvailable$1.invokeSuspend(Unit.INSTANCE);
     }
 

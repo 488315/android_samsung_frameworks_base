@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFaceAuthRepositoryImpl$handleFaceHardwareError$1 extends SuspendLambda implements Function2 {
     int label;
@@ -63,9 +62,9 @@ final class DeviceEntryFaceAuthRepositoryImpl$handleFaceHardwareError$1 extends 
             LogLevel logLevel = LogLevel.DEBUG;
             FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(9);
             LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i2;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i2;
+            logBuffer.commit(logMessageObtain);
             DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl2 = this.this$0;
             FaceAuthUiEvent faceAuthUiEvent = FaceAuthUiEvent.FACE_AUTH_TRIGGERED_RETRY_AFTER_HW_UNAVAILABLE;
             StateFlowImpl stateFlowImpl = deviceEntryFaceAuthRepositoryImpl2.pendingAuthenticateRequest;
@@ -78,11 +77,11 @@ final class DeviceEntryFaceAuthRepositoryImpl$handleFaceHardwareError$1 extends 
             faceAuthenticationLogger2.getClass();
             FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda02 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer2 = faceAuthenticationLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda02, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda02, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
             logMessageImpl.str1 = String.valueOf(faceAuthUiEvent);
             logMessageImpl.bool1 = false;
-            logBuffer2.commit(obtain2);
+            logBuffer2.commit(logMessageObtain2);
             stateFlowImpl.updateState(null, new AuthenticationRequest(faceAuthUiEvent, false));
         }
         return Unit.INSTANCE;

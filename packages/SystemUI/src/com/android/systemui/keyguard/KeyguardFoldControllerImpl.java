@@ -36,7 +36,6 @@ import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardFoldControllerImpl implements KeyguardFoldController {
     public final BinderCallMonitor binderCallMonitor;
@@ -54,7 +53,6 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
     public final kotlin.Lazy viewMediatorHelper$delegate;
     public final Lazy viewMediatorLazy;
     public int wakeReason;
-    public Boolean wasFolded;
     public int foldState = -1;
     public final List highRankedStateListeners = new ArrayList();
     public final List normalRankedStateListeners = new ArrayList();
@@ -122,17 +120,13 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
         new DeviceStateManager.DeviceStateCallback() { // from class: com.android.systemui.keyguard.KeyguardFoldControllerImpl$deviceStateCallback$1
             public final void onDeviceStateChanged(DeviceState deviceState) {
                 int identifier = deviceState.getIdentifier();
-                Boolean bool = identifier != 0 ? identifier != 6 ? identifier != 2 ? identifier != 3 ? null : Boolean.FALSE : Boolean.FALSE : Boolean.TRUE : Boolean.TRUE;
-                if (Intrinsics.areEqual(KeyguardFoldControllerImpl.this.wasFolded, bool)) {
-                    if (deviceState.getIdentifier() == 6) {
-                        KeyguardFoldControllerImpl.this.resetFoldOpenState$1();
-                    }
+                if (identifier == 0) {
+                    this.this$0.notifyFoldStateChanged(false, false);
                 } else {
-                    KeyguardFoldControllerImpl keyguardFoldControllerImpl = KeyguardFoldControllerImpl.this;
-                    keyguardFoldControllerImpl.wasFolded = bool;
-                    if (bool != null) {
-                        keyguardFoldControllerImpl.changeFoldState(bool.booleanValue());
+                    if (identifier != 3) {
+                        return;
                     }
+                    this.this$0.notifyFoldStateChanged(true, false);
                 }
             }
         };
@@ -172,39 +166,17 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
         boolean z2 = !z;
         int i = this.foldState;
         boolean z3 = i == -1 || i != z2;
-        boolean z4 = i == -1 ? 1 : 0;
-        KeyguardFoldControllerDependency keyguardFoldControllerDependency = this.dependency;
-        String m = FakeFeatures$$ExternalSyntheticOutline0.m("changeFoldState: foldState=", ((KeyguardFoldControllerConfigImpl) this.foldConfig).isDebug() ? z2 != -1 ? !z ? z2 != 1 ? "" : "FOLD_OPEN" : "FOLD_CLOSE" : "FOLD_NONE" : String.valueOf(z2 ? 1 : 0), ", changed=", z3);
-        ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency).getClass();
-        Log.d("KeyguardFoldController", m);
+        boolean z4 = i == -1;
+        KeyguardFoldControllerConfigImpl keyguardFoldControllerConfigImpl = (KeyguardFoldControllerConfigImpl) this.foldConfig;
+        String strM = FakeFeatures$$ExternalSyntheticOutline0.m("changeFoldState: foldState=", keyguardFoldControllerConfigImpl.isDebug() ? z2 != -1 ? !z ? z2 != 1 ? "" : "FOLD_OPEN" : "FOLD_CLOSE" : "FOLD_NONE" : String.valueOf(z2 ? 1 : 0), ", changed=", z3);
+        ((KeyguardFoldControllerDependencyImpl) this.dependency).getClass();
+        Log.d("KeyguardFoldController", strM);
         if (z3) {
             this.foldState = z2 ? 1 : 0;
-            if (((KeyguardFoldControllerConfigImpl) this.foldConfig).isDebug()) {
+            if (keyguardFoldControllerConfigImpl.isDebug()) {
                 ((LooperSlowLogControllerImpl) this.looperSlowLogController).enable(2, 10L, 20L, 3000L, false, null);
             }
-            ((KeyguardFoldControllerConfigImpl) this.foldConfig).getClass();
-            if (Rune.SYSUI_BINDER_CALL_MONITOR) {
-                BinderCallMonitorImpl binderCallMonitorImpl = (BinderCallMonitorImpl) this.binderCallMonitor;
-                binderCallMonitorImpl.getClass();
-                binderCallMonitorImpl.startMonitoring(4, BinderCallMonitorConstants.MAX_DURATION / 1000000, 3000L);
-            }
-            Handler handler = this.handler;
-            if (handler == null) {
-                handler = null;
-            }
-            if (handler.hasMessages(1003)) {
-                ((KeyguardFoldControllerDependencyImpl) this.dependency).getClass();
-                Log.d("KeyguardFoldController", "notifyFoldStateChanged remove previous msg");
-                handler.removeMessages(1003);
-            }
-            handler.sendMessageAtFrontOfQueue(handler.obtainMessage(1003, z2 ? 1 : 0, !z4));
-            if (z4 == 0 && !z && this.initShowTime > 0 && (!this.updateMonitor.isSecure() || this.updateMonitor.getUserCanSkipBouncer(this.selectedUserInteractor.getSelectedUserId()))) {
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = (KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) this.viewMediatorHelper$delegate.getValue());
-                ViewMediatorProvider viewMediatorProvider = keyguardViewMediatorHelperImpl.viewMediatorProvider;
-                (viewMediatorProvider != null ? viewMediatorProvider : null).resetPendingLock.invoke();
-                keyguardViewMediatorHelperImpl.removeShowMsg();
-            }
-            onFoldStateChanged(this.highRankedStateListeners, z2, z4, false);
+            notifyFoldStateChanged(z2, z4);
         }
     }
 
@@ -229,6 +201,32 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
         return i == 2 || i == 3;
     }
 
+    public final void notifyFoldStateChanged(boolean z, boolean z2) {
+        ((KeyguardFoldControllerConfigImpl) this.foldConfig).getClass();
+        if (Rune.SYSUI_BINDER_CALL_MONITOR) {
+            BinderCallMonitorImpl binderCallMonitorImpl = (BinderCallMonitorImpl) this.binderCallMonitor;
+            binderCallMonitorImpl.getClass();
+            binderCallMonitorImpl.startMonitoring(4, BinderCallMonitorConstants.MAX_DURATION / 1000000, 3000L);
+        }
+        Handler handler = this.handler;
+        if (handler == null) {
+            handler = null;
+        }
+        if (handler.hasMessages(1003)) {
+            ((KeyguardFoldControllerDependencyImpl) this.dependency).getClass();
+            Log.d("KeyguardFoldController", "notifyFoldStateChanged remove previous msg");
+            handler.removeMessages(1003);
+        }
+        handler.sendMessageAtFrontOfQueue(handler.obtainMessage(1003, z ? 1 : 0, !z2 ? 1 : 0));
+        if (!z2 && z && this.initShowTime > 0 && (!this.updateMonitor.isSecure() || this.updateMonitor.getUserCanSkipBouncer(this.selectedUserInteractor.getSelectedUserId()))) {
+            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = (KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) this.viewMediatorHelper$delegate.getValue());
+            ViewMediatorProvider viewMediatorProvider = keyguardViewMediatorHelperImpl.viewMediatorProvider;
+            (viewMediatorProvider != null ? viewMediatorProvider : null).resetPendingLock.invoke();
+            keyguardViewMediatorHelperImpl.removeShowMsg();
+        }
+        onFoldStateChanged(this.highRankedStateListeners, z, z2, false);
+    }
+
     public final void onFoldStateChanged(List list, final boolean z, boolean z2, boolean z3) {
         ArrayList arrayList = new ArrayList();
         for (Object obj : list) {
@@ -243,17 +241,17 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
             i++;
             final RankedStateListener rankedStateListener = (RankedStateListener) obj2;
             if (z3) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(rankedStateListener.rank, "onFoldStateChanged ", " ");
-                m.append(rankedStateListener.stateListener);
-                String sb = m.toString();
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(rankedStateListener.rank, "onFoldStateChanged ", " ");
+                sbM.append(rankedStateListener.stateListener);
+                String string = sbM.toString();
                 Runnable runnable = new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFoldControllerImpl$onFoldStateChanged$2$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RankedStateListener.this.stateListener.onFoldStateChanged(z);
+                        rankedStateListener.stateListener.onFoldStateChanged(z);
                     }
                 };
                 ((KeyguardFoldControllerDependencyImpl) this.dependency).getClass();
-                LogUtil.execTime(runnable, 10, "LooperSlow", sb, new Object[0]);
+                LogUtil.execTime(runnable, 10, "LooperSlow", string, new Object[0]);
             } else {
                 rankedStateListener.stateListener.onFoldStateChanged(z);
             }
@@ -274,16 +272,16 @@ public final class KeyguardFoldControllerImpl implements KeyguardFoldController 
         KeyguardFoldControllerDependency keyguardFoldControllerDependency = this.dependency;
         if (i2 == i) {
             if (((KeyguardFoldControllerConfigImpl) this.foldConfig).isDebug()) {
-                String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("already ", getFoldOpenModeStr(i));
+                String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("already ", getFoldOpenModeStr(i));
                 ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency).getClass();
-                Log.d("KeyguardFoldController", m);
+                Log.d("KeyguardFoldController", strM);
                 return;
             }
             return;
         }
-        String m2 = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("setFoldOpenState ", getFoldOpenModeStr(i2), " -> ", getFoldOpenModeStr(i));
+        String strM2 = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("setFoldOpenState ", getFoldOpenModeStr(i2), " -> ", getFoldOpenModeStr(i));
         ((KeyguardFoldControllerDependencyImpl) keyguardFoldControllerDependency).getClass();
-        Log.d("KeyguardFoldController", m2);
+        Log.d("KeyguardFoldController", strM2);
         int i3 = this.foldOpenState;
         this.foldOpenState = i;
         ArrayList arrayList = (ArrayList) this.foldOpenModeListeners;

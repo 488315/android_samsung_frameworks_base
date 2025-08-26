@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.widget.SystemUIButton;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecEmergencyCarrierArea extends EmergencyCarrierArea {
     public LinearLayout mEmergencyButtonArea;
@@ -27,23 +26,23 @@ public class SecEmergencyCarrierArea extends EmergencyCarrierArea {
         if (linearLayout == null || this.mEmergencyButton == null || this.mForgotPatternButton == null) {
             return;
         }
-        View view = null;
+        View childAt = null;
         int i = 0;
         for (int i2 = 0; i2 < this.mEmergencyButtonArea.getChildCount(); i2++) {
             if (this.mEmergencyButtonArea.getChildAt(i2) != null && this.mEmergencyButtonArea.getChildAt(i2).getVisibility() == 0) {
                 i++;
-                view = this.mEmergencyButtonArea.getChildAt(i2);
+                childAt = this.mEmergencyButtonArea.getChildAt(i2);
             }
         }
         if (i > 0 && this.mEmergencyButton.getVisibility() == 4) {
             this.mEmergencyButton.setVisibility(8);
         }
         if (i == 1) {
-            if (view != null) {
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+            if (childAt != null) {
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
                 layoutParams.width = -2;
                 layoutParams.weight = 0.0f;
-                view.setLayoutParams(layoutParams);
+                childAt.setLayoutParams(layoutParams);
                 return;
             }
             return;

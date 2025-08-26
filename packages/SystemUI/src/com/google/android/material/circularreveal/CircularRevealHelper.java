@@ -10,7 +10,6 @@ import android.view.View;
 import com.google.android.material.circularreveal.CircularRevealWidget;
 import com.google.android.material.math.MathUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CircularRevealHelper {
     public final Delegate delegate;
@@ -19,7 +18,6 @@ public class CircularRevealHelper {
     public final Paint scrimPaint;
     public final View view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Delegate {
         void actualDraw(Canvas canvas);
 
@@ -64,11 +62,11 @@ public class CircularRevealHelper {
             return;
         }
         Rect bounds = drawable.getBounds();
-        float width = this.revealInfo.centerX - (bounds.width() / 2.0f);
-        float height = this.revealInfo.centerY - (bounds.height() / 2.0f);
-        canvas2.translate(width, height);
+        float fWidth = this.revealInfo.centerX - (bounds.width() / 2.0f);
+        float fHeight = this.revealInfo.centerY - (bounds.height() / 2.0f);
+        canvas2.translate(fWidth, fHeight);
         this.overlayDrawable.draw(canvas2);
-        canvas2.translate(-width, -height);
+        canvas2.translate(-fWidth, -fHeight);
     }
 
     public final void setRevealInfo(CircularRevealWidget.RevealInfo revealInfo) {

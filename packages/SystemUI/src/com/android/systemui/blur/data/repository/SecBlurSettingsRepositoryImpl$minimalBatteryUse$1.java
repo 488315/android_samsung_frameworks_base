@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecBlurSettingsRepositoryImpl$minimalBatteryUse$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SettingsHelper $settingsHelper;
@@ -55,8 +54,8 @@ final class SecBlurSettingsRepositoryImpl$minimalBatteryUse$1 extends SuspendLam
                     }
                     if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE)) || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE))) {
                         SecBlurSettingsRepositoryImpl.Companion.getClass();
-                        EmergencyButtonController$$ExternalSyntheticOutline0.m("isUltraPowerSavingMode changed ", SecBlurSettingsRepositoryImpl.TAG, SettingsHelper.this.isUltraPowerSavingMode());
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(SettingsHelper.this.isUltraPowerSavingMode()));
+                        EmergencyButtonController$$ExternalSyntheticOutline0.m("isUltraPowerSavingMode changed ", SecBlurSettingsRepositoryImpl.TAG, settingsHelper.isUltraPowerSavingMode());
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(settingsHelper.isUltraPowerSavingMode()));
                     }
                 }
             };

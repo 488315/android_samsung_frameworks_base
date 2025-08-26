@@ -119,10 +119,10 @@ public class StatusBarNotification implements Parcelable {
     }
 
     public static int getUidFromKey(String str) {
-        String[] split = str.split("\\|");
-        if (split.length >= 5) {
+        String[] strArrSplit = str.split("\\|");
+        if (strArrSplit.length >= 5) {
             try {
-                return Integer.parseInt(split[4]);
+                return Integer.parseInt(strArrSplit[4]);
             } catch (NumberFormatException unused) {
             }
         }
@@ -130,9 +130,9 @@ public class StatusBarNotification implements Parcelable {
     }
 
     public static String getPkgFromKey(String str) {
-        String[] split = str.split("\\|");
-        if (split.length >= 2) {
-            return split[1];
+        String[] strArrSplit = str.split("\\|");
+        if (strArrSplit.length >= 2) {
+            return strArrSplit[1];
         }
         return null;
     }
@@ -217,8 +217,8 @@ public class StatusBarNotification implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public StatusBarNotification m4256clone() {
-        return cloneShallow(this.notification.m421clone());
+    public StatusBarNotification m4263clone() {
+        return cloneShallow(this.notification.m425clone());
     }
 
     public StatusBarNotification cloneShallow(Notification notification) {
@@ -338,9 +338,7 @@ public class StatusBarNotification implements Parcelable {
             return this.mContextForDisplayId.computeIfAbsent(Integer.valueOf(context.getDisplayId()), new Function() { // from class: android.service.notification.StatusBarNotification$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Context lambda$getPackageContext$0;
-                    lambda$getPackageContext$0 = StatusBarNotification.this.lambda$getPackageContext$0(context, (Integer) obj);
-                    return lambda$getPackageContext$0;
+                    return this.f$0.lambda$getPackageContext$0(context, (Integer) obj);
                 }
             });
         }
@@ -374,18 +372,18 @@ public class StatusBarNotification implements Parcelable {
     }
 
     public LogMaker getLogMaker() {
-        LogMaker addTaggedData = new LogMaker(0).setPackageName(getPackageName()).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_ID, Integer.valueOf(getId())).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_TAG, getTag()).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CHANNEL_ID, getChannelIdLogTag()).addTaggedData(946, getGroupLogTag()).addTaggedData(947, Integer.valueOf(getNotification().isGroupSummary() ? 1 : 0)).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CATEGORY, getNotification().category);
+        LogMaker logMakerAddTaggedData = new LogMaker(0).setPackageName(getPackageName()).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_ID, Integer.valueOf(getId())).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_TAG, getTag()).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CHANNEL_ID, getChannelIdLogTag()).addTaggedData(946, getGroupLogTag()).addTaggedData(947, Integer.valueOf(getNotification().isGroupSummary() ? 1 : 0)).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CATEGORY, getNotification().category);
         if (getNotification().extras != null) {
             String string = getNotification().extras.getString(Notification.EXTRA_TEMPLATE);
             if (string != null && !string.isEmpty()) {
-                addTaggedData.addTaggedData(1745, Integer.valueOf(string.hashCode()));
+                logMakerAddTaggedData.addTaggedData(1745, Integer.valueOf(string.hashCode()));
             }
             ArrayList parcelableArrayList = getNotification().extras.getParcelableArrayList(Notification.EXTRA_PEOPLE_LIST, Person.class);
             if (parcelableArrayList != null && !parcelableArrayList.isEmpty()) {
-                addTaggedData.addTaggedData(1744, Integer.valueOf(parcelableArrayList.size()));
+                logMakerAddTaggedData.addTaggedData(1744, Integer.valueOf(parcelableArrayList.size()));
             }
         }
-        return addTaggedData;
+        return logMakerAddTaggedData;
     }
 
     public String getShortcutId() {

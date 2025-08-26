@@ -21,7 +21,6 @@ import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
     public final AnnotatedString annotatedString;
@@ -50,7 +49,7 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
             public final Object invoke() {
                 Object obj;
                 ParagraphIntrinsics paragraphIntrinsics;
-                ArrayList arrayList2 = (ArrayList) MultiParagraphIntrinsics.this.infoList;
+                ArrayList arrayList2 = (ArrayList) this.this$0.infoList;
                 if (arrayList2.isEmpty()) {
                     obj = null;
                 } else {
@@ -87,7 +86,7 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
             public final Object invoke() {
                 Object obj;
                 ParagraphIntrinsics paragraphIntrinsics;
-                ArrayList arrayList2 = (ArrayList) MultiParagraphIntrinsics.this.infoList;
+                ArrayList arrayList2 = (ArrayList) this.this$0.infoList;
                 if (arrayList2.isEmpty()) {
                     obj = null;
                 } else {
@@ -118,23 +117,23 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
         ParagraphStyle paragraphStyle = textStyle2.paragraphStyle;
         AnnotatedString annotatedString3 = AnnotatedStringKt.EmptyAnnotatedString;
         List list3 = annotatedString2.paragraphStylesOrNull;
-        List list4 = (list3 == null || (list4 = CollectionsKt___CollectionsKt.sortedWith(list3, new Comparator() { // from class: androidx.compose.ui.text.AnnotatedStringKt$normalizedParagraphStyles$$inlined$sortedBy$1
+        List listSortedWith = (list3 == null || (listSortedWith = CollectionsKt___CollectionsKt.sortedWith(list3, new Comparator() { // from class: androidx.compose.ui.text.AnnotatedStringKt$normalizedParagraphStyles$$inlined$sortedBy$1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
                 return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((AnnotatedString.Range) obj).start), Integer.valueOf(((AnnotatedString.Range) obj2).start));
             }
-        })) == null) ? EmptyList.INSTANCE : list4;
+        })) == null) ? EmptyList.INSTANCE : listSortedWith;
         ArrayList arrayList2 = new ArrayList();
         ArrayDeque arrayDeque = new ArrayDeque();
-        int size = list4.size();
+        int size = listSortedWith.size();
         int i4 = 0;
         int i5 = 0;
         int i6 = 0;
         while (i5 < size) {
-            AnnotatedString.Range range = (AnnotatedString.Range) list4.get(i5);
-            AnnotatedString.Range copy$default = AnnotatedString.Range.copy$default(range, paragraphStyle.merge((ParagraphStyle) range.item), i4, 14);
+            AnnotatedString.Range range = (AnnotatedString.Range) listSortedWith.get(i5);
+            AnnotatedString.Range rangeCopy$default = AnnotatedString.Range.copy$default(range, paragraphStyle.merge((ParagraphStyle) range.item), i4, 14);
             while (true) {
-                i3 = copy$default.start;
+                i3 = rangeCopy$default.start;
                 if (i6 >= i3 || arrayDeque.isEmpty()) {
                     break;
                 }
@@ -146,9 +145,11 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
                 } else {
                     arrayList2.add(new AnnotatedString.Range(obj, i6, i7));
                     while (true) {
-                        boolean isEmpty = arrayDeque.isEmpty();
+                        boolean zIsEmpty = arrayDeque.isEmpty();
                         i3 = range2.end;
-                        if (!isEmpty && i3 == ((AnnotatedString.Range) arrayDeque.last()).end) {
+                        if (zIsEmpty || i3 != ((AnnotatedString.Range) arrayDeque.last()).end) {
+                            break;
+                        } else {
                             arrayDeque.removeLast();
                         }
                     }
@@ -160,8 +161,8 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
                 i6 = i3;
             }
             AnnotatedString.Range range3 = (AnnotatedString.Range) arrayDeque.lastOrNull();
-            Object obj2 = copy$default.item;
-            int i8 = copy$default.end;
+            Object obj2 = rangeCopy$default.item;
+            int i8 = rangeCopy$default.end;
             if (range3 != null) {
                 int i9 = range3.end;
                 Object obj3 = range3.item;
@@ -169,25 +170,25 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
                 if (i10 == i3 && i9 == i8) {
                     arrayDeque.removeLast();
                     arrayDeque.addLast(new AnnotatedString.Range(((ParagraphStyle) obj3).merge((ParagraphStyle) obj2), i3, i8));
-                    list2 = list4;
+                    list2 = listSortedWith;
                 } else if (i10 == i9) {
-                    list2 = list4;
+                    list2 = listSortedWith;
                     arrayList2.add(new AnnotatedString.Range(obj3, i10, i9));
                     arrayDeque.removeLast();
                     arrayDeque.addLast(new AnnotatedString.Range(obj2, i3, i8));
                 } else {
-                    list2 = list4;
+                    list2 = listSortedWith;
                     if (i9 < i8) {
                         throw new IllegalArgumentException();
                     }
                     arrayDeque.addLast(new AnnotatedString.Range(((ParagraphStyle) obj3).merge((ParagraphStyle) obj2), i3, i8));
                 }
             } else {
-                list2 = list4;
+                list2 = listSortedWith;
                 arrayDeque.addLast(new AnnotatedString.Range(obj2, i3, i8));
             }
             i5++;
-            list4 = list2;
+            listSortedWith = list2;
             i4 = 0;
         }
         while (i6 <= annotatedString2.text.length() && !arrayDeque.isEmpty()) {
@@ -216,9 +217,9 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
             AnnotatedString.Range range5 = (AnnotatedString.Range) arrayList2.get(i12);
             int i13 = range5.start;
             int i14 = range5.end;
-            String substring = i13 != i14 ? annotatedString2.text.substring(i13, i14) : "";
+            String strSubstring = i13 != i14 ? annotatedString2.text.substring(i13, i14) : "";
             List localAnnotations = AnnotatedStringKt.getLocalAnnotations(annotatedString2, i13, i14, AnnotatedStringKt$substringWithoutParagraphStyles$1.INSTANCE);
-            AnnotatedString annotatedString4 = new AnnotatedString(substring, (List<? extends AnnotatedString.Range<? extends AnnotatedString.Annotation>>) (localAnnotations == null ? EmptyList.INSTANCE : localAnnotations));
+            AnnotatedString annotatedString4 = new AnnotatedString(strSubstring, (List<? extends AnnotatedString.Range<? extends AnnotatedString.Annotation>>) (localAnnotations == null ? EmptyList.INSTANCE : localAnnotations));
             ParagraphStyle paragraphStyle2 = (ParagraphStyle) range5.item;
             int i15 = paragraphStyle2.textDirection;
             TextDirection.Companion.getClass();
@@ -230,19 +231,19 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
             }
             String str = annotatedString4.text;
             TextStyle textStyle3 = new TextStyle(textStyle2.spanStyle, textStyle2.paragraphStyle.merge(paragraphStyle2));
-            List list5 = annotatedString4.annotations;
-            List list6 = list5 == null ? EmptyList.INSTANCE : list5;
-            List list7 = this.placeholders;
-            ArrayList arrayList4 = new ArrayList(list7.size());
-            int size3 = list7.size();
+            List list4 = annotatedString4.annotations;
+            List list5 = list4 == null ? EmptyList.INSTANCE : list4;
+            List list6 = this.placeholders;
+            ArrayList arrayList4 = new ArrayList(list6.size());
+            int size3 = list6.size();
             int i16 = 0;
             while (true) {
                 i2 = range5.start;
                 if (i16 < size3) {
-                    AnnotatedString.Range range6 = (AnnotatedString.Range) list7.get(i16);
+                    AnnotatedString.Range range6 = (AnnotatedString.Range) list6.get(i16);
                     ParagraphStyle paragraphStyle3 = paragraphStyle;
                     int i17 = range6.start;
-                    List list8 = list7;
+                    List list7 = list6;
                     int i18 = range6.end;
                     if (AnnotatedStringKt.intersect(i2, i14, i17, i18)) {
                         int i19 = range6.start;
@@ -252,11 +253,11 @@ public final class MultiParagraphIntrinsics implements ParagraphIntrinsics {
                         arrayList4.add(new AnnotatedString.Range(range6.item, i19 - i2, i18 - i2));
                     }
                     i16++;
-                    list7 = list8;
+                    list6 = list7;
                     paragraphStyle = paragraphStyle3;
                 }
             }
-            arrayList3.add(new ParagraphIntrinsicInfo(new AndroidParagraphIntrinsics(str, textStyle3, list6, arrayList4, resolver, density), i2, i14));
+            arrayList3.add(new ParagraphIntrinsicInfo(new AndroidParagraphIntrinsics(str, textStyle3, list5, arrayList4, resolver, density), i2, i14));
             i12++;
             annotatedString2 = annotatedString;
             textStyle2 = textStyle;

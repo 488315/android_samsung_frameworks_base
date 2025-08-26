@@ -1,6 +1,7 @@
 package com.android.systemui.power.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -37,7 +38,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChargerFlipCoverView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -214,9 +214,9 @@ public final class ChargerFlipCoverView extends FrameLayout {
         chargerFlipCoverView.getClass();
         SemBlurInfo.Builder backgroundColor = new SemBlurInfo.Builder(0).setBackgroundColor(chargerFlipCoverView.backgroundColor);
         ChargerAnimationUtils.INSTANCE.getClass();
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(32L, true);
-        Slog.d("PowerUI.ChargerAnimationUtil", "isCoverWhiteWallpaper in TOP : " + isWhiteKeyguardWallpaper);
-        return backgroundColor.setColorCurvePreset(!isWhiteKeyguardWallpaper ? 112 : 123).setBackgroundCornerRadius(chargerFlipCoverView.getResources().getDimension(R.dimen.charging_flip_cover_card_radius)).setRadius(i).build();
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(32L, true);
+        Slog.d("PowerUI.ChargerAnimationUtil", "isCoverWhiteWallpaper in TOP : " + zIsWhiteKeyguardWallpaper);
+        return backgroundColor.setColorCurvePreset(!zIsWhiteKeyguardWallpaper ? 112 : 123).setBackgroundCornerRadius(chargerFlipCoverView.getResources().getDimension(R.dimen.charging_flip_cover_card_radius)).setRadius(i).build();
     }
 
     public final LottieAnimationView getBatteryProgressbar() {
@@ -228,15 +228,15 @@ public final class ChargerFlipCoverView extends FrameLayout {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         post(new Runnable() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$setScalePivot$1
             @Override // java.lang.Runnable
             public final void run() {
-                ChargerFlipCoverView chargerFlipCoverView = ChargerFlipCoverView.this;
+                ChargerFlipCoverView chargerFlipCoverView = this.this$0;
                 int i = ChargerFlipCoverView.$r8$clinit;
-                chargerFlipCoverView.getCoverCard().setPivotX(ChargerFlipCoverView.this.currentLayoutDirection == 1 ? 0.0f : r1.getCoverCard().getMeasuredWidth());
-                ChargerFlipCoverView.this.getCoverCard().setPivotY(0.0f);
+                chargerFlipCoverView.getCoverCard().setPivotX(this.this$0.currentLayoutDirection == 1 ? 0.0f : r1.getCoverCard().getMeasuredWidth());
+                this.this$0.getCoverCard().setPivotY(0.0f);
             }
         });
         TextView textView = (TextView) this.batteryLevel$delegate.getValue();
@@ -244,9 +244,9 @@ public final class ChargerFlipCoverView extends FrameLayout {
         textView.setText(String.format("%d", Arrays.copyOf(new Object[]{Integer.valueOf(this.currentBatteryLevel)}, 1)));
         int color = getContext().getColor(R.color.charging_vi_now_bar_battery_main_dark_bg_color);
         ChargerAnimationUtils.INSTANCE.getClass();
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(32L, true);
-        Slog.d("PowerUI.ChargerAnimationUtil", "isCoverWhiteWallpaper in TOP : " + isWhiteKeyguardWallpaper);
-        if (isWhiteKeyguardWallpaper) {
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(32L, true);
+        Slog.d("PowerUI.ChargerAnimationUtil", "isCoverWhiteWallpaper in TOP : " + zIsWhiteKeyguardWallpaper);
+        if (zIsWhiteKeyguardWallpaper) {
             this.backgroundColor = getContext().getColor(R.color.charging_vi_flip_cover_background_bg_color);
             color = getContext().getColor(R.color.charging_vi_now_bar_battery_main_color);
         }
@@ -264,14 +264,14 @@ public final class ChargerFlipCoverView extends FrameLayout {
             }
         });
         AnimatorSet animatorSet = this.chargerAnimationSet;
-        final ObjectAnimator ofFloat = ObjectAnimator.ofFloat(getCoverCard(), "alpha", 0.0f, 1.0f);
-        ofFloat.m894setDuration(100L);
-        ofFloat.mInterpolator = new LinearInterpolator();
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeInAnimations$1$1
+        final ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(getCoverCard(), "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat.m896setDuration(100L);
+        objectAnimatorOfFloat.mInterpolator = new LinearInterpolator();
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeInAnimations$1$1
             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
                 int i2 = ChargerFlipCoverView.$r8$clinit;
-                ChargerFlipCoverView chargerFlipCoverView = ChargerFlipCoverView.this;
+                ChargerFlipCoverView chargerFlipCoverView = this.this$0;
                 chargerFlipCoverView.getClass();
                 SpringAnimation springAnimation = new SpringAnimation(chargerFlipCoverView.getCoverCard(), DynamicAnimation.SCALE_X);
                 springAnimation.mSpring = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(200.0f, 0.71f);
@@ -290,58 +290,58 @@ public final class ChargerFlipCoverView extends FrameLayout {
                 springAnimation3.animateToFinalPosition(0.0f);
             }
         });
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeInAnimations$1$2
+        objectAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeInAnimations$1$2
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                int floatValue = (int) (((Float) ObjectAnimator.this.getAnimatedValue()).floatValue() * 150.0f);
+                int iFloatValue = (int) (((Float) objectAnimatorOfFloat.getAnimatedValue()).floatValue() * 150.0f);
                 int i2 = ChargerFlipCoverView.$r8$clinit;
                 ChargerFlipCoverView chargerFlipCoverView = this;
-                ((ImageView) chargerFlipCoverView.backgroundBlur$delegate.getValue()).semSetBlurInfo(ChargerFlipCoverView.access$getBackgroundBlur(chargerFlipCoverView, floatValue));
+                ((ImageView) chargerFlipCoverView.backgroundBlur$delegate.getValue()).semSetBlurInfo(ChargerFlipCoverView.access$getBackgroundBlur(chargerFlipCoverView, iFloatValue));
             }
         });
-        animatorSet.play(ofFloat);
+        animatorSet.play(objectAnimatorOfFloat);
         float dimension = getResources().getDimension(R.dimen.charging_flip_cover_card_width);
         int i2 = this.currentLayoutDirection;
         float f = i2 == 0 ? -dimension : dimension;
         float progressbarComputeWidth = ChargerAnimationUtils.getProgressbarComputeWidth(dimension, i2, this.currentBatteryLevel) + f;
         AnimatorSet animatorSet2 = this.chargerAnimationSet;
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(getBatteryProgressbar(), "translationX", f, progressbarComputeWidth);
-        ofFloat2.m894setDuration(1000L);
-        ofFloat2.mInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
-        animatorSet2.play(ofFloat2);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(getBatteryProgressbar(), "translationX", f, progressbarComputeWidth);
+        objectAnimatorOfFloat2.m896setDuration(1000L);
+        objectAnimatorOfFloat2.mInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
+        animatorSet2.play(objectAnimatorOfFloat2);
         AnimatorSet animatorSet3 = this.chargerAnimationSet;
-        final ValueAnimator ofFloat3 = ValueAnimator.ofFloat(10.0f, 0.0f);
-        ofFloat3.setDuration(1000L);
-        ofFloat3.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-        ofFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addProgressbarWaveBlurAnimation$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(10.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(1000L);
+        valueAnimatorOfFloat.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addProgressbarWaveBlurAnimation$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
                 int i3 = ChargerFlipCoverView.$r8$clinit;
-                LottieAnimationView batteryProgressbar2 = ChargerFlipCoverView.this.getBatteryProgressbar();
+                LottieAnimationView batteryProgressbar2 = this.this$0.getBatteryProgressbar();
                 ChargerAnimationConstants.INSTANCE.getClass();
                 KeyPath keyPath = ChargerAnimationConstants.WAVE_KEY_PATH;
                 Float f2 = LottieProperty.BLUR_RADIUS;
-                final ValueAnimator valueAnimator = ofFloat3;
+                final ValueAnimator valueAnimator = valueAnimatorOfFloat;
                 batteryProgressbar2.addValueCallback(keyPath, (KeyPath) f2, new SimpleLottieValueCallback() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addProgressbarWaveBlurAnimation$1$1.1
                     @Override // com.airbnb.lottie.value.SimpleLottieValueCallback
                     public final Object getValue() {
-                        return (Float) ValueAnimator.this.getAnimatedValue();
+                        return (Float) valueAnimator.getAnimatedValue();
                     }
                 });
             }
         });
-        animatorSet3.play(ofFloat3);
+        animatorSet3.play(valueAnimatorOfFloat);
         AnimatorSet animatorSet4 = this.chargerAnimationSet;
-        final ValueAnimator ofFloat4 = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat4.setDuration(1700L);
-        ofFloat4.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-        ofFloat4.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addBatteryLevelShadowAnimation$1$1
+        final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat2.setDuration(1700L);
+        valueAnimatorOfFloat2.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+        valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addBatteryLevelShadowAnimation$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
                 ChargerAnimationUtils chargerAnimationUtils = ChargerAnimationUtils.INSTANCE;
-                float floatValue = ((Float) ValueAnimator.this.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue();
                 chargerAnimationUtils.getClass();
-                float f2 = floatValue * 8.0f;
+                float f2 = fFloatValue * 8.0f;
                 float f3 = 8.0f + f2;
                 float f4 = f2 + 0.0f;
                 float[] fArr = {f3, f4, f4};
@@ -350,56 +350,56 @@ public final class ChargerFlipCoverView extends FrameLayout {
                 ((TextView) chargerFlipCoverView.batteryLevel$delegate.getValue()).setShadowLayer(fArr[0], fArr[1], fArr[2], chargerFlipCoverView.getContext().getColor(R.color.charging_vi_flip_cover_battery_shadow_color));
             }
         });
-        ofFloat4.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addBatteryLevelShadowAnimation$1$2
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addBatteryLevelShadowAnimation$1$2
             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 int i3 = ChargerFlipCoverView.$r8$clinit;
-                ChargerFlipCoverView.this.getCoverCard().setPivotY(r1.getCoverCard().getMeasuredHeight() / 2.0f);
+                this.this$0.getCoverCard().setPivotY(r1.getCoverCard().getMeasuredHeight() / 2.0f);
             }
         });
-        animatorSet4.play(ofFloat4);
+        animatorSet4.play(valueAnimatorOfFloat2);
         AnimatorSet animatorSet5 = this.chargerAnimationSet;
-        final ValueAnimator ofFloat5 = ValueAnimator.ofFloat(1.0f, 0.5f);
-        ofFloat5.setStartDelay(3200L);
-        ofFloat5.setDuration(200L);
-        ofFloat5.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
-        ofFloat5.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addScaleDownAnimation$1$1
+        final ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.5f);
+        valueAnimatorOfFloat3.setStartDelay(3200L);
+        valueAnimatorOfFloat3.setDuration(200L);
+        valueAnimatorOfFloat3.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
+        valueAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addScaleDownAnimation$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
                 int i3 = ChargerFlipCoverView.$r8$clinit;
-                ChargerFlipCoverView chargerFlipCoverView = ChargerFlipCoverView.this;
+                ChargerFlipCoverView chargerFlipCoverView = this.this$0;
                 CardView coverCard = chargerFlipCoverView.getCoverCard();
-                ValueAnimator valueAnimator = ofFloat5;
+                ValueAnimator valueAnimator = valueAnimatorOfFloat3;
                 coverCard.setScaleX(((Float) valueAnimator.getAnimatedValue()).floatValue());
                 chargerFlipCoverView.getCoverCard().setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        animatorSet5.play(ofFloat5);
+        animatorSet5.play(valueAnimatorOfFloat3);
         AnimatorSet animatorSet6 = this.chargerAnimationSet;
-        final ObjectAnimator ofFloat6 = ObjectAnimator.ofFloat(getCoverCard(), "alpha", 1.0f, 0.0f);
-        ofFloat6.setStartDelay(3200L);
-        ofFloat6.m894setDuration(200L);
-        ofFloat6.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
-        ofFloat6.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeOutAnimation$1$1
+        final ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(getCoverCard(), "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat3.setStartDelay(3200L);
+        objectAnimatorOfFloat3.m896setDuration(200L);
+        objectAnimatorOfFloat3.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
+        objectAnimatorOfFloat3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeOutAnimation$1$1
             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 Slog.i("PowerUI.ChargerFlipCoverView", "FadeOutAnimationEnd, call onChargerAnimationEnd()");
-                ChargerAnimationListener chargerAnimationListener = ChargerFlipCoverView.this.animationListener;
+                ChargerAnimationListener chargerAnimationListener = this.this$0.animationListener;
                 if (chargerAnimationListener != null) {
                     ((SecPowerUI) chargerAnimationListener).onChargerAnimationEnd();
                 }
             }
         });
-        ofFloat6.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeOutAnimation$1$2
+        objectAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerFlipCoverView$addFadeOutAnimation$1$2
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                int floatValue = (int) (((Float) ObjectAnimator.this.getAnimatedValue()).floatValue() * 150.0f);
+                int iFloatValue = (int) (((Float) objectAnimatorOfFloat3.getAnimatedValue()).floatValue() * 150.0f);
                 int i3 = ChargerFlipCoverView.$r8$clinit;
                 ChargerFlipCoverView chargerFlipCoverView = this;
-                ((ImageView) chargerFlipCoverView.backgroundBlur$delegate.getValue()).semSetBlurInfo(ChargerFlipCoverView.access$getBackgroundBlur(chargerFlipCoverView, floatValue));
+                ((ImageView) chargerFlipCoverView.backgroundBlur$delegate.getValue()).semSetBlurInfo(ChargerFlipCoverView.access$getBackgroundBlur(chargerFlipCoverView, iFloatValue));
             }
         });
-        animatorSet6.play(ofFloat6);
+        animatorSet6.play(objectAnimatorOfFloat3);
         getBatteryProgressbar().playAnimation();
         this.chargerAnimationSet.start();
         Log.d("PowerUI.ChargerFlipCoverView", "Animation Started");

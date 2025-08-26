@@ -3,6 +3,7 @@ package com.samsung.android.sdk.scs.ai.visual.c2pa;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +20,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class C2paManifestList {
     public static final Companion Companion = new Companion(null);
@@ -30,7 +30,6 @@ public final class C2paManifestList {
     private final String activeManifest;
     private final Map<String, C2paManifest> manifests;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,7 +44,7 @@ public final class C2paManifestList {
         this.manifests = map;
     }
 
-    private final boolean checkInvalid(List<ValidationStatus> list) {
+    private final boolean checkInvalid(List<ValidationStatus> list) throws IOException {
         List<ValidationStatus> list2 = list;
         if (list2 == null || list2.isEmpty()) {
             return false;
@@ -53,7 +52,7 @@ public final class C2paManifestList {
         return C2paError.Companion.checkInvalid(CollectionsKt___CollectionsKt.joinToString$default(list, "::", null, null, new Function1() { // from class: com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList$checkInvalid$concatErrorCode$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke, reason: merged with bridge method [inline-methods] */
-            public final CharSequence mo779invoke(ValidationStatus validationStatus) {
+            public final CharSequence mo781invoke(ValidationStatus validationStatus) {
                 return String.valueOf(validationStatus.getCode());
             }
         }, 30));
@@ -93,24 +92,24 @@ public final class C2paManifestList {
     }
 
     private final String getRootParentManifestKey() {
-        List<Ingredients> list;
+        List<Ingredients> ingredients;
         Ingredients next;
-        String str = this.activeManifest;
+        String activeManifest = this.activeManifest;
         while (true) {
             for (boolean z = true; z; z = false) {
-                C2paManifest c2paManifest = this.manifests.get(str);
-                if (c2paManifest == null || (list = c2paManifest.getIngredients()) == null) {
-                    list = EmptyList.INSTANCE;
+                C2paManifest c2paManifest = this.manifests.get(activeManifest);
+                if (c2paManifest == null || (ingredients = c2paManifest.getIngredients()) == null) {
+                    ingredients = EmptyList.INSTANCE;
                 }
-                Iterator<Ingredients> it = list.iterator();
+                Iterator<Ingredients> it = ingredients.iterator();
                 while (it.hasNext()) {
                     next = it.next();
                     if (!Intrinsics.areEqual(next.getRelationship(), PARENT_RELATION) || next.getActiveManifest() == null) {
                     }
                 }
             }
-            return str;
-            str = next.getActiveManifest();
+            return activeManifest;
+            activeManifest = next.getActiveManifest();
         }
     }
 
@@ -208,7 +207,7 @@ public final class C2paManifestList {
     }
 
     public final List<Action> getAllActions() {
-        List<Action> list;
+        List<Action> actions;
         for (Map.Entry<String, C2paManifest> entry : this.manifests.entrySet()) {
             String key = entry.getKey();
             List<C2paAssertion> assertions = entry.getValue().getAssertions();
@@ -218,18 +217,18 @@ public final class C2paManifestList {
             Iterator<C2paAssertion> it = assertions.iterator();
             while (it.hasNext()) {
                 Data data = it.next().getData();
-                if (data == null || (list = data.getActions()) == null) {
-                    list = EmptyList.INSTANCE;
+                if (data == null || (actions = data.getActions()) == null) {
+                    actions = EmptyList.INSTANCE;
                 }
-                Iterator<Action> it2 = list.iterator();
+                Iterator<Action> it2 = actions.iterator();
                 while (it2.hasNext()) {
                     it2.next().setActiveManifest(key);
                 }
             }
         }
-        Collection<C2paManifest> values = this.manifests.values();
+        Collection<C2paManifest> collectionValues = this.manifests.values();
         ArrayList arrayList = new ArrayList();
-        Iterator<T> it3 = values.iterator();
+        Iterator<T> it3 = collectionValues.iterator();
         while (it3.hasNext()) {
             CollectionsKt__MutableCollectionsKt.addAll(((C2paManifest) it3.next()).getActions(), arrayList);
         }
@@ -257,8 +256,8 @@ public final class C2paManifestList {
 
     public final Map<Exif, String> getExif(String str) {
         JsonArray assertionsJsonArray;
-        String str2;
-        Object obj;
+        String asString;
+        Object next;
         JsonElement jsonElement;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         C2paManifest manifest = getManifest(str);
@@ -269,9 +268,9 @@ public final class C2paManifestList {
                 if (Intrinsics.areEqual(asJsonObject.get("label").getAsString(), EXIF_LABEL)) {
                     JsonObject asJsonObject2 = asJsonObject.get("data").getAsJsonObject();
                     for (Exif exif : Exif.values()) {
-                        Set<String> keySet = asJsonObject2.keySet();
-                        if (!(keySet instanceof Collection) || !keySet.isEmpty()) {
-                            Iterator<T> it2 = keySet.iterator();
+                        Set<String> setKeySet = asJsonObject2.keySet();
+                        if (!(setKeySet instanceof Collection) || !setKeySet.isEmpty()) {
+                            Iterator<T> it2 = setKeySet.iterator();
                             while (true) {
                                 if (!it2.hasNext()) {
                                     break;
@@ -279,22 +278,22 @@ public final class C2paManifestList {
                                 if (StringsKt__StringsJVMKt.equals((String) it2.next(), exif.getStr(), true)) {
                                     Iterator<T> it3 = asJsonObject2.keySet().iterator();
                                     while (true) {
-                                        str2 = null;
+                                        asString = null;
                                         if (!it3.hasNext()) {
-                                            obj = null;
+                                            next = null;
                                             break;
                                         }
-                                        obj = it3.next();
-                                        if (StringsKt__StringsJVMKt.equals((String) obj, exif.getStr(), true)) {
+                                        next = it3.next();
+                                        if (StringsKt__StringsJVMKt.equals((String) next, exif.getStr(), true)) {
                                             break;
                                         }
                                     }
-                                    String str3 = (String) obj;
-                                    if (str3 != null && (jsonElement = asJsonObject2.get(str3)) != null) {
-                                        str2 = jsonElement.getAsString();
+                                    String str2 = (String) next;
+                                    if (str2 != null && (jsonElement = asJsonObject2.get(str2)) != null) {
+                                        asString = jsonElement.getAsString();
                                     }
-                                    if (str2 != null) {
-                                        linkedHashMap.put(exif, str2);
+                                    if (asString != null) {
+                                        linkedHashMap.put(exif, asString);
                                     }
                                 }
                             }
@@ -363,20 +362,20 @@ public final class C2paManifestList {
     }
 
     public final List<IngredientManifestInfo> getIngredientManifestInfo(String str) {
-        List<Ingredients> list;
+        List<Ingredients> ingredients;
         ArrayList arrayList = new ArrayList();
         C2paManifest c2paManifest = this.manifests.get(str);
-        if (c2paManifest == null || (list = c2paManifest.getIngredients()) == null) {
-            list = EmptyList.INSTANCE;
+        if (c2paManifest == null || (ingredients = c2paManifest.getIngredients()) == null) {
+            ingredients = EmptyList.INSTANCE;
         }
-        for (Ingredients ingredients : list) {
-            String activeManifest = ingredients.getActiveManifest();
-            boolean areEqual = Intrinsics.areEqual(ingredients.getRelationship(), PARENT_RELATION);
+        for (Ingredients ingredients2 : ingredients) {
+            String activeManifest = ingredients2.getActiveManifest();
+            boolean zAreEqual = Intrinsics.areEqual(ingredients2.getRelationship(), PARENT_RELATION);
             if (activeManifest != null) {
-                if (areEqual) {
-                    arrayList.add(0, new IngredientManifestInfo(activeManifest, areEqual));
+                if (zAreEqual) {
+                    arrayList.add(0, new IngredientManifestInfo(activeManifest, zAreEqual));
                 } else {
-                    arrayList.add(new IngredientManifestInfo(activeManifest, areEqual));
+                    arrayList.add(new IngredientManifestInfo(activeManifest, zAreEqual));
                 }
             }
         }
@@ -406,18 +405,18 @@ public final class C2paManifestList {
 
     public final C2paManifestList getSingleTreeC2paManifestList(String str) {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        String str2 = str;
+        String manifestKey = str;
         while (true) {
-            C2paManifest manifest = getManifest(str2);
+            C2paManifest manifest = getManifest(manifestKey);
             if (manifest == null) {
                 break;
             }
-            linkedHashMap.put(str2, manifest);
-            List<IngredientManifestInfo> ingredientManifestInfo = getIngredientManifestInfo(str2);
+            linkedHashMap.put(manifestKey, manifest);
+            List<IngredientManifestInfo> ingredientManifestInfo = getIngredientManifestInfo(manifestKey);
             if (ingredientManifestInfo.size() != 1) {
                 break;
             }
-            str2 = ingredientManifestInfo.get(0).getManifestKey();
+            manifestKey = ingredientManifestInfo.get(0).getManifestKey();
         }
         return new C2paManifestList(str, linkedHashMap);
     }

@@ -97,10 +97,10 @@ public class SpringStopEngine {
         }
         double d2 = this.mStiffness;
         double d3 = this.mDamping;
-        int sqrt = (int) ((9.0d / ((Math.sqrt(d2 / this.mMass) * d) * 4.0d)) + 1.0d);
-        double d4 = d / sqrt;
+        int iSqrt = (int) ((9.0d / ((Math.sqrt(d2 / this.mMass) * d) * 4.0d)) + 1.0d);
+        double d4 = d / iSqrt;
         int i = 0;
-        while (i < sqrt) {
+        while (i < iSqrt) {
             float f = this.mPos;
             double d5 = this.mTargetPos;
             float f2 = this.mV;

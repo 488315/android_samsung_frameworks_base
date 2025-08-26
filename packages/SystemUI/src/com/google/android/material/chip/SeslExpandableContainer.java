@@ -1,6 +1,7 @@
 package com.google.android.material.chip;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SeslExpandableContainer extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -39,39 +39,39 @@ public class SeslExpandableContainer extends FrameLayout {
         if (this.mExpanded) {
             return 0;
         }
-        int i = 0;
-        for (int i2 = 0; i2 < this.mScrollingChipsContainer.getChildCount(); i2++) {
-            View childAt = this.mScrollingChipsContainer.getChildAt(i2);
+        int width = 0;
+        for (int i = 0; i < this.mScrollingChipsContainer.getChildCount(); i++) {
+            View childAt = this.mScrollingChipsContainer.getChildAt(i);
             if (childAt.getVisibility() == 0) {
                 if (childAt instanceof SeslChipGroup) {
                     SeslChipGroup seslChipGroup = (SeslChipGroup) childAt;
                     int paddingEnd = seslChipGroup.getPaddingEnd() + seslChipGroup.getPaddingStart();
                     int childCount = seslChipGroup.getChildCount();
                     if (childCount > 0) {
-                        for (int i3 = 0; i3 < childCount; i3++) {
-                            View childAt2 = seslChipGroup.getChildAt(i3);
+                        for (int i2 = 0; i2 < childCount; i2++) {
+                            View childAt2 = seslChipGroup.getChildAt(i2);
                             paddingEnd = (childAt2 instanceof SeslChip ? ((SeslChip) childAt2).chipDrawable.getIntrinsicWidth() : childAt2.getWidth()) + paddingEnd;
                         }
                         if (childCount > 1) {
                             paddingEnd += (childCount - 2) * seslChipGroup.chipSpacingHorizontal;
                         }
                     }
-                    i += paddingEnd;
+                    width += paddingEnd;
                 } else {
-                    i += childAt.getWidth();
+                    width += childAt.getWidth();
                 }
             }
         }
-        return i;
+        return width;
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    public final void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         refreshLayout();
     }
 
-    public final void refreshLayout() {
+    public final void refreshLayout() throws Resources.NotFoundException {
         setLayoutTransition(null);
         int i = 1;
         if (this.mExpanded) {
@@ -90,18 +90,18 @@ public class SeslExpandableContainer extends FrameLayout {
                 if (z) {
                     Collections.reverse(Arrays.asList(viewArr));
                 }
-                int i3 = 0;
-                for (int i4 = 0; i4 < childCount; i4++) {
-                    View view = viewArr[i4];
+                int height = 0;
+                for (int i3 = 0; i3 < childCount; i3++) {
+                    View view = viewArr[i3];
                     if (!this.mPaddingAllowed || view.getId() != this.mPaddingView.getId()) {
                         this.mScrollingChipsContainer.removeView(view);
                         addView(view, i);
-                        i3 += view.getHeight();
+                        height += view.getHeight();
                         i++;
                     }
                 }
                 this.mScrollView.setVisibility(8);
-                if (this.mExpansionButton.getVisibility() == 0 || i3 <= 0) {
+                if (this.mExpansionButton.getVisibility() == 0 || height <= 0) {
                     return;
                 }
                 this.mExpansionButton.setVisibility(0);
@@ -115,15 +115,15 @@ public class SeslExpandableContainer extends FrameLayout {
             int childCount2 = getChildCount();
             View[] viewArr2 = new View[childCount2];
             boolean z2 = this.mIsRtl;
-            for (int i5 = 0; i5 < getChildCount(); i5++) {
-                viewArr2[i5] = getChildAt(i5);
+            for (int i4 = 0; i4 < getChildCount(); i4++) {
+                viewArr2[i4] = getChildAt(i4);
             }
             if (z2) {
                 Collections.reverse(Arrays.asList(viewArr2));
             }
-            int i6 = 0;
-            for (int i7 = 0; i7 < childCount2; i7++) {
-                View view2 = viewArr2[i7];
+            int i5 = 0;
+            for (int i6 = 0; i6 < childCount2; i6++) {
+                View view2 = viewArr2[i6];
                 if (!this.mChipGroupInitialized && (view2 instanceof SeslChipGroup)) {
                     SeslChipGroup seslChipGroup = (SeslChipGroup) view2;
                     seslChipGroup.mChipMaxWidth = getWidth() - ((seslChipGroup.getPaddingEnd() + seslChipGroup.getPaddingStart()) + seslChipGroup.getResources().getDimensionPixelSize(R.dimen.expansion_button_size));
@@ -132,8 +132,8 @@ public class SeslExpandableContainer extends FrameLayout {
                 int id = view2.getId();
                 if (id != this.mScrollView.getId() && id != this.mExpansionButtonContainerId && id != this.mPaddingView.getId()) {
                     removeView(view2);
-                    this.mScrollingChipsContainer.addView(view2, i6);
-                    i6++;
+                    this.mScrollingChipsContainer.addView(view2, i5);
+                    i5++;
                 }
             }
             this.mScrollView.scrollTo(this.mScrollViewPos, 0);
@@ -152,14 +152,14 @@ public class SeslExpandableContainer extends FrameLayout {
                 }
                 this.mExpansionButton.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.material.chip.SeslExpandableContainer$$ExternalSyntheticLambda1
                     @Override // android.view.View.OnClickListener
-                    public final void onClick(View view) {
-                        final SeslExpandableContainer seslExpandableContainer = SeslExpandableContainer.this;
+                    public final void onClick(View view) throws Resources.NotFoundException {
+                        final SeslExpandableContainer seslExpandableContainer = this.f$0;
                         seslExpandableContainer.mExpanded = !seslExpandableContainer.mExpanded;
                         seslExpandableContainer.refreshLayout();
                         seslExpandableContainer.post(new Runnable() { // from class: com.google.android.material.chip.SeslExpandableContainer$$ExternalSyntheticLambda2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                SeslExpandableContainer seslExpandableContainer2 = SeslExpandableContainer.this;
+                                SeslExpandableContainer seslExpandableContainer2 = seslExpandableContainer;
                                 SeslExpansionButton seslExpansionButton = seslExpandableContainer2.mExpansionButton;
                                 seslExpansionButton.mExpanded = seslExpandableContainer2.mExpanded;
                                 seslExpansionButton.refreshDrawableState();
@@ -176,14 +176,14 @@ public class SeslExpandableContainer extends FrameLayout {
             }
             this.mExpansionButton.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.material.chip.SeslExpandableContainer$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    final SeslExpandableContainer seslExpandableContainer = SeslExpandableContainer.this;
+                public final void onClick(View view) throws Resources.NotFoundException {
+                    final SeslExpandableContainer seslExpandableContainer = this.f$0;
                     seslExpandableContainer.mExpanded = !seslExpandableContainer.mExpanded;
                     seslExpandableContainer.refreshLayout();
                     seslExpandableContainer.post(new Runnable() { // from class: com.google.android.material.chip.SeslExpandableContainer$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SeslExpandableContainer seslExpandableContainer2 = SeslExpandableContainer.this;
+                            SeslExpandableContainer seslExpandableContainer2 = seslExpandableContainer;
                             SeslExpansionButton seslExpansionButton = seslExpandableContainer2.mExpansionButton;
                             seslExpansionButton.mExpanded = seslExpandableContainer2.mExpanded;
                             seslExpansionButton.refreshDrawableState();
@@ -223,22 +223,22 @@ public class SeslExpandableContainer extends FrameLayout {
         this.mFloatChangeAllowed = true;
         boolean z = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == 1;
         this.mIsRtl = z;
-        View inflate = LayoutInflater.from(context).inflate(R.layout.sesl_expandable_container, (ViewGroup) null);
-        HorizontalScrollView horizontalScrollView = (HorizontalScrollView) inflate.findViewById(R.id.sesl_scroll_view);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.sesl_expandable_container, (ViewGroup) null);
+        HorizontalScrollView horizontalScrollView = (HorizontalScrollView) viewInflate.findViewById(R.id.sesl_scroll_view);
         this.mScrollView = horizontalScrollView;
         horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: com.google.android.material.chip.SeslExpandableContainer$$ExternalSyntheticLambda0
             @Override // android.view.View.OnScrollChangeListener
             public final void onScrollChange(View view, int i3, int i4, int i5, int i6) {
-                SeslExpandableContainer seslExpandableContainer = SeslExpandableContainer.this;
+                SeslExpandableContainer seslExpandableContainer = this.f$0;
                 int i7 = SeslExpandableContainer.$r8$clinit;
                 seslExpandableContainer.updateScrollExpansionButton();
             }
         });
-        this.mScrollingChipsContainer = (LinearLayout) inflate.findViewById(R.id.sesl_scrolling_chips_container);
-        this.mPaddingView = inflate.findViewById(R.id.sesl_padding_view);
-        addView(inflate);
-        int generateViewId = View.generateViewId();
-        this.mExpansionButtonContainerId = generateViewId;
+        this.mScrollingChipsContainer = (LinearLayout) viewInflate.findViewById(R.id.sesl_scrolling_chips_container);
+        this.mPaddingView = viewInflate.findViewById(R.id.sesl_padding_view);
+        addView(viewInflate);
+        int iGenerateViewId = View.generateViewId();
+        this.mExpansionButtonContainerId = iGenerateViewId;
         SeslExpansionButton seslExpansionButton = new SeslExpansionButton(context);
         this.mExpansionButton = seslExpansionButton;
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-2, -2);
@@ -254,7 +254,7 @@ public class SeslExpandableContainer extends FrameLayout {
         seslExpansionButton.setVisibility(8);
         RelativeLayout relativeLayout = new RelativeLayout(context);
         relativeLayout.setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
-        relativeLayout.setId(generateViewId);
+        relativeLayout.setId(iGenerateViewId);
         if (z) {
             relativeLayout.setGravity(3);
         } else {

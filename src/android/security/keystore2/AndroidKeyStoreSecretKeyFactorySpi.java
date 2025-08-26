@@ -48,18 +48,18 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
         int i;
         int i2;
         int i3;
+        int iFromKeymaster;
         int i4;
-        int i5;
+        boolean zIsSecureHardware;
+        int iFromKeymaster2;
         boolean z;
-        int i6;
+        boolean zIsSecureHardware2;
         boolean z2;
+        boolean zIsSecureHardware3;
+        boolean zIsSecureHardware4;
+        int i5;
+        int i6;
         boolean z3;
-        boolean z4;
-        boolean z5;
-        boolean z6;
-        int i7;
-        int i8;
-        boolean z7;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         ArrayList arrayList3 = new ArrayList();
@@ -72,17 +72,17 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
             date3 = null;
             i2 = 0;
             i3 = -1;
-            i4 = -1;
+            iFromKeymaster = -1;
+            i4 = 0;
+            zIsSecureHardware = false;
+            iFromKeymaster2 = 0;
+            z = true;
+            zIsSecureHardware2 = false;
+            z2 = false;
+            zIsSecureHardware3 = false;
+            zIsSecureHardware4 = false;
             i5 = 0;
-            z = false;
-            i6 = 0;
-            z2 = true;
-            z3 = false;
-            z4 = false;
-            z5 = false;
-            z6 = false;
-            i7 = 0;
-            i8 = -1;
+            i6 = -1;
         } catch (IllegalArgumentException e) {
             throw new ProviderException("Unsupported key characteristic", e);
         }
@@ -94,19 +94,19 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
                 case 268435960:
                     int hardwareAuthenticatorType = authorization.keyParameter.value.getHardwareAuthenticatorType();
                     if (KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel)) {
-                        i5 = hardwareAuthenticatorType;
+                        i4 = hardwareAuthenticatorType;
                         continue;
                     } else {
                         i2 = hardwareAuthenticatorType;
                     }
                 case 268436158:
-                    z = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
-                    int i9 = authorization.securityLevel;
-                    i4 = KeyProperties.Origin.fromKeymaster(authorization.keyParameter.value.getOrigin());
-                    i7 = i9;
+                    zIsSecureHardware = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
+                    int i7 = authorization.securityLevel;
+                    iFromKeymaster = KeyProperties.Origin.fromKeymaster(authorization.keyParameter.value.getOrigin());
+                    i5 = i7;
                     continue;
                 case 536870913:
-                    i6 |= KeyProperties.Purpose.fromKeymaster(authorization.keyParameter.value.getKeyPurpose());
+                    iFromKeymaster2 |= KeyProperties.Purpose.fromKeymaster(authorization.keyParameter.value.getKeyPurpose());
                     continue;
                 case 536870916:
                     arrayList2.add(KeyProperties.BlockMode.fromKeymaster(authorization.keyParameter.value.getBlockMode()));
@@ -138,7 +138,7 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
                     if (unsignedInt2 > 2147483647L) {
                         throw new ProviderException("Usage count of limited use key too long: " + unsignedInt2);
                     }
-                    i8 = (int) unsignedInt2;
+                    i6 = (int) unsignedInt2;
                     continue;
                 case 805306873:
                     long unsignedInt3 = KeyStore2ParameterUtils.getUnsignedInt(authorization);
@@ -157,19 +157,19 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
                     date3 = KeyStore2ParameterUtils.getDate(authorization);
                     continue;
                 case 1879048695:
-                    z2 = false;
+                    z = false;
                     continue;
                 case 1879048698:
-                    z3 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
+                    zIsSecureHardware2 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
                     continue;
                 case 1879048699:
-                    z5 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
+                    zIsSecureHardware3 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
                     continue;
                 case 1879048700:
-                    z6 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
+                    zIsSecureHardware4 = KeyStore2ParameterUtils.isSecureHardware(authorization.securityLevel);
                     continue;
                 case 1879048701:
-                    z4 = true;
+                    z2 = true;
                     continue;
                 default:
                     continue;
@@ -179,20 +179,20 @@ public class AndroidKeyStoreSecretKeyFactorySpi extends SecretKeyFactorySpi {
         if (i3 == -1) {
             throw new ProviderException("Key size not available");
         }
-        if (i4 == -1) {
+        if (iFromKeymaster == -1) {
             throw new ProviderException("Key origin not available");
         }
         String[] strArr = (String[]) arrayList4.toArray(new String[0]);
         String[] strArr2 = (String[]) arrayList5.toArray(new String[0]);
-        boolean z8 = z2 && i5 != 0 && i2 == 0;
+        boolean z4 = z && i4 != 0 && i2 == 0;
         String[] strArr3 = (String[]) arrayList.toArray(new String[0]);
         String[] strArr4 = (String[]) arrayList2.toArray(new String[0]);
-        if (i2 == 2 || i5 == 2) {
-            z7 = (arrayList3.isEmpty() || arrayList3.contains(getGateKeeperSecureUserId())) ? false : true;
+        if (i2 == 2 || i4 == 2) {
+            z3 = (arrayList3.isEmpty() || arrayList3.contains(getGateKeeperSecureUserId())) ? false : true;
         } else {
-            z7 = false;
+            z3 = false;
         }
-        return new KeyInfo(androidKeyStoreKey.getUserKeyDescriptor().alias, z, i4, i3, date, date2, date3, i6, strArr, strArr2, strArr3, strArr4, z2, (int) j, z8 ? i5 : i2, z8, z3, z4, z5, z7, z6, i7, i8);
+        return new KeyInfo(androidKeyStoreKey.getUserKeyDescriptor().alias, zIsSecureHardware, iFromKeymaster, i3, date, date2, date3, iFromKeymaster2, strArr, strArr2, strArr3, strArr4, z, (int) j, z4 ? i4 : i2, z4, zIsSecureHardware2, z2, zIsSecureHardware3, z3, zIsSecureHardware4, i5, i6);
     }
 
     private static BigInteger getGateKeeperSecureUserId() throws ProviderException {

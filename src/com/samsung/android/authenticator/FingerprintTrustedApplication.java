@@ -30,16 +30,16 @@ final class FingerprintTrustedApplication implements TrustedApplication {
             AuthenticatorLog.e(TAG, "command is invalid");
             return new byte[0];
         }
-        byte[] bArr2 = new byte[0];
+        byte[] wrappedObject = new byte[0];
         if (Arrays.equals(SET_AUTH_CHALLENGE_COMMAND, bArr)) {
             if (AuthenticatorService.setChallenge(bArr)) {
-                bArr2 = SUCCESS;
+                wrappedObject = SUCCESS;
             }
         } else if (Arrays.equals(GET_AUTH_RESULT_COMMAND, bArr)) {
-            bArr2 = AuthenticatorService.getWrappedObject(bArr);
+            wrappedObject = AuthenticatorService.getWrappedObject(bArr);
         }
         AuthenticatorLog.e(TAG, "command is not supported");
-        return bArr2;
+        return wrappedObject;
     }
 
     @Override // com.samsung.android.authenticator.TrustedApplication

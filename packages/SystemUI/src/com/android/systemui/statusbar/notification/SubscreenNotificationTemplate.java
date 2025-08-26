@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class SubscreenNotificationTemplate {
     public final Context mContext;
@@ -39,9 +38,9 @@ public abstract class SubscreenNotificationTemplate {
             if (actionMasked != 1) {
                 if (actionMasked == 2 && ((this.mIsClicked && Math.abs(this.mInitX - motionEvent.getX()) > SubscreenNotificationTemplate.this.mTouchSlop) || Math.abs(this.mInitY - motionEvent.getY()) > SubscreenNotificationTemplate.this.mTouchSlop)) {
                     Log.d("S.S.N.", "OUT OF TOUCH SLOP ");
-                    float abs = Math.abs(this.mInitY - motionEvent.getY());
+                    float fAbs = Math.abs(this.mInitY - motionEvent.getY());
                     SubscreenNotificationTemplate subscreenNotificationTemplate = SubscreenNotificationTemplate.this;
-                    if (abs > subscreenNotificationTemplate.mTouchSlop) {
+                    if (fAbs > subscreenNotificationTemplate.mTouchSlop) {
                         subscreenNotificationTemplate.mDeviceModel.dimissTopPopupNotification();
                     }
                     this.mIsClicked = false;
@@ -69,7 +68,7 @@ public abstract class SubscreenNotificationTemplate {
         this.mLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationTemplate$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubscreenNotificationTemplate subscreenNotificationTemplate = SubscreenNotificationTemplate.this;
+                SubscreenNotificationTemplate subscreenNotificationTemplate = this.f$0;
                 subscreenNotificationTemplate.getClass();
                 if (view.isAccessibilityFocused()) {
                     subscreenNotificationTemplate.performClick();

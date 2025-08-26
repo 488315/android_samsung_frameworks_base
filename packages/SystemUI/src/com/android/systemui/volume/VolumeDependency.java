@@ -54,7 +54,6 @@ import dagger.Lazy;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDependency implements VolumeDependencyBase {
     public static VolumeDependency sInstance;
@@ -65,7 +64,6 @@ public final class VolumeDependency implements VolumeDependencyBase {
     public static final Companion Companion = new Companion(null);
     public static final ArrayMap sProvider = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

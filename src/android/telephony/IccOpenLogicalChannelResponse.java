@@ -41,9 +41,9 @@ public class IccOpenLogicalChannelResponse implements Parcelable {
     private IccOpenLogicalChannelResponse(Parcel parcel) {
         this.mChannel = parcel.readInt();
         this.mStatus = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.mSelectResponse = bArr;
             parcel.readByteArray(bArr);
             return;

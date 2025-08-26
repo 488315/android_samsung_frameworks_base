@@ -150,7 +150,7 @@ public abstract class PermissionControllerService extends Service {
                 PermissionControllerService.this.onRevokeRuntimePermissions(arrayMap, z, i, str, new Consumer() { // from class: android.permission.PermissionControllerService$1$$ExternalSyntheticLambda2
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        PermissionControllerService.AnonymousClass1.lambda$revokeRuntimePermissions$1(AndroidFuture.this, (Map) obj);
+                        PermissionControllerService.AnonymousClass1.lambda$revokeRuntimePermissions$1(androidFuture, (Map) obj);
                     }
                 });
             } catch (PackageManager.NameNotFoundException e) {
@@ -183,7 +183,7 @@ public abstract class PermissionControllerService extends Service {
         }
 
         @Override // android.permission.IPermissionController
-        public void getRuntimePermissionBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) {
+        public void getRuntimePermissionBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws IOException {
             Preconditions.checkNotNull(userHandle);
             Preconditions.checkNotNull(parcelFileDescriptor);
             enforceSomePermissionsGrantedToCaller(Manifest.permission.GET_RUNTIME_PERMISSIONS);
@@ -204,7 +204,7 @@ public abstract class PermissionControllerService extends Service {
         }
 
         @Override // android.permission.IPermissionController
-        public void stageAndApplyRuntimePermissionsBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) {
+        public void stageAndApplyRuntimePermissionsBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws IOException {
             Preconditions.checkNotNull(userHandle);
             Preconditions.checkNotNull(parcelFileDescriptor);
             enforceSomePermissionsGrantedToCaller(Manifest.permission.GRANT_RUNTIME_PERMISSIONS, Manifest.permission.RESTORE_RUNTIME_PERMISSIONS);
@@ -252,7 +252,7 @@ public abstract class PermissionControllerService extends Service {
         }
 
         @Override // android.permission.IPermissionController
-        public void revokeRuntimePermission(String str, String str2) {
+        public void revokeRuntimePermission(String str, String str2) throws InterruptedException {
             Preconditions.checkNotNull(str, "packageName");
             Preconditions.checkNotNull(str2, "permissionName");
             enforceSomePermissionsGrantedToCaller(Manifest.permission.REVOKE_RUNTIME_PERMISSIONS);
@@ -310,7 +310,7 @@ public abstract class PermissionControllerService extends Service {
             PermissionControllerService.this.onGrantOrUpgradeDefaultRuntimePermissions(new Runnable() { // from class: android.permission.PermissionControllerService$1$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AndroidFuture.this.complete(true);
+                    androidFuture.complete(true);
                 }
             });
         }
@@ -323,7 +323,7 @@ public abstract class PermissionControllerService extends Service {
                 PermissionControllerService.this.onUpdateUserSensitivePermissionFlags(i, new Runnable() { // from class: android.permission.PermissionControllerService$1$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AndroidFuture.this.complete(null);
+                        androidFuture.complete(null);
                     }
                 });
             } catch (Exception e) {
@@ -380,7 +380,7 @@ public abstract class PermissionControllerService extends Service {
                 permissionControllerService.onGetGroupOfPlatformPermission(str, new Consumer() { // from class: android.permission.PermissionControllerService$1$$ExternalSyntheticLambda9
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        AndroidFuture.this.complete((String) obj);
+                        androidFuture.complete((String) obj);
                     }
                 });
             } catch (Throwable th) {
@@ -424,7 +424,7 @@ public abstract class PermissionControllerService extends Service {
                 PermissionControllerService.this.onRevokeSelfPermissionsOnKill(str, list, i, new Runnable() { // from class: android.permission.PermissionControllerService$1$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AndroidFuture.this.complete(null);
+                        androidFuture.complete(null);
                     }
                 });
             } catch (Throwable th) {

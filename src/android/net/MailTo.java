@@ -22,18 +22,18 @@ public class MailTo {
         if (!isMailTo(str)) {
             throw new ParseException("Not a mailto scheme");
         }
-        Uri parse = Uri.parse(str.substring(7));
+        Uri uri = Uri.parse(str.substring(7));
         MailTo mailTo = new MailTo();
-        String query = parse.getQuery();
+        String query = uri.getQuery();
         if (query != null) {
             for (String str2 : query.split("&")) {
-                String[] split = str2.split("=");
-                if (split.length != 0) {
-                    mailTo.mHeaders.put(Uri.decode(split[0]).toLowerCase(Locale.ROOT), split.length > 1 ? Uri.decode(split[1]) : null);
+                String[] strArrSplit = str2.split("=");
+                if (strArrSplit.length != 0) {
+                    mailTo.mHeaders.put(Uri.decode(strArrSplit[0]).toLowerCase(Locale.ROOT), strArrSplit.length > 1 ? Uri.decode(strArrSplit[1]) : null);
                 }
             }
         }
-        String path = parse.getPath();
+        String path = uri.getPath();
         if (path != null) {
             String to = mailTo.getTo();
             if (to != null) {

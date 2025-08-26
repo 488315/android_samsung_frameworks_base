@@ -3,13 +3,11 @@ package androidx.compose.ui.unit;
 import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DpOffset {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final long packedValue;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,22 +26,22 @@ public final class DpOffset {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ DpOffset m839boximpl(long j) {
+    public static final /* synthetic */ DpOffset m841boximpl(long j) {
         return new DpOffset(j);
     }
 
     /* renamed from: getX-D9Ej5fM, reason: not valid java name */
-    public static final float m840getXD9Ej5fM(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+    public static final float m842getXD9Ej5fM(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
         Dp.Companion companion = Dp.Companion;
-        return intBitsToFloat;
+        return fIntBitsToFloat;
     }
 
     /* renamed from: getY-D9Ej5fM, reason: not valid java name */
-    public static final float m841getYD9Ej5fM(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j & 4294967295L));
+    public static final float m843getYD9Ej5fM(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j & 4294967295L));
         Dp.Companion companion = Dp.Companion;
-        return intBitsToFloat;
+        return fIntBitsToFloat;
     }
 
     public final boolean equals(Object obj) {
@@ -62,6 +60,6 @@ public final class DpOffset {
         if (j == 9205357640488583168L) {
             return "DpOffset.Unspecified";
         }
-        return "(" + ((Object) Dp.m837toStringimpl(m840getXD9Ej5fM(j))) + ", " + ((Object) Dp.m837toStringimpl(m841getYD9Ej5fM(j))) + ')';
+        return "(" + ((Object) Dp.m839toStringimpl(m842getXD9Ej5fM(j))) + ", " + ((Object) Dp.m839toStringimpl(m843getYD9Ej5fM(j))) + ')';
     }
 }

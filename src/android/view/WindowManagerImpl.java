@@ -12,7 +12,6 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.WindowManagerImpl;
 import android.window.ITaskFpsCallback;
 import android.window.InputTransferToken;
 import android.window.TaskFpsCallback;
@@ -348,7 +347,7 @@ public class WindowManagerImpl implements WindowManager {
             this.mExecutor.execute(new Runnable() { // from class: android.view.WindowManagerImpl$OnFpsCallbackListenerProxy$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowManagerImpl.OnFpsCallbackListenerProxy.this.lambda$onFpsReported$0(f);
+                    this.f$0.lambda$onFpsReported$0(f);
                 }
             });
         }
@@ -385,12 +384,12 @@ public class WindowManagerImpl implements WindowManager {
 
     @Override // android.view.WindowManager
     public boolean replaceContentOnDisplayWithMirror(int i, Window window) {
-        View peekDecorView = window.peekDecorView();
-        if (peekDecorView == null) {
+        View viewPeekDecorView = window.peekDecorView();
+        if (viewPeekDecorView == null) {
             Log.e(TAG, "replaceContentOnDisplayWithMirror: Window's decorView was null.");
             return false;
         }
-        ViewRootImpl viewRootImpl = peekDecorView.getViewRootImpl();
+        ViewRootImpl viewRootImpl = viewPeekDecorView.getViewRootImpl();
         if (viewRootImpl == null) {
             Log.e(TAG, "replaceContentOnDisplayWithMirror: Window's viewRootImpl was null.");
             return false;

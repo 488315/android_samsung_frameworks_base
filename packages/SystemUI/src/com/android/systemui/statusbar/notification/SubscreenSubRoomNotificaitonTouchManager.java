@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenSubRoomNotificaitonTouchManager {
     public final VibrationEffect effect;
@@ -126,9 +125,9 @@ public class SubscreenSubRoomNotificaitonTouchManager {
                         return false;
                     }
                 }
-                View findChildViewUnder = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
-                if (findChildViewUnder != null) {
-                    RecyclerView.ViewHolder childViewHolder = recyclerView.getChildViewHolder(findChildViewUnder);
+                View viewFindChildViewUnder = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (viewFindChildViewUnder != null) {
+                    RecyclerView.ViewHolder childViewHolder = recyclerView.getChildViewHolder(viewFindChildViewUnder);
                     if (childViewHolder instanceof SubscreenParentDetailItemViewHolder) {
                         recyclerView.getParent().requestDisallowInterceptTouchEvent(true);
                     }

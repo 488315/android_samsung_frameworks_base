@@ -5,7 +5,6 @@ import com.google.zxing.BarcodeFormat;
 import java.util.Collection;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ITFWriter extends OneDimensionalCodeWriter {
     public static final int[] START_PATTERN = {1, 1, 1, 1};
@@ -23,20 +22,20 @@ public final class ITFWriter extends OneDimensionalCodeWriter {
         }
         OneDimensionalCodeWriter.checkNumeric(str);
         boolean[] zArr = new boolean[(length * 9) + 9];
-        int appendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, START_PATTERN, true);
+        int iAppendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, START_PATTERN, true);
         for (int i = 0; i < length; i += 2) {
-            int digit = Character.digit(str.charAt(i), 10);
-            int digit2 = Character.digit(str.charAt(i + 1), 10);
+            int iDigit = Character.digit(str.charAt(i), 10);
+            int iDigit2 = Character.digit(str.charAt(i + 1), 10);
             int[] iArr = new int[10];
             for (int i2 = 0; i2 < 5; i2++) {
                 int i3 = i2 * 2;
                 int[][] iArr2 = PATTERNS;
-                iArr[i3] = iArr2[digit][i2];
-                iArr[i3 + 1] = iArr2[digit2][i2];
+                iArr[i3] = iArr2[iDigit][i2];
+                iArr[i3 + 1] = iArr2[iDigit2][i2];
             }
-            appendPattern += OneDimensionalCodeWriter.appendPattern(zArr, appendPattern, iArr, true);
+            iAppendPattern += OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern, iArr, true);
         }
-        OneDimensionalCodeWriter.appendPattern(zArr, appendPattern, END_PATTERN, true);
+        OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern, END_PATTERN, true);
         return zArr;
     }
 

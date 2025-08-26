@@ -4,7 +4,6 @@ import androidx.compose.runtime.internal.Thread_jvmKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransparentObserverSnapshot extends Snapshot {
     public final boolean mergeParentObservers;
@@ -15,8 +14,8 @@ public final class TransparentObserverSnapshot extends Snapshot {
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public TransparentObserverSnapshot(Snapshot snapshot, Function1 function1, boolean z, boolean z2) {
-        super(0L, SnapshotIdSet.EMPTY, (DefaultConstructorMarker) null);
         Function1 readObserver;
+        super(0L, SnapshotIdSet.EMPTY, (DefaultConstructorMarker) null);
         Function1 function12 = SnapshotKt.emptyLambda;
         SnapshotIdSet.Companion.getClass();
         this.previousSnapshot = snapshot;
@@ -90,7 +89,7 @@ public final class TransparentObserverSnapshot extends Snapshot {
 
     @Override // androidx.compose.runtime.snapshots.Snapshot
     public final Snapshot takeNestedSnapshot(Function1 function1) {
-        Function1 mergedReadObserver = SnapshotKt.mergedReadObserver(function1, true, this.readObserver);
-        return !this.mergeParentObservers ? SnapshotKt.createTransparentSnapshotWithNoParentReadObserver(getCurrentSnapshot().takeNestedSnapshot(null), mergedReadObserver, true) : getCurrentSnapshot().takeNestedSnapshot(mergedReadObserver);
+        Function1 function1MergedReadObserver = SnapshotKt.mergedReadObserver(function1, true, this.readObserver);
+        return !this.mergeParentObservers ? SnapshotKt.createTransparentSnapshotWithNoParentReadObserver(getCurrentSnapshot().takeNestedSnapshot(null), function1MergedReadObserver, true) : getCurrentSnapshot().takeNestedSnapshot(function1MergedReadObserver);
     }
 }

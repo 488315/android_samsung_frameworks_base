@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LogUtils {
     public final Pattern bssidPattern;
@@ -22,21 +21,21 @@ public class LogUtils {
         }
         StringBuilder sb = new StringBuilder();
         Matcher matcher = this.bssidPattern.matcher(str);
-        int i = 0;
-        while (matcher.find(i)) {
+        int iEnd = 0;
+        while (matcher.find(iEnd)) {
             try {
-                int start = matcher.start();
-                int end = matcher.end();
-                sb.append((CharSequence) str, i, start + 9);
+                int iStart = matcher.start();
+                int iEnd2 = matcher.end();
+                sb.append((CharSequence) str, iEnd, iStart + 9);
                 sb.append("**");
-                sb.append((CharSequence) str, start + 11, start + 12);
+                sb.append((CharSequence) str, iStart + 11, iStart + 12);
                 sb.append("**");
-                sb.append((CharSequence) str, start + 14, end);
-                i = matcher.end();
+                sb.append((CharSequence) str, iStart + 14, iEnd2);
+                iEnd = matcher.end();
             } catch (ArrayIndexOutOfBoundsException unused) {
             }
         }
-        sb.append(str.substring(i));
+        sb.append(str.substring(iEnd));
         return sb.toString();
     }
 

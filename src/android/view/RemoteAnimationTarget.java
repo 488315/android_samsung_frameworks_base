@@ -37,6 +37,7 @@ public class RemoteAnimationTarget implements Parcelable {
     public final Rect clipRect;
     public final Rect contentInsets;
     private int displayId;
+    private WindowConfiguration embedActivityConfiguration;
     public boolean hasAnimatingParent;
     public boolean isNotInRecents;
     public final boolean isTranslucent;
@@ -138,6 +139,9 @@ public class RemoteAnimationTarget implements Parcelable {
         if (CoreRune.FW_PREDICTIVE_BACK_ANIM) {
             this.displayId = parcel.readInt();
         }
+        if (CoreRune.MW_EMBED_ACTIVITY_ANIMATION) {
+            this.embedActivityConfiguration = (WindowConfiguration) parcel.readTypedObject(WindowConfiguration.CREATOR);
+        }
     }
 
     public void setShowBackdrop(boolean z) {
@@ -168,6 +172,14 @@ public class RemoteAnimationTarget implements Parcelable {
         return this.displayId;
     }
 
+    public void setEmbedActivityConfiguration(WindowConfiguration windowConfiguration) {
+        this.embedActivityConfiguration = windowConfiguration;
+    }
+
+    public WindowConfiguration getEmbedActivityConfiguration() {
+        return this.embedActivityConfiguration;
+    }
+
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(this.taskId);
@@ -195,6 +207,9 @@ public class RemoteAnimationTarget implements Parcelable {
         parcel.writeInt(this.rotationChange);
         if (CoreRune.FW_PREDICTIVE_BACK_ANIM) {
             parcel.writeInt(this.displayId);
+        }
+        if (CoreRune.MW_EMBED_ACTIVITY_ANIMATION) {
+            parcel.writeTypedObject(this.embedActivityConfiguration, 0);
         }
     }
 
@@ -253,10 +268,15 @@ public class RemoteAnimationTarget implements Parcelable {
             printWriter.print("displayId=");
             printWriter.println(this.displayId);
         }
+        if (CoreRune.MW_EMBED_ACTIVITY_ANIMATION) {
+            printWriter.print(str);
+            printWriter.print("embedActivityConfig=");
+            printWriter.println(this.embedActivityConfiguration);
+        }
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.taskId);
         protoOutputStream.write(1120986464258L, this.mode);
         this.leash.dumpDebug(protoOutputStream, 1146756268035L);
@@ -274,7 +294,7 @@ public class RemoteAnimationTarget implements Parcelable {
             surfaceControl.dumpDebug(protoOutputStream, 1146756268043L);
         }
         this.startBounds.dumpDebug(protoOutputStream, 1146756268044L);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private static void printPoint(Point point, PrintWriter printWriter) {

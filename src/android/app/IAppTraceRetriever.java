@@ -46,9 +46,9 @@ public interface IAppTraceRetriever extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppTraceRetriever.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppTraceRetriever)) {
-                return (IAppTraceRetriever) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppTraceRetriever.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppTraceRetriever)) {
+                return (IAppTraceRetriever) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,11 +75,11 @@ public interface IAppTraceRetriever extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ParcelFileDescriptor traceFileDescriptor = getTraceFileDescriptor(readString, readInt, readInt2);
+                ParcelFileDescriptor traceFileDescriptor = getTraceFileDescriptor(string, i3, i4);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(traceFileDescriptor, 1);
                 return true;
@@ -105,19 +105,19 @@ public interface IAppTraceRetriever extends IInterface {
 
             @Override // android.app.IAppTraceRetriever
             public ParcelFileDescriptor getTraceFileDescriptor(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppTraceRetriever.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAppTraceRetriever.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

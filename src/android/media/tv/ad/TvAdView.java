@@ -10,7 +10,6 @@ import android.media.tv.TvInputManager;
 import android.media.tv.TvTrackInfo;
 import android.media.tv.TvView;
 import android.media.tv.ad.TvAdManager;
-import android.media.tv.ad.TvAdView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -98,7 +97,7 @@ public class TvAdView extends ViewGroup {
         this(context, attributeSet, 0);
     }
 
-    public TvAdView(Context context, AttributeSet attributeSet, int i) {
+    public TvAdView(Context context, AttributeSet attributeSet, int i) throws Throwable {
         super(context, attributeSet, i);
         this.mHandler = new Handler();
         this.mCallbackLock = new Object();
@@ -212,7 +211,7 @@ public class TvAdView extends ViewGroup {
     }
 
     @Override // android.view.View
-    public void onVisibilityChanged(View view, int i) {
+    public void onVisibilityChanged(View view, int i) throws Throwable {
         super.onVisibilityChanged(view, i);
         this.mSurfaceView.setVisibility(i);
         if (i == 0) {
@@ -222,7 +221,7 @@ public class TvAdView extends ViewGroup {
         }
     }
 
-    public void setZOrderMediaOverlay(boolean z) {
+    public void setZOrderMediaOverlay(boolean z) throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.setZOrderOnTop(false);
@@ -230,7 +229,7 @@ public class TvAdView extends ViewGroup {
         }
     }
 
-    public void setZOrderOnTop(boolean z) {
+    public void setZOrderOnTop(boolean z) throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.setZOrderMediaOverlay(false);
@@ -238,7 +237,7 @@ public class TvAdView extends ViewGroup {
         }
     }
 
-    private void resetSurfaceView() {
+    private void resetSurfaceView() throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.getHolder().removeCallback(this.mSurfaceHolderCallback);
@@ -247,7 +246,7 @@ public class TvAdView extends ViewGroup {
         this.mSurface = null;
         SurfaceView surfaceView2 = new SurfaceView(getContext(), this.mAttrs, this.mDefStyleAttr) { // from class: android.media.tv.ad.TvAdView.2
             @Override // android.view.SurfaceView
-            protected void updateSurface() {
+            protected void updateSurface() throws Throwable {
                 super.updateSurface();
                 TvAdView.this.relayoutSessionMediaView();
             }
@@ -261,11 +260,11 @@ public class TvAdView extends ViewGroup {
         addView(this.mSurfaceView);
     }
 
-    public void reset() {
+    public void reset() throws Throwable {
         resetInternal();
     }
 
-    private void resetInternal() {
+    private void resetInternal() throws Throwable {
         this.mSessionCallback = null;
         if (this.mSession != null) {
             setSessionSurface(null);
@@ -365,8 +364,8 @@ public class TvAdView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        KeyEvent copy = keyEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        KeyEvent keyEventCopy = keyEvent.copy();
+        return this.mSession.dispatchInputEvent(keyEventCopy, keyEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     public void prepareAdService(String str, String str2) {
@@ -538,7 +537,7 @@ public class TvAdView extends ViewGroup {
                     TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentVideoBounds$0();
+                            this.f$0.lambda$onRequestCurrentVideoBounds$0();
                         }
                     });
                 }
@@ -565,7 +564,7 @@ public class TvAdView extends ViewGroup {
                     TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentChannelUri$1();
+                            this.f$0.lambda$onRequestCurrentChannelUri$1();
                         }
                     });
                 }
@@ -592,7 +591,7 @@ public class TvAdView extends ViewGroup {
                     TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestTrackInfoList$2();
+                            this.f$0.lambda$onRequestTrackInfoList$2();
                         }
                     });
                 }
@@ -619,7 +618,7 @@ public class TvAdView extends ViewGroup {
                     TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentTvInputId$3();
+                            this.f$0.lambda$onRequestCurrentTvInputId$3();
                         }
                     });
                 }
@@ -646,7 +645,7 @@ public class TvAdView extends ViewGroup {
                     TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestSigning$4(str, str2, str3, bArr);
+                            this.f$0.lambda$onRequestSigning$4(str, str2, str3, bArr);
                         }
                     });
                 }

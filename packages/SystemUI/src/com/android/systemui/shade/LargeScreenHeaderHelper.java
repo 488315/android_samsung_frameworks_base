@@ -11,14 +11,12 @@ import com.android.systemui.statusbar.phone.IndicatorCutoutUtil;
 import com.android.systemui.util.DeviceState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LargeScreenHeaderHelper {
     public static final Companion Companion = new Companion(null);
     public final Context context;
     public final SecQSPanelResourcePicker qsPanelResourcePicker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +32,7 @@ public final class LargeScreenHeaderHelper {
     }
 
     public final int getLargeScreenHeaderHeight() {
-        if (DeviceState.isShowingPopOverStatusBar()) {
+        if (DeviceState.isShowingPopOverStatusBar(this.context)) {
             return SystemBarUtils.getStatusBarHeight(this.context);
         }
         return this.qsPanelResourcePicker.resourcePickHelper.getTargetPicker().getShadeHeaderHeight(this.context);
@@ -42,19 +40,19 @@ public final class LargeScreenHeaderHelper {
 
     public final int getTopMargin(WindowInsets windowInsets) {
         Rect boundingRectTop;
-        int i = 0;
-        if (DeviceState.isShowingPopOverStatusBar()) {
+        int iIntValue = 0;
+        if (DeviceState.isShowingPopOverStatusBar(this.context)) {
             return 0;
         }
         if (windowInsets != null) {
             IndicatorCutoutUtil.Companion.getClass();
             DisplayCutout displayCutout = IndicatorCutoutUtil.Companion.getHidWindowInsetsFromUDC(windowInsets).getDisplayCutout();
-            Integer valueOf = (displayCutout == null || (boundingRectTop = displayCutout.getBoundingRectTop()) == null) ? null : Integer.valueOf(boundingRectTop.bottom);
-            if (valueOf != null) {
-                i = valueOf.intValue();
+            Integer numValueOf = (displayCutout == null || (boundingRectTop = displayCutout.getBoundingRectTop()) == null) ? null : Integer.valueOf(boundingRectTop.bottom);
+            if (numValueOf != null) {
+                iIntValue = numValueOf.intValue();
             }
         }
-        return i == 0 ? this.context.getResources().getDimensionPixelSize(R.dimen.shade_header_no_cutout_top_margin) : i;
+        return iIntValue == 0 ? this.context.getResources().getDimensionPixelSize(R.dimen.shade_header_no_cutout_top_margin) : iIntValue;
     }
 
     public static final int getLargeScreenHeaderHeight(Context context) {

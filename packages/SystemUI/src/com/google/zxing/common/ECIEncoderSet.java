@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ECIEncoderSet {
     public static final List ENCODERS = new ArrayList();
@@ -41,8 +40,8 @@ public final class ECIEncoderSet {
                 Object obj = arrayList.get(i4);
                 i4++;
                 CharsetEncoder charsetEncoder = (CharsetEncoder) obj;
-                char charAt = str.charAt(i3);
-                if (charAt == i || charsetEncoder.canEncode(charAt)) {
+                char cCharAt = str.charAt(i3);
+                if (cCharAt == i || charsetEncoder.canEncode(cCharAt)) {
                     z = true;
                     break;
                 }
@@ -98,9 +97,9 @@ public final class ECIEncoderSet {
                     i2++;
                 }
             }
-            this.priorityEncoderIndex = i2;
+        } else {
+            i2 = -1;
         }
-        i2 = -1;
         this.priorityEncoderIndex = i2;
     }
 

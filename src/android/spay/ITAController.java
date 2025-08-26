@@ -87,9 +87,9 @@ public interface ITAController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITAController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITAController)) {
-                return (ITAController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITAController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITAController)) {
+                return (ITAController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,12 +130,12 @@ public interface ITAController extends IInterface {
             switch (i) {
                 case 1:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean loadTA = loadTA(parcelFileDescriptor, readLong, readLong2);
+                    boolean zLoadTA = loadTA(parcelFileDescriptor, j, j2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(loadTA);
+                    parcel2.writeBoolean(zLoadTA);
                     return true;
                 case 2:
                     unloadTA();
@@ -144,30 +144,30 @@ public interface ITAController extends IInterface {
                 case 3:
                     TACommandRequest tACommandRequest = (TACommandRequest) parcel.readTypedObject(TACommandRequest.CREATOR);
                     parcel.enforceNoDataAvail();
-                    TACommandResponse processTACommand = processTACommand(tACommandRequest);
+                    TACommandResponse tACommandResponseProcessTACommand = processTACommand(tACommandRequest);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(processTACommand, 1);
+                    parcel2.writeTypedObject(tACommandResponseProcessTACommand, 1);
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean makeSystemCall = makeSystemCall(readInt);
+                    boolean zMakeSystemCall = makeSystemCall(i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(makeSystemCall);
+                    parcel2.writeBoolean(zMakeSystemCall);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearDeviceCertificates = clearDeviceCertificates(readString);
+                    boolean zClearDeviceCertificates = clearDeviceCertificates(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearDeviceCertificates);
+                    parcel2.writeBoolean(zClearDeviceCertificates);
                     return true;
                 case 6:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    CertInfo checkCertInfo = checkCertInfo(createStringArrayList);
+                    CertInfo certInfoCheckCertInfo = checkCertInfo(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(checkCertInfo, 1);
+                    parcel2.writeTypedObject(certInfoCheckCertInfo, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -192,97 +192,97 @@ public interface ITAController extends IInterface {
 
             @Override // android.spay.ITAController
             public boolean loadTA(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.ITAController
             public void unloadTA() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.ITAController
             public TACommandResponse processTACommand(TACommandRequest tACommandRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeTypedObject(tACommandRequest, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TACommandResponse) obtain2.readTypedObject(TACommandResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(tACommandRequest, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TACommandResponse) parcelObtain2.readTypedObject(TACommandResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.ITAController
             public boolean makeSystemCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.ITAController
             public boolean clearDeviceCertificates(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.ITAController
             public CertInfo checkCertInfo(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CertInfo) obtain2.readTypedObject(CertInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CertInfo) parcelObtain2.readTypedObject(CertInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

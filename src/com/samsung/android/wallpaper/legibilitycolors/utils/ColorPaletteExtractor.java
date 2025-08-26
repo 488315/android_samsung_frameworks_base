@@ -2,10 +2,14 @@ package com.samsung.android.wallpaper.legibilitycolors.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.hardware.scontext.SContextConstants;
 import android.text.Spanned;
 import android.util.Log;
+import com.android.internal.graphics.ColorUtils;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /* loaded from: classes6.dex */
@@ -38,7 +42,7 @@ public class ColorPaletteExtractor extends ColorExtractor {
     	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
     	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
     	at jadx.core.utils.InsnRemover.lambda$unbindInsns$1(InsnRemover.java:99)
-    	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+    	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
     	at jadx.core.utils.InsnRemover.unbindInsns(InsnRemover.java:98)
     	at jadx.core.utils.InsnRemover.removeAllAndUnbind(InsnRemover.java:252)
     	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:180)
@@ -157,18 +161,252 @@ public class ColorPaletteExtractor extends ColorExtractor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0161  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x0156  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x0161  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int discardSameColorFromDominantColorsForColorPalette(com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor.DominantColorResult[] r39, double r40, com.samsung.android.wallpaper.legibilitycolors.utils.ColorPaletteExtractor.ColorSpace r42, boolean r43) {
-        /*
-            Method dump skipped, instructions count: 626
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wallpaper.legibilitycolors.utils.ColorPaletteExtractor.discardSameColorFromDominantColorsForColorPalette(com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor$DominantColorResult[], double, com.samsung.android.wallpaper.legibilitycolors.utils.ColorPaletteExtractor$ColorSpace, boolean):int");
+    public static int discardSameColorFromDominantColorsForColorPalette(ColorExtractor.DominantColorResult[] dominantColorResultArr, double d, ColorSpace colorSpace, boolean z) {
+        double d2;
+        double d3;
+        float f;
+        int i;
+        float f2;
+        int i2;
+        double d4;
+        double d5;
+        ColorExtractor.DominantColorResult[] dominantColorResultArr2 = dominantColorResultArr;
+        ColorSpace colorSpace2 = colorSpace;
+        float[] fArr = new float[3];
+        float[] fArr2 = new float[3];
+        double[] dArr = new double[3];
+        double[] dArr2 = new double[3];
+        int length = dominantColorResultArr2.length;
+        if (colorSpace2 == ColorSpace.HUE) {
+            d2 = 360.0d;
+            d3 = d * 360.0d;
+        } else if (colorSpace2 == ColorSpace.RGB) {
+            d2 = 360.0d;
+            d3 = d * sMaxRGB;
+        } else {
+            d2 = 360.0d;
+            if (colorSpace2 == ColorSpace.HSV) {
+                f = sMaxHSV;
+            } else if (colorSpace2 == ColorSpace.LAB) {
+                f = sMaxLab;
+            } else {
+                d3 = d;
+            }
+            d3 = f * d;
+        }
+        int i3 = 0;
+        int i4 = 0;
+        float f3 = 0.0f;
+        float f4 = 0.0f;
+        double dColorDistance_rgb_sqaure2 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+        while (true) {
+            ColorResultData[] colorResultDataArr = new ColorResultData[length];
+            double d6 = d2;
+            int i5 = 0;
+            boolean z2 = false;
+            while (i5 < length) {
+                ColorExtractor.DominantColorResult dominantColorResult = dominantColorResultArr2[i5];
+                if (dominantColorResult.percentage == 0.0f) {
+                    break;
+                }
+                int i6 = dominantColorResult.color;
+                if (colorSpace2 == ColorSpace.HSV || colorSpace2 == ColorSpace.HUE) {
+                    dominantColorResult.copyHSV(fArr);
+                    float fCalculateLuminance = IUXColorUtils.calculateLuminance(i6);
+                    f2 = fArr[0];
+                    f4 = fCalculateLuminance;
+                } else {
+                    if (colorSpace2 == ColorSpace.LAB) {
+                        ColorUtils.colorToLAB(i6, dArr);
+                    }
+                    f2 = f3;
+                }
+                int i7 = i5 + 1;
+                int i8 = i7;
+                double d7 = Double.MAX_VALUE;
+                double[] dArr3 = dArr;
+                int i9 = -1;
+                while (true) {
+                    if (i8 >= length) {
+                        i2 = i3;
+                        break;
+                    }
+                    int i10 = i8;
+                    ColorExtractor.DominantColorResult dominantColorResult2 = dominantColorResultArr[i10];
+                    i2 = i3;
+                    if (dominantColorResult2.percentage == 0.0f) {
+                        break;
+                    }
+                    int i11 = dominantColorResult2.color;
+                    int i12 = i7;
+                    if (colorSpace2 == ColorSpace.HSV || colorSpace2 == ColorSpace.HUE) {
+                        dominantColorResult2.copyHSV(fArr2);
+                    } else if (colorSpace2 == ColorSpace.LAB) {
+                        ColorUtils.colorToLAB(i11, dArr2);
+                    }
+                    int iOrdinal = colorSpace2.ordinal();
+                    int i13 = i4;
+                    if (iOrdinal == 0) {
+                        dColorDistance_rgb_sqaure2 = IUXColorUtils.colorDistance_rgb_sqaure2(dominantColorResult.color, dominantColorResult2.color);
+                    } else if (iOrdinal == 1) {
+                        dColorDistance_rgb_sqaure2 = IUXColorUtils.getHsvDistanceSquare2FromCornSpaceDoubleFast(fArr, fArr2, sHsvSpaceHueRadiusValue);
+                    } else if (iOrdinal != 2) {
+                        if (iOrdinal == 3) {
+                            if (dominantColorResult.isGrayScale == dominantColorResult2.isGrayScale) {
+                                if (dominantColorResult.isGrayScale) {
+                                    d4 = 2.0d;
+                                    dColorDistance_rgb_sqaure2 = Math.pow((f4 - IUXColorUtils.calculateLuminance(i11)) * d3 * 1.5d, 2.0d);
+                                } else {
+                                    d4 = 2.0d;
+                                    dColorDistance_rgb_sqaure2 = Math.pow(IUXColorUtils.colorDistanceHueFast(f2, fArr2[0]), 2.0d);
+                                }
+                            } else {
+                                dColorDistance_rgb_sqaure2 = Math.pow(Math.max((((Math.sqrt(IUXColorUtils.getHsvDistanceSquare2FromCornSpaceDoubleFast(fArr, fArr2, sHsvSpaceHueRadiusValue)) / sMaxHSV) - 0.019999999552965164d) * d6) + d3, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN), 2.0d);
+                                d4 = 2.0d;
+                            }
+                        }
+                        if (dColorDistance_rgb_sqaure2 >= Math.pow(d3, d4)) {
+                            d5 = d7;
+                            if (d5 > dColorDistance_rgb_sqaure2) {
+                                d7 = dColorDistance_rgb_sqaure2;
+                                i9 = i10;
+                            }
+                            i8 = i10 + 1;
+                            colorSpace2 = colorSpace;
+                            i3 = i2;
+                            i7 = i12;
+                            i4 = i13;
+                        } else {
+                            d5 = d7;
+                        }
+                        d7 = d5;
+                        i8 = i10 + 1;
+                        colorSpace2 = colorSpace;
+                        i3 = i2;
+                        i7 = i12;
+                        i4 = i13;
+                    } else {
+                        double d8 = dArr3[0];
+                        float f5 = sLabSpaceLightnessScale;
+                        dColorDistance_rgb_sqaure2 = IUXMathUtils.distanceSqrt2((f5 * d8) - (dArr2[0] * f5), dArr3[1] - dArr2[1], dArr3[2] - dArr2[2]);
+                    }
+                    d4 = 2.0d;
+                    if (dColorDistance_rgb_sqaure2 >= Math.pow(d3, d4)) {
+                    }
+                    d7 = d5;
+                    i8 = i10 + 1;
+                    colorSpace2 = colorSpace;
+                    i3 = i2;
+                    i7 = i12;
+                    i4 = i13;
+                }
+                int i14 = i4;
+                int i15 = i7;
+                double d9 = d7;
+                if (i9 != -1) {
+                    colorResultDataArr[i5] = new ColorResultData(i5, i9, d9);
+                    z2 = true;
+                }
+                dominantColorResultArr2 = dominantColorResultArr;
+                colorSpace2 = colorSpace;
+                f3 = f2;
+                dArr = dArr3;
+                i3 = i2;
+                i5 = i15;
+                i4 = i14;
+            }
+            double[] dArr4 = dArr;
+            int i16 = i3;
+            int i17 = i4;
+            if (z2) {
+                Arrays.sort(colorResultDataArr, new Comparator<ColorResultData>() { // from class: com.samsung.android.wallpaper.legibilitycolors.utils.ColorPaletteExtractor.1
+                    @Override // java.util.Comparator
+                    public int compare(ColorResultData colorResultData, ColorResultData colorResultData2) {
+                        if (colorResultData == null && colorResultData2 == null) {
+                            return 0;
+                        }
+                        if (colorResultData == null) {
+                            return 1;
+                        }
+                        if (colorResultData2 == null) {
+                            return -1;
+                        }
+                        return Double.compare(colorResultData.dist, colorResultData2.dist);
+                    }
+                });
+                i3 = i16;
+                for (int i18 = 0; i18 < length; i18 = i + 1) {
+                    ColorResultData colorResultData = colorResultDataArr[i18];
+                    if (colorResultData == null) {
+                        break;
+                    }
+                    int i19 = colorResultData.index;
+                    int i20 = colorResultData.indexTarget;
+                    ColorExtractor.DominantColorResult dominantColorResult3 = dominantColorResultArr[i19];
+                    ColorExtractor.DominantColorResult dominantColorResult4 = dominantColorResultArr[i20];
+                    if (dominantColorResult3.percentage <= 0.0f || dominantColorResult4.percentage <= 0.0f) {
+                        i = i18;
+                    } else {
+                        if (!z) {
+                            mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.A);
+                            i = i18;
+                        } else {
+                            int i21 = dominantColorResult3.color;
+                            dominantColorResult3.copyHSV(fArr);
+                            int i22 = dominantColorResult4.color;
+                            dominantColorResult4.copyHSV(fArr2);
+                            boolean z3 = dominantColorResult3.isGrayScale;
+                            float f6 = dominantColorResult3.percentage;
+                            float f7 = dominantColorResult4.percentage;
+                            float fCalculateLuminance2 = IUXColorUtils.calculateLuminance(i21);
+                            float fCalculateLuminance3 = IUXColorUtils.calculateLuminance(i22);
+                            float f8 = f7 / f6;
+                            i = i18;
+                            if (dominantColorResult3.isGrayScale != dominantColorResult4.isGrayScale) {
+                                if (z3 && fArr[2] < fArr2[2] * f8 * 1.2f) {
+                                    mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.B);
+                                } else {
+                                    mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.A);
+                                }
+                                i3++;
+                            } else if (!dominantColorResult3.isGrayScale) {
+                                if (fArr[1] * fArr[2] < fArr2[1] * fArr2[2] * f8) {
+                                    mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.B);
+                                } else {
+                                    mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.A);
+                                }
+                                i3++;
+                            } else if (fCalculateLuminance2 < fCalculateLuminance3 * f8) {
+                                mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.B);
+                            } else {
+                                mergeDominantColorUnit(dominantColorResult3, dominantColorResult4, ColorMergeType.A);
+                            }
+                        }
+                        i3++;
+                    }
+                }
+                sortColorResult(dominantColorResultArr);
+            } else {
+                i3 = i16;
+            }
+            if (!z2) {
+                break;
+            }
+            i4 = i17 + 1;
+            if (i17 >= 1000) {
+                break;
+            }
+            dominantColorResultArr2 = dominantColorResultArr;
+            colorSpace2 = colorSpace;
+            d2 = d6;
+            dArr = dArr4;
+        }
+        return i3;
     }
 
     public static int[] getOnlyColorsFromDominantColor(ColorExtractor.DominantColorResult[] dominantColorResultArr, double d) {
@@ -261,7 +499,7 @@ public class ColorPaletteExtractor extends ColorExtractor {
             jArr[i7] = new long[]{0, 0, 0};
         }
         Runtime runtime = Runtime.getRuntime();
-        long freeMemory = runtime.totalMemory() - runtime.freeMemory();
+        long jFreeMemory = runtime.totalMemory() - runtime.freeMemory();
         int length2 = iArr.length;
         int i8 = 0;
         int i9 = 0;
@@ -324,7 +562,7 @@ public class ColorPaletteExtractor extends ColorExtractor {
         for (int i18 = 0; i18 < length; i18++) {
             dominantColorResultArr[i18] = new ColorExtractor.DominantColorResult(iArr6[i18], iArr5[i18] * f12, checkGayScaleWithSV(fArr2[i18], f2, f3));
         }
-        Log.i(TAG, "ColorExtractor Memory Usage " + ((runtime.totalMemory() - runtime.freeMemory()) - freeMemory) + " length: " + iArr.length);
+        Log.i(TAG, "ColorExtractor Memory Usage " + ((runtime.totalMemory() - runtime.freeMemory()) - jFreeMemory) + " length: " + iArr.length);
         sortColorResult(dominantColorResultArr);
         return dominantColorResultArr;
     }

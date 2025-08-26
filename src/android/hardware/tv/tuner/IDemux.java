@@ -124,9 +124,9 @@ public interface IDemux extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDemux)) {
-                return (IDemux) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDemux)) {
+                return (IDemux) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -153,36 +153,36 @@ public interface IDemux extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setFrontendDataSource(readInt);
+                    setFrontendDataSource(i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     DemuxFilterType demuxFilterType = (DemuxFilterType) parcel.readTypedObject(DemuxFilterType.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    IFilterCallback asInterface = IFilterCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    IFilterCallback iFilterCallbackAsInterface = IFilterCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    IFilter openFilter = openFilter(demuxFilterType, readInt2, asInterface);
+                    IFilter iFilterOpenFilter = openFilter(demuxFilterType, i4, iFilterCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openFilter);
+                    parcel2.writeStrongInterface(iFilterOpenFilter);
                     return true;
                 case 3:
-                    ITimeFilter openTimeFilter = openTimeFilter();
+                    ITimeFilter iTimeFilterOpenTimeFilter = openTimeFilter();
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openTimeFilter);
+                    parcel2.writeStrongInterface(iTimeFilterOpenTimeFilter);
                     return true;
                 case 4:
-                    IFilter asInterface2 = IFilter.Stub.asInterface(parcel.readStrongBinder());
+                    IFilter iFilterAsInterface = IFilter.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int avSyncHwId = getAvSyncHwId(asInterface2);
+                    int avSyncHwId = getAvSyncHwId(iFilterAsInterface);
                     parcel2.writeNoException();
                     parcel2.writeInt(avSyncHwId);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long avSyncTime = getAvSyncTime(readInt3);
+                    long avSyncTime = getAvSyncTime(i5);
                     parcel2.writeNoException();
                     parcel2.writeLong(avSyncTime);
                     return true;
@@ -191,18 +191,18 @@ public interface IDemux extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    byte readByte = parcel.readByte();
-                    int readInt4 = parcel.readInt();
-                    IDvrCallback asInterface3 = IDvrCallback.Stub.asInterface(parcel.readStrongBinder());
+                    byte b = parcel.readByte();
+                    int i6 = parcel.readInt();
+                    IDvrCallback iDvrCallbackAsInterface = IDvrCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    IDvr openDvr = openDvr(readByte, readInt4, asInterface3);
+                    IDvr iDvrOpenDvr = openDvr(b, i6, iDvrCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openDvr);
+                    parcel2.writeStrongInterface(iDvrOpenDvr);
                     return true;
                 case 8:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    connectCiCam(readInt5);
+                    connectCiCam(i7);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -234,176 +234,176 @@ public interface IDemux extends IInterface {
 
             @Override // android.hardware.tv.tuner.IDemux
             public void setFrontendDataSource(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setFrontendDataSource is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public IFilter openFilter(DemuxFilterType demuxFilterType, int i, IFilterCallback iFilterCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(demuxFilterType, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iFilterCallback);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(demuxFilterType, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iFilterCallback);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openFilter is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IFilter.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IFilter.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public ITimeFilter openTimeFilter() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openTimeFilter is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ITimeFilter.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ITimeFilter.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public int getAvSyncHwId(IFilter iFilter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iFilter);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFilter);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getAvSyncHwId is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public long getAvSyncTime(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getAvSyncTime is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method close is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public IDvr openDvr(byte b, int i, IDvrCallback iDvrCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iDvrCallback);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iDvrCallback);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openDvr is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IDvr.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IDvr.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public void connectCiCam(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method connectCiCam is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public void disconnectCiCam() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method disconnectCiCam is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDemux
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -412,18 +412,18 @@ public interface IDemux extends IInterface {
             @Override // android.hardware.tv.tuner.IDemux
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

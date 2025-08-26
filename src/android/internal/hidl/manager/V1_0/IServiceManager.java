@@ -74,9 +74,9 @@ public interface IServiceManager extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceManager)) {
-            return (IServiceManager) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IServiceManager)) {
+            return (IServiceManager) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -212,13 +212,13 @@ public interface IServiceManager extends IBase {
 
         public static final ArrayList<InstanceDebugInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<InstanceDebugInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 InstanceDebugInfo instanceDebugInfo = new InstanceDebugInfo();
-                instanceDebugInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 64);
+                instanceDebugInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 64);
                 arrayList.add(instanceDebugInfo);
             }
             return arrayList;
@@ -232,10 +232,10 @@ public interface IServiceManager extends IBase {
             hwParcel.readEmbeddedBuffer(r4.getBytes().length + 1, hwBlob.handle(), j2, false);
             this.pid = hwBlob.getInt32(j + 32);
             int int32 = hwBlob.getInt32(j + 48);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 40, true);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 40, true);
             this.clientPids.clear();
             for (int i = 0; i < int32; i++) {
-                this.clientPids.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+                this.clientPids.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
             }
             this.arch = hwBlob.getInt32(j + 56);
         }
@@ -491,13 +491,13 @@ public interface IServiceManager extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -659,9 +659,9 @@ public interface IServiceManager extends IBase {
                     return;
                 case 2:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean add = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
+                    boolean zAdd = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(add);
+                    hwParcel2.writeBool(zAdd);
                     hwParcel2.send();
                     return;
                 case 3:
@@ -680,23 +680,23 @@ public interface IServiceManager extends IBase {
                     return;
                 case 5:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    ArrayList<String> listByInterface = listByInterface(hwParcel.readString());
+                    ArrayList<String> arrayListListByInterface = listByInterface(hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(listByInterface);
+                    hwParcel2.writeStringVector(arrayListListByInterface);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean registerForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    boolean zRegisterForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(registerForNotifications);
+                    hwParcel2.writeBool(zRegisterForNotifications);
                     hwParcel2.send();
                     return;
                 case 7:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    ArrayList<InstanceDebugInfo> debugDump = debugDump();
+                    ArrayList<InstanceDebugInfo> arrayListDebugDump = debugDump();
                     hwParcel2.writeStatus(0);
-                    InstanceDebugInfo.writeVectorToParcel(hwParcel2, debugDump);
+                    InstanceDebugInfo.writeVectorToParcel(hwParcel2, arrayListDebugDump);
                     hwParcel2.send();
                     return;
                 case 8:
@@ -709,9 +709,9 @@ public interface IServiceManager extends IBase {
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -722,9 +722,9 @@ public interface IServiceManager extends IBase {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

@@ -84,19 +84,19 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
     }
 
     private DsmccResponse(Parcel parcel) {
-        super(6, parcel);
         int i;
-        String readString = parcel.readString();
-        this.mBiopMessageType = readString;
-        readString.hashCode();
+        super(6, parcel);
+        String string = parcel.readString();
+        this.mBiopMessageType = string;
+        string.hashCode();
         i = 0;
-        switch (readString) {
+        switch (string) {
             case "directory":
             case "service_gateway":
-                int readInt = parcel.readInt();
-                if (readInt > 0) {
+                int i2 = parcel.readInt();
+                if (i2 > 0) {
                     this.mChildList = new ArrayList();
-                    while (i < readInt) {
+                    while (i < i2) {
                         this.mChildList.add(parcel.readString());
                         i++;
                     }
@@ -108,11 +108,11 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
                 this.mEventNames = null;
                 return;
             case "stream":
-                int readInt2 = parcel.readInt();
-                if (readInt2 > 0) {
-                    this.mEventIds = new int[readInt2];
-                    this.mEventNames = new String[readInt2];
-                    while (i < readInt2) {
+                int i3 = parcel.readInt();
+                if (i3 > 0) {
+                    this.mEventIds = new int[i3];
+                    this.mEventNames = new String[i3];
+                    while (i < i3) {
                         this.mEventIds[i] = parcel.readInt();
                         this.mEventNames[i] = parcel.readString();
                         i++;

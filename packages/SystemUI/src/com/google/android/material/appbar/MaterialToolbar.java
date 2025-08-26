@@ -2,6 +2,7 @@ package com.google.android.material.appbar;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -26,7 +27,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialToolbar extends Toolbar {
     public static final ImageView.ScaleType[] LOGO_SCALE_TYPE_ARRAY = {ImageView.ScaleType.MATRIX, ImageView.ScaleType.FIT_XY, ImageView.ScaleType.FIT_START, ImageView.ScaleType.FIT_CENTER, ImageView.ScaleType.FIT_END, ImageView.ScaleType.CENTER, ImageView.ScaleType.CENTER_CROP, ImageView.ScaleType.CENTER_INSIDE};
@@ -57,17 +57,17 @@ public class MaterialToolbar extends Toolbar {
         int measuredWidth2 = view.getMeasuredWidth();
         int i = (measuredWidth / 2) - (measuredWidth2 / 2);
         int i2 = measuredWidth2 + i;
-        int max = Math.max(Math.max(((Integer) pair.first).intValue() - i, 0), Math.max(i2 - ((Integer) pair.second).intValue(), 0));
-        if (max > 0) {
-            i += max;
-            i2 -= max;
+        int iMax = Math.max(Math.max(((Integer) pair.first).intValue() - i, 0), Math.max(i2 - ((Integer) pair.second).intValue(), 0));
+        if (iMax > 0) {
+            i += iMax;
+            i2 -= iMax;
             view.measure(View.MeasureSpec.makeMeasureSpec(i2 - i, 1073741824), view.getMeasuredHeightAndState());
         }
         view.layout(i, view.getTop(), i2, view.getBottom());
     }
 
     @Override // androidx.appcompat.widget.Toolbar, android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         MaterialShapeUtils.setParentAbsoluteElevation(this);
     }
@@ -161,30 +161,30 @@ public class MaterialToolbar extends Toolbar {
     }
 
     public MaterialToolbar(Context context, AttributeSet attributeSet, int i) {
-        super(MaterialThemeOverlay.wrap(context, attributeSet, i, R.style.Widget_MaterialComponents_Toolbar), attributeSet, i);
         ColorStateList colorStateListOrNull;
+        super(MaterialThemeOverlay.wrap(context, attributeSet, i, R.style.Widget_MaterialComponents_Toolbar), attributeSet, i);
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialToolbar, i, R.style.Widget_MaterialComponents_Toolbar, new int[0]);
-        if (obtainStyledAttributes.hasValue(2)) {
-            this.navigationIconTint = Integer.valueOf(obtainStyledAttributes.getColor(2, -1));
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialToolbar, i, R.style.Widget_MaterialComponents_Toolbar, new int[0]);
+        if (typedArrayObtainStyledAttributes.hasValue(2)) {
+            this.navigationIconTint = Integer.valueOf(typedArrayObtainStyledAttributes.getColor(2, -1));
             Drawable navigationIcon = getNavigationIcon();
             if (navigationIcon != null) {
                 setNavigationIcon(navigationIcon);
             }
         }
-        this.titleCentered = obtainStyledAttributes.getBoolean(4, false);
-        this.subtitleCentered = obtainStyledAttributes.getBoolean(3, false);
-        int i2 = obtainStyledAttributes.getInt(1, -1);
+        this.titleCentered = typedArrayObtainStyledAttributes.getBoolean(4, false);
+        this.subtitleCentered = typedArrayObtainStyledAttributes.getBoolean(3, false);
+        int i2 = typedArrayObtainStyledAttributes.getInt(1, -1);
         if (i2 >= 0) {
             ImageView.ScaleType[] scaleTypeArr = LOGO_SCALE_TYPE_ARRAY;
             if (i2 < scaleTypeArr.length) {
                 this.logoScaleType = scaleTypeArr[i2];
             }
         }
-        if (obtainStyledAttributes.hasValue(0)) {
-            this.logoAdjustViewBounds = Boolean.valueOf(obtainStyledAttributes.getBoolean(0, false));
+        if (typedArrayObtainStyledAttributes.hasValue(0)) {
+            this.logoAdjustViewBounds = Boolean.valueOf(typedArrayObtainStyledAttributes.getBoolean(0, false));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         Drawable background = getBackground();
         if (background == null) {
             colorStateListOrNull = ColorStateList.valueOf(0);

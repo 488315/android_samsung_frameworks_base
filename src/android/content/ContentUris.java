@@ -21,18 +21,18 @@ public class ContentUris {
         return appendId(uri.buildUpon(), j).build();
     }
 
-    public static Uri removeId(Uri uri) {
+    public static Uri removeId(Uri uri) throws NumberFormatException {
         String lastPathSegment = uri.getLastPathSegment();
         if (lastPathSegment == null) {
             throw new IllegalArgumentException("No path segments to remove");
         }
         Long.parseLong(lastPathSegment);
         List<String> pathSegments = uri.getPathSegments();
-        Uri.Builder buildUpon = uri.buildUpon();
-        buildUpon.path((String) null);
+        Uri.Builder builderBuildUpon = uri.buildUpon();
+        builderBuildUpon.path((String) null);
         for (int i = 0; i < pathSegments.size() - 1; i++) {
-            buildUpon.appendPath(pathSegments.get(i));
+            builderBuildUpon.appendPath(pathSegments.get(i));
         }
-        return buildUpon.build();
+        return builderBuildUpon.build();
     }
 }

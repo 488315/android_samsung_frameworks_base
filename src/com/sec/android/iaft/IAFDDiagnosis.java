@@ -70,14 +70,14 @@ public class IAFDDiagnosis {
         this.mContext = context;
     }
 
-    public void init(Context context) {
+    public void init(Context context) throws InterruptedException {
         this.mContext = context;
         this.mSalesCode = SemSystemProperties.getSalesCode();
         this.isCHNModel = "com.samsung.android.sm_cn".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
         initData(false);
     }
 
-    private void initData(boolean z) {
+    private void initData(boolean z) throws InterruptedException {
         try {
             IAFDDBManager.getInstance().init(this.mContext, this.mSalesCode, this.isCHNModel);
             this.mIFADData = IAFDDBManager.getInstance().getData();
@@ -104,21 +104,21 @@ public class IAFDDiagnosis {
         if (str == null) {
             return false;
         }
-        int lastIndexOf = str.lastIndexOf(46) + 1;
-        if (lastIndexOf < 0) {
-            lastIndexOf = 0;
+        int iLastIndexOf = str.lastIndexOf(46) + 1;
+        if (iLastIndexOf < 0) {
+            iLastIndexOf = 0;
         }
-        String substring = str.substring(lastIndexOf);
-        if (substring == null || !this.mIFADData.hashMapJE_ClassNameTB.containsKey(substring)) {
+        String strSubstring = str.substring(iLastIndexOf);
+        if (strSubstring == null || !this.mIFADData.hashMapJE_ClassNameTB.containsKey(strSubstring)) {
             return false;
         }
-        int intValue = this.mIFADData.hashMapJE_ClassNameTB.get(substring).intValue();
-        if (i != (this.mIFADData.JE_ClassNameTB[intValue].supportFlag & i)) {
+        int iIntValue = this.mIFADData.hashMapJE_ClassNameTB.get(strSubstring).intValue();
+        if (i != (this.mIFADData.JE_ClassNameTB[iIntValue].supportFlag & i)) {
             return false;
         }
-        this.expType = this.mIFADData.JE_ClassNameTB[intValue].expID;
-        this.curExpEntity = this.mIFADData.JE_ClassNameTB[intValue];
-        return this.mIFADData.JE_ClassNameTB[intValue].ruleType <= 0;
+        this.expType = this.mIFADData.JE_ClassNameTB[iIntValue].expID;
+        this.curExpEntity = this.mIFADData.JE_ClassNameTB[iIntValue];
+        return this.mIFADData.JE_ClassNameTB[iIntValue].ruleType <= 0;
     }
 
     private boolean isContainExpInfo(String str, IAFD_ENTITY[] iafd_entityArr, String str2, int i) {
@@ -150,131 +150,112 @@ public class IAFDDiagnosis {
 
     private String getSubStringForNE(String str, int i, boolean z) {
         int i2;
-        int indexOf;
+        int iIndexOf;
         if (z) {
             i2 = str.charAt(str.indexOf("ABI:") + 9) == '6' ? 1 : 0;
-            int indexOf2 = str.indexOf("pid:");
+            int iIndexOf2 = str.indexOf("pid:");
             if (i2 != 0) {
-                indexOf = str.indexOf(" x0 ");
+                iIndexOf = str.indexOf(" x0 ");
             } else {
-                indexOf = str.indexOf(" r0 ");
+                iIndexOf = str.indexOf(" r0 ");
             }
-            if (indexOf <= indexOf2 && (indexOf = str.indexOf("backtrace:")) <= indexOf2) {
+            if (iIndexOf <= iIndexOf2 && (iIndexOf = str.indexOf("backtrace:")) <= iIndexOf2) {
                 return null;
             }
-            int i3 = i + indexOf2;
-            if (i3 > str.length()) {
-                i3 = str.length();
+            int length = i + iIndexOf2;
+            if (length > str.length()) {
+                length = str.length();
             }
-            if (indexOf > i3) {
-                indexOf = i3;
+            if (iIndexOf > length) {
+                iIndexOf = length;
             }
-            return str.substring(indexOf2, indexOf);
+            return str.substring(iIndexOf2, iIndexOf);
         }
-        int indexOf3 = str.indexOf("backtrace:");
-        i2 = indexOf3 >= 0 ? indexOf3 + 11 : 0;
-        int i4 = i + i2;
-        if (i4 > str.length()) {
-            i4 = str.length();
+        int iIndexOf3 = str.indexOf("backtrace:");
+        i2 = iIndexOf3 >= 0 ? iIndexOf3 + 11 : 0;
+        int length2 = i + i2;
+        if (length2 > str.length()) {
+            length2 = str.length();
         }
-        return str.substring(i2, i4);
+        return str.substring(i2, length2);
     }
 
     private String getCauseForNE(String str, int i) {
         int i2;
-        int indexOf = str.indexOf("Cause:");
-        if (indexOf < 0) {
-            indexOf = str.indexOf("Abort message:");
-            if (indexOf < 0) {
+        int iIndexOf = str.indexOf("Cause:");
+        if (iIndexOf < 0) {
+            iIndexOf = str.indexOf("Abort message:");
+            if (iIndexOf < 0) {
                 return null;
             }
             i2 = 14;
         } else {
             i2 = 6;
         }
-        int i3 = indexOf + i;
-        if (i3 > str.length()) {
-            i3 = str.length();
+        int length = iIndexOf + i;
+        if (length > str.length()) {
+            length = str.length();
         }
-        String substring = str.substring(indexOf, i3);
-        if (substring == null) {
+        String strSubstring = str.substring(iIndexOf, length);
+        if (strSubstring == null) {
             return null;
         }
-        int i4 = i + i2;
-        if (i4 > substring.length()) {
-            i4 = substring.length();
+        int length2 = i + i2;
+        if (length2 > strSubstring.length()) {
+            length2 = strSubstring.length();
         }
-        int indexOf2 = substring.indexOf(ShaderAssembler.NEWLINE);
-        if (indexOf2 > i2 && i4 > indexOf2) {
-            i4 = indexOf2;
+        int iIndexOf2 = strSubstring.indexOf(ShaderAssembler.NEWLINE);
+        if (iIndexOf2 > i2 && length2 > iIndexOf2) {
+            length2 = iIndexOf2;
         }
-        return substring.substring(i2, i4);
+        return strSubstring.substring(i2, length2);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0045, code lost:
-    
-        if (r1 <= r4) goto L32;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0048 A[PHI: r4
+      0x0048: PHI (r4v2 int) = (r4v1 int), (r4v3 int) binds: [B:29:0x004f, B:25:0x0045] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String getComponent(java.lang.String r2, java.lang.String r3, int r4, boolean r5) {
-        /*
-            r1 = this;
-            java.lang.String r1 = "com."
-            if (r2 == 0) goto L13
-            int r0 = r2.indexOf(r1)
-            if (r0 < 0) goto L13
-            int r1 = r2.length()
-            java.lang.String r1 = r2.substring(r0, r1)
-            return r1
-        L13:
-            if (r3 == 0) goto L5b
-            if (r5 == 0) goto L36
-            java.lang.String r5 = "/data/app/"
-            int r5 = r3.indexOf(r5)
-            if (r5 >= 0) goto L25
-            java.lang.String r5 = "/app/"
-            int r5 = r3.indexOf(r5)
-        L25:
-            int r0 = r3.indexOf(r1, r5)
-            if (r0 >= 0) goto L2f
-            int r0 = r3.indexOf(r1)
-        L2f:
-            if (r0 >= 0) goto L34
-            if (r5 < 0) goto L34
-            goto L3a
-        L34:
-            r5 = r0
-            goto L3a
-        L36:
-            int r5 = r3.indexOf(r1)
-        L3a:
-            if (r5 < 0) goto L5b
-            java.lang.String r1 = "\n"
-            int r1 = r3.indexOf(r1, r5)
-            if (r1 <= 0) goto L4a
-            int r4 = r4 + r5
-            if (r1 > r4) goto L48
-            goto L56
-        L48:
-            r1 = r4
-            goto L56
-        L4a:
-            int r4 = r4 + r5
-            int r1 = r3.length()
-            if (r4 > r1) goto L52
-            goto L48
-        L52:
-            int r1 = r3.length()
-        L56:
-            java.lang.String r1 = r3.substring(r5, r1)
-            return r1
-        L5b:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.sec.android.iaft.IAFDDiagnosis.getComponent(java.lang.String, java.lang.String, int, boolean):java.lang.String");
+    private String getComponent(String str, String str2, int i, boolean z) {
+        int iIndexOf;
+        int i2;
+        int iIndexOf2;
+        if (str != null && (iIndexOf2 = str.indexOf("com.")) >= 0) {
+            return str.substring(iIndexOf2, str.length());
+        }
+        if (str2 != null) {
+            if (z) {
+                iIndexOf = str2.indexOf("/data/app/");
+                if (iIndexOf < 0) {
+                    iIndexOf = str2.indexOf("/app/");
+                }
+                int iIndexOf3 = str2.indexOf("com.", iIndexOf);
+                if (iIndexOf3 < 0) {
+                    iIndexOf3 = str2.indexOf("com.");
+                }
+                if (iIndexOf3 >= 0 || iIndexOf < 0) {
+                    iIndexOf = iIndexOf3;
+                }
+            } else {
+                iIndexOf = str2.indexOf("com.");
+            }
+            if (iIndexOf >= 0) {
+                int iIndexOf4 = str2.indexOf(ShaderAssembler.NEWLINE, iIndexOf);
+                if (iIndexOf4 > 0) {
+                    i2 = i + iIndexOf;
+                    if (iIndexOf4 > i2) {
+                        iIndexOf4 = i2;
+                    }
+                } else {
+                    i2 = i + iIndexOf;
+                    if (i2 > str2.length()) {
+                        iIndexOf4 = str2.length();
+                    }
+                }
+                return str2.substring(iIndexOf, iIndexOf4);
+            }
+        }
+        return str;
     }
 
     private int findStringFromRtoL(String str, String str2, int i, int i2) {
@@ -307,17 +288,17 @@ public class IAFDDiagnosis {
         int i4 = 0;
         while (i4 < 2) {
             i4++;
-            int findStringFromRtoL = findStringFromRtoL(str, "Caused by:", i3, i2);
-            if (findStringFromRtoL < 0) {
+            int iFindStringFromRtoL = findStringFromRtoL(str, "Caused by:", i3, i2);
+            if (iFindStringFromRtoL < 0) {
                 break;
             }
-            int i5 = i3 - findStringFromRtoL;
+            int i5 = i3 - iFindStringFromRtoL;
             if (i5 >= i) {
                 i5 = i;
             }
-            str3 = str3 + str.substring(findStringFromRtoL, findStringFromRtoL + i5);
+            str3 = str3 + str.substring(iFindStringFromRtoL, iFindStringFromRtoL + i5);
             i -= i5;
-            i3 = findStringFromRtoL;
+            i3 = iFindStringFromRtoL;
         }
         if (i <= 0) {
             return str3;
@@ -326,9 +307,9 @@ public class IAFDDiagnosis {
     }
 
     private boolean isContainPkgname(String str, String str2, String str3) {
-        String substring;
-        int indexOf = str.indexOf(str2);
-        return indexOf >= 0 && (substring = str.substring(indexOf, str.length())) != null && substring.contains(str3);
+        String strSubstring;
+        int iIndexOf = str.indexOf(str2);
+        return iIndexOf >= 0 && (strSubstring = str.substring(iIndexOf, str.length())) != null && strSubstring.contains(str3);
     }
 
     private boolean parseExpTypeInternal(String str, String str2, int i, int i2, int i3, String str3, String str4, String str5) {
@@ -404,7 +385,7 @@ public class IAFDDiagnosis {
                 }
             }
         } else {
-            String str6 = "";
+            String callstackForJE = "";
             if (str4 != null) {
                 int length2 = str4.length();
                 if (length2 > this.mIFADData.controlInfo.reason_maxSize) {
@@ -413,14 +394,14 @@ public class IAFDDiagnosis {
                 this.reason = str4.substring(0, length2);
             }
             if (str5 != null) {
-                str6 = getCallstackForJE(str5, this.mIFADData.controlInfo.JE_cstack_start, this.mIFADData.controlInfo.JE_cstack_maxSize);
-                int length3 = str6.length();
+                callstackForJE = getCallstackForJE(str5, this.mIFADData.controlInfo.JE_cstack_start, this.mIFADData.controlInfo.JE_cstack_maxSize);
+                int length3 = callstackForJE.length();
                 if (length3 > this.mIFADData.controlInfo.callstack_maxSize) {
                     length3 = this.mIFADData.controlInfo.callstack_maxSize;
                 }
-                this.callstack = str6.substring(0, length3);
+                this.callstack = callstackForJE.substring(0, length3);
             }
-            this.component = getComponent(this.reason, str6, this.mIFADData.controlInfo.reason_maxSize, false);
+            this.component = getComponent(this.reason, callstackForJE, this.mIFADData.controlInfo.reason_maxSize, false);
             if (this.mIFADData.controlInfo.enableDetectAll32bitApps && (this.curAppFlag & this.mIFADData.controlInfo.supportflagDetectAll32bitApps) == this.curAppFlag && is32BitApp(str2, null)) {
                 this.expType = 30;
                 return true;
@@ -429,30 +410,30 @@ public class IAFDDiagnosis {
                 this.isParseSuccess = true;
                 return true;
             }
-            if (isContainExpInfo(str4, this.mIFADData.JE_DetailMsgTB, str6, this.curAppFlag)) {
+            if (isContainExpInfo(str4, this.mIFADData.JE_DetailMsgTB, callstackForJE, this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
-            if (isContainExpInfo(str4, this.mIFADData.JE_ClassNameTB, str6, this.curAppFlag)) {
+            if (isContainExpInfo(str4, this.mIFADData.JE_ClassNameTB, callstackForJE, this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
-            if (isContainExpInfo(str6, this.mIFADData.JE_ClassNameTB, str6, this.curAppFlag)) {
+            if (isContainExpInfo(callstackForJE, this.mIFADData.JE_ClassNameTB, callstackForJE, this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
-            if (isContainExpInfo(str6, this.mIFADData.JE_DetailMsgTB, str6, this.curAppFlag)) {
+            if (isContainExpInfo(callstackForJE, this.mIFADData.JE_DetailMsgTB, callstackForJE, this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
-            if (isContainExpInfo(str6, this.mIFADData.JE_CallStackTB, str6, this.curAppFlag)) {
+            if (isContainExpInfo(callstackForJE, this.mIFADData.JE_CallStackTB, callstackForJE, this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
             IAFD_ENTITY iafd_entity2 = this.curExpEntity;
             if (iafd_entity2 != null) {
                 if (iafd_entity2.ruleType == 1 && this.curExpEntity.expID == this.expType) {
-                    if (isContainPkgname(str6, this.mIFADData.controlInfo.JE_cstack_start, str)) {
+                    if (isContainPkgname(callstackForJE, this.mIFADData.controlInfo.JE_cstack_start, str)) {
                         this.isParseSuccess = true;
                         return true;
                     }
@@ -565,7 +546,7 @@ public class IAFDDiagnosis {
 
     private int getRepairType(int i, String str) {
         PackageInfo packageInfo;
-        String valueOf = String.valueOf(i);
+        String strValueOf = String.valueOf(i);
         if (!this.mIFADData.controlInfo.isSupportRepair) {
             return 0;
         }
@@ -577,7 +558,7 @@ public class IAFDDiagnosis {
             return 0;
         }
         if (i != 39) {
-            str = valueOf;
+            str = strValueOf;
         } else if (packageInfo.getLongVersionCode() < this.mIFADData.controlInfo.minVocAppVersionCodeForOnlyShow) {
             return 0;
         }
@@ -603,13 +584,13 @@ public class IAFDDiagnosis {
                 intent.setPackage(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
                 Slog.d(TAG, "Show3rdAppErrorUiExt() startService SM");
             } else {
-                String valueOf = String.valueOf(getExpType());
+                String strValueOf = String.valueOf(getExpType());
                 Intent intent2 = new Intent("com.sec.android.iaft.IAFDService");
                 intent2.setClassName("com.sec.android.iaft", "com.sec.android.iaft.IAFDService");
                 if (getExpType() == 39) {
-                    valueOf = str;
+                    strValueOf = str;
                 }
-                String[] strArr = this.mIFADData.controlInfo.gethashMapOfRepairDBInfo(valueOf);
+                String[] strArr = this.mIFADData.controlInfo.gethashMapOfRepairDBInfo(strValueOf);
                 if ("onekey".equals(strArr[1])) {
                     intent2.putExtra("OneKeyRepairMode", 1);
                 } else if ("onejump".equals(strArr[1])) {
@@ -785,9 +766,9 @@ public class IAFDDiagnosis {
             if (str == null || str.length() <= 0) {
                 return;
             }
-            String[] split = str.split(">,<");
-            if (split[0].equals("supportFlag")) {
-                this.supportflagDetectAll32bitApps = Integer.parseInt(split[1]);
+            String[] strArrSplit = str.split(">,<");
+            if (strArrSplit[0].equals("supportFlag")) {
+                this.supportflagDetectAll32bitApps = Integer.parseInt(strArrSplit[1]);
             }
         }
 
@@ -827,14 +808,14 @@ public class IAFDDiagnosis {
                 this.IAFDDBControlFeature = true;
             }
             if (this.IAFDDBControlFeature && str2 != null && str2.length() > 0) {
-                String[] split = str2.split(">,<");
-                for (int i = 0; i < split.length; i += 2) {
-                    if ("Repair".equals(split[i])) {
+                String[] strArrSplit = str2.split(">,<");
+                for (int i = 0; i < strArrSplit.length; i += 2) {
+                    if ("Repair".equals(strArrSplit[i])) {
                         int i2 = i + 1;
-                        if ("CHNONLY".equals(split[i2]) && z) {
+                        if ("CHNONLY".equals(strArrSplit[i2]) && z) {
                             setSupportRepair(true);
                         }
-                        if ("ALL".equals(split[i2])) {
+                        if ("ALL".equals(strArrSplit[i2])) {
                             setSupportRepair(true);
                         }
                     }
@@ -873,10 +854,10 @@ public class IAFDDiagnosis {
             this.isSupportRepair = z;
         }
 
-        void inithashMapValues(HashMap<String, String[]> hashMap, String str, String str2, String str3, String str4) {
-            String[] split = str.split(str4);
+        void inithashMapValues(HashMap<String, String[]> map, String str, String str2, String str3, String str4) {
+            String[] strArrSplit = str.split(str4);
             String[] strArr = {"0", "0", "0", "vocApp", str2, str3, "0"};
-            for (String str5 : split) {
+            for (String str5 : strArrSplit) {
                 if (str5.equals("Pile")) {
                     strArr[0] = str5;
                 } else if (str5.equals("onekey")) {
@@ -893,37 +874,37 @@ public class IAFDDiagnosis {
                     strArr[6] = str5;
                 }
             }
-            hashMap.putIfAbsent(split[0], strArr);
+            map.putIfAbsent(strArrSplit[0], strArr);
         }
 
         void sethashMapOfLinkForVocApp(String str) {
             if (str == null || str.length() <= 0) {
                 return;
             }
-            String[] split = str.split(">,<");
-            HashMap<String, String[]> hashMap = new HashMap<>();
-            if (split[0].equals("pairlinks")) {
-                this.minVocAppVersionCode = Long.valueOf(split[1]).longValue();
-                this.domainRepair = split[2];
-                this.prefixRepair = split[3];
-                this.postfixRepair = split[4];
-                this.mainLanguage = split[5];
-                for (int i = 6; i < split.length; i += 3) {
-                    inithashMapValues(hashMap, split[i], split[i + 1], split[i + 2], Session.SESSION_SEPARATION_CHAR_CHILD);
+            String[] strArrSplit = str.split(">,<");
+            HashMap<String, String[]> map = new HashMap<>();
+            if (strArrSplit[0].equals("pairlinks")) {
+                this.minVocAppVersionCode = Long.valueOf(strArrSplit[1]).longValue();
+                this.domainRepair = strArrSplit[2];
+                this.prefixRepair = strArrSplit[3];
+                this.postfixRepair = strArrSplit[4];
+                this.mainLanguage = strArrSplit[5];
+                for (int i = 6; i < strArrSplit.length; i += 3) {
+                    inithashMapValues(map, strArrSplit[i], strArrSplit[i + 1], strArrSplit[i + 2], Session.SESSION_SEPARATION_CHAR_CHILD);
                 }
             }
-            this.hashMapOfRepairDBInfo = hashMap;
+            this.hashMapOfRepairDBInfo = map;
         }
 
         void sethashMapOfLinkForVocAppOnlyShow(String str) {
             if (str == null || str.length() <= 0) {
                 return;
             }
-            String[] split = str.split(">,<");
-            if (split[0].equals("OnlyShowList")) {
-                this.minVocAppVersionCodeForOnlyShow = Long.valueOf(split[1]).longValue();
-                for (int i = 2; i < split.length; i += 3) {
-                    inithashMapValues(this.hashMapOfRepairDBInfo, split[i], split[i + 1], split[i + 2], ":;");
+            String[] strArrSplit = str.split(">,<");
+            if (strArrSplit[0].equals("OnlyShowList")) {
+                this.minVocAppVersionCodeForOnlyShow = Long.valueOf(strArrSplit[1]).longValue();
+                for (int i = 2; i < strArrSplit.length; i += 3) {
+                    inithashMapValues(this.hashMapOfRepairDBInfo, strArrSplit[i], strArrSplit[i + 1], strArrSplit[i + 2], ":;");
                 }
             }
         }
@@ -954,13 +935,13 @@ public class IAFDDiagnosis {
             this.ruleType = 0;
             this.rules = null;
             if (str2 != null && str2.length() > 0) {
-                String[] split = str2.split(">,<");
-                this.rules = split;
-                if (SmLib_IafdConstant.KEY_PACKAGE_NAME.equals(split[0])) {
+                String[] strArrSplit = str2.split(">,<");
+                this.rules = strArrSplit;
+                if (SmLib_IafdConstant.KEY_PACKAGE_NAME.equals(strArrSplit[0])) {
                     this.ruleType = 1;
-                } else if ("libs".equals(split[0])) {
+                } else if ("libs".equals(strArrSplit[0])) {
                     this.ruleType = 2;
-                } else if ("32bit".equals(split[0])) {
+                } else if ("32bit".equals(strArrSplit[0])) {
                     this.ruleType = 4;
                 }
             }
@@ -970,9 +951,9 @@ public class IAFDDiagnosis {
                 return;
             }
             this.suggestion = str3;
-            String[] split2 = str3.split(">,<");
-            if (split2[0].equals("supportFlag")) {
-                this.supportFlag = Integer.parseInt(split2[1]);
+            String[] strArrSplit2 = str3.split(">,<");
+            if (strArrSplit2[0].equals("supportFlag")) {
+                this.supportFlag = Integer.parseInt(strArrSplit2[1]);
             }
         }
 
@@ -980,10 +961,10 @@ public class IAFDDiagnosis {
             initENTITY(i, i2, bool.booleanValue(), str, str2, str3);
         }
 
-        IAFD_ENTITY(int i, int i2, Boolean bool, String str, String str2, String str3, int i3, HashMap<String, Integer> hashMap) {
+        IAFD_ENTITY(int i, int i2, Boolean bool, String str, String str2, String str3, int i3, HashMap<String, Integer> map) {
             initENTITY(i, i2, bool.booleanValue(), str, str2, str3);
             if (bool.booleanValue()) {
-                hashMap.putIfAbsent(str, Integer.valueOf(i3));
+                map.putIfAbsent(str, Integer.valueOf(i3));
             }
         }
     }

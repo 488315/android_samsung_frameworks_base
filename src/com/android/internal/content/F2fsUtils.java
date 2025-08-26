@@ -44,7 +44,7 @@ public final class F2fsUtils {
         }
     }
 
-    private static boolean isCompressionAllowed(File file) {
+    private static boolean isCompressionAllowed(File file) throws IOException {
         try {
             String canonicalPath = file.getCanonicalPath();
             return !IncrementalManager.isIncrementalPath(canonicalPath) && isChild(sDataDirectory, canonicalPath);
@@ -53,7 +53,7 @@ public final class F2fsUtils {
         }
     }
 
-    private static boolean isChild(File file, String str) {
+    private static boolean isChild(File file, String str) throws IOException {
         try {
             File canonicalFile = file.getCanonicalFile();
             for (File canonicalFile2 = new File(str).getCanonicalFile(); canonicalFile2 != null; canonicalFile2 = canonicalFile2.getParentFile()) {
@@ -67,10 +67,10 @@ public final class F2fsUtils {
     }
 
     private static boolean isFeatureEnabledInKernel(String str) {
-        File[] listFiles = sKernelFeatures.listFiles();
-        if (listFiles != null && listFiles.length != 0) {
-            for (int length = listFiles.length - 1; length >= 0; length--) {
-                if (str.equals(listFiles[length].getName())) {
+        File[] fileArrListFiles = sKernelFeatures.listFiles();
+        if (fileArrListFiles != null && fileArrListFiles.length != 0) {
+            for (int length = fileArrListFiles.length - 1; length >= 0; length--) {
+                if (str.equals(fileArrListFiles[length].getName())) {
                     return true;
                 }
             }
@@ -78,15 +78,15 @@ public final class F2fsUtils {
         return false;
     }
 
-    private static boolean isCompressionEnabledOnUserData() {
+    private static boolean isCompressionEnabledOnUserData() throws IOException {
         File file = sUserDataFeatures;
         if (file.exists() && file.isFile() && file.canRead()) {
             try {
-                List<String> readAllLines = Files.readAllLines(file.toPath());
-                if (readAllLines != null && readAllLines.size() <= 1 && !TextUtils.isEmpty(readAllLines.get(0))) {
-                    String[] split = readAllLines.get(0).split(",");
-                    for (int length = split.length - 1; length >= 0; length--) {
-                        if (COMPRESSION_FEATURE.equals(split[length].trim())) {
+                List<String> allLines = Files.readAllLines(file.toPath());
+                if (allLines != null && allLines.size() <= 1 && !TextUtils.isEmpty(allLines.get(0))) {
+                    String[] strArrSplit = allLines.get(0).split(",");
+                    for (int length = strArrSplit.length - 1; length >= 0; length--) {
+                        if (COMPRESSION_FEATURE.equals(strArrSplit[length].trim())) {
                             return true;
                         }
                     }
@@ -98,12 +98,12 @@ public final class F2fsUtils {
     }
 
     private static List<File> getFilesRecursive(File file) {
-        File[] listFiles = file.listFiles();
-        if (listFiles == null) {
+        File[] fileArrListFiles = file.listFiles();
+        if (fileArrListFiles == null) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        for (File file2 : listFiles) {
+        for (File file2 : fileArrListFiles) {
             if (file2.isDirectory()) {
                 arrayList.addAll(getFilesRecursive(file2));
             } else if (file2.isFile()) {

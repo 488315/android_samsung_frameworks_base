@@ -107,7 +107,7 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
     }
 
     @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-    public void process(List<CaptureBundle> list, IProcessResultImpl iProcessResultImpl, boolean z) throws RemoteException {
+    public void process(List<CaptureBundle> list, IProcessResultImpl iProcessResultImpl, boolean z) throws Exception {
         JpegParameters jpegParameters = getJpegParameters(list);
         try {
             this.mJpegParameters.add(jpegParameters);
@@ -156,9 +156,9 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
             this.mProcessor.onOutputSurface(surface, i);
         } else {
             this.mOutputWriter = ImageWriter.newInstance(surface, 1, 256, (((size.width * this.mResolution.height) * 3) / 2) + 65536, 1);
-            ImageReader newInstance = ImageReader.newInstance(this.mResolution.width, this.mResolution.height, this.mFormat, 1);
-            this.mYuvReader = newInstance;
-            newInstance.setOnImageAvailableListener(new YuvCallback(this.mYuvReader, this.mOutputWriter), this.mHandler);
+            ImageReader imageReaderNewInstance = ImageReader.newInstance(this.mResolution.width, this.mResolution.height, this.mFormat, 1);
+            this.mYuvReader = imageReaderNewInstance;
+            imageReaderNewInstance.setOnImageAvailableListener(new YuvCallback(this.mYuvReader, this.mOutputWriter), this.mHandler);
             this.mProcessor.onOutputSurface(this.mYuvReader.getSurface(), this.mFormat);
         }
         this.mProcessor.onResolutionUpdate(this.mResolution, this.mPostviewResolution);
@@ -175,9 +175,9 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
             this.mProcessor.onPostviewOutputSurface(surface);
         } else {
             this.mPostviewOutputWriter = ImageWriter.newInstance(surface, 1, 256, size.width * this.mPostviewResolution.height, 1);
-            ImageReader newInstance = ImageReader.newInstance(this.mPostviewResolution.width, this.mPostviewResolution.height, this.mFormat, 1);
-            this.mPostviewYuvReader = newInstance;
-            newInstance.setOnImageAvailableListener(new YuvCallback(this.mPostviewYuvReader, this.mPostviewOutputWriter), this.mHandler);
+            ImageReader imageReaderNewInstance = ImageReader.newInstance(this.mPostviewResolution.width, this.mPostviewResolution.height, this.mFormat, 1);
+            this.mPostviewYuvReader = imageReaderNewInstance;
+            imageReaderNewInstance.setOnImageAvailableListener(new YuvCallback(this.mPostviewYuvReader, this.mPostviewOutputWriter), this.mHandler);
             this.mProcessor.onPostviewOutputSurface(this.mPostviewYuvReader.getSurface());
         }
         this.mProcessor.onResolutionUpdate(this.mResolution, this.mPostviewResolution);
@@ -198,65 +198,65 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
             this.mImageWriter = imageWriter;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.media.ImageReader.OnImageAvailableListener
         public void onImageAvailable(ImageReader imageReader) {
-            Image acquireNextImage;
             JpegParameters jpegParameters;
             Image image = null;
-            byte b = 0;
+            Object[] objArr = 0;
             try {
-                acquireNextImage = this.mImageReader.acquireNextImage();
-            } catch (IllegalStateException unused) {
-            }
-            try {
-                Image dequeueInputImage = this.mImageWriter.dequeueInputImage();
-                ByteBuffer buffer = dequeueInputImage.getPlanes()[0].getBuffer();
-                buffer.clear();
-                int width = dequeueInputImage.getWidth();
-                Image.Plane plane = acquireNextImage.getPlanes()[0];
-                Image.Plane plane2 = acquireNextImage.getPlanes()[1];
-                Image.Plane plane3 = acquireNextImage.getPlanes()[2];
-                ConcurrentLinkedQueue concurrentLinkedQueue = new ConcurrentLinkedQueue(CameraExtensionJpegProcessor.this.mJpegParameters);
-                Iterator it = concurrentLinkedQueue.iterator();
-                while (true) {
-                    if (!it.hasNext()) {
-                        jpegParameters = null;
-                        break;
-                    }
-                    jpegParameters = (JpegParameters) it.next();
-                    if (jpegParameters.mTimeStamps.contains(Long.valueOf(acquireNextImage.getTimestamp()))) {
-                        it.remove();
-                        break;
-                    }
-                }
-                if (jpegParameters == null) {
-                    if (concurrentLinkedQueue.isEmpty()) {
-                        Log.w(CameraExtensionJpegProcessor.TAG, "Empty jpeg settings queue! Using default jpeg orientation and quality!");
-                        jpegParameters = new JpegParameters();
-                        jpegParameters.mRotation = 0;
-                        jpegParameters.mQuality = 100;
-                    } else {
-                        Log.w(CameraExtensionJpegProcessor.TAG, "No jpeg settings found with matching timestamp for current processed input!");
-                        Log.w(CameraExtensionJpegProcessor.TAG, "Using values from the top of the queue!");
-                        jpegParameters = (JpegParameters) concurrentLinkedQueue.poll();
-                    }
-                }
-                CameraExtensionJpegProcessor.compressJpegFromYUV420pNative(acquireNextImage.getWidth(), acquireNextImage.getHeight(), plane.getBuffer(), plane.getPixelStride(), plane.getRowStride(), plane2.getBuffer(), plane2.getPixelStride(), plane2.getRowStride(), plane3.getBuffer(), plane3.getPixelStride(), plane3.getRowStride(), buffer, width, jpegParameters.mQuality, 0, 0, acquireNextImage.getWidth(), acquireNextImage.getHeight(), jpegParameters.mRotation);
-                dequeueInputImage.setTimestamp(acquireNextImage.getTimestamp());
-                acquireNextImage.close();
+                Image imageAcquireNextImage = this.mImageReader.acquireNextImage();
                 try {
-                    this.mImageWriter.queueInputImage(dequeueInputImage);
+                    Image imageDequeueInputImage = this.mImageWriter.dequeueInputImage();
+                    ByteBuffer buffer = imageDequeueInputImage.getPlanes()[0].getBuffer();
+                    buffer.clear();
+                    int width = imageDequeueInputImage.getWidth();
+                    Image.Plane plane = imageAcquireNextImage.getPlanes()[0];
+                    Image.Plane plane2 = imageAcquireNextImage.getPlanes()[1];
+                    Image.Plane plane3 = imageAcquireNextImage.getPlanes()[2];
+                    ConcurrentLinkedQueue concurrentLinkedQueue = new ConcurrentLinkedQueue(CameraExtensionJpegProcessor.this.mJpegParameters);
+                    Iterator it = concurrentLinkedQueue.iterator();
+                    while (true) {
+                        if (!it.hasNext()) {
+                            jpegParameters = null;
+                            break;
+                        }
+                        jpegParameters = (JpegParameters) it.next();
+                        if (jpegParameters.mTimeStamps.contains(Long.valueOf(imageAcquireNextImage.getTimestamp()))) {
+                            it.remove();
+                            break;
+                        }
+                    }
+                    if (jpegParameters == null) {
+                        if (concurrentLinkedQueue.isEmpty()) {
+                            Log.w(CameraExtensionJpegProcessor.TAG, "Empty jpeg settings queue! Using default jpeg orientation and quality!");
+                            jpegParameters = new JpegParameters();
+                            jpegParameters.mRotation = 0;
+                            jpegParameters.mQuality = 100;
+                        } else {
+                            Log.w(CameraExtensionJpegProcessor.TAG, "No jpeg settings found with matching timestamp for current processed input!");
+                            Log.w(CameraExtensionJpegProcessor.TAG, "Using values from the top of the queue!");
+                            jpegParameters = (JpegParameters) concurrentLinkedQueue.poll();
+                        }
+                    }
+                    CameraExtensionJpegProcessor.compressJpegFromYUV420pNative(imageAcquireNextImage.getWidth(), imageAcquireNextImage.getHeight(), plane.getBuffer(), plane.getPixelStride(), plane.getRowStride(), plane2.getBuffer(), plane2.getPixelStride(), plane2.getRowStride(), plane3.getBuffer(), plane3.getPixelStride(), plane3.getRowStride(), buffer, width, jpegParameters.mQuality, 0, 0, imageAcquireNextImage.getWidth(), imageAcquireNextImage.getHeight(), jpegParameters.mRotation);
+                    imageDequeueInputImage.setTimestamp(imageAcquireNextImage.getTimestamp());
+                    imageAcquireNextImage.close();
+                    try {
+                        this.mImageWriter.queueInputImage(imageDequeueInputImage);
+                    } catch (IllegalStateException unused) {
+                        Log.e(CameraExtensionJpegProcessor.TAG, "Failed to queue encoded result!");
+                    } finally {
+                        imageDequeueInputImage.close();
+                    }
                 } catch (IllegalStateException unused2) {
-                    Log.e(CameraExtensionJpegProcessor.TAG, "Failed to queue encoded result!");
-                } finally {
-                    dequeueInputImage.close();
+                    image = imageAcquireNextImage;
+                    if (image != null) {
+                        image.close();
+                    }
+                    Log.e(CameraExtensionJpegProcessor.TAG, "Failed to acquire processed yuv image or jpeg image!");
                 }
             } catch (IllegalStateException unused3) {
-                image = acquireNextImage;
-                if (image != null) {
-                    image.close();
-                }
-                Log.e(CameraExtensionJpegProcessor.TAG, "Failed to acquire processed yuv image or jpeg image!");
             }
         }
     }

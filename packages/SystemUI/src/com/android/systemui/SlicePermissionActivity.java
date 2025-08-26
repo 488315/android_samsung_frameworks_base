@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SlicePermissionActivity extends Activity implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     public CheckBox mAllCheckbox;
@@ -60,16 +59,16 @@ public class SlicePermissionActivity extends Activity implements DialogInterface
                 }
                 EventLog.writeEvent(1397638484, "159145361", Integer.valueOf(i));
             }
-            String unicodeWrap = BidiFormatter.getInstance().unicodeWrap(packageManager.getApplicationInfo(this.mCallingPkg, 0).loadSafeLabel(packageManager, 1000.0f, 5).toString());
-            String unicodeWrap2 = BidiFormatter.getInstance().unicodeWrap(packageManager.getApplicationInfo(this.mProviderPkg, 0).loadSafeLabel(packageManager, 1000.0f, 5).toString());
-            AlertDialog create = new AlertDialog.Builder(this).setTitle(getString(R.string.slice_permission_title, new Object[]{unicodeWrap, unicodeWrap2})).setView(R.layout.slice_permission_request).setNegativeButton(R.string.slice_permission_deny, this).setPositiveButton(R.string.slice_permission_allow, this).setOnDismissListener(this).create();
-            create.getWindow().addSystemFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
-            create.show();
-            ((TextView) create.getWindow().getDecorView().findViewById(R.id.text1)).setText(getString(R.string.slice_permission_text_1, new Object[]{unicodeWrap2}));
-            ((TextView) create.getWindow().getDecorView().findViewById(R.id.text2)).setText(getString(R.string.slice_permission_text_2, new Object[]{unicodeWrap2}));
-            CheckBox checkBox = (CheckBox) create.getWindow().getDecorView().findViewById(R.id.slice_permission_checkbox);
+            String strUnicodeWrap = BidiFormatter.getInstance().unicodeWrap(packageManager.getApplicationInfo(this.mCallingPkg, 0).loadSafeLabel(packageManager, 1000.0f, 5).toString());
+            String strUnicodeWrap2 = BidiFormatter.getInstance().unicodeWrap(packageManager.getApplicationInfo(this.mProviderPkg, 0).loadSafeLabel(packageManager, 1000.0f, 5).toString());
+            AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setTitle(getString(R.string.slice_permission_title, new Object[]{strUnicodeWrap, strUnicodeWrap2})).setView(R.layout.slice_permission_request).setNegativeButton(R.string.slice_permission_deny, this).setPositiveButton(R.string.slice_permission_allow, this).setOnDismissListener(this).create();
+            alertDialogCreate.getWindow().addSystemFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
+            alertDialogCreate.show();
+            ((TextView) alertDialogCreate.getWindow().getDecorView().findViewById(R.id.text1)).setText(getString(R.string.slice_permission_text_1, new Object[]{strUnicodeWrap2}));
+            ((TextView) alertDialogCreate.getWindow().getDecorView().findViewById(R.id.text2)).setText(getString(R.string.slice_permission_text_2, new Object[]{strUnicodeWrap2}));
+            CheckBox checkBox = (CheckBox) alertDialogCreate.getWindow().getDecorView().findViewById(R.id.slice_permission_checkbox);
             this.mAllCheckbox = checkBox;
-            checkBox.setText(getString(R.string.slice_permission_checkbox, new Object[]{unicodeWrap}));
+            checkBox.setText(getString(R.string.slice_permission_checkbox, new Object[]{strUnicodeWrap}));
         } catch (PackageManager.NameNotFoundException e2) {
             Log.e("SlicePermissionActivity", "Couldn't find package", e2);
             finish();

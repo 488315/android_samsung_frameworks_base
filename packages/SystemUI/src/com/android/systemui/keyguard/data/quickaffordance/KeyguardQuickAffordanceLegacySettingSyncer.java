@@ -12,7 +12,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardQuickAffordanceLegacySettingSyncer {
     public static final List BINDINGS;
@@ -21,7 +20,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer {
     public final SecureSettings secureSettings;
     public final KeyguardQuickAffordanceLocalUserSelectionManager selectionsManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Binding {
         public final String affordanceId;
         public final String settingsKey;
@@ -58,7 +56,6 @@ public final class KeyguardQuickAffordanceLegacySettingSyncer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

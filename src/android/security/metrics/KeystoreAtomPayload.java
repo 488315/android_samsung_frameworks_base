@@ -212,37 +212,37 @@ public final class KeystoreAtomPayload implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, (StorageStats) parcel.readTypedObject(StorageStats.CREATOR));
+                _set(i, (StorageStats) parcel.readTypedObject(StorageStats.CREATOR));
                 return;
             case 1:
-                _set(readInt, (KeyCreationWithGeneralInfo) parcel.readTypedObject(KeyCreationWithGeneralInfo.CREATOR));
+                _set(i, (KeyCreationWithGeneralInfo) parcel.readTypedObject(KeyCreationWithGeneralInfo.CREATOR));
                 return;
             case 2:
-                _set(readInt, (KeyCreationWithAuthInfo) parcel.readTypedObject(KeyCreationWithAuthInfo.CREATOR));
+                _set(i, (KeyCreationWithAuthInfo) parcel.readTypedObject(KeyCreationWithAuthInfo.CREATOR));
                 return;
             case 3:
-                _set(readInt, (KeyCreationWithPurposeAndModesInfo) parcel.readTypedObject(KeyCreationWithPurposeAndModesInfo.CREATOR));
+                _set(i, (KeyCreationWithPurposeAndModesInfo) parcel.readTypedObject(KeyCreationWithPurposeAndModesInfo.CREATOR));
                 return;
             case 4:
-                _set(readInt, (Keystore2AtomWithOverflow) parcel.readTypedObject(Keystore2AtomWithOverflow.CREATOR));
+                _set(i, (Keystore2AtomWithOverflow) parcel.readTypedObject(Keystore2AtomWithOverflow.CREATOR));
                 return;
             case 5:
-                _set(readInt, (KeyOperationWithPurposeAndModesInfo) parcel.readTypedObject(KeyOperationWithPurposeAndModesInfo.CREATOR));
+                _set(i, (KeyOperationWithPurposeAndModesInfo) parcel.readTypedObject(KeyOperationWithPurposeAndModesInfo.CREATOR));
                 return;
             case 6:
-                _set(readInt, (KeyOperationWithGeneralInfo) parcel.readTypedObject(KeyOperationWithGeneralInfo.CREATOR));
+                _set(i, (KeyOperationWithGeneralInfo) parcel.readTypedObject(KeyOperationWithGeneralInfo.CREATOR));
                 return;
             case 7:
-                _set(readInt, (RkpErrorStats) parcel.readTypedObject(RkpErrorStats.CREATOR));
+                _set(i, (RkpErrorStats) parcel.readTypedObject(RkpErrorStats.CREATOR));
                 return;
             case 8:
-                _set(readInt, (CrashStats) parcel.readTypedObject(CrashStats.CREATOR));
+                _set(i, (CrashStats) parcel.readTypedObject(CrashStats.CREATOR));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

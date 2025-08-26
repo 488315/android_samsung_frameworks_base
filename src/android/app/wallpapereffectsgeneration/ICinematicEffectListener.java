@@ -44,9 +44,9 @@ public interface ICinematicEffectListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICinematicEffectListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICinematicEffectListener)) {
-                return (ICinematicEffectListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICinematicEffectListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICinematicEffectListener)) {
+                return (ICinematicEffectListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ICinematicEffectListener extends IInterface {
 
             @Override // android.app.wallpapereffectsgeneration.ICinematicEffectListener
             public void onCinematicEffectGenerated(CinematicEffectResponse cinematicEffectResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICinematicEffectListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cinematicEffectResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICinematicEffectListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cinematicEffectResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

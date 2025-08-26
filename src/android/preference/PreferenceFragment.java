@@ -7,6 +7,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
@@ -121,7 +122,7 @@ public abstract class PreferenceFragment extends Fragment implements PreferenceM
     }
 
     @Override // android.app.Fragment
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         ActivityInfo activityInfo;
         super.onCreate(bundle);
         PreferenceManager preferenceManager = new PreferenceManager(getActivity(), 100);
@@ -143,21 +144,21 @@ public abstract class PreferenceFragment extends Fragment implements PreferenceM
 
     @Override // android.app.Fragment
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
-        TypedArray obtainStyledAttributes = getActivity().obtainStyledAttributes(null, R.styleable.PreferenceFragment, 16844038, 0);
-        this.mLayoutResId = obtainStyledAttributes.getResourceId(0, this.mLayoutResId);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getActivity().obtainStyledAttributes(null, R.styleable.PreferenceFragment, 16844038, 0);
+        this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(0, this.mLayoutResId);
+        typedArrayObtainStyledAttributes.recycle();
         return layoutInflater.inflate(this.mLayoutResId, viewGroup, false);
     }
 
     @Override // android.app.Fragment
     public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
-        TypedArray obtainStyledAttributes = getActivity().obtainStyledAttributes(null, R.styleable.PreferenceFragment, 16844038, 0);
+        TypedArray typedArrayObtainStyledAttributes = getActivity().obtainStyledAttributes(null, R.styleable.PreferenceFragment, 16844038, 0);
         ListView listView = (ListView) view.findViewById(16908298);
-        if (listView != null && obtainStyledAttributes.hasValueOrEmpty(1)) {
-            listView.setDivider(obtainStyledAttributes.getDrawable(1));
+        if (listView != null && typedArrayObtainStyledAttributes.hasValueOrEmpty(1)) {
+            listView.setDivider(typedArrayObtainStyledAttributes.getDrawable(1));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.app.Fragment
@@ -287,14 +288,14 @@ public abstract class PreferenceFragment extends Fragment implements PreferenceM
         if (preferenceScreen != null) {
             View view = getView();
             if (view != null) {
-                View findViewById = view.findViewById(16908310);
-                if (findViewById instanceof TextView) {
+                View viewFindViewById = view.findViewById(16908310);
+                if (viewFindViewById instanceof TextView) {
                     CharSequence title = preferenceScreen.getTitle();
                     if (TextUtils.isEmpty(title)) {
-                        findViewById.setVisibility(8);
+                        viewFindViewById.setVisibility(8);
                     } else {
-                        ((TextView) findViewById).lambda$setTextAsync$0(title);
-                        findViewById.setVisibility(0);
+                        ((TextView) viewFindViewById).lambda$setTextAsync$0(title);
+                        viewFindViewById.setVisibility(0);
                     }
                 }
             }
@@ -320,11 +321,11 @@ public abstract class PreferenceFragment extends Fragment implements PreferenceM
         if (view == null) {
             return false;
         }
-        View findViewById = view.findViewById(16908298);
-        if (!(findViewById instanceof ListView)) {
+        View viewFindViewById = view.findViewById(16908298);
+        if (!(viewFindViewById instanceof ListView)) {
             return false;
         }
-        ListView listView = (ListView) findViewById;
+        ListView listView = (ListView) viewFindViewById;
         this.mList = listView;
         return listView != null;
     }
@@ -337,11 +338,11 @@ public abstract class PreferenceFragment extends Fragment implements PreferenceM
         if (view == null) {
             throw new IllegalStateException("Content view not yet created");
         }
-        View findViewById = view.findViewById(16908298);
-        if (!(findViewById instanceof ListView)) {
+        View viewFindViewById = view.findViewById(16908298);
+        if (!(viewFindViewById instanceof ListView)) {
             throw new RuntimeException("Content has view with id attribute 'android.R.id.list' that is not a ListView class");
         }
-        ListView listView = (ListView) findViewById;
+        ListView listView = (ListView) viewFindViewById;
         this.mList = listView;
         if (listView == null) {
             throw new RuntimeException("Your content must have a ListView whose id attribute is 'android.R.id.list'");

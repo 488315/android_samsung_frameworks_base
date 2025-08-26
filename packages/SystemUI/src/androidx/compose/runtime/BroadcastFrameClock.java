@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BroadcastFrameClock implements MonotonicFrameClock {
     public List awaiters;
@@ -26,7 +25,6 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
     public final Function0 onNewAwaiters;
     public List spareList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class FrameAwaiter<R> {
         public final Continuation continuation;
         public final Function1 onFrame;
@@ -37,6 +35,7 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BroadcastFrameClock() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -75,7 +74,7 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
                     frameAwaiter.getClass();
                     try {
                         int i2 = Result.$r8$clinit;
-                        failure = frameAwaiter.onFrame.mo779invoke(Long.valueOf(j));
+                        failure = frameAwaiter.onFrame.mo781invoke(Long.valueOf(j));
                     } catch (Throwable th) {
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
@@ -102,9 +101,9 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
                 int i = Result.$r8$clinit;
                 cancellableContinuationImpl.resumeWith(new Result.Failure(th));
             } else {
-                boolean isEmpty = this.awaiters.isEmpty();
+                boolean zIsEmpty = this.awaiters.isEmpty();
                 ((ArrayList) this.awaiters).add(frameAwaiter);
-                if (isEmpty) {
+                if (zIsEmpty) {
                     this.hasAwaitersUnlocked.set(1);
                 }
                 cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: androidx.compose.runtime.BroadcastFrameClock$withFrameNanos$2$1
@@ -115,8 +114,8 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        BroadcastFrameClock broadcastFrameClock = BroadcastFrameClock.this;
+                    public final Object mo781invoke(Object obj) {
+                        BroadcastFrameClock broadcastFrameClock = this.this$0;
                         Object obj2 = broadcastFrameClock.lock;
                         BroadcastFrameClock.FrameAwaiter<Object> frameAwaiter2 = frameAwaiter;
                         synchronized (obj2) {
@@ -128,7 +127,7 @@ public final class BroadcastFrameClock implements MonotonicFrameClock {
                         return Unit.INSTANCE;
                     }
                 });
-                if (isEmpty && (function0 = this.onNewAwaiters) != null) {
+                if (zIsEmpty && (function0 = this.onNewAwaiters) != null) {
                     try {
                         function0.invoke();
                     } catch (Throwable th2) {

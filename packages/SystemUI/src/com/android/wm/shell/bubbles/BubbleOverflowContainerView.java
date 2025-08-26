@@ -3,6 +3,7 @@ package com.android.wm.shell.bubbles;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleOverflowContainerView extends LinearLayout {
     public float fontSize;
@@ -38,15 +38,14 @@ public class BubbleOverflowContainerView extends LinearLayout {
     public BubblePositioner mPositioner;
     public RecyclerView mRecyclerView;
     public int mVerticalMargin;
+    public int textColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleOverflowContainerView$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OverflowGridLayoutManager extends GridLayoutManager {
         public OverflowGridLayoutManager(BubbleOverflowContainerView bubbleOverflowContainerView, Context context, int i) {
             super(context, i);
@@ -60,7 +59,6 @@ public class BubbleOverflowContainerView extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OverflowItemDecoration extends RecyclerView.ItemDecoration {
         public /* synthetic */ OverflowItemDecoration(BubbleOverflowContainerView bubbleOverflowContainerView, int i) {
             this();
@@ -124,16 +122,17 @@ public class BubbleOverflowContainerView extends LinearLayout {
         this.mEmptyStateImage = (ImageView) findViewById(R.id.bubble_overflow_empty_state_image);
     }
 
-    public final void show() {
+    public final void show() throws Resources.NotFoundException {
         requestFocus();
         Resources resources = getResources();
-        int round = Math.round(getWidth() / resources.getDimension(R.dimen.bubble_name_width));
-        if (round <= 0) {
-            round = resources.getInteger(R.integer.bubbles_overflow_columns);
+        int iRound = Math.round(getWidth() / resources.getDimension(R.dimen.bubble_name_width));
+        if (iRound <= 0) {
+            iRound = resources.getInteger(R.integer.bubbles_overflow_columns);
         }
-        this.mRecyclerView.setLayoutManager(new OverflowGridLayoutManager(this, getContext(), round));
+        this.mRecyclerView.setLayoutManager(new OverflowGridLayoutManager(this, getContext(), iRound));
+        int i = 0;
         if (this.mRecyclerView.mItemDecorations.size() == 0) {
-            this.mRecyclerView.addItemDecoration(new OverflowItemDecoration(this, r1));
+            this.mRecyclerView.addItemDecoration(new OverflowItemDecoration(this, i));
         }
         Context context = getContext();
         List list = this.mOverflowBubbles;
@@ -142,7 +141,7 @@ public class BubbleOverflowContainerView extends LinearLayout {
         BubbleOverflowAdapter bubbleOverflowAdapter = new BubbleOverflowAdapter(context, list, new Consumer() { // from class: com.android.wm.shell.bubbles.BubbleOverflowContainerView$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((BubbleExpandedViewManager$Companion$fromBubbleController$1) BubbleExpandedViewManager.this).$controller.promoteBubbleFromOverflow((Bubble) obj);
+                ((BubbleExpandedViewManager$Companion$fromBubbleController$1) bubbleExpandedViewManager).$controller.promoteBubbleFromOverflow((Bubble) obj);
             }
         }, this.mPositioner);
         this.mAdapter = bubbleOverflowAdapter;
@@ -153,7 +152,7 @@ public class BubbleOverflowContainerView extends LinearLayout {
         ((BubbleExpandedViewManager$Companion$fromBubbleController$1) this.mExpandedViewManager).$controller.mOverflowListener = this.mDataListener;
         updateEmptyStateVisibility();
         Resources resources2 = getResources();
-        r1 = (resources2.getConfiguration().uiMode & 48) == 32 ? 1 : 0;
+        boolean z = (resources2.getConfiguration().uiMode & 48) == 32;
         this.mHorizontalMargin = resources2.getDimensionPixelSize(R.dimen.bubble_overflow_item_padding_horizontal);
         this.mVerticalMargin = resources2.getDimensionPixelSize(R.dimen.bubble_overflow_item_padding_vertical);
         RecyclerView recyclerView = this.mRecyclerView;
@@ -163,14 +162,14 @@ public class BubbleOverflowContainerView extends LinearLayout {
         this.mEmptyStateImage.setVisibility(8);
         this.mEmptyStateSubtitle.setVisibility(8);
         this.mEmptyStateTitle.setText(R.string.sec_bubble_overflow_empty_text);
-        findViewById(R.id.bubble_overflow_container).setBackgroundColor(r1 != 0 ? resources2.getColor(R.color.bubbles_dark) : resources2.getColor(R.color.bubbles_light));
+        findViewById(R.id.bubble_overflow_container).setBackgroundColor(z ? resources2.getColor(R.color.bubbles_dark) : resources2.getColor(R.color.bubbles_light));
         int color = getContext().getColor(android.R.color.side_fps_toast_background);
-        int color2 = getContext().getColor(android.R.color.search_url_text_material_light);
+        this.textColor = ((LinearLayout) this).mContext.getColor(R.color.no_more_bubble_text_color);
+        this.mEmptyStateTitle.setTypeface(Typeface.create(Typeface.create("sec", 0), 400, false));
         setBackgroundColor(color);
-        this.mEmptyStateTitle.setTextColor(color2);
-        this.mEmptyStateSubtitle.setTextColor(color2);
+        this.mEmptyStateTitle.setTextColor(this.textColor);
+        this.mEmptyStateSubtitle.setTextColor(this.textColor);
         TypefaceUtils.FontFamily fontFamily = TypefaceUtils.FontFamily.GSF_TITLE_MEDIUM;
-        TypefaceUtils.setTypeface();
         TypefaceUtils.setTypeface();
     }
 

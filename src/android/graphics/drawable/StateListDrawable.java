@@ -41,21 +41,21 @@ public class StateListDrawable extends DrawableContainer {
 
     @Override // android.graphics.drawable.DrawableContainer, android.graphics.drawable.Drawable
     protected boolean onStateChange(int[] iArr) {
-        boolean onStateChange = super.onStateChange(iArr);
-        int indexOfStateSet = this.mStateListState.indexOfStateSet(iArr);
-        if (indexOfStateSet < 0) {
-            indexOfStateSet = this.mStateListState.indexOfStateSet(StateSet.WILD_CARD);
+        boolean zOnStateChange = super.onStateChange(iArr);
+        int iIndexOfStateSet = this.mStateListState.indexOfStateSet(iArr);
+        if (iIndexOfStateSet < 0) {
+            iIndexOfStateSet = this.mStateListState.indexOfStateSet(StateSet.WILD_CARD);
         }
-        return selectDrawable(indexOfStateSet) || onStateChange;
+        return selectDrawable(iIndexOfStateSet) || zOnStateChange;
     }
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.StateListDrawable);
-        super.inflateWithAttributes(resources, xmlPullParser, obtainAttributes, 1);
-        updateStateFromTypedArray(obtainAttributes);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.StateListDrawable);
+        super.inflateWithAttributes(resources, xmlPullParser, typedArrayObtainAttributes, 1);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
         updateDensity(resources);
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         onStateChange(getState());
     }
@@ -86,10 +86,10 @@ public class StateListDrawable extends DrawableContainer {
                 return;
             }
             if (next2 == 2 && depth2 <= depth && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
-                TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.StateListDrawableItem);
-                Drawable drawable = obtainAttributes.getDrawable(0);
-                obtainAttributes.recycle();
-                int[] extractStateSet = extractStateSet(attributeSet);
+                TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.StateListDrawableItem);
+                Drawable drawable = typedArrayObtainAttributes.getDrawable(0);
+                typedArrayObtainAttributes.recycle();
+                int[] iArrExtractStateSet = extractStateSet(attributeSet);
                 if (drawable == null) {
                     do {
                         next = xmlPullParser.next();
@@ -99,7 +99,7 @@ public class StateListDrawable extends DrawableContainer {
                     }
                     drawable = Drawable.createFromXmlInner(resources, xmlPullParser, attributeSet, theme);
                 }
-                stateListState.addStateSet(extractStateSet, drawable);
+                stateListState.addStateSet(iArrExtractStateSet, drawable);
             }
         }
     }
@@ -191,9 +191,9 @@ public class StateListDrawable extends DrawableContainer {
         }
 
         int addStateSet(int[] iArr, Drawable drawable) {
-            int addChild = addChild(drawable);
-            this.mStateSets[addChild] = iArr;
-            return addChild;
+            int iAddChild = addChild(drawable);
+            this.mStateSets[iAddChild] = iArr;
+            return iAddChild;
         }
 
         int indexOfStateSet(int[] iArr) {
@@ -211,6 +211,7 @@ public class StateListDrawable extends DrawableContainer {
             return StateSet.containsAttribute(this.mStateSets, 16842908);
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new StateListDrawable(this, null);

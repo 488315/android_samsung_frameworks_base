@@ -1,20 +1,16 @@
 package com.sec.ims.ft;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface FtIntent {
     public static final String CATEGORY_ACTION = "com.samsung.rcs.framework.filetransfer.category.ACTION";
     public static final String CATEGORY_NOTIFICATION = "com.samsung.rcs.framework.filetransfer.category.NOTIFICATION";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Actions {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface RequestIntentToApp {
             public static final String REQUEST_FILE_RESIZE = "com.samsung.rcs.framework.filetransfer.request.REQUEST_FILE_RESIZE";
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface RequestIntents {
             public static final String ATTACH_FILE = "com.samsung.rcs.framework.filetransfer.action.ATTACH_FILE";
             public static final String ATTACH_FILE_TO_GROUP_CHAT = "com.samsung.rcs.framework.filetransfer.action.ATTACH_FILE_TO_GROUP_CHAT";
@@ -31,12 +27,10 @@ public interface FtIntent {
             public static final String TRANSFER_DECLINE = "com.samsung.rcs.framework.filetransfer.action.TRANSFER_DECLINE";
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface ResponseIntentFromApp {
             public static final String RESPONSE_FILE_RESIZE = "com.samsung.rcs.framework.filetransfer.response.RESPONSE_FILE_RESIZE";
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface ResponseIntents {
             public static final String GRANT_FILE_PERMISSION_RESPONSE = "com.samsung.rcs.framework.instantmessaging.action.GRANT_FILE_PERMISSION_RESPONSE";
             public static final String REQUEST_FAILED = "com.samsung.rcs.framework.filetransfer.notification.REQUEST_FAILED";
@@ -49,7 +43,6 @@ public interface FtIntent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Extras {
         public static final String EXTRA_AUTO_ACCEPT_STATE = "autoAcceptState";
         public static final String EXTRA_BYTES_DONE = "bytesDone";

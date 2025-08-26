@@ -2,7 +2,6 @@ package androidx.constraintlayout.core.motion.utils;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Easing {
     public String mStr = "identity";
@@ -49,7 +48,6 @@ public class Easing {
         return this.mStr;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CubicEasing extends Easing {
         public final double mX1;
         public final double mX2;
@@ -58,16 +56,16 @@ public class Easing {
 
         public CubicEasing(String str) {
             this.mStr = str;
-            int indexOf = str.indexOf(40);
-            int indexOf2 = str.indexOf(44, indexOf);
-            this.mX1 = Double.parseDouble(str.substring(indexOf + 1, indexOf2).trim());
-            int i = indexOf2 + 1;
-            int indexOf3 = str.indexOf(44, i);
-            this.mY1 = Double.parseDouble(str.substring(i, indexOf3).trim());
-            int i2 = indexOf3 + 1;
-            int indexOf4 = str.indexOf(44, i2);
-            this.mX2 = Double.parseDouble(str.substring(i2, indexOf4).trim());
-            int i3 = indexOf4 + 1;
+            int iIndexOf = str.indexOf(40);
+            int iIndexOf2 = str.indexOf(44, iIndexOf);
+            this.mX1 = Double.parseDouble(str.substring(iIndexOf + 1, iIndexOf2).trim());
+            int i = iIndexOf2 + 1;
+            int iIndexOf3 = str.indexOf(44, i);
+            this.mY1 = Double.parseDouble(str.substring(i, iIndexOf3).trim());
+            int i2 = iIndexOf3 + 1;
+            int iIndexOf4 = str.indexOf(44, i2);
+            this.mX2 = Double.parseDouble(str.substring(i2, iIndexOf4).trim());
+            int i3 = iIndexOf4 + 1;
             this.mY2 = Double.parseDouble(str.substring(i3, str.indexOf(41, i3)).trim());
         }
 

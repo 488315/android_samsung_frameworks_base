@@ -9,14 +9,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractMap implements Map, KMappedMarker {
     public static final /* synthetic */ int $r8$clinit = 0;
     public volatile AbstractMap$keys$1 _keys;
-    public volatile AbstractMap$values$1 _values;
+    public volatile AnonymousClass1 _values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -72,11 +70,11 @@ public abstract class AbstractMap implements Map, KMappedMarker {
         if (getSize() != map.size()) {
             return false;
         }
-        Set<Map.Entry> entrySet = map.entrySet();
-        if ((entrySet instanceof Collection) && entrySet.isEmpty()) {
+        Set<Map.Entry> setEntrySet = map.entrySet();
+        if ((setEntrySet instanceof Collection) && setEntrySet.isEmpty()) {
             return true;
         }
-        for (Map.Entry entry : entrySet) {
+        for (Map.Entry entry : setEntrySet) {
             if (entry != null) {
                 Object key = entry.getKey();
                 Object value = entry.getValue();
@@ -91,9 +89,9 @@ public abstract class AbstractMap implements Map, KMappedMarker {
 
     @Override // java.util.Map
     public Object get(Object obj) {
-        Map.Entry implFindEntry = implFindEntry(obj);
-        if (implFindEntry != null) {
-            return implFindEntry.getValue();
+        Map.Entry entryImplFindEntry = implFindEntry(obj);
+        if (entryImplFindEntry != null) {
+            return entryImplFindEntry.getValue();
         }
         return null;
     }
@@ -106,17 +104,17 @@ public abstract class AbstractMap implements Map, KMappedMarker {
             this._keys = new AbstractSet() { // from class: kotlin.collections.AbstractMap$keys$1
                 @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
                 public final boolean contains(Object obj) {
-                    return AbstractMap.this.containsKey(obj);
+                    return this.this$0.containsKey(obj);
                 }
 
                 @Override // kotlin.collections.AbstractCollection
                 public final int getSize() {
-                    return AbstractMap.this.getSize();
+                    return this.this$0.getSize();
                 }
 
                 @Override // kotlin.collections.AbstractSet, java.util.Collection, java.lang.Iterable, java.util.Set
                 public final Iterator iterator() {
-                    return new AbstractMap$keys$1$iterator$1(AbstractMap.this.getEntries().iterator());
+                    return new AbstractMap$keys$1$iterator$1(this.this$0.getEntries().iterator());
                 }
             };
         }
@@ -132,7 +130,7 @@ public abstract class AbstractMap implements Map, KMappedMarker {
     /* JADX WARN: Type inference failed for: r0v1, types: [kotlin.collections.AbstractMap$values$1] */
     public Collection getValues() {
         if (this._values == null) {
-            this._values = new AbstractCollection() { // from class: kotlin.collections.AbstractMap$values$1
+            this._values = new AbstractCollection() { // from class: kotlin.collections.AbstractMap.values.1
                 @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
                 public final boolean contains(Object obj) {
                     return AbstractMap.this.containsValue(obj);
@@ -149,9 +147,9 @@ public abstract class AbstractMap implements Map, KMappedMarker {
                 }
             };
         }
-        AbstractMap$values$1 abstractMap$values$1 = this._values;
-        abstractMap$values$1.getClass();
-        return abstractMap$values$1;
+        AnonymousClass1 anonymousClass1 = this._values;
+        anonymousClass1.getClass();
+        return anonymousClass1;
     }
 
     @Override // java.util.Map
@@ -160,19 +158,19 @@ public abstract class AbstractMap implements Map, KMappedMarker {
     }
 
     public final Map.Entry implFindEntry(Object obj) {
-        Object obj2;
+        Object next;
         Iterator it = getEntries().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj2 = null;
+                next = null;
                 break;
             }
-            obj2 = it.next();
-            if (Intrinsics.areEqual(((Map.Entry) obj2).getKey(), obj)) {
+            next = it.next();
+            if (Intrinsics.areEqual(((Map.Entry) next).getKey(), obj)) {
                 break;
             }
         }
-        return (Map.Entry) obj2;
+        return (Map.Entry) next;
     }
 
     @Override // java.util.Map
@@ -209,10 +207,10 @@ public abstract class AbstractMap implements Map, KMappedMarker {
         return CollectionsKt___CollectionsKt.joinToString$default(getEntries(), ", ", "{", "}", new Function1() { // from class: kotlin.collections.AbstractMap$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Map.Entry entry = (Map.Entry) obj;
                 int i = AbstractMap.$r8$clinit;
-                AbstractMap abstractMap = AbstractMap.this;
+                AbstractMap abstractMap = this.f$0;
                 StringBuilder sb = new StringBuilder();
                 Object key = entry.getKey();
                 sb.append(key == abstractMap ? "(this Map)" : String.valueOf(key));

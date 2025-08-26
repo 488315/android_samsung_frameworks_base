@@ -10,7 +10,6 @@ import android.media.PlaybackParams;
 import android.media.tv.ITvInputClient;
 import android.media.tv.ITvInputHardwareCallback;
 import android.media.tv.ITvInputManagerCallback;
-import android.media.tv.TvInputManager;
 import android.media.tv.ad.TvAdManager;
 import android.media.tv.interactive.TvInteractiveAppManager;
 import android.net.Uri;
@@ -1551,46 +1550,46 @@ public final class TvInputManager {
 
         @Override // android.media.tv.ITvInputHardwareCallback
         public void onReleased() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final HardwareCallback hardwareCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.media.tv.TvInputManager$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TvInputManager.HardwareCallback.this.onReleased();
+                        hardwareCallback.onReleased();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.media.tv.ITvInputHardwareCallback
         public void onStreamConfigChanged(final TvStreamConfig[] tvStreamConfigArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final HardwareCallback hardwareCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.media.tv.TvInputManager$4$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TvInputManager.HardwareCallback.this.onStreamConfigChanged(tvStreamConfigArr);
+                        hardwareCallback.onStreamConfigChanged(tvStreamConfigArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
 
     private Hardware acquireTvInputHardwareInternal(int i, TvInputInfo tvInputInfo, String str, int i2, Executor executor, HardwareCallback hardwareCallback) {
         try {
-            ITvInputHardware acquireTvInputHardware = this.mService.acquireTvInputHardware(i, new AnonymousClass4(this, executor, hardwareCallback), tvInputInfo, this.mUserId, str, i2);
-            if (acquireTvInputHardware == null) {
+            ITvInputHardware iTvInputHardwareAcquireTvInputHardware = this.mService.acquireTvInputHardware(i, new AnonymousClass4(this, executor, hardwareCallback), tvInputInfo, this.mUserId, str, i2);
+            if (iTvInputHardwareAcquireTvInputHardware == null) {
                 return null;
             }
-            return new Hardware(acquireTvInputHardware);
+            return new Hardware(iTvInputHardwareAcquireTvInputHardware);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2365,13 +2364,13 @@ public final class TvInputManager {
                 if (this.mChannel == null) {
                     return 0;
                 }
-                PendingEvent obtainPendingEventLocked = obtainPendingEventLocked(inputEvent, obj, finishedInputEventCallback, handler);
+                PendingEvent pendingEventObtainPendingEventLocked = obtainPendingEventLocked(inputEvent, obj, finishedInputEventCallback, handler);
                 if (Looper.myLooper() == Looper.getMainLooper()) {
-                    return sendInputEventOnMainLooperLocked(obtainPendingEventLocked);
+                    return sendInputEventOnMainLooperLocked(pendingEventObtainPendingEventLocked);
                 }
-                Message obtainMessage = this.mHandler.obtainMessage(1, obtainPendingEventLocked);
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessage(obtainMessage);
+                Message messageObtainMessage = this.mHandler.obtainMessage(1, pendingEventObtainPendingEventLocked);
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessage(messageObtainMessage);
                 return -1;
             }
         }
@@ -2397,9 +2396,9 @@ public final class TvInputManager {
             int sequenceNumber = inputEvent.getSequenceNumber();
             if (this.mSender.sendInputEvent(sequenceNumber, inputEvent)) {
                 this.mPendingEvents.put(sequenceNumber, pendingEvent);
-                Message obtainMessage = this.mHandler.obtainMessage(2, pendingEvent);
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessageDelayed(obtainMessage, INPUT_SESSION_NOT_RESPONDING_TIMEOUT);
+                Message messageObtainMessage = this.mHandler.obtainMessage(2, pendingEvent);
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessageDelayed(messageObtainMessage, INPUT_SESSION_NOT_RESPONDING_TIMEOUT);
                 return -1;
             }
             Log.w(TvInputManager.TAG, "Unable to send input event to session: " + this.mToken + " dropping:" + inputEvent);
@@ -2408,18 +2407,18 @@ public final class TvInputManager {
 
         void finishedInputEvent(int i, boolean z, boolean z2) {
             synchronized (this.mHandler) {
-                int indexOfKey = this.mPendingEvents.indexOfKey(i);
-                if (indexOfKey < 0) {
+                int iIndexOfKey = this.mPendingEvents.indexOfKey(i);
+                if (iIndexOfKey < 0) {
                     return;
                 }
-                PendingEvent valueAt = this.mPendingEvents.valueAt(indexOfKey);
-                this.mPendingEvents.removeAt(indexOfKey);
+                PendingEvent pendingEventValueAt = this.mPendingEvents.valueAt(iIndexOfKey);
+                this.mPendingEvents.removeAt(iIndexOfKey);
                 if (z2) {
                     Log.w(TvInputManager.TAG, "Timeout waiting for session to handle input event after 2500 ms: " + this.mToken);
                 } else {
-                    this.mHandler.removeMessages(2, valueAt);
+                    this.mHandler.removeMessages(2, pendingEventValueAt);
                 }
-                invokeFinishedInputEventCallback(valueAt, z);
+                invokeFinishedInputEventCallback(pendingEventValueAt, z);
             }
         }
 
@@ -2429,31 +2428,31 @@ public final class TvInputManager {
                 pendingEvent.run();
                 return;
             }
-            Message obtain = Message.obtain(pendingEvent.mEventHandler, pendingEvent);
-            obtain.setAsynchronous(true);
-            obtain.sendToTarget();
+            Message messageObtain = Message.obtain(pendingEvent.mEventHandler, pendingEvent);
+            messageObtain.setAsynchronous(true);
+            messageObtain.sendToTarget();
         }
 
         private void flushPendingEventsLocked() {
             this.mHandler.removeMessages(3);
             int size = this.mPendingEvents.size();
             for (int i = 0; i < size; i++) {
-                Message obtainMessage = this.mHandler.obtainMessage(3, this.mPendingEvents.keyAt(i), 0);
-                obtainMessage.setAsynchronous(true);
-                obtainMessage.sendToTarget();
+                Message messageObtainMessage = this.mHandler.obtainMessage(3, this.mPendingEvents.keyAt(i), 0);
+                messageObtainMessage.setAsynchronous(true);
+                messageObtainMessage.sendToTarget();
             }
         }
 
         private PendingEvent obtainPendingEventLocked(InputEvent inputEvent, Object obj, FinishedInputEventCallback finishedInputEventCallback, Handler handler) {
-            PendingEvent acquire = this.mPendingEventPool.acquire();
-            if (acquire == null) {
-                acquire = new PendingEvent();
+            PendingEvent pendingEventAcquire = this.mPendingEventPool.acquire();
+            if (pendingEventAcquire == null) {
+                pendingEventAcquire = new PendingEvent();
             }
-            acquire.mEvent = inputEvent;
-            acquire.mEventToken = obj;
-            acquire.mCallback = finishedInputEventCallback;
-            acquire.mEventHandler = handler;
-            return acquire;
+            pendingEventAcquire.mEvent = inputEvent;
+            pendingEventAcquire.mEventToken = obj;
+            pendingEventAcquire.mCallback = finishedInputEventCallback;
+            pendingEventAcquire.mEventHandler = handler;
+            return pendingEventAcquire;
         }
 
         /* JADX INFO: Access modifiers changed from: private */

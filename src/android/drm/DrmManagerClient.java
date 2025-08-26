@@ -14,12 +14,15 @@ import android.os.Message;
 import android.util.Log;
 import com.samsung.android.os.SemDvfsManager;
 import dalvik.system.CloseGuard;
+import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Deprecated
@@ -121,113 +124,46 @@ public class DrmManagerClient implements AutoCloseable {
             super(looper);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:16:0x00a5 A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x00ba A[ADDED_TO_REGION] */
-        /* JADX WARN: Removed duplicated region for block: B:24:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
         @Override // android.os.Handler
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public void handleMessage(android.os.Message r7) {
-            /*
-                r6 = this;
-                java.util.HashMap r0 = new java.util.HashMap
-                r0.<init>()
-                int r1 = r7.what
-                r2 = 1001(0x3e9, float:1.403E-42)
-                r3 = 0
-                if (r1 == r2) goto L75
-                r2 = 1002(0x3ea, float:1.404E-42)
-                if (r1 == r2) goto L26
-                java.lang.StringBuilder r6 = new java.lang.StringBuilder
-                java.lang.String r0 = "Unknown message type "
-                r6.<init>(r0)
-                int r7 = r7.what
-                r6.append(r7)
-                java.lang.String r6 = r6.toString()
-                java.lang.String r7 = "DrmManagerClient"
-                android.util.Log.e(r7, r6)
-                return
-            L26:
-                java.lang.Object r7 = r7.obj
-                android.drm.DrmInfo r7 = (android.drm.DrmInfo) r7
-                android.drm.DrmManagerClient r1 = android.drm.DrmManagerClient.this
-                int r2 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r1)
-                android.drm.DrmInfoStatus r1 = android.drm.DrmManagerClient.m1210$$Nest$m_processDrmInfo(r1, r2, r7)
-                java.lang.String r2 = "drm_info_status_object"
-                r0.put(r2, r1)
-                java.lang.String r2 = "drm_info_object"
-                r0.put(r2, r7)
-                if (r1 == 0) goto L59
-                r2 = 1
-                int r4 = r1.statusCode
-                if (r2 != r4) goto L59
-                android.drm.DrmEvent r7 = new android.drm.DrmEvent
-                android.drm.DrmManagerClient r2 = android.drm.DrmManagerClient.this
-                int r2 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r2)
-                android.drm.DrmManagerClient r4 = android.drm.DrmManagerClient.this
-                int r1 = r1.infoType
-                int r1 = android.drm.DrmManagerClient.m1213$$Nest$mgetEventType(r4, r1)
-                r7.<init>(r2, r1, r3, r0)
-                goto L8c
-            L59:
-                if (r1 == 0) goto L5e
-                int r7 = r1.infoType
-                goto L62
-            L5e:
-                int r7 = r7.getInfoType()
-            L62:
-                android.drm.DrmErrorEvent r1 = new android.drm.DrmErrorEvent
-                android.drm.DrmManagerClient r2 = android.drm.DrmManagerClient.this
-                int r2 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r2)
-                android.drm.DrmManagerClient r4 = android.drm.DrmManagerClient.this
-                int r7 = android.drm.DrmManagerClient.m1212$$Nest$mgetErrorType(r4, r7)
-                r1.<init>(r2, r7, r3, r0)
-                r7 = r1
-                goto L9d
-            L75:
-                android.drm.DrmManagerClient r7 = android.drm.DrmManagerClient.this
-                int r0 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r7)
-                int r7 = android.drm.DrmManagerClient.m1211$$Nest$m_removeAllRights(r7, r0)
-                if (r7 != 0) goto L90
-                android.drm.DrmEvent r7 = new android.drm.DrmEvent
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                int r0 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r0)
-                r7.<init>(r0, r2, r3)
-            L8c:
-                r5 = r3
-                r3 = r7
-                r7 = r5
-                goto L9d
-            L90:
-                android.drm.DrmErrorEvent r7 = new android.drm.DrmErrorEvent
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                int r0 = android.drm.DrmManagerClient.m1209$$Nest$fgetmUniqueId(r0)
-                r1 = 2007(0x7d7, float:2.812E-42)
-                r7.<init>(r0, r1, r3)
-            L9d:
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                android.drm.DrmManagerClient$OnEventListener r0 = android.drm.DrmManagerClient.m1207$$Nest$fgetmOnEventListener(r0)
-                if (r0 == 0) goto Lb2
-                if (r3 == 0) goto Lb2
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                android.drm.DrmManagerClient$OnEventListener r0 = android.drm.DrmManagerClient.m1207$$Nest$fgetmOnEventListener(r0)
-                android.drm.DrmManagerClient r1 = android.drm.DrmManagerClient.this
-                r0.onEvent(r1, r3)
-            Lb2:
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                android.drm.DrmManagerClient$OnErrorListener r0 = android.drm.DrmManagerClient.m1206$$Nest$fgetmOnErrorListener(r0)
-                if (r0 == 0) goto Lc7
-                if (r7 == 0) goto Lc7
-                android.drm.DrmManagerClient r0 = android.drm.DrmManagerClient.this
-                android.drm.DrmManagerClient$OnErrorListener r0 = android.drm.DrmManagerClient.m1206$$Nest$fgetmOnErrorListener(r0)
-                android.drm.DrmManagerClient r6 = android.drm.DrmManagerClient.this
-                r0.onError(r6, r7)
-            Lc7:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.drm.DrmManagerClient.EventHandler.handleMessage(android.os.Message):void");
+        public void handleMessage(Message message) {
+            DrmErrorEvent drmErrorEvent;
+            DrmEvent drmEvent;
+            HashMap map = new HashMap();
+            int i = message.what;
+            DrmEvent drmEvent2 = null;
+            if (i == 1001) {
+                DrmManagerClient drmManagerClient = DrmManagerClient.this;
+                if (drmManagerClient._removeAllRights(drmManagerClient.mUniqueId) == 0) {
+                    drmEvent = new DrmEvent(DrmManagerClient.this.mUniqueId, 1001, null);
+                    drmEvent2 = drmEvent;
+                    drmErrorEvent = null;
+                } else {
+                    drmErrorEvent = new DrmErrorEvent(DrmManagerClient.this.mUniqueId, 2007, null);
+                }
+            } else if (i == 1002) {
+                DrmInfo drmInfo = (DrmInfo) message.obj;
+                DrmManagerClient drmManagerClient2 = DrmManagerClient.this;
+                DrmInfoStatus drmInfoStatus_processDrmInfo = drmManagerClient2._processDrmInfo(drmManagerClient2.mUniqueId, drmInfo);
+                map.put(DrmEvent.DRM_INFO_STATUS_OBJECT, drmInfoStatus_processDrmInfo);
+                map.put(DrmEvent.DRM_INFO_OBJECT, drmInfo);
+                if (drmInfoStatus_processDrmInfo != null && 1 == drmInfoStatus_processDrmInfo.statusCode) {
+                    drmEvent = new DrmEvent(DrmManagerClient.this.mUniqueId, DrmManagerClient.this.getEventType(drmInfoStatus_processDrmInfo.infoType), null, map);
+                    drmEvent2 = drmEvent;
+                    drmErrorEvent = null;
+                } else {
+                    drmErrorEvent = new DrmErrorEvent(DrmManagerClient.this.mUniqueId, DrmManagerClient.this.getErrorType(drmInfoStatus_processDrmInfo != null ? drmInfoStatus_processDrmInfo.infoType : drmInfo.getInfoType()), null, map);
+                }
+            } else {
+                Log.e(DrmManagerClient.TAG, "Unknown message type " + message.what);
+                return;
+            }
+            if (DrmManagerClient.this.mOnEventListener != null && drmEvent2 != null) {
+                DrmManagerClient.this.mOnEventListener.onEvent(DrmManagerClient.this, drmEvent2);
+            }
+            if (DrmManagerClient.this.mOnErrorListener == null || drmErrorEvent == null) {
+                return;
+            }
+            DrmManagerClient.this.mOnErrorListener.onError(DrmManagerClient.this, drmErrorEvent);
         }
     }
 
@@ -254,7 +190,7 @@ public class DrmManagerClient implements AutoCloseable {
             if (message.what == 1) {
                 int i = message.arg1;
                 int i2 = message.arg2;
-                String obj = message.obj.toString();
+                String string = message.obj.toString();
                 DrmInfoEvent drmInfoEvent2 = null;
                 switch (i2) {
                     case 1:
@@ -262,24 +198,24 @@ public class DrmManagerClient implements AutoCloseable {
                     case 4:
                     case 5:
                     case 6:
-                        drmInfoEvent = new DrmInfoEvent(i, i2, obj);
+                        drmInfoEvent = new DrmInfoEvent(i, i2, string);
                         DrmInfoEvent drmInfoEvent3 = drmInfoEvent;
                         drmErrorEvent = null;
                         drmInfoEvent2 = drmInfoEvent3;
                         break;
                     case 2:
                         try {
-                            DrmUtils.removeFile(obj);
+                            DrmUtils.removeFile(string);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        drmInfoEvent = new DrmInfoEvent(i, i2, obj);
+                        drmInfoEvent = new DrmInfoEvent(i, i2, string);
                         DrmInfoEvent drmInfoEvent32 = drmInfoEvent;
                         drmErrorEvent = null;
                         drmInfoEvent2 = drmInfoEvent32;
                         break;
                     default:
-                        drmErrorEvent = new DrmErrorEvent(i, i2, obj);
+                        drmErrorEvent = new DrmErrorEvent(i, i2, string);
                         break;
                 }
                 if (DrmManagerClient.this.mOnInfoListener != null && drmInfoEvent2 != null) {
@@ -366,9 +302,9 @@ public class DrmManagerClient implements AutoCloseable {
     }
 
     public String[] getAvailableDrmEngines() {
-        DrmSupportInfo[] _getAllSupportInfo = _getAllSupportInfo(this.mUniqueId);
+        DrmSupportInfo[] drmSupportInfoArr_getAllSupportInfo = _getAllSupportInfo(this.mUniqueId);
         ArrayList arrayList = new ArrayList();
-        for (DrmSupportInfo drmSupportInfo : _getAllSupportInfo) {
+        for (DrmSupportInfo drmSupportInfo : drmSupportInfoArr_getAllSupportInfo) {
             arrayList.add(drmSupportInfo.getDescriprition());
         }
         return (String[]) arrayList.toArray(new String[arrayList.size()]);
@@ -406,7 +342,7 @@ public class DrmManagerClient implements AutoCloseable {
         return getMetadata(convertUriToPath(uri));
     }
 
-    public int saveRights(DrmRights drmRights, String str, String str2) throws IOException {
+    public int saveRights(DrmRights drmRights, String str, String str2) throws Throwable {
         if (drmRights == null || !drmRights.isValid()) {
             throw new IllegalArgumentException("Given drmRights or contentPath is not valid");
         }
@@ -429,10 +365,10 @@ public class DrmManagerClient implements AutoCloseable {
         }
         if (this.mDvfsHelper == null) {
             Log.i(TAG, "mDvfsHelper initialize");
-            SemDvfsManager createInstance = SemDvfsManager.createInstance(this.mContext, "DRM_SECURE_PLAY", 21);
-            this.mDvfsHintManager = createInstance;
-            if (createInstance != null) {
-                createInstance.setHint(1400);
+            SemDvfsManager semDvfsManagerCreateInstance = SemDvfsManager.createInstance(this.mContext, "DRM_SECURE_PLAY", 21);
+            this.mDvfsHintManager = semDvfsManagerCreateInstance;
+            if (semDvfsManagerCreateInstance != null) {
+                semDvfsManagerCreateInstance.setHint(1400);
             }
         }
         SemDvfsManager semDvfsManager = this.mDvfsHintManager;
@@ -503,8 +439,8 @@ public class DrmManagerClient implements AutoCloseable {
     }
 
     public int acquireRights(DrmInfoRequest drmInfoRequest) {
-        DrmInfo acquireDrmInfo = acquireDrmInfo(drmInfoRequest);
-        return acquireDrmInfo == null ? ERROR_UNKNOWN : processDrmInfo(acquireDrmInfo);
+        DrmInfo drmInfoAcquireDrmInfo = acquireDrmInfo(drmInfoRequest);
+        return drmInfoAcquireDrmInfo == null ? ERROR_UNKNOWN : processDrmInfo(drmInfoAcquireDrmInfo);
     }
 
     public int getDrmObjectType(String str, String str2) {
@@ -515,85 +451,71 @@ public class DrmManagerClient implements AutoCloseable {
     }
 
     public int getDrmObjectType(Uri uri, String str) {
-        String str2 = "";
+        String strConvertUriToPath = "";
         if ((uri == null || Uri.EMPTY == uri) && (str == null || str.equals(""))) {
             throw new IllegalArgumentException("Uri or the mimetype should be non null");
         }
         try {
-            str2 = convertUriToPath(uri);
+            strConvertUriToPath = convertUriToPath(uri);
         } catch (Exception unused) {
             Log.w(TAG, "Given Uri could not be found in media store");
         }
-        return getDrmObjectType(str2, str);
+        return getDrmObjectType(strConvertUriToPath, str);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0028, code lost:
-    
-        if (r2 != null) goto L32;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x002a, code lost:
-    
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0039, code lost:
-    
-        if (r2 == null) goto L24;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x002a A[EXC_TOP_SPLITTER, PHI: r0 r2
+      0x002a: PHI (r0v5 java.lang.String) = (r0v11 java.lang.String), (r0v9 java.lang.String) binds: [B:22:0x0039, B:12:0x0028] A[DONT_GENERATE, DONT_INLINE]
+      0x002a: PHI (r2v2 java.io.FileInputStream) = (r2v1 java.io.FileInputStream), (r2v7 java.io.FileInputStream) binds: [B:22:0x0039, B:12:0x0028] A[DONT_GENERATE, DONT_INLINE], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String getOriginalMimeType(java.lang.String r5) {
-        /*
-            r4 = this;
-            if (r5 == 0) goto L3d
-            java.lang.String r0 = ""
-            boolean r0 = r5.equals(r0)
-            if (r0 != 0) goto L3d
-            r0 = 0
-            java.io.File r1 = new java.io.File     // Catch: java.lang.Throwable -> L31 java.io.IOException -> L38
-            r1.<init>(r5)     // Catch: java.lang.Throwable -> L31 java.io.IOException -> L38
-            boolean r2 = r1.exists()     // Catch: java.lang.Throwable -> L31 java.io.IOException -> L38
-            if (r2 == 0) goto L20
-            java.io.FileInputStream r2 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L31 java.io.IOException -> L38
-            r2.<init>(r1)     // Catch: java.lang.Throwable -> L31 java.io.IOException -> L38
-            java.io.FileDescriptor r1 = r2.getFD()     // Catch: java.lang.Throwable -> L2e java.io.IOException -> L39
-            goto L22
-        L20:
-            r1 = r0
-            r2 = r1
-        L22:
-            int r3 = r4.mUniqueId     // Catch: java.lang.Throwable -> L2e java.io.IOException -> L39
-            java.lang.String r0 = r4._getOriginalMimeType(r3, r5, r1)     // Catch: java.lang.Throwable -> L2e java.io.IOException -> L39
-            if (r2 == 0) goto L3c
-        L2a:
-            r2.close()     // Catch: java.io.IOException -> L3c
-            goto L3c
-        L2e:
-            r4 = move-exception
-            r0 = r2
-            goto L32
-        L31:
-            r4 = move-exception
-        L32:
-            if (r0 == 0) goto L37
-            r0.close()     // Catch: java.io.IOException -> L37
-        L37:
-            throw r4
-        L38:
-            r2 = r0
-        L39:
-            if (r2 == 0) goto L3c
-            goto L2a
-        L3c:
-            return r0
-        L3d:
-            java.lang.IllegalArgumentException r4 = new java.lang.IllegalArgumentException
-            java.lang.String r5 = "Given path should be non null"
-            r4.<init>(r5)
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.drm.DrmManagerClient.getOriginalMimeType(java.lang.String):java.lang.String");
+    public String getOriginalMimeType(String str) throws Throwable {
+        FileInputStream fileInputStream;
+        FileDescriptor fd;
+        if (str == null || str.equals("")) {
+            throw new IllegalArgumentException("Given path should be non null");
+        }
+        FileInputStream fileInputStream2 = null;
+        str_getOriginalMimeType = null;
+        String str_getOriginalMimeType = null;
+        try {
+            File file = new File(str);
+            if (file.exists()) {
+                fileInputStream = new FileInputStream(file);
+                try {
+                    fd = fileInputStream.getFD();
+                } catch (IOException unused) {
+                    if (fileInputStream != null) {
+                    }
+                    return str_getOriginalMimeType;
+                } catch (Throwable th) {
+                    th = th;
+                    fileInputStream2 = fileInputStream;
+                    if (fileInputStream2 != null) {
+                        try {
+                            fileInputStream2.close();
+                        } catch (IOException unused2) {
+                        }
+                    }
+                    throw th;
+                }
+            } else {
+                fd = null;
+                fileInputStream = null;
+            }
+            str_getOriginalMimeType = _getOriginalMimeType(this.mUniqueId, str, fd);
+        } catch (IOException unused3) {
+            fileInputStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        if (fileInputStream != null) {
+            try {
+                fileInputStream.close();
+            } catch (IOException unused4) {
+            }
+        }
+        return str_getOriginalMimeType;
     }
 
     public String getOriginalMimeType(Uri uri) {
@@ -685,13 +607,13 @@ public class DrmManagerClient implements AutoCloseable {
         if (scheme.equals("content")) {
             try {
                 try {
-                    Cursor query = this.mContext.getContentResolver().query(uri, new String[]{"_data"}, null, null, null);
-                    if (query == null || query.getCount() == 0 || !query.moveToFirst()) {
+                    Cursor cursorQuery = this.mContext.getContentResolver().query(uri, new String[]{"_data"}, null, null, null);
+                    if (cursorQuery == null || cursorQuery.getCount() == 0 || !cursorQuery.moveToFirst()) {
                         throw new IllegalArgumentException("Given Uri could not be found in media store");
                     }
-                    String string = query.getString(query.getColumnIndexOrThrow("_data"));
-                    if (query != null) {
-                        query.close();
+                    String string = cursorQuery.getString(cursorQuery.getColumnIndexOrThrow("_data"));
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return string;
                 } catch (SQLiteException unused) {

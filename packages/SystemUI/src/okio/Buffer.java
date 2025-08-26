@@ -12,13 +12,11 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Buffer implements BufferedSource, Sink, WritableByteChannel, Cloneable, ByteChannel {
     public Segment head;
     public long size;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UnsafeCursor implements Closeable {
         @Override // java.io.Closeable, java.lang.AutoCloseable
         public final void close() {
@@ -33,12 +31,12 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         }
         Segment segment = this.head;
         segment.getClass();
-        Segment sharedCopy = segment.sharedCopy();
-        buffer.head = sharedCopy;
-        sharedCopy.prev = sharedCopy;
-        sharedCopy.next = sharedCopy;
+        Segment segmentSharedCopy = segment.sharedCopy();
+        buffer.head = segmentSharedCopy;
+        segmentSharedCopy.prev = segmentSharedCopy;
+        segmentSharedCopy.next = segmentSharedCopy;
         for (Segment segment2 = segment.next; segment2 != segment; segment2 = segment2.next) {
-            Segment segment3 = sharedCopy.prev;
+            Segment segment3 = segmentSharedCopy.prev;
             segment3.getClass();
             segment2.getClass();
             segment3.push(segment2.sharedCopy());
@@ -72,9 +70,9 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         int i2 = segment2.pos;
         long j2 = 0;
         while (j2 < this.size) {
-            long min = Math.min(segment.limit - i, segment2.limit - i2);
+            long jMin = Math.min(segment.limit - i, segment2.limit - i2);
             long j3 = 0;
-            while (j3 < min) {
+            while (j3 < jMin) {
                 int i3 = i + 1;
                 boolean z3 = z;
                 byte b = segment.data[i];
@@ -102,7 +100,7 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
                 segment2.getClass();
                 i2 = segment2.pos;
             }
-            j2 += min;
+            j2 += jMin;
             z = z5;
             z2 = z6;
         }
@@ -216,7 +214,7 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         return b;
     }
 
-    public final byte[] readByteArray(long j) {
+    public final byte[] readByteArray(long j) throws EOFException {
         if (j < 0 || j > 2147483647L) {
             throw new IllegalArgumentException(ValueAnimator$$ExternalSyntheticOutline0.m("byteCount: ", j).toString());
         }
@@ -227,16 +225,16 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         byte[] bArr = new byte[i];
         int i2 = 0;
         while (i2 < i) {
-            int read = read(bArr, i2, i - i2);
-            if (read == -1) {
+            int i3 = read(bArr, i2, i - i2);
+            if (i3 == -1) {
                 throw new EOFException();
             }
-            i2 += read;
+            i2 += i3;
         }
         return bArr;
     }
 
-    public final ByteString readByteString(long j) {
+    public final ByteString readByteString(long j) throws EOFException {
         if (j < 0 || j > 2147483647L) {
             throw new IllegalArgumentException(ValueAnimator$$ExternalSyntheticOutline0.m("byteCount: ", j).toString());
         }
@@ -246,12 +244,12 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         if (j < 4096) {
             return new ByteString(readByteArray(j));
         }
-        ByteString snapshot = snapshot((int) j);
+        ByteString byteStringSnapshot = snapshot((int) j);
         skip(j);
-        return snapshot;
+        return byteStringSnapshot;
     }
 
-    public final int readInt() {
+    public final int readInt() throws EOFException {
         if (this.size < 4) {
             throw new EOFException();
         }
@@ -277,7 +275,7 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         return i6;
     }
 
-    public final String readString(long j, Charset charset) {
+    public final String readString(long j, Charset charset) throws EOFException {
         if (j < 0 || j > 2147483647L) {
             throw new IllegalArgumentException(ValueAnimator$$ExternalSyntheticOutline0.m("byteCount: ", j).toString());
         }
@@ -311,27 +309,27 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
     }
 
     @Override // okio.BufferedSource
-    public final int select(Options options) {
-        int selectPrefix = okio.internal.Buffer.selectPrefix(this, options, false);
-        if (selectPrefix == -1) {
+    public final int select(Options options) throws EOFException {
+        int iSelectPrefix = okio.internal.Buffer.selectPrefix(this, options, false);
+        if (iSelectPrefix == -1) {
             return -1;
         }
-        skip(options.byteStrings[selectPrefix].getSize$external__okio__android_common__okio_lib());
-        return selectPrefix;
+        skip(options.byteStrings[iSelectPrefix].getSize$external__okio__android_common__okio_lib());
+        return iSelectPrefix;
     }
 
     @Override // okio.BufferedSource
-    public final void skip(long j) {
+    public final void skip(long j) throws EOFException {
         while (j > 0) {
             Segment segment = this.head;
             if (segment == null) {
                 throw new EOFException();
             }
-            int min = (int) Math.min(j, segment.limit - segment.pos);
-            long j2 = min;
+            int iMin = (int) Math.min(j, segment.limit - segment.pos);
+            long j2 = iMin;
             this.size -= j2;
             j -= j2;
-            int i = segment.pos + min;
+            int i = segment.pos + iMin;
             segment.pos = i;
             if (i == segment.limit) {
                 this.head = segment.pop();
@@ -374,7 +372,7 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
             i7++;
             segment2 = segment2.next;
         }
-        return new C0436SegmentedByteString(bArr, iArr);
+        return new C1238SegmentedByteString(bArr, iArr);
     }
 
     public final String toString() {
@@ -391,25 +389,25 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         }
         Segment segment = this.head;
         if (segment == null) {
-            Segment take = SegmentPool.take();
-            this.head = take;
-            take.prev = take;
-            take.next = take;
-            return take;
+            Segment segmentTake = SegmentPool.take();
+            this.head = segmentTake;
+            segmentTake.prev = segmentTake;
+            segmentTake.next = segmentTake;
+            return segmentTake;
         }
         Segment segment2 = segment.prev;
         segment2.getClass();
         if (segment2.limit + i <= 8192 && segment2.owner) {
             return segment2;
         }
-        Segment take2 = SegmentPool.take();
-        segment2.push(take2);
-        return take2;
+        Segment segmentTake2 = SegmentPool.take();
+        segment2.push(segmentTake2);
+        return segmentTake2;
     }
 
     @Override // okio.Sink
     public final void write(Buffer buffer, long j) {
-        Segment take;
+        Segment segmentTake;
         if (buffer == this) {
             throw new IllegalArgumentException("source == this");
         }
@@ -442,18 +440,18 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
                     throw new IllegalArgumentException("byteCount out of range");
                 }
                 if (i3 >= 1024) {
-                    take = segment6.sharedCopy();
+                    segmentTake = segment6.sharedCopy();
                 } else {
-                    take = SegmentPool.take();
+                    segmentTake = SegmentPool.take();
                     int i4 = segment6.pos;
-                    ArraysKt___ArraysJvmKt.copyInto$default(segment6.data, i4, i4 + i3, take.data, 2);
+                    ArraysKt___ArraysJvmKt.copyInto$default(segment6.data, i4, i4 + i3, segmentTake.data, 2);
                 }
-                take.limit = take.pos + i3;
+                segmentTake.limit = segmentTake.pos + i3;
                 segment6.pos += i3;
                 Segment segment7 = segment6.prev;
                 segment7.getClass();
-                segment7.push(take);
-                buffer.head = take;
+                segment7.push(segmentTake);
+                buffer.head = segmentTake;
             }
             Segment segment8 = buffer.head;
             segment8.getClass();
@@ -506,27 +504,27 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
     }
 
     public final void writeByte(int i) {
-        Segment writableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
-        int i2 = writableSegment$external__okio__android_common__okio_lib.limit;
-        writableSegment$external__okio__android_common__okio_lib.limit = i2 + 1;
-        writableSegment$external__okio__android_common__okio_lib.data[i2] = (byte) i;
+        Segment segmentWritableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
+        int i2 = segmentWritableSegment$external__okio__android_common__okio_lib.limit;
+        segmentWritableSegment$external__okio__android_common__okio_lib.limit = i2 + 1;
+        segmentWritableSegment$external__okio__android_common__okio_lib.data[i2] = (byte) i;
         this.size++;
     }
 
     public final void writeInt(int i) {
-        Segment writableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(4);
-        int i2 = writableSegment$external__okio__android_common__okio_lib.limit;
-        byte[] bArr = writableSegment$external__okio__android_common__okio_lib.data;
+        Segment segmentWritableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(4);
+        int i2 = segmentWritableSegment$external__okio__android_common__okio_lib.limit;
+        byte[] bArr = segmentWritableSegment$external__okio__android_common__okio_lib.data;
         bArr[i2] = (byte) ((i >>> 24) & 255);
         bArr[i2 + 1] = (byte) ((i >>> 16) & 255);
         bArr[i2 + 2] = (byte) ((i >>> 8) & 255);
         bArr[i2 + 3] = (byte) (i & 255);
-        writableSegment$external__okio__android_common__okio_lib.limit = i2 + 4;
+        segmentWritableSegment$external__okio__android_common__okio_lib.limit = i2 + 4;
         this.size += 4;
     }
 
     public final void writeUtf8(int i, int i2, String str) {
-        char charAt;
+        char cCharAt;
         if (i < 0) {
             throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "beginIndex < 0: ").toString());
         }
@@ -537,62 +535,62 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
             throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i2, str.length(), "endIndex > string.length: ", " > ").toString());
         }
         while (i < i2) {
-            char charAt2 = str.charAt(i);
-            if (charAt2 < 128) {
-                Segment writableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
-                int i3 = writableSegment$external__okio__android_common__okio_lib.limit - i;
-                int min = Math.min(i2, 8192 - i3);
+            char cCharAt2 = str.charAt(i);
+            if (cCharAt2 < 128) {
+                Segment segmentWritableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
+                int i3 = segmentWritableSegment$external__okio__android_common__okio_lib.limit - i;
+                int iMin = Math.min(i2, 8192 - i3);
                 int i4 = i + 1;
-                byte[] bArr = writableSegment$external__okio__android_common__okio_lib.data;
-                bArr[i + i3] = (byte) charAt2;
+                byte[] bArr = segmentWritableSegment$external__okio__android_common__okio_lib.data;
+                bArr[i + i3] = (byte) cCharAt2;
                 while (true) {
                     i = i4;
-                    if (i >= min || (charAt = str.charAt(i)) >= 128) {
+                    if (i >= iMin || (cCharAt = str.charAt(i)) >= 128) {
                         break;
                     }
                     i4 = i + 1;
-                    bArr[i + i3] = (byte) charAt;
+                    bArr[i + i3] = (byte) cCharAt;
                 }
-                int i5 = writableSegment$external__okio__android_common__okio_lib.limit;
+                int i5 = segmentWritableSegment$external__okio__android_common__okio_lib.limit;
                 int i6 = (i3 + i) - i5;
-                writableSegment$external__okio__android_common__okio_lib.limit = i5 + i6;
+                segmentWritableSegment$external__okio__android_common__okio_lib.limit = i5 + i6;
                 this.size += i6;
             } else {
-                if (charAt2 < 2048) {
-                    Segment writableSegment$external__okio__android_common__okio_lib2 = writableSegment$external__okio__android_common__okio_lib(2);
-                    int i7 = writableSegment$external__okio__android_common__okio_lib2.limit;
-                    byte[] bArr2 = writableSegment$external__okio__android_common__okio_lib2.data;
-                    bArr2[i7] = (byte) ((charAt2 >> 6) | 192);
-                    bArr2[i7 + 1] = (byte) ((charAt2 & '?') | 128);
-                    writableSegment$external__okio__android_common__okio_lib2.limit = i7 + 2;
+                if (cCharAt2 < 2048) {
+                    Segment segmentWritableSegment$external__okio__android_common__okio_lib2 = writableSegment$external__okio__android_common__okio_lib(2);
+                    int i7 = segmentWritableSegment$external__okio__android_common__okio_lib2.limit;
+                    byte[] bArr2 = segmentWritableSegment$external__okio__android_common__okio_lib2.data;
+                    bArr2[i7] = (byte) ((cCharAt2 >> 6) | 192);
+                    bArr2[i7 + 1] = (byte) ((cCharAt2 & '?') | 128);
+                    segmentWritableSegment$external__okio__android_common__okio_lib2.limit = i7 + 2;
                     this.size += 2;
-                } else if (charAt2 < 55296 || charAt2 > 57343) {
-                    Segment writableSegment$external__okio__android_common__okio_lib3 = writableSegment$external__okio__android_common__okio_lib(3);
-                    int i8 = writableSegment$external__okio__android_common__okio_lib3.limit;
-                    byte b = (byte) ((charAt2 >> '\f') | IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
-                    byte[] bArr3 = writableSegment$external__okio__android_common__okio_lib3.data;
+                } else if (cCharAt2 < 55296 || cCharAt2 > 57343) {
+                    Segment segmentWritableSegment$external__okio__android_common__okio_lib3 = writableSegment$external__okio__android_common__okio_lib(3);
+                    int i8 = segmentWritableSegment$external__okio__android_common__okio_lib3.limit;
+                    byte b = (byte) ((cCharAt2 >> '\f') | IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
+                    byte[] bArr3 = segmentWritableSegment$external__okio__android_common__okio_lib3.data;
                     bArr3[i8] = b;
-                    bArr3[i8 + 1] = (byte) ((63 & (charAt2 >> 6)) | 128);
-                    bArr3[i8 + 2] = (byte) ((charAt2 & '?') | 128);
-                    writableSegment$external__okio__android_common__okio_lib3.limit = i8 + 3;
+                    bArr3[i8 + 1] = (byte) ((63 & (cCharAt2 >> 6)) | 128);
+                    bArr3[i8 + 2] = (byte) ((cCharAt2 & '?') | 128);
+                    segmentWritableSegment$external__okio__android_common__okio_lib3.limit = i8 + 3;
                     this.size += 3;
                 } else {
                     int i9 = i + 1;
-                    char charAt3 = i9 < i2 ? str.charAt(i9) : (char) 0;
-                    if (charAt2 > 56319 || 56320 > charAt3 || charAt3 >= 57344) {
+                    char cCharAt3 = i9 < i2 ? str.charAt(i9) : (char) 0;
+                    if (cCharAt2 > 56319 || 56320 > cCharAt3 || cCharAt3 >= 57344) {
                         writeByte(63);
                         i = i9;
                     } else {
-                        int i10 = (((charAt2 & 1023) << 10) | (charAt3 & 1023)) + 65536;
-                        Segment writableSegment$external__okio__android_common__okio_lib4 = writableSegment$external__okio__android_common__okio_lib(4);
-                        int i11 = writableSegment$external__okio__android_common__okio_lib4.limit;
+                        int i10 = (((cCharAt2 & 1023) << 10) | (cCharAt3 & 1023)) + 65536;
+                        Segment segmentWritableSegment$external__okio__android_common__okio_lib4 = writableSegment$external__okio__android_common__okio_lib(4);
+                        int i11 = segmentWritableSegment$external__okio__android_common__okio_lib4.limit;
                         byte b2 = (byte) ((i10 >> 18) | IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp);
-                        byte[] bArr4 = writableSegment$external__okio__android_common__okio_lib4.data;
+                        byte[] bArr4 = segmentWritableSegment$external__okio__android_common__okio_lib4.data;
                         bArr4[i11] = b2;
                         bArr4[i11 + 1] = (byte) (((i10 >> 12) & 63) | 128);
                         bArr4[i11 + 2] = (byte) (((i10 >> 6) & 63) | 128);
                         bArr4[i11 + 3] = (byte) ((i10 & 63) | 128);
-                        writableSegment$external__okio__android_common__okio_lib4.limit = i11 + 4;
+                        segmentWritableSegment$external__okio__android_common__okio_lib4.limit = i11 + 4;
                         this.size += 4;
                         i += 2;
                     }
@@ -619,13 +617,13 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
                 j3 -= segment.limit - segment.pos;
             }
             if (byteString.getSize$external__okio__android_common__okio_lib() == 2) {
-                byte internalGet$external__okio__android_common__okio_lib = byteString.internalGet$external__okio__android_common__okio_lib(0);
-                byte internalGet$external__okio__android_common__okio_lib2 = byteString.internalGet$external__okio__android_common__okio_lib(1);
+                byte bInternalGet$external__okio__android_common__okio_lib = byteString.internalGet$external__okio__android_common__okio_lib(0);
+                byte bInternalGet$external__okio__android_common__okio_lib2 = byteString.internalGet$external__okio__android_common__okio_lib(1);
                 while (j3 < this.size) {
                     int i = segment.limit;
                     for (int i2 = (int) ((segment.pos + j) - j3); i2 < i; i2++) {
                         byte b = segment.data[i2];
-                        if (b == internalGet$external__okio__android_common__okio_lib || b == internalGet$external__okio__android_common__okio_lib2) {
+                        if (b == bInternalGet$external__okio__android_common__okio_lib || b == bInternalGet$external__okio__android_common__okio_lib2) {
                             return (i2 - segment.pos) + j3;
                         }
                     }
@@ -636,12 +634,12 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
                 }
                 return -1L;
             }
-            byte[] internalArray$external__okio__android_common__okio_lib = byteString.internalArray$external__okio__android_common__okio_lib();
+            byte[] bArrInternalArray$external__okio__android_common__okio_lib = byteString.internalArray$external__okio__android_common__okio_lib();
             while (j3 < this.size) {
                 int i3 = segment.limit;
                 for (int i4 = (int) ((segment.pos + j) - j3); i4 < i3; i4++) {
                     byte b2 = segment.data[i4];
-                    for (byte b3 : internalArray$external__okio__android_common__okio_lib) {
+                    for (byte b3 : bArrInternalArray$external__okio__android_common__okio_lib) {
                         if (b2 == b3) {
                             return (i4 - segment.pos) + j3;
                         }
@@ -664,13 +662,13 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
             j2 = j4;
         }
         if (byteString.getSize$external__okio__android_common__okio_lib() == 2) {
-            byte internalGet$external__okio__android_common__okio_lib3 = byteString.internalGet$external__okio__android_common__okio_lib(0);
-            byte internalGet$external__okio__android_common__okio_lib4 = byteString.internalGet$external__okio__android_common__okio_lib(1);
+            byte bInternalGet$external__okio__android_common__okio_lib3 = byteString.internalGet$external__okio__android_common__okio_lib(0);
+            byte bInternalGet$external__okio__android_common__okio_lib4 = byteString.internalGet$external__okio__android_common__okio_lib(1);
             while (j2 < this.size) {
                 int i5 = segment.limit;
                 for (int i6 = (int) ((segment.pos + j) - j2); i6 < i5; i6++) {
                     byte b4 = segment.data[i6];
-                    if (b4 == internalGet$external__okio__android_common__okio_lib3 || b4 == internalGet$external__okio__android_common__okio_lib4) {
+                    if (b4 == bInternalGet$external__okio__android_common__okio_lib3 || b4 == bInternalGet$external__okio__android_common__okio_lib4) {
                         return (i6 - segment.pos) + j2;
                     }
                 }
@@ -681,12 +679,12 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
             }
             return -1L;
         }
-        byte[] internalArray$external__okio__android_common__okio_lib2 = byteString.internalArray$external__okio__android_common__okio_lib();
+        byte[] bArrInternalArray$external__okio__android_common__okio_lib2 = byteString.internalArray$external__okio__android_common__okio_lib();
         while (j2 < this.size) {
             int i7 = segment.limit;
             for (int i8 = (int) ((segment.pos + j) - j2); i8 < i7; i8++) {
                 byte b5 = segment.data[i8];
-                for (byte b6 : internalArray$external__okio__android_common__okio_lib2) {
+                for (byte b6 : bArrInternalArray$external__okio__android_common__okio_lib2) {
                     if (b5 == b6) {
                         return (i8 - segment.pos) + j2;
                     }
@@ -706,16 +704,16 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         if (segment == null) {
             return -1;
         }
-        int min = Math.min(byteBuffer.remaining(), segment.limit - segment.pos);
-        byteBuffer.put(segment.data, segment.pos, min);
-        int i = segment.pos + min;
+        int iMin = Math.min(byteBuffer.remaining(), segment.limit - segment.pos);
+        byteBuffer.put(segment.data, segment.pos, iMin);
+        int i = segment.pos + iMin;
         segment.pos = i;
-        this.size -= min;
+        this.size -= iMin;
         if (i == segment.limit) {
             this.head = segment.pop();
             SegmentPool.recycle(segment);
         }
-        return min;
+        return iMin;
     }
 
     public final int read(byte[] bArr, int i, int i2) {
@@ -724,17 +722,17 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         if (segment == null) {
             return -1;
         }
-        int min = Math.min(i2, segment.limit - segment.pos);
+        int iMin = Math.min(i2, segment.limit - segment.pos);
         int i3 = segment.pos;
-        System.arraycopy(segment.data, i3, bArr, i, (i3 + min) - i3);
-        int i4 = segment.pos + min;
+        System.arraycopy(segment.data, i3, bArr, i, (i3 + iMin) - i3);
+        int i4 = segment.pos + iMin;
         segment.pos = i4;
-        this.size -= min;
+        this.size -= iMin;
         if (i4 == segment.limit) {
             this.head = segment.pop();
             SegmentPool.recycle(segment);
         }
-        return min;
+        return iMin;
     }
 
     @Override // okio.BufferedSource
@@ -761,17 +759,17 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
 
     @Override // java.nio.channels.WritableByteChannel
     public final int write(ByteBuffer byteBuffer) {
-        int remaining = byteBuffer.remaining();
-        int i = remaining;
+        int iRemaining = byteBuffer.remaining();
+        int i = iRemaining;
         while (i > 0) {
-            Segment writableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
-            int min = Math.min(i, 8192 - writableSegment$external__okio__android_common__okio_lib.limit);
-            byteBuffer.get(writableSegment$external__okio__android_common__okio_lib.data, writableSegment$external__okio__android_common__okio_lib.limit, min);
-            i -= min;
-            writableSegment$external__okio__android_common__okio_lib.limit += min;
+            Segment segmentWritableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
+            int iMin = Math.min(i, 8192 - segmentWritableSegment$external__okio__android_common__okio_lib.limit);
+            byteBuffer.get(segmentWritableSegment$external__okio__android_common__okio_lib.data, segmentWritableSegment$external__okio__android_common__okio_lib.limit, iMin);
+            i -= iMin;
+            segmentWritableSegment$external__okio__android_common__okio_lib.limit += iMin;
         }
-        this.size += remaining;
-        return remaining;
+        this.size += iRemaining;
+        return iRemaining;
     }
 
     public final void write(byte[] bArr, int i, int i2) {
@@ -779,11 +777,11 @@ public final class Buffer implements BufferedSource, Sink, WritableByteChannel, 
         SegmentedByteString.checkOffsetAndCount(bArr.length, i, j);
         int i3 = i2 + i;
         while (i < i3) {
-            Segment writableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
-            int min = Math.min(i3 - i, 8192 - writableSegment$external__okio__android_common__okio_lib.limit);
-            int i4 = i + min;
-            System.arraycopy(bArr, i, writableSegment$external__okio__android_common__okio_lib.data, writableSegment$external__okio__android_common__okio_lib.limit, i4 - i);
-            writableSegment$external__okio__android_common__okio_lib.limit += min;
+            Segment segmentWritableSegment$external__okio__android_common__okio_lib = writableSegment$external__okio__android_common__okio_lib(1);
+            int iMin = Math.min(i3 - i, 8192 - segmentWritableSegment$external__okio__android_common__okio_lib.limit);
+            int i4 = i + iMin;
+            System.arraycopy(bArr, i, segmentWritableSegment$external__okio__android_common__okio_lib.data, segmentWritableSegment$external__okio__android_common__okio_lib.limit, i4 - i);
+            segmentWritableSegment$external__okio__android_common__okio_lib.limit += iMin;
             i = i4;
         }
         this.size += j;

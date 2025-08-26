@@ -339,50 +339,29 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x002e, code lost:
-    
-        if (((java.lang.Integer) r2.mLogicalCameraSettings.get(android.hardware.camera2.CaptureRequest.CONTROL_CAPTURE_INTENT)).intValue() == 2) goto L15;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0031  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getRequestType() {
-        /*
-            r2 = this;
-            int r0 = r2.mRequestType
-            r1 = -1
-            if (r0 != r1) goto L34
-            boolean r0 = r2.mIsReprocess
-            if (r0 == 0) goto Ld
-            r0 = 1
-            r2.mRequestType = r0
-            goto L34
-        Ld:
-            android.hardware.camera2.impl.CameraMetadataNative r0 = r2.mLogicalCameraSettings
-            android.hardware.camera2.CaptureRequest$Key<java.lang.Boolean> r1 = android.hardware.camera2.CaptureRequest.CONTROL_ENABLE_ZSL
-            java.lang.Object r0 = r0.get(r1)
-            java.lang.Boolean r0 = (java.lang.Boolean) r0
-            if (r0 == 0) goto L31
-            boolean r0 = r0.booleanValue()
-            if (r0 == 0) goto L31
-            android.hardware.camera2.impl.CameraMetadataNative r0 = r2.mLogicalCameraSettings
-            android.hardware.camera2.CaptureRequest$Key<java.lang.Integer> r1 = android.hardware.camera2.CaptureRequest.CONTROL_CAPTURE_INTENT
-            java.lang.Object r0 = r0.get(r1)
-            java.lang.Integer r0 = (java.lang.Integer) r0
-            int r0 = r0.intValue()
-            r1 = 2
-            if (r0 != r1) goto L31
-            goto L32
-        L31:
-            r1 = 0
-        L32:
-            r2.mRequestType = r1
-        L34:
-            int r2 = r2.mRequestType
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.camera2.CaptureRequest.getRequestType():int");
+        int i;
+        if (this.mRequestType == -1) {
+            if (this.mIsReprocess) {
+                this.mRequestType = 1;
+            } else {
+                Boolean bool = (Boolean) this.mLogicalCameraSettings.get(CONTROL_ENABLE_ZSL);
+                if (bool != null && bool.booleanValue()) {
+                    i = 2;
+                    if (((Integer) this.mLogicalCameraSettings.get(CONTROL_CAPTURE_INTENT)).intValue() != 2) {
+                    }
+                    this.mRequestType = i;
+                } else {
+                    i = 0;
+                    this.mRequestType = i;
+                }
+            }
+        }
+        return this.mRequestType;
     }
 
     public int[] getStreamIds() {
@@ -434,8 +413,8 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         this.mSurfaceSet = new ArraySet<>();
         this.mSurfacesLock = new Object();
         this.mSurfaceConverted = false;
-        HashMap<String, CameraMetadataNative> hashMap = new HashMap<>();
-        this.mPhysicalCameraSettings = hashMap;
+        HashMap<String, CameraMetadataNative> map = new HashMap<>();
+        this.mPhysicalCameraSettings = map;
         this.mRequestType = -1;
         this.mIsPartOfCHSRequestList = false;
         this.mReleaseSurfaces = false;
@@ -443,9 +422,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
             throw new IllegalArgumentException("Create a reprocess capture request with with more than one physical camera is not supported!");
         }
         this.mLogicalCameraId = str;
-        CameraMetadataNative move = CameraMetadataNative.move(cameraMetadataNative);
-        this.mLogicalCameraSettings = move;
-        hashMap.put(this.mLogicalCameraId, move);
+        CameraMetadataNative cameraMetadataNativeMove = CameraMetadataNative.move(cameraMetadataNative);
+        this.mLogicalCameraSettings = cameraMetadataNativeMove;
+        map.put(this.mLogicalCameraId, cameraMetadataNativeMove);
         if (set != null) {
             Iterator<String> it = set.iterator();
             while (it.hasNext()) {
@@ -522,9 +501,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
 
     /* JADX INFO: Access modifiers changed from: private */
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt <= 0) {
-            throw new RuntimeException("Physical camera count" + readInt + " should always be positive");
+        int i = parcel.readInt();
+        if (i <= 0) {
+            throw new RuntimeException("Physical camera count" + i + " should always be positive");
         }
         this.mLogicalCameraId = parcel.readString();
         CameraMetadataNative cameraMetadataNative = new CameraMetadataNative();
@@ -532,11 +511,11 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         cameraMetadataNative.readFromParcel(parcel);
         setNativeInstance(this.mLogicalCameraSettings);
         this.mPhysicalCameraSettings.put(this.mLogicalCameraId, this.mLogicalCameraSettings);
-        for (int i = 1; i < readInt; i++) {
-            String readString = parcel.readString();
+        for (int i2 = 1; i2 < i; i2++) {
+            String string = parcel.readString();
             CameraMetadataNative cameraMetadataNative2 = new CameraMetadataNative();
             cameraMetadataNative2.readFromParcel(parcel);
-            this.mPhysicalCameraSettings.put(readString, cameraMetadataNative2);
+            this.mPhysicalCameraSettings.put(string, cameraMetadataNative2);
         }
         this.mIsReprocess = parcel.readInt() != 0;
         this.mReprocessableSessionId = -1;
@@ -594,10 +573,10 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         }
         Object obj = this.mUserTag;
         if (obj != null) {
-            String obj2 = obj.toString();
-            if (obj2 != null && obj2.startsWith(SET_TAG_STRING_PREFIX)) {
+            String string = obj.toString();
+            if (string != null && string.startsWith(SET_TAG_STRING_PREFIX)) {
                 parcel.writeInt(1);
-                parcel.writeString(obj2.substring(47));
+                parcel.writeString(string.substring(47));
                 return;
             } else {
                 parcel.writeInt(0);
@@ -633,7 +612,7 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                 Surface next = it.next();
                 boolean z = false;
                 for (int i2 = 0; i2 < sparseArray.size(); i2++) {
-                    int keyAt = sparseArray.keyAt(i2);
+                    int iKeyAt = sparseArray.keyAt(i2);
                     Iterator<Surface> it2 = sparseArray.valueAt(i2).getSurfaces().iterator();
                     int i3 = 0;
                     while (true) {
@@ -641,7 +620,7 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                             break;
                         }
                         if (next == it2.next()) {
-                            this.mStreamIdxArray[i] = keyAt;
+                            this.mStreamIdxArray[i] = iKeyAt;
                             this.mSurfaceIdxArray[i] = i3;
                             i++;
                             z = true;
@@ -656,7 +635,7 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                 if (!z) {
                     long surfaceId = SurfaceUtils.getSurfaceId(next);
                     for (int i4 = 0; i4 < sparseArray.size(); i4++) {
-                        int keyAt2 = sparseArray.keyAt(i4);
+                        int iKeyAt2 = sparseArray.keyAt(i4);
                         Iterator<Surface> it3 = sparseArray.valueAt(i4).getSurfaces().iterator();
                         int i5 = 0;
                         while (true) {
@@ -664,7 +643,7 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                                 break;
                             }
                             if (surfaceId == SurfaceUtils.getSurfaceId(it3.next())) {
-                                this.mStreamIdxArray[i] = keyAt2;
+                                this.mStreamIdxArray[i] = iKeyAt2;
                                 this.mSurfaceIdxArray[i] = i5;
                                 i++;
                                 z = true;

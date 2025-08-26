@@ -50,14 +50,14 @@ public abstract class DynamicDrawableSpan extends ReplacementSpan {
     public void draw(Canvas canvas, CharSequence charSequence, int i, int i2, float f, int i3, int i4, int i5, Paint paint) {
         Drawable cachedDrawable = getCachedDrawable();
         canvas.save();
-        int i6 = i5 - cachedDrawable.getBounds().bottom;
-        int i7 = this.mVerticalAlignment;
-        if (i7 == 1) {
-            i6 -= paint.getFontMetricsInt().descent;
-        } else if (i7 == 2) {
-            i6 = (i3 + ((i5 - i3) / 2)) - (cachedDrawable.getBounds().height() / 2);
+        int iHeight = i5 - cachedDrawable.getBounds().bottom;
+        int i6 = this.mVerticalAlignment;
+        if (i6 == 1) {
+            iHeight -= paint.getFontMetricsInt().descent;
+        } else if (i6 == 2) {
+            iHeight = (i3 + ((i5 - i3) / 2)) - (cachedDrawable.getBounds().height() / 2);
         }
-        canvas.translate(f, i6);
+        canvas.translate(f, iHeight);
         cachedDrawable.draw(canvas);
         canvas.restore();
     }

@@ -278,7 +278,7 @@ public final class MediaMetadata implements Parcelable {
             i5++;
         }
         String string3 = getString(METADATA_KEY_MEDIA_URI);
-        Uri parse = TextUtils.isEmpty(string3) ? null : Uri.parse(string3);
+        Uri uri2 = TextUtils.isEmpty(string3) ? null : Uri.parse(string3);
         MediaDescription.Builder builder = new MediaDescription.Builder();
         builder.setMediaId(string);
         builder.setTitle(charSequenceArr[0]);
@@ -286,15 +286,15 @@ public final class MediaMetadata implements Parcelable {
         builder.setDescription(charSequenceArr[2]);
         builder.setIconBitmap(bitmap);
         builder.setIconUri(uri);
-        builder.setMediaUri(parse);
+        builder.setMediaUri(uri2);
         if (this.mBundle.containsKey(METADATA_KEY_BT_FOLDER_TYPE)) {
             Bundle bundle = new Bundle();
             bundle.putLong(MediaDescription.EXTRA_BT_FOLDER_TYPE, getLong(METADATA_KEY_BT_FOLDER_TYPE));
             builder.setExtras(bundle);
         }
-        MediaDescription build = builder.build();
-        this.mDescription = build;
-        return build;
+        MediaDescription mediaDescriptionBuild = builder.build();
+        this.mDescription = mediaDescriptionBuild;
+        return mediaDescriptionBuild;
     }
 
     public static String getKeyFromMetadataEditorKey(int i) {
@@ -315,13 +315,13 @@ public final class MediaMetadata implements Parcelable {
             if (i >= arrayMap.size()) {
                 return true;
             }
-            String keyAt = arrayMap.keyAt(i);
-            int intValue = arrayMap.valueAt(i).intValue();
-            if (intValue != 0) {
-                if (intValue == 1 && !Objects.equals(getString(keyAt), mediaMetadata.getString(keyAt))) {
+            String strKeyAt = arrayMap.keyAt(i);
+            int iIntValue = arrayMap.valueAt(i).intValue();
+            if (iIntValue != 0) {
+                if (iIntValue == 1 && !Objects.equals(getString(strKeyAt), mediaMetadata.getString(strKeyAt))) {
                     return false;
                 }
-            } else if (getLong(keyAt) != mediaMetadata.getLong(keyAt)) {
+            } else if (getLong(strKeyAt) != mediaMetadata.getLong(strKeyAt)) {
                 return false;
             }
             i++;
@@ -330,7 +330,7 @@ public final class MediaMetadata implements Parcelable {
 
     public int hashCode() {
         int i;
-        int hashCode;
+        int iHashCode;
         int i2 = 17;
         int i3 = 0;
         while (true) {
@@ -338,18 +338,18 @@ public final class MediaMetadata implements Parcelable {
             if (i3 >= arrayMap.size()) {
                 return i2;
             }
-            String keyAt = arrayMap.keyAt(i3);
-            int intValue = arrayMap.valueAt(i3).intValue();
-            if (intValue == 0) {
+            String strKeyAt = arrayMap.keyAt(i3);
+            int iIntValue = arrayMap.valueAt(i3).intValue();
+            if (iIntValue == 0) {
                 i = i2 * 31;
-                hashCode = Long.hashCode(getLong(keyAt));
-            } else if (intValue != 1) {
+                iHashCode = Long.hashCode(getLong(strKeyAt));
+            } else if (iIntValue != 1) {
                 i3++;
             } else {
                 i = i2 * 31;
-                hashCode = Objects.hash(getString(keyAt));
+                iHashCode = Objects.hash(getString(strKeyAt));
             }
-            i2 = i + hashCode;
+            i2 = i + iHashCode;
             i3++;
         }
     }
@@ -435,8 +435,8 @@ public final class MediaMetadata implements Parcelable {
 
         private Bitmap scaleBitmap(Bitmap bitmap, int i) {
             float f = i;
-            float min = Math.min(f / bitmap.getWidth(), f / bitmap.getHeight());
-            return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * min), (int) (bitmap.getHeight() * min), true);
+            float fMin = Math.min(f / bitmap.getWidth(), f / bitmap.getHeight());
+            return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fMin), (int) (bitmap.getHeight() * fMin), true);
         }
     }
 }

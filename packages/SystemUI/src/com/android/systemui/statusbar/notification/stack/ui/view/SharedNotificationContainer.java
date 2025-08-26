@@ -12,7 +12,6 @@ import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SharedNotificationContainer extends ConstraintLayout {
     public final ConstraintSet baseConstraintSet;
@@ -40,25 +39,30 @@ public final class SharedNotificationContainer extends ConstraintLayout {
         return super.dispatchTouchEvent(motionEvent);
     }
 
-    public final void updateConstraints(SharedNotificationContainerViewModel.HorizontalPosition horizontalPosition, int i, int i2, int i3, float f, int i4, float f2, SecQsUiDisplayModeInteractor.UiDisplayMode uiDisplayMode) {
+    /* JADX WARN: Removed duplicated region for block: B:19:0x006d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void updateConstraints(SharedNotificationContainerViewModel.HorizontalPosition horizontalPosition, int i, int i2, int i3, float f, int i4, int i5, float f2, SecQsUiDisplayModeInteractor.UiDisplayMode uiDisplayMode) {
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(this.baseConstraintSet);
-        int i5 = horizontalPosition instanceof SharedNotificationContainerViewModel.HorizontalPosition.MiddleToEdge ? R.id.nssl_guideline : 0;
+        int i6 = horizontalPosition instanceof SharedNotificationContainerViewModel.HorizontalPosition.MiddleToEdge ? R.id.nssl_guideline : 0;
         constraintSet.setAlpha(R.id.notification_stack_scroller, f);
-        constraintSet.connect(R.id.notification_stack_scroller, 6, i5, 6, i);
+        constraintSet.setVisibility(R.id.notification_stack_scroller, i4);
+        constraintSet.connect(R.id.notification_stack_scroller, 6, i6, 6, i);
         constraintSet.connect(R.id.notification_stack_scroller, 7, 0, 7, i2);
         constraintSet.connect(R.id.notification_stack_scroller, 4, 0, 4, i3);
         constraintSet.connect(R.id.notification_stack_scroller, 3, 0, 3, 0);
-        constraintSet.constrainWidth(R.id.notification_stack_scroller, i4);
+        constraintSet.constrainWidth(R.id.notification_stack_scroller, i5);
         if (uiDisplayMode == SecQsUiDisplayModeInteractor.UiDisplayMode.LARGE) {
             constraintSet.setTranslationX(R.id.notification_stack_scroller, f2);
         }
-        SecPanelSplitHelper.Companion.getClass();
-        if (SecPanelSplitHelper.isEnabled) {
-            if (((SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class)).isQSState()) {
-                constraintSet.setVisibility(R.id.notification_stack_scroller, 4);
-            } else {
-                constraintSet.setVisibility(R.id.notification_stack_scroller, 0);
+        QsAnimatorState.INSTANCE.getClass();
+        if (QsAnimatorState.isCustomizerShowing || QsAnimatorState.isDetailShowing) {
+            constraintSet.setVisibility(R.id.notification_stack_scroller, 4);
+        } else {
+            SecPanelSplitHelper.Companion.getClass();
+            if (SecPanelSplitHelper.isEnabled && ((SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class)).isQSState()) {
             }
         }
         constraintSet.applyTo(this);

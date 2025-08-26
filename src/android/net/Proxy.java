@@ -30,9 +30,9 @@ public final class Proxy {
 
     public static final java.net.Proxy getProxy(Context context, String str) {
         if (str != null && !isLocalHost("")) {
-            List<java.net.Proxy> select = ProxySelector.getDefault().select(URI.create(str));
-            if (select.size() > 0) {
-                return select.get(0);
+            List<java.net.Proxy> listSelect = ProxySelector.getDefault().select(URI.create(str));
+            if (listSelect.size() > 0) {
+                return listSelect.get(0);
             }
         }
         return java.net.Proxy.NO_PROXY;
@@ -107,39 +107,36 @@ public final class Proxy {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static void setHttpProxyConfiguration(ProxyInfo proxyInfo) {
-        String str;
-        String str2;
-        Uri uri;
-        String str3;
-        Uri uri2 = Uri.EMPTY;
+        String string;
+        String strExclusionListAsString;
+        Uri pacFileUrl;
+        String host;
+        Uri uri = Uri.EMPTY;
         if (proxyInfo != null) {
-            str3 = proxyInfo.getHost();
-            str = Integer.toString(proxyInfo.getPort());
-            str2 = ProxyUtils.exclusionListAsString(proxyInfo.getExclusionList());
-            uri = proxyInfo.getPacFileUrl();
+            host = proxyInfo.getHost();
+            string = Integer.toString(proxyInfo.getPort());
+            strExclusionListAsString = ProxyUtils.exclusionListAsString(proxyInfo.getExclusionList());
+            pacFileUrl = proxyInfo.getPacFileUrl();
         } else {
-            str = null;
-            str2 = null;
-            uri = uri2;
-            str3 = null;
+            string = null;
+            strExclusionListAsString = null;
+            pacFileUrl = uri;
+            host = null;
         }
-        setHttpProxyConfiguration(str3, str, str2, uri);
+        setHttpProxyConfiguration(host, string, strExclusionListAsString, pacFileUrl);
     }
 
     public static void setHttpProxyConfiguration(String str, String str2, String str3, Uri uri) {
-        int[] iArr = new int[2];
-        if (str == null && str2 == null) {
-            iArr = getKnoxVpnZtnaProxyInfo();
-            int i = iArr[0];
-            if (i > 0) {
-                str2 = Integer.toString(i);
-                str = "localhost";
-            }
-            int i2 = iArr[1];
-            if (i2 > 0) {
-                str2 = Integer.toString(i2);
-                str = "127.0.0.1";
-            }
+        int[] knoxVpnZtnaProxyInfo = getKnoxVpnZtnaProxyInfo();
+        int i = knoxVpnZtnaProxyInfo[0];
+        if (i > 0) {
+            str2 = Integer.toString(i);
+            str = "localhost";
+        }
+        int i2 = knoxVpnZtnaProxyInfo[1];
+        if (i2 > 0) {
+            str2 = Integer.toString(i2);
+            str = "127.0.0.1";
         }
         boolean z = DBG;
         if (z) {
@@ -172,12 +169,12 @@ public final class Proxy {
             System.clearProperty("http.nonProxyHosts");
             System.clearProperty("https.nonProxyHosts");
         }
-        if (iArr[0] > 0) {
+        if (knoxVpnZtnaProxyInfo[0] > 0) {
             if (Uri.EMPTY.equals(uri)) {
                 return;
             }
             ProxySelector.setDefault(new KnoxVpnProxySelector());
-        } else if (iArr[1] > 0) {
+        } else if (knoxVpnZtnaProxyInfo[1] > 0) {
             ProxySelector.setDefault(new KnoxZtnaProxySelector());
         } else if (!Uri.EMPTY.equals(uri)) {
             ProxySelector.setDefault(new PacProxySelector());

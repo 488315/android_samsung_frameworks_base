@@ -46,8 +46,8 @@ public abstract class HandwritingGesture {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final byte[] toByteArray() {
-        Parcel parcel;
+    public final byte[] toByteArray() throws Throwable {
+        Parcel parcelObtain;
         if (!(this instanceof Parcelable)) {
             throw new UnsupportedOperationException(getClass() + " is not Parcelable");
         }
@@ -55,49 +55,49 @@ public abstract class HandwritingGesture {
             throw new UnsupportedOperationException("Gesture that contains FD is not supported");
         }
         try {
-            parcel = Parcel.obtain();
-        } catch (Throwable th) {
-            th = th;
-            parcel = null;
-        }
-        try {
-            ParcelableHandwritingGesture.of(this).writeToParcel(parcel, 0);
-            byte[] marshall = parcel.marshall();
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            return marshall;
-        } catch (Throwable th2) {
-            th = th2;
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            throw th;
-        }
-    }
-
-    public static HandwritingGesture fromByteArray(byte[] bArr) {
-        Parcel parcel;
-        try {
-            parcel = Parcel.obtain();
+            parcelObtain = Parcel.obtain();
             try {
-                parcel.unmarshall(bArr, 0, bArr.length);
-                parcel.setDataPosition(0);
-                HandwritingGesture handwritingGesture = ParcelableHandwritingGesture.CREATOR.createFromParcel(parcel).get();
-                if (parcel != null) {
-                    parcel.recycle();
+                ParcelableHandwritingGesture.of(this).writeToParcel(parcelObtain, 0);
+                byte[] bArrMarshall = parcelObtain.marshall();
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
                 }
-                return handwritingGesture;
+                return bArrMarshall;
             } catch (Throwable th) {
                 th = th;
-                if (parcel != null) {
-                    parcel.recycle();
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
                 }
                 throw th;
             }
         } catch (Throwable th2) {
             th = th2;
-            parcel = null;
+            parcelObtain = null;
+        }
+    }
+
+    public static HandwritingGesture fromByteArray(byte[] bArr) throws Throwable {
+        Parcel parcelObtain;
+        try {
+            parcelObtain = Parcel.obtain();
+        } catch (Throwable th) {
+            th = th;
+            parcelObtain = null;
+        }
+        try {
+            parcelObtain.unmarshall(bArr, 0, bArr.length);
+            parcelObtain.setDataPosition(0);
+            HandwritingGesture handwritingGesture = ParcelableHandwritingGesture.CREATOR.createFromParcel(parcelObtain).get();
+            if (parcelObtain != null) {
+                parcelObtain.recycle();
+            }
+            return handwritingGesture;
+        } catch (Throwable th2) {
+            th = th2;
+            if (parcelObtain != null) {
+                parcelObtain.recycle();
+            }
+            throw th;
         }
     }
 }

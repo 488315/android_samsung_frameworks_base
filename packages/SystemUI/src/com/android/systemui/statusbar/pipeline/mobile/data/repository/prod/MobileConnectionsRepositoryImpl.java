@@ -4,16 +4,22 @@ import android.R;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.ParcelUuid;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.IndentingPrintWriter;
 import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.keyguard.KeyguardUpdateMonitorCallback;
+import com.android.settingslib.SignalIcon$MobileIconGroup;
 import com.android.settingslib.mobile.MobileMappings;
 import com.android.systemui.Dumpable;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dump.DumpManager;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.table.DiffableKt;
 import com.android.systemui.log.table.TableLogBuffer;
 import com.android.systemui.statusbar.phone.CoverScreenNetworkSignalModel;
@@ -27,32 +33,45 @@ import com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConn
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepository;
 import com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileDataIconResource;
 import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxy;
+import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxyImpl;
 import com.android.systemui.statusbar.pipeline.mobile.util.SimCardInfoUtil;
 import com.android.systemui.statusbar.pipeline.mobile.util.SubscriptionManagerProxy;
+import com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel;
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepository;
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl;
 import com.android.systemui.statusbar.pipeline.wifi.data.repository.WifiRepository;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.kotlin.WithPrev;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
+import kotlin.collections.IntIterator;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.ranges.IntRange;
+import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.channels.ChannelCoroutine;
+import kotlinx.coroutines.channels.ProduceKt;
+import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
@@ -64,7 +83,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileConnectionsRepositoryImpl implements MobileConnectionsRepository, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -104,13 +122,143 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
     public final ReadonlyStateFlow subscriptions;
     public final TelephonyManager telephonyManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isAnySimSecure$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = MobileConnectionsRepositoryImpl.this.new AnonymousClass1(continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Multi-variable type inference failed */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final ProducerScope producerScope = (ProducerScope) this.L$0;
+                final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = MobileConnectionsRepositoryImpl.this;
+                KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isAnySimSecure$1$callback$1
+                    @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
+                    public final void onSimStateChanged(int i2, int i3, int i4) {
+                        MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = mobileConnectionsRepositoryImpl;
+                        MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryImpl2.logger;
+                        mobileInputLogger.getClass();
+                        LogBuffer.log$default(mobileInputLogger.buffer, "MobileInputLog", LogLevel.INFO, "onSimStateChanged");
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryImpl2.keyguardUpdateMonitor.isSimPinSecure()));
+                    }
+                };
+                MobileConnectionsRepositoryImpl.this.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);
+                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                MobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0 mobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0 = new MobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0(MobileConnectionsRepositoryImpl.this, keyguardUpdateMonitorCallback, 0);
+                this.label = 1;
+                if (ProduceKt.awaitClose(producerScope, mobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isDeviceEmergencyCallCapable$1, reason: invalid class name and case insensitive filesystem */
+    final class C11021 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C11021(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return MobileConnectionsRepositoryImpl.this.new C11021(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C11021) create((Unit) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            boolean z = true;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            if (!MobileConnectionsRepositoryImpl.this.context.getPackageManager().hasSystemFeature("android.hardware.telephony.radio.access")) {
+                return Boolean.FALSE;
+            }
+            IntRange intRangeUntil = RangesKt___RangesKt.until(0, MobileConnectionsRepositoryImpl.this.telephonyManager.getActiveModemCount());
+            MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = MobileConnectionsRepositoryImpl.this;
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(intRangeUntil, 10));
+            Iterator it = intRangeUntil.iterator();
+            while (it.hasNext()) {
+                arrayList.add(mobileConnectionsRepositoryImpl.telephonyManager.getServiceStateForSlot(((IntIterator) it).nextInt()));
+            }
+            if (arrayList.isEmpty()) {
+                z = false;
+            } else {
+                int size = arrayList.size();
+                int i = 0;
+                while (i < size) {
+                    Object obj2 = arrayList.get(i);
+                    i++;
+                    ServiceState serviceState = (ServiceState) obj2;
+                    if (serviceState != null && serviceState.isEmergencyOnly()) {
+                        break;
+                    }
+                }
+                z = false;
+            }
+            return Boolean.valueOf(z);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1, reason: invalid class name and case insensitive filesystem */
+    final class C11031 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public C11031(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return MobileConnectionsRepositoryImpl.this.isInEcmMode(this);
         }
     }
 
@@ -131,17 +279,17 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
         this.mobileDataIconResource = mobileDataIconResource;
         this.settingsHelper = settingsHelper;
         DeviceType.isEngOrUTBinary();
-        this.defaultNetworkName = new NetworkNameModel.Default(context.getString(R.string.permlab_accessHiddenProfile));
+        this.defaultNetworkName = new NetworkNameModel.Default(context.getString(R.string.permlab_accessLastKnownCellId));
         this.networkNameSeparator = context.getString(com.android.systemui.R.string.status_bar_network_name_separator);
         dumpManager.registerNormalDumpable("MobileConnectionsRepository", this);
         this.mobileIconMappingTable = new LinkedHashMap();
         ConnectivityRepositoryImpl connectivityRepositoryImpl = (ConnectivityRepositoryImpl) connectivityRepository;
-        Flow logDiffsForTable = DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.combine(wifiRepository.getWifiNetwork(), connectivityRepositoryImpl.defaultConnections, ((AirplaneModeRepositoryImpl) airplaneModeRepository).isAirplaneMode, new MobileConnectionsRepositoryImpl$carrierMergedSubId$1(null))), tableLogBuffer, "carrierMergedSubId");
+        Flow flowLogDiffsForTable = DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.combine(wifiRepository.getWifiNetwork(), connectivityRepositoryImpl.defaultConnections, ((AirplaneModeRepositoryImpl) airplaneModeRepository).isAirplaneMode, new MobileConnectionsRepositoryImpl$carrierMergedSubId$1(null))), tableLogBuffer, "carrierMergedSubId");
         SharingStarted.Companion companion = SharingStarted.Companion;
-        final ReadonlyStateFlow stateIn = FlowKt.stateIn(logDiffsForTable, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.carrierMergedSubId = stateIn;
-        Flow flowOn = FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$mobileSubscriptionsChangeEvent$1(this, null)), coroutineDispatcher);
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1(this, null));
+        final ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowLogDiffsForTable, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.carrierMergedSubId = readonlyStateFlowStateIn;
+        Flow flowFlowOn = FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$mobileSubscriptionsChangeEvent$1(this, null)), coroutineDispatcher);
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1(this, null));
         final int i = 0;
         FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryImpl$serviceStateChangedEvent$2(null), BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.SERVICE_STATE"), null, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
@@ -163,18 +311,17 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
             }
         }, 14));
         this.serviceStateChangedEvent = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
-        Flow logDiffsForTable2 = DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowKt.mapLatest(flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, new MobileConnectionsRepositoryImpl$isDeviceEmergencyCallCapable$1(this, null)), coroutineDispatcher)), tableLogBuffer, "Repo", "deviceEmergencyOnly", false);
+        Flow flowLogDiffsForTable2 = DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowKt.mapLatest(flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, new C11021(null)), coroutineDispatcher)), tableLogBuffer, "Repo", "deviceEmergencyOnly", false);
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
         Boolean bool = Boolean.FALSE;
-        this.isDeviceEmergencyCallCapable = FlowKt.stateIn(logDiffsForTable2, coroutineScope, startedEagerly, bool);
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.mapLatest(FlowKt.merge(flowOn, stateIn, conflatedCallbackFlow, BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.SIM_STATE_CHANGED"), null, 14)), new MobileConnectionsRepositoryImpl$subscriptions$1(this, null)), new MobileConnectionsRepositoryImpl$subscriptions$2(this, null)));
+        this.isDeviceEmergencyCallCapable = FlowKt.stateIn(flowLogDiffsForTable2, coroutineScope, startedEagerly, bool);
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.mapLatest(FlowKt.merge(flowFlowOn, readonlyStateFlowStateIn, flowConflatedCallbackFlow, BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.SIM_STATE_CHANGED"), null, 14)), new MobileConnectionsRepositoryImpl$subscriptions$1(this, null)), new MobileConnectionsRepositoryImpl$subscriptions$2(this, null)));
         EmptyList emptyList = EmptyList.INSTANCE;
-        this.subscriptions = FlowKt.stateIn(DiffableKt.logDiffsForTable(distinctUntilChanged, tableLogBuffer, "Repo", "subscriptions", emptyList), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), emptyList);
-        final ReadonlyStateFlow stateIn2 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1(this, null)), coroutineDispatcher)), tableLogBuffer, "activeSubId"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.activeMobileDataSubscriptionId = stateIn2;
+        this.subscriptions = FlowKt.stateIn(DiffableKt.logDiffsForTable(flowDistinctUntilChanged, tableLogBuffer, "Repo", "subscriptions", emptyList), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), emptyList);
+        final ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$activeMobileDataSubscriptionId$1(this, null)), coroutineDispatcher)), tableLogBuffer, "activeSubId"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.activeMobileDataSubscriptionId = readonlyStateFlowStateIn2;
         this.activeMobileDataRepository = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -203,77 +350,58 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.this$0 = mobileConnectionsRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4f
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Integer r5 = (java.lang.Integer) r5
-                        if (r5 != 0) goto L38
-                        r5 = 0
-                        goto L44
-                    L38:
-                        int r5 = r5.intValue()
-                        int r6 = com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl.$r8$clinit
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl r6 = r4.this$0
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepository r5 = r6.getOrCreateRepoForSubId(r5)
-                    L44:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4f
-                        return r1
-                    L4f:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    FullMobileConnectionRepository orCreateRepoForSubId;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Integer num = (Integer) obj;
+                        if (num == null) {
+                            orCreateRepoForSubId = null;
+                        } else {
+                            int iIntValue = num.intValue();
+                            int i3 = MobileConnectionsRepositoryImpl.$r8$clinit;
+                            orCreateRepoForSubId = this.this$0.getOrCreateRepoForSubId(iIntValue);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(orCreateRepoForSubId, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
         final int i2 = 1;
-        ReadonlyStateFlow stateIn3 = FlowKt.stateIn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryImpl$defaultDataSubId$2(this, null), DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED"), null, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$$ExternalSyntheticLambda0
+        ReadonlyStateFlow readonlyStateFlowStateIn3 = FlowKt.stateIn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryImpl$defaultDataSubId$2(this, null), DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED"), null, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Intent intent = (Intent) obj;
@@ -292,19 +420,18 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                 }
             }
         }, 14)), tableLogBuffer, "defaultSubId")), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.defaultDataSubId = stateIn3;
+        this.defaultDataSubId = readonlyStateFlowStateIn3;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.telephony.action.CARRIER_CONFIG_CHANGED"), null, 14), new MobileConnectionsRepositoryImpl$carrierConfigChangedEvent$1(this, null));
         this.carrierConfigChangedEvent = flowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$12 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("com.samsung.carrier.action.CARRIER_CHANGED"), null, 14), new MobileConnectionsRepositoryImpl$semCarrierChangedEvent$1(this, null));
         this.semCarrierChangedEvent = flowKt__TransformKt$onEach$$inlined$unsafeTransform$12;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$13 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("com.samsung.intent.action.OMC_CHANGED"), null, 14), new MobileConnectionsRepositoryImpl$semOMCChangedEvent$1(this, null));
         this.semOMCChangedEvent = flowKt__TransformKt$onEach$$inlined$unsafeTransform$13;
-        final ReadonlyStateFlow stateIn4 = FlowKt.stateIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(FlowKt.mapLatest(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$1(null), FlowKt.merge(stateIn3, flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, flowKt__TransformKt$onEach$$inlined$unsafeTransform$12, stateIn2)), new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$2(this, null))), new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$3(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), MobileMappings.Config.readConfig(context));
-        this.defaultDataSubRatConfig = stateIn4;
-        final ChannelLimitedFlowMerge merge = FlowKt.merge(flowOn, flowKt__TransformKt$onEach$$inlined$unsafeTransform$12, flowKt__TransformKt$onEach$$inlined$unsafeTransform$13, conflatedCallbackFlow);
+        final ReadonlyStateFlow readonlyStateFlowStateIn4 = FlowKt.stateIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(FlowKt.mapLatest(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$1(null), FlowKt.merge(readonlyStateFlowStateIn3, flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, flowKt__TransformKt$onEach$$inlined$unsafeTransform$12, readonlyStateFlowStateIn2)), new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$2(this, null))), new MobileConnectionsRepositoryImpl$defaultDataSubRatConfig$3(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), MobileMappings.Config.readConfig(context));
+        this.defaultDataSubRatConfig = readonlyStateFlowStateIn4;
+        final ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(flowFlowOn, flowKt__TransformKt$onEach$$inlined$unsafeTransform$12, flowKt__TransformKt$onEach$$inlined$unsafeTransform$13, flowConflatedCallbackFlow);
         this.defaultMobileIconMappingTable = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -333,114 +460,66 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.this$0 = mobileConnectionsRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r11, kotlin.coroutines.Continuation r12) {
-                    /*
-                        r10 = this;
-                        boolean r0 = r12 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r12
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r12)
-                    L18:
-                        java.lang.Object r12 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L30
-                        if (r2 != r3) goto L28
-                        kotlin.ResultKt.throwOnFailure(r12)
-                        goto La2
-                    L28:
-                        java.lang.IllegalStateException r10 = new java.lang.IllegalStateException
-                        java.lang.String r11 = "call to 'resume' before 'invoke' with coroutine"
-                        r10.<init>(r11)
-                        throw r10
-                    L30:
-                        kotlin.ResultKt.throwOnFailure(r12)
-                        kotlin.Unit r11 = (kotlin.Unit) r11
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl r11 = r10.this$0
-                        java.util.List r12 = com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl.access$fetchSubscriptionsList(r11)
-                        java.util.ArrayList r2 = new java.util.ArrayList
-                        r4 = 10
-                        int r4 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r12, r4)
-                        r2.<init>(r4)
-                        java.util.Iterator r12 = r12.iterator()
-                    L4a:
-                        boolean r4 = r12.hasNext()
-                        if (r4 == 0) goto L5e
-                        java.lang.Object r4 = r12.next()
-                        android.telephony.SubscriptionInfo r4 = (android.telephony.SubscriptionInfo) r4
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel r4 = com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl.access$toSubscriptionModel(r11, r4)
-                        r2.add(r4)
-                        goto L4a
-                    L5e:
-                        int r12 = r2.size()
-                        r4 = 0
-                        r5 = r4
-                    L64:
-                        if (r5 >= r12) goto L90
-                        java.lang.Object r6 = r2.get(r5)
-                        int r5 = r5 + 1
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel r6 = (com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel) r6
-                        int r7 = r6.subscriptionId
-                        int r7 = android.telephony.SubscriptionManager.getSlotIndex(r7)
-                        r8 = -1
-                        if (r7 != r8) goto L79
-                        r6 = r4
-                        goto L7f
-                    L79:
-                        int r6 = r6.subscriptionId
-                        int r6 = android.telephony.SubscriptionManager.getSlotIndex(r6)
-                    L7f:
-                        java.lang.Integer r7 = new java.lang.Integer
-                        r7.<init>(r6)
-                        java.util.Map r8 = r11.mobileIconMappingTable
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileDataIconResource r9 = r11.mobileDataIconResource
-                        java.util.Map r6 = r9.mapIconSets(r6)
-                        r8.put(r7, r6)
-                        goto L64
-                    L90:
-                        java.util.concurrent.ConcurrentHashMap r12 = new java.util.concurrent.ConcurrentHashMap
-                        java.util.Map r11 = r11.mobileIconMappingTable
-                        r12.<init>(r11)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r10 = r10.$this_unsafeFlow
-                        java.lang.Object r10 = r10.emit(r12, r0)
-                        if (r10 != r1) goto La2
-                        return r1
-                    La2:
-                        kotlin.Unit r10 = kotlin.Unit.INSTANCE
-                        return r10
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = this.this$0;
+                        List listAccess$fetchSubscriptionsList = MobileConnectionsRepositoryImpl.access$fetchSubscriptionsList(mobileConnectionsRepositoryImpl);
+                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAccess$fetchSubscriptionsList, 10));
+                        Iterator it = listAccess$fetchSubscriptionsList.iterator();
+                        while (it.hasNext()) {
+                            arrayList.add(MobileConnectionsRepositoryImpl.access$toSubscriptionModel(mobileConnectionsRepositoryImpl, (SubscriptionInfo) it.next()));
+                        }
+                        int size = arrayList.size();
+                        int i3 = 0;
+                        while (i3 < size) {
+                            Object obj3 = arrayList.get(i3);
+                            i3++;
+                            SubscriptionModel subscriptionModel = (SubscriptionModel) obj3;
+                            int slotIndex = SubscriptionManager.getSlotIndex(subscriptionModel.subscriptionId) == -1 ? 0 : SubscriptionManager.getSlotIndex(subscriptionModel.subscriptionId);
+                            mobileConnectionsRepositoryImpl.mobileIconMappingTable.put(new Integer(slotIndex), mobileConnectionsRepositoryImpl.mobileDataIconResource.mapIconSets(slotIndex));
+                        }
+                        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap(mobileConnectionsRepositoryImpl.mobileIconMappingTable);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(concurrentHashMap, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelLimitedFlowMergeMerge.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new MobileConnectionsRepositoryImpl$defaultMobileIconMappingTable$2(this, null));
         this.defaultMobileIconMapping = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -469,74 +548,50 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.this$0 = mobileConnectionsRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4f
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.settingslib.mobile.MobileMappings$Config r5 = (com.android.settingslib.mobile.MobileMappings.Config) r5
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl r5 = r4.this$0
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileDataIconResource r5 = r5.mobileDataIconResource
-                        int r6 = android.telephony.SubscriptionManager.getActiveDataSubscriptionId()
-                        int r6 = android.telephony.SubscriptionManager.getSlotIndex(r6)
-                        java.util.Map r5 = r5.mapIconSets(r6)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4f
-                        return r1
-                    L4f:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Map mapMapIconSets = this.this$0.mobileDataIconResource.mapIconSets(SubscriptionManager.getSlotIndex(SubscriptionManager.getActiveDataSubscriptionId()));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(mapMapIconSets, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this, mobileMappingsProxy), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn4.collect(new AnonymousClass2(flowCollector, this, mobileMappingsProxy), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new MobileConnectionsRepositoryImpl$defaultMobileIconMapping$2(this, null));
         this.defaultMobileIconGroup = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ MobileMappingsProxy $mobileMappingsProxy$inlined;
@@ -565,75 +620,53 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.$mobileMappingsProxy$inlined = mobileMappingsProxy;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.settingslib.mobile.MobileMappings$Config r5 = (com.android.settingslib.mobile.MobileMappings.Config) r5
-                        com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxy r6 = r4.$mobileMappingsProxy$inlined
-                        com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxyImpl r6 = (com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxyImpl) r6
-                        com.android.settingslib.SignalIcon$MobileIconGroup r5 = r6.getDefaultIcons(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        SignalIcon$MobileIconGroup defaultIcons = ((MobileMappingsProxyImpl) this.$mobileMappingsProxy$inlined).getDefaultIcons((MobileMappings.Config) obj);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(defaultIcons, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, mobileMappingsProxy), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn4.collect(new AnonymousClass2(flowCollector, mobileMappingsProxy), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new MobileConnectionsRepositoryImpl$defaultMobileIconGroup$2(this, null));
-        this.isAnySimSecure = FlowKt.distinctUntilChanged(DiffableKt.logDiffsForTable(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$isAnySimSecure$1(this, null)), coroutineDispatcher2), tableLogBuffer, "Repo", "isAnySimSecure", false));
+        this.isAnySimSecure = FlowKt.distinctUntilChanged(DiffableKt.logDiffsForTable(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new AnonymousClass1(null)), coroutineDispatcher2), tableLogBuffer, "Repo", "isAnySimSecure", false));
         this.deviceOnTheCall = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowConflatedKt.conflatedCallbackFlow(new MobileConnectionsRepositoryImpl$deviceOnTheCall$1(this, null))), tableLogBuffer, "Repo", "deviceOnTheCall", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         final ReadonlyStateFlow readonlyStateFlow = connectivityRepositoryImpl.defaultConnections;
         this.mobileIsDefault = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -660,72 +693,50 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel r5 = (com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel) r5
-                        com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel$Mobile r5 = r5.mobile
-                        boolean r5 = r5.isDefault
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$5.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((DefaultConnectionModel) obj).mobile.isDefault);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), tableLogBuffer, "Repo", "mobileIsDefault", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this.hasCarrierMergedConnection = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -752,76 +763,50 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Integer r5 = (java.lang.Integer) r5
-                        if (r5 == 0) goto L38
-                        r5 = r3
-                        goto L39
-                    L38:
-                        r5 = 0
-                    L39:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$6.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((Integer) obj) != null);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), tableLogBuffer, "Repo", "hasCarrierMergedConnection", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this.defaultConnectionIsValidated = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -848,72 +833,51 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel r5 = (com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel) r5
-                        boolean r5 = r5.isValidated
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$map$7.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((DefaultConnectionModel) obj).isValidated);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), tableLogBuffer, "", "defaultConnectionIsValidated", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        final Flow pairwise = com.android.systemui.util.kotlin.FlowKt.pairwise(stateIn2);
+        final Flow flowPairwise = com.android.systemui.util.kotlin.FlowKt.pairwise(readonlyStateFlowStateIn2);
         this.activeSubChangedInGroupEvent = FlowKt.flowOn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -942,98 +906,61 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.this$0 = mobileConnectionsRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r7, kotlin.coroutines.Continuation r8) {
-                    /*
-                        r6 = this;
-                        boolean r0 = r8 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r8
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1$2$1
-                        r0.<init>(r8)
-                    L18:
-                        java.lang.Object r8 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L83
-                    L27:
-                        java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                        java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                        r6.<init>(r7)
-                        throw r6
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        com.android.systemui.util.kotlin.WithPrev r7 = (com.android.systemui.util.kotlin.WithPrev) r7
-                        java.lang.Object r8 = r7.component1()
-                        java.lang.Integer r8 = (java.lang.Integer) r8
-                        java.lang.Object r7 = r7.component2()
-                        java.lang.Integer r7 = (java.lang.Integer) r7
-                        r2 = 0
-                        if (r8 == 0) goto L76
-                        if (r7 != 0) goto L46
-                        goto L76
-                    L46:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl r4 = r6.this$0
-                        android.telephony.SubscriptionManager r5 = r4.subscriptionManager
-                        int r8 = r8.intValue()
-                        android.telephony.SubscriptionInfo r8 = r5.getActiveSubscriptionInfo(r8)
-                        if (r8 == 0) goto L59
-                        android.os.ParcelUuid r8 = r8.getGroupUuid()
-                        goto L5a
-                    L59:
-                        r8 = r2
-                    L5a:
-                        android.telephony.SubscriptionManager r4 = r4.subscriptionManager
-                        int r7 = r7.intValue()
-                        android.telephony.SubscriptionInfo r7 = r4.getActiveSubscriptionInfo(r7)
-                        if (r7 == 0) goto L6b
-                        android.os.ParcelUuid r7 = r7.getGroupUuid()
-                        goto L6c
-                    L6b:
-                        r7 = r2
-                    L6c:
-                        if (r8 == 0) goto L76
-                        boolean r7 = r8.equals(r7)
-                        if (r7 == 0) goto L76
-                        kotlin.Unit r2 = kotlin.Unit.INSTANCE
-                    L76:
-                        if (r2 == 0) goto L83
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r6 = r6.$this_unsafeFlow
-                        java.lang.Object r6 = r6.emit(r2, r0)
-                        if (r6 != r1) goto L83
-                        return r1
-                    L83:
-                        kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                        return r6
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$special$$inlined$mapNotNull$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        WithPrev withPrev = (WithPrev) obj;
+                        Integer num = (Integer) withPrev.component1();
+                        Integer num2 = (Integer) withPrev.component2();
+                        Unit unit = null;
+                        if (num != null && num2 != null) {
+                            MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = this.this$0;
+                            SubscriptionInfo activeSubscriptionInfo = mobileConnectionsRepositoryImpl.subscriptionManager.getActiveSubscriptionInfo(num.intValue());
+                            ParcelUuid groupUuid = activeSubscriptionInfo != null ? activeSubscriptionInfo.getGroupUuid() : null;
+                            SubscriptionInfo activeSubscriptionInfo2 = mobileConnectionsRepositoryImpl.subscriptionManager.getActiveSubscriptionInfo(num2.intValue());
+                            ParcelUuid groupUuid2 = activeSubscriptionInfo2 != null ? activeSubscriptionInfo2.getGroupUuid() : null;
+                            if (groupUuid != null && groupUuid.equals(groupUuid2)) {
+                                unit = Unit.INSTANCE;
+                            }
+                        }
+                        if (unit != null) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowPairwise.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineDispatcher);
     }
@@ -1071,7 +998,6 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
         final ReadonlyStateFlow readonlyStateFlow = this.subscriptions;
         Flow flow = new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ int $subId$inlined;
@@ -1100,79 +1026,57 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                     this.$subId$inlined = i;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L5a
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        java.util.List r6 = (java.util.List) r6
-                        java.lang.Iterable r6 = (java.lang.Iterable) r6
-                        java.util.Iterator r6 = r6.iterator()
-                    L3a:
-                        boolean r7 = r6.hasNext()
-                        if (r7 == 0) goto L4e
-                        java.lang.Object r7 = r6.next()
-                        r2 = r7
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel r2 = (com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel) r2
-                        int r2 = r2.subscriptionId
-                        int r4 = r5.$subId$inlined
-                        if (r2 != r4) goto L3a
-                        goto L4f
-                    L4e:
-                        r7 = 0
-                    L4f:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r7, r0)
-                        if (r5 != r1) goto L5a
-                        return r1
-                    L5a:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$subscriptionModelForSubId$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object next;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Iterator it = ((List) obj).iterator();
+                        while (true) {
+                            if (!it.hasNext()) {
+                                next = null;
+                                break;
+                            }
+                            next = it.next();
+                            if (((SubscriptionModel) next).subscriptionId == this.$subId$inlined) {
+                                break;
+                            }
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(next, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, i), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, i), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         FullMobileConnectionRepository.Factory factory = this.fullMobileRepoFactory;
@@ -1312,14 +1216,14 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                 if (weakReference2 != null && (fullMobileConnectionRepository2 = (FullMobileConnectionRepository) weakReference2.get()) != null) {
                     return fullMobileConnectionRepository2;
                 }
-                FullMobileConnectionRepository createRepositoryForSubId = createRepositoryForSubId(i);
-                this.subIdRepositoryCache.put(Integer.valueOf(i), new WeakReference(createRepositoryForSubId));
-                return createRepositoryForSubId;
+                FullMobileConnectionRepository fullMobileConnectionRepositoryCreateRepositoryForSubId = createRepositoryForSubId(i);
+                this.subIdRepositoryCache.put(Integer.valueOf(i), new WeakReference(fullMobileConnectionRepositoryCreateRepositoryForSubId));
+                return fullMobileConnectionRepositoryCreateRepositoryForSubId;
             }
         }
-        FullMobileConnectionRepository createRepositoryForSubId2 = createRepositoryForSubId(i);
-        this.subIdRepositoryCache.put(Integer.valueOf(i), new WeakReference(createRepositoryForSubId2));
-        return createRepositoryForSubId2;
+        FullMobileConnectionRepository fullMobileConnectionRepositoryCreateRepositoryForSubId2 = createRepositoryForSubId(i);
+        this.subIdRepositoryCache.put(Integer.valueOf(i), new WeakReference(fullMobileConnectionRepositoryCreateRepositoryForSubId2));
+        return fullMobileConnectionRepositoryCreateRepositoryForSubId2;
     }
 
     @Override // com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository
@@ -1346,108 +1250,72 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
         return this.isDeviceEmergencyCallCapable;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x0086 -> B:10:0x0089). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x006d  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0093  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:29:0x0086 -> B:30:0x0089). Please report as a decompilation issue!!! */
     @Override // com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object isInEcmMode(kotlin.coroutines.Continuation r7) {
-        /*
-            r6 = this;
-            boolean r0 = r7 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$isInEcmMode$1
-            r0.<init>(r6, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L38
-            if (r2 != r4) goto L30
-            java.lang.Object r6 = r0.L$1
-            java.util.Iterator r6 = (java.util.Iterator) r6
-            java.lang.Object r2 = r0.L$0
-            com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl r2 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl) r2
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L89
-        L30:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L38:
-            kotlin.ResultKt.throwOnFailure(r7)
-            android.telephony.TelephonyManager r7 = r6.telephonyManager
-            boolean r7 = r7.getEmergencyCallbackMode()
-            if (r7 == 0) goto L46
-            java.lang.Boolean r6 = java.lang.Boolean.TRUE
-            return r6
-        L46:
-            kotlinx.coroutines.flow.ReadonlyStateFlow r7 = r6.subscriptions
-            kotlinx.coroutines.flow.StateFlow r7 = r7.$$delegate_0
-            java.lang.Object r7 = r7.getValue()
-            java.util.List r7 = (java.util.List) r7
-            java.lang.Iterable r7 = (java.lang.Iterable) r7
-            boolean r2 = r7 instanceof java.util.Collection
-            if (r2 == 0) goto L60
-            r2 = r7
-            java.util.Collection r2 = (java.util.Collection) r2
-            boolean r2 = r2.isEmpty()
-            if (r2 == 0) goto L60
-            goto L95
-        L60:
-            java.util.Iterator r7 = r7.iterator()
-            r5 = r7
-            r7 = r6
-            r6 = r5
-        L67:
-            boolean r2 = r6.hasNext()
-            if (r2 == 0) goto L95
-            java.lang.Object r2 = r6.next()
-            com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel r2 = (com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel) r2
-            int r2 = r2.subscriptionId
-            com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepository r2 = r7.getOrCreateRepoForSubId(r2)
-            r0.L$0 = r7
-            r0.L$1 = r6
-            r0.label = r4
-            java.lang.Object r2 = r2.isInEcmMode(r0)
-            if (r2 != r1) goto L86
-            return r1
-        L86:
-            r5 = r2
-            r2 = r7
-            r7 = r5
-        L89:
-            java.lang.Boolean r7 = (java.lang.Boolean) r7
-            boolean r7 = r7.booleanValue()
-            if (r7 == 0) goto L93
-            r3 = r4
-            goto L95
-        L93:
-            r7 = r2
-            goto L67
-        L95:
-            java.lang.Boolean r6 = java.lang.Boolean.valueOf(r3)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl.isInEcmMode(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object isInEcmMode(Continuation continuation) {
+        C11031 c11031;
+        MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl;
+        Iterator it;
+        if (continuation instanceof C11031) {
+            c11031 = (C11031) continuation;
+            int i = c11031.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c11031.label = i - Integer.MIN_VALUE;
+            } else {
+                c11031 = new C11031(continuation);
+            }
+        }
+        Object obj = c11031.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c11031.label;
+        boolean z = false;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            if (this.telephonyManager.getEmergencyCallbackMode()) {
+                return Boolean.TRUE;
+            }
+            List list = (List) this.subscriptions.$$delegate_0.getValue();
+            if (!(list instanceof Collection) || !list.isEmpty()) {
+                Iterator it2 = list.iterator();
+                mobileConnectionsRepositoryImpl = this;
+                it = it2;
+                if (it.hasNext()) {
+                }
+            }
+            return Boolean.valueOf(z);
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        it = (Iterator) c11031.L$1;
+        MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = (MobileConnectionsRepositoryImpl) c11031.L$0;
+        ResultKt.throwOnFailure(obj);
+        if (!((Boolean) obj).booleanValue()) {
+            z = true;
+            return Boolean.valueOf(z);
+        }
+        mobileConnectionsRepositoryImpl = mobileConnectionsRepositoryImpl2;
+        if (it.hasNext()) {
+            FullMobileConnectionRepository orCreateRepoForSubId = mobileConnectionsRepositoryImpl.getOrCreateRepoForSubId(((SubscriptionModel) it.next()).subscriptionId);
+            c11031.L$0 = mobileConnectionsRepositoryImpl;
+            c11031.L$1 = it;
+            c11031.label = 1;
+            Object objIsInEcmMode = orCreateRepoForSubId.isInEcmMode(c11031);
+            if (objIsInEcmMode == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            mobileConnectionsRepositoryImpl2 = mobileConnectionsRepositoryImpl;
+            obj = objIsInEcmMode;
+            if (!((Boolean) obj).booleanValue()) {
+            }
+        }
+        return Boolean.valueOf(z);
     }
 }

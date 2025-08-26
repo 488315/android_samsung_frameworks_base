@@ -97,9 +97,9 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITaskFragmentOrganizerController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskFragmentOrganizerController)) {
-                return (ITaskFragmentOrganizerController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITaskFragmentOrganizerController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskFragmentOrganizerController)) {
+                return (ITaskFragmentOrganizerController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -143,64 +143,64 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ITaskFragmentOrganizer asInterface = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
+                    ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
                     Bundle bundle = new Bundle();
                     parcel.enforceNoDataAvail();
-                    registerOrganizer(asInterface, readBoolean, bundle);
+                    registerOrganizer(iTaskFragmentOrganizerAsInterface, z, bundle);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(bundle, 1);
                     return true;
                 case 2:
-                    ITaskFragmentOrganizer asInterface2 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface2 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterOrganizer(asInterface2);
+                    unregisterOrganizer(iTaskFragmentOrganizerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ITaskFragmentOrganizer asInterface3 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface3 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     RemoteAnimationDefinition remoteAnimationDefinition = (RemoteAnimationDefinition) parcel.readTypedObject(RemoteAnimationDefinition.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerRemoteAnimations(asInterface3, remoteAnimationDefinition);
+                    registerRemoteAnimations(iTaskFragmentOrganizerAsInterface3, remoteAnimationDefinition);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    ITaskFragmentOrganizer asInterface4 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface4 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRemoteAnimations(asInterface4);
+                    unregisterRemoteAnimations(iTaskFragmentOrganizerAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    ITaskFragmentOrganizer asInterface5 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface5 = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setSavedState(asInterface5, bundle2);
+                    setSavedState(iTaskFragmentOrganizerAsInterface5, bundle2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     WindowContainerTransaction windowContainerTransaction = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
-                    int readInt = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onTransactionHandled(readStrongBinder, windowContainerTransaction, readInt, readBoolean2);
+                    onTransactionHandled(strongBinder, windowContainerTransaction, i3, z2);
                     parcel2.writeNoException();
                     return true;
                 case 7:
                     WindowContainerTransaction windowContainerTransaction2 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     RemoteTransition remoteTransition = (RemoteTransition) parcel.readTypedObject(RemoteTransition.CREATOR);
                     parcel.enforceNoDataAvail();
-                    applyTransaction(windowContainerTransaction2, readInt2, readBoolean3, remoteTransition);
+                    applyTransaction(windowContainerTransaction2, i4, z3, remoteTransition);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSupportActivityEmbedded = isSupportActivityEmbedded(readString);
+                    boolean zIsSupportActivityEmbedded = isSupportActivityEmbedded(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportActivityEmbedded);
+                    parcel2.writeBoolean(zIsSupportActivityEmbedded);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -225,134 +225,134 @@ public interface ITaskFragmentOrganizerController extends IInterface {
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void registerOrganizer(ITaskFragmentOrganizer iTaskFragmentOrganizer, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskFragmentOrganizer);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskFragmentOrganizer);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void unregisterOrganizer(ITaskFragmentOrganizer iTaskFragmentOrganizer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskFragmentOrganizer);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskFragmentOrganizer);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void registerRemoteAnimations(ITaskFragmentOrganizer iTaskFragmentOrganizer, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskFragmentOrganizer);
-                    obtain.writeTypedObject(remoteAnimationDefinition, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskFragmentOrganizer);
+                    parcelObtain.writeTypedObject(remoteAnimationDefinition, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void unregisterRemoteAnimations(ITaskFragmentOrganizer iTaskFragmentOrganizer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskFragmentOrganizer);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskFragmentOrganizer);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void setSavedState(ITaskFragmentOrganizer iTaskFragmentOrganizer, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskFragmentOrganizer);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskFragmentOrganizer);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void onTransactionHandled(IBinder iBinder, WindowContainerTransaction windowContainerTransaction, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public void applyTransaction(WindowContainerTransaction windowContainerTransaction, int i, boolean z, RemoteTransition remoteTransition) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(remoteTransition, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(remoteTransition, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
             public boolean isSupportActivityEmbedded(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

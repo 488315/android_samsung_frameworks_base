@@ -3,10 +3,12 @@ package com.android.keyguard;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Presentation;
+import android.app.SemWallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Property;
@@ -36,11 +38,10 @@ import com.android.systemui.bouncer.shared.model.BouncerDismissActionModel;
 import com.android.systemui.bouncer.ui.binder.ComposeBouncerDependencies;
 import com.android.systemui.bouncer.ui.binder.ComposeBouncerViewBinder;
 import com.android.systemui.compose.ComposeInitializer;
-import com.android.systemui.doze.PluginAODManager;
 import com.android.systemui.facewidget.dex.DexClockController;
+import com.android.systemui.facewidget.dex.DexClockControllerCallback;
 import com.android.systemui.facewidget.dex.DexClockControllerImpl;
-import com.android.systemui.facewidget.plugin.PluginFaceWidgetManager;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.clocks.ClockController;
 import com.android.systemui.plugins.clocks.ClockFaceController;
@@ -57,7 +58,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -72,7 +72,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public final DexClockController dexClockController;
     public float distance;
     public ClockFaceController faceController;
-    public boolean isWireless;
     public final KeyguardDisplayManager keyguardDisplayManager;
     public final KeyguardSecurityModel keyguardSecurityModel;
     public final ConnectedDisplayKeyguardPresentation$keyguardStateCallback$1 keyguardStateCallback;
@@ -80,11 +79,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public final KeyguardUpdateMonitor keyguardUpdateMonitor;
     public final ConnectedDisplayKeyguardPresentation$layoutChangeListener$1 layoutChangeListener;
     public int mCurrentSecurityMode;
-    public int mMarginLeft;
-    public int mMarginTop;
-    public final ConnectedDisplayKeyguardPresentation$mMoveTextRunnable$1 mMoveTextRunnable;
-    public int mUsableHeight;
-    public int mUsableWidth;
     public AnimatorSet restoreAnimatorSet;
     public FrameLayout rootView;
     public View secClock;
@@ -97,12 +91,10 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
     public final ViewMediatorCallback viewMediatorCallback;
     public final WallpaperManager wallpaperManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ConnectedDisplayKeyguardPresentation create(Display display);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -132,11 +124,11 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v11, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$keyguardStateCallback$1] */
-    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$updateMonitorCallback$1] */
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$mMoveTextRunnable$1] */
-    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$clockChangedListener$1] */
-    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$layoutChangeListener$1] */
+    /* JADX WARN: Type inference failed for: r3v10, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$keyguardStateCallback$1] */
+    /* JADX WARN: Type inference failed for: r3v11, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$updateMonitorCallback$1] */
+    /* JADX WARN: Type inference failed for: r3v12, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$dexClockChangedCallback$1] */
+    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$clockChangedListener$1] */
+    /* JADX WARN: Type inference failed for: r3v5, types: [com.android.keyguard.ConnectedDisplayKeyguardPresentation$layoutChangeListener$1] */
     public ConnectedDisplayKeyguardPresentation(Display display, final Context context, ClockRegistry clockRegistry, ClockEventController clockEventController, Lazy lazy, KeyguardUpdateMonitor keyguardUpdateMonitor, ViewMediatorCallback viewMediatorCallback, SelectedUserInteractor selectedUserInteractor, KeyguardStateController keyguardStateController, KeyguardSecurityModel keyguardSecurityModel, DexClockController dexClockController, WallpaperManager wallpaperManager, KeyguardDisplayManager keyguardDisplayManager) {
         super(context, display, R.style.Theme_SystemUI_KeyguardPresentation, 2009);
         this.clockRegistry = clockRegistry;
@@ -153,19 +145,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         this.touchDownPos = new PointF(-1.0f, -1.0f);
         this.restoreAnimatorSet = new AnimatorSet();
         this.SINE_OUT_33 = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
-        this.mMoveTextRunnable = new Runnable() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$mMoveTextRunnable$1
-            @Override // java.lang.Runnable
-            public final void run() {
-                Log.d("ConnectedDisplayKeyguardPresentation", "mMoveTextRunnable run()");
-                View view = ConnectedDisplayKeyguardPresentation.this.secClock;
-                if (view == null) {
-                    return;
-                }
-                view.setX(r0.mMarginLeft + ((float) (Math.random() * (ConnectedDisplayKeyguardPresentation.this.mUsableWidth - view.getWidth()))));
-                view.setY(ConnectedDisplayKeyguardPresentation.this.mMarginTop + ((float) (Math.random() * (ConnectedDisplayKeyguardPresentation.this.mUsableHeight - view.getHeight()))));
-                view.postDelayed(this, 10000L);
-            }
-        };
         this.clockChangedListener = new ClockRegistry.ClockChangeListener(this) { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$clockChangedListener$1
             @Override // com.android.systemui.shared.clocks.ClockRegistry.ClockChangeListener
             public final void onCurrentClockChanged() {
@@ -174,7 +153,7 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         this.layoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$layoutChangeListener$1
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = ConnectedDisplayKeyguardPresentation.this;
+                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = this.this$0;
                 View view2 = connectedDisplayKeyguardPresentation.clock;
                 if (view2 != null) {
                     ClockFaceController clockFaceController = connectedDisplayKeyguardPresentation.faceController;
@@ -220,7 +199,7 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         this.keyguardStateCallback = new KeyguardStateController.Callback() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$keyguardStateCallback$1
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onUnlockedChanged() {
-                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = ConnectedDisplayKeyguardPresentation.this;
+                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = this.this$0;
                 if (((KeyguardStateControllerImpl) connectedDisplayKeyguardPresentation.keyguardStateController).mCanDismissLockScreen) {
                     View view = connectedDisplayKeyguardPresentation.clock;
                     if (view != null) {
@@ -237,13 +216,26 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         };
         this.updateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$updateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
+            public final void onKeyguardGoingAway() {
+                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = this.this$0;
+                if (connectedDisplayKeyguardPresentation.keyguardUpdateMonitor.mKeyguardGoingAway) {
+                    View view = connectedDisplayKeyguardPresentation.secClock;
+                    if (view != null) {
+                        view.getClass();
+                        view.setVisibility(4);
+                    }
+                    connectedDisplayKeyguardPresentation.getTextView().setVisibility(4);
+                }
+            }
+
+            @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSecurityViewChanged(KeyguardSecurityModel.SecurityMode securityMode) {
                 Log.i("ConnectedDisplayKeyguardPresentation", "onSecurityViewChanged() : " + securityMode);
                 if (securityMode == KeyguardSecurityModel.SecurityMode.ForgotPassword) {
                     return;
                 }
                 int i3 = ConnectedDisplayKeyguardPresentation.$r8$clinit;
-                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = ConnectedDisplayKeyguardPresentation.this;
+                ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = this.this$0;
                 connectedDisplayKeyguardPresentation.getClass();
                 int keyguardConstantSecurityMode = ConnectedDisplayKeyguardPresentation.getKeyguardConstantSecurityMode(securityMode);
                 if (connectedDisplayKeyguardPresentation.mCurrentSecurityMode != keyguardConstantSecurityMode) {
@@ -269,7 +261,13 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                 }
             }
         };
-        this.dexClockChangedCallback = new ConnectedDisplayKeyguardPresentation$dexClockChangedCallback$1(this);
+        this.dexClockChangedCallback = new DexClockControllerCallback() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$dexClockChangedCallback$1
+            @Override // com.android.systemui.facewidget.dex.DexClockControllerCallback
+            public final void onDexClockChanged(View view) {
+                Log.i("ConnectedDisplayKeyguardPresentation", "onDexClockChanged: " + view);
+                this.this$0.secClock = view;
+            }
+        };
     }
 
     public static final void access$updateChildView(ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation) {
@@ -362,14 +360,6 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         this.rootView = frameLayout;
         frameLayout.setClipChildren(false);
         if (this.keyguardDisplayManager.isExternalDesktopWindowing()) {
-            this.isWireless = getDisplay().semGetType() == 3 && (getDisplay().getFlags() & 131072) != 0;
-            Window window = getWindow();
-            window.getClass();
-            Rect bounds = window.getWindowManager().getMaximumWindowMetrics().getBounds();
-            this.mUsableWidth = (bounds.width() * 80) / 100;
-            this.mUsableHeight = (bounds.height() * 80) / 100;
-            this.mMarginLeft = (bounds.width() * 20) / 200;
-            this.mMarginTop = (bounds.height() * 20) / 200;
             this.mCurrentSecurityMode = getCurrentSecurityMode();
             FrameLayout frameLayout2 = this.rootView;
             if (frameLayout2 == null) {
@@ -390,8 +380,8 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             });
             DisplayInfo displayInfo = new DisplayInfo();
             getContext().getDisplay().getDisplayInfo(displayInfo);
-            float min = Math.min(displayInfo.logicalWidth / displayInfo.physicalXDpi, displayInfo.logicalHeight / displayInfo.physicalYDpi);
-            this.swipeUnlockRadius = (int) (Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight) * (min > 4.5f ? 0.3f : min > 3.5f ? 0.4f : min > 1.8f ? 0.5f : 0.7f));
+            float fMin = Math.min(displayInfo.logicalWidth / displayInfo.physicalXDpi, displayInfo.logicalHeight / displayInfo.physicalYDpi);
+            this.swipeUnlockRadius = (int) (Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight) * (fMin > 4.5f ? 0.3f : fMin > 3.5f ? 0.4f : fMin > 1.8f ? 0.5f : 0.7f));
             this.touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
             FrameLayout frameLayout3 = this.rootView;
             if (frameLayout3 == null) {
@@ -405,7 +395,7 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             frameLayout4.setOnKeyListener(new View.OnKeyListener() { // from class: com.android.keyguard.ConnectedDisplayKeyguardPresentation$onCreateV2$2
                 @Override // android.view.View.OnKeyListener
                 public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                    ConnectedDisplayKeyguardPresentation.this.showBouncer();
+                    this.this$0.showBouncer();
                     return true;
                 }
             });
@@ -417,28 +407,28 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getActionMasked() == 0) {
-                        ConnectedDisplayKeyguardPresentation.this.touchDownPos.x = motionEvent.getRawX();
-                        ConnectedDisplayKeyguardPresentation.this.touchDownPos.y = motionEvent.getRawY();
-                        View view2 = ConnectedDisplayKeyguardPresentation.this.secClock;
+                        this.this$0.touchDownPos.x = motionEvent.getRawX();
+                        this.this$0.touchDownPos.y = motionEvent.getRawY();
+                        View view2 = this.this$0.secClock;
                         if (view2 != null) {
                             view2.getClass();
                             view2.setPivotX(view2.getWidth() / 2.0f);
-                            View view3 = ConnectedDisplayKeyguardPresentation.this.secClock;
+                            View view3 = this.this$0.secClock;
                             view3.getClass();
-                            ConnectedDisplayKeyguardPresentation.this.secClock.getClass();
+                            this.this$0.secClock.getClass();
                             view3.setPivotY(r11.getHeight() * 2.0f);
                         }
                     } else if (motionEvent.getActionMasked() == 2) {
-                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = ConnectedDisplayKeyguardPresentation.this;
+                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = this.this$0;
                         PointF pointF = connectedDisplayKeyguardPresentation.touchDownPos;
                         if (pointF.x == -1.0f || pointF.y == -1.0f) {
                             connectedDisplayKeyguardPresentation.distance = 0.0f;
                         } else {
                             connectedDisplayKeyguardPresentation.distance = (float) Math.sqrt(Math.pow(motionEvent.getRawY() - connectedDisplayKeyguardPresentation.touchDownPos.y, 2.0d) + Math.pow(motionEvent.getRawX() - connectedDisplayKeyguardPresentation.touchDownPos.x, 2.0d));
                         }
-                        ConnectedDisplayKeyguardPresentation.access$updateChildView(ConnectedDisplayKeyguardPresentation.this);
+                        ConnectedDisplayKeyguardPresentation.access$updateChildView(this.this$0);
                     } else if (motionEvent.getActionMasked() == 1) {
-                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation2 = ConnectedDisplayKeyguardPresentation.this;
+                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation2 = this.this$0;
                         int i = connectedDisplayKeyguardPresentation2.touchSlop;
                         float f = connectedDisplayKeyguardPresentation2.distance;
                         int i2 = connectedDisplayKeyguardPresentation2.swipeUnlockRadius;
@@ -448,13 +438,9 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                         sb.append(f);
                         sb.append(", R=");
                         RecyclerView$$ExternalSyntheticOutline0.m(i2, "ConnectedDisplayKeyguardPresentation", sb);
-                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation3 = ConnectedDisplayKeyguardPresentation.this;
+                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation3 = this.this$0;
                         float f2 = connectedDisplayKeyguardPresentation3.distance;
-                        if (f2 < connectedDisplayKeyguardPresentation3.touchSlop) {
-                            connectedDisplayKeyguardPresentation3.showBouncer();
-                        } else if (connectedDisplayKeyguardPresentation3.swipeUnlockRadius < f2) {
-                            connectedDisplayKeyguardPresentation3.showBouncer();
-                        } else {
+                        if (f2 >= connectedDisplayKeyguardPresentation3.touchSlop && connectedDisplayKeyguardPresentation3.swipeUnlockRadius >= f2) {
                             AnimatorSet animatorSet = new AnimatorSet();
                             animatorSet.setDuration(400L);
                             animatorSet.setInterpolator(connectedDisplayKeyguardPresentation3.SINE_OUT_33);
@@ -469,10 +455,12 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                                 animatorSet.start();
                             }
                             connectedDisplayKeyguardPresentation3.restoreAnimatorSet.playTogether(ObjectAnimator.ofFloat(connectedDisplayKeyguardPresentation3.getTextView(), (Property<TextView, Float>) View.ALPHA, connectedDisplayKeyguardPresentation3.getTextView().getAlpha(), 1.0f));
-                            ConnectedDisplayKeyguardPresentation.this.reset();
+                            this.this$0.reset();
+                        } else {
+                            connectedDisplayKeyguardPresentation3.showBouncer();
                         }
                     }
-                    ConnectedDisplayKeyguardPresentation.access$updateChildView(ConnectedDisplayKeyguardPresentation.this);
+                    ConnectedDisplayKeyguardPresentation.access$updateChildView(this.this$0);
                     return false;
                 }
             });
@@ -482,46 +470,21 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             frameLayout6 = null;
         }
         setContentView(frameLayout6);
-        Window window2 = getWindow();
-        if (window2 == null) {
+        Window window = getWindow();
+        if (window == null) {
             throw new IllegalStateException("no window available.");
         }
-        window2.getDecorView().setSystemUiVisibility(1792);
-        window2.getAttributes().setFitInsetsTypes(0);
-        window2.setNavigationBarContrastEnforced(false);
-        window2.setNavigationBarColor(0);
+        window.getDecorView().setSystemUiVisibility(1792);
+        window.getAttributes().setFitInsetsTypes(0);
+        window.setNavigationBarContrastEnforced(false);
+        window.setNavigationBarColor(0);
         if (this.keyguardDisplayManager.isExternalDesktopWindowing()) {
             setBottomView();
             DexClockController dexClockController = this.dexClockController;
-            final FrameLayout frameLayout7 = this.rootView;
-            if (frameLayout7 == null) {
-                frameLayout7 = null;
-            }
-            final Display display = getDisplay();
-            ConnectedDisplayKeyguardPresentation$dexClockChangedCallback$1 connectedDisplayKeyguardPresentation$dexClockChangedCallback$1 = this.dexClockChangedCallback;
-            final DexClockControllerImpl dexClockControllerImpl = (DexClockControllerImpl) dexClockController;
-            dexClockControllerImpl.getClass();
-            Log.i(dexClockControllerImpl.tag, "initDexClock: rootView=" + frameLayout7 + ", display=" + display);
-            dexClockControllerImpl.isWireless = display.semGetType() == 3 && (131072 & display.getFlags()) != 0;
-            dexClockControllerImpl.rootView = frameLayout7;
-            dexClockControllerImpl.callback = connectedDisplayKeyguardPresentation$dexClockChangedCallback$1;
-            if (((PluginFaceWidgetManager) dexClockControllerImpl.faceWidgetManager$delegate.getValue()).mIsConnected) {
-                display.getDisplayId();
-                dexClockControllerImpl.addDexClock(frameLayout7);
-            } else {
-                ((PluginAODManager) dexClockControllerImpl.pluginAODManager$delegate.getValue()).addConnectionRunnable(new Runnable() { // from class: com.android.systemui.facewidget.dex.DexClockControllerImpl$initDexClock$1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        DexClockControllerImpl dexClockControllerImpl2 = DexClockControllerImpl.this;
-                        FrameLayout frameLayout8 = frameLayout7;
-                        display.getDisplayId();
-                        int i = DexClockControllerImpl.$r8$clinit;
-                        dexClockControllerImpl2.addDexClock(frameLayout8);
-                    }
-                });
-            }
+            FrameLayout frameLayout7 = this.rootView;
+            ((DexClockControllerImpl) dexClockController).initDexClock(frameLayout7 != null ? frameLayout7 : null, getDisplay(), this.dexClockChangedCallback, false);
         } else {
-            ClockController createCurrentClock = this.clockRegistry.createCurrentClock();
+            ClockController clockControllerCreateCurrentClock = this.clockRegistry.createCurrentClock();
             if (!this.keyguardDisplayManager.isExternalDesktopWindowing()) {
                 View view = this.clock;
                 if (view != null) {
@@ -532,7 +495,7 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                     frameLayout8 = null;
                 }
                 frameLayout8.removeAllViews();
-                ClockFaceController largeClock = createCurrentClock.getLargeClock();
+                ClockFaceController largeClock = clockControllerCreateCurrentClock.getLargeClock();
                 this.faceController = largeClock;
                 if (largeClock == null) {
                     largeClock = null;
@@ -545,41 +508,29 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
                     frameLayout9 = null;
                 }
                 frameLayout9.addView(view2, new FrameLayout.LayoutParams(!this.keyguardDisplayManager.isExternalDesktopWindowing() ? -2 : getContext().getResources().getDimensionPixelSize(R.dimen.keyguard_presentation_width), -2, 17));
-                this.clockEventController.setClock(createCurrentClock);
+                this.clockEventController.setClock(clockControllerCreateCurrentClock);
                 ClockEventController clockEventController = this.clockEventController;
                 clockEventController.largeClockOnSecondaryDisplay = true;
                 clockEventController.updateFontSizes();
                 ClockFaceController clockFaceController = this.faceController;
-                if (clockFaceController == null) {
-                    clockFaceController = null;
-                }
-                clockFaceController.getEvents().onSecondaryDisplayChanged(true);
-            }
-        }
-        if (this.isWireless) {
-            FrameLayout frameLayout10 = this.rootView;
-            (frameLayout10 != null ? frameLayout10 : null).setBackgroundColor(-16777216);
-            getTextView().setVisibility(8);
-            View view3 = this.secClock;
-            if (view3 != null) {
-                view3.postDelayed(this.mMoveTextRunnable, 10000L);
+                (clockFaceController != null ? clockFaceController : null).getEvents().onSecondaryDisplayChanged(true);
             }
         }
         if (this.keyguardDisplayManager.isExternalDesktopWindowing()) {
             reset();
         }
-        Window window3 = getWindow();
-        if (window3 == null) {
+        Window window2 = getWindow();
+        if (window2 == null) {
             return;
         }
-        WindowManager.LayoutParams attributes = window3.getAttributes();
+        WindowManager.LayoutParams attributes = window2.getAttributes();
         attributes.flags |= 1048576;
-        window3.setAttributes(attributes);
+        window2.setAttributes(attributes);
         if (this.keyguardDisplayManager.isExternalDesktopWindowing()) {
-            window3.getDecorView().setBackgroundColor(0);
+            window2.getDecorView().setBackgroundColor(0);
         } else {
-            window3.getDecorView().setBackgroundColor(-16777216);
-            window3.getDecorView().semSetRoundedCorners(0);
+            window2.getDecorView().setBackgroundColor(-16777216);
+            window2.getDecorView().semSetRoundedCorners(0);
         }
         if (this.keyguardDisplayManager.isDesktopMode()) {
             attributes.userActivityTimeout = 10000L;
@@ -599,9 +550,9 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             ClockEventController clockEventController = this.clockEventController;
             if (clockEventController.isRegistered) {
                 clockEventController.isRegistered = false;
-                RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = clockEventController.disposableHandle;
-                if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-                    repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+                RepeatWhenAttachedKt.C09181 c09181 = clockEventController.disposableHandle;
+                if (c09181 != null) {
+                    c09181.dispose();
                 }
                 clockEventController.broadcastDispatcher.unregisterReceiver(clockEventController.localeBroadcastReceiver);
                 ((ConfigurationControllerImpl) clockEventController.configurationController).removeCallback(clockEventController.configListener);
@@ -659,144 +610,45 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         this.distance = 0.0f;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void setBottomView() {
-        /*
-            r7 = this;
-            android.app.WallpaperManager r0 = r7.wallpaperManager
-            r1 = 10
-            android.app.SemWallpaperColors r0 = r0.semGetWallpaperColors(r1)
-            r1 = 0
-            if (r0 == 0) goto Lc
-            goto Ld
-        Lc:
-            r0 = r1
-        Ld:
-            if (r0 == 0) goto L33
-            r2 = 128(0x80, double:6.3E-322)
-            android.app.SemWallpaperColors$Item r0 = r0.get(r2)
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            java.lang.String r3 = "setBottomView: bodyBottomItem = "
-            r2.<init>(r3)
-            r2.append(r0)
-            java.lang.String r2 = r2.toString()
-            java.lang.String r3 = "ConnectedDisplayKeyguardPresentation"
-            android.util.Log.i(r3, r2)
-            if (r0 == 0) goto L33
-            int r0 = r0.getFontColor()
-            java.lang.Integer r0 = java.lang.Integer.valueOf(r0)
-            goto L34
-        L33:
-            r0 = r1
-        L34:
-            r2 = 1
-            r3 = 0
-            if (r0 == 0) goto L41
-            int r0 = r0.intValue()
-            if (r0 != r2) goto L3f
-            goto L41
-        L3f:
-            r0 = r3
-            goto L42
-        L41:
-            r0 = r2
-        L42:
-            android.widget.TextView r4 = r7.getTextView()
-            if (r0 == 0) goto L54
-            android.content.Context r0 = r4.getContext()
-            r5 = 2131100076(0x7f0601ac, float:1.7812523E38)
-            int r0 = r0.getColor(r5)
-            goto L5f
-        L54:
-            android.content.Context r0 = r4.getContext()
-            r5 = 2131100075(0x7f0601ab, float:1.7812521E38)
-            int r0 = r0.getColor(r5)
-        L5f:
-            r4.setTextColor(r0)
-            r4.setGravity(r2)
-            android.content.Context r0 = r4.getContext()
-            r2 = 2131955458(0x7f130f02, float:1.9547444E38)
-            java.lang.String r0 = r0.getString(r2)
-            android.graphics.Typeface r0 = android.graphics.Typeface.create(r0, r3)
-            r2 = 400(0x190, float:5.6E-43)
-            android.graphics.Typeface r0 = android.graphics.Typeface.create(r0, r2, r3)
-            r4.setTypeface(r0)
-            android.content.Context r0 = r4.getContext()
-            android.content.res.Resources r0 = r0.getResources()
-            r2 = 2131166664(0x7f0705c8, float:1.794758E38)
-            float r0 = r0.getDimension(r2)
-            r4.setTextSize(r3, r0)
-            int r0 = r7.mCurrentSecurityMode
-            r2 = 5
-            if (r0 != r2) goto La4
-            android.content.Context r0 = r4.getContext()
-            android.content.res.Resources r0 = r0.getResources()
-            r2 = 2131954041(0x7f130979, float:1.954457E38)
-            java.lang.String r0 = r0.getString(r2)
-            goto Lb3
-        La4:
-            android.content.Context r0 = r4.getContext()
-            android.content.res.Resources r0 = r0.getResources()
-            r2 = 2131954040(0x7f130978, float:1.9544568E38)
-            java.lang.String r0 = r0.getString(r2)
-        Lb3:
-            r4.setText(r0)
-            android.content.Context r0 = r7.getContext()
-            android.content.res.Resources r0 = r0.getResources()
-            android.util.DisplayMetrics r0 = r0.getDisplayMetrics()
-            int r0 = r0.heightPixels
-            float r0 = (float) r0
-            r2 = 1038174126(0x3de147ae, float:0.11)
-            float r0 = r0 * r2
-            int r0 = (int) r0
-            android.widget.FrameLayout$LayoutParams r2 = new android.widget.FrameLayout$LayoutParams
-            r4 = -2
-            r5 = 80
-            r6 = -1
-            r2.<init>(r6, r4, r5)
-            r4 = 81
-            r2.gravity = r4
-            r2.bottomMargin = r0
-            android.widget.FrameLayout r0 = r7.rootView
-            if (r0 != 0) goto Lde
-            r0 = r1
-        Lde:
-            android.widget.TextView r4 = r7.getTextView()
-            int r0 = r0.indexOfChild(r4)
-            if (r0 == r6) goto Lf0
-            android.widget.TextView r7 = r7.getTextView()
-            r7.setVisibility(r3)
-            return
-        Lf0:
-            android.widget.FrameLayout r0 = r7.rootView
-            if (r0 != 0) goto Lf5
-            goto Lf6
-        Lf5:
-            r1 = r0
-        Lf6:
-            android.widget.TextView r7 = r7.getTextView()
-            r1.addView(r7, r2)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.ConnectedDisplayKeyguardPresentation.setBottomView():void");
+        Integer numValueOf;
+        SemWallpaperColors semWallpaperColorsSemGetWallpaperColors = this.wallpaperManager.semGetWallpaperColors(10);
+        if (semWallpaperColorsSemGetWallpaperColors == null) {
+            semWallpaperColorsSemGetWallpaperColors = null;
+        }
+        if (semWallpaperColorsSemGetWallpaperColors != null) {
+            SemWallpaperColors.Item item = semWallpaperColorsSemGetWallpaperColors.get(128L);
+            Log.i("ConnectedDisplayKeyguardPresentation", "setBottomView: bodyBottomItem = " + item);
+            numValueOf = item != null ? Integer.valueOf(item.getFontColor()) : null;
+        }
+        boolean z = numValueOf == null || numValueOf.intValue() == 1;
+        TextView textView = getTextView();
+        textView.setTextColor(z ? textView.getContext().getColor(R.color.kg_external_dex_bottom_message_whitebg_color) : textView.getContext().getColor(R.color.kg_external_dex_bottom_message_color));
+        textView.setGravity(1);
+        textView.setTypeface(Typeface.create(Typeface.create(textView.getContext().getString(R.string.pinlock_numeric_font_family), 0), 400, false));
+        textView.setTextSize(0, textView.getContext().getResources().getDimension(R.dimen.kg_compose_bottom_message_text_size));
+        textView.setText(this.mCurrentSecurityMode == 5 ? textView.getContext().getResources().getString(R.string.kg_compose_bottom_message_unlock_your_phone) : textView.getContext().getResources().getString(R.string.kg_compose_bottom_message_tap_anywhere_to_unlock));
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, -2, 80);
+        layoutParams.gravity = 81;
+        layoutParams.bottomMargin = (int) (getContext().getResources().getDisplayMetrics().heightPixels * 0.11f);
+        FrameLayout frameLayout = this.rootView;
+        if (frameLayout == null) {
+            frameLayout = null;
+        }
+        if (frameLayout.indexOfChild(getTextView()) != -1) {
+            getTextView().setVisibility(0);
+        } else {
+            FrameLayout frameLayout2 = this.rootView;
+            (frameLayout2 != null ? frameLayout2 : null).addView(getTextView(), layoutParams);
+        }
     }
 
     public final void showBouncer() {
         ActivityStarter.OnDismissAction onDismissAction;
-        View view = this.secClock;
-        if (view != null) {
-            view.removeCallbacks(this.mMoveTextRunnable);
-        }
         FrameLayout frameLayout = this.rootView;
         if (frameLayout == null) {
             frameLayout = null;
@@ -817,9 +669,9 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             getTextView().setVisibility(4);
             DexClockControllerImpl dexClockControllerImpl = (DexClockControllerImpl) this.dexClockController;
             Log.i(dexClockControllerImpl.tag, "hide: ");
-            View view2 = dexClockControllerImpl.dexClockView;
-            if (view2 != null) {
-                view2.setVisibility(4);
+            View view = dexClockControllerImpl.dexClockView;
+            if (view != null) {
+                view.setVisibility(4);
                 return;
             }
             return;
@@ -835,9 +687,9 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
             getComposeView().setVisibility(0);
             DexClockControllerImpl dexClockControllerImpl2 = (DexClockControllerImpl) this.dexClockController;
             Log.i(dexClockControllerImpl2.tag, "hide: ");
-            View view3 = dexClockControllerImpl2.dexClockView;
-            if (view3 != null) {
-                view3.setVisibility(4);
+            View view2 = dexClockControllerImpl2.dexClockView;
+            if (view2 != null) {
+                view2.setVisibility(4);
             }
             FrameLayout frameLayout4 = this.rootView;
             (frameLayout4 != null ? frameLayout4 : null).addView(getComposeView(), new FrameLayout.LayoutParams(-1, -1, 17));
@@ -851,9 +703,9 @@ public final class ConnectedDisplayKeyguardPresentation extends Presentation {
         }
         if (i == 5) {
             getComposeView().setVisibility(4);
-            View view4 = this.secClock;
-            if (view4 != null) {
-                view4.setVisibility(0);
+            View view3 = this.secClock;
+            if (view3 != null) {
+                view3.setVisibility(0);
             }
             getTextView().setVisibility(0);
             getTextView().setText(getContext().getResources().getString(R.string.kg_compose_bottom_message_unlock_your_phone));

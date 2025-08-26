@@ -22,9 +22,9 @@ public class FastDataOutput implements DataOutput, Flushable, Closeable {
         if (i < 8) {
             throw new IllegalArgumentException();
         }
-        byte[] newByteArray = newByteArray(i);
-        this.mBuffer = newByteArray;
-        this.mBufferCap = newByteArray.length;
+        byte[] bArrNewByteArray = newByteArray(i);
+        this.mBuffer = bArrNewByteArray;
+        this.mBufferCap = bArrNewByteArray.length;
         setOutput(outputStream);
     }
 
@@ -101,25 +101,25 @@ public class FastDataOutput implements DataOutput, Flushable, Closeable {
 
     @Override // java.io.DataOutput
     public void writeUTF(String str) throws IOException {
-        int countBytes = (int) ModifiedUtf8.countBytes(str, false);
-        if (countBytes > 65535) {
-            throw new IOException("Modified UTF-8 length too large: " + countBytes);
+        int iCountBytes = (int) ModifiedUtf8.countBytes(str, false);
+        if (iCountBytes > 65535) {
+            throw new IOException("Modified UTF-8 length too large: " + iCountBytes);
         }
         int i = this.mBufferCap;
-        int i2 = countBytes + 2;
+        int i2 = iCountBytes + 2;
         if (i >= i2) {
             if (i - this.mBufferPos < i2) {
                 drain();
             }
-            writeShort(countBytes);
+            writeShort(iCountBytes);
             ModifiedUtf8.encode(this.mBuffer, this.mBufferPos, str);
-            this.mBufferPos += countBytes;
+            this.mBufferPos += iCountBytes;
             return;
         }
-        byte[] newByteArray = newByteArray(countBytes + 1);
-        ModifiedUtf8.encode(newByteArray, 0, str);
-        writeShort(countBytes);
-        write(newByteArray, 0, countBytes);
+        byte[] bArrNewByteArray = newByteArray(iCountBytes + 1);
+        ModifiedUtf8.encode(bArrNewByteArray, 0, str);
+        writeShort(iCountBytes);
+        write(bArrNewByteArray, 0, iCountBytes);
     }
 
     public void writeInternedUTF(String str) throws IOException {
@@ -131,10 +131,10 @@ public class FastDataOutput implements DataOutput, Flushable, Closeable {
         writeShort(65535);
         writeUTF(str);
         int size = this.mStringRefs.size();
-        Integer valueOf = Integer.valueOf(size);
-        valueOf.getClass();
+        Integer numValueOf = Integer.valueOf(size);
+        numValueOf.getClass();
         if (size < 65535) {
-            this.mStringRefs.put(str, valueOf);
+            this.mStringRefs.put(str, numValueOf);
         }
     }
 

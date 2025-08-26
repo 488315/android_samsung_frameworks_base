@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger.LogProvider {
     private static final String TAG = "SecQsUiDisplayModeInteractor";
@@ -40,7 +39,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.util.SecQsUiDisplayModeInteractor$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -71,7 +69,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -83,7 +80,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class DeviceState {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ DeviceState[] $VALUES;
@@ -98,9 +94,9 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
         }
 
         static {
-            DeviceState[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            DeviceState[] deviceStateArr$values = $values();
+            $VALUES = deviceStateArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(deviceStateArr$values);
         }
 
         private DeviceState(String str, int i) {
@@ -121,7 +117,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldState {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ FoldState[] $VALUES;
@@ -135,9 +130,9 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
         }
 
         static {
-            FoldState[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            FoldState[] foldStateArr$values = $values();
+            $VALUES = foldStateArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(foldStateArr$values);
         }
 
         private FoldState(String str, int i) {
@@ -158,7 +153,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UiDisplayMode {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ UiDisplayMode[] $VALUES;
@@ -173,9 +167,9 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
         }
 
         static {
-            UiDisplayMode[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            UiDisplayMode[] uiDisplayModeArr$values = $values();
+            $VALUES = uiDisplayModeArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(uiDisplayModeArr$values);
         }
 
         private UiDisplayMode(String str, int i) {
@@ -194,7 +188,6 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -223,17 +216,17 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
     public SecQsUiDisplayModeInteractor(DeviceStateManager deviceStateManager, DelayableExecutor delayableExecutor, CoroutineScope coroutineScope) {
         this.deviceStateManager = deviceStateManager;
         this.mainExecutor = delayableExecutor;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(UiDisplayMode.NORMAL);
-        this._uiDisplayMode = MutableStateFlow;
-        this.uiDisplayMode = FlowKt.asStateFlow(MutableStateFlow);
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new SecQsUiDisplayModeInteractor$foldState$1(this, null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(UiDisplayMode.NORMAL);
+        this._uiDisplayMode = stateFlowImplMutableStateFlow;
+        this.uiDisplayMode = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new SecQsUiDisplayModeInteractor$foldState$1(this, null));
         SharingStarted.Companion.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Eagerly, FoldState.UNSET);
-        this.foldState = stateIn;
-        UiDisplayMode updateUiDisplayMode = updateUiDisplayMode();
-        Log.d(TAG, " init uiMode = " + updateUiDisplayMode + ", foldState = " + stateIn.$$delegate_0.getValue());
-        MutableStateFlow.setValue(updateUiDisplayMode);
-        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(stateIn, new AnonymousClass2(null)), coroutineScope);
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Eagerly, FoldState.UNSET);
+        this.foldState = readonlyStateFlowStateIn;
+        UiDisplayMode uiDisplayModeUpdateUiDisplayMode = updateUiDisplayMode();
+        Log.d(TAG, " init uiMode = " + uiDisplayModeUpdateUiDisplayMode + ", foldState = " + readonlyStateFlowStateIn.$$delegate_0.getValue());
+        stateFlowImplMutableStateFlow.setValue(uiDisplayModeUpdateUiDisplayMode);
+        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(readonlyStateFlowStateIn, new AnonymousClass2(null)), coroutineScope);
         initLogProvider();
     }
 
@@ -255,18 +248,18 @@ public final class SecQsUiDisplayModeInteractor implements PanelScreenShotLogger
     }
 
     private final UiDisplayMode updateUiDisplayMode() {
-        boolean isFolded = isFolded();
+        boolean zIsFolded = isFolded();
         int i = WhenMappings.$EnumSwitchMapping$0[getDeviceState().ordinal()];
-        return i != 1 ? i != 2 ? i != 3 ? i != 4 ? UiDisplayMode.NORMAL : UiDisplayMode.LARGE : isFolded ? UiDisplayMode.COVER : UiDisplayMode.NORMAL : isFolded ? UiDisplayMode.NARROW : UiDisplayMode.WIDE : isFolded ? UiDisplayMode.NORMAL : UiDisplayMode.LARGE;
+        return i != 1 ? i != 2 ? i != 3 ? i != 4 ? UiDisplayMode.NORMAL : UiDisplayMode.LARGE : zIsFolded ? UiDisplayMode.COVER : UiDisplayMode.NORMAL : zIsFolded ? UiDisplayMode.NARROW : UiDisplayMode.WIDE : zIsFolded ? UiDisplayMode.NORMAL : UiDisplayMode.LARGE;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void updateUiDisplayModeAtFoldStateChanged() {
         if (shouldCheckUiDisplayModeAtFoldStateChanged()) {
             MutableStateFlow mutableStateFlow = this._uiDisplayMode;
-            UiDisplayMode updateUiDisplayMode = updateUiDisplayMode();
-            Log.d(TAG, "updateUiDisplayModeAtFoldStateChanged " + updateUiDisplayMode);
-            mutableStateFlow.setValue(updateUiDisplayMode);
+            UiDisplayMode uiDisplayModeUpdateUiDisplayMode = updateUiDisplayMode();
+            Log.d(TAG, "updateUiDisplayModeAtFoldStateChanged " + uiDisplayModeUpdateUiDisplayMode);
+            mutableStateFlow.setValue(uiDisplayModeUpdateUiDisplayMode);
         }
     }
 

@@ -8,21 +8,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JsonParser {
     @Deprecated
     public JsonParser() {
     }
 
-    public static JsonElement parseReader(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public static JsonElement parseReader(Reader reader) throws JsonSyntaxException, JsonIOException {
         try {
             JsonReader jsonReader = new JsonReader(reader);
-            JsonElement parseReader = parseReader(jsonReader);
-            if (!parseReader.isJsonNull() && jsonReader.peek() != JsonToken.END_DOCUMENT) {
+            JsonElement reader2 = parseReader(jsonReader);
+            if (!reader2.isJsonNull() && jsonReader.peek() != JsonToken.END_DOCUMENT) {
                 throw new JsonSyntaxException("Did not consume the entire document.");
             }
-            return parseReader;
+            return reader2;
         } catch (MalformedJsonException e) {
             throw new JsonSyntaxException(e);
         } catch (IOException e2) {
@@ -42,17 +41,17 @@ public final class JsonParser {
     }
 
     @Deprecated
-    public JsonElement parse(Reader reader) throws JsonIOException, JsonSyntaxException {
+    public JsonElement parse(Reader reader) throws JsonSyntaxException, JsonIOException {
         return parseReader(reader);
     }
 
     @Deprecated
-    public JsonElement parse(JsonReader jsonReader) throws JsonIOException, JsonSyntaxException {
+    public JsonElement parse(JsonReader jsonReader) throws JsonSyntaxException, JsonIOException {
         return parseReader(jsonReader);
     }
 
-    public static JsonElement parseReader(JsonReader jsonReader) throws JsonIOException, JsonSyntaxException {
-        boolean isLenient = jsonReader.isLenient();
+    public static JsonElement parseReader(JsonReader jsonReader) throws JsonSyntaxException, JsonIOException {
+        boolean zIsLenient = jsonReader.isLenient();
         jsonReader.setLenient(true);
         try {
             try {
@@ -63,7 +62,7 @@ public final class JsonParser {
                 throw new JsonParseException("Failed parsing JSON source: " + jsonReader + " to Json", e2);
             }
         } finally {
-            jsonReader.setLenient(isLenient);
+            jsonReader.setLenient(zIsLenient);
         }
     }
 }

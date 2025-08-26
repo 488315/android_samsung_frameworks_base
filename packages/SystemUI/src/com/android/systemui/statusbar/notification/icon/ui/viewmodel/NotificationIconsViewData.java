@@ -2,11 +2,11 @@ package com.android.systemui.statusbar.notification.icon.ui.viewmodel;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.List;
+import kotlin.collections.EmptyList;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationIconsViewData {
     public static final Companion Companion = null;
@@ -14,7 +14,6 @@ public final class NotificationIconsViewData {
     public final LimitType limitType;
     public final List visibleIcons;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,7 +25,6 @@ public final class NotificationIconsViewData {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LimitType {
         public static final /* synthetic */ LimitType[] $VALUES;
         public static final LimitType MaximumAmount;
@@ -88,28 +86,8 @@ public final class NotificationIconsViewData {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public NotificationIconsViewData(java.util.List r1, int r2, com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconsViewData.LimitType r3, int r4, kotlin.jvm.internal.DefaultConstructorMarker r5) {
-        /*
-            r0 = this;
-            r5 = r4 & 1
-            if (r5 == 0) goto L6
-            kotlin.collections.EmptyList r1 = kotlin.collections.EmptyList.INSTANCE
-        L6:
-            r5 = r4 & 2
-            if (r5 == 0) goto Le
-            int r2 = r1.size()
-        Le:
-            r4 = r4 & 4
-            if (r4 == 0) goto L14
-            com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconsViewData$LimitType r3 = com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconsViewData.LimitType.MaximumAmount
-        L14:
-            r0.<init>(r1, r2, r3)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconsViewData.<init>(java.util.List, int, com.android.systemui.statusbar.notification.icon.ui.viewmodel.NotificationIconsViewData$LimitType, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public NotificationIconsViewData(List list, int i, LimitType limitType, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+        list = (i2 & 1) != 0 ? EmptyList.INSTANCE : list;
+        this(list, (i2 & 2) != 0 ? list.size() : i, (i2 & 4) != 0 ? LimitType.MaximumAmount : limitType);
     }
 }

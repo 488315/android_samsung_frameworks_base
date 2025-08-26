@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.notification.collection.listbuilder.plugga
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ListAttachState {
     public static final Companion Companion = new Companion(null);
@@ -18,7 +17,6 @@ public final class ListAttachState {
     public int stableIndex;
     public final SuppressedAttachState suppressedChanges;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,6 +30,7 @@ public final class ListAttachState {
         this(pipelineEntry, notifSection, notifFilter, notifPromoter, str, suppressedAttachState);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public static final ListAttachState create() {
         Companion.getClass();
         SuppressedAttachState.Companion.getClass();
@@ -51,15 +50,15 @@ public final class ListAttachState {
 
     public final int hashCode() {
         PipelineEntry pipelineEntry = this.parent;
-        int hashCode = (pipelineEntry == null ? 0 : pipelineEntry.hashCode()) * 31;
+        int iHashCode = (pipelineEntry == null ? 0 : pipelineEntry.hashCode()) * 31;
         NotifSection notifSection = this.section;
-        int hashCode2 = (hashCode + (notifSection == null ? 0 : notifSection.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (notifSection == null ? 0 : notifSection.hashCode())) * 31;
         NotifFilter notifFilter = this.excludingFilter;
-        int hashCode3 = (hashCode2 + (notifFilter == null ? 0 : notifFilter.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (notifFilter == null ? 0 : notifFilter.hashCode())) * 31;
         NotifPromoter notifPromoter = this.promoter;
-        int hashCode4 = (hashCode3 + (notifPromoter == null ? 0 : notifPromoter.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (notifPromoter == null ? 0 : notifPromoter.hashCode())) * 31;
         String str = this.groupPruneReason;
-        return this.suppressedChanges.hashCode() + ((hashCode4 + (str != null ? str.hashCode() : 0)) * 31);
+        return this.suppressedChanges.hashCode() + ((iHashCode4 + (str != null ? str.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

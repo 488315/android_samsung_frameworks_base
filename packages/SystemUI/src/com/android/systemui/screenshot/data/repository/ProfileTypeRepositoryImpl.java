@@ -1,13 +1,19 @@
 package com.android.systemui.screenshot.data.repository;
 
 import android.os.UserManager;
+import com.android.systemui.screenshot.data.model.ProfileType;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ProfileTypeRepositoryImpl implements ProfileTypeRepository {
     public final CoroutineDispatcher background;
@@ -15,19 +21,33 @@ public final class ProfileTypeRepositoryImpl implements ProfileTypeRepository {
     public final MutexImpl mutex = MutexKt.Mutex$default();
     public final UserManager userManager;
 
+    /* renamed from: com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int I$0;
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ProfileTypeRepositoryImpl.this.getProfileType(0, this);
+        }
+    }
+
     public ProfileTypeRepositoryImpl(UserManager userManager, CoroutineDispatcher coroutineDispatcher) {
         this.userManager = userManager;
         this.background = coroutineDispatcher;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0061, code lost:
-    
-        if (r9.lock(r0) == r1) goto L27;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0075 A[Catch: all -> 0x00a2, TRY_LEAVE, TryCatch #0 {all -> 0x00a2, blocks: (B:26:0x0064, B:28:0x0075), top: B:25:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r7v9, types: [kotlinx.coroutines.sync.Mutex] */
     /* JADX WARN: Type inference failed for: r8v10, types: [kotlinx.coroutines.sync.Mutex] */
     /* JADX WARN: Type inference failed for: r8v11 */
@@ -38,117 +58,94 @@ public final class ProfileTypeRepositoryImpl implements ProfileTypeRepository {
     /* JADX WARN: Type inference failed for: r8v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getProfileType(int r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r7 = this;
-            boolean r0 = r9 instanceof com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1 r0 = (com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1 r0 = new com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$1
-            r0.<init>(r7, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            r5 = 0
-            if (r2 == 0) goto L50
-            if (r2 == r4) goto L40
-            if (r2 != r3) goto L38
-            int r7 = r0.I$0
-            java.lang.Object r8 = r0.L$1
-            kotlinx.coroutines.sync.Mutex r8 = (kotlinx.coroutines.sync.Mutex) r8
-            java.lang.Object r0 = r0.L$0
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl r0 = (com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl) r0
-            kotlin.ResultKt.throwOnFailure(r9)     // Catch: java.lang.Throwable -> L35
-            goto L90
-        L35:
-            r7 = move-exception
-            goto La9
-        L38:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L40:
-            int r8 = r0.I$0
-            java.lang.Object r7 = r0.L$1
-            kotlinx.coroutines.sync.Mutex r7 = (kotlinx.coroutines.sync.Mutex) r7
-            java.lang.Object r2 = r0.L$0
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl r2 = (com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl) r2
-            kotlin.ResultKt.throwOnFailure(r9)
-            r9 = r7
-            r7 = r2
-            goto L64
-        L50:
-            kotlin.ResultKt.throwOnFailure(r9)
-            kotlinx.coroutines.sync.MutexImpl r9 = r7.mutex
-            r0.L$0 = r7
-            r0.L$1 = r9
-            r0.I$0 = r8
-            r0.label = r4
-            java.lang.Object r2 = r9.lock(r0)
-            if (r2 != r1) goto L64
-            goto L8a
-        L64:
-            java.util.Map r2 = r7.cache     // Catch: java.lang.Throwable -> La2
-            java.lang.Integer r4 = new java.lang.Integer     // Catch: java.lang.Throwable -> La2
-            r4.<init>(r8)     // Catch: java.lang.Throwable -> La2
-            java.util.LinkedHashMap r2 = (java.util.LinkedHashMap) r2     // Catch: java.lang.Throwable -> La2
-            java.lang.Object r2 = r2.get(r4)     // Catch: java.lang.Throwable -> La2
-            com.android.systemui.screenshot.data.model.ProfileType r2 = (com.android.systemui.screenshot.data.model.ProfileType) r2     // Catch: java.lang.Throwable -> La2
-            if (r2 != 0) goto La5
-            kotlinx.coroutines.CoroutineDispatcher r2 = r7.background     // Catch: java.lang.Throwable -> La2
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$2$1 r4 = new com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl$getProfileType$2$1     // Catch: java.lang.Throwable -> La2
-            r4.<init>(r7, r8, r5)     // Catch: java.lang.Throwable -> La2
-            r0.L$0 = r7     // Catch: java.lang.Throwable -> La2
-            r0.L$1 = r9     // Catch: java.lang.Throwable -> La2
-            r0.I$0 = r8     // Catch: java.lang.Throwable -> La2
-            r0.label = r3     // Catch: java.lang.Throwable -> La2
-            java.lang.Object r0 = kotlinx.coroutines.BuildersKt.withContext(r2, r4, r0)     // Catch: java.lang.Throwable -> La2
-            if (r0 != r1) goto L8b
-        L8a:
-            return r1
-        L8b:
-            r6 = r0
-            r0 = r7
-            r7 = r8
-            r8 = r9
-            r9 = r6
-        L90:
-            r1 = r9
-            com.android.systemui.screenshot.data.model.ProfileType r1 = (com.android.systemui.screenshot.data.model.ProfileType) r1     // Catch: java.lang.Throwable -> L35
-            java.lang.Integer r2 = new java.lang.Integer     // Catch: java.lang.Throwable -> L35
-            r2.<init>(r7)     // Catch: java.lang.Throwable -> L35
-            java.util.Map r7 = r0.cache     // Catch: java.lang.Throwable -> L35
-            r7.put(r2, r1)     // Catch: java.lang.Throwable -> L35
-            r2 = r9
-            com.android.systemui.screenshot.data.model.ProfileType r2 = (com.android.systemui.screenshot.data.model.ProfileType) r2     // Catch: java.lang.Throwable -> L35
-            r9 = r8
-            goto La5
-        La2:
-            r7 = move-exception
-            r8 = r9
-            goto La9
-        La5:
-            r9.unlock(r5)
-            return r2
-        La9:
-            r8.unlock(r5)
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl.getProfileType(int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getProfileType(int i, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        MutexImpl mutexImpl;
+        ?? r8;
+        ProfileType profileType;
+        ProfileTypeRepositoryImpl profileTypeRepositoryImpl;
+        int i2;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i3 = anonymousClass1.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i3 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = anonymousClass1.label;
+        try {
+            if (i4 == 0) {
+                ResultKt.throwOnFailure(obj);
+                mutexImpl = this.mutex;
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = mutexImpl;
+                anonymousClass1.I$0 = i;
+                anonymousClass1.label = 1;
+                if (mutexImpl.lock(anonymousClass1) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i4 != 1) {
+                if (i4 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                i2 = anonymousClass1.I$0;
+                r8 = (Mutex) anonymousClass1.L$1;
+                profileTypeRepositoryImpl = (ProfileTypeRepositoryImpl) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    r8 = r8;
+                    Integer num = new Integer(i2);
+                    profileTypeRepositoryImpl.cache.put(num, (ProfileType) obj);
+                    profileType = (ProfileType) obj;
+                    mutexImpl = r8;
+                    mutexImpl.unlock(null);
+                    return profileType;
+                } catch (Throwable th) {
+                    th = th;
+                    r8.unlock(null);
+                    throw th;
+                }
+            }
+            i = anonymousClass1.I$0;
+            ?? r7 = (Mutex) anonymousClass1.L$1;
+            ProfileTypeRepositoryImpl profileTypeRepositoryImpl2 = (ProfileTypeRepositoryImpl) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            mutexImpl = r7;
+            this = profileTypeRepositoryImpl2;
+            profileType = (ProfileType) ((LinkedHashMap) this.cache).get(new Integer(i));
+            if (profileType == null) {
+                CoroutineDispatcher coroutineDispatcher = this.background;
+                ProfileTypeRepositoryImpl$getProfileType$2$1 profileTypeRepositoryImpl$getProfileType$2$1 = new ProfileTypeRepositoryImpl$getProfileType$2$1(this, i, null);
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = mutexImpl;
+                anonymousClass1.I$0 = i;
+                anonymousClass1.label = 2;
+                Object objWithContext = BuildersKt.withContext(coroutineDispatcher, profileTypeRepositoryImpl$getProfileType$2$1, anonymousClass1);
+                if (objWithContext != coroutineSingletons) {
+                    profileTypeRepositoryImpl = this;
+                    i2 = i;
+                    r8 = mutexImpl;
+                    obj = objWithContext;
+                    Integer num2 = new Integer(i2);
+                    profileTypeRepositoryImpl.cache.put(num2, (ProfileType) obj);
+                    profileType = (ProfileType) obj;
+                    mutexImpl = r8;
+                }
+                return coroutineSingletons;
+            }
+            mutexImpl.unlock(null);
+            return profileType;
+        } catch (Throwable th2) {
+            th = th2;
+            r8 = mutexImpl;
+            r8.unlock(null);
+            throw th;
+        }
     }
 }

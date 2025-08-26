@@ -9,7 +9,6 @@ import com.android.systemui.wallpaper.theme.view.RainView;
 import com.android.systemui.wallpaper.theme.view.SnowView;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SceneParser extends BaseParser {
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser

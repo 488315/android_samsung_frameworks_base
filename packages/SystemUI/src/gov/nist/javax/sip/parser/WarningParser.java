@@ -5,9 +5,9 @@ import gov.nist.core.Token;
 import gov.nist.javax.sip.header.SIPHeader;
 import gov.nist.javax.sip.header.Warning;
 import gov.nist.javax.sip.header.WarningList;
+import java.text.ParseException;
 import javax.sip.InvalidArgumentException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WarningParser extends HeaderParser {
     public WarningParser(String str) {
@@ -15,7 +15,7 @@ public class WarningParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         WarningList warningList = new WarningList();
         headerName(2078);
         while (this.lexer.lookAhead(0) != '\n') {

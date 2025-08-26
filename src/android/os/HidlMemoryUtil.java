@@ -32,16 +32,16 @@ public final class HidlMemoryUtil {
             str = "";
         }
         try {
-            SharedMemory create = SharedMemory.create(str, bArr.length);
+            SharedMemory sharedMemoryCreate = SharedMemory.create(str, bArr.length);
             try {
-                ByteBuffer mapReadWrite = create.mapReadWrite();
-                mapReadWrite.put(bArr);
-                SharedMemory.unmap(mapReadWrite);
-                HidlMemory sharedMemoryToHidlMemory = sharedMemoryToHidlMemory(create);
-                if (create != null) {
-                    create.close();
+                ByteBuffer byteBufferMapReadWrite = sharedMemoryCreate.mapReadWrite();
+                byteBufferMapReadWrite.put(bArr);
+                SharedMemory.unmap(byteBufferMapReadWrite);
+                HidlMemory hidlMemorySharedMemoryToHidlMemory = sharedMemoryToHidlMemory(sharedMemoryCreate);
+                if (sharedMemoryCreate != null) {
+                    sharedMemoryCreate.close();
                 }
-                return sharedMemoryToHidlMemory;
+                return hidlMemorySharedMemoryToHidlMemory;
             } finally {
             }
         } catch (ErrnoException e) {
@@ -62,19 +62,19 @@ public final class HidlMemoryUtil {
             str = "";
         }
         try {
-            SharedMemory create = SharedMemory.create(str, list.size());
+            SharedMemory sharedMemoryCreate = SharedMemory.create(str, list.size());
             try {
-                ByteBuffer mapReadWrite = create.mapReadWrite();
+                ByteBuffer byteBufferMapReadWrite = sharedMemoryCreate.mapReadWrite();
                 Iterator<Byte> it = list.iterator();
                 while (it.hasNext()) {
-                    mapReadWrite.put(it.next().byteValue());
+                    byteBufferMapReadWrite.put(it.next().byteValue());
                 }
-                SharedMemory.unmap(mapReadWrite);
-                HidlMemory sharedMemoryToHidlMemory = sharedMemoryToHidlMemory(create);
-                if (create != null) {
-                    create.close();
+                SharedMemory.unmap(byteBufferMapReadWrite);
+                HidlMemory hidlMemorySharedMemoryToHidlMemory = sharedMemoryToHidlMemory(sharedMemoryCreate);
+                if (sharedMemoryCreate != null) {
+                    sharedMemoryCreate.close();
                 }
-                return sharedMemoryToHidlMemory;
+                return hidlMemorySharedMemoryToHidlMemory;
             } finally {
             }
         } catch (ErrnoException e) {
@@ -82,7 +82,7 @@ public final class HidlMemoryUtil {
         }
     }
 
-    public static byte[] hidlMemoryToByteArray(HidlMemory hidlMemory) {
+    public static byte[] hidlMemoryToByteArray(HidlMemory hidlMemory) throws ErrnoException {
         Preconditions.checkNotNull(hidlMemory);
         Preconditions.checkArgumentInRange(hidlMemory.getSize(), 0L, 2147483647L, "Memory size");
         Preconditions.checkArgument(hidlMemory.getSize() == 0 || hidlMemory.getName().equals("ashmem"), "Unsupported memory type: %s", hidlMemory.getName());
@@ -95,7 +95,7 @@ public final class HidlMemoryUtil {
         return bArr;
     }
 
-    public static ArrayList<Byte> hidlMemoryToByteList(HidlMemory hidlMemory) {
+    public static ArrayList<Byte> hidlMemoryToByteList(HidlMemory hidlMemory) throws ErrnoException {
         Preconditions.checkNotNull(hidlMemory);
         Preconditions.checkArgumentInRange(hidlMemory.getSize(), 0L, 2147483647L, "Memory size");
         Preconditions.checkArgument(hidlMemory.getSize() == 0 || hidlMemory.getName().equals("ashmem"), "Unsupported memory type: %s", hidlMemory.getName());
@@ -129,18 +129,18 @@ public final class HidlMemoryUtil {
         }
     }
 
-    private static ByteBuffer getBuffer(HidlMemory hidlMemory) {
+    private static ByteBuffer getBuffer(HidlMemory hidlMemory) throws ErrnoException {
         try {
             final int size = (int) hidlMemory.getSize();
             if (size == 0) {
                 return ByteBuffer.wrap(new byte[0]);
             }
             NativeHandle handle = hidlMemory.getHandle();
-            final long mmap = Os.mmap(0L, size, OsConstants.PROT_READ, OsConstants.MAP_SHARED, handle.getFileDescriptor(), 0L);
-            return new DirectByteBuffer(size, mmap, handle.getFileDescriptor(), new Runnable() { // from class: android.os.HidlMemoryUtil$$ExternalSyntheticLambda0
+            final long jMmap = Os.mmap(0L, size, OsConstants.PROT_READ, OsConstants.MAP_SHARED, handle.getFileDescriptor(), 0L);
+            return new DirectByteBuffer(size, jMmap, handle.getFileDescriptor(), new Runnable() { // from class: android.os.HidlMemoryUtil$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    HidlMemoryUtil.lambda$getBuffer$0(mmap, size);
+                public final void run() throws ErrnoException {
+                    HidlMemoryUtil.lambda$getBuffer$0(jMmap, size);
                 }
             }, true);
         } catch (ErrnoException e) {
@@ -148,7 +148,7 @@ public final class HidlMemoryUtil {
         }
     }
 
-    static /* synthetic */ void lambda$getBuffer$0(long j, int i) {
+    static /* synthetic */ void lambda$getBuffer$0(long j, int i) throws ErrnoException {
         try {
             Os.munmap(j, i);
         } catch (ErrnoException e) {

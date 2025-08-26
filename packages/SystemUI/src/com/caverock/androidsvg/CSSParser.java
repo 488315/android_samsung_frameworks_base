@@ -12,14 +12,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CSSParser {
     public final MediaType deviceMediaType;
     public boolean inMediaRule;
     public final Source source;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.caverock.androidsvg.CSSParser$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$caverock$androidsvg$CSSParser$AttribOp;
@@ -141,7 +139,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Attrib {
         public final String name;
         public final AttribOp operation;
@@ -154,7 +151,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum AttribOp {
         EXISTS,
         EQUALS,
@@ -162,10 +158,8 @@ public class CSSParser {
         DASHMATCH
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CSSTextScanner extends SVGParser.TextScanner {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class AnPlusB {
             public final int a;
             public final int b;
@@ -194,36 +188,36 @@ public class CSSParser {
         }
 
         public final String nextCSSString() {
-            int hexChar;
+            int iHexChar;
             if (empty()) {
                 return null;
             }
-            char charAt = this.input.charAt(this.position);
-            if (charAt != '\'' && charAt != '\"') {
+            char cCharAt = this.input.charAt(this.position);
+            if (cCharAt != '\'' && cCharAt != '\"') {
                 return null;
             }
             StringBuilder sb = new StringBuilder();
             this.position++;
-            int intValue = nextChar().intValue();
-            while (intValue != -1 && intValue != charAt) {
-                if (intValue == 92) {
-                    intValue = nextChar().intValue();
-                    if (intValue != -1) {
-                        if (intValue == 10 || intValue == 13 || intValue == 12) {
-                            intValue = nextChar().intValue();
+            int iIntValue = nextChar().intValue();
+            while (iIntValue != -1 && iIntValue != cCharAt) {
+                if (iIntValue == 92) {
+                    iIntValue = nextChar().intValue();
+                    if (iIntValue != -1) {
+                        if (iIntValue == 10 || iIntValue == 13 || iIntValue == 12) {
+                            iIntValue = nextChar().intValue();
                         } else {
-                            int hexChar2 = hexChar(intValue);
-                            if (hexChar2 != -1) {
-                                for (int i = 1; i <= 5 && (hexChar = hexChar((intValue = nextChar().intValue()))) != -1; i++) {
-                                    hexChar2 = (hexChar2 * 16) + hexChar;
+                            int iHexChar2 = hexChar(iIntValue);
+                            if (iHexChar2 != -1) {
+                                for (int i = 1; i <= 5 && (iHexChar = hexChar((iIntValue = nextChar().intValue()))) != -1; i++) {
+                                    iHexChar2 = (iHexChar2 * 16) + iHexChar;
                                 }
-                                sb.append((char) hexChar2);
+                                sb.append((char) iHexChar2);
                             }
                         }
                     }
                 }
-                sb.append((char) intValue);
-                intValue = nextChar().intValue();
+                sb.append((char) iIntValue);
+                iIntValue = nextChar().intValue();
             }
             return sb.toString();
         }
@@ -231,25 +225,25 @@ public class CSSParser {
         public final String nextIdentifier() {
             int i;
             int i2;
-            boolean empty = empty();
+            boolean zEmpty = empty();
             String str = this.input;
-            if (empty) {
+            if (zEmpty) {
                 i2 = this.position;
             } else {
                 int i3 = this.position;
-                int charAt = str.charAt(i3);
-                if (charAt == 45) {
-                    charAt = advanceChar();
+                int iCharAt = str.charAt(i3);
+                if (iCharAt == 45) {
+                    iCharAt = advanceChar();
                 }
-                if ((charAt < 65 || charAt > 90) && ((charAt < 97 || charAt > 122) && charAt != 95)) {
+                if ((iCharAt < 65 || iCharAt > 90) && ((iCharAt < 97 || iCharAt > 122) && iCharAt != 95)) {
                     i = i3;
                 } else {
-                    int advanceChar = advanceChar();
+                    int iAdvanceChar = advanceChar();
                     while (true) {
-                        if ((advanceChar < 65 || advanceChar > 90) && ((advanceChar < 97 || advanceChar > 122) && !((advanceChar >= 48 && advanceChar <= 57) || advanceChar == 45 || advanceChar == 95))) {
+                        if ((iAdvanceChar < 65 || iAdvanceChar > 90) && ((iAdvanceChar < 97 || iAdvanceChar > 122) && !((iAdvanceChar >= 48 && iAdvanceChar <= 57) || iAdvanceChar == 45 || iAdvanceChar == 95))) {
                             break;
                         }
-                        advanceChar = advanceChar();
+                        iAdvanceChar = advanceChar();
                     }
                     i = this.position;
                 }
@@ -260,43 +254,26 @@ public class CSSParser {
             if (i2 == i4) {
                 return null;
             }
-            String substring = str.substring(i4, i2);
+            String strSubstring = str.substring(i4, i2);
             this.position = i2;
-            return substring;
+            return strSubstring;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:226:0x04a5, code lost:
-        
-            r0 = r4.simpleSelectors;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:227:0x04a7, code lost:
-        
-            if (r0 == null) goto L275;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:229:0x04af, code lost:
-        
-            if (((java.util.ArrayList) r0).isEmpty() == false) goto L274;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:230:0x04b2, code lost:
-        
-            r1.add(r4);
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:231:0x04b5, code lost:
-        
-            return r1;
-         */
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:140:0x03a7  */
-        /* JADX WARN: Removed duplicated region for block: B:142:0x03c0 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:153:0x03a2  */
-        /* JADX WARN: Removed duplicated region for block: B:212:0x047d  */
-        /* JADX WARN: Removed duplicated region for block: B:224:0x04a3 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x005c  */
-        /* JADX WARN: Removed duplicated region for block: B:26:0x007b  */
-        /* JADX WARN: Removed duplicated region for block: B:293:0x0062  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x045f  */
-        /* JADX WARN: Removed duplicated region for block: B:80:0x027d  */
-        /* JADX WARN: Removed duplicated region for block: B:92:0x02a4 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:131:0x01f6  */
+        /* JADX WARN: Removed duplicated region for block: B:161:0x027d  */
+        /* JADX WARN: Removed duplicated region for block: B:186:0x02d2  */
+        /* JADX WARN: Removed duplicated region for block: B:240:0x03a2  */
+        /* JADX WARN: Removed duplicated region for block: B:242:0x03a7  */
+        /* JADX WARN: Removed duplicated region for block: B:256:0x045f  */
+        /* JADX WARN: Removed duplicated region for block: B:261:0x047d  */
+        /* JADX WARN: Removed duplicated region for block: B:26:0x0053  */
+        /* JADX WARN: Removed duplicated region for block: B:285:0x02a4 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:286:0x03c0 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:287:0x04a3 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:29:0x005c  */
+        /* JADX WARN: Removed duplicated region for block: B:30:0x0062  */
+        /* JADX WARN: Removed duplicated region for block: B:36:0x007b  */
         /* JADX WARN: Type inference failed for: r11v12, types: [com.caverock.androidsvg.CSSParser$PseudoClassOnlyChild] */
         /* JADX WARN: Type inference failed for: r11v16, types: [com.caverock.androidsvg.CSSParser$PseudoClassOnlyChild] */
         /* JADX WARN: Type inference failed for: r11v17, types: [com.caverock.androidsvg.CSSParser$PseudoClassRoot] */
@@ -315,25 +292,544 @@ public class CSSParser {
         /* JADX WARN: Type inference failed for: r2v9 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.util.List nextSelectorGroup() {
-            /*
-                Method dump skipped, instructions count: 1258
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.CSSParser.CSSTextScanner.nextSelectorGroup():java.util.List");
+        public final List nextSelectorGroup() throws CSSParseException {
+            Combinator combinator;
+            SimpleSelector simpleSelector;
+            String strNextQuotedString;
+            Combinator combinator2;
+            char c;
+            PseudoClassAnPlusB pseudoClassAnPlusB;
+            PseudoClassAnPlusB pseudoClassAnPlusB2;
+            PseudoClassAnPlusB pseudoClassAnPlusB3;
+            int i;
+            IntegerParser integerParser;
+            AnPlusB anPlusB;
+            List listNextSelectorGroup;
+            PseudoClassAnPlusB pseudoClassAnPlusB4;
+            ?? r2 = 0;
+            boolean z = false;
+            if (empty()) {
+                return null;
+            }
+            int i2 = 1;
+            ArrayList arrayList = new ArrayList(1);
+            Selector selector = new Selector(z ? 1 : 0);
+            while (true) {
+                if (!empty() && !empty()) {
+                    int i3 = this.position;
+                    List list = selector.simpleSelectors;
+                    char c2 = '+';
+                    if (((list == null || ((ArrayList) list).isEmpty()) ? i2 : 0) != 0) {
+                        combinator = r2;
+                        if (consume('*')) {
+                            String strNextIdentifier = nextIdentifier();
+                            if (strNextIdentifier != null) {
+                                SimpleSelector simpleSelector2 = new SimpleSelector(combinator, strNextIdentifier);
+                                selector.specificity += i2;
+                                simpleSelector = simpleSelector2;
+                            } else {
+                                simpleSelector = r2;
+                            }
+                        } else {
+                            simpleSelector = new SimpleSelector(combinator, r2);
+                        }
+                        while (!empty()) {
+                            if (consume('.')) {
+                                if (simpleSelector == null) {
+                                    simpleSelector = new SimpleSelector(combinator, r2);
+                                }
+                                String strNextIdentifier2 = nextIdentifier();
+                                if (strNextIdentifier2 == null) {
+                                    throw new CSSParseException("Invalid \".class\" simpleSelectors");
+                                }
+                                simpleSelector.addAttrib("class", AttribOp.EQUALS, strNextIdentifier2);
+                                selector.addedAttributeOrPseudo();
+                            } else if (consume('#')) {
+                                if (simpleSelector == null) {
+                                    simpleSelector = new SimpleSelector(combinator, r2);
+                                }
+                                String strNextIdentifier3 = nextIdentifier();
+                                if (strNextIdentifier3 == null) {
+                                    throw new CSSParseException("Invalid \"#id\" simpleSelectors");
+                                }
+                                simpleSelector.addAttrib("id", AttribOp.EQUALS, strNextIdentifier3);
+                                selector.specificity += 1000000;
+                            } else if (consume('[')) {
+                                if (simpleSelector == null) {
+                                    simpleSelector = new SimpleSelector(combinator, r2);
+                                }
+                                skipWhitespace();
+                                String strNextIdentifier4 = nextIdentifier();
+                                if (strNextIdentifier4 == null) {
+                                    throw new CSSParseException("Invalid attribute simpleSelectors");
+                                }
+                                skipWhitespace();
+                                AttribOp attribOp = consume('=') ? AttribOp.EQUALS : consume("~=") ? AttribOp.INCLUDES : consume("|=") ? AttribOp.DASHMATCH : r2;
+                                if (attribOp != null) {
+                                    skipWhitespace();
+                                    if (empty()) {
+                                        strNextQuotedString = r2;
+                                    } else {
+                                        strNextQuotedString = nextQuotedString();
+                                        if (strNextQuotedString == null) {
+                                            strNextQuotedString = nextIdentifier();
+                                        }
+                                    }
+                                    if (strNextQuotedString == null) {
+                                        throw new CSSParseException("Invalid attribute simpleSelectors");
+                                    }
+                                    skipWhitespace();
+                                } else {
+                                    strNextQuotedString = r2;
+                                }
+                                if (!consume(']')) {
+                                    throw new CSSParseException("Invalid attribute simpleSelectors");
+                                }
+                                if (attribOp == null) {
+                                    attribOp = AttribOp.EXISTS;
+                                }
+                                simpleSelector.addAttrib(strNextIdentifier4, attribOp, strNextQuotedString);
+                                selector.addedAttributeOrPseudo();
+                            } else if (consume(':')) {
+                                if (simpleSelector == null) {
+                                    simpleSelector = new SimpleSelector(combinator, r2);
+                                }
+                                String strNextIdentifier5 = nextIdentifier();
+                                if (strNextIdentifier5 == null) {
+                                    throw new CSSParseException("Invalid pseudo class");
+                                }
+                                PseudoClassIdents pseudoClassIdents = (PseudoClassIdents) ((HashMap) PseudoClassIdents.cache).get(strNextIdentifier5);
+                                if (pseudoClassIdents == null) {
+                                    pseudoClassIdents = PseudoClassIdents.UNSUPPORTED;
+                                }
+                                switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$CSSParser$PseudoClassIdents[pseudoClassIdents.ordinal()]) {
+                                    case 1:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        PseudoClassAnPlusB pseudoClassAnPlusB5 = new PseudoClassAnPlusB(0, 1, true, false, null);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB5;
+                                        if (simpleSelector.pseudos == null) {
+                                            simpleSelector.pseudos = new ArrayList();
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 2:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        PseudoClassAnPlusB pseudoClassAnPlusB6 = new PseudoClassAnPlusB(0, 1, false, false, null);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB6;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 3:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        ?? pseudoClassOnlyChild = new PseudoClassOnlyChild(false, null);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB = pseudoClassOnlyChild;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 4:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        PseudoClassAnPlusB pseudoClassAnPlusB7 = new PseudoClassAnPlusB(0, 1, true, true, simpleSelector.tag);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB7;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 5:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        PseudoClassAnPlusB pseudoClassAnPlusB8 = new PseudoClassAnPlusB(0, 1, false, true, simpleSelector.tag);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB8;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 6:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        i2 = 1;
+                                        ?? pseudoClassOnlyChild2 = new PseudoClassOnlyChild(true, simpleSelector.tag);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB2 = pseudoClassOnlyChild2;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 7:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        ?? pseudoClassRoot = new PseudoClassRoot(r2);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB3 = pseudoClassRoot;
+                                        i2 = 1;
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB3;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 8:
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        ?? pseudoClassEmpty = new PseudoClassEmpty(null);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB3 = pseudoClassEmpty;
+                                        i2 = 1;
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB3;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                        combinator2 = combinator;
+                                        boolean z2 = pseudoClassIdents == PseudoClassIdents.nth_child || pseudoClassIdents == PseudoClassIdents.nth_of_type;
+                                        boolean z3 = pseudoClassIdents == PseudoClassIdents.nth_of_type || pseudoClassIdents == PseudoClassIdents.nth_last_of_type;
+                                        if (empty()) {
+                                            anPlusB = null;
+                                            c = '+';
+                                            if (anPlusB != null) {
+                                                throw new CSSParseException("Invalid or missing parameter section for pseudo class: ".concat(strNextIdentifier5));
+                                            }
+                                            PseudoClassAnPlusB pseudoClassAnPlusB9 = new PseudoClassAnPlusB(anPlusB.a, anPlusB.b, z2, z3, simpleSelector.tag);
+                                            selector.addedAttributeOrPseudo();
+                                            pseudoClassAnPlusB3 = pseudoClassAnPlusB9;
+                                            i2 = 1;
+                                            pseudoClassAnPlusB2 = pseudoClassAnPlusB3;
+                                            pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                            if (simpleSelector.pseudos == null) {
+                                            }
+                                            ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                            c2 = c;
+                                            combinator = combinator2;
+                                            r2 = 0;
+                                            break;
+                                        } else {
+                                            int i4 = this.position;
+                                            if (consume('(')) {
+                                                skipWhitespace();
+                                                if (consume("odd")) {
+                                                    anPlusB = new AnPlusB(2, 1);
+                                                } else if (consume("even")) {
+                                                    anPlusB = new AnPlusB(2, 0);
+                                                } else {
+                                                    int i5 = (!consume('+') && consume('-')) ? -1 : 1;
+                                                    int i6 = this.position;
+                                                    String str = this.input;
+                                                    int i7 = this.inputLength;
+                                                    IntegerParser integerParser2 = IntegerParser.parseInt(i6, i7, str);
+                                                    if (integerParser2 != null) {
+                                                        this.position = integerParser2.pos;
+                                                    }
+                                                    if (consume('n') || consume('N')) {
+                                                        if (integerParser2 == null) {
+                                                            integerParser2 = new IntegerParser(1L, this.position);
+                                                        }
+                                                        skipWhitespace();
+                                                        c = '+';
+                                                        boolean zConsume = consume('+');
+                                                        int i8 = (zConsume || !(zConsume = consume('-'))) ? 1 : -1;
+                                                        if (zConsume) {
+                                                            skipWhitespace();
+                                                            IntegerParser integerParser3 = IntegerParser.parseInt(this.position, i7, str);
+                                                            if (integerParser3 != null) {
+                                                                this.position = integerParser3.pos;
+                                                                integerParser = integerParser3;
+                                                                i = i5;
+                                                                i5 = i8;
+                                                            } else {
+                                                                this.position = i4;
+                                                                anPlusB = null;
+                                                            }
+                                                        } else {
+                                                            i = i5;
+                                                            i5 = i8;
+                                                            integerParser = null;
+                                                        }
+                                                    } else {
+                                                        integerParser = integerParser2;
+                                                        i = 1;
+                                                        c = '+';
+                                                        integerParser2 = null;
+                                                    }
+                                                    anPlusB = new AnPlusB(integerParser2 == null ? 0 : i * ((int) integerParser2.value), integerParser == null ? 0 : i5 * ((int) integerParser.value));
+                                                    skipWhitespace();
+                                                    if (!consume(')')) {
+                                                        this.position = i4;
+                                                        anPlusB = null;
+                                                    }
+                                                }
+                                                c = '+';
+                                                skipWhitespace();
+                                                if (!consume(')')) {
+                                                }
+                                            }
+                                            if (anPlusB != null) {
+                                            }
+                                        }
+                                        break;
+                                    case 13:
+                                        if (empty()) {
+                                            listNextSelectorGroup = r2;
+                                            combinator2 = combinator;
+                                            if (listNextSelectorGroup == null) {
+                                                throw new CSSParseException("Invalid or missing parameter section for pseudo class: ".concat(strNextIdentifier5));
+                                            }
+                                            ?? pseudoClassNot = new PseudoClassNot(listNextSelectorGroup);
+                                            Iterator it = pseudoClassNot.selectorGroup.iterator();
+                                            int i9 = Integer.MIN_VALUE;
+                                            while (it.hasNext()) {
+                                                int i10 = ((Selector) it.next()).specificity;
+                                                if (i10 > i9) {
+                                                    i9 = i10;
+                                                }
+                                            }
+                                            selector.specificity = i9;
+                                            i2 = 1;
+                                            c = '+';
+                                            pseudoClassAnPlusB = pseudoClassNot;
+                                            if (simpleSelector.pseudos == null) {
+                                            }
+                                            ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                            c2 = c;
+                                            combinator = combinator2;
+                                            r2 = 0;
+                                            break;
+                                        } else {
+                                            int i11 = this.position;
+                                            if (consume('(')) {
+                                                skipWhitespace();
+                                                listNextSelectorGroup = nextSelectorGroup();
+                                                if (listNextSelectorGroup != null && consume(')')) {
+                                                    ArrayList arrayList2 = (ArrayList) listNextSelectorGroup;
+                                                    int size = arrayList2.size();
+                                                    int i12 = 0;
+                                                    while (i12 < size) {
+                                                        Object obj = arrayList2.get(i12);
+                                                        i12++;
+                                                        List list2 = ((Selector) obj).simpleSelectors;
+                                                        if (list2 == null) {
+                                                            combinator2 = combinator;
+                                                            if (listNextSelectorGroup == null) {
+                                                            }
+                                                        } else {
+                                                            ArrayList arrayList3 = (ArrayList) list2;
+                                                            int size2 = arrayList3.size();
+                                                            int i13 = 0;
+                                                            while (i13 < size2) {
+                                                                Object obj2 = arrayList3.get(i13);
+                                                                i13++;
+                                                                List list3 = ((SimpleSelector) obj2).pseudos;
+                                                                if (list3 == null) {
+                                                                    combinator = combinator;
+                                                                } else {
+                                                                    ArrayList arrayList4 = (ArrayList) list3;
+                                                                    ArrayList arrayList5 = arrayList3;
+                                                                    int size3 = arrayList4.size();
+                                                                    combinator2 = combinator;
+                                                                    int i14 = 0;
+                                                                    while (i14 < size3) {
+                                                                        Object obj3 = arrayList4.get(i14);
+                                                                        i14++;
+                                                                        int i15 = size3;
+                                                                        if (((PseudoClass) obj3) instanceof PseudoClassNot) {
+                                                                            listNextSelectorGroup = null;
+                                                                            if (listNextSelectorGroup == null) {
+                                                                            }
+                                                                        } else {
+                                                                            size3 = i15;
+                                                                        }
+                                                                    }
+                                                                    arrayList3 = arrayList5;
+                                                                    combinator = combinator2;
+                                                                }
+                                                            }
+                                                            combinator = combinator;
+                                                        }
+                                                    }
+                                                    combinator2 = combinator;
+                                                    if (listNextSelectorGroup == null) {
+                                                    }
+                                                } else {
+                                                    this.position = i11;
+                                                    listNextSelectorGroup = r2;
+                                                    combinator2 = combinator;
+                                                    if (listNextSelectorGroup == null) {
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case 14:
+                                        ?? pseudoClassTarget = new PseudoClassTarget(r2);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB4 = pseudoClassTarget;
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB4;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 15:
+                                        if (!empty()) {
+                                            int i16 = this.position;
+                                            if (consume('(')) {
+                                                skipWhitespace();
+                                                ArrayList arrayList6 = r2;
+                                                while (true) {
+                                                    String strNextIdentifier6 = nextIdentifier();
+                                                    if (strNextIdentifier6 == null) {
+                                                        this.position = i16;
+                                                    } else {
+                                                        if (arrayList6 == null) {
+                                                            arrayList6 = new ArrayList();
+                                                        }
+                                                        arrayList6.add(strNextIdentifier6);
+                                                        skipWhitespace();
+                                                        if (!skipCommaWhitespace()) {
+                                                            if (!consume(')')) {
+                                                                this.position = i16;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        ?? pseudoClassNotSupported = new PseudoClassNotSupported(strNextIdentifier5);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB4 = pseudoClassNotSupported;
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB4;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                    case 19:
+                                    case 20:
+                                    case 21:
+                                    case 22:
+                                    case 23:
+                                    case 24:
+                                        ?? pseudoClassNotSupported2 = new PseudoClassNotSupported(strNextIdentifier5);
+                                        selector.addedAttributeOrPseudo();
+                                        pseudoClassAnPlusB4 = pseudoClassNotSupported2;
+                                        combinator2 = combinator;
+                                        c = c2;
+                                        pseudoClassAnPlusB2 = pseudoClassAnPlusB4;
+                                        pseudoClassAnPlusB = pseudoClassAnPlusB2;
+                                        if (simpleSelector.pseudos == null) {
+                                        }
+                                        ((ArrayList) simpleSelector.pseudos).add(pseudoClassAnPlusB);
+                                        c2 = c;
+                                        combinator = combinator2;
+                                        r2 = 0;
+                                        break;
+                                    default:
+                                        throw new CSSParseException("Unsupported pseudo class: ".concat(strNextIdentifier5));
+                                }
+                            } else if (simpleSelector != null) {
+                                if (selector.simpleSelectors == null) {
+                                    selector.simpleSelectors = new ArrayList();
+                                }
+                                ((ArrayList) selector.simpleSelectors).add(simpleSelector);
+                                if (skipCommaWhitespace()) {
+                                    arrayList.add(selector);
+                                    r2 = 0;
+                                    selector = new Selector(false ? 1 : 0);
+                                } else {
+                                    r2 = 0;
+                                }
+                            } else {
+                                this.position = i3;
+                            }
+                        }
+                        if (simpleSelector != null) {
+                        }
+                    } else {
+                        if (consume('>')) {
+                            combinator = Combinator.CHILD;
+                            skipWhitespace();
+                        } else if (consume('+')) {
+                            combinator = Combinator.FOLLOWS;
+                            skipWhitespace();
+                        }
+                        if (consume('*')) {
+                        }
+                        while (!empty()) {
+                        }
+                        if (simpleSelector != null) {
+                        }
+                    }
+                }
+            }
+            List list4 = selector.simpleSelectors;
+            if (list4 != null && !((ArrayList) list4).isEmpty()) {
+                arrayList.add(selector);
+            }
+            return arrayList;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Combinator {
         DESCENDANT,
         CHILD,
         FOLLOWS
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum MediaType {
         all,
         /* JADX INFO: Fake field, exist only in values array */
@@ -357,12 +853,10 @@ public class CSSParser {
         tv
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PseudoClass {
         boolean matches(SVG.SvgElementBase svgElementBase);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassAnPlusB implements PseudoClass {
         public final int a;
         public final int b;
@@ -378,77 +872,47 @@ public class CSSParser {
             this.nodeName = str;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x0065 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0064 A[RETURN] */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x0064 A[RETURN] */
+        /* JADX WARN: Removed duplicated region for block: B:34:0x0065 A[RETURN] */
         @Override // com.caverock.androidsvg.CSSParser.PseudoClass
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean matches(com.caverock.androidsvg.SVG.SvgElementBase r8) {
-            /*
-                r7 = this;
-                boolean r0 = r7.isOfType
-                java.lang.String r1 = r7.nodeName
-                if (r0 == 0) goto Lc
-                if (r1 != 0) goto Lc
-                java.lang.String r1 = r8.getNodeName()
-            Lc:
-                com.caverock.androidsvg.SVG$SvgContainer r0 = r8.parent
-                r2 = 1
-                r3 = 0
-                if (r0 == 0) goto L3c
-                java.util.List r0 = r0.getChildren()
-                java.util.Iterator r0 = r0.iterator()
-                r4 = r3
-                r5 = r4
-            L1c:
-                boolean r6 = r0.hasNext()
-                if (r6 == 0) goto L3e
-                java.lang.Object r6 = r0.next()
-                com.caverock.androidsvg.SVG$SvgObject r6 = (com.caverock.androidsvg.SVG.SvgObject) r6
-                com.caverock.androidsvg.SVG$SvgElementBase r6 = (com.caverock.androidsvg.SVG.SvgElementBase) r6
-                if (r6 != r8) goto L2d
-                r4 = r5
-            L2d:
-                if (r1 == 0) goto L39
-                java.lang.String r6 = r6.getNodeName()
-                boolean r6 = r6.equals(r1)
-                if (r6 == 0) goto L1c
-            L39:
-                int r5 = r5 + 1
-                goto L1c
-            L3c:
-                r5 = r2
-                r4 = r3
-            L3e:
-                boolean r8 = r7.isFromStart
-                if (r8 == 0) goto L44
-                int r4 = r4 + r2
-                goto L46
-            L44:
-                int r4 = r5 - r4
-            L46:
-                int r8 = r7.a
-                int r7 = r7.b
-                if (r8 != 0) goto L4f
-                if (r4 != r7) goto L65
-                goto L64
-            L4f:
-                int r4 = r4 - r7
-                int r7 = r4 % r8
-                if (r7 != 0) goto L65
-                int r7 = java.lang.Integer.signum(r4)
-                if (r7 == 0) goto L64
-                int r7 = java.lang.Integer.signum(r4)
-                int r8 = java.lang.Integer.signum(r8)
-                if (r7 != r8) goto L65
-            L64:
-                return r2
-            L65:
-                return r3
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.CSSParser.PseudoClassAnPlusB.matches(com.caverock.androidsvg.SVG$SvgElementBase):boolean");
+        public final boolean matches(SVG.SvgElementBase svgElementBase) {
+            int i;
+            int i2;
+            boolean z = this.isOfType;
+            String nodeName = this.nodeName;
+            if (z && nodeName == null) {
+                nodeName = svgElementBase.getNodeName();
+            }
+            SVG.SvgContainer svgContainer = svgElementBase.parent;
+            if (svgContainer != null) {
+                Iterator it = svgContainer.getChildren().iterator();
+                i2 = 0;
+                i = 0;
+                while (it.hasNext()) {
+                    SVG.SvgElementBase svgElementBase2 = (SVG.SvgElementBase) ((SVG.SvgObject) it.next());
+                    if (svgElementBase2 == svgElementBase) {
+                        i2 = i;
+                    }
+                    if (nodeName == null || svgElementBase2.getNodeName().equals(nodeName)) {
+                        i++;
+                    }
+                }
+            } else {
+                i = 1;
+                i2 = 0;
+            }
+            int i3 = this.isFromStart ? i2 + 1 : i - i2;
+            int i4 = this.a;
+            int i5 = this.b;
+            if (i4 == 0) {
+                return i3 == i5;
+            }
+            int i6 = i3 - i5;
+            if (i6 % i4 != 0 || (Integer.signum(i6) != 0 && Integer.signum(i6) != Integer.signum(i4))) {
+            }
         }
 
         public final String toString() {
@@ -460,7 +924,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassEmpty implements PseudoClass {
         private PseudoClassEmpty() {
         }
@@ -480,7 +943,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PseudoClassIdents {
         target,
         root,
@@ -519,7 +981,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassNot implements PseudoClass {
         public final List selectorGroup;
 
@@ -543,7 +1004,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassNotSupported implements PseudoClass {
         public final String clazz;
 
@@ -561,7 +1021,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassOnlyChild implements PseudoClass {
         public final boolean isOfType;
         public final String nodeName;
@@ -575,9 +1034,9 @@ public class CSSParser {
         public final boolean matches(SVG.SvgElementBase svgElementBase) {
             int i;
             boolean z = this.isOfType;
-            String str = this.nodeName;
-            if (z && str == null) {
-                str = svgElementBase.getNodeName();
+            String nodeName = this.nodeName;
+            if (z && nodeName == null) {
+                nodeName = svgElementBase.getNodeName();
             }
             SVG.SvgContainer svgContainer = svgElementBase.parent;
             if (svgContainer != null) {
@@ -585,7 +1044,7 @@ public class CSSParser {
                 i = 0;
                 while (it.hasNext()) {
                     SVG.SvgElementBase svgElementBase2 = (SVG.SvgElementBase) ((SVG.SvgObject) it.next());
-                    if (str == null || svgElementBase2.getNodeName().equals(str)) {
+                    if (nodeName == null || svgElementBase2.getNodeName().equals(nodeName)) {
                         i++;
                     }
                 }
@@ -600,7 +1059,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassRoot implements PseudoClass {
         private PseudoClassRoot() {
         }
@@ -619,7 +1077,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PseudoClassTarget implements PseudoClass {
         private PseudoClassTarget() {
         }
@@ -638,7 +1095,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Rule {
         public final Selector selector;
         public final Source source;
@@ -655,7 +1111,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Ruleset {
         public List rules = null;
 
@@ -703,7 +1158,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SimpleSelector {
         public final Combinator combinator;
         public final String tag;
@@ -780,7 +1234,6 @@ public class CSSParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Source {
         Document,
         /* JADX INFO: Fake field, exist only in values array */
@@ -816,29 +1269,29 @@ public class CSSParser {
     public static List parseMediaList(CSSTextScanner cSSTextScanner) {
         ArrayList arrayList = new ArrayList();
         while (!cSSTextScanner.empty()) {
-            String str = null;
+            String strSubstring = null;
             if (!cSSTextScanner.empty()) {
                 int i = cSSTextScanner.position;
-                String str2 = cSSTextScanner.input;
-                char charAt = str2.charAt(i);
-                if ((charAt < 'A' || charAt > 'Z') && (charAt < 'a' || charAt > 'z')) {
+                String str = cSSTextScanner.input;
+                char cCharAt = str.charAt(i);
+                if ((cCharAt < 'A' || cCharAt > 'Z') && (cCharAt < 'a' || cCharAt > 'z')) {
                     cSSTextScanner.position = i;
                 } else {
-                    int advanceChar = cSSTextScanner.advanceChar();
+                    int iAdvanceChar = cSSTextScanner.advanceChar();
                     while (true) {
-                        if ((advanceChar < 65 || advanceChar > 90) && (advanceChar < 97 || advanceChar > 122)) {
+                        if ((iAdvanceChar < 65 || iAdvanceChar > 90) && (iAdvanceChar < 97 || iAdvanceChar > 122)) {
                             break;
                         }
-                        advanceChar = cSSTextScanner.advanceChar();
+                        iAdvanceChar = cSSTextScanner.advanceChar();
                     }
-                    str = str2.substring(i, cSSTextScanner.position);
+                    strSubstring = str.substring(i, cSSTextScanner.position);
                 }
             }
-            if (str == null) {
+            if (strSubstring == null) {
                 break;
             }
             try {
-                arrayList.add(MediaType.valueOf(str));
+                arrayList.add(MediaType.valueOf(strSubstring));
             } catch (IllegalArgumentException unused) {
             }
             if (!cSSTextScanner.skipCommaWhitespace()) {
@@ -905,34 +1358,43 @@ public class CSSParser {
         return ruleMatch(selector, i - 1, list, i2, (SVG.SvgElementBase) svgElementBase.parent.getChildren().get(childPosition - 1));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:27:0x005c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean selectorMatch(SimpleSelector simpleSelector, SVG.SvgElementBase svgElementBase) {
         List list;
+        List list2;
         String str = simpleSelector.tag;
         if (str == null || str.equals(svgElementBase.getNodeName().toLowerCase(Locale.US))) {
-            List list2 = simpleSelector.attribs;
-            if (list2 != null) {
-                ArrayList arrayList = (ArrayList) list2;
-                int size = arrayList.size();
-                int i = 0;
-                while (i < size) {
-                    Object obj = arrayList.get(i);
-                    i++;
-                    Attrib attrib = (Attrib) obj;
-                    String str2 = attrib.name;
-                    str2.getClass();
-                    String str3 = attrib.value;
-                    if (!str2.equals("id")) {
-                        if (!str2.equals("class") || (list = svgElementBase.classNames) == null || !list.contains(str3)) {
-                            break;
-                        }
-                    } else if (!str3.equals(svgElementBase.id)) {
+            List list3 = simpleSelector.attribs;
+            if (list3 == null) {
+                list = simpleSelector.pseudos;
+                if (list != null) {
+                }
+                return true;
+            }
+            ArrayList arrayList = (ArrayList) list3;
+            int size = arrayList.size();
+            int i = 0;
+            while (i < size) {
+                Object obj = arrayList.get(i);
+                i++;
+                Attrib attrib = (Attrib) obj;
+                String str2 = attrib.name;
+                str2.getClass();
+                String str3 = attrib.value;
+                if (!str2.equals("id")) {
+                    if (!str2.equals("class") || (list2 = svgElementBase.classNames) == null || !list2.contains(str3)) {
                         break;
                     }
+                } else if (!str3.equals(svgElementBase.id)) {
+                    break;
                 }
             }
-            List list3 = simpleSelector.pseudos;
-            if (list3 != null) {
-                ArrayList arrayList2 = (ArrayList) list3;
+            list = simpleSelector.pseudos;
+            if (list != null) {
+                ArrayList arrayList2 = (ArrayList) list;
                 int size2 = arrayList2.size();
                 int i2 = 0;
                 while (i2 < size2) {
@@ -947,23 +1409,23 @@ public class CSSParser {
         return false;
     }
 
-    public final void parseAtRule(Ruleset ruleset, CSSTextScanner cSSTextScanner) {
-        int intValue;
-        int hexChar;
-        String nextIdentifier = cSSTextScanner.nextIdentifier();
+    public final void parseAtRule(Ruleset ruleset, CSSTextScanner cSSTextScanner) throws CSSParseException {
+        int iIntValue;
+        int iHexChar;
+        String strNextIdentifier = cSSTextScanner.nextIdentifier();
         cSSTextScanner.skipWhitespace();
-        if (nextIdentifier == null) {
+        if (strNextIdentifier == null) {
             throw new CSSParseException("Invalid '@' rule");
         }
         int i = 0;
-        if (!this.inMediaRule && nextIdentifier.equals("media")) {
-            List parseMediaList = parseMediaList(cSSTextScanner);
+        if (!this.inMediaRule && strNextIdentifier.equals("media")) {
+            List mediaList = parseMediaList(cSSTextScanner);
             if (!cSSTextScanner.consume('{')) {
                 throw new CSSParseException("Invalid @media rule: missing rule set");
             }
             cSSTextScanner.skipWhitespace();
             MediaType mediaType = this.deviceMediaType;
-            ArrayList arrayList = (ArrayList) parseMediaList;
+            ArrayList arrayList = (ArrayList) mediaList;
             int size = arrayList.size();
             int i2 = 0;
             while (i2 < size) {
@@ -981,69 +1443,71 @@ public class CSSParser {
             if (!cSSTextScanner.empty() && !cSSTextScanner.consume('}')) {
                 throw new CSSParseException("Invalid @media rule: expected '}' at end of rule set");
             }
-        } else if (this.inMediaRule || !nextIdentifier.equals("import")) {
-            Log.w("CSSParser", "Ignoring @" + nextIdentifier + " rule");
-            while (!cSSTextScanner.empty() && ((intValue = cSSTextScanner.nextChar().intValue()) != 59 || i != 0)) {
-                if (intValue == 123) {
+        } else if (this.inMediaRule || !strNextIdentifier.equals("import")) {
+            Log.w("CSSParser", "Ignoring @" + strNextIdentifier + " rule");
+            while (!cSSTextScanner.empty() && ((iIntValue = cSSTextScanner.nextChar().intValue()) != 59 || i != 0)) {
+                if (iIntValue != 123) {
+                    if (iIntValue == 125 && i > 0 && i - 1 == 0) {
+                        break;
+                    }
+                } else {
                     i++;
-                } else if (intValue == 125 && i > 0 && i - 1 == 0) {
-                    break;
                 }
             }
         } else {
-            String str = null;
+            String strNextCSSString = null;
             if (!cSSTextScanner.empty()) {
                 int i3 = cSSTextScanner.position;
                 if (cSSTextScanner.consume("url(")) {
                     cSSTextScanner.skipWhitespace();
-                    String nextCSSString = cSSTextScanner.nextCSSString();
-                    if (nextCSSString == null) {
+                    String strNextCSSString2 = cSSTextScanner.nextCSSString();
+                    if (strNextCSSString2 == null) {
                         StringBuilder sb = new StringBuilder();
                         while (!cSSTextScanner.empty()) {
                             int i4 = cSSTextScanner.position;
-                            String str2 = cSSTextScanner.input;
-                            char charAt = str2.charAt(i4);
-                            if (charAt == '\'' || charAt == '\"' || charAt == '(' || charAt == ')' || SVGParser.TextScanner.isWhitespace(charAt) || Character.isISOControl((int) charAt)) {
+                            String str = cSSTextScanner.input;
+                            char cCharAt = str.charAt(i4);
+                            if (cCharAt == '\'' || cCharAt == '\"' || cCharAt == '(' || cCharAt == ')' || SVGParser.TextScanner.isWhitespace(cCharAt) || Character.isISOControl((int) cCharAt)) {
                                 break;
                             }
                             cSSTextScanner.position++;
-                            if (charAt == '\\') {
+                            if (cCharAt == '\\') {
                                 if (!cSSTextScanner.empty()) {
                                     int i5 = cSSTextScanner.position;
                                     cSSTextScanner.position = i5 + 1;
-                                    charAt = str2.charAt(i5);
-                                    if (charAt != '\n' && charAt != '\r' && charAt != '\f') {
-                                        int hexChar2 = CSSTextScanner.hexChar(charAt);
-                                        if (hexChar2 != -1) {
-                                            for (int i6 = 1; i6 <= 5 && !cSSTextScanner.empty() && (hexChar = CSSTextScanner.hexChar(str2.charAt(cSSTextScanner.position))) != -1; i6++) {
+                                    cCharAt = str.charAt(i5);
+                                    if (cCharAt != '\n' && cCharAt != '\r' && cCharAt != '\f') {
+                                        int iHexChar2 = CSSTextScanner.hexChar(cCharAt);
+                                        if (iHexChar2 != -1) {
+                                            for (int i6 = 1; i6 <= 5 && !cSSTextScanner.empty() && (iHexChar = CSSTextScanner.hexChar(str.charAt(cSSTextScanner.position))) != -1; i6++) {
                                                 cSSTextScanner.position++;
-                                                hexChar2 = (hexChar2 * 16) + hexChar;
+                                                iHexChar2 = (iHexChar2 * 16) + iHexChar;
                                             }
-                                            sb.append((char) hexChar2);
+                                            sb.append((char) iHexChar2);
                                         }
                                     }
                                 }
                             }
-                            sb.append(charAt);
+                            sb.append(cCharAt);
                         }
-                        nextCSSString = sb.length() == 0 ? null : sb.toString();
+                        strNextCSSString2 = sb.length() == 0 ? null : sb.toString();
                     }
-                    if (nextCSSString == null) {
+                    if (strNextCSSString2 == null) {
                         cSSTextScanner.position = i3;
                     } else {
                         cSSTextScanner.skipWhitespace();
                         if (cSSTextScanner.empty() || cSSTextScanner.consume(")")) {
-                            str = nextCSSString;
+                            strNextCSSString = strNextCSSString2;
                         } else {
                             cSSTextScanner.position = i3;
                         }
                     }
                 }
             }
-            if (str == null) {
-                str = cSSTextScanner.nextCSSString();
+            if (strNextCSSString == null) {
+                strNextCSSString = cSSTextScanner.nextCSSString();
             }
-            if (str == null) {
+            if (strNextCSSString == null) {
                 throw new CSSParseException("Invalid @import rule: expected string or url()");
             }
             cSSTextScanner.skipWhitespace();
@@ -1055,11 +1519,11 @@ public class CSSParser {
         cSSTextScanner.skipWhitespace();
     }
 
-    public final boolean parseRule(Ruleset ruleset, CSSTextScanner cSSTextScanner) {
-        List nextSelectorGroup = cSSTextScanner.nextSelectorGroup();
+    public final boolean parseRule(Ruleset ruleset, CSSTextScanner cSSTextScanner) throws CSSParseException {
+        List listNextSelectorGroup = cSSTextScanner.nextSelectorGroup();
         int i = 0;
-        if (nextSelectorGroup != null) {
-            ArrayList arrayList = (ArrayList) nextSelectorGroup;
+        if (listNextSelectorGroup != null) {
+            ArrayList arrayList = (ArrayList) listNextSelectorGroup;
             if (!arrayList.isEmpty()) {
                 if (!cSSTextScanner.consume('{')) {
                     throw new CSSParseException("Malformed rule block: expected '{'");
@@ -1067,31 +1531,31 @@ public class CSSParser {
                 cSSTextScanner.skipWhitespace();
                 SVG.Style style = new SVG.Style();
                 do {
-                    String nextIdentifier = cSSTextScanner.nextIdentifier();
+                    String strNextIdentifier = cSSTextScanner.nextIdentifier();
                     cSSTextScanner.skipWhitespace();
                     if (!cSSTextScanner.consume(':')) {
                         throw new CSSParseException("Expected ':'");
                     }
                     cSSTextScanner.skipWhitespace();
-                    String str = null;
+                    String strSubstring = null;
                     if (!cSSTextScanner.empty()) {
                         int i2 = cSSTextScanner.position;
-                        String str2 = cSSTextScanner.input;
-                        int charAt = str2.charAt(i2);
+                        String str = cSSTextScanner.input;
+                        int iCharAt = str.charAt(i2);
                         int i3 = i2;
-                        while (charAt != -1 && charAt != 59 && charAt != 125 && charAt != 33 && charAt != 10 && charAt != 13) {
-                            if (!SVGParser.TextScanner.isWhitespace(charAt)) {
+                        while (iCharAt != -1 && iCharAt != 59 && iCharAt != 125 && iCharAt != 33 && iCharAt != 10 && iCharAt != 13) {
+                            if (!SVGParser.TextScanner.isWhitespace(iCharAt)) {
                                 i3 = cSSTextScanner.position + 1;
                             }
-                            charAt = cSSTextScanner.advanceChar();
+                            iCharAt = cSSTextScanner.advanceChar();
                         }
                         if (cSSTextScanner.position > i2) {
-                            str = str2.substring(i2, i3);
+                            strSubstring = str.substring(i2, i3);
                         } else {
                             cSSTextScanner.position = i2;
                         }
                     }
-                    if (str == null) {
+                    if (strSubstring == null) {
                         throw new CSSParseException("Expected property value");
                     }
                     cSSTextScanner.skipWhitespace();
@@ -1103,7 +1567,7 @@ public class CSSParser {
                         cSSTextScanner.skipWhitespace();
                     }
                     cSSTextScanner.consume(';');
-                    SVGParser.processStyleProperty(style, nextIdentifier, str);
+                    SVGParser.processStyleProperty(style, strNextIdentifier, strSubstring);
                     cSSTextScanner.skipWhitespace();
                     if (cSSTextScanner.empty()) {
                         break;
@@ -1146,7 +1610,6 @@ public class CSSParser {
         this(MediaType.screen, source);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Selector {
         public List simpleSelectors;
         public int specificity;

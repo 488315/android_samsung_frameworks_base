@@ -5,12 +5,10 @@ import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SpatialAudioEnabledModel {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final List values = Arrays.asList(Disabled.INSTANCE, SpatialAudioEnabled.Companion, HeadTrackingEnabled.INSTANCE);
@@ -19,7 +17,6 @@ public interface SpatialAudioEnabledModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Disabled implements SpatialAudioEnabledModel {
         public static final Disabled INSTANCE = new Disabled();
 
@@ -39,7 +36,6 @@ public interface SpatialAudioEnabledModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeadTrackingEnabled implements SpatialAudioEnabled {
         public static final HeadTrackingEnabled INSTANCE = new HeadTrackingEnabled();
 
@@ -59,11 +55,9 @@ public interface SpatialAudioEnabledModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SpatialAudioEnabled extends SpatialAudioEnabledModel {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion implements SpatialAudioEnabled {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -72,7 +66,6 @@ public interface SpatialAudioEnabledModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unknown implements SpatialAudioEnabled {
         public static final Unknown INSTANCE = new Unknown();
 

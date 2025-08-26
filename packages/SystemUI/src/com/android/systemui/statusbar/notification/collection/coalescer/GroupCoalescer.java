@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GroupCoalescer implements Dumpable, PipelineDumpable {
     public final Map mBatches;
@@ -45,7 +44,7 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
     public final long mMinGroupLingerDuration;
 
     /* renamed from: -$$Nest$mapplyRanking, reason: not valid java name */
-    public static void m2950$$Nest$mapplyRanking(GroupCoalescer groupCoalescer, NotificationListenerService.RankingMap rankingMap) {
+    public static void m2967$$Nest$mapplyRanking(GroupCoalescer groupCoalescer, NotificationListenerService.RankingMap rankingMap) {
         for (CoalescedEvent coalescedEvent : ((ArrayMap) groupCoalescer.mCoalescedEvents).values()) {
             NotificationListenerService.Ranking ranking = new NotificationListenerService.Ranking();
             if (rankingMap.getRanking(coalescedEvent.key, ranking)) {
@@ -56,22 +55,22 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
                 LogLevel logLevel = LogLevel.WARNING;
                 GroupCoalescerLogger$$ExternalSyntheticLambda0 groupCoalescerLogger$$ExternalSyntheticLambda0 = new GroupCoalescerLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer = groupCoalescerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = coalescedEvent.key;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = coalescedEvent.key;
+                logBuffer.commit(logMessageObtain);
             }
         }
     }
 
     /* renamed from: -$$Nest$mmaybeEmitBatch, reason: not valid java name */
-    public static void m2951$$Nest$mmaybeEmitBatch(GroupCoalescer groupCoalescer, StatusBarNotification statusBarNotification) {
+    public static void m2968$$Nest$mmaybeEmitBatch(GroupCoalescer groupCoalescer, StatusBarNotification statusBarNotification) {
         CoalescedEvent coalescedEvent = (CoalescedEvent) ((ArrayMap) groupCoalescer.mCoalescedEvents).get(statusBarNotification.getKey());
         EventBatch eventBatch = (EventBatch) ((ArrayMap) groupCoalescer.mBatches).get(statusBarNotification.getGroupKey());
         int i = UseElapsedRealtimeForCreationTime.$r8$clinit;
-        long uptimeMillis = groupCoalescer.mClock.uptimeMillis();
+        long jUptimeMillis = groupCoalescer.mClock.uptimeMillis();
         GroupCoalescerLogger groupCoalescerLogger = groupCoalescer.mLogger;
         if (coalescedEvent == null) {
-            if (eventBatch == null || uptimeMillis - eventBatch.mCreatedTimestamp < groupCoalescer.mMaxGroupLingerDuration) {
+            if (eventBatch == null || jUptimeMillis - eventBatch.mCreatedTimestamp < groupCoalescer.mMaxGroupLingerDuration) {
                 return;
             }
             String key = statusBarNotification.getKey();
@@ -79,11 +78,11 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
             LogLevel logLevel = LogLevel.INFO;
             GroupCoalescerLogger$$ExternalSyntheticLambda0 groupCoalescerLogger$$ExternalSyntheticLambda0 = new GroupCoalescerLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = groupCoalescerLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = key;
             logMessageImpl.str2 = eventBatch.mGroupKey;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             groupCoalescer.emitBatch(eventBatch);
             return;
         }
@@ -94,11 +93,11 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
         LogLevel logLevel2 = LogLevel.DEBUG;
         GroupCoalescerLogger$$ExternalSyntheticLambda0 groupCoalescerLogger$$ExternalSyntheticLambda02 = new GroupCoalescerLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer2 = groupCoalescerLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("GroupCoalescer", logLevel2, groupCoalescerLogger$$ExternalSyntheticLambda02, null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer2.obtain("GroupCoalescer", logLevel2, groupCoalescerLogger$$ExternalSyntheticLambda02, null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.str1 = key2;
         logMessageImpl2.str2 = eventBatch2.mGroupKey;
-        logBuffer2.commit(obtain2);
+        logBuffer2.commit(logMessageObtain2);
         EventBatch eventBatch3 = coalescedEvent.batch;
         Objects.requireNonNull(eventBatch3);
         groupCoalescer.emitBatch(eventBatch3);
@@ -111,13 +110,13 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         int i = UseElapsedRealtimeForCreationTime.$r8$clinit;
-        long uptimeMillis = this.mClock.uptimeMillis();
+        long jUptimeMillis = this.mClock.uptimeMillis();
         printWriter.println();
         printWriter.println("Coalesced notifications:");
         int i2 = 0;
         for (EventBatch eventBatch : ((ArrayMap) this.mBatches).values()) {
             printWriter.println("   Batch " + eventBatch.mGroupKey + ":");
-            printWriter.println("       Created " + (uptimeMillis - eventBatch.mCreatedTimestamp) + "ms ago");
+            printWriter.println("       Created " + (jUptimeMillis - eventBatch.mCreatedTimestamp) + "ms ago");
             ArrayList arrayList = (ArrayList) eventBatch.mMembers;
             int size = arrayList.size();
             int i3 = 0;
@@ -171,19 +170,19 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
         }
         arrayList.sort(this.mEventComparator);
         int i3 = UseElapsedRealtimeForCreationTime.$r8$clinit;
-        long uptimeMillis = this.mClock.uptimeMillis() - eventBatch.mCreatedTimestamp;
+        long jUptimeMillis = this.mClock.uptimeMillis() - eventBatch.mCreatedTimestamp;
         int size2 = ((ArrayList) eventBatch.mMembers).size();
         GroupCoalescerLogger groupCoalescerLogger = this.mLogger;
         groupCoalescerLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         GroupCoalescerLogger$$ExternalSyntheticLambda0 groupCoalescerLogger$$ExternalSyntheticLambda0 = new GroupCoalescerLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = groupCoalescerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = size2;
-        logMessageImpl.long1 = uptimeMillis;
-        logBuffer.commit(obtain);
+        logMessageImpl.long1 = jUptimeMillis;
+        logBuffer.commit(logMessageObtain);
         NotifCollection.AnonymousClass1 anonymousClass1 = this.mHandler;
         anonymousClass1.getClass();
         int i4 = NotifCollection.$r8$clinit;
@@ -197,11 +196,11 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
         LogLevel logLevel2 = LogLevel.INFO;
         NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(9);
         LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.str1 = NotificationUtils.logKey(groupKey);
         logMessageImpl2.int1 = size3;
-        logBuffer2.commit(obtain2);
+        logBuffer2.commit(logMessageObtain2);
         int size4 = arrayList.size();
         while (i < size4) {
             Object obj2 = arrayList.get(i);
@@ -225,8 +224,8 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap) {
                 final GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2951$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
-                GroupCoalescer.m2950$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2968$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
+                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 if (((ArrayMap) groupCoalescer.mCoalescedEvents).containsKey(statusBarNotification.getKey())) {
                     throw new IllegalStateException("Notification has already been coalesced: " + statusBarNotification.getKey());
                 }
@@ -259,7 +258,7 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
                 eventBatch2.mCancelShortTimeout = groupCoalescer.mMainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coalescer.GroupCoalescer$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        GroupCoalescer groupCoalescer2 = GroupCoalescer.this;
+                        GroupCoalescer groupCoalescer2 = groupCoalescer;
                         EventBatch eventBatch3 = eventBatch2;
                         groupCoalescer2.getClass();
                         eventBatch3.mCancelShortTimeout = null;
@@ -272,24 +271,24 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
                 LogLevel logLevel = LogLevel.INFO;
                 GroupCoalescerLogger$$ExternalSyntheticLambda0 groupCoalescerLogger$$ExternalSyntheticLambda0 = new GroupCoalescerLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer = groupCoalescerLogger2.buffer;
-                LogMessage obtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = key3;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("GroupCoalescer", logLevel, groupCoalescerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = key3;
+                logBuffer.commit(logMessageObtain);
                 groupCoalescer.mHandler.onNotificationRankingUpdate(rankingMap);
             }
 
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationRankingUpdate(NotificationListenerService.RankingMap rankingMap) {
                 GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2950$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 groupCoalescer.mHandler.onNotificationRankingUpdate(rankingMap);
             }
 
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationRemoved(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap, int i) {
                 GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2951$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
-                GroupCoalescer.m2950$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2968$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
+                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 groupCoalescer.mHandler.onNotificationRemoved(statusBarNotification, rankingMap, i);
             }
 

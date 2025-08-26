@@ -5,7 +5,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeViewDifferLogger {
     public final LogBuffer buffer;
@@ -18,13 +17,13 @@ public final class ShadeViewDifferLogger {
         LogLevel logLevel = LogLevel.DEBUG;
         ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda0 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
         logMessageImpl.str2 = str2;
         logMessageImpl.str3 = str3;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

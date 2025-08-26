@@ -62,8 +62,8 @@ public class BundleMerger implements Parcelable {
         this.mDefaultStrategy = 0;
         this.mStrategies = new ArrayMap<>();
         this.mDefaultStrategy = parcel.readInt();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mStrategies.put(parcel.readString(), Integer.valueOf(parcel.readInt()));
         }
     }
@@ -95,7 +95,7 @@ public class BundleMerger implements Parcelable {
         return new BinaryOperator() { // from class: android.os.BundleMerger$$ExternalSyntheticLambda0
             @Override // java.util.function.BiFunction
             public final Object apply(Object obj, Object obj2) {
-                return BundleMerger.this.merge((Bundle) obj, (Bundle) obj2);
+                return this.f$0.merge((Bundle) obj, (Bundle) obj2);
             }
         };
     }
@@ -226,20 +226,20 @@ public class BundleMerger implements Parcelable {
         return Boolean.valueOf(((Boolean) obj).booleanValue() || ((Boolean) obj2).booleanValue());
     }
 
-    private static Object arrayAppend(Object obj, Object obj2) {
+    private static Object arrayAppend(Object obj, Object obj2) throws NegativeArraySizeException {
         if (!obj.getClass().isArray()) {
             throw new IllegalArgumentException("Unable to append " + obj.getClass());
         }
         Class<?> componentType = obj.getClass().getComponentType();
         int length = Array.getLength(obj);
         int length2 = Array.getLength(obj2);
-        Object newInstance = Array.newInstance(componentType, length + length2);
-        System.arraycopy(obj, 0, newInstance, 0, length);
-        System.arraycopy(obj2, 0, newInstance, length, length2);
-        return newInstance;
+        Object objNewInstance = Array.newInstance(componentType, length + length2);
+        System.arraycopy(obj, 0, objNewInstance, 0, length);
+        System.arraycopy(obj2, 0, objNewInstance, length, length2);
+        return objNewInstance;
     }
 
-    private static Object arrayUnion(Object obj, Object obj2) {
+    private static Object arrayUnion(Object obj, Object obj2) throws ArrayIndexOutOfBoundsException, IllegalArgumentException, NegativeArraySizeException {
         if (!obj.getClass().isArray()) {
             throw new IllegalArgumentException("Unable to union " + obj.getClass());
         }
@@ -255,11 +255,11 @@ public class BundleMerger implements Parcelable {
         }
         Class<?> componentType = obj.getClass().getComponentType();
         int size = arraySet.size();
-        Object newInstance = Array.newInstance(componentType, size);
+        Object objNewInstance = Array.newInstance(componentType, size);
         for (int i3 = 0; i3 < size; i3++) {
-            Array.set(newInstance, i3, arraySet.valueAt(i3));
+            Array.set(objNewInstance, i3, arraySet.valueAt(i3));
         }
-        return newInstance;
+        return objNewInstance;
     }
 
     private static Object arrayListAppend(Object obj, Object obj2) {

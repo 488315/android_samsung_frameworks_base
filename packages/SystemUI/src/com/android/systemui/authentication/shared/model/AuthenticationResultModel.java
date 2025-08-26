@@ -2,12 +2,12 @@ package com.android.systemui.authentication.shared.model;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AuthenticationResultModel {
     public final boolean isSuccessful;
     public final int lockoutDurationMs;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public AuthenticationResultModel() {
         this(false, 0 == true ? 1 : 0, 3, null);
     }

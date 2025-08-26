@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BrightnessSliderKt$BrightnessSliderContainer$4$6$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $it;
@@ -41,9 +40,9 @@ final class BrightnessSliderKt$BrightnessSliderContainer$4$6$1$1 extends Suspend
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             BrightnessSliderViewModel brightnessSliderViewModel = this.$viewModel;
-            Drag.Stopped m1071boximpl = Drag.Stopped.m1071boximpl(this.$it);
+            Drag.Stopped stoppedM1073boximpl = Drag.Stopped.m1073boximpl(this.$it);
             this.label = 1;
-            if (brightnessSliderViewModel.onDrag(m1071boximpl, this) == coroutineSingletons) {
+            if (brightnessSliderViewModel.onDrag(stoppedM1073boximpl, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 extends FunctionReferenceImpl implements Function2 {
     public SpatialAudioComponent$Content$buttonComponent$1$1(Object obj) {
@@ -25,7 +24,7 @@ final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 ex
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
         Expandable expandable = (Expandable) obj;
-        int intValue = ((Number) obj2).intValue();
+        int iIntValue = ((Number) obj2).intValue();
         final SpatialAudioPopup spatialAudioPopup = (SpatialAudioPopup) this.receiver;
         UiEventLogger uiEventLogger = spatialAudioPopup.uiEventLogger;
         VolumePanelUiEvent volumePanelUiEvent = VolumePanelUiEvent.VOLUME_PANEL_SPATIAL_AUDIO_POP_UP_SHOWN;
@@ -42,7 +41,7 @@ final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 ex
             i++;
         }
         uiEventLogger.logWithPosition(volumePanelUiEvent, 0, (String) null, i);
-        spatialAudioPopup.volumePanelPopup.show(expandable, intValue | 80, new ComposableLambdaImpl(1544071836, true, new Function3() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$show$2
+        spatialAudioPopup.volumePanelPopup.show(expandable, iIntValue | 80, new ComposableLambdaImpl(1544071836, true, new Function3() { // from class: com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup$show$2
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj3, Object obj4, Object obj5) {
                 Composer composer = (Composer) obj4;
@@ -50,7 +49,7 @@ final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 ex
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup.show.<anonymous> (SpatialAudioPopup.kt:60)");
                 }
-                SpatialAudioPopup.this.Title(0, composer);
+                spatialAudioPopup.Title(0, composer);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -61,11 +60,11 @@ final /* synthetic */ class SpatialAudioComponent$Content$buttonComponent$1$1 ex
             public final Object invoke(Object obj3, Object obj4, Object obj5) {
                 SystemUIDialog systemUIDialog = (SystemUIDialog) obj3;
                 Composer composer = (Composer) obj4;
-                int intValue2 = ((Number) obj5).intValue();
+                int iIntValue2 = ((Number) obj5).intValue();
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.spatialaudio.ui.composable.SpatialAudioPopup.show.<anonymous> (SpatialAudioPopup.kt:60)");
                 }
-                SpatialAudioPopup.this.Content(systemUIDialog, composer, intValue2 & 14);
+                spatialAudioPopup.Content(systemUIDialog, composer, iIntValue2 & 14);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }

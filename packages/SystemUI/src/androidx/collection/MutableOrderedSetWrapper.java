@@ -3,12 +3,44 @@ package androidx.collection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableSet;
+import kotlin.sequences.SequenceBuilderIterator;
+import kotlin.sequences.SequencesKt__SequenceBuilderKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableOrderedSetWrapper extends OrderedSetWrapper implements Set, KMutableSet {
     public final MutableOrderedScatterSet parent;
+
+    /* renamed from: androidx.collection.MutableOrderedSetWrapper$iterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Iterator, KMappedMarker {
+        public int current = -1;
+        public final SequenceBuilderIterator iterator;
+
+        public AnonymousClass1() {
+            this.iterator = SequencesKt__SequenceBuilderKt.iterator(new MutableOrderedSetWrapper$iterator$1$iterator$1(MutableOrderedSetWrapper.this, this, null));
+        }
+
+        @Override // java.util.Iterator
+        public final boolean hasNext() {
+            return this.iterator.hasNext();
+        }
+
+        @Override // java.util.Iterator
+        public final Object next() {
+            return this.iterator.next();
+        }
+
+        @Override // java.util.Iterator
+        public final void remove() {
+            int i = this.current;
+            if (i != -1) {
+                MutableOrderedSetWrapper.this.parent.removeElementAt(i);
+                this.current = -1;
+            }
+        }
+    }
 
     public MutableOrderedSetWrapper(MutableOrderedScatterSet mutableOrderedScatterSet) {
         super(mutableOrderedScatterSet);
@@ -25,17 +57,17 @@ public final class MutableOrderedSetWrapper extends OrderedSetWrapper implements
         MutableOrderedScatterSet mutableOrderedScatterSet = this.parent;
         int i = mutableOrderedScatterSet._size;
         for (Object obj : collection) {
-            int findAbsoluteInsertIndex = mutableOrderedScatterSet.findAbsoluteInsertIndex(obj);
-            mutableOrderedScatterSet.elements[findAbsoluteInsertIndex] = obj;
+            int iFindAbsoluteInsertIndex = mutableOrderedScatterSet.findAbsoluteInsertIndex(obj);
+            mutableOrderedScatterSet.elements[iFindAbsoluteInsertIndex] = obj;
             long[] jArr = mutableOrderedScatterSet.nodes;
             int i2 = mutableOrderedScatterSet.head;
-            jArr[findAbsoluteInsertIndex] = (i2 & 2147483647L) | 4611686016279904256L;
+            jArr[iFindAbsoluteInsertIndex] = (i2 & 2147483647L) | 4611686016279904256L;
             if (i2 != Integer.MAX_VALUE) {
-                jArr[i2] = ((findAbsoluteInsertIndex & 2147483647L) << 31) | (jArr[i2] & (-4611686016279904257L));
+                jArr[i2] = ((iFindAbsoluteInsertIndex & 2147483647L) << 31) | (jArr[i2] & (-4611686016279904257L));
             }
-            mutableOrderedScatterSet.head = findAbsoluteInsertIndex;
+            mutableOrderedScatterSet.head = iFindAbsoluteInsertIndex;
             if (mutableOrderedScatterSet.tail == Integer.MAX_VALUE) {
-                mutableOrderedScatterSet.tail = findAbsoluteInsertIndex;
+                mutableOrderedScatterSet.tail = iFindAbsoluteInsertIndex;
             }
         }
         return i != mutableOrderedScatterSet._size;
@@ -48,7 +80,7 @@ public final class MutableOrderedSetWrapper extends OrderedSetWrapper implements
 
     @Override // androidx.collection.OrderedSetWrapper, java.util.Set, java.util.Collection, java.lang.Iterable
     public final Iterator iterator() {
-        return new MutableOrderedSetWrapper$iterator$1(this);
+        return new AnonymousClass1();
     }
 
     @Override // androidx.collection.OrderedSetWrapper, java.util.Set, java.util.Collection
@@ -56,127 +88,68 @@ public final class MutableOrderedSetWrapper extends OrderedSetWrapper implements
         return this.parent.remove(obj);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x007d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x007d, code lost:
     
         r18 = r4;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0086, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x0086, code lost:
     
         if (((r9 & ((~r9) << 6)) & (-9187201950435737472L)) == 0) goto L22;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0088, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0088, code lost:
     
         r15 = -1;
      */
     @Override // androidx.collection.OrderedSetWrapper, java.util.Set, java.util.Collection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean removeAll(java.util.Collection r19) {
-        /*
-            r18 = this;
-            r0 = r18
-            androidx.collection.MutableOrderedScatterSet r0 = r0.parent
-            r1 = r19
-            java.lang.Iterable r1 = (java.lang.Iterable) r1
-            int r2 = r0._size
-            java.util.Iterator r1 = r1.iterator()
-        Le:
-            boolean r3 = r1.hasNext()
-            r4 = 1
-            r5 = 0
-            if (r3 == 0) goto L97
-            java.lang.Object r3 = r1.next()
-            if (r3 == 0) goto L21
-            int r6 = r3.hashCode()
-            goto L22
-        L21:
-            r6 = r5
-        L22:
-            r7 = -862048943(0xffffffffcc9e2d51, float:-8.293031E7)
-            int r6 = r6 * r7
-            int r7 = r6 << 16
-            r6 = r6 ^ r7
-            r7 = r6 & 127(0x7f, float:1.78E-43)
-            int r8 = r0._capacity
-            int r6 = r6 >>> 7
-            r6 = r6 & r8
-        L30:
-            long[] r9 = r0.metadata
-            int r10 = r6 >> 3
-            r11 = r6 & 7
-            int r11 = r11 << 3
-            r12 = r9[r10]
-            long r12 = r12 >>> r11
-            int r10 = r10 + r4
-            r9 = r9[r10]
-            int r14 = 64 - r11
-            long r9 = r9 << r14
-            long r14 = (long) r11
-            long r14 = -r14
-            r11 = 63
-            long r14 = r14 >> r11
-            long r9 = r9 & r14
-            long r9 = r9 | r12
-            long r11 = (long) r7
-            r13 = 72340172838076673(0x101010101010101, double:7.748604185489348E-304)
-            long r11 = r11 * r13
-            long r11 = r11 ^ r9
-            long r13 = r11 - r13
-            long r11 = ~r11
-            long r11 = r11 & r13
-            r13 = -9187201950435737472(0x8080808080808080, double:-2.937446524422997E-306)
-            long r11 = r11 & r13
-        L5a:
-            r15 = 0
-            int r17 = (r11 > r15 ? 1 : (r11 == r15 ? 0 : -1))
-            if (r17 == 0) goto L7d
-            int r15 = java.lang.Long.numberOfTrailingZeros(r11)
-            int r15 = r15 >> 3
-            int r15 = r15 + r6
-            r15 = r15 & r8
-            r18 = r4
-            java.lang.Object[] r4 = r0.elements
-            r4 = r4[r15]
-            boolean r4 = kotlin.jvm.internal.Intrinsics.areEqual(r4, r3)
-            if (r4 == 0) goto L75
-            goto L89
-        L75:
-            r15 = 1
-            long r15 = r11 - r15
-            long r11 = r11 & r15
-            r4 = r18
-            goto L5a
-        L7d:
-            r18 = r4
-            long r11 = ~r9
-            r4 = 6
-            long r11 = r11 << r4
-            long r9 = r9 & r11
-            long r9 = r9 & r13
-            int r4 = (r9 > r15 ? 1 : (r9 == r15 ? 0 : -1))
-            if (r4 == 0) goto L90
-            r15 = -1
-        L89:
-            if (r15 < 0) goto Le
-            r0.removeElementAt(r15)
-            goto Le
-        L90:
-            int r5 = r5 + 8
-            int r6 = r6 + r5
-            r6 = r6 & r8
-            r4 = r18
-            goto L30
-        L97:
-            r18 = r4
-            int r0 = r0._size
-            if (r2 == r0) goto L9e
-            return r18
-        L9e:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.collection.MutableOrderedSetWrapper.removeAll(java.util.Collection):boolean");
+    public final boolean removeAll(Collection collection) {
+        int i;
+        int iNumberOfTrailingZeros;
+        MutableOrderedScatterSet mutableOrderedScatterSet = this.parent;
+        int i2 = mutableOrderedScatterSet._size;
+        Iterator it = collection.iterator();
+        while (true) {
+            int i3 = 1;
+            int i4 = 0;
+            if (!it.hasNext()) {
+                break;
+            }
+            Object next = it.next();
+            int iHashCode = (next != null ? next.hashCode() : 0) * (-862048943);
+            int i5 = iHashCode ^ (iHashCode << 16);
+            int i6 = i5 & 127;
+            int i7 = mutableOrderedScatterSet._capacity;
+            int i8 = (i5 >>> 7) & i7;
+            while (true) {
+                long[] jArr = mutableOrderedScatterSet.metadata;
+                int i9 = i8 >> 3;
+                int i10 = (i8 & 7) << 3;
+                long j = ((jArr[i9 + i3] << (64 - i10)) & ((-i10) >> 63)) | (jArr[i9] >>> i10);
+                long j2 = (i6 * 72340172838076673L) ^ j;
+                long j3 = (~j2) & (j2 - 72340172838076673L) & (-9187201950435737472L);
+                while (true) {
+                    if (j3 == 0) {
+                        break;
+                    }
+                    iNumberOfTrailingZeros = ((Long.numberOfTrailingZeros(j3) >> 3) + i8) & i7;
+                    int i11 = i3;
+                    if (Intrinsics.areEqual(mutableOrderedScatterSet.elements[iNumberOfTrailingZeros], next)) {
+                        break;
+                    }
+                    j3 &= j3 - 1;
+                    i3 = i11;
+                }
+                i4 += 8;
+                i8 = (i8 + i4) & i7;
+                i3 = i;
+            }
+            if (iNumberOfTrailingZeros >= 0) {
+                mutableOrderedScatterSet.removeElementAt(iNumberOfTrailingZeros);
+            }
+        }
+        return i2 != mutableOrderedScatterSet._size;
     }
 
     @Override // androidx.collection.OrderedSetWrapper, java.util.Set, java.util.Collection

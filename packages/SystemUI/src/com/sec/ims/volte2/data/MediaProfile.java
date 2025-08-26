@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MediaProfile implements Parcelable {
     public static final Parcelable.Creator<MediaProfile> CREATOR = new Parcelable.Creator<MediaProfile>() { // from class: com.sec.ims.volte2.data.MediaProfile.1
@@ -168,22 +167,22 @@ public class MediaProfile implements Parcelable {
         this.mHeight = 0;
         this.mVideoPause = false;
         this.mRttMode = 0;
-        String readString = parcel.readString();
-        if (readString == null) {
+        String string = parcel.readString();
+        if (string == null) {
             this.mAudioCodec = audioCodecType;
-        } else if ("AMR-WB".equals(readString)) {
+        } else if ("AMR-WB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_AMRWB;
-        } else if ("AMR-NB".equals(readString)) {
+        } else if ("AMR-NB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_AMRNB;
-        } else if ("EVS-FB".equals(readString)) {
+        } else if ("EVS-FB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_EVSFB;
-        } else if ("EVS-SWB".equals(readString)) {
+        } else if ("EVS-SWB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_EVSSWB;
-        } else if ("EVS-WB".equals(readString)) {
+        } else if ("EVS-WB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_EVSWB;
-        } else if ("EVS-NB".equals(readString)) {
+        } else if ("EVS-NB".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_EVSNB;
-        } else if ("EVS".equals(readString)) {
+        } else if ("EVS".equals(string)) {
             this.mAudioCodec = VolteConstants.AudioCodecType.AUDIO_CODEC_EVS;
         } else {
             this.mAudioCodec = audioCodecType;

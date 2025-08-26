@@ -77,17 +77,17 @@ public class LoggingContentInterface implements ContentInterface {
                 Cursor cursor = (Cursor) logger.setResult(this.delegate.query(uri, strArr, bundle, cancellationSignal));
                 logger.close();
                 return cursor;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -99,17 +99,17 @@ public class LoggingContentInterface implements ContentInterface {
                 String str = (String) logger.setResult(this.delegate.getType(uri));
                 logger.close();
                 return str;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -121,17 +121,17 @@ public class LoggingContentInterface implements ContentInterface {
                 String[] strArr = (String[]) logger.setResult(this.delegate.getStreamTypes(uri, str));
                 logger.close();
                 return strArr;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -143,17 +143,17 @@ public class LoggingContentInterface implements ContentInterface {
                 Uri uri2 = (Uri) logger.setResult(this.delegate.canonicalize(uri));
                 logger.close();
                 return uri2;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -165,17 +165,17 @@ public class LoggingContentInterface implements ContentInterface {
                 Uri uri2 = (Uri) logger.setResult(this.delegate.uncanonicalize(uri));
                 logger.close();
                 return uri2;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -184,9 +184,9 @@ public class LoggingContentInterface implements ContentInterface {
         Logger logger = new Logger("refresh", uri, bundle, cancellationSignal);
         try {
             try {
-                boolean booleanValue = ((Boolean) logger.setResult(Boolean.valueOf(this.delegate.refresh(uri, bundle, cancellationSignal)))).booleanValue();
+                boolean zBooleanValue = ((Boolean) logger.setResult(Boolean.valueOf(this.delegate.refresh(uri, bundle, cancellationSignal)))).booleanValue();
                 logger.close();
-                return booleanValue;
+                return zBooleanValue;
             } catch (Exception e) {
                 logger.setResult(e);
                 throw e;
@@ -206,20 +206,20 @@ public class LoggingContentInterface implements ContentInterface {
         Logger logger = new Logger("checkUriPermission", uri, Integer.valueOf(i), Integer.valueOf(i2));
         try {
             try {
-                int intValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.checkUriPermission(uri, i, i2)))).intValue();
+                int iIntValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.checkUriPermission(uri, i, i2)))).intValue();
                 logger.close();
-                return intValue;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+                return iIntValue;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -231,17 +231,17 @@ public class LoggingContentInterface implements ContentInterface {
                 Uri uri2 = (Uri) logger.setResult(this.delegate.insert(uri, contentValues, bundle));
                 logger.close();
                 return uri2;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -250,9 +250,9 @@ public class LoggingContentInterface implements ContentInterface {
         Logger logger = new Logger("bulkInsert", uri, contentValuesArr);
         try {
             try {
-                int intValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.bulkInsert(uri, contentValuesArr)))).intValue();
+                int iIntValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.bulkInsert(uri, contentValuesArr)))).intValue();
                 logger.close();
-                return intValue;
+                return iIntValue;
             } catch (Exception e) {
                 logger.setResult(e);
                 throw e;
@@ -272,9 +272,9 @@ public class LoggingContentInterface implements ContentInterface {
         Logger logger = new Logger("delete", uri, bundle);
         try {
             try {
-                int intValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.delete(uri, bundle)))).intValue();
+                int iIntValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.delete(uri, bundle)))).intValue();
                 logger.close();
-                return intValue;
+                return iIntValue;
             } catch (Exception e) {
                 logger.setResult(e);
                 throw e;
@@ -294,9 +294,9 @@ public class LoggingContentInterface implements ContentInterface {
         Logger logger = new Logger("update", uri, contentValues, bundle);
         try {
             try {
-                int intValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.update(uri, contentValues, bundle)))).intValue();
+                int iIntValue = ((Integer) logger.setResult(Integer.valueOf(this.delegate.update(uri, contentValues, bundle)))).intValue();
                 logger.close();
-                return intValue;
+                return iIntValue;
             } catch (Exception e) {
                 logger.setResult(e);
                 throw e;
@@ -319,17 +319,17 @@ public class LoggingContentInterface implements ContentInterface {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) logger.setResult(this.delegate.openFile(uri, str, cancellationSignal));
                 logger.close();
                 return parcelFileDescriptor;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -341,17 +341,17 @@ public class LoggingContentInterface implements ContentInterface {
                 AssetFileDescriptor assetFileDescriptor = (AssetFileDescriptor) logger.setResult(this.delegate.openAssetFile(uri, str, cancellationSignal));
                 logger.close();
                 return assetFileDescriptor;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -363,17 +363,17 @@ public class LoggingContentInterface implements ContentInterface {
                 AssetFileDescriptor assetFileDescriptor = (AssetFileDescriptor) logger.setResult(this.delegate.openTypedAssetFile(uri, str, bundle, cancellationSignal));
                 logger.close();
                 return assetFileDescriptor;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -385,17 +385,17 @@ public class LoggingContentInterface implements ContentInterface {
                 ContentProviderResult[] contentProviderResultArr = (ContentProviderResult[]) logger.setResult(this.delegate.applyBatch(str, arrayList));
                 logger.close();
                 return contentProviderResultArr;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 
@@ -407,17 +407,17 @@ public class LoggingContentInterface implements ContentInterface {
                 Bundle bundle2 = (Bundle) logger.setResult(this.delegate.call(str, str2, str3, bundle));
                 logger.close();
                 return bundle2;
-            } catch (Throwable th) {
-                try {
-                    logger.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            } catch (Exception e) {
+                logger.setResult(e);
+                throw e;
             }
-        } catch (Exception e) {
-            logger.setResult(e);
-            throw e;
+        } catch (Throwable th) {
+            try {
+                logger.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 }

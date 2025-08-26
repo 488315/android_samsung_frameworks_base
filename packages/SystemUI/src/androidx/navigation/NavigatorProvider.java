@@ -7,14 +7,12 @@ import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NavigatorProvider {
     public static final Companion Companion = new Companion(null);
     public static final Map annotationNames = new LinkedHashMap();
     public final Map _navigators = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -22,17 +20,17 @@ public class NavigatorProvider {
 
         public static String getNameForNavigator$navigation_common_release(Class cls) {
             Map map = NavigatorProvider.annotationNames;
-            String str = (String) ((LinkedHashMap) map).get(cls);
-            if (str == null) {
+            String strValue = (String) ((LinkedHashMap) map).get(cls);
+            if (strValue == null) {
                 Navigator.Name name = (Navigator.Name) cls.getAnnotation(Navigator.Name.class);
-                str = name != null ? name.value() : null;
-                if (str == null || str.length() <= 0) {
+                strValue = name != null ? name.value() : null;
+                if (strValue == null || strValue.length() <= 0) {
                     throw new IllegalArgumentException("No @Navigator.Name annotation found for ".concat(cls.getSimpleName()).toString());
                 }
-                map.put(cls, str);
+                map.put(cls, strValue);
             }
-            str.getClass();
-            return str;
+            strValue.getClass();
+            return strValue;
         }
 
         private Companion() {

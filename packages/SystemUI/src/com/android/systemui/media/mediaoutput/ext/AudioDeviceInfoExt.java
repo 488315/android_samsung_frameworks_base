@@ -3,7 +3,6 @@ package com.android.systemui.media.mediaoutput.ext;
 import android.media.AudioDeviceInfo;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioDeviceInfoExt {
     public static final AudioDeviceInfoExt INSTANCE = new AudioDeviceInfoExt();
@@ -48,11 +47,11 @@ public final class AudioDeviceInfoExt {
         int id = audioDeviceInfo.getId();
         int type = audioDeviceInfo.getType();
         CharSequence productName = audioDeviceInfo.getProductName();
-        String maskedLogText$default = StringExtKt.maskedLogText$default(audioDeviceInfo.getAddress());
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(id, type, "Id: ", ", Type: ", ", ProductName: ");
-        m.append((Object) productName);
-        m.append(", Address: ");
-        m.append(maskedLogText$default);
-        return m.toString();
+        String strMaskedLogText$default = StringExtKt.maskedLogText$default(audioDeviceInfo.getAddress());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(id, type, "Id: ", ", Type: ", ", ProductName: ");
+        sbM.append((Object) productName);
+        sbM.append(", Address: ");
+        sbM.append(strMaskedLogText$default);
+        return sbM.toString();
     }
 }

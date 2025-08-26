@@ -30,16 +30,16 @@ public class SurfaceUtils {
 
     public static boolean isSurfaceForPreview(Surface surface) {
         Preconditions.checkNotNull(surface);
-        long nativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
-        boolean z = (1114115 & nativeDetectSurfaceUsageFlags) == 0 && (nativeDetectSurfaceUsageFlags & 2816) != 0;
+        long jNativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
+        boolean z = (1114115 & jNativeDetectSurfaceUsageFlags) == 0 && (jNativeDetectSurfaceUsageFlags & 2816) != 0;
         getSurfaceFormat(surface);
         return z;
     }
 
     public static boolean isSurfaceForHwVideoEncoder(Surface surface) {
         Preconditions.checkNotNull(surface);
-        long nativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
-        boolean z = (1050627 & nativeDetectSurfaceUsageFlags) == 0 && (nativeDetectSurfaceUsageFlags & 65536) != 0;
+        long jNativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
+        boolean z = (1050627 & jNativeDetectSurfaceUsageFlags) == 0 && (jNativeDetectSurfaceUsageFlags & 65536) != 0;
         getSurfaceFormat(surface);
         return z;
     }
@@ -73,38 +73,38 @@ public class SurfaceUtils {
 
     public static int getSurfaceFormat(Surface surface) {
         Preconditions.checkNotNull(surface);
-        int nativeDetectSurfaceType = nativeDetectSurfaceType(surface);
-        if (nativeDetectSurfaceType == BAD_VALUE) {
+        int iNativeDetectSurfaceType = nativeDetectSurfaceType(surface);
+        if (iNativeDetectSurfaceType == BAD_VALUE) {
             throw new IllegalArgumentException("Surface was abandoned");
         }
-        if (nativeDetectSurfaceType < 1 || nativeDetectSurfaceType > 5) {
-            return nativeDetectSurfaceType;
+        if (iNativeDetectSurfaceType < 1 || iNativeDetectSurfaceType > 5) {
+            return iNativeDetectSurfaceType;
         }
         return 34;
     }
 
     public static int detectSurfaceFormat(Surface surface) {
         Preconditions.checkNotNull(surface);
-        int nativeDetectSurfaceType = nativeDetectSurfaceType(surface);
-        if (nativeDetectSurfaceType != BAD_VALUE) {
-            return nativeDetectSurfaceType;
+        int iNativeDetectSurfaceType = nativeDetectSurfaceType(surface);
+        if (iNativeDetectSurfaceType != BAD_VALUE) {
+            return iNativeDetectSurfaceType;
         }
         throw new IllegalArgumentException("Surface was abandoned");
     }
 
     public static int getSurfaceDataspace(Surface surface) {
         Preconditions.checkNotNull(surface);
-        int nativeDetectSurfaceDataspace = nativeDetectSurfaceDataspace(surface);
-        if (nativeDetectSurfaceDataspace != BAD_VALUE) {
-            return nativeDetectSurfaceDataspace;
+        int iNativeDetectSurfaceDataspace = nativeDetectSurfaceDataspace(surface);
+        if (iNativeDetectSurfaceDataspace != BAD_VALUE) {
+            return iNativeDetectSurfaceDataspace;
         }
         throw new IllegalArgumentException("Surface was abandoned");
     }
 
     public static boolean isFlexibleConsumer(Surface surface) {
         Preconditions.checkNotNull(surface);
-        long nativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
-        return (1114112 & nativeDetectSurfaceUsageFlags) == 0 && (nativeDetectSurfaceUsageFlags & 2307) != 0;
+        long jNativeDetectSurfaceUsageFlags = nativeDetectSurfaceUsageFlags(surface);
+        return (1114112 & jNativeDetectSurfaceUsageFlags) == 0 && (jNativeDetectSurfaceUsageFlags & 2307) != 0;
     }
 
     private static void checkHighSpeedSurfaceFormat(Surface surface) {
@@ -116,24 +116,24 @@ public class SurfaceUtils {
     }
 
     public static void checkConstrainedHighSpeedSurfaces(Collection<Surface> collection, Range<Integer> range, StreamConfigurationMap streamConfigurationMap) {
-        List asList;
+        List listAsList;
         if (collection == null || collection.size() == 0 || collection.size() > 2) {
             throw new IllegalArgumentException("Output target surface list must not be null and the size must be 1 or 2");
         }
         if (range == null) {
-            asList = Arrays.asList(streamConfigurationMap.getHighSpeedVideoSizes());
+            listAsList = Arrays.asList(streamConfigurationMap.getHighSpeedVideoSizes());
         } else {
             Range<Integer>[] highSpeedVideoFpsRanges = streamConfigurationMap.getHighSpeedVideoFpsRanges();
             if (!Arrays.asList(highSpeedVideoFpsRanges).contains(range)) {
                 throw new IllegalArgumentException("Fps range " + range.toString() + " in the request is not a supported high speed fps range " + Arrays.toString(highSpeedVideoFpsRanges));
             }
-            asList = Arrays.asList(streamConfigurationMap.getHighSpeedVideoSizesFor(range));
+            listAsList = Arrays.asList(streamConfigurationMap.getHighSpeedVideoSizesFor(range));
         }
         for (Surface surface : collection) {
             checkHighSpeedSurfaceFormat(surface);
             Size surfaceSize = getSurfaceSize(surface);
-            if (!asList.contains(surfaceSize)) {
-                throw new IllegalArgumentException("Surface size " + surfaceSize.toString() + " is not part of the high speed supported size list " + Arrays.toString(asList.toArray()));
+            if (!listAsList.contains(surfaceSize)) {
+                throw new IllegalArgumentException("Surface size " + surfaceSize.toString() + " is not part of the high speed supported size list " + Arrays.toString(listAsList.toArray()));
             }
             if (!isSurfaceForPreview(surface) && !isSurfaceForHwVideoEncoder(surface)) {
                 throw new IllegalArgumentException("This output surface is neither preview nor hardware video encoding surface");

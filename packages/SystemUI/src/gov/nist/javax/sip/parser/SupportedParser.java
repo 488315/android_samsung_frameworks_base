@@ -3,8 +3,8 @@ package gov.nist.javax.sip.parser;
 import gov.nist.javax.sip.header.SIPHeader;
 import gov.nist.javax.sip.header.Supported;
 import gov.nist.javax.sip.header.SupportedList;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SupportedParser extends HeaderParser {
     public SupportedParser(String str) {
@@ -12,7 +12,7 @@ public class SupportedParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         SupportedList supportedList = new SupportedList();
         headerName(2068);
         while (this.lexer.lookAhead(0) != '\n') {

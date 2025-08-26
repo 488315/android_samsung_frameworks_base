@@ -6,7 +6,6 @@ import com.android.systemui.haptics.slider.SliderHapticFeedbackFilter;
 import kotlin.ranges.ClosedFloatRange;
 import kotlin.ranges.ClosedFloatingPointRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeHapticsConfigsProvider {
     public static final VolumeHapticsConfigsProvider INSTANCE = new VolumeHapticsConfigsProvider();

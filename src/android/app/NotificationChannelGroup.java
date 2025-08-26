@@ -217,7 +217,7 @@ public final class NotificationChannelGroup implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NotificationChannelGroup m473clone() {
+    public NotificationChannelGroup m477clone() {
         NotificationChannelGroup notificationChannelGroup = new NotificationChannelGroup(getId(), getName());
         notificationChannelGroup.setDescription(getDescription());
         notificationChannelGroup.setBlocked(isBlocked());
@@ -272,7 +272,7 @@ public final class NotificationChannelGroup implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mId);
         protoOutputStream.write(1138166333442L, this.mName.toString());
         protoOutputStream.write(1138166333443L, this.mDescription);
@@ -281,6 +281,6 @@ public final class NotificationChannelGroup implements Parcelable {
         while (it.hasNext()) {
             it.next().dumpDebug(protoOutputStream, 2246267895813L);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

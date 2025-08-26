@@ -1,18 +1,26 @@
 package com.android.systemui.media.mediaoutput.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
+import android.provider.Settings;
 import android.util.Log;
 import androidx.datastore.core.DataStore;
 import androidx.datastore.preferences.core.MutablePreferences;
+import androidx.datastore.preferences.core.Preferences;
 import androidx.datastore.preferences.core.PreferencesKt;
 import androidx.lifecycle.ViewModel;
+import com.android.systemui.media.mediaoutput.analytics.MoSaLogging;
+import com.android.systemui.media.mediaoutput.analytics.SaCustom;
+import com.android.systemui.media.mediaoutput.analytics.SaEvent;
 import com.android.systemui.media.mediaoutput.common.DataStoreExt;
-import com.android.systemui.media.mediaoutput.common.DataStoreExt$special$$inlined$map$1;
 import com.android.systemui.media.mediaoutput.common.DataStoreExt$special$$inlined$map$2;
 import com.android.systemui.media.mediaoutput.common.DataStoreExt$special$$inlined$map$3;
 import com.android.systemui.media.mediaoutput.common.DataStoreExt$special$$inlined$map$4;
+import com.android.systemui.media.mediaoutput.common.DataStoreExt$special$$inlined$map$5;
+import com.android.systemui.media.mediaoutput.common.PreferenceKeys;
+import com.android.systemui.media.mediaoutput.entity.Configuration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +30,7 @@ import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
@@ -31,7 +40,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SettingViewModel extends ViewModel {
     public final Context context;
@@ -39,10 +47,10 @@ public final class SettingViewModel extends ViewModel {
     public final DataStoreExt$special$$inlined$map$2 isCastingPriority;
     public final DataStoreExt$special$$inlined$map$4 isShowMusicShareEnabled;
     public final DataStoreExt$special$$inlined$map$3 isSpotifyCastingPriority;
+    public final SettingViewModel$special$$inlined$map$1 isSupportSpotifyMediaProvider;
     public final Lazy pref$delegate;
     public final Lazy router2Manager$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -71,144 +79,76 @@ public final class SettingViewModel extends ViewModel {
                 final SettingViewModel settingViewModel = SettingViewModel.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel.1.1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$1$1$1, reason: invalid class name and collision with other inner class name */
-                    final class C02341 extends SuspendLambda implements Function2 {
+                    final class C03711 extends SuspendLambda implements Function2 {
                         /* synthetic */ Object L$0;
                         int label;
                         final /* synthetic */ SettingViewModel this$0;
 
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                        public C02341(SettingViewModel settingViewModel, Continuation continuation) {
+                        public C03711(SettingViewModel settingViewModel, Continuation continuation) {
                             super(2, continuation);
                             this.this$0 = settingViewModel;
                         }
 
                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                         public final Continuation create(Object obj, Continuation continuation) {
-                            C02341 c02341 = new C02341(this.this$0, continuation);
-                            c02341.L$0 = obj;
-                            return c02341;
+                            C03711 c03711 = new C03711(this.this$0, continuation);
+                            c03711.L$0 = obj;
+                            return c03711;
                         }
 
                         @Override // kotlin.jvm.functions.Function2
                         public final Object invoke(Object obj, Object obj2) {
-                            return ((C02341) create((MutablePreferences) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                            return ((C03711) create((MutablePreferences) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                         }
 
-                        /* JADX WARN: Code restructure failed: missing block: B:17:0x0073, code lost:
-                        
-                            if (r3.intValue() == 1) goto L25;
-                         */
-                        /* JADX WARN: Code restructure failed: missing block: B:18:0x007b, code lost:
-                        
-                            r1 = false;
-                         */
-                        /* JADX WARN: Code restructure failed: missing block: B:19:0x007c, code lost:
-                        
-                            r7.setUnchecked$datastore_preferences_core(r0, java.lang.Boolean.valueOf(r1));
-                         */
-                        /* JADX WARN: Code restructure failed: missing block: B:20:0x0085, code lost:
-                        
-                            return kotlin.Unit.INSTANCE;
-                         */
-                        /* JADX WARN: Code restructure failed: missing block: B:22:0x0078, code lost:
-                        
-                            if ((r6 & 4) != 4) goto L25;
-                         */
+                        /* JADX WARN: Removed duplicated region for block: B:24:0x007b  */
                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-                            /*
-                                r6 = this;
-                                r0 = 2
-                                r1 = 1
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r2 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r6.label
-                                if (r2 != 0) goto L86
-                                kotlin.ResultKt.throwOnFailure(r7)
-                                java.lang.Object r7 = r6.L$0
-                                androidx.datastore.preferences.core.MutablePreferences r7 = (androidx.datastore.preferences.core.MutablePreferences) r7
-                                com.android.systemui.media.mediaoutput.common.PreferenceKeys r2 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.INSTANCE
-                                r2.getClass()
-                                androidx.datastore.preferences.core.Preferences$Key r2 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.MIRRORING_PRIORITY
-                                java.util.Map r3 = r7.preferencesMap
-                                boolean r3 = r3.containsKey(r2)
-                                if (r3 == 0) goto L21
-                                kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                                return r6
-                            L21:
-                                com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel r6 = r6.this$0
-                                android.content.Context r6 = r6.context
-                                android.content.ContentResolver r6 = r6.getContentResolver()
-                                java.lang.String r3 = "wifispeaker_chromecast_mode_enabled"
-                                r4 = 0
-                                int r6 = android.provider.Settings.System.getInt(r6, r3, r4)
-                                androidx.datastore.preferences.core.Preferences$Key r3 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.CASTING_PRIORITY
-                                r7.checkNotFrozen$datastore_preferences_core()
-                                java.util.Map r5 = r7.preferencesMap
-                                r5.remove(r3)
-                                r3 = r6 & 1
-                                if (r3 == r1) goto L41
-                                r3 = r1
-                                goto L42
-                            L41:
-                                r3 = r4
-                            L42:
-                                java.lang.Boolean r3 = java.lang.Boolean.valueOf(r3)
-                                r7.setUnchecked$datastore_preferences_core(r2, r3)
-                                androidx.datastore.preferences.core.Preferences$Key r2 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.SPOTIFY_CASTING_PRIORITY
-                                r3 = r6 & 2
-                                if (r3 == r0) goto L51
-                                r0 = r1
-                                goto L52
-                            L51:
-                                r0 = r4
-                            L52:
-                                java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-                                r7.setUnchecked$datastore_preferences_core(r2, r0)
-                                androidx.datastore.preferences.core.Preferences$Key r0 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.SHOW_MUSIC_SHARE
-                                androidx.datastore.preferences.core.Preferences$Key r2 = com.android.systemui.media.mediaoutput.common.PreferenceKeys.SHOW_MUSIC_SHARE_ENABLED
-                                java.lang.Object r3 = r7.get(r2)
-                                java.lang.Integer r3 = (java.lang.Integer) r3
-                                if (r3 == 0) goto L76
-                                r7.checkNotFrozen$datastore_preferences_core()
-                                java.util.Map r6 = r7.preferencesMap
-                                r6.remove(r2)
-                                kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                                int r6 = r3.intValue()
-                                if (r6 != r1) goto L7b
-                                goto L7c
-                            L76:
-                                r2 = 4
-                                r6 = r6 & r2
-                                if (r6 == r2) goto L7b
-                                goto L7c
-                            L7b:
-                                r1 = r4
-                            L7c:
-                                java.lang.Boolean r6 = java.lang.Boolean.valueOf(r1)
-                                r7.setUnchecked$datastore_preferences_core(r0, r6)
-                                kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                                return r6
-                            L86:
-                                java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                                java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                                r6.<init>(r7)
-                                throw r6
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel.AnonymousClass1.C02331.C02341.invokeSuspend(java.lang.Object):java.lang.Object");
+                        public final Object invokeSuspend(Object obj) {
+                            boolean z = true;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            if (this.label != 0) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj);
+                            MutablePreferences mutablePreferences = (MutablePreferences) this.L$0;
+                            PreferenceKeys.INSTANCE.getClass();
+                            Preferences.Key key = PreferenceKeys.MIRRORING_PRIORITY;
+                            if (mutablePreferences.preferencesMap.containsKey(key)) {
+                                return Unit.INSTANCE;
+                            }
+                            int i = Settings.System.getInt(this.this$0.context.getContentResolver(), "wifispeaker_chromecast_mode_enabled", 0);
+                            Preferences.Key key2 = PreferenceKeys.CASTING_PRIORITY;
+                            mutablePreferences.checkNotFrozen$datastore_preferences_core();
+                            mutablePreferences.preferencesMap.remove(key2);
+                            mutablePreferences.setUnchecked$datastore_preferences_core(key, Boolean.valueOf((i & 1) != 1));
+                            mutablePreferences.setUnchecked$datastore_preferences_core(PreferenceKeys.SPOTIFY_CASTING_PRIORITY, Boolean.valueOf((i & 2) != 2));
+                            Preferences.Key key3 = PreferenceKeys.SHOW_MUSIC_SHARE;
+                            Preferences.Key key4 = PreferenceKeys.SHOW_MUSIC_SHARE_ENABLED;
+                            Integer num = (Integer) mutablePreferences.get(key4);
+                            if (num != null) {
+                                mutablePreferences.checkNotFrozen$datastore_preferences_core();
+                                mutablePreferences.preferencesMap.remove(key4);
+                                Unit unit = Unit.INSTANCE;
+                                if (num.intValue() != 1) {
+                                    z = false;
+                                }
+                            } else if ((i & 4) == 4) {
+                            }
+                            mutablePreferences.setUnchecked$datastore_preferences_core(key3, Boolean.valueOf(z));
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        SettingViewModel settingViewModel2 = SettingViewModel.this;
-                        Object edit = PreferencesKt.edit(settingViewModel2.dataStore, new C02341(settingViewModel2, null), continuation);
-                        return edit == CoroutineSingletons.COROUTINE_SUSPENDED ? edit : Unit.INSTANCE;
+                        SettingViewModel settingViewModel2 = settingViewModel;
+                        Object objEdit = PreferencesKt.edit(settingViewModel2.dataStore, new C03711(settingViewModel2, null), continuation);
+                        return objEdit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEdit : Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
@@ -225,7 +165,6 @@ public final class SettingViewModel extends ViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -235,17 +174,374 @@ public final class SettingViewModel extends ViewModel {
         }
     }
 
+    /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setCastingPriority$1, reason: invalid class name and case insensitive filesystem */
+    final class C09631 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $value;
+        int label;
+
+        /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setCastingPriority$1$1, reason: invalid class name and collision with other inner class name */
+        final class C03721 extends SuspendLambda implements Function2 {
+            final /* synthetic */ boolean $value;
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ SettingViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C03721(boolean z, SettingViewModel settingViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.$value = z;
+                this.this$0 = settingViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C03721 c03721 = new C03721(this.$value, this.this$0, continuation);
+                c03721.L$0 = obj;
+                return c03721;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C03721) create((MutablePreferences) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                MutablePreferences mutablePreferences = (MutablePreferences) this.L$0;
+                PreferenceKeys.INSTANCE.getClass();
+                mutablePreferences.setUnchecked$datastore_preferences_core(PreferenceKeys.MIRRORING_PRIORITY, Boolean.valueOf(!this.$value));
+                SettingViewModel.access$updateSystemSettings(this.this$0, 17, !this.$value ? 16 : 17);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C09631(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$value = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SettingViewModel.this.new C09631(this.$value, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09631) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SettingViewModel settingViewModel = SettingViewModel.this;
+                DataStore dataStore = settingViewModel.dataStore;
+                C03721 c03721 = new C03721(this.$value, settingViewModel, null);
+                this.label = 1;
+                if (PreferencesKt.edit(dataStore, c03721, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            ((SharedPreferences) SettingViewModel.this.pref$delegate.getValue()).edit().putString(SaEvent.WifiSpeakerPlaybackPreference.INSTANCE.id, this.$value ? "Casting" : "Mirroring").apply();
+            List remoteSessions = ((MediaRouter2Manager) SettingViewModel.this.router2Manager$delegate.getValue()).getRemoteSessions();
+            remoteSessions.getClass();
+            List list = remoteSessions.isEmpty() ? null : remoteSessions;
+            if (list != null) {
+                SettingViewModel.access$releaseSession(SettingViewModel.this, list, this.$value);
+            }
+            MoSaLogging.send$default(MoSaLogging.INSTANCE, this.$value ? SaEvent.Casting.INSTANCE : SaEvent.Mirroring.INSTANCE);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setShowMusicShareEnabled$1, reason: invalid class name and case insensitive filesystem */
+    final class C09641 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $value;
+        int label;
+
+        /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setShowMusicShareEnabled$1$1, reason: invalid class name and collision with other inner class name */
+        final class C03731 extends SuspendLambda implements Function2 {
+            final /* synthetic */ boolean $value;
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ SettingViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C03731(boolean z, SettingViewModel settingViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.$value = z;
+                this.this$0 = settingViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C03731 c03731 = new C03731(this.$value, this.this$0, continuation);
+                c03731.L$0 = obj;
+                return c03731;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C03731) create((MutablePreferences) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                MutablePreferences mutablePreferences = (MutablePreferences) this.L$0;
+                PreferenceKeys.INSTANCE.getClass();
+                mutablePreferences.setUnchecked$datastore_preferences_core(PreferenceKeys.SHOW_MUSIC_SHARE, Boolean.valueOf(this.$value));
+                SettingViewModel.access$updateSystemSettings(this.this$0, 68, this.$value ? 64 : 68);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C09641(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$value = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SettingViewModel.this.new C09641(this.$value, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09641) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SettingViewModel settingViewModel = SettingViewModel.this;
+                DataStore dataStore = settingViewModel.dataStore;
+                C03731 c03731 = new C03731(this.$value, settingViewModel, null);
+                this.label = 1;
+                if (PreferencesKt.edit(dataStore, c03731, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            SharedPreferences.Editor editorEdit = ((SharedPreferences) SettingViewModel.this.pref$delegate.getValue()).edit();
+            SaEvent.ShowMusicShare showMusicShare = SaEvent.ShowMusicShare.INSTANCE;
+            editorEdit.putBoolean(showMusicShare.id, this.$value).apply();
+            MoSaLogging moSaLogging = MoSaLogging.INSTANCE;
+            SaCustom[] saCustomArr = {new SaCustom.Value(this.$value ? "1" : "0")};
+            moSaLogging.getClass();
+            MoSaLogging.send(showMusicShare, saCustomArr);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setSpotifyCastingPriority$1, reason: invalid class name and case insensitive filesystem */
+    final class C09651 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $value;
+        int label;
+
+        /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$setSpotifyCastingPriority$1$1, reason: invalid class name and collision with other inner class name */
+        final class C03741 extends SuspendLambda implements Function2 {
+            final /* synthetic */ boolean $value;
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ SettingViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C03741(boolean z, SettingViewModel settingViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.$value = z;
+                this.this$0 = settingViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C03741 c03741 = new C03741(this.$value, this.this$0, continuation);
+                c03741.L$0 = obj;
+                return c03741;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C03741) create((MutablePreferences) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                MutablePreferences mutablePreferences = (MutablePreferences) this.L$0;
+                PreferenceKeys.INSTANCE.getClass();
+                mutablePreferences.setUnchecked$datastore_preferences_core(PreferenceKeys.SPOTIFY_CASTING_PRIORITY, Boolean.valueOf(this.$value));
+                SettingViewModel.access$updateSystemSettings(this.this$0, 34, this.$value ? 32 : 34);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C09651(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$value = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SettingViewModel.this.new C09651(this.$value, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09651) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SettingViewModel settingViewModel = SettingViewModel.this;
+                DataStore dataStore = settingViewModel.dataStore;
+                C03741 c03741 = new C03741(this.$value, settingViewModel, null);
+                this.label = 1;
+                if (PreferencesKt.edit(dataStore, c03741, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            ((SharedPreferences) SettingViewModel.this.pref$delegate.getValue()).edit().putString(SaEvent.SpotifyPlaybackPreference.INSTANCE.id, this.$value ? "Casting" : "Mirroring").apply();
+            Lazy lazy = LazyKt__LazyJVMKt.lazy(new SettingViewModel$$ExternalSyntheticLambda0(SettingViewModel.this, 2));
+            List remoteSessions = ((MediaRouter2Manager) SettingViewModel.this.router2Manager$delegate.getValue()).getRemoteSessions();
+            boolean z = this.$value;
+            ArrayList arrayList = new ArrayList();
+            for (Object obj2 : remoteSessions) {
+                RoutingSessionInfo routingSessionInfo = (RoutingSessionInfo) obj2;
+                if (z ? Intrinsics.areEqual(routingSessionInfo.getClientPackageName(), "com.samsung.android.audiomirroring") && ((String) lazy.getValue()).startsWith("com.spotify.music") : routingSessionInfo.getClientPackageName().startsWith("com.spotify.music")) {
+                    arrayList.add(obj2);
+                }
+            }
+            ArrayList arrayList2 = arrayList.isEmpty() ? null : arrayList;
+            if (arrayList2 != null) {
+                SettingViewModel.access$releaseSession(SettingViewModel.this, arrayList2, this.$value);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
 
+    /* JADX WARN: Type inference failed for: r2v6, types: [com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$special$$inlined$map$1] */
     public SettingViewModel(Context context, DataStore dataStore) {
         this.context = context;
         this.dataStore = dataStore;
         DataStoreExt.INSTANCE.getClass();
-        this.isCastingPriority = new DataStoreExt$special$$inlined$map$2(new DataStoreExt$special$$inlined$map$1(dataStore.getData()));
-        this.isSpotifyCastingPriority = new DataStoreExt$special$$inlined$map$3(dataStore.getData());
+        this.isCastingPriority = DataStoreExt.isCastingPriority(dataStore);
+        this.isSpotifyCastingPriority = new DataStoreExt$special$$inlined$map$3(dataStore.getData(), dataStore);
         this.isShowMusicShareEnabled = new DataStoreExt$special$$inlined$map$4(dataStore.getData());
+        final DataStoreExt$special$$inlined$map$5 dataStoreExt$special$$inlined$map$5 = new DataStoreExt$special$$inlined$map$5(dataStore.getData());
+        this.isSupportSpotifyMediaProvider = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$special$$inlined$map$1
+
+            /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$special$$inlined$map$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SettingViewModel$special$$inlined$map$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    Object L$0;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector) {
+                    this.$this_unsafeFlow = flowCollector;
+                }
+
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((Configuration) obj).getSupportSpotifyMediaProvider());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = dataStoreExt$special$$inlined$map$5.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        };
         this.router2Manager$delegate = LazyKt__LazyJVMKt.lazy(new SettingViewModel$$ExternalSyntheticLambda0(this, 0));
         this.pref$delegate = LazyKt__LazyJVMKt.lazy(new SettingViewModel$$ExternalSyntheticLambda0(this, 1));
         Log.d("SettingViewModel", "init()");
@@ -259,18 +555,18 @@ public final class SettingViewModel extends ViewModel {
         Iterator it = list.iterator();
         while (true) {
             i = 0;
-            boolean z2 = false;
+            boolean zAreEqual = false;
             if (!it.hasNext()) {
                 break;
             }
             Object next = it.next();
             RoutingSessionInfo routingSessionInfo = (RoutingSessionInfo) next;
             if (z) {
-                z2 = Intrinsics.areEqual(routingSessionInfo.getClientPackageName(), "com.samsung.android.audiomirroring");
+                zAreEqual = Intrinsics.areEqual(routingSessionInfo.getClientPackageName(), "com.samsung.android.audiomirroring");
             } else if (!Intrinsics.areEqual(routingSessionInfo.getClientPackageName(), "com.samsung.android.audiomirroring")) {
-                z2 = true;
+                zAreEqual = true;
             }
-            if (z2) {
+            if (zAreEqual) {
                 arrayList.add(next);
             }
         }
@@ -282,10 +578,9 @@ public final class SettingViewModel extends ViewModel {
         }
     }
 
-    public static final Object access$updateSystemSettings(SettingViewModel settingViewModel, SuspendLambda suspendLambda) {
-        settingViewModel.getClass();
-        Object edit = PreferencesKt.edit(settingViewModel.dataStore, new SettingViewModel$updateSystemSettings$2(settingViewModel, null), suspendLambda);
-        return edit == CoroutineSingletons.COROUTINE_SUSPENDED ? edit : Unit.INSTANCE;
+    public static final void access$updateSystemSettings(SettingViewModel settingViewModel, int i, int i2) {
+        int i3 = Settings.System.getInt(settingViewModel.context.getContentResolver(), "wifispeaker_chromecast_mode_enabled", 0);
+        Settings.System.putInt(settingViewModel.context.getContentResolver(), "wifispeaker_chromecast_mode_enabled", (i3 - (i & i3)) + i2);
     }
 
     @Override // androidx.lifecycle.ViewModel
@@ -295,16 +590,16 @@ public final class SettingViewModel extends ViewModel {
 
     public final void setCastingPriority(boolean z) {
         Log.d("SettingViewModel", "setCastingPriority() - " + z);
-        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new SettingViewModel$setCastingPriority$1(this, z, null), 3);
+        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new C09631(z, null), 3);
     }
 
     public final void setShowMusicShareEnabled(boolean z) {
         Log.d("SettingViewModel", "setShowMusicShareEnabled() - " + z);
-        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new SettingViewModel$setShowMusicShareEnabled$1(this, z, null), 3);
+        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new C09641(z, null), 3);
     }
 
     public final void setSpotifyCastingPriority(boolean z) {
         Log.d("SettingViewModel", "setSpotifyCastingPriority() - " + z);
-        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new SettingViewModel$setSpotifyCastingPriority$1(this, z, null), 3);
+        BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(this), null, null, new C09651(z, null), 3);
     }
 }

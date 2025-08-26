@@ -1,7 +1,7 @@
 package com.android.internal.protolog;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public final /* synthetic */ class PerfettoProtoLogImpl$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ PerfettoProtoLogImpl f$0;
 

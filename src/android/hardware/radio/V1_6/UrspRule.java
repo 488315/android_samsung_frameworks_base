@@ -37,13 +37,13 @@ public final class UrspRule {
 
     public static final ArrayList<UrspRule> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<UrspRule> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             UrspRule urspRule = new UrspRule();
-            urspRule.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            urspRule.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(urspRule);
         }
         return arrayList;
@@ -52,19 +52,19 @@ public final class UrspRule {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.precedence = hwBlob.getInt8(j);
         int int32 = hwBlob.getInt32(16 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, hwBlob.handle(), j + 8, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, hwBlob.handle(), j + 8, true);
         this.trafficDescriptors.clear();
         for (int i = 0; i < int32; i++) {
             TrafficDescriptor trafficDescriptor = new TrafficDescriptor();
-            trafficDescriptor.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            trafficDescriptor.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             this.trafficDescriptors.add(trafficDescriptor);
         }
         int int322 = hwBlob.getInt32(j + 32);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 48, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 48, hwBlob.handle(), j + 24, true);
         this.routeSelectionDescriptor.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             RouteSelectionDescriptor routeSelectionDescriptor = new RouteSelectionDescriptor();
-            routeSelectionDescriptor.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 48);
+            routeSelectionDescriptor.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 48);
             this.routeSelectionDescriptor.add(routeSelectionDescriptor);
         }
     }

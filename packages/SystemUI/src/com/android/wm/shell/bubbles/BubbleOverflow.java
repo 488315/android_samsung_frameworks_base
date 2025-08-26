@@ -14,7 +14,6 @@ import com.android.wm.shell.bubbles.BadgedImageView;
 import com.android.wm.shell.bubbles.bar.BubbleBarExpandedView;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleOverflow implements BubbleViewProvider {
     public Bitmap bitmap;
@@ -28,7 +27,6 @@ public final class BubbleOverflow implements BubbleViewProvider {
     public final BubblePositioner positioner;
     public boolean showDot;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -141,7 +139,7 @@ public final class BubbleOverflow implements BubbleViewProvider {
         BubbleIconFactory bubbleIconFactory = new BubbleIconFactory(this.context);
         BadgedImageView badgedImageView = this.overflowBtn;
         this.bitmap = bubbleIconFactory.getCircledBubble(badgedImageView != null ? badgedImageView.mBubbleIcon.getDrawable() : null, true);
-        this.dotPath = PathParser.createPathFromPathData(resources.getString(android.R.string.eventTypeAnniversary));
+        this.dotPath = PathParser.createPathFromPathData(resources.getString(android.R.string.eventTypeCustom));
         float f = new float[1][0];
         Matrix matrix = new Matrix();
         matrix.setScale(f, f, 50.0f, 50.0f);

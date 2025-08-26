@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceStateInteractor {
     public final DeviceStateInteractor$componentCallbacks$1 componentCallbacks;
@@ -44,7 +43,6 @@ public final class DeviceStateInteractor {
     private final SettingsHelper settingsHelper;
     public final Context windowContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CoverTask extends TaskStackListener {
         public final Consumer callback;
 
@@ -60,23 +58,23 @@ public final class DeviceStateInteractor {
             deviceStateInteractor.handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.interactor.DeviceStateInteractor$CoverTask$onTaskFocusChanged$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Object obj;
+                    Object next;
                     List tasks = ActivityTaskManager.getInstance().getTasks(3);
                     if (tasks != null) {
                         int i2 = i;
                         Iterator it = tasks.iterator();
                         while (true) {
                             if (!it.hasNext()) {
-                                obj = null;
+                                next = null;
                                 break;
                             }
-                            obj = it.next();
-                            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) obj;
+                            next = it.next();
+                            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) next;
                             if (runningTaskInfo.taskId == i2 && runningTaskInfo.displayId == 1) {
                                 break;
                             }
                         }
-                        ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) obj;
+                        ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) next;
                         if (runningTaskInfo2 != null) {
                             DeviceStateInteractor deviceStateInteractor2 = deviceStateInteractor;
                             DeviceStateInteractor.CoverTask coverTask = this;
@@ -93,7 +91,6 @@ public final class DeviceStateInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MultimodalTask extends TaskStackListener {
         public final Consumer callback;
 
@@ -107,7 +104,7 @@ public final class DeviceStateInteractor {
                 public final void run() {
                     List tasks = ActivityTaskManager.getInstance().getTasks(2);
                     if (tasks != null) {
-                        DeviceStateInteractor.MultimodalTask multimodalTask = DeviceStateInteractor.MultimodalTask.this;
+                        DeviceStateInteractor.MultimodalTask multimodalTask = this.this$0;
                         if (tasks.size() > 0) {
                             int i = 0;
                             if (!SemPersonaManager.isSecureFolderId(((ActivityManager.RunningTaskInfo) tasks.get(0)).userId) && !SemDualAppManager.isDualAppId(((ActivityManager.RunningTaskInfo) tasks.get(0)).userId)) {
@@ -140,9 +137,9 @@ public final class DeviceStateInteractor {
                     return;
                 }
                 DisplayInfo displayInfo = new DisplayInfo();
-                Display display = DeviceStateInteractor.this.displayManager.getDisplay(i);
+                Display display = this.this$0.displayManager.getDisplay(i);
                 if (display != null) {
-                    DeviceStateInteractor deviceStateInteractor = DeviceStateInteractor.this;
+                    DeviceStateInteractor deviceStateInteractor = this.this$0;
                     display.getDisplayInfo(displayInfo);
                     int i2 = displayInfo.rotation;
                     if (deviceStateInteractor.lastRotation != i2) {
@@ -171,7 +168,7 @@ public final class DeviceStateInteractor {
             @Override // android.content.ComponentCallbacks
             public final void onConfigurationChanged(Configuration configuration) {
                 int rotation = configuration.windowConfiguration.getRotation();
-                DeviceStateInteractor deviceStateInteractor = DeviceStateInteractor.this;
+                DeviceStateInteractor deviceStateInteractor = this.this$0;
                 if (deviceStateInteractor.lastCoverRotation != rotation) {
                     deviceStateInteractor.lastCoverRotation = rotation;
                     NavBarStoreImpl$initInteractor$20 navBarStoreImpl$initInteractor$20 = deviceStateInteractor.largeCoverRotationCallback;

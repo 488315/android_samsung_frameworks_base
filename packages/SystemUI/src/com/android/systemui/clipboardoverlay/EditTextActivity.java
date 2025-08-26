@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EditTextActivity extends Activity implements ClipboardManager.OnPrimaryClipChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,16 +33,16 @@ public class EditTextActivity extends Activity implements ClipboardManager.OnPri
         findViewById(R.id.done_button).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.clipboardoverlay.EditTextActivity$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                EditTextActivity editTextActivity = EditTextActivity.this;
+                EditTextActivity editTextActivity = this.f$0;
                 int i = EditTextActivity.$r8$clinit;
                 ((InputMethodManager) editTextActivity.getSystemService(InputMethodManager.class)).hideSoftInputFromWindow(editTextActivity.mEditText.getWindowToken(), 0);
                 Editable text = editTextActivity.mEditText.getText();
                 text.clearSpans();
-                ClipData newPlainText = ClipData.newPlainText("text", text);
+                ClipData clipDataNewPlainText = ClipData.newPlainText("text", text);
                 PersistableBundle persistableBundle = new PersistableBundle();
                 persistableBundle.putBoolean("android.content.extra.IS_SENSITIVE", editTextActivity.mSensitive);
-                newPlainText.getDescription().setExtras(persistableBundle);
-                editTextActivity.mClipboardManager.setPrimaryClip(newPlainText);
+                clipDataNewPlainText.getDescription().setExtras(persistableBundle);
+                editTextActivity.mClipboardManager.setPrimaryClip(clipDataNewPlainText);
                 editTextActivity.finish();
             }
         });

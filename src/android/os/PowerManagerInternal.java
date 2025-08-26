@@ -142,7 +142,7 @@ public abstract class PowerManagerInternal {
 
     public abstract void unregisterUserActivityStateListener(UserActivityStateListener userActivityStateListener);
 
-    public abstract void updateDualViewMode(boolean z);
+    public abstract void updateDualViewMode(int i);
 
     public abstract void updateProfileActivityTimeFromKnox(int i, long j);
 

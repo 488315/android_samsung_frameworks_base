@@ -23,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Function3 {
     final /* synthetic */ ImageView $fgIconView;
@@ -33,7 +32,6 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$4$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ ImageView $fgIconView;
@@ -43,9 +41,8 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$4$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01511 extends SuspendLambda implements Function2 {
+        final class C02591 extends SuspendLambda implements Function2 {
             final /* synthetic */ ImageView $fgIconView;
             final /* synthetic */ DeviceEntryForegroundViewModel $fgViewModel;
             final /* synthetic */ Color $overrideColor;
@@ -53,7 +50,7 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01511(DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, ImageView imageView, Color color, DeviceEntryIconView deviceEntryIconView, Continuation continuation) {
+            public C02591(DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, ImageView imageView, Color color, DeviceEntryIconView deviceEntryIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$fgViewModel = deviceEntryForegroundViewModel;
                 this.$fgIconView = imageView;
@@ -63,12 +60,12 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01511(this.$fgViewModel, this.$fgIconView, this.$overrideColor, this.$view, continuation);
+                return new C02591(this.$fgViewModel, this.$fgIconView, this.$overrideColor, this.$view, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01511) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02591) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -94,7 +91,7 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
                             }
                             ImageView imageView3 = imageView;
                             Color color2 = color;
-                            imageView3.setImageTintList(ColorStateList.valueOf(color2 != null ? ColorKt.m467toArgb8_81llA(color2.value) : foregroundIconViewModel.tint));
+                            imageView3.setImageTintList(ColorStateList.valueOf(color2 != null ? ColorKt.m469toArgb8_81llA(color2.value) : foregroundIconViewModel.tint));
                             ImageView imageView4 = imageView;
                             int i2 = foregroundIconViewModel.padding;
                             imageView4.setPadding(i2, i2, i2, i2);
@@ -150,7 +147,7 @@ final class DeviceEntryIconViewBinder$bind$4 extends SuspendLambda implements Fu
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             Log.d("DeviceEntryIconViewBinder", "Initializing device entry fgIconView");
             this.$fgIconView.setImageState(StateSet.NOTHING, false);
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01511(this.$fgViewModel, this.$fgIconView, this.$overrideColor, this.$view, null), 6);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02591(this.$fgViewModel, this.$fgIconView, this.$overrideColor, this.$view, null), 6);
             return Unit.INSTANCE;
         }
     }

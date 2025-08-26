@@ -52,9 +52,9 @@ public interface IPublishResponseCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPublishResponseCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPublishResponseCallback)) {
-                return (IPublishResponseCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPublishResponseCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPublishResponseCallback)) {
+                return (IPublishResponseCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface IPublishResponseCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCommandError(readInt);
+                onCommandError(i3);
             } else if (i == 2) {
                 SipDetails sipDetails = (SipDetails) parcel.readTypedObject(SipDetails.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -115,25 +115,25 @@ public interface IPublishResponseCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IPublishResponseCallback
             public void onCommandError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPublishResponseCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPublishResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IPublishResponseCallback
             public void onNetworkResponse(SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPublishResponseCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPublishResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

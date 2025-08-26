@@ -4,6 +4,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHearingAid;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.CursorWindowAllocationException;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -56,7 +59,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SBluetoothControllerImpl implements SBluetoothController, BluetoothCallback, CachedBluetoothDevice.Callback, LocalBluetoothProfileManager.ServiceListener, BluetoothCastCallback {
     public final List mConnectedDevices = new ArrayList();
@@ -73,18 +75,15 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
     public int mState;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.policy.SBluetoothControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 implements BluetoothDesktopCallback {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface BluetoothDesktopCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public final ArrayList mCallbacks;
 
@@ -128,13 +127,13 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
                     this.mCallbacks.remove((SBluetoothController.SCallback) message.obj);
                     break;
                 case 5:
-                    boolean booleanValue = ((Boolean) message.obj).booleanValue();
+                    boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
                     ArrayList arrayList3 = this.mCallbacks;
                     int size3 = arrayList3.size();
                     while (i2 < size3) {
                         Object obj3 = arrayList3.get(i2);
                         i2++;
-                        ((SBluetoothController.SCallback) obj3).onBluetoothScanStateChanged(booleanValue);
+                        ((SBluetoothController.SCallback) obj3).onBluetoothScanStateChanged(zBooleanValue);
                     }
                     break;
                 case 6:
@@ -148,13 +147,13 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
                     }
                     break;
                 case 7:
-                    boolean booleanValue2 = ((Boolean) message.obj).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) message.obj).booleanValue();
                     ArrayList arrayList5 = this.mCallbacks;
                     int size5 = arrayList5.size();
                     while (i2 < size5) {
                         Object obj5 = arrayList5.get(i2);
                         i2++;
-                        ((SBluetoothController.SCallback) obj5).onMusicShareDiscoveryStateChanged(booleanValue2);
+                        ((SBluetoothController.SCallback) obj5).onMusicShareDiscoveryStateChanged(zBooleanValue2);
                     }
                     break;
             }
@@ -334,7 +333,7 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
         return cachedDevicesCopy != null ? (Collection) cachedDevicesCopy.stream().filter(new Predicate() { // from class: com.android.systemui.statusbar.policy.SBluetoothControllerImpl$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return !BluetoothUtils.isExclusivelyManagedBluetoothDevice(SBluetoothControllerImpl.this.mContext, ((CachedBluetoothDevice) obj).mDevice);
+                return !BluetoothUtils.isExclusivelyManagedBluetoothDevice(this.f$0.mContext, ((CachedBluetoothDevice) obj).mDevice);
             }
         }).collect(Collectors.toCollection(new SBluetoothControllerImpl$$ExternalSyntheticLambda2())) : cachedDevicesCopy;
     }
@@ -343,15 +342,15 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
         LocalBluetoothManager localBluetoothManager = this.mLocalBluetoothManager;
         if (localBluetoothManager != null) {
             List connectedDeviceList = localBluetoothManager.mLocalAdapter.mAdapter.getConnectedDeviceList();
-            CachedBluetoothDevice findDevice = localBluetoothManager.mCachedDeviceManager.findDevice((connectedDeviceList == null || connectedDeviceList.size() <= 0) ? null : (BluetoothDevice) connectedDeviceList.get(0));
-            if (findDevice != null) {
+            CachedBluetoothDevice cachedBluetoothDeviceFindDevice = localBluetoothManager.mCachedDeviceManager.findDevice((connectedDeviceList == null || connectedDeviceList.size() <= 0) ? null : (BluetoothDevice) connectedDeviceList.get(0));
+            if (cachedBluetoothDeviceFindDevice != null) {
                 StringBuilder sb = new StringBuilder();
-                String str = findDevice.mPrefixName;
+                String str = cachedBluetoothDeviceFindDevice.mPrefixName;
                 if (str == null) {
                     str = "";
                 }
                 sb.append(str);
-                sb.append(findDevice.getName());
+                sb.append(cachedBluetoothDeviceFindDevice.getName());
                 return sb.toString();
             }
         }
@@ -368,15 +367,15 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
         BluetoothLogger bluetoothLogger = this.mLogger;
         if (bluetoothLogger != null) {
             String address = cachedBluetoothDevice.mDevice.getAddress();
-            String connectionStateToString = connectionStateToString(i);
+            String strConnectionStateToString = connectionStateToString(i);
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(6);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = address;
-            logMessageImpl.str2 = connectionStateToString;
-            logBuffer.commit(obtain);
+            logMessageImpl.str2 = strConnectionStateToString;
+            logBuffer.commit(logMessageObtain);
         }
         StringBuilder sb = new StringBuilder("ACLConnectionStateChanged=");
         sb.append(cachedBluetoothDevice.mDevice.getAddress());
@@ -398,11 +397,11 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = address;
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         Log.d("SBluetoothControllerImpl", "ActiveDeviceChanged=" + cachedBluetoothDevice.mDevice.getAddress() + " profileId=" + i);
         boolean z = false;
@@ -426,13 +425,13 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
     public final void onBluetoothStateChanged(int i) {
         BluetoothLogger bluetoothLogger = this.mLogger;
         if (bluetoothLogger != null) {
-            String nameForState = BluetoothAdapter.nameForState(i);
+            String strNameForState = BluetoothAdapter.nameForState(i);
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = nameForState;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = strNameForState;
+            logBuffer.commit(logMessageObtain);
         }
         this.mEnabled = this.mLocalBluetoothManager.mLocalAdapter.mAdapter.isEnabled();
         ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("onBluetoothStateChanged is called++++++ = "), this.mEnabled, "SBluetoothControllerImpl");
@@ -476,9 +475,9 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = address;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = address;
+            logBuffer.commit(logMessageObtain);
         }
         cachedBluetoothDevice.registerCallback(this);
         updateConnected$1();
@@ -506,11 +505,11 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = address;
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         updateConnected$1();
         this.mHandler.sendEmptyMessage(1);
@@ -524,9 +523,9 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
             LogLevel logLevel = LogLevel.DEBUG;
             BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = bluetoothLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = address;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = address;
+            logBuffer.commit(logMessageObtain);
         }
         updateConnected$1();
         this.mHandler.sendEmptyMessage(1);
@@ -570,7 +569,7 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
         this.mHandler.obtainMessage(4, (BluetoothController.Callback) obj).sendToTarget();
     }
 
-    public final void scan(boolean z) {
+    public final void scan(boolean z) throws InterruptedException {
         LocalBluetoothManager localBluetoothManager = this.mLocalBluetoothManager;
         if (localBluetoothManager == null) {
             return;
@@ -625,88 +624,41 @@ public class SBluetoothControllerImpl implements SBluetoothController, Bluetooth
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0053  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void setScanMode(int r9) {
-        /*
-            r8 = this;
-            java.lang.String r1 = "CursorWindowAllocationException"
-            java.lang.String r0 = "content://com.sec.knox.provider/BluetoothPolicy"
-            android.net.Uri r3 = android.net.Uri.parse(r0)
-            android.content.Context r0 = r8.mContext
-            android.content.ContentResolver r2 = r0.getContentResolver()
-            r6 = 0
-            r7 = 0
-            r4 = 0
-            java.lang.String r5 = "isDiscoverableEnabled"
-            android.database.Cursor r2 = r2.query(r3, r4, r5, r6, r7)
-            r3 = 0
-            if (r2 == 0) goto L4e
-            r2.moveToFirst()     // Catch: java.lang.Throwable -> L31 android.database.CursorWindowAllocationException -> L34
-            java.lang.String r0 = "isDiscoverableEnabled"
-            int r0 = r2.getColumnIndex(r0)     // Catch: java.lang.Throwable -> L31 android.database.CursorWindowAllocationException -> L34
-            java.lang.String r0 = r2.getString(r0)     // Catch: java.lang.Throwable -> L31 android.database.CursorWindowAllocationException -> L34
-            java.lang.String r4 = "false"
-            boolean r0 = r0.equals(r4)     // Catch: java.lang.Throwable -> L31 android.database.CursorWindowAllocationException -> L34
-            r2.close()
-            goto L4f
-        L31:
-            r0 = move-exception
-            r8 = r0
-            goto L4a
-        L34:
-            r0 = move-exception
-            java.lang.String r4 = "SBluetoothControllerImpl"
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L31
-            r5.<init>(r1)     // Catch: java.lang.Throwable -> L31
-            r5.append(r0)     // Catch: java.lang.Throwable -> L31
-            java.lang.String r0 = r5.toString()     // Catch: java.lang.Throwable -> L31
-            android.util.Log.e(r4, r0)     // Catch: java.lang.Throwable -> L31
-            r2.close()
-            goto L4e
-        L4a:
-            r2.close()
-            throw r8
-        L4e:
-            r0 = r3
-        L4f:
-            r1 = 23
-            if (r9 != r1) goto L65
-            if (r0 == 0) goto L5d
-            r8 = 70
-            java.lang.Object[] r9 = new java.lang.Object[r3]
-            android.sec.enterprise.auditlog.AuditLog.logEvent(r8, r9)
-            return
-        L5d:
-            r0 = 26
-            java.lang.Object[] r2 = new java.lang.Object[r3]
-            android.sec.enterprise.auditlog.AuditLog.logEvent(r0, r2)
-            goto L6e
-        L65:
-            if (r0 != 0) goto L6e
-            r0 = 27
-            java.lang.Object[] r2 = new java.lang.Object[r3]
-            android.sec.enterprise.auditlog.AuditLog.logEvent(r0, r2)
-        L6e:
-            if (r9 == r1) goto L74
-            r0 = 21
-            if (r9 != r0) goto L7d
-        L74:
-            com.android.settingslib.bluetooth.LocalBluetoothManager r8 = r8.mLocalBluetoothManager
-            com.android.settingslib.bluetooth.LocalBluetoothAdapter r8 = r8.mLocalAdapter
-            android.bluetooth.BluetoothAdapter r8 = r8.mAdapter
-            r8.setScanMode(r9)
-        L7d:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.SBluetoothControllerImpl.setScanMode(int):void");
+    public final void setScanMode(int i) {
+        boolean zEquals;
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/BluetoothPolicy"), null, "isDiscoverableEnabled", null, null);
+        try {
+            if (cursorQuery != null) {
+                try {
+                    cursorQuery.moveToFirst();
+                    zEquals = cursorQuery.getString(cursorQuery.getColumnIndex("isDiscoverableEnabled")).equals("false");
+                    cursorQuery.close();
+                } catch (CursorWindowAllocationException e) {
+                    Log.e("SBluetoothControllerImpl", "CursorWindowAllocationException" + e);
+                    cursorQuery.close();
+                }
+            } else {
+                zEquals = false;
+            }
+            if (i == 23) {
+                if (zEquals) {
+                    AuditLog.logEvent(70, new Object[0]);
+                    return;
+                }
+                AuditLog.logEvent(26, new Object[0]);
+            } else if (!zEquals) {
+                AuditLog.logEvent(27, new Object[0]);
+            }
+            if (i == 23 || i == 21) {
+                this.mLocalBluetoothManager.mLocalAdapter.mAdapter.setScanMode(i);
+            }
+        } catch (Throwable th) {
+            cursorQuery.close();
+            throw th;
+        }
     }
 
-    public final void stopScan() {
+    public final void stopScan() throws InterruptedException {
         LocalBluetoothManager localBluetoothManager = this.mLocalBluetoothManager;
         LocalBluetoothAdapter localBluetoothAdapter = localBluetoothManager.mLocalAdapter;
         if (localBluetoothAdapter.mAdapter.isDiscovering()) {

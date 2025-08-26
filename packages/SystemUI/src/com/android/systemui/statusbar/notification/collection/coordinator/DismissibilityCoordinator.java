@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class DismissibilityCoordinator implements Coordinator {
@@ -61,7 +60,7 @@ public final class DismissibilityCoordinator implements Coordinator {
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DismissibilityCoordinator$attach$1
+        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DismissibilityCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
             public final void onBeforeRenderList(List<? extends PipelineEntry> list) {
                 DismissibilityCoordinator.this.onBeforeRenderListListener(list);

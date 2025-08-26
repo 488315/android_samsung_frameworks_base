@@ -41,7 +41,7 @@ public class AndroidKeyStoreProvider extends Provider {
 
     public AndroidKeyStoreProvider() {
         super("AndroidKeyStore", 1.0d, "Android KeyStore security provider");
-        boolean equals = "true".equals(SystemProperties.get(DESEDE_SYSTEM_PROPERTY));
+        boolean zEquals = "true".equals(SystemProperties.get(DESEDE_SYSTEM_PROPERTY));
         if ("CN".equals(SystemProperties.get("ro.csc.countryiso_code")) && "system_server".equals(Process.myProcessName()) && !"FINISH".equals(SystemProperties.get("persist.sys.setupwizard"))) {
             try {
                 Log.i(TAG, "original rkp_hostname : " + SystemProperties.get("remote_provisioning.hostname"));
@@ -68,13 +68,13 @@ public class AndroidKeyStoreProvider extends Provider {
         put("KeyGenerator.HmacSHA256", "android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$HmacSHA256");
         put("KeyGenerator.HmacSHA384", "android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$HmacSHA384");
         put("KeyGenerator.HmacSHA512", "android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$HmacSHA512");
-        if (equals) {
+        if (zEquals) {
             put("KeyGenerator.DESede", "android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$DESede");
         }
         put("KeyAgreement.ECDH", "android.security.keystore2.AndroidKeyStoreKeyAgreementSpi$ECDH");
         put("KeyAgreement.XDH", "android.security.keystore2.AndroidKeyStoreKeyAgreementSpi$XDH");
         putSecretKeyFactoryImpl("AES");
-        if (equals) {
+        if (zEquals) {
             putSecretKeyFactoryImpl(KeyProperties.KEY_ALGORITHM_3DES);
         }
         putSecretKeyFactoryImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
@@ -162,35 +162,35 @@ public class AndroidKeyStoreProvider extends Provider {
         throw new ProviderException("Unsupported Android Keystore public key algorithm: " + algorithm);
     }
 
-    public static AndroidKeyStorePublicKey loadAndroidKeyStorePublicKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, str, i);
-        if (loadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
-            return (AndroidKeyStorePublicKey) loadAndroidKeyStoreKeyFromKeystore;
+    public static AndroidKeyStorePublicKey loadAndroidKeyStorePublicKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        AndroidKeyStoreKey androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, str, i);
+        if (androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
+            return (AndroidKeyStorePublicKey) androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore;
         }
         throw new UnrecoverableKeyException("No asymmetric key found by the given alias.");
     }
 
-    public static KeyPair loadAndroidKeyStoreKeyPairFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
-        if (loadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
-            AndroidKeyStorePublicKey androidKeyStorePublicKey = (AndroidKeyStorePublicKey) loadAndroidKeyStoreKeyFromKeystore;
+    public static KeyPair loadAndroidKeyStoreKeyPairFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        AndroidKeyStoreKey androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
+        if (androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
+            AndroidKeyStorePublicKey androidKeyStorePublicKey = (AndroidKeyStorePublicKey) androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore;
             return new KeyPair(androidKeyStorePublicKey, androidKeyStorePublicKey.getPrivateKey());
         }
         throw new UnrecoverableKeyException("No asymmetric key found by the given alias.");
     }
 
-    public static AndroidKeyStorePrivateKey loadAndroidKeyStorePrivateKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, str, i);
-        if (loadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
-            return ((AndroidKeyStorePublicKey) loadAndroidKeyStoreKeyFromKeystore).getPrivateKey();
+    public static AndroidKeyStorePrivateKey loadAndroidKeyStorePrivateKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        AndroidKeyStoreKey androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, str, i);
+        if (androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey) {
+            return ((AndroidKeyStorePublicKey) androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore).getPrivateKey();
         }
         throw new UnrecoverableKeyException("No asymmetric key found by the given alias.");
     }
 
-    public static SecretKey loadAndroidKeyStoreSecretKeyFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        Key loadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
-        if (loadAndroidKeyStoreKeyFromKeystore instanceof SecretKey) {
-            return (SecretKey) loadAndroidKeyStoreKeyFromKeystore;
+    public static SecretKey loadAndroidKeyStoreSecretKeyFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        Key keyLoadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
+        if (keyLoadAndroidKeyStoreKeyFromKeystore instanceof SecretKey) {
+            return (SecretKey) keyLoadAndroidKeyStoreKeyFromKeystore;
         }
         throw new UnrecoverableKeyException("No secret key found by the given alias.");
     }
@@ -203,7 +203,7 @@ public class AndroidKeyStoreProvider extends Provider {
         }
     }
 
-    public static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
+    public static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, String str, int i) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
         int i2;
         if (i == -1) {
             i2 = 0;
@@ -214,40 +214,40 @@ public class AndroidKeyStoreProvider extends Provider {
         return loadAndroidKeyStoreKeyFromKeystore(keyStore2, str, i, i2);
     }
 
-    public static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, String str, long j, int i) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
+    public static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, String str, long j, int i) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
         KeyDescriptor keyDescriptor = new KeyDescriptor();
         keyDescriptor.nspace = j;
         keyDescriptor.domain = i;
         keyDescriptor.alias = str;
         keyDescriptor.blob = null;
-        AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
-        return loadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey ? ((AndroidKeyStorePublicKey) loadAndroidKeyStoreKeyFromKeystore).getPrivateKey() : loadAndroidKeyStoreKeyFromKeystore;
+        AndroidKeyStoreKey androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore = loadAndroidKeyStoreKeyFromKeystore(keyStore2, keyDescriptor);
+        return androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore instanceof AndroidKeyStorePublicKey ? ((AndroidKeyStorePublicKey) androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore).getPrivateKey() : androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore;
     }
 
-    private static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        Integer num = null;
+    private static AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore(KeyStore2 keyStore2, KeyDescriptor keyDescriptor) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        Integer numValueOf = null;
         try {
             KeyEntryResponse keyEntry = keyStore2.getKeyEntry(keyDescriptor);
             if (keyEntry.iSecurityLevel == null) {
                 return null;
             }
-            int i = -1;
+            int digest = -1;
             for (Authorization authorization : keyEntry.metadata.authorizations) {
-                int i2 = authorization.keyParameter.tag;
-                if (i2 == 268435458) {
-                    num = Integer.valueOf(authorization.keyParameter.value.getAlgorithm());
-                } else if (i2 == 536870917 && i == -1) {
-                    i = authorization.keyParameter.value.getDigest();
+                int i = authorization.keyParameter.tag;
+                if (i == 268435458) {
+                    numValueOf = Integer.valueOf(authorization.keyParameter.value.getAlgorithm());
+                } else if (i == 536870917 && digest == -1) {
+                    digest = authorization.keyParameter.value.getDigest();
                 }
             }
-            if (num == null) {
+            if (numValueOf == null) {
                 throw new UnrecoverableKeyException("Key algorithm unknown");
             }
-            if (num.intValue() == 128 || num.intValue() == 32 || num.intValue() == 33) {
-                return makeAndroidKeyStoreSecretKeyFromKeyEntryResponse(keyDescriptor, keyEntry, num.intValue(), i);
+            if (numValueOf.intValue() == 128 || numValueOf.intValue() == 32 || numValueOf.intValue() == 33) {
+                return makeAndroidKeyStoreSecretKeyFromKeyEntryResponse(keyDescriptor, keyEntry, numValueOf.intValue(), digest);
             }
-            if (num.intValue() == 1 || num.intValue() == 3) {
-                return makeAndroidKeyStorePublicKeyFromKeyEntryResponse(keyDescriptor, keyEntry.metadata, new KeyStoreSecurityLevel(keyEntry.iSecurityLevel), num.intValue());
+            if (numValueOf.intValue() == 1 || numValueOf.intValue() == 3) {
+                return makeAndroidKeyStorePublicKeyFromKeyEntryResponse(keyDescriptor, keyEntry.metadata, new KeyStoreSecurityLevel(keyEntry.iSecurityLevel), numValueOf.intValue());
             }
             throw new UnrecoverableKeyException("Key algorithm unknown");
         } catch (KeyStoreException e) {

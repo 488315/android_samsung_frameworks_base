@@ -7,13 +7,13 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CommandRegistry {
     public final Map commandMap = new LinkedHashMap();
@@ -35,13 +35,13 @@ public final class CommandRegistry {
         }
     }
 
-    public final void onShellCommand(final PrintWriter printWriter, final String[] strArr) {
+    public final void onShellCommand(final PrintWriter printWriter, final String[] strArr) throws ExecutionException, InterruptedException {
         if (!this.initialized) {
             this.initialized = true;
             registerCommand("prefs", new Function0() { // from class: com.android.systemui.statusbar.commandline.CommandRegistry$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    return new PrefsCommand(CommandRegistry.this.context);
+                    return new PrefsCommand(this.f$0.context);
                 }
             });
         }
@@ -58,11 +58,11 @@ public final class CommandRegistry {
         final FutureTask futureTask = new FutureTask(new Callable() { // from class: com.android.systemui.statusbar.commandline.CommandRegistry$onShellCommand$task$1
             @Override // java.util.concurrent.Callable
             public final Object call() {
-                Command.this.execute(printWriter, ArraysKt___ArraysKt.drop(1, strArr));
+                command.execute(printWriter, ArraysKt___ArraysKt.drop(1, strArr));
                 return Unit.INSTANCE;
             }
         });
-        commandWrapper.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.commandline.CommandRegistry$onShellCommand$1
+        commandWrapper.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.commandline.CommandRegistry.onShellCommand.1
             @Override // java.lang.Runnable
             public final void run() {
                 futureTask.run();

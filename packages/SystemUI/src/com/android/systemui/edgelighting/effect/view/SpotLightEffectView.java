@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
 import com.android.systemui.R;
 import com.android.systemui.edgelighting.effect.container.NotificationSpotlightEffect;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SpotLightEffectView extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -77,8 +76,8 @@ public class SpotLightEffectView extends View {
         this.mAnimatorSet.addListener(this.mAnimtorListener);
         AnimatorSet animatorSet2 = this.mAnimatorSet;
         AnimatorSet animatorSet3 = new AnimatorSet();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.edgelighting.effect.view.SpotLightEffectView.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 SpotLightEffectView.this.mSpotlightDrawable.setAlpha((int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * 255.0f));
@@ -86,41 +85,41 @@ public class SpotLightEffectView extends View {
         });
         animatorSet3.setDuration(100L);
         animatorSet3.setInterpolator(new PathInterpolator(0.33f, 0.36f, 0.67f, 1.0f));
-        animatorSet3.play(ofFloat);
+        animatorSet3.play(valueAnimatorOfFloat);
         AnimatorSet animatorSet4 = new AnimatorSet();
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, "scaleX", 0.63f, 1.0f);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this, "scaleY", 0.63f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "scaleX", 0.63f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, "scaleY", 0.63f, 1.0f);
         animatorSet4.setDuration(1167L);
         animatorSet4.setInterpolator(new PathInterpolator(0.33f, 0.36f, 0.67f, 1.0f));
-        animatorSet4.playTogether(ofFloat2, ofFloat3);
+        animatorSet4.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         AnimatorSet animatorSet5 = new AnimatorSet();
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(this, "scaleX", 1.0f, 0.93f);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(this, "scaleY", 1.0f, 0.93f);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this, "scaleX", 1.0f, 0.93f);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(this, "scaleY", 1.0f, 0.93f);
         animatorSet5.setStartDelay(1167L);
         animatorSet5.setDuration(572L);
         animatorSet5.setInterpolator(new PathInterpolator(0.26f, 0.0f, 0.65f, 1.0f));
-        animatorSet5.playTogether(ofFloat4, ofFloat5);
+        animatorSet5.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat4);
         AnimatorSet animatorSet6 = new AnimatorSet();
-        ObjectAnimator ofFloat6 = ObjectAnimator.ofFloat(this, "scaleX", 0.93f, 0.98f);
-        ObjectAnimator ofFloat7 = ObjectAnimator.ofFloat(this, "scaleY", 0.93f, 0.98f);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(this, "scaleX", 0.93f, 0.98f);
+        ObjectAnimator objectAnimatorOfFloat6 = ObjectAnimator.ofFloat(this, "scaleY", 0.93f, 0.98f);
         animatorSet6.setStartDelay(1733L);
         animatorSet6.setDuration(583L);
         animatorSet6.setInterpolator(new PathInterpolator(0.32f, 0.0f, 0.66f, 0.79f));
-        animatorSet6.playTogether(ofFloat6, ofFloat7);
+        animatorSet6.playTogether(objectAnimatorOfFloat5, objectAnimatorOfFloat6);
         AnimatorSet animatorSet7 = new AnimatorSet();
-        ObjectAnimator ofFloat8 = ObjectAnimator.ofFloat(this, "scaleX", 0.98f, 0.93f);
-        ObjectAnimator ofFloat9 = ObjectAnimator.ofFloat(this, "scaleY", 0.98f, 0.93f);
+        ObjectAnimator objectAnimatorOfFloat7 = ObjectAnimator.ofFloat(this, "scaleX", 0.98f, 0.93f);
+        ObjectAnimator objectAnimatorOfFloat8 = ObjectAnimator.ofFloat(this, "scaleY", 0.98f, 0.93f);
         animatorSet7.setStartDelay(2333L);
         animatorSet7.setDuration(572L);
         animatorSet7.setInterpolator(new PathInterpolator(0.33f, -0.2f, 0.67f, 1.09f));
-        animatorSet7.playTogether(ofFloat8, ofFloat9);
+        animatorSet7.playTogether(objectAnimatorOfFloat7, objectAnimatorOfFloat8);
         AnimatorSet animatorSet8 = new AnimatorSet();
-        ObjectAnimator ofFloat10 = ObjectAnimator.ofFloat(this, "scaleX", 0.93f, 0.54f);
-        ObjectAnimator ofFloat11 = ObjectAnimator.ofFloat(this, "scaleY", 0.93f, 0.54f);
+        ObjectAnimator objectAnimatorOfFloat9 = ObjectAnimator.ofFloat(this, "scaleX", 0.93f, 0.54f);
+        ObjectAnimator objectAnimatorOfFloat10 = ObjectAnimator.ofFloat(this, "scaleY", 0.93f, 0.54f);
         animatorSet8.setStartDelay(2900L);
         animatorSet8.setDuration(607L);
         animatorSet8.setInterpolator(new PathInterpolator(0.35f, -0.01f, 0.67f, 1.0f));
-        animatorSet8.playTogether(ofFloat10, ofFloat11);
+        animatorSet8.playTogether(objectAnimatorOfFloat9, objectAnimatorOfFloat10);
         animatorSet2.playTogether(animatorSet3, animatorSet4, animatorSet5, animatorSet6, animatorSet7, animatorSet8);
         this.mAnimatorSet.start();
     }

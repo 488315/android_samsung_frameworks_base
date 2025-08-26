@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PluginInstance implements PluginLifecycleManager, ProtectedPluginListener {
     public static final Map sClassLoaders = new ArrayMap();
@@ -46,7 +45,6 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
     public boolean mHasError = false;
     public BiConsumer mLogConsumer = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final ClassLoader mBaseClassLoader;
         public final InstanceFactory mInstanceFactory;
@@ -66,15 +64,15 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
             return new PluginInstance(context, pluginListener, componentName, new PluginFactory(context, this.mInstanceFactory, applicationInfo, componentName, this.mVersionChecker, cls, new Supplier() { // from class: com.android.systemui.shared.plugins.PluginInstance$Factory$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    PluginInstance.Factory factory = PluginInstance.Factory.this;
+                    PluginInstance.Factory factory = this.f$0;
                     ApplicationInfo applicationInfo2 = applicationInfo;
                     ClassLoader classLoader = factory.mBaseClassLoader;
                     if (!factory.mIsDebug) {
                         String str = applicationInfo2.packageName;
                         for (String str2 : factory.mPrivilegedPlugins) {
-                            ComponentName unflattenFromString = ComponentName.unflattenFromString(str2);
-                            if (unflattenFromString != null) {
-                                if (unflattenFromString.getPackageName().equals(str)) {
+                            ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str2);
+                            if (componentNameUnflattenFromString != null) {
+                                if (componentNameUnflattenFromString.getPackageName().equals(str)) {
                                 }
                             } else if (str2.equals(str)) {
                             }
@@ -98,11 +96,9 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InstanceFactory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PluginFactory {
         public final ApplicationInfo mAppInfo;
         public final Supplier mClassLoaderFactory;
@@ -124,7 +120,7 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
             this.mDisplayId = i;
         }
 
-        public final boolean checkVersion(Plugin plugin) {
+        public final boolean checkVersion(Plugin plugin) throws ClassNotFoundException {
             if (plugin == null) {
                 plugin = createPlugin(null);
             }
@@ -152,14 +148,14 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
                 public final /* synthetic */ ArrayMap val$versions;
 
                 public AnonymousClass1(ArrayMap arrayMap2) {
-                    r2 = arrayMap2;
+                    arrayMap = arrayMap2;
                 }
 
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
                     Class cls3 = (Class) obj;
                     Version version = (Version) obj2;
-                    Version version2 = (Version) r2.remove(cls3);
+                    Version version2 = (Version) arrayMap.remove(cls3);
                     if (version2 == null) {
                         VersionInfo.this.getClass();
                         ProvidesInterface providesInterface = (ProvidesInterface) cls3.getDeclaredAnnotation(ProvidesInterface.class);
@@ -191,7 +187,7 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
             return true;
         }
 
-        public final Plugin createPlugin(PluginInstance pluginInstance) {
+        public final Plugin createPlugin(PluginInstance pluginInstance) throws ClassNotFoundException {
             try {
                 Class<?> cls = Class.forName(this.mComponentName.getClassName(), true, (ClassLoader) this.mClassLoaderFactory.get());
                 this.mInstanceFactory.getClass();
@@ -211,12 +207,12 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
                 if (i == 0) {
                     return new PluginActionManager.PluginContextWrapper(this.mContext.createApplicationContext(this.mAppInfo, 0), classLoader);
                 }
-                Context context = this.mContext;
-                Display display = ((DisplayManager) context.getSystemService("display")).getDisplay(i);
+                Context contextCreateDisplayContext = this.mContext;
+                Display display = ((DisplayManager) contextCreateDisplayContext.getSystemService("display")).getDisplay(i);
                 if (display != null) {
-                    context = context.createDisplayContext(display);
+                    contextCreateDisplayContext = contextCreateDisplayContext.createDisplayContext(display);
                 }
-                return new PluginActionManager.PluginContextWrapper(context.createApplicationContext(this.mAppInfo, 0), classLoader);
+                return new PluginActionManager.PluginContextWrapper(contextCreateDisplayContext.createApplicationContext(this.mAppInfo, 0), classLoader);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e("PluginInstance", "Failed to create plugin context", e);
                 return null;
@@ -224,11 +220,9 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VersionChecker {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VersionCheckerImpl implements VersionChecker {
     }
 
@@ -284,18 +278,18 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
         return this.mPluginContext;
     }
 
-    public final VersionInfo getVersionInfo() {
-        Plugin plugin = this.mPlugin;
+    public final VersionInfo getVersionInfo() throws ClassNotFoundException {
+        Plugin pluginCreatePlugin = this.mPlugin;
         PluginFactory pluginFactory = this.mPluginFactory;
-        if (plugin == null) {
-            plugin = pluginFactory.createPlugin(null);
+        if (pluginCreatePlugin == null) {
+            pluginCreatePlugin = pluginFactory.createPlugin(null);
         } else {
             pluginFactory.getClass();
         }
-        if (plugin instanceof PluginWrapper) {
-            plugin = (Plugin) ((PluginWrapper) plugin).getPlugin();
+        if (pluginCreatePlugin instanceof PluginWrapper) {
+            pluginCreatePlugin = (Plugin) ((PluginWrapper) pluginCreatePlugin).getPlugin();
         }
-        Class<?> cls = plugin.getClass();
+        Class<?> cls = pluginCreatePlugin.getClass();
         ((VersionCheckerImpl) pluginFactory.mVersionChecker).getClass();
         VersionInfo versionInfo = new VersionInfo();
         if (versionInfo.mDefault == null) {
@@ -319,9 +313,9 @@ public class PluginInstance implements PluginLifecycleManager, ProtectedPluginLi
             return;
         }
         this.mPlugin = this.mPluginFactory.createPlugin(this);
-        PluginActionManager.PluginContextWrapper createPluginContext = this.mPluginFactory.createPluginContext();
-        this.mPluginContext = createPluginContext;
-        if (this.mPlugin != null && createPluginContext != null) {
+        PluginActionManager.PluginContextWrapper pluginContextWrapperCreatePluginContext = this.mPluginFactory.createPluginContext();
+        this.mPluginContext = pluginContextWrapperCreatePluginContext;
+        if (this.mPlugin != null && pluginContextWrapperCreatePluginContext != null) {
             if (!checkVersion()) {
                 log("loadPlugin: version check failed");
                 return;

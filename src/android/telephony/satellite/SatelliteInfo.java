@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,7 +36,7 @@ public final class SatelliteInfo implements Parcelable {
         return 0;
     }
 
-    protected SatelliteInfo(Parcel parcel) {
+    protected SatelliteInfo(Parcel parcel) throws ClassNotFoundException, IOException {
         ParcelUuid parcelUuid = (ParcelUuid) parcel.readParcelable(ParcelUuid.class.getClassLoader(), ParcelUuid.class);
         if (parcelUuid != null) {
             this.mId = parcelUuid.getUuid();

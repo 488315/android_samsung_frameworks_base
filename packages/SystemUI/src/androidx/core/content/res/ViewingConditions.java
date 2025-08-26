@@ -2,7 +2,6 @@ package androidx.core.content.res;
 
 import androidx.compose.material3.internal.colorUtil.Frame$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewingConditions {
     public static final ViewingConditions DEFAULT;
@@ -19,7 +18,7 @@ public final class ViewingConditions {
 
     static {
         float[] fArr = CamUtils.WHITE_POINT_D65;
-        float yFromLStar = (float) ((CamUtils.yFromLStar() * 63.66197723675813d) / 100.0d);
+        float fYFromLStar = (float) ((CamUtils.yFromLStar() * 63.66197723675813d) / 100.0d);
         float[][] fArr2 = CamUtils.XYZ_TO_CAM16RGB;
         float f = fArr[0];
         float[] fArr3 = fArr2[0];
@@ -33,30 +32,30 @@ public final class ViewingConditions {
         float[] fArr5 = fArr2[2];
         float f8 = (f5 * fArr5[2]) + (f3 * fArr5[1]) + (f * fArr5[0]);
         float f9 = ((double) 1.0f) >= 0.9d ? 0.69f : 0.655f;
-        float m = Frame$$ExternalSyntheticOutline0.m((float) Math.exp(((-yFromLStar) - 42.0f) / 92.0f), 0.2777778f, 1.0f, 1.0f);
-        double d = m;
+        float fM = Frame$$ExternalSyntheticOutline0.m((float) Math.exp(((-fYFromLStar) - 42.0f) / 92.0f), 0.2777778f, 1.0f, 1.0f);
+        double d = fM;
         if (d > 1.0d) {
-            m = 1.0f;
+            fM = 1.0f;
         } else if (d < 0.0d) {
-            m = 0.0f;
+            fM = 0.0f;
         }
-        float[] fArr6 = {(((100.0f / f6) * m) + 1.0f) - m, (((100.0f / f7) * m) + 1.0f) - m, (((100.0f / f8) * m) + 1.0f) - m};
-        float f10 = 1.0f / ((5.0f * yFromLStar) + 1.0f);
+        float[] fArr6 = {(((100.0f / f6) * fM) + 1.0f) - fM, (((100.0f / f7) * fM) + 1.0f) - fM, (((100.0f / f8) * fM) + 1.0f) - fM};
+        float f10 = 1.0f / ((5.0f * fYFromLStar) + 1.0f);
         float f11 = f10 * f10 * f10 * f10;
         float f12 = 1.0f - f11;
-        float cbrt = (0.1f * f12 * f12 * ((float) Math.cbrt(yFromLStar * 5.0d))) + (f11 * yFromLStar);
-        float yFromLStar2 = CamUtils.yFromLStar() / fArr[1];
-        double d2 = yFromLStar2;
-        float sqrt = ((float) Math.sqrt(d2)) + 1.48f;
-        float pow = 0.725f / ((float) Math.pow(d2, 0.2d));
-        float[] fArr7 = {(float) Math.pow(((fArr6[0] * cbrt) * f6) / 100.0d, 0.42d), (float) Math.pow(((fArr6[1] * cbrt) * f7) / 100.0d, 0.42d), (float) Math.pow(((fArr6[2] * cbrt) * f8) / 100.0d, 0.42d)};
+        float fCbrt = (0.1f * f12 * f12 * ((float) Math.cbrt(fYFromLStar * 5.0d))) + (f11 * fYFromLStar);
+        float fYFromLStar2 = CamUtils.yFromLStar() / fArr[1];
+        double d2 = fYFromLStar2;
+        float fSqrt = ((float) Math.sqrt(d2)) + 1.48f;
+        float fPow = 0.725f / ((float) Math.pow(d2, 0.2d));
+        float[] fArr7 = {(float) Math.pow(((fArr6[0] * fCbrt) * f6) / 100.0d, 0.42d), (float) Math.pow(((fArr6[1] * fCbrt) * f7) / 100.0d, 0.42d), (float) Math.pow(((fArr6[2] * fCbrt) * f8) / 100.0d, 0.42d)};
         float f13 = fArr7[0];
         float f14 = (f13 * 400.0f) / (f13 + 27.13f);
         float f15 = fArr7[1];
         float f16 = (f15 * 400.0f) / (f15 + 27.13f);
         float f17 = fArr7[2];
         float[] fArr8 = {f14, f16, (400.0f * f17) / (f17 + 27.13f)};
-        DEFAULT = new ViewingConditions(yFromLStar2, ((fArr8[2] * 0.05f) + (fArr8[0] * 2.0f) + fArr8[1]) * pow, pow, pow, f9, 1.0f, fArr6, cbrt, (float) Math.pow(cbrt, 0.25d), sqrt);
+        DEFAULT = new ViewingConditions(fYFromLStar2, ((fArr8[2] * 0.05f) + (fArr8[0] * 2.0f) + fArr8[1]) * fPow, fPow, fPow, f9, 1.0f, fArr6, fCbrt, (float) Math.pow(fCbrt, 0.25d), fSqrt);
     }
 
     private ViewingConditions(float f, float f2, float f3, float f4, float f5, float f6, float[] fArr, float f7, float f8, float f9) {

@@ -195,9 +195,9 @@ public interface IAuthService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuthService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAuthService)) {
-                return (IAuthService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuthService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAuthService)) {
+                return (IAuthService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -261,18 +261,18 @@ public interface IAuthService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    ITestSessionCallback asInterface = ITestSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    ITestSessionCallback iTestSessionCallbackAsInterface = ITestSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ITestSession createTestSession = createTestSession(readInt, asInterface, readString);
+                    ITestSession iTestSessionCreateTestSession = createTestSession(i3, iTestSessionCallbackAsInterface, string);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createTestSession);
+                    parcel2.writeStrongInterface(iTestSessionCreateTestSession);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<SensorPropertiesInternal> sensorProperties = getSensorProperties(readString2);
+                    List<SensorPropertiesInternal> sensorProperties = getSensorProperties(string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(sensorProperties, 1);
                     return true;
@@ -282,106 +282,106 @@ public interface IAuthService extends IInterface {
                     parcel2.writeString(uiPackage);
                     return true;
                 case 4:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    long readLong = parcel.readLong();
-                    int readInt2 = parcel.readInt();
-                    IBiometricServiceReceiver asInterface2 = IBiometricServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString3 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    long j = parcel.readLong();
+                    int i4 = parcel.readInt();
+                    IBiometricServiceReceiver iBiometricServiceReceiverAsInterface = IBiometricServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
                     PromptInfo promptInfo = (PromptInfo) parcel.readTypedObject(PromptInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long authenticate = authenticate(readStrongBinder, readLong, readInt2, asInterface2, readString3, promptInfo);
+                    long jAuthenticate = authenticate(strongBinder, j, i4, iBiometricServiceReceiverAsInterface, string3, promptInfo);
                     parcel2.writeNoException();
-                    parcel2.writeLong(authenticate);
+                    parcel2.writeLong(jAuthenticate);
                     return true;
                 case 5:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
-                    long readLong2 = parcel.readLong();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelAuthentication(readStrongBinder2, readString4, readLong2);
+                    cancelAuthentication(strongBinder2, string4, j2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int canAuthenticate = canAuthenticate(readString5, readInt3, readInt4);
+                    int iCanAuthenticate = canAuthenticate(string5, i5, i6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(canAuthenticate);
+                    parcel2.writeInt(iCanAuthenticate);
                     return true;
                 case 7:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long lastAuthenticationTime = getLastAuthenticationTime(readInt5, readInt6);
+                    long lastAuthenticationTime = getLastAuthenticationTime(i7, i8);
                     parcel2.writeNoException();
                     parcel2.writeLong(lastAuthenticationTime);
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasEnrolledBiometrics = hasEnrolledBiometrics(readInt7, readString6);
+                    boolean zHasEnrolledBiometrics = hasEnrolledBiometrics(i9, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasEnrolledBiometrics);
+                    parcel2.writeBoolean(zHasEnrolledBiometrics);
                     return true;
                 case 9:
-                    IBiometricEnabledOnKeyguardCallback asInterface3 = IBiometricEnabledOnKeyguardCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallbackAsInterface = IBiometricEnabledOnKeyguardCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerEnabledOnKeyguardCallback(asInterface3);
+                    registerEnabledOnKeyguardCallback(iBiometricEnabledOnKeyguardCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    AuthenticationStateListener asInterface4 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    AuthenticationStateListener authenticationStateListenerAsInterface = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAuthenticationStateListener(asInterface4);
+                    registerAuthenticationStateListener(authenticationStateListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    AuthenticationStateListener asInterface5 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    AuthenticationStateListener authenticationStateListenerAsInterface2 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAuthenticationStateListener(asInterface5);
+                    unregisterAuthenticationStateListener(authenticationStateListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    IInvalidationCallback asInterface6 = IInvalidationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    IInvalidationCallback iInvalidationCallbackAsInterface = IInvalidationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    invalidateAuthenticatorIds(readInt8, readInt9, asInterface6);
+                    invalidateAuthenticatorIds(i10, i11, iInvalidationCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long[] authenticatorIds = getAuthenticatorIds(readInt10);
+                    long[] authenticatorIds = getAuthenticatorIds(i12);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(authenticatorIds);
                     return true;
                 case 14:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    String readString7 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    String string7 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    resetLockoutTimeBound(readStrongBinder3, readString7, readInt11, readInt12, createByteArray);
+                    resetLockoutTimeBound(strongBinder3, string7, i13, i14, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt13 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i15 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    resetLockout(readInt13, createByteArray2);
+                    resetLockout(i15, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt14 = parcel.readInt();
-                    String readString8 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence buttonLabel = getButtonLabel(readInt14, readString8, readInt15);
+                    CharSequence buttonLabel = getButtonLabel(i16, string8, i17);
                     parcel2.writeNoException();
                     if (buttonLabel != null) {
                         parcel2.writeInt(1);
@@ -391,11 +391,11 @@ public interface IAuthService extends IInterface {
                     }
                     return true;
                 case 17:
-                    int readInt16 = parcel.readInt();
-                    String readString9 = parcel.readString();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence promptMessage = getPromptMessage(readInt16, readString9, readInt17);
+                    CharSequence promptMessage = getPromptMessage(i18, string9, i19);
                     parcel2.writeNoException();
                     if (promptMessage != null) {
                         parcel2.writeInt(1);
@@ -405,11 +405,11 @@ public interface IAuthService extends IInterface {
                     }
                     return true;
                 case 18:
-                    int readInt18 = parcel.readInt();
-                    String readString10 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence settingName = getSettingName(readInt18, readString10, readInt19);
+                    CharSequence settingName = getSettingName(i20, string10, i21);
                     parcel2.writeNoException();
                     if (settingName != null) {
                         parcel2.writeInt(1);
@@ -441,307 +441,307 @@ public interface IAuthService extends IInterface {
 
             @Override // android.hardware.biometrics.IAuthService
             public ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iTestSessionCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITestSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iTestSessionCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITestSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public List<SensorPropertiesInternal> getSensorProperties(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SensorPropertiesInternal.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SensorPropertiesInternal.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public String getUiPackage() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public long authenticate(IBinder iBinder, long j, int i, IBiometricServiceReceiver iBiometricServiceReceiver, String str, PromptInfo promptInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iBiometricServiceReceiver);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(promptInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iBiometricServiceReceiver);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(promptInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void cancelAuthentication(IBinder iBinder, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public int canAuthenticate(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public long getLastAuthenticationTime(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public boolean hasEnrolledBiometrics(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBiometricEnabledOnKeyguardCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBiometricEnabledOnKeyguardCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongInterface(authenticationStateListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(authenticationStateListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongInterface(authenticationStateListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(authenticationStateListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void invalidateAuthenticatorIds(int i, int i2, IInvalidationCallback iInvalidationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iInvalidationCallback);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iInvalidationCallback);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public long[] getAuthenticatorIds(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void resetLockoutTimeBound(IBinder iBinder, String str, int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public void resetLockout(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public CharSequence getButtonLabel(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public CharSequence getPromptMessage(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.IAuthService
             public CharSequence getSettingName(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(IAuthService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

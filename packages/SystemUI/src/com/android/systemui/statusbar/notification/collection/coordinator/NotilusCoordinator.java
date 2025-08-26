@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class NotilusCoordinator extends Invalidator implements Coordinator {
@@ -54,8 +53,8 @@ public final class NotilusCoordinator extends Invalidator implements Coordinator
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderList(List<? extends PipelineEntry> list) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotilusCoordinator.onAfterRenderList");
         }
         try {
@@ -65,11 +64,11 @@ public final class NotilusCoordinator extends Invalidator implements Coordinator
                 ((NotificationShelfManager) Dependency.sDependency.getDependencyInner(NotificationShelfManager.class)).updateClearButton();
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -81,7 +80,7 @@ public final class NotilusCoordinator extends Invalidator implements Coordinator
         NotiCenterPlugin.INSTANCE.getClass();
         NotiCenterPlugin.mListener = this;
         notifPipeline.addPreRenderInvalidator(this);
-        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotilusCoordinator$attach$1
+        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotilusCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener
             public final void onAfterRenderList(List<? extends PipelineEntry> list) {
                 NotilusCoordinator.this.onAfterRenderList(list);

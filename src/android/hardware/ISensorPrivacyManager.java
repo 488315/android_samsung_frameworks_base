@@ -195,9 +195,9 @@ public interface ISensorPrivacyManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISensorPrivacyManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISensorPrivacyManager)) {
-                return (ISensorPrivacyManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISensorPrivacyManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISensorPrivacyManager)) {
+                return (ISensorPrivacyManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -267,89 +267,89 @@ public interface ISensorPrivacyManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean supportsSensorToggle = supportsSensorToggle(readInt, readInt2);
+                    boolean zSupportsSensorToggle = supportsSensorToggle(i3, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supportsSensorToggle);
+                    parcel2.writeBoolean(zSupportsSensorToggle);
                     return true;
                 case 2:
-                    ISensorPrivacyListener asInterface = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISensorPrivacyListener iSensorPrivacyListenerAsInterface = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addSensorPrivacyListener(asInterface);
+                    addSensorPrivacyListener(iSensorPrivacyListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ISensorPrivacyListener asInterface2 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISensorPrivacyListener iSensorPrivacyListenerAsInterface2 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addToggleSensorPrivacyListener(asInterface2);
+                    addToggleSensorPrivacyListener(iSensorPrivacyListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    ISensorPrivacyListener asInterface3 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISensorPrivacyListener iSensorPrivacyListenerAsInterface3 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeSensorPrivacyListener(asInterface3);
+                    removeSensorPrivacyListener(iSensorPrivacyListenerAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    ISensorPrivacyListener asInterface4 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISensorPrivacyListener iSensorPrivacyListenerAsInterface4 = ISensorPrivacyListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeToggleSensorPrivacyListener(asInterface4);
+                    removeToggleSensorPrivacyListener(iSensorPrivacyListenerAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    boolean isSensorPrivacyEnabled = isSensorPrivacyEnabled();
+                    boolean zIsSensorPrivacyEnabled = isSensorPrivacyEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSensorPrivacyEnabled);
+                    parcel2.writeBoolean(zIsSensorPrivacyEnabled);
                     return true;
                 case 7:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCombinedToggleSensorPrivacyEnabled = isCombinedToggleSensorPrivacyEnabled(readInt3);
+                    boolean zIsCombinedToggleSensorPrivacyEnabled = isCombinedToggleSensorPrivacyEnabled(i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCombinedToggleSensorPrivacyEnabled);
+                    parcel2.writeBoolean(zIsCombinedToggleSensorPrivacyEnabled);
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isToggleSensorPrivacyEnabled = isToggleSensorPrivacyEnabled(readInt4, readInt5);
+                    boolean zIsToggleSensorPrivacyEnabled = isToggleSensorPrivacyEnabled(i6, i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isToggleSensorPrivacyEnabled);
+                    parcel2.writeBoolean(zIsToggleSensorPrivacyEnabled);
                     return true;
                 case 9:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSensorPrivacy(readBoolean);
+                    setSensorPrivacy(z);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setToggleSensorPrivacy(readInt6, readInt7, readInt8, readBoolean2);
+                    setToggleSensorPrivacy(i8, i9, i10, z2);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setToggleSensorPrivacyForProfileGroup(readInt9, readInt10, readInt11, readBoolean3);
+                    setToggleSensorPrivacyForProfileGroup(i11, i12, i13, z3);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int readInt15 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setToggleSensorPrivacyForProfileGroupWithConfirmPopup(readInt12, readInt13, readInt14, readBoolean4, readInt15);
+                    setToggleSensorPrivacyForProfileGroupWithConfirmPopup(i14, i15, i16, z4, i17);
                     parcel2.writeNoException();
                     return true;
                 case 13:
@@ -358,62 +358,62 @@ public interface ISensorPrivacyManager extends IInterface {
                     parcel2.writeStringList(cameraPrivacyAllowlist);
                     return true;
                 case 14:
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int toggleSensorPrivacyState = getToggleSensorPrivacyState(readInt16, readInt17);
+                    int toggleSensorPrivacyState = getToggleSensorPrivacyState(i18, i19);
                     parcel2.writeNoException();
                     parcel2.writeInt(toggleSensorPrivacyState);
                     return true;
                 case 15:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setToggleSensorPrivacyState(readInt18, readInt19, readInt20, readInt21);
+                    setToggleSensorPrivacyState(i20, i21, i22, i23);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setToggleSensorPrivacyStateForProfileGroup(readInt22, readInt23, readInt24, readInt25);
+                    setToggleSensorPrivacyStateForProfileGroup(i24, i25, i26, i27);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isCameraPrivacyEnabled = isCameraPrivacyEnabled(readString);
+                    boolean zIsCameraPrivacyEnabled = isCameraPrivacyEnabled(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCameraPrivacyEnabled);
+                    parcel2.writeBoolean(zIsCameraPrivacyEnabled);
                     return true;
                 case 18:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    setCameraPrivacyAllowlist(createStringArrayList);
+                    setCameraPrivacyAllowlist(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    suppressToggleSensorPrivacyReminders(readInt26, readInt27, readStrongBinder, readBoolean5);
+                    suppressToggleSensorPrivacyReminders(i28, i29, strongBinder, z5);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    boolean requiresAuthentication = requiresAuthentication();
+                    boolean zRequiresAuthentication = requiresAuthentication();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requiresAuthentication);
+                    parcel2.writeBoolean(zRequiresAuthentication);
                     return true;
                 case 21:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showSensorUseDialog(readInt28);
+                    showSensorUseDialog(i30);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -439,343 +439,343 @@ public interface ISensorPrivacyManager extends IInterface {
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean supportsSensorToggle(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void addSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSensorPrivacyListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSensorPrivacyListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void addToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSensorPrivacyListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSensorPrivacyListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void removeSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSensorPrivacyListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSensorPrivacyListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void removeToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSensorPrivacyListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSensorPrivacyListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean isSensorPrivacyEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean isCombinedToggleSensorPrivacyEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean isToggleSensorPrivacyEnabled(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setSensorPrivacy(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setToggleSensorPrivacy(int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setToggleSensorPrivacyForProfileGroup(int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(int i, int i2, int i3, boolean z, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public List<String> getCameraPrivacyAllowlist() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public int getToggleSensorPrivacyState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setToggleSensorPrivacyState(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setToggleSensorPrivacyStateForProfileGroup(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean isCameraPrivacyEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void setCameraPrivacyAllowlist(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void suppressToggleSensorPrivacyReminders(int i, int i2, IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public boolean requiresAuthentication() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ISensorPrivacyManager
             public void showSensorUseDialog(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISensorPrivacyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

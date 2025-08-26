@@ -69,9 +69,9 @@ public interface IUpdateEngineStable extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUpdateEngineStable)) {
-                return (IUpdateEngineStable) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUpdateEngineStable)) {
+                return (IUpdateEngineStable) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -98,24 +98,24 @@ public interface IUpdateEngineStable extends IInterface {
             }
             if (i == 1) {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
-                String[] createStringArray = parcel.createStringArray();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                applyPayloadFd(parcelFileDescriptor, readLong, readLong2, createStringArray);
+                applyPayloadFd(parcelFileDescriptor, j, j2, strArrCreateStringArray);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IUpdateEngineStableCallback asInterface = IUpdateEngineStableCallback.Stub.asInterface(parcel.readStrongBinder());
+                IUpdateEngineStableCallback iUpdateEngineStableCallbackAsInterface = IUpdateEngineStableCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                boolean bind = bind(asInterface);
+                boolean zBind = bind(iUpdateEngineStableCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(bind);
+                parcel2.writeBoolean(zBind);
             } else if (i == 3) {
-                IUpdateEngineStableCallback asInterface2 = IUpdateEngineStableCallback.Stub.asInterface(parcel.readStrongBinder());
+                IUpdateEngineStableCallback iUpdateEngineStableCallbackAsInterface2 = IUpdateEngineStableCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                boolean unbind = unbind(asInterface2);
+                boolean zUnbind = unbind(iUpdateEngineStableCallbackAsInterface2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(unbind);
+                parcel2.writeBoolean(zUnbind);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -142,73 +142,73 @@ public interface IUpdateEngineStable extends IInterface {
 
             @Override // android.os.IUpdateEngineStable
             public void applyPayloadFd(ParcelFileDescriptor parcelFileDescriptor, long j, long j2, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeStringArray(strArr);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeStringArray(strArr);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method applyPayloadFd is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IUpdateEngineStable
             public boolean bind(IUpdateEngineStableCallback iUpdateEngineStableCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iUpdateEngineStableCallback);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUpdateEngineStableCallback);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method bind is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IUpdateEngineStable
             public boolean unbind(IUpdateEngineStableCallback iUpdateEngineStableCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iUpdateEngineStableCallback);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUpdateEngineStableCallback);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method unbind is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IUpdateEngineStable
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -217,18 +217,18 @@ public interface IUpdateEngineStable extends IInterface {
             @Override // android.os.IUpdateEngineStable
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

@@ -14,11 +14,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MoreExecutors {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ListeningDecorator extends AbstractListeningExecutorService {
         public final ExecutorService delegate;
 
@@ -87,11 +85,9 @@ public final class MoreExecutors {
         };
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScheduledListeningDecorator extends ListeningDecorator implements ScheduledExecutorService {
         public final ScheduledExecutorService delegate;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ListenableScheduledTask extends ForwardingListenableFuture.SimpleForwardingListenableFuture implements ScheduledFuture {
             public final ScheduledFuture scheduledDelegate;
 
@@ -102,11 +98,11 @@ public final class MoreExecutors {
 
             @Override // com.google.common.util.concurrent.ForwardingFuture, java.util.concurrent.Future
             public final boolean cancel(boolean z) {
-                boolean cancel = super.cancel(z);
-                if (cancel) {
+                boolean zCancel = super.cancel(z);
+                if (zCancel) {
                     this.scheduledDelegate.cancel(z);
                 }
-                return cancel;
+                return zCancel;
             }
 
             @Override // java.lang.Comparable
@@ -120,7 +116,6 @@ public final class MoreExecutors {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NeverSuccessfulListenableFutureTask extends AbstractFuture.TrustedFuture implements Runnable {
             public final Runnable delegate;
 

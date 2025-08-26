@@ -11,7 +11,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.service.carrier.CarrierMessagingServiceWrapper;
 import android.service.carrier.ICarrierMessagingCallback;
 import android.service.carrier.ICarrierMessagingService;
 import com.android.internal.hidden_from_bootclasspath.com.android.internal.telephony.flags.Flags;
@@ -81,11 +80,11 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
         if (this.mOnServiceReadyCallback == null || this.mServiceReadyCallbackExecutor == null) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mServiceReadyCallbackExecutor.execute(this.mOnServiceReadyCallback);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -189,7 +188,7 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
             this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onFilterComplete$0(i);
+                    this.f$0.lambda$onFilterComplete$0(i);
                 }
             });
         }
@@ -204,7 +203,7 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
             this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendSmsComplete$1(i, i2);
+                    this.f$0.lambda$onSendSmsComplete$1(i, i2);
                 }
             });
         }
@@ -219,7 +218,7 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
             this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendMultipartSmsComplete$2(i, iArr);
+                    this.f$0.lambda$onSendMultipartSmsComplete$2(i, iArr);
                 }
             });
         }
@@ -234,7 +233,7 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
             this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendMmsComplete$3(i, bArr);
+                    this.f$0.lambda$onSendMmsComplete$3(i, bArr);
                 }
             });
         }
@@ -249,7 +248,7 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
             this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onDownloadMmsComplete$4(i);
+                    this.f$0.lambda$onDownloadMmsComplete$4(i);
                 }
             });
         }

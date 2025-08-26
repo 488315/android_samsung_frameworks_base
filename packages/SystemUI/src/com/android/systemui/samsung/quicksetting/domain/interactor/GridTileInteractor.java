@@ -1,26 +1,52 @@
 package com.android.systemui.samsung.quicksetting.domain.interactor;
 
 import androidx.compose.ui.unit.IntOffset;
+import androidx.compose.ui.unit.IntSize;
 import com.android.systemui.R;
 import com.android.systemui.pluginlock.component.PluginLockShortcutTask;
+import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.panels.domain.interactor.EditTilesListInteractor;
+import com.android.systemui.qs.panels.domain.model.EditTilesModel;
+import com.android.systemui.qs.panels.shared.model.EditTileData;
 import com.android.systemui.qs.panels.ui.viewmodel.TileGridViewModel;
 import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor;
+import com.android.systemui.qs.pipeline.shared.TileSpec;
+import com.android.systemui.samsung.quicksetting.data.repository.GridTileRepositoryImpl;
 import com.android.systemui.samsung.quicksetting.domain.model.GridTileData;
 import com.android.systemui.samsung.quicksetting.domain.model.QSPanelItem;
 import com.android.systemui.samsung.quicksetting.domain.model.items.BrightBar;
 import com.android.systemui.samsung.quicksetting.domain.model.items.Collapser;
 import com.android.systemui.samsung.quicksetting.domain.model.items.GridTileItem;
 import com.android.systemui.samsung.quicksetting.domain.model.items.MediaPlayer;
+import com.android.systemui.samsung.quicksetting.domain.model.items.QuickTile;
 import com.android.systemui.samsung.quicksetting.domain.model.items.QuickTileDrawer;
+import com.android.systemui.samsung.quicksetting.domain.model.items.QuickTileFolder;
 import com.android.systemui.samsung.quicksetting.domain.model.items.VolumeBar;
 import com.android.systemui.samsung.quicksetting.domain.repository.GridTileRepository;
+import com.android.systemui.samsung.quicksetting.ui.panel.ScreenType;
 import com.android.systemui.samsung.quicksetting.ui.panel.SecBrightBarViewModel;
 import com.android.systemui.samsung.quicksetting.ui.panel.SecVolumeBarViewModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import javax.inject.Provider;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__MutableCollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.SetsKt___SetsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GridTileInteractor {
     public final Provider brightBarViewModelProvider;
@@ -29,6 +55,44 @@ public final class GridTileInteractor {
     public final GridTileRepository gridTileRepository;
     public final TileGridViewModel tileGridViewModel;
     public final Provider volumeBarViewModelProvider;
+
+    /* renamed from: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadAvailableTiles$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return GridTileInteractor.this.loadAvailableTiles(null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1, reason: invalid class name and case insensitive filesystem */
+    final class C10221 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C10221(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return GridTileInteractor.this.loadTiles(null, this);
+        }
+    }
 
     public GridTileInteractor(GridTileRepository gridTileRepository, EditTilesListInteractor editTilesListInteractor, CurrentTilesInteractor currentTilesInteractor, TileGridViewModel.Factory factory, Provider provider, Provider provider2) {
         this.gridTileRepository = gridTileRepository;
@@ -40,7 +104,7 @@ public final class GridTileInteractor {
     }
 
     public static QSPanelItem buildPanelItem(GridTileData gridTileData, Function1 function1) {
-        GridTileItem gridTileItem = (GridTileItem) function1.mo779invoke(gridTileData);
+        GridTileItem gridTileItem = (GridTileItem) function1.mo781invoke(gridTileData);
         long j = (gridTileData.spanX << 32) | (gridTileData.spanY & 4294967295L);
         IntOffset.Companion companion = IntOffset.Companion;
         return new QSPanelItem(gridTileItem, gridTileData.spanWidth, gridTileData.spanHeight, j, 0.0f, 0.0f, 0, null, null, null, false, 2032, null);
@@ -67,91 +131,356 @@ public final class GridTileInteractor {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:118:0x0068, code lost:
-    
-        if (r5 == r4) goto L36;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x019a  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x01b3 A[LOOP:0: B:12:0x01ad->B:14:0x01b3, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0208 A[LOOP:2: B:32:0x0206->B:33:0x0208, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0229  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0250  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0277 A[LOOP:5: B:57:0x0275->B:58:0x0277, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x029b  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x02be A[LOOP:7: B:72:0x02bc->B:73:0x02be, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x02e1 A[LOOP:8: B:76:0x02df->B:77:0x02e1, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0307  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0028  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x008c  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x01b3 A[LOOP:0: B:39:0x01ad->B:41:0x01b3, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x01d6  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0208 A[LOOP:2: B:52:0x0206->B:53:0x0208, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0229  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x0250  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x0277 A[LOOP:5: B:66:0x0275->B:67:0x0277, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x029b  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x02be A[LOOP:7: B:75:0x02bc->B:76:0x02be, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:79:0x02e1 A[LOOP:8: B:78:0x02df->B:79:0x02e1, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0018  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x0307  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object loadAvailableTiles(java.util.List r42, kotlin.coroutines.jvm.internal.ContinuationImpl r43) {
-        /*
-            Method dump skipped, instructions count: 803
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor.loadAvailableTiles(java.util.List, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object loadAvailableTiles(List list, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        List list2;
+        Object tilesToEdit;
+        List list3;
+        GridTileInteractor gridTileInteractor;
+        List list4;
+        QuickTile quickTile;
+        long j;
+        Iterator it;
+        int size;
+        int i;
+        int size2;
+        int i2;
+        int size3;
+        int i3;
+        int size4;
+        int i4;
+        int size5;
+        int i5;
+        GridTileInteractor gridTileInteractor2 = this;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i6 = anonymousClass1.label;
+            if ((i6 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i6 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = gridTileInteractor2.new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i7 = anonymousClass1.label;
+        int i8 = 2;
+        if (i7 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.L$0 = gridTileInteractor2;
+            list2 = list;
+            anonymousClass1.L$1 = list2;
+            anonymousClass1.label = 1;
+            tilesToEdit = gridTileInteractor2.editTilesListInteractor.getTilesToEdit(anonymousClass1);
+            if (tilesToEdit != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i7 != 1) {
+            if (i7 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            list4 = (List) anonymousClass1.L$2;
+            list3 = (List) anonymousClass1.L$1;
+            gridTileInteractor = (GridTileInteractor) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            Iterable iterable = (Iterable) obj;
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
+            it = iterable.iterator();
+            while (it.hasNext()) {
+                arrayList.add(gridTileInteractor.toQSPanelItem((GridTileData) it.next()));
+            }
+            List list5 = list3;
+            ArrayList arrayList2 = new ArrayList();
+            for (Object obj2 : list5) {
+                GridTileItem gridTileItem = ((QSPanelItem) obj2).gridTileItem;
+                if (!Intrinsics.areEqual(gridTileItem.getType(), "QuickTile") && !Intrinsics.areEqual(gridTileItem.getType(), "QuickTileFolder")) {
+                    arrayList2.add(obj2);
+                }
+            }
+            ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
+            size = arrayList2.size();
+            i = 0;
+            while (i < size) {
+                Object obj3 = arrayList2.get(i);
+                i++;
+                arrayList3.add(((QSPanelItem) obj3).gridTileItem.getUniqueKey());
+            }
+            Set set = CollectionsKt___CollectionsKt.toSet(arrayList3);
+            ArrayList arrayList4 = new ArrayList();
+            size2 = arrayList.size();
+            i2 = 0;
+            while (i2 < size2) {
+                Object obj4 = arrayList.get(i2);
+                i2++;
+                if (!set.contains(((QSPanelItem) obj4).gridTileItem.getUniqueKey())) {
+                    arrayList4.add(obj4);
+                }
+            }
+            ArrayList arrayList5 = new ArrayList();
+            for (Object obj5 : list5) {
+                if (Intrinsics.areEqual(((QSPanelItem) obj5).gridTileItem.getType(), "QuickTile")) {
+                    arrayList5.add(obj5);
+                }
+            }
+            ArrayList arrayList6 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList5, 10));
+            size3 = arrayList5.size();
+            i3 = 0;
+            while (i3 < size3) {
+                Object obj6 = arrayList5.get(i3);
+                i3++;
+                arrayList6.add(((QSPanelItem) obj6).gridTileItem.getUniqueKey());
+            }
+            Set set2 = CollectionsKt___CollectionsKt.toSet(arrayList6);
+            ArrayList arrayList7 = new ArrayList();
+            for (Object obj7 : list5) {
+                if (Intrinsics.areEqual(((QSPanelItem) obj7).gridTileItem.getType(), "QuickTileFolder")) {
+                    arrayList7.add(obj7);
+                }
+            }
+            ArrayList arrayList8 = new ArrayList();
+            size4 = arrayList7.size();
+            i4 = 0;
+            while (i4 < size4) {
+                Object obj8 = arrayList7.get(i4);
+                i4++;
+                CollectionsKt__MutableCollectionsKt.addAll(((QuickTileFolder) ((QSPanelItem) obj8).gridTileItem).tiles, arrayList8);
+            }
+            ArrayList arrayList9 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList8, 10));
+            size5 = arrayList8.size();
+            i5 = 0;
+            while (i5 < size5) {
+                Object obj9 = arrayList8.get(i5);
+                i5++;
+                arrayList9.add(((QuickTile) obj9).spec);
+            }
+            Set set3 = CollectionsKt___CollectionsKt.toSet(SetsKt___SetsKt.plus(set2, (Iterable) arrayList9));
+            ArrayList arrayList10 = new ArrayList();
+            for (Object obj10 : list4) {
+                if (!set3.contains(((QSPanelItem) obj10).gridTileItem.getUniqueKey())) {
+                    arrayList10.add(obj10);
+                }
+            }
+            return CollectionsKt___CollectionsKt.plus((Iterable) arrayList10, (Collection) arrayList4);
+        }
+        List list6 = (List) anonymousClass1.L$1;
+        GridTileInteractor gridTileInteractor3 = (GridTileInteractor) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        list2 = list6;
+        gridTileInteractor2 = gridTileInteractor3;
+        tilesToEdit = obj;
+        EditTilesModel editTilesModel = (EditTilesModel) tilesToEdit;
+        List listPlus = CollectionsKt___CollectionsKt.plus((Iterable) editTilesModel.customTiles, (Collection) editTilesModel.stockTiles);
+        ArrayList arrayList11 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listPlus, 10));
+        ArrayList arrayList12 = (ArrayList) listPlus;
+        int size6 = arrayList12.size();
+        int i9 = 0;
+        while (i9 < size6) {
+            Object obj11 = arrayList12.get(i9);
+            i9++;
+            EditTileData editTileData = (EditTileData) obj11;
+            QSTile tileBySpecString = gridTileInteractor2.currentTilesInteractor.getTileBySpecString(editTileData.tileSpec.getSpec());
+            TileSpec tileSpec = editTileData.tileSpec;
+            if (tileBySpecString != null) {
+                String spec = tileSpec.getSpec();
+                if (Intrinsics.areEqual(spec, "Wifi") || Intrinsics.areEqual(spec, "Bluetooth")) {
+                    j = (i8 << 32) | (1 & 4294967295L);
+                    IntSize.Companion companion = IntSize.Companion;
+                } else {
+                    long j2 = 1;
+                    j = (j2 << 32) | (j2 & 4294967295L);
+                    IntSize.Companion companion2 = IntSize.Companion;
+                }
+                quickTile = new QuickTile(j, null, tileSpec.getSpec(), 0, tileBySpecString, 10, null);
+            } else {
+                quickTile = new QuickTile(0L, null, tileSpec.getSpec(), 0, null, 27, null);
+            }
+            arrayList11.add(new QSPanelItem(quickTile, 0, 0, 0L, 0.0f, 0.0f, 0, null, null, null, false, 2046, null));
+            i8 = 2;
+        }
+        GridTileRepository gridTileRepository = gridTileInteractor2.gridTileRepository;
+        anonymousClass1.L$0 = gridTileInteractor2;
+        anonymousClass1.L$1 = list2;
+        anonymousClass1.L$2 = arrayList11;
+        anonymousClass1.label = 2;
+        ((GridTileRepositoryImpl) gridTileRepository).getClass();
+        List listAsList = Arrays.asList(new GridTileData("BrightBar", null, 0, 0, 4, 1, 14, null), new GridTileData("VolumeBar", null, 0, 0, 2, 2, 14, null), new GridTileData("MediaPlayer", null, 0, 0, 4, 1, 14, null), new GridTileData("QuickButton", "NearByDevices", 0, 0, 2, 1, 12, null), new GridTileData("QuickButton", "SmartThings", 0, 0, 2, 1, 12, null));
+        if (listAsList != coroutineSingletons) {
+            list3 = list2;
+            obj = listAsList;
+            gridTileInteractor = gridTileInteractor2;
+            list4 = arrayList11;
+            Iterable iterable2 = (Iterable) obj;
+            ArrayList arrayList13 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable2, 10));
+            it = iterable2.iterator();
+            while (it.hasNext()) {
+            }
+            List list52 = list3;
+            ArrayList arrayList22 = new ArrayList();
+            while (r3.hasNext()) {
+            }
+            ArrayList arrayList32 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList22, 10));
+            size = arrayList22.size();
+            i = 0;
+            while (i < size) {
+            }
+            Set set4 = CollectionsKt___CollectionsKt.toSet(arrayList32);
+            ArrayList arrayList42 = new ArrayList();
+            size2 = arrayList13.size();
+            i2 = 0;
+            while (i2 < size2) {
+            }
+            ArrayList arrayList52 = new ArrayList();
+            while (r5.hasNext()) {
+            }
+            ArrayList arrayList62 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList52, 10));
+            size3 = arrayList52.size();
+            i3 = 0;
+            while (i3 < size3) {
+            }
+            Set set22 = CollectionsKt___CollectionsKt.toSet(arrayList62);
+            ArrayList arrayList72 = new ArrayList();
+            while (r4.hasNext()) {
+            }
+            ArrayList arrayList82 = new ArrayList();
+            size4 = arrayList72.size();
+            i4 = 0;
+            while (i4 < size4) {
+            }
+            ArrayList arrayList92 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList82, 10));
+            size5 = arrayList82.size();
+            i5 = 0;
+            while (i5 < size5) {
+            }
+            Set set32 = CollectionsKt___CollectionsKt.toSet(SetsKt___SetsKt.plus(set22, (Iterable) arrayList92));
+            ArrayList arrayList102 = new ArrayList();
+            while (r0.hasNext()) {
+            }
+            return CollectionsKt___CollectionsKt.plus((Iterable) arrayList102, (Collection) arrayList42);
+        }
+        return coroutineSingletons;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object loadTiles(com.android.systemui.samsung.quicksetting.ui.panel.ScreenType r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1 r0 = (com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1 r0 = new com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor r4 = (com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L45
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r4
-            r0.label = r3
-            com.android.systemui.samsung.quicksetting.domain.repository.GridTileRepository r6 = r4.gridTileRepository
-            com.android.systemui.samsung.quicksetting.data.repository.GridTileRepositoryImpl r6 = (com.android.systemui.samsung.quicksetting.data.repository.GridTileRepositoryImpl) r6
-            java.lang.Object r6 = r6.loadGridTiles(r5, r0)
-            if (r6 != r1) goto L45
-            return r1
-        L45:
-            kotlinx.coroutines.flow.Flow r6 = (kotlinx.coroutines.flow.Flow) r6
-            com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$$inlined$map$1 r5 = new com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$$inlined$map$1
-            r5.<init>()
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor.loadTiles(com.android.systemui.samsung.quicksetting.ui.panel.ScreenType, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object loadTiles(ScreenType screenType, ContinuationImpl continuationImpl) {
+        C10221 c10221;
+        if (continuationImpl instanceof C10221) {
+            c10221 = (C10221) continuationImpl;
+            int i = c10221.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c10221.label = i - Integer.MIN_VALUE;
+            } else {
+                c10221 = new C10221(continuationImpl);
+            }
+        }
+        Object objLoadGridTiles = c10221.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c10221.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objLoadGridTiles);
+            c10221.L$0 = this;
+            c10221.label = 1;
+            objLoadGridTiles = ((GridTileRepositoryImpl) this.gridTileRepository).loadGridTiles(screenType, c10221);
+            if (objLoadGridTiles == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (GridTileInteractor) c10221.L$0;
+            ResultKt.throwOnFailure(objLoadGridTiles);
+        }
+        final Flow flow = (Flow) objLoadGridTiles;
+        return new Flow() { // from class: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$$inlined$map$1
+
+            /* renamed from: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$$inlined$map$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                public final /* synthetic */ GridTileInteractor this$0;
+
+                /* renamed from: com.android.systemui.samsung.quicksetting.domain.interactor.GridTileInteractor$loadTiles$$inlined$map$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    Object L$0;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector, GridTileInteractor gridTileInteractor) {
+                    this.$this_unsafeFlow = flowCollector;
+                    this.this$0 = gridTileInteractor;
+                }
+
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        QSPanelItem qSPanelItem = this.this$0.toQSPanelItem((GridTileData) obj);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(qSPanelItem, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        };
     }
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
@@ -166,10 +495,10 @@ public final class GridTileInteractor {
     public final QSPanelItem toQSPanelItem(GridTileData gridTileData) {
         final int i = 1;
         String str = gridTileData.type;
-        int hashCode = str.hashCode();
+        int iHashCode = str.hashCode();
         int i2 = gridTileData.spanY;
         int i3 = gridTileData.spanX;
-        switch (hashCode) {
+        switch (iHashCode) {
             case -990228965:
                 if (str.equals("QuickTile")) {
                     return buildPanelItem(gridTileData, new GridTileInteractor$$ExternalSyntheticLambda0(this, gridTileData));
@@ -198,7 +527,7 @@ public final class GridTileInteractor {
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             switch (i4) {
                                 case 0:
                                     return new BrightBar((SecBrightBarViewModel) this.f$0.brightBarViewModelProvider.get(), 0L, null, 6, null);
@@ -226,7 +555,7 @@ public final class GridTileInteractor {
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             switch (i) {
                                 case 0:
                                     return new BrightBar((SecBrightBarViewModel) this.f$0.brightBarViewModelProvider.get(), 0L, null, 6, null);

@@ -1,8 +1,13 @@
 package com.android.wm.shell.freeform;
 
+import android.app.ActivityManager;
+import android.app.AppGlobals;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.wm.shell.freeform.FreeformContainerManager;
+import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformContainerItemController {
     public final FreeformContainerIconLoader mFreeformContainerIconLoader;
@@ -125,7 +129,7 @@ public class FreeformContainerItemController {
     }
 
     public final void publishItemIfNeeded(FreeformContainerItem freeformContainerItem) {
-        int indexOf;
+        int iIndexOf;
         freeformContainerItem.getClass();
         boolean z = freeformContainerItem instanceof MultiInstanceItem;
         if (!z && !this.mItemList.contains(freeformContainerItem)) {
@@ -141,11 +145,11 @@ public class FreeformContainerItemController {
             int taskId = freeformContainerItem.getTaskId();
             ArrayList arrayList = new ArrayList(this.mItemList);
             int size = arrayList.size();
-            indexOf = 0;
+            iIndexOf = 0;
             int i2 = 0;
             loop0: while (true) {
                 if (i2 >= size) {
-                    indexOf = 0;
+                    iIndexOf = 0;
                     break;
                 }
                 Object obj = arrayList.get(i2);
@@ -160,12 +164,12 @@ public class FreeformContainerItemController {
                         }
                     }
                 }
-                indexOf++;
+                iIndexOf++;
             }
         } else {
-            indexOf = this.mItemList.indexOf(freeformContainerItem);
+            iIndexOf = this.mItemList.indexOf(freeformContainerItem);
         }
-        if (indexOf != 0 && !((FreeformContainerItem) this.mItemList.get(indexOf - 1)).mPublishCompleted) {
+        if (iIndexOf != 0 && !((FreeformContainerItem) this.mItemList.get(iIndexOf - 1)).mPublishCompleted) {
             Log.i("FreeformContainer", "[ItemController] publishItemIfNeeded: previous item is not published, item=" + freeformContainerItem);
             return;
         }
@@ -212,8 +216,8 @@ public class FreeformContainerItemController {
             freeformContainerCallback.onItemAdded(freeformContainerItem);
         }
         Log.i("FreeformContainer", "[ItemController] publishItemIfNeeded item=" + freeformContainerItem);
-        if (indexOf < this.mItemList.size() - 1) {
-            publishItemIfNeeded((FreeformContainerItem) this.mItemList.get(indexOf + 1));
+        if (iIndexOf < this.mItemList.size() - 1) {
+            publishItemIfNeeded((FreeformContainerItem) this.mItemList.get(iIndexOf + 1));
         }
     }
 
@@ -269,123 +273,97 @@ public class FreeformContainerItemController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00c3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void removeItem(com.android.wm.shell.freeform.FreeformContainerItem r9) {
-        /*
-            r8 = this;
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "[ItemController] Run removeItem, item="
-            r0.<init>(r1)
-            r0.append(r9)
-            java.lang.String r0 = r0.toString()
-            java.lang.String r1 = "FreeformContainer"
-            android.util.Log.i(r1, r0)
-            boolean r0 = com.samsung.android.rune.CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW
-            if (r0 == 0) goto Lc3
-            r9.getClass()
-            boolean r0 = r9 instanceof com.android.wm.shell.freeform.MultiInstanceItem
-            if (r0 == 0) goto Lc3
-            int r9 = r9.getTaskId()
-            java.util.List r0 = r8.mItemList
-            java.util.Iterator r0 = r0.iterator()
-        L28:
-            boolean r2 = r0.hasNext()
-            if (r2 == 0) goto Ld1
-            java.lang.Object r2 = r0.next()
-            com.android.wm.shell.freeform.FreeformContainerItem r2 = (com.android.wm.shell.freeform.FreeformContainerItem) r2
-            com.android.wm.shell.freeform.MultiInstanceItem r3 = r2.asMultiInstanceItem()
-            if (r3 != 0) goto L3b
-            goto L28
-        L3b:
-            java.util.List r4 = r3.mChildItemList
-            int r4 = r4.size()
-            int r4 = r4 + (-1)
-        L43:
-            r5 = 0
-            if (r4 < 0) goto L56
-            java.util.List r6 = r3.mChildItemList
-            java.lang.Object r6 = r6.get(r4)
-            com.android.wm.shell.freeform.MultiInstanceItem r6 = (com.android.wm.shell.freeform.MultiInstanceItem) r6
-            int r7 = r6.mTaskId
-            if (r7 != r9) goto L53
-            goto L57
-        L53:
-            int r4 = r4 + (-1)
-            goto L43
-        L56:
-            r6 = r5
-        L57:
-            if (r6 == 0) goto Lae
-            java.util.List r4 = r3.mChildItemList
-            boolean r4 = r4.contains(r6)
-            if (r4 != 0) goto L73
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r4 = "[MultiInstanceItem]  removeChildItem: failed, not exist, "
-            r3.<init>(r4)
-            r3.append(r6)
-            java.lang.String r3 = r3.toString()
-            android.util.Log.w(r1, r3)
-            goto La9
-        L73:
-            android.graphics.Bitmap r4 = r6.mSnapshotBitmap
-            if (r4 == 0) goto L8a
-            r6.mSnapshotBitmap = r5
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "[MultiInstanceItem] setSnapshotBitmap: "
-            r4.<init>(r5)
-            r4.append(r6)
-            java.lang.String r4 = r4.toString()
-            android.util.Log.d(r1, r4)
-        L8a:
-            java.util.List r4 = r3.mChildItemList
-            r4.remove(r6)
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "removeChildItem: "
-            r4.<init>(r5)
-            r4.append(r6)
-            java.lang.String r5 = ", this="
-            r4.append(r5)
-            r4.append(r3)
-            java.lang.String r3 = r4.toString()
-            android.util.Log.d(r1, r3)
-        La9:
-            com.android.wm.shell.freeform.FreeformContainerViewController r3 = r8.mViewController
-            r3.notifyItemRemoved(r6)
-        Lae:
-            boolean r3 = r2.mPublishCompleted
-            if (r3 == 0) goto L28
-            int r3 = r2.getItemCount()
-            if (r3 != 0) goto L28
-            java.util.List r9 = r8.mItemList
-            r9.remove(r2)
-            com.android.wm.shell.freeform.FreeformContainerViewController r9 = r8.mViewController
-            r9.notifyItemRemoved(r2)
-            goto Ld1
-        Lc3:
-            java.util.List r0 = r8.mItemList
-            r0.remove(r9)
-            boolean r0 = r9.mPublishCompleted
-            if (r0 == 0) goto Ld1
-            com.android.wm.shell.freeform.FreeformContainerViewController r0 = r8.mViewController
-            r0.notifyItemRemoved(r9)
-        Ld1:
-            java.util.List r8 = r8.mItemList
-            boolean r8 = r8.isEmpty()
-            if (r8 == 0) goto Le4
-            java.util.concurrent.ExecutorService r8 = com.android.wm.shell.freeform.FreeformContainerSystemProxy.mExecutor
-            com.android.wm.shell.freeform.FreeformContainerSystemProxy$$ExternalSyntheticLambda0 r9 = new com.android.wm.shell.freeform.FreeformContainerSystemProxy$$ExternalSyntheticLambda0
-            r0 = 0
-            r9.<init>(r0)
-            r8.execute(r9)
-        Le4:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.freeform.FreeformContainerItemController.removeItem(com.android.wm.shell.freeform.FreeformContainerItem):void");
+    public final void removeItem(FreeformContainerItem freeformContainerItem) {
+        MultiInstanceItem multiInstanceItem;
+        Log.i("FreeformContainer", "[ItemController] Run removeItem, item=" + freeformContainerItem);
+        if (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW) {
+            freeformContainerItem.getClass();
+            if (freeformContainerItem instanceof MultiInstanceItem) {
+                int taskId = freeformContainerItem.getTaskId();
+                Iterator it = this.mItemList.iterator();
+                while (true) {
+                    if (!it.hasNext()) {
+                        break;
+                    }
+                    FreeformContainerItem freeformContainerItem2 = (FreeformContainerItem) it.next();
+                    MultiInstanceItem multiInstanceItemAsMultiInstanceItem = freeformContainerItem2.asMultiInstanceItem();
+                    if (multiInstanceItemAsMultiInstanceItem != null) {
+                        int size = multiInstanceItemAsMultiInstanceItem.mChildItemList.size();
+                        while (true) {
+                            size--;
+                            if (size < 0) {
+                                multiInstanceItem = null;
+                                break;
+                            } else {
+                                multiInstanceItem = (MultiInstanceItem) multiInstanceItemAsMultiInstanceItem.mChildItemList.get(size);
+                                if (multiInstanceItem.mTaskId == taskId) {
+                                    break;
+                                }
+                            }
+                        }
+                        if (multiInstanceItem != null) {
+                            if (multiInstanceItemAsMultiInstanceItem.mChildItemList.contains(multiInstanceItem)) {
+                                if (multiInstanceItem.mSnapshotBitmap != null) {
+                                    multiInstanceItem.mSnapshotBitmap = null;
+                                    Log.d("FreeformContainer", "[MultiInstanceItem] setSnapshotBitmap: " + multiInstanceItem);
+                                }
+                                multiInstanceItemAsMultiInstanceItem.mChildItemList.remove(multiInstanceItem);
+                                Log.d("FreeformContainer", "removeChildItem: " + multiInstanceItem + ", this=" + multiInstanceItemAsMultiInstanceItem);
+                            } else {
+                                Log.w("FreeformContainer", "[MultiInstanceItem]  removeChildItem: failed, not exist, " + multiInstanceItem);
+                            }
+                            this.mViewController.notifyItemRemoved(multiInstanceItem);
+                        }
+                        if (freeformContainerItem2.mPublishCompleted && freeformContainerItem2.getItemCount() == 0) {
+                            this.mItemList.remove(freeformContainerItem2);
+                            this.mViewController.notifyItemRemoved(freeformContainerItem2);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                this.mItemList.remove(freeformContainerItem);
+                if (freeformContainerItem.mPublishCompleted) {
+                    this.mViewController.notifyItemRemoved(freeformContainerItem);
+                }
+            }
+        }
+        if (this.mItemList.isEmpty()) {
+            FreeformContainerSystemProxy.mExecutor.execute(new FreeformContainerSystemProxy$$ExternalSyntheticLambda0(false));
+        }
+    }
+
+    public final void restoreMinimizeContainerItems(Context context) {
+        Context context2;
+        ActivityInfo activityInfo;
+        this.mItemList.clear();
+        List<ActivityManager.RunningTaskInfo> minimizedFreeformTasksForCurrentUser = MultiWindowManager.getInstance().getMinimizedFreeformTasksForCurrentUser();
+        if (minimizedFreeformTasksForCurrentUser == null || minimizedFreeformTasksForCurrentUser.isEmpty()) {
+            return;
+        }
+        for (ActivityManager.RunningTaskInfo runningTaskInfo : minimizedFreeformTasksForCurrentUser) {
+            try {
+                activityInfo = AppGlobals.getPackageManager().getActivityInfo(runningTaskInfo.realActivity, 128L, runningTaskInfo.userId);
+            } catch (RemoteException e) {
+                e = e;
+                context2 = context;
+            }
+            if (activityInfo != null) {
+                context2 = context;
+                try {
+                    this.mH.sendMessage(13, new MinimizeContainerItem(context2, activityInfo.packageName, runningTaskInfo.realActivity, runningTaskInfo.taskId, runningTaskInfo.userId, true));
+                } catch (RemoteException e2) {
+                    e = e2;
+                    e.printStackTrace();
+                    context = context2;
+                }
+                context = context2;
+            }
+        }
     }
 
     public final void throwAwayAllItems() {

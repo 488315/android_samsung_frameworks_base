@@ -37,7 +37,6 @@ import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Bubble implements BubbleViewProvider {
     public String mAppName;
@@ -93,7 +92,6 @@ public class Bubble implements BubbleViewProvider {
     public final BubbleType mType;
     public UserHandle mUser;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum BubbleType {
         TYPE_CHAT,
         TYPE_NOTE,
@@ -101,7 +99,6 @@ public class Bubble implements BubbleViewProvider {
         TYPE_APP
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FlyoutMessage {
         public boolean isGroupChat;
         public CharSequence message;
@@ -295,14 +292,15 @@ public class Bubble implements BubbleViewProvider {
         int i = this.mAppUid;
         if (i == -1) {
             PackageManager packageManagerForUser = BubbleController.getPackageManagerForUser(this.mUser.getIdentifier(), context);
-            if (packageManagerForUser != null) {
+            if (packageManagerForUser == null) {
+                i = -1;
+            } else {
                 try {
                     i = packageManagerForUser.getApplicationInfo(this.mShortcutInfo.getPackage(), 0).uid;
                 } catch (PackageManager.NameNotFoundException e) {
                     Log.e("Bubble", "cannot find uid", e);
                 }
             }
-            i = -1;
         }
         if (i != -1) {
             intent.putExtra("app_uid", i);
@@ -356,20 +354,20 @@ public class Bubble implements BubbleViewProvider {
                 bubbleViewInfoTask2.mBgExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleViewInfoTask$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        final BubbleViewInfoTask bubbleViewInfoTask3 = BubbleViewInfoTask.this;
+                        final BubbleViewInfoTask bubbleViewInfoTask3 = bubbleViewInfoTask2;
                         if (bubbleViewInfoTask3.mCancelled.get()) {
                             bubbleViewInfoTask3.mFinished.set(true);
                             return;
                         }
-                        final BubbleViewInfoTask.BubbleViewInfo loadViewInfo = bubbleViewInfoTask3.loadViewInfo();
+                        final BubbleViewInfoTask.BubbleViewInfo bubbleViewInfoLoadViewInfo = bubbleViewInfoTask3.loadViewInfo();
                         if (bubbleViewInfoTask3.mCancelled.get()) {
                             bubbleViewInfoTask3.mFinished.set(true);
                         } else {
                             bubbleViewInfoTask3.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleViewInfoTask$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    BubbleViewInfoTask bubbleViewInfoTask4 = BubbleViewInfoTask.this;
-                                    BubbleViewInfoTask.BubbleViewInfo bubbleViewInfo = loadViewInfo;
+                                    BubbleViewInfoTask bubbleViewInfoTask4 = bubbleViewInfoTask3;
+                                    BubbleViewInfoTask.BubbleViewInfo bubbleViewInfo = bubbleViewInfoLoadViewInfo;
                                     if (!bubbleViewInfoTask4.mCancelled.get()) {
                                         bubbleViewInfoTask4.updateViewInfo(bubbleViewInfo);
                                     }
@@ -411,7 +409,7 @@ public class Bubble implements BubbleViewProvider {
 
     public final void setEntry(BubbleEntry bubbleEntry) {
         Objects.requireNonNull(bubbleEntry);
-        boolean showDot = showDot();
+        boolean zShowDot = showDot();
         this.mLastUpdated = bubbleEntry.mSbn.getPostTime();
         this.mIsBubble = bubbleEntry.mSbn.getNotification().isBubbleNotification();
         this.mPackageName = bubbleEntry.mSbn.getPackageName();
@@ -435,10 +433,10 @@ public class Bubble implements BubbleViewProvider {
                 }
                 flyoutMessage.message = charSequence2;
             } else if (Notification.MessagingStyle.class.equals(notificationStyle)) {
-                Notification.MessagingStyle.Message findLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(Notification.MessagingStyle.Message.getMessagesFromBundleArray((Parcelable[]) notification2.extras.get("android.messages")));
-                if (findLatestIncomingMessage != null) {
-                    flyoutMessage.message = findLatestIncomingMessage.getText();
-                    Person senderPerson = findLatestIncomingMessage.getSenderPerson();
+                Notification.MessagingStyle.Message messageFindLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(Notification.MessagingStyle.Message.getMessagesFromBundleArray((Parcelable[]) notification2.extras.get("android.messages")));
+                if (messageFindLatestIncomingMessage != null) {
+                    flyoutMessage.message = messageFindLatestIncomingMessage.getText();
+                    Person senderPerson = messageFindLatestIncomingMessage.getSenderPerson();
                     flyoutMessage.senderName = senderPerson != null ? senderPerson.getName() : null;
                     flyoutMessage.senderAvatar = null;
                     flyoutMessage.senderIcon = senderPerson != null ? senderPerson.getIcon() : null;
@@ -490,7 +488,7 @@ public class Bubble implements BubbleViewProvider {
         this.mShouldSuppressNotificationDot = bubbleEntry.mShouldSuppressNotificationDot;
         this.mShouldSuppressNotificationList = bubbleEntry.mShouldSuppressNotificationList;
         this.mShouldSuppressPeek = bubbleEntry.mShouldSuppressPeek;
-        if (showDot != showDot()) {
+        if (zShowDot != showDot()) {
             setShowDot(showDot());
         }
     }
@@ -501,13 +499,13 @@ public class Bubble implements BubbleViewProvider {
 
     public void setShouldAutoExpand(boolean z) {
         Bubbles.BubbleMetadataFlagListener bubbleMetadataFlagListener;
-        boolean isEnabled = isEnabled(1);
+        boolean zIsEnabled = isEnabled(1);
         if (z) {
             this.mFlags = 1 | this.mFlags;
         } else {
             this.mFlags &= -2;
         }
-        if (isEnabled == z || (bubbleMetadataFlagListener = this.mBubbleMetadataFlagListener) == null) {
+        if (zIsEnabled == z || (bubbleMetadataFlagListener = this.mBubbleMetadataFlagListener) == null) {
             return;
         }
         bubbleMetadataFlagListener.onBubbleMetadataFlagChanged(this);
@@ -542,13 +540,13 @@ public class Bubble implements BubbleViewProvider {
 
     public void setSuppressNotification(boolean z) {
         Bubbles.BubbleMetadataFlagListener bubbleMetadataFlagListener;
-        boolean showInShade = showInShade();
+        boolean zShowInShade = showInShade();
         if (z) {
             this.mFlags |= 2;
         } else {
             this.mFlags &= -3;
         }
-        if (showInShade() == showInShade || (bubbleMetadataFlagListener = this.mBubbleMetadataFlagListener) == null) {
+        if (showInShade() == zShowInShade || (bubbleMetadataFlagListener = this.mBubbleMetadataFlagListener) == null) {
             return;
         }
         bubbleMetadataFlagListener.onBubbleMetadataFlagChanged(this);
@@ -671,7 +669,7 @@ public class Bubble implements BubbleViewProvider {
         this.mBubbleMetadataFlagListener = bubbleMetadataFlagListener;
         this.mPendingIntentCancelListener = new PendingIntent.CancelListener() { // from class: com.android.wm.shell.bubbles.Bubble$$ExternalSyntheticLambda0
             public final void onCanceled(PendingIntent pendingIntent) {
-                final Bubble bubble = Bubble.this;
+                final Bubble bubble = this.f$0;
                 Executor executor3 = executor;
                 final Bubbles.PendingIntentCanceledListener pendingIntentCanceledListener2 = pendingIntentCanceledListener;
                 PendingIntent pendingIntent2 = bubble.mPendingIntent;
@@ -681,7 +679,7 @@ public class Bubble implements BubbleViewProvider {
                 executor3.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.Bubble$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Bubble bubble2 = Bubble.this;
+                        Bubble bubble2 = bubble;
                         BubbleController bubbleController = (BubbleController) ((BubbleController$$ExternalSyntheticLambda5) pendingIntentCanceledListener2).f$0;
                         if (bubble2.mPendingIntent == null) {
                             return;

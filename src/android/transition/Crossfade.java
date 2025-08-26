@@ -55,8 +55,8 @@ public class Crossfade extends Transition {
 
     @Override // android.transition.Transition
     public Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
-        ObjectAnimator ofInt;
-        ObjectAnimator objectAnimator = null;
+        ObjectAnimator objectAnimatorOfInt;
+        ObjectAnimator objectAnimatorOfFloat = null;
         if (transitionValues != null && transitionValues2 != null) {
             final boolean z = this.mFadeBehavior != 1;
             final View view = transitionValues2.view;
@@ -75,11 +75,11 @@ public class Crossfade extends Transition {
                 }
                 overlay.add(bitmapDrawable);
                 if (this.mFadeBehavior == 2) {
-                    ofInt = ObjectAnimator.ofInt(bitmapDrawable, "alpha", 255, 0, 0);
+                    objectAnimatorOfInt = ObjectAnimator.ofInt(bitmapDrawable, "alpha", 255, 0, 0);
                 } else {
-                    ofInt = ObjectAnimator.ofInt(bitmapDrawable, "alpha", 0);
+                    objectAnimatorOfInt = ObjectAnimator.ofInt(bitmapDrawable, "alpha", 0);
                 }
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.Crossfade.1
+                objectAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.Crossfade.1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         view.invalidate(bitmapDrawable.getBounds());
@@ -87,11 +87,11 @@ public class Crossfade extends Transition {
                 });
                 int i = this.mFadeBehavior;
                 if (i == 2) {
-                    objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, 0.0f, 0.0f, 1.0f);
+                    objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, View.ALPHA, 0.0f, 0.0f, 1.0f);
                 } else if (i == 0) {
-                    objectAnimator = ObjectAnimator.ofFloat(view, View.ALPHA, 0.0f, 1.0f);
+                    objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, View.ALPHA, 0.0f, 1.0f);
                 }
-                ofInt.addListener(new AnimatorListenerAdapter() { // from class: android.transition.Crossfade.2
+                objectAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: android.transition.Crossfade.2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         ViewOverlay overlay2 = z ? ((ViewGroup) view.getParent()).getOverlay() : view.getOverlay();
@@ -102,9 +102,9 @@ public class Crossfade extends Transition {
                     }
                 });
                 AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playTogether(ofInt);
-                if (objectAnimator != null) {
-                    animatorSet.playTogether(objectAnimator);
+                animatorSet.playTogether(objectAnimatorOfInt);
+                if (objectAnimatorOfFloat != null) {
+                    animatorSet.playTogether(objectAnimatorOfFloat);
                 }
                 if (this.mResizeBehavior == 1 && !rect.equals(rect2)) {
                     animatorSet.playTogether(ObjectAnimator.ofObject(bitmapDrawable, "bounds", sRectEvaluator, rect, rect2));
@@ -125,14 +125,14 @@ public class Crossfade extends Transition {
             rect.offset(view.getLeft(), view.getTop());
         }
         transitionValues.values.put(PROPNAME_BOUNDS, rect);
-        Bitmap createBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         if (view instanceof TextureView) {
-            createBitmap = ((TextureView) view).getBitmap();
+            bitmapCreateBitmap = ((TextureView) view).getBitmap();
         } else {
-            view.draw(new Canvas(createBitmap));
+            view.draw(new Canvas(bitmapCreateBitmap));
         }
-        transitionValues.values.put(PROPNAME_BITMAP, createBitmap);
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(createBitmap);
+        transitionValues.values.put(PROPNAME_BITMAP, bitmapCreateBitmap);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmapCreateBitmap);
         bitmapDrawable.setBounds(rect);
         transitionValues.values.put(PROPNAME_DRAWABLE, bitmapDrawable);
     }

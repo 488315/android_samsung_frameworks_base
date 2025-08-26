@@ -9,7 +9,6 @@ import android.os.IScreenTimeoutPolicyListener;
 import android.os.IThermalHeadroomListener;
 import android.os.IThermalStatusListener;
 import android.os.IWakeLockCallback;
-import android.os.PowerManager;
 import android.service.dreams.Sandman;
 import android.telephony.ims.SipDelegateImsConfiguration;
 import android.util.ArrayMap;
@@ -826,18 +825,18 @@ public final class PowerManager {
 
         @Override // android.os.IScreenTimeoutPolicyListener
         public void onScreenTimeoutPolicyChanged(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ScreenTimeoutPolicyListener screenTimeoutPolicyListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.os.PowerManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PowerManager.ScreenTimeoutPolicyListener.this.onScreenTimeoutPolicyChanged(i);
+                        screenTimeoutPolicyListener.onScreenTimeoutPolicyChanged(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -1223,18 +1222,18 @@ public final class PowerManager {
 
         @Override // android.os.IThermalStatusListener
         public void onStatusChange(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final OnThermalStatusChangedListener onThermalStatusChangedListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.os.PowerManager$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PowerManager.OnThermalStatusChangedListener.this.onThermalStatusChanged(i);
+                        onThermalStatusChangedListener.onThermalStatusChanged(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -1291,19 +1290,19 @@ public final class PowerManager {
 
         @Override // android.os.IThermalHeadroomListener
         public void onHeadroomChange(final float f, final float f2, final int i, float[] fArr) throws RemoteException {
-            final Map convertThresholdsToMap = PowerManager.this.convertThresholdsToMap(fArr);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            final Map mapConvertThresholdsToMap = PowerManager.this.convertThresholdsToMap(fArr);
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final OnThermalHeadroomChangedListener onThermalHeadroomChangedListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.os.PowerManager$5$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PowerManager.OnThermalHeadroomChangedListener.this.onThermalHeadroomChanged(f, f2, i, convertThresholdsToMap);
+                        onThermalHeadroomChangedListener.onThermalHeadroomChanged(f, f2, i, mapConvertThresholdsToMap);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -1641,19 +1640,19 @@ public final class PowerManager {
             return arrayList;
         }
 
-        public static LowPowerStandbyPortDescription fromParcelable(IPowerManager.LowPowerStandbyPortDescription lowPowerStandbyPortDescription) {
-            InetAddress inetAddress = null;
+        public static LowPowerStandbyPortDescription fromParcelable(IPowerManager.LowPowerStandbyPortDescription lowPowerStandbyPortDescription) throws UnknownHostException {
+            InetAddress byAddress = null;
             if (lowPowerStandbyPortDescription == null) {
                 return null;
             }
             if (lowPowerStandbyPortDescription.localAddress != null) {
                 try {
-                    inetAddress = InetAddress.getByAddress(lowPowerStandbyPortDescription.localAddress);
+                    byAddress = InetAddress.getByAddress(lowPowerStandbyPortDescription.localAddress);
                 } catch (UnknownHostException e) {
                     Log.w(PowerManager.TAG, "Address has invalid length", e);
                 }
             }
-            return new LowPowerStandbyPortDescription(lowPowerStandbyPortDescription.protocol, lowPowerStandbyPortDescription.portMatcher, lowPowerStandbyPortDescription.portNumber, inetAddress);
+            return new LowPowerStandbyPortDescription(lowPowerStandbyPortDescription.protocol, lowPowerStandbyPortDescription.portMatcher, lowPowerStandbyPortDescription.portNumber, byAddress);
         }
 
         public static List<LowPowerStandbyPortDescription> fromParcelable(List<IPowerManager.LowPowerStandbyPortDescription> list) {
@@ -1860,7 +1859,7 @@ public final class PowerManager {
         private final Runnable mReleaser = new Runnable() { // from class: android.os.PowerManager$WakeLock$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                PowerManager.WakeLock.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
         private final IBinder mToken = new Binder();
@@ -2016,9 +2015,9 @@ public final class PowerManager {
                     if (workSource2 == null) {
                         this.mWorkSource = new WorkSource(workSource);
                     } else {
-                        boolean equals = workSource2.equals(workSource);
-                        z = !equals;
-                        if (!equals) {
+                        boolean zEquals = workSource2.equals(workSource);
+                        z = !zEquals;
+                        if (!zEquals) {
                             this.mWorkSource.set(workSource);
                         }
                     }
@@ -2078,7 +2077,7 @@ public final class PowerManager {
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
             synchronized (this.mToken) {
-                long start = protoOutputStream.start(j);
+                long jStart = protoOutputStream.start(j);
                 protoOutputStream.write(1138166333441L, this.mTag);
                 protoOutputStream.write(1138166333442L, this.mPackageName);
                 protoOutputStream.write(1133871366147L, this.mHeld);
@@ -2087,7 +2086,7 @@ public final class PowerManager {
                 if (workSource != null) {
                     workSource.dumpDebug(protoOutputStream, 1146756268037L);
                 }
-                protoOutputStream.end(start);
+                protoOutputStream.end(jStart);
             }
         }
 
@@ -2096,7 +2095,7 @@ public final class PowerManager {
             return new Runnable() { // from class: android.os.PowerManager$WakeLock$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PowerManager.WakeLock.this.lambda$wrap$1(runnable);
+                    this.f$0.lambda$wrap$1(runnable);
                 }
             };
         }
@@ -2143,18 +2142,18 @@ public final class PowerManager {
 
             @Override // android.os.IWakeLockCallback
             public void onStateChanged(final boolean z) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     Executor executor = this.val$executor;
                     final WakeLockStateListener wakeLockStateListener = this.val$listener;
                     executor.execute(new Runnable() { // from class: android.os.PowerManager$WakeLock$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            PowerManager.WakeLockStateListener.this.onStateChanged(z);
+                            wakeLockStateListener.onStateChanged(z);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }

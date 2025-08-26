@@ -10,7 +10,6 @@ import android.os.ServiceManager;
 import android.util.Log;
 import com.android.internal.statusbar.IStatusBarService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BiometricPromptWrapperBixby {
     private static final String TAG = "BiometricPromptWrapperBixby";
@@ -24,10 +23,10 @@ public class BiometricPromptWrapperBixby {
             super.onAuthenticationError(i, charSequence);
             if (i == 14 || i == 11) {
                 Log.d(BiometricPromptWrapperBixby.TAG, "power off!");
-                IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
-                if (asInterface != null) {
+                IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+                if (iStatusBarServiceAsInterface != null) {
                     try {
-                        asInterface.shutdownByBixby();
+                        iStatusBarServiceAsInterface.shutdownByBixby();
                     } catch (RemoteException e) {
                         Log.e(BiometricPromptWrapperBixby.TAG, "shutdown RemoteException ", e);
                     }
@@ -37,11 +36,11 @@ public class BiometricPromptWrapperBixby {
 
         @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult authenticationResult) {
-            IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+            IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
             Log.d(BiometricPromptWrapperBixby.TAG, "onAuthenticationSucceeded");
-            if (asInterface != null) {
+            if (iStatusBarServiceAsInterface != null) {
                 try {
-                    asInterface.shutdownByBixby();
+                    iStatusBarServiceAsInterface.shutdownByBixby();
                 } catch (RemoteException e) {
                     Log.e(BiometricPromptWrapperBixby.TAG, "shutdown RemoteException ", e);
                 }

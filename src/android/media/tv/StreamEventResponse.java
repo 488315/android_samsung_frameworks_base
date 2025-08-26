@@ -44,9 +44,9 @@ public final class StreamEventResponse extends BroadcastInfoResponse implements 
         super(5, parcel);
         this.mEventId = parcel.readInt();
         this.mNptMillis = parcel.readLong();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.mData = bArr;
             parcel.readByteArray(bArr);
             return;

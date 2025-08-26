@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SafeFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioSlidersInteractor {
     public final AudioSystemRepository audioSystemRepository;
@@ -25,14 +24,14 @@ public final class AudioSlidersInteractor {
 
     public AudioSlidersInteractor(CoroutineScope coroutineScope, MediaOutputInteractor mediaOutputInteractor, AudioModeInteractor audioModeInteractor, AudioSystemRepository audioSystemRepository, AudioSharingInteractor audioSharingInteractor) {
         this.audioSystemRepository = audioSystemRepository;
-        SafeFlow combineTransform = FlowKt.combineTransform(mediaOutputInteractor.activeMediaDeviceSessions, ResultKt.filterData(mediaOutputInteractor.defaultActiveMediaSession), audioModeInteractor.isOngoingCall, audioSharingInteractor.getVolume(), new AudioSlidersInteractor$volumePanelSliders$1(this, null));
+        SafeFlow safeFlowCombineTransform = FlowKt.combineTransform(mediaOutputInteractor.activeMediaDeviceSessions, ResultKt.filterData(mediaOutputInteractor.defaultActiveMediaSession), audioModeInteractor.isOngoingCall, audioSharingInteractor.getVolume(), new AudioSlidersInteractor$volumePanelSliders$1(this, null));
         SharingStarted.Companion.getClass();
-        this.volumePanelSliders = FlowKt.stateIn(combineTransform, coroutineScope, SharingStarted.Companion.Eagerly, EmptyList.INSTANCE);
+        this.volumePanelSliders = FlowKt.stateIn(safeFlowCombineTransform, coroutineScope, SharingStarted.Companion.Eagerly, EmptyList.INSTANCE);
     }
 
     public static final void access$addStream(AudioSlidersInteractor audioSlidersInteractor, ListBuilder listBuilder, int i) {
         if (!AudioSystem.isSingleVolume(((AudioSystemRepositoryImpl) audioSlidersInteractor.audioSystemRepository).context) || i == 3) {
-            AudioStream.m989constructorimpl(i);
+            AudioStream.m991constructorimpl(i);
             listBuilder.add(new SliderType.Stream(i, null));
         }
     }

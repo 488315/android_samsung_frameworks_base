@@ -17,7 +17,6 @@ import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseToggleVie
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VoiceBoostViewModel extends BaseToggleViewModel {
     public final Context context;
@@ -26,7 +25,6 @@ public final class VoiceBoostViewModel extends BaseToggleViewModel {
     public final SoundAliveManager soundAliveManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -90,8 +88,8 @@ public final class VoiceBoostViewModel extends BaseToggleViewModel {
         ModelProvider modelProvider = this.modelProvider;
         Boolean bool = modelProvider.effectModel.voiceBoost;
         if (bool != null) {
-            boolean booleanValue = bool.booleanValue();
-            boolean z = !booleanValue;
+            boolean zBooleanValue = bool.booleanValue();
+            boolean z = !zBooleanValue;
             modelProvider.effectModel.voiceBoost = Boolean.valueOf(z);
             this.isSelected.setValue(Boolean.valueOf(z));
             AppSettingModel appSettingModel = modelProvider.appSettingModel;
@@ -118,7 +116,7 @@ public final class VoiceBoostViewModel extends BaseToggleViewModel {
             SoundCraftSALogging.ScreenId screenId = modelProvider.effectOutDeviceType == EffectOutDeviceType.PHONE ? SoundCraftSALogging.ScreenId.EID_PHONE_DETAIL_SETTING : SoundCraftSALogging.ScreenId.EID_BUDS_DETAIL_SETTING;
             SoundCraftSALogging.Event event = SoundCraftSALogging.Event.BOOST_DIALOGUE;
             soundCraftSALogging.getClass();
-            SoundCraftSALogging.sendEventLog$default(soundCraftSALogging, screenId, event, !booleanValue ? SoundCraftSALogging.ON : SoundCraftSALogging.OFF, 8);
+            SoundCraftSALogging.sendEventLog$default(soundCraftSALogging, screenId, event, !zBooleanValue ? SoundCraftSALogging.ON : SoundCraftSALogging.OFF, 8);
         }
         notifyChange();
     }

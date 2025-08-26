@@ -530,7 +530,7 @@ public abstract class Window {
         this.mIsPreserved = z;
     }
 
-    public Window(Context context) {
+    public Window(Context context) throws Resources.NotFoundException {
         this.mContext = context;
         int defaultFeatures = getDefaultFeatures(context);
         this.mLocalFeatures = defaultFeatures;
@@ -594,11 +594,11 @@ public abstract class Window {
 
     void adjustLayoutParamsForSubWindow(WindowManager.LayoutParams layoutParams) {
         CharSequence charSequence;
-        View peekDecorView;
+        View viewPeekDecorView;
         CharSequence title = layoutParams.getTitle();
         if (layoutParams.type >= 1000 && layoutParams.type <= 1999) {
-            if (layoutParams.token == null && (peekDecorView = peekDecorView()) != null) {
-                layoutParams.token = peekDecorView.getWindowToken();
+            if (layoutParams.token == null && (viewPeekDecorView = peekDecorView()) != null) {
+                layoutParams.token = viewPeekDecorView.getWindowToken();
             }
             if (title == null || title.length() == 0) {
                 StringBuilder sb = new StringBuilder(32);
@@ -1014,7 +1014,7 @@ public abstract class Window {
         return this.mFeatures;
     }
 
-    public static int getDefaultFeatures(Context context) {
+    public static int getDefaultFeatures(Context context) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         boolean z = resources.getBoolean(R.bool.config_defaultWindowFeatureOptionsPanel);
         return resources.getBoolean(R.bool.config_defaultWindowFeatureContextMenu) ? (z ? 1 : 0) | 64 : z ? 1 : 0;

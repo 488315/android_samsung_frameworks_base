@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RadialViewGroup extends ConstraintLayout {
     public final MaterialShapeDrawable background;
@@ -72,7 +71,7 @@ public class RadialViewGroup extends ConstraintLayout {
     public void updateLayoutParams$1() {
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(this);
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
             if (childAt.getId() != R.id.circle_center && !"skip".equals(childAt.getTag())) {
@@ -80,20 +79,20 @@ public class RadialViewGroup extends ConstraintLayout {
                 if (i2 == null) {
                     i2 = 1;
                 }
-                if (!hashMap.containsKey(i2)) {
-                    hashMap.put(i2, new ArrayList());
+                if (!map.containsKey(i2)) {
+                    map.put(i2, new ArrayList());
                 }
-                ((List) hashMap.get(i2)).add(childAt);
+                ((List) map.get(i2)).add(childAt);
             }
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
+        for (Map.Entry entry : map.entrySet()) {
             List list = (List) entry.getValue();
-            int round = ((Integer) entry.getKey()).intValue() == 2 ? Math.round(this.radius * 0.66f) : this.radius;
+            int iRound = ((Integer) entry.getKey()).intValue() == 2 ? Math.round(this.radius * 0.66f) : this.radius;
             Iterator it = list.iterator();
-            float f = 0.0f;
+            float size = 0.0f;
             while (it.hasNext()) {
-                constraintSet.constrainCircle(((View) it.next()).getId(), R.id.circle_center, round, f);
-                f += 360.0f / list.size();
+                constraintSet.constrainCircle(((View) it.next()).getId(), R.id.circle_center, iRound, size);
+                size += 360.0f / list.size();
             }
         }
         constraintSet.applyTo(this);
@@ -122,14 +121,14 @@ public class RadialViewGroup extends ConstraintLayout {
         MaterialShapeDrawable materialShapeDrawable2 = this.background;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         setBackground(materialShapeDrawable2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RadialViewGroup, i, 0);
-        this.radius = obtainStyledAttributes.getDimensionPixelSize(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RadialViewGroup, i, 0);
+        this.radius = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
         this.updateLayoutParametersRunnable = new Runnable() { // from class: com.google.android.material.timepicker.RadialViewGroup$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                RadialViewGroup.this.updateLayoutParams$1();
+                this.f$0.updateLayoutParams$1();
             }
         };
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

@@ -36,13 +36,13 @@ public class ProcTimeInStateReader {
     }
 
     private void initializeTimeInStateFormat(Path path) throws IOException {
-        byte[] readAllBytes = Files.readAllBytes(path);
+        byte[] allBytes = Files.readAllBytes(path);
         IntArray intArray = new IntArray();
         IntArray intArray2 = new IntArray();
         int i = 0;
         int i2 = 0;
-        while (i < readAllBytes.length) {
-            if (!Character.isDigit(readAllBytes[i])) {
+        while (i < allBytes.length) {
+            if (!Character.isDigit(allBytes[i])) {
                 int[] iArr = TIME_IN_STATE_HEADER_LINE_FORMAT;
                 intArray.addAll(iArr);
                 intArray2.addAll(iArr);
@@ -51,7 +51,7 @@ public class ProcTimeInStateReader {
                 intArray2.addAll(TIME_IN_STATE_LINE_TIME_FORMAT);
                 i2++;
             }
-            while (i < readAllBytes.length && readAllBytes[i] != 10) {
+            while (i < allBytes.length && allBytes[i] != 10) {
                 i++;
             }
             i++;
@@ -60,7 +60,7 @@ public class ProcTimeInStateReader {
             throw new IOException("Empty time_in_state file");
         }
         long[] jArr = new long[i2];
-        if (!Process.parseProcLine(readAllBytes, 0, readAllBytes.length, intArray.toArray(), null, jArr, null)) {
+        if (!Process.parseProcLine(allBytes, 0, allBytes.length, intArray.toArray(), null, jArr, null)) {
             throw new IOException("Failed to parse time_in_state file");
         }
         this.mTimeInStateTimeFormat = intArray2.toArray();

@@ -45,9 +45,9 @@ public interface ITextToSpeechManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITextToSpeechManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITextToSpeechManager)) {
-                return (ITextToSpeechManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITextToSpeechManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITextToSpeechManager)) {
+                return (ITextToSpeechManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface ITextToSpeechManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                ITextToSpeechSessionCallback asInterface = ITextToSpeechSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                ITextToSpeechSessionCallback iTextToSpeechSessionCallbackAsInterface = ITextToSpeechSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                createSession(readString, asInterface);
+                createSession(string, iTextToSpeechSessionCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface ITextToSpeechManager extends IInterface {
 
             @Override // android.speech.tts.ITextToSpeechManager
             public void createSession(String str, ITextToSpeechSessionCallback iTextToSpeechSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITextToSpeechManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iTextToSpeechSessionCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITextToSpeechManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iTextToSpeechSessionCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

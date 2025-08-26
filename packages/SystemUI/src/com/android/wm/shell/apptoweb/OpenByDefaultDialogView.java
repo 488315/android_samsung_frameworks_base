@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OpenByDefaultDialogView extends ConstraintLayout {
     public View dialogContainer;
@@ -21,11 +20,11 @@ public final class OpenByDefaultDialogView extends ConstraintLayout {
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.dialogContainer = requireViewById(R.id.open_by_default_dialog_container);
-        Drawable mutate = getBackground().mutate();
-        if (mutate == null) {
-            mutate = null;
+        Drawable drawableMutate = getBackground().mutate();
+        if (drawableMutate == null) {
+            drawableMutate = null;
         }
-        mutate.setAlpha(128);
+        drawableMutate.setAlpha(128);
     }
 
     public OpenByDefaultDialogView(Context context, AttributeSet attributeSet) {

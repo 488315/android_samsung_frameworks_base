@@ -123,11 +123,11 @@ public class RestrictionsManager {
             if (iRestrictionsManager == null) {
                 return null;
             }
-            Intent createLocalApprovalIntent = iRestrictionsManager.createLocalApprovalIntent();
-            if (createLocalApprovalIntent != null) {
-                createLocalApprovalIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+            Intent intentCreateLocalApprovalIntent = iRestrictionsManager.createLocalApprovalIntent();
+            if (intentCreateLocalApprovalIntent != null) {
+                intentCreateLocalApprovalIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
             }
-            return createLocalApprovalIntent;
+            return intentCreateLocalApprovalIntent;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -169,41 +169,43 @@ public class RestrictionsManager {
     }
 
     private List<RestrictionEntry> loadManifestRestrictions(String str, XmlResourceParser xmlResourceParser) {
+        Context contextCreatePackageContext;
+        ArrayList arrayList;
         try {
-            Context createPackageContext = this.mContext.createPackageContext(str, 0);
-            ArrayList arrayList = new ArrayList();
-            try {
-                int next = xmlResourceParser.next();
-                while (next != 1) {
-                    if (next == 2) {
-                        RestrictionEntry loadRestrictionElement = loadRestrictionElement(createPackageContext, xmlResourceParser);
-                        if (loadRestrictionElement != null) {
-                            arrayList.add(loadRestrictionElement);
-                        }
-                    }
-                    next = xmlResourceParser.next();
-                }
-                return arrayList;
-            } catch (IOException e) {
-                Log.w(TAG, "Reading restriction metadata for " + str, e);
-                return null;
-            } catch (XmlPullParserException e2) {
-                Log.w(TAG, "Reading restriction metadata for " + str, e2);
-                return null;
-            }
+            contextCreatePackageContext = this.mContext.createPackageContext(str, 0);
+            arrayList = new ArrayList();
         } catch (PackageManager.NameNotFoundException unused) {
         }
-    }
-
-    private RestrictionEntry loadRestrictionElement(Context context, XmlResourceParser xmlResourceParser) throws IOException, XmlPullParserException {
-        AttributeSet asAttributeSet;
-        if (!xmlResourceParser.getName().equals(TAG_RESTRICTION) || (asAttributeSet = Xml.asAttributeSet(xmlResourceParser)) == null) {
+        try {
+            int next = xmlResourceParser.next();
+            while (next != 1) {
+                if (next == 2) {
+                    RestrictionEntry restrictionEntryLoadRestrictionElement = loadRestrictionElement(contextCreatePackageContext, xmlResourceParser);
+                    if (restrictionEntryLoadRestrictionElement != null) {
+                        arrayList.add(restrictionEntryLoadRestrictionElement);
+                    }
+                }
+                next = xmlResourceParser.next();
+            }
+            return arrayList;
+        } catch (IOException e) {
+            Log.w(TAG, "Reading restriction metadata for " + str, e);
+            return null;
+        } catch (XmlPullParserException e2) {
+            Log.w(TAG, "Reading restriction metadata for " + str, e2);
             return null;
         }
-        return loadRestriction(context, context.obtainStyledAttributes(asAttributeSet, R.styleable.RestrictionEntry), xmlResourceParser);
     }
 
-    private RestrictionEntry loadRestriction(Context context, TypedArray typedArray, XmlResourceParser xmlResourceParser) throws IOException, XmlPullParserException {
+    private RestrictionEntry loadRestrictionElement(Context context, XmlResourceParser xmlResourceParser) throws XmlPullParserException, IOException {
+        AttributeSet attributeSetAsAttributeSet;
+        if (!xmlResourceParser.getName().equals(TAG_RESTRICTION) || (attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParser)) == null) {
+            return null;
+        }
+        return loadRestriction(context, context.obtainStyledAttributes(attributeSetAsAttributeSet, R.styleable.RestrictionEntry), xmlResourceParser);
+    }
+
+    private RestrictionEntry loadRestriction(Context context, TypedArray typedArray, XmlResourceParser xmlResourceParser) throws XmlPullParserException, IOException {
         String string = typedArray.getString(3);
         int i = typedArray.getInt(6, -1);
         String string2 = typedArray.getString(2);
@@ -255,12 +257,12 @@ public class RestrictionsManager {
                 int depth = xmlResourceParser.getDepth();
                 ArrayList arrayList = new ArrayList();
                 while (XmlUtils.nextElementWithin(xmlResourceParser, depth)) {
-                    RestrictionEntry loadRestrictionElement = loadRestrictionElement(context, xmlResourceParser);
-                    if (loadRestrictionElement == null) {
+                    RestrictionEntry restrictionEntryLoadRestrictionElement = loadRestrictionElement(context, xmlResourceParser);
+                    if (restrictionEntryLoadRestrictionElement == null) {
                         Log.w(TAG, "Child entry cannot be loaded for bundle restriction " + string);
                     } else {
-                        arrayList.add(loadRestrictionElement);
-                        if (i == 8 && loadRestrictionElement.getType() != 7) {
+                        arrayList.add(restrictionEntryLoadRestrictionElement);
+                        if (i == 8 && restrictionEntryLoadRestrictionElement.getType() != 7) {
                             Log.w(TAG, "bundle_array " + string + " can only contain entries of type bundle");
                         }
                     }

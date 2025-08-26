@@ -75,9 +75,9 @@ public interface IVirtualDeviceActivityListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceActivityListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDeviceActivityListener)) {
-                return (IVirtualDeviceActivityListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceActivityListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDeviceActivityListener)) {
+                return (IVirtualDeviceActivityListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -116,32 +116,32 @@ public interface IVirtualDeviceActivityListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTopActivityChanged(readInt, componentName, readInt2);
+                onTopActivityChanged(i3, componentName, i4);
             } else if (i == 2) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onDisplayEmpty(readInt3);
+                onDisplayEmpty(i5);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                 parcel.enforceNoDataAvail();
-                onActivityLaunchBlocked(readInt4, componentName2, userHandle, intentSender);
+                onActivityLaunchBlocked(i6, componentName2, userHandle, intentSender);
             } else if (i == 4) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 ComponentName componentName3 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSecureWindowShown(readInt5, componentName3, userHandle2);
+                onSecureWindowShown(i7, componentName3, userHandle2);
             } else if (i == 5) {
-                int readInt6 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSecureWindowHidden(readInt6);
+                onSecureWindowHidden(i8);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -166,68 +166,68 @@ public interface IVirtualDeviceActivityListener extends IInterface {
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onTopActivityChanged(int i, ComponentName componentName, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onDisplayEmpty(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onActivityLaunchBlocked(int i, ComponentName componentName, UserHandle userHandle, IntentSender intentSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowShown(int i, ComponentName componentName, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowHidden(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

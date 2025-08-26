@@ -24,13 +24,11 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ FromGlanceableHubTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -78,10 +76,10 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2 exten
             FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardInteractor.isKeyguardOccluded, keyguardInteractor.isDreaming, AnonymousClass3.INSTANCE);
             Duration.Companion companion2 = Duration.Companion;
             final int i3 = 0;
-            TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(companion.sampleFilter(FlowKt.m3462debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, DurationKt.toDuration(200, DurationUnit.MILLISECONDS)), this.this$0.communalSceneInteractor.isLaunchingWidget, new Function1() { // from class: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2$$ExternalSyntheticLambda0
+            TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(companion.sampleFilter(FlowKt.m3482debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, DurationKt.toDuration(200, DurationUnit.MILLISECONDS)), this.this$0.communalSceneInteractor.isLaunchingWidget, new Function1() { // from class: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     switch (i3) {
                         case 0:
                             return Boolean.valueOf(!((Boolean) obj2).booleanValue());
@@ -93,7 +91,7 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2 exten
             }), fromGlanceableHubTransitionInteractor, new Function1() { // from class: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     switch (i) {
                         case 0:
                             return Boolean.valueOf(!((Boolean) obj2).booleanValue());
@@ -107,7 +105,7 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2 exten
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToOccluded$2.6
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    CommunalSceneInteractor communalSceneInteractor = FromGlanceableHubTransitionInteractor.this.communalSceneInteractor;
+                    CommunalSceneInteractor communalSceneInteractor = fromGlanceableHubTransitionInteractor2.communalSceneInteractor;
                     SceneKey sceneKey = CommunalScenes.Blank;
                     CommunalTransitionKeys.INSTANCE.getClass();
                     communalSceneInteractor.changeScene(sceneKey, "hub to occluded", CommunalTransitionKeys.SimpleFade, KeyguardState.OCCLUDED);

@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AppClipsViewModel extends ViewModel {
     public final AppClipsCrossProcessHelper mAppClipsCrossProcessHelper;
@@ -33,7 +32,6 @@ public final class AppClipsViewModel extends ViewModel {
     public final MutableLiveData mScreenshotLiveData;
     public final MutableLiveData mSelectedBacklinksLiveData;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements ViewModelProvider.Factory {
         public final AppClipsCrossProcessHelper mAppClipsCrossProcessHelper;
         public final AssistContentRequester mAssistContentRequester;
@@ -72,23 +70,23 @@ public final class AppClipsViewModel extends ViewModel {
 
     public static Intent getMainLauncherIntentForTask(PackageManager packageManager, String str) {
         Intent intent = new Intent("android.intent.action.MAIN").addCategory("android.intent.category.LAUNCHER").setPackage(str);
-        ResolveInfo resolveActivity = packageManager.resolveActivity(intent, 0);
-        if (resolveActivity != null) {
-            intent.setComponent(resolveActivity.getComponentInfo().getComponentName());
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(intent, 0);
+        if (resolveInfoResolveActivity != null) {
+            intent.setComponent(resolveInfoResolveActivity.getComponentInfo().getComponentName());
         }
         return intent;
     }
 
     public final BacklinkDisplayInfo getInfoThatResolvesIntent(Intent intent, InternalTaskInfo internalTaskInfo) {
         PackageManager packageManager = internalTaskInfo.packageManager;
-        List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(intent, 65536);
-        if (queryIntentActivities.isEmpty()) {
+        List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(intent, 65536);
+        if (listQueryIntentActivities.isEmpty()) {
             DebugLogger.INSTANCE.getClass();
             boolean z = Build.IS_DEBUGGABLE;
             Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
             return null;
         }
-        ActivityInfo activityInfo = queryIntentActivities.get(0).activityInfo;
+        ActivityInfo activityInfo = listQueryIntentActivities.get(0).activityInfo;
         if (activityInfo == null) {
             DebugLogger.INSTANCE.getClass();
             boolean z2 = Build.IS_DEBUGGABLE;

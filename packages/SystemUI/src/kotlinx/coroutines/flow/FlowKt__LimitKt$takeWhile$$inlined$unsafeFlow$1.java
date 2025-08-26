@@ -1,10 +1,14 @@
 package kotlinx.coroutines.flow;
 
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.JobKt;
+import kotlinx.coroutines.flow.internal.AbortFlowException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 implements Flow {
     public final /* synthetic */ Function2 $predicate$inlined;
@@ -33,76 +37,60 @@ public final class FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 implements Fl
         this.$predicate$inlined = function2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // kotlinx.coroutines.flow.Flow
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object collect(kotlinx.coroutines.flow.FlowCollector r5, kotlin.coroutines.Continuation r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1.AnonymousClass1
-            if (r0 == 0) goto L13
-            r0 = r6
-            kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1$1 r0 = (kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1.AnonymousClass1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1$1 r0 = new kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1$1
-            r0.<init>(r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L35
-            if (r2 != r3) goto L2d
-            java.lang.Object r4 = r0.L$0
-            kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 r4 = (kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1) r4
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: kotlinx.coroutines.flow.internal.AbortFlowException -> L2b
-            goto L59
-        L2b:
-            r5 = move-exception
-            goto L4e
-        L2d:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L35:
-            kotlin.ResultKt.throwOnFailure(r6)
-            kotlinx.coroutines.flow.Flow r6 = r4.$this_takeWhile$inlined
-            kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 r2 = new kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1
-            kotlin.jvm.functions.Function2 r4 = r4.$predicate$inlined
-            r2.<init>(r4, r5)
-            r0.L$0 = r2     // Catch: kotlinx.coroutines.flow.internal.AbortFlowException -> L4c
-            r0.label = r3     // Catch: kotlinx.coroutines.flow.internal.AbortFlowException -> L4c
-            java.lang.Object r4 = r6.collect(r2, r0)     // Catch: kotlinx.coroutines.flow.internal.AbortFlowException -> L4c
-            if (r4 != r1) goto L59
-            return r1
-        L4c:
-            r5 = move-exception
-            r4 = r2
-        L4e:
-            java.lang.Object r6 = r5.owner
-            if (r6 != r4) goto L5c
-            kotlin.coroutines.CoroutineContext r4 = r0.getContext()
-            kotlinx.coroutines.JobKt.ensureActive(r4)
-        L59:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        L5c:
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1.collect(kotlinx.coroutines.flow.FlowCollector, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            Flow flow = this.$this_takeWhile$inlined;
+            FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$12 = new FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1(this.$predicate$inlined, flowCollector);
+            try {
+                anonymousClass1.L$0 = flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$12;
+                anonymousClass1.label = 1;
+                if (flow.collect(flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$12, anonymousClass1) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } catch (AbortFlowException e) {
+                e = e;
+                flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 = flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$12;
+                if (e.owner == flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1) {
+                    throw e;
+                }
+                JobKt.ensureActive(anonymousClass1.getContext());
+                return Unit.INSTANCE;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1 = (FlowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1) anonymousClass1.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+            } catch (AbortFlowException e2) {
+                e = e2;
+                if (e.owner == flowKt__LimitKt$takeWhile$lambda$6$$inlined$collectWhile$1) {
+                }
+            }
+        }
+        return Unit.INSTANCE;
     }
 }

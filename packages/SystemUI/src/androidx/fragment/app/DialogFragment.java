@@ -1,5 +1,6 @@
 package androidx.fragment.app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import androidx.activity.ComponentDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.PopBackStackState;
@@ -19,7 +21,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewTreeLifecycleOwner;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DialogFragment extends Fragment implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
     public int mBackStackId;
@@ -39,7 +40,6 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
     public int mTheme;
     public boolean mViewDestroyed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.fragment.app.DialogFragment$3, reason: invalid class name */
     public class AnonymousClass3 implements DialogInterface.OnDismissListener {
         public AnonymousClass3() {
@@ -88,15 +88,15 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
                 if (((LifecycleOwner) obj) != null) {
                     DialogFragment dialogFragment = DialogFragment.this;
                     if (dialogFragment.mShowsDialog) {
-                        View requireView = dialogFragment.requireView();
-                        if (requireView.getParent() != null) {
+                        View viewRequireView = dialogFragment.requireView();
+                        if (viewRequireView.getParent() != null) {
                             throw new IllegalStateException("DialogFragment can not be attached to a container view");
                         }
                         if (dialogFragment.mDialog != null) {
                             if (FragmentManager.isLoggingEnabled(3)) {
                                 Log.d("SeslDialogFragment", "DialogFragment " + this + " setting the content view on " + dialogFragment.mDialog);
                             }
-                            dialogFragment.mDialog.setContentView(requireView);
+                            dialogFragment.mDialog.setContentView(viewRequireView);
                         }
                     }
                 }
@@ -230,127 +230,89 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0046 A[Catch: all -> 0x004e, TryCatch #0 {all -> 0x004e, blocks: (B:10:0x001a, B:12:0x0026, B:18:0x003e, B:20:0x0046, B:21:0x0050, B:23:0x0030, B:25:0x0036, B:26:0x003b, B:27:0x0068), top: B:9:0x001a }] */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0046 A[Catch: all -> 0x004e, TryCatch #0 {all -> 0x004e, blocks: (B:12:0x001a, B:14:0x0026, B:24:0x003e, B:26:0x0046, B:29:0x0050, B:20:0x0030, B:22:0x0036, B:23:0x003b, B:30:0x0068), top: B:49:0x001a }] */
     @Override // androidx.fragment.app.Fragment
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle r8) {
-        /*
-            r7 = this;
-            android.view.LayoutInflater r8 = super.onGetLayoutInflater(r8)
-            boolean r0 = r7.mShowsDialog
-            java.lang.String r1 = "SeslDialogFragment"
-            r2 = 2
-            if (r0 == 0) goto L9a
-            boolean r3 = r7.mCreatingDialog
-            if (r3 == 0) goto L11
-            goto L9a
-        L11:
-            if (r0 != 0) goto L14
-            goto L71
-        L14:
-            boolean r0 = r7.mDialogCreated
-            if (r0 != 0) goto L71
-            r0 = 0
-            r3 = 1
-            r7.mCreatingDialog = r3     // Catch: java.lang.Throwable -> L4e
-            android.app.Dialog r4 = r7.onCreateDialog()     // Catch: java.lang.Throwable -> L4e
-            r7.mDialog = r4     // Catch: java.lang.Throwable -> L4e
-            boolean r5 = r7.mShowsDialog     // Catch: java.lang.Throwable -> L4e
-            if (r5 == 0) goto L68
-            int r5 = r7.mStyle     // Catch: java.lang.Throwable -> L4e
-            if (r5 == r3) goto L3b
-            if (r5 == r2) goto L3b
-            r6 = 3
-            if (r5 == r6) goto L30
-            goto L3e
-        L30:
-            android.view.Window r5 = r4.getWindow()     // Catch: java.lang.Throwable -> L4e
-            if (r5 == 0) goto L3b
-            r6 = 24
-            r5.addFlags(r6)     // Catch: java.lang.Throwable -> L4e
-        L3b:
-            r4.requestWindowFeature(r3)     // Catch: java.lang.Throwable -> L4e
-        L3e:
-            android.content.Context r4 = r7.getContext()     // Catch: java.lang.Throwable -> L4e
-            boolean r5 = r4 instanceof android.app.Activity     // Catch: java.lang.Throwable -> L4e
-            if (r5 == 0) goto L50
-            android.app.Dialog r5 = r7.mDialog     // Catch: java.lang.Throwable -> L4e
-            android.app.Activity r4 = (android.app.Activity) r4     // Catch: java.lang.Throwable -> L4e
-            r5.setOwnerActivity(r4)     // Catch: java.lang.Throwable -> L4e
-            goto L50
-        L4e:
-            r8 = move-exception
-            goto L6e
-        L50:
-            android.app.Dialog r4 = r7.mDialog     // Catch: java.lang.Throwable -> L4e
-            boolean r5 = r7.mCancelable     // Catch: java.lang.Throwable -> L4e
-            r4.setCancelable(r5)     // Catch: java.lang.Throwable -> L4e
-            android.app.Dialog r4 = r7.mDialog     // Catch: java.lang.Throwable -> L4e
-            androidx.fragment.app.DialogFragment$2 r5 = r7.mOnCancelListener     // Catch: java.lang.Throwable -> L4e
-            r4.setOnCancelListener(r5)     // Catch: java.lang.Throwable -> L4e
-            android.app.Dialog r4 = r7.mDialog     // Catch: java.lang.Throwable -> L4e
-            androidx.fragment.app.DialogFragment$3 r5 = r7.mOnDismissListener     // Catch: java.lang.Throwable -> L4e
-            r4.setOnDismissListener(r5)     // Catch: java.lang.Throwable -> L4e
-            r7.mDialogCreated = r3     // Catch: java.lang.Throwable -> L4e
-            goto L6b
-        L68:
-            r3 = 0
-            r7.mDialog = r3     // Catch: java.lang.Throwable -> L4e
-        L6b:
-            r7.mCreatingDialog = r0
-            goto L71
-        L6e:
-            r7.mCreatingDialog = r0
-            throw r8
-        L71:
-            boolean r0 = androidx.fragment.app.FragmentManager.isLoggingEnabled(r2)
-            if (r0 == 0) goto L8d
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "get layout inflater for DialogFragment "
-            r0.<init>(r2)
-            r0.append(r7)
-            java.lang.String r2 = " from dialog context"
-            r0.append(r2)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.d(r1, r0)
-        L8d:
-            android.app.Dialog r7 = r7.mDialog
-            if (r7 == 0) goto Lbd
-            android.content.Context r7 = r7.getContext()
-            android.view.LayoutInflater r7 = r8.cloneInContext(r7)
-            return r7
-        L9a:
-            boolean r0 = androidx.fragment.app.FragmentManager.isLoggingEnabled(r2)
-            if (r0 == 0) goto Lbd
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "getting layout inflater for DialogFragment "
-            r0.<init>(r2)
-            r0.append(r7)
-            java.lang.String r0 = r0.toString()
-            boolean r7 = r7.mShowsDialog
-            if (r7 != 0) goto Lb8
-            java.lang.String r7 = "mShowsDialog = false: "
-            android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r7, r0, r1)
-            return r8
-        Lb8:
-            java.lang.String r7 = "mCreatingDialog = true: "
-            android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r7, r0, r1)
-        Lbd:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.fragment.app.DialogFragment.onGetLayoutInflater(android.os.Bundle):android.view.LayoutInflater");
+    public final LayoutInflater onGetLayoutInflater(Bundle bundle) {
+        Context context;
+        LayoutInflater layoutInflaterOnGetLayoutInflater = super.onGetLayoutInflater(bundle);
+        boolean z = this.mShowsDialog;
+        if (z && !this.mCreatingDialog) {
+            if (z && !this.mDialogCreated) {
+                try {
+                    this.mCreatingDialog = true;
+                    Dialog dialogOnCreateDialog = onCreateDialog();
+                    this.mDialog = dialogOnCreateDialog;
+                    if (this.mShowsDialog) {
+                        int i = this.mStyle;
+                        if (i == 1 || i == 2) {
+                            dialogOnCreateDialog.requestWindowFeature(1);
+                            context = getContext();
+                            if (context instanceof Activity) {
+                                this.mDialog.setOwnerActivity((Activity) context);
+                            }
+                            this.mDialog.setCancelable(this.mCancelable);
+                            this.mDialog.setOnCancelListener(this.mOnCancelListener);
+                            this.mDialog.setOnDismissListener(this.mOnDismissListener);
+                            this.mDialogCreated = true;
+                        } else if (i == 3) {
+                            Window window = dialogOnCreateDialog.getWindow();
+                            if (window != null) {
+                                window.addFlags(24);
+                            }
+                            dialogOnCreateDialog.requestWindowFeature(1);
+                            context = getContext();
+                            if (context instanceof Activity) {
+                            }
+                            this.mDialog.setCancelable(this.mCancelable);
+                            this.mDialog.setOnCancelListener(this.mOnCancelListener);
+                            this.mDialog.setOnDismissListener(this.mOnDismissListener);
+                            this.mDialogCreated = true;
+                        } else {
+                            context = getContext();
+                            if (context instanceof Activity) {
+                            }
+                            this.mDialog.setCancelable(this.mCancelable);
+                            this.mDialog.setOnCancelListener(this.mOnCancelListener);
+                            this.mDialog.setOnDismissListener(this.mOnDismissListener);
+                            this.mDialogCreated = true;
+                        }
+                    } else {
+                        this.mDialog = null;
+                    }
+                    this.mCreatingDialog = false;
+                } catch (Throwable th) {
+                    this.mCreatingDialog = false;
+                    throw th;
+                }
+            }
+            if (FragmentManager.isLoggingEnabled(2)) {
+                Log.d("SeslDialogFragment", "get layout inflater for DialogFragment " + this + " from dialog context");
+            }
+            Dialog dialog = this.mDialog;
+            if (dialog != null) {
+                return layoutInflaterOnGetLayoutInflater.cloneInContext(dialog.getContext());
+            }
+        } else if (FragmentManager.isLoggingEnabled(2)) {
+            String str = "getting layout inflater for DialogFragment " + this;
+            if (!this.mShowsDialog) {
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("mShowsDialog = false: ", str, "SeslDialogFragment");
+                return layoutInflaterOnGetLayoutInflater;
+            }
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("mCreatingDialog = true: ", str, "SeslDialogFragment");
+        }
+        return layoutInflaterOnGetLayoutInflater;
     }
 
     @Override // androidx.fragment.app.Fragment
     public void onSaveInstanceState(Bundle bundle) {
         Dialog dialog = this.mDialog;
         if (dialog != null) {
-            Bundle onSaveInstanceState = dialog.onSaveInstanceState();
-            onSaveInstanceState.putBoolean("android:dialogShowing", false);
-            bundle.putBundle("android:savedDialogState", onSaveInstanceState);
+            Bundle bundleOnSaveInstanceState = dialog.onSaveInstanceState();
+            bundleOnSaveInstanceState.putBoolean("android:dialogShowing", false);
+            bundle.putBundle("android:savedDialogState", bundleOnSaveInstanceState);
         }
         int i = this.mStyle;
         if (i != 0) {
@@ -451,15 +413,15 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
                 if (((LifecycleOwner) obj) != null) {
                     DialogFragment dialogFragment = DialogFragment.this;
                     if (dialogFragment.mShowsDialog) {
-                        View requireView = dialogFragment.requireView();
-                        if (requireView.getParent() != null) {
+                        View viewRequireView = dialogFragment.requireView();
+                        if (viewRequireView.getParent() != null) {
                             throw new IllegalStateException("DialogFragment can not be attached to a container view");
                         }
                         if (dialogFragment.mDialog != null) {
                             if (FragmentManager.isLoggingEnabled(3)) {
                                 Log.d("SeslDialogFragment", "DialogFragment " + this + " setting the content view on " + dialogFragment.mDialog);
                             }
-                            dialogFragment.mDialog.setContentView(requireView);
+                            dialogFragment.mDialog.setContentView(viewRequireView);
                         }
                     }
                 }

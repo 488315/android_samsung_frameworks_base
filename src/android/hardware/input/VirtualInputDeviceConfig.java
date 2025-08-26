@@ -82,22 +82,22 @@ public abstract class VirtualInputDeviceConfig {
 
         public T setVendorId(int i) {
             this.mVendorId = i;
-            return self();
+            return (T) self();
         }
 
         public T setProductId(int i) {
             this.mProductId = i;
-            return self();
+            return (T) self();
         }
 
         public T setAssociatedDisplayId(int i) {
             this.mAssociatedDisplayId = i;
-            return self();
+            return (T) self();
         }
 
         public T setInputDeviceName(String str) {
             this.mInputDeviceName = (String) Objects.requireNonNull(str);
-            return self();
+            return (T) self();
         }
     }
 }

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import androidx.room.IMultiInstanceInvalidationCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface IMultiInstanceInvalidationService extends IInterface {
     public static final String DESCRIPTOR = "androidx$room$IMultiInstanceInvalidationService".replace('$', '.');
@@ -17,11 +16,9 @@ public interface IMultiInstanceInvalidationService extends IInterface {
 
     void unregisterCallback(IMultiInstanceInvalidationCallback iMultiInstanceInvalidationCallback, int i);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMultiInstanceInvalidationService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMultiInstanceInvalidationService {
             public final IBinder mRemote;
 
@@ -36,47 +33,47 @@ public interface IMultiInstanceInvalidationService extends IInterface {
 
             @Override // androidx.room.IMultiInstanceInvalidationService
             public final void broadcastInvalidation(String[] strArr, int i) {
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // androidx.room.IMultiInstanceInvalidationService
             public final int registerCallback(IMultiInstanceInvalidationCallback iMultiInstanceInvalidationCallback, String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMultiInstanceInvalidationCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMultiInstanceInvalidationCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // androidx.room.IMultiInstanceInvalidationService
             public final void unregisterCallback(IMultiInstanceInvalidationCallback iMultiInstanceInvalidationCallback, int i) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMultiInstanceInvalidationCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiInstanceInvalidationService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMultiInstanceInvalidationCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -95,16 +92,16 @@ public interface IMultiInstanceInvalidationService extends IInterface {
                 parcel2.writeString(str);
                 return true;
             }
-            IMultiInstanceInvalidationCallback iMultiInstanceInvalidationCallback = null;
+            IMultiInstanceInvalidationCallback proxy = null;
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                if (readStrongBinder != null) {
-                    IInterface queryLocalInterface = readStrongBinder.queryLocalInterface(IMultiInstanceInvalidationCallback.DESCRIPTOR);
-                    iMultiInstanceInvalidationCallback = (queryLocalInterface == null || !(queryLocalInterface instanceof IMultiInstanceInvalidationCallback)) ? new IMultiInstanceInvalidationCallback.Stub.Proxy(readStrongBinder) : (IMultiInstanceInvalidationCallback) queryLocalInterface;
+                IBinder strongBinder = parcel.readStrongBinder();
+                if (strongBinder != null) {
+                    IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface(IMultiInstanceInvalidationCallback.DESCRIPTOR);
+                    proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMultiInstanceInvalidationCallback)) ? new IMultiInstanceInvalidationCallback.Stub.Proxy(strongBinder) : (IMultiInstanceInvalidationCallback) iInterfaceQueryLocalInterface;
                 }
-                int registerCallback = ((MultiInstanceInvalidationService$binder$1) this).registerCallback(iMultiInstanceInvalidationCallback, parcel.readString());
+                int iRegisterCallback = ((MultiInstanceInvalidationService$binder$1) this).registerCallback(proxy, parcel.readString());
                 parcel2.writeNoException();
-                parcel2.writeInt(registerCallback);
+                parcel2.writeInt(iRegisterCallback);
                 return true;
             }
             if (i != 2) {
@@ -114,12 +111,12 @@ public interface IMultiInstanceInvalidationService extends IInterface {
                 ((MultiInstanceInvalidationService$binder$1) this).broadcastInvalidation(parcel.createStringArray(), parcel.readInt());
                 return true;
             }
-            IBinder readStrongBinder2 = parcel.readStrongBinder();
-            if (readStrongBinder2 != null) {
-                IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface(IMultiInstanceInvalidationCallback.DESCRIPTOR);
-                iMultiInstanceInvalidationCallback = (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IMultiInstanceInvalidationCallback)) ? new IMultiInstanceInvalidationCallback.Stub.Proxy(readStrongBinder2) : (IMultiInstanceInvalidationCallback) queryLocalInterface2;
+            IBinder strongBinder2 = parcel.readStrongBinder();
+            if (strongBinder2 != null) {
+                IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface(IMultiInstanceInvalidationCallback.DESCRIPTOR);
+                proxy = (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IMultiInstanceInvalidationCallback)) ? new IMultiInstanceInvalidationCallback.Stub.Proxy(strongBinder2) : (IMultiInstanceInvalidationCallback) iInterfaceQueryLocalInterface2;
             }
-            ((MultiInstanceInvalidationService$binder$1) this).unregisterCallback(iMultiInstanceInvalidationCallback, parcel.readInt());
+            ((MultiInstanceInvalidationService$binder$1) this).unregisterCallback(proxy, parcel.readInt());
             parcel2.writeNoException();
             return true;
         }

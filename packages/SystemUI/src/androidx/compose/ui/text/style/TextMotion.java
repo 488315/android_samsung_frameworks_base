@@ -2,7 +2,6 @@ package androidx.compose.ui.text.style;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextMotion {
     public static final TextMotion Animated;
@@ -11,7 +10,6 @@ public final class TextMotion {
     public final int linearity;
     public final boolean subpixelTextPositioning;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -21,7 +19,6 @@ public final class TextMotion {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Linearity {
         public final int value;
         public static final Companion Companion = new Companion(null);
@@ -29,7 +26,6 @@ public final class TextMotion {
         public static final int FontHinting = 2;
         public static final int None = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -44,7 +40,7 @@ public final class TextMotion {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Linearity m811boximpl(int i) {
+        public static final /* synthetic */ Linearity m813boximpl(int i) {
             return new Linearity(i);
         }
 

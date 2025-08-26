@@ -109,7 +109,6 @@ import javax.inject.Provider;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardStatusView.Callback {
     public int mAppPluginVersion;
@@ -227,10 +226,10 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
                 if (context2 == null || pluginFaceWidgetManager.mSysuiContext == null) {
                     return;
                 }
-                int hashCode = context2.getResources().getConfiguration().hashCode();
-                int hashCode2 = pluginFaceWidgetManager.mSysuiContext.getResources().getConfiguration().hashCode();
-                if (hashCode != hashCode2) {
-                    Log.w("PluginFaceWidgetManager", MutableVectorKt$$ExternalSyntheticOutline0.m(hashCode, hashCode2, "onConfigurationChanged: changed [", " -> ", "]"));
+                int iHashCode = context2.getResources().getConfiguration().hashCode();
+                int iHashCode2 = pluginFaceWidgetManager.mSysuiContext.getResources().getConfiguration().hashCode();
+                if (iHashCode != iHashCode2) {
+                    Log.w("PluginFaceWidgetManager", MutableVectorKt$$ExternalSyntheticOutline0.m(iHashCode, iHashCode2, "onConfigurationChanged: changed [", " -> ", "]"));
                     if (((SettingsHelper) pluginFaceWidgetManager.mSettingsHelperProvider.get()).isLockScreenRotationAllowed()) {
                         Log.w("PluginFaceWidgetManager", "onConfigurationChanged: try plugin connect again");
                         pluginFaceWidgetManager.reconnectPluginModule();
@@ -301,7 +300,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
                     Supplier supplier = new Supplier() { // from class: com.android.systemui.facewidget.plugin.PluginFaceWidgetManager$$ExternalSyntheticLambda6
                         @Override // java.util.function.Supplier
                         public final Object get() {
-                            return Integer.valueOf(PluginKeyguardStatusView.this.getVersion());
+                            return Integer.valueOf(pluginKeyguardStatusView.getVersion());
                         }
                     };
                     PluginKeyguardStatusView pluginKeyguardStatusView2 = (PluginKeyguardStatusView) new VersionCheckingProxy(PluginKeyguardStatusView.class, pluginKeyguardStatusView, supplier).get();
@@ -383,7 +382,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
                         builder.getFeature().dismissCallback = new Function0() { // from class: com.android.systemui.media.mediaoutput.MediaOutputController$$ExternalSyntheticLambda0
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
-                                PluginFaceWidgetManager$$ExternalSyntheticLambda4 pluginFaceWidgetManager$$ExternalSyntheticLambda4 = MediaOutputController.this.listener;
+                                PluginFaceWidgetManager$$ExternalSyntheticLambda4 pluginFaceWidgetManager$$ExternalSyntheticLambda4 = mediaOutputController2.listener;
                                 if (pluginFaceWidgetManager$$ExternalSyntheticLambda4 != null) {
                                     StringBuilder sb = new StringBuilder("destroyFullNowBar mFaceWidgetPlugin");
                                     PluginFaceWidgetManager pluginFaceWidgetManager2 = pluginFaceWidgetManager$$ExternalSyntheticLambda4.f$0;
@@ -409,10 +408,10 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
                 Log.d("PluginFaceWidgetManager", "Attach container started");
                 if (pluginFaceWidgetManager.mFaceWidgetPlugin != null) {
                     NotificationPanelViewController notificationPanelViewController = pluginFaceWidgetManager.mNPVController;
-                    int indexOfChild = notificationPanelViewController == null ? 0 : notificationPanelViewController.mView.indexOfChild(notificationPanelViewController.mEditModeContainer) + 1;
+                    int iIndexOfChild = notificationPanelViewController == null ? 0 : notificationPanelViewController.mView.indexOfChild(notificationPanelViewController.mEditModeContainer) + 1;
                     PluginKeyguardStatusView pluginKeyguardStatusView6 = pluginFaceWidgetManager.mFaceWidgetPlugin;
                     NotificationPanelViewController notificationPanelViewController2 = pluginFaceWidgetManager.mNPVController;
-                    pluginKeyguardStatusView6.attachFaceWidgetContainer(notificationPanelViewController2 != null ? notificationPanelViewController2.mView : null, pluginFaceWidgetManager.mContainerView, indexOfChild);
+                    pluginKeyguardStatusView6.attachFaceWidgetContainer(notificationPanelViewController2 != null ? notificationPanelViewController2.mView : null, pluginFaceWidgetManager.mContainerView, iIndexOfChild);
                     View containerView = pluginFaceWidgetManager.mFaceWidgetPlugin.getContainerView();
                     pluginFaceWidgetManager.mContainerView = containerView;
                     PluginKeyguardStatusView pluginKeyguardStatusView7 = pluginFaceWidgetManager.mFaceWidgetPlugin;
@@ -453,7 +452,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
                             ((HashMap) pluginFaceWidgetManager.mMediaDataMap).forEach(new BiConsumer() { // from class: com.android.systemui.facewidget.plugin.PluginFaceWidgetManager$$ExternalSyntheticLambda5
                                 @Override // java.util.function.BiConsumer
                                 public final void accept(Object obj5, Object obj6) {
-                                    PluginFaceWidgetManager pluginFaceWidgetManager2 = PluginFaceWidgetManager.this;
+                                    PluginFaceWidgetManager pluginFaceWidgetManager2 = pluginFaceWidgetManager;
                                     MediaDataManager.Listener listener = anonymousClass1;
                                     String str2 = (String) obj5;
                                     MediaData mediaData = (MediaData) obj6;
@@ -490,7 +489,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
         ((BootAnimationFinishedCacheImpl) bootAnimationFinishedCache).addListener(new BootAnimationFinishedCache.BootAnimationFinishedListener() { // from class: com.android.systemui.facewidget.plugin.PluginFaceWidgetManager$$ExternalSyntheticLambda1
             @Override // com.android.systemui.BootAnimationFinishedCache.BootAnimationFinishedListener
             public final void onBootAnimationFinished() {
-                final PluginFaceWidgetManager pluginFaceWidgetManager = PluginFaceWidgetManager.this;
+                final PluginFaceWidgetManager pluginFaceWidgetManager = this.f$0;
                 if (SafeUIState.isSysUiSafeModeEnabled()) {
                     Log.i("PluginFaceWidgetManager", "Do not  initPluginModule in safe mode");
                 } else {
@@ -525,7 +524,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
         javaAdapter.alwaysCollectFlow(keyguardInteractor.dozeTimeTick, new Consumer() { // from class: com.android.systemui.facewidget.plugin.PluginFaceWidgetManager$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                PluginFaceWidgetManager pluginFaceWidgetManager = PluginFaceWidgetManager.this;
+                PluginFaceWidgetManager pluginFaceWidgetManager = this.f$0;
                 pluginFaceWidgetManager.getClass();
                 Log.d("PluginFaceWidgetManager", "dozeTimeTick: time=" + ((Long) obj));
                 PluginKeyguardStatusView pluginKeyguardStatusView = pluginFaceWidgetManager.mFaceWidgetPlugin;
@@ -556,9 +555,9 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
     public final View createBatteryMeterView() {
         BatteryMeterView batteryMeterView = new BatteryMeterView(this.mSysuiContext, null);
         batteryMeterView.setTag("PluginFaceWidgetManager");
-        BatteryMeterViewController create = this.mBatteryMeterViewControllerFactory.create(batteryMeterView, StatusBarLocation.AOD);
-        this.mBatteryMeterViewController = create;
-        create.init();
+        BatteryMeterViewController batteryMeterViewControllerCreate = this.mBatteryMeterViewControllerFactory.create(batteryMeterView, StatusBarLocation.AOD);
+        this.mBatteryMeterViewController = batteryMeterViewControllerCreate;
+        batteryMeterViewControllerCreate.init();
         this.mBatteryMeterViewController.setAodScaleFactor();
         return batteryMeterView;
     }
@@ -649,7 +648,7 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
 
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView.Callback
     public final int getNavigationBarHeight() {
-        return this.mSysuiContext.getResources().getDimensionPixelSize(R.dimen.seekbar_track_progress_height_material);
+        return this.mSysuiContext.getResources().getDimensionPixelSize(R.dimen.select_dialog_drawable_padding_start_material);
     }
 
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView.Callback
@@ -733,21 +732,23 @@ public class PluginFaceWidgetManager implements PluginListener, PluginKeyguardSt
         return DeviceType.isMultiSimSupported();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0024  */
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView.Callback
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean isNoLockIcon() {
         NotificationPanelViewController notificationPanelViewController = this.mNPVController;
         boolean z = false;
         boolean z2 = notificationPanelViewController.mKeyguardStateController.mSecure && notificationPanelViewController.mPluginLockViewMode == 0;
         if (z2) {
             PluginLockData pluginLockData = notificationPanelViewController.mPluginLockData;
-            if (pluginLockData.isAvailable()) {
-                if (pluginLockData.getVisibility(7) == 0) {
-                    z = true;
-                }
-                return !z;
+            if (!pluginLockData.isAvailable()) {
+                z = z2;
+            } else if (pluginLockData.getVisibility(7) == 0) {
+                z = true;
             }
         }
-        z = z2;
         return !z;
     }
 

@@ -2,6 +2,7 @@ package android.widget;
 
 import android.app.backup.FullBackup;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
@@ -42,12 +43,12 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         return true;
     }
 
-    public TimePickerSpinnerDelegate(TimePicker timePicker, Context context, AttributeSet attributeSet, int i, int i2) {
+    public TimePickerSpinnerDelegate(TimePicker timePicker, Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(timePicker, context);
         this.mIsEnabled = true;
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
-        int resourceId = obtainStyledAttributes.getResourceId(13, R.layout.time_picker_legacy);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(13, R.layout.time_picker_legacy);
+        typedArrayObtainStyledAttributes.recycle();
         LayoutInflater.from(this.mContext).inflate(resourceId, (ViewGroup) this.mDelegator, true).setSaveFromParentEnabled(false);
         NumberPicker numberPicker = (NumberPicker) timePicker.findViewById(R.id.hour);
         this.mHourSpinner = numberPicker;
@@ -105,15 +106,15 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         editText2.setImeOptions(5);
         String[] amPmStrings = TimePicker.getAmPmStrings(context);
         this.mAmPmStrings = amPmStrings;
-        View findViewById = this.mDelegator.findViewById(R.id.amPm);
-        if (findViewById instanceof Button) {
+        View viewFindViewById = this.mDelegator.findViewById(R.id.amPm);
+        if (viewFindViewById instanceof Button) {
             this.mAmPmSpinner = null;
             this.mAmPmSpinnerInput = null;
-            Button button = (Button) findViewById;
+            Button button = (Button) viewFindViewById;
             this.mAmPmButton = button;
             button.setOnClickListener(new View.OnClickListener() { // from class: android.widget.TimePickerSpinnerDelegate.3
                 @Override // android.view.View.OnClickListener
-                public void onClick(View view) {
+                public void onClick(View view) throws Resources.NotFoundException {
                     view.requestFocus();
                     TimePickerSpinnerDelegate.this.mIsAm = !r2.mIsAm;
                     TimePickerSpinnerDelegate.this.updateAmPmControl();
@@ -122,7 +123,7 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
             });
         } else {
             this.mAmPmButton = null;
-            NumberPicker numberPicker3 = (NumberPicker) findViewById;
+            NumberPicker numberPicker3 = (NumberPicker) viewFindViewById;
             this.mAmPmSpinner = numberPicker3;
             numberPicker3.setMinValue(0);
             numberPicker3.setMaxValue(1);
@@ -143,9 +144,9 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
         if (isAmPmAtStart()) {
             ViewGroup viewGroup = (ViewGroup) timePicker.findViewById(R.id.timePickerLayout);
-            viewGroup.removeView(findViewById);
-            viewGroup.addView(findViewById, 0);
-            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) findViewById.getLayoutParams();
+            viewGroup.removeView(viewFindViewById);
+            viewGroup.addView(viewFindViewById, 0);
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) viewFindViewById.getLayoutParams();
             int marginStart = marginLayoutParams.getMarginStart();
             int marginEnd = marginLayoutParams.getMarginEnd();
             if (marginStart != marginEnd) {
@@ -175,11 +176,11 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         int length = bestDateTimePattern.length();
         this.mHourWithTwoDigit = false;
         for (int i = 0; i < length; i++) {
-            char charAt = bestDateTimePattern.charAt(i);
-            if (charAt == 'H' || charAt == 'h' || charAt == 'K' || charAt == 'k') {
-                this.mHourFormat = charAt;
+            char cCharAt = bestDateTimePattern.charAt(i);
+            if (cCharAt == 'H' || cCharAt == 'h' || cCharAt == 'K' || cCharAt == 'k') {
+                this.mHourFormat = cCharAt;
                 int i2 = i + 1;
-                if (i2 >= length || charAt != bestDateTimePattern.charAt(i2)) {
+                if (i2 >= length || cCharAt != bestDateTimePattern.charAt(i2)) {
                     return;
                 }
                 this.mHourWithTwoDigit = true;
@@ -193,24 +194,24 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
     }
 
     private void setDividerText() {
-        String substring;
+        String strSubstring;
         String bestDateTimePattern = DateFormat.getBestDateTimePattern(this.mLocale, this.mIs24HourView ? "Hm" : "hm");
-        int lastIndexOf = bestDateTimePattern.lastIndexOf(72);
-        if (lastIndexOf == -1) {
-            lastIndexOf = bestDateTimePattern.lastIndexOf(104);
+        int iLastIndexOf = bestDateTimePattern.lastIndexOf(72);
+        if (iLastIndexOf == -1) {
+            iLastIndexOf = bestDateTimePattern.lastIndexOf(104);
         }
-        if (lastIndexOf == -1) {
-            substring = ":";
+        if (iLastIndexOf == -1) {
+            strSubstring = ":";
         } else {
-            int i = lastIndexOf + 1;
-            int indexOf = bestDateTimePattern.indexOf(109, i);
-            if (indexOf == -1) {
-                substring = Character.toString(bestDateTimePattern.charAt(i));
+            int i = iLastIndexOf + 1;
+            int iIndexOf = bestDateTimePattern.indexOf(109, i);
+            if (iIndexOf == -1) {
+                strSubstring = Character.toString(bestDateTimePattern.charAt(i));
             } else {
-                substring = bestDateTimePattern.substring(i, indexOf);
+                strSubstring = bestDateTimePattern.substring(i, iIndexOf);
             }
         }
-        this.mDivider.lambda$setTextAsync$0(substring);
+        this.mDivider.lambda$setTextAsync$0(strSubstring);
     }
 
     @Override // android.widget.TimePicker.TimePickerDelegate
@@ -303,7 +304,7 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
     }
 
     @Override // android.widget.TimePicker.TimePickerDelegate
-    public void setEnabled(boolean z) {
+    public void setEnabled(boolean z) throws Resources.NotFoundException {
         this.mMinuteSpinner.setEnabled(z);
         TextView textView = this.mDivider;
         if (textView != null) {
@@ -461,7 +462,7 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
     }
 
-    private void setContentDescriptions() {
+    private void setContentDescriptions() throws Resources.NotFoundException {
         trySetContentDescription(this.mMinuteSpinner, R.id.increment, R.string.time_picker_increment_minute_button);
         trySetContentDescription(this.mMinuteSpinner, R.id.decrement, R.string.time_picker_decrement_minute_button);
         trySetContentDescription(this.mHourSpinner, R.id.increment, R.string.time_picker_increment_hour_button);
@@ -473,10 +474,10 @@ class TimePickerSpinnerDelegate extends TimePicker.AbstractTimePickerDelegate {
         }
     }
 
-    private void trySetContentDescription(View view, int i, int i2) {
-        View findViewById = view.findViewById(i);
-        if (findViewById != null) {
-            findViewById.setContentDescription(this.mContext.getString(i2));
+    private void trySetContentDescription(View view, int i, int i2) throws Resources.NotFoundException {
+        View viewFindViewById = view.findViewById(i);
+        if (viewFindViewById != null) {
+            viewFindViewById.setContentDescription(this.mContext.getString(i2));
         }
     }
 }

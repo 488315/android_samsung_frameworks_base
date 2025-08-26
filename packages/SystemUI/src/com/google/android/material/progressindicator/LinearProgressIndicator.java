@@ -6,7 +6,6 @@ import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LinearProgressIndicator extends BaseProgressIndicator {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,8 +62,8 @@ public class LinearProgressIndicator extends BaseProgressIndicator {
     }
 
     public LinearProgressIndicator(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i, R.style.Widget_MaterialComponents_LinearProgressIndicator);
         IndeterminateAnimatorDelegate linearIndeterminateDisjointAnimatorDelegate;
+        super(context, attributeSet, i, R.style.Widget_MaterialComponents_LinearProgressIndicator);
         LinearDrawingDelegate linearDrawingDelegate = new LinearDrawingDelegate((LinearProgressIndicatorSpec) this.spec);
         Context context2 = getContext();
         LinearProgressIndicatorSpec linearProgressIndicatorSpec = (LinearProgressIndicatorSpec) this.spec;

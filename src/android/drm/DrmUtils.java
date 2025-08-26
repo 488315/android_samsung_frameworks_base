@@ -21,9 +21,9 @@ public class DrmUtils {
         FileInputStream fileInputStream = new FileInputStream(file);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
         try {
-            int available = bufferedInputStream.available();
-            if (available > 0) {
-                bArr = new byte[available];
+            int iAvailable = bufferedInputStream.available();
+            if (iAvailable > 0) {
+                bArr = new byte[iAvailable];
                 bufferedInputStream.read(bArr);
             } else {
                 bArr = null;
@@ -35,25 +35,24 @@ public class DrmUtils {
         }
     }
 
-    static void writeToFile(String str, byte[] bArr) throws IOException {
-        FileOutputStream fileOutputStream;
+    static void writeToFile(String str, byte[] bArr) throws Throwable {
         if (str == null || bArr == null) {
             return;
         }
-        FileOutputStream fileOutputStream2 = null;
+        FileOutputStream fileOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream(str);
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            fileOutputStream.write(bArr);
-            quietlyDispose(fileOutputStream);
+            FileOutputStream fileOutputStream2 = new FileOutputStream(str);
+            try {
+                fileOutputStream2.write(bArr);
+                quietlyDispose(fileOutputStream2);
+            } catch (Throwable th) {
+                th = th;
+                fileOutputStream = fileOutputStream2;
+                quietlyDispose(fileOutputStream);
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            fileOutputStream2 = fileOutputStream;
-            quietlyDispose(fileOutputStream2);
-            throw th;
         }
     }
 
@@ -61,7 +60,7 @@ public class DrmUtils {
         new File(str).delete();
     }
 
-    private static void quietlyDispose(Closeable closeable) {
+    private static void quietlyDispose(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();
@@ -97,17 +96,17 @@ public class DrmUtils {
             this.mMap = new HashMap<>();
             int i = 0;
             while (i < bArr.length) {
-                int readByte = readByte(bArr, i);
-                int readByte2 = readByte(bArr, i + 1);
-                int i2 = i + 2;
-                String readMultipleBytes = readMultipleBytes(bArr, readByte, i2);
-                int i3 = i2 + readByte;
-                String readMultipleBytes2 = readMultipleBytes(bArr, readByte2, i3);
-                if (readMultipleBytes2.equals(" ")) {
-                    readMultipleBytes2 = "";
+                int i2 = readByte(bArr, i);
+                int i3 = readByte(bArr, i + 1);
+                int i4 = i + 2;
+                String multipleBytes = readMultipleBytes(bArr, i2, i4);
+                int i5 = i4 + i2;
+                String multipleBytes2 = readMultipleBytes(bArr, i3, i5);
+                if (multipleBytes2.equals(" ")) {
+                    multipleBytes2 = "";
                 }
-                i = i3 + readByte2;
-                this.mMap.put(readMultipleBytes, readMultipleBytes2);
+                i = i5 + i3;
+                this.mMap.put(multipleBytes, multipleBytes2);
             }
         }
 

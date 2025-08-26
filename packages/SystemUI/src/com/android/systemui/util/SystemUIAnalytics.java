@@ -3,6 +3,7 @@ package com.android.systemui.util;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Trace;
 import android.util.Log;
 import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
@@ -30,7 +31,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SystemUIAnalytics {
     public static final String CONTROL_KEY_ALL_CONTROLS = "AllControls";
@@ -598,7 +598,7 @@ public final class SystemUIAnalytics {
         }
     }
 
-    private static void makeSAPreferences() {
+    private static void makeSAPreferences() throws Resources.NotFoundException {
         try {
             LogBuilders$SettingPrefBuilder logBuilders$SettingPrefBuilder = new LogBuilders$SettingPrefBuilder();
             String[] stringArray = sContext.getResources().getStringArray(R.array.tile_ids);
@@ -702,7 +702,7 @@ public final class SystemUIAnalytics {
         }
     }
 
-    public static void prepareIdMap() {
+    public static void prepareIdMap() throws Resources.NotFoundException {
         Arrays.asList(SystemUIAnalytics.class.getFields()).stream().filter(new SystemUIAnalytics$$ExternalSyntheticLambda0()).forEach(new SystemUIAnalytics$$ExternalSyntheticLambda1());
         Context context = sContext;
         if (context == null) {
@@ -721,84 +721,84 @@ public final class SystemUIAnalytics {
     }
 
     public static void sendEventCDLog(String str, String str2, Map<String, String> map) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
-            m.append(toReadableString(convertScreenID, str2));
-            m.append(", ");
-            m.append(map);
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
+            sbM.append(toReadableString(strConvertScreenID, str2));
+            sbM.append(", ");
+            sbM.append(map);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
                 logBuilders$EventBuilder.setDimension(map);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", "), toReadableString(convertScreenID, str2), TAG);
+            ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", "), toReadableString(strConvertScreenID, str2), TAG);
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendRunestoneEventCDLog(String str, String str2, String str3, String str4, String str5) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap();
-            hashMap.put(str3, str4);
-            HashMap hashMap2 = new HashMap();
-            hashMap2.put(str5, new String[]{str3});
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunestoneEventCDLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            m.append(str4);
-            m.append(", ");
-            m.append(str5);
-            Log.d(TAG, m.toString());
+            HashMap map = new HashMap();
+            map.put(str3, str4);
+            HashMap map2 = new HashMap();
+            map2.put(str5, new String[]{str3});
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunestoneEventCDLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            sbM.append(str4);
+            sbM.append(", ");
+            sbM.append(str5);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
-                logBuilders$EventBuilder.setPersonalizedData(hashMap2);
+                logBuilders$EventBuilder.setDimension(map);
+                logBuilders$EventBuilder.setPersonalizedData(map2);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendRunestoneEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendRunstoneEventLog(String str, String str2, String str3) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunstoneEventLog ", str2, ", ");
-            m.append(toReadableString(convertScreenID, str2));
-            m.append(", ");
-            m.append(str3);
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunstoneEventLog ", str2, ", ");
+            sbM.append(toReadableString(strConvertScreenID, str2));
+            sbM.append(", ");
+            sbM.append(str3);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
                 String[] strArr = {str3};
                 StringBuilder sb = new StringBuilder();
@@ -812,23 +812,23 @@ public final class SystemUIAnalytics {
             } catch (Exception e) {
                 Log.d(TAG, "sendRunstoneEventLog : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendScreenViewLog(String str) {
-        String convertScreenID = convertScreenID(str);
-        if (checkConfigurationConfirmed() && !sCurrentScreenID.equals(convertScreenID)) {
-            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendScreenViewLog "), toReadableString(convertScreenID), TAG);
+        String strConvertScreenID = convertScreenID(str);
+        if (checkConfigurationConfirmed() && !sCurrentScreenID.equals(strConvertScreenID)) {
+            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendScreenViewLog "), toReadableString(strConvertScreenID), TAG);
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$ScreenViewBuilder logBuilders$ScreenViewBuilder = new LogBuilders$ScreenViewBuilder();
-                logBuilders$ScreenViewBuilder.setScreenView$1(convertScreenID);
+                logBuilders$ScreenViewBuilder.setScreenView$1(strConvertScreenID);
                 samsungAnalytics.sendLog(logBuilders$ScreenViewBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendScreenViewLog : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
@@ -863,68 +863,68 @@ public final class SystemUIAnalytics {
     }
 
     public static void sendScreenViewLog(String str, boolean z) {
-        String convertScreenID = convertScreenID(str);
-        if (checkConfigurationConfirmed() && !sCurrentScreenID.equals(convertScreenID)) {
-            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendScreenViewLog "), toReadableString(convertScreenID), TAG);
+        String strConvertScreenID = convertScreenID(str);
+        if (checkConfigurationConfirmed() && !sCurrentScreenID.equals(strConvertScreenID)) {
+            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendScreenViewLog "), toReadableString(strConvertScreenID), TAG);
             try {
                 if (z) {
                     SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                     LogBuilders$ScreenViewBuilder logBuilders$ScreenViewBuilder = new LogBuilders$ScreenViewBuilder();
-                    logBuilders$ScreenViewBuilder.setScreenView$1(convertScreenID);
+                    logBuilders$ScreenViewBuilder.setScreenView$1(strConvertScreenID);
                     logBuilders$ScreenViewBuilder.set("sc", "s");
                     samsungAnalytics.sendLog(logBuilders$ScreenViewBuilder.build());
                 } else {
                     SamsungAnalytics samsungAnalytics2 = SamsungAnalytics.getInstance();
                     LogBuilders$ScreenViewBuilder logBuilders$ScreenViewBuilder2 = new LogBuilders$ScreenViewBuilder();
-                    logBuilders$ScreenViewBuilder2.setScreenView$1(convertScreenID);
+                    logBuilders$ScreenViewBuilder2.setScreenView$1(strConvertScreenID);
                     logBuilders$ScreenViewBuilder2.set("sc", "e");
                     samsungAnalytics2.sendLog(logBuilders$ScreenViewBuilder2.build());
                 }
             } catch (Exception e) {
                 Log.d(TAG, "sendScreenViewLog : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventCDLog(String str, String str2, String str3, String str4) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap();
-            hashMap.put(str3, str4);
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            ExifInterface$$ExternalSyntheticOutline0.m(m, str4, TAG);
+            HashMap map = new HashMap();
+            map.put(str3, str4);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            ExifInterface$$ExternalSyntheticOutline0.m(sbM, str4, TAG);
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2, boolean z) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", "), toReadableString(convertScreenID, str2), TAG);
+            ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", "), toReadableString(strConvertScreenID, str2), TAG);
             try {
                 if (z) {
                     SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                     LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                    logBuilders$EventBuilder.setScreenView(convertScreenID);
+                    logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                     logBuilders$EventBuilder.setEventName(str2);
                     logBuilders$EventBuilder.set("sc", "s");
                     samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
                 } else {
                     SamsungAnalytics samsungAnalytics2 = SamsungAnalytics.getInstance();
                     LogBuilders$EventBuilder logBuilders$EventBuilder2 = new LogBuilders$EventBuilder();
-                    logBuilders$EventBuilder2.setScreenView(convertScreenID);
+                    logBuilders$EventBuilder2.setScreenView(strConvertScreenID);
                     logBuilders$EventBuilder2.setEventName(str2);
                     logBuilders$EventBuilder2.set("sc", "e");
                     samsungAnalytics2.sendLog(logBuilders$EventBuilder2.build());
@@ -932,190 +932,190 @@ public final class SystemUIAnalytics {
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendRunestoneEventCDLog(String str, String str2, String str3, String str4, String str5, String str6, String str7) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap();
-            hashMap.put(str3, str4);
-            hashMap.put(str5, str6);
-            HashMap hashMap2 = new HashMap();
-            hashMap2.put(str7, new String[]{str3, str5});
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunestoneEventCDLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, str4, ", ", str5, ", ");
-            m.append(str6);
-            m.append(", ");
-            m.append(str7);
-            Log.d(TAG, m.toString());
+            HashMap map = new HashMap();
+            map.put(str3, str4);
+            map.put(str5, str6);
+            HashMap map2 = new HashMap();
+            map2.put(str7, new String[]{str3, str5});
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendRunestoneEventCDLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, str4, ", ", str5, ", ");
+            sbM.append(str6);
+            sbM.append(", ");
+            sbM.append(str7);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
-                logBuilders$EventBuilder.setPersonalizedData(hashMap2);
+                logBuilders$EventBuilder.setDimension(map);
+                logBuilders$EventBuilder.setPersonalizedData(map2);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendRunestoneEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventCDLog(String str, String str2, String str3, String str4, String str5, String str6) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap();
-            hashMap.put(str3, str4);
-            hashMap.put(str5, str6);
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, str4, ", ", str5, ", ");
-            ExifInterface$$ExternalSyntheticOutline0.m(m, str6, TAG);
+            HashMap map = new HashMap();
+            map.put(str3, str4);
+            map.put(str5, str6);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventCDLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, str4, ", ", str5, ", ");
+            ExifInterface$$ExternalSyntheticOutline0.m(sbM, str6, TAG);
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2, String str3) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap(1);
-            hashMap.put("det", str3);
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
-            m.append(toReadableString(convertScreenID, str2));
-            m.append(", ");
-            m.append(str3);
-            Log.d(TAG, m.toString());
+            HashMap map = new HashMap(1);
+            map.put("det", str3);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
+            sbM.append(toReadableString(strConvertScreenID, str2));
+            sbM.append(", ");
+            sbM.append(str3);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog/detail : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2, long j) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
-            m.append(toReadableString(convertScreenID, str2));
-            m.append(", ");
-            m.append(j);
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
+            sbM.append(toReadableString(strConvertScreenID, str2));
+            sbM.append(", ");
+            sbM.append(j);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
                 logBuilders$EventBuilder.set("ev", String.valueOf(j));
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog/detail : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventCDLog(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap();
-            hashMap.put(str3, str4);
-            hashMap.put(str5, str6);
-            hashMap.put(str7, str8);
+            HashMap map = new HashMap();
+            map.put(str3, str4);
+            map.put(str5, str6);
+            map.put(str7, str8);
             StringBuilder sb = new StringBuilder("sendEventCDLog ");
             sb.append(str2);
             sb.append(", ");
-            MoveResult$$ExternalSyntheticOutline0.m(sb, toReadableString(convertScreenID, str2), ", ", str3, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sb, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
             MoveResult$$ExternalSyntheticOutline0.m(sb, str4, ", ", str5, ", ");
             MoveResult$$ExternalSyntheticOutline0.m(sb, str6, ", ", str7, ", ");
             ExifInterface$$ExternalSyntheticOutline0.m(sb, str8, TAG);
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventCDLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2, String str3, long j) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap(1);
-            hashMap.put("det", str3);
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            m.append(j);
-            Log.d(TAG, m.toString());
+            HashMap map = new HashMap(1);
+            map.put("det", str3);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            sbM.append(j);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 logBuilders$EventBuilder.set("ev", String.valueOf(j));
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 
     public static void sendEventLog(String str, String str2, String str3, long j, long j2) {
-        String convertScreenID = convertScreenID(str);
+        String strConvertScreenID = convertScreenID(str);
         if (checkConfigurationConfirmed()) {
-            HashMap hashMap = new HashMap(1);
-            hashMap.put("det", str3);
+            HashMap map = new HashMap(1);
+            map.put("det", str3);
             if (j2 == 1) {
-                hashMap.put("Tap", "1");
+                map.put("Tap", "1");
             } else {
-                hashMap.put("DragDrop", "2");
+                map.put("DragDrop", "2");
             }
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
-            MoveResult$$ExternalSyntheticOutline0.m(m, toReadableString(convertScreenID, str2), ", ", str3, ", ");
-            m.append(j);
-            m.append(", ");
-            m.append(j2);
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sendEventLog ", str2, ", ");
+            MoveResult$$ExternalSyntheticOutline0.m(sbM, toReadableString(strConvertScreenID, str2), ", ", str3, ", ");
+            sbM.append(j);
+            sbM.append(", ");
+            sbM.append(j2);
+            Log.d(TAG, sbM.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
                 LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
-                logBuilders$EventBuilder.setScreenView(convertScreenID);
+                logBuilders$EventBuilder.setScreenView(strConvertScreenID);
                 logBuilders$EventBuilder.setEventName(str2);
-                logBuilders$EventBuilder.setDimension(hashMap);
+                logBuilders$EventBuilder.setDimension(map);
                 logBuilders$EventBuilder.set("ev", String.valueOf(j));
                 samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
             } catch (Exception e) {
                 Log.d(TAG, "sendEventLog/all : " + e.getMessage() + ", " + android.os.Debug.getCallers(3));
             }
-            setCurrentScreenID(convertScreenID);
+            setCurrentScreenID(strConvertScreenID);
         }
     }
 }

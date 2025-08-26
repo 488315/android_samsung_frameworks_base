@@ -31,7 +31,7 @@ class BundleAndJsonConverter {
     BundleAndJsonConverter() {
     }
 
-    public Bundle convertJsonToBundle(String str) {
+    public Bundle convertJsonToBundle(String str) throws IOException {
         if (str == null) {
             return null;
         }
@@ -57,16 +57,16 @@ class BundleAndJsonConverter {
             return null;
         }
         ArrayList<String> arrayList = new ArrayList<>();
-        String[] split = str.split("\\|");
-        if (split != null) {
-            for (String str2 : split) {
+        String[] strArrSplit = str.split("\\|");
+        if (strArrSplit != null) {
+            for (String str2 : strArrSplit) {
                 arrayList.add(str2);
             }
         }
         return arrayList;
     }
 
-    public String convertBundleToJson(Bundle bundle) {
+    public String convertBundleToJson(Bundle bundle) throws IOException {
         if (bundle == null) {
             return null;
         }
@@ -103,26 +103,26 @@ class BundleAndJsonConverter {
     }
 
     private void writeBundleToJson(Bundle bundle, JsonWriter jsonWriter) throws IOException {
-        String obj;
+        String string;
         jsonWriter.beginObject();
         for (String str : bundle.keySet()) {
-            Object obj2 = bundle.get(str);
-            if (obj2 == null) {
+            Object obj = bundle.get(str);
+            if (obj == null) {
                 Log.i(TAG, "writeBundleToJson: the value of " + str + " is null. skipping..");
             } else {
-                String determineDataTypePrefix = determineDataTypePrefix(obj2);
-                if (determineDataTypePrefix == null) {
-                    Log.i(TAG, "writeBundleToJson: unsupported value type : key=" + str + ", type=" + obj2.getClass().getSimpleName() + ", skipping..");
+                String strDetermineDataTypePrefix = determineDataTypePrefix(obj);
+                if (strDetermineDataTypePrefix == null) {
+                    Log.i(TAG, "writeBundleToJson: unsupported value type : key=" + str + ", type=" + obj.getClass().getSimpleName() + ", skipping..");
                 } else {
                     jsonWriter.name(str);
-                    if (JSON_VALUE_TYPE_PREFIX_BUNDLE.equals(determineDataTypePrefix)) {
-                        obj = convertBundleToJson((Bundle) obj2);
-                    } else if (JSON_VALUE_TYPE_PREFIX_STRING_ARRAY.equals(determineDataTypePrefix)) {
-                        obj = convertStringArrayToString((ArrayList) obj2);
+                    if (JSON_VALUE_TYPE_PREFIX_BUNDLE.equals(strDetermineDataTypePrefix)) {
+                        string = convertBundleToJson((Bundle) obj);
+                    } else if (JSON_VALUE_TYPE_PREFIX_STRING_ARRAY.equals(strDetermineDataTypePrefix)) {
+                        string = convertStringArrayToString((ArrayList) obj);
                     } else {
-                        obj = obj2.toString();
+                        string = obj.toString();
                     }
-                    jsonWriter.value(determineDataTypePrefix + "|" + obj);
+                    jsonWriter.value(strDetermineDataTypePrefix + "|" + string);
                 }
             }
         }
@@ -132,51 +132,51 @@ class BundleAndJsonConverter {
     private void putJsonObjectFieldsToBundle(JsonReader jsonReader, Bundle bundle) throws IOException {
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
-            String nextName = jsonReader.nextName();
-            if (Boolean.valueOf(putValueToBundle(bundle, nextName, jsonReader.nextString())) == null) {
-                Log.d(TAG, "putJsonObjectFieldsToBundle: failed to decode value. key=" + nextName);
+            String strNextName = jsonReader.nextName();
+            if (Boolean.valueOf(putValueToBundle(bundle, strNextName, jsonReader.nextString())) == null) {
+                Log.d(TAG, "putJsonObjectFieldsToBundle: failed to decode value. key=" + strNextName);
             }
         }
         jsonReader.endObject();
     }
 
     private boolean putValueToBundle(Bundle bundle, String str, String str2) {
-        String substring;
+        String strSubstring;
         if (bundle == null || str == null || str2 == null) {
             return false;
         }
-        int indexOf = str2.indexOf("|");
-        if (indexOf < 0) {
+        int iIndexOf = str2.indexOf("|");
+        if (iIndexOf < 0) {
             Log.e(TAG, "putValueToBundle : type delimiter is absent : " + str2);
             return false;
         }
-        String substring2 = str2.substring(0, indexOf);
-        substring = str2.substring(indexOf + 1, str2.length());
-        substring2.hashCode();
-        switch (substring2) {
+        String strSubstring2 = str2.substring(0, iIndexOf);
+        strSubstring = str2.substring(iIndexOf + 1, str2.length());
+        strSubstring2.hashCode();
+        switch (strSubstring2) {
             case "B":
-                bundle.putBoolean(str, Boolean.valueOf(substring).booleanValue());
+                bundle.putBoolean(str, Boolean.valueOf(strSubstring).booleanValue());
                 break;
             case "D":
-                bundle.putDouble(str, Double.valueOf(substring).doubleValue());
+                bundle.putDouble(str, Double.valueOf(strSubstring).doubleValue());
                 break;
             case "F":
-                bundle.putFloat(str, Float.valueOf(substring).floatValue());
+                bundle.putFloat(str, Float.valueOf(strSubstring).floatValue());
                 break;
             case "I":
-                bundle.putInt(str, Integer.valueOf(substring).intValue());
+                bundle.putInt(str, Integer.valueOf(strSubstring).intValue());
                 break;
             case "L":
-                bundle.putLong(str, Long.valueOf(substring).longValue());
+                bundle.putLong(str, Long.valueOf(strSubstring).longValue());
                 break;
             case "S":
-                bundle.putString(str, substring);
+                bundle.putString(str, strSubstring);
                 break;
             case "BD":
-                bundle.putBundle(str, convertJsonToBundle(substring));
+                bundle.putBundle(str, convertJsonToBundle(strSubstring));
                 break;
             case "SA":
-                bundle.putStringArrayList(str, convertStringToStringArray(substring));
+                bundle.putStringArrayList(str, convertStringToStringArray(strSubstring));
                 break;
             default:
                 Log.e(TAG, "putValueToBundle: unexpected data type : " + str2);

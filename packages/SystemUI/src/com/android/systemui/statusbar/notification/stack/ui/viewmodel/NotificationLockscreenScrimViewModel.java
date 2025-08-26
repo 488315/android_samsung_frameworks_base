@@ -19,9 +19,12 @@ import com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl;
 import com.android.systemui.shade.shared.model.ShadeMode;
 import com.android.systemui.shade.ui.composable.Shade$Elements;
 import com.android.systemui.statusbar.notification.stack.domain.interactor.NotificationStackAppearanceInteractor;
+import com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel;
 import com.android.systemui.util.kotlin.ActivatableFlowDumper;
 import com.android.systemui.util.kotlin.ActivatableFlowDumperImpl;
 import java.io.PrintWriter;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -29,13 +32,13 @@ import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationLockscreenScrimViewModel extends ExclusiveActivatable implements ActivatableFlowDumper {
     public static final Companion Companion = new Companion(null);
@@ -45,7 +48,6 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
     public final ReadonlyStateFlow shadeMode;
     public final NotificationStackAppearanceInteractor stackAppearanceInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,7 +57,6 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ElementViewModel {
         public final Function3 color;
         public final ElementKey key;
@@ -85,8 +86,24 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return NotificationLockscreenScrimViewModel.this.onActivated(this);
+        }
     }
 
     public NotificationLockscreenScrimViewModel(DumpManager dumpManager, ShadeModeInteractor shadeModeInteractor, NotificationStackAppearanceInteractor notificationStackAppearanceInteractor) {
@@ -98,7 +115,6 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
         this.shadeMode = readonlyStateFlow;
         this.element$delegate = hydrator.hydratedStateOf("elementKey", element((ShadeMode) readonlyStateFlow.$$delegate_0.getValue()), new Flow() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -127,68 +143,48 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
                     this.this$0 = notificationLockscreenScrimViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4a
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.shade.shared.model.ShadeMode r5 = (com.android.systemui.shade.shared.model.ShadeMode) r5
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$Companion r6 = com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.Companion
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel r6 = r4.this$0
-                        r6.getClass()
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$ElementViewModel r5 = com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.element(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4a
-                        return r1
-                    L4a:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        NotificationLockscreenScrimViewModel.Companion companion = NotificationLockscreenScrimViewModel.Companion;
+                        this.this$0.getClass();
+                        NotificationLockscreenScrimViewModel.ElementViewModel elementViewModelElement = NotificationLockscreenScrimViewModel.element((ShadeMode) obj);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(elementViewModelElement, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
     }
@@ -196,7 +192,7 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
     public static ElementViewModel element(ShadeMode shadeMode) {
         if (Intrinsics.areEqual(shadeMode, ShadeMode.Single.INSTANCE)) {
             Notifications$Elements.INSTANCE.getClass();
-            return new ElementViewModel(Notifications$Elements.NotificationScrim, new Function3() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$element$4
+            return new ElementViewModel(Notifications$Elements.NotificationScrim, new Function3() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.element.4
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     ((Boolean) obj).getClass();
@@ -219,30 +215,30 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
                         ComposerKt.traceEventEnd();
                     }
                     composerImpl.end(false);
-                    return Color.m454boximpl(j);
+                    return Color.m456boximpl(j);
                 }
             });
         }
         Shade$Elements.INSTANCE.getClass();
-        return new ElementViewModel(Shade$Elements.BackgroundScrim, new Function3() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$element$5
+        return new ElementViewModel(Shade$Elements.BackgroundScrim, new Function3() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.element.5
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                long colorResource;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                long jColorResource;
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 ((Number) obj3).intValue();
                 ComposerImpl composerImpl = (ComposerImpl) ((Composer) obj2);
                 composerImpl.startReplaceGroup(-1769572002);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.element.<anonymous> (NotificationLockscreenScrimViewModel.kt:89)");
                 }
-                if (booleanValue) {
+                if (zBooleanValue) {
                     composerImpl.startReplaceGroup(-517273929);
                     NotificationLockscreenScrimViewModel.Companion.getClass();
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.Companion.<get-SplitShadeBouncerToLockscreenBackground> (NotificationLockscreenScrimViewModel.kt:117)");
                     }
                     MaterialTheme.INSTANCE.getClass();
-                    colorResource = MaterialTheme.getColorScheme(composerImpl).surface;
+                    jColorResource = MaterialTheme.getColorScheme(composerImpl).surface;
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -253,7 +249,7 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.Companion.<get-SplitShadeDefaultBackground> (NotificationLockscreenScrimViewModel.kt:122)");
                     }
-                    colorResource = ColorResources_androidKt.colorResource(R.color.shade_scrim_background_dark, composerImpl);
+                    jColorResource = ColorResources_androidKt.colorResource(R.color.shade_scrim_background_dark, composerImpl);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -263,7 +259,7 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
                     ComposerKt.traceEventEnd();
                 }
                 composerImpl.end(false);
-                return Color.m454boximpl(colorResource);
+                return Color.m456boximpl(jColorResource);
             }
         });
     }
@@ -298,59 +294,38 @@ public final class NotificationLockscreenScrimViewModel extends ExclusiveActivat
         return this.$$delegate_0.dumpWhileCollecting(flow, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1 r0 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1 r0 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L43
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1 r6 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1
-            r2 = 0
-            java.lang.String r4 = "NotificationLockscreenScrimViewModel"
-            r6.<init>(r2, r4, r5)
-            r0.label = r3
-            java.lang.Object r5 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r6, r0)
-            if (r5 != r1) goto L43
-            return r1
-        L43:
-            kotlin.KotlinNothingValueException r5 = new kotlin.KotlinNothingValueException
-            r5.<init>()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationLockscreenScrimViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            NotificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1 notificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1 = new NotificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1(null, "NotificationLockscreenScrimViewModel", this);
+            anonymousClass1.label = 1;
+            if (CoroutineScopeKt.coroutineScope(notificationLockscreenScrimViewModel$onActivated$$inlined$coroutineScopeTraced$1, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 }

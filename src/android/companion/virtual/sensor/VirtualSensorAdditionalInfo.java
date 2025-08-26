@@ -43,9 +43,9 @@ public final class VirtualSensorAdditionalInfo implements Parcelable {
 
     private VirtualSensorAdditionalInfo(Parcel parcel) {
         this.mType = parcel.readInt();
-        int readInt = parcel.readInt();
-        this.mValues = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mValues = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mValues.add(parcel.createFloatArray());
         }
     }

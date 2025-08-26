@@ -13,7 +13,6 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BluetoothMediaDevice extends MediaDevice {
     public final AudioManager mAudioManager;
@@ -43,7 +42,7 @@ public class BluetoothMediaDevice extends MediaDevice {
     }
 
     @Override // com.android.settingslib.media.MediaDevice
-    public final Drawable getIcon() {
+    public final Drawable getIcon() throws Throwable {
         Context context = this.mContext;
         CachedBluetoothDevice cachedBluetoothDevice = this.mCachedDevice;
         boolean z = BluetoothUtils.DEBUG;

@@ -69,20 +69,20 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamCipher
     public void init(boolean z, CipherParameters cipherParameters) {
-        CipherParameters cipherParameters2;
-        byte[] bArr;
+        CipherParameters parameters;
+        byte[] iv;
         if (cipherParameters instanceof ParametersWithIV) {
             ParametersWithIV parametersWithIV = (ParametersWithIV) cipherParameters;
-            bArr = parametersWithIV.getIV();
-            cipherParameters2 = parametersWithIV.getParameters();
+            iv = parametersWithIV.getIV();
+            parameters = parametersWithIV.getParameters();
         } else {
-            cipherParameters2 = cipherParameters;
-            bArr = null;
+            parameters = cipherParameters;
+            iv = null;
         }
-        byte[] key = cipherParameters2 instanceof KeyParameter ? ((KeyParameter) cipherParameters2).getKey() : null;
+        byte[] key = parameters instanceof KeyParameter ? ((KeyParameter) parameters).getKey() : null;
         this.theIndex = 0;
         this.theIterations = 0;
-        setKeyAndIV(key, bArr);
+        setKeyAndIV(key, iv);
         CryptoServicesRegistrar.checkConstraints(new DefaultServiceProperties(getAlgorithmName(), key.length * 8, cipherParameters, z ? CryptoServicePurpose.ENCRYPTION : CryptoServicePurpose.DECRYPTION));
         this.theResetState = (Zuc128CoreEngine) copy();
     }
@@ -138,7 +138,7 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
 
     private void LFSRWithInitialisationMode(int i) {
         int i2 = this.LFSR[0];
-        int AddM = AddM(AddM(AddM(AddM(AddM(AddM(i2, MulByPow2(i2, 8)), MulByPow2(this.LFSR[4], 20)), MulByPow2(this.LFSR[10], 21)), MulByPow2(this.LFSR[13], 17)), MulByPow2(this.LFSR[15], 15)), i);
+        int iAddM = AddM(AddM(AddM(AddM(AddM(AddM(i2, MulByPow2(i2, 8)), MulByPow2(this.LFSR[4], 20)), MulByPow2(this.LFSR[10], 21)), MulByPow2(this.LFSR[13], 17)), MulByPow2(this.LFSR[15], 15)), i);
         int[] iArr = this.LFSR;
         iArr[0] = iArr[1];
         iArr[1] = iArr[2];
@@ -155,12 +155,12 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
         iArr[12] = iArr[13];
         iArr[13] = iArr[14];
         iArr[14] = iArr[15];
-        iArr[15] = AddM;
+        iArr[15] = iAddM;
     }
 
     private void LFSRWithWorkMode() {
         int i = this.LFSR[0];
-        int AddM = AddM(AddM(AddM(AddM(AddM(i, MulByPow2(i, 8)), MulByPow2(this.LFSR[4], 20)), MulByPow2(this.LFSR[10], 21)), MulByPow2(this.LFSR[13], 17)), MulByPow2(this.LFSR[15], 15));
+        int iAddM = AddM(AddM(AddM(AddM(AddM(i, MulByPow2(i, 8)), MulByPow2(this.LFSR[4], 20)), MulByPow2(this.LFSR[10], 21)), MulByPow2(this.LFSR[13], 17)), MulByPow2(this.LFSR[15], 15));
         int[] iArr = this.LFSR;
         iArr[0] = iArr[1];
         iArr[1] = iArr[2];
@@ -177,7 +177,7 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
         iArr[12] = iArr[13];
         iArr[13] = iArr[14];
         iArr[14] = iArr[15];
-        iArr[15] = AddM;
+        iArr[15] = iAddM;
     }
 
     private void BitReorganization() {
@@ -206,14 +206,14 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
         int i4 = (i ^ i2) + i3;
         int i5 = i2 + iArr[1];
         int i6 = iArr[2] ^ i3;
-        int L1 = L1((i5 << 16) | (i6 >>> 16));
-        int L2 = L2((i6 << 16) | (i5 >>> 16));
+        int iL1 = L1((i5 << 16) | (i6 >>> 16));
+        int iL2 = L2((i6 << 16) | (i5 >>> 16));
         int[] iArr3 = this.F;
         byte[] bArr = S0;
-        byte b = bArr[L1 >>> 24];
+        byte b = bArr[iL1 >>> 24];
         byte[] bArr2 = S1;
-        iArr3[0] = MAKEU32(b, bArr2[(L1 >>> 16) & 255], bArr[(L1 >>> 8) & 255], bArr2[L1 & 255]);
-        this.F[1] = MAKEU32(bArr[L2 >>> 24], bArr2[(L2 >>> 16) & 255], bArr[(L2 >>> 8) & 255], bArr2[L2 & 255]);
+        iArr3[0] = MAKEU32(b, bArr2[(iL1 >>> 16) & 255], bArr[(iL1 >>> 8) & 255], bArr2[iL1 & 255]);
+        this.F[1] = MAKEU32(bArr[iL2 >>> 24], bArr2[(iL2 >>> 16) & 255], bArr[(iL2 >>> 8) & 255], bArr2[iL2 & 255]);
         return i4;
     }
 
@@ -270,9 +270,9 @@ public class Zuc128CoreEngine implements StreamCipher, Memoable {
             throw new IllegalStateException("Too much data processed by singleKey/IV");
         }
         BitReorganization();
-        int F = F() ^ this.BRC[3];
+        int iF = F() ^ this.BRC[3];
         LFSRWithWorkMode();
-        return F;
+        return iF;
     }
 
     @Override // com.android.internal.org.bouncycastle.util.Memoable

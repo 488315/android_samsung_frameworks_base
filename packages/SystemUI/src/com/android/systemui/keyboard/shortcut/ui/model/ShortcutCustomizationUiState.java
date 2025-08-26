@@ -9,11 +9,9 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ShortcutCustomizationUiState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeleteShortcutDialog implements ShortcutCustomizationUiState {
         public static final DeleteShortcutDialog INSTANCE = new DeleteShortcutDialog();
 
@@ -33,7 +31,6 @@ public interface ShortcutCustomizationUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive implements ShortcutCustomizationUiState {
         public static final Inactive INSTANCE = new Inactive();
 
@@ -53,7 +50,6 @@ public interface ShortcutCustomizationUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetShortcutDialog implements ShortcutCustomizationUiState {
         public static final ResetShortcutDialog INSTANCE = new ResetShortcutDialog();
 
@@ -73,7 +69,6 @@ public interface ShortcutCustomizationUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AddShortcutDialog implements ShortcutCustomizationUiState {
         public final ShortcutKey.Icon.ResIdIcon defaultCustomShortcutModifierKey;
         public final String errorMessage;

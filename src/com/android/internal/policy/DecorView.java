@@ -40,16 +40,19 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.FloatProperty;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Property;
+import android.util.Size;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.InputQueue;
+import android.view.InsetsState;
 import android.view.KeyEvent;
 import android.view.KeyboardShortcutGroup;
 import android.view.LayoutInflater;
@@ -78,9 +81,11 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.window.DesktopModeFlags;
 import com.android.internal.R;
 import com.android.internal.app.ChooserActivity;
 import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
+import com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.view.FloatingActionMode;
 import com.android.internal.view.RootViewSurfaceTaker;
@@ -96,6 +101,7 @@ import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
+import com.samsung.android.util.InterpolatorUtils;
 import com.samsung.android.util.SemViewUtils;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -278,12 +284,12 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
 
     private int getRoundedCornersInLandscapeMode(int i, int i2) {
         if (i != 1 && i2 != 0) {
-            r0 = (i2 & 1) != 0 ? 5 : 0;
+            i = (i2 & 1) != 0 ? 5 : 0;
             if ((i2 & 2) != 0) {
-                return r0 | 10;
+                return i | 10;
             }
         }
-        return r0;
+        return i;
     }
 
     public static boolean isNavBarToLeftEdge(int i, int i2) {
@@ -326,8 +332,8 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     }
 
     DecorView(Context context, int i, PhoneWindow phoneWindow, WindowManager.LayoutParams layoutParams) {
-        super(context);
         WindowConfiguration windowConfiguration;
+        super(context);
         boolean z = false;
         this.mDensityForKnoxBadge = 0;
         this.mKnoxBadge = null;
@@ -378,9 +384,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mBackgroundBlurOnPreDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.internal.policy.DecorView$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                boolean lambda$new$0;
-                lambda$new$0 = DecorView.this.lambda$new$0();
-                return lambda$new$0;
+                return this.f$0.lambda$new$0();
             }
         };
         this.mWindowingMode = 0;
@@ -495,7 +499,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
             Log.i(TAG, "mPopOverBackgroundColor=" + Integer.toHexString(this.mPopOverBackgroundColor));
         }
         if (CoreRune.MW_CAPTION_TYPE) {
-            this.mLastCaptionType = getCaptionType();
+            this.mLastCaptionType = -1;
         }
     }
 
@@ -567,9 +571,9 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         PhoneWindow.PanelFeatureState panelState = this.mWindow.getPanelState(0, false);
         if (panelState != null && this.mWindow.mPreparedPanel == null) {
             this.mWindow.preparePanel(panelState, keyEvent);
-            boolean performPanelShortcut = this.mWindow.performPanelShortcut(panelState, keyEvent.getKeyCode(), keyEvent, 1);
+            boolean zPerformPanelShortcut = this.mWindow.performPanelShortcut(panelState, keyEvent.getKeyCode(), keyEvent, 1);
             panelState.isPrepared = false;
-            if (performPanelShortcut) {
+            if (zPerformPanelShortcut) {
                 return true;
             }
         }
@@ -658,12 +662,12 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (viewRootImpl == null || (wearGestureInterceptionDetector = this.mWearGestureInterceptionDetector) == null) {
             return false;
         }
-        boolean isIntercepting = wearGestureInterceptionDetector.isIntercepting();
-        boolean onInterceptTouchEvent = this.mWearGestureInterceptionDetector.onInterceptTouchEvent(motionEvent);
-        if (isIntercepting != onInterceptTouchEvent) {
-            viewRootImpl.updateDecorViewGestureInterception(onInterceptTouchEvent);
+        boolean zIsIntercepting = wearGestureInterceptionDetector.isIntercepting();
+        boolean zOnInterceptTouchEvent = this.mWearGestureInterceptionDetector.onInterceptTouchEvent(motionEvent);
+        if (zIsIntercepting != zOnInterceptTouchEvent) {
+            viewRootImpl.updateDecorViewGestureInterception(zOnInterceptTouchEvent);
         }
-        return onInterceptTouchEvent;
+        return zOnInterceptTouchEvent;
     }
 
     @Override // android.view.View, android.view.accessibility.AccessibilityEventSource
@@ -716,30 +720,138 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return frame;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0082  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00b3  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00e8 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00f8  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0198  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x019f  */
-    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x007b  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00b3  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00bc  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00d9  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x0194  */
     @Override // android.widget.FrameLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r17, int r18) {
-        /*
-            Method dump skipped, instructions count: 419
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int iMakeMeasureSpec;
+        boolean z;
+        int iMakeMeasureSpec2;
+        float fApplyDimension;
+        int i3;
+        float fraction;
+        TypedValue typedValue;
+        int i4;
+        float fraction2;
+        int i5;
+        float fraction3;
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        boolean z2 = false;
+        boolean z3 = getResources().getConfiguration().orientation == 1;
+        int mode = View.MeasureSpec.getMode(i);
+        int mode2 = View.MeasureSpec.getMode(i2);
+        this.mApplyFloatingHorizontalInsets = false;
+        if (mode == Integer.MIN_VALUE) {
+            PhoneWindow phoneWindow = this.mWindow;
+            TypedValue typedValue2 = z3 ? phoneWindow.mFixedWidthMinor : phoneWindow.mFixedWidthMajor;
+            if (typedValue2 == null || typedValue2.type == 0) {
+                iMakeMeasureSpec = i;
+            } else {
+                if (typedValue2.type == 5) {
+                    fraction3 = typedValue2.getDimension(displayMetrics);
+                } else if (typedValue2.type == 6) {
+                    fraction3 = typedValue2.getFraction(displayMetrics.widthPixels, displayMetrics.widthPixels);
+                } else {
+                    i5 = 0;
+                    int size = View.MeasureSpec.getSize(i);
+                    if (i5 <= 0) {
+                        iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.min(i5, size), 1073741824);
+                        z = true;
+                    } else {
+                        iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec((size - this.mFloatingInsets.left) - this.mFloatingInsets.right, Integer.MIN_VALUE);
+                        this.mApplyFloatingHorizontalInsets = true;
+                    }
+                }
+                i5 = (int) fraction3;
+                int size2 = View.MeasureSpec.getSize(i);
+                if (i5 <= 0) {
+                }
+            }
+            z = false;
+        }
+        this.mApplyFloatingVerticalInsets = false;
+        if (mode2 != Integer.MIN_VALUE) {
+            iMakeMeasureSpec2 = i2;
+        } else {
+            if (z3) {
+                typedValue = this.mWindow.mFixedHeightMajor;
+            } else {
+                typedValue = this.mWindow.mFixedHeightMinor;
+            }
+            if (typedValue != null && typedValue.type != 0) {
+                if (typedValue.type == 5) {
+                    fraction2 = typedValue.getDimension(displayMetrics);
+                } else if (typedValue.type == 6) {
+                    fraction2 = typedValue.getFraction(displayMetrics.heightPixels, displayMetrics.heightPixels);
+                } else {
+                    i4 = 0;
+                    int size3 = View.MeasureSpec.getSize(i2);
+                    if (i4 <= 0) {
+                        iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(Math.min(i4, size3), 1073741824);
+                    } else if ((this.mWindow.getAttributes().flags & 256) == 0) {
+                        iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec((size3 - this.mFloatingInsets.top) - this.mFloatingInsets.bottom, Integer.MIN_VALUE);
+                        this.mApplyFloatingVerticalInsets = true;
+                    }
+                }
+                i4 = (int) fraction2;
+                int size32 = View.MeasureSpec.getSize(i2);
+                if (i4 <= 0) {
+                }
+            }
+        }
+        super.onMeasure(iMakeMeasureSpec, iMakeMeasureSpec2);
+        int measuredWidth = getMeasuredWidth();
+        int iMakeMeasureSpec3 = View.MeasureSpec.makeMeasureSpec(measuredWidth, 1073741824);
+        if (!z && mode == Integer.MIN_VALUE) {
+            int i6 = getResources().getConfiguration().smallestScreenWidthDp;
+            if (this.mLastSmallestScreenWidthDp != i6) {
+                Resources.Theme theme = getContext().getTheme();
+                theme.resolveAttribute(16843607, this.mWindow.mMinWidthMinor, true);
+                theme.resolveAttribute(16843606, this.mWindow.mMinWidthMajor, true);
+                this.mLastSmallestScreenWidthDp = i6;
+            }
+            TypedValue typedValue3 = z3 ? this.mWindow.mMinWidthMinor : this.mWindow.mMinWidthMajor;
+            WindowInsets rootWindowInsets = getRootWindowInsets();
+            Flags.insetsDecoupledConfiguration();
+            if (this.mWindow.mEdgeToEdgeEnforced && rootWindowInsets != null && getConfiguration().windowConfiguration.getStage() != 0) {
+                Size frame = rootWindowInsets.getFrame();
+                Insets insets = getRootWindowInsets().getInsets(WindowInsets.Type.displayCutout() | WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+                fApplyDimension = (frame.getWidth() - insets.left) - insets.right;
+            } else {
+                fApplyDimension = TypedValue.applyDimension(1, r1.getConfiguration().screenWidthDp, displayMetrics);
+            }
+            if (typedValue3.type != 0) {
+                if (typedValue3.type == 5) {
+                    if (this.mIsDialog) {
+                        fraction = Math.min(typedValue3.getDimension(displayMetrics), fApplyDimension);
+                    } else {
+                        fraction = typedValue3.getDimension(displayMetrics);
+                    }
+                } else if (typedValue3.type == 6) {
+                    fraction = typedValue3.getFraction(fApplyDimension, fApplyDimension);
+                } else {
+                    i3 = 0;
+                    if (measuredWidth < i3) {
+                        iMakeMeasureSpec3 = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
+                        z2 = true;
+                    }
+                }
+                i3 = (int) fraction;
+                if (measuredWidth < i3) {
+                }
+            }
+        }
+        if (z2) {
+            super.onMeasure(iMakeMeasureSpec3, iMakeMeasureSpec2);
+        }
     }
 
     public void semSetIsDialog() {
@@ -829,7 +941,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     }
 
     private boolean showContextMenuForChildInternal(View view, float f, float f2) {
-        MenuHelper showDialog;
+        MenuHelper menuHelperShowDialog;
         if (this.mWindow.mContextMenuHelper != null) {
             this.mWindow.mContextMenuHelper.dismiss();
             this.mWindow.mContextMenuHelper = null;
@@ -843,16 +955,16 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
         boolean z = (Float.isNaN(f) || Float.isNaN(f2)) ? false : true;
         if (z) {
-            showDialog = this.mWindow.mContextMenu.showPopup(view.getContext(), view, f, f2);
+            menuHelperShowDialog = this.mWindow.mContextMenu.showPopup(view.getContext(), view, f, f2);
         } else {
-            showDialog = this.mWindow.mContextMenu.showDialog(view, view.getWindowToken());
+            menuHelperShowDialog = this.mWindow.mContextMenu.showDialog(view, view.getWindowToken());
         }
-        if (showDialog != null) {
+        if (menuHelperShowDialog != null) {
             phoneWindowMenuCallback.setShowDialogForSubmenu(!z);
-            showDialog.setPresenterCallback(phoneWindowMenuCallback);
+            menuHelperShowDialog.setPresenterCallback(phoneWindowMenuCallback);
         }
-        this.mWindow.mContextMenuHelper = showDialog;
-        return showDialog != null;
+        this.mWindow.mContextMenuHelper = menuHelperShowDialog;
+        return menuHelperShowDialog != null;
     }
 
     @Override // android.view.ViewGroup, android.view.ViewParent
@@ -875,82 +987,50 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return startActionMode(this, callback, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0031  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private android.view.ActionMode startActionMode(android.view.View r3, android.view.ActionMode.Callback r4, int r5) {
-        /*
-            r2 = this;
-            com.android.internal.policy.DecorView$ActionModeCallback2Wrapper r0 = new com.android.internal.policy.DecorView$ActionModeCallback2Wrapper
-            r0.<init>(r4)
-            com.android.internal.policy.PhoneWindow r4 = r2.mWindow
-            android.view.Window$Callback r4 = r4.getCallback()
-            r1 = 0
-            if (r4 == 0) goto L2e
-            com.android.internal.policy.PhoneWindow r4 = r2.mWindow
-            boolean r4 = r4.isDestroyed()
-            if (r4 != 0) goto L2e
-            com.android.internal.policy.PhoneWindow r4 = r2.mWindow     // Catch: java.lang.AbstractMethodError -> L21
-            android.view.Window$Callback r4 = r4.getCallback()     // Catch: java.lang.AbstractMethodError -> L21
-            android.view.ActionMode r4 = r4.onWindowStartingActionMode(r0, r5)     // Catch: java.lang.AbstractMethodError -> L21
-            goto L2f
-        L21:
-            if (r5 != 0) goto L2e
-            com.android.internal.policy.PhoneWindow r4 = r2.mWindow     // Catch: java.lang.AbstractMethodError -> L2e
-            android.view.Window$Callback r4 = r4.getCallback()     // Catch: java.lang.AbstractMethodError -> L2e
-            android.view.ActionMode r4 = r4.onWindowStartingActionMode(r0)     // Catch: java.lang.AbstractMethodError -> L2e
-            goto L2f
-        L2e:
-            r4 = r1
-        L2f:
-            if (r4 == 0) goto L57
-            int r3 = r4.getType()
-            if (r3 != 0) goto L3d
-            r2.cleanupPrimaryActionMode()
-            r2.mPrimaryActionMode = r4
-            goto L55
-        L3d:
-            int r3 = r4.getType()
-            r5 = 1
-            if (r3 == r5) goto L4c
-            int r3 = r4.getType()
-            r5 = 99
-            if (r3 != r5) goto L55
-        L4c:
-            android.view.ActionMode r3 = r2.mFloatingActionMode
-            if (r3 == 0) goto L53
-            r3.finish()
-        L53:
-            r2.mFloatingActionMode = r4
-        L55:
-            r1 = r4
-            goto L6b
-        L57:
-            android.view.ActionMode r3 = r2.createActionMode(r5, r0, r3)
-            if (r3 == 0) goto L6b
-            android.view.Menu r4 = r3.getMenu()
-            boolean r4 = r0.onCreateActionMode(r3, r4)
-            if (r4 == 0) goto L6b
-            r2.setHandledActionMode(r3)
-            r1 = r3
-        L6b:
-            if (r1 == 0) goto L86
-            com.android.internal.policy.PhoneWindow r3 = r2.mWindow
-            android.view.Window$Callback r3 = r3.getCallback()
-            if (r3 == 0) goto L86
-            com.android.internal.policy.PhoneWindow r3 = r2.mWindow
-            boolean r3 = r3.isDestroyed()
-            if (r3 != 0) goto L86
-            com.android.internal.policy.PhoneWindow r2 = r2.mWindow     // Catch: java.lang.AbstractMethodError -> L86
-            android.view.Window$Callback r2 = r2.getCallback()     // Catch: java.lang.AbstractMethodError -> L86
-            r2.onActionModeStarted(r1)     // Catch: java.lang.AbstractMethodError -> L86
-        L86:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.startActionMode(android.view.View, android.view.ActionMode$Callback, int):android.view.ActionMode");
+    private ActionMode startActionMode(View view, ActionMode.Callback callback, int i) {
+        ActionMode actionModeOnWindowStartingActionMode;
+        ActionModeCallback2Wrapper actionModeCallback2Wrapper = new ActionModeCallback2Wrapper(callback);
+        ActionMode actionMode = null;
+        if (this.mWindow.getCallback() == null || this.mWindow.isDestroyed()) {
+            actionModeOnWindowStartingActionMode = null;
+        } else {
+            try {
+                actionModeOnWindowStartingActionMode = this.mWindow.getCallback().onWindowStartingActionMode(actionModeCallback2Wrapper, i);
+            } catch (AbstractMethodError unused) {
+                if (i == 0) {
+                    try {
+                        actionModeOnWindowStartingActionMode = this.mWindow.getCallback().onWindowStartingActionMode(actionModeCallback2Wrapper);
+                    } catch (AbstractMethodError unused2) {
+                    }
+                }
+            }
+        }
+        if (actionModeOnWindowStartingActionMode != null) {
+            if (actionModeOnWindowStartingActionMode.getType() == 0) {
+                cleanupPrimaryActionMode();
+                this.mPrimaryActionMode = actionModeOnWindowStartingActionMode;
+            } else if (actionModeOnWindowStartingActionMode.getType() == 1 || actionModeOnWindowStartingActionMode.getType() == 99) {
+                ActionMode actionMode2 = this.mFloatingActionMode;
+                if (actionMode2 != null) {
+                    actionMode2.finish();
+                }
+                this.mFloatingActionMode = actionModeOnWindowStartingActionMode;
+            }
+            actionMode = actionModeOnWindowStartingActionMode;
+        } else {
+            ActionMode actionModeCreateActionMode = createActionMode(i, actionModeCallback2Wrapper, view);
+            if (actionModeCreateActionMode != null && actionModeCallback2Wrapper.onCreateActionMode(actionModeCreateActionMode, actionModeCreateActionMode.getMenu())) {
+                setHandledActionMode(actionModeCreateActionMode);
+                actionMode = actionModeCreateActionMode;
+            }
+        }
+        if (actionMode != null && this.mWindow.getCallback() != null && !this.mWindow.isDestroyed()) {
+            try {
+                this.mWindow.getCallback().onActionModeStarted(actionMode);
+            } catch (AbstractMethodError unused3) {
+            }
+        }
+        return actionMode;
     }
 
     private void cleanupPrimaryActionMode() {
@@ -991,18 +1071,21 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         drawableChanged();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0027  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setWindowBackground(Drawable drawable) {
         boolean z = drawable instanceof ColorDrawable;
         if (z) {
             this.mPopOverBackgroundColor = ((ColorDrawable) drawable).getColor();
-        } else {
-            if (drawable instanceof GradientDrawable) {
-                GradientDrawable gradientDrawable = (GradientDrawable) drawable;
-                if (gradientDrawable.getColor() != null) {
-                    this.mPopOverBackgroundColor = gradientDrawable.getColor().getDefaultColor();
-                }
+        } else if (drawable instanceof GradientDrawable) {
+            GradientDrawable gradientDrawable = (GradientDrawable) drawable;
+            if (gradientDrawable.getColor() != null) {
+                this.mPopOverBackgroundColor = gradientDrawable.getColor().getDefaultColor();
+            } else {
+                this.mPopOverBackgroundColor = getResources().getColor(SemViewUtils.isLightTheme(this.mContext) ? R.color.sem_app_bar_bg_color : R.color.sem_app_bar_bg_color_dark, null);
             }
-            this.mPopOverBackgroundColor = getResources().getColor(SemViewUtils.isLightTheme(this.mContext) ? R.color.sem_app_bar_bg_color : R.color.sem_app_bar_bg_color_dark, null);
         }
         Log.i(TAG, "setWindowBackground: isPopOver=" + this.mIsPopOver + " color=" + Integer.toHexString(this.mPopOverBackgroundColor) + " d=" + drawable);
         if (this.mWindow == null) {
@@ -1097,12 +1180,12 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
             }
         }
         this.mFrameOffsets.set(windowInsets.getSystemWindowInsetsAsRect());
-        WindowInsets updateStatusGuard = updateStatusGuard(updateColorViews(windowInsets, true));
+        WindowInsets windowInsetsUpdateStatusGuard = updateStatusGuard(updateColorViews(windowInsets, true));
         if (getForeground() != null) {
             drawableChanged();
         }
-        updateDisplayCutoutBackground(updateStatusGuard);
-        return updateStatusGuard;
+        updateDisplayCutoutBackground(windowInsetsUpdateStatusGuard);
+        return windowInsetsUpdateStatusGuard;
     }
 
     public static int getNavBarSize(int i, int i2, int i3) {
@@ -1123,24 +1206,213 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:203:0x01aa, code lost:
-    
-        if (r2.getHeight() == r4) goto L92;
-     */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x01d5  */
-    /* JADX WARN: Removed duplicated region for block: B:218:0x01e9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x01d9  */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x01e3  */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x01ef  */
+    /* JADX WARN: Removed duplicated region for block: B:110:0x01f2  */
+    /* JADX WARN: Removed duplicated region for block: B:112:0x01f6  */
+    /* JADX WARN: Removed duplicated region for block: B:117:0x0206 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:119:0x020b  */
+    /* JADX WARN: Removed duplicated region for block: B:253:0x03cb  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x01c9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    android.view.WindowInsets updateColorViews(android.view.WindowInsets r23, boolean r24) {
-        /*
-            Method dump skipped, instructions count: 968
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.updateColorViews(android.view.WindowInsets, boolean):android.view.WindowInsets");
+    WindowInsets updateColorViews(WindowInsets windowInsets, boolean z) {
+        int systemBarsAppearance;
+        int i;
+        boolean z2;
+        int i2;
+        boolean z3;
+        int i3;
+        boolean z4;
+        int i4;
+        int i5;
+        Insets insetsMin;
+        WindowInsets windowInsetsInset;
+        WindowInsets windowInsets2;
+        int i6;
+        WindowManager.LayoutParams attributes = this.mWindow.getAttributes();
+        int windowSystemUiVisibility = attributes.systemUiVisibility | getWindowSystemUiVisibility();
+        ViewRootImpl viewRootImpl = getViewRootImpl();
+        WindowInsetsController windowInsetsController = getWindowInsetsController();
+        int requestedVisibleTypes = windowInsetsController.getRequestedVisibleTypes();
+        if (viewRootImpl != null) {
+            systemBarsAppearance = viewRootImpl.mWindowAttributes.insetsFlags.appearance;
+        } else {
+            systemBarsAppearance = windowInsetsController.getSystemBarsAppearance();
+        }
+        int i7 = systemBarsAppearance;
+        boolean z5 = this.mWindow.getAttributes().type == 2011;
+        if (!this.mWindow.mIsFloating || z5) {
+            boolean z6 = (!isLaidOut()) | (((this.mLastWindowFlags ^ attributes.flags) & Integer.MIN_VALUE) != 0);
+            this.mLastWindowFlags = attributes.flags;
+            if (windowInsets != null) {
+                this.mLastInsets = windowInsets;
+                this.mLastForceConsumingTypes = windowInsets.getForceConsumingTypes();
+                this.mLastForceConsumingOpaqueCaptionBar = windowInsets.isForceConsumingOpaqueCaptionBar();
+                if (CoreRune.MW_CAPTION_TYPE && this.mLastCaptionType == -1 && this.mLastInsets.getConsumedCaptionType() != -1) {
+                    this.mLastCaptionType = this.mLastInsets.getConsumedCaptionType();
+                }
+                boolean zClearsCompatInsets = InsetsState.clearsCompatInsets(attributes.type, attributes.flags, getResources().getConfiguration().windowConfiguration.getActivityType(), this.mLastForceConsumingTypes);
+                int iSystemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
+                Insets insetsIgnoringVisibility = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
+                if (zClearsCompatInsets) {
+                    insetsMin = Insets.NONE;
+                } else {
+                    insetsMin = Insets.min(windowInsets.getInsets(iSystemBars), insetsIgnoringVisibility);
+                }
+                this.mLastTopInset = insetsMin.top;
+                this.mLastBottomInset = insetsMin.bottom;
+                this.mLastRightInset = insetsMin.right;
+                this.mLastLeftInset = insetsMin.left;
+                this.mKnoxBadgeInsets = windowInsets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                boolean z7 = insetsIgnoringVisibility.top != 0;
+                boolean z8 = z6 | (z7 != this.mLastHasTopStableInset);
+                this.mLastHasTopStableInset = z7;
+                boolean z9 = insetsIgnoringVisibility.bottom != 0;
+                boolean z10 = z8 | (z9 != this.mLastHasBottomStableInset);
+                this.mLastHasBottomStableInset = z9;
+                boolean z11 = insetsIgnoringVisibility.right != 0;
+                boolean z12 = z10 | (z11 != this.mLastHasRightStableInset);
+                this.mLastHasRightStableInset = z11;
+                boolean z13 = insetsIgnoringVisibility.left != 0;
+                z6 = z12 | (z13 != this.mLastHasLeftStableInset);
+                this.mLastHasLeftStableInset = z13;
+                this.mLastSuppressScrimTypes = windowInsets.getSuppressScrimTypes();
+            } else {
+                updateDisplayCutoutBackground(null);
+            }
+            boolean z14 = z6;
+            boolean zIsNavBarToRightEdge = isNavBarToRightEdge(this.mLastBottomInset, this.mLastRightInset);
+            boolean zIsNavBarToLeftEdge = isNavBarToLeftEdge(this.mLastBottomInset, this.mLastLeftInset);
+            int navBarSize = getNavBarSize(this.mLastBottomInset, this.mLastRightInset, this.mLastLeftInset);
+            ColorViewState colorViewState = this.mNavigationColorViewState;
+            int iCalculateNavigationBarColor = calculateNavigationBarColor(i7);
+            int i8 = this.mWindow.mNavigationBarDividerColor;
+            if (zIsNavBarToRightEdge || zIsNavBarToLeftEdge) {
+                i = -1;
+                z2 = true;
+            } else {
+                i = -1;
+                z2 = false;
+            }
+            if (!z || z14) {
+                i2 = i;
+                z3 = false;
+            } else {
+                i2 = i;
+                z3 = true;
+            }
+            i3 = i2;
+            updateColorViewInt(colorViewState, iCalculateNavigationBarColor, i8, navBarSize, z2, zIsNavBarToLeftEdge, 0, z3, this.mForceWindowDrawsBarBackgrounds, requestedVisibleTypes);
+            boolean z15 = this.mDrawLegacyNavigationBarBackground;
+            this.mDrawLegacyNavigationBarBackground = ((this.mLastForceConsumingTypes | requestedVisibleTypes) & WindowInsets.Type.navigationBars()) != 0 && (this.mWindow.getAttributes().flags & Integer.MIN_VALUE) == 0 && navBarSize > 0;
+            View view = this.mNavigationColorViewState.view;
+            if (z15 != this.mDrawLegacyNavigationBarBackground) {
+                this.mDrawLegacyNavigationBarBackgroundHandled = this.mWindow.onDrawLegacyNavigationBarBackgroundChanged(this.mDrawLegacyNavigationBarBackground);
+                if (viewRootImpl != null) {
+                    viewRootImpl.requestInvalidateRootRenderNode();
+                }
+                z4 = !zIsNavBarToRightEdge && this.mNavigationColorViewState.present;
+                boolean z16 = !zIsNavBarToLeftEdge && this.mNavigationColorViewState.present;
+                if (!z4) {
+                    i5 = this.mLastRightInset;
+                } else if (z16) {
+                    i5 = this.mLastLeftInset;
+                } else {
+                    i4 = 0;
+                    updateColorViewInt(this.mStatusColorViewState, calculateStatusBarColor(i7), 0, this.mLastTopInset, false, z16, i4, z && !z14, this.mForceWindowDrawsBarBackgrounds, requestedVisibleTypes);
+                }
+                i4 = i5;
+                if (z) {
+                    updateColorViewInt(this.mStatusColorViewState, calculateStatusBarColor(i7), 0, this.mLastTopInset, false, z16, i4, z && !z14, this.mForceWindowDrawsBarBackgrounds, requestedVisibleTypes);
+                }
+            } else {
+                if (view != null) {
+                    if ((view.getVisibility() == 0) != this.mNavigationColorViewState.visible || (this.mDrawLegacyNavigationBarBackground && view.getHeight() != navBarSize)) {
+                    }
+                }
+                if (zIsNavBarToRightEdge) {
+                    if (zIsNavBarToLeftEdge) {
+                        if (!z4) {
+                        }
+                        i4 = i5;
+                    }
+                }
+            }
+        } else {
+            i3 = -1;
+        }
+        boolean z17 = (windowSystemUiVisibility & 2) != 0 || (WindowInsets.Type.navigationBars() & requestedVisibleTypes) == 0;
+        boolean z18 = this.mWindow.mDecorFitsSystemWindows;
+        boolean z19 = (windowSystemUiVisibility & 512) == 0 && z18 && !z17;
+        boolean z20 = ((this.mForceWindowDrawsBarBackgrounds || this.mDrawLegacyNavigationBarBackgroundHandled) && (attributes.flags & Integer.MIN_VALUE) == 0 && z19) || ((this.mLastForceConsumingTypes & WindowInsets.Type.navigationBars()) != 0 && z17);
+        int iNavigationBars = (((attributes.flags & Integer.MIN_VALUE) == 0 || !z19) && !z20) ? 0 : WindowInsets.Type.navigationBars();
+        boolean z21 = ((windowSystemUiVisibility & 4) == 0 && (attributes.flags & 1024) == 0) ? false : true;
+        boolean z22 = z21 || (WindowInsets.Type.statusBars() & requestedVisibleTypes) == 0;
+        if (((windowSystemUiVisibility & 1024) == 0 && z18 && (attributes.flags & 256) == 0 && (attributes.flags & 65536) == 0 && this.mForceWindowDrawsBarBackgrounds && this.mLastTopInset != 0) || ((this.mLastForceConsumingTypes & WindowInsets.Type.statusBars()) != 0 && z22)) {
+            iNavigationBars |= WindowInsets.Type.statusBars();
+        }
+        boolean z23 = DesktopModeFlags.ENABLE_CAPTION_COMPAT_INSET_FORCE_CONSUMPTION.isTrue() && (this.mLastForceConsumingTypes & WindowInsets.Type.captionBar()) != 0 && (z21 || (WindowInsets.Type.captionBar() & requestedVisibleTypes) == 0);
+        boolean z24 = DesktopModeFlags.ENABLE_CAPTION_COMPAT_INSET_FORCE_CONSUMPTION_ALWAYS.isTrue() && this.mLastForceConsumingOpaqueCaptionBar && (android.view.flags.Flags.customizableWindowHeaders() && (i7 & 128) == 0);
+        if (z23 || z24) {
+            iNavigationBars |= WindowInsets.Type.captionBar();
+        }
+        WindowInsets windowInsets3 = this.mLastInsets;
+        final Insets insets = windowInsets3 != null ? windowInsets3.getInsets(iNavigationBars) : Insets.NONE;
+        ViewGroup viewGroup = this.mContentRoot;
+        if (viewGroup == null || !(viewGroup.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
+            windowInsetsInset = windowInsets;
+        } else {
+            final ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mContentRoot.getLayoutParams();
+            if (marginLayoutParams.topMargin != insets.top || marginLayoutParams.rightMargin != insets.right || marginLayoutParams.bottomMargin != insets.bottom || marginLayoutParams.leftMargin != insets.left) {
+                if (CoreRune.MW_CAPTION_TYPE && this.mContext.getDisplayId() == 0 && isFreeformMode() && (windowInsets2 = this.mLastInsets) != null) {
+                    int consumedCaptionType = windowInsets2.getConsumedCaptionType();
+                    if (marginLayoutParams.topMargin != insets.top && (i6 = this.mLastCaptionType) != i3 && consumedCaptionType != i3 && i6 != consumedCaptionType) {
+                        this.mLastCaptionType = consumedCaptionType;
+                        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(marginLayoutParams.topMargin, insets.top);
+                        this.mCaptionPinnedAnimator = valueAnimatorOfInt;
+                        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.internal.policy.DecorView$$ExternalSyntheticLambda2
+                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                this.f$0.lambda$updateColorViews$1(marginLayoutParams, insets, valueAnimator);
+                            }
+                        });
+                        this.mCaptionPinnedAnimator.setInterpolator(InterpolatorUtils.ONE_EASING);
+                        this.mCaptionPinnedAnimator.setDuration(400L);
+                        this.mCaptionPinnedAnimator.start();
+                    } else {
+                        ValueAnimator valueAnimator = this.mCaptionPinnedAnimator;
+                        if (valueAnimator == null || !valueAnimator.isRunning()) {
+                            marginLayoutParams.topMargin = insets.top;
+                        }
+                        marginLayoutParams.rightMargin = insets.right;
+                        marginLayoutParams.bottomMargin = insets.bottom;
+                        marginLayoutParams.leftMargin = insets.left;
+                        this.mContentRoot.setLayoutParams(marginLayoutParams);
+                    }
+                } else {
+                    marginLayoutParams.topMargin = insets.top;
+                    marginLayoutParams.rightMargin = insets.right;
+                    marginLayoutParams.bottomMargin = insets.bottom;
+                    marginLayoutParams.leftMargin = insets.left;
+                    this.mContentRoot.setLayoutParams(marginLayoutParams);
+                }
+                if (windowInsets == null) {
+                    requestApplyInsets();
+                }
+            }
+            if (windowInsets != null && !Insets.NONE.equals(insets)) {
+                windowInsetsInset = windowInsets.inset(insets);
+            }
+        }
+        if (z20 && !z17 && !this.mDrawLegacyNavigationBarBackgroundHandled) {
+            this.mBackgroundInsets = Insets.of(this.mLastLeftInset, 0, this.mLastRightInset, this.mLastBottomInset);
+        } else {
+            this.mBackgroundInsets = Insets.NONE;
+        }
+        updateBackgroundDrawable();
+        return windowInsetsInset;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1160,23 +1432,23 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (this.mBackgroundInsets.equals(this.mLastBackgroundInsets) && this.mBackgroundBlurDrawable == this.mLastBackgroundBlurDrawable && this.mLastOriginalBackgroundDrawable == this.mOriginalBackgroundDrawable) {
             return;
         }
-        Drawable drawable = this.mOriginalBackgroundDrawable;
+        Drawable layerDrawable = this.mOriginalBackgroundDrawable;
         if (this.mBackgroundBlurDrawable != null) {
-            drawable = new LayerDrawable(new Drawable[]{this.mBackgroundBlurDrawable, this.mOriginalBackgroundDrawable});
+            layerDrawable = new LayerDrawable(new Drawable[]{this.mBackgroundBlurDrawable, this.mOriginalBackgroundDrawable});
         }
-        Drawable drawable2 = drawable;
-        if (drawable2 == null || this.mBackgroundInsets.equals(Insets.NONE)) {
+        Drawable drawable = layerDrawable;
+        if (drawable == null || this.mBackgroundInsets.equals(Insets.NONE)) {
             decorView = this;
         } else {
             decorView = this;
-            drawable2 = new InsetDrawable(decorView, drawable2, this.mBackgroundInsets.left, this.mBackgroundInsets.top, this.mBackgroundInsets.right, this.mBackgroundInsets.bottom) { // from class: com.android.internal.policy.DecorView.5
+            drawable = new InsetDrawable(decorView, drawable, this.mBackgroundInsets.left, this.mBackgroundInsets.top, this.mBackgroundInsets.right, this.mBackgroundInsets.bottom) { // from class: com.android.internal.policy.DecorView.5
                 @Override // android.graphics.drawable.InsetDrawable, android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
                 public boolean getPadding(Rect rect) {
                     return getDrawable().getPadding(rect);
                 }
             };
         }
-        super.setBackgroundDrawable(drawable2);
+        super.setBackgroundDrawable(drawable);
         decorView.mLastBackgroundInsets = decorView.mBackgroundInsets;
         decorView.mLastBackgroundBlurDrawable = decorView.mBackgroundBlurDrawable;
         decorView.mLastOriginalBackgroundDrawable = decorView.mOriginalBackgroundDrawable;
@@ -1186,15 +1458,15 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (this.mBackgroundBlurDrawable == null) {
             return;
         }
-        float f = 0.0f;
+        float radius = 0.0f;
         if (this.mBackgroundBlurRadius != 0 && this.mOriginalBackgroundDrawable != null) {
             Outline outline = new Outline();
             this.mOriginalBackgroundDrawable.getOutline(outline);
             if (outline.mMode == 1) {
-                f = outline.getRadius();
+                radius = outline.getRadius();
             }
         }
-        this.mBackgroundBlurDrawable.setCornerRadius(f);
+        this.mBackgroundBlurDrawable.setCornerRadius(radius);
     }
 
     private void updateBackgroundBlurRadius() {
@@ -1221,7 +1493,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 this.mCrossWindowBlurEnabledListener = new Consumer() { // from class: com.android.internal.policy.DecorView$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        DecorView.this.lambda$setBackgroundBlurRadius$2((Boolean) obj);
+                        this.f$0.lambda$setBackgroundBlurRadius$2((Boolean) obj);
                     }
                 };
                 if (Looper.myLooper() == Looper.getMainLooper()) {
@@ -1331,8 +1603,8 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         int i7 = i4;
         int i8 = colorViewState.attributes.insetsType;
         colorViewState.present = colorViewState.attributes.isPresent(((i5 & i8) == 0 && (this.mLastForceConsumingTypes & i8) == 0) ? false : true, this.mWindow.getAttributes().flags, z4);
-        boolean isVisible = colorViewState.attributes.isVisible(colorViewState.present, i, this.mWindow.getAttributes().flags, z4);
-        boolean z7 = isVisible && i3 > 0;
+        boolean zIsVisible = colorViewState.attributes.isVisible(colorViewState.present, i, this.mWindow.getAttributes().flags, z4);
+        boolean z7 = zIsVisible && i3 > 0;
         if (i8 == WindowInsets.Type.navigationBars() && getResources().getConfiguration().windowConfiguration.isPopOver()) {
             z7 = false;
         }
@@ -1411,7 +1683,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 });
             }
         }
-        colorViewState.visible = isVisible;
+        colorViewState.visible = zIsVisible;
         colorViewState.color = i;
     }
 
@@ -1420,8 +1692,8 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (i2 != 0) {
             Pair pair = (Pair) view.getTag();
             if (pair == null || ((Boolean) pair.first).booleanValue() != z || ((Boolean) pair.second).booleanValue() != z2) {
-                int round = Math.round(TypedValue.applyDimension(1, 1.0f, view.getContext().getResources().getDisplayMetrics()));
-                view.setBackground(new LayerDrawable(new Drawable[]{new ColorDrawable(i2), new InsetDrawable((Drawable) new ColorDrawable(i), (!z || z2) ? 0 : round, !z ? round : 0, (z && z2) ? round : 0, 0)}));
+                int iRound = Math.round(TypedValue.applyDimension(1, 1.0f, view.getContext().getResources().getDisplayMetrics()));
+                view.setBackground(new LayerDrawable(new Drawable[]{new ColorDrawable(i2), new InsetDrawable((Drawable) new ColorDrawable(i), (!z || z2) ? 0 : iRound, !z ? iRound : 0, (z && z2) ? iRound : 0, 0)}));
                 view.setTag(new Pair(Boolean.valueOf(z), Boolean.valueOf(z2)));
                 return;
             } else {
@@ -1457,10 +1729,10 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 if (this.mTempRect == null) {
                     this.mTempRect = new Rect();
                 }
-                WindowInsets computeSystemWindowInsets = this.mWindow.mContentParent.computeSystemWindowInsets(windowInsets, this.mTempRect);
-                int systemWindowInsetTop = computeSystemWindowInsets.getSystemWindowInsetTop();
-                int systemWindowInsetLeft = computeSystemWindowInsets.getSystemWindowInsetLeft();
-                int systemWindowInsetRight = computeSystemWindowInsets.getSystemWindowInsetRight();
+                WindowInsets windowInsetsComputeSystemWindowInsets = this.mWindow.mContentParent.computeSystemWindowInsets(windowInsets, this.mTempRect);
+                int systemWindowInsetTop = windowInsetsComputeSystemWindowInsets.getSystemWindowInsetTop();
+                int systemWindowInsetLeft = windowInsetsComputeSystemWindowInsets.getSystemWindowInsetLeft();
+                int systemWindowInsetRight = windowInsetsComputeSystemWindowInsets.getSystemWindowInsetRight();
                 WindowInsets rootWindowInsets = getRootWindowInsets();
                 int systemWindowInsetLeft2 = rootWindowInsets.getSystemWindowInsetLeft();
                 int systemWindowInsetRight2 = rootWindowInsets.getSystemWindowInsetRight();
@@ -1493,24 +1765,24 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                     }
                 }
                 View view3 = this.mStatusGuard;
-                r4 = view3 != null;
-                if (r4 && view3.getVisibility() != 0) {
+                z = view3 != null;
+                if (z && view3.getVisibility() != 0) {
                     updateStatusGuardColor();
                 }
-                if ((this.mWindow.getLocalFeaturesPrivate() & 1024) == 0 && r4) {
+                if ((this.mWindow.getLocalFeaturesPrivate() & 1024) == 0 && z) {
                     windowInsets = windowInsets.inset(0, windowInsets.getSystemWindowInsetTop(), 0, 0);
                 }
-                boolean z3 = r4;
-                r4 = z2;
+                boolean z3 = z;
+                z = z2;
                 z = z3;
             } else if (marginLayoutParams.topMargin == 0 && marginLayoutParams.leftMargin == 0 && marginLayoutParams.rightMargin == 0) {
                 z = false;
-                r4 = false;
+                z = false;
             } else {
                 marginLayoutParams.topMargin = 0;
                 z = false;
             }
-            if (r4) {
+            if (z) {
                 this.mPrimaryActionModeView.setLayoutParams(marginLayoutParams);
             }
         }
@@ -1558,6 +1830,10 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mLastOutlineProvider = viewOutlineProvider;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0092  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void drawableChanged() {
         if (this.mChanging) {
             return;
@@ -1575,33 +1851,32 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         invalidate();
         WindowConfiguration windowConfiguration = getResources().getConfiguration().windowConfiguration;
         boolean z = this.mWindow.mRenderShadowsInCompositor;
-        int i = -3;
+        int opacity = -3;
         if ((!windowConfiguration.hasWindowShadow() || z) && !windowConfiguration.isPopOver()) {
             Drawable background = getBackground();
             Drawable foreground = getForeground();
-            if (background != null) {
-                if (foreground == null) {
-                    i = background.getOpacity();
-                } else if (rect.left <= 0 && rect.top <= 0 && rect.right <= 0 && rect.bottom <= 0) {
-                    int opacity = foreground.getOpacity();
-                    int opacity2 = background.getOpacity();
-                    if (opacity != -1 && opacity2 != -1) {
-                        if (opacity == 0) {
-                            i = opacity2;
-                        } else {
-                            if (opacity2 != 0) {
-                                opacity = Drawable.resolveOpacity(opacity, opacity2);
-                            }
-                            i = opacity;
+            if (background == null) {
+                opacity = -1;
+            } else if (foreground == null) {
+                opacity = background.getOpacity();
+            } else if (rect.left <= 0 && rect.top <= 0 && rect.right <= 0 && rect.bottom <= 0) {
+                int opacity2 = foreground.getOpacity();
+                int opacity3 = background.getOpacity();
+                if (opacity2 != -1 && opacity3 != -1) {
+                    if (opacity2 == 0) {
+                        opacity = opacity3;
+                    } else {
+                        if (opacity3 != 0) {
+                            opacity2 = Drawable.resolveOpacity(opacity2, opacity3);
                         }
+                        opacity = opacity2;
                     }
                 }
             }
-            i = -1;
         }
-        this.mDefaultOpacity = i;
+        this.mDefaultOpacity = opacity;
         if (this.mFeatureId < 0) {
-            this.mWindow.setDefaultWindowFormat(i);
+            this.mWindow.setDefaultWindowFormat(opacity);
         }
     }
 
@@ -1628,8 +1903,8 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                     callback.onWindowFocusChanged(true);
                     this.mStayFocus = true;
                 } else {
-                    ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-                    if (this.mStayFocus && currentActivityThread != null && !currentActivityThread.mayStayActivityFocus(this.mWindow.getAttributes().token)) {
+                    ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+                    if (this.mStayFocus && activityThreadCurrentActivityThread != null && !activityThreadCurrentActivityThread.mayStayActivityFocus(this.mWindow.getAttributes().token)) {
                         callback.onWindowFocusChanged(false);
                         this.mStayFocus = false;
                     }
@@ -1787,9 +2062,9 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (i != 1 && i != 99) {
             return createStandaloneActionMode(callback2);
         }
-        ActionMode createFloatingActionMode = createFloatingActionMode(view, callback2);
-        createFloatingActionMode.setType(i);
-        return createFloatingActionMode;
+        ActionMode actionModeCreateFloatingActionMode = createFloatingActionMode(view, callback2);
+        actionModeCreateFloatingActionMode.setType(i);
+        return actionModeCreateFloatingActionMode;
     }
 
     private void setHandledActionMode(ActionMode actionMode) {
@@ -1801,7 +2076,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     }
 
     private ActionMode createStandaloneActionMode(ActionMode.Callback callback) {
-        Context context;
+        Context contextThemeWrapper;
         endOnGoingFadeAnimation();
         cleanupPrimaryActionMode();
         ActionBarContextView actionBarContextView = this.mPrimaryActionModeView;
@@ -1811,22 +2086,22 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 Resources.Theme theme = this.mContext.getTheme();
                 theme.resolveAttribute(16843825, typedValue, true);
                 if (typedValue.resourceId != 0) {
-                    Resources.Theme newTheme = this.mContext.getResources().newTheme();
-                    newTheme.setTo(theme);
-                    newTheme.applyStyle(typedValue.resourceId, true);
-                    context = new ContextThemeWrapper(this.mContext, 0);
-                    context.getTheme().setTo(newTheme);
+                    Resources.Theme themeNewTheme = this.mContext.getResources().newTheme();
+                    themeNewTheme.setTo(theme);
+                    themeNewTheme.applyStyle(typedValue.resourceId, true);
+                    contextThemeWrapper = new ContextThemeWrapper(this.mContext, 0);
+                    contextThemeWrapper.getTheme().setTo(themeNewTheme);
                 } else {
-                    context = this.mContext;
+                    contextThemeWrapper = this.mContext;
                 }
-                this.mPrimaryActionModeView = new ActionBarContextView(context);
-                PopupWindow popupWindow = new PopupWindow(context, (AttributeSet) null, R.attr.actionModePopupWindowStyle);
+                this.mPrimaryActionModeView = new ActionBarContextView(contextThemeWrapper);
+                PopupWindow popupWindow = new PopupWindow(contextThemeWrapper, (AttributeSet) null, R.attr.actionModePopupWindowStyle);
                 this.mPrimaryActionModePopup = popupWindow;
                 popupWindow.setWindowLayoutType(2);
                 this.mPrimaryActionModePopup.setContentView(this.mPrimaryActionModeView);
                 this.mPrimaryActionModePopup.setWidth(-1);
-                context.getTheme().resolveAttribute(16843499, typedValue, true);
-                this.mPrimaryActionModeView.setContentHeight(TypedValue.complexToDimensionPixelSize(typedValue.data, context.getResources().getDisplayMetrics()));
+                contextThemeWrapper.getTheme().resolveAttribute(16843499, typedValue, true);
+                this.mPrimaryActionModeView.setContentHeight(TypedValue.complexToDimensionPixelSize(typedValue.data, contextThemeWrapper.getResources().getDisplayMetrics()));
                 this.mPrimaryActionModePopup.setHeight(-2);
                 this.mShowPrimaryActionModePopup = new Runnable() { // from class: com.android.internal.policy.DecorView.7
                     @Override // java.lang.Runnable
@@ -1887,9 +2162,9 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (this.mPrimaryActionModePopup != null) {
             post(this.mShowPrimaryActionModePopup);
         } else if (shouldAnimatePrimaryActionModeView()) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mPrimaryActionModeView, (Property<ActionBarContextView, Float>) View.ALPHA, 0.0f, 1.0f);
-            this.mFadeAnim = ofFloat;
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.policy.DecorView.8
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mPrimaryActionModeView, (Property<ActionBarContextView, Float>) View.ALPHA, 0.0f, 1.0f);
+            this.mFadeAnim = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.policy.DecorView.8
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animator) {
                     DecorView.this.mPrimaryActionModeView.setVisibility(0);
@@ -1961,7 +2236,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     }
 
     @Override // android.view.View
-    protected void onConfigurationChanged(Configuration configuration) {
+    protected void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         StateListDrawable stateListDrawable;
         int[] state;
         StateListDrawable stateListDrawable2;
@@ -1973,17 +2248,17 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mLastDisplayDeviceType = i2;
         boolean z = i2 != i;
         WindowConfiguration windowConfiguration = configuration.windowConfiguration;
-        boolean isPopOver = windowConfiguration.isPopOver();
-        if (this.mIsPopOver != isPopOver) {
-            this.mIsPopOver = isPopOver;
-            if (!isPopOver) {
+        boolean zIsPopOver = windowConfiguration.isPopOver();
+        if (this.mIsPopOver != zIsPopOver) {
+            this.mIsPopOver = zIsPopOver;
+            if (!zIsPopOver) {
                 removePopOverElevation();
             }
             z = true;
         }
-        boolean isPopOverWithoutOutlineEffect = windowConfiguration.isPopOverWithoutOutlineEffect();
-        if (this.mIsPopOverWithoutOutlineEffect != isPopOverWithoutOutlineEffect) {
-            this.mIsPopOverWithoutOutlineEffect = isPopOverWithoutOutlineEffect;
+        boolean zIsPopOverWithoutOutlineEffect = windowConfiguration.isPopOverWithoutOutlineEffect();
+        if (this.mIsPopOverWithoutOutlineEffect != zIsPopOverWithoutOutlineEffect) {
+            this.mIsPopOverWithoutOutlineEffect = zIsPopOverWithoutOutlineEffect;
             z = true;
         }
         if (z) {
@@ -2062,9 +2337,9 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     void onResourcesLoaded(LayoutInflater layoutInflater, int i) {
         this.mLastOutlineProvider = getOutlineProvider();
         updateOutlineProvider();
-        View inflate = layoutInflater.inflate(i, (ViewGroup) null);
-        addView(inflate, 0, new ViewGroup.LayoutParams(-1, -1));
-        this.mContentRoot = (ViewGroup) inflate;
+        View viewInflate = layoutInflater.inflate(i, (ViewGroup) null);
+        addView(viewInflate, 0, new ViewGroup.LayoutParams(-1, -1));
+        this.mContentRoot = (ViewGroup) viewInflate;
         initializeElevation();
         this.mLastSmallestScreenWidthDp = getResources().getConfiguration().smallestScreenWidthDp;
     }
@@ -2144,23 +2419,23 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     private void updateElevation() {
         int windowingMode = getResources().getConfiguration().windowConfiguration.getWindowingMode();
         boolean z = this.mWindow.mRenderShadowsInCompositor;
-        boolean isPopOverState = isPopOverState();
-        if (!z || isPopOverState) {
+        boolean zIsPopOverState = isPopOverState();
+        if (!z || zIsPopOverState) {
             boolean z2 = this.mElevationAdjustedForStack;
-            float f = 0.0f;
+            float fDipToPx = 0.0f;
             if (this.mIsPopOver && (this.mIsPopOverWithoutOutlineEffect || this.mPreventPopOverElevation)) {
                 this.mElevationAdjustedForStack = true;
             } else if (isPopOverState()) {
-                f = dipToPx(32.0f);
+                fDipToPx = dipToPx(32.0f);
                 this.mElevationAdjustedForStack = true;
             } else if (windowingMode == 5) {
-                f = dipToPx(this.mAllowUpdateElevation ? hasWindowFocus() ? 20.0f : 5.0f : 20.0f);
+                fDipToPx = dipToPx(this.mAllowUpdateElevation ? hasWindowFocus() ? 20.0f : 5.0f : 20.0f);
                 this.mElevationAdjustedForStack = true;
             } else {
                 this.mElevationAdjustedForStack = false;
             }
-            if ((z2 || this.mElevationAdjustedForStack) && getElevation() != f) {
-                this.mWindow.setElevation(f);
+            if ((z2 || this.mElevationAdjustedForStack) && getElevation() != fDipToPx) {
+                this.mWindow.setElevation(fDipToPx);
             }
         }
     }
@@ -2173,11 +2448,11 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         if (layoutParams == null) {
             return "";
         }
-        String[] split = layoutParams.getTitle().toString().split("\\.");
-        if (split.length <= 0) {
+        String[] strArrSplit = layoutParams.getTitle().toString().split("\\.");
+        if (strArrSplit.length <= 0) {
             return "";
         }
-        return split[split.length - 1];
+        return strArrSplit[strArrSplit.length - 1];
     }
 
     void updateLogTag(WindowManager.LayoutParams layoutParams) {
@@ -2283,18 +2558,80 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return ((windowSystemUiVisibility & GLES30.GL_COLOR) == 0 || (windowSystemUiVisibility & 2) == 0) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0147  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x010d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void updateRoundedCornerStateIfNeeded() {
-        /*
-            Method dump skipped, instructions count: 336
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.updateRoundedCornerStateIfNeeded():void");
+        boolean zShouldDrawRoundedCornerInPortraitMode;
+        int i;
+        if (this.mWindow.mActivityCurrentConfig == null) {
+            return;
+        }
+        WindowManager.LayoutParams attributes = this.mWindow.getAttributes();
+        boolean zIsFullscreen = attributes.isFullscreen();
+        Configuration configuration = getConfiguration();
+        this.mRotationForRoundedCorner = configuration.windowConfiguration.getRotation();
+        this.mDisplayRotationForRoundedCorner = configuration.windowConfiguration.getDisplayRotation();
+        if (configuration.windowConfiguration.isPopOver()) {
+            zShouldDrawRoundedCornerInPortraitMode = false;
+        } else {
+            zShouldDrawRoundedCornerInPortraitMode = true;
+            if (CoreRune.FW_FLIP_FULL_COVER_SCREEN_APPS_CUTOUT && this.mContext.getDisplayId() == 1 && this.mHasDisplayCutout) {
+                ViewRootImpl viewRootImpl = getViewRootImpl();
+                int i2 = viewRootImpl != null ? viewRootImpl.mRequestedLetterboxDirection : 0;
+                int i3 = (i2 & 4) != 0 ? 3 : 0;
+                if ((i2 & 8) != 0) {
+                    i3 |= 12;
+                }
+                if (i3 != 0) {
+                    super.semSetRoundedCorners(i3, this.mRoundedCornerRadiusForAppsCoverLauncherLetterBox);
+                    super.semSetRoundedCornerColor(i3, -16777216);
+                }
+            } else if (isFullscreenMode() && configuration.orientation == 2 && this.mHasDisplayCutout && zIsFullscreen) {
+                ViewRootImpl viewRootImpl2 = getViewRootImpl();
+                int i4 = viewRootImpl2 != null ? viewRootImpl2.mRequestedLetterboxDirection : 0;
+                int roundedCornersInLandscapeMode = getRoundedCornersInLandscapeMode(attributes.layoutInDisplayCutoutMode, i4);
+                if (roundedCornersInLandscapeMode != 0) {
+                    if ((i4 & 1) != 0) {
+                        i = this.mDeviceRoundedCornerTopRadius;
+                    } else if ((i4 & 2) != 0) {
+                        i = this.mDeviceRoundedCornerBottomRadius;
+                    } else {
+                        i = this.mRoundedCornerRadiusForLetterBox;
+                    }
+                    super.semSetRoundedCorners(roundedCornersInLandscapeMode, i);
+                    super.semSetRoundedCornerColor(roundedCornersInLandscapeMode, -16777216);
+                }
+            } else if (isFullscreenMode() && configuration.orientation == 1 && this.mIsShowNavigationBar && attributes.type != 2037) {
+                zShouldDrawRoundedCornerInPortraitMode = shouldDrawRoundedCornerInPortraitMode(zIsFullscreen);
+                if (zShouldDrawRoundedCornerInPortraitMode) {
+                    super.semSetRoundedCorners(12, this.mRoundedCornerRadius);
+                    super.semSetRoundedCornerColor(12, getCurrentColor(this.mNavigationColorViewState));
+                }
+            } else if (isSplitMode() && zIsFullscreen) {
+                Rect currentBounds = getCurrentBounds(this.mContext);
+                if (CoreRune.MW_MULTI_SPLIT_ROUNDED_CORNER && !this.mWindow.isFloating()) {
+                    updateRoundedCornerForMultiSplit(this.mContext);
+                } else if (!this.mWindow.mIsFloating || (currentBounds.width() <= getWidth() && currentBounds.height() <= getHeight())) {
+                    updateRoundedCornerForSplit(this.mContext);
+                }
+                this.mForceRoundedCorner = false;
+            }
+        }
+        if (zShouldDrawRoundedCornerInPortraitMode) {
+            boolean zIsSplitMode = isSplitMode();
+            int i5 = this.mRotationForRoundedCorner;
+            if ((i5 == 0 || i5 == 2) && !zIsSplitMode) {
+                this.mOverrideRoundedCornerBounds.set(this.mLastLeftInset, this.mLastTopInset, getWidth() - this.mLastRightInset, getHeight() - this.mLastBottomInset);
+                return;
+            } else {
+                this.mOverrideRoundedCornerBounds.set(this.mLastLeftInset, 0, getWidth() - this.mLastRightInset, getHeight());
+                return;
+            }
+        }
+        super.semSetRoundedCorners(0);
+        this.mOverrideRoundedCornerBounds.setEmpty();
     }
 
     private int getFlipCoverScreenRoundedCorner(WindowManager.LayoutParams layoutParams, int i, int i2) {
@@ -2353,93 +2690,42 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mGestureHintEnabled = Settings.Global.getInt(this.mContext.getContentResolver(), Settings.Global.NAVIGATIONBAR_GESTURE_HINT, 1) != 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x002f, code lost:
-    
-        if (r0 == 3) goto L12;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0032, code lost:
-    
-        r4 = 15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0046, code lost:
-    
-        if (r1 == 1) goto L11;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void updateRoundedCornerForSplit(android.content.Context r9) {
-        /*
-            r8 = this;
-            android.content.res.Configuration r0 = r8.getConfiguration()
-            android.app.WindowConfiguration r1 = r0.windowConfiguration
-            int r1 = r1.getRotation()
-            int r9 = com.samsung.android.multiwindow.MultiWindowUtils.getRoundedCornerColor(r9)
-            int r2 = r8.getStagePosition()
-            boolean r3 = com.samsung.android.rune.CoreRune.MW_EMBED_ACTIVITY
-            r4 = 10
-            r5 = 5
-            r6 = 3
-            r7 = 15
-            if (r3 == 0) goto L35
-            android.app.WindowConfiguration r3 = r0.windowConfiguration
-            boolean r3 = r3.isEmbedded()
-            if (r3 == 0) goto L35
-            android.app.WindowConfiguration r0 = r0.windowConfiguration
-            int r0 = r0.getEmbedActivityMode()
-            r1 = 2
-            if (r0 != r1) goto L2f
-            r4 = r5
-            goto L33
-        L2f:
-            if (r0 != r6) goto L32
-            goto L33
-        L32:
-            r4 = r7
-        L33:
-            r6 = r4
-            goto L52
-        L35:
-            r0 = 16
-            if (r2 != r0) goto L3c
-            r6 = 12
-            goto L52
-        L3c:
-            r0 = 64
-            if (r2 != r0) goto L41
-            goto L52
-        L41:
-            r0 = 8
-            r3 = 1
-            if (r2 != r0) goto L49
-            if (r1 != r3) goto L33
-            goto L32
-        L49:
-            r0 = 32
-            if (r2 != r0) goto L5b
-            if (r1 != r3) goto L50
-            goto L51
-        L50:
-            r5 = r7
-        L51:
-            r6 = r5
-        L52:
-            int r0 = r8.mMultiWindowRoundedCornerRadius
-            super.semSetRoundedCorners(r6, r0)
-            super.semSetRoundedCornerColor(r6, r9)
-            return
-        L5b:
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            java.lang.String r9 = "updateRoundedCornerForSplit: Invalid position 0x"
-            r8.<init>(r9)
-            r8.append(r2)
-            java.lang.String r8 = r8.toString()
-            java.lang.String r9 = "DecorView"
-            android.util.Log.e(r9, r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.updateRoundedCornerForSplit(android.content.Context):void");
+    private void updateRoundedCornerForSplit(Context context) {
+        Configuration configuration = getConfiguration();
+        int rotation = configuration.windowConfiguration.getRotation();
+        int roundedCornerColor = MultiWindowUtils.getRoundedCornerColor(context);
+        int stagePosition = getStagePosition();
+        int i = 10;
+        int i2 = 3;
+        if (CoreRune.MW_EMBED_ACTIVITY && configuration.windowConfiguration.isEmbedded()) {
+            int embedActivityMode = configuration.windowConfiguration.getEmbedActivityMode();
+            if (embedActivityMode == 2) {
+                i = 5;
+            } else if (embedActivityMode != 3) {
+            }
+            i2 = i;
+        } else if (stagePosition == 16) {
+            i2 = 12;
+        } else if (stagePosition != 64) {
+            if (stagePosition == 8) {
+                if (rotation == 1) {
+                    i = 15;
+                }
+                i2 = i;
+            } else {
+                if (stagePosition != 32) {
+                    Log.e(TAG, "updateRoundedCornerForSplit: Invalid position 0x" + stagePosition);
+                    return;
+                }
+                i2 = rotation != 1 ? 15 : 5;
+            }
+        }
+        super.semSetRoundedCorners(i2, this.mMultiWindowRoundedCornerRadius);
+        super.semSetRoundedCornerColor(i2, roundedCornerColor);
     }
 
     private Rect getCurrentBounds(Context context) {
@@ -2449,6 +2735,10 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         return this.mWm.getCurrentWindowMetrics().getBounds();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0021  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void updateRoundedCornerForMultiSplit(Context context) {
         int i;
         if (CoreRune.MW_EMBED_ACTIVITY) {
@@ -2460,11 +2750,10 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
                 } else if (embedActivityMode == 3) {
                     i = 10;
                 }
-                super.semSetRoundedCorners(i, this.mMultiWindowRoundedCornerRadius);
-                super.semSetRoundedCornerColor(i, MultiWindowUtils.getRoundedCornerColor(context));
+            } else {
+                i = 15;
             }
         }
-        i = 15;
         super.semSetRoundedCorners(i, this.mMultiWindowRoundedCornerRadius);
         super.semSetRoundedCornerColor(i, MultiWindowUtils.getRoundedCornerColor(context));
     }
@@ -2534,24 +2823,24 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     }
 
     private void showPopOver() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, this.POP_OVER_BACKGROUND_ALPHA, 1.0f);
-        ofFloat.setDuration(200L);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, this.POP_OVER_CONTENT_ALPHA, 1.0f);
-        ofFloat2.setDuration(100L);
-        ofFloat2.setStartDelay(100L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, this.POP_OVER_BACKGROUND_ALPHA, 1.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, this.POP_OVER_CONTENT_ALPHA, 1.0f);
+        objectAnimatorOfFloat2.setDuration(100L);
+        objectAnimatorOfFloat2.setStartDelay(100L);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         animatorSet.start();
     }
 
     private void hidePopOver() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, this.POP_OVER_BACKGROUND_ALPHA, 0.2f);
-        ofFloat.setDuration(200L);
-        ofFloat.setStartDelay(100L);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, this.POP_OVER_CONTENT_ALPHA, 0.0f);
-        ofFloat2.setDuration(100L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, this.POP_OVER_BACKGROUND_ALPHA, 0.2f);
+        objectAnimatorOfFloat.setDuration(200L);
+        objectAnimatorOfFloat.setStartDelay(100L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, this.POP_OVER_CONTENT_ALPHA, 0.0f);
+        objectAnimatorOfFloat2.setDuration(100L);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat2, ofFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat);
         animatorSet.start();
     }
 
@@ -2754,19 +3043,111 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         requestApplyInsets();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0115  */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x0179  */
-    /* JADX WARN: Removed duplicated region for block: B:81:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void updateDisplayCutoutBackground(android.view.WindowInsets r11) {
-        /*
-            Method dump skipped, instructions count: 401
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.DecorView.updateDisplayCutoutBackground(android.view.WindowInsets):void");
+    private void updateDisplayCutoutBackground(WindowInsets windowInsets) {
+        int i;
+        View view;
+        boolean z = true;
+        if (CoreRune.FW_CHANGE_DISPLAY_CUTOUT_MODE && this.mWindow.getAttributes().type == 2011 && this.mWindow.getAttributes().layoutInDisplayCutoutMode == 1) {
+            Log.d(TAG, "IME does not need CutoutBackgroundView");
+            return;
+        }
+        if (!this.mCalledDisplayCutoutBackgroundColor && (View.sIsSamsungBasicInteraction || View.sIsDisplayCutoutBackground)) {
+            this.mDisplayCutoutBackgroundColor = getCurrentColor(this.mNavigationColorViewState);
+        }
+        if (windowInsets == null && (view = this.mDisplayCutoutBackgroundView) != null) {
+            view.setBackgroundColor(this.mDisplayCutoutBackgroundColor);
+            return;
+        }
+        WindowManager.LayoutParams attributes = this.mWindow.getAttributes();
+        int i2 = 3;
+        if ((attributes.layoutInDisplayCutoutMode == 1 || attributes.layoutInDisplayCutoutMode == 3) && windowInsets != null && windowInsets.getDisplayCutout() != null && windowInsets.hasSystemWindowInsets()) {
+            DisplayCutout displayCutout = windowInsets.getDisplayCutout();
+            int safeInsetLeft = displayCutout.getSafeInsetLeft();
+            int safeInsetTop = displayCutout.getSafeInsetTop();
+            int safeInsetRight = displayCutout.getSafeInsetRight();
+            int safeInsetBottom = displayCutout.getSafeInsetBottom();
+            sKnoxBadgeRightCutout = safeInsetRight;
+            int i3 = 0;
+            if (safeInsetLeft + safeInsetRight != 0) {
+                if (safeInsetLeft > 0 && windowInsets.getSystemWindowInsetLeft() > 0) {
+                    View view2 = this.mStatusColorViewState.visible ? this.mStatusColorViewState.view : null;
+                    int i4 = (view2 == null || view2.getVisibility() != 0) ? 0 : view2.getLayoutParams().height;
+                    View view3 = this.mNavigationColorViewState.visible ? this.mNavigationColorViewState.view : null;
+                    if (view3 != null && view3.getVisibility() == 0 && view3.getLayoutParams().height != -1) {
+                        i3 = view3.getLayoutParams().height;
+                    }
+                    int i5 = i3;
+                    i3 = i4;
+                    i = i5;
+                } else if (safeInsetRight > 0 && windowInsets.getSystemWindowInsetRight() > 0) {
+                    View view4 = this.mStatusColorViewState.visible ? this.mStatusColorViewState.view : null;
+                    i2 = 5;
+                    i3 = (view4 == null || view4.getVisibility() != 0) ? 0 : view4.getLayoutParams().height;
+                    i = 0;
+                    safeInsetLeft = safeInsetRight;
+                } else {
+                    if (safeInsetTop <= 0 || windowInsets.getSystemWindowInsetTop() <= 0) {
+                        if (safeInsetBottom > 0 && windowInsets.getSystemWindowInsetBottom() > 0) {
+                            i2 = 80;
+                            safeInsetTop = safeInsetBottom;
+                        }
+                        i = 0;
+                        z = false;
+                        safeInsetLeft = 0;
+                        i2 = 0;
+                        safeInsetTop = 0;
+                    } else {
+                        i2 = 48;
+                    }
+                    safeInsetLeft = -1;
+                    i = 0;
+                }
+                safeInsetTop = -1;
+            } else {
+                i = 0;
+                z = false;
+                safeInsetLeft = 0;
+                i2 = 0;
+                safeInsetTop = 0;
+            }
+            if (z && this.mDisplayCutoutBackgroundColor != 0) {
+                View view5 = this.mDisplayCutoutBackgroundView;
+                if (view5 == null) {
+                    View view6 = new View(getContext());
+                    this.mDisplayCutoutBackgroundView = view6;
+                    addView(view6);
+                } else if (view5.getParent() != this) {
+                    View view7 = new View(getContext());
+                    this.mDisplayCutoutBackgroundView = view7;
+                    addView(view7);
+                }
+                if (this.mDisplayCutoutBackgroundView.getTag() == null) {
+                    this.mDisplayCutoutBackgroundView.setTag("DisplayCutoutBackgroundView");
+                    this.mDisplayCutoutBackgroundView.setElevation(-1.0f);
+                }
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) this.mDisplayCutoutBackgroundView.getLayoutParams();
+                layoutParams.gravity = i2;
+                layoutParams.width = safeInsetLeft;
+                layoutParams.height = safeInsetTop;
+                layoutParams.topMargin = i3;
+                layoutParams.bottomMargin = i;
+                this.mDisplayCutoutBackgroundView.setBackgroundColor(this.mDisplayCutoutBackgroundColor);
+                this.mDisplayCutoutBackgroundView.requestLayout();
+                return;
+            }
+            View view8 = this.mDisplayCutoutBackgroundView;
+            if (view8 == null || view8.getParent() != this) {
+                return;
+            }
+            removeView(this.mDisplayCutoutBackgroundView);
+            this.mDisplayCutoutBackgroundView = null;
+            return;
+        }
+        View view9 = this.mDisplayCutoutBackgroundView;
+        if (view9 != null) {
+            removeView(view9);
+            this.mDisplayCutoutBackgroundView = null;
+        }
     }
 
     boolean isDrawLegacyNavigationBarBackground() {
@@ -2845,7 +3226,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
     private void setKnoxBadgePosition() {
         this.mKnoxBadgeDisplayRunnable = new Runnable() { // from class: com.android.internal.policy.DecorView.10
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws Resources.NotFoundException {
                 boolean z = true;
                 boolean z2 = Settings.Global.getInt(DecorView.this.mContext.getContentResolver(), Settings.Global.NAVIGATION_BAR_GESTURE_WHILE_HIDDEN, 0) != 0;
                 boolean z3 = Settings.Global.getInt(DecorView.this.mContext.getContentResolver(), Settings.Global.NAVIGATIONBAR_GESTURE_HINT, 1) != 0;
@@ -2975,14 +3356,14 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         boolean z2 = true;
         boolean z3 = i3 != i2;
         WindowConfiguration windowConfiguration = getResources().getConfiguration().windowConfiguration;
-        boolean isPopOver = windowConfiguration.isPopOver();
-        if (this.mIsPopOver != isPopOver) {
-            this.mIsPopOver = isPopOver;
+        boolean zIsPopOver = windowConfiguration.isPopOver();
+        if (this.mIsPopOver != zIsPopOver) {
+            this.mIsPopOver = zIsPopOver;
             z3 = true;
         }
-        boolean isPopOverWithoutOutlineEffect = windowConfiguration.isPopOverWithoutOutlineEffect();
-        if (this.mIsPopOverWithoutOutlineEffect != isPopOverWithoutOutlineEffect) {
-            this.mIsPopOverWithoutOutlineEffect = isPopOverWithoutOutlineEffect;
+        boolean zIsPopOverWithoutOutlineEffect = windowConfiguration.isPopOverWithoutOutlineEffect();
+        if (this.mIsPopOverWithoutOutlineEffect != zIsPopOverWithoutOutlineEffect) {
+            this.mIsPopOverWithoutOutlineEffect = zIsPopOverWithoutOutlineEffect;
         } else {
             z2 = z3;
         }
@@ -3008,10 +3389,6 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
         this.mForceHideRoundedCorner = z;
         Log.i(TAG, "hidden_semSetForceHideRoundedCorner() : " + z);
         super.semSetRoundedCorners(0);
-    }
-
-    private int getCaptionType() {
-        return Settings.Global.getInt(this.mContext.getContentResolver(), Settings.Global.FREEFORM_CAPTION_TYPE, 0);
     }
 
     public boolean shouldConsumeCaptionInsets() {

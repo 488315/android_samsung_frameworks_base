@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.icu.util.Calendar;
@@ -50,7 +51,7 @@ class DayPickerView extends ViewGroup {
         this(context, attributeSet, i, 0);
     }
 
-    public DayPickerView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public DayPickerView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mSelectedDay = Calendar.getInstance();
         this.mMinDate = Calendar.getInstance();
@@ -62,9 +63,9 @@ class DayPickerView extends ViewGroup {
 
             @Override // com.android.internal.widget.ViewPager.OnPageChangeListener
             public void onPageScrolled(int i3, float f, int i4) {
-                float abs = Math.abs(0.5f - f) * 2.0f;
-                DayPickerView.this.mPrevButton.setAlpha(abs);
-                DayPickerView.this.mNextButton.setAlpha(abs);
+                float fAbs = Math.abs(0.5f - f) * 2.0f;
+                DayPickerView.this.mPrevButton.setAlpha(fAbs);
+                DayPickerView.this.mNextButton.setAlpha(fAbs);
             }
 
             @Override // com.android.internal.widget.ViewPager.OnPageChangeListener
@@ -87,16 +88,16 @@ class DayPickerView extends ViewGroup {
             }
         };
         this.mAccessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.CalendarView, attributeSet, obtainStyledAttributes, i, i2);
-        int i3 = obtainStyledAttributes.getInt(0, Calendar.getInstance().getFirstDayOfWeek());
-        String string = obtainStyledAttributes.getString(2);
-        String string2 = obtainStyledAttributes.getString(3);
-        int resourceId = obtainStyledAttributes.getResourceId(16, R.style.TextAppearance_Material_Widget_Calendar_Month);
-        int resourceId2 = obtainStyledAttributes.getResourceId(11, R.style.TextAppearance_Material_Widget_Calendar_DayOfWeek);
-        int resourceId3 = obtainStyledAttributes.getResourceId(12, R.style.TextAppearance_Material_Widget_Calendar_Day);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(15);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.CalendarView, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        int i3 = typedArrayObtainStyledAttributes.getInt(0, Calendar.getInstance().getFirstDayOfWeek());
+        String string = typedArrayObtainStyledAttributes.getString(2);
+        String string2 = typedArrayObtainStyledAttributes.getString(3);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(16, R.style.TextAppearance_Material_Widget_Calendar_Month);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(11, R.style.TextAppearance_Material_Widget_Calendar_DayOfWeek);
+        int resourceId3 = typedArrayObtainStyledAttributes.getResourceId(12, R.style.TextAppearance_Material_Widget_Calendar_Day);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(15);
+        typedArrayObtainStyledAttributes.recycle();
         DayPickerPagerAdapter dayPickerPagerAdapter = new DayPickerPagerAdapter(context, R.layout.date_picker_month_item_material, R.id.month_view);
         this.mAdapter = dayPickerPagerAdapter;
         dayPickerPagerAdapter.setMonthTextAppearance(resourceId);
@@ -120,13 +121,13 @@ class DayPickerView extends ViewGroup {
         viewPager.setAdapter(this.mAdapter);
         viewPager.setOnPageChangeListener(this.mOnPageChangedListener);
         if (resourceId != 0) {
-            TypedArray obtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
-            ColorStateList colorStateList2 = obtainStyledAttributes2.getColorStateList(0);
+            TypedArray typedArrayObtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
+            ColorStateList colorStateList2 = typedArrayObtainStyledAttributes2.getColorStateList(0);
             if (colorStateList2 != null) {
                 imageButton.setImageTintList(colorStateList2);
                 imageButton2.setImageTintList(colorStateList2);
             }
-            obtainStyledAttributes2.recycle();
+            typedArrayObtainStyledAttributes2.recycle();
         }
         Calendar calendar = Calendar.getInstance();
         if (!CalendarView.parseDate(string, calendar)) {
@@ -140,11 +141,11 @@ class DayPickerView extends ViewGroup {
         if (timeInMillis2 < timeInMillis) {
             throw new IllegalArgumentException("maxDate must be >= minDate");
         }
-        long constrain = MathUtils.constrain(System.currentTimeMillis(), timeInMillis, timeInMillis2);
+        long jConstrain = MathUtils.constrain(System.currentTimeMillis(), timeInMillis, timeInMillis2);
         setFirstDayOfWeek(i3);
         setMinDate(timeInMillis);
         setMaxDate(timeInMillis2);
-        setDate(constrain, false);
+        setDate(jConstrain, false);
         this.mAdapter.setOnDaySelectedListener(new DayPickerPagerAdapter.OnDaySelectedListener() { // from class: android.widget.DayPickerView.1
             @Override // android.widget.DayPickerPagerAdapter.OnDaySelectedListener
             public void onDaySelected(DayPickerPagerAdapter dayPickerPagerAdapter2, Calendar calendar2) {
@@ -170,10 +171,10 @@ class DayPickerView extends ViewGroup {
         setMeasuredDimension(viewPager.getMeasuredWidthAndState(), viewPager.getMeasuredHeightAndState());
         int measuredWidth = viewPager.getMeasuredWidth();
         int measuredHeight = viewPager.getMeasuredHeight();
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth, Integer.MIN_VALUE);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(measuredHeight, Integer.MIN_VALUE);
-        this.mPrevButton.measure(makeMeasureSpec, makeMeasureSpec2);
-        this.mNextButton.measure(makeMeasureSpec, makeMeasureSpec2);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth, Integer.MIN_VALUE);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(measuredHeight, Integer.MIN_VALUE);
+        this.mPrevButton.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+        this.mNextButton.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
     }
 
     @Override // android.view.View

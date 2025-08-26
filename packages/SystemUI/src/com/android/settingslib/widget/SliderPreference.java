@@ -26,7 +26,6 @@ import com.google.android.material.slider.BaseSlider;
 import com.google.android.material.slider.Slider;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliderPreference extends Preference {
     public final boolean mAdjustable;
@@ -59,7 +58,7 @@ public class SliderPreference extends Preference {
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.settingslib.widget.SliderPreference$1] */
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.settingslib.widget.SliderPreference$2] */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.settingslib.widget.SliderPreference$3] */
-    public SliderPreference(Context context, AttributeSet attributeSet, int i) {
+    public SliderPreference(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         this.mSliderKeyListener = new View.OnKeyListener() { // from class: com.android.settingslib.widget.SliderPreference.1
             @Override // android.view.View.OnKeyListener
@@ -109,32 +108,32 @@ public class SliderPreference extends Preference {
         };
         this.mLayoutResId = R.layout.settingslib_expressive_preference_slider;
         setSelectable(false);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarPreference, i, 0);
-        this.mMin = obtainStyledAttributes.getInt(3, 0);
-        int i2 = obtainStyledAttributes.getInt(1, 100);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarPreference, i, 0);
+        this.mMin = typedArrayObtainStyledAttributes.getInt(3, 0);
+        int i2 = typedArrayObtainStyledAttributes.getInt(1, 100);
         int i3 = this.mMin;
         i2 = i2 < i3 ? i3 : i2;
         if (i2 != this.mMax) {
             this.mMax = i2;
             notifyChanged();
         }
-        int i4 = obtainStyledAttributes.getInt(4, 0);
+        int i4 = typedArrayObtainStyledAttributes.getInt(4, 0);
         if (i4 != this.mSliderIncrement) {
             this.mSliderIncrement = Math.min(this.mMax - this.mMin, Math.abs(i4));
             notifyChanged();
         }
-        this.mAdjustable = obtainStyledAttributes.getBoolean(2, true);
-        this.mShowSliderValue = obtainStyledAttributes.getBoolean(5, false);
-        this.mUpdatesContinuously = obtainStyledAttributes.getBoolean(6, false);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, com.android.settingslib.widget.preference.slider.R$styleable.SliderPreference);
-        this.mTextStartId = obtainStyledAttributes2.getResourceId(5, 0);
-        this.mTextEndId = obtainStyledAttributes2.getResourceId(4, 0);
-        this.mIconStartId = obtainStyledAttributes2.getResourceId(2, 0);
-        this.mIconEndId = obtainStyledAttributes2.getResourceId(0, 0);
-        this.mIconStartContentDescriptionId = obtainStyledAttributes2.getResourceId(3, 0);
-        this.mIconEndContentDescriptionId = obtainStyledAttributes2.getResourceId(1, 0);
-        obtainStyledAttributes2.recycle();
+        this.mAdjustable = typedArrayObtainStyledAttributes.getBoolean(2, true);
+        this.mShowSliderValue = typedArrayObtainStyledAttributes.getBoolean(5, false);
+        this.mUpdatesContinuously = typedArrayObtainStyledAttributes.getBoolean(6, false);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, com.android.settingslib.widget.preference.slider.R$styleable.SliderPreference);
+        this.mTextStartId = typedArrayObtainStyledAttributes2.getResourceId(5, 0);
+        this.mTextEndId = typedArrayObtainStyledAttributes2.getResourceId(4, 0);
+        this.mIconStartId = typedArrayObtainStyledAttributes2.getResourceId(2, 0);
+        this.mIconEndId = typedArrayObtainStyledAttributes2.getResourceId(0, 0);
+        this.mIconStartContentDescriptionId = typedArrayObtainStyledAttributes2.getResourceId(3, 0);
+        this.mIconEndContentDescriptionId = typedArrayObtainStyledAttributes2.getResourceId(1, 0);
+        typedArrayObtainStyledAttributes2.recycle();
         this.mTrackActiveColor = context.getColorStateList(R.color.settingslib_expressive_color_slider_track_active);
         this.mTrackInactiveColor = context.getColorStateList(R.color.settingslib_expressive_color_slider_track_inactive);
         this.mThumbColor = context.getColorStateList(R.color.settingslib_expressive_color_slider_thumb);
@@ -194,12 +193,10 @@ public class SliderPreference extends Preference {
             this.mSliderIncrement = (int) this.mSlider.stepSize;
         }
         CharSequence charSequence = this.mTitle;
-        if (!TextUtils.isEmpty(null)) {
-            this.mSlider.setContentDescription(null);
-        } else if (TextUtils.isEmpty(charSequence)) {
-            this.mSlider.setContentDescription(null);
-        } else {
+        if (TextUtils.isEmpty(null) && !TextUtils.isEmpty(charSequence)) {
             this.mSlider.setContentDescription(charSequence);
+        } else {
+            this.mSlider.setContentDescription(null);
         }
         Slider slider4 = this.mSlider;
         slider4.valueFrom = this.mMin;
@@ -281,9 +278,9 @@ public class SliderPreference extends Preference {
         if (i6 > 0 && textView2 != null) {
             textView2.setText(i6);
         }
-        View findViewById = preferenceViewHolder.findViewById(R.id.label_frame);
-        if (findViewById != null) {
-            findViewById.setVisibility((this.mTextStartId > 0 || this.mTextEndId > 0) ? 0 : 8);
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.label_frame);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility((this.mTextStartId > 0 || this.mTextEndId > 0) ? 0 : 8);
         }
         ImageView imageView = (ImageView) preferenceViewHolder.findViewById(R.id.icon_start);
         if (imageView != null && (viewGroup2 = (ViewGroup) imageView.getParent()) != null) {
@@ -452,7 +449,6 @@ public class SliderPreference extends Preference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends Preference.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: com.android.settingslib.widget.SliderPreference.SavedState.1
             @Override // android.os.Parcelable.Creator

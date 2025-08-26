@@ -11,19 +11,24 @@ import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.State;
 import com.android.systemui.qs.panels.ui.compose.selection.QSDragAnchor;
+import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptyList;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.sync.MutexImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnchoredDraggableState<T> {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,13 +43,268 @@ public final class AnchoredDraggableState<T> {
     public final MutableState settledValue$delegate;
     public final State targetValue$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function1 {
+        final /* synthetic */ Function3 $block;
+        int label;
+        final /* synthetic */ AnchoredDraggableState<Object> this$0;
+
+        /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$2$2, reason: invalid class name and collision with other inner class name */
+        final class C00062 extends SuspendLambda implements Function2 {
+            final /* synthetic */ Function3 $block;
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ AnchoredDraggableState<Object> this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C00062(Function3 function3, AnchoredDraggableState<Object> anchoredDraggableState, Continuation continuation) {
+                super(2, continuation);
+                this.$block = function3;
+                this.this$0 = anchoredDraggableState;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C00062 c00062 = new C00062(this.$block, this.this$0, continuation);
+                c00062.L$0 = obj;
+                return c00062;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C00062) create((DraggableAnchors) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    DraggableAnchors draggableAnchors = (DraggableAnchors) this.L$0;
+                    Function3 function3 = this.$block;
+                    AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = this.this$0.anchoredDragScope;
+                    this.label = 1;
+                    if (function3.invoke(anchoredDraggableState$anchoredDragScope$1, draggableAnchors, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(AnchoredDraggableState<Object> anchoredDraggableState, Function3 function3, Continuation continuation) {
+            super(1, continuation);
+            this.this$0 = anchoredDraggableState;
+            this.$block = function3;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Continuation continuation) {
+            return new AnonymousClass2(this.this$0, this.$block, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((AnonymousClass2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final AnchoredDraggableState<Object> anchoredDraggableState = this.this$0;
+                Function0 function0 = new Function0() { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState.anchoredDrag.2.1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(0);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        return anchoredDraggableState.getAnchors();
+                    }
+                };
+                C00062 c00062 = new C00062(this.$block, this.this$0, null);
+                this.label = 1;
+                if (AnchoredDraggableKt.access$restartable(function0, c00062, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            Object objClosestAnchor = ((DefaultDraggableAnchors) this.this$0.getAnchors()).closestAnchor(((SnapshotMutableFloatStateImpl) this.this$0.offset$delegate).getFloatValue());
+            if (objClosestAnchor != null) {
+                if (Math.abs(((SnapshotMutableFloatStateImpl) this.this$0.offset$delegate).getFloatValue() - ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(objClosestAnchor)) < 0.5f && ((Boolean) this.this$0.confirmValueChange.mo781invoke(objClosestAnchor)).booleanValue()) {
+                    ((SnapshotMutableStateImpl) this.this$0.settledValue$delegate).setValue(objClosestAnchor);
+                    this.this$0.setCurrentValue(objClosestAnchor);
+                }
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3, reason: invalid class name */
+    final class AnonymousClass3 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+        final /* synthetic */ AnchoredDraggableState<Object> this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass3(AnchoredDraggableState<Object> anchoredDraggableState, Continuation continuation) {
+            super(continuation);
+            this.this$0 = anchoredDraggableState;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return this.this$0.anchoredDrag(null, null, null, this);
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$4, reason: invalid class name */
+    final class AnonymousClass4 extends SuspendLambda implements Function1 {
+        final /* synthetic */ Function4 $block;
+        final /* synthetic */ Object $targetValue;
+        int label;
+        final /* synthetic */ AnchoredDraggableState<Object> this$0;
+
+        /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$4$2, reason: invalid class name */
+        final class AnonymousClass2 extends SuspendLambda implements Function2 {
+            final /* synthetic */ Function4 $block;
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ AnchoredDraggableState<Object> this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass2(Function4 function4, AnchoredDraggableState<Object> anchoredDraggableState, Continuation continuation) {
+                super(2, continuation);
+                this.$block = function4;
+                this.this$0 = anchoredDraggableState;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.$block, this.this$0, continuation);
+                anonymousClass2.L$0 = obj;
+                return anonymousClass2;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass2) create((Pair) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Pair pair = (Pair) this.L$0;
+                    DraggableAnchors draggableAnchors = (DraggableAnchors) pair.component1();
+                    Object objComponent2 = pair.component2();
+                    Function4 function4 = this.$block;
+                    AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = this.this$0.anchoredDragScope;
+                    this.label = 1;
+                    if (function4.invoke(anchoredDraggableState$anchoredDragScope$1, draggableAnchors, objComponent2, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass4(AnchoredDraggableState<Object> anchoredDraggableState, Object obj, Function4 function4, Continuation continuation) {
+            super(1, continuation);
+            this.this$0 = anchoredDraggableState;
+            this.$targetValue = obj;
+            this.$block = function4;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Continuation continuation) {
+            return new AnonymousClass4(this.this$0, this.$targetValue, this.$block, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((AnonymousClass4) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                AnchoredDraggableState<Object> anchoredDraggableState = this.this$0;
+                Object obj2 = this.$targetValue;
+                int i2 = AnchoredDraggableState.$r8$clinit;
+                ((SnapshotMutableStateImpl) anchoredDraggableState.dragTarget$delegate).setValue(obj2);
+                final AnchoredDraggableState<Object> anchoredDraggableState2 = this.this$0;
+                Function0 function0 = new Function0() { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState.anchoredDrag.4.1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(0);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        return new Pair(anchoredDraggableState2.getAnchors(), anchoredDraggableState2.targetValue$delegate.getValue());
+                    }
+                };
+                AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.$block, this.this$0, null);
+                this.label = 1;
+                if (AnchoredDraggableKt.access$restartable(function0, anonymousClass2, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            if (((Boolean) this.this$0.confirmValueChange.mo781invoke(this.$targetValue)).booleanValue()) {
+                float fPositionOf = ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(this.$targetValue);
+                AnchoredDraggableState<Object> anchoredDraggableState3 = this.this$0;
+                anchoredDraggableState3.anchoredDragScope.dragTo(fPositionOf, ((SnapshotMutableFloatStateImpl) anchoredDraggableState3.lastVelocity$delegate).getFloatValue());
+                AnchoredDraggableState<Object> anchoredDraggableState4 = this.this$0;
+                ((SnapshotMutableStateImpl) anchoredDraggableState4.settledValue$delegate).setValue(this.$targetValue);
+                this.this$0.setCurrentValue(this.$targetValue);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -56,7 +316,7 @@ public final class AnchoredDraggableState<T> {
         this.confirmValueChange = new Function1() { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState$confirmValueChange$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Boolean.TRUE;
             }
         };
@@ -79,17 +339,17 @@ public final class AnchoredDraggableState<T> {
                     return value;
                 }
                 AnchoredDraggableState<Object> anchoredDraggableState = this.this$0;
-                boolean isNaN = Float.isNaN(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
+                boolean zIsNaN = Float.isNaN(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
                 MutableState mutableState = anchoredDraggableState.currentValue$delegate;
-                if (isNaN) {
+                if (zIsNaN) {
                     return ((SnapshotMutableStateImpl) mutableState).getValue();
                 }
-                Object closestAnchor = ((DefaultDraggableAnchors) anchoredDraggableState.getAnchors()).closestAnchor(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
-                return closestAnchor == null ? ((SnapshotMutableStateImpl) mutableState).getValue() : closestAnchor;
+                Object objClosestAnchor = ((DefaultDraggableAnchors) anchoredDraggableState.getAnchors()).closestAnchor(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
+                return objClosestAnchor == null ? ((SnapshotMutableStateImpl) mutableState).getValue() : objClosestAnchor;
             }
         });
         this.offset$delegate = PrimitiveSnapshotStateKt.mutableFloatStateOf(Float.NaN);
-        SnapshotStateKt.derivedStateOf(SnapshotStateKt.structuralEqualityPolicy(), new Function0(this) { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState$progress$2
+        SnapshotStateKt.derivedStateOf(SnapshotStateKt.structuralEqualityPolicy(), new Function0(this) { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState.progress.2
             final /* synthetic */ AnchoredDraggableState<Object> this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -100,16 +360,16 @@ public final class AnchoredDraggableState<T> {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                float positionOf = ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(((SnapshotMutableStateImpl) this.this$0.settledValue$delegate).getValue());
-                float positionOf2 = ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(this.this$0.targetValue$delegate.getValue()) - positionOf;
-                float abs = Math.abs(positionOf2);
+                float fPositionOf = ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(((SnapshotMutableStateImpl) this.this$0.settledValue$delegate).getValue());
+                float fPositionOf2 = ((DefaultDraggableAnchors) this.this$0.getAnchors()).positionOf(this.this$0.targetValue$delegate.getValue()) - fPositionOf;
+                float fAbs = Math.abs(fPositionOf2);
                 float f = 1.0f;
-                if (!Float.isNaN(abs) && abs > 1.0E-6f) {
-                    float requireOffset = (this.this$0.requireOffset() - positionOf) / positionOf2;
-                    if (requireOffset < 1.0E-6f) {
+                if (!Float.isNaN(fAbs) && fAbs > 1.0E-6f) {
+                    float fRequireOffset = (this.this$0.requireOffset() - fPositionOf) / fPositionOf2;
+                    if (fRequireOffset < 1.0E-6f) {
                         f = 0.0f;
-                    } else if (requireOffset <= 0.999999f) {
-                        f = requireOffset;
+                    } else if (fRequireOffset <= 0.999999f) {
+                        f = fRequireOffset;
                     }
                 }
                 return Float.valueOf(f);
@@ -125,15 +385,15 @@ public final class AnchoredDraggableState<T> {
     public static Object anchoredDrag$default(AnchoredDraggableState anchoredDraggableState, Function3 function3, ContinuationImpl continuationImpl) {
         MutatePriority mutatePriority = MutatePriority.Default;
         anchoredDraggableState.getClass();
-        Object mutate = anchoredDraggableState.dragMutex.mutate(mutatePriority, new AnchoredDraggableState$anchoredDrag$2(anchoredDraggableState, function3, null), continuationImpl);
-        return mutate == CoroutineSingletons.COROUTINE_SUSPENDED ? mutate : Unit.INSTANCE;
+        Object objMutate = anchoredDraggableState.dragMutex.mutate(mutatePriority, new AnonymousClass2(anchoredDraggableState, function3, null), continuationImpl);
+        return objMutate == CoroutineSingletons.COROUTINE_SUSPENDED ? objMutate : Unit.INSTANCE;
     }
 
     public static void updateAnchors$default(AnchoredDraggableState anchoredDraggableState, DraggableAnchors draggableAnchors) {
         Object value;
-        boolean isNaN = Float.isNaN(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
+        boolean zIsNaN = Float.isNaN(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
         State state = anchoredDraggableState.targetValue$delegate;
-        if (isNaN) {
+        if (zIsNaN) {
             value = state.getValue();
         } else {
             value = ((DefaultDraggableAnchors) draggableAnchors).closestAnchor(((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).getFloatValue());
@@ -152,92 +412,57 @@ public final class AnchoredDraggableState<T> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r5v13 */
     /* JADX WARN: Type inference failed for: r5v7, types: [androidx.compose.runtime.SnapshotMutableStateImpl] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object anchoredDrag(java.lang.Object r6, androidx.compose.foundation.MutatePriority r7, kotlin.jvm.functions.Function4 r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r5 = this;
-            boolean r0 = r9 instanceof androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3
-            if (r0 == 0) goto L13
-            r0 = r9
-            androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3 r0 = (androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3 r0 = new androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$3
-            r0.<init>(r5, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            r4 = 0
-            if (r2 == 0) goto L36
-            if (r2 != r3) goto L2e
-            java.lang.Object r5 = r0.L$0
-            androidx.compose.foundation.gestures.AnchoredDraggableState r5 = (androidx.compose.foundation.gestures.AnchoredDraggableState) r5
-            kotlin.ResultKt.throwOnFailure(r9)     // Catch: java.lang.Throwable -> L2c
-            goto L5a
-        L2c:
-            r6 = move-exception
-            goto L62
-        L2e:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L36:
-            kotlin.ResultKt.throwOnFailure(r9)
-            androidx.compose.foundation.gestures.DraggableAnchors r9 = r5.getAnchors()
-            androidx.compose.foundation.gestures.DefaultDraggableAnchors r9 = (androidx.compose.foundation.gestures.DefaultDraggableAnchors) r9
-            java.util.List r9 = r9.keys
-            int r9 = r9.indexOf(r6)
-            r2 = -1
-            if (r9 == r2) goto L6a
-            androidx.compose.foundation.MutatorMutex r9 = r5.dragMutex     // Catch: java.lang.Throwable -> L2c
-            androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$4 r2 = new androidx.compose.foundation.gestures.AnchoredDraggableState$anchoredDrag$4     // Catch: java.lang.Throwable -> L2c
-            r2.<init>(r5, r6, r8, r4)     // Catch: java.lang.Throwable -> L2c
-            r0.L$0 = r5     // Catch: java.lang.Throwable -> L2c
-            r0.label = r3     // Catch: java.lang.Throwable -> L2c
-            java.lang.Object r6 = r9.mutate(r7, r2, r0)     // Catch: java.lang.Throwable -> L2c
-            if (r6 != r1) goto L5a
-            return r1
-        L5a:
-            androidx.compose.runtime.MutableState r5 = r5.dragTarget$delegate
-            androidx.compose.runtime.SnapshotMutableStateImpl r5 = (androidx.compose.runtime.SnapshotMutableStateImpl) r5
-            r5.setValue(r4)
-            goto L82
-        L62:
-            androidx.compose.runtime.MutableState r5 = r5.dragTarget$delegate
-            androidx.compose.runtime.SnapshotMutableStateImpl r5 = (androidx.compose.runtime.SnapshotMutableStateImpl) r5
-            r5.setValue(r4)
-            throw r6
-        L6a:
-            kotlin.jvm.functions.Function1 r7 = r5.confirmValueChange
-            java.lang.Object r7 = r7.mo779invoke(r6)
-            java.lang.Boolean r7 = (java.lang.Boolean) r7
-            boolean r7 = r7.booleanValue()
-            if (r7 == 0) goto L82
-            androidx.compose.runtime.MutableState r7 = r5.settledValue$delegate
-            androidx.compose.runtime.SnapshotMutableStateImpl r7 = (androidx.compose.runtime.SnapshotMutableStateImpl) r7
-            r7.setValue(r6)
-            r5.setCurrentValue(r6)
-        L82:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.AnchoredDraggableState.anchoredDrag(java.lang.Object, androidx.compose.foundation.MutatePriority, kotlin.jvm.functions.Function4, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object anchoredDrag(Object obj, MutatePriority mutatePriority, Function4 function4, ContinuationImpl continuationImpl) {
+        AnonymousClass3 anonymousClass3;
+        ?? r5;
+        if (continuationImpl instanceof AnonymousClass3) {
+            anonymousClass3 = (AnonymousClass3) continuationImpl;
+            int i = anonymousClass3.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass3.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass3 = new AnonymousClass3(this, continuationImpl);
+            }
+        }
+        Object obj2 = anonymousClass3.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass3.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj2);
+                if (((DefaultDraggableAnchors) getAnchors()).keys.indexOf(obj) == -1) {
+                    if (((Boolean) this.confirmValueChange.mo781invoke(obj)).booleanValue()) {
+                        ((SnapshotMutableStateImpl) this.settledValue$delegate).setValue(obj);
+                        setCurrentValue(obj);
+                    }
+                    return Unit.INSTANCE;
+                }
+                MutatorMutex mutatorMutex = this.dragMutex;
+                AnonymousClass4 anonymousClass4 = new AnonymousClass4(this, obj, function4, null);
+                anonymousClass3.L$0 = this;
+                anonymousClass3.label = 1;
+                this = this;
+                if (mutatorMutex.mutate(mutatePriority, anonymousClass4, anonymousClass3) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                boolean z = (AnchoredDraggableState<T>) ((AnchoredDraggableState) anonymousClass3.L$0);
+                ResultKt.throwOnFailure(obj2);
+                r5 = z;
+            }
+            return Unit.INSTANCE;
+        } finally {
+            ((SnapshotMutableStateImpl) this.dragTarget$delegate).setValue(null);
+        }
     }
 
     public final DraggableAnchors getAnchors() {
@@ -250,19 +475,19 @@ public final class AnchoredDraggableState<T> {
     }
 
     public final float progress(QSDragAnchor qSDragAnchor, QSDragAnchor qSDragAnchor2) {
-        float positionOf = ((DefaultDraggableAnchors) getAnchors()).positionOf(qSDragAnchor);
-        float positionOf2 = ((DefaultDraggableAnchors) getAnchors()).positionOf(qSDragAnchor2);
-        float coerceIn = (RangesKt___RangesKt.coerceIn(((SnapshotMutableFloatStateImpl) this.offset$delegate).getFloatValue(), Math.min(positionOf, positionOf2), Math.max(positionOf, positionOf2)) - positionOf) / (positionOf2 - positionOf);
-        if (Float.isNaN(coerceIn)) {
+        float fPositionOf = ((DefaultDraggableAnchors) getAnchors()).positionOf(qSDragAnchor);
+        float fPositionOf2 = ((DefaultDraggableAnchors) getAnchors()).positionOf(qSDragAnchor2);
+        float fCoerceIn = (RangesKt___RangesKt.coerceIn(((SnapshotMutableFloatStateImpl) this.offset$delegate).getFloatValue(), Math.min(fPositionOf, fPositionOf2), Math.max(fPositionOf, fPositionOf2)) - fPositionOf) / (fPositionOf2 - fPositionOf);
+        if (Float.isNaN(fCoerceIn)) {
             return 1.0f;
         }
-        if (coerceIn < 1.0E-6f) {
+        if (fCoerceIn < 1.0E-6f) {
             return 0.0f;
         }
-        if (coerceIn > 0.999999f) {
+        if (fCoerceIn > 0.999999f) {
             return 1.0f;
         }
-        return Math.abs(coerceIn);
+        return Math.abs(fCoerceIn);
     }
 
     public final float requireOffset() {
@@ -281,21 +506,21 @@ public final class AnchoredDraggableState<T> {
         MutatorMutex mutatorMutex = this.dragMutex;
         MutexImpl mutexImpl = mutatorMutex.mutex;
         MutexImpl mutexImpl2 = mutatorMutex.mutex;
-        boolean tryLock = mutexImpl.tryLock();
-        if (!tryLock) {
-            return tryLock;
+        boolean zTryLock = mutexImpl.tryLock();
+        if (!zTryLock) {
+            return zTryLock;
         }
         try {
             AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = this.anchoredDragScope;
-            float positionOf = ((DefaultDraggableAnchors) getAnchors()).positionOf(obj);
-            if (!Float.isNaN(positionOf)) {
-                anchoredDraggableState$anchoredDragScope$1.dragTo(positionOf, 0.0f);
+            float fPositionOf = ((DefaultDraggableAnchors) getAnchors()).positionOf(obj);
+            if (!Float.isNaN(fPositionOf)) {
+                anchoredDraggableState$anchoredDragScope$1.dragTo(fPositionOf, 0.0f);
                 ((SnapshotMutableStateImpl) this.dragTarget$delegate).setValue(null);
             }
             setCurrentValue(obj);
             ((SnapshotMutableStateImpl) this.settledValue$delegate).setValue(obj);
             mutexImpl2.unlock(null);
-            return tryLock;
+            return zTryLock;
         } catch (Throwable th) {
             mutexImpl2.unlock(null);
             throw th;
@@ -317,7 +542,7 @@ public final class AnchoredDraggableState<T> {
         this(obj, draggableAnchors, (i & 4) != 0 ? new Function1() { // from class: androidx.compose.foundation.gestures.AnchoredDraggableState.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                 return Boolean.TRUE;
             }
         } : function1);

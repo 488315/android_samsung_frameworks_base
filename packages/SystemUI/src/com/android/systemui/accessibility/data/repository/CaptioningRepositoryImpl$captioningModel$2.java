@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CaptioningRepositoryImpl$captioningModel$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ CaptioningManager $this_captioningModel;
@@ -49,12 +48,12 @@ final class CaptioningRepositoryImpl$captioningModel$2 extends SuspendLambda imp
             final ?? r1 = new CaptioningManager.CaptioningChangeListener() { // from class: com.android.systemui.accessibility.data.repository.CaptioningRepositoryImpl$captioningModel$2$listener$1
                 @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
                 public final void onSystemAudioCaptioningChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
 
                 @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
                 public final void onSystemAudioCaptioningUiChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.$this_captioningModel.addCaptioningChangeListener(r1);

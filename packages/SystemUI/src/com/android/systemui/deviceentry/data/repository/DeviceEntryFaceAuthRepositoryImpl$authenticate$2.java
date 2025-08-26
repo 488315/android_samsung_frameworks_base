@@ -22,7 +22,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFaceAuthRepositoryImpl$authenticate$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ FaceAuthUiEvent $uiEvent;
@@ -63,9 +62,9 @@ final class DeviceEntryFaceAuthRepositoryImpl$authenticate$2 extends SuspendLamb
         LogLevel logLevel = LogLevel.DEBUG;
         FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = faceAuthUiEvent.getReason();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = faceAuthUiEvent.getReason();
+        logBuffer.commit(logMessageObtain);
         DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl2 = this.this$0;
         FaceManager faceManager = deviceEntryFaceAuthRepositoryImpl2.faceManager;
         if (faceManager == null) {

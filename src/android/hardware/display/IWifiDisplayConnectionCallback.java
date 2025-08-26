@@ -53,9 +53,9 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWifiDisplayConnectionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWifiDisplayConnectionCallback)) {
-                return (IWifiDisplayConnectionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWifiDisplayConnectionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWifiDisplayConnectionCallback)) {
+                return (IWifiDisplayConnectionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,13 +85,13 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSuccess(createTypedArrayList);
+                onSuccess(arrayListCreateTypedArrayList);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onFailure(readInt);
+                onFailure(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,25 +116,25 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
 
             @Override // android.hardware.display.IWifiDisplayConnectionCallback
             public void onSuccess(List<SemWifiDisplayParameter> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiDisplayConnectionCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiDisplayConnectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.display.IWifiDisplayConnectionCallback
             public void onFailure(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiDisplayConnectionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiDisplayConnectionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

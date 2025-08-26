@@ -2,6 +2,7 @@ package com.android.wm.shell.activityembedding;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.IBinder;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -9,13 +10,18 @@ import android.view.SurfaceControl;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowContainerTransaction;
+import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.sysui.ShellInit;
+import com.android.wm.shell.transition.DefaultTransitionHandler;
 import com.android.wm.shell.transition.Transitions;
+import com.samsung.android.core.CompatSandbox;
+import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ActivityEmbeddingController implements Transitions.TransitionHandler {
     final ActivityEmbeddingAnimationRunner mAnimationRunner;
@@ -30,7 +36,7 @@ public class ActivityEmbeddingController implements Transitions.TransitionHandle
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.activityembedding.ActivityEmbeddingController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ActivityEmbeddingController activityEmbeddingController = ActivityEmbeddingController.this;
+                ActivityEmbeddingController activityEmbeddingController = this.f$0;
                 activityEmbeddingController.mTransitions.addHandler(activityEmbeddingController);
             }
         }, this);
@@ -43,22 +49,93 @@ public class ActivityEmbeddingController implements Transitions.TransitionHandle
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x012e, code lost:
-    
-        if (r0 == false) goto L97;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0171 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:108:? A[LOOP:5: B:100:0x0139->B:108:?, LOOP_END, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x014b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean shouldAnimate(android.window.TransitionInfo r9) {
-        /*
-            Method dump skipped, instructions count: 371
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.activityembedding.ActivityEmbeddingController.shouldAnimate(android.window.TransitionInfo):boolean");
+    public static boolean shouldAnimate(TransitionInfo transitionInfo) {
+        boolean z;
+        boolean z2;
+        if (transitionInfo.getType() != 1017) {
+            Iterator it = transitionInfo.getChanges().iterator();
+            boolean z3 = false;
+            while (true) {
+                if (it.hasNext()) {
+                    TransitionInfo.Change change = (TransitionInfo.Change) it.next();
+                    if (!change.hasFlags(1024) && change.hasFlags(512) && (!CompatSandbox.isAppCompatOverrideEnabled(change.getConfiguration()) || change.getConfiguration().windowConfiguration.getWindowingMode() != 1)) {
+                        if (change.getPopOverAnimationNeeded()) {
+                            break;
+                        }
+                        if (CoreRune.MW_EMBED_ACTIVITY) {
+                            TransitionInfo.AnimationOptions animationOptions = change.getAnimationOptions();
+                            if ((animationOptions != null ? animationOptions.getType() : 0) == 0 && change.hasFlags(4) && change.hasFlags(64)) {
+                                break;
+                            }
+                        }
+                        z3 = true;
+                    }
+                } else if (z3) {
+                    Iterator it2 = transitionInfo.getChanges().iterator();
+                    while (true) {
+                        if (!it2.hasNext()) {
+                            z = false;
+                            break;
+                        }
+                        if (!((TransitionInfo.Change) it2.next()).hasFlags(512)) {
+                            z = true;
+                            break;
+                        }
+                    }
+                    if (z) {
+                        List changes = transitionInfo.getChanges();
+                        Rect rect = new Rect();
+                        int size = changes.size() - 1;
+                        while (true) {
+                            if (size >= 0) {
+                                TransitionInfo.Change change2 = (TransitionInfo.Change) changes.get(size);
+                                if (!TransitionUtil.isClosingType(change2.getMode())) {
+                                    if (change2.hasFlags(512)) {
+                                        rect.union(change2.getEndAbsBounds());
+                                    } else {
+                                        if (!CoreRune.MW_EMBED_ACTIVITY || !TransitionUtil.isOpeningType(change2.getMode()) || !change2.hasFlags(4) || change2.getConfiguration().windowConfiguration.getWindowingMode() != 1) {
+                                            break;
+                                        }
+                                        rect.union(change2.getEndAbsBounds());
+                                    }
+                                }
+                                size--;
+                            } else {
+                                for (int size2 = changes.size() - 1; size2 >= 0; size2--) {
+                                    TransitionInfo.Change change3 = (TransitionInfo.Change) changes.get(size2);
+                                    if (change3.hasFlags(512) || rect.contains(change3.getEndAbsBounds())) {
+                                    }
+                                }
+                                for (int size3 = changes.size() - 1; size3 >= 0; size3--) {
+                                    if (!((TransitionInfo.Change) changes.get(size3)).hasFlags(512)) {
+                                        changes.remove(size3);
+                                    }
+                                }
+                                z2 = true;
+                            }
+                        }
+                        z2 = false;
+                        if (z2) {
+                        }
+                    }
+                    Iterator it3 = transitionInfo.getChanges().iterator();
+                    while (it3.hasNext()) {
+                        TransitionInfo.AnimationOptions animationOptions2 = ((TransitionInfo.Change) it3.next()).getAnimationOptions();
+                        if (animationOptions2 != null) {
+                            boolean z4 = animationOptions2.getType() == 5 ? false : (animationOptions2.getType() == 1 || (CoreRune.MW_EMBED_ACTIVITY_ANIMATION && animationOptions2.getType() == 14)) ? true : !DefaultTransitionHandler.isSupportedOverrideAnimation(animationOptions2);
+                            if (!z4) {
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -91,10 +168,10 @@ public class ActivityEmbeddingController implements Transitions.TransitionHandle
         final ActivityEmbeddingAnimationRunner activityEmbeddingAnimationRunner = this.mAnimationRunner;
         activityEmbeddingAnimationRunner.getClass();
         ArrayList arrayList = new ArrayList();
-        Animator createAnimator = activityEmbeddingAnimationRunner.createAnimator(transitionInfo, transaction, transaction2, new Runnable() { // from class: com.android.wm.shell.activityembedding.ActivityEmbeddingAnimationRunner$$ExternalSyntheticLambda3
+        Animator animatorCreateAnimator = activityEmbeddingAnimationRunner.createAnimator(transitionInfo, transaction, transaction2, new Runnable() { // from class: com.android.wm.shell.activityembedding.ActivityEmbeddingAnimationRunner$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                ActivityEmbeddingAnimationRunner activityEmbeddingAnimationRunner2 = ActivityEmbeddingAnimationRunner.this;
+                ActivityEmbeddingAnimationRunner activityEmbeddingAnimationRunner2 = activityEmbeddingAnimationRunner;
                 Transitions.TransitionFinishCallback transitionFinishCallback2 = (Transitions.TransitionFinishCallback) activityEmbeddingAnimationRunner2.mController.mTransitionCallbacks.remove(iBinder);
                 if (transitionFinishCallback2 == null) {
                     throw new IllegalStateException("No finish callback found");
@@ -102,10 +179,10 @@ public class ActivityEmbeddingController implements Transitions.TransitionHandle
                 transitionFinishCallback2.onTransitionFinished(null);
             }
         }, arrayList);
-        activityEmbeddingAnimationRunner.mActiveAnimator = createAnimator;
+        activityEmbeddingAnimationRunner.mActiveAnimator = animatorCreateAnimator;
         if (arrayList.isEmpty()) {
             transaction.apply();
-            createAnimator.start();
+            animatorCreateAnimator.start();
             return true;
         }
         transaction.apply(true);
@@ -117,7 +194,7 @@ public class ActivityEmbeddingController implements Transitions.TransitionHandle
             ((Consumer) obj).accept(transaction3);
         }
         transaction3.apply();
-        createAnimator.start();
+        animatorCreateAnimator.start();
         return true;
     }
 }

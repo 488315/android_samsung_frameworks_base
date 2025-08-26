@@ -2,7 +2,6 @@ package com.android.systemui.accessibility;
 
 import android.animation.ValueAnimator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class FullscreenMagnificationController$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -26,9 +25,9 @@ public final /* synthetic */ class FullscreenMagnificationController$$ExternalSy
                 fullscreenMagnificationController.mFullscreenBorder.setAlpha(0.0f);
                 break;
             case 1:
-                ValueAnimator createShowTargetAnimator = fullscreenMagnificationController.createShowTargetAnimator(fullscreenMagnificationController.mFullscreenBorder);
-                fullscreenMagnificationController.mShowHideBorderAnimator = createShowTargetAnimator;
-                createShowTargetAnimator.start();
+                ValueAnimator valueAnimatorCreateShowTargetAnimator = fullscreenMagnificationController.createShowTargetAnimator(fullscreenMagnificationController.mFullscreenBorder);
+                fullscreenMagnificationController.mShowHideBorderAnimator = valueAnimatorCreateShowTargetAnimator;
+                valueAnimatorCreateShowTargetAnimator.start();
                 break;
             default:
                 fullscreenMagnificationController.applyCornerRadiusToBorder();

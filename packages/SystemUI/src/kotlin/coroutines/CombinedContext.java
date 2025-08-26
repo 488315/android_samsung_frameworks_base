@@ -9,18 +9,15 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CombinedContext implements CoroutineContext, Serializable {
     private final CoroutineContext.Element element;
     private final CoroutineContext left;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Serialized implements Serializable {
         private static final long serialVersionUID = 0;
         private final CoroutineContext[] elements;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -40,11 +37,11 @@ public final class CombinedContext implements CoroutineContext, Serializable {
 
         private final Object readResolve() {
             CoroutineContext[] coroutineContextArr = this.elements;
-            CoroutineContext coroutineContext = EmptyCoroutineContext.INSTANCE;
-            for (CoroutineContext coroutineContext2 : coroutineContextArr) {
-                coroutineContext = coroutineContext.plus(coroutineContext2);
+            CoroutineContext coroutineContextPlus = EmptyCoroutineContext.INSTANCE;
+            for (CoroutineContext coroutineContext : coroutineContextArr) {
+                coroutineContextPlus = coroutineContextPlus.plus(coroutineContext);
             }
-            return coroutineContext;
+            return coroutineContextPlus;
         }
     }
 
@@ -54,8 +51,8 @@ public final class CombinedContext implements CoroutineContext, Serializable {
     }
 
     private final Object writeReplace() {
-        int size$1 = size$1();
-        final CoroutineContext[] coroutineContextArr = new CoroutineContext[size$1];
+        int iSize$1 = size$1();
+        final CoroutineContext[] coroutineContextArr = new CoroutineContext[iSize$1];
         final Ref$IntRef ref$IntRef = new Ref$IntRef();
         fold(Unit.INSTANCE, new Function2() { // from class: kotlin.coroutines.CombinedContext$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
@@ -67,14 +64,14 @@ public final class CombinedContext implements CoroutineContext, Serializable {
                 return Unit.INSTANCE;
             }
         });
-        if (ref$IntRef.element == size$1) {
+        if (ref$IntRef.element == iSize$1) {
             return new Serialized(coroutineContextArr);
         }
         throw new IllegalStateException("Check failed.");
     }
 
     public final boolean equals(Object obj) {
-        boolean z;
+        boolean zAreEqual;
         if (this == obj) {
             return true;
         }
@@ -84,18 +81,18 @@ public final class CombinedContext implements CoroutineContext, Serializable {
                 while (true) {
                     CoroutineContext.Element element = this.element;
                     if (!Intrinsics.areEqual(combinedContext.get(element.getKey()), element)) {
-                        z = false;
+                        zAreEqual = false;
                         break;
                     }
                     CoroutineContext coroutineContext = this.left;
                     if (!(coroutineContext instanceof CombinedContext)) {
                         CoroutineContext.Element element2 = (CoroutineContext.Element) coroutineContext;
-                        z = Intrinsics.areEqual(combinedContext.get(element2.getKey()), element2);
+                        zAreEqual = Intrinsics.areEqual(combinedContext.get(element2.getKey()), element2);
                         break;
                     }
                     this = (CombinedContext) coroutineContext;
                 }
-                if (z) {
+                if (zAreEqual) {
                     return true;
                 }
             }
@@ -132,8 +129,8 @@ public final class CombinedContext implements CoroutineContext, Serializable {
         if (this.element.get(key) != null) {
             return this.left;
         }
-        CoroutineContext minusKey = this.left.minusKey(key);
-        return minusKey == this.left ? this : minusKey == EmptyCoroutineContext.INSTANCE ? this.element : new CombinedContext(minusKey, this.element);
+        CoroutineContext coroutineContextMinusKey = this.left.minusKey(key);
+        return coroutineContextMinusKey == this.left ? this : coroutineContextMinusKey == EmptyCoroutineContext.INSTANCE ? this.element : new CombinedContext(coroutineContextMinusKey, this.element);
     }
 
     @Override // kotlin.coroutines.CoroutineContext

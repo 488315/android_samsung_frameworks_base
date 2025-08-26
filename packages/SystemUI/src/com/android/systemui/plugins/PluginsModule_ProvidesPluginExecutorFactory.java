@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginsModule_ProvidesPluginExecutorFactory implements Provider {
     private final Provider threadFactoryProvider;
@@ -19,9 +18,9 @@ public final class PluginsModule_ProvidesPluginExecutorFactory implements Provid
     }
 
     public static Executor providesPluginExecutor(ThreadFactory threadFactory) {
-        Executor providesPluginExecutor = PluginsModule.providesPluginExecutor(threadFactory);
-        providesPluginExecutor.getClass();
-        return providesPluginExecutor;
+        Executor executorProvidesPluginExecutor = PluginsModule.providesPluginExecutor(threadFactory);
+        executorProvidesPluginExecutor.getClass();
+        return executorProvidesPluginExecutor;
     }
 
     public static PluginsModule_ProvidesPluginExecutorFactory create(Provider provider) {

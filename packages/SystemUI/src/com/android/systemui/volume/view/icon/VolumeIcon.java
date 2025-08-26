@@ -2,6 +2,9 @@ package com.android.systemui.volume.view.icon;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +14,18 @@ import android.widget.ImageView;
 import com.android.systemui.R;
 import com.android.systemui.volume.store.StoreInteractor;
 import com.android.systemui.volume.store.VolumePanelStore;
+import com.android.systemui.volume.util.BluetoothIconUtil;
+import com.android.systemui.volume.util.ViewVisibilityUtil;
+import com.samsung.systemui.splugins.extensions.VolumePanelStateExt;
 import com.samsung.systemui.splugins.volume.VolumeObserver;
 import com.samsung.systemui.splugins.volume.VolumePanelRow;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import java.util.ArrayList;
+import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     public int currentMediaIconState;
@@ -37,7 +43,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     public int stream;
     public VolumeIconMotion volumeIconMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,7 +52,6 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -105,13 +109,13 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
 
     public View inflateIconView(boolean z) {
         if (z) {
-            View inflate = VolumeIcons.isForMediaIcon(this.stream) ? LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_media_icon, (ViewGroup) null) : VolumePanelValues.isRing(this.stream) ? LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_ringtone_icon, (ViewGroup) null) : LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_icon, (ViewGroup) null);
-            inflate.getClass();
-            return inflate;
+            View viewInflate = VolumeIcons.isForMediaIcon(this.stream) ? LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_media_icon, (ViewGroup) null) : VolumePanelValues.isRing(this.stream) ? LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_ringtone_icon, (ViewGroup) null) : LayoutInflater.from(getContext()).inflate(R.layout.volume_animated_icon, (ViewGroup) null);
+            viewInflate.getClass();
+            return viewInflate;
         }
-        View inflate2 = LayoutInflater.from(getContext()).inflate(R.layout.volume_default_icon, (ViewGroup) null);
-        inflate2.getClass();
-        return inflate2;
+        View viewInflate2 = LayoutInflater.from(getContext()).inflate(R.layout.volume_default_icon, (ViewGroup) null);
+        viewInflate2.getClass();
+        return viewInflate2;
     }
 
     public void initVolumeIconColor(int i, int i2, int i3) {
@@ -120,7 +124,7 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
         this.iconEarShockColor = i3;
     }
 
-    public final void initialize(VolumePanelStore volumePanelStore, VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) {
+    public final void initialize(VolumePanelStore volumePanelStore, VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) throws Resources.NotFoundException {
         StoreInteractor storeInteractor = this.storeInteractor;
         storeInteractor.store = volumePanelStore;
         storeInteractor.observeStore();
@@ -137,33 +141,122 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
         updateEnableState(volumePanelState, volumePanelRow);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:112:0x00f2, code lost:
-    
-        if (com.android.systemui.volume.view.icon.VolumeIcons.isAnimatableIcon(r21.stream, r8.getIconType()) == false) goto L59;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x00df, code lost:
-    
-        if (com.android.systemui.volume.view.icon.VolumeIcons.isAnimatableMediaIconType(r10) != false) goto L59;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x012e  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x013d  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x014d  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x015c  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x016d  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x00f4  */
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onChanged(java.lang.Object r22) {
-        /*
-            Method dump skipped, instructions count: 417
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.view.icon.VolumeIcon.onChanged(java.lang.Object):void");
+    public final void onChanged(Object obj) throws Resources.NotFoundException {
+        VolumePanelRow volumePanelRowFindRow;
+        VolumePanelRow volumePanelRowFindRow2;
+        VolumePanelState volumePanelState = (VolumePanelState) obj;
+        int i = WhenMappings.$EnumSwitchMapping$0[volumePanelState.getStateType().ordinal()];
+        if (i == 1) {
+            this.storeInteractor.dispose();
+            return;
+        }
+        if (i != 2) {
+            if (i == 3) {
+                if (this.stream == volumePanelState.getStream() && (volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream)) != null && VolumeIcons.isAnimatableIcon(this.stream, volumePanelRowFindRow.getIconType())) {
+                    updateIconState(volumePanelRowFindRow, false);
+                    return;
+                }
+                return;
+            }
+            if (i == 4) {
+                if (this.stream != volumePanelState.getStream() || (volumePanelRowFindRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream)) == null) {
+                    return;
+                }
+                updateIconLayout(volumePanelRowFindRow2, false);
+                updateIconState(volumePanelRowFindRow2, true);
+                return;
+            }
+            if (i == 5 && this.isAnimatedType && this.stream == volumePanelState.getStream()) {
+                int iconTargetState = volumePanelState.getIconTargetState();
+                int iconCurrentState = volumePanelState.getIconCurrentState();
+                if (VolumePanelValues.isRing(this.stream)) {
+                    setSoundIconState(iconTargetState, iconCurrentState, this.iconType, true);
+                    return;
+                } else {
+                    setMediaIconState(iconTargetState, iconCurrentState, true);
+                    return;
+                }
+            }
+            return;
+        }
+        boolean zIsQpVolumeBarEnabled = volumePanelState.isQpVolumeBarEnabled();
+        List<VolumePanelRow> volumeRowList = volumePanelState.getVolumeRowList();
+        ArrayList arrayList = new ArrayList();
+        for (Object obj2 : volumeRowList) {
+            VolumePanelRow volumePanelRow = (VolumePanelRow) obj2;
+            if (volumePanelRow.getStreamType() == this.stream && (volumePanelRow.isVisible() || zIsQpVolumeBarEnabled)) {
+                arrayList.add(obj2);
+            }
+        }
+        int size = arrayList.size();
+        int i2 = 0;
+        while (i2 < size) {
+            Object obj3 = arrayList.get(i2);
+            i2++;
+            VolumePanelRow volumePanelRow2 = (VolumePanelRow) obj3;
+            updateIconLayout(volumePanelRow2, false);
+            if (!this.shouldUpdateIcon) {
+                int i3 = this.stream;
+                int iconType = volumePanelRow2.getIconType();
+                if ((!VolumeIcons.isForMediaIcon(i3) || !VolumeIcons.isAnimatableMediaIconType(iconType)) && !VolumePanelValues.isRing(i3) && VolumeIcons.isAnimatableIcon(this.stream, volumePanelRow2.getIconType())) {
+                    updateIconState(volumePanelRow2, false);
+                }
+            }
+            int iconType2 = volumePanelRow2.getIconType();
+            if (this.iconType != iconType2 && VolumePanelValues.isRing(this.stream) && iconType2 != 3) {
+                View view = this.iconView;
+                if (view == null) {
+                    view = null;
+                }
+                ImageView imageView = (ImageView) view.requireViewById(R.id.volume_icon_mute_splash);
+                View view2 = this.iconView;
+                if (view2 == null) {
+                    view2 = null;
+                }
+                ImageView imageView2 = (ImageView) view2.requireViewById(R.id.volume_mute_icon);
+                View view3 = this.iconView;
+                if (view3 == null) {
+                    view3 = null;
+                }
+                ImageView imageView3 = (ImageView) view3.requireViewById(R.id.volume_normal_icon);
+                View view4 = this.iconView;
+                if (view4 == null) {
+                    view4 = null;
+                }
+                ImageView imageView4 = (ImageView) view4.requireViewById(R.id.volume_sound_icon_wave_l);
+                View view5 = this.iconView;
+                if (view5 == null) {
+                    view5 = null;
+                }
+                ImageView imageView5 = (ImageView) view5.requireViewById(R.id.volume_sound_icon_wave_s);
+                View view6 = this.iconView;
+                if (view6 == null) {
+                    view6 = null;
+                }
+                ImageView imageView6 = (ImageView) view6.requireViewById(R.id.volume_vibrate_icon);
+                ScreenState screenState = getScreenState();
+                if (iconType2 == 1) {
+                    VolumeIconMotion volumeIconMotion = this.volumeIconMotion;
+                    (volumeIconMotion == null ? null : volumeIconMotion).startMuteAnimation(this.stream, imageView3, imageView5, imageView4, imageView6, imageView2, imageView, screenState);
+                } else {
+                    VolumeIconMotion volumeIconMotion2 = this.volumeIconMotion;
+                    if (volumeIconMotion2 == null) {
+                        volumeIconMotion2 = null;
+                    }
+                    volumeIconMotion2.startSoundVibrationAnimation(imageView6, imageView3, imageView5, imageView4, imageView2, imageView);
+                }
+                this.shouldUpdateIcon = false;
+                this.currentMediaIconState = 0;
+                this.iconType = iconType2;
+            }
+            updateIconTintColor(volumePanelRow2, volumePanelState, false);
+            updateEnableState(volumePanelState, volumePanelRow2);
+        }
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -314,54 +407,142 @@ public abstract class VolumeIcon extends FrameLayout implements VolumeObserver {
     }
 
     public final void updateIconLayout(VolumePanelRow volumePanelRow, boolean z) {
-        boolean isAnimatableIcon = VolumeIcons.isAnimatableIcon(this.stream, volumePanelRow.getIconType());
-        boolean z2 = z || this.isAnimatedType != isAnimatableIcon;
+        boolean zIsAnimatableIcon = VolumeIcons.isAnimatableIcon(this.stream, volumePanelRow.getIconType());
+        boolean z2 = z || this.isAnimatedType != zIsAnimatableIcon;
         this.shouldUpdateIcon = z2;
         if (z2) {
             if (getChildCount() > 0) {
                 removeAllViews();
             }
-            View inflateIconView = inflateIconView(isAnimatableIcon);
-            this.iconView = inflateIconView;
-            this.isAnimatedType = isAnimatableIcon;
-            addView(inflateIconView);
+            View viewInflateIconView = inflateIconView(zIsAnimatableIcon);
+            this.iconView = viewInflateIconView;
+            this.isAnimatedType = zIsAnimatableIcon;
+            addView(viewInflateIconView);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0172  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x018a  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:82:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x018c  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x016f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateIconState(com.samsung.systemui.splugins.volume.VolumePanelRow r12, boolean r13) {
-        /*
-            Method dump skipped, instructions count: 411
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.view.icon.VolumeIcon.updateIconState(com.samsung.systemui.splugins.volume.VolumePanelRow, boolean):void");
+    public final void updateIconState(VolumePanelRow volumePanelRow, boolean z) throws Resources.NotFoundException {
+        Drawable drawable;
+        if (!VolumeIcons.isAnimatableIcon(this.stream, volumePanelRow.getIconType()) || !this.isAnimatedType) {
+            if (volumePanelRow.isRoutedToBluetooth()) {
+                String dualBtDeviceAddress = volumePanelRow.getDualBtDeviceAddress();
+                if (TextUtils.isEmpty(dualBtDeviceAddress)) {
+                    drawable = null;
+                } else {
+                    BluetoothIconUtil bluetoothIconUtil = BluetoothIconUtil.INSTANCE;
+                    Context context = getContext();
+                    bluetoothIconUtil.getClass();
+                    drawable = BluetoothIconUtil.getServerIconDrawable(context, dualBtDeviceAddress);
+                }
+            }
+            if (drawable == null) {
+                drawable = getResources().getDrawable(VolumeIcons.getDefaultIconResId(volumePanelRow.getStreamType(), volumePanelRow.getIconType()), null);
+            }
+            View view = this.iconView;
+            if ((view == null ? null : view) instanceof ImageView) {
+                ((ImageView) (view != null ? view : null)).setImageDrawable(drawable);
+                return;
+            }
+            return;
+        }
+        if (VolumeIcons.isForMediaIcon(this.stream) || VolumePanelValues.isRing(this.stream)) {
+            int levelMax = volumePanelRow.getLevelMax() * (VolumeIcons.isForMediaIcon(this.stream) ? 100 : 1);
+            int realLevel = volumePanelRow.getRealLevel();
+            double d = realLevel;
+            double d2 = levelMax;
+            int i = d <= 0.5d * d2 ? d > d2 * 0.25d ? 2 : realLevel > 0 ? 1 : 0 : 3;
+            if (VolumePanelValues.isRing(this.stream)) {
+                setSoundIconState(i, this.currentMediaIconState, volumePanelRow.getIconType(), z);
+                return;
+            } else {
+                setMediaIconState(i, this.currentMediaIconState, z);
+                return;
+            }
+        }
+        View view2 = this.iconView;
+        if (view2 == null) {
+            view2 = null;
+        }
+        ImageView imageView = (ImageView) view2.requireViewById(R.id.volume_normal_icon);
+        View view3 = this.iconView;
+        if (view3 == null) {
+            view3 = null;
+        }
+        ImageView imageView2 = (ImageView) view3.requireViewById(R.id.volume_mute_icon);
+        View view4 = this.iconView;
+        if (view4 == null) {
+            view4 = null;
+        }
+        ImageView imageView3 = (ImageView) view4.requireViewById(R.id.volume_vibrate_icon);
+        View view5 = this.iconView;
+        if (view5 == null) {
+            view5 = null;
+        }
+        ImageView imageView4 = (ImageView) view5.requireViewById(R.id.volume_icon_mute_splash);
+        int streamType = volumePanelRow.getStreamType();
+        if (streamType == 1) {
+            imageView.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_system_mtrl));
+            imageView2.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_system_mute_mtrl));
+        } else if (streamType == 5) {
+            imageView.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_mtrl));
+            imageView2.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_mute_mtrl));
+            imageView3.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_vibrate_mtrl));
+        }
+        int iconType = volumePanelRow.getIconType();
+        if (this.iconType != iconType) {
+            this.iconType = iconType;
+            if (iconType == 0) {
+                ViewVisibilityUtil.INSTANCE.getClass();
+                ViewVisibilityUtil.setGone(imageView);
+                ViewVisibilityUtil.setGone(imageView2);
+                ViewVisibilityUtil.setGone(imageView4);
+                imageView3.setVisibility(0);
+                VolumeIconMotion volumeIconMotion = this.volumeIconMotion;
+                (volumeIconMotion != null ? volumeIconMotion : null).startVibrationAnimation(imageView3);
+                return;
+            }
+            if (iconType != 1) {
+                if (iconType != 3) {
+                    return;
+                }
+                ViewVisibilityUtil.INSTANCE.getClass();
+                imageView.setVisibility(0);
+                ViewVisibilityUtil.setGone(imageView2);
+                ViewVisibilityUtil.setGone(imageView4);
+                ViewVisibilityUtil.setGone(imageView3);
+                return;
+            }
+            ViewVisibilityUtil.INSTANCE.getClass();
+            ViewVisibilityUtil.setGone(imageView);
+            imageView2.setVisibility(0);
+            imageView4.setVisibility(0);
+            ViewVisibilityUtil.setGone(imageView3);
+            VolumeIconMotion volumeIconMotion2 = this.volumeIconMotion;
+            (volumeIconMotion2 != null ? volumeIconMotion2 : null).getClass();
+            VolumeIconMotion.startSplashAnimation(imageView4);
+        }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0056  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateIconTintColor(VolumePanelRow volumePanelRow, VolumePanelState volumePanelState, boolean z) {
         int i;
         boolean z2 = volumePanelState.isLeBroadcasting() && !volumePanelRow.isRoutedToBluetooth();
-        if (volumePanelRow.getIconType() == 0 || volumePanelRow.getIconType() == 3 || !(volumePanelRow.isMuted() || volumePanelRow.getRealLevel() == 0)) {
-            if (volumePanelState.isSafeMediaDeviceOn() || volumePanelState.isSafeMediaPinDeviceOn()) {
-                int earProtectLevel = volumePanelRow.getEarProtectLevel();
-                int realLevel = volumePanelRow.getRealLevel();
-                if (VolumePanelValues.isAudioSharing(volumePanelRow.getStreamType())) {
-                    realLevel *= 100;
-                }
-                if (1 <= earProtectLevel && earProtectLevel < realLevel && !z2) {
-                    i = this.iconEarShockColor;
-                }
-            }
-            i = this.iconActiveColor;
-        } else {
+        if (volumePanelRow.getIconType() != 0 && volumePanelRow.getIconType() != 3 && (volumePanelRow.isMuted() || volumePanelRow.getRealLevel() == 0)) {
             i = this.iconMutedColor;
+        } else if (volumePanelState.isSafeMediaDeviceOn() || volumePanelState.isSafeMediaPinDeviceOn()) {
+            int earProtectLevel = volumePanelRow.getEarProtectLevel();
+            int realLevel = volumePanelRow.getRealLevel();
+            if (VolumePanelValues.isAudioSharing(volumePanelRow.getStreamType())) {
+                realLevel *= 100;
+            }
+            i = (1 > earProtectLevel || earProtectLevel >= realLevel || z2) ? this.iconActiveColor : this.iconEarShockColor;
         }
         final ArrayList arrayList = new ArrayList();
         if (!VolumeIcons.isAnimatableIcon(volumePanelRow.getStreamType(), volumePanelRow.getIconType())) {

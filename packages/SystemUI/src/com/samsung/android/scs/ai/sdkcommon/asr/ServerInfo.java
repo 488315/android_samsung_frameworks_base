@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ServerInfo extends ServerType {
     public static final Parcelable.Creator<ServerInfo> CREATOR = new Parcelable.Creator<ServerInfo>() { // from class: com.samsung.android.scs.ai.sdkcommon.asr.ServerInfo.1

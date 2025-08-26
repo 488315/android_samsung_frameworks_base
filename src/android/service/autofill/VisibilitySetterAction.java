@@ -16,15 +16,15 @@ public final class VisibilitySetterAction extends InternalOnClickAction implemen
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public VisibilitySetterAction createFromParcel(Parcel parcel) {
-            SparseIntArray readSparseIntArray = parcel.readSparseIntArray();
+            SparseIntArray sparseIntArray = parcel.readSparseIntArray();
             Builder builder = null;
-            for (int i = 0; i < readSparseIntArray.size(); i++) {
-                int keyAt = readSparseIntArray.keyAt(i);
-                int valueAt = readSparseIntArray.valueAt(i);
+            for (int i = 0; i < sparseIntArray.size(); i++) {
+                int iKeyAt = sparseIntArray.keyAt(i);
+                int iValueAt = sparseIntArray.valueAt(i);
                 if (builder == null) {
-                    builder = new Builder(keyAt, valueAt);
+                    builder = new Builder(iKeyAt, iValueAt);
                 } else {
-                    builder.setVisibility(keyAt, valueAt);
+                    builder.setVisibility(iKeyAt, iValueAt);
                 }
             }
             if (builder == null) {
@@ -54,16 +54,16 @@ public final class VisibilitySetterAction extends InternalOnClickAction implemen
     @Override // android.service.autofill.InternalOnClickAction
     public void onClick(ViewGroup viewGroup) {
         for (int i = 0; i < this.mVisibilities.size(); i++) {
-            int keyAt = this.mVisibilities.keyAt(i);
-            View findViewById = viewGroup.findViewById(keyAt);
-            if (findViewById == null) {
-                Slog.w(TAG, "Skipping view id " + keyAt + " because it's not found on " + viewGroup);
+            int iKeyAt = this.mVisibilities.keyAt(i);
+            View viewFindViewById = viewGroup.findViewById(iKeyAt);
+            if (viewFindViewById == null) {
+                Slog.w(TAG, "Skipping view id " + iKeyAt + " because it's not found on " + viewGroup);
             } else {
-                int valueAt = this.mVisibilities.valueAt(i);
+                int iValueAt = this.mVisibilities.valueAt(i);
                 if (Helper.sVerbose) {
-                    Slog.v(TAG, "Changing visibility of view " + findViewById + " from " + findViewById.getVisibility() + " to  " + valueAt);
+                    Slog.v(TAG, "Changing visibility of view " + viewFindViewById + " from " + viewFindViewById.getVisibility() + " to  " + iValueAt);
                 }
-                findViewById.setVisibility(valueAt);
+                viewFindViewById.setVisibility(iValueAt);
             }
         }
     }

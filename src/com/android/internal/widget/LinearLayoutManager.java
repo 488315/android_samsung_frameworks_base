@@ -251,12 +251,12 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         int i3;
         int i4;
         int i5;
-        int fixLayoutEndGap;
+        int iFixLayoutEndGap;
         int i6;
-        View findViewByPosition;
+        View viewFindViewByPosition;
         int decoratedStart;
-        int i7;
-        int i8 = -1;
+        int endAfterPadding;
+        int i7 = -1;
         if ((this.mPendingSavedState != null || this.mPendingScrollPosition != -1) && state.getItemCount() == 0) {
             removeAndRecycleAllViews(recycler);
             return;
@@ -283,25 +283,25 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         }
         int startAfterPadding = extraLayoutSpace + this.mOrientationHelper.getStartAfterPadding();
         int endPadding = i + this.mOrientationHelper.getEndPadding();
-        if (state.isPreLayout() && (i6 = this.mPendingScrollPosition) != -1 && this.mPendingScrollPositionOffset != Integer.MIN_VALUE && (findViewByPosition = findViewByPosition(i6)) != null) {
+        if (state.isPreLayout() && (i6 = this.mPendingScrollPosition) != -1 && this.mPendingScrollPositionOffset != Integer.MIN_VALUE && (viewFindViewByPosition = findViewByPosition(i6)) != null) {
             if (this.mShouldReverseLayout) {
-                i7 = this.mOrientationHelper.getEndAfterPadding() - this.mOrientationHelper.getDecoratedEnd(findViewByPosition);
+                endAfterPadding = this.mOrientationHelper.getEndAfterPadding() - this.mOrientationHelper.getDecoratedEnd(viewFindViewByPosition);
                 decoratedStart = this.mPendingScrollPositionOffset;
             } else {
-                decoratedStart = this.mOrientationHelper.getDecoratedStart(findViewByPosition) - this.mOrientationHelper.getStartAfterPadding();
-                i7 = this.mPendingScrollPositionOffset;
+                decoratedStart = this.mOrientationHelper.getDecoratedStart(viewFindViewByPosition) - this.mOrientationHelper.getStartAfterPadding();
+                endAfterPadding = this.mPendingScrollPositionOffset;
             }
-            int i9 = i7 - decoratedStart;
-            if (i9 > 0) {
-                startAfterPadding += i9;
+            int i8 = endAfterPadding - decoratedStart;
+            if (i8 > 0) {
+                startAfterPadding += i8;
             } else {
-                endPadding -= i9;
+                endPadding -= i8;
             }
         }
         if (!this.mAnchorInfo.mLayoutFromEnd ? !this.mShouldReverseLayout : this.mShouldReverseLayout) {
-            i8 = 1;
+            i7 = 1;
         }
-        onAnchorReady(recycler, state, this.mAnchorInfo, i8);
+        onAnchorReady(recycler, state, this.mAnchorInfo, i7);
         detachAndScrapAttachedViews(recycler);
         this.mLayoutState.mInfinite = resolveIsInfinite();
         this.mLayoutState.mIsPreLayout = state.isPreLayout();
@@ -310,7 +310,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
             this.mLayoutState.mExtra = startAfterPadding;
             fill(recycler, this.mLayoutState, state, false);
             i3 = this.mLayoutState.mOffset;
-            int i10 = this.mLayoutState.mCurrentPosition;
+            int i9 = this.mLayoutState.mCurrentPosition;
             if (this.mLayoutState.mAvailable > 0) {
                 endPadding += this.mLayoutState.mAvailable;
             }
@@ -320,9 +320,9 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
             fill(recycler, this.mLayoutState, state, false);
             i2 = this.mLayoutState.mOffset;
             if (this.mLayoutState.mAvailable > 0) {
-                int i11 = this.mLayoutState.mAvailable;
-                updateLayoutStateToFillStart(i10, i3);
-                this.mLayoutState.mExtra = i11;
+                int i10 = this.mLayoutState.mAvailable;
+                updateLayoutStateToFillStart(i9, i3);
+                this.mLayoutState.mExtra = i10;
                 fill(recycler, this.mLayoutState, state, false);
                 i3 = this.mLayoutState.mOffset;
             }
@@ -331,7 +331,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
             this.mLayoutState.mExtra = endPadding;
             fill(recycler, this.mLayoutState, state, false);
             i2 = this.mLayoutState.mOffset;
-            int i12 = this.mLayoutState.mCurrentPosition;
+            int i11 = this.mLayoutState.mCurrentPosition;
             if (this.mLayoutState.mAvailable > 0) {
                 startAfterPadding += this.mLayoutState.mAvailable;
             }
@@ -341,27 +341,27 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
             fill(recycler, this.mLayoutState, state, false);
             i3 = this.mLayoutState.mOffset;
             if (this.mLayoutState.mAvailable > 0) {
-                int i13 = this.mLayoutState.mAvailable;
-                updateLayoutStateToFillEnd(i12, i2);
-                this.mLayoutState.mExtra = i13;
+                int i12 = this.mLayoutState.mAvailable;
+                updateLayoutStateToFillEnd(i11, i2);
+                this.mLayoutState.mExtra = i12;
                 fill(recycler, this.mLayoutState, state, false);
                 i2 = this.mLayoutState.mOffset;
             }
         }
         if (getChildCount() > 0) {
             if (this.mShouldReverseLayout ^ this.mStackFromEnd) {
-                int fixLayoutEndGap2 = fixLayoutEndGap(i2, recycler, state, true);
-                i4 = i3 + fixLayoutEndGap2;
-                i5 = i2 + fixLayoutEndGap2;
-                fixLayoutEndGap = fixLayoutStartGap(i4, recycler, state, false);
+                int iFixLayoutEndGap2 = fixLayoutEndGap(i2, recycler, state, true);
+                i4 = i3 + iFixLayoutEndGap2;
+                i5 = i2 + iFixLayoutEndGap2;
+                iFixLayoutEndGap = fixLayoutStartGap(i4, recycler, state, false);
             } else {
-                int fixLayoutStartGap = fixLayoutStartGap(i3, recycler, state, true);
-                i4 = i3 + fixLayoutStartGap;
-                i5 = i2 + fixLayoutStartGap;
-                fixLayoutEndGap = fixLayoutEndGap(i5, recycler, state, false);
+                int iFixLayoutStartGap = fixLayoutStartGap(i3, recycler, state, true);
+                i4 = i3 + iFixLayoutStartGap;
+                i5 = i2 + iFixLayoutStartGap;
+                iFixLayoutEndGap = fixLayoutEndGap(i5, recycler, state, false);
             }
-            i3 = i4 + fixLayoutEndGap;
-            i2 = i5 + fixLayoutEndGap;
+            i3 = i4 + iFixLayoutEndGap;
+            i2 = i5 + iFixLayoutEndGap;
         }
         layoutForPredictiveAnimations(recycler, state, i3, i2);
         if (!state.isPreLayout()) {
@@ -388,29 +388,29 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         List<RecyclerView.ViewHolder> scrapList = recycler.getScrapList();
         int size = scrapList.size();
         int position = getPosition(getChildAt(0));
-        int i3 = 0;
-        int i4 = 0;
-        for (int i5 = 0; i5 < size; i5++) {
-            RecyclerView.ViewHolder viewHolder = scrapList.get(i5);
+        int decoratedMeasurement = 0;
+        int decoratedMeasurement2 = 0;
+        for (int i3 = 0; i3 < size; i3++) {
+            RecyclerView.ViewHolder viewHolder = scrapList.get(i3);
             if (!viewHolder.isRemoved()) {
                 if ((viewHolder.getLayoutPosition() < position) != this.mShouldReverseLayout) {
-                    i3 += this.mOrientationHelper.getDecoratedMeasurement(viewHolder.itemView);
+                    decoratedMeasurement += this.mOrientationHelper.getDecoratedMeasurement(viewHolder.itemView);
                 } else {
-                    i4 += this.mOrientationHelper.getDecoratedMeasurement(viewHolder.itemView);
+                    decoratedMeasurement2 += this.mOrientationHelper.getDecoratedMeasurement(viewHolder.itemView);
                 }
             }
         }
         this.mLayoutState.mScrapList = scrapList;
-        if (i3 > 0) {
+        if (decoratedMeasurement > 0) {
             updateLayoutStateToFillStart(getPosition(getChildClosestToStart()), i);
-            this.mLayoutState.mExtra = i3;
+            this.mLayoutState.mExtra = decoratedMeasurement;
             this.mLayoutState.mAvailable = 0;
             this.mLayoutState.assignPositionFromScrapList();
             fill(recycler, this.mLayoutState, state, false);
         }
-        if (i4 > 0) {
+        if (decoratedMeasurement2 > 0) {
             updateLayoutStateToFillEnd(getPosition(getChildClosestToEnd()), i2);
-            this.mLayoutState.mExtra = i4;
+            this.mLayoutState.mExtra = decoratedMeasurement2;
             this.mLayoutState.mAvailable = 0;
             this.mLayoutState.assignPositionFromScrapList();
             fill(recycler, this.mLayoutState, state, false);
@@ -427,7 +427,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
     }
 
     private boolean updateAnchorFromChildren(RecyclerView.Recycler recycler, RecyclerView.State state, AnchorInfo anchorInfo) {
-        View findReferenceChildClosestToStart;
+        View viewFindReferenceChildClosestToStart;
         int startAfterPadding;
         if (getChildCount() == 0) {
             return false;
@@ -441,15 +441,15 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
             return false;
         }
         if (anchorInfo.mLayoutFromEnd) {
-            findReferenceChildClosestToStart = findReferenceChildClosestToEnd(recycler, state);
+            viewFindReferenceChildClosestToStart = findReferenceChildClosestToEnd(recycler, state);
         } else {
-            findReferenceChildClosestToStart = findReferenceChildClosestToStart(recycler, state);
+            viewFindReferenceChildClosestToStart = findReferenceChildClosestToStart(recycler, state);
         }
-        if (findReferenceChildClosestToStart == null) {
+        if (viewFindReferenceChildClosestToStart == null) {
             return false;
         }
-        anchorInfo.assignFromView(findReferenceChildClosestToStart);
-        if (!state.isPreLayout() && supportsPredictiveItemAnimations() && (this.mOrientationHelper.getDecoratedStart(findReferenceChildClosestToStart) >= this.mOrientationHelper.getEndAfterPadding() || this.mOrientationHelper.getDecoratedEnd(findReferenceChildClosestToStart) < this.mOrientationHelper.getStartAfterPadding())) {
+        anchorInfo.assignFromView(viewFindReferenceChildClosestToStart);
+        if (!state.isPreLayout() && supportsPredictiveItemAnimations() && (this.mOrientationHelper.getDecoratedStart(viewFindReferenceChildClosestToStart) >= this.mOrientationHelper.getEndAfterPadding() || this.mOrientationHelper.getDecoratedEnd(viewFindReferenceChildClosestToStart) < this.mOrientationHelper.getStartAfterPadding())) {
             if (anchorInfo.mLayoutFromEnd) {
                 startAfterPadding = this.mOrientationHelper.getEndAfterPadding();
             } else {
@@ -480,26 +480,26 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
                     return true;
                 }
                 if (this.mPendingScrollPositionOffset == Integer.MIN_VALUE) {
-                    View findViewByPosition = findViewByPosition(this.mPendingScrollPosition);
-                    if (findViewByPosition != null) {
-                        if (this.mOrientationHelper.getDecoratedMeasurement(findViewByPosition) > this.mOrientationHelper.getTotalSpace()) {
+                    View viewFindViewByPosition = findViewByPosition(this.mPendingScrollPosition);
+                    if (viewFindViewByPosition != null) {
+                        if (this.mOrientationHelper.getDecoratedMeasurement(viewFindViewByPosition) > this.mOrientationHelper.getTotalSpace()) {
                             anchorInfo.assignCoordinateFromPadding();
                             return true;
                         }
-                        if (this.mOrientationHelper.getDecoratedStart(findViewByPosition) - this.mOrientationHelper.getStartAfterPadding() < 0) {
+                        if (this.mOrientationHelper.getDecoratedStart(viewFindViewByPosition) - this.mOrientationHelper.getStartAfterPadding() < 0) {
                             anchorInfo.mCoordinate = this.mOrientationHelper.getStartAfterPadding();
                             anchorInfo.mLayoutFromEnd = false;
                             return true;
                         }
-                        if (this.mOrientationHelper.getEndAfterPadding() - this.mOrientationHelper.getDecoratedEnd(findViewByPosition) < 0) {
+                        if (this.mOrientationHelper.getEndAfterPadding() - this.mOrientationHelper.getDecoratedEnd(viewFindViewByPosition) < 0) {
                             anchorInfo.mCoordinate = this.mOrientationHelper.getEndAfterPadding();
                             anchorInfo.mLayoutFromEnd = true;
                             return true;
                         }
                         if (anchorInfo.mLayoutFromEnd) {
-                            decoratedStart = this.mOrientationHelper.getDecoratedEnd(findViewByPosition) + this.mOrientationHelper.getTotalSpaceChange();
+                            decoratedStart = this.mOrientationHelper.getDecoratedEnd(viewFindViewByPosition) + this.mOrientationHelper.getTotalSpaceChange();
                         } else {
-                            decoratedStart = this.mOrientationHelper.getDecoratedStart(findViewByPosition);
+                            decoratedStart = this.mOrientationHelper.getDecoratedStart(viewFindViewByPosition);
                         }
                         anchorInfo.mCoordinate = decoratedStart;
                     } else {
@@ -783,14 +783,14 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         this.mLayoutState.mRecycle = true;
         ensureLayoutState();
         int i2 = i > 0 ? 1 : -1;
-        int abs = Math.abs(i);
-        updateLayoutState(i2, abs, true, state);
-        int fill = this.mLayoutState.mScrollingOffset + fill(recycler, this.mLayoutState, state, false);
-        if (fill < 0) {
+        int iAbs = Math.abs(i);
+        updateLayoutState(i2, iAbs, true, state);
+        int iFill = this.mLayoutState.mScrollingOffset + fill(recycler, this.mLayoutState, state, false);
+        if (iFill < 0) {
             return 0;
         }
-        if (abs > fill) {
-            i = i2 * fill;
+        if (iAbs > iFill) {
+            i = i2 * iFill;
         }
         this.mOrientationHelper.offsetChildren(-i);
         this.mLayoutState.mLastScrollDelta = i;
@@ -921,6 +921,10 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         return i - layoutState.mAvailable;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00bf  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     void layoutChunk(RecyclerView.Recycler recycler, RecyclerView.State state, LayoutState layoutState, LayoutChunkResult layoutChunkResult) {
         int i;
         int i2;
@@ -992,8 +996,8 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         linearLayoutManager = this;
         linearLayoutManager.layoutDecoratedWithMargins(next, i, i4, i2, i3);
         if (!layoutParams.isItemRemoved()) {
+            layoutChunkResult.mIgnoreConsumed = true;
         }
-        layoutChunkResult.mIgnoreConsumed = true;
         layoutChunkResult.mFocusable = next.isFocusable();
     }
 
@@ -1074,35 +1078,35 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
     }
 
     public int findFirstVisibleItemPosition() {
-        View findOneVisibleChild = findOneVisibleChild(0, getChildCount(), false, true);
-        if (findOneVisibleChild == null) {
+        View viewFindOneVisibleChild = findOneVisibleChild(0, getChildCount(), false, true);
+        if (viewFindOneVisibleChild == null) {
             return -1;
         }
-        return getPosition(findOneVisibleChild);
+        return getPosition(viewFindOneVisibleChild);
     }
 
     public int findFirstCompletelyVisibleItemPosition() {
-        View findOneVisibleChild = findOneVisibleChild(0, getChildCount(), true, false);
-        if (findOneVisibleChild == null) {
+        View viewFindOneVisibleChild = findOneVisibleChild(0, getChildCount(), true, false);
+        if (viewFindOneVisibleChild == null) {
             return -1;
         }
-        return getPosition(findOneVisibleChild);
+        return getPosition(viewFindOneVisibleChild);
     }
 
     public int findLastVisibleItemPosition() {
-        View findOneVisibleChild = findOneVisibleChild(getChildCount() - 1, -1, false, true);
-        if (findOneVisibleChild == null) {
+        View viewFindOneVisibleChild = findOneVisibleChild(getChildCount() - 1, -1, false, true);
+        if (viewFindOneVisibleChild == null) {
             return -1;
         }
-        return getPosition(findOneVisibleChild);
+        return getPosition(viewFindOneVisibleChild);
     }
 
     public int findLastCompletelyVisibleItemPosition() {
-        View findOneVisibleChild = findOneVisibleChild(getChildCount() - 1, -1, true, false);
-        if (findOneVisibleChild == null) {
+        View viewFindOneVisibleChild = findOneVisibleChild(getChildCount() - 1, -1, true, false);
+        if (viewFindOneVisibleChild == null) {
             return -1;
         }
-        return getPosition(findOneVisibleChild);
+        return getPosition(viewFindOneVisibleChild);
     }
 
     View findOneVisibleChild(int i, int i2, boolean z, boolean z2) {
@@ -1130,33 +1134,33 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
 
     @Override // com.android.internal.widget.RecyclerView.LayoutManager
     public View onFocusSearchFailed(View view, int i, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        int convertFocusDirectionToLayoutDirection;
-        View findReferenceChildClosestToEnd;
+        int iConvertFocusDirectionToLayoutDirection;
+        View viewFindReferenceChildClosestToEnd;
         View childClosestToEnd;
         resolveShouldLayoutReverse();
-        if (getChildCount() == 0 || (convertFocusDirectionToLayoutDirection = convertFocusDirectionToLayoutDirection(i)) == Integer.MIN_VALUE) {
+        if (getChildCount() == 0 || (iConvertFocusDirectionToLayoutDirection = convertFocusDirectionToLayoutDirection(i)) == Integer.MIN_VALUE) {
             return null;
         }
         ensureLayoutState();
-        if (convertFocusDirectionToLayoutDirection == -1) {
-            findReferenceChildClosestToEnd = findReferenceChildClosestToStart(recycler, state);
+        if (iConvertFocusDirectionToLayoutDirection == -1) {
+            viewFindReferenceChildClosestToEnd = findReferenceChildClosestToStart(recycler, state);
         } else {
-            findReferenceChildClosestToEnd = findReferenceChildClosestToEnd(recycler, state);
+            viewFindReferenceChildClosestToEnd = findReferenceChildClosestToEnd(recycler, state);
         }
-        if (findReferenceChildClosestToEnd == null) {
+        if (viewFindReferenceChildClosestToEnd == null) {
             return null;
         }
         ensureLayoutState();
-        updateLayoutState(convertFocusDirectionToLayoutDirection, (int) (this.mOrientationHelper.getTotalSpace() * MAX_SCROLL_FACTOR), false, state);
+        updateLayoutState(iConvertFocusDirectionToLayoutDirection, (int) (this.mOrientationHelper.getTotalSpace() * MAX_SCROLL_FACTOR), false, state);
         this.mLayoutState.mScrollingOffset = Integer.MIN_VALUE;
         this.mLayoutState.mRecycle = false;
         fill(recycler, this.mLayoutState, state, true);
-        if (convertFocusDirectionToLayoutDirection == -1) {
+        if (iConvertFocusDirectionToLayoutDirection == -1) {
             childClosestToEnd = getChildClosestToStart();
         } else {
             childClosestToEnd = getChildClosestToEnd();
         }
-        if (childClosestToEnd == findReferenceChildClosestToEnd || !childClosestToEnd.isFocusable()) {
+        if (childClosestToEnd == viewFindReferenceChildClosestToEnd || !childClosestToEnd.isFocusable()) {
             return null;
         }
         return childClosestToEnd;
@@ -1298,11 +1302,11 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
         }
 
         public void assignPositionFromScrapList(View view) {
-            View nextViewInLimitedList = nextViewInLimitedList(view);
-            if (nextViewInLimitedList == null) {
+            View viewNextViewInLimitedList = nextViewInLimitedList(view);
+            if (viewNextViewInLimitedList == null) {
                 this.mCurrentPosition = -1;
             } else {
-                this.mCurrentPosition = ((RecyclerView.LayoutParams) nextViewInLimitedList.getLayoutParams()).getViewLayoutPosition();
+                this.mCurrentPosition = ((RecyclerView.LayoutParams) viewNextViewInLimitedList.getLayoutParams()).getViewLayoutPosition();
             }
         }
 
@@ -1433,9 +1437,9 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager implements I
                 if (endAfterPadding > 0) {
                     int decoratedMeasurement = this.mCoordinate - LinearLayoutManager.this.mOrientationHelper.getDecoratedMeasurement(view);
                     int startAfterPadding = LinearLayoutManager.this.mOrientationHelper.getStartAfterPadding();
-                    int min = decoratedMeasurement - (startAfterPadding + Math.min(LinearLayoutManager.this.mOrientationHelper.getDecoratedStart(view) - startAfterPadding, 0));
-                    if (min < 0) {
-                        this.mCoordinate += Math.min(endAfterPadding, -min);
+                    int iMin = decoratedMeasurement - (startAfterPadding + Math.min(LinearLayoutManager.this.mOrientationHelper.getDecoratedStart(view) - startAfterPadding, 0));
+                    if (iMin < 0) {
+                        this.mCoordinate += Math.min(endAfterPadding, -iMin);
                         return;
                     }
                     return;

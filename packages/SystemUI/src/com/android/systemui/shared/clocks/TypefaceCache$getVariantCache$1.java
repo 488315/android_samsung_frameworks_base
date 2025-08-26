@@ -6,7 +6,6 @@ import com.android.systemui.animation.TypefaceVariantCache;
 import com.android.systemui.shared.clocks.TypefaceCache;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TypefaceCache$getVariantCache$1 implements TypefaceVariantCache {
     public final /* synthetic */ Typeface $baseTypeface;
@@ -41,8 +40,8 @@ public final class TypefaceCache$getVariantCache$1 implements TypefaceVariantCac
         typefaceCache.logMiss(cacheKey);
         Typeface typeface2 = this.$baseTypeface;
         TypefaceVariantCache.Companion.getClass();
-        Typeface createVariantTypeface = TypefaceVariantCache.Companion.createVariantTypeface(typeface2, str);
-        typefaceCache.cache.put(cacheKey, new TypefaceCache.WeakTypefaceRef(typefaceCache, cacheKey, createVariantTypeface));
-        return createVariantTypeface;
+        Typeface typefaceCreateVariantTypeface = TypefaceVariantCache.Companion.createVariantTypeface(typeface2, str);
+        typefaceCache.cache.put(cacheKey, new TypefaceCache.WeakTypefaceRef(typefaceCache, cacheKey, typefaceCreateVariantTypeface));
+        return typefaceCreateVariantTypeface;
     }
 }

@@ -3,7 +3,6 @@ package androidx.compose.animation.graphics.res;
 import android.animation.TimeInterpolator;
 import androidx.compose.animation.core.Easing;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AnimatorResources_androidKt$$ExternalSyntheticLambda0 implements Easing {
     public final /* synthetic */ TimeInterpolator f$0;

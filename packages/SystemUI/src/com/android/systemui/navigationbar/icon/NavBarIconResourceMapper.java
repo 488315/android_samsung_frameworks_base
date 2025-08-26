@@ -26,7 +26,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarIconResourceMapper {
     public final String TAG;
@@ -127,32 +126,32 @@ public final class NavBarIconResourceMapper {
         boolean z2 = this.themeIcon;
         String str = this.themePostfix;
         String str2 = this.largeScreenPostfix;
-        String str3 = iconResourceInfo.lightRes;
+        String strM = iconResourceInfo.lightRes;
         if (z2) {
-            str3 = StringsKt__StringsJVMKt.replace$default(str3 + str, "_samsung", "");
+            strM = StringsKt__StringsJVMKt.replace$default(strM + str, "_samsung", "");
         } else if (this.coverIcon) {
-            str3 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str3, str2);
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, str2);
         }
         boolean z3 = this.themeIcon;
-        String str4 = iconResourceInfo.darkRes;
+        String strM2 = iconResourceInfo.darkRes;
         if (z3) {
-            str4 = StringsKt__StringsJVMKt.replace$default(str4 + str, "_samsung", "");
+            strM2 = StringsKt__StringsJVMKt.replace$default(strM2 + str, "_samsung", "");
         } else if (this.coverIcon) {
-            str4 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str4, str2);
+            strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, str2);
         }
         String packageName = this.themeIcon ? "android" : this.context.getPackageName();
-        int identifier = this.context.getResources().getIdentifier(str3, "drawable", packageName);
-        int identifier2 = this.context.getResources().getIdentifier(str4, "drawable", packageName);
+        int identifier = this.context.getResources().getIdentifier(strM, "drawable", packageName);
+        int identifier2 = this.context.getResources().getIdentifier(strM2, "drawable", packageName);
         boolean z4 = (true ^ this.themeIcon) & iconResourceInfo.needRtl;
         if (identifier != 0 && identifier2 != 0) {
             return new IconResource(iconResourceInfo.type, this.context.getDrawable(identifier), this.context.getDrawable(identifier2), z4);
         }
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(identifier, "Unable to retrieve resource: lightResName=", str3, "(", ") lightResName=");
-        m888m.append(str4);
-        m888m.append("(");
-        m888m.append(identifier2);
-        m888m.append(")");
-        Log.i(this.TAG, m888m.toString());
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(identifier, "Unable to retrieve resource: lightResName=", strM, "(", ") lightResName=");
+        sbM890m.append(strM2);
+        sbM890m.append("(");
+        sbM890m.append(identifier2);
+        sbM890m.append(")");
+        Log.i(this.TAG, sbM890m.toString());
         IconResourceIdInfo iconResourceIdInfo = (IconResourceIdInfo) this.defaultIconResIdList.get(iconType);
         if (iconResourceIdInfo != null) {
             return new IconResource(iconResourceIdInfo.type, this.context.getDrawable(iconResourceIdInfo.lightResId), this.context.getDrawable(iconResourceIdInfo.darkResId), iconResourceIdInfo.needRtl);
@@ -160,7 +159,6 @@ public final class NavBarIconResourceMapper {
         return null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconResourceIdInfo {
         public final int darkResId;
         public final int lightResId;
@@ -198,7 +196,6 @@ public final class NavBarIconResourceMapper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconResourceInfo {
         public final String darkRes;
         public final String lightRes;

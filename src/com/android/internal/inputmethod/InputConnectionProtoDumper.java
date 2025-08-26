@@ -14,67 +14,67 @@ public final class InputConnectionProtoDumper {
 
     public static byte[] buildGetTextAfterCursorProto(int i, int i2, CharSequence charSequence) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268034L);
+        long jStart = protoOutputStream.start(1146756268034L);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1120986464258L, i2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 
     public static byte[] buildGetTextBeforeCursorProto(int i, int i2, CharSequence charSequence) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268033L);
+        long jStart = protoOutputStream.start(1146756268033L);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1120986464258L, i2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 
     public static byte[] buildGetSelectedTextProto(int i, CharSequence charSequence) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268035L);
+        long jStart = protoOutputStream.start(1146756268035L);
         protoOutputStream.write(1120986464257L, i);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 
     public static byte[] buildGetSurroundingTextProto(int i, int i2, int i3, SurroundingText surroundingText) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268036L);
+        long jStart = protoOutputStream.start(1146756268036L);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1120986464258L, i2);
         protoOutputStream.write(1120986464259L, i3);
         if (surroundingText != null) {
-            long start2 = protoOutputStream.start(1146756268036L);
+            long jStart2 = protoOutputStream.start(1146756268036L);
             protoOutputStream.write(1120986464258L, surroundingText.getSelectionStart());
             protoOutputStream.write(1120986464259L, surroundingText.getSelectionEnd());
             protoOutputStream.write(1120986464260L, surroundingText.getOffset());
-            protoOutputStream.end(start2);
+            protoOutputStream.end(jStart2);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 
     public static byte[] buildGetCursorCapsModeProto(int i, int i2) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268037L);
+        long jStart = protoOutputStream.start(1146756268037L);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1120986464258L, i2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 
     public static byte[] buildGetExtractedTextProto(ExtractedTextRequest extractedTextRequest, int i, ExtractedText extractedText) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-        long start = protoOutputStream.start(1146756268038L);
-        long start2 = protoOutputStream.start(1146756268033L);
+        long jStart = protoOutputStream.start(1146756268038L);
+        long jStart2 = protoOutputStream.start(1146756268033L);
         protoOutputStream.write(1120986464257L, extractedTextRequest.token);
         protoOutputStream.write(1120986464258L, extractedTextRequest.flags);
         protoOutputStream.write(1120986464259L, extractedTextRequest.hintMaxLines);
         protoOutputStream.write(1120986464260L, extractedTextRequest.hintMaxChars);
-        protoOutputStream.end(start2);
+        protoOutputStream.end(jStart2);
         protoOutputStream.write(1120986464258L, i);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return protoOutputStream.getBytes();
     }
 }

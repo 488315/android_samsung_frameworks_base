@@ -143,6 +143,7 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+HDCPTEST=3,7,*", this.cmdType);
         putAtCommands("AT+CPRMTEST=0,0", this.cmdType);
         putAtCommands("AT+FPSENSOR=1,4,2", this.cmdType);
+        putAtCommands("AT+FPSENSOR=1,0,0", this.cmdType);
         putAtCommands("AT+VIBRTEST=0,6", this.cmdType);
         putAtCommands("AT+LIGHTEST=0,5", this.cmdType);
         putAtCommands("AT+LIGHTEST=0,6", this.cmdType);
@@ -193,7 +194,6 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+BARCODEE=0,1,*", this.cmdType);
         putAtCommands("AT+BARCODEE=0,2,0", this.cmdType);
         putAtCommands("AT+CONNTEST=3,0,2,*", this.cmdType);
-        putAtCommands("AT+ARPCHECK=1,0,0", this.cmdType);
         putAtCommands("AT+CHIPIDTT=1,0,1,0", this.cmdType);
         putAtCommands("AT+CHIPIDTT=1,0,1,1", this.cmdType);
         putAtCommands("AT+CHIPIDTT=1,0,0,0", this.cmdType);
@@ -219,7 +219,14 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+PDPBACKU=0,0,0", this.cmdType);
         putAtCommands("AT+PDPBACKU=0,1,0", this.cmdType);
         putAtCommands("AT+PDPBACKU=1,0,0", this.cmdType);
-        putAtCommands("AT+ISOSECHW=*", this.cmdType);
+        putAtCommands("AT+ISOSECHW=0,0,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=0,1,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=1,0,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=1,1,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=0,2,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=0,2,1", this.cmdType);
+        putAtCommands("AT+ISOSECHW=1,2,0", this.cmdType);
+        putAtCommands("AT+ISOSECHW=0,3,*", this.cmdType);
         putAtCommands("AT+NCAMTEST=0,0,6,*", this.cmdType);
         putAtCommands("AT+SWIZSKIP=0,0", this.cmdType);
         putAtCommands("AT+SWIZSKIP=0,1", this.cmdType);
@@ -391,6 +398,10 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+SPKSTEST=0,5,5", this.cmdType);
         putAtCommands("AT+SPKSTEST=0,5,6", this.cmdType);
         putAtCommands("AT+SPKSTEST=0,5,7", this.cmdType);
+        putAtCommands("AT+SPKSTEST=3,3,9", this.cmdType);
+        putAtCommands("AT+SPKSTEST=3,3,10", this.cmdType);
+        putAtCommands("AT+SPKSTEST=3,3,11", this.cmdType);
+        putAtCommands("AT+SPKSTEST=3,3,12", this.cmdType);
         putAtCommands("AT+FACMINFO=3,*", this.cmdType);
         putAtCommands("AT+FACMINFO=8,*", this.cmdType);
         putAtCommands("AT+CHIPIDTT=1,0,2,4", this.cmdType);
@@ -398,6 +409,10 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+USBMODEC=1,0", this.cmdType);
         putAtCommands("AT+USBMODEC=2,2", this.cmdType);
         putAtCommands("AT+TSPPTEST=0,6,7", this.cmdType);
+        putAtCommands("AT+BAROMETE=0,1,0", this.cmdType);
+        putAtCommands("AT+BAROMETE=1,2,0", this.cmdType);
+        putAtCommands("AT+BAROMETE=0,0,0", this.cmdType);
+        putAtCommands("AT+CHARGEIC=0,0,2,2", this.cmdType);
         putAtCommands("AT+MSLSECUR=0,*", this.cmdType);
         putAtCommands("AT+MSLSECUR=2,*", this.cmdType);
         putAtCommands("AT+MSLSECUR=3,*", this.cmdType);

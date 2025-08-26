@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FragmentHostManager {
     public final InterestingConfigChanges mConfigChanges;
@@ -38,7 +37,6 @@ public class FragmentHostManager {
     public final Handler mHandler = new Handler(Looper.getMainLooper());
     public final HashMap mListeners = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtensionFragmentManager {
         public final ArrayMap mExtensionLookup = new ArrayMap();
 
@@ -51,11 +49,11 @@ public class FragmentHostManager {
             if (context2 == null) {
                 return instantiateWithInjections(context, str, bundle);
             }
-            Fragment instantiateWithInjections = instantiateWithInjections(context2, str, bundle);
-            if (instantiateWithInjections instanceof Plugin) {
-                ((Plugin) instantiateWithInjections).onCreate(FragmentHostManager.this.mContext, context2);
+            Fragment fragmentInstantiateWithInjections = instantiateWithInjections(context2, str, bundle);
+            if (fragmentInstantiateWithInjections instanceof Plugin) {
+                ((Plugin) fragmentInstantiateWithInjections).onCreate(FragmentHostManager.this.mContext, context2);
             }
-            return instantiateWithInjections;
+            return fragmentInstantiateWithInjections;
         }
 
         public final Fragment instantiateWithInjections(Context context, String str, Bundle bundle) {
@@ -72,7 +70,6 @@ public class FragmentHostManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         FragmentHostManager create(View view);
     }
@@ -97,18 +94,18 @@ public class FragmentHostManager {
             this.mListeners.put(str, arrayList);
         }
         arrayList.add(fragmentListener);
-        Fragment findFragmentByTag = this.mFragments.getFragmentManager().findFragmentByTag(str);
-        if (findFragmentByTag == null || findFragmentByTag.getView() == null) {
+        Fragment fragmentFindFragmentByTag = this.mFragments.getFragmentManager().findFragmentByTag(str);
+        if (fragmentFindFragmentByTag == null || fragmentFindFragmentByTag.getView() == null) {
             return;
         }
-        fragmentListener.onFragmentViewCreated(findFragmentByTag);
+        fragmentListener.onFragmentViewCreated(fragmentFindFragmentByTag);
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.fragments.FragmentHostManager$1] */
     public final void createFragmentHost(Parcelable parcelable) {
-        FragmentController createController = FragmentController.createController(new HostCallbacks());
-        this.mFragments = createController;
-        createController.attachHost(null);
+        FragmentController fragmentControllerCreateController = FragmentController.createController(new HostCallbacks());
+        this.mFragments = fragmentControllerCreateController;
+        fragmentControllerCreateController.attachHost(null);
         this.mLifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() { // from class: com.android.systemui.fragments.FragmentHostManager.1
             @Override // android.app.FragmentManager.FragmentLifecycleCallbacks
             public final void onFragmentDestroyed(FragmentManager fragmentManager, Fragment fragment) {
@@ -148,21 +145,20 @@ public class FragmentHostManager {
 
     public final void reloadFragments() {
         Trace.beginSection("FrargmentHostManager#reloadFragments");
-        Parcelable parcelable = null;
+        Parcelable parcelableSaveAllState = null;
         try {
             this.mFragments.dispatchPause();
-            parcelable = this.mFragments.saveAllState();
+            parcelableSaveAllState = this.mFragments.saveAllState();
             this.mFragments.dispatchStop();
             this.mFragments.dispatchDestroy();
             this.mFragments.getFragmentManager().unregisterFragmentLifecycleCallbacks(this.mLifecycleCallbacks);
         } catch (IllegalStateException unused) {
             Log.e("FragmentHostManager", "Failed to destroy fragment host. This is expected to happen only in tests when displays are added and removed quickly");
         }
-        createFragmentHost(parcelable);
+        createFragmentHost(parcelableSaveAllState);
         Trace.endSection();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FragmentListener {
         void onFragmentViewCreated(Fragment fragment);
 
@@ -170,7 +166,6 @@ public class FragmentHostManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HostCallbacks extends FragmentHostCallback {
         public HostCallbacks() {
             super(FragmentHostManager.this.mContext, FragmentHostManager.this.mHandler, 0);

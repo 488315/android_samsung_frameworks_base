@@ -5,7 +5,6 @@ import androidx.compose.ui.modifier.ModifierLocalReadScope;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ConsumedInsetsModifier implements ModifierLocalConsumer {
     public final Function1 block;
@@ -33,6 +32,6 @@ final class ConsumedInsetsModifier implements ModifierLocalConsumer {
             return;
         }
         this.oldWindowInsets = windowInsets;
-        this.block.mo779invoke(windowInsets);
+        this.block.mo781invoke(windowInsets);
     }
 }

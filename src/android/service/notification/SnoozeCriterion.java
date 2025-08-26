@@ -114,10 +114,10 @@ public final class SnoozeCriterion implements Parcelable {
 
     public int hashCode() {
         String str = this.mId;
-        int hashCode = (str != null ? str.hashCode() : 0) * 31;
+        int iHashCode = (str != null ? str.hashCode() : 0) * 31;
         CharSequence charSequence = this.mExplanation;
-        int hashCode2 = (hashCode + (charSequence != null ? charSequence.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (charSequence != null ? charSequence.hashCode() : 0)) * 31;
         CharSequence charSequence2 = this.mConfirmation;
-        return hashCode2 + (charSequence2 != null ? charSequence2.hashCode() : 0);
+        return iHashCode2 + (charSequence2 != null ? charSequence2.hashCode() : 0);
     }
 }

@@ -10,7 +10,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateObserver;
 import com.android.systemui.R;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SnapshotViewBindingKt {
     public static final SnapshotViewBindingRoot access$getBindingRoot(View view) {
@@ -29,7 +28,7 @@ public abstract class SnapshotViewBindingKt {
         view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.systemui.lifecycle.SnapshotViewBindingKt$bindingRoot$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view2) {
-                SnapshotStateObserver snapshotStateObserver = SnapshotViewBindingRoot.this.observer;
+                SnapshotStateObserver snapshotStateObserver = snapshotViewBindingRoot2.observer;
                 snapshotStateObserver.getClass();
                 Snapshot.Companion companion = Snapshot.Companion;
                 Function2 function2 = snapshotStateObserver.applyObserver;
@@ -39,7 +38,7 @@ public abstract class SnapshotViewBindingKt {
 
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view2) {
-                SnapshotViewBindingRoot snapshotViewBindingRoot3 = SnapshotViewBindingRoot.this;
+                SnapshotViewBindingRoot snapshotViewBindingRoot3 = snapshotViewBindingRoot2;
                 Snapshot$Companion$$ExternalSyntheticLambda0 snapshot$Companion$$ExternalSyntheticLambda0 = snapshotViewBindingRoot3.observer.applyUnsubscribe;
                 if (snapshot$Companion$$ExternalSyntheticLambda0 != null) {
                     snapshot$Companion$$ExternalSyntheticLambda0.dispose();

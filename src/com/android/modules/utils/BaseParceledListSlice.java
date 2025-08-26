@@ -1,5 +1,6 @@
 package com.android.modules.utils;
 
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -27,68 +28,68 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
     }
 
     BaseParceledListSlice(Parcel parcel, ClassLoader classLoader) {
-        int readInt = parcel.readInt();
-        this.mList = new ArrayList(readInt);
+        int i = parcel.readInt();
+        this.mList = new ArrayList(i);
         if (DEBUG) {
-            Log.d(TAG, "Retrieving " + readInt + " items");
+            Log.d(TAG, "Retrieving " + i + " items");
         }
-        if (readInt <= 0) {
+        if (i <= 0) {
             return;
         }
-        Parcelable.Creator<?> readParcelableCreator = readParcelableCreator(parcel, classLoader);
+        Parcelable.Creator<?> parcelableCreator = readParcelableCreator(parcel, classLoader);
         Class<?> cls = null;
-        int i = 0;
-        while (i < readInt && parcel.readInt() != 0) {
-            T readCreator = readCreator(readParcelableCreator, parcel, classLoader);
+        int i2 = 0;
+        while (i2 < i && parcel.readInt() != 0) {
+            T creator = readCreator(parcelableCreator, parcel, classLoader);
             if (cls == null) {
-                cls = readCreator.getClass();
+                cls = creator.getClass();
             } else {
-                verifySameType(cls, readCreator.getClass());
+                verifySameType(cls, creator.getClass());
             }
-            this.mList.add(readCreator);
+            this.mList.add(creator);
             if (DEBUG) {
                 String str = TAG;
                 StringBuilder sb = new StringBuilder("Read inline #");
-                sb.append(i);
+                sb.append(i2);
                 sb.append(": ");
                 List<T> list = this.mList;
                 sb.append(list.get(list.size() - 1));
                 Log.d(str, sb.toString());
             }
-            i++;
+            i2++;
         }
-        if (i >= readInt) {
+        if (i2 >= i) {
             return;
         }
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        while (i < readInt) {
+        IBinder strongBinder = parcel.readStrongBinder();
+        while (i2 < i) {
             if (DEBUG) {
-                Log.d(TAG, "Reading more @" + i + " of " + readInt + ": retriever=" + readStrongBinder);
+                Log.d(TAG, "Reading more @" + i2 + " of " + i + ": retriever=" + strongBinder);
             }
-            Parcel obtain = Parcel.obtain();
-            Parcel obtain2 = Parcel.obtain();
-            obtain.writeInt(i);
+            Parcel parcelObtain = Parcel.obtain();
+            Parcel parcelObtain2 = Parcel.obtain();
+            parcelObtain.writeInt(i2);
             try {
-                readStrongBinder.transact(1, obtain, obtain2, 0);
-                while (i < readInt && obtain2.readInt() != 0) {
-                    T readCreator2 = readCreator(readParcelableCreator, obtain2, classLoader);
-                    verifySameType(cls, readCreator2.getClass());
-                    this.mList.add(readCreator2);
+                strongBinder.transact(1, parcelObtain, parcelObtain2, 0);
+                while (i2 < i && parcelObtain2.readInt() != 0) {
+                    T creator2 = readCreator(parcelableCreator, parcelObtain2, classLoader);
+                    verifySameType(cls, creator2.getClass());
+                    this.mList.add(creator2);
                     if (DEBUG) {
                         String str2 = TAG;
                         StringBuilder sb2 = new StringBuilder("Read extra #");
-                        sb2.append(i);
+                        sb2.append(i2);
                         sb2.append(": ");
                         List<T> list2 = this.mList;
                         sb2.append(list2.get(list2.size() - 1));
                         Log.d(str2, sb2.toString());
                     }
-                    i++;
+                    i2++;
                 }
-                obtain2.recycle();
-                obtain.recycle();
+                parcelObtain2.recycle();
+                parcelObtain.recycle();
             } catch (RemoteException e) {
-                Log.w(TAG, "Failure retrieving array; only received " + i + " of " + readInt, e);
+                Log.w(TAG, "Failure retrieving array; only received " + i2 + " of " + i, e);
                 return;
             }
         }
@@ -121,115 +122,64 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
         this.mInlineCountLimit = i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0088, code lost:
-    
-        r8.writeInt(0);
-        r2 = new com.android.modules.utils.BaseParceledListSlice.AnonymousClass1(r7);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0092, code lost:
-    
-        if (com.android.modules.utils.BaseParceledListSlice.DEBUG == false) goto L20;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0094, code lost:
-    
-        android.util.Log.d(com.android.modules.utils.BaseParceledListSlice.TAG, "Breaking @" + r3 + " of " + r0 + ": retriever=" + r2);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x00b7, code lost:
-    
-        r8.writeStrongBinder(r2);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00ba, code lost:
-    
-        return;
-     */
     @Override // android.os.Parcelable
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void writeToParcel(android.os.Parcel r8, final int r9) {
-        /*
-            r7 = this;
-            java.util.List<T> r0 = r7.mList
-            int r0 = r0.size()
-            r8.writeInt(r0)
-            boolean r1 = com.android.modules.utils.BaseParceledListSlice.DEBUG
-            if (r1 == 0) goto L25
-            java.lang.String r1 = com.android.modules.utils.BaseParceledListSlice.TAG
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            java.lang.String r3 = "Writing "
-            r2.<init>(r3)
-            r2.append(r0)
-            java.lang.String r3 = " items"
-            r2.append(r3)
-            java.lang.String r2 = r2.toString()
-            android.util.Log.d(r1, r2)
-        L25:
-            if (r0 <= 0) goto Lba
-            java.util.List<T> r1 = r7.mList
-            r2 = 0
-            java.lang.Object r1 = r1.get(r2)
-            java.lang.Class r1 = r1.getClass()
-            java.util.List<T> r3 = r7.mList
-            java.lang.Object r3 = r3.get(r2)
-            r7.writeParcelableCreator(r3, r8)
-            r3 = r2
-        L3c:
-            if (r3 >= r0) goto L86
-            int r4 = r7.mInlineCountLimit
-            if (r3 >= r4) goto L86
-            int r4 = r8.dataSize()
-            int r5 = com.android.modules.utils.BaseParceledListSlice.MAX_IPC_SIZE
-            if (r4 >= r5) goto L86
-            r4 = 1
-            r8.writeInt(r4)
-            java.util.List<T> r4 = r7.mList
-            java.lang.Object r4 = r4.get(r3)
-            java.lang.Class r5 = r4.getClass()
-            verifySameType(r1, r5)
-            r7.writeElement(r4, r8, r9)
-            boolean r4 = com.android.modules.utils.BaseParceledListSlice.DEBUG
-            if (r4 == 0) goto L83
-            java.lang.String r4 = com.android.modules.utils.BaseParceledListSlice.TAG
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r6 = "Wrote inline #"
-            r5.<init>(r6)
-            r5.append(r3)
-            java.lang.String r6 = ": "
-            r5.append(r6)
-            java.util.List<T> r6 = r7.mList
-            java.lang.Object r6 = r6.get(r3)
-            r5.append(r6)
-            java.lang.String r5 = r5.toString()
-            android.util.Log.d(r4, r5)
-        L83:
-            int r3 = r3 + 1
-            goto L3c
-        L86:
-            if (r3 >= r0) goto Lba
-            r8.writeInt(r2)
-            com.android.modules.utils.BaseParceledListSlice$1 r2 = new com.android.modules.utils.BaseParceledListSlice$1
-            r2.<init>()
-            boolean r7 = com.android.modules.utils.BaseParceledListSlice.DEBUG
-            if (r7 == 0) goto Lb7
-            java.lang.String r7 = com.android.modules.utils.BaseParceledListSlice.TAG
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r1 = "Breaking @"
-            r9.<init>(r1)
-            r9.append(r3)
-            java.lang.String r1 = " of "
-            r9.append(r1)
-            r9.append(r0)
-            java.lang.String r0 = ": retriever="
-            r9.append(r0)
-            r9.append(r2)
-            java.lang.String r9 = r9.toString()
-            android.util.Log.d(r7, r9)
-        Lb7:
-            r8.writeStrongBinder(r2)
-        Lba:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.modules.utils.BaseParceledListSlice.writeToParcel(android.os.Parcel, int):void");
+    public void writeToParcel(Parcel parcel, final int i) {
+        final int size = this.mList.size();
+        parcel.writeInt(size);
+        if (DEBUG) {
+            Log.d(TAG, "Writing " + size + " items");
+        }
+        if (size > 0) {
+            final Class<?> cls = this.mList.get(0).getClass();
+            writeParcelableCreator(this.mList.get(0), parcel);
+            int i2 = 0;
+            while (i2 < size && i2 < this.mInlineCountLimit && parcel.dataSize() < MAX_IPC_SIZE) {
+                parcel.writeInt(1);
+                T t = this.mList.get(i2);
+                verifySameType(cls, t.getClass());
+                writeElement(t, parcel, i);
+                if (DEBUG) {
+                    Log.d(TAG, "Wrote inline #" + i2 + ": " + this.mList.get(i2));
+                }
+                i2++;
+            }
+            if (i2 < size) {
+                parcel.writeInt(0);
+                Binder binder = new Binder() { // from class: com.android.modules.utils.BaseParceledListSlice.1
+                    /* JADX WARN: Multi-variable type inference failed */
+                    @Override // android.os.Binder
+                    protected boolean onTransact(int i3, Parcel parcel2, Parcel parcel3, int i4) throws RemoteException {
+                        if (i3 != 1) {
+                            return super.onTransact(i3, parcel2, parcel3, i4);
+                        }
+                        int i5 = parcel2.readInt();
+                        if (BaseParceledListSlice.DEBUG) {
+                            Log.d(BaseParceledListSlice.TAG, "Writing more @" + i5 + " of " + size);
+                        }
+                        while (i5 < size && parcel3.dataSize() < BaseParceledListSlice.MAX_IPC_SIZE) {
+                            parcel3.writeInt(1);
+                            Object obj = BaseParceledListSlice.this.mList.get(i5);
+                            BaseParceledListSlice.verifySameType(cls, obj.getClass());
+                            BaseParceledListSlice.this.writeElement(obj, parcel3, i);
+                            if (BaseParceledListSlice.DEBUG) {
+                                Log.d(BaseParceledListSlice.TAG, "Wrote extra #" + i5 + ": " + BaseParceledListSlice.this.mList.get(i5));
+                            }
+                            i5++;
+                        }
+                        if (i5 < size) {
+                            if (BaseParceledListSlice.DEBUG) {
+                                Log.d(BaseParceledListSlice.TAG, "Breaking @" + i5 + " of " + size);
+                            }
+                            parcel3.writeInt(0);
+                        }
+                        return true;
+                    }
+                };
+                if (DEBUG) {
+                    Log.d(TAG, "Breaking @" + i2 + " of " + size + ": retriever=" + binder);
+                }
+                parcel.writeStrongBinder(binder);
+            }
+        }
     }
 }

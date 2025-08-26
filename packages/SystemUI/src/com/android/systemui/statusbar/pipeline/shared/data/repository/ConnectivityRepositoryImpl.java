@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.pipeline.shared.data.repository;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.TransportInfo;
 import android.net.vcn.VcnTransportInfo;
@@ -14,13 +15,16 @@ import com.android.systemui.statusbar.pipeline.shared.ConnectivityInputLogger;
 import com.android.systemui.statusbar.pipeline.shared.data.model.ConnectivitySlot;
 import com.android.systemui.statusbar.pipeline.shared.data.model.ConnectivitySlots;
 import com.android.systemui.statusbar.pipeline.shared.data.model.DefaultConnectionModel;
+import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
@@ -38,7 +42,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConnectivityRepositoryImpl implements ConnectivityRepository, Dumpable {
     public static final Companion Companion = new Companion(null);
@@ -51,7 +54,6 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
     public final ReadonlyStateFlow forceHiddenSlots;
     public final ReadonlyStateFlow vcnSubId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -107,16 +109,15 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
         this.connectivityManager = connectivityManager;
         this.connectivitySlots = connectivitySlots;
         dumpManager.registerNormalDumpable("ConnectivityRepository", this);
-        Set access$toSlotSet = Companion.access$toSlotSet(Companion, Arrays.asList(context.getResources().getStringArray(DEFAULT_HIDDEN_ICONS_RESOURCE)), connectivitySlots);
-        this.defaultHiddenIcons = access$toSlotSet;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ConnectivityRepositoryImpl$forceHiddenSlots$1(tunerService, connectivityInputLogger, this, null));
+        Set setAccess$toSlotSet = Companion.access$toSlotSet(Companion, Arrays.asList(context.getResources().getStringArray(DEFAULT_HIDDEN_ICONS_RESOURCE)), connectivitySlots);
+        this.defaultHiddenIcons = setAccess$toSlotSet;
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ConnectivityRepositoryImpl$forceHiddenSlots$1(tunerService, connectivityInputLogger, this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        this.forceHiddenSlots = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), access$toSlotSet);
-        final ReadonlySharedFlow shareIn = FlowKt.shareIn(FlowConflatedKt.conflatedCallbackFlow(new ConnectivityRepositoryImpl$defaultNetworkCapabilities$1(this, connectivityInputLogger, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.defaultNetworkCapabilities = shareIn;
+        this.forceHiddenSlots = FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), setAccess$toSlotSet);
+        final ReadonlySharedFlow readonlySharedFlowShareIn = FlowKt.shareIn(FlowConflatedKt.conflatedCallbackFlow(new ConnectivityRepositoryImpl$defaultNetworkCapabilities$1(this, connectivityInputLogger, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.defaultNetworkCapabilities = readonlySharedFlowShareIn;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -145,81 +146,57 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
                     this.this$0 = connectivityRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L52
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.net.NetworkCapabilities r5 = (android.net.NetworkCapabilities) r5
-                        r6 = 0
-                        if (r5 == 0) goto L47
-                        com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl r2 = r4.this$0
-                        android.net.ConnectivityManager r2 = r2.connectivityManager
-                        int r5 = android.net.vcn.VcnUtils.getSubIdFromVcnCaps(r2, r5)
-                        r2 = -1
-                        if (r5 == r2) goto L47
-                        java.lang.Integer r6 = new java.lang.Integer
-                        r6.<init>(r5)
-                    L47:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L52
-                        return r1
-                    L52:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    int subIdFromVcnCaps;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        NetworkCapabilities networkCapabilities = (NetworkCapabilities) obj;
+                        Integer num = null;
+                        if (networkCapabilities != null && (subIdFromVcnCaps = VcnUtils.getSubIdFromVcnCaps(this.this$0.connectivityManager, networkCapabilities)) != -1) {
+                            num = new Integer(subIdFromVcnCaps);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlySharedFlowShareIn.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new ConnectivityRepositoryImpl$vcnSubId$2(connectivityInputLogger, null));
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
         this.vcnSubId = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, startedEagerly, null);
         this.defaultConnections = FlowKt.stateIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -248,26 +225,86 @@ public final class ConnectivityRepositoryImpl implements ConnectivityRepository,
                     this.this$0 = connectivityRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r19, kotlin.coroutines.Continuation r20) {
-                    /*
-                        Method dump skipped, instructions count: 249
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    DefaultConnectionModel defaultConnectionModel;
+                    WifiInfo mainWifiInfo;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        NetworkCapabilities networkCapabilities = (NetworkCapabilities) obj;
+                        boolean z = false;
+                        if (networkCapabilities == null) {
+                            defaultConnectionModel = new DefaultConnectionModel(new DefaultConnectionModel.Wifi(false), new DefaultConnectionModel.Mobile(false), new DefaultConnectionModel.CarrierMerged(false), new DefaultConnectionModel.Ethernet(false), new DefaultConnectionModel.BTTether(false), false);
+                        } else {
+                            ConnectivityRepositoryImpl.Companion companion = ConnectivityRepositoryImpl.Companion;
+                            ConnectivityManager connectivityManager = this.this$0.connectivityManager;
+                            companion.getClass();
+                            WifiInfo mainWifiInfo2 = ConnectivityRepositoryImpl.Companion.getMainWifiInfo(networkCapabilities, connectivityManager);
+                            if (mainWifiInfo2 == null) {
+                                networkCapabilities.hasTransport(0);
+                                List underlyingNetworks = networkCapabilities.getUnderlyingNetworks();
+                                if (underlyingNetworks != null) {
+                                    Iterator it = underlyingNetworks.iterator();
+                                    while (it.hasNext()) {
+                                        NetworkCapabilities networkCapabilities2 = connectivityManager.getNetworkCapabilities((Network) it.next());
+                                        if (networkCapabilities2 != null) {
+                                            ConnectivityRepositoryImpl.Companion.getClass();
+                                            mainWifiInfo = ConnectivityRepositoryImpl.Companion.getMainWifiInfo(networkCapabilities2, connectivityManager);
+                                        } else {
+                                            mainWifiInfo = null;
+                                        }
+                                        if (mainWifiInfo != null) {
+                                            mainWifiInfo2 = mainWifiInfo;
+                                            break;
+                                        }
+                                    }
+                                    mainWifiInfo2 = null;
+                                } else {
+                                    mainWifiInfo2 = null;
+                                }
+                            }
+                            boolean z2 = networkCapabilities.hasTransport(1) || mainWifiInfo2 != null;
+                            boolean zHasTransport = networkCapabilities.hasTransport(0);
+                            if (mainWifiInfo2 != null && mainWifiInfo2.isCarrierMerged()) {
+                                z = true;
+                            }
+                            defaultConnectionModel = new DefaultConnectionModel(new DefaultConnectionModel.Wifi(z2), new DefaultConnectionModel.Mobile(zHasTransport), new DefaultConnectionModel.CarrierMerged(z), new DefaultConnectionModel.Ethernet(networkCapabilities.hasTransport(3)), new DefaultConnectionModel.BTTether(networkCapabilities.hasTransport(2)), networkCapabilities.hasCapability(16));
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(defaultConnectionModel, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlySharedFlowShareIn.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new ConnectivityRepositoryImpl$defaultConnections$2(connectivityInputLogger, null)), coroutineScope, startedEagerly, new DefaultConnectionModel(null, null, null, null, null, false, 63, null));
     }

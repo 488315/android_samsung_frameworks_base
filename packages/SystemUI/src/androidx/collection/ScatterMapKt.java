@@ -2,7 +2,6 @@ package androidx.collection;
 
 import androidx.appcompat.widget.AbsActionBarView$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ScatterMapKt {
     public static final long[] EmptyGroup = {-9187201950435737345L, -1};

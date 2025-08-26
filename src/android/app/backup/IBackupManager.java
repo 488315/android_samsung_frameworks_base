@@ -593,9 +593,9 @@ public interface IBackupManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackupManager)) {
-                return (IBackupManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackupManager)) {
+                return (IBackupManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -767,118 +767,118 @@ public interface IBackupManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    dataChangedForUser(readInt, readString);
+                    dataChangedForUser(i3, string);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    dataChanged(readString2);
+                    dataChanged(string2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearBackupDataForUser(readInt2, readString3, readString4);
+                    clearBackupDataForUser(i4, string3, string4);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearBackupData(readString5, readString6);
+                    clearBackupData(string5, string6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    IBackupObserver asInterface = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    IBackupObserver iBackupObserverAsInterface = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    initializeTransportsForUser(readInt3, createStringArray, asInterface);
+                    initializeTransportsForUser(i5, strArrCreateStringArray, iBackupObserverAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    restoreAtInstallForUser(readInt4, readString7, readInt5);
+                    restoreAtInstallForUser(i6, string7, i7);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString8 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    restoreAtInstall(readString8, readInt6);
+                    restoreAtInstall(string8, i8);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i9 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBackupEnabledForUser(readInt7, readBoolean);
+                    setBackupEnabledForUser(i9, z);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt8 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i10 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setFrameworkSchedulingEnabledForUser(readInt8, readBoolean2);
+                    setFrameworkSchedulingEnabledForUser(i10, z2);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBackupEnabled(readBoolean3);
+                    setBackupEnabled(z3);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt9 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAutoRestoreForUser(readInt9, readBoolean4);
+                    setAutoRestoreForUser(i11, z4);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAutoRestore(readBoolean5);
+                    setAutoRestore(z5);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isBackupEnabledForUser = isBackupEnabledForUser(readInt10);
+                    boolean zIsBackupEnabledForUser = isBackupEnabledForUser(i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupEnabledForUser);
+                    parcel2.writeBoolean(zIsBackupEnabledForUser);
                     return true;
                 case 14:
-                    boolean isBackupEnabled = isBackupEnabled();
+                    boolean zIsBackupEnabled = isBackupEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupEnabled);
+                    parcel2.writeBoolean(zIsBackupEnabled);
                     return true;
                 case 15:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean backupPassword = setBackupPassword(readString9, readString10);
+                    boolean backupPassword = setBackupPassword(string9, string10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(backupPassword);
                     return true;
                 case 16:
-                    boolean hasBackupPassword = hasBackupPassword();
+                    boolean zHasBackupPassword = hasBackupPassword();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasBackupPassword);
+                    parcel2.writeBoolean(zHasBackupPassword);
                     return true;
                 case 17:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    backupNowForUser(readInt11);
+                    backupNowForUser(i13);
                     parcel2.writeNoException();
                     return true;
                 case 18:
@@ -886,82 +886,82 @@ public interface IBackupManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
-                    boolean readBoolean7 = parcel.readBoolean();
-                    boolean readBoolean8 = parcel.readBoolean();
-                    boolean readBoolean9 = parcel.readBoolean();
-                    boolean readBoolean10 = parcel.readBoolean();
-                    boolean readBoolean11 = parcel.readBoolean();
-                    boolean readBoolean12 = parcel.readBoolean();
-                    boolean readBoolean13 = parcel.readBoolean();
-                    String[] createStringArray2 = parcel.createStringArray();
+                    boolean z6 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    adbBackup(readInt12, parcelFileDescriptor, readBoolean6, readBoolean7, readBoolean8, readBoolean9, readBoolean10, readBoolean11, readBoolean12, readBoolean13, createStringArray2);
+                    adbBackup(i14, parcelFileDescriptor, z6, z7, z8, z9, z10, z11, z12, z13, strArrCreateStringArray2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt13 = parcel.readInt();
-                    String[] createStringArray3 = parcel.createStringArray();
+                    int i15 = parcel.readInt();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    fullTransportBackupForUser(readInt13, createStringArray3);
+                    fullTransportBackupForUser(i15, strArrCreateStringArray3);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt14 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    boolean readBoolean14 = parcel.readBoolean();
-                    String readString12 = parcel.readString();
-                    IMemorySaverBackupRestoreObserver asInterface2 = IMemorySaverBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i16 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    boolean z14 = parcel.readBoolean();
+                    String string12 = parcel.readString();
+                    IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserverAsInterface = IMemorySaverBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    fullRestoreCustomized(readInt14, readString11, readBoolean14, readString12, asInterface2);
+                    fullRestoreCustomized(i16, string11, z14, string12, iMemorySaverBackupRestoreObserverAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     parcel.enforceNoDataAvail();
-                    adbRestore(readInt15, parcelFileDescriptor2);
+                    adbRestore(i17, parcelFileDescriptor2);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
-                    boolean readBoolean15 = parcel.readBoolean();
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    IFullBackupRestoreObserver asInterface3 = IFullBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    boolean z15 = parcel.readBoolean();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    IFullBackupRestoreObserver iFullBackupRestoreObserverAsInterface = IFullBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    acknowledgeFullBackupOrRestoreForUser(readInt16, readInt17, readBoolean15, readString13, readString14, asInterface3);
+                    acknowledgeFullBackupOrRestoreForUser(i18, i19, z15, string13, string14, iFullBackupRestoreObserverAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt18 = parcel.readInt();
-                    boolean readBoolean16 = parcel.readBoolean();
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    IFullBackupRestoreObserver asInterface4 = IFullBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
+                    boolean z16 = parcel.readBoolean();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    IFullBackupRestoreObserver iFullBackupRestoreObserverAsInterface2 = IFullBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    acknowledgeFullBackupOrRestore(readInt18, readBoolean16, readString15, readString16, asInterface4);
+                    acknowledgeFullBackupOrRestore(i20, z16, string15, string16, iFullBackupRestoreObserverAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateTransportAttributesForUser(readInt19, componentName, readString17, intent, readString18, intent2, charSequence);
+                    updateTransportAttributesForUser(i21, componentName, string17, intent, string18, intent2, charSequence);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String currentTransportForUser = getCurrentTransportForUser(readInt20);
+                    String currentTransportForUser = getCurrentTransportForUser(i22);
                     parcel2.writeNoException();
                     parcel2.writeString(currentTransportForUser);
                     return true;
@@ -971,30 +971,30 @@ public interface IBackupManager extends IInterface {
                     parcel2.writeString(currentTransport);
                     return true;
                 case 28:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName currentTransportComponentForUser = getCurrentTransportComponentForUser(readInt21);
+                    ComponentName currentTransportComponentForUser = getCurrentTransportComponentForUser(i23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentTransportComponentForUser, 1);
                     return true;
                 case 29:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] listAllTransportsForUser = listAllTransportsForUser(readInt22);
+                    String[] strArrListAllTransportsForUser = listAllTransportsForUser(i24);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(listAllTransportsForUser);
+                    parcel2.writeStringArray(strArrListAllTransportsForUser);
                     return true;
                 case 30:
-                    String[] listAllTransports = listAllTransports();
+                    String[] strArrListAllTransports = listAllTransports();
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(listAllTransports);
+                    parcel2.writeStringArray(strArrListAllTransports);
                     return true;
                 case 31:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName[] listAllTransportComponentsForUser = listAllTransportComponentsForUser(readInt23);
+                    ComponentName[] componentNameArrListAllTransportComponentsForUser = listAllTransportComponentsForUser(i25);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(listAllTransportComponentsForUser, 1);
+                    parcel2.writeTypedArray(componentNameArrListAllTransportComponentsForUser, 1);
                     return true;
                 case 32:
                     String[] transportWhitelist = getTransportWhitelist();
@@ -1002,78 +1002,78 @@ public interface IBackupManager extends IInterface {
                     parcel2.writeStringArray(transportWhitelist);
                     return true;
                 case 33:
-                    int readInt24 = parcel.readInt();
-                    String readString19 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String selectBackupTransportForUser = selectBackupTransportForUser(readInt24, readString19);
+                    String strSelectBackupTransportForUser = selectBackupTransportForUser(i26, string19);
                     parcel2.writeNoException();
-                    parcel2.writeString(selectBackupTransportForUser);
+                    parcel2.writeString(strSelectBackupTransportForUser);
                     return true;
                 case 34:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String selectBackupTransport = selectBackupTransport(readString20);
+                    String strSelectBackupTransport = selectBackupTransport(string20);
                     parcel2.writeNoException();
-                    parcel2.writeString(selectBackupTransport);
+                    parcel2.writeString(strSelectBackupTransport);
                     return true;
                 case 35:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ISelectBackupTransportCallback asInterface5 = ISelectBackupTransportCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISelectBackupTransportCallback iSelectBackupTransportCallbackAsInterface = ISelectBackupTransportCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    selectBackupTransportAsyncForUser(readInt25, componentName2, asInterface5);
+                    selectBackupTransportAsyncForUser(i27, componentName2, iSelectBackupTransportCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    int readInt26 = parcel.readInt();
-                    String readString21 = parcel.readString();
+                    int i28 = parcel.readInt();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Intent configurationIntentForUser = getConfigurationIntentForUser(readInt26, readString21);
+                    Intent configurationIntentForUser = getConfigurationIntentForUser(i28, string21);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(configurationIntentForUser, 1);
                     return true;
                 case 37:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Intent configurationIntent = getConfigurationIntent(readString22);
+                    Intent configurationIntent = getConfigurationIntent(string22);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(configurationIntent, 1);
                     return true;
                 case 38:
-                    int readInt27 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    int i29 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String destinationStringForUser = getDestinationStringForUser(readInt27, readString23);
+                    String destinationStringForUser = getDestinationStringForUser(i29, string23);
                     parcel2.writeNoException();
                     parcel2.writeString(destinationStringForUser);
                     return true;
                 case 39:
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String destinationString = getDestinationString(readString24);
+                    String destinationString = getDestinationString(string24);
                     parcel2.writeNoException();
                     parcel2.writeString(destinationString);
                     return true;
                 case 40:
-                    int readInt28 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    int i30 = parcel.readInt();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Intent dataManagementIntentForUser = getDataManagementIntentForUser(readInt28, readString25);
+                    Intent dataManagementIntentForUser = getDataManagementIntentForUser(i30, string25);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(dataManagementIntentForUser, 1);
                     return true;
                 case 41:
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Intent dataManagementIntent = getDataManagementIntent(readString26);
+                    Intent dataManagementIntent = getDataManagementIntent(string26);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(dataManagementIntent, 1);
                     return true;
                 case 42:
-                    int readInt29 = parcel.readInt();
-                    String readString27 = parcel.readString();
+                    int i31 = parcel.readInt();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CharSequence dataManagementLabelForUser = getDataManagementLabelForUser(readInt29, readString27);
+                    CharSequence dataManagementLabelForUser = getDataManagementLabelForUser(i31, string27);
                     parcel2.writeNoException();
                     if (dataManagementLabelForUser != null) {
                         parcel2.writeInt(1);
@@ -1083,99 +1083,99 @@ public interface IBackupManager extends IInterface {
                     parcel2.writeInt(0);
                     return true;
                 case 43:
-                    int readInt30 = parcel.readInt();
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
+                    int i32 = parcel.readInt();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IRestoreSession beginRestoreSessionForUser = beginRestoreSessionForUser(readInt30, readString28, readString29);
+                    IRestoreSession iRestoreSessionBeginRestoreSessionForUser = beginRestoreSessionForUser(i32, string28, string29);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(beginRestoreSessionForUser);
+                    parcel2.writeStrongInterface(iRestoreSessionBeginRestoreSessionForUser);
                     return true;
                 case 44:
-                    int readInt31 = parcel.readInt();
-                    int readInt32 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i33 = parcel.readInt();
+                    int i34 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    opCompleteForUser(readInt31, readInt32, readLong);
+                    opCompleteForUser(i33, i34, j);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    int readInt33 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
+                    int i35 = parcel.readInt();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    opComplete(readInt33, readLong2);
+                    opComplete(i35, j2);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt34 = parcel.readInt();
-                    boolean readBoolean17 = parcel.readBoolean();
+                    int i36 = parcel.readInt();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBackupServiceActive(readInt34, readBoolean17);
+                    setBackupServiceActive(i36, z17);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isBackupServiceActive = isBackupServiceActive(readInt35);
+                    boolean zIsBackupServiceActive = isBackupServiceActive(i37);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupServiceActive);
+                    parcel2.writeBoolean(zIsBackupServiceActive);
                     return true;
                 case 48:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isUserReadyForBackup = isUserReadyForBackup(readInt36);
+                    boolean zIsUserReadyForBackup = isUserReadyForBackup(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUserReadyForBackup);
+                    parcel2.writeBoolean(zIsUserReadyForBackup);
                     return true;
                 case 49:
-                    int readInt37 = parcel.readInt();
-                    String readString30 = parcel.readString();
+                    int i39 = parcel.readInt();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long availableRestoreTokenForUser = getAvailableRestoreTokenForUser(readInt37, readString30);
+                    long availableRestoreTokenForUser = getAvailableRestoreTokenForUser(i39, string30);
                     parcel2.writeNoException();
                     parcel2.writeLong(availableRestoreTokenForUser);
                     return true;
                 case 50:
-                    int readInt38 = parcel.readInt();
-                    String readString31 = parcel.readString();
+                    int i40 = parcel.readInt();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAppEligibleForBackupForUser = isAppEligibleForBackupForUser(readInt38, readString31);
+                    boolean zIsAppEligibleForBackupForUser = isAppEligibleForBackupForUser(i40, string31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAppEligibleForBackupForUser);
+                    parcel2.writeBoolean(zIsAppEligibleForBackupForUser);
                     return true;
                 case 51:
-                    int readInt39 = parcel.readInt();
-                    String[] createStringArray4 = parcel.createStringArray();
+                    int i41 = parcel.readInt();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    String[] filterAppsEligibleForBackupForUser = filterAppsEligibleForBackupForUser(readInt39, createStringArray4);
+                    String[] strArrFilterAppsEligibleForBackupForUser = filterAppsEligibleForBackupForUser(i41, strArrCreateStringArray4);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(filterAppsEligibleForBackupForUser);
+                    parcel2.writeStringArray(strArrFilterAppsEligibleForBackupForUser);
                     return true;
                 case 52:
-                    int readInt40 = parcel.readInt();
-                    String[] createStringArray5 = parcel.createStringArray();
-                    IBackupObserver asInterface6 = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
-                    IBackupManagerMonitor asInterface7 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt41 = parcel.readInt();
+                    int i42 = parcel.readInt();
+                    String[] strArrCreateStringArray5 = parcel.createStringArray();
+                    IBackupObserver iBackupObserverAsInterface2 = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
+                    IBackupManagerMonitor iBackupManagerMonitorAsInterface = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int requestBackupForUser = requestBackupForUser(readInt40, createStringArray5, asInterface6, asInterface7, readInt41);
+                    int iRequestBackupForUser = requestBackupForUser(i42, strArrCreateStringArray5, iBackupObserverAsInterface2, iBackupManagerMonitorAsInterface, i43);
                     parcel2.writeNoException();
-                    parcel2.writeInt(requestBackupForUser);
+                    parcel2.writeInt(iRequestBackupForUser);
                     return true;
                 case 53:
-                    String[] createStringArray6 = parcel.createStringArray();
-                    IBackupObserver asInterface8 = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
-                    IBackupManagerMonitor asInterface9 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt42 = parcel.readInt();
+                    String[] strArrCreateStringArray6 = parcel.createStringArray();
+                    IBackupObserver iBackupObserverAsInterface3 = IBackupObserver.Stub.asInterface(parcel.readStrongBinder());
+                    IBackupManagerMonitor iBackupManagerMonitorAsInterface2 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int requestBackup = requestBackup(createStringArray6, asInterface8, asInterface9, readInt42);
+                    int iRequestBackup = requestBackup(strArrCreateStringArray6, iBackupObserverAsInterface3, iBackupManagerMonitorAsInterface2, i44);
                     parcel2.writeNoException();
-                    parcel2.writeInt(requestBackup);
+                    parcel2.writeInt(iRequestBackup);
                     return true;
                 case 54:
-                    int readInt43 = parcel.readInt();
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    cancelBackupsForUser(readInt43);
+                    cancelBackupsForUser(i45);
                     parcel2.writeNoException();
                     return true;
                 case 55:
@@ -1183,131 +1183,131 @@ public interface IBackupManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 56:
-                    int readInt44 = parcel.readInt();
-                    String readString32 = parcel.readString();
-                    boolean readBoolean18 = parcel.readBoolean();
-                    boolean readBoolean19 = parcel.readBoolean();
-                    boolean readBoolean20 = parcel.readBoolean();
-                    boolean readBoolean21 = parcel.readBoolean();
-                    boolean readBoolean22 = parcel.readBoolean();
-                    boolean readBoolean23 = parcel.readBoolean();
-                    boolean readBoolean24 = parcel.readBoolean();
-                    String[] createStringArray7 = parcel.createStringArray();
-                    boolean readBoolean25 = parcel.readBoolean();
-                    String readString33 = parcel.readString();
-                    boolean readBoolean26 = parcel.readBoolean();
-                    IMemorySaverBackupRestoreObserver asInterface10 = IMemorySaverBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i46 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    boolean z18 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
+                    boolean z21 = parcel.readBoolean();
+                    boolean z22 = parcel.readBoolean();
+                    boolean z23 = parcel.readBoolean();
+                    boolean z24 = parcel.readBoolean();
+                    String[] strArrCreateStringArray7 = parcel.createStringArray();
+                    boolean z25 = parcel.readBoolean();
+                    String string33 = parcel.readString();
+                    boolean z26 = parcel.readBoolean();
+                    IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserverAsInterface2 = IMemorySaverBackupRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    fullBackupCustomized(readInt44, readString32, readBoolean18, readBoolean19, readBoolean20, readBoolean21, readBoolean22, readBoolean23, readBoolean24, createStringArray7, readBoolean25, readString33, readBoolean26, asInterface10);
+                    fullBackupCustomized(i46, string32, z18, z19, z20, z21, z22, z23, z24, strArrCreateStringArray7, z25, string33, z26, iMemorySaverBackupRestoreObserverAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 57:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    UserHandle userForAncestralSerialNumber = getUserForAncestralSerialNumber(readLong3);
+                    UserHandle userForAncestralSerialNumber = getUserForAncestralSerialNumber(j3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(userForAncestralSerialNumber, 1);
                     return true;
                 case 58:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setAncestralSerialNumber(readLong4);
+                    setAncestralSerialNumber(j4);
                     parcel2.writeNoException();
                     return true;
                 case 59:
-                    boolean isSubUserSupported = isSubUserSupported();
+                    boolean zIsSubUserSupported = isSubUserSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSubUserSupported);
+                    parcel2.writeBoolean(zIsSubUserSupported);
                     return true;
                 case 60:
                     ParcelFileDescriptor parcelFileDescriptor3 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    String[] createStringArray8 = parcel.createStringArray();
-                    String readString34 = parcel.readString();
-                    int readInt45 = parcel.readInt();
+                    String[] strArrCreateStringArray8 = parcel.createStringArray();
+                    String string34 = parcel.readString();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Map semBackupPackage = semBackupPackage(parcelFileDescriptor3, createStringArray8, readString34, readInt45);
+                    Map mapSemBackupPackage = semBackupPackage(parcelFileDescriptor3, strArrCreateStringArray8, string34, i47);
                     parcel2.writeNoException();
-                    parcel2.writeMap(semBackupPackage);
+                    parcel2.writeMap(mapSemBackupPackage);
                     return true;
                 case 61:
                     ParcelFileDescriptor parcelFileDescriptor4 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    String[] createStringArray9 = parcel.createStringArray();
-                    String readString35 = parcel.readString();
-                    int readInt46 = parcel.readInt();
-                    String[] createStringArray10 = parcel.createStringArray();
+                    String[] strArrCreateStringArray9 = parcel.createStringArray();
+                    String string35 = parcel.readString();
+                    int i48 = parcel.readInt();
+                    String[] strArrCreateStringArray10 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Map semBackupPackagePath = semBackupPackagePath(parcelFileDescriptor4, createStringArray9, readString35, readInt46, createStringArray10);
+                    Map mapSemBackupPackagePath = semBackupPackagePath(parcelFileDescriptor4, strArrCreateStringArray9, string35, i48, strArrCreateStringArray10);
                     parcel2.writeNoException();
-                    parcel2.writeMap(semBackupPackagePath);
+                    parcel2.writeMap(mapSemBackupPackagePath);
                     return true;
                 case 62:
                     ParcelFileDescriptor parcelFileDescriptor5 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    String readString36 = parcel.readString();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    semRestorePackage(parcelFileDescriptor5, readString36);
+                    semRestorePackage(parcelFileDescriptor5, string36);
                     parcel2.writeNoException();
                     return true;
                 case 63:
-                    boolean semIsBackupEnabled = semIsBackupEnabled();
+                    boolean zSemIsBackupEnabled = semIsBackupEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semIsBackupEnabled);
+                    parcel2.writeBoolean(zSemIsBackupEnabled);
                     return true;
                 case 64:
-                    boolean readBoolean27 = parcel.readBoolean();
+                    boolean z27 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semSetBackupEnabled(readBoolean27);
+                    semSetBackupEnabled(z27);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    boolean readBoolean28 = parcel.readBoolean();
+                    boolean z28 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semSetAutoRestoreEnabled(readBoolean28);
+                    semSetAutoRestoreEnabled(z28);
                     parcel2.writeNoException();
                     return true;
                 case 66:
-                    boolean semCancelBackupAndRestore = semCancelBackupAndRestore();
+                    boolean zSemCancelBackupAndRestore = semCancelBackupAndRestore();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semCancelBackupAndRestore);
+                    parcel2.writeBoolean(zSemCancelBackupAndRestore);
                     return true;
                 case 67:
-                    int readInt47 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean semSetTimeoutBackupAndRestore = semSetTimeoutBackupAndRestore(readInt47);
+                    boolean zSemSetTimeoutBackupAndRestore = semSetTimeoutBackupAndRestore(i49);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semSetTimeoutBackupAndRestore);
+                    parcel2.writeBoolean(zSemSetTimeoutBackupAndRestore);
                     return true;
                 case 68:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean semSetTransportFlagsForAdbBackup = semSetTransportFlagsForAdbBackup(readInt48);
+                    boolean zSemSetTransportFlagsForAdbBackup = semSetTransportFlagsForAdbBackup(i50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semSetTransportFlagsForAdbBackup);
+                    parcel2.writeBoolean(zSemSetTransportFlagsForAdbBackup);
                     return true;
                 case 69:
-                    boolean readBoolean29 = parcel.readBoolean();
+                    boolean z29 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean semDisableDataExtractionRule = semDisableDataExtractionRule(readBoolean29);
+                    boolean zSemDisableDataExtractionRule = semDisableDataExtractionRule(z29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semDisableDataExtractionRule);
+                    parcel2.writeBoolean(zSemDisableDataExtractionRule);
                     return true;
                 case 70:
-                    boolean readBoolean30 = parcel.readBoolean();
+                    boolean z30 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semDisableRestrictedModeForAdbBackUp(readBoolean30);
+                    semDisableRestrictedModeForAdbBackUp(z30);
                     parcel2.writeNoException();
                     return true;
                 case 71:
-                    String readString37 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string37 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    excludeKeysFromRestore(readString37, createStringArrayList);
+                    excludeKeysFromRestore(string37, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 72:
-                    String readString38 = parcel.readString();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(BackupRestoreEventLogger.DataTypeResult.CREATOR);
+                    String string38 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(BackupRestoreEventLogger.DataTypeResult.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reportDelayedRestoreResult(readString38, createTypedArrayList);
+                    reportDelayedRestoreResult(string38, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1333,1203 +1333,1203 @@ public interface IBackupManager extends IInterface {
 
             @Override // android.app.backup.IBackupManager
             public void dataChangedForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void dataChanged(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void clearBackupDataForUser(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void clearBackupData(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void initializeTransportsForUser(int i, String[] strArr, IBackupObserver iBackupObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iBackupObserver);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iBackupObserver);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void restoreAtInstallForUser(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void restoreAtInstall(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setBackupEnabledForUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setFrameworkSchedulingEnabledForUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setBackupEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setAutoRestoreForUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setAutoRestore(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isBackupEnabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isBackupEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean setBackupPassword(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean hasBackupPassword() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void backupNowForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void backupNow() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void adbBackup(int i, ParcelFileDescriptor parcelFileDescriptor, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeBoolean(z4);
-                    obtain.writeBoolean(z5);
-                    obtain.writeBoolean(z6);
-                    obtain.writeBoolean(z7);
-                    obtain.writeBoolean(z8);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeBoolean(z5);
+                    parcelObtain.writeBoolean(z6);
+                    parcelObtain.writeBoolean(z7);
+                    parcelObtain.writeBoolean(z8);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void fullTransportBackupForUser(int i, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void fullRestoreCustomized(int i, String str, boolean z, String str2, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iMemorySaverBackupRestoreObserver);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iMemorySaverBackupRestoreObserver);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void adbRestore(int i, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void acknowledgeFullBackupOrRestoreForUser(int i, int i2, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iFullBackupRestoreObserver);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iFullBackupRestoreObserver);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void acknowledgeFullBackupOrRestore(int i, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iFullBackupRestoreObserver);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iFullBackupRestoreObserver);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void updateTransportAttributesForUser(int i, ComponentName componentName, String str, Intent intent, String str2, Intent intent2, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(intent2, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(intent2, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String getCurrentTransportForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String getCurrentTransport() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public ComponentName getCurrentTransportComponentForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String[] listAllTransportsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String[] listAllTransports() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public ComponentName[] listAllTransportComponentsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName[]) obtain2.createTypedArray(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName[]) parcelObtain2.createTypedArray(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String[] getTransportWhitelist() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String selectBackupTransportForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String selectBackupTransport(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void selectBackupTransportAsyncForUser(int i, ComponentName componentName, ISelectBackupTransportCallback iSelectBackupTransportCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStrongInterface(iSelectBackupTransportCallback);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStrongInterface(iSelectBackupTransportCallback);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Intent getConfigurationIntentForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Intent getConfigurationIntent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String getDestinationStringForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String getDestinationString(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Intent getDataManagementIntentForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Intent getDataManagementIntent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public CharSequence getDataManagementLabelForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public IRestoreSession beginRestoreSessionForUser(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IRestoreSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IRestoreSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void opCompleteForUser(int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void opComplete(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setBackupServiceActive(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isBackupServiceActive(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isUserReadyForBackup(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public long getAvailableRestoreTokenForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isAppEligibleForBackupForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public String[] filterAppsEligibleForBackupForUser(int i, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public int requestBackupForUser(int i, String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iBackupObserver);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iBackupObserver);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public int requestBackup(String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iBackupObserver);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iBackupObserver);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void cancelBackupsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void cancelBackups() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void fullBackupCustomized(int i, String str, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, String[] strArr, boolean z8, String str2, boolean z9, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeBoolean(z4);
-                    obtain.writeBoolean(z5);
-                    obtain.writeBoolean(z6);
-                    obtain.writeBoolean(z7);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z8);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z9);
-                    obtain.writeStrongInterface(iMemorySaverBackupRestoreObserver);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeBoolean(z5);
+                    parcelObtain.writeBoolean(z6);
+                    parcelObtain.writeBoolean(z7);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z8);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z9);
+                    parcelObtain.writeStrongInterface(iMemorySaverBackupRestoreObserver);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public UserHandle getUserForAncestralSerialNumber(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UserHandle) obtain2.readTypedObject(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UserHandle) parcelObtain2.readTypedObject(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void setAncestralSerialNumber(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean isSubUserSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Map semBackupPackage(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public Map semBackupPackagePath(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i, String[] strArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr2);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr2);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void semRestorePackage(ParcelFileDescriptor parcelFileDescriptor, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean semIsBackupEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void semSetBackupEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void semSetAutoRestoreEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean semCancelBackupAndRestore() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean semSetTimeoutBackupAndRestore(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean semSetTransportFlagsForAdbBackup(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public boolean semDisableDataExtractionRule(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void semDisableRestrictedModeForAdbBackUp(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void excludeKeysFromRestore(String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IBackupManager
             public void reportDelayedRestoreResult(String str, List<BackupRestoreEventLogger.DataTypeResult> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

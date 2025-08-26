@@ -41,9 +41,9 @@ public interface IDeviceAdminService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceAdminService)) {
-                return (IDeviceAdminService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceAdminService)) {
+                return (IDeviceAdminService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

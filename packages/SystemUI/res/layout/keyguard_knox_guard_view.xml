@@ -13,7 +13,7 @@
             <com.android.systemui.widget.SystemUITextView android:id="@id/keyguard_knox_pin_message" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/kg_knox_guard_pin_message_margin_top" android:layout_marginBottom="@dimen/kg_knox_guard_pin_message_margin_bottom" android:layout_marginStart="@dimen/kg_knox_guard_view_margin_start" android:layout_marginEnd="@dimen/kg_knox_guard_view_margin_end" style="@style/Keyguard.KnoxGuard.Text.PinMessage" />
             <include android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/keyguard_sec_bouncer_message_area" />
         </LinearLayout>
-        <LinearLayout android:gravity="center" android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/bottom_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:layout_gravity="center|bottom" android:orientation="vertical" android:id="@id/bottom_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
             <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
                 <com.android.systemui.widget.SystemUIImageView android:id="@id/keyguard_wifi_on_button" android:background="@drawable/kg_knox_guard_ic_circle_ripple" android:layout_width="@dimen/kg_knox_guard_network_button_size" android:layout_height="@dimen/kg_knox_guard_network_button_size" android:src="@drawable/kg_knox_guard_ic_wifi" android:contentDescription="@string/kg_knox_guard_wifi_button" android:layout_marginStart="@dimen/kg_knox_guard_network_button_margin_side" android:layout_marginEnd="@dimen/kg_knox_guard_network_button_margin_side" />
                 <com.android.systemui.widget.SystemUIImageView android:id="@id/keyguard_data_on_button" android:background="@drawable/kg_knox_guard_ic_circle_ripple" android:layout_width="@dimen/kg_knox_guard_network_button_size" android:layout_height="@dimen/kg_knox_guard_network_button_size" android:src="@drawable/kg_knox_guard_ic_data_connection" android:contentDescription="@string/kg_knox_guard_mobile_data_button" android:layout_marginStart="@dimen/kg_knox_guard_network_button_margin_side" android:layout_marginEnd="@dimen/kg_knox_guard_network_button_margin_side" />
@@ -37,7 +37,7 @@
                     <com.android.systemui.widget.SystemUITextView android:id="@id/option_header" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/Keyguard.KnoxGuard.Text.Button" />
                 </LinearLayout>
             </RelativeLayout>
-            <include android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/kg_knox_guard_container_margin_top" layout="@layout/keyguard_emergency_button" />
+            <include android:gravity="center" android:layout_gravity="center|bottom" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/kg_knox_guard_container_margin_top" layout="@layout/keyguard_emergency_button" />
         </LinearLayout>
     </FrameLayout>
 </com.android.keyguard.KeyguardKnoxGuardView>

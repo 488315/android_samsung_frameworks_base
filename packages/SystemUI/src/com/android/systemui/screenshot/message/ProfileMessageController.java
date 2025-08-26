@@ -1,12 +1,23 @@
 package com.android.systemui.screenshot.message;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
+import android.os.UserHandle;
+import com.android.systemui.R;
 import com.android.systemui.screenshot.data.model.ProfileType;
 import com.android.systemui.screenshot.data.repository.ProfileTypeRepository;
+import com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl;
+import com.android.systemui.screenshot.message.ProfileFirstRunSettingsImpl;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.Result;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ProfileMessageController {
     public final ProfileFirstRunFileResources fileResources;
@@ -14,7 +25,6 @@ public final class ProfileMessageController {
     public final PackageLabelIconProvider packageLabelIconProvider;
     public final ProfileTypeRepository profileTypes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,7 +36,6 @@ public final class ProfileMessageController {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FirstRunProfile {
         public static final /* synthetic */ FirstRunProfile[] $VALUES;
         public static final FirstRunProfile PRIVATE;
@@ -54,7 +63,6 @@ public final class ProfileMessageController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ProfileFirstRunData {
         public final LabeledIcon labeledIcon;
         public final FirstRunProfile profileType;
@@ -84,7 +92,6 @@ public final class ProfileMessageController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -113,6 +120,25 @@ public final class ProfileMessageController {
         }
     }
 
+    /* renamed from: com.android.systemui.screenshot.message.ProfileMessageController$onScreenshotTaken$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ProfileMessageController.this.onScreenshotTaken(null, this);
+        }
+    }
+
     static {
         new Companion(null);
     }
@@ -124,28 +150,150 @@ public final class ProfileMessageController {
         this.profileTypes = profileTypeRepository;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x0064, code lost:
-    
-        if (r11 == r1) goto L46;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x010f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0114  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00ab A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x010f  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x0114  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onScreenshotTaken(android.os.UserHandle r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            Method dump skipped, instructions count: 300
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.message.ProfileMessageController.onScreenshotTaken(android.os.UserHandle, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object onScreenshotTaken(UserHandle userHandle, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        FirstRunProfile firstRunProfile;
+        String str;
+        ProfileMessageController profileMessageController;
+        FirstRunProfile firstRunProfile2;
+        Throwable th;
+        ComponentName componentNameUnflattenFromString;
+        Object failure;
+        LabeledIcon labeledIcon;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object profileType = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(profileType);
+            if (userHandle != null) {
+                int identifier = userHandle.getIdentifier();
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = userHandle;
+                anonymousClass1.label = 1;
+                profileType = ((ProfileTypeRepositoryImpl) this.profileTypes).getProfileType(identifier, anonymousClass1);
+                if (profileType != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            return null;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            firstRunProfile2 = (FirstRunProfile) anonymousClass1.L$1;
+            profileMessageController = (ProfileMessageController) anonymousClass1.L$0;
+            try {
+                ResultKt.throwOnFailure(profileType);
+                failure = (LabeledIcon) profileType;
+                int i3 = Result.$r8$clinit;
+            } catch (Throwable th2) {
+                th = th2;
+                int i4 = Result.$r8$clinit;
+                failure = new Result.Failure(th);
+                if (failure instanceof Result.Failure) {
+                }
+                labeledIcon = (LabeledIcon) failure;
+                if (labeledIcon == null) {
+                }
+                return new ProfileFirstRunData(labeledIcon, firstRunProfile2);
+            }
+            if (failure instanceof Result.Failure) {
+                failure = null;
+            }
+            labeledIcon = (LabeledIcon) failure;
+            if (labeledIcon == null) {
+                labeledIcon = new LabeledIcon(((ProfileFirstRunFileResourcesImpl) profileMessageController.fileResources).context.getString(R.string.screenshot_default_files_app_name), null);
+            }
+            return new ProfileFirstRunData(labeledIcon, firstRunProfile2);
+        }
+        userHandle = (UserHandle) anonymousClass1.L$1;
+        this = (ProfileMessageController) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(profileType);
+        int i5 = WhenMappings.$EnumSwitchMapping$0[((ProfileType) profileType).ordinal()];
+        if (i5 != 1) {
+            if (i5 == 2) {
+                firstRunProfile = FirstRunProfile.PRIVATE;
+            }
+            return null;
+        }
+        firstRunProfile = FirstRunProfile.WORK;
+        ProfileFirstRunSettingsImpl profileFirstRunSettingsImpl = (ProfileFirstRunSettingsImpl) this.firstRunSettings;
+        profileFirstRunSettingsImpl.getClass();
+        int i6 = ProfileFirstRunSettingsImpl.WhenMappings.$EnumSwitchMapping$0[firstRunProfile.ordinal()];
+        if (i6 == 1) {
+            str = "work_profile_first_run";
+        } else {
+            if (i6 != 2) {
+                throw new NoWhenBranchMatchedException();
+            }
+            str = "private_profile_first_run";
+        }
+        if (!profileFirstRunSettingsImpl.context.getSharedPreferences("com.android.systemui.screenshot", 0).getBoolean(str, false)) {
+            try {
+                int i7 = Result.$r8$clinit;
+                componentNameUnflattenFromString = ComponentName.unflattenFromString(((ProfileFirstRunFileResourcesImpl) this.fileResources).context.getString(R.string.config_screenshotFilesApp));
+            } catch (Throwable th3) {
+                profileMessageController = this;
+                firstRunProfile2 = firstRunProfile;
+                th = th3;
+                int i42 = Result.$r8$clinit;
+                failure = new Result.Failure(th);
+                if (failure instanceof Result.Failure) {
+                }
+                labeledIcon = (LabeledIcon) failure;
+                if (labeledIcon == null) {
+                }
+                return new ProfileFirstRunData(labeledIcon, firstRunProfile2);
+            }
+            if (componentNameUnflattenFromString == null) {
+                profileMessageController = this;
+                firstRunProfile2 = firstRunProfile;
+                failure = null;
+                int i32 = Result.$r8$clinit;
+                if (failure instanceof Result.Failure) {
+                }
+                labeledIcon = (LabeledIcon) failure;
+                if (labeledIcon == null) {
+                }
+                return new ProfileFirstRunData(labeledIcon, firstRunProfile2);
+            }
+            PackageLabelIconProvider packageLabelIconProvider = this.packageLabelIconProvider;
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = firstRunProfile;
+            anonymousClass1.label = 2;
+            PackageLabelIconProviderImpl packageLabelIconProviderImpl = (PackageLabelIconProviderImpl) packageLabelIconProvider;
+            LabeledIcon labeledIcon2 = new LabeledIcon(packageLabelIconProviderImpl.packageManager.getActivityInfo(componentNameUnflattenFromString, PackageManager.ComponentInfoFlags.of(0L)).loadLabel(packageLabelIconProviderImpl.packageManager), packageLabelIconProviderImpl.packageManager.getUserBadgedIcon(packageLabelIconProviderImpl.packageManager.getActivityIcon(componentNameUnflattenFromString), userHandle));
+            if (labeledIcon2 != coroutineSingletons) {
+                profileMessageController = this;
+                firstRunProfile2 = firstRunProfile;
+                profileType = labeledIcon2;
+                failure = (LabeledIcon) profileType;
+                int i322 = Result.$r8$clinit;
+                if (failure instanceof Result.Failure) {
+                }
+                labeledIcon = (LabeledIcon) failure;
+                if (labeledIcon == null) {
+                }
+                return new ProfileFirstRunData(labeledIcon, firstRunProfile2);
+            }
+            return coroutineSingletons;
+        }
+        return null;
     }
 }

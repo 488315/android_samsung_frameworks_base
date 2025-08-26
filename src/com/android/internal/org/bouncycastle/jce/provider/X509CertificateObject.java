@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -104,12 +105,12 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity() throws CertificateNotYetValidException, CertificateExpiredException {
         checkValidity(new Date());
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date) throws CertificateNotYetValidException, CertificateExpiredException {
         if (date.getTime() > getNotAfter().getTime()) {
             throw new CertificateExpiredException("certificate expired on " + this.c.getEndDate().getTime());
         }
@@ -302,9 +303,9 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         if (extensions == null) {
             return null;
         }
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (extensions.getExtension(aSN1ObjectIdentifier).isCritical()) {
                 hashSet.add(aSN1ObjectIdentifier.getId());
             }
@@ -345,9 +346,9 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         if (extensions == null) {
             return null;
         }
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (!extensions.getExtension(aSN1ObjectIdentifier).isCritical()) {
                 hashSet.add(aSN1ObjectIdentifier.getId());
             }
@@ -361,9 +362,9 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         if (getVersion() != 3 || (extensions = this.c.getTBSCertificate().getExtensions()) == null) {
             return false;
         }
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             String id = aSN1ObjectIdentifier.getId();
             if (!id.equals(RFC3280CertPathUtilities.KEY_USAGE) && !id.equals(RFC3280CertPathUtilities.CERTIFICATE_POLICIES) && !id.equals(RFC3280CertPathUtilities.POLICY_MAPPINGS) && !id.equals(RFC3280CertPathUtilities.INHIBIT_ANY_POLICY) && !id.equals(RFC3280CertPathUtilities.CRL_DISTRIBUTION_POINTS) && !id.equals(RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT) && !id.equals(RFC3280CertPathUtilities.DELTA_CRL_INDICATOR) && !id.equals(RFC3280CertPathUtilities.POLICY_CONSTRAINTS) && !id.equals(RFC3280CertPathUtilities.BASIC_CONSTRAINTS) && !id.equals(RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME) && !id.equals(RFC3280CertPathUtilities.NAME_CONSTRAINTS) && extensions.getExtension(aSN1ObjectIdentifier).isCritical()) {
                 return true;
@@ -448,57 +449,57 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     @Override // java.security.cert.Certificate
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("  [0]         Version: ");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(getVersion()).append(lineSeparator);
-        stringBuffer.append("         SerialNumber: ").append(getSerialNumber()).append(lineSeparator);
-        stringBuffer.append("             IssuerDN: ").append(getIssuerDN()).append(lineSeparator);
-        stringBuffer.append("           Start Date: ").append(getNotBefore()).append(lineSeparator);
-        stringBuffer.append("           Final Date: ").append(getNotAfter()).append(lineSeparator);
-        stringBuffer.append("            SubjectDN: ").append(getSubjectDN()).append(lineSeparator);
-        stringBuffer.append("           Public Key: ").append(getPublicKey()).append(lineSeparator);
-        stringBuffer.append("  Signature Algorithm: ").append(getSigAlgName()).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(getVersion()).append(strLineSeparator);
+        stringBuffer.append("         SerialNumber: ").append(getSerialNumber()).append(strLineSeparator);
+        stringBuffer.append("             IssuerDN: ").append(getIssuerDN()).append(strLineSeparator);
+        stringBuffer.append("           Start Date: ").append(getNotBefore()).append(strLineSeparator);
+        stringBuffer.append("           Final Date: ").append(getNotAfter()).append(strLineSeparator);
+        stringBuffer.append("            SubjectDN: ").append(getSubjectDN()).append(strLineSeparator);
+        stringBuffer.append("           Public Key: ").append(getPublicKey()).append(strLineSeparator);
+        stringBuffer.append("  Signature Algorithm: ").append(getSigAlgName()).append(strLineSeparator);
         byte[] signature = getSignature();
-        stringBuffer.append("            Signature: ").append(new String(Hex.encode(signature, 0, 20))).append(lineSeparator);
+        stringBuffer.append("            Signature: ").append(new String(Hex.encode(signature, 0, 20))).append(strLineSeparator);
         for (int i = 20; i < signature.length; i += 20) {
             if (i < signature.length - 20) {
-                stringBuffer.append("                       ").append(new String(Hex.encode(signature, i, 20))).append(lineSeparator);
+                stringBuffer.append("                       ").append(new String(Hex.encode(signature, i, 20))).append(strLineSeparator);
             } else {
-                stringBuffer.append("                       ").append(new String(Hex.encode(signature, i, signature.length - i))).append(lineSeparator);
+                stringBuffer.append("                       ").append(new String(Hex.encode(signature, i, signature.length - i))).append(strLineSeparator);
             }
         }
         Extensions extensions = this.c.getTBSCertificate().getExtensions();
         if (extensions != null) {
-            Enumeration oids = extensions.oids();
-            if (oids.hasMoreElements()) {
+            Enumeration enumerationOids = extensions.oids();
+            if (enumerationOids.hasMoreElements()) {
                 stringBuffer.append("       Extensions: \n");
             }
-            while (oids.hasMoreElements()) {
-                ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+            while (enumerationOids.hasMoreElements()) {
+                ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
                 Extension extension = extensions.getExtension(aSN1ObjectIdentifier);
                 if (extension.getExtnValue() != null) {
                     ASN1InputStream aSN1InputStream = new ASN1InputStream(extension.getExtnValue().getOctets());
                     stringBuffer.append("                       critical(").append(extension.isCritical()).append(") ");
                     try {
                         if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.basicConstraints)) {
-                            stringBuffer.append(BasicConstraints.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(BasicConstraints.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.keyUsage)) {
-                            stringBuffer.append(KeyUsage.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(KeyUsage.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeCertType)) {
-                            stringBuffer.append(new NetscapeCertType((ASN1BitString) aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(new NetscapeCertType((ASN1BitString) aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeRevocationURL)) {
-                            stringBuffer.append(new NetscapeRevocationURL((ASN1IA5String) aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(new NetscapeRevocationURL((ASN1IA5String) aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) MiscObjectIdentifiers.verisignCzagExtension)) {
-                            stringBuffer.append(new VerisignCzagExtension((ASN1IA5String) aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(new VerisignCzagExtension((ASN1IA5String) aSN1InputStream.readObject())).append(strLineSeparator);
                         } else {
                             stringBuffer.append(aSN1ObjectIdentifier.getId());
-                            stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(strLineSeparator);
                         }
                     } catch (Exception unused) {
                         stringBuffer.append(aSN1ObjectIdentifier.getId());
-                        stringBuffer.append(" value = *****").append(lineSeparator);
+                        stringBuffer.append(" value = *****").append(strLineSeparator);
                     }
                 } else {
-                    stringBuffer.append(lineSeparator);
+                    stringBuffer.append(strLineSeparator);
                 }
             }
         }
@@ -506,7 +507,7 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey publicKey) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey publicKey) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
         Signature signature;
         String signatureName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         try {
@@ -518,7 +519,7 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey publicKey, String str) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey publicKey, String str) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
         Signature signature;
         String signatureName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         if (str != null) {
@@ -530,7 +531,7 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.X509Certificate, java.security.cert.Certificate
-    public final void verify(PublicKey publicKey, Provider provider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public final void verify(PublicKey publicKey, Provider provider) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CertificateException, InvalidAlgorithmParameterException {
         Signature signature;
         String signatureName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         if (provider != null) {
@@ -541,7 +542,7 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         checkSignature(publicKey, signature);
     }
 
-    private void checkSignature(PublicKey publicKey, Signature signature) throws CertificateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    private void checkSignature(PublicKey publicKey, Signature signature) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CertificateException, InvalidAlgorithmParameterException {
         if (!isAlgIdEqual(this.c.getSignatureAlgorithm(), this.c.getTBSCertificate().getSignature())) {
             throw new CertificateException("signature algorithm in TBS cert not same as outer cert");
         }
@@ -566,7 +567,7 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         return algorithmIdentifier.getParameters().equals(algorithmIdentifier2.getParameters());
     }
 
-    private static Collection getAlternativeNames(byte[] bArr) throws CertificateParsingException {
+    private static Collection getAlternativeNames(byte[] bArr) throws CertificateParsingException, IOException {
         if (bArr == null) {
             return null;
         }

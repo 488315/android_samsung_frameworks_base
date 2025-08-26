@@ -43,11 +43,11 @@ public class IntIntMap {
     }
 
     public int get(int i) {
-        int findKey = findKey(i);
-        if (findKey == -1) {
+        int iFindKey = findKey(i);
+        if (iFindKey == -1) {
             return 0;
         }
-        return this.mValues[findKey];
+        return this.mValues[iFindKey];
     }
 
     public int size() {
@@ -59,16 +59,16 @@ public class IntIntMap {
         int[] iArr;
         int i4;
         int i5;
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            i3 = hash % length;
+            i3 = iHash % length;
             iArr = this.mKeys;
             i4 = iArr[i3];
             if (i4 == Integer.MIN_VALUE || i4 == i) {
                 break;
             }
-            hash = i3 + 1;
+            iHash = i3 + 1;
             length = iArr.length;
         }
         if (i4 == Integer.MIN_VALUE) {
@@ -83,10 +83,10 @@ public class IntIntMap {
     }
 
     private int findKey(int i) {
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            int i2 = hash % length;
+            int i2 = iHash % length;
             int[] iArr = this.mKeys;
             int i3 = iArr[i2];
             if (i3 == Integer.MIN_VALUE) {
@@ -95,7 +95,7 @@ public class IntIntMap {
             if (i3 == i) {
                 return i2;
             }
-            hash = i2 + 1;
+            iHash = i2 + 1;
             length = iArr.length;
         }
     }

@@ -40,9 +40,9 @@ public interface IMinorModeObserverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMinorModeObserverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMinorModeObserverService)) {
-                return (IMinorModeObserverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMinorModeObserverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMinorModeObserverService)) {
+                return (IMinorModeObserverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

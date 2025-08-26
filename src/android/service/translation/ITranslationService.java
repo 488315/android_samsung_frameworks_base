@@ -68,9 +68,9 @@ public interface ITranslationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITranslationService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITranslationService)) {
-                return (ITranslationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITranslationService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITranslationService)) {
+                return (ITranslationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,23 +106,23 @@ public interface ITranslationService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                onConnected(readStrongBinder);
+                onConnected(strongBinder);
             } else if (i == 2) {
                 onDisconnected();
             } else if (i == 3) {
                 TranslationContext translationContext = (TranslationContext) parcel.readTypedObject(TranslationContext.CREATOR);
-                int readInt = parcel.readInt();
-                IResultReceiver asInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCreateTranslationSession(translationContext, readInt, asInterface);
+                onCreateTranslationSession(translationContext, i3, iResultReceiverAsInterface);
             } else if (i == 4) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                 parcel.enforceNoDataAvail();
-                onTranslationCapabilitiesRequest(readInt2, readInt3, resultReceiver);
+                onTranslationCapabilitiesRequest(i4, i5, resultReceiver);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -147,52 +147,52 @@ public interface ITranslationService extends IInterface {
 
             @Override // android.service.translation.ITranslationService
             public void onConnected(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.translation.ITranslationService
             public void onDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.translation.ITranslationService
             public void onCreateTranslationSession(TranslationContext translationContext, int i, IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
-                    obtain.writeTypedObject(translationContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(translationContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.translation.ITranslationService
             public void onTranslationCapabilitiesRequest(int i, int i2, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

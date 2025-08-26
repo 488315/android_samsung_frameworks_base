@@ -53,9 +53,9 @@ public interface ISurfaceSyncGroup extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISurfaceSyncGroup.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfaceSyncGroup)) {
-                return (ISurfaceSyncGroup) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISurfaceSyncGroup.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISurfaceSyncGroup)) {
+                return (ISurfaceSyncGroup) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,19 +85,19 @@ public interface ISurfaceSyncGroup extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean onAddedToSyncGroup = onAddedToSyncGroup(readStrongBinder, readBoolean);
+                boolean zOnAddedToSyncGroup = onAddedToSyncGroup(strongBinder, z);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(onAddedToSyncGroup);
+                parcel2.writeBoolean(zOnAddedToSyncGroup);
             } else if (i == 2) {
-                ISurfaceSyncGroup asInterface = asInterface(parcel.readStrongBinder());
-                boolean readBoolean2 = parcel.readBoolean();
+                ISurfaceSyncGroup iSurfaceSyncGroupAsInterface = asInterface(parcel.readStrongBinder());
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean addToSync = addToSync(asInterface, readBoolean2);
+                boolean zAddToSync = addToSync(iSurfaceSyncGroupAsInterface, z2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(addToSync);
+                parcel2.writeBoolean(zAddToSync);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -122,35 +122,35 @@ public interface ISurfaceSyncGroup extends IInterface {
 
             @Override // android.window.ISurfaceSyncGroup
             public boolean onAddedToSyncGroup(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISurfaceSyncGroup.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISurfaceSyncGroup.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ISurfaceSyncGroup
             public boolean addToSync(ISurfaceSyncGroup iSurfaceSyncGroup, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISurfaceSyncGroup.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSurfaceSyncGroup);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISurfaceSyncGroup.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSurfaceSyncGroup);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -127,11 +127,11 @@ public class NNDirector {
         NNDescriptor nNDescriptor2 = new NNDescriptor(Model.MIRACLE_FILTER, NNFW.TFLITE, HwUnit.GPU, 1);
         NNDescriptor nNDescriptor3 = new NNDescriptor(Model.IMAGE_UPSCALER_X4, NNFW.SNAP, HwUnit.GPU, 1);
         nNDescriptor3.setTargetFormat(MediaFormat.mutableImageOf(new Object[0]).setDataType(DataType.U8C3));
-        float floatValue = option.getFilterThreshold().floatValue();
-        if (floatValue == 0.0f) {
-            floatValue = 86.0f;
+        float fFloatValue = option.getFilterThreshold().floatValue();
+        if (fFloatValue == 0.0f) {
+            fFloatValue = 86.0f;
         }
-        this.graphBuilder.addNode(nNDescriptor, nNDescriptor3, Evaluator.ge(Float.valueOf(floatValue))).addNode(nNDescriptor, nNDescriptor2, Evaluator.lt(Float.valueOf(floatValue))).addNode(nNDescriptor2, nNDescriptor3);
+        this.graphBuilder.addNode(nNDescriptor, nNDescriptor3, Evaluator.ge(Float.valueOf(fFloatValue))).addNode(nNDescriptor, nNDescriptor2, Evaluator.lt(Float.valueOf(fFloatValue))).addNode(nNDescriptor2, nNDescriptor3);
         if (option.isSupportAlphaChannel()) {
             ImgpDescriptor imgpDescriptor = new ImgpDescriptor("com.samsung.android.sume.ext.plugin.AlphaChannelPlugin", "EXTRACT_ALPHA");
             this.graphBuilder.addNode(imgpDescriptor, nNDescriptor).addNode(nNDescriptor3, new ImgpDescriptor("com.samsung.android.sume.ext.plugin.AlphaChannelPlugin", "MERGE_ALPHA"));
@@ -153,11 +153,11 @@ public class NNDirector {
         } else {
             imgpDescriptor = new ImgpDescriptor("com.samsung.android.sume.midas.upscaler.WrapVSWEnginePlugin", "X4_UPSCALER");
         }
-        float floatValue = option.getFilterThreshold().floatValue();
-        if (floatValue == 0.0f) {
-            floatValue = 86.0f;
+        float fFloatValue = option.getFilterThreshold().floatValue();
+        if (fFloatValue == 0.0f) {
+            fFloatValue = 86.0f;
         }
-        this.graphBuilder.addNode(nNDescriptor, imgpDescriptor, Evaluator.ge(Float.valueOf(floatValue))).addNode(nNDescriptor, nNDescriptor2, Evaluator.lt(Float.valueOf(floatValue))).addNode(nNDescriptor2, imgpDescriptor);
+        this.graphBuilder.addNode(nNDescriptor, imgpDescriptor, Evaluator.ge(Float.valueOf(fFloatValue))).addNode(nNDescriptor, nNDescriptor2, Evaluator.lt(Float.valueOf(fFloatValue))).addNode(nNDescriptor2, imgpDescriptor);
         if (option.isSupportAlphaChannel()) {
             ImgpDescriptor imgpDescriptor2 = new ImgpDescriptor("com.samsung.android.sume.ext.plugin.AlphaChannelPlugin", "EXTRACT_ALPHA");
             this.graphBuilder.addNode(imgpDescriptor2, nNDescriptor).addNode(imgpDescriptor, new ImgpDescriptor("com.samsung.android.sume.ext.plugin.AlphaChannelPlugin", "MERGE_ALPHA"));

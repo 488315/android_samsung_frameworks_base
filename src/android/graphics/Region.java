@@ -13,11 +13,11 @@ public class Region implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Region createFromParcel(Parcel parcel) {
-            long nativeCreateFromParcel = Region.nativeCreateFromParcel(parcel);
-            if (nativeCreateFromParcel == 0) {
+            long jNativeCreateFromParcel = Region.nativeCreateFromParcel(parcel);
+            if (jNativeCreateFromParcel == 0) {
                 throw new RuntimeException();
             }
-            return new Region(nativeCreateFromParcel);
+            return new Region(jNativeCreateFromParcel);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -104,15 +104,15 @@ public class Region implements Parcelable {
     }
 
     public Region(Rect rect) {
-        long nativeConstructor = nativeConstructor();
-        this.mNativeRegion = nativeConstructor;
-        nativeSetRect(nativeConstructor, rect.left, rect.top, rect.right, rect.bottom);
+        long jNativeConstructor = nativeConstructor();
+        this.mNativeRegion = jNativeConstructor;
+        nativeSetRect(jNativeConstructor, rect.left, rect.top, rect.right, rect.bottom);
     }
 
     public Region(int i, int i2, int i3, int i4) {
-        long nativeConstructor = nativeConstructor();
-        this.mNativeRegion = nativeConstructor;
-        nativeSetRect(nativeConstructor, i, i2, i3, i4);
+        long jNativeConstructor = nativeConstructor();
+        this.mNativeRegion = jNativeConstructor;
+        nativeSetRect(jNativeConstructor, i, i2, i3, i4);
     }
 
     public void setEmpty() {
@@ -202,14 +202,14 @@ public class Region implements Parcelable {
     }
 
     public static Region obtain() {
-        Region acquire = sPool.acquire();
-        return acquire != null ? acquire : new Region();
+        Region regionAcquire = sPool.acquire();
+        return regionAcquire != null ? regionAcquire : new Region();
     }
 
     public static Region obtain(Region region) {
-        Region obtain = obtain();
-        obtain.set(region);
-        return obtain;
+        Region regionObtain = obtain();
+        regionObtain.set(region);
+        return regionObtain;
     }
 
     public void recycle() {

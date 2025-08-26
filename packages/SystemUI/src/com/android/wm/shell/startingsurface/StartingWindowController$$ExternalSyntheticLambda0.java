@@ -10,7 +10,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.startingsurface.SplashscreenWindowCreator;
 import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class StartingWindowController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -38,13 +37,13 @@ public final /* synthetic */ class StartingWindowController$$ExternalSyntheticLa
                     splashScreenViewParcelable = new SplashScreenView.SplashScreenViewParcelable(splashScreenView);
                     splashScreenViewParcelable.setClientCallback(new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.wm.shell.startingsurface.SplashscreenWindowCreator$$ExternalSyntheticLambda4
                         public final void onResult(Bundle bundle) {
-                            final SplashscreenWindowCreator splashscreenWindowCreator2 = SplashscreenWindowCreator.this;
+                            final SplashscreenWindowCreator splashscreenWindowCreator2 = splashscreenWindowCreator;
                             final int i2 = i;
                             splashscreenWindowCreator2.getClass();
                             splashscreenWindowCreator2.mSplashScreenExecutor.execute(new Runnable() { // from class: com.android.wm.shell.startingsurface.SplashscreenWindowCreator$$ExternalSyntheticLambda5
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    SplashscreenWindowCreator.this.onAppSplashScreenViewRemoved(i2, false);
+                                    splashscreenWindowCreator2.onAppSplashScreenViewRemoved(i2, false);
                                 }
                             });
                         }

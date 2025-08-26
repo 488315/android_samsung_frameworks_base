@@ -85,33 +85,33 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
 
             @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookup(int i5) {
-                int[] create = Nat.create(12);
-                int[] create2 = Nat.create(12);
+                int[] iArrCreate = Nat.create(12);
+                int[] iArrCreate2 = Nat.create(12);
                 int i6 = 0;
                 for (int i7 = 0; i7 < i2; i7++) {
                     int i8 = ((i7 ^ i5) - 1) >> 31;
                     for (int i9 = 0; i9 < 12; i9++) {
-                        int i10 = create[i9];
+                        int i10 = iArrCreate[i9];
                         int[] iArr2 = iArr;
-                        create[i9] = i10 ^ (iArr2[i6 + i9] & i8);
-                        create2[i9] = create2[i9] ^ (iArr2[(i6 + 12) + i9] & i8);
+                        iArrCreate[i9] = i10 ^ (iArr2[i6 + i9] & i8);
+                        iArrCreate2[i9] = iArrCreate2[i9] ^ (iArr2[(i6 + 12) + i9] & i8);
                     }
                     i6 += 24;
                 }
-                return createPoint(create, create2);
+                return createPoint(iArrCreate, iArrCreate2);
             }
 
             @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookupVar(int i5) {
-                int[] create = Nat.create(12);
-                int[] create2 = Nat.create(12);
+                int[] iArrCreate = Nat.create(12);
+                int[] iArrCreate2 = Nat.create(12);
                 int i6 = i5 * 24;
                 for (int i7 = 0; i7 < 12; i7++) {
                     int[] iArr2 = iArr;
-                    create[i7] = iArr2[i6 + i7];
-                    create2[i7] = iArr2[i6 + 12 + i7];
+                    iArrCreate[i7] = iArr2[i6 + i7];
+                    iArrCreate2[i7] = iArr2[i6 + 12 + i7];
                 }
-                return createPoint(create, create2);
+                return createPoint(iArrCreate, iArrCreate2);
             }
 
             private ECPoint createPoint(int[] iArr2, int[] iArr3) {
@@ -122,15 +122,15 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElement(SecureRandom secureRandom) {
-        int[] create = Nat.create(12);
-        SecP384R1Field.random(secureRandom, create);
-        return new SecP384R1FieldElement(create);
+        int[] iArrCreate = Nat.create(12);
+        SecP384R1Field.random(secureRandom, iArrCreate);
+        return new SecP384R1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElementMult(SecureRandom secureRandom) {
-        int[] create = Nat.create(12);
-        SecP384R1Field.randomMult(secureRandom, create);
-        return new SecP384R1FieldElement(create);
+        int[] iArrCreate = Nat.create(12);
+        SecP384R1Field.randomMult(secureRandom, iArrCreate);
+        return new SecP384R1FieldElement(iArrCreate);
     }
 }

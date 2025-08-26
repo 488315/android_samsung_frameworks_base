@@ -17,11 +17,11 @@ public abstract class InputEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public InputEvent createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 2) {
+            int i = parcel.readInt();
+            if (i == 2) {
                 return KeyEvent.createFromParcelBody(parcel);
             }
-            if (readInt == 1) {
+            if (i == 1) {
                 return MotionEvent.createFromParcelBody(parcel);
             }
             throw new IllegalStateException("Unexpected input event type token in parcel.");

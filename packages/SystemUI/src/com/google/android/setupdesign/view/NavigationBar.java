@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NavigationBar extends LinearLayout implements View.OnClickListener {
     public NavigationBar(Context context) {
@@ -18,16 +17,16 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
     }
 
     public static Context getThemedContext(Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.sudNavBarTheme, android.R.attr.colorForeground, android.R.attr.colorBackground});
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.sudNavBarTheme, android.R.attr.colorForeground, android.R.attr.colorBackground});
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId == 0) {
             float[] fArr = new float[3];
             float[] fArr2 = new float[3];
-            Color.colorToHSV(obtainStyledAttributes.getColor(1, 0), fArr);
-            Color.colorToHSV(obtainStyledAttributes.getColor(2, 0), fArr2);
+            Color.colorToHSV(typedArrayObtainStyledAttributes.getColor(1, 0), fArr);
+            Color.colorToHSV(typedArrayObtainStyledAttributes.getColor(2, 0), fArr2);
             resourceId = fArr[2] > fArr2[2] ? R.style.SudNavBarThemeDark : R.style.SudNavBarThemeLight;
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         return new ContextThemeWrapper(context, resourceId);
     }
 

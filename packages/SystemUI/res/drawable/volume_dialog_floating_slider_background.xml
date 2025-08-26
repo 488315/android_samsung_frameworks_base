@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <corners android:radius="20.0dip" />
-    <solid android:color="@android:color/secondary_text_nodisable_holo_light" />
+    <solid android:color="@android:color/notification_progress_background_color" />
 </shape>

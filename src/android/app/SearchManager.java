@@ -292,23 +292,23 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
         if (searchableInfo == null || (suggestAuthority = searchableInfo.getSuggestAuthority()) == null) {
             return null;
         }
-        Uri.Builder fragment = new Uri.Builder().scheme("content").authority(suggestAuthority).query("").fragment("");
+        Uri.Builder builderFragment = new Uri.Builder().scheme("content").authority(suggestAuthority).query("").fragment("");
         String suggestPath = searchableInfo.getSuggestPath();
         if (suggestPath != null) {
-            fragment.appendEncodedPath(suggestPath);
+            builderFragment.appendEncodedPath(suggestPath);
         }
-        fragment.appendPath(SUGGEST_URI_PATH_QUERY);
+        builderFragment.appendPath(SUGGEST_URI_PATH_QUERY);
         String suggestSelection = searchableInfo.getSuggestSelection();
         if (suggestSelection != null) {
             strArr = new String[]{str};
         } else {
-            fragment.appendPath(str);
+            builderFragment.appendPath(str);
         }
         String[] strArr2 = strArr;
         if (i > 0) {
-            fragment.appendQueryParameter("limit", String.valueOf(i));
+            builderFragment.appendQueryParameter("limit", String.valueOf(i));
         }
-        return this.mContext.getContentResolver().query(fragment.build(), null, suggestSelection, strArr2, null);
+        return this.mContext.getContentResolver().query(builderFragment.build(), null, suggestSelection, strArr2, null);
     }
 
     public List<SearchableInfo> getSearchablesInGlobalSearch() {

@@ -9,7 +9,6 @@ import androidx.slice.widget.RowContent;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceMetadata {
     public final long mExpiry;
@@ -18,54 +17,46 @@ public class SliceMetadata {
     public final Slice mSlice;
     public final List mSliceActions;
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0037  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private SliceMetadata(Context context, Slice slice) {
-        List list;
         this.mSlice = slice;
-        SliceItem find = SliceQuery.find(slice, "long", "ttl");
-        if (find != null) {
-            this.mExpiry = find.getLong();
+        SliceItem sliceItemFind = SliceQuery.find(slice, "long", "ttl");
+        if (sliceItemFind != null) {
+            this.mExpiry = sliceItemFind.getLong();
         }
-        SliceItem find2 = SliceQuery.find(slice, "long", "last_updated");
-        if (find2 != null) {
-            this.mLastUpdated = find2.getLong();
+        SliceItem sliceItemFind2 = SliceQuery.find(slice, "long", "last_updated");
+        if (sliceItemFind2 != null) {
+            this.mLastUpdated = sliceItemFind2.getLong();
         }
-        SliceItem findSubtype = SliceQuery.findSubtype(slice, "bundle", "host_extras");
-        if (findSubtype != null) {
-            Object obj = findSubtype.mObj;
+        SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(slice, "bundle", "host_extras");
+        if (sliceItemFindSubtype != null) {
+            Object obj = sliceItemFindSubtype.mObj;
             if (obj instanceof Bundle) {
-                ListContent listContent = new ListContent(slice);
-                this.mListContent = listContent;
-                RowContent rowContent = listContent.mHeaderContent;
-                ListContent.getRowType(rowContent, true, listContent.mSliceActions);
-                listContent.getShortcut(context);
-                list = listContent.mSliceActions;
-                this.mSliceActions = list;
-                if (list == null || rowContent == null || !SliceQuery.hasHints(rowContent.mSliceItem, "list_item")) {
-                    return;
-                }
-                ArrayList arrayList = rowContent.mEndItems;
-                ArrayList arrayList2 = new ArrayList();
-                for (int i = 0; i < arrayList.size(); i++) {
-                    if (SliceQuery.find((SliceItem) arrayList.get(i), "action", (String[]) null, (String[]) null) != null) {
-                        arrayList2.add(new SliceActionImpl((SliceItem) arrayList.get(i)));
-                    }
-                }
-                if (arrayList2.size() > 0) {
-                    this.mSliceActions = arrayList2;
-                    return;
-                }
-                return;
+            } else {
+                Bundle bundle = Bundle.EMPTY;
             }
         }
-        Bundle bundle = Bundle.EMPTY;
-        ListContent listContent2 = new ListContent(slice);
-        this.mListContent = listContent2;
-        RowContent rowContent2 = listContent2.mHeaderContent;
-        ListContent.getRowType(rowContent2, true, listContent2.mSliceActions);
-        listContent2.getShortcut(context);
-        list = listContent2.mSliceActions;
+        ListContent listContent = new ListContent(slice);
+        this.mListContent = listContent;
+        RowContent rowContent = listContent.mHeaderContent;
+        ListContent.getRowType(rowContent, true, listContent.mSliceActions);
+        listContent.getShortcut(context);
+        List list = listContent.mSliceActions;
         this.mSliceActions = list;
-        if (list == null) {
+        if (list == null && rowContent != null && SliceQuery.hasHints(rowContent.mSliceItem, "list_item")) {
+            ArrayList arrayList = rowContent.mEndItems;
+            ArrayList arrayList2 = new ArrayList();
+            for (int i = 0; i < arrayList.size(); i++) {
+                if (SliceQuery.find((SliceItem) arrayList.get(i), "action", (String[]) null, (String[]) null) != null) {
+                    arrayList2.add(new SliceActionImpl((SliceItem) arrayList.get(i)));
+                }
+            }
+            if (arrayList2.size() > 0) {
+                this.mSliceActions = arrayList2;
+            }
         }
     }
 
@@ -82,8 +73,8 @@ public class SliceMetadata {
     }
 
     public final boolean isExpired() {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         long j = this.mExpiry;
-        return (j == 0 || j == -1 || currentTimeMillis <= j) ? false : true;
+        return (j == 0 || j == -1 || jCurrentTimeMillis <= j) ? false : true;
     }
 }

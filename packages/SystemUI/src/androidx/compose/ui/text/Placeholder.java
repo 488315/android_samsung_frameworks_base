@@ -6,7 +6,6 @@ import androidx.compose.ui.unit.TextUnit;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Placeholder {
     public final long height;
@@ -25,7 +24,7 @@ public final class Placeholder {
             return false;
         }
         Placeholder placeholder = (Placeholder) obj;
-        if (!TextUnit.m866equalsimpl0(this.width, placeholder.width) || !TextUnit.m866equalsimpl0(this.height, placeholder.height)) {
+        if (!TextUnit.m868equalsimpl0(this.width, placeholder.width) || !TextUnit.m868equalsimpl0(this.height, placeholder.height)) {
             return false;
         }
         int i = placeholder.placeholderVerticalAlign;
@@ -35,13 +34,13 @@ public final class Placeholder {
 
     public final int hashCode() {
         TextUnit.Companion companion = TextUnit.Companion;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(Long.hashCode(this.width) * 31, 31, this.height);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(Long.hashCode(this.width) * 31, 31, this.height);
         PlaceholderVerticalAlign.Companion companion2 = PlaceholderVerticalAlign.Companion;
-        return Integer.hashCode(this.placeholderVerticalAlign) + m;
+        return Integer.hashCode(this.placeholderVerticalAlign) + iM;
     }
 
     public final String toString() {
-        return "Placeholder(width=" + ((Object) TextUnit.m870toStringimpl(this.width)) + ", height=" + ((Object) TextUnit.m870toStringimpl(this.height)) + ", placeholderVerticalAlign=" + ((Object) PlaceholderVerticalAlign.m740toStringimpl(this.placeholderVerticalAlign)) + ')';
+        return "Placeholder(width=" + ((Object) TextUnit.m872toStringimpl(this.width)) + ", height=" + ((Object) TextUnit.m872toStringimpl(this.height)) + ", placeholderVerticalAlign=" + ((Object) PlaceholderVerticalAlign.m742toStringimpl(this.placeholderVerticalAlign)) + ')';
     }
 
     private Placeholder(long j, long j2, int i) {

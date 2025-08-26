@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.app.SemWallpaperColors;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -90,13 +91,14 @@ import dagger.Lazy;
 import java.util.Optional;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManager {
     public BiometricUnlockController mBiometricUnlockController;
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass1 mConfigurationListener;
     public int mCurrentOrientation;
+    public int mCurrentRotation;
+    public final AnonymousClass2 mDisplayObserver;
     public final KeyguardFastBioUnlockController mFastBioUnlockController;
     public boolean mIsCoverClosed;
     public final KeyguardStateController mKeyguardStateController;
@@ -115,17 +117,19 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
     public final Lazy mShadeControllerLazy;
     public ShadeLockscreenInteractor mShadeLockscreenInteractor;
     public final SysuiStatusBarStateController mStatusBarStateController;
-    public final AnonymousClass3 mSystemUIWidgetCallback;
+    public final AnonymousClass4 mSystemUIWidgetCallback;
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
 
-    /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager$1] */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager$3] */
+    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager$1] */
+    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager$2] */
+    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager$4] */
     public SecStatusBarKeyguardViewManager(KeyguardViewMediatorHelper keyguardViewMediatorHelper, KeyguardFastBioUnlockController keyguardFastBioUnlockController, Lazy lazy, SettingsHelper settingsHelper, Context context, ViewMediatorCallback viewMediatorCallback, LockPatternUtils lockPatternUtils, SysuiStatusBarStateController sysuiStatusBarStateController, ConfigurationController configurationController, KeyguardUpdateMonitor keyguardUpdateMonitor, DreamOverlayStateController dreamOverlayStateController, NavigationModeController navigationModeController, DockManager dockManager, NotificationShadeWindowController notificationShadeWindowController, KeyguardStateController keyguardStateController, Optional<SysUIUnfoldComponent> optional, Lazy lazy2, LatencyTracker latencyTracker, KeyguardSecurityModel keyguardSecurityModel, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, BouncerView bouncerView, AlternateBouncerInteractor alternateBouncerInteractor, ActivityStarter activityStarter, KeyguardTransitionInteractor keyguardTransitionInteractor, KeyguardDismissTransitionInteractor keyguardDismissTransitionInteractor, CoroutineDispatcher coroutineDispatcher, Lazy lazy3, SelectedUserInteractor selectedUserInteractor, JavaAdapter javaAdapter, Lazy lazy4, StatusBarKeyguardViewManagerInteractor statusBarKeyguardViewManagerInteractor, DelayableExecutor delayableExecutor, Lazy lazy5, DismissCallbackRegistry dismissCallbackRegistry, Lazy lazy6, CommunalSceneInteractor communalSceneInteractor) {
         super(context, viewMediatorCallback, lockPatternUtils, sysuiStatusBarStateController, configurationController, keyguardUpdateMonitor, dreamOverlayStateController, navigationModeController, dockManager, notificationShadeWindowController, keyguardStateController, optional, lazy2, latencyTracker, keyguardSecurityModel, primaryBouncerCallbackInteractor, primaryBouncerInteractor, bouncerView, alternateBouncerInteractor, activityStarter, keyguardTransitionInteractor, keyguardDismissTransitionInteractor, coroutineDispatcher, lazy3, selectedUserInteractor, javaAdapter, lazy4, statusBarKeyguardViewManagerInteractor, delayableExecutor, lazy5, dismissCallbackRegistry, lazy6, communalSceneInteractor);
         this.mCurrentOrientation = 1;
+        this.mCurrentRotation = 0;
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onOrientationChanged(int i) {
+            public final void onOrientationChanged(int i) throws Resources.NotFoundException {
                 SecStatusBarKeyguardViewManager secStatusBarKeyguardViewManager = SecStatusBarKeyguardViewManager.this;
                 if (secStatusBarKeyguardViewManager.mCurrentOrientation != i) {
                     secStatusBarKeyguardViewManager.mCurrentOrientation = i;
@@ -138,7 +142,24 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 }
             }
         };
-        this.mUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.2
+        this.mDisplayObserver = new DisplayLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.2
+            @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
+            public final void onDisplayChanged(int i) {
+                SecStatusBarKeyguardViewManager secStatusBarKeyguardViewManager = SecStatusBarKeyguardViewManager.this;
+                int rotation = DeviceState.getRotation(secStatusBarKeyguardViewManager.mContext.getResources().getConfiguration().windowConfiguration.getRotation());
+                if (secStatusBarKeyguardViewManager.mCurrentRotation != rotation) {
+                    secStatusBarKeyguardViewManager.mCurrentRotation = rotation;
+                    ViewGroup viewGroup = secStatusBarKeyguardViewManager.mLockIconContainer;
+                    if (viewGroup == null) {
+                        return;
+                    }
+                    FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) viewGroup.getLayoutParams();
+                    layoutParams.topMargin = SecurityUtils.getLockIconTopMargin(secStatusBarKeyguardViewManager.mContext);
+                    secStatusBarKeyguardViewManager.mLockIconContainer.setLayoutParams(layoutParams);
+                }
+            }
+        };
+        this.mUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.3
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) {
                 if (DeviceType.isTablet() && LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && biometricSourceType.equals(BiometricSourceType.FINGERPRINT)) {
@@ -166,7 +187,7 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 }
             }
         };
-        this.mSystemUIWidgetCallback = new SystemUIWidgetCallback() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.3
+        this.mSystemUIWidgetCallback = new SystemUIWidgetCallback() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.4
             @Override // com.android.systemui.widget.SystemUIWidgetCallback
             public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) {
                 if ((j & 512) != 0) {
@@ -201,9 +222,9 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 Log.d("SecStatusBarKeyguardViewManager", "dismissWithAction ignored : Permanent Lock");
                 return;
             }
-            boolean isFullscreenBouncer = isFullscreenBouncer();
+            boolean zIsFullscreenBouncer = isFullscreenBouncer();
             PrimaryBouncerInteractor primaryBouncerInteractor = this.mPrimaryBouncerInteractor;
-            if (isFullscreenBouncer && keyguardUpdateMonitor.isActiveDismissAction()) {
+            if (zIsFullscreenBouncer && keyguardUpdateMonitor.isActiveDismissAction()) {
                 primaryBouncerInteractor.show("SecStatusBarKeyguardViewManager#dismissWithAction isFullscreenBouncer&&isActiveDismissAction", true);
             }
             if (z) {
@@ -252,20 +273,20 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
         bundle.putCharSequence(PluginSubScreen.KEY_BOUNCER_MESSAGE, keyguardTextBuilder.getDefaultSecurityMessage(securityMode));
         int bouncerPromptReason = keyguardPluginControllerImpl.mViewMediatorCallback.getBouncerPromptReason();
         keyguardPluginControllerImpl.mPromptReason = bouncerPromptReason;
-        String str = "";
+        String strongAuthTimeOutMessage = "";
         if ((bouncerPromptReason == 1 || bouncerPromptReason == 2 || bouncerPromptReason == 7 || bouncerPromptReason == 17 || bouncerPromptReason == 3) && keyguardPluginControllerImpl.mKeyguardUpdateMonitor.getLockoutAttemptDeadline() <= 0) {
             String promptSecurityMessage = keyguardTextBuilder.getPromptSecurityMessage(securityMode, keyguardPluginControllerImpl.mPromptReason);
             if (!TextUtils.isEmpty(promptSecurityMessage)) {
                 int i2 = keyguardPluginControllerImpl.mPromptReason;
-                str = (i2 == 2 || i2 == 7 || i2 == 17) ? keyguardTextBuilder.getStrongAuthTimeOutMessage(securityMode) : promptSecurityMessage;
+                strongAuthTimeOutMessage = (i2 == 2 || i2 == 7 || i2 == 17) ? keyguardTextBuilder.getStrongAuthTimeOutMessage(securityMode) : promptSecurityMessage;
             }
         }
-        bundle.putCharSequence(PluginSubScreen.KEY_STRONG_AUTH_MESSAGE, str);
+        bundle.putCharSequence(PluginSubScreen.KEY_STRONG_AUTH_MESSAGE, strongAuthTimeOutMessage);
         return bundle;
     }
 
     @Override // com.android.keyguard.KeyguardViewController
-    public final Bundle getIncorrectBouncerMessage() {
+    public final Bundle getIncorrectBouncerMessage() throws Resources.NotFoundException {
         KeyguardBouncerViewBinder$bind$delegate$1 delegate = ((BouncerViewImpl) this.mPrimaryBouncerInteractor.primaryBouncerView).getDelegate();
         if (delegate == null) {
             return null;
@@ -353,22 +374,25 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
         return this.mLaunchEditMode;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0027  */
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean isNavBarVisible() {
         boolean z;
         boolean z2 = LsRune.COVER_SUPPORTED && this.mIsCoverClosed;
         boolean z3 = this.mKeyguardUnlocking;
         KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
-        if (keyguardStateControllerImpl.mShowing && !keyguardStateControllerImpl.mOccluded) {
+        if (!keyguardStateControllerImpl.mShowing || keyguardStateControllerImpl.mOccluded) {
+            z = false;
+        } else {
             CentralSurfacesImpl centralSurfacesImpl = this.mCentralSurfaces;
             if (centralSurfacesImpl.mIsDlsOverlay && centralSurfacesImpl.mState == 1) {
                 z = true;
-                return (z2 && super.isNavBarVisible()) || z3 || z;
             }
         }
-        z = false;
-        if (z2) {
-        }
+        return (!z2 && super.isNavBarVisible()) || z3 || z;
     }
 
     @Override // com.android.keyguard.KeyguardViewController
@@ -393,9 +417,9 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 this.mKeyguardUpdateManager.clearESimRemoved();
             }
             boolean z = this.mCentralSurfaces.mScrimController.mState == ScrimState.BOUNCER_SCRIMMED;
-            boolean isScrimmed = primaryBouncerInteractor.isScrimmed();
+            boolean zIsScrimmed = primaryBouncerInteractor.isScrimmed();
             SysuiStatusBarStateController sysuiStatusBarStateController = this.mStatusBarStateController;
-            if (!isScrimmed || needsFullscreenBouncer()) {
+            if (!zIsScrimmed || needsFullscreenBouncer()) {
                 reset(z, false);
             } else {
                 if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK) {
@@ -434,8 +458,12 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
 
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager, com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onDensityOrFontScaleChanged() {
-        hideBouncer(true);
-        updateLockContainerMargin();
+        if (LsRune.SECURITY_SUB_DISPLAY_LOCK && isBouncerShowing()) {
+            Log.d("SecStatusBarKeyguardViewManager", "onDensityOrFontScaleChanged - Skip call hideBouncer on fold device");
+        } else {
+            hideBouncer(true);
+            updateLockContainerMargin();
+        }
     }
 
     @Override // com.android.keyguard.KeyguardViewController
@@ -574,11 +602,14 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
         this.mKeyguardUpdateManager.registerCallback(this.mUpdateMonitorCallback);
         this.mCurrentOrientation = this.mContext.getResources().getConfiguration().orientation;
         ((ConfigurationControllerImpl) this.mConfigurationController).addCallback(this.mConfigurationListener);
+        if (DeviceType.isTablet()) {
+            ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).addObserver(this.mDisplayObserver);
+        }
         if (LsRune.SECURITY_BOUNCER_WINDOW) {
             ((WallpaperEventNotifier) Dependency.sDependency.getDependencyInner(WallpaperEventNotifier.class)).registerCallback(false, this.mSystemUIWidgetCallback, 512L);
         }
         KeyguardUnlockAnimationController keyguardUnlockAnimationController = (KeyguardUnlockAnimationController) this.mKeyguardUnlockAnimationControllerLazy.get();
-        keyguardUnlockAnimationController.listeners.add(new KeyguardUnlockAnimationController.KeyguardUnlockAnimationListener() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.4
+        keyguardUnlockAnimationController.listeners.add(new KeyguardUnlockAnimationController.KeyguardUnlockAnimationListener() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.5
             @Override // com.android.systemui.keyguard.KeyguardUnlockAnimationController.KeyguardUnlockAnimationListener
             public final void onUnlockAnimationStarted(boolean z, boolean z2) {
                 if (z) {
@@ -586,7 +617,7 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 }
             }
         });
-        this.mStatusBarStateController.addCallback(new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.5
+        this.mStatusBarStateController.addCallback(new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.phone.SecStatusBarKeyguardViewManager.6
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onStatePreChange(int i, int i2) {
                 if (i == 1 && i2 == 0) {
@@ -614,8 +645,8 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
             Log.d("KeyguardPluginController", "requestUnlock");
             SelectedUserInteractor selectedUserInteractor = keyguardPluginControllerImpl.mSelectedUserInteractor;
             int selectedUserId = selectedUserInteractor.getSelectedUserId();
-            LockscreenCredential createNone = TextUtils.isEmpty(str) ? LockscreenCredential.createNone() : keyguardPluginControllerImpl.mLockPatternUtils.isLockPasswordEnabled(selectedUserId) ? LockPatternUtils.isQualityAlphabeticPassword(keyguardPluginControllerImpl.mLockPatternUtils.getKeyguardStoredPasswordQuality(selectedUserId)) ? LockscreenCredential.createPasswordOrNone(str) : LockscreenCredential.createPinOrNone(str) : keyguardPluginControllerImpl.mLockPatternUtils.isLockPatternEnabled(selectedUserId) ? LockscreenCredential.createPattern(LockPatternUtils.byteArrayToPattern(str.getBytes())) : LockscreenCredential.createPasswordOrNone(str);
-            if (createNone == null) {
+            LockscreenCredential lockscreenCredentialCreateNone = TextUtils.isEmpty(str) ? LockscreenCredential.createNone() : keyguardPluginControllerImpl.mLockPatternUtils.isLockPasswordEnabled(selectedUserId) ? LockPatternUtils.isQualityAlphabeticPassword(keyguardPluginControllerImpl.mLockPatternUtils.getKeyguardStoredPasswordQuality(selectedUserId)) ? LockscreenCredential.createPasswordOrNone(str) : LockscreenCredential.createPinOrNone(str) : keyguardPluginControllerImpl.mLockPatternUtils.isLockPatternEnabled(selectedUserId) ? LockscreenCredential.createPattern(LockPatternUtils.byteArrayToPattern(str.getBytes())) : LockscreenCredential.createPasswordOrNone(str);
+            if (lockscreenCredentialCreateNone == null) {
                 Log.e("KeyguardPluginController", "credential null : failed to get credential type");
                 return;
             }
@@ -624,7 +655,7 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
             if (keyguardUpdateMonitor.getUserHasTrust(selectedUserId) || keyguardUpdateMonitor.isBiometricsAuthenticatedOnLock()) {
                 credentialTypeForUser = -1;
             }
-            if (createNone.isNone() && credentialTypeForUser != -1) {
+            if (lockscreenCredentialCreateNone.isNone() && credentialTypeForUser != -1) {
                 ClockEventController$$ExternalSyntheticOutline0.m(credentialTypeForUser, "credential none, but credentialType is ", "KeyguardPluginController");
                 return;
             }
@@ -635,18 +666,18 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                 }
                 keyguardPluginControllerImpl.mLatencyTracker.onActionStart(3);
                 keyguardPluginControllerImpl.mLatencyTracker.onActionStart(4);
-                keyguardPluginControllerImpl.mPendingLockCheck = LockPatternChecker.checkCredential(keyguardPluginControllerImpl.mLockPatternUtils, createNone, selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardPluginControllerImpl.1
+                keyguardPluginControllerImpl.mPendingLockCheck = LockPatternChecker.checkCredential(keyguardPluginControllerImpl.mLockPatternUtils, lockscreenCredentialCreateNone, selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardPluginControllerImpl.1
                     public final /* synthetic */ LockscreenCredential val$credential;
                     public final /* synthetic */ int val$userId;
 
-                    public AnonymousClass1(int selectedUserId2, LockscreenCredential createNone2) {
-                        r2 = selectedUserId2;
-                        r3 = createNone2;
+                    public AnonymousClass1(int selectedUserId2, LockscreenCredential lockscreenCredentialCreateNone2) {
+                        i = selectedUserId2;
+                        lockscreenCredential = lockscreenCredentialCreateNone2;
                     }
 
                     public final void onCancelled() {
                         KeyguardPluginControllerImpl.this.mLatencyTracker.onActionEnd(4);
-                        r3.zeroize();
+                        lockscreenCredential.zeroize();
                     }
 
                     public final void onChecked(boolean z, int i) {
@@ -654,15 +685,15 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
                         KeyguardPluginControllerImpl keyguardPluginControllerImpl2 = KeyguardPluginControllerImpl.this;
                         keyguardPluginControllerImpl2.mPendingLockCheck = null;
                         if (!z) {
-                            KeyguardPluginControllerImpl.m955$$Nest$monPasswordChecked(keyguardPluginControllerImpl2, r2, false, i);
+                            KeyguardPluginControllerImpl.m957$$Nest$monPasswordChecked(keyguardPluginControllerImpl2, i, false, i);
                         }
-                        r3.zeroize();
+                        lockscreenCredential.zeroize();
                     }
 
                     public final void onEarlyMatched() {
                         KeyguardPluginControllerImpl.this.mLatencyTracker.onActionEnd(3);
-                        KeyguardPluginControllerImpl.m955$$Nest$monPasswordChecked(KeyguardPluginControllerImpl.this, r2, true, 0);
-                        r3.zeroize();
+                        KeyguardPluginControllerImpl.m957$$Nest$monPasswordChecked(KeyguardPluginControllerImpl.this, i, true, 0);
+                        lockscreenCredential.zeroize();
                     }
                 });
                 return;
@@ -684,9 +715,9 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
     @Override // com.android.keyguard.KeyguardViewController
     public final void resetKeyguardDismissAction() {
         PrimaryBouncerInteractor primaryBouncerInteractor = this.mPrimaryBouncerInteractor;
-        boolean willDismissWithAction = primaryBouncerInteractor.willDismissWithAction();
-        if (willDismissWithAction || this.mAfterKeyguardGoneAction != null) {
-            LogUtil.d("SecStatusBarKeyguardViewManager", "resetKeyguardDismissAction hasDismissAction=%d hasGoneAction=%d", Integer.valueOf(LogUtil.getInt(willDismissWithAction)), Integer.valueOf(LogUtil.getInt(this.mAfterKeyguardGoneAction)));
+        boolean zWillDismissWithAction = primaryBouncerInteractor.willDismissWithAction();
+        if (zWillDismissWithAction || this.mAfterKeyguardGoneAction != null) {
+            LogUtil.d("SecStatusBarKeyguardViewManager", "resetKeyguardDismissAction hasDismissAction=%d hasGoneAction=%d", Integer.valueOf(LogUtil.getInt(zWillDismissWithAction)), Integer.valueOf(LogUtil.getInt(this.mAfterKeyguardGoneAction)));
         }
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateManager;
         if (keyguardUpdateMonitor.isActiveDismissAction()) {
@@ -798,17 +829,17 @@ public class SecStatusBarKeyguardViewManager extends StatusBarKeyguardViewManage
         updateNavigationBarVisibility(isNavBarVisible());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0018  */
     @Override // com.android.keyguard.KeyguardViewController
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateKeyguardUnlocking() {
         boolean z;
         if (!((KeyguardViewMediatorHelperImpl) this.mKeyguardViewMediatorHelper).isKeyguardHiding()) {
             KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
-            if (keyguardStateControllerImpl.mKeyguardGoingAway || keyguardStateControllerImpl.mKeyguardFadingAway) {
-                z = true;
-                this.mKeyguardUnlocking = z;
-            }
+            z = keyguardStateControllerImpl.mKeyguardGoingAway || keyguardStateControllerImpl.mKeyguardFadingAway;
         }
-        z = false;
         this.mKeyguardUnlocking = z;
     }
 

@@ -1,6 +1,7 @@
 package androidx.compose.ui.platform;
 
 import android.graphics.Matrix;
+import android.graphics.RecordingCanvas;
 import android.graphics.RenderNode;
 import android.view.ViewParent;
 import androidx.compose.ui.geometry.MutableRect;
@@ -12,6 +13,7 @@ import androidx.compose.ui.graphics.Canvas;
 import androidx.compose.ui.graphics.CanvasHolder;
 import androidx.compose.ui.graphics.ColorFilter;
 import androidx.compose.ui.graphics.ColorKt;
+import androidx.compose.ui.graphics.Path;
 import androidx.compose.ui.graphics.RectangleShapeKt;
 import androidx.compose.ui.graphics.RenderEffect;
 import androidx.compose.ui.graphics.ReusableGraphicsLayerScope;
@@ -21,10 +23,10 @@ import androidx.compose.ui.node.OwnedLayer;
 import androidx.compose.ui.unit.IntOffset;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RenderNodeLayer implements OwnedLayer {
     public static final Function2 getMatrix;
@@ -42,7 +44,6 @@ public final class RenderNodeLayer implements OwnedLayer {
     public final LayerMatrixCache matrixCache = new LayerMatrixCache(getMatrix);
     public final CanvasHolder canvasHolder = new CanvasHolder();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,9 +95,9 @@ public final class RenderNodeLayer implements OwnedLayer {
     public final void drawLayer(Canvas canvas, GraphicsLayer graphicsLayer) {
         android.graphics.Canvas canvas2 = AndroidCanvas_androidKt.EmptyCanvas;
         android.graphics.Canvas canvas3 = ((AndroidCanvas) canvas).internalCanvas;
-        boolean isHardwareAccelerated = canvas3.isHardwareAccelerated();
+        boolean zIsHardwareAccelerated = canvas3.isHardwareAccelerated();
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
-        if (isHardwareAccelerated) {
+        if (zIsHardwareAccelerated) {
             updateDisplayList();
             boolean z = renderNodeApi29.renderNode.getElevation() > 0.0f;
             this.drawnWithZ = z;
@@ -126,7 +127,7 @@ public final class RenderNodeLayer implements OwnedLayer {
             canvas.save();
         }
         canvas.translate(left, top);
-        canvas.mo425concat58bKbWc(this.matrixCache.m706calculateMatrixGrdbGEg(renderNodeApi29));
+        canvas.mo427concat58bKbWc(this.matrixCache.m708calculateMatrixGrdbGEg(renderNodeApi29));
         if (renderNodeApi29.renderNode.getClipToOutline() || renderNodeApi29.renderNode.getClipToBounds()) {
             this.outlineResolver.clipToOutline(canvas);
         }
@@ -140,8 +141,8 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: getUnderlyingMatrix-sQKQjiQ */
-    public final float[] mo682getUnderlyingMatrixsQKQjiQ() {
-        return this.matrixCache.m706calculateMatrixGrdbGEg(this.renderNode);
+    public final float[] mo684getUnderlyingMatrixsQKQjiQ() {
+        return this.matrixCache.m708calculateMatrixGrdbGEg(this.renderNode);
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
@@ -155,24 +156,24 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: inverseTransform-58bKbWc */
-    public final void mo683inverseTransform58bKbWc(float[] fArr) {
-        float[] m705calculateInverseMatrixbWbORWo = this.matrixCache.m705calculateInverseMatrixbWbORWo(this.renderNode);
-        if (m705calculateInverseMatrixbWbORWo != null) {
-            androidx.compose.ui.graphics.Matrix.m487timesAssign58bKbWc(fArr, m705calculateInverseMatrixbWbORWo);
+    public final void mo685inverseTransform58bKbWc(float[] fArr) {
+        float[] fArrM707calculateInverseMatrixbWbORWo = this.matrixCache.m707calculateInverseMatrixbWbORWo(this.renderNode);
+        if (fArrM707calculateInverseMatrixbWbORWo != null) {
+            androidx.compose.ui.graphics.Matrix.m489timesAssign58bKbWc(fArr, fArrM707calculateInverseMatrixbWbORWo);
         }
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: isInLayer-k-4lQ0M */
-    public final boolean mo684isInLayerk4lQ0M(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (4294967295L & j));
+    public final boolean mo686isInLayerk4lQ0M(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (4294967295L & j));
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
         if (renderNodeApi29.renderNode.getClipToBounds()) {
-            return 0.0f <= intBitsToFloat && intBitsToFloat < ((float) renderNodeApi29.renderNode.getWidth()) && 0.0f <= intBitsToFloat2 && intBitsToFloat2 < ((float) renderNodeApi29.renderNode.getHeight());
+            return 0.0f <= fIntBitsToFloat && fIntBitsToFloat < ((float) renderNodeApi29.renderNode.getWidth()) && 0.0f <= fIntBitsToFloat2 && fIntBitsToFloat2 < ((float) renderNodeApi29.renderNode.getHeight());
         }
         if (renderNodeApi29.renderNode.getClipToOutline()) {
-            return this.outlineResolver.m707isInOutlinek4lQ0M(j);
+            return this.outlineResolver.m709isInOutlinek4lQ0M(j);
         }
         return true;
     }
@@ -182,19 +183,19 @@ public final class RenderNodeLayer implements OwnedLayer {
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
         LayerMatrixCache layerMatrixCache = this.matrixCache;
         if (!z) {
-            float[] m706calculateMatrixGrdbGEg = layerMatrixCache.m706calculateMatrixGrdbGEg(renderNodeApi29);
+            float[] fArrM708calculateMatrixGrdbGEg = layerMatrixCache.m708calculateMatrixGrdbGEg(renderNodeApi29);
             if (layerMatrixCache.isIdentity) {
                 return;
             }
-            androidx.compose.ui.graphics.Matrix.m483mapimpl(m706calculateMatrixGrdbGEg, mutableRect);
+            androidx.compose.ui.graphics.Matrix.m485mapimpl(fArrM708calculateMatrixGrdbGEg, mutableRect);
             return;
         }
-        float[] m705calculateInverseMatrixbWbORWo = layerMatrixCache.m705calculateInverseMatrixbWbORWo(renderNodeApi29);
-        if (m705calculateInverseMatrixbWbORWo != null) {
+        float[] fArrM707calculateInverseMatrixbWbORWo = layerMatrixCache.m707calculateInverseMatrixbWbORWo(renderNodeApi29);
+        if (fArrM707calculateInverseMatrixbWbORWo != null) {
             if (layerMatrixCache.isIdentity) {
                 return;
             }
-            androidx.compose.ui.graphics.Matrix.m483mapimpl(m705calculateInverseMatrixbWbORWo, mutableRect);
+            androidx.compose.ui.graphics.Matrix.m485mapimpl(fArrM707calculateInverseMatrixbWbORWo, mutableRect);
         } else {
             mutableRect.left = 0.0f;
             mutableRect.top = 0.0f;
@@ -205,22 +206,22 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: mapOffset-8S9VItk */
-    public final long mo685mapOffset8S9VItk(long j, boolean z) {
+    public final long mo687mapOffset8S9VItk(long j, boolean z) {
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
         LayerMatrixCache layerMatrixCache = this.matrixCache;
         if (z) {
-            float[] m705calculateInverseMatrixbWbORWo = layerMatrixCache.m705calculateInverseMatrixbWbORWo(renderNodeApi29);
-            if (m705calculateInverseMatrixbWbORWo == null) {
+            float[] fArrM707calculateInverseMatrixbWbORWo = layerMatrixCache.m707calculateInverseMatrixbWbORWo(renderNodeApi29);
+            if (fArrM707calculateInverseMatrixbWbORWo == null) {
                 Offset.Companion.getClass();
                 return Offset.Infinite;
             }
             if (!layerMatrixCache.isIdentity) {
-                return androidx.compose.ui.graphics.Matrix.m482mapMKHz9U(j, m705calculateInverseMatrixbWbORWo);
+                return androidx.compose.ui.graphics.Matrix.m484mapMKHz9U(j, fArrM707calculateInverseMatrixbWbORWo);
             }
         } else {
-            float[] m706calculateMatrixGrdbGEg = layerMatrixCache.m706calculateMatrixGrdbGEg(renderNodeApi29);
+            float[] fArrM708calculateMatrixGrdbGEg = layerMatrixCache.m708calculateMatrixGrdbGEg(renderNodeApi29);
             if (!layerMatrixCache.isIdentity) {
-                return androidx.compose.ui.graphics.Matrix.m482mapMKHz9U(j, m706calculateMatrixGrdbGEg);
+                return androidx.compose.ui.graphics.Matrix.m484mapMKHz9U(j, fArrM708calculateMatrixGrdbGEg);
             }
         }
         return j;
@@ -228,7 +229,7 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: move--gyyYBs */
-    public final void mo686movegyyYBs(long j) {
+    public final void mo688movegyyYBs(long j) {
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
         int left = renderNodeApi29.renderNode.getLeft();
         int top = renderNodeApi29.renderNode.getTop();
@@ -255,13 +256,13 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: resize-ozmzZPI */
-    public final void mo687resizeozmzZPI(long j) {
+    public final void mo689resizeozmzZPI(long j) {
         int i = (int) (j >> 32);
         int i2 = (int) (j & 4294967295L);
-        float m503getPivotFractionXimpl = TransformOrigin.m503getPivotFractionXimpl(this.transformOrigin) * i;
+        float fM505getPivotFractionXimpl = TransformOrigin.m505getPivotFractionXimpl(this.transformOrigin) * i;
         RenderNodeApi29 renderNodeApi29 = this.renderNode;
-        renderNodeApi29.renderNode.setPivotX(m503getPivotFractionXimpl);
-        renderNodeApi29.renderNode.setPivotY(TransformOrigin.m504getPivotFractionYimpl(this.transformOrigin) * i2);
+        renderNodeApi29.renderNode.setPivotX(fM505getPivotFractionXimpl);
+        renderNodeApi29.renderNode.setPivotY(TransformOrigin.m506getPivotFractionYimpl(this.transformOrigin) * i2);
         if (renderNodeApi29.renderNode.setPosition(renderNodeApi29.renderNode.getLeft(), renderNodeApi29.renderNode.getTop(), renderNodeApi29.renderNode.getLeft() + i, renderNodeApi29.renderNode.getTop() + i2)) {
             renderNodeApi29.renderNode.setOutline(this.outlineResolver.getAndroidOutline());
             if (!this.isDirty && !this.isDestroyed) {
@@ -279,8 +280,8 @@ public final class RenderNodeLayer implements OwnedLayer {
         layerMatrixCache.isInverseDirty = false;
         layerMatrixCache.isIdentity = true;
         layerMatrixCache.isInverseValid = true;
-        androidx.compose.ui.graphics.Matrix.m484resetimpl(layerMatrixCache.matrixCache);
-        androidx.compose.ui.graphics.Matrix.m484resetimpl(layerMatrixCache.inverseMatrixCache);
+        androidx.compose.ui.graphics.Matrix.m486resetimpl(layerMatrixCache.matrixCache);
+        androidx.compose.ui.graphics.Matrix.m486resetimpl(layerMatrixCache.inverseMatrixCache);
         setDirty$1(false);
         this.isDestroyed = false;
         this.drawnWithZ = false;
@@ -299,69 +300,61 @@ public final class RenderNodeLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: transform-58bKbWc */
-    public final void mo688transform58bKbWc(float[] fArr) {
-        androidx.compose.ui.graphics.Matrix.m487timesAssign58bKbWc(fArr, this.matrixCache.m706calculateMatrixGrdbGEg(this.renderNode));
+    public final void mo690transform58bKbWc(float[] fArr) {
+        androidx.compose.ui.graphics.Matrix.m489timesAssign58bKbWc(fArr, this.matrixCache.m708calculateMatrixGrdbGEg(this.renderNode));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0029  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0024  */
     @Override // androidx.compose.ui.node.OwnedLayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateDisplayList() {
-        /*
-            r7 = this;
-            boolean r0 = r7.isDirty
-            androidx.compose.ui.platform.RenderNodeApi29 r1 = r7.renderNode
-            if (r0 != 0) goto L10
-            android.graphics.RenderNode r0 = r1.renderNode
-            boolean r0 = r0.hasDisplayList()
-            if (r0 != 0) goto Lf
-            goto L10
-        Lf:
-            return
-        L10:
-            android.graphics.RenderNode r0 = r1.renderNode
-            boolean r0 = r0.getClipToOutline()
-            if (r0 == 0) goto L24
-            androidx.compose.ui.platform.OutlineResolver r0 = r7.outlineResolver
-            boolean r2 = r0.usePathForClip
-            if (r2 == 0) goto L24
-            r0.updateCache()
-            androidx.compose.ui.graphics.Path r0 = r0.outlinePath
-            goto L25
-        L24:
-            r0 = 0
-        L25:
-            kotlin.jvm.functions.Function2 r2 = r7.drawBlock
-            if (r2 == 0) goto L55
-            androidx.compose.ui.platform.RenderNodeLayer$updateDisplayList$1$1 r3 = new androidx.compose.ui.platform.RenderNodeLayer$updateDisplayList$1$1
-            r3.<init>()
-            android.graphics.RenderNode r2 = r1.renderNode
-            android.graphics.RecordingCanvas r2 = r2.beginRecording()
-            androidx.compose.ui.graphics.CanvasHolder r4 = r7.canvasHolder
-            androidx.compose.ui.graphics.AndroidCanvas r5 = r4.androidCanvas
-            android.graphics.Canvas r6 = r5.internalCanvas
-            r5.internalCanvas = r2
-            if (r0 == 0) goto L44
-            r5.save()
-            androidx.compose.ui.graphics.Canvas.m452clipPathmtrdDE$default(r5, r0)
-        L44:
-            r3.mo779invoke(r5)
-            if (r0 == 0) goto L4c
-            r5.restore()
-        L4c:
-            androidx.compose.ui.graphics.AndroidCanvas r0 = r4.androidCanvas
-            r0.internalCanvas = r6
-            android.graphics.RenderNode r0 = r1.renderNode
-            r0.endRecording()
-        L55:
-            r0 = 0
-            r7.setDirty$1(r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.RenderNodeLayer.updateDisplayList():void");
+        Path path;
+        boolean z = this.isDirty;
+        RenderNodeApi29 renderNodeApi29 = this.renderNode;
+        if (z || !renderNodeApi29.renderNode.hasDisplayList()) {
+            if (renderNodeApi29.renderNode.getClipToOutline()) {
+                OutlineResolver outlineResolver = this.outlineResolver;
+                if (outlineResolver.usePathForClip) {
+                    outlineResolver.updateCache();
+                    path = outlineResolver.outlinePath;
+                } else {
+                    path = null;
+                }
+            }
+            final Function2 function2 = this.drawBlock;
+            if (function2 != null) {
+                Function1 function1 = new Function1() { // from class: androidx.compose.ui.platform.RenderNodeLayer$updateDisplayList$1$1
+                    {
+                        super(1);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj) {
+                        function2.invoke((Canvas) obj, null);
+                        return Unit.INSTANCE;
+                    }
+                };
+                RecordingCanvas recordingCanvasBeginRecording = renderNodeApi29.renderNode.beginRecording();
+                CanvasHolder canvasHolder = this.canvasHolder;
+                AndroidCanvas androidCanvas = canvasHolder.androidCanvas;
+                android.graphics.Canvas canvas = androidCanvas.internalCanvas;
+                androidCanvas.internalCanvas = recordingCanvasBeginRecording;
+                if (path != null) {
+                    androidCanvas.save();
+                    Canvas.m454clipPathmtrdDE$default(androidCanvas, path);
+                }
+                function1.mo781invoke(androidCanvas);
+                if (path != null) {
+                    androidCanvas.restore();
+                }
+                canvasHolder.androidCanvas.internalCanvas = canvas;
+                renderNodeApi29.renderNode.endRecording();
+            }
+            setDirty$1(false);
+        }
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
@@ -396,10 +389,10 @@ public final class RenderNodeLayer implements OwnedLayer {
             renderNodeApi29.renderNode.setElevation(reusableGraphicsLayerScope.shadowElevation);
         }
         if ((i & 64) != 0) {
-            renderNodeApi29.renderNode.setAmbientShadowColor(ColorKt.m467toArgb8_81llA(reusableGraphicsLayerScope.ambientShadowColor));
+            renderNodeApi29.renderNode.setAmbientShadowColor(ColorKt.m469toArgb8_81llA(reusableGraphicsLayerScope.ambientShadowColor));
         }
         if ((i & 128) != 0) {
-            renderNodeApi29.renderNode.setSpotShadowColor(ColorKt.m467toArgb8_81llA(reusableGraphicsLayerScope.spotShadowColor));
+            renderNodeApi29.renderNode.setSpotShadowColor(ColorKt.m469toArgb8_81llA(reusableGraphicsLayerScope.spotShadowColor));
         }
         if ((i & 1024) != 0) {
             renderNodeApi29.renderNode.setRotationZ(reusableGraphicsLayerScope.rotationZ);
@@ -414,8 +407,8 @@ public final class RenderNodeLayer implements OwnedLayer {
             renderNodeApi29.renderNode.setCameraDistance(reusableGraphicsLayerScope.cameraDistance);
         }
         if (i2 != 0) {
-            renderNodeApi29.renderNode.setPivotX(TransformOrigin.m503getPivotFractionXimpl(this.transformOrigin) * renderNodeApi29.renderNode.getWidth());
-            renderNodeApi29.renderNode.setPivotY(TransformOrigin.m504getPivotFractionYimpl(this.transformOrigin) * renderNodeApi29.renderNode.getHeight());
+            renderNodeApi29.renderNode.setPivotX(TransformOrigin.m505getPivotFractionXimpl(this.transformOrigin) * renderNodeApi29.renderNode.getWidth());
+            renderNodeApi29.renderNode.setPivotY(TransformOrigin.m506getPivotFractionYimpl(this.transformOrigin) * renderNodeApi29.renderNode.getHeight());
         }
         boolean z3 = reusableGraphicsLayerScope.clip && reusableGraphicsLayerScope.shape != RectangleShapeKt.RectangleShape;
         if ((i & 24576) != 0) {
@@ -449,14 +442,14 @@ public final class RenderNodeLayer implements OwnedLayer {
                 androidPaint2 = new AndroidPaint();
                 renderNodeApi29.layerPaint = androidPaint2;
             }
-            androidPaint2.m437setBlendModes9anfk8(i3);
+            androidPaint2.m439setBlendModes9anfk8(i3);
             renderNodeApi29.updateLayerProperties$1();
         }
         if ((32768 & i) != 0) {
             renderNodeApi29.internalCompositingStrategy = reusableGraphicsLayerScope.compositingStrategy;
             renderNodeApi29.updateLayerProperties$1();
         }
-        boolean m708updateS_szKao = this.outlineResolver.m708updateS_szKao(reusableGraphicsLayerScope.outline, reusableGraphicsLayerScope.alpha, z3, reusableGraphicsLayerScope.shadowElevation, reusableGraphicsLayerScope.size);
+        boolean zM710updateS_szKao = this.outlineResolver.m710updateS_szKao(reusableGraphicsLayerScope.outline, reusableGraphicsLayerScope.alpha, z3, reusableGraphicsLayerScope.shadowElevation, reusableGraphicsLayerScope.size);
         if (outlineResolver.cacheIsDirty) {
             renderNodeApi29.renderNode.setOutline(outlineResolver.getAndroidOutline());
         }
@@ -464,7 +457,7 @@ public final class RenderNodeLayer implements OwnedLayer {
             z = true;
         }
         AndroidComposeView androidComposeView = this.ownerView;
-        if (z2 == z && (!z || !m708updateS_szKao)) {
+        if (z2 == z && (!z || !zM710updateS_szKao)) {
             WrapperRenderNodeLayerHelperMethods.INSTANCE.getClass();
             ViewParent parent = androidComposeView.getParent();
             if (parent != null) {

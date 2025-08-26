@@ -49,10 +49,10 @@ public final class MediaFilterFactory {
 
         public Builder(MediaFilterFactory mediaFilterFactory) {
             this.pluginStores = new ArrayList();
-            HashMap hashMap = new HashMap();
-            this.creators = hashMap;
+            HashMap map = new HashMap();
+            this.creators = map;
             this.comparators = new HashMap();
-            hashMap.putAll(mediaFilterFactory.getCreatorRegistry());
+            map.putAll(mediaFilterFactory.getCreatorRegistry());
         }
 
         public Builder addDefaultCreators() {
@@ -114,7 +114,7 @@ public final class MediaFilterFactory {
             this.comparators.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$Builder$$ExternalSyntheticLambda1
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    MediaFilterFactory.Builder.this.m9564x8891efff((Class) obj, (Comparator) obj2);
+                    this.f$0.m9577x8891efff((Class) obj, (Comparator) obj2);
                 }
             });
             MediaFilterFactory mediaFilterFactory = new MediaFilterFactory(this.creators, PluginStore.of(this.pluginStores));
@@ -126,7 +126,7 @@ public final class MediaFilterFactory {
         }
 
         /* renamed from: lambda$build$1$com-samsung-android-sume-core-filter-factory-MediaFilterFactory$Builder, reason: not valid java name */
-        /* synthetic */ void m9564x8891efff(Class cls, Comparator comparator) {
+        /* synthetic */ void m9577x8891efff(Class cls, Comparator comparator) {
             if (this.creators.containsKey(cls)) {
                 this.creators.get(cls).sort(comparator);
             }
@@ -148,7 +148,7 @@ public final class MediaFilterFactory {
         }).forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaFilterFactory.this.m9561x999bf6a4((MediaFilterCreator) obj);
+                this.f$0.m9574x999bf6a4((MediaFilterCreator) obj);
             }
         });
         this.creators.values().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda2
@@ -159,7 +159,7 @@ public final class MediaFilterFactory {
         }).flatMap(new ContentProtectionEventProcessor$$ExternalSyntheticLambda8()).forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaFilterFactory.this.m9562x351ae6a6((MediaFilterCreator) obj);
+                this.f$0.m9575x351ae6a6((MediaFilterCreator) obj);
             }
         });
     }
@@ -169,7 +169,7 @@ public final class MediaFilterFactory {
     }
 
     /* renamed from: lambda$init$1$com-samsung-android-sume-core-filter-factory-MediaFilterFactory, reason: not valid java name */
-    /* synthetic */ void m9561x999bf6a4(MediaFilterCreator mediaFilterCreator) {
+    /* synthetic */ void m9574x999bf6a4(MediaFilterCreator mediaFilterCreator) {
         ((PluginFilterCreator) mediaFilterCreator).setPluginStore(this.pluginStore);
     }
 
@@ -178,7 +178,7 @@ public final class MediaFilterFactory {
     }
 
     /* renamed from: lambda$init$3$com-samsung-android-sume-core-filter-factory-MediaFilterFactory, reason: not valid java name */
-    /* synthetic */ void m9562x351ae6a6(MediaFilterCreator mediaFilterCreator) {
+    /* synthetic */ void m9575x351ae6a6(MediaFilterCreator mediaFilterCreator) {
         ((MediaFilterCreatorChain) mediaFilterCreator).prepare(this.creators);
     }
 
@@ -210,21 +210,17 @@ public final class MediaFilterFactory {
         return (MediaFilter) Optional.ofNullable(this.creators.get(cls)).flatMap(new Function() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Optional findFirst;
-                findFirst = ((List) obj).stream().findFirst();
-                return findFirst;
+                return ((List) obj).stream().findFirst();
             }
         }).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MediaFilterFactory.this.m9563xbaecdff6(mFDescriptor, mediaFilter, (MediaFilterCreator) obj);
+                return this.f$0.m9576xbaecdff6(mFDescriptor, mediaFilter, (MediaFilterCreator) obj);
             }
         }).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MediaFilter addAdditionalFilters;
-                addAdditionalFilters = MediaFilterFactory.this.addAdditionalFilters((MediaFilter) obj);
-                return addAdditionalFilters;
+                return this.f$0.addAdditionalFilters((MediaFilter) obj);
             }
         }).orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterFactory$$ExternalSyntheticLambda7
             @Override // java.util.function.Supplier
@@ -235,7 +231,7 @@ public final class MediaFilterFactory {
     }
 
     /* renamed from: lambda$newFilter$5$com-samsung-android-sume-core-filter-factory-MediaFilterFactory, reason: not valid java name */
-    /* synthetic */ MediaFilter m9563xbaecdff6(MFDescriptor mFDescriptor, MediaFilter mediaFilter, MediaFilterCreator mediaFilterCreator) {
+    /* synthetic */ MediaFilter m9576xbaecdff6(MFDescriptor mFDescriptor, MediaFilter mediaFilter, MediaFilterCreator mediaFilterCreator) {
         return mediaFilterCreator.newFilter(this, mFDescriptor, mediaFilter);
     }
 

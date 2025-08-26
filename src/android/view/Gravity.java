@@ -38,59 +38,27 @@ public class Gravity {
     public @interface GravityFlags {
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0016, code lost:
-    
-        r3 = r3 | 3;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0024, code lost:
-    
-        if (r4 == 1) goto L9;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x0011, code lost:
-    
-        if (r4 == 1) goto L8;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0013, code lost:
-    
-        r3 = r3 | 5;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0013 A[PHI: r3
+      0x0013: PHI (r3v6 int) = (r3v1 int), (r3v8 int) binds: [B:13:0x0024, B:7:0x0011] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0016 A[PHI: r3
+      0x0016: PHI (r3v2 int) = (r3v1 int), (r3v8 int) binds: [B:13:0x0024, B:7:0x0011] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int getAbsoluteGravity(int r3, int r4) {
-        /*
-            r0 = 8388608(0x800000, float:1.1754944E-38)
-            r0 = r0 & r3
-            if (r0 <= 0) goto L2b
-            r0 = 8388611(0x800003, float:1.1754948E-38)
-            r1 = r3 & r0
-            r2 = 1
-            if (r1 != r0) goto L19
-            r0 = -8388612(0xffffffffff7ffffc, float:-3.4028229E38)
-            r3 = r3 & r0
-            if (r4 != r2) goto L16
-        L13:
-            r3 = r3 | 5
-            goto L27
-        L16:
-            r3 = r3 | 3
-            goto L27
-        L19:
-            r0 = 8388613(0x800005, float:1.175495E-38)
-            r1 = r3 & r0
-            if (r1 != r0) goto L27
-            r0 = -8388614(0xffffffffff7ffffa, float:-3.4028225E38)
-            r3 = r3 & r0
-            if (r4 != r2) goto L13
-            goto L16
-        L27:
-            r4 = -8388609(0xffffffffff7fffff, float:-3.4028235E38)
-            r3 = r3 & r4
-        L2b:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.Gravity.getAbsoluteGravity(int, int):int");
+    public static int getAbsoluteGravity(int i, int i2) {
+        int i3;
+        if ((8388608 & i) <= 0) {
+            return i;
+        }
+        if ((i & START) == 8388611) {
+            i3 = i & (-8388612);
+            i = i2 == 1 ? i3 | 5 : i3 | 3;
+        } else if ((i & END) == 8388613) {
+            i3 = i & (-8388614);
+            if (i2 == 1) {
+            }
+        }
+        return i & (-8388609);
     }
 
     public static boolean isHorizontal(int i) {
@@ -180,123 +148,82 @@ public class Gravity {
         apply(getAbsoluteGravity(i, i6), i2, i3, rect, i4, i5, rect2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
+    /* JADX WARN: Removed duplicated region for block: B:47:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void applyDisplay(int r5, android.graphics.Rect r6, android.graphics.Rect r7) {
-        /*
-            r0 = 268435456(0x10000000, float:2.524355E-29)
-            r0 = r0 & r5
-            r1 = 0
-            if (r0 == 0) goto L1b
-            int r0 = r7.top
-            int r2 = r6.top
-            if (r0 >= r2) goto L10
-            int r0 = r6.top
-            r7.top = r0
-        L10:
-            int r0 = r7.bottom
-            int r2 = r6.bottom
-            if (r0 <= r2) goto L53
-            int r0 = r6.bottom
-            r7.bottom = r0
-            goto L53
-        L1b:
-            int r0 = r7.top
-            int r2 = r6.top
-            if (r0 >= r2) goto L27
-            int r0 = r6.top
-            int r2 = r7.top
-        L25:
-            int r0 = r0 - r2
-            goto L33
-        L27:
-            int r0 = r7.bottom
-            int r2 = r6.bottom
-            if (r0 <= r2) goto L32
-            int r0 = r6.bottom
-            int r2 = r7.bottom
-            goto L25
-        L32:
-            r0 = r1
-        L33:
-            if (r0 == 0) goto L53
-            int r2 = r7.height()
-            int r3 = r6.bottom
-            int r4 = r6.top
-            int r3 = r3 - r4
-            if (r2 <= r3) goto L49
-            int r0 = r6.top
-            r7.top = r0
-            int r0 = r6.bottom
-            r7.bottom = r0
-            goto L53
-        L49:
-            int r2 = r7.top
-            int r2 = r2 + r0
-            r7.top = r2
-            int r2 = r7.bottom
-            int r2 = r2 + r0
-            r7.bottom = r2
-        L53:
-            r0 = 16777216(0x1000000, float:2.3509887E-38)
-            r5 = r5 & r0
-            if (r5 == 0) goto L6d
-            int r5 = r7.left
-            int r0 = r6.left
-            if (r5 >= r0) goto L62
-            int r5 = r6.left
-            r7.left = r5
-        L62:
-            int r5 = r7.right
-            int r0 = r6.right
-            if (r5 <= r0) goto La5
-            int r5 = r6.right
-            r7.right = r5
-            return
-        L6d:
-            int r5 = r7.left
-            int r0 = r6.left
-            if (r5 >= r0) goto L7a
-            int r5 = r6.left
-            int r0 = r7.left
-        L77:
-            int r1 = r5 - r0
-            goto L85
-        L7a:
-            int r5 = r7.right
-            int r0 = r6.right
-            if (r5 <= r0) goto L85
-            int r5 = r6.right
-            int r0 = r7.right
-            goto L77
-        L85:
-            if (r1 == 0) goto La5
-            int r5 = r7.width()
-            int r0 = r6.right
-            int r2 = r6.left
-            int r0 = r0 - r2
-            if (r5 <= r0) goto L9b
-            int r5 = r6.left
-            r7.left = r5
-            int r5 = r6.right
-            r7.right = r5
-            return
-        L9b:
-            int r5 = r7.left
-            int r5 = r5 + r1
-            r7.left = r5
-            int r5 = r7.right
-            int r5 = r5 + r1
-            r7.right = r5
-        La5:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.Gravity.applyDisplay(int, android.graphics.Rect, android.graphics.Rect):void");
+    public static void applyDisplay(int i, Rect rect, Rect rect2) {
+        int i2;
+        int i3;
+        int i4;
+        int i5;
+        int i6;
+        int i7 = 0;
+        if ((268435456 & i) != 0) {
+            if (rect2.top < rect.top) {
+                rect2.top = rect.top;
+            }
+            if (rect2.bottom > rect.bottom) {
+                rect2.bottom = rect.bottom;
+            }
+        } else {
+            if (rect2.top < rect.top) {
+                i3 = rect.top;
+                i4 = rect2.top;
+            } else if (rect2.bottom > rect.bottom) {
+                i3 = rect.bottom;
+                i4 = rect2.bottom;
+            } else {
+                i2 = 0;
+                if (i2 != 0) {
+                    if (rect2.height() > rect.bottom - rect.top) {
+                        rect2.top = rect.top;
+                        rect2.bottom = rect.bottom;
+                    } else {
+                        rect2.top += i2;
+                        rect2.bottom += i2;
+                    }
+                }
+            }
+            i2 = i3 - i4;
+            if (i2 != 0) {
+            }
+        }
+        if ((i & 16777216) != 0) {
+            if (rect2.left < rect.left) {
+                rect2.left = rect.left;
+            }
+            if (rect2.right > rect.right) {
+                rect2.right = rect.right;
+                return;
+            }
+            return;
+        }
+        if (rect2.left >= rect.left) {
+            if (rect2.right > rect.right) {
+                i5 = rect.right;
+                i6 = rect2.right;
+            }
+            if (i7 == 0) {
+                if (rect2.width() > rect.right - rect.left) {
+                    rect2.left = rect.left;
+                    rect2.right = rect.right;
+                    return;
+                } else {
+                    rect2.left += i7;
+                    rect2.right += i7;
+                    return;
+                }
+            }
+            return;
+        }
+        i5 = rect.left;
+        i6 = rect2.left;
+        i7 = i5 - i6;
+        if (i7 == 0) {
+        }
     }
 
     public static void applyDisplay(int i, Rect rect, Rect rect2, int i2) {

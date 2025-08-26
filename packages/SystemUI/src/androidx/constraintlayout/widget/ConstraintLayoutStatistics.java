@@ -8,7 +8,6 @@ import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOu
 import androidx.constraintlayout.core.Metrics;
 import java.text.DecimalFormat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ConstraintLayoutStatistics {
     public static final int DURATION_OF_CHILD_MEASURES = 5;
@@ -32,16 +31,16 @@ public class ConstraintLayoutStatistics {
     }
 
     private String compare(DecimalFormat decimalFormat, ConstraintLayoutStatistics constraintLayoutStatistics, int i) {
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(fmt(decimalFormat, getValue(i) * 1.0E-6f, 7), " -> "), fmt(decimalFormat, constraintLayoutStatistics.getValue(i) * 1.0E-6f, 7), "ms");
-        String m2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2.substring(m2.length() - MAX_WORD), " = "), m);
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(fmt(decimalFormat, getValue(i) * 1.0E-6f, 7), " -> "), fmt(decimalFormat, constraintLayoutStatistics.getValue(i) * 1.0E-6f, 7), "ms");
+        String strM2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2.substring(strM2.length() - MAX_WORD), " = "), strM);
     }
 
     private String fmt(DecimalFormat decimalFormat, float f, int i) {
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(new String(new char[i]).replace((char) 0, ' '));
-        m.append(decimalFormat.format(f));
-        String sb = m.toString();
-        return sb.substring(sb.length() - i);
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(new String(new char[i]).replace((char) 0, ' '));
+        sbM.append(decimalFormat.format(f));
+        String string = sbM.toString();
+        return string.substring(string.length() - i);
     }
 
     private void log(String str) {
@@ -155,7 +154,7 @@ public class ConstraintLayoutStatistics {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ConstraintLayoutStatistics m887clone() {
+    public ConstraintLayoutStatistics m889clone() {
         return new ConstraintLayoutStatistics(this);
     }
 
@@ -204,20 +203,20 @@ public class ConstraintLayoutStatistics {
     }
 
     private String log(DecimalFormat decimalFormat, int i) {
-        String fmt = fmt(decimalFormat, getValue(i) * 1.0E-6f, 7);
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m.substring(m.length() - MAX_WORD), " = "), fmt);
+        String strFmt = fmt(decimalFormat, getValue(i) * 1.0E-6f, 7);
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM.substring(strM.length() - MAX_WORD), " = "), strFmt);
     }
 
     private String compare(ConstraintLayoutStatistics constraintLayoutStatistics, int i) {
         String str = getValue(i) + " -> " + constraintLayoutStatistics.getValue(i);
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m.substring(m.length() - MAX_WORD), " = "), str);
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM.substring(strM.length() - MAX_WORD), " = "), str);
     }
 
     private String log(int i) {
-        String l = Long.toString(getValue(i));
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m.substring(m.length() - MAX_WORD), " = "), l);
+        String string = Long.toString(getValue(i));
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), WORD_PAD, geName(i));
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CL Perf: ", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM.substring(strM.length() - MAX_WORD), " = "), string);
     }
 }

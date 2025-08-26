@@ -3,6 +3,7 @@ package com.android.internal.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Telephony;
+import java.io.IOException;
 
 /* loaded from: classes4.dex */
 public class OperatorInfo implements Parcelable {
@@ -105,7 +106,7 @@ public class OperatorInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mOperatorAlphaLong);
         parcel.writeString(this.mOperatorAlphaShort);
         parcel.writeString(this.mOperatorNumeric);

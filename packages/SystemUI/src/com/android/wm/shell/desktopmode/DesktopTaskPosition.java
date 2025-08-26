@@ -5,11 +5,9 @@ import android.graphics.Rect;
 import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class DesktopTaskPosition {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BottomLeft extends DesktopTaskPosition {
         public static final BottomLeft INSTANCE = new BottomLeft();
 
@@ -40,7 +38,6 @@ public abstract class DesktopTaskPosition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BottomRight extends DesktopTaskPosition {
         public static final BottomRight INSTANCE = new BottomRight();
 
@@ -71,7 +68,6 @@ public abstract class DesktopTaskPosition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Center extends DesktopTaskPosition {
         public static final Center INSTANCE = new Center();
 
@@ -102,7 +98,6 @@ public abstract class DesktopTaskPosition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TopLeft extends DesktopTaskPosition {
         public static final TopLeft INSTANCE = new TopLeft();
 
@@ -133,7 +128,6 @@ public abstract class DesktopTaskPosition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TopRight extends DesktopTaskPosition {
         public static final TopRight INSTANCE = new TopRight();
 

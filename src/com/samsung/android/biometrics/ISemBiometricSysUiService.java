@@ -90,9 +90,9 @@ public interface ISemBiometricSysUiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemBiometricSysUiService)) {
-                return (ISemBiometricSysUiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemBiometricSysUiService)) {
+                return (ISemBiometricSysUiService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,66 +134,66 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    ISemBiometricSysUiCallback asInterface = ISemBiometricSysUiCallback.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt3 = parcel.readInt();
-                    String readString = parcel.readString();
-                    long readLong = parcel.readLong();
+                    ISemBiometricSysUiCallback iSemBiometricSysUiCallbackAsInterface = ISemBiometricSysUiCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
+                    int i5 = parcel.readInt();
+                    String string = parcel.readString();
+                    long j = parcel.readLong();
                     PromptInfo promptInfo = (PromptInfo) parcel.readTypedObject(PromptInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    showBiometricDialog(readInt, readInt2, bundle, asInterface, readBoolean, readInt3, readString, readLong, promptInfo);
+                    showBiometricDialog(i3, i4, bundle, iSemBiometricSysUiCallbackAsInterface, z, i5, string, j, promptInfo);
                     return true;
                 case 2:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    String readString2 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onBiometricAuthenticated(readInt4, readInt5, readBoolean2, readString2);
+                    onBiometricAuthenticated(i6, i7, z2, string2);
                     return true;
                 case 3:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onBiometricHelp(readInt6, readInt7, readInt8, readInt9, readString3);
+                    onBiometricHelp(i8, i9, i10, i11, string3);
                     return true;
                 case 4:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onBiometricError(readInt10, readInt11, readInt12, readInt13, readString4);
+                    onBiometricError(i12, i13, i14, i15, string4);
                     return true;
                 case 5:
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hideBiometricDialog(readInt14, readInt15, readInt16);
+                    hideBiometricDialog(i16, i17, i18);
                     return true;
                 case 6:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCommand(readInt17, readInt18, readInt19, bundle2);
+                    sendCommand(i19, i20, i21, bundle2);
                     return true;
                 case 7:
-                    int readInt20 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    FileDescriptor readRawFileDescriptor = parcel.readRawFileDescriptor();
+                    int i22 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    FileDescriptor rawFileDescriptor = parcel.readRawFileDescriptor();
                     parcel.enforceNoDataAvail();
-                    setBiometricTheme(readInt20, readString5, createByteArray, readRawFileDescriptor);
+                    setBiometricTheme(i22, string5, bArrCreateByteArray, rawFileDescriptor);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -218,112 +218,112 @@ public interface ISemBiometricSysUiService extends IInterface {
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void showBiometricDialog(int i, int i2, Bundle bundle, ISemBiometricSysUiCallback iSemBiometricSysUiCallback, boolean z, int i3, String str, long j, PromptInfo promptInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iSemBiometricSysUiCallback);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(promptInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iSemBiometricSysUiCallback);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(promptInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void onBiometricAuthenticated(int i, int i2, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void onBiometricHelp(int i, int i2, int i3, int i4, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void onBiometricError(int i, int i2, int i3, int i4, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void hideBiometricDialog(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void sendCommand(int i, int i2, int i3, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
             public void setBiometricTheme(int i, String str, byte[] bArr, FileDescriptor fileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

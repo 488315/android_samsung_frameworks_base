@@ -9,7 +9,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 
 /* loaded from: classes5.dex */
 public class ParameterUtil {
-    public static char[] extractPassword(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException {
+    public static char[] extractPassword(KeyStore.LoadStoreParameter loadStoreParameter) throws UnsupportedCallbackException, IOException {
         KeyStore.ProtectionParameter protectionParameter = loadStoreParameter.getProtectionParameter();
         if (protectionParameter == null) {
             return null;

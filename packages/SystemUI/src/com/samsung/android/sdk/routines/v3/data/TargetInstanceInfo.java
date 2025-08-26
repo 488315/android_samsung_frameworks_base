@@ -4,7 +4,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TargetInstanceInfo {
     private final TargetInstanceInfoExtra extra;
@@ -114,11 +113,11 @@ public final class TargetInstanceInfo {
     }
 
     public int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Long.hashCode(this.instanceId) * 31, 31, this.packageName), 31, this.tag);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Long.hashCode(this.instanceId) * 31, 31, this.packageName), 31, this.tag);
         String str = this.intentParam;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.labelParam;
-        return this.extra.hashCode() + ((hashCode + (str2 != null ? str2.hashCode() : 0)) * 31);
+        return this.extra.hashCode() + ((iHashCode + (str2 != null ? str2.hashCode() : 0)) * 31);
     }
 
     public final void setInstanceId(long j) {

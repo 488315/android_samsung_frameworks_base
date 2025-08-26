@@ -502,7 +502,7 @@ Se a permissão for desativada, os alarmes e eventos programados pelo app não f
     <string name="autofill">Preenchimento automático</string>
     <string name="available_devices_header">Aparelhos disponíveis</string>
     <string name="available_using_samsung_account">Disponível com o uso da Samsung account</string>
-    <string name="avatar_picker_title">Escolha uma foto de perfil</string>
+    <string name="avatar_picker_title">Atualizar a foto de perfil</string>
     <string name="back">Voltar</string>
     <string name="back_button_text">Voltar</string>
     <string name="back_edu_notification_content">Deslize para a esquerda ou direita usando três dedos. Toque para aprender outros gestos.</string>
@@ -890,6 +890,7 @@ Seleção"</string>
     <string name="call_notification_incoming_text">Alguém está ligando</string>
     <string name="call_notification_ongoing_text">Chamada em andamento</string>
     <string name="call_notification_screening_text">Filtrando uma ligação recebida</string>
+    <string name="camera">Câmera</string>
     <string name="camera_and_microphone_blocked_dream_overlay_content_description">Câmera e microfone bloqueados</string>
     <string name="camera_blocked_dream_overlay_content_description">Câmara bloqueada</string>
     <string name="camera_compat_dismiss_button_description">Não tem problemas com a câmera? Toque para dispensar.</string>
@@ -900,6 +901,7 @@ Toque para ajustar o enquadramento"</string>
     <string name="camera_hint">Deslize a partir do ícone da câmera</string>
     <string name="can_not_use_in_dex">Não é possível usar %s no Samsung DeX.</string>
     <string name="cancel">Cancelar</string>
+    <string name="cancel_button">Cancelar</string>
     <string name="cancel_button_broadcast">Cancelar</string>
     <string name="cant_screenshot_in_ps">Não é possível capturar tela em %s.</string>
     <string name="card_crash">Falha do cartão SIM</string>
@@ -1264,6 +1266,7 @@ Se retomar o uso de dados, o serviço poderá ser cobrado."</string>
     <string name="delete_blob_text">Excluir dados compartilhados</string>
     <string name="demo_mode">Modo de demonstração da interface do sistema</string>
     <string name="demote_explain_text">O app %1$s não vai mais mostrar atualizações em tempo real. É possível mudar isso a qualquer momento nas Configurações.</string>
+    <string name="desktop_label">Desktop %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">Maximizar ou restaurar o tamanho da janela</string>
     <string name="desktop_mode_a11y_action_snap_left">Redimensionar janela do app para a esquerda</string>
     <string name="desktop_mode_a11y_action_snap_right">Redimensionar janela do app para a direita</string>
@@ -1318,6 +1321,17 @@ Se retomar o uso de dados, o serviço poderá ser cobrado."</string>
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">Como abrir o touchpad no seu tablet</string>
     <string name="dex_touchpad_dialog_pinch">Juntar dois dedos</string>
     <string name="dex_touchpad_dialog_pinch_desc">Amplia ou reduz.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">Use sua S Pen para escrever ou desenhar nos seus aplicativos favoritos. Quando você colocar a S Pen sobre a tela do telefone, o cursor será posicionado exatamente nesse ponto no monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">Use sua S Pen para escrever ou desenhar nos seus aplicativos favoritos. Quando você colocar a S Pen sobre a tela do tablet, o cursor será posicionado exatamente nesse ponto no monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">Selecione objetos, abra aplicativos, ative botões etc. (clique com o botão esquerdo).</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">Role em qualquer direção.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">Tocar e arrastar</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">Tocar</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">Cursor da S Pen</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">Manter pressionado</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">Selecione os objetos na tela.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">Mova os objetos pela tela ou selecione o texto.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">Manter pressionado e arrastar</string>
     <string name="dex_touchpad_dialog_swipe">Deslizar com 2 dedos</string>
     <string name="dex_touchpad_dialog_swipe_desc">Role em qualquer direção.</string>
     <string name="dex_touchpad_dialog_swipe_left_right">Deslizar para a esquerda ou direita com 3 dedos</string>
@@ -1359,6 +1373,7 @@ Se retomar o uso de dados, o serviço poderá ser cobrado."</string>
     <string name="disconnect_smart_view">Desconectar o Smart View?</string>
     <string name="dismiss_dialog">Dispensar</string>
     <string name="dismissible_keyguard_swipe">Deslize para cima para continuar</string>
+    <string name="display_disconnected_to_change_user">Exibição desconectada para alterar usuários.</string>
     <string name="divider_panel_app_pair_to_edge">Adicionar par de aplicativos ao painel Edge</string>
     <string name="divider_panel_change_layout">Alterar layout</string>
     <string name="divider_panel_rotate_clockwise">Girar no sentido horário</string>
@@ -1416,6 +1431,7 @@ Se retomar o uso de dados, o serviço poderá ser cobrado."</string>
     <string name="drop_now_to_open_in_fullscreen_view">Solte-o agora para abri-lo na exibição em tela cheia</string>
     <string name="dropdown_menu">Menu suspenso</string>
     <string name="durationMinutes">%d minutos</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Áreas de trabalho do desktop ocultas enquanto o Smart View está em uso.</string>
     <string name="edge_feeds_preview_not_selected_tts">%s não selecionado.</string>
     <string name="edge_feeds_preview_selected_tts">%s selecionado.</string>
     <string name="edge_lighting_action_description">Efeito de Notif. Edge uma vez</string>
@@ -1595,6 +1611,7 @@ Depois disso, você vai precisar configurar esse recurso de novo para desbloquea
     <string name="freeform_forced_resizable_samsung_dex">Algumas funções deste aplicativo podem não ser compatíveis com o Samsung DeX.</string>
     <string name="from_music_share">Do Music Share</string>
     <string name="fullscreen_text">Tela cheia</string>
+    <string name="gallery">Galeria</string>
     <string name="game_status">Jogando</string>
     <string name="gesture_accessibility_guide_gesture_onboarding">Deslize a tela de baixo para cima com dois dedos para usar o atalho de acessibilidade.</string>
     <string name="gesture_accessibility_guide_gesture_onboarding_voice_assistant_on">Deslize a tela de baixo para cima com 3 dedos para usar o atalho de acessibilidade.</string>
@@ -2612,6 +2629,7 @@ Tente novamente em %2$d segundos."</string>
     <string name="ksh_group_system_notifications">Notificações</string>
     <string name="ksh_group_system_popup_view">Exibição pop-up</string>
     <string name="ksh_group_system_recents">Recentes</string>
+    <string name="ksh_group_system_running_apps">Aplicativos em execução</string>
     <string name="ksh_group_system_screen_off">Tela desligada</string>
     <string name="ksh_group_system_show_emojis">Exibir emojis</string>
     <string name="ksh_group_system_show_hanja_input">Exibir entrada em hanja</string>
@@ -2835,6 +2853,7 @@ Se você não permitir que esse app acesse todos os registros do dispositivo, el
     <string name="material_timepicker_pm">PM</string>
     <string name="material_timepicker_select_time">Selecionar horário</string>
     <string name="material_timepicker_text_input_mode_description">Alterne para o modo de entrada de texto para informar o horário.</string>
+    <string name="max_byte_error">Número máximo de caracteres atingido.</string>
     <string name="max_long_trace_duration">Duração máxima do rastro longo</string>
     <string name="max_long_trace_size">Tamanho máximo do rastro longo</string>
     <string name="maximize_button_text">Maximizar %1$s</string>
@@ -3155,9 +3174,13 @@ Em caso de dúvidas, entre em contato com %2$s."</string>
     <string name="music_share_description_second_line">Se você e um(a) amigo(a) têm Galaxy Buds, podem ouvir música juntos.</string>
     <string name="mw_caption_button_text_open_in_browser">Abrir no navegador</string>
     <string name="mw_caption_button_text_remove_from_workspace">Remover do espaço de trabalho</string>
+    <string name="mw_caption_button_text_restart_app">Reiniciar aplicativo para otimizar o layout</string>
     <string name="mw_caption_button_text_send_to_other_display">Enviar para outro visor</string>
     <string name="mw_caption_button_text_snap_to_left">Ajustar à esquerda</string>
     <string name="mw_caption_button_text_snap_to_right">Ajustar à direita</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">Áreas de trabalho do desktop ocultas porque o telefone está muito quente. Elas ficarão disponíveis novamente quando ele esfriar.</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">Não é possível alternar este aplicativo para um espaço de trabalho na área de trabalho porque a tela está muito ampliada. Altere as configurações de Zoom da tela e tente novamente.</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Não é possível alterar um aplicativo para o modo desktop enquanto o Smart View está em uso.</string>
     <string name="nav_bar">Barra de navegação</string>
     <string name="nav_bar_layout">Layout</string>
     <string name="navigation_menu">Menu de navegação</string>
@@ -3253,7 +3276,7 @@ Em caso de dúvidas, entre em contato com %2$s."</string>
     <string name="notification_info_radio_priority_text">Prioridade</string>
     <string name="notification_info_radio_silent_text">Silencioso</string>
     <string name="notification_info_save_button">Salvar</string>
-    <string name="notification_info_setting_button">Config.</string>
+    <string name="notification_info_setting_button">Configurações</string>
     <string name="notification_inginificatn_header_text">Mais notificações</string>
     <string name="notification_inline_disable_promotion">Não mostrar como fixadas</string>
     <string name="notification_inline_disable_promotion_button">Bloquear atualizações em tempo real deste app</string>
@@ -3503,6 +3526,7 @@ Ele será desligado agora para esfriar."</string>
     <string name="qs_custom_action_move_to_bottom">Mover para o fim</string>
     <string name="qs_custom_action_move_to_top">Mover para o início</string>
     <string name="qs_custom_action_move_up">Mover para cima</string>
+    <string name="qs_custom_action_radio_button">Botão de opção</string>
     <string name="qs_custom_action_removed_done">Botão %s removido</string>
     <string name="qs_customizer_settings">Configurações do painel</string>
     <string name="qs_detail_flashlight_title">Lanterna</string>
@@ -3597,6 +3621,7 @@ Tente novamente mais tarde."</string>
     <string name="qs_record_issue_label">Gravar problema</string>
     <string name="qs_record_issue_start">Iniciar</string>
     <string name="qs_record_issue_stop">Parar</string>
+    <string name="qs_reset_complete">Restauração concluída.</string>
     <string name="qs_sensor_privacy_dialog_cancel">Cancelar</string>
     <string name="qs_sensor_privacy_dialog_turn_on">Ativar</string>
     <string name="qs_sensor_privacy_dialog_unblock">Desbloquear</string>
@@ -3877,7 +3902,6 @@ Desative o Perfil de trabalho para usar seu tablet sem interrupções do trabalh
     <string name="retail_demo_reset_title">Senha necessária</string>
     <string name="retry_face">Refazer autenticação facial</string>
     <string name="reverse_folding_alert_view_warning_text">Abra o telefone e dobre pelo lado esquerdo.</string>
-    <string name="reverse_folding_order_guide_text">Dobre o lado esquerdo primeiro.</string>
     <string name="right_icon">Ícone à direita</string>
     <string name="right_keycode">Código de tecla à direita</string>
     <string name="right_nav_bar_button_type">Tipo de botão direito extra</string>
@@ -3904,6 +3928,7 @@ Desative o Perfil de trabalho para usar seu tablet sem interrupções do trabalh
     <string name="satellite_connected_carrier_text">SOS via satélite</string>
     <string name="satellite_emergency_only_carrier_text">Apenas chamadas de emergência ou SOS</string>
     <string name="save">Salvar</string>
+    <string name="save_button">Salvar</string>
     <string name="saved_network">Salva por %1$s</string>
     <string name="saving_heap_dump">Salvando heap dump</string>
     <string name="saving_stack_samples">Salvando as amostras de pilhas</string>
@@ -4096,6 +4121,7 @@ Desative o Perfil de trabalho para usar seu tablet sem interrupções do trabalh
     <string name="sec_decor_button_text_caption_pin">Fixar o menu de opções no topo</string>
     <string name="sec_decor_button_text_caption_unpin">Desafixar o menu de opções</string>
     <string name="sec_decor_button_text_close">Fechar</string>
+    <string name="sec_decor_button_text_enter_full_screen">Tela cheia</string>
     <string name="sec_decor_button_text_exit_full_screen">Sair da tela cheia</string>
     <string name="sec_decor_button_text_freeform">Abrir na exibição pop-up</string>
     <string name="sec_decor_button_text_maximize">Maximizar</string>
@@ -4111,6 +4137,7 @@ Desative o Perfil de trabalho para usar seu tablet sem interrupções do trabalh
     <string name="sec_decor_button_text_window_pin">Fixar janela na parte superior</string>
     <string name="sec_decor_button_text_window_unpin">Desafixar janela</string>
     <string name="sec_decor_handle_text">Opções rápidas</string>
+    <string name="sec_decor_window_handle">Aba da janela</string>
     <string name="sec_devices_and_media_control">Botões Controle do aparelho e Saída de mídia</string>
     <string name="sec_dlg_turn_on">Ativar</string>
     <string name="sec_dnd_detail_on_until_time_today">Função ativada até às %s</string>
@@ -4169,7 +4196,7 @@ Desative o Perfil de trabalho para usar seu tablet sem interrupções do trabalh
     <string name="sec_qs_media_player_expand_content_description">Expandir</string>
     <string name="sec_qs_media_player_media_output">Saída de mídia</string>
     <string name="sec_qs_media_player_remove">Remover</string>
-    <string name="sec_qs_media_player_settings">Config.</string>
+    <string name="sec_qs_media_player_settings">Configurações</string>
     <string name="sec_qs_mic_mode">Modo de microfone</string>
     <string name="sec_qs_mic_mode_full_spectrum">Espectro completo</string>
     <string name="sec_qs_mic_mode_standard">Padrão</string>
@@ -4948,9 +4975,9 @@ Ao adicionar um novo usuário, o dispositivo vai sair do modo visitante e exclui
 Quando você adiciona um novo usuário, essa pessoa precisa configurar o próprio espaço.
 
 Qualquer usuário pode atualizar apps para todos os outros. Serviços e configurações de acessibilidade podem não ser transferidos para novos usuários."</string>
-    <string name="user_add_user_message_short">"Quando você adiciona um novo usuário, essa pessoa precisa configurar o próprio espaço.
+    <string name="user_add_user_message_short">"Após criar um novo usuário, esta pessoa precisa seguir o processo de configuração.
 
-Qualquer usuário pode atualizar apps para os demais usuários."</string>
+É possível para qualquer usuário aceitar permissões de atualização de aplicativo em nome de todos os demais usuários."</string>
     <string name="user_add_user_title">Adicionar novo usuário?</string>
     <string name="user_add_user_type_title">Adicionar</string>
     <string name="user_aspect_ratio_settings_button_description">Mudar a proporção</string>
@@ -5339,6 +5366,7 @@ Endereço do Wi-Fi (BSSID)
     <string name="zen_mode_and_condition">%1$s. %2$s</string>
     <string name="zen_mode_do_not_disturb_name">Não perturbe</string>
     <string name="zen_mode_duration_always_prompt_title">Perguntar sempre</string>
+    <string name="zen_mode_duration_settings_summary">A função Não perturbar silencia todas as chamadas, notificações e outros alertas, exceto aqueles que você permitir.</string>
     <string name="zen_mode_duration_settings_title">Duração</string>
     <string name="zen_mode_enable_dialog_turn_on">Ativar</string>
     <string name="zen_mode_forever">Até eu desativar</string>

@@ -3,7 +3,6 @@ package kotlin;
 import java.io.Serializable;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Pair<A, B> implements Serializable {
     private final A first;
@@ -43,9 +42,9 @@ public final class Pair<A, B> implements Serializable {
 
     public final int hashCode() {
         A a = this.first;
-        int hashCode = (a == null ? 0 : a.hashCode()) * 31;
+        int iHashCode = (a == null ? 0 : a.hashCode()) * 31;
         B b = this.second;
-        return hashCode + (b != null ? b.hashCode() : 0);
+        return iHashCode + (b != null ? b.hashCode() : 0);
     }
 
     public final String toString() {

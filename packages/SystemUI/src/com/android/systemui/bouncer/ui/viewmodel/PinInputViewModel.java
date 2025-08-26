@@ -9,20 +9,20 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import kotlin.Pair;
+import kotlin.collections.CollectionsKt__CollectionsJVMKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
+import kotlin.collections.builders.ListBuilder;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PinInputViewModel {
     public static final Companion Companion = new Companion(null);
     public final List input;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,14 +78,14 @@ public final class PinInputViewModel {
     }
 
     public final List getDigits(EntryToken.ClearAll clearAll) {
-        int indexOf = this.input.indexOf(clearAll) + 1;
-        if (indexOf == 0 || indexOf == this.input.size()) {
+        int iIndexOf = this.input.indexOf(clearAll) + 1;
+        if (iIndexOf == 0 || iIndexOf == this.input.size()) {
             return EmptyList.INSTANCE;
         }
         List list = this.input;
-        List subList = list.subList(indexOf, list.size());
+        List listSubList = list.subList(iIndexOf, list.size());
         ArrayList arrayList = new ArrayList();
-        for (Object obj : subList) {
+        for (Object obj : listSubList) {
             if (!(((EntryToken) obj) instanceof EntryToken.Digit)) {
                 break;
             }
@@ -124,9 +124,9 @@ public final class PinInputViewModel {
         List list = this.input;
         ListIterator listIterator = list.listIterator(list.size());
         while (listIterator.hasPrevious()) {
-            Object previous = listIterator.previous();
-            if (((EntryToken) previous) instanceof EntryToken.ClearAll) {
-                return (EntryToken.ClearAll) previous;
+            Object objPrevious = listIterator.previous();
+            if (((EntryToken) objPrevious) instanceof EntryToken.ClearAll) {
+                return (EntryToken.ClearAll) objPrevious;
             }
         }
         throw new NoSuchElementException("List contains no element matching the predicate.");
@@ -137,54 +137,28 @@ public final class PinInputViewModel {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private PinInputViewModel(java.util.List<? extends com.android.systemui.bouncer.ui.viewmodel.EntryToken> r6, com.android.systemui.bouncer.ui.viewmodel.EntryToken r7) {
-        /*
-            r5 = this;
-            kotlin.collections.builders.ListBuilder r0 = kotlin.collections.CollectionsKt__CollectionsJVMKt.createListBuilder()
-            r1 = r6
-            java.util.Collection r1 = (java.util.Collection) r1
-            boolean r1 = r1.isEmpty()
-            if (r1 != 0) goto L4a
-            java.lang.Object r1 = kotlin.collections.CollectionsKt___CollectionsKt.first(r6)
-            boolean r1 = r1 instanceof com.android.systemui.bouncer.ui.viewmodel.EntryToken.ClearAll
-            if (r1 == 0) goto L4a
-            int r1 = r6.size()
-            int r1 = r1 + (-1)
-            r2 = 0
-            r3 = r2
-        L1d:
-            r4 = -1
-            if (r4 >= r1) goto L32
-            java.lang.Object r4 = r6.get(r1)
-            boolean r4 = r4 instanceof com.android.systemui.bouncer.ui.viewmodel.EntryToken.ClearAll
-            if (r4 == 0) goto L2f
-            int r3 = r3 + 1
-            r4 = 2
-            if (r3 != r4) goto L2f
-            r2 = r1
-            goto L32
-        L2f:
-            int r1 = r1 + (-1)
-            goto L1d
-        L32:
-            int r1 = r6.size()
-            java.util.List r6 = r6.subList(r2, r1)
-            java.util.Collection r6 = (java.util.Collection) r6
-            r0.addAll(r6)
-            r0.add(r7)
-            kotlin.collections.builders.ListBuilder r6 = r0.build()
-            r5.<init>(r6)
-            return
-        L4a:
-            java.lang.IllegalArgumentException r5 = new java.lang.IllegalArgumentException
-            java.lang.String r6 = "Failed requirement."
-            r5.<init>(r6)
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.PinInputViewModel.<init>(java.util.List, com.android.systemui.bouncer.ui.viewmodel.EntryToken):void");
+    private PinInputViewModel(List<? extends EntryToken> list, EntryToken entryToken) {
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        if (!list.isEmpty() && (CollectionsKt___CollectionsKt.first((List) list) instanceof EntryToken.ClearAll)) {
+            int size = list.size() - 1;
+            int i = 0;
+            int i2 = 0;
+            while (true) {
+                if (-1 < size) {
+                    if ((list.get(size) instanceof EntryToken.ClearAll) && (i2 = i2 + 1) == 2) {
+                        i = size;
+                        break;
+                    }
+                    size--;
+                } else {
+                    break;
+                }
+            }
+            listBuilderCreateListBuilder.addAll(list.subList(i, list.size()));
+            listBuilderCreateListBuilder.add(entryToken);
+            this(listBuilderCreateListBuilder.build());
+            return;
+        }
+        throw new IllegalArgumentException("Failed requirement.");
     }
 }

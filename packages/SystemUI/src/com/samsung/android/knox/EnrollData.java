@@ -3,7 +3,6 @@ package com.samsung.android.knox;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnrollData implements Parcelable {
     public static final Parcelable.Creator<EnrollData> CREATOR = new Parcelable.Creator<EnrollData>() { // from class: com.samsung.android.knox.EnrollData.1
@@ -70,9 +69,9 @@ public class EnrollData implements Parcelable {
         this.policyBitMask = parcel.readInt();
         this.constrainedState = parcel.readInt();
         this.downloadUrl = parcel.readString();
-        int readInt = parcel.readInt();
-        if (readInt != 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i != 0) {
+            byte[] bArr = new byte[i];
             this.signature = bArr;
             parcel.readByteArray(bArr);
         }

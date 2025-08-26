@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.EditText;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PasswordToggleEndIconDelegate extends EndIconDelegate {
     public EditText editText;
@@ -19,7 +18,7 @@ public class PasswordToggleEndIconDelegate extends EndIconDelegate {
         this.onIconClickListener = new View.OnClickListener() { // from class: com.google.android.material.textfield.PasswordToggleEndIconDelegate$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                PasswordToggleEndIconDelegate passwordToggleEndIconDelegate = PasswordToggleEndIconDelegate.this;
+                PasswordToggleEndIconDelegate passwordToggleEndIconDelegate = this.f$0;
                 EditText editText = passwordToggleEndIconDelegate.editText;
                 if (editText == null) {
                     return;

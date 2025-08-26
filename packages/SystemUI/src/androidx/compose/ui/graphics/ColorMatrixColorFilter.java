@@ -3,7 +3,6 @@ package androidx.compose.ui.graphics;
 import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColorMatrixColorFilter extends ColorFilter {
     public float[] colorMatrix;
@@ -16,7 +15,7 @@ public final class ColorMatrixColorFilter extends ColorFilter {
         if (this == obj) {
             return true;
         }
-        return (obj instanceof ColorMatrixColorFilter) && Arrays.equals(m470obtainColorMatrixp10uLo(), ((ColorMatrixColorFilter) obj).m470obtainColorMatrixp10uLo());
+        return (obj instanceof ColorMatrixColorFilter) && Arrays.equals(m472obtainColorMatrixp10uLo(), ((ColorMatrixColorFilter) obj).m472obtainColorMatrixp10uLo());
     }
 
     public final int hashCode() {
@@ -28,7 +27,7 @@ public final class ColorMatrixColorFilter extends ColorFilter {
     }
 
     /* renamed from: obtainColorMatrix-p10-uLo, reason: not valid java name */
-    public final float[] m470obtainColorMatrixp10uLo() {
+    public final float[] m472obtainColorMatrixp10uLo() {
         float[] fArr = this.colorMatrix;
         if (fArr != null) {
             return fArr;

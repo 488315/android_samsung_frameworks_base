@@ -42,13 +42,13 @@ public final class CdmaInformationRecord {
 
     public static final ArrayList<CdmaInformationRecord> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaInformationRecord> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaInformationRecord cdmaInformationRecord = new CdmaInformationRecord();
-            cdmaInformationRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 120);
+            cdmaInformationRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 120);
             arrayList.add(cdmaInformationRecord);
         }
         return arrayList;
@@ -57,59 +57,59 @@ public final class CdmaInformationRecord {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.name = hwBlob.getInt32(j);
         int int32 = hwBlob.getInt32(16 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 8, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 8, true);
         this.display.clear();
         for (int i = 0; i < int32; i++) {
             CdmaDisplayInfoRecord cdmaDisplayInfoRecord = new CdmaDisplayInfoRecord();
-            cdmaDisplayInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            cdmaDisplayInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             this.display.add(cdmaDisplayInfoRecord);
         }
         int int322 = hwBlob.getInt32(32 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 24, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 24, hwBlob.handle(), j + 24, true);
         this.number.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             CdmaNumberInfoRecord cdmaNumberInfoRecord = new CdmaNumberInfoRecord();
-            cdmaNumberInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 24);
+            cdmaNumberInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 24);
             this.number.add(cdmaNumberInfoRecord);
         }
         int int323 = hwBlob.getInt32(48 + j);
-        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 4, hwBlob.handle(), j + 40, true);
+        HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 4, hwBlob.handle(), j + 40, true);
         this.signal.clear();
         for (int i3 = 0; i3 < int323; i3++) {
             CdmaSignalInfoRecord cdmaSignalInfoRecord = new CdmaSignalInfoRecord();
-            cdmaSignalInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer3, i3 * 4);
+            cdmaSignalInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer3, i3 * 4);
             this.signal.add(cdmaSignalInfoRecord);
         }
         int int324 = hwBlob.getInt32(64 + j);
-        HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 32, hwBlob.handle(), j + 56, true);
+        HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 32, hwBlob.handle(), j + 56, true);
         this.redir.clear();
         for (int i4 = 0; i4 < int324; i4++) {
             CdmaRedirectingNumberInfoRecord cdmaRedirectingNumberInfoRecord = new CdmaRedirectingNumberInfoRecord();
-            cdmaRedirectingNumberInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer4, i4 * 32);
+            cdmaRedirectingNumberInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer4, i4 * 32);
             this.redir.add(cdmaRedirectingNumberInfoRecord);
         }
         int int325 = hwBlob.getInt32(80 + j);
-        HwBlob readEmbeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 4, hwBlob.handle(), j + 72, true);
+        HwBlob embeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 4, hwBlob.handle(), j + 72, true);
         this.lineCtrl.clear();
         for (int i5 = 0; i5 < int325; i5++) {
             CdmaLineControlInfoRecord cdmaLineControlInfoRecord = new CdmaLineControlInfoRecord();
-            cdmaLineControlInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer5, i5 * 4);
+            cdmaLineControlInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer5, i5 * 4);
             this.lineCtrl.add(cdmaLineControlInfoRecord);
         }
         int int326 = hwBlob.getInt32(96 + j);
-        HwBlob readEmbeddedBuffer6 = hwParcel.readEmbeddedBuffer(int326, hwBlob.handle(), j + 88, true);
+        HwBlob embeddedBuffer6 = hwParcel.readEmbeddedBuffer(int326, hwBlob.handle(), j + 88, true);
         this.clir.clear();
         for (int i6 = 0; i6 < int326; i6++) {
             CdmaT53ClirInfoRecord cdmaT53ClirInfoRecord = new CdmaT53ClirInfoRecord();
-            cdmaT53ClirInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer6, i6);
+            cdmaT53ClirInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer6, i6);
             this.clir.add(cdmaT53ClirInfoRecord);
         }
         int int327 = hwBlob.getInt32(j + 112);
-        HwBlob readEmbeddedBuffer7 = hwParcel.readEmbeddedBuffer(int327 * 2, hwBlob.handle(), j + 104, true);
+        HwBlob embeddedBuffer7 = hwParcel.readEmbeddedBuffer(int327 * 2, hwBlob.handle(), j + 104, true);
         this.audioCtrl.clear();
         for (int i7 = 0; i7 < int327; i7++) {
             CdmaT53AudioControlInfoRecord cdmaT53AudioControlInfoRecord = new CdmaT53AudioControlInfoRecord();
-            cdmaT53AudioControlInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer7, i7 * 2);
+            cdmaT53AudioControlInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer7, i7 * 2);
             this.audioCtrl.add(cdmaT53AudioControlInfoRecord);
         }
     }

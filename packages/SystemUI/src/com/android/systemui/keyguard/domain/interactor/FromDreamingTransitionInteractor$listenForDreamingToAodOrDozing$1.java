@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromDreamingTransitionInteractor$listenForDreamingToAodOrDozing$1 extends SuspendLambda implements Function2 {
     int label;
@@ -51,14 +50,14 @@ final class FromDreamingTransitionInteractor$listenForDreamingToAodOrDozing$1 ex
                 public final Object emit(Object obj2, Continuation continuation) {
                     DozeStateModel dozeStateModel = ((DozeTransitionModel) obj2).to;
                     if (dozeStateModel == DozeStateModel.DOZE) {
-                        Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromDreamingTransitionInteractor.this, KeyguardState.DOZING, null, null, null, continuation, 14);
-                        return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                        Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromDreamingTransitionInteractor2, KeyguardState.DOZING, null, null, null, continuation, 14);
+                        return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                     }
                     if (dozeStateModel != DozeStateModel.DOZE_AOD) {
                         return Unit.INSTANCE;
                     }
-                    Object startTransitionTo$default2 = TransitionInteractor.startTransitionTo$default(FromDreamingTransitionInteractor.this, KeyguardState.AOD, null, null, null, continuation, 14);
-                    return startTransitionTo$default2 == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default2 : Unit.INSTANCE;
+                    Object objStartTransitionTo$default2 = TransitionInteractor.startTransitionTo$default(fromDreamingTransitionInteractor2, KeyguardState.AOD, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default2 == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default2 : Unit.INSTANCE;
                 }
             };
             this.label = 1;

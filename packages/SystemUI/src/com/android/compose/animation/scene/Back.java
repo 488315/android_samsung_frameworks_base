@@ -3,12 +3,10 @@ package com.android.compose.animation.scene;
 import androidx.compose.ui.unit.LayoutDirection;
 import com.android.compose.animation.scene.UserAction;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Back extends UserAction {
     public static final Back INSTANCE = new Back();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resolved extends UserAction.Resolved {
         public static final Resolved INSTANCE = new Resolved();
 

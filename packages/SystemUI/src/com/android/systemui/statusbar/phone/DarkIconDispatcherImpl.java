@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DarkIconDispatcherImpl implements LightBarTransitionsController.DarkIntensityApplier, DarkIconDispatcher, Dumpable {
     public float mDarkIntensity;
@@ -32,7 +31,6 @@ public class DarkIconDispatcherImpl implements LightBarTransitionsController.Dar
     public final int mLightModeContrastColor = -16777216;
     public final StateFlowImpl mDarkChangeFlow = StateFlowKt.MutableStateFlow(SysuiDarkIconDispatcher$DarkChange.EMPTY);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         DarkIconDispatcherImpl create(int i, Context context);
     }
@@ -66,9 +64,9 @@ public class DarkIconDispatcherImpl implements LightBarTransitionsController.Dar
         this.mDarkIntensity = f;
         ArgbEvaluator argbEvaluator = ArgbEvaluator.getInstance();
         ArgbEvaluator argbEvaluator2 = ArgbEvaluator.getInstance();
-        Integer valueOf = Integer.valueOf(this.mLightModeIconColorSingleTone);
+        Integer numValueOf = Integer.valueOf(this.mLightModeIconColorSingleTone);
         this.mSamsungStatusBarGrayIconHelper.getClass();
-        this.mIconTint = ((Integer) argbEvaluator2.evaluate(f, valueOf, Integer.valueOf(this.mDarkModeIconColorSingleTone))).intValue();
+        this.mIconTint = ((Integer) argbEvaluator2.evaluate(f, numValueOf, Integer.valueOf(this.mDarkModeIconColorSingleTone))).intValue();
         this.mContrastTint = ((Integer) argbEvaluator.evaluate(f, Integer.valueOf(this.mLightModeContrastColor), Integer.valueOf(this.mDarkModeContrastColor))).intValue();
         applyIconTint();
     }
@@ -83,9 +81,9 @@ public class DarkIconDispatcherImpl implements LightBarTransitionsController.Dar
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "DarkIconDispatcher: ", "  mIconTint: 0x");
-        m.append(Integer.toHexString(this.mIconTint));
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "DarkIconDispatcher: ", "  mIconTint: 0x");
+        sbM.append(Integer.toHexString(this.mIconTint));
+        printWriter.println(sbM.toString());
         printWriter.println("  mContrastTint: 0x" + Integer.toHexString(this.mContrastTint));
         printWriter.println("  mDarkModeIconColorSingleTone: 0x" + Integer.toHexString(this.mDarkModeIconColorSingleTone));
         printWriter.println("  mLightModeIconColorSingleTone: 0x" + Integer.toHexString(this.mLightModeIconColorSingleTone));

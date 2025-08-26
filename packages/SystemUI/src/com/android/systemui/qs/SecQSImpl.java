@@ -19,7 +19,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecQSImpl implements PanelTransitionStateListener, LockscreenShadeTransitionController.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,7 +40,6 @@ public final class SecQSImpl implements PanelTransitionStateListener, Lockscreen
     public boolean stackScrollerOverscrolling;
     public final Runnable updateQsState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

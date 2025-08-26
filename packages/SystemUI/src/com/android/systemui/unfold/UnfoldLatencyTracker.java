@@ -14,7 +14,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnfoldLatencyTracker implements ScreenLifecycle.Observer, UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final ContentResolver contentResolver;
@@ -29,22 +28,21 @@ public final class UnfoldLatencyTracker implements ScreenLifecycle.Observer, Unf
     public final Executor uiBgExecutor;
     public boolean unfoldInProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldStateListener extends DeviceStateManager.FoldStateListener {
         public FoldStateListener(final UnfoldLatencyTracker unfoldLatencyTracker, Context context) {
             super(context, new Consumer() { // from class: com.android.systemui.unfold.UnfoldLatencyTracker.FoldStateListener.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     Boolean bool = (Boolean) obj;
-                    UnfoldLatencyTracker unfoldLatencyTracker2 = UnfoldLatencyTracker.this;
+                    UnfoldLatencyTracker unfoldLatencyTracker2 = unfoldLatencyTracker;
                     bool.getClass();
-                    boolean booleanValue = bool.booleanValue();
+                    boolean zBooleanValue = bool.booleanValue();
                     Boolean bool2 = unfoldLatencyTracker2.folded;
                     if (Intrinsics.areEqual(bool2, bool)) {
                         return;
                     }
                     unfoldLatencyTracker2.folded = bool;
-                    if (bool2 == null || booleanValue) {
+                    if (bool2 == null || zBooleanValue) {
                         return;
                     }
                     boolean z = false;

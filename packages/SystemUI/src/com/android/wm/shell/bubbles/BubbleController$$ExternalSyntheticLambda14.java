@@ -1,12 +1,12 @@
 package com.android.wm.shell.bubbles;
 
+import android.os.RemoteException;
 import android.util.SparseArray;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda23;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda24;
 import com.android.systemui.wmshell.BubblesManager;
 import com.android.systemui.wmshell.BubblesManager$$ExternalSyntheticLambda1;
 import com.android.wm.shell.bubbles.BubbleController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda14 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +20,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda14 i
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws RemoteException {
         switch (this.$r8$classId) {
             case 0:
                 BubbleController bubbleController = (BubbleController) this.f$0;
@@ -54,7 +54,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda14 i
                 break;
             case 3:
                 BubbleController.BubblesImpl bubblesImpl2 = (BubbleController.BubblesImpl) this.f$0;
-                BubbleController.this.setExpandListener((CentralSurfacesImpl$$ExternalSyntheticLambda23) this.f$1);
+                BubbleController.this.setExpandListener((CentralSurfacesImpl$$ExternalSyntheticLambda24) this.f$1);
                 break;
             case 4:
                 BubbleController.this.mCurrentProfiles = (SparseArray) this.f$1;

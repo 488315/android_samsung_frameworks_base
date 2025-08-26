@@ -10,7 +10,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
     public final long selectedBadgeColor;
@@ -33,12 +32,12 @@ final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.DefaultDrawerItemsColor.containerColor (NavigationDrawer.kt:1252)");
         }
-        MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m454boximpl(z ? this.selectedContainerColor : this.unselectedContainerColor), composerImpl);
+        MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m456boximpl(z ? this.selectedContainerColor : this.unselectedContainerColor), composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return rememberUpdatedState;
+        return mutableStateRememberUpdatedState;
     }
 
     public final boolean equals(Object obj) {
@@ -51,28 +50,28 @@ final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
         DefaultDrawerItemsColor defaultDrawerItemsColor = (DefaultDrawerItemsColor) obj;
         long j = defaultDrawerItemsColor.selectedIconColor;
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3427equalsimpl0(this.selectedIconColor, j)) {
+        if (!ULong.m3447equalsimpl0(this.selectedIconColor, j)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.unselectedIconColor, defaultDrawerItemsColor.unselectedIconColor)) {
+        if (!ULong.m3447equalsimpl0(this.unselectedIconColor, defaultDrawerItemsColor.unselectedIconColor)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.selectedTextColor, defaultDrawerItemsColor.selectedTextColor)) {
+        if (!ULong.m3447equalsimpl0(this.selectedTextColor, defaultDrawerItemsColor.selectedTextColor)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.unselectedTextColor, defaultDrawerItemsColor.unselectedTextColor)) {
+        if (!ULong.m3447equalsimpl0(this.unselectedTextColor, defaultDrawerItemsColor.unselectedTextColor)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.selectedContainerColor, defaultDrawerItemsColor.selectedContainerColor)) {
+        if (!ULong.m3447equalsimpl0(this.selectedContainerColor, defaultDrawerItemsColor.selectedContainerColor)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.unselectedContainerColor, defaultDrawerItemsColor.unselectedContainerColor)) {
+        if (!ULong.m3447equalsimpl0(this.unselectedContainerColor, defaultDrawerItemsColor.unselectedContainerColor)) {
             return false;
         }
-        if (!ULong.m3427equalsimpl0(this.selectedBadgeColor, defaultDrawerItemsColor.selectedBadgeColor)) {
+        if (!ULong.m3447equalsimpl0(this.selectedBadgeColor, defaultDrawerItemsColor.selectedBadgeColor)) {
             return false;
         }
-        return ULong.m3427equalsimpl0(this.unselectedBadgeColor, defaultDrawerItemsColor.unselectedBadgeColor);
+        return ULong.m3447equalsimpl0(this.unselectedBadgeColor, defaultDrawerItemsColor.unselectedBadgeColor);
     }
 
     public final int hashCode() {
@@ -88,12 +87,12 @@ final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.DefaultDrawerItemsColor.iconColor (NavigationDrawer.kt:1242)");
         }
-        MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m454boximpl(z ? this.selectedIconColor : this.unselectedIconColor), composerImpl);
+        MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m456boximpl(z ? this.selectedIconColor : this.unselectedIconColor), composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return rememberUpdatedState;
+        return mutableStateRememberUpdatedState;
     }
 
     @Override // androidx.compose.material3.NavigationDrawerItemColors
@@ -103,12 +102,12 @@ final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.DefaultDrawerItemsColor.textColor (NavigationDrawer.kt:1247)");
         }
-        MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m454boximpl(z ? this.selectedTextColor : this.unselectedTextColor), composerImpl);
+        MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(Color.m456boximpl(z ? this.selectedTextColor : this.unselectedTextColor), composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return rememberUpdatedState;
+        return mutableStateRememberUpdatedState;
     }
 
     private DefaultDrawerItemsColor(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8) {

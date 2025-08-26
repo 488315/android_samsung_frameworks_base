@@ -34,27 +34,27 @@ public class Time extends ASN1Object implements ASN1Choice {
         this.time = aSN1Primitive;
     }
 
-    public Time(Date date) {
+    public Time(Date date) throws NumberFormatException {
         SimpleTimeZone simpleTimeZone = new SimpleTimeZone(0, GnssSignalType.CODE_TYPE_Z);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
         simpleDateFormat.setTimeZone(simpleTimeZone);
         String str = simpleDateFormat.format(date) + GnssSignalType.CODE_TYPE_Z;
-        int parseInt = Integer.parseInt(str.substring(0, 4));
-        if (parseInt < 1950 || parseInt > 2049) {
+        int i = Integer.parseInt(str.substring(0, 4));
+        if (i < 1950 || i > 2049) {
             this.time = new DERGeneralizedTime(str);
         } else {
             this.time = new DERUTCTime(str.substring(2));
         }
     }
 
-    public Time(Date date, Locale locale) {
+    public Time(Date date, Locale locale) throws NumberFormatException {
         SimpleTimeZone simpleTimeZone = new SimpleTimeZone(0, GnssSignalType.CODE_TYPE_Z);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
         simpleDateFormat.setCalendar(Calendar.getInstance(locale));
         simpleDateFormat.setTimeZone(simpleTimeZone);
         String str = simpleDateFormat.format(date) + GnssSignalType.CODE_TYPE_Z;
-        int parseInt = Integer.parseInt(str.substring(0, 4));
-        if (parseInt < 1950 || parseInt > 2049) {
+        int i = Integer.parseInt(str.substring(0, 4));
+        if (i < 1950 || i > 2049) {
             this.time = new DERGeneralizedTime(str);
         } else {
             this.time = new DERUTCTime(str.substring(2));

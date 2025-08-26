@@ -11,18 +11,18 @@ public abstract class VisibilityPropagation extends TransitionPropagation {
     @Override // android.transition.TransitionPropagation
     public void captureValues(TransitionValues transitionValues) {
         View view = transitionValues.view;
-        Integer num = (Integer) transitionValues.values.get("android:visibility:visibility");
-        if (num == null) {
-            num = Integer.valueOf(view.getVisibility());
+        Integer numValueOf = (Integer) transitionValues.values.get("android:visibility:visibility");
+        if (numValueOf == null) {
+            numValueOf = Integer.valueOf(view.getVisibility());
         }
-        transitionValues.values.put(PROPNAME_VISIBILITY, num);
-        int[] iArr = {r3, 0};
+        transitionValues.values.put(PROPNAME_VISIBILITY, numValueOf);
+        int[] iArr = {iRound, 0};
         view.getLocationOnScreen(iArr);
-        int round = iArr[0] + Math.round(view.getTranslationX());
-        iArr[0] = round + (view.getWidth() / 2);
-        int round2 = iArr[1] + Math.round(view.getTranslationY());
-        iArr[1] = round2;
-        iArr[1] = round2 + (view.getHeight() / 2);
+        int iRound = iArr[0] + Math.round(view.getTranslationX());
+        iArr[0] = iRound + (view.getWidth() / 2);
+        int iRound2 = iArr[1] + Math.round(view.getTranslationY());
+        iArr[1] = iRound2;
+        iArr[1] = iRound2 + (view.getHeight() / 2);
         transitionValues.values.put(PROPNAME_VIEW_CENTER, iArr);
     }
 

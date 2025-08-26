@@ -6,7 +6,6 @@ import androidx.window.extensions.embedding.ActivityStack;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActivityStack {
     public final List activitiesInProcess;
@@ -31,9 +30,9 @@ public final class ActivityStack {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(this.activitiesInProcess.hashCode() * 31, 31, this.isEmpty);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(this.activitiesInProcess.hashCode() * 31, 31, this.isEmpty);
         ActivityStack.Token token = this.token;
-        return m + (token != null ? token.hashCode() : 0);
+        return iM + (token != null ? token.hashCode() : 0);
     }
 
     public final String toString() {

@@ -29,7 +29,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecBrightnessMirrorController {
     public BrightnessAnimationIcon brightnessIcon;
@@ -46,31 +45,6 @@ public final class SecBrightnessMirrorController {
         return (SecQSPanelResourcePicker) this.resourcePicker$delegate.getValue();
     }
 
-    public final void hideMirror() {
-        SecBrightnessSliderController secBrightnessSliderController;
-        SecBrightnessSliderController secBrightnessSliderController2;
-        SecQpBlurController secQpBlurController;
-        FrameLayout frameLayout = this.brightnessMirror;
-        if (frameLayout != null) {
-            frameLayout.setVisibility(4);
-        }
-        QuickPanelBlur quickPanelBlur = this.quickPanelBlur;
-        if (quickPanelBlur != null && (secQpBlurController = (SecQpBlurController) quickPanelBlur.blurController$delegate.getValue()) != null) {
-            secQpBlurController.setBrightnessMirrorVisible(false);
-        }
-        BrightnessSliderController brightnessSliderController = this.toggleSliderController;
-        if (brightnessSliderController != null && (secBrightnessSliderController2 = brightnessSliderController.mSecBrightnessSliderController) != null) {
-            QuickTileBrightnessMirrorDummyView quickTileBrightnessMirrorDummyView = this.quickTileBrightnessMirrorDummyView;
-            secBrightnessSliderController2.isExpanded = quickTileBrightnessMirrorDummyView != null ? quickTileBrightnessMirrorDummyView.expanded : false;
-        }
-        if (brightnessSliderController == null || (secBrightnessSliderController = brightnessSliderController.mSecBrightnessSliderController) == null) {
-            return;
-        }
-        ValueAnimator valueAnimator = secBrightnessSliderController.thumbAnimator;
-        secBrightnessSliderController.isThumbShowing = false;
-        valueAnimator.reverse();
-    }
-
     public final void reinflate(FrameLayout frameLayout, final BrightnessSliderController brightnessSliderController) {
         this.brightnessMirror = frameLayout;
         final Context context = frameLayout.getContext();
@@ -79,7 +53,7 @@ public final class SecBrightnessMirrorController {
         new Handler(context.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.policy.SecBrightnessMirrorController$toInitIconResources$1
             @Override // java.lang.Runnable
             public final void run() {
-                BrightnessAnimationIcon brightnessAnimationIcon = new BrightnessAnimationIcon((LottieAnimationView) BrightnessSliderController.this.getRootView().findViewById(R.id.brightness_icon));
+                BrightnessAnimationIcon brightnessAnimationIcon = new BrightnessAnimationIcon((LottieAnimationView) brightnessSliderController.getRootView().findViewById(R.id.brightness_icon));
                 brightnessAnimationIcon.init(context);
                 this.brightnessIcon = brightnessAnimationIcon;
             }
@@ -124,16 +98,16 @@ public final class SecBrightnessMirrorController {
         QuickTileBrightnessMirrorDummyView quickTileBrightnessMirrorDummyView = this.quickTileBrightnessMirrorDummyView;
         if (brightnessSliderController != null && (context = this.context) != null) {
             context.getResources();
-            View findViewById = brightnessSliderController.getRootView().findViewById(R.id.brightness_tile_layout);
-            LinearLayout linearLayout = findViewById instanceof LinearLayout ? (LinearLayout) findViewById : null;
+            View viewFindViewById = brightnessSliderController.getRootView().findViewById(R.id.brightness_tile_layout);
+            LinearLayout linearLayout = viewFindViewById instanceof LinearLayout ? (LinearLayout) viewFindViewById : null;
             if (linearLayout != null) {
                 linearLayout.setVisibility(4);
                 int size = (quickTileBrightnessMirrorDummyView == null || (arrayList = quickTileBrightnessMirrorDummyView.tiles) == null) ? 0 : arrayList.size();
                 linearLayout.removeAllViews();
                 IntProgressionIterator it = RangesKt___RangesKt.until(0, size).iterator();
                 while (it.hasNext) {
-                    int nextInt = it.nextInt();
-                    if (quickTileBrightnessMirrorDummyView != null && (tileRecord = (SecQSPanelControllerBase.TileRecord) quickTileBrightnessMirrorDummyView.tiles.get(nextInt)) != null && (qSTileView = tileRecord.tileView) != null) {
+                    int iNextInt = it.nextInt();
+                    if (quickTileBrightnessMirrorDummyView != null && (tileRecord = (SecQSPanelControllerBase.TileRecord) quickTileBrightnessMirrorDummyView.tiles.get(iNextInt)) != null && (qSTileView = tileRecord.tileView) != null) {
                         TextView textView = new TextView(this.context);
                         textView.setText("Dummy text");
                         ViewGroup.LayoutParams layoutParams = qSTileView.getLayoutParams();
@@ -165,16 +139,16 @@ public final class SecBrightnessMirrorController {
         valueAnimator.start();
     }
 
-    public final void updateLayout() {
+    public final void updateLayout() throws Resources.NotFoundException {
         Context context;
         BrightnessSliderController brightnessSliderController = this.toggleSliderController;
         if (brightnessSliderController == null || (context = this.context) == null) {
             return;
         }
         Resources resources = context.getResources();
-        View findViewById = brightnessSliderController.getRootView().findViewById(R.id.brightness_bar_container);
+        View viewFindViewById = brightnessSliderController.getRootView().findViewById(R.id.brightness_bar_container);
         LinearLayout.LayoutParams layoutParams = null;
-        LinearLayout linearLayout = findViewById instanceof LinearLayout ? (LinearLayout) findViewById : null;
+        LinearLayout linearLayout = viewFindViewById instanceof LinearLayout ? (LinearLayout) viewFindViewById : null;
         if (linearLayout != null) {
             ViewGroup.LayoutParams layoutParams2 = linearLayout.getLayoutParams();
             layoutParams2.width = this.brightnessMirrorWidth;
@@ -191,23 +165,23 @@ public final class SecBrightnessMirrorController {
         QuickTileBrightnessMirrorDummyView quickTileBrightnessMirrorDummyView = this.quickTileBrightnessMirrorDummyView;
         boolean z = quickTileBrightnessMirrorDummyView != null ? quickTileBrightnessMirrorDummyView.expanded : false;
         int brightnessBarExpandedHeight = z ? getResourcePicker().getBrightnessBarExpandedHeight(context) : getResourcePicker().getBrightnessBarHeight(context);
-        View findViewById2 = brightnessSliderController.getRootView().findViewById(R.id.brightness_detail);
-        ImageView imageView = findViewById2 instanceof ImageView ? (ImageView) findViewById2 : null;
+        View viewFindViewById2 = brightnessSliderController.getRootView().findViewById(R.id.brightness_detail);
+        ImageView imageView = viewFindViewById2 instanceof ImageView ? (ImageView) viewFindViewById2 : null;
         if (imageView != null) {
             imageView.setVisibility(z ? 8 : 0);
         }
-        View findViewById3 = brightnessSliderController.getRootView().findViewById(R.id.slider_container);
-        RelativeLayout relativeLayout = findViewById3 instanceof RelativeLayout ? (RelativeLayout) findViewById3 : null;
+        View viewFindViewById3 = brightnessSliderController.getRootView().findViewById(R.id.slider_container);
+        RelativeLayout relativeLayout = viewFindViewById3 instanceof RelativeLayout ? (RelativeLayout) viewFindViewById3 : null;
         if (relativeLayout != null) {
             resources.getClass();
             getResourcePicker().resourcePickHelper.getTargetPicker().getClass();
-            Boolean valueOf = Boolean.valueOf(z);
+            Boolean boolValueOf = Boolean.valueOf(z);
             ViewGroup.LayoutParams layoutParams4 = relativeLayout.getLayoutParams();
             LinearLayout.LayoutParams layoutParams5 = layoutParams4 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams4 : null;
             if (layoutParams5 != null) {
                 layoutParams5.width = -1;
                 layoutParams5.height = brightnessBarExpandedHeight;
-                if (valueOf.equals(Boolean.TRUE)) {
+                if (boolValueOf.equals(Boolean.TRUE)) {
                     layoutParams5.weight = 1.0f;
                 } else {
                     layoutParams5.weight = 0.0f;
@@ -218,13 +192,13 @@ public final class SecBrightnessMirrorController {
             }
             relativeLayout.setLayoutParams(layoutParams5);
         }
-        View findViewById4 = brightnessSliderController.getRootView().findViewById(R.id.slider_container);
-        RelativeLayout relativeLayout2 = findViewById4 instanceof RelativeLayout ? (RelativeLayout) findViewById4 : null;
+        View viewFindViewById4 = brightnessSliderController.getRootView().findViewById(R.id.slider_container);
+        RelativeLayout relativeLayout2 = viewFindViewById4 instanceof RelativeLayout ? (RelativeLayout) viewFindViewById4 : null;
         if (relativeLayout2 != null) {
             relativeLayout2.setPadding(0, relativeLayout2.getPaddingTop(), 0, relativeLayout2.getPaddingBottom());
         }
-        View findViewById5 = brightnessSliderController.getRootView().findViewById(R.id.brightness_tile_layout);
-        LinearLayout linearLayout2 = findViewById5 instanceof LinearLayout ? (LinearLayout) findViewById5 : null;
+        View viewFindViewById5 = brightnessSliderController.getRootView().findViewById(R.id.brightness_tile_layout);
+        LinearLayout linearLayout2 = viewFindViewById5 instanceof LinearLayout ? (LinearLayout) viewFindViewById5 : null;
         if (linearLayout2 != null) {
             resources.getClass();
             ViewGroup.LayoutParams layoutParams6 = linearLayout2.getLayoutParams();

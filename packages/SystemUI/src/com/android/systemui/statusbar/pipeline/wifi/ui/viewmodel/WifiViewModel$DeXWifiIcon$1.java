@@ -17,7 +17,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiViewModel$DeXWifiIcon$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ TaskbarIndicatorController $taskbarIndicatorController;
@@ -61,7 +60,7 @@ final class WifiViewModel$DeXWifiIcon$1 extends SuspendLambda implements Functio
                     WifiViewModel wifiViewModel2 = wifiViewModel;
                     boolean z = ((DeXStatusBarWifiIconModel) wifiViewModel2.updateDeXWifiIconModel.$$delegate_0.getValue()).isVisible;
                     ReadonlyStateFlow readonlyStateFlow = wifiViewModel2.updateDeXWifiIconModel;
-                    TaskbarIndicatorController.this.setWifiIcon(z, ((DeXStatusBarWifiIconModel) readonlyStateFlow.$$delegate_0.getValue()).wifiId, ((DeXStatusBarWifiIconModel) readonlyStateFlow.$$delegate_0.getValue()).activityId);
+                    taskbarIndicatorController.setWifiIcon(z, ((DeXStatusBarWifiIconModel) readonlyStateFlow.$$delegate_0.getValue()).wifiId, ((DeXStatusBarWifiIconModel) readonlyStateFlow.$$delegate_0.getValue()).activityId);
                 }
             };
             this.$taskbarIndicatorController.setDesktopStatusBarIconCallback(r1);
@@ -71,7 +70,7 @@ final class WifiViewModel$DeXWifiIcon$1 extends SuspendLambda implements Functio
                 public final Object invoke() {
                     DeXStatusBarWifiIconModel deXStatusBarWifiIconModel = DeXStatusBarWifiIconModelKt.DEFAULT_DEX_STATUS_BAR_WIFI_ICON_MODEL;
                     boolean z = deXStatusBarWifiIconModel.isVisible;
-                    TaskbarIndicatorController taskbarIndicatorController3 = TaskbarIndicatorController.this;
+                    TaskbarIndicatorController taskbarIndicatorController3 = taskbarIndicatorController2;
                     taskbarIndicatorController3.setWifiIcon(z, deXStatusBarWifiIconModel.wifiId, deXStatusBarWifiIconModel.activityId);
                     WifiViewModel$DeXWifiIcon$1$callback$1 wifiViewModel$DeXWifiIcon$1$callback$1 = r1;
                     List list = taskbarIndicatorController3.mDesktopStatusBarIconCallback;

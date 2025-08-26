@@ -1,21 +1,25 @@
 package com.android.systemui.controls.util;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.CipherOutputStream;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EncryptDecrypt {
-    public static OutputStream encryptStream(OutputStream outputStream, String str, int i) {
-        SecretKeySpec generateSHA256SecretKey;
+    public static OutputStream encryptStream(OutputStream outputStream, String str, int i) throws NoSuchPaddingException, NoSuchAlgorithmException, IOException, InvalidKeyException, InvalidAlgorithmParameterException {
+        SecretKeySpec secretKeySpecGenerateSHA256SecretKey;
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         byte[] bArr = new byte[cipher.getBlockSize()];
         new SecureRandom().nextBytes(bArr);
@@ -25,11 +29,11 @@ public final class EncryptDecrypt {
             byte[] bArr2 = new byte[16];
             new SecureRandom().nextBytes(bArr2);
             outputStream.write(bArr2);
-            generateSHA256SecretKey = generatePBKDF2SecretKey(str, bArr2);
+            secretKeySpecGenerateSHA256SecretKey = generatePBKDF2SecretKey(str, bArr2);
         } else {
-            generateSHA256SecretKey = generateSHA256SecretKey(str);
+            secretKeySpecGenerateSHA256SecretKey = generateSHA256SecretKey(str);
         }
-        cipher.init(1, generateSHA256SecretKey, ivParameterSpec);
+        cipher.init(1, secretKeySpecGenerateSHA256SecretKey, ivParameterSpec);
         return new CipherOutputStream(outputStream, cipher);
     }
 
@@ -37,7 +41,7 @@ public final class EncryptDecrypt {
         return new SecretKeySpec(SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new PBEKeySpec(str.toCharArray(), bArr, 1000, 256)).getEncoded(), "AES");
     }
 
-    public static SecretKeySpec generateSHA256SecretKey(String str) {
+    public static SecretKeySpec generateSHA256SecretKey(String str) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(str.getBytes(Charset.forName("UTF-8")));
         byte[] bArr = new byte[16];

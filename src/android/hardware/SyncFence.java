@@ -58,17 +58,17 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     }
 
     private SyncFence(int i) {
-        long nCreate = nCreate(i);
-        this.mNativePtr = nCreate;
-        this.mCloser = sRegistry.registerNativeAllocation(this, nCreate);
+        long jNCreate = nCreate(i);
+        this.mNativePtr = jNCreate;
+        this.mCloser = sRegistry.registerNativeAllocation(this, jNCreate);
     }
 
     private SyncFence(Parcel parcel) {
-        FileDescriptor readRawFileDescriptor = parcel.readBoolean() ? parcel.readRawFileDescriptor() : null;
-        if (readRawFileDescriptor != null) {
-            long nCreate = nCreate(readRawFileDescriptor.getInt$());
-            this.mNativePtr = nCreate;
-            this.mCloser = sRegistry.registerNativeAllocation(this, nCreate);
+        FileDescriptor rawFileDescriptor = parcel.readBoolean() ? parcel.readRawFileDescriptor() : null;
+        if (rawFileDescriptor != null) {
+            long jNCreate = nCreate(rawFileDescriptor.getInt$());
+            this.mNativePtr = jNCreate;
+            this.mCloser = sRegistry.registerNativeAllocation(this, jNCreate);
             return;
         }
         this.mCloser = new Runnable() { // from class: android.hardware.SyncFence$$ExternalSyntheticLambda2
@@ -123,16 +123,16 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     }
 
     public ParcelFileDescriptor getFdDup() throws IOException {
-        ParcelFileDescriptor fromFd;
+        ParcelFileDescriptor parcelFileDescriptorFromFd;
         synchronized (this.mCloser) {
             long j = this.mNativePtr;
-            int nGetFd = j != 0 ? nGetFd(j) : -1;
-            if (nGetFd == -1) {
+            int iNGetFd = j != 0 ? nGetFd(j) : -1;
+            if (iNGetFd == -1) {
                 throw new IllegalStateException("Cannot dup the FD of an invalid SyncFence");
             }
-            fromFd = ParcelFileDescriptor.fromFd(nGetFd);
+            parcelFileDescriptorFromFd = ParcelFileDescriptor.fromFd(iNGetFd);
         }
-        return fromFd;
+        return parcelFileDescriptorFromFd;
     }
 
     public boolean isValid() {
@@ -162,12 +162,12 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     }
 
     public long getSignalTime() {
-        long nGetSignalTime;
+        long jNGetSignalTime;
         synchronized (this.mCloser) {
             long j = this.mNativePtr;
-            nGetSignalTime = j != 0 ? nGetSignalTime(j) : -1L;
+            jNGetSignalTime = j != 0 ? nGetSignalTime(j) : -1L;
         }
-        return nGetSignalTime;
+        return jNGetSignalTime;
     }
 
     @Override // java.lang.AutoCloseable
@@ -193,13 +193,13 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         synchronized (this.mCloser) {
             long j = this.mNativePtr;
-            int nGetFd = j != 0 ? nGetFd(j) : -1;
-            if (nGetFd == -1) {
+            int iNGetFd = j != 0 ? nGetFd(j) : -1;
+            if (iNGetFd == -1) {
                 parcel.writeBoolean(false);
             } else {
                 parcel.writeBoolean(true);
                 FileDescriptor fileDescriptor = new FileDescriptor();
-                fileDescriptor.setInt$(nGetFd);
+                fileDescriptor.setInt$(iNGetFd);
                 parcel.writeFileDescriptor(fileDescriptor);
             }
         }

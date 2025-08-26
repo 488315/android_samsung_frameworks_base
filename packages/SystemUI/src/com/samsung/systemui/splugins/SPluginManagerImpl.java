@@ -44,7 +44,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SPluginManagerImpl extends BroadcastReceiver implements SPluginManager {
     private static final String ALL_SPLUGIN_DISABLED = "all_splugin_disabled";
@@ -70,7 +69,6 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
     private static final String TAG = "SPluginManagerImpl";
     static final String[] IGNORE_EXCEPTION = {"com.samsung.systemui.bixby", "com.samsung.systemui.bixby2", "com.samsung.android.dynamiclock", "com.samsung.android.mateagent", "com.samsung.android.app.aodservice"};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ClassLoaderFilter extends ClassLoader {
         private final ClassLoader mBase;
         private final String mPackage;
@@ -90,14 +88,12 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CrashWhilePluginActiveException extends RuntimeException {
         public CrashWhilePluginActiveException(Throwable th) {
             super(th);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PluginExceptionHandler implements Thread.UncaughtExceptionHandler {
         public /* synthetic */ PluginExceptionHandler(SPluginManagerImpl sPluginManagerImpl, int i) {
             this();
@@ -107,14 +103,14 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
             if (th == null) {
                 return false;
             }
-            boolean z = false;
+            boolean zCheckAndDisable = false;
             for (StackTraceElement stackTraceElement : th.getStackTrace()) {
                 Iterator it = SPluginManagerImpl.this.mPluginMap.values().iterator();
                 while (it.hasNext()) {
-                    z |= ((SPluginInstanceManager) it.next()).checkAndDisable(stackTraceElement.getClassName());
+                    zCheckAndDisable |= ((SPluginInstanceManager) it.next()).checkAndDisable(stackTraceElement.getClassName());
                 }
             }
-            return checkStack(th.getCause()) | z;
+            return checkStack(th.getCause()) | zCheckAndDisable;
         }
 
         @Override // java.lang.Thread.UncaughtExceptionHandler
@@ -122,11 +118,11 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
             if (SystemProperties.getBoolean("plugin.debugging", false)) {
                 return;
             }
-            long elapsedRealtime = SystemClock.elapsedRealtime();
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
             long firstUncaughtExceptionTime = SPluginPrefs.getFirstUncaughtExceptionTime(SPluginManagerImpl.this.mContext);
-            if (firstUncaughtExceptionTime == 0 || elapsedRealtime - firstUncaughtExceptionTime > 180000) {
+            if (firstUncaughtExceptionTime == 0 || jElapsedRealtime - firstUncaughtExceptionTime > 180000) {
                 SPluginPrefs.setUncaughtExceptionCount(SPluginManagerImpl.this.mContext, 1);
-                SPluginPrefs.setFirstUncaughtExceptionTime(SPluginManagerImpl.this.mContext, elapsedRealtime);
+                SPluginPrefs.setFirstUncaughtExceptionTime(SPluginManagerImpl.this.mContext, jElapsedRealtime);
                 return;
             }
             int uncaughtExceptionCount = SPluginPrefs.getUncaughtExceptionCount(SPluginManagerImpl.this.mContext) + 1;
@@ -135,9 +131,9 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
                 return;
             }
             String str = SPluginManagerImpl.TAG;
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("UncaughtException - currentTime = ", elapsedRealtime, "   firstExceptionTime = ");
-            m.append(firstUncaughtExceptionTime);
-            Log.i(str, m.toString());
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("UncaughtException - currentTime = ", jElapsedRealtime, "   firstExceptionTime = ");
+            sbM.append(firstUncaughtExceptionTime);
+            Log.i(str, sbM.toString());
             ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(SPluginManagerImpl.IGNORE_EXCEPTION));
             Iterator it = SPluginManagerImpl.this.mPluginMap.values().iterator();
             while (it.hasNext()) {
@@ -152,7 +148,6 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PluginInstanceManagerFactory {
         public <T extends SPlugin> SPluginInstanceManager createPluginInstanceManager(Context context, String str, SPluginListener<T> sPluginListener, boolean z, boolean z2, Looper looper, Class<?> cls, SPluginManagerImpl sPluginManagerImpl) {
             return new SPluginInstanceManager(context, str, sPluginListener, z, z2, looper, new SVersionInfo().addClass(cls), sPluginManagerImpl, new SPluginPolicyInteractor(context));
@@ -271,12 +266,12 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
     @Override // android.content.BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
         int disableReason;
-        String str;
+        String string;
         String action = intent.getAction();
-        String str2 = TAG;
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onReceive: ", action, ", size:");
-        m.append(this.mPluginMap.toString());
-        Log.d(str2, m.toString());
+        String str = TAG;
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onReceive: ", action, ", size:");
+        sbM.append(this.mPluginMap.toString());
+        Log.d(str, sbM.toString());
         if ("android.intent.action.USER_UNLOCKED".equals(action)) {
             Iterator<SPluginInstanceManager> it = this.mPluginMap.values().iterator();
             while (it.hasNext()) {
@@ -285,33 +280,33 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
             return;
         }
         if (DISABLE_PLUGIN.equals(action)) {
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(intent.getData().toString().substring(10));
-            if (this.mAllowedPlugins.contains(unflattenFromString.getPackageName())) {
+            ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(intent.getData().toString().substring(10));
+            if (this.mAllowedPlugins.contains(componentNameUnflattenFromString.getPackageName())) {
                 return;
             }
-            getPluginEnabler().setDisabled(unflattenFromString, 1);
-            ((NotificationManager) this.mContext.getSystemService(NotificationManager.class)).cancel(unflattenFromString.getClassName(), 6);
+            getPluginEnabler().setDisabled(componentNameUnflattenFromString, 1);
+            ((NotificationManager) this.mContext.getSystemService(NotificationManager.class)).cancel(componentNameUnflattenFromString.getClassName(), 6);
             return;
         }
         String encodedSchemeSpecificPart = intent.getData().getEncodedSchemeSpecificPart();
-        ComponentName unflattenFromString2 = ComponentName.unflattenFromString(encodedSchemeSpecificPart);
+        ComponentName componentNameUnflattenFromString2 = ComponentName.unflattenFromString(encodedSchemeSpecificPart);
         if (this.mOneShotPackages.contains(encodedSchemeSpecificPart)) {
             int identifier = this.mContext.getResources().getIdentifier("tuner", "drawable", this.mContext.getPackageName());
             int identifier2 = Resources.getSystem().getIdentifier("system_notification_accent_color", "color", "android");
             try {
                 PackageManager packageManager = this.mContext.getPackageManager();
-                str = packageManager.getApplicationInfo(encodedSchemeSpecificPart, 0).loadLabel(packageManager).toString();
+                string = packageManager.getApplicationInfo(encodedSchemeSpecificPart, 0).loadLabel(packageManager).toString();
             } catch (PackageManager.NameNotFoundException unused) {
-                str = encodedSchemeSpecificPart;
+                string = encodedSchemeSpecificPart;
             }
-            Notification.Builder contentText = new Notification.Builder(this.mContext, "ALR").setSmallIcon(identifier).setWhen(0L).setShowWhen(false).setPriority(2).setVisibility(1).setColor(this.mContext.getColor(identifier2)).setContentTitle("Plugin \"" + str + "\" has updated").setContentText("Restart SysUI for changes to take effect.");
+            Notification.Builder contentText = new Notification.Builder(this.mContext, "ALR").setSmallIcon(identifier).setWhen(0L).setShowWhen(false).setPriority(2).setVisibility(1).setColor(this.mContext.getColor(identifier2)).setContentTitle("Plugin \"" + string + "\" has updated").setContentText("Restart SysUI for changes to take effect.");
             contentText.addAction(new Notification.Action.Builder((Icon) null, "Restart SysUI", PendingIntent.getBroadcast(this.mContext, 0, new Intent("com.android.systemui.action.RESTART").setData(Uri.parse("package://" + encodedSchemeSpecificPart)), 0)).build());
             ((NotificationManager) this.mContext.getSystemService(NotificationManager.class)).notifyAsUser(encodedSchemeSpecificPart, 6, contentText.build(), UserHandle.ALL);
         }
         clearClassLoader(encodedSchemeSpecificPart);
-        if ("android.intent.action.PACKAGE_REPLACED".equals(action) && unflattenFromString2 != null && ((disableReason = getPluginEnabler().getDisableReason(unflattenFromString2)) == 2 || disableReason == 3 || disableReason == 1)) {
-            Log.i(TAG, "Re-enabling previously disabled plugin that has been updated: " + unflattenFromString2.flattenToShortString());
-            getPluginEnabler().setEnabled(unflattenFromString2);
+        if ("android.intent.action.PACKAGE_REPLACED".equals(action) && componentNameUnflattenFromString2 != null && ((disableReason = getPluginEnabler().getDisableReason(componentNameUnflattenFromString2)) == 2 || disableReason == 3 || disableReason == 1)) {
+            Log.i(TAG, "Re-enabling previously disabled plugin that has been updated: " + componentNameUnflattenFromString2.flattenToShortString());
+            getPluginEnabler().setEnabled(componentNameUnflattenFromString2);
         }
         if (!"android.intent.action.PACKAGE_REMOVED".equals(action)) {
             if (isPluginLockPackage(encodedSchemeSpecificPart) && "android.intent.action.PACKAGE_REPLACED".equals(action)) {
@@ -384,18 +379,18 @@ public class SPluginManagerImpl extends BroadcastReceiver implements SPluginMana
     @Override // com.samsung.systemui.splugins.SPluginManager
     public <T extends SPlugin> void addPluginListener(String str, SPluginListener<T> sPluginListener, Class cls, boolean z, boolean z2) {
         this.mSPluginPrefs.addAction(str);
-        SPluginInstanceManager createPluginInstanceManager = this.mFactory.createPluginInstanceManager(this.mContext, str, sPluginListener, z, z2, this.mLooper, cls, this);
-        createPluginInstanceManager.loadAll();
-        this.mPluginMap.put(sPluginListener, createPluginInstanceManager);
+        SPluginInstanceManager sPluginInstanceManagerCreatePluginInstanceManager = this.mFactory.createPluginInstanceManager(this.mContext, str, sPluginListener, z, z2, this.mLooper, cls, this);
+        sPluginInstanceManagerCreatePluginInstanceManager.loadAll();
+        this.mPluginMap.put(sPluginListener, sPluginInstanceManagerCreatePluginInstanceManager);
         startListening();
     }
 
     @Override // com.samsung.systemui.splugins.SPluginManager
     public <T extends SPlugin> T getOneShotPlugin(String str, Class<?> cls) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            SPluginInstanceManager createPluginInstanceManager = this.mFactory.createPluginInstanceManager(this.mContext, str, null, false, false, this.mLooper, cls, this);
+            SPluginInstanceManager sPluginInstanceManagerCreatePluginInstanceManager = this.mFactory.createPluginInstanceManager(this.mContext, str, null, false, false, this.mLooper, cls, this);
             this.mSPluginPrefs.addAction(str);
-            SPluginInstanceManager.PluginInfo<T> plugin = createPluginInstanceManager.getPlugin();
+            SPluginInstanceManager.PluginInfo<T> plugin = sPluginInstanceManagerCreatePluginInstanceManager.getPlugin();
             if (plugin == null) {
                 return null;
             }

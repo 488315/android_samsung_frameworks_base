@@ -21,6 +21,7 @@ import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOu
 import com.android.app.animation.Interpolators;
 import com.android.internal.widget.CachingIconView;
 import com.android.settingslib.Utils;
+import com.android.systemui.Gefingerpoken;
 import com.android.systemui.R;
 import com.android.systemui.animation.ViewHierarchyAnimator;
 import com.android.systemui.animation.ViewHierarchyAnimator$Companion$createListener$1;
@@ -62,7 +63,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ChipbarCoordinator extends TemporaryViewDisplayController {
     public static final VibrationAttributes VIBRATION_ATTRIBUTES;
@@ -75,7 +75,6 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
     public final ViewUtil viewUtil;
     public final WindowManager.LayoutParams windowLayoutParams;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -85,7 +84,6 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LoadingDetails {
         public final ObjectAnimator animator;
         public final View loadingView;
@@ -115,6 +113,12 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
         }
     }
 
+    /* renamed from: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator$updateView$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Gefingerpoken {
+        public AnonymousClass1() {
+        }
+    }
+
     static {
         new Companion(null);
         VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(50);
@@ -138,7 +142,7 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
         Runnable runnable = new Runnable() { // from class: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator$animateViewIn$onAnimationEnd$1
             @Override // java.lang.Runnable
             public final void run() {
-                ChipbarCoordinator chipbarCoordinator = ChipbarCoordinator.this;
+                ChipbarCoordinator chipbarCoordinator = this.this$0;
                 ChipbarInfo chipbarInfo = (ChipbarInfo) viewGroup.getTag(R.id.tag_chipbar_info);
                 ViewGroup viewGroup2 = viewGroup;
                 VibrationAttributes vibrationAttributes = ChipbarCoordinator.VIBRATION_ATTRIBUTES;
@@ -192,7 +196,7 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
             @Override // java.lang.Runnable
             public final void run() {
                 ObjectAnimator objectAnimator;
-                ChipbarCoordinator chipbarCoordinator = ChipbarCoordinator.this;
+                ChipbarCoordinator chipbarCoordinator = this.this$0;
                 VibrationAttributes vibrationAttributes = ChipbarCoordinator.VIBRATION_ATTRIBUTES;
                 ChipbarCoordinator.LoadingDetails loadingDetails = chipbarCoordinator.loadingDetails;
                 if (loadingDetails != null && (objectAnimator = loadingDetails.animator) != null) {
@@ -233,15 +237,15 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     VibrationAttributes vibrationAttributes = ChipbarCoordinator.VIBRATION_ATTRIBUTES;
-                    return TemporaryViewDisplayController.DisplayInfo.this.view;
+                    return displayInfo.view;
                 }
             };
             swipeChipbarAwayGestureHandler.addOnGestureDetectedCallback("ChipbarCoordinator", new Function1() { // from class: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     VibrationAttributes vibrationAttributes = ChipbarCoordinator.VIBRATION_ATTRIBUTES;
-                    ChipbarCoordinator chipbarCoordinator = ChipbarCoordinator.this;
+                    ChipbarCoordinator chipbarCoordinator = this.f$0;
                     TemporaryViewDisplayController.DisplayInfo displayInfo2 = (TemporaryViewDisplayController.DisplayInfo) CollectionsKt___CollectionsKt.getOrNull(0, chipbarCoordinator.activeViews);
                     TemporaryViewLogger temporaryViewLogger = chipbarCoordinator.logger;
                     if (displayInfo2 == null) {
@@ -250,11 +254,11 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
                         LogLevel logLevel = LogLevel.WARNING;
                         ChipbarLogger$$ExternalSyntheticLambda0 chipbarLogger$$ExternalSyntheticLambda0 = new ChipbarLogger$$ExternalSyntheticLambda0(1);
                         LogBuffer logBuffer = chipbarLogger.buffer;
-                        LogMessage obtain = logBuffer.obtain(chipbarLogger.tag, logLevel, chipbarLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain(chipbarLogger.tag, logLevel, chipbarLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.str1 = null;
                         logMessageImpl.str2 = "No info is being displayed";
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                     } else {
                         ChipbarInfo chipbarInfo = (ChipbarInfo) displayInfo2.info;
                         if (chipbarInfo.allowSwipeToDismiss) {
@@ -267,11 +271,11 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
                             LogLevel logLevel2 = LogLevel.WARNING;
                             ChipbarLogger$$ExternalSyntheticLambda0 chipbarLogger$$ExternalSyntheticLambda02 = new ChipbarLogger$$ExternalSyntheticLambda0(1);
                             LogBuffer logBuffer2 = chipbarLogger2.buffer;
-                            LogMessage obtain2 = logBuffer2.obtain(chipbarLogger2.tag, logLevel2, chipbarLogger$$ExternalSyntheticLambda02, null);
-                            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                            LogMessage logMessageObtain2 = logBuffer2.obtain(chipbarLogger2.tag, logLevel2, chipbarLogger$$ExternalSyntheticLambda02, null);
+                            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                             logMessageImpl2.str1 = chipbarInfo.id;
                             logMessageImpl2.str2 = "This view prohibits swipe-to-dismiss";
-                            logBuffer2.commit(obtain2);
+                            logBuffer2.commit(logMessageObtain2);
                         }
                     }
                     return Unit.INSTANCE;
@@ -291,74 +295,74 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
 
     @Override // com.android.systemui.temporarydisplay.TemporaryViewDisplayController
     public final void updateView(TemporaryViewInfo temporaryViewInfo, ViewGroup viewGroup) {
-        String m;
+        String strM;
         ObjectAnimator objectAnimator;
-        String str;
+        String strM2;
         ObjectAnimator objectAnimator2;
         int i = 0;
         final ChipbarInfo chipbarInfo = (ChipbarInfo) temporaryViewInfo;
         updateGestureListening$1();
         ChipbarLogger chipbarLogger = (ChipbarLogger) this.logger;
-        String str2 = chipbarInfo.windowTitle;
+        String str = chipbarInfo.windowTitle;
         Text.Companion companion = Text.Companion;
         Context context = this.context;
         companion.getClass();
         Text text = chipbarInfo.text;
-        String loadText = Text.Companion.loadText(text, context);
+        String strLoadText = Text.Companion.loadText(text, context);
         ChipbarEndItem chipbarEndItem = chipbarInfo.endItem;
         if (chipbarEndItem == null) {
-            m = "null";
+            strM = "null";
         } else if (chipbarEndItem instanceof ChipbarEndItem.Loading) {
-            m = "loading";
+            strM = "loading";
         } else if (chipbarEndItem instanceof ChipbarEndItem.Error) {
-            m = "error";
+            strM = "error";
         } else {
             if (!(chipbarEndItem instanceof ChipbarEndItem.Button)) {
                 throw new NoWhenBranchMatchedException();
             }
-            m = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("button(", Text.Companion.loadText(((ChipbarEndItem.Button) chipbarEndItem).text, this.context), ")");
+            strM = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("button(", Text.Companion.loadText(((ChipbarEndItem.Button) chipbarEndItem).text, this.context), ")");
         }
         chipbarLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         ChipbarLogger$$ExternalSyntheticLambda0 chipbarLogger$$ExternalSyntheticLambda0 = new ChipbarLogger$$ExternalSyntheticLambda0(i);
-        String str3 = chipbarLogger.tag;
+        String str2 = chipbarLogger.tag;
         LogBuffer logBuffer = chipbarLogger.buffer;
-        LogMessage obtain = logBuffer.obtain(str3, logLevel, chipbarLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        logMessageImpl.str1 = str2;
-        logMessageImpl.str2 = loadText;
-        logMessageImpl.str3 = m;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain(str2, logLevel, chipbarLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.str1 = str;
+        logMessageImpl.str2 = strLoadText;
+        logMessageImpl.str3 = strM;
+        logBuffer.commit(logMessageObtain);
         viewGroup.setTag(R.id.tag_chipbar_info, chipbarInfo);
         ChipbarRootView chipbarRootView = (ChipbarRootView) viewGroup.requireViewById(R.id.chipbar_root_view);
         if (chipbarRootView == null) {
             chipbarRootView = null;
         }
-        chipbarRootView.touchHandler = new ChipbarCoordinator$updateView$1(this);
-        CachingIconView requireViewById = viewGroup.requireViewById(R.id.start_icon);
+        chipbarRootView.touchHandler = new AnonymousClass1();
+        CachingIconView cachingIconViewRequireViewById = viewGroup.requireViewById(R.id.start_icon);
         TintedIconViewBinder.INSTANCE.getClass();
         IconViewBinder iconViewBinder = IconViewBinder.INSTANCE;
         TintedIcon tintedIcon = chipbarInfo.startIcon;
         Icon icon = tintedIcon.icon;
         iconViewBinder.getClass();
-        IconViewBinder.bind(icon, requireViewById);
+        IconViewBinder.bind(icon, cachingIconViewRequireViewById);
         Integer num = tintedIcon.tint;
-        requireViewById.setImageTintList(num != null ? Utils.getColorAttr(num.intValue(), requireViewById.getContext()) : null);
+        cachingIconViewRequireViewById.setImageTintList(num != null ? Utils.getColorAttr(num.intValue(), cachingIconViewRequireViewById.getContext()) : null);
         TextView textView = (TextView) viewGroup.requireViewById(R.id.text);
         TextViewBinder.INSTANCE.getClass();
         TextViewBinder.bind(textView, text);
         textView.requestLayout();
-        boolean areEqual = Intrinsics.areEqual(chipbarEndItem, ChipbarEndItem.Loading.INSTANCE);
+        boolean zAreEqual = Intrinsics.areEqual(chipbarEndItem, ChipbarEndItem.Loading.INSTANCE);
         ImageView imageView = (ImageView) viewGroup.requireViewById(R.id.loading);
-        imageView.setVisibility(areEqual ? 0 : 8);
-        if (areEqual) {
+        imageView.setVisibility(zAreEqual ? 0 : 8);
+        if (zAreEqual) {
             LoadingDetails loadingDetails = this.loadingDetails;
             if (loadingDetails == null || !Intrinsics.areEqual(loadingDetails.loadingView, imageView)) {
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(imageView, (Property<ImageView, Float>) View.ROTATION, 0.0f, 360.0f);
-                ofFloat.setDuration(1000L);
-                ofFloat.setRepeatCount(-1);
-                ofFloat.setInterpolator(Interpolators.LINEAR);
-                LoadingDetails loadingDetails2 = new LoadingDetails(imageView, ofFloat);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(imageView, (Property<ImageView, Float>) View.ROTATION, 0.0f, 360.0f);
+                objectAnimatorOfFloat.setDuration(1000L);
+                objectAnimatorOfFloat.setRepeatCount(-1);
+                objectAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+                LoadingDetails loadingDetails2 = new LoadingDetails(imageView, objectAnimatorOfFloat);
                 loadingDetails2.animator.start();
                 LoadingDetails loadingDetails3 = this.loadingDetails;
                 if (loadingDetails3 != null && (objectAnimator2 = loadingDetails3.animator) != null) {
@@ -381,7 +385,7 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
             textView2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator$updateView$onClickListener$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    if (ChipbarCoordinator.this.falsingManager.isFalseTap(1)) {
+                    if (this.this$0.falsingManager.isFalseTap(1)) {
                         return;
                     }
                     ((ChipbarEndItem.Button) chipbarInfo.endItem).onClickListener.onClick(view);
@@ -398,15 +402,15 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
             ContentDescription.Companion companion2 = ContentDescription.Companion;
             Context context2 = this.context;
             companion2.getClass();
-            str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(ContentDescription.Companion.loadContentDescription(contentDescription, context2), " ");
+            strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(ContentDescription.Companion.loadContentDescription(contentDescription, context2), " ");
         } else {
-            str = "";
+            strM2 = "";
         }
-        String m2 = chipbarEndItem instanceof ChipbarEndItem.Loading ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m(". ", this.context.getResources().getString(R.string.media_transfer_loading), ".") : "";
+        String strM3 = chipbarEndItem instanceof ChipbarEndItem.Loading ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m(". ", this.context.getResources().getString(R.string.media_transfer_loading), ".") : "";
         ViewGroup viewGroup3 = (ViewGroup) viewGroup.requireViewById(R.id.chipbar_inner);
-        viewGroup3.setContentDescription(str + Text.Companion.loadText(text, this.context) + m2);
+        viewGroup3.setContentDescription(strM2 + Text.Companion.loadText(text, this.context) + strM3);
         viewGroup3.setAccessibilityLiveRegion(2);
-        viewGroup3.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator$updateView$2
+        viewGroup3.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.temporarydisplay.chipbar.ChipbarCoordinator.updateView.2
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
@@ -420,17 +424,17 @@ public class ChipbarCoordinator extends TemporaryViewDisplayController {
         }
         final VibrationEffect vibrationEffect = chipbarInfo.vibrationEffect;
         if (vibrationEffect != null) {
-            final int myUid = Process.myUid();
+            final int iMyUid = Process.myUid();
             final String packageName = this.context.getApplicationContext().getPackageName();
             final VibrationAttributes vibrationAttributes = VIBRATION_ATTRIBUTES;
             final VibratorHelper vibratorHelper = this.vibratorHelper;
-            final String str4 = chipbarInfo.windowTitle;
+            final String str3 = chipbarInfo.windowTitle;
             if (vibratorHelper.hasVibrator()) {
                 vibratorHelper.mExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.VibratorHelper$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VibratorHelper vibratorHelper2 = VibratorHelper.this;
-                        vibratorHelper2.mVibrator.vibrate(myUid, packageName, vibrationEffect, str4, vibrationAttributes);
+                        VibratorHelper vibratorHelper2 = vibratorHelper;
+                        vibratorHelper2.mVibrator.vibrate(iMyUid, packageName, vibrationEffect, str3, vibrationAttributes);
                     }
                 });
             }

@@ -2,18 +2,18 @@ package kotlinx.coroutines.flow;
 
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.flow.CancellableFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class CancellableFlowImpl$collect$2$emit$1 extends ContinuationImpl {
     int label;
     /* synthetic */ Object result;
-    final /* synthetic */ CancellableFlowImpl$collect$2 this$0;
+    final /* synthetic */ CancellableFlowImpl.AnonymousClass2 this$0;
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public CancellableFlowImpl$collect$2$emit$1(CancellableFlowImpl$collect$2 cancellableFlowImpl$collect$2, Continuation continuation) {
+    public CancellableFlowImpl$collect$2$emit$1(CancellableFlowImpl.AnonymousClass2 anonymousClass2, Continuation continuation) {
         super(continuation);
-        this.this$0 = cancellableFlowImpl$collect$2;
+        this.this$0 = anonymousClass2;
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl

@@ -62,9 +62,9 @@ public interface IDomainSelectionServiceController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDomainSelectionServiceController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDomainSelectionServiceController)) {
-                return (IDomainSelectionServiceController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDomainSelectionServiceController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDomainSelectionServiceController)) {
+                return (IDomainSelectionServiceController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -98,21 +98,21 @@ public interface IDomainSelectionServiceController extends IInterface {
             }
             if (i == 1) {
                 DomainSelectionService.SelectionAttributes selectionAttributes = (DomainSelectionService.SelectionAttributes) parcel.readTypedObject(DomainSelectionService.SelectionAttributes.CREATOR);
-                ITransportSelectorCallback asInterface = ITransportSelectorCallback.Stub.asInterface(parcel.readStrongBinder());
+                ITransportSelectorCallback iTransportSelectorCallbackAsInterface = ITransportSelectorCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                selectDomain(selectionAttributes, asInterface);
+                selectDomain(selectionAttributes, iTransportSelectorCallbackAsInterface);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 ServiceState serviceState = (ServiceState) parcel.readTypedObject(ServiceState.CREATOR);
                 parcel.enforceNoDataAvail();
-                updateServiceState(readInt, readInt2, serviceState);
+                updateServiceState(i3, i4, serviceState);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 BarringInfo barringInfo = (BarringInfo) parcel.readTypedObject(BarringInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                updateBarringInfo(readInt3, readInt4, barringInfo);
+                updateBarringInfo(i5, i6, barringInfo);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -137,42 +137,42 @@ public interface IDomainSelectionServiceController extends IInterface {
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
             public void selectDomain(DomainSelectionService.SelectionAttributes selectionAttributes, ITransportSelectorCallback iTransportSelectorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
-                    obtain.writeTypedObject(selectionAttributes, 0);
-                    obtain.writeStrongInterface(iTransportSelectorCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(selectionAttributes, 0);
+                    parcelObtain.writeStrongInterface(iTransportSelectorCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
             public void updateServiceState(int i, int i2, ServiceState serviceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(serviceState, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(serviceState, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
             public void updateBarringInfo(int i, int i2, BarringInfo barringInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(barringInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(barringInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

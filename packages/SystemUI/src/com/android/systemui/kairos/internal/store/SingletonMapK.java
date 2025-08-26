@@ -9,13 +9,11 @@ import kotlin.collections.AbstractMutableMap;
 import kotlin.collections.AbstractMutableSet;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SingletonMapK extends AbstractMutableMap implements MutableMapK {
     public final SingletonMapK$entries$1 entries;
     public volatile Object value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements MutableMapK.Factory {
         @Override // com.android.systemui.kairos.internal.store.MutableMapK.Factory
         public final MutableMapK create(Integer num) {
@@ -33,8 +31,8 @@ public final class SingletonMapK extends AbstractMutableMap implements MutableMa
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
             public final boolean add(Object obj2) {
                 Map.Entry entry = (Map.Entry) obj2;
-                boolean z = SingletonMapK.this.value != NoValue.INSTANCE;
-                SingletonMapK.this.value = entry;
+                boolean z = this.this$0.value != NoValue.INSTANCE;
+                this.this$0.value = entry;
                 return z;
             }
 
@@ -48,12 +46,12 @@ public final class SingletonMapK extends AbstractMutableMap implements MutableMa
 
             @Override // kotlin.collections.AbstractMutableSet
             public final int getSize() {
-                return SingletonMapK.this.value == NoValue.INSTANCE ? 0 : 1;
+                return this.this$0.value == NoValue.INSTANCE ? 0 : 1;
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
             public final Iterator iterator() {
-                return new SingletonMapK$entries$1$iterator$1(SingletonMapK.this);
+                return new SingletonMapK$entries$1$iterator$1(this.this$0);
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -105,11 +103,11 @@ public final class SingletonMapK extends AbstractMutableMap implements MutableMa
     public final MapK readOnlyCopy() {
         Object obj = this.value;
         NoValue noValue = NoValue.INSTANCE;
-        Object obj2 = this.value;
+        Object value = this.value;
         if (obj != noValue) {
-            obj2 = TypeIntrinsics.asMutableMapEntry(obj2).getValue();
+            value = TypeIntrinsics.asMutableMapEntry(value).getValue();
         }
-        return new Single(obj2);
+        return new Single(value);
     }
 
     @Override // java.util.AbstractMap, java.util.Map

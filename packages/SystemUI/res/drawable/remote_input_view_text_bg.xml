@@ -2,8 +2,8 @@
 <shape android:shape="rectangle"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
-    <solid android:color="@android:color/sliding_tab_text_color_active" />
-    <stroke android:width="@dimen/remote_input_view_text_stroke" android:color="@android:color/secondary_material_settings_light" />
+    <solid android:color="@android:color/perms_dangerous_perm_color" />
+    <stroke android:width="@dimen/remote_input_view_text_stroke" android:color="@android:color/notification_action_list_background_color" />
     <padding android:left="12.0dip" android:top="0.0dip" android:right="12.0dip" android:bottom="0.0dip" />
     <corners android:radius="24.0dip" />
 </shape>

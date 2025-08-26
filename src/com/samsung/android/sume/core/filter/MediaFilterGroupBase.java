@@ -31,11 +31,11 @@ public abstract class MediaFilterGroupBase implements MediaFilterGroup {
 
     @Override // com.samsung.android.sume.core.filter.MediaFilterGroup
     public boolean replaceFilter(MediaFilter mediaFilter, MediaFilter mediaFilter2) {
-        int indexOf = this.filters.indexOf(mediaFilter);
-        if (indexOf < 0) {
+        int iIndexOf = this.filters.indexOf(mediaFilter);
+        if (iIndexOf < 0) {
             return false;
         }
-        this.filters.set(indexOf, mediaFilter2);
+        this.filters.set(iIndexOf, mediaFilter2);
         return true;
     }
 

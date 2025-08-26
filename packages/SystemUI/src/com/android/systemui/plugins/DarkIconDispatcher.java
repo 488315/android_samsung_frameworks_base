@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(version = 2)
 @DependsOn(target = DarkReceiver.class)
 /* loaded from: classes2.dex */
@@ -29,7 +28,7 @@ public interface DarkIconDispatcher {
     }
 
     static int getTint(Collection<Rect> collection, View view, int i) {
-        if (isInAreas(collection, view)) {
+        if (collection == null || isInAreas(collection, view)) {
             return i;
         }
         return -301989889;
@@ -41,8 +40,8 @@ public interface DarkIconDispatcher {
         }
         sTmpRect.set(rect);
         int i = rect2.left;
-        int width = rect2.width();
-        return Math.max(0, Math.min(i + width, rect.right) - Math.max(i, rect.left)) * 2 > width && (rect.top <= 0);
+        int iWidth = rect2.width();
+        return Math.max(0, Math.min(i + iWidth, rect.right) - Math.max(i, rect.left)) * 2 > iWidth && (rect.top <= 0);
     }
 
     static boolean isInAreas(Collection<Rect> collection, View view) {
@@ -93,7 +92,6 @@ public interface DarkIconDispatcher {
     default void stop() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 3)
     public interface DarkReceiver {
         public static final int VERSION = 3;

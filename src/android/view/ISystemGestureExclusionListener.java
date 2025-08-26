@@ -45,9 +45,9 @@ public interface ISystemGestureExclusionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISystemGestureExclusionListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISystemGestureExclusionListener)) {
-                return (ISystemGestureExclusionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISystemGestureExclusionListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISystemGestureExclusionListener)) {
+                return (ISystemGestureExclusionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface ISystemGestureExclusionListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Region region = (Region) parcel.readTypedObject(Region.CREATOR);
                 Region region2 = (Region) parcel.readTypedObject(Region.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSystemGestureExclusionChanged(readInt, region, region2);
+                onSystemGestureExclusionChanged(i3, region, region2);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,15 +102,15 @@ public interface ISystemGestureExclusionListener extends IInterface {
 
             @Override // android.view.ISystemGestureExclusionListener
             public void onSystemGestureExclusionChanged(int i, Region region, Region region2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemGestureExclusionListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(region, 0);
-                    obtain.writeTypedObject(region2, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemGestureExclusionListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(region, 0);
+                    parcelObtain.writeTypedObject(region2, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

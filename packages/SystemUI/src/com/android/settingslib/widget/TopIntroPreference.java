@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TopIntroPreference extends Preference {
     public static final int[] COLLAPSABLE_TEXT_VIEW_ATTRS;
@@ -20,7 +19,6 @@ public class TopIntroPreference extends Preference {
     public final boolean isCollapsable;
     public final int minLines;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,8 +44,8 @@ public class TopIntroPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedAbove = false;
         preferenceViewHolder.mDividerAllowedBelow = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.collapsable_text_view);
-        CollapsableTextView collapsableTextView = findViewById instanceof CollapsableTextView ? (CollapsableTextView) findViewById : null;
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.collapsable_text_view);
+        CollapsableTextView collapsableTextView = viewFindViewById instanceof CollapsableTextView ? (CollapsableTextView) viewFindViewById : null;
         if (collapsableTextView != null) {
             boolean z = this.isCollapsable;
             collapsableTextView.isCollapsable = z;
@@ -79,11 +77,11 @@ public class TopIntroPreference extends Preference {
         super(context, attributeSet, i, i2);
         this.minLines = 2;
         this.mLayoutResId = R.layout.settingslib_expressive_top_intro;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, COLLAPSABLE_TEXT_VIEW_ATTRS, i, 0);
-        boolean z = obtainStyledAttributes.getBoolean(IS_COLLAPSABLE, false);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, COLLAPSABLE_TEXT_VIEW_ATTRS, i, 0);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(IS_COLLAPSABLE, false);
         this.isCollapsable = z;
-        this.minLines = RangesKt___RangesKt.coerceIn(obtainStyledAttributes.getInt(MIN_LINES, z ? 2 : 10), 1, 10);
-        obtainStyledAttributes.recycle();
+        this.minLines = RangesKt___RangesKt.coerceIn(typedArrayObtainStyledAttributes.getInt(MIN_LINES, z ? 2 : 10), 1, 10);
+        typedArrayObtainStyledAttributes.recycle();
         setSelectable(false);
     }
 }

@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class TileUiStateKt {
     public static final IconProvider toIconProvider(QSTile.State state) {
@@ -29,9 +28,9 @@ public abstract class TileUiStateKt {
     public static final TileUiState toUiState(QSTile.State state, Resources resources) {
         int i;
         String str;
-        String obj;
-        String obj2;
-        String obj3;
+        String string;
+        String string2;
+        String string3;
         if (!Intrinsics.areEqual(state.expandedAccessibilityClassName, Switch.class.getName()) || state.handlesSecondaryClick) {
             Role.Companion.getClass();
             i = 0;
@@ -71,15 +70,15 @@ public abstract class TileUiStateKt {
         }
         ToggleableState toggleableState = (i == i2 || state.handlesSecondaryClick) ? state.state == 2 ? ToggleableState.On : ToggleableState.Off : null;
         CharSequence charSequence2 = state.label;
-        String str5 = (charSequence2 == null || (obj3 = charSequence2.toString()) == null) ? "" : obj3;
-        String str6 = (secondaryLabel == null || (obj2 = secondaryLabel.toString()) == null) ? "" : obj2;
+        String str5 = (charSequence2 == null || (string3 = charSequence2.toString()) == null) ? "" : string3;
+        String str6 = (secondaryLabel == null || (string2 = secondaryLabel.toString()) == null) ? "" : string2;
         int i3 = state.disabledByPolicy ? 0 : state.state;
         boolean z = state.handlesLongClick;
         boolean z2 = state.handlesSecondaryClick;
         Drawable drawable = state.sideViewCustomDrawable;
         CharSequence charSequence3 = state.contentDescription;
-        if (charSequence3 != null && (obj = charSequence3.toString()) != null) {
-            str2 = obj;
+        if (charSequence3 != null && (string = charSequence3.toString()) != null) {
+            str2 = string;
         }
         return new TileUiState(str5, str6, i3, z, z2, drawable, new AccessibilityUiState(str2, sb.toString(), i, toggleableState, state.disabledByPolicy ? resources.getString(R.string.accessibility_tile_disabled_by_policy_action_description) : null, null));
     }

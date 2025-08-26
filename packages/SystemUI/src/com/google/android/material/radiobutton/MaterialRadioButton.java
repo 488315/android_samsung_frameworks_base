@@ -12,7 +12,6 @@ import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialRadioButton extends AppCompatRadioButton {
     public static final int[][] ENABLED_CHECKED_STATES = {new int[]{R.attr.state_enabled, R.attr.state_checked}, new int[]{R.attr.state_enabled, -16842912}, new int[]{-16842910, R.attr.state_checked}, new int[]{-16842910, -16842912}};
@@ -45,11 +44,11 @@ public class MaterialRadioButton extends AppCompatRadioButton {
     public MaterialRadioButton(Context context, AttributeSet attributeSet, int i) {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_CompoundButton_RadioButton), attributeSet, i);
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialRadioButton, i, com.android.systemui.R.style.Widget_MaterialComponents_CompoundButton_RadioButton, new int[0]);
-        if (obtainStyledAttributes.hasValue(0)) {
-            setButtonTintList(MaterialResources.getColorStateList(context2, obtainStyledAttributes, 0));
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialRadioButton, i, com.android.systemui.R.style.Widget_MaterialComponents_CompoundButton_RadioButton, new int[0]);
+        if (typedArrayObtainStyledAttributes.hasValue(0)) {
+            setButtonTintList(MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 0));
         }
-        this.useMaterialThemeColors = obtainStyledAttributes.getBoolean(1, false);
-        obtainStyledAttributes.recycle();
+        this.useMaterialThemeColors = typedArrayObtainStyledAttributes.getBoolean(1, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

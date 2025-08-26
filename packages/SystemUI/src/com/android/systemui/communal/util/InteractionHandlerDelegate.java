@@ -15,7 +15,6 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.log.core.Logger;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InteractionHandlerDelegate implements RemoteViews.InteractionHandler {
     public final CommunalSceneInteractor communalSceneInteractor;
@@ -23,7 +22,6 @@ public final class InteractionHandlerDelegate implements RemoteViews.Interaction
     public final IntentStarter intentStarter;
     public final Logger logger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface IntentStarter {
         void startActivity(PendingIntent pendingIntent, Intent intent, ActivityOptions activityOptions, CommunalTransitionAnimatorController communalTransitionAnimatorController);
 
@@ -41,18 +39,18 @@ public final class InteractionHandlerDelegate implements RemoteViews.Interaction
 
     public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
         View view2;
-        GhostedViewTransitionAnimatorController fromView$default;
+        GhostedViewTransitionAnimatorController ghostedViewTransitionAnimatorControllerFromView$default;
         Logger logger = this.logger;
         CommunalTransitionAnimatorController communalTransitionAnimatorController = null;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new InteractionHandlerDelegate$$ExternalSyntheticLambda0(), null);
-        obtain.setStr1(pendingIntent.isActivity() ? "activity" : pendingIntent.isBroadcast() ? "broadcast" : pendingIntent.isForegroundService() ? "fgService" : pendingIntent.isService() ? "service" : "unknown");
-        obtain.setStr2(pendingIntent.getCreatorPackage());
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new InteractionHandlerDelegate$$ExternalSyntheticLambda0(), null);
+        logMessageObtain.setStr1(pendingIntent.isActivity() ? "activity" : pendingIntent.isBroadcast() ? "broadcast" : pendingIntent.isForegroundService() ? "fgService" : pendingIntent.isService() ? "service" : "unknown");
+        logMessageObtain.setStr2(pendingIntent.getCreatorPackage());
+        logger.getBuffer().commit(logMessageObtain);
         Pair launchOptions = remoteResponse.getLaunchOptions(view);
         launchOptions.getClass();
         Intent intent = (Intent) launchOptions.first;
         ActivityOptions activityOptions = (ActivityOptions) launchOptions.second;
-        Object obj = view;
+        Object parent = view;
         if (!pendingIntent.isActivity()) {
             IntentStarter intentStarter = this.intentStarter;
             intent.getClass();
@@ -60,19 +58,19 @@ public final class InteractionHandlerDelegate implements RemoteViews.Interaction
             return intentStarter.startPendingIntent(view, pendingIntent, intent, activityOptions);
         }
         while (true) {
-            if (!(obj instanceof View)) {
+            if (!(parent instanceof View)) {
                 view2 = null;
                 break;
             }
-            if (((Boolean) this.findViewToAnimate.mo779invoke(obj)).booleanValue()) {
-                view2 = (View) obj;
+            if (((Boolean) this.findViewToAnimate.mo781invoke(parent)).booleanValue()) {
+                view2 = (View) parent;
                 break;
             }
-            obj = ((View) obj).getParent();
+            parent = ((View) parent).getParent();
         }
-        if (view2 != null && (fromView$default = ActivityTransitionAnimator.Controller.Companion.fromView$default(ActivityTransitionAnimator.Controller.Companion, view2, null, 62)) != null) {
+        if (view2 != null && (ghostedViewTransitionAnimatorControllerFromView$default = ActivityTransitionAnimator.Controller.Companion.fromView$default(ActivityTransitionAnimator.Controller.Companion, view2, null, 62)) != null) {
             this.communalSceneInteractor._isLaunchingWidget.updateState(null, Boolean.TRUE);
-            communalTransitionAnimatorController = new CommunalTransitionAnimatorController(fromView$default, this.communalSceneInteractor);
+            communalTransitionAnimatorController = new CommunalTransitionAnimatorController(ghostedViewTransitionAnimatorControllerFromView$default, this.communalSceneInteractor);
         }
         IntentStarter intentStarter2 = this.intentStarter;
         intent.getClass();

@@ -15,7 +15,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SystemManager {
     public static final String TAG = "SystemManager";
@@ -27,21 +26,17 @@ public class SystemManager {
     }
 
     public static synchronized SystemManager getInstance() {
-        SystemManager systemManager;
-        synchronized (SystemManager.class) {
-            try {
-                if (sSystemManager == null) {
-                    sSystemManager = new SystemManager();
-                }
-                if (sContextInfo == null) {
-                    sContextInfo = new ContextInfo();
-                }
-                systemManager = sSystemManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sSystemManager == null) {
+                sSystemManager = new SystemManager();
             }
+            if (sContextInfo == null) {
+                sContextInfo = new ContextInfo();
+            }
+        } catch (Throwable th) {
+            throw th;
         }
-        return systemManager;
+        return sSystemManager;
     }
 
     public int addAutoCallNumber(String str, int i, int i2) {
@@ -744,9 +739,9 @@ public class SystemManager {
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed talking with KnoxCustomManager service", e);
             }
-            return screenTimeout / 1000;
+        } else {
+            screenTimeout = 0;
         }
-        screenTimeout = 0;
         return screenTimeout / 1000;
     }
 
@@ -2444,19 +2439,15 @@ public class SystemManager {
     }
 
     public static synchronized SystemManager getInstance(int i) {
-        SystemManager systemManager;
-        synchronized (SystemManager.class) {
-            try {
-                if (sSystemManager == null) {
-                    sSystemManager = new SystemManager();
-                }
-                sContextInfo = new ContextInfo(Process.myUid(), false, i);
-                systemManager = sSystemManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sSystemManager == null) {
+                sSystemManager = new SystemManager();
             }
+            sContextInfo = new ContextInfo(Process.myUid(), false, i);
+        } catch (Throwable th) {
+            throw th;
         }
-        return systemManager;
+        return sSystemManager;
     }
 
     public int setHardKeyIntentBroadcast(boolean z, int i, int i2, Intent intent, String str, boolean z2) {

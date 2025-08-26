@@ -213,22 +213,22 @@ public final class AmbientContextEvent implements Parcelable {
     }
 
     AmbientContextEvent(Parcel parcel) {
-        int readInt = parcel.readInt();
-        Instant unparcel = sParcellingForStartTime.unparcel(parcel);
-        Instant unparcel2 = sParcellingForEndTime.unparcel(parcel);
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
+        int i = parcel.readInt();
+        Instant instantUnparcel = sParcellingForStartTime.unparcel(parcel);
+        Instant instantUnparcel2 = sParcellingForEndTime.unparcel(parcel);
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
         PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-        this.mEventType = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) EventCode.class, (Annotation) null, readInt);
-        this.mStartTime = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.mEndTime = unparcel2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel2);
-        this.mConfidenceLevel = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, readInt2);
-        this.mDensityLevel = readInt3;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, readInt3);
+        this.mEventType = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) EventCode.class, (Annotation) null, i);
+        this.mStartTime = instantUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) instantUnparcel);
+        this.mEndTime = instantUnparcel2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) instantUnparcel2);
+        this.mConfidenceLevel = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, i2);
+        this.mDensityLevel = i3;
+        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, i3);
         this.mVendorData = persistableBundle;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) persistableBundle);
     }

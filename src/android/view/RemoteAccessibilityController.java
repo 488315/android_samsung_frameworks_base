@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.RemoteAccessibilityController;
 import android.view.accessibility.IAccessibilityEmbeddedConnection;
 import java.lang.ref.WeakReference;
 
@@ -100,7 +99,7 @@ class RemoteAccessibilityController {
             remoteAccessibilityController.runOnUiThread(new Runnable() { // from class: android.view.RemoteAccessibilityController$RemoteAccessibilityEmbeddedConnection$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteAccessibilityController.RemoteAccessibilityEmbeddedConnection.this.lambda$binderDied$0(remoteAccessibilityController);
+                    this.f$0.lambda$binderDied$0(remoteAccessibilityController);
                 }
             });
         }

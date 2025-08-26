@@ -17,7 +17,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MusicShareDevice implements AudioDevice, BluetoothRoute {
     public static final Companion Companion = new Companion(null);
@@ -39,7 +38,6 @@ public final class MusicShareDevice implements AudioDevice, BluetoothRoute {
     public final int volume;
     public final int volumeMax;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,9 +86,9 @@ public final class MusicShareDevice implements AudioDevice, BluetoothRoute {
 
     @Override // com.android.systemui.media.mediaoutput.entity.AudioDevice
     public final AudioDevice clone() {
-        MusicShareDevice copy$default = copy$default(this, null, 0, null, false, CustomDeviceManager.SETTINGS_ALL_PREVIOUS);
-        copy$default.deepCopy(this);
-        return copy$default;
+        MusicShareDevice musicShareDeviceCopy$default = copy$default(this, null, 0, null, false, CustomDeviceManager.SETTINGS_ALL_PREVIOUS);
+        musicShareDeviceCopy$default.deepCopy(this);
+        return musicShareDeviceCopy$default;
     }
 
     public final void deepCopy(MusicShareDevice musicShareDevice) {
@@ -214,11 +212,11 @@ public final class MusicShareDevice implements AudioDevice, BluetoothRoute {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
         CharSequence charSequence = this.description;
-        int hashCode = (this.icon.hashCode() + ((m + (charSequence == null ? 0 : charSequence.hashCode())) * 31)) * 31;
+        int iM2 = AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, (iM + (charSequence == null ? 0 : charSequence.hashCode())) * 31, 31);
         Painter painter = this.badge;
-        return Boolean.hashCode(this.cancelable) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (hashCode + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31, 31, this.selectable), 31, this.transferable);
+        return Boolean.hashCode(this.cancelable) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (iM2 + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31, 31, this.selectable), 31, this.transferable);
     }
 
     public final String toString() {

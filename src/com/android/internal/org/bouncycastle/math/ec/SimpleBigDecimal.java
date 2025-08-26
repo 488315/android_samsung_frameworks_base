@@ -58,9 +58,9 @@ class SimpleBigDecimal {
 
     public SimpleBigDecimal multiply(SimpleBigDecimal simpleBigDecimal) {
         checkScale(simpleBigDecimal);
-        BigInteger multiply = this.bigInt.multiply(simpleBigDecimal.bigInt);
+        BigInteger bigIntegerMultiply = this.bigInt.multiply(simpleBigDecimal.bigInt);
         int i = this.scale;
-        return new SimpleBigDecimal(multiply, i + i);
+        return new SimpleBigDecimal(bigIntegerMultiply, i + i);
     }
 
     public SimpleBigDecimal multiply(BigInteger bigInteger) {
@@ -113,27 +113,27 @@ class SimpleBigDecimal {
         if (this.scale == 0) {
             return this.bigInt.toString();
         }
-        BigInteger floor = floor();
-        BigInteger subtract = this.bigInt.subtract(floor.shiftLeft(this.scale));
+        BigInteger bigIntegerFloor = floor();
+        BigInteger bigIntegerSubtract = this.bigInt.subtract(bigIntegerFloor.shiftLeft(this.scale));
         if (this.bigInt.signum() == -1) {
-            subtract = ECConstants.ONE.shiftLeft(this.scale).subtract(subtract);
+            bigIntegerSubtract = ECConstants.ONE.shiftLeft(this.scale).subtract(bigIntegerSubtract);
         }
-        if (floor.signum() == -1 && !subtract.equals(ECConstants.ZERO)) {
-            floor = floor.add(ECConstants.ONE);
+        if (bigIntegerFloor.signum() == -1 && !bigIntegerSubtract.equals(ECConstants.ZERO)) {
+            bigIntegerFloor = bigIntegerFloor.add(ECConstants.ONE);
         }
-        String bigInteger = floor.toString();
+        String string = bigIntegerFloor.toString();
         char[] cArr = new char[this.scale];
-        String bigInteger2 = subtract.toString(2);
-        int length = bigInteger2.length();
+        String string2 = bigIntegerSubtract.toString(2);
+        int length = string2.length();
         int i = this.scale - length;
         for (int i2 = 0; i2 < i; i2++) {
             cArr[i2] = '0';
         }
         for (int i3 = 0; i3 < length; i3++) {
-            cArr[i + i3] = bigInteger2.charAt(i3);
+            cArr[i + i3] = string2.charAt(i3);
         }
         String str = new String(cArr);
-        StringBuffer stringBuffer = new StringBuffer(bigInteger);
+        StringBuffer stringBuffer = new StringBuffer(string);
         stringBuffer.append(MediaMetrics.SEPARATOR);
         stringBuffer.append(str);
         return stringBuffer.toString();

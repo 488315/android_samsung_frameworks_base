@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableState<Object> $state$delegate;
@@ -56,9 +55,7 @@ final class ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1 extends SuspendLam
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.composable.kairos.ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Unit invokeSuspend$lambda$0;
-                    invokeSuspend$lambda$0 = ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1.invokeSuspend$lambda$0(obj2, mutableState);
-                    return invokeSuspend$lambda$0;
+                    return ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1.invokeSuspend$lambda$0(obj2, mutableState);
                 }
             };
             this.label = 1;

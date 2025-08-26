@@ -58,12 +58,12 @@ public abstract class LoggingPrintStream extends PrintStream {
         int length = this.builder.length();
         int i = 0;
         while (i < length) {
-            int indexOf = this.builder.indexOf(ShaderAssembler.NEWLINE, i);
-            if (indexOf == -1) {
+            int iIndexOf = this.builder.indexOf(ShaderAssembler.NEWLINE, i);
+            if (iIndexOf == -1) {
                 break;
             }
-            log(this.builder.substring(i, indexOf));
-            i = indexOf + 1;
+            log(this.builder.substring(i, iIndexOf));
+            i = iIndexOf + 1;
         }
         if (z) {
             if (i < length) {
@@ -87,7 +87,7 @@ public abstract class LoggingPrintStream extends PrintStream {
 
     @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream
     public synchronized void write(byte[] bArr, int i, int i2) {
-        CoderResult decode;
+        CoderResult coderResultDecode;
         if (this.decoder == null) {
             this.encodedBytes = ByteBuffer.allocate(80);
             this.decodedChars = CharBuffer.allocate(80);
@@ -95,16 +95,16 @@ public abstract class LoggingPrintStream extends PrintStream {
         }
         int i3 = i2 + i;
         while (i < i3) {
-            int min = Math.min(this.encodedBytes.remaining(), i3 - i);
-            this.encodedBytes.put(bArr, i, min);
-            i += min;
+            int iMin = Math.min(this.encodedBytes.remaining(), i3 - i);
+            this.encodedBytes.put(bArr, i, iMin);
+            i += iMin;
             this.encodedBytes.flip();
             do {
-                decode = this.decoder.decode(this.encodedBytes, this.decodedChars, false);
+                coderResultDecode = this.decoder.decode(this.encodedBytes, this.decodedChars, false);
                 this.decodedChars.flip();
                 this.builder.append((CharSequence) this.decodedChars);
                 this.decodedChars.clear();
-            } while (decode.isOverflow());
+            } while (coderResultDecode.isOverflow());
             this.encodedBytes.compact();
         }
         flush(false);
@@ -239,12 +239,12 @@ public abstract class LoggingPrintStream extends PrintStream {
             int length = str.length();
             int i = 0;
             while (i < length) {
-                int indexOf = str.indexOf(10, i);
-                if (indexOf == -1) {
+                int iIndexOf = str.indexOf(10, i);
+                if (iIndexOf == -1) {
                     break;
                 }
-                log(str.substring(i, indexOf));
-                i = indexOf + 1;
+                log(str.substring(i, iIndexOf));
+                i = iIndexOf + 1;
             }
             if (i < length) {
                 log(str.substring(i));

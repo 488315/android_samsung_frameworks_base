@@ -12,7 +12,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SmartPopupViewItem extends FreeformContainerItem {
     public final Notification mNotification;
@@ -33,19 +32,19 @@ public class SmartPopupViewItem extends FreeformContainerItem {
 
     @Override // com.android.wm.shell.freeform.FreeformContainerItem
     public final void launch() {
-        final ActivityOptions makeBasic = ActivityOptions.makeBasic();
+        final ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
         if ((CoreRune.MW_MULTI_SPLIT_NOT_SUPPORT_FOR_COVER_DISPLAY ? !MultiWindowUtils.isInSubDisplay(this.mContext) : true) && !"MESSAGE_KT_TWO_PHONE_OPPOSITE_RECEIVED".equals(this.mNotification.getGroup())) {
-            makeBasic.setLaunchWindowingMode(5);
-            makeBasic.preserveTaskWindowingMode();
+            activityOptionsMakeBasic.setLaunchWindowingMode(5);
+            activityOptionsMakeBasic.preserveTaskWindowingMode();
         }
-        makeBasic.setLaunchDisplayId(0);
-        makeBasic.setPendingIntentBackgroundActivityStartMode(1);
+        activityOptionsMakeBasic.setLaunchDisplayId(0);
+        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
         final PendingIntent pendingIntent = this.mNotification.contentIntent;
         FreeformContainerSystemProxy.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.freeform.FreeformContainerSystemProxy$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws PendingIntent.CanceledException {
                 PendingIntent pendingIntent2 = pendingIntent;
-                ActivityOptions activityOptions = makeBasic;
+                ActivityOptions activityOptions = activityOptionsMakeBasic;
                 ExecutorService executorService = FreeformContainerSystemProxy.mExecutor;
                 try {
                     pendingIntent2.send(null, 0, null, null, null, null, activityOptions.toBundle());
@@ -55,7 +54,7 @@ public class SmartPopupViewItem extends FreeformContainerItem {
                 }
             }
         });
-        if (CoreRune.MW_FREEFORM_SMART_POPUP_VIEW_SA_LOGGING && makeBasic.getLaunchWindowingMode() == 5) {
+        if (CoreRune.MW_FREEFORM_SMART_POPUP_VIEW_SA_LOGGING && activityOptionsMakeBasic.getLaunchWindowingMode() == 5) {
             CoreSaLogger.logForAdvanced("2004", "From Smart Popup");
         }
     }

@@ -6,7 +6,6 @@ import java.util.List;
 import kotlin.jvm.functions.Function1;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnnotatedStringKt {
     public static final AnnotatedString EmptyAnnotatedString = new AnnotatedString("", null, 2, null);
@@ -21,7 +20,7 @@ public abstract class AnnotatedStringKt {
             int size = list.size();
             for (int i3 = 0; i3 < size; i3++) {
                 AnnotatedString.Range range = (AnnotatedString.Range) list.get(i3);
-                if ((function1 != null ? ((Boolean) ((AnnotatedStringKt$substringWithoutParagraphStyles$1) function1).mo779invoke(range.item)).booleanValue() : true) && intersect(i, i2, range.start, range.end)) {
+                if ((function1 != null ? ((Boolean) ((AnnotatedStringKt$substringWithoutParagraphStyles$1) function1).mo781invoke(range.item)).booleanValue() : true) && intersect(i, i2, range.start, range.end)) {
                     arrayList.add(new AnnotatedString.Range((AnnotatedString.Annotation) range.item, RangesKt___RangesKt.coerceIn(range.start, i, i2) - i, RangesKt___RangesKt.coerceIn(range.end, i, i2) - i, range.tag));
                 }
             }
@@ -34,7 +33,7 @@ public abstract class AnnotatedStringKt {
         int size2 = list.size();
         for (int i4 = 0; i4 < size2; i4++) {
             Object obj = list.get(i4);
-            if (((Boolean) ((AnnotatedStringKt$substringWithoutParagraphStyles$1) function1).mo779invoke(((AnnotatedString.Range) obj).item)).booleanValue()) {
+            if (((Boolean) ((AnnotatedStringKt$substringWithoutParagraphStyles$1) function1).mo781invoke(((AnnotatedString.Range) obj).item)).booleanValue()) {
                 arrayList2.add(obj);
             }
         }

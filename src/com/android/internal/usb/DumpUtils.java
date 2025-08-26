@@ -14,18 +14,18 @@ import com.android.internal.util.dump.DualDumpOutputStream;
 /* loaded from: classes4.dex */
 public class DumpUtils {
     public static void writeAccessory(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbAccessory usbAccessory) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write(MidiDeviceInfo.PROPERTY_MANUFACTURER, 1138166333441L, usbAccessory.getManufacturer());
         dualDumpOutputStream.write("model", 1138166333442L, usbAccessory.getModel());
         com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(dualDumpOutputStream, "description", 1138166333443L, usbAccessory.getManufacturer());
         dualDumpOutputStream.write("version", 1138166333444L, usbAccessory.getVersion());
         com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(dualDumpOutputStream, "uri", 1138166333445L, usbAccessory.getUri());
         dualDumpOutputStream.write(Context.SERIAL_SERVICE, 1138166333446L, usbAccessory.getSerial());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writeDevice(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbDevice usbDevice) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("name", 1138166333441L, usbDevice.getDeviceName());
         dualDumpOutputStream.write("vendor_id", 1120986464258L, usbDevice.getVendorId());
         dualDumpOutputStream.write("product_id", 1120986464259L, usbDevice.getProductId());
@@ -40,11 +40,11 @@ public class DumpUtils {
         for (int i = 0; i < configurationCount; i++) {
             writeConfiguration(dualDumpOutputStream, "configurations", 2246267895819L, usbDevice.getConfiguration(i));
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     private static void writeConfiguration(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbConfiguration usbConfiguration) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("id", 1120986464257L, usbConfiguration.getId());
         dualDumpOutputStream.write("name", 1138166333442L, usbConfiguration.getName());
         dualDumpOutputStream.write("attributes", 1155346202627L, usbConfiguration.getAttributes());
@@ -53,11 +53,11 @@ public class DumpUtils {
         for (int i = 0; i < interfaceCount; i++) {
             writeInterface(dualDumpOutputStream, "interfaces", 2246267895813L, usbConfiguration.getInterface(i));
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     private static void writeInterface(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbInterface usbInterface) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("id", 1120986464257L, usbInterface.getId());
         dualDumpOutputStream.write("alternate_settings", 1120986464258L, usbInterface.getAlternateSetting());
         dualDumpOutputStream.write("name", 1138166333443L, usbInterface.getName());
@@ -68,11 +68,11 @@ public class DumpUtils {
         for (int i = 0; i < endpointCount; i++) {
             writeEndpoint(dualDumpOutputStream, "endpoints", 2246267895815L, usbInterface.getEndpoint(i));
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     private static void writeEndpoint(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbEndpoint usbEndpoint) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("endpoint_number", 1120986464257L, usbEndpoint.getEndpointNumber());
         dualDumpOutputStream.write("direction", 1159641169922L, usbEndpoint.getDirection());
         dualDumpOutputStream.write("address", 1120986464259L, usbEndpoint.getAddress());
@@ -80,11 +80,11 @@ public class DumpUtils {
         dualDumpOutputStream.write("attributes", 1155346202629L, usbEndpoint.getAttributes());
         dualDumpOutputStream.write("max_packet_size", 1120986464262L, usbEndpoint.getMaxPacketSize());
         dualDumpOutputStream.write("interval", 1120986464263L, usbEndpoint.getInterval());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePort(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbPort usbPort) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("id", 1138166333441L, usbPort.getId());
         int supportedModes = usbPort.getSupportedModes();
         if (!dualDumpOutputStream.isProto()) {
@@ -110,7 +110,7 @@ public class DumpUtils {
         if (usbPort.isAltModeSupported(1)) {
             dualDumpOutputStream.write("supported_alt_modes", 2259152797700L, 1);
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     private static void writePowerRole(DualDumpOutputStream dualDumpOutputStream, String str, long j, int i) {
@@ -138,7 +138,7 @@ public class DumpUtils {
     }
 
     public static void writePortStatus(DualDumpOutputStream dualDumpOutputStream, String str, long j, UsbPortStatus usbPortStatus) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("connected", 1133871366145L, usbPortStatus.isConnected());
         if (dualDumpOutputStream.isProto()) {
             dualDumpOutputStream.write("current_mode", 1159641169922L, usbPortStatus.getCurrentMode());
@@ -149,12 +149,12 @@ public class DumpUtils {
         writeDataRole(dualDumpOutputStream, "data_role", 1159641169924L, usbPortStatus.getCurrentDataRole());
         int supportedRoleCombinations = usbPortStatus.getSupportedRoleCombinations();
         while (supportedRoleCombinations != 0) {
-            int numberOfTrailingZeros = Integer.numberOfTrailingZeros(supportedRoleCombinations);
-            supportedRoleCombinations &= ~(1 << numberOfTrailingZeros);
-            long start2 = dualDumpOutputStream.start("role_combinations", 2246267895813L);
-            writePowerRole(dualDumpOutputStream, "power_role", 1159641169921L, numberOfTrailingZeros / 3);
-            writeDataRole(dualDumpOutputStream, "data_role", 1159641169922L, numberOfTrailingZeros % 3);
-            dualDumpOutputStream.end(start2);
+            int iNumberOfTrailingZeros = Integer.numberOfTrailingZeros(supportedRoleCombinations);
+            supportedRoleCombinations &= ~(1 << iNumberOfTrailingZeros);
+            long jStart2 = dualDumpOutputStream.start("role_combinations", 2246267895813L);
+            writePowerRole(dualDumpOutputStream, "power_role", 1159641169921L, iNumberOfTrailingZeros / 3);
+            writeDataRole(dualDumpOutputStream, "data_role", 1159641169922L, iNumberOfTrailingZeros % 3);
+            dualDumpOutputStream.end(jStart2);
         }
         writeContaminantPresenceStatus(dualDumpOutputStream, "contaminant_presence_status", 1159641169926L, usbPortStatus.getContaminantDetectionStatus());
         dualDumpOutputStream.write("usb_data_status", 1138166333447L, UsbPort.usbDataStatusToString(usbPortStatus.getUsbDataStatus()));
@@ -164,6 +164,6 @@ public class DumpUtils {
         if (usbPortStatus.getDisplayPortAltModeInfo() != null) {
             dualDumpOutputStream.write("displayport_alt_mode_status", 1138166333451L, usbPortStatus.getDisplayPortAltModeInfo().toString());
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 }

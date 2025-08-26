@@ -6,18 +6,17 @@ import android.os.Parcelable;
 import androidx.versionedparcelable.VersionedParcel;
 import java.nio.charset.Charset;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class IconCompatParcelizer {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static IconCompat read(VersionedParcel versionedParcel) {
         IconCompat iconCompat = new IconCompat();
         iconCompat.mType = versionedParcel.readInt(iconCompat.mType, 1);
-        byte[] bArr = iconCompat.mData;
+        byte[] byteArray = iconCompat.mData;
         if (versionedParcel.readField(2)) {
-            bArr = versionedParcel.readByteArray();
+            byteArray = versionedParcel.readByteArray();
         }
-        iconCompat.mData = bArr;
+        iconCompat.mData = byteArray;
         iconCompat.mParcelable = versionedParcel.readParcelable(iconCompat.mParcelable, 3);
         iconCompat.mInt1 = versionedParcel.readInt(iconCompat.mInt1, 4);
         iconCompat.mInt2 = versionedParcel.readInt(iconCompat.mInt2, 5);
@@ -43,11 +42,11 @@ public class IconCompatParcelizer {
                     iconCompat.mObj1 = parcelable2;
                     return iconCompat;
                 }
-                byte[] bArr2 = iconCompat.mData;
-                iconCompat.mObj1 = bArr2;
+                byte[] bArr = iconCompat.mData;
+                iconCompat.mObj1 = bArr;
                 iconCompat.mType = 3;
                 iconCompat.mInt1 = 0;
-                iconCompat.mInt2 = bArr2.length;
+                iconCompat.mInt2 = bArr.length;
                 return iconCompat;
             case 2:
             case 4:

@@ -1,12 +1,12 @@
 package kotlin.io;
 
 import java.io.Closeable;
+import java.io.IOException;
 import kotlin.ExceptionsKt__ExceptionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CloseableKt {
-    public static final void closeFinally(Closeable closeable, Throwable th) {
+    public static final void closeFinally(Closeable closeable, Throwable th) throws IOException {
         if (closeable != null) {
             if (th == null) {
                 closeable.close();

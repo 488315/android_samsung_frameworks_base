@@ -17,7 +17,6 @@ import androidx.compose.ui.layout.LayoutCoordinates;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SelectionController implements RememberObserver {
     public final Modifier modifier;
@@ -30,20 +29,12 @@ public final class SelectionController implements RememberObserver {
 
     @Override // androidx.compose.runtime.RememberObserver
     public final void onRemembered() {
-        new MultiWidgetSelectionDelegate(this.selectableId, new Function0() { // from class: androidx.compose.foundation.text.modifiers.SelectionController$onRemembered$1
-            {
-                super(0);
-            }
-
+        new MultiWidgetSelectionDelegate(this.selectableId, new Function0() { // from class: androidx.compose.foundation.text.modifiers.SelectionController.onRemembered.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 return SelectionController.this.params.layoutCoordinates;
             }
-        }, new Function0() { // from class: androidx.compose.foundation.text.modifiers.SelectionController$onRemembered$2
-            {
-                super(0);
-            }
-
+        }, new Function0() { // from class: androidx.compose.foundation.text.modifiers.SelectionController.onRemembered.2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 return SelectionController.this.params.textLayoutResult;
@@ -53,7 +44,6 @@ public final class SelectionController implements RememberObserver {
     }
 
     private SelectionController(final long j, SelectionRegistrar selectionRegistrar, long j2, StaticTextSelectionParams staticTextSelectionParams) {
-        Modifier then;
         this.selectableId = j;
         this.params = staticTextSelectionParams;
         final Function0 function0 = new Function0() { // from class: androidx.compose.foundation.text.modifiers.SelectionController$modifier$1
@@ -63,7 +53,7 @@ public final class SelectionController implements RememberObserver {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SelectionController.this.params.layoutCoordinates;
+                return this.this$0.params.layoutCoordinates;
             }
         };
         final SelectionRegistrar selectionRegistrar2 = null;
@@ -79,8 +69,8 @@ public final class SelectionController implements RememberObserver {
 
             @Override // androidx.compose.foundation.text.TextDragObserver
             /* renamed from: onDrag-k-4lQ0M */
-            public final void mo202onDragk4lQ0M(long j3) {
-                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) Function0.this.invoke();
+            public final void mo203onDragk4lQ0M(long j3) {
+                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) this.$layoutCoordinates.invoke();
                 if (layoutCoordinates == null || !layoutCoordinates.isAttached()) {
                     return;
                 }
@@ -89,8 +79,8 @@ public final class SelectionController implements RememberObserver {
 
             @Override // androidx.compose.foundation.text.TextDragObserver
             /* renamed from: onStart-k-4lQ0M */
-            public final void mo203onStartk4lQ0M(long j3) {
-                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) Function0.this.invoke();
+            public final void mo204onStartk4lQ0M(long j3) {
+                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) this.$layoutCoordinates.invoke();
                 if (layoutCoordinates == null) {
                     DynamicProvidableCompositionLocal dynamicProvidableCompositionLocal = SelectionRegistrarKt.LocalSelectionRegistrar;
                 } else if (layoutCoordinates.isAttached()) {
@@ -107,22 +97,22 @@ public final class SelectionController implements RememberObserver {
 
             @Override // androidx.compose.foundation.text.TextDragObserver
             /* renamed from: onDown-k-4lQ0M */
-            public final void mo201onDownk4lQ0M() {
+            public final void mo202onDownk4lQ0M() {
             }
 
             @Override // androidx.compose.foundation.text.TextDragObserver
             public final void onUp() {
             }
         };
-        Modifier selectionGestureInput = SelectionGesturesKt.selectionGestureInput(Modifier.Companion, new MouseSelectionObserver(selectionRegistrar2, j) { // from class: androidx.compose.foundation.text.modifiers.SelectionControllerKt$makeSelectionModifier$mouseSelectionObserver$1
+        Modifier modifierSelectionGestureInput = SelectionGesturesKt.selectionGestureInput(Modifier.Companion, new MouseSelectionObserver(selectionRegistrar2, j) { // from class: androidx.compose.foundation.text.modifiers.SelectionControllerKt$makeSelectionModifier$mouseSelectionObserver$1
             {
                 Offset.Companion.getClass();
             }
 
             @Override // androidx.compose.foundation.text.selection.MouseSelectionObserver
             /* renamed from: onDrag-3MmeM6k, reason: not valid java name */
-            public final boolean mo229onDrag3MmeM6k(long j3, SelectionAdjustment selectionAdjustment) {
-                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) Function0.this.invoke();
+            public final boolean mo230onDrag3MmeM6k(long j3, SelectionAdjustment selectionAdjustment) {
+                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) this.$layoutCoordinates.invoke();
                 if (layoutCoordinates == null) {
                     return true;
                 }
@@ -140,8 +130,8 @@ public final class SelectionController implements RememberObserver {
 
             @Override // androidx.compose.foundation.text.selection.MouseSelectionObserver
             /* renamed from: onStart-3MmeM6k, reason: not valid java name */
-            public final boolean mo230onStart3MmeM6k(long j3, SelectionAdjustment selectionAdjustment) {
-                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) Function0.this.invoke();
+            public final boolean mo231onStart3MmeM6k(long j3, SelectionAdjustment selectionAdjustment) {
+                LayoutCoordinates layoutCoordinates = (LayoutCoordinates) this.$layoutCoordinates.invoke();
                 if (layoutCoordinates == null || !layoutCoordinates.isAttached()) {
                     return false;
                 }
@@ -149,34 +139,16 @@ public final class SelectionController implements RememberObserver {
             }
         }, textDragObserver);
         PointerIcon.Companion.getClass();
-        then = selectionGestureInput.then(new PointerHoverIconModifierElement(PointerIcon.Companion.Text, false));
-        this.modifier = then;
+        this.modifier = modifierSelectionGestureInput.then(new PointerHoverIconModifierElement(PointerIcon.Companion.Text, false));
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public SelectionController(long r9, androidx.compose.foundation.text.selection.SelectionRegistrar r11, long r12, androidx.compose.foundation.text.modifiers.StaticTextSelectionParams r14, int r15, kotlin.jvm.internal.DefaultConstructorMarker r16) {
-        /*
-            r8 = this;
-            r0 = r15 & 8
-            if (r0 == 0) goto Lb
-            androidx.compose.foundation.text.modifiers.StaticTextSelectionParams$Companion r14 = androidx.compose.foundation.text.modifiers.StaticTextSelectionParams.Companion
-            r14.getClass()
-            androidx.compose.foundation.text.modifiers.StaticTextSelectionParams r14 = androidx.compose.foundation.text.modifiers.StaticTextSelectionParams.Empty
-        Lb:
-            r6 = r14
-            r7 = 0
-            r0 = r8
-            r1 = r9
-            r3 = r11
-            r4 = r12
-            r0.<init>(r1, r3, r4, r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.SelectionController.<init>(long, androidx.compose.foundation.text.selection.SelectionRegistrar, long, androidx.compose.foundation.text.modifiers.StaticTextSelectionParams, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public SelectionController(long j, SelectionRegistrar selectionRegistrar, long j2, StaticTextSelectionParams staticTextSelectionParams, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 8) != 0) {
+            StaticTextSelectionParams.Companion.getClass();
+            staticTextSelectionParams = StaticTextSelectionParams.Empty;
+        }
+        this(j, selectionRegistrar, j2, staticTextSelectionParams, null);
     }
 
     @Override // androidx.compose.runtime.RememberObserver

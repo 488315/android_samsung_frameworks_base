@@ -7,7 +7,7 @@
         <TextView android:textAppearance="?android:textAppearanceListItemSecondary" android:id="@android:id/summary" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="4" android:layout_below="@android:id/title" android:layout_alignStart="@android:id/title" />
         <androidx.preference.UnPressableLinearLayout android:duplicateParentState="true" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@android:id/summary" android:layout_alignStart="@android:id/title">
             <SeekBar android:id="@id/seekbar" android:background="@null" android:focusable="false" android:clickable="false" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:paddingStart="@dimen/lb_preference_seekbar_padding_start" android:paddingEnd="@dimen/lb_preference_seekbar_padding_end" style="?android:seekBarStyle" />
-            <TextView android:textAppearance="?android:textAppearanceListItem" android:gravity="center|right" android:id="@id/seekbar_value" android:duplicateParentState="true" android:layout_width="@dimen/lb_preference_seekbar_value_width" android:layout_height="fill_parent" />
+            <TextView android:textAppearance="?android:textAppearanceListItem" android:gravity="right|center" android:id="@id/seekbar_value" android:duplicateParentState="true" android:layout_width="@dimen/lb_preference_seekbar_value_width" android:layout_height="fill_parent" />
         </androidx.preference.UnPressableLinearLayout>
     </RelativeLayout>
 </LinearLayout>

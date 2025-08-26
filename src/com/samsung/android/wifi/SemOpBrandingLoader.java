@@ -25,14 +25,10 @@ public class SemOpBrandingLoader {
     }
 
     public static synchronized SemOpBrandingLoader getInstance() {
-        SemOpBrandingLoader semOpBrandingLoader;
-        synchronized (SemOpBrandingLoader.class) {
-            if (sInstance == null) {
-                sInstance = new SemOpBrandingLoader();
-            }
-            semOpBrandingLoader = sInstance;
+        if (sInstance == null) {
+            sInstance = new SemOpBrandingLoader();
         }
-        return semOpBrandingLoader;
+        return sInstance;
     }
 
     public SemVendor getOpBranding() {

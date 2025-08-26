@@ -1,6 +1,5 @@
 package androidx.constraintlayout.core.motion.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class StopLogicEngine implements StopEngine {
     public boolean mBackwards = false;
@@ -99,16 +98,16 @@ public class StopLogicEngine implements StopEngine {
         float f6 = f / f3;
         float f7 = (f6 * f) / 2.0f;
         if (f < 0.0f) {
-            float sqrt = (float) Math.sqrt((f2 - ((((-f) / f3) * f) / 2.0f)) * f3);
-            if (sqrt < f4) {
+            float fSqrt = (float) Math.sqrt((f2 - ((((-f) / f3) * f) / 2.0f)) * f3);
+            if (fSqrt < f4) {
                 this.mNumberOfStages = 2;
                 this.mStage1Velocity = f;
-                this.mStage2Velocity = sqrt;
+                this.mStage2Velocity = fSqrt;
                 this.mStage3Velocity = 0.0f;
-                float f8 = (sqrt - f) / f3;
+                float f8 = (fSqrt - f) / f3;
                 this.mStage1Duration = f8;
-                this.mStage2Duration = sqrt / f3;
-                this.mStage1EndPosition = ((f + sqrt) * f8) / 2.0f;
+                this.mStage2Duration = fSqrt / f3;
+                this.mStage1EndPosition = ((f + fSqrt) * f8) / 2.0f;
                 this.mStage2EndPosition = f2;
                 this.mStage3EndPosition = f2;
                 return;
@@ -150,19 +149,19 @@ public class StopLogicEngine implements StopEngine {
             this.mStage2Duration = f6;
             return;
         }
-        float sqrt2 = (float) Math.sqrt(((f * f) / 2.0f) + (f3 * f2));
-        float f15 = (sqrt2 - f) / f3;
+        float fSqrt2 = (float) Math.sqrt(((f * f) / 2.0f) + (f3 * f2));
+        float f15 = (fSqrt2 - f) / f3;
         this.mStage1Duration = f15;
-        float f16 = sqrt2 / f3;
+        float f16 = fSqrt2 / f3;
         this.mStage2Duration = f16;
-        if (sqrt2 < f4) {
+        if (fSqrt2 < f4) {
             this.mNumberOfStages = 2;
             this.mStage1Velocity = f;
-            this.mStage2Velocity = sqrt2;
+            this.mStage2Velocity = fSqrt2;
             this.mStage3Velocity = 0.0f;
             this.mStage1Duration = f15;
             this.mStage2Duration = f16;
-            this.mStage1EndPosition = ((f + sqrt2) * f15) / 2.0f;
+            this.mStage1EndPosition = ((f + fSqrt2) * f15) / 2.0f;
             this.mStage2EndPosition = f2;
             return;
         }

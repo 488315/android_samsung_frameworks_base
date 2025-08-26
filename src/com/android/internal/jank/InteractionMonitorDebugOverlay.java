@@ -61,7 +61,7 @@ class InteractionMonitorDebugOverlay {
         this.mUiThread.post(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionMonitorDebugOverlay.this.lambda$onTrackerAdded$0(i, i2);
+                this.f$0.lambda$onTrackerAdded$0(i, i2);
             }
         });
     }
@@ -78,7 +78,7 @@ class InteractionMonitorDebugOverlay {
         this.mUiThread.post(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionMonitorDebugOverlay.this.lambda$onTrackerRemoved$1(i, i3, i2);
+                this.f$0.lambda$onTrackerRemoved$1(i, i3, i2);
             }
         });
     }
@@ -117,7 +117,7 @@ class InteractionMonitorDebugOverlay {
         this.mUiThread.post(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionMonitorDebugOverlay.this.lambda$dispose$2();
+                this.f$0.lambda$dispose$2();
             }
         });
     }
@@ -168,15 +168,15 @@ class InteractionMonitorDebugOverlay {
             String str = "package:" + InteractionMonitorDebugOverlay.this.mCurrentApplication.getPackageName();
             this.mPackageNameText = str;
             this.mPadding = dipToPx(5);
-            int dipToPx = dipToPx(12);
-            this.mPackageNameFontSize = dipToPx;
-            int dipToPx2 = dipToPx(18);
-            this.mCujFontSize = dipToPx2;
-            float textHeight = getTextHeight(dipToPx2);
+            int iDipToPx = dipToPx(12);
+            this.mPackageNameFontSize = iDipToPx;
+            int iDipToPx2 = dipToPx(18);
+            this.mCujFontSize = iDipToPx2;
+            float textHeight = getTextHeight(iDipToPx2);
             this.mCujNameTextHeight = textHeight;
             this.mCujStatusWidth = textHeight * 1.2f;
-            this.mPackageNameTextHeight = getTextHeight(dipToPx);
-            this.mPackageNameWidth = getWidthOfText(str, dipToPx);
+            this.mPackageNameTextHeight = getTextHeight(iDipToPx);
+            this.mPackageNameWidth = getWidthOfText(str, iDipToPx);
         }
 
         private int dipToPx(int i) {
@@ -198,9 +198,9 @@ class InteractionMonitorDebugOverlay {
             this.mDebugPaint.setTextSize(i);
             float f = 0.0f;
             for (int i2 = 0; i2 < InteractionMonitorDebugOverlay.this.mRunningCujs.size(); i2++) {
-                float measureText = this.mDebugPaint.measureText(Cuj.getNameOfCuj(((TrackerState) InteractionMonitorDebugOverlay.this.mRunningCujs.get(i2)).mCuj));
-                if (measureText > f) {
-                    f = measureText;
+                float fMeasureText = this.mDebugPaint.measureText(Cuj.getNameOfCuj(((TrackerState) InteractionMonitorDebugOverlay.this.mRunningCujs.get(i2)).mCuj));
+                if (fMeasureText > f) {
+                    f = fMeasureText;
                 }
             }
             return f;
@@ -214,11 +214,11 @@ class InteractionMonitorDebugOverlay {
             int height = getHeight();
             int width = getWidth();
             int i = (int) (height * this.mYOffset);
-            float max = Math.max(this.mPackageNameWidth, getWidthOfLongestCujName(this.mCujFontSize)) + this.mCujStatusWidth;
-            canvas.translate((int) ((width - max) / 2.0f), i);
+            float fMax = Math.max(this.mPackageNameWidth, getWidthOfLongestCujName(this.mCujFontSize)) + this.mCujStatusWidth;
+            canvas.translate((int) ((width - fMax) / 2.0f), i);
             this.mDebugPaint.setColor(this.mBgColor);
             int i2 = this.mPadding;
-            canvas.drawRect((-i2) * 2, -i2, (i2 * 2) + max, (i2 * 2) + this.mPackageNameTextHeight + (this.mCujNameTextHeight * InteractionMonitorDebugOverlay.this.mRunningCujs.size()), this.mDebugPaint);
+            canvas.drawRect((-i2) * 2, -i2, (i2 * 2) + fMax, (i2 * 2) + this.mPackageNameTextHeight + (this.mCujNameTextHeight * InteractionMonitorDebugOverlay.this.mRunningCujs.size()), this.mDebugPaint);
             this.mDebugPaint.setTextSize(this.mPackageNameFontSize);
             this.mDebugPaint.setColor(-16777216);
             this.mDebugPaint.setStrikeThruText(false);

@@ -5,7 +5,6 @@ import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationMemoryDumper$dumpNotificationObjects$Totals {
     public int bigPicture;
@@ -46,13 +45,13 @@ public final class NotificationMemoryDumper$dumpNotificationObjects$Totals {
         int i4 = this.bigPicture;
         int i5 = this.extender;
         int i6 = this.extras;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Totals(smallIcon=", ", largeIcon=", ", styleIcon=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", bigPicture=", i4, ", extender=");
-        m.append(i5);
-        m.append(", extras=");
-        m.append(i6);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Totals(smallIcon=", ", largeIcon=", ", styleIcon=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", bigPicture=", i4, ", extender=");
+        sbM.append(i5);
+        sbM.append(", extras=");
+        sbM.append(i6);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public /* synthetic */ NotificationMemoryDumper$dumpNotificationObjects$Totals(int i, int i2, int i3, int i4, int i5, int i6, int i7, DefaultConstructorMarker defaultConstructorMarker) {

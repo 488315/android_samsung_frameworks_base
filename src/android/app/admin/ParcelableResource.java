@@ -152,7 +152,7 @@ public final class ParcelableResource implements Parcelable {
         return packageManager.getResourcesForApplication(packageManager.getApplicationInfo(this.mPackageName, 9216), context.getResources().getConfiguration());
     }
 
-    private void verifyResourceName(Resources resources) throws IllegalStateException {
+    private void verifyResourceName(Resources resources) throws IllegalStateException, Resources.NotFoundException {
         String resourceName = resources.getResourceName(this.mResourceId);
         if (!this.mResourceName.equals(resourceName)) {
             throw new IllegalStateException(String.format("Current resource name %s for resource id %d has changed from the previously stored resource name %s.", resourceName, Integer.valueOf(this.mResourceId), this.mResourceName));

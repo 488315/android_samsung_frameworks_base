@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.Dp;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PaddingValuesImpl implements PaddingValues {
     public final float bottom;
@@ -21,25 +20,25 @@ public final class PaddingValuesImpl implements PaddingValues {
 
     @Override // androidx.compose.foundation.layout.PaddingValues
     /* renamed from: calculateBottomPadding-D9Ej5fM */
-    public final float mo109calculateBottomPaddingD9Ej5fM() {
+    public final float mo110calculateBottomPaddingD9Ej5fM() {
         return this.bottom;
     }
 
     @Override // androidx.compose.foundation.layout.PaddingValues
     /* renamed from: calculateLeftPadding-u2uoSUM */
-    public final float mo110calculateLeftPaddingu2uoSUM(LayoutDirection layoutDirection) {
+    public final float mo111calculateLeftPaddingu2uoSUM(LayoutDirection layoutDirection) {
         return layoutDirection == LayoutDirection.Ltr ? this.start : this.end;
     }
 
     @Override // androidx.compose.foundation.layout.PaddingValues
     /* renamed from: calculateRightPadding-u2uoSUM */
-    public final float mo111calculateRightPaddingu2uoSUM(LayoutDirection layoutDirection) {
+    public final float mo112calculateRightPaddingu2uoSUM(LayoutDirection layoutDirection) {
         return layoutDirection == LayoutDirection.Ltr ? this.end : this.start;
     }
 
     @Override // androidx.compose.foundation.layout.PaddingValues
     /* renamed from: calculateTopPadding-D9Ej5fM */
-    public final float mo112calculateTopPaddingD9Ej5fM() {
+    public final float mo113calculateTopPaddingD9Ej5fM() {
         return this.top;
     }
 
@@ -48,7 +47,7 @@ public final class PaddingValuesImpl implements PaddingValues {
             return false;
         }
         PaddingValuesImpl paddingValuesImpl = (PaddingValuesImpl) obj;
-        return Dp.m836equalsimpl0(this.start, paddingValuesImpl.start) && Dp.m836equalsimpl0(this.top, paddingValuesImpl.top) && Dp.m836equalsimpl0(this.end, paddingValuesImpl.end) && Dp.m836equalsimpl0(this.bottom, paddingValuesImpl.bottom);
+        return Dp.m838equalsimpl0(this.start, paddingValuesImpl.start) && Dp.m838equalsimpl0(this.top, paddingValuesImpl.top) && Dp.m838equalsimpl0(this.end, paddingValuesImpl.end) && Dp.m838equalsimpl0(this.bottom, paddingValuesImpl.bottom);
     }
 
     public final int hashCode() {
@@ -61,7 +60,7 @@ public final class PaddingValuesImpl implements PaddingValues {
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.start, ", top=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.top, ", end=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.end, ", bottom=", sb);
-        sb.append((Object) Dp.m837toStringimpl(this.bottom));
+        sb.append((Object) Dp.m839toStringimpl(this.bottom));
         sb.append(')');
         return sb.toString();
     }
@@ -87,43 +86,26 @@ public final class PaddingValuesImpl implements PaddingValues {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public PaddingValuesImpl(float r8, float r9, float r10, float r11, int r12, kotlin.jvm.internal.DefaultConstructorMarker r13) {
-        /*
-            r7 = this;
-            r13 = r12 & 1
-            r0 = 0
-            if (r13 == 0) goto L8
-            float r8 = (float) r0
-            androidx.compose.ui.unit.Dp$Companion r13 = androidx.compose.ui.unit.Dp.Companion
-        L8:
-            r2 = r8
-            r8 = r12 & 2
-            if (r8 == 0) goto L10
-            float r9 = (float) r0
-            androidx.compose.ui.unit.Dp$Companion r8 = androidx.compose.ui.unit.Dp.Companion
-        L10:
-            r3 = r9
-            r8 = r12 & 4
-            if (r8 == 0) goto L18
-            float r10 = (float) r0
-            androidx.compose.ui.unit.Dp$Companion r8 = androidx.compose.ui.unit.Dp.Companion
-        L18:
-            r4 = r10
-            r8 = r12 & 8
-            if (r8 == 0) goto L20
-            float r11 = (float) r0
-            androidx.compose.ui.unit.Dp$Companion r8 = androidx.compose.ui.unit.Dp.Companion
-        L20:
-            r5 = r11
-            r6 = 0
-            r1 = r7
-            r1.<init>(r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.layout.PaddingValuesImpl.<init>(float, float, float, float, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public PaddingValuesImpl(float f, float f2, float f3, float f4, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 1) != 0) {
+            f = 0;
+            Dp.Companion companion = Dp.Companion;
+        }
+        float f5 = f;
+        if ((i & 2) != 0) {
+            f2 = 0;
+            Dp.Companion companion2 = Dp.Companion;
+        }
+        float f6 = f2;
+        if ((i & 4) != 0) {
+            f3 = 0;
+            Dp.Companion companion3 = Dp.Companion;
+        }
+        float f7 = f3;
+        if ((i & 8) != 0) {
+            f4 = 0;
+            Dp.Companion companion4 = Dp.Companion;
+        }
+        this(f5, f6, f7, f4, null);
     }
 }

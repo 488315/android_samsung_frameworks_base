@@ -120,7 +120,7 @@ public class SemBatteryEventHistory implements Cloneable, Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemBatteryEventHistory m9418clone() {
+    public SemBatteryEventHistory m9431clone() {
         try {
             return (SemBatteryEventHistory) super.clone();
         } catch (CloneNotSupportedException unused) {

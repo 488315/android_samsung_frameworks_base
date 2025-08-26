@@ -11,7 +11,6 @@ import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipEdgePanelSupport {
     public final Context mContext;
@@ -40,11 +39,11 @@ public class PipEdgePanelSupport {
 
     public final int percentToPixel(float f) {
         SparseIntArray sparseIntArray = this.mContext.getResources().getConfiguration().orientation == 2 ? this.mDisplayWidthPerDpi : this.mDisplayHeightPerDpi;
-        int i = sparseIntArray.get(this.mContext.getResources().getConfiguration().densityDpi);
-        if (i == 0) {
-            i = ((WindowManager) this.mContext.getSystemService("window")).getMaximumWindowMetrics().getBounds().height();
-            sparseIntArray.put(this.mContext.getResources().getConfiguration().densityDpi, i);
+        int iHeight = sparseIntArray.get(this.mContext.getResources().getConfiguration().densityDpi);
+        if (iHeight == 0) {
+            iHeight = ((WindowManager) this.mContext.getSystemService("window")).getMaximumWindowMetrics().getBounds().height();
+            sparseIntArray.put(this.mContext.getResources().getConfiguration().densityDpi, iHeight);
         }
-        return (int) (((f * ((i - (this.mContext.getResources().getBoolean(android.R.bool.config_swipeDisambiguation) ? this.mContext.getResources().getDimensionPixelSize(android.R.dimen.seekbar_track_progress_height_material) : 0)) - getUpperMostPosition())) / 100.0f) + 0.5f);
+        return (int) (((f * ((iHeight - (this.mContext.getResources().getBoolean(android.R.bool.config_swipeDisambiguation) ? this.mContext.getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material) : 0)) - getUpperMostPosition())) / 100.0f) + 0.5f);
     }
 }

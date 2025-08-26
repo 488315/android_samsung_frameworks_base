@@ -8,14 +8,12 @@ import java.util.HashMap;
 import java.util.Objects;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FakeVolumeInfraMediator implements VolumeInfraMediator {
     public static final HashMap sConditionMap;
     public final LogWrapper logWrapper;
     public final VolumeInfraMediator volumeInfraMediator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,11 +40,11 @@ public final class FakeVolumeInfraMediator implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final Object get(VolumeInfraMediator.Values values, Object... objArr) {
-        HashMap hashMap = sConditionMap;
-        if (!hashMap.containsKey(values)) {
+        HashMap map = sConditionMap;
+        if (!map.containsKey(values)) {
             return this.volumeInfraMediator.get(values, Arrays.copyOf(objArr, objArr.length));
         }
-        Object obj = hashMap.get(values);
+        Object obj = map.get(values);
         Objects.toString(values);
         Objects.toString(obj);
         this.logWrapper.v("FakeVolumeInfraMediator");
@@ -195,14 +193,14 @@ public final class FakeVolumeInfraMediator implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isEnabled(VolumeInfraMediator.Conditions conditions, Object... objArr) {
-        HashMap hashMap = sConditionMap;
-        if (!hashMap.containsKey(conditions)) {
+        HashMap map = sConditionMap;
+        if (!map.containsKey(conditions)) {
             return this.volumeInfraMediator.isEnabled(conditions, Arrays.copyOf(objArr, objArr.length));
         }
-        boolean booleanValue = ((Boolean) hashMap.get(conditions)).booleanValue();
+        boolean zBooleanValue = ((Boolean) map.get(conditions)).booleanValue();
         Objects.toString(conditions);
         this.logWrapper.v("FakeVolumeInfraMediator");
-        return booleanValue;
+        return zBooleanValue;
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator

@@ -1,29 +1,19 @@
 package com.android.systemui.statusbar.gesture;
 
+import android.content.Context;
 import android.view.InputEvent;
 import android.view.MotionEvent;
+import com.android.systemui.settings.DisplayTracker;
+import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GesturePointerEventDetector extends GenericGestureDetector {
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public GesturePointerEventDetector(android.content.Context r1, com.android.systemui.settings.DisplayTracker r2) {
-        /*
-            r0 = this;
-            java.lang.Class<com.android.systemui.statusbar.gesture.GesturePointerEventDetector> r1 = com.android.systemui.statusbar.gesture.GesturePointerEventDetector.class
-            kotlin.jvm.internal.ClassReference r1 = kotlin.jvm.internal.Reflection.getOrCreateKotlinClass(r1)
-            java.lang.String r1 = r1.getSimpleName()
-            r1.getClass()
-            r2.getClass()
-            r2 = 0
-            r0.<init>(r1, r2)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.gesture.GesturePointerEventDetector.<init>(android.content.Context, com.android.systemui.settings.DisplayTracker):void");
+    public GesturePointerEventDetector(Context context, DisplayTracker displayTracker) {
+        String simpleName = Reflection.getOrCreateKotlinClass(GesturePointerEventDetector.class).getSimpleName();
+        simpleName.getClass();
+        displayTracker.getClass();
+        super(simpleName, 0);
     }
 
     @Override // com.android.systemui.statusbar.gesture.GenericGestureDetector

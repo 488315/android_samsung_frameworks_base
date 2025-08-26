@@ -1,10 +1,14 @@
 package androidx.compose.foundation.layout;
 
+import androidx.collection.IntIntPair;
+import androidx.compose.foundation.layout.FlowLayoutOverflow;
+import androidx.compose.foundation.layout.FlowLayoutOverflowState;
 import androidx.compose.ui.layout.Measurable;
 import androidx.compose.ui.layout.Placeable;
+import androidx.compose.ui.unit.Constraints;
+import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FlowLayoutBuildingBlocks {
     public final long constraints;
@@ -14,7 +18,6 @@ public final class FlowLayoutBuildingBlocks {
     public final int maxLines;
     public final FlowLayoutOverflowState overflow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrapEllipsisInfo {
         public final Measurable ellipsis;
         public final long ellipsisSize;
@@ -37,26 +40,14 @@ public final class FlowLayoutBuildingBlocks {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrapInfo {
         public final boolean isLastItemInContainer;
         public final boolean isLastItemInLine;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public WrapInfo() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.WrapInfo.<init>():void");
+            boolean z = false;
+            this(z, z, 3, null);
         }
 
         public WrapInfo(boolean z, boolean z2) {
@@ -73,119 +64,105 @@ public final class FlowLayoutBuildingBlocks {
         this(i, flowLayoutOverflowState, j, i2, i3, i4);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0064  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0051  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.WrapEllipsisInfo getWrapEllipsisInfo(androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.WrapInfo r17, boolean r18, int r19, int r20, int r21, int r22) {
-        /*
-            r16 = this;
-            r0 = r16
-            r1 = r19
-            r2 = r22
-            r3 = r17
-            boolean r3 = r3.isLastItemInContainer
-            r4 = 0
-            if (r3 != 0) goto Le
-            goto L63
-        Le:
-            androidx.compose.foundation.layout.FlowLayoutOverflowState r3 = r0.overflow
-            r3.getClass()
-            int[] r5 = androidx.compose.foundation.layout.FlowLayoutOverflowState.WhenMappings.$EnumSwitchMapping$0
-            androidx.compose.foundation.layout.FlowLayoutOverflow$OverflowType r6 = r3.type
-            int r6 = r6.ordinal()
-            r5 = r5[r6]
-            r6 = 1
-            if (r5 == r6) goto L51
-            r7 = 2
-            if (r5 == r7) goto L51
-            r7 = 3
-            if (r5 == r7) goto L30
-            r7 = 4
-            if (r5 != r7) goto L2a
-            goto L30
-        L2a:
-            kotlin.NoWhenBranchMatchedException r0 = new kotlin.NoWhenBranchMatchedException
-            r0.<init>()
-            throw r0
-        L30:
-            if (r18 == 0) goto L3b
-            androidx.compose.ui.layout.Measurable r5 = r3.seeMoreMeasurable
-            androidx.collection.IntIntPair r7 = r3.seeMoreSize
-            androidx.compose.ui.layout.Placeable r3 = r3.seeMorePlaceable
-        L38:
-            r10 = r3
-            r9 = r5
-            goto L4f
-        L3b:
-            int r5 = r3.minLinesToShowCollapse
-            int r5 = r5 - r6
-            if (r1 < r5) goto L49
-            int r5 = r3.minCrossAxisSizeToShowCollapse
-            r7 = r20
-            if (r7 < r5) goto L49
-            androidx.compose.ui.layout.Measurable r5 = r3.collapseMeasurable
-            goto L4a
-        L49:
-            r5 = r4
-        L4a:
-            androidx.collection.IntIntPair r7 = r3.collapseSize
-            androidx.compose.ui.layout.Placeable r3 = r3.collapsePlaceable
-            goto L38
-        L4f:
-            if (r9 != 0) goto L53
-        L51:
-            r8 = r4
-            goto L61
-        L53:
-            androidx.compose.foundation.layout.FlowLayoutBuildingBlocks$WrapEllipsisInfo r8 = new androidx.compose.foundation.layout.FlowLayoutBuildingBlocks$WrapEllipsisInfo
-            r7.getClass()
-            r14 = 8
-            r15 = 0
-            long r11 = r7.packedValue
-            r13 = 0
-            r8.<init>(r9, r10, r11, r13, r14, r15)
-        L61:
-            if (r8 != 0) goto L64
-        L63:
-            return r4
-        L64:
-            if (r1 < 0) goto L77
-            if (r2 == 0) goto L78
-            r1 = 32
-            long r3 = r8.ellipsisSize
-            long r3 = r3 >> r1
-            int r1 = (int) r3
-            int r1 = r21 - r1
-            if (r1 < 0) goto L77
-            int r0 = r0.maxItemsInMainAxis
-            if (r2 >= r0) goto L77
-            goto L78
-        L77:
-            r6 = 0
-        L78:
-            r8.placeEllipsisOnLastContentLine = r6
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.getWrapEllipsisInfo(androidx.compose.foundation.layout.FlowLayoutBuildingBlocks$WrapInfo, boolean, int, int, int, int):androidx.compose.foundation.layout.FlowLayoutBuildingBlocks$WrapEllipsisInfo");
+    public final WrapEllipsisInfo getWrapEllipsisInfo(WrapInfo wrapInfo, boolean z, int i, int i2, int i3, int i4) {
+        WrapEllipsisInfo wrapEllipsisInfo;
+        Measurable measurable;
+        IntIntPair intIntPair;
+        Placeable placeable;
+        if (wrapInfo.isLastItemInContainer) {
+            FlowLayoutOverflowState flowLayoutOverflowState = this.overflow;
+            flowLayoutOverflowState.getClass();
+            int i5 = FlowLayoutOverflowState.WhenMappings.$EnumSwitchMapping$0[flowLayoutOverflowState.type.ordinal()];
+            boolean z2 = true;
+            if (i5 == 1 || i5 == 2) {
+                wrapEllipsisInfo = null;
+                if (wrapEllipsisInfo != null) {
+                    if (i < 0 || (i4 != 0 && (i3 - ((int) (wrapEllipsisInfo.ellipsisSize >> 32)) < 0 || i4 >= this.maxItemsInMainAxis))) {
+                        z2 = false;
+                    }
+                    wrapEllipsisInfo.placeEllipsisOnLastContentLine = z2;
+                    return wrapEllipsisInfo;
+                }
+            } else {
+                if (i5 != 3 && i5 != 4) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                if (z) {
+                    measurable = flowLayoutOverflowState.seeMoreMeasurable;
+                    intIntPair = flowLayoutOverflowState.seeMoreSize;
+                    placeable = flowLayoutOverflowState.seeMorePlaceable;
+                } else {
+                    measurable = (i < flowLayoutOverflowState.minLinesToShowCollapse - 1 || i2 < flowLayoutOverflowState.minCrossAxisSizeToShowCollapse) ? null : flowLayoutOverflowState.collapseMeasurable;
+                    intIntPair = flowLayoutOverflowState.collapseSize;
+                    placeable = flowLayoutOverflowState.collapsePlaceable;
+                }
+                Placeable placeable2 = placeable;
+                Measurable measurable2 = measurable;
+                if (measurable2 != null) {
+                    intIntPair.getClass();
+                    wrapEllipsisInfo = new WrapEllipsisInfo(measurable2, placeable2, intIntPair.packedValue, false, 8, null);
+                }
+                if (wrapEllipsisInfo != null) {
+                }
+            }
+        }
+        return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x005c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x005c, code lost:
     
         if ((((int) (r25 >> 32)) - ((int) (r20 >> 32))) < 0) goto L23;
      */
     /* renamed from: getWrapInfo-OpUlnko, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.WrapInfo m103getWrapInfoOpUlnko(boolean r23, int r24, long r25, androidx.collection.IntIntPair r27, int r28, int r29, int r30, boolean r31, boolean r32) {
-        /*
-            Method dump skipped, instructions count: 255
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.layout.FlowLayoutBuildingBlocks.m103getWrapInfoOpUlnko(boolean, int, long, androidx.collection.IntIntPair, int, int, int, boolean, boolean):androidx.compose.foundation.layout.FlowLayoutBuildingBlocks$WrapInfo");
+    public final WrapInfo m104getWrapInfoOpUlnko(boolean z, int i, long j, IntIntPair intIntPair, int i2, int i3, int i4, boolean z2, boolean z3) {
+        long j2;
+        long j3;
+        int i5 = i3 + i4;
+        if (intIntPair == null) {
+            return new WrapInfo(true, true);
+        }
+        FlowLayoutOverflowState flowLayoutOverflowState = this.overflow;
+        FlowLayoutOverflow.OverflowType overflowType = flowLayoutOverflowState.type;
+        FlowLayoutOverflow.OverflowType overflowType2 = FlowLayoutOverflow.OverflowType.Visible;
+        long j4 = intIntPair.packedValue;
+        if (overflowType != overflowType2 && (i2 >= this.maxLines || ((int) (j & 4294967295L)) - ((int) (j4 & 4294967295L)) < 0)) {
+            return new WrapInfo(true, true);
+        }
+        int i6 = this.mainAxisSpacing;
+        int i7 = this.crossAxisSpacing;
+        long j5 = this.constraints;
+        int i8 = this.maxItemsInMainAxis;
+        if (i != 0) {
+            if (i >= i8) {
+                j2 = 4294967295L;
+                j3 = j4;
+            } else {
+                j2 = 4294967295L;
+                j3 = j4;
+            }
+            return z2 ? new WrapInfo(true, true) : new WrapInfo(true, m104getWrapInfoOpUlnko(z, 0, IntIntPair.m1constructorimpl(Constraints.m823getMaxWidthimpl(j5), (((int) (j & j2)) - i7) - i4), IntIntPair.m0boximpl(IntIntPair.m1constructorimpl(((int) (j3 >> 32)) - i6, (int) (j3 & j2))), i2 + 1, i5, 0, true, false).isLastItemInContainer);
+        }
+        j2 = 4294967295L;
+        j3 = j4;
+        int i9 = (int) (j3 & j2);
+        int iMax = Math.max(i4, i9) + i3;
+        IntIntPair intIntPairM106ellipsisSizeF35zmw$foundation_layout = z3 ? null : flowLayoutOverflowState.m106ellipsisSizeF35zmw$foundation_layout(i2, iMax, z);
+        if (intIntPairM106ellipsisSizeF35zmw$foundation_layout == null || (i + 1 < i8 && ((((int) (j >> 32)) - ((int) (j3 >> 32))) - i6) - ((int) (intIntPairM106ellipsisSizeF35zmw$foundation_layout.packedValue >> 32)) >= 0)) {
+            return new WrapInfo(false, false);
+        }
+        if (z3) {
+            return new WrapInfo(true, true);
+        }
+        boolean z4 = m104getWrapInfoOpUlnko(false, 0, IntIntPair.m1constructorimpl(Constraints.m823getMaxWidthimpl(j5), (((int) (j & j2)) - i7) - Math.max(i4, i9)), intIntPairM106ellipsisSizeF35zmw$foundation_layout, i2 + 1, iMax, 0, true, true).isLastItemInContainer;
+        return new WrapInfo(z4, z4);
     }
 
     private FlowLayoutBuildingBlocks(int i, FlowLayoutOverflowState flowLayoutOverflowState, long j, int i2, int i3, int i4) {

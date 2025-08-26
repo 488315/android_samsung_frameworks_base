@@ -1,11 +1,17 @@
 package com.android.systemui.navigationbar.store;
 
 import android.R;
+import android.app.ActivityTaskManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Point;
+import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
+import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
@@ -19,6 +25,7 @@ import com.android.systemui.navigationbar.interactor.DesktopModeInteractor;
 import com.android.systemui.navigationbar.interactor.DeviceStateInteractor;
 import com.android.systemui.navigationbar.interactor.InteractorFactory;
 import com.android.systemui.navigationbar.interactor.KnoxStateMonitorInteractor;
+import com.android.systemui.navigationbar.interactor.TaskBarInteractor;
 import com.android.systemui.navigationbar.layout.NavBarCoverLayoutParams;
 import com.android.systemui.navigationbar.layout.NavBarLayoutParams;
 import com.android.systemui.navigationbar.model.NavBarStates;
@@ -27,21 +34,23 @@ import com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager;
 import com.android.systemui.navigationbar.store.EventTypeFactory;
 import com.android.systemui.navigationbar.util.StoreLogUtil;
 import com.android.systemui.settings.UserTracker;
+import com.android.systemui.shared.system.ActivityManagerWrapper;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.DeviceType;
+import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.systemui.splugins.navigationbar.BarLayoutParams;
 import com.samsung.systemui.splugins.navigationbar.LayoutProvider;
 import com.samsung.systemui.splugins.navigationbar.LayoutProviderContainer;
+import com.sec.ims.settings.ImsProfile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarStateManagerImpl implements NavBarStateManager {
     public final Context context;
@@ -107,73 +116,24 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         return this.settingsHelper.isNavigationBarHideKeyboardButtonEnabled() && canPlaceKeyboardButton(i);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0052, code lost:
-    
-        if (canShowHideKeyboardButtonForRotation(r5) == false) goto L30;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0054  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean canShowKeyboardButtonForRotation(int r5) {
-        /*
-            r4 = this;
-            android.content.Context r0 = r4.context
-            android.content.ContentResolver r0 = r0.getContentResolver()
-            com.android.systemui.navigationbar.model.NavBarStates r1 = r4.states
-            int r1 = r1.lastTaskUserId
-            java.lang.String r2 = "show_keyboard_button"
-            r3 = 0
-            int r0 = android.provider.Settings.Secure.getIntForUser(r0, r2, r3, r1)
-            r1 = 1
-            if (r0 == 0) goto L17
-            r0 = r1
-            goto L18
-        L17:
-            r0 = r3
-        L18:
-            boolean r2 = r4.isGestureMode()
-            if (r2 == 0) goto L2f
-            boolean r2 = r4.supportLargeCoverScreenNavBar()
-            if (r2 != 0) goto L2e
-            if (r0 == 0) goto L2e
-            boolean r0 = r4.canPlaceKeyboardButton(r5)
-            if (r0 == 0) goto L2e
-            r0 = r1
-            goto L2f
-        L2e:
-            r0 = r3
-        L2f:
-            if (r0 != 0) goto L54
-            boolean r0 = com.android.systemui.BasicRune.NAVBAR_MULTI_MODAL_ICON
-            if (r0 == 0) goto L4b
-            boolean r0 = r4.isGestureMode()
-            if (r0 == 0) goto L49
-            com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager r0 = r4.navBarRemoteViewManager
-            boolean r0 = r0.isSetMultimodalButton()
-            if (r0 == 0) goto L4b
-            boolean r0 = r4.canPlaceKeyboardButton(r5)
-            if (r0 == 0) goto L4b
-        L49:
-            r0 = r1
-            goto L4c
-        L4b:
-            r0 = r3
-        L4c:
-            if (r0 != 0) goto L54
-            boolean r0 = r4.canShowHideKeyboardButtonForRotation(r5)
-            if (r0 == 0) goto L55
-        L54:
-            r3 = r1
-        L55:
-            java.lang.String r0 = "canShowKeyboardButtonForRotation("
-            java.lang.String r1 = ")"
-            java.lang.String r5 = androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(r5, r0, r1)
-            java.lang.Boolean r0 = java.lang.Boolean.valueOf(r3)
-            r4.logNavBarStates(r0, r5)
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStateManagerImpl.canShowKeyboardButtonForRotation(int):boolean");
+    public final boolean canShowKeyboardButtonForRotation(int i) {
+        boolean z = false;
+        boolean z2 = Settings.Secure.getIntForUser(this.context.getContentResolver(), SettingsHelper.INDEX_SHOW_KEYBOARD_BUTTON, 0, this.states.lastTaskUserId) != 0;
+        if (isGestureMode()) {
+            z2 = !supportLargeCoverScreenNavBar() && z2 && canPlaceKeyboardButton(i);
+        }
+        if (z2) {
+            z = true;
+        } else {
+            if ((BasicRune.NAVBAR_MULTI_MODAL_ICON && (!isGestureMode() || (this.navBarRemoteViewManager.isSetMultimodalButton() && canPlaceKeyboardButton(i)))) || canShowHideKeyboardButtonForRotation(i)) {
+            }
+        }
+        logNavBarStates(Boolean.valueOf(z), ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "canShowKeyboardButtonForRotation(", ")"));
+        return z;
     }
 
     public final boolean canShowKeyboardButtonOnLeft() {
@@ -184,9 +144,9 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         LayoutProvider layoutProvider = this.states.layoutProvider;
         layoutProvider.getClass();
         int buttonWidth = layoutProvider.getButtonWidth(this.states.displaySize, z);
-        Integer valueOf = Integer.valueOf(buttonWidth);
-        logNavBarStates(valueOf, "getButtonWidth(land: " + z + ")");
-        return valueOf.intValue();
+        Integer numValueOf = Integer.valueOf(buttonWidth);
+        logNavBarStates(numValueOf, "getButtonWidth(land: " + z + ")");
+        return numValueOf.intValue();
     }
 
     public final String getDefaultLayout() {
@@ -212,13 +172,13 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         LayoutProvider layoutProvider = this.states.layoutProvider;
         layoutProvider.getClass();
         int gestureWidth = layoutProvider.getGestureWidth(this.states.displaySize, z);
-        Integer valueOf = Integer.valueOf(gestureWidth);
-        logNavBarStates(valueOf, "getGestureWidth(land: " + z + ")");
-        return valueOf.intValue();
+        Integer numValueOf = Integer.valueOf(gestureWidth);
+        logNavBarStates(numValueOf, "getGestureWidth(land: " + z + ")");
+        return numValueOf.intValue();
     }
 
     public final int getNavBarHeight(int i) {
-        return shouldShowSUWStyle() ? this.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size) : this.navBarLayoutParams.getBarHeight(this.states.canMove, i);
+        return shouldShowSUWStyle() ? this.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size) : this.navBarLayoutParams.getBarHeight(this.states.canMove, i);
     }
 
     public final SettingsHelper getSettingHelper() {
@@ -229,9 +189,9 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         LayoutProvider layoutProvider = this.states.layoutProvider;
         layoutProvider.getClass();
         int spaceWidth = layoutProvider.getSpaceWidth(this.states.displaySize, z, NavBarStateManager.isSideAndBottomGestureMode$default(this));
-        Integer valueOf = Integer.valueOf(spaceWidth);
-        logNavBarStates(valueOf, "getSpaceWidth(land: " + z + ")");
-        return valueOf.intValue();
+        Integer numValueOf = Integer.valueOf(spaceWidth);
+        logNavBarStates(numValueOf, "getSpaceWidth(land: " + z + ")");
+        return numValueOf.intValue();
     }
 
     public final boolean isBottomGestureMode(boolean z) {
@@ -242,64 +202,40 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         return z2;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x002b, code lost:
-    
-        if ((r0 != null ? r0.foldCache : false) != false) goto L18;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean isCoverDisplayNavBarEnabled() {
-        /*
-            r4 = this;
-            boolean r0 = r4.supportLargeCoverScreenNavBar()
-            r1 = 1
-            r2 = 0
-            if (r0 == 0) goto L15
-            boolean r0 = r4.isLargeCoverScreenSyncEnabled()
-            if (r0 != 0) goto L14
-            boolean r4 = r4.isCoverLauncherNavBarEnabled()
-            if (r4 == 0) goto L40
-        L14:
-            return r1
-        L15:
-            com.android.systemui.navigationbar.model.NavBarStates r0 = r4.states
-            boolean r0 = r0.supportCoverScreen
-            if (r0 == 0) goto L2e
-            com.android.systemui.navigationbar.interactor.InteractorFactory r0 = r4.interactorFactory
-            java.lang.Class<com.android.systemui.navigationbar.interactor.DeviceStateInteractor> r3 = com.android.systemui.navigationbar.interactor.DeviceStateInteractor.class
-            java.lang.Object r0 = r0.get(r3)
-            com.android.systemui.navigationbar.interactor.DeviceStateInteractor r0 = (com.android.systemui.navigationbar.interactor.DeviceStateInteractor) r0
-            if (r0 == 0) goto L2a
-            boolean r0 = r0.foldCache
-            goto L2b
-        L2a:
-            r0 = r2
-        L2b:
-            if (r0 == 0) goto L2e
-            goto L2f
-        L2e:
-            r1 = r2
-        L2f:
-            java.lang.Boolean r0 = java.lang.Boolean.valueOf(r1)
-            java.lang.String r3 = "supportCoverScreenNavBar"
-            r4.logNavBarStates(r0, r3)
-            if (r1 == 0) goto L40
-            boolean r4 = r4.isCoverLauncherNavBarEnabled()
-            return r4
-        L40:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStateManagerImpl.isCoverDisplayNavBarEnabled():boolean");
+        boolean z = true;
+        if (supportLargeCoverScreenNavBar()) {
+            if (isLargeCoverScreenSyncEnabled() || isCoverLauncherNavBarEnabled()) {
+                return true;
+            }
+        } else if (this.states.supportCoverScreen) {
+            DeviceStateInteractor deviceStateInteractor = (DeviceStateInteractor) this.interactorFactory.get(DeviceStateInteractor.class);
+            if (!(deviceStateInteractor != null ? deviceStateInteractor.foldCache : false)) {
+            }
+            logNavBarStates(Boolean.valueOf(z), "supportCoverScreenNavBar");
+            if (z) {
+            }
+        } else {
+            z = false;
+            logNavBarStates(Boolean.valueOf(z), "supportCoverScreenNavBar");
+            if (z) {
+                return isCoverLauncherNavBarEnabled();
+            }
+        }
+        return false;
     }
 
     public final boolean isCoverLauncherNavBarEnabled() {
         if (this.states.supportCoverScreen) {
             CoverDisplayWidgetInteractor coverDisplayWidgetInteractor = (CoverDisplayWidgetInteractor) this.interactorFactory.get(CoverDisplayWidgetInteractor.class);
-            Boolean valueOf = coverDisplayWidgetInteractor != null ? Boolean.valueOf(coverDisplayWidgetInteractor.isEnabled()) : null;
-            logNavBarStates(valueOf, "isCoverLauncherNavBarEnabled");
-            if (valueOf != null ? valueOf.booleanValue() : false) {
+            Boolean boolValueOf = coverDisplayWidgetInteractor != null ? Boolean.valueOf(coverDisplayWidgetInteractor.isEnabled()) : null;
+            logNavBarStates(boolValueOf, "isCoverLauncherNavBarEnabled");
+            if (boolValueOf != null ? boolValueOf.booleanValue() : false) {
                 return true;
             }
         }
@@ -308,11 +244,11 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
 
     public final boolean isGameMode(boolean z) {
         NavBarRemoteView navBarRemoteView = (NavBarRemoteView) this.navBarRemoteViewManager.leftViewList.peek();
-        boolean equals = navBarRemoteView != null ? "com.samsung.android.game.gametools".equals(navBarRemoteView.requestClass) : false;
+        boolean zEquals = navBarRemoteView != null ? "com.samsung.android.game.gametools".equals(navBarRemoteView.requestClass) : false;
         if (z) {
-            logNavBarStates(Boolean.valueOf(equals), "isGameMode");
+            logNavBarStates(Boolean.valueOf(zEquals), "isGameMode");
         }
-        return equals;
+        return zEquals;
     }
 
     public final boolean isGestureHintEnabled() {
@@ -327,9 +263,9 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         if (!this.states.supportLargeCoverScreen) {
             return false;
         }
-        boolean isLargeCoverScreenNavigation = this.settingsHelper.isLargeCoverScreenNavigation();
-        logNavBarStates(Boolean.valueOf(isLargeCoverScreenNavigation), "isLargeCoverScreenSyncEnabled");
-        return isLargeCoverScreenNavigation;
+        boolean zIsLargeCoverScreenNavigation = this.settingsHelper.isLargeCoverScreenNavigation();
+        logNavBarStates(Boolean.valueOf(zIsLargeCoverScreenNavigation), "isLargeCoverScreenSyncEnabled");
+        return zIsLargeCoverScreenNavigation;
     }
 
     public final boolean isLargeCoverTaskEnabled() {
@@ -340,146 +276,64 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x006b, code lost:
-    
-        if (r10 != null) goto L31;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x006d, code lost:
-    
-        r10.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x008a, code lost:
-    
-        r0 = r11.states;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x008d, code lost:
-    
-        if (r4 != 1) goto L40;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x008f, code lost:
-    
-        r1 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0090, code lost:
-    
-        r0.multiModalForLargeCover = java.lang.Boolean.valueOf(r1);
-        android.util.Log.d("NavBarStateManager", "multiModalForLargeCover : " + r11.states.multiModalForLargeCover);
-        r11 = r11.states.multiModalForLargeCover;
-        r11.getClass();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x00b6, code lost:
-    
-        return r11.booleanValue();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x0087, code lost:
-    
-        if (r10 == null) goto L37;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x006d A[PHI: r4 r10
+      0x006d: PHI (r4v3 int) = (r4v1 int), (r4v10 int) binds: [B:35:0x0087, B:30:0x006b] A[DONT_GENERATE, DONT_INLINE]
+      0x006d: PHI (r10v3 android.database.Cursor) = (r10v2 android.database.Cursor), (r10v4 android.database.Cursor) binds: [B:35:0x0087, B:30:0x006b] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x008f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean isMultiModalAvailableInLargeCover() {
-        /*
-            r11 = this;
-            boolean r0 = r11.supportLargeCoverScreenNavBar()
-            r1 = 0
-            java.lang.String r2 = "NavBarStateManager"
-            if (r0 != 0) goto Lf
-            java.lang.String r11 = "multiModalForLargeCover = false (not in cover display)"
-            android.util.Log.d(r2, r11)
-            return r1
-        Lf:
-            com.android.systemui.navigationbar.model.NavBarStates r0 = r11.states
-            java.lang.Boolean r0 = r0.multiModalForLargeCover
-            if (r0 == 0) goto L1d
-            r0.getClass()
-            boolean r11 = r0.booleanValue()
-            return r11
-        L1d:
-            java.lang.String r0 = "content://com.samsung.android.honeyboard.provider.KeyboardSettingsProvider"
-            java.lang.String r3 = "cover_voice_icon"
-            java.lang.String[] r8 = new java.lang.String[]{r3}
-            r10 = 0
-            android.content.Context r4 = r11.context     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L71
-            android.content.ContentResolver r4 = r4.getContentResolver()     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L71
-            android.net.Uri r5 = android.net.Uri.parse(r0)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L71
-            r7 = 0
-            r9 = 0
-            r6 = 0
-            android.database.Cursor r10 = r4.query(r5, r6, r7, r8, r9)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L71
-            r4 = r1
-            if (r10 == 0) goto L6b
-        L3a:
-            boolean r0 = r10.moveToNext()     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            if (r0 == 0) goto L6b
-            java.lang.String r0 = "NAME"
-            int r0 = r10.getColumnIndex(r0)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            r5 = -1
-            if (r0 == r5) goto L3a
-            java.lang.String r0 = r10.getString(r0)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            if (r0 == 0) goto L3a
-            int r5 = r0.length()     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            if (r5 <= 0) goto L3a
-            boolean r0 = r0.equals(r3)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            if (r0 == 0) goto L3a
-            java.lang.String r0 = "VALUE"
-            int r0 = r10.getColumnIndex(r0)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            int r4 = r10.getInt(r0)     // Catch: java.lang.Throwable -> L66 java.lang.Exception -> L69
-            goto L3a
-        L66:
-            r0 = move-exception
-            r11 = r0
-            goto Lb7
-        L69:
-            r0 = move-exception
-            goto L73
-        L6b:
-            if (r10 == 0) goto L8a
-        L6d:
-            r10.close()
-            goto L8a
-        L71:
-            r0 = move-exception
-            r4 = r1
-        L73:
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L66
-            r3.<init>()     // Catch: java.lang.Throwable -> L66
-            java.lang.String r5 = "Failed to retrieve cover_voice_icon. "
-            r3.append(r5)     // Catch: java.lang.Throwable -> L66
-            r3.append(r0)     // Catch: java.lang.Throwable -> L66
-            java.lang.String r0 = r3.toString()     // Catch: java.lang.Throwable -> L66
-            android.util.Log.e(r2, r0)     // Catch: java.lang.Throwable -> L66
-            if (r10 == 0) goto L8a
-            goto L6d
-        L8a:
-            com.android.systemui.navigationbar.model.NavBarStates r0 = r11.states
-            r3 = 1
-            if (r4 != r3) goto L90
-            r1 = r3
-        L90:
-            java.lang.Boolean r1 = java.lang.Boolean.valueOf(r1)
-            r0.multiModalForLargeCover = r1
-            com.android.systemui.navigationbar.model.NavBarStates r0 = r11.states
-            java.lang.Boolean r0 = r0.multiModalForLargeCover
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r3 = "multiModalForLargeCover : "
-            r1.<init>(r3)
-            r1.append(r0)
-            java.lang.String r0 = r1.toString()
-            android.util.Log.d(r2, r0)
-            com.android.systemui.navigationbar.model.NavBarStates r11 = r11.states
-            java.lang.Boolean r11 = r11.multiModalForLargeCover
-            r11.getClass()
-            boolean r11 = r11.booleanValue()
-            return r11
-        Lb7:
-            if (r10 == 0) goto Lbc
-            r10.close()
-        Lbc:
-            throw r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStateManagerImpl.isMultiModalAvailableInLargeCover():boolean");
+        int i;
+        String string;
+        if (!supportLargeCoverScreenNavBar()) {
+            Log.d("NavBarStateManager", "multiModalForLargeCover = false (not in cover display)");
+            return false;
+        }
+        Boolean bool = this.states.multiModalForLargeCover;
+        if (bool != null) {
+            bool.getClass();
+            return bool.booleanValue();
+        }
+        Cursor cursorQuery = null;
+        try {
+            try {
+                cursorQuery = this.context.getContentResolver().query(Uri.parse("content://com.samsung.android.honeyboard.provider.KeyboardSettingsProvider"), null, null, new String[]{"cover_voice_icon"}, null);
+                i = 0;
+                if (cursorQuery != null) {
+                    while (cursorQuery.moveToNext()) {
+                        try {
+                            int columnIndex = cursorQuery.getColumnIndex("NAME");
+                            if (columnIndex != -1 && (string = cursorQuery.getString(columnIndex)) != null && string.length() > 0 && string.equals("cover_voice_icon")) {
+                                i = cursorQuery.getInt(cursorQuery.getColumnIndex("VALUE"));
+                            }
+                        } catch (Exception e) {
+                            e = e;
+                            Log.e("NavBarStateManager", "Failed to retrieve cover_voice_icon. " + e);
+                            if (cursorQuery != null) {
+                            }
+                            this.states.multiModalForLargeCover = Boolean.valueOf(i == 1);
+                            Log.d("NavBarStateManager", "multiModalForLargeCover : " + this.states.multiModalForLargeCover);
+                            Boolean bool2 = this.states.multiModalForLargeCover;
+                            bool2.getClass();
+                            return bool2.booleanValue();
+                        }
+                    }
+                }
+            } finally {
+            }
+        } catch (Exception e2) {
+            e = e2;
+            i = 0;
+        }
+        if (cursorQuery != null) {
+            cursorQuery.close();
+        }
+        this.states.multiModalForLargeCover = Boolean.valueOf(i == 1);
+        Log.d("NavBarStateManager", "multiModalForLargeCover : " + this.states.multiModalForLargeCover);
+        Boolean bool22 = this.states.multiModalForLargeCover;
+        bool22.getClass();
+        return bool22.booleanValue();
     }
 
     public final boolean isNavBarHidden() {
@@ -498,47 +352,57 @@ public final class NavBarStateManagerImpl implements NavBarStateManager {
     }
 
     public final boolean isNavigationBarUseThemeDefault() {
-        boolean isNavigationBarUseThemeDefault = this.settingsHelper.isNavigationBarUseThemeDefault();
-        logNavBarStates(Boolean.valueOf(isNavigationBarUseThemeDefault), "isNavigationBarUseThemeDefault");
-        return isNavigationBarUseThemeDefault;
+        boolean zIsNavigationBarUseThemeDefault = this.settingsHelper.isNavigationBarUseThemeDefault();
+        logNavBarStates(Boolean.valueOf(zIsNavigationBarUseThemeDefault), "isNavigationBarUseThemeDefault");
+        return zIsNavigationBarUseThemeDefault;
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x015b  */
-    /* JADX WARN: Type inference failed for: r11v0 */
-    /* JADX WARN: Type inference failed for: r11v1 */
-    /* JADX WARN: Type inference failed for: r11v4 */
-    /* JADX WARN: Type inference failed for: r12v2 */
-    /* JADX WARN: Type inference failed for: r12v3 */
-    /* JADX WARN: Type inference failed for: r12v5 */
-    /* JADX WARN: Type inference failed for: r14v1 */
-    /* JADX WARN: Type inference failed for: r14v2 */
-    /* JADX WARN: Type inference failed for: r14v7 */
-    /* JADX WARN: Type inference failed for: r3v3 */
-    /* JADX WARN: Type inference failed for: r3v4 */
-    /* JADX WARN: Type inference failed for: r3v6 */
-    /* JADX WARN: Type inference failed for: r6v0 */
-    /* JADX WARN: Type inference failed for: r6v1, types: [boolean, int] */
-    /* JADX WARN: Type inference failed for: r6v2 */
-    /* JADX WARN: Type inference failed for: r6v3 */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean isTaskBarEnabled(boolean r17) {
-        /*
-            Method dump skipped, instructions count: 363
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStateManagerImpl.isTaskBarEnabled(boolean):boolean");
+    /* JADX WARN: Type inference failed for: r10v1 */
+    /* JADX WARN: Type inference failed for: r10v2 */
+    /* JADX WARN: Type inference failed for: r10v3, types: [boolean, int] */
+    /* JADX WARN: Type inference failed for: r10v4 */
+    public final boolean isTaskBarEnabled(boolean z) {
+        String strM;
+        DesktopModeInteractor desktopModeInteractor;
+        Boolean bool;
+        boolean zIsTaskBarEnabled = this.settingsHelper.isTaskBarEnabled();
+        boolean zIsFactoryBinary = DeviceType.isFactoryBinary();
+        InteractorFactory interactorFactory = this.interactorFactory;
+        TaskBarInteractor taskBarInteractor = (TaskBarInteractor) interactorFactory.get(TaskBarInteractor.class);
+        boolean zBooleanValue = (taskBarInteractor == null || (bool = taskBarInteractor.userUnlocked) == null) ? false : bool.booleanValue();
+        boolean z2 = this.states.deviceProvisioned;
+        boolean zIsEasyModeOn = this.settingsHelper.isEasyModeOn();
+        boolean zIsUltraPowerSavingMode = this.settingsHelper.isUltraPowerSavingMode();
+        ActivityManagerWrapper.sInstance.getClass();
+        ?? r10 = 1;
+        r10 = 1;
+        boolean z3 = ActivityTaskManager.getService().getLockTaskModeState() == 1;
+        TaskBarInteractor taskBarInteractor2 = (TaskBarInteractor) interactorFactory.get(TaskBarInteractor.class);
+        boolean z4 = taskBarInteractor2 != null && taskBarInteractor2.isDefaultHome;
+        boolean z5 = this.states.userSetupCompleteForCurrentUser;
+        boolean z6 = BasicRune.NAVBAR_DESKTOP && (desktopModeInteractor = (DesktopModeInteractor) interactorFactory.get(DesktopModeInteractor.class)) != null && desktopModeInteractor.isEnabled();
+        TaskBarInteractor taskBarInteractor3 = (TaskBarInteractor) interactorFactory.get(TaskBarInteractor.class);
+        boolean z7 = taskBarInteractor3 != null && taskBarInteractor3.fitToActiveDisplay;
+        boolean zIsSysUiSafeModeEnabled = SafeUIState.isSysUiSafeModeEnabled();
+        if (z) {
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m((zIsTaskBarEnabled ? "a" : ImsProfile.TIMER_NAME_A).concat(!zIsFactoryBinary ? "b" : ImsProfile.TIMER_NAME_B), zBooleanValue ? "c" : ImsProfile.TIMER_NAME_C), this.context.getResources().getConfiguration().semDisplayDeviceType == 0 ? "d" : ImsProfile.TIMER_NAME_D), DeviceType.isTablet() ? "e" : ImsProfile.TIMER_NAME_E), z2 ? "f" : ImsProfile.TIMER_NAME_F), !zIsEasyModeOn ? "g" : ImsProfile.TIMER_NAME_G), !zIsUltraPowerSavingMode ? "h" : ImsProfile.TIMER_NAME_H), !z3 ? "i" : ImsProfile.TIMER_NAME_I), z4 ? "j" : ImsProfile.TIMER_NAME_J), z5 ? "k" : ImsProfile.TIMER_NAME_K), z6 ? "l" : "L"), !z7 ? "m" : "M"), !zIsSysUiSafeModeEnabled ? "n" : "N");
+        } else {
+            strM = "";
+        }
+        if ((!zIsTaskBarEnabled || zIsFactoryBinary || !zBooleanValue || ((this.context.getResources().getConfiguration().semDisplayDeviceType != 0 && !DeviceType.isTablet()) || z7 || !z2 || zIsEasyModeOn || zIsUltraPowerSavingMode || z3 || !z4 || !z5 || zIsSysUiSafeModeEnabled)) && (!z6 || !zBooleanValue)) {
+            r10 = 0;
+        }
+        Settings.Global.putInt(this.context.getContentResolver(), "sem_task_bar_available", r10);
+        if (z) {
+            logNavBarStates(Boolean.valueOf((boolean) r10), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("isTaskbarEnabled(", strM, ")"));
+        }
+        return r10;
     }
 
     public final void logNavBarStates(Object obj, String str) {
-        StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(this.context.getDisplayId(), "NavBarStates(", ") ", str, ": ");
-        m.append(obj);
-        Log.d("NavBarStateManager", m.toString());
+        StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(this.context.getDisplayId(), "NavBarStates(", ") ", str, ": ");
+        sbM.append(obj);
+        Log.d("NavBarStateManager", sbM.toString());
     }
 
     public final void onNavigationBarCreated() {

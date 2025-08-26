@@ -17,7 +17,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColumnMeasurePolicy implements MeasurePolicy, RowColumnMeasurePolicy {
     public final Alignment.Horizontal horizontalAlignment;
@@ -30,13 +29,13 @@ public final class ColumnMeasurePolicy implements MeasurePolicy, RowColumnMeasur
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy
     /* renamed from: createConstraints-xF2OJ5Q, reason: not valid java name */
-    public final long mo102createConstraintsxF2OJ5Q(boolean z, int i, int i2, int i3, int i4) {
+    public final long mo103createConstraintsxF2OJ5Q(boolean z, int i, int i2, int i3, int i4) {
         ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.DefaultColumnMeasurePolicy;
         if (!z) {
             return ConstraintsKt.Constraints(i2, i4, i, i3);
         }
         Constraints.Companion.getClass();
-        return Constraints.Companion.m825fitPrioritizingHeightZbe2FdA(i2, i4, i, i3);
+        return Constraints.Companion.m827fitPrioritizingHeightZbe2FdA(i2, i4, i, i3);
     }
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy
@@ -67,138 +66,137 @@ public final class ColumnMeasurePolicy implements MeasurePolicy, RowColumnMeasur
     @Override // androidx.compose.ui.layout.MeasurePolicy
     public final int maxIntrinsicHeight(IntrinsicMeasureScope intrinsicMeasureScope, List list, int i) {
         IntrinsicMeasureBlocks intrinsicMeasureBlocks = IntrinsicMeasureBlocks.INSTANCE;
-        int mo51roundToPx0680j_4 = intrinsicMeasureScope.mo51roundToPx0680j_4(this.verticalArrangement.mo94getSpacingD9Ej5fM());
+        int iMo52roundToPx0680j_4 = intrinsicMeasureScope.mo52roundToPx0680j_4(this.verticalArrangement.mo95getSpacingD9Ej5fM());
         intrinsicMeasureBlocks.getClass();
         if (list.isEmpty()) {
             return 0;
         }
         int size = list.size();
+        int iMax = 0;
         int i2 = 0;
-        int i3 = 0;
         float f = 0.0f;
-        for (int i4 = 0; i4 < size; i4++) {
-            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i4);
+        for (int i3 = 0; i3 < size; i3++) {
+            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i3);
             float weight = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable));
-            int maxIntrinsicHeight = intrinsicMeasurable.maxIntrinsicHeight(i);
+            int iMaxIntrinsicHeight = intrinsicMeasurable.maxIntrinsicHeight(i);
             if (weight == 0.0f) {
-                i3 += maxIntrinsicHeight;
+                i2 += iMaxIntrinsicHeight;
             } else if (weight > 0.0f) {
                 f += weight;
-                i2 = Math.max(i2, Math.round(maxIntrinsicHeight / weight));
+                iMax = Math.max(iMax, Math.round(iMaxIntrinsicHeight / weight));
             }
         }
-        return ((list.size() - 1) * mo51roundToPx0680j_4) + Math.round(i2 * f) + i3;
+        return ((list.size() - 1) * iMo52roundToPx0680j_4) + Math.round(iMax * f) + i2;
     }
 
     @Override // androidx.compose.ui.layout.MeasurePolicy
     public final int maxIntrinsicWidth(IntrinsicMeasureScope intrinsicMeasureScope, List list, int i) {
         IntrinsicMeasureBlocks intrinsicMeasureBlocks = IntrinsicMeasureBlocks.INSTANCE;
-        int mo51roundToPx0680j_4 = intrinsicMeasureScope.mo51roundToPx0680j_4(this.verticalArrangement.mo94getSpacingD9Ej5fM());
+        int iMo52roundToPx0680j_4 = intrinsicMeasureScope.mo52roundToPx0680j_4(this.verticalArrangement.mo95getSpacingD9Ej5fM());
         intrinsicMeasureBlocks.getClass();
         if (list.isEmpty()) {
             return 0;
         }
-        int min = Math.min((list.size() - 1) * mo51roundToPx0680j_4, i);
+        int iMin = Math.min((list.size() - 1) * iMo52roundToPx0680j_4, i);
         List list2 = list;
         int size = list2.size();
-        int i2 = 0;
+        int iMax = 0;
         float f = 0.0f;
-        for (int i3 = 0; i3 < size; i3++) {
-            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i3);
+        for (int i2 = 0; i2 < size; i2++) {
+            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i2);
             float weight = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable));
             if (weight == 0.0f) {
-                int min2 = Math.min(intrinsicMeasurable.maxIntrinsicHeight(Integer.MAX_VALUE), i == Integer.MAX_VALUE ? Integer.MAX_VALUE : i - min);
-                min += min2;
-                i2 = Math.max(i2, intrinsicMeasurable.maxIntrinsicWidth(min2));
+                int iMin2 = Math.min(intrinsicMeasurable.maxIntrinsicHeight(Integer.MAX_VALUE), i == Integer.MAX_VALUE ? Integer.MAX_VALUE : i - iMin);
+                iMin += iMin2;
+                iMax = Math.max(iMax, intrinsicMeasurable.maxIntrinsicWidth(iMin2));
             } else if (weight > 0.0f) {
                 f += weight;
             }
         }
-        int round = f == 0.0f ? 0 : i == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.round(Math.max(i - min, 0) / f);
+        int iRound = f == 0.0f ? 0 : i == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.round(Math.max(i - iMin, 0) / f);
         int size2 = list2.size();
-        for (int i4 = 0; i4 < size2; i4++) {
-            IntrinsicMeasurable intrinsicMeasurable2 = (IntrinsicMeasurable) list.get(i4);
+        for (int i3 = 0; i3 < size2; i3++) {
+            IntrinsicMeasurable intrinsicMeasurable2 = (IntrinsicMeasurable) list.get(i3);
             float weight2 = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable2));
             if (weight2 > 0.0f) {
-                i2 = Math.max(i2, intrinsicMeasurable2.maxIntrinsicWidth(round != Integer.MAX_VALUE ? Math.round(round * weight2) : Integer.MAX_VALUE));
+                iMax = Math.max(iMax, intrinsicMeasurable2.maxIntrinsicWidth(iRound != Integer.MAX_VALUE ? Math.round(iRound * weight2) : Integer.MAX_VALUE));
             }
         }
-        return i2;
+        return iMax;
     }
 
     @Override // androidx.compose.ui.layout.MeasurePolicy
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo3measure3p2s80s(MeasureScope measureScope, List list, long j) {
-        return RowColumnMeasurePolicyKt.measure(this, Constraints.m822getMinHeightimpl(j), Constraints.m823getMinWidthimpl(j), Constraints.m820getMaxHeightimpl(j), Constraints.m821getMaxWidthimpl(j), measureScope.mo51roundToPx0680j_4(this.verticalArrangement.mo94getSpacingD9Ej5fM()), measureScope, list, new Placeable[list.size()], 0, list.size(), null, 0);
+        return RowColumnMeasurePolicyKt.measure(this, Constraints.m824getMinHeightimpl(j), Constraints.m825getMinWidthimpl(j), Constraints.m822getMaxHeightimpl(j), Constraints.m823getMaxWidthimpl(j), measureScope.mo52roundToPx0680j_4(this.verticalArrangement.mo95getSpacingD9Ej5fM()), measureScope, list, new Placeable[list.size()], 0, list.size(), null, 0);
     }
 
     @Override // androidx.compose.ui.layout.MeasurePolicy
     public final int minIntrinsicHeight(IntrinsicMeasureScope intrinsicMeasureScope, List list, int i) {
         IntrinsicMeasureBlocks intrinsicMeasureBlocks = IntrinsicMeasureBlocks.INSTANCE;
-        int mo51roundToPx0680j_4 = intrinsicMeasureScope.mo51roundToPx0680j_4(this.verticalArrangement.mo94getSpacingD9Ej5fM());
+        int iMo52roundToPx0680j_4 = intrinsicMeasureScope.mo52roundToPx0680j_4(this.verticalArrangement.mo95getSpacingD9Ej5fM());
         intrinsicMeasureBlocks.getClass();
         if (list.isEmpty()) {
             return 0;
         }
         int size = list.size();
-        int i2 = 0;
-        int i3 = 0;
-        float f = 0.0f;
-        for (int i4 = 0; i4 < size; i4++) {
-            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i4);
-            float weight = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable));
-            int minIntrinsicHeight = intrinsicMeasurable.minIntrinsicHeight(i);
-            if (weight == 0.0f) {
-                i3 += minIntrinsicHeight;
-            } else if (weight > 0.0f) {
-                f += weight;
-                i2 = Math.max(i2, Math.round(minIntrinsicHeight / weight));
-            }
-        }
-        return ((list.size() - 1) * mo51roundToPx0680j_4) + Math.round(i2 * f) + i3;
-    }
-
-    @Override // androidx.compose.ui.layout.MeasurePolicy
-    public final int minIntrinsicWidth(IntrinsicMeasureScope intrinsicMeasureScope, List list, int i) {
-        IntrinsicMeasureBlocks intrinsicMeasureBlocks = IntrinsicMeasureBlocks.INSTANCE;
-        int mo51roundToPx0680j_4 = intrinsicMeasureScope.mo51roundToPx0680j_4(this.verticalArrangement.mo94getSpacingD9Ej5fM());
-        intrinsicMeasureBlocks.getClass();
-        if (list.isEmpty()) {
-            return 0;
-        }
-        int min = Math.min((list.size() - 1) * mo51roundToPx0680j_4, i);
-        List list2 = list;
-        int size = list2.size();
+        int iMax = 0;
         int i2 = 0;
         float f = 0.0f;
         for (int i3 = 0; i3 < size; i3++) {
             IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i3);
             float weight = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable));
+            int iMinIntrinsicHeight = intrinsicMeasurable.minIntrinsicHeight(i);
             if (weight == 0.0f) {
-                int min2 = Math.min(intrinsicMeasurable.maxIntrinsicHeight(Integer.MAX_VALUE), i == Integer.MAX_VALUE ? Integer.MAX_VALUE : i - min);
-                min += min2;
-                i2 = Math.max(i2, intrinsicMeasurable.minIntrinsicWidth(min2));
+                i2 += iMinIntrinsicHeight;
+            } else if (weight > 0.0f) {
+                f += weight;
+                iMax = Math.max(iMax, Math.round(iMinIntrinsicHeight / weight));
+            }
+        }
+        return ((list.size() - 1) * iMo52roundToPx0680j_4) + Math.round(iMax * f) + i2;
+    }
+
+    @Override // androidx.compose.ui.layout.MeasurePolicy
+    public final int minIntrinsicWidth(IntrinsicMeasureScope intrinsicMeasureScope, List list, int i) {
+        IntrinsicMeasureBlocks intrinsicMeasureBlocks = IntrinsicMeasureBlocks.INSTANCE;
+        int iMo52roundToPx0680j_4 = intrinsicMeasureScope.mo52roundToPx0680j_4(this.verticalArrangement.mo95getSpacingD9Ej5fM());
+        intrinsicMeasureBlocks.getClass();
+        if (list.isEmpty()) {
+            return 0;
+        }
+        int iMin = Math.min((list.size() - 1) * iMo52roundToPx0680j_4, i);
+        List list2 = list;
+        int size = list2.size();
+        int iMax = 0;
+        float f = 0.0f;
+        for (int i2 = 0; i2 < size; i2++) {
+            IntrinsicMeasurable intrinsicMeasurable = (IntrinsicMeasurable) list.get(i2);
+            float weight = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable));
+            if (weight == 0.0f) {
+                int iMin2 = Math.min(intrinsicMeasurable.maxIntrinsicHeight(Integer.MAX_VALUE), i == Integer.MAX_VALUE ? Integer.MAX_VALUE : i - iMin);
+                iMin += iMin2;
+                iMax = Math.max(iMax, intrinsicMeasurable.minIntrinsicWidth(iMin2));
             } else if (weight > 0.0f) {
                 f += weight;
             }
         }
-        int round = f == 0.0f ? 0 : i == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.round(Math.max(i - min, 0) / f);
+        int iRound = f == 0.0f ? 0 : i == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.round(Math.max(i - iMin, 0) / f);
         int size2 = list2.size();
-        for (int i4 = 0; i4 < size2; i4++) {
-            IntrinsicMeasurable intrinsicMeasurable2 = (IntrinsicMeasurable) list.get(i4);
+        for (int i3 = 0; i3 < size2; i3++) {
+            IntrinsicMeasurable intrinsicMeasurable2 = (IntrinsicMeasurable) list.get(i3);
             float weight2 = RowColumnImplKt.getWeight(RowColumnImplKt.getRowColumnParentData(intrinsicMeasurable2));
             if (weight2 > 0.0f) {
-                i2 = Math.max(i2, intrinsicMeasurable2.minIntrinsicWidth(round != Integer.MAX_VALUE ? Math.round(round * weight2) : Integer.MAX_VALUE));
+                iMax = Math.max(iMax, intrinsicMeasurable2.minIntrinsicWidth(iRound != Integer.MAX_VALUE ? Math.round(iRound * weight2) : Integer.MAX_VALUE));
             }
         }
-        return i2;
+        return iMax;
     }
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy
     public final MeasureResult placeHelper(final Placeable[] placeableArr, final MeasureScope measureScope, final int[] iArr, int i, final int i2, int[] iArr2, int i3, int i4, int i5) {
-        MeasureResult layout$1;
         final int i6 = 0;
-        layout$1 = measureScope.layout$1(i2, i, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.ColumnMeasurePolicy$placeHelper$1$1
+        return measureScope.layout$1(i2, i, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.ColumnMeasurePolicy$placeHelper$1$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -206,7 +204,7 @@ public final class ColumnMeasurePolicy implements MeasurePolicy, RowColumnMeasur
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
                 Placeable[] placeableArr2 = placeableArr;
                 ColumnMeasurePolicy columnMeasurePolicy = this;
@@ -232,7 +230,6 @@ public final class ColumnMeasurePolicy implements MeasurePolicy, RowColumnMeasur
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy

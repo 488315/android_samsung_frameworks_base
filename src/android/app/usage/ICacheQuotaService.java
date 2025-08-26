@@ -47,9 +47,9 @@ public interface ICacheQuotaService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICacheQuotaService)) {
-                return (ICacheQuotaService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICacheQuotaService)) {
+                return (ICacheQuotaService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,9 +77,9 @@ public interface ICacheQuotaService extends IInterface {
             }
             if (i == 1) {
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(CacheQuotaHint.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CacheQuotaHint.CREATOR);
                 parcel.enforceNoDataAvail();
-                computeCacheQuotaHints(remoteCallback, createTypedArrayList);
+                computeCacheQuotaHints(remoteCallback, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,14 +103,14 @@ public interface ICacheQuotaService extends IInterface {
 
             @Override // android.app.usage.ICacheQuotaService
             public void computeCacheQuotaHints(RemoteCallback remoteCallback, List<CacheQuotaHint> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -76,7 +76,9 @@ public class AttestationVerificationManager {
         executor.execute(new Runnable() { // from class: android.security.attestationverification.AttestationVerificationManager$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                biConsumer.accept(Integer.valueOf(r1.resultCode), iVerificationResult.token);
+                BiConsumer biConsumer2 = biConsumer;
+                IVerificationResult iVerificationResult2 = iVerificationResult;
+                biConsumer2.accept(Integer.valueOf(iVerificationResult2.resultCode), iVerificationResult2.token);
             }
         });
     }

@@ -1,17 +1,32 @@
 package com.android.systemui.keyguard.data.repository;
 
 import android.app.trust.TrustManager;
+import android.content.pm.UserInfo;
+import com.android.keyguard.TrustGrantFlags;
 import com.android.keyguard.logging.TrustRepositoryLogger;
+import com.android.keyguard.logging.TrustRepositoryLogger$$ExternalSyntheticLambda0;
+import com.android.systemui.keyguard.shared.model.ActiveUnlockModel;
+import com.android.systemui.keyguard.shared.model.TrustManagedModel;
 import com.android.systemui.keyguard.shared.model.TrustModel;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.user.data.repository.UserRepository;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.AdaptedFunctionReference;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -26,7 +41,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TrustRepositoryImpl implements TrustRepository {
     public final CoroutineScope applicationScope;
@@ -41,6 +55,206 @@ public final class TrustRepositoryImpl implements TrustRepository {
     public final Map activeUnlockRunningForUser = new LinkedHashMap();
     public final Map trustManagedForUser = new LinkedHashMap();
 
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrustManaged$3, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
+        public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
+
+        public AnonymousClass3() {
+            super(3, Pair.class, "<init>", "<init>(Ljava/lang/Object;Ljava/lang/Object;)V", 4);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            return new Pair(obj, (UserInfo) obj2);
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrustManaged$5, reason: invalid class name */
+    final class AnonymousClass5 extends SuspendLambda implements Function2 {
+        /* synthetic */ boolean Z$0;
+        int label;
+
+        public AnonymousClass5(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass5 anonymousClass5 = TrustRepositoryImpl.this.new AnonymousClass5(continuation);
+            anonymousClass5.Z$0 = ((Boolean) obj).booleanValue();
+            return anonymousClass5;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            Boolean bool = (Boolean) obj;
+            bool.booleanValue();
+            return ((AnonymousClass5) create(bool, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            boolean z = this.Z$0;
+            TrustRepositoryLogger trustRepositoryLogger = TrustRepositoryImpl.this.logger;
+            trustRepositoryLogger.getClass();
+            LogLevel logLevel = LogLevel.DEBUG;
+            TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda0 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(4);
+            LogBuffer logBuffer = trustRepositoryLogger.logBuffer;
+            LogMessage logMessageObtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrustManaged$6, reason: invalid class name */
+    final class AnonymousClass6 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass6(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass6 anonymousClass6 = new AnonymousClass6(continuation);
+            anonymousClass6.L$0 = obj;
+            return anonymousClass6;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass6) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                Boolean bool = Boolean.FALSE;
+                this.label = 1;
+                if (flowCollector.emit(bool, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrusted$3, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C09013 extends AdaptedFunctionReference implements Function3 {
+        public static final C09013 INSTANCE = new C09013();
+
+        public C09013() {
+            super(3, Pair.class, "<init>", "<init>(Ljava/lang/Object;Ljava/lang/Object;)V", 4);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            return new Pair(obj, (UserInfo) obj2);
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrusted$5, reason: invalid class name and case insensitive filesystem */
+    final class C09025 extends SuspendLambda implements Function2 {
+        /* synthetic */ boolean Z$0;
+        int label;
+
+        public C09025(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C09025 c09025 = TrustRepositoryImpl.this.new C09025(continuation);
+            c09025.Z$0 = ((Boolean) obj).booleanValue();
+            return c09025;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            Boolean bool = (Boolean) obj;
+            bool.booleanValue();
+            return ((C09025) create(bool, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            boolean z = this.Z$0;
+            TrustRepositoryLogger trustRepositoryLogger = TrustRepositoryImpl.this.logger;
+            trustRepositoryLogger.getClass();
+            LogLevel logLevel = LogLevel.DEBUG;
+            TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda0 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(3);
+            LogBuffer logBuffer = trustRepositoryLogger.logBuffer;
+            LogMessage logMessageObtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$isCurrentUserTrusted$6, reason: invalid class name and case insensitive filesystem */
+    final class C09036 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public C09036(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C09036 c09036 = new C09036(continuation);
+            c09036.L$0 = obj;
+            return c09036;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09036) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                Boolean bool = Boolean.FALSE;
+                this.label = 1;
+                if (flowCollector.emit(bool, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     public TrustRepositoryImpl(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, UserRepository userRepository, TrustManager trustManager, TrustRepositoryLogger trustRepositoryLogger) {
         this.applicationScope = coroutineScope;
         this.backgroundDispatcher = coroutineDispatcher;
@@ -50,13 +264,12 @@ public final class TrustRepositoryImpl implements TrustRepository {
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowConflatedKt.conflatedCallbackFlow(new TrustRepositoryImpl$trust$1(this, null)), new TrustRepositoryImpl$trust$2(this, null));
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
-        ReadonlySharedFlow shareIn = FlowKt.shareIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, startedEagerly, 1);
-        this.trust = shareIn;
+        ReadonlySharedFlow readonlySharedFlowShareIn = FlowKt.shareIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, startedEagerly, 1);
+        this.trust = readonlySharedFlowShareIn;
         UserRepositoryImpl userRepositoryImpl = (UserRepositoryImpl) userRepository;
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(shareIn, userRepositoryImpl.selectedUserInfo, TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$3.INSTANCE);
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlySharedFlowShareIn, userRepositoryImpl.selectedUserInfo, TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$3.INSTANCE);
         this.isCurrentUserActiveUnlockRunning = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$6(this, null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -85,81 +298,47 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L62
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl r6 = r4.this$0
-                        java.util.Map r6 = r6.activeUnlockRunningForUser
-                        java.lang.Object r5 = r5.getSecond()
-                        android.content.pm.UserInfo r5 = (android.content.pm.UserInfo) r5
-                        int r5 = r5.id
-                        java.lang.Integer r2 = new java.lang.Integer
-                        r2.<init>(r5)
-                        java.util.LinkedHashMap r6 = (java.util.LinkedHashMap) r6
-                        java.lang.Object r5 = r6.get(r2)
-                        com.android.systemui.keyguard.shared.model.ActiveUnlockModel r5 = (com.android.systemui.keyguard.shared.model.ActiveUnlockModel) r5
-                        if (r5 == 0) goto L52
-                        boolean r5 = r5.isRunning
-                        goto L53
-                    L52:
-                        r5 = 0
-                    L53:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L62
-                        return r1
-                    L62:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ActiveUnlockModel activeUnlockModel = (ActiveUnlockModel) ((LinkedHashMap) this.this$0.activeUnlockRunningForUser).get(new Integer(((UserInfo) ((Pair) obj).getSecond()).id));
+                        Boolean boolValueOf = Boolean.valueOf(activeUnlockModel != null ? activeUnlockModel.isRunning : false);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$5(this, null)));
         this.isCurrentUserTrustUsuallyManaged = FlowKt.stateIn(FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new TrustRepositoryImpl$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, startedEagerly, Boolean.FALSE);
@@ -168,9 +347,8 @@ public final class TrustRepositoryImpl implements TrustRepository {
     /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4] */
     public final TrustRepositoryImpl$special$$inlined$map$4 getTrustAgentRequestingToDismissKeyguard() {
         final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, ((UserRepositoryImpl) this.userRepository).selectedUserInfo, TrustRepositoryImpl$trustAgentRequestingToDismissKeyguard$3.INSTANCE);
-        final Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3
+        final Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -199,78 +377,50 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L56
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl r6 = r4.this$0
-                        java.util.Map r6 = r6.latestTrustModelForUser
-                        java.lang.Object r5 = r5.getSecond()
-                        android.content.pm.UserInfo r5 = (android.content.pm.UserInfo) r5
-                        int r5 = r5.id
-                        java.lang.Integer r2 = new java.lang.Integer
-                        r2.<init>(r5)
-                        java.util.LinkedHashMap r6 = (java.util.LinkedHashMap) r6
-                        java.lang.Object r5 = r6.get(r2)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L56
-                        return r1
-                    L56:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Object obj3 = ((LinkedHashMap) this.this$0.latestTrustModelForUser).get(new Integer(((UserInfo) ((Pair) obj).getSecond()).id));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(obj3, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         final Flow flow = new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -298,80 +448,55 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L50
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.TrustModel r6 = (com.android.systemui.keyguard.shared.model.TrustModel) r6
-                        if (r6 == 0) goto L50
-                        com.android.keyguard.TrustGrantFlags r6 = r6.flags
-                        int r2 = r6.mFlags
-                        r2 = r2 & r3
-                        if (r2 == 0) goto L3f
-                        goto L45
-                    L3f:
-                        boolean r6 = r6.dismissKeyguardRequested()
-                        if (r6 == 0) goto L50
-                    L45:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L50
-                        return r1
-                    L50:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        TrustModel trustModel = (TrustModel) obj;
+                        if (trustModel != null) {
+                            TrustGrantFlags trustGrantFlags = trustModel.flags;
+                            if ((trustGrantFlags.mFlags & 1) != 0 || trustGrantFlags.dismissKeyguardRequested()) {
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowDistinctUntilChanged.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         return new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -398,74 +523,55 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L42
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.keyguard.shared.model.TrustModel r5 = (com.android.systemui.keyguard.shared.model.TrustModel) r5
-                        r5.getClass()
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L42
-                        return r1
-                    L42:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        TrustModel trustModel = (TrustModel) obj;
+                        trustModel.getClass();
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(trustModel, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
     }
 
     public final ReadonlyStateFlow isCurrentUserTrustManaged() {
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, ((UserRepositoryImpl) this.userRepository).selectedUserInfo, TrustRepositoryImpl$isCurrentUserTrustManaged$3.INSTANCE);
-        return FlowKt.stateIn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new TrustRepositoryImpl$isCurrentUserTrustManaged$6(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, ((UserRepositoryImpl) this.userRepository).selectedUserInfo, AnonymousClass3.INSTANCE);
+        return FlowKt.stateIn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass6(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -494,90 +600,56 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L61
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.getSecond()
-                        android.content.pm.UserInfo r5 = (android.content.pm.UserInfo) r5
-                        int r5 = r5.id
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl r6 = r4.this$0
-                        java.util.Map r6 = r6.trustManagedForUser
-                        java.lang.Integer r5 = java.lang.Integer.valueOf(r5)
-                        java.util.LinkedHashMap r6 = (java.util.LinkedHashMap) r6
-                        java.lang.Object r5 = r6.get(r5)
-                        com.android.systemui.keyguard.shared.model.TrustManagedModel r5 = (com.android.systemui.keyguard.shared.model.TrustManagedModel) r5
-                        if (r5 == 0) goto L51
-                        boolean r5 = r5.isTrustManaged
-                        goto L52
-                    L51:
-                        r5 = 0
-                    L52:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L61
-                        return r1
-                    L61:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        TrustManagedModel trustManagedModel = (TrustManagedModel) ((LinkedHashMap) this.this$0.trustManagedForUser).get(Integer.valueOf(((UserInfo) ((Pair) obj).getSecond()).id));
+                        Boolean boolValueOf = Boolean.valueOf(trustManagedModel != null ? trustManagedModel.isTrustManaged : false);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }), new TrustRepositoryImpl$isCurrentUserTrustManaged$5(this, null))), this.applicationScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.FALSE);
+        }), new AnonymousClass5(null))), this.applicationScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.FALSE);
     }
 
     public final ReadonlyStateFlow isCurrentUserTrusted() {
         UserRepositoryImpl userRepositoryImpl = (UserRepositoryImpl) this.userRepository;
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, userRepositoryImpl.selectedUserInfo, TrustRepositoryImpl$isCurrentUserTrusted$3.INSTANCE);
-        FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new TrustRepositoryImpl$isCurrentUserTrusted$6(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.trust, userRepositoryImpl.selectedUserInfo, C09013.INSTANCE);
+        FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new C09036(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -606,84 +678,51 @@ public final class TrustRepositoryImpl implements TrustRepository {
                     this.this$0 = trustRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5$2$1 r0 = (com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5$2$1 r0 = new com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L61
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.getSecond()
-                        android.content.pm.UserInfo r5 = (android.content.pm.UserInfo) r5
-                        int r5 = r5.id
-                        com.android.systemui.keyguard.data.repository.TrustRepositoryImpl r6 = r4.this$0
-                        java.util.Map r6 = r6.latestTrustModelForUser
-                        java.lang.Integer r5 = java.lang.Integer.valueOf(r5)
-                        java.util.LinkedHashMap r6 = (java.util.LinkedHashMap) r6
-                        java.lang.Object r5 = r6.get(r5)
-                        com.android.systemui.keyguard.shared.model.TrustModel r5 = (com.android.systemui.keyguard.shared.model.TrustModel) r5
-                        if (r5 == 0) goto L51
-                        boolean r5 = r5.isTrusted
-                        goto L52
-                    L51:
-                        r5 = 0
-                    L52:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L61
-                        return r1
-                    L61:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$special$$inlined$map$5.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        TrustModel trustModel = (TrustModel) ((LinkedHashMap) this.this$0.latestTrustModelForUser).get(Integer.valueOf(((UserInfo) ((Pair) obj).getSecond()).id));
+                        Boolean boolValueOf = Boolean.valueOf(trustModel != null ? trustModel.isTrusted : false);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }), new TrustRepositoryImpl$isCurrentUserTrusted$5(this, null)));
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3);
+        }), new C09025(null)));
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3);
         TrustModel trustModel = (TrustModel) ((LinkedHashMap) this.latestTrustModelForUser).get(Integer.valueOf(userRepositoryImpl.getSelectedUserInfo().id));
-        return FlowKt.stateIn(flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, this.applicationScope, WhileSubscribed$default, Boolean.valueOf(trustModel != null ? trustModel.isTrusted : false));
+        return FlowKt.stateIn(flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, this.applicationScope, startedWhileSubscribedWhileSubscribed$default, Boolean.valueOf(trustModel != null ? trustModel.isTrusted : false));
     }
 }

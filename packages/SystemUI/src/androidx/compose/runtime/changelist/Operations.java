@@ -8,7 +8,6 @@ import java.util.Arrays;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Operations extends OperationsDebugStringFormattable {
     public int intArgsSize;
@@ -18,7 +17,6 @@ public final class Operations extends OperationsDebugStringFormattable {
     public int[] intArgs = new int[16];
     public Object[] objectArgs = new Object[16];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OpIterator {
         public int intIdx;
         public int objIdx;
@@ -32,22 +30,21 @@ public final class Operations extends OperationsDebugStringFormattable {
         }
 
         /* renamed from: getObject-31yXWZQ, reason: not valid java name */
-        public final Object m337getObject31yXWZQ(int i) {
+        public final Object m338getObject31yXWZQ(int i) {
             return Operations.this.objectArgs[this.objIdx + i];
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WriteScope {
         public final Operations stack;
 
         /* renamed from: setObject-DKhxnng, reason: not valid java name */
-        public static final void m338setObjectDKhxnng(Operations operations, int i, Object obj) {
+        public static final void m339setObjectDKhxnng(Operations operations, int i, Object obj) {
             operations.objectArgs[(operations.objectArgsSize - operations.opCodes[operations.opCodesSize - 1].objects) + i] = obj;
         }
 
         /* renamed from: setObjects-4uCC6AY, reason: not valid java name */
-        public static final void m339setObjects4uCC6AY(Operations operations, int i, Object obj, int i2, Object obj2) {
+        public static final void m340setObjects4uCC6AY(Operations operations, int i, Object obj, int i2, Object obj2) {
             int i3 = operations.objectArgsSize - operations.opCodes[operations.opCodesSize - 1].objects;
             Object[] objArr = operations.objectArgs;
             objArr[i + i3] = obj;
@@ -55,7 +52,7 @@ public final class Operations extends OperationsDebugStringFormattable {
         }
 
         /* renamed from: setObjects-t7hvbck, reason: not valid java name */
-        public static final void m340setObjectst7hvbck(Operations operations, Object obj, Object obj2, Object obj3) {
+        public static final void m341setObjectst7hvbck(Operations operations, Object obj, Object obj2, Object obj3) {
             int i = operations.objectArgsSize - operations.opCodes[operations.opCodesSize - 1].objects;
             Object[] objArr = operations.objectArgs;
             objArr[i] = obj;

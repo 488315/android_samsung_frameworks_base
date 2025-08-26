@@ -61,14 +61,14 @@ public final class Channel implements java.nio.channels.Channel {
     }
 
     public byte[] transmit(byte[] bArr) throws IOException {
-        byte[] transmit;
+        byte[] bArrTransmit;
         if (!this.mService.isConnected()) {
             throw new IllegalStateException("service not connected to system");
         }
         synchronized (this.mLock) {
             try {
-                transmit = this.mChannel.transmit(bArr);
-                if (transmit == null) {
+                bArrTransmit = this.mChannel.transmit(bArr);
+                if (bArrTransmit == null) {
                     throw new IOException("Error in communicating with Secure Element");
                 }
             } catch (RemoteException e) {
@@ -77,7 +77,7 @@ public final class Channel implements java.nio.channels.Channel {
                 throw new IOException(e2.getMessage());
             }
         }
-        return transmit;
+        return bArrTransmit;
     }
 
     public Session getSession() {
@@ -100,15 +100,15 @@ public final class Channel implements java.nio.channels.Channel {
     }
 
     public boolean selectNext() throws IOException {
-        boolean selectNext;
+        boolean zSelectNext;
         if (!this.mService.isConnected()) {
             throw new IllegalStateException("service not connected to system");
         }
         try {
             synchronized (this.mLock) {
-                selectNext = this.mChannel.selectNext();
+                zSelectNext = this.mChannel.selectNext();
             }
-            return selectNext;
+            return zSelectNext;
         } catch (RemoteException e) {
             throw new IllegalStateException(e.getMessage());
         } catch (ServiceSpecificException e2) {

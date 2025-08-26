@@ -33,7 +33,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
     public final SparseArray mAffordanceControllerList;
@@ -46,7 +45,6 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
     public final SparseArray mTasks;
     public final Optional mWindowDecorViewModelOptional;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class State {
         public SurfaceControl mLeash;
         public ActivityManager.RunningTaskInfo mTaskInfo;
@@ -65,11 +63,11 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
 
     public final void animForAffordance(int i, int i2) {
         final AffordanceAnimController affordanceAnimController;
-        Keyframe[] keyframeArr;
+        Keyframe[] keyFrames;
         State state = (State) this.mTasks.get(i);
         if (state != null) {
             int i3 = state.mTaskInfo.displayId;
-            Keyframe[] keyframeArr2 = null;
+            Keyframe[] keyFrames2 = null;
             if (this.mContext == null) {
                 affordanceAnimController = null;
             } else {
@@ -96,25 +94,25 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                 affordanceAnimController.mDisplayContext.getDisplay().getMetrics(displayMetrics);
                 float f = displayMetrics.density;
                 if ((i2 & 4) != 0) {
-                    keyframeArr = affordanceAnimController.getKeyFrames(f, true, (i2 & 1) != 0);
+                    keyFrames = affordanceAnimController.getKeyFrames(f, true, (i2 & 1) != 0);
                 } else if ((i2 & 8) != 0) {
-                    keyframeArr = affordanceAnimController.getKeyFrames(f, false, (i2 & 1) != 0);
+                    keyFrames = affordanceAnimController.getKeyFrames(f, false, (i2 & 1) != 0);
                 } else {
-                    keyframeArr = null;
+                    keyFrames = null;
                 }
                 if ((i2 & 1) != 0) {
-                    keyframeArr2 = affordanceAnimController.getKeyFrames(f, true, (i2 & 12) != 0);
+                    keyFrames2 = affordanceAnimController.getKeyFrames(f, true, (i2 & 12) != 0);
                 } else if ((i2 & 2) != 0) {
-                    keyframeArr2 = affordanceAnimController.getKeyFrames(f, false, false);
+                    keyFrames2 = affordanceAnimController.getKeyFrames(f, false, false);
                 }
-                if (keyframeArr == null && keyframeArr2 == null) {
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                    affordanceAnimController.mAnimator = ofFloat;
-                    ofFloat.setDuration(affordanceAnimController.mAnimation.getDuration());
+                if (keyFrames == null && keyFrames2 == null) {
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                    affordanceAnimController.mAnimator = valueAnimatorOfFloat;
+                    valueAnimatorOfFloat.setDuration(affordanceAnimController.mAnimation.getDuration());
                     affordanceAnimController.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.fullscreen.AffordanceAnimController$$ExternalSyntheticLambda0
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            AffordanceAnimController affordanceAnimController2 = AffordanceAnimController.this;
+                            AffordanceAnimController affordanceAnimController2 = affordanceAnimController;
                             SurfaceControl surfaceControl2 = surfaceControl;
                             affordanceAnimController2.mTmpTransformation.clear();
                             affordanceAnimController2.mAnimation.getTransformation(AnimationUtils.currentAnimationTimeMillis(), affordanceAnimController2.mTmpTransformation);
@@ -126,19 +124,19 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                         public final /* synthetic */ SurfaceControl val$leash;
 
                         public AnonymousClass2(final SurfaceControl surfaceControl2) {
-                            r2 = surfaceControl2;
+                            surfaceControl = surfaceControl2;
                         }
 
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
                             AffordanceAnimController.this.mAnimation.cancel();
                             AffordanceAnimController affordanceAnimController2 = AffordanceAnimController.this;
-                            affordanceAnimController2.mTransaction.setMatrix(r2, Matrix.IDENTITY_MATRIX, affordanceAnimController2.mTmpFloat9);
+                            affordanceAnimController2.mTransaction.setMatrix(surfaceControl, Matrix.IDENTITY_MATRIX, affordanceAnimController2.mTmpFloat9);
                             affordanceAnimController2.mTransaction.apply();
                             AffordanceAnimController affordanceAnimController3 = AffordanceAnimController.this;
                             if (affordanceAnimController3.mRadius != 0.0f) {
-                                affordanceAnimController3.mTransaction.setWindowCrop(r2, 0, 0);
-                                AffordanceAnimController.this.mTransaction.setCornerRadius(r2, 0.0f);
+                                affordanceAnimController3.mTransaction.setWindowCrop(surfaceControl, 0, 0);
+                                AffordanceAnimController.this.mTransaction.setCornerRadius(surfaceControl, 0.0f);
                             }
                         }
 
@@ -149,9 +147,9 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                             AffordanceAnimController.this.mAnimation.start();
                             AffordanceAnimController affordanceAnimController3 = AffordanceAnimController.this;
                             if (affordanceAnimController3.mRadius != 0.0f) {
-                                affordanceAnimController3.mTransaction.setWindowCrop(r2, affordanceAnimController3.mBounds.width(), AffordanceAnimController.this.mBounds.height());
+                                affordanceAnimController3.mTransaction.setWindowCrop(surfaceControl, affordanceAnimController3.mBounds.width(), AffordanceAnimController.this.mBounds.height());
                                 AffordanceAnimController affordanceAnimController4 = AffordanceAnimController.this;
-                                affordanceAnimController4.mTransaction.setCornerRadius(r2, affordanceAnimController4.mRadius);
+                                affordanceAnimController4.mTransaction.setCornerRadius(surfaceControl, affordanceAnimController4.mRadius);
                             }
                         }
                     });
@@ -159,11 +157,11 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                     return;
                 }
                 ArrayList arrayList = new ArrayList();
-                if (keyframeArr != null) {
-                    arrayList.add(PropertyValuesHolder.ofKeyframe(AffordanceAnimController.AnimTarget.X, keyframeArr));
+                if (keyFrames != null) {
+                    arrayList.add(PropertyValuesHolder.ofKeyframe(AffordanceAnimController.AnimTarget.X, keyFrames));
                 }
-                if (keyframeArr2 != null) {
-                    arrayList.add(PropertyValuesHolder.ofKeyframe(AffordanceAnimController.AnimTarget.Y, keyframeArr2));
+                if (keyFrames2 != null) {
+                    arrayList.add(PropertyValuesHolder.ofKeyframe(AffordanceAnimController.AnimTarget.Y, keyFrames2));
                 }
                 AffordanceAnimController.AnimTarget animTarget = new AffordanceAnimController.AnimTarget(surfaceControl2);
                 ObjectAnimator duration = ObjectAnimator.ofPropertyValuesHolder(animTarget, (PropertyValuesHolder[]) arrayList.toArray(new PropertyValuesHolder[0])).setDuration(500L);
@@ -174,16 +172,16 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                     public final /* synthetic */ SurfaceControl val$leash;
 
                     public AnonymousClass1(final SurfaceControl surfaceControl2) {
-                        r2 = surfaceControl2;
+                        surfaceControl = surfaceControl2;
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        AffordanceAnimController.this.mTransaction.setPosition(r2, 0.0f, 0.0f);
+                        AffordanceAnimController.this.mTransaction.setPosition(surfaceControl, 0.0f, 0.0f);
                         AffordanceAnimController affordanceAnimController2 = AffordanceAnimController.this;
                         if (affordanceAnimController2.mRadius != 0.0f) {
-                            affordanceAnimController2.mTransaction.setWindowCrop(r2, 0, 0);
-                            AffordanceAnimController.this.mTransaction.setCornerRadius(r2, 0.0f);
+                            affordanceAnimController2.mTransaction.setWindowCrop(surfaceControl, 0, 0);
+                            AffordanceAnimController.this.mTransaction.setCornerRadius(surfaceControl, 0.0f);
                         }
                         AffordanceAnimController.this.mTransaction.apply();
                     }
@@ -192,9 +190,9 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
                     public final void onAnimationStart(Animator animator) {
                         AffordanceAnimController affordanceAnimController2 = AffordanceAnimController.this;
                         if (affordanceAnimController2.mRadius != 0.0f) {
-                            affordanceAnimController2.mTransaction.setWindowCrop(r2, affordanceAnimController2.mBounds.width(), AffordanceAnimController.this.mBounds.height());
+                            affordanceAnimController2.mTransaction.setWindowCrop(surfaceControl, affordanceAnimController2.mBounds.width(), AffordanceAnimController.this.mBounds.height());
                             AffordanceAnimController affordanceAnimController3 = AffordanceAnimController.this;
-                            affordanceAnimController3.mTransaction.setCornerRadius(r2, affordanceAnimController3.mRadius);
+                            affordanceAnimController3.mTransaction.setCornerRadius(surfaceControl, affordanceAnimController3.mRadius);
                         }
                         AffordanceAnimController.this.mTransaction.apply();
                     }
@@ -211,9 +209,9 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
     public final void dump$2(PrintWriter printWriter, String str) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         printWriter.println(str + this);
-        printWriter.println(m + this.mTasks.size() + " Tasks");
+        printWriter.println(strM + this.mTasks.size() + " Tasks");
     }
 
     public final SurfaceControl findTaskSurface$1(int i) {
@@ -223,6 +221,7 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
         throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "There is no surface for taskId="));
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
     public final void onTaskAppeared(final ActivityManager.RunningTaskInfo runningTaskInfo, final SurfaceControl surfaceControl) {
         if (this.mTasks.get(runningTaskInfo.taskId) != null) {
@@ -232,7 +231,7 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TASK_ORG, 1427696159067159186L, 1, Long.valueOf(runningTaskInfo.taskId));
         }
         final Point point = runningTaskInfo.positionInParent;
-        boolean z = false;
+        boolean zOnTaskOpening = false;
         State state = new State(0 == true ? 1 : 0);
         state.mLeash = surfaceControl;
         state.mTaskInfo = runningTaskInfo;
@@ -243,10 +242,10 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
         this.mRecentTasksOptional.ifPresent(new FullscreenTaskListener$$ExternalSyntheticLambda1(runningTaskInfo, 2));
         if (this.mWindowDecorViewModelOptional.isPresent()) {
             SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-            z = ((WindowDecorViewModel) this.mWindowDecorViewModelOptional.get()).onTaskOpening(runningTaskInfo, surfaceControl, transaction, transaction);
+            zOnTaskOpening = ((WindowDecorViewModel) this.mWindowDecorViewModelOptional.get()).onTaskOpening(runningTaskInfo, surfaceControl, transaction, transaction);
             transaction.apply();
         }
-        if (z) {
+        if (zOnTaskOpening) {
             return;
         }
         this.mSyncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda5
@@ -283,14 +282,14 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
         }
         this.mRecentTasksOptional.ifPresent(new FullscreenTaskListener$$ExternalSyntheticLambda1(runningTaskInfo, 2));
         final Point point2 = state.mTaskInfo.positionInParent;
-        boolean equals = point.equals(point2);
+        boolean zEquals = point.equals(point2);
         final boolean z2 = !z && state.mTaskInfo.isVisible;
-        if (z2 || !equals) {
+        if (z2 || !zEquals) {
             this.mSyncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda3
                 @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
                 public final void runWithTransaction(SurfaceControl.Transaction transaction) {
                     Point point3 = point2;
-                    FullscreenTaskListener.State state2 = FullscreenTaskListener.State.this;
+                    FullscreenTaskListener.State state2 = state;
                     if (state2.mLeash.isValid()) {
                         if (z2) {
                             transaction.show(state2.mLeash);
@@ -320,11 +319,6 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
         transaction.reparent(surfaceControl, findTaskSurface$1(i));
     }
 
-    @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
-    public final boolean supportCompatUI$1() {
-        return true;
-    }
-
     public final String toString() {
         return "FullscreenTaskListener:" + ShellTaskOrganizer.taskListenerTypeToString(-2);
     }
@@ -343,7 +337,7 @@ public class FullscreenTaskListener implements ShellTaskOrganizer.TaskListener {
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FullscreenTaskListener fullscreenTaskListener = FullscreenTaskListener.this;
+                    FullscreenTaskListener fullscreenTaskListener = this.f$0;
                     fullscreenTaskListener.mShellTaskOrganizer.addListenerForType(fullscreenTaskListener, -2);
                     fullscreenTaskListener.mSplitScreenControllerOptional.ifPresent(new FullscreenTaskListener$$ExternalSyntheticLambda1(fullscreenTaskListener, 3));
                 }

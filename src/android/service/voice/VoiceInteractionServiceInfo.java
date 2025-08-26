@@ -52,62 +52,62 @@ public class VoiceInteractionServiceInfo {
             return;
         }
         try {
-            XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, VoiceInteractionService.SERVICE_META_DATA);
+            XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, VoiceInteractionService.SERVICE_META_DATA);
             try {
-                if (loadXmlMetaData == null) {
+                if (xmlResourceParserLoadXmlMetaData == null) {
                     this.mParseError = "No android.voice_interaction meta-data for " + serviceInfo.packageName;
-                    if (loadXmlMetaData == null) {
+                    if (xmlResourceParserLoadXmlMetaData == null) {
                         return;
                     }
                 } else {
                     Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-                    AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
+                    AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
                     do {
-                        next = loadXmlMetaData.next();
+                        next = xmlResourceParserLoadXmlMetaData.next();
                         if (next == 1) {
                             break;
                         }
                     } while (next != 2);
-                    if (!"voice-interaction-service".equals(loadXmlMetaData.getName())) {
+                    if (!"voice-interaction-service".equals(xmlResourceParserLoadXmlMetaData.getName())) {
                         this.mParseError = "Meta-data does not start with voice-interaction-service tag";
-                        if (loadXmlMetaData == null) {
+                        if (xmlResourceParserLoadXmlMetaData == null) {
                             return;
                         }
                     } else {
-                        TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.VoiceInteractionService);
-                        this.mSessionService = obtainAttributes.getString(1);
-                        this.mRecognitionService = obtainAttributes.getString(2);
-                        this.mSettingsActivity = obtainAttributes.getString(0);
-                        this.mSupportsAssist = obtainAttributes.getBoolean(3, false);
-                        this.mSupportsLaunchFromKeyguard = obtainAttributes.getBoolean(4, false);
-                        this.mSupportsLocalInteraction = obtainAttributes.getBoolean(5, false);
-                        this.mHotwordDetectionService = obtainAttributes.getString(6);
-                        this.mVisualQueryDetectionService = obtainAttributes.getString(7);
-                        obtainAttributes.recycle();
+                        TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.VoiceInteractionService);
+                        this.mSessionService = typedArrayObtainAttributes.getString(1);
+                        this.mRecognitionService = typedArrayObtainAttributes.getString(2);
+                        this.mSettingsActivity = typedArrayObtainAttributes.getString(0);
+                        this.mSupportsAssist = typedArrayObtainAttributes.getBoolean(3, false);
+                        this.mSupportsLaunchFromKeyguard = typedArrayObtainAttributes.getBoolean(4, false);
+                        this.mSupportsLocalInteraction = typedArrayObtainAttributes.getBoolean(5, false);
+                        this.mHotwordDetectionService = typedArrayObtainAttributes.getString(6);
+                        this.mVisualQueryDetectionService = typedArrayObtainAttributes.getString(7);
+                        typedArrayObtainAttributes.recycle();
                         if (this.mSessionService == null) {
                             this.mParseError = "No sessionService specified";
-                            if (loadXmlMetaData == null) {
+                            if (xmlResourceParserLoadXmlMetaData == null) {
                                 return;
                             }
                         } else if (this.mRecognitionService == null) {
                             this.mParseError = "No recognitionService specified";
-                            if (loadXmlMetaData == null) {
+                            if (xmlResourceParserLoadXmlMetaData == null) {
                                 return;
                             }
                         } else {
-                            if (loadXmlMetaData != null) {
-                                loadXmlMetaData.close();
+                            if (xmlResourceParserLoadXmlMetaData != null) {
+                                xmlResourceParserLoadXmlMetaData.close();
                             }
                             this.mServiceInfo = serviceInfo;
                             return;
                         }
                     }
                 }
-                loadXmlMetaData.close();
+                xmlResourceParserLoadXmlMetaData.close();
             } catch (Throwable th) {
-                if (loadXmlMetaData != null) {
+                if (xmlResourceParserLoadXmlMetaData != null) {
                     try {
-                        loadXmlMetaData.close();
+                        xmlResourceParserLoadXmlMetaData.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }

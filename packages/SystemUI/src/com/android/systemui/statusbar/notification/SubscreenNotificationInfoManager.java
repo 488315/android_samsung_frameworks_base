@@ -4,6 +4,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -24,7 +25,6 @@ import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenNotificationInfoManager implements ConfigurationController.ConfigurationListener {
     public static final ArrayList mSubscreenNotificationInfoList = new ArrayList();
@@ -41,14 +41,13 @@ public class SubscreenNotificationInfoManager implements ConfigurationController
     public final Handler mUiHandler = new Handler(Looper.getMainLooper());
     public final ArrayList mReplyWordList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayLifecycleObserver implements DisplayLifecycle.Observer {
         public /* synthetic */ DisplayLifecycleObserver(SubscreenNotificationInfoManager subscreenNotificationInfoManager, int i) {
             this();
         }
 
         @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-        public final void onFolderStateChanged(boolean z) {
+        public final void onFolderStateChanged(boolean z) throws JSONException, Resources.NotFoundException, NumberFormatException {
             SubscreenNotificationInfoManager subscreenNotificationInfoManager = SubscreenNotificationInfoManager.this;
             SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter = subscreenNotificationInfoManager.mNotificationDetailAdapter;
             if (subscreenNotificationDetailAdapter.mNeedToUnlock) {
@@ -73,7 +72,7 @@ public class SubscreenNotificationInfoManager implements ConfigurationController
         }
     }
 
-    public SubscreenNotificationInfoManager(Context context, SubscreenNotificationListAdapter subscreenNotificationListAdapter, SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, SubscreenNotificationGroupAdapter subscreenNotificationGroupAdapter) {
+    public SubscreenNotificationInfoManager(Context context, SubscreenNotificationListAdapter subscreenNotificationListAdapter, SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, SubscreenNotificationGroupAdapter subscreenNotificationGroupAdapter) throws JSONException, Resources.NotFoundException, NumberFormatException {
         this.mContext = context;
         this.mNotificationListAdapter = subscreenNotificationListAdapter;
         this.mNotificationDetailAdapter = subscreenNotificationDetailAdapter;
@@ -153,7 +152,7 @@ public class SubscreenNotificationInfoManager implements ConfigurationController
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public final void onConfigChanged(Configuration configuration) {
+    public final void onConfigChanged(Configuration configuration) throws JSONException, Resources.NotFoundException, NumberFormatException {
         setReplyWordList();
     }
 
@@ -185,9 +184,9 @@ public class SubscreenNotificationInfoManager implements ConfigurationController
                 notificationEntry.row.performDismiss(false);
             }
         }
-        boolean isGroupSummary = notificationEntry.mSbn.getNotification().isGroupSummary();
+        boolean zIsGroupSummary = notificationEntry.mSbn.getNotification().isGroupSummary();
         String str = notificationEntry.mKey;
-        if (isGroupSummary && (notificationChildrenContainer = notificationEntry.row.mChildrenContainer) != null && (notificationChildCount = notificationChildrenContainer.getNotificationChildCount()) > 0) {
+        if (zIsGroupSummary && (notificationChildrenContainer = notificationEntry.row.mChildrenContainer) != null && (notificationChildCount = notificationChildrenContainer.getNotificationChildCount()) > 0) {
             boolean z = false;
             for (int i = 0; i < notificationChildCount; i++) {
                 NotificationEntry notificationEntry2 = ((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i)).mEntry;
@@ -203,17 +202,17 @@ public class SubscreenNotificationInfoManager implements ConfigurationController
         if (notificationEntry.mRanking.canBubble()) {
             subscreenNotificationController.mDeviceModel.mMainListArrayHashMap.remove(str);
         }
-        int removeSubscreenNotificationInfoItem = removeSubscreenNotificationInfoItem(notificationEntry);
-        if (removeSubscreenNotificationInfoItem >= 0 && (subscreenSubRoomNotification = (subscreenDeviceModelParent = subscreenNotificationController.mDeviceModel).mSubRoomNotification) != null && (subscreenNotificationListAdapter = subscreenSubRoomNotification.mNotificationListAdapter) != null) {
-            subscreenNotificationListAdapter.notifyItemRemoved(subscreenDeviceModelParent.convertInfoIndexToAdapterPosition(removeSubscreenNotificationInfoItem));
+        int iRemoveSubscreenNotificationInfoItem = removeSubscreenNotificationInfoItem(notificationEntry);
+        if (iRemoveSubscreenNotificationInfoItem >= 0 && (subscreenSubRoomNotification = (subscreenDeviceModelParent = subscreenNotificationController.mDeviceModel).mSubRoomNotification) != null && (subscreenNotificationListAdapter = subscreenSubRoomNotification.mNotificationListAdapter) != null) {
+            subscreenNotificationListAdapter.notifyItemRemoved(subscreenDeviceModelParent.convertInfoIndexToAdapterPosition(iRemoveSubscreenNotificationInfoItem));
         }
-        int removeGroupDataArrayItem = removeGroupDataArrayItem(notificationEntry);
-        if (removeGroupDataArrayItem >= 0) {
-            this.mNotificationGroupAdapter.notifyItemRemoved(removeGroupDataArrayItem);
+        int iRemoveGroupDataArrayItem = removeGroupDataArrayItem(notificationEntry);
+        if (iRemoveGroupDataArrayItem >= 0) {
+            this.mNotificationGroupAdapter.notifyItemRemoved(iRemoveGroupDataArrayItem);
         }
     }
 
-    public final void setReplyWordList() {
+    public final void setReplyWordList() throws JSONException, Resources.NotFoundException, NumberFormatException {
         if (this.mReplyWordList.size() > 0) {
             this.mReplyWordList.clear();
         }

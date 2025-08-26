@@ -15,13 +15,13 @@ public final class HidlFingerprintSensorConfig extends SensorProps {
     private int mStrength;
 
     public void parse(String str, Context context) throws IllegalArgumentException {
-        String[] split = str.split(":");
-        if (split.length < 3) {
+        String[] strArrSplit = str.split(":");
+        if (strArrSplit.length < 3) {
             throw new IllegalArgumentException();
         }
-        this.mSensorId = Integer.parseInt(split[0]);
-        this.mModality = Integer.parseInt(split[1]);
-        this.mStrength = Integer.parseInt(split[2]);
+        this.mSensorId = Integer.parseInt(strArrSplit[0]);
+        this.mModality = Integer.parseInt(strArrSplit[1]);
+        this.mStrength = Integer.parseInt(strArrSplit[2]);
         mapHidlToAidlSensorConfiguration(context);
     }
 
@@ -38,16 +38,16 @@ public final class HidlFingerprintSensorConfig extends SensorProps {
         this.halControlsIllumination = false;
         this.sensorLocations = new SensorLocation[1];
         this.commonProps.maxEnrollmentsPerUser = SemFingerprintManager.getMaxTemplateNumberFromSPF();
-        int semGetSensorPosition = FingerprintManager.semGetSensorPosition();
-        if (semGetSensorPosition == 0) {
+        int iSemGetSensorPosition = FingerprintManager.semGetSensorPosition();
+        if (iSemGetSensorPosition == 0) {
             this.sensorType = (byte) 0;
-        } else if (semGetSensorPosition == 1) {
+        } else if (iSemGetSensorPosition == 1) {
             this.sensorType = (byte) 5;
-        } else if (semGetSensorPosition == 2) {
+        } else if (iSemGetSensorPosition == 2) {
             this.sensorType = (byte) 2;
-        } else if (semGetSensorPosition == 3) {
+        } else if (iSemGetSensorPosition == 3) {
             this.sensorType = (byte) 1;
-        } else if (semGetSensorPosition == 4) {
+        } else if (iSemGetSensorPosition == 4) {
             this.sensorType = (byte) 4;
         }
         setSensorLocation(0, 0, 0);

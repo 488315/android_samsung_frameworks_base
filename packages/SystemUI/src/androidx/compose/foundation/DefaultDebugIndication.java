@@ -11,12 +11,10 @@ import androidx.compose.ui.node.DrawModifierNode;
 import androidx.compose.ui.node.LayoutNodeDrawScope;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultDebugIndication implements IndicationNodeFactory {
     public static final DefaultDebugIndication INSTANCE = new DefaultDebugIndication();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class DefaultDebugIndicationInstance extends Modifier.Node implements DrawModifierNode {
         public final InteractionSource interactionSource;
         public boolean isFocused;
@@ -29,19 +27,17 @@ final class DefaultDebugIndication implements IndicationNodeFactory {
 
         @Override // androidx.compose.ui.node.DrawModifierNode
         public final void draw(LayoutNodeDrawScope layoutNodeDrawScope) {
-            long Color;
-            long Color2;
             layoutNodeDrawScope.drawContent();
             boolean z = this.isPressed;
             CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
             if (z) {
                 Color.Companion.getClass();
-                Color2 = ColorKt.Color(Color.m461getRedimpl(r0), Color.m460getGreenimpl(r0), Color.m458getBlueimpl(r0), 0.3f, Color.m459getColorSpaceimpl(Color.Black));
-                DrawScope.m539drawRectnJ9OG0$default(layoutNodeDrawScope, Color2, 0L, canvasDrawScope.mo545getSizeNHjbRc(), 0.0f, null, null, 0, 122);
+                long j = Color.Black;
+                DrawScope.m541drawRectnJ9OG0$default(layoutNodeDrawScope, ColorKt.Color(Color.m463getRedimpl(j), Color.m462getGreenimpl(j), Color.m460getBlueimpl(j), 0.3f, Color.m461getColorSpaceimpl(j)), 0L, canvasDrawScope.mo547getSizeNHjbRc(), 0.0f, null, null, 0, 122);
             } else if (this.isHovered || this.isFocused) {
                 Color.Companion.getClass();
-                Color = ColorKt.Color(Color.m461getRedimpl(r0), Color.m460getGreenimpl(r0), Color.m458getBlueimpl(r0), 0.1f, Color.m459getColorSpaceimpl(Color.Black));
-                DrawScope.m539drawRectnJ9OG0$default(layoutNodeDrawScope, Color, 0L, canvasDrawScope.mo545getSizeNHjbRc(), 0.0f, null, null, 0, 122);
+                long j2 = Color.Black;
+                DrawScope.m541drawRectnJ9OG0$default(layoutNodeDrawScope, ColorKt.Color(Color.m463getRedimpl(j2), Color.m462getGreenimpl(j2), Color.m460getBlueimpl(j2), 0.1f, Color.m461getColorSpaceimpl(j2)), 0L, canvasDrawScope.mo547getSizeNHjbRc(), 0.0f, null, null, 0, 122);
             }
         }
 

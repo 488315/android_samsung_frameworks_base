@@ -2,6 +2,8 @@ package com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.session.MediaController;
+import android.media.session.MediaSession;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
@@ -9,18 +11,28 @@ import com.android.systemui.R;
 import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.haptics.slider.SliderHapticFeedbackFilter;
 import com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor;
 import com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1;
 import com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession;
 import com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderState;
 import com.android.systemui.volume.panel.shared.VolumePanelLogger;
+import com.android.systemui.volume.panel.shared.VolumePanelLogger$$ExternalSyntheticLambda0;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.math.MathKt__MathJVMKt;
 import kotlin.ranges.ClosedFloatingPointRange;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -28,7 +40,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CastVolumeSliderViewModel implements SliderViewModel {
     public final Icon.Loaded castIcon;
@@ -41,12 +52,10 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
     public final CoroutineContext uiBackgroundContext;
     public final VolumePanelLogger volumePanelLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         CastVolumeSliderViewModel create(MediaDeviceSession mediaDeviceSession, CoroutineScope coroutineScope);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State implements SliderState {
         public final Icon.Loaded icon;
         public final boolean isEnabled;
@@ -121,9 +130,9 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
         }
 
         public final int hashCode() {
-            int hashCode = (this.valueRange.hashCode() + (Float.hashCode(this.value) * 31)) * 31;
+            int iHashCode = (this.valueRange.hashCode() + (Float.hashCode(this.value) * 31)) * 31;
             Icon.Loaded loaded = this.icon;
-            return Float.hashCode(this.step) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((hashCode + (loaded == null ? 0 : loaded.hashCode())) * 31, 31, this.label), 31, this.isEnabled);
+            return Float.hashCode(this.step) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iHashCode + (loaded == null ? 0 : loaded.hashCode())) * 31, 31, this.label), 31, this.isEnabled);
         }
 
         @Override // com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderState
@@ -141,6 +150,64 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
         }
     }
 
+    /* renamed from: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$onValueChanged$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ float $newValue;
+        int label;
+        final /* synthetic */ CastVolumeSliderViewModel this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(float f, CastVolumeSliderViewModel castVolumeSliderViewModel, Continuation continuation) {
+            super(2, continuation);
+            this.$newValue = f;
+            this.this$0 = castVolumeSliderViewModel;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass1(this.$newValue, this.this$0, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.$newValue);
+                CastVolumeSliderViewModel castVolumeSliderViewModel = this.this$0;
+                VolumePanelLogger volumePanelLogger = castVolumeSliderViewModel.volumePanelLogger;
+                MediaSession.Token token = castVolumeSliderViewModel.session.sessionToken;
+                volumePanelLogger.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(8);
+                LogBuffer logBuffer = volumePanelLogger.logBuffer;
+                LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = token.toString();
+                logMessageImpl.int1 = iRoundToInt;
+                logBuffer.commit(logMessageObtain);
+                CastVolumeSliderViewModel castVolumeSliderViewModel2 = this.this$0;
+                MediaDeviceSessionInteractor mediaDeviceSessionInteractor = castVolumeSliderViewModel2.mediaDeviceSessionInteractor;
+                this.label = 1;
+                if (mediaDeviceSessionInteractor.setSessionVolume(castVolumeSliderViewModel2.session, iRoundToInt, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     public CastVolumeSliderViewModel(MediaDeviceSession mediaDeviceSession, CoroutineScope coroutineScope, CoroutineContext coroutineContext, Context context, MediaDeviceSessionInteractor mediaDeviceSessionInteractor, SliderHapticsViewModel.Factory factory, VolumePanelLogger volumePanelLogger) {
         this.session = mediaDeviceSession;
         this.coroutineScope = coroutineScope;
@@ -152,10 +219,9 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
         Drawable drawable = context.getDrawable(R.drawable.ic_cast);
         drawable.getClass();
         this.castIcon = new Icon.Loaded(drawable, null, Integer.valueOf(R.drawable.ic_cast));
-        final MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1 playbackInfo = mediaDeviceSessionInteractor.playbackInfo(mediaDeviceSession);
+        final MediaDeviceSessionInteractor$playbackInfo$$inlined$map$1 mediaDeviceSessionInteractor$playbackInfo$$inlined$map$1PlaybackInfo = mediaDeviceSessionInteractor.playbackInfo(mediaDeviceSession);
         Flow flow = new Flow() { // from class: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -184,116 +250,77 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
                     this.this$0 = castVolumeSliderViewModel;
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:19:0x008b, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:21:0x008b, code lost:
                 
                     if (r11.emit(r13, r0) == r1) goto L22;
                  */
-                /* JADX WARN: Code restructure failed: missing block: B:20:0x008d, code lost:
-                
-                    return r1;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:22:0x007e, code lost:
-                
-                    if (r13 == r1) goto L22;
-                 */
-                /* JADX WARN: Removed duplicated region for block: B:18:0x0083  */
-                /* JADX WARN: Removed duplicated region for block: B:21:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r12, kotlin.coroutines.Continuation r13) {
-                    /*
-                        r11 = this;
-                        boolean r0 = r13 instanceof com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r13
-                        com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1$2$1 r0 = (com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1$2$1 r0 = new com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1$2$1
-                        r0.<init>(r13)
-                    L18:
-                        java.lang.Object r13 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 2
-                        r4 = 1
-                        r5 = 0
-                        if (r2 == 0) goto L3b
-                        if (r2 == r4) goto L33
-                        if (r2 != r3) goto L2b
-                        kotlin.ResultKt.throwOnFailure(r13)
-                        goto L8e
-                    L2b:
-                        java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-                        java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-                        r11.<init>(r12)
-                        throw r11
-                    L33:
-                        java.lang.Object r11 = r0.L$0
-                        kotlinx.coroutines.flow.FlowCollector r11 = (kotlinx.coroutines.flow.FlowCollector) r11
-                        kotlin.ResultKt.throwOnFailure(r13)
-                        goto L81
-                    L3b:
-                        kotlin.ResultKt.throwOnFailure(r13)
-                        android.media.session.MediaController$PlaybackInfo r12 = (android.media.session.MediaController.PlaybackInfo) r12
-                        com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel r13 = r11.this$0
-                        com.android.systemui.volume.panel.shared.VolumePanelLogger r2 = r13.volumePanelLogger
-                        com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r6 = r13.session
-                        android.media.session.MediaSession$Token r6 = r6.sessionToken
-                        int r7 = r12.getCurrentVolume()
-                        r2.getClass()
-                        com.android.systemui.log.core.LogLevel r8 = com.android.systemui.log.core.LogLevel.DEBUG
-                        com.android.systemui.volume.panel.shared.VolumePanelLogger$$ExternalSyntheticLambda0 r9 = new com.android.systemui.volume.panel.shared.VolumePanelLogger$$ExternalSyntheticLambda0
-                        r10 = 2
-                        r9.<init>(r10)
-                        java.lang.String r10 = "SysUI_VolumePanel"
-                        com.android.systemui.log.LogBuffer r2 = r2.logBuffer
-                        com.android.systemui.log.core.LogMessage r8 = r2.obtain(r10, r8, r9, r5)
-                        java.lang.String r6 = r6.toString()
-                        r9 = r8
-                        com.android.systemui.log.LogMessageImpl r9 = (com.android.systemui.log.LogMessageImpl) r9
-                        r9.str1 = r6
-                        r9.int1 = r7
-                        r2.commit(r8)
-                        kotlin.coroutines.CoroutineContext r2 = r13.uiBackgroundContext
-                        com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$slider$1$1 r6 = new com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$slider$1$1
-                        r6.<init>(r13, r12, r5)
-                        kotlinx.coroutines.flow.FlowCollector r11 = r11.$this_unsafeFlow
-                        r0.L$0 = r11
-                        r0.label = r4
-                        java.lang.Object r13 = kotlinx.coroutines.BuildersKt.withContext(r2, r6, r0)
-                        if (r13 != r1) goto L81
-                        goto L8d
-                    L81:
-                        if (r13 == 0) goto L8e
-                        r0.L$0 = r5
-                        r0.label = r3
-                        java.lang.Object r11 = r11.emit(r13, r0)
-                        if (r11 != r1) goto L8e
-                    L8d:
-                        return r1
-                    L8e:
-                        kotlin.Unit r11 = kotlin.Unit.INSTANCE
-                        return r11
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.CastVolumeSliderViewModel$special$$inlined$mapNotNull$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) throws Throwable {
+                    AnonymousClass1 anonymousClass1;
+                    FlowCollector flowCollector;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object objWithContext = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(objWithContext);
+                        MediaController.PlaybackInfo playbackInfo = (MediaController.PlaybackInfo) obj;
+                        CastVolumeSliderViewModel castVolumeSliderViewModel = this.this$0;
+                        VolumePanelLogger volumePanelLogger = castVolumeSliderViewModel.volumePanelLogger;
+                        MediaSession.Token token = castVolumeSliderViewModel.session.sessionToken;
+                        int currentVolume = playbackInfo.getCurrentVolume();
+                        volumePanelLogger.getClass();
+                        LogLevel logLevel = LogLevel.DEBUG;
+                        VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(2);
+                        LogBuffer logBuffer = volumePanelLogger.logBuffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.str1 = token.toString();
+                        logMessageImpl.int1 = currentVolume;
+                        logBuffer.commit(logMessageObtain);
+                        CoroutineContext coroutineContext = castVolumeSliderViewModel.uiBackgroundContext;
+                        CastVolumeSliderViewModel$slider$1$1 castVolumeSliderViewModel$slider$1$1 = new CastVolumeSliderViewModel$slider$1$1(castVolumeSliderViewModel, playbackInfo, null);
+                        flowCollector = this.$this_unsafeFlow;
+                        anonymousClass1.L$0 = flowCollector;
+                        anonymousClass1.label = 1;
+                        objWithContext = BuildersKt.withContext(coroutineContext, castVolumeSliderViewModel$slider$1$1, anonymousClass1);
+                        if (objWithContext != coroutineSingletons) {
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 != 1) {
+                        if (i2 != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(objWithContext);
+                        return Unit.INSTANCE;
+                    }
+                    flowCollector = (FlowCollector) anonymousClass1.L$0;
+                    ResultKt.throwOnFailure(objWithContext);
+                    if (objWithContext != null) {
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.label = 2;
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = mediaDeviceSessionInteractor$playbackInfo$$inlined$map$1PlaybackInfo.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion.getClass();
@@ -315,7 +342,7 @@ public final class CastVolumeSliderViewModel implements SliderViewModel {
 
     @Override // com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderViewModel
     public final void onValueChanged(SliderState sliderState, float f) {
-        CoroutineTracingKt.launchTraced$default(this.coroutineScope, null, null, new CastVolumeSliderViewModel$onValueChanged$1(f, this, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.coroutineScope, null, null, new AnonymousClass1(f, this, null), 7);
     }
 
     @Override // com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderViewModel

@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecBatterySnapshot {
     public final boolean automaticTestMode;
@@ -35,9 +34,9 @@ public final class SecBatterySnapshot {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.batteryHealth, ReorderTile$$ExternalSyntheticOutline0.m(this.chargingType, MoveResult$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.currentBatteryMode, Integer.hashCode(this.batteryLevel) * 31, 31), 31, this.chargingTime), 31), 31), 31, this.isHiccupState), 31, this.automaticTestMode);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.batteryHealth, ReorderTile$$ExternalSyntheticOutline0.m(this.chargingType, MoveResult$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.currentBatteryMode, Integer.hashCode(this.batteryLevel) * 31, 31), 31, this.chargingTime), 31), 31), 31, this.isHiccupState), 31, this.automaticTestMode);
         String str = this.optimizationChargingFinishTime;
-        return m + (str == null ? 0 : str.hashCode());
+        return iM + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {

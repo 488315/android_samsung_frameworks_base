@@ -7,19 +7,18 @@ import java.util.List;
 import java.util.Map;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class NotificationMemoryLoggerKt {
     public static final Map<Pair<String, Integer>, NotificationMemoryLogger.NotificationMemoryUseAtomBuilder> aggregateMemoryUsageData(List<NotificationMemoryUsage> list) {
-        Object obj;
+        Object next;
         NotificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1 notificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1 = new NotificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1(list);
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Object obj2 : notificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1.$this_groupingBy) {
-            Object keyOf = notificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1.keyOf(obj2);
-            Object obj3 = linkedHashMap.get(keyOf);
-            boolean z = obj3 == null && !linkedHashMap.containsKey(keyOf);
-            NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj2;
-            NotificationMemoryLogger.NotificationMemoryUseAtomBuilder notificationMemoryUseAtomBuilder = (NotificationMemoryLogger.NotificationMemoryUseAtomBuilder) obj3;
+        for (Object obj : notificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1.$this_groupingBy) {
+            Object objKeyOf = notificationMemoryLoggerKt$aggregateMemoryUsageData$$inlined$groupingBy$1.keyOf(obj);
+            Object obj2 = linkedHashMap.get(objKeyOf);
+            boolean z = obj2 == null && !linkedHashMap.containsKey(objKeyOf);
+            NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj;
+            NotificationMemoryLogger.NotificationMemoryUseAtomBuilder notificationMemoryUseAtomBuilder = (NotificationMemoryLogger.NotificationMemoryUseAtomBuilder) obj2;
             if (z) {
                 notificationMemoryUseAtomBuilder = new NotificationMemoryLogger.NotificationMemoryUseAtomBuilder(notificationMemoryUsage.uid, notificationMemoryUsage.objectUsage.style);
             } else {
@@ -53,15 +52,15 @@ public abstract class NotificationMemoryLoggerKt {
             Iterator it = notificationMemoryUsage.viewUsage.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (((NotificationViewUsage) obj).viewType == ViewType.TOTAL) {
+                next = it.next();
+                if (((NotificationViewUsage) next).viewType == ViewType.TOTAL) {
                     break;
                 }
             }
-            NotificationViewUsage notificationViewUsage = (NotificationViewUsage) obj;
+            NotificationViewUsage notificationViewUsage = (NotificationViewUsage) next;
             if (notificationViewUsage != null) {
                 notificationMemoryUseAtomBuilder.smallIconViews += notificationViewUsage.smallIcon;
                 notificationMemoryUseAtomBuilder.largeIconViews += notificationViewUsage.largeIcon;
@@ -70,7 +69,7 @@ public abstract class NotificationMemoryLoggerKt {
                 notificationMemoryUseAtomBuilder.customViews += notificationViewUsage.customViews;
                 notificationMemoryUseAtomBuilder.softwareBitmaps += notificationViewUsage.softwareBitmapsPenalty;
             }
-            linkedHashMap.put(keyOf, notificationMemoryUseAtomBuilder);
+            linkedHashMap.put(objKeyOf, notificationMemoryUseAtomBuilder);
         }
         return linkedHashMap;
     }

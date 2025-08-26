@@ -14,13 +14,11 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FragmentStrictMode {
     public static final FragmentStrictMode INSTANCE = new FragmentStrictMode();
     public static final Policy defaultPolicy = Policy.LAX;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Flag {
         PENALTY_LOG,
         PENALTY_DEATH,
@@ -35,17 +33,14 @@ public final class FragmentStrictMode {
         DETECT_WRONG_FRAGMENT_CONTAINER
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnViolationListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Policy {
         public static final Policy LAX;
         public final Set flags;
         public final Map mAllowedViolations;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();

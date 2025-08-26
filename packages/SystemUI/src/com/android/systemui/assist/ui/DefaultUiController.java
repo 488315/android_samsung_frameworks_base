@@ -37,7 +37,6 @@ import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DefaultUiController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -83,14 +82,14 @@ public class DefaultUiController {
     }
 
     public final void animateInvocationCompletion() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mLastInvocationProgress, 1.0f);
-        this.mInvocationAnimator = ofFloat;
-        ofFloat.setStartDelay(1L);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mLastInvocationProgress, 1.0f);
+        this.mInvocationAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setStartDelay(1L);
         this.mInvocationAnimator.setDuration(200L);
         this.mInvocationAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.assist.ui.DefaultUiController$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DefaultUiController defaultUiController = DefaultUiController.this;
+                DefaultUiController defaultUiController = this.f$0;
                 int i = DefaultUiController.$r8$clinit;
                 defaultUiController.getClass();
                 defaultUiController.setProgressInternal(((Float) valueAnimator.getAnimatedValue()).floatValue());
@@ -149,6 +148,10 @@ public class DefaultUiController {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setProgressInternal(float f) {
         float interpolation = this.mProgressInterpolator.getInterpolation(f);
         InvocationLightsView invocationLightsView = this.mInvocationLightsView;
@@ -163,31 +166,32 @@ public class DefaultUiController {
                         if (lightBarTransitionsController != null) {
                             invocationLightsView.updateDarkness(lightBarTransitionsController.mDarkIntensity);
                         }
+                    } else {
+                        NavigationBar defaultNavigationBar = ((NavigationBarControllerImpl) invocationLightsView.mNavigationBarController).getDefaultNavigationBar();
+                        if (defaultNavigationBar != null) {
+                            NavigationBarTransitions navigationBarTransitions = defaultNavigationBar.mNavigationBarTransitions;
+                            ((ArrayList) navigationBarTransitions.mDarkIntensityListeners).add(invocationLightsView);
+                            invocationLightsView.updateDarkness(navigationBarTransitions.mLightTransitionsController.mDarkIntensity);
+                            invocationLightsView.mRegistered = true;
+                        }
                     }
-                }
-                NavigationBar defaultNavigationBar = ((NavigationBarControllerImpl) invocationLightsView.mNavigationBarController).getDefaultNavigationBar();
-                if (defaultNavigationBar != null) {
-                    NavigationBarTransitions navigationBarTransitions = defaultNavigationBar.mNavigationBarTransitions;
-                    ((ArrayList) navigationBarTransitions.mDarkIntensityListeners).add(invocationLightsView);
-                    invocationLightsView.updateDarkness(navigationBarTransitions.mLightTransitionsController.mDarkIntensity);
-                    invocationLightsView.mRegistered = true;
                 }
             }
             float f2 = invocationLightsView.mGuide.mRegions[PerimeterPathGuide.Region.BOTTOM_LEFT.ordinal()].normalizedLength;
-            float m = SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f2, 0.6f, f2, 2.0f);
+            float fM = SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f2, 0.6f, f2, 2.0f);
             PerimeterPathGuide perimeterPathGuide = invocationLightsView.mGuide;
             PerimeterPathGuide.Region region = PerimeterPathGuide.Region.BOTTOM;
-            float lerp = MathUtils.lerp(0.0f, perimeterPathGuide.mRegions[region.ordinal()].normalizedLength / 4.0f, interpolation);
+            float fLerp = MathUtils.lerp(0.0f, perimeterPathGuide.mRegions[region.ordinal()].normalizedLength / 4.0f, interpolation);
             float f3 = 1.0f - interpolation;
-            float f4 = ((-f2) + m) * f3;
-            float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, m, f3, invocationLightsView.mGuide.mRegions[region.ordinal()].normalizedLength);
-            float f5 = f4 + lerp;
+            float f4 = ((-f2) + fM) * f3;
+            float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, fM, f3, invocationLightsView.mGuide.mRegions[region.ordinal()].normalizedLength);
+            float f5 = f4 + fLerp;
             invocationLightsView.setLight(f4, f5, 0);
-            float f6 = 2.0f * lerp;
+            float f6 = 2.0f * fLerp;
             invocationLightsView.setLight(f5, f4 + f6, 1);
-            float f7 = m$1 - lerp;
-            invocationLightsView.setLight(m$1 - f6, f7, 2);
-            invocationLightsView.setLight(f7, m$1, 3);
+            float f7 = fM$1 - fLerp;
+            invocationLightsView.setLight(fM$1 - f6, f7, 2);
+            invocationLightsView.setLight(f7, fM$1, 3);
             invocationLightsView.setVisibility(0);
         }
         invocationLightsView.invalidate();

@@ -7,22 +7,23 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
-import com.samsung.android.motionphoto.core.MPSurfaceReader;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes6.dex */
 public class MPSurfaceReader implements AutoCloseable {
     private static final int ACQUIRE_MAX_IMAGES = 2;
     private static final int ACQUIRE_NO_BUFS = 1;
     private static final int ACQUIRE_SUCCESS = 0;
+    private static final int MAX_BUFFER_CONSUMER_SIZE = 32;
     private static final String TAG = "MPSurfaceReader";
     private final int format;
     private final int height;
-    private final AtomicBoolean isReaderValid;
+    private boolean isReaderValid;
     private OnImageAvailableListener listener;
     private Executor listenerExecutor;
     private Handler listenerHandler;
@@ -32,10 +33,13 @@ public class MPSurfaceReader implements AutoCloseable {
     private final long usage;
     private final int width;
     private final int dataSpace = 0;
+    private final AtomicInteger availImageCount = new AtomicInteger(0);
+    private final AtomicInteger dropImageCount = new AtomicInteger(0);
     private final Object listenerLock = new Object();
+    private final Object closeLock = new Object();
 
     public interface OnImageAvailableListener {
-        void onImageAvailable(MPSurfaceImage mPSurfaceImage);
+        void onImageAvailable(MPSurfaceReader mPSurfaceReader);
     }
 
     private static native void nativeClassInit();
@@ -62,7 +66,7 @@ public class MPSurfaceReader implements AutoCloseable {
         this.maxImages = i4;
         this.usage = j;
         nativeInit(new WeakReference(this), i, i2, i3, 0, i4, j);
-        this.isReaderValid = new AtomicBoolean(true);
+        this.isReaderValid = true;
         this.surface = nativeGetSurface();
     }
 
@@ -98,6 +102,86 @@ public class MPSurfaceReader implements AutoCloseable {
         nativeReleaseBuffer(mPSurfaceImage);
     }
 
+    public MPSurfaceImage acquireNextImage() {
+        MPSurfaceImage mPSurfaceImage = new MPSurfaceImage();
+        int iAcquireNextMPSurfaceImage = acquireNextMPSurfaceImage(mPSurfaceImage);
+        if (iAcquireNextMPSurfaceImage == 0) {
+            return mPSurfaceImage;
+        }
+        if (iAcquireNextMPSurfaceImage != 1) {
+            if (iAcquireNextMPSurfaceImage == 2) {
+                throw new IllegalStateException(String.format("maxImages (%d) has already been acquired, call #close before acquiring more.", Integer.valueOf(this.maxImages)));
+            }
+            throw new AssertionError("Unknown MPSurfaceReader_nativeImageSetup return code " + iAcquireNextMPSurfaceImage);
+        }
+        if (this.dropImageCount.get() > 0) {
+            this.dropImageCount.decrementAndGet();
+            return null;
+        }
+        Log.w(TAG, "failed to acquire image unless there is no dropped image");
+        return null;
+    }
+
+    public MPSurfaceImage acquireLatestImage() {
+        MPSurfaceImage mPSurfaceImageAcquireNextImage = acquireNextImage();
+        if (mPSurfaceImageAcquireNextImage == null) {
+            return null;
+        }
+        while (true) {
+            try {
+                MPSurfaceImage mPSurfaceImageAcquireNextMPSurfaceImageNoThrowException = acquireNextMPSurfaceImageNoThrowException();
+                if (mPSurfaceImageAcquireNextMPSurfaceImageNoThrowException == null) {
+                    return mPSurfaceImageAcquireNextImage;
+                }
+                mPSurfaceImageAcquireNextImage.close();
+                mPSurfaceImageAcquireNextImage = mPSurfaceImageAcquireNextMPSurfaceImageNoThrowException;
+            } catch (Throwable th) {
+                if (mPSurfaceImageAcquireNextImage != null) {
+                    mPSurfaceImageAcquireNextImage.close();
+                }
+                throw th;
+            }
+        }
+    }
+
+    private int acquireNextMPSurfaceImage(MPSurfaceImage mPSurfaceImage) {
+        int iNativeImageSetup;
+        synchronized (this.closeLock) {
+            iNativeImageSetup = nativeImageSetup(mPSurfaceImage);
+            if (iNativeImageSetup == 0) {
+                this.availImageCount.decrementAndGet();
+            } else if (iNativeImageSetup != 1 && iNativeImageSetup != 2) {
+                throw new AssertionError("Unknown MPSurfaceReader_nativeImageSetup return code " + iNativeImageSetup);
+            }
+        }
+        return iNativeImageSetup;
+    }
+
+    private MPSurfaceImage acquireNextMPSurfaceImageNoThrowException() {
+        MPSurfaceImage mPSurfaceImage = new MPSurfaceImage();
+        if (acquireNextMPSurfaceImage(mPSurfaceImage) == 0) {
+            return mPSurfaceImage;
+        }
+        return null;
+    }
+
+    private void dropImageIfRequired() {
+        if (this.availImageCount.get() > Integer.min(this.maxImages, 32)) {
+            dropOldestImage();
+        }
+    }
+
+    private void dropOldestImage() {
+        MPSurfaceImage mPSurfaceImage = new MPSurfaceImage();
+        if (nativeImageSetup(mPSurfaceImage) == 0) {
+            releaseBuffer(mPSurfaceImage);
+            this.availImageCount.decrementAndGet();
+            this.dropImageCount.incrementAndGet();
+        } else {
+            Log.w(TAG, "failed to drop oldest image on availCount=" + this.availImageCount.get() + ", dropCount=" + this.dropImageCount.get());
+        }
+    }
+
     @Override // java.lang.AutoCloseable
     public void close() throws Exception {
         String str = TAG;
@@ -108,8 +192,10 @@ public class MPSurfaceReader implements AutoCloseable {
             surface.release();
             this.surface = null;
         }
-        this.isReaderValid.set(false);
-        nativeClose();
+        synchronized (this.closeLock) {
+            this.isReaderValid = false;
+            nativeClose();
+        }
         Log.i(str, "close MPSurfaceReader...X");
     }
 
@@ -137,7 +223,8 @@ public class MPSurfaceReader implements AutoCloseable {
     private static void postEventFromNative(Object obj) {
         Executor executor;
         final OnImageAvailableListener onImageAvailableListener;
-        MPSurfaceReader mPSurfaceReader = (MPSurfaceReader) ((WeakReference) obj).get();
+        boolean z;
+        final MPSurfaceReader mPSurfaceReader = (MPSurfaceReader) ((WeakReference) obj).get();
         if (mPSurfaceReader == null) {
             return;
         }
@@ -145,25 +232,20 @@ public class MPSurfaceReader implements AutoCloseable {
             executor = mPSurfaceReader.listenerExecutor;
             onImageAvailableListener = mPSurfaceReader.listener;
         }
-        boolean z = mPSurfaceReader.isReaderValid.get();
+        synchronized (mPSurfaceReader.closeLock) {
+            z = mPSurfaceReader.isReaderValid;
+        }
         if (executor == null || onImageAvailableListener == null || !z) {
             return;
         }
-        Objects.requireNonNull(mPSurfaceReader);
-        final MPSurfaceImage mPSurfaceImage = mPSurfaceReader.new MPSurfaceImage();
-        int nativeImageSetup = mPSurfaceReader.nativeImageSetup(mPSurfaceImage);
-        if (nativeImageSetup == 0 || nativeImageSetup == 1) {
-            executor.execute(new Runnable() { // from class: com.samsung.android.motionphoto.core.MPSurfaceReader$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MPSurfaceReader.OnImageAvailableListener.this.onImageAvailable(mPSurfaceImage);
-                }
-            });
-        } else if (nativeImageSetup == 2) {
-            Log.w(TAG, String.format("maxImages (%d) has already been acquired, call #close before acquiring more.", Integer.valueOf(mPSurfaceReader.maxImages)));
-        } else {
-            throw new AssertionError("Unknown MPSurfaceReader_nativeImageSetup return code " + nativeImageSetup);
-        }
+        mPSurfaceReader.availImageCount.addAndGet(1);
+        mPSurfaceReader.dropImageIfRequired();
+        executor.execute(new Runnable() { // from class: com.samsung.android.motionphoto.core.MPSurfaceReader$$ExternalSyntheticLambda0
+            @Override // java.lang.Runnable
+            public final void run() {
+                onImageAvailableListener.onImageAvailable(mPSurfaceReader);
+            }
+        });
     }
 
     public class MPSurfaceImage implements AutoCloseable {
@@ -293,7 +375,10 @@ public class MPSurfaceReader implements AutoCloseable {
     }
 
     static {
-        System.loadLibrary(Def.MP_NATIVE_LIB);
-        nativeClassInit();
+        String property = System.getProperty(Def.JUNIT_TEST_EXECUTION_MODE);
+        if (property == null || !Boolean.parseBoolean(property)) {
+            System.loadLibrary(Def.MP_NATIVE_LIB);
+            nativeClassInit();
+        }
     }
 }

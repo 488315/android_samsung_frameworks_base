@@ -36,14 +36,14 @@ public class MergeCursor extends AbstractCursor {
     @Override // android.database.AbstractCursor, android.database.Cursor
     public int getCount() {
         int length = this.mCursors.length;
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            Cursor cursor = this.mCursors[i2];
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            Cursor cursor = this.mCursors[i];
             if (cursor != null) {
-                i += cursor.getCount();
+                count += cursor.getCount();
             }
         }
-        return i;
+        return count;
     }
 
     @Override // android.database.AbstractCursor, android.database.CrossProcessCursor
@@ -51,24 +51,24 @@ public class MergeCursor extends AbstractCursor {
         this.mCursor = null;
         int length = this.mCursors.length;
         int i3 = 0;
-        int i4 = 0;
+        int count = 0;
         while (true) {
             if (i3 >= length) {
                 break;
             }
             Cursor cursor = this.mCursors[i3];
             if (cursor != null) {
-                if (i2 < cursor.getCount() + i4) {
+                if (i2 < cursor.getCount() + count) {
                     this.mCursor = this.mCursors[i3];
                     break;
                 }
-                i4 += this.mCursors[i3].getCount();
+                count += this.mCursors[i3].getCount();
             }
             i3++;
         }
         Cursor cursor2 = this.mCursor;
         if (cursor2 != null) {
-            return cursor2.moveToPosition(i2 - i4);
+            return cursor2.moveToPosition(i2 - count);
         }
         return false;
     }

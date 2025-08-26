@@ -758,10 +758,10 @@ public final class MediaController {
         }
 
         public void post(int i, Object obj, Bundle bundle) {
-            Message obtainMessage = obtainMessage(i, obj);
-            obtainMessage.setAsynchronous(true);
-            obtainMessage.setData(bundle);
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = obtainMessage(i, obj);
+            messageObtainMessage.setAsynchronous(true);
+            messageObtainMessage.setData(bundle);
+            messageObtainMessage.sendToTarget();
         }
     }
 }

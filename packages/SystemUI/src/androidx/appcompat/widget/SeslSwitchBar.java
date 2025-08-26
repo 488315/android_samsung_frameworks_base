@@ -29,7 +29,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
     public final LinearLayout mBackground;
@@ -45,14 +44,12 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
     public final List mSwitchChangeListeners;
     public final TextView mTextView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.widget.SeslSwitchBar$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.appcompat.widget.SeslSwitchBar.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -95,7 +92,6 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SwitchBarDelegate extends AccessibilityDelegateCompat {
         public String mSessionName = "";
         public final SeslToggleSwitch mSwitch;
@@ -169,9 +165,9 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
 
     public final void setTextViewLabelAndBackground(boolean z) {
         this.mLabel = getResources().getString(z ? this.mOnTextId : this.mOffTextId);
-        Drawable mutate = this.mBackground.getBackground().mutate();
-        if (mutate instanceof SeslRecoilDrawable) {
-            SeslRecoilDrawable seslRecoilDrawable = (SeslRecoilDrawable) mutate;
+        Drawable drawableMutate = this.mBackground.getBackground().mutate();
+        if (drawableMutate instanceof SeslRecoilDrawable) {
+            SeslRecoilDrawable seslRecoilDrawable = (SeslRecoilDrawable) drawableMutate;
             if (seslRecoilDrawable.getNumberOfLayers() > 0) {
                 Drawable drawable = seslRecoilDrawable.getDrawable(0);
                 if (drawable instanceof GradientDrawable) {
@@ -179,7 +175,7 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
                 }
             }
         } else {
-            mutate.setTintList(ColorStateList.valueOf(z ? this.mBackgroundActivatedColor : this.mBackgroundColor));
+            drawableMutate.setTintList(ColorStateList.valueOf(z ? this.mBackgroundActivatedColor : this.mBackgroundColor));
         }
         this.mTextView.setTextColor(z ? this.mOnTextColor : this.mOffTextColor);
         if (isEnabled()) {
@@ -204,18 +200,18 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
     }
 
     public SeslSwitchBar(Context context, AttributeSet attributeSet, int i, int i2) {
+        String string;
         super(context, attributeSet, i, i2);
-        String str;
         ArrayList arrayList = new ArrayList();
         this.mSwitchChangeListeners = arrayList;
         LayoutInflater.from(context).inflate(R.layout.sesl_switchbar, this);
         Resources resources = getResources();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeslSwitchBar, i, i2);
-        this.mBackgroundColor = obtainStyledAttributes.getColor(1, resources.getColor(R.color.sesl_switchbar_off_background_color_light));
-        this.mBackgroundActivatedColor = obtainStyledAttributes.getColor(0, resources.getColor(R.color.sesl_switchbar_on_background_color_light));
-        this.mOnTextColor = obtainStyledAttributes.getColor(2, resources.getColor(R.color.sesl_switchbar_on_text_color_light));
-        this.mOffTextColor = obtainStyledAttributes.getColor(3, resources.getColor(R.color.sesl_switchbar_on_text_color_light));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeslSwitchBar, i, i2);
+        this.mBackgroundColor = typedArrayObtainStyledAttributes.getColor(1, resources.getColor(R.color.sesl_switchbar_off_background_color_light));
+        this.mBackgroundActivatedColor = typedArrayObtainStyledAttributes.getColor(0, resources.getColor(R.color.sesl_switchbar_on_background_color_light));
+        this.mOnTextColor = typedArrayObtainStyledAttributes.getColor(2, resources.getColor(R.color.sesl_switchbar_on_text_color_light));
+        this.mOffTextColor = typedArrayObtainStyledAttributes.getColor(3, resources.getColor(R.color.sesl_switchbar_on_text_color_light));
+        typedArrayObtainStyledAttributes.recycle();
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.sesl_switchbar_container);
         this.mBackground = linearLayout;
         linearLayout.setOnClickListener(new View.OnClickListener() { // from class: androidx.appcompat.widget.SeslSwitchBar.1
@@ -253,20 +249,20 @@ public class SeslSwitchBar extends LinearLayout implements CompoundButton.OnChec
             ViewCompat.setAccessibilityDelegate(linearLayout, switchBarDelegate);
             Context context2 = getContext();
             while (true) {
-                str = "";
+                string = "";
                 if (!(context2 instanceof ContextWrapper)) {
                     break;
                 }
                 if (context2 instanceof Activity) {
                     CharSequence title = ((Activity) context2).getTitle();
                     if (title != null) {
-                        str = title.toString();
+                        string = title.toString();
                     }
                 } else {
                     context2 = ((ContextWrapper) context2).getBaseContext();
                 }
             }
-            this.mDelegate.mSessionName = str;
+            this.mDelegate.mSessionName = string;
             return;
         }
         throw new IllegalStateException("Cannot add twice the same OnSwitchChangeListener");

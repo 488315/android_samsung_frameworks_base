@@ -8,7 +8,6 @@ import android.widget.EditText;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NavBarTuner$$ExternalSyntheticLambda3 implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
     public final /* synthetic */ NavBarTuner f$0;
@@ -36,7 +35,7 @@ public final /* synthetic */ class NavBarTuner$$ExternalSyntheticLambda3 impleme
         handler.post(new Runnable() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                NavBarTuner navBarTuner2 = NavBarTuner.this;
+                NavBarTuner navBarTuner2 = navBarTuner;
                 String str2 = str;
                 ListPreference listPreference3 = listPreference2;
                 Preference preference3 = preference2;
@@ -63,9 +62,9 @@ public final /* synthetic */ class NavBarTuner$$ExternalSyntheticLambda3 impleme
         final Preference preference2 = this.f$3;
         negativeButton.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda7
             @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i) {
+            public final void onClick(DialogInterface dialogInterface, int i) throws NumberFormatException {
                 int i2;
-                NavBarTuner navBarTuner2 = NavBarTuner.this;
+                NavBarTuner navBarTuner2 = navBarTuner;
                 EditText editText2 = editText;
                 Preference preference3 = preference2;
                 String str2 = str;

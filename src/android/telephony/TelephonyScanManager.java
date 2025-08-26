@@ -97,7 +97,7 @@ public final class TelephonyScanManager {
                                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda0
                                         @Override // java.lang.Runnable
                                         public final void run() {
-                                            TelephonyScanManager.NetworkScanCallback.this.onError(3);
+                                            networkScanCallback.onError(3);
                                         }
                                     });
                                 } catch (RejectedExecutionException unused) {
@@ -144,7 +144,7 @@ public final class TelephonyScanManager {
                         executor2.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                TelephonyScanManager.AnonymousClass1.lambda$handleMessage$3(TelephonyScanManager.NetworkScanCallback.this);
+                                TelephonyScanManager.AnonymousClass1.lambda$handleMessage$3(networkScanCallback2);
                             }
                         });
                         synchronized (TelephonyScanManager.this.mScanInfo) {
@@ -205,14 +205,14 @@ public final class TelephonyScanManager {
                 return null;
             }
             synchronized (this.mScanInfo) {
-                int requestNetworkScan = iTelephony.requestNetworkScan(i, z, networkScanRequest, this.mMessenger, new Binder(), str, str2);
-                if (requestNetworkScan == -1) {
+                int iRequestNetworkScan = iTelephony.requestNetworkScan(i, z, networkScanRequest, this.mMessenger, new Binder(), str, str2);
+                if (iRequestNetworkScan == -1) {
                     com.android.telephony.Rlog.e(TAG, "Failed to initiate network scan");
                     return null;
                 }
                 iTelephony.asBinder().linkToDeath(this.mDeathRecipient, 0);
-                saveScanInfo(requestNetworkScan, networkScanRequest, executor, networkScanCallback);
-                return new NetworkScan(requestNetworkScan, i);
+                saveScanInfo(iRequestNetworkScan, networkScanRequest, executor, networkScanCallback);
+                return new NetworkScan(iRequestNetworkScan, i);
             }
         } catch (RemoteException e) {
             com.android.telephony.Rlog.e(TAG, "requestNetworkScan RemoteException", e);

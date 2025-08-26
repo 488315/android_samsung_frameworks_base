@@ -83,9 +83,9 @@ public interface IImsRegistrationCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsRegistrationCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsRegistrationCallback)) {
-                return (IImsRegistrationCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsRegistrationCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsRegistrationCallback)) {
+                return (IImsRegistrationCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -136,24 +136,24 @@ public interface IImsRegistrationCallback extends IInterface {
                     return true;
                 case 3:
                     ImsReasonInfo imsReasonInfo = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDeregistered(imsReasonInfo, readInt, readInt2);
+                    onDeregistered(imsReasonInfo, i3, i4);
                     return true;
                 case 4:
                     ImsReasonInfo imsReasonInfo2 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     SipDetails sipDetails = (SipDetails) parcel.readTypedObject(SipDetails.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onDeregisteredWithDetails(imsReasonInfo2, readInt3, readInt4, sipDetails);
+                    onDeregisteredWithDetails(imsReasonInfo2, i5, i6, sipDetails);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo3 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onTechnologyChangeFailed(readInt5, imsReasonInfo3);
+                    onTechnologyChangeFailed(i7, imsReasonInfo3);
                     return true;
                 case 6:
                     Uri[] uriArr = (Uri[]) parcel.createTypedArray(Uri.CREATOR);
@@ -183,79 +183,79 @@ public interface IImsRegistrationCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onRegistered(ImsRegistrationAttributes imsRegistrationAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistrationAttributes, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistrationAttributes, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onRegistering(ImsRegistrationAttributes imsRegistrationAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistrationAttributes, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistrationAttributes, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onDeregistered(ImsReasonInfo imsReasonInfo, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onDeregisteredWithDetails(ImsReasonInfo imsReasonInfo, int i, int i2, SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onTechnologyChangeFailed(int i, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
             public void onSubscriberAssociatedUriChanged(Uri[] uriArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
-                    obtain.writeTypedArray(uriArr, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(uriArr, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -11,7 +11,6 @@ import androidx.emoji2.text.MetadataRepo;
 import androidx.emoji2.text.flatbuffer.MetadataItem;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiProcessor {
     public final int[] mEmojiAsDefaultStyleExceptions;
@@ -20,7 +19,6 @@ public final class EmojiProcessor {
     public final EmojiCompat.SpanFactory mSpanFactory;
     public final boolean mUseEmojiAsDefaultStyle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ProcessorSm {
         public int mCurrentDepth;
         public MetadataRepo.Node mCurrentNode;
@@ -88,8 +86,8 @@ public final class EmojiProcessor {
         public final boolean shouldUseEmojiPresentationStyleForSingleCodepoint() {
             int[] iArr;
             MetadataItem metadataItem = this.mCurrentNode.mData.getMetadataItem();
-            int __offset = metadataItem.__offset(6);
-            if ((__offset == 0 || metadataItem.bb.get(__offset + metadataItem.bb_pos) == 0) && this.mLastCodepoint != 65039) {
+            int i__offset = metadataItem.__offset(6);
+            if ((i__offset == 0 || metadataItem.bb.get(i__offset + metadataItem.bb_pos) == 0) && this.mLastCodepoint != 65039) {
                 return this.mUseEmojiAsDefaultStyle && ((iArr = this.mEmojiAsDefaultStyleExceptions) == null || Arrays.binarySearch(iArr, this.mCurrentNode.mData.getCodepointAt(0)) < 0);
             }
             return true;
@@ -127,9 +125,9 @@ public final class EmojiProcessor {
         if (emojiMetadata.mHasGlyph == 0) {
             EmojiCompat.GlyphChecker glyphChecker = this.mGlyphChecker;
             MetadataItem metadataItem = emojiMetadata.getMetadataItem();
-            int __offset = metadataItem.__offset(8);
-            if (__offset != 0) {
-                metadataItem.bb.getShort(__offset + metadataItem.bb_pos);
+            int i__offset = metadataItem.__offset(8);
+            if (i__offset != 0) {
+                metadataItem.bb.getShort(i__offset + metadataItem.bb_pos);
             }
             DefaultGlyphChecker defaultGlyphChecker = (DefaultGlyphChecker) glyphChecker;
             defaultGlyphChecker.getClass();
@@ -144,9 +142,9 @@ public final class EmojiProcessor {
                 i++;
             }
             TextPaint textPaint = defaultGlyphChecker.mTextPaint;
-            String sb2 = sb.toString();
+            String string = sb.toString();
             int i3 = PaintCompat.$r8$clinit;
-            emojiMetadata.mHasGlyph = textPaint.hasGlyph(sb2) ? 2 : 1;
+            emojiMetadata.mHasGlyph = textPaint.hasGlyph(string) ? 2 : 1;
         }
         return emojiMetadata.mHasGlyph == 2;
     }

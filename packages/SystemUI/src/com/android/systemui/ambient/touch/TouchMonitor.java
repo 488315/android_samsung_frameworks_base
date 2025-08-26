@@ -42,7 +42,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TouchMonitor {
     public static int sNextInstanceId;
@@ -85,25 +84,25 @@ public class TouchMonitor {
     public final AnonymousClass4 mOnGestureListener = new GestureDetector.OnGestureListener() { // from class: com.android.systemui.ambient.touch.TouchMonitor.4
         public final boolean evaluate(final Evaluator evaluator) {
             final HashSet hashSet = new HashSet();
-            boolean anyMatch = TouchMonitor.this.mActiveTouchSessions.stream().map(new Function() { // from class: com.android.systemui.ambient.touch.TouchMonitor$4$$ExternalSyntheticLambda6
+            boolean zAnyMatch = TouchMonitor.this.mActiveTouchSessions.stream().map(new Function() { // from class: com.android.systemui.ambient.touch.TouchMonitor$4$$ExternalSyntheticLambda6
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    final TouchMonitor.Evaluator evaluator2 = TouchMonitor.Evaluator.this;
+                    final TouchMonitor.Evaluator evaluator2 = evaluator;
                     Set set = hashSet;
                     TouchMonitor.TouchSessionImpl touchSessionImpl = (TouchMonitor.TouchSessionImpl) obj;
-                    boolean anyMatch2 = touchSessionImpl.mGestureListeners.stream().map(new Function() { // from class: com.android.systemui.ambient.touch.TouchMonitor$4$$ExternalSyntheticLambda10
+                    boolean zAnyMatch2 = touchSessionImpl.mGestureListeners.stream().map(new Function() { // from class: com.android.systemui.ambient.touch.TouchMonitor$4$$ExternalSyntheticLambda10
                         @Override // java.util.function.Function
                         public final Object apply(Object obj2) {
-                            return Boolean.valueOf(TouchMonitor.Evaluator.this.evaluate((GestureDetector.OnGestureListener) obj2));
+                            return Boolean.valueOf(evaluator2.evaluate((GestureDetector.OnGestureListener) obj2));
                         }
                     }).anyMatch(new TouchMonitor$4$$ExternalSyntheticLambda7(1));
-                    if (anyMatch2) {
+                    if (zAnyMatch2) {
                         ((HashSet) set).add(touchSessionImpl);
                     }
-                    return Boolean.valueOf(anyMatch2);
+                    return Boolean.valueOf(zAnyMatch2);
                 }
             }).anyMatch(new TouchMonitor$4$$ExternalSyntheticLambda7(0));
-            if (anyMatch) {
+            if (zAnyMatch) {
                 TouchMonitor touchMonitor = TouchMonitor.this;
                 Collection<?> collection = (Collection) touchMonitor.mActiveTouchSessions.stream().filter(new Predicate() { // from class: com.android.systemui.ambient.touch.TouchMonitor$$ExternalSyntheticLambda9
                     @Override // java.util.function.Predicate
@@ -114,7 +113,7 @@ public class TouchMonitor {
                 collection.forEach(new TouchMonitor$$ExternalSyntheticLambda6(1));
                 touchMonitor.mActiveTouchSessions.removeAll(collection);
             }
-            return anyMatch;
+            return zAnyMatch;
         }
 
         public final void observe(Consumer consumer) {
@@ -152,7 +151,6 @@ public class TouchMonitor {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ambient.touch.TouchMonitor$2, reason: invalid class name */
     public class AnonymousClass2 extends ISystemGestureExclusionListener.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -171,7 +169,6 @@ public class TouchMonitor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ambient.touch.TouchMonitor$3, reason: invalid class name */
     public class AnonymousClass3 implements InputChannelCompat$InputEventListener {
         public AnonymousClass3() {
@@ -181,44 +178,44 @@ public class TouchMonitor {
         public final void onInputEvent(final InputEvent inputEvent) {
             TouchMonitor touchMonitor = TouchMonitor.this;
             if (touchMonitor.mActiveTouchSessions.isEmpty()) {
-                HashMap hashMap = new HashMap();
+                HashMap map = new HashMap();
                 for (TouchHandler touchHandler : touchMonitor.mHandlers) {
                     if (touchHandler.isEnabled().booleanValue()) {
                         Rect rect = touchMonitor.mMaxBounds;
-                        Region obtain = Region.obtain();
-                        touchHandler.getTouchInitiationRegion(rect, obtain, touchMonitor.mExclusionRect);
-                        if (!obtain.isEmpty()) {
+                        Region regionObtain = Region.obtain();
+                        touchHandler.getTouchInitiationRegion(rect, regionObtain, touchMonitor.mExclusionRect);
+                        if (!regionObtain.isEmpty()) {
                             if (inputEvent instanceof MotionEvent) {
                                 MotionEvent motionEvent = (MotionEvent) inputEvent;
-                                if (!obtain.contains(Math.round(motionEvent.getX()), Math.round(motionEvent.getY()))) {
+                                if (!regionObtain.contains(Math.round(motionEvent.getX()), Math.round(motionEvent.getY()))) {
                                 }
                             }
                         }
                         TouchSessionImpl touchSessionImpl = new TouchSessionImpl(touchMonitor, rect, null);
                         touchMonitor.mActiveTouchSessions.add(touchSessionImpl);
-                        hashMap.put(touchHandler, touchSessionImpl);
+                        map.put(touchHandler, touchSessionImpl);
                     }
                 }
-                hashMap.forEach(new BiConsumer() { // from class: com.android.systemui.ambient.touch.TouchMonitor$3$$ExternalSyntheticLambda0
+                map.forEach(new BiConsumer() { // from class: com.android.systemui.ambient.touch.TouchMonitor$3$$ExternalSyntheticLambda0
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        TouchMonitor.AnonymousClass3 anonymousClass3 = TouchMonitor.AnonymousClass3.this;
+                        TouchMonitor.AnonymousClass3 anonymousClass3 = this.f$0;
                         InputEvent inputEvent2 = inputEvent;
                         final TouchHandler touchHandler2 = (TouchHandler) obj;
                         final TouchHandler.TouchSession touchSession = (TouchHandler.TouchSession) obj2;
                         anonymousClass3.getClass();
                         if (inputEvent2 instanceof MotionEvent) {
                             MotionEvent motionEvent2 = (MotionEvent) inputEvent2;
-                            final int round = Math.round(motionEvent2.getX());
-                            final int round2 = Math.round(motionEvent2.getY());
+                            final int iRound = Math.round(motionEvent2.getX());
+                            final int iRound2 = Math.round(motionEvent2.getY());
                             TouchMonitor.this.mLogger.i(new TouchMonitor$$ExternalSyntheticLambda2(3), new Function1() { // from class: com.android.systemui.ambient.touch.TouchMonitor$3$$ExternalSyntheticLambda5
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj3) {
+                                public final Object mo781invoke(Object obj3) {
                                     LogMessage logMessage = (LogMessage) obj3;
-                                    logMessage.setStr1(TouchHandler.this.getClass().getSimpleName());
-                                    logMessage.setLong1(round);
-                                    logMessage.setLong2(round2);
+                                    logMessage.setStr1(touchHandler2.getClass().getSimpleName());
+                                    logMessage.setLong1(iRound);
+                                    logMessage.setLong2(iRound2);
                                     logMessage.setInt1(touchSession.hashCode());
                                     return Unit.INSTANCE;
                                 }
@@ -232,12 +229,10 @@ public class TouchMonitor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Evaluator {
         boolean evaluate(GestureDetector.OnGestureListener onGestureListener);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TouchSessionImpl implements TouchHandler.TouchSession {
         public final Rect mBounds;
         public final TouchSessionImpl mPredecessor;
@@ -247,7 +242,7 @@ public class TouchMonitor {
         public final HashSet mCallbacks = new HashSet();
 
         /* renamed from: -$$Nest$monRemoved, reason: not valid java name */
-        public static void m1010$$Nest$monRemoved(TouchSessionImpl touchSessionImpl) {
+        public static void m1012$$Nest$monRemoved(TouchSessionImpl touchSessionImpl) {
             touchSessionImpl.mEventListeners.clear();
             touchSessionImpl.mGestureListeners.clear();
             Iterator it = touchSessionImpl.mCallbacks.iterator();
@@ -269,18 +264,18 @@ public class TouchMonitor {
             return CallbackToFutureAdapter.getFuture(new CallbackToFutureAdapter.Resolver() { // from class: com.android.systemui.ambient.touch.TouchMonitor$$ExternalSyntheticLambda12
                 @Override // androidx.concurrent.futures.CallbackToFutureAdapter.Resolver
                 public final Object attachCompleter(final CallbackToFutureAdapter.Completer completer) {
-                    final TouchMonitor touchMonitor2 = TouchMonitor.this;
+                    final TouchMonitor touchMonitor2 = touchMonitor;
                     Executor executor = touchMonitor2.mMainExecutor;
                     final TouchMonitor.TouchSessionImpl touchSessionImpl = this;
                     executor.execute(new Runnable() { // from class: com.android.systemui.ambient.touch.TouchMonitor$$ExternalSyntheticLambda13
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TouchMonitor touchMonitor3 = TouchMonitor.this;
+                            TouchMonitor touchMonitor3 = touchMonitor2;
                             TouchMonitor.TouchSessionImpl touchSessionImpl2 = touchSessionImpl;
                             CallbackToFutureAdapter.Completer completer2 = completer;
                             touchMonitor3.mLogger.i(new TouchMonitor$$ExternalSyntheticLambda2(1), new TouchMonitor$$ExternalSyntheticLambda3(touchSessionImpl2, 1));
                             if (touchMonitor3.mActiveTouchSessions.remove(touchSessionImpl2)) {
-                                TouchMonitor.TouchSessionImpl.m1010$$Nest$monRemoved(touchSessionImpl2);
+                                TouchMonitor.TouchSessionImpl.m1012$$Nest$monRemoved(touchSessionImpl2);
                                 TouchMonitor.TouchSessionImpl touchSessionImpl3 = touchSessionImpl2.mPredecessor;
                                 if (touchSessionImpl3 != null) {
                                     touchMonitor3.mActiveTouchSessions.add(touchSessionImpl3);
@@ -313,12 +308,12 @@ public class TouchMonitor {
         this.mLifecycle = lifecycle;
         this.mWindowManagerService = iWindowManager;
         this.mConfigurationInteractor = configurationInteractor;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ":TouchMonitor[");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ":TouchMonitor[");
         int i2 = sNextInstanceId;
         sNextInstanceId = i2 + 1;
-        String m2 = ReorderTile$$ExternalSyntheticOutline0.m(i2, "]", m);
-        this.mLoggingName = m2;
-        this.mLogger = new Logger(logBuffer, m2);
+        String strM = ReorderTile$$ExternalSyntheticOutline0.m(i2, "]", sbM);
+        this.mLoggingName = strM;
+        this.mLogger = new Logger(logBuffer, strM);
     }
 
     public final void destroy() {
@@ -364,9 +359,9 @@ public class TouchMonitor {
         if (this.mCurrentInputSession == null) {
             return;
         }
-        boolean isEmpty = this.mActiveTouchSessions.isEmpty();
+        boolean zIsEmpty = this.mActiveTouchSessions.isEmpty();
         Logger logger = this.mLogger;
-        if (!isEmpty && !z) {
+        if (!zIsEmpty && !z) {
             logger.i(new TouchMonitor$$ExternalSyntheticLambda2(0), new TouchMonitor$$ExternalSyntheticLambda3(this, 0));
             this.mStopMonitoringPending = true;
             return;

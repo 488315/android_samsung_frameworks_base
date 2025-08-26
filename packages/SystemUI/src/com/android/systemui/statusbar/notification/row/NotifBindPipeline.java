@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifBindPipeline {
     public final AnonymousClass1 mCollectionListener;
@@ -30,12 +29,10 @@ public final class NotifBindPipeline {
     public final Map mBindEntries = new ArrayMap();
     public final List mScratchCallbacksList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface BindCallback {
         void onBindFinished(NotificationEntry notificationEntry);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BindEntry {
         public final Set callbacks;
         public boolean invalidated;
@@ -81,16 +78,16 @@ public final class NotifBindPipeline {
         Consumer consumer = new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotifBindPipeline$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NotifBindPipeline notifBindPipeline = NotifBindPipeline.this;
+                NotifBindPipeline notifBindPipeline = this.f$0;
                 NotificationEntry notificationEntry = (NotificationEntry) obj;
                 NotifBindPipelineLogger notifBindPipelineLogger2 = notifBindPipeline.mLogger;
                 notifBindPipelineLogger2.getClass();
                 LogLevel logLevel = LogLevel.INFO;
                 NotifBindPipelineLogger$$ExternalSyntheticLambda0 notifBindPipelineLogger$$ExternalSyntheticLambda0 = new NotifBindPipelineLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer = notifBindPipelineLogger2.buffer;
-                LogMessage obtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+                logBuffer.commit(logMessageObtain);
                 if (notifBindPipeline.mStage == null) {
                     throw new IllegalStateException("No stage was ever set on the pipeline");
                 }
@@ -108,14 +105,14 @@ public final class NotifBindPipeline {
         LogLevel logLevel = LogLevel.INFO;
         NotifBindPipelineLogger$$ExternalSyntheticLambda0 notifBindPipelineLogger$$ExternalSyntheticLambda0 = new NotifBindPipelineLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = notifBindPipelineLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
         ExpandableNotificationRow expandableNotificationRow = ((BindEntry) ((ArrayMap) this.mBindEntries).get(notificationEntry)).row;
         if (expandableNotificationRow == null) {
-            LogMessage obtain2 = logBuffer.obtain("NotifBindPipeline", logLevel, new NotifBindPipelineLogger$$ExternalSyntheticLambda0(0), null);
-            ((LogMessageImpl) obtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-            logBuffer.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer.obtain("NotifBindPipeline", logLevel, new NotifBindPipelineLogger$$ExternalSyntheticLambda0(0), null);
+            ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+            logBuffer.commit(logMessageObtain2);
         } else {
             this.mStage.abortStage(notificationEntry, expandableNotificationRow);
             NotificationEntryProcessorFactoryLooperImpl.HandlerProcessor handlerProcessor = this.mStartProcessor;

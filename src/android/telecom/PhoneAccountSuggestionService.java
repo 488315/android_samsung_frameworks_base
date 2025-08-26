@@ -33,13 +33,13 @@ public class PhoneAccountSuggestionService extends Service {
     }
 
     public final void suggestPhoneAccounts(String str, List<PhoneAccountSuggestion> list) {
-        IPhoneAccountSuggestionCallback remove = this.mCallbackMap.remove(str);
-        if (remove == null) {
+        IPhoneAccountSuggestionCallback iPhoneAccountSuggestionCallbackRemove = this.mCallbackMap.remove(str);
+        if (iPhoneAccountSuggestionCallbackRemove == null) {
             Log.w(this, "No suggestions requested for the number %s", Log.pii(str));
             return;
         }
         try {
-            remove.suggestPhoneAccounts(str, list);
+            iPhoneAccountSuggestionCallbackRemove.suggestPhoneAccounts(str, list);
         } catch (RemoteException unused) {
             Log.w(this, "Remote exception calling suggestPhoneAccounts", new Object[0]);
         }

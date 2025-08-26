@@ -1,14 +1,19 @@
 package androidx.compose.foundation.gestures;
 
+import androidx.compose.foundation.gestures.DragEvent;
+import java.util.concurrent.CancellationException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.channels.BufferedChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DragGestureNode$startListeningForEvents$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -17,7 +22,6 @@ final class DragGestureNode$startListeningForEvents$1 extends SuspendLambda impl
     int label;
     final /* synthetic */ DragGestureNode this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.foundation.gestures.DragGestureNode$startListeningForEvents$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Ref$ObjectRef<DragEvent> $event;
@@ -46,77 +50,60 @@ final class DragGestureNode$startListeningForEvents$1 extends SuspendLambda impl
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x002d  */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0045 -> B:6:0x0057). Please report as a decompilation issue!!! */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x0051 -> B:5:0x0054). Please report as a decompilation issue!!! */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x002d  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:20:0x0045 -> B:25:0x0057). Please report as a decompilation issue!!! */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x0051 -> B:24:0x0054). Please report as a decompilation issue!!! */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-            /*
-                r5 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r5.label
-                r2 = 1
-                if (r1 == 0) goto L1d
-                if (r1 != r2) goto L15
-                java.lang.Object r1 = r5.L$1
-                kotlin.jvm.internal.Ref$ObjectRef r1 = (kotlin.jvm.internal.Ref$ObjectRef) r1
-                java.lang.Object r3 = r5.L$0
-                kotlin.jvm.functions.Function1 r3 = (kotlin.jvm.functions.Function1) r3
-                kotlin.ResultKt.throwOnFailure(r6)
-                goto L54
-            L15:
-                java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                r5.<init>(r6)
-                throw r5
-            L1d:
-                kotlin.ResultKt.throwOnFailure(r6)
-                java.lang.Object r6 = r5.L$0
-                kotlin.jvm.functions.Function1 r6 = (kotlin.jvm.functions.Function1) r6
-                r3 = r6
-            L25:
-                kotlin.jvm.internal.Ref$ObjectRef<androidx.compose.foundation.gestures.DragEvent> r6 = r5.$event
-                T r6 = r6.element
-                boolean r1 = r6 instanceof androidx.compose.foundation.gestures.DragEvent.DragStopped
-                if (r1 != 0) goto L5a
-                boolean r1 = r6 instanceof androidx.compose.foundation.gestures.DragEvent.DragCancelled
-                if (r1 != 0) goto L5a
-                boolean r1 = r6 instanceof androidx.compose.foundation.gestures.DragEvent.DragDelta
-                r4 = 0
-                if (r1 == 0) goto L39
-                androidx.compose.foundation.gestures.DragEvent$DragDelta r6 = (androidx.compose.foundation.gestures.DragEvent.DragDelta) r6
-                goto L3a
-            L39:
-                r6 = r4
-            L3a:
-                if (r6 == 0) goto L3f
-                r3.mo779invoke(r6)
-            L3f:
-                kotlin.jvm.internal.Ref$ObjectRef<androidx.compose.foundation.gestures.DragEvent> r1 = r5.$event
-                androidx.compose.foundation.gestures.DragGestureNode r6 = r5.this$0
-                kotlinx.coroutines.channels.BufferedChannel r6 = r6.channel
-                if (r6 == 0) goto L57
-                r5.L$0 = r3
-                r5.L$1 = r1
-                r5.label = r2
-                java.lang.Object r6 = r6.receive(r5)
-                if (r6 != r0) goto L54
-                return r0
-            L54:
-                r4 = r6
-                androidx.compose.foundation.gestures.DragEvent r4 = (androidx.compose.foundation.gestures.DragEvent) r4
-            L57:
-                r1.element = r4
-                goto L25
-            L5a:
-                kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                return r5
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DragGestureNode$startListeningForEvents$1.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            Function1 function1;
+            DragEvent dragEvent;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                function1 = (Function1) this.L$0;
+                dragEvent = this.$event.element;
+                if (dragEvent instanceof DragEvent.DragStopped) {
+                }
+                return Unit.INSTANCE;
+            }
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            Ref$ObjectRef<DragEvent> ref$ObjectRef = (Ref$ObjectRef) this.L$1;
+            function1 = (Function1) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            T t = (DragEvent) obj;
+            ref$ObjectRef.element = t;
+            dragEvent = this.$event.element;
+            if (!(dragEvent instanceof DragEvent.DragStopped) || (dragEvent instanceof DragEvent.DragCancelled)) {
+                return Unit.INSTANCE;
+            }
+            t = 0;
+            DragEvent.DragDelta dragDelta = dragEvent instanceof DragEvent.DragDelta ? (DragEvent.DragDelta) dragEvent : null;
+            if (dragDelta != null) {
+                function1.mo781invoke(dragDelta);
+            }
+            ref$ObjectRef = this.$event;
+            BufferedChannel bufferedChannel = this.this$0.channel;
+            if (bufferedChannel != null) {
+                this.L$0 = function1;
+                this.L$1 = ref$ObjectRef;
+                this.label = 1;
+                obj = bufferedChannel.receive(this);
+                if (obj == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                T t2 = (DragEvent) obj;
+            }
+            ref$ObjectRef.element = t2;
+            dragEvent = this.$event.element;
+            if (dragEvent instanceof DragEvent.DragStopped) {
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -138,38 +125,202 @@ final class DragGestureNode$startListeningForEvents$1 extends SuspendLambda impl
         return ((DragGestureNode$startListeningForEvents$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x00b4, code lost:
-    
-        if (r7.drag(r4, r6) != r0) goto L14;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x00e2, code lost:
-    
-        if (androidx.compose.foundation.gestures.DragGestureNode.access$processDragCancel(r7, r6) == r0) goto L51;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00f2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:50:0x00f2, code lost:
     
         if (androidx.compose.foundation.gestures.DragGestureNode.access$processDragCancel(r7, r6) != r0) goto L11;
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Path cross not found for [B:30:0x00d1, B:27:0x00bd], limit reached: 56 */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00f5  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x008a -> B:8:0x005c). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:28:0x00cc -> B:8:0x005c). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:31:0x00d3 -> B:8:0x005c). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:33:0x00e2 -> B:8:0x005c). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:37:0x00f2 -> B:7:0x0025). Please report as a decompilation issue!!! */
+    /* JADX WARN: Path cross not found for [B:44:0x00d1, B:40:0x00bd], limit reached: 56 */
+    /* JADX WARN: Path cross not found for [B:46:0x00d5, B:19:0x005c], limit reached: 56 */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0032 A[PHI: r1 r3
+      0x0032: PHI (r1v14 kotlin.jvm.internal.Ref$ObjectRef) = (r1v6 kotlin.jvm.internal.Ref$ObjectRef), (r1v19 kotlin.jvm.internal.Ref$ObjectRef) binds: [B:13:0x002f, B:36:0x00b4] A[DONT_GENERATE, DONT_INLINE]
+      0x0032: PHI (r3v8 kotlinx.coroutines.CoroutineScope) = (r3v5 kotlinx.coroutines.CoroutineScope), (r3v10 kotlinx.coroutines.CoroutineScope) binds: [B:13:0x002f, B:36:0x00b4] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005c A[PHI: r4
+      0x005c: PHI (r4v7 kotlinx.coroutines.CoroutineScope) = 
+      (r4v0 kotlinx.coroutines.CoroutineScope)
+      (r4v3 kotlinx.coroutines.CoroutineScope)
+      (r4v3 kotlinx.coroutines.CoroutineScope)
+      (r4v3 kotlinx.coroutines.CoroutineScope)
+      (r4v5 kotlinx.coroutines.CoroutineScope)
+      (r4v8 kotlinx.coroutines.CoroutineScope)
+     binds: [B:18:0x0054, B:45:0x00d3, B:47:0x00e2, B:41:0x00cc, B:30:0x008a, B:11:0x0025] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x008c  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00bd A[Catch: CancellationException -> 0x00cf, TryCatch #0 {CancellationException -> 0x00cf, blocks: (B:38:0x00b7, B:40:0x00bd, B:44:0x00d1, B:46:0x00d5), top: B:55:0x00b7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00d1 A[Catch: CancellationException -> 0x00cf, TryCatch #0 {CancellationException -> 0x00cf, blocks: (B:38:0x00b7, B:40:0x00bd, B:44:0x00d1, B:46:0x00d5), top: B:55:0x00b7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00f5  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:30:0x008a -> B:19:0x005c). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:41:0x00cc -> B:19:0x005c). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:45:0x00d3 -> B:19:0x005c). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:47:0x00e2 -> B:19:0x005c). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:50:0x00f2 -> B:11:0x0025). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-        /*
-            Method dump skipped, instructions count: 266
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DragGestureNode$startListeningForEvents$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        CoroutineScope coroutineScope;
+        Ref$ObjectRef ref$ObjectRef;
+        Ref$ObjectRef ref$ObjectRef2;
+        Ref$ObjectRef ref$ObjectRef3;
+        CoroutineScope coroutineScope2;
+        CoroutineScope coroutineScope3;
+        T t;
+        DragGestureNode dragGestureNode;
+        AnonymousClass1 anonymousClass1;
+        T t2;
+        T t3;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        switch (this.label) {
+            case 0:
+                ResultKt.throwOnFailure(obj);
+                coroutineScope = (CoroutineScope) this.L$0;
+                if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                    ref$ObjectRef = new Ref$ObjectRef();
+                    BufferedChannel bufferedChannel = this.this$0.channel;
+                    if (bufferedChannel == null) {
+                        ref$ObjectRef2 = ref$ObjectRef;
+                        t2 = 0;
+                        ref$ObjectRef.element = t2;
+                        t3 = ref$ObjectRef2.element;
+                        if (t3 instanceof DragEvent.DragStarted) {
+                        }
+                        return coroutineSingletons;
+                    }
+                    this.L$0 = coroutineScope;
+                    this.L$1 = ref$ObjectRef;
+                    this.L$2 = ref$ObjectRef;
+                    this.label = 1;
+                    obj = bufferedChannel.receive(this);
+                    if (obj != coroutineSingletons) {
+                        ref$ObjectRef2 = ref$ObjectRef;
+                        t2 = (DragEvent) obj;
+                        ref$ObjectRef.element = t2;
+                        t3 = ref$ObjectRef2.element;
+                        if (t3 instanceof DragEvent.DragStarted) {
+                            this.L$0 = coroutineScope;
+                            this.L$1 = ref$ObjectRef2;
+                            this.L$2 = null;
+                            this.label = 2;
+                            if (DragGestureNode.access$processDragStart(this.this$0, (DragEvent.DragStarted) t3, this) != coroutineSingletons) {
+                                ref$ObjectRef3 = ref$ObjectRef2;
+                                coroutineScope2 = coroutineScope;
+                                dragGestureNode = this.this$0;
+                                anonymousClass1 = new AnonymousClass1(ref$ObjectRef3, dragGestureNode, null);
+                                this.L$0 = coroutineScope2;
+                                this.L$1 = ref$ObjectRef3;
+                                this.label = 3;
+                                if (dragGestureNode.drag(anonymousClass1, this) != coroutineSingletons) {
+                                    coroutineScope = coroutineScope2;
+                                    try {
+                                    } catch (CancellationException unused) {
+                                        coroutineScope3 = coroutineScope;
+                                        DragGestureNode dragGestureNode2 = this.this$0;
+                                        this.L$0 = coroutineScope3;
+                                        this.L$1 = null;
+                                        this.label = 6;
+                                        break;
+                                    }
+                                    t = ref$ObjectRef3.element;
+                                    if (t instanceof DragEvent.DragStopped) {
+                                        this.L$0 = coroutineScope;
+                                        this.L$1 = null;
+                                        this.label = 4;
+                                        if (DragGestureNode.access$processDragStop(this.this$0, (DragEvent.DragStopped) t, this) != coroutineSingletons) {
+                                            if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                                            }
+                                        }
+                                    } else {
+                                        if (t instanceof DragEvent.DragCancelled) {
+                                            DragGestureNode dragGestureNode3 = this.this$0;
+                                            this.L$0 = coroutineScope;
+                                            this.L$1 = null;
+                                            this.label = 5;
+                                            if (DragGestureNode.access$processDragCancel(dragGestureNode3, this) != coroutineSingletons) {
+                                            }
+                                        }
+                                        if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                                            return Unit.INSTANCE;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return coroutineSingletons;
+                }
+            case 1:
+                ref$ObjectRef = (Ref$ObjectRef) this.L$2;
+                ref$ObjectRef2 = (Ref$ObjectRef) this.L$1;
+                coroutineScope = (CoroutineScope) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                t2 = (DragEvent) obj;
+                ref$ObjectRef.element = t2;
+                t3 = ref$ObjectRef2.element;
+                if (t3 instanceof DragEvent.DragStarted) {
+                }
+                return coroutineSingletons;
+            case 2:
+                ref$ObjectRef3 = (Ref$ObjectRef) this.L$1;
+                coroutineScope2 = (CoroutineScope) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                dragGestureNode = this.this$0;
+                anonymousClass1 = new AnonymousClass1(ref$ObjectRef3, dragGestureNode, null);
+                this.L$0 = coroutineScope2;
+                this.L$1 = ref$ObjectRef3;
+                this.label = 3;
+                if (dragGestureNode.drag(anonymousClass1, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 3:
+                ref$ObjectRef3 = (Ref$ObjectRef) this.L$1;
+                coroutineScope2 = (CoroutineScope) this.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                } catch (CancellationException unused2) {
+                    coroutineScope3 = coroutineScope2;
+                    DragGestureNode dragGestureNode22 = this.this$0;
+                    this.L$0 = coroutineScope3;
+                    this.L$1 = null;
+                    this.label = 6;
+                    break;
+                }
+                coroutineScope = coroutineScope2;
+                t = ref$ObjectRef3.element;
+                if (t instanceof DragEvent.DragStopped) {
+                }
+                break;
+            case 4:
+                coroutineScope3 = (CoroutineScope) this.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                } catch (CancellationException unused3) {
+                    DragGestureNode dragGestureNode222 = this.this$0;
+                    this.L$0 = coroutineScope3;
+                    this.L$1 = null;
+                    this.label = 6;
+                    break;
+                }
+                coroutineScope = coroutineScope3;
+                if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                }
+                break;
+            case 5:
+                coroutineScope3 = (CoroutineScope) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                coroutineScope = coroutineScope3;
+                if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                }
+                break;
+            case 6:
+                coroutineScope3 = (CoroutineScope) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                coroutineScope = coroutineScope3;
+                if (!CoroutineScopeKt.isActive(coroutineScope)) {
+                }
+                break;
+            default:
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
     }
 }

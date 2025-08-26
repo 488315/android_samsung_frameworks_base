@@ -8,11 +8,11 @@ import android.view.View;
 import com.android.systemui.R;
 import com.samsung.android.util.SemViewUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OutlineView extends View {
     public final Paint mBackgroundPaint;
     public float mCaptionHeight;
+    public boolean mInFullImmersiveState;
     public boolean mIsClosing;
     public boolean mIsOpening;
     public int mRadius;
@@ -36,17 +36,21 @@ public class OutlineView extends View {
     @Override // android.view.View
     public final void draw(Canvas canvas) {
         super.draw(canvas);
+        if (this.mInFullImmersiveState) {
+            return;
+        }
         canvas.drawPath(SemViewUtils.getSmoothCornerRectPath(this.mRadius, 0.0f, 0.0f, getWidth(), getHeight()), this.mStrokePaint);
         if (this.mCaptionHeight != 0.0f) {
             canvas.drawRect(0.0f, 0.0f, getWidth(), this.mCaptionHeight, this.mBackgroundPaint);
         }
     }
 
-    public final void setOutlineInfo(int i, int i2, int i3, boolean z) {
+    public final void setOutlineInfo(int i, int i2, boolean z, boolean z2, int i3) {
         this.mRadius = i;
         this.mStrokePaint.setColor(((View) this).mContext.getColor(z ? R.color.mw_caption_outline_stroke_color_dark : R.color.mw_caption_outline_stroke_color_light));
         this.mStrokePaint.setStrokeWidth(i2);
         this.mCaptionHeight = i3;
         this.mBackgroundPaint.setColor(((View) this).mContext.getColor(z ? R.color.mw_caption_background_color_dark : R.color.mw_caption_background_color_light));
+        this.mInFullImmersiveState = z2;
     }
 }

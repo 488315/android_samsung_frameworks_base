@@ -12,8 +12,8 @@ import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.builders.SetBuilder;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DepthTracker {
     public volatile int dirty_directDepth;
@@ -115,13 +115,13 @@ public final class DepthTracker {
                 setBuilder4.add((MuxDeferredNode) muxNode);
             }
             Unit unit4 = Unit.INSTANCE;
-            SetBuilder build = setBuilder4.build();
+            SetBuilder setBuilderBuild = setBuilder4.build();
             SetBuilder setBuilder5 = new SetBuilder();
             setBuilder5.addAll(this.indirectAdditions);
             if (!this.snapshotIsIndirectRoot && this.dirty_isIndirectRoot) {
                 setBuilder5.add((MuxDeferredNode) muxNode);
             }
-            downstreamSet.adjustIndirectUpstream(schedulerImpl, i7, i8, build, setBuilder5.build());
+            downstreamSet.adjustIndirectUpstream(schedulerImpl, i7, i8, setBuilderBuild, setBuilder5.build());
         }
         reset();
     }
@@ -131,24 +131,24 @@ public final class DepthTracker {
     }
 
     public final boolean recalcDepth() {
-        Map.Entry lastEntry = this.dirty_directUpstreamDepths.lastEntry();
-        int intValue = lastEntry != null ? ((Integer) lastEntry.getKey()).intValue() + 1 : 0;
+        Map.Entry entryLastEntry = this.dirty_directUpstreamDepths.lastEntry();
+        int iIntValue = entryLastEntry != null ? ((Integer) entryLastEntry.getKey()).intValue() + 1 : 0;
         boolean z = !this.dirty_directUpstreamDepths.isEmpty();
         boolean z2 = this.dirty_depthIsDirect != z;
         this.dirty_depthIsDirect = z;
-        boolean z3 = intValue != this.dirty_directDepth;
-        this.dirty_directDepth = intValue;
+        boolean z3 = iIntValue != this.dirty_directDepth;
+        this.dirty_directDepth = iIntValue;
         return z3 | z2;
     }
 
     public final boolean recalcIndirDepth() {
-        Map.Entry lastEntry = this.dirty_indirectUpstreamDepths.lastEntry();
+        Map.Entry entryLastEntry = this.dirty_indirectUpstreamDepths.lastEntry();
         boolean z = false;
-        int intValue = lastEntry != null ? ((Integer) lastEntry.getKey()).intValue() + 1 : 0;
-        if (!this.dirty_depthIsDirect && !this.dirty_isIndirectRoot && intValue != this.dirty_indirectDepth) {
+        int iIntValue = entryLastEntry != null ? ((Integer) entryLastEntry.getKey()).intValue() + 1 : 0;
+        if (!this.dirty_depthIsDirect && !this.dirty_isIndirectRoot && iIntValue != this.dirty_indirectDepth) {
             z = true;
         }
-        this.dirty_indirectDepth = intValue;
+        this.dirty_indirectDepth = iIntValue;
         return z;
     }
 
@@ -178,14 +178,14 @@ public final class DepthTracker {
     public final void schedule(SchedulerImpl schedulerImpl, MuxNode muxNode) {
         if (this.dirty_depthIsDirect) {
             int i = this.dirty_directDepth;
-            if (((Boolean) schedulerImpl.enqueue.mo779invoke(muxNode)).booleanValue()) {
+            if (((Boolean) schedulerImpl.enqueue.mo781invoke(muxNode)).booleanValue()) {
                 schedulerImpl.scheduledQ.add(new Pair(Integer.valueOf(i), muxNode));
                 return;
             }
             return;
         }
         int i2 = this.dirty_indirectDepth - 2147483648;
-        if (((Boolean) schedulerImpl.enqueue.mo779invoke(muxNode)).booleanValue()) {
+        if (((Boolean) schedulerImpl.enqueue.mo781invoke(muxNode)).booleanValue()) {
             schedulerImpl.scheduledQ.add(new Pair(Integer.valueOf(i2), muxNode));
         }
     }
@@ -207,129 +207,82 @@ public final class DepthTracker {
         TreeMap treeMap = this.dirty_directUpstreamDepths;
         TreeMap treeMap2 = this.dirty_indirectUpstreamDepths;
         Bag bag = this.dirty_indirectUpstreamRoots;
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("DepthTracker(sIsDirect=", i, ", sDirectDepth=", z, ", sIndirectDepth=");
-        m.append(i2);
-        m.append(", sIndirectRoots=");
-        m.append(set);
-        m.append(", dIsIndirectRoot=");
-        m.append(z2);
-        m.append(", dDirectDepths=");
-        m.append(treeMap);
-        m.append(", dIndirectDepths=");
-        m.append(treeMap2);
-        m.append(", dIndirectRoots=");
-        m.append(bag);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("DepthTracker(sIsDirect=", i, ", sDirectDepth=", z, ", sIndirectDepth=");
+        sbM.append(i2);
+        sbM.append(", sIndirectRoots=");
+        sbM.append(set);
+        sbM.append(", dIsIndirectRoot=");
+        sbM.append(z2);
+        sbM.append(", dDirectDepths=");
+        sbM.append(treeMap);
+        sbM.append(", dIndirectDepths=");
+        sbM.append(treeMap2);
+        sbM.append(", dIndirectRoots=");
+        sbM.append(bag);
+        sbM.append(")");
+        return sbM.toString();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00ba A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean updateIndirectRoots(java.util.Set r8, java.util.Set r9, com.android.systemui.kairos.internal.MuxDeferredNode r10) {
-        /*
-            r7 = this;
-            r0 = 0
-            r1 = 0
-            r2 = 1
-            if (r8 == 0) goto L5e
-            com.android.systemui.kairos.internal.util.Bag r3 = r7.dirty_indirectUpstreamRoots
-            java.lang.Iterable r8 = (java.lang.Iterable) r8
-            r3.getClass()
-            java.util.HashSet r4 = new java.util.HashSet
-            r4.<init>()
-            java.util.Iterator r8 = r8.iterator()
-        L15:
-            boolean r5 = r8.hasNext()
-            if (r5 == 0) goto L2f
-            java.lang.Object r5 = r8.next()
-            boolean r6 = kotlin.jvm.internal.Intrinsics.areEqual(r5, r10)
-            if (r6 != 0) goto L15
-            boolean r6 = r3.add(r5)
-            if (r6 == 0) goto L15
-            r4.add(r5)
-            goto L15
-        L2f:
-            boolean r8 = r4.isEmpty()
-            if (r8 == 0) goto L36
-            r4 = r0
-        L36:
-            if (r4 == 0) goto L5e
-            java.util.HashSet r8 = r7.indirectAdditions
-            java.util.HashSet r10 = r7.indirectRemovals
-            java.util.HashSet r3 = new java.util.HashSet
-            r3.<init>()
-            java.util.Iterator r4 = r4.iterator()
-        L45:
-            boolean r5 = r4.hasNext()
-            if (r5 == 0) goto L59
-            java.lang.Object r5 = r4.next()
-            boolean r6 = r10.add(r5)
-            if (r6 != 0) goto L45
-            r3.add(r5)
-            goto L45
-        L59:
-            r8.addAll(r3)
-            r8 = r2
-            goto L5f
-        L5e:
-            r8 = r1
-        L5f:
-            if (r9 == 0) goto Lb5
-            com.android.systemui.kairos.internal.util.Bag r10 = r7.dirty_indirectUpstreamRoots
-            java.util.Collection r9 = (java.util.Collection) r9
-            r10.getClass()
-            java.util.HashSet r3 = new java.util.HashSet
-            r3.<init>()
-            java.util.Iterator r9 = r9.iterator()
-        L71:
-            boolean r4 = r9.hasNext()
-            if (r4 == 0) goto L85
-            java.lang.Object r4 = r9.next()
-            boolean r5 = r10.remove(r4)
-            if (r5 == 0) goto L71
-            r3.add(r4)
-            goto L71
-        L85:
-            boolean r9 = r3.isEmpty()
-            if (r9 == 0) goto L8c
-            goto L8d
-        L8c:
-            r0 = r3
-        L8d:
-            if (r0 == 0) goto Lb5
-            java.util.HashSet r9 = r7.indirectRemovals
-            java.util.HashSet r10 = r7.indirectAdditions
-            java.util.HashSet r3 = new java.util.HashSet
-            r3.<init>()
-            java.util.Iterator r0 = r0.iterator()
-        L9c:
-            boolean r4 = r0.hasNext()
-            if (r4 == 0) goto Lb0
-            java.lang.Object r4 = r0.next()
-            boolean r5 = r10.add(r4)
-            if (r5 != 0) goto L9c
-            r3.add(r4)
-            goto L9c
-        Lb0:
-            r9.addAll(r3)
-            r9 = r2
-            goto Lb6
-        Lb5:
-            r9 = r1
-        Lb6:
-            boolean r7 = r7.dirty_depthIsDirect
-            if (r7 != 0) goto Lbf
-            if (r8 != 0) goto Lbe
-            if (r9 == 0) goto Lbf
-        Lbe:
-            return r2
-        Lbf:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.kairos.internal.DepthTracker.updateIndirectRoots(java.util.Set, java.util.Set, com.android.systemui.kairos.internal.MuxDeferredNode):boolean");
+    public final boolean updateIndirectRoots(Set set, Set set2, MuxDeferredNode muxDeferredNode) {
+        boolean z;
+        boolean z2;
+        if (set != null) {
+            Bag bag = this.dirty_indirectUpstreamRoots;
+            bag.getClass();
+            HashSet hashSet = new HashSet();
+            for (Object obj : set) {
+                if (!Intrinsics.areEqual(obj, muxDeferredNode) && bag.add(obj)) {
+                    hashSet.add(obj);
+                }
+            }
+            if (hashSet.isEmpty()) {
+                hashSet = null;
+            }
+            if (hashSet != null) {
+                HashSet hashSet2 = this.indirectAdditions;
+                HashSet hashSet3 = this.indirectRemovals;
+                HashSet hashSet4 = new HashSet();
+                for (Object obj2 : hashSet) {
+                    if (!hashSet3.add(obj2)) {
+                        hashSet4.add(obj2);
+                    }
+                }
+                hashSet2.addAll(hashSet4);
+                z = true;
+            } else {
+                z = false;
+            }
+        }
+        if (set2 != null) {
+            Bag bag2 = this.dirty_indirectUpstreamRoots;
+            bag2.getClass();
+            HashSet hashSet5 = new HashSet();
+            for (Object obj3 : set2) {
+                if (bag2.remove(obj3)) {
+                    hashSet5.add(obj3);
+                }
+            }
+            HashSet hashSet6 = hashSet5.isEmpty() ? null : hashSet5;
+            if (hashSet6 != null) {
+                HashSet hashSet7 = this.indirectRemovals;
+                HashSet hashSet8 = this.indirectAdditions;
+                HashSet hashSet9 = new HashSet();
+                for (Object obj4 : hashSet6) {
+                    if (!hashSet8.add(obj4)) {
+                        hashSet9.add(obj4);
+                    }
+                }
+                hashSet7.addAll(hashSet9);
+                z2 = true;
+            } else {
+                z2 = false;
+            }
+        }
+        return !this.dirty_depthIsDirect && (z || z2);
     }
 }

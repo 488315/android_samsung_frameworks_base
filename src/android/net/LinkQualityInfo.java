@@ -9,16 +9,16 @@ public class LinkQualityInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public LinkQualityInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 1) {
+            int i = parcel.readInt();
+            if (i == 1) {
                 LinkQualityInfo linkQualityInfo = new LinkQualityInfo();
                 linkQualityInfo.initializeFromParcel(parcel);
                 return linkQualityInfo;
             }
-            if (readInt == 2) {
+            if (i == 2) {
                 return WifiLinkQualityInfo.createFromParcelBody(parcel);
             }
-            if (readInt == 3) {
+            if (i == 3) {
                 return MobileLinkQualityInfo.createFromParcelBody(parcel);
             }
             return null;

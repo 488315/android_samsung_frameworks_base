@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidUiDispatcher extends CoroutineDispatcher {
     public static final Companion Companion = new Companion(null);
@@ -41,11 +40,11 @@ public final class AndroidUiDispatcher extends CoroutineDispatcher {
         @Override // java.lang.ThreadLocal
         public final CoroutineContext initialValue() {
             Choreographer choreographer = Choreographer.getInstance();
-            Looper myLooper = Looper.myLooper();
-            if (myLooper == null) {
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper == null) {
                 throw new IllegalStateException("no Looper on this thread");
             }
-            AndroidUiDispatcher androidUiDispatcher = new AndroidUiDispatcher(choreographer, Handler.createAsync(myLooper), null);
+            AndroidUiDispatcher androidUiDispatcher = new AndroidUiDispatcher(choreographer, Handler.createAsync(looperMyLooper), null);
             return CoroutineContext.DefaultImpls.plus(androidUiDispatcher, androidUiDispatcher.frameClock);
         }
     };
@@ -60,7 +59,6 @@ public final class AndroidUiDispatcher extends CoroutineDispatcher {
     public List toRunOnFrame;
     public final ArrayDeque toRunTrampolined;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

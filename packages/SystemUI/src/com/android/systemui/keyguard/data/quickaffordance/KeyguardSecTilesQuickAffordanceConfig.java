@@ -29,7 +29,6 @@ import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSecTilesQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public final KeyguardSecTilesQuickAffordanceConfig$callback$1 callback;
@@ -41,7 +40,6 @@ public final class KeyguardSecTilesQuickAffordanceConfig implements KeyguardQuic
     public String key = "tilesConfig";
     public final HashMap componentNameList = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,30 +53,32 @@ public final class KeyguardSecTilesQuickAffordanceConfig implements KeyguardQuic
         new Companion(null);
     }
 
-    public KeyguardSecTilesQuickAffordanceConfig(Context context, SecLockscreenTileHost secLockscreenTileHost) {
-        Collection collection;
+    public KeyguardSecTilesQuickAffordanceConfig(Context context, SecLockscreenTileHost secLockscreenTileHost) throws Resources.NotFoundException {
+        Collection collectionTake;
         this.lockQSTileHost = secLockscreenTileHost;
-        List split = new Regex(",").split(context.getResources().getString(R.string.lock_shortcut_custom_tile_component_name));
-        if (!split.isEmpty()) {
-            ListIterator listIterator = split.listIterator(split.size());
+        List listSplit = new Regex(",").split(context.getResources().getString(R.string.lock_shortcut_custom_tile_component_name));
+        if (listSplit.isEmpty()) {
+            collectionTake = EmptyList.INSTANCE;
+        } else {
+            ListIterator listIterator = listSplit.listIterator(listSplit.size());
             while (listIterator.hasPrevious()) {
                 if (((String) listIterator.previous()).length() != 0) {
-                    collection = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                    collectionTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                     break;
                 }
             }
+            collectionTake = EmptyList.INSTANCE;
         }
-        collection = EmptyList.INSTANCE;
-        for (String str : (String[]) collection.toArray(new String[0])) {
+        for (String str : (String[]) collectionTake.toArray(new String[0])) {
             str.getClass();
-            int indexOf$default = StringsKt__StringsKt.indexOf$default(str, ":", 0, false, 6);
-            String substring = str.substring(0, indexOf$default);
-            String substring2 = str.substring(indexOf$default + 1, str.length());
-            if (substring2 != null) {
-                substring2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("custom(", substring2, ")");
+            int iIndexOf$default = StringsKt__StringsKt.indexOf$default(str, ":", 0, false, 6);
+            String strSubstring = str.substring(0, iIndexOf$default);
+            String strSubstring2 = str.substring(iIndexOf$default + 1, str.length());
+            if (strSubstring2 != null) {
+                strSubstring2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("custom(", strSubstring2, ")");
             }
-            this.componentNameList.put(substring, substring2);
-            Log.d("KeyguardSecTilesQuickAffordanceConfig", "make table : customTileName = " + substring + ", componentName = " + substring2);
+            this.componentNameList.put(strSubstring, strSubstring2);
+            Log.d("KeyguardSecTilesQuickAffordanceConfig", "make table : customTileName = " + strSubstring + ", componentName = " + strSubstring2);
         }
         this.pickerIconResourceId = R.drawable.fg_do_not_disturb_off;
         this.callback = KeyguardSecTilesQuickAffordanceConfig$callback$1.INSTANCE;
@@ -208,14 +208,14 @@ public final class KeyguardSecTilesQuickAffordanceConfig implements KeyguardQuic
         }
         String str4 = this.key;
         boolean z = this.isLocalCustomTile;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("updated key: ", str4, ", new key: ", str3, ", old key: ");
-        m.append(str2);
-        m.append(", isLocalCustomTile: ");
-        m.append(z);
-        Log.d("KeyguardSecTilesQuickAffordanceConfig", m.toString());
-        boolean isEmpty = TextUtils.isEmpty(str2);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("updated key: ", str4, ", new key: ", str3, ", old key: ");
+        sbM.append(str2);
+        sbM.append(", isLocalCustomTile: ");
+        sbM.append(z);
+        Log.d("KeyguardSecTilesQuickAffordanceConfig", sbM.toString());
+        boolean zIsEmpty = TextUtils.isEmpty(str2);
         SecLockscreenTileHost secLockscreenTileHost = this.lockQSTileHost;
-        if (!isEmpty) {
+        if (!zIsEmpty) {
             secLockscreenTileHost.getClass();
             Log.d("LockscreenTileHost", "releaseLockscreenTile  ".concat(str2));
             TileSpec.Companion companion = TileSpec.Companion;
@@ -239,9 +239,9 @@ public final class KeyguardSecTilesQuickAffordanceConfig implements KeyguardQuic
         tileNameConverter2.getClass();
         String tileSpec2 = TileNameConverter.toTileSpec(resources2, str3);
         companion2.getClass();
-        QSTile requestTileUsing = secLockscreenTileHost.tileInstanceManager.requestTileUsing("Lock", TileSpec.Companion.create(tileSpec2));
-        if (requestTileUsing instanceof LockQSTile) {
-            lockQSTile = (LockQSTile) requestTileUsing;
+        QSTile qSTileRequestTileUsing = secLockscreenTileHost.tileInstanceManager.requestTileUsing("Lock", TileSpec.Companion.create(tileSpec2));
+        if (qSTileRequestTileUsing instanceof LockQSTile) {
+            lockQSTile = (LockQSTile) qSTileRequestTileUsing;
         } else {
             Log.w("LockscreenTileHost", "not LockQSTile object");
         }

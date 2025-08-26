@@ -77,9 +77,9 @@ public interface ISurfaceControlViewHost extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISurfaceControlViewHost.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfaceControlViewHost)) {
-                return (ISurfaceControlViewHost) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISurfaceControlViewHost.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISurfaceControlViewHost)) {
+                return (ISurfaceControlViewHost) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -133,9 +133,9 @@ public interface ISurfaceControlViewHost extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeStrongInterface(surfaceSyncGroup);
             } else if (i == 5) {
-                ISurfaceControlViewHostParent asInterface = ISurfaceControlViewHostParent.Stub.asInterface(parcel.readStrongBinder());
+                ISurfaceControlViewHostParent iSurfaceControlViewHostParentAsInterface = ISurfaceControlViewHostParent.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                attachParentInterface(asInterface);
+                attachParentInterface(iSurfaceControlViewHostParentAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -160,64 +160,64 @@ public interface ISurfaceControlViewHost extends IInterface {
 
             @Override // android.view.ISurfaceControlViewHost
             public void onConfigurationChanged(Configuration configuration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
-                    obtain.writeTypedObject(configuration, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(configuration, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.ISurfaceControlViewHost
             public void onDispatchDetachedFromWindow() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.ISurfaceControlViewHost
             public void onInsetsChanged(InsetsState insetsState, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
-                    obtain.writeTypedObject(insetsState, 0);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(insetsState, 0);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.ISurfaceControlViewHost
             public ISurfaceSyncGroup getSurfaceSyncGroup() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISurfaceSyncGroup.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISurfaceSyncGroup.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.ISurfaceControlViewHost
             public void attachParentInterface(ISurfaceControlViewHostParent iSurfaceControlViewHostParent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSurfaceControlViewHostParent);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSurfaceControlViewHostParent);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

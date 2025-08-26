@@ -55,17 +55,17 @@ public class LetterboxScrollProcessor {
                 this.mState = LetterboxScrollState.GESTURE_STARTED_IN_APP;
             }
         }
-        int ordinal = this.mState.ordinal();
-        if (ordinal == 0 || ordinal == 1) {
+        int iOrdinal = this.mState.ordinal();
+        if (iOrdinal == 0 || iOrdinal == 1) {
             z = true;
         } else {
-            if (ordinal == 2) {
+            if (iOrdinal == 2) {
                 applyOffset(motionEvent, appBounds);
                 this.mScrollDetector.onTouchEvent(motionEvent);
                 if (this.mState == LetterboxScrollState.SCROLLING_STARTED_OUTSIDE_APP) {
                     this.mProcessedEvents.add(motionEvent);
                 }
-            } else if (ordinal == 3) {
+            } else if (iOrdinal == 3) {
                 if (isOutsideAppBounds(motionEvent, appBounds)) {
                     applyOffset(motionEvent, appBounds);
                 } else {
@@ -111,10 +111,10 @@ public class LetterboxScrollProcessor {
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
         public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
-            MotionEvent obtain = MotionEvent.obtain((MotionEvent) Objects.requireNonNull(motionEvent));
-            LetterboxScrollProcessor.this.applyOffset(obtain, LetterboxScrollProcessor.this.getAppBounds());
-            LetterboxScrollProcessor.this.mGeneratedEventIds.add(Integer.valueOf(obtain.getId()));
-            LetterboxScrollProcessor.this.mProcessedEvents.add(obtain);
+            MotionEvent motionEventObtain = MotionEvent.obtain((MotionEvent) Objects.requireNonNull(motionEvent));
+            LetterboxScrollProcessor.this.applyOffset(motionEventObtain, LetterboxScrollProcessor.this.getAppBounds());
+            LetterboxScrollProcessor.this.mGeneratedEventIds.add(Integer.valueOf(motionEventObtain.getId()));
+            LetterboxScrollProcessor.this.mProcessedEvents.add(motionEventObtain);
             LetterboxScrollProcessor.this.mState = LetterboxScrollState.SCROLLING_STARTED_OUTSIDE_APP;
             return super.onScroll(motionEvent, motionEvent2, f, f2);
         }

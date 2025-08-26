@@ -6,7 +6,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ListenerSet<E> implements Collection<E>, IListenerSet<E>, KMappedMarker {
     public static final int $stable = 8;

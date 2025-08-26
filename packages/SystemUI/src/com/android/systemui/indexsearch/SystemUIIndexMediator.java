@@ -11,16 +11,15 @@ import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.samsung.android.lib.galaxyfinder.search.api.payload.IntentResultItemPayload;
 import com.samsung.android.lib.galaxyfinder.search.api.search.SimpleSearchResult;
 import com.samsung.android.lib.galaxyfinder.search.api.search.item.SimpleSearchResultItem;
+import java.io.IOException;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SystemUIIndexMediator {
     public final Context mContext;
     public final ArrayList mTileSearchables = new ArrayList();
     public final ArrayList mTileSearchResults = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BroadcastReceiverHelper extends BroadcastReceiver {
         public BroadcastReceiverHelper(Context context) {
             context.registerReceiver(this, new IntentFilter("com.samsung.systemui.statusbar.COLLAPSED"), null, null, 2);
@@ -40,7 +39,7 @@ public class SystemUIIndexMediator {
         handler.post(new Runnable() { // from class: com.android.systemui.indexsearch.SystemUIIndexMediator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final SystemUIIndexMediator systemUIIndexMediator = SystemUIIndexMediator.this;
+                final SystemUIIndexMediator systemUIIndexMediator = this.f$0;
                 ScreenLifecycle screenLifecycle2 = screenLifecycle;
                 systemUIIndexMediator.getClass();
                 screenLifecycle2.addObserver(new ScreenLifecycle.Observer() { // from class: com.android.systemui.indexsearch.SystemUIIndexMediator.1
@@ -53,7 +52,7 @@ public class SystemUIIndexMediator {
         });
     }
 
-    public final SimpleSearchResult getSimpleSearchResult(int i, String str) {
+    public final SimpleSearchResult getSimpleSearchResult(int i, String str) throws IOException {
         SimpleSearchResult simpleSearchResult = new SimpleSearchResult(str);
         ArrayList arrayList = this.mTileSearchResults;
         int size = arrayList.size();

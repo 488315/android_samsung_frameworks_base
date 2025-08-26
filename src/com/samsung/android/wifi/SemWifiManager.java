@@ -22,7 +22,6 @@ import com.samsung.android.wifi.ISemWifiApClientUpdateCallback;
 import com.samsung.android.wifi.ISemWifiApDataUsageCallback;
 import com.samsung.android.wifi.ISemWifiApSmartCallback;
 import com.samsung.android.wifi.SemTasPolicyListener;
-import com.samsung.android.wifi.SemWifiManager;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.Reference;
@@ -533,7 +532,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApSmartCallback$SemWifiApSmartCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.SemWifiApSmartCallback.this.onStateChanged(i, str);
+                        semWifiApSmartCallback.onStateChanged(i, str);
                     }
                 });
             }
@@ -590,7 +589,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.SemWifiApClientListUpdateCallback.this.onClientListUpdated(list, j);
+                        semWifiApClientListUpdateCallback.onClientListUpdated(list, j);
                     }
                 });
             }
@@ -611,7 +610,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.SemWifiApClientListUpdateCallback.this.onOverallDataLimitChanged(j);
+                        semWifiApClientListUpdateCallback.onOverallDataLimitChanged(j);
                     }
                 });
             }
@@ -666,7 +665,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientUpdateCallback$SemWifiApClientUpdateCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.SemWifiApClientUpdateCallback.this.onClientUpdated(semWifiApClientDetails);
+                        semWifiApClientUpdateCallback.onClientUpdated(semWifiApClientDetails);
                     }
                 });
             }
@@ -1127,7 +1126,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApDataUsageListener$SemWifiApDataUsageClient$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.SemWifiApDataUsageListener.this.onDataUsageChanged(str);
+                        semWifiApDataUsageListener.onDataUsageChanged(str);
                     }
                 });
             }
@@ -1391,11 +1390,11 @@ public class SemWifiManager {
         }
         Bundle bundle = new Bundle();
         StackTraceElement stackTraceElement = new Exception().getStackTrace()[3];
-        CharSequence format = DateFormat.format("yy/MM/dd kk:mm:ss ", System.currentTimeMillis());
+        CharSequence charSequence = DateFormat.format("yy/MM/dd kk:mm:ss ", System.currentTimeMillis());
         if (z) {
-            bundle.putString("extra_log", ((Object) format) + str + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getMethodName() + "():" + stackTraceElement.getLineNumber() + "]\n");
+            bundle.putString("extra_log", ((Object) charSequence) + str + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getMethodName() + "():" + stackTraceElement.getLineNumber() + "]\n");
         } else {
-            bundle.putString("extra_log", ((Object) format) + str + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getLineNumber() + "]\n");
+            bundle.putString("extra_log", ((Object) charSequence) + str + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getLineNumber() + "]\n");
         }
         reportHotspotDumpLogs(bundle.getString("extra_log"));
     }
@@ -3449,7 +3448,7 @@ public class SemWifiManager {
                 executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$TasPolicyListener$TasPolicyListenerProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiManager.TasPolicyListener.this.onTasPolicyChanged(i, i2);
+                        tasPolicyListener.onTasPolicyChanged(i, i2);
                     }
                 });
             }
@@ -3571,13 +3570,13 @@ public class SemWifiManager {
         }
         SparseArray<ISemAbTestConfigurationUpdateObserver> sparseArray = sSemAbTestConfigurationUpdateObserverMap;
         synchronized (sparseArray) {
-            int identityHashCode = System.identityHashCode(abTestConfigUpdateObserver);
-            if (!sparseArray.contains(identityHashCode)) {
-                Log.e(TAG, "Unknown external observer " + identityHashCode);
+            int iIdentityHashCode = System.identityHashCode(abTestConfigUpdateObserver);
+            if (!sparseArray.contains(iIdentityHashCode)) {
+                Log.e(TAG, "Unknown external observer " + iIdentityHashCode);
             } else {
                 try {
-                    this.mService.unregisterAbTestConfigUpdateObserver(sparseArray.get(identityHashCode));
-                    sparseArray.remove(identityHashCode);
+                    this.mService.unregisterAbTestConfigUpdateObserver(sparseArray.get(iIdentityHashCode));
+                    sparseArray.remove(iIdentityHashCode);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -3639,7 +3638,7 @@ public class SemWifiManager {
             this.mExecutor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SemWifiManager.AbTestConfigUpdateObserverProxy.this.lambda$registered$0(semWifiManager);
+                    this.f$0.lambda$registered$0(semWifiManager);
                 }
             });
         }
@@ -3656,7 +3655,7 @@ public class SemWifiManager {
             this.mExecutor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SemWifiManager.AbTestConfigUpdateObserverProxy.this.lambda$notifyAbTestConfigUpdate$1(semAbTestConfiguration);
+                    this.f$0.lambda$notifyAbTestConfigUpdate$1(semAbTestConfiguration);
                 }
             });
         }

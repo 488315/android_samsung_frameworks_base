@@ -4,10 +4,12 @@ import android.content.Context;
 import android.telecom.TelecomManager;
 import com.android.systemui.telephony.TelephonyListenerManager;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -17,7 +19,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TelephonyRepositoryImpl implements TelephonyRepository {
     public final CoroutineDispatcher backgroundDispatcher;
@@ -31,11 +32,10 @@ public final class TelephonyRepositoryImpl implements TelephonyRepository {
         this.backgroundDispatcher = coroutineDispatcher;
         this.manager = telephonyListenerManager;
         this.telecomManager = telecomManager;
-        final Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new TelephonyRepositoryImpl$callState$1(this, null));
-        this.callState = conflatedCallbackFlow;
+        final Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new TelephonyRepositoryImpl$callState$1(this, null));
+        this.callState = flowConflatedCallbackFlow;
         this.isInCall = FlowKt.stateIn(telecomManager == null ? new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE) : new Flow() { // from class: com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -64,97 +64,62 @@ public final class TelephonyRepositoryImpl implements TelephonyRepository {
                     this.this$0 = telephonyRepositoryImpl;
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:18:0x0061, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:20:0x0061, code lost:
                 
-                    if (r6.emit(r8, r0) != r1) goto L22;
+                    if (r6.emit(r8, r0) == r1) goto L21;
                  */
-                /* JADX WARN: Code restructure failed: missing block: B:19:0x0063, code lost:
-                
-                    return r1;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:21:0x0056, code lost:
-                
-                    if (r8 == r1) goto L21;
-                 */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r7, kotlin.coroutines.Continuation r8) {
-                    /*
-                        r6 = this;
-                        boolean r0 = r8 instanceof com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r8
-                        com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r8)
-                    L18:
-                        java.lang.Object r8 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 0
-                        r4 = 2
-                        r5 = 1
-                        if (r2 == 0) goto L3b
-                        if (r2 == r5) goto L33
-                        if (r2 != r4) goto L2b
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L64
-                    L2b:
-                        java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                        java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                        r6.<init>(r7)
-                        throw r6
-                    L33:
-                        java.lang.Object r6 = r0.L$0
-                        kotlinx.coroutines.flow.FlowCollector r6 = (kotlinx.coroutines.flow.FlowCollector) r6
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L59
-                    L3b:
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        java.lang.Number r7 = (java.lang.Number) r7
-                        r7.intValue()
-                        com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl r7 = r6.this$0
-                        kotlinx.coroutines.CoroutineDispatcher r8 = r7.backgroundDispatcher
-                        com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$isInCall$1$1 r2 = new com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$isInCall$1$1
-                        r2.<init>(r7, r3)
-                        kotlinx.coroutines.flow.FlowCollector r6 = r6.$this_unsafeFlow
-                        r0.L$0 = r6
-                        r0.label = r5
-                        java.lang.Object r8 = kotlinx.coroutines.BuildersKt.withContext(r8, r2, r0)
-                        if (r8 != r1) goto L59
-                        goto L63
-                    L59:
-                        r0.L$0 = r3
-                        r0.label = r4
-                        java.lang.Object r6 = r6.emit(r8, r0)
-                        if (r6 != r1) goto L64
-                    L63:
-                        return r1
-                    L64:
-                        kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                        return r6
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) throws Throwable {
+                    AnonymousClass1 anonymousClass1;
+                    FlowCollector flowCollector;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object objWithContext = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(objWithContext);
+                        ((Number) obj).intValue();
+                        TelephonyRepositoryImpl telephonyRepositoryImpl = this.this$0;
+                        CoroutineDispatcher coroutineDispatcher = telephonyRepositoryImpl.backgroundDispatcher;
+                        TelephonyRepositoryImpl$isInCall$1$1 telephonyRepositoryImpl$isInCall$1$1 = new TelephonyRepositoryImpl$isInCall$1$1(telephonyRepositoryImpl, null);
+                        flowCollector = this.$this_unsafeFlow;
+                        anonymousClass1.L$0 = flowCollector;
+                        anonymousClass1.label = 1;
+                        objWithContext = BuildersKt.withContext(coroutineDispatcher, telephonyRepositoryImpl$isInCall$1$1, anonymousClass1);
+                        if (objWithContext != coroutineSingletons) {
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 != 1) {
+                        if (i2 != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(objWithContext);
+                        return Unit.INSTANCE;
+                    }
+                    flowCollector = (FlowCollector) anonymousClass1.L$0;
+                    ResultKt.throwOnFailure(objWithContext);
+                    anonymousClass1.L$0 = null;
+                    anonymousClass1.label = 2;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowConflatedCallbackFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.FALSE);
         this.hasTelephonyRadio = context.getPackageManager().hasSystemFeature("android.hardware.telephony");

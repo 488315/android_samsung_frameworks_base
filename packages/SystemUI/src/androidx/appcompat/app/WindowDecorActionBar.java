@@ -38,7 +38,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WindowDecorActionBar extends ActionBar {
     public static final Interpolator sHideInterpolator = new AccelerateInterpolator();
@@ -68,7 +67,6 @@ public class WindowDecorActionBar extends ActionBar {
     public Context mThemedContext;
     public final AnonymousClass3 mUpdateListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.WindowDecorActionBar$1, reason: invalid class name */
     public class AnonymousClass1 extends ViewPropertyAnimatorListenerAdapter {
         public AnonymousClass1() {
@@ -101,7 +99,6 @@ public class WindowDecorActionBar extends ActionBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.WindowDecorActionBar$2, reason: invalid class name */
     public class AnonymousClass2 extends ViewPropertyAnimatorListenerAdapter {
         public AnonymousClass2() {
@@ -115,7 +112,6 @@ public class WindowDecorActionBar extends ActionBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.WindowDecorActionBar$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
@@ -140,8 +136,8 @@ public class WindowDecorActionBar extends ActionBar {
     }
 
     public final void animateToMode(boolean z) {
+        ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate;
         ViewPropertyAnimatorCompat viewPropertyAnimatorCompat;
-        ViewPropertyAnimatorCompat viewPropertyAnimatorCompat2;
         final int i = 0;
         if (z) {
             if (!this.mShowingForMode) {
@@ -166,15 +162,15 @@ public class WindowDecorActionBar extends ActionBar {
         }
         if (z) {
             final ToolbarWidgetWrapper toolbarWidgetWrapper = this.mDecorToolbar;
-            viewPropertyAnimatorCompat = ViewCompat.animate(toolbarWidgetWrapper.mToolbar);
-            viewPropertyAnimatorCompat.alpha(0.0f);
-            viewPropertyAnimatorCompat.setDuration(100L);
-            viewPropertyAnimatorCompat.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.widget.ToolbarWidgetWrapper.2
+            viewPropertyAnimatorCompatAnimate = ViewCompat.animate(toolbarWidgetWrapper.mToolbar);
+            viewPropertyAnimatorCompatAnimate.alpha(0.0f);
+            viewPropertyAnimatorCompatAnimate.setDuration(100L);
+            viewPropertyAnimatorCompatAnimate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.widget.ToolbarWidgetWrapper.2
                 public boolean mCanceled = false;
                 public final /* synthetic */ int val$visibility;
 
                 public AnonymousClass2(final int i22) {
-                    r2 = i22;
+                    i = i22;
                 }
 
                 @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
@@ -187,7 +183,7 @@ public class WindowDecorActionBar extends ActionBar {
                     if (this.mCanceled) {
                         return;
                     }
-                    ToolbarWidgetWrapper.this.mToolbar.setVisibility(r2);
+                    ToolbarWidgetWrapper.this.mToolbar.setVisibility(i);
                 }
 
                 @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
@@ -195,18 +191,18 @@ public class WindowDecorActionBar extends ActionBar {
                     ToolbarWidgetWrapper.this.mToolbar.setVisibility(0);
                 }
             });
-            viewPropertyAnimatorCompat2 = this.mContextView.setupAnimatorToVisibility(0, 200L);
+            viewPropertyAnimatorCompat = this.mContextView.setupAnimatorToVisibility(0, 200L);
         } else {
             final ToolbarWidgetWrapper toolbarWidgetWrapper2 = this.mDecorToolbar;
-            ViewPropertyAnimatorCompat animate = ViewCompat.animate(toolbarWidgetWrapper2.mToolbar);
-            animate.alpha(1.0f);
-            animate.setDuration(200L);
-            animate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.widget.ToolbarWidgetWrapper.2
+            ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate2 = ViewCompat.animate(toolbarWidgetWrapper2.mToolbar);
+            viewPropertyAnimatorCompatAnimate2.alpha(1.0f);
+            viewPropertyAnimatorCompatAnimate2.setDuration(200L);
+            viewPropertyAnimatorCompatAnimate2.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.widget.ToolbarWidgetWrapper.2
                 public boolean mCanceled = false;
                 public final /* synthetic */ int val$visibility;
 
                 public AnonymousClass2(final int i3) {
-                    r2 = i3;
+                    i = i3;
                 }
 
                 @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
@@ -219,7 +215,7 @@ public class WindowDecorActionBar extends ActionBar {
                     if (this.mCanceled) {
                         return;
                     }
-                    ToolbarWidgetWrapper.this.mToolbar.setVisibility(r2);
+                    ToolbarWidgetWrapper.this.mToolbar.setVisibility(i);
                 }
 
                 @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
@@ -227,18 +223,18 @@ public class WindowDecorActionBar extends ActionBar {
                     ToolbarWidgetWrapper.this.mToolbar.setVisibility(0);
                 }
             });
-            viewPropertyAnimatorCompat = this.mContextView.setupAnimatorToVisibility(8, 100L);
-            viewPropertyAnimatorCompat2 = animate;
+            viewPropertyAnimatorCompatAnimate = this.mContextView.setupAnimatorToVisibility(8, 100L);
+            viewPropertyAnimatorCompat = viewPropertyAnimatorCompatAnimate2;
         }
         ViewPropertyAnimatorCompatSet viewPropertyAnimatorCompatSet = new ViewPropertyAnimatorCompatSet();
-        viewPropertyAnimatorCompatSet.mAnimators.add(viewPropertyAnimatorCompat);
-        View view = (View) viewPropertyAnimatorCompat.mView.get();
+        viewPropertyAnimatorCompatSet.mAnimators.add(viewPropertyAnimatorCompatAnimate);
+        View view = (View) viewPropertyAnimatorCompatAnimate.mView.get();
         long duration = view != null ? view.animate().getDuration() : 0L;
-        View view2 = (View) viewPropertyAnimatorCompat2.mView.get();
+        View view2 = (View) viewPropertyAnimatorCompat.mView.get();
         if (view2 != null) {
             view2.animate().setStartDelay(duration);
         }
-        viewPropertyAnimatorCompatSet.mAnimators.add(viewPropertyAnimatorCompat2);
+        viewPropertyAnimatorCompatSet.mAnimators.add(viewPropertyAnimatorCompat);
         viewPropertyAnimatorCompatSet.start();
     }
 
@@ -308,11 +304,11 @@ public class WindowDecorActionBar extends ActionBar {
                 }
             }
         }
-        View findViewById = view.findViewById(com.android.systemui.R.id.action_bar);
-        if (!(findViewById instanceof Toolbar)) {
-            throw new IllegalStateException("Can't make a decor toolbar out of ".concat(findViewById != null ? findViewById.getClass().getSimpleName() : "null"));
+        View viewFindViewById = view.findViewById(com.android.systemui.R.id.action_bar);
+        if (!(viewFindViewById instanceof Toolbar)) {
+            throw new IllegalStateException("Can't make a decor toolbar out of ".concat(viewFindViewById != null ? viewFindViewById.getClass().getSimpleName() : "null"));
         }
-        Toolbar toolbar = (Toolbar) findViewById;
+        Toolbar toolbar = (Toolbar) viewFindViewById;
         if (toolbar.mWrapper == null) {
             toolbar.mWrapper = new ToolbarWidgetWrapper(toolbar, true);
         }
@@ -332,8 +328,8 @@ public class WindowDecorActionBar extends ActionBar {
         ActionBarPolicy.get(context);
         setHomeButtonEnabled();
         setHasEmbeddedTabs();
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R$styleable.ActionBar, com.android.systemui.R.attr.actionBarStyle, 0);
-        if (obtainStyledAttributes.getBoolean(14, false)) {
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R$styleable.ActionBar, com.android.systemui.R.attr.actionBarStyle, 0);
+        if (typedArrayObtainStyledAttributes.getBoolean(14, false)) {
             ActionBarOverlayLayout actionBarOverlayLayout2 = this.mOverlayLayout;
             if (!actionBarOverlayLayout2.mOverlayMode) {
                 throw new IllegalStateException("Action bar must be in overlay mode (Window.FEATURE_OVERLAY_ACTION_BAR) to enable hide on content scroll");
@@ -341,13 +337,13 @@ public class WindowDecorActionBar extends ActionBar {
             this.mHideOnContentScroll = true;
             actionBarOverlayLayout2.setHideOnContentScrollEnabled(true);
         }
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(12, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, 0);
         if (dimensionPixelSize != 0) {
             ActionBarContainer actionBarContainer2 = this.mContainerView;
             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
             ViewCompat.Api21Impl.setElevation(actionBarContainer2, dimensionPixelSize);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.appcompat.app.ActionBar
@@ -491,9 +487,9 @@ public class WindowDecorActionBar extends ActionBar {
                     this.mContainerView.getLocationInWindow(new int[]{0, 0});
                     f -= r11[1];
                 }
-                ViewPropertyAnimatorCompat animate = ViewCompat.animate(this.mContainerView);
-                animate.translationY(f);
-                final View view4 = (View) animate.mView.get();
+                ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate = ViewCompat.animate(this.mContainerView);
+                viewPropertyAnimatorCompatAnimate.translationY(f);
+                final View view4 = (View) viewPropertyAnimatorCompatAnimate.mView.get();
                 if (view4 != null) {
                     view4.animate().setUpdateListener(anonymousClass3 != null ? new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.core.view.ViewPropertyAnimatorCompat$$ExternalSyntheticLambda0
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -503,13 +499,13 @@ public class WindowDecorActionBar extends ActionBar {
                     } : null);
                 }
                 if (!viewPropertyAnimatorCompatSet2.mIsStarted) {
-                    viewPropertyAnimatorCompatSet2.mAnimators.add(animate);
+                    viewPropertyAnimatorCompatSet2.mAnimators.add(viewPropertyAnimatorCompatAnimate);
                 }
                 if (this.mContentAnimations && (view = this.mContentView) != null) {
-                    ViewPropertyAnimatorCompat animate2 = ViewCompat.animate(view);
-                    animate2.translationY(f);
+                    ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate2 = ViewCompat.animate(view);
+                    viewPropertyAnimatorCompatAnimate2.translationY(f);
                     if (!viewPropertyAnimatorCompatSet2.mIsStarted) {
-                        viewPropertyAnimatorCompatSet2.mAnimators.add(animate2);
+                        viewPropertyAnimatorCompatSet2.mAnimators.add(viewPropertyAnimatorCompatAnimate2);
                     }
                 }
                 Interpolator interpolator = sHideInterpolator;
@@ -549,9 +545,9 @@ public class WindowDecorActionBar extends ActionBar {
             }
             this.mContainerView.setTranslationY(f2);
             ViewPropertyAnimatorCompatSet viewPropertyAnimatorCompatSet4 = new ViewPropertyAnimatorCompatSet();
-            ViewPropertyAnimatorCompat animate3 = ViewCompat.animate(this.mContainerView);
-            animate3.translationY(0.0f);
-            final View view5 = (View) animate3.mView.get();
+            ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate3 = ViewCompat.animate(this.mContainerView);
+            viewPropertyAnimatorCompatAnimate3.translationY(0.0f);
+            final View view5 = (View) viewPropertyAnimatorCompatAnimate3.mView.get();
             if (view5 != null) {
                 view5.animate().setUpdateListener(anonymousClass3 != null ? new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.core.view.ViewPropertyAnimatorCompat$$ExternalSyntheticLambda0
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -561,14 +557,14 @@ public class WindowDecorActionBar extends ActionBar {
                 } : null);
             }
             if (!viewPropertyAnimatorCompatSet4.mIsStarted) {
-                viewPropertyAnimatorCompatSet4.mAnimators.add(animate3);
+                viewPropertyAnimatorCompatSet4.mAnimators.add(viewPropertyAnimatorCompatAnimate3);
             }
             if (this.mContentAnimations && (view3 = this.mContentView) != null) {
                 view3.setTranslationY(f2);
-                ViewPropertyAnimatorCompat animate4 = ViewCompat.animate(this.mContentView);
-                animate4.translationY(0.0f);
+                ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate4 = ViewCompat.animate(this.mContentView);
+                viewPropertyAnimatorCompatAnimate4.translationY(0.0f);
                 if (!viewPropertyAnimatorCompatSet4.mIsStarted) {
-                    viewPropertyAnimatorCompatSet4.mAnimators.add(animate4);
+                    viewPropertyAnimatorCompatSet4.mAnimators.add(viewPropertyAnimatorCompatAnimate4);
                 }
             }
             Interpolator interpolator2 = sShowInterpolator;
@@ -613,7 +609,6 @@ public class WindowDecorActionBar extends ActionBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActionModeImpl extends ActionMode implements MenuBuilder.Callback {
         public final Context mActionModeContext;
         public ActionMode.Callback mCallback;

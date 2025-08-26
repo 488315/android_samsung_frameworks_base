@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BackupRestoreReceiver {
     public final AnonymousClass1 mHandler = new Handler(this) { // from class: com.android.systemui.wallpaper.BackupRestoreReceiver.1
@@ -40,7 +39,7 @@ public class BackupRestoreReceiver {
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.d("WallpaperBackupRestoreReceiver", "onReceive ( action = " + action + ")");
-            Message obtainMessage = (action.equals("com.sec.android.intent.action.REQUEST_BACKUP_LOCKSCREEN") || action.equals("com.sec.android.intent.action.REQUEST_BACKUP_WALLPAPER")) ? obtainMessage(0, context) : obtainMessage(1, context);
+            Message messageObtainMessage = (action.equals("com.sec.android.intent.action.REQUEST_BACKUP_LOCKSCREEN") || action.equals("com.sec.android.intent.action.REQUEST_BACKUP_WALLPAPER")) ? obtainMessage(0, context) : obtainMessage(1, context);
             BackupRestoreReceiver.this.getClass();
             Bundle bundle = new Bundle();
             bundle.putString("SAVE_PATH", intent.getStringExtra("SAVE_PATH"));
@@ -52,8 +51,8 @@ public class BackupRestoreReceiver {
             String action2 = intent.getAction();
             bundle.putInt("WHICH", intent.getIntExtra("WHICH", (action2.equals("com.sec.android.intent.action.REQUEST_BACKUP_LOCKSCREEN") || action2.equals("com.sec.android.intent.action.REQUEST_RESTORE_LOCKSCREEN")) ? 2 : 1));
             bundle.putString("EXTRA_RESTORE_VALUE", intent.getStringExtra("EXTRA_RESTORE_VALUE"));
-            obtainMessage.setData(bundle);
-            sendMessage(obtainMessage);
+            messageObtainMessage.setData(bundle);
+            sendMessage(messageObtainMessage);
         }
     };
 }

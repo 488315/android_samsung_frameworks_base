@@ -34,7 +34,6 @@ import com.android.wm.shell.transition.FocusTransitionObserver;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardTransitionHandler implements Transitions.TransitionHandler, KeyguardChangeListener, TaskStackListenerCallback {
     public WindowContainerToken mDreamToken;
@@ -52,7 +51,6 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
     public KeyguardService.AnonymousClass1 mUnoccludeTransition = null;
     public boolean mKeyguardShowing = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.keyguard.KeyguardTransitionHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends IRemoteTransitionFinishedCallback.Stub {
         public final /* synthetic */ Transitions.TransitionFinishCallback val$finishCallback;
@@ -106,7 +104,7 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
             ((HandlerExecutor) shellExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.keyguard.KeyguardTransitionHandler$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardTransitionHandler.AnonymousClass1 anonymousClass1 = KeyguardTransitionHandler.AnonymousClass1.this;
+                    KeyguardTransitionHandler.AnonymousClass1 anonymousClass1 = this.f$0;
                     IBinder iBinder2 = iBinder;
                     Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction2;
@@ -117,7 +115,6 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FakeFinishCallback extends IRemoteTransitionFinishedCallback.Stub {
         public /* synthetic */ FakeFinishCallback(int i) {
             this();
@@ -130,7 +127,6 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyguardTransitionsImpl implements KeyguardTransitions {
         public /* synthetic */ KeyguardTransitionsImpl(KeyguardTransitionHandler keyguardTransitionHandler, int i) {
             this();
@@ -141,7 +137,7 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
             KeyguardTransitionHandler.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.keyguard.KeyguardTransitionHandler$KeyguardTransitionsImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardTransitionHandler.KeyguardTransitionsImpl keyguardTransitionsImpl = KeyguardTransitionHandler.KeyguardTransitionsImpl.this;
+                    KeyguardTransitionHandler.KeyguardTransitionsImpl keyguardTransitionsImpl = this.f$0;
                     KeyguardService.AnonymousClass1 anonymousClass16 = anonymousClass1;
                     KeyguardService.AnonymousClass1 anonymousClass17 = anonymousClass12;
                     KeyguardService.AnonymousClass1 anonymousClass18 = anonymousClass13;
@@ -171,7 +167,6 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StartedTransition {
         public final SurfaceControl.Transaction mFinishT;
         public final TransitionInfo mInfo;
@@ -192,7 +187,7 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.keyguard.KeyguardTransitionHandler$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardTransitionHandler keyguardTransitionHandler = KeyguardTransitionHandler.this;
+                KeyguardTransitionHandler keyguardTransitionHandler = this.f$0;
                 keyguardTransitionHandler.mTransitions.addHandler(keyguardTransitionHandler);
                 keyguardTransitionHandler.mShellController.addKeyguardChangeListener(keyguardTransitionHandler);
                 keyguardTransitionHandler.mTaskStackListener.addListener(keyguardTransitionHandler);
@@ -278,8 +273,8 @@ public class KeyguardTransitionHandler implements Transitions.TransitionHandler,
             if (!this.mIsLaunchingActivityOverLockscreen) {
                 if ((transitionInfo.getFlags() & 64) != 0) {
                     if ((transitionInfo.getFlags() & 4096) != 0) {
-                        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+                        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
                             if (TransitionUtil.isOpeningType(change.getMode()) && change.getTaskInfo() != null && change.getTaskInfo().getActivityType() == 5) {
                                 return startAnimation(this.mOccludeByDreamTransition, "occlude-by-dream", iBinder, transitionInfo, transaction, transaction2, transitionFinishCallback);
                             }

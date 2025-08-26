@@ -1,5 +1,6 @@
 package kotlinx.coroutines.flow.internal;
 
+import java.io.IOException;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.ContinuationInterceptor;
@@ -14,7 +15,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.internal.ThreadContextKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ChannelFlowOperator extends ChannelFlow {
     public final Flow flow;
@@ -31,35 +31,35 @@ public abstract class ChannelFlowOperator extends ChannelFlow {
             Boolean bool = Boolean.FALSE;
             CoroutineContextKt$$ExternalSyntheticLambda0 coroutineContextKt$$ExternalSyntheticLambda0 = new CoroutineContextKt$$ExternalSyntheticLambda0(0);
             CoroutineContext coroutineContext = this.context;
-            CoroutineContext plus = !((Boolean) coroutineContext.fold(bool, coroutineContextKt$$ExternalSyntheticLambda0)).booleanValue() ? context.plus(coroutineContext) : CoroutineContextKt.foldCopies(context, coroutineContext, false);
-            if (Intrinsics.areEqual(plus, context)) {
-                Object flowCollect = flowCollect(flowCollector, continuation);
-                return flowCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? flowCollect : Unit.INSTANCE;
+            CoroutineContext coroutineContextPlus = !((Boolean) coroutineContext.fold(bool, coroutineContextKt$$ExternalSyntheticLambda0)).booleanValue() ? context.plus(coroutineContext) : CoroutineContextKt.foldCopies(context, coroutineContext, false);
+            if (Intrinsics.areEqual(coroutineContextPlus, context)) {
+                Object objFlowCollect = flowCollect(flowCollector, continuation);
+                return objFlowCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objFlowCollect : Unit.INSTANCE;
             }
             ContinuationInterceptor.Key key = ContinuationInterceptor.Key;
-            if (Intrinsics.areEqual(plus.get(key), context.get(key))) {
+            if (Intrinsics.areEqual(coroutineContextPlus.get(key), context.get(key))) {
                 CoroutineContext context2 = continuation.getContext();
                 if (!(flowCollector instanceof SendingCollector) && !(flowCollector instanceof NopCollector)) {
                     flowCollector = new UndispatchedContextCollector(flowCollector, context2);
                 }
-                Object withContextUndispatched = ChannelFlowKt.withContextUndispatched(plus, flowCollector, ThreadContextKt.threadContextElements(plus), new ChannelFlowOperator$collectWithContextUndispatched$2(this, null), continuation);
-                return withContextUndispatched == CoroutineSingletons.COROUTINE_SUSPENDED ? withContextUndispatched : Unit.INSTANCE;
+                Object objWithContextUndispatched = ChannelFlowKt.withContextUndispatched(coroutineContextPlus, flowCollector, ThreadContextKt.threadContextElements(coroutineContextPlus), new ChannelFlowOperator$collectWithContextUndispatched$2(this, null), continuation);
+                return objWithContextUndispatched == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContextUndispatched : Unit.INSTANCE;
             }
         }
-        Object collect = super.collect(flowCollector, continuation);
-        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+        Object objCollect = super.collect(flowCollector, continuation);
+        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
     public final Object collectTo(ProducerScope producerScope, Continuation continuation) {
-        Object flowCollect = flowCollect(new SendingCollector(producerScope), continuation);
-        return flowCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? flowCollect : Unit.INSTANCE;
+        Object objFlowCollect = flowCollect(new SendingCollector(producerScope), continuation);
+        return objFlowCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objFlowCollect : Unit.INSTANCE;
     }
 
     public abstract Object flowCollect(FlowCollector flowCollector, Continuation continuation);
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
-    public final String toString() {
+    public final String toString() throws IOException {
         return this.flow + " -> " + super.toString();
     }
 }

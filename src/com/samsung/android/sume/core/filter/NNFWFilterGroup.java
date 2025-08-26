@@ -27,7 +27,7 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
         nNFWDescriptor.getNNDescriptor().setModelSelector(new ModelSelector() { // from class: com.samsung.android.sume.core.filter.NNFWFilterGroup$$ExternalSyntheticLambda3
             @Override // com.samsung.android.sume.core.functional.ModelSelector
             public final ModelSelector.Item select(MediaBuffer mediaBuffer) {
-                return NNFWFilterGroup.this.m9548xd3f4c5ae(mediaBuffer);
+                return this.f$0.m9561xd3f4c5ae(mediaBuffer);
             }
         });
         this.filters = list;
@@ -40,23 +40,21 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: loadModel, reason: merged with bridge method [inline-methods] */
-    public ModelSelector.Item m9548xd3f4c5ae(MediaBuffer mediaBuffer) {
-        final ModelSelector.Item select = this.modelSelector.select(mediaBuffer);
-        Log.d(TAG, "load model: " + select.name);
+    public ModelSelector.Item m9561xd3f4c5ae(MediaBuffer mediaBuffer) {
+        final ModelSelector.Item itemSelect = this.modelSelector.select(mediaBuffer);
+        Log.d(TAG, "load model: " + itemSelect.name);
         this.mediaFilter = this.filters.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.filter.NNFWFilterGroup$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((NNFWDescriptor) ((MediaFilter) obj).getDescriptor()).getNNFileDescriptor().getName().equals(ModelSelector.Item.this.name);
-                return equals;
+                return ((NNFWDescriptor) ((MediaFilter) obj).getDescriptor()).getNNFileDescriptor().getName().equals(itemSelect.name);
             }
         }).findFirst().orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.filter.NNFWFilterGroup$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                return NNFWFilterGroup.lambda$loadModel$2(ModelSelector.Item.this);
+                return NNFWFilterGroup.lambda$loadModel$2(itemSelect);
             }
         });
-        return select;
+        return itemSelect;
     }
 
     static /* synthetic */ IllegalStateException lambda$loadModel$2(ModelSelector.Item item) {
@@ -68,13 +66,13 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
         this.filters.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.NNFWFilterGroup$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NNFWFilterGroup.this.m9549x92910fc4((MediaFilter) obj);
+                this.f$0.m9562x92910fc4((MediaFilter) obj);
             }
         });
     }
 
     /* renamed from: lambda$prepare$3$com-samsung-android-sume-core-filter-NNFWFilterGroup, reason: not valid java name */
-    /* synthetic */ void m9549x92910fc4(MediaFilter mediaFilter) {
+    /* synthetic */ void m9562x92910fc4(MediaFilter mediaFilter) {
         MediaFilter enclosedFilter = mediaFilter instanceof DecorateFilter ? ((DecorateFilter) mediaFilter).getEnclosedFilter() : mediaFilter;
         if (enclosedFilter instanceof NNFWFilter) {
             ((NNFWFilter) enclosedFilter).setExecuteDelegator(this.executeDelegator);
@@ -85,13 +83,13 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
     @Override // com.samsung.android.sume.core.filter.NNFWFilter, com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
         if (this.mediaFilter == null) {
-            m9548xd3f4c5ae(mediaBuffer);
+            m9561xd3f4c5ae(mediaBuffer);
         }
-        MutableMediaBuffer run = this.mediaFilter.run(mediaBuffer, mutableMediaBuffer);
+        MutableMediaBuffer mutableMediaBufferRun = this.mediaFilter.run(mediaBuffer, mutableMediaBuffer);
         if (this.descriptor.isInstant()) {
             this.mediaFilter = null;
         }
-        return run;
+        return mutableMediaBufferRun;
     }
 
     @Override // com.samsung.android.sume.core.filter.NNFWFilter
@@ -117,11 +115,11 @@ public class NNFWFilterGroup extends NNFWFilter implements MediaFilterGroup {
 
     @Override // com.samsung.android.sume.core.filter.MediaFilterGroup
     public boolean replaceFilter(MediaFilter mediaFilter, MediaFilter mediaFilter2) {
-        int indexOf = this.filters.indexOf(mediaFilter);
-        if (indexOf < 0) {
+        int iIndexOf = this.filters.indexOf(mediaFilter);
+        if (iIndexOf < 0) {
             return false;
         }
-        this.filters.set(indexOf, mediaFilter2);
+        this.filters.set(iIndexOf, mediaFilter2);
         return true;
     }
 

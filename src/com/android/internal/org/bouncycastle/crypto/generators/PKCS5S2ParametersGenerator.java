@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.generators;
 
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator;
@@ -24,7 +25,7 @@ public class PKCS5S2ParametersGenerator extends PBEParametersGenerator {
         this.state = new byte[hMac.getMacSize()];
     }
 
-    private void F(byte[] bArr, int i, byte[] bArr2, byte[] bArr3, int i2) {
+    private void F(byte[] bArr, int i, byte[] bArr2, byte[] bArr3, int i2) throws IllegalStateException, DataLengthException {
         if (i == 0) {
             throw new IllegalArgumentException("iteration count must be at least 1.");
         }
@@ -52,7 +53,7 @@ public class PKCS5S2ParametersGenerator extends PBEParametersGenerator {
         }
     }
 
-    private byte[] generateDerivedKey(int i) {
+    private byte[] generateDerivedKey(int i) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         int i2;
         int macSize = this.hMac.getMacSize();
         int i3 = ((i + macSize) - 1) / macSize;
@@ -79,11 +80,11 @@ public class PKCS5S2ParametersGenerator extends PBEParametersGenerator {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator
-    public CipherParameters generateDerivedParameters(int i, int i2) {
+    public CipherParameters generateDerivedParameters(int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         int i3 = i / 8;
         int i4 = i2 / 8;
-        byte[] generateDerivedKey = generateDerivedKey(i3 + i4);
-        return new ParametersWithIV(new KeyParameter(generateDerivedKey, 0, i3), generateDerivedKey, i3, i4);
+        byte[] bArrGenerateDerivedKey = generateDerivedKey(i3 + i4);
+        return new ParametersWithIV(new KeyParameter(bArrGenerateDerivedKey, 0, i3), bArrGenerateDerivedKey, i3, i4);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator

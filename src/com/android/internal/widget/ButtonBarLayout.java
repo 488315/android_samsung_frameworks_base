@@ -29,9 +29,9 @@ public class ButtonBarLayout extends LinearLayout {
         if (typedValue.data != 0) {
             this.mIsDeviceDefault = true;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ButtonBarLayout);
-        this.mAllowStacking = obtainStyledAttributes.getBoolean(0, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ButtonBarLayout);
+        this.mAllowStacking = typedArrayObtainStyledAttributes.getBoolean(0, true);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void setAllowStacking(boolean z) {
@@ -46,11 +46,10 @@ public class ButtonBarLayout extends LinearLayout {
 
     @Override // android.widget.LinearLayout, android.view.View
     protected void onMeasure(int i, int i2) {
-        int i3;
+        int iMakeMeasureSpec;
         boolean z;
-        int paddingBottom;
         int size = View.MeasureSpec.getSize(i);
-        int i4 = 0;
+        int paddingTop = 0;
         if (this.mAllowStacking) {
             if (size > this.mLastWidthSize && isStacked()) {
                 setStacked(false);
@@ -61,13 +60,13 @@ public class ButtonBarLayout extends LinearLayout {
             this.mLastWidthSize = size;
         }
         if (isStacked() || View.MeasureSpec.getMode(i) != 1073741824) {
-            i3 = i;
+            iMakeMeasureSpec = i;
             z = false;
         } else {
-            i3 = View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE);
             z = true;
         }
-        super.onMeasure(i3, i2);
+        super.onMeasure(iMakeMeasureSpec, i2);
         if (this.mAllowStacking && !isStacked() && (getMeasuredWidthAndState() & (-16777216)) == 16777216) {
             setStacked(true);
             if (this.mIsDeviceDefault) {
@@ -83,20 +82,16 @@ public class ButtonBarLayout extends LinearLayout {
         if (nextVisibleChildIndex >= 0) {
             View childAt = getChildAt(nextVisibleChildIndex);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
-            int paddingTop = getPaddingTop() + childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin;
-            if (isStacked()) {
-                if (this.mIsDeviceDefault) {
-                    paddingBottom = getPaddingBottom();
-                } else {
-                    i4 = getNextVisibleChildIndex(nextVisibleChildIndex + 1) >= 0 ? (int) (paddingTop + getChildAt(r6).getPaddingTop() + (getResources().getDisplayMetrics().density * 16.0f)) : paddingTop;
-                }
+            int paddingTop2 = getPaddingTop() + childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin;
+            if (!isStacked() || this.mIsDeviceDefault) {
+                int paddingBottom = getPaddingBottom();
+                paddingTop = paddingTop2 + paddingBottom;
             } else {
-                paddingBottom = getPaddingBottom();
+                paddingTop = getNextVisibleChildIndex(nextVisibleChildIndex + 1) >= 0 ? (int) (paddingTop2 + getChildAt(r6).getPaddingTop() + (getResources().getDisplayMetrics().density * 16.0f)) : paddingTop2;
             }
-            i4 = paddingTop + paddingBottom;
         }
-        if (getMinimumHeight() != i4) {
-            setMinimumHeight(i4);
+        if (getMinimumHeight() != paddingTop) {
+            setMinimumHeight(paddingTop);
         }
     }
 
@@ -122,9 +117,9 @@ public class ButtonBarLayout extends LinearLayout {
         if (this.mIsDeviceDefault) {
             return;
         }
-        View findViewById = findViewById(R.id.spacer);
-        if (findViewById != null) {
-            findViewById.setVisibility(z ? 8 : 4);
+        View viewFindViewById = findViewById(R.id.spacer);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(z ? 8 : 4);
         }
         for (int childCount = getChildCount() - 2; childCount >= 0; childCount--) {
             bringChildToFront(getChildAt(childCount));

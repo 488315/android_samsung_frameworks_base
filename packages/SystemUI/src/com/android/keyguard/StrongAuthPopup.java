@@ -1,9 +1,9 @@
 package com.android.keyguard;
 
-import android.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
@@ -13,16 +13,17 @@ import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.android.keyguard.KeyguardSecurityModel;
 import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
+import com.android.systemui.R;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowInsetsListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,7 +42,6 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
     public final KeyguardSecurityModel.SecurityMode mSecurityMode;
     public final AnonymousClass2 mTextWatcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.StrongAuthPopup$1, reason: invalid class name */
     class AnonymousClass1 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass1() {
@@ -56,7 +56,6 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.StrongAuthPopup$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -82,104 +81,55 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
     /* JADX WARN: Illegal instructions before constructor call */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r5v1, types: [com.android.keyguard.StrongAuthPopup$3, java.lang.Object] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public StrongAuthPopup(android.content.Context r10, com.android.keyguard.KeyguardSecurityModel.SecurityMode r11, android.widget.EditText r12) {
-        /*
-            r9 = this;
-            com.android.keyguard.KeyguardSecurityModel$SecurityMode r0 = com.android.keyguard.KeyguardSecurityModel.SecurityMode.Password
-            if (r11 != r0) goto L8
-            r1 = 2132019729(0x7f140a11, float:1.9677801E38)
-            goto Lb
-        L8:
-            r1 = 2132019735(0x7f140a17, float:1.9677813E38)
-        Lb:
-            r9.<init>(r10, r1)
-            android.os.Handler r1 = new android.os.Handler
-            android.os.Looper r2 = android.os.Looper.getMainLooper()
-            r1.<init>(r2)
-            r9.mHandler = r1
-            com.android.keyguard.StrongAuthPopup$1 r1 = new com.android.keyguard.StrongAuthPopup$1
-            r1.<init>()
-            r9.mKeyguardUpdateMonitorCallback = r1
-            com.android.keyguard.StrongAuthPopup$2 r2 = new com.android.keyguard.StrongAuthPopup$2
-            r2.<init>()
-            r9.mTextWatcher = r2
-            com.android.keyguard.StrongAuthPopup$$ExternalSyntheticLambda1 r3 = new com.android.keyguard.StrongAuthPopup$$ExternalSyntheticLambda1
-            r4 = 0
-            r3.<init>(r9, r4)
-            r9.mRunnable = r3
-            r3 = 1
-            r9.mCurrentOrientation = r3
-            com.android.systemui.Dependency r4 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.statusbar.policy.ConfigurationController> r5 = com.android.systemui.statusbar.policy.ConfigurationController.class
-            java.lang.Object r4 = r4.getDependencyInner(r5)
-            com.android.systemui.statusbar.policy.ConfigurationController r4 = (com.android.systemui.statusbar.policy.ConfigurationController) r4
-            r9.mConfigurationController = r4
-            com.android.keyguard.StrongAuthPopup$3 r5 = new com.android.keyguard.StrongAuthPopup$3
-            r5.<init>()
-            r9.mConfigurationListener = r5
-            r6 = 0
-            r9.mImeHeight = r6
-            r9.mContext = r10
-            r9.mSecurityMode = r11
-            r9.mPasswordEntry = r12
-            java.lang.Class<com.android.keyguard.KeyguardUpdateMonitor> r7 = com.android.keyguard.KeyguardUpdateMonitor.class
-            com.android.systemui.Dependency r8 = com.android.systemui.Dependency.sDependency
-            java.lang.Object r7 = r8.getDependencyInner(r7)
-            com.android.keyguard.KeyguardUpdateMonitor r7 = (com.android.keyguard.KeyguardUpdateMonitor) r7
-            r9.mKeyguardUpdateMonitor = r7
-            boolean r8 = com.android.systemui.util.DeviceState.shouldEnableKeyguardScreenRotation(r10)
-            if (r8 == 0) goto L75
-            android.content.Context r8 = r9.getContext()
-            android.content.res.Resources r8 = r8.getResources()
-            android.content.res.Configuration r8 = r8.getConfiguration()
-            int r8 = r8.orientation
-            r9.mCurrentOrientation = r8
-            com.android.systemui.statusbar.phone.ConfigurationControllerImpl r4 = (com.android.systemui.statusbar.phone.ConfigurationControllerImpl) r4
-            r4.addCallback(r5)
-        L75:
-            r7.registerCallback(r1)
-            if (r11 != r0) goto L7f
-            if (r12 == 0) goto L7f
-            r12.addTextChangedListener(r2)
-        L7f:
-            android.view.Window r12 = r9.getWindow()
-            r0 = 2009(0x7d9, float:2.815E-42)
-            r12.setType(r0)
-            r0 = 786472(0xc0028, float:1.102082E-39)
-            r12.addFlags(r0)
-            android.graphics.drawable.ColorDrawable r0 = new android.graphics.drawable.ColorDrawable
-            r0.<init>(r6)
-            r12.setBackgroundDrawable(r0)
-            android.view.WindowManager$LayoutParams r0 = r12.getAttributes()
-            android.view.WindowManager$LayoutParams r1 = r12.getAttributes()
-            int r1 = r1.getFitInsetsTypes()
-            int r2 = android.view.WindowInsets.Type.statusBars()
-            int r2 = ~r2
-            r1 = r1 & r2
-            r0.setFitInsetsTypes(r1)
-            r0 = 2
-            r12.clearFlags(r0)
-            r9.setCanceledOnTouchOutside(r3)
-            r12.setDecorFitsSystemWindows(r6)
-            android.view.View r12 = r12.getDecorView()
-            r12.setOnApplyWindowInsetsListener(r9)
-            r12 = 2131558837(0x7f0d01b5, float:1.8743001E38)
-            r0 = 0
-            android.view.View r12 = android.view.View.inflate(r10, r12, r0)
-            r0 = 2131365063(0x7f0a0cc7, float:1.834998E38)
-            android.view.View r0 = r12.findViewById(r0)
-            android.widget.TextView r0 = (android.widget.TextView) r0
-            com.android.keyguard.KeyguardTextBuilder r10 = com.android.keyguard.KeyguardTextBuilder.getInstance(r10)
-            java.lang.String r10 = r10.getStrongAuthTimeOutMessage(r11)
-            r0.setText(r10)
-            r9.setView(r12)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.StrongAuthPopup.<init>(android.content.Context, com.android.keyguard.KeyguardSecurityModel$SecurityMode, android.widget.EditText):void");
+    public StrongAuthPopup(Context context, KeyguardSecurityModel.SecurityMode securityMode, EditText editText) {
+        KeyguardSecurityModel.SecurityMode securityMode2 = KeyguardSecurityModel.SecurityMode.Password;
+        super(context, securityMode == securityMode2 ? R.style.keyguard_password_strong_auth_popup_style : R.style.keyguard_strong_auth_popup_style);
+        this.mHandler = new Handler(Looper.getMainLooper());
+        AnonymousClass1 anonymousClass1 = new AnonymousClass1();
+        this.mKeyguardUpdateMonitorCallback = anonymousClass1;
+        AnonymousClass2 anonymousClass2 = new AnonymousClass2();
+        this.mTextWatcher = anonymousClass2;
+        this.mRunnable = new StrongAuthPopup$$ExternalSyntheticLambda1(this, 0);
+        this.mCurrentOrientation = 1;
+        ConfigurationController configurationController = (ConfigurationController) Dependency.sDependency.getDependencyInner(ConfigurationController.class);
+        this.mConfigurationController = configurationController;
+        ?? r5 = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.StrongAuthPopup.3
+            @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+            public final void onOrientationChanged(int i) {
+                StrongAuthPopup strongAuthPopup = StrongAuthPopup.this;
+                if (strongAuthPopup.mCurrentOrientation != i) {
+                    strongAuthPopup.mCurrentOrientation = i;
+                    strongAuthPopup.mHandler.post(strongAuthPopup.mRunnable);
+                }
+            }
+        };
+        this.mConfigurationListener = r5;
+        this.mImeHeight = 0;
+        this.mContext = context;
+        this.mSecurityMode = securityMode;
+        this.mPasswordEntry = editText;
+        KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
+        this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;
+        if (DeviceState.shouldEnableKeyguardScreenRotation(context)) {
+            this.mCurrentOrientation = getContext().getResources().getConfiguration().orientation;
+            ((ConfigurationControllerImpl) configurationController).addCallback(r5);
+        }
+        keyguardUpdateMonitor.registerCallback(anonymousClass1);
+        if (securityMode == securityMode2 && editText != null) {
+            editText.addTextChangedListener(anonymousClass2);
+        }
+        Window window = getWindow();
+        window.setType(2009);
+        window.addFlags(786472);
+        window.setBackgroundDrawable(new ColorDrawable(0));
+        window.getAttributes().setFitInsetsTypes(window.getAttributes().getFitInsetsTypes() & (~WindowInsets.Type.statusBars()));
+        window.clearFlags(2);
+        setCanceledOnTouchOutside(true);
+        window.setDecorFitsSystemWindows(false);
+        window.getDecorView().setOnApplyWindowInsetsListener(this);
+        View viewInflate = View.inflate(context, R.layout.keyguard_strong_auth_popup, null);
+        ((TextView) viewInflate.findViewById(R.id.strong_auth_popup_message)).setText(KeyguardTextBuilder.getInstance(context).getStrongAuthTimeOutMessage(securityMode));
+        setView(viewInflate);
     }
 
     @Override // android.app.Dialog, android.content.DialogInterface
@@ -197,7 +147,7 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
 
     public final int getNavigationBarSize() {
         if (LsRune.SECURITY_NAVBAR_ENABLED) {
-            return this.mContext.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
+            return this.mContext.getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
         }
         return 0;
     }
@@ -221,7 +171,7 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
     }
 
     public final void updatePopup() {
-        int calculateLandscapeViewWidth;
+        int iCalculateLandscapeViewWidth;
         int dimensionPixelSize;
         int dimensionPixelSize2;
         int dimensionPixelSize3;
@@ -238,28 +188,28 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
         Window window = getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
         Resources resources = this.mContext.getResources();
-        int width = resources.getConfiguration().windowConfiguration.getBounds().width();
-        int dimensionPixelSize5 = resources.getDimensionPixelSize(com.android.systemui.R.dimen.kg_strong_auth_timeout_popup_margin);
+        int iWidth = resources.getConfiguration().windowConfiguration.getBounds().width();
+        int dimensionPixelSize5 = resources.getDimensionPixelSize(R.dimen.kg_strong_auth_timeout_popup_margin);
         boolean z = LsRune.SECURITY_BIOMETRICS_TABLET;
         char c = 1;
         if (z) {
-            calculateLandscapeViewWidth = resources.getDimensionPixelSize(com.android.systemui.R.dimen.kg_strong_auth_timeout_popup_size_tablet);
+            iCalculateLandscapeViewWidth = resources.getDimensionPixelSize(R.dimen.kg_strong_auth_timeout_popup_size_tablet);
         } else if (this.mKeyguardUpdateMonitor.isDualDisplayPolicyAllowed()) {
-            calculateLandscapeViewWidth = SecurityUtils.getMainSecurityViewFlipperSize(this.mContext, this.mSecurityMode == KeyguardSecurityModel.SecurityMode.Password);
+            iCalculateLandscapeViewWidth = SecurityUtils.getMainSecurityViewFlipperSize(this.mContext, this.mSecurityMode == KeyguardSecurityModel.SecurityMode.Password);
         } else {
-            calculateLandscapeViewWidth = (rotation == 1 || rotation == 3) ? SecurityUtils.calculateLandscapeViewWidth(width, this.mContext) - dimensionPixelSize5 : width - (dimensionPixelSize5 * 2);
+            iCalculateLandscapeViewWidth = (rotation == 1 || rotation == 3) ? SecurityUtils.calculateLandscapeViewWidth(iWidth, this.mContext) - dimensionPixelSize5 : iWidth - (dimensionPixelSize5 * 2);
         }
-        attributes.width = calculateLandscapeViewWidth;
+        attributes.width = iCalculateLandscapeViewWidth;
         attributes.height = -2;
         attributes.layoutInDisplayCutoutMode = 1;
         if (!(rotation == 1 || rotation == 3) || z || this.mKeyguardUpdateMonitor.isDualDisplayPolicyAllowed()) {
             attributes.gravity = 80;
             attributes.x = 0;
-            boolean isTablet = DeviceType.isTablet();
+            boolean zIsTablet = DeviceType.isTablet();
             Resources resources2 = this.mContext.getResources();
             int inDisplayFingerprintHeight = (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && this.mKeyguardUpdateMonitor.isFingerprintDetectionRunning()) ? DeviceState.getInDisplayFingerprintHeight() : 0;
             int i4 = AnonymousClass4.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[this.mSecurityMode.ordinal()];
-            int i5 = com.android.systemui.R.dimen.keyguard_bottom_area_emergency_button_area_min_height;
+            int i5 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height;
             if (i4 != 1) {
                 if (i4 == 2) {
                     if (this.mIsSIPVisible) {
@@ -272,47 +222,47 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
                     } else {
                         i2 = 0;
                     }
-                    int dimensionPixelSize6 = resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_security_password_input_box_margin_bottom_tablet : com.android.systemui.R.dimen.kg_password_container_margin_bottom) + resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_security_input_box_height_tablet : com.android.systemui.R.dimen.kg_security_input_box_height) + resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_security_input_box_margin_top_tablet : com.android.systemui.R.dimen.kg_security_input_box_margin_top);
+                    int dimensionPixelSize6 = resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_security_password_input_box_margin_bottom_tablet : R.dimen.kg_password_container_margin_bottom) + resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_security_input_box_height_tablet : R.dimen.kg_security_input_box_height) + resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_security_input_box_margin_top_tablet : R.dimen.kg_security_input_box_margin_top);
                     if (inDisplayFingerprintHeight != 0) {
                         dimensionPixelSize4 = inDisplayFingerprintHeight - getNavigationBarSize();
                     } else {
-                        if (isTablet) {
-                            i5 = com.android.systemui.R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
+                        if (zIsTablet) {
+                            i5 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
                         }
-                        dimensionPixelSize4 = resources2.getDimensionPixelSize(i5) + resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_password_eca_margin_bottom_tablet : com.android.systemui.R.dimen.kg_password_eca_margin_bottom);
+                        dimensionPixelSize4 = resources2.getDimensionPixelSize(i5) + resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_password_eca_margin_bottom_tablet : R.dimen.kg_password_eca_margin_bottom);
                     }
-                    r9 = (i2 != 0 ? i2 - getNavigationBarSize() : 0) + dimensionPixelSize6 + dimensionPixelSize4;
+                    navigationBarSize = (i2 != 0 ? i2 - getNavigationBarSize() : 0) + dimensionPixelSize6 + dimensionPixelSize4;
                 } else if (i4 == 3) {
-                    dimensionPixelSize = resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_pattern_lock_pattern_view_margin_bottom_tablet : com.android.systemui.R.dimen.kg_pattern_lock_pattern_view_margin_bottom) + resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_pattern_lock_pattern_view_height_tablet : com.android.systemui.R.dimen.kg_pattern_lock_pattern_view_height);
+                    dimensionPixelSize = resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pattern_lock_pattern_view_margin_bottom_tablet : R.dimen.kg_pattern_lock_pattern_view_margin_bottom) + resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pattern_lock_pattern_view_height_tablet : R.dimen.kg_pattern_lock_pattern_view_height);
                     if (inDisplayFingerprintHeight != 0) {
                         navigationBarSize = getNavigationBarSize();
                         i = inDisplayFingerprintHeight - navigationBarSize;
                     } else {
-                        if (isTablet) {
-                            i5 = com.android.systemui.R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
+                        if (zIsTablet) {
+                            i5 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
                         }
                         dimensionPixelSize2 = resources2.getDimensionPixelSize(i5);
-                        dimensionPixelSize3 = resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_pattern_eca_margin_bottom_tablet : com.android.systemui.R.dimen.kg_pattern_eca_margin_bottom);
+                        dimensionPixelSize3 = resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pattern_eca_margin_bottom_tablet : R.dimen.kg_pattern_eca_margin_bottom);
                         i = dimensionPixelSize3 + dimensionPixelSize2;
                     }
                 }
-                attributes.y = r9;
+                attributes.y = navigationBarSize;
             } else {
-                dimensionPixelSize = resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_pin_container_margin_bottom_tablet : com.android.systemui.R.dimen.kg_pin_container_margin_bottom) + (isTablet ? SecurityUtils.getTabletPINContainerHeight(this.mContext) : (LsRune.SECURITY_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) ? SecurityUtils.getFoldPINContainerHeight(this.mContext) : SecurityUtils.getPINContainerHeight(this.mContext));
+                dimensionPixelSize = resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pin_container_margin_bottom_tablet : R.dimen.kg_pin_container_margin_bottom) + (zIsTablet ? SecurityUtils.getTabletPINContainerHeight(this.mContext) : (LsRune.SECURITY_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) ? SecurityUtils.getFoldPINContainerHeight(this.mContext) : SecurityUtils.getPINContainerHeight(this.mContext));
                 if (inDisplayFingerprintHeight != 0) {
                     navigationBarSize = getNavigationBarSize();
                     i = inDisplayFingerprintHeight - navigationBarSize;
                 } else {
-                    if (isTablet) {
-                        i5 = com.android.systemui.R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
+                    if (zIsTablet) {
+                        i5 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
                     }
                     dimensionPixelSize2 = resources2.getDimensionPixelSize(i5);
-                    dimensionPixelSize3 = resources2.getDimensionPixelSize(isTablet ? com.android.systemui.R.dimen.kg_pin_eca_margin_bottom_tablet : com.android.systemui.R.dimen.kg_pin_eca_margin_bottom);
+                    dimensionPixelSize3 = resources2.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pin_eca_margin_bottom_tablet : R.dimen.kg_pin_eca_margin_bottom);
                     i = dimensionPixelSize3 + dimensionPixelSize2;
                 }
             }
-            r9 = dimensionPixelSize + i;
-            attributes.y = r9;
+            navigationBarSize = dimensionPixelSize + i;
+            attributes.y = navigationBarSize;
         } else {
             if (this.mSecurityMode == KeyguardSecurityModel.SecurityMode.Password) {
                 if (this.mIsSIPVisible) {
@@ -321,7 +271,7 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
                     i3 = 0;
                 }
                 attributes.gravity = i3 == 0 ? 16 : 80;
-                attributes.y = i3 != 0 ? StrongAuthPopup$$ExternalSyntheticOutline0.m(this.mContext, com.android.systemui.R.dimen.kg_strong_auth_timeout_popup_margin, i3) : 0;
+                attributes.y = i3 != 0 ? StrongAuthPopup$$ExternalSyntheticOutline0.m(this.mContext, R.dimen.kg_strong_auth_timeout_popup_margin, i3) : 0;
             } else {
                 attributes.gravity = 16;
                 attributes.y = 0;
@@ -332,7 +282,6 @@ public class StrongAuthPopup extends AlertDialog implements View.OnApplyWindowIn
         window.setAttributes(attributes);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.StrongAuthPopup$2, reason: invalid class name */
     public class AnonymousClass2 implements TextWatcher {
         public AnonymousClass2() {

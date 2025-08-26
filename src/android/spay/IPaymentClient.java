@@ -40,9 +40,9 @@ public interface IPaymentClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPaymentClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPaymentClient)) {
-                return (IPaymentClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPaymentClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPaymentClient)) {
+                return (IPaymentClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

@@ -167,15 +167,15 @@ public final class PasswordMetrics implements Parcelable {
             if (i >= length2) {
                 break;
             }
-            int categoryChar = categoryChar((char) bArr[i]);
-            if (categoryChar == 0) {
+            int iCategoryChar = categoryChar((char) bArr[i]);
+            if (iCategoryChar == 0) {
                 i2++;
                 i4++;
-            } else if (categoryChar != 1) {
-                if (categoryChar == 2) {
+            } else if (iCategoryChar != 1) {
+                if (iCategoryChar == 2) {
                     i5++;
                     i7++;
-                } else if (categoryChar == 3) {
+                } else if (iCategoryChar == 3) {
                     i6++;
                     i7++;
                 }
@@ -195,33 +195,33 @@ public final class PasswordMetrics implements Parcelable {
             return 0;
         }
         char c = (char) bArr[0];
-        int categoryChar = categoryChar(c);
+        int iCategoryChar = categoryChar(c);
+        int iMax = 0;
         int i = 0;
-        int i2 = 0;
         boolean z = false;
-        int i3 = 0;
-        int i4 = 1;
-        while (i4 < bArr.length) {
-            char c2 = (char) bArr[i4];
-            int categoryChar2 = categoryChar(c2);
-            int i5 = c2 - c;
-            if (categoryChar2 != categoryChar || Math.abs(i5) > maxDiffCategory(categoryChar)) {
-                i = Math.max(i, i4 - i2);
+        int i2 = 0;
+        int i3 = 1;
+        while (i3 < bArr.length) {
+            char c2 = (char) bArr[i3];
+            int iCategoryChar2 = categoryChar(c2);
+            int i4 = c2 - c;
+            if (iCategoryChar2 != iCategoryChar || Math.abs(i4) > maxDiffCategory(iCategoryChar)) {
+                iMax = Math.max(iMax, i3 - i);
                 z = false;
-                i2 = i4;
-                categoryChar = categoryChar2;
+                i = i3;
+                iCategoryChar = iCategoryChar2;
             } else {
-                if (z && i5 != i3) {
-                    i = Math.max(i, i4 - i2);
-                    i2 = i4 - 1;
+                if (z && i4 != i2) {
+                    iMax = Math.max(iMax, i3 - i);
+                    i = i3 - 1;
                 }
-                i3 = i5;
+                i2 = i4;
                 z = true;
             }
-            i4++;
+            i3++;
             c = c2;
         }
-        return Math.max(i, bArr.length - i2);
+        return Math.max(iMax, bArr.length - i);
     }
 
     public static PasswordMetrics merge(List<PasswordMetrics> list) {
@@ -234,9 +234,9 @@ public final class PasswordMetrics implements Parcelable {
     }
 
     public void maxWith(PasswordMetrics passwordMetrics) {
-        int max = Math.max(this.credType, passwordMetrics.credType);
-        this.credType = max;
-        if (max == 4 || max == 3) {
+        int iMax = Math.max(this.credType, passwordMetrics.credType);
+        this.credType = iMax;
+        if (iMax == 4 || iMax == 3) {
             this.length = Math.max(this.length, passwordMetrics.length);
             this.letters = Math.max(this.letters, passwordMetrics.letters);
             this.upperCase = Math.max(this.upperCase, passwordMetrics.upperCase);
@@ -420,9 +420,9 @@ public final class PasswordMetrics implements Parcelable {
     }
 
     public static List<PasswordValidationError> validatePasswordMetrics(PasswordMetrics passwordMetrics, int i, PasswordMetrics passwordMetrics2) {
-        ComplexityBucket forComplexity = ComplexityBucket.forComplexity(i);
+        ComplexityBucket complexityBucketForComplexity = ComplexityBucket.forComplexity(i);
         int i2 = passwordMetrics2.credType;
-        if (i2 < passwordMetrics.credType || !forComplexity.allowsCredType(i2)) {
+        if (i2 < passwordMetrics.credType || !complexityBucketForComplexity.allowsCredType(i2)) {
             return Collections.singletonList(new PasswordValidationError(1, 0));
         }
         int i3 = passwordMetrics2.credType;
@@ -443,10 +443,10 @@ public final class PasswordMetrics implements Parcelable {
         if (passwordMetrics2.length > 256) {
             arrayList.add(new PasswordValidationError(5, 256));
         }
-        PasswordMetrics applyComplexity = applyComplexity(passwordMetrics, passwordMetrics2.credType == 3, forComplexity);
-        applyComplexity.length = Math.min(256, Math.max(applyComplexity.length, 4));
-        applyComplexity.removeOverlapping();
-        comparePasswordMetrics(applyComplexity, forComplexity, passwordMetrics2, arrayList);
+        PasswordMetrics passwordMetricsApplyComplexity = applyComplexity(passwordMetrics, passwordMetrics2.credType == 3, complexityBucketForComplexity);
+        passwordMetricsApplyComplexity.length = Math.min(256, Math.max(passwordMetricsApplyComplexity.length, 4));
+        passwordMetricsApplyComplexity.removeOverlapping();
+        comparePasswordMetrics(passwordMetricsApplyComplexity, complexityBucketForComplexity, passwordMetrics2, arrayList);
         return arrayList;
     }
 
@@ -487,9 +487,9 @@ public final class PasswordMetrics implements Parcelable {
     private void removeOverlapping() {
         int i = this.upperCase + this.lowerCase;
         int i2 = this.numeric + this.symbols;
-        int max = Math.max(this.letters, i);
-        int i3 = this.symbols + max;
-        int max2 = Math.max(max + Math.max(this.nonLetter, i2), this.numeric + Math.max(this.nonNumeric, i3));
+        int iMax = Math.max(this.letters, i);
+        int i3 = this.symbols + iMax;
+        int iMax2 = Math.max(iMax + Math.max(this.nonLetter, i2), this.numeric + Math.max(this.nonNumeric, i3));
         if (i >= this.letters) {
             this.letters = 0;
         }
@@ -499,7 +499,7 @@ public final class PasswordMetrics implements Parcelable {
         if (i3 >= this.nonNumeric) {
             this.nonNumeric = 0;
         }
-        if (max2 >= this.length) {
+        if (iMax2 >= this.length) {
             this.length = 0;
         }
     }

@@ -4,7 +4,6 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OnImeSubmitListener implements TextView.OnEditorActionListener {
     public final Function1 onSubmit;
@@ -20,7 +19,7 @@ public final class OnImeSubmitListener implements TextView.OnEditorActionListene
         if (!z && !z2) {
             return false;
         }
-        this.onSubmit.mo779invoke(textView.getText());
+        this.onSubmit.mo781invoke(textView.getText());
         return true;
     }
 }

@@ -72,15 +72,15 @@ public final class PrintAttributes implements Parcelable {
         this.mMediaSize = parcel.readInt() == 1 ? MediaSize.createFromParcel(parcel) : null;
         this.mResolution = parcel.readInt() == 1 ? Resolution.createFromParcel(parcel) : null;
         this.mMinMargins = parcel.readInt() == 1 ? Margins.createFromParcel(parcel) : null;
-        int readInt = parcel.readInt();
-        this.mColorMode = readInt;
-        if (readInt != 0) {
-            enforceValidColorMode(readInt);
+        int i = parcel.readInt();
+        this.mColorMode = i;
+        if (i != 0) {
+            enforceValidColorMode(i);
         }
-        int readInt2 = parcel.readInt();
-        this.mDuplexMode = readInt2;
-        if (readInt2 != 0) {
-            enforceValidDuplexMode(readInt2);
+        int i2 = parcel.readInt();
+        this.mDuplexMode = i2;
+        if (i2 != 0) {
+            enforceValidDuplexMode(i2);
         }
     }
 
@@ -185,11 +185,11 @@ public final class PrintAttributes implements Parcelable {
     public int hashCode() {
         int i = (((this.mColorMode + 31) * 31) + this.mDuplexMode) * 31;
         Margins margins = this.mMinMargins;
-        int hashCode = (i + (margins == null ? 0 : margins.hashCode())) * 31;
+        int iHashCode = (i + (margins == null ? 0 : margins.hashCode())) * 31;
         MediaSize mediaSize = this.mMediaSize;
-        int hashCode2 = (hashCode + (mediaSize == null ? 0 : mediaSize.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (mediaSize == null ? 0 : mediaSize.hashCode())) * 31;
         Resolution resolution = this.mResolution;
-        return hashCode2 + (resolution != null ? resolution.hashCode() : 0);
+        return iHashCode2 + (resolution != null ? resolution.hashCode() : 0);
     }
 
     public boolean equals(Object obj) {

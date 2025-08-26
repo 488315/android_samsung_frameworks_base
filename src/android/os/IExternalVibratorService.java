@@ -54,9 +54,9 @@ public interface IExternalVibratorService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IExternalVibratorService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IExternalVibratorService)) {
-                return (IExternalVibratorService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IExternalVibratorService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IExternalVibratorService)) {
+                return (IExternalVibratorService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -91,23 +91,23 @@ public interface IExternalVibratorService extends IInterface {
             if (i == 1) {
                 ExternalVibration externalVibration = (ExternalVibration) parcel.readTypedObject(ExternalVibration.CREATOR);
                 parcel.enforceNoDataAvail();
-                ExternalVibrationScale onExternalVibrationStart = onExternalVibrationStart(externalVibration);
+                ExternalVibrationScale externalVibrationScaleOnExternalVibrationStart = onExternalVibrationStart(externalVibration);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(onExternalVibrationStart, 1);
+                parcel2.writeTypedObject(externalVibrationScaleOnExternalVibrationStart, 1);
             } else if (i == 2) {
                 ExternalVibration externalVibration2 = (ExternalVibration) parcel.readTypedObject(ExternalVibration.CREATOR);
                 parcel.enforceNoDataAvail();
                 onExternalVibrationStop(externalVibration2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean shouldIgnoreExternalVibrationLocked = shouldIgnoreExternalVibrationLocked(readInt, readInt2, readInt3, readInt4);
+                boolean zShouldIgnoreExternalVibrationLocked = shouldIgnoreExternalVibrationLocked(i3, i4, i5, i6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(shouldIgnoreExternalVibrationLocked);
+                parcel2.writeBoolean(zShouldIgnoreExternalVibrationLocked);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -132,51 +132,51 @@ public interface IExternalVibratorService extends IInterface {
 
             @Override // android.os.IExternalVibratorService
             public ExternalVibrationScale onExternalVibrationStart(ExternalVibration externalVibration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
-                    obtain.writeTypedObject(externalVibration, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ExternalVibrationScale) obtain2.readTypedObject(ExternalVibrationScale.CREATOR);
+                    parcelObtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(externalVibration, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ExternalVibrationScale) parcelObtain2.readTypedObject(ExternalVibrationScale.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IExternalVibratorService
             public void onExternalVibrationStop(ExternalVibration externalVibration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
-                    obtain.writeTypedObject(externalVibration, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(externalVibration, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IExternalVibratorService
             public boolean shouldIgnoreExternalVibrationLocked(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExternalVibratorService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

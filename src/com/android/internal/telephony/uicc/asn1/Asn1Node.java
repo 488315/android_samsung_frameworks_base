@@ -54,8 +54,8 @@ public final class Asn1Node {
             if (Asn1Node.isConstructedTag(i)) {
                 throw new IllegalStateException("Cannot set value of a constructed tag: " + i);
             }
-            byte[] signedIntToBytes = IccUtils.signedIntToBytes(i2);
-            addChild(new Asn1Node(i, signedIntToBytes, 0, signedIntToBytes.length));
+            byte[] bArrSignedIntToBytes = IccUtils.signedIntToBytes(i2);
+            addChild(new Asn1Node(i, bArrSignedIntToBytes, 0, bArrSignedIntToBytes.length));
             return this;
         }
 
@@ -85,10 +85,10 @@ public final class Asn1Node {
                 throw new IllegalStateException("Cannot set value of a constructed tag: " + i);
             }
             byte[] bArr = new byte[5];
-            int reverse = Integer.reverse(i2);
+            int iReverse = Integer.reverse(i2);
             int i3 = 0;
             for (int i4 = 1; i4 < 5; i4++) {
-                byte b = (byte) (reverse >> ((4 - i4) * 8));
+                byte b = (byte) (iReverse >> ((4 - i4) * 8));
                 bArr[i4] = b;
                 if (b != 0) {
                     i3 = i4;
@@ -130,12 +130,12 @@ public final class Asn1Node {
 
     Asn1Node(int i, byte[] bArr, int i2, int i3) {
         this.mTag = i;
-        boolean isConstructedTag = isConstructedTag(i);
-        this.mConstructed = isConstructedTag;
+        boolean zIsConstructedTag = isConstructedTag(i);
+        this.mConstructed = zIsConstructedTag;
         this.mDataBytes = bArr;
         this.mDataOffset = i2;
         this.mDataLength = i3;
-        this.mChildren = isConstructedTag ? new ArrayList<>() : EMPTY_NODE_LIST;
+        this.mChildren = zIsConstructedTag ? new ArrayList<>() : EMPTY_NODE_LIST;
         this.mEncodedLength = IccUtils.byteNumForUnsignedInt(i) + calculateEncodedBytesNumForLength(this.mDataLength) + this.mDataLength;
     }
 
@@ -312,11 +312,11 @@ public final class Asn1Node {
             throw new InvalidAsn1DataException(this.mTag, "Data bytes cannot be null.");
         }
         try {
-            int bytesToInt = IccUtils.bytesToInt(bArr, this.mDataOffset + 1, this.mDataLength - 1);
+            int iBytesToInt = IccUtils.bytesToInt(bArr, this.mDataOffset + 1, this.mDataLength - 1);
             for (int i = this.mDataLength - 1; i < 4; i++) {
-                bytesToInt <<= 8;
+                iBytesToInt <<= 8;
             }
-            return Integer.reverse(bytesToInt);
+            return Integer.reverse(iBytesToInt);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             throw new InvalidAsn1DataException(this.mTag, "Cannot parse data bytes.", e);
         }
@@ -373,40 +373,40 @@ public final class Asn1Node {
     }
 
     public String getHeadAsHex() {
-        String bytesToHexString = IccUtils.bytesToHexString(IccUtils.unsignedIntToBytes(this.mTag));
+        String strBytesToHexString = IccUtils.bytesToHexString(IccUtils.unsignedIntToBytes(this.mTag));
         int i = this.mDataLength;
         if (i <= 127) {
-            return bytesToHexString + IccUtils.byteToHex((byte) this.mDataLength);
+            return strBytesToHexString + IccUtils.byteToHex((byte) this.mDataLength);
         }
-        byte[] unsignedIntToBytes = IccUtils.unsignedIntToBytes(i);
-        return (bytesToHexString + IccUtils.byteToHex((byte) (unsignedIntToBytes.length | 128))) + IccUtils.bytesToHexString(unsignedIntToBytes);
+        byte[] bArrUnsignedIntToBytes = IccUtils.unsignedIntToBytes(i);
+        return (strBytesToHexString + IccUtils.byteToHex((byte) (bArrUnsignedIntToBytes.length | 128))) + IccUtils.bytesToHexString(bArrUnsignedIntToBytes);
     }
 
     private int write(byte[] bArr, int i) {
-        int i2;
-        int unsignedIntToBytes = i + IccUtils.unsignedIntToBytes(this.mTag, bArr, i);
-        int i3 = this.mDataLength;
-        if (i3 <= 127) {
-            i2 = unsignedIntToBytes + 1;
-            bArr[unsignedIntToBytes] = (byte) i3;
+        int iWrite;
+        int iUnsignedIntToBytes = i + IccUtils.unsignedIntToBytes(this.mTag, bArr, i);
+        int i2 = this.mDataLength;
+        if (i2 <= 127) {
+            iWrite = iUnsignedIntToBytes + 1;
+            bArr[iUnsignedIntToBytes] = (byte) i2;
         } else {
-            int i4 = unsignedIntToBytes + 1;
-            int unsignedIntToBytes2 = IccUtils.unsignedIntToBytes(i3, bArr, i4);
-            bArr[unsignedIntToBytes] = (byte) (unsignedIntToBytes2 | 128);
-            i2 = i4 + unsignedIntToBytes2;
+            int i3 = iUnsignedIntToBytes + 1;
+            int iUnsignedIntToBytes2 = IccUtils.unsignedIntToBytes(i2, bArr, i3);
+            bArr[iUnsignedIntToBytes] = (byte) (iUnsignedIntToBytes2 | 128);
+            iWrite = i3 + iUnsignedIntToBytes2;
         }
         if (this.mConstructed && this.mDataBytes == null) {
             int size = this.mChildren.size();
-            for (int i5 = 0; i5 < size; i5++) {
-                i2 = this.mChildren.get(i5).write(bArr, i2);
+            for (int i4 = 0; i4 < size; i4++) {
+                iWrite = this.mChildren.get(i4).write(bArr, iWrite);
             }
-            return i2;
+            return iWrite;
         }
         byte[] bArr2 = this.mDataBytes;
         if (bArr2 == null) {
-            return i2;
+            return iWrite;
         }
-        System.arraycopy(bArr2, this.mDataOffset, bArr, i2, this.mDataLength);
-        return i2 + this.mDataLength;
+        System.arraycopy(bArr2, this.mDataOffset, bArr, iWrite, this.mDataLength);
+        return iWrite + this.mDataLength;
     }
 }

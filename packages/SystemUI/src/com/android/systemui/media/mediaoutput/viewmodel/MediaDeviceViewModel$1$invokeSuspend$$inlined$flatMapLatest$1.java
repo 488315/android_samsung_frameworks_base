@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDeviceViewModel$1$invokeSuspend$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,7 +40,7 @@ public final class MediaDeviceViewModel$1$invokeSuspend$$inlined$flatMapLatest$1
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -51,16 +50,16 @@ public final class MediaDeviceViewModel$1$invokeSuspend$$inlined$flatMapLatest$1
                 MediaDeviceViewModel.Companion companion = MediaDeviceViewModel.Companion;
                 SmartThingsMediaSdkManager smartThingsMediaSdkManager = this.this$0.mediaSdkManager;
                 companion.getClass();
-                Flow buffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaDeviceViewModel$Companion$mediaChanged$1(smartThingsMediaSdkManager, null)), -1, 2);
+                Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaDeviceViewModel$Companion$mediaChanged$1(smartThingsMediaSdkManager, null)), -1, 2);
                 DataStoreDebugLabsExt dataStoreDebugLabsExt = DataStoreDebugLabsExt.INSTANCE;
                 DataStore dataStore = this.this$0.dataStore;
                 dataStoreDebugLabsExt.getClass();
-                flow = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(buffer$default, new DataStoreDebugLabsExt$special$$inlined$map$9(dataStore.getData()), new MediaDeviceViewModel$1$1$1(null));
+                flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flowBuffer$default, new DataStoreDebugLabsExt$special$$inlined$map$9(dataStore.getData()), new MediaDeviceViewModel$1$1$1(null));
             } else {
-                flow = EmptyFlow.INSTANCE;
+                flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = EmptyFlow.INSTANCE;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

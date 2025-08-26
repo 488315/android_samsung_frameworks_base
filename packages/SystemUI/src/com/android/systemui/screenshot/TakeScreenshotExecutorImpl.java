@@ -1,21 +1,37 @@
 package com.android.systemui.screenshot;
 
+import android.os.UserHandle;
+import android.util.Log;
+import android.view.Display;
 import com.android.internal.logging.UiEventLogger;
+import com.android.internal.util.ScreenshotRequest;
 import com.android.systemui.display.data.repository.DisplayRepository;
 import com.android.systemui.display.data.repository.DisplayRepositoryImpl;
 import com.android.systemui.display.data.repository.FocusedDisplayRepository;
 import com.android.systemui.screenshot.InteractiveScreenshotHandler;
+import com.android.systemui.screenshot.ScreenshotData;
 import com.android.systemui.screenshot.ScreenshotNotificationsController;
 import com.android.systemui.screenshot.TakeScreenshotService;
+import com.android.systemui.screenshot.policy.PolicyRequestProcessor;
 import com.android.systemui.screenshot.sep.ScreenCaptureHelper;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
+import kotlin.Result;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor {
     public static final List ALLOWED_DISPLAY_TYPES;
@@ -28,13 +44,78 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
     public final ScreenshotRequestProcessor screenshotRequestProcessor;
     public final UiEventLogger uiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.screenshot.TakeScreenshotExecutorImpl$dispatchToController$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        Object L$4;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            TakeScreenshotExecutorImpl takeScreenshotExecutorImpl = TakeScreenshotExecutorImpl.this;
+            String str = TakeScreenshotExecutorImpl.TAG;
+            return takeScreenshotExecutorImpl.dispatchToController(null, null, null, null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.screenshot.TakeScreenshotExecutorImpl$executeScreenshots$1, reason: invalid class name and case insensitive filesystem */
+    final class C10291 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        int label;
+        /* synthetic */ Object result;
+
+        public C10291(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return TakeScreenshotExecutorImpl.this.executeScreenshots(null, null, null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1, reason: invalid class name and case insensitive filesystem */
+    final class C10301 extends ContinuationImpl {
+        int I$0;
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C10301(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            TakeScreenshotExecutorImpl takeScreenshotExecutorImpl = TakeScreenshotExecutorImpl.this;
+            String str = TakeScreenshotExecutorImpl.TAG;
+            return takeScreenshotExecutorImpl.getDisplaysToScreenshot(0, this);
         }
     }
 
@@ -53,172 +134,265 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
         new LinkedHashMap();
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(15:0|1|(2:3|(11:5|6|7|(1:(2:10|11)(2:66|67))(3:68|69|(1:71))|12|13|(1:15)|16|(1:18)|19|(2:21|22)(2:24|(5:40|(2:(1:43)|44)|45|(1:47)|(4:49|(3:51|(1:53)|54)|55|56)(4:57|58|59|60))(2:28|29))))|74|6|7|(0)(0)|12|13|(0)|16|(0)|19|(0)(0)|(1:(0))) */
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x003f, code lost:
-    
-        r11 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x006a, code lost:
-    
-        r0 = kotlin.Result.$r8$clinit;
-        r11 = new kotlin.Result.Failure(r11);
-        r7 = r7;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009c  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r7v9, types: [com.android.systemui.screenshot.ScreenshotHandler] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object dispatchToController(com.android.systemui.screenshot.InteractiveScreenshotHandler r7, com.android.systemui.screenshot.ScreenshotData r8, kotlin.jvm.functions.Function1 r9, com.android.systemui.screenshot.TakeScreenshotService.RequestCallback r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            Method dump skipped, instructions count: 306
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.TakeScreenshotExecutorImpl.dispatchToController(com.android.systemui.screenshot.InteractiveScreenshotHandler, com.android.systemui.screenshot.ScreenshotData, kotlin.jvm.functions.Function1, com.android.systemui.screenshot.TakeScreenshotService$RequestCallback, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object dispatchToController(InteractiveScreenshotHandler interactiveScreenshotHandler, ScreenshotData screenshotData, Function1 function1, TakeScreenshotService.RequestCallback requestCallback, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        Object failure;
+        InteractiveScreenshotHandler interactiveScreenshotHandler2;
+        InteractiveScreenshotHandler interactiveScreenshotHandler3;
+        int i;
+        InteractiveScreenshotHandler interactiveScreenshotHandler4;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i2 = anonymousClass1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objProcess = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = anonymousClass1.label;
+        try {
+            if (i3 == 0) {
+                ResultKt.throwOnFailure(objProcess);
+                int i4 = Result.$r8$clinit;
+                ScreenshotRequestProcessor screenshotRequestProcessor = this.screenshotRequestProcessor;
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = interactiveScreenshotHandler;
+                anonymousClass1.L$2 = screenshotData;
+                anonymousClass1.L$3 = function1;
+                anonymousClass1.L$4 = requestCallback;
+                anonymousClass1.label = 1;
+                objProcess = ((PolicyRequestProcessor) screenshotRequestProcessor).process(screenshotData, anonymousClass1);
+                interactiveScreenshotHandler = interactiveScreenshotHandler;
+                if (objProcess == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i3 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                requestCallback = (TakeScreenshotService.RequestCallback) anonymousClass1.L$4;
+                function1 = (Function1) anonymousClass1.L$3;
+                screenshotData = (ScreenshotData) anonymousClass1.L$2;
+                ?? r7 = (ScreenshotHandler) anonymousClass1.L$1;
+                this = (TakeScreenshotExecutorImpl) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objProcess);
+                interactiveScreenshotHandler = r7;
+            }
+            failure = (ScreenshotData) objProcess;
+            int i5 = Result.$r8$clinit;
+            interactiveScreenshotHandler2 = interactiveScreenshotHandler;
+        } catch (Throwable th) {
+            int i6 = Result.$r8$clinit;
+            failure = new Result.Failure(th);
+            interactiveScreenshotHandler2 = interactiveScreenshotHandler;
+        }
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        String str = TAG;
+        if (thM3442exceptionOrNullimpl != null) {
+            Log.e(str, "Failed to process screenshot request!", thM3442exceptionOrNullimpl);
+            this.uiEventLogger.log(ScreenshotEvent.getScreenshotSource(screenshotData.source), 0, screenshotData.getPackageNameString());
+            this.onFailedScreenshotRequest(screenshotData, requestCallback);
+        }
+        if (failure instanceof Result.Failure) {
+            failure = null;
+        }
+        ScreenshotData screenshotData2 = (ScreenshotData) failure;
+        if (screenshotData2 == null) {
+            return Unit.INSTANCE;
+        }
+        this.uiEventLogger.log(ScreenshotEvent.getScreenshotSource(screenshotData2.source), 0, screenshotData2.getPackageNameString());
+        Log.d(str, "Screenshot request: " + screenshotData2);
+        InteractiveScreenshotHandler interactiveScreenshotHandler5 = this.screenshotController;
+        if ((interactiveScreenshotHandler5 != null && interactiveScreenshotHandler5.isAnimationRunning()) || (((interactiveScreenshotHandler3 = this.screenshotController) != null && interactiveScreenshotHandler3.isSnackBarShowing()) || ((i = screenshotData2.type) == 2 && (interactiveScreenshotHandler4 = this.screenshotController) != null && interactiveScreenshotHandler4.isScreenshotSelectorViewVisible()))) {
+            this.onFailedScreenshotRequest(screenshotData2, requestCallback);
+            return Unit.INSTANCE;
+        }
+        ScreenCaptureHelper screenCaptureHelper = this.screenCaptureHelper;
+        InteractiveScreenshotHandler interactiveScreenshotHandler6 = this.screenshotController;
+        if (interactiveScreenshotHandler6 != null) {
+            if (screenCaptureHelper == null) {
+                screenCaptureHelper = null;
+            }
+            interactiveScreenshotHandler6.setScreenCaptureHelper(screenCaptureHelper);
+        }
+        InteractiveScreenshotHandler interactiveScreenshotHandler7 = this.screenshotController;
+        if (interactiveScreenshotHandler7 != null) {
+            interactiveScreenshotHandler7.initSemScreenshotLayout();
+        }
+        if (i == 2) {
+            Log.d(str, "Partial screenshot");
+            InteractiveScreenshotHandler interactiveScreenshotHandler8 = this.screenshotController;
+            if (interactiveScreenshotHandler8 != null) {
+                ScreenCaptureHelper screenCaptureHelper2 = this.screenCaptureHelper;
+                interactiveScreenshotHandler8.setPartialScreenshotSelector((screenCaptureHelper2 != null ? screenCaptureHelper2 : null).mBundle, screenshotData2, new TakeScreenshotExecutorImpl$sam$java_util_function_Consumer$0(function1), requestCallback);
+            }
+            return Unit.INSTANCE;
+        }
+        try {
+            interactiveScreenshotHandler2.handleScreenshot(screenshotData2, new TakeScreenshotExecutorImpl$sam$java_util_function_Consumer$0(function1), requestCallback);
+            return Unit.INSTANCE;
+        } catch (IllegalStateException e) {
+            Log.e(str, "Error while ScreenshotController was handling ScreenshotData!", e);
+            this.onFailedScreenshotRequest(screenshotData2, requestCallback);
+            return Unit.INSTANCE;
+        }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00d5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x00d5, code lost:
     
-        if (r3.dispatchToController(r1, r11, r6, r7, r8) != r2) goto L30;
+        if (r3.dispatchToController(r1, r11, r6, r7, r8) == r2) goto L29;
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0028  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0018  */
     /* JADX WARN: Type inference failed for: r3v5, types: [kotlin.jvm.functions.Function1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object executeScreenshots(com.android.internal.util.ScreenshotRequest r26, com.android.systemui.screenshot.TakeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0 r27, com.android.systemui.screenshot.TakeScreenshotService.RequestCallback r28, kotlin.coroutines.jvm.internal.ContinuationImpl r29) {
-        /*
-            Method dump skipped, instructions count: 219
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.TakeScreenshotExecutorImpl.executeScreenshots(com.android.internal.util.ScreenshotRequest, com.android.systemui.screenshot.TakeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0, com.android.systemui.screenshot.TakeScreenshotService$RequestCallback, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object executeScreenshots(ScreenshotRequest screenshotRequest, TakeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0 takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0, TakeScreenshotService.RequestCallback requestCallback, ContinuationImpl continuationImpl) {
+        C10291 c10291;
+        TakeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0 takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda02;
+        TakeScreenshotService.RequestCallback requestCallback2;
+        ScreenshotRequest screenshotRequest2;
+        TakeScreenshotExecutorImpl takeScreenshotExecutorImpl;
+        if (continuationImpl instanceof C10291) {
+            c10291 = (C10291) continuationImpl;
+            int i = c10291.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c10291.label = i - Integer.MIN_VALUE;
+            } else {
+                c10291 = new C10291(continuationImpl);
+            }
+        }
+        C10291 c102912 = c10291;
+        Object displaysToScreenshot = c102912.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c102912.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(displaysToScreenshot);
+            int type = screenshotRequest.getType();
+            c102912.L$0 = this;
+            c102912.L$1 = screenshotRequest;
+            takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda02 = takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0;
+            c102912.L$2 = takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda02;
+            requestCallback2 = requestCallback;
+            c102912.L$3 = requestCallback2;
+            c102912.label = 1;
+            displaysToScreenshot = getDisplaysToScreenshot(type, c102912);
+            if (displaysToScreenshot != coroutineSingletons) {
+                screenshotRequest2 = screenshotRequest;
+                takeScreenshotExecutorImpl = this;
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(displaysToScreenshot);
+            return Unit.INSTANCE;
+        }
+        TakeScreenshotService.RequestCallback requestCallback3 = (TakeScreenshotService.RequestCallback) c102912.L$3;
+        ?? r3 = (Function1) c102912.L$2;
+        screenshotRequest2 = (ScreenshotRequest) c102912.L$1;
+        TakeScreenshotExecutorImpl takeScreenshotExecutorImpl2 = (TakeScreenshotExecutorImpl) c102912.L$0;
+        ResultKt.throwOnFailure(displaysToScreenshot);
+        takeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda02 = r3;
+        takeScreenshotExecutorImpl = takeScreenshotExecutorImpl2;
+        requestCallback2 = requestCallback3;
+        Display display = (Display) CollectionsKt___CollectionsKt.first((List) displaysToScreenshot);
+        InteractiveScreenshotHandler interactiveScreenshotHandlerCreate = takeScreenshotExecutorImpl.screenshotController;
+        if (interactiveScreenshotHandlerCreate == null) {
+            interactiveScreenshotHandlerCreate = takeScreenshotExecutorImpl.interactiveScreenshotHandlerFactory.create(display);
+        }
+        takeScreenshotExecutorImpl.screenshotController = interactiveScreenshotHandlerCreate;
+        ScreenshotData.Companion companion = ScreenshotData.Companion;
+        ScreenCaptureHelper screenCaptureHelper = takeScreenshotExecutorImpl.screenCaptureHelper;
+        if (screenCaptureHelper == null) {
+            screenCaptureHelper = null;
+        }
+        int i3 = screenCaptureHelper.builtInDisplayId;
+        companion.getClass();
+        ScreenshotData screenshotData = new ScreenshotData(screenshotRequest2.getType(), screenshotRequest2.getSource(), UserHandle.of(screenshotRequest2.getUserId()), screenshotRequest2.getTopComponent(), screenshotRequest2.getTaskId(), screenshotRequest2.getBoundsInScreen(), screenshotRequest2.getInsets(), screenshotRequest2.getBitmap(), i3, false, false, 1536, null);
+        c102912.L$0 = null;
+        c102912.L$1 = null;
+        c102912.L$2 = null;
+        c102912.L$3 = null;
+        c102912.label = 2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getDisplaysToScreenshot(int r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1 r0 = (com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1 r0 = new com.android.systemui.screenshot.TakeScreenshotExecutorImpl$getDisplaysToScreenshot$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L35
-            if (r2 != r3) goto L2d
-            int r5 = r0.I$0
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.screenshot.TakeScreenshotExecutorImpl r4 = (com.android.systemui.screenshot.TakeScreenshotExecutorImpl) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L47
-        L2d:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L35:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r4
-            r0.I$0 = r5
-            r0.label = r3
-            kotlinx.coroutines.flow.StateFlow r6 = r4.displays
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r6, r0)
-            if (r6 != r1) goto L47
-            return r1
-        L47:
-            java.util.Set r6 = (java.util.Set) r6
-            r0 = 3
-            if (r5 != r0) goto L6f
-            java.lang.Iterable r6 = (java.lang.Iterable) r6
-            java.util.ArrayList r4 = new java.util.ArrayList
-            r4.<init>()
-            java.util.Iterator r5 = r6.iterator()
-        L57:
-            boolean r6 = r5.hasNext()
-            if (r6 == 0) goto L6e
-            java.lang.Object r6 = r5.next()
-            r0 = r6
-            android.view.Display r0 = (android.view.Display) r0
-            int r0 = r0.getDisplayId()
-            if (r0 != 0) goto L57
-            r4.add(r6)
-            goto L57
-        L6e:
-            return r4
-        L6f:
-            java.lang.Iterable r6 = (java.lang.Iterable) r6
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.util.Iterator r0 = r6.iterator()
-        L7a:
-            boolean r1 = r0.hasNext()
-            if (r1 == 0) goto L98
-            java.lang.Object r1 = r0.next()
-            r2 = r1
-            android.view.Display r2 = (android.view.Display) r2
-            int r2 = r2.getDisplayId()
-            com.android.systemui.screenshot.sep.ScreenCaptureHelper r3 = r4.screenCaptureHelper
-            if (r3 != 0) goto L90
-            r3 = 0
-        L90:
-            int r3 = r3.builtInDisplayId
-            if (r2 != r3) goto L7a
-            r5.add(r1)
-            goto L7a
-        L98:
-            java.util.ArrayList r4 = new java.util.ArrayList
-            r4.<init>()
-            java.util.Iterator r5 = r6.iterator()
-        La1:
-            boolean r6 = r5.hasNext()
-            if (r6 == 0) goto Lc3
-            java.lang.Object r6 = r5.next()
-            r0 = r6
-            android.view.Display r0 = (android.view.Display) r0
-            java.util.List r1 = com.android.systemui.screenshot.TakeScreenshotExecutorImpl.ALLOWED_DISPLAY_TYPES
-            int r0 = r0.getType()
-            java.lang.Integer r2 = new java.lang.Integer
-            r2.<init>(r0)
-            boolean r0 = r1.contains(r2)
-            if (r0 == 0) goto La1
-            r4.add(r6)
-            goto La1
-        Lc3:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.TakeScreenshotExecutorImpl.getDisplaysToScreenshot(int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getDisplaysToScreenshot(int i, ContinuationImpl continuationImpl) {
+        C10301 c10301;
+        if (continuationImpl instanceof C10301) {
+            c10301 = (C10301) continuationImpl;
+            int i2 = c10301.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                c10301.label = i2 - Integer.MIN_VALUE;
+            } else {
+                c10301 = new C10301(continuationImpl);
+            }
+        }
+        Object objFirst = c10301.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = c10301.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(objFirst);
+            c10301.L$0 = this;
+            c10301.I$0 = i;
+            c10301.label = 1;
+            objFirst = FlowKt.first(this.displays, c10301);
+            if (objFirst == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = c10301.I$0;
+            this = (TakeScreenshotExecutorImpl) c10301.L$0;
+            ResultKt.throwOnFailure(objFirst);
+        }
+        Set set = (Set) objFirst;
+        if (i == 3) {
+            ArrayList arrayList = new ArrayList();
+            for (Object obj : set) {
+                if (((Display) obj).getDisplayId() == 0) {
+                    arrayList.add(obj);
+                }
+            }
+            return arrayList;
+        }
+        Set set2 = set;
+        ArrayList arrayList2 = new ArrayList();
+        for (Object obj2 : set2) {
+            int displayId = ((Display) obj2).getDisplayId();
+            ScreenCaptureHelper screenCaptureHelper = this.screenCaptureHelper;
+            if (screenCaptureHelper == null) {
+                screenCaptureHelper = null;
+            }
+            if (displayId == screenCaptureHelper.builtInDisplayId) {
+                arrayList2.add(obj2);
+            }
+        }
+        ArrayList arrayList3 = new ArrayList();
+        for (Object obj3 : set2) {
+            if (ALLOWED_DISPLAY_TYPES.contains(new Integer(((Display) obj3).getType()))) {
+                arrayList3.add(obj3);
+            }
+        }
+        return arrayList3;
     }
 
     public final void onFailedScreenshotRequest(ScreenshotData screenshotData, TakeScreenshotService.RequestCallback requestCallback) {

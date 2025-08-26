@@ -33,15 +33,15 @@ public class LocaleUtil {
         }
         Map map = localeCache;
         synchronized (map) {
-            Long l = (Long) map.get(locale);
-            if (l == null) {
-                l = longValueOf(new SimpleDateFormat("yyyyMMddHHmmssz").parse("19700101000000GMT+00:00").getTime());
-                map.put(locale, l);
+            Long lLongValueOf = (Long) map.get(locale);
+            if (lLongValueOf == null) {
+                lLongValueOf = longValueOf(new SimpleDateFormat("yyyyMMddHHmmssz").parse("19700101000000GMT+00:00").getTime());
+                map.put(locale, lLongValueOf);
             }
-            if (l.longValue() == 0) {
+            if (lLongValueOf.longValue() == 0) {
                 return date;
             }
-            return new Date(date.getTime() - l.longValue());
+            return new Date(date.getTime() - lLongValueOf.longValue());
         }
     }
 

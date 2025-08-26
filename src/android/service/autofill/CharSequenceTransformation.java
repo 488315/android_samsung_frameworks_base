@@ -10,6 +10,7 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -24,11 +25,11 @@ public final class CharSequenceTransformation extends InternalTransformation imp
         public CharSequenceTransformation createFromParcel(Parcel parcel) {
             AutofillId[] autofillIdArr = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
             Pattern[] patternArr = (Pattern[]) parcel.readSerializable();
-            String[] createStringArray = parcel.createStringArray();
-            Builder builder = new Builder(autofillIdArr[0], patternArr[0], createStringArray[0]);
+            String[] strArrCreateStringArray = parcel.createStringArray();
+            Builder builder = new Builder(autofillIdArr[0], patternArr[0], strArrCreateStringArray[0]);
             int length = autofillIdArr.length;
             for (int i = 1; i < length; i++) {
-                builder.addField(autofillIdArr[i], patternArr[i], createStringArray[i]);
+                builder.addField(autofillIdArr[i], patternArr[i], strArrCreateStringArray[i]);
             }
             return builder.build();
         }
@@ -61,13 +62,13 @@ public final class CharSequenceTransformation extends InternalTransformation imp
         for (Map.Entry<AutofillId, Pair<Pattern, String>> entry : this.mFields.entrySet()) {
             AutofillId key = entry.getKey();
             Pair<Pattern, String> value = entry.getValue();
-            String findByAutofillId = valueFinder.findByAutofillId(key);
-            if (findByAutofillId == null) {
+            String strFindByAutofillId = valueFinder.findByAutofillId(key);
+            if (strFindByAutofillId == null) {
                 Log.w(TAG, "No value for id " + key);
                 return;
             }
             try {
-                Matcher matcher = value.first.matcher(findByAutofillId);
+                Matcher matcher = value.first.matcher(strFindByAutofillId);
                 if (!matcher.find()) {
                     if (Helper.sDebug) {
                         Log.d(TAG, "Match for " + value.first + " failed on id " + key);
@@ -123,7 +124,7 @@ public final class CharSequenceTransformation extends InternalTransformation imp
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v0, types: [java.io.Serializable, java.util.regex.Pattern[]] */
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         int size = this.mFields.size();
         AutofillId[] autofillIdArr = new AutofillId[size];
         ?? r2 = new Pattern[size];

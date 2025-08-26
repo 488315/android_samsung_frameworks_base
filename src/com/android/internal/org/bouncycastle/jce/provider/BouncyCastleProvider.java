@@ -104,10 +104,10 @@ public final class BouncyCastleProvider extends Provider implements Configurable
     }
 
     private void loadServiceClass(String str, String str2) {
-        Class loadClass = ClassUtil.loadClass(BouncyCastleProvider.class, str + str2 + "$Mappings");
-        if (loadClass != null) {
+        Class clsLoadClass = ClassUtil.loadClass(BouncyCastleProvider.class, str + str2 + "$Mappings");
+        if (clsLoadClass != null) {
             try {
-                ((AlgorithmProvider) loadClass.newInstance()).configure(this);
+                ((AlgorithmProvider) clsLoadClass.newInstance()).configure(this);
             } catch (Exception e) {
                 throw new InternalError("cannot create instance of " + str + str2 + "$Mappings : " + e);
             }

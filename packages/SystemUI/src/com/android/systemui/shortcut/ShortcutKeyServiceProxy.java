@@ -16,18 +16,15 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShortcutKeyServiceProxy extends IShortcutService.Stub {
     public final Callbacks mCallbacks;
     public final Object mLock = new Object();
     public final H mHandler = new H(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callbacks {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public /* synthetic */ H(ShortcutKeyServiceProxy shortcutKeyServiceProxy, int i) {
             this();
@@ -39,14 +36,14 @@ public class ShortcutKeyServiceProxy extends IShortcutService.Stub {
                 return;
             }
             Callbacks callbacks = ShortcutKeyServiceProxy.this.mCallbacks;
-            final long longValue = ((Long) message.obj).longValue();
+            final long jLongValue = ((Long) message.obj).longValue();
             ShortcutKeyDispatcher shortcutKeyDispatcher = (ShortcutKeyDispatcher) callbacks;
             int i = shortcutKeyDispatcher.mContext.getResources().getConfiguration().orientation;
-            if ((longValue == 281474976710727L || longValue == 281474976710728L) && i == 2) {
+            if ((jLongValue == 281474976710727L || jLongValue == 281474976710728L) && i == 2) {
                 shortcutKeyDispatcher.mSplitScreenOptional.ifPresent(new Consumer() { // from class: com.android.systemui.shortcut.ShortcutKeyDispatcher$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        final long j = longValue;
+                        final long j = jLongValue;
                         final SplitScreenController splitScreenController = (SplitScreenController) obj;
                         int i2 = ShortcutKeyDispatcher.$r8$clinit;
                         splitScreenController.getClass();
@@ -54,7 +51,7 @@ public class ShortcutKeyServiceProxy extends IShortcutService.Stub {
                             @Override // java.lang.Runnable
                             public final void run() {
                                 List tasks;
-                                SplitScreenController splitScreenController2 = SplitScreenController.this;
+                                SplitScreenController splitScreenController2 = splitScreenController;
                                 long j2 = j;
                                 if (!splitScreenController2.mStageCoordinator.isSplitScreenVisible()) {
                                     DesktopStateImpl.Companion.getClass();
@@ -76,19 +73,19 @@ public class ShortcutKeyServiceProxy extends IShortcutService.Stub {
                                 StageCoordinator stageCoordinator = splitScreenController2.mStageCoordinator;
                                 DividerSnapAlgorithm dividerSnapAlgorithm = stageCoordinator.mSplitLayout.getDividerSnapAlgorithm();
                                 int i3 = stageCoordinator.mSplitLayout.mDividerPosition;
-                                DividerSnapAlgorithm.SnapTarget calculateNonDismissingSnapTarget = dividerSnapAlgorithm.calculateNonDismissingSnapTarget(i3);
+                                DividerSnapAlgorithm.SnapTarget snapTargetCalculateNonDismissingSnapTarget = dividerSnapAlgorithm.calculateNonDismissingSnapTarget(i3);
                                 if (j2 == 281474976710727L) {
-                                    int indexOf = dividerSnapAlgorithm.mTargets.indexOf(calculateNonDismissingSnapTarget);
-                                    if (indexOf != -1 && indexOf > 0) {
-                                        calculateNonDismissingSnapTarget = (DividerSnapAlgorithm.SnapTarget) dividerSnapAlgorithm.mTargets.get(indexOf - 1);
+                                    int iIndexOf = dividerSnapAlgorithm.mTargets.indexOf(snapTargetCalculateNonDismissingSnapTarget);
+                                    if (iIndexOf != -1 && iIndexOf > 0) {
+                                        snapTargetCalculateNonDismissingSnapTarget = (DividerSnapAlgorithm.SnapTarget) dividerSnapAlgorithm.mTargets.get(iIndexOf - 1);
                                     }
                                 } else {
-                                    int indexOf2 = dividerSnapAlgorithm.mTargets.indexOf(calculateNonDismissingSnapTarget);
-                                    if (indexOf2 != -1 && indexOf2 < dividerSnapAlgorithm.mTargets.size() - 1) {
-                                        calculateNonDismissingSnapTarget = (DividerSnapAlgorithm.SnapTarget) dividerSnapAlgorithm.mTargets.get(indexOf2 + 1);
+                                    int iIndexOf2 = dividerSnapAlgorithm.mTargets.indexOf(snapTargetCalculateNonDismissingSnapTarget);
+                                    if (iIndexOf2 != -1 && iIndexOf2 < dividerSnapAlgorithm.mTargets.size() - 1) {
+                                        snapTargetCalculateNonDismissingSnapTarget = (DividerSnapAlgorithm.SnapTarget) dividerSnapAlgorithm.mTargets.get(iIndexOf2 + 1);
                                     }
                                 }
-                                DividerSnapAlgorithm.SnapTarget snapTarget = calculateNonDismissingSnapTarget;
+                                DividerSnapAlgorithm.SnapTarget snapTarget = snapTargetCalculateNonDismissingSnapTarget;
                                 SplitLayout splitLayout = stageCoordinator.mSplitLayout;
                                 splitLayout.getClass();
                                 splitLayout.snapToTarget(i3, snapTarget, IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, Interpolators.FAST_OUT_SLOW_IN, false);

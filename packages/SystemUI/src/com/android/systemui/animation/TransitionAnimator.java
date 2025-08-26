@@ -37,7 +37,6 @@ import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransitionAnimator {
     public final float[] cornerRadii;
@@ -52,14 +51,12 @@ public final class TransitionAnimator {
     public static final PorterDuffXfermode SRC_MODE = new PorterDuffXfermode(PorterDuff.Mode.SRC);
     public static final SpringParams DEFAULT_SPRING_PARAMS = new SpringParams(450.0f, 0.965f, 400.0f, 0.95f, 500.0f, 0.99f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Animation {
         void cancel();
 
         void start();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,7 +74,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InterpolatedAnimation implements Animation {
         public final Animator animator;
 
@@ -100,7 +96,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MultiSpringAnimation implements Animation {
         public final Runnable onAnimationStart;
         public final SpringAnimation springScale;
@@ -170,7 +165,7 @@ public final class TransitionAnimator {
                     Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() { // from class: com.android.systemui.animation.TransitionAnimator$MultiSpringAnimation$start$2
                         @Override // android.view.Choreographer.FrameCallback
                         public final void doFrame(long j) {
-                            TransitionAnimator.MultiSpringAnimation.this.initAndStartSprings(j / 1000000);
+                            this.this$0.initAndStartSprings(j / 1000000);
                         }
                     });
                 }
@@ -178,7 +173,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpringParams {
         public final float centerXDampingRatio;
         public final float centerXStiffness;
@@ -229,14 +223,12 @@ public final class TransitionAnimator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     abstract class SpringProperty {
         public static final /* synthetic */ SpringProperty[] $VALUES;
         public static final CENTER_X CENTER_X;
         public static final CENTER_Y CENTER_Y;
         public static final SCALE SCALE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class CENTER_X extends SpringProperty {
             public CENTER_X(String str, int i) {
                 super(str, i, null);
@@ -254,7 +246,6 @@ public final class TransitionAnimator {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class CENTER_Y extends SpringProperty {
             public CENTER_Y(String str, int i) {
                 super(str, i, null);
@@ -272,7 +263,6 @@ public final class TransitionAnimator {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class SCALE extends SpringProperty {
             public SCALE(String str, int i) {
                 super(str, i, null);
@@ -322,7 +312,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpringTimings {
         public final float contentAfterFadeInDelay;
         public final float contentAfterFadeInDuration;
@@ -337,7 +326,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class State {
         public int bottom;
         public float bottomCornerRadius;
@@ -382,7 +370,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Timings {
         public final long contentAfterFadeInDelay;
         public final long contentAfterFadeInDuration;
@@ -461,13 +448,13 @@ public final class TransitionAnimator {
                     springState.isCenterXUpdated = false;
                     springState.isCenterYUpdated = false;
                     springState.isScaleUpdated = false;
-                    float lerp = MathUtils.lerp(state.getWidth(), state2.getWidth(), springState.scale);
-                    float lerp2 = MathUtils.lerp(state.getHeight(), state2.getHeight(), springState.scale);
+                    float fLerp = MathUtils.lerp(state.getWidth(), state2.getWidth(), springState.scale);
+                    float fLerp2 = MathUtils.lerp(state.getHeight(), state2.getHeight(), springState.scale);
                     float f = springState.centerX;
                     float f2 = 2;
-                    float f3 = lerp / f2;
+                    float f3 = fLerp / f2;
                     float f4 = springState.centerY;
-                    float f5 = lerp2 / f2;
+                    float f5 = fLerp2 / f2;
                     State state3 = new State((int) (f4 - f5), (int) (f4 + f5), (int) (f - f3), (int) (f + f3), MathUtils.lerp(state.topCornerRadius, state2.topCornerRadius, springState.scale), MathUtils.lerp(state.bottomCornerRadius, state2.bottomCornerRadius, springState.scale));
                     state3.visible = checkVisibility(transitionAnimator.timings, springState.scale, controller.isLaunching());
                     if (!ref$BooleanRef.element) {
@@ -557,7 +544,7 @@ public final class TransitionAnimator {
     public final void applyStateToWindowBackgroundLayer(GradientDrawable gradientDrawable, State state, float f, View view, boolean z, boolean z2, boolean z3, boolean z4) {
         float progressInternal;
         Interpolators interpolators;
-        float f2;
+        float progressInternal2;
         int[] iArr = this.transitionContainerLocation;
         view.getLocationOnScreen(iArr);
         int i = state.left;
@@ -565,17 +552,17 @@ public final class TransitionAnimator {
         int i3 = state.top;
         int i4 = iArr[1];
         gradientDrawable.setBounds(i - i2, i3 - i4, state.right - i2, state.bottom - i4);
-        float f3 = state.topCornerRadius;
+        float f2 = state.topCornerRadius;
         float[] fArr = this.cornerRadii;
-        fArr[0] = f3;
-        fArr[1] = f3;
-        fArr[2] = f3;
-        fArr[3] = f3;
-        float f4 = state.bottomCornerRadius;
-        fArr[4] = f4;
-        fArr[5] = f4;
-        fArr[6] = f4;
-        fArr[7] = f4;
+        fArr[0] = f2;
+        fArr[1] = f2;
+        fArr[2] = f2;
+        fArr[3] = f2;
+        float f3 = state.bottomCornerRadius;
+        fArr[4] = f3;
+        fArr[5] = f3;
+        fArr[6] = f3;
+        fArr[7] = f3;
         gradientDrawable.setCornerRadii(fArr);
         Companion companion = Companion;
         if (z4) {
@@ -585,18 +572,18 @@ public final class TransitionAnimator {
             springTimings.getClass();
             companion.getClass();
             progressInternal = Companion.getProgressInternal(1.0f, f, springTimings.contentBeforeFadeOutDelay, springTimings.contentBeforeFadeOutDuration);
-            f2 = Companion.getProgressInternal(1.0f, f, springTimings.contentAfterFadeInDelay, springTimings.contentAfterFadeInDuration);
+            progressInternal2 = Companion.getProgressInternal(1.0f, f, springTimings.contentAfterFadeInDelay, springTimings.contentAfterFadeInDuration);
         } else {
             long j = this.timings.contentBeforeFadeOutDelay;
             companion.getClass();
             progressInternal = Companion.getProgressInternal(r15.totalDuration, f, j, r15.contentBeforeFadeOutDuration);
-            float progressInternal2 = Companion.getProgressInternal(r15.totalDuration, f, r15.contentAfterFadeInDelay, r15.contentAfterFadeInDuration);
+            float progressInternal3 = Companion.getProgressInternal(r15.totalDuration, f, r15.contentAfterFadeInDelay, r15.contentAfterFadeInDuration);
             interpolators = this.interpolators;
-            f2 = progressInternal2;
+            progressInternal2 = progressInternal3;
         }
         if (!z3) {
             if (progressInternal >= 1.0f || !z) {
-                gradientDrawable.setAlpha(MathKt__MathJVMKt.roundToInt((1 - interpolators.contentAfterFadeInInterpolator.getInterpolation(f2)) * 255));
+                gradientDrawable.setAlpha(MathKt__MathJVMKt.roundToInt((1 - interpolators.contentAfterFadeInInterpolator.getInterpolation(progressInternal2)) * 255));
                 gradientDrawable.setXfermode(null);
                 return;
             } else {
@@ -616,7 +603,7 @@ public final class TransitionAnimator {
             gradientDrawable.setAlpha(255);
             return;
         }
-        gradientDrawable.setAlpha(MathKt__MathJVMKt.roundToInt((1 - interpolators.contentAfterFadeInInterpolator.getInterpolation(f2)) * 255));
+        gradientDrawable.setAlpha(MathKt__MathJVMKt.roundToInt((1 - interpolators.contentAfterFadeInInterpolator.getInterpolation(progressInternal2)) * 255));
         if (z2) {
             gradientDrawable.setXfermode(SRC_MODE);
         }
@@ -653,17 +640,17 @@ public final class TransitionAnimator {
             ref$IntRef5.element = ref$IntRef4.element - ref$IntRef3.element;
             final float f4 = state2.topCornerRadius;
             final float f5 = state2.bottomCornerRadius;
-            final boolean isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(transitionContainer, state2);
+            final boolean zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(transitionContainer, state2);
             final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.setDuration(this.timings.totalDuration);
-            ofFloat.setInterpolator(com.android.app.animation.Interpolators.LINEAR);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.animation.TransitionAnimator$createInterpolatedAnimation$1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.setDuration(this.timings.totalDuration);
+            valueAnimatorOfFloat.setInterpolator(com.android.app.animation.Interpolators.LINEAR);
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.animation.TransitionAnimator$createInterpolatedAnimation$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    TransitionAnimator transitionAnimator = TransitionAnimator.this;
+                    TransitionAnimator transitionAnimator = this.this$0;
                     TransitionAnimator.Controller controller2 = controller;
-                    boolean z4 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib;
+                    boolean z4 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib;
                     GradientDrawable gradientDrawable2 = gradientDrawable;
                     ViewGroupOverlay viewGroupOverlay = overlay;
                     ViewOverlay viewOverlay = overlay2;
@@ -680,9 +667,9 @@ public final class TransitionAnimator {
 
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator, boolean z4) {
-                    TransitionAnimator transitionAnimator = TransitionAnimator.this;
+                    TransitionAnimator transitionAnimator = this.this$0;
                     TransitionAnimator.Controller controller2 = controller;
-                    boolean z5 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib;
+                    boolean z5 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib;
                     GradientDrawable gradientDrawable2 = gradientDrawable;
                     ViewGroupOverlay viewGroupOverlay = overlay;
                     ViewOverlay viewOverlay = overlay2;
@@ -696,7 +683,7 @@ public final class TransitionAnimator {
                     }
                 }
             });
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.animation.TransitionAnimator$createInterpolatedAnimation$2
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.animation.TransitionAnimator$createInterpolatedAnimation$2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     View transitionContainer2;
@@ -721,19 +708,19 @@ public final class TransitionAnimator {
                         ref$IntRef10.element = i7 - i8;
                     }
                     float animatedFraction = valueAnimator.getAnimatedFraction();
-                    float interpolation = TransitionAnimator.this.interpolators.positionInterpolator.getInterpolation(animatedFraction);
-                    float lerp = MathUtils.lerp(f, ref$FloatRef.element, TransitionAnimator.this.interpolators.positionXInterpolator.getInterpolation(animatedFraction));
-                    float lerp2 = MathUtils.lerp(i4, ref$IntRef5.element, interpolation) / 2.0f;
+                    float interpolation = this.this$0.interpolators.positionInterpolator.getInterpolation(animatedFraction);
+                    float fLerp = MathUtils.lerp(f, ref$FloatRef.element, this.this$0.interpolators.positionXInterpolator.getInterpolation(animatedFraction));
+                    float fLerp2 = MathUtils.lerp(i4, ref$IntRef5.element, interpolation) / 2.0f;
                     state.top = MathKt__MathJVMKt.roundToInt(MathUtils.lerp(i, ref$IntRef.element, interpolation));
                     state.bottom = MathKt__MathJVMKt.roundToInt(MathUtils.lerp(i2, ref$IntRef2.element, interpolation));
-                    state.left = MathKt__MathJVMKt.roundToInt(lerp - lerp2);
-                    state.right = MathKt__MathJVMKt.roundToInt(lerp + lerp2);
+                    state.left = MathKt__MathJVMKt.roundToInt(fLerp - fLerp2);
+                    state.right = MathKt__MathJVMKt.roundToInt(fLerp + fLerp2);
                     state.topCornerRadius = MathUtils.lerp(f2, f4, interpolation);
                     state.bottomCornerRadius = MathUtils.lerp(f3, f5, interpolation);
-                    state.visible = TransitionAnimator.checkVisibility(TransitionAnimator.this.timings, animatedFraction, controller.isLaunching());
+                    state.visible = TransitionAnimator.checkVisibility(this.this$0.timings, animatedFraction, controller.isLaunching());
                     Ref$BooleanRef ref$BooleanRef2 = ref$BooleanRef;
                     if (!ref$BooleanRef2.element) {
-                        TransitionAnimator transitionAnimator = TransitionAnimator.this;
+                        TransitionAnimator transitionAnimator = this.this$0;
                         TransitionAnimator.Controller controller2 = controller;
                         TransitionAnimator.State state4 = state;
                         GradientDrawable gradientDrawable2 = gradientDrawable;
@@ -751,11 +738,11 @@ public final class TransitionAnimator {
                     } else {
                         transitionContainer2 = controller.getTransitionContainer();
                     }
-                    TransitionAnimator.this.applyStateToWindowBackgroundLayer(gradientDrawable, state, animatedFraction, transitionContainer2, z, z2, controller.isLaunching(), false);
+                    this.this$0.applyStateToWindowBackgroundLayer(gradientDrawable, state, animatedFraction, transitionContainer2, z, z2, controller.isLaunching(), false);
                     controller.onTransitionAnimationProgress(state, interpolation, animatedFraction);
                 }
             });
-            return new InterpolatedAnimation(ofFloat);
+            return new InterpolatedAnimation(valueAnimatorOfFloat);
         }
         overlay.getClass();
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
@@ -766,13 +753,13 @@ public final class TransitionAnimator {
         ref$FloatRef3.element = state2.getCenterY();
         final Ref$BooleanRef ref$BooleanRef2 = new Ref$BooleanRef();
         final SpringState springState = new SpringState(state.getCenterX(), state.getCenterY(), 0.0f, false, false, false, false, false, false, 508, null);
-        final boolean isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(transitionContainer, state2);
+        final boolean zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(transitionContainer, state2);
         final SpringProperty.CENTER_X center_x = SpringProperty.CENTER_X;
         final int i5 = 0;
         final Function1 function1 = new Function1() { // from class: com.android.systemui.animation.TransitionAnimator$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i5) {
                     case 0:
                         TransitionAnimator.createSpringAnimation$updateProgress(state, state2, ref$BooleanRef2, this, controller, gradientDrawable, transitionContainer, overlay, openingWindowSyncView, overlay2, z3, z, z2, ref$FloatRef2, ref$FloatRef3, ref$ObjectRef, ref$ObjectRef2, (TransitionAnimator.SpringState) obj);
@@ -788,18 +775,18 @@ public final class TransitionAnimator {
             }
         };
         Companion.getClass();
-        final String name = center_x.name();
-        ?? springAnimation = new SpringAnimation(springState, new FloatProperty(name) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
+        final String strName = center_x.name();
+        ?? springAnimation = new SpringAnimation(springState, new FloatProperty(strName) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return Float.valueOf(TransitionAnimator.SpringProperty.this.get((TransitionAnimator.SpringState) obj));
+                return Float.valueOf(center_x.get((TransitionAnimator.SpringState) obj));
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f6) {
                 TransitionAnimator.SpringState springState2 = (TransitionAnimator.SpringState) obj;
-                TransitionAnimator.SpringProperty.this.setValue(springState2, f6);
-                function1.mo779invoke(springState2);
+                center_x.setValue(springState2, f6);
+                function1.mo781invoke(springState2);
             }
         });
         SpringForce springForce = new SpringForce(state2.getCenterX());
@@ -813,11 +800,11 @@ public final class TransitionAnimator {
         springAnimation.setMaxValue(Math.max(state.getCenterX(), state2.getCenterX()));
         springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.animation.TransitionAnimator$createSpringAnimation$2$2
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z4, float f6, float f7) {
-                TransitionAnimator.SpringState springState2 = TransitionAnimator.SpringState.this;
+                TransitionAnimator.SpringState springState2 = springState;
                 springState2.isCenterXDone = true;
                 TransitionAnimator transitionAnimator = this;
                 TransitionAnimator.Controller controller2 = controller;
-                boolean z5 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
+                boolean z5 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
                 GradientDrawable gradientDrawable2 = gradientDrawable;
                 ViewGroupOverlay viewGroupOverlay = overlay;
                 ViewOverlay viewOverlay = overlay2;
@@ -840,7 +827,7 @@ public final class TransitionAnimator {
         final Function1 function12 = new Function1() { // from class: com.android.systemui.animation.TransitionAnimator$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i6) {
                     case 0:
                         TransitionAnimator.createSpringAnimation$updateProgress(state, state2, ref$BooleanRef2, this, controller, gradientDrawable, transitionContainer, overlay, openingWindowSyncView, overlay2, z3, z, z2, ref$FloatRef2, ref$FloatRef3, ref$ObjectRef, ref$ObjectRef2, (TransitionAnimator.SpringState) obj);
@@ -855,18 +842,18 @@ public final class TransitionAnimator {
                 return Unit.INSTANCE;
             }
         };
-        final String name2 = center_y.name();
-        ?? springAnimation2 = new SpringAnimation(springState, new FloatProperty(name2) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
+        final String strName2 = center_y.name();
+        ?? springAnimation2 = new SpringAnimation(springState, new FloatProperty(strName2) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return Float.valueOf(TransitionAnimator.SpringProperty.this.get((TransitionAnimator.SpringState) obj));
+                return Float.valueOf(center_y.get((TransitionAnimator.SpringState) obj));
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f6) {
                 TransitionAnimator.SpringState springState2 = (TransitionAnimator.SpringState) obj;
-                TransitionAnimator.SpringProperty.this.setValue(springState2, f6);
-                function12.mo779invoke(springState2);
+                center_y.setValue(springState2, f6);
+                function12.mo781invoke(springState2);
             }
         });
         SpringForce springForce2 = new SpringForce(state2.getCenterY());
@@ -879,11 +866,11 @@ public final class TransitionAnimator {
         springAnimation2.setMaxValue(Math.max(state.getCenterY(), state2.getCenterY()));
         springAnimation2.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.animation.TransitionAnimator$createSpringAnimation$4$2
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z4, float f6, float f7) {
-                TransitionAnimator.SpringState springState2 = TransitionAnimator.SpringState.this;
+                TransitionAnimator.SpringState springState2 = springState;
                 springState2.isCenterYDone = true;
                 TransitionAnimator transitionAnimator = this;
                 TransitionAnimator.Controller controller2 = controller;
-                boolean z5 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
+                boolean z5 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
                 GradientDrawable gradientDrawable2 = gradientDrawable;
                 ViewGroupOverlay viewGroupOverlay = overlay;
                 ViewOverlay viewOverlay = overlay2;
@@ -906,7 +893,7 @@ public final class TransitionAnimator {
         final Function1 function13 = new Function1() { // from class: com.android.systemui.animation.TransitionAnimator$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i7) {
                     case 0:
                         TransitionAnimator.createSpringAnimation$updateProgress(state, state2, ref$BooleanRef2, this, controller, gradientDrawable, transitionContainer, overlay, openingWindowSyncView, overlay2, z3, z, z2, ref$FloatRef2, ref$FloatRef3, ref$ObjectRef, ref$ObjectRef2, (TransitionAnimator.SpringState) obj);
@@ -921,18 +908,18 @@ public final class TransitionAnimator {
                 return Unit.INSTANCE;
             }
         };
-        final String name3 = scale.name();
-        SpringAnimation springAnimation3 = new SpringAnimation(springState, new FloatProperty(name3) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
+        final String strName3 = scale.name();
+        SpringAnimation springAnimation3 = new SpringAnimation(springState, new FloatProperty(strName3) { // from class: com.android.systemui.animation.TransitionAnimator$Companion$buildProperty$1
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return Float.valueOf(TransitionAnimator.SpringProperty.this.get((TransitionAnimator.SpringState) obj));
+                return Float.valueOf(scale.get((TransitionAnimator.SpringState) obj));
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f6) {
                 TransitionAnimator.SpringState springState2 = (TransitionAnimator.SpringState) obj;
-                TransitionAnimator.SpringProperty.this.setValue(springState2, f6);
-                function13.mo779invoke(springState2);
+                scale.setValue(springState2, f6);
+                function13.mo781invoke(springState2);
             }
         });
         SpringForce springForce3 = new SpringForce(1.0f);
@@ -944,11 +931,11 @@ public final class TransitionAnimator {
         springAnimation3.setMinimumVisibleChange(Math.abs(1.0f / state.getHeight()));
         springAnimation3.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.animation.TransitionAnimator$createSpringAnimation$springScale$2$2
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z4, float f6, float f7) {
-                TransitionAnimator.SpringState springState2 = TransitionAnimator.SpringState.this;
+                TransitionAnimator.SpringState springState2 = springState;
                 springState2.isScaleDone = true;
                 TransitionAnimator transitionAnimator = this;
                 TransitionAnimator.Controller controller2 = controller;
-                boolean z5 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
+                boolean z5 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
                 GradientDrawable gradientDrawable2 = gradientDrawable;
                 ViewGroupOverlay viewGroupOverlay = overlay;
                 ViewOverlay viewOverlay = overlay2;
@@ -968,9 +955,9 @@ public final class TransitionAnimator {
         return new MultiSpringAnimation((SpringAnimation) ref$ObjectRef.element, (SpringAnimation) ref$ObjectRef2.element, springAnimation3, springState, j, new Runnable() { // from class: com.android.systemui.animation.TransitionAnimator$createSpringAnimation$5
             @Override // java.lang.Runnable
             public final void run() {
-                TransitionAnimator transitionAnimator = TransitionAnimator.this;
+                TransitionAnimator transitionAnimator = this.this$0;
                 TransitionAnimator.Controller controller2 = controller;
-                boolean z4 = isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
+                boolean z4 = zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib2;
                 GradientDrawable gradientDrawable2 = gradientDrawable;
                 ViewGroupOverlay viewGroupOverlay = overlay;
                 ViewOverlay viewOverlay = overlay2;
@@ -1002,9 +989,9 @@ public final class TransitionAnimator {
     }
 
     public final Animation startAnimation(Controller controller, State state, int i, boolean z, boolean z2, PointF pointF, long j) {
-        boolean isLaunching = controller.isLaunching();
+        boolean zIsLaunching = controller.isLaunching();
         Companion companion = Companion;
-        if (!isLaunching) {
+        if (!zIsLaunching) {
             companion.getClass();
         }
         if (pointF != null) {
@@ -1013,12 +1000,11 @@ public final class TransitionAnimator {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(i);
         gradientDrawable.setAlpha(0);
-        Animation createAnimation = createAnimation(controller, controller.createAnimatorState(), state, gradientDrawable, z, z2, pointF, j);
-        createAnimation.start();
-        return createAnimation;
+        Animation animationCreateAnimation = createAnimation(controller, controller.createAnimatorState(), state, gradientDrawable, z, z2, pointF, j);
+        animationCreateAnimation.start();
+        return animationCreateAnimation;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Interpolators {
         public final Interpolator contentAfterFadeInInterpolator;
         public final Interpolator contentBeforeFadeOutInterpolator;
@@ -1071,7 +1057,6 @@ public final class TransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpringState {
         public float centerX;
         public float centerY;
@@ -1172,7 +1157,6 @@ public final class TransitionAnimator {
         this(executor, timings, interpolators, (i & 8) != 0 ? null : springTimings, (i & 16) != 0 ? null : interpolators2, (i & 32) != 0 ? DEFAULT_SPRING_PARAMS : springParams);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Controller {
         State createAnimatorState();
 

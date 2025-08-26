@@ -6,7 +6,6 @@ import com.android.systemui.bluetooth.BroadcastDialogDelegate;
 import com.android.systemui.broadcast.BroadcastSender;
 import com.android.systemui.broadcast.BroadcastSender$$ExternalSyntheticLambda0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class BroadcastDialogDelegate$1$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -25,10 +24,10 @@ public final /* synthetic */ class BroadcastDialogDelegate$1$$ExternalSyntheticL
             case 0:
                 BroadcastDialogDelegate broadcastDialogDelegate = anonymousClass1.this$0;
                 if (broadcastDialogDelegate.mShouldLaunchLeBroadcastDialog) {
-                    Intent putExtra = new Intent().setPackage(broadcastDialogDelegate.mContext.getPackageName()).setAction("com.android.systemui.action.LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG").putExtra("package_name", broadcastDialogDelegate.mOutputPackageName);
+                    Intent intentPutExtra = new Intent().setPackage(broadcastDialogDelegate.mContext.getPackageName()).setAction("com.android.systemui.action.LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG").putExtra("package_name", broadcastDialogDelegate.mOutputPackageName);
                     BroadcastSender broadcastSender = broadcastDialogDelegate.mBroadcastSender;
                     broadcastSender.getClass();
-                    broadcastSender.sendInBackground(String.valueOf(putExtra), new BroadcastSender$$ExternalSyntheticLambda0(broadcastSender, putExtra, 1));
+                    broadcastSender.sendInBackground(String.valueOf(intentPutExtra), new BroadcastSender$$ExternalSyntheticLambda0(broadcastSender, intentPutExtra, 1));
                     broadcastDialogDelegate.mDialogs.forEach(new BroadcastDialogDelegate$$ExternalSyntheticLambda3());
                     broadcastDialogDelegate.mShouldLaunchLeBroadcastDialog = false;
                     break;

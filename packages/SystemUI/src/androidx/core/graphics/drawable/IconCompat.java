@@ -17,7 +17,6 @@ import android.util.Log;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
 import androidx.versionedparcelable.CustomVersionedParcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class IconCompat extends CustomVersionedParcelable {
     public static final PorterDuff.Mode DEFAULT_TINT_MODE = PorterDuff.Mode.SRC_IN;
@@ -32,7 +31,6 @@ public class IconCompat extends CustomVersionedParcelable {
     public String mTintModeStr;
     public int mType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api23Impl {
         private Api23Impl() {
         }
@@ -48,10 +46,10 @@ public class IconCompat extends CustomVersionedParcelable {
                 Uri uri = icon.getUri();
                 PorterDuff.Mode mode = IconCompat.DEFAULT_TINT_MODE;
                 uri.getClass();
-                String uri2 = uri.toString();
-                uri2.getClass();
+                String string = uri.toString();
+                string.getClass();
                 IconCompat iconCompat = new IconCompat(4);
-                iconCompat.mObj1 = uri2;
+                iconCompat.mObj1 = string;
                 return iconCompat;
             }
             if (type != 6) {
@@ -59,13 +57,13 @@ public class IconCompat extends CustomVersionedParcelable {
                 iconCompat2.mObj1 = obj;
                 return iconCompat2;
             }
-            Uri uri3 = icon.getUri();
+            Uri uri2 = icon.getUri();
             PorterDuff.Mode mode2 = IconCompat.DEFAULT_TINT_MODE;
-            uri3.getClass();
-            String uri4 = uri3.toString();
-            uri4.getClass();
+            uri2.getClass();
+            String string2 = uri2.toString();
+            string2.getClass();
             IconCompat iconCompat3 = new IconCompat(6);
-            iconCompat3.mObj1 = uri4;
+            iconCompat3.mObj1 = string2;
             return iconCompat3;
         }
     }
@@ -114,7 +112,7 @@ public class IconCompat extends CustomVersionedParcelable {
         }
     }
 
-    public static IconCompat createFromIcon(Context context, Icon icon) {
+    public static IconCompat createFromIcon(Context context, Icon icon) throws PackageManager.NameNotFoundException {
         icon.getClass();
         int type = icon.getType();
         if (type == 2) {
@@ -128,10 +126,10 @@ public class IconCompat extends CustomVersionedParcelable {
         if (type == 4) {
             Uri uri = icon.getUri();
             uri.getClass();
-            String uri2 = uri.toString();
-            uri2.getClass();
+            String string = uri.toString();
+            string.getClass();
             IconCompat iconCompat = new IconCompat(4);
-            iconCompat.mObj1 = uri2;
+            iconCompat.mObj1 = string;
             return iconCompat;
         }
         if (type != 6) {
@@ -139,12 +137,12 @@ public class IconCompat extends CustomVersionedParcelable {
             iconCompat2.mObj1 = icon;
             return iconCompat2;
         }
-        Uri uri3 = icon.getUri();
-        uri3.getClass();
-        String uri4 = uri3.toString();
-        uri4.getClass();
+        Uri uri2 = icon.getUri();
+        uri2.getClass();
+        String string2 = uri2.toString();
+        string2.getClass();
         IconCompat iconCompat3 = new IconCompat(6);
-        iconCompat3.mObj1 = uri4;
+        iconCompat3.mObj1 = string2;
         return iconCompat3;
     }
 
@@ -160,7 +158,7 @@ public class IconCompat extends CustomVersionedParcelable {
         return createWithResource(i, context.getResources(), context.getPackageName());
     }
 
-    public static Resources getResources(Context context, String str) {
+    public static Resources getResources(Context context, String str) throws PackageManager.NameNotFoundException {
         if ("android".equals(str)) {
             return Resources.getSystem();
         }
@@ -230,8 +228,8 @@ public class IconCompat extends CustomVersionedParcelable {
     }
 
     public final Icon toIcon$1() {
-        Icon createWithBitmap;
-        Uri parse;
+        Icon iconCreateWithBitmap;
+        Uri uri;
         int i = this.mType;
         switch (i) {
             case -1:
@@ -240,41 +238,41 @@ public class IconCompat extends CustomVersionedParcelable {
             default:
                 throw new IllegalArgumentException("Unknown type");
             case 1:
-                createWithBitmap = Icon.createWithBitmap((Bitmap) this.mObj1);
+                iconCreateWithBitmap = Icon.createWithBitmap((Bitmap) this.mObj1);
                 break;
             case 2:
-                createWithBitmap = Icon.createWithResource(getResPackage(), this.mInt1);
+                iconCreateWithBitmap = Icon.createWithResource(getResPackage(), this.mInt1);
                 break;
             case 3:
-                createWithBitmap = Icon.createWithData((byte[]) this.mObj1, this.mInt1, this.mInt2);
+                iconCreateWithBitmap = Icon.createWithData((byte[]) this.mObj1, this.mInt1, this.mInt2);
                 break;
             case 4:
-                createWithBitmap = Icon.createWithContentUri((String) this.mObj1);
+                iconCreateWithBitmap = Icon.createWithContentUri((String) this.mObj1);
                 break;
             case 5:
-                createWithBitmap = Icon.createWithAdaptiveBitmap((Bitmap) this.mObj1);
+                iconCreateWithBitmap = Icon.createWithAdaptiveBitmap((Bitmap) this.mObj1);
                 break;
             case 6:
                 if (i == -1) {
-                    parse = ((Icon) this.mObj1).getUri();
+                    uri = ((Icon) this.mObj1).getUri();
                 } else {
                     if (i != 4 && i != 6) {
                         throw new IllegalStateException("called getUri() on " + this);
                     }
-                    parse = Uri.parse((String) this.mObj1);
+                    uri = Uri.parse((String) this.mObj1);
                 }
-                createWithBitmap = Icon.createWithAdaptiveBitmapContentUri(parse);
+                iconCreateWithBitmap = Icon.createWithAdaptiveBitmapContentUri(uri);
                 break;
         }
         ColorStateList colorStateList = this.mTintList;
         if (colorStateList != null) {
-            createWithBitmap.setTintList(colorStateList);
+            iconCreateWithBitmap.setTintList(colorStateList);
         }
         PorterDuff.Mode mode = this.mTintMode;
         if (mode != DEFAULT_TINT_MODE) {
-            createWithBitmap.setTintMode(mode);
+            iconCreateWithBitmap.setTintMode(mode);
         }
-        return createWithBitmap;
+        return iconCreateWithBitmap;
     }
 
     public final String toString() {

@@ -1,6 +1,5 @@
 package com.android.systemui.bixby2.actionresult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActionResults {
     public static final String RESULT_ALEADY_ON_SOUND_APP_NOTIFICATION = "AlreadyOnSoundAppNotification";

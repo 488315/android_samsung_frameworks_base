@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function6;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FlowKt__ZipKt$combineTransform$$inlined$combineTransformUnsafe$FlowKt__ZipKt$4 extends SuspendLambda implements Function2 {
     final /* synthetic */ Flow[] $flows;
@@ -18,7 +17,6 @@ public final class FlowKt__ZipKt$combineTransform$$inlined$combineTransformUnsaf
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: kotlinx.coroutines.flow.FlowKt__ZipKt$combineTransform$$inlined$combineTransformUnsafe$FlowKt__ZipKt$4$1, reason: invalid class name */
     public final class AnonymousClass1 extends SuspendLambda implements Function3 {
         final /* synthetic */ Function6 $transform$inlined;

@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SheetState {
     public static final Companion Companion = new Companion(null);
@@ -28,7 +27,6 @@ public final class SheetState {
     public final boolean skipHiddenState;
     public final boolean skipPartiallyExpanded;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,9 +54,9 @@ public final class SheetState {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((Number) obj).floatValue();
-                return (Float) Function0.this.invoke();
+                return (Float) function0.invoke();
             }
         }, function02, new Function0() { // from class: androidx.compose.material3.SheetState$anchoredDraggableState$2
             {
@@ -67,7 +65,7 @@ public final class SheetState {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SheetState.this.anchoredDraggableMotionSpec;
+                return this.this$0.anchoredDraggableMotionSpec;
             }
         }, function1);
         this.showMotionSpec = AnimationSpecKt.snap$default();
@@ -80,17 +78,17 @@ public final class SheetState {
         SheetState$animateTo$2 sheetState$animateTo$2 = new SheetState$animateTo$2(sheetState, floatValue, finiteAnimationSpec, null);
         AnchoredDraggableState anchoredDraggableState = sheetState.anchoredDraggableState;
         int i = AnchoredDraggableState.$r8$clinit;
-        Object anchoredDrag = anchoredDraggableState.anchoredDrag(sheetValue, MutatePriority.Default, sheetState$animateTo$2, suspendLambda);
-        return anchoredDrag == CoroutineSingletons.COROUTINE_SUSPENDED ? anchoredDrag : Unit.INSTANCE;
+        Object objAnchoredDrag = anchoredDraggableState.anchoredDrag(sheetValue, MutatePriority.Default, sheetState$animateTo$2, suspendLambda);
+        return objAnchoredDrag == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnchoredDrag : Unit.INSTANCE;
     }
 
     public final Object expand(SuspendLambda suspendLambda) {
         SheetValue sheetValue = SheetValue.Expanded;
-        if (!((Boolean) this.confirmValueChange.mo779invoke(sheetValue)).booleanValue()) {
+        if (!((Boolean) this.confirmValueChange.mo781invoke(sheetValue)).booleanValue()) {
             return Unit.INSTANCE;
         }
-        Object animateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
-        return animateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? animateTo$material3_release$default : Unit.INSTANCE;
+        Object objAnimateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
+        return objAnimateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnimateTo$material3_release$default : Unit.INSTANCE;
     }
 
     public final Object hide(SuspendLambda suspendLambda) {
@@ -98,11 +96,11 @@ public final class SheetState {
             throw new IllegalStateException("Attempted to animate to hidden when skipHiddenState was enabled. Set skipHiddenState to false to use this function.");
         }
         SheetValue sheetValue = SheetValue.Hidden;
-        if (!((Boolean) this.confirmValueChange.mo779invoke(sheetValue)).booleanValue()) {
+        if (!((Boolean) this.confirmValueChange.mo781invoke(sheetValue)).booleanValue()) {
             return Unit.INSTANCE;
         }
-        Object animateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.hideMotionSpec, suspendLambda);
-        return animateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? animateTo$material3_release$default : Unit.INSTANCE;
+        Object objAnimateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.hideMotionSpec, suspendLambda);
+        return objAnimateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnimateTo$material3_release$default : Unit.INSTANCE;
     }
 
     public final boolean isVisible() {
@@ -114,11 +112,11 @@ public final class SheetState {
             throw new IllegalStateException("Attempted to animate to partial expanded when skipPartiallyExpanded was enabled. Set skipPartiallyExpanded to false to use this function.");
         }
         SheetValue sheetValue = SheetValue.PartiallyExpanded;
-        if (!((Boolean) this.confirmValueChange.mo779invoke(sheetValue)).booleanValue()) {
+        if (!((Boolean) this.confirmValueChange.mo781invoke(sheetValue)).booleanValue()) {
             return Unit.INSTANCE;
         }
-        Object animateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
-        return animateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? animateTo$material3_release$default : Unit.INSTANCE;
+        Object objAnimateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
+        return objAnimateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnimateTo$material3_release$default : Unit.INSTANCE;
     }
 
     public final Object show(SuspendLambda suspendLambda) {
@@ -127,18 +125,18 @@ public final class SheetState {
         if (!anchors.hasAnchorFor(sheetValue)) {
             sheetValue = SheetValue.Expanded;
         }
-        if (!((Boolean) this.confirmValueChange.mo779invoke(sheetValue)).booleanValue()) {
+        if (!((Boolean) this.confirmValueChange.mo781invoke(sheetValue)).booleanValue()) {
             return Unit.INSTANCE;
         }
-        Object animateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
-        return animateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? animateTo$material3_release$default : Unit.INSTANCE;
+        Object objAnimateTo$material3_release$default = animateTo$material3_release$default(this, sheetValue, this.showMotionSpec, suspendLambda);
+        return objAnimateTo$material3_release$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnimateTo$material3_release$default : Unit.INSTANCE;
     }
 
     public /* synthetic */ SheetState(boolean z, Function0 function0, Function0 function02, SheetValue sheetValue, Function1 function1, boolean z2, int i, DefaultConstructorMarker defaultConstructorMarker) {
         this(z, function0, function02, (i & 8) != 0 ? SheetValue.Hidden : sheetValue, (i & 16) != 0 ? new Function1() { // from class: androidx.compose.material3.SheetState.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Boolean.TRUE;
             }
         } : function1, (i & 32) != 0 ? false : z2);
@@ -148,7 +146,7 @@ public final class SheetState {
         this(z, density, (i & 4) != 0 ? SheetValue.Hidden : sheetValue, (i & 8) != 0 ? new Function1() { // from class: androidx.compose.material3.SheetState.4
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Boolean.TRUE;
             }
         } : function1, (i & 16) != 0 ? false : z2);
@@ -162,9 +160,9 @@ public final class SheetState {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Density density2 = Density.this;
+                Density density2 = density;
                 BottomSheetDefaults.INSTANCE.getClass();
-                return Float.valueOf(density2.mo57toPx0680j_4(BottomSheetDefaults.PositionalThreshold));
+                return Float.valueOf(density2.mo58toPx0680j_4(BottomSheetDefaults.PositionalThreshold));
             }
         }, new Function0() { // from class: androidx.compose.material3.SheetState.6
             {
@@ -173,9 +171,9 @@ public final class SheetState {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Density density2 = Density.this;
+                Density density2 = density;
                 BottomSheetDefaults.INSTANCE.getClass();
-                return Float.valueOf(density2.mo57toPx0680j_4(BottomSheetDefaults.VelocityThreshold));
+                return Float.valueOf(density2.mo58toPx0680j_4(BottomSheetDefaults.VelocityThreshold));
             }
         }, sheetValue, function1, z2);
     }

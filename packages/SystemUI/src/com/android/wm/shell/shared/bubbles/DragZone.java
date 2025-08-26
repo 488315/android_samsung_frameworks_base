@@ -4,16 +4,13 @@ import android.graphics.Rect;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface DragZone {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Bubble implements DragZone {
         public final Rect bounds;
         public final Rect dropTarget;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Left extends Bubble {
             public final Rect bounds;
             public final Rect dropTarget;
@@ -54,7 +51,6 @@ public interface DragZone {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Right extends Bubble {
             public final Rect bounds;
             public final Rect dropTarget;
@@ -115,7 +111,6 @@ public interface DragZone {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Dismiss implements DragZone {
         public final Rect bounds;
 
@@ -149,7 +144,6 @@ public interface DragZone {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FullScreen implements DragZone {
         public final Rect bounds;
         public final Rect dropTarget;
@@ -189,11 +183,9 @@ public interface DragZone {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Split implements DragZone {
         public final Rect bounds;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Bottom extends Split {
             public final Rect bounds;
 
@@ -223,7 +215,6 @@ public interface DragZone {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Left extends Split {
             public final Rect bounds;
 
@@ -253,7 +244,6 @@ public interface DragZone {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Right extends Split {
             public final Rect bounds;
 
@@ -283,7 +273,6 @@ public interface DragZone {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Top extends Split {
             public final Rect bounds;
 

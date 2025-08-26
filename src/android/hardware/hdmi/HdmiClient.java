@@ -1,7 +1,6 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiClient;
 import android.hardware.hdmi.HdmiControlManager;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.hardware.hdmi.IHdmiVendorCommandListener;
@@ -66,7 +65,7 @@ public abstract class HdmiClient {
                     executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiClient$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            HdmiClient.OnDeviceSelectedListener.this.onDeviceSelected(r2, r3);
+                            onDeviceSelectedListener.onDeviceSelected(i, i);
                         }
                     });
                 }
@@ -136,12 +135,12 @@ public abstract class HdmiClient {
         return new IHdmiVendorCommandListener.Stub() { // from class: android.hardware.hdmi.HdmiClient.2
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
             public void onReceived(int i, int i2, byte[] bArr, boolean z) {
-                HdmiControlManager.VendorCommandListener.this.onReceived(i, i2, bArr, z);
+                vendorCommandListener.onReceived(i, i2, bArr, z);
             }
 
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
             public void onControlStateChanged(boolean z, int i) {
-                HdmiControlManager.VendorCommandListener.this.onControlStateChanged(z, i);
+                vendorCommandListener.onControlStateChanged(z, i);
             }
         };
     }

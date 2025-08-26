@@ -60,14 +60,14 @@ public abstract class ReplacementTransformationMethod implements TransformationM
 
         @Override // java.lang.CharSequence
         public char charAt(int i) {
-            char charAt = this.mSource.charAt(i);
+            char cCharAt = this.mSource.charAt(i);
             int length = this.mOriginal.length;
             for (int i2 = 0; i2 < length; i2++) {
-                if (charAt == this.mOriginal[i2]) {
-                    charAt = this.mReplacement[i2];
+                if (cCharAt == this.mOriginal[i2]) {
+                    cCharAt = this.mReplacement[i2];
                 }
             }
-            return charAt;
+            return cCharAt;
         }
 
         @Override // java.lang.CharSequence

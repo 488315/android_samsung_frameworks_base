@@ -7,7 +7,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnimateToSceneKt {
     public static final Pair animateToScene(CoroutineScope coroutineScope, MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl, SceneKey sceneKey, TransitionKey transitionKey) {
@@ -22,19 +21,19 @@ public abstract class AnimateToSceneKt {
             throw new NoWhenBranchMatchedException();
         }
         TransitionState.Transition.ChangeScene changeScene = (TransitionState.Transition.ChangeScene) transitionState;
-        boolean isInitiatedByUserInput = changeScene.isInitiatedByUserInput();
+        boolean zIsInitiatedByUserInput = changeScene.isInitiatedByUserInput();
         SceneKey sceneKey2 = changeScene.toScene;
-        boolean areEqual = Intrinsics.areEqual(sceneKey2, sceneKey);
+        boolean zAreEqual = Intrinsics.areEqual(sceneKey2, sceneKey);
         SceneKey sceneKey3 = changeScene.fromScene;
-        if (areEqual) {
+        if (zAreEqual) {
             if (Intrinsics.areEqual(sceneKey3, transitionState.getCurrentScene())) {
-                return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, isInitiatedByUserInput, (TransitionState.Transition) transitionState, null, false, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
+                return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, zIsInitiatedByUserInput, (TransitionState.Transition) transitionState, null, false, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
             }
             throw new IllegalStateException("Check failed.");
         }
         if (Intrinsics.areEqual(sceneKey3, sceneKey)) {
             if (Intrinsics.areEqual(sceneKey2, transitionState.getCurrentScene())) {
-                return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, isInitiatedByUserInput, changeScene, null, false, 192);
+                return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, zIsInitiatedByUserInput, changeScene, null, false, 192);
             }
             throw new IllegalStateException("Check failed.");
         }
@@ -46,7 +45,7 @@ public abstract class AnimateToSceneKt {
             if (z && !Intrinsics.areEqual(sceneKey4, transitionState.getCurrentScene())) {
                 animateToScene(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey4, null);
             }
-            return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, isInitiatedByUserInput, null, sceneKey4, z, 32);
+            return animateToScene$default(coroutineScope, mutableSceneTransitionLayoutStateImpl, sceneKey, transitionKey, zIsInitiatedByUserInput, null, sceneKey4, z, 32);
         }
         throw new IllegalStateException(("InterruptionResult.animateFrom must be either the fromScene (" + sceneKey3.debugName + ") or the toScene (" + sceneKey2.debugName + ") of the interrupted transition.").toString());
     }

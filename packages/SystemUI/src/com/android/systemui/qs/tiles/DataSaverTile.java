@@ -27,7 +27,6 @@ import com.android.systemui.statusbar.policy.DataSaverController;
 import com.android.systemui.statusbar.policy.DataSaverControllerImpl;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataSaverTile extends QSTileImpl implements DataSaverController.Listener {
     public final DataSaverController mDataSaverController;
@@ -67,30 +66,30 @@ public class DataSaverTile extends QSTileImpl implements DataSaverController.Lis
             this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.DataSaverTile$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final DataSaverTile dataSaverTile = DataSaverTile.this;
+                    final DataSaverTile dataSaverTile = this.f$0;
                     Expandable expandable2 = expandable;
-                    SystemUIDialog create = dataSaverTile.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) dataSaverTile.mShadeDialogContextInteractor).getContext());
-                    create.setTitle(android.R.string.font_family_display_3_material);
-                    create.setMessage(android.R.string.font_family_button_material);
-                    create.setPositiveButton(android.R.string.font_family_display_2_material, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.DataSaverTile$$ExternalSyntheticLambda1
+                    SystemUIDialog systemUIDialogCreate = dataSaverTile.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) dataSaverTile.mShadeDialogContextInteractor).getContext());
+                    systemUIDialogCreate.setTitle(android.R.string.font_family_headline_material);
+                    systemUIDialogCreate.setMessage(android.R.string.font_family_display_1_material);
+                    systemUIDialogCreate.setPositiveButton(android.R.string.font_family_display_4_material, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.DataSaverTile$$ExternalSyntheticLambda1
                         @Override // android.content.DialogInterface.OnClickListener
                         public final void onClick(DialogInterface dialogInterface, int i) {
-                            DataSaverTile dataSaverTile2 = DataSaverTile.this;
+                            DataSaverTile dataSaverTile2 = dataSaverTile;
                             dataSaverTile2.toggleDataSaver();
                             Prefs.putBoolean(dataSaverTile2.mContext, "QsDataSaverDialogShown", true);
                         }
                     });
-                    create.setButton(-3, android.R.string.cancel, null, true);
-                    SystemUIDialog.setShowForAllUsers(create);
+                    systemUIDialogCreate.setButton(-3, android.R.string.cancel, null, true);
+                    SystemUIDialog.setShowForAllUsers(systemUIDialogCreate);
                     if (expandable2 == null) {
-                        create.show();
+                        systemUIDialogCreate.show();
                         return;
                     }
-                    DialogTransitionAnimator.Controller dialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "start_data_saver"));
-                    if (dialogTransitionController != null) {
-                        dataSaverTile.mDialogTransitionAnimator.show(create, dialogTransitionController, false);
+                    DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "start_data_saver"));
+                    if (controllerDialogTransitionController != null) {
+                        dataSaverTile.mDialogTransitionAnimator.show(systemUIDialogCreate, controllerDialogTransitionController, false);
                     } else {
-                        create.show();
+                        systemUIDialogCreate.show();
                     }
                 }
             });
@@ -100,9 +99,9 @@ public class DataSaverTile extends QSTileImpl implements DataSaverController.Lis
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
-        boolean booleanValue = obj instanceof Boolean ? ((Boolean) obj).booleanValue() : ((DataSaverControllerImpl) this.mDataSaverController).isDataSaverEnabled$1();
-        booleanState.value = booleanValue;
-        booleanState.state = booleanValue ? 2 : 1;
+        boolean zBooleanValue = obj instanceof Boolean ? ((Boolean) obj).booleanValue() : ((DataSaverControllerImpl) this.mDataSaverController).isDataSaverEnabled$1();
+        booleanState.value = zBooleanValue;
+        booleanState.state = zBooleanValue ? 2 : 1;
         String string = this.mContext.getString(R.string.data_saver);
         booleanState.label = string;
         booleanState.contentDescription = string;

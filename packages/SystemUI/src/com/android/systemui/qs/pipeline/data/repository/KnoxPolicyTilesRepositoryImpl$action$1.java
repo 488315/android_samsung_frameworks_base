@@ -17,7 +17,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -55,29 +54,29 @@ final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda impleme
             final ?? r1 = new KnoxStateMonitorCallback() { // from class: com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepositoryImpl$action$1$callback$1
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateQuickPanelButtons() {
-                    KnoxPolicyTilesRepositoryImpl knoxPolicyTilesRepositoryImpl2 = KnoxPolicyTilesRepositoryImpl.this;
+                    KnoxPolicyTilesRepositoryImpl knoxPolicyTilesRepositoryImpl2 = knoxPolicyTilesRepositoryImpl;
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelButtons : " + ((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled());
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UpdateEnable(((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled()));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UpdateEnable(((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled()));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateQuickPanelItems() {
-                    List quickPanelItems = ((KnoxStateMonitorImpl) KnoxPolicyTilesRepositoryImpl.this.knoxStateMonitor).getQuickPanelItems();
+                    List quickPanelItems = ((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl.knoxStateMonitor).getQuickPanelItems();
                     if (quickPanelItems == null) {
                         quickPanelItems = EmptyList.INSTANCE;
                     }
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelItems : " + quickPanelItems);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.BlockTile(quickPanelItems));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.BlockTile(quickPanelItems));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateQuickPanelUnavailableButtons() {
-                    List quickPanelUnavailableButtons = ((KnoxStateMonitorImpl) KnoxPolicyTilesRepositoryImpl.this.knoxStateMonitor).getQuickPanelUnavailableButtons();
+                    List quickPanelUnavailableButtons = ((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl.knoxStateMonitor).getQuickPanelUnavailableButtons();
                     if (quickPanelUnavailableButtons == null) {
                         quickPanelUnavailableButtons = EmptyList.INSTANCE;
                     }
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelUnavailableButtons : " + quickPanelUnavailableButtons);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UnavailableTile(quickPanelUnavailableButtons));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UnavailableTile(quickPanelUnavailableButtons));
                 }
             };
             ((KnoxStateMonitorImpl) this.this$0.knoxStateMonitor).registerCallback(r1);
@@ -85,7 +84,7 @@ final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda impleme
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepositoryImpl$action$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((KnoxStateMonitorImpl) KnoxPolicyTilesRepositoryImpl.this.knoxStateMonitor).removeCallback(r1);
+                    ((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

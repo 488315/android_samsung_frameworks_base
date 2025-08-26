@@ -4,7 +4,6 @@ import android.graphics.Point;
 import android.util.RotationUtils;
 import android.view.SurfaceControl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CounterRotator {
     public SurfaceControl mSurface = null;
@@ -13,9 +12,9 @@ public class CounterRotator {
         if (i == 0) {
             return;
         }
-        SurfaceControl build = new SurfaceControl.Builder().setName("Transition Unrotate").setContainerLayer().setParent(surfaceControl).build();
-        this.mSurface = build;
-        RotationUtils.rotateSurface(transaction, build, i);
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName("Transition Unrotate").setContainerLayer().setParent(surfaceControl).build();
+        this.mSurface = surfaceControlBuild;
+        RotationUtils.rotateSurface(transaction, surfaceControlBuild, i);
         Point point = new Point(0, 0);
         if (i % 2 != 0) {
             f2 = f;

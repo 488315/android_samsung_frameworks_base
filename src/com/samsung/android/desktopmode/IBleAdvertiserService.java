@@ -45,9 +45,9 @@ public interface IBleAdvertiserService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBleAdvertiserService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBleAdvertiserService)) {
-                return (IBleAdvertiserService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBleAdvertiserService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBleAdvertiserService)) {
+                return (IBleAdvertiserService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IBleAdvertiserService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean needToKeepBinding = needToKeepBinding();
+                boolean zNeedToKeepBinding = needToKeepBinding();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(needToKeepBinding);
+                parcel2.writeBoolean(zNeedToKeepBinding);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,16 +100,16 @@ public interface IBleAdvertiserService extends IInterface {
 
             @Override // com.samsung.android.desktopmode.IBleAdvertiserService
             public boolean needToKeepBinding() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBleAdvertiserService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBleAdvertiserService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

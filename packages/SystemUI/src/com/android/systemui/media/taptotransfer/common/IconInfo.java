@@ -7,7 +7,6 @@ import com.android.systemui.media.taptotransfer.common.MediaTttIcon;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class IconInfo {
     public final ContentDescription contentDescription;
@@ -49,9 +48,9 @@ public final class IconInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (this.icon.hashCode() + (this.contentDescription.hashCode() * 31)) * 31;
+        int iHashCode = (this.icon.hashCode() + (this.contentDescription.hashCode() * 31)) * 31;
         Integer num = this.tint;
-        return Boolean.hashCode(this.isAppIcon) + ((hashCode + (num == null ? 0 : num.hashCode())) * 31);
+        return Boolean.hashCode(this.isAppIcon) + ((iHashCode + (num == null ? 0 : num.hashCode())) * 31);
     }
 
     public final String toString() {

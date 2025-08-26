@@ -6,7 +6,6 @@ import android.graphics.PointF;
 import android.graphics.Typeface;
 import com.airbnb.lottie.value.ScaleXY;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface LottieProperty {
     public static final Float BLUR_RADIUS;
@@ -47,21 +46,21 @@ public interface LottieProperty {
     public static final PointF TRANSFORM_POSITION = new PointF();
 
     static {
-        Float valueOf = Float.valueOf(15.0f);
-        TRANSFORM_POSITION_X = valueOf;
-        Float valueOf2 = Float.valueOf(16.0f);
-        TRANSFORM_POSITION_Y = valueOf2;
-        Float valueOf3 = Float.valueOf(17.0f);
-        BLUR_RADIUS = valueOf3;
+        Float fValueOf = Float.valueOf(15.0f);
+        TRANSFORM_POSITION_X = fValueOf;
+        Float fValueOf2 = Float.valueOf(16.0f);
+        TRANSFORM_POSITION_Y = fValueOf2;
+        Float fValueOf3 = Float.valueOf(17.0f);
+        BLUR_RADIUS = fValueOf3;
         ELLIPSE_SIZE = new PointF();
         RECTANGLE_SIZE = new PointF();
-        Float valueOf4 = Float.valueOf(0.0f);
-        CORNER_RADIUS = valueOf4;
+        Float fValueOf4 = Float.valueOf(0.0f);
+        CORNER_RADIUS = fValueOf4;
         POSITION = new PointF();
         TRANSFORM_SCALE = new ScaleXY();
         TRANSFORM_ROTATION = Float.valueOf(1.0f);
-        TRANSFORM_SKEW = valueOf4;
-        TRANSFORM_SKEW_ANGLE = valueOf4;
+        TRANSFORM_SKEW = fValueOf4;
+        TRANSFORM_SKEW_ANGLE = fValueOf4;
         STROKE_WIDTH = Float.valueOf(2.0f);
         TEXT_TRACKING = Float.valueOf(3.0f);
         REPEATER_COPIES = Float.valueOf(4.0f);
@@ -76,9 +75,9 @@ public interface LottieProperty {
         TRANSFORM_END_OPACITY = Float.valueOf(12.1f);
         TIME_REMAP = Float.valueOf(13.0f);
         TEXT_SIZE = Float.valueOf(14.0f);
-        DROP_SHADOW_OPACITY = valueOf;
-        DROP_SHADOW_DIRECTION = valueOf2;
-        DROP_SHADOW_DISTANCE = valueOf3;
+        DROP_SHADOW_OPACITY = fValueOf;
+        DROP_SHADOW_DIRECTION = fValueOf2;
+        DROP_SHADOW_DISTANCE = fValueOf3;
         DROP_SHADOW_RADIUS = Float.valueOf(18.0f);
         COLOR_FILTER = new ColorFilter();
         GRADIENT_COLOR = new Integer[0];

@@ -2,6 +2,7 @@ package com.google.android.material.datepicker;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -18,7 +19,6 @@ import com.google.android.material.shape.RelativeCornerSize;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CalendarItemStyle {
     public final ColorStateList backgroundColor;
@@ -41,20 +41,20 @@ public final class CalendarItemStyle {
         this.itemShape = shapeAppearanceModel;
     }
 
-    public static CalendarItemStyle create(int i, Context context) {
+    public static CalendarItemStyle create(int i, Context context) throws Resources.NotFoundException {
         Preconditions.checkArgument("Cannot create a CalendarItemStyle with a styleResId of 0", i != 0);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(i, R$styleable.MaterialCalendarItem);
-        Rect rect = new Rect(obtainStyledAttributes.getDimensionPixelOffset(0, 0), obtainStyledAttributes.getDimensionPixelOffset(2, 0), obtainStyledAttributes.getDimensionPixelOffset(1, 0), obtainStyledAttributes.getDimensionPixelOffset(3, 0));
-        ColorStateList colorStateList = MaterialResources.getColorStateList(context, obtainStyledAttributes, 4);
-        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 9);
-        ColorStateList colorStateList3 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 7);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(8, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(5, 0);
-        int resourceId2 = obtainStyledAttributes.getResourceId(6, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(i, R$styleable.MaterialCalendarItem);
+        Rect rect = new Rect(typedArrayObtainStyledAttributes.getDimensionPixelOffset(0, 0), typedArrayObtainStyledAttributes.getDimensionPixelOffset(2, 0), typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, 0), typedArrayObtainStyledAttributes.getDimensionPixelOffset(3, 0));
+        ColorStateList colorStateList = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 4);
+        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 9);
+        ColorStateList colorStateList3 = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 7);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(5, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(6, 0);
         RelativeCornerSize relativeCornerSize = ShapeAppearanceModel.PILL;
-        ShapeAppearanceModel build = ShapeAppearanceModel.builder(context, resourceId, resourceId2, new AbsoluteCornerSize(0)).build();
-        obtainStyledAttributes.recycle();
-        return new CalendarItemStyle(colorStateList, colorStateList2, colorStateList3, dimensionPixelSize, build, rect);
+        ShapeAppearanceModel shapeAppearanceModelBuild = ShapeAppearanceModel.builder(context, resourceId, resourceId2, new AbsoluteCornerSize(0)).build();
+        typedArrayObtainStyledAttributes.recycle();
+        return new CalendarItemStyle(colorStateList, colorStateList2, colorStateList3, dimensionPixelSize, shapeAppearanceModelBuild, rect);
     }
 
     public final void styleItem(TextView textView) {

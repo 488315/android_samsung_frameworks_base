@@ -71,11 +71,11 @@ public final class VirtualKeyboardConfig extends VirtualInputDeviceConfig implem
 
         public Builder setLanguageTag(String str) {
             Objects.requireNonNull(str, "languageTag cannot be null");
-            ULocale forLanguageTag = ULocale.forLanguageTag(str);
-            if (forLanguageTag.getLanguage().isEmpty()) {
+            ULocale uLocaleForLanguageTag = ULocale.forLanguageTag(str);
+            if (uLocaleForLanguageTag.getLanguage().isEmpty()) {
                 throw new IllegalArgumentException("The language tag is not valid.");
             }
-            this.mLanguageTag = ULocale.createCanonical(forLanguageTag).toLanguageTag();
+            this.mLanguageTag = ULocale.createCanonical(uLocaleForLanguageTag).toLanguageTag();
             return this;
         }
 

@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NightDisplayState {
     public final int autoMode;
@@ -60,11 +59,11 @@ public final class NightDisplayState {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.autoMode) * 31, 31, this.isActivated);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.autoMode) * 31, 31, this.isActivated);
         LocalTime localTime = this.startTime;
-        int hashCode = (m + (localTime == null ? 0 : localTime.hashCode())) * 31;
+        int iHashCode = (iM + (localTime == null ? 0 : localTime.hashCode())) * 31;
         LocalTime localTime2 = this.endTime;
-        return Boolean.hashCode(this.locationEnabled) + TransitionData$$ExternalSyntheticOutline0.m((hashCode + (localTime2 != null ? localTime2.hashCode() : 0)) * 31, 31, this.shouldForceAutoMode);
+        return Boolean.hashCode(this.locationEnabled) + TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (localTime2 != null ? localTime2.hashCode() : 0)) * 31, 31, this.shouldForceAutoMode);
     }
 
     public final String toString() {

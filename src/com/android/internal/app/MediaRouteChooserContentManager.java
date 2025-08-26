@@ -1,6 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.MediaRouter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -39,18 +40,18 @@ public class MediaRouteChooserContentManager {
     }
 
     public void bindViews(View view) {
-        View findViewById = view.findViewById(16908292);
+        View viewFindViewById = view.findViewById(16908292);
         ListView listView = (ListView) view.findViewById(R.id.media_route_list);
         listView.setAdapter((ListAdapter) this.mAdapter);
         listView.setOnItemClickListener(this.mAdapter);
-        listView.setEmptyView(findViewById);
+        listView.setEmptyView(viewFindViewById);
         if (this.mDelegate.showProgressBarWhenEmpty()) {
             return;
         }
         view.findViewById(R.id.media_route_progress_bar).setVisibility(8);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) findViewById.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) viewFindViewById.getLayoutParams();
         layoutParams.gravity = 17;
-        findViewById.setLayoutParams(layoutParams);
+        viewFindViewById.setLayoutParams(layoutParams);
     }
 
     public void onAttachedToWindow() {
@@ -121,7 +122,7 @@ public class MediaRouteChooserContentManager {
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             if (view == null) {
                 view = this.mInflater.inflate(R.layout.media_route_list_item, viewGroup, false);
             }

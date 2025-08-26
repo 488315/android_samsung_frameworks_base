@@ -112,16 +112,16 @@ public final class DisplayHash implements Parcelable {
     private DisplayHash(Parcel parcel) {
         this.mTimeMillis = parcel.readLong();
         Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-        String readString = parcel.readString();
-        byte[] createByteArray = parcel.createByteArray();
-        byte[] createByteArray2 = parcel.createByteArray();
+        String string = parcel.readString();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        byte[] bArrCreateByteArray2 = parcel.createByteArray();
         this.mBoundsInWindow = rect;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rect);
-        this.mHashAlgorithm = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mImageHash = createByteArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray);
-        this.mHmac = createByteArray2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray2);
+        this.mHashAlgorithm = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mImageHash = bArrCreateByteArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray);
+        this.mHmac = bArrCreateByteArray2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray2);
     }
 }

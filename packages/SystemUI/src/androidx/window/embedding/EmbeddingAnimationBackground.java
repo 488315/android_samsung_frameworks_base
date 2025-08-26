@@ -3,13 +3,11 @@ package androidx.window.embedding;
 import android.graphics.Color;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class EmbeddingAnimationBackground {
     public static final Companion Companion = new Companion(null);
     public static final DefaultBackground DEFAULT = new DefaultBackground();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ColorBackground extends EmbeddingAnimationBackground {
         public final int color;
 
@@ -40,7 +38,6 @@ public abstract class EmbeddingAnimationBackground {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,7 +47,6 @@ public abstract class EmbeddingAnimationBackground {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DefaultBackground extends EmbeddingAnimationBackground {
         public DefaultBackground() {
             super(null);

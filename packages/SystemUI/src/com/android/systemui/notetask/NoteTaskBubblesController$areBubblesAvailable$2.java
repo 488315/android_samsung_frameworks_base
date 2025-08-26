@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Reflection;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NoteTaskBubblesController$areBubblesAvailable$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -70,7 +69,7 @@ final class NoteTaskBubblesController$areBubblesAvailable$2 extends SuspendLambd
                 if (((Throwable) obj3) != null) {
                     DebugLogger debugLogger = DebugLogger.INSTANCE;
                     boolean z = Build.IS_DEBUGGABLE;
-                    Reflection.getOrCreateKotlinClass(CoroutineScope.this.getClass()).getSimpleName();
+                    Reflection.getOrCreateKotlinClass(coroutineScope.getClass()).getSimpleName();
                 }
                 int i2 = Result.$r8$clinit;
                 safeContinuation.resumeWith(Boolean.valueOf(bool != null ? bool.booleanValue() : false));

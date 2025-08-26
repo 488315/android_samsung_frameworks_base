@@ -20,7 +20,6 @@ import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.policy.BluetoothController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class HearingDevicesTile extends QSTileImpl {
     public final AnonymousClass1 mCallback;
@@ -63,7 +62,7 @@ public class HearingDevicesTile extends QSTileImpl {
         this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.HearingDevicesTile$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                HearingDevicesTile hearingDevicesTile = HearingDevicesTile.this;
+                HearingDevicesTile hearingDevicesTile = this.f$0;
                 hearingDevicesTile.mDialogManager.showDialog(expandable, 2);
             }
         });
@@ -78,11 +77,11 @@ public class HearingDevicesTile extends QSTileImpl {
         booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.qs_hearing_devices_icon);
         booleanState.forceExpandIcon = true;
         HearingDevicesChecker hearingDevicesChecker = this.mDevicesChecker;
-        boolean isAnyPairedHearingDevice = hearingDevicesChecker.isAnyPairedHearingDevice();
+        boolean zIsAnyPairedHearingDevice = hearingDevicesChecker.isAnyPairedHearingDevice();
         if (hearingDevicesChecker.isAnyActiveHearingDevice()) {
             booleanState.state = 2;
             booleanState.secondaryLabel = this.mContext.getString(R.string.quick_settings_hearing_devices_connected);
-        } else if (isAnyPairedHearingDevice) {
+        } else if (zIsAnyPairedHearingDevice) {
             booleanState.state = 1;
             booleanState.secondaryLabel = this.mContext.getString(R.string.quick_settings_hearing_devices_disconnected);
         } else {

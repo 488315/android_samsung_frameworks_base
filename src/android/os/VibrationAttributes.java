@@ -161,13 +161,13 @@ public final class VibrationAttributes implements Parcelable {
         boolean z = (parcel.readInt() & 1) == 1;
         this.mTags = new HashSet<>();
         if (z) {
-            String readString = parcel.readString();
-            this.mFormattedTags = readString;
-            this.mTags.add(readString);
+            String string = parcel.readString();
+            this.mFormattedTags = string;
+            this.mTags.add(string);
         } else {
-            String[] readStringArray = parcel.readStringArray();
-            for (int length = readStringArray.length - 1; length >= 0; length--) {
-                this.mTags.add(readStringArray[length]);
+            String[] stringArray = parcel.readStringArray();
+            for (int length = stringArray.length - 1; length >= 0; length--) {
+                this.mTags.add(stringArray[length]);
             }
             this.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
         }

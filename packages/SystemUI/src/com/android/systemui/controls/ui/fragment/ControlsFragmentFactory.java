@@ -12,7 +12,6 @@ import com.android.systemui.controls.util.SALogger;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsFragmentFactory extends FragmentFactory {
     public final BadgeSubject badgeSubject;
@@ -22,7 +21,6 @@ public final class ControlsFragmentFactory extends FragmentFactory {
     public final ControlsListingController listingController;
     public final SALogger saLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,26 +45,26 @@ public final class ControlsFragmentFactory extends FragmentFactory {
 
     @Override // androidx.fragment.app.FragmentFactory
     public final Fragment instantiate(ClassLoader classLoader, String str) {
-        Fragment instantiate;
+        Fragment fragmentInstantiate;
         Fragment settingFragment;
         if (Intrinsics.areEqual(str, MainFragment.class.getName())) {
-            instantiate = new MainFragment(this.controlsActivityStarter, this.layoutUtil, this.saLogger, this.badgeSubject, this.listingController, this.controlsUiController);
+            fragmentInstantiate = new MainFragment(this.controlsActivityStarter, this.layoutUtil, this.saLogger, this.badgeSubject, this.listingController, this.controlsUiController);
         } else {
-            boolean areEqual = Intrinsics.areEqual(str, NoAppFragment.class.getName());
+            boolean zAreEqual = Intrinsics.areEqual(str, NoAppFragment.class.getName());
             SALogger sALogger = this.saLogger;
-            if (areEqual) {
+            if (zAreEqual) {
                 settingFragment = new NoAppFragment(sALogger);
             } else if (Intrinsics.areEqual(str, NoFavoriteFragment.class.getName())) {
-                instantiate = new NoFavoriteFragment(this.controlsActivityStarter, sALogger, this.badgeSubject);
+                fragmentInstantiate = new NoFavoriteFragment(this.controlsActivityStarter, sALogger, this.badgeSubject);
             } else if (Intrinsics.areEqual(str, SettingFragment.class.getName())) {
                 settingFragment = new SettingFragment(sALogger);
             } else {
-                instantiate = super.instantiate(classLoader, str);
+                fragmentInstantiate = super.instantiate(classLoader, str);
             }
-            instantiate = settingFragment;
+            fragmentInstantiate = settingFragment;
         }
-        instantiate.getClass();
+        fragmentInstantiate.getClass();
         Log.d("ControlsFragmentFactory", str);
-        return instantiate;
+        return fragmentInstantiate;
     }
 }

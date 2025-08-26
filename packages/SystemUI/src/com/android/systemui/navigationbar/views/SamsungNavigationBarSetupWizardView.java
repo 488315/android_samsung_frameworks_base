@@ -24,7 +24,6 @@ import com.android.systemui.shared.navigationbar.SamsungKeyButtonRipple;
 import com.android.wm.shell.back.BackAnimationController;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
     public ImageView a11yBtn;
@@ -41,7 +40,6 @@ public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
     public NavigationBarSetupWizardButton prevBtnLayout;
     public FrameLayout setupWizardView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NavigationBarSetupWizardButton extends LinearLayout {
         public NavigationBarSetupWizardButton(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
@@ -59,9 +57,9 @@ public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
     }
 
     public static void sendEvent$default(SamsungNavigationBarSetupWizardView samsungNavigationBarSetupWizardView, int i) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         samsungNavigationBarSetupWizardView.getClass();
-        KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, i, 4, 0, 0, -1, 0, 72, 257);
+        KeyEvent keyEvent = new KeyEvent(jUptimeMillis, jUptimeMillis, i, 4, 0, 0, -1, 0, 72, 257);
         if (!(BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON && samsungNavigationBarSetupWizardView.mBackAnimation != null)) {
             InputManager.getInstance().injectInputEvent(keyEvent, 0);
             return;
@@ -162,14 +160,14 @@ public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
         View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.navigationbar.views.SamsungNavigationBarSetupWizardView$onFinishInflate$clickListener$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SamsungNavigationBarSetupWizardView.sendEvent$default(SamsungNavigationBarSetupWizardView.this, 0);
-                SamsungNavigationBarSetupWizardView.sendEvent$default(SamsungNavigationBarSetupWizardView.this, 1);
-                SamsungNavigationBarSetupWizardView samsungNavigationBarSetupWizardView = SamsungNavigationBarSetupWizardView.this;
+                SamsungNavigationBarSetupWizardView.sendEvent$default(this.this$0, 0);
+                SamsungNavigationBarSetupWizardView.sendEvent$default(this.this$0, 1);
+                SamsungNavigationBarSetupWizardView samsungNavigationBarSetupWizardView = this.this$0;
                 samsungNavigationBarSetupWizardView.getClass();
                 if (!BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON || samsungNavigationBarSetupWizardView.mBackAnimation == null) {
                     return;
                 }
-                SamsungNavigationBarSetupWizardView.this.performHapticFeedback(1);
+                this.this$0.performHapticFeedback(1);
             }
         };
         NavigationBarSetupWizardButton navigationBarSetupWizardButton7 = this.prevBtnLayout;
@@ -186,7 +184,7 @@ public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
         if (navigationBarSetupWizardButton9 == null) {
             navigationBarSetupWizardButton9 = null;
         }
-        navigationBarSetupWizardButton9.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.navigationbar.views.SamsungNavigationBarSetupWizardView$onFinishInflate$1
+        navigationBarSetupWizardButton9.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.navigationbar.views.SamsungNavigationBarSetupWizardView.onFinishInflate.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 Display display = view.getDisplay();
@@ -197,7 +195,7 @@ public final class SamsungNavigationBarSetupWizardView extends FrameLayout {
         if (navigationBarSetupWizardButton10 == null) {
             navigationBarSetupWizardButton10 = null;
         }
-        navigationBarSetupWizardButton10.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.navigationbar.views.SamsungNavigationBarSetupWizardView$onFinishInflate$2
+        navigationBarSetupWizardButton10.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.navigationbar.views.SamsungNavigationBarSetupWizardView.onFinishInflate.2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
                 Intent intent = new Intent("com.android.internal.intent.action.CHOOSE_ACCESSIBILITY_BUTTON");

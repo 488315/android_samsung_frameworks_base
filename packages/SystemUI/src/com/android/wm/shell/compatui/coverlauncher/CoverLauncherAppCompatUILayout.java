@@ -1,6 +1,7 @@
 package com.android.wm.shell.compatui.coverlauncher;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.Handler;
@@ -18,7 +19,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CoverLauncherAppCompatUILayout extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,14 +34,14 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
     public CoverLauncherAppCompatUIWindowManager mWindowManager;
 
     /* renamed from: $r8$lambda$4WPzlIeSoSg8-Q-IF7a0VjEY2q8, reason: not valid java name */
-    public static /* synthetic */ void m3228$r8$lambda$4WPzlIeSoSg8QIF7a0VjEY2q8(CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout, View view) {
+    public static /* synthetic */ void m3245$r8$lambda$4WPzlIeSoSg8QIF7a0VjEY2q8(CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout, View view) {
         Rect rect = new Rect();
         view.getBoundsOnScreen(rect);
         coverLauncherAppCompatUILayout.mTouchableRegion.union(rect);
     }
 
     /* renamed from: $r8$lambda$Zq0T92Sd_iEwka0niF0qFU-7lB0, reason: not valid java name */
-    public static void m3229$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout) {
+    public static void m3246$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout) {
         coverLauncherAppCompatUILayout.configureTouchableRegion(coverLauncherAppCompatUILayout.mTouchableRegionCalculator);
         coverLauncherAppCompatUILayout.getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(coverLauncherAppCompatUILayout.mLayoutListener);
     }
@@ -56,7 +56,7 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                CoverLauncherAppCompatUILayout.m3229$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(CoverLauncherAppCompatUILayout.this);
+                CoverLauncherAppCompatUILayout.m3246$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout.1
@@ -79,7 +79,7 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
             while (it.hasNext()) {
                 ImageButton imageButton = (ImageButton) ((Map.Entry) it.next()).getValue();
                 if (imageButton.getVisibility() == 0) {
-                    m3228$r8$lambda$4WPzlIeSoSg8QIF7a0VjEY2q8(coverLauncherAppCompatUILayout$$ExternalSyntheticLambda0.f$0, imageButton);
+                    m3245$r8$lambda$4WPzlIeSoSg8QIF7a0VjEY2q8(coverLauncherAppCompatUILayout$$ExternalSyntheticLambda0.f$0, imageButton);
                 }
             }
             CoverLauncherAppCompatUIController coverLauncherAppCompatUIController = this.mController;
@@ -110,7 +110,7 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
         handler.postDelayed(new CoverLauncherAppCompatUIController$$ExternalSyntheticLambda0(coverLauncherAppCompatUIController), coverLauncherAppCompatUIController, 5000L);
     }
 
-    public final void setButtonVisibility(int i, int i2, boolean z) {
+    public final void setButtonVisibility(int i, int i2, boolean z) throws Resources.NotFoundException {
         View view = (View) this.mButtons.get(Integer.valueOf(i));
         AnimationListenerWrapper animationListenerWrapper = (AnimationListenerWrapper) this.mAnimationListenerWrappers.remove(Integer.valueOf(i));
         if (animationListenerWrapper != null) {
@@ -124,9 +124,9 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
             view.setVisibility(i2);
             return;
         }
-        Animation loadAnimation = AnimationUtils.loadAnimation(((FrameLayout) this).mContext, i2 == 0 ? R.anim.mt_app_compat_ui_btn_release_n_appear : R.anim.mt_app_compat_ui_btn_release_n_disappear);
-        this.mAnimationListenerWrappers.put(Integer.valueOf(i), new AnimationListenerWrapper(loadAnimation, view, i2));
-        view.startAnimation(loadAnimation);
+        Animation animationLoadAnimation = AnimationUtils.loadAnimation(((FrameLayout) this).mContext, i2 == 0 ? R.anim.mt_app_compat_ui_btn_release_n_appear : R.anim.mt_app_compat_ui_btn_release_n_disappear);
+        this.mAnimationListenerWrappers.put(Integer.valueOf(i), new AnimationListenerWrapper(animationLoadAnimation, view, i2));
+        view.startAnimation(animationLoadAnimation);
     }
 
     @Override // android.view.View
@@ -144,7 +144,7 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                CoverLauncherAppCompatUILayout.m3229$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(CoverLauncherAppCompatUILayout.this);
+                CoverLauncherAppCompatUILayout.m3246$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout.1
@@ -170,7 +170,7 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                CoverLauncherAppCompatUILayout.m3229$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(CoverLauncherAppCompatUILayout.this);
+                CoverLauncherAppCompatUILayout.m3246$r8$lambda$Zq0T92Sd_iEwka0niF0qFU7lB0(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatUILayout.1
@@ -186,7 +186,6 @@ public class CoverLauncherAppCompatUILayout extends FrameLayout {
         this.mHandler = new Handler(Looper.myLooper());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationListenerWrapper implements Animation.AnimationListener {
         public final Animation mAnimation;
         public boolean mCancel;

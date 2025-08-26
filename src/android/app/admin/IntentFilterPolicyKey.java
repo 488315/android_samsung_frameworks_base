@@ -58,7 +58,7 @@ public final class IntentFilterPolicyKey extends PolicyKey {
     }
 
     @Override // android.app.admin.PolicyKey
-    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IOException {
+    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         typedXmlSerializer.attribute(null, "policy-identifier", getIdentifier());
         typedXmlSerializer.startTag(null, TAG_INTENT_FILTER_ENTRY);
         this.mFilter.writeToXml(typedXmlSerializer);

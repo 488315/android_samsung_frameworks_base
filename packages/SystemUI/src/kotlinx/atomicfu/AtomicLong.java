@@ -4,14 +4,12 @@ import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.atomicfu.TraceBase;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AtomicLong {
     public static final AtomicLongFieldUpdater FU;
     public final TraceBase trace;
     public volatile long value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,25 +30,25 @@ public final class AtomicLong {
     }
 
     public final long addAndGet(long j) {
-        long addAndGet = FU.addAndGet(this, j);
+        long jAddAndGet = FU.addAndGet(this, j);
         TraceBase.None none = TraceBase.None.INSTANCE;
         TraceBase traceBase = this.trace;
         if (traceBase != none) {
             traceBase.getClass();
         }
-        return addAndGet;
+        return jAddAndGet;
     }
 
     public final boolean compareAndSet(long j, long j2) {
-        boolean compareAndSet = FU.compareAndSet(this, j, j2);
-        if (compareAndSet) {
+        boolean zCompareAndSet = FU.compareAndSet(this, j, j2);
+        if (zCompareAndSet) {
             TraceBase.None none = TraceBase.None.INSTANCE;
             TraceBase traceBase = this.trace;
             if (traceBase != none) {
                 traceBase.getClass();
             }
         }
-        return compareAndSet;
+        return zCompareAndSet;
     }
 
     public final long getAndIncrement() {

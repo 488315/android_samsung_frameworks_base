@@ -49,11 +49,11 @@ public class VibrationConfig {
     }
 
     private static int loadDefaultIntensity(Resources resources, int i) {
-        int loadInteger = loadInteger(resources, i, 2);
-        if (loadInteger < 0 || loadInteger > 3) {
+        int iLoadInteger = loadInteger(resources, i, 2);
+        if (iLoadInteger < 0 || iLoadInteger > 3) {
             return 2;
         }
-        return loadInteger;
+        return iLoadInteger;
     }
 
     private static float loadFloat(Resources resources, int i) {

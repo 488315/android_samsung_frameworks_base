@@ -149,26 +149,22 @@ public class NativeInterface {
     }
 
     public static synchronized NativeInterface getInstance() {
-        synchronized (NativeInterface.class) {
-            HashMap<Integer, NativeInterface> hashMap = sInstances;
-            int size = hashMap.size();
-            if (size < 1) {
-                Integer num = sInstanceIdCnt;
-                hashMap.put(num, new NativeInterface(num.intValue()));
-                Integer num2 = sInstanceIdCnt;
-                sInstanceIdCnt = Integer.valueOf(num2.intValue() + 1);
-                return hashMap.get(num2);
-            }
-            Log.e("NativeInterface", "ERROR already Max native interface instances(" + size + ") running");
-            return null;
+        HashMap<Integer, NativeInterface> map = sInstances;
+        int size = map.size();
+        if (size < 1) {
+            Integer num = sInstanceIdCnt;
+            map.put(num, new NativeInterface(num.intValue()));
+            Integer num2 = sInstanceIdCnt;
+            sInstanceIdCnt = Integer.valueOf(num2.intValue() + 1);
+            return map.get(num2);
         }
+        Log.e("NativeInterface", "ERROR already Max native interface instances(" + size + ") running");
+        return null;
     }
 
     public static synchronized void releaseInstance(NativeInterface nativeInterface) {
-        synchronized (NativeInterface.class) {
-            if (nativeInterface != null) {
-                sInstances.remove(Integer.valueOf(nativeInterface.mInstanceId));
-            }
+        if (nativeInterface != null) {
+            sInstances.remove(Integer.valueOf(nativeInterface.mInstanceId));
         }
     }
 }

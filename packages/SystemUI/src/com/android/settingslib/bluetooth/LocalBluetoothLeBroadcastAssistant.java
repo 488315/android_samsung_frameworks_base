@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocalBluetoothLeBroadcastAssistant implements LocalBluetoothProfile {
     public final AnonymousClass2 mAssistantCallback;
@@ -39,7 +38,6 @@ public class LocalBluetoothLeBroadcastAssistant implements LocalBluetoothProfile
     public final Map mCachedCallbackExecutorMap = new ConcurrentHashMap();
     public final HashSet mServiceConnectedCallbacks = new HashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant$1, reason: invalid class name */
     public class AnonymousClass1 implements BluetoothProfile.ServiceListener {
         public AnonymousClass1() {
@@ -53,13 +51,13 @@ public class LocalBluetoothLeBroadcastAssistant implements LocalBluetoothProfile
             List connectedDevices = bluetoothLeBroadcastAssistant.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = LocalBluetoothLeBroadcastAssistant.this.mDeviceManager.findDevice(bluetoothDevice);
-                if (findDevice == null) {
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = LocalBluetoothLeBroadcastAssistant.this.mDeviceManager.findDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceFindDevice == null) {
                     Log.d("LocalBluetoothLeBroadcastAssistant", "LocalBluetoothLeBroadcastAssistant found new device: " + bluetoothDevice);
-                    findDevice = LocalBluetoothLeBroadcastAssistant.this.mDeviceManager.addDevice(bluetoothDevice);
+                    cachedBluetoothDeviceFindDevice = LocalBluetoothLeBroadcastAssistant.this.mDeviceManager.addDevice(bluetoothDevice);
                 }
-                findDevice.onProfileStateChanged(LocalBluetoothLeBroadcastAssistant.this, 2);
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.onProfileStateChanged(LocalBluetoothLeBroadcastAssistant.this, 2);
+                cachedBluetoothDeviceFindDevice.refresh();
             }
             LocalBluetoothLeBroadcastAssistant.this.mProfileManager.callServiceConnectedListeners();
             LocalBluetoothLeBroadcastAssistant localBluetoothLeBroadcastAssistant = LocalBluetoothLeBroadcastAssistant.this;

@@ -27,9 +27,7 @@ public final class TextClassificationManager {
         TextClassificationSessionFactory textClassificationSessionFactory = new TextClassificationSessionFactory() { // from class: android.view.textclassifier.TextClassificationManager$$ExternalSyntheticLambda0
             @Override // android.view.textclassifier.TextClassificationSessionFactory
             public final TextClassifier createTextClassificationSession(TextClassificationContext textClassificationContext) {
-                TextClassifier lambda$new$0;
-                lambda$new$0 = TextClassificationManager.this.lambda$new$0(textClassificationContext);
-                return lambda$new$0;
+                return this.f$0.lambda$new$0(textClassificationContext);
             }
         };
         this.mDefaultSessionFactory = textClassificationSessionFactory;
@@ -84,9 +82,9 @@ public final class TextClassificationManager {
 
     public TextClassifier createTextClassificationSession(TextClassificationContext textClassificationContext) {
         Objects.requireNonNull(textClassificationContext);
-        TextClassifier createTextClassificationSession = this.mSessionFactory.createTextClassificationSession(textClassificationContext);
-        Objects.requireNonNull(createTextClassificationSession, "Session Factory should never return null");
-        return createTextClassificationSession;
+        TextClassifier textClassifierCreateTextClassificationSession = this.mSessionFactory.createTextClassificationSession(textClassificationContext);
+        Objects.requireNonNull(textClassifierCreateTextClassificationSession, "Session Factory should never return null");
+        return textClassifierCreateTextClassificationSession;
     }
 
     public TextClassifier createTextClassificationSession(TextClassificationContext textClassificationContext, TextClassifier textClassifier) {

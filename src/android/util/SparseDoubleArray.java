@@ -15,11 +15,11 @@ public class SparseDoubleArray implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SparseDoubleArray m5531clone() {
+    public SparseDoubleArray m5538clone() {
         try {
             SparseDoubleArray sparseDoubleArray = (SparseDoubleArray) super.clone();
             try {
-                sparseDoubleArray.mValues = this.mValues.m5533clone();
+                sparseDoubleArray.mValues = this.mValues.m5540clone();
                 return sparseDoubleArray;
             } catch (CloneNotSupportedException unused) {
                 return sparseDoubleArray;
@@ -34,8 +34,8 @@ public class SparseDoubleArray implements Cloneable {
     }
 
     public double get(int i, double d) {
-        int indexOfKey = this.mValues.indexOfKey(i);
-        return indexOfKey < 0 ? d : valueAt(indexOfKey);
+        int iIndexOfKey = this.mValues.indexOfKey(i);
+        return iIndexOfKey < 0 ? d : valueAt(iIndexOfKey);
     }
 
     public void put(int i, double d) {

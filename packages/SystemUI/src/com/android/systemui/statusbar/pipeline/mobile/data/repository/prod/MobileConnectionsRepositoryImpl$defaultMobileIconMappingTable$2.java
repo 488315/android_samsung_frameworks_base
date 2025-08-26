@@ -16,7 +16,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryImpl$defaultMobileIconMappingTable$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -53,17 +52,17 @@ final class MobileConnectionsRepositoryImpl$defaultMobileIconMappingTable$2 exte
         for (Map.Entry entry : concurrentHashMap.entrySet()) {
             Log.d("MobileConnectionsRepository", "mobileIconMappingTable(" + entry.getKey() + "): " + entry.getValue() + " ");
             MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryImpl.logger;
-            int intValue = ((Number) entry.getKey()).intValue();
+            int iIntValue = ((Number) entry.getKey()).intValue();
             Map map = (Map) entry.getValue();
             mobileInputLogger.getClass();
             LogLevel logLevel = LogLevel.INFO;
             MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(12);
             LogBuffer logBuffer = mobileInputLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-            logMessageImpl.int1 = intValue;
+            LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.int1 = iIntValue;
             logMessageImpl.str1 = map.toString();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         return Unit.INSTANCE;
     }

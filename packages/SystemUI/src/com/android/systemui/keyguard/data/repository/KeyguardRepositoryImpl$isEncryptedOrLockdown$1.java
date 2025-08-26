@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRepositoryImpl$isEncryptedOrLockdown$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -47,9 +46,9 @@ final class KeyguardRepositoryImpl$isEncryptedOrLockdown$1 extends SuspendLambda
                 @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
                 public final void onStrongAuthStateChanged(int i2) {
                     ChannelExt channelExt = ChannelExt.INSTANCE;
-                    Integer valueOf = Integer.valueOf(i2);
+                    Integer numValueOf = Integer.valueOf(i2);
                     channelExt.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, valueOf, "KeyguardRepositoryImpl", "strong auth state change");
+                    ChannelExt.trySendWithFailureLogging(producerScope, numValueOf, "KeyguardRepositoryImpl", "strong auth state change");
                 }
             };
             this.this$0.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);

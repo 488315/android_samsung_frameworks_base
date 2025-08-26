@@ -2,13 +2,24 @@ package android.net;
 
 import android.net.sntp.Duration64;
 import android.net.sntp.Timestamp64;
+import android.os.RemoteException;
+import android.os.SystemClock;
+import android.sec.enterprise.EnterpriseDeviceManager;
+import android.sec.enterprise.IEDMProxy;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+import com.android.internal.util.TrafficStatsConstants;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.TemporalAmount;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -58,109 +69,209 @@ public class SntpClient {
         this.mRandom = (Random) Objects.requireNonNull(random);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x006f A[Catch: UnknownHostException -> 0x007c, TRY_LEAVE, TryCatch #2 {UnknownHostException -> 0x007c, blocks: (B:25:0x0067, B:26:0x006c, B:28:0x006f), top: B:24:0x0067 }] */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x006f A[Catch: UnknownHostException -> 0x007c, TRY_LEAVE, TryCatch #2 {UnknownHostException -> 0x007c, blocks: (B:22:0x0067, B:23:0x006c, B:25:0x006f), top: B:38:0x0067 }] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0037 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean requestTime(java.lang.String r8, int r9, int r10, android.net.Network r11) {
-        /*
-            r7 = this;
-            java.lang.String r0 = "SntpClient"
-            java.lang.String r1 = "timeout set by MDM: "
-            java.lang.String r2 = "host set by MDM: "
-            android.sec.enterprise.IEDMProxy r3 = android.sec.enterprise.EnterpriseDeviceManager.EDMProxyServiceHelper.getService()     // Catch: android.os.RemoteException -> L4d
-            if (r3 == 0) goto L62
-            boolean r4 = r3.shallForceNtpMdmValues()     // Catch: android.os.RemoteException -> L4d
-            if (r4 == 0) goto L62
-            java.lang.String r4 = r3.getNtpServer()     // Catch: android.os.RemoteException -> L4d
-            long r5 = r3.getNtpTimeout()     // Catch: android.os.RemoteException -> L4d
-            int r3 = (int) r5     // Catch: android.os.RemoteException -> L4d
-            boolean r5 = android.text.TextUtils.isEmpty(r4)     // Catch: android.os.RemoteException -> L4d
-            if (r5 != 0) goto L35
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L33
-            r8.<init>(r2)     // Catch: android.os.RemoteException -> L33
-            r8.append(r4)     // Catch: android.os.RemoteException -> L33
-            java.lang.String r8 = r8.toString()     // Catch: android.os.RemoteException -> L33
-            android.util.Log.d(r0, r8)     // Catch: android.os.RemoteException -> L33
-            r8 = r4
-            goto L35
-        L33:
-            r8 = move-exception
-            goto L50
-        L35:
-            if (r3 == 0) goto L62
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L48
-            r10.<init>(r1)     // Catch: android.os.RemoteException -> L48
-            r10.append(r3)     // Catch: android.os.RemoteException -> L48
-            java.lang.String r10 = r10.toString()     // Catch: android.os.RemoteException -> L48
-            android.util.Log.d(r0, r10)     // Catch: android.os.RemoteException -> L48
-            r10 = r3
-            goto L62
-        L48:
-            r10 = move-exception
-            r4 = r8
-            r8 = r10
-            r10 = r3
-            goto L50
-        L4d:
-            r1 = move-exception
-            r4 = r8
-            r8 = r1
-        L50:
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "Remote Exception: "
-            r1.<init>(r2)
-            r1.append(r8)
-            java.lang.String r8 = r1.toString()
-            android.util.Log.d(r0, r8)
-            r8 = r4
-        L62:
-            android.net.Network r11 = r11.getPrivateDnsBypassingCopy()
-            r1 = 0
-            java.net.InetAddress[] r2 = r11.getAllByName(r8)     // Catch: java.net.UnknownHostException -> L7c
-            r3 = r1
-        L6c:
-            int r4 = r2.length     // Catch: java.net.UnknownHostException -> L7c
-            if (r3 >= r4) goto L95
-            r4 = r2[r3]     // Catch: java.net.UnknownHostException -> L7c
-            boolean r4 = r7.requestTime(r4, r9, r10, r11)     // Catch: java.net.UnknownHostException -> L7c
-            if (r4 == 0) goto L79
-            r7 = 1
-            return r7
-        L79:
-            int r3 = r3 + 1
-            goto L6c
-        L7c:
-            r7 = move-exception
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r10 = "Unknown host: "
-            r9.<init>(r10)
-            r9.append(r8)
-            java.lang.String r9 = r9.toString()
-            android.util.Log.w(r0, r9)
-            java.lang.String r7 = r7.toString()
-            android.net.EventLogTags.writeNtpFailure(r8, r7)
-        L95:
-            java.lang.String r7 = "request time failed"
-            android.util.Log.d(r0, r7)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.SntpClient.requestTime(java.lang.String, int, int, android.net.Network):boolean");
+    public boolean requestTime(String str, int i, int i2, Network network) throws UnknownHostException {
+        String ntpServer;
+        RemoteException e;
+        Network privateDnsBypassingCopy;
+        try {
+            IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+            if (service != null && service.shallForceNtpMdmValues()) {
+                ntpServer = service.getNtpServer();
+                int ntpTimeout = (int) service.getNtpTimeout();
+                if (!TextUtils.isEmpty(ntpServer)) {
+                    try {
+                        Log.d(TAG, "host set by MDM: " + ntpServer);
+                        str = ntpServer;
+                        if (ntpTimeout != 0) {
+                            try {
+                                Log.d(TAG, "timeout set by MDM: " + ntpTimeout);
+                                i2 = ntpTimeout;
+                            } catch (RemoteException e2) {
+                                ntpServer = str;
+                                e = e2;
+                                i2 = ntpTimeout;
+                                Log.d(TAG, "Remote Exception: " + e);
+                                str = ntpServer;
+                                privateDnsBypassingCopy = network.getPrivateDnsBypassingCopy();
+                                while (i < r2.length) {
+                                }
+                                Log.d(TAG, "request time failed");
+                                return false;
+                            }
+                        }
+                    } catch (RemoteException e3) {
+                        e = e3;
+                        Log.d(TAG, "Remote Exception: " + e);
+                        str = ntpServer;
+                        privateDnsBypassingCopy = network.getPrivateDnsBypassingCopy();
+                        while (i < r2.length) {
+                        }
+                        Log.d(TAG, "request time failed");
+                        return false;
+                    }
+                } else if (ntpTimeout != 0) {
+                }
+            }
+        } catch (RemoteException e4) {
+            ntpServer = str;
+            e = e4;
+        }
+        privateDnsBypassingCopy = network.getPrivateDnsBypassingCopy();
+        try {
+            for (InetAddress inetAddress : privateDnsBypassingCopy.getAllByName(str)) {
+                if (requestTime(inetAddress, i, i2, privateDnsBypassingCopy)) {
+                    return true;
+                }
+            }
+        } catch (UnknownHostException e5) {
+            Log.w(TAG, "Unknown host: " + str);
+            EventLogTags.writeNtpFailure(str, e5.toString());
+        }
+        Log.d(TAG, "request time failed");
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0151  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0147  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0151  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean requestTime(java.net.InetAddress r28, int r29, int r30, android.net.Network r31) {
-        /*
-            Method dump skipped, instructions count: 344
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.SntpClient.requestTime(java.net.InetAddress, int, int, android.net.Network):boolean");
+    public boolean requestTime(InetAddress inetAddress, int i, int i2, Network network) throws Throwable {
+        int i3;
+        String str;
+        boolean z;
+        DatagramSocket datagramSocket;
+        DatagramSocket datagramSocket2;
+        byte[] bArr;
+        Instant instant;
+        Timestamp64 timestamp64FromInstant;
+        Timestamp64 timestamp64RandomizeSubMillis;
+        long jElapsedRealtime;
+        long j;
+        int andSetThreadStatsTag = TrafficStats.getAndSetThreadStatsTag(TrafficStatsConstants.TAG_SYSTEM_NTP);
+        DatagramSocket datagramSocket3 = null;
+        try {
+            datagramSocket = new DatagramSocket();
+            try {
+                try {
+                    network.bindSocket(datagramSocket);
+                    datagramSocket.setSoTimeout(i2);
+                    bArr = new byte[48];
+                    DatagramPacket datagramPacket = new DatagramPacket(bArr, 48, inetAddress, i);
+                    bArr[0] = 27;
+                    instant = this.mSystemTimeSupplier.get();
+                    timestamp64FromInstant = Timestamp64.fromInstant(instant);
+                    timestamp64RandomizeSubMillis = timestamp64FromInstant.randomizeSubMillis(this.mRandom);
+                    long jElapsedRealtime2 = SystemClock.elapsedRealtime();
+                    z = false;
+                    try {
+                        writeTimeStamp(bArr, 40, timestamp64RandomizeSubMillis);
+                        datagramSocket.send(datagramPacket);
+                        datagramSocket.receive(new DatagramPacket(bArr, 48));
+                        jElapsedRealtime = SystemClock.elapsedRealtime();
+                        str = "request time failed: ";
+                        i3 = andSetThreadStatsTag;
+                        j = jElapsedRealtime - jElapsedRealtime2;
+                    } catch (Exception e) {
+                        e = e;
+                        str = "request time failed: ";
+                        i3 = andSetThreadStatsTag;
+                    }
+                } catch (Throwable th) {
+                    th = th;
+                    i3 = andSetThreadStatsTag;
+                }
+            } catch (Exception e2) {
+                e = e2;
+                str = "request time failed: ";
+                i3 = andSetThreadStatsTag;
+                z = false;
+            }
+        } catch (Exception e3) {
+            e = e3;
+            str = "request time failed: ";
+            i3 = andSetThreadStatsTag;
+            z = false;
+        } catch (Throwable th2) {
+            th = th2;
+            i3 = andSetThreadStatsTag;
+        }
+        try {
+            Instant instantPlusMillis = instant.plusMillis(j);
+            Timestamp64 timestamp64FromInstant2 = Timestamp64.fromInstant(instantPlusMillis);
+            byte b = bArr[0];
+            int i4 = bArr[1] & 255;
+            Timestamp64 timeStamp = readTimeStamp(bArr, 16);
+            Timestamp64 timeStamp2 = readTimeStamp(bArr, 24);
+            Timestamp64 timeStamp3 = readTimeStamp(bArr, 32);
+            Timestamp64 timeStamp4 = readTimeStamp(bArr, 40);
+            checkValidServerReply((byte) ((b >> 6) & 3), (byte) (b & 7), i4, timeStamp4, timeStamp, timestamp64RandomizeSubMillis, timeStamp2);
+            long millis = j - Duration64.between(timeStamp3, timeStamp4).toDuration().toMillis();
+            Duration durationCalculateClockOffset = calculateClockOffset(timestamp64FromInstant, timeStamp3, timeStamp4, timestamp64FromInstant2);
+            datagramSocket2 = datagramSocket;
+            try {
+                long millis2 = durationCalculateClockOffset.toMillis();
+                EventLogTags.writeNtpSuccess(inetAddress.toString(), millis, millis2);
+                Log.d(TAG, "round trip: " + millis + "ms, clock offset: " + millis2 + "ms");
+                this.mClockOffset = millis2;
+                this.mNtpTime = instantPlusMillis.plus((TemporalAmount) durationCalculateClockOffset).toEpochMilli();
+                this.mNtpTimeReference = jElapsedRealtime;
+                this.mRoundTripTime = millis;
+                this.mServerSocketAddress = new InetSocketAddress(inetAddress, i);
+                datagramSocket2.close();
+                TrafficStats.setThreadStatsTag(i3);
+                return true;
+            } catch (Exception e4) {
+                e = e4;
+                datagramSocket3 = datagramSocket2;
+                try {
+                    EventLogTags.writeNtpFailure(inetAddress.toString(), e.toString());
+                    Log.d(TAG, str + e);
+                    if (datagramSocket3 != null) {
+                        datagramSocket3.close();
+                    }
+                    TrafficStats.setThreadStatsTag(i3);
+                    return z;
+                } catch (Throwable th3) {
+                    th = th3;
+                    if (datagramSocket3 != null) {
+                        datagramSocket3.close();
+                    }
+                    TrafficStats.setThreadStatsTag(i3);
+                    throw th;
+                }
+            } catch (Throwable th4) {
+                th = th4;
+                datagramSocket3 = datagramSocket2;
+                if (datagramSocket3 != null) {
+                }
+                TrafficStats.setThreadStatsTag(i3);
+                throw th;
+            }
+        } catch (Exception e5) {
+            e = e5;
+            datagramSocket2 = datagramSocket;
+            datagramSocket3 = datagramSocket2;
+            EventLogTags.writeNtpFailure(inetAddress.toString(), e.toString());
+            Log.d(TAG, str + e);
+            if (datagramSocket3 != null) {
+            }
+            TrafficStats.setThreadStatsTag(i3);
+            return z;
+        } catch (Throwable th5) {
+            th = th5;
+            datagramSocket2 = datagramSocket;
+            datagramSocket3 = datagramSocket2;
+            if (datagramSocket3 != null) {
+            }
+            TrafficStats.setThreadStatsTag(i3);
+            throw th;
+        }
     }
 
     public static Duration calculateClockOffset(Timestamp64 timestamp64, Timestamp64 timestamp642, Timestamp64 timestamp643, Timestamp64 timestamp644) {

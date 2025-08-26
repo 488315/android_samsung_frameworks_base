@@ -115,14 +115,14 @@ public class SemGoodCatchManager {
         this.mContext = context;
         this.mModule = str;
         this.mListener = onStateChangeListener;
-        IGoodCatchManager asInterface = IGoodCatchManager.Stub.asInterface(((SemUnionManager) context.getSystemService(Context.SEP_UNION_SERVICE)).getSemSystemService(UnionConstants.SERVICE_GOOD_CATCH));
-        mService = asInterface;
-        if (asInterface == null) {
+        IGoodCatchManager iGoodCatchManagerAsInterface = IGoodCatchManager.Stub.asInterface(((SemUnionManager) context.getSystemService(Context.SEP_UNION_SERVICE)).getSemSystemService(UnionConstants.SERVICE_GOOD_CATCH));
+        mService = iGoodCatchManagerAsInterface;
+        if (iGoodCatchManagerAsInterface == null) {
             android.util.Log.w(TAG, "Failed to SemGoodCatchManager; no service.");
             return;
         }
         try {
-            asInterface.registerListener(this.mModule, strArr, stub, binder);
+            iGoodCatchManagerAsInterface.registerListener(this.mModule, strArr, stub, binder);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -130,28 +130,28 @@ public class SemGoodCatchManager {
     }
 
     public void update(String str, String str2, int i, String str3, String str4) {
-        String l = Long.toString(System.currentTimeMillis());
+        String string = Long.toString(System.currentTimeMillis());
         IGoodCatchManager iGoodCatchManager = mService;
         if (iGoodCatchManager == null) {
             android.util.Log.w(TAG, "Failed to update; no service.");
             return;
         }
         try {
-            iGoodCatchManager.update(new String[]{this.mModule, str, str2, l, Integer.toString(i), str3, str4});
+            iGoodCatchManager.update(new String[]{this.mModule, str, str2, string, Integer.toString(i), str3, str4});
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
     public void update(String str, String str2, String str3, String str4, String str5) {
-        String l = Long.toString(System.currentTimeMillis());
+        String string = Long.toString(System.currentTimeMillis());
         IGoodCatchManager iGoodCatchManager = mService;
         if (iGoodCatchManager == null) {
             android.util.Log.w(TAG, "Failed to update; no service.");
             return;
         }
         try {
-            iGoodCatchManager.update(new String[]{this.mModule, str, str2, l, str3, str4, str5});
+            iGoodCatchManager.update(new String[]{this.mModule, str, str2, string, str3, str4, str5});
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -159,18 +159,18 @@ public class SemGoodCatchManager {
 
     public List<String> getSelectedSettingKey() {
         IGoodCatchManager iGoodCatchManager = mService;
-        List<String> list = null;
+        List<String> selectedSettingKey = null;
         if (iGoodCatchManager == null) {
             android.util.Log.w(TAG, "Failed to update; no service.");
             return null;
         }
         try {
-            list = iGoodCatchManager.getSelectedSettingKey();
-            android.util.Log.d(TAG, "getSelectedSettingKey() : db_keys=" + list);
-            return list;
+            selectedSettingKey = iGoodCatchManager.getSelectedSettingKey();
+            android.util.Log.d(TAG, "getSelectedSettingKey() : db_keys=" + selectedSettingKey);
+            return selectedSettingKey;
         } catch (RemoteException e) {
             e.printStackTrace();
-            return list;
+            return selectedSettingKey;
         }
     }
 }

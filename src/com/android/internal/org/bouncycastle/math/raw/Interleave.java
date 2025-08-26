@@ -28,9 +28,9 @@ public class Interleave {
     }
 
     public static void expand64To128(long j, long[] jArr, int i) {
-        long bitPermuteStep = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(j, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
-        jArr[i] = bitPermuteStep & M64;
-        jArr[i + 1] = (bitPermuteStep >>> 1) & M64;
+        long jBitPermuteStep = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(j, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
+        jArr[i] = jBitPermuteStep & M64;
+        jArr[i + 1] = (jBitPermuteStep >>> 1) & M64;
     }
 
     public static void expand64To128(long[] jArr, int i, int i2, long[] jArr2, int i3) {
@@ -41,9 +41,9 @@ public class Interleave {
     }
 
     public static void expand64To128Rev(long j, long[] jArr, int i) {
-        long bitPermuteStep = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(j, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
-        jArr[i] = bitPermuteStep & M64R;
-        jArr[i + 1] = (bitPermuteStep << 1) & M64R;
+        long jBitPermuteStep = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(j, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
+        jArr[i] = jBitPermuteStep & M64R;
+        jArr[i + 1] = (jBitPermuteStep << 1) & M64R;
     }
 
     public static int shuffle(int i) {

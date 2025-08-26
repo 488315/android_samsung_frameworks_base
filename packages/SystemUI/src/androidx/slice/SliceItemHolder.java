@@ -10,7 +10,6 @@ import androidx.slice.compat.SliceProviderCompat;
 import androidx.versionedparcelable.VersionedParcelable;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceItemHolder implements VersionedParcelable {
     public static final SliceProviderCompat.AnonymousClass2 sHandler = null;
@@ -23,7 +22,6 @@ public class SliceItemHolder implements VersionedParcelable {
     public String mStr;
     public VersionedParcelable mVersionedParcelable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceItemPool {
         public final ArrayList mCached = new ArrayList();
     }
@@ -39,7 +37,7 @@ public class SliceItemHolder implements VersionedParcelable {
     }
 
     public SliceItemHolder(String str, Object obj, boolean z) {
-        String str2;
+        String html;
         this.mVersionedParcelable = null;
         this.mParcelable = null;
         this.mStr = null;
@@ -69,11 +67,11 @@ public class SliceItemHolder implements VersionedParcelable {
                 break;
             case "text":
                 if (obj instanceof Spanned) {
-                    str2 = Html.toHtml((Spanned) obj, 0);
+                    html = Html.toHtml((Spanned) obj, 0);
                 } else {
-                    str2 = (String) obj;
+                    html = (String) obj;
                 }
-                this.mStr = str2;
+                this.mStr = html;
                 break;
             case "image":
             case "slice":

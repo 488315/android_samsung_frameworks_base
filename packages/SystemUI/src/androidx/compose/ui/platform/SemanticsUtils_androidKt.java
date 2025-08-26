@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SemanticsUtils_androidKt {
     public static final Rect DefaultFakeNodeBounds = new Rect(0.0f, 0.0f, 10.0f, 10.0f);
@@ -62,13 +61,13 @@ public abstract class SemanticsUtils_androidKt {
         Rect rect;
         LayoutNode layoutNode;
         Object outerMergingSemantics;
-        boolean isPlaced = semanticsNode2.layoutNode.isPlaced();
+        boolean zIsPlaced = semanticsNode2.layoutNode.isPlaced();
         LayoutNode layoutNode2 = semanticsNode2.layoutNode;
-        boolean z = (isPlaced && layoutNode2.isAttached()) ? false : true;
-        boolean isEmpty = region.isEmpty();
+        boolean z = (zIsPlaced && layoutNode2.isAttached()) ? false : true;
+        boolean zIsEmpty = region.isEmpty();
         int i = semanticsNode.id;
         int i2 = semanticsNode2.id;
-        if (!isEmpty || i2 == i) {
+        if (!zIsEmpty || i2 == i) {
             if (!z || semanticsNode2.isFake) {
                 SemanticsConfiguration semanticsConfiguration = semanticsNode2.unmergedConfig;
                 boolean z2 = semanticsConfiguration.isMergingSemanticsOfDescendants;
@@ -83,34 +82,34 @@ public abstract class SemanticsUtils_androidKt {
                     Rect.Companion.getClass();
                     rect = Rect.Zero;
                 } else if (z3) {
-                    NodeCoordinator m632requireCoordinator64DMado = DelegatableNodeKt.m632requireCoordinator64DMado(node, 8);
-                    if (m632requireCoordinator64DMado.getTail().isAttached) {
-                        LayoutCoordinates findRootCoordinates = LayoutCoordinatesKt.findRootCoordinates(m632requireCoordinator64DMado);
-                        MutableRect mutableRect = m632requireCoordinator64DMado._rectCache;
+                    NodeCoordinator nodeCoordinatorM634requireCoordinator64DMado = DelegatableNodeKt.m634requireCoordinator64DMado(node, 8);
+                    if (nodeCoordinatorM634requireCoordinator64DMado.getTail().isAttached) {
+                        LayoutCoordinates layoutCoordinatesFindRootCoordinates = LayoutCoordinatesKt.findRootCoordinates(nodeCoordinatorM634requireCoordinator64DMado);
+                        MutableRect mutableRect = nodeCoordinatorM634requireCoordinator64DMado._rectCache;
                         if (mutableRect == null) {
                             mutableRect = new MutableRect(0.0f, 0.0f, 0.0f, 0.0f);
-                            m632requireCoordinator64DMado._rectCache = mutableRect;
+                            nodeCoordinatorM634requireCoordinator64DMado._rectCache = mutableRect;
                         }
-                        long m665calculateMinimumTouchTargetPaddingE7KxVPU = m632requireCoordinator64DMado.m665calculateMinimumTouchTargetPaddingE7KxVPU(m632requireCoordinator64DMado.m668getMinimumTouchTargetSizeNHjbRc());
-                        int i3 = (int) (m665calculateMinimumTouchTargetPaddingE7KxVPU >> 32);
+                        long jM667calculateMinimumTouchTargetPaddingE7KxVPU = nodeCoordinatorM634requireCoordinator64DMado.m667calculateMinimumTouchTargetPaddingE7KxVPU(nodeCoordinatorM634requireCoordinator64DMado.m670getMinimumTouchTargetSizeNHjbRc());
+                        int i3 = (int) (jM667calculateMinimumTouchTargetPaddingE7KxVPU >> 32);
                         mutableRect.left = -Float.intBitsToFloat(i3);
-                        int i4 = (int) (m665calculateMinimumTouchTargetPaddingE7KxVPU & 4294967295L);
+                        int i4 = (int) (jM667calculateMinimumTouchTargetPaddingE7KxVPU & 4294967295L);
                         mutableRect.top = -Float.intBitsToFloat(i4);
-                        mutableRect.right = Float.intBitsToFloat(i3) + m632requireCoordinator64DMado.getMeasuredWidth();
-                        mutableRect.bottom = Float.intBitsToFloat(i4) + m632requireCoordinator64DMado.getMeasuredHeight();
+                        mutableRect.right = Float.intBitsToFloat(i3) + nodeCoordinatorM634requireCoordinator64DMado.getMeasuredWidth();
+                        mutableRect.bottom = Float.intBitsToFloat(i4) + nodeCoordinatorM634requireCoordinator64DMado.getMeasuredHeight();
                         while (true) {
-                            if (m632requireCoordinator64DMado == findRootCoordinates) {
+                            if (nodeCoordinatorM634requireCoordinator64DMado == layoutCoordinatesFindRootCoordinates) {
                                 rect = new Rect(mutableRect.left, mutableRect.top, mutableRect.right, mutableRect.bottom);
                                 break;
                             }
-                            m632requireCoordinator64DMado.rectInParent$ui_release(mutableRect, false, true);
+                            nodeCoordinatorM634requireCoordinator64DMado.rectInParent$ui_release(mutableRect, false, true);
                             if (mutableRect.isEmpty()) {
                                 Rect.Companion.getClass();
                                 rect = Rect.Zero;
                                 break;
                             } else {
-                                m632requireCoordinator64DMado = m632requireCoordinator64DMado.wrappedBy;
-                                m632requireCoordinator64DMado.getClass();
+                                nodeCoordinatorM634requireCoordinator64DMado = nodeCoordinatorM634requireCoordinator64DMado.wrappedBy;
+                                nodeCoordinatorM634requireCoordinator64DMado.getClass();
                             }
                         }
                     } else {
@@ -118,14 +117,14 @@ public abstract class SemanticsUtils_androidKt {
                         rect = Rect.Zero;
                     }
                 } else {
-                    NodeCoordinator m632requireCoordinator64DMado2 = DelegatableNodeKt.m632requireCoordinator64DMado(node, 8);
-                    rect = LayoutCoordinatesKt.findRootCoordinates(m632requireCoordinator64DMado2).localBoundingBoxOf(m632requireCoordinator64DMado2, true);
+                    NodeCoordinator nodeCoordinatorM634requireCoordinator64DMado2 = DelegatableNodeKt.m634requireCoordinator64DMado(node, 8);
+                    rect = LayoutCoordinatesKt.findRootCoordinates(nodeCoordinatorM634requireCoordinator64DMado2).localBoundingBoxOf(nodeCoordinatorM634requireCoordinator64DMado2, true);
                 }
-                int round = Math.round(rect.left);
-                int round2 = Math.round(rect.top);
-                int round3 = Math.round(rect.right);
-                int round4 = Math.round(rect.bottom);
-                region2.set(round, round2, round3, round4);
+                int iRound = Math.round(rect.left);
+                int iRound2 = Math.round(rect.top);
+                int iRound3 = Math.round(rect.right);
+                int iRound4 = Math.round(rect.bottom);
+                region2.set(iRound, iRound2, iRound3, iRound4);
                 if (i2 == i) {
                     i2 = -1;
                 }
@@ -153,7 +152,7 @@ public abstract class SemanticsUtils_androidKt {
                     }
                 }
                 if (isImportantForAccessibility(semanticsNode2)) {
-                    region.op(round, round2, round3, round4, Region.Op.DIFFERENCE);
+                    region.op(iRound, iRound2, iRound3, iRound4, Region.Op.DIFFERENCE);
                 }
             }
         }
@@ -164,15 +163,15 @@ public abstract class SemanticsUtils_androidKt {
         ArrayList arrayList = new ArrayList();
         SemanticsActions.INSTANCE.getClass();
         AccessibilityAction accessibilityAction = (AccessibilityAction) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsActions.GetTextLayoutResult);
-        if (accessibilityAction == null || (function1 = (Function1) accessibilityAction.action) == null || !((Boolean) function1.mo779invoke(arrayList)).booleanValue()) {
+        if (accessibilityAction == null || (function1 = (Function1) accessibilityAction.action) == null || !((Boolean) function1.mo781invoke(arrayList)).booleanValue()) {
             return null;
         }
         return (TextLayoutResult) arrayList.get(0);
     }
 
     public static final boolean isHidden(SemanticsNode semanticsNode) {
-        NodeCoordinator findCoordinatorToGetBounds$ui_release = semanticsNode.findCoordinatorToGetBounds$ui_release();
-        if (findCoordinatorToGetBounds$ui_release != null ? findCoordinatorToGetBounds$ui_release.isTransparent() : false) {
+        NodeCoordinator nodeCoordinatorFindCoordinatorToGetBounds$ui_release = semanticsNode.findCoordinatorToGetBounds$ui_release();
+        if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release != null ? nodeCoordinatorFindCoordinatorToGetBounds$ui_release.isTransparent() : false) {
             return true;
         }
         SemanticsProperties semanticsProperties = SemanticsProperties.INSTANCE;
@@ -186,6 +185,10 @@ public abstract class SemanticsUtils_androidKt {
         return semanticsConfiguration.props.containsKey(SemanticsProperties.InvisibleToUser);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0054  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final boolean isImportantForAccessibility(SemanticsNode semanticsNode) {
         if (!isHidden(semanticsNode)) {
             SemanticsConfiguration semanticsConfiguration = semanticsNode.unmergedConfig;
@@ -217,11 +220,11 @@ public abstract class SemanticsUtils_androidKt {
                         if (i2 != 8) {
                             break;
                         }
+                        if (i == length) {
+                            break;
+                        }
+                        i++;
                     }
-                    if (i == length) {
-                        break;
-                    }
-                    i++;
                 }
             }
         }
@@ -229,19 +232,19 @@ public abstract class SemanticsUtils_androidKt {
     }
 
     public static final AndroidViewHolder semanticsIdToView(AndroidViewsHandler androidViewsHandler, int i) {
-        Object obj;
+        Object next;
         Iterator it = androidViewsHandler.layoutNodeToHolder.entrySet().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((LayoutNode) ((Map.Entry) obj).getKey()).semanticsId == i) {
+            next = it.next();
+            if (((LayoutNode) ((Map.Entry) next).getKey()).semanticsId == i) {
                 break;
             }
         }
-        Map.Entry entry = (Map.Entry) obj;
+        Map.Entry entry = (Map.Entry) next;
         if (entry != null) {
             return (AndroidViewHolder) entry.getValue();
         }
@@ -249,7 +252,7 @@ public abstract class SemanticsUtils_androidKt {
     }
 
     /* renamed from: toLegacyClassName-V4PA4sw, reason: not valid java name */
-    public static final String m710toLegacyClassNameV4PA4sw(int i) {
+    public static final String m712toLegacyClassNameV4PA4sw(int i) {
         Role.Companion companion = Role.Companion;
         companion.getClass();
         if (i == 0) {

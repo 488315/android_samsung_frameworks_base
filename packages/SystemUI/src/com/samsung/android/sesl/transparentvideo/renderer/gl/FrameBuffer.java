@@ -6,7 +6,6 @@ import com.samsung.android.sesl.transparentvideo.renderer.gl.Texture;
 import java.nio.IntBuffer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FrameBuffer implements IGLObject {
     public Texture colorAttachment;
@@ -15,7 +14,6 @@ public final class FrameBuffer implements IGLObject {
     public boolean sizeUpdated;
     public int width;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,9 +36,9 @@ public final class FrameBuffer implements IGLObject {
 
     @Override // com.samsung.android.sesl.transparentvideo.renderer.gl.IGLObject
     public final void create() {
-        IntBuffer allocate = IntBuffer.allocate(1);
-        GLES30.glGenFramebuffers(1, allocate);
-        this.frameBufferId = allocate.get(0);
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        GLES30.glGenFramebuffers(1, intBufferAllocate);
+        this.frameBufferId = intBufferAllocate.get(0);
         updateColorAttachmentIfNeeded();
     }
 
@@ -51,10 +49,10 @@ public final class FrameBuffer implements IGLObject {
             texture.dispose();
         }
         this.colorAttachment = null;
-        IntBuffer allocate = IntBuffer.allocate(1);
-        allocate.put(this.frameBufferId);
-        allocate.rewind();
-        GLES30.glDeleteFramebuffers(1, allocate);
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        intBufferAllocate.put(this.frameBufferId);
+        intBufferAllocate.rewind();
+        GLES30.glDeleteFramebuffers(1, intBufferAllocate);
     }
 
     public final void updateColorAttachmentIfNeeded() {
@@ -73,9 +71,9 @@ public final class FrameBuffer implements IGLObject {
             texture2.bind();
             GLES30.glFramebufferTexture2D(36160, 36064, 3553, texture2.id, 0);
             this.colorAttachment = texture2;
-            int glCheckFramebufferStatus = GLES30.glCheckFramebufferStatus(36160);
-            if (glCheckFramebufferStatus != 36053) {
-                ClockEventController$$ExternalSyntheticOutline0.m(glCheckFramebufferStatus, "Framebuffer is not complete error: ", "FrameBuffer");
+            int iGlCheckFramebufferStatus = GLES30.glCheckFramebufferStatus(36160);
+            if (iGlCheckFramebufferStatus != 36053) {
+                ClockEventController$$ExternalSyntheticOutline0.m(iGlCheckFramebufferStatus, "Framebuffer is not complete error: ", "FrameBuffer");
             } else {
                 this.sizeUpdated = false;
             }

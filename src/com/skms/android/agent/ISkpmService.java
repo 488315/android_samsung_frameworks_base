@@ -85,9 +85,9 @@ public interface ISkpmService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISkpmService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISkpmService)) {
-                return (ISkpmService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISkpmService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISkpmService)) {
+                return (ISkpmService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,59 +127,59 @@ public interface ISkpmService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    byte readByte = parcel.readByte();
-                    byte readByte2 = parcel.readByte();
-                    String readString = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte readByte3 = parcel.readByte();
+                    byte b = parcel.readByte();
+                    byte b2 = parcel.readByte();
+                    String string = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte b3 = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    int SkpmServiceKeyInjection = SkpmServiceKeyInjection(readByte, readByte2, readString, createByteArray, readByte3);
+                    int iSkpmServiceKeyInjection = SkpmServiceKeyInjection(b, b2, string, bArrCreateByteArray, b3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmServiceKeyInjection);
+                    parcel2.writeInt(iSkpmServiceKeyInjection);
                     return true;
                 case 2:
-                    byte readByte4 = parcel.readByte();
-                    byte readByte5 = parcel.readByte();
-                    String readString2 = parcel.readString();
+                    byte b4 = parcel.readByte();
+                    byte b5 = parcel.readByte();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int SkpmServiceInjectedKeyVerification = SkpmServiceInjectedKeyVerification(readByte4, readByte5, readString2);
+                    int iSkpmServiceInjectedKeyVerification = SkpmServiceInjectedKeyVerification(b4, b5, string2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmServiceInjectedKeyVerification);
+                    parcel2.writeInt(iSkpmServiceInjectedKeyVerification);
                     return true;
                 case 3:
-                    byte readByte6 = parcel.readByte();
-                    byte readByte7 = parcel.readByte();
-                    String readString3 = parcel.readString();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    byte b6 = parcel.readByte();
+                    byte b7 = parcel.readByte();
+                    String string3 = parcel.readString();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int SkpmReadInjectedKeyUID = SkpmReadInjectedKeyUID(readByte6, readByte7, readString3, createByteArray2);
+                    int iSkpmReadInjectedKeyUID = SkpmReadInjectedKeyUID(b6, b7, string3, bArrCreateByteArray2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmReadInjectedKeyUID);
-                    parcel2.writeByteArray(createByteArray2);
+                    parcel2.writeInt(iSkpmReadInjectedKeyUID);
+                    parcel2.writeByteArray(bArrCreateByteArray2);
                     return true;
                 case 4:
-                    byte readByte8 = parcel.readByte();
-                    String readString4 = parcel.readString();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    byte readByte9 = parcel.readByte();
+                    byte b8 = parcel.readByte();
+                    String string4 = parcel.readString();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    byte b9 = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    int SkpmServiceCreateGetKeySession = SkpmServiceCreateGetKeySession(readByte8, readString4, createByteArray3, readByte9);
+                    int iSkpmServiceCreateGetKeySession = SkpmServiceCreateGetKeySession(b8, string4, bArrCreateByteArray3, b9);
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmServiceCreateGetKeySession);
-                    parcel2.writeByteArray(createByteArray3);
+                    parcel2.writeInt(iSkpmServiceCreateGetKeySession);
+                    parcel2.writeByteArray(bArrCreateByteArray3);
                     return true;
                 case 5:
-                    int SkpmServiceReleaseGetKeySession = SkpmServiceReleaseGetKeySession();
+                    int iSkpmServiceReleaseGetKeySession = SkpmServiceReleaseGetKeySession();
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmServiceReleaseGetKeySession);
+                    parcel2.writeInt(iSkpmServiceReleaseGetKeySession);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int SkpmChangeOtaServer = SkpmChangeOtaServer(readString5, readString6);
+                    int iSkpmChangeOtaServer = SkpmChangeOtaServer(string5, string6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(SkpmChangeOtaServer);
+                    parcel2.writeInt(iSkpmChangeOtaServer);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -204,113 +204,113 @@ public interface ISkpmService extends IInterface {
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmServiceKeyInjection(byte b, byte b2, String str, byte[] bArr, byte b3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeByte(b2);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByte(b3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeByte(b2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByte(b3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmServiceInjectedKeyVerification(byte b, byte b2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeByte(b2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeByte(b2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmReadInjectedKeyUID(byte b, byte b2, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeByte(b2);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeByte(b2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmServiceCreateGetKeySession(byte b, String str, byte[] bArr, byte b2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByte(b2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByte(b2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmServiceReleaseGetKeySession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.skms.android.agent.ISkpmService
             public int SkpmChangeOtaServer(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISkpmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

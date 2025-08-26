@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SpacerKt {
     public static final void Spacer(Composer composer, Modifier modifier) {
@@ -23,9 +22,9 @@ public abstract class SpacerKt {
         }
         SpacerMeasurePolicy spacerMeasurePolicy = SpacerMeasurePolicy.INSTANCE;
         int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composer);
-        Modifier materializeModifier = ComposedModifierKt.materializeModifier(composer, modifier);
+        Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composer, modifier);
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+        PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
         ComposeUiNode.Companion.getClass();
         Function0 function0 = ComposeUiNode.Companion.Constructor;
         if (composerImpl.applier == null) {
@@ -38,9 +37,9 @@ public abstract class SpacerKt {
         } else {
             composerImpl.useNode();
         }
-        Updater.m336setimpl(composer, spacerMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-        Updater.m336setimpl(composer, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
-        Updater.m336setimpl(composer, materializeModifier, ComposeUiNode.Companion.SetModifier);
+        Updater.m337setimpl(composer, spacerMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+        Updater.m337setimpl(composer, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+        Updater.m337setimpl(composer, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
         Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
         if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
             AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);

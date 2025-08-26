@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ComplicationLayoutEngine implements Complication.VisibilityController {
     public final Provider mComplicationMarginsProvider;
@@ -32,12 +31,10 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
     public final HashMap mEntries = new HashMap();
     public final HashMap mPositions = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DirectionGroup implements ViewEntry.Parent {
         public final Parent mParent;
         public final ArrayList mViews = new ArrayList();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Parent {
         }
 
@@ -46,7 +43,6 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Margins {
         public final int bottom;
         public final int end;
@@ -69,15 +65,14 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PositionGroup implements DirectionGroup.Parent {
         public final int mDefaultDirectionalSpacing;
         public final HashMap mDirectionGroups = new HashMap();
         public final HashMap mDirectionalMargins;
 
-        public PositionGroup(int i, HashMap<Integer, Margins> hashMap) {
+        public PositionGroup(int i, HashMap<Integer, Margins> map) {
             this.mDefaultDirectionalSpacing = i;
-            this.mDirectionalMargins = hashMap;
+            this.mDirectionalMargins = map;
         }
 
         public final void onEntriesChanged() {
@@ -112,14 +107,14 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj2) {
                             ComplicationLayoutEngine.Margins margins;
-                            ComplicationLayoutEngine.ViewEntry viewEntry4 = ComplicationLayoutEngine.ViewEntry.this;
+                            ComplicationLayoutEngine.ViewEntry viewEntry4 = viewEntry3;
                             boolean z3 = z2;
                             int i3 = i2;
                             Constraints.LayoutParams layoutParams2 = layoutParams;
                             View view3 = view2;
                             boolean z4 = z;
-                            int intValue = ((Integer) obj2).intValue();
-                            if (intValue == 1) {
+                            int iIntValue = ((Integer) obj2).intValue();
+                            if (iIntValue == 1) {
                                 if (z3 || i3 != 2) {
                                     layoutParams2.topToTop = 0;
                                 } else {
@@ -128,7 +123,7 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
                                 if (z4 && (i3 == 8 || i3 == 4)) {
                                     layoutParams2.endToStart = R.id.complication_top_guide;
                                 }
-                            } else if (intValue == 2) {
+                            } else if (iIntValue == 2) {
                                 if (z3 || i3 != 1) {
                                     layoutParams2.bottomToBottom = 0;
                                 } else {
@@ -137,7 +132,7 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
                                 if (z4 && (i3 == 8 || i3 == 4)) {
                                     layoutParams2.topToBottom = R.id.complication_bottom_guide;
                                 }
-                            } else if (intValue == 4) {
+                            } else if (iIntValue == 4) {
                                 if (z3 || i3 != 8) {
                                     layoutParams2.startToStart = 0;
                                 } else {
@@ -146,7 +141,7 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
                                 if (z4 && (i3 == 2 || i3 == 1)) {
                                     layoutParams2.endToStart = R.id.complication_start_guide;
                                 }
-                            } else if (intValue == 8) {
+                            } else if (iIntValue == 8) {
                                 if (z3 || i3 != 4) {
                                     layoutParams2.endToEnd = 0;
                                 } else {
@@ -187,8 +182,8 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
                             } else {
                                 margins = (ComplicationLayoutEngine.Margins) positionGroup.mDirectionalMargins.get(Integer.valueOf(viewEntry4.mLayoutParams.mDirection));
                             }
-                            ComplicationLayoutEngine.Margins combine = ComplicationLayoutEngine.Margins.combine(margins, margins2);
-                            layoutParams2.setMarginsRelative(combine.start, combine.top, combine.end, combine.bottom);
+                            ComplicationLayoutEngine.Margins marginsCombine = ComplicationLayoutEngine.Margins.combine(margins, margins2);
+                            layoutParams2.setMarginsRelative(marginsCombine.start, marginsCombine.top, marginsCombine.end, marginsCombine.bottom);
                         }
                     });
                     int i3 = viewEntry3.mLayoutParams.mConstraint;
@@ -206,7 +201,6 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewEntry implements Comparable {
         public final int mCategory;
         public final ComplicationLayoutParams mLayoutParams;
@@ -214,7 +208,6 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
         public final TouchInsetManager.TouchInsetSession mTouchInsetSession;
         public final View mView;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Builder {
             public final int mCategory;
             public final ComplicationLayoutParams mLayoutParams;
@@ -230,7 +223,6 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Parent {
         }
 
@@ -261,8 +253,8 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
     }
 
     public ComplicationLayoutEngine(ConstraintLayout constraintLayout, int i, Provider provider, TouchInsetManager.TouchInsetSession touchInsetSession, int i2, int i3) {
-        HashMap hashMap = new HashMap();
-        this.mPositionDirectionMarginMapping = hashMap;
+        HashMap map = new HashMap();
+        this.mPositionDirectionMarginMapping = map;
         this.mScreenBounds = new Rect();
         this.mLayout = constraintLayout;
         this.mDefaultDirectionalSpacing = i;
@@ -270,15 +262,15 @@ public class ComplicationLayoutEngine implements Complication.VisibilityControll
         this.mFadeInDuration = i2;
         this.mFadeOutDuration = i3;
         this.mComplicationMarginsProvider = provider;
-        updatePositionDirectionalMarginsMapping(hashMap, (Margins) provider.get());
+        updatePositionDirectionalMarginsMapping(map, (Margins) provider.get());
     }
 
     public static void addToMapping(Map map, int i, int i2, Margins margins) {
-        HashMap hashMap = (HashMap) map;
-        if (!hashMap.containsKey(Integer.valueOf(i))) {
-            hashMap.put(Integer.valueOf(i), new HashMap());
+        HashMap map2 = (HashMap) map;
+        if (!map2.containsKey(Integer.valueOf(i))) {
+            map2.put(Integer.valueOf(i), new HashMap());
         }
-        ((HashMap) hashMap.get(Integer.valueOf(i))).put(Integer.valueOf(i2), margins);
+        ((HashMap) map2.get(Integer.valueOf(i))).put(Integer.valueOf(i2), margins);
     }
 
     public static void updatePositionDirectionalMarginsMapping(Map map, Margins margins) {

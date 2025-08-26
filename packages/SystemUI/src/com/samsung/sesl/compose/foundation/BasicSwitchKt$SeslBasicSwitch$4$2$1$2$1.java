@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BasicSwitchKt$SeslBasicSwitch$4$2$1$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Function1> $animateFraction$delegate;
@@ -56,7 +55,7 @@ final class BasicSwitchKt$SeslBasicSwitch$4$2$1$2$1 extends SuspendLambda implem
             ResultKt.throwOnFailure(obj);
         }
         if (((Boolean) this.$needUpdateFraction$delegate.getValue()).booleanValue()) {
-            ((Function1) this.$animateFraction$delegate.getValue()).mo779invoke(new Float(this.$checked ? 1.0f : 0.0f));
+            ((Function1) this.$animateFraction$delegate.getValue()).mo781invoke(new Float(this.$checked ? 1.0f : 0.0f));
         }
         return Unit.INSTANCE;
     }

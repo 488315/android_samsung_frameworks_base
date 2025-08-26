@@ -1,15 +1,18 @@
 package com.android.systemui.dump;
 
+import com.android.systemui.dump.DumpHandler;
 import com.android.systemui.dump.DumpsysEntry;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DumpHandler$findAllMatchesInCollection$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ Collection<DumpsysEntry.DumpableEntry> $dumpables;
@@ -40,137 +43,80 @@ final class DumpHandler$findAllMatchesInCollection$1 extends RestrictedSuspendLa
         return ((DumpHandler$findAllMatchesInCollection$1) create((SequenceScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00d5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x00d5, code lost:
     
-        if (r1.yieldAll(r4, r11) == r0) goto L39;
+        if (r1.yieldAll(r4, r11) != r0) goto L40;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x009e, code lost:
-    
-        if (r1.yieldAll(r5, r11) == r0) goto L39;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00b6  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r12) {
-        /*
-            r11 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r11.label
-            r2 = 3
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L2d
-            if (r1 == r4) goto L25
-            if (r1 == r3) goto L1c
-            if (r1 != r2) goto L14
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto Ld8
-        L14:
-            java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-            java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-            r11.<init>(r12)
-            throw r11
-        L1c:
-            java.lang.Object r1 = r11.L$0
-            kotlin.sequences.SequenceScope r1 = (kotlin.sequences.SequenceScope) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto La1
-        L25:
-            java.lang.Object r1 = r11.L$0
-            kotlin.sequences.SequenceScope r1 = (kotlin.sequences.SequenceScope) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L6b
-        L2d:
-            kotlin.ResultKt.throwOnFailure(r12)
-            java.lang.Object r12 = r11.L$0
-            kotlin.sequences.SequenceScope r12 = (kotlin.sequences.SequenceScope) r12
-            java.util.Collection<com.android.systemui.dump.DumpsysEntry$DumpableEntry> r1 = r11.$dumpables
-            java.lang.Iterable r1 = (java.lang.Iterable) r1
-            java.util.List<java.lang.String> r5 = r11.$targets
-            java.util.ArrayList r6 = new java.util.ArrayList
-            r6.<init>()
-            java.util.Iterator r1 = r1.iterator()
-        L43:
-            boolean r7 = r1.hasNext()
-            if (r7 == 0) goto L5f
-            java.lang.Object r7 = r1.next()
-            r8 = r7
-            com.android.systemui.dump.DumpsysEntry$DumpableEntry r8 = (com.android.systemui.dump.DumpsysEntry.DumpableEntry) r8
-            com.android.systemui.dump.DumpHandler$Companion r9 = com.android.systemui.dump.DumpHandler.Companion
-            r10 = r5
-            java.util.Collection r10 = (java.util.Collection) r10
-            boolean r8 = com.android.systemui.dump.DumpHandler.Companion.access$matchesAny(r9, r8, r10)
-            if (r8 == 0) goto L43
-            r6.add(r7)
-            goto L43
-        L5f:
-            r11.L$0 = r12
-            r11.label = r4
-            java.lang.Object r1 = r12.yieldAll(r6, r11)
-            if (r1 != r0) goto L6a
-            goto Ld7
-        L6a:
-            r1 = r12
-        L6b:
-            java.util.Collection<com.android.systemui.dump.DumpsysEntry$LogBufferEntry> r12 = r11.$logBuffers
-            java.lang.Iterable r12 = (java.lang.Iterable) r12
-            java.util.List<java.lang.String> r4 = r11.$targets
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.util.Iterator r12 = r12.iterator()
-        L7a:
-            boolean r6 = r12.hasNext()
-            if (r6 == 0) goto L96
-            java.lang.Object r6 = r12.next()
-            r7 = r6
-            com.android.systemui.dump.DumpsysEntry$LogBufferEntry r7 = (com.android.systemui.dump.DumpsysEntry.LogBufferEntry) r7
-            com.android.systemui.dump.DumpHandler$Companion r8 = com.android.systemui.dump.DumpHandler.Companion
-            r9 = r4
-            java.util.Collection r9 = (java.util.Collection) r9
-            boolean r7 = com.android.systemui.dump.DumpHandler.Companion.access$matchesAny(r8, r7, r9)
-            if (r7 == 0) goto L7a
-            r5.add(r6)
-            goto L7a
-        L96:
-            r11.L$0 = r1
-            r11.label = r3
-            java.lang.Object r12 = r1.yieldAll(r5, r11)
-            if (r12 != r0) goto La1
-            goto Ld7
-        La1:
-            java.util.Collection<com.android.systemui.dump.DumpsysEntry$TableLogBufferEntry> r12 = r11.$tableBuffers
-            java.lang.Iterable r12 = (java.lang.Iterable) r12
-            java.util.List<java.lang.String> r3 = r11.$targets
-            java.util.ArrayList r4 = new java.util.ArrayList
-            r4.<init>()
-            java.util.Iterator r12 = r12.iterator()
-        Lb0:
-            boolean r5 = r12.hasNext()
-            if (r5 == 0) goto Lcc
-            java.lang.Object r5 = r12.next()
-            r6 = r5
-            com.android.systemui.dump.DumpsysEntry$TableLogBufferEntry r6 = (com.android.systemui.dump.DumpsysEntry.TableLogBufferEntry) r6
-            com.android.systemui.dump.DumpHandler$Companion r7 = com.android.systemui.dump.DumpHandler.Companion
-            r8 = r3
-            java.util.Collection r8 = (java.util.Collection) r8
-            boolean r6 = com.android.systemui.dump.DumpHandler.Companion.access$matchesAny(r7, r6, r8)
-            if (r6 == 0) goto Lb0
-            r4.add(r5)
-            goto Lb0
-        Lcc:
-            r12 = 0
-            r11.L$0 = r12
-            r11.label = r2
-            java.lang.Object r11 = r1.yieldAll(r4, r11)
-            if (r11 != r0) goto Ld8
-        Ld7:
-            return r0
-        Ld8:
-            kotlin.Unit r11 = kotlin.Unit.INSTANCE
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.dump.DumpHandler$findAllMatchesInCollection$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        SequenceScope sequenceScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            SequenceScope sequenceScope2 = (SequenceScope) this.L$0;
+            Collection<DumpsysEntry.DumpableEntry> collection = this.$dumpables;
+            List<String> list = this.$targets;
+            ArrayList arrayList = new ArrayList();
+            for (Object obj2 : collection) {
+                if (DumpHandler.Companion.access$matchesAny(DumpHandler.Companion, (DumpsysEntry.DumpableEntry) obj2, list)) {
+                    arrayList.add(obj2);
+                }
+            }
+            this.L$0 = sequenceScope2;
+            this.label = 1;
+            if (sequenceScope2.yieldAll(arrayList, this) != coroutineSingletons) {
+                sequenceScope = sequenceScope2;
+            }
+            return coroutineSingletons;
+        }
+        if (i == 1) {
+            sequenceScope = (SequenceScope) this.L$0;
+            ResultKt.throwOnFailure(obj);
+        } else {
+            if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            sequenceScope = (SequenceScope) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            Collection<DumpsysEntry.TableLogBufferEntry> collection2 = this.$tableBuffers;
+            List<String> list2 = this.$targets;
+            ArrayList arrayList2 = new ArrayList();
+            for (Object obj3 : collection2) {
+                if (DumpHandler.Companion.access$matchesAny(DumpHandler.Companion, (DumpsysEntry.TableLogBufferEntry) obj3, list2)) {
+                    arrayList2.add(obj3);
+                }
+            }
+            this.L$0 = null;
+            this.label = 3;
+        }
+        Collection<DumpsysEntry.LogBufferEntry> collection3 = this.$logBuffers;
+        List<String> list3 = this.$targets;
+        ArrayList arrayList3 = new ArrayList();
+        for (Object obj4 : collection3) {
+            if (DumpHandler.Companion.access$matchesAny(DumpHandler.Companion, (DumpsysEntry.LogBufferEntry) obj4, list3)) {
+                arrayList3.add(obj4);
+            }
+        }
+        this.L$0 = sequenceScope;
+        this.label = 2;
+        if (sequenceScope.yieldAll(arrayList3, this) != coroutineSingletons) {
+            Collection<DumpsysEntry.TableLogBufferEntry> collection22 = this.$tableBuffers;
+            List<String> list22 = this.$targets;
+            ArrayList arrayList22 = new ArrayList();
+            while (r12.hasNext()) {
+            }
+            this.L$0 = null;
+            this.label = 3;
+        }
+        return coroutineSingletons;
     }
 }

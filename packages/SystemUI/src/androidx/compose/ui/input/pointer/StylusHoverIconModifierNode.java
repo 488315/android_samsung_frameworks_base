@@ -7,7 +7,6 @@ import androidx.compose.ui.platform.AndroidComposeView$pointerIconService$1;
 import androidx.compose.ui.platform.CompositionLocalsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class StylusHoverIconModifierNode extends HoverIconModifierNode {
     public final String traverseKey;
@@ -31,7 +30,7 @@ public final class StylusHoverIconModifierNode extends HoverIconModifierNode {
 
     @Override // androidx.compose.ui.input.pointer.HoverIconModifierNode
     /* renamed from: isRelevantPointerType-uerMTgs */
-    public final boolean mo587isRelevantPointerTypeuerMTgs(int i) {
+    public final boolean mo589isRelevantPointerTypeuerMTgs(int i) {
         PointerType.Companion companion = PointerType.Companion;
         companion.getClass();
         if (i == PointerType.Stylus) {

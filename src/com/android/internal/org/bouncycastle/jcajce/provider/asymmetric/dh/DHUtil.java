@@ -14,20 +14,20 @@ class DHUtil {
 
     static String privateKeyToString(String str, BigInteger bigInteger, DHParameters dHParameters) {
         StringBuffer stringBuffer = new StringBuffer();
-        String lineSeparator = Strings.lineSeparator();
-        BigInteger modPow = dHParameters.getG().modPow(bigInteger, dHParameters.getP());
+        String strLineSeparator = Strings.lineSeparator();
+        BigInteger bigIntegerModPow = dHParameters.getG().modPow(bigInteger, dHParameters.getP());
         stringBuffer.append(str);
-        stringBuffer.append(" Private Key [").append(generateKeyFingerprint(modPow, dHParameters)).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("              Y: ").append(modPow.toString(16)).append(lineSeparator);
+        stringBuffer.append(" Private Key [").append(generateKeyFingerprint(bigIntegerModPow, dHParameters)).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("              Y: ").append(bigIntegerModPow.toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 
     static String publicKeyToString(String str, BigInteger bigInteger, DHParameters dHParameters) {
         StringBuffer stringBuffer = new StringBuffer();
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         stringBuffer.append(str);
-        stringBuffer.append(" Public Key [").append(generateKeyFingerprint(bigInteger, dHParameters)).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("             Y: ").append(bigInteger.toString(16)).append(lineSeparator);
+        stringBuffer.append(" Public Key [").append(generateKeyFingerprint(bigInteger, dHParameters)).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("             Y: ").append(bigInteger.toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 

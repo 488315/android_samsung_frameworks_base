@@ -51,9 +51,9 @@ public interface IExecuteAppFunctionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IExecuteAppFunctionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IExecuteAppFunctionCallback)) {
-                return (IExecuteAppFunctionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IExecuteAppFunctionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IExecuteAppFunctionCallback)) {
+                return (IExecuteAppFunctionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,25 +114,25 @@ public interface IExecuteAppFunctionCallback extends IInterface {
 
             @Override // android.app.appfunctions.IExecuteAppFunctionCallback
             public void onSuccess(ExecuteAppFunctionResponse executeAppFunctionResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IExecuteAppFunctionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(executeAppFunctionResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IExecuteAppFunctionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(executeAppFunctionResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.appfunctions.IExecuteAppFunctionCallback
             public void onError(AppFunctionException appFunctionException) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IExecuteAppFunctionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(appFunctionException, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IExecuteAppFunctionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appFunctionException, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

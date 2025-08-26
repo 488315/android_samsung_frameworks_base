@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.events;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import androidx.core.animation.Animator;
+import androidx.core.animation.AnimatorListenerAdapter;
 import androidx.core.animation.ObjectAnimator;
 import androidx.core.animation.PathInterpolator;
 import androidx.core.animation.ValueAnimator;
@@ -41,20 +43,25 @@ import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.statusbar.window.StatusBarWindowControllerImpl;
+import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.animation.AnimationUtil;
 import com.android.systemui.util.leak.RotationUtils;
+import java.util.ArrayDeque;
 import java.util.Locale;
+import java.util.Queue;
+import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdateMonitorCallback implements SystemEventChipAnimationController {
+    public final Rect animRect;
     public final FrameLayout animationWindowView;
     public int animationWindowViewHeight;
+    public final Queue batteryQueue;
     public final int chipMinWidth;
     public final StatusBarContentInsetsProvider contentInsetsProvider;
     public final Context context;
@@ -66,15 +73,14 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
     public boolean isChipAnimationStarted;
     public final KeyguardStateController keyguardStateController;
     public final PrivacyLogger privacyLogger;
+    public final SecPanelExpansionStateInteractor secPanelExpansionStateInteractor;
     private final SettingsHelper settingsHelper;
     public final ShadeExpansionStateManager shadeExpansionStateManager;
     public final SystemEventChipAnimationControllerImpl$statusBarContentInsetsChangedListener$1 statusBarContentInsetsChangedListener;
     public final ContextThemeWrapper themedContext;
     public int animationDirection = 1;
     public Rect chipBounds = new Rect();
-    public final Rect animRect = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SystemEventChipAnimationControllerImpl create(Context context, StatusBarWindowController statusBarWindowController, StatusBarContentInsetsProvider statusBarContentInsetsProvider);
     }
@@ -89,9 +95,13 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
         this.indicatorScaleGardener = indicatorScaleGardener;
         this.settingsHelper = settingsHelper;
         this.keyguardStateController = keyguardStateController;
+        this.secPanelExpansionStateInteractor = secPanelExpansionStateInteractor;
         this.chipMinWidth = context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_chip_min_animation_width);
+        ArrayDeque arrayDeque = new ArrayDeque();
+        this.batteryQueue = arrayDeque;
         this.dotSize = context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter);
         this.dotMarginStart = context.getResources().getDimensionPixelSize(R.dimen.privacy_dot_margin_start);
+        this.animRect = new Rect();
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.Theme_SystemUI_QuickSettings);
         this.themedContext = contextThemeWrapper;
         this.animationWindowView = (FrameLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.system_event_animation_window, (ViewGroup) null);
@@ -107,7 +117,7 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
         indicatorGardenPresenter.addCallback(new IndicatorGardenPresenter.GardenListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$init$1
             @Override // com.android.systemui.statusbar.phone.IndicatorGardenPresenter.GardenListener
             public final void onGardenChanged(IndicatorGardenModel indicatorGardenModel) {
-                SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = SystemEventChipAnimationControllerImpl.this;
+                SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = this.this$0;
                 FrameLayout frameLayout4 = systemEventChipAnimationControllerImpl.animationWindowView;
                 if (frameLayout4 == null) {
                     frameLayout4 = null;
@@ -122,14 +132,14 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
             /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                int calculateRightPadding;
+                int iCalculateRightPadding;
                 int i9;
                 if (i == i5 && i3 == i7) {
                     return;
                 }
-                StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) SystemEventChipAnimationControllerImpl.this.contentInsetsProvider;
+                StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) this.this$0.contentInsetsProvider;
                 Rect statusBarContentAreaForRotation = statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context));
-                final SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = SystemEventChipAnimationControllerImpl.this;
+                final SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = this.this$0;
                 BackgroundAnimatableView backgroundAnimatableView = systemEventChipAnimationControllerImpl.currentAnimatedView;
                 if (backgroundAnimatableView != 0) {
                     FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) ((View) backgroundAnimatableView).getLayoutParams();
@@ -137,64 +147,64 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
                     if (frameLayout5 == null) {
                         frameLayout5 = null;
                     }
-                    boolean isLayoutRtl = frameLayout5.isLayoutRtl();
+                    boolean zIsLayoutRtl = frameLayout5.isLayoutRtl();
                     IndicatorGardenPresenter indicatorGardenPresenter2 = systemEventChipAnimationControllerImpl.indicatorGardenPresenter;
-                    if (isLayoutRtl) {
-                        calculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateLeftPadding();
+                    if (zIsLayoutRtl) {
+                        iCalculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateLeftPadding();
                         i9 = systemEventChipAnimationControllerImpl.dotMarginStart;
                     } else {
-                        calculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateRightPadding();
+                        iCalculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateRightPadding();
                         i9 = systemEventChipAnimationControllerImpl.dotMarginStart;
                     }
-                    layoutParams2.setMarginEnd(calculateRightPadding - i9);
+                    layoutParams2.setMarginEnd(iCalculateRightPadding - i9);
                     Object obj = systemEventChipAnimationControllerImpl.currentAnimatedView;
                     obj.getClass();
                     ((View) obj).setLayoutParams(layoutParams2);
                     systemEventChipAnimationControllerImpl.updateChipBounds(backgroundAnimatableView, statusBarContentAreaForRotation);
-                    ValueAnimator ofInt = ValueAnimator.ofInt(0, 1);
-                    ofInt.setDuration(0L);
-                    ofInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$init$2$1$1
+                    ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, 1);
+                    valueAnimatorOfInt.setDuration(0L);
+                    valueAnimatorOfInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$init$2$1$1
                         @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                         public final void onAnimationUpdate(Animator animator) {
-                            SystemEventChipAnimationControllerImpl.this.updateCurrentAnimatedView();
+                            systemEventChipAnimationControllerImpl.updateCurrentAnimatedView();
                         }
                     });
-                    ofInt.start(false);
+                    valueAnimatorOfInt.start(false);
                 }
             }
         });
         keyguardUpdateMonitor.registerCallback(this);
-        if (DeviceType.isTablet()) {
+        if (DeviceType.isSupportModelPopOverStatusBar()) {
             secPanelExpansionStateInteractor.registerListener(new SecPanelExpansionStateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl.1
                 @Override // com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener
                 public final void onPanelExpansionStateChanged(SecPanelExpansionStateChangeEvent secPanelExpansionStateChangeEvent) {
                     SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = SystemEventChipAnimationControllerImpl.this;
                     Object obj = systemEventChipAnimationControllerImpl.currentAnimatedView;
-                    if (obj == null || !((View) obj).isAttachedToWindow()) {
-                        return;
-                    }
-                    if (secPanelExpansionStateChangeEvent.panelExpansionState != 0) {
-                        Object obj2 = systemEventChipAnimationControllerImpl.currentAnimatedView;
-                        if (obj2 != null) {
-                            ((View) obj2).setVisibility(8);
+                    if (obj != null && ((View) obj).isAttachedToWindow() && DeviceState.isShowingPopOverStatusBar(systemEventChipAnimationControllerImpl.context)) {
+                        if (secPanelExpansionStateChangeEvent.panelExpansionState != 0) {
+                            Object obj2 = systemEventChipAnimationControllerImpl.currentAnimatedView;
+                            if (obj2 != null) {
+                                ((View) obj2).setVisibility(8);
+                                return;
+                            }
                             return;
                         }
-                        return;
-                    }
-                    Object obj3 = systemEventChipAnimationControllerImpl.currentAnimatedView;
-                    if (obj3 != null) {
-                        ((View) obj3).setVisibility(0);
+                        Object obj3 = systemEventChipAnimationControllerImpl.currentAnimatedView;
+                        if (obj3 != null) {
+                            ((View) obj3).setVisibility(0);
+                        }
                     }
                 }
             });
         }
+        arrayDeque.clear();
         this.statusBarContentInsetsChangedListener = new StatusBarContentInsetsChangedListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$statusBarContentInsetsChangedListener$1
             /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.statusbar.layout.StatusBarContentInsetsChangedListener
             public final void onStatusBarContentInsetsChanged() {
-                int calculateRightPadding;
+                int iCalculateRightPadding;
                 int i;
-                final SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = SystemEventChipAnimationControllerImpl.this;
+                final SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = this.this$0;
                 StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) systemEventChipAnimationControllerImpl.contentInsetsProvider;
                 Rect statusBarContentAreaForRotation = statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context));
                 SystemEventChipAnimationControllerImpl.access$updateDimens(systemEventChipAnimationControllerImpl, statusBarContentAreaForRotation);
@@ -213,30 +223,30 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
                         if (frameLayout5 == null) {
                             frameLayout5 = null;
                         }
-                        boolean isLayoutRtl = frameLayout5.isLayoutRtl();
+                        boolean zIsLayoutRtl = frameLayout5.isLayoutRtl();
                         IndicatorGardenPresenter indicatorGardenPresenter2 = systemEventChipAnimationControllerImpl.indicatorGardenPresenter;
-                        if (isLayoutRtl) {
-                            calculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateLeftPadding();
+                        if (zIsLayoutRtl) {
+                            iCalculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateLeftPadding();
                             i = systemEventChipAnimationControllerImpl.dotMarginStart;
                         } else {
-                            calculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateRightPadding();
+                            iCalculateRightPadding = indicatorGardenPresenter2.gardenAlgorithm.calculateRightPadding();
                             i = systemEventChipAnimationControllerImpl.dotMarginStart;
                         }
-                        layoutParams2.setMarginEnd(calculateRightPadding - i);
+                        layoutParams2.setMarginEnd(iCalculateRightPadding - i);
                     }
                     Object obj = systemEventChipAnimationControllerImpl.currentAnimatedView;
                     obj.getClass();
                     ((View) obj).setLayoutParams(layoutParams2);
                     systemEventChipAnimationControllerImpl.updateChipBounds(backgroundAnimatableView, statusBarContentAreaForRotation);
-                    ValueAnimator ofInt = ValueAnimator.ofInt(0, 1);
-                    ofInt.setDuration(0L);
-                    ofInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$statusBarContentInsetsChangedListener$1$onStatusBarContentInsetsChanged$1$1
+                    ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, 1);
+                    valueAnimatorOfInt.setDuration(0L);
+                    valueAnimatorOfInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$statusBarContentInsetsChangedListener$1$onStatusBarContentInsetsChanged$1$1
                         @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                         public final void onAnimationUpdate(Animator animator) {
-                            SystemEventChipAnimationControllerImpl.this.updateCurrentAnimatedView();
+                            systemEventChipAnimationControllerImpl.updateCurrentAnimatedView();
                         }
                     });
-                    ofInt.start(false);
+                    valueAnimatorOfInt.start(false);
                 }
             }
         };
@@ -304,27 +314,27 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
         LogLevel logLevel = LogLevel.INFO;
         PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(12);
         LogBuffer logBuffer = privacyLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = !z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = !z;
+        logBuffer.commit(logMessageObtain);
     }
 
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController, com.android.systemui.statusbar.events.SystemStatusAnimationCallback
-    public final SpringAnimatorSet onSystemEventAnimationBegin(boolean z, boolean z2) {
+    public final SpringAnimatorSet onSystemEventAnimationBegin(boolean z, boolean z2) throws Resources.NotFoundException {
         View contentView;
         this.animRect.set(this.chipBounds);
         if (!z2) {
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
             AnimationUtil.Companion companion = AnimationUtil.Companion;
-            ofFloat.setStartDelay(companion.getFrames(7));
-            ofFloat.setDuration(companion.getFrames(5));
-            ofFloat.setInterpolator(null);
-            ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$alphaIn$1$1
+            valueAnimatorOfFloat.setStartDelay(companion.getFrames(7));
+            valueAnimatorOfFloat.setDuration(companion.getFrames(5));
+            valueAnimatorOfFloat.setInterpolator(null);
+            valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$alphaIn$1$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
-                    Object obj = SystemEventChipAnimationControllerImpl.this.currentAnimatedView;
+                    Object obj = this.this$0.currentAnimatedView;
                     if (obj != null) {
-                        ((View) obj).setAlpha(((Float) ofFloat.getAnimatedValue()).floatValue());
+                        ((View) obj).setAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
                     }
                 }
             });
@@ -332,41 +342,41 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
             if (backgroundAnimatableView != null && (contentView = backgroundAnimatableView.getContentView()) != null) {
                 contentView.setAlpha(0.0f);
             }
-            final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat2.setStartDelay(companion.getFrames(10));
-            ofFloat2.setDuration(companion.getFrames(10));
-            ofFloat2.setInterpolator(null);
-            ofFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$contentAlphaIn$1$1
+            final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat2.setStartDelay(companion.getFrames(10));
+            valueAnimatorOfFloat2.setDuration(companion.getFrames(10));
+            valueAnimatorOfFloat2.setInterpolator(null);
+            valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$contentAlphaIn$1$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
                     View contentView2;
-                    BackgroundAnimatableView backgroundAnimatableView2 = SystemEventChipAnimationControllerImpl.this.currentAnimatedView;
+                    BackgroundAnimatableView backgroundAnimatableView2 = this.this$0.currentAnimatedView;
                     if (backgroundAnimatableView2 == null || (contentView2 = backgroundAnimatableView2.getContentView()) == null) {
                         return;
                     }
-                    contentView2.setAlpha(((Float) ofFloat2.getAnimatedValue()).floatValue());
+                    contentView2.setAlpha(((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue());
                 }
             });
-            final ValueAnimator ofInt = ValueAnimator.ofInt(this.chipMinWidth, this.chipBounds.width());
-            ofInt.setStartDelay(companion.getFrames(7));
-            ofInt.setDuration(companion.getFrames(23));
-            ofInt.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_IN);
-            ofInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$moveIn$1$1
+            final ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(this.chipMinWidth, this.chipBounds.width());
+            valueAnimatorOfInt.setStartDelay(companion.getFrames(7));
+            valueAnimatorOfInt.setDuration(companion.getFrames(23));
+            valueAnimatorOfInt.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_IN);
+            valueAnimatorOfInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$onSystemEventAnimationBegin$moveIn$1$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
-                    SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsWidth(SystemEventChipAnimationControllerImpl.this, ((Integer) ofInt.getAnimatedValue()).intValue());
+                    SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsWidth(this.this$0, ((Integer) valueAnimatorOfInt.getAnimatedValue()).intValue());
                 }
             });
             SpringAnimatorSet springAnimatorSet = new SpringAnimatorSet();
-            springAnimatorSet.playTogether(ofFloat, ofFloat2, ofInt);
+            springAnimatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2, valueAnimatorOfInt);
             return springAnimatorSet;
         }
-        boolean isClosed = this.shadeExpansionStateManager.isClosed();
+        boolean zIsClosed = this.shadeExpansionStateManager.isClosed();
         HeadsUpAppearanceController headsUpAppearanceController = this.indicatorGardenPresenter.headsUpAppearanceController;
         if (headsUpAppearanceController != null && this.settingsHelper.isPopStyleDetail() && headsUpAppearanceController.shouldHeadsUpStatusBarBeVisible()) {
-            isClosed = true;
+            zIsClosed = true;
         }
-        if (!isClosed) {
+        if (!zIsClosed) {
             return new SpringAnimatorSet();
         }
         this.isChipAnimationStarted = true;
@@ -404,7 +414,7 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
         float f3 = this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio;
         samsungBatteryStatusChip2.getClass();
         SpringAnimatorSet springAnimatorSet3 = new SpringAnimatorSet();
-        SpringAnimatorSet systemIconAnimator = SamsungBatteryStatusChip.getSystemIconAnimator(samsungBatteryStatusChip2.getRootView().requireViewById(R.id.statusIcons), true);
+        SpringAnimatorSet systemIconAnimator = samsungBatteryStatusChip2.getSystemIconAnimator(samsungBatteryStatusChip2.getRootView().findViewById(R.id.statusIcons), true, samsungBatteryStatusChip2.isLayoutRtl());
         int layoutDirectionFromLocale = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault());
         float measuredWidth = samsungBatteryStatusChip2.batteryChipContainer.getMeasuredWidth();
         BatteryChipAnimationUtils.Companion.getClass();
@@ -412,190 +422,406 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
             measuredWidth = -measuredWidth;
         }
         SpringAnimatorSet springAnimatorSet4 = new SpringAnimatorSet();
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(samsungBatteryStatusChip2.batteryLevelProgress, "translationX", measuredWidth, 0.0f);
-        ofFloat3.m894setDuration(1000L);
-        ofFloat3.mInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(samsungBatteryStatusChip2.batteryLevelProgress, "translationX", measuredWidth, 0.0f);
+        objectAnimatorOfFloat.m896setDuration(1000L);
+        objectAnimatorOfFloat.mInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
         Unit unit = Unit.INSTANCE;
-        final ValueAnimator ofFloat4 = ValueAnimator.ofFloat(10.0f, 0.0f);
-        ofFloat4.setDuration(1000L);
-        ofFloat4.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-        ofFloat4.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SamsungBatteryStatusChip$getChargingWaveAnimation$1$2$1
+        final ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(10.0f, 0.0f);
+        valueAnimatorOfFloat3.setDuration(1000L);
+        valueAnimatorOfFloat3.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+        valueAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SamsungBatteryStatusChip$getChargingWaveAnimation$1$2$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                LottieAnimationView lottieAnimationView = SamsungBatteryStatusChip.this.batteryLevelProgress;
+                LottieAnimationView lottieAnimationView = samsungBatteryStatusChip2.batteryLevelProgress;
                 BatteryChipConstants.INSTANCE.getClass();
                 KeyPath keyPath = BatteryChipConstants.WAVE_KEY_PATH;
                 Float f4 = LottieProperty.BLUR_RADIUS;
-                final ValueAnimator valueAnimator = ofFloat4;
+                final ValueAnimator valueAnimator = valueAnimatorOfFloat3;
                 lottieAnimationView.addValueCallback(keyPath, (KeyPath) f4, new SimpleLottieValueCallback() { // from class: com.android.systemui.statusbar.events.SamsungBatteryStatusChip$getChargingWaveAnimation$1$2$1.1
                     @Override // com.airbnb.lottie.value.SimpleLottieValueCallback
                     public final Object getValue() {
-                        return (Float) ValueAnimator.this.getAnimatedValue();
+                        return (Float) valueAnimator.getAnimatedValue();
                     }
                 });
             }
         });
-        springAnimatorSet4.playTogether(ofFloat3, ofFloat4);
+        springAnimatorSet4.playTogether(objectAnimatorOfFloat, valueAnimatorOfFloat3);
         springAnimatorSet3.playTogether(systemIconAnimator, springAnimatorSet4, samsungBatteryStatusChip2.getContainerBackgroundAnimator(true, batteryBounds, f3, samsungBatteryStatusChip2.isLayoutRtl(), z), samsungBatteryStatusChip2.getBatteryBackgroundAnimator(f3, batteryBounds, true, samsungBatteryStatusChip2.isLayoutRtl()), samsungBatteryStatusChip2.getBatteryLevelTextAnimator(f3, batteryBounds, true, samsungBatteryStatusChip2.isLayoutRtl()), samsungBatteryStatusChip2.getChargingIconAnimator(f3, batteryBounds, true, samsungBatteryStatusChip2.isLayoutRtl()));
         springAnimatorSet2.playTogether(springAnimatorSet3);
         return springAnimatorSet2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002b  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0031  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0028  */
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController, com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.statusbar.events.SpringAnimatorSet onSystemEventAnimationFinish(boolean r11, boolean r12, boolean r13) {
-        /*
-            Method dump skipped, instructions count: 628
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl.onSystemEventAnimationFinish(boolean, boolean, boolean):com.android.systemui.statusbar.events.SpringAnimatorSet");
+    public final SpringAnimatorSet onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
+        Object[] objArr;
+        SpringAnimatorSet springAnimatorSet;
+        if (z3) {
+            boolean zIsClosed = this.shadeExpansionStateManager.isClosed();
+            HeadsUpAppearanceController headsUpAppearanceController = this.indicatorGardenPresenter.headsUpAppearanceController;
+            if (headsUpAppearanceController != null && this.settingsHelper.isPopStyleDetail() && headsUpAppearanceController.shouldHeadsUpStatusBarBeVisible()) {
+                zIsClosed = true;
+            }
+            objArr = (zIsClosed || this.isChipAnimationStarted) ? false : true;
+        }
+        if (objArr == true) {
+            return new SpringAnimatorSet();
+        }
+        if (objArr == true) {
+            throw new NoWhenBranchMatchedException();
+        }
+        this.isChipAnimationStarted = false;
+        this.animRect.set(this.chipBounds);
+        if (z3) {
+            springAnimatorSet = new SpringAnimatorSet();
+            Object obj = this.currentAnimatedView;
+            if ((obj != null ? (View) obj : null) instanceof SamsungBatteryStatusChip) {
+                SamsungBatteryStatusChip samsungBatteryStatusChip = (SamsungBatteryStatusChip) (obj != null ? (View) obj : null);
+                Rect batteryBounds = getBatteryBounds();
+                float f = this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio;
+                samsungBatteryStatusChip.getClass();
+                SpringAnimatorSet springAnimatorSet2 = new SpringAnimatorSet();
+                springAnimatorSet2.playTogether(samsungBatteryStatusChip.getSystemIconAnimator(samsungBatteryStatusChip.getRootView().findViewById(R.id.statusIcons), false, samsungBatteryStatusChip.isLayoutRtl()), samsungBatteryStatusChip.getContainerBackgroundAnimator(false, batteryBounds, f, samsungBatteryStatusChip.isLayoutRtl(), z2), samsungBatteryStatusChip.getBatteryBackgroundAnimator(f, batteryBounds, false, samsungBatteryStatusChip.isLayoutRtl()), samsungBatteryStatusChip.getBatteryLevelTextAnimator(f, batteryBounds, false, samsungBatteryStatusChip.isLayoutRtl()), samsungBatteryStatusChip.getChargingIconAnimator(f, batteryBounds, false, samsungBatteryStatusChip.isLayoutRtl()));
+                springAnimatorSet.playTogether(springAnimatorSet2);
+                BackgroundAnimatableView backgroundAnimatableView = this.currentAnimatedView;
+                ((SamsungBatteryStatusChip) (backgroundAnimatableView != null ? (View) backgroundAnimatableView : null)).playProgressLottieAnimation(false);
+            } else {
+                Log.e("SystemEventChipAnimationController", "CurrentAnimatedView is not a BatteryStatusChip - currentAnimatedView: " + (obj != null ? (View) obj : null));
+            }
+        } else {
+            int i = this.chipMinWidth;
+            if (z) {
+                final ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(this.chipBounds.width(), i);
+                AnimationUtil.Companion companion = AnimationUtil.Companion;
+                valueAnimatorOfInt.setDuration(companion.getFrames(9));
+                valueAnimatorOfInt.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_CHIP_WIDTH_TO_DOT_KEYFRAME_1);
+                valueAnimatorOfInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$width1$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsWidth(this.this$0, ((Integer) valueAnimatorOfInt.getAnimatedValue()).intValue());
+                    }
+                });
+                final ValueAnimator valueAnimatorOfInt2 = ValueAnimator.ofInt(i, this.dotSize);
+                valueAnimatorOfInt2.setStartDelay(companion.getFrames(9));
+                valueAnimatorOfInt2.setDuration(companion.getFrames(20));
+                valueAnimatorOfInt2.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_CHIP_WIDTH_TO_DOT_KEYFRAME_2);
+                valueAnimatorOfInt2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$width2$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsWidth(this.this$0, ((Integer) valueAnimatorOfInt2.getAnimatedValue()).intValue());
+                    }
+                });
+                int i2 = this.dotSize * 2;
+                Rect rect = this.chipBounds;
+                final int iHeight = (rect.height() / 2) + rect.top;
+                final ValueAnimator valueAnimatorOfInt3 = ValueAnimator.ofInt(this.chipBounds.height(), i2);
+                valueAnimatorOfInt3.setStartDelay(companion.getFrames(8));
+                valueAnimatorOfInt3.setDuration(companion.getFrames(6));
+                valueAnimatorOfInt3.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_CHIP_HEIGHT_TO_DOT_KEYFRAME_1);
+                valueAnimatorOfInt3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$height1$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsHeight(this.this$0, ((Integer) valueAnimatorOfInt3.getAnimatedValue()).intValue(), iHeight);
+                    }
+                });
+                final ValueAnimator valueAnimatorOfInt4 = ValueAnimator.ofInt(i2, this.dotSize);
+                valueAnimatorOfInt4.setStartDelay(companion.getFrames(14));
+                valueAnimatorOfInt4.setDuration(companion.getFrames(15));
+                valueAnimatorOfInt4.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_CHIP_HEIGHT_TO_DOT_KEYFRAME_2);
+                valueAnimatorOfInt4.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$height2$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsHeight(this.this$0, ((Integer) valueAnimatorOfInt4.getAnimatedValue()).intValue(), iHeight);
+                    }
+                });
+                final ValueAnimator valueAnimatorOfInt5 = ValueAnimator.ofInt(0, this.dotSize);
+                valueAnimatorOfInt5.setStartDelay(companion.getFrames(3));
+                valueAnimatorOfInt5.setDuration(companion.getFrames(11));
+                PathInterpolator pathInterpolator = SystemStatusAnimationSchedulerKt.STATUS_CHIP_MOVE_TO_DOT;
+                valueAnimatorOfInt5.setInterpolator(pathInterpolator);
+                valueAnimatorOfInt5.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$moveOut$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = this.this$0;
+                        int i3 = systemEventChipAnimationControllerImpl.animationDirection;
+                        ValueAnimator valueAnimator = valueAnimatorOfInt5;
+                        int iIntValue = i3 == 1 ? ((Integer) valueAnimator.getAnimatedValue()).intValue() : -((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        Object obj2 = systemEventChipAnimationControllerImpl.currentAnimatedView;
+                        if (obj2 != null) {
+                            ((View) obj2).setTranslationX(iIntValue);
+                        }
+                    }
+                });
+                Rect rect2 = this.chipBounds;
+                final ValueAnimator valueAnimatorOfInt6 = ValueAnimator.ofInt(0, MathKt__MathJVMKt.roundToInt(((((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarPaddingTop() + (this.animationWindowView != null ? r5 : null).getHeight()) / 2.0f) - ((rect2.top + rect2.bottom) / 2.0f)));
+                valueAnimatorOfInt6.setStartDelay(companion.getFrames(3));
+                valueAnimatorOfInt6.setDuration(companion.getFrames(26));
+                valueAnimatorOfInt6.setInterpolator(pathInterpolator);
+                valueAnimatorOfInt6.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationForDot$moveOutY$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        int iIntValue = ((Integer) valueAnimatorOfInt6.getAnimatedValue()).intValue();
+                        Object obj2 = this.this$0.currentAnimatedView;
+                        if (obj2 != null) {
+                            ((View) obj2).setTranslationY(iIntValue);
+                        }
+                    }
+                });
+                springAnimatorSet = new SpringAnimatorSet();
+                springAnimatorSet.playTogether(valueAnimatorOfInt, valueAnimatorOfInt2, valueAnimatorOfInt3, valueAnimatorOfInt4, valueAnimatorOfInt5, valueAnimatorOfInt6);
+            } else {
+                final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                AnimationUtil.Companion companion2 = AnimationUtil.Companion;
+                valueAnimatorOfFloat.setStartDelay(companion2.getFrames(6));
+                valueAnimatorOfFloat.setDuration(companion2.getFrames(6));
+                valueAnimatorOfFloat.setInterpolator(null);
+                valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationDefault$alphaOut$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        Object obj2 = this.this$0.currentAnimatedView;
+                        if (obj2 != null) {
+                            ((View) obj2).setAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
+                        }
+                    }
+                });
+                final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
+                valueAnimatorOfFloat2.setDuration(companion2.getFrames(5));
+                valueAnimatorOfFloat2.setInterpolator(null);
+                valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationDefault$contentAlphaOut$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        View contentView;
+                        BackgroundAnimatableView backgroundAnimatableView2 = this.this$0.currentAnimatedView;
+                        if (backgroundAnimatableView2 == null || (contentView = backgroundAnimatableView2.getContentView()) == null) {
+                            return;
+                        }
+                        contentView.setAlpha(((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue());
+                    }
+                });
+                final ValueAnimator valueAnimatorOfInt7 = ValueAnimator.ofInt(this.chipBounds.width(), i);
+                valueAnimatorOfInt7.setDuration(companion2.getFrames(23));
+                valueAnimatorOfInt7.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_OUT);
+                valueAnimatorOfInt7.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl$createMoveOutAnimationDefault$moveOut$1$1
+                    @Override // androidx.core.animation.Animator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(Animator animator) {
+                        SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = this.this$0;
+                        if (systemEventChipAnimationControllerImpl.currentAnimatedView != null) {
+                            SystemEventChipAnimationControllerImpl.access$updateAnimatedViewBoundsWidth(systemEventChipAnimationControllerImpl, ((Integer) valueAnimatorOfInt7.getAnimatedValue()).intValue());
+                        }
+                    }
+                });
+                SpringAnimatorSet springAnimatorSet3 = new SpringAnimatorSet();
+                springAnimatorSet3.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2, valueAnimatorOfInt7);
+                springAnimatorSet = springAnimatorSet3;
+            }
+        }
+        springAnimatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemEventChipAnimationControllerImpl.onSystemEventAnimationFinish.1
+            /* JADX WARN: Multi-variable type inference failed */
+            @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
+            public final void onAnimationEnd(Animator animator) {
+                SystemEventChipAnimationControllerImpl systemEventChipAnimationControllerImpl = SystemEventChipAnimationControllerImpl.this;
+                if (systemEventChipAnimationControllerImpl.animationWindowView == null) {
+                    return;
+                }
+                int iWidth = systemEventChipAnimationControllerImpl.chipBounds.width();
+                PrivacyLogger privacyLogger = systemEventChipAnimationControllerImpl.privacyLogger;
+                privacyLogger.getClass();
+                LogLevel logLevel = LogLevel.INFO;
+                PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(13);
+                LogBuffer logBuffer = privacyLogger.buffer;
+                LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.bool1 = false;
+                logMessageImpl.int1 = iWidth;
+                logBuffer.commit(logMessageObtain);
+                BackgroundAnimatableView backgroundAnimatableView2 = systemEventChipAnimationControllerImpl.currentAnimatedView;
+                if (backgroundAnimatableView2 == null) {
+                    return;
+                }
+                View view = (View) backgroundAnimatableView2;
+                if (!(view instanceof SamsungBatteryStatusChip)) {
+                    FrameLayout frameLayout = systemEventChipAnimationControllerImpl.animationWindowView;
+                    (frameLayout != null ? frameLayout : null).removeView(view);
+                } else {
+                    if (((ArrayDeque) systemEventChipAnimationControllerImpl.batteryQueue).isEmpty()) {
+                        return;
+                    }
+                    FrameLayout frameLayout2 = systemEventChipAnimationControllerImpl.animationWindowView;
+                    if (frameLayout2 == null) {
+                        frameLayout2 = null;
+                    }
+                    BackgroundAnimatableView backgroundAnimatableView3 = (BackgroundAnimatableView) ((ArrayDeque) systemEventChipAnimationControllerImpl.batteryQueue).poll();
+                    frameLayout2.removeView(backgroundAnimatableView3 != null ? (View) backgroundAnimatableView3 : null);
+                }
+            }
+        });
+        return springAnimatorSet;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController
     public final void prepareChipAnimation(Function1 function1, boolean z) {
-        int calculateRightPadding;
+        int iCalculateRightPadding;
         int i;
         FrameLayout.LayoutParams layoutParams;
         int i2;
         int i3;
-        FrameLayout frameLayout = this.animationWindowView;
-        if (frameLayout == null) {
-            frameLayout = null;
+        Object obj;
+        if (!DeviceState.isShowingPopOverStatusBar(this.context) || ((Number) this.secPanelExpansionStateInteractor.shadeFraction.getValue()).floatValue() == 0.0f) {
+            FrameLayout frameLayout = this.animationWindowView;
+            if (frameLayout == null) {
+                frameLayout = null;
+            }
+            this.animationDirection = frameLayout.isLayoutRtl() ? 2 : 1;
+            StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) this.contentInsetsProvider;
+            statusBarContentInsetsProviderImpl.getStatusBarContentInsetsForCurrentRotation();
+            float f = this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio;
+            this.dotMarginStart = MathKt__MathJVMKt.roundToInt(this.context.getResources().getDimensionPixelSize(R.dimen.privacy_dot_margin_start) * f);
+            this.dotSize = MathKt__MathJVMKt.roundToInt(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter) * f);
+            if (!z && (obj = this.currentAnimatedView) != null) {
+                Log.d("SystemEventChipAnimationController", "Try to remove existing animationView=" + obj);
+                FrameLayout frameLayout2 = this.animationWindowView;
+                if (frameLayout2 == null) {
+                    frameLayout2 = null;
+                }
+                frameLayout2.removeView((View) obj);
+            }
+            ContextThemeWrapper contextThemeWrapper = this.themedContext;
+            if (contextThemeWrapper == null) {
+                contextThemeWrapper = null;
+            }
+            BackgroundAnimatableView backgroundAnimatableView = (BackgroundAnimatableView) function1.mo781invoke(contextThemeWrapper);
+            FrameLayout frameLayout3 = this.animationWindowView;
+            if (frameLayout3 == null) {
+                frameLayout3 = null;
+            }
+            backgroundAnimatableView.getClass();
+            View view = (View) backgroundAnimatableView;
+            if (z) {
+                FrameLayout frameLayout4 = this.animationWindowView;
+                if (frameLayout4 == null) {
+                    frameLayout4 = null;
+                }
+                if (frameLayout4.isLayoutRtl()) {
+                    i2 = getBatteryBounds().left;
+                    BatteryChipAnimationUtils.Companion companion = BatteryChipAnimationUtils.Companion;
+                    FrameLayout frameLayout5 = this.animationWindowView;
+                    if (frameLayout5 == null) {
+                        frameLayout5 = null;
+                    }
+                    companion.getClass();
+                    i3 = BatteryChipAnimationUtils.Companion.getBounds(frameLayout5).left;
+                } else {
+                    BatteryChipAnimationUtils.Companion companion2 = BatteryChipAnimationUtils.Companion;
+                    FrameLayout frameLayout6 = this.animationWindowView;
+                    if (frameLayout6 == null) {
+                        frameLayout6 = null;
+                    }
+                    companion2.getClass();
+                    i2 = BatteryChipAnimationUtils.Companion.getBounds(frameLayout6).right;
+                    i3 = getBatteryBounds().right;
+                }
+                int i4 = i2 - i3;
+                layoutParams = new FrameLayout.LayoutParams(-2, -2);
+                layoutParams.gravity = 8388661;
+                layoutParams.setMarginEnd(i4);
+            } else {
+                FrameLayout frameLayout7 = this.animationWindowView;
+                if (frameLayout7 == null) {
+                    frameLayout7 = null;
+                }
+                boolean zIsLayoutRtl = frameLayout7.isLayoutRtl();
+                IndicatorGardenPresenter indicatorGardenPresenter = this.indicatorGardenPresenter;
+                if (zIsLayoutRtl) {
+                    iCalculateRightPadding = indicatorGardenPresenter.gardenAlgorithm.calculateLeftPadding();
+                    i = this.dotMarginStart;
+                } else {
+                    iCalculateRightPadding = indicatorGardenPresenter.gardenAlgorithm.calculateRightPadding();
+                    i = this.dotMarginStart;
+                }
+                int i5 = iCalculateRightPadding - i;
+                layoutParams = new FrameLayout.LayoutParams(-2, -2);
+                layoutParams.gravity = 8388629;
+                layoutParams.setMarginEnd(i5);
+            }
+            frameLayout3.addView(view, layoutParams);
+            view.setAlpha(0.0f);
+            FrameLayout frameLayout8 = this.animationWindowView;
+            if (frameLayout8 == null) {
+                frameLayout8 = null;
+            }
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(((View) frameLayout8.getParent()).getWidth(), Integer.MIN_VALUE);
+            FrameLayout frameLayout9 = this.animationWindowView;
+            if (frameLayout9 == null) {
+                frameLayout9 = null;
+            }
+            view.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(((View) frameLayout9.getParent()).getHeight(), Integer.MIN_VALUE));
+            if (backgroundAnimatableView instanceof SamsungBatteryStatusChip) {
+                SamsungBatteryStatusChip samsungBatteryStatusChip = (SamsungBatteryStatusChip) backgroundAnimatableView;
+                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) samsungBatteryStatusChip.getLayoutParams();
+                BatteryChipAnimationUtils.Companion companion3 = BatteryChipAnimationUtils.Companion;
+                View batteryMeterView = getBatteryMeterView();
+                companion3.getClass();
+                Rect bounds = BatteryChipAnimationUtils.Companion.getBounds(batteryMeterView);
+                marginLayoutParams.topMargin = ((bounds.top + bounds.bottom) / 2) - (view.getMeasuredHeight() / 2);
+                samsungBatteryStatusChip.setAlpha(0.0f);
+                ViewGroup.LayoutParams layoutParams2 = samsungBatteryStatusChip.background.getLayoutParams();
+                layoutParams2.width = samsungBatteryStatusChip.batteryChipContainer.getMeasuredWidth();
+                layoutParams2.height = samsungBatteryStatusChip.batteryChipContainer.getMeasuredHeight();
+            }
+            updateChipBounds(backgroundAnimatableView, statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
+            view.setPivotX(this.animationDirection != 2 ? view.getMeasuredWidth() : 0.0f);
+            view.setPivotY(view.getMeasuredHeight() / 2.0f);
+            view.setScaleX(f);
+            view.setScaleY(f);
+            KeyguardStateController keyguardStateController = this.keyguardStateController;
+            view.setVisibility(!keyguardStateController.isVisible() ? 0 : 8);
+            boolean zIsVisible = keyguardStateController.isVisible();
+            PrivacyLogger privacyLogger = this.privacyLogger;
+            if (zIsVisible) {
+                privacyLogger.getClass();
+                LogLevel logLevel = LogLevel.INFO;
+                PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(12);
+                LogBuffer logBuffer = privacyLogger.buffer;
+                LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).bool1 = false;
+                logBuffer.commit(logMessageObtain);
+            }
+            this.currentAnimatedView = backgroundAnimatableView;
+            if (z) {
+                ((ArrayDeque) this.batteryQueue).add(backgroundAnimatableView);
+            }
+            int iWidth = this.chipBounds.width();
+            privacyLogger.getClass();
+            LogLevel logLevel2 = LogLevel.INFO;
+            PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda02 = new PrivacyLogger$$ExternalSyntheticLambda0(13);
+            LogBuffer logBuffer2 = privacyLogger.buffer;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
+            logMessageImpl.bool1 = true;
+            logMessageImpl.int1 = iWidth;
+            logBuffer2.commit(logMessageObtain2);
         }
-        this.animationDirection = frameLayout.isLayoutRtl() ? 2 : 1;
-        StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) this.contentInsetsProvider;
-        statusBarContentInsetsProviderImpl.getStatusBarContentInsetsForCurrentRotation();
-        float f = this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio;
-        this.dotMarginStart = MathKt__MathJVMKt.roundToInt(this.context.getResources().getDimensionPixelSize(R.dimen.privacy_dot_margin_start) * f);
-        this.dotSize = MathKt__MathJVMKt.roundToInt(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter) * f);
+    }
+
+    @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController
+    public final void removeBatteryAnim() {
         Object obj = this.currentAnimatedView;
         if (obj != null) {
-            Log.d("SystemEventChipAnimationController", "Try to remove existing animationView=" + obj);
-            FrameLayout frameLayout2 = this.animationWindowView;
-            if (frameLayout2 == null) {
-                frameLayout2 = null;
+            FrameLayout frameLayout = this.animationWindowView;
+            if (frameLayout == null) {
+                frameLayout = null;
             }
-            frameLayout2.removeView((View) obj);
-        }
-        ContextThemeWrapper contextThemeWrapper = this.themedContext;
-        if (contextThemeWrapper == null) {
-            contextThemeWrapper = null;
-        }
-        BackgroundAnimatableView backgroundAnimatableView = (BackgroundAnimatableView) function1.mo779invoke(contextThemeWrapper);
-        FrameLayout frameLayout3 = this.animationWindowView;
-        if (frameLayout3 == null) {
-            frameLayout3 = null;
-        }
-        backgroundAnimatableView.getClass();
-        View view = (View) backgroundAnimatableView;
-        if (z) {
-            FrameLayout frameLayout4 = this.animationWindowView;
-            if (frameLayout4 == null) {
-                frameLayout4 = null;
-            }
-            if (frameLayout4.isLayoutRtl()) {
-                i2 = getBatteryBounds().left;
-                BatteryChipAnimationUtils.Companion companion = BatteryChipAnimationUtils.Companion;
-                FrameLayout frameLayout5 = this.animationWindowView;
-                if (frameLayout5 == null) {
-                    frameLayout5 = null;
-                }
-                companion.getClass();
-                i3 = BatteryChipAnimationUtils.Companion.getBounds(frameLayout5).left;
-            } else {
-                BatteryChipAnimationUtils.Companion companion2 = BatteryChipAnimationUtils.Companion;
-                FrameLayout frameLayout6 = this.animationWindowView;
-                if (frameLayout6 == null) {
-                    frameLayout6 = null;
-                }
-                companion2.getClass();
-                i2 = BatteryChipAnimationUtils.Companion.getBounds(frameLayout6).right;
-                i3 = getBatteryBounds().right;
-            }
-            int i4 = i2 - i3;
-            layoutParams = new FrameLayout.LayoutParams(-2, -2);
-            layoutParams.gravity = 8388661;
-            layoutParams.setMarginEnd(i4);
-        } else {
-            FrameLayout frameLayout7 = this.animationWindowView;
-            if (frameLayout7 == null) {
-                frameLayout7 = null;
-            }
-            boolean isLayoutRtl = frameLayout7.isLayoutRtl();
-            IndicatorGardenPresenter indicatorGardenPresenter = this.indicatorGardenPresenter;
-            if (isLayoutRtl) {
-                calculateRightPadding = indicatorGardenPresenter.gardenAlgorithm.calculateLeftPadding();
-                i = this.dotMarginStart;
-            } else {
-                calculateRightPadding = indicatorGardenPresenter.gardenAlgorithm.calculateRightPadding();
-                i = this.dotMarginStart;
-            }
-            int i5 = calculateRightPadding - i;
-            layoutParams = new FrameLayout.LayoutParams(-2, -2);
-            layoutParams.gravity = 8388629;
-            layoutParams.setMarginEnd(i5);
-        }
-        frameLayout3.addView(view, layoutParams);
-        view.setAlpha(0.0f);
-        FrameLayout frameLayout8 = this.animationWindowView;
-        if (frameLayout8 == null) {
-            frameLayout8 = null;
-        }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(((View) frameLayout8.getParent()).getWidth(), Integer.MIN_VALUE);
-        FrameLayout frameLayout9 = this.animationWindowView;
-        if (frameLayout9 == null) {
-            frameLayout9 = null;
-        }
-        view.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(((View) frameLayout9.getParent()).getHeight(), Integer.MIN_VALUE));
-        if (backgroundAnimatableView instanceof SamsungBatteryStatusChip) {
-            SamsungBatteryStatusChip samsungBatteryStatusChip = (SamsungBatteryStatusChip) backgroundAnimatableView;
-            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) samsungBatteryStatusChip.getLayoutParams();
-            BatteryChipAnimationUtils.Companion companion3 = BatteryChipAnimationUtils.Companion;
+            frameLayout.removeView((View) obj);
             View batteryMeterView = getBatteryMeterView();
-            companion3.getClass();
-            Rect bounds = BatteryChipAnimationUtils.Companion.getBounds(batteryMeterView);
-            marginLayoutParams.topMargin = ((bounds.top + bounds.bottom) / 2) - (view.getMeasuredHeight() / 2);
-            samsungBatteryStatusChip.setAlpha(0.0f);
-            ViewGroup.LayoutParams layoutParams2 = samsungBatteryStatusChip.background.getLayoutParams();
-            layoutParams2.width = samsungBatteryStatusChip.batteryChipContainer.getMeasuredWidth();
-            layoutParams2.height = samsungBatteryStatusChip.batteryChipContainer.getMeasuredHeight();
+            if (batteryMeterView != null) {
+                batteryMeterView.setAlpha(1.0f);
+            }
         }
-        updateChipBounds(backgroundAnimatableView, statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
-        view.setPivotX(this.animationDirection != 2 ? view.getMeasuredWidth() : 0.0f);
-        view.setPivotY(view.getMeasuredHeight() / 2.0f);
-        view.setScaleX(f);
-        view.setScaleY(f);
-        KeyguardStateController keyguardStateController = this.keyguardStateController;
-        view.setVisibility(!keyguardStateController.isVisible() ? 0 : 8);
-        boolean isVisible = keyguardStateController.isVisible();
-        PrivacyLogger privacyLogger = this.privacyLogger;
-        if (isVisible) {
-            privacyLogger.getClass();
-            LogLevel logLevel = LogLevel.INFO;
-            PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(12);
-            LogBuffer logBuffer = privacyLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = false;
-            logBuffer.commit(obtain);
-        }
-        this.currentAnimatedView = backgroundAnimatableView;
-        int width = this.chipBounds.width();
-        privacyLogger.getClass();
-        LogLevel logLevel2 = LogLevel.INFO;
-        PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda02 = new PrivacyLogger$$ExternalSyntheticLambda0(13);
-        LogBuffer logBuffer2 = privacyLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
-        logMessageImpl.bool1 = true;
-        logMessageImpl.int1 = width;
-        logBuffer2.commit(obtain2);
     }
 
     @Override // com.android.systemui.statusbar.events.SystemEventChipAnimationController
@@ -606,51 +832,51 @@ public final class SystemEventChipAnimationControllerImpl extends KeyguardUpdate
     /* JADX WARN: Multi-variable type inference failed */
     public final void updateChipBounds(BackgroundAnimatableView backgroundAnimatableView, Rect rect) {
         int measuredWidth;
-        int i;
         int measuredWidth2;
-        int i2;
+        int measuredWidth3;
+        int measuredWidth4;
         if (backgroundAnimatableView instanceof SamsungBatteryStatusChip) {
             BatteryChipAnimationUtils.Companion companion = BatteryChipAnimationUtils.Companion;
             View batteryMeterView = getBatteryMeterView();
             companion.getClass();
             Rect bounds = BatteryChipAnimationUtils.Companion.getBounds(batteryMeterView);
-            int i3 = (bounds.top + bounds.bottom) / 2;
+            int i = (bounds.top + bounds.bottom) / 2;
             backgroundAnimatableView.getClass();
             View view = (View) backgroundAnimatableView;
-            int measuredHeight = i3 - (view.getMeasuredHeight() / 2);
+            int measuredHeight = i - (view.getMeasuredHeight() / 2);
             int measuredHeight2 = view.getMeasuredHeight() + measuredHeight;
             if (this.animationDirection == 1) {
-                int i4 = getBatteryBounds().right;
+                int i2 = getBatteryBounds().right;
                 FrameLayout frameLayout = this.animationWindowView;
-                measuredWidth2 = i4 - (frameLayout != null ? frameLayout : null).getLeft();
-                i2 = measuredWidth2 - view.getMeasuredWidth();
+                measuredWidth3 = i2 - (frameLayout != null ? frameLayout : null).getLeft();
+                measuredWidth4 = measuredWidth3 - view.getMeasuredWidth();
             } else {
-                int i5 = getBatteryBounds().left;
+                int i3 = getBatteryBounds().left;
                 FrameLayout frameLayout2 = this.animationWindowView;
-                int left = i5 - (frameLayout2 != null ? frameLayout2 : null).getLeft();
-                measuredWidth2 = view.getMeasuredWidth() + left;
-                i2 = left;
+                int left = i3 - (frameLayout2 != null ? frameLayout2 : null).getLeft();
+                measuredWidth3 = view.getMeasuredWidth() + left;
+                measuredWidth4 = left;
             }
-            this.chipBounds = new Rect(i2, measuredHeight, measuredWidth2, measuredHeight2);
+            this.chipBounds = new Rect(measuredWidth4, measuredHeight, measuredWidth3, measuredHeight2);
         } else {
-            int i6 = rect.top;
-            int height = rect.height();
+            int i4 = rect.top;
+            int iHeight = rect.height();
             backgroundAnimatableView.getClass();
             View view2 = (View) backgroundAnimatableView;
-            int measuredHeight3 = ((height - view2.getMeasuredHeight()) / 2) + i6;
+            int measuredHeight3 = ((iHeight - view2.getMeasuredHeight()) / 2) + i4;
             int measuredHeight4 = view2.getMeasuredHeight() + measuredHeight3;
-            int i7 = this.animationDirection;
+            int i5 = this.animationDirection;
             IndicatorGardenPresenter indicatorGardenPresenter = this.indicatorGardenPresenter;
-            if (i7 == 1) {
+            if (i5 == 1) {
                 FrameLayout frameLayout3 = this.animationWindowView;
                 measuredWidth = ((frameLayout3 != null ? frameLayout3 : null).getWidth() - indicatorGardenPresenter.gardenAlgorithm.calculateRightPadding()) + this.dotMarginStart;
-                i = measuredWidth - view2.getMeasuredWidth();
+                measuredWidth2 = measuredWidth - view2.getMeasuredWidth();
             } else {
-                int calculateLeftPadding = indicatorGardenPresenter.gardenAlgorithm.calculateLeftPadding() - this.dotMarginStart;
-                measuredWidth = view2.getMeasuredWidth() + calculateLeftPadding;
-                i = calculateLeftPadding;
+                int iCalculateLeftPadding = indicatorGardenPresenter.gardenAlgorithm.calculateLeftPadding() - this.dotMarginStart;
+                measuredWidth = view2.getMeasuredWidth() + iCalculateLeftPadding;
+                measuredWidth2 = iCalculateLeftPadding;
             }
-            this.chipBounds = new Rect(i, measuredHeight3, measuredWidth, measuredHeight4);
+            this.chipBounds = new Rect(measuredWidth2, measuredHeight3, measuredWidth, measuredHeight4);
         }
         this.animRect.set(this.chipBounds);
     }

@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImsDmConfigListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.IImsDmConfigListener";
 
     void onChangeDmValue(String str, boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImsDmConfigListener {
         static final int TRANSACTION_onChangeDmValue = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImsDmConfigListener {
             private IBinder mRemote;
 
@@ -36,14 +33,14 @@ public interface IImsDmConfigListener extends IInterface {
 
             @Override // com.sec.ims.IImsDmConfigListener
             public void onChangeDmValue(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsDmConfigListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsDmConfigListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -56,8 +53,8 @@ public interface IImsDmConfigListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsDmConfigListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImsDmConfigListener)) ? new Proxy(iBinder) : (IImsDmConfigListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsDmConfigListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImsDmConfigListener)) ? new Proxy(iBinder) : (IImsDmConfigListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -72,10 +69,10 @@ public interface IImsDmConfigListener extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            onChangeDmValue(readString, readBoolean);
+            onChangeDmValue(string, z);
             return true;
         }
 
@@ -85,7 +82,6 @@ public interface IImsDmConfigListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImsDmConfigListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

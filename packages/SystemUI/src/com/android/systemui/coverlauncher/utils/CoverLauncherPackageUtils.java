@@ -25,7 +25,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverLauncherPackageUtils {
     public static ArrayList sAppList;
@@ -36,13 +35,12 @@ public final class CoverLauncherPackageUtils {
     public final ArrayList mAllowedPackageList = new ArrayList();
     public final Object mLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppLabelComparator implements Comparator {
         public AppLabelComparator() {
         }
 
         @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
+        public final int compare(Object obj, Object obj2) throws PackageManager.NameNotFoundException {
             CoverLauncherPackageInfo coverLauncherPackageInfo = (CoverLauncherPackageInfo) obj;
             CoverLauncherPackageInfo coverLauncherPackageInfo2 = (CoverLauncherPackageInfo) obj2;
             String applicationLabel = CoverLauncherPackageUtils.this.getApplicationLabel(coverLauncherPackageInfo.packageName);
@@ -52,16 +50,15 @@ public final class CoverLauncherPackageUtils {
             }
             Collator collator = Collator.getInstance(Locale.getDefault());
             collator.setStrength(0);
-            int compare = collator.compare(applicationLabel, applicationLabel2);
-            if (compare != 0) {
-                return compare;
+            int iCompare = collator.compare(applicationLabel, applicationLabel2);
+            if (iCompare != 0) {
+                return iCompare;
             }
-            int compareTo = coverLauncherPackageInfo.packageName.compareTo(coverLauncherPackageInfo2.packageName);
-            return compareTo == 0 ? Intrinsics.compare(coverLauncherPackageInfo.profileId, coverLauncherPackageInfo2.profileId) : compareTo;
+            int iCompareTo = coverLauncherPackageInfo.packageName.compareTo(coverLauncherPackageInfo2.packageName);
+            return iCompareTo == 0 ? Intrinsics.compare(coverLauncherPackageInfo.profileId, coverLauncherPackageInfo2.profileId) : iCompareTo;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,6 +94,10 @@ public final class CoverLauncherPackageUtils {
         return new ColorMatrixColorFilter(colorMatrix);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00ce A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final ArrayList getAppListFromDB(boolean z) {
         if (z || sAppList == null) {
             ArrayList arrayList = null;
@@ -121,15 +122,18 @@ public final class CoverLauncherPackageUtils {
                                 arrayList3.add(new CoverLauncherPackageInfo((String) arrayList4.get(i2), dualAppProfileId));
                                 Log.i("CoverLauncherPackageUtils", "add pkg : " + arrayList4.get(i2) + ", " + dualAppProfileId);
                             }
+                            synchronized (this.mLock) {
+                            }
                         }
+                    } else {
+                        synchronized (this.mLock) {
+                            this.mAllowedPackageList.clear();
+                            this.mAllowedPackageList.addAll(arrayList3);
+                            CollectionsKt__MutableCollectionsJVMKt.sortWith(this.mAllowedPackageList, new AppLabelComparator());
+                            Unit unit = Unit.INSTANCE;
+                        }
+                        arrayList = this.mAllowedPackageList;
                     }
-                    synchronized (this.mLock) {
-                        this.mAllowedPackageList.clear();
-                        this.mAllowedPackageList.addAll(arrayList3);
-                        CollectionsKt__MutableCollectionsJVMKt.sortWith(this.mAllowedPackageList, new AppLabelComparator());
-                        Unit unit = Unit.INSTANCE;
-                    }
-                    arrayList = this.mAllowedPackageList;
                 }
             } catch (Exception e) {
                 Log.e("CoverLauncherPackageUtils", "Failed to get allowed package list ", e);
@@ -140,7 +144,7 @@ public final class CoverLauncherPackageUtils {
         return sAppList != null ? new ArrayList(sAppList) : new ArrayList();
     }
 
-    public final String getApplicationLabel(String str) {
+    public final String getApplicationLabel(String str) throws PackageManager.NameNotFoundException {
         try {
             return this.mPackageManager.getApplicationLabel(this.mPackageManager.getApplicationInfo(str, 0)).toString();
         } catch (Exception e) {
@@ -158,7 +162,7 @@ public final class CoverLauncherPackageUtils {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.systemui.coverlauncher.widget.CoverLauncherWidgetViewController$updateAppWidgetDelayed$1
             @Override // java.lang.Runnable
             public final void run() {
-                CoverLauncherWidgetViewController.this.updateAppWidget(false);
+                companion2.updateAppWidget(false);
             }
         }, 500);
     }

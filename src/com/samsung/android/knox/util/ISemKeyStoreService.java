@@ -76,9 +76,9 @@ public interface ISemKeyStoreService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemKeyStoreService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemKeyStoreService)) {
-                return (ISemKeyStoreService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemKeyStoreService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemKeyStoreService)) {
+                return (ISemKeyStoreService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -117,32 +117,32 @@ public interface ISemKeyStoreService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int isAliasExists = isAliasExists(readString);
+                int iIsAliasExists = isAliasExists(string);
                 parcel2.writeNoException();
-                parcel2.writeInt(isAliasExists);
+                parcel2.writeInt(iIsAliasExists);
             } else if (i == 2) {
                 SemCertByte semCertByte = (SemCertByte) parcel.readTypedObject(SemCertByte.CREATOR);
-                String readString2 = parcel.readString();
-                char[] createCharArray = parcel.createCharArray();
-                int readInt = parcel.readInt();
+                String string2 = parcel.readString();
+                char[] cArrCreateCharArray = parcel.createCharArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int installCertificateInAndroidKeyStore = installCertificateInAndroidKeyStore(semCertByte, readString2, createCharArray, readInt);
+                int iInstallCertificateInAndroidKeyStore = installCertificateInAndroidKeyStore(semCertByte, string2, cArrCreateCharArray, i3);
                 parcel2.writeNoException();
-                parcel2.writeInt(installCertificateInAndroidKeyStore);
+                parcel2.writeInt(iInstallCertificateInAndroidKeyStore);
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
-                String readString3 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                grantAccessForAKS(readInt2, readString3);
+                grantAccessForAKS(i4, string3);
                 parcel2.writeNoException();
             } else if (i == 4) {
                 SemCertAndroidKeyStore semCertAndroidKeyStore = (SemCertAndroidKeyStore) parcel.readTypedObject(SemCertAndroidKeyStore.CREATOR);
                 parcel.enforceNoDataAvail();
-                int installCACert = installCACert(semCertAndroidKeyStore);
+                int iInstallCACert = installCACert(semCertAndroidKeyStore);
                 parcel2.writeNoException();
-                parcel2.writeInt(installCACert);
+                parcel2.writeInt(iInstallCACert);
             } else if (i == 5) {
                 int keystoreStatus = getKeystoreStatus();
                 parcel2.writeNoException();
@@ -171,83 +171,83 @@ public interface ISemKeyStoreService extends IInterface {
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
             public int isAliasExists(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
             public int installCertificateInAndroidKeyStore(SemCertByte semCertByte, String str, char[] cArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
-                    obtain.writeTypedObject(semCertByte, 0);
-                    obtain.writeString(str);
-                    obtain.writeCharArray(cArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semCertByte, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeCharArray(cArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
             public void grantAccessForAKS(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
             public int installCACert(SemCertAndroidKeyStore semCertAndroidKeyStore) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
-                    obtain.writeTypedObject(semCertAndroidKeyStore, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semCertAndroidKeyStore, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
             public int getKeystoreStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemKeyStoreService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

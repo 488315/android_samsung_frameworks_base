@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerViewModel$translationY$3 extends SuspendLambda implements Function4 {
     /* synthetic */ float F$0;
@@ -23,13 +22,13 @@ final class SharedNotificationContainerViewModel$translationY$3 extends SuspendL
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        float floatValue = ((Number) obj).floatValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        float floatValue2 = ((Number) obj3).floatValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
         SharedNotificationContainerViewModel$translationY$3 sharedNotificationContainerViewModel$translationY$3 = new SharedNotificationContainerViewModel$translationY$3((Continuation) obj4);
-        sharedNotificationContainerViewModel$translationY$3.F$0 = floatValue;
-        sharedNotificationContainerViewModel$translationY$3.Z$0 = booleanValue;
-        sharedNotificationContainerViewModel$translationY$3.F$1 = floatValue2;
+        sharedNotificationContainerViewModel$translationY$3.F$0 = fFloatValue;
+        sharedNotificationContainerViewModel$translationY$3.Z$0 = zBooleanValue;
+        sharedNotificationContainerViewModel$translationY$3.F$1 = fFloatValue2;
         return sharedNotificationContainerViewModel$translationY$3.invokeSuspend(Unit.INSTANCE);
     }
 

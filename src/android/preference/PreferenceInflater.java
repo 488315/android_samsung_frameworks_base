@@ -42,9 +42,9 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
         String name = xmlPullParser.getName();
         if (name.equals("intent")) {
             try {
-                Intent parseIntent = Intent.parseIntent(getContext().getResources(), xmlPullParser, attributeSet);
-                if (parseIntent != null) {
-                    preference.setIntent(parseIntent);
+                Intent intent = Intent.parseIntent(getContext().getResources(), xmlPullParser, attributeSet);
+                if (intent != null) {
+                    preference.setIntent(intent);
                 }
                 return true;
             } catch (IOException e) {

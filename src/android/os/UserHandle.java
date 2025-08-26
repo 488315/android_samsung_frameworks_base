@@ -395,9 +395,9 @@ public final class UserHandle implements Parcelable {
     }
 
     public static UserHandle readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt != -10000) {
-            return new UserHandle(readInt);
+        int i = parcel.readInt();
+        if (i != -10000) {
+            return new UserHandle(i);
         }
         return null;
     }

@@ -10,7 +10,7 @@ public class ExceptionUtils {
         throw new ParcelableException(iOException);
     }
 
-    public static void maybeUnwrapIOException(RuntimeException runtimeException) throws IOException {
+    public static void maybeUnwrapIOException(RuntimeException runtimeException) throws Throwable {
         if (runtimeException instanceof ParcelableException) {
             ((ParcelableException) runtimeException).maybeRethrow(IOException.class);
         }
@@ -38,6 +38,7 @@ public class ExceptionUtils {
         return getCompleteMessage(null, th);
     }
 
+    /* JADX INFO: Thrown type has an unknown type hierarchy: E extends java.lang.Throwable */
     public static <E extends Throwable> void propagateIfInstanceOf(Throwable th, Class<E> cls) throws Throwable {
         if (th != null && cls.isInstance(th)) {
             throw cls.cast(th);
@@ -49,7 +50,7 @@ public class ExceptionUtils {
         return propagate(th);
     }
 
-    public static RuntimeException propagate(Throwable th) {
+    public static RuntimeException propagate(Throwable th) throws Throwable {
         Preconditions.checkNotNull(th);
         propagateIfInstanceOf(th, Error.class);
         propagateIfInstanceOf(th, RuntimeException.class);

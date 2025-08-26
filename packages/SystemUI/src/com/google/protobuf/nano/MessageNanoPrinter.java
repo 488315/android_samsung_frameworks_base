@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MessageNanoPrinter {
     private MessageNanoPrinter() {
@@ -14,14 +13,14 @@ public final class MessageNanoPrinter {
     public static String deCamelCaseify(String str) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
+            char cCharAt = str.charAt(i);
             if (i == 0) {
-                stringBuffer.append(Character.toLowerCase(charAt));
-            } else if (Character.isUpperCase(charAt)) {
+                stringBuffer.append(Character.toLowerCase(cCharAt));
+            } else if (Character.isUpperCase(cCharAt)) {
                 stringBuffer.append('_');
-                stringBuffer.append(Character.toLowerCase(charAt));
+                stringBuffer.append(Character.toLowerCase(cCharAt));
             } else {
-                stringBuffer.append(charAt);
+                stringBuffer.append(cCharAt);
             }
         }
         return stringBuffer.toString();
@@ -62,12 +61,12 @@ public final class MessageNanoPrinter {
             for (Method method : cls.getMethods()) {
                 String name2 = method.getName();
                 if (name2.startsWith("set")) {
-                    String substring = name2.substring(3);
+                    String strSubstring = name2.substring(3);
                     try {
                         Class[] clsArr = new Class[0];
-                        if (((Boolean) cls.getMethod("has" + substring, null).invoke(obj, null)).booleanValue()) {
+                        if (((Boolean) cls.getMethod("has" + strSubstring, null).invoke(obj, null)).booleanValue()) {
                             Class[] clsArr2 = new Class[0];
-                            print(substring, cls.getMethod("get" + substring, null).invoke(obj, null), stringBuffer, stringBuffer2);
+                            print(strSubstring, cls.getMethod("get" + strSubstring, null).invoke(obj, null), stringBuffer, stringBuffer2);
                         }
                     } catch (NoSuchMethodException unused) {
                     }
@@ -82,10 +81,10 @@ public final class MessageNanoPrinter {
             return;
         }
         if (obj instanceof Map) {
-            String deCamelCaseify = deCamelCaseify(str);
+            String strDeCamelCaseify = deCamelCaseify(str);
             for (Map.Entry entry : ((Map) obj).entrySet()) {
                 stringBuffer2.append(stringBuffer);
-                stringBuffer2.append(deCamelCaseify);
+                stringBuffer2.append(strDeCamelCaseify);
                 stringBuffer2.append(" <\n");
                 int length3 = stringBuffer.length();
                 stringBuffer.append("  ");
@@ -97,9 +96,9 @@ public final class MessageNanoPrinter {
             }
             return;
         }
-        String deCamelCaseify2 = deCamelCaseify(str);
+        String strDeCamelCaseify2 = deCamelCaseify(str);
         stringBuffer2.append(stringBuffer);
-        stringBuffer2.append(deCamelCaseify2);
+        stringBuffer2.append(strDeCamelCaseify2);
         stringBuffer2.append(": ");
         if (obj instanceof String) {
             String str2 = (String) obj;
@@ -109,17 +108,17 @@ public final class MessageNanoPrinter {
             int length4 = str2.length();
             StringBuilder sb = new StringBuilder(length4);
             while (i < length4) {
-                char charAt = str2.charAt(i);
-                if (charAt < ' ' || charAt > '~' || charAt == '\"' || charAt == '\'') {
-                    sb.append(String.format("\\u%04x", Integer.valueOf(charAt)));
+                char cCharAt = str2.charAt(i);
+                if (cCharAt < ' ' || cCharAt > '~' || cCharAt == '\"' || cCharAt == '\'') {
+                    sb.append(String.format("\\u%04x", Integer.valueOf(cCharAt)));
                 } else {
-                    sb.append(charAt);
+                    sb.append(cCharAt);
                 }
                 i++;
             }
-            String sb2 = sb.toString();
+            String string = sb.toString();
             stringBuffer2.append("\"");
-            stringBuffer2.append(sb2);
+            stringBuffer2.append(string);
             stringBuffer2.append("\"");
         } else if (obj instanceof byte[]) {
             byte[] bArr = (byte[]) obj;

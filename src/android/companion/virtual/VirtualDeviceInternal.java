@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.companion.virtual.IVirtualDeviceActivityListener;
 import android.companion.virtual.IVirtualDeviceIntentInterceptor;
 import android.companion.virtual.IVirtualDeviceSoundEffectListener;
-import android.companion.virtual.VirtualDeviceInternal;
 import android.companion.virtual.VirtualDeviceManager;
 import android.companion.virtual.audio.VirtualAudioDevice;
 import android.companion.virtual.camera.VirtualCamera;
@@ -63,7 +62,7 @@ public class VirtualDeviceInternal {
         IVirtualDeviceActivityListener.Stub stub = new IVirtualDeviceActivityListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.1
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onTopActivityChanged(int i2, ComponentName componentName, int i3) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i4 = 0; i4 < VirtualDeviceInternal.this.mActivityListeners.size(); i4++) {
@@ -72,13 +71,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onDisplayEmpty(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -86,13 +85,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onActivityLaunchBlocked(int i2, ComponentName componentName, UserHandle userHandle, IntentSender intentSender) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -100,13 +99,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowShown(int i2, ComponentName componentName, UserHandle userHandle) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -114,13 +113,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowHidden(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -128,7 +127,7 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         };
@@ -136,7 +135,7 @@ public class VirtualDeviceInternal {
         IVirtualDeviceSoundEffectListener.Stub stub2 = new IVirtualDeviceSoundEffectListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.2
             @Override // android.companion.virtual.IVirtualDeviceSoundEffectListener
             public void onPlaySoundEffect(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mSoundEffectListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mSoundEffectListeners.size(); i3++) {
@@ -144,7 +143,7 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         };
@@ -158,7 +157,7 @@ public class VirtualDeviceInternal {
         IVirtualDeviceActivityListener.Stub stub = new IVirtualDeviceActivityListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.1
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onTopActivityChanged(int i2, ComponentName componentName, int i3) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i4 = 0; i4 < VirtualDeviceInternal.this.mActivityListeners.size(); i4++) {
@@ -167,13 +166,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onDisplayEmpty(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -181,13 +180,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onActivityLaunchBlocked(int i2, ComponentName componentName, UserHandle userHandle, IntentSender intentSender) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -195,13 +194,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowShown(int i2, ComponentName componentName, UserHandle userHandle) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -209,13 +208,13 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
             public void onSecureWindowHidden(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mActivityListeners.size(); i3++) {
@@ -223,7 +222,7 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         };
@@ -231,7 +230,7 @@ public class VirtualDeviceInternal {
         IVirtualDeviceSoundEffectListener.Stub stub2 = new IVirtualDeviceSoundEffectListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.2
             @Override // android.companion.virtual.IVirtualDeviceSoundEffectListener
             public void onPlaySoundEffect(int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     synchronized (VirtualDeviceInternal.this.mSoundEffectListenersLock) {
                         for (int i3 = 0; i3 < VirtualDeviceInternal.this.mSoundEffectListeners.size(); i3++) {
@@ -239,7 +238,7 @@ public class VirtualDeviceInternal {
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         };
@@ -466,18 +465,18 @@ public class VirtualDeviceInternal {
     }
 
     VirtualAudioDevice createVirtualAudioDevice(VirtualDisplay virtualDisplay, Executor executor, VirtualAudioDevice.AudioConfigurationChangeCallback audioConfigurationChangeCallback) {
-        Context context;
+        Context contextCreateDeviceContext;
         if (this.mVirtualAudioDevice == null) {
             try {
                 if (this.mVirtualDevice.getDevicePolicy(1) == 1) {
-                    context = this.mContext.createDeviceContext(getDeviceId());
+                    contextCreateDeviceContext = this.mContext.createDeviceContext(getDeviceId());
                 } else {
-                    context = this.mContext;
+                    contextCreateDeviceContext = this.mContext;
                 }
-                this.mVirtualAudioDevice = new VirtualAudioDevice(context, this.mVirtualDevice, virtualDisplay, executor, audioConfigurationChangeCallback, new VirtualAudioDevice.CloseListener() { // from class: android.companion.virtual.VirtualDeviceInternal$$ExternalSyntheticLambda0
+                this.mVirtualAudioDevice = new VirtualAudioDevice(contextCreateDeviceContext, this.mVirtualDevice, virtualDisplay, executor, audioConfigurationChangeCallback, new VirtualAudioDevice.CloseListener() { // from class: android.companion.virtual.VirtualDeviceInternal$$ExternalSyntheticLambda0
                     @Override // android.companion.virtual.audio.VirtualAudioDevice.CloseListener
                     public final void onClosed() {
-                        VirtualDeviceInternal.this.lambda$createVirtualAudioDevice$0();
+                        this.f$0.lambda$createVirtualAudioDevice$0();
                     }
                 });
             } catch (RemoteException e) {
@@ -560,14 +559,14 @@ public class VirtualDeviceInternal {
     }
 
     void unregisterIntentInterceptor(VirtualDeviceManager.IntentInterceptorCallback intentInterceptorCallback) {
-        IntentInterceptorDelegate remove;
+        IntentInterceptorDelegate intentInterceptorDelegateRemove;
         Objects.requireNonNull(intentInterceptorCallback);
         synchronized (this.mIntentInterceptorListenersLock) {
-            remove = this.mIntentInterceptorListeners.remove(intentInterceptorCallback);
+            intentInterceptorDelegateRemove = this.mIntentInterceptorListeners.remove(intentInterceptorCallback);
         }
-        if (remove != null) {
+        if (intentInterceptorDelegateRemove != null) {
             try {
-                this.mVirtualDevice.unregisterIntentInterceptor(remove);
+                this.mVirtualDevice.unregisterIntentInterceptor(intentInterceptorDelegateRemove);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -593,7 +592,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onTopActivityChanged$0(i, componentName);
+                    this.f$0.lambda$onTopActivityChanged$0(i, componentName);
                 }
             });
         }
@@ -602,7 +601,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onTopActivityChanged$1(i, componentName, i2);
+                    this.f$0.lambda$onTopActivityChanged$1(i, componentName, i2);
                 }
             });
         }
@@ -621,7 +620,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onDisplayEmpty$2(i);
+                    this.f$0.lambda$onDisplayEmpty$2(i);
                 }
             });
         }
@@ -630,7 +629,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onActivityLaunchBlocked$3(i, componentName, userHandle, intentSender);
+                    this.f$0.lambda$onActivityLaunchBlocked$3(i, componentName, userHandle, intentSender);
                 }
             });
         }
@@ -644,7 +643,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onSecureWindowShown$4(i, componentName, userHandle);
+                    this.f$0.lambda$onSecureWindowShown$4(i, componentName, userHandle);
                 }
             });
         }
@@ -663,7 +662,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onSecureWindowHidden$5(i);
+                    this.f$0.lambda$onSecureWindowHidden$5(i);
                 }
             });
         }
@@ -681,16 +680,16 @@ public class VirtualDeviceInternal {
 
         @Override // android.companion.virtual.IVirtualDeviceIntentInterceptor
         public void onIntentIntercepted(final Intent intent) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$IntentInterceptorDelegate$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDeviceInternal.IntentInterceptorDelegate.this.lambda$onIntentIntercepted$0(intent);
+                        this.f$0.lambda$onIntentIntercepted$0(intent);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -719,7 +718,7 @@ public class VirtualDeviceInternal {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$SoundEffectListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDeviceInternal.SoundEffectListenerDelegate.this.lambda$onPlaySoundEffect$0(i);
+                    this.f$0.lambda$onPlaySoundEffect$0(i);
                 }
             });
         }

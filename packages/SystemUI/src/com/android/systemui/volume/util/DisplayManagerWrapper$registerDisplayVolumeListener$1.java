@@ -6,7 +6,6 @@ import com.android.systemui.audio.soundcraft.interfaces.volume.VolumeManager;
 import com.android.systemui.basic.util.LogWrapper;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisplayManagerWrapper$registerDisplayVolumeListener$1 implements SemDisplayVolumeListener {
     public final /* synthetic */ Consumer $isMute;
@@ -23,11 +22,11 @@ public final class DisplayManagerWrapper$registerDisplayVolumeListener$1 impleme
         displayManagerWrapper.minSmartViewVol = i;
         displayManagerWrapper.maxSmartViewVol = i2;
         LogWrapper logWrapper = displayManagerWrapper.logWrapper;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i, "onDisplayVolumeChanged : curVol = ", ", minVol = ", ", maxVol = ");
-        m.append(i2);
-        m.append(", mute=");
-        m.append(z);
-        logWrapper.d("DisplayManagerWrapper", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i, "onDisplayVolumeChanged : curVol = ", ", minVol = ", ", maxVol = ");
+        sbM.append(i2);
+        sbM.append(", mute=");
+        sbM.append(z);
+        logWrapper.d("DisplayManagerWrapper", sbM.toString());
         this.$isMute.accept(Boolean.valueOf(z));
         ((VolumeManager) this.this$0.volumeManager$delegate.getValue()).updateCurrentVolume();
     }

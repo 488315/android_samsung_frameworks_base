@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodManager;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.internal.util.ScreenshotRequest;
 import com.android.systemui.BasicRune;
 import com.android.systemui.navigationbar.store.EventTypeFactory;
@@ -38,11 +39,9 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface ISystemUiProxy extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISystemUiProxy {
         public Stub() {
             attachInterface(this, "com.android.systemui.shared.recents.ISystemUiProxy");
@@ -59,25 +58,25 @@ public interface ISystemUiProxy extends IInterface {
                 return true;
             }
             if (i == 2) {
-                final int readInt = parcel.readInt();
-                final boolean readBoolean = parcel.readBoolean();
-                final String readString = parcel.readString();
+                final int i3 = parcel.readInt();
+                final boolean z = parcel.readBoolean();
+                final String string = parcel.readString();
                 parcel.enforceNoDataAvail();
                 final LauncherProxyService.AnonymousClass1 anonymousClass1 = (LauncherProxyService.AnonymousClass1) this;
                 anonymousClass1.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda13
                     @Override // java.lang.Runnable
                     public final void run() {
                         LauncherProxyService.AnonymousClass1 anonymousClass12 = anonymousClass1;
-                        LauncherProxyService.this.mSamsungScreenPinningRequest.showPrompt(readInt, readBoolean, readString);
+                        LauncherProxyService.this.mSamsungScreenPinningRequest.showPrompt(i3, z, string);
                     }
                 }, "startScreenPinning");
                 return true;
             }
             if (i == 7) {
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
                 LauncherProxyService.AnonymousClass1 anonymousClass12 = (LauncherProxyService.AnonymousClass1) this;
-                anonymousClass12.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda4(anonymousClass12, readBoolean2), "onOverviewShown");
+                anonymousClass12.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda4(anonymousClass12, z2), "onOverviewShown");
                 return true;
             }
             if (i == 10) {
@@ -86,11 +85,11 @@ public interface ISystemUiProxy extends IInterface {
                 LauncherProxyService.AnonymousClass1 anonymousClass13 = (LauncherProxyService.AnonymousClass1) this;
                 Log.d("LauncherProxyService", "onStatusBarTouchEvent: " + motionEvent.getAction());
                 final LauncherProxyService$1$$ExternalSyntheticLambda3 launcherProxyService$1$$ExternalSyntheticLambda3 = new LauncherProxyService$1$$ExternalSyntheticLambda3(anonymousClass13, motionEvent, 0);
-                anonymousClass13.verifyCallerAndClearCallingIdentity("onStatusBarTouchEvent", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda37
+                anonymousClass13.verifyCallerAndClearCallingIdentity("onStatusBarTouchEvent", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda38
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         Runnable runnable = launcherProxyService$1$$ExternalSyntheticLambda3;
-                        int i3 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                        int i4 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                         runnable.run();
                         return null;
                     }
@@ -98,35 +97,35 @@ public interface ISystemUiProxy extends IInterface {
                 return true;
             }
             if (i == 26) {
-                final int readInt2 = parcel.readInt();
+                final int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 final LauncherProxyService.AnonymousClass1 anonymousClass14 = (LauncherProxyService.AnonymousClass1) this;
-                final int i3 = 0;
+                final int i5 = 0;
                 anonymousClass14.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        switch (i3) {
+                        switch (i5) {
                             case 0:
                                 LauncherProxyService.AnonymousClass1 anonymousClass15 = anonymousClass14;
-                                int i4 = readInt2;
+                                int i6 = i4;
                                 LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                 for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i4);
+                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i6);
                                 }
                                 break;
                             case 1:
-                                AccessibilityManager.getInstance(LauncherProxyService.this.mContext).notifyAccessibilityButtonClicked(readInt2);
+                                AccessibilityManager.getInstance(LauncherProxyService.this.mContext).notifyAccessibilityButtonClicked(i4);
                                 break;
                             default:
-                                int i5 = readInt2;
-                                int i6 = LauncherProxyService.AnonymousClass1.$r8$clinit;
-                                long uptimeMillis = SystemClock.uptimeMillis();
-                                KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
-                                keyEvent.setDisplayId(i5);
+                                int i7 = i4;
+                                int i8 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                long jUptimeMillis = SystemClock.uptimeMillis();
+                                KeyEvent keyEvent = new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
+                                keyEvent.setDisplayId(i7);
                                 InputManagerGlobal.getInstance().injectInputEvent(keyEvent, 0);
-                                long uptimeMillis2 = SystemClock.uptimeMillis();
-                                KeyEvent keyEvent2 = new KeyEvent(uptimeMillis2, uptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
-                                keyEvent2.setDisplayId(i5);
+                                long jUptimeMillis2 = SystemClock.uptimeMillis();
+                                KeyEvent keyEvent2 = new KeyEvent(jUptimeMillis2, jUptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
+                                keyEvent2.setDisplayId(i7);
                                 InputManagerGlobal.getInstance().injectInputEvent(keyEvent2, 0);
                                 break;
                         }
@@ -140,28 +139,28 @@ public interface ISystemUiProxy extends IInterface {
                 return true;
             }
             if (i == 13) {
-                final float readFloat = parcel.readFloat();
+                final float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
                 final LauncherProxyService.AnonymousClass1 anonymousClass16 = (LauncherProxyService.AnonymousClass1) this;
-                final int i4 = 1;
+                final int i6 = 1;
                 anonymousClass16.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        switch (i4) {
+                        switch (i6) {
                             case 0:
                                 LauncherProxyService.AnonymousClass1 anonymousClass17 = anonymousClass16;
-                                float f = readFloat;
+                                float f2 = f;
                                 LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                 for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onAssistantGestureCompletion(f);
+                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onAssistantGestureCompletion(f2);
                                 }
                                 break;
                             default:
                                 LauncherProxyService.AnonymousClass1 anonymousClass18 = anonymousClass16;
-                                float f2 = readFloat;
+                                float f3 = f;
                                 LauncherProxyService launcherProxyService2 = LauncherProxyService.this;
                                 for (int size2 = ((ArrayList) launcherProxyService2.mConnectionCallbacks).size() - 1; size2 >= 0; size2--) {
-                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size2)).onAssistantProgress(f2);
+                                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size2)).onAssistantProgress(f3);
                                 }
                                 break;
                         }
@@ -181,34 +180,35 @@ public interface ISystemUiProxy extends IInterface {
                 parcel.enforceNoDataAvail();
                 final LauncherProxyService.AnonymousClass1 anonymousClass18 = (LauncherProxyService.AnonymousClass1) this;
                 final int displayId = keyEvent == null ? -1 : keyEvent.getDisplayId();
+                ListPopupWindow$$ExternalSyntheticOutline0.m(displayId, "onBackEvent for displayId=", "LauncherProxyService");
                 BackAnimationController.BackAnimationImpl backAnimationImpl = LauncherProxyService.this.mBackAnimation;
                 if (backAnimationImpl == null || keyEvent == null) {
-                    final int i5 = 2;
+                    final int i7 = 2;
                     anonymousClass18.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i5) {
+                            switch (i7) {
                                 case 0:
                                     LauncherProxyService.AnonymousClass1 anonymousClass152 = anonymousClass18;
-                                    int i42 = displayId;
+                                    int i62 = displayId;
                                     LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i42);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i62);
                                     }
                                     break;
                                 case 1:
                                     AccessibilityManager.getInstance(LauncherProxyService.this.mContext).notifyAccessibilityButtonClicked(displayId);
                                     break;
                                 default:
-                                    int i52 = displayId;
-                                    int i6 = LauncherProxyService.AnonymousClass1.$r8$clinit;
-                                    long uptimeMillis = SystemClock.uptimeMillis();
-                                    KeyEvent keyEvent2 = new KeyEvent(uptimeMillis, uptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
-                                    keyEvent2.setDisplayId(i52);
+                                    int i72 = displayId;
+                                    int i8 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                    long jUptimeMillis = SystemClock.uptimeMillis();
+                                    KeyEvent keyEvent2 = new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
+                                    keyEvent2.setDisplayId(i72);
                                     InputManagerGlobal.getInstance().injectInputEvent(keyEvent2, 0);
-                                    long uptimeMillis2 = SystemClock.uptimeMillis();
-                                    KeyEvent keyEvent22 = new KeyEvent(uptimeMillis2, uptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
-                                    keyEvent22.setDisplayId(i52);
+                                    long jUptimeMillis2 = SystemClock.uptimeMillis();
+                                    KeyEvent keyEvent22 = new KeyEvent(jUptimeMillis2, jUptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
+                                    keyEvent22.setDisplayId(i72);
                                     InputManagerGlobal.getInstance().injectInputEvent(keyEvent22, 0);
                                     break;
                             }
@@ -221,53 +221,53 @@ public interface ISystemUiProxy extends IInterface {
                 return true;
             }
             if (i == 46) {
-                boolean readBoolean3 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
                 LauncherProxyService.AnonymousClass1 anonymousClass19 = (LauncherProxyService.AnonymousClass1) this;
-                anonymousClass19.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$5$$ExternalSyntheticLambda0(anonymousClass19, readBoolean3, 1), "setHomeRotationEnabled");
+                anonymousClass19.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$5$$ExternalSyntheticLambda0(anonymousClass19, z3, 1), "setHomeRotationEnabled");
                 return true;
             }
             switch (i) {
                 case 16:
-                    final int readInt3 = parcel.readInt();
+                    final int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
                     final LauncherProxyService.AnonymousClass1 anonymousClass110 = (LauncherProxyService.AnonymousClass1) this;
-                    final int i6 = 1;
+                    final int i9 = 1;
                     final Runnable runnable = new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i6) {
+                            switch (i9) {
                                 case 0:
                                     LauncherProxyService.AnonymousClass1 anonymousClass152 = anonymousClass110;
-                                    int i42 = readInt3;
+                                    int i62 = i8;
                                     LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i42);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onPrioritizedRotation(i62);
                                     }
                                     break;
                                 case 1:
-                                    AccessibilityManager.getInstance(LauncherProxyService.this.mContext).notifyAccessibilityButtonClicked(readInt3);
+                                    AccessibilityManager.getInstance(LauncherProxyService.this.mContext).notifyAccessibilityButtonClicked(i8);
                                     break;
                                 default:
-                                    int i52 = readInt3;
-                                    int i62 = LauncherProxyService.AnonymousClass1.$r8$clinit;
-                                    long uptimeMillis = SystemClock.uptimeMillis();
-                                    KeyEvent keyEvent2 = new KeyEvent(uptimeMillis, uptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
-                                    keyEvent2.setDisplayId(i52);
+                                    int i72 = i8;
+                                    int i82 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                    long jUptimeMillis = SystemClock.uptimeMillis();
+                                    KeyEvent keyEvent2 = new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257);
+                                    keyEvent2.setDisplayId(i72);
                                     InputManagerGlobal.getInstance().injectInputEvent(keyEvent2, 0);
-                                    long uptimeMillis2 = SystemClock.uptimeMillis();
-                                    KeyEvent keyEvent22 = new KeyEvent(uptimeMillis2, uptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
-                                    keyEvent22.setDisplayId(i52);
+                                    long jUptimeMillis2 = SystemClock.uptimeMillis();
+                                    KeyEvent keyEvent22 = new KeyEvent(jUptimeMillis2, jUptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257);
+                                    keyEvent22.setDisplayId(i72);
                                     InputManagerGlobal.getInstance().injectInputEvent(keyEvent22, 0);
                                     break;
                             }
                         }
                     };
-                    anonymousClass110.verifyCallerAndClearCallingIdentity("notifyAccessibilityButtonClicked", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda37
+                    anonymousClass110.verifyCallerAndClearCallingIdentity("notifyAccessibilityButtonClicked", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda38
                         @Override // java.util.function.Supplier
                         public final Object get() {
                             Runnable runnable2 = runnable;
-                            int i32 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                            int i42 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                             runnable2.run();
                             return null;
                         }
@@ -276,24 +276,24 @@ public interface ISystemUiProxy extends IInterface {
                 case 17:
                     LauncherProxyService.AnonymousClass1 anonymousClass111 = (LauncherProxyService.AnonymousClass1) this;
                     final LauncherProxyService$1$$ExternalSyntheticLambda4 launcherProxyService$1$$ExternalSyntheticLambda4 = new LauncherProxyService$1$$ExternalSyntheticLambda4(anonymousClass111, 0);
-                    anonymousClass111.verifyCallerAndClearCallingIdentity("notifyAccessibilityButtonLongClicked", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda37
+                    anonymousClass111.verifyCallerAndClearCallingIdentity("notifyAccessibilityButtonLongClicked", new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda38
                         @Override // java.util.function.Supplier
                         public final Object get() {
                             Runnable runnable2 = launcherProxyService$1$$ExternalSyntheticLambda4;
-                            int i32 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                            int i42 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                             runnable2.run();
                             return null;
                         }
                     });
                     return true;
                 case 18:
-                    final int i7 = 1;
+                    final int i10 = 1;
                     ((LauncherProxyService.AnonymousClass1) this).verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i7) {
+                            switch (i10) {
                                 case 0:
-                                    int i8 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                    int i11 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                                     ((MultiStarManager) MultiStarManager.sInstance.get()).getClass();
                                     PluginMultiStar pluginMultiStar = MultiStarManager.mPluginMultiStar;
                                     if (pluginMultiStar != null) {
@@ -302,7 +302,7 @@ public interface ISystemUiProxy extends IInterface {
                                     }
                                     break;
                                 default:
-                                    int i9 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                    int i12 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                                     try {
                                         ActivityTaskManager.getService().stopSystemLockTaskMode();
                                         break;
@@ -314,28 +314,28 @@ public interface ISystemUiProxy extends IInterface {
                     }, "stopScreenPinning");
                     return true;
                 case 19:
-                    final float readFloat2 = parcel.readFloat();
+                    final float f2 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
                     final LauncherProxyService.AnonymousClass1 anonymousClass112 = (LauncherProxyService.AnonymousClass1) this;
-                    final int i8 = 0;
+                    final int i11 = 0;
                     anonymousClass112.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda9
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i8) {
+                            switch (i11) {
                                 case 0:
                                     LauncherProxyService.AnonymousClass1 anonymousClass172 = anonymousClass112;
-                                    float f = readFloat2;
+                                    float f22 = f2;
                                     LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onAssistantGestureCompletion(f);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onAssistantGestureCompletion(f22);
                                     }
                                     break;
                                 default:
                                     LauncherProxyService.AnonymousClass1 anonymousClass182 = anonymousClass112;
-                                    float f2 = readFloat2;
+                                    float f3 = f2;
                                     LauncherProxyService launcherProxyService2 = LauncherProxyService.this;
                                     for (int size2 = ((ArrayList) launcherProxyService2.mConnectionCallbacks).size() - 1; size2 >= 0; size2--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size2)).onAssistantProgress(f2);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size2)).onAssistantProgress(f3);
                                     }
                                     break;
                             }
@@ -345,28 +345,28 @@ public interface ISystemUiProxy extends IInterface {
                 default:
                     switch (i) {
                         case 48:
-                            final boolean readBoolean4 = parcel.readBoolean();
-                            final boolean readBoolean5 = parcel.readBoolean();
+                            final boolean z4 = parcel.readBoolean();
+                            final boolean z5 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
                             final LauncherProxyService.AnonymousClass1 anonymousClass113 = (LauncherProxyService.AnonymousClass1) this;
                             anonymousClass113.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda8
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LauncherProxyService.AnonymousClass1 anonymousClass114 = LauncherProxyService.AnonymousClass1.this;
-                                    boolean z = readBoolean4;
-                                    boolean z2 = readBoolean5;
+                                    LauncherProxyService.AnonymousClass1 anonymousClass114 = anonymousClass113;
+                                    boolean z6 = z4;
+                                    boolean z7 = z5;
                                     LauncherProxyService launcherProxyService = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onTaskbarStatusUpdated$1(z, z2);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).onTaskbarStatusUpdated$1(z6, z7);
                                     }
                                 }
                             }, "notifyTaskbarStatus");
                             return true;
                         case 49:
-                            boolean readBoolean6 = parcel.readBoolean();
+                            boolean z6 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
                             LauncherProxyService.AnonymousClass1 anonymousClass114 = (LauncherProxyService.AnonymousClass1) this;
-                            anonymousClass114.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$5$$ExternalSyntheticLambda0(anonymousClass114, readBoolean6, 2), "notifyTaskbarAutohideSuspend");
+                            anonymousClass114.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$5$$ExternalSyntheticLambda0(anonymousClass114, z6, 2), "notifyTaskbarAutohideSuspend");
                             return true;
                         case 50:
                             LauncherProxyService.AnonymousClass1 anonymousClass115 = (LauncherProxyService.AnonymousClass1) this;
@@ -392,47 +392,47 @@ public interface ISystemUiProxy extends IInterface {
                             anonymousClass117.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda3(anonymousClass117, motionEvent2, 1), "onStatusBarTrackpadEvent");
                             return true;
                         case 54:
-                            int[] createIntArray = parcel.createIntArray();
+                            int[] iArrCreateIntArray = parcel.createIntArray();
                             parcel.enforceNoDataAvail();
                             LauncherProxyService.AnonymousClass1 anonymousClass118 = (LauncherProxyService.AnonymousClass1) this;
-                            anonymousClass118.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda16(anonymousClass118, createIntArray), "setAssistantOverridesRequested");
+                            anonymousClass118.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda16(anonymousClass118, iArrCreateIntArray), "setAssistantOverridesRequested");
                             return true;
                         case 55:
-                            final boolean readBoolean7 = parcel.readBoolean();
-                            final boolean readBoolean8 = parcel.readBoolean();
-                            final long readLong = parcel.readLong();
+                            final boolean z7 = parcel.readBoolean();
+                            final boolean z8 = parcel.readBoolean();
+                            final long j = parcel.readLong();
                             parcel.enforceNoDataAvail();
                             final LauncherProxyService.AnonymousClass1 anonymousClass119 = (LauncherProxyService.AnonymousClass1) this;
                             anonymousClass119.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda22
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LauncherProxyService.AnonymousClass1 anonymousClass120 = LauncherProxyService.AnonymousClass1.this;
-                                    boolean z = readBoolean7;
-                                    boolean z2 = readBoolean8;
-                                    long j = readLong;
+                                    LauncherProxyService.AnonymousClass1 anonymousClass120 = anonymousClass119;
+                                    boolean z9 = z7;
+                                    boolean z10 = z8;
+                                    long j2 = j;
                                     LauncherProxyService launcherProxyService2 = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService2.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size)).animateNavBarLongPress(z, z2, j);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size)).animateNavBarLongPress(z9, z10, j2);
                                     }
                                 }
                             }, "animateNavBarLongPress");
                             return true;
                         case 56:
-                            final long readLong2 = parcel.readLong();
-                            final float readFloat3 = parcel.readFloat();
-                            final boolean readBoolean9 = parcel.readBoolean();
+                            final long j2 = parcel.readLong();
+                            final float f3 = parcel.readFloat();
+                            final boolean z9 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
                             final LauncherProxyService.AnonymousClass1 anonymousClass120 = (LauncherProxyService.AnonymousClass1) this;
                             anonymousClass120.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda32
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LauncherProxyService.AnonymousClass1 anonymousClass121 = LauncherProxyService.AnonymousClass1.this;
-                                    long j = readLong2;
-                                    float f = readFloat3;
-                                    boolean z = readBoolean9;
+                                    LauncherProxyService.AnonymousClass1 anonymousClass121 = anonymousClass120;
+                                    long j3 = j2;
+                                    float f4 = f3;
+                                    boolean z10 = z9;
                                     LauncherProxyService launcherProxyService2 = LauncherProxyService.this;
                                     for (int size = ((ArrayList) launcherProxyService2.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size)).setOverrideHomeButtonLongPress(f, z, j);
+                                        ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService2.mConnectionCallbacks).get(size)).setOverrideHomeButtonLongPress(f4, z10, j3);
                                     }
                                 }
                             }, "setOverrideHomeButtonLongPress");
@@ -444,11 +444,11 @@ public interface ISystemUiProxy extends IInterface {
                         case 58:
                             return true;
                         case 59:
-                            boolean readBoolean10 = parcel.readBoolean();
-                            String readString2 = parcel.readString();
+                            boolean z10 = parcel.readBoolean();
+                            String string2 = parcel.readString();
                             parcel.enforceNoDataAvail();
                             LauncherProxyService.AnonymousClass1 anonymousClass122 = (LauncherProxyService.AnonymousClass1) this;
-                            anonymousClass122.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda10(0, anonymousClass122, readString2, readBoolean10), "updateContextualEduStats");
+                            anonymousClass122.verifyCallerAndClearCallingIdentityPostMain(new LauncherProxyService$1$$ExternalSyntheticLambda10(0, anonymousClass122, string2, z10), "updateContextualEduStats");
                             return true;
                         default:
                             switch (i) {
@@ -465,36 +465,36 @@ public interface ISystemUiProxy extends IInterface {
                                     parcel2.writeNoException();
                                     return true;
                                 case 102:
-                                    int readInt4 = parcel.readInt();
+                                    int i12 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
                                     LauncherProxyService.AnonymousClass1 anonymousClass124 = (LauncherProxyService.AnonymousClass1) this;
                                     if (BasicRune.NAVBAR_GESTURE) {
                                         LauncherProxyService launcherProxyService4 = LauncherProxyService.this;
-                                        ((NavBarStoreImpl) launcherProxyService4.mNavBarStore).handleEvent(launcherProxyService4, new EventTypeFactory.EventType.StartBottomGestureHintVI(readInt4));
+                                        ((NavBarStoreImpl) launcherProxyService4.mNavBarStore).handleEvent(launcherProxyService4, new EventTypeFactory.EventType.StartBottomGestureHintVI(i12));
                                     }
                                     parcel2.writeNoException();
                                     return true;
                                 case 103:
-                                    int readInt5 = parcel.readInt();
-                                    int readInt6 = parcel.readInt();
-                                    int readInt7 = parcel.readInt();
-                                    long readLong3 = parcel.readLong();
+                                    int i13 = parcel.readInt();
+                                    int i14 = parcel.readInt();
+                                    int i15 = parcel.readInt();
+                                    long j3 = parcel.readLong();
                                     parcel.enforceNoDataAvail();
                                     LauncherProxyService.AnonymousClass1 anonymousClass125 = (LauncherProxyService.AnonymousClass1) this;
                                     if (BasicRune.NAVBAR_GESTURE) {
                                         LauncherProxyService launcherProxyService5 = LauncherProxyService.this;
-                                        ((NavBarStoreImpl) launcherProxyService5.mNavBarStore).handleEvent(launcherProxyService5, new EventTypeFactory.EventType.MoveBottomGestureHintDistance(readInt5, readInt6, readInt7, readLong3));
+                                        ((NavBarStoreImpl) launcherProxyService5.mNavBarStore).handleEvent(launcherProxyService5, new EventTypeFactory.EventType.MoveBottomGestureHintDistance(i13, i14, i15, j3));
                                     }
                                     parcel2.writeNoException();
                                     return true;
                                 case 104:
-                                    final int i9 = 0;
+                                    final int i16 = 0;
                                     ((LauncherProxyService.AnonymousClass1) this).verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda1
                                         @Override // java.lang.Runnable
                                         public final void run() {
-                                            switch (i9) {
+                                            switch (i16) {
                                                 case 0:
-                                                    int i82 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                                    int i112 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                                                     ((MultiStarManager) MultiStarManager.sInstance.get()).getClass();
                                                     PluginMultiStar pluginMultiStar = MultiStarManager.mPluginMultiStar;
                                                     if (pluginMultiStar != null) {
@@ -503,7 +503,7 @@ public interface ISystemUiProxy extends IInterface {
                                                     }
                                                     break;
                                                 default:
-                                                    int i92 = LauncherProxyService.AnonymousClass1.$r8$clinit;
+                                                    int i122 = LauncherProxyService.AnonymousClass1.$r8$clinit;
                                                     try {
                                                         ActivityTaskManager.getService().stopSystemLockTaskMode();
                                                         break;
@@ -526,12 +526,12 @@ public interface ISystemUiProxy extends IInterface {
                                     parcel2.writeNoException();
                                     return true;
                                 case 107:
-                                    boolean readBoolean11 = parcel.readBoolean();
+                                    boolean z11 = parcel.readBoolean();
                                     parcel.enforceNoDataAvail();
                                     LauncherProxyService.AnonymousClass1 anonymousClass128 = (LauncherProxyService.AnonymousClass1) this;
                                     FgsManagerController fgsManagerController = LauncherProxyService.this.mFgsManagerController;
                                     if (fgsManagerController != null) {
-                                        if (readBoolean11) {
+                                        if (z11) {
                                             LauncherProxyService$1$$ExternalSyntheticLambda27 launcherProxyService$1$$ExternalSyntheticLambda27 = anonymousClass128.mOnNumberOfPackagesChangedListener;
                                             FgsManagerControllerImpl fgsManagerControllerImpl = (FgsManagerControllerImpl) fgsManagerController;
                                             synchronized (fgsManagerControllerImpl.lock) {
@@ -596,14 +596,32 @@ public interface ISystemUiProxy extends IInterface {
                                     }
                                     return true;
                                 case 112:
-                                    String readString3 = parcel.readString();
+                                    String string3 = parcel.readString();
                                     parcel.enforceNoDataAvail();
                                     LauncherProxyService.AnonymousClass1 anonymousClass133 = (LauncherProxyService.AnonymousClass1) this;
-                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("invokeSearcleWithPackageName packageName = ", readString3, "LauncherProxyService");
+                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("invokeSearcleWithPackageName packageName = ", string3, "LauncherProxyService");
                                     if (BasicRune.SEARCLE) {
-                                        LauncherProxyService.this.mMainHandler.post(new LauncherProxyService$1$$ExternalSyntheticLambda16(anonymousClass133, readString3, 2));
+                                        LauncherProxyService.this.mMainHandler.post(new LauncherProxyService$1$$ExternalSyntheticLambda16(anonymousClass133, string3, 2));
                                         return true;
                                     }
+                                    return true;
+                                case 113:
+                                    final boolean z12 = parcel.readBoolean();
+                                    final int i17 = parcel.readInt();
+                                    parcel.enforceNoDataAvail();
+                                    final LauncherProxyService.AnonymousClass1 anonymousClass134 = (LauncherProxyService.AnonymousClass1) this;
+                                    anonymousClass134.verifyCallerAndClearCallingIdentityPostMain(new Runnable() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda33
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            LauncherProxyService.AnonymousClass1 anonymousClass135 = anonymousClass134;
+                                            boolean z13 = z12;
+                                            int i18 = i17;
+                                            LauncherProxyService launcherProxyService8 = LauncherProxyService.this;
+                                            for (int size = ((ArrayList) launcherProxyService8.mConnectionCallbacks).size() - 1; size >= 0; size--) {
+                                                ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService8.mConnectionCallbacks).get(size)).onTaskbarAutohideSuspendForDisplay(i18, z13);
+                                            }
+                                        }
+                                    }, "notifyTaskbarAutohideSuspendForDisplay");
                                     return true;
                                 default:
                                     return super.onTransact(i, parcel, parcel2, i2);

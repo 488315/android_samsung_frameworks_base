@@ -24,17 +24,17 @@ public final class DisplayedContentSample {
     }
 
     public long[] getSampleComponent(ColorComponent colorComponent) {
-        int ordinal = colorComponent.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = colorComponent.ordinal();
+        if (iOrdinal == 0) {
             return this.mSamplesComponent0;
         }
-        if (ordinal == 1) {
+        if (iOrdinal == 1) {
             return this.mSamplesComponent1;
         }
-        if (ordinal == 2) {
+        if (iOrdinal == 2) {
             return this.mSamplesComponent2;
         }
-        if (ordinal == 3) {
+        if (iOrdinal == 3) {
             return this.mSamplesComponent3;
         }
         throw new ArrayIndexOutOfBoundsException();

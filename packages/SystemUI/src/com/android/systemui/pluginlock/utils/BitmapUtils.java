@@ -2,14 +2,23 @@ package com.android.systemui.pluginlock.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import com.android.systemui.wallpaper.WallpaperUtils;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BitmapUtils {
     private static final String TAG = "BitmapUtils";
@@ -34,10 +43,10 @@ public class BitmapUtils {
             i = realScreenSize.x;
         }
         if (bitmap == null) {
-            Bitmap createBitmap = Bitmap.createBitmap(i2, i, Bitmap.Config.ARGB_8888);
-            new Canvas(createBitmap).drawColor(-16777216);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i, Bitmap.Config.ARGB_8888);
+            new Canvas(bitmapCreateBitmap).drawColor(-16777216);
             Log.w(TAG, "fitToScreen: bitmap is null, return blank bitmap");
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -51,113 +60,250 @@ public class BitmapUtils {
             return bitmap;
         }
         SuggestionsAdapter$$ExternalSyntheticOutline0.m(width, height, "fitToScreen: original width = ", ", height = ", TAG);
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (f * f5), (int) (f2 * f5), true);
-        if (createScaledBitmap != bitmap) {
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (f * f5), (int) (f2 * f5), true);
+        if (bitmapCreateScaledBitmap != bitmap) {
             Log.d(TAG, "fitToScreen: Recycle. bitmap = " + bitmap);
             bitmap.recycle();
         }
-        Log.d(TAG, "fitToScreen: Resized width = " + createScaledBitmap.getWidth() + ", height = " + createScaledBitmap.getHeight());
-        return createScaledBitmap;
+        Log.d(TAG, "fitToScreen: Resized width = " + bitmapCreateScaledBitmap.getWidth() + ", height = " + bitmapCreateScaledBitmap.getHeight());
+        return bitmapCreateScaledBitmap;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:4:0x00e7  */
-    /* JADX WARN: Removed duplicated region for block: B:7:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x00e7  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x00bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:92:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Type inference failed for: r3v12 */
+    /* JADX WARN: Type inference failed for: r3v20 */
+    /* JADX WARN: Type inference failed for: r3v5, types: [java.io.FileInputStream] */
     /* JADX WARN: Type inference failed for: r6v0, types: [java.lang.StringBuilder] */
     /* JADX WARN: Type inference failed for: r6v1 */
     /* JADX WARN: Type inference failed for: r6v11 */
     /* JADX WARN: Type inference failed for: r6v12 */
-    /* JADX WARN: Type inference failed for: r6v13 */
     /* JADX WARN: Type inference failed for: r6v2, types: [java.io.InputStream] */
-    /* JADX WARN: Type inference failed for: r6v5 */
-    /* JADX WARN: Type inference failed for: r6v9 */
+    /* JADX WARN: Type inference failed for: r6v3 */
+    /* JADX WARN: Type inference failed for: r6v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Bitmap getBitmapFromPath(android.content.Context r8, java.lang.String r9, boolean r10, boolean r11) {
-        /*
-            Method dump skipped, instructions count: 236
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.utils.BitmapUtils.getBitmapFromPath(android.content.Context, java.lang.String, boolean, boolean):android.graphics.Bitmap");
+    public static Bitmap getBitmapFromPath(Context context, String str, boolean z, boolean z2) throws IOException {
+        Bitmap bitmap;
+        ?? r3;
+        Bitmap bitmap2;
+        BitmapFactory.Options options;
+        FileInputStream fileInputStream;
+        FileInputStream fileInputStream2;
+        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getBitmapFromPath() path:", str, TAG);
+        Bitmap bitmap3 = null;
+        Bitmap bitmapDecodeStreamConsiderQMG = null;
+        bitmap3 = null;
+        bitmap3 = null;
+        FileInputStream fileInputStream3 = null;
+        bitmap3 = null;
+        if (str != null) {
+            try {
+                File file = new File(str);
+                ?? sb = new StringBuilder("getBitmapFromPath() file.exists():");
+                sb.append(file.exists());
+                Log.d(TAG, sb.toString());
+                if (file.exists() && file.canRead()) {
+                    try {
+                        options = new BitmapFactory.Options();
+                        options.inJustDecodeBounds = true;
+                        boolean z3 = WallpaperUtils.mIsExternalLiveWallpaper;
+                    } catch (Throwable th) {
+                        th = th;
+                    }
+                    try {
+                        fileInputStream = new FileInputStream(str);
+                        try {
+                            WallpaperUtils.decodeStreamConsiderQMG(fileInputStream, null, options);
+                            try {
+                                fileInputStream.close();
+                            } catch (IOException e) {
+                                e = e;
+                                e.printStackTrace();
+                                int i = options.outWidth;
+                                int i2 = options.outHeight;
+                                Log.d(TAG, "getBitmapFromPath() width:" + i + ", height:" + i2);
+                                fileInputStream2 = new FileInputStream(file);
+                                Rect rect = new Rect(0, 0, i, i2);
+                                options.inJustDecodeBounds = false;
+                                bitmapDecodeStreamConsiderQMG = WallpaperUtils.decodeStreamConsiderQMG(fileInputStream2, rect, options);
+                                Log.d(TAG, "getBitmapFromPath() bitmap:" + bitmapDecodeStreamConsiderQMG);
+                                bitmap2 = bitmapDecodeStreamConsiderQMG;
+                                fileInputStream3 = fileInputStream2;
+                                sb = i2;
+                                bitmap3 = bitmap2;
+                                if (z) {
+                                }
+                            }
+                        } catch (FileNotFoundException e2) {
+                            e = e2;
+                            e.printStackTrace();
+                            if (fileInputStream != null) {
+                                try {
+                                    fileInputStream.close();
+                                } catch (IOException e3) {
+                                    e = e3;
+                                    e.printStackTrace();
+                                    int i3 = options.outWidth;
+                                    int i22 = options.outHeight;
+                                    Log.d(TAG, "getBitmapFromPath() width:" + i3 + ", height:" + i22);
+                                    fileInputStream2 = new FileInputStream(file);
+                                    Rect rect2 = new Rect(0, 0, i3, i22);
+                                    options.inJustDecodeBounds = false;
+                                    bitmapDecodeStreamConsiderQMG = WallpaperUtils.decodeStreamConsiderQMG(fileInputStream2, rect2, options);
+                                    Log.d(TAG, "getBitmapFromPath() bitmap:" + bitmapDecodeStreamConsiderQMG);
+                                    bitmap2 = bitmapDecodeStreamConsiderQMG;
+                                    fileInputStream3 = fileInputStream2;
+                                    sb = i22;
+                                    bitmap3 = bitmap2;
+                                    if (z) {
+                                    }
+                                }
+                            }
+                            int i32 = options.outWidth;
+                            int i222 = options.outHeight;
+                            Log.d(TAG, "getBitmapFromPath() width:" + i32 + ", height:" + i222);
+                            fileInputStream2 = new FileInputStream(file);
+                            Rect rect22 = new Rect(0, 0, i32, i222);
+                            options.inJustDecodeBounds = false;
+                            bitmapDecodeStreamConsiderQMG = WallpaperUtils.decodeStreamConsiderQMG(fileInputStream2, rect22, options);
+                            Log.d(TAG, "getBitmapFromPath() bitmap:" + bitmapDecodeStreamConsiderQMG);
+                            bitmap2 = bitmapDecodeStreamConsiderQMG;
+                            fileInputStream3 = fileInputStream2;
+                            sb = i222;
+                            bitmap3 = bitmap2;
+                            if (z) {
+                            }
+                        }
+                    } catch (FileNotFoundException e4) {
+                        e = e4;
+                        fileInputStream = null;
+                    } catch (Throwable th2) {
+                        th = th2;
+                        sb = 0;
+                        if (sb != 0) {
+                            try {
+                                sb.close();
+                            } catch (IOException e5) {
+                                e5.printStackTrace();
+                            }
+                        }
+                        throw th;
+                    }
+                    int i322 = options.outWidth;
+                    int i2222 = options.outHeight;
+                    Log.d(TAG, "getBitmapFromPath() width:" + i322 + ", height:" + i2222);
+                    fileInputStream2 = new FileInputStream(file);
+                    try {
+                        Rect rect222 = new Rect(0, 0, i322, i2222);
+                        options.inJustDecodeBounds = false;
+                        bitmapDecodeStreamConsiderQMG = WallpaperUtils.decodeStreamConsiderQMG(fileInputStream2, rect222, options);
+                        Log.d(TAG, "getBitmapFromPath() bitmap:" + bitmapDecodeStreamConsiderQMG);
+                        bitmap2 = bitmapDecodeStreamConsiderQMG;
+                        fileInputStream3 = fileInputStream2;
+                        sb = i2222;
+                    } catch (Throwable th3) {
+                        th = th3;
+                        bitmap = bitmapDecodeStreamConsiderQMG;
+                        r3 = fileInputStream2;
+                        try {
+                            Log.w(TAG, "Can't load dynamic lock wallpaper!", th);
+                            th.printStackTrace();
+                            if (r3 != 0) {
+                                try {
+                                    r3.close();
+                                } catch (IOException e6) {
+                                    e6.printStackTrace();
+                                }
+                            }
+                            bitmap3 = bitmap;
+                            if (z) {
+                            }
+                        } finally {
+                            if (r3 != 0) {
+                                try {
+                                    r3.close();
+                                } catch (IOException e7) {
+                                    e7.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Log.w(TAG, "Can't load dynamic lock file");
+                    bitmap2 = null;
+                    sb = sb;
+                }
+                bitmap3 = bitmap2;
+            } catch (Throwable th4) {
+                th = th4;
+                bitmap = bitmap3;
+                r3 = bitmap3;
+            }
+        }
+        return z ? fitToScreen(context, bitmap3, z2) : bitmap3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:8:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0071  */
+    /* JADX WARN: Removed duplicated region for block: B:42:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Bitmap getBitmapFromUri(android.content.Context r7, android.net.Uri r8, boolean r9, boolean r10) {
-        /*
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "getBitmapFromPath() uri:"
-            r0.<init>(r1)
-            r0.append(r8)
-            java.lang.String r0 = r0.toString()
-            java.lang.String r1 = "BitmapUtils"
-            android.util.Log.d(r1, r0)
-            r0 = 0
-            if (r8 == 0) goto L6f
-            android.content.ContentResolver r1 = r7.getContentResolver()     // Catch: java.lang.Throwable -> L58
-            java.lang.String r2 = "r"
-            android.os.ParcelFileDescriptor r8 = r1.openFileDescriptor(r8, r2)     // Catch: java.lang.Throwable -> L58
-            if (r8 == 0) goto L4d
-            java.io.FileDescriptor r1 = r8.getFileDescriptor()     // Catch: java.lang.Throwable -> L4b
-            android.graphics.BitmapFactory$Options r2 = new android.graphics.BitmapFactory$Options     // Catch: java.lang.Throwable -> L4b
-            r2.<init>()     // Catch: java.lang.Throwable -> L4b
-            r3 = 1
-            r2.inJustDecodeBounds = r3     // Catch: java.lang.Throwable -> L4b
-            android.graphics.Bitmap$Config r3 = android.graphics.Bitmap.Config.ARGB_8888     // Catch: java.lang.Throwable -> L4b
-            r2.inPreferredConfig = r3     // Catch: java.lang.Throwable -> L4b
-            android.graphics.BitmapFactory.decodeFileDescriptor(r1, r0, r2)     // Catch: java.lang.Throwable -> L4b
-            int r4 = r2.outWidth     // Catch: java.lang.Throwable -> L4b
-            int r2 = r2.outHeight     // Catch: java.lang.Throwable -> L4b
-            android.graphics.Rect r5 = new android.graphics.Rect     // Catch: java.lang.Throwable -> L4b
-            r6 = 0
-            r5.<init>(r6, r6, r4, r2)     // Catch: java.lang.Throwable -> L4b
-            android.graphics.BitmapFactory$Options r2 = new android.graphics.BitmapFactory$Options     // Catch: java.lang.Throwable -> L4b
-            r2.<init>()     // Catch: java.lang.Throwable -> L4b
-            r2.inPreferredConfig = r3     // Catch: java.lang.Throwable -> L4b
-            android.graphics.Bitmap r0 = android.graphics.BitmapFactory.decodeFileDescriptor(r1, r5, r2)     // Catch: java.lang.Throwable -> L4b
-            goto L4d
-        L4b:
-            r1 = move-exception
-            goto L5a
-        L4d:
-            if (r8 == 0) goto L6f
-            r8.close()     // Catch: java.io.IOException -> L53
-            goto L6f
-        L53:
-            r8 = move-exception
-            r8.printStackTrace()
-            goto L6f
-        L58:
-            r1 = move-exception
-            r8 = r0
-        L5a:
-            r1.printStackTrace()     // Catch: java.lang.Throwable -> L63
-            if (r8 == 0) goto L6f
-            r8.close()     // Catch: java.io.IOException -> L53
-            goto L6f
-        L63:
-            r7 = move-exception
-            if (r8 == 0) goto L6e
-            r8.close()     // Catch: java.io.IOException -> L6a
-            goto L6e
-        L6a:
-            r8 = move-exception
-            r8.printStackTrace()
-        L6e:
-            throw r7
-        L6f:
-            if (r9 == 0) goto L75
-            android.graphics.Bitmap r0 = fitToScreen(r7, r0, r10)
-        L75:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.utils.BitmapUtils.getBitmapFromUri(android.content.Context, android.net.Uri, boolean, boolean):android.graphics.Bitmap");
+    public static Bitmap getBitmapFromUri(Context context, Uri uri, boolean z, boolean z2) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor;
+        Log.d(TAG, "getBitmapFromPath() uri:" + uri);
+        Bitmap bitmapDecodeFileDescriptor = null;
+        try {
+            if (uri != null) {
+                try {
+                    parcelFileDescriptorOpenFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r");
+                    if (parcelFileDescriptorOpenFileDescriptor != null) {
+                        try {
+                            FileDescriptor fileDescriptor = parcelFileDescriptorOpenFileDescriptor.getFileDescriptor();
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inJustDecodeBounds = true;
+                            Bitmap.Config config = Bitmap.Config.ARGB_8888;
+                            options.inPreferredConfig = config;
+                            BitmapFactory.decodeFileDescriptor(fileDescriptor, null, options);
+                            Rect rect = new Rect(0, 0, options.outWidth, options.outHeight);
+                            BitmapFactory.Options options2 = new BitmapFactory.Options();
+                            options2.inPreferredConfig = config;
+                            bitmapDecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(fileDescriptor, rect, options2);
+                        } catch (Throwable th) {
+                            th = th;
+                            try {
+                                th.printStackTrace();
+                                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                                    parcelFileDescriptorOpenFileDescriptor.close();
+                                }
+                                if (!z) {
+                                }
+                            } catch (Throwable th2) {
+                                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                                    try {
+                                        parcelFileDescriptorOpenFileDescriptor.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                throw th2;
+                            }
+                        }
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                    parcelFileDescriptorOpenFileDescriptor = null;
+                }
+                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                    parcelFileDescriptorOpenFileDescriptor.close();
+                }
+            }
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        return !z ? fitToScreen(context, bitmapDecodeFileDescriptor, z2) : bitmapDecodeFileDescriptor;
     }
 }

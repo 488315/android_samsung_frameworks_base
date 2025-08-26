@@ -15,24 +15,24 @@ public abstract class CountDownTimer {
                 if (CountDownTimer.this.mCancelled) {
                     return;
                 }
-                long elapsedRealtime = CountDownTimer.this.mStopTimeInFuture - SystemClock.elapsedRealtime();
+                long jElapsedRealtime = CountDownTimer.this.mStopTimeInFuture - SystemClock.elapsedRealtime();
                 long j2 = 0;
-                if (elapsedRealtime <= 0) {
+                if (jElapsedRealtime <= 0) {
                     CountDownTimer.this.onFinish();
                 } else {
-                    long elapsedRealtime2 = SystemClock.elapsedRealtime();
-                    CountDownTimer.this.onTick(elapsedRealtime);
-                    long elapsedRealtime3 = SystemClock.elapsedRealtime() - elapsedRealtime2;
-                    if (elapsedRealtime < CountDownTimer.this.mCountdownInterval) {
-                        j = elapsedRealtime - elapsedRealtime3;
-                        if (j < 0) {
-                            sendMessageDelayed(obtainMessage(1), j2);
-                        }
-                    } else {
-                        j = CountDownTimer.this.mCountdownInterval - elapsedRealtime3;
+                    long jElapsedRealtime2 = SystemClock.elapsedRealtime();
+                    CountDownTimer.this.onTick(jElapsedRealtime);
+                    long jElapsedRealtime3 = SystemClock.elapsedRealtime() - jElapsedRealtime2;
+                    if (jElapsedRealtime >= CountDownTimer.this.mCountdownInterval) {
+                        j = CountDownTimer.this.mCountdownInterval - jElapsedRealtime3;
                         while (j < 0) {
                             j += CountDownTimer.this.mCountdownInterval;
                         }
+                    } else {
+                        j = jElapsedRealtime - jElapsedRealtime3;
+                        if (j < 0) {
+                        }
+                        sendMessageDelayed(obtainMessage(1), j2);
                     }
                     j2 = j;
                     sendMessageDelayed(obtainMessage(1), j2);

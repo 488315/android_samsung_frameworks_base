@@ -4,6 +4,7 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +18,13 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
+import com.android.systemui.FontSizeUtils;
 import com.android.systemui.LsRune;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
+import com.android.systemui.knox.EdmMonitor;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.pluginlock.PluginLockMediator;
@@ -34,7 +39,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.wallpaper.PluginWallpaperController;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class RotationLockDetailAdapter implements DetailAdapter {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,19 +73,19 @@ public class RotationLockDetailAdapter implements DetailAdapter {
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
-    public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_qs_detail_rotation, viewGroup, false);
+    public final View createDetailView(Context context, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_qs_detail_rotation, viewGroup, false);
         SystemUIAnalytics.sendScreenViewLog(SystemUIAnalytics.SID_ROTATE_DETAIL);
-        ViewGroup viewGroup2 = (ViewGroup) inflate;
-        SecQSSwitchPreference inflateSwitch = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
-        viewGroup2.addView(inflateSwitch);
-        this.mHomeScreenOption = inflateSwitch;
-        SecQSSwitchPreference inflateSwitch2 = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
-        viewGroup2.addView(inflateSwitch2);
-        this.mLockScreenOption = inflateSwitch2;
-        SecQSSwitchPreference inflateSwitch3 = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
-        viewGroup2.addView(inflateSwitch3);
-        this.mCallScreenOption = inflateSwitch3;
+        ViewGroup viewGroup2 = (ViewGroup) viewInflate;
+        SecQSSwitchPreference secQSSwitchPreferenceInflateSwitch = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
+        viewGroup2.addView(secQSSwitchPreferenceInflateSwitch);
+        this.mHomeScreenOption = secQSSwitchPreferenceInflateSwitch;
+        SecQSSwitchPreference secQSSwitchPreferenceInflateSwitch2 = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
+        viewGroup2.addView(secQSSwitchPreferenceInflateSwitch2);
+        this.mLockScreenOption = secQSSwitchPreferenceInflateSwitch2;
+        SecQSSwitchPreference secQSSwitchPreferenceInflateSwitch3 = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup2);
+        viewGroup2.addView(secQSSwitchPreferenceInflateSwitch3);
+        this.mCallScreenOption = secQSSwitchPreferenceInflateSwitch3;
         if (QpRune.QUICK_TABLET) {
             this.mHomeScreenOption.setVisibility(8);
             this.mLockScreenOption.setVisibility(8);
@@ -119,15 +123,15 @@ public class RotationLockDetailAdapter implements DetailAdapter {
         this.mCallSwitch.setChecked(this.mSettingsHelper.isCallScreenRotationAllowed());
         updateVoiceCallScreenOption(getToggleState().booleanValue());
         if (QpRune.QUICK_TILE_ROTATION_MANUAL) {
-            View inflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.sec_qs_detail_rotation_navigation_button, viewGroup, false);
-            viewGroup2.addView(inflate2);
-            View findViewById = inflate2.findViewById(R.id.button_on_navigation_bar_option_parent);
-            this.mButtonOnNavigationBarOption = findViewById;
-            SecQSSwitchPreference inflateSwitch4 = SecQSSwitchPreference.inflateSwitch(this.mContext, (ViewGroup) findViewById);
-            ((ViewGroup) this.mButtonOnNavigationBarOption).addView(inflateSwitch4);
-            inflateSwitch4.setClickable(false);
-            this.mButtonOnNavigationBarOption = inflateSwitch4;
-            TextView textView4 = (TextView) inflateSwitch4.findViewById(R.id.title);
+            View viewInflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.sec_qs_detail_rotation_navigation_button, viewGroup, false);
+            viewGroup2.addView(viewInflate2);
+            View viewFindViewById = viewInflate2.findViewById(R.id.button_on_navigation_bar_option_parent);
+            this.mButtonOnNavigationBarOption = viewFindViewById;
+            SecQSSwitchPreference secQSSwitchPreferenceInflateSwitch4 = SecQSSwitchPreference.inflateSwitch(this.mContext, (ViewGroup) viewFindViewById);
+            ((ViewGroup) this.mButtonOnNavigationBarOption).addView(secQSSwitchPreferenceInflateSwitch4);
+            secQSSwitchPreferenceInflateSwitch4.setClickable(false);
+            this.mButtonOnNavigationBarOption = secQSSwitchPreferenceInflateSwitch4;
+            TextView textView4 = (TextView) secQSSwitchPreferenceInflateSwitch4.findViewById(R.id.title);
             this.mButtonOnNavigationBarTitle = textView4;
             textView4.setText(R.string.quick_settings_manual_rotation_button_on_navigation_bar_title);
             this.mButtonOnNavigationBarOption.findViewById(R.id.title_summary).setVisibility(8);
@@ -139,7 +143,7 @@ public class RotationLockDetailAdapter implements DetailAdapter {
             }
             updateButtonOnNavigationBarOption(!getToggleState().booleanValue());
         } else {
-            inflate.findViewById(R.id.button_on_navigation_bar_option_parent).setVisibility(8);
+            viewInflate.findViewById(R.id.button_on_navigation_bar_option_parent).setVisibility(8);
         }
         SecQSSwitchPreference secQSSwitchPreference = this.mHomeScreenOption;
         final TextView textView5 = this.mHomeTitle;
@@ -148,7 +152,10 @@ public class RotationLockDetailAdapter implements DetailAdapter {
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
-                accessibilityNodeInfo.setContentDescription(textView5.getText().toString() + ", " + (!switchCompat3.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat3.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off)) + ", Switch");
+                String string = !switchCompat3.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat3.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off);
+                accessibilityNodeInfo.setContentDescription(textView5.getText().toString());
+                accessibilityNodeInfo.setClassName("android.widget.Switch");
+                accessibilityNodeInfo.setStateDescription(string);
             }
         });
         SecQSSwitchPreference secQSSwitchPreference2 = this.mLockScreenOption;
@@ -158,7 +165,10 @@ public class RotationLockDetailAdapter implements DetailAdapter {
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
-                accessibilityNodeInfo.setContentDescription(textView6.getText().toString() + ", " + (!switchCompat4.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat4.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off)) + ", Switch");
+                String string = !switchCompat4.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat4.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off);
+                accessibilityNodeInfo.setContentDescription(textView6.getText().toString());
+                accessibilityNodeInfo.setClassName("android.widget.Switch");
+                accessibilityNodeInfo.setStateDescription(string);
             }
         });
         SecQSSwitchPreference secQSSwitchPreference3 = this.mCallScreenOption;
@@ -168,7 +178,10 @@ public class RotationLockDetailAdapter implements DetailAdapter {
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
-                accessibilityNodeInfo.setContentDescription(textView7.getText().toString() + ", " + (!switchCompat5.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat5.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off)) + ", Switch");
+                String string = !switchCompat5.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat5.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off);
+                accessibilityNodeInfo.setContentDescription(textView7.getText().toString());
+                accessibilityNodeInfo.setClassName("android.widget.Switch");
+                accessibilityNodeInfo.setStateDescription(string);
             }
         });
         View view2 = this.mButtonOnNavigationBarOption;
@@ -178,10 +191,17 @@ public class RotationLockDetailAdapter implements DetailAdapter {
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view22, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view22, accessibilityNodeInfo);
-                accessibilityNodeInfo.setContentDescription(textView8.getText().toString() + ", " + (!switchCompat6.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat6.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off)) + ", Switch");
+                String string = !switchCompat6.isEnabled() ? RotationLockDetailAdapter.this.mContext.getString(R.string.sec_accessibility_rotation_disabled_switch) : switchCompat6.isChecked() ? RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_on) : RotationLockDetailAdapter.this.mContext.getString(R.string.switch_bar_off);
+                accessibilityNodeInfo.setContentDescription(textView8.getText().toString());
+                accessibilityNodeInfo.setClassName("android.widget.Switch");
+                accessibilityNodeInfo.setStateDescription(string);
             }
         });
-        return inflate;
+        FontSizeUtils.updateFontSize(this.mHomeTitle, R.dimen.sec_qs_detail_category_item_text_size, 0.8f, 1.3f);
+        FontSizeUtils.updateFontSize(this.mLockTitle, R.dimen.sec_qs_detail_category_item_text_size, 0.8f, 1.3f);
+        FontSizeUtils.updateFontSize(this.mCallTitle, R.dimen.sec_qs_detail_category_item_text_size, 0.8f, 1.3f);
+        FontSizeUtils.updateFontSize(this.mButtonOnNavigationBarTitle, R.dimen.sec_qs_detail_category_item_text_size, 0.8f, 1.3f);
+        return viewInflate;
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -215,63 +235,39 @@ public class RotationLockDetailAdapter implements DetailAdapter {
         if (z2 || z3) {
             return true;
         }
-        boolean isVideoWallpaper = WallpaperUtils.isVideoWallpaper(this.mContext);
+        boolean zIsVideoWallpaper = WallpaperUtils.isVideoWallpaper(this.mContext);
         boolean z4 = WallpaperManager.getInstance(this.mContext).semGetWallpaperType(WallpaperUtils.sCurrentWhich) == 3 && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).isPluginWallpaperRequired(WallpaperUtils.sCurrentWhich) && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).containsVideo(WallpaperUtils.sCurrentWhich);
-        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isVideoWallpaper: ", " ,isMultiPackVideoWallpaper: ", "RotationLockDetailAdapter", isVideoWallpaper, z4);
-        return (isVideoWallpaper || z4 || pluginLockMediator.isRotateMenuHide()) ? false : true;
+        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isVideoWallpaper: ", " ,isMultiPackVideoWallpaper: ", "RotationLockDetailAdapter", zIsVideoWallpaper, z4);
+        return (zIsVideoWallpaper || z4 || pluginLockMediator.isRotateMenuHide()) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0023  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x001f  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001a  */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setToggleState(boolean r4) {
-        /*
-            r3 = this;
-            com.android.systemui.Dependency r0 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.knox.KnoxStateMonitor> r1 = com.android.systemui.knox.KnoxStateMonitor.class
-            java.lang.Object r0 = r0.getDependencyInner(r1)
-            com.android.systemui.knox.KnoxStateMonitor r0 = (com.android.systemui.knox.KnoxStateMonitor) r0
-            com.android.systemui.knox.KnoxStateMonitorImpl r0 = (com.android.systemui.knox.KnoxStateMonitorImpl) r0
-            com.android.systemui.knox.EdmMonitor r0 = r0.mEdmMonitor
-            if (r0 == 0) goto L1a
-            com.android.systemui.knox.KnoxStateMonitorImpl r1 = r0.knoxStateMonitor
-            android.content.Context r1 = r1.mContext
-            boolean r0 = r0.mSettingsChangesAllowed
-            if (r0 != 0) goto L1a
-            r0 = 1
-            goto L1b
-        L1a:
-            r0 = 0
-        L1b:
-            com.android.systemui.qs.tiles.SRotationLockTile r1 = r3.mRotationLockTile
-            if (r0 == 0) goto L23
-            r1.showItPolicyToast()
-            return
-        L23:
-            r1.fireToggleStateChanged(r4)
-            r0 = r4 ^ 1
-            java.lang.String r1 = "SRotationLockTile#setToggleState"
-            com.android.systemui.statusbar.policy.RotationLockController r2 = r3.mController
-            r2.setRotationLocked(r1, r0)
-            r3.updateHomeScreenOption(r4)
-            r3.updateLockScreenOption(r4)
-            r3.updateVoiceCallScreenOption(r4)
-            boolean r4 = com.android.systemui.QpRune.QUICK_TILE_ROTATION_MANUAL
-            if (r4 == 0) goto L3f
-            r3.updateButtonOnNavigationBarOption(r0)
-        L3f:
-            java.lang.String r3 = com.android.systemui.util.SystemUIAnalytics.getCurrentScreenID()
-            java.lang.String r4 = "auto rotate"
-            java.lang.String r0 = "QPDE1008"
-            java.lang.String r1 = "location"
-            com.android.systemui.util.SystemUIAnalytics.sendEventCDLog(r3, r0, r1, r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.detail.RotationLockDetailAdapter.setToggleState(boolean):void");
+    public final void setToggleState(boolean z) {
+        boolean z2;
+        EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
+        if (edmMonitor != null) {
+            Context context = edmMonitor.knoxStateMonitor.mContext;
+            z2 = !edmMonitor.mSettingsChangesAllowed;
+        }
+        SRotationLockTile sRotationLockTile = this.mRotationLockTile;
+        if (z2) {
+            sRotationLockTile.showItPolicyToast();
+            return;
+        }
+        sRotationLockTile.fireToggleStateChanged(z);
+        boolean z3 = !z;
+        this.mController.setRotationLocked("SRotationLockTile#setToggleState", z3);
+        updateHomeScreenOption(z);
+        updateLockScreenOption(z);
+        updateVoiceCallScreenOption(z);
+        if (QpRune.QUICK_TILE_ROTATION_MANUAL) {
+            updateButtonOnNavigationBarOption(z3);
+        }
+        SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_DETAIL_SWITCH, "location", "auto rotate");
     }
 
     public final void updateButtonOnNavigationBarOption(boolean z) {

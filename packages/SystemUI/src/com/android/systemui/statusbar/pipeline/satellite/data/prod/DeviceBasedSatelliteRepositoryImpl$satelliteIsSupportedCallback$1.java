@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -53,16 +52,16 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 ex
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj2) {
                     final Boolean bool = (Boolean) obj2;
-                    DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, DeviceBasedSatelliteRepositoryImpl.this.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1$callback$1$$ExternalSyntheticLambda0
+                    DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, deviceBasedSatelliteRepositoryImpl.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1$callback$1$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj3) {
+                        public final Object mo781invoke(Object obj3) {
                             return "onSatelliteSupportedStateChanged: ".concat(bool.booleanValue() ? "supported" : "not supported");
                         }
                     });
                     SendChannel sendChannel = producerScope;
                     bool.getClass();
-                    ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(bool);
+                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(bool);
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

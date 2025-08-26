@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BiometricManager $biometricManager;
@@ -48,7 +47,7 @@ final class BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFr
             IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback = new IBiometricEnabledOnKeyguardCallback.Stub() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$1$callback$1
                 public final void onChanged(boolean z, int i2, int i3) {
                     ChannelExt channelExt = ChannelExt.INSTANCE;
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     Triple triple = new Triple(Integer.valueOf(i2), Boolean.valueOf(z), Integer.valueOf(i3));
                     channelExt.getClass();
                     ChannelExt.trySendWithFailureLogging(producerScope2, triple, "BiometricsRepositoryImpl", "biometricsEnabled state changed");

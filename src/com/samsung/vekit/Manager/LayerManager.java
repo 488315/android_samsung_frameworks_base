@@ -21,21 +21,21 @@ public class LayerManager extends Manager<Layer> {
     public Layer create(LayerType layerType, String str) {
         Layer mediaLayer;
         try {
-            int generateUniqueId = generateUniqueId();
+            int iGenerateUniqueId = generateUniqueId();
             int i = AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$LayerType[layerType.ordinal()];
             if (i == 1) {
-                mediaLayer = new MediaLayer(this.context, generateUniqueId, str);
+                mediaLayer = new MediaLayer(this.context, iGenerateUniqueId, str);
             } else if (i == 2) {
-                mediaLayer = new AudioLayer(this.context, generateUniqueId, str);
+                mediaLayer = new AudioLayer(this.context, iGenerateUniqueId, str);
             } else if (i == 3) {
-                mediaLayer = new ImageLayer(this.context, generateUniqueId, str);
+                mediaLayer = new ImageLayer(this.context, iGenerateUniqueId, str);
             } else if (i == 4) {
-                mediaLayer = new DoodleLayer(this.context, generateUniqueId, str);
+                mediaLayer = new DoodleLayer(this.context, iGenerateUniqueId, str);
             } else {
                 if (i != 5) {
                     return null;
                 }
-                mediaLayer = new CaptionLayer(this.context, generateUniqueId, str);
+                mediaLayer = new CaptionLayer(this.context, iGenerateUniqueId, str);
             }
             add(mediaLayer);
             return mediaLayer;

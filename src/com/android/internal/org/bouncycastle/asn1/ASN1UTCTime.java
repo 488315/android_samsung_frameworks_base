@@ -93,24 +93,24 @@ public class ASN1UTCTime extends ASN1Primitive {
     }
 
     public String getTime() {
-        String fromByteArray = Strings.fromByteArray(this.contents);
-        if (fromByteArray.indexOf(45) < 0 && fromByteArray.indexOf(43) < 0) {
-            if (fromByteArray.length() == 11) {
-                return fromByteArray.substring(0, 10) + "00GMT+00:00";
+        String strFromByteArray = Strings.fromByteArray(this.contents);
+        if (strFromByteArray.indexOf(45) < 0 && strFromByteArray.indexOf(43) < 0) {
+            if (strFromByteArray.length() == 11) {
+                return strFromByteArray.substring(0, 10) + "00GMT+00:00";
             }
-            return fromByteArray.substring(0, 12) + "GMT+00:00";
+            return strFromByteArray.substring(0, 12) + "GMT+00:00";
         }
-        int indexOf = fromByteArray.indexOf(45);
-        if (indexOf < 0) {
-            indexOf = fromByteArray.indexOf(43);
+        int iIndexOf = strFromByteArray.indexOf(45);
+        if (iIndexOf < 0) {
+            iIndexOf = strFromByteArray.indexOf(43);
         }
-        if (indexOf == fromByteArray.length() - 3) {
-            fromByteArray = fromByteArray + "00";
+        if (iIndexOf == strFromByteArray.length() - 3) {
+            strFromByteArray = strFromByteArray + "00";
         }
-        if (indexOf == 10) {
-            return fromByteArray.substring(0, 10) + "00GMT" + fromByteArray.substring(10, 13) + ":" + fromByteArray.substring(13, 15);
+        if (iIndexOf == 10) {
+            return strFromByteArray.substring(0, 10) + "00GMT" + strFromByteArray.substring(10, 13) + ":" + strFromByteArray.substring(13, 15);
         }
-        return fromByteArray.substring(0, 12) + "GMT" + fromByteArray.substring(12, 15) + ":" + fromByteArray.substring(15, 17);
+        return strFromByteArray.substring(0, 12) + "GMT" + strFromByteArray.substring(12, 15) + ":" + strFromByteArray.substring(15, 17);
     }
 
     public String getAdjustedTime() {

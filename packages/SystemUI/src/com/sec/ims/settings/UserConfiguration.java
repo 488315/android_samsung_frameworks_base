@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UserConfiguration {
     public static final String ENABLE_CALL_WAITING = "enable_call_wait";
@@ -32,17 +31,17 @@ public class UserConfiguration {
     }
 
     public static String getUserConfig(Context context, int i, String str, String str2) {
-        Cursor query = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.moveToFirst()) {
-                    str2 = query.getString(0);
+                if (cursorQuery.moveToFirst()) {
+                    str2 = cursorQuery.getString(0);
                 }
             } finally {
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return str2;
     }
@@ -51,10 +50,10 @@ public class UserConfiguration {
         if (getUserConfig(context, i, str, "").equals(str2)) {
             return;
         }
-        Uri build = URI.buildUpon().fragment("simslot" + i).build();
+        Uri uriBuild = URI.buildUpon().fragment("simslot" + i).build();
         ContentValues contentValues = new ContentValues();
         contentValues.put(str, str2);
-        context.getContentResolver().insert(build, contentValues);
+        context.getContentResolver().insert(uriBuild, contentValues);
     }
 
     @Deprecated
@@ -79,10 +78,10 @@ public class UserConfiguration {
         if (getUserConfig(context, i, str, -1) == i2) {
             return;
         }
-        Uri build = URI.buildUpon().fragment("simslot" + i).build();
+        Uri uriBuild = URI.buildUpon().fragment("simslot" + i).build();
         ContentValues contentValues = new ContentValues();
         contentValues.put(str, Integer.valueOf(i2));
-        context.getContentResolver().insert(build, contentValues);
+        context.getContentResolver().insert(uriBuild, contentValues);
     }
 
     @Deprecated
@@ -91,17 +90,17 @@ public class UserConfiguration {
     }
 
     public static boolean getUserConfig(Context context, int i, String str, boolean z) {
-        Cursor query = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.moveToFirst()) {
-                    z = "true".equals(query.getString(0));
+                if (cursorQuery.moveToFirst()) {
+                    z = "true".equals(cursorQuery.getString(0));
                 }
             } finally {
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return z;
     }
@@ -115,9 +114,9 @@ public class UserConfiguration {
         if (getUserConfig(context, i, str, false) == z) {
             return;
         }
-        Uri build = URI.buildUpon().fragment("simslot" + i).build();
+        Uri uriBuild = URI.buildUpon().fragment("simslot" + i).build();
         ContentValues contentValues = new ContentValues();
         contentValues.put(str, z ? "true" : "false");
-        context.getContentResolver().insert(build, contentValues);
+        context.getContentResolver().insert(uriBuild, contentValues);
     }
 }

@@ -37,13 +37,13 @@ public class SizedInputStream extends InputStream {
         if (i2 > j) {
             i2 = (int) j;
         }
-        int read = this.mWrapped.read(bArr, i, i2);
-        if (read != -1) {
-            this.mLength -= read;
-            return read;
+        int i3 = this.mWrapped.read(bArr, i, i2);
+        if (i3 != -1) {
+            this.mLength -= i3;
+            return i3;
         }
         if (this.mLength <= 0) {
-            return read;
+            return i3;
         }
         throw new IOException("Unexpected EOF; expected " + this.mLength + " more bytes");
     }

@@ -16,9 +16,9 @@ public class OpenSSHPublicKeySpec extends EncodedKeySpec {
         if (i2 >= bArr.length) {
             throw new IllegalArgumentException("invalid public key blob: type field longer than blob");
         }
-        String fromByteArray = Strings.fromByteArray(Arrays.copyOfRange(bArr, 4, i2));
-        this.type = fromByteArray;
-        if (fromByteArray.startsWith("ecdsa")) {
+        String strFromByteArray = Strings.fromByteArray(Arrays.copyOfRange(bArr, 4, i2));
+        this.type = strFromByteArray;
+        if (strFromByteArray.startsWith("ecdsa")) {
             return;
         }
         while (true) {

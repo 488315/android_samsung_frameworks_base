@@ -17,7 +17,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AppToWebGenericLinksParser {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class AppToWebGenericLinksParser {
     public final Map genericLinksMap = new LinkedHashMap();
     public final ShellExecutor mainExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,6 @@ public final class AppToWebGenericLinksParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public DeviceConfigListener() {
             DeviceConfig.addOnPropertiesChangedListener("app_compat_overrides", AppToWebGenericLinksParser.this.mainExecutor, this);
@@ -74,9 +71,9 @@ public final class AppToWebGenericLinksParser {
         if (string == null) {
             return;
         }
-        List split$default = StringsKt__StringsKt.split$default(string, new String[]{" "}, 0, 6);
+        List listSplit$default = StringsKt__StringsKt.split$default(string, new String[]{" "}, 0, 6);
         ArrayList arrayList = new ArrayList();
-        for (Object obj : split$default) {
+        for (Object obj : listSplit$default) {
             if (StringsKt__StringsKt.contains$default((String) obj, ':')) {
                 arrayList.add(obj);
             }
@@ -87,8 +84,8 @@ public final class AppToWebGenericLinksParser {
         while (i2 < size) {
             Object obj2 = arrayList.get(i2);
             i2++;
-            List split$default2 = StringsKt__StringsKt.split$default((String) obj2, new char[]{':'}, 2);
-            arrayList2.add(new Pair((String) split$default2.get(0), (String) split$default2.get(1)));
+            List listSplit$default2 = StringsKt__StringsKt.split$default((String) obj2, new char[]{':'}, 2);
+            arrayList2.add(new Pair((String) listSplit$default2.get(0), (String) listSplit$default2.get(1)));
         }
         ArrayList arrayList3 = new ArrayList();
         int size2 = arrayList2.size();

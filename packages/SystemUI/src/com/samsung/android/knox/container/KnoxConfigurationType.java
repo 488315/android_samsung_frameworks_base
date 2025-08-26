@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxConfigurationType implements Parcelable {
     public static final Parcelable.Creator<KnoxConfigurationType> CREATOR = new Parcelable.Creator<KnoxConfigurationType>() { // from class: com.samsung.android.knox.container.KnoxConfigurationType.1
@@ -236,16 +235,16 @@ public class KnoxConfigurationType implements Parcelable {
         return 0;
     }
 
-    public final void deserializeRCPSettings(Parcel parcel, HashMap<String, List<Pair<String, String>>> hashMap) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
+    public final void deserializeRCPSettings(Parcel parcel, HashMap<String, List<Pair<String, String>>> map) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
             ArrayList arrayList = new ArrayList();
-            int readInt2 = parcel.readInt();
-            for (int i2 = 0; i2 < readInt2; i2++) {
+            int i3 = parcel.readInt();
+            for (int i4 = 0; i4 < i3; i4++) {
                 arrayList.add(new Pair(parcel.readString(), parcel.readString()));
             }
-            hashMap.put(readString, arrayList);
+            map.put(string, arrayList);
         }
     }
 
@@ -261,21 +260,21 @@ public class KnoxConfigurationType implements Parcelable {
         }
         for (String str : authenticationConfig.getAuthenticatorConfig().keySet()) {
             if (authenticationConfig.getAuthenticatorConfig().get(str) != null) {
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("AuthenticationConfig:authenticatorConfig:", str, ":");
-                m.append(authenticationConfig.getAuthenticatorConfig().get(str).toString());
-                Log.d(TAG, m.toString());
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("AuthenticationConfig:authenticatorConfig:", str, ":");
+                sbM.append(authenticationConfig.getAuthenticatorConfig().get(str).toString());
+                Log.d(TAG, sbM.toString());
             }
         }
     }
 
-    public final void dumpRCPSettings(HashMap<String, List<Pair<String, String>>> hashMap) {
-        Set<String> keySet = hashMap.keySet();
-        if (keySet == null || keySet.isEmpty()) {
+    public final void dumpRCPSettings(HashMap<String, List<Pair<String, String>>> map) {
+        Set<String> setKeySet = map.keySet();
+        if (setKeySet == null || setKeySet.isEmpty()) {
             return;
         }
-        for (String str : keySet) {
+        for (String str : setKeySet) {
             KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m(" ", str, " {", TAG);
-            List<Pair<String, String>> list = hashMap.get(str);
+            List<Pair<String, String>> list = map.get(str);
             if (list != null) {
                 for (Pair<String, String> pair : list) {
                     StringBuilder sb = new StringBuilder("  ( ");
@@ -457,13 +456,13 @@ public class KnoxConfigurationType implements Parcelable {
         return getListFromSyncPolicy(str, str2, this.mRCPDataSettings);
     }
 
-    public final List<String> getListFromSyncPolicy(String str, String str2, HashMap<String, List<Pair<String, String>>> hashMap) {
-        Set<String> keySet;
+    public final List<String> getListFromSyncPolicy(String str, String str2, HashMap<String, List<Pair<String, String>>> map) {
+        Set<String> setKeySet;
         ArrayList arrayList = null;
-        if (hashMap != null && str != null && !str.isEmpty() && str2 != null && !str2.isEmpty() && (keySet = hashMap.keySet()) != null) {
+        if (map != null && str != null && !str.isEmpty() && str2 != null && !str2.isEmpty() && (setKeySet = map.keySet()) != null) {
             Pair pair = new Pair(str, str2);
-            for (String str3 : keySet) {
-                List<Pair<String, String>> list = hashMap.get(str3);
+            for (String str3 : setKeySet) {
+                List<Pair<String, String>> list = map.get(str3);
                 if (list != null) {
                     Iterator<Pair<String, String>> it = list.iterator();
                     while (it.hasNext()) {
@@ -564,9 +563,9 @@ public class KnoxConfigurationType implements Parcelable {
         return this.mProtectedList;
     }
 
-    public final String getRCPSyncPolicy(String str, String str2, HashMap<String, List<Pair<String, String>>> hashMap) {
+    public final String getRCPSyncPolicy(String str, String str2, HashMap<String, List<Pair<String, String>>> map) {
         List<Pair<String, String>> list;
-        if (hashMap == null || str == null || str.isEmpty() || str2 == null || str2.isEmpty() || (list = hashMap.get(str)) == null) {
+        if (map == null || str == null || str.isEmpty() || str2 == null || str2.isEmpty() || (list = map.get(str)) == null) {
             return null;
         }
         for (Pair<String, String> pair : list) {
@@ -642,20 +641,20 @@ public class KnoxConfigurationType implements Parcelable {
         }
     }
 
-    public final void serializeRCPSettings(Parcel parcel, HashMap<String, List<Pair<String, String>>> hashMap) {
-        Set<String> keySet = hashMap.keySet();
-        if (keySet == null) {
+    public final void serializeRCPSettings(Parcel parcel, HashMap<String, List<Pair<String, String>>> map) {
+        Set<String> setKeySet = map.keySet();
+        if (setKeySet == null) {
             parcel.writeInt(0);
             return;
         }
-        parcel.writeInt(keySet.size());
-        for (String str : keySet) {
+        parcel.writeInt(setKeySet.size());
+        for (String str : setKeySet) {
             parcel.writeString(str);
-            List<Pair<String, String>> list = hashMap.get(str);
+            List<Pair<String, String>> list = map.get(str);
             if (list != null) {
-                Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, list);
-                while (m.hasNext()) {
-                    Pair pair = (Pair) m.next();
+                Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, list);
+                while (itM.hasNext()) {
+                    Pair pair = (Pair) itM.next();
                     parcel.writeString((String) pair.first);
                     parcel.writeString((String) pair.second);
                 }
@@ -945,23 +944,23 @@ public class KnoxConfigurationType implements Parcelable {
         this.mProtectedList.addAll(list);
     }
 
-    public void setRCPSyncPolicy(HashMap<String, List<Pair<String, String>>> hashMap, HashMap<String, List<Pair<String, String>>> hashMap2) {
-        Set<String> keySet;
-        if (hashMap2 == null) {
+    public void setRCPSyncPolicy(HashMap<String, List<Pair<String, String>>> map, HashMap<String, List<Pair<String, String>>> map2) {
+        Set<String> setKeySet;
+        if (map2 == null) {
             return;
         }
-        hashMap2.clear();
-        if (hashMap == null || (keySet = hashMap.keySet()) == null) {
+        map2.clear();
+        if (map == null || (setKeySet = map.keySet()) == null) {
             return;
         }
-        for (String str : keySet) {
-            List<Pair<String, String>> list = hashMap.get(str);
+        for (String str : setKeySet) {
+            List<Pair<String, String>> list = map.get(str);
             if (list != null && !list.isEmpty()) {
                 ArrayList arrayList = new ArrayList();
                 for (Pair<String, String> pair : list) {
                     arrayList.add(new Pair((String) pair.first, (String) pair.second));
                 }
-                hashMap2.put(str, arrayList);
+                map2.put(str, arrayList);
             }
         }
     }
@@ -1105,8 +1104,8 @@ public class KnoxConfigurationType implements Parcelable {
         return getRCPSyncPolicy(str, str2, this.mRCPNotifSettings);
     }
 
-    public final void setRCPSyncPolicy(List<String> list, String str, String str2, HashMap<String, List<Pair<String, String>>> hashMap) {
-        if (hashMap == null || list == null || list.isEmpty() || str == null || str.isEmpty() || str2 == null || str2.isEmpty()) {
+    public final void setRCPSyncPolicy(List<String> list, String str, String str2, HashMap<String, List<Pair<String, String>>> map) {
+        if (map == null || list == null || list.isEmpty() || str == null || str.isEmpty() || str2 == null || str2.isEmpty()) {
             return;
         }
         Pair<String, String> pair = new Pair<>(str, str2);
@@ -1114,11 +1113,11 @@ public class KnoxConfigurationType implements Parcelable {
         while (true) {
             boolean z = true;
             for (String str3 : list) {
-                List<Pair<String, String>> list2 = hashMap.get(str3);
-                if (list2 == null) {
-                    list2 = new ArrayList<>();
+                List<Pair<String, String>> arrayList = map.get(str3);
+                if (arrayList == null) {
+                    arrayList = new ArrayList<>();
                 } else {
-                    for (Pair<String, String> pair3 : list2) {
+                    for (Pair<String, String> pair3 : arrayList) {
                         if (pair3.equals(pair)) {
                             StringBuilder sb = new StringBuilder("Ignoring the duplicate entry: ");
                             sb.append((String) pair.first);
@@ -1134,13 +1133,13 @@ public class KnoxConfigurationType implements Parcelable {
                         }
                     }
                     if (pair2 != null) {
-                        list2.remove(pair2);
+                        arrayList.remove(pair2);
                         pair2 = null;
                     }
                 }
                 if (z) {
-                    list2.add(pair);
-                    hashMap.put(str3, list2);
+                    arrayList.add(pair);
+                    map.put(str3, arrayList);
                 }
             }
             return;
@@ -1259,9 +1258,9 @@ public class KnoxConfigurationType implements Parcelable {
         this.mAllowChangeDataSettings = new HashMap<>();
         this.mRCPNotifSettings = new HashMap<>();
         this.mName = parcel.readString();
-        String readString = parcel.readString();
-        if (readString != null) {
-            this.mVersion = readString;
+        String string = parcel.readString();
+        if (string != null) {
+            this.mVersion = string;
         } else {
             this.mVersion = "custom";
         }
@@ -1275,26 +1274,26 @@ public class KnoxConfigurationType implements Parcelable {
         this.mMaximumTimeToLock = parcel.readInt();
         this.mMaximumFailedPasswordsForWipe = parcel.readInt();
         this.mManagedType = parcel.readInt() == 1;
-        String readString2 = parcel.readString();
-        this.mCustomBadgeIcon = (readString2 == null || readString2.isEmpty()) ? null : readString2;
-        String readString3 = parcel.readString();
-        this.mCustomHomeScreenWallpaper = (readString3 == null || readString3.isEmpty()) ? null : readString3;
+        String string2 = parcel.readString();
+        this.mCustomBadgeIcon = (string2 == null || string2.isEmpty()) ? null : string2;
+        String string3 = parcel.readString();
+        this.mCustomHomeScreenWallpaper = (string3 == null || string3.isEmpty()) ? null : string3;
         this.mEC = parcel.readInt() == 1;
         Log.d(TAG, "reading from parcel mEC " + this.mEC);
-        String readString4 = parcel.readString();
-        this.mNameIcon = (readString4 == null || readString4.isEmpty()) ? null : readString4;
-        String readString5 = parcel.readString();
-        this.mECName = (readString5 == null || readString5.isEmpty()) ? null : readString5;
-        String readString6 = parcel.readString();
-        this.mECIcon = (readString6 == null || readString6.isEmpty()) ? null : readString6;
-        String readString7 = parcel.readString();
-        this.mECBadge = (readString7 == null || readString7.isEmpty()) ? null : readString7;
-        String readString8 = parcel.readString();
-        this.mCustomLockScreenWallpaper = (readString8 == null || readString8.isEmpty()) ? null : readString8;
-        String readString9 = parcel.readString();
-        this.mCustomStatusLabel = (readString9 == null || readString9.isEmpty()) ? null : readString9;
-        String readString10 = parcel.readString();
-        this.mCustomStatusIcon = (readString10 == null || readString10.isEmpty()) ? null : readString10;
+        String string4 = parcel.readString();
+        this.mNameIcon = (string4 == null || string4.isEmpty()) ? null : string4;
+        String string5 = parcel.readString();
+        this.mECName = (string5 == null || string5.isEmpty()) ? null : string5;
+        String string6 = parcel.readString();
+        this.mECIcon = (string6 == null || string6.isEmpty()) ? null : string6;
+        String string7 = parcel.readString();
+        this.mECBadge = (string7 == null || string7.isEmpty()) ? null : string7;
+        String string8 = parcel.readString();
+        this.mCustomLockScreenWallpaper = (string8 == null || string8.isEmpty()) ? null : string8;
+        String string9 = parcel.readString();
+        this.mCustomStatusLabel = (string9 == null || string9.isEmpty()) ? null : string9;
+        String string10 = parcel.readString();
+        this.mCustomStatusIcon = (string10 == null || string10.isEmpty()) ? null : string10;
         parcel.readStringList(this.mAppInstallationList);
         parcel.readStringList(this.mForbiddenStrings);
         parcel.readStringList(this.mProtectedList);
@@ -1303,9 +1302,9 @@ public class KnoxConfigurationType implements Parcelable {
         this.mMaximumCharacterSequenceLength = parcel.readInt();
         this.mMaximumNumericSequenceLength = parcel.readInt();
         this.mPasswordMinimumLength = parcel.readInt();
-        String readString11 = parcel.readString();
-        if (readString11 != null && !readString11.isEmpty()) {
-            str = readString11;
+        String string11 = parcel.readString();
+        if (string11 != null && !string11.isEmpty()) {
+            str = string11;
         }
         this.mPasswordPattern = str;
         this.mSimplePasswordEnabled = parcel.readInt() == 1;

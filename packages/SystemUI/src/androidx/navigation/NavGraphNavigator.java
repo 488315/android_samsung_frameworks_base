@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Navigator.Name("navigation")
 /* loaded from: classes.dex */
 public class NavGraphNavigator extends Navigator {
@@ -33,22 +32,22 @@ public class NavGraphNavigator extends Navigator {
                 sb.append(i2 != 0 ? String.valueOf(i2) : "the root navigation");
                 throw new IllegalStateException(sb.toString().toString());
             }
-            NavDestination findNode = str != null ? navGraph.findNode(str, false) : (NavDestination) navGraph.nodes.get(i);
-            if (findNode == null) {
+            NavDestination navDestinationFindNode = str != null ? navGraph.findNode(str, false) : (NavDestination) navGraph.nodes.get(i);
+            if (navDestinationFindNode == null) {
                 if (navGraph.startDestIdName == null) {
-                    String str2 = navGraph.startDestinationRoute;
-                    if (str2 == null) {
-                        str2 = String.valueOf(navGraph.startDestId);
+                    String strValueOf = navGraph.startDestinationRoute;
+                    if (strValueOf == null) {
+                        strValueOf = String.valueOf(navGraph.startDestId);
                     }
-                    navGraph.startDestIdName = str2;
+                    navGraph.startDestIdName = strValueOf;
                 }
-                String str3 = navGraph.startDestIdName;
-                str3.getClass();
-                throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("navigation destination ", str3, " is not a direct child of this NavGraph"));
+                String str2 = navGraph.startDestIdName;
+                str2.getClass();
+                throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("navigation destination ", str2, " is not a direct child of this NavGraph"));
             }
             if (str != null) {
-                NavDestination.DeepLinkMatch matchDeepLink = findNode.matchDeepLink(str);
-                Bundle bundle = matchDeepLink != null ? matchDeepLink.matchingArgs : null;
+                NavDestination.DeepLinkMatch deepLinkMatchMatchDeepLink = navDestinationFindNode.matchDeepLink(str);
+                Bundle bundle = deepLinkMatchMatchDeepLink != null ? deepLinkMatchMatchDeepLink.matchingArgs : null;
                 if (bundle != null && !bundle.isEmpty()) {
                     Bundle bundle2 = new Bundle();
                     bundle2.putAll(bundle);
@@ -58,7 +57,7 @@ public class NavGraphNavigator extends Navigator {
                     arguments = bundle2;
                 }
             }
-            this.navigatorProvider.getNavigator(findNode.navigatorName).navigate(Collections.singletonList(getState().createBackStackEntry(findNode, findNode.addInDefaultArgs(arguments))), navOptions);
+            this.navigatorProvider.getNavigator(navDestinationFindNode.navigatorName).navigate(Collections.singletonList(getState().createBackStackEntry(navDestinationFindNode, navDestinationFindNode.addInDefaultArgs(arguments))), navOptions);
         }
     }
 

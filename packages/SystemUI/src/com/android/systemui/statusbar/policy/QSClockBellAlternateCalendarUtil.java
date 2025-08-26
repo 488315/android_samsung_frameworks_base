@@ -2,16 +2,18 @@ package com.android.systemui.statusbar.policy;
 
 import android.content.Context;
 import android.database.ContentObserver;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
+import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.QpRune;
 import com.android.systemui.statusbar.policy.QSClockBellTower;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QSClockBellAlternateCalendarUtil {
     private SettingsHelper.OnChangedCallback mAlternateCalendarSettingCallback;
@@ -23,7 +25,6 @@ public class QSClockBellAlternateCalendarUtil {
     public static final Uri SETTING_KEY_LUNAR_CALENDAR_URI = Settings.System.getUriFor(SettingsHelper.INDEX_LUNAR_CALENDAR);
     public static final Uri SETTING_KEY_HIJRI_CALENDAR_URI = Settings.System.getUriFor(SettingsHelper.INDEX_HIJRI_CALENDAR);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateHelperByContent extends ContentObserver {
         public UpdateHelperByContent(Handler handler) {
             super(handler);
@@ -45,7 +46,7 @@ public class QSClockBellAlternateCalendarUtil {
             public final void onChanged(Uri uri) {
                 QSClockBellTower.AnonymousClass1 anonymousClass1;
                 Uri uri2 = QSClockBellAlternateCalendarUtil.SETTING_KEY_LUNAR_CALENDAR_URI;
-                QSClockBellAlternateCalendarUtil qSClockBellAlternateCalendarUtil = QSClockBellAlternateCalendarUtil.this;
+                QSClockBellAlternateCalendarUtil qSClockBellAlternateCalendarUtil = this.f$0;
                 Log.d("QSClockBellTower", "QSClockBellAlternateCalendarUtil receive SettingsHelper callback !");
                 Handler handler2 = qSClockBellAlternateCalendarUtil.mHandler;
                 if (handler2 == null || (anonymousClass1 = qSClockBellAlternateCalendarUtil.mUpdateNotifyNewClockTime) == null) {
@@ -79,102 +80,60 @@ public class QSClockBellAlternateCalendarUtil {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:45:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0083  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0090  */
+    /* JADX WARN: Removed duplicated region for block: B:51:? A[SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r7v0 */
     /* JADX WARN: Type inference failed for: r7v1, types: [android.database.Cursor] */
     /* JADX WARN: Type inference failed for: r7v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateAlternateCalendar(java.lang.String r9) {
-        /*
-            r8 = this;
-            java.lang.String r0 = "."
-            boolean r0 = r0.equals(r9)
-            if (r0 != 0) goto L30
-            java.lang.String r0 = "android.intent.action.TIME_SET"
-            boolean r0 = r0.equals(r9)
-            if (r0 != 0) goto L30
-            java.lang.String r0 = "android.intent.action.DATE_CHANGED"
-            boolean r0 = r0.equals(r9)
-            if (r0 != 0) goto L30
-            java.lang.String r0 = "android.intent.action.LOCALE_CHANGED"
-            boolean r0 = r0.equals(r9)
-            if (r0 != 0) goto L30
-            java.lang.String r0 = "android.intent.action.TIMEZONE_CHANGED"
-            boolean r0 = r0.equals(r9)
-            if (r0 != 0) goto L30
-            java.lang.String r0 = "android.intent.action.USER_SWITCHED"
-            boolean r9 = r0.equals(r9)
-            if (r9 == 0) goto L8d
-        L30:
-            android.content.Context r9 = r8.mContext
-            boolean r0 = com.android.systemui.QpRune.QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_HIJRI
-            java.lang.String r0 = java.lang.String.valueOf(r0)
-            java.lang.String[] r3 = new java.lang.String[]{r0}
-            r7 = 0
-            android.content.ContentResolver r1 = r9.getContentResolver()     // Catch: java.lang.Throwable -> L6f java.lang.UnsupportedOperationException -> L72
-            java.lang.String r9 = "content://com.samsung.android.app.clockpack.provider/clock_pack_settings/get_alternate_calendar_complete_text"
-            android.net.Uri r2 = android.net.Uri.parse(r9)     // Catch: java.lang.Throwable -> L6f java.lang.UnsupportedOperationException -> L72
-            r4 = 0
-            r5 = 0
-            r6 = 0
-            android.database.Cursor r9 = r1.query(r2, r3, r4, r5, r6)     // Catch: java.lang.Throwable -> L6f java.lang.UnsupportedOperationException -> L72
-            if (r9 == 0) goto L68
-            int r0 = r9.getCount()     // Catch: java.lang.Throwable -> L62 java.lang.UnsupportedOperationException -> L66
-            if (r0 <= 0) goto L68
-            boolean r0 = r9.moveToFirst()     // Catch: java.lang.Throwable -> L62 java.lang.UnsupportedOperationException -> L66
-            if (r0 == 0) goto L68
-            r0 = 0
-            java.lang.String r0 = r9.getString(r0)     // Catch: java.lang.Throwable -> L62 java.lang.UnsupportedOperationException -> L66
-            goto L69
-        L62:
-            r0 = move-exception
-            r8 = r0
-            r7 = r9
-            goto L8e
-        L66:
-            r0 = move-exception
-            goto L74
-        L68:
-            r0 = r7
-        L69:
-            if (r9 == 0) goto L7d
-            r9.close()
-            goto L7d
-        L6f:
-            r0 = move-exception
-            r8 = r0
-            goto L8e
-        L72:
-            r0 = move-exception
-            r9 = r7
-        L74:
-            r0.printStackTrace()     // Catch: java.lang.Throwable -> L62
-            if (r9 == 0) goto L7c
-            r9.close()
-        L7c:
-            r0 = r7
-        L7d:
-            boolean r9 = android.text.TextUtils.isEmpty(r0)
-            if (r9 != 0) goto L8b
-            java.lang.String r9 = " ("
-            java.lang.String r1 = ")"
-            java.lang.String r7 = androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0.m(r9, r0, r1)
-        L8b:
-            r8.mCachedAlternateCalendar = r7
-        L8d:
-            return
-        L8e:
-            if (r7 == 0) goto L93
-            r7.close()
-        L93:
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.QSClockBellAlternateCalendarUtil.updateAlternateCalendar(java.lang.String):void");
+    public final void updateAlternateCalendar(String str) {
+        Throwable th;
+        Cursor cursorQuery;
+        String string;
+        if (".".equals(str) || "android.intent.action.TIME_SET".equals(str) || "android.intent.action.DATE_CHANGED".equals(str) || "android.intent.action.LOCALE_CHANGED".equals(str) || "android.intent.action.TIMEZONE_CHANGED".equals(str) || "android.intent.action.USER_SWITCHED".equals(str)) {
+            Context context = this.mContext;
+            ?? r7 = 0;
+            try {
+                try {
+                    cursorQuery = context.getContentResolver().query(Uri.parse("content://com.samsung.android.app.clockpack.provider/clock_pack_settings/get_alternate_calendar_complete_text"), new String[]{String.valueOf(QpRune.QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_HIJRI ? 1 : 0)}, null, null, null);
+                    if (cursorQuery != null) {
+                        try {
+                            string = (cursorQuery.getCount() <= 0 || !cursorQuery.moveToFirst()) ? null : cursorQuery.getString(0);
+                            if (cursorQuery != null) {
+                                cursorQuery.close();
+                            }
+                        } catch (UnsupportedOperationException e) {
+                            e = e;
+                            e.printStackTrace();
+                            if (cursorQuery != null) {
+                                cursorQuery.close();
+                            }
+                            string = null;
+                            this.mCachedAlternateCalendar = TextUtils.isEmpty(string) ? null : ContentInViewNode$Request$$ExternalSyntheticOutline0.m(" (", string, ")");
+                        }
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    r7 = context;
+                    if (r7 != 0) {
+                        throw th;
+                    }
+                    r7.close();
+                    throw th;
+                }
+            } catch (UnsupportedOperationException e2) {
+                e = e2;
+                cursorQuery = null;
+            } catch (Throwable th3) {
+                th = th3;
+                if (r7 != 0) {
+                }
+            }
+            this.mCachedAlternateCalendar = TextUtils.isEmpty(string) ? null : ContentInViewNode$Request$$ExternalSyntheticOutline0.m(" (", string, ")");
+        }
     }
 }

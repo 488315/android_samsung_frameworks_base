@@ -47,9 +47,9 @@ public interface ISchedulingPolicyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISchedulingPolicyService)) {
-                return (ISchedulingPolicyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISchedulingPolicyService)) {
+                return (ISchedulingPolicyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -79,21 +79,21 @@ public interface ISchedulingPolicyService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                int requestPriority = requestPriority(readInt, readInt2, readInt3, readBoolean);
+                int iRequestPriority = requestPriority(i3, i4, i5, z);
                 parcel2.writeNoException();
-                parcel2.writeInt(requestPriority);
+                parcel2.writeInt(iRequestPriority);
             } else if (i == 2) {
-                boolean readBoolean2 = parcel.readBoolean();
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                boolean z2 = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                int requestCpusetBoost = requestCpusetBoost(readBoolean2, readStrongBinder);
+                int iRequestCpusetBoost = requestCpusetBoost(z2, strongBinder);
                 parcel2.writeNoException();
-                parcel2.writeInt(requestCpusetBoost);
+                parcel2.writeInt(iRequestCpusetBoost);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,37 +118,37 @@ public interface ISchedulingPolicyService extends IInterface {
 
             @Override // android.os.ISchedulingPolicyService
             public int requestPriority(int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISchedulingPolicyService
             public int requestCpusetBoost(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

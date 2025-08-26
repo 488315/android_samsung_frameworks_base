@@ -21,6 +21,7 @@ import android.window.TaskFragmentOperation;
 import android.window.WindowContainerTransaction;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public final class WindowContainerTransaction implements Parcelable {
             return new WindowContainerTransaction[i];
         }
     };
+    public static final int TRANSACTION_TYPE_ACTIVATE_DESK = 4;
     public static final int TRANSACTION_TYPE_DISMISS_SPLIT_WITH_ALL_APPS = 7;
     public static final int TRANSACTION_TYPE_DISMISS_SPLIT_WITH_FREEFORM = 6;
     public static final int TRANSACTION_TYPE_START_INTENTS = 1;
@@ -59,7 +61,6 @@ public final class WindowContainerTransaction implements Parcelable {
     public static final int TRANSACTION_TYPE_START_TASKS_FROM_RECENT = 5;
     public static final int TRANSACTION_TYPE_START_TASK_AND_INTENT = 2;
     public static final int TRANSACTION_TYPE_UNDEFINED = 0;
-    public static final int TRANSACTION_TYPE_UPDATE_DESKTOP_MODE_ACTIVE = 4;
     private int mAdditionalFlag;
     private boolean mAvoidReady;
     private final ArrayList<ContainerChange> mChangeList;
@@ -146,7 +147,7 @@ public final class WindowContainerTransaction implements Parcelable {
         this.mChangeList = new ArrayList<>();
     }
 
-    private WindowContainerTransaction(Parcel parcel) {
+    private WindowContainerTransaction(Parcel parcel) throws ClassNotFoundException, IOException {
         ArrayMap<IBinder, Change> arrayMap = new ArrayMap<>();
         this.mChanges = arrayMap;
         ArrayList<HierarchyOp> arrayList = new ArrayList<>();
@@ -586,20 +587,21 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void merge(WindowContainerTransaction windowContainerTransaction, boolean z) {
         IBinder iBinder;
         int size = windowContainerTransaction.mChanges.size();
         int i = 0;
         while (true) {
-            byte b = 0;
+            Object[] objArr = 0;
             if (i >= size) {
                 break;
             }
-            IBinder keyAt = windowContainerTransaction.mChanges.keyAt(i);
-            Change change = this.mChanges.get(keyAt);
+            IBinder iBinderKeyAt = windowContainerTransaction.mChanges.keyAt(i);
+            Change change = this.mChanges.get(iBinderKeyAt);
             if (change == null) {
                 change = new Change();
-                this.mChanges.put(keyAt, change);
+                this.mChanges.put(iBinderKeyAt, change);
             }
             change.merge(windowContainerTransaction.mChanges.valueAt(i), z);
             i++;
@@ -618,9 +620,9 @@ public final class WindowContainerTransaction implements Parcelable {
             throw new IllegalArgumentException("Can't merge two WCTs with different error token");
         }
         ITaskFragmentOrganizer iTaskFragmentOrganizer = this.mTaskFragmentOrganizer;
-        IBinder asBinder = iTaskFragmentOrganizer != null ? iTaskFragmentOrganizer.asBinder() : null;
+        IBinder iBinderAsBinder = iTaskFragmentOrganizer != null ? iTaskFragmentOrganizer.asBinder() : null;
         ITaskFragmentOrganizer iTaskFragmentOrganizer2 = windowContainerTransaction.mTaskFragmentOrganizer;
-        if (!Objects.equals(asBinder, iTaskFragmentOrganizer2 != null ? iTaskFragmentOrganizer2.asBinder() : null)) {
+        if (!Objects.equals(iBinderAsBinder, iTaskFragmentOrganizer2 != null ? iTaskFragmentOrganizer2.asBinder() : null)) {
             throw new IllegalArgumentException("Can't merge two WCTs from different TaskFragmentOrganizers");
         }
         IBinder iBinder3 = this.mErrorCallbackToken;
@@ -666,7 +668,7 @@ public final class WindowContainerTransaction implements Parcelable {
         return this.mType == 3;
     }
 
-    public boolean isUpdateDesktopModeActive() {
+    public boolean isActivateDeskType() {
         return this.mType == 4;
     }
 
@@ -734,6 +736,10 @@ public final class WindowContainerTransaction implements Parcelable {
         getOrCreateChange(windowContainerToken.asBinder()).mIsFullscreenTransparentInDesktop = z;
     }
 
+    public void setCaptionShowingState(WindowContainerToken windowContainerToken, boolean z) {
+        getOrCreateChange(windowContainerToken.asBinder()).mCaptionShowingState = z ? 1 : 2;
+    }
+
     public String toString() {
         String str;
         if (CoreRune.MW_SHELL_CHANGE_TRANSITION && changeTransitionRequested()) {
@@ -797,9 +803,7 @@ public final class WindowContainerTransaction implements Parcelable {
         return this.mChanges.values().stream().anyMatch(new Predicate() { // from class: android.window.WindowContainerTransaction$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean hasChangeTransitMode;
-                hasChangeTransitMode = ((WindowContainerTransaction.Change) obj).hasChangeTransitMode();
-                return hasChangeTransitMode;
+                return ((WindowContainerTransaction.Change) obj).hasChangeTransitMode();
             }
         });
     }
@@ -861,6 +865,7 @@ public final class WindowContainerTransaction implements Parcelable {
         };
         private int mActivityWindowingMode;
         private SurfaceControl.Transaction mBoundsChangeTransaction;
+        private int mCaptionShowingState;
         private int mChangeFreeformStashMode;
         private float mChangeFreeformStashScale;
         private int mChangeMask;
@@ -915,6 +920,7 @@ public final class WindowContainerTransaction implements Parcelable {
             this.mTaskViewTaskOrganizerTaskId = -1;
             this.mSkipLayoutTask = false;
             this.mIsFullscreenTransparentInDesktop = false;
+            this.mCaptionShowingState = 0;
         }
 
         private Change(Parcel parcel) {
@@ -939,6 +945,7 @@ public final class WindowContainerTransaction implements Parcelable {
             this.mTaskViewTaskOrganizerTaskId = -1;
             this.mSkipLayoutTask = false;
             this.mIsFullscreenTransparentInDesktop = false;
+            this.mCaptionShowingState = 0;
             configuration.readFromParcel(parcel);
             this.mFocusable = parcel.readBoolean();
             this.mHidden = parcel.readBoolean();
@@ -978,6 +985,9 @@ public final class WindowContainerTransaction implements Parcelable {
             this.mTaskViewTaskOrganizerTaskId = parcel.readInt();
             this.mSkipLayoutTask = parcel.readBoolean();
             this.mIsFullscreenTransparentInDesktop = parcel.readBoolean();
+            if (CoreRune.MW_CAPTION_DESKTOP_DIMMING) {
+                this.mCaptionShowingState = parcel.readInt();
+            }
         }
 
         public void merge(Change change, boolean z) {
@@ -1056,6 +1066,9 @@ public final class WindowContainerTransaction implements Parcelable {
             }
             this.mSkipLayoutTask = change.mSkipLayoutTask;
             this.mIsFullscreenTransparentInDesktop = change.mIsFullscreenTransparentInDesktop;
+            if (CoreRune.MW_CAPTION_DESKTOP_DIMMING) {
+                this.mCaptionShowingState = change.mCaptionShowingState;
+            }
         }
 
         public int getWindowingMode() {
@@ -1197,6 +1210,14 @@ public final class WindowContainerTransaction implements Parcelable {
             return this.mIsFullscreenTransparentInDesktop;
         }
 
+        public boolean hasChangeCaptionShowingState() {
+            return this.mCaptionShowingState != 0;
+        }
+
+        public int getChangeCaptionShowingState() {
+            return this.mCaptionShowingState;
+        }
+
         public String toString() {
             int i = this.mConfigSetMask;
             boolean z = ((i & 536870912) == 0 || (this.mWindowSetMask & 1) == 0) ? false : true;
@@ -1309,6 +1330,9 @@ public final class WindowContainerTransaction implements Parcelable {
             parcel.writeInt(this.mTaskViewTaskOrganizerTaskId);
             parcel.writeBoolean(this.mSkipLayoutTask);
             parcel.writeBoolean(this.mIsFullscreenTransparentInDesktop);
+            if (CoreRune.MW_CAPTION_DESKTOP_DIMMING) {
+                parcel.writeInt(this.mCaptionShowingState);
+            }
         }
     }
 
@@ -1696,170 +1720,172 @@ public final class WindowContainerTransaction implements Parcelable {
             }
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:46:0x022b  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public String toString() {
             StringBuilder sb = new StringBuilder("{");
             sb.append(hopToString(this.mType));
             sb.append(": ");
             int i = this.mType;
-            if (i != 19) {
-                if (i != 100) {
-                    switch (i) {
-                        case 0:
-                            sb.append(this.mContainer);
-                            sb.append(" to ");
-                            sb.append(this.mToTop ? "top of " : "bottom of ");
-                            sb.append(this.mReparent);
-                            break;
-                        case 1:
-                            sb.append(this.mContainer);
-                            sb.append(" to ");
-                            sb.append(this.mToTop ? GenerateXML.TOP : GenerateXML.BOTTOM);
-                            break;
-                        case 2:
-                            sb.append("from=");
-                            sb.append(this.mContainer);
-                            sb.append(" to=");
-                            sb.append(this.mReparent);
-                            sb.append(" mToTop=");
-                            sb.append(this.mToTop);
-                            sb.append(" mReparentTopOnly=");
-                            sb.append(this.mReparentTopOnly);
-                            sb.append(" mWindowingMode=");
-                            sb.append(Arrays.toString(this.mWindowingModes));
-                            sb.append(" mActivityType=");
-                            sb.append(Arrays.toString(this.mActivityTypes));
-                            break;
-                        case 3:
-                            sb.append("container=");
-                            sb.append(this.mContainer);
-                            sb.append(" mWindowingMode=");
-                            sb.append(Arrays.toString(this.mWindowingModes));
-                            sb.append(" mActivityType=");
-                            sb.append(Arrays.toString(this.mActivityTypes));
-                            break;
-                        case 4:
-                            for (IBinder iBinder : this.mContainers) {
-                                if (iBinder == this.mContainers[0]) {
-                                    sb.append("adjacentRoots=");
-                                    sb.append(iBinder);
-                                } else {
-                                    sb.append(", ");
-                                    sb.append(iBinder);
-                                }
-                            }
-                            break;
-                        case 5:
-                            sb.append(this.mLaunchOptions);
-                            break;
-                        case 6:
-                            sb.append("container=");
-                            sb.append(this.mContainer);
-                            sb.append(" clearRoot=");
-                            sb.append(this.mToTop);
-                            break;
-                        case 7:
-                            sb.append("options=");
-                            sb.append(this.mLaunchOptions);
-                            break;
-                        case 8:
-                            sb.append("options=");
-                            sb.append(this.mLaunchOptions);
-                            sb.append(" info=");
-                            sb.append(this.mShortcutInfo);
-                            break;
-                        default:
-                            switch (i) {
-                                case 10:
-                                case 11:
-                                    sb.append("container=");
-                                    sb.append(this.mContainer);
-                                    sb.append(" provider=");
-                                    sb.append(this.mInsetsFrameProvider);
-                                    sb.append(" owner=");
-                                    sb.append(this.mInsetsFrameOwner);
-                                    break;
-                                case 12:
-                                    sb.append("container=");
-                                    sb.append(this.mContainer);
-                                    sb.append(" alwaysOnTop=");
-                                    sb.append(this.mAlwaysOnTop);
-                                    break;
-                                case 13:
-                                    break;
-                                case 14:
-                                    sb.append("activity=");
-                                    sb.append(this.mContainer);
-                                    break;
-                                case 15:
-                                    sb.append("container=");
-                                    sb.append(this.mContainer);
-                                    break;
-                                case 16:
-                                    sb.append("container= ");
-                                    sb.append(this.mContainer);
-                                    sb.append(" reparentLeafTaskIfRelaunch= ");
-                                    sb.append(this.mReparentLeafTaskIfRelaunch);
-                                    break;
-                                case 17:
-                                    sb.append("fragmentToken= ");
-                                    sb.append(this.mContainer);
-                                    sb.append(" operation= ");
-                                    sb.append(this.mTaskFragmentOperation);
-                                    break;
-                                default:
-                                    switch (i) {
-                                        case 21:
-                                            sb.append("container= ");
-                                            sb.append(this.mContainer);
-                                            sb.append(" mExcludeInsetsTypes= ");
-                                            sb.append(WindowInsets.Type.toString(this.mExcludeInsetsTypes));
-                                            break;
-                                        case 22:
-                                            sb.append("KeyguardState= ");
-                                            sb.append(this.mKeyguardState);
-                                            break;
-                                        case 23:
-                                            sb.append("container=");
-                                            sb.append(this.mContainer);
-                                            sb.append(" disabled=");
-                                            sb.append(this.mLaunchAdjacentDisabled);
-                                            break;
-                                        case 24:
-                                            sb.append("rootTask=");
-                                            sb.append(this.mContainer);
-                                            break;
-                                        case 25:
-                                            sb.append(this.mAppCompatOptions);
-                                            break;
-                                        case 26:
-                                            sb.append("container= ");
-                                            sb.append(this.mContainer);
-                                            sb.append(" safeRegionBounds= ");
-                                            sb.append(this.mSafeRegionBounds);
-                                            break;
-                                        default:
-                                            sb.append("container=");
-                                            sb.append(this.mContainer);
-                                            sb.append(" reparent=");
-                                            sb.append(this.mReparent);
-                                            sb.append(" mToTop=");
-                                            sb.append(this.mToTop);
-                                            sb.append(" mWindowingMode=");
-                                            sb.append(Arrays.toString(this.mWindowingModes));
-                                            sb.append(" mActivityType=");
-                                            sb.append(Arrays.toString(this.mActivityTypes));
-                                            break;
-                                    }
-                            }
-                    }
-                }
-                sb.append("task=");
-                sb.append(this.mContainer);
-            } else {
+            if (i == 19) {
                 sb.append("container= ");
                 sb.append(this.mContainer);
                 sb.append(" isTrimmable= ");
                 sb.append(this.mIsTrimmableFromRecents);
+            } else if (i != 100) {
+                switch (i) {
+                    case 0:
+                        sb.append(this.mContainer);
+                        sb.append(" to ");
+                        sb.append(this.mToTop ? "top of " : "bottom of ");
+                        sb.append(this.mReparent);
+                        break;
+                    case 1:
+                        sb.append(this.mContainer);
+                        sb.append(" to ");
+                        sb.append(this.mToTop ? GenerateXML.TOP : GenerateXML.BOTTOM);
+                        break;
+                    case 2:
+                        sb.append("from=");
+                        sb.append(this.mContainer);
+                        sb.append(" to=");
+                        sb.append(this.mReparent);
+                        sb.append(" mToTop=");
+                        sb.append(this.mToTop);
+                        sb.append(" mReparentTopOnly=");
+                        sb.append(this.mReparentTopOnly);
+                        sb.append(" mWindowingMode=");
+                        sb.append(Arrays.toString(this.mWindowingModes));
+                        sb.append(" mActivityType=");
+                        sb.append(Arrays.toString(this.mActivityTypes));
+                        break;
+                    case 3:
+                        sb.append("container=");
+                        sb.append(this.mContainer);
+                        sb.append(" mWindowingMode=");
+                        sb.append(Arrays.toString(this.mWindowingModes));
+                        sb.append(" mActivityType=");
+                        sb.append(Arrays.toString(this.mActivityTypes));
+                        break;
+                    case 4:
+                        for (IBinder iBinder : this.mContainers) {
+                            if (iBinder == this.mContainers[0]) {
+                                sb.append("adjacentRoots=");
+                                sb.append(iBinder);
+                            } else {
+                                sb.append(", ");
+                                sb.append(iBinder);
+                            }
+                        }
+                        break;
+                    case 5:
+                        sb.append(this.mLaunchOptions);
+                        break;
+                    case 6:
+                        sb.append("container=");
+                        sb.append(this.mContainer);
+                        sb.append(" clearRoot=");
+                        sb.append(this.mToTop);
+                        break;
+                    case 7:
+                        sb.append("options=");
+                        sb.append(this.mLaunchOptions);
+                        break;
+                    case 8:
+                        sb.append("options=");
+                        sb.append(this.mLaunchOptions);
+                        sb.append(" info=");
+                        sb.append(this.mShortcutInfo);
+                        break;
+                    default:
+                        switch (i) {
+                            case 10:
+                            case 11:
+                                sb.append("container=");
+                                sb.append(this.mContainer);
+                                sb.append(" provider=");
+                                sb.append(this.mInsetsFrameProvider);
+                                sb.append(" owner=");
+                                sb.append(this.mInsetsFrameOwner);
+                                break;
+                            case 12:
+                                sb.append("container=");
+                                sb.append(this.mContainer);
+                                sb.append(" alwaysOnTop=");
+                                sb.append(this.mAlwaysOnTop);
+                                break;
+                            case 13:
+                                sb.append("task=");
+                                sb.append(this.mContainer);
+                                break;
+                            case 14:
+                                sb.append("activity=");
+                                sb.append(this.mContainer);
+                                break;
+                            case 15:
+                                sb.append("container=");
+                                sb.append(this.mContainer);
+                                break;
+                            case 16:
+                                sb.append("container= ");
+                                sb.append(this.mContainer);
+                                sb.append(" reparentLeafTaskIfRelaunch= ");
+                                sb.append(this.mReparentLeafTaskIfRelaunch);
+                                break;
+                            case 17:
+                                sb.append("fragmentToken= ");
+                                sb.append(this.mContainer);
+                                sb.append(" operation= ");
+                                sb.append(this.mTaskFragmentOperation);
+                                break;
+                            default:
+                                switch (i) {
+                                    case 21:
+                                        sb.append("container= ");
+                                        sb.append(this.mContainer);
+                                        sb.append(" mExcludeInsetsTypes= ");
+                                        sb.append(WindowInsets.Type.toString(this.mExcludeInsetsTypes));
+                                        break;
+                                    case 22:
+                                        sb.append("KeyguardState= ");
+                                        sb.append(this.mKeyguardState);
+                                        break;
+                                    case 23:
+                                        sb.append("container=");
+                                        sb.append(this.mContainer);
+                                        sb.append(" disabled=");
+                                        sb.append(this.mLaunchAdjacentDisabled);
+                                        break;
+                                    case 24:
+                                        sb.append("rootTask=");
+                                        sb.append(this.mContainer);
+                                        break;
+                                    case 25:
+                                        sb.append(this.mAppCompatOptions);
+                                        break;
+                                    case 26:
+                                        sb.append("container= ");
+                                        sb.append(this.mContainer);
+                                        sb.append(" safeRegionBounds= ");
+                                        sb.append(this.mSafeRegionBounds);
+                                        break;
+                                    default:
+                                        sb.append("container=");
+                                        sb.append(this.mContainer);
+                                        sb.append(" reparent=");
+                                        sb.append(this.mReparent);
+                                        sb.append(" mToTop=");
+                                        sb.append(this.mToTop);
+                                        sb.append(" mWindowingMode=");
+                                        sb.append(Arrays.toString(this.mWindowingModes));
+                                        sb.append(" mActivityType=");
+                                        sb.append(Arrays.toString(this.mActivityTypes));
+                                        break;
+                                }
+                        }
+                }
             }
             sb.append("}");
             return sb.toString();
@@ -2045,6 +2071,7 @@ public final class WindowContainerTransaction implements Parcelable {
                 return this;
             }
 
+            /* JADX WARN: Multi-variable type inference failed */
             HierarchyOp build() {
                 HierarchyOp hierarchyOp = new HierarchyOp(this.mType);
                 hierarchyOp.mContainer = this.mContainer;

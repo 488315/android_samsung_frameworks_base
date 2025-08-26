@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Log;
 import dalvik.system.PathClassLoader;
+import java.lang.reflect.InvocationTargetException;
 
 /* loaded from: classes6.dex */
 public class SemCodecSolutionService {
@@ -12,23 +13,23 @@ public class SemCodecSolutionService {
     private Class mClass;
     private Object mService;
 
-    public SemCodecSolutionService() {
+    public SemCodecSolutionService() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         this.mClass = null;
         this.mService = null;
         try {
             PathClassLoader pathClassLoader = new PathClassLoader("/system/framework/vendor.samsung.frameworks.codecsolution-service.jar", getClass().getClassLoader());
-            Class loadClass = pathClassLoader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution");
-            Class loadClass2 = pathClassLoader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution$Stub");
-            Object invoke = loadClass2.getDeclaredMethod("asInterface", IBinder.class).invoke(loadClass2, ServiceManager.getService("vendor.samsung.frameworks.codecsolution.ISehCodecSolution/default"));
-            this.mClass = loadClass;
-            this.mService = invoke;
+            Class clsLoadClass = pathClassLoader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution");
+            Class clsLoadClass2 = pathClassLoader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution$Stub");
+            Object objInvoke = clsLoadClass2.getDeclaredMethod("asInterface", IBinder.class).invoke(clsLoadClass2, ServiceManager.getService("vendor.samsung.frameworks.codecsolution.ISehCodecSolution/default"));
+            this.mClass = clsLoadClass;
+            this.mService = objInvoke;
         } catch (Exception e) {
             Log.e(TAG, "Can't load ISehCodecSolution class.");
             e.printStackTrace();
         }
     }
 
-    public void setSmartFittingMode(int i) {
+    public void setSmartFittingMode(int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Log.d(TAG, "setSmartFittingMode(" + i + NavigationBarInflaterView.KEY_CODE_END);
         Class cls = this.mClass;
         if (cls == null || this.mService == null) {
@@ -41,7 +42,7 @@ public class SemCodecSolutionService {
         }
     }
 
-    public void setAutoFitMode(boolean z) {
+    public void setAutoFitMode(boolean z) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Log.d(TAG, "setAutoFitMode(" + z + NavigationBarInflaterView.KEY_CODE_END);
         Class cls = this.mClass;
         if (cls == null || this.mService == null) {
@@ -54,7 +55,7 @@ public class SemCodecSolutionService {
         }
     }
 
-    public void setSecVideoUseSmartFitting(int i) {
+    public void setSecVideoUseSmartFitting(int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Log.d(TAG, "setSecVideoUseSmartFitting(" + i + NavigationBarInflaterView.KEY_CODE_END);
         if (i != 0) {
             setAutoFitMode(true);

@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SceneContainerHapticsViewModel$isShadePullHapticsRequired$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -26,9 +25,9 @@ final class SceneContainerHapticsViewModel$isShadePullHapticsRequired$1 extends 
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         SceneContainerHapticsViewModel$isShadePullHapticsRequired$1 sceneContainerHapticsViewModel$isShadePullHapticsRequired$1 = new SceneContainerHapticsViewModel$isShadePullHapticsRequired$1(this.this$0, (Continuation) obj3);
-        sceneContainerHapticsViewModel$isShadePullHapticsRequired$1.Z$0 = booleanValue;
+        sceneContainerHapticsViewModel$isShadePullHapticsRequired$1.Z$0 = zBooleanValue;
         sceneContainerHapticsViewModel$isShadePullHapticsRequired$1.L$0 = (ObservableTransitionState) obj2;
         return sceneContainerHapticsViewModel$isShadePullHapticsRequired$1.invokeSuspend(Unit.INSTANCE);
     }

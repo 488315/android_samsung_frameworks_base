@@ -137,7 +137,7 @@ public final class EuiccProfileInfo implements Parcelable {
         }
 
         public Builder(EuiccProfileInfo euiccProfileInfo) {
-            List<UiccAccessRule> asList;
+            List<UiccAccessRule> listAsList;
             this.mIccid = euiccProfileInfo.mIccid;
             this.mNickname = euiccProfileInfo.mNickname;
             this.mServiceProviderName = euiccProfileInfo.mServiceProviderName;
@@ -147,11 +147,11 @@ public final class EuiccProfileInfo implements Parcelable {
             this.mCarrierIdentifier = euiccProfileInfo.mCarrierIdentifier;
             this.mPolicyRules = euiccProfileInfo.mPolicyRules;
             if (euiccProfileInfo.mAccessRules == null) {
-                asList = Collections.EMPTY_LIST;
+                listAsList = Collections.EMPTY_LIST;
             } else {
-                asList = Arrays.asList(euiccProfileInfo.mAccessRules);
+                listAsList = Arrays.asList(euiccProfileInfo.mAccessRules);
             }
-            this.mAccessRules = asList;
+            this.mAccessRules = listAsList;
         }
 
         public EuiccProfileInfo build() {

@@ -43,7 +43,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SystemActions implements CoreStartable, ConfigurationController.ConfigurationListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -64,11 +63,10 @@ public class SystemActions implements CoreStartable, ConfigurationController.Con
         @Override // com.android.systemui.statusbar.phone.StatusBarWindowCallback
         public final void onStateChanged(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8) {
             int i = SystemActions.$r8$clinit;
-            SystemActions.this.registerOrUnregisterDismissNotificationShadeAction();
+            this.f$0.registerOrUnregisterDismissNotificationShadeAction();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SystemActionsBroadcastReceiver extends BroadcastReceiver {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -202,7 +200,7 @@ public class SystemActions implements CoreStartable, ConfigurationController.Con
     public final RemoteAction createRemoteAction(int i, String str) {
         Context context;
         PendingIntent broadcast;
-        Icon createWithResource = Icon.createWithResource(this.mContext, R.drawable.ic_info);
+        Icon iconCreateWithResource = Icon.createWithResource(this.mContext, R.drawable.ic_info);
         String string = this.mContext.getString(i);
         String string2 = this.mContext.getString(i);
         context = this.mContext;
@@ -238,7 +236,7 @@ public class SystemActions implements CoreStartable, ConfigurationController.Con
                 broadcast = null;
                 break;
         }
-        return new RemoteAction(createWithResource, string, string2, broadcast);
+        return new RemoteAction(iconCreateWithResource, string, string2, broadcast);
     }
 
     public void handleHeadsetHook() {
@@ -267,42 +265,42 @@ public class SystemActions implements CoreStartable, ConfigurationController.Con
     }
 
     public final void registerActions() {
-        RemoteAction createRemoteAction = createRemoteAction(R.string.autofill_update_title_with_type, "SYSTEM_ACTION_BACK");
-        RemoteAction createRemoteAction2 = createRemoteAction(R.string.battery_saver_notification_channel_name, "SYSTEM_ACTION_HOME");
-        RemoteAction createRemoteAction3 = createRemoteAction(R.string.biometric_error_device_not_secured, "SYSTEM_ACTION_RECENTS");
-        RemoteAction createRemoteAction4 = createRemoteAction(R.string.biometric_dangling_notification_action_not_now, "SYSTEM_ACTION_NOTIFICATIONS");
-        RemoteAction createRemoteAction5 = createRemoteAction(R.string.biometric_error_canceled, "SYSTEM_ACTION_QUICK_SETTINGS");
-        RemoteAction createRemoteAction6 = createRemoteAction(R.string.biometric_dialog_default_title, "SYSTEM_ACTION_POWER_DIALOG");
-        RemoteAction createRemoteAction7 = createRemoteAction(R.string.battery_saver_off_notification_title, "SYSTEM_ACTION_LOCK_SCREEN");
-        RemoteAction createRemoteAction8 = createRemoteAction(R.string.biometric_error_generic, "SYSTEM_ACTION_TAKE_SCREENSHOT");
-        RemoteAction createRemoteAction9 = createRemoteAction(R.string.battery_saver_description_with_learn_more, "SYSTEM_ACTION_HEADSET_HOOK");
-        RemoteAction createRemoteAction10 = createRemoteAction(R.string.battery_saver_description, "SYSTEM_ACTION_ACCESSIBILITY_SHORTCUT");
-        RemoteAction createRemoteAction11 = createRemoteAction(R.string.battery_saver_charged_notification_summary, "SYSTEM_ACTION_DPAD_UP");
-        RemoteAction createRemoteAction12 = createRemoteAction(R.string.back_button_label, "SYSTEM_ACTION_DPAD_DOWN");
-        RemoteAction createRemoteAction13 = createRemoteAction(R.string.badPin, "SYSTEM_ACTION_DPAD_LEFT");
-        RemoteAction createRemoteAction14 = createRemoteAction(R.string.badPuk, "SYSTEM_ACTION_DPAD_RIGHT");
-        RemoteAction createRemoteAction15 = createRemoteAction(R.string.autofill_window_title, "SYSTEM_ACTION_DPAD_CENTER");
-        RemoteAction createRemoteAction16 = createRemoteAction(R.string.biometric_app_setting_name, "SYSTEM_ACTION_MENU");
-        RemoteAction createRemoteAction17 = createRemoteAction(R.string.beforeOneMonthDurationPast, "SYSTEM_ACTION_MEDIA_PLAY_PAUSE");
-        this.mA11yManager.registerSystemAction(createRemoteAction, 1);
-        this.mA11yManager.registerSystemAction(createRemoteAction2, 2);
-        this.mA11yManager.registerSystemAction(createRemoteAction3, 3);
+        RemoteAction remoteActionCreateRemoteAction = createRemoteAction(R.string.autofill_update_title_with_type, "SYSTEM_ACTION_BACK");
+        RemoteAction remoteActionCreateRemoteAction2 = createRemoteAction(R.string.battery_saver_notification_channel_name, "SYSTEM_ACTION_HOME");
+        RemoteAction remoteActionCreateRemoteAction3 = createRemoteAction(R.string.biometric_error_device_not_secured, "SYSTEM_ACTION_RECENTS");
+        RemoteAction remoteActionCreateRemoteAction4 = createRemoteAction(R.string.biometric_dangling_notification_action_not_now, "SYSTEM_ACTION_NOTIFICATIONS");
+        RemoteAction remoteActionCreateRemoteAction5 = createRemoteAction(R.string.biometric_error_canceled, "SYSTEM_ACTION_QUICK_SETTINGS");
+        RemoteAction remoteActionCreateRemoteAction6 = createRemoteAction(R.string.biometric_dialog_default_title, "SYSTEM_ACTION_POWER_DIALOG");
+        RemoteAction remoteActionCreateRemoteAction7 = createRemoteAction(R.string.battery_saver_off_notification_title, "SYSTEM_ACTION_LOCK_SCREEN");
+        RemoteAction remoteActionCreateRemoteAction8 = createRemoteAction(R.string.biometric_error_generic, "SYSTEM_ACTION_TAKE_SCREENSHOT");
+        RemoteAction remoteActionCreateRemoteAction9 = createRemoteAction(R.string.battery_saver_description_with_learn_more, "SYSTEM_ACTION_HEADSET_HOOK");
+        RemoteAction remoteActionCreateRemoteAction10 = createRemoteAction(R.string.battery_saver_description, "SYSTEM_ACTION_ACCESSIBILITY_SHORTCUT");
+        RemoteAction remoteActionCreateRemoteAction11 = createRemoteAction(R.string.battery_saver_charged_notification_summary, "SYSTEM_ACTION_DPAD_UP");
+        RemoteAction remoteActionCreateRemoteAction12 = createRemoteAction(R.string.back_button_label, "SYSTEM_ACTION_DPAD_DOWN");
+        RemoteAction remoteActionCreateRemoteAction13 = createRemoteAction(R.string.badPin, "SYSTEM_ACTION_DPAD_LEFT");
+        RemoteAction remoteActionCreateRemoteAction14 = createRemoteAction(R.string.badPuk, "SYSTEM_ACTION_DPAD_RIGHT");
+        RemoteAction remoteActionCreateRemoteAction15 = createRemoteAction(R.string.autofill_window_title, "SYSTEM_ACTION_DPAD_CENTER");
+        RemoteAction remoteActionCreateRemoteAction16 = createRemoteAction(R.string.biometric_app_setting_name, "SYSTEM_ACTION_MENU");
+        RemoteAction remoteActionCreateRemoteAction17 = createRemoteAction(R.string.beforeOneMonthDurationPast, "SYSTEM_ACTION_MEDIA_PLAY_PAUSE");
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction, 1);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction2, 2);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction3, 3);
         if (this.mShadeController.isShadeEnabled()) {
-            this.mA11yManager.registerSystemAction(createRemoteAction4, 4);
-            this.mA11yManager.registerSystemAction(createRemoteAction5, 5);
+            this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction4, 4);
+            this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction5, 5);
         }
-        this.mA11yManager.registerSystemAction(createRemoteAction6, 6);
-        this.mA11yManager.registerSystemAction(createRemoteAction7, 8);
-        this.mA11yManager.registerSystemAction(createRemoteAction8, 9);
-        this.mA11yManager.registerSystemAction(createRemoteAction9, 10);
-        this.mA11yManager.registerSystemAction(createRemoteAction10, 13);
-        this.mA11yManager.registerSystemAction(createRemoteAction11, 16);
-        this.mA11yManager.registerSystemAction(createRemoteAction12, 17);
-        this.mA11yManager.registerSystemAction(createRemoteAction13, 18);
-        this.mA11yManager.registerSystemAction(createRemoteAction14, 19);
-        this.mA11yManager.registerSystemAction(createRemoteAction15, 20);
-        this.mA11yManager.registerSystemAction(createRemoteAction16, 21);
-        this.mA11yManager.registerSystemAction(createRemoteAction17, 22);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction6, 6);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction7, 8);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction8, 9);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction9, 10);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction10, 13);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction11, 16);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction12, 17);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction13, 18);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction14, 19);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction15, 20);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction16, 21);
+        this.mA11yManager.registerSystemAction(remoteActionCreateRemoteAction17, 22);
         registerOrUnregisterDismissNotificationShadeAction();
     }
 
@@ -324,15 +322,15 @@ public class SystemActions implements CoreStartable, ConfigurationController.Con
     }
 
     public final void sendDownAndUpKeyEvents(int i) {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        sendKeyEventIdentityCleared(i, 0, uptimeMillis, uptimeMillis);
-        sendKeyEventIdentityCleared(i, 1, uptimeMillis, SystemClock.uptimeMillis());
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        sendKeyEventIdentityCleared(i, 0, jUptimeMillis, jUptimeMillis);
+        sendKeyEventIdentityCleared(i, 1, jUptimeMillis, SystemClock.uptimeMillis());
     }
 
     public final void sendKeyEventIdentityCleared(int i, int i2, long j, long j2) {
-        KeyEvent obtain = KeyEvent.obtain(j, j2, i2, i, 0, 0, -1, 0, 8, 257, null);
-        ((InputManager) this.mContext.getSystemService(InputManager.class)).injectInputEvent(obtain, 0);
-        obtain.recycle();
+        KeyEvent keyEventObtain = KeyEvent.obtain(j, j2, i2, i, 0, 0, -1, 0, 8, 257, null);
+        ((InputManager) this.mContext.getSystemService(InputManager.class)).injectInputEvent(keyEventObtain, 0);
+        keyEventObtain.recycle();
     }
 
     @Override // com.android.systemui.CoreStartable

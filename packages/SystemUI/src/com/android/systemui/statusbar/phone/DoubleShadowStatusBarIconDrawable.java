@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +17,6 @@ import android.graphics.drawable.InsetDrawable;
 import com.android.systemui.R;
 import com.android.systemui.shared.shadow.DoubleShadowTextHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DoubleShadowStatusBarIconDrawable extends Drawable {
     public boolean drawShadowOnly;
@@ -25,7 +25,7 @@ public final class DoubleShadowStatusBarIconDrawable extends Drawable {
     public final RenderNode mDoubleShadowNode;
     public final InsetDrawable mIconDrawable;
 
-    public DoubleShadowStatusBarIconDrawable(Drawable drawable, Context context, int i, int i2) {
+    public DoubleShadowStatusBarIconDrawable(Drawable drawable, Context context, int i, int i2) throws Resources.NotFoundException {
         this.iconWidth = i;
         this.iconHeight = i2;
         float dimension = context.getResources().getDimension(R.dimen.status_bar_icon_shadow_radius);
@@ -37,15 +37,15 @@ public final class DoubleShadowStatusBarIconDrawable extends Drawable {
         insetDrawable.setBounds(0, 0, i, i2);
         RenderNode renderNode = new RenderNode("DoubleShadowNode");
         renderNode.setPosition(0, 0, i, i2);
-        int argb = Color.argb(shadowInfo2.alpha, 0.0f, 0.0f, 0.0f);
+        int iArgb = Color.argb(shadowInfo2.alpha, 0.0f, 0.0f, 0.0f);
         PorterDuff.Mode mode = PorterDuff.Mode.MULTIPLY;
-        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(argb, mode);
+        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(iArgb, mode);
         Shader.TileMode tileMode = Shader.TileMode.CLAMP;
         float f = shadowInfo2.blur;
-        RenderEffect createColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(shadowInfo2.offsetX, shadowInfo2.offsetY, RenderEffect.createBlurEffect(f, f, tileMode)));
+        RenderEffect renderEffectCreateColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(shadowInfo2.offsetX, shadowInfo2.offsetY, RenderEffect.createBlurEffect(f, f, tileMode)));
         PorterDuffColorFilter porterDuffColorFilter2 = new PorterDuffColorFilter(Color.argb(shadowInfo.alpha, 0.0f, 0.0f, 0.0f), mode);
         float f2 = shadowInfo.blur;
-        renderNode.setRenderEffect(RenderEffect.createBlendModeEffect(createColorFilterEffect, RenderEffect.createColorFilterEffect(porterDuffColorFilter2, RenderEffect.createOffsetEffect(shadowInfo.offsetX, shadowInfo.offsetY, RenderEffect.createBlurEffect(f2, f2, tileMode))), BlendMode.DST_ATOP));
+        renderNode.setRenderEffect(RenderEffect.createBlendModeEffect(renderEffectCreateColorFilterEffect, RenderEffect.createColorFilterEffect(porterDuffColorFilter2, RenderEffect.createOffsetEffect(shadowInfo.offsetX, shadowInfo.offsetY, RenderEffect.createBlurEffect(f2, f2, tileMode))), BlendMode.DST_ATOP));
         this.mDoubleShadowNode = renderNode;
     }
 

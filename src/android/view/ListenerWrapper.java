@@ -23,7 +23,7 @@ public class ListenerWrapper<T> {
         this.mExecutor.execute(new Runnable() { // from class: android.view.ListenerWrapper$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ListenerWrapper.this.lambda$accept$0(t);
+                this.f$0.lambda$accept$0(t);
             }
         });
     }

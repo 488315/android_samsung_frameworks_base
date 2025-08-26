@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RoundableState {
     public static final Companion Companion = new Companion(null);
@@ -25,7 +24,6 @@ public final class RoundableState {
     public float topRoundness;
     public final Map topRoundnessMap;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,13 +51,13 @@ public final class RoundableState {
 
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return Float.valueOf(Roundable.this.getRoundableState().topRoundness);
+                return Float.valueOf(roundable.getRoundableState().topRoundness);
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f2) {
-                Roundable.this.getRoundableState().topRoundness = f2;
-                Roundable.this.applyRoundnessAndInvalidate();
+                roundable.getRoundableState().topRoundness = f2;
+                roundable.applyRoundnessAndInvalidate();
             }
         };
         AnimatableProperty.AnonymousClass7 anonymousClass7 = AnimatableProperty.Y;
@@ -71,13 +69,13 @@ public final class RoundableState {
 
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return Float.valueOf(Roundable.this.getRoundableState().bottomRoundness);
+                return Float.valueOf(roundable.getRoundableState().bottomRoundness);
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f2) {
-                Roundable.this.getRoundableState().bottomRoundness = f2;
-                Roundable.this.applyRoundnessAndInvalidate();
+                roundable.getRoundableState().bottomRoundness = f2;
+                roundable.applyRoundnessAndInvalidate();
             }
         });
         this.topRoundnessMap = new LinkedHashMap();

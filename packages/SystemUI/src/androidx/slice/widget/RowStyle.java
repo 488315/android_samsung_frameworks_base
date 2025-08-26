@@ -1,11 +1,11 @@
 package androidx.slice.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import androidx.slice.view.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RowStyle {
     public final int mActionDividerHeight;
@@ -59,7 +59,7 @@ public class RowStyle {
         this.mImageSize = context.getResources().getDimensionPixelSize(R.dimen.abc_slice_small_image_size);
     }
 
-    public RowStyle(Context context, int i, SliceStyle sliceStyle) {
+    public RowStyle(Context context, int i, SliceStyle sliceStyle) throws Resources.NotFoundException {
         this.mTitleItemStartPadding = -1;
         this.mTitleItemEndPadding = -1;
         this.mContentStartPadding = -1;
@@ -81,34 +81,34 @@ public class RowStyle {
         this.mIconSize = -1;
         this.mDisableRecyclerViewItemAnimator = false;
         this.mSliceStyle = sliceStyle;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(i, R$styleable.RowStyle);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(i, R$styleable.RowStyle);
         try {
-            this.mTitleItemStartPadding = (int) obtainStyledAttributes.getDimension(22, -1.0f);
-            this.mTitleItemEndPadding = (int) obtainStyledAttributes.getDimension(21, -1.0f);
-            this.mContentStartPadding = (int) obtainStyledAttributes.getDimension(4, -1.0f);
-            this.mContentEndPadding = (int) obtainStyledAttributes.getDimension(3, -1.0f);
-            this.mTitleStartPadding = (int) obtainStyledAttributes.getDimension(23, -1.0f);
-            this.mTitleEndPadding = (int) obtainStyledAttributes.getDimension(20, -1.0f);
-            this.mSubContentStartPadding = (int) obtainStyledAttributes.getDimension(15, -1.0f);
-            this.mSubContentEndPadding = (int) obtainStyledAttributes.getDimension(14, -1.0f);
-            this.mEndItemStartPadding = (int) obtainStyledAttributes.getDimension(7, -1.0f);
-            this.mEndItemEndPadding = (int) obtainStyledAttributes.getDimension(6, -1.0f);
-            this.mBottomDividerStartPadding = (int) obtainStyledAttributes.getDimension(2, -1.0f);
-            this.mBottomDividerEndPadding = (int) obtainStyledAttributes.getDimension(1, -1.0f);
-            this.mActionDividerHeight = (int) obtainStyledAttributes.getDimension(0, -1.0f);
-            this.mSeekBarInlineWidth = (int) obtainStyledAttributes.getDimension(13, -1.0f);
-            this.mProgressBarInlineWidth = (int) obtainStyledAttributes.getDimension(11, -1.0f);
-            this.mProgressBarStartPadding = (int) obtainStyledAttributes.getDimension(12, -1.0f);
-            this.mProgressBarEndPadding = (int) obtainStyledAttributes.getDimension(10, -1.0f);
-            this.mTextActionPadding = (int) obtainStyledAttributes.getDimension(17, 10.0f);
-            this.mIconSize = (int) obtainStyledAttributes.getDimension(8, -1.0f);
-            this.mDisableRecyclerViewItemAnimator = obtainStyledAttributes.getBoolean(5, false);
-            this.mImageSize = (int) obtainStyledAttributes.getDimension(9, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_small_image_size));
-            this.mTintColor = obtainStyledAttributes.hasValue(18) ? Integer.valueOf(obtainStyledAttributes.getColor(18, 0)) : null;
-            this.mTitleColor = obtainStyledAttributes.hasValue(19) ? Integer.valueOf(obtainStyledAttributes.getColor(19, 0)) : null;
-            this.mSubtitleColor = obtainStyledAttributes.hasValue(16) ? Integer.valueOf(obtainStyledAttributes.getColor(16, 0)) : null;
+            this.mTitleItemStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(22, -1.0f);
+            this.mTitleItemEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(21, -1.0f);
+            this.mContentStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(4, -1.0f);
+            this.mContentEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(3, -1.0f);
+            this.mTitleStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(23, -1.0f);
+            this.mTitleEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(20, -1.0f);
+            this.mSubContentStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(15, -1.0f);
+            this.mSubContentEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(14, -1.0f);
+            this.mEndItemStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(7, -1.0f);
+            this.mEndItemEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(6, -1.0f);
+            this.mBottomDividerStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(2, -1.0f);
+            this.mBottomDividerEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(1, -1.0f);
+            this.mActionDividerHeight = (int) typedArrayObtainStyledAttributes.getDimension(0, -1.0f);
+            this.mSeekBarInlineWidth = (int) typedArrayObtainStyledAttributes.getDimension(13, -1.0f);
+            this.mProgressBarInlineWidth = (int) typedArrayObtainStyledAttributes.getDimension(11, -1.0f);
+            this.mProgressBarStartPadding = (int) typedArrayObtainStyledAttributes.getDimension(12, -1.0f);
+            this.mProgressBarEndPadding = (int) typedArrayObtainStyledAttributes.getDimension(10, -1.0f);
+            this.mTextActionPadding = (int) typedArrayObtainStyledAttributes.getDimension(17, 10.0f);
+            this.mIconSize = (int) typedArrayObtainStyledAttributes.getDimension(8, -1.0f);
+            this.mDisableRecyclerViewItemAnimator = typedArrayObtainStyledAttributes.getBoolean(5, false);
+            this.mImageSize = (int) typedArrayObtainStyledAttributes.getDimension(9, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_small_image_size));
+            this.mTintColor = typedArrayObtainStyledAttributes.hasValue(18) ? Integer.valueOf(typedArrayObtainStyledAttributes.getColor(18, 0)) : null;
+            this.mTitleColor = typedArrayObtainStyledAttributes.hasValue(19) ? Integer.valueOf(typedArrayObtainStyledAttributes.getColor(19, 0)) : null;
+            this.mSubtitleColor = typedArrayObtainStyledAttributes.hasValue(16) ? Integer.valueOf(typedArrayObtainStyledAttributes.getColor(16, 0)) : null;
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 }

@@ -17,5 +17,5 @@ public interface AudioSegmentInterface<T> {
 
     void removeAudioSegment(String str);
 
-    void setAudioSegmentMap(HashMap<String, AudioSegment> hashMap);
+    void setAudioSegmentMap(HashMap<String, AudioSegment> map);
 }

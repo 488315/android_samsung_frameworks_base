@@ -22,15 +22,16 @@ import com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor;
 import com.android.systemui.shade.PanelTransitionStateChangeEvent;
 import com.android.systemui.shade.PanelTransitionStateListener;
 import com.android.systemui.util.SettingsHelper;
+import dagger.Lazy;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BarController implements Dumpable, PanelScreenShotLogger.LogProvider, PanelTransitionStateListener {
     public final ArrayList mAllBarItems;
@@ -78,7 +79,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
                 barController.mThemeSeq = i3;
                 Context context2 = barController.mContext;
                 if (context2 != null) {
-                    BarController.m2883$$Nest$mlogForOpenTheme(barController, context2);
+                    BarController.m2900$$Nest$mlogForOpenTheme(barController, context2);
                 }
             }
         }
@@ -87,7 +88,6 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
     public int mNavBarHeight = 0;
     public int mOrientation = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.BarController$3, reason: invalid class name */
     public class AnonymousClass3 {
         public final /* synthetic */ Runnable val$animatorRunner;
@@ -99,14 +99,12 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.BarController$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener {
         public /* synthetic */ OnApplyWindowInsetsListener(BarController barController, int i) {
             this();
@@ -133,7 +131,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
     }
 
     /* renamed from: -$$Nest$mlogForOpenTheme, reason: not valid java name */
-    public static void m2883$$Nest$mlogForOpenTheme(BarController barController, Context context) {
+    public static void m2900$$Nest$mlogForOpenTheme(BarController barController, Context context) {
         Log.d("BarController", "<QUICK_OPENTHEME is " + barController.mSettingsHelper.getActiveThemePackage());
         logForColors(context, new BarController$$ExternalSyntheticLambda3(1));
         Log.d("BarController", ">");
@@ -141,7 +139,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.qs.bar.BarController$1] */
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.qs.bar.BarController$2] */
-    public BarController(Context context, SettingsHelper settingsHelper, DumpManager dumpManager, final BarFactory barFactory, SecQSPanelResourcePicker secQSPanelResourcePicker, KnoxStateMonitor knoxStateMonitor, BarOrderInteractor barOrderInteractor, ColoredBGHelper coloredBGHelper) {
+    public BarController(Context context, SettingsHelper settingsHelper, DumpManager dumpManager, final BarFactory barFactory, SecQSPanelResourcePicker secQSPanelResourcePicker, KnoxStateMonitor knoxStateMonitor, BarOrderInteractor barOrderInteractor, ColoredBGHelper coloredBGHelper, Lazy lazy, Executor executor) {
         final boolean z = false;
         final boolean z2 = true;
         this.mContext = context;
@@ -163,21 +161,21 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
         }).forEach(new Consumer() { // from class: com.android.systemui.qs.bar.BarFactory$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BarFactory barFactory2 = BarFactory.this;
+                BarFactory barFactory2 = barFactory;
                 ArrayList arrayList2 = arrayList;
                 boolean z3 = z2;
                 BarType barType = (BarType) obj;
-                BarItemImpl createBarItem = barFactory2.createBarItem(barType);
-                if (createBarItem == null) {
+                BarItemImpl barItemImplCreateBarItem = barFactory2.createBarItem(barType);
+                if (barItemImplCreateBarItem == null) {
                     return;
                 }
-                if (!createBarItem.isAvailable()) {
-                    createBarItem.destroy();
+                if (!barItemImplCreateBarItem.isAvailable()) {
+                    barItemImplCreateBarItem.destroy();
                     return;
                 }
                 barType.name();
-                createBarItem.mIsOnCollapsedState = z3;
-                arrayList2.add(createBarItem);
+                barItemImplCreateBarItem.mIsOnCollapsedState = z3;
+                arrayList2.add(barItemImplCreateBarItem);
             }
         });
         this.mCollapsedBarItems = new ArrayList(arrayList);
@@ -191,21 +189,21 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
         }).forEach(new Consumer() { // from class: com.android.systemui.qs.bar.BarFactory$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BarFactory barFactory2 = BarFactory.this;
+                BarFactory barFactory2 = barFactory;
                 ArrayList arrayList22 = arrayList2;
                 boolean z3 = z;
                 BarType barType = (BarType) obj;
-                BarItemImpl createBarItem = barFactory2.createBarItem(barType);
-                if (createBarItem == null) {
+                BarItemImpl barItemImplCreateBarItem = barFactory2.createBarItem(barType);
+                if (barItemImplCreateBarItem == null) {
                     return;
                 }
-                if (!createBarItem.isAvailable()) {
-                    createBarItem.destroy();
+                if (!barItemImplCreateBarItem.isAvailable()) {
+                    barItemImplCreateBarItem.destroy();
                     return;
                 }
                 barType.name();
-                createBarItem.mIsOnCollapsedState = z3;
-                arrayList22.add(createBarItem);
+                barItemImplCreateBarItem.mIsOnCollapsedState = z3;
+                arrayList22.add(barItemImplCreateBarItem);
             }
         });
         ArrayList arrayList3 = new ArrayList(arrayList2);
@@ -215,7 +213,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
         this.mAllBarItems = arrayList4;
         arrayList4.addAll(this.mCollapsedBarItems);
         this.mAllBarItems.addAll(this.mExpandedBarItems);
-        this.mBarBackUpRestoreHelper = new BarBackUpRestoreHelper(context, settingsHelper, barOrderInteractor);
+        this.mBarBackUpRestoreHelper = new BarBackUpRestoreHelper(context, settingsHelper, barOrderInteractor, lazy, executor);
     }
 
     public static void logForColors(final Context context, final Consumer consumer) {
@@ -224,9 +222,9 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
             public final void accept(Object obj, Object obj2) {
                 Consumer consumer2 = consumer;
                 Context context2 = context;
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m((String) obj, ": #");
-                m.append(Integer.toHexString(context2.getColor(((Integer) obj2).intValue())));
-                consumer2.accept(m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m((String) obj, ": #");
+                sbM.append(Integer.toHexString(context2.getColor(((Integer) obj2).intValue())));
+                consumer2.accept(sbM.toString());
             }
         });
     }

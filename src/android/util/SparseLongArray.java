@@ -18,15 +18,15 @@ public class SparseLongArray implements Cloneable {
             this.mKeys = EmptyArray.INT;
             this.mValues = EmptyArray.LONG;
         } else {
-            long[] newUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i);
-            this.mValues = newUnpaddedLongArray;
-            this.mKeys = new int[newUnpaddedLongArray.length];
+            long[] jArrNewUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i);
+            this.mValues = jArrNewUnpaddedLongArray;
+            this.mKeys = new int[jArrNewUnpaddedLongArray.length];
         }
         this.mSize = 0;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SparseLongArray m5533clone() {
+    public SparseLongArray m5540clone() {
         try {
             SparseLongArray sparseLongArray = (SparseLongArray) super.clone();
             try {
@@ -46,25 +46,25 @@ public class SparseLongArray implements Cloneable {
     }
 
     public long get(int i, long j) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        return binarySearch < 0 ? j : this.mValues[binarySearch];
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        return iBinarySearch < 0 ? j : this.mValues[iBinarySearch];
     }
 
     public void delete(int i) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            removeAt(binarySearch);
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            removeAt(iBinarySearch);
         }
     }
 
     public void removeAtRange(int i, int i2) {
-        int min = Math.min(i2, this.mSize - i);
+        int iMin = Math.min(i2, this.mSize - i);
         int[] iArr = this.mKeys;
-        int i3 = i + min;
+        int i3 = i + iMin;
         System.arraycopy(iArr, i3, iArr, i, this.mSize - i3);
         long[] jArr = this.mValues;
         System.arraycopy(jArr, i3, jArr, i, this.mSize - i3);
-        this.mSize -= min;
+        this.mSize -= iMin;
     }
 
     public void removeAt(int i) {
@@ -77,24 +77,24 @@ public class SparseLongArray implements Cloneable {
     }
 
     public void put(int i, long j) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = j;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = j;
             return;
         }
-        int i2 = ~binarySearch;
+        int i2 = ~iBinarySearch;
         this.mKeys = GrowingArrayUtils.insert(this.mKeys, this.mSize, i2, i);
         this.mValues = GrowingArrayUtils.insert(this.mValues, this.mSize, i2, j);
         this.mSize++;
     }
 
     public void incrementValue(int i, long j) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
             long[] jArr = this.mValues;
-            jArr[binarySearch] = jArr[binarySearch] + j;
+            jArr[iBinarySearch] = jArr[iBinarySearch] + j;
         } else {
-            int i2 = ~binarySearch;
+            int i2 = ~iBinarySearch;
             this.mKeys = GrowingArrayUtils.insert(this.mKeys, this.mSize, i2, i);
             this.mValues = GrowingArrayUtils.insert(this.mValues, this.mSize, i2, j);
             this.mSize++;

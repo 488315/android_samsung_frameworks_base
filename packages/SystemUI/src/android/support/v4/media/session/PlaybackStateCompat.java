@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlaybackStateCompat implements Parcelable {
     public static final Parcelable.Creator<PlaybackStateCompat> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.session.PlaybackStateCompat.1
@@ -34,7 +33,6 @@ public final class PlaybackStateCompat implements Parcelable {
     public final int mState;
     public final long mUpdateTime;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api21Impl {
         private Api21Impl() {
         }
@@ -136,7 +134,6 @@ public final class PlaybackStateCompat implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api22Impl {
         private Api22Impl() {
         }
@@ -207,7 +204,6 @@ public final class PlaybackStateCompat implements Parcelable {
         parcel.writeInt(this.mErrorCode);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CustomAction implements Parcelable {
         public static final Parcelable.Creator<CustomAction> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.session.PlaybackStateCompat.CustomAction.1
             @Override // android.os.Parcelable.Creator

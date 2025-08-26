@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WindowRootViewBlurRepositoryImpl$isBlurSupported$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ CrossWindowBlurListeners $crossWindowBlurListeners;
@@ -54,26 +53,26 @@ final class WindowRootViewBlurRepositoryImpl$isBlurSupported$1 extends SuspendLa
             final ?? r3 = new Function1() { // from class: com.android.systemui.window.data.repository.WindowRootViewBlurRepositoryImpl$isBlurSupported$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
+                public final Object mo781invoke(Object obj2) {
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                     ChannelExt channelExt = ChannelExt.INSTANCE;
                     int i2 = WindowRootViewBlurRepositoryImpl.$r8$clinit;
                     windowRootViewBlurRepositoryImpl.getClass();
                     boolean z = false;
                     if (ActivityManager.isHighEndGfx()) {
                         WindowRootViewBlurRepository.Companion.getClass();
-                        if (!SystemProperties.getBoolean("persist.sysui.disableBlur", false) && booleanValue) {
+                        if (!SystemProperties.getBoolean("persist.sysui.disableBlur", false) && zBooleanValue) {
                             z = true;
                         }
                     }
-                    Boolean valueOf = Boolean.valueOf(z);
+                    Boolean boolValueOf = Boolean.valueOf(z);
                     channelExt.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, valueOf, "WindowRootViewBlurRepository", "unable to send blur enabled/disable state change");
+                    ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "WindowRootViewBlurRepository", "unable to send blur enabled/disable state change");
                     return Unit.INSTANCE;
                 }
             };
             this.$crossWindowBlurListeners.addListener(windowRootViewBlurRepositoryImpl.executor, new WindowRootViewBlurRepositoryKt$sam$java_util_function_Consumer$0(r3));
-            r3.mo779invoke(Boolean.valueOf(this.$crossWindowBlurListeners.isCrossWindowBlurEnabled()));
+            r3.mo781invoke(Boolean.valueOf(this.$crossWindowBlurListeners.isCrossWindowBlurEnabled()));
             final CrossWindowBlurListeners crossWindowBlurListeners = this.$crossWindowBlurListeners;
             Function0 function0 = new Function0() { // from class: com.android.systemui.window.data.repository.WindowRootViewBlurRepositoryImpl$isBlurSupported$1$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0

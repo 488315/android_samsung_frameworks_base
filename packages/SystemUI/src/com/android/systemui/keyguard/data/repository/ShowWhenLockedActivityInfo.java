@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShowWhenLockedActivityInfo {
     public final boolean isOnTop;
@@ -27,9 +26,9 @@ public final class ShowWhenLockedActivityInfo {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.isOnTop) * 31;
+        int iHashCode = Boolean.hashCode(this.isOnTop) * 31;
         ActivityManager.RunningTaskInfo runningTaskInfo = this.taskInfo;
-        return hashCode + (runningTaskInfo == null ? 0 : runningTaskInfo.hashCode());
+        return iHashCode + (runningTaskInfo == null ? 0 : runningTaskInfo.hashCode());
     }
 
     public final String toString() {

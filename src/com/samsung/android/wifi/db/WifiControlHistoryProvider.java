@@ -97,15 +97,15 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         }
 
         Map<String, String> getProjectionMap() {
-            HashMap hashMap = new HashMap();
-            hashMap.put(CONTROL_ID, CONTROL_ID);
-            hashMap.put("package_name", "package_name");
-            hashMap.put("time_stamp", "time_stamp");
-            hashMap.put(ENABLE_NUMBER, ENABLE_NUMBER);
-            hashMap.put(DISABLE_NUMBER, DISABLE_NUMBER);
-            hashMap.put(LAST_CONTROL, LAST_CONTROL);
-            hashMap.put(FIRST_CONTROL, FIRST_CONTROL);
-            return hashMap;
+            HashMap map = new HashMap();
+            map.put(CONTROL_ID, CONTROL_ID);
+            map.put("package_name", "package_name");
+            map.put("time_stamp", "time_stamp");
+            map.put(ENABLE_NUMBER, ENABLE_NUMBER);
+            map.put(DISABLE_NUMBER, DISABLE_NUMBER);
+            map.put(LAST_CONTROL, LAST_CONTROL);
+            map.put(FIRST_CONTROL, FIRST_CONTROL);
+            return map;
         }
 
         String getDefaultSortOrder() {
@@ -115,11 +115,11 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         ContentValues checkAndGetContentValues(Cursor cursor, ContentValues contentValues) {
             ContentValues contentValues2 = new ContentValues();
             contentValues2.put("package_name", contentValues.getAsString("package_name"));
-            long currentTimeMillis = System.currentTimeMillis();
-            contentValues2.put("time_stamp", Long.valueOf(getLong("time_stamp", null, contentValues, currentTimeMillis)));
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            contentValues2.put("time_stamp", Long.valueOf(getLong("time_stamp", null, contentValues, jCurrentTimeMillis)));
             int integer = getInteger(LAST_CONTROL, null, contentValues, 0);
             contentValues2.put(LAST_CONTROL, Integer.valueOf(integer));
-            contentValues2.put(FIRST_CONTROL, Long.valueOf(getLong(FIRST_CONTROL, cursor, contentValues, currentTimeMillis)));
+            contentValues2.put(FIRST_CONTROL, Long.valueOf(getLong(FIRST_CONTROL, cursor, contentValues, jCurrentTimeMillis)));
             contentValues2.put(ENABLE_NUMBER, Integer.valueOf(getInteger(ENABLE_NUMBER, cursor, contentValues, 0) + (integer == 1 ? 1 : 0)));
             contentValues2.put(DISABLE_NUMBER, Integer.valueOf(getInteger(DISABLE_NUMBER, cursor, contentValues, 0) + (integer == 0 ? 1 : 0)));
             return contentValues2;
@@ -182,13 +182,13 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         sb.append(" where ");
         sb.append(str);
         sb.append(" arg length ");
-        Object obj = PerfettoProtoLogImpl.NULL_STRING;
+        Object objValueOf = PerfettoProtoLogImpl.NULL_STRING;
         sb.append(strArr2 != null ? Integer.valueOf(strArr2.length) : PerfettoProtoLogImpl.NULL_STRING);
         sb.append(" projection length ");
         if (strArr != null) {
-            obj = Integer.valueOf(strArr.length);
+            objValueOf = Integer.valueOf(strArr.length);
         }
-        sb.append(obj);
+        sb.append(objValueOf);
         sb.append(" sortOrder ");
         sb.append(str2);
         Log.v(TAG, sb.toString());
@@ -209,158 +209,124 @@ public final class WifiControlHistoryProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(Uri uri, ContentValues contentValues) throws Throwable {
         if (DBG) {
             Log.v(TAG, "insert uri " + uri.toSafeString());
         }
-        Uri updateIfExist = updateIfExist(uri, contentValues);
-        if (updateIfExist == null) {
+        Uri uriUpdateIfExist = updateIfExist(uri, contentValues);
+        if (uriUpdateIfExist == null) {
             try {
-                long insert = this.mDbHelper.getDatabase(true).insert(this.mDbHelper.getTableName(), null, this.mDbHelper.checkAndGetContentValues(null, contentValues));
-                if (insert >= 0) {
-                    Log.d(TAG, "Inserted at " + insert);
-                    updateIfExist = getContentUri(insert);
+                long jInsert = this.mDbHelper.getDatabase(true).insert(this.mDbHelper.getTableName(), null, this.mDbHelper.checkAndGetContentValues(null, contentValues));
+                if (jInsert >= 0) {
+                    Log.d(TAG, "Inserted at " + jInsert);
+                    uriUpdateIfExist = getContentUri(jInsert);
                 } else {
-                    Log.e(TAG, "Failed to insert - " + insert);
+                    Log.e(TAG, "Failed to insert - " + jInsert);
                     return null;
                 }
             } catch (SQLiteException e) {
                 Log.e(TAG, "Failed to insert - " + e);
             }
         }
-        this.mContext.getContentResolver().notifyChange(updateIfExist, null);
-        return updateIfExist;
+        this.mContext.getContentResolver().notifyChange(uriUpdateIfExist, null);
+        return uriUpdateIfExist;
     }
 
     private Uri getContentUri(long j) {
         return Uri.parse("content://com.samsung.server.wifi/control/" + j);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009d A[Catch: SQLiteException -> 0x00ad, TRY_ENTER, TRY_LEAVE, TryCatch #5 {SQLiteException -> 0x00ad, blocks: (B:18:0x009d, B:37:0x00ac, B:36:0x00a9, B:31:0x00a3), top: B:13:0x0056, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00df A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x007d A[Catch: all -> 0x0079, TRY_ENTER, TRY_LEAVE, TryCatch #3 {all -> 0x0079, blocks: (B:11:0x0058, B:13:0x005e, B:20:0x007d), top: B:53:0x0058 }] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00ca  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00df A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.net.Uri updateIfExist(android.net.Uri r12, android.content.ContentValues r13) {
-        /*
-            r11 = this;
-            com.samsung.android.wifi.db.WifiControlHistoryProvider$DatabaseHelper r0 = r11.mDbHelper
-            java.lang.String r0 = r0.getUniqueColumnName()
-            boolean r1 = r13.containsKey(r0)
-            r2 = 0
-            java.lang.String r3 = "WifiControlHistoryProvider"
-            if (r1 != 0) goto L16
-            java.lang.String r11 = "unique value is not in the content"
-            android.util.Log.e(r3, r11)
-            return r2
-        L16:
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            r1.<init>()
-            r1.append(r0)
-            java.lang.String r4 = "=?"
-            r1.append(r4)
-            java.lang.String r8 = r1.toString()
-            java.lang.Object r0 = r13.get(r0)
-            java.lang.String r1 = java.lang.String.valueOf(r0)
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r4 = "try to find "
-            r0.<init>(r4)
-            r0.append(r8)
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.v(r3, r0)
-            r4 = 0
-            java.lang.String[] r9 = new java.lang.String[]{r1}     // Catch: android.database.sqlite.SQLiteException -> Lb2
-            com.samsung.android.wifi.db.WifiControlHistoryProvider$DatabaseHelper r0 = r11.mDbHelper     // Catch: android.database.sqlite.SQLiteException -> Lb2
-            java.lang.String r10 = r0.getDefaultSortOrder()     // Catch: android.database.sqlite.SQLiteException -> Lb2
-            r7 = 0
-            r5 = r11
-            r6 = r12
-            android.database.Cursor r11 = r5.query(r6, r7, r8, r9, r10)     // Catch: android.database.sqlite.SQLiteException -> Lb0
-            if (r11 == 0) goto L7d
-            int r12 = r11.getCount()     // Catch: java.lang.Throwable -> L79
-            if (r12 <= 0) goto L7d
-            r11.moveToFirst()     // Catch: java.lang.Throwable -> L79
-            com.samsung.android.wifi.db.WifiControlHistoryProvider$DatabaseHelper r12 = r5.mDbHelper     // Catch: java.lang.Throwable -> L79
-            android.content.ContentValues r12 = r12.checkAndGetContentValues(r11, r13)     // Catch: java.lang.Throwable -> L79
-            com.samsung.android.wifi.db.WifiControlHistoryProvider$DatabaseHelper r13 = r5.mDbHelper     // Catch: java.lang.Throwable -> L76
-            java.lang.String r13 = r13.getIdColumnName()     // Catch: java.lang.Throwable -> L76
-            int r13 = r11.getColumnIndex(r13)     // Catch: java.lang.Throwable -> L76
-            int r4 = r11.getInt(r13)     // Catch: java.lang.Throwable -> L76
-            goto L9b
-        L76:
-            r0 = move-exception
-            r13 = r0
-            goto La1
-        L79:
-            r0 = move-exception
-            r13 = r0
-            r12 = r2
-            goto La1
-        L7d:
-            java.lang.StringBuilder r12 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L79
-            r12.<init>()     // Catch: java.lang.Throwable -> L79
-            r12.append(r1)     // Catch: java.lang.Throwable -> L79
-            java.lang.String r13 = " is not existed in "
-            r12.append(r13)     // Catch: java.lang.Throwable -> L79
-            com.samsung.android.wifi.db.WifiControlHistoryProvider$DatabaseHelper r13 = r5.mDbHelper     // Catch: java.lang.Throwable -> L79
-            java.lang.String r13 = r13.getTableName()     // Catch: java.lang.Throwable -> L79
-            r12.append(r13)     // Catch: java.lang.Throwable -> L79
-            java.lang.String r12 = r12.toString()     // Catch: java.lang.Throwable -> L79
-            android.util.Log.v(r3, r12)     // Catch: java.lang.Throwable -> L79
-            r12 = r2
-        L9b:
-            if (r11 == 0) goto Lc8
-            r11.close()     // Catch: android.database.sqlite.SQLiteException -> Lad
-            goto Lc8
-        La1:
-            if (r11 == 0) goto Lac
-            r11.close()     // Catch: java.lang.Throwable -> La7
-            goto Lac
-        La7:
-            r0 = move-exception
-            r11 = r0
-            r13.addSuppressed(r11)     // Catch: android.database.sqlite.SQLiteException -> Lad
-        Lac:
-            throw r13     // Catch: android.database.sqlite.SQLiteException -> Lad
-        Lad:
-            r0 = move-exception
-            r11 = r0
-            goto Lb7
-        Lb0:
-            r0 = move-exception
-            goto Lb5
-        Lb2:
-            r0 = move-exception
-            r5 = r11
-            r6 = r12
-        Lb5:
-            r11 = r0
-            r12 = r2
-        Lb7:
-            java.lang.StringBuilder r13 = new java.lang.StringBuilder
-            java.lang.String r0 = "Failed to update - "
-            r13.<init>(r0)
-            r13.append(r11)
-            java.lang.String r11 = r13.toString()
-            android.util.Log.e(r3, r11)
-        Lc8:
-            if (r12 == 0) goto Ldf
-            java.lang.String[] r11 = new java.lang.String[]{r1}
-            int r11 = r5.update(r6, r12, r8, r11)
-            if (r11 != 0) goto Ld9
-            java.lang.String r11 = "Failed to update"
-            android.util.Log.e(r3, r11)
-        Ld9:
-            long r11 = (long) r4
-            android.net.Uri r11 = r5.getContentUri(r11)
-            return r11
-        Ldf:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wifi.db.WifiControlHistoryProvider.updateIfExist(android.net.Uri, android.content.ContentValues):android.net.Uri");
+    private Uri updateIfExist(Uri uri, ContentValues contentValues) throws Throwable {
+        WifiControlHistoryProvider wifiControlHistoryProvider;
+        Uri uri2;
+        SQLiteException sQLiteException;
+        ContentValues contentValues2;
+        Cursor cursorQuery;
+        Throwable th;
+        String uniqueColumnName = this.mDbHelper.getUniqueColumnName();
+        if (!contentValues.containsKey(uniqueColumnName)) {
+            Log.e(TAG, "unique value is not in the content");
+            return null;
+        }
+        String str = uniqueColumnName + "=?";
+        String strValueOf = String.valueOf(contentValues.get(uniqueColumnName));
+        Log.v(TAG, "try to find " + str + strValueOf);
+        int i = 0;
+        try {
+            wifiControlHistoryProvider = this;
+            uri2 = uri;
+            try {
+                cursorQuery = wifiControlHistoryProvider.query(uri2, null, str, new String[]{strValueOf}, this.mDbHelper.getDefaultSortOrder());
+            } catch (SQLiteException e) {
+                e = e;
+                sQLiteException = e;
+                contentValues2 = null;
+                wifiControlHistoryProvider = wifiControlHistoryProvider;
+                Log.e(TAG, "Failed to update - " + sQLiteException);
+                if (contentValues2 == null) {
+                }
+            }
+        } catch (SQLiteException e2) {
+            e = e2;
+            wifiControlHistoryProvider = this;
+            uri2 = uri;
+        }
+        try {
+            if (cursorQuery != null) {
+                try {
+                    if (cursorQuery.getCount() > 0) {
+                        cursorQuery.moveToFirst();
+                        ContentValues contentValuesCheckAndGetContentValues = wifiControlHistoryProvider.mDbHelper.checkAndGetContentValues(cursorQuery, contentValues);
+                        try {
+                            i = cursorQuery.getInt(cursorQuery.getColumnIndex(wifiControlHistoryProvider.mDbHelper.getIdColumnName()));
+                            contentValues2 = contentValuesCheckAndGetContentValues;
+                        } catch (Throwable th2) {
+                            th = th2;
+                            uri = contentValuesCheckAndGetContentValues;
+                            if (cursorQuery == null) {
+                                throw th;
+                            }
+                            try {
+                                cursorQuery.close();
+                                throw th;
+                            } catch (Throwable th3) {
+                                th.addSuppressed(th3);
+                                throw th;
+                            }
+                        }
+                    } else {
+                        Log.v(TAG, strValueOf + " is not existed in " + wifiControlHistoryProvider.mDbHelper.getTableName());
+                        contentValues2 = null;
+                    }
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
+                    }
+                } catch (Throwable th4) {
+                    th = th4;
+                    uri = null;
+                }
+            }
+        } catch (SQLiteException e3) {
+            sQLiteException = e3;
+            wifiControlHistoryProvider = wifiControlHistoryProvider;
+            contentValues2 = uri;
+            Log.e(TAG, "Failed to update - " + sQLiteException);
+            if (contentValues2 == null) {
+            }
+        }
+        if (contentValues2 == null) {
+            return null;
+        }
+        if (wifiControlHistoryProvider.update(uri2, contentValues2, str, new String[]{strValueOf}) == 0) {
+            Log.e(TAG, "Failed to update");
+        }
+        return wifiControlHistoryProvider.getContentUri(i);
     }
 
     @Override // android.content.ContentProvider
@@ -368,18 +334,18 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         if (DBG) {
             Log.v(TAG, "update uri " + uri.toSafeString());
         }
-        int i = 0;
+        int iUpdate = 0;
         try {
             try {
-                i = this.mDbHelper.getDatabase(true).update(this.mDbHelper.getTableName(), contentValues, str, strArr);
-                Log.v(TAG, "updated " + i + " rows");
-                return i;
+                iUpdate = this.mDbHelper.getDatabase(true).update(this.mDbHelper.getTableName(), contentValues, str, strArr);
+                Log.v(TAG, "updated " + iUpdate + " rows");
+                return iUpdate;
             } catch (SQLiteDiskIOException | SQLiteReadOnlyDatabaseException e) {
                 Log.e(TAG, "Failed to update - " + e);
-                return i;
+                return iUpdate;
             }
         } catch (Throwable unused) {
-            return i;
+            return iUpdate;
         }
     }
 
@@ -388,18 +354,18 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         if (DBG) {
             Log.v(TAG, "delete uri " + uri.toSafeString());
         }
-        int i = 0;
+        int iDelete = 0;
         try {
             try {
-                i = this.mDbHelper.getDatabase(true).delete(this.mDbHelper.getTableName(), str, strArr);
-                Log.v(TAG, "deleted " + i + " rows");
-                return i;
+                iDelete = this.mDbHelper.getDatabase(true).delete(this.mDbHelper.getTableName(), str, strArr);
+                Log.v(TAG, "deleted " + iDelete + " rows");
+                return iDelete;
             } catch (SQLiteDiskIOException | SQLiteReadOnlyDatabaseException e) {
                 Log.e(TAG, "Failed to delete - " + e);
-                return i;
+                return iDelete;
             }
         } catch (Throwable unused) {
-            return i;
+            return iDelete;
         }
     }
 

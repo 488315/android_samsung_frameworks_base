@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.view.SurfaceControl;
 import com.android.wm.shell.shared.TransactionPool;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class SplitScreenTransitions$$ExternalSyntheticLambda4 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -32,10 +31,10 @@ public final /* synthetic */ class SplitScreenTransitions$$ExternalSyntheticLamb
                 splitScreenTransitions.getClass();
                 float animatedFraction = valueAnimator.getAnimatedFraction();
                 TransactionPool transactionPool = splitScreenTransitions.mTransactionPool;
-                SurfaceControl.Transaction acquire = transactionPool.acquire();
-                acquire.setAlpha(surfaceControl, (f2 * animatedFraction) + ((1.0f - animatedFraction) * f));
-                acquire.apply();
-                transactionPool.release(acquire);
+                SurfaceControl.Transaction transactionAcquire = transactionPool.acquire();
+                transactionAcquire.setAlpha(surfaceControl, (f2 * animatedFraction) + ((1.0f - animatedFraction) * f));
+                transactionAcquire.apply();
+                transactionPool.release(transactionAcquire);
                 break;
             default:
                 SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) this.f$0;

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.SizeKt;
 import androidx.compose.material3.ButtonColors;
 import androidx.compose.material3.ButtonDefaults;
 import androidx.compose.material3.ButtonKt;
+import androidx.compose.material3.ColorScheme;
 import androidx.compose.material3.MaterialTheme;
 import androidx.compose.runtime.Composer;
 import androidx.compose.runtime.ComposerImpl;
@@ -18,50 +19,271 @@ import androidx.compose.runtime.RecomposeScopeImplKt;
 import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import androidx.compose.runtime.internal.ComposableLambdaKt;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.graphics.Shape;
 import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
+import com.sec.ims.volte2.data.QuantumSecurityInfo;
 import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PlatformButtonsKt {
     public static final PaddingValuesImpl ButtonPaddings;
 
     static {
         Dp.Companion companion = Dp.Companion;
-        ButtonPaddings = PaddingKt.m120PaddingValuesYgX7TsA(16, 8);
+        ButtonPaddings = PaddingKt.m121PaddingValuesYgX7TsA(16, 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x014a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x013c  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x003a  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0045  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0058  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x0094  */
     /* JADX WARN: Removed duplicated region for block: B:40:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x009f  */
     /* JADX WARN: Removed duplicated region for block: B:51:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0045  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00f9  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x013c  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x014a  */
+    /* JADX WARN: Removed duplicated region for block: B:64:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void PlatformButton(final kotlin.jvm.functions.Function0 r19, androidx.compose.ui.Modifier r20, boolean r21, androidx.compose.material3.ButtonColors r22, androidx.compose.foundation.layout.PaddingValuesImpl r23, androidx.compose.ui.graphics.Shape r24, androidx.compose.runtime.internal.ComposableLambdaImpl r25, androidx.compose.runtime.Composer r26, final int r27, final int r28) {
-        /*
-            Method dump skipped, instructions count: 345
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.PlatformButtonsKt.PlatformButton(kotlin.jvm.functions.Function0, androidx.compose.ui.Modifier, boolean, androidx.compose.material3.ButtonColors, androidx.compose.foundation.layout.PaddingValuesImpl, androidx.compose.ui.graphics.Shape, androidx.compose.runtime.internal.ComposableLambdaImpl, androidx.compose.runtime.Composer, int, int):void");
+    public static final void PlatformButton(final Function0 function0, Modifier modifier, boolean z, ButtonColors buttonColors, PaddingValuesImpl paddingValuesImpl, Shape shape, ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i, final int i2) {
+        Modifier modifier2;
+        ButtonColors buttonColors2;
+        int i3;
+        ButtonColors buttonColorsM252buttonColorsro_MJ88;
+        PaddingValuesImpl paddingValuesImpl2;
+        Shape shape2;
+        int i4;
+        boolean z2;
+        Modifier modifier3;
+        final ComposableLambdaImpl composableLambdaImpl2;
+        final ButtonColors buttonColors3;
+        final boolean z3;
+        final Shape shape3;
+        final PaddingValuesImpl paddingValuesImpl3;
+        final Modifier modifier4;
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup;
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startRestartGroup(1497181280);
+        int i5 = i | (composerImpl.changedInstance(function0) ? 4 : 2);
+        int i6 = i2 & 2;
+        if (i6 != 0) {
+            i5 |= 48;
+        } else {
+            if ((i & 48) == 0) {
+                modifier2 = modifier;
+                i5 |= composerImpl.changed(modifier2) ? 32 : 16;
+            }
+            int i7 = i5 | 384;
+            if ((i2 & 8) != 0) {
+                buttonColors2 = buttonColors;
+                int i8 = composerImpl.changed(buttonColors2) ? 2048 : 1024;
+                i3 = i7 | i8 | 90112;
+                if ((599187 & i3) == 599186 && composerImpl.getSkipping()) {
+                    composerImpl.skipToGroupEnd();
+                    z3 = z;
+                    paddingValuesImpl3 = paddingValuesImpl;
+                    shape3 = shape;
+                    composableLambdaImpl2 = composableLambdaImpl;
+                    modifier4 = modifier2;
+                    buttonColors3 = buttonColors2;
+                } else {
+                    composerImpl.startDefaults();
+                    if ((i & 1) != 0 || composerImpl.getDefaultsInvalid()) {
+                        Modifier modifier5 = i6 == 0 ? Modifier.Companion : modifier2;
+                        if ((i2 & 8) == 0) {
+                            composerImpl.startReplaceGroup(-611437802);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.compose.filledButtonColors (PlatformButtons.kt:125)");
+                            }
+                            MaterialTheme.INSTANCE.getClass();
+                            ColorScheme colorScheme = MaterialTheme.getColorScheme(composerImpl);
+                            ButtonDefaults buttonDefaults = ButtonDefaults.INSTANCE;
+                            long j = colorScheme.primary;
+                            buttonDefaults.getClass();
+                            buttonColorsM252buttonColorsro_MJ88 = ButtonDefaults.m252buttonColorsro_MJ88(j, colorScheme.onPrimary, composerImpl, 12);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
+                            composerImpl.end(false);
+                            i3 &= -7169;
+                        } else {
+                            buttonColorsM252buttonColorsro_MJ88 = buttonColors2;
+                        }
+                        ButtonDefaults.INSTANCE.getClass();
+                        Shape shape4 = ButtonDefaults.getShape(composerImpl);
+                        int i9 = i3 & (-458753);
+                        paddingValuesImpl2 = ButtonPaddings;
+                        shape2 = shape4;
+                        i4 = i9;
+                        z2 = true;
+                        modifier3 = modifier5;
+                    } else {
+                        composerImpl.skipToGroupEnd();
+                        if ((i2 & 8) != 0) {
+                            i3 &= -7169;
+                        }
+                        int i10 = i3 & (-458753);
+                        paddingValuesImpl2 = paddingValuesImpl;
+                        i4 = i10;
+                        modifier3 = modifier2;
+                        buttonColorsM252buttonColorsro_MJ88 = buttonColors2;
+                        z2 = z;
+                        shape2 = shape;
+                    }
+                    composerImpl.endDefaults();
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventStart("com.android.compose.PlatformButton (PlatformButtons.kt:46)");
+                    }
+                    Dp.Companion companion = Dp.Companion;
+                    composableLambdaImpl2 = composableLambdaImpl;
+                    ButtonColors buttonColors4 = buttonColorsM252buttonColorsro_MJ88;
+                    ButtonKt.Button(function0, SizeKt.m133heightInVpY3zN4$default(modifier3, 36, 0.0f, 2), z2, shape2, buttonColors4, null, null, paddingValuesImpl2, null, ComposableLambdaKt.rememberComposableLambda(-221024176, new Function3() { // from class: com.android.compose.PlatformButtonsKt.PlatformButton.1
+                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
+                        @Override // kotlin.jvm.functions.Function3
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object invoke(Object obj, Object obj2, Object obj3) {
+                            RowScope rowScope = (RowScope) obj;
+                            Composer composer2 = (Composer) obj2;
+                            int iIntValue = ((Number) obj3).intValue();
+                            if ((iIntValue & 6) == 0) {
+                                iIntValue |= ((ComposerImpl) composer2).changed(rowScope) ? 4 : 2;
+                            }
+                            if ((iIntValue & 19) == 18) {
+                                ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                if (composerImpl2.getSkipping()) {
+                                    composerImpl2.skipToGroupEnd();
+                                } else {
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventStart("com.android.compose.PlatformButton.<anonymous> (PlatformButtons.kt:55)");
+                                    }
+                                    composableLambdaImpl2.invoke(rowScope, composer2, Integer.valueOf(iIntValue & 14));
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventEnd();
+                                    }
+                                }
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }, composerImpl), composerImpl, ((i4 << 3) & 57344) | (i4 & 14) | 805306752 | 12582912, QuantumSecurityInfo.QUANTUM_KEY_STATUS.KEY_STATUS_EXCEPTION);
+                    composerImpl = composerImpl;
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventEnd();
+                    }
+                    buttonColors3 = buttonColors4;
+                    z3 = z2;
+                    shape3 = shape2;
+                    paddingValuesImpl3 = paddingValuesImpl2;
+                    modifier4 = modifier3;
+                }
+                recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+                if (recomposeScopeImplEndRestartGroup != null) {
+                    final ComposableLambdaImpl composableLambdaImpl3 = composableLambdaImpl2;
+                    recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.compose.PlatformButtonsKt$$ExternalSyntheticLambda1
+                        @Override // kotlin.jvm.functions.Function2
+                        public final Object invoke(Object obj, Object obj2) {
+                            ((Integer) obj2).getClass();
+                            int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                            ComposableLambdaImpl composableLambdaImpl4 = composableLambdaImpl3;
+                            PlatformButtonsKt.PlatformButton(function0, modifier4, z3, buttonColors3, paddingValuesImpl3, shape3, composableLambdaImpl4, (Composer) obj, iUpdateChangedFlags, i2);
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    return;
+                }
+                return;
+            }
+            buttonColors2 = buttonColors;
+            i3 = i7 | i8 | 90112;
+            if ((599187 & i3) == 599186) {
+                composerImpl.startDefaults();
+                if ((i & 1) != 0) {
+                    if (i6 == 0) {
+                    }
+                    if ((i2 & 8) == 0) {
+                    }
+                    ButtonDefaults.INSTANCE.getClass();
+                    Shape shape42 = ButtonDefaults.getShape(composerImpl);
+                    int i92 = i3 & (-458753);
+                    paddingValuesImpl2 = ButtonPaddings;
+                    shape2 = shape42;
+                    i4 = i92;
+                    z2 = true;
+                    modifier3 = modifier5;
+                    composerImpl.endDefaults();
+                    if (ComposerKt.isTraceInProgress()) {
+                    }
+                    Dp.Companion companion2 = Dp.Companion;
+                    composableLambdaImpl2 = composableLambdaImpl;
+                    ButtonColors buttonColors42 = buttonColorsM252buttonColorsro_MJ88;
+                    ButtonKt.Button(function0, SizeKt.m133heightInVpY3zN4$default(modifier3, 36, 0.0f, 2), z2, shape2, buttonColors42, null, null, paddingValuesImpl2, null, ComposableLambdaKt.rememberComposableLambda(-221024176, new Function3() { // from class: com.android.compose.PlatformButtonsKt.PlatformButton.1
+                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
+                        @Override // kotlin.jvm.functions.Function3
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object invoke(Object obj, Object obj2, Object obj3) {
+                            RowScope rowScope = (RowScope) obj;
+                            Composer composer2 = (Composer) obj2;
+                            int iIntValue = ((Number) obj3).intValue();
+                            if ((iIntValue & 6) == 0) {
+                                iIntValue |= ((ComposerImpl) composer2).changed(rowScope) ? 4 : 2;
+                            }
+                            if ((iIntValue & 19) == 18) {
+                                ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                if (composerImpl2.getSkipping()) {
+                                    composerImpl2.skipToGroupEnd();
+                                } else {
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventStart("com.android.compose.PlatformButton.<anonymous> (PlatformButtons.kt:55)");
+                                    }
+                                    composableLambdaImpl2.invoke(rowScope, composer2, Integer.valueOf(iIntValue & 14));
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventEnd();
+                                    }
+                                }
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }, composerImpl), composerImpl, ((i4 << 3) & 57344) | (i4 & 14) | 805306752 | 12582912, QuantumSecurityInfo.QUANTUM_KEY_STATUS.KEY_STATUS_EXCEPTION);
+                    composerImpl = composerImpl;
+                    if (ComposerKt.isTraceInProgress()) {
+                    }
+                    buttonColors3 = buttonColors42;
+                    z3 = z2;
+                    shape3 = shape2;
+                    paddingValuesImpl3 = paddingValuesImpl2;
+                    modifier4 = modifier3;
+                }
+            }
+            recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+            if (recomposeScopeImplEndRestartGroup != null) {
+            }
+        }
+        modifier2 = modifier;
+        int i72 = i5 | 384;
+        if ((i2 & 8) != 0) {
+        }
+        i3 = i72 | i8 | 90112;
+        if ((599187 & i3) == 599186) {
+        }
+        recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+        }
     }
 
     public static final void PlatformOutlinedButton(final Function0 function0, Modifier.Companion companion, boolean z, ButtonColors buttonColors, BorderStroke borderStroke, ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i) {
-        final BorderStroke m31BorderStrokecXLIe8U;
+        final BorderStroke borderStrokeM31BorderStrokecXLIe8U;
         boolean z2;
         Modifier.Companion companion2;
         int i2;
@@ -78,7 +300,7 @@ public abstract class PlatformButtonsKt {
             companion3 = companion;
             z3 = z;
             buttonColors3 = buttonColors;
-            m31BorderStrokecXLIe8U = borderStroke;
+            borderStrokeM31BorderStrokecXLIe8U = borderStroke;
             composableLambdaImpl2 = composableLambdaImpl;
         } else {
             composerImpl.startDefaults();
@@ -93,7 +315,7 @@ public abstract class PlatformButtonsKt {
                 materialTheme.getClass();
                 long j = MaterialTheme.getColorScheme(composerImpl).onSurface;
                 buttonDefaults.getClass();
-                ButtonColors m252outlinedButtonColorsro_MJ88 = ButtonDefaults.m252outlinedButtonColorsro_MJ88(j, composerImpl);
+                ButtonColors buttonColorsM253outlinedButtonColorsro_MJ88 = ButtonDefaults.m253outlinedButtonColorsro_MJ88(j, composerImpl);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -104,7 +326,7 @@ public abstract class PlatformButtonsKt {
                 }
                 Dp.Companion companion5 = Dp.Companion;
                 materialTheme.getClass();
-                m31BorderStrokecXLIe8U = BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).primary);
+                borderStrokeM31BorderStrokecXLIe8U = BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).primary);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -113,13 +335,13 @@ public abstract class PlatformButtonsKt {
                 z2 = true;
                 companion2 = companion4;
                 i2 = i4;
-                buttonColors2 = m252outlinedButtonColorsro_MJ88;
+                buttonColors2 = buttonColorsM253outlinedButtonColorsro_MJ88;
             } else {
                 composerImpl.skipToGroupEnd();
                 int i5 = i3 & (-64513);
                 z2 = z;
                 buttonColors2 = buttonColors;
-                m31BorderStrokecXLIe8U = borderStroke;
+                borderStrokeM31BorderStrokecXLIe8U = borderStroke;
                 i2 = i5;
                 companion2 = companion;
             }
@@ -130,28 +352,32 @@ public abstract class PlatformButtonsKt {
             Dp.Companion companion6 = Dp.Companion;
             composableLambdaImpl2 = composableLambdaImpl;
             boolean z4 = z2;
-            ButtonKt.OutlinedButton(function0, SizeKt.m132heightInVpY3zN4$default(companion2, 36, 0.0f, 2), z4, null, buttonColors2, null, m31BorderStrokecXLIe8U, ButtonPaddings, null, ComposableLambdaKt.rememberComposableLambda(-670085408, new Function3() { // from class: com.android.compose.PlatformButtonsKt$PlatformOutlinedButton$1
+            ButtonKt.OutlinedButton(function0, SizeKt.m133heightInVpY3zN4$default(companion2, 36, 0.0f, 2), z4, null, buttonColors2, null, borderStrokeM31BorderStrokecXLIe8U, ButtonPaddings, null, ComposableLambdaKt.rememberComposableLambda(-670085408, new Function3() { // from class: com.android.compose.PlatformButtonsKt.PlatformOutlinedButton.1
+                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     RowScope rowScope = (RowScope) obj;
                     Composer composer2 = (Composer) obj2;
-                    int intValue = ((Number) obj3).intValue();
-                    if ((intValue & 6) == 0) {
-                        intValue |= ((ComposerImpl) composer2).changed(rowScope) ? 4 : 2;
+                    int iIntValue = ((Number) obj3).intValue();
+                    if ((iIntValue & 6) == 0) {
+                        iIntValue |= ((ComposerImpl) composer2).changed(rowScope) ? 4 : 2;
                     }
-                    if ((intValue & 19) == 18) {
+                    if ((iIntValue & 19) == 18) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.compose.PlatformOutlinedButton.<anonymous> (PlatformButtons.kt:76)");
+                            }
+                            composableLambdaImpl2.invoke(rowScope, composer2, Integer.valueOf(iIntValue & 14));
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.compose.PlatformOutlinedButton.<anonymous> (PlatformButtons.kt:76)");
-                    }
-                    Function3.this.invoke(rowScope, composer2, Integer.valueOf(intValue & 14));
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -163,10 +389,10 @@ public abstract class PlatformButtonsKt {
             buttonColors3 = buttonColors2;
             z3 = z4;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final ComposableLambdaImpl composableLambdaImpl3 = composableLambdaImpl2;
-            endRestartGroup.block = new Function2(companion3, z3, buttonColors3, m31BorderStrokecXLIe8U, composableLambdaImpl3, i) { // from class: com.android.compose.PlatformButtonsKt$$ExternalSyntheticLambda2
+            recomposeScopeImplEndRestartGroup.block = new Function2(companion3, z3, buttonColors3, borderStrokeM31BorderStrokecXLIe8U, composableLambdaImpl3, i) { // from class: com.android.compose.PlatformButtonsKt$$ExternalSyntheticLambda2
                 public final /* synthetic */ Modifier.Companion f$1;
                 public final /* synthetic */ boolean f$2;
                 public final /* synthetic */ ButtonColors f$3;
@@ -176,10 +402,10 @@ public abstract class PlatformButtonsKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196609);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196609);
                     BorderStroke borderStroke2 = this.f$4;
                     ComposableLambdaImpl composableLambdaImpl4 = this.f$5;
-                    PlatformButtonsKt.PlatformOutlinedButton(Function0.this, this.f$1, this.f$2, this.f$3, borderStroke2, composableLambdaImpl4, (Composer) obj, updateChangedFlags);
+                    PlatformButtonsKt.PlatformOutlinedButton(this.f$0, this.f$1, this.f$2, this.f$3, borderStroke2, composableLambdaImpl4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -214,13 +440,13 @@ public abstract class PlatformButtonsKt {
                 MaterialTheme.INSTANCE.getClass();
                 long j = MaterialTheme.getColorScheme(composerImpl).primary;
                 buttonDefaults.getClass();
-                ButtonColors m253textButtonColorsro_MJ88 = ButtonDefaults.m253textButtonColorsro_MJ88(0L, j, composerImpl, 13);
+                ButtonColors buttonColorsM254textButtonColorsro_MJ88 = ButtonDefaults.m254textButtonColorsro_MJ88(0L, j, composerImpl, 13);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
                 composerImpl.end(false);
                 z2 = true;
-                buttonColors2 = m253textButtonColorsro_MJ88;
+                buttonColors2 = buttonColorsM254textButtonColorsro_MJ88;
                 i2 = i3 & (-7169);
                 companion2 = companion4;
             } else {
@@ -242,9 +468,9 @@ public abstract class PlatformButtonsKt {
             buttonColors3 = buttonColors2;
             z3 = z2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(companion3, z3, buttonColors3, composableLambdaImpl, i) { // from class: com.android.compose.PlatformButtonsKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(companion3, z3, buttonColors3, composableLambdaImpl, i) { // from class: com.android.compose.PlatformButtonsKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ Modifier.Companion f$1;
                 public final /* synthetic */ boolean f$2;
                 public final /* synthetic */ ButtonColors f$3;
@@ -253,10 +479,10 @@ public abstract class PlatformButtonsKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(24577);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(24577);
                     ButtonColors buttonColors4 = this.f$3;
                     ComposableLambdaImpl composableLambdaImpl2 = this.f$4;
-                    PlatformButtonsKt.PlatformTextButton(Function0.this, this.f$1, this.f$2, buttonColors4, composableLambdaImpl2, (Composer) obj, updateChangedFlags);
+                    PlatformButtonsKt.PlatformTextButton(this.f$0, this.f$1, this.f$2, buttonColors4, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

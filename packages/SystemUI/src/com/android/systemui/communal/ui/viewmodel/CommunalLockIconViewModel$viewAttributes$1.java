@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalLockIconViewModel$viewAttributes$1 extends SuspendLambda implements Function4 {
     /* synthetic */ int I$0;
@@ -22,12 +21,12 @@ final class CommunalLockIconViewModel$viewAttributes$1 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        int intValue = ((Number) obj2).intValue();
-        int intValue2 = ((Number) obj3).intValue();
+        int iIntValue = ((Number) obj2).intValue();
+        int iIntValue2 = ((Number) obj3).intValue();
         CommunalLockIconViewModel$viewAttributes$1 communalLockIconViewModel$viewAttributes$1 = new CommunalLockIconViewModel$viewAttributes$1((Continuation) obj4);
         communalLockIconViewModel$viewAttributes$1.L$0 = (DeviceEntryIconView.IconType) obj;
-        communalLockIconViewModel$viewAttributes$1.I$0 = intValue;
-        communalLockIconViewModel$viewAttributes$1.I$1 = intValue2;
+        communalLockIconViewModel$viewAttributes$1.I$0 = iIntValue;
+        communalLockIconViewModel$viewAttributes$1.I$1 = iIntValue2;
         return communalLockIconViewModel$viewAttributes$1.invokeSuspend(Unit.INSTANCE);
     }
 

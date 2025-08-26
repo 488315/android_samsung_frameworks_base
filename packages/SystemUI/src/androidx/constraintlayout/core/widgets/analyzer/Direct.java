@@ -8,7 +8,6 @@ import androidx.constraintlayout.core.widgets.analyzer.BasicMeasure;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Direct {
     public static final BasicMeasure.Measure sMeasure = new BasicMeasure.Measure();
@@ -57,8 +56,8 @@ public class Direct {
                 ConstraintAnchor constraintAnchor5 = (ConstraintAnchor) it.next();
                 ConstraintWidget constraintWidget2 = constraintAnchor5.mOwner;
                 int i2 = i + 1;
-                boolean canMeasure = canMeasure(constraintWidget2);
-                if (constraintWidget2.isMeasureRequested() && canMeasure) {
+                boolean zCanMeasure = canMeasure(constraintWidget2);
+                if (constraintWidget2.isMeasureRequested() && zCanMeasure) {
                     ConstraintWidgetContainer.measure(constraintWidget2, measurer, new BasicMeasure.Measure());
                 }
                 ConstraintAnchor constraintAnchor6 = constraintWidget2.mLeft;
@@ -66,7 +65,7 @@ public class Direct {
                 boolean z2 = (constraintAnchor5 == constraintAnchor6 && (constraintAnchor4 = constraintAnchor7.mTarget) != null && constraintAnchor4.mHasFinalValue) || (constraintAnchor5 == constraintAnchor7 && (constraintAnchor3 = constraintAnchor6.mTarget) != null && constraintAnchor3.mHasFinalValue);
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour = constraintWidget2.mListDimensionBehaviors[0];
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour2 = ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT;
-                if (dimensionBehaviour != dimensionBehaviour2 || canMeasure) {
+                if (dimensionBehaviour != dimensionBehaviour2 || zCanMeasure) {
                     if (!constraintWidget2.isMeasureRequested()) {
                         if (constraintAnchor5 == constraintAnchor6 && constraintAnchor7.mTarget == null) {
                             int margin = constraintAnchor6.getMargin() + finalValue;
@@ -97,8 +96,8 @@ public class Direct {
                 ConstraintAnchor constraintAnchor8 = (ConstraintAnchor) it2.next();
                 ConstraintWidget constraintWidget3 = constraintAnchor8.mOwner;
                 int i3 = i + 1;
-                boolean canMeasure2 = canMeasure(constraintWidget3);
-                if (constraintWidget3.isMeasureRequested() && canMeasure2) {
+                boolean zCanMeasure2 = canMeasure(constraintWidget3);
+                if (constraintWidget3.isMeasureRequested() && zCanMeasure2) {
                     ConstraintWidgetContainer.measure(constraintWidget3, measurer, new BasicMeasure.Measure());
                 }
                 ConstraintAnchor constraintAnchor9 = constraintWidget3.mLeft;
@@ -106,7 +105,7 @@ public class Direct {
                 boolean z3 = (constraintAnchor8 == constraintAnchor9 && (constraintAnchor2 = constraintAnchor10.mTarget) != null && constraintAnchor2.mHasFinalValue) || (constraintAnchor8 == constraintAnchor10 && (constraintAnchor = constraintAnchor9.mTarget) != null && constraintAnchor.mHasFinalValue);
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour3 = constraintWidget3.mListDimensionBehaviors[0];
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour4 = ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT;
-                if (dimensionBehaviour3 != dimensionBehaviour4 || canMeasure2) {
+                if (dimensionBehaviour3 != dimensionBehaviour4 || zCanMeasure2) {
                     if (!constraintWidget3.isMeasureRequested()) {
                         if (constraintAnchor8 == constraintAnchor9 && constraintAnchor10.mTarget == null) {
                             int margin3 = constraintAnchor9.getMargin() + finalValue2;
@@ -270,8 +269,8 @@ public class Direct {
                 ConstraintAnchor constraintAnchor5 = (ConstraintAnchor) it.next();
                 ConstraintWidget constraintWidget2 = constraintAnchor5.mOwner;
                 int i2 = i + 1;
-                boolean canMeasure = canMeasure(constraintWidget2);
-                if (constraintWidget2.isMeasureRequested() && canMeasure) {
+                boolean zCanMeasure = canMeasure(constraintWidget2);
+                if (constraintWidget2.isMeasureRequested() && zCanMeasure) {
                     ConstraintWidgetContainer.measure(constraintWidget2, measurer, new BasicMeasure.Measure());
                 }
                 ConstraintAnchor constraintAnchor6 = constraintWidget2.mTop;
@@ -280,7 +279,7 @@ public class Direct {
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour = constraintWidget2.mListDimensionBehaviors[c3];
                 char c5 = c3;
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour2 = ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT;
-                if (dimensionBehaviour != dimensionBehaviour2 || canMeasure) {
+                if (dimensionBehaviour != dimensionBehaviour2 || zCanMeasure) {
                     if (!constraintWidget2.isMeasureRequested()) {
                         if (constraintAnchor5 == constraintAnchor6 && constraintAnchor7.mTarget == null) {
                             int margin = constraintAnchor6.getMargin() + finalValue;
@@ -311,8 +310,8 @@ public class Direct {
                 ConstraintAnchor constraintAnchor8 = (ConstraintAnchor) it2.next();
                 ConstraintWidget constraintWidget3 = constraintAnchor8.mOwner;
                 int i3 = i + 1;
-                boolean canMeasure2 = canMeasure(constraintWidget3);
-                if (constraintWidget3.isMeasureRequested() && canMeasure2) {
+                boolean zCanMeasure2 = canMeasure(constraintWidget3);
+                if (constraintWidget3.isMeasureRequested() && zCanMeasure2) {
                     ConstraintWidgetContainer.measure(constraintWidget3, measurer, new BasicMeasure.Measure());
                 }
                 ConstraintAnchor constraintAnchor9 = constraintWidget3.mTop;
@@ -320,7 +319,7 @@ public class Direct {
                 boolean z = ((constraintAnchor8 == constraintAnchor9 && (constraintAnchor2 = constraintAnchor10.mTarget) != null && constraintAnchor2.mHasFinalValue) || (constraintAnchor8 == constraintAnchor10 && (constraintAnchor = constraintAnchor9.mTarget) != null && constraintAnchor.mHasFinalValue)) ? c6 == true ? 1 : 0 : false;
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour3 = constraintWidget3.mListDimensionBehaviors[c6 == true ? 1 : 0];
                 ConstraintWidget.DimensionBehaviour dimensionBehaviour4 = ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT;
-                if (dimensionBehaviour3 != dimensionBehaviour4 || canMeasure2) {
+                if (dimensionBehaviour3 != dimensionBehaviour4 || zCanMeasure2) {
                     if (!constraintWidget3.isMeasureRequested()) {
                         if (constraintAnchor8 == constraintAnchor9 && constraintAnchor10.mTarget == null) {
                             int margin3 = constraintAnchor9.getMargin() + finalValue2;
@@ -349,11 +348,11 @@ public class Direct {
                 ConstraintAnchor constraintAnchor11 = (ConstraintAnchor) it3.next();
                 ConstraintWidget constraintWidget4 = constraintAnchor11.mOwner;
                 int i4 = i + 1;
-                boolean canMeasure3 = canMeasure(constraintWidget4);
-                if (constraintWidget4.isMeasureRequested() && canMeasure3) {
+                boolean zCanMeasure3 = canMeasure(constraintWidget4);
+                if (constraintWidget4.isMeasureRequested() && zCanMeasure3) {
                     ConstraintWidgetContainer.measure(constraintWidget4, measurer, new BasicMeasure.Measure());
                 }
-                if (constraintWidget4.mListDimensionBehaviors[c6 == true ? 1 : 0] != ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT || canMeasure3) {
+                if (constraintWidget4.mListDimensionBehaviors[c6 == true ? 1 : 0] != ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT || zCanMeasure3) {
                     if (!constraintWidget4.isMeasureRequested()) {
                         ConstraintAnchor constraintAnchor12 = constraintWidget4.mBaseline;
                         if (constraintAnchor11 == constraintAnchor12) {
@@ -373,8 +372,8 @@ public class Direct {
                             }
                             verticalSolvingPass(i4, constraintWidget4, measurer);
                             c2 = c;
-                            c6 = c2;
                         }
+                        c6 = c2;
                     }
                 }
                 c2 = c6 == true ? 1 : 0;

@@ -59,40 +59,38 @@ public class SemTemperatureManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0026 A[Catch: all -> 0x002a, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x0010, B:10:0x0018, B:13:0x0023, B:14:0x0026), top: B:22:0x0003, inners: #0 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static synchronized ISamsungDeviceHealthManager getService() {
-        ISamsungDeviceHealthManager iSamsungDeviceHealthManager;
         IBinder service;
-        synchronized (SemTemperatureManager.class) {
-            if (mService == null && (service = ServiceManager.getService("sdhms")) != null) {
-                ISamsungDeviceHealthManager asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service);
-                mService = asInterface;
-                if (asInterface != null) {
-                    try {
-                        service.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.os.SemTemperatureManager.1
-                            @Override // android.os.IBinder.DeathRecipient
-                            public void binderDied() {
-                                SemTemperatureManager.mService = null;
-                            }
-                        }, 0);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+        if (mService == null && (service = ServiceManager.getService("sdhms")) != null) {
+            ISamsungDeviceHealthManager iSamsungDeviceHealthManagerAsInterface = ISamsungDeviceHealthManager.Stub.asInterface(service);
+            mService = iSamsungDeviceHealthManagerAsInterface;
+            if (iSamsungDeviceHealthManagerAsInterface != null) {
+                try {
+                    service.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.os.SemTemperatureManager.1
+                        @Override // android.os.IBinder.DeathRecipient
+                        public void binderDied() {
+                            SemTemperatureManager.mService = null;
+                        }
+                    }, 0);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
             }
-            iSamsungDeviceHealthManager = mService;
         }
-        return iSamsungDeviceHealthManager;
+        return mService;
     }
 
     private static synchronized void initThermistorList() {
-        synchronized (SemTemperatureManager.class) {
-            mThermistorList = new SparseArray<>();
-            int[] allTemperatures = getAllTemperatures();
-            for (int i = 0; i < 12; i++) {
-                Thermistor thermistor = new Thermistor(i);
-                if (allTemperatures[i] != -999) {
-                    mThermistorList.append(i, thermistor);
-                }
+        mThermistorList = new SparseArray<>();
+        int[] allTemperatures = getAllTemperatures();
+        for (int i = 0; i < 12; i++) {
+            Thermistor thermistor = new Thermistor(i);
+            if (allTemperatures[i] != -999) {
+                mThermistorList.append(i, thermistor);
             }
         }
     }

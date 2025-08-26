@@ -4,7 +4,6 @@ import androidx.emoji2.text.flatbuffer.MetadataItem;
 import androidx.emoji2.text.flatbuffer.MetadataList;
 import java.nio.ByteBuffer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EmojiMetadata {
     public static final ThreadLocal sMetadataItem = new ThreadLocal();
@@ -19,12 +18,12 @@ public class EmojiMetadata {
 
     public final int getCodepointAt(int i) {
         MetadataItem metadataItem = getMetadataItem();
-        int __offset = metadataItem.__offset(16);
-        if (__offset == 0) {
+        int i__offset = metadataItem.__offset(16);
+        if (i__offset == 0) {
             return 0;
         }
         ByteBuffer byteBuffer = metadataItem.bb;
-        int i2 = __offset + metadataItem.bb_pos;
+        int i2 = i__offset + metadataItem.bb_pos;
         return byteBuffer.getInt((i * 4) + byteBuffer.getInt(i2) + i2 + 4);
     }
 
@@ -36,9 +35,9 @@ public class EmojiMetadata {
             threadLocal.set(metadataItem);
         }
         MetadataList metadataList = this.mMetadataRepo.mMetadataList;
-        int __offset = metadataList.__offset(6);
-        if (__offset != 0) {
-            int i = __offset + metadataList.bb_pos;
+        int i__offset = metadataList.__offset(6);
+        if (i__offset != 0) {
+            int i = i__offset + metadataList.bb_pos;
             int i2 = (this.mIndex * 4) + metadataList.bb.getInt(i) + i + 4;
             int i3 = metadataList.bb.getInt(i2) + i2;
             ByteBuffer byteBuffer = metadataList.bb;
@@ -63,13 +62,13 @@ public class EmojiMetadata {
         sb.append(super.toString());
         sb.append(", id:");
         MetadataItem metadataItem = getMetadataItem();
-        int __offset = metadataItem.__offset(4);
-        sb.append(Integer.toHexString(__offset != 0 ? metadataItem.bb.getInt(__offset + metadataItem.bb_pos) : 0));
+        int i__offset = metadataItem.__offset(4);
+        sb.append(Integer.toHexString(i__offset != 0 ? metadataItem.bb.getInt(i__offset + metadataItem.bb_pos) : 0));
         sb.append(", codepoints:");
         MetadataItem metadataItem2 = getMetadataItem();
-        int __offset2 = metadataItem2.__offset(16);
-        if (__offset2 != 0) {
-            int i2 = __offset2 + metadataItem2.bb_pos;
+        int i__offset2 = metadataItem2.__offset(16);
+        if (i__offset2 != 0) {
+            int i2 = i__offset2 + metadataItem2.bb_pos;
             i = metadataItem2.bb.getInt(metadataItem2.bb.getInt(i2) + i2);
         } else {
             i = 0;

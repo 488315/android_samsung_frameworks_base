@@ -64,7 +64,7 @@ public final class AmbientContextManager {
 
     static /* synthetic */ void lambda$queryAmbientContextServiceStatus$1(Executor executor, final Consumer consumer, Bundle bundle) {
         final int i = bundle.getInt(STATUS_RESPONSE_BUNDLE_KEY);
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             executor.execute(new Runnable() { // from class: android.app.ambientcontext.AmbientContextManager$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
@@ -73,7 +73,7 @@ public final class AmbientContextManager {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -112,7 +112,7 @@ public final class AmbientContextManager {
 
     static /* synthetic */ void lambda$registerObserver$3(Executor executor, final Consumer consumer, Bundle bundle) {
         final int i = bundle.getInt(STATUS_RESPONSE_BUNDLE_KEY);
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             executor.execute(new Runnable() { // from class: android.app.ambientcontext.AmbientContextManager$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
@@ -121,7 +121,7 @@ public final class AmbientContextManager {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -137,35 +137,35 @@ public final class AmbientContextManager {
 
         @Override // android.app.ambientcontext.IAmbientContextObserver
         public void onEvents(final List<AmbientContextEvent> list) throws RemoteException {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final AmbientContextCallback ambientContextCallback = this.val$ambientContextCallback;
                 executor.execute(new Runnable() { // from class: android.app.ambientcontext.AmbientContextManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AmbientContextCallback.this.onEvents(list);
+                        ambientContextCallback.onEvents(list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.app.ambientcontext.IAmbientContextObserver
         public void onRegistrationComplete(final int i) throws RemoteException {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final AmbientContextCallback ambientContextCallback = this.val$ambientContextCallback;
                 executor.execute(new Runnable() { // from class: android.app.ambientcontext.AmbientContextManager$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AmbientContextCallback.this.onRegistrationComplete(i);
+                        ambientContextCallback.onRegistrationComplete(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

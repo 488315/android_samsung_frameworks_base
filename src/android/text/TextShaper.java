@@ -14,13 +14,13 @@ public class TextShaper {
 
     public static void shapeText(CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, TextPaint textPaint, GlyphsConsumer glyphsConsumer) {
         int i3 = i + i2;
-        MeasuredParagraph buildForBidi = MeasuredParagraph.buildForBidi(charSequence, i, i3, textDirectionHeuristic, null);
-        TextLine obtain = TextLine.obtain();
+        MeasuredParagraph measuredParagraphBuildForBidi = MeasuredParagraph.buildForBidi(charSequence, i, i3, textDirectionHeuristic, null);
+        TextLine textLineObtain = TextLine.obtain();
         try {
-            obtain.set(textPaint, charSequence, i, i3, buildForBidi.getParagraphDir(), buildForBidi.getDirections(0, i2), false, null, -1, -1, false);
-            obtain.shape(glyphsConsumer);
+            textLineObtain.set(textPaint, charSequence, i, i3, measuredParagraphBuildForBidi.getParagraphDir(), measuredParagraphBuildForBidi.getDirections(0, i2), false, null, -1, -1, false);
+            textLineObtain.shape(glyphsConsumer);
         } finally {
-            TextLine.recycle(obtain);
+            TextLine.recycle(textLineObtain);
         }
     }
 }

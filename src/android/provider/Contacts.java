@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -300,15 +301,15 @@ public class Contacts {
 
         @Deprecated
         public static String getSetting(ContentResolver contentResolver, String str, String str2) {
-            Cursor query = contentResolver.query(CONTENT_URI, new String[]{"value"}, "key=?", new String[]{str2}, null);
+            Cursor cursorQuery = contentResolver.query(CONTENT_URI, new String[]{"value"}, "key=?", new String[]{str2}, null);
             try {
-                if (query.moveToNext()) {
-                    return query.getString(0);
+                if (cursorQuery.moveToNext()) {
+                    return cursorQuery.getString(0);
                 }
-                query.close();
+                cursorQuery.close();
                 return null;
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 
@@ -365,38 +366,38 @@ public class Contacts {
 
         @Deprecated
         public static long tryGetMyContactsGroupId(ContentResolver contentResolver) {
-            Cursor query = contentResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "system_id='Contacts'", null, null);
-            if (query == null) {
+            Cursor cursorQuery = contentResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "system_id='Contacts'", null, null);
+            if (cursorQuery == null) {
                 return 0L;
             }
             try {
-                if (query.moveToFirst()) {
-                    return query.getLong(0);
+                if (cursorQuery.moveToFirst()) {
+                    return cursorQuery.getLong(0);
                 }
                 return 0L;
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 
         @Deprecated
         public static Uri addToMyContactsGroup(ContentResolver contentResolver, long j) {
-            long tryGetMyContactsGroupId = tryGetMyContactsGroupId(contentResolver);
-            if (tryGetMyContactsGroupId == 0) {
+            long jTryGetMyContactsGroupId = tryGetMyContactsGroupId(contentResolver);
+            if (jTryGetMyContactsGroupId == 0) {
                 throw new IllegalStateException("Failed to find the My Contacts group");
             }
-            return addToGroup(contentResolver, j, tryGetMyContactsGroupId);
+            return addToGroup(contentResolver, j, jTryGetMyContactsGroupId);
         }
 
         @Deprecated
         public static Uri addToGroup(ContentResolver contentResolver, long j, String str) {
             long j2;
-            Cursor query = contentResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "name=?", new String[]{str}, null);
-            if (query != null) {
+            Cursor cursorQuery = contentResolver.query(Groups.CONTENT_URI, GROUPS_PROJECTION, "name=?", new String[]{str}, null);
+            if (cursorQuery != null) {
                 try {
-                    j2 = query.moveToFirst() ? query.getLong(0) : 0L;
+                    j2 = cursorQuery.moveToFirst() ? cursorQuery.getLong(0) : 0L;
                 } finally {
-                    query.close();
+                    cursorQuery.close();
                 }
             } else {
                 j2 = 0;
@@ -417,15 +418,15 @@ public class Contacts {
 
         @Deprecated
         public static Uri createPersonInMyContactsGroup(ContentResolver contentResolver, ContentValues contentValues) {
-            Uri insert = contentResolver.insert(CONTENT_URI, contentValues);
-            if (insert == null) {
+            Uri uriInsert = contentResolver.insert(CONTENT_URI, contentValues);
+            if (uriInsert == null) {
                 Log.e("Contacts", "Failed to create the contact");
                 return null;
             }
-            if (addToMyContactsGroup(contentResolver, ContentUris.parseId(insert)) != null) {
-                return insert;
+            if (addToMyContactsGroup(contentResolver, ContentUris.parseId(uriInsert)) != null) {
+                return uriInsert;
             }
-            contentResolver.delete(insert, null, null);
+            contentResolver.delete(uriInsert, null, null);
             return null;
         }
 
@@ -436,36 +437,36 @@ public class Contacts {
 
         @Deprecated
         public static void setPhotoData(ContentResolver contentResolver, Uri uri, byte[] bArr) {
-            Uri withAppendedPath = Uri.withAppendedPath(uri, "photo");
+            Uri uriWithAppendedPath = Uri.withAppendedPath(uri, "photo");
             ContentValues contentValues = new ContentValues();
             contentValues.put("data", bArr);
-            contentResolver.update(withAppendedPath, contentValues, null, null);
+            contentResolver.update(uriWithAppendedPath, contentValues, null, null);
         }
 
         @Deprecated
         public static InputStream openContactPhotoInputStream(ContentResolver contentResolver, Uri uri) {
-            Cursor query = contentResolver.query(Uri.withAppendedPath(uri, "photo"), new String[]{"data"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = contentResolver.query(Uri.withAppendedPath(uri, "photo"), new String[]{"data"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToNext()) {
-                        byte[] blob = query.getBlob(0);
+                    if (cursorQuery.moveToNext()) {
+                        byte[] blob = cursorQuery.getBlob(0);
                         if (blob == null) {
-                            if (query != null) {
-                                query.close();
+                            if (cursorQuery != null) {
+                                cursorQuery.close();
                             }
                             return null;
                         }
                         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(blob);
-                        if (query != null) {
-                            query.close();
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return byteArrayInputStream;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         }
@@ -475,9 +476,9 @@ public class Contacts {
             if (uri == null) {
                 return loadPlaceholderPhoto(i, context, options);
             }
-            InputStream openContactPhotoInputStream = openContactPhotoInputStream(context.getContentResolver(), uri);
-            Bitmap decodeStream = openContactPhotoInputStream != null ? BitmapFactory.decodeStream(openContactPhotoInputStream, null, options) : null;
-            return decodeStream == null ? loadPlaceholderPhoto(i, context, options) : decodeStream;
+            InputStream inputStreamOpenContactPhotoInputStream = openContactPhotoInputStream(context.getContentResolver(), uri);
+            Bitmap bitmapDecodeStream = inputStreamOpenContactPhotoInputStream != null ? BitmapFactory.decodeStream(inputStreamOpenContactPhotoInputStream, null, options) : null;
+            return bitmapDecodeStream == null ? loadPlaceholderPhoto(i, context, options) : bitmapDecodeStream;
         }
 
         private static Bitmap loadPlaceholderPhoto(int i, Context context, BitmapFactory.Options options) {
@@ -584,7 +585,7 @@ public class Contacts {
         }
 
         @Deprecated
-        public static final CharSequence getDisplayLabel(Context context, int i, CharSequence charSequence, CharSequence[] charSequenceArr) {
+        public static final CharSequence getDisplayLabel(Context context, int i, CharSequence charSequence, CharSequence[] charSequenceArr) throws Resources.NotFoundException {
             if (i == 0) {
                 return !TextUtils.isEmpty(charSequence) ? charSequence : "";
             }
@@ -771,7 +772,7 @@ public class Contacts {
         }
 
         @Deprecated
-        public static final CharSequence getDisplayLabel(Context context, int i, int i2, CharSequence charSequence) {
+        public static final CharSequence getDisplayLabel(Context context, int i, int i2, CharSequence charSequence) throws Resources.NotFoundException {
             if (i != 1) {
                 if (i != 2) {
                     return context.getString(17039375);
@@ -810,9 +811,9 @@ public class Contacts {
             contentValues.put("data", Double.valueOf(d));
             contentValues.put("aux_data", Double.valueOf(d2));
             Uri uri = CONTENT_URI;
-            long parseId = ContentUris.parseId(contentResolver.insert(uri, contentValues));
+            long id = ContentUris.parseId(contentResolver.insert(uri, contentValues));
             contentValues.clear();
-            contentValues.put("aux_data", Long.valueOf(parseId));
+            contentValues.put("aux_data", Long.valueOf(id));
             contentResolver.update(ContentUris.withAppendedId(uri, j), contentValues, null, null);
         }
     }
@@ -862,7 +863,7 @@ public class Contacts {
         }
 
         @Deprecated
-        public static final CharSequence getDisplayLabel(Context context, int i, CharSequence charSequence) {
+        public static final CharSequence getDisplayLabel(Context context, int i, CharSequence charSequence) throws Resources.NotFoundException {
             if (i == 0) {
                 return !TextUtils.isEmpty(charSequence) ? charSequence : "";
             }

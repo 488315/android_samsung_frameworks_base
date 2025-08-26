@@ -9,7 +9,6 @@ import com.google.android.material.internal.CheckableImageButton;
 import java.util.Arrays;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IconHelper {
     private IconHelper() {
@@ -25,9 +24,9 @@ public class IconHelper {
                 int[] drawableState = textInputLayout.getDrawableState();
                 int[] drawableState2 = checkableImageButton.getDrawableState();
                 int length = drawableState.length;
-                int[] copyOf = Arrays.copyOf(drawableState, drawableState.length + drawableState2.length);
-                System.arraycopy(drawableState2, 0, copyOf, length, drawableState2.length);
-                drawable.setTintList(ColorStateList.valueOf(colorStateList.getColorForState(copyOf, colorStateList.getDefaultColor())));
+                int[] iArrCopyOf = Arrays.copyOf(drawableState, drawableState.length + drawableState2.length);
+                System.arraycopy(drawableState2, 0, iArrCopyOf, length, drawableState2.length);
+                drawable.setTintList(ColorStateList.valueOf(colorStateList.getColorForState(iArrCopyOf, colorStateList.getDefaultColor())));
             }
             if (mode != null) {
                 drawable.setTintMode(mode);
@@ -50,21 +49,21 @@ public class IconHelper {
         int[] drawableState = textInputLayout.getDrawableState();
         int[] drawableState2 = checkableImageButton.getDrawableState();
         int length = drawableState.length;
-        int[] copyOf = Arrays.copyOf(drawableState, drawableState.length + drawableState2.length);
-        System.arraycopy(drawableState2, 0, copyOf, length, drawableState2.length);
-        int colorForState = colorStateList.getColorForState(copyOf, colorStateList.getDefaultColor());
-        Drawable mutate = drawable.mutate();
-        mutate.setTintList(ColorStateList.valueOf(colorForState));
-        checkableImageButton.setImageDrawable(mutate);
+        int[] iArrCopyOf = Arrays.copyOf(drawableState, drawableState.length + drawableState2.length);
+        System.arraycopy(drawableState2, 0, iArrCopyOf, length, drawableState2.length);
+        int colorForState = colorStateList.getColorForState(iArrCopyOf, colorStateList.getDefaultColor());
+        Drawable drawableMutate = drawable.mutate();
+        drawableMutate.setTintList(ColorStateList.valueOf(colorForState));
+        checkableImageButton.setImageDrawable(drawableMutate);
     }
 
     public static void setIconClickable(CheckableImageButton checkableImageButton) {
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        boolean hasOnClickListeners = checkableImageButton.hasOnClickListeners();
-        checkableImageButton.setFocusable(hasOnClickListeners);
-        checkableImageButton.setClickable(hasOnClickListeners);
-        checkableImageButton.pressable = hasOnClickListeners;
+        boolean zHasOnClickListeners = checkableImageButton.hasOnClickListeners();
+        checkableImageButton.setFocusable(zHasOnClickListeners);
+        checkableImageButton.setClickable(zHasOnClickListeners);
+        checkableImageButton.pressable = zHasOnClickListeners;
         checkableImageButton.setLongClickable(false);
-        checkableImageButton.setImportantForAccessibility(hasOnClickListeners ? 1 : 2);
+        checkableImageButton.setImportantForAccessibility(zHasOnClickListeners ? 1 : 2);
     }
 }

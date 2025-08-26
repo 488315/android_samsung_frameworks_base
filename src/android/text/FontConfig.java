@@ -128,8 +128,8 @@ public final class FontConfig implements Parcelable {
             @Override // android.os.Parcelable.Creator
             public Font createFromParcel(Parcel parcel) {
                 File file = new File(parcel.readString8());
-                String readString8 = parcel.readString8();
-                return new Font(file, readString8 == null ? null : new File(readString8), parcel.readString8(), new FontStyle(parcel.readInt(), parcel.readInt()), parcel.readInt(), parcel.readString8(), parcel.readString8(), parcel.readInt());
+                String string8 = parcel.readString8();
+                return new Font(file, string8 == null ? null : new File(string8), parcel.readString8(), new FontStyle(parcel.readInt(), parcel.readInt()), parcel.readInt(), parcel.readString8(), parcel.readString8(), parcel.readInt());
             }
 
             /* JADX WARN: Can't rename method to resolve collision */
@@ -330,8 +330,8 @@ public final class FontConfig implements Parcelable {
             public FontFamily createFromParcel(Parcel parcel) {
                 ArrayList arrayList = new ArrayList();
                 parcel.readTypedList(arrayList, Font.CREATOR);
-                String readString8 = parcel.readString8();
-                return new FontFamily(arrayList, LocaleList.forLanguageTags(readString8), parcel.readInt());
+                String string8 = parcel.readString8();
+                return new FontFamily(arrayList, LocaleList.forLanguageTags(string8), parcel.readInt());
             }
 
             /* JADX WARN: Can't rename method to resolve collision */

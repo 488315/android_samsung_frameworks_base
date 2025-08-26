@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import android.util.SparseArray;
 import android.util.SparseIntArray;
-import com.android.internal.util.HeavyHitterSketch;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,22 +66,22 @@ public interface HeavyHitterSketch<T> {
         }
 
         private void addToMGSummary(T t) {
-            int hashCode = t != null ? t.hashCode() : 0;
-            int indexOfKey = this.mObjects.indexOfKey(hashCode);
-            if (indexOfKey >= 0) {
+            int iHashCode = t != null ? t.hashCode() : 0;
+            int iIndexOfKey = this.mObjects.indexOfKey(iHashCode);
+            if (iIndexOfKey >= 0) {
                 SparseIntArray sparseIntArray = this.mFrequencies;
-                sparseIntArray.setValueAt(indexOfKey, sparseIntArray.valueAt(indexOfKey) + 1);
+                sparseIntArray.setValueAt(iIndexOfKey, sparseIntArray.valueAt(iIndexOfKey) + 1);
             } else if (this.mObjects.size() < this.mCapacity - 1) {
-                this.mObjects.put(hashCode, t);
-                this.mFrequencies.put(hashCode, 1);
+                this.mObjects.put(iHashCode, t);
+                this.mFrequencies.put(iHashCode, 1);
             } else {
                 for (int size = this.mFrequencies.size() - 1; size >= 0; size--) {
-                    int valueAt = this.mFrequencies.valueAt(size) - 1;
-                    if (valueAt == 0) {
+                    int iValueAt = this.mFrequencies.valueAt(size) - 1;
+                    if (iValueAt == 0) {
                         this.mObjects.removeAt(size);
                         this.mFrequencies.removeAt(size);
                     } else {
-                        this.mFrequencies.setValueAt(size, valueAt);
+                        this.mFrequencies.setValueAt(size, iValueAt);
                     }
                 }
             }
@@ -96,10 +95,10 @@ public interface HeavyHitterSketch<T> {
         }
 
         private void validate(T t) {
-            int indexOfKey = this.mObjects.indexOfKey(t != null ? t.hashCode() : 0);
-            if (indexOfKey >= 0) {
+            int iIndexOfKey = this.mObjects.indexOfKey(t != null ? t.hashCode() : 0);
+            if (iIndexOfKey >= 0) {
                 SparseIntArray sparseIntArray = this.mFrequencies;
-                sparseIntArray.setValueAt(indexOfKey, sparseIntArray.valueAt(indexOfKey) + 1);
+                sparseIntArray.setValueAt(iIndexOfKey, sparseIntArray.valueAt(iIndexOfKey) + 1);
             }
             int i = this.mNumInputs + 1;
             this.mNumInputs = i;
@@ -140,9 +139,7 @@ public interface HeavyHitterSketch<T> {
             Collections.sort(arrayList, new Comparator() { // from class: com.android.internal.util.HeavyHitterSketch$HeavyHitterSketchImpl$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int lambda$getTopHeavyHitters$0;
-                    lambda$getTopHeavyHitters$0 = HeavyHitterSketch.HeavyHitterSketchImpl.this.lambda$getTopHeavyHitters$0((Integer) obj, (Integer) obj2);
-                    return lambda$getTopHeavyHitters$0;
+                    return this.f$0.lambda$getTopHeavyHitters$0((Integer) obj, (Integer) obj2);
                 }
             });
             if (list == null) {
@@ -151,11 +148,11 @@ public interface HeavyHitterSketch<T> {
             if (i == 0) {
                 i = this.mCapacity - 1;
             }
-            int min = Math.min(i, arrayList.size());
-            for (int i2 = 0; i2 < min; i2++) {
-                T valueAt = this.mObjects.valueAt(((Integer) arrayList.get(i2)).intValue());
-                if (valueAt != null) {
-                    list.add(valueAt);
+            int iMin = Math.min(i, arrayList.size());
+            for (int i2 = 0; i2 < iMin; i2++) {
+                T tValueAt = this.mObjects.valueAt(((Integer) arrayList.get(i2)).intValue());
+                if (tValueAt != null) {
+                    list.add(tValueAt);
                     if (list2 != null) {
                         list2.add(Float.valueOf(this.mFrequencies.valueAt(r1) / this.mPassSize));
                     }
@@ -181,9 +178,9 @@ public interface HeavyHitterSketch<T> {
                 list = new ArrayList();
             }
             for (int size = this.mObjects.size() - 1; size >= 0; size--) {
-                T valueAt = this.mObjects.valueAt(size);
-                if (valueAt != null) {
-                    list.add(valueAt);
+                T tValueAt = this.mObjects.valueAt(size);
+                if (tValueAt != null) {
+                    list.add(tValueAt);
                 }
             }
             return list;

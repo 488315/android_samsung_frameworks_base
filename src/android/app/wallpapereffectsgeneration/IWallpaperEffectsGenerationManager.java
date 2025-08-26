@@ -52,9 +52,9 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWallpaperEffectsGenerationManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWallpaperEffectsGenerationManager)) {
-                return (IWallpaperEffectsGenerationManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWallpaperEffectsGenerationManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWallpaperEffectsGenerationManager)) {
+                return (IWallpaperEffectsGenerationManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
             }
             if (i == 1) {
                 CinematicEffectRequest cinematicEffectRequest = (CinematicEffectRequest) parcel.readTypedObject(CinematicEffectRequest.CREATOR);
-                ICinematicEffectListener asInterface = ICinematicEffectListener.Stub.asInterface(parcel.readStrongBinder());
+                ICinematicEffectListener iCinematicEffectListenerAsInterface = ICinematicEffectListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                generateCinematicEffect(cinematicEffectRequest, asInterface);
+                generateCinematicEffect(cinematicEffectRequest, iCinematicEffectListenerAsInterface);
             } else if (i == 2) {
                 CinematicEffectResponse cinematicEffectResponse = (CinematicEffectResponse) parcel.readTypedObject(CinematicEffectResponse.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -116,26 +116,26 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
 
             @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
             public void generateCinematicEffect(CinematicEffectRequest cinematicEffectRequest, ICinematicEffectListener iCinematicEffectListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);
-                    obtain.writeTypedObject(cinematicEffectRequest, 0);
-                    obtain.writeStrongInterface(iCinematicEffectListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cinematicEffectRequest, 0);
+                    parcelObtain.writeStrongInterface(iCinematicEffectListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
             public void returnCinematicEffectResponse(CinematicEffectResponse cinematicEffectResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);
-                    obtain.writeTypedObject(cinematicEffectResponse, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cinematicEffectResponse, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

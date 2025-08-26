@@ -259,10 +259,10 @@ public class ActionMenuItem implements MenuItem {
         Drawable drawable = this.mIconDrawable;
         if (drawable != null) {
             if (this.mHasIconTint || this.mHasIconTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mIconDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mIconDrawable = drawableMutate;
                 if (this.mHasIconTint) {
-                    mutate.setTintList(this.mIconTintList);
+                    drawableMutate.setTintList(this.mIconTintList);
                 }
                 if (this.mHasIconTintMode) {
                     this.mIconDrawable.setTintMode(this.mIconTintMode);

@@ -219,17 +219,17 @@ class SemDragAndDropAnimationCore {
 
         @Override // java.lang.Runnable
         public void run() {
-            long uptimeMillis = SystemClock.uptimeMillis();
-            boolean z = true;
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            boolean zIsFinished = true;
             for (int size = this.mAnimations.size() - 1; size >= 0; size--) {
                 ItemAnimation itemAnimation = this.mAnimations.get(this.mAnimations.keyAt(size), null);
                 if (itemAnimation != null) {
-                    itemAnimation.computeAnimation(uptimeMillis);
-                    z &= itemAnimation.isFinished();
+                    itemAnimation.computeAnimation(jUptimeMillis);
+                    zIsFinished &= itemAnimation.isFinished();
                 }
             }
             SemDragAndDropAnimationCore.this.mView.invalidate();
-            if (!z) {
+            if (!zIsFinished) {
                 SemDragAndDropAnimationCore.this.mView.postOnAnimation(this);
             } else if (this.mIsAnimating) {
                 this.mIsAnimating = false;

@@ -3,7 +3,6 @@ package com.google.dexmaker.dx.rop.cst;
 import com.google.dexmaker.dx.util.ByteArray;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CstString extends TypedConstant {
     public final String string;
@@ -21,18 +20,18 @@ public final class CstString extends TypedConstant {
         byte[] bArr = new byte[length * 3];
         int i = 0;
         for (int i2 = 0; i2 < length; i2++) {
-            char charAt = str.charAt(i2);
-            if (charAt != 0 && charAt < 128) {
-                bArr[i] = (byte) charAt;
+            char cCharAt = str.charAt(i2);
+            if (cCharAt != 0 && cCharAt < 128) {
+                bArr[i] = (byte) cCharAt;
                 i++;
-            } else if (charAt < 2048) {
-                bArr[i] = (byte) (((charAt >> 6) & 31) | 192);
-                bArr[i + 1] = (byte) ((charAt & '?') | 128);
+            } else if (cCharAt < 2048) {
+                bArr[i] = (byte) (((cCharAt >> 6) & 31) | 192);
+                bArr[i + 1] = (byte) ((cCharAt & '?') | 128);
                 i += 2;
             } else {
-                bArr[i] = (byte) (((charAt >> '\f') & 15) | IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
-                bArr[i + 1] = (byte) (((charAt >> 6) & 63) | 128);
-                bArr[i + 2] = (byte) ((charAt & '?') | 128);
+                bArr[i] = (byte) (((cCharAt >> '\f') & 15) | IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
+                bArr[i + 1] = (byte) (((cCharAt >> 6) & 63) | 128);
+                bArr[i + 2] = (byte) ((cCharAt & '?') | 128);
                 i += 3;
             }
         }
@@ -81,28 +80,28 @@ public final class CstString extends TypedConstant {
         StringBuilder sb = new StringBuilder((length * 3) / 2);
         int i = 0;
         while (i < length) {
-            char charAt = this.string.charAt(i);
-            if (charAt >= ' ' && charAt < 127) {
-                if (charAt == '\'' || charAt == '\"' || charAt == '\\') {
+            char cCharAt = this.string.charAt(i);
+            if (cCharAt >= ' ' && cCharAt < 127) {
+                if (cCharAt == '\'' || cCharAt == '\"' || cCharAt == '\\') {
                     sb.append('\\');
                 }
-                sb.append(charAt);
-            } else if (charAt > 127) {
+                sb.append(cCharAt);
+            } else if (cCharAt > 127) {
                 sb.append("\\u");
-                sb.append(Character.forDigit(charAt >> '\f', 16));
-                sb.append(Character.forDigit((charAt >> '\b') & 15, 16));
-                sb.append(Character.forDigit((charAt >> 4) & 15, 16));
-                sb.append(Character.forDigit(charAt & 15, 16));
-            } else if (charAt == '\t') {
+                sb.append(Character.forDigit(cCharAt >> '\f', 16));
+                sb.append(Character.forDigit((cCharAt >> '\b') & 15, 16));
+                sb.append(Character.forDigit((cCharAt >> 4) & 15, 16));
+                sb.append(Character.forDigit(cCharAt & 15, 16));
+            } else if (cCharAt == '\t') {
                 sb.append("\\t");
-            } else if (charAt == '\n') {
+            } else if (cCharAt == '\n') {
                 sb.append("\\n");
-            } else if (charAt != '\r') {
-                char charAt2 = i < length + (-1) ? this.string.charAt(i + 1) : (char) 0;
-                boolean z = charAt2 >= '0' && charAt2 <= '7';
+            } else if (cCharAt != '\r') {
+                char cCharAt2 = i < length + (-1) ? this.string.charAt(i + 1) : (char) 0;
+                boolean z = cCharAt2 >= '0' && cCharAt2 <= '7';
                 sb.append('\\');
                 for (int i2 = 6; i2 >= 0; i2 -= 3) {
-                    char c = (char) (((charAt >> i2) & 7) + 48);
+                    char c = (char) (((cCharAt >> i2) & 7) + 48);
                     if (c != '0' || z) {
                         sb.append(c);
                         z = true;

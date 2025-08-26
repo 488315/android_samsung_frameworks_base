@@ -6,7 +6,6 @@ import androidx.compose.ui.text.TextLayoutResult;
 import androidx.compose.ui.text.style.ResolvedTextDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AccessibilityIterators$PageTextSegmentIterator extends AccessibilityIterators$AbstractTextSegmentIterator {
     public static AccessibilityIterators$PageTextSegmentIterator pageInstance;
@@ -16,7 +15,6 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
     public static final ResolvedTextDirection DirectionStart = ResolvedTextDirection.Rtl;
     public static final ResolvedTextDirection DirectionEnd = ResolvedTextDirection.Ltr;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,7 +30,7 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
 
     @Override // androidx.compose.ui.platform.AccessibilityIterators$TextSegmentIterator
     public final int[] following(int i) {
-        int i2;
+        int lineForVerticalPosition;
         String str = this.text;
         if (str == null) {
             str = null;
@@ -53,7 +51,7 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
                 semanticsNode = null;
             }
             Rect boundsInRoot = semanticsNode.getBoundsInRoot();
-            int round = Math.round(boundsInRoot.bottom - boundsInRoot.top);
+            int iRound = Math.round(boundsInRoot.bottom - boundsInRoot.top);
             if (i <= 0) {
                 i = 0;
             }
@@ -66,7 +64,7 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
             if (textLayoutResult2 == null) {
                 textLayoutResult2 = null;
             }
-            float lineTop = textLayoutResult2.multiParagraph.getLineTop(lineForOffset) + round;
+            float lineTop = textLayoutResult2.multiParagraph.getLineTop(lineForOffset) + iRound;
             TextLayoutResult textLayoutResult3 = this.layoutResult;
             TextLayoutResult textLayoutResult4 = textLayoutResult3 == null ? null : textLayoutResult3;
             if (textLayoutResult3 == null) {
@@ -74,19 +72,18 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
             }
             if (lineTop < textLayoutResult4.multiParagraph.getLineTop(textLayoutResult3.multiParagraph.lineCount - 1)) {
                 TextLayoutResult textLayoutResult5 = this.layoutResult;
-                i2 = (textLayoutResult5 != null ? textLayoutResult5 : null).multiParagraph.getLineForVerticalPosition(lineTop);
+                lineForVerticalPosition = (textLayoutResult5 != null ? textLayoutResult5 : null).multiParagraph.getLineForVerticalPosition(lineTop);
             } else {
                 TextLayoutResult textLayoutResult6 = this.layoutResult;
-                i2 = (textLayoutResult6 != null ? textLayoutResult6 : null).multiParagraph.lineCount;
+                lineForVerticalPosition = (textLayoutResult6 != null ? textLayoutResult6 : null).multiParagraph.lineCount;
             }
-            return getRange(i, getLineEdgeIndex$1(i2 - 1, DirectionEnd) + 1);
+            return getRange(i, getLineEdgeIndex$1(lineForVerticalPosition - 1, DirectionEnd) + 1);
         } catch (IllegalStateException unused) {
             return null;
         }
     }
 
     public final int getLineEdgeIndex$1(int i, ResolvedTextDirection resolvedTextDirection) {
-        int lineEnd;
         TextLayoutResult textLayoutResult = this.layoutResult;
         if (textLayoutResult == null) {
             textLayoutResult = null;
@@ -100,14 +97,12 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
             TextLayoutResult textLayoutResult3 = this.layoutResult;
             return (textLayoutResult3 != null ? textLayoutResult3 : null).getLineStart(i);
         }
-        TextLayoutResult textLayoutResult4 = this.layoutResult;
-        lineEnd = (textLayoutResult4 != null ? textLayoutResult4 : null).multiParagraph.getLineEnd(i, false);
-        return lineEnd - 1;
+        return (this.layoutResult != null ? r3 : null).multiParagraph.getLineEnd(i, false) - 1;
     }
 
     @Override // androidx.compose.ui.platform.AccessibilityIterators$TextSegmentIterator
     public final int[] preceding(int i) {
-        int i2;
+        int lineForVerticalPosition;
         String str = this.text;
         if (str == null) {
             str = null;
@@ -121,7 +116,7 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
                 semanticsNode = null;
             }
             Rect boundsInRoot = semanticsNode.getBoundsInRoot();
-            int round = Math.round(boundsInRoot.bottom - boundsInRoot.top);
+            int iRound = Math.round(boundsInRoot.bottom - boundsInRoot.top);
             String str2 = this.text;
             if (str2 == null) {
                 str2 = null;
@@ -139,21 +134,21 @@ public final class AccessibilityIterators$PageTextSegmentIterator extends Access
             if (textLayoutResult2 == null) {
                 textLayoutResult2 = null;
             }
-            float lineTop = textLayoutResult2.multiParagraph.getLineTop(lineForOffset) - round;
+            float lineTop = textLayoutResult2.multiParagraph.getLineTop(lineForOffset) - iRound;
             if (lineTop > 0.0f) {
                 TextLayoutResult textLayoutResult3 = this.layoutResult;
                 if (textLayoutResult3 == null) {
                     textLayoutResult3 = null;
                 }
-                i2 = textLayoutResult3.multiParagraph.getLineForVerticalPosition(lineTop);
+                lineForVerticalPosition = textLayoutResult3.multiParagraph.getLineForVerticalPosition(lineTop);
             } else {
-                i2 = 0;
+                lineForVerticalPosition = 0;
             }
             String str3 = this.text;
-            if (i == (str3 != null ? str3 : null).length() && i2 < lineForOffset) {
-                i2++;
+            if (i == (str3 != null ? str3 : null).length() && lineForVerticalPosition < lineForOffset) {
+                lineForVerticalPosition++;
             }
-            return getRange(getLineEdgeIndex$1(i2, DirectionStart), i);
+            return getRange(getLineEdgeIndex$1(lineForVerticalPosition, DirectionStart), i);
         } catch (IllegalStateException unused) {
             return null;
         }

@@ -28,7 +28,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationMediaManager implements Dumpable {
     public static final HashSet CONNECTING_MEDIA_STATES;
@@ -46,7 +45,6 @@ public class NotificationMediaManager implements Dumpable {
     public final NotifPipeline mNotifPipeline;
     public final NotificationVisibilityProvider mVisibilityProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.NotificationMediaManager$1, reason: invalid class name */
     public class AnonymousClass1 extends MediaController.Callback {
         public AnonymousClass1() {
@@ -76,7 +74,6 @@ public class NotificationMediaManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MediaListener {
     }
 
@@ -182,7 +179,6 @@ public class NotificationMediaManager implements Dumpable {
         dispatchUpdateMediaMetaData();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.NotificationMediaManager$3, reason: invalid class name */
     public class AnonymousClass3 implements MediaDataManager.Listener {
         public AnonymousClass3() {

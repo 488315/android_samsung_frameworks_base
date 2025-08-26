@@ -4,7 +4,6 @@ import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import com.google.gson.annotations.SerializedName;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Ingredient {
 
@@ -60,9 +59,9 @@ public final class Ingredient {
 
     public int hashCode() {
         String str = this.url;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         String str2 = this.digitalSourceType;
-        return hashCode + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode + (str2 != null ? str2.hashCode() : 0);
     }
 
     public String toString() {

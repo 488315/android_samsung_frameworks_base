@@ -102,7 +102,7 @@ public interface MessagingMessage extends MessagingLinearLayout.MessagingChild {
             group.performRemoveAnimation(getView(), new Runnable() { // from class: com.android.internal.widget.MessagingMessage$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MessagingMessage.this.lambda$hideAnimated$0();
+                    this.f$0.lambda$hideAnimated$0();
                 }
             });
         } else {

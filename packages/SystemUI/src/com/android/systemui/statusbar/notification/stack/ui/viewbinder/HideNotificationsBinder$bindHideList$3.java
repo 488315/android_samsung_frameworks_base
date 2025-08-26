@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HideNotificationsBinder$bindHideList$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ SharedFlow $hideListFlow;
@@ -45,12 +44,12 @@ final class HideNotificationsBinder$bindHideList$3 extends SuspendLambda impleme
             SharedFlow sharedFlow = this.$hideListFlow;
             this.label = 1;
             displaySwitchNotificationsHiderTracker.getClass();
-            Object collect = sharedFlow.collect(new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.DisplaySwitchNotificationsHiderTracker$trackNotificationHideTime$2
+            Object objCollect = sharedFlow.collect(new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.DisplaySwitchNotificationsHiderTracker$trackNotificationHideTime$2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
-                    DisplaySwitchNotificationsHiderTracker displaySwitchNotificationsHiderTracker2 = DisplaySwitchNotificationsHiderTracker.this;
-                    if (booleanValue) {
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                    DisplaySwitchNotificationsHiderTracker displaySwitchNotificationsHiderTracker2 = displaySwitchNotificationsHiderTracker;
+                    if (zBooleanValue) {
                         displaySwitchNotificationsHiderTracker2.latencyTracker.onActionStart(26);
                     } else {
                         displaySwitchNotificationsHiderTracker2.latencyTracker.onActionEnd(26);
@@ -58,10 +57,10 @@ final class HideNotificationsBinder$bindHideList$3 extends SuspendLambda impleme
                     return Unit.INSTANCE;
                 }
             }, this);
-            if (collect != coroutineSingletons) {
-                collect = Unit.INSTANCE;
+            if (objCollect != coroutineSingletons) {
+                objCollect = Unit.INSTANCE;
             }
-            if (collect == coroutineSingletons) {
+            if (objCollect == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

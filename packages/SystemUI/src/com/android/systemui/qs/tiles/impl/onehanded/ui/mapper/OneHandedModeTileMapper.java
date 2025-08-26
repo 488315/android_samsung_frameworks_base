@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OneHandedModeTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
@@ -33,9 +32,9 @@ public final class OneHandedModeTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.onehanded.ui.mapper.OneHandedModeTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) throws Resources.NotFoundException {
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                OneHandedModeTileMapper oneHandedModeTileMapper = OneHandedModeTileMapper.this;
+                OneHandedModeTileMapper oneHandedModeTileMapper = this.f$0;
                 String[] stringArray = oneHandedModeTileMapper.resources.getStringArray(R.array.tile_states_onehanded);
                 builder.label = oneHandedModeTileMapper.resources.getString(R.string.quick_settings_onehanded_label);
                 builder.icon = new Icon.Loaded(oneHandedModeTileMapper.resources.getDrawable(android.R.drawable.jog_dial_arrow_short_left, oneHandedModeTileMapper.theme), null, Integer.valueOf(android.R.drawable.jog_dial_arrow_short_left));

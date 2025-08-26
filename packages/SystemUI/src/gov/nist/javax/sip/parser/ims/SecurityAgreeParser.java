@@ -11,15 +11,15 @@ import gov.nist.javax.sip.header.ims.SecurityVerify;
 import gov.nist.javax.sip.header.ims.SecurityVerifyList;
 import gov.nist.javax.sip.parser.HeaderParser;
 import gov.nist.javax.sip.parser.Lexer;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SecurityAgreeParser extends HeaderParser {
     public SecurityAgreeParser(String str) {
         super(str);
     }
 
-    public final SIPHeaderList parse(SecurityAgree securityAgree) {
+    public final SIPHeaderList parse(SecurityAgree securityAgree) throws ParseException {
         SIPHeaderList securityVerifyList;
         if (securityAgree.getClass().isInstance(new SecurityClient())) {
             securityVerifyList = new SecurityClientList();
@@ -35,23 +35,23 @@ public class SecurityAgreeParser extends HeaderParser {
         this.lexer.match(4095);
         securityAgree.setSecurityMechanism(this.lexer.currentMatch.tokenValue);
         this.lexer.SPorHT();
-        char lookAhead = this.lexer.lookAhead(0);
-        if (lookAhead == '\n') {
+        char cLookAhead = this.lexer.lookAhead(0);
+        if (cLookAhead == '\n') {
             securityVerifyList.add((SIPHeader) securityAgree);
             return securityVerifyList;
         }
-        if (lookAhead == ';') {
+        if (cLookAhead == ';') {
             this.lexer.match(59);
         }
         this.lexer.SPorHT();
         while (this.lexer.lookAhead(0) != '\n') {
             securityAgree.setParameter(nameValue());
             this.lexer.SPorHT();
-            char lookAhead2 = this.lexer.lookAhead(0);
-            if (lookAhead2 == '\n' || lookAhead2 == 0) {
+            char cLookAhead2 = this.lexer.lookAhead(0);
+            if (cLookAhead2 == '\n' || cLookAhead2 == 0) {
                 break;
             }
-            if (lookAhead2 == ',') {
+            if (cLookAhead2 == ',') {
                 securityVerifyList.add((SIPHeader) securityAgree);
                 if (securityAgree.getClass().isInstance(new SecurityClient())) {
                     securityAgree = new SecurityClient();

@@ -71,8 +71,8 @@ public class SemWifiApSmartWhiteList {
         return uniqueInstance;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0034 -> B:11:0x0037). Please report as a decompilation issue!!! */
-    private void createOrChangePermission() {
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:15:0x0034 -> B:17:0x0037). Please report as a decompilation issue!!! */
+    private void createOrChangePermission() throws InterruptedException, IOException {
         File file = new File("/data/misc/wifi_hostapd/smart_tethering.accept");
         if (file.exists()) {
             return;
@@ -83,10 +83,10 @@ public class SemWifiApSmartWhiteList {
             e.printStackTrace();
         }
         try {
-            Process exec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/smart_tethering.accept"});
+            Process processExec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/smart_tethering.accept"});
             try {
-                exec.waitFor();
-                exec.destroy();
+                processExec.waitFor();
+                processExec.destroy();
             } catch (InterruptedException e2) {
                 e2.printStackTrace();
             }
@@ -95,132 +95,140 @@ public class SemWifiApSmartWhiteList {
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:52:0x0081 -> B:28:0x0084). Please report as a decompilation issue!!! */
-    private void readWhiteListFile() {
-        String readLine;
-        int i;
+    /* JADX WARN: Removed duplicated region for block: B:21:0x005e  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:38:0x0081 -> B:48:0x0084). Please report as a decompilation issue!!! */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private void readWhiteListFile() throws Throwable {
+        String line;
+        int iIntValue;
         mSmartWhiteList.clear();
         BufferedReader bufferedReader = null;
         BufferedReader bufferedReader2 = null;
         bufferedReader = null;
         try {
-        } catch (IOException e) {
-            e.printStackTrace();
-            bufferedReader = bufferedReader;
-        }
-        try {
             try {
-                BufferedReader bufferedReader3 = new BufferedReader(new InputStreamReader(new FileInputStream("/data/misc/wifi_hostapd/smart_tethering.accept"), StandardCharsets.UTF_8), 64);
-                while (true) {
-                    try {
-                        readLine = bufferedReader3.readLine();
-                        if (readLine == null) {
-                            break;
-                        }
-                        if (readLine.startsWith("#")) {
-                            String substring = readLine.substring(1);
-                            String readLine2 = bufferedReader3.readLine();
-                            if (bufferedReader3.markSupported()) {
-                                bufferedReader3.mark(50);
-                                String readLine3 = bufferedReader3.readLine();
-                                if (readLine3 != null) {
-                                    if (!readLine3.startsWith("#")) {
-                                        if (readLine3 instanceof String) {
-                                            try {
-                                                i = Integer.decode(readLine3).intValue();
-                                            } catch (NumberFormatException e2) {
-                                                e2.printStackTrace();
+                try {
+                    BufferedReader bufferedReader3 = new BufferedReader(new InputStreamReader(new FileInputStream("/data/misc/wifi_hostapd/smart_tethering.accept"), StandardCharsets.UTF_8), 64);
+                    while (true) {
+                        try {
+                            line = bufferedReader3.readLine();
+                            if (line == null) {
+                                break;
+                            }
+                            if (line.startsWith("#")) {
+                                String strSubstring = line.substring(1);
+                                String line2 = bufferedReader3.readLine();
+                                if (bufferedReader3.markSupported()) {
+                                    bufferedReader3.mark(50);
+                                    String line3 = bufferedReader3.readLine();
+                                    if (line3 != null) {
+                                        if (!line3.startsWith("#")) {
+                                            if (line3 instanceof String) {
+                                                try {
+                                                    iIntValue = Integer.decode(line3).intValue();
+                                                } catch (NumberFormatException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                mSmartWhiteList.add(new SmartWhiteList(line2, strSubstring, iIntValue));
                                             }
-                                            mSmartWhiteList.add(new SmartWhiteList(readLine2, substring, i));
+                                        } else {
+                                            bufferedReader3.reset();
                                         }
+                                        iIntValue = 0;
+                                        mSmartWhiteList.add(new SmartWhiteList(line2, strSubstring, iIntValue));
                                     } else {
-                                        bufferedReader3.reset();
+                                        iIntValue = 0;
+                                        mSmartWhiteList.add(new SmartWhiteList(line2, strSubstring, iIntValue));
                                     }
                                 }
                             }
-                            i = 0;
-                            mSmartWhiteList.add(new SmartWhiteList(readLine2, substring, i));
-                        }
-                    } catch (IOException e3) {
-                        e = e3;
-                        bufferedReader2 = bufferedReader3;
-                        e.printStackTrace();
-                        bufferedReader = bufferedReader2;
-                        if (bufferedReader2 != null) {
-                            bufferedReader2.close();
+                        } catch (IOException e2) {
+                            e = e2;
+                            bufferedReader2 = bufferedReader3;
+                            e.printStackTrace();
                             bufferedReader = bufferedReader2;
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        bufferedReader = bufferedReader3;
-                        if (bufferedReader != null) {
-                            try {
-                                bufferedReader.close();
-                            } catch (IOException e4) {
-                                e4.printStackTrace();
+                            if (bufferedReader2 != null) {
+                                bufferedReader2.close();
+                                bufferedReader = bufferedReader2;
                             }
+                        } catch (Throwable th) {
+                            th = th;
+                            bufferedReader = bufferedReader3;
+                            if (bufferedReader != null) {
+                                try {
+                                    bufferedReader.close();
+                                } catch (IOException e3) {
+                                    e3.printStackTrace();
+                                }
+                            }
+                            throw th;
                         }
-                        throw th;
                     }
+                    bufferedReader3.close();
+                    bufferedReader = line;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
-                bufferedReader3.close();
-                bufferedReader = readLine;
-            } catch (IOException e5) {
-                e = e5;
+            } catch (IOException e4) {
+                e = e4;
             }
-        } catch (Throwable th2) {
-            th = th2;
+        } catch (IOException e5) {
+            e5.printStackTrace();
+            bufferedReader = bufferedReader;
         }
     }
 
-    private void writeWhiteListFile() {
-        OutputStreamWriter outputStreamWriter = null;
+    private void writeWhiteListFile() throws Throwable {
+        OutputStreamWriter outputStreamWriter;
+        OutputStreamWriter outputStreamWriter2 = null;
         try {
             try {
                 try {
-                    OutputStreamWriter outputStreamWriter2 = new OutputStreamWriter(new FileOutputStream("/data/misc/wifi_hostapd/smart_tethering.accept"), StandardCharsets.UTF_8);
-                    try {
-                        Iterator<SmartWhiteList> it = mSmartWhiteList.iterator();
-                        while (it.hasNext()) {
-                            SmartWhiteList next = it.next();
-                            outputStreamWriter2.write("#");
-                            if (next.getName() != null) {
-                                outputStreamWriter2.write(next.getName());
-                            }
-                            outputStreamWriter2.write(ShaderAssembler.NEWLINE);
-                            outputStreamWriter2.write(next.getMac());
-                            outputStreamWriter2.write(ShaderAssembler.NEWLINE);
-                            outputStreamWriter2.write(Integer.toString(next.mDeviceType));
-                            outputStreamWriter2.write(ShaderAssembler.NEWLINE);
-                        }
-                        outputStreamWriter2.close();
-                    } catch (IOException e) {
-                        e = e;
-                        outputStreamWriter = outputStreamWriter2;
-                        e.printStackTrace();
-                        if (outputStreamWriter != null) {
-                            outputStreamWriter.close();
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        outputStreamWriter = outputStreamWriter2;
-                        if (outputStreamWriter != null) {
-                            try {
-                                outputStreamWriter.close();
-                            } catch (IOException e2) {
-                                e2.printStackTrace();
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (IOException e3) {
-                    e = e3;
+                    outputStreamWriter = new OutputStreamWriter(new FileOutputStream("/data/misc/wifi_hostapd/smart_tethering.accept"), StandardCharsets.UTF_8);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e4) {
-                e4.printStackTrace();
+            } catch (IOException e2) {
+                e = e2;
+            }
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            Iterator<SmartWhiteList> it = mSmartWhiteList.iterator();
+            while (it.hasNext()) {
+                SmartWhiteList next = it.next();
+                outputStreamWriter.write("#");
+                if (next.getName() != null) {
+                    outputStreamWriter.write(next.getName());
+                }
+                outputStreamWriter.write(ShaderAssembler.NEWLINE);
+                outputStreamWriter.write(next.getMac());
+                outputStreamWriter.write(ShaderAssembler.NEWLINE);
+                outputStreamWriter.write(Integer.toString(next.mDeviceType));
+                outputStreamWriter.write(ShaderAssembler.NEWLINE);
+            }
+            outputStreamWriter.close();
+        } catch (IOException e3) {
+            e = e3;
+            outputStreamWriter2 = outputStreamWriter;
+            e.printStackTrace();
+            if (outputStreamWriter2 != null) {
+                outputStreamWriter2.close();
             }
         } catch (Throwable th2) {
             th = th2;
+            outputStreamWriter2 = outputStreamWriter;
+            if (outputStreamWriter2 != null) {
+                try {
+                    outputStreamWriter2.close();
+                } catch (IOException e4) {
+                    e4.printStackTrace();
+                }
+            }
+            throw th;
         }
     }
 

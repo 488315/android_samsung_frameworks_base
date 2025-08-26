@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FooterActionsViewModel {
     public final StateFlowImpl _alpha;
@@ -35,7 +34,6 @@ public final class FooterActionsViewModel {
     public final FooterActionsButtonViewModel settings;
     public final Flow userSwitcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public final ActivityStarter activityStarter;
         public final Context context;
@@ -77,12 +75,12 @@ public final class FooterActionsViewModel {
         this.power = flow4;
         this.initialPower = function0;
         this.observeDeviceMonitoringDialogRequests = function2;
-        Float valueOf = Float.valueOf(1.0f);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(valueOf);
-        this._alpha = MutableStateFlow;
-        this.alpha = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(valueOf);
-        this._backgroundAlpha = MutableStateFlow2;
-        this.backgroundAlpha = FlowKt.asStateFlow(MutableStateFlow2);
+        Float fValueOf = Float.valueOf(1.0f);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(fValueOf);
+        this._alpha = stateFlowImplMutableStateFlow;
+        this.alpha = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._backgroundAlpha = stateFlowImplMutableStateFlow2;
+        this.backgroundAlpha = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
     }
 }

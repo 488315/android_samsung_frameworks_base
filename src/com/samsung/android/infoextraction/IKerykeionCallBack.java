@@ -46,9 +46,9 @@ public interface IKerykeionCallBack extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKerykeionCallBack.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKerykeionCallBack)) {
-                return (IKerykeionCallBack) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKerykeionCallBack.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKerykeionCallBack)) {
+                return (IKerykeionCallBack) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IKerykeionCallBack extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SemExtractedInfo.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemExtractedInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCompleted(createTypedArrayList);
+                onCompleted(arrayListCreateTypedArrayList);
                 parcel2.writeNoException();
                 return true;
             }
@@ -102,16 +102,16 @@ public interface IKerykeionCallBack extends IInterface {
 
             @Override // com.samsung.android.infoextraction.IKerykeionCallBack
             public void onCompleted(List<SemExtractedInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeionCallBack.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeionCallBack.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

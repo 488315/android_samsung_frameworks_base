@@ -89,9 +89,9 @@ public interface IKeystoreAuthorization extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeystoreAuthorization.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeystoreAuthorization)) {
-                return (IKeystoreAuthorization) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeystoreAuthorization.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeystoreAuthorization)) {
+                return (IKeystoreAuthorization) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -139,46 +139,46 @@ public interface IKeystoreAuthorization extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    onDeviceUnlocked(readInt, createByteArray);
+                    onDeviceUnlocked(i3, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
-                    long[] createLongArray = parcel.createLongArray();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    long[] jArrCreateLongArray = parcel.createLongArray();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onDeviceLocked(readInt2, createLongArray, readBoolean);
+                    onDeviceLocked(i4, jArrCreateLongArray, z);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onWeakUnlockMethodsExpired(readInt3);
+                    onWeakUnlockMethodsExpired(i5);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNonLskfUnlockMethodsExpired(readInt4);
+                    onNonLskfUnlockMethodsExpired(i6);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    long readLong3 = parcel.readLong();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    AuthorizationTokens authTokensForCredStore = getAuthTokensForCredStore(readLong, readLong2, readLong3);
+                    AuthorizationTokens authTokensForCredStore = getAuthTokensForCredStore(j, j2, j3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(authTokensForCredStore, 1);
                     return true;
                 case 7:
-                    long readLong4 = parcel.readLong();
-                    int[] createIntArray = parcel.createIntArray();
+                    long j4 = parcel.readLong();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    long lastAuthTime = getLastAuthTime(readLong4, createIntArray);
+                    long lastAuthTime = getLastAuthTime(j4, iArrCreateIntArray);
                     parcel2.writeNoException();
                     parcel2.writeLong(lastAuthTime);
                     return true;
@@ -205,121 +205,121 @@ public interface IKeystoreAuthorization extends IInterface {
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public void addAuthToken(HardwareAuthToken hardwareAuthToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public void onDeviceUnlocked(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public void onDeviceLocked(int i, long[] jArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLongArray(jArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLongArray(jArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public void onWeakUnlockMethodsExpired(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public void onNonLskfUnlockMethodsExpired(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public AuthorizationTokens getAuthTokensForCredStore(long j, long j2, long j3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeLong(j3);
-                    this.mRemote.transact(6, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return (AuthorizationTokens) obtain2.readTypedObject(AuthorizationTokens.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeLong(j3);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return (AuthorizationTokens) parcelObtain2.readTypedObject(AuthorizationTokens.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
             public long getLastAuthTime(long j, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(7, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IKeystoreAuthorization.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

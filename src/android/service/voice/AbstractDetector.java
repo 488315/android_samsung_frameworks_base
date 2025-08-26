@@ -12,7 +12,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.SharedMemory;
-import android.service.voice.AbstractDetector;
 import android.service.voice.AlwaysOnHotwordDetector;
 import android.service.voice.HotwordDetector;
 import android.service.voice.HotwordRejectedResult;
@@ -134,7 +133,7 @@ abstract class AbstractDetector implements HotwordDetector {
             this.mExecutor.execute(new Runnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AbstractDetector.BinderCallback.this.lambda$onDetected$0(audioFormat, hotwordDetectedResult);
+                    this.f$0.lambda$onDetected$0(audioFormat, hotwordDetectedResult);
                 }
             });
         }
@@ -143,8 +142,8 @@ abstract class AbstractDetector implements HotwordDetector {
         public void onDetected(final HotwordDetectedResult hotwordDetectedResult, final AudioFormat audioFormat, ParcelFileDescriptor parcelFileDescriptor) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    AbstractDetector.BinderCallback.this.lambda$onDetected$1(audioFormat, hotwordDetectedResult);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onDetected$1(audioFormat, hotwordDetectedResult);
                 }
             });
         }
@@ -159,8 +158,8 @@ abstract class AbstractDetector implements HotwordDetector {
             Slog.v(AbstractDetector.TAG, "BinderCallback#onHotwordDetectionServiceFailure: " + hotwordDetectionServiceFailure);
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda4
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    AbstractDetector.BinderCallback.this.lambda$onHotwordDetectionServiceFailure$3(hotwordDetectionServiceFailure);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onHotwordDetectionServiceFailure$3(hotwordDetectionServiceFailure);
                 }
             });
         }
@@ -170,7 +169,7 @@ abstract class AbstractDetector implements HotwordDetector {
             this.mExecutor.execute(new Runnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AbstractDetector.BinderCallback.this.lambda$onHotwordDetectionServiceFailure$2(hotwordDetectionServiceFailure);
+                    this.f$0.lambda$onHotwordDetectionServiceFailure$2(hotwordDetectionServiceFailure);
                 }
             });
         }
@@ -189,7 +188,7 @@ abstract class AbstractDetector implements HotwordDetector {
             this.mExecutor.execute(new Runnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AbstractDetector.BinderCallback.this.lambda$onRejected$4(hotwordRejectedResult);
+                    this.f$0.lambda$onRejected$4(hotwordRejectedResult);
                 }
             });
         }
@@ -198,8 +197,8 @@ abstract class AbstractDetector implements HotwordDetector {
         public void onRejected(final HotwordRejectedResult hotwordRejectedResult) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.AbstractDetector$BinderCallback$$ExternalSyntheticLambda2
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    AbstractDetector.BinderCallback.this.lambda$onRejected$5(hotwordRejectedResult);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onRejected$5(hotwordRejectedResult);
                 }
             });
         }

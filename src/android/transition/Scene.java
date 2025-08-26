@@ -1,6 +1,7 @@
 package android.transition;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +68,7 @@ public final class Scene {
         runnable.run();
     }
 
-    public void enter() {
+    public void enter() throws Resources.NotFoundException {
         if (this.mLayoutId > 0 || this.mLayout != null) {
             getSceneRoot().removeAllViews();
             if (this.mLayoutId > 0) {

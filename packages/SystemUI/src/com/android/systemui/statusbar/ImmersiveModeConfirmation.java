@@ -50,7 +50,6 @@ import com.android.systemui.utils.windowmanager.WindowManagerProvider;
 import com.android.systemui.utils.windowmanager.WindowManagerProviderImpl;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Callbacks, TaskStackChangeListener {
     public static boolean sConfirmed;
@@ -87,7 +86,6 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.ImmersiveModeConfirmation$2, reason: invalid class name */
     public class AnonymousClass2 extends IVrStateCallbacks.Stub {
         public AnonymousClass2() {
@@ -103,7 +101,6 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClingWindowView extends FrameLayout {
         public ViewGroup mClingLayout;
         public final ColorDrawable mColor;
@@ -164,19 +161,19 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         }
 
         @Override // android.view.View
-        public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
+        public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) throws Resources.NotFoundException {
             int width = getWidth();
             ImmersiveModeConfirmation immersiveModeConfirmation = ImmersiveModeConfirmation.this;
             boolean z = ImmersiveModeConfirmation.sConfirmed;
             int dimensionPixelSize = immersiveModeConfirmation.mSysUiContext.getResources().getDimensionPixelSize(R.dimen.immersive_mode_cling_width);
             Rect boundingRectTop = windowInsets.getDisplayCutout() != null ? windowInsets.getDisplayCutout().getBoundingRectTop() : new Rect();
             int i = dimensionPixelSize / 2;
-            boolean intersects = boundingRectTop.intersects(width - i, 0, i + width, boundingRectTop.bottom);
-            if (dimensionPixelSize < 0 || (width > 0 && intersects)) {
-                View findViewById = findViewById(R.id.immersive_cling_icon);
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) findViewById.getLayoutParams();
+            boolean zIntersects = boundingRectTop.intersects(width - i, 0, i + width, boundingRectTop.bottom);
+            if (dimensionPixelSize < 0 || (width > 0 && zIntersects)) {
+                View viewFindViewById = findViewById(R.id.immersive_cling_icon);
+                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) viewFindViewById.getLayoutParams();
                 layoutParams.topMargin = boundingRectTop.bottom;
-                findViewById.setLayoutParams(layoutParams);
+                viewFindViewById.setLayoutParams(layoutParams);
             }
             return new WindowInsets.Builder(windowInsets).setInsets(WindowInsets.Type.systemBars(), Insets.NONE).build();
         }
@@ -238,7 +235,6 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -311,9 +307,9 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
             bundle.putInt("root_display_area_id", i);
         }
         this.mWindowContextRootDisplayAreaId = i;
-        Context createWindowContext = this.mDisplayContext.createWindowContext(2017, bundle);
+        Context contextCreateWindowContext = this.mDisplayContext.createWindowContext(2017, bundle);
         ((WindowManagerProviderImpl) this.mWindowManagerProvider).getClass();
-        WindowManager windowManager = WindowManagerUtils.getWindowManager(createWindowContext);
+        WindowManager windowManager = WindowManagerUtils.getWindowManager(contextCreateWindowContext);
         this.mWindowManager = windowManager;
         return windowManager;
     }
@@ -354,20 +350,20 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         if (sConfirmed || !z2 || this.mVrModeEnabled || !this.mCanSystemBarsBeShownByUser || this.mNavBarEmpty || UserManager.isDeviceInDemoMode(this.mDisplayContext) || this.mLockTaskState == 1 || i2 == 2037 || i2 == 2030) {
             return;
         }
-        Message obtainMessage = h.obtainMessage(1);
-        obtainMessage.arg1 = i;
-        h.sendMessageDelayed(obtainMessage, this.mShowDelayMs);
+        Message messageObtainMessage = h.obtainMessage(1);
+        messageObtainMessage.arg1 = i;
+        h.sendMessageDelayed(messageObtainMessage, this.mShowDelayMs);
     }
 
     public final boolean loadSetting() {
         boolean z = sConfirmed;
         sConfirmed = false;
-        String str = null;
+        String stringForUser = null;
         try {
-            str = this.mSecureSettings.getStringForUser("immersive_mode_confirmations", -2);
-            sConfirmed = "confirmed".equals(str);
+            stringForUser = this.mSecureSettings.getStringForUser("immersive_mode_confirmations", -2);
+            sConfirmed = "confirmed".equals(stringForUser);
         } catch (Throwable th) {
-            Log.w("ImmersiveModeConfirm", "Error loading confirmations, value=" + str, th);
+            Log.w("ImmersiveModeConfirm", "Error loading confirmations, value=" + stringForUser, th);
         }
         return sConfirmed != z;
     }
@@ -380,10 +376,10 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         H h = this.mHandler;
         h.removeMessages(1);
         h.removeMessages(2);
-        IVrManager asInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
-        if (asInterface != null) {
+        IVrManager iVrManagerAsInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
+        if (iVrManagerAsInterface != null) {
             try {
-                asInterface.unregisterListener(this.mVrStateCallbacks);
+                iVrManagerAsInterface.unregisterListener(this.mVrStateCallbacks);
             } catch (RemoteException unused) {
             }
         }
@@ -403,12 +399,12 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         Resources resources = this.mSysUiContext.getResources();
         this.mShowDelayMs = resources.getInteger(R.integer.dock_enter_exit_duration) * 3;
         this.mCanSystemBarsBeShownByUser = !resources.getBoolean(R.bool.config_remoteInsetsControllerControlsSystemBars) || resources.getBoolean(R.bool.config_remoteInsetsControllerSystemBarsCanBeShownByUserAction);
-        IVrManager asInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
-        if (asInterface != null) {
+        IVrManager iVrManagerAsInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
+        if (iVrManagerAsInterface != null) {
             try {
-                this.mVrModeEnabled = asInterface.getVrModeState();
+                this.mVrModeEnabled = iVrManagerAsInterface.getVrModeState();
                 AnonymousClass2 anonymousClass2 = this.mVrStateCallbacks;
-                asInterface.registerListener(anonymousClass2);
+                iVrManagerAsInterface.registerListener(anonymousClass2);
                 anonymousClass2.onVrStateChanged(this.mVrModeEnabled);
             } catch (RemoteException unused) {
             }
@@ -432,7 +428,7 @@ public class ImmersiveModeConfirmation implements CoreStartable, CommandQueue.Ca
         handler.post(new Runnable() { // from class: com.android.systemui.statusbar.ImmersiveModeConfirmation$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ImmersiveModeConfirmation immersiveModeConfirmation = ImmersiveModeConfirmation.this;
+                ImmersiveModeConfirmation immersiveModeConfirmation = this.f$0;
                 boolean z = ImmersiveModeConfirmation.sConfirmed;
                 immersiveModeConfirmation.loadSetting();
             }

@@ -30,15 +30,15 @@ public final class ModemActivityInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ModemActivityInfo createFromParcel(Parcel parcel) {
-            long readLong = parcel.readLong();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            long j = parcel.readLong();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             Parcelable[] parcelableArr = (Parcelable[]) parcel.createTypedArray(ActivityStatsTechSpecificInfo.CREATOR);
             ActivityStatsTechSpecificInfo[] activityStatsTechSpecificInfoArr = new ActivityStatsTechSpecificInfo[parcelableArr.length];
-            for (int i = 0; i < parcelableArr.length; i++) {
-                activityStatsTechSpecificInfoArr[i] = (ActivityStatsTechSpecificInfo) parcelableArr[i];
+            for (int i3 = 0; i3 < parcelableArr.length; i3++) {
+                activityStatsTechSpecificInfoArr[i3] = (ActivityStatsTechSpecificInfo) parcelableArr[i3];
             }
-            return new ModemActivityInfo(readLong, readInt, readInt2, activityStatsTechSpecificInfoArr);
+            return new ModemActivityInfo(j, i, i2, activityStatsTechSpecificInfoArr);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -124,11 +124,11 @@ public final class ModemActivityInfo implements Parcelable {
     }
 
     public long getTransmitDurationMillisAtPowerLevel(int i) {
-        long j = 0;
+        long transmitTimeMillis = 0;
         for (int i2 = 0; i2 < getSpecificInfoLength(); i2++) {
-            j += this.mActivityStatsTechSpecificInfo[i2].getTransmitTimeMillis(i);
+            transmitTimeMillis += this.mActivityStatsTechSpecificInfo[i2].getTransmitTimeMillis(i);
         }
-        return j;
+        return transmitTimeMillis;
     }
 
     public long getTransmitDurationMillisAtPowerLevel(int i, int i2) {

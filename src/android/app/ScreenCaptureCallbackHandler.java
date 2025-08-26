@@ -2,7 +2,6 @@ package android.app;
 
 import android.app.Activity;
 import android.app.IScreenCaptureObserver;
-import android.app.ScreenCaptureCallbackHandler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.ArrayMap;
@@ -46,7 +45,7 @@ public class ScreenCaptureCallbackHandler {
                 screenCaptureRegistration.mExecutor.execute(new Runnable() { // from class: android.app.ScreenCaptureCallbackHandler$ScreenCaptureObserver$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ScreenCaptureCallbackHandler.ScreenCaptureRegistration.this.mCallback.onScreenCaptured();
+                        screenCaptureRegistration.mCallback.onScreenCaptured();
                     }
                 });
             }

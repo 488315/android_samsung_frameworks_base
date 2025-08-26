@@ -20,12 +20,12 @@ public class ToneAnimation extends Animation<ToneInfo> {
     @Override // com.samsung.vekit.Animation.Animation
     public void rollback() {
         if (isEnableRollback()) {
-            ToneType[] values = ToneType.values();
-            int length = values.length;
+            ToneType[] toneTypeArrValues = ToneType.values();
+            int length = toneTypeArrValues.length;
             int i = 0;
             int i2 = 0;
             while (i < length) {
-                ((Item) this.firstTarget).setToneIntensity(values[i], (int) ((ToneInfo) this.rollbackValue).getToneArray()[i2]);
+                ((Item) this.firstTarget).setToneIntensity(toneTypeArrValues[i], (int) ((ToneInfo) this.rollbackValue).getToneArray()[i2]);
                 i++;
                 i2++;
             }
@@ -97,12 +97,12 @@ public class ToneAnimation extends Animation<ToneInfo> {
             return;
         }
         float[] fArr = (float[]) obj;
-        ToneType[] values = ToneType.values();
-        int length = values.length;
+        ToneType[] toneTypeArrValues = ToneType.values();
+        int length = toneTypeArrValues.length;
         int i = 0;
         int i2 = 0;
         while (i < length) {
-            ((Item) this.firstTarget).setToneIntensity(values[i], (int) fArr[i2]);
+            ((Item) this.firstTarget).setToneIntensity(toneTypeArrValues[i], (int) fArr[i2]);
             i++;
             i2++;
         }

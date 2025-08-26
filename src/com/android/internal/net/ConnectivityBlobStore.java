@@ -22,10 +22,10 @@ public class ConnectivityBlobStore {
         this(new File(ROOT_DIR + str));
     }
 
-    public ConnectivityBlobStore(File file) {
-        SQLiteDatabase openDatabase = SQLiteDatabase.openDatabase(file, new SQLiteDatabase.OpenParams.Builder().addOpenFlags(268435456).addOpenFlags(536870912).build());
-        this.mDb = openDatabase;
-        openDatabase.execSQL(CREATE_TABLE);
+    public ConnectivityBlobStore(File file) throws SQLException {
+        SQLiteDatabase sQLiteDatabaseOpenDatabase = SQLiteDatabase.openDatabase(file, new SQLiteDatabase.OpenParams.Builder().addOpenFlags(268435456).addOpenFlags(536870912).build());
+        this.mDb = sQLiteDatabaseOpenDatabase;
+        sQLiteDatabaseOpenDatabase.execSQL(CREATE_TABLE);
     }
 
     public boolean put(String str, byte[] bArr) {
@@ -39,19 +39,19 @@ public class ConnectivityBlobStore {
 
     public byte[] get(String str) {
         try {
-            Cursor query = this.mDb.query(TABLENAME, new String[]{"blob"}, "owner=? AND name=?", new String[]{Integer.toString(Binder.getCallingUid()), str}, null, null, null);
+            Cursor cursorQuery = this.mDb.query(TABLENAME, new String[]{"blob"}, "owner=? AND name=?", new String[]{Integer.toString(Binder.getCallingUid()), str}, null, null, null);
             try {
-                if (query.moveToFirst()) {
-                    byte[] blob = query.getBlob(0);
-                    if (query != null) {
-                        query.close();
+                if (cursorQuery.moveToFirst()) {
+                    byte[] blob = cursorQuery.getBlob(0);
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return blob;
                 }
-                if (query == null) {
+                if (cursorQuery == null) {
                     return null;
                 }
-                query.close();
+                cursorQuery.close();
                 return null;
             } finally {
             }
@@ -74,15 +74,15 @@ public class ConnectivityBlobStore {
         int callingUid = Binder.getCallingUid();
         ArrayList arrayList = new ArrayList();
         try {
-            Cursor query = this.mDb.query(TABLENAME, new String[]{"name"}, "owner=? AND name LIKE ? ESCAPE '\\'", new String[]{Integer.toString(callingUid), DatabaseUtils.escapeForLike(str) + "%"}, null, null, "name ASC");
+            Cursor cursorQuery = this.mDb.query(TABLENAME, new String[]{"name"}, "owner=? AND name LIKE ? ESCAPE '\\'", new String[]{Integer.toString(callingUid), DatabaseUtils.escapeForLike(str) + "%"}, null, null, "name ASC");
             try {
-                if (query.moveToFirst()) {
+                if (cursorQuery.moveToFirst()) {
                     do {
-                        arrayList.add(query.getString(0).substring(str.length()));
-                    } while (query.moveToNext());
+                        arrayList.add(cursorQuery.getString(0).substring(str.length()));
+                    } while (cursorQuery.moveToNext());
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
             } finally {
             }

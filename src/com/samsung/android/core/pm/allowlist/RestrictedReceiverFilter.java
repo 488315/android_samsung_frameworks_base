@@ -6,6 +6,7 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import com.samsung.android.rune.PMRune;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class RestrictedReceiverFilter {
@@ -57,11 +59,11 @@ public class RestrictedReceiverFilter {
         }
     }
 
-    private void loadItemsLocked() {
+    private void loadItemsLocked() throws XmlPullParserException, IOException {
         loadItemsInternalLocked(null);
     }
 
-    public void loadItemsInternalLocked(String str) {
+    public void loadItemsInternalLocked(String str) throws XmlPullParserException, IOException {
         BroadcastReceiverListParser broadcastReceiverListParser;
         if (BroadcastReceiverListParser.FW_BR_ALLOW_LIST_WITH_SCPM) {
             broadcastReceiverListParser = new BroadcastReceiverListParserWithScpm();
@@ -79,10 +81,10 @@ public class RestrictedReceiverFilter {
         this.mExemptedPackagePrefixNames.addAll(broadcastReceiverListParser.getAllowedPackagePrefixNames());
         this.mRestrictedPackageNames.addAll(broadcastReceiverListParser.getRestrictedPackageNames());
         this.mRestrictedPackagePrefixNames.addAll(broadcastReceiverListParser.getRestrictedPackagePrefixNames());
-        boolean isWorkCompChangedEnabled = broadcastReceiverListParser.isWorkCompChangedEnabled();
-        if (PMRune.PM_WA_WORK_COMP_CHANGED != isWorkCompChangedEnabled) {
-            PMRune.PM_WA_WORK_COMP_CHANGED = isWorkCompChangedEnabled;
-            Slog.d(TAG, "PM_WA_WORK_COMP_CHANGED change to " + isWorkCompChangedEnabled);
+        boolean zIsWorkCompChangedEnabled = broadcastReceiverListParser.isWorkCompChangedEnabled();
+        if (PMRune.PM_WA_WORK_COMP_CHANGED != zIsWorkCompChangedEnabled) {
+            PMRune.PM_WA_WORK_COMP_CHANGED = zIsWorkCompChangedEnabled;
+            Slog.d(TAG, "PM_WA_WORK_COMP_CHANGED change to " + zIsWorkCompChangedEnabled);
         }
     }
 
@@ -147,15 +149,15 @@ public class RestrictedReceiverFilter {
         }
         Slog.d(TAG, "Restricted action " + str3 + " for package " + str);
         synchronized (this.mLock) {
-            List<String> list = this.mViolationActions.get(str);
-            if (list == null) {
-                list = new ArrayList<>();
+            List<String> arrayList = this.mViolationActions.get(str);
+            if (arrayList == null) {
+                arrayList = new ArrayList<>();
             }
-            if (!list.contains(str3)) {
-                list.add(str3);
+            if (!arrayList.contains(str3)) {
+                arrayList.add(str3);
             }
             this.mViolationCodePaths.put(str, str2);
-            this.mViolationActions.put(str, list);
+            this.mViolationActions.put(str, arrayList);
         }
     }
 
@@ -169,7 +171,7 @@ public class RestrictedReceiverFilter {
             this.mViolationActions.forEach(new BiConsumer() { // from class: com.samsung.android.core.pm.allowlist.RestrictedReceiverFilter$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    RestrictedReceiverFilter.this.lambda$getViolationLog$0(sb, (String) obj, (List) obj2);
+                    this.f$0.lambda$getViolationLog$0(sb, (String) obj, (List) obj2);
                 }
             });
             return sb.toString();

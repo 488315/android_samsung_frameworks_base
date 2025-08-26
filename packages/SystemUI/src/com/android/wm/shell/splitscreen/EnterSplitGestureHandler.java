@@ -35,7 +35,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class EnterSplitGestureHandler {
     public static final boolean DEBUG = CoreRune.IS_DEBUG_LEVEL_MID;
@@ -68,7 +67,6 @@ public class EnterSplitGestureHandler {
     public int mDisplayDeviceType = -1;
     public final IActivityTaskManager mAtm = ActivityTaskManager.getService();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends ISystemGestureExclusionListener.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -80,7 +78,7 @@ public class EnterSplitGestureHandler {
             EnterSplitGestureHandler.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    EnterSplitGestureHandler.AnonymousClass1 anonymousClass1 = EnterSplitGestureHandler.AnonymousClass1.this;
+                    EnterSplitGestureHandler.AnonymousClass1 anonymousClass1 = this.f$0;
                     int i2 = i;
                     Region region3 = region;
                     if (i2 != 0) {
@@ -97,7 +95,6 @@ public class EnterSplitGestureHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EnterSplitGestureEventListener extends BatchedInputEventReceiver {
         public EnterSplitGestureEventListener(InputChannel inputChannel, Looper looper) {
             super(inputChannel, looper, Choreographer.getSfInstance());
@@ -120,7 +117,7 @@ public class EnterSplitGestureHandler {
         this.mGestureDetector = new TwoFingerSwipeGestureDetector(context, new Function() { // from class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                final EnterSplitGestureHandler enterSplitGestureHandler = EnterSplitGestureHandler.this;
+                final EnterSplitGestureHandler enterSplitGestureHandler = this.f$0;
                 final TwoFingerSwipeGestureDetector twoFingerSwipeGestureDetector = (TwoFingerSwipeGestureDetector) obj;
                 boolean z = EnterSplitGestureHandler.DEBUG;
                 enterSplitGestureHandler.getClass();
@@ -156,7 +153,7 @@ public class EnterSplitGestureHandler {
                         displayLayout.getDisplayBounds(EnterSplitGestureHandler.this.mTmpBounds);
                         TwoFingerSwipeGestureDetector twoFingerSwipeGestureDetector2 = twoFingerSwipeGestureDetector;
                         Rect rect = EnterSplitGestureHandler.this.mTmpBounds;
-                        float density = displayLayout.density();
+                        float fDensity = displayLayout.density();
                         EnterSplitGestureHandler enterSplitGestureHandler3 = EnterSplitGestureHandler.this;
                         char c = displayLayout.mWidth > displayLayout.mHeight ? (char) 2 : (char) 1;
                         boolean z2 = enterSplitGestureHandler3.mDisplayDeviceType == 5;
@@ -167,7 +164,7 @@ public class EnterSplitGestureHandler {
                         if (z4) {
                             i |= 8;
                         }
-                        twoFingerSwipeGestureDetector2.init(rect, density, i, EnterSplitGestureHandler.this.mIsTalkbackEnabled);
+                        twoFingerSwipeGestureDetector2.init(rect, fDensity, i, EnterSplitGestureHandler.this.mIsTalkbackEnabled);
                     }
                 };
             }

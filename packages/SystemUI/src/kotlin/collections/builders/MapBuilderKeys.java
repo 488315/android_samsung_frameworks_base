@@ -6,7 +6,6 @@ import java.util.Set;
 import kotlin.collections.AbstractMutableSet;
 import kotlin.collections.builders.MapBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MapBuilderKeys extends AbstractMutableSet implements Set {
     public final MapBuilder backing;
@@ -56,11 +55,11 @@ public final class MapBuilderKeys extends AbstractMutableSet implements Set {
     public final boolean remove(Object obj) {
         MapBuilder mapBuilder = this.backing;
         mapBuilder.checkIsMutable$kotlin_stdlib();
-        int findKey = mapBuilder.findKey(obj);
-        if (findKey < 0) {
+        int iFindKey = mapBuilder.findKey(obj);
+        if (iFindKey < 0) {
             return false;
         }
-        mapBuilder.removeEntryAt(findKey);
+        mapBuilder.removeEntryAt(iFindKey);
         return true;
     }
 

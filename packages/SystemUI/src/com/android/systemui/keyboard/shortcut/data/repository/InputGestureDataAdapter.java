@@ -16,14 +16,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InputGestureDataAdapter {
     public final Context context;
     public final InputGestureMaps inputGestureMaps;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +41,7 @@ public final class InputGestureDataAdapter {
         this.context = context;
     }
 
-    public final Intent buildIntentFromComponentName(ComponentName componentName) {
+    public final Intent buildIntentFromComponentName(ComponentName componentName) throws PackageManager.NameNotFoundException {
         try {
             getUserContext().getPackageManager().getActivityInfo(componentName, 794624);
             Intent intent = new Intent("android.intent.action.MAIN");
@@ -65,13 +63,13 @@ public final class InputGestureDataAdapter {
                 AppLaunchData.ComponentData componentData = (AppLaunchData.ComponentData) appLaunchData;
                 String packageName = componentData.getPackageName();
                 String className = componentData.getClassName();
-                Intent buildIntentFromComponentName = buildIntentFromComponentName(new ComponentName(packageName, className));
-                if (buildIntentFromComponentName != null) {
-                    return buildIntentFromComponentName;
+                Intent intentBuildIntentFromComponentName = buildIntentFromComponentName(new ComponentName(packageName, className));
+                if (intentBuildIntentFromComponentName != null) {
+                    return intentBuildIntentFromComponentName;
                 }
-                Intent buildIntentFromComponentName2 = buildIntentFromComponentName(new ComponentName(getUserContext().getPackageManager().canonicalToCurrentPackageNames(new String[]{packageName})[0], className));
-                if (buildIntentFromComponentName2 != null) {
-                    return buildIntentFromComponentName2;
+                Intent intentBuildIntentFromComponentName2 = buildIntentFromComponentName(new ComponentName(getUserContext().getPackageManager().canonicalToCurrentPackageNames(new String[]{packageName})[0], className));
+                if (intentBuildIntentFromComponentName2 != null) {
+                    return intentBuildIntentFromComponentName2;
                 }
             }
             return null;
@@ -104,10 +102,10 @@ public final class InputGestureDataAdapter {
     }
 
     public final ActivityInfo resolveSingleMatchingActivityFrom(Intent intent) {
-        ActivityInfo resolveActivityInfo = intent.resolveActivityInfo(getUserContext().getPackageManager(), 65536);
-        if (resolveActivityInfo == null || StringsKt__StringsJVMKt.equals(Reflection.getOrCreateKotlinClass(ResolverActivity.class).getQualifiedName(), resolveActivityInfo.name, false)) {
+        ActivityInfo activityInfoResolveActivityInfo = intent.resolveActivityInfo(getUserContext().getPackageManager(), 65536);
+        if (activityInfoResolveActivityInfo == null || StringsKt__StringsJVMKt.equals(Reflection.getOrCreateKotlinClass(ResolverActivity.class).getQualifiedName(), activityInfoResolveActivityInfo.name, false)) {
             return null;
         }
-        return resolveActivityInfo;
+        return activityInfoResolveActivityInfo;
     }
 }

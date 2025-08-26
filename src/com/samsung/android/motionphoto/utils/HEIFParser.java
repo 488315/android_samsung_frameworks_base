@@ -1,6 +1,7 @@
 package com.samsung.android.motionphoto.utils;
 
 import android.util.Log;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
 
@@ -102,9 +103,9 @@ public class HEIFParser {
         }
     }
 
-    private int parseIrefBox(long chunk_size) {
-        int byte2toUInt32;
-        int byte2toUInt322;
+    private int parseIrefBox(long chunk_size) throws IOException {
+        int iByte2toUInt32;
+        int iByte2toUInt322;
         byte[] bArr;
         int i = 4;
         byte[] bArr2 = new byte[4];
@@ -120,7 +121,7 @@ public class HEIFParser {
                 if (this.mData.read(bArr2, 0, i) != i) {
                     return i2;
                 }
-                long byte2toUInt323 = byte2toUInt32(bArr2);
+                long jByte2toUInt32 = byte2toUInt32(bArr2);
                 int i4 = i2;
                 long j3 = j;
                 this.mOffset += j3;
@@ -139,9 +140,9 @@ public class HEIFParser {
                             this.mOffset += j5;
                             long j6 = j4 - j5;
                             if (i3 == 2) {
-                                byte2toUInt32 = bytetoUInt16(bArr2);
+                                iByte2toUInt32 = bytetoUInt16(bArr2);
                             } else {
-                                byte2toUInt32 = (int) byte2toUInt32(bArr2);
+                                iByte2toUInt32 = (int) byte2toUInt32(bArr2);
                             }
                             this.mOffset += 2;
                             long j7 = j6 - 2;
@@ -151,13 +152,13 @@ public class HEIFParser {
                             this.mOffset += j5;
                             j2 = j7 - j5;
                             if (i3 == 2) {
-                                byte2toUInt322 = bytetoUInt16(bArr2);
+                                iByte2toUInt322 = bytetoUInt16(bArr2);
                             } else {
-                                byte2toUInt322 = (int) byte2toUInt32(bArr2);
+                                iByte2toUInt322 = (int) byte2toUInt32(bArr2);
                             }
                             ItemReference itemReference = new ItemReference();
-                            itemReference.itemID = byte2toUInt32;
-                            itemReference.referenceItems.add(Integer.valueOf(byte2toUInt322));
+                            itemReference.itemID = iByte2toUInt32;
+                            itemReference.referenceItems.add(Integer.valueOf(iByte2toUInt322));
                             this.referenceList.add(itemReference);
                             bArr = bArr2;
                         } catch (Exception unused) {
@@ -165,7 +166,7 @@ public class HEIFParser {
                         }
                     } else {
                         bArr = bArr2;
-                        long j8 = byte2toUInt323 - 8;
+                        long j8 = jByte2toUInt32 - 8;
                         this.mOffset += j8;
                         j2 = j4 - j8;
                         try {
@@ -219,9 +220,9 @@ public class HEIFParser {
         }
     }
 
-    private int parseIinfBox() {
-        int byte2toUInt32;
-        int byte2toUInt322;
+    private int parseIinfBox() throws IOException {
+        int iByte2toUInt32;
+        int iByte2toUInt322;
         int i = -1;
         if (parseFullBoxHeader() != 0) {
             return -1;
@@ -236,25 +237,25 @@ public class HEIFParser {
             this.mOffset += i2;
             this.mRemainChunkSize -= i2;
             if (i2 == 2) {
-                byte2toUInt32 = bytetoUInt16(bArr);
+                iByte2toUInt32 = bytetoUInt16(bArr);
             } else {
-                byte2toUInt32 = (int) byte2toUInt32(bArr);
+                iByte2toUInt32 = (int) byte2toUInt32(bArr);
             }
             int i3 = 0;
-            while (i3 < byte2toUInt32) {
+            while (i3 < iByte2toUInt32) {
                 try {
                     if (this.mData.read(bArr, 0, 4) != 4) {
                         return i;
                     }
-                    long byte2toUInt323 = byte2toUInt32(bArr);
+                    long jByte2toUInt32 = byte2toUInt32(bArr);
                     this.mOffset += 4;
-                    this.mRemainChunkSize = (int) (this.mRemainChunkSize - byte2toUInt323);
+                    this.mRemainChunkSize = (int) (this.mRemainChunkSize - jByte2toUInt32);
                     try {
                         if (this.mData.read(bArr, 0, 4) != 4) {
                             return i;
                         }
                         this.mOffset += 4;
-                        long j = byte2toUInt323 - 8;
+                        long j = jByte2toUInt32 - 8;
                         int i4 = i;
                         if (!new String(bArr).equals("infe")) {
                             this.mOffset += j;
@@ -268,7 +269,7 @@ public class HEIFParser {
                             if (parseFullBoxHeader() != 0) {
                                 return i4;
                             }
-                            long j2 = byte2toUInt323 - 12;
+                            long j2 = jByte2toUInt32 - 12;
                             int i5 = this.mVersion;
                             if (i5 < 2) {
                                 return i4;
@@ -282,9 +283,9 @@ public class HEIFParser {
                                 this.mOffset += j3;
                                 long j4 = j2 - j3;
                                 if (i6 == 2) {
-                                    byte2toUInt322 = bytetoUInt16(bArr);
+                                    iByte2toUInt322 = bytetoUInt16(bArr);
                                 } else {
-                                    byte2toUInt322 = (int) byte2toUInt32(bArr);
+                                    iByte2toUInt322 = (int) byte2toUInt32(bArr);
                                 }
                                 this.mOffset += 2;
                                 try {
@@ -296,7 +297,7 @@ public class HEIFParser {
                                         this.mOffset += 4;
                                         long j5 = j4 - 6;
                                         if (new String(bArr).equals("mime")) {
-                                            this.mXMPMetadataIDs.add(Integer.valueOf(byte2toUInt322));
+                                            this.mXMPMetadataIDs.add(Integer.valueOf(iByte2toUInt322));
                                             this.mOffset += j5;
                                         } else {
                                             this.mOffset += j5;
@@ -333,10 +334,10 @@ public class HEIFParser {
         }
     }
 
-    private int parseIlocBox() {
-        int byte2toUInt32;
+    private int parseIlocBox() throws IOException {
+        int iByte2toUInt32;
         String str;
-        int byte2toUInt322;
+        int iByte2toUInt322;
         int i;
         byte[] bArr = new byte[4];
         if (parseFullBoxHeader() != 0 || this.mVersion > 2) {
@@ -344,132 +345,132 @@ public class HEIFParser {
         }
         try {
             int i2 = 0;
-            int read = this.mData.read(bArr, 0, 1);
+            int i3 = this.mData.read(bArr, 0, 1);
             byte b = bArr[0];
-            if (read != 1) {
+            if (i3 != 1) {
                 return -1;
             }
             this.mOffset++;
-            int i3 = b & 15;
-            int i4 = b >> 4;
+            int i4 = b & 15;
+            int i5 = b >> 4;
             try {
-                int read2 = this.mData.read(bArr, 0, 1);
+                int i6 = this.mData.read(bArr, 0, 1);
                 byte b2 = bArr[0];
-                if (read2 != 1) {
+                if (i6 != 1) {
                     return -1;
                 }
                 this.mOffset++;
-                int i5 = this.mVersion;
-                int i6 = (i5 == 0 || i5 == 1) ? b2 & 15 : 0;
-                int i7 = b2 >> 4;
-                int i8 = i5 < 2 ? 2 : 4;
+                int i7 = this.mVersion;
+                int i8 = (i7 == 0 || i7 == 1) ? b2 & 15 : 0;
+                int i9 = b2 >> 4;
+                int i10 = i7 < 2 ? 2 : 4;
                 try {
-                    if (this.mData.read(bArr, 0, i8) != i8) {
+                    if (this.mData.read(bArr, 0, i10) != i10) {
                         return -1;
                     }
-                    long j = i8;
+                    long j = i10;
                     this.mOffset += j;
-                    if (i8 == 2) {
-                        byte2toUInt32 = bytetoUInt16(bArr);
+                    if (i10 == 2) {
+                        iByte2toUInt32 = bytetoUInt16(bArr);
                     } else {
-                        byte2toUInt32 = (int) byte2toUInt32(bArr);
+                        iByte2toUInt32 = (int) byte2toUInt32(bArr);
                     }
-                    long j2 = 0;
-                    int i9 = 0;
-                    while (i9 < byte2toUInt32) {
+                    long jByte2toUInt32 = 0;
+                    int i11 = 0;
+                    while (i11 < iByte2toUInt32) {
                         try {
-                            if (this.mData.read(bArr, i2, i8) != i8) {
+                            if (this.mData.read(bArr, i2, i10) != i10) {
                                 return -1;
                             }
-                            int i10 = i4;
+                            int i12 = i5;
                             this.mOffset += j;
-                            if (i8 == 2) {
-                                int bytetoUInt16 = bytetoUInt16(bArr);
+                            if (i10 == 2) {
+                                int iBytetoUInt16 = bytetoUInt16(bArr);
                                 str = TAG;
-                                byte2toUInt322 = bytetoUInt16;
+                                iByte2toUInt322 = iBytetoUInt16;
                             } else {
                                 str = TAG;
-                                byte2toUInt322 = (int) byte2toUInt32(bArr);
+                                iByte2toUInt322 = (int) byte2toUInt32(bArr);
                             }
-                            int i11 = this.mVersion;
+                            int i13 = this.mVersion;
                             String str2 = str;
-                            int i12 = byte2toUInt32;
-                            long j3 = 2;
-                            if (i11 == 1 || i11 == 2) {
+                            int i14 = iByte2toUInt32;
+                            long j2 = 2;
+                            if (i13 == 1 || i13 == 2) {
                                 this.mOffset += 2;
                                 try {
                                     this.mData.skip(2L);
-                                    j3 = 2;
+                                    j2 = 2;
                                 } catch (Exception e) {
                                     Log.e(str2, "Exception: " + e.toString());
                                     return -1;
                                 }
                             }
-                            this.mOffset += j3;
+                            this.mOffset += j2;
                             try {
-                                this.mData.skip(j3);
-                                if (i7 > 0) {
+                                this.mData.skip(j2);
+                                if (i9 > 0) {
                                     try {
-                                        int read3 = this.mData.read(bArr, 0, i7);
-                                        if (i8 == 2) {
-                                            j2 = bytetoUInt16(bArr);
+                                        int i15 = this.mData.read(bArr, 0, i9);
+                                        if (i10 == 2) {
+                                            jByte2toUInt32 = bytetoUInt16(bArr);
                                         } else {
-                                            j2 = byte2toUInt32(bArr);
+                                            jByte2toUInt32 = byte2toUInt32(bArr);
                                         }
-                                        if (read3 != i7) {
+                                        if (i15 != i9) {
                                             return -1;
                                         }
-                                        i = byte2toUInt322;
-                                        this.mOffset += i7;
+                                        i = iByte2toUInt322;
+                                        this.mOffset += i9;
                                     } catch (Exception unused) {
                                         return -1;
                                     }
                                 } else {
-                                    i = byte2toUInt322;
+                                    i = iByte2toUInt322;
                                 }
                                 try {
-                                    int read4 = this.mData.read(bArr, 0, 2);
-                                    int bytetoUInt162 = bytetoUInt16(bArr);
-                                    if (read4 != 2) {
+                                    int i16 = this.mData.read(bArr, 0, 2);
+                                    int iBytetoUInt162 = bytetoUInt16(bArr);
+                                    if (i16 != 2) {
                                         return -1;
                                     }
                                     this.mOffset += 2;
-                                    if (bytetoUInt162 != 1) {
+                                    if (iBytetoUInt162 != 1) {
                                         return -1;
                                     }
-                                    int read5 = this.mData.read(bArr, 0, i6);
+                                    int i17 = this.mData.read(bArr, 0, i8);
                                     byte2toUInt32(bArr);
-                                    if (read5 != i6) {
+                                    if (i17 != i8) {
                                         return -1;
                                     }
-                                    this.mOffset += i6;
-                                    int read6 = this.mData.read(bArr, 0, i10);
-                                    int i13 = i9;
-                                    long byte2toUInt323 = byte2toUInt32(bArr);
-                                    if (read6 != i10) {
+                                    this.mOffset += i8;
+                                    int i18 = this.mData.read(bArr, 0, i12);
+                                    int i19 = i11;
+                                    long jByte2toUInt322 = byte2toUInt32(bArr);
+                                    if (i18 != i12) {
                                         return -1;
                                     }
-                                    this.mOffset += i10;
-                                    int read7 = this.mData.read(bArr, 0, i3);
-                                    int i14 = i;
-                                    long byte2toUInt324 = byte2toUInt32(bArr);
-                                    if (read7 != i3) {
+                                    this.mOffset += i12;
+                                    int i20 = this.mData.read(bArr, 0, i4);
+                                    int i21 = i;
+                                    long jByte2toUInt323 = byte2toUInt32(bArr);
+                                    if (i20 != i4) {
                                         return -1;
                                     }
-                                    int i15 = i8;
-                                    this.mOffset += i3;
+                                    int i22 = i10;
+                                    this.mOffset += i4;
                                     ItemLocation itemLocation = new ItemLocation();
-                                    itemLocation.base_offset = j2;
-                                    itemLocation.itemID = i14;
-                                    itemLocation.offset = byte2toUInt323;
-                                    itemLocation.length = byte2toUInt324;
+                                    itemLocation.base_offset = jByte2toUInt32;
+                                    itemLocation.itemID = i21;
+                                    itemLocation.offset = jByte2toUInt322;
+                                    itemLocation.length = jByte2toUInt323;
                                     this.locationList.add(itemLocation);
-                                    i9 = i13 + 1;
-                                    i4 = i10;
-                                    byte2toUInt32 = i12;
+                                    i11 = i19 + 1;
+                                    i5 = i12;
+                                    iByte2toUInt32 = i14;
                                     bArr = bArr;
-                                    i8 = i15;
-                                    i3 = i3;
+                                    i10 = i22;
+                                    i4 = i4;
                                     i2 = 0;
                                 } catch (Exception unused2) {
                                     return -1;
@@ -495,7 +496,7 @@ public class HEIFParser {
         }
     }
 
-    public XMPInformation getCoverImageXMPOffsetAndSize(InputStream buf) {
+    public XMPInformation getCoverImageXMPOffsetAndSize(InputStream buf) throws IOException {
         this.mData = buf;
         byte[] bArr = new byte[4];
         while (true) {
@@ -506,13 +507,13 @@ public class HEIFParser {
                         return null;
                     }
                     hEIFParser.mOffset += 4;
-                    long byte2toUInt32 = hEIFParser.byte2toUInt32(bArr);
+                    long jByte2toUInt32 = hEIFParser.byte2toUInt32(bArr);
                     try {
                         if (hEIFParser.mData.read(bArr, 0, 4) != 4) {
                             return null;
                         }
                         hEIFParser.mOffset += 4;
-                        long j = byte2toUInt32 - 8;
+                        long j = jByte2toUInt32 - 8;
                         String str = new String(bArr);
                         if (str.equals("iinf")) {
                             hEIFParser.parseIinfBox();
@@ -553,9 +554,9 @@ public class HEIFParser {
                 int i = 0;
                 while (i < this.referenceList.size()) {
                     ItemReference itemReference = this.referenceList.get(i);
-                    int intValue = itemReference.referenceItems.get(0).intValue();
+                    int iIntValue = itemReference.referenceItems.get(0).intValue();
                     int i2 = itemReference.itemID;
-                    if (intValue == this.mCoverImageID && this.mXMPMetadataIDs.contains(Integer.valueOf(i2))) {
+                    if (iIntValue == this.mCoverImageID && this.mXMPMetadataIDs.contains(Integer.valueOf(i2))) {
                         for (int i3 = 0; i3 < this.locationList.size(); i3++) {
                             ItemLocation itemLocation = this.locationList.get(i3);
                             if (itemLocation.itemID == i2) {

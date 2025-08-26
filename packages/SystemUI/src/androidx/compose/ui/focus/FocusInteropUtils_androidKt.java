@@ -7,7 +7,6 @@ import androidx.compose.ui.focus.FocusDirection;
 import androidx.compose.ui.geometry.Rect;
 import androidx.compose.ui.platform.AndroidComposeView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FocusInteropUtils_androidKt {
     public static final Rect calculateBoundingRectRelativeTo(View view, AndroidComposeView androidComposeView) {
@@ -40,15 +39,15 @@ public abstract class FocusInteropUtils_androidKt {
             return view.requestFocus(num.intValue(), rect);
         }
         if (rect != null) {
-            View findNextFocusFromRect = FocusFinder.getInstance().findNextFocusFromRect(viewGroup, rect, num.intValue());
-            return findNextFocusFromRect != null ? findNextFocusFromRect.requestFocus(num.intValue(), rect) : view.requestFocus(num.intValue(), rect);
+            View viewFindNextFocusFromRect = FocusFinder.getInstance().findNextFocusFromRect(viewGroup, rect, num.intValue());
+            return viewFindNextFocusFromRect != null ? viewFindNextFocusFromRect.requestFocus(num.intValue(), rect) : view.requestFocus(num.intValue(), rect);
         }
-        View findNextFocus = FocusFinder.getInstance().findNextFocus(viewGroup, view.hasFocus() ? view.findFocus() : null, num.intValue());
-        return findNextFocus != null ? findNextFocus.requestFocus(num.intValue()) : view.requestFocus(num.intValue());
+        View viewFindNextFocus = FocusFinder.getInstance().findNextFocus(viewGroup, view.hasFocus() ? view.findFocus() : null, num.intValue());
+        return viewFindNextFocus != null ? viewFindNextFocus.requestFocus(num.intValue()) : view.requestFocus(num.intValue());
     }
 
     /* renamed from: toAndroidFocusDirection-3ESFkO8, reason: not valid java name */
-    public static final Integer m368toAndroidFocusDirection3ESFkO8(int i) {
+    public static final Integer m370toAndroidFocusDirection3ESFkO8(int i) {
         FocusDirection.Companion companion = FocusDirection.Companion;
         companion.getClass();
         if (i == FocusDirection.Up) {
@@ -77,28 +76,28 @@ public abstract class FocusInteropUtils_androidKt {
     public static final FocusDirection toFocusDirection(int i) {
         if (i == 1) {
             FocusDirection.Companion.getClass();
-            return FocusDirection.m366boximpl(FocusDirection.Previous);
+            return FocusDirection.m368boximpl(FocusDirection.Previous);
         }
         if (i == 2) {
             FocusDirection.Companion.getClass();
-            return FocusDirection.m366boximpl(FocusDirection.Next);
+            return FocusDirection.m368boximpl(FocusDirection.Next);
         }
         if (i == 17) {
             FocusDirection.Companion.getClass();
-            return FocusDirection.m366boximpl(FocusDirection.Left);
+            return FocusDirection.m368boximpl(FocusDirection.Left);
         }
         if (i == 33) {
             FocusDirection.Companion.getClass();
-            return FocusDirection.m366boximpl(FocusDirection.Up);
+            return FocusDirection.m368boximpl(FocusDirection.Up);
         }
         if (i == 66) {
             FocusDirection.Companion.getClass();
-            return FocusDirection.m366boximpl(FocusDirection.Right);
+            return FocusDirection.m368boximpl(FocusDirection.Right);
         }
         if (i != 130) {
             return null;
         }
         FocusDirection.Companion.getClass();
-        return FocusDirection.m366boximpl(FocusDirection.Down);
+        return FocusDirection.m368boximpl(FocusDirection.Down);
     }
 }

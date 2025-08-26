@@ -18,7 +18,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.systemui.R;
 import java.net.URISyntaxException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FooterPreference extends Preference {
     int mIconVisibility;
@@ -26,7 +25,6 @@ public class FooterPreference extends Preference {
     public FooterLearnMoreSpan mLearnMoreSpan;
     public CharSequence mLearnMoreText;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FooterLearnMoreSpan extends URLSpan {
         public final View.OnClickListener mClickListener;
 
@@ -69,7 +67,7 @@ public class FooterPreference extends Preference {
     }
 
     @Override // androidx.preference.Preference
-    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
+    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) throws URISyntaxException {
         URLSpan uRLSpan;
         String url;
         super.onBindViewHolder(preferenceViewHolder);
@@ -89,11 +87,11 @@ public class FooterPreference extends Preference {
                             int spanEnd = spannableString.getSpanEnd(uRLSpan);
                             spannableString.removeSpan(uRLSpan);
                             try {
-                                final Intent parseUri = Intent.parseUri(url, 1);
+                                final Intent uri = Intent.parseUri(url, 1);
                                 spannableString.setSpan(new ClickableSpan() { // from class: com.android.settingslib.widget.FooterPreference.1
                                     @Override // android.text.style.ClickableSpan
                                     public final void onClick(View view) {
-                                        FooterPreference.this.mContext.startActivity(parseUri);
+                                        FooterPreference.this.mContext.startActivity(uri);
                                     }
                                 }, spanStart, spanEnd, 33);
                             } catch (URISyntaxException e) {
@@ -128,9 +126,9 @@ public class FooterPreference extends Preference {
                 textView2.setVisibility(8);
             }
         }
-        View findViewById = preferenceViewHolder.itemView.findViewById(R.id.icon_frame);
-        if (findViewById != null) {
-            findViewById.setVisibility(this.mIconVisibility);
+        View viewFindViewById = preferenceViewHolder.itemView.findViewById(R.id.icon_frame);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(this.mIconVisibility);
         }
     }
 

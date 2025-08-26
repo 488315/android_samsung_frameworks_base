@@ -82,9 +82,9 @@ public interface IAudioPolicyServiceClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAudioPolicyServiceClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioPolicyServiceClient)) {
-                return (IAudioPolicyServiceClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAudioPolicyServiceClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioPolicyServiceClient)) {
+                return (IAudioPolicyServiceClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,10 +100,10 @@ public interface IAudioPolicyServiceClient extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAudioVolumeGroupChanged(readInt, readInt2);
+                    onAudioVolumeGroupChanged(i3, i4);
                     return true;
                 case 2:
                     onAudioPortListUpdate();
@@ -112,22 +112,22 @@ public interface IAudioPolicyServiceClient extends IInterface {
                     onAudioPatchListUpdate();
                     return true;
                 case 4:
-                    String readString = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDynamicPolicyMixStateUpdate(readString, readInt3);
+                    onDynamicPolicyMixStateUpdate(string, i5);
                     return true;
                 case 5:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     RecordClientInfo recordClientInfo = (RecordClientInfo) parcel.readTypedObject(RecordClientInfo.CREATOR);
                     AudioConfigBase audioConfigBase = (AudioConfigBase) parcel.readTypedObject(AudioConfigBase.CREATOR);
                     EffectDescriptor[] effectDescriptorArr = (EffectDescriptor[]) parcel.createTypedArray(EffectDescriptor.CREATOR);
                     AudioConfigBase audioConfigBase2 = (AudioConfigBase) parcel.readTypedObject(AudioConfigBase.CREATOR);
                     EffectDescriptor[] effectDescriptorArr2 = (EffectDescriptor[]) parcel.createTypedArray(EffectDescriptor.CREATOR);
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRecordingConfigurationUpdate(readInt4, recordClientInfo, audioConfigBase, effectDescriptorArr, audioConfigBase2, effectDescriptorArr2, readInt5, readInt6);
+                    onRecordingConfigurationUpdate(i6, recordClientInfo, audioConfigBase, effectDescriptorArr, audioConfigBase2, effectDescriptorArr2, i7, i8);
                     return true;
                 case 6:
                     onRoutingUpdated();
@@ -158,90 +158,90 @@ public interface IAudioPolicyServiceClient extends IInterface {
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onAudioVolumeGroupChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onAudioPortListUpdate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onAudioPatchListUpdate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onDynamicPolicyMixStateUpdate(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onRecordingConfigurationUpdate(int i, RecordClientInfo recordClientInfo, AudioConfigBase audioConfigBase, EffectDescriptor[] effectDescriptorArr, AudioConfigBase audioConfigBase2, EffectDescriptor[] effectDescriptorArr2, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(recordClientInfo, 0);
-                    obtain.writeTypedObject(audioConfigBase, 0);
-                    obtain.writeTypedArray(effectDescriptorArr, 0);
-                    obtain.writeTypedObject(audioConfigBase2, 0);
-                    obtain.writeTypedArray(effectDescriptorArr2, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(recordClientInfo, 0);
+                    parcelObtain.writeTypedObject(audioConfigBase, 0);
+                    parcelObtain.writeTypedArray(effectDescriptorArr, 0);
+                    parcelObtain.writeTypedObject(audioConfigBase2, 0);
+                    parcelObtain.writeTypedArray(effectDescriptorArr2, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onRoutingUpdated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioPolicyServiceClient
             public void onVolumeRangeInitRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

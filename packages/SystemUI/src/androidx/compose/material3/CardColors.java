@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CardColors {
     public final long containerColor;
@@ -26,7 +25,7 @@ public final class CardColors {
         }
         CardColors cardColors = (CardColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.containerColor, cardColors.containerColor) && ULong.m3427equalsimpl0(this.contentColor, cardColors.contentColor) && ULong.m3427equalsimpl0(this.disabledContainerColor, cardColors.disabledContainerColor) && ULong.m3427equalsimpl0(this.disabledContentColor, cardColors.disabledContentColor);
+        return ULong.m3447equalsimpl0(this.containerColor, cardColors.containerColor) && ULong.m3447equalsimpl0(this.contentColor, cardColors.contentColor) && ULong.m3447equalsimpl0(this.disabledContainerColor, cardColors.disabledContainerColor) && ULong.m3447equalsimpl0(this.disabledContentColor, cardColors.disabledContentColor);
     }
 
     public final int hashCode() {

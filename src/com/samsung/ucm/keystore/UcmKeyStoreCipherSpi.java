@@ -50,7 +50,7 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     private byte[] mIV = null;
     private byte[] mAAD = new byte[0];
 
-    void doCryptoInit(AlgorithmParameterSpec algorithmParameterSpec) throws InvalidAlgorithmParameterException, InvalidKeyException {
+    void doCryptoInit(AlgorithmParameterSpec algorithmParameterSpec) throws InvalidKeyException, InvalidAlgorithmParameterException {
     }
 
     @Override // javax.crypto.CipherSpi
@@ -100,7 +100,7 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
         return this.mIV;
     }
 
-    void engineInitInternal(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    void engineInitInternal(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec) throws InvalidParameterException, InvalidKeyException, InvalidAlgorithmParameterException {
         parseEncryptionMode(i);
         if (key == null) {
             throw new InvalidKeyException("Key is null");
@@ -136,7 +136,7 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public void engineInit(int i, Key key, SecureRandom secureRandom) throws InvalidKeyException {
+    public void engineInit(int i, Key key, SecureRandom secureRandom) throws InvalidParameterException, InvalidKeyException {
         try {
             parseEncryptionMode(i);
             engineInitInternal(i, key, null);
@@ -146,13 +146,13 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public void engineInit(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    public void engineInit(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidParameterException, InvalidKeyException, InvalidAlgorithmParameterException {
         parseEncryptionMode(i);
         engineInitInternal(i, key, algorithmParameterSpec);
     }
 
     @Override // javax.crypto.CipherSpi
-    public void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    public void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidParameterException, InvalidKeyException, InvalidAlgorithmParameterException {
         if (algorithmParameters != null) {
             throw new InvalidAlgorithmParameterException("unknown param type: " + algorithmParameters.getClass().getName());
         }
@@ -178,12 +178,12 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public byte[] engineDoFinal(byte[] bArr, int i, int i2) throws IllegalBlockSizeException, BadPaddingException {
-        byte[] ucmDecrypt;
+    public byte[] engineDoFinal(byte[] bArr, int i, int i2) throws BadPaddingException, IllegalBlockSizeException {
+        byte[] bArrUcmDecrypt;
         if (bArr != null) {
             engineUpdate(bArr, i, i2);
         }
-        byte[] doFinal = this.mUcmGenericCipher.doFinal();
+        byte[] bArrDoFinal = this.mUcmGenericCipher.doFinal();
         IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
         if (service == null) {
             throw new IllegalBlockSizeException("failed to connect ucm service");
@@ -196,25 +196,25 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
             bundle.putByteArray(KEY_EXTRA_AAD, this.mAAD);
             bundle.putInt(KEY_EXTRA_TAG_LEN, this.mTagLength);
         }
-        boolean equals = "AES".equals(this.mAlgorithm.split("/")[0].toUpperCase());
+        boolean zEquals = "AES".equals(this.mAlgorithm.split("/")[0].toUpperCase());
         UcmKeyStoreKey key = this.mUcmGenericCipher.getKey();
         try {
             if (this.mEncrypting) {
-                ucmDecrypt = service.ucmEncrypt(key.getAlias(), doFinal, this.mAlgorithm, bundle);
-                if (equals && ucmDecrypt != null) {
-                    ucmDecrypt = parseEncryptedMessage(ucmDecrypt);
+                bArrUcmDecrypt = service.ucmEncrypt(key.getAlias(), bArrDoFinal, this.mAlgorithm, bundle);
+                if (zEquals && bArrUcmDecrypt != null) {
+                    bArrUcmDecrypt = parseEncryptedMessage(bArrUcmDecrypt);
                 }
             } else {
-                ucmDecrypt = service.ucmDecrypt(key.getAlias(), doFinal, this.mAlgorithm, bundle);
-                if (equals && ucmDecrypt != null) {
-                    ucmDecrypt = parseDecryptedMessage(ucmDecrypt);
+                bArrUcmDecrypt = service.ucmDecrypt(key.getAlias(), bArrDoFinal, this.mAlgorithm, bundle);
+                if (zEquals && bArrUcmDecrypt != null) {
+                    bArrUcmDecrypt = parseDecryptedMessage(bArrUcmDecrypt);
                 }
             }
-            if (ucmDecrypt == null) {
+            if (bArrUcmDecrypt == null) {
                 throw new IllegalBlockSizeException("output is null");
             }
             this.mIsDoFinalCalled = true;
-            return ucmDecrypt;
+            return bArrUcmDecrypt;
         } catch (RemoteException e) {
             Log.e(TAG, "Remote Exception " + e);
             throw new IllegalBlockSizeException("RemoteException");
@@ -245,14 +245,14 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
-        byte[] engineDoFinal = engineDoFinal(bArr, i, i2);
-        int length = engineDoFinal.length + i3;
+    public int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws BadPaddingException, IllegalBlockSizeException, ShortBufferException {
+        byte[] bArrEngineDoFinal = engineDoFinal(bArr, i, i2);
+        int length = bArrEngineDoFinal.length + i3;
         if (length > bArr2.length) {
             throw new ShortBufferException("output buffer is too small " + bArr2.length + " < " + length);
         }
-        System.arraycopy(engineDoFinal, 0, bArr2, i3, engineDoFinal.length);
-        return engineDoFinal.length;
+        System.arraycopy(bArrEngineDoFinal, 0, bArr2, i3, bArrEngineDoFinal.length);
+        return bArrEngineDoFinal.length;
     }
 
     @Override // javax.crypto.CipherSpi
@@ -268,17 +268,17 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public Key engineUnwrap(byte[] bArr, String str, int i) throws InvalidKeyException, NoSuchAlgorithmException {
+    public Key engineUnwrap(byte[] bArr, String str, int i) throws NoSuchAlgorithmException, InvalidKeyException {
         try {
-            byte[] engineDoFinal = engineDoFinal(bArr, 0, bArr.length);
+            byte[] bArrEngineDoFinal = engineDoFinal(bArr, 0, bArr.length);
             if (i == 1) {
-                return KeyFactory.getInstance(str).generatePublic(new X509EncodedKeySpec(engineDoFinal));
+                return KeyFactory.getInstance(str).generatePublic(new X509EncodedKeySpec(bArrEngineDoFinal));
             }
             if (i == 2) {
-                return KeyFactory.getInstance(str).generatePrivate(new PKCS8EncodedKeySpec(engineDoFinal));
+                return KeyFactory.getInstance(str).generatePrivate(new PKCS8EncodedKeySpec(bArrEngineDoFinal));
             }
             if (i == 3) {
-                return new SecretKeySpec(engineDoFinal, str);
+                return new SecretKeySpec(bArrEngineDoFinal, str);
             }
             throw new UnsupportedOperationException("wrappedKeyType == " + i);
         } catch (InvalidKeySpecException e) {

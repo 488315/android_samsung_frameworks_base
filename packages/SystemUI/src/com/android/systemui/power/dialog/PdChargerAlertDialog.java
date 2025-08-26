@@ -18,7 +18,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PdChargerAlertDialog extends PowerUiDialog {
     public PdChargerAlertDialog(Context context) {
@@ -37,23 +36,23 @@ public class PdChargerAlertDialog extends PowerUiDialog {
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog
     public final AlertDialog getDialog() {
-        String m;
-        View inflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
-        ((LinearLayout) inflate.findViewById(R.id.do_not_show_again_layout)).setVisibility(0);
-        final CheckBox checkBox = (CheckBox) inflate.findViewById(R.id.do_not_show_again);
-        TextView textView = (TextView) inflate.findViewById(R.id.notice_text);
+        String strM;
+        View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
+        ((LinearLayout) viewInflate.findViewById(R.id.do_not_show_again_layout)).setVisibility(0);
+        final CheckBox checkBox = (CheckBox) viewInflate.findViewById(R.id.do_not_show_again);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.notice_text);
         if (DeviceType.isTablet()) {
             StringBuilder sb = new StringBuilder();
             sb.append(this.mContext.getString(R.string.pd_charger_dialog_text_pd_charger_tablet));
             sb.append("\n\n");
-            m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.pd_charger_dialog_text_faster_charging_tablet, sb);
+            strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.pd_charger_dialog_text_faster_charging_tablet, sb);
         } else {
             StringBuilder sb2 = new StringBuilder();
             sb2.append(this.mContext.getString(R.string.pd_charger_dialog_text_pd_charger));
             sb2.append("\n\n");
-            m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.pd_charger_dialog_text_faster_charging, sb2);
+            strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.pd_charger_dialog_text_faster_charging, sb2);
         }
-        textView.setText(m);
+        textView.setText(strM);
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext, R.style.power_ui_dialog_theme);
         String string = this.mContext.getString(R.string.pd_charger_dialog_title);
         AlertController.AlertParams alertParams = builder.P;
@@ -62,20 +61,20 @@ public class PdChargerAlertDialog extends PowerUiDialog {
         builder.setPositiveButton(this.mContext.getString(R.string.dialog_button_text_ok), new DialogInterface.OnClickListener() { // from class: com.android.systemui.power.dialog.PdChargerAlertDialog$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                PdChargerAlertDialog pdChargerAlertDialog = PdChargerAlertDialog.this;
+                PdChargerAlertDialog pdChargerAlertDialog = this.f$0;
                 CheckBox checkBox2 = checkBox;
                 pdChargerAlertDialog.getClass();
                 if (checkBox2.isChecked()) {
-                    SharedPreferences.Editor edit = pdChargerAlertDialog.mSharedPref.edit();
-                    edit.putBoolean(pdChargerAlertDialog.mDoNotShowTag, true);
-                    edit.commit();
+                    SharedPreferences.Editor editorEdit = pdChargerAlertDialog.mSharedPref.edit();
+                    editorEdit.putBoolean(pdChargerAlertDialog.mDoNotShowTag, true);
+                    editorEdit.commit();
                 }
             }
         });
-        builder.setView(inflate);
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        builder.setView(viewInflate);
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

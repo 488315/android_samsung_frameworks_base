@@ -25,16 +25,16 @@ public class MediaRouteControllerDialog extends AlertDialog implements MediaRout
         setButton(-2, getContext().getResources().getString(R.string.media_route_controller_disconnect), new DialogInterface.OnClickListener() { // from class: com.android.internal.app.MediaRouteControllerDialog$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                MediaRouteControllerDialog.this.lambda$onCreate$0(dialogInterface, i);
+                this.f$0.lambda$onCreate$0(dialogInterface, i);
             }
         });
-        View inflate = getLayoutInflater().inflate(R.layout.media_route_controller_dialog, (ViewGroup) null);
-        setView(inflate, 0, 0, 0, 0);
-        this.mContentManager.bindViews(inflate);
+        View viewInflate = getLayoutInflater().inflate(R.layout.media_route_controller_dialog, (ViewGroup) null);
+        setView(viewInflate, 0, 0, 0, 0);
+        this.mContentManager.bindViews(viewInflate);
         super.onCreate(bundle);
-        View findViewById = getWindow().findViewById(R.id.customPanel);
-        if (findViewById != null) {
-            findViewById.setMinimumHeight(0);
+        View viewFindViewById = getWindow().findViewById(R.id.customPanel);
+        if (viewFindViewById != null) {
+            viewFindViewById.setMinimumHeight(0);
         }
         this.mContentManager.update();
     }

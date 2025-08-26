@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.notification.emptyshade.ui.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -18,7 +19,6 @@ import com.android.systemui.statusbar.notification.stack.ExpandableViewState;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class EmptyShadeView extends StackScrollerDecorView implements LaunchableView {
     public TextView mEmptyFooterText;
@@ -30,7 +30,6 @@ public class EmptyShadeView extends StackScrollerDecorView implements Launchable
     public int mSize;
     public int mTextId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmptyShadeViewState extends ExpandableViewState {
         public EmptyShadeViewState() {
         }
@@ -57,8 +56,8 @@ public class EmptyShadeView extends StackScrollerDecorView implements Launchable
         this.mLaunchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.notification.emptyshade.ui.view.EmptyShadeView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return EmptyShadeView.$r8$lambda$f6a1cyY_134d03mX3sLFgRPDHuk(EmptyShadeView.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return EmptyShadeView.$r8$lambda$f6a1cyY_134d03mX3sLFgRPDHuk(this.f$0, (Integer) obj);
             }
         });
         this.mSize = getResources().getDimensionPixelSize(R.dimen.notifications_unseen_footer_icon_size);
@@ -98,7 +97,7 @@ public class EmptyShadeView extends StackScrollerDecorView implements Launchable
     }
 
     @Override // com.android.systemui.statusbar.notification.row.ExpandableView, android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         this.mSize = getResources().getDimensionPixelSize(R.dimen.notifications_unseen_footer_icon_size);
         int i = ModesEmptyShadeFix.$r8$clinit;

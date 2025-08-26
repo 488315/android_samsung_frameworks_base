@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NavigatorState {
     public final StateFlowImpl _backStack;
@@ -30,12 +29,12 @@ public abstract class NavigatorState {
     public final ReadonlyStateFlow transitionsInProgress;
 
     public NavigatorState() {
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._backStack = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(EmptySet.INSTANCE);
-        this._transitionsInProgress = MutableStateFlow2;
-        this.backStack = FlowKt.asStateFlow(MutableStateFlow);
-        this.transitionsInProgress = FlowKt.asStateFlow(MutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._backStack = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(EmptySet.INSTANCE);
+        this._transitionsInProgress = stateFlowImplMutableStateFlow2;
+        this.backStack = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.transitionsInProgress = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
     }
 
     public abstract NavBackStackEntry createBackStackEntry(NavDestination navDestination, Bundle bundle);
@@ -69,7 +68,7 @@ public abstract class NavigatorState {
     }
 
     public void popWithTransition(NavBackStackEntry navBackStackEntry, boolean z) {
-        Object obj;
+        Object objPrevious;
         StateFlowImpl stateFlowImpl = this._transitionsInProgress;
         Iterable iterable = (Iterable) stateFlowImpl.getValue();
         boolean z2 = iterable instanceof Collection;
@@ -99,16 +98,16 @@ public abstract class NavigatorState {
         ListIterator listIterator = list.listIterator(list.size());
         while (true) {
             if (!listIterator.hasPrevious()) {
-                obj = null;
+                objPrevious = null;
                 break;
             }
-            obj = listIterator.previous();
-            NavBackStackEntry navBackStackEntry2 = (NavBackStackEntry) obj;
+            objPrevious = listIterator.previous();
+            NavBackStackEntry navBackStackEntry2 = (NavBackStackEntry) objPrevious;
             if (!Intrinsics.areEqual(navBackStackEntry2, navBackStackEntry) && ((List) readonlyStateFlow.$$delegate_0.getValue()).lastIndexOf(navBackStackEntry2) < ((List) readonlyStateFlow.$$delegate_0.getValue()).lastIndexOf(navBackStackEntry)) {
                 break;
             }
         }
-        NavBackStackEntry navBackStackEntry3 = (NavBackStackEntry) obj;
+        NavBackStackEntry navBackStackEntry3 = (NavBackStackEntry) objPrevious;
         if (navBackStackEntry3 != null) {
             stateFlowImpl.updateState(null, SetsKt___SetsKt.plus((Set) stateFlowImpl.getValue(), navBackStackEntry3));
         }

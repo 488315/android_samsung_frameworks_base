@@ -1,10 +1,13 @@
 package com.android.systemui.controls.management;
 
+import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,9 +51,10 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsProviderSelectorActivity extends BaseActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -70,13 +74,101 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
     public final SALogger saLogger;
     public final SecControlsController secControlsController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$10, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass10 extends FunctionReferenceImpl implements Function1 {
+        public AnonymousClass10(Object obj) {
+            super(1, obj, ControlsController.class, "countFavoritesForComponent", "countFavoritesForComponent(Landroid/content/ComponentName;)I", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((ControlsControllerImpl) ((ControlsController) this.receiver)).getClass();
+            Favorites.INSTANCE.getClass();
+            return Integer.valueOf(((ArrayList) Favorites.getControlsForComponent((ComponentName) obj)).size());
+        }
+    }
+
+    /* renamed from: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$11, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass11 extends FunctionReferenceImpl implements Function1 {
+        public AnonymousClass11(Object obj) {
+            super(1, obj, SecControlsController.class, "getActiveFlag", "getActiveFlag(Landroid/content/ComponentName;)Z", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((ControlsControllerImpl) ((SecControlsController) this.receiver)).getClass();
+            Favorites.INSTANCE.getClass();
+            return Boolean.valueOf(Favorites.getActiveFlag((ComponentName) obj));
+        }
+    }
+
+    /* renamed from: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$12, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass12 extends FunctionReferenceImpl implements Function2 {
+        public AnonymousClass12(Object obj) {
+            super(2, obj, SecControlsController.class, "setActiveFlag", "setActiveFlag(Landroid/content/ComponentName;Z)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+            ((ControlsControllerImpl) ((SecControlsController) this.receiver)).getClass();
+            Favorites.INSTANCE.getClass();
+            Favorites.setActiveFlag((ComponentName) obj, zBooleanValue);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$13, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass13 extends FunctionReferenceImpl implements Function2 {
+        public AnonymousClass13(Object obj) {
+            super(2, obj, SecControlsController.class, "setActivePanelFlag", "setActivePanelFlag(Landroid/content/ComponentName;Z)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+            ((ControlsControllerImpl) ((SecControlsController) this.receiver)).setActivePanelFlag((ComponentName) obj, zBooleanValue);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$9, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass9 extends FunctionReferenceImpl implements Function1 {
+        public AnonymousClass9(Object obj) {
+            super(1, obj, SecControlsProviderSelectorActivity.class, "launchFavoritingActivity", "launchFavoritingActivity(Landroid/content/ComponentName;)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            final ComponentName componentName = (ComponentName) obj;
+            final SecControlsProviderSelectorActivity secControlsProviderSelectorActivity = (SecControlsProviderSelectorActivity) this.receiver;
+            secControlsProviderSelectorActivity.executor.execute(new Runnable() { // from class: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$launchFavoritingActivity$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ComponentName componentName2 = componentName;
+                    if (componentName2 != null) {
+                        SecControlsProviderSelectorActivity secControlsProviderSelectorActivity2 = secControlsProviderSelectorActivity;
+                        Intent intent = new Intent(secControlsProviderSelectorActivity2.getApplicationContext(), (Class<?>) SecControlsFavoritingActivity.class);
+                        intent.putExtra("extra_app_label", ((ControlsListingControllerImpl) secControlsProviderSelectorActivity2.listingController).getAppLabel(componentName2));
+                        intent.putExtra("android.intent.extra.COMPONENT_NAME", componentName2);
+                        secControlsProviderSelectorActivity2.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(secControlsProviderSelectorActivity2, new Pair[0]).toBundle());
+                        ((BadgeProviderImpl) secControlsProviderSelectorActivity2.badgeProvider).dismiss();
+                    }
+                }
+            });
+            return Unit.INSTANCE;
         }
     }
 
@@ -142,7 +234,7 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
     }
 
     @Override // com.android.systemui.controls.BaseActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         Log.d("SecControlsProviderSelectorActivity", "onCreate");
         super.onCreate(bundle);
         setContentView(R.layout.activity_controls_providers);
@@ -170,15 +262,15 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$onCreate$5$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SecControlsProviderSelectorActivity secControlsProviderSelectorActivity = SecControlsProviderSelectorActivity.this;
+                    SecControlsProviderSelectorActivity secControlsProviderSelectorActivity = this.this$0;
                     int i = SecControlsProviderSelectorActivity.$r8$clinit;
                     secControlsProviderSelectorActivity.handleDone();
                 }
             });
             this.doneButton = button;
-            View requireViewById = requireViewById(R.id.button_layout);
-            ((LinearLayout) requireViewById).setVisibility(0);
-            requireViewById.getClass();
+            View viewRequireViewById = requireViewById(R.id.button_layout);
+            ((LinearLayout) viewRequireViewById).setVisibility(0);
+            viewRequireViewById.getClass();
         } else {
             ActionBar supportActionBar2 = getSupportActionBar();
             if (supportActionBar2 != null) {
@@ -187,25 +279,25 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
                 setTitle(text2);
                 supportActionBar2.setDisplayHomeAsUpEnabled(true);
             }
-            View requireViewById2 = requireViewById(R.id.subtitle);
-            TextView textView2 = (TextView) requireViewById2;
+            View viewRequireViewById2 = requireViewById(R.id.subtitle);
+            TextView textView2 = (TextView) viewRequireViewById2;
             textView2.setText(textView2.getResources().getText(R.string.controls_providers_subtitle));
-            requireViewById2.getClass();
+            viewRequireViewById2.getClass();
         }
         Executor executor = this.backExecutor;
         Executor executor2 = this.executor;
         LifecycleRegistry lifecycleRegistry = this.lifecycleRegistry;
-        LayoutInflater from = LayoutInflater.from(this);
-        SecControlsProviderSelectorActivity$onCreate$9 secControlsProviderSelectorActivity$onCreate$9 = new SecControlsProviderSelectorActivity$onCreate$9(this);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this);
+        AnonymousClass9 anonymousClass9 = new AnonymousClass9(this);
         Resources resources = getResources();
-        SecControlsProviderSelectorActivity$onCreate$10 secControlsProviderSelectorActivity$onCreate$10 = new SecControlsProviderSelectorActivity$onCreate$10(this.controlsController);
+        AnonymousClass10 anonymousClass10 = new AnonymousClass10(this.controlsController);
         SecControlsController secControlsController = this.secControlsController;
-        SecAppAdapter secAppAdapter = new SecAppAdapter(executor, executor2, lifecycleRegistry, this.listingController, from, secControlsProviderSelectorActivity$onCreate$9, new SecFavoritesRenderer(resources, secControlsProviderSelectorActivity$onCreate$10, new SecControlsProviderSelectorActivity$onCreate$11(secControlsController), new SecControlsProviderSelectorActivity$onCreate$12(secControlsController), new SecControlsProviderSelectorActivity$onCreate$13(secControlsController)), this, this.controlsUtil, this.saLogger, this.badgeProvider, this.authorizedPanelsRepository, new Function1() { // from class: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$$ExternalSyntheticLambda0
+        SecAppAdapter secAppAdapter = new SecAppAdapter(executor, executor2, lifecycleRegistry, this.listingController, layoutInflaterFrom, anonymousClass9, new SecFavoritesRenderer(resources, anonymousClass10, new AnonymousClass11(secControlsController), new AnonymousClass12(secControlsController), new AnonymousClass13(secControlsController)), this, this.controlsUtil, this.saLogger, this.badgeProvider, this.authorizedPanelsRepository, new Function1() { // from class: com.android.systemui.controls.management.SecControlsProviderSelectorActivity$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i = SecControlsProviderSelectorActivity.$r8$clinit;
-                SecControlsProviderSelectorActivity.this.updateButtonStatue();
+                this.f$0.updateButtonStatue();
                 return Unit.INSTANCE;
             }
         });
@@ -213,7 +305,7 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
             @Override // androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
             public final void onChanged() {
                 int i = SecControlsProviderSelectorActivity.$r8$clinit;
-                SecControlsProviderSelectorActivity.this.updateButtonStatue();
+                this.this$0.updateButtonStatue();
             }
         });
         this.appAdapter = secAppAdapter;
@@ -257,21 +349,23 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
             Object obj = arrayList.get(i);
             i++;
             ComponentName componentName = ((StructureInfo) obj).componentName;
-            Object obj2 = linkedHashMap.get(componentName);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(componentName, obj2);
+            Object arrayList2 = linkedHashMap.get(componentName);
+            if (arrayList2 == null) {
+                arrayList2 = new ArrayList();
+                linkedHashMap.put(componentName, arrayList2);
             }
-            ((List) obj2).add(obj);
+            ((List) arrayList2).add(obj);
         }
-        ArrayList arrayList2 = new ArrayList();
+        ArrayList arrayList3 = new ArrayList();
         for (Map.Entry entry : linkedHashMap.entrySet()) {
             ComponentName componentName2 = (ComponentName) entry.getKey();
             List list = (List) entry.getValue();
             String packageName = componentName2.getPackageName();
             SALogger.Companion companion = SALogger.Companion;
             List list2 = list;
-            if (!(list2 instanceof Collection) || !list2.isEmpty()) {
+            if ((list2 instanceof Collection) && list2.isEmpty()) {
+                z = false;
+            } else {
                 Iterator it = list2.iterator();
                 while (it.hasNext()) {
                     if (((StructureInfo) it.next()).active) {
@@ -279,12 +373,12 @@ public final class SecControlsProviderSelectorActivity extends BaseActivity {
                         break;
                     }
                 }
+                z = false;
             }
-            z = false;
             companion.getClass();
-            arrayList2.add(new SALogger.AppStatus(packageName, String.valueOf(Boolean.compare(z, false))));
+            arrayList3.add(new SALogger.AppStatus(packageName, String.valueOf(Boolean.compare(z, false))));
         }
-        sALogger.sendStatusEvent(this, new SALogger.StatusEvent.DeviceAppStatus(new SALogger.AppStatusList(arrayList2)));
+        sALogger.sendStatusEvent(this, new SALogger.StatusEvent.DeviceAppStatus(new SALogger.AppStatusList(arrayList3)));
         super.onDestroy();
     }
 

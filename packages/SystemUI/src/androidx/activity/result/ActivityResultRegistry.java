@@ -2,8 +2,10 @@ package androidx.activity.result;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -17,7 +19,6 @@ import kotlin.sequences.ConstrainedOnceSequence;
 import kotlin.sequences.GeneratorSequence;
 import kotlin.sequences.SequencesKt__SequencesKt$$ExternalSyntheticLambda1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ActivityResultRegistry {
     public final Map rcToKey = new LinkedHashMap();
@@ -28,7 +29,6 @@ public abstract class ActivityResultRegistry {
     public final Map parsedPendingResults = new LinkedHashMap();
     public final Bundle pendingResults = new Bundle();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CallbackAndContract {
         public final ActivityResultCallback callback;
         public final ActivityResultContract contract;
@@ -39,7 +39,6 @@ public abstract class ActivityResultRegistry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,13 +48,55 @@ public abstract class ActivityResultRegistry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LifecycleContainer {
         public final Lifecycle lifecycle;
         public final List observers = new ArrayList();
 
         public LifecycleContainer(Lifecycle lifecycle) {
             this.lifecycle = lifecycle;
+        }
+    }
+
+    /* renamed from: androidx.activity.result.ActivityResultRegistry$register$3, reason: invalid class name */
+    public final class AnonymousClass3 extends ActivityResultLauncher {
+        public final /* synthetic */ String $key;
+
+        public AnonymousClass3(String str, ActivityResultContract activityResultContract) {
+            this.$key = str;
+        }
+
+        public final void unregister() {
+            Integer num;
+            ActivityResultRegistry activityResultRegistry = ActivityResultRegistry.this;
+            ArrayList arrayList = (ArrayList) activityResultRegistry.launchedKeys;
+            String str = this.$key;
+            if (!arrayList.contains(str) && (num = (Integer) activityResultRegistry.keyToRc.remove(str)) != null) {
+                activityResultRegistry.rcToKey.remove(num);
+            }
+            activityResultRegistry.keyToCallback.remove(str);
+            if (activityResultRegistry.parsedPendingResults.containsKey(str)) {
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Dropping pending result for request ", str, ": ");
+                sbM.append(((LinkedHashMap) activityResultRegistry.parsedPendingResults).get(str));
+                Log.w("ActivityResultRegistry", sbM.toString());
+                activityResultRegistry.parsedPendingResults.remove(str);
+            }
+            if (activityResultRegistry.pendingResults.containsKey(str)) {
+                Log.w("ActivityResultRegistry", "Dropping pending result for request " + str + ": " + ((ActivityResult) activityResultRegistry.pendingResults.getParcelable(str, ActivityResult.class)));
+                activityResultRegistry.pendingResults.remove(str);
+            }
+            LifecycleContainer lifecycleContainer = (LifecycleContainer) ((LinkedHashMap) activityResultRegistry.keyToLifecycleContainers).get(str);
+            if (lifecycleContainer != null) {
+                ArrayList arrayList2 = (ArrayList) lifecycleContainer.observers;
+                int size = arrayList2.size();
+                int i = 0;
+                while (i < size) {
+                    Object obj = arrayList2.get(i);
+                    i++;
+                    lifecycleContainer.lifecycle.removeObserver((LifecycleEventObserver) obj);
+                }
+                ((ArrayList) lifecycleContainer.observers).clear();
+                activityResultRegistry.keyToLifecycleContainers.remove(str);
+            }
         }
     }
 
@@ -79,7 +120,7 @@ public abstract class ActivityResultRegistry {
         return true;
     }
 
-    public final ActivityResultRegistry$register$3 register(String str, ActivityResultContract activityResultContract, ActivityResultCallback activityResultCallback) {
+    public final AnonymousClass3 register(String str, ActivityResultContract activityResultContract, ActivityResultCallback activityResultCallback) {
         if (((Integer) ((LinkedHashMap) this.keyToRc).get(str)) == null) {
             ActivityResultRegistry$generateRandomNumber$1 activityResultRegistry$generateRandomNumber$1 = new Function0() { // from class: androidx.activity.result.ActivityResultRegistry$generateRandomNumber$1
                 @Override // kotlin.jvm.functions.Function0
@@ -92,9 +133,9 @@ public abstract class ActivityResultRegistry {
             while (it.hasNext()) {
                 Number number = (Number) it.next();
                 if (!this.rcToKey.containsKey(Integer.valueOf(number.intValue()))) {
-                    int intValue = number.intValue();
-                    this.rcToKey.put(Integer.valueOf(intValue), str);
-                    this.keyToRc.put(str, Integer.valueOf(intValue));
+                    int iIntValue = number.intValue();
+                    this.rcToKey.put(Integer.valueOf(iIntValue), str);
+                    this.keyToRc.put(str, Integer.valueOf(iIntValue));
                 }
             }
             throw new NoSuchElementException("Sequence contains no element matching the predicate.");
@@ -110,6 +151,6 @@ public abstract class ActivityResultRegistry {
             this.pendingResults.remove(str);
             activityResultCallback.onActivityResult(activityResultContract.parseResult(activityResult.resultCode, activityResult.data));
         }
-        return new ActivityResultRegistry$register$3(this, str, activityResultContract);
+        return new AnonymousClass3(str, activityResultContract);
     }
 }

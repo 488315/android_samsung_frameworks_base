@@ -7,12 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Tables {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AbstractCell {
         public final boolean equals(Object obj) {
             if (obj == this) {
@@ -40,7 +38,6 @@ public final class Tables {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ImmutableCell<R, C, V> extends AbstractCell implements Serializable {
         private static final long serialVersionUID = 0;
         private final C columnKey;

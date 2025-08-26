@@ -1,7 +1,6 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiSwitchClient;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.os.Binder;
 import android.os.RemoteException;
@@ -35,7 +34,7 @@ public class HdmiSwitchClient extends HdmiClient {
         return new IHdmiControlCallback.Stub() { // from class: android.hardware.hdmi.HdmiSwitchClient.1
             @Override // android.hardware.hdmi.IHdmiControlCallback
             public void onComplete(int i) {
-                OnSelectListener.this.onSelect(i);
+                onSelectListener.onSelect(i);
             }
         };
     }
@@ -92,7 +91,7 @@ public class HdmiSwitchClient extends HdmiClient {
                     executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$2$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+                            onSelectListener.onSelect(i);
                         }
                     });
                 }
@@ -131,7 +130,7 @@ public class HdmiSwitchClient extends HdmiClient {
                     executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$3$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+                            onSelectListener.onSelect(i);
                         }
                     });
                 }

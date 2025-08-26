@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import com.android.systemui.res.R$styleable;
 import com.android.systemui.statusbar.AlphaOptimizedImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamOverlayDotImageView extends AlphaOptimizedImageView {
     public final int mDotColor;
@@ -37,15 +36,14 @@ public class DreamOverlayDotImageView extends AlphaOptimizedImageView {
 
     public DreamOverlayDotImageView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.DreamOverlayDotImageView, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.DreamOverlayDotImageView, 0, 0);
         try {
-            this.mDotColor = obtainStyledAttributes.getColor(0, -1);
+            this.mDotColor = typedArrayObtainStyledAttributes.getColor(0, -1);
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DotDrawable extends Drawable {
         public Bitmap mDotBitmap;
         public final int mDotColor;
@@ -62,14 +60,14 @@ public class DreamOverlayDotImageView extends AlphaOptimizedImageView {
                 return;
             }
             if (this.mDotBitmap == null) {
-                int width = this.mBounds.width();
-                int height = this.mBounds.height();
-                Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                Canvas canvas2 = new Canvas(createBitmap);
+                int iWidth = this.mBounds.width();
+                int iHeight = this.mBounds.height();
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iWidth, iHeight, Bitmap.Config.ARGB_8888);
+                Canvas canvas2 = new Canvas(bitmapCreateBitmap);
                 Paint paint = new Paint(1);
                 paint.setColor(this.mDotColor);
-                canvas2.drawCircle(width / 2.0f, height / 2.0f, Math.min(width, height) / 2.0f, paint);
-                this.mDotBitmap = createBitmap;
+                canvas2.drawCircle(iWidth / 2.0f, iHeight / 2.0f, Math.min(iWidth, iHeight) / 2.0f, paint);
+                this.mDotBitmap = bitmapCreateBitmap;
             }
             canvas.drawBitmap(this.mDotBitmap, (Rect) null, this.mBounds, this.mPaint);
         }

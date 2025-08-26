@@ -234,22 +234,22 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
     public static String flagsToString(int i) {
         StringBuilder sb = new StringBuilder(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
-            if (numberOfTrailingZeros == 1) {
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
+            if (iNumberOfTrailingZeros == 1) {
                 sb.append("costsMoney");
-            } else if (numberOfTrailingZeros == 2) {
+            } else if (iNumberOfTrailingZeros == 2) {
                 sb.append(Environment.MEDIA_REMOVED);
-            } else if (numberOfTrailingZeros == 4) {
+            } else if (iNumberOfTrailingZeros == 4) {
                 sb.append("hardRestricted");
-            } else if (numberOfTrailingZeros == 8) {
+            } else if (iNumberOfTrailingZeros == 8) {
                 sb.append("softRestricted");
-            } else if (numberOfTrailingZeros == 16) {
+            } else if (iNumberOfTrailingZeros == 16) {
                 sb.append("immutablyRestricted");
-            } else if (numberOfTrailingZeros == 1073741824) {
+            } else if (iNumberOfTrailingZeros == 1073741824) {
                 sb.append("installed");
             } else {
-                sb.append(numberOfTrailingZeros);
+                sb.append(iNumberOfTrailingZeros);
             }
             if (i != 0) {
                 sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);

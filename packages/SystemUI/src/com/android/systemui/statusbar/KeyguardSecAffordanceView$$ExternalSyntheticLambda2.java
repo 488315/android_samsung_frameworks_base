@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.graphics.drawable.PaintDrawable;
 import android.view.animation.Interpolator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KeyguardSecAffordanceView$$ExternalSyntheticLambda2 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -24,9 +23,9 @@ public final /* synthetic */ class KeyguardSecAffordanceView$$ExternalSyntheticL
             case 0:
                 Interpolator interpolator = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 keyguardSecAffordanceView.getClass();
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                keyguardSecAffordanceView.setRectangleBounds(floatValue);
-                if (floatValue >= keyguardSecAffordanceView.mScreenWidth && (paintDrawable = keyguardSecAffordanceView.mPanelBackgroundDrawable) != null) {
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                keyguardSecAffordanceView.setRectangleBounds(fFloatValue);
+                if (fFloatValue >= keyguardSecAffordanceView.mScreenWidth && (paintDrawable = keyguardSecAffordanceView.mPanelBackgroundDrawable) != null) {
                     paintDrawable.setCornerRadius(0.0f);
                     break;
                 }
@@ -43,40 +42,31 @@ public final /* synthetic */ class KeyguardSecAffordanceView$$ExternalSyntheticL
                 keyguardSecAffordanceView.mRectangleIconScale = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 break;
             case 3:
-                Interpolator interpolator4 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
-                keyguardSecAffordanceView.getClass();
-                int intValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
-                if (keyguardSecAffordanceView.mIsNowBarExpanded) {
-                    intValue = 0;
-                }
-                keyguardSecAffordanceView.setDrawBackgroundAlpha(intValue);
+                keyguardSecAffordanceView.mRectanglePaint.setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                keyguardSecAffordanceView.invalidate();
                 break;
             case 4:
-                keyguardSecAffordanceView.mRectanglePaint.setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                Interpolator interpolator4 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
+                keyguardSecAffordanceView.getClass();
+                keyguardSecAffordanceView.setRectangleBounds(((Float) valueAnimator.getAnimatedValue()).floatValue());
                 keyguardSecAffordanceView.invalidate();
                 break;
             case 5:
                 Interpolator interpolator5 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 keyguardSecAffordanceView.getClass();
-                keyguardSecAffordanceView.setRectangleBounds(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                keyguardSecAffordanceView.invalidate();
-                break;
-            case 6:
-                Interpolator interpolator6 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
-                keyguardSecAffordanceView.getClass();
                 keyguardSecAffordanceView.mVerticalScale = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 break;
-            case 7:
+            case 6:
                 keyguardSecAffordanceView.mRectanglePaint.setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
                 break;
-            case 8:
-                Interpolator interpolator7 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
+            case 7:
+                Interpolator interpolator6 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 keyguardSecAffordanceView.getClass();
-                float floatValue2 = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue2 = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 if (keyguardSecAffordanceView.mIsDown) {
                     KeyguardSecAffordanceView.cancelAnimator(keyguardSecAffordanceView.mRectangleShrinkAnimator);
                 }
-                keyguardSecAffordanceView.updatePanelViews(floatValue2);
+                keyguardSecAffordanceView.updatePanelViews(fFloatValue2);
                 keyguardSecAffordanceView.invalidate();
                 break;
             default:

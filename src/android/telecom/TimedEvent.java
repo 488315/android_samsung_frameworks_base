@@ -11,20 +11,20 @@ public abstract class TimedEvent<T> {
     public abstract long getTime();
 
     public static <T> Map<T, Double> averageTimings(Collection<? extends TimedEvent<T>> collection) {
-        HashMap hashMap = new HashMap();
-        HashMap hashMap2 = new HashMap();
+        HashMap map = new HashMap();
+        HashMap map2 = new HashMap();
         for (TimedEvent<T> timedEvent : collection) {
-            if (hashMap.containsKey(timedEvent.getKey())) {
-                hashMap.put(timedEvent.getKey(), Integer.valueOf(((Integer) hashMap.get(timedEvent.getKey())).intValue() + 1));
-                hashMap2.put(timedEvent.getKey(), Double.valueOf(((Double) hashMap2.get(timedEvent.getKey())).doubleValue() + timedEvent.getTime()));
+            if (map.containsKey(timedEvent.getKey())) {
+                map.put(timedEvent.getKey(), Integer.valueOf(((Integer) map.get(timedEvent.getKey())).intValue() + 1));
+                map2.put(timedEvent.getKey(), Double.valueOf(((Double) map2.get(timedEvent.getKey())).doubleValue() + timedEvent.getTime()));
             } else {
-                hashMap.put(timedEvent.getKey(), 1);
-                hashMap2.put(timedEvent.getKey(), Double.valueOf(timedEvent.getTime()));
+                map.put(timedEvent.getKey(), 1);
+                map2.put(timedEvent.getKey(), Double.valueOf(timedEvent.getTime()));
             }
         }
-        for (Map.Entry entry : hashMap2.entrySet()) {
-            hashMap2.put(entry.getKey(), Double.valueOf(((Double) entry.getValue()).doubleValue() / ((Integer) hashMap.get(entry.getKey())).intValue()));
+        for (Map.Entry entry : map2.entrySet()) {
+            map2.put(entry.getKey(), Double.valueOf(((Double) entry.getValue()).doubleValue() / ((Integer) map.get(entry.getKey())).intValue()));
         }
-        return hashMap2;
+        return map2;
     }
 }

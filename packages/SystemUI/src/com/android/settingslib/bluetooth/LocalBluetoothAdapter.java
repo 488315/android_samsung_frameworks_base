@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocalBluetoothAdapter {
     public static LocalBluetoothAdapter sInstance;
@@ -39,19 +38,15 @@ public class LocalBluetoothAdapter {
     }
 
     public static synchronized LocalBluetoothAdapter getInstance() {
-        LocalBluetoothAdapter localBluetoothAdapter;
         BluetoothAdapter defaultAdapter;
-        synchronized (LocalBluetoothAdapter.class) {
-            try {
-                if (sInstance == null && (defaultAdapter = BluetoothAdapter.getDefaultAdapter()) != null) {
-                    sInstance = new LocalBluetoothAdapter(defaultAdapter);
-                }
-                localBluetoothAdapter = sInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sInstance == null && (defaultAdapter = BluetoothAdapter.getDefaultAdapter()) != null) {
+                sInstance = new LocalBluetoothAdapter(defaultAdapter);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return localBluetoothAdapter;
+        return sInstance;
     }
 
     public final void setBluetoothEnabled(boolean z) {

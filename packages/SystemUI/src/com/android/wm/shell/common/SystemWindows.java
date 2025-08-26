@@ -32,7 +32,6 @@ import com.android.wm.shell.common.DisplayController;
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemWindows {
     public final DisplayController mDisplayController;
@@ -41,7 +40,6 @@ public class SystemWindows {
     public final HashMap mViewRoots = new HashMap();
     public final IWindowManager mWmService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PerDisplay {
         public final int mDisplayId;
         public final SparseArray mWwms = new SparseArray();
@@ -64,7 +62,6 @@ public class SystemWindows {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SysUiWindowManager extends WindowlessWindowManager {
         public final HashMap mLeashForWindow;
 
@@ -74,11 +71,11 @@ public class SystemWindows {
         }
 
         public final SurfaceControl getParentSurface(IWindow iWindow, WindowManager.LayoutParams layoutParams) {
-            SurfaceControl build = new SurfaceControl.Builder().setContainerLayer().setName("SystemWindowLeash").setHidden(false).setParent(((WindowlessWindowManager) this).mRootSurface).setCallsite("SysUiWIndowManager#attachToParentSurface").build();
+            SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setContainerLayer().setName("SystemWindowLeash").setHidden(false).setParent(((WindowlessWindowManager) this).mRootSurface).setCallsite("SysUiWIndowManager#attachToParentSurface").build();
             synchronized (this) {
-                this.mLeashForWindow.put(iWindow.asBinder(), build);
+                this.mLeashForWindow.put(iWindow.asBinder(), surfaceControlBuild);
             }
-            return build;
+            return surfaceControlBuild;
         }
 
         public final SurfaceControl getSurfaceControlForWindow(View view) {
@@ -136,7 +133,7 @@ public class SystemWindows {
     }
 
     public final void addView(View view, WindowManager.LayoutParams layoutParams, int i) {
-        SurfaceControl surfaceControl;
+        SurfaceControl surfaceControlAddShellRoot;
         PerDisplay perDisplay = (PerDisplay) this.mPerDisplay.get(i);
         if (perDisplay == null) {
             perDisplay = new PerDisplay(i);
@@ -149,14 +146,14 @@ public class SystemWindows {
             ContainerWindow containerWindow = new ContainerWindow();
             sysUiWindowManager = null;
             try {
-                surfaceControl = systemWindows.mWmService.addShellRoot(i2, containerWindow, 1);
+                surfaceControlAddShellRoot = systemWindows.mWmService.addShellRoot(i2, containerWindow, 1);
             } catch (RemoteException unused) {
-                surfaceControl = null;
+                surfaceControlAddShellRoot = null;
             }
-            if (surfaceControl == null) {
+            if (surfaceControlAddShellRoot == null) {
                 Slog.e("SystemWindows", "Unable to get root surfacecontrol for systemui");
             } else {
-                SysUiWindowManager sysUiWindowManager2 = new SysUiWindowManager(SystemWindows.this, perDisplay.mDisplayId, systemWindows.mDisplayController.getDisplayContext(i2), surfaceControl, containerWindow);
+                SysUiWindowManager sysUiWindowManager2 = new SysUiWindowManager(SystemWindows.this, perDisplay.mDisplayId, systemWindows.mDisplayController.getDisplayContext(i2), surfaceControlAddShellRoot, containerWindow);
                 perDisplay.mWwms.put(1, sysUiWindowManager2);
                 sysUiWindowManager = sysUiWindowManager2;
             }
@@ -201,7 +198,6 @@ public class SystemWindows {
         perDisplay.setShellRootAccessibilityWindow(view);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContainerWindow extends IWindow.Stub {
         public final void requestScrollCapture(IScrollCaptureResponseListener iScrollCaptureResponseListener) {
             try {

@@ -1,5 +1,6 @@
 package android.transition;
 
+import android.content.res.Resources;
 import android.util.ArrayMap;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class TransitionManager {
         return transition2 != null ? transition2 : sDefaultTransition;
     }
 
-    private static void changeScene(Scene scene, Transition transition) {
+    private static void changeScene(Scene scene, Transition transition) throws Resources.NotFoundException {
         ViewGroup sceneRoot = scene.getSceneRoot();
         if (sPendingTransitions.contains(sceneRoot)) {
             return;
@@ -65,14 +66,14 @@ public class TransitionManager {
             return;
         }
         sPendingTransitions.add(sceneRoot);
-        Transition mo5495clone = transition.mo5495clone();
-        mo5495clone.setSceneRoot(sceneRoot);
+        Transition transitionMo5502clone = transition.mo5502clone();
+        transitionMo5502clone.setSceneRoot(sceneRoot);
         if (currentScene != null && currentScene.isCreatedFromLayoutResource()) {
-            mo5495clone.setCanRemoveViews(true);
+            transitionMo5502clone.setCanRemoveViews(true);
         }
-        sceneChangeSetup(sceneRoot, mo5495clone);
+        sceneChangeSetup(sceneRoot, transitionMo5502clone);
         scene.enter();
-        sceneChangeRunTransition(sceneRoot, mo5495clone);
+        sceneChangeRunTransition(sceneRoot, transitionMo5502clone);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -186,15 +187,15 @@ public class TransitionManager {
         }
     }
 
-    public void transitionTo(Scene scene) {
+    public void transitionTo(Scene scene) throws Resources.NotFoundException {
         changeScene(scene, getTransition(scene));
     }
 
-    public static void go(Scene scene) {
+    public static void go(Scene scene) throws Resources.NotFoundException {
         changeScene(scene, sDefaultTransition);
     }
 
-    public static void go(Scene scene, Transition transition) {
+    public static void go(Scene scene, Transition transition) throws Resources.NotFoundException {
         changeScene(scene, transition);
     }
 
@@ -210,10 +211,10 @@ public class TransitionManager {
         if (transition == null) {
             transition = sDefaultTransition;
         }
-        Transition mo5495clone = transition.mo5495clone();
-        sceneChangeSetup(viewGroup, mo5495clone);
+        Transition transitionMo5502clone = transition.mo5502clone();
+        sceneChangeSetup(viewGroup, transitionMo5502clone);
         Scene.setCurrentScene(viewGroup, null);
-        sceneChangeRunTransition(viewGroup, mo5495clone);
+        sceneChangeRunTransition(viewGroup, transitionMo5502clone);
     }
 
     public static void endTransitions(ViewGroup viewGroup) {

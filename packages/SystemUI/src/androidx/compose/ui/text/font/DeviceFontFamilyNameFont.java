@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DeviceFontFamilyNameFont extends AndroidFont {
     public final String familyName;
@@ -42,7 +41,7 @@ public final class DeviceFontFamilyNameFont extends AndroidFont {
 
     @Override // androidx.compose.ui.text.font.Font
     /* renamed from: getStyle-_-LCdwA, reason: not valid java name */
-    public final int mo760getStyle_LCdwA() {
+    public final int mo762getStyle_LCdwA() {
         return this.style;
     }
 
@@ -52,13 +51,13 @@ public final class DeviceFontFamilyNameFont extends AndroidFont {
     }
 
     public final int hashCode() {
-        int hashCode = ((this.familyName.hashCode() * 31) + this.weight.weight) * 31;
+        int iHashCode = ((this.familyName.hashCode() * 31) + this.weight.weight) * 31;
         FontStyle.Companion companion = FontStyle.Companion;
-        return this.variationSettings.settings.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.style, hashCode, 31);
+        return this.variationSettings.settings.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.style, iHashCode, 31);
     }
 
     public final String toString() {
-        return "Font(familyName=\"" + ((Object) ("DeviceFontFamilyName(name=" + this.familyName + ')')) + "\", weight=" + this.weight + ", style=" + ((Object) FontStyle.m765toStringimpl(this.style)) + ')';
+        return "Font(familyName=\"" + ((Object) ("DeviceFontFamilyName(name=" + this.familyName + ')')) + "\", weight=" + this.weight + ", style=" + ((Object) FontStyle.m767toStringimpl(this.style)) + ')';
     }
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */

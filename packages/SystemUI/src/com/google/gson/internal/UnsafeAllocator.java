@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class UnsafeAllocator {
     public static void assertInstantiable(Class<?> cls) {
@@ -19,7 +18,7 @@ public abstract class UnsafeAllocator {
         }
     }
 
-    public static UnsafeAllocator create() {
+    public static UnsafeAllocator create() throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException, SecurityException, IllegalArgumentException {
         try {
             Class<?> cls = Class.forName("sun.misc.Unsafe");
             Field declaredField = cls.getDeclaredField("theUnsafe");
@@ -38,32 +37,32 @@ public abstract class UnsafeAllocator {
                 try {
                     Method declaredMethod = ObjectStreamClass.class.getDeclaredMethod("getConstructorId", Class.class);
                     declaredMethod.setAccessible(true);
-                    final int intValue = ((Integer) declaredMethod.invoke(null, Object.class)).intValue();
+                    final int iIntValue = ((Integer) declaredMethod.invoke(null, Object.class)).intValue();
                     final Method declaredMethod2 = ObjectStreamClass.class.getDeclaredMethod("newInstance", Class.class, Integer.TYPE);
                     declaredMethod2.setAccessible(true);
                     return new UnsafeAllocator() { // from class: com.google.gson.internal.UnsafeAllocator.2
                         @Override // com.google.gson.internal.UnsafeAllocator
                         public <T> T newInstance(Class<T> cls2) throws Exception {
                             UnsafeAllocator.assertInstantiable(cls2);
-                            return (T) declaredMethod2.invoke(null, cls2, Integer.valueOf(intValue));
+                            return (T) declaredMethod2.invoke(null, cls2, Integer.valueOf(iIntValue));
                         }
                     };
                 } catch (Exception unused2) {
-                    final Method declaredMethod3 = ObjectInputStream.class.getDeclaredMethod("newInstance", Class.class, Class.class);
-                    declaredMethod3.setAccessible(true);
-                    return new UnsafeAllocator() { // from class: com.google.gson.internal.UnsafeAllocator.3
+                    return new UnsafeAllocator() { // from class: com.google.gson.internal.UnsafeAllocator.4
                         @Override // com.google.gson.internal.UnsafeAllocator
-                        public <T> T newInstance(Class<T> cls2) throws Exception {
-                            UnsafeAllocator.assertInstantiable(cls2);
-                            return (T) declaredMethod3.invoke(null, cls2, Object.class);
+                        public <T> T newInstance(Class<T> cls2) {
+                            throw new UnsupportedOperationException("Cannot allocate " + cls2 + ". Usage of JDK sun.misc.Unsafe is enabled, but it could not be used. Make sure your runtime is configured correctly.");
                         }
                     };
                 }
             } catch (Exception unused3) {
-                return new UnsafeAllocator() { // from class: com.google.gson.internal.UnsafeAllocator.4
+                final Method declaredMethod3 = ObjectInputStream.class.getDeclaredMethod("newInstance", Class.class, Class.class);
+                declaredMethod3.setAccessible(true);
+                return new UnsafeAllocator() { // from class: com.google.gson.internal.UnsafeAllocator.3
                     @Override // com.google.gson.internal.UnsafeAllocator
-                    public <T> T newInstance(Class<T> cls2) {
-                        throw new UnsupportedOperationException("Cannot allocate " + cls2 + ". Usage of JDK sun.misc.Unsafe is enabled, but it could not be used. Make sure your runtime is configured correctly.");
+                    public <T> T newInstance(Class<T> cls2) throws Exception {
+                        UnsafeAllocator.assertInstantiable(cls2);
+                        return (T) declaredMethod3.invoke(null, cls2, Object.class);
                     }
                 };
             }

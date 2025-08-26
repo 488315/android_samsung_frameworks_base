@@ -105,7 +105,7 @@ public class ContextHubTransaction<T> {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ContextHubTransaction.this.lambda$setOnCompleteListener$0();
+                        this.f$0.lambda$setOnCompleteListener$0();
                     }
                 });
             }
@@ -134,7 +134,7 @@ public class ContextHubTransaction<T> {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ContextHubTransaction.this.lambda$setResponse$1();
+                        this.f$0.lambda$setResponse$1();
                     }
                 });
             }

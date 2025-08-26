@@ -17,7 +17,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SearcleTipAnimHelper {
     public static final AnimProperty HIDE_ANIM_BUBBLE_ALPHA_PROPERTY;
@@ -39,7 +38,6 @@ public final class SearcleTipAnimHelper {
     public final ArrayList showAnimList = new ArrayList();
     public final ArrayList hideAnimList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimPairSet {
         public final AnimProperty property;
         public final View view;
@@ -70,7 +68,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimProperty {
         public AnimationType animType;
         public final int duration;
@@ -110,7 +107,6 @@ public final class SearcleTipAnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationType {
         public static final /* synthetic */ AnimationType[] $VALUES;
         public static final AnimationType Alpha;
@@ -153,7 +149,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -163,7 +158,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HideAnimatorListener extends BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super(SearcleTipAnimHelper.this, str);
@@ -175,7 +169,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowAnimatorListener extends BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super(SearcleTipAnimHelper.this, str);
@@ -187,7 +180,6 @@ public final class SearcleTipAnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -293,34 +285,34 @@ public final class SearcleTipAnimHelper {
     }
 
     public final AnimatorSet makeAnimSet(AnimPairSet[] animPairSetArr, ArrayList arrayList, BaseAnimatorListener baseAnimatorListener) {
-        ValueAnimator valueAnimator;
+        ValueAnimator valueAnimatorOfFloat;
         for (AnimPairSet animPairSet : animPairSetArr) {
             final View view = animPairSet.view;
             final AnimProperty animProperty = animPairSet.property;
             if (animProperty != null) {
-                valueAnimator = ValueAnimator.ofFloat(animProperty.fromValue, animProperty.toValue);
+                valueAnimatorOfFloat = ValueAnimator.ofFloat(animProperty.fromValue, animProperty.toValue);
                 if (view != null) {
-                    valueAnimator.setDuration(animProperty.duration);
-                    valueAnimator.setStartDelay(animProperty.startDelay);
-                    valueAnimator.setInterpolator(animProperty.interpolator);
-                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.searcle.SearcleTipAnimHelper$makeAnimator$1$1$1
+                    valueAnimatorOfFloat.setDuration(animProperty.duration);
+                    valueAnimatorOfFloat.setStartDelay(animProperty.startDelay);
+                    valueAnimatorOfFloat.setInterpolator(animProperty.interpolator);
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.searcle.SearcleTipAnimHelper$makeAnimator$1$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            SearcleTipAnimHelper searcleTipAnimHelper = SearcleTipAnimHelper.this;
+                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            SearcleTipAnimHelper searcleTipAnimHelper = this.this$0;
                             View view2 = view;
-                            float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                            float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                             SearcleTipAnimHelper.AnimationType animationType = animProperty.animType;
                             SearcleTipAnimHelper.AnimationType[] animationTypeArr = SearcleTipAnimHelper.INIT_BUBBLE_PROPERTY_FIELDS;
                             searcleTipAnimHelper.getClass();
-                            SearcleTipAnimHelper.updateProperty(view2, floatValue, animationType);
+                            SearcleTipAnimHelper.updateProperty(view2, fFloatValue, animationType);
                         }
                     });
                 }
             } else {
-                valueAnimator = null;
+                valueAnimatorOfFloat = null;
             }
-            if (valueAnimator != null) {
-                arrayList.add(valueAnimator);
+            if (valueAnimatorOfFloat != null) {
+                arrayList.add(valueAnimatorOfFloat);
             }
         }
         AnimatorSet animatorSet = new AnimatorSet();
@@ -329,7 +321,6 @@ public final class SearcleTipAnimHelper {
         return animatorSet;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseAnimatorListener implements Animator.AnimatorListener {
         public BaseAnimatorListener(SearcleTipAnimHelper searcleTipAnimHelper, String str) {
         }

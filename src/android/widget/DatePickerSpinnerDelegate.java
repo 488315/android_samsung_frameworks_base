@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.icu.util.Calendar;
 import android.os.Parcelable;
@@ -47,22 +48,22 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
     private final NumberPicker mYearSpinner;
     private final EditText mYearSpinnerInput;
 
-    DatePickerSpinnerDelegate(DatePicker datePicker, Context context, AttributeSet attributeSet, int i, int i2) {
+    DatePickerSpinnerDelegate(DatePicker datePicker, Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(datePicker, context);
         this.mDateFormat = new SimpleDateFormat(DATE_FORMAT);
         this.mIsEnabled = true;
         this.mDelegator = datePicker;
         this.mContext = context;
         setCurrentLocale(Locale.getDefault());
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
-        boolean z = obtainStyledAttributes.getBoolean(6, true);
-        boolean z2 = obtainStyledAttributes.getBoolean(7, true);
-        int i3 = obtainStyledAttributes.getInt(1, 1900);
-        int i4 = obtainStyledAttributes.getInt(2, 2100);
-        String string = obtainStyledAttributes.getString(4);
-        String string2 = obtainStyledAttributes.getString(5);
-        int resourceId = obtainStyledAttributes.getResourceId(20, R.layout.date_picker_legacy);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(6, true);
+        boolean z2 = typedArrayObtainStyledAttributes.getBoolean(7, true);
+        int i3 = typedArrayObtainStyledAttributes.getInt(1, 1900);
+        int i4 = typedArrayObtainStyledAttributes.getInt(2, 2100);
+        String string = typedArrayObtainStyledAttributes.getString(4);
+        String string2 = typedArrayObtainStyledAttributes.getString(5);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(20, R.layout.date_picker_legacy);
+        typedArrayObtainStyledAttributes.recycle();
         ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(resourceId, (ViewGroup) this.mDelegator, true).setSaveFromParentEnabled(false);
         NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener() { // from class: android.widget.DatePickerSpinnerDelegate.1
             @Override // android.widget.NumberPicker.OnValueChangeListener
@@ -135,20 +136,12 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
             setCalendarViewShown(z2);
         }
         this.mTempDate.clear();
-        if (!TextUtils.isEmpty(string)) {
-            if (!parseDate(string, this.mTempDate)) {
-                this.mTempDate.set(i3, 0, 1);
-            }
-        } else {
+        if (TextUtils.isEmpty(string) || !parseDate(string, this.mTempDate)) {
             this.mTempDate.set(i3, 0, 1);
         }
         setMinDate(this.mTempDate.getTimeInMillis());
         this.mTempDate.clear();
-        if (!TextUtils.isEmpty(string2)) {
-            if (!parseDate(string2, this.mTempDate)) {
-                this.mTempDate.set(i4, 11, 31);
-            }
-        } else {
+        if (TextUtils.isEmpty(string2) || !parseDate(string2, this.mTempDate)) {
             this.mTempDate.set(i4, 11, 31);
         }
         setMaxDate(this.mTempDate.getTimeInMillis());
@@ -452,7 +445,7 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
         ((TextView) numberPicker.findViewById(R.id.numberpicker_input)).setImeOptions(i2 < i + (-1) ? 5 : 6);
     }
 
-    private void setContentDescriptions() {
+    private void setContentDescriptions() throws Resources.NotFoundException {
         trySetContentDescription(this.mDaySpinner, R.id.increment, R.string.date_picker_increment_day_button);
         trySetContentDescription(this.mDaySpinner, R.id.decrement, R.string.date_picker_decrement_day_button);
         trySetContentDescription(this.mMonthSpinner, R.id.increment, R.string.date_picker_increment_month_button);
@@ -461,10 +454,10 @@ class DatePickerSpinnerDelegate extends DatePicker.AbstractDatePickerDelegate {
         trySetContentDescription(this.mYearSpinner, R.id.decrement, R.string.date_picker_decrement_year_button);
     }
 
-    private void trySetContentDescription(View view, int i, int i2) {
-        View findViewById = view.findViewById(i);
-        if (findViewById != null) {
-            findViewById.setContentDescription(this.mContext.getString(i2));
+    private void trySetContentDescription(View view, int i, int i2) throws Resources.NotFoundException {
+        View viewFindViewById = view.findViewById(i);
+        if (viewFindViewById != null) {
+            viewFindViewById.setContentDescription(this.mContext.getString(i2));
         }
     }
 

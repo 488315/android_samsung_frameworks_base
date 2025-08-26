@@ -45,9 +45,9 @@ public interface ITextToSpeechSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITextToSpeechSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITextToSpeechSession)) {
-                return (ITextToSpeechSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITextToSpeechSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITextToSpeechSession)) {
+                return (ITextToSpeechSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -98,12 +98,12 @@ public interface ITextToSpeechSession extends IInterface {
 
             @Override // android.speech.tts.ITextToSpeechSession
             public void disconnect() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITextToSpeechSession.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITextToSpeechSession.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

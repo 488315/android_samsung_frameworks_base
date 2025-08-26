@@ -152,9 +152,9 @@ public interface ISemRemoteContentManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemRemoteContentManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemRemoteContentManager)) {
-                return (ISemRemoteContentManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemRemoteContentManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemRemoteContentManager)) {
+                return (ISemRemoteContentManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -210,10 +210,10 @@ public interface ISemRemoteContentManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IRCPInterface asInterface = IRCPInterface.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    IRCPInterface iRCPInterfaceAsInterface = IRCPInterface.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerRCPInterface(asInterface, readInt);
+                    registerRCPInterface(iRCPInterfaceAsInterface, i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -222,115 +222,115 @@ public interface ISemRemoteContentManager extends IInterface {
                     parcel2.writeStrongInterface(rCPInterface);
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int moveFile = moveFile(readInt2, readString, readInt3, readString2);
+                    int iMoveFile = moveFile(i4, string, i5, string2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(moveFile);
+                    parcel2.writeInt(iMoveFile);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int copyFileInternal = copyFileInternal(readInt4, readString3, readInt5, readString4);
+                    int iCopyFileInternal = copyFileInternal(i6, string3, i7, string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(copyFileInternal);
+                    parcel2.writeInt(iCopyFileInternal);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int copyFile = copyFile(readInt6, readString5, readInt7, readString6);
+                    int iCopyFile = copyFile(i8, string5, i9, string6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(copyFile);
+                    parcel2.writeInt(iCopyFile);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long moveUnlimitedFiles = moveUnlimitedFiles(readInt8, uri, readInt9, readInt10);
+                    long jMoveUnlimitedFiles = moveUnlimitedFiles(i10, uri, i11, i12);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveUnlimitedFiles);
+                    parcel2.writeLong(jMoveUnlimitedFiles);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isFileExist = isFileExist(readString7, readInt11);
+                    boolean zIsFileExist = isFileExist(string7, i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFileExist);
+                    parcel2.writeBoolean(zIsFileExist);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
-                    int readInt12 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> files = getFiles(readString8, readInt12);
+                    List<String> files = getFiles(string8, i14);
                     parcel2.writeNoException();
                     parcel2.writeStringList(files);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean deleteFile = deleteFile(readString9, readInt13);
+                    boolean zDeleteFile = deleteFile(string9, i15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteFile);
+                    parcel2.writeBoolean(zDeleteFile);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle fileInfo = getFileInfo(readString10, readInt14);
+                    Bundle fileInfo = getFileInfo(string10, i16);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(fileInfo, 1);
                     return true;
                 case 11:
-                    int readInt15 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    int readInt16 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    int readInt17 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i17 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    long j = parcel.readLong();
+                    int i19 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int copyChunks = copyChunks(readInt15, readString11, readInt16, readString12, readLong, readInt17, readLong2, readBoolean);
+                    int iCopyChunks = copyChunks(i17, string11, i18, string12, j, i19, j2, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(copyChunks);
+                    parcel2.writeInt(iCopyChunks);
                     return true;
                 case 12:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelCopyChunks(readLong3);
+                    cancelCopyChunks(j3);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
-                    int readInt18 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    int i20 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle exchangeData = exchangeData(readString13, readInt18, bundle);
+                    Bundle bundleExchangeData = exchangeData(string13, i20, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(exchangeData, 1);
+                    parcel2.writeTypedObject(bundleExchangeData, 1);
                     return true;
                 case 14:
-                    int readInt19 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    int readInt20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long moveFilesForAppEx = moveFilesForAppEx(readInt19, createStringArrayList, createStringArrayList2, readInt20);
+                    long jMoveFilesForAppEx = moveFilesForAppEx(i21, arrayListCreateStringArrayList, arrayListCreateStringArrayList2, i22);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveFilesForAppEx);
+                    parcel2.writeLong(jMoveFilesForAppEx);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -355,251 +355,251 @@ public interface ISemRemoteContentManager extends IInterface {
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public void registerRCPInterface(IRCPInterface iRCPInterface, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRCPInterface);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRCPInterface);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public IRCPInterface getRCPInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IRCPInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IRCPInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public int moveFile(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public int copyFileInternal(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public int copyFile(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public long moveUnlimitedFiles(int i, Uri uri, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public boolean isFileExist(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public List<String> getFiles(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public boolean deleteFile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public Bundle getFileInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public int copyChunks(int i, String str, int i2, String str2, long j, int i3, long j2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public void cancelCopyChunks(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public Bundle exchangeData(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
             public long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

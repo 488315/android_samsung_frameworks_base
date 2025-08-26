@@ -36,13 +36,13 @@ public final class CdmaSmsWriteArgs {
 
     public static final ArrayList<CdmaSmsWriteArgs> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaSmsWriteArgs> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaSmsWriteArgs cdmaSmsWriteArgs = new CdmaSmsWriteArgs();
-            cdmaSmsWriteArgs.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 96);
+            cdmaSmsWriteArgs.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 96);
             arrayList.add(cdmaSmsWriteArgs);
         }
         return arrayList;

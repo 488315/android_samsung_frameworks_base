@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternalKeyboardShortcutInfo {
     public final char baseCharacter;
@@ -36,9 +35,9 @@ public final class InternalKeyboardShortcutInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (Character.hashCode(this.baseCharacter) + ReorderTile$$ExternalSyntheticOutline0.m(this.modifiers, ReorderTile$$ExternalSyntheticOutline0.m(this.keycode, this.label.hashCode() * 31, 31), 31)) * 31;
+        int iHashCode = (Character.hashCode(this.baseCharacter) + ReorderTile$$ExternalSyntheticOutline0.m(this.modifiers, ReorderTile$$ExternalSyntheticOutline0.m(this.keycode, this.label.hashCode() * 31, 31), 31)) * 31;
         Icon icon = this.icon;
-        return Boolean.hashCode(this.isCustomShortcut) + ((hashCode + (icon == null ? 0 : icon.hashCode())) * 31);
+        return Boolean.hashCode(this.isCustomShortcut) + ((iHashCode + (icon == null ? 0 : icon.hashCode())) * 31);
     }
 
     public final String toString() {

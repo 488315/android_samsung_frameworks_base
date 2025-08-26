@@ -201,9 +201,9 @@ public class SemGfxImageFilter {
 
     @Deprecated(forRemoval = true, since = "17.0")
     public Bitmap applyToBitmap(Bitmap bitmap) {
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        applyToBitmap(bitmap, createBitmap);
-        return createBitmap;
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        applyToBitmap(bitmap, bitmapCreateBitmap);
+        return bitmapCreateBitmap;
     }
 
     public void applyToBitmap(Bitmap bitmap, Bitmap bitmap2) {

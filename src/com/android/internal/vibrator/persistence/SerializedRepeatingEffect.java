@@ -1,9 +1,12 @@
 package com.android.internal.vibrator.persistence;
 
 import android.os.VibrationEffect;
+import com.android.internal.vibrator.persistence.SerializedBasicEnvelopeEffect;
 import com.android.internal.vibrator.persistence.SerializedComposedEffect;
 import com.android.internal.vibrator.persistence.SerializedCompositionPrimitive;
+import com.android.internal.vibrator.persistence.SerializedPredefinedEffect;
 import com.android.internal.vibrator.persistence.SerializedWaveformEffectEntries;
+import com.android.internal.vibrator.persistence.SerializedWaveformEnvelopeEffect;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import java.io.IOException;
@@ -75,17 +78,17 @@ public class SerializedRepeatingEffect implements SerializedComposedEffect.Seria
         Parser() {
         }
 
-        static SerializedRepeatingEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws XmlParserException, IOException {
+        static SerializedRepeatingEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_REPEATING_EFFECT);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, new String[0]);
             Builder builder = new Builder();
             int depth = typedXmlPullParser.getDepth();
-            boolean readNextTagWithin = XmlReader.readNextTagWithin(typedXmlPullParser, depth);
-            if (readNextTagWithin && XmlConstants.TAG_PREAMBLE.equals(typedXmlPullParser.getName())) {
+            boolean nextTagWithin = XmlReader.readNextTagWithin(typedXmlPullParser, depth);
+            if (nextTagWithin && XmlConstants.TAG_PREAMBLE.equals(typedXmlPullParser.getName())) {
                 builder.setPreamble(parseEffect(typedXmlPullParser, XmlConstants.TAG_PREAMBLE, i));
-                readNextTagWithin = XmlReader.readNextTagWithin(typedXmlPullParser, depth);
+                nextTagWithin = XmlReader.readNextTagWithin(typedXmlPullParser, depth);
             }
-            XmlValidator.checkParserCondition(readNextTagWithin, "Missing %s tag in %s", XmlConstants.TAG_REPEATING, XmlConstants.TAG_REPEATING_EFFECT);
+            XmlValidator.checkParserCondition(nextTagWithin, "Missing %s tag in %s", XmlConstants.TAG_REPEATING, XmlConstants.TAG_REPEATING_EFFECT);
             builder.setRepeating(parseEffect(typedXmlPullParser, XmlConstants.TAG_REPEATING, i));
             XmlValidator.checkParserCondition(builder.hasRepeatingSegment(), "Unexpected %s tag with no repeating segment", XmlConstants.TAG_REPEATING_EFFECT);
             XmlReader.readEndTag(typedXmlPullParser, XmlConstants.TAG_REPEATING_EFFECT, depth);
@@ -93,127 +96,80 @@ public class SerializedRepeatingEffect implements SerializedComposedEffect.Seria
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Code restructure failed: missing block: B:29:0x0061, code lost:
-        
-            if (r2.equals(com.android.internal.vibrator.persistence.XmlConstants.TAG_BASIC_ENVELOPE_EFFECT) == false) goto L4;
-         */
+        /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+        /* JADX WARN: Removed duplicated region for block: B:4:0x0029  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private static com.android.internal.vibrator.persistence.SerializedComposedEffect parseEffect(com.android.modules.utils.TypedXmlPullParser r5, java.lang.String r6, int r7) throws com.android.internal.vibrator.persistence.XmlParserException, java.io.IOException {
-            /*
-                com.android.internal.vibrator.persistence.XmlValidator.checkStartTag(r5, r6)
-                r0 = 0
-                java.lang.String[] r1 = new java.lang.String[r0]
-                com.android.internal.vibrator.persistence.XmlValidator.checkTagHasNoUnexpectedAttributes(r5, r1)
-                int r1 = r5.getDepth()
-                boolean r2 = com.android.internal.vibrator.persistence.XmlReader.readNextTagWithin(r5, r1)
-                java.lang.String r3 = "Unsupported empty %s tag"
-                java.lang.Object[] r4 = new java.lang.Object[]{r6}
-                com.android.internal.vibrator.persistence.XmlValidator.checkParserCondition(r2, r3, r4)
-                java.lang.String r2 = r5.getName()
-                r2.hashCode()
-                int r3 = r2.hashCode()
-                r4 = -1
-                switch(r3) {
-                    case -2119736689: goto L5b;
-                    case -1327271112: goto L4f;
-                    case 149296439: goto L43;
-                    case 1239288734: goto L37;
-                    case 1638168034: goto L2b;
-                    default: goto L29;
-                }
-            L29:
-                r0 = r4
-                goto L64
-            L2b:
-                java.lang.String r0 = "waveform-entry"
-                boolean r0 = r2.equals(r0)
-                if (r0 != 0) goto L35
-                goto L29
-            L35:
-                r0 = 4
-                goto L64
-            L37:
-                java.lang.String r0 = "waveform-envelope-effect"
-                boolean r0 = r2.equals(r0)
-                if (r0 != 0) goto L41
-                goto L29
-            L41:
-                r0 = 3
-                goto L64
-            L43:
-                java.lang.String r0 = "primitive-effect"
-                boolean r0 = r2.equals(r0)
-                if (r0 != 0) goto L4d
-                goto L29
-            L4d:
-                r0 = 2
-                goto L64
-            L4f:
-                java.lang.String r0 = "predefined-effect"
-                boolean r0 = r2.equals(r0)
-                if (r0 != 0) goto L59
-                goto L29
-            L59:
-                r0 = 1
-                goto L64
-            L5b:
-                java.lang.String r3 = "basic-envelope-effect"
-                boolean r2 = r2.equals(r3)
-                if (r2 != 0) goto L64
-                goto L29
-            L64:
-                switch(r0) {
-                    case 0: goto La6;
-                    case 1: goto L9b;
-                    case 2: goto L96;
-                    case 3: goto L8c;
-                    case 4: goto L87;
-                    default: goto L67;
-                }
-            L67:
-                com.android.internal.vibrator.persistence.XmlParserException r7 = new com.android.internal.vibrator.persistence.XmlParserException
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "Unexpected tag "
-                r0.<init>(r1)
-                java.lang.String r5 = r5.getName()
-                r0.append(r5)
-                java.lang.String r5 = " in vibration tag "
-                r0.append(r5)
-                r0.append(r6)
-                java.lang.String r5 = r0.toString()
-                r7.<init>(r5)
-                throw r7
-            L87:
-                com.android.internal.vibrator.persistence.SerializedComposedEffect r7 = parseWaveformEntries(r5, r1)
-                goto Lb0
-            L8c:
-                com.android.internal.vibrator.persistence.SerializedComposedEffect r0 = new com.android.internal.vibrator.persistence.SerializedComposedEffect
-                com.android.internal.vibrator.persistence.SerializedWaveformEnvelopeEffect r7 = com.android.internal.vibrator.persistence.SerializedWaveformEnvelopeEffect.Parser.parseNext(r5, r7)
-                r0.<init>(r7)
-                goto La4
-            L96:
-                com.android.internal.vibrator.persistence.SerializedComposedEffect r7 = parsePrimitiveEffects(r5, r1)
-                goto Lb0
-            L9b:
-                com.android.internal.vibrator.persistence.SerializedComposedEffect r0 = new com.android.internal.vibrator.persistence.SerializedComposedEffect
-                com.android.internal.vibrator.persistence.SerializedPredefinedEffect r7 = com.android.internal.vibrator.persistence.SerializedPredefinedEffect.Parser.parseNext(r5, r7)
-                r0.<init>(r7)
-            La4:
-                r7 = r0
-                goto Lb0
-            La6:
-                com.android.internal.vibrator.persistence.SerializedComposedEffect r0 = new com.android.internal.vibrator.persistence.SerializedComposedEffect
-                com.android.internal.vibrator.persistence.SerializedBasicEnvelopeEffect r7 = com.android.internal.vibrator.persistence.SerializedBasicEnvelopeEffect.Parser.parseNext(r5, r7)
-                r0.<init>(r7)
-                goto La4
-            Lb0:
-                com.android.internal.vibrator.persistence.XmlReader.readEndTag(r5, r6, r1)
-                return r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.vibrator.persistence.SerializedRepeatingEffect.Parser.parseEffect(com.android.modules.utils.TypedXmlPullParser, java.lang.String, int):com.android.internal.vibrator.persistence.SerializedComposedEffect");
+        private static SerializedComposedEffect parseEffect(TypedXmlPullParser typedXmlPullParser, String str, int i) throws IOException, XmlParserException {
+            SerializedComposedEffect serializedComposedEffect;
+            SerializedComposedEffect primitiveEffects;
+            XmlValidator.checkStartTag(typedXmlPullParser, str);
+            char c = 0;
+            XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, new String[0]);
+            int depth = typedXmlPullParser.getDepth();
+            XmlValidator.checkParserCondition(XmlReader.readNextTagWithin(typedXmlPullParser, depth), "Unsupported empty %s tag", str);
+            String name = typedXmlPullParser.getName();
+            name.hashCode();
+            switch (name.hashCode()) {
+                case -2119736689:
+                    if (!name.equals(XmlConstants.TAG_BASIC_ENVELOPE_EFFECT)) {
+                        c = 65535;
+                        break;
+                    }
+                    break;
+                case -1327271112:
+                    if (name.equals(XmlConstants.TAG_PREDEFINED_EFFECT)) {
+                        c = 1;
+                        break;
+                    }
+                    break;
+                case 149296439:
+                    if (name.equals(XmlConstants.TAG_PRIMITIVE_EFFECT)) {
+                        c = 2;
+                        break;
+                    }
+                    break;
+                case 1239288734:
+                    if (name.equals(XmlConstants.TAG_WAVEFORM_ENVELOPE_EFFECT)) {
+                        c = 3;
+                        break;
+                    }
+                    break;
+                case 1638168034:
+                    if (name.equals(XmlConstants.TAG_WAVEFORM_ENTRY)) {
+                        c = 4;
+                        break;
+                    }
+                    break;
+            }
+            switch (c) {
+                case 0:
+                    serializedComposedEffect = new SerializedComposedEffect(SerializedBasicEnvelopeEffect.Parser.parseNext(typedXmlPullParser, i));
+                    primitiveEffects = serializedComposedEffect;
+                    XmlReader.readEndTag(typedXmlPullParser, str, depth);
+                    return primitiveEffects;
+                case 1:
+                    serializedComposedEffect = new SerializedComposedEffect(SerializedPredefinedEffect.Parser.parseNext(typedXmlPullParser, i));
+                    primitiveEffects = serializedComposedEffect;
+                    XmlReader.readEndTag(typedXmlPullParser, str, depth);
+                    return primitiveEffects;
+                case 2:
+                    primitiveEffects = parsePrimitiveEffects(typedXmlPullParser, depth);
+                    XmlReader.readEndTag(typedXmlPullParser, str, depth);
+                    return primitiveEffects;
+                case 3:
+                    serializedComposedEffect = new SerializedComposedEffect(SerializedWaveformEnvelopeEffect.Parser.parseNext(typedXmlPullParser, i));
+                    primitiveEffects = serializedComposedEffect;
+                    XmlReader.readEndTag(typedXmlPullParser, str, depth);
+                    return primitiveEffects;
+                case 4:
+                    primitiveEffects = parseWaveformEntries(typedXmlPullParser, depth);
+                    XmlReader.readEndTag(typedXmlPullParser, str, depth);
+                    return primitiveEffects;
+                default:
+                    throw new XmlParserException("Unexpected tag " + typedXmlPullParser.getName() + " in vibration tag " + str);
+            }
         }
 
         private static SerializedComposedEffect parsePrimitiveEffects(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {

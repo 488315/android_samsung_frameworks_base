@@ -12,7 +12,6 @@ import android.view.View;
 import androidx.core.graphics.ColorUtils;
 import com.android.systemui.surfaceeffects.ripple.RippleShader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RippleView extends View {
     public final ValueAnimator animator;
@@ -124,27 +123,27 @@ public class RippleView extends View {
             return;
         }
         this.animator.setDuration(this.duration);
-        this.animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.ripple.RippleView$startRipple$1
+        this.animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.ripple.RippleView.startRipple.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 RippleShader rippleShader = RippleView.this.rippleShader;
                 if (rippleShader == null) {
                     rippleShader = null;
                 }
-                rippleShader.setRawProgress(floatValue);
+                rippleShader.setRawProgress(fFloatValue);
                 RippleShader rippleShader2 = RippleView.this.rippleShader;
                 if (rippleShader2 == null) {
                     rippleShader2 = null;
                 }
-                rippleShader2.setDistortionStrength(1 - floatValue);
+                rippleShader2.setDistortionStrength(1 - fFloatValue);
                 RippleShader rippleShader3 = RippleView.this.rippleShader;
                 (rippleShader3 != null ? rippleShader3 : null).setFloatUniform("in_time", currentPlayTime);
                 RippleView.this.invalidate();
             }
         });
-        this.animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.ripple.RippleView$startRipple$2
+        this.animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.ripple.RippleView.startRipple.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 Runnable runnable2 = runnable;

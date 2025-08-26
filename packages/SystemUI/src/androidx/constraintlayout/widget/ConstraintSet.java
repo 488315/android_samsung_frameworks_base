@@ -31,17 +31,18 @@ import com.sec.ims.settings.ImsProfile;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ConstraintSet {
     private static final int ALPHA = 43;
@@ -198,7 +199,6 @@ public class ConstraintSet {
     private boolean mForceId = true;
     private HashMap<Integer, Constraint> mConstraints = new HashMap<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Constraint {
         Delta mDelta;
         String mTargetString;
@@ -398,7 +398,7 @@ public class ConstraintSet {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public Constraint m889clone() {
+        public Constraint m891clone() {
             Constraint constraint = new Constraint();
             constraint.layout.copyFrom(this.layout);
             constraint.motion.copyFrom(this.motion);
@@ -409,7 +409,6 @@ public class ConstraintSet {
             return constraint;
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Delta {
             private static final int INITIAL_BOOLEAN = 4;
             private static final int INITIAL_FLOAT = 10;
@@ -547,7 +546,6 @@ public class ConstraintSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Layout {
         private static final int BARRIER_ALLOWS_GONE_WIDGETS = 75;
         private static final int BARRIER_DIRECTION = 72;
@@ -848,7 +846,7 @@ public class ConstraintSet {
             this.mWrapBehavior = layout.mWrapBehavior;
         }
 
-        public void dump(MotionScene motionScene, StringBuilder sb) {
+        public void dump(MotionScene motionScene, StringBuilder sb) throws IllegalAccessException, IllegalArgumentException {
             Field[] declaredFields = getClass().getDeclaredFields();
             sb.append("\n");
             for (Field field : declaredFields) {
@@ -860,11 +858,11 @@ public class ConstraintSet {
                         if (type == Integer.TYPE) {
                             Integer num = (Integer) obj;
                             if (num.intValue() != -1) {
-                                Object lookUpConstraintName = motionScene.lookUpConstraintName(num.intValue());
+                                Object objLookUpConstraintName = motionScene.lookUpConstraintName(num.intValue());
                                 sb.append("    ");
                                 sb.append(name);
                                 sb.append(" = \"");
-                                sb.append(lookUpConstraintName == null ? num : lookUpConstraintName);
+                                sb.append(objLookUpConstraintName == null ? num : objLookUpConstraintName);
                                 sb.append("\"\n");
                             }
                         } else if (type == Float.TYPE) {
@@ -885,217 +883,217 @@ public class ConstraintSet {
         }
 
         public void fillFromAttributeList(Context context, AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Layout);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Layout);
             this.mApply = true;
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 int i2 = sMapToConstant.get(index);
                 switch (i2) {
                     case 1:
-                        this.baselineToBaseline = ConstraintSet.lookupID(obtainStyledAttributes, index, this.baselineToBaseline);
+                        this.baselineToBaseline = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.baselineToBaseline);
                         break;
                     case 2:
-                        this.bottomMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.bottomMargin);
+                        this.bottomMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.bottomMargin);
                         break;
                     case 3:
-                        this.bottomToBottom = ConstraintSet.lookupID(obtainStyledAttributes, index, this.bottomToBottom);
+                        this.bottomToBottom = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.bottomToBottom);
                         break;
                     case 4:
-                        this.bottomToTop = ConstraintSet.lookupID(obtainStyledAttributes, index, this.bottomToTop);
+                        this.bottomToTop = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.bottomToTop);
                         break;
                     case 5:
-                        this.dimensionRatio = obtainStyledAttributes.getString(index);
+                        this.dimensionRatio = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     case 6:
-                        this.editorAbsoluteX = obtainStyledAttributes.getDimensionPixelOffset(index, this.editorAbsoluteX);
+                        this.editorAbsoluteX = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, this.editorAbsoluteX);
                         break;
                     case 7:
-                        this.editorAbsoluteY = obtainStyledAttributes.getDimensionPixelOffset(index, this.editorAbsoluteY);
+                        this.editorAbsoluteY = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, this.editorAbsoluteY);
                         break;
                     case 8:
-                        this.endMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.endMargin);
+                        this.endMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.endMargin);
                         break;
                     case 9:
-                        this.endToEnd = ConstraintSet.lookupID(obtainStyledAttributes, index, this.endToEnd);
+                        this.endToEnd = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.endToEnd);
                         break;
                     case 10:
-                        this.endToStart = ConstraintSet.lookupID(obtainStyledAttributes, index, this.endToStart);
+                        this.endToStart = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.endToStart);
                         break;
                     case 11:
-                        this.goneBottomMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneBottomMargin);
+                        this.goneBottomMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneBottomMargin);
                         break;
                     case 12:
-                        this.goneEndMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneEndMargin);
+                        this.goneEndMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneEndMargin);
                         break;
                     case 13:
-                        this.goneLeftMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneLeftMargin);
+                        this.goneLeftMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneLeftMargin);
                         break;
                     case 14:
-                        this.goneRightMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneRightMargin);
+                        this.goneRightMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneRightMargin);
                         break;
                     case 15:
-                        this.goneStartMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneStartMargin);
+                        this.goneStartMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneStartMargin);
                         break;
                     case 16:
-                        this.goneTopMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneTopMargin);
+                        this.goneTopMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneTopMargin);
                         break;
                     case 17:
-                        this.guideBegin = obtainStyledAttributes.getDimensionPixelOffset(index, this.guideBegin);
+                        this.guideBegin = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, this.guideBegin);
                         break;
                     case 18:
-                        this.guideEnd = obtainStyledAttributes.getDimensionPixelOffset(index, this.guideEnd);
+                        this.guideEnd = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, this.guideEnd);
                         break;
                     case 19:
-                        this.guidePercent = obtainStyledAttributes.getFloat(index, this.guidePercent);
+                        this.guidePercent = typedArrayObtainStyledAttributes.getFloat(index, this.guidePercent);
                         break;
                     case 20:
-                        this.horizontalBias = obtainStyledAttributes.getFloat(index, this.horizontalBias);
+                        this.horizontalBias = typedArrayObtainStyledAttributes.getFloat(index, this.horizontalBias);
                         break;
                     case 21:
-                        this.mHeight = obtainStyledAttributes.getLayoutDimension(index, this.mHeight);
+                        this.mHeight = typedArrayObtainStyledAttributes.getLayoutDimension(index, this.mHeight);
                         break;
                     case 22:
-                        this.mWidth = obtainStyledAttributes.getLayoutDimension(index, this.mWidth);
+                        this.mWidth = typedArrayObtainStyledAttributes.getLayoutDimension(index, this.mWidth);
                         break;
                     case 23:
-                        this.leftMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.leftMargin);
+                        this.leftMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.leftMargin);
                         break;
                     case 24:
-                        this.leftToLeft = ConstraintSet.lookupID(obtainStyledAttributes, index, this.leftToLeft);
+                        this.leftToLeft = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.leftToLeft);
                         break;
                     case 25:
-                        this.leftToRight = ConstraintSet.lookupID(obtainStyledAttributes, index, this.leftToRight);
+                        this.leftToRight = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.leftToRight);
                         break;
                     case 26:
-                        this.orientation = obtainStyledAttributes.getInt(index, this.orientation);
+                        this.orientation = typedArrayObtainStyledAttributes.getInt(index, this.orientation);
                         break;
                     case 27:
-                        this.rightMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.rightMargin);
+                        this.rightMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.rightMargin);
                         break;
                     case 28:
-                        this.rightToLeft = ConstraintSet.lookupID(obtainStyledAttributes, index, this.rightToLeft);
+                        this.rightToLeft = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.rightToLeft);
                         break;
                     case 29:
-                        this.rightToRight = ConstraintSet.lookupID(obtainStyledAttributes, index, this.rightToRight);
+                        this.rightToRight = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.rightToRight);
                         break;
                     case 30:
-                        this.startMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.startMargin);
+                        this.startMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.startMargin);
                         break;
                     case 31:
-                        this.startToEnd = ConstraintSet.lookupID(obtainStyledAttributes, index, this.startToEnd);
+                        this.startToEnd = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.startToEnd);
                         break;
                     case 32:
-                        this.startToStart = ConstraintSet.lookupID(obtainStyledAttributes, index, this.startToStart);
+                        this.startToStart = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.startToStart);
                         break;
                     case 33:
-                        this.topMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.topMargin);
+                        this.topMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.topMargin);
                         break;
                     case 34:
-                        this.topToBottom = ConstraintSet.lookupID(obtainStyledAttributes, index, this.topToBottom);
+                        this.topToBottom = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.topToBottom);
                         break;
                     case 35:
-                        this.topToTop = ConstraintSet.lookupID(obtainStyledAttributes, index, this.topToTop);
+                        this.topToTop = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.topToTop);
                         break;
                     case 36:
-                        this.verticalBias = obtainStyledAttributes.getFloat(index, this.verticalBias);
+                        this.verticalBias = typedArrayObtainStyledAttributes.getFloat(index, this.verticalBias);
                         break;
                     case 37:
-                        this.horizontalWeight = obtainStyledAttributes.getFloat(index, this.horizontalWeight);
+                        this.horizontalWeight = typedArrayObtainStyledAttributes.getFloat(index, this.horizontalWeight);
                         break;
                     case 38:
-                        this.verticalWeight = obtainStyledAttributes.getFloat(index, this.verticalWeight);
+                        this.verticalWeight = typedArrayObtainStyledAttributes.getFloat(index, this.verticalWeight);
                         break;
                     case 39:
-                        this.horizontalChainStyle = obtainStyledAttributes.getInt(index, this.horizontalChainStyle);
+                        this.horizontalChainStyle = typedArrayObtainStyledAttributes.getInt(index, this.horizontalChainStyle);
                         break;
                     case 40:
-                        this.verticalChainStyle = obtainStyledAttributes.getInt(index, this.verticalChainStyle);
+                        this.verticalChainStyle = typedArrayObtainStyledAttributes.getInt(index, this.verticalChainStyle);
                         break;
                     case 41:
-                        ConstraintSet.parseDimensionConstraints(this, obtainStyledAttributes, index, 0);
+                        ConstraintSet.parseDimensionConstraints(this, typedArrayObtainStyledAttributes, index, 0);
                         break;
                     case 42:
-                        ConstraintSet.parseDimensionConstraints(this, obtainStyledAttributes, index, 1);
+                        ConstraintSet.parseDimensionConstraints(this, typedArrayObtainStyledAttributes, index, 1);
                         break;
                     default:
                         switch (i2) {
                             case 61:
-                                this.circleConstraint = ConstraintSet.lookupID(obtainStyledAttributes, index, this.circleConstraint);
+                                this.circleConstraint = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.circleConstraint);
                                 break;
                             case 62:
-                                this.circleRadius = obtainStyledAttributes.getDimensionPixelSize(index, this.circleRadius);
+                                this.circleRadius = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.circleRadius);
                                 break;
                             case 63:
-                                this.circleAngle = obtainStyledAttributes.getFloat(index, this.circleAngle);
+                                this.circleAngle = typedArrayObtainStyledAttributes.getFloat(index, this.circleAngle);
                                 break;
                             default:
                                 switch (i2) {
                                     case 69:
-                                        this.widthPercent = obtainStyledAttributes.getFloat(index, 1.0f);
+                                        this.widthPercent = typedArrayObtainStyledAttributes.getFloat(index, 1.0f);
                                         break;
                                     case 70:
-                                        this.heightPercent = obtainStyledAttributes.getFloat(index, 1.0f);
+                                        this.heightPercent = typedArrayObtainStyledAttributes.getFloat(index, 1.0f);
                                         break;
                                     case 71:
                                         Log.e(ConstraintSet.TAG, "CURRENTLY UNSUPPORTED");
                                         break;
                                     case 72:
-                                        this.mBarrierDirection = obtainStyledAttributes.getInt(index, this.mBarrierDirection);
+                                        this.mBarrierDirection = typedArrayObtainStyledAttributes.getInt(index, this.mBarrierDirection);
                                         break;
                                     case 73:
-                                        this.mBarrierMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.mBarrierMargin);
+                                        this.mBarrierMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.mBarrierMargin);
                                         break;
                                     case 74:
-                                        this.mReferenceIdString = obtainStyledAttributes.getString(index);
+                                        this.mReferenceIdString = typedArrayObtainStyledAttributes.getString(index);
                                         break;
                                     case 75:
-                                        this.mBarrierAllowsGoneWidgets = obtainStyledAttributes.getBoolean(index, this.mBarrierAllowsGoneWidgets);
+                                        this.mBarrierAllowsGoneWidgets = typedArrayObtainStyledAttributes.getBoolean(index, this.mBarrierAllowsGoneWidgets);
                                         break;
                                     case 76:
-                                        this.mWrapBehavior = obtainStyledAttributes.getInt(index, this.mWrapBehavior);
+                                        this.mWrapBehavior = typedArrayObtainStyledAttributes.getInt(index, this.mWrapBehavior);
                                         break;
                                     case 77:
-                                        this.baselineToTop = ConstraintSet.lookupID(obtainStyledAttributes, index, this.baselineToTop);
+                                        this.baselineToTop = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.baselineToTop);
                                         break;
                                     case 78:
-                                        this.baselineToBottom = ConstraintSet.lookupID(obtainStyledAttributes, index, this.baselineToBottom);
+                                        this.baselineToBottom = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.baselineToBottom);
                                         break;
                                     case 79:
-                                        this.goneBaselineMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.goneBaselineMargin);
+                                        this.goneBaselineMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.goneBaselineMargin);
                                         break;
                                     case 80:
-                                        this.baselineMargin = obtainStyledAttributes.getDimensionPixelSize(index, this.baselineMargin);
+                                        this.baselineMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.baselineMargin);
                                         break;
                                     case 81:
-                                        this.widthDefault = obtainStyledAttributes.getInt(index, this.widthDefault);
+                                        this.widthDefault = typedArrayObtainStyledAttributes.getInt(index, this.widthDefault);
                                         break;
                                     case 82:
-                                        this.heightDefault = obtainStyledAttributes.getInt(index, this.heightDefault);
+                                        this.heightDefault = typedArrayObtainStyledAttributes.getInt(index, this.heightDefault);
                                         break;
                                     case 83:
-                                        this.heightMax = obtainStyledAttributes.getDimensionPixelSize(index, this.heightMax);
+                                        this.heightMax = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.heightMax);
                                         break;
                                     case 84:
-                                        this.widthMax = obtainStyledAttributes.getDimensionPixelSize(index, this.widthMax);
+                                        this.widthMax = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.widthMax);
                                         break;
                                     case 85:
-                                        this.heightMin = obtainStyledAttributes.getDimensionPixelSize(index, this.heightMin);
+                                        this.heightMin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.heightMin);
                                         break;
                                     case 86:
-                                        this.widthMin = obtainStyledAttributes.getDimensionPixelSize(index, this.widthMin);
+                                        this.widthMin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, this.widthMin);
                                         break;
                                     case 87:
-                                        this.constrainedWidth = obtainStyledAttributes.getBoolean(index, this.constrainedWidth);
+                                        this.constrainedWidth = typedArrayObtainStyledAttributes.getBoolean(index, this.constrainedWidth);
                                         break;
                                     case 88:
-                                        this.constrainedHeight = obtainStyledAttributes.getBoolean(index, this.constrainedHeight);
+                                        this.constrainedHeight = typedArrayObtainStyledAttributes.getBoolean(index, this.constrainedHeight);
                                         break;
                                     case 89:
-                                        this.mConstraintTag = obtainStyledAttributes.getString(index);
+                                        this.mConstraintTag = typedArrayObtainStyledAttributes.getString(index);
                                         break;
                                     case 90:
-                                        this.guidelineUseRtl = obtainStyledAttributes.getBoolean(index, this.guidelineUseRtl);
+                                        this.guidelineUseRtl = typedArrayObtainStyledAttributes.getBoolean(index, this.guidelineUseRtl);
                                         break;
                                     case 91:
                                         Log.w(ConstraintSet.TAG, "unused attribute 0x" + Integer.toHexString(index) + "   " + sMapToConstant.get(index));
@@ -1107,11 +1105,10 @@ public class ConstraintSet {
                         }
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Motion {
         private static final int ANIMATE_CIRCLE_ANGLE_TO = 6;
         private static final int ANIMATE_RELATIVE_TO = 5;
@@ -1169,48 +1166,48 @@ public class ConstraintSet {
         }
 
         public void fillFromAttributeList(Context context, AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Motion);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Motion);
             this.mApply = true;
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 switch (sMapToConstant.get(index)) {
                     case 1:
-                        this.mPathRotate = obtainStyledAttributes.getFloat(index, this.mPathRotate);
+                        this.mPathRotate = typedArrayObtainStyledAttributes.getFloat(index, this.mPathRotate);
                         break;
                     case 2:
-                        this.mPathMotionArc = obtainStyledAttributes.getInt(index, this.mPathMotionArc);
+                        this.mPathMotionArc = typedArrayObtainStyledAttributes.getInt(index, this.mPathMotionArc);
                         break;
                     case 3:
-                        if (obtainStyledAttributes.peekValue(index).type == 3) {
-                            this.mTransitionEasing = obtainStyledAttributes.getString(index);
+                        if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                            this.mTransitionEasing = typedArrayObtainStyledAttributes.getString(index);
                             break;
                         } else {
-                            this.mTransitionEasing = Easing.NAMED_EASING[obtainStyledAttributes.getInteger(index, 0)];
+                            this.mTransitionEasing = Easing.NAMED_EASING[typedArrayObtainStyledAttributes.getInteger(index, 0)];
                             break;
                         }
                     case 4:
-                        this.mDrawPath = obtainStyledAttributes.getInt(index, 0);
+                        this.mDrawPath = typedArrayObtainStyledAttributes.getInt(index, 0);
                         break;
                     case 5:
-                        this.mAnimateRelativeTo = ConstraintSet.lookupID(obtainStyledAttributes, index, this.mAnimateRelativeTo);
+                        this.mAnimateRelativeTo = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.mAnimateRelativeTo);
                         break;
                     case 6:
-                        this.mAnimateCircleAngleTo = obtainStyledAttributes.getInteger(index, this.mAnimateCircleAngleTo);
+                        this.mAnimateCircleAngleTo = typedArrayObtainStyledAttributes.getInteger(index, this.mAnimateCircleAngleTo);
                         break;
                     case 7:
-                        this.mMotionStagger = obtainStyledAttributes.getFloat(index, this.mMotionStagger);
+                        this.mMotionStagger = typedArrayObtainStyledAttributes.getFloat(index, this.mMotionStagger);
                         break;
                     case 8:
-                        this.mQuantizeMotionSteps = obtainStyledAttributes.getInteger(index, this.mQuantizeMotionSteps);
+                        this.mQuantizeMotionSteps = typedArrayObtainStyledAttributes.getInteger(index, this.mQuantizeMotionSteps);
                         break;
                     case 9:
-                        this.mQuantizeMotionPhase = obtainStyledAttributes.getFloat(index, this.mQuantizeMotionPhase);
+                        this.mQuantizeMotionPhase = typedArrayObtainStyledAttributes.getFloat(index, this.mQuantizeMotionPhase);
                         break;
                     case 10:
-                        int i2 = obtainStyledAttributes.peekValue(index).type;
+                        int i2 = typedArrayObtainStyledAttributes.peekValue(index).type;
                         if (i2 == 1) {
-                            int resourceId = obtainStyledAttributes.getResourceId(index, -1);
+                            int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, -1);
                             this.mQuantizeInterpolatorID = resourceId;
                             if (resourceId != -1) {
                                 this.mQuantizeInterpolatorType = -2;
@@ -1219,10 +1216,10 @@ public class ConstraintSet {
                                 break;
                             }
                         } else if (i2 == 3) {
-                            String string = obtainStyledAttributes.getString(index);
+                            String string = typedArrayObtainStyledAttributes.getString(index);
                             this.mQuantizeInterpolatorString = string;
                             if (string.indexOf("/") > 0) {
-                                this.mQuantizeInterpolatorID = obtainStyledAttributes.getResourceId(index, -1);
+                                this.mQuantizeInterpolatorID = typedArrayObtainStyledAttributes.getResourceId(index, -1);
                                 this.mQuantizeInterpolatorType = -2;
                                 break;
                             } else {
@@ -1230,16 +1227,15 @@ public class ConstraintSet {
                                 break;
                             }
                         } else {
-                            this.mQuantizeInterpolatorType = obtainStyledAttributes.getInteger(index, this.mQuantizeInterpolatorID);
+                            this.mQuantizeInterpolatorType = typedArrayObtainStyledAttributes.getInteger(index, this.mQuantizeInterpolatorID);
                             break;
                         }
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PropertySet {
         public boolean mApply = false;
         public int visibility = 0;
@@ -1256,27 +1252,26 @@ public class ConstraintSet {
         }
 
         public void fillFromAttributeList(Context context, AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PropertySet);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PropertySet);
             this.mApply = true;
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.PropertySet_android_alpha) {
-                    this.alpha = obtainStyledAttributes.getFloat(index, this.alpha);
+                    this.alpha = typedArrayObtainStyledAttributes.getFloat(index, this.alpha);
                 } else if (index == R.styleable.PropertySet_android_visibility) {
-                    this.visibility = obtainStyledAttributes.getInt(index, this.visibility);
+                    this.visibility = typedArrayObtainStyledAttributes.getInt(index, this.visibility);
                     this.visibility = ConstraintSet.VISIBILITY_FLAGS[this.visibility];
                 } else if (index == R.styleable.PropertySet_visibilityMode) {
-                    this.mVisibilityMode = obtainStyledAttributes.getInt(index, this.mVisibilityMode);
+                    this.mVisibilityMode = typedArrayObtainStyledAttributes.getInt(index, this.mVisibilityMode);
                 } else if (index == R.styleable.PropertySet_motionProgress) {
-                    this.mProgress = obtainStyledAttributes.getFloat(index, this.mProgress);
+                    this.mProgress = typedArrayObtainStyledAttributes.getFloat(index, this.mProgress);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Transform {
         private static final int ELEVATION = 11;
         private static final int ROTATION = 1;
@@ -1341,52 +1336,52 @@ public class ConstraintSet {
         }
 
         public void fillFromAttributeList(Context context, AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Transform);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Transform);
             this.mApply = true;
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 switch (sMapToConstant.get(index)) {
                     case 1:
-                        this.rotation = obtainStyledAttributes.getFloat(index, this.rotation);
+                        this.rotation = typedArrayObtainStyledAttributes.getFloat(index, this.rotation);
                         break;
                     case 2:
-                        this.rotationX = obtainStyledAttributes.getFloat(index, this.rotationX);
+                        this.rotationX = typedArrayObtainStyledAttributes.getFloat(index, this.rotationX);
                         break;
                     case 3:
-                        this.rotationY = obtainStyledAttributes.getFloat(index, this.rotationY);
+                        this.rotationY = typedArrayObtainStyledAttributes.getFloat(index, this.rotationY);
                         break;
                     case 4:
-                        this.scaleX = obtainStyledAttributes.getFloat(index, this.scaleX);
+                        this.scaleX = typedArrayObtainStyledAttributes.getFloat(index, this.scaleX);
                         break;
                     case 5:
-                        this.scaleY = obtainStyledAttributes.getFloat(index, this.scaleY);
+                        this.scaleY = typedArrayObtainStyledAttributes.getFloat(index, this.scaleY);
                         break;
                     case 6:
-                        this.transformPivotX = obtainStyledAttributes.getDimension(index, this.transformPivotX);
+                        this.transformPivotX = typedArrayObtainStyledAttributes.getDimension(index, this.transformPivotX);
                         break;
                     case 7:
-                        this.transformPivotY = obtainStyledAttributes.getDimension(index, this.transformPivotY);
+                        this.transformPivotY = typedArrayObtainStyledAttributes.getDimension(index, this.transformPivotY);
                         break;
                     case 8:
-                        this.translationX = obtainStyledAttributes.getDimension(index, this.translationX);
+                        this.translationX = typedArrayObtainStyledAttributes.getDimension(index, this.translationX);
                         break;
                     case 9:
-                        this.translationY = obtainStyledAttributes.getDimension(index, this.translationY);
+                        this.translationY = typedArrayObtainStyledAttributes.getDimension(index, this.translationY);
                         break;
                     case 10:
-                        this.translationZ = obtainStyledAttributes.getDimension(index, this.translationZ);
+                        this.translationZ = typedArrayObtainStyledAttributes.getDimension(index, this.translationZ);
                         break;
                     case 11:
                         this.applyElevation = true;
-                        this.elevation = obtainStyledAttributes.getDimension(index, this.elevation);
+                        this.elevation = typedArrayObtainStyledAttributes.getDimension(index, this.elevation);
                         break;
                     case 12:
-                        this.transformPivotTarget = ConstraintSet.lookupID(obtainStyledAttributes, index, this.transformPivotTarget);
+                        this.transformPivotTarget = ConstraintSet.lookupID(typedArrayObtainStyledAttributes, index, this.transformPivotTarget);
                         break;
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -1584,47 +1579,47 @@ public class ConstraintSet {
     }
 
     public static Constraint buildDelta(Context context, XmlPullParser xmlPullParser) {
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
         Constraint constraint = new Constraint();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(asAttributeSet, R.styleable.ConstraintOverride);
-        populateOverride(constraint, obtainStyledAttributes);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSetAsAttributeSet, R.styleable.ConstraintOverride);
+        populateOverride(constraint, typedArrayObtainStyledAttributes);
+        typedArrayObtainStyledAttributes.recycle();
         return constraint;
     }
 
-    private int[] convertReferenceString(View view, String str) {
-        int i;
+    private int[] convertReferenceString(View view, String str) throws IllegalAccessException, IllegalArgumentException {
+        int iIntValue;
         Object designInformation;
-        String[] split = str.split(",");
+        String[] strArrSplit = str.split(",");
         Context context = view.getContext();
-        int[] iArr = new int[split.length];
+        int[] iArr = new int[strArrSplit.length];
+        int i = 0;
         int i2 = 0;
-        int i3 = 0;
-        while (i2 < split.length) {
-            String trim = split[i2].trim();
+        while (i < strArrSplit.length) {
+            String strTrim = strArrSplit[i].trim();
             try {
-                i = R.id.class.getField(trim).getInt(null);
+                iIntValue = R.id.class.getField(strTrim).getInt(null);
             } catch (Exception unused) {
-                i = 0;
+                iIntValue = 0;
             }
-            if (i == 0) {
-                i = context.getResources().getIdentifier(trim, "id", context.getPackageName());
+            if (iIntValue == 0) {
+                iIntValue = context.getResources().getIdentifier(strTrim, "id", context.getPackageName());
             }
-            if (i == 0 && view.isInEditMode() && (view.getParent() instanceof ConstraintLayout) && (designInformation = ((ConstraintLayout) view.getParent()).getDesignInformation(0, trim)) != null && (designInformation instanceof Integer)) {
-                i = ((Integer) designInformation).intValue();
+            if (iIntValue == 0 && view.isInEditMode() && (view.getParent() instanceof ConstraintLayout) && (designInformation = ((ConstraintLayout) view.getParent()).getDesignInformation(0, strTrim)) != null && (designInformation instanceof Integer)) {
+                iIntValue = ((Integer) designInformation).intValue();
             }
-            iArr[i3] = i;
+            iArr[i2] = iIntValue;
+            i++;
             i2++;
-            i3++;
         }
-        return i3 != split.length ? Arrays.copyOf(iArr, i3) : iArr;
+        return i2 != strArrSplit.length ? Arrays.copyOf(iArr, i2) : iArr;
     }
 
     private Constraint fillFromAttributeList(Context context, AttributeSet attributeSet, boolean z) {
         Constraint constraint = new Constraint();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, z ? R.styleable.ConstraintOverride : R.styleable.Constraint);
-        populateConstraint(constraint, obtainStyledAttributes, z);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, z ? R.styleable.ConstraintOverride : R.styleable.Constraint);
+        populateConstraint(constraint, typedArrayObtainStyledAttributes, z);
+        typedArrayObtainStyledAttributes.recycle();
         return constraint;
     }
 
@@ -1661,113 +1656,91 @@ public class ConstraintSet {
         return resourceId == -1 ? typedArray.getInt(i, -1) : resourceId;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0042  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0034  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0042  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void parseDimensionConstraints(java.lang.Object r4, android.content.res.TypedArray r5, int r6, int r7) {
-        /*
-            if (r4 != 0) goto L4
-            goto L71
-        L4:
-            android.util.TypedValue r0 = r5.peekValue(r6)
-            int r0 = r0.type
-            r1 = 3
-            if (r0 == r1) goto L72
-            r1 = 5
-            r2 = 0
-            if (r0 == r1) goto L2b
-            int r5 = r5.getInt(r6, r2)
-            r6 = -4
-            r0 = -2
-            if (r5 == r6) goto L27
-            r6 = -3
-            if (r5 == r6) goto L21
-            if (r5 == r0) goto L23
-            r6 = -1
-            if (r5 == r6) goto L23
-        L21:
-            r5 = r2
-            goto L30
-        L23:
-            r3 = r2
-            r2 = r5
-            r5 = r3
-            goto L30
-        L27:
-            r2 = 1
-            r5 = r2
-            r2 = r0
-            goto L30
-        L2b:
-            int r5 = r5.getDimensionPixelSize(r6, r2)
-            goto L23
-        L30:
-            boolean r6 = r4 instanceof androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
-            if (r6 == 0) goto L42
-            androidx.constraintlayout.widget.ConstraintLayout$LayoutParams r4 = (androidx.constraintlayout.widget.ConstraintLayout.LayoutParams) r4
-            if (r7 != 0) goto L3d
-            r4.width = r2
-            r4.constrainedWidth = r5
-            return
-        L3d:
-            r4.height = r2
-            r4.constrainedHeight = r5
-            return
-        L42:
-            boolean r6 = r4 instanceof androidx.constraintlayout.widget.ConstraintSet.Layout
-            if (r6 == 0) goto L54
-            androidx.constraintlayout.widget.ConstraintSet$Layout r4 = (androidx.constraintlayout.widget.ConstraintSet.Layout) r4
-            if (r7 != 0) goto L4f
-            r4.mWidth = r2
-            r4.constrainedWidth = r5
-            return
-        L4f:
-            r4.mHeight = r2
-            r4.constrainedHeight = r5
-            return
-        L54:
-            boolean r6 = r4 instanceof androidx.constraintlayout.widget.ConstraintSet.Constraint.Delta
-            if (r6 == 0) goto L71
-            androidx.constraintlayout.widget.ConstraintSet$Constraint$Delta r4 = (androidx.constraintlayout.widget.ConstraintSet.Constraint.Delta) r4
-            if (r7 != 0) goto L67
-            r6 = 23
-            r4.add(r6, r2)
-            r6 = 80
-            r4.add(r6, r5)
-            return
-        L67:
-            r6 = 21
-            r4.add(r6, r2)
-            r6 = 81
-            r4.add(r6, r5)
-        L71:
-            return
-        L72:
-            java.lang.String r5 = r5.getString(r6)
-            parseDimensionConstraintsString(r4, r5, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.widget.ConstraintSet.parseDimensionConstraints(java.lang.Object, android.content.res.TypedArray, int, int):void");
+    public static void parseDimensionConstraints(Object obj, TypedArray typedArray, int i, int i2) {
+        int dimensionPixelSize;
+        boolean z;
+        if (obj == null) {
+            return;
+        }
+        int i3 = typedArray.peekValue(i).type;
+        if (i3 == 3) {
+            parseDimensionConstraintsString(obj, typedArray.getString(i), i2);
+            return;
+        }
+        int i4 = 0;
+        if (i3 != 5) {
+            dimensionPixelSize = typedArray.getInt(i, 0);
+            if (dimensionPixelSize == -4) {
+                z = true;
+                i4 = -2;
+            } else if (dimensionPixelSize == -3 || (dimensionPixelSize != -2 && dimensionPixelSize != -1)) {
+                z = false;
+            }
+            if (!(obj instanceof ConstraintLayout.LayoutParams)) {
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) obj;
+                if (i2 == 0) {
+                    ((ViewGroup.MarginLayoutParams) layoutParams).width = i4;
+                    layoutParams.constrainedWidth = z;
+                    return;
+                } else {
+                    ((ViewGroup.MarginLayoutParams) layoutParams).height = i4;
+                    layoutParams.constrainedHeight = z;
+                    return;
+                }
+            }
+            if (obj instanceof Layout) {
+                Layout layout = (Layout) obj;
+                if (i2 == 0) {
+                    layout.mWidth = i4;
+                    layout.constrainedWidth = z;
+                    return;
+                } else {
+                    layout.mHeight = i4;
+                    layout.constrainedHeight = z;
+                    return;
+                }
+            }
+            if (obj instanceof Constraint.Delta) {
+                Constraint.Delta delta = (Constraint.Delta) obj;
+                if (i2 == 0) {
+                    delta.add(23, i4);
+                    delta.add(80, z);
+                    return;
+                } else {
+                    delta.add(21, i4);
+                    delta.add(81, z);
+                    return;
+                }
+            }
+            return;
+        }
+        dimensionPixelSize = typedArray.getDimensionPixelSize(i, 0);
+        i4 = dimensionPixelSize;
+        z = false;
+        if (!(obj instanceof ConstraintLayout.LayoutParams)) {
+        }
     }
 
-    public static void parseDimensionConstraintsString(Object obj, String str, int i) {
+    public static void parseDimensionConstraintsString(Object obj, String str, int i) throws NumberFormatException {
         if (str == null) {
             return;
         }
-        int indexOf = str.indexOf(61);
+        int iIndexOf = str.indexOf(61);
         int length = str.length();
-        if (indexOf <= 0 || indexOf >= length - 1) {
+        if (iIndexOf <= 0 || iIndexOf >= length - 1) {
             return;
         }
-        String substring = str.substring(0, indexOf);
-        String substring2 = str.substring(indexOf + 1);
-        if (substring2.length() > 0) {
-            String trim = substring.trim();
-            String trim2 = substring2.trim();
-            if (KEY_RATIO.equalsIgnoreCase(trim)) {
+        String strSubstring = str.substring(0, iIndexOf);
+        String strSubstring2 = str.substring(iIndexOf + 1);
+        if (strSubstring2.length() > 0) {
+            String strTrim = strSubstring.trim();
+            String strTrim2 = strSubstring2.trim();
+            if (KEY_RATIO.equalsIgnoreCase(strTrim)) {
                 if (obj instanceof ConstraintLayout.LayoutParams) {
                     ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) obj;
                     if (i == 0) {
@@ -1775,32 +1748,32 @@ public class ConstraintSet {
                     } else {
                         ((ViewGroup.MarginLayoutParams) layoutParams).height = 0;
                     }
-                    parseDimensionRatioString(layoutParams, trim2);
+                    parseDimensionRatioString(layoutParams, strTrim2);
                     return;
                 }
                 if (obj instanceof Layout) {
-                    ((Layout) obj).dimensionRatio = trim2;
+                    ((Layout) obj).dimensionRatio = strTrim2;
                     return;
                 } else {
                     if (obj instanceof Constraint.Delta) {
-                        ((Constraint.Delta) obj).add(5, trim2);
+                        ((Constraint.Delta) obj).add(5, strTrim2);
                         return;
                     }
                     return;
                 }
             }
             try {
-                if (KEY_WEIGHT.equalsIgnoreCase(trim)) {
-                    float parseFloat = Float.parseFloat(trim2);
+                if (KEY_WEIGHT.equalsIgnoreCase(strTrim)) {
+                    float f = Float.parseFloat(strTrim2);
                     if (obj instanceof ConstraintLayout.LayoutParams) {
                         ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) obj;
                         if (i == 0) {
                             ((ViewGroup.MarginLayoutParams) layoutParams2).width = 0;
-                            layoutParams2.horizontalWeight = parseFloat;
+                            layoutParams2.horizontalWeight = f;
                             return;
                         } else {
                             ((ViewGroup.MarginLayoutParams) layoutParams2).height = 0;
-                            layoutParams2.verticalWeight = parseFloat;
+                            layoutParams2.verticalWeight = f;
                             return;
                         }
                     }
@@ -1808,11 +1781,11 @@ public class ConstraintSet {
                         Layout layout = (Layout) obj;
                         if (i == 0) {
                             layout.mWidth = 0;
-                            layout.horizontalWeight = parseFloat;
+                            layout.horizontalWeight = f;
                             return;
                         } else {
                             layout.mHeight = 0;
-                            layout.verticalWeight = parseFloat;
+                            layout.verticalWeight = f;
                             return;
                         }
                     }
@@ -1820,28 +1793,28 @@ public class ConstraintSet {
                         Constraint.Delta delta = (Constraint.Delta) obj;
                         if (i == 0) {
                             delta.add(23, 0);
-                            delta.add(39, parseFloat);
+                            delta.add(39, f);
                             return;
                         } else {
                             delta.add(21, 0);
-                            delta.add(40, parseFloat);
+                            delta.add(40, f);
                             return;
                         }
                     }
                     return;
                 }
-                if (KEY_PERCENT_PARENT.equalsIgnoreCase(trim)) {
-                    float max = Math.max(0.0f, Math.min(1.0f, Float.parseFloat(trim2)));
+                if (KEY_PERCENT_PARENT.equalsIgnoreCase(strTrim)) {
+                    float fMax = Math.max(0.0f, Math.min(1.0f, Float.parseFloat(strTrim2)));
                     if (obj instanceof ConstraintLayout.LayoutParams) {
                         ConstraintLayout.LayoutParams layoutParams3 = (ConstraintLayout.LayoutParams) obj;
                         if (i == 0) {
                             ((ViewGroup.MarginLayoutParams) layoutParams3).width = 0;
-                            layoutParams3.matchConstraintPercentWidth = max;
+                            layoutParams3.matchConstraintPercentWidth = fMax;
                             layoutParams3.matchConstraintDefaultWidth = 2;
                             return;
                         } else {
                             ((ViewGroup.MarginLayoutParams) layoutParams3).height = 0;
-                            layoutParams3.matchConstraintPercentHeight = max;
+                            layoutParams3.matchConstraintPercentHeight = fMax;
                             layoutParams3.matchConstraintDefaultHeight = 2;
                             return;
                         }
@@ -1850,12 +1823,12 @@ public class ConstraintSet {
                         Layout layout2 = (Layout) obj;
                         if (i == 0) {
                             layout2.mWidth = 0;
-                            layout2.widthPercent = max;
+                            layout2.widthPercent = fMax;
                             layout2.widthDefault = 2;
                             return;
                         } else {
                             layout2.mHeight = 0;
-                            layout2.heightPercent = max;
+                            layout2.heightPercent = fMax;
                             layout2.heightDefault = 2;
                             return;
                         }
@@ -1877,36 +1850,36 @@ public class ConstraintSet {
     }
 
     public static void parseDimensionRatioString(ConstraintLayout.LayoutParams layoutParams, String str) {
-        float f = Float.NaN;
+        float fAbs = Float.NaN;
         int i = -1;
         if (str != null) {
             int length = str.length();
-            int indexOf = str.indexOf(44);
+            int iIndexOf = str.indexOf(44);
             int i2 = 0;
-            if (indexOf > 0 && indexOf < length - 1) {
-                String substring = str.substring(0, indexOf);
-                if (substring.equalsIgnoreCase("W")) {
+            if (iIndexOf > 0 && iIndexOf < length - 1) {
+                String strSubstring = str.substring(0, iIndexOf);
+                if (strSubstring.equalsIgnoreCase("W")) {
                     i = 0;
-                } else if (substring.equalsIgnoreCase(ImsProfile.TIMER_NAME_H)) {
+                } else if (strSubstring.equalsIgnoreCase(ImsProfile.TIMER_NAME_H)) {
                     i = 1;
                 }
-                i2 = indexOf + 1;
+                i2 = iIndexOf + 1;
             }
-            int indexOf2 = str.indexOf(58);
+            int iIndexOf2 = str.indexOf(58);
             try {
-                if (indexOf2 < 0 || indexOf2 >= length - 1) {
-                    String substring2 = str.substring(i2);
-                    if (substring2.length() > 0) {
-                        f = Float.parseFloat(substring2);
+                if (iIndexOf2 < 0 || iIndexOf2 >= length - 1) {
+                    String strSubstring2 = str.substring(i2);
+                    if (strSubstring2.length() > 0) {
+                        fAbs = Float.parseFloat(strSubstring2);
                     }
                 } else {
-                    String substring3 = str.substring(i2, indexOf2);
-                    String substring4 = str.substring(indexOf2 + 1);
-                    if (substring3.length() > 0 && substring4.length() > 0) {
-                        float parseFloat = Float.parseFloat(substring3);
-                        float parseFloat2 = Float.parseFloat(substring4);
-                        if (parseFloat > 0.0f && parseFloat2 > 0.0f) {
-                            f = i == 1 ? Math.abs(parseFloat2 / parseFloat) : Math.abs(parseFloat / parseFloat2);
+                    String strSubstring3 = str.substring(i2, iIndexOf2);
+                    String strSubstring4 = str.substring(iIndexOf2 + 1);
+                    if (strSubstring3.length() > 0 && strSubstring4.length() > 0) {
+                        float f = Float.parseFloat(strSubstring3);
+                        float f2 = Float.parseFloat(strSubstring4);
+                        if (f > 0.0f && f2 > 0.0f) {
+                            fAbs = i == 1 ? Math.abs(f2 / f) : Math.abs(f / f2);
                         }
                     }
                 }
@@ -1914,7 +1887,7 @@ public class ConstraintSet {
             }
         }
         layoutParams.dimensionRatio = str;
-        layoutParams.mDimensionRatioValue = f;
+        layoutParams.mDimensionRatioValue = fAbs;
         layoutParams.mDimensionRatioSide = i;
     }
 
@@ -2854,7 +2827,7 @@ public class ConstraintSet {
         }
     }
 
-    public void applyCustomAttributes(ConstraintLayout constraintLayout) {
+    public void applyCustomAttributes(ConstraintLayout constraintLayout) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Constraint constraint;
         int childCount = constraintLayout.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -3009,17 +2982,17 @@ public class ConstraintSet {
                     }
                     barrier2.setType(constraint2.layout.mBarrierDirection);
                     barrier2.setMargin(constraint2.layout.mBarrierMargin);
-                    ConstraintLayout.LayoutParams generateDefaultLayoutParams = constraintLayout.generateDefaultLayoutParams();
+                    ConstraintLayout.LayoutParams layoutParamsGenerateDefaultLayoutParams = constraintLayout.generateDefaultLayoutParams();
                     barrier2.validateParams();
-                    constraint2.applyTo(generateDefaultLayoutParams);
-                    constraintLayout.addView(barrier2, generateDefaultLayoutParams);
+                    constraint2.applyTo(layoutParamsGenerateDefaultLayoutParams);
+                    constraintLayout.addView(barrier2, layoutParamsGenerateDefaultLayoutParams);
                 }
                 if (constraint2.layout.mIsGuideline) {
                     View guideline = new Guideline(constraintLayout.getContext());
                     guideline.setId(num.intValue());
-                    ConstraintLayout.LayoutParams generateDefaultLayoutParams2 = constraintLayout.generateDefaultLayoutParams();
-                    constraint2.applyTo(generateDefaultLayoutParams2);
-                    constraintLayout.addView(guideline, generateDefaultLayoutParams2);
+                    ConstraintLayout.LayoutParams layoutParamsGenerateDefaultLayoutParams2 = constraintLayout.generateDefaultLayoutParams();
+                    constraint2.applyTo(layoutParamsGenerateDefaultLayoutParams2);
+                    constraintLayout.addView(guideline, layoutParamsGenerateDefaultLayoutParams2);
                 }
             }
         }
@@ -3366,16 +3339,16 @@ public class ConstraintSet {
         connect(iArr[iArr.length - 1], 4, i3, i4, 0);
     }
 
-    public void dump(MotionScene motionScene, int... iArr) {
+    public void dump(MotionScene motionScene, int... iArr) throws IllegalAccessException, IllegalArgumentException {
         HashSet hashSet;
-        Set<Integer> keySet = this.mConstraints.keySet();
+        Set<Integer> setKeySet = this.mConstraints.keySet();
         if (iArr.length != 0) {
             hashSet = new HashSet();
             for (int i : iArr) {
                 hashSet.add(Integer.valueOf(i));
             }
         } else {
-            hashSet = new HashSet(keySet);
+            hashSet = new HashSet(setKeySet);
         }
         System.out.println(hashSet.size() + " constraints");
         StringBuilder sb = new StringBuilder();
@@ -3461,11 +3434,11 @@ public class ConstraintSet {
             for (int eventType = xml.getEventType(); eventType != 1; eventType = xml.next()) {
                 if (eventType == 2) {
                     String name = xml.getName();
-                    Constraint fillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xml), false);
+                    Constraint constraintFillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xml), false);
                     if (name.equalsIgnoreCase("Guideline")) {
-                        fillFromAttributeList.layout.mIsGuideline = true;
+                        constraintFillFromAttributeList.layout.mIsGuideline = true;
                     }
-                    this.mConstraints.put(Integer.valueOf(fillFromAttributeList.mViewId), fillFromAttributeList);
+                    this.mConstraints.put(Integer.valueOf(constraintFillFromAttributeList.mViewId), constraintFillFromAttributeList);
                 }
             }
         } catch (IOException e) {
@@ -3475,87 +3448,70 @@ public class ConstraintSet {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0015, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:8:0x0015, code lost:
     
         r2 = r2 + 1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean matchesLabels(java.lang.String... r9) {
-        /*
-            r8 = this;
-            int r0 = r9.length
-            r1 = 0
-            r2 = r1
-        L3:
-            if (r2 >= r0) goto L1c
-            r3 = r9[r2]
-            java.lang.String[] r4 = r8.mMatchLabels
-            int r5 = r4.length
-            r6 = r1
-        Lb:
-            if (r6 >= r5) goto L1b
-            r7 = r4[r6]
-            boolean r7 = r7.equals(r3)
-            if (r7 == 0) goto L18
-            int r2 = r2 + 1
-            goto L3
-        L18:
-            int r6 = r6 + 1
-            goto Lb
-        L1b:
-            return r1
-        L1c:
-            r8 = 1
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.widget.ConstraintSet.matchesLabels(java.lang.String[]):boolean");
+    public boolean matchesLabels(String... strArr) {
+        int length = strArr.length;
+        int i = 0;
+        while (i < length) {
+            String str = strArr[i];
+            for (String str2 : this.mMatchLabels) {
+                if (str2.equals(str)) {
+                    break;
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     public void parseColorAttributes(Constraint constraint, String str) {
-        String[] split = str.split(",");
-        for (int i = 0; i < split.length; i++) {
-            String[] split2 = split[i].split("=");
-            if (split2.length != 2) {
-                Log.w(TAG, " Unable to parse " + split[i]);
+        String[] strArrSplit = str.split(",");
+        for (int i = 0; i < strArrSplit.length; i++) {
+            String[] strArrSplit2 = strArrSplit[i].split("=");
+            if (strArrSplit2.length != 2) {
+                Log.w(TAG, " Unable to parse " + strArrSplit[i]);
             } else {
-                constraint.setColorValue(split2[0], Color.parseColor(split2[1]));
+                constraint.setColorValue(strArrSplit2[0], Color.parseColor(strArrSplit2[1]));
             }
         }
     }
 
     public void parseFloatAttributes(Constraint constraint, String str) {
-        String[] split = str.split(",");
-        for (int i = 0; i < split.length; i++) {
-            String[] split2 = split[i].split("=");
-            if (split2.length != 2) {
-                Log.w(TAG, " Unable to parse " + split[i]);
+        String[] strArrSplit = str.split(",");
+        for (int i = 0; i < strArrSplit.length; i++) {
+            String[] strArrSplit2 = strArrSplit[i].split("=");
+            if (strArrSplit2.length != 2) {
+                Log.w(TAG, " Unable to parse " + strArrSplit[i]);
             } else {
-                constraint.setFloatValue(split2[0], Float.parseFloat(split2[1]));
+                constraint.setFloatValue(strArrSplit2[0], Float.parseFloat(strArrSplit2[1]));
             }
         }
     }
 
     public void parseIntAttributes(Constraint constraint, String str) {
-        String[] split = str.split(",");
-        for (int i = 0; i < split.length; i++) {
-            String[] split2 = split[i].split("=");
-            if (split2.length != 2) {
-                Log.w(TAG, " Unable to parse " + split[i]);
+        String[] strArrSplit = str.split(",");
+        for (int i = 0; i < strArrSplit.length; i++) {
+            String[] strArrSplit2 = strArrSplit[i].split("=");
+            if (strArrSplit2.length != 2) {
+                Log.w(TAG, " Unable to parse " + strArrSplit[i]);
             } else {
-                constraint.setFloatValue(split2[0], Integer.decode(split2[1]).intValue());
+                constraint.setFloatValue(strArrSplit2[0], Integer.decode(strArrSplit2[1]).intValue());
             }
         }
     }
 
     public void parseStringAttributes(Constraint constraint, String str) {
-        String[] splitString = splitString(str);
-        for (int i = 0; i < splitString.length; i++) {
-            String[] split = splitString[i].split("=");
-            Log.w(TAG, " Unable to parse " + splitString[i]);
-            constraint.setStringValue(split[0], split[1]);
+        String[] strArrSplitString = splitString(str);
+        for (int i = 0; i < strArrSplitString.length; i++) {
+            String[] strArrSplit = strArrSplitString[i].split("=");
+            Log.w(TAG, " Unable to parse " + strArrSplitString[i]);
+            constraint.setStringValue(strArrSplit[0], strArrSplit[1]);
         }
     }
 
@@ -3660,6 +3616,10 @@ public class ConstraintSet {
         constraintSet2.clear(i, 7);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0027  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void removeFromVerticalChain(int i) {
         ConstraintSet constraintSet;
         if (this.mConstraints.containsKey(Integer.valueOf(i))) {
@@ -3688,11 +3648,10 @@ public class ConstraintSet {
                     constraintSet.connect(i2, 4, i3, 3, 0);
                     constraintSet.connect(i3, 3, i2, 4, 0);
                 }
-                constraintSet.clear(i, 3);
-                constraintSet.clear(i, 4);
             }
+        } else {
+            constraintSet = this;
         }
-        constraintSet = this;
         constraintSet.clear(i, 3);
         constraintSet.clear(i, 4);
     }
@@ -4052,12 +4011,11 @@ public class ConstraintSet {
         for (Integer num : constraintSet.mConstraints.keySet()) {
             Constraint constraint = constraintSet.mConstraints.get(num);
             if (constraint != null) {
-                this.mConstraints.put(num, constraint.m889clone());
+                this.mConstraints.put(num, constraint.m891clone());
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class WriteJsonEngine {
         private static final String SPACE = "       ";
         Context mContext;
@@ -4107,18 +4065,18 @@ public class ConstraintSet {
             }
             if (i2 == 0) {
                 Writer writer = this.mWriter;
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i3, SPACE, str, ": {'spread' ,", ", ");
-                m888m.append(i4);
-                m888m.append("}\n");
-                writer.write(m888m.toString());
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i3, SPACE, str, ": {'spread' ,", ", ");
+                sbM890m.append(i4);
+                sbM890m.append("}\n");
+                writer.write(sbM890m.toString());
                 return;
             }
             if (i2 == 1) {
                 Writer writer2 = this.mWriter;
-                StringBuilder m888m2 = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i3, SPACE, str, ": {'wrap' ,", ", ");
-                m888m2.append(i4);
-                m888m2.append("}\n");
-                writer2.write(m888m2.toString());
+                StringBuilder sbM890m2 = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i3, SPACE, str, ": {'wrap' ,", ", ");
+                sbM890m2.append(i4);
+                sbM890m2.append("}\n");
+                writer2.write(sbM890m2.toString());
                 return;
             }
             if (i2 != 2) {
@@ -4141,9 +4099,9 @@ public class ConstraintSet {
             if (i == 0) {
                 return "'parent'";
             }
-            String lookup = lookup(i);
-            this.mIdMap.put(Integer.valueOf(i), lookup);
-            return "'" + lookup + "'";
+            String strLookup = lookup(i);
+            this.mIdMap.put(Integer.valueOf(i), strLookup);
+            return "'" + strLookup + "'";
         }
 
         public String lookup(int i) {
@@ -4386,7 +4344,6 @@ public class ConstraintSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class WriteXmlEngine {
         private static final String SPACE = "\n       ";
         Context mContext;
@@ -4439,10 +4396,10 @@ public class ConstraintSet {
         private void writeEnum(String str, int i, String[] strArr, int i2) throws IOException {
             if (i != i2) {
                 Writer writer = this.mWriter;
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(SPACE, str, "=\"");
-                m.append(strArr[i]);
-                m.append("\"");
-                writer.write(m.toString());
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(SPACE, str, "=\"");
+                sbM.append(strArr[i]);
+                sbM.append("\"");
+                writer.write(sbM.toString());
             }
         }
 
@@ -4453,9 +4410,9 @@ public class ConstraintSet {
             if (i == 0) {
                 return ConstraintSet.KEY_PERCENT_PARENT;
             }
-            String lookup = lookup(i);
-            this.mIdMap.put(Integer.valueOf(i), lookup);
-            return "@+id/" + lookup + "";
+            String strLookup = lookup(i);
+            this.mIdMap.put(Integer.valueOf(i), strLookup);
+            return "@+id/" + strLookup + "";
         }
 
         public String lookup(int i) {
@@ -4648,7 +4605,7 @@ public class ConstraintSet {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:82:0x01d2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:123:0x01d2, code lost:
     
         continue;
      */
@@ -4661,14 +4618,110 @@ public class ConstraintSet {
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void load(android.content.Context r12, org.xmlpull.v1.XmlPullParser r13) {
-        /*
-            Method dump skipped, instructions count: 564
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.widget.ConstraintSet.load(android.content.Context, org.xmlpull.v1.XmlPullParser):void");
+    public void load(Context context, XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+        try {
+            int eventType = xmlPullParser.getEventType();
+            Constraint constraintFillFromAttributeList = null;
+            while (eventType != 1) {
+                if (eventType != 0) {
+                    if (eventType == 2) {
+                        switch (xmlPullParser.getName()) {
+                            case "Constraint":
+                                constraintFillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser), false);
+                                break;
+                            case "ConstraintOverride":
+                                constraintFillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser), true);
+                                break;
+                            case "Guideline":
+                                constraintFillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser), false);
+                                Layout layout = constraintFillFromAttributeList.layout;
+                                layout.mIsGuideline = true;
+                                layout.mApply = true;
+                                break;
+                            case "Barrier":
+                                constraintFillFromAttributeList = fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser), false);
+                                constraintFillFromAttributeList.layout.mHelperType = 1;
+                                break;
+                            case "PropertySet":
+                                if (constraintFillFromAttributeList != null) {
+                                    constraintFillFromAttributeList.propertySet.fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser));
+                                    break;
+                                } else {
+                                    throw new RuntimeException(ERROR_MESSAGE + xmlPullParser.getLineNumber());
+                                }
+                            case "Transform":
+                                if (constraintFillFromAttributeList != null) {
+                                    constraintFillFromAttributeList.transform.fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser));
+                                    break;
+                                } else {
+                                    throw new RuntimeException(ERROR_MESSAGE + xmlPullParser.getLineNumber());
+                                }
+                            case "Layout":
+                                if (constraintFillFromAttributeList != null) {
+                                    constraintFillFromAttributeList.layout.fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser));
+                                    break;
+                                } else {
+                                    throw new RuntimeException(ERROR_MESSAGE + xmlPullParser.getLineNumber());
+                                }
+                            case "Motion":
+                                if (constraintFillFromAttributeList != null) {
+                                    constraintFillFromAttributeList.motion.fillFromAttributeList(context, Xml.asAttributeSet(xmlPullParser));
+                                    break;
+                                } else {
+                                    throw new RuntimeException(ERROR_MESSAGE + xmlPullParser.getLineNumber());
+                                }
+                            case "CustomAttribute":
+                            case "CustomMethod":
+                                if (constraintFillFromAttributeList != null) {
+                                    ConstraintAttribute.parse(context, xmlPullParser, constraintFillFromAttributeList.mCustomConstraints);
+                                    break;
+                                } else {
+                                    throw new RuntimeException(ERROR_MESSAGE + xmlPullParser.getLineNumber());
+                                }
+                        }
+                    } else if (eventType == 3) {
+                        String lowerCase = xmlPullParser.getName().toLowerCase(Locale.ROOT);
+                        switch (lowerCase.hashCode()) {
+                            case -2075718416:
+                                if (lowerCase.equals("guideline")) {
+                                    break;
+                                }
+                                break;
+                            case -190376483:
+                                if (lowerCase.equals("constraint")) {
+                                    break;
+                                }
+                                break;
+                            case 426575017:
+                                if (lowerCase.equals("constraintoverride")) {
+                                    break;
+                                }
+                                break;
+                            case 2146106725:
+                                if (lowerCase.equals("constraintset")) {
+                                    break;
+                                }
+                                break;
+                        }
+                        if (r6 == 0) {
+                            return;
+                        }
+                        if (r6 == 1 || r6 == 2 || r6 == 3) {
+                            this.mConstraints.put(Integer.valueOf(constraintFillFromAttributeList.mViewId), constraintFillFromAttributeList);
+                            constraintFillFromAttributeList = null;
+                        }
+                    }
+                } else {
+                    xmlPullParser.getName();
+                }
+                eventType = xmlPullParser.next();
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Error parsing XML resource", e);
+        } catch (XmlPullParserException e2) {
+            Log.e(TAG, "Error parsing XML resource", e2);
+        }
     }
 
     public void readFallback(ConstraintLayout constraintLayout) {

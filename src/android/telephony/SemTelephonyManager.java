@@ -101,15 +101,15 @@ public class SemTelephonyManager {
         if (context == null) {
             return context2;
         }
-        Context createAttributionContext = !Objects.equals(context2.getAttributionTag(), context.getAttributionTag()) ? context.createAttributionContext(context2.getAttributionTag()) : context;
+        Context contextCreateAttributionContext = !Objects.equals(context2.getAttributionTag(), context.getAttributionTag()) ? context.createAttributionContext(context2.getAttributionTag()) : context;
         Set<String> renouncedPermissions = context2.getAttributionSource().getRenouncedPermissions();
         if (renouncedPermissions.isEmpty()) {
-            return createAttributionContext;
+            return contextCreateAttributionContext;
         }
         if (context.getParams() != null) {
-            return createAttributionContext.createContext(new ContextParams.Builder(context.getParams()).setRenouncedPermissions(renouncedPermissions).build());
+            return contextCreateAttributionContext.createContext(new ContextParams.Builder(context.getParams()).setRenouncedPermissions(renouncedPermissions).build());
         }
-        return createAttributionContext.createContext(new ContextParams.Builder().setRenouncedPermissions(renouncedPermissions).build());
+        return contextCreateAttributionContext.createContext(new ContextParams.Builder().setRenouncedPermissions(renouncedPermissions).build());
     }
 
     private String getOpPackageName() {
@@ -163,12 +163,12 @@ public class SemTelephonyManager {
     /* JADX INFO: Access modifiers changed from: private */
     public static ITelephony getITelephony() {
         if (sITelephony == null) {
-            ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+            ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
             synchronized (sCacheLock) {
-                if (sITelephony == null && asInterface != null) {
+                if (sITelephony == null && iTelephonyAsInterface != null) {
                     try {
-                        sITelephony = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sITelephony = iTelephonyAsInterface;
+                        iTelephonyAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sITelephony = null;
                     }
@@ -180,12 +180,12 @@ public class SemTelephonyManager {
 
     private ISemTelephony getISemTelephony() {
         if (sISemTelephony == null) {
-            ISemTelephony asInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+            ISemTelephony iSemTelephonyAsInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
             synchronized (sCacheLock) {
-                if (sISemTelephony == null && asInterface != null) {
+                if (sISemTelephony == null && iSemTelephonyAsInterface != null) {
                     try {
-                        sISemTelephony = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISemTelephony = iSemTelephonyAsInterface;
+                        iSemTelephonyAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISemTelephony = null;
                     }
@@ -247,12 +247,12 @@ public class SemTelephonyManager {
 
     static ISemPhoneSubInfo getSemSubscriberInfoService() {
         if (sISemPhoneSubInfo == null) {
-            ISemPhoneSubInfo asInterface = ISemPhoneSubInfo.Stub.asInterface(ServiceManager.getService("isemphonesubinfo"));
+            ISemPhoneSubInfo iSemPhoneSubInfoAsInterface = ISemPhoneSubInfo.Stub.asInterface(ServiceManager.getService("isemphonesubinfo"));
             synchronized (sCacheLock) {
-                if (sISemPhoneSubInfo == null && asInterface != null) {
+                if (sISemPhoneSubInfo == null && iSemPhoneSubInfoAsInterface != null) {
                     try {
-                        sISemPhoneSubInfo = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISemPhoneSubInfo = iSemPhoneSubInfoAsInterface;
+                        iSemPhoneSubInfoAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISemPhoneSubInfo = null;
                     }
@@ -289,7 +289,7 @@ public class SemTelephonyManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.SemTelephonyManager$$ExternalSyntheticLambda0
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(2);
+                                consumer.accept(2);
                             }
                         });
                     }
@@ -305,7 +305,7 @@ public class SemTelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.SemTelephonyManager$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(2);
+                            consumer.accept(2);
                         }
                     });
                 }
@@ -333,7 +333,7 @@ public class SemTelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.SemTelephonyManager$2$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }

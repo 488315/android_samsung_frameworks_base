@@ -14,7 +14,6 @@ import com.google.gson.GsonBuilder;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockInstanceState {
     private static final int ALLOWED_NUMBER_BASE_BASIC = 10;
@@ -82,44 +81,45 @@ public class PluginLockInstanceState {
             try {
                 String dbData = getDbData();
                 Log.d(TAG, "initInstanceData list = " + dbData);
-                if (dbData != null && !dbData.isEmpty()) {
-                    PluginLockInstanceData pluginLockInstanceData = (PluginLockInstanceData) this.mGson.fromJson(dbData, PluginLockInstanceData.class);
-                    this.mUtils.addDump(TAG, "initInstanceData() instanceData:" + pluginLockInstanceData.getData(this.mPackageName));
-                    if (pluginLockInstanceData.contain(this.mPackageName)) {
-                        PluginLockInstanceData.Data data = pluginLockInstanceData.getData(this.mPackageName);
-                        this.mData = data;
-                        if (data != null) {
-                            this.mAllowedNumber = data.getNumber().intValue();
+                if (dbData == null || dbData.isEmpty()) {
+                    this.mUtils.addDump(TAG, "initInstanceData() strData:" + dbData);
+                    PluginLockInstanceData pluginLockInstanceData = new PluginLockInstanceData();
+                    PluginLockInstanceData.Data data = new PluginLockInstanceData.Data();
+                    this.mData = data;
+                    int i = this.mMode;
+                    if (i == 1) {
+                        this.mAllowedNumber = 10;
+                    } else if (i == 2) {
+                        this.mAllowedNumber = 10000;
+                    }
+                    data.setPackageName(this.mPackageName);
+                    this.mData.setNumber(Integer.valueOf(this.mAllowedNumber));
+                    pluginLockInstanceData.addData(this.mData);
+                    updateDb(pluginLockInstanceData);
+                } else {
+                    PluginLockInstanceData pluginLockInstanceData2 = (PluginLockInstanceData) this.mGson.fromJson(dbData, PluginLockInstanceData.class);
+                    this.mUtils.addDump(TAG, "initInstanceData() instanceData:" + pluginLockInstanceData2.getData(this.mPackageName));
+                    if (pluginLockInstanceData2.contain(this.mPackageName)) {
+                        PluginLockInstanceData.Data data2 = pluginLockInstanceData2.getData(this.mPackageName);
+                        this.mData = data2;
+                        if (data2 != null) {
+                            this.mAllowedNumber = data2.getNumber().intValue();
                         }
                     } else {
                         this.mData = new PluginLockInstanceData.Data();
-                        int size = pluginLockInstanceData.getDataList().size();
-                        int i = this.mMode;
-                        if (i == 1) {
+                        int size = pluginLockInstanceData2.getDataList().size();
+                        int i2 = this.mMode;
+                        if (i2 == 1) {
                             this.mAllowedNumber = (size * 10) + 10;
-                        } else if (i == 2) {
+                        } else if (i2 == 2) {
                             this.mAllowedNumber = (size * 10) + 10000;
                         }
                         this.mData.setPackageName(this.mPackageName);
                         this.mData.setNumber(Integer.valueOf(this.mAllowedNumber));
-                        pluginLockInstanceData.addData(this.mData);
-                        updateDb(pluginLockInstanceData);
+                        pluginLockInstanceData2.addData(this.mData);
+                        updateDb(pluginLockInstanceData2);
                     }
                 }
-                this.mUtils.addDump(TAG, "initInstanceData() strData:" + dbData);
-                PluginLockInstanceData pluginLockInstanceData2 = new PluginLockInstanceData();
-                PluginLockInstanceData.Data data2 = new PluginLockInstanceData.Data();
-                this.mData = data2;
-                int i2 = this.mMode;
-                if (i2 == 1) {
-                    this.mAllowedNumber = 10;
-                } else if (i2 == 2) {
-                    this.mAllowedNumber = 10000;
-                }
-                data2.setPackageName(this.mPackageName);
-                this.mData.setNumber(Integer.valueOf(this.mAllowedNumber));
-                pluginLockInstanceData2.addData(this.mData);
-                updateDb(pluginLockInstanceData2);
             } catch (Throwable th) {
                 throw th;
             }
@@ -153,9 +153,9 @@ public class PluginLockInstanceState {
     }
 
     public int getDataVersion() {
-        int intValue = ((PluginLockInstanceData) this.mGson.fromJson(getDbData(), PluginLockInstanceData.class)).getVersion().intValue();
-        ListPopupWindow$$ExternalSyntheticOutline0.m(intValue, "getDataVersion() ", TAG);
-        return intValue;
+        int iIntValue = ((PluginLockInstanceData) this.mGson.fromJson(getDbData(), PluginLockInstanceData.class)).getVersion().intValue();
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iIntValue, "getDataVersion() ", TAG);
+        return iIntValue;
     }
 
     public String getPackageName() {
@@ -224,17 +224,17 @@ public class PluginLockInstanceState {
         ArrayList<PluginLockInstanceData.Data> dataList = ((PluginLockInstanceData) this.mGson.fromJson(getDbData(), PluginLockInstanceData.class)).getDataList();
         int size = dataList.size();
         boolean z = false;
-        long j = 0;
+        long jLongValue = 0;
         int i = 0;
         while (i < size) {
             PluginLockInstanceData.Data data = dataList.get(i);
             i++;
             PluginLockInstanceData.Data data2 = data;
-            if (data2.getTimeStamp() != null && j < data2.getTimeStamp().longValue()) {
-                j = data2.getTimeStamp().longValue();
+            if (data2.getTimeStamp() != null && jLongValue < data2.getTimeStamp().longValue()) {
+                jLongValue = data2.getTimeStamp().longValue();
             }
         }
-        if (j > 0 && this.mData.getTimeStamp() != null && this.mData.getTimeStamp().longValue() >= j) {
+        if (jLongValue > 0 && this.mData.getTimeStamp() != null && this.mData.getTimeStamp().longValue() >= jLongValue) {
             z = true;
         }
         if (z) {
@@ -304,88 +304,42 @@ public class PluginLockInstanceState {
         return sb.toString();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0062 A[Catch: all -> 0x0015, TryCatch #0 {all -> 0x0015, blocks: (B:8:0x0008, B:10:0x000e, B:13:0x0050, B:15:0x0062, B:16:0x008f, B:17:0x0092, B:20:0x0018, B:22:0x0029, B:23:0x0035, B:26:0x0031), top: B:7:0x0008 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public void updateDb() {
-        /*
-            r5 = this;
-            boolean r0 = r5.mIsDestroyed
-            if (r0 == 0) goto L5
-            return
-        L5:
-            java.lang.Object r0 = com.android.systemui.pluginlock.PluginLockInstanceState.mLock
-            monitor-enter(r0)
-            java.lang.String r1 = r5.getDbData()     // Catch: java.lang.Throwable -> L15
-            if (r1 == 0) goto L18
-            boolean r2 = r1.isEmpty()     // Catch: java.lang.Throwable -> L15
-            if (r2 == 0) goto L50
-            goto L18
-        L15:
-            r5 = move-exception
-            goto L94
-        L18:
-            com.android.systemui.pluginlock.PluginLockInstanceData r1 = new com.android.systemui.pluginlock.PluginLockInstanceData     // Catch: java.lang.Throwable -> L15
-            r1.<init>()     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r2 = new com.android.systemui.pluginlock.PluginLockInstanceData$Data     // Catch: java.lang.Throwable -> L15
-            r2.<init>()     // Catch: java.lang.Throwable -> L15
-            r5.mData = r2     // Catch: java.lang.Throwable -> L15
-            int r3 = r5.mMode     // Catch: java.lang.Throwable -> L15
-            r4 = 1
-            if (r3 != r4) goto L2e
-            r3 = 10
-            r5.mAllowedNumber = r3     // Catch: java.lang.Throwable -> L15
-            goto L35
-        L2e:
-            r4 = 2
-            if (r3 != r4) goto L35
-            r3 = 10000(0x2710, float:1.4013E-41)
-            r5.mAllowedNumber = r3     // Catch: java.lang.Throwable -> L15
-        L35:
-            java.lang.String r3 = r5.mPackageName     // Catch: java.lang.Throwable -> L15
-            r2.setPackageName(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r2 = r5.mData     // Catch: java.lang.Throwable -> L15
-            int r3 = r5.mAllowedNumber     // Catch: java.lang.Throwable -> L15
-            java.lang.Integer r3 = java.lang.Integer.valueOf(r3)     // Catch: java.lang.Throwable -> L15
-            r2.setNumber(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r2 = r5.mData     // Catch: java.lang.Throwable -> L15
-            r1.addData(r2)     // Catch: java.lang.Throwable -> L15
-            com.google.gson.Gson r2 = r5.mGson     // Catch: java.lang.Throwable -> L15
-            java.lang.String r1 = r2.toJson(r1)     // Catch: java.lang.Throwable -> L15
-        L50:
-            com.google.gson.Gson r2 = r5.mGson     // Catch: java.lang.Throwable -> L15
-            java.lang.Class<com.android.systemui.pluginlock.PluginLockInstanceData> r3 = com.android.systemui.pluginlock.PluginLockInstanceData.class
-            java.lang.Object r1 = r2.fromJson(r1, r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData r1 = (com.android.systemui.pluginlock.PluginLockInstanceData) r1     // Catch: java.lang.Throwable -> L15
-            java.lang.String r2 = r5.mPackageName     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r2 = r1.getData(r2)     // Catch: java.lang.Throwable -> L15
-            if (r2 == 0) goto L8f
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r3 = r5.mData     // Catch: java.lang.Throwable -> L15
-            java.lang.Integer r3 = r3.getNumber()     // Catch: java.lang.Throwable -> L15
-            r2.setNumber(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r3 = r5.mData     // Catch: java.lang.Throwable -> L15
-            java.lang.Long r3 = r3.getTimeStamp()     // Catch: java.lang.Throwable -> L15
-            r2.setTimeStamp(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r3 = r5.mData     // Catch: java.lang.Throwable -> L15
-            java.util.List r3 = r3.getTimeStamps()     // Catch: java.lang.Throwable -> L15
-            r2.setTimeStampList(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r3 = r5.mData     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data$RecoverData r3 = r3.getRecoverData()     // Catch: java.lang.Throwable -> L15
-            r2.setRecoverData(r3)     // Catch: java.lang.Throwable -> L15
-            com.android.systemui.pluginlock.PluginLockInstanceData$Data r3 = r5.mData     // Catch: java.lang.Throwable -> L15
-            int r3 = r3.getWhich()     // Catch: java.lang.Throwable -> L15
-            r2.setWhich(r3)     // Catch: java.lang.Throwable -> L15
-        L8f:
-            r5.updateDb(r1)     // Catch: java.lang.Throwable -> L15
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L15
-            return
-        L94:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L15
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockInstanceState.updateDb():void");
+        if (this.mIsDestroyed) {
+            return;
+        }
+        synchronized (mLock) {
+            try {
+                String dbData = getDbData();
+                if (dbData == null || dbData.isEmpty()) {
+                    PluginLockInstanceData pluginLockInstanceData = new PluginLockInstanceData();
+                    PluginLockInstanceData.Data data = new PluginLockInstanceData.Data();
+                    this.mData = data;
+                    int i = this.mMode;
+                    if (i == 1) {
+                        this.mAllowedNumber = 10;
+                    } else if (i == 2) {
+                        this.mAllowedNumber = 10000;
+                    }
+                    data.setPackageName(this.mPackageName);
+                    this.mData.setNumber(Integer.valueOf(this.mAllowedNumber));
+                    pluginLockInstanceData.addData(this.mData);
+                    dbData = this.mGson.toJson(pluginLockInstanceData);
+                }
+                PluginLockInstanceData pluginLockInstanceData2 = (PluginLockInstanceData) this.mGson.fromJson(dbData, PluginLockInstanceData.class);
+                PluginLockInstanceData.Data data2 = pluginLockInstanceData2.getData(this.mPackageName);
+                if (data2 != null) {
+                    data2.setNumber(this.mData.getNumber());
+                    data2.setTimeStamp(this.mData.getTimeStamp());
+                    data2.setTimeStampList(this.mData.getTimeStamps());
+                    data2.setRecoverData(this.mData.getRecoverData());
+                    data2.setWhich(this.mData.getWhich());
+                }
+                updateDb(pluginLockInstanceData2);
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public void setStateData(int i, long j) {
@@ -402,19 +356,19 @@ public class PluginLockInstanceState {
         ArrayList<PluginLockInstanceData.Data> dataList = ((PluginLockInstanceData) this.mGson.fromJson(getDbData(), PluginLockInstanceData.class)).getDataList();
         int size = dataList.size();
         boolean z = false;
-        long j = 0;
+        long jLongValue = 0;
         int i2 = 0;
         while (i2 < size) {
             PluginLockInstanceData.Data data = dataList.get(i2);
             i2++;
             PluginLockInstanceData.Data data2 = data;
             Long timeStamps = LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION ? data2.getTimeStamps(i) : data2.getTimeStamp();
-            if (timeStamps != null && j < timeStamps.longValue() && data2.isEnabled(i)) {
-                j = timeStamps.longValue();
+            if (timeStamps != null && jLongValue < timeStamps.longValue() && data2.isEnabled(i)) {
+                jLongValue = timeStamps.longValue();
             }
         }
         Long timeStamps2 = LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION ? this.mData.getTimeStamps(i) : this.mData.getTimeStamp();
-        if (j > 0 && timeStamps2 != null && timeStamps2.longValue() >= j && this.mData.isEnabled(i)) {
+        if (jLongValue > 0 && timeStamps2 != null && timeStamps2.longValue() >= jLongValue && this.mData.isEnabled(i)) {
             z = true;
         }
         if (z) {

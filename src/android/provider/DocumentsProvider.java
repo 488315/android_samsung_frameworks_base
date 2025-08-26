@@ -150,11 +150,11 @@ public abstract class DocumentsProvider extends ContentProvider {
 
     public Cursor queryRecentDocuments(String str, String[] strArr, Bundle bundle, CancellationSignal cancellationSignal) throws FileNotFoundException {
         Preconditions.checkNotNull(str, "rootId can not be null");
-        Cursor queryRecentDocuments = queryRecentDocuments(str, strArr);
+        Cursor cursorQueryRecentDocuments = queryRecentDocuments(str, strArr);
         Bundle bundle2 = new Bundle();
-        queryRecentDocuments.setExtras(bundle2);
+        cursorQueryRecentDocuments.setExtras(bundle2);
         bundle2.putStringArray(ContentResolver.EXTRA_HONORED_ARGS, new String[0]);
-        return queryRecentDocuments;
+        return cursorQueryRecentDocuments;
     }
 
     public Cursor queryChildDocuments(String str, String[] strArr, Bundle bundle) throws FileNotFoundException {
@@ -184,14 +184,14 @@ public abstract class DocumentsProvider extends ContentProvider {
     }
 
     public String getDocumentType(String str) throws FileNotFoundException {
-        Cursor queryDocument = queryDocument(str, null);
+        Cursor cursorQueryDocument = queryDocument(str, null);
         try {
-            if (queryDocument.moveToFirst()) {
-                return queryDocument.getString(queryDocument.getColumnIndexOrThrow("mime_type"));
+            if (cursorQueryDocument.moveToFirst()) {
+                return cursorQueryDocument.getString(cursorQueryDocument.getColumnIndexOrThrow("mime_type"));
             }
             return null;
         } finally {
-            IoUtils.closeQuietly(queryDocument);
+            IoUtils.closeQuietly(cursorQueryDocument);
         }
     }
 
@@ -255,11 +255,11 @@ public abstract class DocumentsProvider extends ContentProvider {
     @Override // android.content.ContentProvider, android.content.ContentInterface
     public final String getType(Uri uri) {
         try {
-            int match = this.mMatcher.match(uri);
-            if (match == 2) {
+            int iMatch = this.mMatcher.match(uri);
+            if (iMatch == 2) {
                 return DocumentsContract.Root.MIME_TYPE_ITEM;
             }
-            if (match != 5 && match != 7) {
+            if (iMatch != 5 && iMatch != 7) {
                 return null;
             }
             enforceTree(uri);
@@ -285,9 +285,9 @@ public abstract class DocumentsProvider extends ContentProvider {
             return null;
         }
         enforceTree(uri);
-        Uri buildDocumentUri = DocumentsContract.buildDocumentUri(uri.getAuthority(), DocumentsContract.getDocumentId(uri));
-        context.grantUriPermission(getCallingPackage(), buildDocumentUri, getCallingOrSelfUriPermissionModeFlags(context, uri));
-        return buildDocumentUri;
+        Uri uriBuildDocumentUri = DocumentsContract.buildDocumentUri(uri.getAuthority(), DocumentsContract.getDocumentId(uri));
+        context.grantUriPermission(getCallingPackage(), uriBuildDocumentUri, getCallingOrSelfUriPermissionModeFlags(context, uri));
+        return uriBuildDocumentUri;
     }
 
     private static int getCallingOrSelfUriPermissionModeFlags(Context context, Uri uri) {
@@ -329,112 +329,112 @@ public abstract class DocumentsProvider extends ContentProvider {
         Context context = getContext();
         Bundle bundle2 = new Bundle();
         enforceTreeForExtraUris(bundle);
-        Uri validateIncomingNullableUri = validateIncomingNullableUri((Uri) bundle.getParcelable("uri", Uri.class));
-        Uri validateIncomingNullableUri2 = validateIncomingNullableUri((Uri) bundle.getParcelable(DocumentsContract.EXTRA_TARGET_URI, Uri.class));
-        Uri validateIncomingNullableUri3 = validateIncomingNullableUri((Uri) bundle.getParcelable(DocumentsContract.EXTRA_PARENT_URI, Uri.class));
+        Uri uriValidateIncomingNullableUri = validateIncomingNullableUri((Uri) bundle.getParcelable("uri", Uri.class));
+        Uri uriValidateIncomingNullableUri2 = validateIncomingNullableUri((Uri) bundle.getParcelable(DocumentsContract.EXTRA_TARGET_URI, Uri.class));
+        Uri uriValidateIncomingNullableUri3 = validateIncomingNullableUri((Uri) bundle.getParcelable(DocumentsContract.EXTRA_PARENT_URI, Uri.class));
         if (DocumentsContract.METHOD_EJECT_ROOT.equals(str)) {
-            enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-            ejectRoot(DocumentsContract.getRootId(validateIncomingNullableUri));
+            enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+            ejectRoot(DocumentsContract.getRootId(uriValidateIncomingNullableUri));
             return bundle2;
         }
-        String authorityWithoutUserId = getAuthorityWithoutUserId(validateIncomingNullableUri.getAuthority());
-        String documentId = DocumentsContract.getDocumentId(validateIncomingNullableUri);
+        String authorityWithoutUserId = getAuthorityWithoutUserId(uriValidateIncomingNullableUri.getAuthority());
+        String documentId = DocumentsContract.getDocumentId(uriValidateIncomingNullableUri);
         if (!this.mAuthority.equals(authorityWithoutUserId)) {
             throw new SecurityException("Requested authority " + authorityWithoutUserId + " doesn't match provider " + this.mAuthority);
         }
         if (DocumentsContract.METHOD_IS_CHILD_DOCUMENT.equals(str)) {
-            enforceReadPermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-            bundle2.putBoolean("result", this.mAuthority.equals(validateIncomingNullableUri2.getAuthority()) && isChildDocument(documentId, DocumentsContract.getDocumentId(validateIncomingNullableUri2)));
+            enforceReadPermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+            bundle2.putBoolean("result", this.mAuthority.equals(uriValidateIncomingNullableUri2.getAuthority()) && isChildDocument(documentId, DocumentsContract.getDocumentId(uriValidateIncomingNullableUri2)));
             return bundle2;
         }
         if (DocumentsContract.METHOD_CREATE_DOCUMENT.equals(str)) {
-            enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-            bundle2.putParcelable("uri", DocumentsContract.buildDocumentUriMaybeUsingTree(validateIncomingNullableUri, createDocument(documentId, bundle.getString("mime_type"), bundle.getString("_display_name"))));
+            enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+            bundle2.putParcelable("uri", DocumentsContract.buildDocumentUriMaybeUsingTree(uriValidateIncomingNullableUri, createDocument(documentId, bundle.getString("mime_type"), bundle.getString("_display_name"))));
             return bundle2;
         }
         if (DocumentsContract.METHOD_CREATE_WEB_LINK_INTENT.equals(str)) {
-            enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
+            enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
             bundle2.putParcelable("result", createWebLinkIntent(documentId, bundle.getBundle("options")));
             return bundle2;
         }
         if (DocumentsContract.METHOD_RENAME_DOCUMENT.equals(str)) {
-            enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-            String renameDocument = renameDocument(documentId, bundle.getString("_display_name"));
-            if (renameDocument != null) {
-                Uri buildDocumentUriMaybeUsingTree = DocumentsContract.buildDocumentUriMaybeUsingTree(validateIncomingNullableUri, renameDocument);
-                if (!DocumentsContract.isTreeUri(buildDocumentUriMaybeUsingTree)) {
-                    context.grantUriPermission(getCallingPackage(), buildDocumentUriMaybeUsingTree, getCallingOrSelfUriPermissionModeFlags(context, validateIncomingNullableUri));
+            enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+            String strRenameDocument = renameDocument(documentId, bundle.getString("_display_name"));
+            if (strRenameDocument != null) {
+                Uri uriBuildDocumentUriMaybeUsingTree = DocumentsContract.buildDocumentUriMaybeUsingTree(uriValidateIncomingNullableUri, strRenameDocument);
+                if (!DocumentsContract.isTreeUri(uriBuildDocumentUriMaybeUsingTree)) {
+                    context.grantUriPermission(getCallingPackage(), uriBuildDocumentUriMaybeUsingTree, getCallingOrSelfUriPermissionModeFlags(context, uriValidateIncomingNullableUri));
                 }
-                bundle2.putParcelable("uri", buildDocumentUriMaybeUsingTree);
+                bundle2.putParcelable("uri", uriBuildDocumentUriMaybeUsingTree);
                 revokeDocumentPermission(documentId);
                 return bundle2;
             }
         } else {
             if (DocumentsContract.METHOD_DELETE_DOCUMENT.equals(str)) {
-                enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
+                enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
                 deleteDocument(documentId);
                 revokeDocumentPermission(documentId);
                 return bundle2;
             }
             if (DocumentsContract.METHOD_COPY_DOCUMENT.equals(str)) {
-                String documentId2 = DocumentsContract.getDocumentId(validateIncomingNullableUri2);
-                enforceReadPermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-                enforceWritePermissionInner(validateIncomingNullableUri2, getCallingAttributionSource());
-                String copyDocument = copyDocument(documentId, documentId2);
-                if (copyDocument != null) {
-                    Uri buildDocumentUriMaybeUsingTree2 = DocumentsContract.buildDocumentUriMaybeUsingTree(validateIncomingNullableUri, copyDocument);
-                    if (!DocumentsContract.isTreeUri(buildDocumentUriMaybeUsingTree2)) {
-                        context.grantUriPermission(getCallingPackage(), buildDocumentUriMaybeUsingTree2, getCallingOrSelfUriPermissionModeFlags(context, validateIncomingNullableUri));
+                String documentId2 = DocumentsContract.getDocumentId(uriValidateIncomingNullableUri2);
+                enforceReadPermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+                enforceWritePermissionInner(uriValidateIncomingNullableUri2, getCallingAttributionSource());
+                String strCopyDocument = copyDocument(documentId, documentId2);
+                if (strCopyDocument != null) {
+                    Uri uriBuildDocumentUriMaybeUsingTree2 = DocumentsContract.buildDocumentUriMaybeUsingTree(uriValidateIncomingNullableUri, strCopyDocument);
+                    if (!DocumentsContract.isTreeUri(uriBuildDocumentUriMaybeUsingTree2)) {
+                        context.grantUriPermission(getCallingPackage(), uriBuildDocumentUriMaybeUsingTree2, getCallingOrSelfUriPermissionModeFlags(context, uriValidateIncomingNullableUri));
                     }
-                    bundle2.putParcelable("uri", buildDocumentUriMaybeUsingTree2);
+                    bundle2.putParcelable("uri", uriBuildDocumentUriMaybeUsingTree2);
                     return bundle2;
                 }
             } else if (DocumentsContract.METHOD_MOVE_DOCUMENT.equals(str)) {
-                String documentId3 = DocumentsContract.getDocumentId(validateIncomingNullableUri3);
-                String documentId4 = DocumentsContract.getDocumentId(validateIncomingNullableUri2);
-                enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
-                enforceReadPermissionInner(validateIncomingNullableUri3, getCallingAttributionSource());
-                enforceWritePermissionInner(validateIncomingNullableUri2, getCallingAttributionSource());
-                String moveDocument = moveDocument(documentId, documentId3, documentId4);
-                if (moveDocument != null) {
-                    Uri buildDocumentUriMaybeUsingTree3 = DocumentsContract.buildDocumentUriMaybeUsingTree(validateIncomingNullableUri, moveDocument);
-                    if (!DocumentsContract.isTreeUri(buildDocumentUriMaybeUsingTree3)) {
-                        context.grantUriPermission(getCallingPackage(), buildDocumentUriMaybeUsingTree3, getCallingOrSelfUriPermissionModeFlags(context, validateIncomingNullableUri));
+                String documentId3 = DocumentsContract.getDocumentId(uriValidateIncomingNullableUri3);
+                String documentId4 = DocumentsContract.getDocumentId(uriValidateIncomingNullableUri2);
+                enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
+                enforceReadPermissionInner(uriValidateIncomingNullableUri3, getCallingAttributionSource());
+                enforceWritePermissionInner(uriValidateIncomingNullableUri2, getCallingAttributionSource());
+                String strMoveDocument = moveDocument(documentId, documentId3, documentId4);
+                if (strMoveDocument != null) {
+                    Uri uriBuildDocumentUriMaybeUsingTree3 = DocumentsContract.buildDocumentUriMaybeUsingTree(uriValidateIncomingNullableUri, strMoveDocument);
+                    if (!DocumentsContract.isTreeUri(uriBuildDocumentUriMaybeUsingTree3)) {
+                        context.grantUriPermission(getCallingPackage(), uriBuildDocumentUriMaybeUsingTree3, getCallingOrSelfUriPermissionModeFlags(context, uriValidateIncomingNullableUri));
                     }
-                    bundle2.putParcelable("uri", buildDocumentUriMaybeUsingTree3);
+                    bundle2.putParcelable("uri", uriBuildDocumentUriMaybeUsingTree3);
                 }
             } else {
                 if (DocumentsContract.METHOD_REMOVE_DOCUMENT.equals(str)) {
-                    String documentId5 = DocumentsContract.getDocumentId(validateIncomingNullableUri3);
-                    enforceReadPermissionInner(validateIncomingNullableUri3, getCallingAttributionSource());
-                    enforceWritePermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
+                    String documentId5 = DocumentsContract.getDocumentId(uriValidateIncomingNullableUri3);
+                    enforceReadPermissionInner(uriValidateIncomingNullableUri3, getCallingAttributionSource());
+                    enforceWritePermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
                     removeDocument(documentId, documentId5);
                     return bundle2;
                 }
                 if (DocumentsContract.METHOD_FIND_DOCUMENT_PATH.equals(str)) {
-                    boolean isTreeUri = DocumentsContract.isTreeUri(validateIncomingNullableUri);
-                    if (isTreeUri) {
-                        enforceReadPermissionInner(validateIncomingNullableUri, getCallingAttributionSource());
+                    boolean zIsTreeUri = DocumentsContract.isTreeUri(uriValidateIncomingNullableUri);
+                    if (zIsTreeUri) {
+                        enforceReadPermissionInner(uriValidateIncomingNullableUri, getCallingAttributionSource());
                     } else {
                         getContext().enforceCallingPermission(Manifest.permission.MANAGE_DOCUMENTS, null);
                     }
-                    String treeDocumentId = isTreeUri ? DocumentsContract.getTreeDocumentId(validateIncomingNullableUri) : null;
-                    DocumentsContract.Path findDocumentPath = findDocumentPath(treeDocumentId, documentId);
-                    if (isTreeUri) {
-                        if (!Objects.equals(findDocumentPath.getPath().get(0), treeDocumentId)) {
-                            Log.wtf(TAG, "Provider doesn't return path from the tree root. Expected: " + treeDocumentId + " found: " + findDocumentPath.getPath().get(0));
-                            LinkedList linkedList = new LinkedList(findDocumentPath.getPath());
+                    String treeDocumentId = zIsTreeUri ? DocumentsContract.getTreeDocumentId(uriValidateIncomingNullableUri) : null;
+                    DocumentsContract.Path pathFindDocumentPath = findDocumentPath(treeDocumentId, documentId);
+                    if (zIsTreeUri) {
+                        if (!Objects.equals(pathFindDocumentPath.getPath().get(0), treeDocumentId)) {
+                            Log.wtf(TAG, "Provider doesn't return path from the tree root. Expected: " + treeDocumentId + " found: " + pathFindDocumentPath.getPath().get(0));
+                            LinkedList linkedList = new LinkedList(pathFindDocumentPath.getPath());
                             while (linkedList.size() > 1 && !Objects.equals(linkedList.getFirst(), treeDocumentId)) {
                                 linkedList.removeFirst();
                             }
-                            findDocumentPath = new DocumentsContract.Path(null, linkedList);
+                            pathFindDocumentPath = new DocumentsContract.Path(null, linkedList);
                         }
-                        if (findDocumentPath.getRootId() != null) {
-                            Log.wtf(TAG, "Provider returns root id :" + findDocumentPath.getRootId() + " unexpectedly. Erase root id.");
-                            findDocumentPath = new DocumentsContract.Path(null, findDocumentPath.getPath());
+                        if (pathFindDocumentPath.getRootId() != null) {
+                            Log.wtf(TAG, "Provider returns root id :" + pathFindDocumentPath.getRootId() + " unexpectedly. Erase root id.");
+                            pathFindDocumentPath = new DocumentsContract.Path(null, pathFindDocumentPath.getPath());
                         }
                     }
-                    bundle2.putParcelable("result", findDocumentPath);
+                    bundle2.putParcelable("result", pathFindDocumentPath);
                     return bundle2;
                 }
                 if (DocumentsContract.METHOD_GET_DOCUMENT_METADATA.equals(str)) {
@@ -467,9 +467,9 @@ public abstract class DocumentsProvider extends ContentProvider {
     @Override // android.content.ContentProvider
     public final AssetFileDescriptor openAssetFile(Uri uri, String str) throws FileNotFoundException {
         enforceTree(uri);
-        ParcelFileDescriptor openDocument = openDocument(DocumentsContract.getDocumentId(uri), str, null);
-        if (openDocument != null) {
-            return new AssetFileDescriptor(openDocument, 0L, -1L);
+        ParcelFileDescriptor parcelFileDescriptorOpenDocument = openDocument(DocumentsContract.getDocumentId(uri), str, null);
+        if (parcelFileDescriptorOpenDocument != null) {
+            return new AssetFileDescriptor(parcelFileDescriptorOpenDocument, 0L, -1L);
         }
         return null;
     }
@@ -477,9 +477,9 @@ public abstract class DocumentsProvider extends ContentProvider {
     @Override // android.content.ContentProvider, android.content.ContentInterface
     public final AssetFileDescriptor openAssetFile(Uri uri, String str, CancellationSignal cancellationSignal) throws FileNotFoundException {
         enforceTree(uri);
-        ParcelFileDescriptor openDocument = openDocument(DocumentsContract.getDocumentId(uri), str, cancellationSignal);
-        if (openDocument != null) {
-            return new AssetFileDescriptor(openDocument, 0L, -1L);
+        ParcelFileDescriptor parcelFileDescriptorOpenDocument = openDocument(DocumentsContract.getDocumentId(uri), str, cancellationSignal);
+        if (parcelFileDescriptorOpenDocument != null) {
+            return new AssetFileDescriptor(parcelFileDescriptorOpenDocument, 0L, -1L);
         }
         return null;
     }
@@ -494,35 +494,35 @@ public abstract class DocumentsProvider extends ContentProvider {
         return openTypedAssetFileImpl(uri, str, bundle, cancellationSignal);
     }
 
-    public String[] getDocumentStreamTypes(String str, String str2) {
-        Cursor cursor;
-        Cursor cursor2 = null;
+    public String[] getDocumentStreamTypes(String str, String str2) throws Throwable {
+        Cursor cursorQueryDocument;
+        Cursor cursor = null;
         try {
-            cursor = queryDocument(str, null);
-            try {
-                if (cursor.moveToFirst()) {
-                    String string = cursor.getString(cursor.getColumnIndexOrThrow("mime_type"));
-                    if ((cursor.getLong(cursor.getColumnIndexOrThrow("flags")) & 512) == 0 && string != null && MimeTypeFilter.matches(string, str2)) {
-                        String[] strArr = {string};
-                        IoUtils.closeQuietly(cursor);
-                        return strArr;
-                    }
+            cursorQueryDocument = queryDocument(str, null);
+        } catch (FileNotFoundException unused) {
+            cursorQueryDocument = null;
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            if (cursorQueryDocument.moveToFirst()) {
+                String string = cursorQueryDocument.getString(cursorQueryDocument.getColumnIndexOrThrow("mime_type"));
+                if ((cursorQueryDocument.getLong(cursorQueryDocument.getColumnIndexOrThrow("flags")) & 512) == 0 && string != null && MimeTypeFilter.matches(string, str2)) {
+                    String[] strArr = {string};
+                    IoUtils.closeQuietly(cursorQueryDocument);
+                    return strArr;
                 }
-                IoUtils.closeQuietly(cursor);
-                return null;
-            } catch (FileNotFoundException unused) {
-                IoUtils.closeQuietly(cursor);
-                return null;
-            } catch (Throwable th) {
-                th = th;
-                cursor2 = cursor;
-                IoUtils.closeQuietly(cursor2);
-                throw th;
             }
+            IoUtils.closeQuietly(cursorQueryDocument);
+            return null;
         } catch (FileNotFoundException unused2) {
-            cursor = null;
+            IoUtils.closeQuietly(cursorQueryDocument);
+            return null;
         } catch (Throwable th2) {
             th = th2;
+            cursor = cursorQueryDocument;
+            IoUtils.closeQuietly(cursor);
+            throw th;
         }
     }
 

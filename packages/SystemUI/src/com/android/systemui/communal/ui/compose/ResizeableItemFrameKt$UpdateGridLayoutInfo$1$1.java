@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.SafeFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $currentSpan;
@@ -46,7 +45,6 @@ final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda
     final /* synthetic */ ResizeableItemFrameViewModel $viewModel;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.communal.ui.compose.ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1$6, reason: invalid class name */
     final /* synthetic */ class AnonymousClass6 extends AdaptedFunctionReference implements Function4 {
         public static final AnonymousClass6 INSTANCE = new AnonymousClass6();
@@ -57,13 +55,12 @@ final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda
 
         @Override // kotlin.jvm.functions.Function4
         public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-            int intValue = ((Number) obj).intValue();
-            int intValue2 = ((Number) obj2).intValue();
-            return new Triple(new Integer(intValue), new Integer(intValue2), (LazyGridItemInfo) obj3);
+            int iIntValue = ((Number) obj).intValue();
+            int iIntValue2 = ((Number) obj2).intValue();
+            return new Triple(new Integer(iIntValue), new Integer(iIntValue2), (LazyGridItemInfo) obj3);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.communal.ui.compose.ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1$7, reason: invalid class name */
     final class AnonymousClass7 extends SuspendLambda implements Function2 {
         final /* synthetic */ long $currentSpan;
@@ -108,8 +105,8 @@ final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda
             }
             ResultKt.throwOnFailure(obj);
             Triple triple = (Triple) this.L$0;
-            int intValue = ((Number) triple.component1()).intValue();
-            int intValue2 = ((Number) triple.component2()).intValue();
+            int iIntValue = ((Number) triple.component1()).intValue();
+            int iIntValue2 = ((Number) triple.component2()).intValue();
             LazyGridItemInfo lazyGridItemInfo = (LazyGridItemInfo) triple.component3();
             ResizeableItemFrameViewModel resizeableItemFrameViewModel = this.$viewModel;
             float f = this.$verticalItemSpacingPx;
@@ -126,15 +123,15 @@ final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda
                 if (i < i2) {
                     throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "Maximum item span of ", " cannot be less than the minimum span of ").toString());
                 }
-                if (i3 > intValue) {
-                    throw new IllegalArgumentException(MutableVectorKt$$ExternalSyntheticOutline0.m(i3, intValue, "Current span (", ") cannot exceed the total number of spans (", ")").toString());
+                if (i3 > iIntValue) {
+                    throw new IllegalArgumentException(MutableVectorKt$$ExternalSyntheticOutline0.m(i3, iIntValue, "Current span (", ") cannot exceed the total number of spans (", ")").toString());
                 }
                 if (i4 <= 0) {
                     throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i4, "Resize multiple (", ") must be a positive integer").toString());
                 }
-                float f3 = intValue2 - f2;
+                float f3 = iIntValue2 - f2;
                 int i5 = (int) f3;
-                stateFlowImpl.updateState(null, new ResizeableItemFrameViewModel.GridLayoutInfo(num.intValue(), i3, i > i5 ? i5 : i, i2, i4, intValue, (f3 - ((intValue - 1) * f)) / intValue, f));
+                stateFlowImpl.updateState(null, new ResizeableItemFrameViewModel.GridLayoutInfo(num.intValue(), i3, i > i5 ? i5 : i, i2, i4, iIntValue, (f3 - ((iIntValue - 1) * f)) / iIntValue, f));
             }
             return Unit.INSTANCE;
         }
@@ -171,37 +168,37 @@ final class ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1 extends SuspendLambda
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            float mo57toPx0680j_4 = this.$density.mo57toPx0680j_4(this.$verticalArrangement.mo94getSpacingD9Ej5fM());
+            float fMo58toPx0680j_4 = this.$density.mo58toPx0680j_4(this.$verticalArrangement.mo95getSpacingD9Ej5fM());
             Density density = this.$density;
             PaddingValues paddingValues = this.$gridContentPadding;
-            float mo109calculateBottomPaddingD9Ej5fM = paddingValues.mo109calculateBottomPaddingD9Ej5fM() + paddingValues.mo112calculateTopPaddingD9Ej5fM();
+            float fMo110calculateBottomPaddingD9Ej5fM = paddingValues.mo110calculateBottomPaddingD9Ej5fM() + paddingValues.mo113calculateTopPaddingD9Ej5fM();
             Dp.Companion companion = Dp.Companion;
-            float mo57toPx0680j_42 = density.mo57toPx0680j_4(mo109calculateBottomPaddingD9Ej5fM);
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new ResizeableItemFrameKt$$ExternalSyntheticLambda0(this.$gridState, 1));
-            SafeFlow snapshotFlow2 = SnapshotStateKt.snapshotFlow(new ResizeableItemFrameKt$$ExternalSyntheticLambda0(this.$gridState, 2));
+            float fMo58toPx0680j_42 = density.mo58toPx0680j_4(fMo110calculateBottomPaddingD9Ej5fM);
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new ResizeableItemFrameKt$$ExternalSyntheticLambda0(this.$gridState, 1));
+            SafeFlow safeFlowSnapshotFlow2 = SnapshotStateKt.snapshotFlow(new ResizeableItemFrameKt$$ExternalSyntheticLambda0(this.$gridState, 2));
             final LazyGridState lazyGridState = this.$gridState;
             final String str = this.$key;
-            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 combine = FlowKt.combine(snapshotFlow, snapshotFlow2, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.systemui.communal.ui.compose.ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1$$ExternalSyntheticLambda2
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine = FlowKt.combine(safeFlowSnapshotFlow, safeFlowSnapshotFlow2, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.systemui.communal.ui.compose.ResizeableItemFrameKt$UpdateGridLayoutInfo$1$1$$ExternalSyntheticLambda2
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Object obj2;
-                    Iterator it = ((LazyGridMeasureResult) LazyGridState.this.getLayoutInfo()).visibleItemsInfo.iterator();
+                    Object next;
+                    Iterator it = ((LazyGridMeasureResult) lazyGridState.getLayoutInfo()).visibleItemsInfo.iterator();
                     while (true) {
                         if (!it.hasNext()) {
-                            obj2 = null;
+                            next = null;
                             break;
                         }
-                        obj2 = it.next();
-                        if (Intrinsics.areEqual(((LazyGridMeasuredItem) ((LazyGridItemInfo) obj2)).key, str)) {
+                        next = it.next();
+                        if (Intrinsics.areEqual(((LazyGridMeasuredItem) ((LazyGridItemInfo) next)).key, str)) {
                             break;
                         }
                     }
-                    return (LazyGridItemInfo) obj2;
+                    return (LazyGridItemInfo) next;
                 }
             }), AnonymousClass6.INSTANCE);
-            AnonymousClass7 anonymousClass7 = new AnonymousClass7(this.$viewModel, mo57toPx0680j_4, this.$maxHeightPx, this.$minHeightPx, this.$currentSpan, this.$resizeMultiple, mo57toPx0680j_42, null);
+            AnonymousClass7 anonymousClass7 = new AnonymousClass7(this.$viewModel, fMo58toPx0680j_4, this.$maxHeightPx, this.$minHeightPx, this.$currentSpan, this.$resizeMultiple, fMo58toPx0680j_42, null);
             this.label = 1;
-            if (FlowKt.collectLatest(combine, anonymousClass7, this) == coroutineSingletons) {
+            if (FlowKt.collectLatest(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine, anonymousClass7, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

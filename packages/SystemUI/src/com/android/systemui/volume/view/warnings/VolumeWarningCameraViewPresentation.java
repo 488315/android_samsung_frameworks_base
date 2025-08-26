@@ -21,13 +21,11 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeWarningCameraViewPresentation extends Presentation implements VolumeObserver {
     public final WarningDialogType dialogType;
     public final StoreInteractor storeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,6 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WarningDialogType {
         public static final /* synthetic */ WarningDialogType[] $VALUES;
         public static final WarningDialogType DEFAULT_SAFETY_VOLUME_WARNING;
@@ -70,7 +67,6 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -174,7 +170,6 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
         }
         ((Button) requireViewById(R.id.negative_button)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.warnings.VolumeWarningCameraViewPresentation$setClickListener$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -194,20 +189,19 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i2 = WhenMappings.$EnumSwitchMapping$0[VolumeWarningCameraViewPresentation.this.dialogType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.dialogType.ordinal()];
                 if (i2 == 1) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_CANCEL_CLICKED), true, VolumeWarningCameraViewPresentation.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_CANCEL_CLICKED), true, this.this$0.storeInteractor, false);
                 } else {
                     if (i2 != 2) {
                         return;
                     }
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_CANCEL_CLICKED), true, VolumeWarningCameraViewPresentation.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_CANCEL_CLICKED), true, this.this$0.storeInteractor, false);
                 }
             }
         });
         ((Button) requireViewById(R.id.positive_button)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.warnings.VolumeWarningCameraViewPresentation$setClickListener$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -231,16 +225,16 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i2 = WhenMappings.$EnumSwitchMapping$0[VolumeWarningCameraViewPresentation.this.dialogType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.dialogType.ordinal()];
                 if (i2 == 1) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_OK_CLICKED), true, VolumeWarningCameraViewPresentation.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_OK_CLICKED), true, this.this$0.storeInteractor, false);
                 } else if (i2 == 2) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_SETTINS_CLICKED), true, VolumeWarningCameraViewPresentation.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_SETTINS_CLICKED), true, this.this$0.storeInteractor, false);
                 } else {
                     if (i2 != 3) {
                         throw new NoWhenBranchMatchedException();
                     }
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_OK_CLICKED), true, VolumeWarningCameraViewPresentation.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_OK_CLICKED), true, this.this$0.storeInteractor, false);
                 }
             }
         });
@@ -285,9 +279,9 @@ public final class VolumeWarningCameraViewPresentation extends Presentation impl
                 break;
             case 9:
                 ViewVisibilityUtil viewVisibilityUtil = ViewVisibilityUtil.INSTANCE;
-                View requireViewById = requireViewById(R.id.volume_warning_camera_view_dialog_view_container);
+                View viewRequireViewById = requireViewById(R.id.volume_warning_camera_view_dialog_view_container);
                 viewVisibilityUtil.getClass();
-                ViewVisibilityUtil.setGone(requireViewById);
+                ViewVisibilityUtil.setGone(viewRequireViewById);
                 requireViewById(R.id.volume_warning_camera_view_toast_text_view).setVisibility(0);
                 getWindow().setBackgroundDrawable(new ColorDrawable(-16777216));
                 break;

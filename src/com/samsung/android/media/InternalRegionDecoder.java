@@ -83,9 +83,9 @@ public class InternalRegionDecoder {
         }
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         try {
-            InternalRegionDecoder newInstance = newInstance(fileInputStream);
+            InternalRegionDecoder internalRegionDecoderNewInstance = newInstance(fileInputStream);
             fileInputStream.close();
-            return newInstance;
+            return internalRegionDecoderNewInstance;
         } catch (Throwable th) {
             try {
                 fileInputStream.close();
@@ -101,9 +101,9 @@ public class InternalRegionDecoder {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[8192];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr, 0, read);
+            int i = inputStream.read(bArr);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr, 0, i);
             } else {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 byteArrayOutputStream.close();
@@ -129,9 +129,9 @@ public class InternalRegionDecoder {
                     i = 1;
                 }
                 options.inSampleSize = i;
-                int width = ((rect.width() + i) - 1) / i;
-                int height = ((rect.height() + i) - 1) / i;
-                if (options.inBitmap != null && (options.inBitmap.getWidth() != width || options.inBitmap.getHeight() != height)) {
+                int iWidth = ((rect.width() + i) - 1) / i;
+                int iHeight = ((rect.height() + i) - 1) / i;
+                if (options.inBitmap != null && (options.inBitmap.getWidth() != iWidth || options.inBitmap.getHeight() != iHeight)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return options.inBitmap;
                 }
@@ -153,9 +153,9 @@ public class InternalRegionDecoder {
                     i = 1;
                 }
                 options.inSampleSize = i;
-                int width = ((rect.width() + i) - 1) / i;
-                int height = ((rect.height() + i) - 1) / i;
-                if (options.inBitmap != null && (options.inBitmap.getWidth() != width || options.inBitmap.getHeight() != height)) {
+                int iWidth = ((rect.width() + i) - 1) / i;
+                int iHeight = ((rect.height() + i) - 1) / i;
+                if (options.inBitmap != null && (options.inBitmap.getWidth() != iWidth || options.inBitmap.getHeight() != iHeight)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return options.inBitmap;
                 }
@@ -177,9 +177,9 @@ public class InternalRegionDecoder {
                     i = 1;
                 }
                 options.inSampleSize = i;
-                int width = ((rect.width() + i) - 1) / i;
-                int height = ((rect.height() + i) - 1) / i;
-                if (options.inBitmap != null && (options.inBitmap.getWidth() != width || options.inBitmap.getHeight() != height)) {
+                int iWidth = ((rect.width() + i) - 1) / i;
+                int iHeight = ((rect.height() + i) - 1) / i;
+                if (options.inBitmap != null && (options.inBitmap.getWidth() != iWidth || options.inBitmap.getHeight() != iHeight)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return options.inBitmap;
                 }
@@ -195,9 +195,9 @@ public class InternalRegionDecoder {
             if (i > 0) {
                 return i;
             }
-            int nativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
-            this.mWidth = nativeGetWidth;
-            return nativeGetWidth;
+            int iNativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
+            this.mWidth = iNativeGetWidth;
+            return iNativeGetWidth;
         }
     }
 
@@ -208,9 +208,9 @@ public class InternalRegionDecoder {
             if (i > 0) {
                 return i;
             }
-            int nativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
-            this.mHeight = nativeGetHeight;
-            return nativeGetHeight;
+            int iNativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
+            this.mHeight = iNativeGetHeight;
+            return iNativeGetHeight;
         }
     }
 

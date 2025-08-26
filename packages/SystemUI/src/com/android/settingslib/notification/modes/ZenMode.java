@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ZenMode implements Parcelable {
     public static final Parcelable.Creator<ZenMode> CREATOR;
@@ -24,14 +23,12 @@ public class ZenMode implements Parcelable {
     public final AutomaticZenRule mRule;
     public final Status mStatus;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Kind {
         NORMAL,
         MANUAL_DND,
         IMPLICIT
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Owner extends Record {
         public final ComponentName conditionProvider;
         public final ComponentName configurationActivity;
@@ -63,15 +60,15 @@ public class ZenMode implements Parcelable {
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {this.packageName, this.configurationActivity, this.conditionProvider};
-            String[] split = "packageName;configurationActivity;conditionProvider".length() == 0 ? new String[0] : "packageName;configurationActivity;conditionProvider".split(";");
+            String[] strArrSplit = "packageName;configurationActivity;conditionProvider".length() == 0 ? new String[0] : "packageName;configurationActivity;conditionProvider".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(Owner.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }
@@ -80,7 +77,6 @@ public class ZenMode implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Status {
         ENABLED,
         ENABLED_AND_ACTIVE,
@@ -91,7 +87,7 @@ public class ZenMode implements Parcelable {
     static {
         final int i = 0;
         final int i2 = 1;
-        Comparator thenComparing = Comparator.comparing(new Function() { // from class: com.android.settingslib.notification.modes.ZenMode$$ExternalSyntheticLambda0
+        Comparator comparatorThenComparing = Comparator.comparing(new Function() { // from class: com.android.settingslib.notification.modes.ZenMode$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 ZenMode zenMode = (ZenMode) obj;
@@ -139,7 +135,7 @@ public class ZenMode implements Parcelable {
             }
         });
         final int i3 = 2;
-        PRIORITIZING_COMPARATOR = thenComparing.thenComparing(new Function() { // from class: com.android.settingslib.notification.modes.ZenMode$$ExternalSyntheticLambda0
+        PRIORITIZING_COMPARATOR = comparatorThenComparing.thenComparing(new Function() { // from class: com.android.settingslib.notification.modes.ZenMode$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 ZenMode zenMode = (ZenMode) obj;
@@ -158,10 +154,10 @@ public class ZenMode implements Parcelable {
         CREATOR = new Parcelable.Creator() { // from class: com.android.settingslib.notification.modes.ZenMode.2
             @Override // android.os.Parcelable.Creator
             public final Object createFromParcel(Parcel parcel) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 AutomaticZenRule automaticZenRule = (AutomaticZenRule) parcel.readParcelable(AutomaticZenRule.class.getClassLoader(), AutomaticZenRule.class);
                 automaticZenRule.getClass();
-                return new ZenMode(readString, automaticZenRule, Kind.valueOf(parcel.readString()), Status.valueOf(parcel.readString()), 0);
+                return new ZenMode(string, automaticZenRule, Kind.valueOf(parcel.readString()), Status.valueOf(parcel.readString()), 0);
             }
 
             @Override // android.os.Parcelable.Creator

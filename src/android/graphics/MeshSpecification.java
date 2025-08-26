@@ -92,27 +92,27 @@ public class MeshSpecification {
     }
 
     public static MeshSpecification make(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2) {
-        long nativeMake = nativeMake(attributeArr, i, varyingArr, str, str2);
-        if (nativeMake == 0) {
+        long jNativeMake = nativeMake(attributeArr, i, varyingArr, str, str2);
+        if (jNativeMake == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
-        return new MeshSpecification(nativeMake);
+        return new MeshSpecification(jNativeMake);
     }
 
     public static MeshSpecification make(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2, ColorSpace colorSpace) {
-        long nativeMakeWithCS = nativeMakeWithCS(attributeArr, i, varyingArr, str, str2, colorSpace.getNativeInstance());
-        if (nativeMakeWithCS == 0) {
+        long jNativeMakeWithCS = nativeMakeWithCS(attributeArr, i, varyingArr, str, str2, colorSpace.getNativeInstance());
+        if (jNativeMakeWithCS == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
-        return new MeshSpecification(nativeMakeWithCS);
+        return new MeshSpecification(jNativeMakeWithCS);
     }
 
     public static MeshSpecification make(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2, ColorSpace colorSpace, int i2) {
-        long nativeMakeWithAlpha = nativeMakeWithAlpha(attributeArr, i, varyingArr, str, str2, colorSpace.getNativeInstance(), i2);
-        if (nativeMakeWithAlpha == 0) {
+        long jNativeMakeWithAlpha = nativeMakeWithAlpha(attributeArr, i, varyingArr, str, str2, colorSpace.getNativeInstance(), i2);
+        if (jNativeMakeWithAlpha == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
-        return new MeshSpecification(nativeMakeWithAlpha);
+        return new MeshSpecification(jNativeMakeWithAlpha);
     }
 
     private MeshSpecification(long j) {

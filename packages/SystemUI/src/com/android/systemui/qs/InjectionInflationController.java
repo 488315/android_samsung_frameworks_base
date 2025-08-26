@@ -10,14 +10,12 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InjectionInflationController {
     public final InjectionFactory mFactory;
     public final ArrayMap mInjectionMap = new ArrayMap();
     public final ViewInstanceCreator.Factory mViewInstanceCreatorFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InjectionFactory implements LayoutInflater.Factory2 {
         public /* synthetic */ InjectionFactory(InjectionInflationController injectionInflationController, int i) {
             this();
@@ -47,16 +45,14 @@ public class InjectionInflationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ViewInstanceCreator {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Factory {
             ViewInstanceCreator build(Context context, AttributeSet attributeSet);
         }
     }
 
-    public InjectionInflationController(ViewInstanceCreator.Factory factory) {
+    public InjectionInflationController(ViewInstanceCreator.Factory factory) throws SecurityException {
         int i = 0;
         this.mFactory = new InjectionFactory(this, i);
         this.mViewInstanceCreatorFactory = factory;

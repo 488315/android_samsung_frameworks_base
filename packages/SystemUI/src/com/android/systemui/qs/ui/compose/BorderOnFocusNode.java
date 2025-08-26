@@ -18,7 +18,6 @@ import androidx.compose.ui.node.LayoutNodeDrawScope;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BorderOnFocusNode extends Modifier.Node implements FocusEventModifierNode, DrawModifierNode {
     public long color;
@@ -35,22 +34,22 @@ public final class BorderOnFocusNode extends Modifier.Node implements FocusEvent
     public final void draw(LayoutNodeDrawScope layoutNodeDrawScope) {
         layoutNodeDrawScope.drawContent();
         Offset.Companion.getClass();
-        Rect inflate = RectKt.m411Recttz77jQw(0L, layoutNodeDrawScope.canvasDrawScope.mo545getSizeNHjbRc()).inflate(layoutNodeDrawScope.mo57toPx0680j_4(this.padding));
+        Rect rectInflate = RectKt.m413Recttz77jQw(0L, layoutNodeDrawScope.canvasDrawScope.mo547getSizeNHjbRc()).inflate(layoutNodeDrawScope.mo58toPx0680j_4(this.padding));
         if (((Boolean) ((SnapshotMutableStateImpl) this.focused$delegate).getValue()).booleanValue()) {
             long j = this.color;
-            long m409getTopLeftF1C5BW0 = inflate.m409getTopLeftF1C5BW0();
-            long m408getSizeNHjbRc = inflate.m408getSizeNHjbRc();
-            float mo184toPxTmRCtEA = this.cornerSize.mo184toPxTmRCtEA(layoutNodeDrawScope, inflate.m408getSizeNHjbRc());
-            long floatToRawIntBits = (Float.floatToRawIntBits(mo184toPxTmRCtEA) << 32) | (Float.floatToRawIntBits(mo184toPxTmRCtEA) & 4294967295L);
+            long jM411getTopLeftF1C5BW0 = rectInflate.m411getTopLeftF1C5BW0();
+            long jM410getSizeNHjbRc = rectInflate.m410getSizeNHjbRc();
+            float fMo185toPxTmRCtEA = this.cornerSize.mo185toPxTmRCtEA(layoutNodeDrawScope, rectInflate.m410getSizeNHjbRc());
+            long jFloatToRawIntBits = (Float.floatToRawIntBits(fMo185toPxTmRCtEA) << 32) | (Float.floatToRawIntBits(fMo185toPxTmRCtEA) & 4294967295L);
             CornerRadius.Companion companion = CornerRadius.Companion;
-            DrawScope.m541drawRoundRectuAw5IA$default(layoutNodeDrawScope, j, m409getTopLeftF1C5BW0, m408getSizeNHjbRc, floatToRawIntBits, new Stroke(layoutNodeDrawScope.mo57toPx0680j_4(this.strokeWidth), 0.0f, 0, 0, null, 30, null), 0.0f, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
+            DrawScope.m543drawRoundRectuAw5IA$default(layoutNodeDrawScope, j, jM411getTopLeftF1C5BW0, jM410getSizeNHjbRc, jFloatToRawIntBits, new Stroke(layoutNodeDrawScope.mo58toPx0680j_4(this.strokeWidth), 0.0f, 0, 0, null, 30, null), 0.0f, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
         }
     }
 
     @Override // androidx.compose.ui.focus.FocusEventModifierNode
     public final void onFocusEvent(FocusStateImpl focusStateImpl) {
-        boolean isFocused = focusStateImpl.isFocused();
-        ((SnapshotMutableStateImpl) this.focused$delegate).setValue(Boolean.valueOf(isFocused));
+        boolean zIsFocused = focusStateImpl.isFocused();
+        ((SnapshotMutableStateImpl) this.focused$delegate).setValue(Boolean.valueOf(zIsFocused));
     }
 
     private BorderOnFocusNode(long j, CornerSize cornerSize, float f, float f2) {

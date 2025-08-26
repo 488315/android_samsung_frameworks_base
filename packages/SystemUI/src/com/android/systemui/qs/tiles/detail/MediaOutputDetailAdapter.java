@@ -35,7 +35,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
     public static final Companion Companion = new Companion(null);
@@ -46,12 +45,10 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
     public final Provider mediaOutputViewProvider;
     public final Provider mediaOutputWindowProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onDismissRequested();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -85,10 +82,10 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
         Feature feature;
-        MediaData mediaData;
+        MediaData currentMediaData;
         String str;
+        MediaData mediaData;
         MediaData mediaData2;
-        MediaData mediaData3;
         Log.d("MediaOutputDetailAdapter", "createDetailView()");
         Object obj = this.mediaOutputViewProvider.get();
         MediaOutputView mediaOutputView = (MediaOutputView) obj;
@@ -122,11 +119,11 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
                 for (Map.Entry entry : secMediaPlayerData.getMediaData()) {
                     Log.e("MediaOutputDetailAdapter", "\t" + ((String) entry.getKey()) + ", " + ((MediaData) entry.getValue()));
                 }
-                mediaData = secMediaPlayerData.getCurrentMediaData();
-                if (mediaData == null) {
-                    Iterable mediaData4 = secMediaPlayerData.getMediaData();
-                    ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(mediaData4, 10));
-                    Iterator it = mediaData4.iterator();
+                currentMediaData = secMediaPlayerData.getCurrentMediaData();
+                if (currentMediaData == null) {
+                    Iterable mediaData3 = secMediaPlayerData.getMediaData();
+                    ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(mediaData3, 10));
+                    Iterator it = mediaData3.iterator();
                     while (it.hasNext()) {
                         arrayList.add((MediaData) ((Map.Entry) it.next()).getValue());
                     }
@@ -134,41 +131,41 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
                     int i = 0;
                     while (true) {
                         if (i >= size) {
-                            mediaData2 = 0;
+                            mediaData = 0;
                             break;
                         }
-                        mediaData2 = arrayList.get(i);
+                        mediaData = arrayList.get(i);
                         i++;
-                        Boolean bool = ((MediaData) mediaData2).isPlaying;
+                        Boolean bool = ((MediaData) mediaData).isPlaying;
                         if (bool != null ? bool.booleanValue() : false) {
                             break;
                         }
                     }
-                    mediaData = mediaData2;
-                    if (mediaData == null) {
+                    currentMediaData = mediaData;
+                    if (currentMediaData == null) {
                         int size2 = arrayList.size();
                         int i2 = 0;
                         while (true) {
                             if (i2 >= size2) {
-                                mediaData3 = 0;
+                                mediaData2 = 0;
                                 break;
                             }
-                            mediaData3 = arrayList.get(i2);
+                            mediaData2 = arrayList.get(i2);
                             i2++;
-                            if (((MediaData) mediaData3).isPlaying != null) {
+                            if (((MediaData) mediaData2).isPlaying != null) {
                                 break;
                             }
                         }
-                        mediaData = mediaData3;
-                        if (mediaData == null) {
-                            mediaData = (MediaData) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList);
+                        currentMediaData = mediaData2;
+                        if (currentMediaData == null) {
+                            currentMediaData = (MediaData) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList);
                         }
                     }
                 }
             } else {
-                mediaData = null;
+                currentMediaData = null;
             }
-            if (mediaData == null || (str = mediaData.packageName) == null) {
+            if (currentMediaData == null || (str = currentMediaData.packageName) == null) {
                 str = "";
             }
             builder.getFeature().packageName = str;
@@ -176,7 +173,7 @@ public final class MediaOutputDetailAdapter extends FullScreenDetailAdapter {
             builder.getFeature().dismissCallback = new Function0() { // from class: com.android.systemui.qs.tiles.detail.MediaOutputDetailAdapter$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    MediaOutputDetailAdapter.Callback callback = MediaOutputDetailAdapter.this.callback;
+                    MediaOutputDetailAdapter.Callback callback = this.f$0.callback;
                     if (callback == null) {
                         callback = null;
                     }

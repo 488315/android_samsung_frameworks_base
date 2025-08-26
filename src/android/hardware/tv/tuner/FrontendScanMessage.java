@@ -343,58 +343,58 @@ public final class FrontendScanMessage implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 1:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 2:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 3:
-                _set(readInt, parcel.createLongArray());
+                _set(i, parcel.createLongArray());
                 return;
             case 4:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 5:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 6:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 7:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 8:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 9:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 10:
-                _set(readInt, (FrontendScanMessageStandard) parcel.readTypedObject(FrontendScanMessageStandard.CREATOR));
+                _set(i, (FrontendScanMessageStandard) parcel.readTypedObject(FrontendScanMessageStandard.CREATOR));
                 return;
             case 11:
-                _set(readInt, (FrontendScanAtsc3PlpInfo[]) parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR));
+                _set(i, (FrontendScanAtsc3PlpInfo[]) parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR));
                 return;
             case 12:
-                _set(readInt, (FrontendModulation) parcel.readTypedObject(FrontendModulation.CREATOR));
+                _set(i, (FrontendModulation) parcel.readTypedObject(FrontendModulation.CREATOR));
                 return;
             case 13:
-                _set(readInt, Byte.valueOf(parcel.readByte()));
+                _set(i, Byte.valueOf(parcel.readByte()));
                 return;
             case 14:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 15:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 
@@ -417,11 +417,11 @@ public final class FrontendScanMessage implements Parcelable {
             return 0;
         }
         if (obj instanceof Object[]) {
-            int i = 0;
+            int iDescribeContents = 0;
             for (Object obj2 : (Object[]) obj) {
-                i |= describeContents(obj2);
+                iDescribeContents |= describeContents(obj2);
             }
-            return i;
+            return iDescribeContents;
         }
         if (obj instanceof Parcelable) {
             return ((Parcelable) obj).describeContents();

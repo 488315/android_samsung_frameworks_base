@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class OriginalUnseenKeyguardCoordinator$trackSeenNotifications$isKeyguardPresentFlow$3 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -34,15 +33,12 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotifications$isKeyguardP
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        KeyguardCoordinatorLogger keyguardCoordinatorLogger;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        boolean z = this.Z$0;
-        keyguardCoordinatorLogger = this.this$0.logger;
-        keyguardCoordinatorLogger.logTrackingUnseen(z);
+        this.this$0.logger.logTrackingUnseen(this.Z$0);
         return Unit.INSTANCE;
     }
 

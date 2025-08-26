@@ -6,7 +6,6 @@ import java.util.Iterator;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class PinInputDisplayKt$$ExternalSyntheticLambda4 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -31,11 +30,12 @@ public final /* synthetic */ class PinInputDisplayKt$$ExternalSyntheticLambda4 i
                     while (it.hasNext()) {
                         if (((PinInputEntry) it.next()).isUnused()) {
                             z = true;
-                            return Boolean.valueOf(z);
                         }
                     }
+                    z = false;
+                } else {
+                    z = false;
                 }
-                z = false;
                 return Boolean.valueOf(z);
         }
     }

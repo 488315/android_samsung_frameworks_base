@@ -11,20 +11,18 @@ public class BargeInEngineWrapper {
     }
 
     public static synchronized BargeInEngine getInstance() {
-        synchronized (BargeInEngineWrapper.class) {
-            if (uniqueInstance == null) {
-                String str = TAG;
-                Log.i(str, "getInstance() : make new libVoiceCommandEngine");
-                if (BargeInEngine.init() == 0) {
-                    uniqueInstance = new BargeInEngine();
-                } else {
-                    Log.e(str, "cannot load libVoiceCommandEngine.so");
-                    return null;
-                }
+        if (uniqueInstance == null) {
+            String str = TAG;
+            Log.i(str, "getInstance() : make new libVoiceCommandEngine");
+            if (BargeInEngine.init() == 0) {
+                uniqueInstance = new BargeInEngine();
             } else {
-                Log.i(TAG, "getInstance() : get existed libVoiceCommandEngine");
+                Log.e(str, "cannot load libVoiceCommandEngine.so");
+                return null;
             }
-            return uniqueInstance;
+        } else {
+            Log.i(TAG, "getInstance() : get existed libVoiceCommandEngine");
         }
+        return uniqueInstance;
     }
 }

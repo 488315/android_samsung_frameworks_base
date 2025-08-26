@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class NightDisplayRepository$colorDisplayManagerChangeEventFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ UserHandle $user;
@@ -55,19 +54,19 @@ final class NightDisplayRepository$colorDisplayManagerChangeEventFlow$1 extends 
             final NightDisplayListener nightDisplayListener = new NightDisplayListener(nightDisplayListenerModule$Builder.mContext, nightDisplayListenerModule$Builder.mUserId, nightDisplayListenerModule$Builder.mBgHandler);
             nightDisplayListener.setCallback(new NightDisplayListener.Callback() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$colorDisplayManagerChangeEventFlow$1$nightDisplayCallback$1
                 public final void onActivated(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new NightDisplayChangeEvent.OnActivatedChanged(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnActivatedChanged(z));
                 }
 
                 public final void onAutoModeChanged(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new NightDisplayChangeEvent.OnAutoModeChanged(i2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnAutoModeChanged(i2));
                 }
 
                 public final void onCustomEndTimeChanged(LocalTime localTime) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomEndTimeChanged(localTime));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomEndTimeChanged(localTime));
                 }
 
                 public final void onCustomStartTimeChanged(LocalTime localTime) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomStartTimeChanged(localTime));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomStartTimeChanged(localTime));
                 }
             });
             Function0 function0 = new Function0() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$colorDisplayManagerChangeEventFlow$1$$ExternalSyntheticLambda0

@@ -15,12 +15,10 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuItemImpl;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuPopupWindow extends ListPopupWindow {
     public CascadingMenuPopup.AnonymousClass3 mHoverListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MenuDropDownListView extends DropDownListView {
         public final int mAdvanceKey;
         public MenuPopupWindow mHoverListener;
@@ -41,22 +39,22 @@ public class MenuPopupWindow extends ListPopupWindow {
         @Override // androidx.appcompat.widget.DropDownListView, android.view.View
         public final boolean onHoverEvent(MotionEvent motionEvent) {
             MenuAdapter menuAdapter;
-            int i;
+            int headersCount;
             final CascadingMenuPopup.AnonymousClass3 anonymousClass3;
             CascadingMenuPopup.AnonymousClass3 anonymousClass32;
-            int pointToPosition;
-            int i2;
+            int iPointToPosition;
+            int i;
             if (this.mHoverListener != null) {
                 ListAdapter adapter = getAdapter();
                 if (adapter instanceof HeaderViewListAdapter) {
                     HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
-                    i = headerViewListAdapter.getHeadersCount();
+                    headersCount = headerViewListAdapter.getHeadersCount();
                     menuAdapter = (MenuAdapter) headerViewListAdapter.getWrappedAdapter();
                 } else {
                     menuAdapter = (MenuAdapter) adapter;
-                    i = 0;
+                    headersCount = 0;
                 }
-                final MenuItemImpl item = (motionEvent.getAction() == 10 || (pointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY())) == -1 || (i2 = pointToPosition - i) < 0 || i2 >= menuAdapter.getCount()) ? null : menuAdapter.getItem(i2);
+                final MenuItemImpl item = (motionEvent.getAction() == 10 || (iPointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY())) == -1 || (i = iPointToPosition - headersCount) < 0 || i >= menuAdapter.getCount()) ? null : menuAdapter.getItem(i);
                 MenuItemImpl menuItemImpl = this.mHoveredMenuItem;
                 if (menuItemImpl != item) {
                     final MenuBuilder menuBuilder = menuAdapter.mAdapterMenu;
@@ -68,41 +66,41 @@ public class MenuPopupWindow extends ListPopupWindow {
                         CascadingMenuPopup cascadingMenuPopup = CascadingMenuPopup.this;
                         cascadingMenuPopup.mSubMenuHoverHandler.removeCallbacksAndMessages(null);
                         int size = ((ArrayList) cascadingMenuPopup.mShowingMenus).size();
-                        int i3 = 0;
+                        int i2 = 0;
                         while (true) {
-                            if (i3 >= size) {
-                                i3 = -1;
+                            if (i2 >= size) {
+                                i2 = -1;
                                 break;
                             }
-                            if (menuBuilder == ((CascadingMenuPopup.CascadingMenuInfo) ((ArrayList) cascadingMenuPopup.mShowingMenus).get(i3)).menu) {
+                            if (menuBuilder == ((CascadingMenuPopup.CascadingMenuInfo) ((ArrayList) cascadingMenuPopup.mShowingMenus).get(i2)).menu) {
                                 break;
                             }
-                            i3++;
+                            i2++;
                         }
-                        if (i3 != -1) {
-                            int i4 = i3 + 1;
-                            final CascadingMenuPopup.CascadingMenuInfo cascadingMenuInfo = i4 < ((ArrayList) cascadingMenuPopup.mShowingMenus).size() ? (CascadingMenuPopup.CascadingMenuInfo) ((ArrayList) cascadingMenuPopup.mShowingMenus).get(i4) : null;
+                        if (i2 != -1) {
+                            int i3 = i2 + 1;
+                            final CascadingMenuPopup.CascadingMenuInfo cascadingMenuInfo = i3 < ((ArrayList) cascadingMenuPopup.mShowingMenus).size() ? (CascadingMenuPopup.CascadingMenuInfo) ((ArrayList) cascadingMenuPopup.mShowingMenus).get(i3) : null;
                             cascadingMenuPopup.mSubMenuHoverHandler.postAtTime(new Runnable() { // from class: androidx.appcompat.view.menu.CascadingMenuPopup.3.1
                                 public final /* synthetic */ MenuItem val$item;
                                 public final /* synthetic */ MenuBuilder val$menu;
                                 public final /* synthetic */ CascadingMenuInfo val$nextInfo;
 
                                 public AnonymousClass1(final CascadingMenuInfo cascadingMenuInfo2, final MenuItem item2, final MenuBuilder menuBuilder2) {
-                                    r2 = cascadingMenuInfo2;
-                                    r3 = item2;
-                                    r4 = menuBuilder2;
+                                    cascadingMenuInfo = cascadingMenuInfo2;
+                                    menuItem = item2;
+                                    menuBuilder = menuBuilder2;
                                 }
 
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    CascadingMenuInfo cascadingMenuInfo2 = r2;
+                                    CascadingMenuInfo cascadingMenuInfo2 = cascadingMenuInfo;
                                     if (cascadingMenuInfo2 != null) {
                                         CascadingMenuPopup.this.mShouldCloseImmediately = true;
                                         cascadingMenuInfo2.menu.close(false);
                                         CascadingMenuPopup.this.mShouldCloseImmediately = false;
                                     }
-                                    if (r3.isEnabled() && r3.hasSubMenu()) {
-                                        r4.performItemAction(r3, null, 4);
+                                    if (menuItem.isEnabled() && menuItem.hasSubMenu()) {
+                                        menuBuilder.performItemAction(menuItem, null, 4);
                                     }
                                 }
                             }, menuBuilder2, SystemClock.uptimeMillis() + 200);

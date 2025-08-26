@@ -55,23 +55,23 @@ public class AlsaCardsParser {
 
         /* JADX INFO: Access modifiers changed from: private */
         public boolean parse(String str, int i) {
-            int nextToken;
-            int indexOf;
+            int iNextToken;
+            int iIndexOf;
             if (i == 0) {
-                int nextToken2 = AlsaCardsParser.mTokenizer.nextToken(str, 0);
-                int nextDelimiter = AlsaCardsParser.mTokenizer.nextDelimiter(str, nextToken2);
+                int iNextToken2 = AlsaCardsParser.mTokenizer.nextToken(str, 0);
+                int iNextDelimiter = AlsaCardsParser.mTokenizer.nextDelimiter(str, iNextToken2);
                 try {
-                    this.mCardNum = Integer.parseInt(str.substring(nextToken2, nextDelimiter));
-                    int nextToken3 = AlsaCardsParser.mTokenizer.nextToken(str, nextDelimiter);
-                    int nextDelimiter2 = AlsaCardsParser.mTokenizer.nextDelimiter(str, nextToken3);
-                    this.mField1 = str.substring(nextToken3, nextDelimiter2);
-                    this.mCardName = str.substring(AlsaCardsParser.mTokenizer.nextToken(str, nextDelimiter2));
+                    this.mCardNum = Integer.parseInt(str.substring(iNextToken2, iNextDelimiter));
+                    int iNextToken3 = AlsaCardsParser.mTokenizer.nextToken(str, iNextDelimiter);
+                    int iNextDelimiter2 = AlsaCardsParser.mTokenizer.nextDelimiter(str, iNextToken3);
+                    this.mField1 = str.substring(iNextToken3, iNextDelimiter2);
+                    this.mCardName = str.substring(AlsaCardsParser.mTokenizer.nextToken(str, iNextDelimiter2));
                 } catch (NumberFormatException unused) {
-                    Slog.e(TAG, "Failed to parse line " + i + " of /proc/asound/cards: " + str.substring(nextToken2, nextDelimiter));
+                    Slog.e(TAG, "Failed to parse line " + i + " of /proc/asound/cards: " + str.substring(iNextToken2, iNextDelimiter));
                     return false;
                 }
-            } else if (i == 1 && (nextToken = AlsaCardsParser.mTokenizer.nextToken(str, 0)) != -1 && (indexOf = str.indexOf(kUsbCardKeyStr)) != -1) {
-                this.mCardDescription = str.substring(nextToken, indexOf - 1);
+            } else if (i == 1 && (iNextToken = AlsaCardsParser.mTokenizer.nextToken(str, 0)) != -1 && (iIndexOf = str.indexOf(kUsbCardKeyStr)) != -1) {
+                this.mCardDescription = str.substring(iNextToken, iIndexOf - 1);
             }
             return true;
         }
@@ -89,32 +89,32 @@ public class AlsaCardsParser {
         }
     }
 
-    public int scan() {
+    public int scan() throws IOException {
         Slog.d(TAG, "AlsaCardsParser.scan()....");
         this.mCardRecords = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(new File(kCardsFilePath));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while (true) {
-                String readLine = bufferedReader.readLine();
-                if (readLine == null) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
                     break;
                 }
                 AlsaCardRecord alsaCardRecord = new AlsaCardRecord(this);
-                Slog.d(TAG, "  " + readLine);
-                alsaCardRecord.parse(readLine, 0);
-                String readLine2 = bufferedReader.readLine();
-                if (readLine2 == null) {
+                Slog.d(TAG, "  " + line);
+                alsaCardRecord.parse(line, 0);
+                String line2 = bufferedReader.readLine();
+                if (line2 == null) {
                     break;
                 }
-                Slog.d(TAG, "  " + readLine2);
-                alsaCardRecord.parse(readLine2, 1);
+                Slog.d(TAG, "  " + line2);
+                alsaCardRecord.parse(line2, 1);
                 File file = new File(("/proc/asound/card" + alsaCardRecord.mCardNum) + "/usbbus");
                 if (file.exists()) {
                     FileReader fileReader2 = new FileReader(file);
-                    String readLine3 = new BufferedReader(fileReader2).readLine();
-                    if (readLine3 != null) {
-                        alsaCardRecord.setDeviceAddress(kDeviceAddressPrefix + readLine3);
+                    String line3 = new BufferedReader(fileReader2).readLine();
+                    if (line3 != null) {
+                        alsaCardRecord.setDeviceAddress(kDeviceAddressPrefix + line3);
                     }
                     fileReader2.close();
                 }

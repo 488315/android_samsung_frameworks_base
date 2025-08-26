@@ -33,7 +33,6 @@ import com.android.wm.shell.splitscreen.StageCoordinator;
 import com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda2;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SplitWindowManager extends WindowlessWindowManager {
     public AlertDialog mAddToAppPairDialogForRecent;
@@ -57,7 +56,6 @@ public final class SplitWindowManager extends WindowlessWindowManager {
     public SurfaceControlViewHost mViewHost;
     public final String mWindowName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ParentContainerCallbacks {
     }
 
@@ -89,20 +87,20 @@ public final class SplitWindowManager extends WindowlessWindowManager {
         Context context = this.mContext;
         this.mViewHost = new SurfaceControlViewHost(context, context.getDisplay(), this, "SplitWindowManager");
         if (CoreRune.MW_MULTI_SPLIT_DIVIDER) {
-            boolean isVerticalDivision = splitLayout.isVerticalDivision();
+            boolean zIsVerticalDivision = splitLayout.isVerticalDivision();
             if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER && this.mIsCellDivider) {
                 if (CoreRune.MW_PARALLEL_MULTI_SPLIT && splitLayout.mParallelMultiSplit) {
-                    if (isVerticalDivision) {
+                    if (zIsVerticalDivision) {
                         this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.parallel_multi_split_cell_divider, (ViewGroup) null);
                     } else {
                         this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.parallel_multi_split_cell_divider_horizontal, (ViewGroup) null);
                     }
-                } else if (isVerticalDivision) {
+                } else if (zIsVerticalDivision) {
                     this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.multi_split_cell_divider_horizontal, (ViewGroup) null);
                 } else {
                     this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.multi_split_cell_divider, (ViewGroup) null);
                 }
-            } else if (isVerticalDivision) {
+            } else if (zIsVerticalDivision) {
                 this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.multi_split_divider, (ViewGroup) null);
             } else {
                 this.mDividerView = (DividerView) LayoutInflater.from(this.mContext).inflate(R.layout.multi_split_divider_horizontal, (ViewGroup) null);
@@ -256,11 +254,11 @@ public final class SplitWindowManager extends WindowlessWindowManager {
 
     public final void setConfiguration(Configuration configuration) {
         super.setConfiguration(configuration);
-        Context createConfigurationContext = this.mContext.createConfigurationContext(configuration);
-        this.mContext = createConfigurationContext;
+        Context contextCreateConfigurationContext = this.mContext.createConfigurationContext(configuration);
+        this.mContext = contextCreateConfigurationContext;
         DividerView dividerView = this.mDividerView;
         if (dividerView != null) {
-            int color = createConfigurationContext.getResources().getColor(17171594, null);
+            int color = contextCreateConfigurationContext.getResources().getColor(17171593, null);
             dividerView.mBackground.setBackgroundColor(color);
             DividerRoundedCorner dividerRoundedCorner = dividerView.mCorners;
             if (dividerRoundedCorner != null) {
@@ -298,25 +296,25 @@ public final class SplitWindowManager extends WindowlessWindowManager {
         this.mDividerPanelAutoOpen = new Runnable() { // from class: com.android.wm.shell.common.split.SplitWindowManager$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SplitWindowManager splitWindowManager = SplitWindowManager.this;
+                SplitWindowManager splitWindowManager = this.f$0;
                 if (!splitWindowManager.mDividerVisible) {
                     Slog.d("SplitWindowManager", "Faild to run DividerPanel first auto open");
                     return;
                 }
                 splitWindowManager.mDividerPanel.updateDividerPanel();
                 splitWindowManager.mIsFirstAutoOpenDividerPanel = false;
-                SharedPreferences.Editor edit = splitWindowManager.mPref.edit();
-                edit.putBoolean("divider_panel_first_auto_open", false);
-                edit.apply();
+                SharedPreferences.Editor editorEdit = splitWindowManager.mPref.edit();
+                editorEdit.putBoolean("divider_panel_first_auto_open", false);
+                editorEdit.apply();
                 splitWindowManager.mShowingFirstAutoOpenDividerPanel = true;
                 Slog.d("SplitWindowManager", "Run DividerPanel first auto open");
             }
         };
-        Context createConfigurationContext = context.createConfigurationContext(configuration);
-        this.mContext = createConfigurationContext;
+        Context contextCreateConfigurationContext = context.createConfigurationContext(configuration);
+        this.mContext = contextCreateConfigurationContext;
         this.mParentContainerCallbacks = parentContainerCallbacks;
         this.mWindowName = str;
-        this.mDividerPanel = new DividerPanel(createConfigurationContext);
+        this.mDividerPanel = new DividerPanel(contextCreateConfigurationContext);
         if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER) {
             this.mIsCellDivider = z;
         }

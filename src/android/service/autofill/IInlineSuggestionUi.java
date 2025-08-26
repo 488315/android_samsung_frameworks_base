@@ -52,9 +52,9 @@ public interface IInlineSuggestionUi extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionUi.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineSuggestionUi)) {
-                return (IInlineSuggestionUi) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionUi.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineSuggestionUi)) {
+                return (IInlineSuggestionUi) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface IInlineSuggestionUi extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISurfacePackageResultCallback asInterface = ISurfacePackageResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISurfacePackageResultCallback iSurfacePackageResultCallbackAsInterface = ISurfacePackageResultCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getSurfacePackage(asInterface);
+                getSurfacePackage(iSurfacePackageResultCallbackAsInterface);
             } else if (i == 2) {
                 releaseSurfaceControlViewHost();
             } else {
@@ -113,24 +113,24 @@ public interface IInlineSuggestionUi extends IInterface {
 
             @Override // android.service.autofill.IInlineSuggestionUi
             public void getSurfacePackage(ISurfacePackageResultCallback iSurfacePackageResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUi.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSurfacePackageResultCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUi.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSurfacePackageResultCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUi
             public void releaseSurfaceControlViewHost() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUi.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUi.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

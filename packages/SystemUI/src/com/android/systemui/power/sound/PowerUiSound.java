@@ -17,7 +17,6 @@ import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.media.NotificationPlayer;
 import com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class PowerUiSound {
     public final AudioManager mAudioManager;
@@ -40,7 +39,7 @@ public abstract class PowerUiSound {
     }
 
     public final boolean checkCommonCondition() {
-        int i;
+        int mode;
         CustomSdkMonitor customSdkMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mCustomSdkMonitor;
         if ((customSdkMonitor == null || !customSdkMonitor.mChargerConnectionSoundEnabledState) && this.mSoundType == 1) {
             Log.d("PowerUiSound", "checkCommonCondition : Knox Custom disabled SOUND_TYPE_CHARGER_CONNECTION");
@@ -48,17 +47,17 @@ public abstract class PowerUiSound {
         }
         AudioManager audioManager = this.mAudioManager;
         if (audioManager != null) {
-            i = audioManager.getMode();
-            if (this.mAudioManager.semIsRecordActive(-1) && 3 != i) {
+            mode = audioManager.getMode();
+            if (this.mAudioManager.semIsRecordActive(-1) && 3 != mode) {
                 Log.d("PowerUiSound", "checkCommonCondition : recording so doesn't play sound");
                 return false;
             }
         } else {
-            i = 0;
+            mode = 0;
         }
         this.mRingerMode = SecStatusBarAudioManagerHelper.getInstance(this.mContext).getRingerMode(false);
         boolean z = Settings.System.getIntForUser(this.mContext.getContentResolver(), "alertoncall_mode", 1, -2) == 1;
-        if (this.mIsInCall || i == 3) {
+        if (this.mIsInCall || mode == 3) {
             if (!z) {
                 Log.d("PowerUiSound", "checkCommonCondition : calling and doesn't notify during calls");
                 return false;
@@ -78,8 +77,8 @@ public abstract class PowerUiSound {
 
     public final void playSound(int i) {
         try {
-            Uri parse = Uri.parse(SoundPathFinder.getSoundPath(i, this.mContext));
-            this.mNotificationPlayer.play(this.mContext, parse, false, getAudioAttribute(), getVolume());
+            Uri uri = Uri.parse(SoundPathFinder.getSoundPath(i, this.mContext));
+            this.mNotificationPlayer.play(this.mContext, uri, false, getAudioAttribute(), getVolume());
             ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "playSound : type = ", "PowerUiSound");
         } catch (NullPointerException e) {
             Log.w("PowerUiSound", "playSound : NPE occur", e);
@@ -89,16 +88,16 @@ public abstract class PowerUiSound {
     public abstract void playSoundAndVibration();
 
     public final void playVibration(int i, int i2, VibrationEffect.SemMagnitudeType semMagnitudeType) {
-        VibrationEffect semCreateHaptic = VibrationEffect.semCreateHaptic(HapticFeedbackConstants.semGetVibrationIndex(i), -1, semMagnitudeType);
+        VibrationEffect vibrationEffectSemCreateHaptic = VibrationEffect.semCreateHaptic(HapticFeedbackConstants.semGetVibrationIndex(i), -1, semMagnitudeType);
         if (i2 != -1) {
-            semCreateHaptic.semSetMagnitude(i2);
+            vibrationEffectSemCreateHaptic.semSetMagnitude(i2);
         }
         Vibrator vibrator = this.mVibrator;
         if (vibrator == null) {
             Log.e("PowerUiSound", "playVibration : Charging vibration setting is on but Vibrator is null");
             return;
         }
-        vibrator.vibrate(semCreateHaptic);
+        vibrator.vibrate(vibrationEffectSemCreateHaptic);
         Log.i("PowerUiSound", "playVibration : index = " + i);
     }
 }

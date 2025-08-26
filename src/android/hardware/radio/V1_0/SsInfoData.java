@@ -31,13 +31,13 @@ public final class SsInfoData {
 
     public static final ArrayList<SsInfoData> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SsInfoData> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SsInfoData ssInfoData = new SsInfoData();
-            ssInfoData.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            ssInfoData.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             arrayList.add(ssInfoData);
         }
         return arrayList;
@@ -45,10 +45,10 @@ public final class SsInfoData {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j, true);
         this.ssInfo.clear();
         for (int i = 0; i < int32; i++) {
-            this.ssInfo.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+            this.ssInfo.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
         }
     }
 

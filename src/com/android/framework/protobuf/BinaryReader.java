@@ -49,9 +49,9 @@ abstract class BinaryReader implements Reader {
             super(null);
             this.bufferIsImmutable = z;
             this.buffer = byteBuffer.array();
-            int arrayOffset = byteBuffer.arrayOffset() + byteBuffer.position();
-            this.pos = arrayOffset;
-            this.initialPos = arrayOffset;
+            int iArrayOffset = byteBuffer.arrayOffset() + byteBuffer.position();
+            this.pos = iArrayOffset;
+            this.initialPos = iArrayOffset;
             this.limit = byteBuffer.arrayOffset() + byteBuffer.limit();
         }
 
@@ -69,12 +69,12 @@ abstract class BinaryReader implements Reader {
             if (isAtEnd()) {
                 return Integer.MAX_VALUE;
             }
-            int readVarint32 = readVarint32();
-            this.tag = readVarint32;
-            if (readVarint32 == this.endGroupTag) {
+            int varint32 = readVarint32();
+            this.tag = varint32;
+            if (varint32 == this.endGroupTag) {
                 return Integer.MAX_VALUE;
             }
-            return WireFormat.getTagFieldNumber(readVarint32);
+            return WireFormat.getTagFieldNumber(varint32);
         }
 
         @Override // com.android.framework.protobuf.Reader
@@ -172,20 +172,20 @@ abstract class BinaryReader implements Reader {
 
         public String readStringInternal(boolean z) throws IOException {
             requireWireType(2);
-            int readVarint32 = readVarint32();
-            if (readVarint32 == 0) {
+            int varint32 = readVarint32();
+            if (varint32 == 0) {
                 return "";
             }
-            requireBytes(readVarint32);
+            requireBytes(varint32);
             if (z) {
                 byte[] bArr = this.buffer;
                 int i = this.pos;
-                if (!Utf8.isValidUtf8(bArr, i, i + readVarint32)) {
+                if (!Utf8.isValidUtf8(bArr, i, i + varint32)) {
                     throw InvalidProtocolBufferException.invalidUtf8();
                 }
             }
-            String str = new String(this.buffer, this.pos, readVarint32, Internal.UTF_8);
-            this.pos += readVarint32;
+            String str = new String(this.buffer, this.pos, varint32, Internal.UTF_8);
+            this.pos += varint32;
             return str;
         }
 
@@ -202,18 +202,18 @@ abstract class BinaryReader implements Reader {
         }
 
         private <T> T readMessage(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-            T newInstance = schema.newInstance();
-            mergeMessageField(newInstance, schema, extensionRegistryLite);
-            schema.makeImmutable(newInstance);
-            return newInstance;
+            T tNewInstance = schema.newInstance();
+            mergeMessageField(tNewInstance, schema, extensionRegistryLite);
+            schema.makeImmutable(tNewInstance);
+            return tNewInstance;
         }
 
         @Override // com.android.framework.protobuf.Reader
         public <T> void mergeMessageField(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-            int readVarint32 = readVarint32();
-            requireBytes(readVarint32);
+            int varint32 = readVarint32();
+            requireBytes(varint32);
             int i = this.limit;
-            int i2 = this.pos + readVarint32;
+            int i2 = this.pos + varint32;
             this.limit = i2;
             try {
                 schema.mergeFrom(t, this, extensionRegistryLite);
@@ -241,10 +241,10 @@ abstract class BinaryReader implements Reader {
         }
 
         private <T> T readGroup(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-            T newInstance = schema.newInstance();
-            mergeGroupField(newInstance, schema, extensionRegistryLite);
-            schema.makeImmutable(newInstance);
-            return newInstance;
+            T tNewInstance = schema.newInstance();
+            mergeGroupField(tNewInstance, schema, extensionRegistryLite);
+            schema.makeImmutable(tNewInstance);
+            return tNewInstance;
         }
 
         @Override // com.android.framework.protobuf.Reader
@@ -264,20 +264,20 @@ abstract class BinaryReader implements Reader {
 
         @Override // com.android.framework.protobuf.Reader
         public ByteString readBytes() throws IOException {
-            ByteString copyFrom;
+            ByteString byteStringCopyFrom;
             requireWireType(2);
-            int readVarint32 = readVarint32();
-            if (readVarint32 == 0) {
+            int varint32 = readVarint32();
+            if (varint32 == 0) {
                 return ByteString.EMPTY;
             }
-            requireBytes(readVarint32);
+            requireBytes(varint32);
             if (this.bufferIsImmutable) {
-                copyFrom = ByteString.wrap(this.buffer, this.pos, readVarint32);
+                byteStringCopyFrom = ByteString.wrap(this.buffer, this.pos, varint32);
             } else {
-                copyFrom = ByteString.copyFrom(this.buffer, this.pos, readVarint32);
+                byteStringCopyFrom = ByteString.copyFrom(this.buffer, this.pos, varint32);
             }
-            this.pos += readVarint32;
-            return copyFrom;
+            this.pos += varint32;
+            return byteStringCopyFrom;
         }
 
         @Override // com.android.framework.protobuf.Reader
@@ -336,9 +336,9 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed64Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed64Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         doubleArrayList.addDouble(Double.longBitsToDouble(readLittleEndian64_NoCheck()));
                     }
@@ -360,9 +360,9 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed64Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed64Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Double.valueOf(Double.longBitsToDouble(readLittleEndian64_NoCheck())));
                 }
@@ -379,9 +379,9 @@ abstract class BinaryReader implements Reader {
                 FloatArrayList floatArrayList = (FloatArrayList) list;
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed32Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed32Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         floatArrayList.addFloat(Float.intBitsToFloat(readLittleEndian32_NoCheck()));
                     }
@@ -403,9 +403,9 @@ abstract class BinaryReader implements Reader {
             }
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed32Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed32Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Float.valueOf(Float.intBitsToFloat(readLittleEndian32_NoCheck())));
                 }
@@ -446,11 +446,11 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = this.pos + readVarint32();
-                    while (this.pos < readVarint32) {
+                    int varint32 = this.pos + readVarint32();
+                    while (this.pos < varint32) {
                         longArrayList.addLong(readVarint64());
                     }
-                    requirePosition(readVarint32);
+                    requirePosition(varint32);
                     return;
                 }
                 throw InvalidProtocolBufferException.invalidWireType();
@@ -469,11 +469,11 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = this.pos + readVarint32();
-                while (this.pos < readVarint322) {
+                int varint322 = this.pos + readVarint32();
+                while (this.pos < varint322) {
                     list.add(Long.valueOf(readVarint64()));
                 }
-                requirePosition(readVarint322);
+                requirePosition(varint322);
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
@@ -499,11 +499,11 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = this.pos + readVarint32();
-                    while (this.pos < readVarint32) {
+                    int varint32 = this.pos + readVarint32();
+                    while (this.pos < varint32) {
                         longArrayList.addLong(readVarint64());
                     }
-                    requirePosition(readVarint32);
+                    requirePosition(varint32);
                     return;
                 }
                 throw InvalidProtocolBufferException.invalidWireType();
@@ -522,11 +522,11 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = this.pos + readVarint32();
-                while (this.pos < readVarint322) {
+                int varint322 = this.pos + readVarint32();
+                while (this.pos < varint322) {
                     list.add(Long.valueOf(readVarint64()));
                 }
-                requirePosition(readVarint322);
+                requirePosition(varint322);
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
@@ -552,11 +552,11 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = this.pos + readVarint32();
-                    while (this.pos < readVarint32) {
+                    int varint32 = this.pos + readVarint32();
+                    while (this.pos < varint32) {
                         intArrayList.addInt(readVarint32());
                     }
-                    requirePosition(readVarint32);
+                    requirePosition(varint32);
                     return;
                 }
                 throw InvalidProtocolBufferException.invalidWireType();
@@ -575,11 +575,11 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = this.pos + readVarint32();
-                while (this.pos < readVarint322) {
+                int varint322 = this.pos + readVarint32();
+                while (this.pos < varint322) {
                     list.add(Integer.valueOf(readVarint32()));
                 }
-                requirePosition(readVarint322);
+                requirePosition(varint322);
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
@@ -605,9 +605,9 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed64Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed64Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         longArrayList.addLong(readLittleEndian64_NoCheck());
                     }
@@ -629,9 +629,9 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed64Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed64Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Long.valueOf(readLittleEndian64_NoCheck()));
                 }
@@ -648,9 +648,9 @@ abstract class BinaryReader implements Reader {
                 IntArrayList intArrayList = (IntArrayList) list;
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed32Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed32Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         intArrayList.addInt(readLittleEndian32_NoCheck());
                     }
@@ -672,9 +672,9 @@ abstract class BinaryReader implements Reader {
             }
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed32Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed32Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Integer.valueOf(readLittleEndian32_NoCheck()));
                 }
@@ -704,11 +704,11 @@ abstract class BinaryReader implements Reader {
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType != 0) {
                     if (tagWireType == 2) {
-                        int readVarint32 = this.pos + readVarint32();
-                        while (this.pos < readVarint32) {
+                        int varint32 = this.pos + readVarint32();
+                        while (this.pos < varint32) {
                             booleanArrayList.addBoolean(readVarint32() != 0);
                         }
-                        requirePosition(readVarint32);
+                        requirePosition(varint32);
                         return;
                     }
                     throw InvalidProtocolBufferException.invalidWireType();
@@ -727,11 +727,11 @@ abstract class BinaryReader implements Reader {
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 != 0) {
                 if (tagWireType2 == 2) {
-                    int readVarint322 = this.pos + readVarint32();
-                    while (this.pos < readVarint322) {
+                    int varint322 = this.pos + readVarint32();
+                    while (this.pos < varint322) {
                         list.add(Boolean.valueOf(readVarint32() != 0));
                     }
-                    requirePosition(readVarint322);
+                    requirePosition(varint322);
                     return;
                 }
                 throw InvalidProtocolBufferException.invalidWireType();
@@ -863,8 +863,8 @@ abstract class BinaryReader implements Reader {
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType != 0) {
                     if (tagWireType == 2) {
-                        int readVarint32 = this.pos + readVarint32();
-                        while (this.pos < readVarint32) {
+                        int varint32 = this.pos + readVarint32();
+                        while (this.pos < varint32) {
                             intArrayList.addInt(readVarint32());
                         }
                         return;
@@ -885,8 +885,8 @@ abstract class BinaryReader implements Reader {
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 != 0) {
                 if (tagWireType2 == 2) {
-                    int readVarint322 = this.pos + readVarint32();
-                    while (this.pos < readVarint322) {
+                    int varint322 = this.pos + readVarint32();
+                    while (this.pos < varint322) {
                         list.add(Integer.valueOf(readVarint32()));
                     }
                     return;
@@ -913,8 +913,8 @@ abstract class BinaryReader implements Reader {
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType != 0) {
                     if (tagWireType == 2) {
-                        int readVarint32 = this.pos + readVarint32();
-                        while (this.pos < readVarint32) {
+                        int varint32 = this.pos + readVarint32();
+                        while (this.pos < varint32) {
                             intArrayList.addInt(readVarint32());
                         }
                         return;
@@ -935,8 +935,8 @@ abstract class BinaryReader implements Reader {
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 != 0) {
                 if (tagWireType2 == 2) {
-                    int readVarint322 = this.pos + readVarint32();
-                    while (this.pos < readVarint322) {
+                    int varint322 = this.pos + readVarint32();
+                    while (this.pos < varint322) {
                         list.add(Integer.valueOf(readVarint32()));
                     }
                     return;
@@ -962,9 +962,9 @@ abstract class BinaryReader implements Reader {
                 IntArrayList intArrayList = (IntArrayList) list;
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed32Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed32Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         intArrayList.addInt(readLittleEndian32_NoCheck());
                     }
@@ -986,9 +986,9 @@ abstract class BinaryReader implements Reader {
             }
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed32Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed32Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Integer.valueOf(readLittleEndian32_NoCheck()));
                 }
@@ -1029,9 +1029,9 @@ abstract class BinaryReader implements Reader {
                     return;
                 }
                 if (tagWireType == 2) {
-                    int readVarint32 = readVarint32();
-                    verifyPackedFixed64Length(readVarint32);
-                    int i3 = this.pos + readVarint32;
+                    int varint32 = readVarint32();
+                    verifyPackedFixed64Length(varint32);
+                    int i3 = this.pos + varint32;
                     while (this.pos < i3) {
                         longArrayList.addLong(readLittleEndian64_NoCheck());
                     }
@@ -1053,9 +1053,9 @@ abstract class BinaryReader implements Reader {
                 return;
             }
             if (tagWireType2 == 2) {
-                int readVarint322 = readVarint32();
-                verifyPackedFixed64Length(readVarint322);
-                int i4 = this.pos + readVarint322;
+                int varint322 = readVarint32();
+                verifyPackedFixed64Length(varint322);
+                int i4 = this.pos + varint322;
                 while (this.pos < i4) {
                     list.add(Long.valueOf(readLittleEndian64_NoCheck()));
                 }
@@ -1073,8 +1073,8 @@ abstract class BinaryReader implements Reader {
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType != 0) {
                     if (tagWireType == 2) {
-                        int readVarint32 = this.pos + readVarint32();
-                        while (this.pos < readVarint32) {
+                        int varint32 = this.pos + readVarint32();
+                        while (this.pos < varint32) {
                             intArrayList.addInt(CodedInputStream.decodeZigZag32(readVarint32()));
                         }
                         return;
@@ -1095,8 +1095,8 @@ abstract class BinaryReader implements Reader {
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 != 0) {
                 if (tagWireType2 == 2) {
-                    int readVarint322 = this.pos + readVarint32();
-                    while (this.pos < readVarint322) {
+                    int varint322 = this.pos + readVarint32();
+                    while (this.pos < varint322) {
                         list.add(Integer.valueOf(CodedInputStream.decodeZigZag32(readVarint32())));
                     }
                     return;
@@ -1123,8 +1123,8 @@ abstract class BinaryReader implements Reader {
                 int tagWireType = WireFormat.getTagWireType(this.tag);
                 if (tagWireType != 0) {
                     if (tagWireType == 2) {
-                        int readVarint32 = this.pos + readVarint32();
-                        while (this.pos < readVarint32) {
+                        int varint32 = this.pos + readVarint32();
+                        while (this.pos < varint32) {
                             longArrayList.addLong(CodedInputStream.decodeZigZag64(readVarint64()));
                         }
                         return;
@@ -1145,8 +1145,8 @@ abstract class BinaryReader implements Reader {
             int tagWireType2 = WireFormat.getTagWireType(this.tag);
             if (tagWireType2 != 0) {
                 if (tagWireType2 == 2) {
-                    int readVarint322 = this.pos + readVarint32();
-                    while (this.pos < readVarint322) {
+                    int varint322 = this.pos + readVarint32();
+                    while (this.pos < varint322) {
                         list.add(Long.valueOf(CodedInputStream.decodeZigZag64(readVarint64())));
                     }
                     return;
@@ -1168,23 +1168,23 @@ abstract class BinaryReader implements Reader {
         @Override // com.android.framework.protobuf.Reader
         public <K, V> void readMap(Map<K, V> map, MapEntryLite.Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistryLite) throws IOException {
             requireWireType(2);
-            int readVarint32 = readVarint32();
-            requireBytes(readVarint32);
+            int varint32 = readVarint32();
+            requireBytes(varint32);
             int i = this.limit;
-            this.limit = this.pos + readVarint32;
+            this.limit = this.pos + varint32;
             try {
-                Object obj = metadata.defaultKey;
-                Object obj2 = metadata.defaultValue;
+                Object field = metadata.defaultKey;
+                Object field2 = metadata.defaultValue;
                 while (true) {
                     int fieldNumber = getFieldNumber();
                     if (fieldNumber == Integer.MAX_VALUE) {
-                        map.put(obj, obj2);
+                        map.put(field, field2);
                         return;
                     }
                     if (fieldNumber == 1) {
-                        obj = readField(metadata.keyType, null, null);
+                        field = readField(metadata.keyType, null, null);
                     } else if (fieldNumber == 2) {
-                        obj2 = readField(metadata.valueType, metadata.defaultValue.getClass(), extensionRegistryLite);
+                        field2 = readField(metadata.valueType, metadata.defaultValue.getClass(), extensionRegistryLite);
                     } else {
                         try {
                             if (!skipField()) {

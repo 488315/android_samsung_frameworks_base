@@ -37,9 +37,9 @@ class ConstructedBitStream extends InputStream {
             this._currentStream = nextParser.getBitStream();
         }
         while (true) {
-            int read = this._currentStream.read(bArr, i + i3, i2 - i3);
-            if (read >= 0) {
-                i3 += read;
+            int i4 = this._currentStream.read(bArr, i + i3, i2 - i3);
+            if (i4 >= 0) {
+                i3 += i4;
                 if (i3 == i2) {
                     return i3;
                 }
@@ -74,9 +74,9 @@ class ConstructedBitStream extends InputStream {
             this._currentStream = nextParser.getBitStream();
         }
         while (true) {
-            int read = this._currentStream.read();
-            if (read >= 0) {
-                return read;
+            int i = this._currentStream.read();
+            if (i >= 0) {
+                return i;
             }
             this._padBits = this._currentParser.getPadBits();
             ASN1BitStringParser nextParser2 = getNextParser();
@@ -90,19 +90,19 @@ class ConstructedBitStream extends InputStream {
     }
 
     private ASN1BitStringParser getNextParser() throws IOException {
-        ASN1Encodable readObject = this._parser.readObject();
-        if (readObject == null) {
+        ASN1Encodable object = this._parser.readObject();
+        if (object == null) {
             if (!this._octetAligned || this._padBits == 0) {
                 return null;
             }
             throw new IOException("expected octet-aligned bitstring, but found padBits: " + this._padBits);
         }
-        if (readObject instanceof ASN1BitStringParser) {
+        if (object instanceof ASN1BitStringParser) {
             if (this._padBits != 0) {
                 throw new IOException("only the last nested bitstring can have padding");
             }
-            return (ASN1BitStringParser) readObject;
+            return (ASN1BitStringParser) object;
         }
-        throw new IOException("unknown object encountered: " + readObject.getClass());
+        throw new IOException("unknown object encountered: " + object.getClass());
     }
 }

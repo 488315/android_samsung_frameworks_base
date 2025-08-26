@@ -5,7 +5,6 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
-import android.inputmethodservice.navigationbar.NavigationBarView;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.Display;
@@ -84,14 +83,14 @@ public final class NavigationBarView extends FrameLayout {
             imeSwitchButton.setOnClickListener(new View.OnClickListener() { // from class: android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    NavigationBarView.ButtonClickListener.this.onImeSwitchButtonClick(view);
+                    buttonClickListener.onImeSwitchButtonClick(view);
                 }
             });
             Objects.requireNonNull(buttonClickListener);
             imeSwitchButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view) {
-                    return NavigationBarView.ButtonClickListener.this.onImeSwitchButtonLongClick(view);
+                    return buttonClickListener.onImeSwitchButtonLongClick(view);
                 }
             });
             return;
@@ -198,10 +197,10 @@ public final class NavigationBarView extends FrameLayout {
             keyButtonDrawable.setRotation(f);
             return;
         }
-        ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(keyButtonDrawable, PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_ROTATE, f), PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_TRANSLATE_Y, z ? -NavigationBarUtils.dpToPx(2.0f, getResources()) : 0.0f));
-        ofPropertyValuesHolder.setInterpolator(FAST_OUT_SLOW_IN);
-        ofPropertyValuesHolder.setDuration(200L);
-        ofPropertyValuesHolder.start();
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(keyButtonDrawable, PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_ROTATE, f), PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_TRANSLATE_Y, z ? -NavigationBarUtils.dpToPx(2.0f, getResources()) : 0.0f));
+        objectAnimatorOfPropertyValuesHolder.setInterpolator(FAST_OUT_SLOW_IN);
+        objectAnimatorOfPropertyValuesHolder.setDuration(200L);
+        objectAnimatorOfPropertyValuesHolder.start();
     }
 
     private KeyButtonDrawable getDrawable(int i) {

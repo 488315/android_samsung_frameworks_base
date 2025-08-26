@@ -3,7 +3,6 @@ package androidx.compose.foundation.text;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyboardActions {
     public static final Companion Companion = new Companion(null);
@@ -15,7 +14,6 @@ public final class KeyboardActions {
     public final Function1 onSearch;
     public final Function1 onSend;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,17 +40,17 @@ public final class KeyboardActions {
 
     public final int hashCode() {
         Function1 function1 = this.onDone;
-        int hashCode = (function1 != null ? function1.hashCode() : 0) * 31;
+        int iHashCode = (function1 != null ? function1.hashCode() : 0) * 31;
         Function1 function12 = this.onGo;
-        int hashCode2 = (hashCode + (function12 != null ? function12.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (function12 != null ? function12.hashCode() : 0)) * 31;
         Function1 function13 = this.onNext;
-        int hashCode3 = (hashCode2 + (function13 != null ? function13.hashCode() : 0)) * 31;
+        int iHashCode3 = (iHashCode2 + (function13 != null ? function13.hashCode() : 0)) * 31;
         Function1 function14 = this.onPrevious;
-        int hashCode4 = (hashCode3 + (function14 != null ? function14.hashCode() : 0)) * 31;
+        int iHashCode4 = (iHashCode3 + (function14 != null ? function14.hashCode() : 0)) * 31;
         Function1 function15 = this.onSearch;
-        int hashCode5 = (hashCode4 + (function15 != null ? function15.hashCode() : 0)) * 31;
+        int iHashCode5 = (iHashCode4 + (function15 != null ? function15.hashCode() : 0)) * 31;
         Function1 function16 = this.onSend;
-        return hashCode5 + (function16 != null ? function16.hashCode() : 0);
+        return iHashCode5 + (function16 != null ? function16.hashCode() : 0);
     }
 
     public KeyboardActions(Function1 function1, Function1 function12, Function1 function13, Function1 function14, Function1 function15, Function1 function16) {

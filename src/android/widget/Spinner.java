@@ -141,19 +141,19 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         this.mTempRect = new Rect();
         this.mIsThemeDeviceDefaultFamily = false;
         this.mDropdownHorizontalOffset = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.Spinner, attributeSet, obtainStyledAttributes, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.Spinner, attributeSet, typedArrayObtainStyledAttributes, i, i2);
         if (theme != null) {
             this.mPopupContext = new ContextThemeWrapper(context, theme);
         } else {
-            int resourceId = obtainStyledAttributes.getResourceId(7, 0);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(7, 0);
             if (resourceId != 0) {
                 this.mPopupContext = new ContextThemeWrapper(context, resourceId);
             } else {
                 this.mPopupContext = context;
             }
         }
-        i3 = i3 == -1 ? obtainStyledAttributes.getInt(5, 0) : i3;
+        i3 = i3 == -1 ? typedArrayObtainStyledAttributes.getInt(5, 0) : i3;
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true);
         this.mIsThemeDeviceDefaultFamily = typedValue.data != 0;
@@ -161,20 +161,20 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         if (i3 == 0) {
             DialogPopup dialogPopup = new DialogPopup();
             this.mPopup = dialogPopup;
-            dialogPopup.setPromptText(obtainStyledAttributes.getString(3));
+            dialogPopup.setPromptText(typedArrayObtainStyledAttributes.getString(3));
         } else if (i3 == 1) {
             final DropdownPopup dropdownPopup = new DropdownPopup(this.mPopupContext, attributeSet, i, i2);
-            TypedArray obtainStyledAttributes2 = this.mPopupContext.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
-            this.mDropDownWidth = obtainStyledAttributes2.getLayoutDimension(4, -2);
-            if (obtainStyledAttributes2.hasValueOrEmpty(1)) {
-                dropdownPopup.setListSelector(obtainStyledAttributes2.getDrawable(1));
+            TypedArray typedArrayObtainStyledAttributes2 = this.mPopupContext.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
+            this.mDropDownWidth = typedArrayObtainStyledAttributes2.getLayoutDimension(4, -2);
+            if (typedArrayObtainStyledAttributes2.hasValueOrEmpty(1)) {
+                dropdownPopup.setListSelector(typedArrayObtainStyledAttributes2.getDrawable(1));
             }
-            dropdownPopup.setBackgroundDrawable(obtainStyledAttributes2.getDrawable(2));
-            dropdownPopup.setPromptText(obtainStyledAttributes.getString(3));
-            obtainStyledAttributes2.recycle();
-            TypedArray obtainStyledAttributes3 = context.obtainStyledAttributes(attributeSet, R.styleable.ListPopupWindow, i, i2);
-            this.mDropdownHorizontalOffset = obtainStyledAttributes3.getDimensionPixelOffset(0, 0);
-            obtainStyledAttributes3.recycle();
+            dropdownPopup.setBackgroundDrawable(typedArrayObtainStyledAttributes2.getDrawable(2));
+            dropdownPopup.setPromptText(typedArrayObtainStyledAttributes.getString(3));
+            typedArrayObtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes3 = context.obtainStyledAttributes(attributeSet, R.styleable.ListPopupWindow, i, i2);
+            this.mDropdownHorizontalOffset = typedArrayObtainStyledAttributes3.getDimensionPixelOffset(0, 0);
+            typedArrayObtainStyledAttributes3.recycle();
             this.mPopup = dropdownPopup;
             this.mForwardingListener = new ForwardingListener(this) { // from class: android.widget.Spinner.1
                 @Override // android.widget.ForwardingListener
@@ -192,9 +192,9 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
                 }
             };
         }
-        this.mGravity = obtainStyledAttributes.getInt(0, 17);
-        this.mDisableChildrenWhenDisabled = obtainStyledAttributes.getBoolean(8, false);
-        obtainStyledAttributes.recycle();
+        this.mGravity = typedArrayObtainStyledAttributes.getInt(0, 17);
+        this.mDisableChildrenWhenDisabled = typedArrayObtainStyledAttributes.getBoolean(8, false);
+        typedArrayObtainStyledAttributes.recycle();
         SpinnerAdapter spinnerAdapter = this.mTempAdapter;
         if (spinnerAdapter != null) {
             setAdapter(spinnerAdapter);
@@ -258,7 +258,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     }
 
     @Override // android.view.View
-    public void setEnabled(boolean z) {
+    public void setEnabled(boolean z) throws Resources.NotFoundException {
         super.setEnabled(z);
         if (this.mDisableChildrenWhenDisabled) {
             int childCount = getChildCount();
@@ -301,22 +301,22 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     }
 
     @Override // android.view.View
-    public int getBaseline() {
-        View view;
+    public int getBaseline() throws Resources.NotFoundException {
+        View childAt;
         int baseline;
         if (getChildCount() > 0) {
-            view = getChildAt(0);
+            childAt = getChildAt(0);
         } else if (this.mAdapter == null || this.mAdapter.getCount() <= 0) {
-            view = null;
+            childAt = null;
         } else {
-            View makeView = makeView(0, false);
-            this.mRecycler.put(0, makeView);
-            view = makeView;
+            View viewMakeView = makeView(0, false);
+            this.mRecycler.put(0, viewMakeView);
+            childAt = viewMakeView;
         }
-        if (view == null || (baseline = view.getBaseline()) < 0) {
+        if (childAt == null || (baseline = childAt.getBaseline()) < 0) {
             return -1;
         }
-        return view.getTop() + baseline;
+        return childAt.getTop() + baseline;
     }
 
     @Override // android.widget.AdapterView, android.view.ViewGroup, android.view.View
@@ -349,18 +349,18 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
 
     @Override // android.widget.AbsSpinner, android.view.View
     protected void onMeasure(int i, int i2) {
-        int measureContentWidth;
+        int iMeasureContentWidth;
         super.onMeasure(i, i2);
         if (this.mPopup == null || View.MeasureSpec.getMode(i) != Integer.MIN_VALUE) {
             return;
         }
         int measuredWidth = getMeasuredWidth();
         if (this.mIsThemeDeviceDefaultFamily && getSelectedItemPosition() > -1 && getSelectedItemPosition() < this.mAdapter.getCount()) {
-            measureContentWidth = semGetCurrentContentWidth(getAdapter(), getBackground());
+            iMeasureContentWidth = semGetCurrentContentWidth(getAdapter(), getBackground());
         } else {
-            measureContentWidth = measureContentWidth(getAdapter(), getBackground());
+            iMeasureContentWidth = measureContentWidth(getAdapter(), getBackground());
         }
-        setMeasuredDimension(Math.min(Math.max(measuredWidth, measureContentWidth), View.MeasureSpec.getSize(i)), getMeasuredHeight());
+        setMeasuredDimension(Math.min(Math.max(measuredWidth, iMeasureContentWidth), View.MeasureSpec.getSize(i)), getMeasuredHeight());
     }
 
     private void enableShowButtonBackground(View view) {
@@ -370,7 +370,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     }
 
     @Override // android.widget.AdapterView, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         this.mInLayout = true;
         layout(0, false);
@@ -378,7 +378,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     }
 
     @Override // android.widget.AbsSpinner
-    void layout(int i, boolean z) {
+    void layout(int i, boolean z) throws Resources.NotFoundException {
         int i2;
         int i3 = this.mSpinnerPadding.left;
         int i4 = ((this.mRight - this.mLeft) - this.mSpinnerPadding.left) - this.mSpinnerPadding.right;
@@ -396,9 +396,9 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         removeAllViewsInLayout();
         this.mFirstPosition = this.mSelectedPosition;
         if (this.mAdapter != null) {
-            View makeView = makeView(this.mSelectedPosition, true);
-            enableShowButtonBackground(makeView);
-            int measuredWidth = makeView.getMeasuredWidth();
+            View viewMakeView = makeView(this.mSelectedPosition, true);
+            enableShowButtonBackground(viewMakeView);
+            int measuredWidth = viewMakeView.getMeasuredWidth();
             int absoluteGravity = Gravity.getAbsoluteGravity(this.mGravity, getLayoutDirection()) & 7;
             if (absoluteGravity == 1) {
                 i2 = i3 + (i4 / 2);
@@ -407,10 +407,10 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
                 if (absoluteGravity == 5) {
                     i2 = i3 + i4;
                 }
-                makeView.offsetLeftAndRight(i3);
+                viewMakeView.offsetLeftAndRight(i3);
             }
             i3 = i2 - measuredWidth;
-            makeView.offsetLeftAndRight(i3);
+            viewMakeView.offsetLeftAndRight(i3);
         }
         this.mRecycler.clear();
         invalidate();
@@ -420,7 +420,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         setNextSelectedPositionInt(this.mSelectedPosition);
     }
 
-    private View makeView(int i, boolean z) {
+    private View makeView(int i, boolean z) throws Resources.NotFoundException {
         View view;
         if (!this.mDataChanged && (view = this.mRecycler.get(i)) != null) {
             setUpChild(view, z);
@@ -431,7 +431,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         return view2;
     }
 
-    private void setUpChild(View view, boolean z) {
+    private void setUpChild(View view, boolean z) throws Resources.NotFoundException {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = generateDefaultLayoutParams();
@@ -452,9 +452,9 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
 
     @Override // android.view.View
     public boolean performClick() {
-        boolean performClick = super.performClick();
-        if (performClick) {
-            return performClick;
+        boolean zPerformClick = super.performClick();
+        if (zPerformClick) {
+            return zPerformClick;
         }
         if (!this.mPopup.isShowing()) {
             playSoundEffect(0);
@@ -508,43 +508,43 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         if (spinnerAdapter == null) {
             return 0;
         }
-        int makeSafeMeasureSpec = View.MeasureSpec.makeSafeMeasureSpec(getMeasuredWidth(), 0);
-        int makeSafeMeasureSpec2 = View.MeasureSpec.makeSafeMeasureSpec(getMeasuredHeight(), 0);
-        int max = Math.max(0, getSelectedItemPosition());
-        int min = Math.min(spinnerAdapter.getCount(), max + 15);
+        int iMakeSafeMeasureSpec = View.MeasureSpec.makeSafeMeasureSpec(getMeasuredWidth(), 0);
+        int iMakeSafeMeasureSpec2 = View.MeasureSpec.makeSafeMeasureSpec(getMeasuredHeight(), 0);
+        int iMax = Math.max(0, getSelectedItemPosition());
+        int iMin = Math.min(spinnerAdapter.getCount(), iMax + 15);
         View view = null;
-        int i2 = 0;
-        for (int max2 = Math.max(0, max - (15 - (min - max))); max2 < min; max2++) {
-            int itemViewType = spinnerAdapter.getItemViewType(max2);
+        int iMax2 = 0;
+        for (int iMax3 = Math.max(0, iMax - (15 - (iMin - iMax))); iMax3 < iMin; iMax3++) {
+            int itemViewType = spinnerAdapter.getItemViewType(iMax3);
             if (itemViewType != i) {
                 view = null;
                 i = itemViewType;
             }
-            view = spinnerAdapter.getView(max2, view, this);
+            view = spinnerAdapter.getView(iMax3, view, this);
             if (view.getLayoutParams() == null) {
                 view.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
             }
-            view.measure(makeSafeMeasureSpec, makeSafeMeasureSpec2);
-            i2 = Math.max(i2, view.getMeasuredWidth());
+            view.measure(iMakeSafeMeasureSpec, iMakeSafeMeasureSpec2);
+            iMax2 = Math.max(iMax2, view.getMeasuredWidth());
         }
         if (drawable == null) {
-            return i2;
+            return iMax2;
         }
         drawable.getPadding(this.mTempRect);
-        return i2 + this.mTempRect.left + this.mTempRect.right;
+        return iMax2 + this.mTempRect.left + this.mTempRect.right;
     }
 
     private int semGetCurrentContentWidth(SpinnerAdapter spinnerAdapter, Drawable drawable) {
         if (spinnerAdapter == null) {
             return 0;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
         View view = spinnerAdapter.getView(getSelectedItemPosition(), null, this);
         if (view.getLayoutParams() == null) {
             view.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
         }
-        view.measure(makeMeasureSpec, makeMeasureSpec2);
+        view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
         int measuredWidth = view.getMeasuredWidth();
         if (drawable == null) {
             return measuredWidth;
@@ -821,9 +821,9 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             if (charSequence != null) {
                 builder.setTitle(charSequence);
             }
-            AlertDialog create = builder.setSingleChoiceItems(this.mListAdapter, Spinner.this.getSelectedItemPosition(), this).create();
-            this.mPopup = create;
-            ListView listView = create.getListView();
+            AlertDialog alertDialogCreate = builder.setSingleChoiceItems(this.mListAdapter, Spinner.this.getSelectedItemPosition(), this).create();
+            this.mPopup = alertDialogCreate;
+            ListView listView = alertDialogCreate.getListView();
             listView.setTextDirection(i);
             listView.setTextAlignment(i2);
             this.mPopup.show();
@@ -912,17 +912,17 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             int paddingRight = Spinner.this.getPaddingRight();
             int width = Spinner.this.getWidth();
             if (Spinner.this.mDropDownWidth == -2) {
-                int measureContentWidth = Spinner.this.measureContentWidth((SpinnerAdapter) this.mAdapter, getBackground());
+                int iMeasureContentWidth = Spinner.this.measureContentWidth((SpinnerAdapter) this.mAdapter, getBackground());
                 Rect rect2 = new Rect();
                 Spinner.this.getWindowDisplayFrame(rect2);
                 int i2 = ((rect2.right - rect2.left) - Spinner.this.mTempRect.left) - Spinner.this.mTempRect.right;
-                if (measureContentWidth > i2) {
-                    measureContentWidth = i2;
+                if (iMeasureContentWidth > i2) {
+                    iMeasureContentWidth = i2;
                 }
                 if (Spinner.this.mIsThemeDeviceDefaultFamily) {
-                    setContentWidth(Math.max(measureContentWidth + 12, width));
+                    setContentWidth(Math.max(iMeasureContentWidth + 12, width));
                 } else {
-                    setContentWidth(Math.max(measureContentWidth, (width - paddingLeft) - paddingRight));
+                    setContentWidth(Math.max(iMeasureContentWidth, (width - paddingLeft) - paddingRight));
                 }
             } else if (Spinner.this.mDropDownWidth == -1) {
                 setContentWidth((width - paddingLeft) - paddingRight);
@@ -940,7 +940,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         @Override // android.widget.Spinner.SpinnerPopup
         public void show(int i, int i2) {
             ViewTreeObserver viewTreeObserver;
-            boolean isShowing = isShowing();
+            boolean zIsShowing = isShowing();
             computeContentWidth();
             setInputMethodMode(2);
             super.show();
@@ -949,7 +949,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             listView.setTextDirection(i);
             listView.setTextAlignment(i2);
             setSelection(Spinner.this.getSelectedItemPosition());
-            if (isShowing || (viewTreeObserver = Spinner.this.getViewTreeObserver()) == null) {
+            if (zIsShowing || (viewTreeObserver = Spinner.this.getViewTreeObserver()) == null) {
                 return;
             }
             final ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: android.widget.Spinner.DropdownPopup.2

@@ -1,8 +1,10 @@
 package com.google.android.msdl.logging;
 
+import com.google.android.msdl.data.model.MSDLToken;
+import com.google.android.msdl.domain.InteractionProperties;
+import com.google.android.msdl.logging.MSDLHistoryLogger;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MSDLEvent {
     public final String properties;
@@ -27,9 +29,9 @@ public final class MSDLEvent {
     }
 
     public final int hashCode() {
-        int hashCode = this.tokenName.hashCode() * 31;
+        int iHashCode = this.tokenName.hashCode() * 31;
         String str = this.properties;
-        return this.timeStamp.hashCode() + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+        return this.timeStamp.hashCode() + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31);
     }
 
     public final String toString() {
@@ -37,29 +39,10 @@ public final class MSDLEvent {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MSDLEvent(com.google.android.msdl.data.model.MSDLToken r4, com.google.android.msdl.domain.InteractionProperties r5) {
-        /*
-            r3 = this;
-            java.lang.String r4 = r4.name()
-            if (r5 == 0) goto Lb
-            java.lang.String r5 = r5.toString()
-            goto Lc
-        Lb:
-            r5 = 0
-        Lc:
-            com.google.android.msdl.logging.MSDLHistoryLogger$Companion r0 = com.google.android.msdl.logging.MSDLHistoryLogger.Companion
-            r0.getClass()
-            java.text.SimpleDateFormat r0 = com.google.android.msdl.logging.MSDLHistoryLogger.Companion.DATE_FORMAT
-            long r1 = java.lang.System.currentTimeMillis()
-            java.lang.Long r1 = java.lang.Long.valueOf(r1)
-            java.lang.String r0 = r0.format(r1)
-            r3.<init>(r4, r5, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.msdl.logging.MSDLEvent.<init>(com.google.android.msdl.data.model.MSDLToken, com.google.android.msdl.domain.InteractionProperties):void");
+    public MSDLEvent(MSDLToken mSDLToken, InteractionProperties interactionProperties) {
+        String strName = mSDLToken.name();
+        String string = interactionProperties != null ? interactionProperties.toString() : null;
+        MSDLHistoryLogger.Companion.getClass();
+        this(strName, string, MSDLHistoryLogger.Companion.DATE_FORMAT.format(Long.valueOf(System.currentTimeMillis())));
     }
 }

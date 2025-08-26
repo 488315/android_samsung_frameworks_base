@@ -7,17 +7,22 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecQSBlurShadowView extends FrameLayout {
+    public int color;
+    public float dx;
+    public float dy;
+    public boolean enabled;
     public float height;
     public float left;
     public final Paint paint;
+    public float radius;
     public float top;
     public float width;
 
     public SecQSBlurShadowView(Context context) {
         super(context);
+        this.enabled = true;
         Paint paint = new Paint();
         paint.setColor(0);
         this.paint = paint;
@@ -36,8 +41,21 @@ public final class SecQSBlurShadowView extends FrameLayout {
         setBackground(getContext().getDrawable(R.drawable.qs_blur_drawable));
     }
 
+    @Override // android.view.View
+    public final void setAlpha(float f) {
+        if (this.enabled) {
+            super.setAlpha(f);
+            this.paint.setShadowLayer(this.radius * f, this.dx, this.dy, this.color);
+        } else {
+            super.setAlpha(0.0f);
+            this.paint.setShadowLayer(this.radius * 0.0f, this.dx, this.dy, this.color);
+        }
+        invalidate();
+    }
+
     public SecQSBlurShadowView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        this.enabled = true;
         Paint paint = new Paint();
         paint.setColor(0);
         this.paint = paint;

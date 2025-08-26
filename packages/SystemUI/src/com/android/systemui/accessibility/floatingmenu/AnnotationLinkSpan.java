@@ -9,13 +9,11 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AnnotationLinkSpan extends ClickableSpan {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Optional mClickListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LinkInfo {
         public final Optional mAnnotation;
         public final Optional mListener;

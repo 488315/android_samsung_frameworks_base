@@ -23,14 +23,12 @@ import kotlin.time.Duration;
 import kotlin.time.MonotonicTimeSource;
 import kotlin.time.TimeSource$Monotonic;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PrefetchHandleProvider {
     public final PrefetchScheduler executor;
     public final LazyLayoutItemContentFactory itemContentFactory;
     public final SubcomposeLayoutState subcomposeLayoutState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class HandleAndRequestImpl implements LazyLayoutPrefetchState.PrefetchHandle, PrefetchRequest, LazyLayoutPrefetchState.LazyLayoutPrefetchResultScope {
         public long availableTimeNanos;
         public final long constraints;
@@ -46,7 +44,6 @@ public final class PrefetchHandleProvider {
         public final PrefetchMetrics prefetchMetrics;
         public long startTime;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class NestedPrefetchController {
             public int requestIndex;
             public final List[] requestsByState;
@@ -92,9 +89,9 @@ public final class PrefetchHandleProvider {
                 int i = this.index;
                 if (i >= 0 && i < itemCount) {
                     Object contentType = lazyLayoutItemProvider.getContentType(i);
-                    long nanoTime = System.nanoTime();
+                    long jNanoTime = System.nanoTime();
                     long j5 = prefetchRequestScopeImpl.nextFrameTimeNs;
-                    this.availableTimeNanos = Math.max(0L, j5 - nanoTime);
+                    this.availableTimeNanos = Math.max(0L, j5 - jNanoTime);
                     TimeSource$Monotonic.INSTANCE.getClass();
                     MonotonicTimeSource.INSTANCE.getClass();
                     this.startTime = MonotonicTimeSource.read();
@@ -176,7 +173,7 @@ public final class PrefetchHandleProvider {
                                             list = EmptyList.INSTANCE;
                                         } else {
                                             LazyLayoutPrefetchState.NestedPrefetchScopeImpl nestedPrefetchScopeImpl = lazyLayoutPrefetchState.new NestedPrefetchScopeImpl();
-                                            function1.mo779invoke(nestedPrefetchScopeImpl);
+                                            function1.mo781invoke(nestedPrefetchScopeImpl);
                                             list = nestedPrefetchScopeImpl._requests;
                                         }
                                         listArr[i2] = list;
@@ -213,7 +210,7 @@ public final class PrefetchHandleProvider {
                             }
                             Trace.beginSection("compose:lazy:prefetch:measure");
                             try {
-                                m174performMeasureBRTryo0(j14);
+                                m175performMeasureBRTryo0(j14);
                                 Unit unit4 = Unit.INSTANCE;
                                 Trace.endSection();
                                 updateElapsedAndAvailableTime();
@@ -236,7 +233,7 @@ public final class PrefetchHandleProvider {
                                 average2.measureTimeNanos = j17;
                                 Function1 function12 = this.onItemPrefetched;
                                 if (function12 != null) {
-                                    function12.mo779invoke(this);
+                                    function12.mo781invoke(this);
                                     return false;
                                 }
                             } finally {
@@ -259,10 +256,10 @@ public final class PrefetchHandleProvider {
 
         @Override // androidx.compose.foundation.lazy.layout.LazyLayoutPrefetchState.LazyLayoutPrefetchResultScope
         /* renamed from: getSize-YEO4UFw */
-        public final long mo171getSizeYEO4UFw(int i) {
+        public final long mo172getSizeYEO4UFw(int i) {
             SubcomposeLayoutState.PrecomposedSlotHandle precomposedSlotHandle = this.precomposeHandle;
             if (precomposedSlotHandle != null) {
-                return precomposedSlotHandle.mo620getSizeYEO4UFw(i);
+                return precomposedSlotHandle.mo622getSizeYEO4UFw(i);
             }
             IntSize.Companion.getClass();
             return 0L;
@@ -274,7 +271,7 @@ public final class PrefetchHandleProvider {
         }
 
         /* renamed from: performMeasure-BRTryo0, reason: not valid java name */
-        public final void m174performMeasureBRTryo0(long j) {
+        public final void m175performMeasureBRTryo0(long j) {
             if (this.isCanceled) {
                 InlineClassHelperKt.throwIllegalArgumentException("Callers should check whether the request is still valid before calling performMeasure()");
             }
@@ -289,7 +286,7 @@ public final class PrefetchHandleProvider {
             }
             int placeablesCount = precomposedSlotHandle.getPlaceablesCount();
             for (int i = 0; i < placeablesCount; i++) {
-                precomposedSlotHandle.mo621premeasure0kLqBqw(i, j);
+                precomposedSlotHandle.mo623premeasure0kLqBqw(i, j);
             }
         }
 
@@ -309,18 +306,18 @@ public final class PrefetchHandleProvider {
                 /* JADX WARN: Multi-variable type inference failed */
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    T t;
+                public final Object mo781invoke(Object obj) {
+                    T tMutableListOf;
                     LazyLayoutPrefetchState lazyLayoutPrefetchState = ((TraversablePrefetchStateNode) ((TraversableNode) obj)).prefetchState;
                     Ref$ObjectRef<List<LazyLayoutPrefetchState>> ref$ObjectRef2 = ref$ObjectRef;
                     List<LazyLayoutPrefetchState> list = ref$ObjectRef2.element;
                     if (list != null) {
                         list.add(lazyLayoutPrefetchState);
-                        t = list;
+                        tMutableListOf = list;
                     } else {
-                        t = CollectionsKt__CollectionsKt.mutableListOf(lazyLayoutPrefetchState);
+                        tMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(lazyLayoutPrefetchState);
                     }
-                    ref$ObjectRef2.element = t;
+                    ref$ObjectRef2.element = tMutableListOf;
                     return TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal;
                 }
             });
@@ -335,7 +332,7 @@ public final class PrefetchHandleProvider {
             StringBuilder sb = new StringBuilder("HandleAndRequestImpl { index = ");
             sb.append(this.index);
             sb.append(", constraints = ");
-            sb.append((Object) Constraints.m824toStringimpl(this.constraints));
+            sb.append((Object) Constraints.m826toStringimpl(this.constraints));
             sb.append(", isComposed = ");
             sb.append(this.precomposeHandle != null);
             sb.append(", isMeasured = ");
@@ -347,16 +344,16 @@ public final class PrefetchHandleProvider {
         public final void updateElapsedAndAvailableTime() {
             TimeSource$Monotonic.INSTANCE.getClass();
             MonotonicTimeSource.INSTANCE.getClass();
-            long read = MonotonicTimeSource.read();
-            long m3448minus6eNON_k = TimeSource$Monotonic.ValueTimeMark.m3448minus6eNON_k(read, this.startTime);
-            long j = m3448minus6eNON_k >> 1;
+            long j = MonotonicTimeSource.read();
+            long jM3468minus6eNON_k = TimeSource$Monotonic.ValueTimeMark.m3468minus6eNON_k(j, this.startTime);
+            long j2 = jM3468minus6eNON_k >> 1;
             Duration.Companion companion = Duration.Companion;
-            if ((((int) m3448minus6eNON_k) & 1) != 0) {
-                j = j > 9223372036854L ? Long.MAX_VALUE : j < -9223372036854L ? Long.MIN_VALUE : j * 1000000;
+            if ((((int) jM3468minus6eNON_k) & 1) != 0) {
+                j2 = j2 > 9223372036854L ? Long.MAX_VALUE : j2 < -9223372036854L ? Long.MIN_VALUE : j2 * 1000000;
             }
-            this.elapsedTimeNanos = j;
-            this.availableTimeNanos -= j;
-            this.startTime = read;
+            this.elapsedTimeNanos = j2;
+            this.availableTimeNanos -= j2;
+            this.startTime = j;
         }
 
         private HandleAndRequestImpl(int i, long j, PrefetchMetrics prefetchMetrics, Function1 function1) {

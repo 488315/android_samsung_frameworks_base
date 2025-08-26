@@ -18,6 +18,8 @@ import com.android.internal.org.bouncycastle.util.Selector;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.Principal;
 import java.security.cert.CertSelector;
 import java.security.cert.Certificate;
@@ -165,7 +167,7 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
     }
 
     @Override // java.security.cert.CertSelector
-    public boolean match(Certificate certificate) {
+    public boolean match(Certificate certificate) throws NoSuchAlgorithmException, NoSuchProviderException {
         if (!(certificate instanceof X509Certificate)) {
             return false;
         }

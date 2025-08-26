@@ -20,7 +20,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollingContainerNode extends DelegatingNode implements CompositionLocalConsumerModifierNode, ObserverModifierNode {
     public BringIntoViewSpec bringIntoViewSpec;
@@ -60,11 +59,7 @@ final class ScrollingContainerNode extends DelegatingNode implements Composition
             return;
         }
         if (this.useLocalOverscrollFactory) {
-            ObserverModifierNodeKt.observeReads(this, new Function0() { // from class: androidx.compose.foundation.ScrollingContainerNode$attachOverscrollNodeIfNeeded$1
-                {
-                    super(0);
-                }
-
+            ObserverModifierNodeKt.observeReads(this, new Function0() { // from class: androidx.compose.foundation.ScrollingContainerNode.attachOverscrollNodeIfNeeded.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     ScrollingContainerNode scrollingContainerNode = ScrollingContainerNode.this;
@@ -113,9 +108,9 @@ final class ScrollingContainerNode extends DelegatingNode implements Composition
 
     @Override // androidx.compose.ui.node.DelegatableNode
     public final void onLayoutDirectionChange() {
-        boolean shouldReverseDirection = shouldReverseDirection();
-        if (this.shouldReverseDirection != shouldReverseDirection) {
-            this.shouldReverseDirection = shouldReverseDirection;
+        boolean zShouldReverseDirection = shouldReverseDirection();
+        if (this.shouldReverseDirection != zShouldReverseDirection) {
+            this.shouldReverseDirection = zShouldReverseDirection;
             ScrollableState scrollableState = this.state;
             Orientation orientation = this.orientation;
             boolean z = this.useLocalOverscrollFactory;
@@ -184,11 +179,11 @@ final class ScrollingContainerNode extends DelegatingNode implements Composition
         this.flingBehavior = flingBehavior;
         this.interactionSource = mutableInteractionSource;
         this.bringIntoViewSpec = bringIntoViewSpec;
-        boolean shouldReverseDirection = shouldReverseDirection();
-        this.shouldReverseDirection = shouldReverseDirection;
+        boolean zShouldReverseDirection = shouldReverseDirection();
+        this.shouldReverseDirection = zShouldReverseDirection;
         ScrollableNode scrollableNode = this.scrollableNode;
         if (scrollableNode != null) {
-            scrollableNode.update(scrollableState, orientation, this.useLocalOverscrollFactory ? this.localOverscrollFactoryCreatedOverscrollEffect : this.userProvidedOverscrollEffect, z2, shouldReverseDirection, flingBehavior, mutableInteractionSource, bringIntoViewSpec);
+            scrollableNode.update(scrollableState, orientation, this.useLocalOverscrollFactory ? this.localOverscrollFactoryCreatedOverscrollEffect : this.userProvidedOverscrollEffect, z2, zShouldReverseDirection, flingBehavior, mutableInteractionSource, bringIntoViewSpec);
         }
     }
 }

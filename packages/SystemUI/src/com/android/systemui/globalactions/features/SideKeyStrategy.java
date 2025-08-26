@@ -3,6 +3,7 @@ package com.android.systemui.globalactions.features;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import com.android.systemui.R;
 import com.android.systemui.globalactions.util.ScreenCapturePopupController;
 import com.android.systemui.globalactions.util.SystemUIConditions;
@@ -15,7 +16,6 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModelF
 import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.SystemConditions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SideKeyStrategy implements ActionsCreationStrategy, ActionUpdateStrategy, DisposingStrategy {
     public final ConditionChecker mConditionChecker;
@@ -52,14 +52,14 @@ public class SideKeyStrategy implements ActionsCreationStrategy, ActionUpdateStr
     public final void onDispose() {
         if (this.sSideKeyType == 1) {
             ScreenCapturePopupController screenCapturePopupController = this.mPopupController;
-            SharedPreferences.Editor edit = screenCapturePopupController.mPrefrerences.edit();
-            edit.putLong("dismissTime", System.currentTimeMillis());
-            edit.apply();
+            SharedPreferences.Editor editorEdit = screenCapturePopupController.mPrefrerences.edit();
+            editorEdit.putLong("dismissTime", System.currentTimeMillis());
+            editorEdit.apply();
             screenCapturePopupController.mLogWrapper.logDebug("ScreenCapturePopupController", "saveTime : " + screenCapturePopupController.mPrefrerences.getLong("dismissTime", 0L));
         }
     }
 
-    public final void onUpdateAction(ActionViewModel actionViewModel) {
+    public final void onUpdateAction(ActionViewModel actionViewModel) throws Resources.NotFoundException {
         if (actionViewModel.getActionInfo().getName() == "force_restart_message") {
             int integer = this.mContext.getResources().getInteger(17695218);
             actionViewModel.getActionInfo().setStateLabel(this.mContext.getResources().getQuantityString(R.plurals.globalactions_force_restart_message, integer, Integer.valueOf(integer)));

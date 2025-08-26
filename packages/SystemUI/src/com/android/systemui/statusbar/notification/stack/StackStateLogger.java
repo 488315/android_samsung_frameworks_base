@@ -6,7 +6,6 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.NotificationUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StackStateLogger {
     public final LogBuffer buffer;
@@ -21,23 +20,23 @@ public final class StackStateLogger {
         LogLevel logLevel = LogLevel.INFO;
         StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda0 = new StackStateLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = this.notificationRenderBuffer;
-        LogMessage obtain = logBuffer.obtain("StackScroll", logLevel, stackStateLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("StackScroll", logLevel, stackStateLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.str2 = str2;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void animationStart(String str, String str2, boolean z) {
         LogLevel logLevel = LogLevel.INFO;
         StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda0 = new StackStateLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = this.notificationRenderBuffer;
-        LogMessage obtain = logBuffer.obtain("StackScroll", logLevel, stackStateLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("StackScroll", logLevel, stackStateLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.str2 = str2;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

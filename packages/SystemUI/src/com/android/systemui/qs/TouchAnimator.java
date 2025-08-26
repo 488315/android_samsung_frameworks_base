@@ -10,7 +10,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TouchAnimator {
     public static final AnonymousClass1 POSITION = new FloatProperty(SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION) { // from class: com.android.systemui.qs.TouchAnimator.1
@@ -32,7 +31,6 @@ public class TouchAnimator {
     public final float mStartDelay;
     public final Object[] mTargets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public float mEndDelay;
         public Interpolator mInterpolator;
@@ -41,47 +39,56 @@ public class TouchAnimator {
         public final List mTargets = new ArrayList();
         public final List mValues = new ArrayList();
 
+        /* JADX WARN: Removed duplicated region for block: B:54:0x0099  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void addFloat(Object obj, String str, float... fArr) {
-            Property of;
+            Property propertyOf;
             Class cls = Float.TYPE;
             if (obj instanceof View) {
                 switch (str) {
                     case "translationX":
-                        of = View.TRANSLATION_X;
+                        propertyOf = View.TRANSLATION_X;
                         break;
                     case "translationY":
-                        of = View.TRANSLATION_Y;
+                        propertyOf = View.TRANSLATION_Y;
                         break;
                     case "translationZ":
-                        of = View.TRANSLATION_Z;
+                        propertyOf = View.TRANSLATION_Z;
                         break;
                     case "scaleX":
-                        of = View.SCALE_X;
+                        propertyOf = View.SCALE_X;
                         break;
                     case "scaleY":
-                        of = View.SCALE_Y;
+                        propertyOf = View.SCALE_Y;
                         break;
                     case "rotation":
-                        of = View.ROTATION;
+                        propertyOf = View.ROTATION;
                         break;
                     case "x":
-                        of = View.X;
+                        propertyOf = View.X;
                         break;
                     case "y":
-                        of = View.Y;
+                        propertyOf = View.Y;
                         break;
                     case "alpha":
-                        of = View.ALPHA;
+                        propertyOf = View.ALPHA;
+                        break;
+                    default:
+                        if (!(obj instanceof TouchAnimator) || !SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION.equals(str)) {
+                            propertyOf = Property.of(obj.getClass(), cls, str);
+                            break;
+                        } else {
+                            propertyOf = TouchAnimator.POSITION;
+                            break;
+                        }
                         break;
                 }
-                FloatKeyframeSet floatKeyframeSet = new FloatKeyframeSet(of, fArr);
-                ((ArrayList) this.mTargets).add(obj);
-                ((ArrayList) this.mValues).add(floatKeyframeSet);
             }
-            of = ((obj instanceof TouchAnimator) && SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION.equals(str)) ? TouchAnimator.POSITION : Property.of(obj.getClass(), cls, str);
-            FloatKeyframeSet floatKeyframeSet2 = new FloatKeyframeSet(of, fArr);
+            FloatKeyframeSet floatKeyframeSet = new FloatKeyframeSet(propertyOf, fArr);
             ((ArrayList) this.mTargets).add(obj);
-            ((ArrayList) this.mValues).add(floatKeyframeSet2);
+            ((ArrayList) this.mValues).add(floatKeyframeSet);
         }
 
         public final TouchAnimator build() {
@@ -92,7 +99,6 @@ public class TouchAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FloatKeyframeSet extends KeyframeSet {
         public final Property mProperty;
         public final float[] mValues;
@@ -111,7 +117,6 @@ public class TouchAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class KeyframeSet {
         public final float mFrameWidth;
         public final int mSize;
@@ -124,7 +129,6 @@ public class TouchAnimator {
         public abstract void interpolate(int i, float f, Object obj);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
         void onAnimationAtEnd();
 
@@ -141,25 +145,25 @@ public class TouchAnimator {
         if (Float.isNaN(f)) {
             return;
         }
-        float constrain = MathUtils.constrain((f - this.mStartDelay) / this.mSpan, 0.0f, 1.0f);
+        float fConstrain = MathUtils.constrain((f - this.mStartDelay) / this.mSpan, 0.0f, 1.0f);
         Interpolator interpolator = this.mInterpolator;
         if (interpolator != null) {
-            constrain = interpolator.getInterpolation(constrain);
+            fConstrain = interpolator.getInterpolation(fConstrain);
         }
         float f2 = this.mLastT;
-        if (constrain == f2) {
+        if (fConstrain == f2) {
             return;
         }
         Listener listener = this.mListener;
         if (listener != null) {
-            if (constrain == 1.0f) {
+            if (fConstrain == 1.0f) {
                 listener.onAnimationAtEnd();
-            } else if (constrain == 0.0f) {
+            } else if (fConstrain == 0.0f) {
                 listener.onAnimationAtStart();
             } else if (f2 <= 0.0f || f2 == 1.0f) {
                 listener.onAnimationStarted();
             }
-            this.mLastT = constrain;
+            this.mLastT = fConstrain;
         }
         int i = 0;
         while (true) {
@@ -170,7 +174,7 @@ public class TouchAnimator {
             KeyframeSet keyframeSet = this.mKeyframeSets[i];
             Object obj = objArr[i];
             float f3 = keyframeSet.mFrameWidth;
-            keyframeSet.interpolate(MathUtils.constrain((int) Math.ceil(constrain / f3), 1, keyframeSet.mSize - 1), SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f3, r4 - 1, constrain, f3), obj);
+            keyframeSet.interpolate(MathUtils.constrain((int) Math.ceil(fConstrain / f3), 1, keyframeSet.mSize - 1), SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f3, r4 - 1, fConstrain, f3), obj);
             i++;
         }
     }

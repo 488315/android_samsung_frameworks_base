@@ -174,19 +174,19 @@ public class TtsSpan implements ParcelableSpan {
         }
 
         public C setGender(String str) {
-            return (C) setStringArgument(TtsSpan.ARG_GENDER, str);
+            return setStringArgument(TtsSpan.ARG_GENDER, str);
         }
 
         public C setAnimacy(String str) {
-            return (C) setStringArgument(TtsSpan.ARG_ANIMACY, str);
+            return setStringArgument(TtsSpan.ARG_ANIMACY, str);
         }
 
         public C setMultiplicity(String str) {
-            return (C) setStringArgument(TtsSpan.ARG_MULTIPLICITY, str);
+            return setStringArgument(TtsSpan.ARG_MULTIPLICITY, str);
         }
 
         public C setCase(String str) {
-            return (C) setStringArgument(TtsSpan.ARG_CASE, str);
+            return setStringArgument(TtsSpan.ARG_CASE, str);
         }
     }
 
@@ -277,14 +277,14 @@ public class TtsSpan implements ParcelableSpan {
             numberFormat.setMinimumFractionDigits(i2);
             numberFormat.setMaximumFractionDigits(i2);
             numberFormat.setGroupingUsed(false);
-            String format = numberFormat.format(d);
-            int indexOf = format.indexOf(46);
-            if (indexOf >= 0) {
-                setIntegerPart(format.substring(0, indexOf));
-                setFractionalPart(format.substring(indexOf + 1));
+            String str = numberFormat.format(d);
+            int iIndexOf = str.indexOf(46);
+            if (iIndexOf >= 0) {
+                setIntegerPart(str.substring(0, iIndexOf));
+                setFractionalPart(str.substring(iIndexOf + 1));
                 return this;
             }
-            setIntegerPart(format);
+            setIntegerPart(str);
             return this;
         }
 

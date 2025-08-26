@@ -24,7 +24,6 @@ import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ChipAnimationController$startAnimation$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $show;
@@ -33,7 +32,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
     int label;
     final /* synthetic */ ChipAnimationController this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startAnimation$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ boolean $show;
@@ -42,9 +40,8 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
         int label;
         final /* synthetic */ ChipAnimationController this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startAnimation$2$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03421 extends SuspendLambda implements Function2 {
+        final class C05421 extends SuspendLambda implements Function2 {
             final /* synthetic */ CoroutineScope $$this$coroutineScope;
             final /* synthetic */ boolean $show;
             final /* synthetic */ View $v;
@@ -52,7 +49,7 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             final /* synthetic */ ChipAnimationController this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C03421(ChipAnimationController chipAnimationController, View view, boolean z, CoroutineScope coroutineScope, Continuation continuation) {
+            public C05421(ChipAnimationController chipAnimationController, View view, boolean z, CoroutineScope coroutineScope, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = chipAnimationController;
                 this.$v = view;
@@ -62,12 +59,12 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C03421(this.this$0, this.$v, this.$show, this.$$this$coroutineScope, continuation);
+                return new C05421(this.this$0, this.$v, this.$show, this.$$this$coroutineScope, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C03421) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C05421) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -85,19 +82,19 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
                     final CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(this), 1);
                     cancellableContinuationImpl.initCancellability();
                     view.setAlpha(z ? 0.0f : 1.0f);
-                    final ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
-                    ofFloat.setDuration(z ? 600L : 500L);
-                    ofFloat.setInterpolator(ChipAnimationController.AlPHA_INTERPOLATOR);
-                    ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateAlpha$2$alphaAnimator$1$1
+                    final ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
+                    objectAnimatorOfFloat.setDuration(z ? 600L : 500L);
+                    objectAnimatorOfFloat.setInterpolator(ChipAnimationController.AlPHA_INTERPOLATOR);
+                    objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateAlpha$2$alphaAnimator$1$1
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationCancel(Animator animator) {
-                            if (CancellableContinuation.this.isActive()) {
+                            if (cancellableContinuationImpl.isActive()) {
                                 ChipAnimationController chipAnimationController2 = chipAnimationController;
                                 View view2 = view;
                                 PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
                                 chipAnimationController2.getClass();
                                 MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("animateAlpha() Cancelled! V:", ChipAnimationController.viewInfo(view2), "{ChipAnimationController}");
-                                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                                 int i2 = Result.$r8$clinit;
                                 cancellableContinuation.resumeWith(Unit.INSTANCE);
                             }
@@ -105,13 +102,13 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
 
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
-                            if (CancellableContinuation.this.isActive()) {
+                            if (cancellableContinuationImpl.isActive()) {
                                 ChipAnimationController chipAnimationController2 = chipAnimationController;
                                 View view2 = view;
                                 PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
                                 chipAnimationController2.getClass();
                                 MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("animateAlpha() End! V:", ChipAnimationController.viewInfo(view2), "{ChipAnimationController}");
-                                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                                 int i2 = Result.$r8$clinit;
                                 cancellableContinuation.resumeWith(Unit.INSTANCE);
                                 View view3 = chipAnimationController.clockView;
@@ -125,12 +122,12 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
                     cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateAlpha$2$1
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj2) {
-                            ofFloat.cancel();
+                        public final Object mo781invoke(Object obj2) {
+                            objectAnimatorOfFloat.cancel();
                             return Unit.INSTANCE;
                         }
                     });
-                    ofFloat.start();
+                    objectAnimatorOfFloat.start();
                     Object result = cancellableContinuationImpl.getResult();
                     if (result != coroutineSingletons) {
                         result = Unit.INSTANCE;
@@ -148,7 +145,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startAnimation$2$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ boolean $show;
@@ -198,7 +194,6 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startAnimation$2$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ boolean $show;
@@ -276,7 +271,7 @@ final class ChipAnimationController$startAnimation$2 extends SuspendLambda imple
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            BuildersKt.launch$default(coroutineScope, null, null, new C03421(this.this$0, this.$v, this.$show, coroutineScope, null), 3);
+            BuildersKt.launch$default(coroutineScope, null, null, new C05421(this.this$0, this.$v, this.$show, coroutineScope, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(this.this$0, this.$v, this.$show, null), 3);
             return BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass3(this.this$0, this.$v, this.$show, null), 3);
         }

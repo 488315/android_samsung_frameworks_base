@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.NotificationPresenter;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarTransitionAnimatorController implements ActivityTransitionAnimator.Controller {
     public static final long ANIMATION_DELAY_ICON_FADE_IN;
@@ -28,7 +27,6 @@ public final class StatusBarTransitionAnimatorController implements ActivityTran
     public final ShadeAnimationInteractor shadeAnimationInteractor;
     public final ShadeController shadeController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

@@ -2,6 +2,7 @@ package com.android.systemui.qp;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,7 +29,6 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
     public SecPageIndicator mFooterPageIndicator;
     public LinearLayout mQuickSettingsContainer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscreenTileRecord extends QSPanelControllerBase$TileRecord {
         public final String mTilespec;
 
@@ -45,7 +44,7 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
         this.mContext = context;
     }
 
-    public final void addPagedTileLayout() {
+    public final void addPagedTileLayout() throws Resources.NotFoundException {
         SubscreenPagedTileLayout subscreenPagedTileLayout = this.mTileLayout;
         if (subscreenPagedTileLayout != null) {
             if (subscreenPagedTileLayout.getParent() != null) {
@@ -100,7 +99,7 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
             imageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomQuickSettingsQSPanelBaseView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SubroomQuickSettingsQSPanelBaseView subroomQuickSettingsQSPanelBaseView = SubroomQuickSettingsQSPanelBaseView.this;
+                    SubroomQuickSettingsQSPanelBaseView subroomQuickSettingsQSPanelBaseView = this.f$0;
                     int i = SubroomQuickSettingsQSPanelBaseView.$r8$clinit;
                     subroomQuickSettingsQSPanelBaseView.getClass();
                     SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_BRIGHTNESS_BAR_MORE_COVER);
@@ -110,7 +109,7 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
         }
     }
 
-    public final void updatePageIndicator() {
+    public final void updatePageIndicator() throws Resources.NotFoundException {
         SecPageIndicator secPageIndicator;
         SubscreenPagedTileLayout subscreenPagedTileLayout = this.mTileLayout;
         if (subscreenPagedTileLayout == null || (secPageIndicator = this.mFooterPageIndicator) == null) {
@@ -119,7 +118,7 @@ public class SubroomQuickSettingsQSPanelBaseView extends QSPanel {
         subscreenPagedTileLayout.setPageIndicator(secPageIndicator);
     }
 
-    public final void updateResources$1() {
+    public final void updateResources$1() throws Resources.NotFoundException {
         updatePageIndicator();
         if (this.mTileLayout != null) {
             int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.cover_screen_page_layout_height);

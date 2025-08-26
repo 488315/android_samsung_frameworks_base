@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IEnhancedAttestationPolicyCallback extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.integrity.IEnhancedAttestationPolicyCallback";
 
     void onAttestationFinished(EnhancedAttestationResult enhancedAttestationResult) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IEnhancedAttestationPolicyCallback {
         public static final int TRANSACTION_onAttestationFinished = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IEnhancedAttestationPolicyCallback {
             public IBinder mRemote;
 
@@ -36,16 +33,16 @@ public interface IEnhancedAttestationPolicyCallback extends IInterface {
 
             @Override // com.samsung.android.knox.integrity.IEnhancedAttestationPolicyCallback
             public void onAttestationFinished(EnhancedAttestationResult enhancedAttestationResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(enhancedAttestationResult, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(enhancedAttestationResult, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -58,8 +55,8 @@ public interface IEnhancedAttestationPolicyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IEnhancedAttestationPolicyCallback)) ? new Proxy(iBinder) : (IEnhancedAttestationPolicyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IEnhancedAttestationPolicyCallback)) ? new Proxy(iBinder) : (IEnhancedAttestationPolicyCallback) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -102,7 +99,6 @@ public interface IEnhancedAttestationPolicyCallback extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IEnhancedAttestationPolicyCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {

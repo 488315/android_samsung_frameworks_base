@@ -12,14 +12,12 @@ import kotlin.Unit;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationInterruptStateProviderWrapper implements VisualInterruptionDecisionProvider {
     public final NotificationInterruptStateProvider wrapped;
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DecisionImpl implements VisualInterruptionDecisionProvider.Decision {
         public static final /* synthetic */ DecisionImpl[] $VALUES;
         public static final Companion Companion;
@@ -28,7 +26,6 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
         private final String logReason = "unknown";
         private final boolean shouldInterrupt;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -72,7 +69,6 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FullScreenIntentDecisionImpl implements VisualInterruptionDecisionProvider.Decision {
         public final String logReason;
         public final NotificationInterruptStateProvider.FullScreenIntentDecision originalDecision;
@@ -116,15 +112,15 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final void logFullScreenIntentDecision(FullScreenIntentDecisionImpl fullScreenIntentDecisionImpl) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotificationInterruptStateProviderWrapper#logFullScreenIntentDecision");
         }
         try {
             ((NotificationInterruptStateProviderImpl) this.wrapped).logFullScreenIntentDecision(fullScreenIntentDecisionImpl.originalEntry, fullScreenIntentDecisionImpl.originalDecision);
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -132,16 +128,16 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeAndLogBubbleDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotificationInterruptStateProviderWrapper#makeAndLogBubbleDecision");
         }
         try {
-            boolean shouldBubbleUp = ((NotificationInterruptStateProviderImpl) this.wrapped).shouldBubbleUp(notificationEntry);
+            boolean zShouldBubbleUp = ((NotificationInterruptStateProviderImpl) this.wrapped).shouldBubbleUp(notificationEntry);
             DecisionImpl.Companion.getClass();
-            return shouldBubbleUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
+            return zShouldBubbleUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -149,16 +145,16 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeAndLogHeadsUpDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotificationInterruptStateProviderWrapper#makeAndLogHeadsUpDecision");
         }
         try {
-            boolean checkHeadsUp = ((NotificationInterruptStateProviderImpl) this.wrapped).checkHeadsUp(notificationEntry, true);
+            boolean zCheckHeadsUp = ((NotificationInterruptStateProviderImpl) this.wrapped).checkHeadsUp(notificationEntry, true);
             DecisionImpl.Companion.getClass();
-            return checkHeadsUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
+            return zCheckHeadsUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -166,8 +162,8 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final FullScreenIntentDecisionImpl makeUnloggedFullScreenIntentDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotificationInterruptStateProviderWrapper#makeUnloggedFullScreenIntentDecision");
         }
         try {
@@ -175,7 +171,7 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
             fullScreenIntentDecision.getClass();
             return new FullScreenIntentDecisionImpl(notificationEntry, fullScreenIntentDecision);
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -183,16 +179,16 @@ public final class NotificationInterruptStateProviderWrapper implements VisualIn
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeUnloggedHeadsUpDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotificationInterruptStateProviderWrapper#makeUnloggedHeadsUpDecision");
         }
         try {
-            boolean checkHeadsUp = ((NotificationInterruptStateProviderImpl) this.wrapped).checkHeadsUp(notificationEntry, false);
+            boolean zCheckHeadsUp = ((NotificationInterruptStateProviderImpl) this.wrapped).checkHeadsUp(notificationEntry, false);
             DecisionImpl.Companion.getClass();
-            return checkHeadsUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
+            return zCheckHeadsUp ? DecisionImpl.SHOULD_INTERRUPT : DecisionImpl.SHOULD_NOT_INTERRUPT;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }

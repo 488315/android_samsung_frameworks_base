@@ -7,17 +7,14 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface NotificationActivityStarter {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsIntent {
         public final List backStack;
         public final Integer cujType;
         public final Intent targetIntent;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -47,9 +44,9 @@ public interface NotificationActivityStarter {
         }
 
         public final int hashCode() {
-            int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.backStack, this.targetIntent.hashCode() * 31, 31);
+            int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.backStack, this.targetIntent.hashCode() * 31, 31);
             Integer num = this.cujType;
-            return m + (num == null ? 0 : num.hashCode());
+            return iM + (num == null ? 0 : num.hashCode());
         }
 
         public final String toString() {

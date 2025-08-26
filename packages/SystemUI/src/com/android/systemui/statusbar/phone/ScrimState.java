@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScrimState {
     public static final /* synthetic */ ScrimState[] $VALUES;
@@ -55,7 +54,6 @@ public class ScrimState {
     int mSurfaceColor;
     boolean mWakeLockScreenSensorActive;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$1, reason: invalid class name */
     enum AnonymousClass1 extends ScrimState {
         public /* synthetic */ AnonymousClass1() {
@@ -81,7 +79,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$10, reason: invalid class name */
     enum AnonymousClass10 extends ScrimState {
         public /* synthetic */ AnonymousClass10() {
@@ -109,7 +106,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$11, reason: invalid class name */
     enum AnonymousClass11 extends ScrimState {
         public /* synthetic */ AnonymousClass11() {
@@ -132,7 +128,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$12, reason: invalid class name */
     enum AnonymousClass12 extends ScrimState {
         public /* synthetic */ AnonymousClass12() {
@@ -155,7 +150,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$2, reason: invalid class name */
     enum AnonymousClass2 extends ScrimState {
         public /* synthetic */ AnonymousClass2() {
@@ -193,7 +187,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$3, reason: invalid class name */
     enum AnonymousClass3 extends ScrimState {
         public /* synthetic */ AnonymousClass3() {
@@ -224,7 +217,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$4, reason: invalid class name */
     enum AnonymousClass4 extends ScrimState {
         public /* synthetic */ AnonymousClass4() {
@@ -247,7 +239,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$5, reason: invalid class name */
     enum AnonymousClass5 extends ScrimState {
         public /* synthetic */ AnonymousClass5() {
@@ -276,7 +267,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$6, reason: invalid class name */
     enum AnonymousClass6 extends ScrimState {
         public /* synthetic */ AnonymousClass6() {
@@ -294,7 +284,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$7, reason: invalid class name */
     enum AnonymousClass7 extends ScrimState {
         public /* synthetic */ AnonymousClass7() {
@@ -335,7 +324,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$8, reason: invalid class name */
     enum AnonymousClass8 extends ScrimState {
         public /* synthetic */ AnonymousClass8() {
@@ -357,7 +345,6 @@ public class ScrimState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimState$9, reason: invalid class name */
     enum AnonymousClass9 extends ScrimState {
         public /* synthetic */ AnonymousClass9() {

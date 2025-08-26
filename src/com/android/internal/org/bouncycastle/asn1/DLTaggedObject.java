@@ -37,29 +37,29 @@ public class DLTaggedObject extends ASN1TaggedObject {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength(boolean z) throws IOException {
         ASN1Primitive dLObject = this.obj.toASN1Primitive().toDLObject();
-        boolean isExplicit = isExplicit();
-        int encodedLength = dLObject.encodedLength(isExplicit);
-        if (isExplicit) {
-            encodedLength += ASN1OutputStream.getLengthOfDL(encodedLength);
+        boolean zIsExplicit = isExplicit();
+        int iEncodedLength = dLObject.encodedLength(zIsExplicit);
+        if (zIsExplicit) {
+            iEncodedLength += ASN1OutputStream.getLengthOfDL(iEncodedLength);
         }
-        return encodedLength + (z ? ASN1OutputStream.getLengthOfIdentifier(this.tagNo) : 0);
+        return iEncodedLength + (z ? ASN1OutputStream.getLengthOfIdentifier(this.tagNo) : 0);
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream aSN1OutputStream, boolean z) throws IOException {
         ASN1Primitive dLObject = this.obj.toASN1Primitive().toDLObject();
-        boolean isExplicit = isExplicit();
+        boolean zIsExplicit = isExplicit();
         if (z) {
             int i = this.tagClass;
-            if (isExplicit || dLObject.encodeConstructed()) {
+            if (zIsExplicit || dLObject.encodeConstructed()) {
                 i |= 32;
             }
             aSN1OutputStream.writeIdentifier(true, i, this.tagNo);
         }
-        if (isExplicit) {
+        if (zIsExplicit) {
             aSN1OutputStream.writeDL(dLObject.encodedLength(true));
         }
-        dLObject.encode(aSN1OutputStream.getDLSubStream(), isExplicit);
+        dLObject.encode(aSN1OutputStream.getDLSubStream(), zIsExplicit);
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject

@@ -47,7 +47,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSHostAdapter implements QSHost {
     public final Map callbacksMap = new LinkedHashMap();
@@ -61,7 +60,6 @@ public final class QSHostAdapter implements QSHost {
     public final TileSearchInteractor tileSearchInteractor;
     public final TileServiceRequestController.Builder tileServiceRequestControllerBuilder;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.QSHostAdapter$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -97,7 +95,6 @@ public final class QSHostAdapter implements QSHost {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -127,7 +124,7 @@ public final class QSHostAdapter implements QSHost {
 
     @Override // com.android.systemui.qs.QSHost
     public final void addCallback(QSHost.Callback callback) {
-        StandaloneCoroutine launchTraced$default = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new QSHostAdapter$addCallback$job$1(this, callback, null), 7);
+        StandaloneCoroutine standaloneCoroutineLaunchTraced$default = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new QSHostAdapter$addCallback$job$1(this, callback, null), 7);
         synchronized (this.callbacksMap) {
         }
     }
@@ -212,12 +209,12 @@ public final class QSHostAdapter implements QSHost {
     }
 
     @Override // com.android.systemui.qs.QSHost
-    public final boolean isAvailableForSearch(String str) {
+    public final boolean isAvailableForSearch(String str) throws Resources.NotFoundException {
         TileSpec.Companion.getClass();
-        TileSpec create = TileSpec.Companion.create(str);
+        TileSpec tileSpecCreate = TileSpec.Companion.create(str);
         String string = ((TileSearchInteractorImpl) this.tileSearchInteractor).context.getResources().getString(R.string.quick_settings_search_allow_list);
         TilesSettingConverter.INSTANCE.getClass();
-        return ((ArrayList) TilesSettingConverter.toTilesList(string)).contains(create);
+        return ((ArrayList) TilesSettingConverter.toTilesList(string)).contains(tileSpecCreate);
     }
 
     @Override // com.android.systemui.qs.QSHost
@@ -268,25 +265,25 @@ public final class QSHostAdapter implements QSHost {
     @Override // com.android.systemui.qs.QSHost
     public final void sendRunestoneTileEventCDLog(String str, String str2, String str3) {
         TileSpec.Companion.getClass();
-        TileSpec create = TileSpec.Companion.create(str);
+        TileSpec tileSpecCreate = TileSpec.Companion.create(str);
         TileSALogHelper tileSALogHelper = this.tileSALogHelper;
         tileSALogHelper.getClass();
         String currentScreenID = SystemUIAnalytics.getCurrentScreenID();
-        int tileIndex = tileSALogHelper.getTileIndex(create);
-        Objects.toString(create);
+        int tileIndex = tileSALogHelper.getTileIndex(tileSpecCreate);
+        Objects.toString(tileSpecCreate);
         SystemUIAnalytics.sendRunestoneEventCDLog(currentScreenID, str2, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED.equals(SystemUIAnalytics.getCurrentScreenID()) ? SystemUIAnalytics.QPBE_QS_TILE_ICON_POSITION : SystemUIAnalytics.QPBE_QQS_TILE_ICON_POSITION, String.valueOf(tileIndex), "settings", str3, SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
     }
 
     @Override // com.android.systemui.qs.QSHost
     public final void sendTileEventLog(String str, String str2, String str3) {
         TileSpec.Companion.getClass();
-        TileSpec create = TileSpec.Companion.create(str);
+        TileSpec tileSpecCreate = TileSpec.Companion.create(str);
         TileSALogHelper tileSALogHelper = this.tileSALogHelper;
         tileSALogHelper.getClass();
         List list = (List) tileSALogHelper.tilesMap.get(str3);
         String str4 = list != null ? (String) list.get(0) : null;
         if (str4 != null) {
-            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), str4, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED.equals(SystemUIAnalytics.getCurrentScreenID()) ? SystemUIAnalytics.QPBE_QS_TILE_INTERACTION : SystemUIAnalytics.QPBE_QQS_TILE_INTERACTION, str2, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED.equals(SystemUIAnalytics.getCurrentScreenID()) ? SystemUIAnalytics.QPBE_QS_TILE_ICON_POSITION : SystemUIAnalytics.QPBE_QQS_TILE_ICON_POSITION, String.valueOf(tileSALogHelper.getTileIndex(create)));
+            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), str4, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED.equals(SystemUIAnalytics.getCurrentScreenID()) ? SystemUIAnalytics.QPBE_QS_TILE_INTERACTION : SystemUIAnalytics.QPBE_QQS_TILE_INTERACTION, str2, SystemUIAnalytics.SID_QUICKPANEL_EXPANDED.equals(SystemUIAnalytics.getCurrentScreenID()) ? SystemUIAnalytics.QPBE_QS_TILE_ICON_POSITION : SystemUIAnalytics.QPBE_QQS_TILE_ICON_POSITION, String.valueOf(tileSALogHelper.getTileIndex(tileSpecCreate)));
         }
     }
 
@@ -326,11 +323,11 @@ public final class QSHostAdapter implements QSHost {
         tileNameConverter.getClass();
         String tileSpec = TileNameConverter.toTileSpec(resources, str);
         companion.getClass();
-        TileSpec create = TileSpec.Companion.create(tileSpec);
-        if (!((List) ((KnoxPolicyTilesRepositoryImpl) knoxPolicyTilesInteractorImpl.knoxPolicyTilesRepository).knoxBlockedTiles.$$delegate_0.getValue()).contains(create)) {
+        TileSpec tileSpecCreate = TileSpec.Companion.create(tileSpec);
+        if (!((List) ((KnoxPolicyTilesRepositoryImpl) knoxPolicyTilesInteractorImpl.knoxPolicyTilesRepository).knoxBlockedTiles.$$delegate_0.getValue()).contains(tileSpecCreate)) {
             return false;
         }
-        Log.d("KnoxPolicyTilesInteractor", "shouldBeHiddenByKnox name= " + str + ", spec= " + create);
+        Log.d("KnoxPolicyTilesInteractor", "shouldBeHiddenByKnox name= " + str + ", spec= " + tileSpecCreate);
         return true;
     }
 
@@ -351,9 +348,9 @@ public final class QSHostAdapter implements QSHost {
         tileNameConverter.getClass();
         String tileSpec = TileNameConverter.toTileSpec(resources, str);
         companion.getClass();
-        TileSpec create = TileSpec.Companion.create(tileSpec);
-        Log.d("KnoxPolicyTilesInteractor", "shouldUnavailableByKnox name= " + str + ", spec= " + create);
-        return ((List) ((KnoxPolicyTilesRepositoryImpl) knoxPolicyTilesRepository).knoxUnavailableTiles.$$delegate_0.getValue()).contains(create);
+        TileSpec tileSpecCreate = TileSpec.Companion.create(tileSpec);
+        Log.d("KnoxPolicyTilesInteractor", "shouldUnavailableByKnox name= " + str + ", spec= " + tileSpecCreate);
+        return ((List) ((KnoxPolicyTilesRepositoryImpl) knoxPolicyTilesRepository).knoxUnavailableTiles.$$delegate_0.getValue()).contains(tileSpecCreate);
     }
 
     @Override // com.android.systemui.qs.QSHost

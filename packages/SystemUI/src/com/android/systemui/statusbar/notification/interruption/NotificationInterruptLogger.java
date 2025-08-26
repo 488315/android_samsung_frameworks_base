@@ -7,7 +7,6 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.NotificationUtilsKt;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationInterruptLogger {
     public final LogBuffer buffer;
@@ -20,35 +19,35 @@ public final class NotificationInterruptLogger {
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationInterruptLogger$$ExternalSyntheticLambda0 notificationInterruptLogger$$ExternalSyntheticLambda0 = new NotificationInterruptLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         logMessageImpl.str2 = str;
         logMessageImpl.long1 = j;
         logMessageImpl.long2 = j2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logNoAlertingSuppressedBy(NotificationEntry notificationEntry, NotificationInterruptSuppressor notificationInterruptSuppressor, boolean z) {
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationInterruptLogger$$ExternalSyntheticLambda0 notificationInterruptLogger$$ExternalSyntheticLambda0 = new NotificationInterruptLogger$$ExternalSyntheticLambda0(21);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         notificationInterruptSuppressor.getClass();
         logMessageImpl.str2 = "StatusBarNotificationPresenter";
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logNoFullscreenWarning(NotificationEntry notificationEntry, String str) {
         LogLevel logLevel = LogLevel.WARNING;
         NotificationInterruptLogger$$ExternalSyntheticLambda0 notificationInterruptLogger$$ExternalSyntheticLambda0 = new NotificationInterruptLogger$$ExternalSyntheticLambda0(9);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        ((LogMessageImpl) obtain).str2 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("InterruptionStateProvider", logLevel, notificationInterruptLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        ((LogMessageImpl) logMessageObtain).str2 = str;
+        logBuffer.commit(logMessageObtain);
     }
 }

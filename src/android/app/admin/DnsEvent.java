@@ -76,10 +76,10 @@ public final class DnsEvent extends NetworkEvent implements Parcelable {
     }
 
     public String toString() {
-        Long valueOf = Long.valueOf(this.mId);
+        Long lValueOf = Long.valueOf(this.mId);
         String str = this.mHostname;
         String[] strArr = this.mIpAddresses;
-        return String.format("DnsEvent(%d, %s, %s, %d, %d, %s)", valueOf, str, strArr == null ? KeyProperties.DIGEST_NONE : String.join(" ", strArr), Integer.valueOf(this.mIpAddressesCount), Long.valueOf(this.mTimestamp), this.mPackageName);
+        return String.format("DnsEvent(%d, %s, %s, %d, %d, %s)", lValueOf, str, strArr == null ? KeyProperties.DIGEST_NONE : String.join(" ", strArr), Integer.valueOf(this.mIpAddressesCount), Long.valueOf(this.mTimestamp), this.mPackageName);
     }
 
     @Override // android.app.admin.NetworkEvent, android.os.Parcelable

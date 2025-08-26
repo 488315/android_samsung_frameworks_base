@@ -10,12 +10,10 @@ import java.util.Set;
 import kotlin.collections.EmptySet;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationDismissibilityProviderImpl implements NotificationDismissibilityProvider, Dumpable {
     public volatile Set nonDismissableEntryKeys;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,17 +34,17 @@ public final class NotificationDismissibilityProviderImpl implements Notificatio
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
         Set set = this.nonDismissableEntryKeys;
-        asIndenting.append("non-dismissible entries").append((CharSequence) ": ").println(set.size());
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("non-dismissible entries").append((CharSequence) ": ").println(set.size());
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             Iterator it = set.iterator();
             while (it.hasNext()) {
-                asIndenting.println(it.next());
+                indentingPrintWriterAsIndenting.println(it.next());
             }
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 

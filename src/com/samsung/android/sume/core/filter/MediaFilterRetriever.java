@@ -38,7 +38,7 @@ public final class MediaFilterRetriever {
         this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$0(DecorateFilter.this, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
+                MediaFilterRetriever.lambda$retrieve$0(decorateFilter, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
             }
         });
         if (decorateFilter.getSuccessorFilter() != null) {
@@ -57,7 +57,7 @@ public final class MediaFilterRetriever {
         this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda4
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$1(ImgpDecorateFilter.this, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
+                MediaFilterRetriever.lambda$retrieve$1(imgpDecorateFilter, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
             }
         });
         if (imgpDecorateFilter.getPreFilter() != null) {
@@ -82,13 +82,13 @@ public final class MediaFilterRetriever {
         mediaFilterGroup.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaFilterRetriever.this.m9540xba46685a(mediaFilterGroup, (MediaFilter) obj);
+                this.f$0.m9553xba46685a(mediaFilterGroup, (MediaFilter) obj);
             }
         });
     }
 
     /* renamed from: lambda$retrieve$2$com-samsung-android-sume-core-filter-MediaFilterRetriever, reason: not valid java name */
-    /* synthetic */ void m9540xba46685a(MediaFilterGroup mediaFilterGroup, MediaFilter mediaFilter) {
+    /* synthetic */ void m9553xba46685a(MediaFilterGroup mediaFilterGroup, MediaFilter mediaFilter) {
         mediaFilter.accept(this, mediaFilterGroup);
     }
 
@@ -97,7 +97,7 @@ public final class MediaFilterRetriever {
         this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$3(MediaFilterPlaceHolder.this, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
+                MediaFilterRetriever.lambda$retrieve$3(mediaFilterPlaceHolder, mediaFilter, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
             }
         });
     }
@@ -129,7 +129,7 @@ public final class MediaFilterRetriever {
         this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda2
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$4(MediaFilter.this, mediaFilter2, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
+                MediaFilterRetriever.lambda$retrieve$4(mediaFilter, mediaFilter2, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
             }
         });
     }

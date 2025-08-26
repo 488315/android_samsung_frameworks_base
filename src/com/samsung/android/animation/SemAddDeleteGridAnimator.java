@@ -120,88 +120,88 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
         this.mDeleteRunnable = new Runnable() { // from class: com.samsung.android.animation.SemAddDeleteGridAnimator.2
             @Override // java.lang.Runnable
             public void run() {
-                int i3;
+                int top;
                 int paddingLeft;
-                float f;
-                float f2;
+                float top2;
+                float left;
+                int i3;
                 int i4;
                 int i5;
-                int i6;
-                int left;
-                float top;
+                int left2;
+                float top3;
                 boolean z;
-                float f3;
+                float f;
                 ArrayList arrayList3 = new ArrayList();
                 int childCount2 = gridView.getChildCount();
                 int firstVisiblePosition2 = gridView.getFirstVisiblePosition();
                 int numColumns = gridView.getNumColumns();
                 if (childCount2 > numColumns) {
-                    i3 = gridView.getChildAt(numColumns).getTop() - gridView.getChildAt(0).getTop();
+                    top = gridView.getChildAt(numColumns).getTop() - gridView.getChildAt(0).getTop();
                 } else {
-                    i3 = height;
+                    top = height;
                 }
-                int i7 = firstVisiblePosition - firstVisiblePosition2;
-                int i8 = lastVisiblePosition;
-                int i9 = 0;
-                int i10 = i7;
+                int i6 = firstVisiblePosition - firstVisiblePosition2;
+                int nextAppearingViewPosition = lastVisiblePosition;
+                int i7 = 0;
+                int i8 = i6;
                 boolean z2 = true;
-                while (i9 < childCount2) {
-                    View childAt2 = gridView.getChildAt(i9);
-                    int i11 = i9 + firstVisiblePosition2;
-                    SemAbsAddDeleteAnimator.ViewInfo remove = SemAddDeleteGridAnimator.this.mOldViewCache.remove(Long.valueOf(adapter.getItemId(i11)));
-                    float left2 = childAt2.getLeft();
-                    float top2 = childAt2.getTop();
-                    if (remove != null) {
-                        remove.recycleBitmap();
-                        if (remove.left == left2 && remove.top == top2) {
-                            i4 = firstVisiblePosition2;
-                            i6 = i3;
+                while (i7 < childCount2) {
+                    View childAt2 = gridView.getChildAt(i7);
+                    int i9 = i7 + firstVisiblePosition2;
+                    SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove = SemAddDeleteGridAnimator.this.mOldViewCache.remove(Long.valueOf(adapter.getItemId(i9)));
+                    float left3 = childAt2.getLeft();
+                    float top4 = childAt2.getTop();
+                    if (viewInfoRemove != null) {
+                        viewInfoRemove.recycleBitmap();
+                        if (viewInfoRemove.left == left3 && viewInfoRemove.top == top4) {
+                            i3 = firstVisiblePosition2;
+                            i5 = top;
                             z2 = false;
-                            i9++;
-                            firstVisiblePosition2 = i4;
-                            i3 = i6;
+                            i7++;
+                            firstVisiblePosition2 = i3;
+                            top = i5;
                         } else {
-                            f3 = remove.left - left2;
-                            top = remove.top - top2;
-                            i4 = firstVisiblePosition2;
-                            i6 = i3;
+                            f = viewInfoRemove.left - left3;
+                            top3 = viewInfoRemove.top - top4;
+                            i3 = firstVisiblePosition2;
+                            i5 = top;
                             z = false;
                         }
                     } else {
-                        if (i10 <= 0 || !z2) {
-                            i4 = firstVisiblePosition2;
-                            i8 = SemAddDeleteGridAnimator.this.getNextAppearingViewPosition(hashSet, i8);
-                            i5 = i8;
+                        if (i8 <= 0 || !z2) {
+                            i3 = firstVisiblePosition2;
+                            nextAppearingViewPosition = SemAddDeleteGridAnimator.this.getNextAppearingViewPosition(hashSet, nextAppearingViewPosition);
+                            i4 = nextAppearingViewPosition;
                         } else {
-                            i5 = i11 - i7;
-                            i10--;
-                            i4 = firstVisiblePosition2;
+                            i4 = i9 - i6;
+                            i8--;
+                            i3 = firstVisiblePosition2;
                         }
-                        int i12 = i3;
-                        int floor = ((int) Math.floor(i5 / numColumns)) - (i11 / numColumns);
-                        int i13 = i5 % numColumns;
-                        if (i13 < 0) {
-                            i13 += numColumns;
+                        int i10 = top;
+                        int iFloor = ((int) Math.floor(i4 / numColumns)) - (i9 / numColumns);
+                        int i11 = i4 % numColumns;
+                        if (i11 < 0) {
+                            i11 += numColumns;
                         }
-                        if (childCount2 > i13) {
-                            left = gridView.getChildAt(i13).getLeft();
-                            i6 = i12;
+                        if (childCount2 > i11) {
+                            left2 = gridView.getChildAt(i11).getLeft();
+                            i5 = i10;
                         } else {
-                            i6 = i12;
-                            left = gridView.getChildAt(0).getLeft() + (i13 * gridView.getChildAt(0).getWidth());
+                            i5 = i10;
+                            left2 = gridView.getChildAt(0).getLeft() + (i11 * gridView.getChildAt(0).getWidth());
                         }
-                        top = (childAt2.getTop() + (floor * i6)) - top2;
+                        top3 = (childAt2.getTop() + (iFloor * i5)) - top4;
                         z = z2;
-                        f3 = left - left2;
+                        f = left2 - left3;
                     }
-                    arrayList3.add(SemAddDeleteGridAnimator.this.getTranslateAnim(childAt2, f3, top));
+                    arrayList3.add(SemAddDeleteGridAnimator.this.getTranslateAnim(childAt2, f, top3));
                     z2 = z;
-                    i9++;
-                    firstVisiblePosition2 = i4;
-                    i3 = i6;
+                    i7++;
+                    firstVisiblePosition2 = i3;
+                    top = i5;
                 }
-                int i14 = firstVisiblePosition2;
-                int i15 = i3;
+                int i12 = firstVisiblePosition2;
+                int i13 = top;
                 Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it = SemAddDeleteGridAnimator.this.mOldViewCache.entrySet().iterator();
                 boolean z3 = false;
                 while (it.hasNext()) {
@@ -209,35 +209,35 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
                     SemAddDeleteGridAnimator.this.mGhostViewSnapshots.add(value);
                     Rect rect = new Rect(value.left, value.top, value.right, value.bottom);
                     int newPosition = SemAddDeleteGridAnimator.this.getNewPosition(value.oldPosition, arrayList2);
-                    boolean contains = hashSet.contains(Integer.valueOf(value.oldPosition));
-                    int i16 = newPosition - i14;
-                    if (i16 < 0 || i16 >= childCount2) {
-                        int i17 = newPosition % numColumns;
-                        if (childCount2 > i17) {
-                            paddingLeft = gridView.getChildAt(i17).getLeft();
+                    boolean zContains = hashSet.contains(Integer.valueOf(value.oldPosition));
+                    int i14 = newPosition - i12;
+                    if (i14 < 0 || i14 >= childCount2) {
+                        int i15 = newPosition % numColumns;
+                        if (childCount2 > i15) {
+                            paddingLeft = gridView.getChildAt(i15).getLeft();
                         } else {
                             paddingLeft = gridView.getPaddingLeft();
                         }
-                        float f4 = paddingLeft;
-                        f = value.top - (((value.oldPosition / numColumns) - (newPosition / numColumns)) * i15);
-                        f2 = f4;
+                        float f2 = paddingLeft;
+                        top2 = value.top - (((value.oldPosition / numColumns) - (newPosition / numColumns)) * i13);
+                        left = f2;
                     } else {
-                        f2 = gridView.getChildAt(i16).getLeft();
-                        f = gridView.getChildAt(i16).getTop();
+                        left = gridView.getChildAt(i14).getLeft();
+                        top2 = gridView.getChildAt(i14).getTop();
                     }
                     Rect rect2 = new Rect(rect);
-                    rect2.offset((int) (f2 - value.left), (int) (f - value.top));
-                    if (contains) {
-                        int width = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.width());
-                        int height2 = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.height());
-                        rect2 = new Rect(rect2.left + width, rect2.top + height2, rect2.right - width, rect2.bottom - height2);
+                    rect2.offset((int) (left - value.left), (int) (top2 - value.top));
+                    if (zContains) {
+                        int iWidth = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.width());
+                        int iHeight = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.height());
+                        rect2 = new Rect(rect2.left + iWidth, rect2.top + iHeight, rect2.right - iWidth, rect2.bottom - iHeight);
                     }
-                    ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(value.viewSnapshot, PropertyValuesHolder.ofObject("bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2), PropertyValuesHolder.ofInt("alpha", 255, 0));
+                    ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(value.viewSnapshot, PropertyValuesHolder.ofObject("bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2), PropertyValuesHolder.ofInt("alpha", 255, 0));
                     if (!z3) {
-                        ofPropertyValuesHolder.addUpdateListener(SemAddDeleteGridAnimator.this.mBitmapUpdateListener);
+                        objectAnimatorOfPropertyValuesHolder.addUpdateListener(SemAddDeleteGridAnimator.this.mBitmapUpdateListener);
                         z3 = true;
                     }
-                    arrayList3.add(ofPropertyValuesHolder);
+                    arrayList3.add(objectAnimatorOfPropertyValuesHolder);
                 }
                 SemAddDeleteGridAnimator.this.mOldViewCache.clear();
                 AnimatorSet animatorSet = new AnimatorSet();
@@ -342,7 +342,7 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
             z = z;
         }
         boolean z2 = z;
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         for (int i3 = 0; i3 < arrayList.size(); i3++) {
             Integer num = arrayList.get(i3);
             View childAt2 = gridView.getChildAt((num.intValue() - i3) - firstVisiblePosition);
@@ -352,7 +352,7 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
                 float[] fArr = new float[2];
                 fArr[0] = left;
                 fArr[z2 ? 1 : 0] = top;
-                hashMap.put(num, fArr);
+                map.put(num, fArr);
             }
         }
         this.mInsertRunnable = new Runnable() { // from class: com.samsung.android.animation.SemAddDeleteGridAnimator.4
@@ -371,15 +371,15 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
                     int i5 = i4 + firstVisiblePosition2;
                     long itemId = adapter.getItemId(i5);
                     View childAt3 = gridView2.getChildAt(i4);
-                    float[] fArr2 = (float[]) hashMap.get(Integer.valueOf(i5));
+                    float[] fArr2 = (float[]) map.get(Integer.valueOf(i5));
                     float left2 = childAt3.getLeft();
                     boolean z4 = z3;
                     float top3 = childAt3.getTop();
-                    SemAbsAddDeleteAnimator.ViewInfo remove = SemAddDeleteGridAnimator.this.mOldViewCache.remove(Long.valueOf(itemId));
-                    if (remove != null) {
-                        remove.recycleBitmap();
-                        if (remove.left != left2 || remove.top != top3) {
-                            arrayList2.add(SemAddDeleteGridAnimator.this.getTranslateAnim(childAt3, remove.left - left2, remove.top - top3));
+                    SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove = SemAddDeleteGridAnimator.this.mOldViewCache.remove(Long.valueOf(itemId));
+                    if (viewInfoRemove != null) {
+                        viewInfoRemove.recycleBitmap();
+                        if (viewInfoRemove.left != left2 || viewInfoRemove.top != top3) {
+                            arrayList2.add(SemAddDeleteGridAnimator.this.getTranslateAnim(childAt3, viewInfoRemove.left - left2, viewInfoRemove.top - top3));
                         }
                     } else if (fArr2 != null) {
                         arrayList2.add(SemAddDeleteGridAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, fArr2[z4 ? 1 : 0] - left2, fArr2[1] - top3));
@@ -410,10 +410,10 @@ public class SemAddDeleteGridAnimator extends SemAbsAddDeleteAnimator {
                         int i7 = (int) f;
                         Rect rect2 = new Rect((int) left4, i7, (int) (left4 + rect.width()), rect.height() + i7);
                         SemAddDeleteGridAnimator.this.mGhostViewSnapshots.add(value);
-                        ObjectAnimator ofObject = ObjectAnimator.ofObject(value.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
-                        arrayList2.add(ofObject);
+                        ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(value.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
+                        arrayList2.add(objectAnimatorOfObject);
                         if (!z3) {
-                            ofObject.addUpdateListener(SemAddDeleteGridAnimator.this.mBitmapUpdateListener);
+                            objectAnimatorOfObject.addUpdateListener(SemAddDeleteGridAnimator.this.mBitmapUpdateListener);
                             z3 = true;
                         }
                     }

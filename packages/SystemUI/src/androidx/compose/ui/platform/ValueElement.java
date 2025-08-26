@@ -2,7 +2,6 @@ package androidx.compose.ui.platform;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ValueElement {
     public final String name;
@@ -25,9 +24,9 @@ public final class ValueElement {
     }
 
     public final int hashCode() {
-        int hashCode = this.name.hashCode() * 31;
+        int iHashCode = this.name.hashCode() * 31;
         Object obj = this.value;
-        return hashCode + (obj == null ? 0 : obj.hashCode());
+        return iHashCode + (obj == null ? 0 : obj.hashCode());
     }
 
     public final String toString() {

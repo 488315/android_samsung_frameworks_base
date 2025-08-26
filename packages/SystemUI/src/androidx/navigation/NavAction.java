@@ -6,7 +6,6 @@ import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavAction {
     public final Bundle defaultArguments;
@@ -18,7 +17,7 @@ public final class NavAction {
     }
 
     public final boolean equals(Object obj) {
-        Set<String> keySet;
+        Set<String> setKeySet;
         if (this == obj) {
             return true;
         }
@@ -27,8 +26,8 @@ public final class NavAction {
             if (this.destinationId == navAction.destinationId && Intrinsics.areEqual(this.navOptions, navAction.navOptions)) {
                 if (!Intrinsics.areEqual(this.defaultArguments, navAction.defaultArguments)) {
                     Bundle bundle = this.defaultArguments;
-                    if (bundle != null && (keySet = bundle.keySet()) != null) {
-                        Set<String> set = keySet;
+                    if (bundle != null && (setKeySet = bundle.keySet()) != null) {
+                        Set<String> set = setKeySet;
                         if (!(set instanceof Collection) || !set.isEmpty()) {
                             for (String str : set) {
                                 Bundle bundle2 = this.defaultArguments;
@@ -47,20 +46,20 @@ public final class NavAction {
     }
 
     public final int hashCode() {
-        Set<String> keySet;
-        int hashCode = Integer.hashCode(this.destinationId) * 31;
+        Set<String> setKeySet;
+        int iHashCode = Integer.hashCode(this.destinationId) * 31;
         NavOptions navOptions = this.navOptions;
-        int hashCode2 = hashCode + (navOptions != null ? navOptions.hashCode() : 0);
+        int iHashCode2 = iHashCode + (navOptions != null ? navOptions.hashCode() : 0);
         Bundle bundle = this.defaultArguments;
-        if (bundle != null && (keySet = bundle.keySet()) != null) {
-            for (String str : keySet) {
-                int i = hashCode2 * 31;
+        if (bundle != null && (setKeySet = bundle.keySet()) != null) {
+            for (String str : setKeySet) {
+                int i = iHashCode2 * 31;
                 Bundle bundle2 = this.defaultArguments;
                 Object obj = bundle2 != null ? bundle2.get(str) : null;
-                hashCode2 = i + (obj != null ? obj.hashCode() : 0);
+                iHashCode2 = i + (obj != null ? obj.hashCode() : 0);
             }
         }
-        return hashCode2;
+        return iHashCode2;
     }
 
     public final String toString() {

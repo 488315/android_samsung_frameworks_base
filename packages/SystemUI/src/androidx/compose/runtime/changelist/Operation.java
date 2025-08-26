@@ -32,13 +32,11 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Operation {
     public final int ints;
     public final int objects;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AdvanceSlotsBy extends Operation {
         public static final AdvanceSlotsBy INSTANCE = new AdvanceSlotsBy();
 
@@ -52,7 +50,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppendValue extends Operation {
         public static final AppendValue INSTANCE = new AppendValue();
 
@@ -62,32 +59,31 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(0);
-            Object m337getObject31yXWZQ = opIterator.m337getObject31yXWZQ(1);
-            if (m337getObject31yXWZQ instanceof RememberObserverHolder) {
-                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) m337getObject31yXWZQ);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(0);
+            Object objM338getObject31yXWZQ = opIterator.m338getObject31yXWZQ(1);
+            if (objM338getObject31yXWZQ instanceof RememberObserverHolder) {
+                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) objM338getObject31yXWZQ);
             }
             if (slotWriter.insertCount != 0) {
                 ComposerKt.composeImmediateRuntimeError("Can only append a slot if not current inserting");
             }
             int i = slotWriter.currentSlot;
             int i2 = slotWriter.currentSlotEnd;
-            int anchorIndex = slotWriter.anchorIndex(anchor);
-            int dataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(anchorIndex + 1), slotWriter.groups);
-            slotWriter.currentSlot = dataIndex;
-            slotWriter.currentSlotEnd = dataIndex;
-            slotWriter.insertSlots(1, anchorIndex);
-            if (i >= dataIndex) {
+            int iAnchorIndex = slotWriter.anchorIndex(anchor);
+            int iDataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(iAnchorIndex + 1), slotWriter.groups);
+            slotWriter.currentSlot = iDataIndex;
+            slotWriter.currentSlotEnd = iDataIndex;
+            slotWriter.insertSlots(1, iAnchorIndex);
+            if (i >= iDataIndex) {
                 i++;
                 i2++;
             }
-            slotWriter.slots[dataIndex] = m337getObject31yXWZQ;
+            slotWriter.slots[iDataIndex] = objM338getObject31yXWZQ;
             slotWriter.currentSlot = i;
             slotWriter.currentSlotEnd = i2;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ApplyChangeList extends Operation {
         public static final ApplyChangeList INSTANCE = new ApplyChangeList();
 
@@ -97,9 +93,9 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            IntRef intRef = (IntRef) opIterator.m337getObject31yXWZQ(1);
+            IntRef intRef = (IntRef) opIterator.m338getObject31yXWZQ(1);
             int i = intRef != null ? intRef.element : 0;
-            ChangeList changeList = (ChangeList) opIterator.m337getObject31yXWZQ(0);
+            ChangeList changeList = (ChangeList) opIterator.m338getObject31yXWZQ(0);
             if (i > 0) {
                 applier = new OffsetApplier(applier, i);
             }
@@ -107,7 +103,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CopyNodesToNewAnchorLocation extends Operation {
         public static final CopyNodesToNewAnchorLocation INSTANCE = new CopyNodesToNewAnchorLocation();
 
@@ -117,8 +112,8 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            int i = ((IntRef) opIterator.m337getObject31yXWZQ(0)).element;
-            List list = (List) opIterator.m337getObject31yXWZQ(1);
+            int i = ((IntRef) opIterator.m338getObject31yXWZQ(0)).element;
+            List list = (List) opIterator.m338getObject31yXWZQ(1);
             int size = list.size();
             for (int i2 = 0; i2 < size; i2++) {
                 Object obj = list.get(i2);
@@ -129,7 +124,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CopySlotTableToAnchorLocation extends Operation {
         public static final CopySlotTableToAnchorLocation INSTANCE = new CopySlotTableToAnchorLocation();
 
@@ -139,11 +133,11 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            MovableContentStateReference movableContentStateReference = (MovableContentStateReference) opIterator.m337getObject31yXWZQ(2);
-            MovableContentStateReference movableContentStateReference2 = (MovableContentStateReference) opIterator.m337getObject31yXWZQ(3);
-            CompositionContext compositionContext = (CompositionContext) opIterator.m337getObject31yXWZQ(1);
-            MovableContentState movableContentState = (MovableContentState) opIterator.m337getObject31yXWZQ(0);
-            if (movableContentState == null && (movableContentState = compositionContext.movableContentStateResolve$runtime_release(movableContentStateReference)) == null) {
+            MovableContentStateReference movableContentStateReference = (MovableContentStateReference) opIterator.m338getObject31yXWZQ(2);
+            MovableContentStateReference movableContentStateReference2 = (MovableContentStateReference) opIterator.m338getObject31yXWZQ(3);
+            CompositionContext compositionContext = (CompositionContext) opIterator.m338getObject31yXWZQ(1);
+            MovableContentState movableContentStateMovableContentStateResolve$runtime_release = (MovableContentState) opIterator.m338getObject31yXWZQ(0);
+            if (movableContentStateMovableContentStateResolve$runtime_release == null && (movableContentStateMovableContentStateResolve$runtime_release = compositionContext.movableContentStateResolve$runtime_release(movableContentStateReference)) == null) {
                 ComposerKt.composeRuntimeError("Could not resolve state for movable content");
                 throw new KotlinNothingValueException();
             }
@@ -156,11 +150,11 @@ public abstract class Operation {
             slotWriter.advanceBy(1);
             slotWriter.startGroup();
             slotWriter.beginInsert();
-            SlotWriter openWriter = movableContentState.slotTable.openWriter();
+            SlotWriter slotWriterOpenWriter = movableContentStateMovableContentStateResolve$runtime_release.slotTable.openWriter();
             try {
                 SlotWriter.Companion.getClass();
-                List moveGroup = SlotWriter.Companion.moveGroup(openWriter, 2, slotWriter, false, true, true);
-                openWriter.close(true);
+                List listMoveGroup = SlotWriter.Companion.moveGroup(slotWriterOpenWriter, 2, slotWriter, false, true, true);
+                slotWriterOpenWriter.close(true);
                 slotWriter.endInsert();
                 slotWriter.endGroup();
                 slotWriter.currentGroup = i;
@@ -169,33 +163,21 @@ public abstract class Operation {
                 RecomposeScopeImpl.Companion companion = RecomposeScopeImpl.Companion;
                 RecomposeScopeOwner recomposeScopeOwner = (RecomposeScopeOwner) movableContentStateReference2.composition;
                 companion.getClass();
-                RecomposeScopeImpl.Companion.adoptAnchoredScopes$runtime_release(slotWriter, moveGroup, recomposeScopeOwner);
+                RecomposeScopeImpl.Companion.adoptAnchoredScopes$runtime_release(slotWriter, listMoveGroup, recomposeScopeOwner);
             } catch (Throwable th) {
-                openWriter.close(false);
+                slotWriterOpenWriter.close(false);
                 throw th;
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeactivateCurrentGroup extends Operation {
         public static final DeactivateCurrentGroup INSTANCE = new DeactivateCurrentGroup();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private DeactivateCurrentGroup() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.DeactivateCurrentGroup.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -204,7 +186,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DetermineMovableContentNodeIndex extends Operation {
         public static final DetermineMovableContentNodeIndex INSTANCE = new DetermineMovableContentNodeIndex();
 
@@ -215,83 +196,70 @@ public abstract class Operation {
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
             int i;
-            IntRef intRef = (IntRef) opIterator.m337getObject31yXWZQ(0);
-            int anchorIndex = slotWriter.anchorIndex((Anchor) opIterator.m337getObject31yXWZQ(1));
-            if (!(slotWriter.currentGroup < anchorIndex)) {
+            IntRef intRef = (IntRef) opIterator.m338getObject31yXWZQ(0);
+            int iAnchorIndex = slotWriter.anchorIndex((Anchor) opIterator.m338getObject31yXWZQ(1));
+            if (!(slotWriter.currentGroup < iAnchorIndex)) {
                 ComposerKt.composeImmediateRuntimeError("Check failed");
             }
-            OperationKt.positionToParentOf(slotWriter, applier, anchorIndex);
+            OperationKt.positionToParentOf(slotWriter, applier, iAnchorIndex);
             int i2 = slotWriter.currentGroup;
-            int i3 = slotWriter.parent;
-            while (i3 >= 0 && !slotWriter.isNode(i3)) {
-                i3 = slotWriter.parent(i3, slotWriter.groups);
+            int iParent = slotWriter.parent;
+            while (iParent >= 0 && !slotWriter.isNode(iParent)) {
+                iParent = slotWriter.parent(iParent, slotWriter.groups);
             }
-            int i4 = i3 + 1;
-            int i5 = 0;
-            while (i4 < i2) {
-                if (slotWriter.indexInGroup(i2, i4)) {
-                    if (slotWriter.isNode(i4)) {
-                        i5 = 0;
+            int iGroupSize = iParent + 1;
+            int iSkipGroup = 0;
+            while (iGroupSize < i2) {
+                if (slotWriter.indexInGroup(i2, iGroupSize)) {
+                    if (slotWriter.isNode(iGroupSize)) {
+                        iSkipGroup = 0;
                     }
-                    i4++;
+                    iGroupSize++;
                 } else {
-                    i5 += slotWriter.isNode(i4) ? 1 : slotWriter.nodeCount(i4);
-                    i4 += slotWriter.groupSize(i4);
+                    iSkipGroup += slotWriter.isNode(iGroupSize) ? 1 : slotWriter.nodeCount(iGroupSize);
+                    iGroupSize += slotWriter.groupSize(iGroupSize);
                 }
             }
             while (true) {
                 i = slotWriter.currentGroup;
-                if (i >= anchorIndex) {
+                if (i >= iAnchorIndex) {
                     break;
                 }
-                if (slotWriter.indexInGroup(anchorIndex, i)) {
-                    int i6 = slotWriter.currentGroup;
-                    if (i6 < slotWriter.currentGroupEnd && (slotWriter.groups[(slotWriter.groupIndexToAddress(i6) * 5) + 1] & 1073741824) != 0) {
+                if (slotWriter.indexInGroup(iAnchorIndex, i)) {
+                    int i3 = slotWriter.currentGroup;
+                    if (i3 < slotWriter.currentGroupEnd && (slotWriter.groups[(slotWriter.groupIndexToAddress(i3) * 5) + 1] & 1073741824) != 0) {
                         applier.down(slotWriter.node(slotWriter.currentGroup));
-                        i5 = 0;
+                        iSkipGroup = 0;
                     }
                     slotWriter.startGroup();
                 } else {
-                    i5 += slotWriter.skipGroup();
+                    iSkipGroup += slotWriter.skipGroup();
                 }
             }
-            if (i != anchorIndex) {
+            if (i != iAnchorIndex) {
                 ComposerKt.composeImmediateRuntimeError("Check failed");
             }
-            intRef.element = i5;
+            intRef.element = iSkipGroup;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Downs extends Operation {
         public static final Downs INSTANCE = new Downs();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private Downs() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.Downs.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            for (Object obj : (Object[]) opIterator.m337getObject31yXWZQ(0)) {
+            for (Object obj : (Object[]) opIterator.m338getObject31yXWZQ(0)) {
                 applier.down(obj);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndCompositionScope extends Operation {
         public static final EndCompositionScope INSTANCE = new EndCompositionScope();
 
@@ -301,29 +269,17 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            ((Function1) opIterator.m337getObject31yXWZQ(0)).mo779invoke((Composition) opIterator.m337getObject31yXWZQ(1));
+            ((Function1) opIterator.m338getObject31yXWZQ(0)).mo781invoke((Composition) opIterator.m338getObject31yXWZQ(1));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndCurrentGroup extends Operation {
         public static final EndCurrentGroup INSTANCE = new EndCurrentGroup();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private EndCurrentGroup() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.EndCurrentGroup.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -332,25 +288,13 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndMovableContentPlacement extends Operation {
         public static final EndMovableContentPlacement INSTANCE = new EndMovableContentPlacement();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private EndMovableContentPlacement() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.EndMovableContentPlacement.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -360,31 +304,19 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndResumingScope extends Operation {
         public static final EndResumingScope INSTANCE = new EndResumingScope();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private EndResumingScope() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.EndResumingScope.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
             MutableVector mutableVector;
-            RecomposeScopeImpl recomposeScopeImpl = (RecomposeScopeImpl) opIterator.m337getObject31yXWZQ(0);
+            RecomposeScopeImpl recomposeScopeImpl = (RecomposeScopeImpl) opIterator.m338getObject31yXWZQ(0);
             MutableScatterMap mutableScatterMap = rememberEventDispatcher.pausedPlaceholders;
             if (mutableScatterMap == null || ((PausedCompositionRemembers) mutableScatterMap.get(recomposeScopeImpl)) == null) {
                 return;
@@ -397,54 +329,30 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EnsureGroupStarted extends Operation {
         public static final EnsureGroupStarted INSTANCE = new EnsureGroupStarted();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private EnsureGroupStarted() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.EnsureGroupStarted.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(0);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(0);
             anchor.getClass();
             slotWriter.ensureStarted(slotWriter.anchorIndex(anchor));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EnsureRootGroupStarted extends Operation {
         public static final EnsureRootGroupStarted INSTANCE = new EnsureRootGroupStarted();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private EnsureRootGroupStarted() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.EnsureRootGroupStarted.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -453,7 +361,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InsertNodeFixup extends Operation {
         public static final InsertNodeFixup INSTANCE = new InsertNodeFixup();
 
@@ -463,22 +370,21 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            Object invoke = ((Function0) opIterator.m337getObject31yXWZQ(0)).invoke();
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(1);
+            Object objInvoke = ((Function0) opIterator.m338getObject31yXWZQ(0)).invoke();
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(1);
             int i = opIterator.getInt(0);
             anchor.getClass();
-            slotWriter.updateNodeOfGroup(slotWriter.anchorIndex(anchor), invoke);
-            applier.insertTopDown(i, invoke);
-            applier.down(invoke);
+            slotWriter.updateNodeOfGroup(slotWriter.anchorIndex(anchor), objInvoke);
+            applier.insertTopDown(i, objInvoke);
+            applier.down(objInvoke);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final Anchor getGroupAnchor(Operations.OpIterator opIterator) {
-            return (Anchor) opIterator.m337getObject31yXWZQ(1);
+            return (Anchor) opIterator.m338getObject31yXWZQ(1);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InsertSlots extends Operation {
         public static final InsertSlots INSTANCE = new InsertSlots();
 
@@ -488,8 +394,8 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            SlotTable slotTable = (SlotTable) opIterator.m337getObject31yXWZQ(1);
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(0);
+            SlotTable slotTable = (SlotTable) opIterator.m338getObject31yXWZQ(1);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(0);
             slotWriter.beginInsert();
             anchor.getClass();
             slotWriter.moveFrom(slotTable, slotTable.anchorIndex(anchor));
@@ -497,7 +403,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InsertSlotsWithFixups extends Operation {
         public static final InsertSlotsWithFixups INSTANCE = new InsertSlotsWithFixups();
 
@@ -508,15 +413,15 @@ public abstract class Operation {
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
             OperationKt$withCurrentStackTrace$1 operationKt$withCurrentStackTrace$1;
-            SlotTable slotTable = (SlotTable) opIterator.m337getObject31yXWZQ(1);
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(0);
-            FixupList fixupList = (FixupList) opIterator.m337getObject31yXWZQ(2);
-            SlotWriter openWriter = slotTable.openWriter();
+            SlotTable slotTable = (SlotTable) opIterator.m338getObject31yXWZQ(1);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(0);
+            FixupList fixupList = (FixupList) opIterator.m338getObject31yXWZQ(2);
+            SlotWriter slotWriterOpenWriter = slotTable.openWriter();
             if (operationErrorContext != null) {
                 try {
                     operationKt$withCurrentStackTrace$1 = new OperationKt$withCurrentStackTrace$1(operationErrorContext, slotWriter);
                 } catch (Throwable th) {
-                    openWriter.close(false);
+                    slotWriterOpenWriter.close(false);
                     throw th;
                 }
             } else {
@@ -525,9 +430,9 @@ public abstract class Operation {
             if (!fixupList.pendingOperations.isEmpty()) {
                 ComposerKt.composeImmediateRuntimeError("FixupList has pending fixup operations that were not realized. Were there mismatched insertNode() and endNodeInsert() calls?");
             }
-            fixupList.operations.executeAndFlushAllPendingOperations(applier, openWriter, rememberEventDispatcher, operationKt$withCurrentStackTrace$1);
+            fixupList.operations.executeAndFlushAllPendingOperations(applier, slotWriterOpenWriter, rememberEventDispatcher, operationKt$withCurrentStackTrace$1);
             Unit unit = Unit.INSTANCE;
-            openWriter.close(true);
+            slotWriterOpenWriter.close(true);
             slotWriter.beginInsert();
             anchor.getClass();
             slotWriter.moveFrom(slotTable, slotTable.anchorIndex(anchor));
@@ -535,7 +440,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MoveCurrentGroup extends Operation {
         public static final MoveCurrentGroup INSTANCE = new MoveCurrentGroup();
 
@@ -546,7 +450,7 @@ public abstract class Operation {
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
             Anchor anchor;
-            int anchorIndex;
+            int iAnchorIndex;
             int i = opIterator.getInt(0);
             if (slotWriter.insertCount != 0) {
                 ComposerKt.composeImmediateRuntimeError("Cannot move a group while inserting");
@@ -570,23 +474,23 @@ public abstract class Operation {
                 i--;
             }
             int i6 = slotWriter.groups[(slotWriter.groupIndexToAddress(i5) * 5) + 3];
-            int dataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups);
-            int dataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i5), slotWriter.groups);
+            int iDataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups);
+            int iDataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i5), slotWriter.groups);
             int i7 = i5 + i6;
-            int dataIndex3 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i7), slotWriter.groups);
-            int i8 = dataIndex3 - dataIndex2;
+            int iDataIndex3 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i7), slotWriter.groups);
+            int i8 = iDataIndex3 - iDataIndex2;
             slotWriter.insertSlots(i8, Math.max(slotWriter.currentGroup - 1, 0));
             slotWriter.insertGroups(i6);
             int[] iArr = slotWriter.groups;
-            int groupIndexToAddress = slotWriter.groupIndexToAddress(i7) * 5;
-            ArraysKt___ArraysJvmKt.copyInto(slotWriter.groupIndexToAddress(i2) * 5, groupIndexToAddress, (i6 * 5) + groupIndexToAddress, iArr, iArr);
+            int iGroupIndexToAddress = slotWriter.groupIndexToAddress(i7) * 5;
+            ArraysKt___ArraysJvmKt.copyInto(slotWriter.groupIndexToAddress(i2) * 5, iGroupIndexToAddress, (i6 * 5) + iGroupIndexToAddress, iArr, iArr);
             if (i8 > 0) {
                 Object[] objArr = slotWriter.slots;
-                int dataIndexToDataAddress = slotWriter.dataIndexToDataAddress(dataIndex2 + i8);
-                System.arraycopy(objArr, dataIndexToDataAddress, objArr, dataIndex, slotWriter.dataIndexToDataAddress(dataIndex3 + i8) - dataIndexToDataAddress);
+                int iDataIndexToDataAddress = slotWriter.dataIndexToDataAddress(iDataIndex2 + i8);
+                System.arraycopy(objArr, iDataIndexToDataAddress, objArr, iDataIndex, slotWriter.dataIndexToDataAddress(iDataIndex3 + i8) - iDataIndexToDataAddress);
             }
-            int i9 = dataIndex2 + i8;
-            int i10 = i9 - dataIndex;
+            int i9 = iDataIndex2 + i8;
+            int i10 = i9 - iDataIndex;
             int i11 = slotWriter.slotsGapStart;
             int i12 = slotWriter.slotsGapLen;
             int length = slotWriter.slots.length;
@@ -595,9 +499,9 @@ public abstract class Operation {
             int i15 = i2;
             while (i15 < i14) {
                 boolean z2 = z;
-                int groupIndexToAddress2 = slotWriter.groupIndexToAddress(i15);
+                int iGroupIndexToAddress2 = slotWriter.groupIndexToAddress(i15);
                 int i16 = i15;
-                iArr[(groupIndexToAddress2 * 5) + 4] = SlotWriter.dataIndexToDataAnchor(SlotWriter.dataIndexToDataAnchor(slotWriter.dataIndex(groupIndexToAddress2, iArr) - i10, i13 < groupIndexToAddress2 ? 0 : i11, i12, length), slotWriter.slotsGapStart, slotWriter.slotsGapLen, slotWriter.slots.length);
+                iArr[(iGroupIndexToAddress2 * 5) + 4] = SlotWriter.dataIndexToDataAnchor(SlotWriter.dataIndexToDataAnchor(slotWriter.dataIndex(iGroupIndexToAddress2, iArr) - i10, i13 < iGroupIndexToAddress2 ? 0 : i11, i12, length), slotWriter.slotsGapStart, slotWriter.slotsGapLen, slotWriter.slots.length);
                 i15 = i16 + 1;
                 z = z2;
                 i10 = i10;
@@ -605,25 +509,25 @@ public abstract class Operation {
             }
             int i17 = i7 + i6;
             int size$runtime_release = slotWriter.getSize$runtime_release();
-            int access$locationOf = SlotTableKt.access$locationOf(slotWriter.anchors, i7, size$runtime_release);
+            int iAccess$locationOf = SlotTableKt.access$locationOf(slotWriter.anchors, i7, size$runtime_release);
             ArrayList arrayList = new ArrayList();
-            if (access$locationOf >= 0) {
-                while (access$locationOf < slotWriter.anchors.size() && (anchorIndex = slotWriter.anchorIndex((anchor = (Anchor) slotWriter.anchors.get(access$locationOf)))) >= i7 && anchorIndex < i17) {
+            if (iAccess$locationOf >= 0) {
+                while (iAccess$locationOf < slotWriter.anchors.size() && (iAnchorIndex = slotWriter.anchorIndex((anchor = (Anchor) slotWriter.anchors.get(iAccess$locationOf)))) >= i7 && iAnchorIndex < i17) {
                     arrayList.add(anchor);
-                    slotWriter.anchors.remove(access$locationOf);
+                    slotWriter.anchors.remove(iAccess$locationOf);
                 }
             }
             int i18 = i2 - i7;
             int size = arrayList.size();
             for (int i19 = 0; i19 < size; i19++) {
                 Anchor anchor2 = (Anchor) arrayList.get(i19);
-                int anchorIndex2 = slotWriter.anchorIndex(anchor2) + i18;
-                if (anchorIndex2 >= slotWriter.groupGapStart) {
-                    anchor2.location = -(size$runtime_release - anchorIndex2);
+                int iAnchorIndex2 = slotWriter.anchorIndex(anchor2) + i18;
+                if (iAnchorIndex2 >= slotWriter.groupGapStart) {
+                    anchor2.location = -(size$runtime_release - iAnchorIndex2);
                 } else {
-                    anchor2.location = anchorIndex2;
+                    anchor2.location = iAnchorIndex2;
                 }
-                slotWriter.anchors.add(SlotTableKt.access$locationOf(slotWriter.anchors, anchorIndex2, size$runtime_release), anchor2);
+                slotWriter.anchors.add(SlotTableKt.access$locationOf(slotWriter.anchors, iAnchorIndex2, size$runtime_release), anchor2);
             }
             if (slotWriter.removeGroups(i7, i6)) {
                 ComposerKt.composeImmediateRuntimeError("Unexpectedly removed anchors");
@@ -635,7 +539,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MoveNode extends Operation {
         public static final MoveNode INSTANCE = new MoveNode();
 
@@ -649,29 +552,18 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PostInsertNodeFixup extends Operation {
         public static final PostInsertNodeFixup INSTANCE = new PostInsertNodeFixup();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private PostInsertNodeFixup() {
-            /*
-                r2 = this;
-                r0 = 1
-                r1 = 0
-                r2.<init>(r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.PostInsertNodeFixup.<init>():void");
+            int i = 1;
+            super(i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(0);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(0);
             int i = opIterator.getInt(0);
             applier.up();
             anchor.getClass();
@@ -680,11 +572,10 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final Anchor getGroupAnchor(Operations.OpIterator opIterator) {
-            return (Anchor) opIterator.m337getObject31yXWZQ(0);
+            return (Anchor) opIterator.m338getObject31yXWZQ(0);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReleaseMovableGroupAtCurrent extends Operation {
         public static final ReleaseMovableGroupAtCurrent INSTANCE = new ReleaseMovableGroupAtCurrent();
 
@@ -694,58 +585,34 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            ControlledComposition controlledComposition = (ControlledComposition) opIterator.m337getObject31yXWZQ(0);
-            MovableContentStateReference movableContentStateReference = (MovableContentStateReference) opIterator.m337getObject31yXWZQ(2);
-            ((CompositionContext) opIterator.m337getObject31yXWZQ(1)).movableContentStateReleased$runtime_release(movableContentStateReference, ComposerKt.extractMovableContentAtCurrent(controlledComposition, movableContentStateReference, slotWriter, null), applier);
+            ControlledComposition controlledComposition = (ControlledComposition) opIterator.m338getObject31yXWZQ(0);
+            MovableContentStateReference movableContentStateReference = (MovableContentStateReference) opIterator.m338getObject31yXWZQ(2);
+            ((CompositionContext) opIterator.m338getObject31yXWZQ(1)).movableContentStateReleased$runtime_release(movableContentStateReference, ComposerKt.extractMovableContentAtCurrent(controlledComposition, movableContentStateReference, slotWriter, null), applier);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Remember extends Operation {
         public static final Remember INSTANCE = new Remember();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private Remember() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.Remember.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) opIterator.m337getObject31yXWZQ(0));
+            rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) opIterator.m338getObject31yXWZQ(0));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoveCurrentGroup extends Operation {
         public static final RemoveCurrentGroup INSTANCE = new RemoveCurrentGroup();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private RemoveCurrentGroup() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.RemoveCurrentGroup.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -754,25 +621,13 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoveNode extends Operation {
         public static final RemoveNode INSTANCE = new RemoveNode();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private RemoveNode() {
-            /*
-                r3 = this;
-                r0 = 0
-                r1 = 0
-                r2 = 2
-                r3.<init>(r2, r0, r2, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.RemoveNode.<init>():void");
+            int i = 2;
+            super(i, 0, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -781,25 +636,13 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetSlots extends Operation {
         public static final ResetSlots INSTANCE = new ResetSlots();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private ResetSlots() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.ResetSlots.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -816,52 +659,28 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SideEffect extends Operation {
         public static final SideEffect INSTANCE = new SideEffect();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private SideEffect() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.SideEffect.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            rememberEventDispatcher.sideEffects.add((Function0) opIterator.m337getObject31yXWZQ(0));
+            rememberEventDispatcher.sideEffects.add((Function0) opIterator.m338getObject31yXWZQ(0));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SkipToEndOfCurrentGroup extends Operation {
         public static final SkipToEndOfCurrentGroup INSTANCE = new SkipToEndOfCurrentGroup();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private SkipToEndOfCurrentGroup() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.SkipToEndOfCurrentGroup.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
@@ -870,30 +689,18 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StartResumingScope extends Operation {
         public static final StartResumingScope INSTANCE = new StartResumingScope();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private StartResumingScope() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.StartResumingScope.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            RecomposeScopeImpl recomposeScopeImpl = (RecomposeScopeImpl) opIterator.m337getObject31yXWZQ(0);
+            RecomposeScopeImpl recomposeScopeImpl = (RecomposeScopeImpl) opIterator.m338getObject31yXWZQ(0);
             MutableScatterMap mutableScatterMap = rememberEventDispatcher.pausedPlaceholders;
             PausedCompositionRemembers pausedCompositionRemembers = mutableScatterMap != null ? (PausedCompositionRemembers) mutableScatterMap.get(recomposeScopeImpl) : null;
             if (pausedCompositionRemembers != null) {
@@ -908,7 +715,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrimParentValues extends Operation {
         public static final TrimParentValues INSTANCE = new TrimParentValues();
 
@@ -918,49 +724,48 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            int i;
-            int i2;
-            int i3 = opIterator.getInt(0);
-            int slotsSize = slotWriter.getSlotsSize();
-            int i4 = slotWriter.parent;
-            int slotIndex = slotWriter.slotIndex(slotWriter.groupIndexToAddress(i4), slotWriter.groups);
-            int dataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i4 + 1), slotWriter.groups);
-            for (int max = Math.max(slotIndex, dataIndex - i3); max < dataIndex; max++) {
-                Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(max)];
+            int iAnchorIndex;
+            int slotsSize;
+            int i = opIterator.getInt(0);
+            int slotsSize2 = slotWriter.getSlotsSize();
+            int i2 = slotWriter.parent;
+            int iSlotIndex = slotWriter.slotIndex(slotWriter.groupIndexToAddress(i2), slotWriter.groups);
+            int iDataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i2 + 1), slotWriter.groups);
+            for (int iMax = Math.max(iSlotIndex, iDataIndex - i); iMax < iDataIndex; iMax++) {
+                Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(iMax)];
                 if (obj instanceof RememberObserverHolder) {
-                    int i5 = slotsSize - max;
+                    int i3 = slotsSize2 - iMax;
                     RememberObserverHolder rememberObserverHolder = (RememberObserverHolder) obj;
                     Anchor anchor = rememberObserverHolder.after;
                     if (anchor == null || !anchor.getValid()) {
-                        i = -1;
-                        i2 = -1;
+                        iAnchorIndex = -1;
+                        slotsSize = -1;
                     } else {
-                        i = slotWriter.anchorIndex(anchor);
-                        i2 = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(i);
+                        iAnchorIndex = slotWriter.anchorIndex(anchor);
+                        slotsSize = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(iAnchorIndex);
                     }
-                    rememberEventDispatcher.recordLeaving(i5, i, i2, rememberObserverHolder);
+                    rememberEventDispatcher.recordLeaving(i3, iAnchorIndex, slotsSize, rememberObserverHolder);
                 } else if (obj instanceof RecomposeScopeImpl) {
                     ((RecomposeScopeImpl) obj).release();
                 }
             }
-            if (!(i3 > 0)) {
+            if (!(i > 0)) {
                 ComposerKt.composeImmediateRuntimeError("Check failed");
             }
-            int i6 = slotWriter.parent;
-            int slotIndex2 = slotWriter.slotIndex(slotWriter.groupIndexToAddress(i6), slotWriter.groups);
-            int dataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i6 + 1), slotWriter.groups) - i3;
-            if (dataIndex2 < slotIndex2) {
+            int i4 = slotWriter.parent;
+            int iSlotIndex2 = slotWriter.slotIndex(slotWriter.groupIndexToAddress(i4), slotWriter.groups);
+            int iDataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(i4 + 1), slotWriter.groups) - i;
+            if (iDataIndex2 < iSlotIndex2) {
                 ComposerKt.composeImmediateRuntimeError("Check failed");
             }
-            slotWriter.removeSlots(dataIndex2, i3, i6);
-            int i7 = slotWriter.currentSlot;
-            if (i7 >= slotIndex2) {
-                slotWriter.currentSlot = i7 - i3;
+            slotWriter.removeSlots(iDataIndex2, i, i4);
+            int i5 = slotWriter.currentSlot;
+            if (i5 >= iSlotIndex2) {
+                slotWriter.currentSlot = i5 - i;
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateAnchoredValue extends Operation {
         public static final UpdateAnchoredValue INSTANCE = new UpdateAnchoredValue();
 
@@ -970,19 +775,19 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            int i;
-            int i2;
-            Object m337getObject31yXWZQ = opIterator.m337getObject31yXWZQ(0);
-            Anchor anchor = (Anchor) opIterator.m337getObject31yXWZQ(1);
-            int i3 = opIterator.getInt(0);
-            if (m337getObject31yXWZQ instanceof RememberObserverHolder) {
-                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) m337getObject31yXWZQ);
+            int iAnchorIndex;
+            int slotsSize;
+            Object objM338getObject31yXWZQ = opIterator.m338getObject31yXWZQ(0);
+            Anchor anchor = (Anchor) opIterator.m338getObject31yXWZQ(1);
+            int i = opIterator.getInt(0);
+            if (objM338getObject31yXWZQ instanceof RememberObserverHolder) {
+                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) objM338getObject31yXWZQ);
             }
-            int anchorIndex = slotWriter.anchorIndex(anchor);
-            int dataIndexToDataAddress = slotWriter.dataIndexToDataAddress(slotWriter.slotIndexOfGroupSlotIndex(anchorIndex, i3));
+            int iAnchorIndex2 = slotWriter.anchorIndex(anchor);
+            int iDataIndexToDataAddress = slotWriter.dataIndexToDataAddress(slotWriter.slotIndexOfGroupSlotIndex(iAnchorIndex2, i));
             Object[] objArr = slotWriter.slots;
-            Object obj = objArr[dataIndexToDataAddress];
-            objArr[dataIndexToDataAddress] = m337getObject31yXWZQ;
+            Object obj = objArr[iDataIndexToDataAddress];
+            objArr[iDataIndexToDataAddress] = objM338getObject31yXWZQ;
             if (!(obj instanceof RememberObserverHolder)) {
                 if (obj instanceof RecomposeScopeImpl) {
                     ((RecomposeScopeImpl) obj).release();
@@ -990,48 +795,35 @@ public abstract class Operation {
                 }
                 return;
             }
-            int slotsSize = slotWriter.getSlotsSize() - slotWriter.slotIndexOfGroupSlotIndex(anchorIndex, i3);
+            int slotsSize2 = slotWriter.getSlotsSize() - slotWriter.slotIndexOfGroupSlotIndex(iAnchorIndex2, i);
             RememberObserverHolder rememberObserverHolder = (RememberObserverHolder) obj;
             Anchor anchor2 = rememberObserverHolder.after;
             if (anchor2 == null || !anchor2.getValid()) {
-                i = -1;
-                i2 = -1;
+                iAnchorIndex = -1;
+                slotsSize = -1;
             } else {
-                i = slotWriter.anchorIndex(anchor2);
-                i2 = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(i);
+                iAnchorIndex = slotWriter.anchorIndex(anchor2);
+                slotsSize = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(iAnchorIndex);
             }
-            rememberEventDispatcher.recordLeaving(slotsSize, i, i2, rememberObserverHolder);
+            rememberEventDispatcher.recordLeaving(slotsSize2, iAnchorIndex, slotsSize, rememberObserverHolder);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateAuxData extends Operation {
         public static final UpdateAuxData INSTANCE = new UpdateAuxData();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private UpdateAuxData() {
-            /*
-                r3 = this;
-                r0 = 1
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.UpdateAuxData.<init>():void");
+            int i = 1;
+            super(0, i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            slotWriter.updateAux(opIterator.m337getObject31yXWZQ(0));
+            slotWriter.updateAux(opIterator.m338getObject31yXWZQ(0));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNode extends Operation {
         public static final UpdateNode INSTANCE = new UpdateNode();
 
@@ -1041,41 +833,30 @@ public abstract class Operation {
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            ((Function2) opIterator.m337getObject31yXWZQ(1)).invoke(applier.getCurrent(), opIterator.m337getObject31yXWZQ(0));
+            ((Function2) opIterator.m338getObject31yXWZQ(1)).invoke(applier.getCurrent(), opIterator.m338getObject31yXWZQ(0));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateValue extends Operation {
         public static final UpdateValue INSTANCE = new UpdateValue();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private UpdateValue() {
-            /*
-                r2 = this;
-                r0 = 1
-                r1 = 0
-                r2.<init>(r0, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.UpdateValue.<init>():void");
+            int i = 1;
+            super(i, i, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation
         public final void execute(Operations.OpIterator opIterator, Applier applier, SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher, OperationErrorContext operationErrorContext) {
-            Object m337getObject31yXWZQ = opIterator.m337getObject31yXWZQ(0);
+            Object objM338getObject31yXWZQ = opIterator.m338getObject31yXWZQ(0);
             int i = opIterator.getInt(0);
-            if (m337getObject31yXWZQ instanceof RememberObserverHolder) {
-                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) m337getObject31yXWZQ);
+            if (objM338getObject31yXWZQ instanceof RememberObserverHolder) {
+                rememberEventDispatcher.currentRememberingList.add((RememberObserverHolder) objM338getObject31yXWZQ);
             }
-            int dataIndexToDataAddress = slotWriter.dataIndexToDataAddress(slotWriter.slotIndexOfGroupSlotIndex(slotWriter.currentGroup, i));
+            int iDataIndexToDataAddress = slotWriter.dataIndexToDataAddress(slotWriter.slotIndexOfGroupSlotIndex(slotWriter.currentGroup, i));
             Object[] objArr = slotWriter.slots;
-            Object obj = objArr[dataIndexToDataAddress];
-            objArr[dataIndexToDataAddress] = m337getObject31yXWZQ;
+            Object obj = objArr[iDataIndexToDataAddress];
+            objArr[iDataIndexToDataAddress] = objM338getObject31yXWZQ;
             if (obj instanceof RememberObserverHolder) {
                 rememberEventDispatcher.recordLeaving(slotWriter.getSlotsSize() - slotWriter.slotIndexOfGroupSlotIndex(slotWriter.currentGroup, i), -1, -1, (RememberObserverHolder) obj);
             } else if (obj instanceof RecomposeScopeImpl) {
@@ -1084,7 +865,6 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Ups extends Operation {
         public static final Ups INSTANCE = new Ups();
 
@@ -1101,25 +881,13 @@ public abstract class Operation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UseCurrentNode extends Operation {
         public static final UseCurrentNode INSTANCE = new UseCurrentNode();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private UseCurrentNode() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.changelist.Operation.UseCurrentNode.<init>():void");
+            int i = 0;
+            super(i, i, 3, null);
         }
 
         @Override // androidx.compose.runtime.changelist.Operation

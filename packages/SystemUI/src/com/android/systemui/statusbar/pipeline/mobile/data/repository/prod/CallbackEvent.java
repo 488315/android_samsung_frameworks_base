@@ -10,11 +10,9 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface CallbackEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCallBackModeStopped implements CallbackEvent {
         public final int type;
 
@@ -38,7 +36,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCallStateChanged implements CallbackEvent {
         public final int callState;
 
@@ -62,7 +59,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCarrierNetworkChange implements CallbackEvent {
         public final boolean active;
 
@@ -86,7 +82,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCarrierRoamingNtnModeChanged implements CallbackEvent {
         public final boolean active;
 
@@ -110,7 +105,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCarrierRoamingNtnSignalStrengthChanged implements CallbackEvent {
         public final NtnSignalStrength signalStrength;
 
@@ -134,7 +128,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnDataActivity implements CallbackEvent {
         public final int direction;
 
@@ -158,7 +151,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnDataConnectionStateChanged implements CallbackEvent {
         public final int dataState;
 
@@ -182,7 +174,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnDataEnabledChanged implements CallbackEvent {
         public final boolean enabled;
 
@@ -206,7 +197,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnDisplayInfoChanged implements CallbackEvent {
         public final TelephonyDisplayInfo telephonyDisplayInfo;
 
@@ -230,7 +220,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnServiceStateChanged implements CallbackEvent {
         public final ServiceState serviceState;
 
@@ -254,7 +243,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnSignalStrengthChanged implements CallbackEvent {
         public final SignalStrength signalStrength;
 
@@ -278,7 +266,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class onSemSatelliteServiceStateChanged implements CallbackEvent {
         public final SemSatelliteServiceState serviceState;
 
@@ -302,7 +289,6 @@ public interface CallbackEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class onSemSatelliteSignalStrengthChanged implements CallbackEvent {
         public final SemSatelliteSignalStrength signalStrength;
 

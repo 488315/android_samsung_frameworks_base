@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import androidx.core.graphics.drawable.WrappedDrawable;
 import androidx.core.graphics.drawable.WrappedDrawableApi14;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatProgressBarHelper {
     public static final int[] TINT_ATTRS = {R.attr.indeterminateDrawable, R.attr.progressDrawable};
@@ -28,8 +27,8 @@ public class AppCompatProgressBarHelper {
     }
 
     public void loadFromAttributes(AttributeSet attributeSet, int i) {
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(this.mView.getContext(), attributeSet, TINT_ATTRS, i, 0);
-        Drawable drawableIfKnown = obtainStyledAttributes.getDrawableIfKnown(0);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(this.mView.getContext(), attributeSet, TINT_ATTRS, i, 0);
+        Drawable drawableIfKnown = tintTypedArrayObtainStyledAttributes.getDrawableIfKnown(0);
         if (drawableIfKnown != null) {
             ProgressBar progressBar = this.mView;
             if (drawableIfKnown instanceof AnimationDrawable) {
@@ -38,20 +37,20 @@ public class AppCompatProgressBarHelper {
                 AnimationDrawable animationDrawable2 = new AnimationDrawable();
                 animationDrawable2.setOneShot(animationDrawable.isOneShot());
                 for (int i2 = 0; i2 < numberOfFrames; i2++) {
-                    Drawable tileify = tileify(animationDrawable.getFrame(i2), true);
-                    tileify.setLevel(10000);
-                    animationDrawable2.addFrame(tileify, animationDrawable.getDuration(i2));
+                    Drawable drawableTileify = tileify(animationDrawable.getFrame(i2), true);
+                    drawableTileify.setLevel(10000);
+                    animationDrawable2.addFrame(drawableTileify, animationDrawable.getDuration(i2));
                 }
                 animationDrawable2.setLevel(10000);
                 drawableIfKnown = animationDrawable2;
             }
             progressBar.setIndeterminateDrawable(drawableIfKnown);
         }
-        Drawable drawableIfKnown2 = obtainStyledAttributes.getDrawableIfKnown(1);
+        Drawable drawableIfKnown2 = tintTypedArrayObtainStyledAttributes.getDrawableIfKnown(1);
         if (drawableIfKnown2 != null) {
             this.mView.setProgressDrawable(tileify(drawableIfKnown2, false));
         }
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX WARN: Multi-variable type inference failed */

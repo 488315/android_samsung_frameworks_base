@@ -7,14 +7,12 @@ import com.google.common.util.concurrent.FluentFuture;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractTransformFuture extends FluentFuture.TrustedFuture implements Runnable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public Object function;
     public ListenableFuture inputFuture;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AsyncTransformFuture extends AbstractTransformFuture {
         public AsyncTransformFuture(ListenableFuture listenableFuture, AsyncFunction asyncFunction) {
             super(listenableFuture, asyncFunction);
@@ -22,9 +20,9 @@ public abstract class AbstractTransformFuture extends FluentFuture.TrustedFuture
 
         @Override // com.google.common.util.concurrent.AbstractTransformFuture
         public final Object doTransform(Object obj, Object obj2) {
-            ListenableFuture apply = ((AsyncFunction) obj).apply(obj2);
-            apply.getClass();
-            return apply;
+            ListenableFuture listenableFutureApply = ((AsyncFunction) obj).apply(obj2);
+            listenableFutureApply.getClass();
+            return listenableFutureApply;
         }
 
         @Override // com.google.common.util.concurrent.AbstractTransformFuture
@@ -33,7 +31,6 @@ public abstract class AbstractTransformFuture extends FluentFuture.TrustedFuture
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransformFuture extends AbstractTransformFuture {
         public TransformFuture(ListenableFuture listenableFuture, Function function) {
             super(listenableFuture, function);
@@ -71,15 +68,15 @@ public abstract class AbstractTransformFuture extends FluentFuture.TrustedFuture
         String str;
         ListenableFuture listenableFuture = this.inputFuture;
         Object obj = this.function;
-        String pendingToString = super.pendingToString();
+        String strPendingToString = super.pendingToString();
         if (listenableFuture != null) {
             str = "inputFuture=[" + listenableFuture + "], ";
         } else {
             str = "";
         }
         if (obj == null) {
-            if (pendingToString != null) {
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, pendingToString);
+            if (strPendingToString != null) {
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, strPendingToString);
             }
             return null;
         }
@@ -100,9 +97,9 @@ public abstract class AbstractTransformFuture extends FluentFuture.TrustedFuture
         }
         try {
             try {
-                Object doTransform = doTransform(obj, Futures.getDone(listenableFuture));
+                Object objDoTransform = doTransform(obj, Futures.getDone(listenableFuture));
                 this.function = null;
-                setResult(doTransform);
+                setResult(objDoTransform);
             } catch (Throwable th) {
                 try {
                     if (th instanceof InterruptedException) {

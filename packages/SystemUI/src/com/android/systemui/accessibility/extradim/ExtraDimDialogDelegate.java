@@ -21,7 +21,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
     public final AccessibilityManager accessibilityManager;
@@ -30,7 +29,6 @@ public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
     public final Context context;
     public final ExtraDimDialogDelegate$onClickListener$1 onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.accessibility.extradim.ExtraDimDialogDelegate$onClickListener$1
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.accessibility.extradim.ExtraDimDialogDelegate$onClickListener$1$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             final /* synthetic */ DialogInterface $dialog;
@@ -55,7 +53,7 @@ public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-            public final Object invokeSuspend(Object obj) {
+            public final Object invokeSuspend(Object obj) throws Throwable {
                 Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
                 int i = this.label;
                 if (i == 0) {
@@ -64,11 +62,11 @@ public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
                     ExtraDimDialogDelegate extraDimDialogDelegate = this.this$0;
                     this.label = 1;
                     extraDimDialogDelegate.getClass();
-                    Object withContext = BuildersKt.withContext(extraDimDialogDelegate.backgroundDispatcher, new ExtraDimDialogDelegate$onRemoveExtraDimShortcutButtonClicked$2(extraDimDialogDelegate, null), this);
-                    if (withContext != obj2) {
-                        withContext = Unit.INSTANCE;
+                    Object objWithContext = BuildersKt.withContext(extraDimDialogDelegate.backgroundDispatcher, new ExtraDimDialogDelegate$onRemoveExtraDimShortcutButtonClicked$2(extraDimDialogDelegate, null), this);
+                    if (objWithContext != obj2) {
+                        objWithContext = Unit.INSTANCE;
                     }
-                    if (withContext == obj2) {
+                    if (objWithContext == obj2) {
                         return obj2;
                     }
                 } else {
@@ -85,7 +83,7 @@ public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
 
         @Override // android.content.DialogInterface.OnClickListener
         public final void onClick(DialogInterface dialogInterface, int i) {
-            ExtraDimDialogDelegate extraDimDialogDelegate = ExtraDimDialogDelegate.this;
+            ExtraDimDialogDelegate extraDimDialogDelegate = this.this$0;
             CoroutineTracingKt.launchTraced$default(extraDimDialogDelegate.applicationScope, null, null, new AnonymousClass1(dialogInterface, extraDimDialogDelegate, null), 7);
         }
     };
@@ -113,8 +111,8 @@ public final class ExtraDimDialogDelegate implements SystemUIDialog.Delegate {
     @Override // com.android.systemui.statusbar.phone.SystemUIDialog.Delegate
     public final SystemUIDialog createDialog() {
         SystemUIDialog.Factory factory = this.systemUIDialogFactory;
-        SystemUIDialog create = factory.create(this, factory.mContext);
-        create.setCanceledOnTouchOutside(false);
-        return create;
+        SystemUIDialog systemUIDialogCreate = factory.create(this, factory.mContext);
+        systemUIDialogCreate.setCanceledOnTouchOutside(false);
+        return systemUIDialogCreate;
     }
 }

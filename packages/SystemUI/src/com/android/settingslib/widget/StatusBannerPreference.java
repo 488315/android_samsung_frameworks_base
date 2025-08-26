@@ -16,7 +16,6 @@ import com.google.android.material.progressindicator.CircularProgressIndicator;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class StatusBannerPreference extends Preference {
     public final BannerStatus buttonLevel;
@@ -25,7 +24,6 @@ public final class StatusBannerPreference extends Preference {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BannerStatus {
         public static final /* synthetic */ BannerStatus[] $VALUES;
         public static final BannerStatus GENERIC;
@@ -68,7 +66,6 @@ public final class StatusBannerPreference extends Preference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -109,28 +106,28 @@ public final class StatusBannerPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedBelow = false;
         preferenceViewHolder.mDividerAllowedAbove = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.icon_background);
-        ImageView imageView = findViewById instanceof ImageView ? (ImageView) findViewById : null;
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.icon_background);
+        ImageView imageView = viewFindViewById instanceof ImageView ? (ImageView) viewFindViewById : null;
         if (imageView != null) {
             int i = WhenMappings.$EnumSwitchMapping$0[this.iconLevel.ordinal()];
             imageView.setImageDrawable(i != 1 ? i != 2 ? i != 3 ? this.mContext.getDrawable(R.drawable.settingslib_expressive_background_generic) : this.mContext.getDrawable(R.drawable.settingslib_expressive_background_level_high) : this.mContext.getDrawable(R.drawable.settingslib_expressive_background_level_medium) : this.mContext.getDrawable(R.drawable.settingslib_expressive_background_level_low));
         }
-        View findViewById2 = preferenceViewHolder.findViewById(android.R.id.icon_frame);
-        if (findViewById2 != null) {
-            findViewById2.setVisibility((getIcon() != null || (bannerStatus = this.iconLevel) == BannerStatus.LOADING_DETERMINATE || bannerStatus == BannerStatus.LOADING_INDETERMINATE) ? 0 : 8);
+        View viewFindViewById2 = preferenceViewHolder.findViewById(android.R.id.icon_frame);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setVisibility((getIcon() != null || (bannerStatus = this.iconLevel) == BannerStatus.LOADING_DETERMINATE || bannerStatus == BannerStatus.LOADING_INDETERMINATE) ? 0 : 8);
         }
-        View findViewById3 = preferenceViewHolder.findViewById(android.R.id.icon);
-        if (findViewById3 != null) {
+        View viewFindViewById3 = preferenceViewHolder.findViewById(android.R.id.icon);
+        if (viewFindViewById3 != null) {
             BannerStatus bannerStatus2 = this.iconLevel;
-            findViewById3.setVisibility((bannerStatus2 == BannerStatus.LOADING_DETERMINATE || bannerStatus2 == BannerStatus.LOADING_INDETERMINATE) ? 8 : 0);
+            viewFindViewById3.setVisibility((bannerStatus2 == BannerStatus.LOADING_DETERMINATE || bannerStatus2 == BannerStatus.LOADING_INDETERMINATE) ? 8 : 0);
         }
-        View findViewById4 = preferenceViewHolder.findViewById(R.id.progress_indicator);
-        CircularProgressIndicator circularProgressIndicator = findViewById4 instanceof CircularProgressIndicator ? (CircularProgressIndicator) findViewById4 : null;
+        View viewFindViewById4 = preferenceViewHolder.findViewById(R.id.progress_indicator);
+        CircularProgressIndicator circularProgressIndicator = viewFindViewById4 instanceof CircularProgressIndicator ? (CircularProgressIndicator) viewFindViewById4 : null;
         if (circularProgressIndicator != null) {
             circularProgressIndicator.setVisibility(this.iconLevel != BannerStatus.LOADING_DETERMINATE ? 8 : 0);
         }
-        View findViewById5 = preferenceViewHolder.findViewById(R.id.status_banner_button);
-        MaterialButton materialButton = findViewById5 instanceof MaterialButton ? (MaterialButton) findViewById5 : null;
+        View viewFindViewById5 = preferenceViewHolder.findViewById(R.id.status_banner_button);
+        MaterialButton materialButton = viewFindViewById5 instanceof MaterialButton ? (MaterialButton) viewFindViewById5 : null;
         if (materialButton != null) {
             BannerStatus bannerStatus3 = this.buttonLevel;
             materialButton.setBackgroundColor(bannerStatus3 == BannerStatus.OFF ? getBackgroundColor(BannerStatus.GENERIC) : getBackgroundColor(bannerStatus3));
@@ -153,17 +150,17 @@ public final class StatusBannerPreference extends Preference {
     }
 
     public StatusBannerPreference(Context context, AttributeSet attributeSet, int i, int i2) {
-        super(context, attributeSet, i, i2);
         BannerStatus bannerStatus;
         Drawable drawable;
+        super(context, attributeSet, i, i2);
         BannerStatus bannerStatus2 = BannerStatus.GENERIC;
         this.iconLevel = bannerStatus2;
         this.buttonLevel = bannerStatus2;
         this.buttonText = "";
         this.mLayoutResId = R.layout.settingslib_expressive_preference_statusbanner;
         setSelectable(false);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.StatusBanner, i, 0);
-        switch (obtainStyledAttributes.getInteger(2, 0)) {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.StatusBanner, i, 0);
+        switch (typedArrayObtainStyledAttributes.getInteger(2, 0)) {
             case 1:
                 bannerStatus = BannerStatus.LOW;
                 break;
@@ -211,7 +208,7 @@ public final class StatusBannerPreference extends Preference {
                 icon2.setTintList(ColorStateList.valueOf(getBackgroundColor(bannerStatus3)));
             }
         }
-        switch (obtainStyledAttributes.getInteger(0, 0)) {
+        switch (typedArrayObtainStyledAttributes.getInteger(0, 0)) {
             case 1:
                 bannerStatus2 = BannerStatus.LOW;
                 break;
@@ -233,9 +230,9 @@ public final class StatusBannerPreference extends Preference {
         }
         this.buttonLevel = bannerStatus2;
         notifyChanged();
-        String string = obtainStyledAttributes.getString(1);
+        String string = typedArrayObtainStyledAttributes.getString(1);
         this.buttonText = string != null ? string : "";
         notifyChanged();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

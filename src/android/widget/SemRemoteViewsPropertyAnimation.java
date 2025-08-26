@@ -63,12 +63,12 @@ public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
 
     @Override // android.widget.SemRemoteViewsAnimation
     protected void startAnimation(View view) {
-        View findViewById;
+        View viewFindViewById;
         AnimatorSet animatorSet;
-        if (view == null || this.mAnimResId <= 0 || (findViewById = view.findViewById(this.mViewId)) == null || (animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(view.getContext(), this.mAnimResId)) == null) {
+        if (view == null || this.mAnimResId <= 0 || (viewFindViewById = view.findViewById(this.mViewId)) == null || (animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(view.getContext(), this.mAnimResId)) == null) {
             return;
         }
-        animatorSet.setTarget(findViewById);
+        animatorSet.setTarget(viewFindViewById);
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsPropertyAnimation.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {

@@ -1,6 +1,7 @@
 package com.android.systemui.settings.brightness;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
@@ -14,7 +15,6 @@ import com.android.systemui.settings.brightness.BrightnessSliderController;
 import java.util.Collections;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessSliderView extends FrameLayout {
     public BrightnessSliderController$$ExternalSyntheticLambda0 mListener;
@@ -79,7 +79,7 @@ public class BrightnessSliderView extends FrameLayout {
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    public final void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         applySliderScale();
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
@@ -109,7 +109,7 @@ public class BrightnessSliderView extends FrameLayout {
         this.mSecBrightnessSliderView = new SecBrightnessSliderView(new Supplier() { // from class: com.android.systemui.settings.brightness.BrightnessSliderView$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return BrightnessSliderView.this.mSlider;
+                return this.f$0.mSlider;
             }
         });
     }

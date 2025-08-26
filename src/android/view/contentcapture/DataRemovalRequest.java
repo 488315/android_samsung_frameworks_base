@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.IntArray;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -55,14 +56,14 @@ public final class DataRemovalRequest implements Parcelable {
 
     private DataRemovalRequest(Parcel parcel) {
         this.mPackageName = parcel.readString();
-        boolean readBoolean = parcel.readBoolean();
-        this.mForEverything = readBoolean;
-        if (readBoolean) {
+        boolean z = parcel.readBoolean();
+        this.mForEverything = z;
+        if (z) {
             return;
         }
-        int readInt = parcel.readInt();
-        this.mLocusIdRequests = new ArrayList<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mLocusIdRequests = new ArrayList<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mLocusIdRequests.add(new LocusIdRequest((LocusId) parcel.readValue(null), parcel.readInt()));
         }
     }
@@ -118,7 +119,7 @@ public final class DataRemovalRequest implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mPackageName);
         parcel.writeBoolean(this.mForEverything);
         if (this.mForEverything) {

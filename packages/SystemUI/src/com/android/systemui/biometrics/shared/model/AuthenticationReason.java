@@ -3,11 +3,9 @@ package com.android.systemui.biometrics.shared.model;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface AuthenticationReason {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BiometricPromptAuthentication implements AuthenticationReason {
         public static final BiometricPromptAuthentication INSTANCE = new BiometricPromptAuthentication();
 
@@ -27,7 +25,6 @@ public interface AuthenticationReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeviceEntryAuthentication implements AuthenticationReason {
         public static final DeviceEntryAuthentication INSTANCE = new DeviceEntryAuthentication();
 
@@ -47,7 +44,6 @@ public interface AuthenticationReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotRunning implements AuthenticationReason {
         public static final NotRunning INSTANCE = new NotRunning();
 
@@ -67,7 +63,6 @@ public interface AuthenticationReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OtherAuthentication implements AuthenticationReason {
         public static final OtherAuthentication INSTANCE = new OtherAuthentication();
 
@@ -87,7 +82,6 @@ public interface AuthenticationReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsAuthentication implements AuthenticationReason {
         public final SettingsOperations settingsOperation;
 
@@ -113,7 +107,6 @@ public interface AuthenticationReason {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsOperations {
         public static final /* synthetic */ SettingsOperations[] $VALUES;
         public static final SettingsOperations ENROLL_ENROLLING;
@@ -144,7 +137,6 @@ public interface AuthenticationReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unknown implements AuthenticationReason {
         public static final Unknown INSTANCE = new Unknown();
 

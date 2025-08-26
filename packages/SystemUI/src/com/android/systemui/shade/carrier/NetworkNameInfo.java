@@ -4,7 +4,6 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NetworkNameInfo {
     public final String dataSpn;
@@ -35,13 +34,13 @@ public final class NetworkNameInfo {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.showSpn) * 31;
+        int iHashCode = Boolean.hashCode(this.showSpn) * 31;
         String str = this.spn;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.dataSpn;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.showPlmn);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.showPlmn);
         String str3 = this.plmn;
-        return Boolean.hashCode(this.hasVoWifiPLMN) + ((m + (str3 != null ? str3.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.hasVoWifiPLMN) + ((iM + (str3 != null ? str3.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

@@ -15,14 +15,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SliderKt$sliderTapModifier$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SliderState $state;
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.material3.SliderKt$sliderTapModifier$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         final /* synthetic */ SliderState $state;
@@ -45,9 +43,9 @@ final class SliderKt$sliderTapModifier$1 extends SuspendLambda implements Functi
 
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         public final Object invokeSuspend(Object obj) {
-            float m398getXimpl;
+            float fM400getXimpl;
             float intValue;
-            float m398getXimpl2;
+            float fM400getXimpl2;
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
             if (this.label != 0) {
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -56,26 +54,21 @@ final class SliderKt$sliderTapModifier$1 extends SuspendLambda implements Functi
             long j = this.J$0;
             SliderState sliderState = this.$state;
             if (sliderState.orientation == Orientation.Vertical) {
-                if (!sliderState.reverseVerticalDirection) {
-                    m398getXimpl = Offset.m399getYimpl(j);
-                    ((SnapshotMutableFloatStateImpl) sliderState.pressOffset$delegate).setFloatValue(m398getXimpl - ((SnapshotMutableFloatStateImpl) sliderState.rawOffset$delegate).getFloatValue());
-                    return Unit.INSTANCE;
+                if (sliderState.reverseVerticalDirection) {
+                    intValue = ((SnapshotMutableIntStateImpl) sliderState.totalHeight$delegate).getIntValue();
+                    fM400getXimpl2 = Offset.m401getYimpl(j);
+                    fM400getXimpl = intValue - fM400getXimpl2;
+                } else {
+                    fM400getXimpl = Offset.m401getYimpl(j);
                 }
-                intValue = ((SnapshotMutableIntStateImpl) sliderState.totalHeight$delegate).getIntValue();
-                m398getXimpl2 = Offset.m399getYimpl(j);
-                m398getXimpl = intValue - m398getXimpl2;
-                ((SnapshotMutableFloatStateImpl) sliderState.pressOffset$delegate).setFloatValue(m398getXimpl - ((SnapshotMutableFloatStateImpl) sliderState.rawOffset$delegate).getFloatValue());
-                return Unit.INSTANCE;
+            } else if (sliderState.isRtl) {
+                intValue = ((SnapshotMutableIntStateImpl) sliderState.totalWidth$delegate).getIntValue();
+                fM400getXimpl2 = Offset.m400getXimpl(j);
+                fM400getXimpl = intValue - fM400getXimpl2;
+            } else {
+                fM400getXimpl = Offset.m400getXimpl(j);
             }
-            if (!sliderState.isRtl) {
-                m398getXimpl = Offset.m398getXimpl(j);
-                ((SnapshotMutableFloatStateImpl) sliderState.pressOffset$delegate).setFloatValue(m398getXimpl - ((SnapshotMutableFloatStateImpl) sliderState.rawOffset$delegate).getFloatValue());
-                return Unit.INSTANCE;
-            }
-            intValue = ((SnapshotMutableIntStateImpl) sliderState.totalWidth$delegate).getIntValue();
-            m398getXimpl2 = Offset.m398getXimpl(j);
-            m398getXimpl = intValue - m398getXimpl2;
-            ((SnapshotMutableFloatStateImpl) sliderState.pressOffset$delegate).setFloatValue(m398getXimpl - ((SnapshotMutableFloatStateImpl) sliderState.rawOffset$delegate).getFloatValue());
+            ((SnapshotMutableFloatStateImpl) sliderState.pressOffset$delegate).setFloatValue(fM400getXimpl - ((SnapshotMutableFloatStateImpl) sliderState.rawOffset$delegate).getFloatValue());
             return Unit.INSTANCE;
         }
     }
@@ -114,10 +107,10 @@ final class SliderKt$sliderTapModifier$1 extends SuspendLambda implements Functi
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     long j = ((Offset) obj2).packedValue;
-                    SliderState.this.dispatchRawDelta(0.0f);
-                    ((SliderState$gestureEndAction$1) SliderState.this.gestureEndAction).invoke();
+                    sliderState.dispatchRawDelta(0.0f);
+                    ((SliderState$gestureEndAction$1) sliderState.gestureEndAction).invoke();
                     return Unit.INSTANCE;
                 }
             };

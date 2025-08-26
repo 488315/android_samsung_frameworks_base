@@ -227,11 +227,11 @@ public final class TvContract {
 
     @SystemApi
     public static Uri buildChannelsUriForInput(String str, boolean z) {
-        Uri.Builder buildUpon = Channels.CONTENT_URI.buildUpon();
+        Uri.Builder builderBuildUpon = Channels.CONTENT_URI.buildUpon();
         if (str != null) {
-            buildUpon.appendQueryParameter("input", str);
+            builderBuildUpon.appendQueryParameter("input", str);
         }
-        return buildUpon.appendQueryParameter(PARAM_BROWSABLE_ONLY, String.valueOf(z)).build();
+        return builderBuildUpon.appendQueryParameter(PARAM_BROWSABLE_ONLY, String.valueOf(z)).build();
     }
 
     @SystemApi
@@ -447,17 +447,17 @@ public final class TvContract {
         }
 
         static {
-            HashMap hashMap = new HashMap();
-            VIDEO_FORMAT_TO_RESOLUTION_MAP = hashMap;
-            hashMap.put(VIDEO_FORMAT_480I, VIDEO_RESOLUTION_SD);
-            hashMap.put(VIDEO_FORMAT_480P, VIDEO_RESOLUTION_ED);
-            hashMap.put(VIDEO_FORMAT_576I, VIDEO_RESOLUTION_SD);
-            hashMap.put(VIDEO_FORMAT_576P, VIDEO_RESOLUTION_ED);
-            hashMap.put(VIDEO_FORMAT_720P, VIDEO_RESOLUTION_HD);
-            hashMap.put(VIDEO_FORMAT_1080I, VIDEO_RESOLUTION_HD);
-            hashMap.put(VIDEO_FORMAT_1080P, VIDEO_RESOLUTION_FHD);
-            hashMap.put(VIDEO_FORMAT_2160P, VIDEO_RESOLUTION_UHD);
-            hashMap.put(VIDEO_FORMAT_4320P, VIDEO_RESOLUTION_UHD);
+            HashMap map = new HashMap();
+            VIDEO_FORMAT_TO_RESOLUTION_MAP = map;
+            map.put(VIDEO_FORMAT_480I, VIDEO_RESOLUTION_SD);
+            map.put(VIDEO_FORMAT_480P, VIDEO_RESOLUTION_ED);
+            map.put(VIDEO_FORMAT_576I, VIDEO_RESOLUTION_SD);
+            map.put(VIDEO_FORMAT_576P, VIDEO_RESOLUTION_ED);
+            map.put(VIDEO_FORMAT_720P, VIDEO_RESOLUTION_HD);
+            map.put(VIDEO_FORMAT_1080I, VIDEO_RESOLUTION_HD);
+            map.put(VIDEO_FORMAT_1080P, VIDEO_RESOLUTION_FHD);
+            map.put(VIDEO_FORMAT_2160P, VIDEO_RESOLUTION_UHD);
+            map.put(VIDEO_FORMAT_4320P, VIDEO_RESOLUTION_UHD);
         }
 
         public static final String getVideoResolution(String str) {
@@ -575,17 +575,21 @@ public final class TvContract {
                 StringBuilder sb = new StringBuilder();
                 int length = str.length();
                 for (int i = 0; i < length; i++) {
-                    char charAt = str.charAt(i);
-                    if (charAt == '\"') {
+                    char cCharAt = str.charAt(i);
+                    if (cCharAt == '\"') {
                         sb.append(DOUBLE_QUOTE);
-                    } else if (charAt == ',') {
+                    } else if (cCharAt == ',') {
                         sb.append(DOUBLE_QUOTE);
                     }
-                    sb.append(charAt);
+                    sb.append(cCharAt);
                 }
                 return sb.toString();
             }
 
+            /* JADX WARN: Removed duplicated region for block: B:25:0x005c  */
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public static String[] decode(String str) {
                 if (TextUtils.isEmpty(str)) {
                     return EMPTY_STRING_ARRAY;
@@ -598,28 +602,25 @@ public final class TvContract {
                 int length = str.length();
                 boolean z = false;
                 for (int i = 0; i < length; i++) {
-                    char charAt = str.charAt(i);
-                    if (charAt != '\"') {
-                        if (charAt == ',' && !z) {
-                            String trim = sb.toString().trim();
-                            if (trim.length() > 0) {
-                                arrayList.add(trim);
+                    char cCharAt = str.charAt(i);
+                    if (cCharAt != '\"') {
+                        if (cCharAt == ',' && !z) {
+                            String strTrim = sb.toString().trim();
+                            if (strTrim.length() > 0) {
+                                arrayList.add(strTrim);
                             }
                             sb = new StringBuilder();
+                        } else {
+                            sb.append(cCharAt);
+                            z = false;
                         }
-                        sb.append(charAt);
-                        z = false;
-                    } else {
-                        if (!z) {
-                            z = true;
-                        }
-                        sb.append(charAt);
-                        z = false;
+                    } else if (!z) {
+                        z = true;
                     }
                 }
-                String trim2 = sb.toString().trim();
-                if (trim2.length() > 0) {
-                    arrayList.add(trim2);
+                String strTrim2 = sb.toString().trim();
+                if (strTrim2.length() > 0) {
+                    arrayList.add(strTrim2);
                 }
                 return (String[]) arrayList.toArray(new String[arrayList.size()]);
             }

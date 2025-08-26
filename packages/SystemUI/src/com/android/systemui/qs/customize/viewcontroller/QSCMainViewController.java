@@ -1,6 +1,7 @@
 package com.android.systemui.qs.customize.viewcontroller;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.SemBlurInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -35,6 +37,7 @@ import com.android.systemui.qs.customize.view.QSCMainView;
 import com.android.systemui.shade.LargeScreenHeaderHelper;
 import com.android.systemui.shade.PanelPopOverManager;
 import com.android.systemui.statusbar.notification.stack.AmbientState;
+import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SettingsHelper;
@@ -44,7 +47,6 @@ import java.util.ArrayList;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSCMainViewController extends ViewControllerBase {
     public final String TAG;
@@ -66,7 +68,6 @@ public final class QSCMainViewController extends ViewControllerBase {
     public QsTransitionAnimator transitionAnimator;
     public final kotlin.Lazy viewControllerRepo$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -88,8 +89,69 @@ public final class QSCMainViewController extends ViewControllerBase {
         }
     }
 
+    /* renamed from: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$onViewAttached$1, reason: invalid class name */
+    public final class AnonymousClass1 implements ConfigurationController.ConfigurationListener {
+        public AnonymousClass1() {
+        }
+
+        @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+        public final void onConfigChanged(Configuration configuration) {
+            float qsFrameX;
+            ViewControllerType viewControllerType;
+            QSCMainViewController qSCMainViewController = QSCMainViewController.this;
+            int i = qSCMainViewController.mCurrentOrientation;
+            int i2 = configuration.orientation;
+            if (i != i2) {
+                qSCMainViewController.mCurrentOrientation = i2;
+                if (qSCMainViewController.isShown) {
+                    if (i2 != 2 && (viewControllerType = qSCMainViewController.doShowingInRotation) != null) {
+                        qSCMainViewController.doShowingInRotation = null;
+                        QSCMainViewController.access$showView(qSCMainViewController, viewControllerType);
+                    }
+                    QSCMainView qSCMainView = (QSCMainView) qSCMainViewController.view;
+                    if (QSCMainViewController.isLargeScreen$7()) {
+                        int displayWidth = DeviceState.getDisplayWidth(qSCMainViewController.getContext());
+                        Context context = qSCMainViewController.getContext();
+                        qsFrameX = qSCMainViewController.resourcePicker.getQsFrameX() + ((displayWidth - r3.getPanelWidth(context)) / 2);
+                    } else {
+                        qsFrameX = 0.0f;
+                    }
+                    qSCMainView.setTranslationX(qsFrameX);
+                    qSCMainViewController.initResources();
+                    for (ViewControllerBase viewControllerBase : qSCMainViewController.getViewControllerRepo().viewControllers) {
+                        if (viewControllerBase != null) {
+                            viewControllerBase.configChanged();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$onViewAttached$2, reason: invalid class name */
+    public final class AnonymousClass2 implements Runnable {
+        public AnonymousClass2() {
+        }
+
+        @Override // java.lang.Runnable
+        public final void run() {
+            QSCMainViewController.this.getClass();
+            if (QSCMainViewController.isLargeScreen$7()) {
+                QSCMainViewController.this.initResources();
+                ViewControllerRepository viewControllerRepo = QSCMainViewController.this.getViewControllerRepo();
+                int cutoutTopMargin = QSCMainViewController.this.getCutoutTopMargin();
+                int cutoutBottomMargin = QSCMainViewController.this.getCutoutBottomMargin();
+                for (ViewControllerBase viewControllerBase : viewControllerRepo.viewControllers) {
+                    if (viewControllerBase != null) {
+                        viewControllerBase.windowInsetChanged(cutoutTopMargin, cutoutBottomMargin);
+                    }
+                }
+            }
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r1v16, types: [com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$accessibilityDelegate$1] */
-    public QSCMainViewController(QSCMainView qSCMainView, Context context, SecQSSettingEditResources secQSSettingEditResources, SecQSPanelResourcePicker secQSPanelResourcePicker, BarOrderInteractor barOrderInteractor, QSCPopupButtonController qSCPopupButtonController, SettingsHelper settingsHelper, ColoredBGHelper coloredBGHelper, PanelPopOverManager panelPopOverManager, Lazy lazy) {
+    public QSCMainViewController(QSCMainView qSCMainView, Context context, SecQSSettingEditResources secQSSettingEditResources, SecQSPanelResourcePicker secQSPanelResourcePicker, BarOrderInteractor barOrderInteractor, QSCPopupButtonController qSCPopupButtonController, SettingsHelper settingsHelper, ColoredBGHelper coloredBGHelper, Lazy lazy) {
         super(qSCMainView);
         this.editResources = secQSSettingEditResources;
         this.resourcePicker = secQSPanelResourcePicker;
@@ -109,7 +171,7 @@ public final class QSCMainViewController extends ViewControllerBase {
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
                 this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
                 accessibilityNodeInfoCompat.mInfo.setSelected(false);
-                accessibilityNodeInfoCompat.setContentDescription(QSCMainViewController.this.getContext().getString(R.string.editscreen_close_button) + ", Button");
+                accessibilityNodeInfoCompat.setContentDescription(this.this$0.getContext().getString(R.string.editscreen_close_button) + ", Button");
             }
         };
     }
@@ -134,9 +196,11 @@ public final class QSCMainViewController extends ViewControllerBase {
             }
             viewControllerRepo.prevType = viewControllerType2;
             viewControllerRepo.currentType = viewControllerType;
-            ViewControllerBase currentViewController = qSCMainViewController.getCurrentViewController();
-            SecQSSettingEditResources secQSSettingEditResources = qSCMainViewController.editResources;
-            if (currentViewController == null) {
+            ViewControllerRepository viewControllerRepo2 = qSCMainViewController.getViewControllerRepo();
+            ViewControllerType viewControllerType3 = viewControllerRepo2.currentType;
+            ViewControllerType viewControllerType4 = ViewControllerType.None;
+            ViewControllerBase qSTileCustomizerController = (viewControllerType3 == viewControllerType4 || viewControllerType3 == viewControllerType4) ? null : viewControllerRepo2.viewControllers[viewControllerType3.ordinal()];
+            if (qSTileCustomizerController == null) {
                 Log.d(str, "createCurrentViewController()");
                 int i = WhenMappings.$EnumSwitchMapping$0[qSCMainViewController.getViewControllerRepo().currentType.ordinal()];
                 if (i != 1) {
@@ -156,60 +220,61 @@ public final class QSCMainViewController extends ViewControllerBase {
                         qSLayoutEditViewController = new QSLayoutEditViewController(context, qSCMainViewController.barOrderInteractor, qSCMainViewController.coloredBGHelper, arrayList, qSCMainViewController.editResources, new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$createCurrentViewController$controller$2
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view) {
-                                QSCMainViewController qSCMainViewController2 = QSCMainViewController.this;
+                                QSCMainViewController qSCMainViewController2 = this.this$0;
                                 qSCMainViewController2.editResources.isCurrentTopEdit = false;
                                 qSCMainViewController2.showViewWithFixRotation(ViewControllerType.TileEdit);
                             }
                         }, new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$createCurrentViewController$controller$3
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view) {
-                                QSCMainViewController.this.showViewWithFixRotation(ViewControllerType.Setting);
+                                this.this$0.showViewWithFixRotation(ViewControllerType.Setting);
                             }
-                        }, qSCMainViewController.getCutoutTopMargin());
+                        }, qSCMainViewController.getCutoutTopMargin(), qSCMainViewController.getCutoutBottomMargin());
                     } else if (i != 3) {
-                        currentViewController = null;
+                        qSTileCustomizerController = null;
                     } else {
                         qSLayoutEditViewController = new QSSettingViewController(qSCMainViewController.getContext(), qSCMainViewController.editResources, qSCMainViewController.popupButtonController, qSCMainViewController.accessibilityDelegate, new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$createCurrentViewController$controller$4
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view) {
-                                QSCMainViewController.this.backKeyEvent();
+                                this.this$0.backKeyEvent();
                             }
                         }, new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$createCurrentViewController$controller$5
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view) {
-                                QSCMainViewController qSCMainViewController2 = QSCMainViewController.this;
+                                QSCMainViewController qSCMainViewController2 = this.this$0;
                                 qSCMainViewController2.editResources.isCurrentTopEdit = true;
                                 qSCMainViewController2.showViewWithFixRotation(ViewControllerType.TileEdit);
                             }
                         });
                     }
-                    currentViewController = qSLayoutEditViewController;
+                    qSTileCustomizerController = qSLayoutEditViewController;
                 } else {
-                    currentViewController = new QSTileCustomizerController(qSCMainViewController.getContext(), secQSSettingEditResources, QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$6(), qSCMainViewController.getCutoutTopMargin());
+                    qSTileCustomizerController = new QSTileCustomizerController(qSCMainViewController.getContext(), qSCMainViewController.editResources, QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$7(), qSCMainViewController.getCutoutTopMargin(), qSCMainViewController.getCutoutBottomMargin());
                 }
-                if (currentViewController != null) {
-                    currentViewController.init();
+                if (qSTileCustomizerController != null) {
+                    qSTileCustomizerController.init();
                 }
             }
-            ViewControllerRepository viewControllerRepo2 = qSCMainViewController.getViewControllerRepo();
-            viewControllerRepo2.viewControllers[viewControllerRepo2.currentType.ordinal()] = currentViewController;
-            ViewControllerBase currentViewController2 = qSCMainViewController.getCurrentViewController();
-            if (currentViewController2 != null) {
-                if (z2 || currentViewController2.view.getParent() != null) {
-                    View view = currentViewController2.view;
+            ViewControllerRepository viewControllerRepo3 = qSCMainViewController.getViewControllerRepo();
+            viewControllerRepo3.viewControllers[viewControllerRepo3.currentType.ordinal()] = qSTileCustomizerController;
+            ViewControllerRepository viewControllerRepo4 = qSCMainViewController.getViewControllerRepo();
+            ViewControllerType viewControllerType5 = viewControllerRepo4.currentType;
+            ViewControllerBase viewControllerBase = (viewControllerType5 == viewControllerType4 || viewControllerType5 == viewControllerType4) ? null : viewControllerRepo4.viewControllers[viewControllerType5.ordinal()];
+            if (viewControllerBase != null) {
+                if (z2 || viewControllerBase.view.getParent() != null) {
+                    View view = viewControllerBase.view;
                     if (view != null) {
                         view.setVisibility(0);
                     }
                 } else {
-                    frameLayout.addView(currentViewController2.view);
-                    currentViewController2.show(new QSCMainViewController$showView$1$1(qSCMainViewController));
+                    frameLayout.addView(viewControllerBase.view);
+                    viewControllerBase.show(new QSCMainViewController$showView$1$1(qSCMainViewController));
                 }
                 if (qSCMainViewController.getViewControllerRepo().prevType != qSCMainViewController.getViewControllerRepo().MAIN_TYPE) {
-                    ViewControllerRepository viewControllerRepo3 = qSCMainViewController.getViewControllerRepo();
-                    ViewControllerType viewControllerType3 = viewControllerRepo3.prevType;
-                    ViewControllerType viewControllerType4 = ViewControllerType.None;
-                    ViewControllerBase viewControllerBase = (viewControllerType3 == viewControllerType4 || viewControllerType3 == viewControllerType4) ? null : viewControllerRepo3.viewControllers[viewControllerType3.ordinal()];
-                    View view2 = viewControllerBase != null ? viewControllerBase.view : null;
+                    ViewControllerRepository viewControllerRepo5 = qSCMainViewController.getViewControllerRepo();
+                    ViewControllerType viewControllerType6 = viewControllerRepo5.prevType;
+                    ViewControllerBase viewControllerBase2 = (viewControllerType6 == viewControllerType4 || viewControllerType6 == viewControllerType4) ? null : viewControllerRepo5.viewControllers[viewControllerType6.ordinal()];
+                    View view2 = viewControllerBase2 != null ? viewControllerBase2.view : null;
                     if (view2 != null) {
                         view2.setVisibility(8);
                     }
@@ -218,7 +283,7 @@ public final class QSCMainViewController extends ViewControllerBase {
             qSCMainViewController.primeContainer.setVisibility(z ? 0 : 8);
             qSCMainViewController.subContainer.setVisibility(z ? 8 : 0);
             boolean z3 = qSCMainViewController.getViewControllerRepo().currentType == ViewControllerType.TileEdit;
-            secQSSettingEditResources.getClass();
+            qSCMainViewController.editResources.getClass();
             boolean z4 = SecQSSettingEditResources.isBarPhone() && z3;
             int color = z4 ? qSCMainViewController.getContext().getColor(R.color.qs_edit_panel_available_background_color) : 0;
             ((QSCMainView) qSCMainViewController.mView).requireViewById(R.id.navigation_bar_view).setAlpha(1.0f);
@@ -229,7 +294,7 @@ public final class QSCMainViewController extends ViewControllerBase {
         }
     }
 
-    public static boolean isLargeScreen$6() {
+    public static boolean isLargeScreen$7() {
         return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
@@ -242,19 +307,23 @@ public final class QSCMainViewController extends ViewControllerBase {
             return;
         }
         ViewControllerType viewControllerType3 = getViewControllerRepo().currentType;
-        ViewControllerBase currentViewController = getCurrentViewController();
-        if (currentViewController != null) {
-            currentViewController.close();
-        }
-        Integer num = currentViewController != null ? currentViewController.message : null;
         ViewControllerRepository viewControllerRepo = getViewControllerRepo();
-        ViewControllerType viewControllerType4 = viewControllerRepo.prevType;
+        ViewControllerType viewControllerType4 = viewControllerRepo.currentType;
         ViewControllerBase viewControllerBase = (viewControllerType4 == viewControllerType2 || viewControllerType4 == viewControllerType2) ? null : viewControllerRepo.viewControllers[viewControllerType4.ordinal()];
         if (viewControllerBase != null) {
-            viewControllerBase.resolveMessage(num);
+            viewControllerBase.close();
         }
-        ViewControllerBase currentViewController2 = getCurrentViewController();
-        if (currentViewController2 != null && (view = currentViewController2.view) != null) {
+        Integer num = viewControllerBase != null ? viewControllerBase.message : null;
+        ViewControllerRepository viewControllerRepo2 = getViewControllerRepo();
+        ViewControllerType viewControllerType5 = viewControllerRepo2.prevType;
+        ViewControllerBase viewControllerBase2 = (viewControllerType5 == viewControllerType2 || viewControllerType5 == viewControllerType2) ? null : viewControllerRepo2.viewControllers[viewControllerType5.ordinal()];
+        if (viewControllerBase2 != null) {
+            viewControllerBase2.resolveMessage(num);
+        }
+        ViewControllerRepository viewControllerRepo3 = getViewControllerRepo();
+        ViewControllerType viewControllerType6 = viewControllerRepo3.currentType;
+        ViewControllerBase viewControllerBase3 = (viewControllerType6 == viewControllerType2 || viewControllerType6 == viewControllerType2) ? null : viewControllerRepo3.viewControllers[viewControllerType6.ordinal()];
+        if (viewControllerBase3 != null && (view = viewControllerBase3.view) != null) {
             this.subContainer.removeView(view);
         }
         showViewWithFixRotation(getViewControllerRepo().prevType);
@@ -264,24 +333,21 @@ public final class QSCMainViewController extends ViewControllerBase {
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
     public final void close() {
         if (this.isShown) {
+            prepareForShowing(false);
             QsTransitionAnimator qsTransitionAnimator = this.transitionAnimator;
             if (qsTransitionAnimator == null) {
                 qsTransitionAnimator = null;
             }
-            if (!qsTransitionAnimator.isThereNoView() && qsTransitionAnimator.mAnimatorsInitialiezed && qsTransitionAnimator.animStateCallback != null) {
-                SecQSImplAnimatorManager.AnonymousClass2.setCustomizerShowing(false);
-            }
-            QsTransitionAnimator qsTransitionAnimator2 = this.transitionAnimator;
-            if (qsTransitionAnimator2 == null) {
-                qsTransitionAnimator2 = null;
-            }
-            qsTransitionAnimator2.showQsPanelForCustomizer(true);
+            qsTransitionAnimator.showQsPanelForCustomizer(true);
             Log.d(this.TAG, "close()");
             super.close();
             ((AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class)).mQsEditMode = false;
-            ViewControllerBase currentViewController = getCurrentViewController();
-            if (currentViewController != null) {
-                currentViewController.close();
+            ViewControllerRepository viewControllerRepo = getViewControllerRepo();
+            ViewControllerType viewControllerType = viewControllerRepo.currentType;
+            ViewControllerType viewControllerType2 = ViewControllerType.None;
+            ViewControllerBase viewControllerBase = (viewControllerType == viewControllerType2 || viewControllerType == viewControllerType2) ? null : viewControllerRepo.viewControllers[viewControllerType.ordinal()];
+            if (viewControllerBase != null) {
+                viewControllerBase.close();
             }
             QSBlurPopUpMenu qSBlurPopUpMenu = this.popupButtonController.qsBlurPopUpMenu;
             if (qSBlurPopUpMenu != null) {
@@ -308,30 +374,25 @@ public final class QSCMainViewController extends ViewControllerBase {
             }
             ((QSCMainView) this.mView).setVisibility(8);
             this.cloneBarRunnable = null;
+            ((QSCMainView) this.mView).requireViewById(R.id.navigation_bar_view).semSetBlurInfo(null);
             SystemUIAnalytics.sendScreenViewLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
         }
     }
 
-    public final ViewControllerBase getCurrentViewController() {
-        ViewControllerRepository viewControllerRepo = getViewControllerRepo();
-        ViewControllerType viewControllerType = viewControllerRepo.currentType;
-        ViewControllerType viewControllerType2 = ViewControllerType.None;
-        if (viewControllerType == viewControllerType2 || viewControllerType == viewControllerType2) {
-            return null;
-        }
-        return viewControllerRepo.viewControllers[viewControllerType.ordinal()];
+    public final int getCutoutBottomMargin() {
+        return ((QSCMainView) this.mView).getRootWindowInsets().getInsets(WindowInsets.Type.navigationBars()).bottom;
     }
 
     public final int getCutoutTopMargin() {
-        int i;
+        int popOverBlankSpace;
         LargeScreenHeaderHelper largeScreenHeaderHelper = (LargeScreenHeaderHelper) this.largeScreenHeaderHelperLazy.get();
         int largeScreenHeaderHeight = largeScreenHeaderHelper.getLargeScreenHeaderHeight() + largeScreenHeaderHelper.getTopMargin(((QSCMainView) this.mView).getRootWindowInsets());
-        if (DeviceState.isShowingPopOverStatusBar()) {
-            i = largeScreenHeaderHelper.qsPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverBlankSpace(largeScreenHeaderHelper.context);
+        if (DeviceState.isShowingPopOverStatusBar(largeScreenHeaderHelper.context)) {
+            popOverBlankSpace = largeScreenHeaderHelper.qsPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverBlankSpace(largeScreenHeaderHelper.context);
         } else {
-            i = 0;
+            popOverBlankSpace = 0;
         }
-        return i + largeScreenHeaderHeight;
+        return popOverBlankSpace + largeScreenHeaderHeight;
     }
 
     public final ViewControllerRepository getViewControllerRepo() {
@@ -339,17 +400,25 @@ public final class QSCMainViewController extends ViewControllerBase {
     }
 
     public final void initResources() {
-        View requireViewById = ((QSCMainView) this.mView).requireViewById(R.id.navigation_bar_view);
-        ViewGroup.LayoutParams layoutParams = requireViewById.getLayoutParams();
+        View viewRequireViewById = ((QSCMainView) this.mView).requireViewById(R.id.navigation_bar_view);
+        ViewGroup.LayoutParams layoutParams = viewRequireViewById.getLayoutParams();
         this.editResources.getClass();
-        layoutParams.height = (SecQSSettingEditResources.isBarPhone() && requireViewById.getResources().getConfiguration().orientation == 2) ? 0 : requireViewById.getResources().getDimensionPixelSize(R.dimen.navigation_bar_size);
-        ((QSCMainView) this.mView).requireViewById(R.id.main_content).getLayoutParams().width = this.resourcePicker.getPanelWidth(getContext());
-        if (isLargeScreen$6()) {
+        layoutParams.height = (SecQSSettingEditResources.isBarPhone() && viewRequireViewById.getResources().getConfiguration().orientation == 2) ? 0 : isLargeScreen$7() ? getCutoutBottomMargin() : viewRequireViewById.getResources().getDimensionPixelSize(R.dimen.navigation_bar_size);
+        QSCMainView qSCMainView = (QSCMainView) this.mView;
+        int panelWidth = this.resourcePicker.getPanelWidth(getContext());
+        qSCMainView.getClass();
+        if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
+            qSCMainView.getLayoutParams().width = panelWidth;
+        } else {
+            qSCMainView.getLayoutParams().width = -1;
+        }
+        qSCMainView.requireViewById(R.id.main_content).getLayoutParams().width = panelWidth;
+        if (isLargeScreen$7()) {
             LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) ((QSCMainView) this.mView).requireViewById(R.id.main_content).getLayoutParams();
             boolean z = QpRune.QUICK_POP_OVER_CUSTOMIZER;
             if (z) {
-                QSCMainView qSCMainView = (QSCMainView) this.mView;
-                qSCMainView.setPadding(qSCMainView.getPaddingLeft(), 0, ((QSCMainView) this.mView).getPaddingRight(), ((QSCMainView) this.mView).getPaddingBottom());
+                QSCMainView qSCMainView2 = (QSCMainView) this.mView;
+                qSCMainView2.setPadding(qSCMainView2.getPaddingLeft(), 0, ((QSCMainView) this.mView).getPaddingRight(), ((QSCMainView) this.mView).getPaddingBottom());
             }
             layoutParams2.topMargin = z ? getCutoutTopMargin() : 0;
         }
@@ -357,11 +426,11 @@ public final class QSCMainViewController extends ViewControllerBase {
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase, com.android.systemui.util.ViewController
     public final void onViewAttached() {
-        ((QSCMainView) this.mView).configChangedCallback = new QSCMainViewController$onViewAttached$1(this);
+        ((QSCMainView) this.mView).configChangedCallback = new AnonymousClass1();
         if (QpRune.QUICK_POP_OVER_CUSTOMIZER) {
-            ((QSCMainView) this.mView).windowInsetChangeListener = new QSCMainViewController$onViewAttached$2(this);
+            ((QSCMainView) this.mView).windowInsetChangeListener = new AnonymousClass2();
         }
-        ((QSCMainView) this.mView).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$onViewAttached$3
+        ((QSCMainView) this.mView).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController.onViewAttached.3
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
@@ -383,6 +452,23 @@ public final class QSCMainViewController extends ViewControllerBase {
         ((QSCMainView) this.mView).configChangedCallback = null;
     }
 
+    public final void prepareForShowing(boolean z) {
+        QsTransitionAnimator qsTransitionAnimator = this.transitionAnimator;
+        if (qsTransitionAnimator == null) {
+            qsTransitionAnimator = null;
+        }
+        if (qsTransitionAnimator.isThereNoView() || !qsTransitionAnimator.mAnimatorsInitialiezed) {
+            return;
+        }
+        PanelPopOverManager panelPopOverManager = qsTransitionAnimator.panelPopOverManager;
+        if (panelPopOverManager.getNeedToPopOver() && panelPopOverManager.isPopOverAreaListenerAdded) {
+            panelPopOverManager.isAnimating = true;
+        }
+        if (qsTransitionAnimator.animStateCallback != null) {
+            SecQSImplAnimatorManager.AnonymousClass2.setCustomizerShowing(z);
+        }
+    }
+
     public final void setPosition$2(float f) {
         ListView listView;
         if (((QSCMainView) this.mView).getVisibility() != 0) {
@@ -392,7 +478,18 @@ public final class QSCMainViewController extends ViewControllerBase {
         builder.addFloat(this.mView, "alpha", 0.0f, 1.0f);
         builder.mStartDelay = 0.3f;
         builder.build().setPosition(f);
-        if (f < 1.0f) {
+        ViewControllerRepository viewControllerRepo = getViewControllerRepo();
+        ViewControllerType viewControllerType = viewControllerRepo.currentType;
+        ViewControllerType viewControllerType2 = ViewControllerType.None;
+        ViewControllerBase viewControllerBase = null;
+        if (viewControllerType != viewControllerType2 && viewControllerType != viewControllerType2) {
+            viewControllerBase = viewControllerRepo.viewControllers[viewControllerType.ordinal()];
+        }
+        if (isLargeScreen$7()) {
+            if (f < 0.5f && (viewControllerBase instanceof QSTileCustomizerController)) {
+                ((QSTileCustomizerController) viewControllerBase).removeBlurs();
+            }
+        } else if (f < 1.0f) {
             ((QSCMainView) this.mView).setVisibility(4);
         }
         QSBlurPopUpMenu qSBlurPopUpMenu = this.popupButtonController.qsBlurPopUpMenu;
@@ -404,30 +501,34 @@ public final class QSCMainViewController extends ViewControllerBase {
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
     public final void show(Runnable runnable) {
-        ViewPropertyAnimator alpha;
-        ViewPropertyAnimator scaleX;
-        ViewPropertyAnimator scaleY;
+        float qsFrameX;
+        ViewPropertyAnimator viewPropertyAnimatorAlpha;
+        ViewPropertyAnimator viewPropertyAnimatorScaleX;
+        ViewPropertyAnimator viewPropertyAnimatorScaleY;
         ViewPropertyAnimator duration;
         ViewPropertyAnimator startDelay;
-        ViewPropertyAnimator withStartAction;
+        ViewPropertyAnimator viewPropertyAnimatorWithStartAction;
         ViewGroup.LayoutParams layoutParams;
         if (this.isShown) {
             return;
         }
         super.show(null);
         if (QpRune.QUICK_POP_OVER_CUSTOMIZER && (layoutParams = ((QSCMainView) this.view).getLayoutParams()) != null) {
-            layoutParams.height = isLargeScreen$6() ? -2 : -1;
+            layoutParams.height = isLargeScreen$7() ? -2 : -1;
             ((QSCMainView) this.view).setLayoutParams(layoutParams);
         }
-        ((QSCMainView) this.view).setTranslationX(isLargeScreen$6() ? this.resourcePicker.getQsFrameX() : 0.0f);
+        QSCMainView qSCMainView = (QSCMainView) this.view;
+        if (isLargeScreen$7()) {
+            int displayWidth = DeviceState.getDisplayWidth(getContext());
+            Context context = getContext();
+            qsFrameX = this.resourcePicker.getQsFrameX() + ((displayWidth - r6.getPanelWidth(context)) / 2);
+        } else {
+            qsFrameX = 0.0f;
+        }
+        qSCMainView.setTranslationX(qsFrameX);
         this.mCurrentOrientation = getContext().getResources().getConfiguration().orientation;
         this.doShowingInRotation = null;
         this.cloneBarRunnable = runnable;
-        QsTransitionAnimator qsTransitionAnimator = this.transitionAnimator;
-        if (qsTransitionAnimator == null) {
-            qsTransitionAnimator = null;
-        }
-        qsTransitionAnimator.showQsPanelForCustomizer(false);
         this.subContainer.removeAllViews();
         ViewControllerRepository viewControllerRepo = getViewControllerRepo();
         ViewControllerType viewControllerType = ViewControllerType.None;
@@ -475,15 +576,17 @@ public final class QSCMainViewController extends ViewControllerBase {
         t2.setAlpha(0.0f);
         t2.setScaleX(0.93f);
         t2.setScaleY(0.93f);
-        ViewPropertyAnimator animate = this.mView.animate();
-        if (animate != null && (alpha = animate.alpha(1.0f)) != null && (scaleX = alpha.scaleX(1.0f)) != null && (scaleY = scaleX.scaleY(1.0f)) != null && (duration = scaleY.setDuration(200L)) != null && (startDelay = duration.setStartDelay(0L)) != null && (withStartAction = startDelay.withStartAction(new Runnable() { // from class: com.android.systemui.qs.customize.SecQSCustomizerAnimator$Companion$startShowView$1
+        ViewPropertyAnimator viewPropertyAnimatorAnimate = this.mView.animate();
+        if (viewPropertyAnimatorAnimate != null && (viewPropertyAnimatorAlpha = viewPropertyAnimatorAnimate.alpha(1.0f)) != null && (viewPropertyAnimatorScaleX = viewPropertyAnimatorAlpha.scaleX(1.0f)) != null && (viewPropertyAnimatorScaleY = viewPropertyAnimatorScaleX.scaleY(1.0f)) != null && (duration = viewPropertyAnimatorScaleY.setDuration(200L)) != null && (startDelay = duration.setStartDelay(0L)) != null && (viewPropertyAnimatorWithStartAction = startDelay.withStartAction(new Runnable() { // from class: com.android.systemui.qs.customize.SecQSCustomizerAnimator$Companion$startShowView$1
             @Override // java.lang.Runnable
             public final void run() {
                 ((AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class)).mQsEditMode = true;
             }
         })) != null) {
-            withStartAction.start();
+            viewPropertyAnimatorWithStartAction.start();
         }
+        QsTransitionAnimator qsTransitionAnimator = this.transitionAnimator;
+        (qsTransitionAnimator != null ? qsTransitionAnimator : null).showQsPanelForCustomizer(false);
         SystemUIAnalytics.sendScreenViewLog(SystemUIAnalytics.SID_QUICKPANEL_CUSTOMIZER);
     }
 
@@ -493,7 +596,7 @@ public final class QSCMainViewController extends ViewControllerBase {
             return;
         }
         int i2 = 1;
-        boolean z = !isLargeScreen$6() && ((i = WhenMappings.$EnumSwitchMapping$0[viewControllerType.ordinal()]) == 1 || i == 2 || !QpRune.QUICK_PANEL_BLUR_DEFAULT);
+        boolean z = !isLargeScreen$7() && ((i = WhenMappings.$EnumSwitchMapping$0[viewControllerType.ordinal()]) == 1 || i == 2 || !QpRune.QUICK_PANEL_BLUR_DEFAULT);
         QSCustomizerWindowHelper qSCustomizerWindowHelper = this.customizerWindowHelper;
         View view = qSCustomizerWindowHelper.windowRootView;
         if (view != null) {
@@ -519,7 +622,7 @@ public final class QSCMainViewController extends ViewControllerBase {
         if (viewControllerType == ViewControllerType.Setting) {
             SystemUIAnalytics.sendRunstoneEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_PANEL_SETTINGS, SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
         }
-        ((QSCMainView) this.mView).post(new Runnable() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController$showViewWithFixRotation$1
+        ((QSCMainView) this.mView).post(new Runnable() { // from class: com.android.systemui.qs.customize.viewcontroller.QSCMainViewController.showViewWithFixRotation.1
             @Override // java.lang.Runnable
             public final void run() {
                 QSCMainViewController.access$showView(QSCMainViewController.this, viewControllerType);

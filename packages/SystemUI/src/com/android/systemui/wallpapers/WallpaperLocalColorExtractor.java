@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WallpaperLocalColorExtractor {
     public static final RectF LOCAL_COLOR_BOUNDS = new RectF(0.0f, 0.0f, 1.0f, 1.0f);
@@ -31,7 +30,6 @@ public class WallpaperLocalColorExtractor {
     public final List mPendingRegions = new ArrayList();
     public final Set mProcessedRegions = new ArraySet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WallpaperLocalColorExtractorCallback {
         void onActivated();
 
@@ -78,8 +76,8 @@ public class WallpaperLocalColorExtractor {
             float f = 1.0f / this.mPages;
             float f2 = (rectF2.left % f) / f;
             float f3 = (rectF2.right % f) / f;
-            int floor = (int) Math.floor(rectF2.centerX() / f);
-            WallpaperColors wallpaperColors = null;
+            int iFloor = (int) Math.floor(rectF2.centerX() / f);
+            WallpaperColors localWallpaperColors = null;
             if (this.mDisplayWidth <= 0 || this.mDisplayHeight <= 0) {
                 Log.e("WallpaperLocalColorExtractor", "Trying to extract colors with invalid display dimensions");
                 rectF = null;
@@ -87,14 +85,14 @@ public class WallpaperLocalColorExtractor {
                 rectF = new RectF();
                 rectF.bottom = rectF2.bottom;
                 rectF.top = rectF2.top;
-                float min = this.mDisplayWidth * Math.min(this.mBitmapHeight / this.mDisplayHeight, 1.0f);
+                float fMin = this.mDisplayWidth * Math.min(this.mBitmapHeight / this.mDisplayHeight, 1.0f);
                 int i2 = this.mBitmapWidth;
-                float min2 = Math.min(1.0f, i2 > 0 ? min / i2 : 1.0f);
-                float f4 = floor * ((1.0f - min2) / (this.mPages - 1));
-                rectF.left = MathUtils.constrain((f2 * min2) + f4, 0.0f, 1.0f);
-                float constrain = MathUtils.constrain((f3 * min2) + f4, 0.0f, 1.0f);
-                rectF.right = constrain;
-                if (rectF.left > constrain) {
+                float fMin2 = Math.min(1.0f, i2 > 0 ? fMin / i2 : 1.0f);
+                float f4 = iFloor * ((1.0f - fMin2) / (this.mPages - 1));
+                rectF.left = MathUtils.constrain((f2 * fMin2) + f4, 0.0f, 1.0f);
+                float fConstrain = MathUtils.constrain((f3 * fMin2) + f4, 0.0f, 1.0f);
+                rectF.right = fConstrain;
+                if (rectF.left > fConstrain) {
                     rectF.left = 0.0f;
                     rectF.right = 1.0f;
                 }
@@ -102,11 +100,11 @@ public class WallpaperLocalColorExtractor {
             if (rectF != null && LOCAL_COLOR_BOUNDS.contains(rectF)) {
                 Rect rect = new Rect((int) Math.floor(rectF.left * this.mMiniBitmap.getWidth()), (int) Math.floor(rectF.top * this.mMiniBitmap.getHeight()), (int) Math.ceil(rectF.right * this.mMiniBitmap.getWidth()), (int) Math.ceil(rectF.bottom * this.mMiniBitmap.getHeight()));
                 if (!rect.isEmpty()) {
-                    wallpaperColors = getLocalWallpaperColors(rect);
+                    localWallpaperColors = getLocalWallpaperColors(rect);
                 }
             }
             ((ArraySet) this.mProcessedRegions).add(rectF2);
-            arrayList.add(wallpaperColors);
+            arrayList.add(localWallpaperColors);
         }
         ArrayList arrayList2 = new ArrayList(this.mPendingRegions);
         ((ArrayList) this.mPendingRegions).clear();

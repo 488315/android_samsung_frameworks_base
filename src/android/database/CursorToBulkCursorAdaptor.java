@@ -218,11 +218,11 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
 
     @Override // android.database.IBulkCursor
     public Bundle respond(Bundle bundle) {
-        Bundle respond;
+        Bundle bundleRespond;
         synchronized (this.mLock) {
             throwIfCursorIsClosed();
-            respond = this.mCursor.respond(bundle);
+            bundleRespond = this.mCursor.respond(bundle);
         }
-        return respond;
+        return bundleRespond;
     }
 }

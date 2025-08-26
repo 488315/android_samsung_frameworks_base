@@ -4,11 +4,9 @@ import com.android.systemui.qs.pipeline.shared.TileSpec;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface AutoAddTracking {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Always implements AutoAddTracking {
         public static final Always INSTANCE = new Always();
 
@@ -20,7 +18,6 @@ public interface AutoAddTracking {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Disabled implements AutoAddTracking {
         static {
             new Disabled();
@@ -34,7 +31,6 @@ public interface AutoAddTracking {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IfNotAdded implements AutoAddTracking {
         public final TileSpec spec;
 

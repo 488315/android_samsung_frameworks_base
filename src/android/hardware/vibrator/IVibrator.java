@@ -303,9 +303,9 @@ public interface IVibrator extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVibrator)) {
-                return (IVibrator) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVibrator)) {
+                return (IVibrator) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -341,20 +341,20 @@ public interface IVibrator extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    IVibratorCallback asInterface = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    IVibratorCallback iVibratorCallbackAsInterface = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    on(readInt, asInterface);
+                    on(i3, iVibratorCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
-                    byte readByte = parcel.readByte();
-                    IVibratorCallback asInterface2 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    byte b = parcel.readByte();
+                    IVibratorCallback iVibratorCallbackAsInterface2 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int perform = perform(readInt2, readByte, asInterface2);
+                    int iPerform = perform(i4, b, iVibratorCallbackAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(perform);
+                    parcel2.writeInt(iPerform);
                     return true;
                 case 5:
                     int[] supportedEffects = getSupportedEffects();
@@ -362,15 +362,15 @@ public interface IVibrator extends IInterface {
                     parcel2.writeIntArray(supportedEffects);
                     return true;
                 case 6:
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setAmplitude(readFloat);
+                    setAmplitude(f);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setExternalControl(readBoolean);
+                    setExternalControl(z);
                     parcel2.writeNoException();
                     return true;
                 case 8:
@@ -389,17 +389,17 @@ public interface IVibrator extends IInterface {
                     parcel2.writeIntArray(supportedPrimitives);
                     return true;
                 case 11:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int primitiveDuration = getPrimitiveDuration(readInt3);
+                    int primitiveDuration = getPrimitiveDuration(i5);
                     parcel2.writeNoException();
                     parcel2.writeInt(primitiveDuration);
                     return true;
                 case 12:
                     CompositeEffect[] compositeEffectArr = (CompositeEffect[]) parcel.createTypedArray(CompositeEffect.CREATOR);
-                    IVibratorCallback asInterface3 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVibratorCallback iVibratorCallbackAsInterface3 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    compose(compositeEffectArr, asInterface3);
+                    compose(compositeEffectArr, iVibratorCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 13:
@@ -408,17 +408,17 @@ public interface IVibrator extends IInterface {
                     parcel2.writeIntArray(supportedAlwaysOnEffects);
                     return true;
                 case 14:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    byte readByte2 = parcel.readByte();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    byte b2 = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    alwaysOnEnable(readInt4, readInt5, readByte2);
+                    alwaysOnEnable(i6, i7, b2);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    alwaysOnDisable(readInt6);
+                    alwaysOnDisable(i8);
                     parcel2.writeNoException();
                     return true;
                 case 16:
@@ -463,16 +463,16 @@ public interface IVibrator extends IInterface {
                     return true;
                 case 24:
                     PrimitivePwle[] primitivePwleArr = (PrimitivePwle[]) parcel.createTypedArray(PrimitivePwle.CREATOR);
-                    IVibratorCallback asInterface4 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVibratorCallback iVibratorCallbackAsInterface4 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    composePwle(primitivePwleArr, asInterface4);
+                    composePwle(primitivePwleArr, iVibratorCallbackAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 25:
                     VendorEffect vendorEffect = (VendorEffect) parcel.readTypedObject(VendorEffect.CREATOR);
-                    IVibratorCallback asInterface5 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVibratorCallback iVibratorCallbackAsInterface5 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    performVendorEffect(vendorEffect, asInterface5);
+                    performVendorEffect(vendorEffect, iVibratorCallbackAsInterface5);
                     parcel2.writeNoException();
                     return true;
                 case 26:
@@ -497,9 +497,9 @@ public interface IVibrator extends IInterface {
                     return true;
                 case 30:
                     CompositePwleV2 compositePwleV2 = (CompositePwleV2) parcel.readTypedObject(CompositePwleV2.CREATOR);
-                    IVibratorCallback asInterface6 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVibratorCallback iVibratorCallbackAsInterface6 = IVibratorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    composePwleV2(compositePwleV2, asInterface6);
+                    composePwleV2(compositePwleV2, iVibratorCallbackAsInterface6);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -527,537 +527,537 @@ public interface IVibrator extends IInterface {
 
             @Override // android.hardware.vibrator.IVibrator
             public int getCapabilities() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCapabilities is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void off() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method off is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void on(int i, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method on is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int perform(int i, byte b, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByte(b);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method perform is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int[] getSupportedEffects() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSupportedEffects is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void setAmplitude(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setAmplitude is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void setExternalControl(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setExternalControl is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getCompositionDelayMax() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCompositionDelayMax is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getCompositionSizeMax() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCompositionSizeMax is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int[] getSupportedPrimitives() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSupportedPrimitives is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPrimitiveDuration(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPrimitiveDuration is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void compose(CompositeEffect[] compositeEffectArr, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedArray(compositeEffectArr, 0);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedArray(compositeEffectArr, 0);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method compose is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int[] getSupportedAlwaysOnEffects() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(13, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSupportedAlwaysOnEffects is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void alwaysOnEnable(int i, int i2, byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByte(b);
-                    if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByte(b);
+                    if (!this.mRemote.transact(14, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method alwaysOnEnable is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void alwaysOnDisable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(15, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method alwaysOnDisable is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public float getResonantFrequency() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(16, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getResonantFrequency is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public float getQFactor() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(17, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(17, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getQFactor is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public float getFrequencyResolution() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(18, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(18, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFrequencyResolution is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public float getFrequencyMinimum() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(19, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(19, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFrequencyMinimum is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public float[] getBandwidthAmplitudeMap() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(20, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(20, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getBandwidthAmplitudeMap is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPwlePrimitiveDurationMax() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(21, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(21, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPwlePrimitiveDurationMax is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPwleCompositionSizeMax() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(22, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(22, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPwleCompositionSizeMax is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int[] getSupportedBraking() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(23, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(23, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSupportedBraking is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void composePwle(PrimitivePwle[] primitivePwleArr, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedArray(primitivePwleArr, 0);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(24, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedArray(primitivePwleArr, 0);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(24, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method composePwle is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void performVendorEffect(VendorEffect vendorEffect, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(vendorEffect, 0);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(25, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(vendorEffect, 0);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(25, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method performVendorEffect is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public List<FrequencyAccelerationMapEntry> getFrequencyToOutputAccelerationMap() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(26, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(26, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFrequencyToOutputAccelerationMap is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(FrequencyAccelerationMapEntry.CREATOR);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(FrequencyAccelerationMapEntry.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPwleV2PrimitiveDurationMaxMillis() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(27, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(27, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPwleV2PrimitiveDurationMaxMillis is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPwleV2CompositionSizeMax() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(28, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(28, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPwleV2CompositionSizeMax is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getPwleV2PrimitiveDurationMinMillis() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(29, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(29, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPwleV2PrimitiveDurationMinMillis is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public void composePwleV2(CompositePwleV2 compositePwleV2, IVibratorCallback iVibratorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(compositePwleV2, 0);
-                    obtain.writeStrongInterface(iVibratorCallback);
-                    if (!this.mRemote.transact(30, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compositePwleV2, 0);
+                    parcelObtain.writeStrongInterface(iVibratorCallback);
+                    if (!this.mRemote.transact(30, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method composePwleV2 is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.vibrator.IVibrator
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -1066,18 +1066,18 @@ public interface IVibrator extends IInterface {
             @Override // android.hardware.vibrator.IVibrator
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

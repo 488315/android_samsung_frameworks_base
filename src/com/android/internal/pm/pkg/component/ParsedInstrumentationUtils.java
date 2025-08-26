@@ -12,24 +12,24 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ParsedInstrumentationUtils {
-    public static ParseResult<ParsedInstrumentation> parseInstrumentation(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws IOException, XmlPullParserException {
+    public static ParseResult<ParsedInstrumentation> parseInstrumentation(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws XmlPullParserException, IOException {
         ParsedInstrumentationImpl parsedInstrumentationImpl = new ParsedInstrumentationImpl();
         String str = "<" + xmlResourceParser.getName() + ">";
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestInstrumentation);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestInstrumentation);
         try {
-            ParseResult<?> parseComponent = ParsedComponentUtils.parseComponent(parsedInstrumentationImpl, str, parsingPackage, obtainAttributes, z, parseInput, 7, -1, 1, 0, 6, 2, 8);
-            if (parseComponent.isError()) {
-                return parseInput.error(parseComponent);
+            ParseResult<?> component = ParsedComponentUtils.parseComponent(parsedInstrumentationImpl, str, parsingPackage, typedArrayObtainAttributes, z, parseInput, 7, -1, 1, 0, 6, 2, 8);
+            if (component.isError()) {
+                return parseInput.error(component);
             }
-            parsedInstrumentationImpl.setTargetPackage(obtainAttributes.getNonResourceString(3)).setTargetProcesses(obtainAttributes.getNonResourceString(9)).setHandleProfiling(obtainAttributes.getBoolean(4, false)).setFunctionalTest(obtainAttributes.getBoolean(5, false));
-            obtainAttributes.recycle();
-            ParseResult<?> parseAllMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedInstrumentationImpl, parseInput);
-            if (parseAllMetaData.isError()) {
-                return parseInput.error(parseAllMetaData);
+            parsedInstrumentationImpl.setTargetPackage(typedArrayObtainAttributes.getNonResourceString(3)).setTargetProcesses(typedArrayObtainAttributes.getNonResourceString(9)).setHandleProfiling(typedArrayObtainAttributes.getBoolean(4, false)).setFunctionalTest(typedArrayObtainAttributes.getBoolean(5, false));
+            typedArrayObtainAttributes.recycle();
+            ParseResult<?> allMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedInstrumentationImpl, parseInput);
+            if (allMetaData.isError()) {
+                return parseInput.error(allMetaData);
             }
-            return parseInput.success((ParsedInstrumentation) parseAllMetaData.getResult());
+            return parseInput.success((ParsedInstrumentation) allMetaData.getResult());
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 }

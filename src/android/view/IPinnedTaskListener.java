@@ -51,9 +51,9 @@ public interface IPinnedTaskListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPinnedTaskListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPinnedTaskListener)) {
-                return (IPinnedTaskListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPinnedTaskListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPinnedTaskListener)) {
+                return (IPinnedTaskListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,14 +83,14 @@ public interface IPinnedTaskListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onMovementBoundsChanged(readBoolean);
+                onMovementBoundsChanged(z);
             } else if (i == 2) {
-                boolean readBoolean2 = parcel.readBoolean();
-                int readInt = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onImeVisibilityChanged(readBoolean2, readInt);
+                onImeVisibilityChanged(z2, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,26 +115,26 @@ public interface IPinnedTaskListener extends IInterface {
 
             @Override // android.view.IPinnedTaskListener
             public void onMovementBoundsChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPinnedTaskListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPinnedTaskListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IPinnedTaskListener
             public void onImeVisibilityChanged(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPinnedTaskListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPinnedTaskListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

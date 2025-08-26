@@ -87,11 +87,11 @@ public class Interpolator {
         if (fArr != null && fArr.length < this.mValueCount) {
             throw new ArrayStoreException();
         }
-        int nativeTimeToValues = nativeTimeToValues(this.native_instance, i, fArr);
-        if (nativeTimeToValues == 0) {
+        int iNativeTimeToValues = nativeTimeToValues(this.native_instance, i, fArr);
+        if (iNativeTimeToValues == 0) {
             return Result.NORMAL;
         }
-        if (nativeTimeToValues == 1) {
+        if (iNativeTimeToValues == 1) {
             return Result.FREEZE_START;
         }
         return Result.FREEZE_END;

@@ -10,7 +10,6 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RingerModeLiveData extends MutableLiveData {
     public static final int $stable = 8;
@@ -22,8 +21,8 @@ public final class RingerModeLiveData extends MutableLiveData {
     private final RingerModeLiveData$receiver$1 receiver = new BroadcastReceiver() { // from class: com.android.systemui.util.RingerModeLiveData$receiver$1
         @Override // android.content.BroadcastReceiver
         public void onReceive(Context context, Intent intent) {
-            RingerModeLiveData.this.initialSticky = isInitialStickyBroadcast();
-            RingerModeLiveData.this.postValue(Integer.valueOf(intent.getIntExtra("android.media.EXTRA_RINGER_MODE", -1)));
+            this.this$0.initialSticky = isInitialStickyBroadcast();
+            this.this$0.postValue(Integer.valueOf(intent.getIntExtra("android.media.EXTRA_RINGER_MODE", -1)));
         }
     };
 
@@ -42,13 +41,11 @@ public final class RingerModeLiveData extends MutableLiveData {
     @Override // androidx.lifecycle.LiveData
     public void onActive() {
         BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, this.receiver, this.filter, this.executor, UserHandle.ALL, 0, null, 48);
-        this.executor.execute(new Runnable() { // from class: com.android.systemui.util.RingerModeLiveData$onActive$1
+        this.executor.execute(new Runnable() { // from class: com.android.systemui.util.RingerModeLiveData.onActive.1
             @Override // java.lang.Runnable
             public final void run() {
-                Function0 function0;
                 RingerModeLiveData ringerModeLiveData = RingerModeLiveData.this;
-                function0 = ringerModeLiveData.getter;
-                ringerModeLiveData.postValue(function0.invoke());
+                ringerModeLiveData.postValue(ringerModeLiveData.getter.invoke());
             }
         });
     }

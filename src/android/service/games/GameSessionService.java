@@ -57,17 +57,17 @@ public abstract class GameSessionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void doCreate(IGameSessionController iGameSessionController, CreateGameSessionRequest createGameSessionRequest, GameSessionViewHostConfiguration gameSessionViewHostConfiguration, AndroidFuture<CreateGameSessionResult> androidFuture) {
-        GameSession onNewSession = onNewSession(createGameSessionRequest);
-        Objects.requireNonNull(onNewSession);
+        GameSession gameSessionOnNewSession = onNewSession(createGameSessionRequest);
+        Objects.requireNonNull(gameSessionOnNewSession);
         Display display = this.mDisplayManager.getDisplay(gameSessionViewHostConfiguration.mDisplayId);
         if (display == null) {
             androidFuture.completeExceptionally(new IllegalStateException("No display found for id: " + gameSessionViewHostConfiguration.mDisplayId));
         } else {
-            Context createWindowContext = createWindowContext(display, 2038, null);
-            SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(createWindowContext, display, new InputTransferToken(), "GameSessionService");
-            onNewSession.attach(iGameSessionController, createGameSessionRequest.getTaskId(), createWindowContext, surfaceControlViewHost, gameSessionViewHostConfiguration.mWidthPx, gameSessionViewHostConfiguration.mHeightPx);
-            androidFuture.complete(new CreateGameSessionResult(onNewSession.mInterface, surfaceControlViewHost.getSurfacePackage()));
-            onNewSession.doCreate();
+            Context contextCreateWindowContext = createWindowContext(display, 2038, null);
+            SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(contextCreateWindowContext, display, new InputTransferToken(), "GameSessionService");
+            gameSessionOnNewSession.attach(iGameSessionController, createGameSessionRequest.getTaskId(), contextCreateWindowContext, surfaceControlViewHost, gameSessionViewHostConfiguration.mWidthPx, gameSessionViewHostConfiguration.mHeightPx);
+            androidFuture.complete(new CreateGameSessionResult(gameSessionOnNewSession.mInterface, surfaceControlViewHost.getSurfacePackage()));
+            gameSessionOnNewSession.doCreate();
         }
     }
 }

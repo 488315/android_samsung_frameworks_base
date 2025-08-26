@@ -1,6 +1,5 @@
 package com.google.zxing.qrcode.decoder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Version {
     public static final Version[] VERSIONS = buildVersions();
@@ -8,7 +7,6 @@ public final class Version {
     public final int totalCodewords;
     public final int versionNumber;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ECB {
         public final int count;
         public final int dataCodewords;
@@ -19,7 +17,6 @@ public final class Version {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ECBlocks {
         public final ECB[] ecBlocks;
         public final int ecCodewordsPerBlock;

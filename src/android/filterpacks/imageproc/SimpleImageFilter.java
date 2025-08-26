@@ -30,7 +30,7 @@ public abstract class SimpleImageFilter extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void setupPorts() {
+    public void setupPorts() throws NoSuchFieldException {
         SimpleImageFilter simpleImageFilter;
         if (this.mParameterName != null) {
             try {
@@ -50,13 +50,13 @@ public abstract class SimpleImageFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
         updateProgramWithTarget(format.getTarget(), filterContext);
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     protected void updateProgramWithTarget(int i, FilterContext filterContext) {

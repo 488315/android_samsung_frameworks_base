@@ -48,11 +48,11 @@ public class AppsQueryHelper {
             }
         } else {
             if (z2) {
-                List<ResolveInfo> queryIntentActivitiesAsUser = queryIntentActivitiesAsUser(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), userHandle.getIdentifier());
+                List<ResolveInfo> listQueryIntentActivitiesAsUser = queryIntentActivitiesAsUser(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), userHandle.getIdentifier());
                 ArraySet arraySet = new ArraySet();
-                int size2 = queryIntentActivitiesAsUser.size();
+                int size2 = listQueryIntentActivitiesAsUser.size();
                 for (int i3 = 0; i3 < size2; i3++) {
-                    arraySet.add(queryIntentActivitiesAsUser.get(i3).activityInfo.packageName);
+                    arraySet.add(listQueryIntentActivitiesAsUser.get(i3).activityInfo.packageName);
                 }
                 int size3 = this.mAllApps.size();
                 for (int i4 = 0; i4 < size3; i4++) {
@@ -76,10 +76,10 @@ public class AppsQueryHelper {
                 }
             }
             if (z4) {
-                List<ResolveInfo> queryIntentServicesAsUser = queryIntentServicesAsUser(new Intent(InputMethod.SERVICE_INTERFACE), userHandle.getIdentifier());
-                int size5 = queryIntentServicesAsUser.size();
+                List<ResolveInfo> listQueryIntentServicesAsUser = queryIntentServicesAsUser(new Intent(InputMethod.SERVICE_INTERFACE), userHandle.getIdentifier());
+                int size5 = listQueryIntentServicesAsUser.size();
                 for (int i6 = 0; i6 < size5; i6++) {
-                    ServiceInfo serviceInfo = queryIntentServicesAsUser.get(i6).serviceInfo;
+                    ServiceInfo serviceInfo = listQueryIntentServicesAsUser.get(i6).serviceInfo;
                     if ((!z || serviceInfo.applicationInfo.isSystemApp()) && !arrayList.contains(serviceInfo.packageName)) {
                         arrayList.add(serviceInfo.packageName);
                     }

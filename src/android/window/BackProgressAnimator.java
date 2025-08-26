@@ -83,13 +83,13 @@ public class BackProgressAnimator implements DynamicAnimation.OnAnimationUpdateL
         this.mOnAnimationEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: android.window.BackProgressAnimator$$ExternalSyntheticLambda0
             @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-                BackProgressAnimator.this.lambda$new$0(dynamicAnimation, z, f, f2);
+                this.f$0.lambda$new$0(dynamicAnimation, z, f, f2);
             }
         };
         this.mOnBackInvokedFlingUpdateListener = new DynamicAnimation.OnAnimationUpdateListener() { // from class: android.window.BackProgressAnimator$$ExternalSyntheticLambda1
             @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                BackProgressAnimator.this.lambda$new$1(dynamicAnimation, f, f2);
+                this.f$0.lambda$new$1(dynamicAnimation, f, f2);
             }
         };
         SpringAnimation springAnimation = new SpringAnimation(this, PROGRESS_PROP);

@@ -27,7 +27,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class NotificationViewWrapper implements TransformableView {
     public int mBackgroundColor;
@@ -79,7 +78,7 @@ public abstract class NotificationViewWrapper implements TransformableView {
                 return new NotificationOngoingExpandViewWrapper(context, view, expandableNotificationRow);
             }
         }
-        if (view.getId() != 16909884) {
+        if (view.getId() != 16909885) {
             return view instanceof NotificationHeaderView ? new NotificationHeaderViewWrapper(context, view, expandableNotificationRow) : new NotificationCustomViewWrapper(context, view, expandableNotificationRow);
         }
         if ("bigPicture".equals(view.getTag())) {

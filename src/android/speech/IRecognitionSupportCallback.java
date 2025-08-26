@@ -51,9 +51,9 @@ public interface IRecognitionSupportCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRecognitionSupportCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecognitionSupportCallback)) {
-                return (IRecognitionSupportCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRecognitionSupportCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecognitionSupportCallback)) {
+                return (IRecognitionSupportCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,9 +87,9 @@ public interface IRecognitionSupportCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onSupportResult(recognitionSupport);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readInt);
+                onError(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -114,25 +114,25 @@ public interface IRecognitionSupportCallback extends IInterface {
 
             @Override // android.speech.IRecognitionSupportCallback
             public void onSupportResult(RecognitionSupport recognitionSupport) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionSupportCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(recognitionSupport, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionSupportCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(recognitionSupport, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionSupportCallback
             public void onError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionSupportCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionSupportCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

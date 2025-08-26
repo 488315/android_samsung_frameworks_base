@@ -3,7 +3,6 @@ package com.android.wm.shell.bubbles;
 import android.graphics.PointF;
 import com.android.wm.shell.bubbles.Bubble;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleFlyoutView$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
@@ -46,7 +45,7 @@ public final /* synthetic */ class BubbleFlyoutView$$ExternalSyntheticLambda0 im
                 bubbleFlyoutView2.post(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleFlyoutView$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BubbleFlyoutView bubbleFlyoutView3 = BubbleFlyoutView.this;
+                        BubbleFlyoutView bubbleFlyoutView3 = bubbleFlyoutView2;
                         PointF pointF3 = pointF2;
                         boolean z3 = z2;
                         int i3 = BubbleFlyoutView.$r8$clinit;

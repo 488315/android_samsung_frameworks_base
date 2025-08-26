@@ -154,19 +154,19 @@ public final class TranslationResponseValue implements Parcelable {
     }
 
     TranslationResponseValue(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        CharSequence readCharSequence = (readByte & 2) == 0 ? null : parcel.readCharSequence();
-        Bundle readBundle = parcel.readBundle();
-        CharSequence readCharSequence2 = (readByte & 8) == 0 ? null : parcel.readCharSequence();
-        this.mStatusCode = readInt;
-        if (readInt != 0 && readInt != 1) {
-            throw new IllegalArgumentException("statusCode was " + readInt + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1)");
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        CharSequence charSequence = (b & 2) == 0 ? null : parcel.readCharSequence();
+        Bundle bundle = parcel.readBundle();
+        CharSequence charSequence2 = (b & 8) == 0 ? null : parcel.readCharSequence();
+        this.mStatusCode = i;
+        if (i != 0 && i != 1) {
+            throw new IllegalArgumentException("statusCode was " + i + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1)");
         }
-        this.mText = readCharSequence;
-        this.mExtras = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mTransliteration = readCharSequence2;
+        this.mText = charSequence;
+        this.mExtras = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mTransliteration = charSequence2;
     }
 
     public static final class Builder extends BaseBuilder {

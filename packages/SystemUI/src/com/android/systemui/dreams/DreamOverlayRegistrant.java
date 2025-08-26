@@ -17,7 +17,6 @@ import com.android.systemui.shared.condition.Monitor;
 import com.android.systemui.util.condition.ConditionalCoreStartable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DreamOverlayRegistrant extends ConditionalCoreStartable {
     public static final boolean DEBUG;
@@ -30,7 +29,6 @@ public final class DreamOverlayRegistrant extends ConditionalCoreStartable {
     public final PackageManager packageManager;
     public final DreamOverlayRegistrant$receiver$1 receiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -60,7 +58,7 @@ public final class DreamOverlayRegistrant extends ConditionalCoreStartable {
                 if (DreamOverlayRegistrant.DEBUG) {
                     Log.d("DreamOverlayRegistrant", "package changed receiver - onReceive");
                 }
-                DreamOverlayRegistrant.this.registerOverlayService();
+                this.this$0.registerOverlayService();
             }
         };
     }
@@ -110,9 +108,9 @@ public final class DreamOverlayRegistrant extends ConditionalCoreStartable {
             DreamLogger dreamLogger = this.logger;
             boolean z2 = this.currentRegisteredState;
             dreamLogger.getClass();
-            LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(1), null);
-            obtain.setBool1(z2);
-            dreamLogger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(1), null);
+            logMessageObtain.setBool1(z2);
+            dreamLogger.getBuffer().commit(logMessageObtain);
         } catch (RemoteException e) {
             Log.e("DreamOverlayRegistrant", "could not register dream overlay service:" + e);
         }

@@ -79,10 +79,10 @@ public final class InstantAppResolveInfo implements Parcelable {
     }
 
     InstantAppResolveInfo(Parcel parcel) {
-        boolean readBoolean = parcel.readBoolean();
-        this.mShouldLetInstallerDecide = readBoolean;
+        boolean z = parcel.readBoolean();
+        this.mShouldLetInstallerDecide = z;
         this.mExtras = parcel.readBundle();
-        if (readBoolean) {
+        if (z) {
             this.mDigest = InstantAppDigest.UNDEFINED;
             this.mPackageName = null;
             this.mFilters = Collections.EMPTY_LIST;
@@ -187,13 +187,13 @@ public final class InstantAppResolveInfo implements Parcelable {
             this(str, -1);
         }
 
-        public InstantAppDigest(String str, int i) {
+        public InstantAppDigest(String str, int i) throws NoSuchAlgorithmException {
             if (str == null) {
                 throw new IllegalArgumentException();
             }
-            byte[][] generateDigest = generateDigest(str.toLowerCase(Locale.ENGLISH), i);
-            this.mDigestBytes = generateDigest;
-            this.mDigestPrefix = new int[generateDigest.length];
+            byte[][] bArrGenerateDigest = generateDigest(str.toLowerCase(Locale.ENGLISH), i);
+            this.mDigestBytes = bArrGenerateDigest;
+            this.mDigestPrefix = new int[bArrGenerateDigest.length];
             int i2 = 0;
             while (true) {
                 byte[][] bArr = this.mDigestBytes;
@@ -212,21 +212,21 @@ public final class InstantAppResolveInfo implements Parcelable {
             this.mDigestBytes = bArr;
         }
 
-        private static byte[][] generateDigest(String str, int i) {
+        private static byte[][] generateDigest(String str, int i) throws NoSuchAlgorithmException {
             ArrayList arrayList = new ArrayList();
             try {
                 MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                 if (i <= 0) {
                     arrayList.add(messageDigest.digest(str.getBytes()));
                 } else {
-                    int lastIndexOf = str.lastIndexOf(46, str.lastIndexOf(46) - 1);
-                    if (lastIndexOf < 0) {
+                    int iLastIndexOf = str.lastIndexOf(46, str.lastIndexOf(46) - 1);
+                    if (iLastIndexOf < 0) {
                         arrayList.add(messageDigest.digest(str.getBytes()));
                     } else {
-                        arrayList.add(messageDigest.digest(str.substring(lastIndexOf + 1, str.length()).getBytes()));
-                        for (int i2 = 1; lastIndexOf >= 0 && i2 < i; i2++) {
-                            lastIndexOf = str.lastIndexOf(46, lastIndexOf - 1);
-                            arrayList.add(messageDigest.digest(str.substring(lastIndexOf + 1, str.length()).getBytes()));
+                        arrayList.add(messageDigest.digest(str.substring(iLastIndexOf + 1, str.length()).getBytes()));
+                        for (int i2 = 1; iLastIndexOf >= 0 && i2 < i; i2++) {
+                            iLastIndexOf = str.lastIndexOf(46, iLastIndexOf - 1);
+                            arrayList.add(messageDigest.digest(str.substring(iLastIndexOf + 1, str.length()).getBytes()));
                         }
                     }
                 }
@@ -237,13 +237,13 @@ public final class InstantAppResolveInfo implements Parcelable {
         }
 
         InstantAppDigest(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 this.mDigestBytes = null;
             } else {
-                this.mDigestBytes = new byte[readInt][];
-                for (int i = 0; i < readInt; i++) {
-                    this.mDigestBytes[i] = parcel.createByteArray();
+                this.mDigestBytes = new byte[i][];
+                for (int i2 = 0; i2 < i; i2++) {
+                    this.mDigestBytes[i2] = parcel.createByteArray();
                 }
             }
             this.mDigestPrefix = parcel.createIntArray();
@@ -264,9 +264,9 @@ public final class InstantAppResolveInfo implements Parcelable {
             }
             if (this.mDigestPrefixSecure == null) {
                 int length = getDigestPrefix().length;
-                int nextInt = length + 10 + sRandom.nextInt(10);
-                this.mDigestPrefixSecure = Arrays.copyOf(getDigestPrefix(), nextInt);
-                while (length < nextInt) {
+                int iNextInt = length + 10 + sRandom.nextInt(10);
+                this.mDigestPrefixSecure = Arrays.copyOf(getDigestPrefix(), iNextInt);
+                while (length < iNextInt) {
                     this.mDigestPrefixSecure[length] = sRandom.nextInt() & DIGEST_MASK;
                     length++;
                 }

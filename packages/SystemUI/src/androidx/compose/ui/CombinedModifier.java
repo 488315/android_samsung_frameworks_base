@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CombinedModifier implements Modifier {
     public final Modifier inner;
@@ -40,7 +39,7 @@ public final class CombinedModifier implements Modifier {
     }
 
     public final String toString() {
-        return OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder("["), (String) foldIn("", new Function2() { // from class: androidx.compose.ui.CombinedModifier$toString$1
+        return OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder("["), (String) foldIn("", new Function2() { // from class: androidx.compose.ui.CombinedModifier.toString.1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 String str = (String) obj;

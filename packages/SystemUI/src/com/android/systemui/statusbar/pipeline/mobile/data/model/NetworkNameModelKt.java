@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.pipeline.mobile.data.model;
 import android.content.Intent;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class NetworkNameModelKt {
     public static final NetworkNameModel.IntentDerived toNetworkNameModel(Intent intent, String str) {

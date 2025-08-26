@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$isCancelButtonVisible$1 extends SuspendLambda implements Function6 {
     /* synthetic */ Object L$0;
@@ -22,13 +21,13 @@ final class PromptViewModel$isCancelButtonVisible$1 extends SuspendLambda implem
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj4).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj5).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj5).booleanValue();
         PromptViewModel$isCancelButtonVisible$1 promptViewModel$isCancelButtonVisible$1 = new PromptViewModel$isCancelButtonVisible$1((Continuation) obj6);
         promptViewModel$isCancelButtonVisible$1.L$0 = (PromptSize) obj;
         promptViewModel$isCancelButtonVisible$1.L$1 = (PromptAuthState) obj3;
-        promptViewModel$isCancelButtonVisible$1.Z$0 = booleanValue;
-        promptViewModel$isCancelButtonVisible$1.Z$1 = booleanValue2;
+        promptViewModel$isCancelButtonVisible$1.Z$0 = zBooleanValue;
+        promptViewModel$isCancelButtonVisible$1.Z$1 = zBooleanValue2;
         return promptViewModel$isCancelButtonVisible$1.invokeSuspend(Unit.INSTANCE);
     }
 

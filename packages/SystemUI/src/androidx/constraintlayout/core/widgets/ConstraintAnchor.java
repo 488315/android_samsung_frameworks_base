@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ConstraintAnchor {
     public int mFinalValue;
@@ -20,7 +19,6 @@ public class ConstraintAnchor {
     public int mMargin = 0;
     public int mGoneMargin = Integer.MIN_VALUE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Type {
         NONE,
         LEFT,
@@ -87,9 +85,9 @@ public class ConstraintAnchor {
 
     public final ConstraintAnchor getOpposite() {
         Type type = this.mType;
-        int ordinal = type.ordinal();
+        int iOrdinal = type.ordinal();
         ConstraintWidget constraintWidget = this.mOwner;
-        switch (ordinal) {
+        switch (iOrdinal) {
             case 0:
             case 5:
             case 6:

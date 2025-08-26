@@ -25,7 +25,6 @@ import java.util.function.Consumer;
 import javax.inject.Provider;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CommunalTouchHandler implements TouchHandler {
     public final Optional mCentralSurfaces;
@@ -97,11 +96,11 @@ public class CommunalTouchHandler implements TouchHandler {
     @Override // com.android.systemui.ambient.touch.TouchHandler
     public final void getTouchInitiationRegion(Rect rect, Region region, Rect rect2) {
         Rect rect3 = new Rect(rect);
-        int width = rect3.width() - this.mInitiationWidth;
+        int iWidth = rect3.width() - this.mInitiationWidth;
         if (this.mLayoutDirection == 0) {
-            rect3.inset(width, 0, 0, 0);
+            rect3.inset(iWidth, 0, 0, 0);
         } else {
-            rect3.inset(0, 0, width, 0);
+            rect3.inset(0, 0, iWidth, 0);
         }
         region.op(rect3, Region.Op.UNION);
     }
@@ -130,7 +129,7 @@ public class CommunalTouchHandler implements TouchHandler {
             this.mCentralSurfaces.ifPresent(new Consumer() { // from class: com.android.systemui.dreams.touch.CommunalTouchHandler$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    final CommunalTouchHandler communalTouchHandler = CommunalTouchHandler.this;
+                    final CommunalTouchHandler communalTouchHandler = this.f$0;
                     final TouchHandler.TouchSession touchSession2 = touchSession;
                     final CentralSurfaces centralSurfaces = (CentralSurfaces) obj;
                     communalTouchHandler.getClass();
@@ -138,7 +137,7 @@ public class CommunalTouchHandler implements TouchHandler {
                     InputChannelCompat$InputEventListener inputChannelCompat$InputEventListener = new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.dreams.touch.CommunalTouchHandler$$ExternalSyntheticLambda3
                         @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
                         public final void onInputEvent(InputEvent inputEvent) {
-                            CommunalTouchHandler.this.getClass();
+                            communalTouchHandler.getClass();
                             int i2 = SceneContainerFlag.$r8$clinit;
                             MotionEvent motionEvent = (MotionEvent) inputEvent;
                             GlanceableHubContainerController glanceableHubContainerController = ((CentralSurfacesImpl) centralSurfaces).mGlanceableHubContainerController;

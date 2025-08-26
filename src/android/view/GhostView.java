@@ -1,9 +1,11 @@
 package android.view;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.RecordingCanvas;
 import android.graphics.RenderNode;
+import android.view.ViewOverlay;
 import android.widget.FrameLayout;
 import java.util.ArrayList;
 
@@ -27,10 +29,10 @@ public class GhostView extends View {
         if (canvas instanceof RecordingCanvas) {
             RecordingCanvas recordingCanvas = (RecordingCanvas) canvas;
             this.mView.mRecreateDisplayList = true;
-            RenderNode updateDisplayListIfDirty = this.mView.updateDisplayListIfDirty();
-            if (updateDisplayListIfDirty.hasDisplayList()) {
+            RenderNode renderNodeUpdateDisplayListIfDirty = this.mView.updateDisplayListIfDirty();
+            if (renderNodeUpdateDisplayListIfDirty.hasDisplayList()) {
                 recordingCanvas.enableZ();
-                recordingCanvas.drawRenderNode(updateDisplayListIfDirty);
+                recordingCanvas.drawRenderNode(renderNodeUpdateDisplayListIfDirty);
                 recordingCanvas.disableZ();
             }
         }
@@ -70,73 +72,49 @@ public class GhostView extends View {
         viewGroup.transformMatrixToLocal(matrix);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x002b  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.view.GhostView addGhost(android.view.View r6, android.view.ViewGroup r7, android.graphics.Matrix r8) {
-        /*
-            android.view.ViewParent r0 = r6.getParent()
-            boolean r0 = r0 instanceof android.view.ViewGroup
-            if (r0 == 0) goto L71
-            android.view.ViewGroupOverlay r0 = r7.getOverlay()
-            android.view.ViewOverlay$OverlayViewGroup r1 = r0.mOverlayViewGroup
-            android.view.GhostView r2 = r6.mGhostView
-            r3 = 0
-            if (r2 == 0) goto L28
-            android.view.ViewParent r4 = r2.getParent()
-            android.view.View r4 = (android.view.View) r4
-            android.view.ViewParent r5 = r4.getParent()
-            android.view.ViewGroup r5 = (android.view.ViewGroup) r5
-            if (r5 == r1) goto L28
-            int r1 = r2.mReferences
-            r5.removeView(r4)
-            r2 = 0
-            goto L29
-        L28:
-            r1 = r3
-        L29:
-            if (r2 != 0) goto L65
-            if (r8 != 0) goto L35
-            android.graphics.Matrix r8 = new android.graphics.Matrix
-            r8.<init>()
-            calculateMatrix(r6, r7, r8)
-        L35:
-            android.view.GhostView r2 = new android.view.GhostView
-            r2.<init>(r6)
-            r2.setMatrix(r8)
-            android.widget.FrameLayout r8 = new android.widget.FrameLayout
-            android.content.Context r6 = r6.getContext()
-            r8.<init>(r6)
-            r8.setClipChildren(r3)
-            copySize(r7, r8)
-            copySize(r7, r2)
-            r8.addView(r2)
-            java.util.ArrayList r6 = new java.util.ArrayList
-            r6.<init>()
-            android.view.ViewOverlay$OverlayViewGroup r7 = r0.mOverlayViewGroup
-            int r7 = moveGhostViewsToTop(r7, r6)
-            android.view.ViewOverlay$OverlayViewGroup r0 = r0.mOverlayViewGroup
-            insertIntoOverlay(r0, r8, r2, r6, r7)
-            r2.mReferences = r1
-            goto L6a
-        L65:
-            if (r8 == 0) goto L6a
-            r2.setMatrix(r8)
-        L6a:
-            int r6 = r2.mReferences
-            int r6 = r6 + 1
-            r2.mReferences = r6
-            return r2
-        L71:
-            java.lang.IllegalArgumentException r6 = new java.lang.IllegalArgumentException
-            java.lang.String r7 = "Ghosted views must be parented by a ViewGroup"
-            r6.<init>(r7)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.GhostView.addGhost(android.view.View, android.view.ViewGroup, android.graphics.Matrix):android.view.GhostView");
+    public static GhostView addGhost(View view, ViewGroup viewGroup, Matrix matrix) {
+        int i;
+        if (!(view.getParent() instanceof ViewGroup)) {
+            throw new IllegalArgumentException("Ghosted views must be parented by a ViewGroup");
+        }
+        ViewGroupOverlay overlay = viewGroup.getOverlay();
+        ViewOverlay.OverlayViewGroup overlayViewGroup = overlay.mOverlayViewGroup;
+        GhostView ghostView = view.mGhostView;
+        if (ghostView != null) {
+            View view2 = (View) ghostView.getParent();
+            ViewGroup viewGroup2 = (ViewGroup) view2.getParent();
+            if (viewGroup2 != overlayViewGroup) {
+                i = ghostView.mReferences;
+                viewGroup2.removeView(view2);
+                ghostView = null;
+            } else {
+                i = 0;
+            }
+        }
+        if (ghostView == null) {
+            if (matrix == null) {
+                matrix = new Matrix();
+                calculateMatrix(view, viewGroup, matrix);
+            }
+            ghostView = new GhostView(view);
+            ghostView.setMatrix(matrix);
+            FrameLayout frameLayout = new FrameLayout(view.getContext());
+            frameLayout.setClipChildren(false);
+            copySize(viewGroup, frameLayout);
+            copySize(viewGroup, ghostView);
+            frameLayout.addView(ghostView);
+            ArrayList arrayList = new ArrayList();
+            insertIntoOverlay(overlay.mOverlayViewGroup, frameLayout, ghostView, arrayList, moveGhostViewsToTop(overlay.mOverlayViewGroup, arrayList));
+            ghostView.mReferences = i;
+        } else if (matrix != null) {
+            ghostView.setMatrix(matrix);
+        }
+        ghostView.mReferences++;
+        return ghostView;
     }
 
     public static GhostView addGhost(View view, ViewGroup viewGroup) {
@@ -159,14 +137,14 @@ public class GhostView extends View {
         return view.mGhostView;
     }
 
-    private static void copySize(View view, View view2) {
+    private static void copySize(View view, View view2) throws Resources.NotFoundException {
         view2.setLeft(0);
         view2.setTop(0);
         view2.setRight(view.getWidth());
         view2.setBottom(view.getHeight());
     }
 
-    private static int moveGhostViewsToTop(ViewGroup viewGroup, ArrayList<View> arrayList) {
+    private static int moveGhostViewsToTop(ViewGroup viewGroup, ArrayList<View> arrayList) throws Resources.NotFoundException {
         int childCount = viewGroup.getChildCount();
         if (childCount == 0) {
             return -1;
@@ -247,15 +225,15 @@ public class GhostView extends View {
         if (arrayList.isEmpty() || arrayList2.isEmpty() || arrayList.get(0) != arrayList2.get(0)) {
             return true;
         }
-        int min = Math.min(arrayList.size(), arrayList2.size());
-        for (int i = 1; i < min; i++) {
+        int iMin = Math.min(arrayList.size(), arrayList2.size());
+        for (int i = 1; i < iMin; i++) {
             View view = arrayList.get(i);
             View view2 = arrayList2.get(i);
             if (view != view2) {
                 return isOnTop(view, view2);
             }
         }
-        return arrayList2.size() == min;
+        return arrayList2.size() == iMin;
     }
 
     private static void getParents(View view, ArrayList<View> arrayList) {
@@ -269,12 +247,12 @@ public class GhostView extends View {
     private static boolean isOnTop(View view, View view2) {
         ViewGroup viewGroup = (ViewGroup) view.getParent();
         int childCount = viewGroup.getChildCount();
-        ArrayList<View> buildOrderedChildList = viewGroup.buildOrderedChildList();
+        ArrayList<View> arrayListBuildOrderedChildList = viewGroup.buildOrderedChildList();
         boolean z = false;
-        boolean z2 = buildOrderedChildList == null && viewGroup.isChildrenDrawingOrderEnabled();
+        boolean z2 = arrayListBuildOrderedChildList == null && viewGroup.isChildrenDrawingOrderEnabled();
         for (int i = 0; i < childCount; i++) {
             int childDrawingOrder = z2 ? viewGroup.getChildDrawingOrder(childCount, i) : i;
-            View childAt = buildOrderedChildList == null ? viewGroup.getChildAt(childDrawingOrder) : buildOrderedChildList.get(childDrawingOrder);
+            View childAt = arrayListBuildOrderedChildList == null ? viewGroup.getChildAt(childDrawingOrder) : arrayListBuildOrderedChildList.get(childDrawingOrder);
             if (childAt == view) {
                 break;
             }
@@ -283,8 +261,8 @@ public class GhostView extends View {
             }
         }
         z = true;
-        if (buildOrderedChildList != null) {
-            buildOrderedChildList.clear();
+        if (arrayListBuildOrderedChildList != null) {
+            arrayListBuildOrderedChildList.clear();
         }
         return z;
     }

@@ -23,19 +23,19 @@ public class TimeFilter implements AutoCloseable {
     }
 
     public int setCurrentTimestamp(long j) {
-        int nativeSetTimestamp = nativeSetTimestamp(j);
-        if (nativeSetTimestamp == 0) {
+        int iNativeSetTimestamp = nativeSetTimestamp(j);
+        if (iNativeSetTimestamp == 0) {
             this.mEnable = true;
         }
-        return nativeSetTimestamp;
+        return iNativeSetTimestamp;
     }
 
     public int clearTimestamp() {
-        int nativeClearTimestamp = nativeClearTimestamp();
-        if (nativeClearTimestamp == 0) {
+        int iNativeClearTimestamp = nativeClearTimestamp();
+        if (iNativeClearTimestamp == 0) {
             this.mEnable = false;
         }
-        return nativeClearTimestamp;
+        return iNativeClearTimestamp;
     }
 
     public long getTimeStamp() {
@@ -54,9 +54,9 @@ public class TimeFilter implements AutoCloseable {
 
     @Override // java.lang.AutoCloseable
     public void close() {
-        int nativeClose = nativeClose();
-        if (nativeClose != 0) {
-            TunerUtils.throwExceptionForResult(nativeClose, "Failed to close time filter.");
+        int iNativeClose = nativeClose();
+        if (iNativeClose != 0) {
+            TunerUtils.throwExceptionForResult(iNativeClose, "Failed to close time filter.");
         }
     }
 }

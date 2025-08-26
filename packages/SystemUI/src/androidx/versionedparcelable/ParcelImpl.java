@@ -2,8 +2,8 @@ package androidx.versionedparcelable;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ParcelImpl implements Parcelable {
     public static final Parcelable.Creator<ParcelImpl> CREATOR = new Parcelable.Creator() { // from class: androidx.versionedparcelable.ParcelImpl.1
@@ -29,7 +29,7 @@ public class ParcelImpl implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public final void writeToParcel(Parcel parcel, int i) {
+    public final void writeToParcel(Parcel parcel, int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         new VersionedParcelParcel(parcel).writeVersionedParcelable(this.mParcel);
     }
 

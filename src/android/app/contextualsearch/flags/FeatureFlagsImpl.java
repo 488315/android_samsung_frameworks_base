@@ -3,6 +3,11 @@ package android.app.contextualsearch.flags;
 /* loaded from: classes.dex */
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.app.contextualsearch.flags.FeatureFlags
+    public boolean contextualSearchMediaProjection() {
+        return false;
+    }
+
+    @Override // android.app.contextualsearch.flags.FeatureFlags
     public boolean contextualSearchPreventSelfCapture() {
         return true;
     }

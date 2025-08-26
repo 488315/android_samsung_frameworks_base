@@ -1,12 +1,15 @@
 package android.preference;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.preference.Preference;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,9 +58,9 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
 
         @Override // java.lang.Comparable
         public int compareTo(PreferenceLayout preferenceLayout) {
-            int compareTo = this.name.compareTo(preferenceLayout.name);
-            if (compareTo != 0) {
-                return compareTo;
+            int iCompareTo = this.name.compareTo(preferenceLayout.name);
+            if (iCompareTo != 0) {
+                return iCompareTo;
             }
             int i = this.resId;
             int i2 = preferenceLayout.resId;
@@ -102,20 +105,85 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0051, code lost:
-    
-        if (r6 != null) goto L31;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void flattenPreferenceGroup(java.util.List<android.preference.Preference> r9, android.preference.PreferenceGroup r10) {
-        /*
-            Method dump skipped, instructions count: 220
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.preference.PreferenceGroupAdapter.flattenPreferenceGroup(java.util.List, android.preference.PreferenceGroup):void");
+    private void flattenPreferenceGroup(List<Preference> list, PreferenceGroup preferenceGroup) {
+        Preference preference;
+        preferenceGroup.sortPreferences();
+        int preferenceCount = preferenceGroup.getPreferenceCount();
+        for (int i = 0; i < preferenceCount; i++) {
+            Preference preference2 = preferenceGroup.getPreference(i);
+            if (preference2 != null) {
+                if (View.sIsSamsungBasicInteraction) {
+                    if (i == preferenceCount - 1) {
+                        this.mNextPreference = null;
+                        if (this.mIsCategoryAfter && preference2 == this.mNextGroupPreference) {
+                            this.mNextGroupPreference = null;
+                        }
+                    } else {
+                        this.mNextPreference = preferenceGroup.getPreference(i + 1);
+                        if (preference2 == this.mNextGroupPreference) {
+                            this.mNextGroupPreference = null;
+                        }
+                    }
+                    if (preference2 instanceof PreferenceCategory) {
+                        this.mIsCategoryAfter = true;
+                    } else {
+                        boolean z = this.mIsCategoryAfter;
+                        if (z) {
+                            Preference preference3 = this.mNextPreference;
+                            if (!(preference3 instanceof PreferenceCategory)) {
+                                if (preference3 == null) {
+                                    Preference preference4 = this.mNextGroupPreference;
+                                    if ((preference4 instanceof PreferenceCategory) || preference4 == null) {
+                                    }
+                                }
+                                if (!z) {
+                                    preference2.setRoundCorner(3);
+                                    this.mIsCategoryAfter = false;
+                                } else {
+                                    Preference preference5 = this.mNextPreference;
+                                    if ((preference5 instanceof PreferenceCategory) || ((preference5 == null && (this.mNextGroupPreference instanceof PreferenceCategory)) || preference2 == (preference = this.mNextGroupPreference) || (preference5 == null && preference == null))) {
+                                        preference2.setRoundCorner(12);
+                                        this.mIsCategoryAfter = true;
+                                    } else {
+                                        preference2.setRoundCorner(0);
+                                    }
+                                }
+                            }
+                            preference2.setRoundCorner(15);
+                            this.mIsCategoryAfter = false;
+                        } else if (!z) {
+                        }
+                    }
+                    if (preferenceGroup.mIsChangedCategoryBG) {
+                        preference2.setCategoryBGColor(preferenceGroup.mCategoryBGColor);
+                    }
+                }
+                list.add(preference2);
+                if (View.sIsSamsungBasicInteraction && (preference2 instanceof PreferenceCategory)) {
+                    if (TextUtils.isEmpty(preference2.getTitle())) {
+                        preference2.setLayoutResource(R.layout.tw_preference_category_material_empty);
+                    } else {
+                        preference2.setLayoutResource(R.layout.tw_preference_category_material);
+                    }
+                }
+                if (!this.mHasReturnedViewTypeCount && preference2 != null && preference2.isRecycleEnabled()) {
+                    addPreferenceClassName(preference2);
+                }
+                if (preference2 instanceof PreferenceGroup) {
+                    PreferenceGroup preferenceGroup2 = (PreferenceGroup) preference2;
+                    if (preferenceGroup2.isOnSameScreenAsChildren()) {
+                        this.mNextGroupPreference = this.mNextPreference;
+                        flattenPreferenceGroup(list, preferenceGroup2);
+                    }
+                }
+                preference2.setOnPreferenceChangeInternalListener(this);
+            }
+        }
     }
 
     private PreferenceLayout createPreferenceLayout(Preference preference, PreferenceLayout preferenceLayout) {
@@ -129,9 +197,9 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
     }
 
     private void addPreferenceClassName(Preference preference) {
-        PreferenceLayout createPreferenceLayout = createPreferenceLayout(preference, null);
-        if (Collections.binarySearch(this.mPreferenceLayouts, createPreferenceLayout) < 0) {
-            this.mPreferenceLayouts.add((r0 * (-1)) - 1, createPreferenceLayout);
+        PreferenceLayout preferenceLayoutCreatePreferenceLayout = createPreferenceLayout(preference, null);
+        if (Collections.binarySearch(this.mPreferenceLayouts, preferenceLayoutCreatePreferenceLayout) < 0) {
+            this.mPreferenceLayouts.add((r0 * (-1)) - 1, preferenceLayoutCreatePreferenceLayout);
         }
     }
 
@@ -165,11 +233,11 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
     }
 
     @Override // android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         Preference item = getItem(i);
-        PreferenceLayout createPreferenceLayout = createPreferenceLayout(item, this.mTempPreferenceLayout);
-        this.mTempPreferenceLayout = createPreferenceLayout;
-        if (Collections.binarySearch(this.mPreferenceLayouts, createPreferenceLayout) < 0 || getItemViewType(i) == getHighlightItemViewType()) {
+        PreferenceLayout preferenceLayoutCreatePreferenceLayout = createPreferenceLayout(item, this.mTempPreferenceLayout);
+        this.mTempPreferenceLayout = preferenceLayoutCreatePreferenceLayout;
+        if (Collections.binarySearch(this.mPreferenceLayouts, preferenceLayoutCreatePreferenceLayout) < 0 || getItemViewType(i) == getHighlightItemViewType()) {
             view = null;
         }
         View view2 = item.getView(view, viewGroup);
@@ -218,13 +286,13 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
         if (!item.isRecycleEnabled()) {
             return -1;
         }
-        PreferenceLayout createPreferenceLayout = createPreferenceLayout(item, this.mTempPreferenceLayout);
-        this.mTempPreferenceLayout = createPreferenceLayout;
-        int binarySearch = Collections.binarySearch(this.mPreferenceLayouts, createPreferenceLayout);
-        if (binarySearch < 0) {
+        PreferenceLayout preferenceLayoutCreatePreferenceLayout = createPreferenceLayout(item, this.mTempPreferenceLayout);
+        this.mTempPreferenceLayout = preferenceLayoutCreatePreferenceLayout;
+        int iBinarySearch = Collections.binarySearch(this.mPreferenceLayouts, preferenceLayoutCreatePreferenceLayout);
+        if (iBinarySearch < 0) {
             return -1;
         }
-        return binarySearch;
+        return iBinarySearch;
     }
 
     @Override // android.widget.BaseAdapter, android.widget.Adapter

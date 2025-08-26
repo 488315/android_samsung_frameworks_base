@@ -118,10 +118,10 @@ public final class SPBnRManager {
         if (mBnRMode == BnRMode.None) {
             Slog.d(TAG, "addManagedFile skipped. mode is " + mBnRMode);
         } else {
-            BnRData create = BnRData.create(i, j, str);
-            sBnRManagedFiles.add(create);
+            BnRData bnRDataCreate = BnRData.create(i, j, str);
+            sBnRManagedFiles.add(bnRDataCreate);
             if (DEBUG) {
-                Slog.d(TAG, TextUtils.formatSimple("Added [%s] for BnR", create.getFileName()));
+                Slog.d(TAG, TextUtils.formatSimple("Added [%s] for BnR", bnRDataCreate.getFileName()));
             }
         }
     }
@@ -196,7 +196,7 @@ public final class SPBnRManager {
         return !linkedList2.isEmpty() ? !startRestorelist(linkedList2) : !linkedList.isEmpty() ? !startBackuplist(linkedList) : true;
     }
 
-    private static boolean checkValidState(File file) {
+    private static boolean checkValidState(File file) throws IOException {
         byte[] bArr;
         if (!file.exists()) {
             return false;
@@ -336,22 +336,22 @@ public final class SPBnRManager {
         if (mBnRMode != BnRMode.FsVerity) {
             return false;
         }
-        boolean hasFsverity = VerityUtils.hasFsverity(file.getAbsolutePath());
+        boolean zHasFsverity = VerityUtils.hasFsverity(file.getAbsolutePath());
         if (DEBUG) {
-            Slog.d(TAG, "hasFsverity [" + file + "], " + hasFsverity);
+            Slog.d(TAG, "hasFsverity [" + file + "], " + zHasFsverity);
         }
-        return hasFsverity;
+        return zHasFsverity;
     }
 
     private static void setUpFsVerity(File file) {
         if (!hasFsverity(file) && mBnRMode == BnRMode.FsVerity) {
             try {
-                ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
+                ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
                 try {
-                    VerityUtils.setUpFsverity(open.getFd());
+                    VerityUtils.setUpFsverity(parcelFileDescriptorOpen.getFd());
                     Slog.w(TAG, "Success to verity-protect " + file);
-                    if (open != null) {
-                        open.close();
+                    if (parcelFileDescriptorOpen != null) {
+                        parcelFileDescriptorOpen.close();
                     }
                 } finally {
                 }
@@ -369,10 +369,10 @@ public final class SPBnRManager {
             }
             return;
         }
-        BnRData create = BnRData.create(i, j, str);
-        sRemoveFiles.add(create);
+        BnRData bnRDataCreate = BnRData.create(i, j, str);
+        sRemoveFiles.add(bnRDataCreate);
         if (DEBUG) {
-            Slog.d(TAG, TextUtils.formatSimple("Added [%s] for delete", create.getFileName()));
+            Slog.d(TAG, TextUtils.formatSimple("Added [%s] for delete", bnRDataCreate.getFileName()));
         }
     }
 
@@ -419,10 +419,10 @@ public final class SPBnRManager {
         }
         int i = 0;
         while (!queue.isEmpty()) {
-            BnRData poll = queue.poll();
-            if (poll == null || TextUtils.isEmpty(poll.getFileName())) {
+            BnRData bnRDataPoll = queue.poll();
+            if (bnRDataPoll == null || TextUtils.isEmpty(bnRDataPoll.getFileName())) {
                 Slog.w(TAG, "data is null!");
-            } else if (deleteFile(new File(getBackupDirectoryForUser(poll.getUserId()), poll.getFileName()))) {
+            } else if (deleteFile(new File(getBackupDirectoryForUser(bnRDataPoll.getUserId()), bnRDataPoll.getFileName()))) {
                 i++;
             }
         }
@@ -432,7 +432,7 @@ public final class SPBnRManager {
     }
 
     public static File startWrite(File file) {
-        boolean z;
+        boolean zHasFsverity;
         if (!file.exists()) {
             if (DEBUG) {
                 Slog.d(TAG, TextUtils.formatSimple("[%s] is not exist!", file));
@@ -440,8 +440,8 @@ public final class SPBnRManager {
             return null;
         }
         if (mBnRMode == BnRMode.FsVerity) {
-            z = hasFsverity(file);
-            if (z) {
+            zHasFsverity = hasFsverity(file);
+            if (zHasFsverity) {
                 File file2 = new File(file.getPath() + ".bnr");
                 if (file2.exists()) {
                     if (DEBUG) {
@@ -456,19 +456,19 @@ public final class SPBnRManager {
                 return null;
             }
         } else {
-            z = false;
+            zHasFsverity = false;
         }
-        boolean z2 = DEBUG;
-        if (z2) {
+        boolean z = DEBUG;
+        if (z) {
             Slog.d(TAG, "Current mode is " + mBnRMode);
         }
-        if (z2) {
-            Slog.d(TAG, "hasVerity = " + z);
+        if (z) {
+            Slog.d(TAG, "hasVerity = " + zHasFsverity);
         }
         return null;
     }
 
-    public static void finishWrite(File file) {
+    public static void finishWrite(File file) throws IOException {
         if (file == null) {
             if (DEBUG) {
                 Slog.d(TAG, "No excute [startWrite()]");
@@ -478,8 +478,7 @@ public final class SPBnRManager {
         }
     }
 
-    public static boolean deleteFile(File file) {
-        RandomAccessFile randomAccessFile;
+    public static boolean deleteFile(File file) throws IOException {
         if (!file.exists()) {
             if (!DEBUG) {
                 return false;
@@ -488,7 +487,18 @@ public final class SPBnRManager {
             return false;
         }
         try {
-            randomAccessFile = new RandomAccessFile(file, "rws");
+            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rws");
+            try {
+                randomAccessFile.write(new byte[(int) randomAccessFile.length()]);
+                randomAccessFile.close();
+            } catch (Throwable th) {
+                try {
+                    randomAccessFile.close();
+                } catch (Throwable th2) {
+                    th.addSuppressed(th2);
+                }
+                throw th;
+            }
         } catch (FileNotFoundException e) {
             if (mBnRMode == BnRMode.FsVerity) {
                 Slog.w(TAG, "Failed to zeroize " + file);
@@ -498,23 +508,12 @@ public final class SPBnRManager {
         } catch (Exception e2) {
             Slog.w(TAG, "Failed to zeroize " + file, e2);
         }
-        try {
-            randomAccessFile.write(new byte[(int) randomAccessFile.length()]);
-            randomAccessFile.close();
-            new AtomicFile(file).delete();
-            if (!DEBUG) {
-                return true;
-            }
-            Slog.d(TAG, TextUtils.formatSimple("[%s] delete success!", file));
+        new AtomicFile(file).delete();
+        if (!DEBUG) {
             return true;
-        } catch (Throwable th) {
-            try {
-                randomAccessFile.close();
-            } catch (Throwable th2) {
-                th.addSuppressed(th2);
-            }
-            throw th;
         }
+        Slog.d(TAG, TextUtils.formatSimple("[%s] delete success!", file));
+        return true;
     }
 
     private static File getSyntheticPasswordDirectoryForUser(int i) {
@@ -537,10 +536,10 @@ public final class SPBnRManager {
         File backupDirectoryForUser = getBackupDirectoryForUser(i);
         indentingPrintWriter.println(TextUtils.formatSimple("Backup [%s]:", backupDirectoryForUser));
         indentingPrintWriter.increaseIndent();
-        File[] listFiles = backupDirectoryForUser.listFiles();
-        if (listFiles != null) {
-            Arrays.sort(listFiles);
-            for (File file : listFiles) {
+        File[] fileArrListFiles = backupDirectoryForUser.listFiles();
+        if (fileArrListFiles != null) {
+            Arrays.sort(fileArrListFiles);
+            for (File file : fileArrListFiles) {
                 indentingPrintWriter.println(TextUtils.formatSimple("%6d %s %s", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
             }
         } else {
@@ -551,14 +550,14 @@ public final class SPBnRManager {
 
     public static String getPWFilelist(int i) {
         File syntheticPasswordDirectoryForUser = getSyntheticPasswordDirectoryForUser(i);
-        File[] listFiles = syntheticPasswordDirectoryForUser.listFiles();
-        if (listFiles == null) {
+        File[] fileArrListFiles = syntheticPasswordDirectoryForUser.listFiles();
+        if (fileArrListFiles == null) {
             return TextUtils.formatSimple("  User %d [Not found]\n", Integer.valueOf(i));
         }
-        Arrays.sort(listFiles);
+        Arrays.sort(fileArrListFiles);
         StringBuilder sb = new StringBuilder();
         sb.append(TextUtils.formatSimple("  User %d [%s]:\n", Integer.valueOf(i), syntheticPasswordDirectoryForUser));
-        for (File file : listFiles) {
+        for (File file : fileArrListFiles) {
             sb.append(TextUtils.formatSimple("  %6d %s %s\n", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
         }
         return sb.toString();
@@ -566,14 +565,14 @@ public final class SPBnRManager {
 
     public static String getBackupPWFilelist(int i) {
         File backupDirectoryForUser = getBackupDirectoryForUser(i);
-        File[] listFiles = backupDirectoryForUser.listFiles();
-        if (listFiles == null) {
+        File[] fileArrListFiles = backupDirectoryForUser.listFiles();
+        if (fileArrListFiles == null) {
             return TextUtils.formatSimple("  User %d Backup [Not found]\n", Integer.valueOf(i));
         }
-        Arrays.sort(listFiles);
+        Arrays.sort(fileArrListFiles);
         StringBuilder sb = new StringBuilder();
         sb.append(TextUtils.formatSimple("  Backup [%s]:\n", backupDirectoryForUser));
-        for (File file : listFiles) {
+        for (File file : fileArrListFiles) {
             sb.append(TextUtils.formatSimple("  %6d %s %s\n", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
         }
         return sb.toString();

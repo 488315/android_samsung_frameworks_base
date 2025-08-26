@@ -72,9 +72,9 @@ public class WebViewZygote {
         try {
             String str = packageInfo.applicationInfo.primaryCpuAbi;
             int memorySafetyRuntimeFlagsForSecondaryZygote = Zygote.getMemorySafetyRuntimeFlagsForSecondaryZygote(sPackage.applicationInfo, null);
-            ChildZygoteProcess startChildZygote = Process.ZYGOTE_PROCESS.startChildZygote("com.android.internal.os.WebViewZygoteInit", "webview_zygote", 1053, 1053, new int[]{UserHandle.getSharedAppGid(UserHandle.getAppId(sPackage.applicationInfo.uid))}, memorySafetyRuntimeFlagsForSecondaryZygote, "webview_zygote", str, TextUtils.join(",", Build.SUPPORTED_ABIS), null, Process.FIRST_ISOLATED_UID, Integer.MAX_VALUE);
-            sZygote = startChildZygote;
-            ZygoteProcess.waitForConnectionToZygote(startChildZygote.getPrimarySocketAddress());
+            ChildZygoteProcess childZygoteProcessStartChildZygote = Process.ZYGOTE_PROCESS.startChildZygote("com.android.internal.os.WebViewZygoteInit", "webview_zygote", 1053, 1053, new int[]{UserHandle.getSharedAppGid(UserHandle.getAppId(sPackage.applicationInfo.uid))}, memorySafetyRuntimeFlagsForSecondaryZygote, "webview_zygote", str, TextUtils.join(",", Build.SUPPORTED_ABIS), null, Process.FIRST_ISOLATED_UID, Integer.MAX_VALUE);
+            sZygote = childZygoteProcessStartChildZygote;
+            ZygoteProcess.waitForConnectionToZygote(childZygoteProcessStartChildZygote.getPrimarySocketAddress());
             sZygote.preloadApp(sPackage.applicationInfo, str);
         } catch (Exception e) {
             Log.e(LOGTAG, "Error connecting to webview zygote", e);

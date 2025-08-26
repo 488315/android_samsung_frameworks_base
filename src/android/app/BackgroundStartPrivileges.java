@@ -56,14 +56,14 @@ public final class BackgroundStartPrivileges {
         if (list == null || list.isEmpty()) {
             return NONE;
         }
-        BackgroundStartPrivileges backgroundStartPrivileges = list.get(0);
+        BackgroundStartPrivileges backgroundStartPrivilegesMerge = list.get(0);
         int size = list.size();
         while (true) {
             int i = size - 1;
             if (size <= 1) {
-                return backgroundStartPrivileges;
+                return backgroundStartPrivilegesMerge;
             }
-            backgroundStartPrivileges = backgroundStartPrivileges.merge(list.get(i));
+            backgroundStartPrivilegesMerge = backgroundStartPrivilegesMerge.merge(list.get(i));
             size = i;
         }
     }

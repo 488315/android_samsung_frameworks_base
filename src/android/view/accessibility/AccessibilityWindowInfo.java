@@ -45,9 +45,9 @@ public final class AccessibilityWindowInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AccessibilityWindowInfo createFromParcel(Parcel parcel) {
-            AccessibilityWindowInfo obtain = AccessibilityWindowInfo.obtain();
-            obtain.initFromParcel(parcel);
-            return obtain;
+            AccessibilityWindowInfo accessibilityWindowInfoObtain = AccessibilityWindowInfo.obtain();
+            accessibilityWindowInfoObtain.initFromParcel(parcel);
+            return accessibilityWindowInfoObtain;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -260,21 +260,21 @@ public final class AccessibilityWindowInfo implements Parcelable {
     }
 
     public static AccessibilityWindowInfo obtain() {
-        AccessibilityWindowInfo acquire = sPool.acquire();
-        if (acquire == null) {
-            acquire = new AccessibilityWindowInfo();
+        AccessibilityWindowInfo accessibilityWindowInfoAcquire = sPool.acquire();
+        if (accessibilityWindowInfoAcquire == null) {
+            accessibilityWindowInfoAcquire = new AccessibilityWindowInfo();
         }
         AtomicInteger atomicInteger = sNumInstancesInUse;
         if (atomicInteger != null) {
             atomicInteger.incrementAndGet();
         }
-        return acquire;
+        return accessibilityWindowInfoAcquire;
     }
 
     public static AccessibilityWindowInfo obtain(AccessibilityWindowInfo accessibilityWindowInfo) {
-        AccessibilityWindowInfo obtain = obtain();
-        obtain.init(accessibilityWindowInfo);
-        return obtain;
+        AccessibilityWindowInfo accessibilityWindowInfoObtain = obtain();
+        accessibilityWindowInfoObtain.init(accessibilityWindowInfo);
+        return accessibilityWindowInfoObtain;
     }
 
     public static void setNumInstancesInUseCounter(AtomicInteger atomicInteger) {
@@ -350,7 +350,7 @@ public final class AccessibilityWindowInfo implements Parcelable {
         if (longArray2 != null && longArray2.size() > 0) {
             LongArray longArray3 = this.mChildIds;
             if (longArray3 == null) {
-                this.mChildIds = accessibilityWindowInfo.mChildIds.m5506clone();
+                this.mChildIds = accessibilityWindowInfo.mChildIds.m5513clone();
             } else {
                 longArray3.addAll(accessibilityWindowInfo.mChildIds);
             }
@@ -373,12 +373,12 @@ public final class AccessibilityWindowInfo implements Parcelable {
         this.mTitle = parcel.readCharSequence();
         this.mAnchorId = parcel.readLong();
         this.mTransitionTime = parcel.readLong();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
+        int i = parcel.readInt();
+        if (i > 0) {
             if (this.mChildIds == null) {
-                this.mChildIds = new LongArray(readInt);
+                this.mChildIds = new LongArray(i);
             }
-            for (int i = 0; i < readInt; i++) {
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mChildIds.add(parcel.readInt());
             }
         }
@@ -525,8 +525,8 @@ public final class AccessibilityWindowInfo implements Parcelable {
             public WindowListSparseArray createFromParcel(Parcel parcel) {
                 WindowListSparseArray windowListSparseArray = new WindowListSparseArray();
                 ClassLoader classLoader = windowListSparseArray.getClass().getClassLoader();
-                int readInt = parcel.readInt();
-                for (int i = 0; i < readInt; i++) {
+                int i = parcel.readInt();
+                for (int i2 = 0; i2 < i; i2++) {
                     ArrayList arrayList = new ArrayList();
                     parcel.readParcelableList(arrayList, classLoader, AccessibilityWindowInfo.class);
                     windowListSparseArray.put(parcel.readInt(), arrayList);

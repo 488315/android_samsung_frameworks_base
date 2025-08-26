@@ -4,7 +4,7 @@ import android.media.MediaMetrics;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class LogDataType {
     public static final int BOOLEAN = 3;
     public static final int DOUBLE = 2;
@@ -17,11 +17,11 @@ public class LogDataType {
         if (list.size() > 16) {
             throw new BitmaskConversionException("Too many log call parameters - max 16 parameters supported");
         }
-        int i = 0;
-        for (int i2 = 0; i2 < list.size(); i2++) {
-            i |= list.get(i2).intValue() << (i2 * 2);
+        int iIntValue = 0;
+        for (int i = 0; i < list.size(); i++) {
+            iIntValue |= list.get(i).intValue() << (i * 2);
         }
-        return i;
+        return iIntValue;
     }
 
     public static int bitmaskToLogDataType(int i, int i2) {
@@ -40,21 +40,21 @@ public class LogDataType {
                 if (i2 >= str.length()) {
                     throw new InvalidFormatStringException("Invalid format string in config");
                 }
-                char charAt = str.charAt(i2);
-                if (charAt != '%') {
-                    if (charAt == 'b') {
+                char cCharAt = str.charAt(i2);
+                if (cCharAt != '%') {
+                    if (cCharAt == 'b') {
                         arrayList.add(3);
-                    } else {
-                        if (charAt != 'd') {
-                            if (charAt == 'f') {
-                                arrayList.add(2);
-                            } else if (charAt == 's') {
-                                arrayList.add(0);
-                            } else if (charAt != 'x') {
-                                throw new InvalidFormatStringException("Invalid Protolog message format in \"" + str + "\" at index " + i + MediaMetrics.SEPARATOR);
-                            }
+                    } else if (cCharAt == 'd') {
+                        arrayList.add(1);
+                    } else if (cCharAt == 'f') {
+                        arrayList.add(2);
+                    } else if (cCharAt != 's') {
+                        if (cCharAt != 'x') {
+                            throw new InvalidFormatStringException("Invalid Protolog message format in \"" + str + "\" at index " + i + MediaMetrics.SEPARATOR);
                         }
                         arrayList.add(1);
+                    } else {
+                        arrayList.add(0);
                     }
                 }
                 i += 2;

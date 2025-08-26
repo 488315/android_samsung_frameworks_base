@@ -6,6 +6,7 @@ import android.app.job.IUserVisibleJobObserver;
 import android.app.job.JobScheduler;
 import android.app.job.UserVisibleJobSummary;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
@@ -16,8 +17,10 @@ import android.os.UserHandle;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,22 +28,32 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import androidx.compose.runtime.snapshots.SnapshotStateObserver$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.AdapterListUpdateCallback;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0;
 import com.android.systemui.Dumpable;
+import com.android.systemui.QpRune;
 import com.android.systemui.R;
+import com.android.systemui.animation.DialogCuj;
 import com.android.systemui.animation.DialogTransitionAnimator;
+import com.android.systemui.animation.Expandable;
+import com.android.systemui.animation.TransitionAnimator;
 import com.android.systemui.broadcast.BroadcastDispatcher;
+import com.android.systemui.common.coroutine.ChannelExt;
+import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractor;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.qs.FgsManagerController;
 import com.android.systemui.qs.FgsManagerControllerImpl;
 import com.android.systemui.qs.FgsManagerControllerImpl.UserPackage;
+import com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.shade.domain.interactor.ShadeDialogContextInteractor;
+import com.android.systemui.shade.domain.interactor.ShadeDialogContextInteractorImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.DeviceConfigProxy;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.time.SystemClock;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
@@ -59,6 +72,7 @@ import java.util.concurrent.Executor;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
+import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
@@ -70,12 +84,12 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FgsManagerControllerImpl implements Dumpable, FgsManagerController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -116,7 +130,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
     public final UserVisibleJobObserver userVisibleJobObserver;
     public final Lazy vendorStoppableApps$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppItemViewHolder extends RecyclerView.ViewHolder {
         public final TextView appLabelView;
         public final TextView durationView;
@@ -132,7 +145,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppListAdapter extends RecyclerView.Adapter {
         public final Object lock = new Object();
         public List data = EmptyList.INSTANCE;
@@ -169,9 +181,9 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                 /* JADX WARN: Multi-variable type inference failed */
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    FgsManagerControllerImpl.AppItemViewHolder.this.stopButton.setText(R.string.sec_fgs_manager_app_item_stop_button_stopped_label);
+                    appItemViewHolder.stopButton.setText(R.string.sec_fgs_manager_app_item_stop_button_stopped_label);
                     FgsManagerControllerImpl.AppListAdapter appListAdapter = this;
-                    FgsManagerControllerImpl.AppItemViewHolder appItemViewHolder2 = FgsManagerControllerImpl.AppItemViewHolder.this;
+                    FgsManagerControllerImpl.AppItemViewHolder appItemViewHolder2 = appItemViewHolder;
                     appListAdapter.getClass();
                     FgsManagerControllerImpl.AppListAdapter.updateContentDescription(appItemViewHolder2);
                     FgsManagerControllerImpl fgsManagerControllerImpl2 = fgsManagerControllerImpl;
@@ -209,7 +221,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -219,7 +230,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ForegroundServiceObserver extends IForegroundServiceObserver.Stub {
         public ForegroundServiceObserver() {
         }
@@ -234,17 +244,17 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                     UserPackage userPackage = fgsManagerControllerImpl.new UserPackage(i, str);
                     if (z) {
                         LinkedHashMap linkedHashMap = (LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers;
-                        Object obj = linkedHashMap.get(userPackage);
-                        if (obj == null) {
-                            obj = new StartTimeAndIdentifiers(fgsManagerControllerImpl.systemClock);
-                            linkedHashMap.put(userPackage, obj);
+                        Object startTimeAndIdentifiers = linkedHashMap.get(userPackage);
+                        if (startTimeAndIdentifiers == null) {
+                            startTimeAndIdentifiers = new StartTimeAndIdentifiers(fgsManagerControllerImpl.systemClock);
+                            linkedHashMap.put(userPackage, startTimeAndIdentifiers);
                         }
-                        ((StartTimeAndIdentifiers) obj).fgsTokens.add(iBinder);
+                        ((StartTimeAndIdentifiers) startTimeAndIdentifiers).fgsTokens.add(iBinder);
                     } else {
-                        StartTimeAndIdentifiers startTimeAndIdentifiers = (StartTimeAndIdentifiers) ((LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers).get(userPackage);
-                        if (startTimeAndIdentifiers != null) {
-                            startTimeAndIdentifiers.fgsTokens.remove(iBinder);
-                            if (startTimeAndIdentifiers.fgsTokens.isEmpty() && startTimeAndIdentifiers.jobSummaries.isEmpty()) {
+                        StartTimeAndIdentifiers startTimeAndIdentifiers2 = (StartTimeAndIdentifiers) ((LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers).get(userPackage);
+                        if (startTimeAndIdentifiers2 != null) {
+                            startTimeAndIdentifiers2.fgsTokens.remove(iBinder);
+                            if (startTimeAndIdentifiers2.fgsTokens.isEmpty() && startTimeAndIdentifiers2.jobSummaries.isEmpty()) {
                                 fgsManagerControllerImpl.runningTaskIdentifiers.remove(userPackage);
                             }
                         }
@@ -259,7 +269,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StartTimeAndIdentifiers {
         public final Set fgsTokens = new LinkedHashSet();
         public final Set jobSummaries = new LinkedHashSet();
@@ -274,13 +283,13 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         public final void dump(PrintWriter printWriter) {
             printWriter.println("StartTimeAndIdentifiers: [");
             ((IndentingPrintWriter) printWriter).increaseIndent();
-            long elapsedRealtime = this.systemClock.elapsedRealtime();
+            long jElapsedRealtime = this.systemClock.elapsedRealtime();
             long j = this.startTime;
-            long j2 = elapsedRealtime - j;
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("startTime=", j, " (time running = ");
-            m.append(j2);
-            m.append("ms)");
-            printWriter.println(m.toString());
+            long j2 = jElapsedRealtime - j;
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("startTime=", j, " (time running = ");
+            sbM.append(j2);
+            sbM.append("ms)");
+            printWriter.println(sbM.toString());
             printWriter.println("fgs tokens: [");
             ((IndentingPrintWriter) printWriter).increaseIndent();
             Iterator it = this.fgsTokens.iterator();
@@ -318,7 +327,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UIControl {
         public static final /* synthetic */ UIControl[] $VALUES;
         public static final UIControl HIDE_BUTTON;
@@ -349,7 +357,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UserPackage {
         public final String packageName;
         public boolean uiControlInitialized;
@@ -364,7 +371,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             this.uid$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$UserPackage$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    PackageManager packageManager = FgsManagerControllerImpl.this.packageManager;
+                    PackageManager packageManager = fgsManagerControllerImpl.packageManager;
                     FgsManagerControllerImpl.UserPackage userPackage = this;
                     return Integer.valueOf(packageManager.getPackageUidAsUser(userPackage.packageName, userPackage.userId));
                 }
@@ -374,9 +381,9 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         public final void dump(PrintWriter printWriter) {
             printWriter.println("UserPackage: [");
             ((IndentingPrintWriter) printWriter).increaseIndent();
-            StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("userId="), this.userId, printWriter, "packageName=");
-            m.append(this.packageName);
-            printWriter.println(m.toString());
+            StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("userId="), this.userId, printWriter, "packageName=");
+            sbM.append(this.packageName);
+            printWriter.println(sbM.toString());
             printWriter.println("uiControl=" + getUiControl() + " (reason=" + this.backgroundRestrictionExemptionReason + ")");
             ((IndentingPrintWriter) printWriter).decreaseIndent();
             printWriter.println("]");
@@ -401,109 +408,50 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             return Objects.hash(Integer.valueOf(this.userId), this.packageName);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:29:0x006d  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0086  */
-        /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:32:0x0056  */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x0059  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final void updateUiControl() {
-            /*
-                r3 = this;
-                com.android.systemui.qs.FgsManagerControllerImpl r0 = com.android.systemui.qs.FgsManagerControllerImpl.this
-                android.app.IActivityManager r1 = r0.activityManager
-                kotlin.Lazy r2 = r3.uid$delegate
-                java.lang.Object r2 = r2.getValue()
-                java.lang.Number r2 = (java.lang.Number) r2
-                int r2 = r2.intValue()
-                int r1 = r1.getBackgroundRestrictionExemptionReason(r2)
-                r3.backgroundRestrictionExemptionReason = r1
-                r2 = 10
-                if (r1 == r2) goto L59
-                r2 = 11
-                if (r1 == r2) goto L59
-                r2 = 51
-                if (r1 == r2) goto L56
-                r2 = 63
-                if (r1 == r2) goto L56
-                r2 = 65
-                if (r1 == r2) goto L4c
-                r2 = 300(0x12c, float:4.2E-43)
-                if (r1 == r2) goto L59
-                r2 = 318(0x13e, float:4.46E-43)
-                if (r1 == r2) goto L59
-                r2 = 320(0x140, float:4.48E-43)
-                if (r1 == r2) goto L59
-                r2 = 327(0x147, float:4.58E-43)
-                if (r1 == r2) goto L59
-                r2 = 350(0x15e, float:4.9E-43)
-                if (r1 == r2) goto L56
-                r2 = 55
-                if (r1 == r2) goto L59
-                r2 = 56
-                if (r1 == r2) goto L59
-                switch(r1) {
-                    case 322: goto L59;
-                    case 323: goto L59;
-                    case 324: goto L59;
-                    default: goto L49;
+            UIControl uIControl;
+            FgsManagerControllerImpl fgsManagerControllerImpl = FgsManagerControllerImpl.this;
+            int backgroundRestrictionExemptionReason = fgsManagerControllerImpl.activityManager.getBackgroundRestrictionExemptionReason(((Number) this.uid$delegate.getValue()).intValue());
+            this.backgroundRestrictionExemptionReason = backgroundRestrictionExemptionReason;
+            if (backgroundRestrictionExemptionReason == 10 || backgroundRestrictionExemptionReason == 11) {
+                uIControl = UIControl.HIDE_BUTTON;
+            } else if (backgroundRestrictionExemptionReason == 51 || backgroundRestrictionExemptionReason == 63) {
+                uIControl = UIControl.HIDE_ENTRY;
+            } else if (backgroundRestrictionExemptionReason == 65) {
+                uIControl = fgsManagerControllerImpl.showStopBtnForUserAllowlistedApps ? UIControl.NORMAL : UIControl.HIDE_BUTTON;
+            } else if (backgroundRestrictionExemptionReason != 300 && backgroundRestrictionExemptionReason != 318 && backgroundRestrictionExemptionReason != 320 && backgroundRestrictionExemptionReason != 327) {
+                if (backgroundRestrictionExemptionReason != 350) {
+                    if (backgroundRestrictionExemptionReason != 55 && backgroundRestrictionExemptionReason != 56) {
+                        switch (backgroundRestrictionExemptionReason) {
+                            case 322:
+                            case 323:
+                            case 324:
+                                break;
+                            default:
+                                uIControl = UIControl.NORMAL;
+                                break;
+                        }
+                    }
                 }
-            L49:
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.NORMAL
-                goto L5b
-            L4c:
-                boolean r1 = r0.showStopBtnForUserAllowlistedApps
-                if (r1 == 0) goto L53
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.NORMAL
-                goto L5b
-            L53:
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.HIDE_BUTTON
-                goto L5b
-            L56:
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.HIDE_ENTRY
-                goto L5b
-            L59:
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.HIDE_BUTTON
-            L5b:
-                r3.uiControl = r1
-                kotlin.Lazy r1 = r0.stoppableApps$delegate
-                java.lang.Object r1 = r1.getValue()
-                java.lang.String[] r1 = (java.lang.String[]) r1
-                java.lang.String r2 = r3.packageName
-                boolean r1 = kotlin.collections.ArraysKt___ArraysKt.contains(r1, r2)
-                if (r1 != 0) goto L7b
-                kotlin.Lazy r1 = r0.vendorStoppableApps$delegate
-                java.lang.Object r1 = r1.getValue()
-                java.lang.String[] r1 = (java.lang.String[]) r1
-                boolean r1 = kotlin.collections.ArraysKt___ArraysKt.contains(r1, r2)
-                if (r1 == 0) goto L7f
-            L7b:
-                com.android.systemui.qs.FgsManagerControllerImpl$UIControl r1 = com.android.systemui.qs.FgsManagerControllerImpl.UIControl.NORMAL
-                r3.uiControl = r1
-            L7f:
-                r1 = 1
-                r3.uiControlInitialized = r1
-                com.android.systemui.qs.SecFgsManagerController r0 = r0.secFgsManagerController
-                if (r0 == 0) goto La2
-                int r3 = r3.backgroundRestrictionExemptionReason
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "updateUiControl["
-                r0.<init>(r1)
-                r0.append(r2)
-                java.lang.String r1 = "]: "
-                r0.append(r1)
-                r0.append(r3)
-                java.lang.String r3 = r0.toString()
-                com.android.systemui.qs.SecFgsManagerController.log(r3)
-            La2:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.FgsManagerControllerImpl.UserPackage.updateUiControl():void");
+            }
+            this.uiControl = uIControl;
+            String[] strArr = (String[]) fgsManagerControllerImpl.stoppableApps$delegate.getValue();
+            String str = this.packageName;
+            if (ArraysKt___ArraysKt.contains(strArr, str) || ArraysKt___ArraysKt.contains((String[]) fgsManagerControllerImpl.vendorStoppableApps$delegate.getValue(), str)) {
+                this.uiControl = UIControl.NORMAL;
+            }
+            this.uiControlInitialized = true;
+            if (fgsManagerControllerImpl.secFgsManagerController != null) {
+                SecFgsManagerController.log("updateUiControl[" + str + "]: " + this.backgroundRestrictionExemptionReason);
+            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UserVisibleJobObserver extends IUserVisibleJobObserver.Stub {
         public UserVisibleJobObserver() {
         }
@@ -515,17 +463,17 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                     UserPackage userPackage = fgsManagerControllerImpl.new UserPackage(UserHandle.getUserId(userVisibleJobSummary.getCallingUid()), userVisibleJobSummary.getCallingPackageName());
                     if (z) {
                         LinkedHashMap linkedHashMap = (LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers;
-                        Object obj = linkedHashMap.get(userPackage);
-                        if (obj == null) {
-                            obj = new StartTimeAndIdentifiers(fgsManagerControllerImpl.systemClock);
-                            linkedHashMap.put(userPackage, obj);
+                        Object startTimeAndIdentifiers = linkedHashMap.get(userPackage);
+                        if (startTimeAndIdentifiers == null) {
+                            startTimeAndIdentifiers = new StartTimeAndIdentifiers(fgsManagerControllerImpl.systemClock);
+                            linkedHashMap.put(userPackage, startTimeAndIdentifiers);
                         }
-                        ((StartTimeAndIdentifiers) obj).jobSummaries.add(userVisibleJobSummary);
+                        ((StartTimeAndIdentifiers) startTimeAndIdentifiers).jobSummaries.add(userVisibleJobSummary);
                     } else {
-                        StartTimeAndIdentifiers startTimeAndIdentifiers = (StartTimeAndIdentifiers) ((LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers).get(userPackage);
-                        if (startTimeAndIdentifiers != null) {
-                            startTimeAndIdentifiers.jobSummaries.remove(userVisibleJobSummary);
-                            if (startTimeAndIdentifiers.fgsTokens.isEmpty() && startTimeAndIdentifiers.jobSummaries.isEmpty()) {
+                        StartTimeAndIdentifiers startTimeAndIdentifiers2 = (StartTimeAndIdentifiers) ((LinkedHashMap) fgsManagerControllerImpl.runningTaskIdentifiers).get(userPackage);
+                        if (startTimeAndIdentifiers2 != null) {
+                            startTimeAndIdentifiers2.jobSummaries.remove(userVisibleJobSummary);
+                            if (startTimeAndIdentifiers2.fgsTokens.isEmpty() && startTimeAndIdentifiers2.jobSummaries.isEmpty()) {
                                 fgsManagerControllerImpl.runningTaskIdentifiers.remove(userPackage);
                             }
                         }
@@ -545,7 +493,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
     }
 
     /* JADX WARN: Type inference failed for: r1v10, types: [com.android.systemui.qs.FgsManagerControllerImpl$userTrackerCallback$1] */
-    public FgsManagerControllerImpl(Resources resources, Executor executor, Executor executor2, SystemClock systemClock, IActivityManager iActivityManager, JobScheduler jobScheduler, PackageManager packageManager, UserTracker userTracker, DeviceConfigProxy deviceConfigProxy, DialogTransitionAnimator dialogTransitionAnimator, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, SystemUIDialog.Factory factory, ShadeDialogContextInteractor shadeDialogContextInteractor) {
+    public FgsManagerControllerImpl(Resources resources, Executor executor, Executor executor2, SystemClock systemClock, IActivityManager iActivityManager, JobScheduler jobScheduler, PackageManager packageManager, UserTracker userTracker, DeviceConfigProxy deviceConfigProxy, DialogTransitionAnimator dialogTransitionAnimator, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, SystemUIDialog.Factory factory, ShadeDialogContextInteractor shadeDialogContextInteractor, ConfigurationInteractor configurationInteractor, CoroutineScope coroutineScope) {
         this.resources = resources;
         this.mainExecutor = executor;
         this.backgroundExecutor = executor2;
@@ -560,9 +508,9 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         this.dumpManager = dumpManager;
         this.systemUIDialogFactory = factory;
         this.shadeDialogContextRepository = shadeDialogContextInteractor;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
-        this._showFooterDot = MutableStateFlow;
-        this.showFooterDot = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this._showFooterDot = stateFlowImplMutableStateFlow;
+        this.showFooterDot = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.showUserVisibleJobs = true;
         this.informJobSchedulerOfPendingAppStop = true;
         this.lock = new Object();
@@ -573,7 +521,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         this.userTrackerCallback = new UserTracker.Callback() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onProfilesChanged(List list) {
-                FgsManagerControllerImpl fgsManagerControllerImpl = FgsManagerControllerImpl.this;
+                FgsManagerControllerImpl fgsManagerControllerImpl = this.this$0;
                 synchronized (fgsManagerControllerImpl.lock) {
                     try {
                         fgsManagerControllerImpl.currentProfileIds.clear();
@@ -602,7 +550,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         this.userVisibleJobObserver = new UserVisibleJobObserver();
         this.stoppableApps$delegate = LazyKt__LazyJVMKt.lazy(new FgsManagerControllerImpl$$ExternalSyntheticLambda0(this, 0));
         this.vendorStoppableApps$delegate = LazyKt__LazyJVMKt.lazy(new FgsManagerControllerImpl$$ExternalSyntheticLambda0(this, 1));
-        this.secFgsManagerController = new SecFgsManagerController(new FgsManagerControllerImpl$$ExternalSyntheticLambda2(this, 0), new FgsManagerControllerImpl$$ExternalSyntheticLambda0(this, 2), new FgsManagerControllerImpl$secFgsManagerController$3(this));
+        this.secFgsManagerController = new SecFgsManagerController(new FgsManagerControllerImpl$$ExternalSyntheticLambda2(this, 0), new FgsManagerControllerImpl$$ExternalSyntheticLambda0(this, 2), new FgsManagerControllerImpl$secFgsManagerController$3(this), configurationInteractor, coroutineScope);
         this.onNumberOfPackagesChangedListeners = new LinkedHashSet();
         this.onDialogDismissedListeners = new LinkedHashSet();
     }
@@ -661,12 +609,12 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
     }
 
     public final int getNumVisibleButtonsLocked() {
-        Set<UserPackage> keySet = ((LinkedHashMap) this.runningTaskIdentifiers).keySet();
+        Set<UserPackage> setKeySet = ((LinkedHashMap) this.runningTaskIdentifiers).keySet();
         int i = 0;
-        if ((keySet instanceof Collection) && keySet.isEmpty()) {
+        if ((setKeySet instanceof Collection) && setKeySet.isEmpty()) {
             return 0;
         }
-        for (UserPackage userPackage : keySet) {
+        for (UserPackage userPackage : setKeySet) {
             if (userPackage.getUiControl() != UIControl.HIDE_BUTTON && this.currentProfileIds.contains(Integer.valueOf(userPackage.userId)) && (i = i + 1) < 0) {
                 CollectionsKt__CollectionsKt.throwCountOverflow();
                 throw null;
@@ -676,12 +624,12 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
     }
 
     public final int getNumVisiblePackagesLocked() {
-        Set<UserPackage> keySet = ((LinkedHashMap) this.runningTaskIdentifiers).keySet();
+        Set<UserPackage> setKeySet = ((LinkedHashMap) this.runningTaskIdentifiers).keySet();
         int i = 0;
-        if ((keySet instanceof Collection) && keySet.isEmpty()) {
+        if ((setKeySet instanceof Collection) && setKeySet.isEmpty()) {
             return 0;
         }
-        for (UserPackage userPackage : keySet) {
+        for (UserPackage userPackage : setKeySet) {
             if (userPackage.getUiControl() != UIControl.HIDE_ENTRY && this.currentProfileIds.contains(Integer.valueOf(userPackage.userId)) && (i = i + 1) < 0) {
                 CollectionsKt__CollectionsKt.throwCountOverflow();
                 throw null;
@@ -690,22 +638,164 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         return i;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0064 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void showDialog$2() {
-        /*
-            Method dump skipped, instructions count: 468
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.FgsManagerControllerImpl.showDialog$2():void");
+    /* JADX WARN: Multi-variable type inference failed */
+    public final void showDialog$2() throws Resources.NotFoundException {
+        final SecFgsManagerController secFgsManagerController = this.secFgsManagerController;
+        RecyclerView recyclerView = null;
+        Object[] objArr = 0;
+        if (secFgsManagerController == null) {
+            synchronized (this.lock) {
+                try {
+                    if (this.dialog == null) {
+                        final SystemUIDialog systemUIDialogCreate = this.systemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) this.shadeDialogContextRepository).getContext());
+                        systemUIDialogCreate.setTitle(R.string.fgs_manager_dialog_title);
+                        systemUIDialogCreate.setMessage(R.string.fgs_manager_dialog_message);
+                        Context context = systemUIDialogCreate.getContext();
+                        RecyclerView recyclerView2 = new RecyclerView(context);
+                        recyclerView2.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView2.setAdapter(this.appListAdapter);
+                        systemUIDialogCreate.setView(recyclerView2, 0, context.getResources().getDimensionPixelSize(R.dimen.fgs_manager_list_top_spacing), 0, 0);
+                        this.dialog = systemUIDialogCreate;
+                        systemUIDialogCreate.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$showDialog$2$1
+                            @Override // android.content.DialogInterface.OnDismissListener
+                            public final void onDismiss(DialogInterface dialogInterface) {
+                                FgsManagerControllerImpl fgsManagerControllerImpl = this.this$0;
+                                fgsManagerControllerImpl.newChangesSinceDialogWasDismissed = false;
+                                synchronized (fgsManagerControllerImpl.lock) {
+                                    fgsManagerControllerImpl.dialog = null;
+                                    fgsManagerControllerImpl.updateAppItemsLocked(false);
+                                    Unit unit = Unit.INSTANCE;
+                                }
+                                FgsManagerControllerImpl fgsManagerControllerImpl2 = this.this$0;
+                                for (final FgsManagerController.OnDialogDismissedListener onDialogDismissedListener : fgsManagerControllerImpl2.onDialogDismissedListeners) {
+                                    fgsManagerControllerImpl2.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$showDialog$2$1$2$1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1 foregroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1 = (ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1) onDialogDismissedListener;
+                                            foregroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1.getClass();
+                                            ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, foregroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1$listener$1.$$this$conflatedCallbackFlow, Unit.INSTANCE, "ForegroundServicesRepositoryImpl");
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        Executor executor = this.mainExecutor;
+                        final Object[] objArr2 = objArr == true ? 1 : 0;
+                        executor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$showDialog$2$2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Expandable expandable = objArr2;
+                                DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable != null ? expandable.dialogTransitionController(new DialogCuj(58, "active_background_apps")) : null;
+                                if (controllerDialogTransitionController == null) {
+                                    systemUIDialogCreate.show();
+                                    return;
+                                }
+                                DialogTransitionAnimator dialogTransitionAnimator = this.dialogTransitionAnimator;
+                                SystemUIDialog systemUIDialog = systemUIDialogCreate;
+                                systemUIDialog.getClass();
+                                TransitionAnimator.Timings timings = DialogTransitionAnimator.TIMINGS;
+                                dialogTransitionAnimator.show(systemUIDialog, controllerDialogTransitionController, false);
+                            }
+                        });
+                        updateAppItemsLocked(true);
+                    }
+                    Unit unit = Unit.INSTANCE;
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+            return;
+        }
+        Executor executor2 = this.backgroundExecutor;
+        Context context2 = ((ShadeDialogContextInteractorImpl) this.shadeDialogContextRepository).getContext();
+        final Object obj = this.lock;
+        final FgsManagerControllerImpl$$ExternalSyntheticLambda2 fgsManagerControllerImpl$$ExternalSyntheticLambda2 = new FgsManagerControllerImpl$$ExternalSyntheticLambda2(this, 1);
+        final FgsManagerControllerImpl$$ExternalSyntheticLambda0 fgsManagerControllerImpl$$ExternalSyntheticLambda0 = new FgsManagerControllerImpl$$ExternalSyntheticLambda0(this, 3);
+        final FgsManagerControllerImpl$showDialog$1$4 fgsManagerControllerImpl$showDialog$1$4 = new FgsManagerControllerImpl$showDialog$1$4(this);
+        if (secFgsManagerController.dialog.invoke() != null) {
+            return;
+        }
+        SecFgsManagerController.log("setup dialog");
+        Context displayContext = SecFgsManagerController.getDisplayContext(context2);
+        synchronized (obj) {
+            Iterator it = ((LinkedHashMap) this.runningTaskIdentifiers).keySet().iterator();
+            while (it.hasNext()) {
+                ((UserPackage) it.next()).updateUiControl();
+            }
+            Unit unit2 = Unit.INSTANCE;
+            Unit unit3 = Unit.INSTANCE;
+        }
+        SystemUIDialog systemUIDialog = new SystemUIDialog(displayContext, R.style.Theme_SystemUI_Dialog_Alert);
+        boolean zAreEqual = Intrinsics.areEqual(displayContext, context2);
+        systemUIDialog.setTitle(R.string.sec_fgs_manager_dialog_title);
+        systemUIDialog.setMessage(R.string.sec_fgs_manager_dialog_message);
+        systemUIDialog.setButton(-3, R.string.sec_quick_settings_done, null, true);
+        Window window = systemUIDialog.getWindow();
+        if (window != null) {
+            if (QpRune.QUICK_TABLET || ((SecQsUiDisplayModeInteractor) secFgsManagerController.qsUiDisplayModeInteractor$delegate.getValue()).isTablet() || !zAreEqual) {
+                window.setGravity(8388659);
+                secFgsManagerController.setMargin(window);
+            } else {
+                window.setGravity(81);
+            }
+        }
+        View viewInflate = LayoutInflater.from(systemUIDialog.getContext()).inflate(R.layout.sec_fgs_manager_container, (ViewGroup) systemUIDialog.getListView(), false);
+        viewInflate.getClass();
+        Context context3 = viewInflate.getContext();
+        RecyclerView recyclerView3 = (RecyclerView) viewInflate.findViewById(R.id.sec_fgs_manager_recycler_view);
+        if (recyclerView3 != null) {
+            recyclerView3.setLayoutManager(new LinearLayoutManager(context3));
+            recyclerView = recyclerView3;
+        }
+        if (recyclerView != null) {
+            recyclerView.setAdapter(this.appListAdapter);
+            secFgsManagerController.recyclerView = recyclerView;
+        }
+        systemUIDialog.setView(viewInflate);
+        secFgsManagerController.noItemTextView = (TextView) viewInflate.findViewById(R.id.sec_fgs_manager_no_item_text_view);
+        secFgsManagerController.updateDialog.mo781invoke(systemUIDialog);
+        systemUIDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.SecFgsManagerController$setOnDismissListener$1
+            @Override // android.content.DialogInterface.OnDismissListener
+            public final void onDismiss(DialogInterface dialogInterface) {
+                fgsManagerControllerImpl$$ExternalSyntheticLambda2.mo781invoke(Boolean.FALSE);
+                Object obj2 = obj;
+                SecFgsManagerController secFgsManagerController2 = secFgsManagerController;
+                Function0 function0 = fgsManagerControllerImpl$showDialog$1$4;
+                synchronized (obj2) {
+                    try {
+                        RecyclerView recyclerView4 = secFgsManagerController2.recyclerView;
+                        if (recyclerView4 != null) {
+                            recyclerView4.setAdapter(null);
+                        }
+                        secFgsManagerController2.updateDialog.mo781invoke(null);
+                        secFgsManagerController2.noItemTextView = null;
+                        function0.invoke();
+                        Unit unit4 = Unit.INSTANCE;
+                    } catch (Throwable th2) {
+                        throw th2;
+                    }
+                }
+                fgsManagerControllerImpl$$ExternalSyntheticLambda0.invoke();
+                secFgsManagerController.getClass();
+                SecFgsManagerController.log("dismiss dialog");
+            }
+        });
+        executor2.execute(new Runnable() { // from class: com.android.systemui.qs.SecFgsManagerController$setupDialog$3
+            @Override // java.lang.Runnable
+            public final void run() {
+                Object obj2 = obj;
+                Function0 function0 = fgsManagerControllerImpl$showDialog$1$4;
+                synchronized (obj2) {
+                    function0.invoke();
+                    Unit unit4 = Unit.INSTANCE;
+                }
+            }
+        });
     }
 
     public final void updateAppItemsLocked(final boolean z) {
         if (this.dialog == null) {
-            this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateAppItemsLocked$1
+            this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl.updateAppItemsLocked.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     FgsManagerControllerImpl.this.runningApps.clear();
@@ -719,7 +809,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
             linkedHashMap.put(entry.getKey(), Long.valueOf(((StartTimeAndIdentifiers) entry.getValue()).startTime));
         }
         final Set set = CollectionsKt___CollectionsKt.toSet(this.currentProfileIds);
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateAppItemsLocked$2
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl.updateAppItemsLocked.2
             @Override // java.lang.Runnable
             public final void run() {
                 final FgsManagerControllerImpl fgsManagerControllerImpl = FgsManagerControllerImpl.this;
@@ -731,21 +821,21 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                 if (z2) {
                     Iterator it = map2.entrySet().iterator();
                     while (it.hasNext()) {
-                        ((FgsManagerControllerImpl.UserPackage) ((Map.Entry) it.next()).getKey()).updateUiControl();
+                        ((UserPackage) ((Map.Entry) it.next()).getKey()).updateUiControl();
                     }
                 }
-                Set keySet = map2.keySet();
+                Set setKeySet = map2.keySet();
                 ArrayList arrayList = new ArrayList();
-                for (Object obj : keySet) {
-                    FgsManagerControllerImpl.UserPackage userPackage = (FgsManagerControllerImpl.UserPackage) obj;
-                    if (set2.contains(Integer.valueOf(userPackage.userId)) && userPackage.getUiControl() != FgsManagerControllerImpl.UIControl.HIDE_ENTRY) {
+                for (Object obj : setKeySet) {
+                    UserPackage userPackage = (UserPackage) obj;
+                    if (set2.contains(Integer.valueOf(userPackage.userId)) && userPackage.getUiControl() != UIControl.HIDE_ENTRY) {
                         arrayList.add(obj);
                     }
                 }
-                Set keySet2 = fgsManagerControllerImpl.runningApps.keySet();
+                Set setKeySet2 = fgsManagerControllerImpl.runningApps.keySet();
                 ArrayList arrayList2 = new ArrayList();
-                for (Object obj2 : keySet2) {
-                    if (!map2.containsKey((FgsManagerControllerImpl.UserPackage) obj2)) {
+                for (Object obj2 : setKeySet2) {
+                    if (!map2.containsKey((UserPackage) obj2)) {
                         arrayList2.add(obj2);
                     }
                 }
@@ -754,7 +844,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                 int i3 = 0;
                 while (i3 < size) {
                     int i4 = i3 + 1;
-                    FgsManagerControllerImpl.UserPackage userPackage2 = (FgsManagerControllerImpl.UserPackage) arrayList.get(i3);
+                    UserPackage userPackage2 = (UserPackage) arrayList.get(i3);
                     PackageManager packageManager = fgsManagerControllerImpl.packageManager;
                     String str = userPackage2.packageName;
                     int i5 = userPackage2.userId;
@@ -762,14 +852,14 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                     ArrayMap arrayMap = fgsManagerControllerImpl.runningApps;
                     Object obj3 = map2.get(userPackage2);
                     obj3.getClass();
-                    long longValue = ((Number) obj3).longValue();
-                    FgsManagerControllerImpl.UIControl uiControl = userPackage2.getUiControl();
+                    long jLongValue = ((Number) obj3).longValue();
+                    UIControl uiControl = userPackage2.getUiControl();
                     CharSequence applicationLabel = fgsManagerControllerImpl.packageManager.getApplicationLabel(applicationInfoAsUser);
                     PackageManager packageManager2 = fgsManagerControllerImpl.packageManager;
-                    arrayMap.put(userPackage2, new FgsManagerControllerImpl.RunningApp(userPackage2.userId, userPackage2.packageName, longValue, uiControl, applicationLabel, packageManager2.getUserBadgedIcon(packageManager2.getApplicationIcon(applicationInfoAsUser), UserHandle.of(i5))));
+                    arrayMap.put(userPackage2, new RunningApp(userPackage2.userId, userPackage2.packageName, jLongValue, uiControl, applicationLabel, packageManager2.getUserBadgedIcon(packageManager2.getApplicationIcon(applicationInfoAsUser), UserHandle.of(i5))));
                     Object obj4 = fgsManagerControllerImpl.runningApps.get(userPackage2);
                     obj4.getClass();
-                    fgsManagerControllerImpl.backgroundExecutor.execute(new FgsManagerControllerImpl$logEvent$1(fgsManagerControllerImpl, userPackage2.packageName, userPackage2.userId, 1, fgsManagerControllerImpl.systemClock.elapsedRealtime(), ((FgsManagerControllerImpl.RunningApp) obj4).timeStarted, false));
+                    fgsManagerControllerImpl.backgroundExecutor.execute(new FgsManagerControllerImpl$logEvent$1(fgsManagerControllerImpl, userPackage2.packageName, userPackage2.userId, 1, fgsManagerControllerImpl.systemClock.elapsedRealtime(), ((RunningApp) obj4).timeStarted, false));
                     i3 = i4;
                     i2 = 0;
                 }
@@ -778,11 +868,11 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                 while (i6 < size2) {
                     Object obj5 = arrayList2.get(i6);
                     i6++;
-                    FgsManagerControllerImpl.UserPackage userPackage3 = (FgsManagerControllerImpl.UserPackage) obj5;
+                    UserPackage userPackage3 = (UserPackage) obj5;
                     Object obj6 = fgsManagerControllerImpl.runningApps.get(userPackage3);
                     obj6.getClass();
-                    FgsManagerControllerImpl.RunningApp runningApp = (FgsManagerControllerImpl.RunningApp) obj6;
-                    FgsManagerControllerImpl.RunningApp runningApp2 = new FgsManagerControllerImpl.RunningApp(runningApp.userId, runningApp.packageName, runningApp.timeStarted, runningApp.uiControl);
+                    RunningApp runningApp = (RunningApp) obj6;
+                    RunningApp runningApp2 = new RunningApp(runningApp.userId, runningApp.packageName, runningApp.timeStarted, runningApp.uiControl);
                     runningApp2.stopped = true;
                     runningApp2.appLabel = runningApp.appLabel;
                     runningApp2.icon = runningApp.icon;
@@ -793,9 +883,9 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                     @Override // java.lang.Runnable
                     public final void run() {
                         SystemUIDialog systemUIDialog;
-                        FgsManagerControllerImpl fgsManagerControllerImpl2 = FgsManagerControllerImpl.this;
+                        FgsManagerControllerImpl fgsManagerControllerImpl2 = fgsManagerControllerImpl;
                         FgsManagerControllerImpl.AppListAdapter appListAdapter = fgsManagerControllerImpl2.appListAdapter;
-                        final List sortedWith = CollectionsKt___CollectionsKt.sortedWith(CollectionsKt___CollectionsKt.toList(fgsManagerControllerImpl2.runningApps.values()), new Comparator() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateAppItems$4$run$$inlined$sortedByDescending$1
+                        final List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(CollectionsKt___CollectionsKt.toList(fgsManagerControllerImpl2.runningApps.values()), new Comparator() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateAppItems$4$run$$inlined$sortedByDescending$1
                             @Override // java.util.Comparator
                             public final int compare(Object obj7, Object obj8) {
                                 return ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((FgsManagerControllerImpl.RunningApp) obj8).timeStarted), Long.valueOf(((FgsManagerControllerImpl.RunningApp) obj7).timeStarted));
@@ -804,10 +894,10 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                         appListAdapter.getClass();
                         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
                         ref$ObjectRef.element = appListAdapter.data;
-                        appListAdapter.data = sortedWith;
+                        appListAdapter.data = listSortedWith;
                         SecFgsManagerController secFgsManagerController = FgsManagerControllerImpl.this.secFgsManagerController;
                         if (secFgsManagerController != null) {
-                            boolean z3 = sortedWith.size() == 0;
+                            boolean z3 = listSortedWith.size() == 0;
                             SecFgsManagerController.log("updateNoItemTextView: " + z3);
                             TextView textView = secFgsManagerController.noItemTextView;
                             if (textView != null) {
@@ -817,17 +907,17 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                         DiffUtil.calculateDiff(new DiffUtil.Callback() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$AppListAdapter$setData$2
                             @Override // androidx.recyclerview.widget.DiffUtil.Callback
                             public final boolean areContentsTheSame(int i7, int i8) {
-                                return ((FgsManagerControllerImpl.RunningApp) ((List) ref$ObjectRef.element).get(i7)).stopped == ((FgsManagerControllerImpl.RunningApp) sortedWith.get(i8)).stopped;
+                                return ((FgsManagerControllerImpl.RunningApp) ((List) ref$ObjectRef.element).get(i7)).stopped == ((FgsManagerControllerImpl.RunningApp) listSortedWith.get(i8)).stopped;
                             }
 
                             @Override // androidx.recyclerview.widget.DiffUtil.Callback
                             public final boolean areItemsTheSame(int i7, int i8) {
-                                return Intrinsics.areEqual(((List) ref$ObjectRef.element).get(i7), sortedWith.get(i8));
+                                return Intrinsics.areEqual(((List) ref$ObjectRef.element).get(i7), listSortedWith.get(i8));
                             }
 
                             @Override // androidx.recyclerview.widget.DiffUtil.Callback
                             public final int getNewListSize() {
-                                return sortedWith.size();
+                                return listSortedWith.size();
                             }
 
                             @Override // androidx.recyclerview.widget.DiffUtil.Callback
@@ -835,7 +925,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                                 return ((List) ref$ObjectRef.element).size();
                             }
                         }).dispatchUpdatesTo(new AdapterListUpdateCallback(appListAdapter));
-                        SecFgsManagerController secFgsManagerController2 = FgsManagerControllerImpl.this.secFgsManagerController;
+                        SecFgsManagerController secFgsManagerController2 = fgsManagerControllerImpl.secFgsManagerController;
                         if (secFgsManagerController2 == null || (systemUIDialog = (SystemUIDialog) secFgsManagerController2.dialog.invoke()) == null) {
                             return;
                         }
@@ -844,6 +934,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                         }
                         if (systemUIDialog != null) {
                             SecFgsManagerController.log("show dialog");
+                            secFgsManagerController2.foldState = (SecQsUiDisplayModeInteractor.FoldState) ((SecQsUiDisplayModeInteractor) secFgsManagerController2.qsUiDisplayModeInteractor$delegate.getValue()).getFoldState().getValue();
                             systemUIDialog.show();
                             SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_FGS_ACTIVE_APPS);
                         }
@@ -862,7 +953,7 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
                 this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$updateNumberOfVisibleRunningPackagesLocked$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FgsManagerController.OnNumberOfPackagesChangedListener.this.onNumberOfPackagesChanged(numVisiblePackagesLocked);
+                        onNumberOfPackagesChangedListener.onNumberOfPackagesChanged(numVisiblePackagesLocked);
                     }
                 });
             }
@@ -881,7 +972,6 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         return numVisibleButtonsLocked;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RunningApp {
         public CharSequence appLabel;
         public Drawable icon;
@@ -902,15 +992,15 @@ public final class FgsManagerControllerImpl implements Dumpable, FgsManagerContr
         public final void dump(PrintWriter printWriter, SystemClock systemClock) {
             printWriter.println("RunningApp: [");
             ((IndentingPrintWriter) printWriter).increaseIndent();
-            StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("userId="), this.userId, printWriter, "packageName=");
-            m.append(this.packageName);
-            printWriter.println(m.toString());
-            long elapsedRealtime = systemClock.elapsedRealtime();
+            StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("userId="), this.userId, printWriter, "packageName=");
+            sbM.append(this.packageName);
+            printWriter.println(sbM.toString());
+            long jElapsedRealtime = systemClock.elapsedRealtime();
             long j = this.timeStarted;
-            StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("timeStarted=", j, " (time since start = ");
-            m2.append(elapsedRealtime - j);
-            m2.append("ms)");
-            printWriter.println(m2.toString());
+            StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("timeStarted=", j, " (time since start = ");
+            sbM2.append(jElapsedRealtime - j);
+            sbM2.append("ms)");
+            printWriter.println(sbM2.toString());
             printWriter.println("uiControl=" + this.uiControl);
             printWriter.println("appLabel=" + ((Object) this.appLabel));
             printWriter.println("icon=" + this.icon);

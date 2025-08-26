@@ -128,11 +128,11 @@ public class SemImsProfile implements Parcelable {
 
         @Override // java.lang.Enum
         public String toString() {
-            int ordinal = ordinal();
-            if (ordinal == 7) {
+            int iOrdinal = ordinal();
+            if (iOrdinal == 7) {
                 return "1xrtt";
             }
-            if (ordinal == 14) {
+            if (iOrdinal == 14) {
                 return "hspa+";
             }
             return super.toString().toLowerCase(Locale.US);
@@ -164,12 +164,12 @@ public class SemImsProfile implements Parcelable {
         }
     }
 
-    public SemImsProfile(ContentValues contentValues) {
+    public SemImsProfile(ContentValues contentValues) throws JSONException {
         this.mBody = new JSONObject();
         update(contentValues);
     }
 
-    private void update(ContentValues contentValues) {
+    private void update(ContentValues contentValues) throws JSONException {
         if (contentValues != null) {
             try {
                 for (String str : contentValues.keySet()) {
@@ -209,9 +209,9 @@ public class SemImsProfile implements Parcelable {
         JSONArray jSONArray2 = this.mBody.getJSONArray("network");
         if (jSONArray2 != null) {
             for (int i = 0; i < jSONArray2.length(); i++) {
-                JSONObject optJSONObject = jSONArray2.optJSONObject(i);
-                for (String str : TextUtils.split(optJSONObject.optString("type"), ",")) {
-                    JSONObject jSONObject = new JSONObject(optJSONObject, new String[]{"services", "enabled", "dereg_timeout"});
+                JSONObject jSONObjectOptJSONObject = jSONArray2.optJSONObject(i);
+                for (String str : TextUtils.split(jSONObjectOptJSONObject.optString("type"), ",")) {
+                    JSONObject jSONObject = new JSONObject(jSONObjectOptJSONObject, new String[]{"services", "enabled", "dereg_timeout"});
                     jSONObject.put("type", str);
                     jSONArray.put(jSONObject);
                 }
@@ -225,7 +225,7 @@ public class SemImsProfile implements Parcelable {
         parcel.writeString(toJson());
     }
 
-    private void put(String str, Boolean bool) {
+    private void put(String str, Boolean bool) throws JSONException {
         try {
             this.mBody.put(str, bool);
         } catch (JSONException e) {

@@ -14,32 +14,29 @@ public class MotionPhotoConverter {
     }
 
     public static synchronized MotionPhotoConverter getInstance() {
-        MotionPhotoConverter motionPhotoConverter;
-        synchronized (MotionPhotoConverter.class) {
-            if (sInstance == null) {
-                sInstance = new MotionPhotoConverter();
-            }
-            motionPhotoConverter = sInstance;
+        if (sInstance == null) {
+            sInstance = new MotionPhotoConverter();
         }
-        return motionPhotoConverter;
+        return sInstance;
     }
 
     public synchronized void convertToMp4(String str, String str2) {
+        FileOutputStream fileOutputStream;
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(str2);
-            try {
-                fileOutputStream.write(SemExtendedFormat.getData(new File(str), SemExtendedFormat.KeyName.MOTION_PHOTO_DATA));
-                fileOutputStream.close();
-            } catch (Throwable th) {
-                try {
-                    fileOutputStream.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
-            }
+            fileOutputStream = new FileOutputStream(str2);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        try {
+            fileOutputStream.write(SemExtendedFormat.getData(new File(str), SemExtendedFormat.KeyName.MOTION_PHOTO_DATA));
+            fileOutputStream.close();
+        } catch (Throwable th) {
+            try {
+                fileOutputStream.close();
+            } catch (Throwable th2) {
+                th.addSuppressed(th2);
+            }
+            throw th;
         }
     }
 }

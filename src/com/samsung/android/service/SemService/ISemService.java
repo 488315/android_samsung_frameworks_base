@@ -350,9 +350,9 @@ public interface ISemService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemService)) {
-                return (ISemService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemService)) {
+                return (ISemService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -474,96 +474,96 @@ public interface ISemService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] handle_CCM = handle_CCM(createByteArray, readInt);
+                    String[] strArrHandle_CCM = handle_CCM(bArrCreateByteArray, i3);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(handle_CCM);
-                    parcel2.writeByteArray(createByteArray);
+                    parcel2.writeStringArray(strArrHandle_CCM);
+                    parcel2.writeByteArray(bArrCreateByteArray);
                     return true;
                 case 5:
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt2 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    int readInt3 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i4 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] handle_CCMCB = handle_CCMCB(createByteArray2, readInt2, createByteArray3, readInt3);
+                    String[] strArrHandle_CCMCB = handle_CCMCB(bArrCreateByteArray2, i4, bArrCreateByteArray3, i5);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(handle_CCMCB);
-                    parcel2.writeByteArray(createByteArray2);
-                    parcel2.writeByteArray(createByteArray3);
+                    parcel2.writeStringArray(strArrHandle_CCMCB);
+                    parcel2.writeByteArray(bArrCreateByteArray2);
+                    parcel2.writeByteArray(bArrCreateByteArray3);
                     return true;
                 case 6:
-                    int isLccmSwp = isLccmSwp();
+                    int iIsLccmSwp = isLccmSwp();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isLccmSwp);
+                    parcel2.writeInt(iIsLccmSwp);
                     return true;
                 case 7:
-                    byte[] createByteArray4 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int i3 = get_HQMMemory(createByteArray4);
+                    int i6 = get_HQMMemory(bArrCreateByteArray4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(i3);
-                    parcel2.writeByteArray(createByteArray4);
+                    parcel2.writeInt(i6);
+                    parcel2.writeByteArray(bArrCreateByteArray4);
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    int[] createIntArray = parcel.createIntArray();
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int deactivate_Cards = deactivate_Cards(readInt4, createStringArray, createIntArray, readInt5);
+                    int iDeactivate_Cards = deactivate_Cards(i7, strArrCreateStringArray, iArrCreateIntArray, i8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(deactivate_Cards);
+                    parcel2.writeInt(iDeactivate_Cards);
                     return true;
                 case 9:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    String[] createStringArray2 = parcel.createStringArray();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int deactivate_CardsAID = deactivate_CardsAID(readInt6, readInt7, createStringArray2, createIntArray2, readInt8);
+                    int iDeactivate_CardsAID = deactivate_CardsAID(i9, i10, strArrCreateStringArray2, iArrCreateIntArray2, i11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(deactivate_CardsAID);
+                    parcel2.writeInt(iDeactivate_CardsAID);
                     return true;
                 case 10:
-                    int eSE_FactoryReset = eSE_FactoryReset();
+                    int iESE_FactoryReset = eSE_FactoryReset();
                     parcel2.writeNoException();
-                    parcel2.writeInt(eSE_FactoryReset);
+                    parcel2.writeInt(iESE_FactoryReset);
                     return true;
                 case 11:
-                    int ICD = ICD();
+                    int iICD = ICD();
                     parcel2.writeNoException();
-                    parcel2.writeInt(ICD);
+                    parcel2.writeInt(iICD);
                     return true;
                 case 12:
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    int readInt9 = parcel.readInt();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    int readInt10 = parcel.readInt();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    int i12 = parcel.readInt();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int start_attestation = start_attestation(createByteArray5, readInt9, createByteArray6, readInt10);
+                    int iStart_attestation = start_attestation(bArrCreateByteArray5, i12, bArrCreateByteArray6, i13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(start_attestation);
-                    parcel2.writeByteArray(createByteArray5);
-                    parcel2.writeByteArray(createByteArray6);
+                    parcel2.writeInt(iStart_attestation);
+                    parcel2.writeByteArray(bArrCreateByteArray5);
+                    parcel2.writeByteArray(bArrCreateByteArray6);
                     return true;
                 case 13:
-                    String readString = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    String string = parcel.readString();
+                    int i14 = parcel.readInt();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int continue_attestation = continue_attestation(readString, readInt11, createByteArray7);
+                    int iContinue_attestation = continue_attestation(string, i14, bArrCreateByteArray7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(continue_attestation);
-                    parcel2.writeByteArray(createByteArray7);
+                    parcel2.writeInt(iContinue_attestation);
+                    parcel2.writeByteArray(bArrCreateByteArray7);
                     return true;
                 case 14:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    secureLog(readString2);
+                    secureLog(string2);
                     parcel2.writeNoException();
                     return true;
                 case 15:
@@ -580,154 +580,154 @@ public interface ISemService extends IInterface {
                     parcel2.writeInt(atr_Spi);
                     return true;
                 case 18:
-                    int resetForCOSU = resetForCOSU();
+                    int iResetForCOSU = resetForCOSU();
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetForCOSU);
+                    parcel2.writeInt(iResetForCOSU);
                     return true;
                 case 19:
-                    int readInt12 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int open_Spi = open_Spi(readInt12);
+                    int iOpen_Spi = open_Spi(i15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(open_Spi);
+                    parcel2.writeInt(iOpen_Spi);
                     return true;
                 case 20:
-                    int readInt13 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int close_Spi = close_Spi(readInt13);
+                    int iClose_Spi = close_Spi(i16);
                     parcel2.writeNoException();
-                    parcel2.writeInt(close_Spi);
+                    parcel2.writeInt(iClose_Spi);
                     return true;
                 case 21:
-                    byte[] createByteArray8 = parcel.createByteArray();
-                    int readInt14 = parcel.readInt();
-                    byte[] createByteArray9 = parcel.createByteArray();
-                    int readInt15 = parcel.readInt();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
+                    int i17 = parcel.readInt();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int send_Data = send_Data(createByteArray8, readInt14, createByteArray9, readInt15);
+                    int iSend_Data = send_Data(bArrCreateByteArray8, i17, bArrCreateByteArray9, i18);
                     parcel2.writeNoException();
-                    parcel2.writeInt(send_Data);
-                    parcel2.writeByteArray(createByteArray8);
-                    parcel2.writeByteArray(createByteArray9);
+                    parcel2.writeInt(iSend_Data);
+                    parcel2.writeByteArray(bArrCreateByteArray8);
+                    parcel2.writeByteArray(bArrCreateByteArray9);
                     return true;
                 case 22:
-                    byte[] createByteArray10 = parcel.createByteArray();
-                    byte[] createByteArray11 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int check_SeState = check_SeState(createByteArray10, createByteArray11);
+                    int iCheck_SeState = check_SeState(bArrCreateByteArray10, bArrCreateByteArray11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(check_SeState);
+                    parcel2.writeInt(iCheck_SeState);
                     return true;
                 case 23:
-                    byte[] createByteArray12 = parcel.createByteArray();
-                    byte[] createByteArray13 = parcel.createByteArray();
-                    String readString3 = parcel.readString();
-                    byte[] createByteArray14 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray12 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray13 = parcel.createByteArray();
+                    String string3 = parcel.readString();
+                    byte[] bArrCreateByteArray14 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int start_request_credentials = start_request_credentials(createByteArray12, createByteArray13, readString3, createByteArray14);
+                    int iStart_request_credentials = start_request_credentials(bArrCreateByteArray12, bArrCreateByteArray13, string3, bArrCreateByteArray14);
                     parcel2.writeNoException();
-                    parcel2.writeInt(start_request_credentials);
-                    parcel2.writeByteArray(createByteArray14);
+                    parcel2.writeInt(iStart_request_credentials);
+                    parcel2.writeByteArray(bArrCreateByteArray14);
                     return true;
                 case 24:
                     stop_request_credentials();
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    int grdm_get_session = grdm_get_session();
+                    int iGrdm_get_session = grdm_get_session();
                     parcel2.writeNoException();
-                    parcel2.writeInt(grdm_get_session);
+                    parcel2.writeInt(iGrdm_get_session);
                     return true;
                 case 26:
-                    int readInt16 = parcel.readInt();
-                    byte[] createByteArray15 = parcel.createByteArray();
+                    int i19 = parcel.readInt();
+                    byte[] bArrCreateByteArray15 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int grdm_request_key = grdm_request_key(readInt16, createByteArray15);
+                    int iGrdm_request_key = grdm_request_key(i19, bArrCreateByteArray15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(grdm_request_key);
-                    parcel2.writeByteArray(createByteArray15);
+                    parcel2.writeInt(iGrdm_request_key);
+                    parcel2.writeByteArray(bArrCreateByteArray15);
                     return true;
                 case 27:
-                    int grdm_release_session = grdm_release_session();
+                    int iGrdm_release_session = grdm_release_session();
                     parcel2.writeNoException();
-                    parcel2.writeInt(grdm_release_session);
+                    parcel2.writeInt(iGrdm_release_session);
                     return true;
                 case 28:
-                    int readInt17 = parcel.readInt();
-                    byte[] createByteArray16 = parcel.createByteArray();
+                    int i20 = parcel.readInt();
+                    byte[] bArrCreateByteArray16 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int grdm_get_attes_cert = grdm_get_attes_cert(readInt17, createByteArray16);
+                    int iGrdm_get_attes_cert = grdm_get_attes_cert(i20, bArrCreateByteArray16);
                     parcel2.writeNoException();
-                    parcel2.writeInt(grdm_get_attes_cert);
-                    parcel2.writeByteArray(createByteArray16);
+                    parcel2.writeInt(iGrdm_get_attes_cert);
+                    parcel2.writeByteArray(bArrCreateByteArray16);
                     return true;
                 case 29:
-                    String grdm_check_restricted_mode = grdm_check_restricted_mode();
+                    String strGrdm_check_restricted_mode = grdm_check_restricted_mode();
                     parcel2.writeNoException();
-                    parcel2.writeString(grdm_check_restricted_mode);
+                    parcel2.writeString(strGrdm_check_restricted_mode);
                     return true;
                 case 30:
-                    int grdm_Check_Status = grdm_Check_Status();
+                    int iGrdm_Check_Status = grdm_Check_Status();
                     parcel2.writeNoException();
-                    parcel2.writeInt(grdm_Check_Status);
+                    parcel2.writeInt(iGrdm_Check_Status);
                     return true;
                 case 31:
-                    int openSpiDriver = openSpiDriver();
+                    int iOpenSpiDriver = openSpiDriver();
                     parcel2.writeNoException();
-                    parcel2.writeInt(openSpiDriver);
+                    parcel2.writeInt(iOpenSpiDriver);
                     return true;
                 case 32:
-                    int closeSpiDriver = closeSpiDriver();
+                    int iCloseSpiDriver = closeSpiDriver();
                     parcel2.writeNoException();
-                    parcel2.writeInt(closeSpiDriver);
+                    parcel2.writeInt(iCloseSpiDriver);
                     return true;
                 case 33:
-                    int eSE_LowFactoryReset = eSE_LowFactoryReset();
+                    int iESE_LowFactoryReset = eSE_LowFactoryReset();
                     parcel2.writeNoException();
-                    parcel2.writeInt(eSE_LowFactoryReset);
+                    parcel2.writeInt(iESE_LowFactoryReset);
                     return true;
                 case 34:
-                    int eSE_FullFactoryReset = eSE_FullFactoryReset();
+                    int iESE_FullFactoryReset = eSE_FullFactoryReset();
                     parcel2.writeNoException();
-                    parcel2.writeInt(eSE_FullFactoryReset);
+                    parcel2.writeInt(iESE_FullFactoryReset);
                     return true;
                 case 35:
-                    int esek_certificate_check = esek_certificate_check();
+                    int iEsek_certificate_check = esek_certificate_check();
                     parcel2.writeNoException();
-                    parcel2.writeInt(esek_certificate_check);
+                    parcel2.writeInt(iEsek_certificate_check);
                     return true;
                 case 36:
-                    int scp11_certificate_check = scp11_certificate_check();
+                    int iScp11_certificate_check = scp11_certificate_check();
                     parcel2.writeNoException();
-                    parcel2.writeInt(scp11_certificate_check);
+                    parcel2.writeInt(iScp11_certificate_check);
                     return true;
                 case 37:
-                    int readInt18 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    check_Network(readInt18);
+                    check_Network(i21);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    byte[] createByteArray17 = parcel.createByteArray();
-                    int readInt19 = parcel.readInt();
+                    byte[] bArrCreateByteArray17 = parcel.createByteArray();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int handle_CCMScp11c = handle_CCMScp11c(createByteArray17, readInt19);
+                    int iHandle_CCMScp11c = handle_CCMScp11c(bArrCreateByteArray17, i22);
                     parcel2.writeNoException();
-                    parcel2.writeInt(handle_CCMScp11c);
-                    parcel2.writeByteArray(createByteArray17);
+                    parcel2.writeInt(iHandle_CCMScp11c);
+                    parcel2.writeByteArray(bArrCreateByteArray17);
                     return true;
                 case 39:
-                    byte[] createByteArray18 = parcel.createByteArray();
-                    int readInt20 = parcel.readInt();
+                    byte[] bArrCreateByteArray18 = parcel.createByteArray();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int eSE_AidFactoryReset = eSE_AidFactoryReset(createByteArray18, readInt20);
+                    int iESE_AidFactoryReset = eSE_AidFactoryReset(bArrCreateByteArray18, i23);
                     parcel2.writeNoException();
-                    parcel2.writeInt(eSE_AidFactoryReset);
+                    parcel2.writeInt(iESE_AidFactoryReset);
                     return true;
                 case 40:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    agent_SLOG(readString4);
+                    agent_SLOG(string4);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -753,663 +753,663 @@ public interface ISemService extends IInterface {
 
             @Override // com.samsung.android.service.SemService.ISemService
             public String get_ESEA() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public String getCPLC14mode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void sem_factory() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public String[] handle_CCM(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    String[] createStringArray = obtain2.createStringArray();
-                    obtain2.readByteArray(bArr);
-                    return createStringArray;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    String[] strArrCreateStringArray = parcelObtain2.createStringArray();
+                    parcelObtain2.readByteArray(bArr);
+                    return strArrCreateStringArray;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public String[] handle_CCMCB(byte[] bArr, int i, byte[] bArr2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    String[] createStringArray = obtain2.createStringArray();
-                    obtain2.readByteArray(bArr);
-                    obtain2.readByteArray(bArr2);
-                    return createStringArray;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    String[] strArrCreateStringArray = parcelObtain2.createStringArray();
+                    parcelObtain2.readByteArray(bArr);
+                    parcelObtain2.readByteArray(bArr2);
+                    return strArrCreateStringArray;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int isLccmSwp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int get_HQMMemory(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int deactivate_Cards(int i, String[] strArr, int[] iArr, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int deactivate_CardsAID(int i, int i2, String[] strArr, int[] iArr, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int eSE_FactoryReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int ICD() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int start_attestation(byte[] bArr, int i, byte[] bArr2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i3 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    parcelObtain2.readByteArray(bArr2);
+                    return i3;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int continue_attestation(String str, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void secureLog(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void start_SLOG() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void stop_SLOG() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int getAtr_Spi() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int resetForCOSU() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int open_Spi(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int close_Spi(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int send_Data(byte[] bArr, int i, byte[] bArr2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i3 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    parcelObtain2.readByteArray(bArr2);
+                    return i3;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int check_SeState(byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int start_request_credentials(byte[] bArr, byte[] bArr2, String str, byte[] bArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr3);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr3);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr3);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr3);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void stop_request_credentials() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int grdm_get_session() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int grdm_request_key(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int grdm_release_session() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int grdm_get_attes_cert(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public String grdm_check_restricted_mode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int grdm_Check_Status() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int openSpiDriver() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int closeSpiDriver() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int eSE_LowFactoryReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int eSE_FullFactoryReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int esek_certificate_check() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int scp11_certificate_check() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void check_Network(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int handle_CCMScp11c(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public int eSE_AidFactoryReset(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
             public void agent_SLOG(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

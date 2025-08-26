@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RemoteViews;
 import com.android.internal.R;
 import com.android.internal.widget.PeopleHelper;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -82,72 +83,72 @@ public class CompactMessagingLayout extends FrameLayout {
         this.mNotificationBackgroundColor = i;
     }
 
-    public Runnable setGroupFacePileAsync(Bundle bundle) {
-        Icon icon;
+    public Runnable setGroupFacePileAsync(Bundle bundle) throws IOException {
+        Icon senderIcon;
         List<Notification.MessagingStyle.Message> messagesFromBundleArray = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_MESSAGES));
         List<Notification.MessagingStyle.Message> messagesFromBundleArray2 = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_HISTORIC_MESSAGES));
         Person person = (Person) bundle.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class);
-        List<List<Notification.MessagingStyle.Message>> groupMessages = groupMessages(messagesFromBundleArray, messagesFromBundleArray2);
-        PeopleHelper.NameToPrefixMap mapUniqueNamesToPrefixWithGroupList = this.mPeopleHelper.mapUniqueNamesToPrefixWithGroupList(groupMessages);
+        List<List<Notification.MessagingStyle.Message>> listGroupMessages = groupMessages(messagesFromBundleArray, messagesFromBundleArray2);
+        PeopleHelper.NameToPrefixMap nameToPrefixMapMapUniqueNamesToPrefixWithGroupList = this.mPeopleHelper.mapUniqueNamesToPrefixWithGroupList(listGroupMessages);
         int i = this.mLayoutColor;
         CharSequence personKey = getPersonKey(person);
-        int size = groupMessages.size() - 1;
+        int size = listGroupMessages.size() - 1;
         CharSequence charSequence = null;
-        Icon icon2 = null;
+        Icon senderIcon2 = null;
         while (true) {
             if (size < 0) {
-                icon = null;
+                senderIcon = null;
                 break;
             }
-            Notification.MessagingStyle.Message message = groupMessages.get(size).get(0);
+            Notification.MessagingStyle.Message message = listGroupMessages.get(size).get(0);
             Person senderPerson = message.getSenderPerson() != null ? message.getSenderPerson() : person;
             CharSequence personKey2 = getPersonKey(senderPerson);
             boolean z = personKey2 != personKey;
             boolean z2 = personKey2 != charSequence;
             if ((z && z2) || (size == 0 && charSequence == null)) {
-                icon = getSenderIcon(senderPerson, mapUniqueNamesToPrefixWithGroupList, i);
-                if (icon2 != null) {
+                senderIcon = getSenderIcon(senderPerson, nameToPrefixMapMapUniqueNamesToPrefixWithGroupList, i);
+                if (senderIcon2 != null) {
                     break;
                 }
-                icon2 = icon;
+                senderIcon2 = senderIcon;
                 charSequence = personKey2;
             }
             size--;
         }
-        if (icon2 == null) {
-            icon2 = getSenderIcon(null, null, i);
+        if (senderIcon2 == null) {
+            senderIcon2 = getSenderIcon(null, null, i);
         }
-        if (icon == null) {
-            icon = getSenderIcon(null, null, i);
+        if (senderIcon == null) {
+            senderIcon = getSenderIcon(null, null, i);
         }
-        final Drawable loadDrawable = icon.loadDrawable(getContext());
-        final Drawable loadDrawable2 = icon2.loadDrawable(getContext());
+        final Drawable drawableLoadDrawable = senderIcon.loadDrawable(getContext());
+        final Drawable drawableLoadDrawable2 = senderIcon2.loadDrawable(getContext());
         return new Runnable() { // from class: com.android.internal.widget.CompactMessagingLayout$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CompactMessagingLayout.this.lambda$setGroupFacePileAsync$0(loadDrawable, loadDrawable2);
+                this.f$0.lambda$setGroupFacePileAsync$0(drawableLoadDrawable, drawableLoadDrawable2);
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setGroupFacePileAsync$0(Drawable drawable, Drawable drawable2) {
-        View inflate = this.mConversationFacePileViewStub.inflate();
-        inflate.setVisibility(0);
-        ImageView imageView = (ImageView) inflate.requireViewById(R.id.conversation_face_pile_bottom_background);
-        ImageView imageView2 = (ImageView) inflate.requireViewById(R.id.conversation_face_pile_top);
-        ImageView imageView3 = (ImageView) inflate.requireViewById(R.id.conversation_face_pile_bottom);
+        View viewInflate = this.mConversationFacePileViewStub.inflate();
+        viewInflate.setVisibility(0);
+        ImageView imageView = (ImageView) viewInflate.requireViewById(R.id.conversation_face_pile_bottom_background);
+        ImageView imageView2 = (ImageView) viewInflate.requireViewById(R.id.conversation_face_pile_top);
+        ImageView imageView3 = (ImageView) viewInflate.requireViewById(R.id.conversation_face_pile_bottom);
         imageView2.lambda$setImageURIAsync$0(drawable);
         imageView3.lambda$setImageURIAsync$0(drawable2);
         imageView.setImageTintList(ColorStateList.valueOf(this.mNotificationBackgroundColor));
-        setSize(inflate, this.mFacePileSize);
+        setSize(viewInflate, this.mFacePileSize);
         setSize(imageView3, this.mFacePileAvatarSize);
         setSize(imageView2, this.mFacePileAvatarSize);
         setSize(imageView, this.mFacePileAvatarSize + (this.mFacePileProtectionWidth * 2));
     }
 
     private Icon getSenderIcon(Person person, PeopleHelper.NameToPrefixMap nameToPrefixMap, int i) {
-        String str = "";
+        String prefix = "";
         if (person == null) {
             return this.mPeopleHelper.createAvatarSymbol("", "", i);
         }
@@ -159,9 +160,9 @@ public class CompactMessagingLayout extends FrameLayout {
             return this.mPeopleHelper.createAvatarSymbol("", "", i);
         }
         if (nameToPrefixMap != null) {
-            str = nameToPrefixMap.getPrefix(name);
+            prefix = nameToPrefixMap.getPrefix(name);
         }
-        return this.mPeopleHelper.createAvatarSymbol(name, str, i);
+        return this.mPeopleHelper.createAvatarSymbol(name, prefix, i);
     }
 
     private static List<List<Notification.MessagingStyle.Message>> groupMessages(List<Notification.MessagingStyle.Message> list, List<Notification.MessagingStyle.Message> list2) {

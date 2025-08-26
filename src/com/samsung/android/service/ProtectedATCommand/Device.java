@@ -73,25 +73,25 @@ public class Device {
     }
 
     public boolean isSecureLockOn() {
-        boolean z = false;
+        boolean zIsDeviceLocked = false;
         try {
-            z = ((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class)).isDeviceLocked();
-            Slog.d(TAG, "secureLock : " + z);
-            return z;
+            zIsDeviceLocked = ((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class)).isDeviceLocked();
+            Slog.d(TAG, "secureLock : " + zIsDeviceLocked);
+            return zIsDeviceLocked;
         } catch (Exception e) {
             Slog.e(TAG, "Failed to get secureLock", e);
-            return z;
+            return zIsDeviceLocked;
         }
     }
 
     public boolean isMaintenanceModeOn() {
         try {
-            r1 = ActivityManager.getCurrentUser() == 77;
-            Slog.d(TAG, "Maintenance mode : " + r1);
-            return r1;
+            z = ActivityManager.getCurrentUser() == 77;
+            Slog.d(TAG, "Maintenance mode : " + z);
+            return z;
         } catch (Exception e) {
             Slog.e(TAG, "Failed to get maintenance mode", e);
-            return r1;
+            return z;
         }
     }
 

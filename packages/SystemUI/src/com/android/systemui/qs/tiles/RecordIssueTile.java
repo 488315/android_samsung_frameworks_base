@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.widget.Switch;
 import com.android.internal.logging.MetricsLogger;
@@ -47,7 +48,6 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RecordIssueTile extends QSTileImpl {
     public final Executor bgExecutor;
@@ -78,7 +78,7 @@ public final class RecordIssueTile extends QSTileImpl {
         this.onRecordingChangeListener = new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$onRecordingChangeListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                RecordIssueTile.this.refreshState(null);
+                this.this$0.refreshState(null);
             }
         };
         provider.getClass();
@@ -87,12 +87,12 @@ public final class RecordIssueTile extends QSTileImpl {
         final TraceurConnection traceurConnection = new TraceurConnection(provider2.userContextProvider, provider2.bgLooper, null);
         ((CopyOnWriteArrayList) traceurConnection.onBound).add(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$traceurConnection$1$1
             @Override // java.lang.Runnable
-            public final void run() {
-                TraceurConnection traceurConnection2 = TraceurConnection.this;
+            public final void run() throws RemoteException {
+                TraceurConnection traceurConnection2 = traceurConnection;
                 IssueRecordingState issueRecordingState2 = this.issueRecordingState;
                 traceurConnection2.getClass();
                 TraceurConnection.sendMessage$default(traceurConnection2, 3, null, new Messenger(new TagsHandler(traceurConnection2.bgLooper, issueRecordingState2)), 2);
-                TraceurConnection.this.doUnBind();
+                traceurConnection.doUnBind();
             }
         });
         this.traceurConnection = traceurConnection;
@@ -109,9 +109,9 @@ public final class RecordIssueTile extends QSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public void handleClick(final Expandable expandable) {
+    public void handleClick(final Expandable expandable) throws PendingIntent.CanceledException {
         if (!this.issueRecordingState.isRecording) {
-            this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$handleClick$1
+            this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile.handleClick.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     final RecordIssueTile recordIssueTile = RecordIssueTile.this;
@@ -119,16 +119,16 @@ public final class RecordIssueTile extends QSTileImpl {
                     recordIssueTile.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$showPrompt$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            if (!RecordIssueTile.this.traceurConnection.onBound.isEmpty()) {
-                                RecordIssueTile.this.traceurConnection.doBind();
+                            if (!recordIssueTile.traceurConnection.onBound.isEmpty()) {
+                                recordIssueTile.traceurConnection.doBind();
                             }
-                            RecordIssueTile.this.irsConnection.doBind();
+                            recordIssueTile.irsConnection.doBind();
                         }
                     });
-                    final SystemUIDialog createDialog = recordIssueTile.delegateFactory.create(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$showPrompt$dialog$1
+                    final SystemUIDialog systemUIDialogCreateDialog = recordIssueTile.delegateFactory.create(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$showPrompt$dialog$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RecordIssueTile recordIssueTile2 = RecordIssueTile.this;
+                            RecordIssueTile recordIssueTile2 = recordIssueTile;
                             recordIssueTile2.getClass();
                             IssueRecordingService.Companion companion = IssueRecordingService.Companion;
                             UserContextProvider userContextProvider = recordIssueTile2.userContextProvider;
@@ -151,29 +151,33 @@ public final class RecordIssueTile extends QSTileImpl {
                             RecordingController.AnonymousClass3 anonymousClass3 = recordingController.new AnonymousClass3(0L, 1000L, service);
                             recordingController.mCountDownTimer = anonymousClass3;
                             anonymousClass3.start();
-                            RecordIssueTile.this.dialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
-                            ((PanelInteractorImpl) RecordIssueTile.this.panelInteractor).collapsePanels();
+                            recordIssueTile.dialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
+                            ((PanelInteractorImpl) recordIssueTile.panelInteractor).collapsePanels();
                         }
                     }).createDialog();
                     recordIssueTile.keyguardDismissUtil.executeWhenUnlocked(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$showPrompt$dismissAction$1
+                        /* JADX WARN: Removed duplicated region for block: B:10:0x002c  */
                         @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
                         public final boolean onDismiss() {
-                            Expandable expandable3 = Expandable.this;
+                            Expandable expandable3 = expandable2;
                             if (expandable3 != null) {
                                 RecordIssueTile recordIssueTile2 = recordIssueTile;
-                                if (!((KeyguardStateControllerImpl) recordIssueTile2.keyguardStateController).mShowing) {
-                                    DialogTransitionAnimator.Controller dialogTransitionController = expandable3.dialogTransitionController(new DialogCuj(58, "record_issue"));
-                                    AlertDialog alertDialog = createDialog;
-                                    if (dialogTransitionController != null) {
+                                if (((KeyguardStateControllerImpl) recordIssueTile2.keyguardStateController).mShowing) {
+                                    systemUIDialogCreateDialog.show();
+                                } else {
+                                    DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable3.dialogTransitionController(new DialogCuj(58, "record_issue"));
+                                    AlertDialog alertDialog = systemUIDialogCreateDialog;
+                                    if (controllerDialogTransitionController != null) {
                                         TransitionAnimator.Timings timings = DialogTransitionAnimator.TIMINGS;
-                                        recordIssueTile2.dialogTransitionAnimator.show(alertDialog, dialogTransitionController, false);
+                                        recordIssueTile2.dialogTransitionAnimator.show(alertDialog, controllerDialogTransitionController, false);
                                     } else {
                                         alertDialog.show();
                                     }
-                                    return false;
                                 }
                             }
-                            createDialog.show();
                             return false;
                         }
                     }, false, true);
@@ -186,15 +190,15 @@ public final class RecordIssueTile extends QSTileImpl {
         Context userContext = ((UserTrackerImpl) userContextProvider).getUserContext();
         companion.getClass();
         PendingIntent service = PendingIntent.getService(((UserTrackerImpl) userContextProvider).getUserContext(), 2, IssueRecordingService.Companion.getStopIntent(userContext), 201326592);
-        BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
-        makeBasic.setInteractive(true);
-        service.send(makeBasic.toBundle());
+        BroadcastOptions broadcastOptionsMakeBasic = BroadcastOptions.makeBasic();
+        broadcastOptionsMakeBasic.setInteractive(true);
+        service.send(broadcastOptionsMakeBasic.toBundle());
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleDestroy() {
         super.handleDestroy();
-        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$handleDestroy$1
+        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile.handleDestroy.1
             @Override // java.lang.Runnable
             public final void run() {
                 RecordIssueTile.this.irsConnection.doUnBind();
@@ -205,7 +209,7 @@ public final class RecordIssueTile extends QSTileImpl {
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleSetListening(final boolean z) {
         super.handleSetListening(z);
-        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile$handleSetListening$1
+        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.RecordIssueTile.handleSetListening.1
             @Override // java.lang.Runnable
             public final void run() {
                 if (z) {

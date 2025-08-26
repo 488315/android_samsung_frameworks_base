@@ -45,7 +45,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BlueLightFilterTile extends SQSTileImpl {
     public static final Intent EYECOMFORT_SETTINGS;
@@ -67,7 +66,6 @@ public class BlueLightFilterTile extends SQSTileImpl {
     private final SettingsHelper mSettingsHelper;
     public String mToasMsg;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$1, reason: invalid class name */
     public class AnonymousClass1 implements Feature {
         public AnonymousClass1() {
@@ -85,7 +83,6 @@ public class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$2, reason: invalid class name */
     public class AnonymousClass2 implements Feature {
         public AnonymousClass2() {
@@ -103,7 +100,6 @@ public class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$3, reason: invalid class name */
     public class AnonymousClass3 implements Feature {
         public AnonymousClass3() {
@@ -121,7 +117,6 @@ public class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.BlueLightFilterTile$4, reason: invalid class name */
     public class AnonymousClass4 implements Feature {
         public AnonymousClass4() {
@@ -139,7 +134,6 @@ public class BlueLightFilterTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Feature {
         String getName();
 
@@ -165,9 +159,9 @@ public class BlueLightFilterTile extends SQSTileImpl {
         this.mSettingsCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.tiles.BlueLightFilterTile.5
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                boolean equals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_BLUE_LIGHT_FILTER));
+                boolean zEquals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_BLUE_LIGHT_FILTER));
                 BlueLightFilterTile blueLightFilterTile = BlueLightFilterTile.this;
-                if (equals) {
+                if (zEquals) {
                     int blueLightFilterMode = blueLightFilterTile.mSettingsHelper.getBlueLightFilterMode(SettingsHelper.INDEX_BLUE_LIGHT_FILTER);
                     NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(blueLightFilterMode, "handleValueChanged( value:", " )", blueLightFilterTile.TAG);
                     blueLightFilterTile.refreshState(Boolean.valueOf(blueLightFilterMode == 1));
@@ -206,27 +200,27 @@ public class BlueLightFilterTile extends SQSTileImpl {
         this.mSettingsHelper.registerCallback(this.mFeatureSettingsCallback, this.mFeatureSettingsValueList);
         Uri uriFor = Settings.System.getUriFor(SettingsHelper.INDEX_GRAYSCALE);
         LinkedHashMap linkedHashMap = this.mFeatureEnabled;
-        String uri = uriFor.toString();
+        String string = uriFor.toString();
         AnonymousClass1 anonymousClass1 = this.GRAYSCALE_FEATURE;
-        linkedHashMap.put(uri, Boolean.valueOf(anonymousClass1.isEnabled()));
+        linkedHashMap.put(string, Boolean.valueOf(anonymousClass1.isEnabled()));
         this.mFeatures.put(uriFor.toString(), anonymousClass1);
         Uri uriFor2 = Settings.System.getUriFor(SettingsHelper.INDEX_NEGATIVE_COLORS);
         LinkedHashMap linkedHashMap2 = this.mFeatureEnabled;
-        String uri2 = uriFor2.toString();
+        String string2 = uriFor2.toString();
         AnonymousClass2 anonymousClass2 = this.NEGATIVE_COLORS_FEATURE;
-        linkedHashMap2.put(uri2, Boolean.valueOf(anonymousClass2.isEnabled()));
+        linkedHashMap2.put(string2, Boolean.valueOf(anonymousClass2.isEnabled()));
         this.mFeatures.put(uriFor2.toString(), anonymousClass2);
         Uri uriFor3 = Settings.System.getUriFor(SettingsHelper.INDEX_COLOR_ADJUSTMENT);
         LinkedHashMap linkedHashMap3 = this.mFeatureEnabled;
-        String uri3 = uriFor3.toString();
+        String string3 = uriFor3.toString();
         AnonymousClass3 anonymousClass3 = this.COLOR_ADJUSTMENT_FEATURE;
-        linkedHashMap3.put(uri3, Boolean.valueOf(anonymousClass3.isEnabled()));
+        linkedHashMap3.put(string3, Boolean.valueOf(anonymousClass3.isEnabled()));
         this.mFeatures.put(uriFor3.toString(), anonymousClass3);
         Uri uriFor4 = Settings.Secure.getUriFor(SettingsHelper.INDEX_COLOR_LENS);
         LinkedHashMap linkedHashMap4 = this.mFeatureEnabled;
-        String uri4 = uriFor4.toString();
+        String string4 = uriFor4.toString();
         AnonymousClass4 anonymousClass4 = this.COLOR_LENS_FEATURE;
-        linkedHashMap4.put(uri4, Boolean.valueOf(anonymousClass4.isEnabled()));
+        linkedHashMap4.put(string4, Boolean.valueOf(anonymousClass4.isEnabled()));
         this.mFeatures.put(uriFor4.toString(), anonymousClass4);
     }
 
@@ -274,7 +268,7 @@ public class BlueLightFilterTile extends SQSTileImpl {
                 this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.BlueLightFilterTile$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BlueLightFilterTile blueLightFilterTile = BlueLightFilterTile.this;
+                        BlueLightFilterTile blueLightFilterTile = this.f$0;
                         Expandable expandable2 = expandable;
                         Intent intent = BlueLightFilterTile.EYECOMFORT_SETTINGS;
                         blueLightFilterTile.handleClick(expandable2);
@@ -394,8 +388,8 @@ public class BlueLightFilterTile extends SQSTileImpl {
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
-        boolean booleanValue = obj instanceof Boolean ? ((Boolean) obj).booleanValue() : this.mSettingsHelper.getBlueLightFilterMode(SettingsHelper.INDEX_BLUE_LIGHT_FILTER) == 1;
-        booleanState.value = booleanValue;
+        boolean zBooleanValue = obj instanceof Boolean ? ((Boolean) obj).booleanValue() : this.mSettingsHelper.getBlueLightFilterMode(SettingsHelper.INDEX_BLUE_LIGHT_FILTER) == 1;
+        booleanState.value = zBooleanValue;
         Iterator it = this.mFeatureEnabled.keySet().iterator();
         while (true) {
             if (it.hasNext()) {
@@ -407,7 +401,7 @@ public class BlueLightFilterTile extends SQSTileImpl {
                 }
             } else {
                 this.mToasMsg = "";
-                booleanState.state = booleanValue ? 2 : 1;
+                booleanState.state = zBooleanValue ? 2 : 1;
             }
         }
         booleanState.dualTarget = true;

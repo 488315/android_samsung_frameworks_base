@@ -34,7 +34,6 @@ import okio.PeekSource;
 import okio.RealBufferedSource;
 import okio.RealBufferedSource$inputStream$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LottieCompositionFactory {
     public static final Map taskCache = new HashMap();
@@ -50,13 +49,13 @@ public class LottieCompositionFactory {
             @Override // java.util.concurrent.Callable
             public final Object call() {
                 Map map = LottieCompositionFactory.taskCache;
-                return new LottieResult(LottieComposition.this);
+                return new LottieResult(lottieComposition);
             }
         }) : null;
         if (str != null) {
-            HashMap hashMap = (HashMap) taskCache;
-            if (hashMap.containsKey(str)) {
-                lottieTask = (LottieTask) hashMap.get(str);
+            HashMap map = (HashMap) taskCache;
+            if (map.containsKey(str)) {
+                lottieTask = (LottieTask) map.get(str);
             }
         }
         if (lottieTask != null) {
@@ -75,20 +74,20 @@ public class LottieCompositionFactory {
                     switch (i) {
                         case 0:
                             AtomicBoolean atomicBoolean2 = atomicBoolean;
-                            HashMap hashMap2 = (HashMap) LottieCompositionFactory.taskCache;
-                            hashMap2.remove(str);
+                            HashMap map2 = (HashMap) LottieCompositionFactory.taskCache;
+                            map2.remove(str);
                             atomicBoolean2.set(true);
-                            if (hashMap2.size() == 0) {
+                            if (map2.size() == 0) {
                                 LottieCompositionFactory.notifyTaskCacheIdleListeners();
                                 break;
                             }
                             break;
                         default:
                             AtomicBoolean atomicBoolean3 = atomicBoolean;
-                            HashMap hashMap3 = (HashMap) LottieCompositionFactory.taskCache;
-                            hashMap3.remove(str);
+                            HashMap map3 = (HashMap) LottieCompositionFactory.taskCache;
+                            map3.remove(str);
                             atomicBoolean3.set(true);
-                            if (hashMap3.size() == 0) {
+                            if (map3.size() == 0) {
                                 LottieCompositionFactory.notifyTaskCacheIdleListeners();
                                 break;
                             }
@@ -103,20 +102,20 @@ public class LottieCompositionFactory {
                     switch (i2) {
                         case 0:
                             AtomicBoolean atomicBoolean2 = atomicBoolean;
-                            HashMap hashMap2 = (HashMap) LottieCompositionFactory.taskCache;
-                            hashMap2.remove(str);
+                            HashMap map2 = (HashMap) LottieCompositionFactory.taskCache;
+                            map2.remove(str);
                             atomicBoolean2.set(true);
-                            if (hashMap2.size() == 0) {
+                            if (map2.size() == 0) {
                                 LottieCompositionFactory.notifyTaskCacheIdleListeners();
                                 break;
                             }
                             break;
                         default:
                             AtomicBoolean atomicBoolean3 = atomicBoolean;
-                            HashMap hashMap3 = (HashMap) LottieCompositionFactory.taskCache;
-                            hashMap3.remove(str);
+                            HashMap map3 = (HashMap) LottieCompositionFactory.taskCache;
+                            map3.remove(str);
                             atomicBoolean3.set(true);
-                            if (hashMap3.size() == 0) {
+                            if (map3.size() == 0) {
                                 LottieCompositionFactory.notifyTaskCacheIdleListeners();
                                 break;
                             }
@@ -125,9 +124,9 @@ public class LottieCompositionFactory {
                 }
             });
             if (!atomicBoolean.get()) {
-                HashMap hashMap2 = (HashMap) taskCache;
-                hashMap2.put(str, lottieTask2);
-                if (hashMap2.size() == 1) {
+                HashMap map2 = (HashMap) taskCache;
+                map2.put(str, lottieTask2);
+                if (map2.size() == 1) {
                     notifyTaskCacheIdleListeners();
                 }
             }
@@ -136,8 +135,8 @@ public class LottieCompositionFactory {
     }
 
     public static LottieTask fromAsset(Context context, String str) {
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("asset_", str);
-        return cache(m, new LottieCompositionFactory$$ExternalSyntheticLambda0(context.getApplicationContext(), str, m, 1), null);
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("asset_", str);
+        return cache(strM, new LottieCompositionFactory$$ExternalSyntheticLambda0(context.getApplicationContext(), str, strM, 1), null);
     }
 
     public static LottieResult fromAssetSync(Context context, String str, String str2) {
@@ -151,7 +150,7 @@ public class LottieCompositionFactory {
         }
     }
 
-    public static LottieResult fromJsonInputStreamSync(InputStream inputStream, String str) {
+    public static LottieResult fromJsonInputStreamSync(InputStream inputStream, String str) throws IOException {
         try {
             RealBufferedSource realBufferedSource = new RealBufferedSource(Okio.source(inputStream));
             String[] strArr = JsonReader.REPLACEMENT_CHARS;
@@ -161,14 +160,14 @@ public class LottieCompositionFactory {
         }
     }
 
-    public static LottieResult fromJsonReaderSyncInternal(JsonUtf8Reader jsonUtf8Reader, String str, boolean z) {
+    public static LottieResult fromJsonReaderSyncInternal(JsonUtf8Reader jsonUtf8Reader, String str, boolean z) throws IOException {
         try {
             try {
-                LottieComposition parse = LottieCompositionMoshiParser.parse(jsonUtf8Reader);
+                LottieComposition lottieComposition = LottieCompositionMoshiParser.parse(jsonUtf8Reader);
                 if (str != null) {
-                    LottieCompositionCache.INSTANCE.cache.put(str, parse);
+                    LottieCompositionCache.INSTANCE.cache.put(str, lottieComposition);
                 }
-                LottieResult lottieResult = new LottieResult(parse);
+                LottieResult lottieResult = new LottieResult(lottieComposition);
                 if (z) {
                     Utils.closeQuietly(jsonUtf8Reader);
                 }
@@ -214,11 +213,11 @@ public class LottieCompositionFactory {
                         }
                         i2++;
                     }
-                } catch (NoSuchMethodError unused) {
+                } catch (Exception unused) {
+                    Logger.INSTANCE.getClass();
                     bool = Boolean.FALSE;
                 }
-            } catch (Exception unused2) {
-                Logger.INSTANCE.getClass();
+            } catch (NoSuchMethodError unused2) {
                 bool = Boolean.FALSE;
             }
             return bool.booleanValue() ? fromZipStreamSync(context, new ZipInputStream(new RealBufferedSource$inputStream$1(realBufferedSource)), str) : fromJsonInputStreamSync(new RealBufferedSource$inputStream$1(realBufferedSource), str);
@@ -227,7 +226,7 @@ public class LottieCompositionFactory {
         }
     }
 
-    public static LottieResult fromZipStreamSync(Context context, ZipInputStream zipInputStream, String str) {
+    public static LottieResult fromZipStreamSync(Context context, ZipInputStream zipInputStream, String str) throws IOException {
         try {
             return fromZipStreamSyncInternal(context, zipInputStream, str);
         } finally {
@@ -235,10 +234,10 @@ public class LottieCompositionFactory {
         }
     }
 
-    public static LottieResult fromZipStreamSyncInternal(Context context, ZipInputStream zipInputStream, String str) {
+    public static LottieResult fromZipStreamSyncInternal(Context context, ZipInputStream zipInputStream, String str) throws IOException {
         LottieImageAsset lottieImageAsset;
-        HashMap hashMap = new HashMap();
-        HashMap hashMap2 = new HashMap();
+        HashMap map = new HashMap();
+        HashMap map2 = new HashMap();
         try {
             ZipEntry nextEntry = zipInputStream.getNextEntry();
             LottieComposition lottieComposition = null;
@@ -252,55 +251,53 @@ public class LottieCompositionFactory {
                     RealBufferedSource realBufferedSource = new RealBufferedSource(Okio.source(zipInputStream));
                     String[] strArr = JsonReader.REPLACEMENT_CHARS;
                     lottieComposition = (LottieComposition) fromJsonReaderSyncInternal(new JsonUtf8Reader(realBufferedSource), null, false).value;
-                } else {
-                    if (!name.contains(".png") && !name.contains(".webp") && !name.contains(".jpg") && !name.contains(".jpeg")) {
-                        if (!name.contains(".ttf") && !name.contains(".otf")) {
-                            zipInputStream.closeEntry();
-                        }
-                        String[] split = name.split("/");
-                        String str2 = split[split.length - 1];
-                        String str3 = str2.split("\\.")[0];
-                        File file = new File(context.getCacheDir(), str2);
-                        new FileOutputStream(file);
+                } else if (name.contains(".png") || name.contains(".webp") || name.contains(".jpg") || name.contains(".jpeg")) {
+                    String[] strArrSplit = name.split("/");
+                    map.put(strArrSplit[strArrSplit.length - 1], BitmapFactory.decodeStream(zipInputStream));
+                } else if (name.contains(".ttf") || name.contains(".otf")) {
+                    String[] strArrSplit2 = name.split("/");
+                    String str2 = strArrSplit2[strArrSplit2.length - 1];
+                    String str3 = str2.split("\\.")[0];
+                    File file = new File(context.getCacheDir(), str2);
+                    new FileOutputStream(file);
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream(file);
                         try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(file);
-                            try {
-                                byte[] bArr = new byte[4096];
-                                while (true) {
-                                    int read = zipInputStream.read(bArr);
-                                    if (read == -1) {
-                                        break;
-                                    }
-                                    fileOutputStream.write(bArr, 0, read);
+                            byte[] bArr = new byte[4096];
+                            while (true) {
+                                int i = zipInputStream.read(bArr);
+                                if (i == -1) {
+                                    break;
                                 }
-                                fileOutputStream.flush();
-                                fileOutputStream.close();
-                            } catch (Throwable th) {
-                                try {
-                                    fileOutputStream.close();
-                                } catch (Throwable th2) {
-                                    th.addSuppressed(th2);
-                                }
-                                throw th;
+                                fileOutputStream.write(bArr, 0, i);
                             }
-                        } catch (Throwable th3) {
-                            Logger.warning("Unable to save font " + str3 + " to the temporary file: " + str2 + ". ", th3);
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        } catch (Throwable th) {
+                            try {
+                                fileOutputStream.close();
+                            } catch (Throwable th2) {
+                                th.addSuppressed(th2);
+                            }
+                            throw th;
                         }
-                        Typeface createFromFile = Typeface.createFromFile(file);
-                        if (!file.delete()) {
-                            Logger.warning("Failed to delete temp font file " + file.getAbsolutePath() + ".");
-                        }
-                        hashMap2.put(str3, createFromFile);
+                    } catch (Throwable th3) {
+                        Logger.warning("Unable to save font " + str3 + " to the temporary file: " + str2 + ". ", th3);
                     }
-                    String[] split2 = name.split("/");
-                    hashMap.put(split2[split2.length - 1], BitmapFactory.decodeStream(zipInputStream));
+                    Typeface typefaceCreateFromFile = Typeface.createFromFile(file);
+                    if (!file.delete()) {
+                        Logger.warning("Failed to delete temp font file " + file.getAbsolutePath() + ".");
+                    }
+                    map2.put(str3, typefaceCreateFromFile);
+                } else {
+                    zipInputStream.closeEntry();
                 }
                 nextEntry = zipInputStream.getNextEntry();
             }
             if (lottieComposition == null) {
                 return new LottieResult((Throwable) new IllegalArgumentException("Unable to parse composition"));
             }
-            for (Map.Entry entry : hashMap.entrySet()) {
+            for (Map.Entry entry : map.entrySet()) {
                 String str4 = (String) entry.getKey();
                 Iterator it = ((HashMap) lottieComposition.images).values().iterator();
                 while (true) {
@@ -317,7 +314,7 @@ public class LottieCompositionFactory {
                     lottieImageAsset.bitmap = Utils.resizeBitmapIfNeeded((Bitmap) entry.getValue(), lottieImageAsset.width, lottieImageAsset.height);
                 }
             }
-            for (Map.Entry entry2 : hashMap2.entrySet()) {
+            for (Map.Entry entry2 : map2.entrySet()) {
                 boolean z = false;
                 for (Font font : ((HashMap) lottieComposition.fonts).values()) {
                     if (font.family.equals(entry2.getKey())) {
@@ -329,7 +326,7 @@ public class LottieCompositionFactory {
                     Logger.warning("Parsed font for " + ((String) entry2.getKey()) + " however it was not found in the animation.");
                 }
             }
-            if (hashMap.isEmpty()) {
+            if (map.isEmpty()) {
                 Iterator it2 = ((HashMap) lottieComposition.images).entrySet().iterator();
                 while (it2.hasNext()) {
                     LottieImageAsset lottieImageAsset2 = (LottieImageAsset) ((Map.Entry) it2.next()).getValue();
@@ -342,8 +339,8 @@ public class LottieCompositionFactory {
                     String str5 = lottieImageAsset2.fileName;
                     if (str5.startsWith("data:") && str5.indexOf("base64,") > 0) {
                         try {
-                            byte[] decode = Base64.decode(str5.substring(str5.indexOf(44) + 1), 0);
-                            lottieImageAsset2.bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length, options);
+                            byte[] bArrDecode = Base64.decode(str5.substring(str5.indexOf(44) + 1), 0);
+                            lottieImageAsset2.bitmap = BitmapFactory.decodeByteArray(bArrDecode, 0, bArrDecode.length, options);
                         } catch (IllegalArgumentException e) {
                             Logger.warning("data URL did not have correct base64 format.", e);
                             return null;

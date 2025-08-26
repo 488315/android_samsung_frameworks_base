@@ -11,7 +11,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobImpl;
 import kotlinx.coroutines.JobKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RememberedCoroutineScope implements CoroutineScope, RememberObserver {
     public static final CoroutineContext CancelledCoroutineContext;
@@ -20,7 +19,6 @@ public final class RememberedCoroutineScope implements CoroutineScope, RememberO
     public final CoroutineContext overlayContext;
     public final CoroutineContext parentContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,33 +56,33 @@ public final class RememberedCoroutineScope implements CoroutineScope, RememberO
 
     @Override // kotlinx.coroutines.CoroutineScope
     public final CoroutineContext getCoroutineContext() {
-        CoroutineContext coroutineContext;
-        CoroutineContext coroutineContext2 = this._coroutineContext;
-        if (coroutineContext2 == null || coroutineContext2 == CancelledCoroutineContext) {
+        CoroutineContext coroutineContextPlus;
+        CoroutineContext coroutineContext = this._coroutineContext;
+        if (coroutineContext == null || coroutineContext == CancelledCoroutineContext) {
             CompositionErrorContextImpl compositionErrorContextImpl = (CompositionErrorContextImpl) this.parentContext.get(CompositionErrorContextImpl.Key);
             CoroutineContext rememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1 = compositionErrorContextImpl != null ? new RememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1(CoroutineExceptionHandler.Key, compositionErrorContextImpl, this) : EmptyCoroutineContext.INSTANCE;
             synchronized (this.lock) {
                 try {
-                    coroutineContext = this._coroutineContext;
-                    if (coroutineContext == null) {
+                    coroutineContextPlus = this._coroutineContext;
+                    if (coroutineContextPlus == null) {
+                        CoroutineContext coroutineContext2 = this.parentContext;
+                        coroutineContextPlus = coroutineContext2.plus(new JobImpl((Job) coroutineContext2.get(Job.Key))).plus(this.overlayContext).plus(rememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1);
+                    } else if (coroutineContextPlus == CancelledCoroutineContext) {
                         CoroutineContext coroutineContext3 = this.parentContext;
-                        coroutineContext = coroutineContext3.plus(new JobImpl((Job) coroutineContext3.get(Job.Key))).plus(this.overlayContext).plus(rememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1);
-                    } else if (coroutineContext == CancelledCoroutineContext) {
-                        CoroutineContext coroutineContext4 = this.parentContext;
-                        JobImpl jobImpl = new JobImpl((Job) coroutineContext4.get(Job.Key));
+                        JobImpl jobImpl = new JobImpl((Job) coroutineContext3.get(Job.Key));
                         jobImpl.cancelImpl$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(new ForgottenCoroutineScopeException());
-                        coroutineContext = coroutineContext4.plus(jobImpl).plus(this.overlayContext).plus(rememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1);
+                        coroutineContextPlus = coroutineContext3.plus(jobImpl).plus(this.overlayContext).plus(rememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1);
                     }
-                    this._coroutineContext = coroutineContext;
+                    this._coroutineContext = coroutineContextPlus;
                     Unit unit = Unit.INSTANCE;
                 } catch (Throwable th) {
                     throw th;
                 }
             }
-            coroutineContext2 = coroutineContext;
+            coroutineContext = coroutineContextPlus;
         }
-        coroutineContext2.getClass();
-        return coroutineContext2;
+        coroutineContext.getClass();
+        return coroutineContext;
     }
 
     @Override // androidx.compose.runtime.RememberObserver

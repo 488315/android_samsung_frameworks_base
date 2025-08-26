@@ -4,11 +4,9 @@ import android.graphics.drawable.Drawable;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface MediaTttIcon {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Loaded implements MediaTttIcon {
         public final Drawable drawable;
 
@@ -32,7 +30,6 @@ public interface MediaTttIcon {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resource implements MediaTttIcon {
         public final int res;
 

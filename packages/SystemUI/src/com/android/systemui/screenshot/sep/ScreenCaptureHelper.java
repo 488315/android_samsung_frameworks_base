@@ -15,7 +15,6 @@ import com.android.systemui.util.SettingsHelper;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenCaptureHelper {
     public static final String TAG;
@@ -48,7 +47,6 @@ public class ScreenCaptureHelper {
     public final DisplayInfo displayInfo = new DisplayInfo();
     public Rect rectToCapture = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -151,10 +149,10 @@ public class ScreenCaptureHelper {
             matrix.preRotate(-this.screenDegrees);
             matrix.mapPoints(fArr);
             fArr[0] = Math.abs(fArr[0]);
-            float abs = Math.abs(fArr[1]);
-            fArr[1] = abs;
+            float fAbs = Math.abs(fArr[1]);
+            fArr[1] = fAbs;
             this.screenNativeWidth = fArr[0];
-            this.screenNativeHeight = abs;
+            this.screenNativeHeight = fAbs;
         }
         this.builtInDisplayId = this.capturedDisplayId;
     }
@@ -202,44 +200,44 @@ public class ScreenCaptureHelper {
         int i15 = this.builtInDisplayId;
         Rect rect2 = this.stackBounds;
         int i16 = this.windowMode;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "ScreenCaptureHelper(screenCaptureType=", ", screenCaptureSweepDirection=", ", capturedDisplayId=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", screenCaptureOrigin=", i4, ", safeInsetLeft=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i5, ", safeInsetTop=", i6, ", safeInsetRight=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i7, ", safeInsetBottom=", i8, ", captureSharedBundle=");
-        m.append(bundle);
-        m.append(", statusBarHeight=");
-        m.append(i9);
-        m.append(", navigationBarHeight=");
-        m.append(i10);
-        m.append(", isStatusBarVisible=");
-        m.append(z);
-        m.append(", isNavigationBarVisible=");
-        m.append(z2);
-        m.append(", mBundle=");
-        m.append(bundle2);
-        m.append(", displayContext=");
-        m.append(context);
-        m.append(", displayWidth=");
-        m.append(i11);
-        m.append(", displayHeight=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i12, ", screenWidth=", i13, ", screenHeight=");
-        m.append(i14);
-        m.append(", rectToCapture=");
-        m.append(rect);
-        m.append(", screenDegrees=");
-        m.append(f);
-        m.append(", screenNativeWidth=");
-        m.append(f2);
-        m.append(", screenNativeHeight=");
-        m.append(f3);
-        m.append(", builtInDisplayId=");
-        m.append(i15);
-        m.append(", stackBounds=");
-        m.append(rect2);
-        m.append(", windowMode=");
-        m.append(i16);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "ScreenCaptureHelper(screenCaptureType=", ", screenCaptureSweepDirection=", ", capturedDisplayId=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", screenCaptureOrigin=", i4, ", safeInsetLeft=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i5, ", safeInsetTop=", i6, ", safeInsetRight=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i7, ", safeInsetBottom=", i8, ", captureSharedBundle=");
+        sbM.append(bundle);
+        sbM.append(", statusBarHeight=");
+        sbM.append(i9);
+        sbM.append(", navigationBarHeight=");
+        sbM.append(i10);
+        sbM.append(", isStatusBarVisible=");
+        sbM.append(z);
+        sbM.append(", isNavigationBarVisible=");
+        sbM.append(z2);
+        sbM.append(", mBundle=");
+        sbM.append(bundle2);
+        sbM.append(", displayContext=");
+        sbM.append(context);
+        sbM.append(", displayWidth=");
+        sbM.append(i11);
+        sbM.append(", displayHeight=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i12, ", screenWidth=", i13, ", screenHeight=");
+        sbM.append(i14);
+        sbM.append(", rectToCapture=");
+        sbM.append(rect);
+        sbM.append(", screenDegrees=");
+        sbM.append(f);
+        sbM.append(", screenNativeWidth=");
+        sbM.append(f2);
+        sbM.append(", screenNativeHeight=");
+        sbM.append(f3);
+        sbM.append(", builtInDisplayId=");
+        sbM.append(i15);
+        sbM.append(", stackBounds=");
+        sbM.append(rect2);
+        sbM.append(", windowMode=");
+        sbM.append(i16);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public Bitmap onPostScreenshot(Bitmap bitmap) {

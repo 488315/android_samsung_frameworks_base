@@ -13,7 +13,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QRCodeScannerTileUserActionInteractor implements QSTileUserActionInteractor {
     public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
@@ -24,7 +23,7 @@ public final class QRCodeScannerTileUserActionInteractor implements QSTileUserAc
 
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
     public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
-        ActivityTransitionAnimator.Controller controller;
+        ActivityTransitionAnimator.Controller controllerActivityTransitionController;
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
             Object obj = qSTileInput.data;
@@ -35,11 +34,11 @@ public final class QRCodeScannerTileUserActionInteractor implements QSTileUserAc
                 QSTileIntentUserInputHandlerImpl qSTileIntentUserInputHandlerImpl = (QSTileIntentUserInputHandlerImpl) this.qsTileIntentUserActionHandler;
                 if (expandable != null) {
                     qSTileIntentUserInputHandlerImpl.getClass();
-                    controller = expandable.activityTransitionController(32);
+                    controllerActivityTransitionController = expandable.activityTransitionController(32);
                 } else {
-                    controller = null;
+                    controllerActivityTransitionController = null;
                 }
-                qSTileIntentUserInputHandlerImpl.activityStarter.startActivity(intent, true, controller, true);
+                qSTileIntentUserInputHandlerImpl.activityStarter.startActivity(intent, true, controllerActivityTransitionController, true);
             } else if (!(qRCodeScannerTileModel instanceof QRCodeScannerTileModel.TemporarilyUnavailable)) {
                 throw new NoWhenBranchMatchedException();
             }

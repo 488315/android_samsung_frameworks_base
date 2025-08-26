@@ -38,7 +38,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionReferenceImpl implements Function2 {
     public SecControlsUiControllerImpl$show$4(Object obj) {
@@ -48,7 +47,7 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
         Object obj3;
-        Object obj4;
+        Object next;
         SelectedItem componentItem;
         PendingIntent pendingIntent;
         List list = (List) obj;
@@ -60,11 +59,11 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
         secControlsUiControllerImpl.serviceInfos = list2;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
-        for (Object obj5 : list) {
-            if (((SecSelectionItem) obj5).isPanel) {
-                arrayList.add(obj5);
+        for (Object obj4 : list) {
+            if (((SecSelectionItem) obj4).isPanel) {
+                arrayList.add(obj4);
             } else {
-                arrayList2.add(obj5);
+                arrayList2.add(obj4);
             }
         }
         Pair pair = new Pair(arrayList, arrayList2);
@@ -109,15 +108,15 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
                 Iterator it = list6.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj4 = null;
+                        next = null;
                         break;
                     }
-                    obj4 = it.next();
-                    if (Intrinsics.areEqual(((ComponentInfo) obj4).componentName, secSelectionItem2.componentName)) {
+                    next = it.next();
+                    if (Intrinsics.areEqual(((ComponentInfo) next).componentName, secSelectionItem2.componentName)) {
                         break;
                     }
                 }
-                ComponentInfo componentInfo = (ComponentInfo) obj4;
+                ComponentInfo componentInfo = (ComponentInfo) next;
                 if (componentInfo == null) {
                     ComponentInfo.Companion.getClass();
                     componentInfo = ComponentInfo.EMPTY_COMPONENT_INFO;
@@ -128,9 +127,9 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
                 secControlsUiControllerImpl.selectedItem = componentItem;
                 SelectedComponentRepository.SelectedComponent selectedComponent = new SelectedComponentRepository.SelectedComponent(componentItem);
                 SelectedComponentRepositoryImpl selectedComponentRepositoryImpl = (SelectedComponentRepositoryImpl) secControlsUiControllerImpl.selectedComponentRepository;
-                SharedPreferences.Editor edit = ((UserFileManagerImpl) selectedComponentRepositoryImpl.userFileManager).getSharedPreferences$1(((UserTrackerImpl) selectedComponentRepositoryImpl.userTracker).getUserId(), SystemUIAnalytics.CONTROL_PREF_NAME).edit();
+                SharedPreferences.Editor editorEdit = ((UserFileManagerImpl) selectedComponentRepositoryImpl.userFileManager).getSharedPreferences$1(((UserTrackerImpl) selectedComponentRepositoryImpl.userTracker).getUserId(), SystemUIAnalytics.CONTROL_PREF_NAME).edit();
                 ComponentName componentName = selectedComponent.componentName;
-                edit.putString("controls_component", componentName != null ? componentName.flattenToString() : null).putString("controls_structure", selectedComponent.name).putBoolean("controls_is_panel", selectedComponent.isPanel).apply();
+                editorEdit.putString("controls_component", componentName != null ? componentName.flattenToString() : null).putString("controls_structure", selectedComponent.name).putBoolean("controls_is_panel", selectedComponent.isPanel).apply();
             }
             if (!(secControlsUiControllerImpl.taskViewFactory.isPresent() && z2) && z2) {
                 Log.w("SecControlsUiControllerImpl", "Not TaskViewFactory to display panel " + secSelectionItem2);
@@ -143,11 +142,11 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
                 String name = MainFragment.class.getName();
                 String packageName = secSelectionItem2.componentName.getPackageName();
                 Lazy lazy = secControlsUiControllerImpl.controlsController;
-                SafeIconLoader create = secControlsUiControllerImpl.safeIconLoaderFactory.create(i3, packageName, ((ControlsController) lazy.get()).getCurrentUserId());
+                SafeIconLoader safeIconLoaderCreate = secControlsUiControllerImpl.safeIconLoaderFactory.create(i3, packageName, ((ControlsController) lazy.get()).getCurrentUserId());
                 if (secControlsUiControllerImpl.mainFragment == null) {
                     FragmentManagerImpl fragmentManagerImpl = secControlsUiControllerImpl.fragmentManager;
-                    Fragment findFragmentByTag = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentByTag(name) : null;
-                    MainFragment mainFragment = findFragmentByTag instanceof MainFragment ? (MainFragment) findFragmentByTag : null;
+                    Fragment fragmentFindFragmentByTag = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentByTag(name) : null;
+                    MainFragment mainFragment = fragmentFindFragmentByTag instanceof MainFragment ? (MainFragment) fragmentFindFragmentByTag : null;
                     if (mainFragment == null) {
                         mainFragment = new MainFragment((ControlsActivityStarter) secControlsUiControllerImpl.controlsActivityStarter.get(), secControlsUiControllerImpl.layoutUtil, secControlsUiControllerImpl.saLogger, secControlsUiControllerImpl.badgeSubject, (ControlsListingController) secControlsUiControllerImpl.controlsListingController.get(), secControlsUiControllerImpl);
                     }
@@ -158,7 +157,7 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$4 extends FunctionR
                 if (mainFragment2.controlAdapter == null && secControlsUiControllerImpl.activityContext != null && secControlsUiControllerImpl.parent != null) {
                     Context context = secControlsUiControllerImpl.activityContext;
                     context.getClass();
-                    StatefulControlAdapter statefulControlAdapter = new StatefulControlAdapter(context, (ControlsController) lazy.get(), secControlsUiControllerImpl.uiExecutor, secControlsUiControllerImpl.bgExecutor, secControlsUiControllerImpl.controlActionCoordinator, secControlsUiControllerImpl.secControlActionCoordinator, secControlsUiControllerImpl.controlsMetricsLogger, secControlsUiControllerImpl.layoutUtil, secControlsUiControllerImpl.controlsUtil, secControlsUiControllerImpl.controlsPositionChangedCallback, secControlsUiControllerImpl.spinnerTouchCallback, secControlsUiControllerImpl.spinnerItemSelectionChangedCallback, create, secControlsUiControllerImpl.openAppButtonClickListener, secControlsUiControllerImpl.auiFacade, secControlsUiControllerImpl.saLogger, secControlsUiControllerImpl.badgeProvider, ((ControlsController) lazy.get()).getCurrentUserId());
+                    StatefulControlAdapter statefulControlAdapter = new StatefulControlAdapter(context, (ControlsController) lazy.get(), secControlsUiControllerImpl.uiExecutor, secControlsUiControllerImpl.bgExecutor, secControlsUiControllerImpl.controlActionCoordinator, secControlsUiControllerImpl.secControlActionCoordinator, secControlsUiControllerImpl.controlsMetricsLogger, secControlsUiControllerImpl.layoutUtil, secControlsUiControllerImpl.controlsUtil, secControlsUiControllerImpl.controlsPositionChangedCallback, secControlsUiControllerImpl.spinnerTouchCallback, secControlsUiControllerImpl.spinnerItemSelectionChangedCallback, safeIconLoaderCreate, secControlsUiControllerImpl.openAppButtonClickListener, secControlsUiControllerImpl.auiFacade, secControlsUiControllerImpl.saLogger, secControlsUiControllerImpl.badgeProvider, ((ControlsController) lazy.get()).getCurrentUserId());
                     MainFragment mainFragment3 = secControlsUiControllerImpl.mainFragment;
                     if (mainFragment3 != null) {
                         RecyclerView recyclerView = mainFragment3.listView;

@@ -48,7 +48,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSCoverPlayLastSongHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -68,7 +67,6 @@ public final class QSCoverPlayLastSongHelper {
     public final FrameLayout restartViewContainer;
     public final SemSoundAssistantManager soundAssistantManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -103,7 +101,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 MediaSession.Token token = qSCoverPlayLastSongHelper2.mediaSessionToken;
                                 String str = qSCoverPlayLastSongHelper2.lastPkgName;
                                 boolean z = qSCoverPlayLastSongHelper2.enabled;
@@ -113,22 +111,22 @@ public final class QSCoverPlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "QSCoverPlayLastSongHelper");
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = QSCoverPlayLastSongHelper.this;
-                                boolean z2 = false;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = qSCoverPlayLastSongHelper;
+                                boolean zIsPackageEnabledForCoverLauncher = false;
                                 if (!qSCoverPlayLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
-                                    List queryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
-                                    ResolveInfo resolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
-                                    if (queryIntentActivitiesAsUser.isEmpty()) {
+                                    List listQueryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
+                                    ResolveInfo resolveInfoResolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
+                                    if (listQueryIntentActivitiesAsUser.isEmpty()) {
                                         Log.d("QSCoverPlayLastSongHelper", "ON-CLICK, No apps for INTENT_ACTION_MUSIC_PLAYER");
                                         SecQSPanelResourceCommon.Companion companion = SecQSPanelResourceCommon.Companion;
                                         Context context2 = qSCoverPlayLastSongHelper3.context;
                                         companion.getClass();
                                         Toast.makeText(qSCoverPlayLastSongHelper3.context, SecQSPanelResourceCommon.Companion.string(R.string.sec_qs_music_no_music_button_toast_error_msg, context2), 0).show();
                                     } else {
-                                        if (resolveActivity != null) {
+                                        if (resolveInfoResolveActivity != null) {
                                             try {
-                                                z2 = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
+                                                zIsPackageEnabledForCoverLauncher = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveInfoResolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
                                             } catch (RemoteException e) {
                                                 Log.w("QSCoverPlayLastSongHelper", "unable to get isPackageEnabledForCoverLauncher()", e);
                                             }
@@ -137,7 +135,7 @@ public final class QSCoverPlayLastSongHelper {
                                         intent.putExtra("com.android.internal.app.ChooserActivity.EXTRA_PRIVATE_RETAIN_IN_ON_STOP", true);
                                         PendingIntent activityAsUser = PendingIntent.getActivityAsUser(qSCoverPlayLastSongHelper3.context, 0, intent, 201326592, null, UserHandle.CURRENT);
                                         Intent intent2 = new Intent();
-                                        if (z2) {
+                                        if (zIsPackageEnabledForCoverLauncher) {
                                             intent2.putExtra("runOnCover", true);
                                         }
                                         intent2.putExtra("showCoverToast", true);
@@ -165,7 +163,7 @@ public final class QSCoverPlayLastSongHelper {
                                 } else {
                                     String str2 = qSCoverPlayLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = qSCoverPlayLastSongHelper;
                                         Log.d("QSCoverPlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) qSCoverPlayLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -173,11 +171,11 @@ public final class QSCoverPlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_PLAY_LAST_SONG_COVER);
                                     }
                                 }
-                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = QSCoverPlayLastSongHelper.this;
+                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = qSCoverPlayLastSongHelper5;
                                         if (qSCoverPlayLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -192,7 +190,7 @@ public final class QSCoverPlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "QSCoverPlayLastSongHelper", str != null, token != null);
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper2.lastPkgName = str;
                                 qSCoverPlayLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -209,7 +207,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "QSCoverPlayLastSongHelper", qSCoverPlayLastSongHelper2.playerVisible, z);
                                 if (qSCoverPlayLastSongHelper2.playerVisible) {
                                     qSCoverPlayLastSongHelper2.handler.removeCallbacksAndMessages(null);
@@ -238,7 +236,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 MediaSession.Token token = qSCoverPlayLastSongHelper2.mediaSessionToken;
                                 String str = qSCoverPlayLastSongHelper2.lastPkgName;
                                 boolean z = qSCoverPlayLastSongHelper2.enabled;
@@ -248,22 +246,22 @@ public final class QSCoverPlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "QSCoverPlayLastSongHelper");
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = QSCoverPlayLastSongHelper.this;
-                                boolean z2 = false;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = qSCoverPlayLastSongHelper;
+                                boolean zIsPackageEnabledForCoverLauncher = false;
                                 if (!qSCoverPlayLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
-                                    List queryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
-                                    ResolveInfo resolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
-                                    if (queryIntentActivitiesAsUser.isEmpty()) {
+                                    List listQueryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
+                                    ResolveInfo resolveInfoResolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
+                                    if (listQueryIntentActivitiesAsUser.isEmpty()) {
                                         Log.d("QSCoverPlayLastSongHelper", "ON-CLICK, No apps for INTENT_ACTION_MUSIC_PLAYER");
                                         SecQSPanelResourceCommon.Companion companion = SecQSPanelResourceCommon.Companion;
                                         Context context2 = qSCoverPlayLastSongHelper3.context;
                                         companion.getClass();
                                         Toast.makeText(qSCoverPlayLastSongHelper3.context, SecQSPanelResourceCommon.Companion.string(R.string.sec_qs_music_no_music_button_toast_error_msg, context2), 0).show();
                                     } else {
-                                        if (resolveActivity != null) {
+                                        if (resolveInfoResolveActivity != null) {
                                             try {
-                                                z2 = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
+                                                zIsPackageEnabledForCoverLauncher = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveInfoResolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
                                             } catch (RemoteException e) {
                                                 Log.w("QSCoverPlayLastSongHelper", "unable to get isPackageEnabledForCoverLauncher()", e);
                                             }
@@ -272,7 +270,7 @@ public final class QSCoverPlayLastSongHelper {
                                         intent.putExtra("com.android.internal.app.ChooserActivity.EXTRA_PRIVATE_RETAIN_IN_ON_STOP", true);
                                         PendingIntent activityAsUser = PendingIntent.getActivityAsUser(qSCoverPlayLastSongHelper3.context, 0, intent, 201326592, null, UserHandle.CURRENT);
                                         Intent intent2 = new Intent();
-                                        if (z2) {
+                                        if (zIsPackageEnabledForCoverLauncher) {
                                             intent2.putExtra("runOnCover", true);
                                         }
                                         intent2.putExtra("showCoverToast", true);
@@ -300,7 +298,7 @@ public final class QSCoverPlayLastSongHelper {
                                 } else {
                                     String str2 = qSCoverPlayLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = qSCoverPlayLastSongHelper;
                                         Log.d("QSCoverPlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) qSCoverPlayLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -308,11 +306,11 @@ public final class QSCoverPlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_PLAY_LAST_SONG_COVER);
                                     }
                                 }
-                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = QSCoverPlayLastSongHelper.this;
+                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = qSCoverPlayLastSongHelper5;
                                         if (qSCoverPlayLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -327,7 +325,7 @@ public final class QSCoverPlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "QSCoverPlayLastSongHelper", str != null, token != null);
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper2.lastPkgName = str;
                                 qSCoverPlayLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -344,7 +342,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "QSCoverPlayLastSongHelper", qSCoverPlayLastSongHelper2.playerVisible, z);
                                 if (qSCoverPlayLastSongHelper2.playerVisible) {
                                     qSCoverPlayLastSongHelper2.handler.removeCallbacksAndMessages(null);
@@ -373,7 +371,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 MediaSession.Token token = qSCoverPlayLastSongHelper2.mediaSessionToken;
                                 String str = qSCoverPlayLastSongHelper2.lastPkgName;
                                 boolean z = qSCoverPlayLastSongHelper2.enabled;
@@ -383,22 +381,22 @@ public final class QSCoverPlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "QSCoverPlayLastSongHelper");
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = QSCoverPlayLastSongHelper.this;
-                                boolean z2 = false;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper3 = qSCoverPlayLastSongHelper;
+                                boolean zIsPackageEnabledForCoverLauncher = false;
                                 if (!qSCoverPlayLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
-                                    List queryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
-                                    ResolveInfo resolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
-                                    if (queryIntentActivitiesAsUser.isEmpty()) {
+                                    List listQueryIntentActivitiesAsUser = qSCoverPlayLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser());
+                                    ResolveInfo resolveInfoResolveActivity = qSCoverPlayLastSongHelper3.context.getPackageManager().resolveActivity(intent, 65536);
+                                    if (listQueryIntentActivitiesAsUser.isEmpty()) {
                                         Log.d("QSCoverPlayLastSongHelper", "ON-CLICK, No apps for INTENT_ACTION_MUSIC_PLAYER");
                                         SecQSPanelResourceCommon.Companion companion = SecQSPanelResourceCommon.Companion;
                                         Context context2 = qSCoverPlayLastSongHelper3.context;
                                         companion.getClass();
                                         Toast.makeText(qSCoverPlayLastSongHelper3.context, SecQSPanelResourceCommon.Companion.string(R.string.sec_qs_music_no_music_button_toast_error_msg, context2), 0).show();
                                     } else {
-                                        if (resolveActivity != null) {
+                                        if (resolveInfoResolveActivity != null) {
                                             try {
-                                                z2 = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
+                                                zIsPackageEnabledForCoverLauncher = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(resolveInfoResolveActivity.getComponentInfo().packageName, ActivityManager.getCurrentUser());
                                             } catch (RemoteException e) {
                                                 Log.w("QSCoverPlayLastSongHelper", "unable to get isPackageEnabledForCoverLauncher()", e);
                                             }
@@ -407,7 +405,7 @@ public final class QSCoverPlayLastSongHelper {
                                         intent.putExtra("com.android.internal.app.ChooserActivity.EXTRA_PRIVATE_RETAIN_IN_ON_STOP", true);
                                         PendingIntent activityAsUser = PendingIntent.getActivityAsUser(qSCoverPlayLastSongHelper3.context, 0, intent, 201326592, null, UserHandle.CURRENT);
                                         Intent intent2 = new Intent();
-                                        if (z2) {
+                                        if (zIsPackageEnabledForCoverLauncher) {
                                             intent2.putExtra("runOnCover", true);
                                         }
                                         intent2.putExtra("showCoverToast", true);
@@ -435,7 +433,7 @@ public final class QSCoverPlayLastSongHelper {
                                 } else {
                                     String str2 = qSCoverPlayLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper4 = qSCoverPlayLastSongHelper;
                                         Log.d("QSCoverPlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) qSCoverPlayLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -443,11 +441,11 @@ public final class QSCoverPlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_PLAY_LAST_SONG_COVER);
                                     }
                                 }
-                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = QSCoverPlayLastSongHelper.this;
+                                final QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper5 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = QSCoverPlayLastSongHelper.this;
+                                        QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper6 = qSCoverPlayLastSongHelper5;
                                         if (qSCoverPlayLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -462,7 +460,7 @@ public final class QSCoverPlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "QSCoverPlayLastSongHelper", str != null, token != null);
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 qSCoverPlayLastSongHelper2.lastPkgName = str;
                                 qSCoverPlayLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -479,7 +477,7 @@ public final class QSCoverPlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.qp.media.QSCoverPlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = QSCoverPlayLastSongHelper.this;
+                                QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper2 = qSCoverPlayLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "QSCoverPlayLastSongHelper", qSCoverPlayLastSongHelper2.playerVisible, z);
                                 if (qSCoverPlayLastSongHelper2.playerVisible) {
                                     qSCoverPlayLastSongHelper2.handler.removeCallbacksAndMessages(null);

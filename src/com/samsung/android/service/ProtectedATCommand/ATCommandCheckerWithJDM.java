@@ -21,18 +21,18 @@ public class ATCommandCheckerWithJDM extends ATCommandChecker {
     @Override // com.samsung.android.service.ProtectedATCommand.ATCommandChecker
     protected int checkProtectedCommand(Device device, ATCommands aTCommands, String str) {
         Slog.i("PACMClassifier", "This Command is a protected command");
-        int checkAllCondition = checkAllCondition(device, aTCommands, str);
-        if (checkAllCondition != 1) {
-            return checkAllCondition;
+        int iCheckAllCondition = checkAllCondition(device, aTCommands, str);
+        if (iCheckAllCondition != 1) {
+            return iCheckAllCondition;
         }
         return 161;
     }
 
     @Override // com.samsung.android.service.ProtectedATCommand.ATCommandChecker
     protected int checkUnregisteredCommand(Device device, ATCommands aTCommands) {
-        int checkAbsoluteCondition = checkAbsoluteCondition(device, aTCommands);
-        if (checkAbsoluteCondition != 1) {
-            return checkAbsoluteCondition;
+        int iCheckAbsoluteCondition = checkAbsoluteCondition(device, aTCommands);
+        if (iCheckAbsoluteCondition != 1) {
+            return iCheckAbsoluteCondition;
         }
         Slog.i("PACMClassifier", "Although this command is an unregistered command, the command is allowed because this device is a JDM device");
         return 161;

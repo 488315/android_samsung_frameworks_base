@@ -57,7 +57,7 @@ public final class DisplayShape implements Parcelable {
         this.mScale = f2;
     }
 
-    public static DisplayShape fromResources(Resources resources, String str, int i, int i2, int i3, int i4) {
+    public static DisplayShape fromResources(Resources resources, String str, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         boolean builtInDisplayIsRound = RoundedCorners.getBuiltInDisplayIsRound(resources, str);
         String specString = getSpecString(resources, str);
         if (specString == null || specString.isEmpty()) {
@@ -83,16 +83,16 @@ public final class DisplayShape implements Parcelable {
         return "M0,0 L" + i + ",0 L" + i + "," + i2 + " L0," + i2 + " Z";
     }
 
-    public static String getSpecString(Resources resources, String str) {
+    public static String getSpecString(Resources resources, String str) throws Resources.NotFoundException {
         String string;
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.config_displayShapeArray);
-        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < obtainTypedArray.length()) {
-            string = obtainTypedArray.getString(displayUniqueIdConfigIndex);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.config_displayShapeArray);
+        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < typedArrayObtainTypedArray.length()) {
+            string = typedArrayObtainTypedArray.getString(displayUniqueIdConfigIndex);
         } else {
             string = resources.getString(R.string.config_mainDisplayShape);
         }
-        obtainTypedArray.recycle();
+        typedArrayObtainTypedArray.recycle();
         return string;
     }
 
@@ -182,8 +182,8 @@ public final class DisplayShape implements Parcelable {
                 if (displayShape.equals(sCacheForPath)) {
                     return sCachedPath;
                 }
-                Path createPathFromPathData = PathParser.createPathFromPathData(displayShape.mDisplayShapeSpec);
-                if (!createPathFromPathData.isEmpty()) {
+                Path pathCreatePathFromPathData = PathParser.createPathFromPathData(displayShape.mDisplayShapeSpec);
+                if (!pathCreatePathFromPathData.isEmpty()) {
                     Matrix matrix = new Matrix();
                     if (displayShape.mRotation != 0) {
                         RotationUtils.transformPhysicalToLogicalCoordinates(displayShape.mRotation, displayShape.mDisplayWidth, displayShape.mDisplayHeight, matrix);
@@ -197,13 +197,13 @@ public final class DisplayShape implements Parcelable {
                     if (displayShape.mScale != 1.0f) {
                         matrix.postScale(displayShape.mScale, displayShape.mScale);
                     }
-                    createPathFromPathData.transform(matrix);
+                    pathCreatePathFromPathData.transform(matrix);
                 }
                 synchronized (obj) {
                     sCacheForPath = displayShape;
-                    sCachedPath = createPathFromPathData;
+                    sCachedPath = pathCreatePathFromPathData;
                 }
-                return createPathFromPathData;
+                return pathCreatePathFromPathData;
             }
         }
     }

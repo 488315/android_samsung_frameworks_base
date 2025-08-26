@@ -17,6 +17,7 @@ import android.graphics.RenderEffect;
 import android.graphics.RenderNode;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -31,6 +32,7 @@ import android.util.Log;
 import android.util.MathUtils;
 import android.view.Display;
 import android.view.DisplayCutout;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -49,6 +51,8 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.widget.OverScroller;
 import android.widget.ScrollView;
+import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.collection.ArraySet;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.picker3.widget.SeslColorSpectrumView$$ExternalSyntheticOutline0;
@@ -60,12 +64,16 @@ import com.android.internal.policy.SystemBarUtils;
 import com.android.keyguard.BouncerPanelExpansionCalculator;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.ExpandHelper;
+import com.android.systemui.LsRune;
 import com.android.systemui.NotiRune;
+import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.animation.ActivityTransitionAnimator;
+import com.android.systemui.animation.ShadeInterpolation;
 import com.android.systemui.animation.TransitionAnimator;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.Flags;
@@ -79,6 +87,7 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.logging.PanelScreenShotLogger;
 import com.android.systemui.media.SecMediaHost;
+import com.android.systemui.noticenter.NotiCenterPlugin;
 import com.android.systemui.notification.FullExpansionPanelNotiAlphaController;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.QS;
@@ -100,12 +109,17 @@ import com.android.systemui.statusbar.DndStatusView;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
 import com.android.systemui.statusbar.NotificationShelf;
 import com.android.systemui.statusbar.NotificationShelfManager;
+import com.android.systemui.statusbar.chips.notification.shared.StatusBarNotifChips;
+import com.android.systemui.statusbar.domain.interactor.SecStatusBarWindowViewTouchedInteractor;
 import com.android.systemui.statusbar.notification.ColorUpdateLogger;
 import com.android.systemui.statusbar.notification.LaunchAnimationParameters;
 import com.android.systemui.statusbar.notification.NotificationUtils;
+import com.android.systemui.statusbar.notification.PhysicsPropertyAnimator;
 import com.android.systemui.statusbar.notification.collection.EntryWithDismissStats;
+import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotifCollection;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
+import com.android.systemui.statusbar.notification.collection.PipelineEntry;
 import com.android.systemui.statusbar.notification.collection.notifcollection.DismissedByUserStats;
 import com.android.systemui.statusbar.notification.collection.provider.NotificationVisibilityProviderImpl;
 import com.android.systemui.statusbar.notification.collection.render.GroupExpansionManager;
@@ -114,23 +128,33 @@ import com.android.systemui.statusbar.notification.collection.render.GroupMember
 import com.android.systemui.statusbar.notification.collection.render.GroupMembershipManagerImpl;
 import com.android.systemui.statusbar.notification.emptyshade.shared.ModesEmptyShadeFix;
 import com.android.systemui.statusbar.notification.emptyshade.ui.view.EmptyShadeView;
+import com.android.systemui.statusbar.notification.footer.ui.view.FooterView;
+import com.android.systemui.statusbar.notification.headsup.AvalancheController;
+import com.android.systemui.statusbar.notification.headsup.HeadsUpAnimationEvent;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpTouchHelper;
 import com.android.systemui.statusbar.notification.headsup.NotificationsHunSharedAnimationValues;
 import com.android.systemui.statusbar.notification.row.ActivatableNotificationView;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
+import com.android.systemui.statusbar.notification.row.NotificationGuts;
+import com.android.systemui.statusbar.notification.row.NotificationSnooze;
 import com.android.systemui.statusbar.notification.row.StackScrollerDecorView;
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.statusbar.notification.shared.NotificationContentAlphaOptimization;
+import com.android.systemui.statusbar.notification.shared.NotificationHeadsUpCycling;
 import com.android.systemui.statusbar.notification.shared.NotificationsLiveDataStoreRefactor;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.notification.stack.NotificationStackSizeCalculator;
+import com.android.systemui.statusbar.notification.stack.StackScrollAlgorithm;
+import com.android.systemui.statusbar.notification.stack.StackStateAnimator;
+import com.android.systemui.statusbar.notification.stack.ViewState;
 import com.android.systemui.statusbar.notification.stack.ui.view.NotificationScrollView;
 import com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1;
-import com.android.systemui.statusbar.notification.stack.ui.viewbinder.SharedNotificationContainerBinder$bind$3;
+import com.android.systemui.statusbar.notification.stack.ui.viewbinder.SharedNotificationContainerBinder;
 import com.android.systemui.statusbar.notification.ui.viewbinder.HeadsUpNotificationViewBinderKt$isHeadsUpAnimatingAway$1$1;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.HeadsUpAppearanceController;
+import com.android.systemui.statusbar.phone.KeyguardBypassController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.android.systemui.statusbar.policy.SplitShadeStateController;
 import com.android.systemui.statusbar.policy.SplitShadeStateControllerImpl;
@@ -140,6 +164,7 @@ import com.android.systemui.util.Assert;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DumpUtilsKt;
 import com.android.systemui.util.ListenerSet;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.widget.SystemUIWidgetCallback;
@@ -165,7 +190,6 @@ import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationStackScrollLayout extends ViewGroup implements Dumpable, NotificationScrollView, PanelScreenShotLogger.LogProvider {
     public static final boolean DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY = SystemProperties.getBoolean("debug.noti.disable_new_notif_only", false);
@@ -220,7 +244,6 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public boolean mDontReportNextOverScroll;
     public int mDownX;
     public EmptyShadeView mEmptyShadeView;
-    public boolean mEverythingNeedsAnimation;
     public final ExpandHelper mExpandHelper;
     public final AnonymousClass11 mExpandHelperCallback;
     public ExpandableNotificationRow mExpandedGroupView;
@@ -271,6 +294,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public float mKeyguardBottomPadding;
     public boolean mKeyguardBypassEnabled;
     public final KeyguardFoldController mKeyguardFoldController;
+    public String mLastAlphaZeroTrace;
     public String mLastGoneCallTrace;
     public String mLastInitViewDumpString;
     public long mLastInitViewElapsedRealtime;
@@ -309,7 +333,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public final AnonymousClass8 mOnChildSensitivityChangedListener;
     public NotificationPanelViewController$$ExternalSyntheticLambda0 mOnEmptySpaceClickListener;
     public NotificationPanelViewController.NsslHeightChangedListener mOnHeightChangedListener;
-    public SharedNotificationContainerBinder$bind$3 mOnHeightChangedRunnable;
+    public SharedNotificationContainerBinder.AnonymousClass3 mOnHeightChangedRunnable;
     public QuickSettingsControllerImpl$$ExternalSyntheticLambda18 mOnStackYChanged;
     public boolean mOnlyScrollingInThisMotion;
     public int mOrientation;
@@ -324,6 +348,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public boolean mPanelTracking;
     public float mPreviousTouchX;
     public float mPreviousTouchY;
+    public float mPreviousTranslationX;
     public boolean mPulsing;
     public float mQsExpansionFraction;
     public boolean mQsFullScreen;
@@ -387,20 +412,17 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public int mTouchSlop;
     public VelocityTracker mVelocityTracker;
     public final NotificationStackScrollLayout$$ExternalSyntheticLambda3 mViewPositionComparator;
-    public boolean mVislbeNSSLWhileMediaExpanded;
     public int mWaterfallTopInset;
     public boolean mWillExpand;
     public int mYDiff;
     public ZenModeController mZenModeController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$10, reason: invalid class name */
     public class AnonymousClass10 implements HeadsUpTouchHelper.Callback {
         public AnonymousClass10() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$11, reason: invalid class name */
     public class AnonymousClass11 implements ExpandHelper.Callback {
         public AnonymousClass11() {
@@ -457,21 +479,18 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$7, reason: invalid class name */
     public class AnonymousClass7 {
         public AnonymousClass7() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$9, reason: invalid class name */
     public class AnonymousClass9 {
         public AnonymousClass9() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationEvent {
         public static final AnimationFilter[] FILTERS;
         public static final int[] LENGTHS;
@@ -615,7 +634,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     /* JADX WARN: Type inference failed for: r5v14, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$6] */
     /* JADX WARN: Type inference failed for: r5v5, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$2] */
     /* JADX WARN: Type inference failed for: r5v8, types: [com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda2] */
-    public NotificationStackScrollLayout(Context context, AttributeSet attributeSet) {
+    public NotificationStackScrollLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet, 0, 0);
         this.mShadeNeedsToClose = false;
         this.mCurrentStackHeight = Integer.MAX_VALUE;
@@ -638,21 +657,610 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         this.mHeadsUpHeightChangedListeners = new ListenerSet();
         this.mIsExpanded = true;
         this.mChildrenUpdater = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.1
-            /* JADX WARN: Code restructure failed: missing block: B:181:0x0346, code lost:
-            
-                if (r12 == false) goto L171;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:171:0x034b  */
+            /* JADX WARN: Removed duplicated region for block: B:292:0x05ca  */
+            /* JADX WARN: Removed duplicated region for block: B:479:0x08e5  */
+            /* JADX WARN: Removed duplicated region for block: B:62:0x0123  */
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
             public final boolean onPreDraw() {
-                /*
-                    Method dump skipped, instructions count: 2454
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.AnonymousClass1.onPreDraw():boolean");
+                StackScrollAlgorithm.SectionProvider sectionProvider;
+                AvalancheController avalancheController;
+                int i2;
+                int i3;
+                float f;
+                int i4;
+                int i5;
+                int i6;
+                int i7;
+                ExpandableNotificationRow expandableNotificationRow;
+                ExpandableViewState expandableViewState;
+                int i8;
+                ExpandableViewState expandableViewState2;
+                StackScrollAlgorithm.StackScrollAlgorithmState stackScrollAlgorithmState;
+                ExpandableViewState expandableViewState3;
+                boolean z;
+                boolean z2;
+                boolean z3;
+                boolean z4 = true;
+                int i9 = SceneContainerFlag.$r8$clinit;
+                NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
+                int i10 = notificationStackScrollLayout.mDisplayState;
+                if (i10 == 4 || i10 == 3 || notificationStackScrollLayout.getVisibility() == 8) {
+                    return true;
+                }
+                NotificationStackScrollLayout.this.updateForcedScroll();
+                NotificationStackScrollLayout notificationStackScrollLayout2 = NotificationStackScrollLayout.this;
+                notificationStackScrollLayout2.getClass();
+                Trace.beginSection("NSSL#updateChildren");
+                int i11 = 0;
+                if (!notificationStackScrollLayout2.mChildrenToAddAnimated.isEmpty()) {
+                    for (int i12 = 0; i12 < notificationStackScrollLayout2.getChildCount(); i12++) {
+                        ExpandableView expandableView = (ExpandableView) notificationStackScrollLayout2.getChildAt(i12);
+                        if (notificationStackScrollLayout2.mChildrenToAddAnimated.contains(expandableView)) {
+                            int positionInLinearLayout = notificationStackScrollLayout2.getPositionInLinearLayout(expandableView);
+                            int intrinsicHeight = (expandableView != null ? expandableView.getIntrinsicHeight() : expandableView.getHeight()) + notificationStackScrollLayout2.mPaddingBetweenElements;
+                            if (positionInLinearLayout < notificationStackScrollLayout2.getOwnScrollY()) {
+                                notificationStackScrollLayout2.setOwnScrollY(notificationStackScrollLayout2.getOwnScrollY() + intrinsicHeight);
+                            }
+                        }
+                    }
+                    notificationStackScrollLayout2.clampScrollPosition();
+                }
+                float f2 = 0.0f;
+                notificationStackScrollLayout2.mAmbientState.mCurrentScrollVelocity = notificationStackScrollLayout2.mScroller.isFinished() ? 0.0f : notificationStackScrollLayout2.mScroller.getCurrVelocity();
+                StackScrollAlgorithm stackScrollAlgorithm = notificationStackScrollLayout2.mStackScrollAlgorithm;
+                AmbientState ambientState = notificationStackScrollLayout2.mAmbientState;
+                if (notificationStackScrollLayout2.mSpeedBumpIndexDirty) {
+                    notificationStackScrollLayout2.mSpeedBumpIndexDirty = false;
+                    int childCount = notificationStackScrollLayout2.getChildCount();
+                    for (int i13 = 0; i13 < childCount; i13++) {
+                        View childAt = notificationStackScrollLayout2.getChildAt(i13);
+                        if (childAt.getVisibility() != 8 && (childAt instanceof ExpandableNotificationRow)) {
+                            ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) childAt;
+                            int i14 = NotificationBundleUi.$r8$clinit;
+                            int i15 = expandableNotificationRow2.getEntryLegacy().mBucket;
+                            expandableNotificationRow2.getEntryLegacy().mRanking.isAmbient();
+                            boolean z5 = notificationStackScrollLayout2.mHighPriorityBeforeSpeedBump;
+                        }
+                    }
+                }
+                int childCount2 = stackScrollAlgorithm.mHostView.getChildCount();
+                for (int i16 = 0; i16 < childCount2; i16++) {
+                    ((ExpandableView) stackScrollAlgorithm.mHostView.getChildAt(i16)).resetViewState$1();
+                }
+                int i17 = ambientState.mScrollY;
+                StackScrollAlgorithm.StackScrollAlgorithmState stackScrollAlgorithmState2 = stackScrollAlgorithm.mTempAlgorithmState;
+                stackScrollAlgorithmState2.getClass();
+                float f3 = -i17;
+                stackScrollAlgorithmState2.mCurrentYPosition = f3;
+                stackScrollAlgorithmState2.mCurrentExpandedYPosition = f3;
+                int childCount3 = stackScrollAlgorithm.mHostView.getChildCount();
+                stackScrollAlgorithmState2.visibleChildren.clear();
+                stackScrollAlgorithmState2.visibleChildren.ensureCapacity(childCount3);
+                int i18 = 0;
+                boolean z6 = false;
+                int i19 = 0;
+                while (i18 < childCount3) {
+                    ExpandableView expandableView2 = (ExpandableView) stackScrollAlgorithm.mHostView.getChildAt(i18);
+                    if (expandableView2.getVisibility() != 8 && expandableView2 != ambientState.mShelf) {
+                        z6 = z6;
+                        if (expandableView2 instanceof EmptyShadeView) {
+                            z6 = z4 ? 1 : 0;
+                        }
+                        if (expandableView2 instanceof FooterView) {
+                            FooterView footerView = (FooterView) expandableView2;
+                            if (z6 || i19 == 0) {
+                                int i20 = SceneContainerFlag.$r8$clinit;
+                                if (!ambientState.mShadeExpanded) {
+                                    footerView.mViewState.hidden = z4;
+                                }
+                            } else if (!(expandableView2 instanceof DndStatusView) || expandableView2.getVisibility() == 8) {
+                                expandableView2.mViewState.notGoneIndex = i19;
+                                stackScrollAlgorithmState2.visibleChildren.add(expandableView2);
+                                i19 += z4 ? 1 : 0;
+                                if (expandableView2 instanceof ExpandableNotificationRow) {
+                                    ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) expandableView2;
+                                    List attachedChildren = expandableNotificationRow3.getAttachedChildren();
+                                    if (expandableNotificationRow3.mIsSummaryWithChildren && attachedChildren != null) {
+                                        ArrayList arrayList = (ArrayList) attachedChildren;
+                                        int size = arrayList.size();
+                                        int i21 = i11;
+                                        while (i21 < size) {
+                                            Object obj = arrayList.get(i21);
+                                            i21 += z4 ? 1 : 0;
+                                            boolean z7 = z4 ? 1 : 0;
+                                            ExpandableNotificationRow expandableNotificationRow4 = (ExpandableNotificationRow) obj;
+                                            if (expandableNotificationRow4.getVisibility() != 8) {
+                                                expandableNotificationRow4.mViewState.notGoneIndex = i19;
+                                                i19++;
+                                            }
+                                            z4 = z7;
+                                        }
+                                    }
+                                }
+                            } else {
+                                expandableView2.mViewState.notGoneIndex = i19;
+                                stackScrollAlgorithmState2.visibleChildren.addFirst(expandableView2);
+                                i19 += z4 ? 1 : 0;
+                            }
+                        }
+                    }
+                    i18++;
+                    z4 = z4;
+                    i11 = 0;
+                    z6 = z6;
+                }
+                boolean z8 = z4 ? 1 : 0;
+                int i22 = -1;
+                float f4 = -ambientState.mScrollY;
+                int i23 = SceneContainerFlag.$r8$clinit;
+                boolean zIsOnKeyguard$1 = ambientState.isOnKeyguard$1();
+                StackScrollAlgorithm.BypassController bypassController = ambientState.mBypassController;
+                float intrinsicHeight2 = ((!zIsOnKeyguard$1 || (((KeyguardBypassController) bypassController).getBypassEnabled() && ambientState.isPulseExpanding())) ? stackScrollAlgorithm.mNotificationScrimPadding : 0.0f) + f4;
+                stackScrollAlgorithmState2.firstViewInShelf = null;
+                int i24 = 0;
+                while (true) {
+                    int size2 = stackScrollAlgorithmState2.visibleChildren.size();
+                    sectionProvider = ambientState.mSectionProvider;
+                    if (i24 >= size2) {
+                        break;
+                    }
+                    ExpandableView expandableView3 = (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i24);
+                    if (stackScrollAlgorithm.childNeedsGapHeight(sectionProvider, expandableView3, i24 > 0 ? (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i24 - 1) : null)) {
+                        intrinsicHeight2 += stackScrollAlgorithm.getGapForLocation(ambientState.mFractionToShade, ambientState.isOnKeyguard$1());
+                    }
+                    if (ambientState.mShelf != null && intrinsicHeight2 >= (ambientState.mStackEndHeight - r8.getHeight()) - stackScrollAlgorithm.mPaddingBetweenElements && !(expandableView3 instanceof FooterView) && stackScrollAlgorithmState2.firstViewInShelf == null) {
+                        stackScrollAlgorithmState2.firstViewInShelf = expandableView3;
+                    }
+                    stackScrollAlgorithm.getClass();
+                    intrinsicHeight2 = intrinsicHeight2 + (expandableView3 != null ? expandableView3.getIntrinsicHeight() : expandableView3 == null ? stackScrollAlgorithm.mCollapsedSize : expandableView3.getHeight()) + stackScrollAlgorithm.mPaddingBetweenElements;
+                    i24++;
+                }
+                int i25 = SceneContainerFlag.$r8$clinit;
+                float f5 = (!ambientState.isOnKeyguard$1() || (((KeyguardBypassController) bypassController).getBypassEnabled() && ambientState.isPulseExpanding())) ? stackScrollAlgorithm.mNotificationScrimPadding : 0.0f;
+                stackScrollAlgorithmState2.mCurrentYPosition += f5;
+                stackScrollAlgorithmState2.mCurrentExpandedYPosition += f5;
+                int size3 = stackScrollAlgorithmState2.visibleChildren.size();
+                stackScrollAlgorithm.mGroupExpandInterpolationY = 0.0f;
+                int i26 = 0;
+                while (i26 < size3) {
+                    ExpandableView expandableView4 = (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i26);
+                    ExpandableViewState expandableViewState4 = expandableView4.mViewState;
+                    expandableViewState4.location = 0;
+                    if (expandableView4 instanceof NotificationShelf) {
+                        stackScrollAlgorithmState2.mCurrentYPosition -= stackScrollAlgorithm.mGroupExpandInterpolationY;
+                    }
+                    boolean zChildNeedsGapHeight = stackScrollAlgorithm.childNeedsGapHeight(sectionProvider, expandableView4, i26 > 0 ? (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i26 - 1) : null);
+                    if ((!ambientState.isOnKeyguard$1() || ambientState.isNeedsToExpandLocksNoti()) && zChildNeedsGapHeight) {
+                        float gapForLocation = stackScrollAlgorithm.getGapForLocation(ambientState.mFractionToShade, ambientState.isOnKeyguard$1());
+                        stackScrollAlgorithmState2.mCurrentYPosition = (1.0f * gapForLocation) + stackScrollAlgorithmState2.mCurrentYPosition;
+                        stackScrollAlgorithmState2.mCurrentExpandedYPosition += gapForLocation;
+                    }
+                    float fInterpolate = NotificationUtils.interpolate(f2, stackScrollAlgorithm.mMaxGroupExpandedBottomGap, StackScrollAlgorithm.getPreviousGroupExpandFraction(expandableView4));
+                    stackScrollAlgorithm.mGroupExpandInterpolationY = fInterpolate;
+                    if (i26 > 0) {
+                        fInterpolate = Math.max(f2, fInterpolate - NotificationUtils.interpolate(f2, stackScrollAlgorithm.mMaxGroupExpandedBottomGap, StackScrollAlgorithm.getPreviousGroupExpandFraction((ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i26 - 1))));
+                    }
+                    float f6 = stackScrollAlgorithmState2.mCurrentYPosition + fInterpolate;
+                    stackScrollAlgorithmState2.mCurrentYPosition = f6;
+                    expandableViewState4.setYTranslation(f6);
+                    int i27 = SceneContainerFlag.$r8$clinit;
+                    float stackY = ambientState.getStackY();
+                    float f7 = expandableViewState4.height + expandableViewState4.mYTranslation + stackY;
+                    boolean z9 = ambientState.mShadeExpanded;
+                    boolean zMustStayOnScreen = expandableView4.mustStayOnScreen();
+                    float f8 = f2;
+                    if (expandableViewState4.mYTranslation >= stackScrollAlgorithm.mNotificationScrimPadding) {
+                        stackScrollAlgorithmState = stackScrollAlgorithmState2;
+                        expandableViewState3 = expandableViewState4;
+                        z = z8;
+                    } else {
+                        stackScrollAlgorithmState = stackScrollAlgorithmState2;
+                        expandableViewState3 = expandableViewState4;
+                        z = false;
+                    }
+                    StackScrollAlgorithm.StackScrollAlgorithmState stackScrollAlgorithmState3 = stackScrollAlgorithmState;
+                    stackScrollAlgorithm.maybeUpdateHeadsUpIsVisible(expandableViewState3, z9, zMustStayOnScreen, z, f7, ambientState.mMaxHeadsUpTranslation);
+                    if (expandableView4 instanceof FooterView) {
+                        if (ambientState.mShadeExpanded) {
+                            FooterView.FooterViewState footerViewState = (FooterView.FooterViewState) expandableViewState3;
+                            if (stackScrollAlgorithmState3.mCurrentExpandedYPosition + ((float) expandableView4.getIntrinsicHeight()) > ambientState.mStackEndHeight) {
+                                z2 = true;
+                                footerViewState.hideContent = z2;
+                            } else {
+                                if (ambientState.mClearAllInProgress) {
+                                    int i28 = 0;
+                                    while (true) {
+                                        if (i28 >= stackScrollAlgorithmState3.visibleChildren.size()) {
+                                            z3 = false;
+                                            break;
+                                        }
+                                        View view = (View) stackScrollAlgorithmState3.visibleChildren.get(i28);
+                                        if ((view instanceof ExpandableNotificationRow) && !((ExpandableNotificationRow) view).canViewBeCleared()) {
+                                            z3 = true;
+                                            break;
+                                        }
+                                        i28++;
+                                    }
+                                    if (!z3) {
+                                    }
+                                    footerViewState.hideContent = z2;
+                                }
+                                z2 = false;
+                                footerViewState.hideContent = z2;
+                            }
+                        } else {
+                            expandableViewState3.hidden = z8;
+                        }
+                    } else {
+                        if (expandableView4 instanceof EmptyShadeView) {
+                            float stackY2 = (ambientState.mLayoutMaxHeight - ambientState.getStackY()) - (ambientState.mShelf.getHeight() + stackScrollAlgorithm.mPaddingBetweenElements);
+                            if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
+                                float translationY = (ambientState.mShelf.getTranslationY() - ambientState.getStackY()) - stackScrollAlgorithm.mPaddingBetweenElements;
+                                float f9 = stackScrollAlgorithm.mPaddingTopWhenEmptyShade;
+                                stackY2 = translationY - f9;
+                                stackY += f9;
+                            }
+                            expandableViewState3.setYTranslation((stackY2 - expandableView4.getIntrinsicHeight()) / 2.0f);
+                        } else if (expandableView4 != ambientState.getTrackedHeadsUpRow()) {
+                            if (ambientState.mExpansionChanging || (ambientState.mDragDownOnKeyguard && ambientState.isNeedsToExpandLocksNoti())) {
+                                expandableViewState3.hidden = false;
+                                ExpandableView expandableView5 = stackScrollAlgorithmState3.firstViewInShelf;
+                                expandableViewState3.inShelf = expandableView5 != null && i26 >= stackScrollAlgorithmState3.visibleChildren.indexOf(expandableView5);
+                            } else if (ambientState.mShelf != null) {
+                                stackScrollAlgorithm.updateViewWithShelf(expandableView4, expandableViewState3, (((!ambientState.mShadeExpanded || ambientState.mDozeAmount == 1.0f || (((KeyguardBypassController) bypassController).getBypassEnabled() && ambientState.isOnKeyguard$1() && !ambientState.isPulseExpanding())) ? ambientState.getInnerHeight$1() : ambientState.mStackHeight) - ambientState.mShelf.getHeight()) - stackScrollAlgorithm.mPaddingBetweenElements, ambientState.mShelf.getHeight());
+                            }
+                        }
+                        expandableViewState3.height = expandableView4.getIntrinsicHeight();
+                        if (!expandableView4.isPinned() && !expandableView4.isHeadsUpAnimatingAway() && ambientState.mPulsingRow != expandableView4) {
+                            expandableViewState3.height = (int) (expandableViewState3.height * 1.0f);
+                        }
+                    }
+                    stackScrollAlgorithmState3.mCurrentYPosition = ((expandableView4.getIntrinsicHeight() + stackScrollAlgorithm.mPaddingBetweenElements) * 1.0f) + stackScrollAlgorithm.mGroupExpandInterpolationY + stackScrollAlgorithmState3.mCurrentYPosition;
+                    stackScrollAlgorithmState3.mCurrentExpandedYPosition = expandableView4.getIntrinsicHeight() + stackScrollAlgorithm.mPaddingBetweenElements + stackScrollAlgorithmState3.mCurrentExpandedYPosition;
+                    if (SecPanelSplitHelper.isEnabled() && ambientState.mScrollY == 0) {
+                        stackScrollAlgorithmState3.mCurrentYPosition = ((stackScrollAlgorithm.mOverExpansionAmount / (stackScrollAlgorithm.mContext.getResources().getDimension(R.dimen.panel_overshoot_amount) * 1.5f)) * (i26 + 1) * 12) + stackScrollAlgorithmState3.mCurrentYPosition;
+                    }
+                    ExpandableViewState expandableViewState5 = expandableView4.mViewState;
+                    float f10 = stackScrollAlgorithmState3.mCurrentYPosition;
+                    expandableViewState5.location = 4;
+                    if (f10 <= f8) {
+                        expandableViewState5.location = 2;
+                    }
+                    expandableViewState3.setYTranslation(expandableViewState3.mYTranslation + stackY);
+                    i26++;
+                    stackScrollAlgorithmState2 = stackScrollAlgorithmState3;
+                    f2 = f8;
+                    z8 = true;
+                }
+                float f11 = f2;
+                StackScrollAlgorithm.StackScrollAlgorithmState stackScrollAlgorithmState4 = stackScrollAlgorithmState2;
+                float f12 = 1.0f;
+                int size4 = stackScrollAlgorithmState4.visibleChildren.size();
+                int i29 = 0;
+                while (true) {
+                    if (i29 >= size4) {
+                        i29 = -1;
+                        break;
+                    }
+                    ExpandableView expandableView6 = (ExpandableView) stackScrollAlgorithmState4.visibleChildren.get(i29);
+                    if ((expandableView6 instanceof ActivatableNotificationView) && (expandableView6.isAboveShelf() || expandableView6.showingPulsing())) {
+                        break;
+                    }
+                    i29++;
+                }
+                int i30 = size4 - 1;
+                float fMin = f11;
+                while (i30 >= 0) {
+                    boolean z10 = i30 == i29;
+                    ExpandableView expandableView7 = (ExpandableView) stackScrollAlgorithmState4.visibleChildren.get(i30);
+                    ExpandableViewState expandableViewState6 = expandableView7.mViewState;
+                    float f13 = 0;
+                    int i31 = SceneContainerFlag.$r8$clinit;
+                    if (expandableView7.mustStayOnScreen() && !expandableViewState6.headsUpIsVisible && !ambientState.isDozingAndNotPulsing(expandableView7) && expandableViewState6.mYTranslation < ambientState.getTopPadding() + ambientState.mStackTranslation) {
+                        fMin = fMin != f11 ? fMin + f12 : fMin + Math.min(f12, ((ambientState.getTopPadding() + ambientState.mStackTranslation) - expandableViewState6.mYTranslation) / expandableViewState6.height);
+                        expandableViewState6.setZTranslation((stackScrollAlgorithm.mPinnedZTranslationExtra * fMin) + f13);
+                    } else if (z10) {
+                        NotificationShelf notificationShelf = ambientState.mShelf;
+                        int height = notificationShelf == null ? 0 : notificationShelf.getHeight();
+                        float topPadding = ambientState.getTopPadding() + (ambientState.getInnerHeight$1() - height) + ambientState.mStackTranslation;
+                        float intrinsicHeight3 = expandableViewState6.mYTranslation + expandableView7.getIntrinsicHeight() + stackScrollAlgorithm.mPaddingBetweenElements;
+                        if (topPadding > intrinsicHeight3) {
+                            expandableViewState6.setZTranslation(f13);
+                        } else {
+                            float f14 = (intrinsicHeight3 - topPadding) / height;
+                            if (Float.isNaN(f14)) {
+                                f14 = 1.0f;
+                            }
+                            expandableViewState6.setZTranslation((Math.min(f14, 1.0f) * stackScrollAlgorithm.mPinnedZTranslationExtra) + f13);
+                        }
+                    } else {
+                        expandableViewState6.setZTranslation(f13);
+                    }
+                    expandableViewState6.setZTranslation(((1.0f - expandableView7.getHeaderVisibleAmount()) * stackScrollAlgorithm.mPinnedZTranslationExtra) + expandableViewState6.mZTranslation);
+                    i30--;
+                    f12 = 1.0f;
+                }
+                int size5 = stackScrollAlgorithmState4.visibleChildren.size();
+                int i32 = SceneContainerFlag.$r8$clinit;
+                float f15 = stackScrollAlgorithm.mHeadsUpInset - ambientState.mStackTopMargin;
+                ExpandableNotificationRow trackedHeadsUpRow = ambientState.getTrackedHeadsUpRow();
+                if (trackedHeadsUpRow != null && (expandableViewState2 = trackedHeadsUpRow.mViewState) != null) {
+                    expandableViewState2.setYTranslation(MathUtils.lerp(f15, expandableViewState2.mYTranslation - ambientState.mStackTranslation, ambientState.mAppearFraction));
+                }
+                int i33 = -1;
+                int i34 = 0;
+                ExpandableNotificationRow expandableNotificationRow5 = null;
+                while (true) {
+                    avalancheController = ambientState.mAvalancheController;
+                    if (i34 >= size5) {
+                        break;
+                    }
+                    View view2 = (View) stackScrollAlgorithmState4.visibleChildren.get(i34);
+                    if (view2 instanceof ExpandableNotificationRow) {
+                        ExpandableNotificationRow expandableNotificationRow6 = (ExpandableNotificationRow) view2;
+                        if (expandableNotificationRow6.mIsHeadsUp || expandableNotificationRow6.mHeadsupDisappearRunning) {
+                            ExpandableViewState expandableViewState7 = expandableNotificationRow6.mViewState;
+                            int i35 = SceneContainerFlag.$r8$clinit;
+                            boolean zMustStayOnScreen2 = expandableNotificationRow6.mustStayOnScreen();
+                            if (expandableNotificationRow5 == null && zMustStayOnScreen2 && !expandableViewState7.headsUpIsVisible) {
+                                expandableViewState7.location = 1;
+                                expandableNotificationRow5 = expandableNotificationRow6;
+                            }
+                            boolean z11 = expandableNotificationRow5 == expandableNotificationRow6;
+                            float f16 = expandableViewState7.mYTranslation + expandableViewState7.height;
+                            if (stackScrollAlgorithm.mIsExpanded) {
+                                boolean zMustStayOnScreen3 = expandableNotificationRow6.mustStayOnScreen();
+                                boolean z12 = expandableViewState7.headsUpIsVisible;
+                                boolean zShowingPulsing = expandableNotificationRow6.showingPulsing();
+                                boolean zIsOnKeyguard$12 = ambientState.isOnKeyguard$1();
+                                int i36 = NotificationBundleUi.$r8$clinit;
+                                i6 = i34;
+                                expandableViewState = expandableViewState7;
+                                i5 = size5;
+                                expandableNotificationRow = expandableNotificationRow6;
+                                stackScrollAlgorithm.shouldHunBeVisibleWhenScrolled(zMustStayOnScreen3, z12, zShowingPulsing, zIsOnKeyguard$12, expandableNotificationRow6.getEntryLegacy().isStickyAndNotDemoted());
+                            } else {
+                                i5 = size5;
+                                i6 = i34;
+                                expandableNotificationRow = expandableNotificationRow6;
+                                expandableViewState = expandableViewState7;
+                            }
+                            if (expandableNotificationRow.mPinnedStatus.isPinned()) {
+                                expandableViewState.setYTranslation(Math.max(expandableViewState.mYTranslation, f15));
+                                expandableViewState.height = Math.max(expandableNotificationRow.getIntrinsicHeight(), expandableViewState.height);
+                                int i37 = NotificationHeadsUpCycling.$r8$clinit;
+                                if (StackScrollAlgorithm.isCyclingIn(expandableNotificationRow, ambientState)) {
+                                    i7 = i22;
+                                    if (i33 == i7) {
+                                        i33 = expandableViewState.height;
+                                    }
+                                } else {
+                                    i7 = i22;
+                                }
+                                expandableViewState.hidden = false;
+                                ExpandableViewState expandableViewState8 = expandableNotificationRow5 == null ? null : expandableNotificationRow5.mViewState;
+                                if (expandableViewState8 != null && !z11 && (!stackScrollAlgorithm.mIsExpanded || f16 > expandableViewState8.mYTranslation + expandableViewState8.height)) {
+                                    expandableViewState.height = expandableNotificationRow.getIntrinsicHeight();
+                                }
+                                if (!stackScrollAlgorithm.mIsExpanded && z11 && (i8 = ambientState.mScrollY) > 0) {
+                                    expandableViewState.setYTranslation(expandableViewState.mYTranslation - i8);
+                                }
+                            } else {
+                                i7 = i22;
+                            }
+                            if (expandableNotificationRow.mHeadsupDisappearRunning && !stackScrollAlgorithm.mIsExpanded && z11) {
+                                int i38 = NotificationHeadsUpCycling.$r8$clinit;
+                                if (expandableNotificationRow.getKey().equals(avalancheController.previousHunKey)) {
+                                    expandableViewState.setYTranslation(Math.max(expandableViewState.mYTranslation, f15) + (i33 >= expandableViewState.height ? i33 - r1 : 0) + stackScrollAlgorithm.mHeadsUpCyclingPadding);
+                                    i33 = i7;
+                                } else if (ambientState.mDozing) {
+                                    expandableViewState.setYTranslation(Math.max(expandableViewState.mYTranslation, f15));
+                                } else {
+                                    boolean z13 = expandableViewState.mYTranslation + ((float) expandableViewState.height) >= ambientState.mMaxHeadsUpTranslation;
+                                    int i39 = NotificationsHunSharedAnimationValues.$r8$clinit;
+                                    if (z13) {
+                                        expandableViewState.setYTranslation(stackScrollAlgorithm.mHeadsUpAppearHeightBottom + stackScrollAlgorithm.mHeadsUpAppearStartAboveScreen);
+                                    } else {
+                                        expandableViewState.setYTranslation((-ambientState.mStackTopMargin) - stackScrollAlgorithm.mHeadsUpAppearStartAboveScreen);
+                                    }
+                                }
+                                expandableViewState.hidden = false;
+                            }
+                        } else {
+                            i5 = size5;
+                            i6 = i34;
+                            i7 = i22;
+                        }
+                    }
+                    i34 = i6 + 1;
+                    i22 = i7;
+                    size5 = i5;
+                }
+                stackScrollAlgorithm.updatePulsingStates(stackScrollAlgorithmState4, ambientState);
+                boolean z14 = ambientState.mHideSensitive;
+                int size6 = stackScrollAlgorithmState4.visibleChildren.size();
+                for (int i40 = 0; i40 < size6; i40++) {
+                    ExpandableViewState expandableViewState9 = ((ExpandableView) stackScrollAlgorithmState4.visibleChildren.get(i40)).mViewState;
+                    expandableViewState9.dimmed = ambientState.mDimmed && !(ambientState.isPulseExpanding() && ambientState.mDozeAmount == 1.0f);
+                    expandableViewState9.hideSensitive = z14;
+                }
+                int i41 = SceneContainerFlag.$r8$clinit;
+                float stackY3 = ambientState.getStackY() - ambientState.mScrollY;
+                if (ambientState.isOnKeyguard$1()) {
+                    stackY3 = f11;
+                }
+                float fMax = ambientState.mNotificationScrimTop;
+                float f17 = f11;
+                boolean z15 = true;
+                int i42 = 0;
+                for (int size7 = stackScrollAlgorithmState4.visibleChildren.size(); i42 < size7; size7 = i4) {
+                    ExpandableView expandableView8 = (ExpandableView) stackScrollAlgorithmState4.visibleChildren.get(i42);
+                    ExpandableViewState expandableViewState10 = expandableView8.mViewState;
+                    if (!expandableView8.mustStayOnScreen() || expandableViewState10.headsUpIsVisible) {
+                        fMax = Math.max(stackY3, fMax);
+                    }
+                    float f18 = expandableViewState10.mYTranslation;
+                    float f19 = expandableViewState10.height + f18;
+                    float f20 = stackY3;
+                    boolean z16 = expandableView8 instanceof ExpandableNotificationRow;
+                    boolean z17 = z16 && expandableView8.isPinned();
+                    if (!stackScrollAlgorithm.mClipNotificationScrollToTop || z15 || ((!z17 && (!expandableView8.isHeadsUpAnimatingAway() || z15)) || f19 <= f17 || ambientState.mShadeExpanded)) {
+                        i4 = size7;
+                        expandableViewState10.clipBottomAmount = 0;
+                    } else {
+                        int i43 = NotificationHeadsUpCycling.$r8$clinit;
+                        if (z16) {
+                            i4 = size7;
+                            ((ExpandableNotificationRow) expandableView8).getKey().equals(avalancheController.previousHunKey);
+                        } else {
+                            i4 = size7;
+                        }
+                        expandableViewState10.clipBottomAmount = stackScrollAlgorithm.mEnableNotificationClipping ? (int) (f19 - f17) : 0;
+                    }
+                    boolean z18 = expandableViewState10.hidden;
+                    if (expandableViewState10.inShelf || f18 >= fMax) {
+                        expandableViewState10.clipTopAmount = 0;
+                    } else {
+                        expandableViewState10.clipTopAmount = (int) (fMax - f18);
+                        if (fMax > f19) {
+                            expandableViewState10.hidden = true;
+                        } else {
+                            expandableViewState10.hidden = z18;
+                        }
+                    }
+                    if (z15) {
+                        f17 = f19;
+                    }
+                    if (z17) {
+                        z15 = false;
+                    }
+                    if (!expandableView8.isTransparent()) {
+                        if (!z17) {
+                            f18 = f19;
+                        }
+                        fMax = Math.max(fMax, f18);
+                    }
+                    i42++;
+                    stackY3 = f20;
+                }
+                int size8 = stackScrollAlgorithmState4.visibleChildren.size();
+                for (int i44 = 0; i44 < size8; i44++) {
+                    ((ExpandableView) stackScrollAlgorithmState4.visibleChildren.get(i44)).mViewState.getClass();
+                }
+                NotificationShelf notificationShelf2 = ambientState.mShelf;
+                if (notificationShelf2 != null) {
+                    notificationShelf2.updateState(stackScrollAlgorithmState4, ambientState);
+                }
+                ArrayList arrayList2 = stackScrollAlgorithmState4.visibleChildren;
+                int size9 = arrayList2.size();
+                boolean z19 = false;
+                int i45 = 0;
+                while (i45 < size9) {
+                    Object obj2 = arrayList2.get(i45);
+                    i45++;
+                    ExpandableView expandableView9 = (ExpandableView) obj2;
+                    ExpandableViewState expandableViewState11 = expandableView9.mViewState;
+                    if (ambientState.mShadeExpanded && expandableView9 == ambientState.getTrackedHeadsUpRow()) {
+                        expandableViewState11.setAlpha(1.0f);
+                    } else {
+                        int i46 = SceneContainerFlag.$r8$clinit;
+                        if (ambientState.isOnKeyguard$1()) {
+                            if (expandableView9.isHeadsUpState()) {
+                                expandableViewState11.setAlpha(1.0f - ambientState.mHideAmount);
+                            } else {
+                                expandableViewState11.setAlpha(1.0f - ambientState.mDozeAmount);
+                                if (ambientState.mDozeAmount > f11) {
+                                    z19 = true;
+                                }
+                            }
+                            if (ambientState.isNeedsToExpandLocksNoti()) {
+                                expandableViewState11.setAlpha(ShadeInterpolation.getNotifContentAlpha(ambientState.mFractionToShade));
+                            }
+                        } else if (ambientState.mExpansionChanging) {
+                            float f21 = ambientState.mExpansionFraction;
+                            if (!expandableView9.mustStayOnScreen()) {
+                                stackScrollAlgorithmState4.visibleChildren.indexOf(expandableView9);
+                                if (ambientState.mIsCollapsingHeadsup) {
+                                    expandableViewState11.setAlpha(f11);
+                                } else if (SecPanelSplitHelper.isEnabled()) {
+                                    expandableViewState11.setAlpha(ShadeInterpolation.getNotifContentAlpha(f21));
+                                } else {
+                                    expandableViewState11.setAlpha(ShadeInterpolation.getContentAlpha(f21));
+                                }
+                            }
+                        }
+                    }
+                    boolean z20 = expandableView9 instanceof EmptyShadeView;
+                    if (z20 && ambientState.mExpansionFraction == 0.0f) {
+                        expandableViewState11.setAlpha(0.0f);
+                    }
+                    if (z20 && ambientState.isOnKeyguard$1()) {
+                        expandableViewState11.setAlpha(ShadeInterpolation.getContentAlpha(ambientState.mFractionToShade));
+                    }
+                    NotificationShelf notificationShelf3 = ambientState.mShelf;
+                    if (notificationShelf3 != null) {
+                        ExpandableViewState expandableViewState12 = notificationShelf3.mViewState;
+                        if (expandableViewState12.hidden) {
+                            f = 0.0f;
+                        } else {
+                            float f22 = expandableViewState12.mYTranslation;
+                            float f23 = expandableViewState11.mYTranslation;
+                            boolean z21 = expandableViewState11.inShelf && ambientState.isOnKeyguard$1();
+                            if ((f23 >= f22 || z21) && !z19) {
+                                f = 0.0f;
+                                expandableViewState11.setAlpha(0.0f);
+                            }
+                        }
+                    }
+                    f11 = f;
+                }
+                StackScrollAlgorithm.getNotificationChildrenStates(stackScrollAlgorithmState4);
+                int childCount4 = notificationStackScrollLayout2.getChildCount();
+                int i47 = 0;
+                while (i47 < childCount4) {
+                    View childAt2 = notificationStackScrollLayout2.getChildAt(i47);
+                    if (childAt2 instanceof ExpandableNotificationRow) {
+                        ExpandableNotificationRow expandableNotificationRow7 = (ExpandableNotificationRow) childAt2;
+                        if (expandableNotificationRow7.mIsSummaryWithChildren) {
+                            NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow7.mChildrenContainer;
+                            int notificationChildCount = notificationChildrenContainer.getNotificationChildCount();
+                            int i48 = 0;
+                            while (i48 < notificationChildCount) {
+                                ExpandableNotificationRow expandableNotificationRow8 = (ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i48);
+                                if (!expandableNotificationRow8.mEntry.isOngoingActivity() || expandableNotificationRow8.mViewState.hasGradient) {
+                                    i3 = 1;
+                                } else {
+                                    expandableNotificationRow8.applyGradientBackground(expandableNotificationRow8.getWidth() - (notificationStackScrollLayout2.mSidePaddings * 2), expandableNotificationRow8.getIntrinsicHeight(), expandableNotificationRow8.mEntry.isPromotedState());
+                                    i3 = 1;
+                                    expandableNotificationRow8.mViewState.hasGradient = true;
+                                }
+                                i48 += i3;
+                            }
+                        } else if (expandableNotificationRow7.mEntry.isOngoingActivity() && !expandableNotificationRow7.mViewState.hasGradient) {
+                            expandableNotificationRow7.applyGradientBackground(expandableNotificationRow7.getWidth() - (notificationStackScrollLayout2.mSidePaddings * 2), expandableNotificationRow7.getIntrinsicHeight(), expandableNotificationRow7.mEntry.isPromotedState());
+                            i2 = 1;
+                            expandableNotificationRow7.mViewState.hasGradient = true;
+                        }
+                        i2 = 1;
+                    } else {
+                        i2 = 1;
+                    }
+                    i47 += i2;
+                }
+                if (!notificationStackScrollLayout2.mStateAnimator.mAnimatorSet.isEmpty() || notificationStackScrollLayout2.mNeedsAnimation) {
+                    notificationStackScrollLayout2.startAnimationToState$1();
+                } else {
+                    notificationStackScrollLayout2.applyCurrentState();
+                }
+                Trace.endSection();
+                NotificationStackScrollLayout notificationStackScrollLayout3 = NotificationStackScrollLayout.this;
+                notificationStackScrollLayout3.mChildrenUpdateRequested = false;
+                notificationStackScrollLayout3.getViewTreeObserver().removeOnPreDrawListener(this);
+                return true;
             }
         };
         this.mTempInt2 = new int[2];
@@ -672,7 +1280,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         this.mShadowUpdater = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda2
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
+                NotificationStackScrollLayout notificationStackScrollLayout = this.f$0;
                 boolean z = NotificationStackScrollLayout.DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY;
                 notificationStackScrollLayout.updateViewShadows();
                 return true;
@@ -701,15 +1309,15 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 boolean z = NotificationStackScrollLayout.DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY;
                 NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
                 notificationStackScrollLayout.getClass();
-                HashMap hashMap = new HashMap();
+                HashMap map = new HashMap();
                 int childCount = notificationStackScrollLayout.getChildCount();
                 for (int i2 = 0; i2 < childCount; i2++) {
                     ExpandableView expandableView = (ExpandableView) notificationStackScrollLayout.getChildAt(i2);
                     if (expandableView instanceof ExpandableNotificationRow) {
-                        ((ExpandableNotificationRow) expandableView).collectVisibleLocations(hashMap);
+                        ((ExpandableNotificationRow) expandableView).collectVisibleLocations(map);
                     }
                 }
-                return hashMap;
+                return map;
             }
         };
         this.mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -807,7 +1415,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 }
             }
         };
-        this.mVislbeNSSLWhileMediaExpanded = false;
+        this.mPreviousTranslationX = 0.0f;
         Resources resources = getResources();
         FeatureFlags featureFlags = (FeatureFlags) Dependency.sDependency.getDependencyInner(FeatureFlags.class);
         Flags flags = Flags.INSTANCE;
@@ -883,88 +1491,43 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0052, code lost:
-    
-        if (r1 == 20) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0056, code lost:
-    
-        r5 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0058, code lost:
-    
-        if (r1 < 20) goto L28;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x005d A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean includeChildInClearAll(com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r5, int r6) {
-        /*
-            r0 = 0
-            if (r5 == 0) goto L15
-            boolean r1 = r5.areGutsExposed()
-            if (r1 != 0) goto L15
-            boolean r1 = r5.hasFinishedInitialization()
-            if (r1 != 0) goto L10
-            goto L15
-        L10:
-            boolean r1 = r5.canViewBeCleared()
-            goto L16
-        L15:
-            r1 = r0
-        L16:
-            if (r1 == 0) goto L5e
-            int r1 = com.android.systemui.statusbar.notification.shared.NotificationBundleUi.$r8$clinit
-            com.android.systemui.statusbar.notification.collection.NotificationEntry r1 = r5.getEntryLegacy()
-            int r1 = r1.mBucket
-            r2 = 1
-            if (r6 == 0) goto L54
-            r3 = 20
-            if (r6 == r2) goto L58
-            r4 = 2
-            if (r6 == r4) goto L52
-            r1 = 3
-            if (r6 != r1) goto L46
-            com.android.systemui.noticenter.NotiCenterPlugin r6 = com.android.systemui.noticenter.NotiCenterPlugin.INSTANCE
-            com.android.systemui.statusbar.notification.collection.NotificationEntry r5 = r5.mEntry
-            android.service.notification.StatusBarNotification r5 = r5.mSbn
-            java.lang.String r5 = r5.getPackageName()
-            r6.getClass()
-            java.util.HashSet r6 = com.android.systemui.noticenter.NotiCenterPlugin.noclearAppList
-            if (r6 == 0) goto L43
-            boolean r5 = r6.contains(r5)
-            goto L44
-        L43:
-            r5 = r0
-        L44:
-            r5 = r5 ^ r2
-            goto L5b
-        L46:
-            java.lang.IllegalArgumentException r5 = new java.lang.IllegalArgumentException
-            java.lang.String r0 = "Unknown selection: "
-            java.lang.String r6 = android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r6, r0)
-            r5.<init>(r6)
-            throw r5
-        L52:
-            if (r1 != r3) goto L56
-        L54:
-            r5 = r2
-            goto L5b
-        L56:
-            r5 = r0
-            goto L5b
-        L58:
-            if (r1 >= r3) goto L56
-            goto L54
-        L5b:
-            if (r5 == 0) goto L5e
-            return r2
-        L5e:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.includeChildInClearAll(com.android.systemui.statusbar.notification.row.ExpandableNotificationRow, int):boolean");
+    public static boolean includeChildInClearAll(ExpandableNotificationRow expandableNotificationRow, int i) {
+        boolean z;
+        if ((expandableNotificationRow == null || expandableNotificationRow.areGutsExposed() || !expandableNotificationRow.hasFinishedInitialization()) ? false : expandableNotificationRow.canViewBeCleared()) {
+            int i2 = NotificationBundleUi.$r8$clinit;
+            int i3 = expandableNotificationRow.getEntryLegacy().mBucket;
+            if (i == 0) {
+                z = true;
+                if (!z) {
+                    return true;
+                }
+            } else {
+                if (i != 1) {
+                    if (i != 2) {
+                        if (i != 3) {
+                            throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown selection: "));
+                        }
+                        NotiCenterPlugin notiCenterPlugin = NotiCenterPlugin.INSTANCE;
+                        String packageName = expandableNotificationRow.mEntry.mSbn.getPackageName();
+                        notiCenterPlugin.getClass();
+                        HashSet hashSet = NotiCenterPlugin.noclearAppList;
+                        z = !(hashSet != null ? hashSet.contains(packageName) : false);
+                    } else if (i3 != 20) {
+                        z = false;
+                    }
+                } else if (i3 < 20) {
+                }
+                if (!z) {
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isPinnedHeadsUp(View view) {
@@ -1000,11 +1563,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             LogLevel logLevel = LogLevel.INFO;
             NotificationStackScrollLogger$$ExternalSyntheticLambda3 notificationStackScrollLogger$$ExternalSyntheticLambda3 = new NotificationStackScrollLogger$$ExternalSyntheticLambda3(ref$ObjectRef, 1);
             LogBuffer logBuffer = notificationStackScrollLogger.notificationRenderBuffer;
-            LogMessage obtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda3, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda3, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         super.addTransientView(view, i);
     }
@@ -1046,7 +1609,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             int i2 = NotificationsLiveDataStoreRefactor.$r8$clinit;
             NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 = this.mLocationsChangedListener;
             if (notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 != null) {
-                ((ChannelCoroutine) notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1.$$this$conflatedCallbackFlow).mo3456trySendJP2dKIU(this.collectVisibleLocationsCallable);
+                ((ChannelCoroutine) notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(this.collectVisibleLocationsCallable);
             }
         }
         runAnimationFinishedRunnables();
@@ -1070,13 +1633,13 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             NotificationSectionsManager notificationSectionsManager = this.mSectionsManager;
             AmbientState ambientState = this.mAmbientState;
             float f = ambientState.mFractionToShade;
-            boolean isOnKeyguard$1 = ambientState.isOnKeyguard$1();
+            boolean zIsOnKeyguard$1 = ambientState.isOnKeyguard$1();
             stackScrollAlgorithm.getClass();
             if (expandableView != null && StackScrollAlgorithm.getPreviousGroupExpandFraction(expandableView) > 0.0f) {
-                return NotificationUtils.interpolate(0.0f, stackScrollAlgorithm.mMaxGroupExpandedBottomGap, StackScrollAlgorithm.getPreviousGroupExpandFraction(expandableView)) + (stackScrollAlgorithm.childNeedsGapHeight(notificationSectionsManager, expandableView2, expandableView) ? stackScrollAlgorithm.getGapForLocation(f, isOnKeyguard$1) : 0.0f);
+                return NotificationUtils.interpolate(0.0f, stackScrollAlgorithm.mMaxGroupExpandedBottomGap, StackScrollAlgorithm.getPreviousGroupExpandFraction(expandableView)) + (stackScrollAlgorithm.childNeedsGapHeight(notificationSectionsManager, expandableView2, expandableView) ? stackScrollAlgorithm.getGapForLocation(f, zIsOnKeyguard$1) : 0.0f);
             }
             if (stackScrollAlgorithm.childNeedsGapHeight(notificationSectionsManager, expandableView2, expandableView)) {
-                return stackScrollAlgorithm.getGapForLocation(f, isOnKeyguard$1);
+                return stackScrollAlgorithm.getGapForLocation(f, zIsOnKeyguard$1);
             }
         }
         return 0.0f;
@@ -1093,9 +1656,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         if (this.mChangePositionInProgress) {
             throw new IllegalStateException("Reentrant call to changeViewPosition");
         }
-        int indexOfChild = indexOfChild(expandableView);
+        int iIndexOfChild = indexOfChild(expandableView);
         boolean z = false;
-        if (indexOfChild == -1) {
+        if (iIndexOfChild == -1) {
             if ((expandableView instanceof ExpandableNotificationRow) && expandableView.mTransientContainer != null) {
                 z = true;
             }
@@ -1111,7 +1674,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             addView(notificationShelf);
             return;
         }
-        if (expandableView == null || expandableView.getParent() != this || indexOfChild == i) {
+        if (expandableView == null || expandableView.getParent() != this || iIndexOfChild == i) {
             return;
         }
         this.mChangePositionInProgress = true;
@@ -1224,7 +1787,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         Consumer consumer = new Consumer() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj3) {
-                final NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
+                final NotificationStackScrollLayout notificationStackScrollLayout = this.f$0;
                 final ArrayList arrayList5 = arrayList3;
                 final int i6 = i;
                 boolean z4 = NotificationStackScrollLayout.DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY;
@@ -1233,7 +1796,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                     notificationStackScrollLayout.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda9
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotificationStackScrollLayout notificationStackScrollLayout2 = NotificationStackScrollLayout.this;
+                            NotificationStackScrollLayout notificationStackScrollLayout2 = notificationStackScrollLayout;
                             ArrayList arrayList6 = arrayList5;
                             int i7 = i6;
                             boolean z5 = NotificationStackScrollLayout.DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY;
@@ -1259,18 +1822,18 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         InteractionJankMonitor.getInstance().begin(this, 62);
         int size3 = arrayList.size();
         int i6 = size3 - 1;
-        int i7 = 60;
-        int i8 = 0;
+        int iMax = 60;
+        int i7 = 0;
         while (i6 >= 0) {
             View view = (View) arrayList.get(i6);
             NotificationStackScrollLayout$$ExternalSyntheticLambda5 notificationStackScrollLayout$$ExternalSyntheticLambda5 = i6 == 0 ? consumer : 0;
             if (view instanceof SectionHeaderView) {
                 ((StackScrollerDecorView) view).setContentVisible(z2, z4, notificationStackScrollLayout$$ExternalSyntheticLambda5);
             } else {
-                this.mSwipeHelper.dismissChild(view, 0.0f, notificationStackScrollLayout$$ExternalSyntheticLambda5, i8, true, 200L, true);
+                this.mSwipeHelper.dismissChild(view, 0.0f, notificationStackScrollLayout$$ExternalSyntheticLambda5, i7, true, 200L, true);
             }
-            i7 = Math.max(30, i7 - 5);
-            i8 += i7;
+            iMax = Math.max(30, iMax - 5);
+            i7 += iMax;
             i6--;
             z2 = false;
             z4 = true;
@@ -1292,11 +1855,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                         LogLevel logLevel = LogLevel.INFO;
                         NotificationStackScrollLogger$$ExternalSyntheticLambda0 notificationStackScrollLogger$$ExternalSyntheticLambda0 = new NotificationStackScrollLogger$$ExternalSyntheticLambda0(8);
                         LogBuffer logBuffer = notificationStackScrollLogger.notificationRenderBuffer;
-                        LogMessage obtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.str1 = str2;
                         logMessageImpl.str2 = str;
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                     }
                 }
             }
@@ -1372,12 +1935,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         this.mBlurNode.setRenderEffect(this.mBlurEffect);
         super.dispatchDraw(this.mBlurNode.beginRecording());
         this.mBlurNode.endRecording();
-        int save = canvas.save();
+        int iSave = canvas.save();
         if (this.mShouldUseRoundedRectClipping) {
             canvas.clipPath(this.mRoundedClipPath);
         }
         canvas.drawRenderNode(this.mBlurNode);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
         for (int i = 0; i < getChildCount(); i++) {
             ExpandableView expandableView = (ExpandableView) getChildAt(i);
             if (expandableView != null ? expandableView.isHeadsUpState() : false) {
@@ -1386,118 +1949,110 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:111:0x0142, code lost:
-    
-        r9 = scrollAmountForKeyboardFocus(r0);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:112:0x0146, code lost:
-    
-        if (r9 == 0) goto L113;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:114:0x014f, code lost:
-    
-        if ((r8.mOwnScrollY + r9) <= getScrollRange()) goto L108;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:115:0x0151, code lost:
-    
-        r8.mOwnScrollY = getScrollRange();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:117:0x015f, code lost:
-    
-        if (r8.mAnimationsEnabled == false) goto L112;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:118:0x0161, code lost:
-    
-        r8.mNeedsAnimation = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:119:0x0163, code lost:
-    
-        requestChildrenUpdate();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:120:0x0158, code lost:
-    
-        r8.mOwnScrollY += r9;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:121:0x0166, code lost:
-    
-        r3.requestFocus();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:122:0x0169, code lost:
-    
-        return true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x0071, code lost:
-    
-        r3.requestFocus();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x0074, code lost:
-    
-        return true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:78:0x00e9, code lost:
-    
-        if ((r3 instanceof com.android.systemui.statusbar.NotificationShelf) != false) goto L87;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:79:0x00eb, code lost:
-    
-        r9 = scrollAmountForKeyboardFocus(r0);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:80:0x00ef, code lost:
-    
-        if (r9 == 0) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:82:0x00f8, code lost:
-    
-        if ((r8.mOwnScrollY + r9) <= getScrollRange()) goto L80;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:83:0x00fa, code lost:
-    
-        r8.mOwnScrollY = getScrollRange();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:85:0x0108, code lost:
-    
-        if (r8.mAnimationsEnabled == false) goto L84;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:86:0x010a, code lost:
-    
-        r8.mNeedsAnimation = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:87:0x010c, code lost:
-    
-        requestChildrenUpdate();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:88:0x0101, code lost:
-    
-        r8.mOwnScrollY += r9;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:89:0x010f, code lost:
-    
-        r3.requestFocus();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:90:0x0112, code lost:
-    
-        return true;
-     */
     @Override // android.view.ViewGroup, android.view.View
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean dispatchKeyEvent(android.view.KeyEvent r9) {
-        /*
-            Method dump skipped, instructions count: 367
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.dispatchKeyEvent(android.view.KeyEvent):boolean");
+    public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
+        int i;
+        int i2;
+        View childAt;
+        ExpandableNotificationRow expandableNotificationRow;
+        int i3;
+        int i4 = 0;
+        boolean z = keyEvent.getAction() == 0;
+        View childAt2 = null;
+        if (z && keyEvent.getKeyCode() == 19) {
+            View viewFindFocus = findFocus();
+            if (viewFindFocus instanceof ExpandableNotificationRow) {
+                ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) viewFindFocus;
+                int childCount = getChildCount();
+                while (true) {
+                    if (i4 >= childCount) {
+                        expandableNotificationRow = null;
+                        break;
+                    }
+                    View childAt3 = getChildAt(i4);
+                    if ((childAt3 instanceof ExpandableNotificationRow) && childAt3.getVisibility() != 8 && childAt3 != this.mShelf) {
+                        expandableNotificationRow = (ExpandableNotificationRow) childAt3;
+                        break;
+                    }
+                    i4++;
+                }
+                if (expandableNotificationRow2 != null && expandableNotificationRow2.equals(expandableNotificationRow)) {
+                    return super.dispatchKeyEvent(keyEvent);
+                }
+                int iIndexOfChild = indexOfChild(expandableNotificationRow2);
+                for (int i5 = 1; i5 < getChildCount() - iIndexOfChild && (i3 = iIndexOfChild - i5) >= 0 && ((childAt2 = getChildAt(i3)) == null || childAt2.getVisibility() != 0); i5++) {
+                }
+                if (childAt2 != null) {
+                    childAt2.requestFocus();
+                    return true;
+                }
+            } else if (this.mShelf.hasFocus() && (childAt = getChildAt(indexOfChild(this.mShelf) - 1)) != null) {
+                this.mOwnScrollY = getScrollRange();
+                if (this.mAnimationsEnabled) {
+                    this.mNeedsAnimation = true;
+                }
+                requestChildrenUpdate();
+                childAt.post(new NotificationStackScrollLayout$$ExternalSyntheticLambda0(childAt));
+                return true;
+            }
+        } else if ((z && keyEvent.getKeyCode() == 20) || (z && keyEvent.getKeyCode() == 61)) {
+            View viewFindFocus2 = findFocus();
+            if (viewFindFocus2 instanceof ExpandableNotificationRow) {
+                int iIndexOfChild2 = indexOfChild((ExpandableNotificationRow) viewFindFocus2);
+                for (int i6 = 1; i6 < getChildCount() - iIndexOfChild2 && (i2 = iIndexOfChild2 + i6) < getChildCount() && ((childAt2 = getChildAt(i2)) == null || childAt2.getVisibility() != 0); i6++) {
+                }
+                if (childAt2 != null && !(childAt2 instanceof NotificationShelf)) {
+                    int iScrollAmountForKeyboardFocus = scrollAmountForKeyboardFocus(iIndexOfChild2);
+                    if (iScrollAmountForKeyboardFocus != 0) {
+                        if (this.mOwnScrollY + iScrollAmountForKeyboardFocus > getScrollRange()) {
+                            this.mOwnScrollY = getScrollRange();
+                        } else {
+                            this.mOwnScrollY += iScrollAmountForKeyboardFocus;
+                        }
+                        if (this.mAnimationsEnabled) {
+                            this.mNeedsAnimation = true;
+                        }
+                        requestChildrenUpdate();
+                    }
+                    childAt2.requestFocus();
+                    return true;
+                }
+                if (childAt2 != null) {
+                    this.mShelf.requestFocus();
+                    return true;
+                }
+            } else if (viewFindFocus2 instanceof SectionHeaderView) {
+                int iIndexOfChild3 = indexOfChild((SectionHeaderView) viewFindFocus2);
+                for (int i7 = 1; i7 < getChildCount() - iIndexOfChild3 && (i = iIndexOfChild3 + i7) < getChildCount() && (childAt2 = getChildAt(i)) == null; i7++) {
+                }
+                if (childAt2 != null) {
+                    int iScrollAmountForKeyboardFocus2 = scrollAmountForKeyboardFocus(iIndexOfChild3);
+                    if (iScrollAmountForKeyboardFocus2 != 0) {
+                        if (this.mOwnScrollY + iScrollAmountForKeyboardFocus2 > getScrollRange()) {
+                            this.mOwnScrollY = getScrollRange();
+                        } else {
+                            this.mOwnScrollY += iScrollAmountForKeyboardFocus2;
+                        }
+                        if (this.mAnimationsEnabled) {
+                            this.mNeedsAnimation = true;
+                        }
+                        requestChildrenUpdate();
+                    }
+                    childAt2.requestFocus();
+                    return true;
+                }
+            }
+        }
+        return super.dispatchKeyEvent(keyEvent);
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         int i = SceneContainerFlag.$r8$clinit;
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "StackScroller", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "StackScroller", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // android.view.ViewGroup
@@ -1518,23 +2073,23 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         if (this.mShouldUseRoundedRectClipping && path != null) {
             canvas.clipPath(path);
         }
-        boolean drawChild = super.drawChild(canvas, view, j);
+        boolean zDrawChild = super.drawChild(canvas, view, j);
         canvas.restore();
-        return drawChild;
+        return zDrawChild;
     }
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, final String[] strArr) {
-        final IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        final long elapsedRealtime = SystemClock.elapsedRealtime();
-        asIndenting.println("Internal state:");
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new Runnable(asIndenting, elapsedRealtime, strArr) { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda6
+        final IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        final long jElapsedRealtime = SystemClock.elapsedRealtime();
+        indentingPrintWriterAsIndenting.println("Internal state:");
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new Runnable(indentingPrintWriterAsIndenting, jElapsedRealtime, strArr) { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda6
             public final /* synthetic */ IndentingPrintWriter f$1;
             public final /* synthetic */ long f$2;
 
             @Override // java.lang.Runnable
             public final void run() {
-                NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
+                NotificationStackScrollLayout notificationStackScrollLayout = this.f$0;
                 IndentingPrintWriter indentingPrintWriter = this.f$1;
                 long j = this.f$2;
                 DumpUtilsKt.println(indentingPrintWriter, "pulsing", Boolean.valueOf(notificationStackScrollLayout.mPulsing));
@@ -1593,7 +2148,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                     int i = SceneContainerFlag.$r8$clinit;
                     RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                     DumpUtilsKt.println(indentingPrintWriter, "intrinsicContentHeight", Float.valueOf(notificationStackScrollLayout.mIntrinsicContentHeight));
-                    DumpUtilsKt.println(indentingPrintWriter, "contentHeight", Integer.valueOf(notificationStackScrollLayout.mContentHeight));
+                    DumpUtilsKt.println(indentingPrintWriter, "contentHeight", Integer.valueOf(notificationStackScrollLayout.getContentHeight()));
                     DumpUtilsKt.println(indentingPrintWriter, "topPadding", Integer.valueOf(notificationStackScrollLayout.getTopPadding()));
                     DumpUtilsKt.println(indentingPrintWriter, "maxTopPadding", Integer.valueOf(notificationStackScrollLayout.mMaxTopPadding));
                     DumpUtilsKt.println(indentingPrintWriter, "qsExpandFraction", Float.valueOf(notificationStackScrollLayout.getQsExpansionFraction$1()));
@@ -1603,13 +2158,13 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 }
             }
         });
-        asIndenting.println();
-        asIndenting.println("Contents:");
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda7
+        indentingPrintWriterAsIndenting.println();
+        indentingPrintWriterAsIndenting.println("Contents:");
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
-                PrintWriter printWriter2 = asIndenting;
+                NotificationStackScrollLayout notificationStackScrollLayout = this.f$0;
+                PrintWriter printWriter2 = indentingPrintWriterAsIndenting;
                 String[] strArr2 = strArr;
                 boolean z = NotificationStackScrollLayout.DEBUG_DISABLE_SHOW_NEW_NOTIF_ONLY;
                 int childCount = notificationStackScrollLayout.getChildCount();
@@ -1697,7 +2252,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
         PanelScreenShotLogger.addLogItem(arrayList, "mLastInvisibleTrace", str2);
         String str3 = this.mLastVisibleTrace;
-        PanelScreenShotLogger.addLogItem(arrayList, "mLastVisibleTrace", str3 != null ? str3 : "NULL");
+        if (str3 == null) {
+            str3 = "NULL";
+        }
+        PanelScreenShotLogger.addLogItem(arrayList, "mLastVisibleTrace", str3);
+        String str4 = this.mLastAlphaZeroTrace;
+        PanelScreenShotLogger.addLogItem(arrayList, "mLastAlphaZeroTrace", str4 != null ? str4 : "NULL");
         PanelScreenShotLogger.addLogItem(arrayList, "appIconColor", Integer.toHexString(getContext().getColor(R.color.notification_app_icon_color)));
         arrayList.add("\n\n");
         for (int i = 0; i < getChildCount(); i++) {
@@ -1706,9 +2266,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) childAt;
                 ExpandableViewState expandableViewState = expandableNotificationRow.mViewState;
                 PanelScreenShotLogger panelScreenShotLogger = PanelScreenShotLogger.INSTANCE;
-                String str4 = expandableNotificationRow.mLoggingKey;
+                String str5 = expandableNotificationRow.mLoggingKey;
                 panelScreenShotLogger.getClass();
-                PanelScreenShotLogger.addLogItem(arrayList, "key", str4);
+                PanelScreenShotLogger.addLogItem(arrayList, "key", str5);
                 PanelScreenShotLogger.addLogItem(arrayList, "x", Float.valueOf(expandableNotificationRow.getX()));
                 PanelScreenShotLogger.addLogItem(arrayList, "y", Float.valueOf(expandableNotificationRow.getY()));
                 PanelScreenShotLogger.addLogItem(arrayList, "alpha", Float.valueOf(expandableNotificationRow.getAlpha()));
@@ -1750,20 +2310,20 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public final float getAppearEndPosition() {
         int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        int i2 = this.mAmbientState.mStackTopMargin;
+        int positionInLinearLayout = this.mAmbientState.mStackTopMargin;
         boolean areAnyNotificationsPresentValue = this.mController.mActiveNotificationsInteractor.getAreAnyNotificationsPresentValue();
         boolean z = NotiRune.NOTI_AOSP_DISABLE_EMPTY_SHADE_VIEW;
         if (!z ? this.mEmptyShadeView.getVisibility() == 8 && areAnyNotificationsPresentValue : areAnyNotificationsPresentValue) {
-            i2 = (z || this.mEmptyShadeView.getVisibility() == 8) ? 0 : this.mEmptyShadeView.getHeight();
+            positionInLinearLayout = (z || this.mEmptyShadeView.getVisibility() == 8) ? 0 : this.mEmptyShadeView.getHeight();
         } else if (isHeadsUpTransition() || (this.mInHeadsUpPinnedMode && !this.mAmbientState.mDozing)) {
             if (this.mShelf.getVisibility() != 8) {
-                i2 += this.mShelf.getHeight() + this.mPaddingBetweenElements;
+                positionInLinearLayout += this.mShelf.getHeight() + this.mPaddingBetweenElements;
             }
-            i2 += getPositionInLinearLayout(this.mAmbientState.getTrackedHeadsUpRow()) + getTopHeadsUpPinnedHeight();
+            positionInLinearLayout += getPositionInLinearLayout(this.mAmbientState.getTrackedHeadsUpRow()) + getTopHeadsUpPinnedHeight();
         } else if (this.mShelf.getVisibility() != 8) {
-            i2 += this.mShelf.getHeight();
+            positionInLinearLayout += this.mShelf.getHeight();
         }
-        return i2 + (onKeyguard() ? getTopPadding() : this.mIntrinsicPadding);
+        return positionInLinearLayout + (onKeyguard() ? getTopPadding() : this.mIntrinsicPadding);
     }
 
     public final float getAppearStartPosition() {
@@ -1775,17 +2335,20 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         return (this.mHeadsUpInset - this.mAmbientState.mStackTopMargin) + (getFirstVisibleSection() != null ? r0.mFirstVisibleChild.getPinnedHeadsUpHeight() : 0);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0072  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final ExpandableView getChildAtPosition(float f, float f2, boolean z, boolean z2) {
-        boolean z3;
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             ExpandableView expandableView = (ExpandableView) getChildAt(i);
             if (expandableView.getVisibility() == 0 && (!z2 || !(expandableView instanceof StackScrollerDecorView))) {
                 float translationY = expandableView.getTranslationY();
-                float max = Math.max(0, expandableView.mClipTopAmount) + translationY;
+                float fMax = Math.max(0, expandableView.mClipTopAmount) + translationY;
                 float f3 = (expandableView.mActualHeight + translationY) - expandableView.mClipBottomAmount;
                 int width = getWidth();
-                if ((f3 - max >= this.mMinInteractionHeight || !z) && f2 >= max && f2 <= f3 && f >= 0 && f <= width) {
+                if ((f3 - fMax >= this.mMinInteractionHeight || !z) && f2 >= fMax && f2 <= f3 && f >= 0 && f <= width) {
                     if (!(expandableView instanceof ExpandableNotificationRow)) {
                         return expandableView;
                     }
@@ -1794,17 +2357,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                     NotificationEntry entryLegacy = expandableNotificationRow.getEntryLegacy();
                     ExpandableNotificationRow expandableNotificationRow2 = this.mTopHeadsUpRow;
                     if (expandableNotificationRow2 != null) {
-                        if (((GroupMembershipManagerImpl) this.mGroupMembershipManager).getGroupSummary(expandableNotificationRow2.getEntryLegacy()) == entryLegacy) {
-                            z3 = true;
-                            if (!this.mIsExpanded || !expandableNotificationRow.mIsHeadsUp || !expandableNotificationRow.mPinnedStatus.isPinned() || this.mTopHeadsUpRow == expandableNotificationRow || z3) {
-                                return expandableNotificationRow.getViewAtPosition(f2 - translationY);
-                            }
+                        boolean z3 = ((GroupMembershipManagerImpl) this.mGroupMembershipManager).getGroupSummary(expandableNotificationRow2.getEntryLegacy()) == entryLegacy;
+                        if (this.mIsExpanded || !expandableNotificationRow.mIsHeadsUp || !expandableNotificationRow.mPinnedStatus.isPinned() || this.mTopHeadsUpRow == expandableNotificationRow || z3) {
+                            return expandableNotificationRow.getViewAtPosition(f2 - translationY);
                         }
                     }
-                    z3 = false;
-                    if (!this.mIsExpanded) {
-                    }
-                    return expandableNotificationRow.getViewAtPosition(f2 - translationY);
                 }
             }
         }
@@ -1829,6 +2386,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         return arrayList;
     }
 
+    public final int getContentHeight() {
+        int i = SceneContainerFlag.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        return this.mContentHeight;
+    }
+
     public final float getCurrentOverScrollAmount(boolean z) {
         AmbientState ambientState = this.mAmbientState;
         return z ? ambientState.mOverScrollTopAmount : ambientState.mOverScrollBottomAmount;
@@ -1837,19 +2400,19 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     public final String getDndStatusText(ZenModeController zenModeController) {
         ZenModeConfig zenModeConfig;
         Uri uri;
-        String str = "";
+        String string = "";
         if (zenModeController != null && (zenModeConfig = ((ZenModeControllerImpl) zenModeController).mConfig) != null) {
             ZenModeConfig.ZenRule zenRule = zenModeConfig.manualRule;
             if (zenRule != null && zenRule.conditionId == null) {
-                String str2 = zenRule.enabler;
-                return str2 != null ? ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_by_app_name, getApplicationNameFromPackage(zenModeController, str2)) : ((ViewGroup) this).mContext.getString(R.string.zen_mode_settings_dnd_manual_indefinite);
+                String str = zenRule.enabler;
+                return str != null ? ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_by_app_name, getApplicationNameFromPackage(zenModeController, str)) : ((ViewGroup) this).mContext.getString(R.string.zen_mode_settings_dnd_manual_indefinite);
             }
             if (zenRule != null && (uri = zenRule.conditionId) != null && ZenModeConfig.isValidCountdownConditionId(uri)) {
-                long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(zenModeConfig.manualRule.conditionId);
-                boolean isToday = ZenModeConfig.isToday(tryParseCountdownConditionId);
+                long jTryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(zenModeConfig.manualRule.conditionId);
+                boolean zIsToday = ZenModeConfig.isToday(jTryParseCountdownConditionId);
                 Context context = ((ViewGroup) this).mContext;
-                CharSequence formattedTime = ZenModeConfig.getFormattedTime(context, tryParseCountdownConditionId, isToday, context.getUserId());
-                return isToday ? ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_until_time, formattedTime) : ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_until_time_tomorrow, formattedTime);
+                CharSequence formattedTime = ZenModeConfig.getFormattedTime(context, jTryParseCountdownConditionId, zIsToday, context.getUserId());
+                return zIsToday ? ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_until_time, formattedTime) : ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_until_time_tomorrow, formattedTime);
             }
             ArrayMap arrayMap = zenModeConfig.automaticRules;
             if (arrayMap != null && !arrayMap.isEmpty()) {
@@ -1865,12 +2428,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                     if (zenRule2.isAutomaticActive() && description != null && description.equals(zenRule2.name)) {
                         if (ZenModeConfig.isValidScheduleConditionId(zenRule2.conditionId)) {
                             long nextChangeTime = ZenModeConfig.toScheduleCalendar(zenRule2.conditionId).getNextChangeTime(System.currentTimeMillis());
-                            boolean isToday2 = ZenModeConfig.isToday(nextChangeTime);
+                            boolean zIsToday2 = ZenModeConfig.isToday(nextChangeTime);
                             Context context2 = ((ViewGroup) this).mContext;
-                            CharSequence formattedTime2 = ZenModeConfig.getFormattedTime(context2, nextChangeTime, isToday2, context2.getUserId());
-                            str = isToday2 ? ((ViewGroup) this).mContext.getString(R.string.dnd_on_schedule_on_today_header, formattedTime2) : ((ViewGroup) this).mContext.getString(R.string.dnd_on_schedule_on_next_day_header, formattedTime2);
+                            CharSequence formattedTime2 = ZenModeConfig.getFormattedTime(context2, nextChangeTime, zIsToday2, context2.getUserId());
+                            string = zIsToday2 ? ((ViewGroup) this).mContext.getString(R.string.dnd_on_schedule_on_today_header, formattedTime2) : ((ViewGroup) this).mContext.getString(R.string.dnd_on_schedule_on_next_day_header, formattedTime2);
                         } else {
-                            str = ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_by_app_and_schedule_name, getApplicationNameFromPackage(zenModeController, zenRule2.pkg.equals(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG) ? "com.samsung.android.app.routines" : zenRule2.pkg), description);
+                            string = ((ViewGroup) this).mContext.getString(R.string.sec_zen_mode_footer_by_app_and_schedule_name, getApplicationNameFromPackage(zenModeController, zenRule2.pkg.equals(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG) ? "com.samsung.android.app.routines" : zenRule2.pkg), description);
                         }
                     }
                 }
@@ -1879,7 +2442,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 }
             }
         }
-        return str;
+        return string;
     }
 
     public final View getFirstChildBelowTranlsationY(float f) {
@@ -1962,19 +2525,83 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x003d  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int getPositionInLinearLayout(android.view.View r14) {
-        /*
-            Method dump skipped, instructions count: 202
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.getPositionInLinearLayout(android.view.View):int");
+    public final int getPositionInLinearLayout(View view) {
+        ExpandableNotificationRow expandableNotificationRow;
+        ExpandableNotificationRow expandableNotificationRow2;
+        PipelineEntry pipelineEntry;
+        ExpandableView expandableView = null;
+        if (view instanceof ExpandableNotificationRow) {
+            ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) view;
+            int i = NotificationBundleUi.$r8$clinit;
+            GroupMembershipManager groupMembershipManager = this.mGroupMembershipManager;
+            NotificationEntry entryLegacy = expandableNotificationRow3.getEntryLegacy();
+            GroupMembershipManagerImpl groupMembershipManagerImpl = (GroupMembershipManagerImpl) groupMembershipManager;
+            groupMembershipManagerImpl.getClass();
+            RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+            if (groupMembershipManagerImpl.isGroupSummary(entryLegacy) || (pipelineEntry = entryLegacy.mAttachState.parent) == GroupEntry.ROOT_ENTRY || pipelineEntry == null) {
+                expandableNotificationRow = 0;
+                expandableNotificationRow2 = null;
+            } else {
+                view = expandableNotificationRow3.mNotificationParent;
+                expandableNotificationRow2 = expandableNotificationRow3;
+                expandableNotificationRow = view;
+            }
+        }
+        int i2 = SceneContainerFlag.$r8$clinit;
+        int i3 = 0;
+        float f = this.mAmbientState.isOnKeyguard$1() ? 0 : this.mMinimumPaddings;
+        int intrinsicHeight = (int) f;
+        for (int i4 = 0; i4 < getChildCount(); i4++) {
+            ExpandableView expandableView2 = (ExpandableView) getChildAt(i4);
+            boolean z = expandableView2.getVisibility() != 8;
+            if (z && !expandableView2.hasNoContentHeight()) {
+                float f2 = intrinsicHeight;
+                if (f2 != f) {
+                    if (expandableView != null) {
+                        intrinsicHeight = (int) (calculateGapHeight(expandableView, expandableView2) + f2);
+                    }
+                    intrinsicHeight += this.mPaddingBetweenElements;
+                }
+            }
+            if (expandableView2 == view) {
+                if (expandableNotificationRow == 0) {
+                    return intrinsicHeight;
+                }
+                if (expandableNotificationRow.mIsSummaryWithChildren) {
+                    NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow.mChildrenContainer;
+                    int intrinsicHeight2 = (notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? notificationChildrenContainer.mHeaderExpandedHeight : 0) + notificationChildrenContainer.mAdditionalExpandedHeaderMargin;
+                    int i5 = 0;
+                    while (true) {
+                        if (i5 >= ((ArrayList) notificationChildrenContainer.mAttachedChildren).size()) {
+                            break;
+                        }
+                        ExpandableNotificationRow expandableNotificationRow4 = (ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i5);
+                        boolean z2 = expandableNotificationRow4.getVisibility() != 8;
+                        if (z2) {
+                            intrinsicHeight2 += notificationChildrenContainer.mDividerHeight;
+                        }
+                        if (expandableNotificationRow4 == expandableNotificationRow2) {
+                            i3 = intrinsicHeight2;
+                            break;
+                        }
+                        if (z2) {
+                            intrinsicHeight2 = expandableNotificationRow4.getIntrinsicHeight() + intrinsicHeight2;
+                        }
+                        i5++;
+                    }
+                }
+                return intrinsicHeight + i3;
+            }
+            if (z) {
+                intrinsicHeight = expandableView2.getIntrinsicHeight() + intrinsicHeight;
+                expandableView = expandableView2;
+            }
+        }
+        return 0;
     }
 
     public final float getQsExpansionFraction$1() {
@@ -2010,15 +2637,14 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
 
     public final int getScrollRange() {
         int i = SceneContainerFlag.$r8$clinit;
-        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        int i2 = this.mContentHeight;
+        int contentHeight = getContentHeight();
         if (!this.mIsExpanded && this.mInHeadsUpPinnedMode) {
-            i2 = this.mHeadsUpInset + getTopHeadsUpPinnedHeight();
+            contentHeight = this.mHeadsUpInset + getTopHeadsUpPinnedHeight();
         }
-        int max = Math.max(0, i2 - this.mMaxLayoutHeight);
+        int iMax = Math.max(0, contentHeight - this.mMaxLayoutHeight);
         int imeInset = getImeInset();
-        int min = Math.min(imeInset, Math.max(0, i2 - (getHeight() - imeInset))) + max;
-        return (this.mInHeadsUpPinnedMode || min <= 0) ? min : Math.max(getScrollAmountToScrollBoundary(), min);
+        int iMin = Math.min(imeInset, Math.max(0, contentHeight - (getHeight() - imeInset))) + iMax;
+        return (this.mInHeadsUpPinnedMode || iMin <= 0) ? iMin : Math.max(getScrollAmountToScrollBoundary(), iMin);
     }
 
     public final int getTopHeadsUpPinnedHeight() {
@@ -2062,22 +2688,22 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
 
     public final void handleEmptySpaceClick(MotionEvent motionEvent) {
         int i = SceneContainerFlag.$r8$clinit;
-        boolean isBelowLastNotification = isBelowLastNotification(this.mInitialTouchX, this.mInitialTouchY);
+        boolean zIsBelowLastNotification = isBelowLastNotification(this.mInitialTouchX, this.mInitialTouchY);
         int i2 = this.mStatusBarState;
         boolean z = this.mTouchIsClick;
         NotificationStackScrollLogger notificationStackScrollLogger = this.mLogger;
         if (notificationStackScrollLogger != null) {
-            String actionToString = MotionEvent.actionToString(motionEvent.getActionMasked());
+            String strActionToString = MotionEvent.actionToString(motionEvent.getActionMasked());
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationStackScrollLogger$$ExternalSyntheticLambda0 notificationStackScrollLogger$$ExternalSyntheticLambda0 = new NotificationStackScrollLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = notificationStackScrollLogger.shadeLogBuffer;
-            LogMessage obtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i2;
             logMessageImpl.bool1 = z;
-            logMessageImpl.bool2 = isBelowLastNotification;
-            logMessageImpl.str1 = actionToString;
-            logBuffer.commit(obtain);
+            logMessageImpl.bool2 = zIsBelowLastNotification;
+            logMessageImpl.str1 = strActionToString;
+            logBuffer.commit(logMessageObtain);
         }
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked != 1) {
@@ -2124,42 +2750,42 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
 
     public final void inflateDndView() {
         DndStatusView dndStatusView = this.mDndStatusView;
-        int i = 0;
+        int iIndexOfChild = 0;
         DndStatusView dndStatusView2 = (DndStatusView) LayoutInflater.from(((ViewGroup) this).mContext).inflate(R.layout.status_bar_notification_dnd_status, (ViewGroup) this, false);
-        View findViewById = dndStatusView2.findViewById(R.id.notification_dnd_status_text_icon_container);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(new NotificationStackScrollLayout$$ExternalSyntheticLambda1(this, 0));
+        View viewFindViewById = dndStatusView2.findViewById(R.id.notification_dnd_status_text_icon_container);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(new NotificationStackScrollLayout$$ExternalSyntheticLambda1(this, 0));
         }
         dndStatusView2.setVisible(dndStatusView != null && dndStatusView.mIsVisible, false);
         dndStatusView2.setDndTextAndIcon(getDndStatusText(this.mZenModeController));
         dndStatusView2.setSecondaryVisible(dndStatusView != null && dndStatusView.mIsVisible);
         View view = this.mDndStatusView;
         if (view != null) {
-            i = indexOfChild(view);
+            iIndexOfChild = indexOfChild(view);
             removeView(this.mDndStatusView);
         }
         this.mDndStatusView = dndStatusView2;
-        addView(dndStatusView2, i);
+        addView(dndStatusView2, iIndexOfChild);
     }
 
     public final void inflateEmptyShadeView() {
-        int i;
+        int iIndexOfChild;
         if (NotiRune.NOTI_AOSP_DISABLE_EMPTY_SHADE_VIEW) {
             return;
         }
-        int i2 = ModesEmptyShadeFix.$r8$clinit;
+        int i = ModesEmptyShadeFix.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         EmptyShadeView emptyShadeView = this.mEmptyShadeView;
         EmptyShadeView emptyShadeView2 = (EmptyShadeView) LayoutInflater.from(((ViewGroup) this).mContext).inflate(R.layout.status_bar_no_notifications, (ViewGroup) this, false);
         View view = this.mEmptyShadeView;
         if (view != null) {
-            i = indexOfChild(view);
+            iIndexOfChild = indexOfChild(view);
             removeView(this.mEmptyShadeView);
         } else {
-            i = -1;
+            iIndexOfChild = -1;
         }
         this.mEmptyShadeView = emptyShadeView2;
-        addView(emptyShadeView2, i);
+        addView(emptyShadeView2, iIndexOfChild);
         emptyShadeView2.setVisible(emptyShadeView != null && emptyShadeView.mIsVisible, false);
         updateEmptyShadeViewResources(emptyShadeView == null ? R.string.empty_shade_text : emptyShadeView.mTextId, emptyShadeView == null ? 0 : emptyShadeView.mFooterText, emptyShadeView != null ? emptyShadeView.mFooterIcon : 0);
     }
@@ -2186,11 +2812,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         boolean z = resources.getBoolean(R.bool.is_small_screen_landscape);
         boolean z2 = resources.getBoolean(R.bool.config_skinnyNotifsInLandscape);
         this.mSkinnyNotifsInLandscape = z2;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("mIsSmallLandscapeLockscreenEnabled=false isSmallScreenLandscape=", " useSmallLandscapeLockscreenResources=", " skinnyNotifsInLandscape=", z, false);
-        m.append(z2);
-        m.append(" mSkinnyNotifsInLandscape=");
-        m.append(this.mSkinnyNotifsInLandscape);
-        this.mLastInitViewDumpString = m.toString();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("mIsSmallLandscapeLockscreenEnabled=false isSmallScreenLandscape=", " useSmallLandscapeLockscreenResources=", " skinnyNotifsInLandscape=", z, false);
+        sbM.append(z2);
+        sbM.append(" mSkinnyNotifsInLandscape=");
+        sbM.append(this.mSkinnyNotifsInLandscape);
+        this.mLastInitViewDumpString = sbM.toString();
         this.mLastInitViewElapsedRealtime = SystemClock.elapsedRealtime();
         resources.getDimensionPixelSize(R.dimen.notification_section_divider_height);
         this.mStackScrollAlgorithm.initView(context);
@@ -2352,15 +2978,15 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         LogLevel logLevel = LogLevel.INFO;
         NotificationStackScrollLogger$$ExternalSyntheticLambda0 notificationStackScrollLogger$$ExternalSyntheticLambda0 = new NotificationStackScrollLogger$$ExternalSyntheticLambda0(4);
         LogBuffer logBuffer = notificationStackScrollLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str2;
         logMessageImpl.str2 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void notifyAppearChangedListeners() {
-        float saturate;
+        float fSaturate;
         float f;
         if (this.mKeyguardBypassEnabled && onKeyguard()) {
             float f2 = this.mAmbientState.mPulseHeight;
@@ -2369,22 +2995,22 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 f2 = 0.0f;
             }
             int i = SceneContainerFlag.$r8$clinit;
-            saturate = MathUtils.smoothStep(0.0f, this.mIntrinsicPadding, f2);
+            fSaturate = MathUtils.smoothStep(0.0f, this.mIntrinsicPadding, f2);
             float f3 = this.mAmbientState.mPulseHeight;
             if (f3 != 100000.0f) {
                 f = f3;
             }
         } else {
-            saturate = MathUtils.saturate(calculateAppearFraction(this.mExpandedHeight));
+            fSaturate = MathUtils.saturate(calculateAppearFraction(this.mExpandedHeight));
             f = this.mExpandedHeight;
         }
-        if (saturate == this.mLastSentAppear && f == this.mLastSentExpandedHeight) {
+        if (fSaturate == this.mLastSentAppear && f == this.mLastSentExpandedHeight) {
             return;
         }
-        this.mLastSentAppear = saturate;
+        this.mLastSentAppear = fSaturate;
         this.mLastSentExpandedHeight = f;
         for (int i2 = 0; i2 < this.mExpandedHeightListeners.size(); i2++) {
-            ((BiConsumer) this.mExpandedHeightListeners.get(i2)).accept(Float.valueOf(f), Float.valueOf(saturate));
+            ((BiConsumer) this.mExpandedHeightListeners.get(i2)).accept(Float.valueOf(f), Float.valueOf(fSaturate));
         }
     }
 
@@ -2410,9 +3036,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 notificationPanelViewController.updateExpandedHeightToMaxHeight();
             }
         }
-        SharedNotificationContainerBinder$bind$3 sharedNotificationContainerBinder$bind$3 = this.mOnHeightChangedRunnable;
-        if (sharedNotificationContainerBinder$bind$3 != null) {
-            sharedNotificationContainerBinder$bind$3.run();
+        SharedNotificationContainerBinder.AnonymousClass3 anonymousClass3 = this.mOnHeightChangedRunnable;
+        if (anonymousClass3 != null) {
+            anonymousClass3.run();
         }
     }
 
@@ -2497,14 +3123,14 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 if (expandableNotificationRow.isChildInGroup()) {
                     translationY += expandableNotificationRow.mNotificationParent.getTranslationY();
                 }
-                int i = this.mMaxLayoutHeight + ((int) this.mAmbientState.mStackTranslation);
+                int height = this.mMaxLayoutHeight + ((int) this.mAmbientState.mStackTranslation);
                 NotificationSection lastVisibleSection = getLastVisibleSection();
                 if (expandableNotificationRow != (lastVisibleSection == null ? null : lastVisibleSection.mLastVisibleChild) && this.mShelf.getVisibility() != 8) {
-                    i -= this.mShelf.getHeight() + this.mPaddingBetweenElements;
+                    height -= this.mShelf.getHeight() + this.mPaddingBetweenElements;
                 }
-                float f = i;
+                float f = height;
                 if (translationY > f) {
-                    int i2 = SceneContainerFlag.$r8$clinit;
+                    int i = SceneContainerFlag.$r8$clinit;
                     setOwnScrollY((int) ((getOwnScrollY() + translationY) - f));
                     this.mDisallowScrollingInThisMotion = true;
                 }
@@ -2657,6 +3283,10 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:34:0x008d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onInterceptTouchEventScroll(MotionEvent motionEvent) {
         if (!this.mScrollingEnabled) {
             return false;
@@ -2666,71 +3296,68 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             return true;
         }
         int i = action & 255;
-        if (i != 0) {
-            if (i != 1) {
-                if (i == 2) {
-                    int i2 = this.mActivePointerId;
-                    if (i2 != -1) {
-                        int findPointerIndex = motionEvent.findPointerIndex(i2);
-                        if (findPointerIndex == -1) {
-                            Log.e("StackScroller", "Invalid pointerId=" + i2 + " in onInterceptTouchEvent");
-                        } else {
-                            int y = (int) motionEvent.getY(findPointerIndex);
-                            int x = (int) motionEvent.getX(findPointerIndex);
-                            int abs = Math.abs(y - this.mLastMotionY);
-                            int abs2 = Math.abs(x - this.mDownX);
-                            if (abs > getTouchSlop$2(motionEvent) && abs > abs2) {
-                                setIsBeingDragged(true);
-                                this.mLastMotionY = y;
-                                this.mDownX = x;
-                                if (this.mVelocityTracker == null) {
-                                    this.mVelocityTracker = VelocityTracker.obtain();
-                                }
-                                this.mVelocityTracker.addMovement(motionEvent);
-                            }
-                        }
-                    }
-                } else if (i != 3) {
-                    if (i == 6) {
-                        onSecondaryPointerUp(motionEvent);
-                    }
+        if (i == 0) {
+            int y = (int) motionEvent.getY();
+            AnonymousClass9 anonymousClass9 = this.mScrollAdapter;
+            anonymousClass9.getClass();
+            int i2 = SceneContainerFlag.$r8$clinit;
+            this.mScrolledToTopOnFirstDown = NotificationStackScrollLayout.this.getOwnScrollY() == 0;
+            if (getChildAtPosition(motionEvent.getX(), y, false, false) == null) {
+                setIsBeingDragged(false);
+                VelocityTracker velocityTracker = this.mVelocityTracker;
+                if (velocityTracker != null) {
+                    velocityTracker.recycle();
+                    this.mVelocityTracker = null;
                 }
+            } else {
+                this.mLastMotionY = y;
+                this.mDownX = (int) motionEvent.getX();
+                this.mActivePointerId = motionEvent.getPointerId(0);
+                VelocityTracker velocityTracker2 = this.mVelocityTracker;
+                if (velocityTracker2 == null) {
+                    this.mVelocityTracker = VelocityTracker.obtain();
+                } else {
+                    velocityTracker2.clear();
+                }
+                this.mVelocityTracker.addMovement(motionEvent);
+                setIsBeingDragged(!this.mScroller.isFinished());
             }
+        } else if (i == 1) {
             setIsBeingDragged(false);
             this.mActivePointerId = -1;
-            VelocityTracker velocityTracker = this.mVelocityTracker;
-            if (velocityTracker != null) {
-                velocityTracker.recycle();
+            VelocityTracker velocityTracker3 = this.mVelocityTracker;
+            if (velocityTracker3 != null) {
+                velocityTracker3.recycle();
                 this.mVelocityTracker = null;
             }
             if (this.mScroller.springBack(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, 0, 0, getScrollRange())) {
                 animateScroll();
             }
-        } else {
-            int y2 = (int) motionEvent.getY();
-            AnonymousClass9 anonymousClass9 = this.mScrollAdapter;
-            anonymousClass9.getClass();
-            int i3 = SceneContainerFlag.$r8$clinit;
-            this.mScrolledToTopOnFirstDown = NotificationStackScrollLayout.this.getOwnScrollY() == 0;
-            if (getChildAtPosition(motionEvent.getX(), y2, false, false) == null) {
-                setIsBeingDragged(false);
-                VelocityTracker velocityTracker2 = this.mVelocityTracker;
-                if (velocityTracker2 != null) {
-                    velocityTracker2.recycle();
-                    this.mVelocityTracker = null;
-                }
-            } else {
-                this.mLastMotionY = y2;
-                this.mDownX = (int) motionEvent.getX();
-                this.mActivePointerId = motionEvent.getPointerId(0);
-                VelocityTracker velocityTracker3 = this.mVelocityTracker;
-                if (velocityTracker3 == null) {
-                    this.mVelocityTracker = VelocityTracker.obtain();
+        } else if (i == 2) {
+            int i3 = this.mActivePointerId;
+            if (i3 != -1) {
+                int iFindPointerIndex = motionEvent.findPointerIndex(i3);
+                if (iFindPointerIndex == -1) {
+                    Log.e("StackScroller", "Invalid pointerId=" + i3 + " in onInterceptTouchEvent");
                 } else {
-                    velocityTracker3.clear();
+                    int y2 = (int) motionEvent.getY(iFindPointerIndex);
+                    int x = (int) motionEvent.getX(iFindPointerIndex);
+                    int iAbs = Math.abs(y2 - this.mLastMotionY);
+                    int iAbs2 = Math.abs(x - this.mDownX);
+                    if (iAbs > getTouchSlop$2(motionEvent) && iAbs > iAbs2) {
+                        setIsBeingDragged(true);
+                        this.mLastMotionY = y2;
+                        this.mDownX = x;
+                        if (this.mVelocityTracker == null) {
+                            this.mVelocityTracker = VelocityTracker.obtain();
+                        }
+                        this.mVelocityTracker.addMovement(motionEvent);
+                    }
                 }
-                this.mVelocityTracker.addMovement(motionEvent);
-                setIsBeingDragged(!this.mScroller.isFinished());
+            }
+        } else if (i != 3) {
+            if (i == 6) {
+                onSecondaryPointerUp(motionEvent);
             }
         }
         return this.mIsBeingDragged;
@@ -2785,11 +3412,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
         int size = View.MeasureSpec.getSize(i);
         int i3 = getResources().getConfiguration().orientation;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "viewWidth=", " skinnyNotifsInLandscape=");
-        m.append(this.mSkinnyNotifsInLandscape);
-        m.append(" orientation=");
-        m.append(i3);
-        this.mLastUpdateSidePaddingDumpString = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "viewWidth=", " skinnyNotifsInLandscape=");
+        sbM.append(this.mSkinnyNotifsInLandscape);
+        sbM.append(" orientation=");
+        sbM.append(i3);
+        this.mLastUpdateSidePaddingDumpString = sbM.toString();
         this.mLastUpdateSidePaddingElapsedRealtime = SystemClock.elapsedRealtime();
         SecQSPanelResourcePicker secQSPanelResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
         int notificationSidePadding = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getNotificationSidePadding(((ViewGroup) this).mContext, true);
@@ -2799,11 +3426,11 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             Trace.endSection();
             return;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size - (notificationSidePadding * 2), View.MeasureSpec.getMode(i));
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i2), 0);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size - (notificationSidePadding * 2), View.MeasureSpec.getMode(i));
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i2), 0);
         int childCount = getChildCount();
         for (int i4 = 0; i4 < childCount; i4++) {
-            measureChild(getChildAt(i4), makeMeasureSpec, makeMeasureSpec2);
+            measureChild(getChildAt(i4), iMakeMeasureSpec, iMakeMeasureSpec2);
         }
         int i5 = SceneContainerFlag.$r8$clinit;
         Trace.endSection();
@@ -2825,28 +3452,208 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                     }
                 }
                 quickSettingsControllerImpl.setExpansionHeight(quickSettingsControllerImpl.mExpansionHeight);
-                boolean isExpansionEnabled = quickSettingsControllerImpl.isExpansionEnabled();
-                if (!isExpansionEnabled && z) {
+                boolean zIsExpansionEnabled = quickSettingsControllerImpl.isExpansionEnabled();
+                if (!zIsExpansionEnabled && z) {
                     f = 0.0f;
                 }
-                quickSettingsControllerImpl.flingQs(f, (z && isExpansionEnabled) ? 0 : 1, new QuickSettingsControllerImpl$$ExternalSyntheticLambda10(nsslOverscrollTopChangedListener, 4), false);
+                quickSettingsControllerImpl.flingQs(f, (z && zIsExpansionEnabled) ? 0 : 1, new QuickSettingsControllerImpl$$ExternalSyntheticLambda10(nsslOverscrollTopChangedListener, 4), false);
             }
         }
         this.mDontReportNextOverScroll = true;
         setOverScrollAmount(0.0f, true, false, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01d5  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x01d5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onScrollTouch(android.view.MotionEvent r23) {
-        /*
-            Method dump skipped, instructions count: 955
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.onScrollTouch(android.view.MotionEvent):boolean");
+    public final boolean onScrollTouch(MotionEvent motionEvent) {
+        float f;
+        StringBuilder sb;
+        if (this.mScrollingEnabled) {
+            if (isInScrollableRegion(motionEvent) || this.mIsBeingDragged) {
+                this.mForcedScroll = null;
+                if (this.mVelocityTracker == null) {
+                    this.mVelocityTracker = VelocityTracker.obtain();
+                }
+                this.mVelocityTracker.addMovement(motionEvent);
+                int actionMasked = motionEvent.getActionMasked();
+                if (motionEvent.findPointerIndex(this.mActivePointerId) == -1 && actionMasked != 0) {
+                    Log.e("StackScroller", "Invalid pointerId=" + this.mActivePointerId + " in onTouchEvent " + MotionEvent.actionToString(motionEvent.getActionMasked()));
+                    return true;
+                }
+                int i = SceneContainerFlag.$r8$clinit;
+                if (actionMasked != 0) {
+                    if (actionMasked != 1) {
+                        if (actionMasked == 2) {
+                            int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+                            if (iFindPointerIndex == -1) {
+                                Log.e("StackScroller", "Invalid pointerId=" + this.mActivePointerId + " in onTouchEvent");
+                                return true;
+                            }
+                            int y = (int) motionEvent.getY(iFindPointerIndex);
+                            int x = (int) motionEvent.getX(iFindPointerIndex);
+                            int i2 = this.mLastMotionY - y;
+                            int iAbs = Math.abs(x - this.mDownX);
+                            int iAbs2 = Math.abs(i2);
+                            float touchSlop$2 = getTouchSlop$2(motionEvent);
+                            if (!this.mIsBeingDragged && iAbs2 > touchSlop$2 && iAbs2 > iAbs) {
+                                setIsBeingDragged(true);
+                                i2 = (int) (i2 > 0 ? i2 - touchSlop$2 : i2 + touchSlop$2);
+                            }
+                            if (this.mIsBeingDragged) {
+                                this.mLastMotionY = y;
+                                int scrollRange = getScrollRange();
+                                if (this.mExpandedInThisMotion) {
+                                    scrollRange = Math.min(scrollRange, this.mMaxScrollAfterExpand);
+                                }
+                                if (i2 < 0) {
+                                    int iMin = Math.min(i2, 0);
+                                    float currentOverScrollAmount = getCurrentOverScrollAmount(false);
+                                    f = iMin + currentOverScrollAmount;
+                                    if (currentOverScrollAmount > 0.0f) {
+                                        setOverScrollAmount(f, false, false, true);
+                                    }
+                                    if (f >= 0.0f) {
+                                        f = 0.0f;
+                                    }
+                                    float ownScrollY = getOwnScrollY() + f;
+                                    if (ownScrollY < 0.0f) {
+                                        setOverScrollAmount(getRubberBandFactor(true) * (this.mOverScrolledTopPixels - ownScrollY), true, false, true);
+                                        setOwnScrollY(0);
+                                        f = 0.0f;
+                                    }
+                                    if (f != 0.0f) {
+                                        customOverScrollBy((int) f, getOwnScrollY(), scrollRange, getHeight() / 2);
+                                        return true;
+                                    }
+                                } else {
+                                    int iMax = Math.max(i2, 0);
+                                    float currentOverScrollAmount2 = getCurrentOverScrollAmount(true);
+                                    float f2 = currentOverScrollAmount2 - iMax;
+                                    if (currentOverScrollAmount2 > 0.0f) {
+                                        setOverScrollAmount(f2, true, false, true);
+                                    }
+                                    f = f2 < 0.0f ? -f2 : 0.0f;
+                                    float ownScrollY2 = getOwnScrollY() + f;
+                                    float f3 = scrollRange;
+                                    if (ownScrollY2 > f3) {
+                                        if (!this.mExpandedInThisMotion) {
+                                            setOverScrollAmount(getRubberBandFactor(false) * ((this.mOverScrolledBottomPixels + ownScrollY2) - f3), false, false, true);
+                                        }
+                                        setOwnScrollY(scrollRange);
+                                        f = 0.0f;
+                                    }
+                                    if (f != 0.0f) {
+                                    }
+                                }
+                            }
+                        } else if (actionMasked != 3) {
+                            if (actionMasked == 5) {
+                                int actionIndex = motionEvent.getActionIndex();
+                                this.mLastMotionY = (int) motionEvent.getY(actionIndex);
+                                this.mDownX = (int) motionEvent.getX(actionIndex);
+                                this.mActivePointerId = motionEvent.getPointerId(actionIndex);
+                                return true;
+                            }
+                            if (actionMasked == 6) {
+                                onSecondaryPointerUp(motionEvent);
+                                this.mLastMotionY = (int) motionEvent.getY(motionEvent.findPointerIndex(this.mActivePointerId));
+                                this.mDownX = (int) motionEvent.getX(motionEvent.findPointerIndex(this.mActivePointerId));
+                                return true;
+                            }
+                        } else if (this.mIsBeingDragged && getChildCount() > 0) {
+                            if (this.mScroller.springBack(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, 0, 0, getScrollRange())) {
+                                animateScroll();
+                            }
+                            this.mActivePointerId = -1;
+                            endDrag();
+                            return true;
+                        }
+                    } else if (this.mIsBeingDragged) {
+                        VelocityTracker velocityTracker = this.mVelocityTracker;
+                        velocityTracker.computeCurrentVelocity(1000, this.mMaximumVelocity);
+                        int yVelocity = (int) velocityTracker.getYVelocity(this.mActivePointerId);
+                        float currentOverScrollAmount3 = getCurrentOverScrollAmount(true);
+                        if (this.mScrolledToTopOnFirstDown && ((!SecPanelSplitHelper.isEnabled() || !getPanelSplitHelper().isShadeState()) && !this.mExpandedInThisMotion && (yVelocity > this.mMinimumVelocity || (currentOverScrollAmount3 > this.mMinTopOverScrollToEscape && yVelocity > 0)))) {
+                            onOverScrollFling(yVelocity, true);
+                        } else if (getChildCount() > 0) {
+                            if (Math.abs(yVelocity) > this.mMinimumVelocity) {
+                                if (getCurrentOverScrollAmount(true) == 0.0f || yVelocity > 0) {
+                                    this.mFlingAfterUpEvent = true;
+                                    NotificationStackScrollLayout$$ExternalSyntheticLambda4 notificationStackScrollLayout$$ExternalSyntheticLambda4 = new NotificationStackScrollLayout$$ExternalSyntheticLambda4(this, 1);
+                                    RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                    this.mFinishScrollingCallback = notificationStackScrollLayout$$ExternalSyntheticLambda4;
+                                    int i3 = -yVelocity;
+                                    if (getChildCount() > 0) {
+                                        float currentOverScrollAmount4 = getCurrentOverScrollAmount(true);
+                                        float currentOverScrollAmount5 = getCurrentOverScrollAmount(false);
+                                        if (i3 < 0 && currentOverScrollAmount4 > 0.0f) {
+                                            setOwnScrollY(getOwnScrollY() - ((int) currentOverScrollAmount4));
+                                            this.mDontReportNextOverScroll = true;
+                                            setOverScrollAmount(0.0f, true, false, true);
+                                            this.mMaxOverScroll = (getRubberBandFactor(true) * (Math.abs(i3) / 1000.0f) * this.mOverflingDistance) + currentOverScrollAmount4;
+                                        } else if (i3 <= 0 || currentOverScrollAmount5 <= 0.0f) {
+                                            this.mMaxOverScroll = 0.0f;
+                                        } else {
+                                            setOwnScrollY((int) (getOwnScrollY() + currentOverScrollAmount5));
+                                            setOverScrollAmount(0.0f, false, false, true);
+                                            this.mMaxOverScroll = ((Math.abs(i3) / 1000.0f) * RUBBER_BAND_FACTOR_NORMAL * this.mOverflingDistance) + currentOverScrollAmount5;
+                                        }
+                                        int iMax2 = Math.max(0, getScrollRange());
+                                        if (this.mExpandedInThisMotion) {
+                                            iMax2 = Math.min(iMax2, this.mMaxScrollAfterExpand);
+                                        }
+                                        this.mScroller.fling(((ViewGroup) this).mScrollX, getOwnScrollY(), 1, i3, 0, 0, i3 > 0 ? getScrollAmountToScrollBoundary() : 0, iMax2, 0, (!this.mExpandedInThisMotion || getOwnScrollY() < 0) ? 1073741823 : 0);
+                                        if (i3 < 0 && this.mScroller.getFinalY() > 0 && this.mScroller.getFinalY() < getScrollAmountToScrollBoundary()) {
+                                            this.mScroller.forceFinished(true);
+                                            this.mScroller.startScroll(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, -getOwnScrollY(), 1050);
+                                        }
+                                        animateScroll();
+                                    }
+                                } else {
+                                    onOverScrollFling(yVelocity, false);
+                                }
+                            } else if (this.mScroller.springBack(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, 0, 0, getScrollRange())) {
+                                animateScroll();
+                            } else if (this.mOwnScrollY > 0) {
+                                int scrollAmountToScrollBoundary = getScrollAmountToScrollBoundary();
+                                int i4 = this.mOwnScrollY;
+                                if (scrollAmountToScrollBoundary > i4) {
+                                    this.mScroller.startScroll(((ViewGroup) this).mScrollX, i4, 0, -i4, 1050);
+                                    animateScroll();
+                                }
+                            }
+                        }
+                        this.mActivePointerId = -1;
+                        endDrag();
+                    }
+                    return true;
+                }
+                if (getChildCount() != 0) {
+                    if (motionEvent.getY() < (getHeight() - Math.max(this.mMaxLayoutHeight - getContentHeight(), 0)) - this.mShelf.getHeight() && this.mController.mActiveNotificationsInteractor.getAreAnyNotificationsPresentValue()) {
+                        setIsBeingDragged(!this.mScroller.isFinished());
+                        if (!this.mScroller.isFinished()) {
+                            this.mScroller.forceFinished(true);
+                        }
+                        this.mLastMotionY = (int) motionEvent.getY();
+                        this.mDownX = (int) motionEvent.getX();
+                        this.mActivePointerId = motionEvent.getPointerId(0);
+                        return true;
+                    }
+                }
+            } else if (this.mQuickPanelLogger != null && (sb = this.mQuickPanelLogBuilder) != null) {
+                sb.setLength(0);
+                StringBuilder sb2 = this.mQuickPanelLogBuilder;
+                sb2.append("onScrollTouch: inInsideQsHeader : ");
+                sb2.append(isInsideQsHeader(motionEvent));
+                sb2.append(" , mIsBeingDragged : ");
+                sb2.append(this.mIsBeingDragged);
+                this.mQuickPanelLogger.onTouchEvent(motionEvent, this.mQuickPanelLogBuilder.toString(), false);
+                return false;
+            }
+        }
+        return false;
     }
 
     public final void onSecondaryPointerUp(MotionEvent motionEvent) {
@@ -2862,35 +3669,278 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:129:0x0344, code lost:
-    
-        if (r11 == false) goto L228;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:163:0x020d, code lost:
-    
-        if (r12.mResizedView != null) goto L109;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x02b7  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x02cf  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x0303  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x0340  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x034b  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x02d8  */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x0275  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x025e  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0296  */
+    /* JADX WARN: Removed duplicated region for block: B:142:0x020e  */
+    /* JADX WARN: Removed duplicated region for block: B:149:0x023b A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:167:0x027c  */
+    /* JADX WARN: Removed duplicated region for block: B:187:0x02b4  */
+    /* JADX WARN: Removed duplicated region for block: B:242:0x036e  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x010e  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onTouchEvent(android.view.MotionEvent r19) {
-        /*
-            Method dump skipped, instructions count: 878
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.onTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onTouchEvent(MotionEvent motionEvent) {
+        boolean z;
+        boolean z2;
+        boolean zHandleTouch;
+        StringBuilder sb;
+        float yVelocity;
+        NotificationStackScrollLayout notificationStackScrollLayout;
+        boolean z3;
+        NotificationStackScrollLayoutController.TouchHandler touchHandler = this.mTouchHandler;
+        if (touchHandler != null) {
+            QuickPanelLogger quickPanelLogger = touchHandler.mQuickPanelLogger;
+            SecStatusBarWindowViewTouchedInteractor secStatusBarWindowViewTouchedInteractor = touchHandler.mStatusBarWindowViewTouchedInteractor;
+            if (secStatusBarWindowViewTouchedInteractor == null || !secStatusBarWindowViewTouchedInteractor.isTouched()) {
+                boolean z4 = LsRune.SECURITY_BOUNCER_WINDOW;
+                NotificationStackScrollLayoutController notificationStackScrollLayoutController = NotificationStackScrollLayoutController.this;
+                if (!z4 && motionEvent.getActionMasked() == 1 && notificationStackScrollLayoutController.mPrimaryBouncerInteractor.isBouncerShowing() && notificationStackScrollLayoutController.mStatusBarStateController.getState() == 2) {
+                    if (quickPanelLogger != null) {
+                        quickPanelLogger.onInterceptTouchEvent(motionEvent, "SHADE_LOCKED Bouncer Showing", false);
+                        z3 = false;
+                    }
+                    z3 = false;
+                } else {
+                    if (quickPanelLogger != null) {
+                        quickPanelLogger.onTouchEvent(motionEvent);
+                    }
+                    if (!notificationStackScrollLayoutController.mIsStartFromContentsBound) {
+                        float rawX = motionEvent.getRawX();
+                        motionEvent.getRawY();
+                        if (notificationStackScrollLayoutController.isInContentBounds$2(rawX)) {
+                            NotificationGuts notificationGuts = notificationStackScrollLayoutController.mNotificationGutsManager.mNotificationGutsExposed;
+                            boolean z5 = motionEvent.getActionMasked() == 3 || motionEvent.getActionMasked() == 1;
+                            notificationStackScrollLayoutController.mView.handleEmptySpaceClick(motionEvent);
+                            boolean zOnTouchEvent = (notificationGuts == null || notificationStackScrollLayoutController.mLongPressedView == null) ? false : notificationStackScrollLayoutController.mSwipeHelper.onTouchEvent(motionEvent);
+                            NotificationStackScrollLayout notificationStackScrollLayout2 = notificationStackScrollLayoutController.mView;
+                            boolean z6 = notificationStackScrollLayout2.mOnlyScrollingInThisMotion;
+                            boolean z7 = notificationStackScrollLayout2.mExpandingNotification;
+                            if (notificationStackScrollLayoutController.mLongPressedView == null && notificationStackScrollLayout2.mIsExpanded && !notificationStackScrollLayoutController.mSwipeHelper.mIsSwiping && !z6 && notificationGuts == null) {
+                                ExpandHelper expandHelper = notificationStackScrollLayout2.mExpandHelper;
+                                if (z5) {
+                                    expandHelper.mOnlyMovements = false;
+                                }
+                                if (expandHelper.mEnabled || expandHelper.mExpanding) {
+                                    expandHelper.trackVelocity(motionEvent);
+                                    int actionMasked = motionEvent.getActionMasked();
+                                    expandHelper.mSGD.onTouchEvent(motionEvent);
+                                    int focusX = (int) expandHelper.mSGD.getFocusX();
+                                    int focusY = (int) expandHelper.mSGD.getFocusY();
+                                    if (expandHelper.mOnlyMovements) {
+                                        expandHelper.mLastMotionY = motionEvent.getRawY();
+                                        z = z5;
+                                        notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
+                                        boolean z8 = notificationStackScrollLayout.mExpandingNotification;
+                                        if (notificationStackScrollLayout.mExpandedInThisMotion && !z8 && z7 && !notificationStackScrollLayout.mDisallowScrollingInThisMotion) {
+                                            int i = SceneContainerFlag.$r8$clinit;
+                                            MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                                            motionEventObtain.setAction(0);
+                                            notificationStackScrollLayout.onScrollTouch(motionEventObtain);
+                                            motionEventObtain.recycle();
+                                        }
+                                        z7 = z8;
+                                    } else {
+                                        if (actionMasked == 0) {
+                                            z = z5;
+                                            AnonymousClass9 anonymousClass9 = expandHelper.mScrollAdapter;
+                                            if (anonymousClass9 != null) {
+                                                boolean z9 = expandHelper.isInside(NotificationStackScrollLayout.this, (float) focusX, (float) focusY);
+                                                expandHelper.mWatchingForPull = z9;
+                                                expandHelper.mResizedView = expandHelper.findView$1(focusX, focusY);
+                                                expandHelper.mInitialTouchX = motionEvent.getRawX();
+                                                expandHelper.mInitialTouchY = motionEvent.getRawY();
+                                            }
+                                        } else if (actionMasked == 1) {
+                                            z = z5;
+                                            boolean z10 = !expandHelper.mEnabled || motionEvent.getActionMasked() == 3;
+                                            VelocityTracker velocityTracker = expandHelper.mVelocityTracker;
+                                            if (velocityTracker != null) {
+                                                velocityTracker.computeCurrentVelocity(1000);
+                                                yVelocity = expandHelper.mVelocityTracker.getYVelocity();
+                                            } else {
+                                                yVelocity = 0.0f;
+                                            }
+                                            expandHelper.finishExpanding(z10, yVelocity);
+                                            expandHelper.mResizedView = null;
+                                        } else if (actionMasked == 2) {
+                                            if (expandHelper.mWatchingForPull) {
+                                                float rawY = motionEvent.getRawY() - expandHelper.mInitialTouchY;
+                                                float rawX2 = motionEvent.getRawX() - expandHelper.mInitialTouchX;
+                                                int classification = motionEvent.getClassification();
+                                                int i2 = expandHelper.mTouchSlop;
+                                                if (rawY > (classification == 1 ? i2 * expandHelper.mSlopMultiplier : i2) && rawY > Math.abs(rawX2)) {
+                                                    expandHelper.mWatchingForPull = false;
+                                                    ExpandableView expandableView = expandHelper.mResizedView;
+                                                    if (expandableView != null && ((expandableView.getIntrinsicHeight() != expandableView.getMaxContentHeight() || (expandableView.isSummaryWithChildren() && !expandableView.areChildrenExpanded())) && expandHelper.startExpanding(expandHelper.mResizedView, 1))) {
+                                                        expandHelper.mInitialTouchY = motionEvent.getRawY();
+                                                        expandHelper.mLastMotionY = motionEvent.getRawY();
+                                                    }
+                                                }
+                                            }
+                                            boolean z11 = expandHelper.mExpanding;
+                                            if (!z11 || (expandHelper.mExpansionStyle & 1) == 0) {
+                                                z = z5;
+                                                if (z11) {
+                                                    expandHelper.updateExpansion();
+                                                    expandHelper.mLastMotionY = motionEvent.getRawY();
+                                                }
+                                            } else {
+                                                float rawY2 = (motionEvent.getRawY() - expandHelper.mLastMotionY) + expandHelper.mCurrentHeight;
+                                                int i3 = expandHelper.mSmallSize;
+                                                float f = i3;
+                                                if (rawY2 >= f) {
+                                                    f = rawY2;
+                                                }
+                                                float f2 = expandHelper.mNaturalHeight;
+                                                if (f > f2) {
+                                                    f = f2;
+                                                }
+                                                boolean z12 = rawY2 > f2;
+                                                if (rawY2 < i3) {
+                                                    z12 = true;
+                                                }
+                                                ExpandHelper.ViewScaler viewScaler = expandHelper.mScaler;
+                                                z = z5;
+                                                viewScaler.mView.setActualHeight((int) f, true);
+                                                ExpandHelper.this.mCurrentHeight = f;
+                                                expandHelper.mLastMotionY = motionEvent.getRawY();
+                                                ExpandHelper.Callback callback = expandHelper.mCallback;
+                                                if (z12) {
+                                                    ((AnonymousClass11) callback).expansionStateChanged(false);
+                                                } else {
+                                                    ((AnonymousClass11) callback).expansionStateChanged(true);
+                                                }
+                                            }
+                                            notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
+                                            boolean z82 = notificationStackScrollLayout.mExpandingNotification;
+                                            if (notificationStackScrollLayout.mExpandedInThisMotion) {
+                                                int i4 = SceneContainerFlag.$r8$clinit;
+                                                MotionEvent motionEventObtain2 = MotionEvent.obtain(motionEvent);
+                                                motionEventObtain2.setAction(0);
+                                                notificationStackScrollLayout.onScrollTouch(motionEventObtain2);
+                                                motionEventObtain2.recycle();
+                                            }
+                                            z7 = z82;
+                                        } else if (actionMasked != 3) {
+                                            if (actionMasked == 5 || actionMasked == 6) {
+                                                expandHelper.mInitialTouchY = (expandHelper.mSGD.getFocusY() - expandHelper.mLastFocusY) + expandHelper.mInitialTouchY;
+                                                expandHelper.mInitialTouchSpan = (expandHelper.mSGD.getCurrentSpan() - expandHelper.mLastSpanY) + expandHelper.mInitialTouchSpan;
+                                            }
+                                            z = z5;
+                                        }
+                                        expandHelper.mLastMotionY = motionEvent.getRawY();
+                                        expandHelper.maybeRecycleVelocityTracker(motionEvent);
+                                        z2 = expandHelper.mResizedView != null;
+                                        notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
+                                        boolean z822 = notificationStackScrollLayout.mExpandingNotification;
+                                        if (notificationStackScrollLayout.mExpandedInThisMotion) {
+                                        }
+                                        z7 = z822;
+                                    }
+                                } else {
+                                    z = z5;
+                                    notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
+                                    boolean z8222 = notificationStackScrollLayout.mExpandingNotification;
+                                    if (notificationStackScrollLayout.mExpandedInThisMotion) {
+                                    }
+                                    z7 = z8222;
+                                }
+                            } else {
+                                z = z5;
+                                z2 = false;
+                            }
+                            ((NotificationStackScrollLayoutController.AnonymousClass12) notificationStackScrollLayoutController.mNotificationCallback).getChildAtPosition(motionEvent);
+                            if (notificationStackScrollLayoutController.mLongPressedView == null) {
+                                NotificationStackScrollLayout notificationStackScrollLayout3 = notificationStackScrollLayoutController.mView;
+                                boolean zOnTouchEvent2 = (notificationStackScrollLayout3.mIsBeingDragged || z7 || notificationStackScrollLayout3.mExpandedInThisMotion || z6 || notificationStackScrollLayout3.mDisallowDismissInThisMotion) ? false : notificationStackScrollLayoutController.mSwipeHelper.onTouchEvent(motionEvent);
+                                if (touchHandler.panelSliderIntercepted) {
+                                    if (motionEvent.getActionMasked() == 3 || motionEvent.getActionMasked() == 1) {
+                                        touchHandler.panelSliderIntercepted = false;
+                                    }
+                                    zHandleTouch = notificationStackScrollLayoutController.mPanelSplitHelper.handleTouch(motionEvent);
+                                } else {
+                                    zHandleTouch = false;
+                                }
+                                if (notificationStackScrollLayoutController.mLongPressedView == null) {
+                                    NotificationStackScrollLayout notificationStackScrollLayout4 = notificationStackScrollLayoutController.mView;
+                                    boolean zOnScrollTouch = (!notificationStackScrollLayout4.mIsExpanded || notificationStackScrollLayoutController.mSwipeHelper.mIsSwiping || z7 || notificationStackScrollLayout4.mDisallowScrollingInThisMotion) ? false : notificationStackScrollLayout4.onScrollTouch(motionEvent);
+                                    int i5 = SceneContainerFlag.$r8$clinit;
+                                    if (notificationGuts != null && !NotificationSwipeHelper.isTouchInView(notificationGuts, motionEvent)) {
+                                        NotificationGuts.GutsContent gutsContent = notificationGuts.mGutsContent;
+                                        if ((gutsContent instanceof NotificationSnooze) && ((((NotificationSnooze) gutsContent).mExpanded && z) || (!zOnTouchEvent2 && zOnScrollTouch))) {
+                                            notificationStackScrollLayoutController.checkSnoozeLeavebehind();
+                                        }
+                                    }
+                                    if (motionEvent.getActionMasked() == 1) {
+                                        if (!zOnTouchEvent2) {
+                                            notificationStackScrollLayoutController.mFalsingManager.isFalseTouch(11);
+                                        }
+                                        notificationStackScrollLayoutController.mView.mCheckForLeavebehind = true;
+                                    }
+                                    NotificationStackScrollLayoutController.m3084$$Nest$mupdateEventAvailability(notificationStackScrollLayoutController, motionEvent);
+                                    int actionMasked2 = motionEvent.getActionMasked();
+                                    InteractionJankMonitor interactionJankMonitor = notificationStackScrollLayoutController.mJankMonitor;
+                                    if (interactionJankMonitor == null) {
+                                        Log.w("StackScrollerController", "traceJankOnTouchEvent, mJankMonitor is null");
+                                    } else {
+                                        NotificationStackScrollLayout notificationStackScrollLayout5 = notificationStackScrollLayoutController.mView;
+                                        if (actionMasked2 != 0) {
+                                            if (actionMasked2 != 1) {
+                                                if (actionMasked2 == 3 && zOnScrollTouch) {
+                                                    interactionJankMonitor.cancel(2);
+                                                }
+                                            } else if (zOnScrollTouch) {
+                                                notificationStackScrollLayout5.getClass();
+                                                RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                                if (!notificationStackScrollLayout5.mFlingAfterUpEvent) {
+                                                    notificationStackScrollLayoutController.mJankMonitor.end(2);
+                                                }
+                                            }
+                                        } else if (zOnScrollTouch) {
+                                            interactionJankMonitor.begin(notificationStackScrollLayout5, 2);
+                                        }
+                                    }
+                                    if (quickPanelLogger != null && (sb = touchHandler.mQuickPanelLogBuilder) != null) {
+                                        sb.setLength(0);
+                                        sb.append("horizontalSwipeWantsIt: ");
+                                        sb.append(zOnTouchEvent2);
+                                        sb.append(", scrollerWantsIt: ");
+                                        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, zOnScrollTouch, ", expandWantsIt: ", z2, ", longPressWantsIt: ");
+                                        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, zOnTouchEvent, ", panelSlideWantsIt: ", zHandleTouch, ", hunWantsIt: ");
+                                        sb.append(false);
+                                        quickPanelLogger.onTouchEvent(motionEvent, sb.toString(), zOnTouchEvent2 || zOnScrollTouch || z2 || zOnTouchEvent || zHandleTouch);
+                                    }
+                                    if (zOnTouchEvent2 || zOnScrollTouch || z2 || zOnTouchEvent) {
+                                    }
+                                }
+                            }
+                        } else if (quickPanelLogger != null) {
+                            quickPanelLogger.onTouchEvent(motionEvent, "NotiRune.NOTI_POLICY_TOUCH_REGION", false);
+                            z3 = false;
+                        }
+                        z3 = false;
+                    }
+                }
+                int i6 = SceneContainerFlag.$r8$clinit;
+                if (z3) {
+                    if (this.mOrientation == 2) {
+                        float f3 = this.mInitialTouchX;
+                        if (f3 < this.mSidePaddings || f3 > getWidth() - this.mSidePaddings) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            } else if (quickPanelLogger != null) {
+                quickPanelLogger.onTouchEvent(motionEvent, "StatusBarWindowView Touched", true);
+            }
+            z3 = true;
+            int i62 = SceneContainerFlag.$r8$clinit;
+            if (z3) {
+            }
+        }
+        return super.onTouchEvent(motionEvent);
     }
 
     @Override // android.view.ViewGroup
@@ -2943,24 +3993,173 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         expandableView.requestRoundnessReset(NotificationShelf.SHELF_SCROLL);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x002a, code lost:
-    
-        if (r4.isInsignificantSummary() == false) goto L27;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x016d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0227  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x022f  */
-    /* JADX WARN: Removed duplicated region for block: B:44:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x002d  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x016d  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0207  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onViewRemovedInternal(com.android.systemui.statusbar.notification.row.ExpandableView r13, android.view.ViewGroup r14) {
-        /*
-            Method dump skipped, instructions count: 599
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.onViewRemovedInternal(com.android.systemui.statusbar.notification.row.ExpandableView, android.view.ViewGroup):void");
+    public final void onViewRemovedInternal(ExpandableView expandableView, ViewGroup viewGroup) {
+        String key;
+        Boolean bool;
+        if (this.mChangePositionInProgress) {
+            return;
+        }
+        expandableView.mOnHeightChangedListener = null;
+        boolean z = expandableView instanceof ExpandableNotificationRow;
+        if (z) {
+            ((ExpandableNotificationRow) expandableView).mEntry.mOnSensitivityChangedListeners.remove(this.mOnChildSensitivityChangedListener);
+        }
+        boolean z2 = true;
+        if (z) {
+            ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) expandableView;
+            if (!expandableNotificationRow.isInsignificant() || expandableNotificationRow.isInsignificantSummary()) {
+                if (z && ((ExpandableNotificationRow) expandableView).mPinnedStatus.isPinned() && getImeInset() > 0) {
+                    resetScrollPosition();
+                } else {
+                    int i = SceneContainerFlag.$r8$clinit;
+                    RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                    int positionInLinearLayout = getPositionInLinearLayout(expandableView);
+                    int intrinsicHeight = expandableView.getIntrinsicHeight() + this.mPaddingBetweenElements;
+                    int i2 = positionInLinearLayout + intrinsicHeight;
+                    int scrollAmountToScrollBoundary = getScrollAmountToScrollBoundary();
+                    this.mAnimateStackYForContentHeightChange = true;
+                    if (i2 <= getOwnScrollY() - scrollAmountToScrollBoundary) {
+                        setOwnScrollY(getOwnScrollY() - intrinsicHeight);
+                    } else if (positionInLinearLayout < getOwnScrollY() - scrollAmountToScrollBoundary) {
+                        setOwnScrollY(positionInLinearLayout + scrollAmountToScrollBoundary);
+                    }
+                }
+            }
+        }
+        if (viewGroup == null) {
+            if (z) {
+                ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("onViewRemovedInternal remove child without animation "), ((ExpandableNotificationRow) expandableView).mLoggingKey, "StackScroller");
+            }
+            this.mSwipedOutViews.remove(expandableView);
+            if (z) {
+                ((ExpandableNotificationRow) expandableView).removeChildrenWithKeepInParent();
+            }
+        } else if (z) {
+            ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) expandableView;
+            if (expandableNotificationRow2.mSkipRemovalAnim) {
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("generateRemoveAnimation skip removalAnim", expandableNotificationRow2.getKey(), "StackScroller");
+                expandableNotificationRow2.mSkipRemovalAnim = false;
+            } else {
+                key = "";
+                if (this.mDebugRemoveAnimation) {
+                    key = z ? ((ExpandableNotificationRow) expandableView).getKey() : "";
+                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("generateRemoveAnimation ", key, "StackScroller");
+                }
+                boolean z3 = false;
+                for (HeadsUpAnimationEvent headsUpAnimationEvent : ((HashMap) this.mHeadsUpChangeAnimations).values()) {
+                    ExpandableNotificationRow expandableNotificationRow3 = headsUpAnimationEvent.row;
+                    if (expandableView == expandableNotificationRow3) {
+                        this.mTmpHeadsUpChangeAnimations.add(expandableNotificationRow3);
+                        z3 |= headsUpAnimationEvent.isHeadsUpAppearance;
+                    }
+                }
+                if (z3) {
+                    this.mTmpHeadsUpChangeAnimations.forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda8
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((HashMap) this.f$0.mHeadsUpChangeAnimations).remove((ExpandableNotificationRow) obj);
+                        }
+                    });
+                    ((ExpandableNotificationRow) expandableView).setHeadsUpAnimatingAway(false);
+                }
+                this.mTmpHeadsUpChangeAnimations.clear();
+                if (z3 && this.mAddedHeadsUpChildren.contains(expandableView)) {
+                    if (this.mDebugRemoveAnimation) {
+                        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("generateRemoveAnimation removedBecauseOfHeadsUp ", key, "StackScroller");
+                    }
+                    this.mAddedHeadsUpChildren.remove(expandableView);
+                } else {
+                    if (this.mIsExpanded || (bool = (Boolean) expandableView.getTag(R.id.is_clicked_heads_up_tag)) == null || !bool.booleanValue()) {
+                        if (this.mDebugRemoveAnimation) {
+                            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("generateRemoveAnimation ", key, " mIsExpanded ");
+                            sbM.append(this.mIsExpanded);
+                            sbM.append(" mAnimationsEnabled ");
+                            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mAnimationsEnabled, "StackScroller");
+                        }
+                        if (this.mIsExpanded && this.mAnimationsEnabled) {
+                            if (this.mChildrenToAddAnimated.contains(expandableView)) {
+                                this.mChildrenToAddAnimated.remove(expandableView);
+                                this.mFromMoreCardAdditions.remove(expandableView);
+                            } else {
+                                if (this.mDebugRemoveAnimation) {
+                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("generateRemoveAnimation needsAnimation = true ", key, "StackScroller");
+                                }
+                                this.mChildrenToRemoveAnimated.add(expandableView);
+                                this.mNeedsAnimation = true;
+                            }
+                        }
+                    } else {
+                        ActionBarContextView$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("generateRemoveAnimation  isClickedHeadsUp ", key, " "), expandableView.mInRemovalAnimation, "StackScroller");
+                        this.mClearTransientViewsWhenFinished.add(expandableView);
+                        z2 = expandableView.mInRemovalAnimation;
+                    }
+                    if (!z2) {
+                        if (!this.mSwipedOutViews.contains(expandableView) || !isFullySwipedOut(expandableView)) {
+                            if (this.mSwipeCancelledView.contains(expandableView)) {
+                                this.mSwipeCancelledView.remove(expandableView);
+                                Log.d("StackScroller", "onViewRemovedInternal not add to transient container. Reason : swipe cancelled");
+                            } else {
+                                NotificationStackScrollLogger notificationStackScrollLogger = this.mLogger;
+                                if (notificationStackScrollLogger != null && z) {
+                                    boolean z4 = viewGroup instanceof NotificationChildrenContainer;
+                                    LogBuffer logBuffer = notificationStackScrollLogger.notificationRenderBuffer;
+                                    if (z4) {
+                                        String str = ((ExpandableNotificationRow) expandableView).mLoggingKey;
+                                        String str2 = ((NotificationChildrenContainer) viewGroup).mContainingNotification.mLoggingKey;
+                                        LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", LogLevel.INFO, new NotificationStackScrollLogger$$ExternalSyntheticLambda0(6), null);
+                                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                                        logMessageImpl.str1 = str;
+                                        logMessageImpl.str2 = str2;
+                                        logBuffer.commit(logMessageObtain);
+                                    } else if (viewGroup instanceof NotificationStackScrollLayout) {
+                                        String str3 = ((ExpandableNotificationRow) expandableView).mLoggingKey;
+                                        LogMessage logMessageObtain2 = logBuffer.obtain("NotificationStackScroll", LogLevel.INFO, new NotificationStackScrollLogger$$ExternalSyntheticLambda0(0), null);
+                                        ((LogMessageImpl) logMessageObtain2).str1 = str3;
+                                        logBuffer.commit(logMessageObtain2);
+                                    } else {
+                                        String str4 = ((ExpandableNotificationRow) expandableView).mLoggingKey;
+                                        LogMessage logMessageObtain3 = logBuffer.obtain("NotificationStackScroll", LogLevel.ERROR, new NotificationStackScrollLogger$$ExternalSyntheticLambda0(7), null);
+                                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
+                                        logMessageImpl2.str1 = str4;
+                                        logMessageImpl2.str2 = viewGroup.toString();
+                                        logBuffer.commit(logMessageObtain3);
+                                    }
+                                }
+                                viewGroup.addTransientView(expandableView, 0);
+                                expandableView.mTransientContainer = viewGroup;
+                                Log.d("StackScroller", "onViewRemovedInternal enqueue next animation");
+                            }
+                        }
+                    }
+                }
+            }
+            z2 = false;
+            if (!z2) {
+            }
+        }
+        if (z) {
+            ((ExpandableNotificationRow) expandableView).setAnimationRunning(false);
+        }
+        if (z) {
+            ExpandableNotificationRow expandableNotificationRow4 = (ExpandableNotificationRow) expandableView;
+            if (expandableNotificationRow4.mRefocusOnDismiss || expandableNotificationRow4.isAccessibilityFocused()) {
+                View firstChildBelowTranlsationY = expandableNotificationRow4.mChildAfterViewWhenDismissed;
+                if (firstChildBelowTranlsationY == null) {
+                    ExpandableNotificationRow expandableNotificationRow5 = expandableNotificationRow4.mGroupParentWhenDismissed;
+                    firstChildBelowTranlsationY = getFirstChildBelowTranlsationY(expandableNotificationRow5 != null ? expandableNotificationRow5.getTranslationY() : expandableView.getTranslationY());
+                }
+                if (firstChildBelowTranlsationY != null) {
+                    firstChildBelowTranlsationY.requestAccessibilityFocus();
+                }
+            }
+        }
     }
 
     @Override // android.view.View
@@ -2972,74 +4171,38 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         cancelLongPress();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0022, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x0022, code lost:
     
         if (r6 != 16908346) goto L23;
      */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean performAccessibilityActionInternal(int r6, android.os.Bundle r7) {
-        /*
-            r5 = this;
-            boolean r7 = super.performAccessibilityActionInternal(r6, r7)
-            r0 = 1
-            if (r7 == 0) goto L8
-            return r0
-        L8:
-            boolean r7 = r5.isEnabled()
-            r1 = 0
-            if (r7 != 0) goto L10
-            goto L6a
-        L10:
-            int r7 = com.android.systemui.scene.shared.flag.SceneContainerFlag.$r8$clinit
-            r7 = 4096(0x1000, float:5.74E-42)
-            if (r6 == r7) goto L27
-            r7 = 8192(0x2000, float:1.148E-41)
-            if (r6 == r7) goto L25
-            r7 = 16908344(0x1020038, float:2.3877386E-38)
-            if (r6 == r7) goto L25
-            r7 = 16908346(0x102003a, float:2.3877392E-38)
-            if (r6 == r7) goto L27
-            goto L6a
-        L25:
-            r6 = -1
-            goto L28
-        L27:
-            r6 = r0
-        L28:
-            int r7 = r5.getHeight()
-            int r2 = r5.mPaddingBottom
-            int r7 = r7 - r2
-            int r2 = r5.getTopPadding()
-            int r7 = r7 - r2
-            int r2 = r5.mPaddingTop
-            int r7 = r7 - r2
-            com.android.systemui.statusbar.NotificationShelf r2 = r5.mShelf
-            int r2 = r2.getHeight()
-            int r7 = r7 - r2
-            int r2 = r5.getOwnScrollY()
-            int r6 = r6 * r7
-            int r6 = r6 + r2
-            int r7 = r5.getScrollRange()
-            int r6 = java.lang.Math.min(r6, r7)
-            int r6 = java.lang.Math.max(r1, r6)
-            int r7 = r5.getOwnScrollY()
-            if (r6 == r7) goto L6a
-            android.widget.OverScroller r7 = r5.mScroller
-            int r2 = r5.mScrollX
-            int r3 = r5.getOwnScrollY()
-            int r4 = r5.getOwnScrollY()
-            int r6 = r6 - r4
-            r7.startScroll(r2, r3, r1, r6)
-            r5.animateScroll()
-            return r0
-        L6a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.performAccessibilityActionInternal(int, android.os.Bundle):boolean");
+    public final boolean performAccessibilityActionInternal(int i, Bundle bundle) {
+        int i2;
+        int iMax;
+        if (super.performAccessibilityActionInternal(i, bundle)) {
+            return true;
+        }
+        if (isEnabled()) {
+            int i3 = SceneContainerFlag.$r8$clinit;
+            if (i == 4096) {
+                i2 = 1;
+                iMax = Math.max(0, Math.min((i2 * ((((getHeight() - ((ViewGroup) this).mPaddingBottom) - getTopPadding()) - ((ViewGroup) this).mPaddingTop) - this.mShelf.getHeight())) + getOwnScrollY(), getScrollRange()));
+                if (iMax != getOwnScrollY()) {
+                    this.mScroller.startScroll(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, iMax - getOwnScrollY());
+                    animateScroll();
+                    return true;
+                }
+            } else if (i == 8192 || i == 16908344) {
+                i2 = -1;
+                iMax = Math.max(0, Math.min((i2 * ((((getHeight() - ((ViewGroup) this).mPaddingBottom) - getTopPadding()) - ((ViewGroup) this).mPaddingTop) - this.mShelf.getHeight())) + getOwnScrollY(), getScrollRange()));
+                if (iMax != getOwnScrollY()) {
+                }
+            }
+        }
+        return false;
     }
 
     /* JADX WARN: Type inference failed for: r3v1, types: [T, java.lang.String] */
@@ -3052,9 +4215,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             LogLevel logLevel = LogLevel.INFO;
             NotificationStackScrollLogger$$ExternalSyntheticLambda3 notificationStackScrollLogger$$ExternalSyntheticLambda3 = new NotificationStackScrollLogger$$ExternalSyntheticLambda3(ref$ObjectRef, 0);
             LogBuffer logBuffer = notificationStackScrollLogger.notificationRenderBuffer;
-            LogMessage obtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain).str1 = str;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain).str1 = str;
+            logBuffer.commit(logMessageObtain);
         }
         super.removeTransientView(view);
     }
@@ -3152,12 +4315,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         int i = SceneContainerFlag.$r8$clinit;
         ExpandableView expandableView = (ExpandableView) view;
         int positionInLinearLayout = getPositionInLinearLayout(view);
-        int targetScrollForView = targetScrollForView(expandableView, positionInLinearLayout);
+        int iTargetScrollForView = targetScrollForView(expandableView, positionInLinearLayout);
         int intrinsicHeight = expandableView.getIntrinsicHeight() + positionInLinearLayout;
-        if (getOwnScrollY() >= targetScrollForView && intrinsicHeight >= getOwnScrollY()) {
+        if (getOwnScrollY() >= iTargetScrollForView && intrinsicHeight >= getOwnScrollY()) {
             return false;
         }
-        this.mScroller.startScroll(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, targetScrollForView - getOwnScrollY());
+        this.mScroller.startScroll(((ViewGroup) this).mScrollX, getOwnScrollY(), 0, iTargetScrollForView - getOwnScrollY());
         this.mDontReportNextOverScroll = true;
         animateScroll();
         return true;
@@ -3165,9 +4328,10 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
 
     @Override // android.view.View
     public final void setAlpha(float f) {
-        if (QsAnimatorState.isCustomizerShowing || ((this.mController.mMusicItemExpanded && !this.mVislbeNSSLWhileMediaExpanded) || (QsAnimatorState.isDetailShowing && !QsAnimatorState.isDetailClosing))) {
+        if (QsAnimatorState.isCustomizerShowing || (QsAnimatorState.isDetailShowing && !QsAnimatorState.isDetailClosing)) {
             if (QsAnimatorState.isCustomizerShowing) {
                 super.setAlpha(0.0f);
+                this.mLastAlphaZeroTrace = this.mDateFormat.format(new Date(System.currentTimeMillis())) + " " + Log.getStackTraceString(new Throwable());
                 return;
             }
             return;
@@ -3181,11 +4345,14 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             }
         }
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mController;
-        float min = Math.min(f, Math.min(notificationStackScrollLayoutController.mMaxAlphaForRebind, Math.min(Math.min(notificationStackScrollLayoutController.mMaxAlphaFromView, notificationStackScrollLayoutController.mBarState == 1 ? notificationStackScrollLayoutController.mMaxAlphaForKeyguard : 1.0f), Math.min(notificationStackScrollLayoutController.mMaxAlphaForUnhide, notificationStackScrollLayoutController.mMaxAlphaForGlanceableHub))));
+        float fMin = Math.min(f, Math.min(notificationStackScrollLayoutController.mMaxAlphaForRebind, Math.min(Math.min(notificationStackScrollLayoutController.mMaxAlphaFromView, notificationStackScrollLayoutController.mBarState == 1 ? notificationStackScrollLayoutController.mMaxAlphaForKeyguard : 1.0f), Math.min(notificationStackScrollLayoutController.mMaxAlphaForUnhide, notificationStackScrollLayoutController.mMaxAlphaForGlanceableHub))));
         if (Trace.isEnabled()) {
-            Trace.setCounter(TrackGroupUtils.trackGroup("shade", "NSSLResultingAlpha"), (int) (100.0f * min));
+            Trace.setCounter(TrackGroupUtils.trackGroup("shade", "NSSLResultingAlpha"), (int) (100.0f * fMin));
         }
-        super.setAlpha(min);
+        super.setAlpha(fMin);
+        if (fMin == 0.0f) {
+            this.mLastAlphaZeroTrace = this.mDateFormat.format(new Date(System.currentTimeMillis())) + " " + Log.getStackTraceString(new Throwable());
+        }
     }
 
     public final void setAnimationRunning(boolean z) {
@@ -3207,13 +4374,13 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     }
 
     public final void setExpandedHeight(float f) {
-        int i;
-        int i2 = SceneContainerFlag.$r8$clinit;
+        int topPadding;
+        int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        boolean shouldSkipHeightUpdate = shouldSkipHeightUpdate();
+        boolean zShouldSkipHeightUpdate = shouldSkipHeightUpdate();
         updateStackPosition(false);
-        float f2 = 0.0f;
-        if (!shouldSkipHeightUpdate) {
+        float fLerp = 0.0f;
+        if (!zShouldSkipHeightUpdate) {
             this.mExpandedHeight = f;
             setIsExpanded(f > 0.0f);
             float height = this.mShelf.getHeight() + this.mWaterfallTopInset;
@@ -3232,37 +4399,37 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 updateClipping$1();
             }
         }
-        float f3 = 1.0f;
+        float fCalculateAppearFraction = 1.0f;
         if (calculateAppearFraction(f) < 1.0f) {
-            f3 = calculateAppearFraction(f);
-            float interpolate = f3 >= 0.0f ? NotificationUtils.interpolate(((this.mShelf.getHeight() + this.mWaterfallTopInset) + (-getTopPadding())) - this.mShelf.getHeight(), 0.0f, f3) : (f - getAppearStartPosition()) + (((this.mShelf.getHeight() + this.mWaterfallTopInset) + (-getTopPadding())) - this.mShelf.getHeight());
-            i = (int) (f - interpolate);
-            f2 = (!isHeadsUpTransition() || f3 < 0.0f) ? interpolate : MathUtils.lerp(this.mHeadsUpInset - getTopPadding(), 0.0f, f3);
+            fCalculateAppearFraction = calculateAppearFraction(f);
+            float fInterpolate = fCalculateAppearFraction >= 0.0f ? NotificationUtils.interpolate(((this.mShelf.getHeight() + this.mWaterfallTopInset) + (-getTopPadding())) - this.mShelf.getHeight(), 0.0f, fCalculateAppearFraction) : (f - getAppearStartPosition()) + (((this.mShelf.getHeight() + this.mWaterfallTopInset) + (-getTopPadding())) - this.mShelf.getHeight());
+            topPadding = (int) (f - fInterpolate);
+            fLerp = (!isHeadsUpTransition() || fCalculateAppearFraction < 0.0f) ? fInterpolate : MathUtils.lerp(this.mHeadsUpInset - getTopPadding(), 0.0f, fCalculateAppearFraction);
         } else if (this.mShouldShowShelfOnly) {
-            i = getTopPadding() + this.mShelf.getHeight();
+            topPadding = getTopPadding() + this.mShelf.getHeight();
         } else {
             if (this.mQsFullScreen) {
-                int topPadding = (this.mContentHeight - getTopPadding()) + this.mIntrinsicPadding;
+                int contentHeight = (getContentHeight() - getTopPadding()) + this.mIntrinsicPadding;
                 int height2 = this.mShelf.getHeight() + this.mMaxTopPadding;
-                if (topPadding <= height2) {
-                    i = height2;
+                if (contentHeight <= height2) {
+                    topPadding = height2;
                 } else {
-                    f = NotificationUtils.interpolate(topPadding, height2, getQsExpansionFraction$1());
+                    f = NotificationUtils.interpolate(contentHeight, height2, getQsExpansionFraction$1());
                 }
-            } else if (shouldSkipHeightUpdate) {
+            } else if (zShouldSkipHeightUpdate) {
                 f = this.mExpandedHeight;
             }
-            i = (int) f;
+            topPadding = (int) f;
         }
-        this.mAmbientState.mAppearFraction = f3;
-        if (i != this.mCurrentStackHeight && !shouldSkipHeightUpdate) {
-            this.mCurrentStackHeight = i;
+        this.mAmbientState.mAppearFraction = fCalculateAppearFraction;
+        if (topPadding != this.mCurrentStackHeight && !zShouldSkipHeightUpdate) {
+            this.mCurrentStackHeight = topPadding;
             updateAlgorithmHeightAndPadding();
             requestChildrenUpdate();
         }
         AmbientState ambientState = this.mAmbientState;
-        if (f2 != ambientState.mStackTranslation) {
-            ambientState.mStackTranslation = f2;
+        if (fLerp != ambientState.mStackTranslation) {
+            ambientState.mStackTranslation = fLerp;
             requestChildrenUpdate();
         }
         notifyAppearChangedListeners();
@@ -3357,17 +4524,17 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
     }
 
     public final float setPulseHeight(float f) {
-        float max;
+        float fMax;
         this.mAmbientState.setPulseHeight(f);
         if (this.mKeyguardBypassEnabled) {
             notifyAppearChangedListeners();
             int i = SceneContainerFlag.$r8$clinit;
-            max = Math.max(0.0f, f - this.mIntrinsicPadding);
+            fMax = Math.max(0.0f, f - this.mIntrinsicPadding);
         } else {
-            max = Math.max(0.0f, f - this.mAmbientState.getInnerHeight$1());
+            fMax = Math.max(0.0f, f - this.mAmbientState.getInnerHeight$1());
         }
         requestChildrenUpdate();
-        return max;
+        return fMax;
     }
 
     public void setStatusBarState(int i) {
@@ -3386,6 +4553,24 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
         this.mSpeedBumpIndexDirty = true;
         updateDismissBehavior();
+    }
+
+    @Override // android.view.View
+    public final void setTranslationX(float f) {
+        if (this.mPreviousTranslationX != f) {
+            String[] strArrSplit = Log.getStackTraceString(new Throwable()).split("\n");
+            StringBuilder sb = new StringBuilder(strArrSplit[0]);
+            for (int i = 1; i < Math.min(5, strArrSplit.length); i++) {
+                sb.append("\n");
+                sb.append(strArrSplit[i]);
+            }
+            Log.d("StackScroller", " mPreviousTranslationX : " + Float.toString(this.mPreviousTranslationX) + " | translationX : " + Float.toString(f));
+            StringBuilder sb2 = new StringBuilder(" setTranslationX ");
+            sb2.append((Object) sb);
+            Log.d("StackScroller", sb2.toString());
+            this.mPreviousTranslationX = f;
+        }
+        super.setTranslationX(f);
     }
 
     @Override // android.view.View
@@ -3424,24 +4609,1123 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         return ambientState.mIsFlinging && ambientState.mIsFlingRequiredAfterLockScreenSwipeUp;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:293:0x066c, code lost:
-    
-        if (r1 != 13) goto L253;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x0255  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x025b  */
-    /* JADX WARN: Removed duplicated region for block: B:414:0x08e4  */
-    /* JADX WARN: Removed duplicated region for block: B:416:0x08f0  */
+    /* JADX WARN: Removed duplicated region for block: B:114:0x0252  */
+    /* JADX WARN: Removed duplicated region for block: B:351:0x0881  */
+    /* JADX WARN: Removed duplicated region for block: B:371:0x08cc  */
+    /* JADX WARN: Removed duplicated region for block: B:373:0x08d2  */
+    /* JADX WARN: Removed duplicated region for block: B:374:0x08de  */
+    /* JADX WARN: Removed duplicated region for block: B:389:0x0928  */
+    /* JADX WARN: Removed duplicated region for block: B:398:0x0953  */
+    /* JADX WARN: Removed duplicated region for block: B:401:0x0964  */
+    /* JADX WARN: Removed duplicated region for block: B:416:0x09d9  */
+    /* JADX WARN: Removed duplicated region for block: B:438:0x011c A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:445:0x001b A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:478:0x095b A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void startAnimationToState$1() {
-        /*
-            Method dump skipped, instructions count: 2642
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.startAnimationToState$1():void");
+        boolean z;
+        int i;
+        AnimationFilter animationFilter;
+        int i2;
+        int i3;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        long j;
+        int i4;
+        int i5;
+        int i6;
+        long jMax;
+        View view;
+        ExpandableView expandableView;
+        int i7;
+        final String key;
+        boolean z5;
+        boolean z6;
+        char c;
+        ArrayList arrayList;
+        int i8;
+        char c2;
+        StackStateAnimator stackStateAnimator;
+        final StackStateAnimator stackStateAnimator2;
+        String str;
+        final StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda1;
+        Runnable stackStateAnimator$$ExternalSyntheticLambda12;
+        Runnable runnable;
+        final StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda13;
+        StackStateAnimator stackStateAnimator3;
+        Runnable stackStateAnimator$$ExternalSyntheticLambda14;
+        Runnable runnable2;
+        char c3;
+        Runnable runnable3;
+        Runnable runnable4;
+        final StackStateAnimator stackStateAnimator4;
+        final ExpandableView expandableView2;
+        final StackStateAnimator stackStateAnimator5;
+        Runnable stackStateAnimator$$ExternalSyntheticLambda15;
+        Runnable runnable5;
+        Integer num;
+        int i9;
+        boolean z7;
+        NotificationStackScrollLogger notificationStackScrollLogger;
+        String strValueOf;
+        int i10;
+        String str2 = "StackScroller";
+        String str3 = null;
+        if (this.mNeedsAnimation) {
+            for (HeadsUpAnimationEvent headsUpAnimationEvent : ((HashMap) this.mHeadsUpChangeAnimations).values()) {
+                ExpandableNotificationRow expandableNotificationRow = headsUpAnimationEvent.row;
+                boolean z8 = expandableNotificationRow.mIsHeadsUp;
+                boolean z9 = headsUpAnimationEvent.isHeadsUpAppearance;
+                if (z9 != z8) {
+                    NotificationStackScrollLogger notificationStackScrollLogger2 = this.mLogger;
+                    if (notificationStackScrollLogger2 != null) {
+                        String str4 = expandableNotificationRow.mLoggingKey;
+                        LogLevel logLevel = LogLevel.INFO;
+                        NotificationStackScrollLogger$$ExternalSyntheticLambda0 notificationStackScrollLogger$$ExternalSyntheticLambda0 = new NotificationStackScrollLogger$$ExternalSyntheticLambda0(3);
+                        LogBuffer logBuffer = notificationStackScrollLogger2.buffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("NotificationStackScroll", logLevel, notificationStackScrollLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.str1 = str4;
+                        logMessageImpl.bool1 = z9;
+                        logMessageImpl.bool2 = z8;
+                        logBuffer.commit(logMessageObtain);
+                    }
+                } else {
+                    boolean z10 = expandableNotificationRow.mPinnedStatus.isPinned() && !this.mIsExpanded;
+                    if ((!this.mIsExpanded || (this.mKeyguardBypassEnabled && onKeyguard() && this.mInHeadsUpPinnedMode)) && !z9) {
+                        i9 = expandableNotificationRow.mJustClicked ? 13 : 12;
+                        int i11 = NotificationHeadsUpCycling.$r8$clinit;
+                        StackScrollAlgorithm stackScrollAlgorithm = this.mStackScrollAlgorithm;
+                        AmbientState ambientState = this.mAmbientState;
+                        stackScrollAlgorithm.getClass();
+                        if (expandableNotificationRow.getKey().equals(ambientState.mAvalancheController.previousHunKey)) {
+                            i9 = 16;
+                        }
+                        if (expandableNotificationRow.isChildInGroup()) {
+                            expandableNotificationRow.setHeadsUpAnimatingAway(false);
+                            logHunAnimationSkipped(expandableNotificationRow, "row is child in group");
+                        } else {
+                            z7 = false;
+                            AnimationEvent animationEvent = new AnimationEvent(expandableNotificationRow, i9);
+                            animationEvent.headsUpFromBottom = z7;
+                            int i12 = StatusBarNotifChips.$r8$clinit;
+                            animationEvent.filter.animateHeight = false;
+                            this.mAnimationEvents.add(animationEvent);
+                            notificationStackScrollLogger = this.mLogger;
+                            if (notificationStackScrollLogger != null) {
+                                String str5 = expandableNotificationRow.mLoggingKey;
+                                if (i9 != 0) {
+                                    switch (i9) {
+                                        case 11:
+                                            strValueOf = "HEADS_UP_APPEAR";
+                                            break;
+                                        case 12:
+                                            strValueOf = "HEADS_UP_DISAPPEAR";
+                                            break;
+                                        case 13:
+                                            strValueOf = "HEADS_UP_DISAPPEAR_CLICK";
+                                            break;
+                                        case 14:
+                                            strValueOf = "HEADS_UP_OTHER";
+                                            break;
+                                        default:
+                                            strValueOf = String.valueOf(i9);
+                                            break;
+                                    }
+                                } else {
+                                    strValueOf = "ADD";
+                                }
+                                LogLevel logLevel2 = LogLevel.INFO;
+                                NotificationStackScrollLogger$$ExternalSyntheticLambda0 notificationStackScrollLogger$$ExternalSyntheticLambda02 = new NotificationStackScrollLogger$$ExternalSyntheticLambda0(5);
+                                LogBuffer logBuffer2 = notificationStackScrollLogger.buffer;
+                                LogMessage logMessageObtain2 = logBuffer2.obtain("NotificationStackScroll", logLevel2, notificationStackScrollLogger$$ExternalSyntheticLambda02, null);
+                                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                                logMessageImpl2.str1 = str5;
+                                logMessageImpl2.str2 = strValueOf;
+                                logBuffer2.commit(logMessageObtain2);
+                            }
+                        }
+                    } else {
+                        ExpandableViewState expandableViewState = expandableNotificationRow.mViewState;
+                        if (expandableViewState == null) {
+                            logHunAnimationSkipped(expandableNotificationRow, "row has no viewState");
+                        } else {
+                            StackScrollAlgorithm stackScrollAlgorithm2 = this.mStackScrollAlgorithm;
+                            AmbientState ambientState2 = this.mAmbientState;
+                            stackScrollAlgorithm2.getClass();
+                            boolean z11 = expandableViewState.mYTranslation + ((float) expandableViewState.height) >= ambientState2.mMaxHeadsUpTranslation;
+                            if (z9 && (this.mAddedHeadsUpChildren.contains(expandableNotificationRow) || z10)) {
+                                if (z10 || z11) {
+                                    int i13 = NotificationHeadsUpCycling.$r8$clinit;
+                                    StackScrollAlgorithm stackScrollAlgorithm3 = this.mStackScrollAlgorithm;
+                                    AmbientState ambientState3 = this.mAmbientState;
+                                    stackScrollAlgorithm3.getClass();
+                                    i10 = StackScrollAlgorithm.isCyclingIn(expandableNotificationRow, ambientState3) ? 17 : 11;
+                                } else {
+                                    i10 = 0;
+                                }
+                                int i14 = i10;
+                                z7 = !z10;
+                                i9 = i14;
+                                AnimationEvent animationEvent2 = new AnimationEvent(expandableNotificationRow, i9);
+                                animationEvent2.headsUpFromBottom = z7;
+                                int i122 = StatusBarNotifChips.$r8$clinit;
+                                animationEvent2.filter.animateHeight = false;
+                                this.mAnimationEvents.add(animationEvent2);
+                                notificationStackScrollLogger = this.mLogger;
+                                if (notificationStackScrollLogger != null) {
+                                }
+                            } else {
+                                i9 = 14;
+                                z7 = false;
+                                AnimationEvent animationEvent22 = new AnimationEvent(expandableNotificationRow, i9);
+                                animationEvent22.headsUpFromBottom = z7;
+                                int i1222 = StatusBarNotifChips.$r8$clinit;
+                                animationEvent22.filter.animateHeight = false;
+                                this.mAnimationEvents.add(animationEvent22);
+                                notificationStackScrollLogger = this.mLogger;
+                                if (notificationStackScrollLogger != null) {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            z = true;
+            ((HashMap) this.mHeadsUpChangeAnimations).clear();
+            this.mAddedHeadsUpChildren.clear();
+            ArrayList arrayList2 = this.mChildrenToRemoveAnimated;
+            int size = arrayList2.size();
+            int i15 = 0;
+            while (i15 < size) {
+                Object obj = arrayList2.get(i15);
+                i15++;
+                ExpandableView expandableView3 = (ExpandableView) obj;
+                boolean zContains = this.mSwipedOutViews.contains(expandableView3);
+                float translationY = expandableView3.getTranslationY();
+                boolean z12 = expandableView3 instanceof ExpandableNotificationRow;
+                if (z12) {
+                    zContains |= isFullySwipedOut((ExpandableNotificationRow) expandableView3);
+                } else if (expandableView3 instanceof MediaContainerView) {
+                    zContains = true;
+                }
+                if (!zContains) {
+                    Rect clipBounds = expandableView3.getClipBounds();
+                    zContains = clipBounds != null && clipBounds.height() == 0;
+                    if (zContains) {
+                        expandableView3.removeFromTransientContainer();
+                    }
+                }
+                AnimationEvent animationEvent3 = new AnimationEvent(expandableView3, zContains ? 2 : 1);
+                animationEvent3.viewAfterChangingView = getFirstChildBelowTranlsationY(translationY);
+                this.mAnimationEvents.add(animationEvent3);
+                this.mSwipedOutViews.remove(expandableView3);
+                if (this.mDebugRemoveAnimation) {
+                    Log.d("StackScroller", "created Remove Event - SwipedOut: " + zContains + " " + (z12 ? ((ExpandableNotificationRow) expandableView3).getKey() : ""));
+                }
+            }
+            this.mChildrenToRemoveAnimated.clear();
+            Iterator it = this.mChildrenToAddAnimated.iterator();
+            while (it.hasNext()) {
+                ExpandableView expandableView4 = (ExpandableView) it.next();
+                if (this.mFromMoreCardAdditions.contains(expandableView4)) {
+                    this.mAnimationEvents.add(new AnimationEvent(expandableView4, 0, 360L));
+                } else {
+                    this.mAnimationEvents.add(new AnimationEvent(expandableView4, 0));
+                }
+            }
+            this.mChildrenToAddAnimated.clear();
+            this.mFromMoreCardAdditions.clear();
+            ArrayList arrayList3 = this.mChildrenChangingPositions;
+            int size2 = arrayList3.size();
+            int i16 = 0;
+            while (i16 < size2) {
+                Object obj2 = arrayList3.get(i16);
+                i16++;
+                ExpandableView expandableView5 = (ExpandableView) obj2;
+                if (expandableView5 instanceof ExpandableNotificationRow) {
+                    ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) expandableView5;
+                    if (expandableNotificationRow2.mEntry.mIsMarkedForUserTriggeredMovement) {
+                        num = 500;
+                        expandableNotificationRow2.mEntry.mIsMarkedForUserTriggeredMovement = false;
+                    } else {
+                        num = null;
+                    }
+                }
+                this.mAnimationEvents.add(num == null ? new AnimationEvent(expandableView5, 6) : new AnimationEvent(expandableView5, 6, num.intValue()));
+            }
+            this.mChildrenChangingPositions.clear();
+            if (this.mTopPaddingNeedsAnimation) {
+                this.mAnimationEvents.add(this.mAmbientState.mDozing ? new AnimationEvent((ExpandableView) null, 3, 550L) : new AnimationEvent(null, 3));
+            }
+            this.mTopPaddingNeedsAnimation = false;
+            if (this.mHideSensitiveNeedsAnimation) {
+                this.mAnimationEvents.add(new AnimationEvent(null, 8));
+            }
+            this.mHideSensitiveNeedsAnimation = false;
+            if (this.mGoToFullShadeNeedsAnimation) {
+                this.mAnimationEvents.add(new AnimationEvent(null, 7));
+            }
+            this.mGoToFullShadeNeedsAnimation = false;
+            if (this.mNeedViewResizeAnimation) {
+                ArrayList arrayList4 = this.mAnimationEvents;
+                int size3 = arrayList4.size();
+                int i17 = 0;
+                while (true) {
+                    if (i17 < size3) {
+                        Object obj3 = arrayList4.get(i17);
+                        i17++;
+                        int i18 = ((AnimationEvent) obj3).animationType;
+                        if (i18 == 13 || i18 == 12) {
+                        }
+                    } else {
+                        this.mAnimationEvents.add(new AnimationEvent(null, 9));
+                    }
+                }
+            }
+            this.mNeedViewResizeAnimation = false;
+            if (this.mExpandedGroupView != null) {
+                this.mAnimationEvents.add(new AnimationEvent(this.mExpandedGroupView, 10));
+                this.mExpandedGroupView = null;
+            }
+            this.mNeedsAnimation = false;
+        } else {
+            z = true;
+        }
+        if (this.mAnimationEvents.isEmpty() && this.mStateAnimator.mAnimatorSet.isEmpty()) {
+            applyCurrentState();
+        } else {
+            setAnimationRunning(z);
+            final StackStateAnimator stackStateAnimator6 = this.mStateAnimator;
+            ArrayList arrayList5 = this.mAnimationEvents;
+            long j2 = this.mGoToFullShadeDelay;
+            stackStateAnimator6.getClass();
+            int size4 = arrayList5.size();
+            boolean z13 = false;
+            int i19 = 0;
+            while (true) {
+                StackStateAnimator.AnonymousClass1 anonymousClass1 = stackStateAnimator6.mAnimationProperties;
+                NotificationStackScrollLayout notificationStackScrollLayout = stackStateAnimator6.mHostLayout;
+                String str6 = str2;
+                if (i19 < size4) {
+                    Object obj4 = arrayList5.get(i19);
+                    i19++;
+                    AnimationEvent animationEvent4 = (AnimationEvent) obj4;
+                    final ExpandableView expandableView6 = animationEvent4.mChangingView;
+                    if (!(expandableView6 instanceof ExpandableNotificationRow) || stackStateAnimator6.mLogger == null) {
+                        key = str3;
+                        z5 = false;
+                        z6 = false;
+                    } else {
+                        ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) expandableView6;
+                        boolean z14 = expandableNotificationRow3.mIsHeadsUp;
+                        key = expandableNotificationRow3.getKey();
+                        z6 = z14;
+                        z5 = true;
+                    }
+                    int i20 = animationEvent4.animationType;
+                    if (i20 == 0) {
+                        ExpandableViewState expandableViewState2 = expandableView6.mViewState;
+                        if (expandableViewState2 == null || expandableViewState2.gone) {
+                            stackStateAnimator4 = stackStateAnimator6;
+                            c = 6;
+                            stackStateAnimator6 = stackStateAnimator4;
+                            str2 = str6;
+                        } else {
+                            if (z5 && z6) {
+                                StackStateLogger stackStateLogger = stackStateAnimator6.mLogger;
+                                stackStateLogger.getClass();
+                                LogLevel logLevel3 = LogLevel.ERROR;
+                                StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda0 = new StackStateLogger$$ExternalSyntheticLambda0(6);
+                                LogBuffer logBuffer3 = stackStateLogger.buffer;
+                                LogMessage logMessageObtain3 = logBuffer3.obtain("StackScroll", logLevel3, stackStateLogger$$ExternalSyntheticLambda0, null);
+                                ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtils.logKey(key);
+                                logBuffer3.commit(logMessageObtain3);
+                            }
+                            expandableViewState2.applyToView(expandableView6);
+                            stackStateAnimator6.mNewAddChildren.add(expandableView6);
+                            stackStateAnimator = stackStateAnimator6;
+                            arrayList = arrayList5;
+                            i8 = size4;
+                            c2 = 3;
+                            c = 6;
+                            stackStateAnimator2 = stackStateAnimator;
+                            str = str6;
+                            stackStateAnimator2.mNewEvents.add(animationEvent4);
+                            stackStateAnimator6 = stackStateAnimator2;
+                            str2 = str;
+                            arrayList5 = arrayList;
+                            size4 = i8;
+                        }
+                    } else {
+                        boolean z15 = z5;
+                        c = 6;
+                        if (i20 == 1) {
+                            int visibility = expandableView6.getVisibility();
+                            if (z15) {
+                                StackStateLogger stackStateLogger2 = stackStateAnimator6.mLogger;
+                                stackStateLogger2.getClass();
+                                LogLevel logLevel4 = LogLevel.INFO;
+                                stackStateAnimator4 = stackStateAnimator6;
+                                StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda02 = new StackStateLogger$$ExternalSyntheticLambda0(4);
+                                LogBuffer logBuffer4 = stackStateLogger2.notificationRenderBuffer;
+                                LogMessage logMessageObtain4 = logBuffer4.obtain("StackScroll", logLevel4, stackStateLogger$$ExternalSyntheticLambda02, null);
+                                LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain4;
+                                logMessageImpl3.str1 = NotificationUtils.logKey(key);
+                                logMessageImpl3.int1 = visibility;
+                                logMessageImpl3.bool1 = z6;
+                                logBuffer4.commit(logMessageObtain4);
+                            } else {
+                                stackStateAnimator4 = stackStateAnimator6;
+                            }
+                            if (visibility != 0) {
+                                expandableView6.removeFromTransientContainer();
+                                stackStateAnimator6 = stackStateAnimator4;
+                                str2 = str6;
+                            } else {
+                                float fMax = -1.0f;
+                                if (animationEvent4.viewAfterChangingView != null) {
+                                    float translationY2 = expandableView6.getTranslationY();
+                                    if (expandableView6 instanceof ExpandableNotificationRow) {
+                                        View view2 = animationEvent4.viewAfterChangingView;
+                                        if (view2 instanceof ExpandableNotificationRow) {
+                                        }
+                                    }
+                                    float f = expandableView6.mActualHeight;
+                                    fMax = Math.max(Math.min(((((ExpandableView) animationEvent4.viewAfterChangingView).mViewState.mYTranslation - ((f / 2.0f) + translationY2)) * 2.0f) / f, 1.0f), -1.0f);
+                                }
+                                float f2 = fMax;
+                                if (z15) {
+                                    final int i21 = 0;
+                                    final boolean z16 = z6;
+                                    stackStateAnimator$$ExternalSyntheticLambda15 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            switch (i21) {
+                                                case 0:
+                                                    StackStateAnimator stackStateAnimator7 = stackStateAnimator4;
+                                                    String str7 = key;
+                                                    boolean z17 = z16;
+                                                    ExpandableView expandableView7 = expandableView6;
+                                                    stackStateAnimator7.mLogger.animationStart(str7, "ANIMATION_TYPE_REMOVE", z17);
+                                                    expandableView7.mInRemovalAnimation = true;
+                                                    break;
+                                                case 1:
+                                                    StackStateAnimator stackStateAnimator8 = stackStateAnimator4;
+                                                    String str8 = key;
+                                                    boolean z18 = z16;
+                                                    ExpandableView expandableView8 = expandableView6;
+                                                    stackStateAnimator8.mLogger.animationStart(str8, "ANIMATION_TYPE_HEADS_UP_CYCLING_OUT", z18);
+                                                    expandableView8.mInRemovalAnimation = true;
+                                                    break;
+                                                default:
+                                                    StackStateAnimator stackStateAnimator9 = stackStateAnimator4;
+                                                    String str9 = key;
+                                                    boolean z19 = z16;
+                                                    ExpandableView expandableView9 = expandableView6;
+                                                    stackStateAnimator9.mLogger.animationEnd(str9, "ANIMATION_TYPE_REMOVE", z19);
+                                                    expandableView9.mInRemovalAnimation = false;
+                                                    expandableView9.removeFromTransientContainer();
+                                                    stackStateAnimator9.mHostLayout.onChildAnimationFinished();
+                                                    break;
+                                            }
+                                        }
+                                    };
+                                    final int i22 = 2;
+                                    stackStateAnimator5 = stackStateAnimator4;
+                                    expandableView2 = expandableView6;
+                                    runnable5 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            switch (i22) {
+                                                case 0:
+                                                    StackStateAnimator stackStateAnimator7 = stackStateAnimator4;
+                                                    String str7 = key;
+                                                    boolean z17 = z16;
+                                                    ExpandableView expandableView7 = expandableView6;
+                                                    stackStateAnimator7.mLogger.animationStart(str7, "ANIMATION_TYPE_REMOVE", z17);
+                                                    expandableView7.mInRemovalAnimation = true;
+                                                    break;
+                                                case 1:
+                                                    StackStateAnimator stackStateAnimator8 = stackStateAnimator4;
+                                                    String str8 = key;
+                                                    boolean z18 = z16;
+                                                    ExpandableView expandableView8 = expandableView6;
+                                                    stackStateAnimator8.mLogger.animationStart(str8, "ANIMATION_TYPE_HEADS_UP_CYCLING_OUT", z18);
+                                                    expandableView8.mInRemovalAnimation = true;
+                                                    break;
+                                                default:
+                                                    StackStateAnimator stackStateAnimator9 = stackStateAnimator4;
+                                                    String str9 = key;
+                                                    boolean z19 = z16;
+                                                    ExpandableView expandableView9 = expandableView6;
+                                                    stackStateAnimator9.mLogger.animationEnd(str9, "ANIMATION_TYPE_REMOVE", z19);
+                                                    expandableView9.mInRemovalAnimation = false;
+                                                    expandableView9.removeFromTransientContainer();
+                                                    stackStateAnimator9.mHostLayout.onChildAnimationFinished();
+                                                    break;
+                                            }
+                                        }
+                                    };
+                                } else {
+                                    expandableView2 = expandableView6;
+                                    stackStateAnimator5 = stackStateAnimator4;
+                                    stackStateAnimator$$ExternalSyntheticLambda15 = new StackStateAnimator$$ExternalSyntheticLambda1(expandableView2, 3);
+                                    final int i23 = 0;
+                                    runnable5 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda9
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            switch (i23) {
+                                                case 0:
+                                                    StackStateAnimator stackStateAnimator7 = stackStateAnimator5;
+                                                    ExpandableView expandableView7 = (ExpandableView) expandableView2;
+                                                    stackStateAnimator7.getClass();
+                                                    expandableView7.mInRemovalAnimation = false;
+                                                    expandableView7.removeFromTransientContainer();
+                                                    stackStateAnimator7.mHostLayout.onChildAnimationFinished();
+                                                    break;
+                                                case 1:
+                                                    StackStateAnimator stackStateAnimator8 = stackStateAnimator5;
+                                                    String str7 = (String) expandableView2;
+                                                    StackStateLogger stackStateLogger3 = stackStateAnimator8.mLogger;
+                                                    stackStateLogger3.getClass();
+                                                    LogLevel logLevel5 = LogLevel.INFO;
+                                                    StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda03 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                    LogBuffer logBuffer5 = stackStateLogger3.buffer;
+                                                    LogMessage logMessageObtain5 = logBuffer5.obtain("StackScroll", logLevel5, stackStateLogger$$ExternalSyntheticLambda03, null);
+                                                    ((LogMessageImpl) logMessageObtain5).str1 = NotificationUtils.logKey(str7);
+                                                    logBuffer5.commit(logMessageObtain5);
+                                                    break;
+                                                default:
+                                                    StackStateAnimator stackStateAnimator9 = stackStateAnimator5;
+                                                    String str8 = (String) expandableView2;
+                                                    StackStateLogger stackStateLogger4 = stackStateAnimator9.mLogger;
+                                                    stackStateLogger4.getClass();
+                                                    LogLevel logLevel6 = LogLevel.INFO;
+                                                    StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda04 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                    LogBuffer logBuffer6 = stackStateLogger4.buffer;
+                                                    LogMessage logMessageObtain6 = logBuffer6.obtain("StackScroll", logLevel6, stackStateLogger$$ExternalSyntheticLambda04, null);
+                                                    ((LogMessageImpl) logMessageObtain6).str1 = NotificationUtils.logKey(str8);
+                                                    logBuffer6.commit(logMessageObtain6);
+                                                    break;
+                                            }
+                                        }
+                                    };
+                                }
+                                expandableView2.performRemoveAnimation(464L, 0L, f2, false, false, stackStateAnimator$$ExternalSyntheticLambda15, runnable5, stackStateAnimator5.getGlobalAnimationFinishedListener(), ExpandableView.ClipSide.BOTTOM);
+                                arrayList = arrayList5;
+                                i8 = size4;
+                                str = str6;
+                                z13 = true;
+                                c2 = 3;
+                                stackStateAnimator2 = stackStateAnimator5;
+                            }
+                        } else {
+                            arrayList = arrayList5;
+                            final boolean z17 = z6;
+                            final String str7 = key;
+                            if (i20 == 2) {
+                                boolean zIsFullySwipedOut = notificationStackScrollLayout.isFullySwipedOut(expandableView6);
+                                if (z15) {
+                                    StackStateLogger stackStateLogger3 = stackStateAnimator6.mLogger;
+                                    stackStateLogger3.getClass();
+                                    LogLevel logLevel5 = LogLevel.INFO;
+                                    i8 = size4;
+                                    StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda03 = new StackStateLogger$$ExternalSyntheticLambda0(1);
+                                    LogBuffer logBuffer5 = stackStateLogger3.notificationRenderBuffer;
+                                    LogMessage logMessageObtain5 = logBuffer5.obtain("StackScroll", logLevel5, stackStateLogger$$ExternalSyntheticLambda03, null);
+                                    LogMessageImpl logMessageImpl4 = (LogMessageImpl) logMessageObtain5;
+                                    logMessageImpl4.str1 = NotificationUtils.logKey(str7);
+                                    logMessageImpl4.bool1 = zIsFullySwipedOut;
+                                    logMessageImpl4.bool2 = z17;
+                                    logBuffer5.commit(logMessageObtain5);
+                                } else {
+                                    i8 = size4;
+                                }
+                                if (zIsFullySwipedOut) {
+                                    expandableView6.removeFromTransientContainer();
+                                }
+                            } else {
+                                i8 = size4;
+                                ExpandableViewState expandableViewState3 = stackStateAnimator6.mTmpState;
+                                if (i20 == 17) {
+                                    stackStateAnimator6.mHeadsUpAppearChildren.add(expandableView6);
+                                    expandableViewState3.copyFrom(expandableView6.mViewState);
+                                    expandableViewState3.setYTranslation(expandableView6.mViewState.mYTranslation + (animationEvent4.headsUpFromBottom ? stackStateAnimator6.mHeadsUpAppearHeightBottom + stackStateAnimator6.mHeadsUpCyclingPadding : -stackStateAnimator6.mHeadsUpCyclingPadding));
+                                    expandableViewState3.applyToView(expandableView6);
+                                    if (z15) {
+                                        StackStateLogger stackStateLogger4 = stackStateAnimator6.mLogger;
+                                        stackStateLogger4.getClass();
+                                        LogLevel logLevel6 = LogLevel.INFO;
+                                        StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda04 = new StackStateLogger$$ExternalSyntheticLambda0(3);
+                                        LogBuffer logBuffer6 = stackStateLogger4.buffer;
+                                        LogMessage logMessageObtain6 = logBuffer6.obtain("StackScroll", logLevel6, stackStateLogger$$ExternalSyntheticLambda04, null);
+                                        ((LogMessageImpl) logMessageObtain6).str1 = NotificationUtils.logKey(str7);
+                                        logBuffer6.commit(logMessageObtain6);
+                                        final int i24 = 1;
+                                        runnable4 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda9
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                switch (i24) {
+                                                    case 0:
+                                                        StackStateAnimator stackStateAnimator7 = stackStateAnimator6;
+                                                        ExpandableView expandableView7 = (ExpandableView) str7;
+                                                        stackStateAnimator7.getClass();
+                                                        expandableView7.mInRemovalAnimation = false;
+                                                        expandableView7.removeFromTransientContainer();
+                                                        stackStateAnimator7.mHostLayout.onChildAnimationFinished();
+                                                        break;
+                                                    case 1:
+                                                        StackStateAnimator stackStateAnimator8 = stackStateAnimator6;
+                                                        String str72 = (String) str7;
+                                                        StackStateLogger stackStateLogger32 = stackStateAnimator8.mLogger;
+                                                        stackStateLogger32.getClass();
+                                                        LogLevel logLevel52 = LogLevel.INFO;
+                                                        StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda032 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                        LogBuffer logBuffer52 = stackStateLogger32.buffer;
+                                                        LogMessage logMessageObtain52 = logBuffer52.obtain("StackScroll", logLevel52, stackStateLogger$$ExternalSyntheticLambda032, null);
+                                                        ((LogMessageImpl) logMessageObtain52).str1 = NotificationUtils.logKey(str72);
+                                                        logBuffer52.commit(logMessageObtain52);
+                                                        break;
+                                                    default:
+                                                        StackStateAnimator stackStateAnimator9 = stackStateAnimator6;
+                                                        String str8 = (String) str7;
+                                                        StackStateLogger stackStateLogger42 = stackStateAnimator9.mLogger;
+                                                        stackStateLogger42.getClass();
+                                                        LogLevel logLevel62 = LogLevel.INFO;
+                                                        StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda042 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                        LogBuffer logBuffer62 = stackStateLogger42.buffer;
+                                                        LogMessage logMessageObtain62 = logBuffer62.obtain("StackScroll", logLevel62, stackStateLogger$$ExternalSyntheticLambda042, null);
+                                                        ((LogMessageImpl) logMessageObtain62).str1 = NotificationUtils.logKey(str8);
+                                                        logBuffer62.commit(logMessageObtain62);
+                                                        break;
+                                                }
+                                            }
+                                        };
+                                    } else {
+                                        runnable4 = null;
+                                    }
+                                    expandableView6.performAddAnimation(0L, 400L, true, true, runnable4);
+                                } else {
+                                    if (i20 == 11) {
+                                        stackStateAnimator6.mHeadsUpAppearChildren.add(expandableView6);
+                                        expandableViewState3.copyFrom(expandableView6.mViewState);
+                                        boolean z18 = animationEvent4.headsUpFromBottom;
+                                        int i25 = NotificationsHunSharedAnimationValues.$r8$clinit;
+                                        expandableViewState3.setYTranslation(z18 ? stackStateAnimator6.mHeadsUpAppearHeightBottom + stackStateAnimator6.mHeadsUpAppearStartAboveScreen : (-stackStateAnimator6.mStackTopMargin) - stackStateAnimator6.mHeadsUpAppearStartAboveScreen);
+                                        expandableViewState3.applyToView(expandableView6);
+                                        anonymousClass1.setCustomInterpolator(View.TRANSLATION_Y, Interpolators.FAST_OUT_SLOW_IN);
+                                        if (z15) {
+                                            StackStateLogger stackStateLogger5 = stackStateAnimator6.mLogger;
+                                            stackStateLogger5.getClass();
+                                            LogLevel logLevel7 = LogLevel.INFO;
+                                            c3 = 3;
+                                            StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda05 = new StackStateLogger$$ExternalSyntheticLambda0(3);
+                                            LogBuffer logBuffer7 = stackStateLogger5.buffer;
+                                            LogMessage logMessageObtain7 = logBuffer7.obtain("StackScroll", logLevel7, stackStateLogger$$ExternalSyntheticLambda05, null);
+                                            ((LogMessageImpl) logMessageObtain7).str1 = NotificationUtils.logKey(str7);
+                                            logBuffer7.commit(logMessageObtain7);
+                                            final int i26 = 2;
+                                            runnable3 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda9
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    switch (i26) {
+                                                        case 0:
+                                                            StackStateAnimator stackStateAnimator7 = stackStateAnimator6;
+                                                            ExpandableView expandableView7 = (ExpandableView) str7;
+                                                            stackStateAnimator7.getClass();
+                                                            expandableView7.mInRemovalAnimation = false;
+                                                            expandableView7.removeFromTransientContainer();
+                                                            stackStateAnimator7.mHostLayout.onChildAnimationFinished();
+                                                            break;
+                                                        case 1:
+                                                            StackStateAnimator stackStateAnimator8 = stackStateAnimator6;
+                                                            String str72 = (String) str7;
+                                                            StackStateLogger stackStateLogger32 = stackStateAnimator8.mLogger;
+                                                            stackStateLogger32.getClass();
+                                                            LogLevel logLevel52 = LogLevel.INFO;
+                                                            StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda032 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                            LogBuffer logBuffer52 = stackStateLogger32.buffer;
+                                                            LogMessage logMessageObtain52 = logBuffer52.obtain("StackScroll", logLevel52, stackStateLogger$$ExternalSyntheticLambda032, null);
+                                                            ((LogMessageImpl) logMessageObtain52).str1 = NotificationUtils.logKey(str72);
+                                                            logBuffer52.commit(logMessageObtain52);
+                                                            break;
+                                                        default:
+                                                            StackStateAnimator stackStateAnimator9 = stackStateAnimator6;
+                                                            String str8 = (String) str7;
+                                                            StackStateLogger stackStateLogger42 = stackStateAnimator9.mLogger;
+                                                            stackStateLogger42.getClass();
+                                                            LogLevel logLevel62 = LogLevel.INFO;
+                                                            StackStateLogger$$ExternalSyntheticLambda0 stackStateLogger$$ExternalSyntheticLambda042 = new StackStateLogger$$ExternalSyntheticLambda0(2);
+                                                            LogBuffer logBuffer62 = stackStateLogger42.buffer;
+                                                            LogMessage logMessageObtain62 = logBuffer62.obtain("StackScroll", logLevel62, stackStateLogger$$ExternalSyntheticLambda042, null);
+                                                            ((LogMessageImpl) logMessageObtain62).str1 = NotificationUtils.logKey(str8);
+                                                            logBuffer62.commit(logMessageObtain62);
+                                                            break;
+                                                    }
+                                                }
+                                            };
+                                        } else {
+                                            c3 = 3;
+                                            runnable3 = null;
+                                        }
+                                        expandableView6.performAddAnimation(0L, 400L, true, false, runnable3);
+                                        stackStateAnimator = stackStateAnimator6;
+                                        c2 = c3;
+                                    } else {
+                                        c2 = 3;
+                                        if (i20 == 16) {
+                                            stackStateAnimator6.mHeadsUpDisappearChildren.add(expandableView6);
+                                            expandableViewState3.copyFrom(expandableView6.mViewState);
+                                            if (expandableView6.getParent() == null) {
+                                                notificationStackScrollLayout.addTransientView(expandableView6, 0);
+                                                expandableView6.mTransientContainer = notificationStackScrollLayout;
+                                                expandableViewState3.setYTranslation(expandableViewState3.mYTranslation + 10.0f);
+                                                stackStateAnimator$$ExternalSyntheticLambda13 = new StackStateAnimator$$ExternalSyntheticLambda1(expandableView6, 1);
+                                            } else {
+                                                stackStateAnimator$$ExternalSyntheticLambda13 = null;
+                                            }
+                                            boolean z19 = ((expandableView6 instanceof ExpandableNotificationRow) && ((ExpandableNotificationRow) expandableView6).mDismissed) ? false : true;
+                                            if (z19) {
+                                                if (z15) {
+                                                    final int i27 = 1;
+                                                    final StackStateAnimator stackStateAnimator7 = stackStateAnimator6;
+                                                    Runnable runnable6 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda0
+                                                        @Override // java.lang.Runnable
+                                                        public final void run() {
+                                                            switch (i27) {
+                                                                case 0:
+                                                                    StackStateAnimator stackStateAnimator72 = stackStateAnimator7;
+                                                                    String str72 = str7;
+                                                                    boolean z172 = z17;
+                                                                    ExpandableView expandableView7 = expandableView6;
+                                                                    stackStateAnimator72.mLogger.animationStart(str72, "ANIMATION_TYPE_REMOVE", z172);
+                                                                    expandableView7.mInRemovalAnimation = true;
+                                                                    break;
+                                                                case 1:
+                                                                    StackStateAnimator stackStateAnimator8 = stackStateAnimator7;
+                                                                    String str8 = str7;
+                                                                    boolean z182 = z17;
+                                                                    ExpandableView expandableView8 = expandableView6;
+                                                                    stackStateAnimator8.mLogger.animationStart(str8, "ANIMATION_TYPE_HEADS_UP_CYCLING_OUT", z182);
+                                                                    expandableView8.mInRemovalAnimation = true;
+                                                                    break;
+                                                                default:
+                                                                    StackStateAnimator stackStateAnimator9 = stackStateAnimator7;
+                                                                    String str9 = str7;
+                                                                    boolean z192 = z17;
+                                                                    ExpandableView expandableView9 = expandableView6;
+                                                                    stackStateAnimator9.mLogger.animationEnd(str9, "ANIMATION_TYPE_REMOVE", z192);
+                                                                    expandableView9.mInRemovalAnimation = false;
+                                                                    expandableView9.removeFromTransientContainer();
+                                                                    stackStateAnimator9.mHostLayout.onChildAnimationFinished();
+                                                                    break;
+                                                            }
+                                                        }
+                                                    };
+                                                    StackStateAnimator$$ExternalSyntheticLambda3 stackStateAnimator$$ExternalSyntheticLambda3 = new StackStateAnimator$$ExternalSyntheticLambda3(stackStateAnimator7, str7, z17, expandableView6, stackStateAnimator$$ExternalSyntheticLambda13);
+                                                    stackStateAnimator3 = stackStateAnimator7;
+                                                    stackStateAnimator$$ExternalSyntheticLambda14 = runnable6;
+                                                    runnable2 = stackStateAnimator$$ExternalSyntheticLambda3;
+                                                } else {
+                                                    stackStateAnimator3 = stackStateAnimator6;
+                                                    final int i28 = 1;
+                                                    Runnable runnable7 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda6
+                                                        @Override // java.lang.Runnable
+                                                        public final void run() {
+                                                            switch (i28) {
+                                                                case 0:
+                                                                    ExpandableView expandableView7 = expandableView6;
+                                                                    StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda16 = stackStateAnimator$$ExternalSyntheticLambda13;
+                                                                    expandableView7.mInRemovalAnimation = false;
+                                                                    if (stackStateAnimator$$ExternalSyntheticLambda16 != null) {
+                                                                        stackStateAnimator$$ExternalSyntheticLambda16.run();
+                                                                        break;
+                                                                    }
+                                                                    break;
+                                                                default:
+                                                                    ExpandableView expandableView8 = expandableView6;
+                                                                    StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda17 = stackStateAnimator$$ExternalSyntheticLambda13;
+                                                                    expandableView8.mInRemovalAnimation = false;
+                                                                    if (stackStateAnimator$$ExternalSyntheticLambda17 != null) {
+                                                                        stackStateAnimator$$ExternalSyntheticLambda17.run();
+                                                                        break;
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        }
+                                                    };
+                                                    stackStateAnimator$$ExternalSyntheticLambda14 = new StackStateAnimator$$ExternalSyntheticLambda1(expandableView6, 0);
+                                                    runnable2 = runnable7;
+                                                }
+                                                stackStateAnimator = stackStateAnimator3;
+                                                anonymousClass1.delay += expandableView6.performRemoveAnimation(400L, 0L, 0.0f, true, true, stackStateAnimator$$ExternalSyntheticLambda14, runnable2, stackStateAnimator3.getGlobalAnimationFinishedListener(), ExpandableView.ClipSide.TOP);
+                                                anonymousClass1.duration = 400L;
+                                                anonymousClass1.setCustomInterpolator(View.TRANSLATION_Y, Interpolators.LINEAR);
+                                                StackStateAnimator.this.mAnimationFilter.animateY = true;
+                                                expandableViewState3.animateTo(expandableView6, anonymousClass1);
+                                                anonymousClass1.mInterpolatorMap = null;
+                                            } else {
+                                                stackStateAnimator = stackStateAnimator6;
+                                                if (stackStateAnimator$$ExternalSyntheticLambda13 != null) {
+                                                    stackStateAnimator$$ExternalSyntheticLambda13.run();
+                                                }
+                                            }
+                                            z13 |= z19;
+                                        } else {
+                                            stackStateAnimator = stackStateAnimator6;
+                                            if (i20 == 12 || i20 == 13) {
+                                                stackStateAnimator2 = stackStateAnimator;
+                                                stackStateAnimator2.mHeadsUpDisappearChildren.add(expandableView6);
+                                                expandableViewState3.copyFrom(expandableView6.mViewState);
+                                                if (expandableView6.getParent() == null) {
+                                                    str = str6;
+                                                    Log.d(str, "HEADS_UP_DISAPPEAR addTransientView : " + expandableView6);
+                                                    notificationStackScrollLayout.addTransientView(expandableView6, 0);
+                                                    expandableView6.mTransientContainer = notificationStackScrollLayout;
+                                                    boolean z20 = animationEvent4.headsUpFromBottom;
+                                                    int i29 = NotificationsHunSharedAnimationValues.$r8$clinit;
+                                                    expandableViewState3.setYTranslation(z20 ? stackStateAnimator2.mHeadsUpAppearHeightBottom + stackStateAnimator2.mHeadsUpAppearStartAboveScreen : (-stackStateAnimator2.mStackTopMargin) - stackStateAnimator2.mHeadsUpAppearStartAboveScreen);
+                                                    stackStateAnimator$$ExternalSyntheticLambda1 = new StackStateAnimator$$ExternalSyntheticLambda1(expandableView6, 1);
+                                                } else {
+                                                    str = str6;
+                                                    stackStateAnimator$$ExternalSyntheticLambda1 = null;
+                                                }
+                                                boolean z21 = ((expandableView6 instanceof ExpandableNotificationRow) && ((ExpandableNotificationRow) expandableView6).mDismissed) ? false : true;
+                                                if (z21) {
+                                                    if (z15) {
+                                                        final String str8 = i20 == 12 ? "ANIMATION_TYPE_HEADS_UP_DISAPPEAR" : "ANIMATION_TYPE_HEADS_UP_DISAPPEAR_CLICK";
+                                                        StackStateAnimator$$ExternalSyntheticLambda3 stackStateAnimator$$ExternalSyntheticLambda32 = new StackStateAnimator$$ExternalSyntheticLambda3(stackStateAnimator2, str7, str8, z17, expandableView6);
+                                                        Runnable runnable8 = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda4
+                                                            @Override // java.lang.Runnable
+                                                            public final void run() {
+                                                                StackStateAnimator stackStateAnimator8 = stackStateAnimator2;
+                                                                String str9 = str7;
+                                                                String str10 = str8;
+                                                                boolean z22 = z17;
+                                                                ExpandableView expandableView7 = expandableView6;
+                                                                StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda16 = stackStateAnimator$$ExternalSyntheticLambda1;
+                                                                stackStateAnimator8.mLogger.animationEnd(str9, str10, z22);
+                                                                expandableView7.mInRemovalAnimation = false;
+                                                                if (stackStateAnimator$$ExternalSyntheticLambda16 != null) {
+                                                                    stackStateAnimator$$ExternalSyntheticLambda16.run();
+                                                                }
+                                                            }
+                                                        };
+                                                        stackStateAnimator2 = stackStateAnimator2;
+                                                        stackStateAnimator$$ExternalSyntheticLambda12 = stackStateAnimator$$ExternalSyntheticLambda32;
+                                                        runnable = runnable8;
+                                                    } else {
+                                                        final StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda16 = stackStateAnimator$$ExternalSyntheticLambda1;
+                                                        final int i30 = 0;
+                                                        stackStateAnimator$$ExternalSyntheticLambda12 = new StackStateAnimator$$ExternalSyntheticLambda1(expandableView6, 2);
+                                                        runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator$$ExternalSyntheticLambda6
+                                                            @Override // java.lang.Runnable
+                                                            public final void run() {
+                                                                switch (i30) {
+                                                                    case 0:
+                                                                        ExpandableView expandableView7 = expandableView6;
+                                                                        StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda162 = stackStateAnimator$$ExternalSyntheticLambda16;
+                                                                        expandableView7.mInRemovalAnimation = false;
+                                                                        if (stackStateAnimator$$ExternalSyntheticLambda162 != null) {
+                                                                            stackStateAnimator$$ExternalSyntheticLambda162.run();
+                                                                            break;
+                                                                        }
+                                                                        break;
+                                                                    default:
+                                                                        ExpandableView expandableView8 = expandableView6;
+                                                                        StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda17 = stackStateAnimator$$ExternalSyntheticLambda16;
+                                                                        expandableView8.mInRemovalAnimation = false;
+                                                                        if (stackStateAnimator$$ExternalSyntheticLambda17 != null) {
+                                                                            stackStateAnimator$$ExternalSyntheticLambda17.run();
+                                                                            break;
+                                                                        }
+                                                                        break;
+                                                                }
+                                                            }
+                                                        };
+                                                    }
+                                                    anonymousClass1.delay += expandableView6.performRemoveAnimation(400L, 0L, 0.0f, true, false, stackStateAnimator$$ExternalSyntheticLambda12, runnable, stackStateAnimator2.getGlobalAnimationFinishedListener(), ExpandableView.ClipSide.BOTTOM);
+                                                    anonymousClass1.duration = 400L;
+                                                    anonymousClass1.setCustomInterpolator(View.TRANSLATION_Y, Interpolators.FAST_OUT_SLOW_IN_REVERSE);
+                                                    StackStateAnimator.this.mAnimationFilter.animateY = true;
+                                                    expandableViewState3.animateTo(expandableView6, anonymousClass1);
+                                                    anonymousClass1.mInterpolatorMap = null;
+                                                } else {
+                                                    StackStateAnimator$$ExternalSyntheticLambda1 stackStateAnimator$$ExternalSyntheticLambda17 = stackStateAnimator$$ExternalSyntheticLambda1;
+                                                    if (stackStateAnimator$$ExternalSyntheticLambda17 != null) {
+                                                        stackStateAnimator$$ExternalSyntheticLambda17.run();
+                                                    }
+                                                }
+                                                z13 |= z21;
+                                            }
+                                        }
+                                    }
+                                    stackStateAnimator2 = stackStateAnimator;
+                                    str = str6;
+                                }
+                            }
+                            stackStateAnimator = stackStateAnimator6;
+                            c2 = 3;
+                            stackStateAnimator2 = stackStateAnimator;
+                            str = str6;
+                        }
+                        stackStateAnimator2.mNewEvents.add(animationEvent4);
+                        stackStateAnimator6 = stackStateAnimator2;
+                        str2 = str;
+                        arrayList5 = arrayList;
+                        size4 = i8;
+                    }
+                    str3 = null;
+                } else {
+                    StackStateAnimator stackStateAnimator8 = stackStateAnimator6;
+                    int childCount = notificationStackScrollLayout.getChildCount();
+                    AnimationFilter animationFilter2 = stackStateAnimator8.mAnimationFilter;
+                    ArrayList arrayList6 = stackStateAnimator8.mNewEvents;
+                    animationFilter2.reset();
+                    int size5 = arrayList6.size();
+                    for (int i31 = 0; i31 < size5; i31++) {
+                        AnimationEvent animationEvent5 = (AnimationEvent) arrayList6.get(i31);
+                        animationFilter2.combineFilter(((AnimationEvent) arrayList6.get(i31)).filter);
+                        if (animationEvent5.animationType == 7) {
+                            animationFilter2.hasGoToFullShadeEvent = true;
+                        }
+                    }
+                    stackStateAnimator8.mCurrentAdditionalDelay = j2;
+                    ArrayList arrayList7 = stackStateAnimator8.mNewEvents;
+                    AnimationFilter[] animationFilterArr = AnimationEvent.FILTERS;
+                    int size6 = arrayList7.size();
+                    int i32 = 0;
+                    long jMax2 = 0;
+                    while (true) {
+                        if (i32 < size6) {
+                            AnimationEvent animationEvent6 = (AnimationEvent) arrayList7.get(i32);
+                            jMax2 = Math.max(jMax2, animationEvent6.length);
+                            if (animationEvent6.animationType == 7) {
+                                jMax2 = animationEvent6.length;
+                            } else {
+                                i32++;
+                            }
+                        }
+                    }
+                    stackStateAnimator8.mCurrentLength = jMax2;
+                    ExpandableView expandableView7 = (ExpandableView) notificationStackScrollLayout.getChildAt(notificationStackScrollLayout.mShelf.mViewState.notGoneIndex);
+                    if (expandableView7 != null) {
+                        expandableView7.getTranslationY();
+                    } else {
+                        notificationStackScrollLayout.getTopPadding();
+                    }
+                    int i33 = 0;
+                    int i34 = 0;
+                    while (i33 < childCount) {
+                        ExpandableView expandableView8 = (ExpandableView) notificationStackScrollLayout.getChildAt(i33);
+                        ExpandableViewState expandableViewState4 = expandableView8.mViewState;
+                        if (expandableViewState4 == null || expandableView8.getVisibility() == 8) {
+                            i = childCount;
+                            animationFilter = animationFilter2;
+                            i2 = i33;
+                            i3 = i34;
+                            z2 = z13;
+                        } else {
+                            if (!stackStateAnimator8.mShadeExpanded) {
+                                ViewState.AnonymousClass1 anonymousClass12 = ViewState.NO_NEW_ANIMATIONS;
+                                if (!ViewState.isAnimating(expandableView8, PhysicsPropertyAnimator.TAG_ANIMATOR_TRANSLATION_Y) && !stackStateAnimator8.mHeadsUpDisappearChildren.contains(expandableView8) && !stackStateAnimator8.mHeadsUpAppearChildren.contains(expandableView8) && !isPinnedHeadsUp(expandableView8)) {
+                                    expandableViewState4.applyToView(expandableView8);
+                                    i = childCount;
+                                    animationFilter = animationFilter2;
+                                    i2 = i33;
+                                    i3 = i34;
+                                    z2 = z13;
+                                }
+                            }
+                            if (anonymousClass1.wasAdded(expandableView8) && i34 < 5) {
+                                i34++;
+                            }
+                            boolean zWasAdded = anonymousClass1.wasAdded(expandableView8);
+                            anonymousClass1.duration = stackStateAnimator8.mCurrentLength;
+                            boolean z22 = expandableView8 instanceof StackScrollerDecorView;
+                            boolean z23 = zWasAdded || z22;
+                            boolean z24 = expandableView8 instanceof ExpandableNotificationRow;
+                            if (z24) {
+                                ExpandableNotificationRow expandableNotificationRow4 = (ExpandableNotificationRow) expandableView8;
+                                i = childCount;
+                                if (expandableNotificationRow4.mEntry.isOngoingActivity() && expandableNotificationRow4.mEntry.isPromotedState()) {
+                                    z3 = true;
+                                }
+                                if (z23 || !animationFilter2.hasGoToFullShadeEvent) {
+                                    z4 = zWasAdded;
+                                    z2 = z13;
+                                } else {
+                                    if (z22) {
+                                        z4 = zWasAdded;
+                                        z2 = z13;
+                                        i7 = 0;
+                                    } else {
+                                        i7 = stackStateAnimator8.mGoToFullShadeAppearingTranslation;
+                                        z4 = zWasAdded;
+                                        z2 = z13;
+                                        anonymousClass1.duration = ((long) (((float) Math.pow(i34, 0.699999988079071d)) * 100.0f)) + 514;
+                                    }
+                                    expandableView8.setTranslationY(expandableViewState4.mYTranslation + i7);
+                                }
+                                if (z3 && z4) {
+                                    anonymousClass1.duration = 100L;
+                                }
+                                anonymousClass1.delay = 0L;
+                                if (!z4 || (animationFilter2.hasDelays && !(expandableViewState4.mYTranslation == expandableView8.getTranslationY() && expandableViewState4.mZTranslation == expandableView8.getTranslationZ() && expandableViewState4.mAlpha == expandableView8.getAlpha() && expandableViewState4.height == expandableView8.mActualHeight && expandableViewState4.clipTopAmount == expandableView8.mClipTopAmount))) {
+                                    long j3 = stackStateAnimator8.mCurrentAdditionalDelay;
+                                    if (animationFilter2.hasGoToFullShadeEvent) {
+                                        j = animationFilter2.customDelay;
+                                        if (j != -1) {
+                                            animationFilter = animationFilter2;
+                                            i2 = i33;
+                                            i4 = i34;
+                                        } else {
+                                            ArrayList arrayList8 = stackStateAnimator8.mNewEvents;
+                                            int size7 = arrayList8.size();
+                                            animationFilter = animationFilter2;
+                                            int i35 = 0;
+                                            long j4 = 0;
+                                            while (i35 < size7) {
+                                                Object obj5 = arrayList8.get(i35);
+                                                ArrayList arrayList9 = arrayList8;
+                                                int i36 = i35 + 1;
+                                                AnimationEvent animationEvent7 = (AnimationEvent) obj5;
+                                                int i37 = animationEvent7.animationType;
+                                                long j5 = 80;
+                                                if (i37 != 0) {
+                                                    i5 = i33;
+                                                    if (i37 == 1) {
+                                                        int i38 = expandableViewState4.notGoneIndex;
+                                                        view = animationEvent7.viewAfterChangingView;
+                                                        if (view != null) {
+                                                            int childCount2 = notificationStackScrollLayout.getChildCount() - 1;
+                                                            while (true) {
+                                                                if (childCount2 >= 0) {
+                                                                    View childAt = notificationStackScrollLayout.getChildAt(childCount2);
+                                                                    int i39 = childCount2;
+                                                                    i6 = i34;
+                                                                    if (childAt.getVisibility() == 8 || childAt == notificationStackScrollLayout.mShelf) {
+                                                                        childCount2 = i39 - 1;
+                                                                        i34 = i6;
+                                                                    } else {
+                                                                        expandableView = (ExpandableView) childAt;
+                                                                    }
+                                                                } else {
+                                                                    i6 = i34;
+                                                                    expandableView = null;
+                                                                }
+                                                            }
+                                                        } else {
+                                                            i6 = i34;
+                                                            expandableView = (ExpandableView) view;
+                                                        }
+                                                        if (expandableView != null) {
+                                                            if (i38 >= expandableView.mViewState.notGoneIndex) {
+                                                                i38++;
+                                                            }
+                                                            jMax = Math.max(Math.max(0, Math.min(2, Math.abs(i38 - r1) - 1)) * j5, j4);
+                                                        }
+                                                    } else if (i37 != 2) {
+                                                        i6 = i34;
+                                                    } else {
+                                                        j5 = 32;
+                                                        int i382 = expandableViewState4.notGoneIndex;
+                                                        view = animationEvent7.viewAfterChangingView;
+                                                        if (view != null) {
+                                                        }
+                                                        if (expandableView != null) {
+                                                        }
+                                                    }
+                                                    i35 = i36;
+                                                    arrayList8 = arrayList9;
+                                                    i33 = i5;
+                                                    i34 = i6;
+                                                } else {
+                                                    i5 = i33;
+                                                    i6 = i34;
+                                                    jMax = Math.max((2 - Math.max(0, Math.min(2, Math.abs(expandableViewState4.notGoneIndex - animationEvent7.mChangingView.mViewState.notGoneIndex) - 1))) * 80, j4);
+                                                }
+                                                j4 = jMax;
+                                                i35 = i36;
+                                                arrayList8 = arrayList9;
+                                                i33 = i5;
+                                                i34 = i6;
+                                            }
+                                            i2 = i33;
+                                            i4 = i34;
+                                            j = j4;
+                                        }
+                                    } else {
+                                        animationFilter = animationFilter2;
+                                        i2 = i33;
+                                        i4 = i34;
+                                        j = 0;
+                                    }
+                                    anonymousClass1.delay = j3 + j;
+                                } else {
+                                    animationFilter = animationFilter2;
+                                    i2 = i33;
+                                    i4 = i34;
+                                }
+                                if (z4 || !z24) {
+                                    expandableViewState4.animateTo(expandableView8, anonymousClass1);
+                                    i3 = i4;
+                                } else {
+                                    ExpandableNotificationRow expandableNotificationRow5 = (ExpandableNotificationRow) expandableView8;
+                                    if (expandableNotificationRow5.mEntry.isOngoingActivity() && expandableNotificationRow5.mEntry.isPromotedState()) {
+                                        anonymousClass1.delay = 400L;
+                                    }
+                                    expandableViewState4.animateTo(expandableView8, anonymousClass1);
+                                    i3 = i4;
+                                }
+                            } else {
+                                i = childCount;
+                            }
+                            z3 = false;
+                            if (z23) {
+                                z4 = zWasAdded;
+                                z2 = z13;
+                                if (z3) {
+                                    anonymousClass1.duration = 100L;
+                                }
+                                anonymousClass1.delay = 0L;
+                                if (z4) {
+                                    long j32 = stackStateAnimator8.mCurrentAdditionalDelay;
+                                    if (animationFilter2.hasGoToFullShadeEvent) {
+                                    }
+                                    anonymousClass1.delay = j32 + j;
+                                    if (z4) {
+                                        expandableViewState4.animateTo(expandableView8, anonymousClass1);
+                                        i3 = i4;
+                                    }
+                                }
+                            }
+                        }
+                        i34 = i3;
+                        i33 = i2 + 1;
+                        childCount = i;
+                        z13 = z2;
+                        animationFilter2 = animationFilter;
+                    }
+                    boolean z25 = z13;
+                    if (stackStateAnimator8.mAnimatorSet.isEmpty() && !notificationStackScrollLayout.mHeadsUpAnimatingAway && !z25) {
+                        stackStateAnimator8.onAnimationFinished();
+                    }
+                    stackStateAnimator8.mHeadsUpAppearChildren.clear();
+                    stackStateAnimator8.mHeadsUpDisappearChildren.clear();
+                    stackStateAnimator8.mNewEvents.clear();
+                    stackStateAnimator8.mNewAddChildren.clear();
+                    anonymousClass1.mInterpolatorMap = null;
+                    this.mAnimationEvents.clear();
+                    updateViewShadows();
+                }
+            }
+        }
+        this.mGoToFullShadeDelay = 0L;
     }
 
     public final int targetScrollForView(ExpandableView expandableView, int i) {
@@ -3502,13 +5786,13 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         int i2 = (int) f;
         NotificationStackSizeCalculator notificationStackSizeCalculator = this.mNotificationStackSizeCalculator;
         int i3 = this.mMaxDisplayedNotifications;
-        SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1 computeHeightPerNotificationLimit = notificationStackSizeCalculator.computeHeightPerNotificationLimit(this, height);
+        SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1 sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1ComputeHeightPerNotificationLimit = notificationStackSizeCalculator.computeHeightPerNotificationLimit(this, height);
         if (i3 >= 0) {
-            SequenceBuilderIterator it = SequencesKt__SequenceBuilderKt.iterator(computeHeightPerNotificationLimit.$block$inlined);
+            SequenceBuilderIterator it = SequencesKt__SequenceBuilderKt.iterator(sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1ComputeHeightPerNotificationLimit.$block$inlined);
             int i4 = 0;
             while (true) {
                 if (!it.hasNext()) {
-                    obj = (NotificationStackSizeCalculator.StackHeight) SequencesKt___SequencesKt.last(computeHeightPerNotificationLimit);
+                    obj = (NotificationStackSizeCalculator.StackHeight) SequencesKt___SequencesKt.last(sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1ComputeHeightPerNotificationLimit);
                     break;
                 }
                 Object next = it.next();
@@ -3520,7 +5804,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                 i4 = i5;
             }
         } else {
-            obj = (NotificationStackSizeCalculator.StackHeight) SequencesKt___SequencesKt.last(computeHeightPerNotificationLimit);
+            obj = (NotificationStackSizeCalculator.StackHeight) SequencesKt___SequencesKt.last(sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1ComputeHeightPerNotificationLimit);
         }
         NotificationStackSizeCalculator.StackHeight stackHeight = (NotificationStackSizeCalculator.StackHeight) obj;
         float f2 = stackHeight.notifsHeight;
@@ -3534,9 +5818,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         clampScrollPosition();
         updateStackPosition(false);
         AmbientState ambientState = this.mAmbientState;
-        int i6 = this.mContentHeight;
+        int contentHeight = getContentHeight();
         ambientState.getClass();
-        ambientState.mContentHeight = i6;
+        ambientState.mContentHeight = contentHeight;
     }
 
     public final void updateContinuousShadowDrawing() {
@@ -3567,7 +5851,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
 
     public final void updateDismissBehavior() {
         boolean z = true;
-        if (NotiRune.NOTI_STYLE_POP_OVER_DISMISS_CLIP_VIEW && this.mStatusBarState != 1 && this.mIsExpanded) {
+        if (NotiRune.NOTI_STYLE_POP_OVER_DISMISS_CLIP_VIEW && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && this.mStatusBarState != 1 && this.mIsExpanded) {
             z = false;
         }
         if (this.mDismissUsingRowTranslationX != z) {
@@ -3670,74 +5954,40 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             if (!SecPanelSplitHelper.isEnabled() && this.mForcedScroll != null && !this.mIsExpanded && isPinnedHeadsUp(expandableView) && this.mOrientation == 2) {
                 positionInLinearLayout = this.mAmbientState.isOnKeyguard$1() ? 0 : this.mMinimumPaddings + this.mPaddingBetweenElements;
             }
-            int targetScrollForView = targetScrollForView(expandableView, positionInLinearLayout);
+            int iTargetScrollForView = targetScrollForView(expandableView, positionInLinearLayout);
             int intrinsicHeight = expandableView.getIntrinsicHeight() + positionInLinearLayout;
-            int max = Math.max(0, Math.min(targetScrollForView, getScrollRange()));
-            if (getOwnScrollY() < max || intrinsicHeight < getOwnScrollY()) {
-                setOwnScrollY(max);
+            int iMax = Math.max(0, Math.min(iTargetScrollForView, getScrollRange()));
+            if (getOwnScrollY() < iMax || intrinsicHeight < getOwnScrollY()) {
+                setOwnScrollY(iMax);
             }
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0020  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateForwardAndBackwardScrollability() {
-        /*
-            r5 = this;
-            int r0 = com.android.systemui.scene.shared.flag.SceneContainerFlag.$r8$clinit
-            com.android.systemui.flags.RefactorFlagUtils r0 = com.android.systemui.flags.RefactorFlagUtils.INSTANCE
-            boolean r0 = r5.mScrollable
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L1b
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$9 r0 = r5.mScrollAdapter
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.this
-            int r3 = r0.getOwnScrollY()
-            int r0 = r0.getScrollRange()
-            if (r3 < r0) goto L19
-            goto L1b
-        L19:
-            r0 = r2
-            goto L1c
-        L1b:
-            r0 = r1
-        L1c:
-            boolean r3 = r5.mScrollable
-            if (r3 == 0) goto L30
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$9 r3 = r5.mScrollAdapter
-            r3.getClass()
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r3 = com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.this
-            int r3 = r3.getOwnScrollY()
-            if (r3 != 0) goto L2e
-            goto L30
-        L2e:
-            r3 = r2
-            goto L31
-        L30:
-            r3 = r1
-        L31:
-            boolean r4 = r5.mForwardScrollable
-            if (r0 != r4) goto L39
-            boolean r4 = r5.mBackwardScrollable
-            if (r3 == r4) goto L3a
-        L39:
-            r1 = r2
-        L3a:
-            r5.mForwardScrollable = r0
-            r5.mBackwardScrollable = r3
-            if (r1 == 0) goto L45
-            r0 = 2048(0x800, float:2.87E-42)
-            r5.sendAccessibilityEvent(r0)
-        L45:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.updateForwardAndBackwardScrollability():void");
+        boolean z;
+        boolean z2;
+        int i = SceneContainerFlag.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        if (this.mScrollable) {
+            NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayout.this;
+            z = notificationStackScrollLayout.getOwnScrollY() < notificationStackScrollLayout.getScrollRange();
+        }
+        if (this.mScrollable) {
+            AnonymousClass9 anonymousClass9 = this.mScrollAdapter;
+            anonymousClass9.getClass();
+            z2 = NotificationStackScrollLayout.this.getOwnScrollY() != 0;
+        }
+        boolean z3 = (z == this.mForwardScrollable && z2 == this.mBackwardScrollable) ? false : true;
+        this.mForwardScrollable = z;
+        this.mBackwardScrollable = z2;
+        if (z3) {
+            sendAccessibilityEvent(2048);
+        }
     }
 
     public final void updateImeInset(WindowInsets windowInsets) {
@@ -3765,9 +6015,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         if (this.mLaunchingNotificationNeedsToBeClipped && this.mLaunchingNotification && this.mExpandingNotificationRow != null) {
             int[] iArr = new int[2];
             getLocationOnScreen(iArr);
-            int min = Math.min(this.mLaunchAnimationParams.left - iArr[0], this.mRoundedRectClippingLeft);
-            int max = Math.max(this.mLaunchAnimationParams.right - iArr[0], this.mRoundedRectClippingRight);
-            int max2 = Math.max(this.mLaunchAnimationParams.bottom - iArr[1], this.mRoundedRectClippingBottom);
+            int iMin = Math.min(this.mLaunchAnimationParams.left - iArr[0], this.mRoundedRectClippingLeft);
+            int iMax = Math.max(this.mLaunchAnimationParams.right - iArr[0], this.mRoundedRectClippingRight);
+            int iMax2 = Math.max(this.mLaunchAnimationParams.bottom - iArr[1], this.mRoundedRectClippingBottom);
             Interpolator interpolator = Interpolators.FAST_OUT_SLOW_IN;
             LaunchAnimationParameters launchAnimationParameters = this.mLaunchAnimationParams;
             launchAnimationParameters.getClass();
@@ -3775,7 +6025,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             TransitionAnimator.Timings timings = ActivityTransitionAnimator.TIMINGS;
             float f = launchAnimationParameters.linearProgress;
             companion.getClass();
-            int min2 = (int) Math.min(MathUtils.lerp(this.mRoundedRectClippingTop, this.mLaunchAnimationParams.top - iArr[1], ((PathInterpolator) interpolator).getInterpolation(TransitionAnimator.Companion.getProgress(timings, f, 0L, 100L))), this.mRoundedRectClippingTop);
+            int iMin2 = (int) Math.min(MathUtils.lerp(this.mRoundedRectClippingTop, this.mLaunchAnimationParams.top - iArr[1], ((PathInterpolator) interpolator).getInterpolation(TransitionAnimator.Companion.getProgress(timings, f, 0L, 100L))), this.mRoundedRectClippingTop);
             LaunchAnimationParameters launchAnimationParameters2 = this.mLaunchAnimationParams;
             float f2 = launchAnimationParameters2.topCornerRadius;
             float f3 = launchAnimationParameters2.bottomCornerRadius;
@@ -3789,7 +6039,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             fArr[6] = f3;
             fArr[7] = f3;
             this.mLaunchedNotificationClipPath.reset();
-            this.mLaunchedNotificationClipPath.addRoundRect(min, min2, max, max2, this.mLaunchedNotificationRadii, Path.Direction.CW);
+            this.mLaunchedNotificationClipPath.addRoundRect(iMin, iMin2, iMax, iMax2, this.mLaunchedNotificationRadii, Path.Direction.CW);
             ExpandableNotificationRow expandableNotificationRow = this.mExpandingNotificationRow;
             ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow.mNotificationParent;
             if (expandableNotificationRow2 != null) {
@@ -3866,10 +6116,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             updateInterpolatedStackHeight(this.mAmbientState.mStackEndHeight, f);
         } else {
             float height = getHeight();
+            float fMax = Math.max(this.mMaxLayoutHeight - getContentHeight(), 0);
+            float topPadding = getTopPadding();
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-            float max = this.mMaxDisplayedNotifications != -1 ? this.mIntrinsicContentHeight : Math.max(0.0f, (height - Math.max(this.mMaxLayoutHeight - this.mContentHeight, 0)) - getTopPadding());
-            this.mAmbientState.mStackEndHeight = max;
-            updateInterpolatedStackHeight(max, f);
+            float fMax2 = this.mMaxDisplayedNotifications != -1 ? this.mIntrinsicContentHeight : Math.max(0.0f, (height - fMax) - topPadding);
+            this.mAmbientState.mStackEndHeight = fMax2;
+            updateInterpolatedStackHeight(fMax2, f);
         }
         if (f2 != this.mAmbientState.mStackHeight) {
             requestChildrenUpdate();
@@ -3883,27 +6135,27 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         float f2 = 0.0f;
         float navBarHeight = ((f < 0.8f ? 0.0f : (f - 0.8f) / 0.2f) * ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(((ViewGroup) this).mContext)) + ((((getTopPadding() + this.mExtraTopInsetForFullShadeTransition) + this.mAmbientState.mOverExpansion) + 0.0f) - getCurrentOverScrollAmount(false));
         AmbientState ambientState = this.mAmbientState;
-        float f3 = ambientState.mExpansionFraction;
+        float fAboutToShowBouncerProgress = ambientState.mExpansionFraction;
         if (z2) {
-            f3 = ambientState.mFractionToShade;
+            fAboutToShowBouncerProgress = ambientState.mFractionToShade;
         }
         StatusBarKeyguardViewManager statusBarKeyguardViewManager = ambientState.mStatusBarKeyguardViewManager;
         if (statusBarKeyguardViewManager != null && statusBarKeyguardViewManager.isPrimaryBouncerInTransit() && getQsExpansionFraction$1() > 0.0f) {
-            f3 = BouncerPanelExpansionCalculator.aboutToShowBouncerProgress(f3);
+            fAboutToShowBouncerProgress = BouncerPanelExpansionCalculator.aboutToShowBouncerProgress(fAboutToShowBouncerProgress);
         }
         if (!SecPanelSplitHelper.isEnabled() && (this.mAmbientState.mExpansionChanging || (onKeyguard() && this.mAmbientState.isNeedsToExpandLocksNoti()))) {
             f2 = navBarHeight - this.mYDiff;
         }
-        float lerp = MathUtils.lerp(f2, navBarHeight, f3);
+        float fLerp = MathUtils.lerp(f2, navBarHeight, fAboutToShowBouncerProgress);
         AmbientState ambientState2 = this.mAmbientState;
         ambientState2.getClass();
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        ambientState2.mStackY = lerp;
+        ambientState2.mStackY = fLerp;
         QuickSettingsControllerImpl$$ExternalSyntheticLambda18 quickSettingsControllerImpl$$ExternalSyntheticLambda18 = this.mOnStackYChanged;
         if (quickSettingsControllerImpl$$ExternalSyntheticLambda18 != null) {
             quickSettingsControllerImpl$$ExternalSyntheticLambda18.accept(Boolean.valueOf(z));
         }
-        updateStackEndHeightAndStackHeight(f3);
+        updateStackEndHeightAndStackHeight(fAboutToShowBouncerProgress);
     }
 
     public final void updateUseRoundedRectClipping() {
@@ -3950,9 +6202,9 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
         int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        float max = Math.max(0.0f, f);
+        float fMax = Math.max(0.0f, f);
         if (!z2) {
-            float rubberBandFactor = max / getRubberBandFactor(z);
+            float rubberBandFactor = fMax / getRubberBandFactor(z);
             if (z) {
                 this.mOverScrolledTopPixels = rubberBandFactor;
             } else {
@@ -3960,12 +6212,12 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             }
             AmbientState ambientState = this.mAmbientState;
             if (z) {
-                ambientState.mOverScrollTopAmount = max;
+                ambientState.mOverScrollTopAmount = fMax;
             } else {
-                ambientState.mOverScrollBottomAmount = max;
+                ambientState.mOverScrollBottomAmount = fMax;
             }
             if (z) {
-                notifyOverscrollTopListener(max, z4);
+                notifyOverscrollTopListener(fMax, z4);
             }
             updateStackPosition(false);
             requestChildrenUpdate();
@@ -3973,51 +6225,51 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
         }
         final StackStateAnimator stackStateAnimator2 = this.mStateAnimator;
         float currentOverScrollAmount = stackStateAnimator2.mHostLayout.getCurrentOverScrollAmount(z);
-        if (max == currentOverScrollAmount) {
+        if (fMax == currentOverScrollAmount) {
             return;
         }
         ValueAnimator valueAnimator2 = z ? stackStateAnimator2.mTopOverScrollAnimator : stackStateAnimator2.mBottomOverScrollAnimator;
         if (valueAnimator2 != null) {
             valueAnimator2.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(currentOverScrollAmount, max);
-        ofFloat.setDuration(360L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator.4
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(currentOverScrollAmount, fMax);
+        valueAnimatorOfFloat.setDuration(360L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator.4
             public final /* synthetic */ boolean val$isRubberbanded;
             public final /* synthetic */ boolean val$onTop;
 
             public AnonymousClass4(final boolean z5, final boolean z42) {
-                r2 = z5;
-                r3 = z42;
+                z = z5;
+                z = z42;
             }
 
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator3) {
-                StackStateAnimator.this.mHostLayout.setOverScrollAmount(((Float) valueAnimator3.getAnimatedValue()).floatValue(), r2, false, false, r3);
+                StackStateAnimator.this.mHostLayout.setOverScrollAmount(((Float) valueAnimator3.getAnimatedValue()).floatValue(), z, false, false, z);
             }
         });
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator.5
+        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.stack.StackStateAnimator.5
             public final /* synthetic */ boolean val$onTop;
 
             public AnonymousClass5(final boolean z5) {
-                r2 = z5;
+                z = z5;
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                if (r2) {
+                if (z) {
                     StackStateAnimator.this.mTopOverScrollAnimator = null;
                 } else {
                     StackStateAnimator.this.mBottomOverScrollAnimator = null;
                 }
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
         if (z5) {
-            stackStateAnimator2.mTopOverScrollAnimator = ofFloat;
+            stackStateAnimator2.mTopOverScrollAnimator = valueAnimatorOfFloat;
         } else {
-            stackStateAnimator2.mBottomOverScrollAnimator = ofFloat;
+            stackStateAnimator2.mBottomOverScrollAnimator = valueAnimatorOfFloat;
         }
     }
 

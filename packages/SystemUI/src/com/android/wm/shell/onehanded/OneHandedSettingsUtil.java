@@ -6,7 +6,6 @@ import android.provider.Settings;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.wm.shell.onehanded.OneHandedController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OneHandedSettingsUtil {
     public static final String ONE_HANDED_MODE_TARGET_NAME = AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME.getShortClassName();

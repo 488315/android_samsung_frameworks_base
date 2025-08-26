@@ -30,7 +30,6 @@ import kotlin.NotImplementedError;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ActivityStarterInternalImpl implements ActivityStarterInternal {
     public final ActivityTransitionAnimator activityTransitionAnimator;
@@ -45,7 +44,6 @@ public final class ActivityStarterInternalImpl implements ActivityStarterInterna
     public final Lazy statusBarKeyguardViewManagerLazy;
     public final StatusBarWindowControllerStore statusBarWindowControllerStore;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

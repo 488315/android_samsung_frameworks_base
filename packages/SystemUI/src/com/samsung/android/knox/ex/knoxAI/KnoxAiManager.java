@@ -5,14 +5,12 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxAiManager {
     public static final String TAG = "KnoxAiManager";
     public static KnoxAiManager sKnoxAiManager;
     public KnoxAiManagerInternal mKnoxAiManagerInternal;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ErrorCodes {
         KNOX_AI_UNKNOWN_ERROR(-1),
         SUCCESS(0),
@@ -58,28 +56,24 @@ public class KnoxAiManager {
     }
 
     public static synchronized KnoxAiManager getInstance(Context context) {
-        KnoxAiManager knoxAiManager;
-        synchronized (KnoxAiManager.class) {
-            try {
-                if (sKnoxAiManager == null) {
-                    sKnoxAiManager = new KnoxAiManager(context);
-                }
-                knoxAiManager = sKnoxAiManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sKnoxAiManager == null) {
+                sKnoxAiManager = new KnoxAiManager(context);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return knoxAiManager;
+        return sKnoxAiManager;
     }
 
     public KnoxAiSession createKnoxAiSession() {
         String str = TAG;
         Log.d(str, "createKnoxAiSession entry");
-        long createKnoxAiSession = this.mKnoxAiManagerInternal.createKnoxAiSession();
-        if (createKnoxAiSession >= 100) {
-            return new KnoxAiSession(this.mKnoxAiManagerInternal, createKnoxAiSession);
+        long jCreateKnoxAiSession = this.mKnoxAiManagerInternal.createKnoxAiSession();
+        if (jCreateKnoxAiSession >= 100) {
+            return new KnoxAiSession(this.mKnoxAiManagerInternal, jCreateKnoxAiSession);
         }
-        Log.e(str, "createKnoxAiSession failed : " + createKnoxAiSession);
+        Log.e(str, "createKnoxAiSession failed : " + jCreateKnoxAiSession);
         return null;
     }
 

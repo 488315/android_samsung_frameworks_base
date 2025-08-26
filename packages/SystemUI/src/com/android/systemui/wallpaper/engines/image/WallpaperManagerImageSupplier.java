@@ -2,15 +2,21 @@ package com.android.systemui.wallpaper.engines.image;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
+import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.android.systemui.wallpaper.engines.image.ImageSource;
 import com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper;
 import com.android.systemui.wallpaper.utils.IntelligentCropHelper;
+import com.samsung.android.wallpaper.live.sdk.utils.BitmapUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WallpaperManagerImageSupplier implements ImageSource.ImageSupplier {
     public static final Object sLock = new Object();
@@ -24,7 +30,6 @@ public class WallpaperManagerImageSupplier implements ImageSource.ImageSupplier 
     public final WallpaperManager mWallpaperManager;
     public final int mWhich;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum CropType {
         NOT_DETERMINED,
         LEGACY_CROP,
@@ -57,8 +62,8 @@ public class WallpaperManagerImageSupplier implements ImageSource.ImageSupplier 
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0047  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0054  */
     /* JADX WARN: Type inference failed for: r2v5, types: [android.app.WallpaperManager] */
     /* JADX WARN: Type inference failed for: r3v4, types: [int] */
     /* JADX WARN: Type inference failed for: r3v5 */
@@ -68,14 +73,106 @@ public class WallpaperManagerImageSupplier implements ImageSource.ImageSupplier 
     @Override // com.android.systemui.wallpaper.engines.image.ImageSource.ImageSupplier
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.wallpaper.engines.image.ImageSource.WallpaperImage getWallpaperImage() {
-        /*
-            Method dump skipped, instructions count: 368
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.image.WallpaperManagerImageSupplier.getWallpaperImage():com.android.systemui.wallpaper.engines.image.ImageSource$WallpaperImage");
+    public final ImageSource.WallpaperImage getWallpaperImage() throws Throwable {
+        Bitmap bitmap;
+        ?? DecodeFileDescriptor;
+        ParcelFileDescriptor wallpaperFile;
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        Rect rect = null;
+        if (this.mCropType == CropType.INTELLIGENT_CROP) {
+            try {
+                ?? r2 = this.mWallpaperManager;
+                DecodeFileDescriptor = this.mWhich;
+                wallpaperFile = r2.getWallpaperFile(DecodeFileDescriptor, this.mUserId, false, 0);
+            } catch (Exception e) {
+                e = e;
+                bitmap = null;
+            }
+            try {
+                if (wallpaperFile != null) {
+                    try {
+                        DecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(wallpaperFile.getFileDescriptor());
+                        try {
+                            this.mWallpaperManager.forgetLoadedWallpaper();
+                            bitmap = DecodeFileDescriptor;
+                        } catch (Throwable th) {
+                            th = th;
+                            try {
+                                wallpaperFile.close();
+                            } catch (Throwable th2) {
+                                th.addSuppressed(th2);
+                            }
+                            throw th;
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                        DecodeFileDescriptor = 0;
+                    }
+                } else {
+                    bitmap = null;
+                }
+                if (wallpaperFile != null) {
+                    wallpaperFile.close();
+                }
+            } catch (Exception e2) {
+                e = e2;
+                EmergencyButton$$ExternalSyntheticOutline0.m("getSourceBitmap: e=", e, "ImageWallpaper[WallpaperManagerImageSupplier]");
+                if (bitmap != null) {
+                }
+            }
+            if (bitmap != null) {
+                Log.e("ImageWallpaper[WallpaperManagerImageSupplier]", "getWallpaperImage: failed to get original bitmap");
+                return new ImageSource.WallpaperImage(null, null, false);
+            }
+            boolean zWallpaperSupportsWcg = this.mWallpaperManager.wallpaperSupportsWcg(bitmap);
+            Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "getWallpaperImage: intelligent crop, " + (SystemClock.elapsedRealtime() - jElapsedRealtime) + "ms");
+            return new ImageSource.WallpaperImage(bitmap, this.mIntelligentCropRects, zWallpaperSupportsWcg);
+        }
+        synchronized (sLock) {
+            try {
+                this.mWallpaperManager.forgetLoadedWallpaper();
+                Bitmap bitmapAsUser = this.mWallpaperManager.getBitmapAsUser(this.mUserId, false, this.mWhich, false);
+                if (bitmapAsUser == null) {
+                    Log.e("ImageWallpaper[WallpaperManagerImageSupplier]", "getWallpaperImage: failed to get cropped bitmap");
+                    return new ImageSource.WallpaperImage(null, null, false);
+                }
+                this.mWallpaperManager.forgetLoadedWallpaper();
+                if (this.mLegacyCropRects == null) {
+                    ArrayList arrayList = new ArrayList();
+                    this.mLegacyCropRects = arrayList;
+                    arrayList.add(new Rect(0, 0, bitmapAsUser.getWidth(), bitmapAsUser.getHeight()));
+                    ImageSmartCropper imageSmartCropper = this.mSmartCropper;
+                    int i = this.mWhich;
+                    if (!imageSmartCropper.needToSmartCrop(i)) {
+                        Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "extractSmartCropRect: not smart crop wallpaper");
+                    } else if (bitmapAsUser.getWidth() > bitmapAsUser.getHeight()) {
+                        Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "extractSmartCropRect: wallpaper is landscape");
+                    } else {
+                        long jElapsedRealtime2 = SystemClock.elapsedRealtime();
+                        try {
+                            imageSmartCropper.updateSmartCropRect(bitmapAsUser, i, this.mUserId);
+                            Rect rect2 = imageSmartCropper.mCropResult;
+                            if (rect2 == null) {
+                                Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "extractSmartCropRect: smart crop result is null");
+                            } else {
+                                Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "extractSmartCropRect: wpSize=" + BitmapUtils.getBitmapSizeString(bitmapAsUser) + ", smartCropRect=" + rect2 + ", elapsed=" + (SystemClock.elapsedRealtime() - jElapsedRealtime2));
+                                rect = rect2;
+                            }
+                        } catch (Exception e3) {
+                            Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "extractSmartCropRect: e=" + e3, e3);
+                        }
+                    }
+                    if (rect != null) {
+                        this.mLegacyCropRects.add(rect);
+                    }
+                    this.mCropType = CropType.LEGACY_CROP;
+                }
+                Log.i("ImageWallpaper[WallpaperManagerImageSupplier]", "getWallpaperImage: " + (SystemClock.elapsedRealtime() - jElapsedRealtime) + "ms");
+                return new ImageSource.WallpaperImage(bitmapAsUser, this.mLegacyCropRects, this.mWallpaperManager.wallpaperSupportsWcg(bitmapAsUser));
+            } finally {
+            }
+        }
     }
 
     @Override // com.android.systemui.wallpaper.engines.image.ImageSource.ImageSupplier

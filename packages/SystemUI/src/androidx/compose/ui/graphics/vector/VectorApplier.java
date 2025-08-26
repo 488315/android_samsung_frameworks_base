@@ -3,7 +3,6 @@ package androidx.compose.ui.graphics.vector;
 import androidx.compose.runtime.AbstractApplier;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorApplier extends AbstractApplier<VNode> {
     public VectorApplier(VNode vNode) {
@@ -28,32 +27,32 @@ public final class VectorApplier extends AbstractApplier<VNode> {
 
     @Override // androidx.compose.runtime.Applier
     public final void move(int i, int i2, int i3) {
-        GroupComponent asGroup = asGroup((VNode) this.current);
-        asGroup.getClass();
+        GroupComponent groupComponentAsGroup = asGroup((VNode) this.current);
+        groupComponentAsGroup.getClass();
         int i4 = 0;
         if (i > i2) {
             while (i4 < i3) {
-                VNode vNode = (VNode) ((ArrayList) asGroup.children).get(i);
-                ((ArrayList) asGroup.children).remove(i);
-                ((ArrayList) asGroup.children).add(i2, vNode);
+                VNode vNode = (VNode) ((ArrayList) groupComponentAsGroup.children).get(i);
+                ((ArrayList) groupComponentAsGroup.children).remove(i);
+                ((ArrayList) groupComponentAsGroup.children).add(i2, vNode);
                 i2++;
                 i4++;
             }
         } else {
             while (i4 < i3) {
-                VNode vNode2 = (VNode) ((ArrayList) asGroup.children).get(i);
-                ((ArrayList) asGroup.children).remove(i);
-                ((ArrayList) asGroup.children).add(i2 - 1, vNode2);
+                VNode vNode2 = (VNode) ((ArrayList) groupComponentAsGroup.children).get(i);
+                ((ArrayList) groupComponentAsGroup.children).remove(i);
+                ((ArrayList) groupComponentAsGroup.children).add(i2 - 1, vNode2);
                 i4++;
             }
         }
-        asGroup.invalidate();
+        groupComponentAsGroup.invalidate();
     }
 
     @Override // androidx.compose.runtime.AbstractApplier
     public final void onClear() {
-        GroupComponent asGroup = asGroup((VNode) this.root);
-        asGroup.remove(0, ((ArrayList) asGroup.children).size());
+        GroupComponent groupComponentAsGroup = asGroup((VNode) this.root);
+        groupComponentAsGroup.remove(0, ((ArrayList) groupComponentAsGroup.children).size());
     }
 
     @Override // androidx.compose.runtime.Applier

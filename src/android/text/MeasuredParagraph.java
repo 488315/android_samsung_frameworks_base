@@ -45,8 +45,8 @@ public class MeasuredParagraph {
     }
 
     private static MeasuredParagraph obtain() {
-        MeasuredParagraph acquire = sPool.acquire();
-        return acquire != null ? acquire : new MeasuredParagraph();
+        MeasuredParagraph measuredParagraphAcquire = sPool.acquire();
+        return measuredParagraphAcquire != null ? measuredParagraphAcquire : new MeasuredParagraph();
     }
 
     public void recycle() {
@@ -99,31 +99,31 @@ public class MeasuredParagraph {
             }
             return Layout.DIRS_ALL_RIGHT_TO_LEFT;
         }
-        Bidi createLineBidi = bidi.createLineBidi(i, i2);
-        if (createLineBidi.getRunCount() == 1) {
-            if (createLineBidi.getRunLevel(0) == 1) {
+        Bidi bidiCreateLineBidi = bidi.createLineBidi(i, i2);
+        if (bidiCreateLineBidi.getRunCount() == 1) {
+            if (bidiCreateLineBidi.getRunLevel(0) == 1) {
                 return Layout.DIRS_ALL_RIGHT_TO_LEFT;
             }
-            if (createLineBidi.getRunLevel(0) == 0) {
+            if (bidiCreateLineBidi.getRunLevel(0) == 0) {
                 return Layout.DIRS_ALL_LEFT_TO_RIGHT;
             }
-            return new Layout.Directions(new int[]{0, (createLineBidi.getRunLevel(0) << 26) | (i2 - i)});
+            return new Layout.Directions(new int[]{0, (bidiCreateLineBidi.getRunLevel(0) << 26) | (i2 - i)});
         }
-        byte[] bArr = new byte[createLineBidi.getRunCount()];
-        for (int i4 = 0; i4 < createLineBidi.getRunCount(); i4++) {
-            bArr[i4] = (byte) createLineBidi.getRunLevel(i4);
+        byte[] bArr = new byte[bidiCreateLineBidi.getRunCount()];
+        for (int i4 = 0; i4 < bidiCreateLineBidi.getRunCount(); i4++) {
+            bArr[i4] = (byte) bidiCreateLineBidi.getRunLevel(i4);
         }
-        int[] reorderVisual = Bidi.reorderVisual(bArr);
-        int[] iArr = new int[createLineBidi.getRunCount() * 2];
-        for (int i5 = 0; i5 < createLineBidi.getRunCount(); i5++) {
+        int[] iArrReorderVisual = Bidi.reorderVisual(bArr);
+        int[] iArr = new int[bidiCreateLineBidi.getRunCount() * 2];
+        for (int i5 = 0; i5 < bidiCreateLineBidi.getRunCount(); i5++) {
             if ((this.mBidi.getBaseLevel() & 1) == 1) {
-                i3 = reorderVisual[(createLineBidi.getRunCount() - i5) - 1];
+                i3 = iArrReorderVisual[(bidiCreateLineBidi.getRunCount() - i5) - 1];
             } else {
-                i3 = reorderVisual[i5];
+                i3 = iArrReorderVisual[i5];
             }
             int i6 = i5 * 2;
-            iArr[i6] = createLineBidi.getRunStart(i3);
-            iArr[i6 + 1] = (createLineBidi.getRunLimit(i3) - iArr[i6]) | (createLineBidi.getRunLevel(i3) << 26);
+            iArr[i6] = bidiCreateLineBidi.getRunStart(i3);
+            iArr[i6 + 1] = (bidiCreateLineBidi.getRunLimit(i3) - iArr[i6]) | (bidiCreateLineBidi.getRunLevel(i3) << 26);
         }
         return new Layout.Directions(iArr);
     }
@@ -182,7 +182,7 @@ public class MeasuredParagraph {
         return measuredParagraph;
     }
 
-    public static MeasuredParagraph buildForMeasurement(TextPaint textPaint, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, MeasuredParagraph measuredParagraph) {
+    public static MeasuredParagraph buildForMeasurement(TextPaint textPaint, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, MeasuredParagraph measuredParagraph) throws Throwable {
         if (measuredParagraph == null) {
             measuredParagraph = obtain();
         }
@@ -196,9 +196,9 @@ public class MeasuredParagraph {
             }
             int i3 = i;
             while (i3 < i2) {
-                int min = Math.min(measuredParagraph2.mSpanned.nextSpanTransition(i3, i2, MetricAffectingSpan.class), measuredParagraph2.mSpanned.nextSpanTransition(i3, i2, LineBreakConfigSpan.class));
-                measuredParagraph2.applyMetricsAffectingSpan(textPaint, null, (MetricAffectingSpan[]) TextUtils.removeEmptySpans((MetricAffectingSpan[]) measuredParagraph2.mSpanned.getSpans(i3, min, MetricAffectingSpan.class), measuredParagraph2.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans((LineBreakConfigSpan[]) measuredParagraph2.mSpanned.getSpans(i3, min, LineBreakConfigSpan.class), measuredParagraph2.mSpanned, LineBreakConfigSpan.class), i3, min, null, null);
-                i3 = min;
+                int iMin = Math.min(measuredParagraph2.mSpanned.nextSpanTransition(i3, i2, MetricAffectingSpan.class), measuredParagraph2.mSpanned.nextSpanTransition(i3, i2, LineBreakConfigSpan.class));
+                measuredParagraph2.applyMetricsAffectingSpan(textPaint, null, (MetricAffectingSpan[]) TextUtils.removeEmptySpans((MetricAffectingSpan[]) measuredParagraph2.mSpanned.getSpans(i3, iMin, MetricAffectingSpan.class), measuredParagraph2.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans((LineBreakConfigSpan[]) measuredParagraph2.mSpanned.getSpans(i3, iMin, LineBreakConfigSpan.class), measuredParagraph2.mSpanned, LineBreakConfigSpan.class), i3, iMin, null, null);
+                i3 = iMin;
             }
         }
         return measuredParagraph2;
@@ -212,7 +212,7 @@ public class MeasuredParagraph {
         return buildForStaticLayoutInternal(textPaint, lineBreakConfig, charSequence, i, i2, textDirectionHeuristic, i3, z, false, null, null, styleRunCallback);
     }
 
-    private static MeasuredParagraph buildForStaticLayoutInternal(TextPaint textPaint, LineBreakConfig lineBreakConfig, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, int i3, boolean z, boolean z2, MeasuredParagraph measuredParagraph, MeasuredParagraph measuredParagraph2, StyleRunCallback styleRunCallback) {
+    private static MeasuredParagraph buildForStaticLayoutInternal(TextPaint textPaint, LineBreakConfig lineBreakConfig, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, int i3, boolean z, boolean z2, MeasuredParagraph measuredParagraph, MeasuredParagraph measuredParagraph2, StyleRunCallback styleRunCallback) throws Throwable {
         MeasuredText.Builder builder;
         MeasuredParagraph measuredParagraph3;
         if (measuredParagraph2 == null) {
@@ -237,10 +237,10 @@ public class MeasuredParagraph {
             int i4 = i;
             measuredParagraph3 = measuredParagraph2;
             while (i4 < i2) {
-                int min = Math.min(measuredParagraph3.mSpanned.nextSpanTransition(i4, i2, MetricAffectingSpan.class), measuredParagraph3.mSpanned.nextSpanTransition(i4, i2, LineBreakConfigSpan.class));
-                measuredParagraph3.applyMetricsAffectingSpan(textPaint, lineBreakConfig, (MetricAffectingSpan[]) TextUtils.removeEmptySpans((MetricAffectingSpan[]) measuredParagraph3.mSpanned.getSpans(i4, min, MetricAffectingSpan.class), measuredParagraph3.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans((LineBreakConfigSpan[]) measuredParagraph3.mSpanned.getSpans(i4, min, LineBreakConfigSpan.class), measuredParagraph3.mSpanned, LineBreakConfigSpan.class), i4, min, builder2, styleRunCallback);
-                measuredParagraph3.mSpanEndCache.append(min);
-                i4 = min;
+                int iMin = Math.min(measuredParagraph3.mSpanned.nextSpanTransition(i4, i2, MetricAffectingSpan.class), measuredParagraph3.mSpanned.nextSpanTransition(i4, i2, LineBreakConfigSpan.class));
+                measuredParagraph3.applyMetricsAffectingSpan(textPaint, lineBreakConfig, (MetricAffectingSpan[]) TextUtils.removeEmptySpans((MetricAffectingSpan[]) measuredParagraph3.mSpanned.getSpans(i4, iMin, MetricAffectingSpan.class), measuredParagraph3.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans((LineBreakConfigSpan[]) measuredParagraph3.mSpanned.getSpans(i4, iMin, LineBreakConfigSpan.class), measuredParagraph3.mSpanned, LineBreakConfigSpan.class), i4, iMin, builder2, styleRunCallback);
+                measuredParagraph3.mSpanEndCache.append(iMin);
+                i4 = iMin;
             }
         }
         measuredParagraph3.mMeasuredText = builder2.build();
@@ -253,7 +253,7 @@ public class MeasuredParagraph {
     /* JADX WARN: Type inference failed for: r10v14 */
     /* JADX WARN: Type inference failed for: r10v29 */
     private void resetAndAnalyzeBidi(CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic) {
-        ?? isRtl;
+        ?? IsRtl;
         int i3;
         reset();
         this.mSpanned = charSequence instanceof Spanned ? (Spanned) charSequence : null;
@@ -292,11 +292,11 @@ public class MeasuredParagraph {
             i3 = 1;
         } else {
             if (textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_LTR) {
-                isRtl = 126;
+                IsRtl = 126;
             } else {
-                isRtl = textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_RTL ? 127 : textDirectionHeuristic.isRtl(this.mCopiedBuffer, 0, this.mTextLength);
+                IsRtl = textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_RTL ? 127 : textDirectionHeuristic.isRtl(this.mCopiedBuffer, 0, this.mTextLength);
             }
-            i3 = isRtl;
+            i3 = IsRtl;
         }
         char[] cArr2 = this.mCopiedBuffer;
         Bidi bidi = new Bidi(cArr2, 0, null, 0, cArr2.length, i3);
@@ -338,7 +338,7 @@ public class MeasuredParagraph {
         }
     }
 
-    private void applyStyleRun(int i, int i2, TextPaint textPaint, LineBreakConfig lineBreakConfig, MeasuredText.Builder builder, StyleRunCallback styleRunCallback) {
+    private void applyStyleRun(int i, int i2, TextPaint textPaint, LineBreakConfig lineBreakConfig, MeasuredText.Builder builder, StyleRunCallback styleRunCallback) throws Throwable {
         int i3;
         int i4;
         boolean z = false;
@@ -376,21 +376,21 @@ public class MeasuredParagraph {
                     try {
                         try {
                             i3 = flags2;
-                        } catch (Throwable th) {
-                            th = th;
+                            try {
+                                this.mWholeWidth += textPaint.getTextRunAdvances(this.mCopiedBuffer, i6, i8, i6, i8, z2, this.mWidths.getRawArray(), i6);
+                                textPaint.setFlags(i3);
+                            } catch (Throwable th) {
+                                th = th;
+                                textPaint.setFlags(i3);
+                                throw th;
+                            }
+                        } catch (Throwable th2) {
+                            th = th2;
                             i3 = flags2;
                         }
-                    } catch (Throwable th2) {
-                        th = th2;
-                        i3 = flags2;
-                    }
-                    try {
-                        this.mWholeWidth += textPaint.getTextRunAdvances(this.mCopiedBuffer, i6, i8, i6, i8, z2, this.mWidths.getRawArray(), i6);
-                        textPaint.setFlags(i3);
                     } catch (Throwable th3) {
                         th = th3;
-                        textPaint.setFlags(i3);
-                        throw th;
+                        i3 = flags2;
                     }
                 } else {
                     builder.appendStyleRun(textPaint, lineBreakConfig, i7 - i6, z2);
@@ -409,7 +409,7 @@ public class MeasuredParagraph {
         }
     }
 
-    private void applyMetricsAffectingSpan(TextPaint textPaint, LineBreakConfig lineBreakConfig, MetricAffectingSpan[] metricAffectingSpanArr, LineBreakConfigSpan[] lineBreakConfigSpanArr, int i, int i2, MeasuredText.Builder builder, StyleRunCallback styleRunCallback) {
+    private void applyMetricsAffectingSpan(TextPaint textPaint, LineBreakConfig lineBreakConfig, MetricAffectingSpan[] metricAffectingSpanArr, LineBreakConfigSpan[] lineBreakConfigSpanArr, int i, int i2, MeasuredText.Builder builder, StyleRunCallback styleRunCallback) throws Throwable {
         MeasuredParagraph measuredParagraph;
         this.mCachedPaint.set(textPaint);
         this.mCachedPaint.baselineShift = 0;

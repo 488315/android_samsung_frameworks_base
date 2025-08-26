@@ -72,9 +72,9 @@ class Cea708CCParser {
     }
 
     public void parse(byte[] bArr) {
-        int i = 0;
-        while (i < bArr.length) {
-            i = parseServiceBlockData(bArr, i);
+        int serviceBlockData = 0;
+        while (serviceBlockData < bArr.length) {
+            serviceBlockData = parseServiceBlockData(bArr, serviceBlockData);
         }
         emitCaptionBuffer();
     }

@@ -54,12 +54,12 @@ public class SECDownloader {
         bundle.putString(AllShareKey.BUNDLE_STRING_DEVICE_NAME, str);
         bundle.putParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI, arrayList2);
         cVMessage.setBundle(bundle);
-        CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-        if (requestCVMSync == null) {
+        CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+        if (cVMessageRequestCVMSync == null) {
             DLog.w_api(TAG_CLASS, "Download, res_msg is null");
             return false;
         }
-        Bundle bundle2 = requestCVMSync.getBundle();
+        Bundle bundle2 = cVMessageRequestCVMSync.getBundle();
         if (bundle2 == null) {
             DLog.w_api(TAG_CLASS, "Download, res_bundle is null");
             return false;
@@ -96,12 +96,12 @@ public class SECDownloader {
                     bundle.putString(AllShareKey.BUNDLE_STRING_DEVICE_NAME, str);
                     bundle.putParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI, arrayList2);
                     cVMessage.setBundle(bundle);
-                    CVMessage requestCVMSync = SECDownloader.this.mAllShareConnector.requestCVMSync(cVMessage);
-                    if (requestCVMSync == null) {
+                    CVMessage cVMessageRequestCVMSync = SECDownloader.this.mAllShareConnector.requestCVMSync(cVMessage);
+                    if (cVMessageRequestCVMSync == null) {
                         DLog.w_api(SECDownloader.TAG_CLASS, "downloadRemains, res_msg is null");
                         break;
                     }
-                    if (requestCVMSync.getBundle() == null) {
+                    if (cVMessageRequestCVMSync.getBundle() == null) {
                         DLog.w_api(SECDownloader.TAG_CLASS, "downloadRemains, res_bundle is null");
                         break;
                     } else if (i == arrayList.size()) {

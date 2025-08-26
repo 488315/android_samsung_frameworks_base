@@ -19,7 +19,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogRingerDrawerViewModel$ringerViewModel$1 extends SuspendLambda implements Function5 {
     /* synthetic */ int I$0;
@@ -37,13 +36,13 @@ final class VolumeDialogRingerDrawerViewModel$ringerViewModel$1 extends SuspendL
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        int intValue = ((Number) obj4).intValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        int iIntValue = ((Number) obj4).intValue();
         VolumeDialogRingerDrawerViewModel$ringerViewModel$1 volumeDialogRingerDrawerViewModel$ringerViewModel$1 = new VolumeDialogRingerDrawerViewModel$ringerViewModel$1(this.this$0, (Continuation) obj5);
-        volumeDialogRingerDrawerViewModel$ringerViewModel$1.Z$0 = booleanValue;
+        volumeDialogRingerDrawerViewModel$ringerViewModel$1.Z$0 = zBooleanValue;
         volumeDialogRingerDrawerViewModel$ringerViewModel$1.L$0 = (VolumeDialogRingerModel) obj2;
         volumeDialogRingerDrawerViewModel$ringerViewModel$1.L$1 = (RingerDrawerState) obj3;
-        volumeDialogRingerDrawerViewModel$ringerViewModel$1.I$0 = intValue;
+        volumeDialogRingerDrawerViewModel$ringerViewModel$1.I$0 = iIntValue;
         return volumeDialogRingerDrawerViewModel$ringerViewModel$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -63,33 +62,33 @@ final class VolumeDialogRingerDrawerViewModel$ringerViewModel$1 extends SuspendL
         volumeDialogRingerDrawerViewModel.levelMax = volumeDialogRingerModel.levelMax;
         List list = volumeDialogRingerModel.availableModes;
         int i2 = volumeDialogRingerModel.currentRingerMode;
-        int indexOf = list.indexOf(RingerMode.m990boximpl(i2));
-        if (indexOf == -1) {
+        int iIndexOf = list.indexOf(RingerMode.m992boximpl(i2));
+        if (iIndexOf == -1) {
             VolumeDialogLogger volumeDialogLogger = volumeDialogRingerDrawerViewModel.volumeDialogLogger;
             volumeDialogLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             VolumeDialogLogger$$ExternalSyntheticLambda0 volumeDialogLogger$$ExternalSyntheticLambda0 = new VolumeDialogLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = volumeDialogLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("SysUI_VolumeDialog", logLevel, volumeDialogLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i2;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumeDialog", logLevel, volumeDialogLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i2;
+            logBuffer.commit(logMessageObtain);
         }
-        if (indexOf == -1 || volumeDialogRingerModel.isSingleVolume) {
+        if (iIndexOf == -1 || volumeDialogRingerModel.isSingleVolume) {
             return RingerViewModelState.Unavailable.INSTANCE;
         }
-        RingerButtonViewModel m3200toButtonViewModelL0tBgz0 = VolumeDialogRingerDrawerViewModel.m3200toButtonViewModelL0tBgz0(volumeDialogRingerModel, i2, z, true);
-        if (m3200toButtonViewModelL0tBgz0 == null) {
+        RingerButtonViewModel ringerButtonViewModelM3217toButtonViewModelL0tBgz0 = VolumeDialogRingerDrawerViewModel.m3217toButtonViewModelL0tBgz0(volumeDialogRingerModel, i2, z, true);
+        if (ringerButtonViewModelM3217toButtonViewModelL0tBgz0 == null) {
             return RingerViewModelState.Unavailable.INSTANCE;
         }
         List list2 = volumeDialogRingerModel.availableModes;
         ArrayList arrayList = new ArrayList();
         Iterator it = list2.iterator();
         while (it.hasNext()) {
-            RingerButtonViewModel m3200toButtonViewModelL0tBgz02 = VolumeDialogRingerDrawerViewModel.m3200toButtonViewModelL0tBgz0(volumeDialogRingerModel, ((RingerMode) it.next()).value, z, false);
-            if (m3200toButtonViewModelL0tBgz02 != null) {
-                arrayList.add(m3200toButtonViewModelL0tBgz02);
+            RingerButtonViewModel ringerButtonViewModelM3217toButtonViewModelL0tBgz02 = VolumeDialogRingerDrawerViewModel.m3217toButtonViewModelL0tBgz0(volumeDialogRingerModel, ((RingerMode) it.next()).value, z, false);
+            if (ringerButtonViewModelM3217toButtonViewModelL0tBgz02 != null) {
+                arrayList.add(ringerButtonViewModelM3217toButtonViewModelL0tBgz02);
             }
         }
-        return new RingerViewModelState.Available(new RingerViewModel(arrayList, indexOf, m3200toButtonViewModelL0tBgz0, ringerDrawerState), i);
+        return new RingerViewModelState.Available(new RingerViewModel(arrayList, iIndexOf, ringerButtonViewModelM3217toButtonViewModelL0tBgz0, ringerDrawerState), i);
     }
 }

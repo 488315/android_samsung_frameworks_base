@@ -33,7 +33,7 @@ class AudioPlaybackQueueItem extends PlaybackQueueItem {
     }
 
     @Override // android.speech.tts.PlaybackQueueItem, java.lang.Runnable
-    public void run() {
+    public void run() throws IllegalStateException {
         TextToSpeechService.UtteranceProgressDispatcher dispatcher = getDispatcher();
         dispatcher.dispatchOnStart();
         int i = this.mAudioParams.mSessionId;
@@ -43,14 +43,14 @@ class AudioPlaybackQueueItem extends PlaybackQueueItem {
         if (i <= 0) {
             i = 0;
         }
-        MediaPlayer create = MediaPlayer.create(context, uri, null, audioAttributes, i);
-        this.mPlayer = create;
-        if (create == null) {
+        MediaPlayer mediaPlayerCreate = MediaPlayer.create(context, uri, null, audioAttributes, i);
+        this.mPlayer = mediaPlayerCreate;
+        if (mediaPlayerCreate == null) {
             dispatcher.dispatchOnError(-5);
             return;
         }
         try {
-            create.setOnErrorListener(new MediaPlayer.OnErrorListener() { // from class: android.speech.tts.AudioPlaybackQueueItem.1
+            mediaPlayerCreate.setOnErrorListener(new MediaPlayer.OnErrorListener() { // from class: android.speech.tts.AudioPlaybackQueueItem.1
                 @Override // android.media.MediaPlayer.OnErrorListener
                 public boolean onError(MediaPlayer mediaPlayer, int i2, int i3) {
                     Log.w(AudioPlaybackQueueItem.TAG, "Audio playback error: " + i2 + ", " + i3);
@@ -82,16 +82,16 @@ class AudioPlaybackQueueItem extends PlaybackQueueItem {
 
     private static void setupVolume(MediaPlayer mediaPlayer, float f, float f2) {
         float f3;
-        float clip = clip(f, 0.0f, 1.0f);
-        float clip2 = clip(f2, -1.0f, 1.0f);
-        if (clip2 > 0.0f) {
-            float f4 = (1.0f - clip2) * clip;
-            f3 = clip;
-            clip = f4;
+        float fClip = clip(f, 0.0f, 1.0f);
+        float fClip2 = clip(f2, -1.0f, 1.0f);
+        if (fClip2 > 0.0f) {
+            float f4 = (1.0f - fClip2) * fClip;
+            f3 = fClip;
+            fClip = f4;
         } else {
-            f3 = clip2 < 0.0f ? (clip2 + 1.0f) * clip : clip;
+            f3 = fClip2 < 0.0f ? (fClip2 + 1.0f) * fClip : fClip;
         }
-        mediaPlayer.setVolume(clip, f3);
+        mediaPlayer.setVolume(fClip, f3);
     }
 
     private void finish() {

@@ -23,7 +23,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavigationBarTransitions extends BarTransitions implements LightBarTransitionsController.DarkIntensityApplier {
     public final boolean mAllowAutoDimWallpaperNotVisible;
@@ -40,12 +39,10 @@ public final class NavigationBarTransitions extends BarTransitions implements Li
     public final NavigationBarView mView;
     public boolean mWallpaperVisible;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DarkIntensityListener {
         void onDarkIntensity(float f);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NavigationBarBackgroundDrawable extends BarTransitions.BarBackgroundDrawable {
         public final NavBarStateManager mNavBarStateManager;
 
@@ -95,7 +92,7 @@ public final class NavigationBarTransitions extends BarTransitions implements Li
         navigationBarView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.navigationbar.views.NavigationBarTransitions$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                NavigationBarTransitions navigationBarTransitions = NavigationBarTransitions.this;
+                NavigationBarTransitions navigationBarTransitions = this.f$0;
                 View view2 = navigationBarTransitions.mView.mCurrentView;
                 if (view2 != null) {
                     navigationBarTransitions.mNavButtons = view2.findViewById(R.id.nav_buttons);

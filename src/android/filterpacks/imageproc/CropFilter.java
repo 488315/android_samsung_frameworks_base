@@ -45,9 +45,9 @@ public class CropFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public FrameFormat getOutputFormat(String str, FrameFormat frameFormat) {
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
-        mutableCopy.setDimensions(0, 0);
-        return mutableCopy;
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
+        mutableFrameFormatMutableCopy.setDimensions(0, 0);
+        return mutableFrameFormatMutableCopy;
     }
 
     protected void createProgram(FilterContext filterContext, FrameFormat frameFormat) {
@@ -71,27 +71,27 @@ public class CropFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        Frame pullInput2 = pullInput("box");
-        createProgram(filterContext, pullInput.getFormat());
-        Quad quad = (Quad) pullInput2.getObjectValue();
-        MutableFrameFormat mutableCopy = pullInput.getFormat().mutableCopy();
-        int i = this.mOutputWidth;
-        if (i == -1) {
-            i = mutableCopy.getWidth();
+        Frame framePullInput = pullInput("image");
+        Frame framePullInput2 = pullInput("box");
+        createProgram(filterContext, framePullInput.getFormat());
+        Quad quad = (Quad) framePullInput2.getObjectValue();
+        MutableFrameFormat mutableFrameFormatMutableCopy = framePullInput.getFormat().mutableCopy();
+        int width = this.mOutputWidth;
+        if (width == -1) {
+            width = mutableFrameFormatMutableCopy.getWidth();
         }
-        int i2 = this.mOutputHeight;
-        if (i2 == -1) {
-            i2 = mutableCopy.getHeight();
+        int height = this.mOutputHeight;
+        if (height == -1) {
+            height = mutableFrameFormatMutableCopy.getHeight();
         }
-        mutableCopy.setDimensions(i, i2);
-        Frame newFrame = filterContext.getFrameManager().newFrame(mutableCopy);
+        mutableFrameFormatMutableCopy.setDimensions(width, height);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
         Program program = this.mProgram;
         if (program instanceof ShaderProgram) {
             ((ShaderProgram) program).setSourceRegion(quad);
         }
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

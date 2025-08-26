@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +21,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.view.ViewCompat;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TooltipPopup {
     public final View mContentView;
@@ -45,10 +46,10 @@ public class TooltipPopup {
         } else {
             this.mContext = context;
         }
-        View inflate = LayoutInflater.from(this.mContext).inflate(com.android.systemui.R.layout.sesl_tooltip, (ViewGroup) null);
-        this.mContentView = inflate;
-        this.mMessageView = (TextView) inflate.findViewById(com.android.systemui.R.id.message);
-        inflate.setOnTouchListener(new View.OnTouchListener() { // from class: androidx.appcompat.widget.TooltipPopup.1
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(com.android.systemui.R.layout.sesl_tooltip, (ViewGroup) null);
+        this.mContentView = viewInflate;
+        this.mMessageView = (TextView) viewInflate.findViewById(com.android.systemui.R.id.message);
+        viewInflate.setOnTouchListener(new View.OnTouchListener() { // from class: androidx.appcompat.widget.TooltipPopup.1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
                 int action = motionEvent.getAction();
@@ -73,110 +74,65 @@ public class TooltipPopup {
         layoutParams.flags = 262152;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0049  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int adjustTooltipPosition(int r10, int r11, int r12) {
-        /*
-            r9 = this;
-            android.content.Context r0 = r9.mContext
-            java.lang.String r1 = "window"
-            java.lang.Object r0 = r0.getSystemService(r1)
-            android.view.WindowManager r0 = (android.view.WindowManager) r0
-            android.view.Display r0 = r0.getDefaultDisplay()
-            int r0 = r0.getRotation()
-            android.content.Context r2 = r9.mContext
-            android.content.res.Resources r3 = r2.getResources()
-            android.graphics.Rect r4 = r9.mTmpDisplayFrame
-            android.graphics.Point r5 = new android.graphics.Point
-            r5.<init>()
-            java.lang.Object r1 = r2.getSystemService(r1)
-            android.view.WindowManager r1 = (android.view.WindowManager) r1
-            android.view.Display r1 = r1.getDefaultDisplay()
-            r1.getRealSize(r5)
-            int r1 = r1.getRotation()
-            r2 = 2131170242(0x7f0713c2, float:1.7954837E38)
-            float r2 = r3.getDimension(r2)
-            int r2 = (int) r2
-            r3 = 3
-            r6 = 1
-            if (r1 != r6) goto L49
-            int r7 = r4.right
-            int r8 = r7 + r2
-            int r5 = r5.x
-            if (r8 < r5) goto L49
-            int r5 = r5 - r7
-            r9.mNavigationBarHeight = r5
-            goto L51
-        L49:
-            if (r1 != r3) goto L84
-            int r1 = r4.left
-            if (r1 > r2) goto L84
-            r9.mNavigationBarHeight = r1
-        L51:
-            if (r0 != r6) goto L64
-            android.graphics.Rect r0 = r9.mTmpDisplayFrame
-            int r0 = r0.width()
-            int r0 = r0 - r11
-            int r9 = r9.mNavigationBarHeight
-            int r0 = r0 - r9
-            int r0 = r0 / 2
-            int r0 = r0 - r12
-            if (r10 <= r0) goto La6
-            int r0 = r0 - r12
-            return r0
-        L64:
-            if (r0 != r3) goto La6
-            if (r10 > 0) goto L76
-            android.graphics.Rect r9 = r9.mTmpDisplayFrame
-            int r9 = r9.width()
-            int r11 = r11 - r9
-            int r11 = r11 / 2
-            int r11 = r11 + r12
-            if (r10 > r11) goto La6
-            int r11 = r11 + r12
-            return r11
-        L76:
-            android.graphics.Rect r9 = r9.mTmpDisplayFrame
-            int r9 = r9.width()
-            int r9 = r9 - r11
-            int r9 = r9 / 2
-            int r9 = r9 + r12
-            if (r10 <= r9) goto La6
-            int r9 = r9 - r12
-            return r9
-        L84:
-            if (r0 == r6) goto L88
-            if (r0 != r3) goto La6
-        L88:
-            if (r10 > 0) goto L98
-            android.graphics.Rect r9 = r9.mTmpDisplayFrame
-            int r9 = r9.width()
-            int r11 = r11 - r9
-            int r11 = r11 / 2
-            int r11 = r11 + r12
-            if (r10 >= r11) goto La6
-            int r11 = r11 + r12
-            return r11
-        L98:
-            android.graphics.Rect r9 = r9.mTmpDisplayFrame
-            int r9 = r9.width()
-            int r9 = r9 - r11
-            int r9 = r9 / 2
-            int r9 = r9 + r12
-            if (r10 <= r9) goto La6
-            int r9 = r9 - r12
-            return r9
-        La6:
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.TooltipPopup.adjustTooltipPosition(int, int, int):int");
+    public final int adjustTooltipPosition(int i, int i2, int i3) {
+        int i4;
+        int rotation = ((WindowManager) this.mContext.getSystemService("window")).getDefaultDisplay().getRotation();
+        Context context = this.mContext;
+        Resources resources = context.getResources();
+        Rect rect = this.mTmpDisplayFrame;
+        Point point = new Point();
+        Display defaultDisplay = ((WindowManager) context.getSystemService("window")).getDefaultDisplay();
+        defaultDisplay.getRealSize(point);
+        int rotation2 = defaultDisplay.getRotation();
+        int dimension = (int) resources.getDimension(com.android.systemui.R.dimen.sesl_navigation_bar_height);
+        if (rotation2 == 1) {
+            int i5 = rect.right;
+            int i6 = i5 + dimension;
+            int i7 = point.x;
+            if (i6 >= i7) {
+                this.mNavigationBarHeight = i7 - i5;
+            } else if (rotation2 == 3 && (i4 = rect.left) <= dimension) {
+                this.mNavigationBarHeight = i4;
+            } else if (rotation == 1 || rotation == 3) {
+                if (i <= 0) {
+                    int iWidth = ((i2 - this.mTmpDisplayFrame.width()) / 2) + i3;
+                    if (i < iWidth) {
+                        return iWidth + i3;
+                    }
+                } else {
+                    int iWidth2 = ((this.mTmpDisplayFrame.width() - i2) / 2) + i3;
+                    if (i > iWidth2) {
+                        return iWidth2 - i3;
+                    }
+                }
+            }
+            if (rotation == 1) {
+                int iWidth3 = (((this.mTmpDisplayFrame.width() - i2) - this.mNavigationBarHeight) / 2) - i3;
+                if (i > iWidth3) {
+                    return iWidth3 - i3;
+                }
+            } else if (rotation == 3) {
+                if (i <= 0) {
+                    int iWidth4 = ((i2 - this.mTmpDisplayFrame.width()) / 2) + i3;
+                    if (i <= iWidth4) {
+                        return iWidth4 + i3;
+                    }
+                } else {
+                    int iWidth5 = ((this.mTmpDisplayFrame.width() - i2) / 2) + i3;
+                    if (i > iWidth5) {
+                        return iWidth5 - i3;
+                    }
+                }
+            }
+        }
+        return i;
     }
 
-    public final void computePosition(View view, boolean z, WindowManager.LayoutParams layoutParams, boolean z2, boolean z3) {
+    public final void computePosition(View view, boolean z, WindowManager.LayoutParams layoutParams, boolean z2, boolean z3) throws Resources.NotFoundException {
         layoutParams.token = view.getApplicationWindowToken();
         int width = view.getWidth() / 2;
         layoutParams.gravity = 49;
@@ -231,8 +187,8 @@ public class TooltipPopup {
         iArr3[0] = i2;
         iArr3[1] = iArr3[1] - iArr2[1];
         layoutParams.x = (i2 + width) - (this.mTmpDisplayFrame.width() / 2);
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        this.mContentView.measure(makeMeasureSpec, makeMeasureSpec);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        this.mContentView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
         int measuredHeight = this.mContentView.getMeasuredHeight();
         int measuredWidth = this.mContentView.getMeasuredWidth();
         int dimensionPixelOffset = this.mContext.getResources().getDimensionPixelOffset(com.android.systemui.R.dimen.sesl_hover_tooltip_popup_right_margin);
@@ -251,9 +207,9 @@ public class TooltipPopup {
                 }
                 layoutParams.x = adjustTooltipPosition(layoutParams.x, measuredWidth, dimensionPixelOffset);
             } else {
-                int width3 = (measuredWidth / 2) + ((iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2)) + dimensionPixelOffset;
-                layoutParams.x = width3;
-                layoutParams.x = adjustTooltipPosition(width3, measuredWidth, dimensionPixelOffset);
+                int iWidth = (measuredWidth / 2) + ((iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2)) + dimensionPixelOffset;
+                layoutParams.x = iWidth;
+                layoutParams.x = adjustTooltipPosition(iWidth, measuredWidth, dimensionPixelOffset);
             }
             if (height + measuredHeight > this.mTmpDisplayFrame.height()) {
                 layoutParams.y = i4;
@@ -261,10 +217,10 @@ public class TooltipPopup {
                 layoutParams.y = height;
             }
         } else {
-            int width4 = (iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2);
-            layoutParams.x = width4;
+            int iWidth2 = (iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2);
+            layoutParams.x = iWidth2;
             int i6 = measuredWidth / 2;
-            if (width4 < ((-this.mTmpDisplayFrame.width()) / 2) + i6) {
+            if (iWidth2 < ((-this.mTmpDisplayFrame.width()) / 2) + i6) {
                 layoutParams.x = ((-this.mTmpDisplayFrame.width()) / 2) + i6 + dimensionPixelOffset2;
             }
             layoutParams.x = adjustTooltipPosition(layoutParams.x, measuredWidth, dimensionPixelOffset);
@@ -277,16 +233,16 @@ public class TooltipPopup {
             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
             if (view.getLayoutDirection() == 0) {
                 int i7 = measuredWidth / 2;
-                int width5 = (((view.getWidth() + iArr3[0]) - (this.mTmpDisplayFrame.width() / 2)) - i7) - dimensionPixelOffset;
-                layoutParams.x = width5;
-                if (width5 < ((-this.mTmpDisplayFrame.width()) / 2) + i7) {
+                int width3 = (((view.getWidth() + iArr3[0]) - (this.mTmpDisplayFrame.width() / 2)) - i7) - dimensionPixelOffset;
+                layoutParams.x = width3;
+                if (width3 < ((-this.mTmpDisplayFrame.width()) / 2) + i7) {
                     layoutParams.x = ((-this.mTmpDisplayFrame.width()) / 2) + i7 + dimensionPixelOffset2;
                 }
                 layoutParams.x = adjustTooltipPosition(layoutParams.x, measuredWidth, dimensionPixelOffset);
             } else {
-                int width6 = ((measuredWidth / 2) + ((iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2))) - dimensionPixelOffset;
-                layoutParams.x = width6;
-                layoutParams.x = adjustTooltipPosition(width6, measuredWidth, dimensionPixelOffset);
+                int iWidth3 = ((measuredWidth / 2) + ((iArr3[0] + width) - (this.mTmpDisplayFrame.width() / 2))) - dimensionPixelOffset;
+                layoutParams.x = iWidth3;
+                layoutParams.x = adjustTooltipPosition(iWidth3, measuredWidth, dimensionPixelOffset);
             }
             if (measuredHeight + height <= this.mTmpDisplayFrame.height()) {
                 i4 = height;

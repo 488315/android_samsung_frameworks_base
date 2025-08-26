@@ -48,7 +48,7 @@ public class BaseObj {
         }
     }
 
-    public void setName(String str) {
+    public void setName(String str) throws UnsupportedEncodingException {
         if (str == null) {
             throw new RSIllegalArgumentException("setName requires a string of non-zero length.");
         }
@@ -82,15 +82,15 @@ public class BaseObj {
         }
         if (z) {
             this.guard.close();
-            ReentrantReadWriteLock.ReadLock readLock = this.mRS.mRWLock.readLock();
-            readLock.lock();
+            ReentrantReadWriteLock.ReadLock lock = this.mRS.mRWLock.readLock();
+            lock.lock();
             if (this.mRS.isAlive()) {
                 long j = this.mID;
                 if (j != 0) {
                     this.mRS.nObjDestroy(j);
                 }
             }
-            readLock.unlock();
+            lock.unlock();
             this.mRS = null;
             this.mID = 0L;
         }

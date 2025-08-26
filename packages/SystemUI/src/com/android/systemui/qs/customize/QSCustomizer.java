@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.phone.LightBarController;
 import com.android.systemui.statusbar.phone.LightBarControllerImpl;
 import com.android.systemui.util.LargeScreenUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSCustomizer extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -68,7 +67,7 @@ public class QSCustomizer extends LinearLayout {
         TypedValue typedValue = new TypedValue();
         ((LinearLayout) this).mContext.getTheme().resolveAttribute(android.R.attr.homeAsUpIndicator, typedValue, true);
         toolbar.setNavigationIcon(getResources().getDrawable(typedValue.resourceId, ((LinearLayout) this).mContext.getTheme()));
-        toolbar.getMenu().add(0, 1, 0, 17042685).setShowAsAction(1);
+        toolbar.getMenu().add(0, 1, 0, 17042689).setShowAsAction(1);
         toolbar.setTitle(R.string.qs_edit);
         RecyclerView recyclerView = (RecyclerView) findViewById(android.R.id.list);
         this.mRecyclerView = recyclerView;
@@ -87,20 +86,16 @@ public class QSCustomizer extends LinearLayout {
         super.onConfigurationChanged(configuration);
         this.mToolbar.setTitleTextAppearance(((LinearLayout) this).mContext, android.R.style.TextAppearance.DeviceDefault.Widget.ActionBar.Title);
         this.mToolbar.getMenu().clear();
-        this.mToolbar.getMenu().add(0, 1, 0, 17042685).setShowAsAction(1);
+        this.mToolbar.getMenu().add(0, 1, 0, 17042689).setShowAsAction(1);
     }
 
     public final void updateNavBackDrop(Configuration configuration, LightBarController lightBarController) {
-        View findViewById = findViewById(R.id.nav_bar_background);
+        View viewFindViewById = findViewById(R.id.nav_bar_background);
         boolean z = configuration.smallestScreenWidthDp >= 600 || configuration.orientation != 2;
-        if (findViewById != null) {
-            findViewById.setVisibility(z ? 0 : 8);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(z ? 0 : 8);
         }
-        LightBarControllerImpl lightBarControllerImpl = (LightBarControllerImpl) lightBarController;
-        if (lightBarControllerImpl.mQsCustomizing) {
-            lightBarControllerImpl.mQsCustomizing = false;
-            lightBarControllerImpl.reevaluate();
-        }
+        ((LightBarControllerImpl) lightBarController).getClass();
     }
 
     public final void updateTransparentViewHeight() {

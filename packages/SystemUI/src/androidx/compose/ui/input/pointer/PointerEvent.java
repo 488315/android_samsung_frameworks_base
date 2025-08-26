@@ -3,7 +3,6 @@ package androidx.compose.ui.input.pointer;
 import android.view.MotionEvent;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PointerEvent {
     public final int buttons;
@@ -11,6 +10,12 @@ public final class PointerEvent {
     public final InternalPointerEvent internalPointerEvent;
     public int type;
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x005a  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0062  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public PointerEvent(List<PointerInputChange> list, InternalPointerEvent internalPointerEvent) {
         this.changes = list;
         this.internalPointerEvent = internalPointerEvent;
@@ -46,41 +51,39 @@ public final class PointerEvent {
             }
         } else {
             int actionMasked = motionEvent$ui_release3.getActionMasked();
-            if (actionMasked != 0) {
-                if (actionMasked != 1) {
-                    if (actionMasked != 2) {
-                        switch (actionMasked) {
-                            case 5:
-                                break;
-                            case 6:
-                                break;
-                            case 7:
-                                break;
-                            case 8:
-                                PointerEventType.Companion.getClass();
-                                i = PointerEventType.Scroll;
-                                break;
-                            case 9:
-                                PointerEventType.Companion.getClass();
-                                i = PointerEventType.Enter;
-                                break;
-                            case 10:
-                                PointerEventType.Companion.getClass();
-                                i = PointerEventType.Exit;
-                                break;
-                            default:
-                                PointerEventType.Companion.getClass();
-                                break;
-                        }
-                    }
-                    PointerEventType.Companion.getClass();
-                    i = PointerEventType.Move;
-                }
+            if (actionMasked == 0) {
+                PointerEventType.Companion.getClass();
+                i = PointerEventType.Press;
+            } else if (actionMasked == 1) {
                 PointerEventType.Companion.getClass();
                 i = PointerEventType.Release;
+            } else if (actionMasked != 2) {
+                switch (actionMasked) {
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        PointerEventType.Companion.getClass();
+                        i = PointerEventType.Move;
+                        break;
+                    case 8:
+                        PointerEventType.Companion.getClass();
+                        i = PointerEventType.Scroll;
+                        break;
+                    case 9:
+                        PointerEventType.Companion.getClass();
+                        i = PointerEventType.Enter;
+                        break;
+                    case 10:
+                        PointerEventType.Companion.getClass();
+                        i = PointerEventType.Exit;
+                        break;
+                    default:
+                        PointerEventType.Companion.getClass();
+                        break;
+                }
             }
-            PointerEventType.Companion.getClass();
-            i = PointerEventType.Press;
         }
         this.type = i;
     }

@@ -95,11 +95,11 @@ public class VolumeRecord implements Parcelable {
         File file = new File("/dev/null");
         File file2 = new File("/dev/null");
         UserHandle userHandle = new UserHandle(-10000);
-        String str2 = this.nickname;
-        if (str2 == null) {
-            str2 = context.getString(17039374);
+        String string = this.nickname;
+        if (string == null) {
+            string = context.getString(17039374);
         }
-        return new StorageVolume(str, file, file2, str2, false, true, false, false, false, 0L, userHandle, null, this.fsUuid, "unknown");
+        return new StorageVolume(str, file, file2, string, false, true, false, false, false, 0L, userHandle, null, this.fsUuid, "unknown");
     }
 
     public void dump(IndentingPrintWriter indentingPrintWriter) {
@@ -121,14 +121,14 @@ public class VolumeRecord implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public VolumeRecord m3710clone() {
-        Parcel obtain = Parcel.obtain();
+    public VolumeRecord m3717clone() {
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            return CREATOR.createFromParcel(obtain);
+            writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return CREATOR.createFromParcel(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

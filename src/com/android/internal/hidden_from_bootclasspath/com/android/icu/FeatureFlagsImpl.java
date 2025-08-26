@@ -13,10 +13,10 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.icu");
-            icu25q2Api = load.getBooleanFlagValue("icu_25q2_api", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.icu");
+            icu25q2Api = aconfigPackageLoad.getBooleanFlagValue("icu_25q2_api", false);
             icuVApi = true;
-            telephonyLookupMccExtension = load.getBooleanFlagValue("telephony_lookup_mcc_extension", false);
+            telephonyLookupMccExtension = aconfigPackageLoad.getBooleanFlagValue("telephony_lookup_mcc_extension", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

@@ -84,19 +84,19 @@ class InlineSuggestionSession {
             return;
         }
         try {
-            InlineSuggestionsRequest apply = this.mRequestSupplier.apply(this.mRequestInfo.getUiExtras());
+            InlineSuggestionsRequest inlineSuggestionsRequestApply = this.mRequestSupplier.apply(this.mRequestInfo.getUiExtras());
             if (this.mAlwaysNotifyAutofill) {
                 this.mResponseCallback = new InlineSuggestionsResponseCallbackImpl();
             }
-            if (apply == null) {
+            if (inlineSuggestionsRequestApply == null) {
                 this.mCallback.onInlineSuggestionsUnsupported();
             } else {
-                apply.setHostInputToken(this.mHostInputTokenSupplier.get());
-                apply.filterContentTypes();
+                inlineSuggestionsRequestApply.setHostInputToken(this.mHostInputTokenSupplier.get());
+                inlineSuggestionsRequestApply.filterContentTypes();
                 if (!this.mAlwaysNotifyAutofill) {
                     this.mResponseCallback = new InlineSuggestionsResponseCallbackImpl();
                 }
-                this.mCallback.onInlineSuggestionsRequest(apply, this.mResponseCallback);
+                this.mCallback.onInlineSuggestionsRequest(inlineSuggestionsRequestApply, this.mResponseCallback);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "makeInlinedSuggestionsRequest() remote exception:" + e);
@@ -111,11 +111,11 @@ class InlineSuggestionSession {
     }
 
     void consumeInlineSuggestionsResponse(InlineSuggestionsResponse inlineSuggestionsResponse) {
-        boolean isEmpty = inlineSuggestionsResponse.getInlineSuggestions().isEmpty();
-        if (isEmpty && Boolean.TRUE.equals(this.mPreviousResponseIsEmpty)) {
+        boolean zIsEmpty = inlineSuggestionsResponse.getInlineSuggestions().isEmpty();
+        if (zIsEmpty && Boolean.TRUE.equals(this.mPreviousResponseIsEmpty)) {
             return;
         }
-        this.mPreviousResponseIsEmpty = Boolean.valueOf(isEmpty);
+        this.mPreviousResponseIsEmpty = Boolean.valueOf(zIsEmpty);
         this.mResponseConsumer.accept(inlineSuggestionsResponse);
     }
 

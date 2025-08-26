@@ -19,6 +19,7 @@ import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
 import android.widget.SpinnerAdapter;
 import com.android.internal.R;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -334,9 +335,9 @@ public abstract class ActionBar {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.gravity = 0;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar_LayoutParams);
-            this.gravity = obtainStyledAttributes.getInt(0, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar_LayoutParams);
+            this.gravity = typedArrayObtainStyledAttributes.getInt(0, 0);
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(int i, int i2) {
@@ -365,7 +366,7 @@ public abstract class ActionBar {
         }
 
         @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
-        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
             super.encodeProperties(viewHierarchyEncoder);
             viewHierarchyEncoder.addProperty("gravity", this.gravity);
         }

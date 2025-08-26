@@ -16,7 +16,6 @@ import com.android.systemui.wallpaper.theme.builder.ComplexAnimationBuilder;
 import com.android.systemui.wallpaper.theme.view.FrameImageView;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AnimationParser extends BaseParser {
     public final String mAttribute;
@@ -28,7 +27,7 @@ public class AnimationParser extends BaseParser {
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
     public final void parseAttribute(ParserData parserData) {
         XmlPullParser xmlPullParser;
-        ValueAnimator ofFloat;
+        ValueAnimator valueAnimatorOfFloat;
         FrameImageView frameImageView;
         if (parserData == null || (xmlPullParser = parserData.mXpp) == null) {
             return;
@@ -51,8 +50,8 @@ public class AnimationParser extends BaseParser {
                 animationBuilder.from = f;
                 float f2 = (float) ((animationBuilder.to / 360.0f) * 2.0f * 3.141592653589793d);
                 animationBuilder.to = f2;
-                ofFloat = ValueAnimator.ofFloat(f, f2);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.3
+                valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.3
                     public AnonymousClass3() {
                     }
 
@@ -78,8 +77,8 @@ public class AnimationParser extends BaseParser {
                 animationBuilder.from = f3;
                 float f4 = (float) ((animationBuilder.to / 360.0f) * 2.0f * 3.141592653589793d);
                 animationBuilder.to = f4;
-                ofFloat = ValueAnimator.ofFloat(f3, f4);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.4
+                valueAnimatorOfFloat = ValueAnimator.ofFloat(f3, f4);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.4
                     public AnonymousClass4() {
                     }
 
@@ -102,8 +101,8 @@ public class AnimationParser extends BaseParser {
             } else if (str.equals("parabola")) {
                 animationBuilder.imageView = frameImageView2;
                 if (animationBuilder.to > animationBuilder.from) {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.ParabolaEvaluator(animationBuilder.key, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.5
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.ParabolaEvaluator(animationBuilder.key, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.5
                         public AnonymousClass5() {
                         }
 
@@ -120,8 +119,8 @@ public class AnimationParser extends BaseParser {
                         }
                     });
                 } else {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.ParabolaEvaluatorReverse(animationBuilder.key, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.6
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.ParabolaEvaluatorReverse(animationBuilder.key, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.6
                         public AnonymousClass6() {
                         }
 
@@ -141,8 +140,8 @@ public class AnimationParser extends BaseParser {
             } else if (str.equals("sinX")) {
                 animationBuilder.imageView = frameImageView2;
                 if (animationBuilder.to > animationBuilder.from) {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.SinXEvaluator(animationBuilder.key, animationBuilder.adjust, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.7
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.SinXEvaluator(animationBuilder.key, animationBuilder.adjust, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.7
                         public AnonymousClass7() {
                         }
 
@@ -158,8 +157,8 @@ public class AnimationParser extends BaseParser {
                         }
                     });
                 } else {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.SinXEvaluatorReverse(animationBuilder.key, animationBuilder.adjust, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.8
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.SinXEvaluatorReverse(animationBuilder.key, animationBuilder.adjust, animationBuilder.xOffSet, animationBuilder.yOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.8
                         public AnonymousClass8() {
                         }
 
@@ -178,8 +177,8 @@ public class AnimationParser extends BaseParser {
             } else if (str.equals("sinY")) {
                 animationBuilder.imageView = frameImageView2;
                 if (animationBuilder.to > animationBuilder.from) {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.SinYEvaluator(animationBuilder.key, animationBuilder.adjust, animationBuilder.yOffSet, animationBuilder.xOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.9
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.SinYEvaluator(animationBuilder.key, animationBuilder.adjust, animationBuilder.yOffSet, animationBuilder.xOffSet), Float.valueOf(animationBuilder.from), Float.valueOf(animationBuilder.to));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.9
                         public AnonymousClass9() {
                         }
 
@@ -195,8 +194,8 @@ public class AnimationParser extends BaseParser {
                         }
                     });
                 } else {
-                    ofFloat = ValueAnimator.ofObject(new AnimationBuilder.SinYEvaluatorReverse(animationBuilder.key, animationBuilder.adjust, animationBuilder.yOffSet, animationBuilder.xOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.10
+                    valueAnimatorOfFloat = ValueAnimator.ofObject(new AnimationBuilder.SinYEvaluatorReverse(animationBuilder.key, animationBuilder.adjust, animationBuilder.yOffSet, animationBuilder.xOffSet), Float.valueOf(animationBuilder.to), Float.valueOf(animationBuilder.from));
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.10
                         public AnonymousClass10() {
                         }
 
@@ -225,12 +224,12 @@ public class AnimationParser extends BaseParser {
                     iArr[i2] = i3;
                     frameImageView2.mImageSetIds[i2] = i3;
                 }
-                ofFloat = ValueAnimator.ofInt(iArr2);
-                ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.1
+                valueAnimatorOfFloat = ValueAnimator.ofInt(iArr2);
+                valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.1
                     public final /* synthetic */ FrameImageView val$view;
 
                     public AnonymousClass1(FrameImageView frameImageView22) {
-                        r2 = frameImageView22;
+                        frameImageView = frameImageView22;
                     }
 
                     @Override // android.animation.Animator.AnimatorListener
@@ -238,13 +237,13 @@ public class AnimationParser extends BaseParser {
                         AnimationBuilder animationBuilder2 = AnimationBuilder.this;
                         animationBuilder2.isAnimationStarted = false;
                         animationBuilder2.startTime = 0L;
-                        r2.mQueue.clear();
+                        frameImageView.mQueue.clear();
                     }
 
                     @Override // android.animation.Animator.AnimatorListener
                     public final void onAnimationStart(Animator animator) {
                         AnimationBuilder.this.isAnimationStarted = true;
-                        r2.mQueue.clear();
+                        frameImageView.mQueue.clear();
                     }
 
                     @Override // android.animation.Animator.AnimatorListener
@@ -255,102 +254,101 @@ public class AnimationParser extends BaseParser {
                     public final void onAnimationRepeat(Animator animator) {
                     }
                 });
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.2
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.2
                     public final /* synthetic */ FrameImageView val$view;
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.wallpaper.theme.builder.AnimationBuilder$2$1 */
                     public class AnonymousClass1 extends AsyncTask {
                         public Bitmap bitmap = null;
                         public final /* synthetic */ int val$sequence;
 
                         public AnonymousClass1(int i) {
-                            r2 = i;
+                            i = i;
                         }
 
                         @Override // android.os.AsyncTask
                         public final Object doInBackground(Object[] objArr) {
-                            FrameImageView frameImageView = r2;
+                            FrameImageView frameImageView = frameImageView;
                             if (frameImageView == null) {
                                 return null;
                             }
-                            this.bitmap = BitmapFactory.decodeResource(frameImageView.mApkResources, frameImageView.mImageSetIds[r2]);
+                            this.bitmap = BitmapFactory.decodeResource(frameImageView.mApkResources, frameImageView.mImageSetIds[i]);
                             return null;
                         }
 
                         @Override // android.os.AsyncTask
                         public final void onPostExecute(Object obj) {
-                            FrameImageView frameImageView = r2;
+                            FrameImageView frameImageView = frameImageView;
                             if (frameImageView != null) {
                                 frameImageView.setImageBitmap(this.bitmap);
                                 this.bitmap = null;
                                 AnonymousClass2 anonymousClass2 = AnonymousClass2.this;
                                 AnimationBuilder animationBuilder = AnimationBuilder.this;
-                                int i = r2;
+                                int i = i;
                                 animationBuilder.preSequence = i;
-                                r2.mQueue.remove(Integer.valueOf(i));
+                                frameImageView.mQueue.remove(Integer.valueOf(i));
                             }
                         }
                     }
 
                     public AnonymousClass2(FrameImageView frameImageView22) {
-                        r2 = frameImageView22;
+                        frameImageView = frameImageView22;
                     }
 
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        int i4;
+                        int iIntValue;
                         if (valueAnimator.getAnimatedValue() == null) {
                             return;
                         }
                         ((Integer) valueAnimator.getAnimatedValue()).getClass();
-                        long currentTimeMillis = System.currentTimeMillis();
+                        long jCurrentTimeMillis = System.currentTimeMillis();
                         AnimationBuilder animationBuilder2 = AnimationBuilder.this;
-                        if (currentTimeMillis - animationBuilder2.startTime < animationBuilder2.elementDuration) {
+                        if (jCurrentTimeMillis - animationBuilder2.startTime < animationBuilder2.elementDuration) {
                             return;
                         }
                         animationBuilder2.startTime = System.currentTimeMillis();
-                        if (r2.mQueue.size() < 5) {
-                            if (r2.mQueue.size() <= 0 || r2.mQueue.peekLast() == null) {
+                        if (frameImageView.mQueue.size() < 5) {
+                            if (frameImageView.mQueue.size() <= 0 || frameImageView.mQueue.peekLast() == null) {
                                 AnimationBuilder animationBuilder3 = AnimationBuilder.this;
                                 if (!animationBuilder3.isAnimationStarted) {
                                     animationBuilder3.preSequence = -1;
                                 }
-                                i4 = animationBuilder3.preSequence;
+                                iIntValue = animationBuilder3.preSequence;
                             } else {
-                                i4 = ((Integer) r2.mQueue.peekLast()).intValue();
+                                iIntValue = ((Integer) frameImageView.mQueue.peekLast()).intValue();
                             }
-                            int i5 = i4 < AnimationBuilder.this.length + (-2) ? i4 + 1 : 0;
-                            r2.mQueue.add(Integer.valueOf(i5));
+                            int i4 = iIntValue < AnimationBuilder.this.length + (-2) ? iIntValue + 1 : 0;
+                            frameImageView.mQueue.add(Integer.valueOf(i4));
                             new AsyncTask() { // from class: com.android.systemui.wallpaper.theme.builder.AnimationBuilder.2.1
                                 public Bitmap bitmap = null;
                                 public final /* synthetic */ int val$sequence;
 
-                                public AnonymousClass1(int i52) {
-                                    r2 = i52;
+                                public AnonymousClass1(int i42) {
+                                    i = i42;
                                 }
 
                                 @Override // android.os.AsyncTask
                                 public final Object doInBackground(Object[] objArr) {
-                                    FrameImageView frameImageView3 = r2;
+                                    FrameImageView frameImageView3 = frameImageView;
                                     if (frameImageView3 == null) {
                                         return null;
                                     }
-                                    this.bitmap = BitmapFactory.decodeResource(frameImageView3.mApkResources, frameImageView3.mImageSetIds[r2]);
+                                    this.bitmap = BitmapFactory.decodeResource(frameImageView3.mApkResources, frameImageView3.mImageSetIds[i]);
                                     return null;
                                 }
 
                                 @Override // android.os.AsyncTask
                                 public final void onPostExecute(Object obj) {
-                                    FrameImageView frameImageView3 = r2;
+                                    FrameImageView frameImageView3 = frameImageView;
                                     if (frameImageView3 != null) {
                                         frameImageView3.setImageBitmap(this.bitmap);
                                         this.bitmap = null;
                                         AnonymousClass2 anonymousClass2 = AnonymousClass2.this;
                                         AnimationBuilder animationBuilder4 = AnimationBuilder.this;
-                                        int i6 = r2;
-                                        animationBuilder4.preSequence = i6;
-                                        r2.mQueue.remove(Integer.valueOf(i6));
+                                        int i5 = i;
+                                        animationBuilder4.preSequence = i5;
+                                        frameImageView.mQueue.remove(Integer.valueOf(i5));
                                     }
                                 }
                             }.execute(new Void[0]);
@@ -358,14 +356,14 @@ public class AnimationParser extends BaseParser {
                     }
                 });
             } else {
-                ofFloat = ObjectAnimator.ofFloat(frameImageView22, str, animationBuilder.from, animationBuilder.to);
+                valueAnimatorOfFloat = ObjectAnimator.ofFloat(frameImageView22, str, animationBuilder.from, animationBuilder.to);
             }
-            ofFloat.setStartDelay(animationBuilder.delay);
-            ofFloat.setDuration(animationBuilder.duration);
-            ofFloat.setRepeatCount(animationBuilder.repeatCount);
-            ofFloat.setRepeatMode(animationBuilder.repeatMode);
-            ofFloat.setInterpolator(animationBuilder.interpolator);
-            complexAnimationBuilder.mAnimatorSet.playTogether(ofFloat);
+            valueAnimatorOfFloat.setStartDelay(animationBuilder.delay);
+            valueAnimatorOfFloat.setDuration(animationBuilder.duration);
+            valueAnimatorOfFloat.setRepeatCount(animationBuilder.repeatCount);
+            valueAnimatorOfFloat.setRepeatMode(animationBuilder.repeatMode);
+            valueAnimatorOfFloat.setInterpolator(animationBuilder.interpolator);
+            complexAnimationBuilder.mAnimatorSet.playTogether(valueAnimatorOfFloat);
             return;
         }
         AnimationBuilder animationBuilder2 = new AnimationBuilder();

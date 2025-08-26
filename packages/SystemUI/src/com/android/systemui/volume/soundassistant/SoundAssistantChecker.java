@@ -14,13 +14,11 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SoundAssistantChecker {
     public final Context context;
     public boolean isNeedToChangeBuds3IconToBtIcon;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,9 +43,9 @@ public final class SoundAssistantChecker {
     /* JADX WARN: Type inference failed for: r4v7, types: [java.lang.Object, java.util.List] */
     public final void updateState(boolean z) {
         Object failure;
-        ?? singletonList;
+        ?? SingletonList;
         String str;
-        List split$default;
+        List listSplit$default;
         boolean z2 = false;
         if (z) {
             try {
@@ -55,26 +53,26 @@ public final class SoundAssistantChecker {
                 PackageManager packageManager = this.context.getPackageManager();
                 SoundAssistantConstants.INSTANCE.getClass();
                 PackageInfo packageInfo = packageManager.getPackageInfo(SoundAssistantConstants.SOUNDASSISTANT_PACKAGE_NAME, 0);
-                if (packageInfo == null || (str = packageInfo.versionName) == null || (split$default = StringsKt__StringsKt.split$default(str, new String[]{"."}, 0, 6)) == null) {
-                    singletonList = Collections.singletonList(r1);
+                if (packageInfo == null || (str = packageInfo.versionName) == null || (listSplit$default = StringsKt__StringsKt.split$default(str, new String[]{"."}, 0, 6)) == null) {
+                    SingletonList = Collections.singletonList(obj);
                 } else {
-                    List list = split$default;
-                    singletonList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                    List list = listSplit$default;
+                    SingletonList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
                     Iterator it = list.iterator();
                     while (it.hasNext()) {
-                        singletonList.add(Integer.valueOf(Integer.parseInt((String) it.next())));
+                        SingletonList.add(Integer.valueOf(Integer.parseInt((String) it.next())));
                     }
                 }
-                Log.d("SecVolume.SoundAssistantChecker", "version=" + singletonList);
-                failure = Integer.valueOf(((Number) singletonList.get(0)).intValue());
+                Log.d("SecVolume.SoundAssistantChecker", "version=" + SingletonList);
+                failure = Integer.valueOf(((Number) SingletonList.get(0)).intValue());
             } catch (Throwable th) {
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
             int i3 = Result.$r8$clinit;
-            int intValue = ((Number) (failure instanceof Result.Failure ? 0 : failure)).intValue();
+            int iIntValue = ((Number) (failure instanceof Result.Failure ? 0 : failure)).intValue();
             SoundAssistantConstants.INSTANCE.getClass();
-            if (intValue <= SoundAssistantConstants.FIX_BUDS3_ICON_SAT_MAJOR_VERSION) {
+            if (iIntValue <= SoundAssistantConstants.FIX_BUDS3_ICON_SAT_MAJOR_VERSION) {
                 z2 = true;
             }
         }

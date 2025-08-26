@@ -38,7 +38,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Transition<S> {
     public final SnapshotStateList _animations;
@@ -54,13 +53,11 @@ public final class Transition<S> {
     public final TransitionState transitionState;
     public final MutableState updateChildrenNeeded$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeferredAnimation<T, V extends AnimationVector> {
         public final MutableState data$delegate = SnapshotStateKt.mutableStateOf$default(null);
         public final String label;
         public final TwoWayConverter typeConverter;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class DeferredAnimationData<T, V extends AnimationVector> implements State<T> {
             public final TransitionAnimationState animation;
             public Function1 targetValueByState;
@@ -79,13 +76,13 @@ public final class Transition<S> {
             }
 
             public final void updateAnimationStates(Segment segment) {
-                Object mo779invoke = this.targetValueByState.mo779invoke(segment.getTargetState());
-                boolean isSeeking = Transition.this.isSeeking();
+                Object objMo781invoke = this.targetValueByState.mo781invoke(segment.getTargetState());
+                boolean zIsSeeking = Transition.this.isSeeking();
                 TransitionAnimationState transitionAnimationState = this.animation;
-                if (isSeeking) {
-                    transitionAnimationState.updateInitialAndTargetValue$animation_core(this.targetValueByState.mo779invoke(segment.getInitialState()), mo779invoke, (FiniteAnimationSpec) this.transitionSpec.mo779invoke(segment));
+                if (zIsSeeking) {
+                    transitionAnimationState.updateInitialAndTargetValue$animation_core(this.targetValueByState.mo781invoke(segment.getInitialState()), objMo781invoke, (FiniteAnimationSpec) this.transitionSpec.mo781invoke(segment));
                 } else {
-                    transitionAnimationState.updateTargetValue$animation_core(mo779invoke, (FiniteAnimationSpec) this.transitionSpec.mo779invoke(segment));
+                    transitionAnimationState.updateTargetValue$animation_core(objMo781invoke, (FiniteAnimationSpec) this.transitionSpec.mo781invoke(segment));
                 }
             }
         }
@@ -100,10 +97,10 @@ public final class Transition<S> {
             DeferredAnimationData deferredAnimationData = (DeferredAnimationData) ((SnapshotMutableStateImpl) mutableState).getValue();
             Transition transition = Transition.this;
             if (deferredAnimationData == null) {
-                Object mo779invoke = function12.mo779invoke(transition.transitionState.getCurrentState());
-                AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo779invoke(function12.mo779invoke(transition.transitionState.getCurrentState()));
+                Object objMo781invoke = function12.mo781invoke(transition.transitionState.getCurrentState());
+                AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo781invoke(function12.mo781invoke(transition.transitionState.getCurrentState()));
                 animationVector.reset$animation_core();
-                deferredAnimationData = new DeferredAnimationData(new TransitionAnimationState(mo779invoke, animationVector, this.typeConverter, this.label), function1, function12);
+                deferredAnimationData = new DeferredAnimationData(new TransitionAnimationState(objMo781invoke, animationVector, this.typeConverter, this.label), function1, function12);
                 ((SnapshotMutableStateImpl) mutableState).setValue(deferredAnimationData);
                 transition._animations.add(deferredAnimationData.animation);
             }
@@ -114,7 +111,6 @@ public final class Transition<S> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Segment<S> {
         Object getInitialState();
 
@@ -125,7 +121,6 @@ public final class Transition<S> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SegmentImpl<S> implements Segment<S> {
         public final Object initialState;
         public final Object targetState;
@@ -158,13 +153,12 @@ public final class Transition<S> {
 
         public final int hashCode() {
             Object obj = this.initialState;
-            int hashCode = (obj != null ? obj.hashCode() : 0) * 31;
+            int iHashCode = (obj != null ? obj.hashCode() : 0) * 31;
             Object obj2 = this.targetState;
-            return hashCode + (obj2 != null ? obj2.hashCode() : 0);
+            return iHashCode + (obj2 != null ? obj2.hashCode() : 0);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionAnimationState<T, V extends AnimationVector> implements State<T> {
         public final MutableState animation$delegate;
         public final MutableState animationSpec$delegate;
@@ -183,12 +177,12 @@ public final class Transition<S> {
 
         public TransitionAnimationState(T t, V v, TwoWayConverter<T, V> twoWayConverter, String str) {
             this.typeConverter = twoWayConverter;
-            MutableState mutableStateOf$default = SnapshotStateKt.mutableStateOf$default(t);
-            this.targetValue$delegate = mutableStateOf$default;
-            Object obj = null;
-            MutableState mutableStateOf$default2 = SnapshotStateKt.mutableStateOf$default(AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7));
-            this.animationSpec$delegate = mutableStateOf$default2;
-            this.animation$delegate = SnapshotStateKt.mutableStateOf$default(new TargetBasedAnimation((FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableStateOf$default2).getValue(), twoWayConverter, t, ((SnapshotMutableStateImpl) mutableStateOf$default).getValue(), v));
+            MutableState mutableStateMutableStateOf$default = SnapshotStateKt.mutableStateOf$default(t);
+            this.targetValue$delegate = mutableStateMutableStateOf$default;
+            Object objMo781invoke = null;
+            MutableState mutableStateMutableStateOf$default2 = SnapshotStateKt.mutableStateOf$default(AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7));
+            this.animationSpec$delegate = mutableStateMutableStateOf$default2;
+            this.animation$delegate = SnapshotStateKt.mutableStateOf$default(new TargetBasedAnimation((FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableStateMutableStateOf$default2).getValue(), twoWayConverter, t, ((SnapshotMutableStateImpl) mutableStateMutableStateOf$default).getValue(), v));
             this.isFinished$delegate = SnapshotStateKt.mutableStateOf$default(Boolean.TRUE);
             this.resetSnapValue$delegate = PrimitiveSnapshotStateKt.mutableFloatStateOf(-1.0f);
             this.value$delegate = SnapshotStateKt.mutableStateOf$default(t);
@@ -196,15 +190,15 @@ public final class Transition<S> {
             this.durationNanos$delegate = SnapshotLongStateKt.mutableLongStateOf(getAnimation().getDurationNanos());
             Float f = (Float) VisibilityThresholdsKt.VisibilityThresholdMap.get(twoWayConverter);
             if (f != null) {
-                float floatValue = f.floatValue();
-                AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(t);
+                float fFloatValue = f.floatValue();
+                AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(t);
                 int size$animation_core = animationVector.getSize$animation_core();
                 for (int i = 0; i < size$animation_core; i++) {
-                    animationVector.set$animation_core(floatValue, i);
+                    animationVector.set$animation_core(fFloatValue, i);
                 }
-                obj = ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo779invoke(animationVector);
+                objMo781invoke = ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo781invoke(animationVector);
             }
-            this.interruptionSpec = AnimationSpecKt.spring$default(0.0f, 0.0f, obj, 3);
+            this.interruptionSpec = AnimationSpecKt.spring$default(0.0f, 0.0f, objMo781invoke, 3);
         }
 
         public final TargetBasedAnimation getAnimation() {
@@ -240,20 +234,18 @@ public final class Transition<S> {
             TargetBasedAnimation targetBasedAnimation = this.initialValueAnimation;
             Object obj2 = targetBasedAnimation != null ? targetBasedAnimation.mutableTargetValue : null;
             SnapshotMutableStateImpl snapshotMutableStateImpl = (SnapshotMutableStateImpl) this.targetValue$delegate;
-            boolean areEqual = Intrinsics.areEqual(obj2, snapshotMutableStateImpl.getValue());
+            boolean zAreEqual = Intrinsics.areEqual(obj2, snapshotMutableStateImpl.getValue());
             MutableLongState mutableLongState = this.durationNanos$delegate;
             MutableState mutableState = this.animation$delegate;
             AnimationSpec animationSpec = this.interruptionSpec;
-            if (areEqual) {
+            if (zAreEqual) {
                 ((SnapshotMutableStateImpl) mutableState).setValue(new TargetBasedAnimation((AnimationSpec<Object>) animationSpec, (TwoWayConverter<Object, AnimationVector>) this.typeConverter, obj, obj, this.velocityVector.newVector$animation_core()));
                 this.useOnlyInitialValue = true;
                 ((SnapshotMutableLongStateImpl) mutableLongState).setLongValue(getAnimation().getDurationNanos());
                 return;
             }
             MutableState mutableState2 = this.animationSpec$delegate;
-            if (!z || this.isSeeking) {
-                animationSpec = (FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableState2).getValue();
-            } else if (((FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableState2).getValue()) instanceof SpringSpec) {
+            if (!z || this.isSeeking || (((FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableState2).getValue()) instanceof SpringSpec)) {
                 animationSpec = (FiniteAnimationSpec) ((SnapshotMutableStateImpl) mutableState2).getValue();
             }
             Transition transition = Transition.this;
@@ -266,10 +258,10 @@ public final class Transition<S> {
             if (transition.isSeeking()) {
                 SnapshotStateList snapshotStateList = transition._animations;
                 int size = snapshotStateList.size();
-                long j = 0;
+                long jMax = 0;
                 for (int i = 0; i < size; i++) {
                     TransitionAnimationState transitionAnimationState = (TransitionAnimationState) snapshotStateList.get(i);
-                    j = Math.max(j, ((SnapshotMutableLongStateImpl) transitionAnimationState.durationNanos$delegate).getLongValue());
+                    jMax = Math.max(jMax, ((SnapshotMutableLongStateImpl) transitionAnimationState.durationNanos$delegate).getLongValue());
                     transitionAnimationState.seekTo$animation_core(0L);
                 }
                 ((SnapshotMutableStateImpl) mutableState3).setValue(Boolean.FALSE);
@@ -293,9 +285,9 @@ public final class Transition<S> {
                 }
             }
             MutableState mutableState = this.targetValue$delegate;
-            boolean areEqual = Intrinsics.areEqual(((SnapshotMutableStateImpl) mutableState).getValue(), obj);
+            boolean zAreEqual = Intrinsics.areEqual(((SnapshotMutableStateImpl) mutableState).getValue(), obj);
             MutableFloatState mutableFloatState = this.resetSnapValue$delegate;
-            if (areEqual && ((SnapshotMutableFloatStateImpl) mutableFloatState).getFloatValue() == -1.0f) {
+            if (zAreEqual && ((SnapshotMutableFloatStateImpl) mutableFloatState).getFloatValue() == -1.0f) {
                 return;
             }
             ((SnapshotMutableStateImpl) mutableState).setValue(obj);
@@ -345,6 +337,10 @@ public final class Transition<S> {
         transitionState.transitionConfigured$animation_core(this);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0099  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void animateTo$animation_core(final Object obj, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -371,131 +367,131 @@ public final class Transition<S> {
                     if (!(((SnapshotMutableLongStateImpl) this.startTimeNanos$delegate).getLongValue() != Long.MIN_VALUE) && !((Boolean) ((SnapshotMutableStateImpl) this.updateChildrenNeeded$delegate).getValue()).booleanValue()) {
                         composerImpl.startReplaceGroup(1824232411);
                         composerImpl.end(false);
-                        composerImpl.end(false);
                     }
-                }
-                composerImpl.startReplaceGroup(1822989838);
-                Object rememberedValue = composerImpl.rememberedValue();
-                Composer.Companion.getClass();
-                Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-                if (rememberedValue == composer$Companion$Empty$1) {
-                    rememberedValue = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl);
-                    composerImpl.updateRememberedValue(rememberedValue);
-                }
-                final CoroutineScope coroutineScope = (CoroutineScope) rememberedValue;
-                boolean changedInstance = composerImpl.changedInstance(coroutineScope) | ((i2 & 112) == 32);
-                Object rememberedValue2 = composerImpl.rememberedValue();
-                if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-                    rememberedValue2 = new Function1() { // from class: androidx.compose.animation.core.Transition$animateTo$1$1
+                    composerImpl.end(false);
+                } else {
+                    composerImpl.startReplaceGroup(1822989838);
+                    Object objRememberedValue = composerImpl.rememberedValue();
+                    Composer.Companion.getClass();
+                    Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
+                    if (objRememberedValue == composer$Companion$Empty$1) {
+                        objRememberedValue = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl);
+                        composerImpl.updateRememberedValue(objRememberedValue);
+                    }
+                    final CoroutineScope coroutineScope = (CoroutineScope) objRememberedValue;
+                    boolean zChangedInstance = composerImpl.changedInstance(coroutineScope) | ((i2 & 112) == 32);
+                    Object objRememberedValue2 = composerImpl.rememberedValue();
+                    if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+                        objRememberedValue2 = new Function1() { // from class: androidx.compose.animation.core.Transition$animateTo$1$1
 
-                        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
-                        /* renamed from: androidx.compose.animation.core.Transition$animateTo$1$1$1, reason: invalid class name */
-                        final class AnonymousClass1 extends SuspendLambda implements Function2 {
-                            float F$0;
-                            private /* synthetic */ Object L$0;
-                            int label;
-                            final /* synthetic */ Transition<Object> this$0;
+                            /* renamed from: androidx.compose.animation.core.Transition$animateTo$1$1$1, reason: invalid class name */
+                            final class AnonymousClass1 extends SuspendLambda implements Function2 {
+                                float F$0;
+                                private /* synthetic */ Object L$0;
+                                int label;
+                                final /* synthetic */ Transition<Object> this$0;
+
+                                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                                public AnonymousClass1(Transition<Object> transition, Continuation continuation) {
+                                    super(2, continuation);
+                                    this.this$0 = transition;
+                                }
+
+                                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                public final Continuation create(Object obj, Continuation continuation) {
+                                    AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.this$0, continuation);
+                                    anonymousClass1.L$0 = obj;
+                                    return anonymousClass1;
+                                }
+
+                                @Override // kotlin.jvm.functions.Function2
+                                public final Object invoke(Object obj, Object obj2) {
+                                    return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                                }
+
+                                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                public final Object invokeSuspend(Object obj) {
+                                    final float durationScale;
+                                    CoroutineScope coroutineScope;
+                                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                    int i = this.label;
+                                    if (i == 0) {
+                                        ResultKt.throwOnFailure(obj);
+                                        CoroutineScope coroutineScope2 = (CoroutineScope) this.L$0;
+                                        durationScale = SuspendAnimationKt.getDurationScale(coroutineScope2.getCoroutineContext());
+                                        coroutineScope = coroutineScope2;
+                                    } else {
+                                        if (i != 1) {
+                                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                        }
+                                        durationScale = this.F$0;
+                                        coroutineScope = (CoroutineScope) this.L$0;
+                                        ResultKt.throwOnFailure(obj);
+                                    }
+                                    while (CoroutineScopeKt.isActive(coroutineScope)) {
+                                        final Transition<Object> transition = this.this$0;
+                                        Function1 function1 = new Function1() { // from class: androidx.compose.animation.core.Transition.animateTo.1.1.1.1
+                                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                                            {
+                                                super(1);
+                                            }
+
+                                            @Override // kotlin.jvm.functions.Function1
+                                            /* renamed from: invoke */
+                                            public final Object mo781invoke(Object obj2) {
+                                                long jLongValue = ((Number) obj2).longValue();
+                                                if (!transition.isSeeking()) {
+                                                    Transition<Object> transition2 = transition;
+                                                    float f = durationScale;
+                                                    long longValue = ((SnapshotMutableLongStateImpl) transition2.startTimeNanos$delegate).getLongValue();
+                                                    MutableLongState mutableLongState = transition2.startTimeNanos$delegate;
+                                                    if (longValue == Long.MIN_VALUE) {
+                                                        ((SnapshotMutableLongStateImpl) mutableLongState).setLongValue(jLongValue);
+                                                        ((SnapshotMutableStateImpl) transition2.transitionState.isRunning$delegate).setValue(Boolean.TRUE);
+                                                    }
+                                                    long longValue2 = jLongValue - ((SnapshotMutableLongStateImpl) mutableLongState).getLongValue();
+                                                    if (f != 0.0f) {
+                                                        longValue2 = MathKt__MathJVMKt.roundToLong(longValue2 / f);
+                                                    }
+                                                    transition2.setPlayTimeNanos(longValue2);
+                                                    transition2.onFrame$animation_core(longValue2, f == 0.0f);
+                                                }
+                                                return Unit.INSTANCE;
+                                            }
+                                        };
+                                        this.L$0 = coroutineScope;
+                                        this.F$0 = durationScale;
+                                        this.label = 1;
+                                        if (MonotonicFrameClockKt.getMonotonicFrameClock(getContext()).withFrameNanos(function1, this) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                    return Unit.INSTANCE;
+                                }
+                            }
 
                             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                            public AnonymousClass1(Transition<Object> transition, Continuation continuation) {
-                                super(2, continuation);
-                                this.this$0 = transition;
+                            {
+                                super(1);
                             }
 
-                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-                            public final Continuation create(Object obj, Continuation continuation) {
-                                AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.this$0, continuation);
-                                anonymousClass1.L$0 = obj;
-                                return anonymousClass1;
-                            }
-
-                            @Override // kotlin.jvm.functions.Function2
-                            public final Object invoke(Object obj, Object obj2) {
-                                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
-                            }
-
-                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-                            public final Object invokeSuspend(Object obj) {
-                                final float durationScale;
-                                CoroutineScope coroutineScope;
-                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-                                int i = this.label;
-                                if (i == 0) {
-                                    ResultKt.throwOnFailure(obj);
-                                    CoroutineScope coroutineScope2 = (CoroutineScope) this.L$0;
-                                    durationScale = SuspendAnimationKt.getDurationScale(coroutineScope2.getCoroutineContext());
-                                    coroutineScope = coroutineScope2;
-                                } else {
-                                    if (i != 1) {
-                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            @Override // kotlin.jvm.functions.Function1
+                            /* renamed from: invoke */
+                            public final Object mo781invoke(Object obj2) {
+                                BuildersKt.launch$default(coroutineScope, null, CoroutineStart.UNDISPATCHED, new AnonymousClass1(this, null), 1);
+                                return new DisposableEffectResult() { // from class: androidx.compose.animation.core.Transition$animateTo$1$1$invoke$$inlined$onDispose$1
+                                    @Override // androidx.compose.runtime.DisposableEffectResult
+                                    public final void dispose() {
                                     }
-                                    durationScale = this.F$0;
-                                    coroutineScope = (CoroutineScope) this.L$0;
-                                    ResultKt.throwOnFailure(obj);
-                                }
-                                while (CoroutineScopeKt.isActive(coroutineScope)) {
-                                    final Transition<Object> transition = this.this$0;
-                                    Function1 function1 = new Function1() { // from class: androidx.compose.animation.core.Transition.animateTo.1.1.1.1
-                                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                                        {
-                                            super(1);
-                                        }
-
-                                        @Override // kotlin.jvm.functions.Function1
-                                        /* renamed from: invoke */
-                                        public final Object mo779invoke(Object obj2) {
-                                            long longValue = ((Number) obj2).longValue();
-                                            if (!transition.isSeeking()) {
-                                                Transition<Object> transition2 = transition;
-                                                float f = durationScale;
-                                                long longValue2 = ((SnapshotMutableLongStateImpl) transition2.startTimeNanos$delegate).getLongValue();
-                                                MutableLongState mutableLongState = transition2.startTimeNanos$delegate;
-                                                if (longValue2 == Long.MIN_VALUE) {
-                                                    ((SnapshotMutableLongStateImpl) mutableLongState).setLongValue(longValue);
-                                                    ((SnapshotMutableStateImpl) transition2.transitionState.isRunning$delegate).setValue(Boolean.TRUE);
-                                                }
-                                                long longValue3 = longValue - ((SnapshotMutableLongStateImpl) mutableLongState).getLongValue();
-                                                if (f != 0.0f) {
-                                                    longValue3 = MathKt__MathJVMKt.roundToLong(longValue3 / f);
-                                                }
-                                                transition2.setPlayTimeNanos(longValue3);
-                                                transition2.onFrame$animation_core(longValue3, f == 0.0f);
-                                            }
-                                            return Unit.INSTANCE;
-                                        }
-                                    };
-                                    this.L$0 = coroutineScope;
-                                    this.F$0 = durationScale;
-                                    this.label = 1;
-                                    if (MonotonicFrameClockKt.getMonotonicFrameClock(getContext()).withFrameNanos(function1, this) == coroutineSingletons) {
-                                        return coroutineSingletons;
-                                    }
-                                }
-                                return Unit.INSTANCE;
+                                };
                             }
-                        }
-
-                        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                        {
-                            super(1);
-                        }
-
-                        @Override // kotlin.jvm.functions.Function1
-                        /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj2) {
-                            BuildersKt.launch$default(CoroutineScope.this, null, CoroutineStart.UNDISPATCHED, new AnonymousClass1(this, null), 1);
-                            return new DisposableEffectResult() { // from class: androidx.compose.animation.core.Transition$animateTo$1$1$invoke$$inlined$onDispose$1
-                                @Override // androidx.compose.runtime.DisposableEffectResult
-                                public final void dispose() {
-                                }
-                            };
-                        }
-                    };
-                    composerImpl.updateRememberedValue(rememberedValue2);
+                        };
+                        composerImpl.updateRememberedValue(objRememberedValue2);
+                    }
+                    EffectsKt.DisposableEffect(coroutineScope, this, (Function1) objRememberedValue2, composerImpl);
+                    composerImpl.end(false);
+                    composerImpl.end(false);
                 }
-                EffectsKt.DisposableEffect(coroutineScope, this, (Function1) rememberedValue2, composerImpl);
-                composerImpl.end(false);
-                composerImpl.end(false);
             }
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -503,9 +499,9 @@ public final class Transition<S> {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(this) { // from class: androidx.compose.animation.core.Transition$animateTo$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(this) { // from class: androidx.compose.animation.core.Transition$animateTo$2
                 final /* synthetic */ Transition<Object> $tmp1_rcvr;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -527,16 +523,16 @@ public final class Transition<S> {
     public final long calculateTotalDurationNanos() {
         SnapshotStateList snapshotStateList = this._animations;
         int size = snapshotStateList.size();
-        long j = 0;
+        long jMax = 0;
         for (int i = 0; i < size; i++) {
-            j = Math.max(j, ((SnapshotMutableLongStateImpl) ((TransitionAnimationState) snapshotStateList.get(i)).durationNanos$delegate).getLongValue());
+            jMax = Math.max(jMax, ((SnapshotMutableLongStateImpl) ((TransitionAnimationState) snapshotStateList.get(i)).durationNanos$delegate).getLongValue());
         }
         SnapshotStateList snapshotStateList2 = this._transitions;
         int size2 = snapshotStateList2.size();
         for (int i2 = 0; i2 < size2; i2++) {
-            j = Math.max(j, ((Transition) snapshotStateList2.get(i2)).calculateTotalDurationNanos());
+            jMax = Math.max(jMax, ((Transition) snapshotStateList2.get(i2)).calculateTotalDurationNanos());
         }
-        return j;
+        return jMax;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -608,9 +604,9 @@ public final class Transition<S> {
         boolean z2 = true;
         for (int i = 0; i < size; i++) {
             TransitionAnimationState transitionAnimationState = (TransitionAnimationState) snapshotStateList.get(i);
-            boolean booleanValue = ((Boolean) ((SnapshotMutableStateImpl) transitionAnimationState.isFinished$delegate).getValue()).booleanValue();
+            boolean zBooleanValue = ((Boolean) ((SnapshotMutableStateImpl) transitionAnimationState.isFinished$delegate).getValue()).booleanValue();
             MutableState mutableState = transitionAnimationState.isFinished$delegate;
-            if (!booleanValue) {
+            if (!zBooleanValue) {
                 long durationNanos = z ? transitionAnimationState.getAnimation().getDurationNanos() : j;
                 transitionAnimationState.setValue$animation_core(transitionAnimationState.getAnimation().getValueFromNanos(durationNanos));
                 transitionAnimationState.velocityVector = transitionAnimationState.getAnimation().getVelocityVectorFromNanos(durationNanos);
@@ -701,9 +697,9 @@ public final class Transition<S> {
         ((SnapshotMutableLongStateImpl) this.startTimeNanos$delegate).setLongValue(Long.MIN_VALUE);
         TransitionState transitionState = this.transitionState;
         ((SnapshotMutableStateImpl) transitionState.isRunning$delegate).setValue(Boolean.FALSE);
-        boolean isSeeking = isSeeking();
+        boolean zIsSeeking = isSeeking();
         MutableState mutableState = this.targetState$delegate;
-        if (!isSeeking || !Intrinsics.areEqual(transitionState.getCurrentState(), obj) || !Intrinsics.areEqual(((SnapshotMutableStateImpl) mutableState).getValue(), obj2)) {
+        if (!zIsSeeking || !Intrinsics.areEqual(transitionState.getCurrentState(), obj) || !Intrinsics.areEqual(((SnapshotMutableStateImpl) mutableState).getValue(), obj2)) {
             if (!Intrinsics.areEqual(transitionState.getCurrentState(), obj) && (transitionState instanceof MutableTransitionState)) {
                 transitionState.setCurrentState$animation_core(obj);
             }
@@ -793,8 +789,8 @@ public final class Transition<S> {
             TransitionAnimationState transitionAnimationState = (TransitionAnimationState) snapshotStateList.get(i);
             SeekableTransitionState.SeekingAnimationState seekingAnimationState = transitionAnimationState.initialValueState;
             if (seekingAnimationState != null && (targetBasedAnimation = transitionAnimationState.initialValueAnimation) != null) {
-                long roundToLong = MathKt__MathJVMKt.roundToLong(seekingAnimationState.durationNanos * seekingAnimationState.value);
-                Object valueFromNanos = targetBasedAnimation.getValueFromNanos(roundToLong);
+                long jRoundToLong = MathKt__MathJVMKt.roundToLong(seekingAnimationState.durationNanos * seekingAnimationState.value);
+                Object valueFromNanos = targetBasedAnimation.getValueFromNanos(jRoundToLong);
                 if (transitionAnimationState.useOnlyInitialValue) {
                     transitionAnimationState.getAnimation().setMutableTargetValue$animation_core(valueFromNanos);
                 }
@@ -805,7 +801,7 @@ public final class Transition<S> {
                 } else {
                     transitionAnimationState.seekTo$animation_core(Transition.this.getPlayTimeNanos());
                 }
-                if (roundToLong >= seekingAnimationState.durationNanos) {
+                if (jRoundToLong >= seekingAnimationState.durationNanos) {
                     transitionAnimationState.initialValueState = null;
                     transitionAnimationState.initialValueAnimation = null;
                 } else {

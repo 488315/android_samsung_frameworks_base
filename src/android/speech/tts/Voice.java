@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.android.internal.logging.nano.MetricsProto;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -68,7 +69,7 @@ public class Voice implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mName);
         parcel.writeSerializable(this.mLocale);
         parcel.writeInt(this.mQuality);
@@ -121,11 +122,11 @@ public class Voice implements Parcelable {
 
     public int hashCode() {
         Set<String> set = this.mFeatures;
-        int hashCode = ((((set == null ? 0 : set.hashCode()) + 31) * 31) + this.mLatency) * 31;
+        int iHashCode = ((((set == null ? 0 : set.hashCode()) + 31) * 31) + this.mLatency) * 31;
         Locale locale = this.mLocale;
-        int hashCode2 = (hashCode + (locale == null ? 0 : locale.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (locale == null ? 0 : locale.hashCode())) * 31;
         String str = this.mName;
-        return ((((hashCode2 + (str != null ? str.hashCode() : 0)) * 31) + this.mQuality) * 31) + (this.mRequiresNetworkConnection ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+        return ((((iHashCode2 + (str != null ? str.hashCode() : 0)) * 31) + this.mQuality) * 31) + (this.mRequiresNetworkConnection ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
     }
 
     public boolean equals(Object obj) {

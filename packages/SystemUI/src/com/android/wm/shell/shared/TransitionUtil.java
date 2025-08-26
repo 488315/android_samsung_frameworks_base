@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TransitionUtil {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LeafTaskFilter implements Predicate {
         public final SparseBooleanArray mChildTaskTargets = new SparseBooleanArray();
 
@@ -41,72 +39,70 @@ public class TransitionUtil {
         if (change.getParent() != null && (change.getFlags() & 2) != 0 && (!CoreRune.FW_SHELL_TRANSITION_BUG_FIX || ((transitionInfo.getType() == 11 && !transitionInfo.isKeyguardGoingAway()) || (transitionInfo.getFlags() & 47360) == 0))) {
             return change.getLeash();
         }
-        int rootIndexFor = rootIndexFor(change, transitionInfo);
-        SurfaceControl build = new SurfaceControl.Builder().setName(change.getLeash().toString() + "_transition-leash").setContainerLayer().setHidden(false).setParent(transitionInfo.getRoot(rootIndexFor).getLeash()).build();
-        int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, i);
-        boolean isOpeningType = isOpeningType(transitionInfo.getType());
+        int iRootIndexFor = rootIndexFor(change, transitionInfo);
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName(change.getLeash().toString() + "_transition-leash").setContainerLayer().setHidden(false).setParent(transitionInfo.getRoot(iRootIndexFor).getLeash()).build();
+        int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, i);
+        boolean zIsOpeningType = isOpeningType(transitionInfo.getType());
         int size = transitionInfo.getChanges().size();
         int mode = change.getMode();
-        transaction.reparent(build, transitionInfo.getRoot(rootIndexFor(change, transitionInfo)).getLeash());
+        transaction.reparent(surfaceControlBuild, transitionInfo.getRoot(rootIndexFor(change, transitionInfo)).getLeash());
         Rect endAbsBounds = mode == 1 ? change.getEndAbsBounds() : change.getStartAbsBounds();
-        transaction.setPosition(build, endAbsBounds.left - transitionInfo.getRoot(r5).getOffset().x, endAbsBounds.top - transitionInfo.getRoot(r5).getOffset().y);
+        transaction.setPosition(surfaceControlBuild, endAbsBounds.left - transitionInfo.getRoot(r5).getOffset().x, endAbsBounds.top - transitionInfo.getRoot(r5).getOffset().y);
         if (isDividerBar(change)) {
             if (isOpeningType(mode)) {
-                transaction.setAlpha(build, 0.0f);
+                transaction.setAlpha(surfaceControlBuild, 0.0f);
             }
-            transaction.setPosition(build, 0.0f, 0.0f);
-            transaction.setLayer(build, Integer.MAX_VALUE);
+            transaction.setPosition(surfaceControlBuild, 0.0f, 0.0f);
+            transaction.setLayer(surfaceControlBuild, Integer.MAX_VALUE);
         } else {
             if (isDimLayer(change)) {
-                transaction.setPosition(build, 0.0f, 0.0f);
-                transaction.setCrop(build, change.getEndAbsBounds());
+                transaction.setPosition(surfaceControlBuild, 0.0f, 0.0f);
+                transaction.setCrop(surfaceControlBuild, change.getEndAbsBounds());
             }
             if (CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY && isTransientLaunchOverlay(change)) {
-                transaction.setAlpha(build, 0.0f);
-                transaction.setPosition(build, 0.0f, 0.0f);
+                transaction.setAlpha(surfaceControlBuild, 0.0f);
+                transaction.setPosition(surfaceControlBuild, 0.0f, 0.0f);
             } else {
                 if ((change.getFlags2() & 1) != 0) {
-                    transaction.setAlpha(build, 0.0f);
+                    transaction.setAlpha(surfaceControlBuild, 0.0f);
                 }
                 if ((change.getFlags() & 2) != 0) {
                     if (mode == 1 || mode == 3) {
-                        transaction.setLayer(build, (transitionInfo.getChanges().size() + (-size)) - m);
+                        transaction.setLayer(surfaceControlBuild, (transitionInfo.getChanges().size() + (-size)) - iM);
                     } else {
-                        transaction.setLayer(build, (-size) - m);
+                        transaction.setLayer(surfaceControlBuild, (-size) - iM);
                     }
                 } else if (isOpeningType(mode)) {
-                    if (isOpeningType) {
-                        transaction.setLayer(build, (transitionInfo.getChanges().size() + size) - m);
+                    if (zIsOpeningType) {
+                        transaction.setLayer(surfaceControlBuild, (transitionInfo.getChanges().size() + size) - iM);
                         if ((change.getFlags() & 8) == 0) {
-                            transaction.setAlpha(build, 0.0f);
+                            transaction.setAlpha(surfaceControlBuild, 0.0f);
                         }
                     } else {
-                        transaction.setLayer(build, size - m);
+                        transaction.setLayer(surfaceControlBuild, size - iM);
                         if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX && isHomeTask(change)) {
-                            int m2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+                            int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
                             while (true) {
-                                if (m2 < 0) {
-                                    transaction.setAlpha(build, 0.0f);
+                                if (iM2 < 0) {
+                                    transaction.setAlpha(surfaceControlBuild, 0.0f);
                                     break;
                                 }
-                                TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m2);
+                                TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM2);
                                 if (isWallpaper(change2) && isOpenOrCloseMode(change2.getMode())) {
                                     break;
                                 }
-                                m2--;
+                                iM2--;
                             }
                         }
                     }
-                } else if (!isClosingType(mode)) {
-                    transaction.setLayer(build, (transitionInfo.getChanges().size() + size) - m);
-                } else if (isOpeningType) {
-                    transaction.setLayer(build, size - m);
+                } else if (isClosingType(mode) && zIsOpeningType) {
+                    transaction.setLayer(surfaceControlBuild, size - iM);
                 } else {
-                    transaction.setLayer(build, (transitionInfo.getChanges().size() + size) - m);
+                    transaction.setLayer(surfaceControlBuild, (transitionInfo.getChanges().size() + size) - iM);
                 }
             }
         }
-        transaction.reparent(change.getLeash(), build);
+        transaction.reparent(change.getLeash(), surfaceControlBuild);
         if (!isDimLayer(change)) {
             transaction.setAlpha(change.getLeash(), 1.0f);
         }
@@ -115,7 +111,7 @@ public class TransitionUtil {
         }
         transaction.setLayer(change.getLeash(), 0);
         transaction.show(change.getLeash());
-        return build;
+        return surfaceControlBuild;
     }
 
     public static ArrayList getMergeableTasks(TransitionInfo transitionInfo) {
@@ -133,8 +129,8 @@ public class TransitionUtil {
     }
 
     public static boolean hasDisplayChange(TransitionInfo transitionInfo) {
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change.getMode() == 6 && change.hasFlags(32)) {
                 return true;
             }
@@ -186,7 +182,10 @@ public class TransitionUtil {
     }
 
     public static boolean isOrderOnly(TransitionInfo.Change change) {
-        return !(CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && change.getResumedAffordance()) && change.getMode() == 6 && (change.getFlags() & 1048576) != 0 && change.getStartAbsBounds().equals(change.getEndAbsBounds()) && (change.getLastParent() == null || change.getLastParent().equals(change.getParent()));
+        if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && change.getResumedAffordance()) {
+            return false;
+        }
+        return !(change.getConfiguration().windowConfiguration.getWindowingMode() == 5 && change.getConfiguration().windowConfiguration.isAlwaysOnTop()) && change.getMode() == 6 && (change.getFlags() & 1048576) != 0 && change.getStartAbsBounds().equals(change.getEndAbsBounds()) && (change.getLastParent() == null || change.getLastParent().equals(change.getParent()));
     }
 
     public static boolean isTransientLaunchOverlay(TransitionInfo.Change change) {
@@ -231,21 +230,21 @@ public class TransitionUtil {
     }
 
     public static RemoteAnimationTarget newTarget(TransitionInfo.Change change, int i, boolean z, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, ArrayMap arrayMap) {
-        SurfaceControl createLeash = createLeash(transitionInfo, change, i, transaction);
+        SurfaceControl surfaceControlCreateLeash = createLeash(transitionInfo, change, i, transaction);
         if (arrayMap != null) {
-            arrayMap.put(change.getLeash(), createLeash);
+            arrayMap.put(change.getLeash(), surfaceControlCreateLeash);
         }
-        return newTarget(change, i, createLeash, z);
+        return newTarget(change, i, surfaceControlCreateLeash, z);
     }
 
     public static int rootIndexFor(TransitionInfo.Change change, TransitionInfo transitionInfo) {
-        int findRootIndex = transitionInfo.findRootIndex(change.getEndDisplayId());
-        if (findRootIndex >= 0) {
-            return findRootIndex;
+        int iFindRootIndex = transitionInfo.findRootIndex(change.getEndDisplayId());
+        if (iFindRootIndex >= 0) {
+            return iFindRootIndex;
         }
-        int findRootIndex2 = transitionInfo.findRootIndex(change.getStartDisplayId());
-        if (findRootIndex2 >= 0) {
-            return findRootIndex2;
+        int iFindRootIndex2 = transitionInfo.findRootIndex(change.getStartDisplayId());
+        if (iFindRootIndex2 >= 0) {
+            return iFindRootIndex2;
         }
         return 0;
     }

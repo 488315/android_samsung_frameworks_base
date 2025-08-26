@@ -11,7 +11,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = PluginNotiCenter.ACTION, version = PluginNotiCenter.VERSION)
 /* loaded from: classes4.dex */
 public interface PluginNotiCenter extends SPlugin {
@@ -20,7 +19,6 @@ public interface PluginNotiCenter extends SPlugin {
     public static final int MINOR_VERSION = 1;
     public static final int VERSION = 9001;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onChangedVisibilityOnKeyguard(boolean z);
 

@@ -80,9 +80,9 @@ public interface IUsbGadget extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUsbGadget)) {
-                return (IUsbGadget) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUsbGadget)) {
+                return (IUsbGadget) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,27 +108,27 @@ public interface IUsbGadget extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                IUsbGadgetCallback asInterface = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
-                long readLong2 = parcel.readLong();
-                long readLong3 = parcel.readLong();
+                long j = parcel.readLong();
+                IUsbGadgetCallback iUsbGadgetCallbackAsInterface = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
+                long j2 = parcel.readLong();
+                long j3 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                setCurrentUsbFunctions(readLong, asInterface, readLong2, readLong3);
+                setCurrentUsbFunctions(j, iUsbGadgetCallbackAsInterface, j2, j3);
             } else if (i == 2) {
-                IUsbGadgetCallback asInterface2 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
-                long readLong4 = parcel.readLong();
+                IUsbGadgetCallback iUsbGadgetCallbackAsInterface2 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
+                long j4 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                getCurrentUsbFunctions(asInterface2, readLong4);
+                getCurrentUsbFunctions(iUsbGadgetCallbackAsInterface2, j4);
             } else if (i == 3) {
-                IUsbGadgetCallback asInterface3 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
-                long readLong5 = parcel.readLong();
+                IUsbGadgetCallback iUsbGadgetCallbackAsInterface3 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
+                long j5 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                getUsbSpeed(asInterface3, readLong5);
+                getUsbSpeed(iUsbGadgetCallbackAsInterface3, j5);
             } else if (i == 4) {
-                IUsbGadgetCallback asInterface4 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
-                long readLong6 = parcel.readLong();
+                IUsbGadgetCallback iUsbGadgetCallbackAsInterface4 = IUsbGadgetCallback.Stub.asInterface(parcel.readStrongBinder());
+                long j6 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                reset(asInterface4, readLong6);
+                reset(iUsbGadgetCallbackAsInterface4, j6);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -155,83 +155,83 @@ public interface IUsbGadget extends IInterface {
 
             @Override // android.hardware.usb.gadget.IUsbGadget
             public void setCurrentUsbFunctions(long j, IUsbGadgetCallback iUsbGadgetCallback, long j2, long j3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iUsbGadgetCallback);
-                    obtain.writeLong(j2);
-                    obtain.writeLong(j3);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iUsbGadgetCallback);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeLong(j3);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCurrentUsbFunctions is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadget
             public void getCurrentUsbFunctions(IUsbGadgetCallback iUsbGadgetCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsbGadgetCallback);
-                    obtain.writeLong(j);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsbGadgetCallback);
+                    parcelObtain.writeLong(j);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCurrentUsbFunctions is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadget
             public void getUsbSpeed(IUsbGadgetCallback iUsbGadgetCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsbGadgetCallback);
-                    obtain.writeLong(j);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsbGadgetCallback);
+                    parcelObtain.writeLong(j);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getUsbSpeed is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadget
             public void reset(IUsbGadgetCallback iUsbGadgetCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsbGadgetCallback);
-                    obtain.writeLong(j);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsbGadgetCallback);
+                    parcelObtain.writeLong(j);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method reset is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadget
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -240,18 +240,18 @@ public interface IUsbGadget extends IInterface {
             @Override // android.hardware.usb.gadget.IUsbGadget
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

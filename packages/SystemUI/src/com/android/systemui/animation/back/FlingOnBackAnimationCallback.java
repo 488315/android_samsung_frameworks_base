@@ -12,7 +12,6 @@ import com.android.internal.dynamicanimation.animation.FlingAnimation;
 import com.android.internal.dynamicanimation.animation.FloatValueHolder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FlingOnBackAnimationCallback implements OnBackAnimationCallback {
     public FlingAnimation backInvokedFlingAnim;
@@ -23,6 +22,7 @@ public abstract class FlingOnBackAnimationCallback implements OnBackAnimationCal
     public final Interpolator progressInterpolator;
     public final VelocityTracker velocityTracker;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public FlingOnBackAnimationCallback() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -103,7 +103,7 @@ public abstract class FlingOnBackAnimationCallback implements OnBackAnimationCal
         this.velocityTracker = VelocityTracker.obtain();
         this.backInvokedFlingUpdateListener = new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.animation.back.FlingOnBackAnimationCallback$backInvokedFlingUpdateListener$1
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                FlingOnBackAnimationCallback flingOnBackAnimationCallback = FlingOnBackAnimationCallback.this;
+                FlingOnBackAnimationCallback flingOnBackAnimationCallback = this.this$0;
                 BackEvent backEvent = flingOnBackAnimationCallback.lastBackEvent;
                 if (backEvent != null) {
                     flingOnBackAnimationCallback.onBackProgressedCompat(new BackEvent(backEvent.getTouchX(), backEvent.getTouchY(), f / 100.0f, backEvent.getSwipeEdge(), backEvent.getFrameTimeMillis()));
@@ -112,8 +112,8 @@ public abstract class FlingOnBackAnimationCallback implements OnBackAnimationCal
         };
         this.backInvokedFlingEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.animation.back.FlingOnBackAnimationCallback$backInvokedFlingEndListener$1
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-                FlingOnBackAnimationCallback.this.onBackInvokedCompat();
-                FlingOnBackAnimationCallback.this.reset();
+                this.this$0.onBackInvokedCompat();
+                this.this$0.reset();
             }
         };
     }

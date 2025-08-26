@@ -1,6 +1,5 @@
 package com.samsung.android.sivs.ai.sdkcommon.asr;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SpeechRecognitionConst {
     public static final String SERVICE_BIND_ACTION = "android.intellivoiceservice.speech.RecognitionService";
@@ -18,7 +17,6 @@ public class SpeechRecognitionConst {
     public static final Integer SINCE_AUDIO_TO_TRANSLATION = 7;
     public static final Integer SINCE_FEATURE_FAST_SOUND_RECOGNITION = 7;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Key {
         public static final String ALTERNATIVE_LOCALE = "preferredLocale";
         public static final String APP_SERVER_TYPE = "app_server_type";
@@ -67,7 +65,6 @@ public class SpeechRecognitionConst {
         public static final String VOICE_FILTER_ID = "voice_filter_id";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Method {
         public static final String CHECK_AVAILABILITY = "check_availability";
         public static final String CHECK_SPEAKER_DIARIZATION_LANGUAGE_SUPPORT = "check_speaker_diarization_language_support";
@@ -80,7 +77,6 @@ public class SpeechRecognitionConst {
         public static final String GET_TARGET_LOCAL_RESOURCE_PACKAGE_NAME = "get_target_local_package_name";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public @interface ServerType {
         public static final int DEV_ENG = 3;
         public static final int DEV_INT = 2;

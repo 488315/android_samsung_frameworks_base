@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class GeneratedMessageLite extends AbstractMessageLite {
     private static final int MEMOIZED_SERIALIZED_SIZE_MASK = Integer.MAX_VALUE;
@@ -20,7 +19,6 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     private int memoizedSerializedSize = -1;
     protected UnknownFieldSetLite unknownFields = UnknownFieldSetLite.DEFAULT_INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultInstanceBasedParser extends AbstractParser {
         public final GeneratedMessageLite defaultInstance;
 
@@ -29,12 +27,10 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ExtendableMessage extends GeneratedMessageLite implements MessageLiteOrBuilder {
         protected FieldSet extensions = FieldSet.DEFAULT_INSTANCE;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ExtensionDescriptor implements Comparable {
         public final Internal.EnumLiteMap enumTypeMap;
         public final boolean isPacked;
@@ -56,7 +52,6 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GeneratedExtension extends ExtensionLite {
         public final Object defaultValue;
         public final ExtensionDescriptor descriptor;
@@ -75,7 +70,6 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum MethodToInvoke {
         GET_MEMOIZED_IS_INITIALIZED,
         SET_MEMOIZED_IS_INITIALIZED,
@@ -86,7 +80,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         GET_PARSER
     }
 
-    public static GeneratedMessageLite getDefaultInstance(Class cls) {
+    public static GeneratedMessageLite getDefaultInstance(Class cls) throws ClassNotFoundException {
         GeneratedMessageLite generatedMessageLite = defaultInstanceMap.get(cls);
         if (generatedMessageLite == null) {
             try {
@@ -131,30 +125,30 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         return protobufList.mutableCopyWithCapacity(size == 0 ? 10 : size * 2);
     }
 
-    public static GeneratedMessageLite parsePartialFrom(GeneratedMessageLite generatedMessageLite, CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) {
-        GeneratedMessageLite newMutableInstance$1 = generatedMessageLite.newMutableInstance$1();
+    public static GeneratedMessageLite parsePartialFrom(GeneratedMessageLite generatedMessageLite, CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException {
+        GeneratedMessageLite generatedMessageLiteNewMutableInstance$1 = generatedMessageLite.newMutableInstance$1();
         try {
-            Schema schemaFor = Protobuf.INSTANCE.schemaFor(newMutableInstance$1);
-            schemaFor.mergeFrom(newMutableInstance$1, CodedInputStreamReader.forCodedInput(codedInputStream), extensionRegistryLite);
-            schemaFor.makeImmutable(newMutableInstance$1);
-            return newMutableInstance$1;
+            Schema schemaSchemaFor = Protobuf.INSTANCE.schemaFor(generatedMessageLiteNewMutableInstance$1);
+            schemaSchemaFor.mergeFrom(generatedMessageLiteNewMutableInstance$1, CodedInputStreamReader.forCodedInput(codedInputStream), extensionRegistryLite);
+            schemaSchemaFor.makeImmutable(generatedMessageLiteNewMutableInstance$1);
+            return generatedMessageLiteNewMutableInstance$1;
         } catch (InvalidProtocolBufferException e) {
             e = e;
             if (e.getThrownFromInputStream()) {
                 e = new InvalidProtocolBufferException((IOException) e);
             }
-            e.setUnfinishedMessage(newMutableInstance$1);
+            e.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw e;
         } catch (UninitializedMessageException e2) {
             InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(e2.getMessage());
-            invalidProtocolBufferException.setUnfinishedMessage(newMutableInstance$1);
+            invalidProtocolBufferException.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException;
         } catch (IOException e3) {
             if (e3.getCause() instanceof InvalidProtocolBufferException) {
                 throw ((InvalidProtocolBufferException) e3.getCause());
             }
             InvalidProtocolBufferException invalidProtocolBufferException2 = new InvalidProtocolBufferException(e3);
-            invalidProtocolBufferException2.setUnfinishedMessage(newMutableInstance$1);
+            invalidProtocolBufferException2.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException2;
         } catch (RuntimeException e4) {
             if (e4.getCause() instanceof InvalidProtocolBufferException) {
@@ -269,11 +263,11 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     }
 
     public final String toString() {
-        String obj = super.toString();
+        String string = super.toString();
         char[] cArr = MessageLiteToString.INDENT_BUFFER;
         StringBuilder sb = new StringBuilder();
         sb.append("# ");
-        sb.append(obj);
+        sb.append(string);
         MessageLiteToString.reflectivePrintWithIndent(this, sb, 0);
         return sb.toString();
     }
@@ -285,23 +279,22 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     }
 
     public static final boolean isInitialized(GeneratedMessageLite generatedMessageLite, boolean z) {
-        byte byteValue = ((Byte) generatedMessageLite.dynamicMethod(MethodToInvoke.GET_MEMOIZED_IS_INITIALIZED)).byteValue();
-        if (byteValue == 1) {
+        byte bByteValue = ((Byte) generatedMessageLite.dynamicMethod(MethodToInvoke.GET_MEMOIZED_IS_INITIALIZED)).byteValue();
+        if (bByteValue == 1) {
             return true;
         }
-        if (byteValue == 0) {
+        if (bByteValue == 0) {
             return false;
         }
         Protobuf protobuf = Protobuf.INSTANCE;
         protobuf.getClass();
-        boolean isInitialized = protobuf.schemaFor((Class) generatedMessageLite.getClass()).isInitialized(generatedMessageLite);
+        boolean zIsInitialized = protobuf.schemaFor((Class) generatedMessageLite.getClass()).isInitialized(generatedMessageLite);
         if (z) {
             generatedMessageLite.dynamicMethod(MethodToInvoke.SET_MEMOIZED_IS_INITIALIZED);
         }
-        return isInitialized;
+        return zIsInitialized;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Builder extends AbstractMessageLite.Builder {
         public final GeneratedMessageLite defaultInstance;
         public GeneratedMessageLite instance;
@@ -319,12 +312,12 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
         }
 
         public final GeneratedMessageLite build() {
-            GeneratedMessageLite buildPartial = buildPartial();
-            buildPartial.getClass();
-            if (GeneratedMessageLite.isInitialized(buildPartial, true)) {
-                return buildPartial;
+            GeneratedMessageLite generatedMessageLiteBuildPartial = buildPartial();
+            generatedMessageLiteBuildPartial.getClass();
+            if (GeneratedMessageLite.isInitialized(generatedMessageLiteBuildPartial, true)) {
+                return generatedMessageLiteBuildPartial;
             }
-            throw new UninitializedMessageException(buildPartial);
+            throw new UninitializedMessageException(generatedMessageLiteBuildPartial);
         }
 
         public final GeneratedMessageLite buildPartial() {
@@ -342,7 +335,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
 
         @Override // com.google.protobuf.AbstractMessageLite.Builder
         /* renamed from: clone */
-        public final Builder mo3269clone() {
+        public final Builder mo3287clone() {
             GeneratedMessageLite generatedMessageLite = this.defaultInstance;
             generatedMessageLite.getClass();
             Builder builder = (Builder) generatedMessageLite.dynamicMethod(MethodToInvoke.NEW_BUILDER);
@@ -354,9 +347,9 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
             if (this.instance.isMutable()) {
                 return;
             }
-            GeneratedMessageLite newMutableInstance$1 = this.defaultInstance.newMutableInstance$1();
-            mergeFromInstance(newMutableInstance$1, this.instance);
-            this.instance = newMutableInstance$1;
+            GeneratedMessageLite generatedMessageLiteNewMutableInstance$1 = this.defaultInstance.newMutableInstance$1();
+            mergeFromInstance(generatedMessageLiteNewMutableInstance$1, this.instance);
+            this.instance = generatedMessageLiteNewMutableInstance$1;
         }
 
         @Override // com.google.protobuf.MessageLiteOrBuilder
@@ -374,7 +367,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
 
         @Override // com.google.protobuf.AbstractMessageLite.Builder
         /* renamed from: clone */
-        public final Object mo3269clone() {
+        public final Object mo3287clone() {
             GeneratedMessageLite generatedMessageLite = this.defaultInstance;
             generatedMessageLite.getClass();
             Builder builder = (Builder) generatedMessageLite.dynamicMethod(MethodToInvoke.NEW_BUILDER);

@@ -92,11 +92,11 @@ public class LetterboxDetails implements Parcelable {
     protected LetterboxDetails(Parcel parcel) {
         Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
         Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mLetterboxInnerBounds = rect;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rect);
         this.mLetterboxFullBounds = rect2;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rect2);
-        this.mAppAppearance = readInt;
+        this.mAppAppearance = i;
     }
 }

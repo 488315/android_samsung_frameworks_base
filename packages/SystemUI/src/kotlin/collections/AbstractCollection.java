@@ -7,7 +7,6 @@ import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractCollection implements Collection, KMappedMarker {
     @Override // java.util.Collection
@@ -90,8 +89,8 @@ public abstract class AbstractCollection implements Collection, KMappedMarker {
         return CollectionsKt___CollectionsKt.joinToString$default(this, ", ", "[", "]", new Function1() { // from class: kotlin.collections.AbstractCollection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return obj == AbstractCollection.this ? "(this Collection)" : String.valueOf(obj);
+            public final Object mo781invoke(Object obj) {
+                return obj == this.f$0 ? "(this Collection)" : String.valueOf(obj);
             }
         }, 24);
     }

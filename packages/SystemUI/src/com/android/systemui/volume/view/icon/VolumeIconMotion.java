@@ -23,7 +23,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeIconMotion {
     public static final PathInterpolator ALPHA_INTERPOLATOR;
@@ -32,7 +31,6 @@ public final class VolumeIconMotion {
     public ValueAnimator shockValueAnimator = new ValueAnimator();
     public final StoreInteractor storeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,10 +51,10 @@ public final class VolumeIconMotion {
     }
 
     public static Animator getVibrationAnimator(View view, float f, float f2, int i) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
-        ofFloat.setDuration(i);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
+        objectAnimatorOfFloat.setDuration(i);
+        objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        return objectAnimatorOfFloat;
     }
 
     public static void startSplashAnimation(final View view) {
@@ -164,20 +162,20 @@ public final class VolumeIconMotion {
                 dimenInt3 = ContextUtils.getDimenInt(R.dimen.volume_sub_large_display_sound_icon_wave_l_mid_x, this.context);
             }
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
-        animatorSet2.playTogether(ofFloat4);
-        animatorSet2.playTogether(ofFloat5);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat5);
         animatorSet2.setDuration(200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet3 = new AnimatorSet();
@@ -186,7 +184,7 @@ public final class VolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.icon.VolumeIconMotion$startMidAnimation$2$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                VolumeIconMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(2).build(), true);
+                this.this$0.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(2).build(), true);
             }
         });
         animatorSet3.start();
@@ -217,16 +215,16 @@ public final class VolumeIconMotion {
         if (screenState != screenState2 && BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG) {
             dimenInt = ContextUtils.getDimenInt(R.dimen.volume_sub_large_display_media_icon_note_min_x, this.context);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         if (VolumePanelValues.isRing(i)) {
             int dimenInt2 = ContextUtils.getDimenInt(screenState == screenState2 ? R.dimen.volume_sound_icon_wave_s_min_x : R.dimen.volume_sub_display_media_icon_wave_s_mid_x, this.context);
             if (screenState != screenState2 && BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG) {
@@ -242,7 +240,7 @@ public final class VolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.icon.VolumeIconMotion$startMinAnimation$2$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                VolumeIconMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(1).build(), true);
+                this.this$0.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(1).build(), true);
             }
         });
         animatorSet3.start();
@@ -269,19 +267,19 @@ public final class VolumeIconMotion {
         if (screenState != screenState2 && BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG) {
             dimenInt = ContextUtils.getDimenInt(R.dimen.volume_sub_large_display_media_icon_note_min_x, this.context);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
-        ofFloat3.setDuration(200L);
-        ofFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        objectAnimatorOfFloat3.setDuration(200L);
+        objectAnimatorOfFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.start();
         this.lastAnimtor = animatorSet2;
         startSplashAnimation(view6);
@@ -306,12 +304,12 @@ public final class VolumeIconMotion {
         animatorSet.playTogether(ObjectAnimator.ofFloat(view4, "alpha", view4.getAlpha(), 0.0f));
         animatorSet.setDuration(50L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt);
-        ofFloat.setDuration(200L);
-        ofFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt);
+        objectAnimatorOfFloat.setDuration(200L);
+        objectAnimatorOfFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat);
+        animatorSet2.playTogether(objectAnimatorOfFloat);
         animatorSet2.start();
         this.lastAnimtor = animatorSet2;
         startVibrationAnimation(view);

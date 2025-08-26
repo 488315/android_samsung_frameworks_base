@@ -7,7 +7,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseKeyframeAnimation {
     public final KeyframesWrapper keyframesWrapper;
@@ -19,12 +18,10 @@ public abstract class BaseKeyframeAnimation {
     public float cachedStartDelayProgress = -1.0f;
     public float cachedEndProgress = -1.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimationListener {
         void onValueChanged();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyKeyframeWrapper implements KeyframesWrapper {
         private EmptyKeyframeWrapper() {
         }
@@ -60,7 +57,6 @@ public abstract class BaseKeyframeAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface KeyframesWrapper {
         Keyframe getCurrentKeyframe();
 
@@ -75,7 +71,6 @@ public abstract class BaseKeyframeAnimation {
         boolean isValueChanged(float f);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyframesWrapperImpl implements KeyframesWrapper {
         public Keyframe cachedCurrentKeyframe = null;
         public float cachedInterpolatedProgress = -1.0f;
@@ -143,7 +138,6 @@ public abstract class BaseKeyframeAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SingleKeyframeWrapper implements KeyframesWrapper {
         public float cachedInterpolatedProgress = -1.0f;
         public final Keyframe keyframe;

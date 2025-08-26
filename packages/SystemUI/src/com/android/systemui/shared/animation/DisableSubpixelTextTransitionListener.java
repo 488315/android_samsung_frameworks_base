@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisableSubpixelTextTransitionListener implements UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final List childrenTextViews = new ArrayList();
@@ -41,8 +40,8 @@ public final class DisableSubpixelTextTransitionListener implements UnfoldTransi
         if (this.isTransitionInProgress) {
             int i = 0;
             this.isTransitionInProgress = false;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("subpixelFlagEnableForTextView");
             }
             try {
@@ -58,11 +57,11 @@ public final class DisableSubpixelTextTransitionListener implements UnfoldTransi
                 }
                 ((ArrayList) this.childrenTextViews).clear();
                 Unit unit = Unit.INSTANCE;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             } catch (Throwable th) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 throw th;
@@ -73,23 +72,23 @@ public final class DisableSubpixelTextTransitionListener implements UnfoldTransi
     @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
     public final void onTransitionStarted() {
         this.isTransitionInProgress = true;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("subpixelFlagSetForTextView");
         }
         try {
-            isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("subpixelFlagTraverseHierarchy");
             }
             try {
                 getAllChildTextView(this.rootView, this.childrenTextViews);
                 Unit unit = Unit.INSTANCE;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
-                boolean isEnabled2 = Trace.isEnabled();
-                if (isEnabled2) {
+                boolean zIsEnabled2 = Trace.isEnabled();
+                if (zIsEnabled2) {
                     TraceUtilsKt.beginSlice("subpixelFlagDisableForTextView");
                 }
                 try {
@@ -105,22 +104,22 @@ public final class DisableSubpixelTextTransitionListener implements UnfoldTransi
                         }
                     }
                     Unit unit2 = Unit.INSTANCE;
-                    if (isEnabled2) {
+                    if (zIsEnabled2) {
                         TraceUtilsKt.endSlice();
                     }
                 } catch (Throwable th) {
-                    if (isEnabled2) {
+                    if (zIsEnabled2) {
                         TraceUtilsKt.endSlice();
                     }
                     throw th;
                 }
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
         } catch (Throwable th2) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th2;

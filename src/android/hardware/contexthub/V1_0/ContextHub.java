@@ -52,13 +52,13 @@ public final class ContextHub {
 
     public static final ArrayList<ContextHub> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ContextHub> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ContextHub contextHub = new ContextHub();
-            contextHub.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 120);
+            contextHub.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 120);
             arrayList.add(contextHub);
         }
         return arrayList;
@@ -81,11 +81,11 @@ public final class ContextHub {
         this.sleepPowerDrawMw = hwBlob.getFloat(j + 68);
         this.peakPowerDrawMw = hwBlob.getFloat(j + 72);
         int int32 = hwBlob.getInt32(j + 88);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, hwBlob.handle(), j + 80, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, hwBlob.handle(), j + 80, true);
         this.connectedSensors.clear();
         for (int i = 0; i < int32; i++) {
             PhysicalSensor physicalSensor = new PhysicalSensor();
-            physicalSensor.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 96);
+            physicalSensor.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 96);
             this.connectedSensors.add(physicalSensor);
         }
         this.maxSupportedMsgLen = hwBlob.getInt32(j + 96);

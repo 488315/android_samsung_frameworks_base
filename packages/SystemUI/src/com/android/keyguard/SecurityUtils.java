@@ -19,6 +19,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
 import com.android.systemui.util.DeviceState;
+import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
@@ -26,7 +27,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecurityUtils {
     public static int sPINContainerBottomMargin;
@@ -38,7 +38,6 @@ public final class SecurityUtils {
     public static int sMainDisplayHeight = 0;
     public static int sSubDisplayWidth = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.SecurityUtils$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -73,8 +72,8 @@ public final class SecurityUtils {
         }
     }
 
-    public static int calculateLandscapeViewWidth(int i, Context context) {
-        int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
+    public static int calculateLandscapeViewWidth(int i, Context context) throws Resources.NotFoundException {
+        int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size);
         return ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isInDisplayFingerprintMarginAccepted() ? ((i - dimensionPixelSize) - DeviceState.getInDisplayFingerprintHeight()) / 2 : (i - (dimensionPixelSize * 2)) / 2;
     }
 
@@ -95,28 +94,35 @@ public final class SecurityUtils {
 
     public static int getFoldPINContainerHeight(Context context) {
         Resources resources = context.getResources();
-        float height = resources.getConfiguration().windowConfiguration.getBounds().height();
-        return (int) ((resources.getFloat(com.android.systemui.R.dimen.fold_num_pad_key_bottom_margin_ratio) * height * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.fold_num_pad_key_size_ratio) * height * 4.0f));
+        float fHeight = resources.getConfiguration().windowConfiguration.getBounds().height();
+        return (int) ((resources.getFloat(com.android.systemui.R.dimen.fold_num_pad_key_bottom_margin_ratio) * fHeight * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.fold_num_pad_key_size_ratio) * fHeight * 4.0f));
     }
 
     public static int getLockIconTopMargin(Context context) {
-        float height = context.getResources().getConfiguration().windowConfiguration.getBounds().height();
-        float f = context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_phone_portrait_ratio);
+        int iHeight = context.getResources().getConfiguration().windowConfiguration.getBounds().height();
         int rotation = DeviceState.getRotation(context.getResources().getConfiguration().windowConfiguration.getRotation());
+        if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && DeviceType.isTablet() && rotation == 2) {
+            KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
+            if (keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted() && !keyguardUpdateMonitor.isNowBarExpandMode()) {
+                return DeviceState.getInDisplayFingerprintHeight();
+            }
+        }
+        float f = iHeight;
+        float f2 = context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_phone_portrait_ratio);
         boolean z = true;
         if (rotation != 1 && rotation != 3) {
             z = false;
         }
         if (LsRune.SECURITY_SUB_DISPLAY_LOCK) {
-            f = z ? context.getResources().getConfiguration().semDisplayDeviceType == 0 ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_sub_landscape_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio);
+            f2 = (!z || context.getResources().getConfiguration().semDisplayDeviceType == 0) ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_sub_landscape_ratio);
         } else if (LsRune.SECURITY_SUB_DISPLAY_COVER) {
-            f = z ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_sub_landscape_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio);
+            f2 = z ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_sub_landscape_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio);
         } else if (DeviceState.isTablet()) {
-            f = z ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_tablet_ratio);
+            f2 = z ? context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_fold_main_ratio) : context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_tablet_ratio);
         } else if (z) {
-            f = context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_phone_landscape_ratio);
+            f2 = context.getResources().getFloat(com.android.systemui.R.dimen.kg_lock_icon_top_margin_phone_landscape_ratio);
         }
-        return (int) (height * f);
+        return (int) (f * f2);
     }
 
     public static int getMainSecurityViewFlipperSize(Context context, boolean z) {
@@ -129,8 +135,8 @@ public final class SecurityUtils {
     public static int getPINContainerHeight(Context context) {
         Resources resources = context.getResources();
         Rect bounds = resources.getConfiguration().windowConfiguration.getBounds();
-        int min = Math.min(bounds.width(), bounds.height());
-        return (int) ((resources.getFloat(com.android.systemui.R.dimen.num_pad_key_bottom_margin_ratio) * Math.max(bounds.width(), bounds.height()) * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.num_pad_key_size_ratio) * min * 4.0f));
+        int iMin = Math.min(bounds.width(), bounds.height());
+        return (int) ((resources.getFloat(com.android.systemui.R.dimen.num_pad_key_bottom_margin_ratio) * Math.max(bounds.width(), bounds.height()) * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.num_pad_key_size_ratio) * iMin * 4.0f));
     }
 
     public static int getSimSlotNum(int i) {
@@ -146,9 +152,9 @@ public final class SecurityUtils {
         String promptSecurityMessage = keyguardTextBuilder.getPromptSecurityMessage(securityMode, i);
         if (!TextUtils.isEmpty(promptSecurityMessage) && !KeyguardTextBuilder.getInstance(context).getStrongAuthTimeOutMessage(securityMode).isEmpty() && (i == 2 || i == 7 || i == 17)) {
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
-            int indexOf = promptSecurityMessage.indexOf("%1$s");
-            int indexOf2 = promptSecurityMessage.indexOf("%2$s") - 4;
-            if (indexOf >= 0 && indexOf2 >= 0) {
+            int iIndexOf = promptSecurityMessage.indexOf("%1$s");
+            int iIndexOf2 = promptSecurityMessage.indexOf("%2$s") - 4;
+            if (iIndexOf >= 0 && iIndexOf2 >= 0) {
                 spannableStringBuilder.append((CharSequence) String.format(promptSecurityMessage, "", ""));
                 if (!SignalSeverity.NONE.equals(keyguardTextBuilder.mBiometricType)) {
                     spannableStringBuilder.setSpan(new ClickableSpan() { // from class: com.android.keyguard.KeyguardTextBuilder.1
@@ -156,8 +162,8 @@ public final class SecurityUtils {
                         public final /* synthetic */ KeyguardSecurityModel.SecurityMode val$securityMode;
 
                         public AnonymousClass1(final KeyguardSecurityModel.SecurityMode securityMode2, final EditText editText2) {
-                            r2 = securityMode2;
-                            r3 = editText2;
+                            securityMode = securityMode2;
+                            editText = editText2;
                         }
 
                         @Override // android.text.style.ClickableSpan
@@ -167,7 +173,7 @@ public final class SecurityUtils {
                                 strongAuthPopup.dismiss();
                                 KeyguardTextBuilder.this.mStrongAuthPopup = null;
                             }
-                            KeyguardTextBuilder.this.mStrongAuthPopup = new StrongAuthPopup(KeyguardTextBuilder.this.mContext, r2, r3);
+                            KeyguardTextBuilder.this.mStrongAuthPopup = new StrongAuthPopup(KeyguardTextBuilder.this.mContext, securityMode, editText);
                             KeyguardTextBuilder.this.mStrongAuthPopup.updatePopup();
                             StrongAuthPopup strongAuthPopup2 = KeyguardTextBuilder.this.mStrongAuthPopup;
                             strongAuthPopup2.mHandler.postDelayed(new StrongAuthPopup$$ExternalSyntheticLambda1(strongAuthPopup2, 1), 100L);
@@ -179,7 +185,7 @@ public final class SecurityUtils {
                             textPaint.setUnderlineText(true);
                             textPaint.setFakeBoldText(true);
                         }
-                    }, indexOf, indexOf2, 33);
+                    }, iIndexOf, iIndexOf2, 33);
                 }
                 return spannableStringBuilder;
             }
@@ -195,7 +201,7 @@ public final class SecurityUtils {
         }
         KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker = keyguardUpdateMonitor.mStrongAuthTracker;
         int strongAuthForUser = strongAuthTracker.getStrongAuthForUser(i);
-        boolean isNonStrongBiometricAllowedAfterIdleTimeout = strongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(i);
+        boolean zIsNonStrongBiometricAllowedAfterIdleTimeout = strongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(i);
         if ((strongAuthForUser & 1) != 0) {
             return 1;
         }
@@ -208,28 +214,28 @@ public final class SecurityUtils {
         if ((strongAuthForUser & 128) != 0) {
             return 7;
         }
-        return !isNonStrongBiometricAllowedAfterIdleTimeout ? 17 : 0;
+        return !zIsNonStrongBiometricAllowedAfterIdleTimeout ? 17 : 0;
     }
 
     public static int getTabletPINContainerHeight(Context context) {
         Resources resources = context.getResources();
         Rect bounds = resources.getConfiguration().windowConfiguration.getBounds();
-        int min = Math.min(bounds.width(), bounds.height());
-        return (int) ((resources.getFloat(com.android.systemui.R.dimen.tablet_num_pad_key_bottom_margin_ratio) * Math.max(bounds.width(), bounds.height()) * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.tablet_num_pad_key_size_ratio) * min * 4.0f));
+        int iMin = Math.min(bounds.width(), bounds.height());
+        return (int) ((resources.getFloat(com.android.systemui.R.dimen.tablet_num_pad_key_bottom_margin_ratio) * Math.max(bounds.width(), bounds.height()) * 3.0f) + (resources.getFloat(com.android.systemui.R.dimen.tablet_num_pad_key_size_ratio) * iMin * 4.0f));
     }
 
     public static void initMainDisplaySize(Context context) {
         Configuration configuration = context.getResources().getConfiguration();
         Rect bounds = configuration.windowConfiguration.getBounds();
-        int width = bounds.width();
-        int height = bounds.height();
+        int iWidth = bounds.width();
+        int iHeight = bounds.height();
         if (configuration.semDisplayDeviceType != 0) {
             if (sSubDisplayWidth == 0) {
-                sSubDisplayWidth = Math.min(width, height);
+                sSubDisplayWidth = Math.min(iWidth, iHeight);
             }
         } else if (sMainDisplayWidth == 0 && sMainDisplayHeight == 0) {
-            sMainDisplayWidth = Math.min(width, height);
-            sMainDisplayHeight = Math.max(width, height);
+            sMainDisplayWidth = Math.min(iWidth, iHeight);
+            sMainDisplayHeight = Math.max(iWidth, iHeight);
             sViewFlipperWidth = (int) SecurityUtils$$ExternalSyntheticOutline0.m(context, com.android.systemui.R.dimen.kg_message_area_width_dual_display_ratio, sMainDisplayWidth);
             sPasswordViewFlipperWidth = (int) SecurityUtils$$ExternalSyntheticOutline0.m(context, com.android.systemui.R.dimen.kg_password_message_area_width_dual_display_ratio, sMainDisplayWidth);
         }
@@ -242,7 +248,7 @@ public final class SecurityUtils {
         return securityMode == KeyguardSecurityModel.SecurityMode.PIN || securityMode == KeyguardSecurityModel.SecurityMode.Pattern || securityMode == KeyguardSecurityModel.SecurityMode.SimPin || securityMode == KeyguardSecurityModel.SecurityMode.SimPuk;
     }
 
-    public static boolean matchSignature(Signature signature) {
+    public static boolean matchSignature(Signature signature) throws NoSuchAlgorithmException {
         MessageDigest messageDigest;
         byte[] byteArray = signature.toByteArray();
         try {
@@ -252,11 +258,11 @@ public final class SecurityUtils {
             messageDigest = null;
         }
         messageDigest.update(byteArray);
-        byte[] digest = messageDigest.digest();
+        byte[] bArrDigest = messageDigest.digest();
         char[] cArr = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-        char[] cArr2 = new char[digest.length * 2];
-        for (int i = 0; i < digest.length; i++) {
-            byte b = digest[i];
+        char[] cArr2 = new char[bArrDigest.length * 2];
+        for (int i = 0; i < bArrDigest.length; i++) {
+            byte b = bArrDigest[i];
             int i2 = i * 2;
             cArr2[i2] = cArr[(b & 255) >>> 4];
             cArr2[i2 + 1] = cArr[b & 15];

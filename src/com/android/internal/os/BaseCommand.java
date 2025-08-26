@@ -36,19 +36,19 @@ public abstract class BaseCommand {
             try {
                 try {
                     onRun();
-                } catch (IllegalArgumentException e) {
-                    onShowUsage(System.err);
-                    System.err.println();
-                    System.err.println("Error: " + e.getMessage());
+                } catch (Exception e) {
+                    e.printStackTrace(System.err);
+                    System.out.flush();
+                    System.err.flush();
                 }
-                System.out.flush();
-                System.err.flush();
-                i = 0;
-            } catch (Exception e2) {
-                e2.printStackTrace(System.err);
-                System.out.flush();
-                System.err.flush();
+            } catch (IllegalArgumentException e2) {
+                onShowUsage(System.err);
+                System.err.println();
+                System.err.println("Error: " + e2.getMessage());
             }
+            System.out.flush();
+            System.err.flush();
+            i = 0;
             if (i != 0) {
                 System.exit(i);
             }

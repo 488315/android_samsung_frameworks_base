@@ -2,6 +2,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.util.Log;
 import com.android.systemui.R;
 import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileSALogHelper {
     public static final boolean LOGGING_DEBUG;
@@ -20,7 +20,6 @@ public final class TileSALogHelper {
     public final CurrentTilesInteractor quickQsTilesInteractor;
     public final HashMap tilesMap = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +34,7 @@ public final class TileSALogHelper {
         LOGGING_DEBUG = Log.isLoggable(SystemUIAnalytics.TAG_QUICK_SETTINGS, 3);
     }
 
-    public TileSALogHelper(Context context, CurrentTilesInteractor currentTilesInteractor, CurrentTilesInteractor currentTilesInteractor2) {
+    public TileSALogHelper(Context context, CurrentTilesInteractor currentTilesInteractor, CurrentTilesInteractor currentTilesInteractor2) throws Resources.NotFoundException {
         this.qsTilesInteractor = currentTilesInteractor;
         this.quickQsTilesInteractor = currentTilesInteractor2;
         String[] stringArray = context.getResources().getStringArray(R.array.tile_ids);

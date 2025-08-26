@@ -20,26 +20,36 @@ import com.android.systemui.deviceentry.domain.interactor.DeviceUnlockedInteract
 import com.android.systemui.deviceentry.shared.model.DeviceEntryRestrictionReason;
 import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel;
+import com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel$special$$inlined$map$1;
+import com.android.systemui.util.kotlin.Utils;
 import com.android.systemui.util.time.SystemClock;
+import kotlin.KotlinNothingValueException;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.MutableStateFlow;
+import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
+import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerMessageViewModel extends ExclusiveActivatable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -65,7 +75,6 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
     public final UserSwitcherViewModel userSwitcherViewModel;
     public final WallpaperManager wallpaperManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,12 +84,10 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         BouncerMessageViewModel create();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -134,6 +141,512 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
         }
     }
 
+    /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return BouncerMessageViewModel.this.listenForHintEvents(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1, reason: invalid class name and case insensitive filesystem */
+    final class C08201 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C08201(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return BouncerMessageViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2, reason: invalid class name and case insensitive filesystem */
+    final class C08212 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    UserSwitcherViewModel$special$$inlined$map$1 userSwitcherViewModel$special$$inlined$map$1 = bouncerMessageViewModel.userSwitcherViewModel.selectedUser;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel.onActivated.2.1.1
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            Unit unitAccess$startLockoutCountdown = BouncerMessageViewModel.access$startLockoutCountdown(bouncerMessageViewModel);
+                            return unitAccess$startLockoutCountdown == CoroutineSingletons.COROUTINE_SUSPENDED ? unitAccess$startLockoutCountdown : Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    if (userSwitcherViewModel$special$$inlined$map$1.collect(flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$2, reason: invalid class name and collision with other inner class name */
+        final class C01432 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C01432(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C01432(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C01432) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    if (BouncerMessageViewModel.access$defaultBouncerMessageInitializer(bouncerMessageViewModel, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$3, reason: invalid class name */
+        final class AnonymousClass3 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass3(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass3(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass3) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    Object objCollect = FlowKt.transformLatest(bouncerMessageViewModel.authenticationInteractor.authenticationMethod, new BouncerMessageViewModel$listenForSimBouncerEvents$$inlined$flatMapLatest$1(null, bouncerMessageViewModel)).collect(new FlowCollector() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForSimBouncerEvents$3
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) throws Throwable {
+                            MessageViewModel messageViewModel = (MessageViewModel) obj2;
+                            BouncerMessageViewModel bouncerMessageViewModel2 = bouncerMessageViewModel;
+                            if (messageViewModel != null) {
+                                bouncerMessageViewModel2.message.updateState(null, messageViewModel);
+                                return Unit.INSTANCE;
+                            }
+                            Object objEmit = bouncerMessageViewModel2.resetToDefault.emit(Boolean.TRUE, continuation);
+                            return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
+                        }
+                    }, this);
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
+                    }
+                    if (objCollect == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$4, reason: invalid class name */
+        final class AnonymousClass4 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass4(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass4(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass4) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    int i2 = BouncerMessageViewModel.$r8$clinit;
+                    bouncerMessageViewModel.getClass();
+                    Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new BouncerMessageViewModel$listenForBouncerEvents$2(bouncerMessageViewModel, null), this);
+                    if (objCoroutineScope != obj2) {
+                        objCoroutineScope = Unit.INSTANCE;
+                    }
+                    if (objCoroutineScope == obj2) {
+                        return obj2;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$5, reason: invalid class name */
+        final class AnonymousClass5 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass5(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass5(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass5) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    int i2 = BouncerMessageViewModel.$r8$clinit;
+                    bouncerMessageViewModel.getClass();
+                    Object objCollectLatest = FlowKt.collectLatest(Utils.Companion.sample(bouncerMessageViewModel.biometricMessageInteractor.faceMessage, bouncerMessageViewModel.authenticationInteractor.authenticationMethod, bouncerMessageViewModel.deviceEntryBiometricsAllowedInteractor.isFingerprintCurrentlyAllowedOnBouncer), new BouncerMessageViewModel$listenForFaceMessages$2(bouncerMessageViewModel, null), this);
+                    if (objCollectLatest != obj2) {
+                        objCollectLatest = Unit.INSTANCE;
+                    }
+                    if (objCollectLatest == obj2) {
+                        return obj2;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$6, reason: invalid class name */
+        final class AnonymousClass6 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass6(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass6(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass6) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    int i2 = BouncerMessageViewModel.$r8$clinit;
+                    bouncerMessageViewModel.getClass();
+                    Object objCollectLatest = FlowKt.collectLatest(Utils.Companion.sample(bouncerMessageViewModel.biometricMessageInteractor.fingerprintMessage, bouncerMessageViewModel.authenticationInteractor.authenticationMethod, bouncerMessageViewModel.deviceEntryBiometricsAllowedInteractor.isFingerprintCurrentlyAllowedOnBouncer), new BouncerMessageViewModel$listenForFingerprintMessages$2(bouncerMessageViewModel, null), this);
+                    if (objCollectLatest != obj2) {
+                        objCollectLatest = Unit.INSTANCE;
+                    }
+                    if (objCollectLatest == obj2) {
+                        return obj2;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$7, reason: invalid class name */
+        final class AnonymousClass7 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass7(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass7(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass7) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    this.label = 1;
+                    if (bouncerMessageViewModel.listenForHintEvents(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$8, reason: invalid class name */
+        final class AnonymousClass8 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass8(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass8(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass8) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
+                    ReadonlyStateFlow readonlyStateFlow = bouncerMessageViewModel.isWhiteBg;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel.onActivated.2.8.1
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                            BouncerMessageViewModel bouncerMessageViewModel2 = bouncerMessageViewModel;
+                            bouncerMessageViewModel2._messageColor.updateState(null, Color.m456boximpl(zBooleanValue ? ColorKt.Color(bouncerMessageViewModel2.applicationContext.getColor(R.color.kg_compose_pattern_dot_whitebg_color)) : ColorKt.Color(bouncerMessageViewModel2.applicationContext.getColor(R.color.kg_compose_pattern_dot_color))));
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    if (readonlyStateFlow.$$delegate_0.collect(flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2$9, reason: invalid class name */
+        final class AnonymousClass9 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ BouncerMessageViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass9(BouncerMessageViewModel bouncerMessageViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = bouncerMessageViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass9(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass9) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                this.this$0._isWhiteBg.updateState(null, Boolean.valueOf(this.this$0.wallpaperManager.semGetWallpaperColors(10).get(512L).getFontColor() == 1));
+                return Unit.INSTANCE;
+            }
+        }
+
+        public C08212(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C08212 c08212 = BouncerMessageViewModel.this.new C08212(continuation);
+            c08212.L$0 = obj;
+            return c08212;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08212) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01432(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass5(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass6(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass7(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass8(BouncerMessageViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass9(BouncerMessageViewModel.this, null), 7);
+                this.label = 1;
+                if (DelayKt.awaitCancellation(this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+    }
+
     static {
         new Companion(null);
     }
@@ -152,11 +665,10 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
         this.deviceEntryBiometricsAllowedInteractor = deviceEntryBiometricsAllowedInteractor;
         this.hintInteractor = hintInteractor;
         this.wallpaperManager = wallpaperManager;
-        final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.lockoutMessage = MutableStateFlow;
+        final StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.lockoutMessage = stateFlowImplMutableStateFlow;
         this.isLockoutMessagePresent = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -183,172 +695,112 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.bouncer.ui.viewmodel.MessageViewModel r5 = (com.android.systemui.bouncer.ui.viewmodel.MessageViewModel) r5
-                        if (r5 == 0) goto L38
-                        r5 = r3
-                        goto L39
-                    L38:
-                        r5 = 0
-                    L39:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((MessageViewModel) obj) != null);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlowImplMutableStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.message = StateFlowKt.MutableStateFlow(null);
         this.hintMessage = StateFlowKt.MutableStateFlow(null);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(Boolean.FALSE);
-        this._isWhiteBg = MutableStateFlow2;
-        this.isWhiteBg = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(Color.m454boximpl(ColorKt.Color(context.getColor(R.color.kg_compose_pattern_dot_color))));
-        this._messageColor = MutableStateFlow3;
-        this.messageColor = FlowKt.asStateFlow(MutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this._isWhiteBg = stateFlowImplMutableStateFlow2;
+        this.isWhiteBg = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(Color.m456boximpl(ColorKt.Color(context.getColor(R.color.kg_compose_pattern_dot_color))));
+        this._messageColor = stateFlowImplMutableStateFlow3;
+        this.messageColor = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.resetToDefault = SharedFlowKt.MutableSharedFlow$default(1, 0, null, 6);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0071, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0071, code lost:
     
-        if (r6.collect(r2, r0) != r1) goto L22;
+        if (r6.collect(r2, r0) == r1) goto L21;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0073, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0053, code lost:
-    
-        if (r6.emit(r2, r0) == r1) goto L21;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$defaultBouncerMessageInitializer(final com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5.getClass()
-            boolean r0 = r6 instanceof com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$1
-            if (r0 == 0) goto L16
-            r0 = r6
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$1 r0 = (com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$1 r0 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$1
-            r0.<init>(r5, r6)
-        L1b:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L3d
-            if (r2 == r4) goto L35
-            if (r2 != r3) goto L2d
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L74
-        L2d:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L35:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel r5 = (com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L56
-        L3d:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.String r6 = "BouncerMessageViewModel"
-            java.lang.String r2 = "defaultBouncerMessageInitializer()"
-            android.util.Log.d(r6, r2)
-            kotlinx.coroutines.flow.SharedFlowImpl r6 = r5.resetToDefault
-            java.lang.Boolean r2 = java.lang.Boolean.TRUE
-            r0.L$0 = r5
-            r0.label = r4
-            java.lang.Object r6 = r6.emit(r2, r0)
-            if (r6 != r1) goto L56
-            goto L73
-        L56:
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r6 = r5.authenticationInteractor
-            kotlinx.coroutines.flow.Flow r6 = r6.authenticationMethod
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$$inlined$flatMapLatest$1 r2 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$$inlined$flatMapLatest$1
-            r4 = 0
-            r2.<init>(r4, r5)
-            kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest r6 = kotlinx.coroutines.flow.FlowKt.transformLatest(r6, r2)
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$3 r2 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$3
-            r2.<init>()
-            r0.L$0 = r4
-            r0.label = r3
-            java.lang.Object r5 = r6.collect(r2, r0)
-            if (r5 != r1) goto L74
-        L73:
-            return r1
-        L74:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel.access$defaultBouncerMessageInitializer(com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$defaultBouncerMessageInitializer(final BouncerMessageViewModel bouncerMessageViewModel, ContinuationImpl continuationImpl) {
+        BouncerMessageViewModel$defaultBouncerMessageInitializer$1 bouncerMessageViewModel$defaultBouncerMessageInitializer$1;
+        bouncerMessageViewModel.getClass();
+        if (continuationImpl instanceof BouncerMessageViewModel$defaultBouncerMessageInitializer$1) {
+            bouncerMessageViewModel$defaultBouncerMessageInitializer$1 = (BouncerMessageViewModel$defaultBouncerMessageInitializer$1) continuationImpl;
+            int i = bouncerMessageViewModel$defaultBouncerMessageInitializer$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                bouncerMessageViewModel$defaultBouncerMessageInitializer$1.label = i - Integer.MIN_VALUE;
+            } else {
+                bouncerMessageViewModel$defaultBouncerMessageInitializer$1 = new BouncerMessageViewModel$defaultBouncerMessageInitializer$1(bouncerMessageViewModel, continuationImpl);
+            }
+        }
+        Object obj = bouncerMessageViewModel$defaultBouncerMessageInitializer$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = bouncerMessageViewModel$defaultBouncerMessageInitializer$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            Log.d("BouncerMessageViewModel", "defaultBouncerMessageInitializer()");
+            SharedFlowImpl sharedFlowImpl = bouncerMessageViewModel.resetToDefault;
+            Boolean bool = Boolean.TRUE;
+            bouncerMessageViewModel$defaultBouncerMessageInitializer$1.L$0 = bouncerMessageViewModel;
+            bouncerMessageViewModel$defaultBouncerMessageInitializer$1.label = 1;
+            if (sharedFlowImpl.emit(bool, bouncerMessageViewModel$defaultBouncerMessageInitializer$1) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        bouncerMessageViewModel = (BouncerMessageViewModel) bouncerMessageViewModel$defaultBouncerMessageInitializer$1.L$0;
+        ResultKt.throwOnFailure(obj);
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(bouncerMessageViewModel.authenticationInteractor.authenticationMethod, new BouncerMessageViewModel$defaultBouncerMessageInitializer$$inlined$flatMapLatest$1(null, bouncerMessageViewModel));
+        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$3
+            @Override // kotlinx.coroutines.flow.FlowCollector
+            public final Object emit(Object obj2, Continuation continuation) {
+                this.this$0.message.setValue((MessageViewModel) obj2);
+                return Unit.INSTANCE;
+            }
+        };
+        bouncerMessageViewModel$defaultBouncerMessageInitializer$1.L$0 = null;
+        bouncerMessageViewModel$defaultBouncerMessageInitializer$1.label = 2;
     }
 
     public static final Unit access$startLockoutCountdown(BouncerMessageViewModel bouncerMessageViewModel) {
@@ -358,115 +810,74 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
         return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final kotlin.coroutines.intrinsics.CoroutineSingletons listenForHintEvents(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1 r0 = (com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1 r0 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L46
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r5 = r4.authenticationInteractor
-            kotlinx.coroutines.flow.ReadonlySharedFlow r5 = r5.onAuthenticationResult
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$2 r2 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$2
-            r2.<init>(r4)
-            r0.label = r3
-            kotlinx.coroutines.flow.SharedFlow r4 = r5.$$delegate_0
-            java.lang.Object r4 = r4.collect(r2, r0)
-            if (r4 != r1) goto L46
-            return r1
-        L46:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel.listenForHintEvents(kotlin.coroutines.jvm.internal.ContinuationImpl):kotlin.coroutines.intrinsics.CoroutineSingletons");
+    public final CoroutineSingletons listenForHintEvents(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ReadonlySharedFlow readonlySharedFlow = this.authenticationInteractor.onAuthenticationResult;
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2();
+            anonymousClass1.label = 1;
+            if (readonlySharedFlow.$$delegate_0.collect(anonymousClass2, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1 r0 = (com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1 r0 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L41
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2 r5 = new com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$onActivated$2
-            r2 = 0
-            r5.<init>(r4, r2)
-            r0.label = r3
-            java.lang.Object r4 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r5, r0)
-            if (r4 != r1) goto L41
-            return r1
-        L41:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        C08201 c08201;
+        if (continuation instanceof C08201) {
+            c08201 = (C08201) continuation;
+            int i = c08201.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08201.label = i - Integer.MIN_VALUE;
+            } else {
+                c08201 = new C08201(continuation);
+            }
+        }
+        Object obj = c08201.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08201.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            C08212 c08212 = new C08212(null);
+            c08201.label = 1;
+            if (CoroutineScopeKt.coroutineScope(c08212, c08201) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
     public final String setSubMessage(Object obj) {
@@ -496,5 +907,61 @@ public final class BouncerMessageViewModel extends ExclusiveActivatable {
             string = this.applicationContext.getString(((Number) pair.getFirst()).intValue());
         }
         return new MessageViewModel(string, setSubMessage(pair.getSecond()), true);
+    }
+
+    /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$listenForHintEvents$2, reason: invalid class name */
+    public final class AnonymousClass2 implements FlowCollector {
+        public AnonymousClass2() {
+        }
+
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object emit(boolean z, Continuation continuation) {
+            BouncerMessageViewModel$listenForHintEvents$2$emit$1 bouncerMessageViewModel$listenForHintEvents$2$emit$1;
+            MutableStateFlow mutableStateFlow;
+            if (continuation instanceof BouncerMessageViewModel$listenForHintEvents$2$emit$1) {
+                bouncerMessageViewModel$listenForHintEvents$2$emit$1 = (BouncerMessageViewModel$listenForHintEvents$2$emit$1) continuation;
+                int i = bouncerMessageViewModel$listenForHintEvents$2$emit$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    bouncerMessageViewModel$listenForHintEvents$2$emit$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    bouncerMessageViewModel$listenForHintEvents$2$emit$1 = new BouncerMessageViewModel$listenForHintEvents$2$emit$1(this, continuation);
+                }
+            }
+            Object hint = bouncerMessageViewModel$listenForHintEvents$2$emit$1.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = bouncerMessageViewModel$listenForHintEvents$2$emit$1.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(hint);
+                BouncerMessageViewModel bouncerMessageViewModel = BouncerMessageViewModel.this;
+                if (z || ((Number) bouncerMessageViewModel.authenticationInteractor.failedAuthenticationAttempts.$$delegate_0.getValue()).intValue() <= 0) {
+                    bouncerMessageViewModel.hintMessage.setValue(null);
+                    return Unit.INSTANCE;
+                }
+                StateFlowImpl stateFlowImpl = bouncerMessageViewModel.hintMessage;
+                bouncerMessageViewModel$listenForHintEvents$2$emit$1.L$0 = stateFlowImpl;
+                bouncerMessageViewModel$listenForHintEvents$2$emit$1.label = 1;
+                hint = bouncerMessageViewModel.hintInteractor.getHint(bouncerMessageViewModel$listenForHintEvents$2$emit$1);
+                if (hint == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                mutableStateFlow = stateFlowImpl;
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                mutableStateFlow = (MutableStateFlow) bouncerMessageViewModel$listenForHintEvents$2$emit$1.L$0;
+                ResultKt.throwOnFailure(hint);
+            }
+            mutableStateFlow.setValue(hint);
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlinx.coroutines.flow.FlowCollector
+        public final /* bridge */ /* synthetic */ Object emit(Object obj, Continuation continuation) {
+            return emit(((Boolean) obj).booleanValue(), continuation);
+        }
     }
 }

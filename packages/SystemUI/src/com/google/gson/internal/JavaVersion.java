@@ -1,6 +1,5 @@
 package com.google.gson.internal;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JavaVersion {
     private static final int majorJavaVersion = determineMajorJavaVersion();
@@ -16,11 +15,11 @@ public final class JavaVersion {
         try {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < str.length(); i++) {
-                char charAt = str.charAt(i);
-                if (!Character.isDigit(charAt)) {
+                char cCharAt = str.charAt(i);
+                if (!Character.isDigit(cCharAt)) {
                     break;
                 }
-                sb.append(charAt);
+                sb.append(cCharAt);
             }
             return Integer.parseInt(sb.toString());
         } catch (NumberFormatException unused) {
@@ -28,26 +27,26 @@ public final class JavaVersion {
         }
     }
 
-    public static int getMajorJavaVersion(String str) {
-        int parseDotted = parseDotted(str);
-        if (parseDotted == -1) {
-            parseDotted = extractBeginningInt(str);
+    public static int getMajorJavaVersion(String str) throws NumberFormatException {
+        int dotted = parseDotted(str);
+        if (dotted == -1) {
+            dotted = extractBeginningInt(str);
         }
-        if (parseDotted == -1) {
+        if (dotted == -1) {
             return 6;
         }
-        return parseDotted;
+        return dotted;
     }
 
     public static boolean isJava9OrLater() {
         return majorJavaVersion >= 9;
     }
 
-    private static int parseDotted(String str) {
+    private static int parseDotted(String str) throws NumberFormatException {
         try {
-            String[] split = str.split("[._]");
-            int parseInt = Integer.parseInt(split[0]);
-            return (parseInt != 1 || split.length <= 1) ? parseInt : Integer.parseInt(split[1]);
+            String[] strArrSplit = str.split("[._]");
+            int i = Integer.parseInt(strArrSplit[0]);
+            return (i != 1 || strArrSplit.length <= 1) ? i : Integer.parseInt(strArrSplit[1]);
         } catch (NumberFormatException unused) {
             return -1;
         }

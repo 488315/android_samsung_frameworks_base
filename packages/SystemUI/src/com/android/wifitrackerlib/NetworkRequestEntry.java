@@ -6,7 +6,6 @@ import android.os.Handler;
 import com.android.wifitrackerlib.StandardWifiEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NetworkRequestEntry extends StandardWifiEntry {
     public NetworkRequestEntry(WifiTrackerInjector wifiTrackerInjector, Handler handler, StandardWifiEntry.StandardWifiEntryKey standardWifiEntryKey, WifiManager wifiManager, boolean z) throws IllegalArgumentException {

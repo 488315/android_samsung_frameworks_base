@@ -22,18 +22,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.TypedArrayUtils;
+import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceManager;
 import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Preference implements Comparable<Preference> {
     public final boolean mAllowDividerAbove;
@@ -84,7 +86,6 @@ public class Preference implements Comparable<Preference> {
     public int mWhere;
     public int mWidgetLayoutResId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseSavedState extends AbsSavedState {
         public static final Parcelable.Creator<BaseSavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.preference.Preference.BaseSavedState.1
             @Override // android.os.Parcelable.Creator
@@ -107,17 +108,14 @@ public class Preference implements Comparable<Preference> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnPreferenceChangeListener {
         boolean onPreferenceChange(Preference preference, Object obj);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnPreferenceClickListener {
         void onPreferenceClick(Preference preference);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnPreferenceCopyListener implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         public final Preference mPreference;
 
@@ -146,7 +144,6 @@ public class Preference implements Comparable<Preference> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SummaryProvider {
         CharSequence provideSummary(Preference preference);
     }
@@ -176,42 +173,42 @@ public class Preference implements Comparable<Preference> {
         this.mWhere = 0;
         this.mIsRoundChanged = false;
         this.mContext = context;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, i2);
-        this.mIconResId = obtainStyledAttributes.getResourceId(23, obtainStyledAttributes.getResourceId(0, 0));
-        String string = obtainStyledAttributes.getString(27);
-        this.mKey = string == null ? obtainStyledAttributes.getString(6) : string;
-        CharSequence text = obtainStyledAttributes.getText(35);
-        this.mTitle = text == null ? obtainStyledAttributes.getText(4) : text;
-        CharSequence text2 = obtainStyledAttributes.getText(34);
-        this.mSummary = text2 == null ? obtainStyledAttributes.getText(7) : text2;
-        this.mOrder = obtainStyledAttributes.getInt(29, obtainStyledAttributes.getInt(8, Integer.MAX_VALUE));
-        String string2 = obtainStyledAttributes.getString(22);
-        this.mFragment = string2 == null ? obtainStyledAttributes.getString(13) : string2;
-        this.mLayoutResId = obtainStyledAttributes.getResourceId(28, obtainStyledAttributes.getResourceId(3, R.layout.preference));
-        this.mWidgetLayoutResId = obtainStyledAttributes.getResourceId(36, obtainStyledAttributes.getResourceId(9, 0));
-        this.mIsDotVisible = obtainStyledAttributes.getBoolean(25, obtainStyledAttributes.getBoolean(25, false));
-        this.mEnabled = obtainStyledAttributes.getBoolean(21, obtainStyledAttributes.getBoolean(2, true));
-        this.mSelectable = obtainStyledAttributes.getBoolean(31, obtainStyledAttributes.getBoolean(5, true));
-        this.mPersistent = obtainStyledAttributes.getBoolean(30, obtainStyledAttributes.getBoolean(1, true));
-        String string3 = obtainStyledAttributes.getString(19);
-        this.mDependencyKey = string3 == null ? obtainStyledAttributes.getString(10) : string3;
-        this.mAllowDividerAbove = obtainStyledAttributes.getBoolean(16, obtainStyledAttributes.getBoolean(16, this.mSelectable));
-        this.mAllowDividerBelow = obtainStyledAttributes.getBoolean(17, obtainStyledAttributes.getBoolean(17, this.mSelectable));
-        if (obtainStyledAttributes.hasValue(18)) {
-            this.mDefaultValue = onGetDefaultValue(obtainStyledAttributes, 18);
-        } else if (obtainStyledAttributes.hasValue(11)) {
-            this.mDefaultValue = onGetDefaultValue(obtainStyledAttributes, 11);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, i2);
+        this.mIconResId = typedArrayObtainStyledAttributes.getResourceId(23, typedArrayObtainStyledAttributes.getResourceId(0, 0));
+        String string = typedArrayObtainStyledAttributes.getString(27);
+        this.mKey = string == null ? typedArrayObtainStyledAttributes.getString(6) : string;
+        CharSequence text = typedArrayObtainStyledAttributes.getText(35);
+        this.mTitle = text == null ? typedArrayObtainStyledAttributes.getText(4) : text;
+        CharSequence text2 = typedArrayObtainStyledAttributes.getText(34);
+        this.mSummary = text2 == null ? typedArrayObtainStyledAttributes.getText(7) : text2;
+        this.mOrder = typedArrayObtainStyledAttributes.getInt(29, typedArrayObtainStyledAttributes.getInt(8, Integer.MAX_VALUE));
+        String string2 = typedArrayObtainStyledAttributes.getString(22);
+        this.mFragment = string2 == null ? typedArrayObtainStyledAttributes.getString(13) : string2;
+        this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(28, typedArrayObtainStyledAttributes.getResourceId(3, R.layout.preference));
+        this.mWidgetLayoutResId = typedArrayObtainStyledAttributes.getResourceId(36, typedArrayObtainStyledAttributes.getResourceId(9, 0));
+        this.mIsDotVisible = typedArrayObtainStyledAttributes.getBoolean(25, typedArrayObtainStyledAttributes.getBoolean(25, false));
+        this.mEnabled = typedArrayObtainStyledAttributes.getBoolean(21, typedArrayObtainStyledAttributes.getBoolean(2, true));
+        this.mSelectable = typedArrayObtainStyledAttributes.getBoolean(31, typedArrayObtainStyledAttributes.getBoolean(5, true));
+        this.mPersistent = typedArrayObtainStyledAttributes.getBoolean(30, typedArrayObtainStyledAttributes.getBoolean(1, true));
+        String string3 = typedArrayObtainStyledAttributes.getString(19);
+        this.mDependencyKey = string3 == null ? typedArrayObtainStyledAttributes.getString(10) : string3;
+        this.mAllowDividerAbove = typedArrayObtainStyledAttributes.getBoolean(16, typedArrayObtainStyledAttributes.getBoolean(16, this.mSelectable));
+        this.mAllowDividerBelow = typedArrayObtainStyledAttributes.getBoolean(17, typedArrayObtainStyledAttributes.getBoolean(17, this.mSelectable));
+        if (typedArrayObtainStyledAttributes.hasValue(18)) {
+            this.mDefaultValue = onGetDefaultValue(typedArrayObtainStyledAttributes, 18);
+        } else if (typedArrayObtainStyledAttributes.hasValue(11)) {
+            this.mDefaultValue = onGetDefaultValue(typedArrayObtainStyledAttributes, 11);
         }
-        this.mShouldDisableView = obtainStyledAttributes.getBoolean(32, obtainStyledAttributes.getBoolean(12, true));
-        boolean hasValue = obtainStyledAttributes.hasValue(33);
-        this.mHasSingleLineTitleAttr = hasValue;
-        if (hasValue) {
-            this.mSingleLineTitle = obtainStyledAttributes.getBoolean(33, obtainStyledAttributes.getBoolean(14, true));
+        this.mShouldDisableView = typedArrayObtainStyledAttributes.getBoolean(32, typedArrayObtainStyledAttributes.getBoolean(12, true));
+        boolean zHasValue = typedArrayObtainStyledAttributes.hasValue(33);
+        this.mHasSingleLineTitleAttr = zHasValue;
+        if (zHasValue) {
+            this.mSingleLineTitle = typedArrayObtainStyledAttributes.getBoolean(33, typedArrayObtainStyledAttributes.getBoolean(14, true));
         }
-        this.mIconSpaceReserved = obtainStyledAttributes.getBoolean(24, obtainStyledAttributes.getBoolean(15, false));
-        this.mVisible = obtainStyledAttributes.getBoolean(26, obtainStyledAttributes.getBoolean(26, true));
-        this.mCopyingEnabled = obtainStyledAttributes.getBoolean(20, obtainStyledAttributes.getBoolean(20, false));
-        obtainStyledAttributes.recycle();
+        this.mIconSpaceReserved = typedArrayObtainStyledAttributes.getBoolean(24, typedArrayObtainStyledAttributes.getBoolean(15, false));
+        this.mVisible = typedArrayObtainStyledAttributes.getBoolean(26, typedArrayObtainStyledAttributes.getBoolean(26, true));
+        this.mCopyingEnabled = typedArrayObtainStyledAttributes.getBoolean(20, typedArrayObtainStyledAttributes.getBoolean(20, false));
+        typedArrayObtainStyledAttributes.recycle();
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
         if (typedValue.resourceId > 0) {
@@ -284,12 +281,12 @@ public class Preference implements Comparable<Preference> {
             return;
         }
         this.mBaseMethodCalled = false;
-        Parcelable onSaveInstanceState = onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = onSaveInstanceState();
         if (!this.mBaseMethodCalled) {
             throw new IllegalStateException("Derived class did not call super.onSaveInstanceState()");
         }
-        if (onSaveInstanceState != null) {
-            bundle.putParcelable(this.mKey, onSaveInstanceState);
+        if (parcelableOnSaveInstanceState != null) {
+            bundle.putParcelable(this.mKey, parcelableOnSaveInstanceState);
         }
     }
 
@@ -336,12 +333,12 @@ public class Preference implements Comparable<Preference> {
     }
 
     public void notifyChanged() {
-        int indexOf;
+        int iIndexOf;
         PreferenceGroupAdapter preferenceGroupAdapter = this.mListener;
-        if (preferenceGroupAdapter == null || (indexOf = preferenceGroupAdapter.mVisiblePreferences.indexOf(this)) == -1) {
+        if (preferenceGroupAdapter == null || (iIndexOf = preferenceGroupAdapter.mVisiblePreferences.indexOf(this)) == -1) {
             return;
         }
-        preferenceGroupAdapter.notifyItemChanged(indexOf, this);
+        preferenceGroupAdapter.notifyItemChanged(iIndexOf, this);
     }
 
     public void notifyDependencyChange(boolean z) {
@@ -368,20 +365,20 @@ public class Preference implements Comparable<Preference> {
         }
         String str = this.mDependencyKey;
         PreferenceManager preferenceManager = this.mPreferenceManager;
-        Preference preference = null;
+        Preference preferenceFindPreference = null;
         if (preferenceManager != null && (preferenceScreen = preferenceManager.mPreferenceScreen) != null) {
-            preference = preferenceScreen.findPreference(str);
+            preferenceFindPreference = preferenceScreen.findPreference(str);
         }
-        if (preference == null) {
+        if (preferenceFindPreference == null) {
             throw new IllegalStateException("Dependency \"" + this.mDependencyKey + "\" not found for preference \"" + this.mKey + "\" (title: \"" + ((Object) this.mTitle) + "\"");
         }
-        if (preference.mDependents == null) {
-            preference.mDependents = new ArrayList();
+        if (preferenceFindPreference.mDependents == null) {
+            preferenceFindPreference.mDependents = new ArrayList();
         }
-        ((ArrayList) preference.mDependents).add(this);
-        boolean shouldDisableDependents = preference.shouldDisableDependents();
-        if (this.mDependencyMet == shouldDisableDependents) {
-            this.mDependencyMet = !shouldDisableDependents;
+        ((ArrayList) preferenceFindPreference.mDependents).add(this);
+        boolean zShouldDisableDependents = preferenceFindPreference.shouldDisableDependents();
+        if (this.mDependencyMet == zShouldDisableDependents) {
+            this.mDependencyMet = !zShouldDisableDependents;
             notifyDependencyChange(shouldDisableDependents());
             notifyChanged();
         }
@@ -410,24 +407,107 @@ public class Preference implements Comparable<Preference> {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00e9  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x00fd  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x012a  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0105  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void onBindViewHolder(androidx.preference.PreferenceViewHolder r9) {
-        /*
-            Method dump skipped, instructions count: 320
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.preference.Preference.onBindViewHolder(androidx.preference.PreferenceViewHolder):void");
+    public void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
+        Integer numValueOf;
+        View view = preferenceViewHolder.itemView;
+        view.setOnClickListener(this.mClickListener);
+        view.setId(0);
+        TextView textView = (TextView) preferenceViewHolder.findViewById(android.R.id.summary);
+        if (textView != null) {
+            CharSequence summary = getSummary();
+            if (TextUtils.isEmpty(summary)) {
+                textView.setVisibility(8);
+                numValueOf = null;
+            } else {
+                textView.setText(summary);
+                setLineBreakWordStyle(textView);
+                ColorStateList colorStateList = this.mTextColorSecondary;
+                if (colorStateList != null) {
+                    textView.setTextColor(colorStateList);
+                }
+                textView.setVisibility(0);
+                numValueOf = Integer.valueOf(textView.getCurrentTextColor());
+            }
+        } else {
+            numValueOf = null;
+        }
+        boolean z = this.mIsPreferenceRoundedBg;
+        int i = this.mWhere;
+        boolean z2 = this.mSubheaderRound;
+        preferenceViewHolder.mDrawBackground = z;
+        preferenceViewHolder.mDrawCorners = i;
+        preferenceViewHolder.mSubheaderRound = z2;
+        TextView textView2 = (TextView) preferenceViewHolder.findViewById(android.R.id.title);
+        if (textView2 != null) {
+            CharSequence title = getTitle();
+            if (!TextUtils.isEmpty(title)) {
+                textView2.setText(title);
+                textView2.setVisibility(0);
+                if (this.mHasSingleLineTitleAttr) {
+                    textView2.setSingleLine(this.mSingleLineTitle);
+                }
+                if (!this.mSelectable && isEnabled() && numValueOf != null) {
+                    textView2.setTextColor(numValueOf.intValue());
+                }
+            } else if (TextUtils.isEmpty(title) && (this instanceof PreferenceCategory)) {
+                textView2.setVisibility(0);
+                if (this.mHasSingleLineTitleAttr) {
+                    textView2.setSingleLine(this.mSingleLineTitle);
+                }
+            } else {
+                textView2.setVisibility(8);
+            }
+        }
+        ImageView imageView = (ImageView) preferenceViewHolder.findViewById(android.R.id.icon);
+        if (imageView != null) {
+            int i2 = this.mIconResId;
+            if (i2 != 0 || this.mIcon != null) {
+                if (this.mIcon == null) {
+                    this.mIcon = AppCompatResources.getDrawable(i2, this.mContext);
+                }
+                Drawable drawable = this.mIcon;
+                if (drawable != null) {
+                    imageView.setImageDrawable(drawable);
+                }
+            }
+            if (this.mIcon != null) {
+                imageView.setVisibility(0);
+            } else {
+                imageView.setVisibility(this.mIconSpaceReserved ? 4 : 8);
+            }
+        }
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.icon_frame);
+        if (viewFindViewById == null) {
+            viewFindViewById = preferenceViewHolder.findViewById(android.R.id.icon_frame);
+        }
+        if (viewFindViewById != null) {
+            if (this.mIcon != null) {
+                viewFindViewById.setVisibility(0);
+            } else {
+                viewFindViewById.setVisibility(this.mIconSpaceReserved ? 4 : 8);
+            }
+        }
+        if (this.mShouldDisableView) {
+            setEnabledStateOnViews(view, isEnabled());
+        } else {
+            setEnabledStateOnViews(view, true);
+        }
+        boolean z3 = this.mSelectable;
+        view.setFocusable(z3);
+        view.setClickable(z3);
+        preferenceViewHolder.mDividerAllowedAbove = this.mAllowDividerAbove;
+        preferenceViewHolder.mDividerAllowedBelow = this.mAllowDividerBelow;
+        boolean z4 = this.mCopyingEnabled;
+        if (z4 && this.mOnCopyListener == null) {
+            this.mOnCopyListener = new OnPreferenceCopyListener(this);
+        }
+        view.setOnCreateContextMenuListener(z4 ? this.mOnCopyListener : null);
+        view.setLongClickable(z4);
+        if (z4 && !z3) {
+            WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+            view.setBackground(null);
+        }
+        this.mItemView = view;
     }
 
     public void onDetached() {
@@ -600,11 +680,11 @@ public class Preference implements Comparable<Preference> {
         String str = this.mDependencyKey;
         if (str != null) {
             PreferenceManager preferenceManager = this.mPreferenceManager;
-            Preference preference = null;
+            Preference preferenceFindPreference = null;
             if (preferenceManager != null && (preferenceScreen = preferenceManager.mPreferenceScreen) != null) {
-                preference = preferenceScreen.findPreference(str);
+                preferenceFindPreference = preferenceScreen.findPreference(str);
             }
-            if (preference == null || (list = preference.mDependents) == null) {
+            if (preferenceFindPreference == null || (list = preferenceFindPreference.mDependents) == null) {
                 return;
             }
             ((ArrayList) list).remove(this);

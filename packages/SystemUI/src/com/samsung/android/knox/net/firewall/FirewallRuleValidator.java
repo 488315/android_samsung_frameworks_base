@@ -7,7 +7,6 @@ import com.samsung.android.knox.net.firewall.FirewallResponse;
 import com.samsung.android.knox.net.firewall.FirewallRule;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FirewallRuleValidator {
     public static final String ADDRESS = "address";
@@ -27,7 +26,6 @@ public class FirewallRuleValidator {
     public static final String TARGET_IP = "target IP";
     public static final String TARGET_PORT_NUMBER = "target port number";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.android.knox.net.firewall.FirewallRuleValidator$1, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType;
@@ -62,25 +60,25 @@ public class FirewallRuleValidator {
         if (str == null || !str.contains("::")) {
             return str;
         }
-        String[] split = str.split("::");
+        String[] strArrSplit = str.split("::");
         int i = 0;
-        if (split.length != 1) {
-            if (split.length != 2) {
+        if (strArrSplit.length != 1) {
+            if (strArrSplit.length != 2) {
                 return null;
             }
-            String[] split2 = split[0].split(":");
-            String[] split3 = split[1].split(":");
-            int length = (8 - split2.length) - split3.length;
+            String[] strArrSplit2 = strArrSplit[0].split(":");
+            String[] strArrSplit3 = strArrSplit[1].split(":");
+            int length = (8 - strArrSplit2.length) - strArrSplit3.length;
             StringBuilder sb = new StringBuilder();
-            while (i < split2.length) {
-                sb.append(split2[i] + ":");
+            while (i < strArrSplit2.length) {
+                sb.append(strArrSplit2[i] + ":");
                 i++;
             }
-            for (int length2 = split2.length; length2 < split2.length + length; length2++) {
+            for (int length2 = strArrSplit2.length; length2 < strArrSplit2.length + length; length2++) {
                 sb.append("0:");
             }
-            for (int length3 = split2.length + length; length3 < 8; length3++) {
-                sb.append(split3[(length3 - split2.length) - length]);
+            for (int length3 = strArrSplit2.length + length; length3 < 8; length3++) {
+                sb.append(strArrSplit3[(length3 - strArrSplit2.length) - length]);
                 if (length3 != 7) {
                     sb.append(":");
                 }
@@ -88,26 +86,26 @@ public class FirewallRuleValidator {
             return sb.toString();
         }
         if (str.charAt(0) == ':') {
-            String[] split4 = split[0].split(":");
-            int length4 = 8 - split4.length;
+            String[] strArrSplit4 = strArrSplit[0].split(":");
+            int length4 = 8 - strArrSplit4.length;
             StringBuilder sb2 = new StringBuilder();
             while (i < length4) {
                 sb2.append("0:");
                 i++;
             }
             for (int i2 = length4; i2 < 8; i2++) {
-                sb2.append(split4[i2 - length4]);
+                sb2.append(strArrSplit4[i2 - length4]);
                 if (i2 != 7) {
                     sb2.append(":");
                 }
             }
             return sb2.toString();
         }
-        String[] split5 = split[0].split(":");
-        int length5 = 8 - split5.length;
+        String[] strArrSplit5 = strArrSplit[0].split(":");
+        int length5 = 8 - strArrSplit5.length;
         StringBuilder sb3 = new StringBuilder();
         while (i < length5) {
-            sb3.append(split5[i] + ":");
+            sb3.append(strArrSplit5[i] + ":");
             i++;
         }
         while (length5 < 8) {
@@ -143,36 +141,36 @@ public class FirewallRuleValidator {
         return bArr2;
     }
 
-    public static byte[] translateIpv4TextualAddress(String str) {
+    public static byte[] translateIpv4TextualAddress(String str) throws NumberFormatException {
         if (str == null || str.length() == 0) {
             return null;
         }
         byte[] bArr = new byte[4];
-        String[] split = str.split("\\.", -1);
+        String[] strArrSplit = str.split("\\.", -1);
         try {
-            int length = split.length;
+            int length = strArrSplit.length;
             int i = 0;
             try {
                 if (length == 1) {
-                    long parseLong = Long.parseLong(split[0]);
-                    if (parseLong >= 0 && parseLong <= 4294967295L) {
-                        bArr[0] = (byte) ((parseLong >> 24) & 255);
-                        bArr[1] = (byte) (((16777215 & parseLong) >> 16) & 255);
-                        bArr[2] = (byte) (((parseLong & 65535) >> 8) & 255);
-                        bArr[3] = (byte) (parseLong & 255);
+                    long j = Long.parseLong(strArrSplit[0]);
+                    if (j >= 0 && j <= 4294967295L) {
+                        bArr[0] = (byte) ((j >> 24) & 255);
+                        bArr[1] = (byte) (((16777215 & j) >> 16) & 255);
+                        bArr[2] = (byte) (((j & 65535) >> 8) & 255);
+                        bArr[3] = (byte) (j & 255);
                         return bArr;
                     }
                     return null;
                 }
                 if (length == 2) {
-                    long parseInt = Integer.parseInt(split[0]);
-                    if (parseInt >= 0 && parseInt <= 255) {
-                        bArr[0] = (byte) (parseInt & 255);
-                        long parseInt2 = Integer.parseInt(split[1]);
-                        if (parseInt2 >= 0 && parseInt2 <= 16777215) {
-                            bArr[1] = (byte) ((parseInt2 >> 16) & 255);
-                            bArr[2] = (byte) (((parseInt2 & 65535) >> 8) & 255);
-                            bArr[3] = (byte) (parseInt2 & 255);
+                    long j2 = Integer.parseInt(strArrSplit[0]);
+                    if (j2 >= 0 && j2 <= 255) {
+                        bArr[0] = (byte) (j2 & 255);
+                        long j3 = Integer.parseInt(strArrSplit[1]);
+                        if (j3 >= 0 && j3 <= 16777215) {
+                            bArr[1] = (byte) ((j3 >> 16) & 255);
+                            bArr[2] = (byte) (((j3 & 65535) >> 8) & 255);
+                            bArr[3] = (byte) (j3 & 255);
                             return bArr;
                         }
                     }
@@ -183,9 +181,9 @@ public class FirewallRuleValidator {
                         return null;
                     }
                     while (i < 4) {
-                        long parseInt3 = Integer.parseInt(split[i]);
-                        if (parseInt3 >= 0 && parseInt3 <= 255) {
-                            bArr[i] = (byte) (parseInt3 & 255);
+                        long j4 = Integer.parseInt(strArrSplit[i]);
+                        if (j4 >= 0 && j4 <= 255) {
+                            bArr[i] = (byte) (j4 & 255);
                             i++;
                         }
                         return null;
@@ -193,17 +191,17 @@ public class FirewallRuleValidator {
                     return bArr;
                 }
                 while (i < 2) {
-                    long parseInt4 = Integer.parseInt(split[i]);
-                    if (parseInt4 >= 0 && parseInt4 <= 255) {
-                        bArr[i] = (byte) (parseInt4 & 255);
+                    long j5 = Integer.parseInt(strArrSplit[i]);
+                    if (j5 >= 0 && j5 <= 255) {
+                        bArr[i] = (byte) (j5 & 255);
                         i++;
                     }
                     return null;
                 }
-                long parseInt5 = Integer.parseInt(split[2]);
-                if (parseInt5 >= 0 && parseInt5 <= 65535) {
-                    bArr[2] = (byte) ((parseInt5 >> 8) & 255);
-                    bArr[3] = (byte) (parseInt5 & 255);
+                long j6 = Integer.parseInt(strArrSplit[2]);
+                if (j6 >= 0 && j6 <= 65535) {
+                    bArr[2] = (byte) ((j6 >> 8) & 255);
+                    bArr[3] = (byte) (j6 & 255);
                     return bArr;
                 }
                 return null;
@@ -215,21 +213,21 @@ public class FirewallRuleValidator {
         }
     }
 
-    public static boolean validadeIpv4Range(String str) {
+    public static boolean validadeIpv4Range(String str) throws NumberFormatException {
         if (str != null && str.contains("-")) {
-            String[] split = str.split("-");
-            if (split.length == 2 && validateIpv4Address(split[0]) && validateIpv4Address(split[1])) {
-                String[] split2 = split[0].split("\\.");
-                String[] split3 = split[1].split("\\.");
-                if (split2 != null && split2.length == 4 && split3 != null && split3.length == 4) {
+            String[] strArrSplit = str.split("-");
+            if (strArrSplit.length == 2 && validateIpv4Address(strArrSplit[0]) && validateIpv4Address(strArrSplit[1])) {
+                String[] strArrSplit2 = strArrSplit[0].split("\\.");
+                String[] strArrSplit3 = strArrSplit[1].split("\\.");
+                if (strArrSplit2 != null && strArrSplit2.length == 4 && strArrSplit3 != null && strArrSplit3.length == 4) {
                     for (int i = 0; i < 4; i++) {
                         try {
-                            int parseInt = Integer.parseInt(split2[i]);
-                            int parseInt2 = Integer.parseInt(split3[i]);
-                            if (parseInt > parseInt2) {
+                            int i2 = Integer.parseInt(strArrSplit2[i]);
+                            int i3 = Integer.parseInt(strArrSplit3[i]);
+                            if (i2 > i3) {
                                 return false;
                             }
-                            if (parseInt < parseInt2) {
+                            if (i2 < i3) {
                                 return true;
                             }
                         } catch (NumberFormatException unused) {
@@ -243,27 +241,27 @@ public class FirewallRuleValidator {
         return false;
     }
 
-    public static boolean validadeIpv6Range(String str) {
+    public static boolean validadeIpv6Range(String str) throws NumberFormatException {
         if (str != null && str.contains("-")) {
-            String[] split = str.split("-");
-            if (split.length == 2 && validateIpv6Address(split[0]) && validateIpv6Address(split[1])) {
-                String[] split2 = str.split("-");
-                if (split2[0].contains("::")) {
-                    split2[0] = convertIpv6ToCompleteForm(split2[0]);
+            String[] strArrSplit = str.split("-");
+            if (strArrSplit.length == 2 && validateIpv6Address(strArrSplit[0]) && validateIpv6Address(strArrSplit[1])) {
+                String[] strArrSplit2 = str.split("-");
+                if (strArrSplit2[0].contains("::")) {
+                    strArrSplit2[0] = convertIpv6ToCompleteForm(strArrSplit2[0]);
                 }
-                if (split2[1].contains("::")) {
-                    split2[1] = convertIpv6ToCompleteForm(split2[1]);
+                if (strArrSplit2[1].contains("::")) {
+                    strArrSplit2[1] = convertIpv6ToCompleteForm(strArrSplit2[1]);
                 }
-                String[] split3 = split2[0].split(":");
-                String[] split4 = split2[1].split(":");
-                if (split3 != null && split3.length == 8 && split4 != null && split4.length == 8) {
+                String[] strArrSplit3 = strArrSplit2[0].split(":");
+                String[] strArrSplit4 = strArrSplit2[1].split(":");
+                if (strArrSplit3 != null && strArrSplit3.length == 8 && strArrSplit4 != null && strArrSplit4.length == 8) {
                     for (int i = 0; i < 8; i++) {
-                        long parseLong = Long.parseLong(split3[i], 16);
-                        long parseLong2 = Long.parseLong(split4[i], 16);
-                        if (parseLong > parseLong2) {
+                        long j = Long.parseLong(strArrSplit3[i], 16);
+                        long j2 = Long.parseLong(strArrSplit4[i], 16);
+                        if (j > j2) {
                             return false;
                         }
-                        if (parseLong < parseLong2) {
+                        if (j < j2) {
                             return true;
                         }
                     }
@@ -276,10 +274,10 @@ public class FirewallRuleValidator {
 
     public static boolean validadePortNumberRange(String str) {
         if (str != null && str.contains("-")) {
-            String[] split = str.split("-");
-            if (split.length == 2 && validatePortNumber(split[0]) && validatePortNumber(split[1])) {
+            String[] strArrSplit = str.split("-");
+            if (strArrSplit.length == 2 && validatePortNumber(strArrSplit[0]) && validatePortNumber(strArrSplit[1])) {
                 try {
-                    return Integer.parseInt(split[0]) <= Integer.parseInt(split[1]);
+                    return Integer.parseInt(strArrSplit[0]) <= Integer.parseInt(strArrSplit[1]);
                 } catch (NumberFormatException unused) {
                 }
             }
@@ -398,25 +396,25 @@ public class FirewallRuleValidator {
         if (str.length() > 255) {
             return false;
         }
-        String[] split = str.split("\\.");
-        for (int i = 0; i < split[0].length(); i++) {
-            char charAt = split[0].charAt(i);
-            if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z')) {
+        String[] strArrSplit = str.split("\\.");
+        for (int i = 0; i < strArrSplit[0].length(); i++) {
+            char cCharAt = strArrSplit[0].charAt(i);
+            if ((cCharAt >= 'a' && cCharAt <= 'z') || (cCharAt >= 'A' && cCharAt <= 'Z')) {
                 int i2 = 0;
                 for (int i3 = 0; i3 < str.length(); i3++) {
                     if (str.charAt(i3) == '.') {
                         i2++;
                     }
                 }
-                if (i2 >= split.length) {
+                if (i2 >= strArrSplit.length) {
                     return false;
                 }
-                for (String str2 : split) {
+                for (String str2 : strArrSplit) {
                     if (str2.length() > 63) {
                         return false;
                     }
                 }
-                for (String str3 : split) {
+                for (String str3 : strArrSplit) {
                     if (!str3.matches("^[A-Za-z0-9-]+$") || str3.charAt(0) == '-' || str3.charAt(str3.length() - 1) == '-') {
                         return false;
                     }
@@ -441,86 +439,160 @@ public class FirewallRuleValidator {
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x00ab, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:56:0x00ab, code lost:
     
         if (r9 == false) goto L61;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x00af, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:58:0x00af, code lost:
     
         if ((r10 + 2) <= 16) goto L60;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:61:0x00b1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:59:0x00b1, code lost:
     
         return false;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:62:0x00b2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x00b2, code lost:
     
         r14 = r10 + 1;
         r2[r10] = (byte) ((r8 >> 8) & 255);
         r10 = r10 + 2;
         r2[r14] = (byte) (r8 & 255);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x00c2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:61:0x00c2, code lost:
     
         if (r11 == (-1)) goto L69;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:64:0x00c4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:62:0x00c4, code lost:
     
         r14 = r10 - r11;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x00c6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x00c6, code lost:
     
         if (r10 != 16) goto L65;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x00c8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:64:0x00c8, code lost:
     
         return false;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x00c9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:65:0x00c9, code lost:
     
         r3 = 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:68:0x00ca, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x00ca, code lost:
     
         if (r3 > r14) goto L87;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x00cc, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:67:0x00cc, code lost:
     
         r6 = (r11 + r14) - r3;
         r2[16 - r3] = r2[r6];
         r2[r6] = 0;
         r3 = r3 + 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:71:0x00da, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x00da, code lost:
     
         r10 = 16;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x00db, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:69:0x00db, code lost:
     
         if (r10 == 16) goto L71;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x00dd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:70:0x00dd, code lost:
     
         return false;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:74:0x00de, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:71:0x00de, code lost:
     
         translateIpv4MappedAddress(r2);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:75:0x00e1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:72:0x00e1, code lost:
     
         return true;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean validateIpv6Address(java.lang.String r14) {
-        /*
-            Method dump skipped, instructions count: 227
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.net.firewall.FirewallRuleValidator.validateIpv6Address(java.lang.String):boolean");
+    public static boolean validateIpv6Address(String str) {
+        int i;
+        byte[] bArrTranslateIpv4TextualAddress;
+        if (str != null && str.length() >= 2) {
+            byte[] bArr = new byte[16];
+            if (str.charAt(0) != ':') {
+                i = 0;
+            } else {
+                if (str.charAt(1) != ':') {
+                    return false;
+                }
+                i = 1;
+            }
+            int i2 = 0;
+            boolean z = false;
+            int i3 = 0;
+            int i4 = i;
+            int i5 = -1;
+            while (true) {
+                if (i >= str.length()) {
+                    break;
+                }
+                int i6 = i + 1;
+                char cCharAt = str.charAt(i);
+                int iDigit = Character.digit(cCharAt, 16);
+                if (iDigit != -1) {
+                    i2 = (i2 << 4) | iDigit;
+                    if (i2 > 65535) {
+                        return false;
+                    }
+                    z = true;
+                    i = i6;
+                } else if (cCharAt == ':') {
+                    if (z) {
+                        if (i6 == str.length() || i3 + 2 > 16) {
+                            return false;
+                        }
+                        int i7 = i3 + 1;
+                        bArr[i3] = (byte) ((i2 >> 8) & 255);
+                        i3 += 2;
+                        bArr[i7] = (byte) (i2 & 255);
+                        i2 = 0;
+                        z = false;
+                    } else {
+                        if (i5 != -1) {
+                            return false;
+                        }
+                        i5 = i3;
+                    }
+                    i = i6;
+                    i4 = i;
+                } else {
+                    if (cCharAt != '.' || i3 + 4 > 16) {
+                        return false;
+                    }
+                    String strSubstring = str.substring(i4, str.length());
+                    int i8 = 0;
+                    int i9 = 0;
+                    while (true) {
+                        int iIndexOf = strSubstring.indexOf(46, i8);
+                        if (iIndexOf == -1) {
+                            break;
+                        }
+                        i9++;
+                        i8 = iIndexOf + 1;
+                    }
+                    if (i9 != 3 || (bArrTranslateIpv4TextualAddress = translateIpv4TextualAddress(strSubstring)) == null) {
+                        return false;
+                    }
+                    int i10 = 0;
+                    while (i10 < 4) {
+                        bArr[i3] = bArrTranslateIpv4TextualAddress[i10];
+                        i10++;
+                        i3++;
+                    }
+                    z = false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 
     public static boolean validatePackageName(String str) {
@@ -528,17 +600,17 @@ public class FirewallRuleValidator {
             return false;
         }
         if (!"*".equals(str) && !Firewall.FIREWALL_SYSTEM_UIDS.equals(str)) {
-            String[] split = str.split("\\.");
+            String[] strArrSplit = str.split("\\.");
             int i = 0;
             for (int i2 = 0; i2 < str.length(); i2++) {
                 if (str.charAt(i2) == '.') {
                     i++;
                 }
             }
-            if (i >= split.length) {
+            if (i >= strArrSplit.length) {
                 return false;
             }
-            for (String str2 : split) {
+            for (String str2 : strArrSplit) {
                 if (!str2.matches("^[A-Za-z0-9_]+$") || str2.charAt(0) == '_' || (str2.charAt(0) >= '0' && str2.charAt(0) <= '9')) {
                     return false;
                 }
@@ -547,7 +619,7 @@ public class FirewallRuleValidator {
         return true;
     }
 
-    public static boolean validatePortNumber(String str) {
+    public static boolean validatePortNumber(String str) throws NumberFormatException {
         int i;
         if (str == null) {
             return false;
@@ -620,26 +692,83 @@ public class FirewallRuleValidator {
         return new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.INVALID_PARAMETER_ERROR, sb.toString());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0125  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0136  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0149  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0133  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x00f3  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00bf  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static com.samsung.android.knox.net.firewall.FirewallResponse validateRedirectRule(com.samsung.android.knox.net.firewall.FirewallRule r8) {
-        /*
-            Method dump skipped, instructions count: 341
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.net.firewall.FirewallRuleValidator.validateRedirectRule(com.samsung.android.knox.net.firewall.FirewallRule):com.samsung.android.knox.net.firewall.FirewallResponse");
+    public static FirewallResponse validateRedirectRule(FirewallRule firewallRule) {
+        boolean z;
+        StringBuilder sb = new StringBuilder();
+        if (firewallRule == null) {
+            return new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, FirewallResponseMessages.RULE_IS_NULL);
+        }
+        Firewall.AddressType addressType = firewallRule.getAddressType();
+        String ipAddress = firewallRule.getIpAddress();
+        Firewall.AddressType addressType2 = Firewall.AddressType.IPV4;
+        boolean z2 = false;
+        if (addressType.equals(addressType2)) {
+            if (!validadeIpv4Range(ipAddress) && !validateIpv4Address(ipAddress) && !"*".equals(ipAddress)) {
+                sb.append("Parameter(s): source address");
+                z = false;
+            }
+            z = true;
+        } else {
+            if (!validadeIpv6Range(ipAddress) && !validateIpv6Address(ipAddress) && !"*".equals(ipAddress)) {
+                sb.append("Parameter(s): source address");
+                z = false;
+            }
+            z = true;
+        }
+        if (!validatePortNumber(firewallRule.getPortNumber()) && !validadePortNumberRange(firewallRule.getPortNumber()) && !"*".equals(firewallRule.getPortNumber())) {
+            if (z) {
+                sb.append("Parameter(s): source port number");
+            } else {
+                sb.append(", source port number");
+            }
+            z = false;
+        }
+        String targetIpAddress = firewallRule.getTargetIpAddress();
+        if (addressType.equals(addressType2)) {
+            if (!validateIpv4Address(targetIpAddress)) {
+                sb.append("Parameter(s): target IP");
+                z = false;
+            }
+        } else if (!validateIpv6Address(targetIpAddress)) {
+            sb.append("Parameter(s): target IP");
+            z = false;
+        }
+        if (!validatePortNumber(firewallRule.getTargetPortNumber()) || "*".equals(firewallRule.getTargetPortNumber())) {
+            if (z) {
+                sb.append("Parameter(s): target port number");
+            } else {
+                sb.append(", target port number");
+            }
+            z = false;
+        }
+        if (firewallRule.getApplication() == null || firewallRule.getApplication().getPackageName() == null || (!TextUtils.isEmpty(firewallRule.getApplication().getPackageName()) && !validatePackageName(firewallRule.getApplication().getPackageName()))) {
+            if (z) {
+                sb.append("Parameter(s): app identity");
+            } else {
+                sb.append(", app identity");
+            }
+            z = false;
+        }
+        if ((firewallRule.getStrNetworkInterface() != null && !validateInterfaceName(firewallRule)) || firewallRule.getNetworkInterface() == null) {
+            if (z) {
+                sb.append("Parameter(s): network interface");
+            } else {
+                sb.append(", network interface");
+            }
+            z = false;
+        }
+        if (firewallRule.getProtocol() != null) {
+            z2 = z;
+        } else if (z) {
+            sb.append("Parameter(s): protocol");
+        } else {
+            sb.append(", protocol");
+        }
+        if (z2) {
+            return new FirewallResponse(FirewallResponse.Result.SUCCESS, FirewallResponse.ErrorCode.NO_ERROR, FirewallResponseMessages.VALIDATION_SUCCESS);
+        }
+        sb.append(FirewallResponseMessages.IS_ARE_INVALID);
+        return new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.INVALID_PARAMETER_ERROR, sb.toString());
     }
 
     public static boolean validateUidRule(FirewallRule firewallRule) {

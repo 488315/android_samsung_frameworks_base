@@ -283,10 +283,10 @@ public class LogMaker {
             return false;
         }
         for (int i = 0; i < this.entries.size(); i++) {
-            int keyAt = this.entries.keyAt(i);
-            Object valueAt = this.entries.valueAt(i);
-            Object obj = logMaker.entries.get(keyAt);
-            if ((valueAt == null && obj != null) || !valueAt.equals(obj)) {
+            int iKeyAt = this.entries.keyAt(i);
+            Object objValueAt = this.entries.valueAt(i);
+            Object obj = logMaker.entries.get(iKeyAt);
+            if ((objValueAt == null && obj != null) || !objValueAt.equals(obj)) {
                 return false;
             }
         }

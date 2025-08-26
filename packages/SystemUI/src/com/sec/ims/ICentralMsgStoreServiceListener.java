@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICentralMsgStoreServiceListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.ICentralMsgStoreServiceListener";
@@ -25,7 +24,6 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
 
     void onCmsSdManagementCompleted(int i, String str, int i2, int i3) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICentralMsgStoreServiceListener {
         static final int TRANSACTION_onCmsAccountInfoDelivered = 5;
         static final int TRANSACTION_onCmsDeRegistrationCompleted = 2;
@@ -35,7 +33,6 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
         static final int TRANSACTION_onCmsSdChanged = 4;
         static final int TRANSACTION_onCmsSdManagementCompleted = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICentralMsgStoreServiceListener {
             private IBinder mRemote;
 
@@ -54,117 +51,117 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsAccountInfoDelivered(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsDeRegistrationCompleted(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsDeRegistrationCompletedWithDetails(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsPushMessageReceived(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsRegistrationCompleted(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsSdChanged(boolean z, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreServiceListener
             public void onCmsSdManagementCompleted(int i, String str, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreServiceListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -177,8 +174,8 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICentralMsgStoreServiceListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICentralMsgStoreServiceListener)) ? new Proxy(iBinder) : (ICentralMsgStoreServiceListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICentralMsgStoreServiceListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICentralMsgStoreServiceListener)) ? new Proxy(iBinder) : (ICentralMsgStoreServiceListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -192,56 +189,56 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsRegistrationCompleted(readInt, readInt2);
+                    onCmsRegistrationCompleted(i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsDeRegistrationCompleted(readInt3);
+                    onCmsDeRegistrationCompleted(i5);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsSdManagementCompleted(readInt4, readString, readInt5, readInt6);
+                    onCmsSdManagementCompleted(i6, string, i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString2 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsSdChanged(readBoolean, readString2, readInt7);
+                    onCmsSdChanged(z, string2, i9);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsAccountInfoDelivered(readString3, readString4, readInt8);
+                    onCmsAccountInfoDelivered(string3, string4, i10);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onCmsPushMessageReceived(readString5, readString6, readString7);
+                    onCmsPushMessageReceived(string5, string6, string7);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCmsDeRegistrationCompletedWithDetails(readInt9, readInt10);
+                    onCmsDeRegistrationCompletedWithDetails(i11, i12);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -255,7 +252,6 @@ public interface ICentralMsgStoreServiceListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICentralMsgStoreServiceListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

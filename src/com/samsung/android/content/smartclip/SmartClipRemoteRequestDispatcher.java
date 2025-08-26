@@ -23,6 +23,7 @@ import android.widget.AbsListView;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.VideoView;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -173,7 +174,7 @@ public class SmartClipRemoteRequestDispatcher {
                             Runnable runnable = new Runnable() { // from class: com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.5
                                 @Override // java.lang.Runnable
                                 public void run() {
-                                    long currentTimeMillis = System.currentTimeMillis();
+                                    long jCurrentTimeMillis = System.currentTimeMillis();
                                     if (SmartClipRemoteRequestDispatcher.this.DEBUG) {
                                         Log.d(SmartClipRemoteRequestDispatcher.TAG, "dispatchInputEventInjection : injecting.. " + inputEvent);
                                     }
@@ -184,7 +185,7 @@ public class SmartClipRemoteRequestDispatcher {
                                         if (z) {
                                             SmartClipRemoteRequestDispatcher.this.sendResult(smartClipRemoteRequestInfo2, null);
                                         }
-                                        Log.d(SmartClipRemoteRequestDispatcher.TAG, "dispatchInputEventInjection : injection finished. Elapsed = " + (System.currentTimeMillis() - currentTimeMillis));
+                                        Log.d(SmartClipRemoteRequestDispatcher.TAG, "dispatchInputEventInjection : injection finished. Elapsed = " + (System.currentTimeMillis() - jCurrentTimeMillis));
                                     }
                                 }
                             };
@@ -211,7 +212,7 @@ public class SmartClipRemoteRequestDispatcher {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchScrollableAreaInfo(SmartClipRemoteRequestInfo smartClipRemoteRequestInfo) {
-        String str;
+        String name;
         View rootView = this.mViewRootImplGateway.getRootView();
         if (rootView == null) {
             Log.e(TAG, "dispatchScrollableAreaInfo : Root view is null!");
@@ -253,12 +254,12 @@ public class SmartClipRemoteRequestDispatcher {
         bundle.putString("packageName", packageName);
         Context context = this.mContext;
         if (context instanceof Activity) {
-            str = context.getClass().getName();
-            bundle.putString("activityName", str);
+            name = context.getClass().getName();
+            bundle.putString("activityName", name);
         } else {
-            str = null;
+            name = null;
         }
-        Log.d(TAG, "dispatchScrollableAreaInfo : Pkg=" + packageName + " Activity=" + str);
+        Log.d(TAG, "dispatchScrollableAreaInfo : Pkg=" + packageName + " Activity=" + name);
         sendResult(smartClipRemoteRequestInfo, bundle);
     }
 
@@ -271,23 +272,23 @@ public class SmartClipRemoteRequestDispatcher {
                 Log.e(TAG, "dispatchScrollableViewInfo : There is no hash value in request!");
                 return;
             }
-            View findViewByHashCode = findViewByHashCode(rootView, i);
+            View viewFindViewByHashCode = findViewByHashCode(rootView, i);
             Bundle bundle = new Bundle();
-            if (findViewByHashCode == null) {
+            if (viewFindViewByHashCode == null) {
                 Log.e(TAG, "dispatchScrollableViewInfo : Could not found the view! hash=" + i);
             } else {
                 bundle.putParcelable(KEY_SCROLLABLE_AREA_INFO_WINDOW_RECT, getTranslatedViewBoundsOnScreen(rootView));
-                bundle.putParcelable(KEY_SCROLLABLE_VIEW_INFO_TARGET_VIEW, createViewInfoAsBundle(findViewByHashCode));
+                bundle.putParcelable(KEY_SCROLLABLE_VIEW_INFO_TARGET_VIEW, createViewInfoAsBundle(viewFindViewByHashCode));
                 ArrayList<? extends Parcelable> arrayList = new ArrayList<>();
-                if (findViewByHashCode instanceof ViewGroup) {
-                    ViewGroup viewGroup = (ViewGroup) findViewByHashCode;
+                if (viewFindViewByHashCode instanceof ViewGroup) {
+                    ViewGroup viewGroup = (ViewGroup) viewFindViewByHashCode;
                     int childCount = viewGroup.getChildCount();
                     for (int i2 = 0; i2 < childCount; i2++) {
                         arrayList.add(createViewInfoAsBundle(viewGroup.getChildAt(i2)));
                     }
                 }
                 bundle.putParcelableArrayList(KEY_SCROLLABLE_VIEW_INFO_CHILD_VIEWS, arrayList);
-                Log.d(TAG, "dispatchScrollableViewInfo : " + findViewByHashCode + "ChildCnt=" + arrayList.size());
+                Log.d(TAG, "dispatchScrollableViewInfo : " + viewFindViewByHashCode + "ChildCnt=" + arrayList.size());
             }
             sendResult(smartClipRemoteRequestInfo, bundle);
         }
@@ -302,18 +303,18 @@ public class SmartClipRemoteRequestDispatcher {
         }
     }
 
-    private Bundle createViewInfoAsBundle(View view) {
+    private Bundle createViewInfoAsBundle(View view) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Bundle bundle = new Bundle();
-        int hashCode = view.hashCode();
+        int iHashCode = view.hashCode();
         Rect translatedViewBoundsOnScreen = getTranslatedViewBoundsOnScreen(view);
         ArrayList<String> viewHierarchyTable = getViewHierarchyTable(view);
-        bundle.putInt(KEY_VIEW_INFO_HASHCODE, hashCode);
+        bundle.putInt(KEY_VIEW_INFO_HASHCODE, iHashCode);
         bundle.putParcelable(KEY_VIEW_INFO_SCREEN_RECT, translatedViewBoundsOnScreen);
         bundle.putStringArrayList(KEY_VIEW_INFO_HIERARCHY, viewHierarchyTable);
         addScrollYInfoToBundle(view, bundle);
         addBrowserInfoToBundle(view, bundle);
         if (this.DEBUG) {
-            Log.d(TAG, "createScrollableViewInfo : Scrollable view hash=@" + Integer.toHexString(hashCode).toUpperCase() + " / Rect=" + translatedViewBoundsOnScreen);
+            Log.d(TAG, "createScrollableViewInfo : Scrollable view hash=@" + Integer.toHexString(iHashCode).toUpperCase() + " / Rect=" + translatedViewBoundsOnScreen);
             Iterator<String> it = viewHierarchyTable.iterator();
             while (it.hasNext()) {
                 Log.d(TAG, "createScrollableViewInfo :   + " + it.next());
@@ -322,7 +323,7 @@ public class SmartClipRemoteRequestDispatcher {
         return bundle;
     }
 
-    private void addScrollYInfoToBundle(View view, Bundle bundle) {
+    private void addScrollYInfoToBundle(View view, Bundle bundle) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (view instanceof WebView) {
             bundle.putBoolean(KEY_VIEW_INFO_SCROLLY_SUPPORTED, true);
             bundle.putFloat(KEY_VIEW_INFO_SCROLLY, ((WebView) view).getScrollY());
@@ -330,26 +331,26 @@ public class SmartClipRemoteRequestDispatcher {
         }
         Class<?> cls = view.getClass();
         if (cls.getSimpleName().equals("SpenComposer")) {
-            Object obj = null;
+            Object objInvoke = null;
             try {
-                obj = cls.getMethod("getDeltaY", null).invoke(view, null);
+                objInvoke = cls.getMethod("getDeltaY", null).invoke(view, null);
             } catch (Exception e) {
                 Log.e(TAG, "addScrollYInfoToBundle : view = " + cls.getSimpleName(), e);
             }
-            if (obj != null) {
+            if (objInvoke != null) {
                 bundle.putBoolean(KEY_VIEW_INFO_SCROLLY_SUPPORTED, true);
-                bundle.putFloat(KEY_VIEW_INFO_SCROLLY, ((Float) obj).floatValue() * (-1.0f));
+                bundle.putFloat(KEY_VIEW_INFO_SCROLLY, ((Float) objInvoke).floatValue() * (-1.0f));
             }
         }
     }
 
-    private void addBrowserInfoToBundle(View view, Bundle bundle) {
+    private void addBrowserInfoToBundle(View view, Bundle bundle) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> cls = view.getClass();
         if (cls.getSimpleName().equals("TinContentView")) {
             Rect rect = null;
             try {
-                Object invoke = cls.getMethod("getTinContentViewCore", null).invoke(view, null);
-                rect = (Rect) invoke.getClass().getMethod("getCurrentVisibleRect", null).invoke(invoke, null);
+                Object objInvoke = cls.getMethod("getTinContentViewCore", null).invoke(view, null);
+                rect = (Rect) objInvoke.getClass().getMethod("getCurrentVisibleRect", null).invoke(objInvoke, null);
             } catch (Exception e) {
                 Log.e(TAG, "addBrowserInfoToBundle : view = " + cls.getSimpleName(), e);
             }
@@ -361,8 +362,8 @@ public class SmartClipRemoteRequestDispatcher {
 
     private ArrayList<String> getViewHierarchyTable(View view) {
         ArrayList<String> arrayList = new ArrayList<>();
-        for (Class<?> cls = view.getClass(); cls != null; cls = cls.getSuperclass()) {
-            String name = cls.getName();
+        for (Class<?> superclass = view.getClass(); superclass != null; superclass = superclass.getSuperclass()) {
+            String name = superclass.getName();
             arrayList.add(name);
             if ("android.view.View".equals(name)) {
                 break;
@@ -417,56 +418,56 @@ public class SmartClipRemoteRequestDispatcher {
                 arrayList2.add(view);
                 return;
             }
-            Class<?> cls = view.getClass();
+            Class<?> superclass = view.getClass();
             boolean z4 = true;
             boolean z5 = false;
             Class<?>[] clsArr = {MotionEvent.class};
             Class<?>[] clsArr2 = {Canvas.class};
             boolean z6 = false;
-            while (cls != null) {
-                String name3 = cls.getName();
+            while (superclass != null) {
+                String name3 = superclass.getName();
                 if (name3.startsWith("android.view.") != z4 && name3.startsWith("android.widget.") != z4 && name3.startsWith("com.android.internal.") != z4) {
                     boolean z7 = z5;
-                    if (isMethodDeclared(cls, "dispatchTouchEvent", clsArr) == z4) {
+                    if (isMethodDeclared(superclass, "dispatchTouchEvent", clsArr) == z4) {
                         if (this.DEBUG) {
-                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have dispatchTouchEvent() " + name + " / " + cls.getName() + " / Rect=" + translatedViewBoundsOnScreen);
+                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have dispatchTouchEvent() " + name + " / " + superclass.getName() + " / Rect=" + translatedViewBoundsOnScreen);
                         }
                         z2 = true;
                     } else {
                         z2 = z7;
                     }
                     boolean z8 = z2;
-                    if (isMethodDeclared(cls, "onTouchEvent", clsArr)) {
+                    if (isMethodDeclared(superclass, "onTouchEvent", clsArr)) {
                         if (this.DEBUG) {
-                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have onTouchEvent() " + name + " / " + cls.getName() + " / Rect=" + translatedViewBoundsOnScreen);
+                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have onTouchEvent() " + name + " / " + superclass.getName() + " / Rect=" + translatedViewBoundsOnScreen);
                         }
                         z3 = true;
                     } else {
                         z3 = z8;
                     }
                     z = z3;
-                    if (isMethodDeclared(cls, "onDraw", clsArr2)) {
+                    if (isMethodDeclared(superclass, "onDraw", clsArr2)) {
                         if (this.DEBUG) {
-                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have onDraw() " + name + " / " + cls.getName() + " / Rect=" + translatedViewBoundsOnScreen);
+                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have onDraw() " + name + " / " + superclass.getName() + " / Rect=" + translatedViewBoundsOnScreen);
                         }
                         z6 = true;
                     }
-                    if (isMethodDeclared(cls, "draw", clsArr2)) {
+                    if (isMethodDeclared(superclass, "draw", clsArr2)) {
                         if (this.DEBUG) {
-                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have draw() " + name + " / " + cls.getName() + " / Rect=" + translatedViewBoundsOnScreen);
+                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have draw() " + name + " / " + superclass.getName() + " / Rect=" + translatedViewBoundsOnScreen);
                         }
                         z6 = true;
                     }
-                    if (isMethodDeclared(cls, "dispatchDraw", clsArr2)) {
+                    if (isMethodDeclared(superclass, "dispatchDraw", clsArr2)) {
                         if (this.DEBUG) {
-                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have dispatchDraw() " + name + " / " + cls.getName() + " / Rect=" + translatedViewBoundsOnScreen);
+                            Log.d(TAG, "findScrollableViews : @" + upperCase + " Have dispatchDraw() " + name + " / " + superclass.getName() + " / Rect=" + translatedViewBoundsOnScreen);
                         }
                         z6 = true;
                     }
                     if (z && z6) {
                         break;
                     }
-                    cls = cls.getSuperclass();
+                    superclass = superclass.getSuperclass();
                     z5 = z;
                     z4 = true;
                 } else {
@@ -503,9 +504,9 @@ public class SmartClipRemoteRequestDispatcher {
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
             for (int childCount = viewGroup.getChildCount() - 1; childCount >= 0; childCount--) {
-                View findViewByHashCode = findViewByHashCode(viewGroup.getChildAt(childCount), i);
-                if (findViewByHashCode != null) {
-                    return findViewByHashCode;
+                View viewFindViewByHashCode = findViewByHashCode(viewGroup.getChildAt(childCount), i);
+                if (viewFindViewByHashCode != null) {
+                    return viewFindViewByHashCode;
                 }
             }
         }

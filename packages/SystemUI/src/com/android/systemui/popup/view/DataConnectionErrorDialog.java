@@ -10,7 +10,6 @@ import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.popup.data.DataConnectionErrorData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataConnectionErrorDialog implements PopupUIAlertDialog {
     private static final int INVALID_TYPE = -1;
@@ -39,9 +38,9 @@ public class DataConnectionErrorDialog implements PopupUIAlertDialog {
             alertParams.mNegativeButtonText = string4;
             alertParams.mNegativeButtonListener = null;
         }
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.getWindow().getAttributes().setTitle(TAG);
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().getAttributes().setTitle(TAG);
         this.mDialog.getWindow().setType(2008);
         AlertDialog alertDialog = this.mDialog;
         alertDialog.mAlert.mIsBlurEnabled = true;

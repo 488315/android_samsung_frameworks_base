@@ -11,7 +11,6 @@ import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HapClientProfile implements LocalBluetoothProfile {
     public final BluetoothAdapter mBluetoothAdapter;
@@ -20,7 +19,6 @@ public class HapClientProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothHapClient mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HapClientServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ HapClientServiceListener(HapClientProfile hapClientProfile, int i) {
             this();
@@ -33,13 +31,13 @@ public class HapClientProfile implements LocalBluetoothProfile {
             List connectedDevices = bluetoothHapClient.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = HapClientProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                if (findDevice == null) {
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = HapClientProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceFindDevice == null) {
                     Log.w("HapClientProfile", "HapClient profile found new device: " + bluetoothDevice);
-                    findDevice = HapClientProfile.this.mDeviceManager.addDevice(bluetoothDevice);
+                    cachedBluetoothDeviceFindDevice = HapClientProfile.this.mDeviceManager.addDevice(bluetoothDevice);
                 }
-                findDevice.onProfileStateChanged(HapClientProfile.this, 2);
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.onProfileStateChanged(HapClientProfile.this, 2);
+                cachedBluetoothDeviceFindDevice.refresh();
             }
             CachedBluetoothDeviceManager cachedBluetoothDeviceManager = HapClientProfile.this.mDeviceManager;
             synchronized (cachedBluetoothDeviceManager) {

@@ -47,26 +47,26 @@ public class MedicalInfoActionViewModel implements ActionViewModel {
             return;
         }
         Display[] displays = ((DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE)).getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
-        int i = 0;
+        int displayId = 0;
         Display display = displays[0];
         int length = displays.length;
-        int i2 = 0;
+        int i = 0;
         while (true) {
-            if (i2 >= length) {
+            if (i >= length) {
                 break;
             }
-            Display display2 = displays[i2];
+            Display display2 = displays[i];
             if (display2.getDisplayId() == 1) {
                 display = display2;
                 break;
             }
-            i2++;
+            i++;
         }
         if (display != null) {
             Intent intent = new Intent();
-            ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
+            ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
             if (SemWindowManager.getInstance().isFolded()) {
-                i = display.getDisplayId();
+                displayId = display.getDisplayId();
                 intent.setAction("com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
                 intent.putExtra("launchMedicalInfo", true);
             } else {
@@ -74,8 +74,8 @@ public class MedicalInfoActionViewModel implements ActionViewModel {
             }
             intent.addFlags(268468224);
             intent.putExtra("from_global_action", true);
-            makeCustomAnimation.setLaunchDisplayId(i);
-            this.mContext.startActivityAsUser(intent, makeCustomAnimation.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
+            activityOptionsMakeCustomAnimation.setLaunchDisplayId(displayId);
+            this.mContext.startActivityAsUser(intent, activityOptionsMakeCustomAnimation.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
         }
         this.mGlobalActions.dismissDialog(true);
         this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS, 9L);

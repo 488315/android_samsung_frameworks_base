@@ -39,13 +39,13 @@ public final class ImsiEncryptionInfo {
 
     public static final ArrayList<ImsiEncryptionInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ImsiEncryptionInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ImsiEncryptionInfo imsiEncryptionInfo = new ImsiEncryptionInfo();
-            imsiEncryptionInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 72);
+            imsiEncryptionInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 72);
             arrayList.add(imsiEncryptionInfo);
         }
         return arrayList;
@@ -58,10 +58,10 @@ public final class ImsiEncryptionInfo {
         this.mnc = hwBlob.getString(j2);
         hwParcel.readEmbeddedBuffer(r4.getBytes().length + 1, hwBlob.handle(), j2, false);
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 32, true);
         this.carrierKey.clear();
         for (int i = 0; i < int32; i++) {
-            this.carrierKey.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.carrierKey.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
         long j3 = j + 48;
         this.keyIdentifier = hwBlob.getString(j3);

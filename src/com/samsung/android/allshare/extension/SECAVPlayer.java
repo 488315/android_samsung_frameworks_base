@@ -13,9 +13,11 @@ import com.samsung.android.allshare.media.AVPlayer;
 import com.samsung.android.allshare.media.ContentInfo;
 import com.samsung.android.allshare.media.MediaInfo;
 import com.sec.android.allshare.iface.message.AllShareEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventListener, AVPlayer.IAVPlayerExtensionEventListener, AVPlayer.IAVPlayerPlaybackResponseListener, AVPlayer.IAVPlayerExtensionResponseListener {
@@ -634,44 +636,26 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x000c, code lost:
-    
-        if (r0 > 100) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0008 A[PHI: r1
+      0x0008: PHI (r1v4 int) = (r1v0 int), (r1v1 int) binds: [B:3:0x0006, B:6:0x000c] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setVolumeDelta(int r3) {
-        /*
-            r2 = this;
-            int r0 = r2.mVolumeDelta
-            int r0 = r0 + r3
-            r1 = 0
-            r2.mVolumeDelta = r1
-            if (r0 >= 0) goto La
-        L8:
-            r0 = r1
-            goto Lf
-        La:
-            r1 = 100
-            if (r0 <= r1) goto Lf
-            goto L8
-        Lf:
-            if (r3 == r0) goto L29
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r1 = " setVolumeDelta - "
-            r3.<init>(r1)
-            r3.append(r0)
-            java.lang.String r3 = r3.toString()
-            java.lang.String r1 = "SECAVPLAYER"
-            com.samsung.android.allshare.DLog.i_api(r1, r3)
-            com.samsung.android.allshare.media.AVPlayer r2 = r2.mAVPlayer
-            r2.setVolume(r0)
-        L29:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.allshare.extension.SECAVPlayer.setVolumeDelta(int):void");
+    public void setVolumeDelta(int i) {
+        int i2 = this.mVolumeDelta + i;
+        int i3 = 0;
+        this.mVolumeDelta = 0;
+        if (i2 < 0) {
+            i2 = i3;
+        } else {
+            i3 = 100;
+            if (i2 > 100) {
+            }
+        }
+        if (i != i2) {
+            DLog.i_api("SECAVPLAYER", " setVolumeDelta - " + i2);
+            this.mAVPlayer.setVolume(i2);
+        }
     }
 
     public void changeMute() {
@@ -816,7 +800,7 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     }
 
     @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerExtensionEventListener
-    public void onExtensionEvent(String str, String str2, ERROR error) {
+    public void onExtensionEvent(String str, String str2, ERROR error) throws XmlPullParserException, IOException {
         DLog.i_api("SECAVPLAYER", "onExtensionEvent: " + str);
         if (AllShareEvent.EVENT_RENDERER_ASPECT_RATIO.equals(str)) {
             DLog.i_api("SECAVPLAYER", "event onAspectRatio");
@@ -824,17 +808,17 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
             return;
         }
         ArrayList arrayList = new ArrayList();
-        List<Caption> parseCaption = Caption.parseCaption(str2);
-        if (parseCaption == null) {
+        List<Caption> caption = Caption.parseCaption(str2);
+        if (caption == null) {
             error = ERROR.FAIL;
         } else {
-            for (Caption caption : parseCaption) {
-                String captionFilePathFromURI = getCaptionFilePathFromURI(caption.getCaptionUri());
+            for (Caption caption2 : caption) {
+                String captionFilePathFromURI = getCaptionFilePathFromURI(caption2.getCaptionUri());
                 if (captionFilePathFromURI != null && !captionFilePathFromURI.isEmpty()) {
-                    caption.setCaptionUri(captionFilePathFromURI);
+                    caption2.setCaptionUri(captionFilePathFromURI);
                 }
-                arrayList.add(caption);
-                DLog.i_api(TAG_CLASS, "onExtensionEvent : [caption]" + caption.toString());
+                arrayList.add(caption2);
+                DLog.i_api(TAG_CLASS, "onExtensionEvent : [caption]" + caption2.toString());
             }
         }
         if (AllShareEvent.EVENT_RENDERER_CAPTIONS.equals(str)) {

@@ -20,7 +20,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.navigationbar.util.IconDrawableUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyButtonDrawable extends Drawable {
     public static final AnonymousClass1 KEY_DRAWABLE_ROTATE = new FloatProperty("KeyButtonRotation") { // from class: com.android.systemui.navigationbar.views.buttons.KeyButtonDrawable.1
@@ -58,7 +57,6 @@ public class KeyButtonDrawable extends Drawable {
     public final Paint mShadowPaint;
     public final ShadowDrawableState mState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShadowDrawableState extends Drawable.ConstantState {
         public int mAlpha = 255;
         public int mBaseHeight;
@@ -109,7 +107,7 @@ public class KeyButtonDrawable extends Drawable {
         this(null, shadowDrawableState);
     }
 
-    public static KeyButtonDrawable create(Context context, int i, int i2, int i3, boolean z) {
+    public static KeyButtonDrawable create(Context context, int i, int i2, int i3, boolean z) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         boolean z2 = resources.getConfiguration().getLayoutDirection() == 1;
         Drawable drawable = context.getDrawable(i3);
@@ -157,20 +155,20 @@ public class KeyButtonDrawable extends Drawable {
         if (this.mState.mLastDrawnIcon == null || z) {
             int intrinsicWidth = getIntrinsicWidth();
             int intrinsicHeight = getIntrinsicHeight();
-            Bitmap createBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
-            Canvas canvas2 = new Canvas(createBitmap);
-            Drawable mutate = this.mState.mChildState.newDrawable().mutate();
-            setDrawableBounds(mutate);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
+            Canvas canvas2 = new Canvas(bitmapCreateBitmap);
+            Drawable drawableMutate = this.mState.mChildState.newDrawable().mutate();
+            setDrawableBounds(drawableMutate);
             canvas2.save();
             if (this.mState.mHorizontalFlip) {
                 canvas2.scale(-1.0f, 1.0f, intrinsicWidth * 0.5f, intrinsicHeight * 0.5f);
             }
-            mutate.draw(canvas2);
+            drawableMutate.draw(canvas2);
             canvas2.restore();
             if (this.mState.mIsHardwareBitmap) {
-                createBitmap = createBitmap.copy(Bitmap.Config.HARDWARE, false);
+                bitmapCreateBitmap = bitmapCreateBitmap.copy(Bitmap.Config.HARDWARE, false);
             }
-            this.mState.mLastDrawnIcon = createBitmap;
+            this.mState.mLastDrawnIcon = bitmapCreateBitmap;
         }
         canvas.save();
         ShadowDrawableState shadowDrawableState = this.mState;
@@ -186,34 +184,34 @@ public class KeyButtonDrawable extends Drawable {
                 } else {
                     int intrinsicWidth2 = getIntrinsicWidth();
                     int intrinsicHeight2 = getIntrinsicHeight();
-                    Bitmap createBitmap2 = Bitmap.createBitmap(intrinsicWidth2, intrinsicHeight2, Bitmap.Config.ARGB_8888);
-                    Canvas canvas3 = new Canvas(createBitmap2);
-                    Drawable mutate2 = this.mState.mChildState.newDrawable().mutate();
-                    setDrawableBounds(mutate2);
+                    Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(intrinsicWidth2, intrinsicHeight2, Bitmap.Config.ARGB_8888);
+                    Canvas canvas3 = new Canvas(bitmapCreateBitmap2);
+                    Drawable drawableMutate2 = this.mState.mChildState.newDrawable().mutate();
+                    setDrawableBounds(drawableMutate2);
                     canvas3.save();
                     if (this.mState.mHorizontalFlip) {
                         canvas3.scale(-1.0f, 1.0f, intrinsicWidth2 * 0.5f, intrinsicHeight2 * 0.5f);
                     }
-                    mutate2.draw(canvas3);
+                    drawableMutate2.draw(canvas3);
                     canvas3.restore();
                     Paint paint = new Paint(3);
                     paint.setMaskFilter(new BlurMaskFilter(this.mState.mShadowSize, BlurMaskFilter.Blur.NORMAL));
-                    Bitmap extractAlpha = createBitmap2.extractAlpha(paint, new int[2]);
+                    Bitmap bitmapExtractAlpha = bitmapCreateBitmap2.extractAlpha(paint, new int[2]);
                     paint.setMaskFilter(null);
-                    createBitmap2.eraseColor(0);
-                    canvas3.drawBitmap(extractAlpha, r4[0], r4[1], paint);
+                    bitmapCreateBitmap2.eraseColor(0);
+                    canvas3.drawBitmap(bitmapExtractAlpha, r4[0], r4[1], paint);
                     if (this.mState.mIsHardwareBitmap) {
-                        createBitmap2 = createBitmap2.copy(Bitmap.Config.HARDWARE, false);
+                        bitmapCreateBitmap2 = bitmapCreateBitmap2.copy(Bitmap.Config.HARDWARE, false);
                     }
-                    this.mState.mLastDrawnShadow = createBitmap2;
+                    this.mState.mLastDrawnShadow = bitmapCreateBitmap2;
                 }
             }
             double d = (float) ((this.mState.mRotateDegrees * 3.141592653589793d) / 180.0d);
-            float cos = ((float) ((Math.cos(d) * this.mState.mShadowOffsetX) + (Math.sin(d) * this.mState.mShadowOffsetY))) - 0.0f;
-            double cos2 = Math.cos(d) * this.mState.mShadowOffsetY;
-            double sin = Math.sin(d);
+            float fCos = ((float) ((Math.cos(d) * this.mState.mShadowOffsetX) + (Math.sin(d) * this.mState.mShadowOffsetY))) - 0.0f;
+            double dCos = Math.cos(d) * this.mState.mShadowOffsetY;
+            double dSin = Math.sin(d);
             ShadowDrawableState shadowDrawableState3 = this.mState;
-            canvas.drawBitmap(shadowDrawableState3.mLastDrawnShadow, cos, ((float) (cos2 - (sin * shadowDrawableState3.mShadowOffsetX))) - shadowDrawableState3.mTranslationY, this.mShadowPaint);
+            canvas.drawBitmap(shadowDrawableState3.mLastDrawnShadow, fCos, ((float) (dCos - (dSin * shadowDrawableState3.mShadowOffsetX))) - shadowDrawableState3.mTranslationY, this.mShadowPaint);
         }
         canvas.drawBitmap(this.mState.mLastDrawnIcon, (Rect) null, bounds, this.mIconPaint);
         canvas.restore();
@@ -276,9 +274,9 @@ public class KeyButtonDrawable extends Drawable {
         LayerDrawable layerDrawable;
         this.mState.mDarkIntensity = f;
         if (!BasicRune.NAVBAR_ENABLED || (layerDrawable = this.mLayerDrawable) == null) {
-            int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mState.mLightColor), Integer.valueOf(this.mState.mDarkColor))).intValue();
+            int iIntValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mState.mLightColor), Integer.valueOf(this.mState.mDarkColor))).intValue();
             updateShadowAlpha();
-            setColorFilter(new PorterDuffColorFilter(intValue, PorterDuff.Mode.SRC_ATOP));
+            setColorFilter(new PorterDuffColorFilter(iIntValue, PorterDuff.Mode.SRC_ATOP));
         } else {
             layerDrawable.getDrawable(0).mutate().setAlpha((int) ((1.0f - f) * 255.0f));
             this.mLayerDrawable.getDrawable(1).mutate().setAlpha((int) (f * 255.0f));
@@ -288,10 +286,10 @@ public class KeyButtonDrawable extends Drawable {
 
     public final void setDrawableBounds(Drawable drawable) {
         ShadowDrawableState shadowDrawableState = this.mState;
-        int abs = Math.abs(shadowDrawableState.mShadowOffsetX) + shadowDrawableState.mShadowSize;
+        int iAbs = Math.abs(shadowDrawableState.mShadowOffsetX) + shadowDrawableState.mShadowSize;
         ShadowDrawableState shadowDrawableState2 = this.mState;
-        int abs2 = Math.abs(shadowDrawableState2.mShadowOffsetY) + shadowDrawableState2.mShadowSize;
-        drawable.setBounds(abs, abs2, getIntrinsicWidth() - abs, getIntrinsicHeight() - abs2);
+        int iAbs2 = Math.abs(shadowDrawableState2.mShadowOffsetY) + shadowDrawableState2.mShadowSize;
+        drawable.setBounds(iAbs, iAbs2, getIntrinsicWidth() - iAbs, getIntrinsicHeight() - iAbs2);
     }
 
     public final void setRotation(float f) {
@@ -313,8 +311,8 @@ public class KeyButtonDrawable extends Drawable {
     }
 
     public final void updateShadowAlpha() {
-        int alpha = Color.alpha(this.mState.mShadowColor);
-        this.mShadowPaint.setAlpha(Math.round((1.0f - this.mState.mDarkIntensity) * (r4.mAlpha / 255.0f) * alpha));
+        int iAlpha = Color.alpha(this.mState.mShadowColor);
+        this.mShadowPaint.setAlpha(Math.round((1.0f - this.mState.mDarkIntensity) * (r4.mAlpha / 255.0f) * iAlpha));
     }
 
     public KeyButtonDrawable(Drawable drawable, int i, int i2, boolean z, Color color) {

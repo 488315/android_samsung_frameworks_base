@@ -9,7 +9,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ObjectList {
     public int _size;
@@ -27,9 +26,9 @@ public abstract class ObjectList {
             if (i == i2) {
                 Object[] objArr = this.content;
                 Object[] objArr2 = objectList.content;
-                IntRange until = RangesKt___RangesKt.until(0, i2);
-                int i3 = until.first;
-                int i4 = until.last;
+                IntRange intRangeUntil = RangesKt___RangesKt.until(0, i2);
+                int i3 = intRangeUntil.first;
+                int i4 = intRangeUntil.last;
                 if (i3 > i4) {
                     return true;
                 }
@@ -63,12 +62,12 @@ public abstract class ObjectList {
     public final int hashCode() {
         Object[] objArr = this.content;
         int i = this._size;
-        int i2 = 0;
-        for (int i3 = 0; i3 < i; i3++) {
-            Object obj = objArr[i3];
-            i2 += (obj != null ? obj.hashCode() : 0) * 31;
+        int iHashCode = 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            Object obj = objArr[i2];
+            iHashCode += (obj != null ? obj.hashCode() : 0) * 31;
         }
-        return i2;
+        return iHashCode;
     }
 
     public final int indexOf(Object obj) {
@@ -104,21 +103,17 @@ public abstract class ObjectList {
     }
 
     public final void throwIndexOutOfBoundsExclusiveException$collection(int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index ", " must be in 0..");
-        m.append(this._size - 1);
-        RuntimeHelpersKt.throwIndexOutOfBoundsException(m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index ", " must be in 0..");
+        sbM.append(this._size - 1);
+        RuntimeHelpersKt.throwIndexOutOfBoundsException(sbM.toString());
         throw null;
     }
 
     public final String toString() {
-        Function1 function1 = new Function1() { // from class: androidx.collection.ObjectList$toString$1
-            {
-                super(1);
-            }
-
+        Function1 function1 = new Function1() { // from class: androidx.collection.ObjectList.toString.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return obj == ObjectList.this ? "(this)" : String.valueOf(obj);
             }
         };
@@ -140,7 +135,7 @@ public abstract class ObjectList {
             if (i2 != 0) {
                 sb.append((CharSequence) ", ");
             }
-            sb.append((CharSequence) function1.mo779invoke(obj));
+            sb.append((CharSequence) function1.mo781invoke(obj));
             i2++;
         }
         return sb.toString();

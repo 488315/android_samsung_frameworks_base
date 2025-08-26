@@ -9,12 +9,10 @@ import com.android.systemui.temporarydisplay.chipbar.ChipbarInfo;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaTttUtils {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,8 +22,8 @@ public final class MediaTttUtils {
             if (str != null) {
                 PackageManager packageManager = context.getPackageManager();
                 try {
-                    String obj = packageManager.getApplicationInfo(str, PackageManager.ApplicationInfoFlags.of(0L)).loadLabel(packageManager).toString();
-                    return new IconInfo(z ? new ContentDescription.Loaded(context.getString(R.string.media_transfer_receiver_content_description_with_app_name, obj)) : new ContentDescription.Loaded(obj), new MediaTttIcon.Loaded(packageManager.getApplicationIcon(str)), null, true);
+                    String string = packageManager.getApplicationInfo(str, PackageManager.ApplicationInfoFlags.of(0L)).loadLabel(packageManager).toString();
+                    return new IconInfo(z ? new ContentDescription.Loaded(context.getString(R.string.media_transfer_receiver_content_description_with_app_name, string)) : new ContentDescription.Loaded(string), new MediaTttIcon.Loaded(packageManager.getApplicationIcon(str)), null, true);
                 } catch (PackageManager.NameNotFoundException unused) {
                     function0.invoke();
                 }

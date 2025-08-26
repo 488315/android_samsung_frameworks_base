@@ -6,7 +6,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableObjectIntMap extends ObjectIntMap {
     public int growthLimit;
@@ -58,8 +57,8 @@ public final class MutableObjectIntMap extends ObjectIntMap {
         int i2 = 1;
         char c = 7;
         int i3 = -862048943;
-        int hashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
-        int i4 = hashCode ^ (hashCode << 16);
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
+        int i4 = iHashCode ^ (iHashCode << 16);
         int i5 = i4 >>> 7;
         int i6 = i4 & 127;
         int i7 = this._capacity;
@@ -79,19 +78,19 @@ public final class MutableObjectIntMap extends ObjectIntMap {
             long j6 = -9187201950435737472L;
             long j7 = (~j5) & (j5 - 72340172838076673L) & (-9187201950435737472L);
             while (j7 != 0) {
-                int numberOfTrailingZeros = (i8 + (Long.numberOfTrailingZeros(j7) >> 3)) & i7;
+                int iNumberOfTrailingZeros = (i8 + (Long.numberOfTrailingZeros(j7) >> 3)) & i7;
                 int i15 = i3;
-                if (Intrinsics.areEqual(this.keys[numberOfTrailingZeros], obj)) {
-                    return numberOfTrailingZeros;
+                if (Intrinsics.areEqual(this.keys[iNumberOfTrailingZeros], obj)) {
+                    return iNumberOfTrailingZeros;
                 }
                 j7 &= j7 - 1;
                 i3 = i15;
             }
             int i16 = i3;
             if ((j3 & ((~j3) << 6) & (-9187201950435737472L)) != 0) {
-                int findFirstAvailableSlot = findFirstAvailableSlot(i5);
+                int iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                 long j8 = 255;
-                if (this.growthLimit != 0 || ((this.metadata[findFirstAvailableSlot >> 3] >> ((findFirstAvailableSlot & 7) << 3)) & 255) == 254) {
+                if (this.growthLimit != 0 || ((this.metadata[iFindFirstAvailableSlot >> 3] >> ((iFindFirstAvailableSlot & 7) << 3)) & 255) == 254) {
                     j = 255;
                     j2 = 128;
                 } else {
@@ -130,12 +129,12 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                                 long j13 = (jArr4[i25] >> i26) & j;
                                 if (j13 != 128 && j13 == 254) {
                                     Object obj2 = objArr2[i24];
-                                    int hashCode2 = (obj2 != null ? obj2.hashCode() : 0) * i16;
-                                    int i27 = (hashCode2 ^ (hashCode2 << 16)) >>> 7;
-                                    int findFirstAvailableSlot2 = findFirstAvailableSlot(i27);
+                                    int iHashCode2 = (obj2 != null ? obj2.hashCode() : 0) * i16;
+                                    int i27 = (iHashCode2 ^ (iHashCode2 << 16)) >>> 7;
+                                    int iFindFirstAvailableSlot2 = findFirstAvailableSlot(i27);
                                     int i28 = i27 & i19;
                                     boolean z2 = z;
-                                    if (((findFirstAvailableSlot2 - i28) & i19) / 8 == ((i24 - i28) & i19) / 8) {
+                                    if (((iFindFirstAvailableSlot2 - i28) & i19) / 8 == ((i24 - i28) & i19) / 8) {
                                         long j14 = j12;
                                         jArr4[i25] = ((r9 & 127) << i26) | (jArr4[i25] & (~(j << i26)));
                                         jArr4[jArr4.length - 1] = (jArr4[0] & j14) | Long.MIN_VALUE;
@@ -144,27 +143,27 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                                         j12 = j14;
                                     } else {
                                         long j15 = j12;
-                                        int i29 = findFirstAvailableSlot2 >> 3;
+                                        int i29 = iFindFirstAvailableSlot2 >> 3;
                                         long j16 = jArr4[i29];
-                                        int i30 = (findFirstAvailableSlot2 & 7) << 3;
+                                        int i30 = (iFindFirstAvailableSlot2 & 7) << 3;
                                         if (((j16 >> i30) & j) == 128) {
                                             i = i19;
                                             objArr = objArr2;
                                             jArr4[i29] = ((~(j << i30)) & j16) | ((r9 & 127) << i30);
                                             jArr4[i25] = (jArr4[i25] & (~(j << i26))) | (128 << i26);
-                                            objArr[findFirstAvailableSlot2] = objArr[i24];
+                                            objArr[iFindFirstAvailableSlot2] = objArr[i24];
                                             objArr[i24] = null;
-                                            iArr[findFirstAvailableSlot2] = iArr[i24];
+                                            iArr[iFindFirstAvailableSlot2] = iArr[i24];
                                             iArr[i24] = 0;
                                         } else {
                                             i = i19;
                                             objArr = objArr2;
                                             jArr4[i29] = ((r9 & 127) << i30) | ((~(j << i30)) & j16);
-                                            Object obj3 = objArr[findFirstAvailableSlot2];
-                                            objArr[findFirstAvailableSlot2] = objArr[i24];
+                                            Object obj3 = objArr[iFindFirstAvailableSlot2];
+                                            objArr[iFindFirstAvailableSlot2] = objArr[i24];
                                             objArr[i24] = obj3;
-                                            int i31 = iArr[findFirstAvailableSlot2];
-                                            iArr[findFirstAvailableSlot2] = iArr[i24];
+                                            int i31 = iArr[iFindFirstAvailableSlot2];
+                                            iArr[iFindFirstAvailableSlot2] = iArr[i24];
                                             iArr[i24] = i31;
                                             i24--;
                                         }
@@ -180,18 +179,18 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                                 }
                             }
                             this.growthLimit = ScatterMapKt.loadedCapacity(this._capacity) - this._size;
-                            findFirstAvailableSlot = findFirstAvailableSlot(i5);
                         }
+                        iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                     } else {
                         j2 = 128;
                     }
                     j = 255;
-                    int nextCapacity = ScatterMapKt.nextCapacity(this._capacity);
+                    int iNextCapacity = ScatterMapKt.nextCapacity(this._capacity);
                     long[] jArr5 = this.metadata;
                     Object[] objArr3 = this.keys;
                     int[] iArr2 = this.values;
                     int i32 = this._capacity;
-                    initializeStorage(nextCapacity);
+                    initializeStorage(iNextCapacity);
                     long[] jArr6 = this.metadata;
                     Object[] objArr4 = this.keys;
                     int[] iArr3 = this.values;
@@ -200,19 +199,19 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                     while (i34 < i32) {
                         if (((jArr5[i34 >> 3] >> ((i34 & 7) << 3)) & 255) < j2) {
                             Object obj4 = objArr3[i34];
-                            int hashCode3 = (obj4 != null ? obj4.hashCode() : i14) * i16;
-                            int i35 = hashCode3 ^ (hashCode3 << 16);
-                            int findFirstAvailableSlot3 = findFirstAvailableSlot(i35 >>> 7);
+                            int iHashCode3 = (obj4 != null ? obj4.hashCode() : i14) * i16;
+                            int i35 = iHashCode3 ^ (iHashCode3 << 16);
+                            int iFindFirstAvailableSlot3 = findFirstAvailableSlot(i35 >>> 7);
                             jArr = jArr6;
                             jArr2 = jArr5;
                             long j17 = i35 & 127;
-                            int i36 = findFirstAvailableSlot3 >> 3;
-                            int i37 = (findFirstAvailableSlot3 & 7) << 3;
+                            int i36 = iFindFirstAvailableSlot3 >> 3;
+                            int i37 = (iFindFirstAvailableSlot3 & 7) << 3;
                             long j18 = (jArr[i36] & (~(255 << i37))) | (j17 << i37);
                             jArr[i36] = j18;
-                            jArr[(((findFirstAvailableSlot3 - 7) & i33) + (i33 & 7)) >> 3] = j18;
-                            objArr4[findFirstAvailableSlot3] = obj4;
-                            iArr3[findFirstAvailableSlot3] = iArr2[i34];
+                            jArr[(((iFindFirstAvailableSlot3 - 7) & i33) + (i33 & 7)) >> 3] = j18;
+                            objArr4[iFindFirstAvailableSlot3] = obj4;
+                            iArr3[iFindFirstAvailableSlot3] = iArr2[i34];
                         } else {
                             jArr = jArr6;
                             jArr2 = jArr5;
@@ -222,14 +221,14 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                         jArr6 = jArr;
                         i14 = 0;
                     }
-                    findFirstAvailableSlot = findFirstAvailableSlot(i5);
+                    iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                 }
                 this._size++;
                 int i38 = this.growthLimit;
                 long[] jArr7 = this.metadata;
-                int i39 = findFirstAvailableSlot >> 3;
+                int i39 = iFindFirstAvailableSlot >> 3;
                 long j19 = jArr7[i39];
-                int i40 = (findFirstAvailableSlot & 7) << 3;
+                int i40 = (iFindFirstAvailableSlot & 7) << 3;
                 if (((j19 >> i40) & j) != j2) {
                     i12 = 0;
                 }
@@ -237,8 +236,8 @@ public final class MutableObjectIntMap extends ObjectIntMap {
                 int i41 = this._capacity;
                 long j20 = (j19 & (~(j << i40))) | (j4 << i40);
                 jArr7[i39] = j20;
-                jArr7[(((findFirstAvailableSlot - 7) & i41) + (i41 & 7)) >> 3] = j20;
-                return ~findFirstAvailableSlot;
+                jArr7[(((iFindFirstAvailableSlot - 7) & i41) + (i41 & 7)) >> 3] = j20;
+                return ~iFindFirstAvailableSlot;
             }
             i9 += 8;
             i8 = (i8 + i9) & i7;
@@ -251,23 +250,23 @@ public final class MutableObjectIntMap extends ObjectIntMap {
 
     public final void initializeStorage(int i) {
         long[] jArr;
-        int max = i > 0 ? Math.max(7, ScatterMapKt.normalizeCapacity(i)) : 0;
-        this._capacity = max;
-        if (max == 0) {
+        int iMax = i > 0 ? Math.max(7, ScatterMapKt.normalizeCapacity(i)) : 0;
+        this._capacity = iMax;
+        if (iMax == 0) {
             jArr = ScatterMapKt.EmptyGroup;
         } else {
-            int i2 = ((max + 15) & (-8)) >> 3;
+            int i2 = ((iMax + 15) & (-8)) >> 3;
             long[] jArr2 = new long[i2];
             Arrays.fill(jArr2, 0, i2, -9187201950435737472L);
             jArr = jArr2;
         }
         this.metadata = jArr;
-        int i3 = max >> 3;
-        long j = 255 << ((max & 7) << 3);
+        int i3 = iMax >> 3;
+        long j = 255 << ((iMax & 7) << 3);
         jArr[i3] = (jArr[i3] & (~j)) | j;
         this.growthLimit = ScatterMapKt.loadedCapacity(this._capacity) - this._size;
-        this.keys = new Object[max];
-        this.values = new int[max];
+        this.keys = new Object[iMax];
+        this.values = new int[iMax];
     }
 
     public final void removeValueAt(int i) {
@@ -283,12 +282,12 @@ public final class MutableObjectIntMap extends ObjectIntMap {
     }
 
     public final void set(int i, Object obj) {
-        int findIndex = findIndex(obj);
-        if (findIndex < 0) {
-            findIndex = ~findIndex;
+        int iFindIndex = findIndex(obj);
+        if (iFindIndex < 0) {
+            iFindIndex = ~iFindIndex;
         }
-        this.keys[findIndex] = obj;
-        this.values[findIndex] = i;
+        this.keys[iFindIndex] = obj;
+        this.values[iFindIndex] = i;
     }
 
     public /* synthetic */ MutableObjectIntMap(int i, int i2, DefaultConstructorMarker defaultConstructorMarker) {

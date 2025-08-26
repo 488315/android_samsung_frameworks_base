@@ -45,72 +45,72 @@ public class FontFileUtil {
     }
 
     public static final int analyzeStyle(ByteBuffer byteBuffer, int i, FontVariationAxis[] fontVariationAxisArr) {
-        int i2;
+        int styleValue;
         char c;
+        int i2;
         int i3;
-        int i4;
         if (fontVariationAxisArr != null) {
-            i2 = -1;
+            styleValue = -1;
             c = 65535;
             for (FontVariationAxis fontVariationAxis : fontVariationAxisArr) {
                 if ("wght".equals(fontVariationAxis.getTag())) {
-                    i2 = (int) fontVariationAxis.getStyleValue();
+                    styleValue = (int) fontVariationAxis.getStyleValue();
                 } else if ("ital".equals(fontVariationAxis.getTag())) {
                     c = fontVariationAxis.getStyleValue() == 1.0f ? (char) 1 : (char) 0;
                 }
             }
         } else {
-            i2 = -1;
+            styleValue = -1;
             c = 65535;
         }
-        if (i2 != -1 && c != 65535) {
-            return pack(i2, c == 1);
+        if (styleValue != -1 && c != 65535) {
+            return pack(styleValue, c == 1);
         }
-        ByteOrder order = byteBuffer.order();
+        ByteOrder byteOrderOrder = byteBuffer.order();
         byteBuffer.order(ByteOrder.BIG_ENDIAN);
         try {
             if (byteBuffer.getInt(0) != TTC_TAG) {
-                i3 = 0;
+                i2 = 0;
             } else {
                 if (i >= byteBuffer.getInt(8)) {
                     return -1;
                 }
-                i3 = byteBuffer.getInt((i * 4) + 12);
+                i2 = byteBuffer.getInt((i * 4) + 12);
             }
-            int i5 = byteBuffer.getInt(i3);
-            if (i5 != 65536 && i5 != SFNT_VERSION_OTTO) {
+            int i4 = byteBuffer.getInt(i2);
+            if (i4 != 65536 && i4 != SFNT_VERSION_OTTO) {
                 return -1;
             }
-            short s = byteBuffer.getShort(i3 + 4);
-            int i6 = 0;
+            short s = byteBuffer.getShort(i2 + 4);
+            int i5 = 0;
             while (true) {
-                if (i6 >= s) {
-                    i4 = -1;
+                if (i5 >= s) {
+                    i3 = -1;
                     break;
                 }
-                int i7 = i3 + 12 + (i6 * 16);
-                if (byteBuffer.getInt(i7) == OS2_TABLE_TAG) {
-                    i4 = byteBuffer.getInt(i7 + 8);
+                int i6 = i2 + 12 + (i5 * 16);
+                if (byteBuffer.getInt(i6) == OS2_TABLE_TAG) {
+                    i3 = byteBuffer.getInt(i6 + 8);
                     break;
                 }
-                i6++;
+                i5++;
             }
-            if (i4 == -1) {
+            if (i3 == -1) {
                 return pack(400, false);
             }
-            short s2 = byteBuffer.getShort(i4 + 4);
-            boolean z = (byteBuffer.getShort(i4 + 62) & 1) != 0;
-            if (i2 == -1) {
-                i2 = s2;
+            short s2 = byteBuffer.getShort(i3 + 4);
+            boolean z = (byteBuffer.getShort(i3 + 62) & 1) != 0;
+            if (styleValue == -1) {
+                styleValue = s2;
             }
             if (c == 65535) {
-                r0 = z;
+                z = z;
             } else if (c != 1) {
-                r0 = false;
+                z = false;
             }
-            return pack(i2, r0);
+            return pack(styleValue, z);
         } finally {
-            byteBuffer.order(order);
+            byteBuffer.order(byteOrderOrder);
         }
     }
 
@@ -127,9 +127,9 @@ public class FontFileUtil {
     }
 
     public static int isCollectionFont(ByteBuffer byteBuffer) {
-        ByteBuffer slice = byteBuffer.slice();
-        slice.order(ByteOrder.BIG_ENDIAN);
-        int i = slice.getInt(0);
+        ByteBuffer byteBufferSlice = byteBuffer.slice();
+        byteBufferSlice.order(ByteOrder.BIG_ENDIAN);
+        int i = byteBufferSlice.getInt(0);
         if (i == TTC_TAG) {
             return 1;
         }
@@ -143,7 +143,7 @@ public class FontFileUtil {
     public static Set<Integer> getSupportedAxes(ByteBuffer byteBuffer, int i) {
         int i2;
         int i3;
-        ByteOrder order = byteBuffer.order();
+        ByteOrder byteOrderOrder = byteBuffer.order();
         byteBuffer.order(ByteOrder.BIG_ENDIAN);
         try {
             if (byteBuffer.getInt(0) != TTC_TAG) {
@@ -187,7 +187,7 @@ public class FontFileUtil {
             }
             return Collections.EMPTY_SET;
         } finally {
-            byteBuffer.order(order);
+            byteBuffer.order(byteOrderOrder);
         }
     }
 }

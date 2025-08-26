@@ -29,16 +29,16 @@ public class MediaInserter {
     }
 
     private void insert(Uri uri, ContentValues contentValues, boolean z) throws RemoteException {
-        HashMap<Uri, List<ContentValues>> hashMap = z ? this.mPriorityRowMap : this.mRowMap;
-        List<ContentValues> list = hashMap.get(uri);
-        if (list == null) {
-            list = new ArrayList<>();
-            hashMap.put(uri, list);
+        HashMap<Uri, List<ContentValues>> map = z ? this.mPriorityRowMap : this.mRowMap;
+        List<ContentValues> arrayList = map.get(uri);
+        if (arrayList == null) {
+            arrayList = new ArrayList<>();
+            map.put(uri, arrayList);
         }
-        list.add(new ContentValues(contentValues));
-        if (list.size() >= this.mBufferSizePerUri) {
+        arrayList.add(new ContentValues(contentValues));
+        if (arrayList.size() >= this.mBufferSizePerUri) {
             flushAllPriority();
-            flush(uri, list);
+            flush(uri, arrayList);
         }
     }
 

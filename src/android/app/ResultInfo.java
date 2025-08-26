@@ -75,16 +75,16 @@ public class ResultInfo implements Parcelable {
     }
 
     public boolean equals(Object obj) {
-        boolean filterEquals;
+        boolean zFilterEquals;
         if (obj != null && (obj instanceof ResultInfo)) {
             ResultInfo resultInfo = (ResultInfo) obj;
             Intent intent = this.mData;
             if (intent == null) {
-                filterEquals = resultInfo.mData == null;
+                zFilterEquals = resultInfo.mData == null;
             } else {
-                filterEquals = intent.filterEquals(resultInfo.mData);
+                zFilterEquals = intent.filterEquals(resultInfo.mData);
             }
-            if (filterEquals && Objects.equals(this.mResultWho, resultInfo.mResultWho) && this.mResultCode == resultInfo.mResultCode && this.mRequestCode == resultInfo.mRequestCode && this.mCallerToken == resultInfo.mCallerToken) {
+            if (zFilterEquals && Objects.equals(this.mResultWho, resultInfo.mResultWho) && this.mResultCode == resultInfo.mResultCode && this.mRequestCode == resultInfo.mRequestCode && this.mCallerToken == resultInfo.mCallerToken) {
                 return true;
             }
         }
@@ -92,11 +92,11 @@ public class ResultInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = ((((527 + this.mRequestCode) * 31) + this.mResultCode) * 31) + Objects.hashCode(this.mResultWho);
+        int iHashCode = ((((527 + this.mRequestCode) * 31) + this.mResultCode) * 31) + Objects.hashCode(this.mResultWho);
         Intent intent = this.mData;
         if (intent != null) {
-            hashCode = (hashCode * 31) + intent.filterHashCode();
+            iHashCode = (iHashCode * 31) + intent.filterHashCode();
         }
-        return (hashCode * 31) + Objects.hashCode(this.mCallerToken);
+        return (iHashCode * 31) + Objects.hashCode(this.mCallerToken);
     }
 }

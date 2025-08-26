@@ -4,7 +4,6 @@ import android.view.Choreographer;
 import com.android.wm.shell.bubbles.BubbleStackView;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda24 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +31,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda24 im
                 BubbleStackView$$ExternalSyntheticLambda24 bubbleStackView$$ExternalSyntheticLambda24 = new BubbleStackView$$ExternalSyntheticLambda24(bubbleStackView, bubbleViewProvider, bubbleViewProvider2, i);
                 BubbleStackView.AnonymousClass1 anonymousClass1 = (BubbleStackView.AnonymousClass1) surfaceSynchronizer;
                 anonymousClass1.getClass();
-                Choreographer.getInstance().postFrameCallback(new BubbleStackView.AnonymousClass1.ChoreographerFrameCallbackC04251(anonymousClass1, bubbleStackView$$ExternalSyntheticLambda24));
+                Choreographer.getInstance().postFrameCallback(new BubbleStackView.AnonymousClass1.ChoreographerFrameCallbackC06551(anonymousClass1, bubbleStackView$$ExternalSyntheticLambda24));
                 break;
             default:
                 BubbleStackView bubbleStackView2 = this.f$0;

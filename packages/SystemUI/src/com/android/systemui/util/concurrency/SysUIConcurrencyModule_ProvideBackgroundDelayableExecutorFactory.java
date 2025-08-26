@@ -4,7 +4,6 @@ import android.os.Looper;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideBackgroundDelayableExecutorFactory implements Provider {
     private final Provider looperProvider;
@@ -18,9 +17,9 @@ public final class SysUIConcurrencyModule_ProvideBackgroundDelayableExecutorFact
     }
 
     public static DelayableExecutor provideBackgroundDelayableExecutor(Looper looper) {
-        DelayableExecutor provideBackgroundDelayableExecutor = SysUIConcurrencyModule.INSTANCE.provideBackgroundDelayableExecutor(looper);
-        provideBackgroundDelayableExecutor.getClass();
-        return provideBackgroundDelayableExecutor;
+        DelayableExecutor delayableExecutorProvideBackgroundDelayableExecutor = SysUIConcurrencyModule.INSTANCE.provideBackgroundDelayableExecutor(looper);
+        delayableExecutorProvideBackgroundDelayableExecutor.getClass();
+        return delayableExecutorProvideBackgroundDelayableExecutor;
     }
 
     public static SysUIConcurrencyModule_ProvideBackgroundDelayableExecutorFactory create(Provider provider) {

@@ -19,60 +19,59 @@ public final class ParcelableMessageNanoCreator<T extends MessageNano> implement
 
     @Override // android.os.Parcelable.Creator
     public T createFromParcel(Parcel parcel) {
-        T t;
-        String readString = parcel.readString();
-        byte[] createByteArray = parcel.createByteArray();
-        T t2 = null;
+        String string = parcel.readString();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        T t = null;
         try {
-            Class<? extends U> asSubclass = Class.forName(readString, false, getClass().getClassLoader()).asSubclass(MessageNano.class);
+            Class<? extends U> clsAsSubclass = Class.forName(string, false, getClass().getClassLoader()).asSubclass(MessageNano.class);
             Class[] clsArr = new Class[0];
-            t = (T) asSubclass.getConstructor(null).newInstance(null);
-        } catch (InvalidProtocolBufferNanoException e) {
-            e = e;
-        } catch (ClassNotFoundException e2) {
-            e = e2;
-        } catch (IllegalAccessException e3) {
-            e = e3;
-        } catch (InstantiationException e4) {
-            e = e4;
-        } catch (NoSuchMethodException e5) {
-            e = e5;
-        } catch (InvocationTargetException e6) {
-            e = e6;
-        }
-        try {
-            MessageNano.mergeFrom(t, createByteArray);
-            return t;
+            T t2 = (T) clsAsSubclass.getConstructor(null).newInstance(null);
+            try {
+                MessageNano.mergeFrom(t2, bArrCreateByteArray);
+                return t2;
+            } catch (InvalidProtocolBufferNanoException e) {
+                e = e;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            } catch (ClassNotFoundException e2) {
+                e = e2;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            } catch (IllegalAccessException e3) {
+                e = e3;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            } catch (InstantiationException e4) {
+                e = e4;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            } catch (NoSuchMethodException e5) {
+                e = e5;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            } catch (InvocationTargetException e6) {
+                e = e6;
+                t = t2;
+                Log.e(TAG, "Exception trying to create proto from parcel", e);
+                return t;
+            }
         } catch (InvalidProtocolBufferNanoException e7) {
             e = e7;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         } catch (ClassNotFoundException e8) {
             e = e8;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         } catch (IllegalAccessException e9) {
             e = e9;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         } catch (InstantiationException e10) {
             e = e10;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         } catch (NoSuchMethodException e11) {
             e = e11;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         } catch (InvocationTargetException e12) {
             e = e12;
-            t2 = t;
-            Log.e(TAG, "Exception trying to create proto from parcel", e);
-            return t2;
         }
     }
 

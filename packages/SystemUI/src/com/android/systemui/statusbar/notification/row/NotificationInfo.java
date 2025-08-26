@@ -55,7 +55,6 @@ import com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationInfo extends LinearLayout implements NotificationGuts.GutsContent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -102,7 +101,6 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
     public UiEventLogger mUiEventLogger;
     public boolean mWasShownHighPriority;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UpdateImportanceRunnable implements Runnable {
         public final int mAppUid;
         public final NotificationChannel mChannelToUpdate;
@@ -157,17 +155,17 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
         if (z) {
             TransitionSet transitionSet = new TransitionSet();
             transitionSet.setOrdering(0);
-            TransitionSet addTransition = transitionSet.addTransition(new Fade(2)).addTransition(new ChangeBounds());
+            TransitionSet transitionSetAddTransition = transitionSet.addTransition(new Fade(2)).addTransition(new ChangeBounds());
             Transition duration = new Fade(1).setStartDelay(150L).setDuration(200L);
             Interpolator interpolator = Interpolators.FAST_OUT_SLOW_IN;
-            addTransition.addTransition(duration.setInterpolator(interpolator));
+            transitionSetAddTransition.addTransition(duration.setInterpolator(interpolator));
             transitionSet.setDuration(350L);
             transitionSet.setInterpolator((TimeInterpolator) interpolator);
             TransitionManager.beginDelayedTransition(this, transitionSet);
         }
-        final View findViewById = findViewById(R.id.alert);
-        final View findViewById2 = findViewById(R.id.silence);
-        final View findViewById3 = findViewById(R.id.automatic);
+        final View viewFindViewById = findViewById(R.id.alert);
+        final View viewFindViewById2 = findViewById(R.id.silence);
+        final View viewFindViewById3 = findViewById(R.id.automatic);
         if (i == 0) {
             this.mPriorityDescriptionView.setVisibility(0);
             this.mSilentDescriptionView.setVisibility(8);
@@ -178,27 +176,27 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                 public final void run() {
                     switch (i2) {
                         case 0:
-                            View view = findViewById;
-                            View view2 = findViewById2;
-                            View view3 = findViewById3;
+                            View view = viewFindViewById;
+                            View view2 = viewFindViewById2;
+                            View view3 = viewFindViewById3;
                             int i3 = NotificationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById;
-                            View view5 = findViewById2;
-                            View view6 = findViewById3;
+                            View view4 = viewFindViewById;
+                            View view5 = viewFindViewById2;
+                            View view6 = viewFindViewById3;
                             int i4 = NotificationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(true);
                             view6.setSelected(false);
                             break;
                         default:
-                            View view7 = findViewById;
-                            View view8 = findViewById2;
-                            View view9 = findViewById3;
+                            View view7 = viewFindViewById;
+                            View view8 = viewFindViewById2;
+                            View view9 = viewFindViewById3;
                             int i5 = NotificationInfo.$r8$clinit;
                             view7.setSelected(true);
                             view8.setSelected(false);
@@ -217,27 +215,27 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                 public final void run() {
                     switch (i3) {
                         case 0:
-                            View view = findViewById;
-                            View view2 = findViewById2;
-                            View view3 = findViewById3;
+                            View view = viewFindViewById;
+                            View view2 = viewFindViewById2;
+                            View view3 = viewFindViewById3;
                             int i32 = NotificationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById;
-                            View view5 = findViewById2;
-                            View view6 = findViewById3;
+                            View view4 = viewFindViewById;
+                            View view5 = viewFindViewById2;
+                            View view6 = viewFindViewById3;
                             int i4 = NotificationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(true);
                             view6.setSelected(false);
                             break;
                         default:
-                            View view7 = findViewById;
-                            View view8 = findViewById2;
-                            View view9 = findViewById3;
+                            View view7 = viewFindViewById;
+                            View view8 = viewFindViewById2;
+                            View view9 = viewFindViewById3;
                             int i5 = NotificationInfo.$r8$clinit;
                             view7.setSelected(true);
                             view8.setSelected(false);
@@ -259,27 +257,27 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                 public final void run() {
                     switch (i4) {
                         case 0:
-                            View view = findViewById3;
-                            View view2 = findViewById;
-                            View view3 = findViewById2;
+                            View view = viewFindViewById3;
+                            View view2 = viewFindViewById;
+                            View view3 = viewFindViewById2;
                             int i32 = NotificationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById3;
-                            View view5 = findViewById;
-                            View view6 = findViewById2;
+                            View view4 = viewFindViewById3;
+                            View view5 = viewFindViewById;
+                            View view6 = viewFindViewById2;
                             int i42 = NotificationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(true);
                             view6.setSelected(false);
                             break;
                         default:
-                            View view7 = findViewById3;
-                            View view8 = findViewById;
-                            View view9 = findViewById2;
+                            View view7 = viewFindViewById3;
+                            View view8 = viewFindViewById;
+                            View view9 = viewFindViewById2;
                             int i5 = NotificationInfo.$r8$clinit;
                             view7.setSelected(true);
                             view8.setSelected(false);
@@ -313,29 +311,29 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
             findViewById(R.id.non_configurable_multichannel_text).setVisibility(8);
             findViewById(R.id.interruptiveness_settings).setVisibility(0);
         }
-        View findViewById = findViewById(R.id.turn_off_notifications);
-        findViewById.setOnClickListener(new NotificationInfo$$ExternalSyntheticLambda0(this, 4));
-        findViewById.setVisibility((!findViewById.hasOnClickListeners() || this.mIsNonblockable) ? 8 : 0);
-        View findViewById2 = findViewById(R.id.inline_dismiss);
-        findViewById2.setOnClickListener(this.mOnCloseClickListener);
-        findViewById2.setVisibility((findViewById2.hasOnClickListeners() && this.mIsDismissable) ? 0 : 8);
-        View findViewById3 = findViewById(R.id.done);
-        findViewById3.setOnClickListener(this.mOnDismissSettings);
-        findViewById3.setAccessibilityDelegate(this.mGutsContainer.getAccessibilityDelegate());
-        View findViewById4 = findViewById(R.id.silence);
-        View findViewById5 = findViewById(R.id.alert);
-        findViewById4.setOnClickListener(this.mOnSilent);
-        findViewById5.setOnClickListener(this.mOnAlert);
-        View findViewById6 = findViewById(R.id.automatic);
+        View viewFindViewById = findViewById(R.id.turn_off_notifications);
+        viewFindViewById.setOnClickListener(new NotificationInfo$$ExternalSyntheticLambda0(this, 4));
+        viewFindViewById.setVisibility((!viewFindViewById.hasOnClickListeners() || this.mIsNonblockable) ? 8 : 0);
+        View viewFindViewById2 = findViewById(R.id.inline_dismiss);
+        viewFindViewById2.setOnClickListener(this.mOnCloseClickListener);
+        viewFindViewById2.setVisibility((viewFindViewById2.hasOnClickListeners() && this.mIsDismissable) ? 0 : 8);
+        View viewFindViewById3 = findViewById(R.id.done);
+        viewFindViewById3.setOnClickListener(this.mOnDismissSettings);
+        viewFindViewById3.setAccessibilityDelegate(this.mGutsContainer.getAccessibilityDelegate());
+        View viewFindViewById4 = findViewById(R.id.silence);
+        View viewFindViewById5 = findViewById(R.id.alert);
+        viewFindViewById4.setOnClickListener(this.mOnSilent);
+        viewFindViewById5.setOnClickListener(this.mOnAlert);
+        View viewFindViewById6 = findViewById(R.id.automatic);
         if (this.mShowAutomaticSetting) {
             TextView textView = this.mAutomaticDescriptionView;
             Context context = ((LinearLayout) this).mContext;
             int feedbackStatus = this.mAssistantFeedbackController.getFeedbackStatus(this.mRanking);
             textView.setText(Html.fromHtml(context.getText(feedbackStatus != 1 ? feedbackStatus != 2 ? feedbackStatus != 3 ? feedbackStatus != 4 ? R.string.notification_channel_summary_automatic : R.string.notification_channel_summary_automatic_demoted : R.string.notification_channel_summary_automatic_promoted : R.string.notification_channel_summary_automatic_silenced : R.string.notification_channel_summary_automatic_alerted).toString()));
-            findViewById6.setVisibility(0);
-            findViewById6.setOnClickListener(this.mOnAutomatic);
+            viewFindViewById6.setVisibility(0);
+            viewFindViewById6.setOnClickListener(this.mOnAutomatic);
         } else {
-            findViewById6.setVisibility(8);
+            viewFindViewById6.setVisibility(8);
         }
         applyAlertingBehavior(getAlertingBehavior(), false);
     }
@@ -371,7 +369,7 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
         this.mIsSystemRegisteredCall = this.mSbn.getNotification().isStyle(Notification.CallStyle.class) && this.mINotificationManager.isInCall(this.mSbn.getPackageName(), this.mSbn.getUid());
         this.mIsSingleDefaultChannel = this.mSingleNotificationChannel.getId().equals("miscellaneous") && this.mINotificationManager.getNumNotificationChannelsForPackage(str, this.mAppUid, false) == 1;
         this.mIsAutomaticChosen = getAlertingBehavior() == 2;
-        CharSequence charSequence = null;
+        CharSequence name = null;
         this.mPkgIcon = null;
         ApplicationInfo applicationInfo = (ApplicationInfo) this.mSbn.getNotification().extras.getParcelable("android.appInfo", ApplicationInfo.class);
         if (applicationInfo != null) {
@@ -392,18 +390,18 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
         } else {
             textView.setVisibility(0);
         }
-        View findViewById = findViewById(R.id.app_settings);
+        View viewFindViewById = findViewById(R.id.app_settings);
         PackageManager packageManager2 = this.mPm;
         String str2 = this.mPackageName;
         NotificationChannel notificationChannel = this.mSingleNotificationChannel;
         int id = this.mSbn.getId();
         String tag = this.mSbn.getTag();
         final Intent intent = new Intent("android.intent.action.MAIN").addCategory("android.intent.category.NOTIFICATION_PREFERENCES").setPackage(str2);
-        List<ResolveInfo> queryIntentActivities = packageManager2.queryIntentActivities(intent, 65536);
-        if (queryIntentActivities == null || queryIntentActivities.isEmpty() || queryIntentActivities.get(0) == null) {
+        List<ResolveInfo> listQueryIntentActivities = packageManager2.queryIntentActivities(intent, 65536);
+        if (listQueryIntentActivities == null || listQueryIntentActivities.isEmpty() || listQueryIntentActivities.get(0) == null) {
             intent = null;
         } else {
-            ActivityInfo activityInfo = queryIntentActivities.get(0).activityInfo;
+            ActivityInfo activityInfo = listQueryIntentActivities.get(0).activityInfo;
             intent.setClassName(activityInfo.packageName, activityInfo.name);
             if (notificationChannel != null) {
                 intent.putExtra("android.intent.extra.CHANNEL_ID", notificationChannel.getId());
@@ -412,13 +410,13 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
             intent.putExtra("android.intent.extra.NOTIFICATION_TAG", tag);
         }
         if (intent == null || TextUtils.isEmpty(this.mSbn.getNotification().getSettingsText())) {
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
         } else {
-            findViewById.setVisibility(0);
-            findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationInfo$$ExternalSyntheticLambda8
+            viewFindViewById.setVisibility(0);
+            viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationInfo$$ExternalSyntheticLambda8
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    NotificationInfo notificationInfo = NotificationInfo.this;
+                    NotificationInfo notificationInfo = this.f$0;
                     Intent intent2 = intent;
                     NotificationGutsManager$$ExternalSyntheticLambda2 notificationGutsManager$$ExternalSyntheticLambda22 = notificationInfo.mAppSettingsClickListener;
                     StatusBarNotification statusBarNotification2 = notificationGutsManager$$ExternalSyntheticLambda22.f$2;
@@ -429,16 +427,16 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                 }
             });
         }
-        View findViewById2 = findViewById(R.id.info);
+        View viewFindViewById2 = findViewById(R.id.info);
         final int i = this.mAppUid;
-        findViewById2.setOnClickListener((i < 0 || this.mOnSettingsClickListener == null || !this.mIsDeviceProvisioned) ? null : new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationInfo$$ExternalSyntheticLambda10
+        viewFindViewById2.setOnClickListener((i < 0 || this.mOnSettingsClickListener == null || !this.mIsDeviceProvisioned) ? null : new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationInfo$$ExternalSyntheticLambda10
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                NotificationInfo notificationInfo = NotificationInfo.this;
+                NotificationInfo notificationInfo = this.f$0;
                 notificationInfo.mOnSettingsClickListener.onClick(notificationInfo.mSingleNotificationChannel, i);
             }
         });
-        findViewById2.setVisibility(findViewById2.hasOnClickListeners() ? 0 : 8);
+        viewFindViewById2.setVisibility(viewFindViewById2.hasOnClickListeners() ? 0 : 8);
         TextView textView2 = (TextView) findViewById(R.id.channel_name);
         if (this.mIsSingleDefaultChannel) {
             textView2.setVisibility(8);
@@ -447,11 +445,11 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
         }
         NotificationChannel notificationChannel2 = this.mSingleNotificationChannel;
         if (notificationChannel2 != null && notificationChannel2.getGroup() != null && (notificationChannelGroupForPackage = this.mINotificationManager.getNotificationChannelGroupForPackage(this.mSingleNotificationChannel.getGroup(), this.mPackageName, this.mAppUid)) != null) {
-            charSequence = notificationChannelGroupForPackage.getName();
+            name = notificationChannelGroupForPackage.getName();
         }
         TextView textView3 = (TextView) findViewById(R.id.group_name);
-        if (charSequence != null) {
-            textView3.setText(charSequence);
+        if (name != null) {
+            textView3.setText(name);
             textView3.setVisibility(0);
         } else {
             textView3.setVisibility(8);
@@ -491,14 +489,14 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                 logUiEvent(NotificationControlsEvent.NOTIFICATION_CONTROLS_SAVE_IMPORTANCE);
                 MetricsLogger metricsLogger = this.mMetricsLogger;
                 Integer num = this.mChosenImportance;
-                int intValue = num != null ? num.intValue() : this.mStartingChannelImportance;
+                int iIntValue = num != null ? num.intValue() : this.mStartingChannelImportance;
                 StatusBarNotification statusBarNotification = this.mSbn;
-                metricsLogger.write((statusBarNotification == null ? new LogMaker(1621) : statusBarNotification.getLogMaker().setCategory(1621)).setCategory(IKnoxCustomManager.Stub.TRANSACTION_getBsohUnbiased).setType(4).setSubtype(intValue - this.mStartingChannelImportance));
-                int intValue2 = this.mChosenImportance.intValue();
+                metricsLogger.write((statusBarNotification == null ? new LogMaker(1621) : statusBarNotification.getLogMaker().setCategory(1621)).setCategory(IKnoxCustomManager.Stub.TRANSACTION_getBsohUnbiased).setType(4).setSubtype(iIntValue - this.mStartingChannelImportance));
+                int iIntValue2 = this.mChosenImportance.intValue();
                 if (this.mStartingChannelImportance != -1000 && ((this.mWasShownHighPriority && this.mChosenImportance.intValue() >= 3) || (!this.mWasShownHighPriority && this.mChosenImportance.intValue() < 3))) {
-                    intValue2 = this.mStartingChannelImportance;
+                    iIntValue2 = this.mStartingChannelImportance;
                 }
-                new Handler((Looper) Dependency.sDependency.getDependencyInner(Dependency.BG_LOOPER)).post(new UpdateImportanceRunnable(this.mINotificationManager, this.mPackageName, this.mAppUid, this.mSingleNotificationChannel, this.mStartingChannelImportance, intValue2, this.mIsAutomaticChosen));
+                new Handler((Looper) Dependency.sDependency.getDependencyInner(Dependency.BG_LOOPER)).post(new UpdateImportanceRunnable(this.mINotificationManager, this.mPackageName, this.mAppUid, this.mSingleNotificationChannel, this.mStartingChannelImportance, iIntValue2, this.mIsAutomaticChosen));
                 int i = NotificationBundleUi.$r8$clinit;
                 OnUserInteractionCallback onUserInteractionCallback = this.mOnUserInteractionCallback;
                 NotificationEntry notificationEntry = this.mEntry;

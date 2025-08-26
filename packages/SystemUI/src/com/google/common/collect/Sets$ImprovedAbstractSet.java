@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class Sets$ImprovedAbstractSet extends AbstractSet {
     @Override // java.util.AbstractSet, java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -14,23 +13,23 @@ public abstract class Sets$ImprovedAbstractSet extends AbstractSet {
         if (collection instanceof Multiset) {
             collection = ((Multiset) collection).elementSet();
         }
-        boolean z = false;
+        boolean zRemove = false;
         if (!(collection instanceof Set) || collection.size() <= size()) {
             Iterator it = collection.iterator();
             while (it.hasNext()) {
-                z |= remove(it.next());
+                zRemove |= remove(it.next());
             }
-            return z;
+            return zRemove;
         }
         Iterator<E> it2 = iterator();
         collection.getClass();
         while (it2.hasNext()) {
             if (collection.contains(it2.next())) {
                 it2.remove();
-                z = true;
+                zRemove = true;
             }
         }
-        return z;
+        return zRemove;
     }
 
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set

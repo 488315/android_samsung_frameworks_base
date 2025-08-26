@@ -2,7 +2,6 @@ package com.android.systemui.brightness.shared.model;
 
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GammaBrightness {
     public final int value;
@@ -12,12 +11,12 @@ public final class GammaBrightness {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ GammaBrightness m1064boximpl(int i) {
+    public static final /* synthetic */ GammaBrightness m1066boximpl(int i) {
         return new GammaBrightness(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m1065toStringimpl(int i) {
+    public static String m1067toStringimpl(int i) {
         return ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "GammaBrightness(value=", ")");
     }
 
@@ -33,6 +32,6 @@ public final class GammaBrightness {
     }
 
     public final String toString() {
-        return m1065toStringimpl(this.value);
+        return m1067toStringimpl(this.value);
     }
 }

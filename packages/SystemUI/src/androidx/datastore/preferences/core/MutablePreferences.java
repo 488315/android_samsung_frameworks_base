@@ -12,13 +12,14 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutablePreferences extends Preferences {
     public final AtomicBoolean frozen;
     public final Map preferencesMap;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public MutablePreferences() {
         this(null, false, 3, 0 == true ? 1 : 0);
     }
@@ -26,13 +27,13 @@ public final class MutablePreferences extends Preferences {
     @Override // androidx.datastore.preferences.core.Preferences
     public final Map asMap() {
         Pair pair;
-        Set<Map.Entry> entrySet = this.preferencesMap.entrySet();
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        Set<Map.Entry> setEntrySet = this.preferencesMap.entrySet();
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-        for (Map.Entry entry : entrySet) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+        for (Map.Entry entry : setEntrySet) {
             Object value = entry.getValue();
             if (value instanceof byte[]) {
                 byte[] bArr = (byte[]) value;
@@ -51,72 +52,38 @@ public final class MutablePreferences extends Preferences {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0066 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[LOOP:0: B:15:0x002e->B:30:?, LOOP_END, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0063  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean equals(java.lang.Object r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof androidx.datastore.preferences.core.MutablePreferences
-            r1 = 0
-            if (r0 != 0) goto L6
-            return r1
-        L6:
-            androidx.datastore.preferences.core.MutablePreferences r6 = (androidx.datastore.preferences.core.MutablePreferences) r6
-            java.util.Map r0 = r6.preferencesMap
-            java.util.Map r2 = r5.preferencesMap
-            r3 = 1
-            if (r0 != r2) goto L10
-            return r3
-        L10:
-            int r0 = r0.size()
-            java.util.Map r2 = r5.preferencesMap
-            int r2 = r2.size()
-            if (r0 == r2) goto L1d
-            return r1
-        L1d:
-            java.util.Map r6 = r6.preferencesMap
-            boolean r0 = r6.isEmpty()
-            if (r0 == 0) goto L26
-            return r3
-        L26:
-            java.util.Set r6 = r6.entrySet()
-            java.util.Iterator r6 = r6.iterator()
-        L2e:
-            boolean r0 = r6.hasNext()
-            if (r0 == 0) goto L67
-            java.lang.Object r0 = r6.next()
-            java.util.Map$Entry r0 = (java.util.Map.Entry) r0
-            java.util.Map r2 = r5.preferencesMap
-            java.lang.Object r4 = r0.getKey()
-            java.lang.Object r2 = r2.get(r4)
-            if (r2 == 0) goto L63
-            java.lang.Object r0 = r0.getValue()
-            boolean r4 = r0 instanceof byte[]
-            if (r4 == 0) goto L5e
-            boolean r4 = r2 instanceof byte[]
-            if (r4 == 0) goto L63
-            byte[] r0 = (byte[]) r0
-            byte[] r2 = (byte[]) r2
-            boolean r0 = java.util.Arrays.equals(r0, r2)
-            if (r0 == 0) goto L63
-            r0 = r3
-            goto L64
-        L5e:
-            boolean r0 = kotlin.jvm.internal.Intrinsics.areEqual(r0, r2)
-            goto L64
-        L63:
-            r0 = r1
-        L64:
-            if (r0 != 0) goto L2e
-            return r1
-        L67:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.preferences.core.MutablePreferences.equals(java.lang.Object):boolean");
+    public final boolean equals(Object obj) {
+        boolean zAreEqual;
+        if (!(obj instanceof MutablePreferences)) {
+            return false;
+        }
+        MutablePreferences mutablePreferences = (MutablePreferences) obj;
+        Map map = mutablePreferences.preferencesMap;
+        if (map == this.preferencesMap) {
+            return true;
+        }
+        if (map.size() != this.preferencesMap.size()) {
+            return false;
+        }
+        Map map2 = mutablePreferences.preferencesMap;
+        if (map2.isEmpty()) {
+            return true;
+        }
+        for (Map.Entry entry : map2.entrySet()) {
+            Object obj2 = this.preferencesMap.get(entry.getKey());
+            if (obj2 != null) {
+                Object value = entry.getValue();
+                zAreEqual = value instanceof byte[] ? (obj2 instanceof byte[]) && Arrays.equals((byte[]) value, (byte[]) obj2) : Intrinsics.areEqual(value, obj2);
+            }
+            if (!zAreEqual) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override // androidx.datastore.preferences.core.Preferences
@@ -131,12 +98,12 @@ public final class MutablePreferences extends Preferences {
 
     public final int hashCode() {
         Iterator it = this.preferencesMap.entrySet().iterator();
-        int i = 0;
+        int iHashCode = 0;
         while (it.hasNext()) {
             Object value = ((Map.Entry) it.next()).getValue();
-            i += value instanceof byte[] ? Arrays.hashCode((byte[]) value) : value.hashCode();
+            iHashCode += value instanceof byte[] ? Arrays.hashCode((byte[]) value) : value.hashCode();
         }
-        return i;
+        return iHashCode;
     }
 
     public final void setUnchecked$datastore_preferences_core(Preferences.Key key, Object obj) {

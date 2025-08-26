@@ -9,7 +9,6 @@ import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
 import com.samsung.android.knox.dar.ddar.securesession.Wiper;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DualDarClientManager extends IProxyAgent.Stub {
     private static final String TAG = "DualDarClientManager";
@@ -17,7 +16,6 @@ public class DualDarClientManager extends IProxyAgent.Stub {
     private final DualDARClientAgentService mClientAgentService;
     private final Context mContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class DualDARClientAgentService extends IProxyAgentService {
         private IDualDARClient mDualDARClient;
 
@@ -25,6 +23,10 @@ public class DualDarClientManager extends IProxyAgent.Stub {
             this(iDualDARClient);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:41:0x009b  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public Bundle onMessage(int i, String str, Bundle bundle) {
             char c;
             Bundle bundle2 = new Bundle();
@@ -33,81 +35,72 @@ public class DualDarClientManager extends IProxyAgent.Stub {
             try {
                 switch (str.hashCode()) {
                     case -1796774992:
-                        if (str.equals("ON_WORKSPACE_DESTROY")) {
+                        if (!str.equals("ON_WORKSPACE_DESTROY")) {
+                            c = 65535;
+                            break;
+                        } else {
                             c = 3;
                             break;
                         }
-                        c = 65535;
-                        break;
                     case -1540060126:
                         if (str.equals("SET_RESET_PASSWORD_TOKEN")) {
                             c = 6;
                             break;
                         }
-                        c = 65535;
                         break;
                     case -1137042856:
                         if (str.equals("ON_PASSWORD2_CHANGE")) {
                             c = 5;
                             break;
                         }
-                        c = 65535;
                         break;
                     case -1007092807:
                         if (str.equals("IS_SUPPORTED")) {
                             c = '\t';
                             break;
                         }
-                        c = 65535;
                         break;
                     case -68128204:
                         if (str.equals("RESET_PASSWORD_WITH_TOKEN")) {
                             c = '\b';
                             break;
                         }
-                        c = 65535;
                         break;
                     case 358962909:
                         if (str.equals("ON_DATA_LOCK_STATE_CHANGE")) {
                             c = '\n';
                             break;
                         }
-                        c = 65535;
                         break;
                     case 921051593:
                         if (str.equals("ON_WORKSPACE_CREATION")) {
                             c = 2;
                             break;
                         }
-                        c = 65535;
                         break;
                     case 1209819970:
                         if (str.equals("ON_DEVICE_OWNER_PROVISIONING")) {
                             c = 1;
                             break;
                         }
-                        c = 65535;
                         break;
                     case 1334135085:
                         if (str.equals("ON_BRINGUP")) {
                             c = 0;
                             break;
                         }
-                        c = 65535;
                         break;
                     case 1419997776:
                         if (str.equals("ON_PASSWORD2_AUTH")) {
                             c = 4;
                             break;
                         }
-                        c = 65535;
                         break;
                     case 1619296023:
                         if (str.equals("CLEAR_RESET_PASSWORD_TOKEN")) {
                             c = 7;
                             break;
                         }
-                        c = 65535;
                         break;
                     default:
                         c = 65535;
@@ -130,31 +123,31 @@ public class DualDarClientManager extends IProxyAgent.Stub {
                         break;
                     case 4:
                         int i4 = bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-                        byte[] decryptMessageFrom = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
-                        boolean onPasswordAuth = this.mDualDARClient.onPasswordAuth(i4, decryptMessageFrom);
-                        Wiper.wipe(decryptMessageFrom);
-                        bundle2.putBoolean("dual_dar_response", onPasswordAuth);
+                        byte[] bArrDecryptMessageFrom = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
+                        boolean zOnPasswordAuth = this.mDualDARClient.onPasswordAuth(i4, bArrDecryptMessageFrom);
+                        Wiper.wipe(bArrDecryptMessageFrom);
+                        bundle2.putBoolean("dual_dar_response", zOnPasswordAuth);
                         bundle2.putInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, i4);
                         break;
                     case 5:
                         int i5 = bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-                        byte[] decryptMessageFrom2 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
-                        byte[] decryptMessageFrom3 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("NEW_PASSWORD"));
-                        boolean onPasswordChange = this.mDualDARClient.onPasswordChange(i5, decryptMessageFrom2, decryptMessageFrom3);
-                        Wiper.wipe(decryptMessageFrom2);
-                        Wiper.wipe(decryptMessageFrom3);
-                        bundle2.putBoolean("dual_dar_response", onPasswordChange);
+                        byte[] bArrDecryptMessageFrom2 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
+                        byte[] bArrDecryptMessageFrom3 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("NEW_PASSWORD"));
+                        boolean zOnPasswordChange = this.mDualDARClient.onPasswordChange(i5, bArrDecryptMessageFrom2, bArrDecryptMessageFrom3);
+                        Wiper.wipe(bArrDecryptMessageFrom2);
+                        Wiper.wipe(bArrDecryptMessageFrom3);
+                        bundle2.putBoolean("dual_dar_response", zOnPasswordChange);
                         bundle2.putInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, i5);
                         break;
                     case 6:
                         int i6 = bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-                        byte[] decryptMessageFrom4 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
+                        byte[] bArrDecryptMessageFrom4 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("EXISTING_PASSWORD"));
                         long j = bundle.getLong("RESET_PASSWORD_TOKEN_HANDLE");
-                        byte[] decryptMessageFrom5 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("RESET_PASSWORD_TOKEN"));
-                        boolean onSetResetPasswordToken = this.mDualDARClient.onSetResetPasswordToken(i6, decryptMessageFrom4, j, decryptMessageFrom5);
-                        Wiper.wipe(decryptMessageFrom4);
-                        Wiper.wipe(decryptMessageFrom5);
-                        bundle2.putBoolean("dual_dar_response", onSetResetPasswordToken);
+                        byte[] bArrDecryptMessageFrom5 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("RESET_PASSWORD_TOKEN"));
+                        boolean zOnSetResetPasswordToken = this.mDualDARClient.onSetResetPasswordToken(i6, bArrDecryptMessageFrom4, j, bArrDecryptMessageFrom5);
+                        Wiper.wipe(bArrDecryptMessageFrom4);
+                        Wiper.wipe(bArrDecryptMessageFrom5);
+                        bundle2.putBoolean("dual_dar_response", zOnSetResetPasswordToken);
                         bundle2.putInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, i6);
                         break;
                     case 7:
@@ -165,13 +158,13 @@ public class DualDarClientManager extends IProxyAgent.Stub {
                         break;
                     case '\b':
                         int i8 = bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-                        byte[] decryptMessageFrom6 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("NEW_PASSWORD"));
+                        byte[] bArrDecryptMessageFrom6 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("NEW_PASSWORD"));
                         long j2 = bundle.getLong("RESET_PASSWORD_TOKEN_HANDLE");
-                        byte[] decryptMessageFrom7 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("RESET_PASSWORD_TOKEN"));
-                        boolean onResetPasswordWithToken = this.mDualDARClient.onResetPasswordWithToken(i8, decryptMessageFrom6, j2, decryptMessageFrom7);
-                        Wiper.wipe(decryptMessageFrom6);
-                        Wiper.wipe(decryptMessageFrom7);
-                        bundle2.putBoolean("dual_dar_response", onResetPasswordWithToken);
+                        byte[] bArrDecryptMessageFrom7 = ((IProxyAgentService) this).mSecureClientForInAPI.decryptMessageFrom(string, bundle.getByteArray("RESET_PASSWORD_TOKEN"));
+                        boolean zOnResetPasswordWithToken = this.mDualDARClient.onResetPasswordWithToken(i8, bArrDecryptMessageFrom6, j2, bArrDecryptMessageFrom7);
+                        Wiper.wipe(bArrDecryptMessageFrom6);
+                        Wiper.wipe(bArrDecryptMessageFrom7);
+                        bundle2.putBoolean("dual_dar_response", zOnResetPasswordWithToken);
                         bundle2.putInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, i8);
                         break;
                     case '\t':

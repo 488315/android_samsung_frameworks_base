@@ -2,6 +2,7 @@ package android.hardware.display;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -134,7 +135,7 @@ public final class DeviceProductInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mName);
         parcel.writeString(this.mManufacturerPnpId);
         parcel.writeValue(this.mProductId);
@@ -176,7 +177,7 @@ public final class DeviceProductInfo implements Parcelable {
         }
 
         @Override // android.os.Parcelable
-        public void writeToParcel(Parcel parcel, int i) {
+        public void writeToParcel(Parcel parcel, int i) throws IOException {
             parcel.writeValue(this.mWeek);
             parcel.writeValue(this.mYear);
         }

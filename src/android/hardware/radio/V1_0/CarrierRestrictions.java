@@ -36,13 +36,13 @@ public final class CarrierRestrictions {
 
     public static final ArrayList<CarrierRestrictions> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CarrierRestrictions> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CarrierRestrictions carrierRestrictions = new CarrierRestrictions();
-            carrierRestrictions.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            carrierRestrictions.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(carrierRestrictions);
         }
         return arrayList;
@@ -50,20 +50,20 @@ public final class CarrierRestrictions {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j, true);
         this.allowedCarriers.clear();
         for (int i = 0; i < int32; i++) {
             Carrier carrier = new Carrier();
-            carrier.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 56);
+            carrier.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 56);
             this.allowedCarriers.add(carrier);
         }
         long j2 = j + 16;
         int int322 = hwBlob.getInt32(j + 24);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 56, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 56, hwBlob.handle(), j2, true);
         this.excludedCarriers.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             Carrier carrier2 = new Carrier();
-            carrier2.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 56);
+            carrier2.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 56);
             this.excludedCarriers.add(carrier2);
         }
     }

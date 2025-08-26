@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShareFilesHandler extends Handler {
     public final List screenRecordingUris;
@@ -76,13 +75,13 @@ public final class ShareFilesHandler extends Handler {
         }
         intent.putExtra("android.intent.extra.TEXT", (CharSequence) str);
         AccountManager accountManager = (AccountManager) userContext.getSystemService("account");
-        String str2 = SystemProperties.get("sendbug.preferred.domain");
-        if (!str2.startsWith("@")) {
-            str2 = "@".concat(str2);
+        String strConcat = SystemProperties.get("sendbug.preferred.domain");
+        if (!strConcat.startsWith("@")) {
+            strConcat = "@".concat(strConcat);
         }
         for (Account account2 : accountManager.getAccounts()) {
             if (Patterns.EMAIL_ADDRESS.matcher(account2.name).matches()) {
-                if (str2.isEmpty() || account2.name.endsWith(str2)) {
+                if (strConcat.isEmpty() || account2.name.endsWith(strConcat)) {
                     account = account2;
                     break;
                 }

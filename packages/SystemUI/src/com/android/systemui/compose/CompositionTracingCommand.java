@@ -8,7 +8,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CompositionTracingCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -24,6 +23,7 @@ public final class CompositionTracingCommand extends ParseableCommand {
         $$delegatedProperties = new KProperty[]{propertyReference1Impl, propertyReference1Impl2};
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public CompositionTracingCommand() {
         super("composition-tracing", null, 2, 0 == true ? 1 : 0);
         this.enable$delegate = subCommand(new EnableCommand());

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.lifecycle.viewmodel.CreationExtras;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ViewModelKt {
     public static final ViewModelProvider.Factory createDaggerViewModelFactory(ViewModelStoreOwner viewModelStoreOwner) {
@@ -18,15 +17,15 @@ public abstract class ViewModelKt {
     }
 
     public static final ViewModel get(ViewModelStoreOwner viewModelStoreOwner, Class cls, ViewModelProvider.Factory factory, CreationExtras creationExtras) {
-        ViewModelProvider create$default;
+        ViewModelProvider viewModelProviderCreate$default;
         if (factory != null) {
             ViewModelProvider.Companion companion = ViewModelProvider.Companion;
             ViewModelStore viewModelStore = viewModelStoreOwner.getViewModelStore();
             companion.getClass();
-            create$default = new ViewModelProvider(viewModelStore, factory, creationExtras);
+            viewModelProviderCreate$default = new ViewModelProvider(viewModelStore, factory, creationExtras);
         } else {
-            create$default = ViewModelProvider.Companion.create$default(ViewModelProvider.Companion, viewModelStoreOwner);
+            viewModelProviderCreate$default = ViewModelProvider.Companion.create$default(ViewModelProvider.Companion, viewModelStoreOwner);
         }
-        return create$default.get(cls);
+        return viewModelProviderCreate$default.get(cls);
     }
 }

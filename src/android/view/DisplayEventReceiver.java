@@ -65,9 +65,9 @@ public abstract class DisplayEventReceiver {
             throw new IllegalArgumentException("looper must not be null");
         }
         this.mMessageQueue = looper.getQueue();
-        long nativeInit = nativeInit(new WeakReference(this), new WeakReference(vsyncEventData), this.mMessageQueue, i, i2, j);
-        this.mReceiverPtr = nativeInit;
-        this.mFreeNativeResources = sNativeAllocationRegistry.registerNativeAllocation(this, nativeInit);
+        long jNativeInit = nativeInit(new WeakReference(this), new WeakReference(vsyncEventData), this.mMessageQueue, i, i2, j);
+        this.mReceiverPtr = jNativeInit;
+        this.mFreeNativeResources = sNativeAllocationRegistry.registerNativeAllocation(this, jNativeInit);
     }
 
     public void dispose() {
@@ -93,9 +93,9 @@ public abstract class DisplayEventReceiver {
 
             FrameTimeline() {
                 this.vsyncId = -1L;
-                long nanoTime = System.nanoTime();
-                this.deadline = 10000000 + nanoTime;
-                this.expectedPresentationTime = nanoTime + 20000000;
+                long jNanoTime = System.nanoTime();
+                this.deadline = 10000000 + jNanoTime;
+                this.expectedPresentationTime = jNanoTime + 20000000;
             }
 
             FrameTimeline(long j, long j2, long j3) {

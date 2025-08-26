@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.time.Duration;
 import kotlinx.coroutines.TimeoutCancellationException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class FlowKt__DelayKt$timeoutInternal$1$1$2 extends SuspendLambda implements Function1 {
     final /* synthetic */ long $timeout;
@@ -29,7 +28,7 @@ final class FlowKt__DelayKt$timeoutInternal$1$1$2 extends SuspendLambda implemen
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         ((FlowKt__DelayKt$timeoutInternal$1$1$2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
         throw null;
     }
@@ -41,6 +40,6 @@ final class FlowKt__DelayKt$timeoutInternal$1$1$2 extends SuspendLambda implemen
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        throw new TimeoutCancellationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Timed out waiting for ", Duration.m3446toStringimpl(this.$timeout)));
+        throw new TimeoutCancellationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Timed out waiting for ", Duration.m3466toStringimpl(this.$timeout)));
     }
 }

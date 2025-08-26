@@ -55,9 +55,9 @@ public interface IMusicRecognitionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMusicRecognitionService)) {
-                return (IMusicRecognitionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMusicRecognitionService)) {
+                return (IMusicRecognitionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -89,13 +89,13 @@ public interface IMusicRecognitionService extends IInterface {
             if (i == 1) {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 AudioFormat audioFormat = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
-                IMusicRecognitionServiceCallback asInterface = IMusicRecognitionServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                IMusicRecognitionServiceCallback iMusicRecognitionServiceCallbackAsInterface = IMusicRecognitionServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onAudioStreamStarted(parcelFileDescriptor, audioFormat, asInterface);
+                onAudioStreamStarted(parcelFileDescriptor, audioFormat, iMusicRecognitionServiceCallbackAsInterface);
             } else if (i == 2) {
-                IMusicRecognitionAttributionTagCallback asInterface2 = IMusicRecognitionAttributionTagCallback.Stub.asInterface(parcel.readStrongBinder());
+                IMusicRecognitionAttributionTagCallback iMusicRecognitionAttributionTagCallbackAsInterface = IMusicRecognitionAttributionTagCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getAttributionTag(asInterface2);
+                getAttributionTag(iMusicRecognitionAttributionTagCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -120,27 +120,27 @@ public interface IMusicRecognitionService extends IInterface {
 
             @Override // android.media.musicrecognition.IMusicRecognitionService
             public void onAudioStreamStarted(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, IMusicRecognitionServiceCallback iMusicRecognitionServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    obtain.writeStrongInterface(iMusicRecognitionServiceCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    parcelObtain.writeStrongInterface(iMusicRecognitionServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionService
             public void getAttributionTag(IMusicRecognitionAttributionTagCallback iMusicRecognitionAttributionTagCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMusicRecognitionAttributionTagCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMusicRecognitionAttributionTagCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

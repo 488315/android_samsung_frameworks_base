@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NaturalSwitchingLayout$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -69,20 +68,20 @@ public final /* synthetic */ class NaturalSwitchingLayout$$ExternalSyntheticLamb
                                 naturalSwitchingLayout.mSplitScreenController.setDividerVisibilityFromNS(false);
                             }
                             boolean z = CoreRune.MW_NATURAL_SWITCHING_PIP;
-                            IBinder iBinder = null;
+                            IBinder windowToken = null;
                             if (z && naturalSwitchingLayout.mIsPipNaturalSwitching && (dragTargetView = naturalSwitchingLayout.mDragTargetView) != null) {
-                                iBinder = dragTargetView.getWindowToken();
+                                windowToken = dragTargetView.getWindowToken();
                             }
                             Log.d("NaturalSwitchingLayout", "startNaturalSwitchingIfNeeded: " + naturalSwitchingLayout);
-                            MultiWindowManager.getInstance().startNaturalSwitching(naturalSwitchingLayout.mBinder, iBinder);
+                            MultiWindowManager.getInstance().startNaturalSwitching(naturalSwitchingLayout.mBinder, windowToken);
                             if (!z || !naturalSwitchingLayout.mIsPipNaturalSwitching || naturalSwitchingLayout.mNaturalSwitchingMode != 2) {
                                 naturalSwitchingLayout.mHideTasks.clear();
-                                List visibleTaskAppearedInfos = naturalSwitchingLayout.mShellTaskOrganizer.getVisibleTaskAppearedInfos();
+                                List visibleTaskAppearedInfos = naturalSwitchingLayout.mShellTaskOrganizer.getVisibleTaskAppearedInfos(-1);
                                 final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-                                ((ArrayList) visibleTaskAppearedInfos).forEach(new Consumer() { // from class: com.android.wm.shell.naturalswitching.NaturalSwitchingLayout$$ExternalSyntheticLambda6
+                                ((ArrayList) visibleTaskAppearedInfos).forEach(new Consumer() { // from class: com.android.wm.shell.naturalswitching.NaturalSwitchingLayout$$ExternalSyntheticLambda4
                                     @Override // java.util.function.Consumer
                                     public final void accept(Object obj) {
-                                        NaturalSwitchingLayout naturalSwitchingLayout2 = NaturalSwitchingLayout.this;
+                                        NaturalSwitchingLayout naturalSwitchingLayout2 = naturalSwitchingLayout;
                                         SurfaceControl.Transaction transaction2 = transaction;
                                         TaskAppearedInfo taskAppearedInfo = (TaskAppearedInfo) obj;
                                         boolean z2 = NaturalSwitchingLayout.DEBUG_DEV;

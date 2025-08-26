@@ -6,7 +6,6 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import com.samsung.android.sdk.scs.base.utils.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ConnectionManager {
     public Context mContext;

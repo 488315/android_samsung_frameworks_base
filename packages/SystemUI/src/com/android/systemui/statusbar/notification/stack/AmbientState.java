@@ -27,7 +27,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AmbientState implements Dumpable, PanelScreenShotLogger.LogProvider {
     public float mAppearFraction;
@@ -50,6 +49,7 @@ public class AmbientState implements Dumpable, PanelScreenShotLogger.LogProvider
     public boolean mIsFlinging;
     public boolean mIsSmallScreen;
     public boolean mIsSwipingUp;
+    public int mLargeScreenShadeHeaderHeight;
     public final LargeScreenShadeInterpolator mLargeScreenShadeInterpolator;
     public ExpandableView mLastVisibleBackgroundChild;
     public int mLayoutHeight;
@@ -68,6 +68,7 @@ public class AmbientState implements Dumpable, PanelScreenShotLogger.LogProvider
     public ExpandableNotificationRow mPulsingRow;
     public boolean mQsEditMode;
     public float mQsExpansionFraction;
+    public int mQsPanelHeight;
     public int mScrollY;
     public final StackScrollAlgorithm.SectionProvider mSectionProvider;
     public boolean mShadeExpanded;
@@ -88,7 +89,6 @@ public class AmbientState implements Dumpable, PanelScreenShotLogger.LogProvider
     public float mStackHeight = 0.0f;
     public boolean mIsFlingRequiredAfterLockScreenSwipeUp = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface KeyguardNotiExpandListener {
     }
 
@@ -108,16 +108,16 @@ public class AmbientState implements Dumpable, PanelScreenShotLogger.LogProvider
         printWriter.println("mStackCutoff=0.0");
         printWriter.println("mHeadsUpTop=0.0");
         printWriter.println("mHeadsUpBottom=0.0");
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mTopPadding="), this.mTopPadding, printWriter, "mStackTopMargin="), this.mStackTopMargin, printWriter, "mStackTranslation="), this.mStackTranslation, printWriter, "mLayoutMinHeight="), this.mLayoutMinHeight, printWriter, "mLayoutMaxHeight="), this.mLayoutMaxHeight, printWriter, "mLayoutHeight="), this.mLayoutHeight, printWriter, "mContentHeight="), this.mContentHeight, printWriter, "mHideSensitive="), this.mHideSensitive, printWriter, "mShadeExpanded="), this.mShadeExpanded, printWriter, "mClearAllInProgress="), this.mClearAllInProgress, printWriter, "mStatusBarState=");
-        m.append(StatusBarState.toString(this.mStatusBarState));
-        printWriter.println(m.toString());
-        StringBuilder m2 = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mExpansionChanging="), this.mExpansionChanging, printWriter, "mPanelFullWidth="), this.mIsSmallScreen, printWriter, "mPulsing="), this.mPulsing, printWriter, "mPulseHeight="), this.mPulseHeight, printWriter, "mTrackedHeadsUpRow.key=");
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mTopPadding="), this.mTopPadding, printWriter, "mStackTopMargin="), this.mStackTopMargin, printWriter, "mStackTranslation="), this.mStackTranslation, printWriter, "mLayoutMinHeight="), this.mLayoutMinHeight, printWriter, "mLayoutMaxHeight="), this.mLayoutMaxHeight, printWriter, "mLayoutHeight="), this.mLayoutHeight, printWriter, "mContentHeight="), this.mContentHeight, printWriter, "mHideSensitive="), this.mHideSensitive, printWriter, "mShadeExpanded="), this.mShadeExpanded, printWriter, "mClearAllInProgress="), this.mClearAllInProgress, printWriter, "mStatusBarState=");
+        sbM.append(StatusBarState.toString(this.mStatusBarState));
+        printWriter.println(sbM.toString());
+        StringBuilder sbM2 = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mExpansionChanging="), this.mExpansionChanging, printWriter, "mPanelFullWidth="), this.mIsSmallScreen, printWriter, "mPulsing="), this.mPulsing, printWriter, "mPulseHeight="), this.mPulseHeight, printWriter, "mTrackedHeadsUpRow.key=");
         ExpandableNotificationRow expandableNotificationRow = this.mTrackedHeadsUpRow;
-        m2.append(expandableNotificationRow == null ? "null" : expandableNotificationRow.mLoggingKey);
-        printWriter.println(m2.toString());
-        StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mMaxHeadsUpTranslation="), this.mMaxHeadsUpTranslation, printWriter, "mDozeAmount="), this.mDozeAmount, printWriter, "mDozing="), this.mDozing, printWriter, "mFractionToShade="), this.mFractionToShade, printWriter, "mHideAmount="), this.mHideAmount, printWriter, "mAppearFraction="), this.mAppearFraction, printWriter, "mExpansionFraction="), this.mExpansionFraction, printWriter, "mQsExpansionFraction="), this.mQsExpansionFraction, printWriter, "mExpandingVelocity="), this.mExpandingVelocity, printWriter, "mOverScrollTopAmount="), this.mOverScrollTopAmount, printWriter, "mOverScrollBottomAmount="), this.mOverScrollBottomAmount, printWriter, "mOverExpansion="), this.mOverExpansion, printWriter, "mStackHeight="), this.mStackHeight, printWriter, "mStackEndHeight="), this.mStackEndHeight, printWriter, "mStackY="), this.mStackY, printWriter, "mScrollY="), this.mScrollY, printWriter, "mCurrentScrollVelocity="), this.mCurrentScrollVelocity, printWriter, "mIsSwipingUp="), this.mIsSwipingUp, printWriter, "mPanelTracking="), this.mPanelTracking, printWriter, "mIsFlinging="), this.mIsFlinging, printWriter, "mIsFlingRequiredAfterLockScreenSwipeUp="), this.mIsFlingRequiredAfterLockScreenSwipeUp, printWriter, "mZDistanceBetweenElements=");
-        m3.append(this.mZDistanceBetweenElements);
-        printWriter.println(m3.toString());
+        sbM2.append(expandableNotificationRow == null ? "null" : expandableNotificationRow.mLoggingKey);
+        printWriter.println(sbM2.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mMaxHeadsUpTranslation="), this.mMaxHeadsUpTranslation, printWriter, "mDozeAmount="), this.mDozeAmount, printWriter, "mDozing="), this.mDozing, printWriter, "mFractionToShade="), this.mFractionToShade, printWriter, "mHideAmount="), this.mHideAmount, printWriter, "mAppearFraction="), this.mAppearFraction, printWriter, "mExpansionFraction="), this.mExpansionFraction, printWriter, "mQsExpansionFraction="), this.mQsExpansionFraction, printWriter, "mExpandingVelocity="), this.mExpandingVelocity, printWriter, "mOverScrollTopAmount="), this.mOverScrollTopAmount, printWriter, "mOverScrollBottomAmount="), this.mOverScrollBottomAmount, printWriter, "mOverExpansion="), this.mOverExpansion, printWriter, "mStackHeight="), this.mStackHeight, printWriter, "mStackEndHeight="), this.mStackEndHeight, printWriter, "mStackY="), this.mStackY, printWriter, "mScrollY="), this.mScrollY, printWriter, "mCurrentScrollVelocity="), this.mCurrentScrollVelocity, printWriter, "mIsSwipingUp="), this.mIsSwipingUp, printWriter, "mPanelTracking="), this.mPanelTracking, printWriter, "mIsFlinging="), this.mIsFlinging, printWriter, "mIsFlingRequiredAfterLockScreenSwipeUp="), this.mIsFlingRequiredAfterLockScreenSwipeUp, printWriter, "mZDistanceBetweenElements=");
+        sbM3.append(this.mZDistanceBetweenElements);
+        printWriter.println(sbM3.toString());
         printWriter.println("mBaseZHeight=0");
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mIsClosing="), this.mIsClosing, printWriter);
     }

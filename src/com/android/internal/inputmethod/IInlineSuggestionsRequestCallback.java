@@ -96,9 +96,9 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineSuggestionsRequestCallback)) {
-                return (IInlineSuggestionsRequestCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineSuggestionsRequestCallback)) {
+                return (IInlineSuggestionsRequestCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -146,9 +146,9 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
                     return true;
                 case 2:
                     InlineSuggestionsRequest inlineSuggestionsRequest = (InlineSuggestionsRequest) parcel.readTypedObject(InlineSuggestionsRequest.CREATOR);
-                    IInlineSuggestionsResponseCallback asInterface = IInlineSuggestionsResponseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallbackAsInterface = IInlineSuggestionsResponseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onInlineSuggestionsRequest(inlineSuggestionsRequest, asInterface);
+                    onInlineSuggestionsRequest(inlineSuggestionsRequest, iInlineSuggestionsResponseCallbackAsInterface);
                     return true;
                 case 3:
                     AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
@@ -156,9 +156,9 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
                     onInputMethodStartInput(autofillId);
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onInputMethodShowInputRequested(readBoolean);
+                    onInputMethodShowInputRequested(z);
                     return true;
                 case 5:
                     onInputMethodStartInputView();
@@ -195,93 +195,93 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInlineSuggestionsUnsupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInlineSuggestionsRequest(InlineSuggestionsRequest inlineSuggestionsRequest, IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(inlineSuggestionsRequest, 0);
-                    obtain.writeStrongInterface(iInlineSuggestionsResponseCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inlineSuggestionsRequest, 0);
+                    parcelObtain.writeStrongInterface(iInlineSuggestionsResponseCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInputMethodStartInput(AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInputMethodShowInputRequested(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInputMethodStartInputView() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInputMethodFinishInputView() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInputMethodFinishInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
             public void onInlineSuggestionsSessionInvalidated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

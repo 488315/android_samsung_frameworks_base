@@ -20,7 +20,6 @@ import androidx.constraintlayout.widget.R;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ConstraintHelper extends View {
     protected static final String CHILD_TAG = "CONSTRAINT_LAYOUT_HELPER_CHILD";
@@ -34,7 +33,7 @@ public abstract class ConstraintHelper extends View {
     private View[] mViews;
     protected Context myContext;
 
-    public ConstraintHelper(Context context) {
+    public ConstraintHelper(Context context) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super(context);
         this.mIds = new int[32];
         this.mUseViewMeasure = false;
@@ -44,17 +43,17 @@ public abstract class ConstraintHelper extends View {
         init(null);
     }
 
-    private void addID(String str) {
+    private void addID(String str) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         if (str == null || str.length() == 0 || this.myContext == null) {
             return;
         }
-        String trim = str.trim();
-        int findId = findId(trim);
-        if (findId != 0) {
-            this.mMap.put(Integer.valueOf(findId), trim);
-            addRscID(findId);
+        String strTrim = str.trim();
+        int iFindId = findId(strTrim);
+        if (iFindId != 0) {
+            this.mMap.put(Integer.valueOf(iFindId), strTrim);
+            addRscID(iFindId);
         } else {
-            Log.w("ConstraintHelper", "Could not find id of \"" + trim + "\"");
+            Log.w("ConstraintHelper", "Could not find id of \"" + strTrim + "\"");
         }
     }
 
@@ -77,7 +76,7 @@ public abstract class ConstraintHelper extends View {
         if (str == null || str.length() == 0 || this.myContext == null) {
             return;
         }
-        String trim = str.trim();
+        String strTrim = str.trim();
         ConstraintLayout constraintLayout = getParent() instanceof ConstraintLayout ? (ConstraintLayout) getParent() : null;
         if (constraintLayout == null) {
             Log.w("ConstraintHelper", "Parent not a ConstraintLayout");
@@ -87,7 +86,7 @@ public abstract class ConstraintHelper extends View {
         for (int i = 0; i < childCount; i++) {
             View childAt = constraintLayout.getChildAt(i);
             ViewGroup.LayoutParams layoutParams = childAt.getLayoutParams();
-            if ((layoutParams instanceof ConstraintLayout.LayoutParams) && trim.equals(((ConstraintLayout.LayoutParams) layoutParams).constraintTag)) {
+            if ((layoutParams instanceof ConstraintLayout.LayoutParams) && strTrim.equals(((ConstraintLayout.LayoutParams) layoutParams).constraintTag)) {
                 if (childAt.getId() == -1) {
                     Log.w("ConstraintHelper", "to use ConstraintTag view " + childAt.getClass().getSimpleName() + " must have an ID");
                 } else {
@@ -97,39 +96,39 @@ public abstract class ConstraintHelper extends View {
         }
     }
 
-    private int[] convertReferenceString(String str) {
-        String[] split = str.split(",");
-        int[] iArr = new int[split.length];
+    private int[] convertReferenceString(String str) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
+        String[] strArrSplit = str.split(",");
+        int[] iArr = new int[strArrSplit.length];
         int i = 0;
-        for (String str2 : split) {
-            int findId = findId(str2.trim());
-            if (findId != 0) {
-                iArr[i] = findId;
+        for (String str2 : strArrSplit) {
+            int iFindId = findId(str2.trim());
+            if (iFindId != 0) {
+                iArr[i] = iFindId;
                 i++;
             }
         }
-        return i != split.length ? Arrays.copyOf(iArr, i) : iArr;
+        return i != strArrSplit.length ? Arrays.copyOf(iArr, i) : iArr;
     }
 
-    private int findId(String str) {
+    private int findId(String str) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         ConstraintLayout constraintLayout = getParent() instanceof ConstraintLayout ? (ConstraintLayout) getParent() : null;
-        int i = 0;
+        int iFindId = 0;
         if (isInEditMode() && constraintLayout != null) {
             Object designInformation = constraintLayout.getDesignInformation(0, str);
             if (designInformation instanceof Integer) {
-                i = ((Integer) designInformation).intValue();
+                iFindId = ((Integer) designInformation).intValue();
             }
         }
-        if (i == 0 && constraintLayout != null) {
-            i = findId(constraintLayout, str);
+        if (iFindId == 0 && constraintLayout != null) {
+            iFindId = findId(constraintLayout, str);
         }
-        if (i == 0) {
+        if (iFindId == 0) {
             try {
-                i = R.id.class.getField(str).getInt(null);
+                iFindId = R.id.class.getField(str).getInt(null);
             } catch (Exception unused) {
             }
         }
-        return i == 0 ? this.myContext.getResources().getIdentifier(str, "id", this.myContext.getPackageName()) : i;
+        return iFindId == 0 ? this.myContext.getResources().getIdentifier(str, "id", this.myContext.getPackageName()) : iFindId;
     }
 
     public static boolean isChildOfHelper(View view) {
@@ -202,23 +201,23 @@ public abstract class ConstraintHelper extends View {
         return i2;
     }
 
-    public void init(AttributeSet attributeSet) {
+    public void init(AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_Layout_constraint_referenced_ids) {
-                    String string = obtainStyledAttributes.getString(index);
+                    String string = typedArrayObtainStyledAttributes.getString(index);
                     this.mReferenceIds = string;
                     setIds(string);
                 } else if (index == R.styleable.ConstraintLayout_Layout_constraint_referenced_tags) {
-                    String string2 = obtainStyledAttributes.getString(index);
+                    String string2 = typedArrayObtainStyledAttributes.getString(index);
                     this.mReferenceTags = string2;
                     setReferenceTags(string2);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -261,7 +260,7 @@ public abstract class ConstraintHelper extends View {
     }
 
     @Override // android.view.View
-    public void onAttachedToWindow() {
+    public void onAttachedToWindow() throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super.onAttachedToWindow();
         String str = this.mReferenceIds;
         if (str != null) {
@@ -318,7 +317,7 @@ public abstract class ConstraintHelper extends View {
         return i2;
     }
 
-    public void setIds(String str) {
+    public void setIds(String str) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         this.mReferenceIds = str;
         if (str == null) {
             return;
@@ -326,13 +325,13 @@ public abstract class ConstraintHelper extends View {
         int i = 0;
         this.mCount = 0;
         while (true) {
-            int indexOf = str.indexOf(44, i);
-            if (indexOf == -1) {
+            int iIndexOf = str.indexOf(44, i);
+            if (iIndexOf == -1) {
                 addID(str.substring(i));
                 return;
             } else {
-                addID(str.substring(i, indexOf));
-                i = indexOf + 1;
+                addID(str.substring(i, iIndexOf));
+                i = iIndexOf + 1;
             }
         }
     }
@@ -345,13 +344,13 @@ public abstract class ConstraintHelper extends View {
         int i = 0;
         this.mCount = 0;
         while (true) {
-            int indexOf = str.indexOf(44, i);
-            if (indexOf == -1) {
+            int iIndexOf = str.indexOf(44, i);
+            if (iIndexOf == -1) {
                 addTag(str.substring(i));
                 return;
             } else {
-                addTag(str.substring(i, indexOf));
-                i = indexOf + 1;
+                addTag(str.substring(i, iIndexOf));
+                i = iIndexOf + 1;
             }
         }
     }
@@ -374,7 +373,7 @@ public abstract class ConstraintHelper extends View {
 
     public void updatePreLayout(ConstraintLayout constraintLayout) {
         String str;
-        int findId;
+        int iFindId;
         if (isInEditMode()) {
             setIds(this.mReferenceIds);
         }
@@ -388,10 +387,10 @@ public abstract class ConstraintHelper extends View {
         for (int i = 0; i < this.mCount; i++) {
             int i2 = this.mIds[i];
             View viewById = constraintLayout.getViewById(i2);
-            if (viewById == null && (findId = findId(constraintLayout, (str = this.mMap.get(Integer.valueOf(i2))))) != 0) {
-                this.mIds[i] = findId;
-                this.mMap.put(Integer.valueOf(findId), str);
-                viewById = constraintLayout.getViewById(findId);
+            if (viewById == null && (iFindId = findId(constraintLayout, (str = this.mMap.get(Integer.valueOf(i2))))) != 0) {
+                this.mIds[i] = iFindId;
+                this.mMap.put(Integer.valueOf(iFindId), str);
+                viewById = constraintLayout.getViewById(iFindId);
             }
             if (viewById != null) {
                 ((HelperWidget) this.mHelperWidget).add(constraintLayout.getViewWidget(viewById));
@@ -412,7 +411,7 @@ public abstract class ConstraintHelper extends View {
         }
     }
 
-    public ConstraintHelper(Context context, AttributeSet attributeSet) {
+    public ConstraintHelper(Context context, AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super(context, attributeSet);
         this.mIds = new int[32];
         this.mUseViewMeasure = false;
@@ -430,9 +429,9 @@ public abstract class ConstraintHelper extends View {
         applyLayoutFeatures((ConstraintLayout) parent);
     }
 
-    private int findId(ConstraintLayout constraintLayout, String str) {
+    private int findId(ConstraintLayout constraintLayout, String str) throws Resources.NotFoundException {
         Resources resources;
-        String str2;
+        String resourceEntryName;
         if (str == null || constraintLayout == null || (resources = this.myContext.getResources()) == null) {
             return 0;
         }
@@ -441,11 +440,11 @@ public abstract class ConstraintHelper extends View {
             View childAt = constraintLayout.getChildAt(i);
             if (childAt.getId() != -1) {
                 try {
-                    str2 = resources.getResourceEntryName(childAt.getId());
+                    resourceEntryName = resources.getResourceEntryName(childAt.getId());
                 } catch (Resources.NotFoundException unused) {
-                    str2 = null;
+                    resourceEntryName = null;
                 }
-                if (str.equals(str2)) {
+                if (str.equals(resourceEntryName)) {
                     return childAt.getId();
                 }
             }
@@ -453,7 +452,7 @@ public abstract class ConstraintHelper extends View {
         return 0;
     }
 
-    public ConstraintHelper(Context context, AttributeSet attributeSet, int i) {
+    public ConstraintHelper(Context context, AttributeSet attributeSet, int i) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super(context, attributeSet, i);
         this.mIds = new int[32];
         this.mUseViewMeasure = false;

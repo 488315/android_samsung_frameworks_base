@@ -30,6 +30,7 @@ import com.android.internal.org.bouncycastle.util.Strings;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -86,9 +87,9 @@ abstract class X509CRLImpl extends X509CRL {
             return null;
         }
         HashSet hashSet = new HashSet();
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (z == extensions.getExtension(aSN1ObjectIdentifier).isCritical()) {
                 hashSet.add(aSN1ObjectIdentifier.getId());
             }
@@ -120,7 +121,7 @@ abstract class X509CRLImpl extends X509CRL {
     }
 
     @Override // java.security.cert.X509CRL
-    public void verify(PublicKey publicKey) throws CRLException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey publicKey) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CRLException, NoSuchProviderException, InvalidAlgorithmParameterException {
         doVerify(publicKey, new SignatureCreator() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CRLImpl.1
             @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
             public Signature createSignature(String str) throws NoSuchAlgorithmException, NoSuchProviderException {
@@ -134,7 +135,7 @@ abstract class X509CRLImpl extends X509CRL {
     }
 
     @Override // java.security.cert.X509CRL
-    public void verify(PublicKey publicKey, final String str) throws CRLException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey publicKey, final String str) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CRLException, NoSuchProviderException, InvalidAlgorithmParameterException {
         doVerify(publicKey, new SignatureCreator(this) { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CRLImpl.2
             @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
             public Signature createSignature(String str2) throws NoSuchAlgorithmException, NoSuchProviderException {
@@ -148,7 +149,7 @@ abstract class X509CRLImpl extends X509CRL {
     }
 
     @Override // java.security.cert.X509CRL
-    public void verify(PublicKey publicKey, final Provider provider) throws CRLException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public void verify(PublicKey publicKey, final Provider provider) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CRLException, InvalidAlgorithmParameterException {
         try {
             doVerify(publicKey, new SignatureCreator() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CRLImpl.3
                 @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
@@ -164,7 +165,7 @@ abstract class X509CRLImpl extends X509CRL {
         }
     }
 
-    private void doVerify(PublicKey publicKey, SignatureCreator signatureCreator) throws CRLException, NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
+    private void doVerify(PublicKey publicKey, SignatureCreator signatureCreator) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CRLException, NoSuchProviderException, InvalidAlgorithmParameterException {
         if (!this.c.getSignatureAlgorithm().equals(this.c.getTBSCertList().getSignature())) {
             throw new CRLException("Signature algorithm on CertificateList does not match TBSCertList.");
         }
@@ -220,20 +221,20 @@ abstract class X509CRLImpl extends X509CRL {
             }
             return;
         }
-        Signature createSignature = signatureCreator.createSignature(getSigAlgName());
+        Signature signatureCreateSignature = signatureCreator.createSignature(getSigAlgName());
         byte[] bArr = this.sigAlgParams;
         if (bArr == null) {
-            checkSignature(publicKey, createSignature, null, getSignature());
+            checkSignature(publicKey, signatureCreateSignature, null, getSignature());
             return;
         }
         try {
-            checkSignature(publicKey, createSignature, ASN1Primitive.fromByteArray(bArr), getSignature());
+            checkSignature(publicKey, signatureCreateSignature, ASN1Primitive.fromByteArray(bArr), getSignature());
         } catch (IOException e3) {
             throw new SignatureException("cannot decode signature parameters: " + e3.getMessage());
         }
     }
 
-    private void checkSignature(PublicKey publicKey, Signature signature, ASN1Encodable aSN1Encodable, byte[] bArr) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, CRLException {
+    private void checkSignature(PublicKey publicKey, Signature signature, ASN1Encodable aSN1Encodable, byte[] bArr) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, CRLException, InvalidAlgorithmParameterException {
         if (aSN1Encodable != null) {
             X509SignatureUtil.setSignatureParameters(signature, aSN1Encodable);
         }
@@ -317,11 +318,11 @@ abstract class X509CRLImpl extends X509CRL {
 
     @Override // java.security.cert.X509CRL
     public Set getRevokedCertificates() {
-        Set loadCRLEntries = loadCRLEntries();
-        if (loadCRLEntries.isEmpty()) {
+        Set setLoadCRLEntries = loadCRLEntries();
+        if (setLoadCRLEntries.isEmpty()) {
             return null;
         }
-        return Collections.unmodifiableSet(loadCRLEntries);
+        return Collections.unmodifiableSet(setLoadCRLEntries);
     }
 
     @Override // java.security.cert.X509CRL
@@ -356,46 +357,46 @@ abstract class X509CRLImpl extends X509CRL {
     @Override // java.security.cert.CRL
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append("              Version: ").append(getVersion()).append(lineSeparator);
-        stringBuffer.append("             IssuerDN: ").append(getIssuerDN()).append(lineSeparator);
-        stringBuffer.append("          This update: ").append(getThisUpdate()).append(lineSeparator);
-        stringBuffer.append("          Next update: ").append(getNextUpdate()).append(lineSeparator);
-        stringBuffer.append("  Signature Algorithm: ").append(getSigAlgName()).append(lineSeparator);
-        X509SignatureUtil.prettyPrintSignature(getSignature(), stringBuffer, lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append("              Version: ").append(getVersion()).append(strLineSeparator);
+        stringBuffer.append("             IssuerDN: ").append(getIssuerDN()).append(strLineSeparator);
+        stringBuffer.append("          This update: ").append(getThisUpdate()).append(strLineSeparator);
+        stringBuffer.append("          Next update: ").append(getNextUpdate()).append(strLineSeparator);
+        stringBuffer.append("  Signature Algorithm: ").append(getSigAlgName()).append(strLineSeparator);
+        X509SignatureUtil.prettyPrintSignature(getSignature(), stringBuffer, strLineSeparator);
         Extensions extensions = this.c.getTBSCertList().getExtensions();
         if (extensions != null) {
-            Enumeration oids = extensions.oids();
-            if (oids.hasMoreElements()) {
-                stringBuffer.append("           Extensions: ").append(lineSeparator);
+            Enumeration enumerationOids = extensions.oids();
+            if (enumerationOids.hasMoreElements()) {
+                stringBuffer.append("           Extensions: ").append(strLineSeparator);
             }
-            while (oids.hasMoreElements()) {
-                ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+            while (enumerationOids.hasMoreElements()) {
+                ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
                 Extension extension = extensions.getExtension(aSN1ObjectIdentifier);
                 if (extension.getExtnValue() != null) {
                     ASN1InputStream aSN1InputStream = new ASN1InputStream(extension.getExtnValue().getOctets());
                     stringBuffer.append("                       critical(").append(extension.isCritical()).append(") ");
                     try {
                         if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.cRLNumber)) {
-                            stringBuffer.append(new CRLNumber(ASN1Integer.getInstance(aSN1InputStream.readObject()).getPositiveValue())).append(lineSeparator);
+                            stringBuffer.append(new CRLNumber(ASN1Integer.getInstance(aSN1InputStream.readObject()).getPositiveValue())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.deltaCRLIndicator)) {
-                            stringBuffer.append("Base CRL: " + new CRLNumber(ASN1Integer.getInstance(aSN1InputStream.readObject()).getPositiveValue())).append(lineSeparator);
+                            stringBuffer.append("Base CRL: " + new CRLNumber(ASN1Integer.getInstance(aSN1InputStream.readObject()).getPositiveValue())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.issuingDistributionPoint)) {
-                            stringBuffer.append(IssuingDistributionPoint.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(IssuingDistributionPoint.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.cRLDistributionPoints)) {
-                            stringBuffer.append(CRLDistPoint.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(CRLDistPoint.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                         } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.freshestCRL)) {
-                            stringBuffer.append(CRLDistPoint.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(CRLDistPoint.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                         } else {
                             stringBuffer.append(aSN1ObjectIdentifier.getId());
-                            stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(lineSeparator);
+                            stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(strLineSeparator);
                         }
                     } catch (Exception unused) {
                         stringBuffer.append(aSN1ObjectIdentifier.getId());
-                        stringBuffer.append(" value = ").append("*****").append(lineSeparator);
+                        stringBuffer.append(" value = ").append("*****").append(strLineSeparator);
                     }
                 } else {
-                    stringBuffer.append(lineSeparator);
+                    stringBuffer.append(strLineSeparator);
                 }
             }
         }
@@ -404,7 +405,7 @@ abstract class X509CRLImpl extends X509CRL {
             Iterator it = revokedCertificates.iterator();
             while (it.hasNext()) {
                 stringBuffer.append(it.next());
-                stringBuffer.append(lineSeparator);
+                stringBuffer.append(strLineSeparator);
             }
         }
         return stringBuffer.toString();

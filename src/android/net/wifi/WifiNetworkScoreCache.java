@@ -52,13 +52,13 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         synchronized (this.mLock) {
             boolean z = false;
             for (ScoredNetwork scoredNetwork : list) {
-                String buildNetworkKey = buildNetworkKey(scoredNetwork);
-                if (buildNetworkKey == null) {
+                String strBuildNetworkKey = buildNetworkKey(scoredNetwork);
+                if (strBuildNetworkKey == null) {
                     if (DBG) {
                         Log.d(TAG, "Failed to build network key for ScoredNetwork" + scoredNetwork);
                     }
                 } else {
-                    this.mCache.put(buildNetworkKey, scoredNetwork);
+                    this.mCache.put(strBuildNetworkKey, scoredNetwork);
                     z = true;
                 }
             }
@@ -90,11 +90,11 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         if (scoredNetwork == null || scoredNetwork.rssiCurve == null) {
             return -128;
         }
-        byte lookupScore = scoredNetwork.rssiCurve.lookupScore(scanResult.level);
+        byte bLookupScore = scoredNetwork.rssiCurve.lookupScore(scanResult.level);
         if (DBG) {
-            Log.d(TAG, "getNetworkScore found scored network " + scoredNetwork.networkKey + " score " + Integer.toString(lookupScore) + " RSSI " + scanResult.level);
+            Log.d(TAG, "getNetworkScore found scored network " + scoredNetwork.networkKey + " score " + Integer.toString(bLookupScore) + " RSSI " + scanResult.level);
         }
-        return lookupScore;
+        return bLookupScore;
     }
 
     public boolean getMeteredHint(ScanResult scanResult) {
@@ -107,29 +107,29 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         if (scoredNetwork == null || scoredNetwork.rssiCurve == null) {
             return -128;
         }
-        byte lookupScore = scoredNetwork.rssiCurve.lookupScore(scanResult.level, z);
+        byte bLookupScore = scoredNetwork.rssiCurve.lookupScore(scanResult.level, z);
         if (DBG) {
-            Log.d(TAG, "getNetworkScore found scored network " + scoredNetwork.networkKey + " score " + Integer.toString(lookupScore) + " RSSI " + scanResult.level + " isActiveNetwork " + z);
+            Log.d(TAG, "getNetworkScore found scored network " + scoredNetwork.networkKey + " score " + Integer.toString(bLookupScore) + " RSSI " + scanResult.level + " isActiveNetwork " + z);
         }
-        return lookupScore;
+        return bLookupScore;
     }
 
     public ScoredNetwork getScoredNetwork(ScanResult scanResult) {
         ScoredNetwork scoredNetwork;
-        String buildNetworkKey = buildNetworkKey(scanResult);
-        if (buildNetworkKey == null) {
+        String strBuildNetworkKey = buildNetworkKey(scanResult);
+        if (strBuildNetworkKey == null) {
             return null;
         }
         synchronized (this.mLock) {
-            scoredNetwork = this.mCache.get(buildNetworkKey);
+            scoredNetwork = this.mCache.get(strBuildNetworkKey);
         }
         return scoredNetwork;
     }
 
     public ScoredNetwork getScoredNetwork(NetworkKey networkKey) {
         ScoredNetwork scoredNetwork;
-        String buildNetworkKey = buildNetworkKey(networkKey);
-        if (buildNetworkKey == null) {
+        String strBuildNetworkKey = buildNetworkKey(networkKey);
+        if (strBuildNetworkKey == null) {
             if (!DBG) {
                 return null;
             }
@@ -137,7 +137,7 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
             return null;
         }
         synchronized (this.mLock) {
-            scoredNetwork = this.mCache.get(buildNetworkKey);
+            scoredNetwork = this.mCache.get(strBuildNetworkKey);
         }
         return scoredNetwork;
     }

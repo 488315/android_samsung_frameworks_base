@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -17,19 +18,22 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.ThemedSpinnerAdapter;
+import androidx.appcompat.R$styleable;
 import androidx.appcompat.app.AlertController;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.graphics.drawable.SeslRecoilDrawable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.view.menu.ShowableListMenu;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatSpinner extends Spinner {
     public static final int[] ATTRS_ANDROID_SPINNERMODE = {R.attr.spinnerMode};
@@ -46,7 +50,6 @@ public class AppCompatSpinner extends Spinner {
     public SpinnerAdapter mTempAdapter;
     public final Rect mTempRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DialogPopup implements SpinnerPopup, DialogInterface.OnClickListener {
         public DropDownAdapter mListAdapter;
         public AlertDialog mPopup;
@@ -149,16 +152,15 @@ public class AppCompatSpinner extends Spinner {
             alertParams.mOnClickListener = this;
             alertParams.mCheckedItem = selectedItemPosition;
             alertParams.mIsSingleChoice = true;
-            AlertDialog create = builder.create();
-            this.mPopup = create;
-            AlertController.RecycleListView recycleListView = create.mAlert.mListView;
+            AlertDialog alertDialogCreate = builder.create();
+            this.mPopup = alertDialogCreate;
+            AlertController.RecycleListView recycleListView = alertDialogCreate.mAlert.mListView;
             recycleListView.setTextDirection(i);
             recycleListView.setTextAlignment(i2);
             this.mPopup.show();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DropDownAdapter implements ListAdapter, SpinnerAdapter {
         public final SpinnerAdapter mAdapter;
         public final ListAdapter mListAdapter;
@@ -275,7 +277,6 @@ public class AppCompatSpinner extends Spinner {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DropdownPopup extends ListPopupWindow implements SpinnerPopup {
         public ListAdapter mAdapter;
         public CharSequence mHintText;
@@ -321,14 +322,14 @@ public class AppCompatSpinner extends Spinner {
             int width = appCompatSpinner.getWidth();
             int i2 = appCompatSpinner.mDropDownWidth;
             if (i2 == -2) {
-                int compatMeasureContentWidth = appCompatSpinner.compatMeasureContentWidth((SpinnerAdapter) this.mAdapter, appCompatPopupWindow.getBackground());
+                int iCompatMeasureContentWidth = appCompatSpinner.compatMeasureContentWidth((SpinnerAdapter) this.mAdapter, appCompatPopupWindow.getBackground());
                 int i3 = appCompatSpinner.getContext().getResources().getDisplayMetrics().widthPixels;
                 Rect rect2 = appCompatSpinner.mTempRect;
                 int i4 = (i3 - rect2.left) - rect2.right;
-                if (compatMeasureContentWidth > i4) {
-                    compatMeasureContentWidth = i4;
+                if (iCompatMeasureContentWidth > i4) {
+                    iCompatMeasureContentWidth = i4;
                 }
-                setContentWidth(Math.max(compatMeasureContentWidth + 4, (width - paddingLeft) - paddingRight));
+                setContentWidth(Math.max(iCompatMeasureContentWidth + 4, (width - paddingLeft) - paddingRight));
             } else if (i2 == -1) {
                 setContentWidth((width - paddingLeft) - paddingRight);
             } else {
@@ -365,16 +366,16 @@ public class AppCompatSpinner extends Spinner {
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Type inference failed for: r0v3, types: [android.view.ViewTreeObserver$OnGlobalLayoutListener, androidx.appcompat.widget.AppCompatSpinner$DropdownPopup$2] */
         @Override // androidx.appcompat.widget.AppCompatSpinner.SpinnerPopup
-        public final void show(int i, int i2) {
+        public final void show(int i, int i2) throws Resources.NotFoundException {
             AppCompatPopupWindow appCompatPopupWindow = this.mPopup;
-            boolean isShowing = appCompatPopupWindow.isShowing();
+            boolean zIsShowing = appCompatPopupWindow.isShowing();
             computeContentWidth();
             this.mPopup.setInputMethodMode(2);
             show();
             DropDownListView dropDownListView = this.mDropDownList;
             dropDownListView.setTextDirection(i);
             dropDownListView.setTextAlignment(i2);
-            if (isShowing) {
+            if (zIsShowing) {
                 return;
             }
             dropDownListView.setChoiceMode(1);
@@ -394,7 +395,7 @@ public class AppCompatSpinner extends Spinner {
             }
             ?? r0 = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: androidx.appcompat.widget.AppCompatSpinner.DropdownPopup.2
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-                public final void onGlobalLayout() {
+                public final void onGlobalLayout() throws Resources.NotFoundException {
                     DropdownPopup.this.computeContentWidth();
                     DropdownPopup.this.show();
                 }
@@ -415,7 +416,6 @@ public class AppCompatSpinner extends Spinner {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.appcompat.widget.AppCompatSpinner.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -446,7 +446,6 @@ public class AppCompatSpinner extends Spinner {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SpinnerPopup {
         void dismiss();
 
@@ -484,31 +483,31 @@ public class AppCompatSpinner extends Spinner {
         if (spinnerAdapter == null) {
             return 0;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 0);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 0);
-        int max = Math.max(0, getSelectedItemPosition());
-        int min = Math.min(spinnerAdapter.getCount(), max + 15);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 0);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 0);
+        int iMax = Math.max(0, getSelectedItemPosition());
+        int iMin = Math.min(spinnerAdapter.getCount(), iMax + 15);
         View view = null;
-        int i2 = 0;
-        for (int max2 = Math.max(0, max - (15 - (min - max))); max2 < min; max2++) {
-            int itemViewType = spinnerAdapter.getItemViewType(max2);
+        int iMax2 = 0;
+        for (int iMax3 = Math.max(0, iMax - (15 - (iMin - iMax))); iMax3 < iMin; iMax3++) {
+            int itemViewType = spinnerAdapter.getItemViewType(iMax3);
             if (itemViewType != i) {
                 view = null;
                 i = itemViewType;
             }
-            view = spinnerAdapter.getView(max2, view, this);
+            view = spinnerAdapter.getView(iMax3, view, this);
             if (view.getLayoutParams() == null) {
                 view.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
             }
-            view.measure(makeMeasureSpec, makeMeasureSpec2);
-            i2 = Math.max(i2, view.getMeasuredWidth());
+            view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+            iMax2 = Math.max(iMax2, view.getMeasuredWidth());
         }
         if (drawable == null) {
-            return i2;
+            return iMax2;
         }
         drawable.getPadding(this.mTempRect);
         Rect rect = this.mTempRect;
-        return rect.left + rect.right + i2;
+        return rect.left + rect.right + iMax2;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -614,35 +613,35 @@ public class AppCompatSpinner extends Spinner {
 
     @Override // android.widget.Spinner, android.widget.AbsSpinner, android.view.View
     public final void onMeasure(int i, int i2) {
-        int compatMeasureContentWidth;
+        int iCompatMeasureContentWidth;
         super.onMeasure(i, i2);
         if (this.mPopup == null || View.MeasureSpec.getMode(i) != Integer.MIN_VALUE) {
             return;
         }
         getMeasuredWidth();
         if (getSelectedItemPosition() <= -1 || getSelectedItemPosition() >= getAdapter().getCount()) {
-            compatMeasureContentWidth = compatMeasureContentWidth(getAdapter(), getBackground());
+            iCompatMeasureContentWidth = compatMeasureContentWidth(getAdapter(), getBackground());
         } else {
             SpinnerAdapter adapter = getAdapter();
             Drawable background = getBackground();
-            compatMeasureContentWidth = 0;
+            iCompatMeasureContentWidth = 0;
             if (adapter != null) {
-                int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-                int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
+                int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+                int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
                 View view = adapter.getView(getSelectedItemPosition(), null, this);
                 if (view.getLayoutParams() == null) {
                     view.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
                 }
-                view.measure(makeMeasureSpec, makeMeasureSpec2);
-                compatMeasureContentWidth = view.getMeasuredWidth();
+                view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+                iCompatMeasureContentWidth = view.getMeasuredWidth();
                 if (background != null) {
                     background.getPadding(this.mTempRect);
                     Rect rect = this.mTempRect;
-                    compatMeasureContentWidth += rect.left + rect.right;
+                    iCompatMeasureContentWidth += rect.left + rect.right;
                 }
             }
         }
-        setMeasuredDimension(Math.min(compatMeasureContentWidth, View.MeasureSpec.getSize(i)), getMeasuredHeight());
+        setMeasuredDimension(Math.min(iCompatMeasureContentWidth, View.MeasureSpec.getSize(i)), getMeasuredHeight());
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -817,11 +816,11 @@ public class AppCompatSpinner extends Spinner {
         this(context, attributeSet, i, i2, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x0065, code lost:
-    
-        if (r13 == null) goto L31;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00a5  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00bc  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00d6  */
     /* JADX WARN: Type inference failed for: r13v14, types: [androidx.appcompat.widget.AppCompatSpinner$1] */
     /* JADX WARN: Type inference failed for: r13v15 */
     /* JADX WARN: Type inference failed for: r13v16 */
@@ -832,13 +831,117 @@ public class AppCompatSpinner extends Spinner {
     /* JADX WARN: Type inference failed for: r8v0, types: [android.view.View, android.widget.Spinner, androidx.appcompat.widget.AppCompatSpinner] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public AppCompatSpinner(android.content.Context r9, android.util.AttributeSet r10, int r11, int r12, android.content.res.Resources.Theme r13) {
-        /*
-            Method dump skipped, instructions count: 225
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.AppCompatSpinner.<init>(android.content.Context, android.util.AttributeSet, int, int, android.content.res.Resources$Theme):void");
+    public AppCompatSpinner(Context context, AttributeSet attributeSet, int i, int i2, Resources.Theme theme) throws Throwable {
+        TypedArray typedArrayObtainStyledAttributes;
+        CharSequence[] textArray;
+        SpinnerAdapter spinnerAdapter;
+        super(context, attributeSet, i);
+        this.mTempRect = new Rect();
+        ThemeUtils.checkAppCompatTheme(getContext(), this);
+        int[] iArr = R$styleable.Spinner;
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, iArr, i, 0);
+        this.mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
+        if (theme != null) {
+            this.mPopupContext = new ContextThemeWrapper(context, theme);
+        } else {
+            int resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(4, 0);
+            if (resourceId != 0) {
+                this.mPopupContext = new ContextThemeWrapper(context, resourceId);
+            } else {
+                this.mPopupContext = context;
+            }
+        }
+        ?? r13 = -1;
+        TypedArray typedArray = null;
+        try {
+            if (i2 == -1) {
+                try {
+                    typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, ATTRS_ANDROID_SPINNERMODE, i, 0);
+                    try {
+                        boolean zHasValue = typedArrayObtainStyledAttributes.hasValue(0);
+                        r13 = typedArrayObtainStyledAttributes;
+                        if (zHasValue) {
+                            i2 = typedArrayObtainStyledAttributes.getInt(0, 0);
+                            r13 = typedArrayObtainStyledAttributes;
+                        }
+                    } catch (Exception e) {
+                        e = e;
+                        Log.i("AppCompatSpinner", "Could not read android:spinnerMode", e);
+                        r13 = typedArrayObtainStyledAttributes;
+                        if (typedArrayObtainStyledAttributes != null) {
+                            r13.recycle();
+                        }
+                        if (i2 != 0) {
+                        }
+                        textArray = tintTypedArrayObtainStyledAttributes.mWrapped.getTextArray(0);
+                        if (textArray != null) {
+                        }
+                        tintTypedArrayObtainStyledAttributes.recycle();
+                        this.mPopupSet = true;
+                        spinnerAdapter = this.mTempAdapter;
+                        if (spinnerAdapter != null) {
+                        }
+                        this.mBackgroundTintHelper.loadFromAttributes(attributeSet, i);
+                    }
+                } catch (Exception e2) {
+                    e = e2;
+                    typedArrayObtainStyledAttributes = null;
+                } catch (Throwable th) {
+                    th = th;
+                    if (typedArray != null) {
+                        typedArray.recycle();
+                    }
+                    throw th;
+                }
+                r13.recycle();
+            }
+            if (i2 != 0) {
+                DialogPopup dialogPopup = new DialogPopup();
+                this.mPopup = dialogPopup;
+                dialogPopup.mPrompt = tintTypedArrayObtainStyledAttributes.mWrapped.getString(2);
+            } else if (i2 == 1) {
+                final DropdownPopup dropdownPopup = new DropdownPopup(this.mPopupContext, attributeSet, i);
+                TintTypedArray tintTypedArrayObtainStyledAttributes2 = TintTypedArray.obtainStyledAttributes(this.mPopupContext, attributeSet, iArr, i, 0);
+                this.mDropDownWidth = tintTypedArrayObtainStyledAttributes2.mWrapped.getLayoutDimension(3, -2);
+                this.mDropDownHorizontalOffset = dropdownPopup.mDropDownHorizontalOffset;
+                dropdownPopup.mHintText = tintTypedArrayObtainStyledAttributes.mWrapped.getString(2);
+                tintTypedArrayObtainStyledAttributes2.recycle();
+                this.mPopup = dropdownPopup;
+                this.mForwardingListener = new ForwardingListener(this) { // from class: androidx.appcompat.widget.AppCompatSpinner.1
+                    @Override // androidx.appcompat.widget.ForwardingListener
+                    public final ShowableListMenu getPopup() {
+                        return dropdownPopup;
+                    }
+
+                    @Override // androidx.appcompat.widget.ForwardingListener
+                    public final boolean onForwardingStarted() {
+                        if (AppCompatSpinner.this.getInternalPopup().isShowing()) {
+                            return true;
+                        }
+                        AppCompatSpinner appCompatSpinner = AppCompatSpinner.this;
+                        appCompatSpinner.mPopup.show(appCompatSpinner.getTextDirection(), appCompatSpinner.getTextAlignment());
+                        return true;
+                    }
+                };
+            }
+            textArray = tintTypedArrayObtainStyledAttributes.mWrapped.getTextArray(0);
+            if (textArray != null) {
+                ArrayAdapter arrayAdapter = new ArrayAdapter(context, R.layout.simple_spinner_item, textArray);
+                arrayAdapter.setDropDownViewResource(com.android.systemui.R.layout.support_simple_spinner_dropdown_item);
+                setAdapter(arrayAdapter);
+            }
+            tintTypedArrayObtainStyledAttributes.recycle();
+            this.mPopupSet = true;
+            spinnerAdapter = this.mTempAdapter;
+            if (spinnerAdapter != null) {
+                setAdapter(spinnerAdapter);
+                this.mTempAdapter = null;
+            }
+            this.mBackgroundTintHelper.loadFromAttributes(attributeSet, i);
+        } catch (Throwable th2) {
+            th = th2;
+            typedArray = r13;
+        }
     }
 }

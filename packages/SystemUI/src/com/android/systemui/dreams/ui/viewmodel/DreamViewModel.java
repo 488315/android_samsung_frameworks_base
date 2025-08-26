@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DreamViewModel extends FlowDumperImpl {
     public final CommunalInteractor communalInteractor;
@@ -51,16 +50,16 @@ public final class DreamViewModel extends FlowDumperImpl {
         this.transitionEnded = new DreamViewModel$special$$inlined$filter$1(keyguardTransitionInteractor.transition(Edge.Companion.create$default(Edge.Companion, KeyguardState.DREAMING, null, 2)));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0029  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void startTransitionFromDream() {
         boolean z;
         this.communalSettingsInteractor.isV2FlagEnabled();
         if (((Boolean) this.communalInteractor.isCommunalEnabled.$$delegate_0.getValue()).booleanValue()) {
-            if (!this.keyguardUpdateMonitor.isEncryptedOrLockdown(((UserTrackerImpl) this.userTracker).getUserId())) {
-                z = true;
-                this.fromDreamingTransitionInteractor.startToLockscreenOrGlanceableHubTransition(z);
-            }
+            z = !this.keyguardUpdateMonitor.isEncryptedOrLockdown(((UserTrackerImpl) this.userTracker).getUserId());
         }
-        z = false;
         this.fromDreamingTransitionInteractor.startToLockscreenOrGlanceableHubTransition(z);
     }
 }

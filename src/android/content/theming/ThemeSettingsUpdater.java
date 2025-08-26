@@ -2,6 +2,7 @@ package android.content.theming;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -53,7 +54,7 @@ public class ThemeSettingsUpdater implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeValue(this.mAccentColor);
         parcel.writeValue(this.mColorBoth);
         parcel.writeValue(this.mColorIndex);

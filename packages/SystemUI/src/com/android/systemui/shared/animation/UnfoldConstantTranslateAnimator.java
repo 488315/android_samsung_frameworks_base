@@ -18,7 +18,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final UnfoldTransitionProgressProvider progressProvider;
@@ -29,7 +28,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction END;
@@ -63,7 +61,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewToTranslate {
         public final Direction direction;
         public final Function2 translateFunc;
@@ -119,11 +116,11 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
         this.viewsToTranslate = SequencesKt___SequencesKt.toList(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.viewsIdToTranslate), new UnfoldConstantTranslateAnimator$$ExternalSyntheticLambda0()), new Function1() { // from class: com.android.systemui.shared.animation.UnfoldConstantTranslateAnimator$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate = (UnfoldConstantTranslateAnimator.ViewIdToTranslate) obj;
-                View findViewById = viewGroup.findViewById(viewIdToTranslate.viewId);
-                if (findViewById != null) {
-                    return new UnfoldConstantTranslateAnimator.ViewToTranslate(new WeakReference(findViewById), viewIdToTranslate.direction, viewIdToTranslate.translateFunc);
+                View viewFindViewById = viewGroup.findViewById(viewIdToTranslate.viewId);
+                if (viewFindViewById != null) {
+                    return new UnfoldConstantTranslateAnimator.ViewToTranslate(new WeakReference(viewFindViewById), viewIdToTranslate.direction, viewIdToTranslate.translateFunc);
                 }
                 return null;
             }
@@ -145,7 +142,6 @@ public final class UnfoldConstantTranslateAnimator implements UnfoldTransitionPr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewIdToTranslate {
         public final Direction direction;
         public final Function0 shouldBeAnimated;

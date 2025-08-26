@@ -46,9 +46,9 @@ public interface IClassificationsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IClassificationsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClassificationsCallback)) {
-                return (IClassificationsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IClassificationsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClassificationsCallback)) {
+                return (IClassificationsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IClassificationsCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ContentClassification.CREATOR);
+                int i3 = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ContentClassification.CREATOR);
                 parcel.enforceNoDataAvail();
-                onContentClassificationsAvailable(readInt, createTypedArrayList);
+                onContentClassificationsAvailable(i3, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface IClassificationsCallback extends IInterface {
 
             @Override // android.app.contentsuggestions.IClassificationsCallback
             public void onContentClassificationsAvailable(int i, List<ContentClassification> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IClassificationsCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IClassificationsCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

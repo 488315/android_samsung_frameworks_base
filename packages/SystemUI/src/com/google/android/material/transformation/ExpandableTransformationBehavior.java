@@ -7,7 +7,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public abstract class ExpandableTransformationBehavior extends ExpandableBehavior {
@@ -25,9 +24,9 @@ public abstract class ExpandableTransformationBehavior extends ExpandableBehavio
         if (z3) {
             animatorSet.cancel();
         }
-        AnimatorSet onCreateExpandedStateChangeAnimation = onCreateExpandedStateChangeAnimation(view, view2, z, z3);
-        this.currentAnimation = onCreateExpandedStateChangeAnimation;
-        onCreateExpandedStateChangeAnimation.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.transformation.ExpandableTransformationBehavior.1
+        AnimatorSet animatorSetOnCreateExpandedStateChangeAnimation = onCreateExpandedStateChangeAnimation(view, view2, z, z3);
+        this.currentAnimation = animatorSetOnCreateExpandedStateChangeAnimation;
+        animatorSetOnCreateExpandedStateChangeAnimation.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.transformation.ExpandableTransformationBehavior.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 ExpandableTransformationBehavior.this.currentAnimation = null;

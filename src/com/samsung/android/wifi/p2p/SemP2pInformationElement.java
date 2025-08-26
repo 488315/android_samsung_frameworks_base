@@ -28,16 +28,16 @@ public class SemP2pInformationElement {
     public SemP2pInformationElement(List<ScanResult.InformationElement> list) {
         Iterator<ScanResult.InformationElement> it = list.iterator();
         while (it.hasNext()) {
-            ByteBuffer order = it.next().getBytes().order(ByteOrder.BIG_ENDIAN);
-            switch (order.getInt()) {
+            ByteBuffer byteBufferOrder = it.next().getBytes().order(ByteOrder.BIG_ENDIAN);
+            switch (byteBufferOrder.getInt()) {
                 case 61452:
-                    parseScreenSharingIe(order);
+                    parseScreenSharingIe(byteBufferOrder);
                     break;
                 case 61453:
                     parseFwInviteIe();
                     break;
                 case 61455:
-                    parseDiscoveryIe(order);
+                    parseDiscoveryIe(byteBufferOrder);
                     break;
             }
         }

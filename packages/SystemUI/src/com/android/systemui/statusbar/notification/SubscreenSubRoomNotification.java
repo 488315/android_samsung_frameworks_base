@@ -46,7 +46,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenSubRoomNotification implements SubRoom {
     public static Context mContext;
@@ -79,9 +78,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
         @Override // androidx.recyclerview.widget.LinearLayoutManager, androidx.recyclerview.widget.RecyclerView.LayoutManager
         public final void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
             try {
-                if (SubscreenSubRoomNotification.this.mIsInNotiRoom) {
-                    super.onLayoutChildren(recycler, state);
-                }
+                super.onLayoutChildren(recycler, state);
             } catch (IndexOutOfBoundsException e) {
                 Log.e("SubscreenSubRoomNotification", "RecyclerView's item count : " + state.getItemCount() + " !meet a IndexOutOfBoundsException : " + e);
                 StringBuilder sb = new StringBuilder("RecyclerView's list + ");
@@ -121,7 +118,10 @@ public class SubscreenSubRoomNotification implements SubRoom {
                 z = false;
                 z2 = false;
             }
-            SubscreenSubRoomNotification.getDeviceModel().moveDetailAdapterContentScroll(getChildAt(0), z2, z, false);
+            View childAt = getChildAt(0);
+            if (childAt != null) {
+                SubscreenSubRoomNotification.getDeviceModel().moveDetailAdapterContentScroll(childAt, z2, z, false);
+            }
             if (z) {
                 Log.d("SubscreenSubRoomNotification", "onLayoutCompleted - ShowAiReply");
                 SubscreenSubRoomNotification.getDeviceModel().showAIReply();
@@ -129,7 +129,6 @@ public class SubscreenSubRoomNotification implements SubRoom {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.SubscreenSubRoomNotification$1, reason: invalid class name */
     public class AnonymousClass1 extends RecyclerView.OnScrollListener {
         public AnonymousClass1() {
@@ -159,7 +158,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
     }
 
     /* renamed from: -$$Nest$mreturnRemoteInput, reason: not valid java name */
-    public static void m2949$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification subscreenSubRoomNotification, String str, String str2, String str3) {
+    public static void m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification subscreenSubRoomNotification, String str, String str2, String str3) {
         subscreenSubRoomNotification.getClass();
         if (ServiceTuple.BASIC_STATUS_OPEN.equals(str3)) {
             subscreenSubRoomNotification.mNotificationDetailAdapter.getClass();
@@ -207,7 +206,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
             public final void onReceive(Context context, Intent intent) {
                 Objects.toString(intent);
                 if ("com.samsung.android.action.RETURN_REMOTE_INPUT".equals(intent.getAction())) {
-                    SubscreenSubRoomNotification.m2949$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
+                    SubscreenSubRoomNotification.m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
                 }
             }
         };
@@ -217,14 +216,14 @@ public class SubscreenSubRoomNotification implements SubRoom {
             public final void onReceive(Context context, Intent intent) {
                 Objects.toString(intent);
                 if ("com.samsung.android.action.RETURN_REMOTE_INPUT_VOICE".equals(intent.getAction())) {
-                    SubscreenSubRoomNotification.m2949$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
+                    SubscreenSubRoomNotification.m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
                 }
             }
         };
         this.mRemoteInputVoiceActionBroadcastReceiver = r0;
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.subscreen_notification_main, (ViewGroup) null);
-        this.mMainView = inflate;
-        this.mSubscreenMainLayout = (LinearLayout) inflate.findViewById(R.id.subscreen_main_layout);
+        View viewInflate = LayoutInflater.from(mContext).inflate(R.layout.subscreen_notification_main, (ViewGroup) null);
+        this.mMainView = viewInflate;
+        this.mSubscreenMainLayout = (LinearLayout) viewInflate.findViewById(R.id.subscreen_main_layout);
         getDeviceModel().initMainHeaderView(this.mSubscreenMainLayout);
         if (SubscreenSubRoomNotificationTip.sInstance == null) {
             SubscreenSubRoomNotificationTip.sInstance = new SubscreenSubRoomNotificationTip();
@@ -293,8 +292,8 @@ public class SubscreenSubRoomNotification implements SubRoom {
             Log.e("SubscreenSubRoomNotification", "hideDetailNotification mIsShownGroup: " + this.mIsShownGroup);
             this.mIsShownDetail = false;
             if (this.mIsShownGroup) {
-                boolean isInsignificantSummary = this.mNotificationGroupAdapter.mSummaryInfo.mRow.isInsignificantSummary();
-                if (this.mNotificationInfoManager.mGroupDataArray.size() > 1 || (this.mNotificationInfoManager.mGroupDataArray.size() == 1 && isInsignificantSummary)) {
+                boolean zIsInsignificantSummary = this.mNotificationGroupAdapter.mSummaryInfo.mRow.isInsignificantSummary();
+                if (this.mNotificationInfoManager.mGroupDataArray.size() > 1 || (this.mNotificationInfoManager.mGroupDataArray.size() == 1 && zIsInsignificantSummary)) {
                     this.mNotificationRecyclerView.setAdapter(this.mNotificationGroupAdapter);
                     this.mNotificationGroupAdapter.notifyDataSetChanged();
                     getDeviceModel().initMainHeaderViewItems(mContext, this.mNotificationGroupAdapter.mSummaryInfo, false);
@@ -354,11 +353,11 @@ public class SubscreenSubRoomNotification implements SubRoom {
         subscreenNotificationDetailAdapter.mSelectNotificationInfo = null;
         subscreenNotificationDetailAdapter.cleanAdapter();
         SubscreenSubRoomNotificaitonTouchManager subscreenSubRoomNotificaitonTouchManager = this.mNotificationTouchManager;
-        int m = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(subscreenSubRoomNotificaitonTouchManager.mContext);
-        subscreenSubRoomNotificaitonTouchManager.mLayoutDirection = m;
+        int iM = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(subscreenSubRoomNotificaitonTouchManager.mContext);
+        subscreenSubRoomNotificaitonTouchManager.mLayoutDirection = iM;
         subscreenSubRoomNotificaitonTouchManager.mItemViewSwipeEnabled = true;
         SubscreenSubRoomNotificaitonTouchManager.AnonymousClass1 anonymousClass1 = subscreenSubRoomNotificaitonTouchManager.mSimpleItemTouchCallBack;
-        if (m == 1) {
+        if (iM == 1) {
             anonymousClass1.mDefaultSwipeDirs = 4;
         } else {
             anonymousClass1.mDefaultSwipeDirs = 8;
@@ -587,8 +586,8 @@ public class SubscreenSubRoomNotification implements SubRoom {
         KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
         if (display != null) {
             String str = subscreenNotificationInfo.mKey;
-            ActivityOptions makeBasic = ActivityOptions.makeBasic();
-            makeBasic.setLaunchDisplayId(display.getDisplayId());
+            ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic.setLaunchDisplayId(display.getDisplayId());
             Intent intent = new Intent();
             if (i == 1) {
                 intent.setAction("samsung.honeyboard.honeyvoice.action.RECOGNIZE_SPEECH");
@@ -609,7 +608,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
             Intent intent2 = intent;
             intent2.setFlags(276824064);
             intent2.putExtra("key", str);
-            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(mContext, 0, intent2, 201326592, makeBasic.toBundle(), UserHandle.CURRENT);
+            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(mContext, 0, intent2, 201326592, activityOptionsMakeBasic.toBundle(), UserHandle.CURRENT);
             Intent intent3 = new Intent();
             intent3.putExtra("runOnCover", true);
             intent3.putExtra("afterKeyguardGone", true);
@@ -627,9 +626,9 @@ public class SubscreenSubRoomNotification implements SubRoom {
             Log.e("SubscreenSubRoomNotification", "updateNotificationState -  Filter out notification");
             return;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateNotificationState -  action = ", " list size = ");
-        m.append(this.mUnreadNotificationList.size());
-        Log.e("SubscreenSubRoomNotification", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateNotificationState -  action = ", " list size = ");
+        sbM.append(this.mUnreadNotificationList.size());
+        Log.e("SubscreenSubRoomNotification", sbM.toString());
         if (i != 0) {
             if (i != 1) {
                 if (i == 2) {
@@ -657,11 +656,11 @@ public class SubscreenSubRoomNotification implements SubRoom {
             bundle.putBoolean(SubRoom.EXTRA_HAS_UNREAD, z2);
             this.mStateChangeListener.onStateChanged(bundle);
         }
-        StringBuilder m2 = RowView$$ExternalSyntheticOutline0.m("updateNotificationState - prevHasUnreadNoti = ", " mHasUnreadNoti = ", z);
-        m2.append(this.mHasUnreadNoti);
-        m2.append(" list size = ");
-        m2.append(this.mUnreadNotificationList.size());
-        Log.e("SubscreenSubRoomNotification", m2.toString());
+        StringBuilder sbM2 = RowView$$ExternalSyntheticOutline0.m("updateNotificationState - prevHasUnreadNoti = ", " mHasUnreadNoti = ", z);
+        sbM2.append(this.mHasUnreadNoti);
+        sbM2.append(" list size = ");
+        sbM2.append(this.mUnreadNotificationList.size());
+        Log.e("SubscreenSubRoomNotification", sbM2.toString());
         for (int i2 = 0; i2 < this.mUnreadNotificationList.size(); i2++) {
             Log.e("SubscreenSubRoomNotification", "updateNotificationState - mUnreadNotificationList = " + ((String) this.mUnreadNotificationList.get(i2)));
         }

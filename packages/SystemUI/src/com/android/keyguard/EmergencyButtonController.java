@@ -1,15 +1,20 @@
 package com.android.keyguard;
 
+import android.R;
+import android.app.ActivityOptions;
 import android.app.ActivityTaskManager;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -18,24 +23,33 @@ import android.telephony.satellite.SemSatelliteServiceState;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settingslib.WirelessUtils;
 import com.android.systemui.CscRune;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.Dependency;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.shade.ShadeController;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
+import com.android.systemui.util.DeviceState;
+import com.android.systemui.util.EmergencyDialerConstants;
 import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import com.google.android.msdl.domain.MSDLPlayer;
+import com.samsung.android.telecom.SemTelecomManager;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EmergencyButtonController extends ViewController {
     public final ActivityTaskManager mActivityTaskManager;
@@ -67,12 +81,10 @@ public class EmergencyButtonController extends ViewController {
     public final TelephonyManager mTelephonyManager;
     public TelephonyManager mTelephonyManagerForSatellite;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface EmergencyButtonCallback {
         void onEmergencyButtonClickedWhenInCall();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final ActivityTaskManager mActivityTaskManager;
         public final Executor mBackgroundExecutor;
@@ -111,7 +123,6 @@ public class EmergencyButtonController extends ViewController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SatelliteTelephonyCallback extends TelephonyCallback implements TelephonyCallback.SemSatelliteStateListener {
         public /* synthetic */ SatelliteTelephonyCallback(EmergencyButtonController emergencyButtonController, int i) {
             this();
@@ -137,20 +148,63 @@ public class EmergencyButtonController extends ViewController {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x00f1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:51:0x00f1, code lost:
     
         if (r0.getVisibility() == 0) goto L52;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void $r8$lambda$W1zTNNSQ2hmvDBkhwJsvlM1sA5k(com.android.keyguard.EmergencyButtonController r13, boolean r14, boolean r15) {
-        /*
-            Method dump skipped, instructions count: 265
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.EmergencyButtonController.$r8$lambda$W1zTNNSQ2hmvDBkhwJsvlM1sA5k(com.android.keyguard.EmergencyButtonController, boolean, boolean):void");
+    public static void $r8$lambda$W1zTNNSQ2hmvDBkhwJsvlM1sA5k(EmergencyButtonController emergencyButtonController, boolean z, boolean z2) throws NumberFormatException {
+        boolean z3;
+        boolean zIsOutOfService;
+        boolean zIsAirplaneModeOn;
+        EmergencyButton emergencyButton = (EmergencyButton) emergencyButtonController.mView;
+        boolean zHasSystemFeature = emergencyButtonController.getContext().getPackageManager().hasSystemFeature("android.hardware.telephony");
+        emergencyButtonController.mKeyguardUpdateMonitor.isSimPinSecure();
+        int i = emergencyButtonController.mCurrentSimState;
+        boolean z4 = emergencyButtonController.mBouncerShowing;
+        int i2 = emergencyButtonController.mSatelliteRegState;
+        emergencyButton.getClass();
+        KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
+        if (CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE) {
+            zIsOutOfService = keyguardUpdateMonitor.isOutOfService();
+            zIsAirplaneModeOn = WirelessUtils.isAirplaneModeOn(emergencyButton.getContext());
+            z3 = i2 == 1 || i2 == 5;
+            ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("updateEmergencyCallButton isOutOfService = ", " isAirplaneModeOn = ", " isSatelliteRegistered = ", zIsOutOfService, zIsAirplaneModeOn), z3, "EmergencyButton");
+        } else {
+            z3 = false;
+            zIsOutOfService = false;
+            zIsAirplaneModeOn = false;
+        }
+        if ((!CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE || !zIsOutOfService || z3 || zIsAirplaneModeOn) && zHasSystemFeature) {
+            if (!z) {
+                if (z2) {
+                    Log.d("EmergencyButton", "updateEmergencyCallButton : secure");
+                } else if (CscRune.LOCKUI_BOTTOM_USIM_TEXT) {
+                    KeyguardUpdateMonitor keyguardUpdateMonitor2 = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
+                    if (i == 1 && DeviceState.isNoSimState(emergencyButton.getContext())) {
+                        Log.d("EmergencyButton", "SIM_STATE_ABSENT");
+                    } else {
+                        TelephonyManager telephonyManager = emergencyButton.mTelephonyManager;
+                        if (telephonyManager != null && telephonyManager.isVoiceCapable() && keyguardUpdateMonitor2.isEmergencyCallOnly()) {
+                            Log.d("EmergencyButton", "EmergencyCallOnly");
+                        } else if (i == 5 && CscRune.SECURITY_SKT_USIM_TEXT && !SystemProperties.get("ril.simtype").equals("") && 19 == Integer.valueOf(SystemProperties.get("ril.simtype")).intValue()) {
+                            Log.d("EmergencyButton", "SKT Usim unregisterd");
+                        } else if (WirelessUtils.isAirplaneModeOn(emergencyButton.getContext())) {
+                            Log.d("EmergencyButton", "AirplaneMode On");
+                        } else {
+                            ListPopupWindow$$ExternalSyntheticOutline0.m(i, "Can't match sim state, simState : ", "EmergencyButton");
+                        }
+                    }
+                } else if (z4) {
+                }
+            }
+            emergencyButton.setVisibility(0);
+            emergencyButton.setText(z ? R.string.permlab_callCompanionApp : com.android.systemui.R.string.kg_lockscreen_emergency_call_button_text);
+            return;
+        }
+        emergencyButton.setVisibility(8);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0089, code lost:
@@ -159,14 +213,70 @@ public class EmergencyButtonController extends ViewController {
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void $r8$lambda$e6ceecPxW3wEM4fHjkBzcKaihjE(com.android.keyguard.EmergencyButtonController r7, boolean r8) {
-        /*
-            Method dump skipped, instructions count: 339
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.EmergencyButtonController.$r8$lambda$e6ceecPxW3wEM4fHjkBzcKaihjE(com.android.keyguard.EmergencyButtonController, boolean):void");
+    public static void $r8$lambda$e6ceecPxW3wEM4fHjkBzcKaihjE(EmergencyButtonController emergencyButtonController, boolean z) {
+        String string;
+        View view;
+        SelectedUserInteractor selectedUserInteractor = emergencyButtonController.mSelectedUserInteractor;
+        if (z) {
+            int selectedUserId = selectedUserInteractor.getSelectedUserId();
+            Log.d("EmergencyButton", "takeEmergencyCallAction - showInCallScreen(false, " + selectedUserId + ")");
+            ((SemTelecomManager) emergencyButtonController.getContext().getSystemService(SemTelecomManager.class)).showInCallScreen(false, UserHandle.of(selectedUserId));
+            EmergencyButtonCallback emergencyButtonCallback = emergencyButtonController.mEmergencyButtonCallback;
+            if (emergencyButtonCallback != null) {
+                emergencyButtonCallback.onEmergencyButtonClickedWhenInCall();
+                return;
+            }
+            return;
+        }
+        emergencyButtonController.mKeyguardUpdateMonitor.reportEmergencyCallAction();
+        if (CscRune.SECURITY_DIRECT_CALL_TO_ECC) {
+            try {
+                view = emergencyButtonController.mPasswordEntry;
+            } catch (Exception unused) {
+                string = "";
+            }
+            if (view instanceof SecPasswordTextView) {
+                string = ((SecPasswordTextView) view).mText;
+                ((PasswordTextView) view).reset(false, false);
+            } else if (view instanceof TextView) {
+                string = ((TextView) view).getText().toString();
+                ((TextView) emergencyButtonController.mPasswordEntry).setText("");
+            } else if (view instanceof EditText) {
+                string = ((EditText) view).getText().toString();
+                ((EditText) emergencyButtonController.mPasswordEntry).setText("");
+            } else {
+                string = "";
+            }
+            if (!string.equals("") && PhoneNumberUtils.isEmergencyNumber(string)) {
+                Intent intent = new Intent("android.intent.action.CALL_EMERGENCY");
+                intent.setData(Uri.fromParts("tel", string, null));
+                intent.setFlags(343932928);
+                try {
+                    Log.w("EmergencyButton", "callToEmergencyLine");
+                    emergencyButtonController.getContext().startActivityAsUser(intent, ActivityOptions.makeCustomAnimation(emergencyButtonController.getContext(), 0, 0).toBundle(), new UserHandle(selectedUserInteractor.getSelectedUserId()));
+                    return;
+                } catch (ActivityNotFoundException e) {
+                    Log.e("EmergencyButton", "Can't find the component " + e);
+                    return;
+                }
+            }
+        }
+        TelecomManager telecomManager = emergencyButtonController.mTelecomManager;
+        if (telecomManager == null) {
+            Log.wtf("EmergencyButton", "TelecomManager was null, cannot launch emergency dialer");
+            return;
+        }
+        Intent intentPutExtra = telecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928).putExtra(EmergencyDialerConstants.EXTRA_ENTRY_TYPE, 1);
+        ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(emergencyButtonController.getContext(), 0, 0);
+        Log.d("EmergencyButton", "takeEmergencyCallAction");
+        emergencyButtonController.mImm.hideSoftInputFromWindow(((EmergencyButton) emergencyButtonController.mView).getWindowToken(), 0);
+        activityOptionsMakeCustomAnimation.setLaunchDisplayId(emergencyButtonController.getContext().getDisplay().getDisplayId());
+        if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isAdminLockEnabled()) {
+            intentPutExtra.putExtra("enable_ice_contact_list", false);
+            intentPutExtra.putExtra("enable_emergency_medical_info", false);
+        }
+        emergencyButtonController.getContext().startActivityAsUser(intentPutExtra, activityOptionsMakeCustomAnimation.toBundle(), new UserHandle(selectedUserInteractor.getSelectedUserId()));
     }
 
     /* JADX WARN: Type inference failed for: r4v4, types: [com.android.keyguard.EmergencyButtonController$2] */
@@ -302,9 +412,9 @@ public class EmergencyButtonController extends ViewController {
         sb.append(this.mCurrentSatellitePhoneId);
         sb.append(", SatelliteSubId=");
         RecyclerView$$ExternalSyntheticOutline0.m(this.mSatelliteSubId, "EmergencyButton", sb);
-        TelephonyManager createForSubscriptionId = this.mTelephonyManager.createForSubscriptionId(this.mSatelliteSubId);
-        this.mTelephonyManagerForSatellite = createForSubscriptionId;
-        createForSubscriptionId.registerTelephonyCallback(this.mBackgroundExecutor, this.mSatelliteTelephonyCallback);
+        TelephonyManager telephonyManagerCreateForSubscriptionId = this.mTelephonyManager.createForSubscriptionId(this.mSatelliteSubId);
+        this.mTelephonyManagerForSatellite = telephonyManagerCreateForSubscriptionId;
+        telephonyManagerCreateForSubscriptionId.registerTelephonyCallback(this.mBackgroundExecutor, this.mSatelliteTelephonyCallback);
     }
 
     public final void setEmergencyView(View view) {
@@ -313,7 +423,7 @@ public class EmergencyButtonController extends ViewController {
         emergencyButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.EmergencyButtonController$$ExternalSyntheticLambda7
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                EmergencyButtonController emergencyButtonController = EmergencyButtonController.this;
+                EmergencyButtonController emergencyButtonController = this.f$0;
                 emergencyButtonController.mMetricsLogger.action(200);
                 PowerManager powerManager = emergencyButtonController.mPowerManager;
                 if (powerManager != null) {
@@ -342,9 +452,9 @@ public class EmergencyButtonController extends ViewController {
         if (this.mView != 0) {
             TelecomManager telecomManager = this.mTelecomManager;
             boolean z = telecomManager != null && telecomManager.isInCall();
-            boolean isSecure = this.mKeyguardUpdateMonitor.isSecure();
+            boolean zIsSecure = this.mKeyguardUpdateMonitor.isSecure();
             if (this.mKeyguardShowing || this.mBouncerShowing) {
-                this.mBackgroundExecutor.execute(new EmergencyButtonController$$ExternalSyntheticLambda5(this, z, isSecure, 0));
+                this.mBackgroundExecutor.execute(new EmergencyButtonController$$ExternalSyntheticLambda5(this, z, zIsSecure, 0));
             }
         }
     }

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LongArrayList extends AbstractProtobufList implements RandomAccess, PrimitiveNonBoxingCollection {
     public long[] array;
@@ -25,12 +24,12 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final void add(int i, Object obj) {
         int i2;
-        long longValue = ((Long) obj).longValue();
+        long jLongValue = ((Long) obj).longValue();
         ensureIsMutable();
         if (i < 0 || i > (i2 = this.size)) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         long[] jArr = this.array;
         if (i2 < jArr.length) {
@@ -41,7 +40,7 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
             System.arraycopy(this.array, i, jArr2, i + 1, this.size - i);
             this.array = jArr2;
         }
-        this.array[i] = longValue;
+        this.array[i] = jLongValue;
         this.size++;
         ((AbstractList) this).modCount++;
     }
@@ -96,9 +95,9 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
 
     public final void ensureIndexInRange$4(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
     }
 
@@ -135,11 +134,11 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
 
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public final int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Internal.hashLong(this.array[i2]);
+        int iHashLong = 1;
+        for (int i = 0; i < this.size; i++) {
+            iHashLong = (iHashLong * 31) + Internal.hashLong(this.array[i]);
         }
-        return i;
+        return iHashLong;
     }
 
     @Override // java.util.AbstractList, java.util.List
@@ -147,10 +146,10 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
         if (!(obj instanceof Long)) {
             return -1;
         }
-        long longValue = ((Long) obj).longValue();
+        long jLongValue = ((Long) obj).longValue();
         int i = this.size;
         for (int i2 = 0; i2 < i; i2++) {
-            if (this.array[i2] == longValue) {
+            if (this.array[i2] == jLongValue) {
                 return i2;
             }
         }
@@ -193,12 +192,12 @@ public final class LongArrayList extends AbstractProtobufList implements RandomA
 
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final Object set(int i, Object obj) {
-        long longValue = ((Long) obj).longValue();
+        long jLongValue = ((Long) obj).longValue();
         ensureIsMutable();
         ensureIndexInRange$4(i);
         long[] jArr = this.array;
         long j = jArr[i];
-        jArr[i] = longValue;
+        jArr[i] = jLongValue;
         return Long.valueOf(j);
     }
 

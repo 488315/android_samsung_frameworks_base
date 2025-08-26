@@ -178,23 +178,23 @@ public class AidlConversion {
     public static native int legacy2aidl_audio_usage_t_AudioUsage(int i);
 
     public static int aidl2legacy_AudioChannelLayout_audio_channel_mask_t(AudioChannelLayout audioChannelLayout, boolean z) {
-        Parcel obtain = Parcel.obtain();
-        audioChannelLayout.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
+        Parcel parcelObtain = Parcel.obtain();
+        audioChannelLayout.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
         try {
-            return aidl2legacy_AudioChannelLayout_Parcel_audio_channel_mask_t(obtain, z);
+            return aidl2legacy_AudioChannelLayout_Parcel_audio_channel_mask_t(parcelObtain, z);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public static AudioChannelLayout legacy2aidl_audio_channel_mask_t_AudioChannelLayout(int i, boolean z) {
-        Parcel legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel = legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel(i, z);
-        if (legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel != null) {
+        Parcel parcelLegacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel = legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel(i, z);
+        if (parcelLegacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel != null) {
             try {
-                return AudioChannelLayout.CREATOR.createFromParcel(legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel);
+                return AudioChannelLayout.CREATOR.createFromParcel(parcelLegacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel);
             } finally {
-                legacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel.recycle();
+                parcelLegacy2aidl_audio_channel_mask_t_AudioChannelLayout_Parcel.recycle();
             }
         }
         StringBuilder sb = new StringBuilder("Failed to convert legacy audio ");
@@ -206,23 +206,23 @@ public class AidlConversion {
     }
 
     public static int aidl2legacy_AudioFormatDescription_audio_format_t(AudioFormatDescription audioFormatDescription) {
-        Parcel obtain = Parcel.obtain();
-        audioFormatDescription.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
+        Parcel parcelObtain = Parcel.obtain();
+        audioFormatDescription.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
         try {
-            return aidl2legacy_AudioFormatDescription_Parcel_audio_format_t(obtain);
+            return aidl2legacy_AudioFormatDescription_Parcel_audio_format_t(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public static AudioFormatDescription legacy2aidl_audio_format_t_AudioFormatDescription(int i) {
-        Parcel legacy2aidl_audio_format_t_AudioFormatDescription_Parcel = legacy2aidl_audio_format_t_AudioFormatDescription_Parcel(i);
-        if (legacy2aidl_audio_format_t_AudioFormatDescription_Parcel != null) {
+        Parcel parcelLegacy2aidl_audio_format_t_AudioFormatDescription_Parcel = legacy2aidl_audio_format_t_AudioFormatDescription_Parcel(i);
+        if (parcelLegacy2aidl_audio_format_t_AudioFormatDescription_Parcel != null) {
             try {
-                return AudioFormatDescription.CREATOR.createFromParcel(legacy2aidl_audio_format_t_AudioFormatDescription_Parcel);
+                return AudioFormatDescription.CREATOR.createFromParcel(parcelLegacy2aidl_audio_format_t_AudioFormatDescription_Parcel);
             } finally {
-                legacy2aidl_audio_format_t_AudioFormatDescription_Parcel.recycle();
+                parcelLegacy2aidl_audio_format_t_AudioFormatDescription_Parcel.recycle();
             }
         }
         throw new IllegalArgumentException("Failed to convert legacy audio_format_t value " + i);
@@ -232,11 +232,11 @@ public class AidlConversion {
         int i2 = 0;
         for (int i3 = Integer.MIN_VALUE; i3 != 0; i3 >>>= 1) {
             if ((i & i3) == i3) {
-                int aidl2api_AudioChannelLayoutBit_AudioFormatChannel = aidl2api_AudioChannelLayoutBit_AudioFormatChannel(i3, z);
-                if (aidl2api_AudioChannelLayoutBit_AudioFormatChannel == 0) {
+                int iAidl2api_AudioChannelLayoutBit_AudioFormatChannel = aidl2api_AudioChannelLayoutBit_AudioFormatChannel(i3, z);
+                if (iAidl2api_AudioChannelLayoutBit_AudioFormatChannel == 0) {
                     break;
                 }
-                i2 |= aidl2api_AudioChannelLayoutBit_AudioFormatChannel;
+                i2 |= iAidl2api_AudioChannelLayoutBit_AudioFormatChannel;
                 i &= ~i3;
                 if (i == 0) {
                     return i2;
@@ -370,7 +370,7 @@ public class AidlConversion {
         return aidl2api_AudioConfigBase_AudioFormat(audioConfig.base, z);
     }
 
-    public static AudioFormat aidl2api_AudioConfigBase_AudioFormat(AudioConfigBase audioConfigBase, boolean z) {
+    public static AudioFormat aidl2api_AudioConfigBase_AudioFormat(AudioConfigBase audioConfigBase, boolean z) throws IllegalArgumentException {
         AudioFormat.Builder builder = new AudioFormat.Builder();
         builder.setSampleRate(audioConfigBase.sampleRate);
         if (audioConfigBase.channelMask.getTag() != 2) {
@@ -479,9 +479,7 @@ public class AidlConversion {
         audioPort.extraAudioDescriptors = (ExtraAudioDescriptor[]) ((List) audioDeviceAttributes.getAudioDescriptors().stream().map(new Function() { // from class: android.media.audio.common.AidlConversion$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                ExtraAudioDescriptor api2aidl_AudioDescriptor_ExtraAudioDescriptor;
-                api2aidl_AudioDescriptor_ExtraAudioDescriptor = AidlConversion.api2aidl_AudioDescriptor_ExtraAudioDescriptor((AudioDescriptor) obj);
-                return api2aidl_AudioDescriptor_ExtraAudioDescriptor;
+                return AidlConversion.api2aidl_AudioDescriptor_ExtraAudioDescriptor((AudioDescriptor) obj);
             }
         }).collect(Collectors.toList())).toArray(new IntFunction() { // from class: android.media.audio.common.AidlConversion$$ExternalSyntheticLambda1
             @Override // java.util.function.IntFunction

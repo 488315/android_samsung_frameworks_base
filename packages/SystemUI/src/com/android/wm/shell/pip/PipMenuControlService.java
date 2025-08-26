@@ -13,7 +13,6 @@ import com.android.wm.shell.pip.PipMenuControlService;
 import com.android.wm.shell.pip.phone.PhonePipMenuController;
 import com.android.wm.shell.pip.phone.PhonePipMenuController$$ExternalSyntheticLambda2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipMenuControlService extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -21,7 +20,6 @@ public class PipMenuControlService extends Service {
     public Messenger mMessenger;
     public PhonePipMenuController mPhonePipMenuController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MessageHandler extends Handler {
         public /* synthetic */ MessageHandler(PipMenuControlService pipMenuControlService, int i) {
             this();

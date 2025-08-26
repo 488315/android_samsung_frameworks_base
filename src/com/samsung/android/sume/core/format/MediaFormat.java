@@ -202,13 +202,13 @@ public interface MediaFormat extends Serializable, Cloneable {
             if (mediaFormat.getColorFormat().isPlanar()) {
                 final ArrayList arrayList = new ArrayList();
                 if (mediaFormat.getColorFormat().isYuv()) {
-                    final DataType depth = mediaFormat.getDataType().depth();
+                    final DataType dataTypeDepth = mediaFormat.getDataType().depth();
                     final Shape shape = mediaFormat.getShape().toMutableShape().setRows(mediaFormat.getRows() >> 1).setCols(mediaFormat.getCols() >> 1).setChannels(mediaFormat.getColorFormat().numberOfChromaChannels()).toShape();
-                    arrayList.add(mutableImageOf(DataType.of(depth, 1), mediaFormat.getShape()));
+                    arrayList.add(mutableImageOf(DataType.of(dataTypeDepth, 1), mediaFormat.getShape()));
                     IntStream.range(1, mediaFormat.getColorFormat().numberOfPlanes()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
                         public final void accept(int i) {
-                            arrayList.add(MediaFormat.mutableImageOf(depth, shape));
+                            arrayList.add(MediaFormat.mutableImageOf(dataTypeDepth, shape));
                         }
                     });
                     return (List) arrayList.stream().map(new Function() { // from class: com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda1

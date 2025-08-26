@@ -13,9 +13,9 @@ public final class GateKeeper {
     }
 
     public static IGateKeeperService getService() {
-        IGateKeeperService asInterface = IGateKeeperService.Stub.asInterface(ServiceManager.getService("android.service.gatekeeper.IGateKeeperService"));
-        if (asInterface != null) {
-            return asInterface;
+        IGateKeeperService iGateKeeperServiceAsInterface = IGateKeeperService.Stub.asInterface(ServiceManager.getService("android.service.gatekeeper.IGateKeeperService"));
+        if (iGateKeeperServiceAsInterface != null) {
+            return iGateKeeperServiceAsInterface;
         }
         throw new IllegalStateException("Gatekeeper service not available");
     }

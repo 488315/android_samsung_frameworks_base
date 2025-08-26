@@ -132,8 +132,8 @@ public class PKCS12ParametersGenerator extends PBEParametersGenerator {
     public CipherParameters generateDerivedParameters(int i, int i2) {
         int i3 = i / 8;
         int i4 = i2 / 8;
-        byte[] generateDerivedKey = generateDerivedKey(1, i3);
-        return new ParametersWithIV(new KeyParameter(generateDerivedKey, 0, i3), generateDerivedKey(2, i4), 0, i4);
+        byte[] bArrGenerateDerivedKey = generateDerivedKey(1, i3);
+        return new ParametersWithIV(new KeyParameter(bArrGenerateDerivedKey, 0, i3), generateDerivedKey(2, i4), 0, i4);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator

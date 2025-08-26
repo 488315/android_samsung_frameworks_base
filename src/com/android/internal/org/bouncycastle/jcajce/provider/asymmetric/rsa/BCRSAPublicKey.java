@@ -115,14 +115,14 @@ public class BCRSAPublicKey implements RSAPublicKey {
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("RSA Public Key [");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[").append(RSAUtil.generateExponentFingerprint(getPublicExponent())).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("        modulus: ").append(getModulus().toString(16)).append(lineSeparator);
-        stringBuffer.append("public exponent: ").append(getPublicExponent().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[").append(RSAUtil.generateExponentFingerprint(getPublicExponent())).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("        modulus: ").append(getModulus().toString(16)).append(strLineSeparator);
+        stringBuffer.append("public exponent: ").append(getPublicExponent().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         try {
             this.algorithmIdentifier = AlgorithmIdentifier.getInstance(objectInputStream.readObject());

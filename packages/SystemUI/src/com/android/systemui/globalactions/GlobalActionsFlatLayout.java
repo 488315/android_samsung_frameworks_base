@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.android.systemui.HardwareBgDrawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsFlatLayout extends GlobalActionsLayout {
     public GlobalActionsFlatLayout(Context context, AttributeSet attributeSet) {
@@ -19,10 +18,10 @@ public class GlobalActionsFlatLayout extends GlobalActionsLayout {
     @Override // com.android.systemui.globalactions.GlobalActionsLayout
     public final void addToListView(View view, boolean z) {
         super.addToListView(view, z);
-        View findViewById = findViewById(R.id.global_actions_overflow_button);
-        if (findViewById != null) {
-            getListView().removeView(findViewById);
-            super.addToListView(findViewById, z);
+        View viewFindViewById = findViewById(R.id.global_actions_overflow_button);
+        if (viewFindViewById != null) {
+            getListView().removeView(viewFindViewById);
+            super.addToListView(viewFindViewById, z);
         }
     }
 
@@ -64,10 +63,10 @@ public class GlobalActionsFlatLayout extends GlobalActionsLayout {
 
     @Override // com.android.systemui.MultiListLayout
     public final void removeAllListViews() {
-        View findViewById = findViewById(R.id.global_actions_overflow_button);
+        View viewFindViewById = findViewById(R.id.global_actions_overflow_button);
         super.removeAllListViews();
-        if (findViewById != null) {
-            super.addToListView(findViewById, false);
+        if (viewFindViewById != null) {
+            super.addToListView(viewFindViewById, false);
         }
     }
 

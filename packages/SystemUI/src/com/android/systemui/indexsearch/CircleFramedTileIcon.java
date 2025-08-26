@@ -15,7 +15,6 @@ import com.android.systemui.R;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.ScalingDrawableWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CircleFramedTileIcon extends Drawable {
     public static Context mContext;
@@ -28,9 +27,9 @@ public class CircleFramedTileIcon extends Drawable {
     public CircleFramedTileIcon(Drawable drawable, int i) {
         int i2;
         this.mSize = i;
-        Bitmap createBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
-        this.mBitmap = createBitmap;
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
+        this.mBitmap = bitmapCreateBitmap;
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Bitmap tileIconBitmap = QSTileImpl.getTileIconBitmap(drawable, mContext);
         if (drawable instanceof ScalingDrawableWrapper) {
             i2 = (int) ((mContext.getResources().getFloat(R.dimen.qs_non_sec_customtile_icon_resize_ratio) * i) / 2.0f);
@@ -39,10 +38,10 @@ public class CircleFramedTileIcon extends Drawable {
         }
         int width = tileIconBitmap.getWidth();
         int height = tileIconBitmap.getHeight();
-        int min = Math.min(width, height);
-        int i3 = ((width - min) / 2) - i2;
-        int i4 = ((height - min) / 2) - i2;
-        int i5 = min + i2;
+        int iMin = Math.min(width, height);
+        int i3 = ((width - iMin) / 2) - i2;
+        int i4 = ((height - iMin) / 2) - i2;
+        int i5 = iMin + i2;
         Rect rect = new Rect(i3, i4, i5, i5);
         float f = i;
         RectF rectF = new RectF(0.0f, 0.0f, f, f);

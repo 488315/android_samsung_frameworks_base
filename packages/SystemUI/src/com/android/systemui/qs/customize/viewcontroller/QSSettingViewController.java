@@ -29,16 +29,15 @@ import kotlin.collections.AbstractList;
 import kotlin.collections.AbstractList.IteratorImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSSettingViewController extends ViewControllerBase {
     public final AccessibilityDelegateCompat accessibilityDelegate;
     public final SecQSSettingEditResources editResources;
     public final View.OnClickListener onActionArrowClickListener;
     public final QSCPopupButtonController popupButtonController;
+    public final QSPanelTypeViewController qsPanelTypeViewController;
     public final View.OnClickListener topTileEditClickListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,6 +58,7 @@ public final class QSSettingViewController extends ViewControllerBase {
         this.accessibilityDelegate = accessibilityDelegateCompat;
         this.onActionArrowClickListener = onClickListener;
         this.topTileEditClickListener = onClickListener2;
+        this.qsPanelTypeViewController = new QSPanelTypeViewController(context, secQSSettingEditResources, this);
     }
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
@@ -82,8 +82,8 @@ public final class QSSettingViewController extends ViewControllerBase {
     }
 
     public final void setupView() {
-        View requireViewById;
-        int popOverMargin = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() ? ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).resourcePickHelper.getTargetPicker().getPopOverMargin(getContext()) : ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelSidePadding(getContext());
+        View viewRequireViewById;
+        int popOverMargin = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() ? ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPopOverMargin(getContext()) : ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelSidePadding(getContext());
         this.mView.setPadding(popOverMargin, 0, popOverMargin, 0);
         this.mView.requireViewById(R.id.action_bar).setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.layout_edit_action_min_height));
         if (QpRune.QUICK_POP_OVER_CUSTOMIZER && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
@@ -93,14 +93,14 @@ public final class QSSettingViewController extends ViewControllerBase {
                 linearLayout.setGravity(16);
             }
         }
-        View requireViewById2 = this.mView.requireViewById(R.id.action_arrow);
-        if (requireViewById2 != null) {
-            requireViewById2.setOnClickListener(this.onActionArrowClickListener);
+        View viewRequireViewById2 = this.mView.requireViewById(R.id.action_arrow);
+        if (viewRequireViewById2 != null) {
+            viewRequireViewById2.setOnClickListener(this.onActionArrowClickListener);
         }
         this.mView.requireViewById(R.id.edit_tile_type_container).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSSettingViewController$setupTileEditButtons$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSSettingViewController.this.topTileEditClickListener.onClick(view);
+                this.this$0.topTileEditClickListener.onClick(view);
                 SystemUIAnalytics.sendRunstoneEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_EDIT_TOP_TILES, SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
             }
         });
@@ -133,30 +133,30 @@ public final class QSSettingViewController extends ViewControllerBase {
                 }
                 int i2 = QSCPopupButtonController.WhenMappings.$EnumSwitchMapping$0[popuptype.ordinal()];
                 if (i2 == 1) {
-                    requireViewById = linearLayout3.requireViewById(R.id.multi_sim);
+                    viewRequireViewById = linearLayout3.requireViewById(R.id.multi_sim);
                 } else if (i2 != 2) {
                     i++;
-                    LayoutInflater from = LayoutInflater.from(qSCPopupButtonController.context);
+                    LayoutInflater layoutInflaterFrom = LayoutInflater.from(qSCPopupButtonController.context);
                     LinearLayout linearLayout6 = qSCPopupButtonController.container;
                     if (linearLayout6 == null) {
                         linearLayout6 = null;
                     }
-                    View inflate = from.inflate(R.layout.qs_customize_main_button, (ViewGroup) linearLayout6, false);
+                    View viewInflate = layoutInflaterFrom.inflate(R.layout.qs_customize_main_button, (ViewGroup) linearLayout6, false);
                     LinearLayout linearLayout7 = qSCPopupButtonController.container;
                     if (linearLayout7 == null) {
                         linearLayout7 = null;
                     }
-                    linearLayout7.addView(inflate);
-                    qSCPopupButtonController.children.add(inflate);
-                    inflate.getClass();
-                    qSCPopupButtonController.setPopupText(inflate, popuptype);
-                    requireViewById = null;
+                    linearLayout7.addView(viewInflate);
+                    qSCPopupButtonController.children.add(viewInflate);
+                    viewInflate.getClass();
+                    qSCPopupButtonController.setPopupText(viewInflate, popuptype);
+                    viewRequireViewById = null;
                 } else {
-                    requireViewById = linearLayout3.requireViewById(R.id.smart_view);
+                    viewRequireViewById = linearLayout3.requireViewById(R.id.smart_view);
                 }
-                if (requireViewById != null) {
-                    requireViewById.setVisibility(0);
-                    qSCPopupButtonController.setPopupText(requireViewById, popuptype);
+                if (viewRequireViewById != null) {
+                    viewRequireViewById.setVisibility(0);
+                    qSCPopupButtonController.setPopupText(viewRequireViewById, popuptype);
                 }
             }
         }
@@ -189,24 +189,24 @@ public final class QSSettingViewController extends ViewControllerBase {
             }
             i3++;
         }
-        View requireViewById3 = this.mView.requireViewById(R.id.contact_us);
-        if (requireViewById3 != null) {
+        View viewRequireViewById3 = this.mView.requireViewById(R.id.contact_us);
+        if (viewRequireViewById3 != null) {
             SecQSSettingEditResources secQSSettingEditResources = this.editResources;
             if (DeviceState.isAppInstalled(secQSSettingEditResources.context, "com.samsung.android.voc")) {
                 try {
                     if (secQSSettingEditResources.context.getPackageManager().getPackageInfoAsUser("com.samsung.android.voc", 0, ActivityManager.getCurrentUser()).versionCode >= 170001000) {
-                        TextView textView = (TextView) requireViewById3.requireViewById(R.id.button_summary);
+                        TextView textView = (TextView) viewRequireViewById3.requireViewById(R.id.button_summary);
                         if (textView != null) {
                             textView.setVisibility(8);
                         }
-                        TextView textView2 = (TextView) requireViewById3.requireViewById(R.id.button_title);
+                        TextView textView2 = (TextView) viewRequireViewById3.requireViewById(R.id.button_title);
                         if (textView2 != null) {
-                            textView2.setText(requireViewById3.getContext().getString(R.string.sec_more_button_menu_contact_us));
+                            textView2.setText(viewRequireViewById3.getContext().getString(R.string.sec_more_button_menu_contact_us));
                         }
-                        requireViewById3.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSSettingViewController$setupIsolatedButtons$1$1
+                        viewRequireViewById3.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSSettingViewController$setupIsolatedButtons$1$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                SecQSSettingEditResources secQSSettingEditResources2 = QSSettingViewController.this.editResources;
+                                SecQSSettingEditResources secQSSettingEditResources2 = this.this$0.editResources;
                                 secQSSettingEditResources2.getClass();
                                 Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("voc://view/contactUs"));
                                 intent.putExtra("packageName", "com.android.systemui.quickpanel");
@@ -234,12 +234,12 @@ public final class QSSettingViewController extends ViewControllerBase {
             } else {
                 Log.e("SecQSSettingEditResources", "contact us not installed.");
             }
-            requireViewById3.setVisibility(8);
+            viewRequireViewById3.setVisibility(8);
         }
         updateSeparateButtonText();
-        View requireViewById4 = this.mView.requireViewById(R.id.action_arrow);
-        if (requireViewById4 != null) {
-            ViewCompat.setAccessibilityDelegate(requireViewById4, this.accessibilityDelegate);
+        View viewRequireViewById4 = this.mView.requireViewById(R.id.action_arrow);
+        if (viewRequireViewById4 != null) {
+            ViewCompat.setAccessibilityDelegate(viewRequireViewById4, this.accessibilityDelegate);
         }
     }
 
@@ -249,7 +249,7 @@ public final class QSSettingViewController extends ViewControllerBase {
             return;
         }
         setupView();
-        ((ViewGroup) this.mView.requireViewById(R.id.separate_panel)).addView(new QSPanelTypeViewController(getContext(), this.editResources, this).view);
+        ((ViewGroup) this.mView.requireViewById(R.id.separate_panel)).addView(this.qsPanelTypeViewController.view);
         super.show(runnable);
     }
 

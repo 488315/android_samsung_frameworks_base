@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractProtobufList extends AbstractList implements Internal.ProtobufList {
     public boolean isMutable;
@@ -66,11 +65,11 @@ public abstract class AbstractProtobufList extends AbstractList implements Inter
     @Override // java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
         int size = size();
-        int i = 1;
-        for (int i2 = 0; i2 < size; i2++) {
-            i = (i * 31) + get(i2).hashCode();
+        int iHashCode = 1;
+        for (int i = 0; i < size; i++) {
+            iHashCode = (iHashCode * 31) + get(i).hashCode();
         }
-        return i;
+        return iHashCode;
     }
 
     @Override // java.util.AbstractList, java.util.List
@@ -116,11 +115,11 @@ public abstract class AbstractProtobufList extends AbstractList implements Inter
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
     public final boolean remove(Object obj) {
         ensureIsMutable();
-        int indexOf = indexOf(obj);
-        if (indexOf == -1) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf == -1) {
             return false;
         }
-        remove(indexOf);
+        remove(iIndexOf);
         return true;
     }
 }

@@ -8,7 +8,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LockScreenMinimalismCoordinatorLogger {
     public static final int $stable = 8;
@@ -55,10 +54,10 @@ public final class LockScreenMinimalismCoordinatorLogger {
 
     public final void logHunHasBeenSeen(String str, boolean z) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logShadeHidden() {
@@ -67,44 +66,44 @@ public final class LockScreenMinimalismCoordinatorLogger {
 
     public final void logShadeVisible(int i) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logTopHeadsUpRow(String str, boolean z) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logTrackingUnseen(boolean z) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenAdded(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenRemoved(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenUpdated(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockScreenMinimalismCoordinator", LogLevel.DEBUG, new LockScreenMinimalismCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 }

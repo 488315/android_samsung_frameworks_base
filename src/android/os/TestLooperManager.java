@@ -45,25 +45,25 @@ public class TestLooperManager {
         return getMessageQueue();
     }
 
-    public Message next() {
+    public Message next() throws InterruptedException {
         checkReleased();
         waitForLooperHolder();
         return this.mQueue.next();
     }
 
-    public Message poll() {
+    public Message poll() throws InterruptedException {
         checkReleased();
         waitForLooperHolder();
         return this.mQueue.pollForTest();
     }
 
-    public Long peekWhen() {
+    public Long peekWhen() throws InterruptedException {
         checkReleased();
         waitForLooperHolder();
         return this.mQueue.peekWhenForTest();
     }
 
-    public boolean isBlockedOnSyncBarrier() {
+    public boolean isBlockedOnSyncBarrier() throws InterruptedException {
         checkReleased();
         waitForLooperHolder();
         return this.mQueue.isBlockedOnSyncBarrier();
@@ -124,7 +124,7 @@ public class TestLooperManager {
         }
     }
 
-    private void waitForLooperHolder() {
+    private void waitForLooperHolder() throws InterruptedException {
         try {
             this.mLooperHolderLatch.await();
         } catch (InterruptedException unused) {

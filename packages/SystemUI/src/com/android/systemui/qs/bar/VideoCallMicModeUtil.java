@@ -13,7 +13,6 @@ import com.android.systemui.util.RecoilEffectUtil;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VideoCallMicModeUtil {
     public final Function0 coloredBGHelper;
@@ -36,19 +35,19 @@ public final class VideoCallMicModeUtil {
     }
 
     public final View inflate(int i, ViewGroup viewGroup, boolean z) {
-        View inflate = LayoutInflater.from(this.context).inflate(i, viewGroup, false);
-        if (inflate == null) {
+        View viewInflate = LayoutInflater.from(this.context).inflate(i, viewGroup, false);
+        if (viewInflate == null) {
             return null;
         }
         if (z) {
-            inflate.setBackground(inflate.getContext().getDrawable(R.drawable.sec_large_button_ripple_background));
+            viewInflate.setBackground(viewInflate.getContext().getDrawable(R.drawable.sec_large_button_ripple_background));
             ColoredBGHelper coloredBGHelper = (ColoredBGHelper) this.coloredBGHelper.invoke();
             if (coloredBGHelper != null) {
-                coloredBGHelper.addBarBackground(inflate, false);
+                coloredBGHelper.addBarBackground(viewInflate, false);
             }
-            inflate.setStateListAnimator(RecoilEffectUtil.getRecoilSmallAnimator(inflate.getContext()));
+            viewInflate.setStateListAnimator(RecoilEffectUtil.getRecoilSmallAnimator(viewInflate.getContext()));
         }
-        return inflate;
+        return viewInflate;
     }
 
     public final int toPixelSize(int i) {

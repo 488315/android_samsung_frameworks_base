@@ -37,13 +37,13 @@ public final class Entry implements Parcelable {
     }
 
     private Entry(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        String readString82 = parcel.readString8();
+        String string8 = parcel.readString8();
+        String string82 = parcel.readString8();
         Slice slice = (Slice) parcel.readTypedObject(Slice.CREATOR);
-        this.mKey = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mSubkey = readString82;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString82);
+        this.mKey = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mSubkey = string82;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string82);
         this.mSlice = slice;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) slice);
         this.mPendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);

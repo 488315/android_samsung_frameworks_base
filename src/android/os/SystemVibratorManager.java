@@ -3,7 +3,6 @@ package android.os;
 import android.content.Context;
 import android.os.IVibratorManagerService;
 import android.os.IVibratorStateListener;
-import android.os.SystemVibratorManager;
 import android.os.Vibrator;
 import android.os.vibrator.IVibrationSession;
 import android.os.vibrator.IVibrationSessionCallback;
@@ -201,9 +200,9 @@ public class SystemVibratorManager extends VibratorManager {
             return;
         }
         try {
-            ICancellationSignal startVendorVibrationSession = iVibratorManagerService.startVendorVibrationSession(this.mUid, this.mContext.getDeviceId(), this.mPackageName, iArr, vibrationAttributes, str, vendorVibrationSessionCallbackDelegate);
+            ICancellationSignal iCancellationSignalStartVendorVibrationSession = iVibratorManagerService.startVendorVibrationSession(this.mUid, this.mContext.getDeviceId(), this.mPackageName, iArr, vibrationAttributes, str, vendorVibrationSessionCallbackDelegate);
             if (cancellationSignal != null) {
-                cancellationSignal.setRemote(startVendorVibrationSession);
+                cancellationSignal.setRemote(iCancellationSignalStartVendorVibrationSession);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Failed to start vibration session.", e);
@@ -266,7 +265,7 @@ public class SystemVibratorManager extends VibratorManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibratorManager$OnVibratorStateChangedListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemVibratorManager.OnVibratorStateChangedListenerDelegate.this.lambda$onVibrating$0(z);
+                    this.f$0.lambda$onVibrating$0(z);
                 }
             });
         }
@@ -294,7 +293,7 @@ public class SystemVibratorManager extends VibratorManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibratorManager$VendorVibrationSessionCallbackDelegate$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemVibratorManager.VendorVibrationSessionCallbackDelegate.this.lambda$onStarted$0(iVibrationSession);
+                    this.f$0.lambda$onStarted$0(iVibrationSession);
                 }
             });
         }
@@ -309,7 +308,7 @@ public class SystemVibratorManager extends VibratorManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibratorManager$VendorVibrationSessionCallbackDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemVibratorManager.VendorVibrationSessionCallbackDelegate.this.lambda$onFinishing$1();
+                    this.f$0.lambda$onFinishing$1();
                 }
             });
         }
@@ -324,7 +323,7 @@ public class SystemVibratorManager extends VibratorManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibratorManager$VendorVibrationSessionCallbackDelegate$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemVibratorManager.VendorVibrationSessionCallbackDelegate.this.lambda$onFinished$2(i);
+                    this.f$0.lambda$onFinished$2(i);
                 }
             });
         }

@@ -2,6 +2,7 @@ package com.android.systemui.qs.buttons;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.FactoryTest;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.globalactions.GlobalActionsComponent;
@@ -19,20 +21,21 @@ import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.qs.buttons.QSButtonsContainer;
 import com.android.systemui.util.ShadowDelegateUtil;
 import com.android.systemui.util.SystemUIAnalytics;
+import com.android.systemui.util.ViewUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSPowerButton extends FrameLayout implements QSButtonsContainer.CloseTooltipWindow {
-    public static final /* synthetic */ int $r8$clinit = 0;
+    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(268435456);
     public final Context mContext;
     public ImageButton mPowerButton;
     public final SecQSPanelResourcePicker mResourcePicker;
-    public final QSTooltipWindow mTipWindow;
+    public QSTooltipWindow mTipWindow;
     public final int mToolTipString;
 
     public QSPowerButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mContext = context;
+        configChanges.applyNewConfig(context.getResources());
         this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
         this.mTipWindow = QSTooltipWindow.getInstance(context);
         this.mToolTipString = R.string.tooltip_quick_settings_power_off;
@@ -46,6 +49,9 @@ public class QSPowerButton extends FrameLayout implements QSButtonsContainer.Clo
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
+        if (configChanges.applyNewConfig(this.mContext.getResources())) {
+            this.mTipWindow = QSTooltipWindow.getInstance(this.mContext);
+        }
         updateTouchTargetArea$3();
     }
 
@@ -61,8 +67,8 @@ public class QSPowerButton extends FrameLayout implements QSButtonsContainer.Clo
         this.mPowerButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSPowerButton$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSPowerButton qSPowerButton = QSPowerButton.this;
-                int i = QSPowerButton.$r8$clinit;
+                QSPowerButton qSPowerButton = this.f$0;
+                InterestingConfigChanges interestingConfigChanges = QSPowerButton.configChanges;
                 qSPowerButton.getClass();
                 Log.d("QSPowerButton", "!@[Shutdown] Click power off button.");
                 if (FactoryTest.isLongPressOnPowerOffEnabled() || FactoryTest.isAutomaticTestMode(qSPowerButton.mContext)) {
@@ -77,18 +83,22 @@ public class QSPowerButton extends FrameLayout implements QSButtonsContainer.Clo
         findViewById(R.id.power_button_container).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSPowerButton$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                return QSPowerButton.this.mPowerButton.onTouchEvent(motionEvent);
+                return this.f$0.mPowerButton.onTouchEvent(motionEvent);
             }
         });
         this.mPowerButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSPowerButton$$ExternalSyntheticLambda3
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                QSPowerButton qSPowerButton = QSPowerButton.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                QSPowerButton qSPowerButton = this.f$0;
                 if (qSPowerButton.mTipWindow.isTooltipShown()) {
                     return true;
                 }
                 qSPowerButton.mTipWindow.showToolTip(view, qSPowerButton.mToolTipString);
-                ((QSButtonsContainer) qSPowerButton.getParent()).mCloseTooltipWindow = qSPowerButton;
+                QSButtonsContainer qSButtonsContainer = (QSButtonsContainer) ViewUtil.findParentOfType(qSPowerButton, QSButtonsContainer.class);
+                if (qSButtonsContainer == null) {
+                    return true;
+                }
+                qSButtonsContainer.mCloseTooltipWindow = qSPowerButton;
                 return true;
             }
         });

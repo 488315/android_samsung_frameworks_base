@@ -47,7 +47,7 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
         SprAttributeFill sprAttributeFill;
         super.start();
         this.mAnimatingList.clear();
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         Iterator<SprObjectBase> it = this.mDocument.getValueAnimationObjects().iterator();
         while (it.hasNext()) {
             SprObjectBase next = it.next();
@@ -55,7 +55,7 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
             SprAttributeAnimatorSet sprAttributeAnimatorSet = null;
             SprAttributeFill sprAttributeFill2 = null;
             SprAttributeStroke sprAttributeStroke2 = null;
-            SprAttributeMatrix sprAttributeMatrix = null;
+            SprAttributeMatrix sprAttributeMatrixMo9233clone = null;
             while (it2.hasNext()) {
                 SprAttributeBase next2 = it2.next();
                 byte b = next2.mType;
@@ -64,7 +64,7 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
                 } else if (b == 35) {
                     sprAttributeStroke2 = (SprAttributeStroke) next2;
                 } else if (b == 64) {
-                    sprAttributeMatrix = (SprAttributeMatrix) next2;
+                    sprAttributeMatrixMo9233clone = (SprAttributeMatrix) next2;
                 } else if (b == 97) {
                     sprAttributeAnimatorSet = (SprAttributeAnimatorSet) next2;
                 }
@@ -81,7 +81,7 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
                     }
                     next.getIntrinsic().appendAttribute(sprAttributeFill);
                     try {
-                        sprAttributeFill2 = (SprAttributeFill) sprAttributeFill.mo9221clone();
+                        sprAttributeFill2 = (SprAttributeFill) sprAttributeFill.mo9233clone();
                         next.appendAttribute(sprAttributeFill2);
                     } catch (CloneNotSupportedException e) {
                         throw new RuntimeException(e);
@@ -95,33 +95,33 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
                     }
                     next.getIntrinsic().appendAttribute(sprAttributeStroke);
                     try {
-                        sprAttributeStroke2 = (SprAttributeStroke) sprAttributeStroke.mo9221clone();
+                        sprAttributeStroke2 = (SprAttributeStroke) sprAttributeStroke.mo9233clone();
                         next.appendAttribute(sprAttributeStroke2);
                     } catch (CloneNotSupportedException e2) {
                         throw new RuntimeException(e2);
                     }
                 }
-                if (sprAttributeMatrix == null) {
-                    SprAttributeMatrix sprAttributeMatrix2 = new SprAttributeMatrix();
-                    next.getIntrinsic().appendAttribute(sprAttributeMatrix2);
+                if (sprAttributeMatrixMo9233clone == null) {
+                    SprAttributeMatrix sprAttributeMatrix = new SprAttributeMatrix();
+                    next.getIntrinsic().appendAttribute(sprAttributeMatrix);
                     try {
-                        sprAttributeMatrix = sprAttributeMatrix2.mo9221clone();
-                        next.appendAttribute(sprAttributeMatrix);
+                        sprAttributeMatrixMo9233clone = sprAttributeMatrix.mo9233clone();
+                        next.appendAttribute(sprAttributeMatrixMo9233clone);
                     } catch (CloneNotSupportedException e3) {
                         throw new RuntimeException(e3);
                     }
                 }
-                animatorData.matrix = sprAttributeMatrix;
+                animatorData.matrix = sprAttributeMatrixMo9233clone;
                 animatorData.fillPaint = sprAttributeFill2;
                 animatorData.strokePaint = sprAttributeStroke2;
                 animatorData.object = next;
-                animatorData.startTime = uptimeMillis;
+                animatorData.startTime = jUptimeMillis;
                 animatorData.duration = sprAttributeAnimatorSet.duration;
                 animatorData.repeatCount = sprAttributeAnimatorSet.repeatCount;
                 this.mAnimatingList.add(animatorData);
             }
         }
-        this.mDrawable.scheduleSelf(this, uptimeMillis);
+        this.mDrawable.scheduleSelf(this, jUptimeMillis);
     }
 
     @Override // com.samsung.android.graphics.spr.animation.SprDrawableAnimation
@@ -184,22 +184,22 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
 
     @Override // java.lang.Runnable
     public void run() {
-        boolean updateAnimatorData;
+        boolean zUpdateAnimatorData;
         if (this.mAnimatingList.size() == 0) {
             this.mIsRunning = false;
             return;
         }
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         int i = 0;
         while (i < this.mAnimatingList.size()) {
             AnimatorData animatorData = this.mAnimatingList.get(i);
             if (animatorData.isRunning) {
-                if (uptimeMillis > animatorData.startTime + animatorData.duration) {
-                    updateAnimatorData = updateAnimatorData(animatorData, true);
+                if (jUptimeMillis > animatorData.startTime + animatorData.duration) {
+                    zUpdateAnimatorData = updateAnimatorData(animatorData, true);
                     animatorData.animatorSet.cancel();
                     if (animatorData.repeatCount != 0) {
                         animatorData.animatorSet.start();
-                        animatorData.startTime = uptimeMillis;
+                        animatorData.startTime = jUptimeMillis;
                         if (animatorData.repeatCount > 0) {
                             animatorData.repeatCount--;
                         }
@@ -208,20 +208,20 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
                         i--;
                     }
                 } else {
-                    updateAnimatorData = updateAnimatorData(animatorData, false);
+                    zUpdateAnimatorData = updateAnimatorData(animatorData, false);
                 }
-                if (updateAnimatorData) {
+                if (zUpdateAnimatorData) {
                     animatorData.object.preDraw(this.mDocument);
                 }
-            } else if (uptimeMillis > animatorData.startTime) {
+            } else if (jUptimeMillis > animatorData.startTime) {
                 animatorData.animatorSet.start();
-                animatorData.startTime = uptimeMillis;
+                animatorData.startTime = jUptimeMillis;
                 animatorData.isRunning = true;
             }
             i++;
         }
         if (this.mAnimatingList.size() > 0) {
-            this.mDrawable.scheduleSelf(this, uptimeMillis + this.mInterval);
+            this.mDrawable.scheduleSelf(this, jUptimeMillis + this.mInterval);
         }
         this.mDrawable.invalidateSelf();
     }

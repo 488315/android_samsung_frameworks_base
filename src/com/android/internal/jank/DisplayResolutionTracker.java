@@ -67,15 +67,15 @@ public class DisplayResolutionTracker {
     }
 
     public static int getResolution(DisplayInfo displayInfo) {
-        int min = Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight);
-        int max = Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight);
-        if (min < 720 || max < 1280) {
+        int iMin = Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight);
+        int iMax = Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight);
+        if (iMin < 720 || iMax < 1280) {
             return 1;
         }
-        if (min < 1080 || max < 1920) {
+        if (iMin < 1080 || iMax < 1920) {
             return 2;
         }
-        return (min < 1440 || max < 2560) ? 3 : 4;
+        return (iMin < 1440 || iMax < 2560) ? 3 : 4;
     }
 
     public interface DisplayInterface {
@@ -89,12 +89,12 @@ public class DisplayResolutionTracker {
             return new DisplayInterface() { // from class: com.android.internal.jank.DisplayResolutionTracker.DisplayInterface.1
                 @Override // com.android.internal.jank.DisplayResolutionTracker.DisplayInterface
                 public void registerDisplayListener(DisplayManager.DisplayListener displayListener) {
-                    DisplayManagerGlobal.this.registerDisplayListener(displayListener, handler, j, ActivityThread.currentPackageName());
+                    displayManagerGlobal.registerDisplayListener(displayListener, handler, j, ActivityThread.currentPackageName());
                 }
 
                 @Override // com.android.internal.jank.DisplayResolutionTracker.DisplayInterface
                 public DisplayInfo getDisplayInfo(int i) {
-                    return DisplayManagerGlobal.this.getDisplayInfo(i);
+                    return displayManagerGlobal.getDisplayInfo(i);
                 }
             };
         }

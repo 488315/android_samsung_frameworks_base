@@ -5,46 +5,54 @@ import android.os.SystemClock;
 import androidx.collection.SimpleArrayMap;
 import androidx.dynamicanimation.animation.AnimationHandler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AnimationHandler$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ AnimationHandler f$0;
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0051  */
     @Override // java.lang.Runnable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void run() {
+        long j;
         AnimationHandler.AnimationCallbackDispatcher animationCallbackDispatcher = this.f$0.mCallbackDispatcher;
         animationCallbackDispatcher.getClass();
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         AnimationHandler animationHandler = animationCallbackDispatcher.this$0;
         animationHandler.getClass();
-        long uptimeMillis2 = SystemClock.uptimeMillis();
+        long jUptimeMillis2 = SystemClock.uptimeMillis();
         for (int i = 0; i < animationHandler.mAnimationCallbacks.size(); i++) {
             AnimationHandler.AnimationFrameCallback animationFrameCallback = (AnimationHandler.AnimationFrameCallback) animationHandler.mAnimationCallbacks.get(i);
             if (animationFrameCallback != null) {
                 SimpleArrayMap simpleArrayMap = animationHandler.mDelayedCallbackStartTime;
                 Long l = (Long) simpleArrayMap.get(animationFrameCallback);
-                if (l != null) {
-                    if (l.longValue() < uptimeMillis2) {
-                        simpleArrayMap.remove(animationFrameCallback);
+                if (l == null) {
+                    DynamicAnimation dynamicAnimation = (DynamicAnimation) animationFrameCallback;
+                    j = dynamicAnimation.mLastFrameTime;
+                    if (j != 0) {
                     }
-                }
-                DynamicAnimation dynamicAnimation = (DynamicAnimation) animationFrameCallback;
-                long j = dynamicAnimation.mLastFrameTime;
-                if (j == 0) {
-                    dynamicAnimation.mLastFrameTime = uptimeMillis;
-                    dynamicAnimation.setPropertyValue(dynamicAnimation.mValue);
-                } else {
-                    long j2 = uptimeMillis - j;
-                    dynamicAnimation.mLastFrameTime = uptimeMillis;
-                    float f = dynamicAnimation.getAnimationHandler().mDurationScale;
-                    boolean updateValueAndVelocity = dynamicAnimation.updateValueAndVelocity(f == 0.0f ? 2147483647L : (long) (j2 / f));
-                    float min = Math.min(dynamicAnimation.mValue, dynamicAnimation.mMaxValue);
-                    dynamicAnimation.mValue = min;
-                    float max = Math.max(min, dynamicAnimation.mMinValue);
-                    dynamicAnimation.mValue = max;
-                    dynamicAnimation.setPropertyValue(max);
-                    if (updateValueAndVelocity) {
-                        dynamicAnimation.endAnimationInternal(false);
+                } else if (l.longValue() < jUptimeMillis2) {
+                    simpleArrayMap.remove(animationFrameCallback);
+                    DynamicAnimation dynamicAnimation2 = (DynamicAnimation) animationFrameCallback;
+                    j = dynamicAnimation2.mLastFrameTime;
+                    if (j != 0) {
+                        dynamicAnimation2.mLastFrameTime = jUptimeMillis;
+                        dynamicAnimation2.setPropertyValue(dynamicAnimation2.mValue);
+                    } else {
+                        long j2 = jUptimeMillis - j;
+                        dynamicAnimation2.mLastFrameTime = jUptimeMillis;
+                        float f = dynamicAnimation2.getAnimationHandler().mDurationScale;
+                        boolean zUpdateValueAndVelocity = dynamicAnimation2.updateValueAndVelocity(f == 0.0f ? 2147483647L : (long) (j2 / f));
+                        float fMin = Math.min(dynamicAnimation2.mValue, dynamicAnimation2.mMaxValue);
+                        dynamicAnimation2.mValue = fMin;
+                        float fMax = Math.max(fMin, dynamicAnimation2.mMinValue);
+                        dynamicAnimation2.mValue = fMax;
+                        dynamicAnimation2.setPropertyValue(fMax);
+                        if (zUpdateValueAndVelocity) {
+                            dynamicAnimation2.endAnimationInternal(false);
+                        }
                     }
                 }
             }

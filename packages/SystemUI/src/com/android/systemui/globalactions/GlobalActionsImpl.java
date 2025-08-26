@@ -2,6 +2,7 @@ package com.android.systemui.globalactions;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,7 +19,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import dagger.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks {
     public final CommandQueue mCommandQueue;
@@ -63,7 +63,7 @@ public class GlobalActionsImpl implements GlobalActions, CommandQueue.Callbacks 
     }
 
     @Override // com.android.systemui.plugins.GlobalActions
-    public final void showShutdownUi(boolean z, String str) {
+    public final void showShutdownUi(boolean z, String str) throws Resources.NotFoundException {
         ShutdownUi shutdownUi = this.mShutdownUi;
         shutdownUi.getClass();
         ScrimDrawable scrimDrawable = new ScrimDrawable();

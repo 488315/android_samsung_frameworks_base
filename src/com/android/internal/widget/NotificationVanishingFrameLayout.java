@@ -28,8 +28,8 @@ public class NotificationVanishingFrameLayout extends FrameLayout {
     @Override // android.widget.FrameLayout, android.view.View
     protected void onMeasure(int i, int i2) {
         if (allChildrenGone()) {
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 1073741824);
-            super.onMeasure(makeMeasureSpec, makeMeasureSpec);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 1073741824);
+            super.onMeasure(iMakeMeasureSpec, iMakeMeasureSpec);
         } else {
             super.onMeasure(i, i2);
         }

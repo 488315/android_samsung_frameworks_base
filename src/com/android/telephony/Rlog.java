@@ -85,19 +85,19 @@ public final class Rlog {
     }
 
     public static String pii(String str, Object obj) {
-        String valueOf = String.valueOf(obj);
-        if (obj == null || TextUtils.isEmpty(valueOf) || (!SHIP_BUILD && isLoggable(str, 2))) {
-            return valueOf;
+        String strValueOf = String.valueOf(obj);
+        if (obj == null || TextUtils.isEmpty(strValueOf) || (!SHIP_BUILD && isLoggable(str, 2))) {
+            return strValueOf;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(valueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(strValueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String pii(boolean z, Object obj) {
-        String valueOf = String.valueOf(obj);
-        if (obj == null || TextUtils.isEmpty(valueOf) || (!SHIP_BUILD && z)) {
-            return valueOf;
+        String strValueOf = String.valueOf(obj);
+        if (obj == null || TextUtils.isEmpty(strValueOf) || (!SHIP_BUILD && z)) {
+            return strValueOf;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(valueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(strValueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String piiHandle(Object obj) {
@@ -114,11 +114,11 @@ public final class Rlog {
                 obfuscatePhoneNumber(sb, schemeSpecificPart);
             } else if ("sip".equals(scheme)) {
                 for (int i = 0; i < schemeSpecificPart.length(); i++) {
-                    char charAt = schemeSpecificPart.charAt(i);
-                    if (charAt != '@' && charAt != '.') {
-                        charAt = '*';
+                    char cCharAt = schemeSpecificPart.charAt(i);
+                    if (cCharAt != '@' && cCharAt != '.') {
+                        cCharAt = '*';
                     }
-                    sb.append(charAt);
+                    sb.append(cCharAt);
                 }
             } else {
                 sb.append("***");
@@ -132,12 +132,12 @@ public final class Rlog {
     private static void obfuscatePhoneNumber(StringBuilder sb, String str) {
         int dialableCount = getDialableCount(str) - ((USER_BUILD || SHIP_BUILD) ? 0 : 2);
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            boolean isDialable = PhoneNumberUtils.isDialable(charAt);
-            if (isDialable) {
+            char cCharAt = str.charAt(i);
+            boolean zIsDialable = PhoneNumberUtils.isDialable(cCharAt);
+            if (zIsDialable) {
                 dialableCount--;
             }
-            sb.append((!isDialable || dialableCount < 0) ? Character.valueOf(charAt) : "*");
+            sb.append((!zIsDialable || dialableCount < 0) ? Character.valueOf(cCharAt) : "*");
         }
     }
 

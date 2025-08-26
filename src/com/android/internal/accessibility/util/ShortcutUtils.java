@@ -30,8 +30,8 @@ public final class ShortcutUtils {
     @Deprecated
     public static void optInValueToSettings(Context context, int i, String str) {
         StringJoiner stringJoiner = new StringJoiner(String.valueOf(ShortcutConstants.SERVICES_SEPARATOR));
-        String convertToKey = convertToKey(i);
-        String string = Settings.Secure.getString(context.getContentResolver(), convertToKey);
+        String strConvertToKey = convertToKey(i);
+        String string = Settings.Secure.getString(context.getContentResolver(), strConvertToKey);
         if (isComponentIdExistingInSettings(context, i, str)) {
             return;
         }
@@ -39,14 +39,14 @@ public final class ShortcutUtils {
             stringJoiner.add(string);
         }
         stringJoiner.add(str);
-        Settings.Secure.putString(context.getContentResolver(), convertToKey, stringJoiner.toString());
+        Settings.Secure.putString(context.getContentResolver(), strConvertToKey, stringJoiner.toString());
     }
 
     @Deprecated
     public static void optOutValueFromSettings(Context context, int i, String str) {
         StringJoiner stringJoiner = new StringJoiner(String.valueOf(ShortcutConstants.SERVICES_SEPARATOR));
-        String convertToKey = convertToKey(i);
-        String string = Settings.Secure.getString(context.getContentResolver(), convertToKey);
+        String strConvertToKey = convertToKey(i);
+        String string = Settings.Secure.getString(context.getContentResolver(), strConvertToKey);
         if (TextUtils.isEmpty(string)) {
             return;
         }
@@ -59,7 +59,7 @@ public final class ShortcutUtils {
                     stringJoiner.add(next);
                 }
             } else {
-                Settings.Secure.putString(context.getContentResolver(), convertToKey, stringJoiner.toString());
+                Settings.Secure.putString(context.getContentResolver(), strConvertToKey, stringJoiner.toString());
                 return;
             }
         }
@@ -179,14 +179,14 @@ public final class ShortcutUtils {
     }
 
     public static Set<String> getShortcutTargetsFromSettings(Context context, int i, int i2) {
-        String convertToKey = convertToKey(i);
-        if ("accessibility_display_magnification_enabled".equals(convertToKey) || Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED.equals(convertToKey)) {
-            if (Settings.Secure.getIntForUser(context.getContentResolver(), convertToKey, 0, i2) == 1) {
+        String strConvertToKey = convertToKey(i);
+        if ("accessibility_display_magnification_enabled".equals(strConvertToKey) || Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED.equals(strConvertToKey)) {
+            if (Settings.Secure.getIntForUser(context.getContentResolver(), strConvertToKey, 0, i2) == 1) {
                 return Set.of("com.android.server.accessibility.MagnificationController");
             }
             return Collections.EMPTY_SET;
         }
-        String stringForUser = Settings.Secure.getStringForUser(context.getContentResolver(), convertToKey, i2);
+        String stringForUser = Settings.Secure.getStringForUser(context.getContentResolver(), strConvertToKey, i2);
         if (TextUtils.isEmpty(stringForUser)) {
             return Collections.EMPTY_SET;
         }

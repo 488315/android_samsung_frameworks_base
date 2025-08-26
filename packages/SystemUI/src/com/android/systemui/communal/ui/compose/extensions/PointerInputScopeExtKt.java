@@ -1,116 +1,117 @@
 package com.android.systemui.communal.ui.compose.extensions;
 
+import androidx.compose.ui.input.pointer.AwaitPointerEventScope;
+import androidx.compose.ui.input.pointer.PointerEvent;
 import androidx.compose.ui.input.pointer.PointerEventPass;
+import androidx.compose.ui.input.pointer.PointerInputChange;
 import androidx.compose.ui.input.pointer.PointerInputScope;
+import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.BaseContinuationImpl;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class PointerInputScopeExtKt {
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0059 A[LOOP:0: B:11:0x0057->B:12:0x0059, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0049 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x0047 -> B:10:0x004a). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0049 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0059 A[LOOP:0: B:19:0x0057->B:20:0x0059, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0047 -> B:18:0x004a). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$consumeUntilUp(androidx.compose.ui.input.pointer.AwaitPointerEventScope r9, androidx.compose.ui.input.pointer.PointerEventPass r10, kotlin.coroutines.jvm.internal.BaseContinuationImpl r11) {
-        /*
-            boolean r0 = r11 instanceof com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$consumeUntilUp$1
-            if (r0 == 0) goto L13
-            r0 = r11
-            com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$consumeUntilUp$1 r0 = (com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$consumeUntilUp$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$consumeUntilUp$1 r0 = new com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt$consumeUntilUp$1
-            r0.<init>(r11)
-        L18:
-            java.lang.Object r11 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3a
-            if (r2 != r3) goto L32
-            java.lang.Object r9 = r0.L$1
-            androidx.compose.ui.input.pointer.PointerEventPass r9 = (androidx.compose.ui.input.pointer.PointerEventPass) r9
-            java.lang.Object r10 = r0.L$0
-            androidx.compose.ui.input.pointer.AwaitPointerEventScope r10 = (androidx.compose.ui.input.pointer.AwaitPointerEventScope) r10
-            kotlin.ResultKt.throwOnFailure(r11)
-            r8 = r10
-            r10 = r9
-            r9 = r8
-            goto L4a
-        L32:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r11)
-        L3d:
-            r0.L$0 = r9
-            r0.L$1 = r10
-            r0.label = r3
-            java.lang.Object r11 = r9.awaitPointerEvent(r10, r0)
-            if (r11 != r1) goto L4a
-            return r1
-        L4a:
-            androidx.compose.ui.input.pointer.PointerEvent r11 = (androidx.compose.ui.input.pointer.PointerEvent) r11
-            java.util.List r2 = r11.changes
-            r4 = r2
-            java.util.Collection r4 = (java.util.Collection) r4
-            int r4 = r4.size()
-            r5 = 0
-            r6 = r5
-        L57:
-            if (r6 >= r4) goto L65
-            java.lang.Object r7 = r2.get(r6)
-            androidx.compose.ui.input.pointer.PointerInputChange r7 = (androidx.compose.ui.input.pointer.PointerInputChange) r7
-            r7.consume()
-            int r6 = r6 + 1
-            goto L57
-        L65:
-            java.util.List r11 = r11.changes
-            r2 = r11
-            java.util.Collection r2 = (java.util.Collection) r2
-            int r2 = r2.size()
-        L6e:
-            if (r5 >= r2) goto L7e
-            java.lang.Object r4 = r11.get(r5)
-            androidx.compose.ui.input.pointer.PointerInputChange r4 = (androidx.compose.ui.input.pointer.PointerInputChange) r4
-            boolean r4 = r4.pressed
-            if (r4 == 0) goto L7b
-            goto L3d
-        L7b:
-            int r5 = r5 + 1
-            goto L6e
-        L7e:
-            kotlin.Unit r9 = kotlin.Unit.INSTANCE
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.ui.compose.extensions.PointerInputScopeExtKt.access$consumeUntilUp(androidx.compose.ui.input.pointer.AwaitPointerEventScope, androidx.compose.ui.input.pointer.PointerEventPass, kotlin.coroutines.jvm.internal.BaseContinuationImpl):java.lang.Object");
+    public static final Object access$consumeUntilUp(AwaitPointerEventScope awaitPointerEventScope, PointerEventPass pointerEventPass, BaseContinuationImpl baseContinuationImpl) {
+        PointerInputScopeExtKt$consumeUntilUp$1 pointerInputScopeExtKt$consumeUntilUp$1;
+        int size;
+        int i;
+        int i2;
+        int size2;
+        if (baseContinuationImpl instanceof PointerInputScopeExtKt$consumeUntilUp$1) {
+            pointerInputScopeExtKt$consumeUntilUp$1 = (PointerInputScopeExtKt$consumeUntilUp$1) baseContinuationImpl;
+            int i3 = pointerInputScopeExtKt$consumeUntilUp$1.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                pointerInputScopeExtKt$consumeUntilUp$1.label = i3 - Integer.MIN_VALUE;
+            } else {
+                pointerInputScopeExtKt$consumeUntilUp$1 = new PointerInputScopeExtKt$consumeUntilUp$1(baseContinuationImpl);
+            }
+        }
+        Object objAwaitPointerEvent = pointerInputScopeExtKt$consumeUntilUp$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = pointerInputScopeExtKt$consumeUntilUp$1.label;
+        if (i4 == 0) {
+            ResultKt.throwOnFailure(objAwaitPointerEvent);
+            pointerInputScopeExtKt$consumeUntilUp$1.L$0 = awaitPointerEventScope;
+            pointerInputScopeExtKt$consumeUntilUp$1.L$1 = pointerEventPass;
+            pointerInputScopeExtKt$consumeUntilUp$1.label = 1;
+            objAwaitPointerEvent = awaitPointerEventScope.awaitPointerEvent(pointerEventPass, pointerInputScopeExtKt$consumeUntilUp$1);
+            if (objAwaitPointerEvent == coroutineSingletons) {
+            }
+            PointerEvent pointerEvent = (PointerEvent) objAwaitPointerEvent;
+            List list = pointerEvent.changes;
+            size = list.size();
+            i = 0;
+            while (i2 < size) {
+            }
+            List list2 = pointerEvent.changes;
+            size2 = list2.size();
+            while (i < size2) {
+            }
+            return Unit.INSTANCE;
+        }
+        if (i4 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        PointerEventPass pointerEventPass2 = (PointerEventPass) pointerInputScopeExtKt$consumeUntilUp$1.L$1;
+        AwaitPointerEventScope awaitPointerEventScope2 = (AwaitPointerEventScope) pointerInputScopeExtKt$consumeUntilUp$1.L$0;
+        ResultKt.throwOnFailure(objAwaitPointerEvent);
+        pointerEventPass = pointerEventPass2;
+        awaitPointerEventScope = awaitPointerEventScope2;
+        PointerEvent pointerEvent2 = (PointerEvent) objAwaitPointerEvent;
+        List list3 = pointerEvent2.changes;
+        size = list3.size();
+        i = 0;
+        for (i2 = 0; i2 < size; i2++) {
+            ((PointerInputChange) list3.get(i2)).consume();
+        }
+        List list22 = pointerEvent2.changes;
+        size2 = list22.size();
+        while (i < size2) {
+            if (((PointerInputChange) list22.get(i)).pressed) {
+                pointerInputScopeExtKt$consumeUntilUp$1.L$0 = awaitPointerEventScope;
+                pointerInputScopeExtKt$consumeUntilUp$1.L$1 = pointerEventPass;
+                pointerInputScopeExtKt$consumeUntilUp$1.label = 1;
+                objAwaitPointerEvent = awaitPointerEventScope.awaitPointerEvent(pointerEventPass, pointerInputScopeExtKt$consumeUntilUp$1);
+                if (objAwaitPointerEvent == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                PointerEvent pointerEvent22 = (PointerEvent) objAwaitPointerEvent;
+                List list32 = pointerEvent22.changes;
+                size = list32.size();
+                i = 0;
+                while (i2 < size) {
+                }
+                List list222 = pointerEvent22.changes;
+                size2 = list222.size();
+                while (i < size2) {
+                }
+            } else {
+                i++;
+            }
+        }
+        return Unit.INSTANCE;
     }
 
     public static Object detectLongPressGesture$default(PointerInputScope pointerInputScope, Function1 function1, Continuation continuation) {
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new PointerInputScopeExtKt$detectLongPressGesture$2(pointerInputScope, PointerEventPass.Initial, function1, null), continuation);
-        return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new PointerInputScopeExtKt$detectLongPressGesture$2(pointerInputScope, PointerEventPass.Initial, function1, null), continuation);
+        return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
     }
 
     public static Object observeTaps$default(PointerInputScope pointerInputScope, Function1 function1, Continuation continuation, int i) {
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new PointerInputScopeExtKt$observeTaps$2(function1, pointerInputScope, PointerEventPass.Initial, (i & 2) == 0, null), continuation);
-        return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new PointerInputScopeExtKt$observeTaps$2(function1, pointerInputScope, PointerEventPass.Initial, (i & 2) == 0, null), continuation);
+        return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
     }
 }

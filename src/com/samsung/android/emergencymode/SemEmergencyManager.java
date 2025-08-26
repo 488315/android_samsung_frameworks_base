@@ -1,5 +1,6 @@
 package com.samsung.android.emergencymode;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -71,27 +72,29 @@ public class SemEmergencyManager {
     @Deprecated
     public static SemEmergencyManager getInstance(Context context) {
         SemEmergencyManager semEmergencyManager;
-        Context context2 = null;
+        Context contextCreatePackageContext = null;
         if (context == null) {
             return null;
         }
         synchronized (mLock) {
             if (sInstance == null) {
                 try {
-                    context2 = context.createPackageContext("android", 2);
+                    contextCreatePackageContext = context.createPackageContext("android", 2);
                 } catch (Exception e) {
                     Elog.d(TAG, "NameNotFoundException or SecurityException createPackageContext failed");
                     e.printStackTrace();
                 }
-                if (context2 != null) {
-                    Elog.d(TAG, "android createPackageContext successful: " + context2.getPackageName());
-                    context = context2;
+                if (contextCreatePackageContext != null) {
+                    Elog.d(TAG, "android createPackageContext successful: " + contextCreatePackageContext.getPackageName());
+                    context = contextCreatePackageContext;
                 } else {
                     Elog.d(TAG, "android createPackageContext null");
                 }
                 sInstance = new SemEmergencyManager(new Handler(context.getMainLooper()), context);
+                semEmergencyManager = sInstance;
+            } else {
+                semEmergencyManager = sInstance;
             }
-            semEmergencyManager = sInstance;
         }
         return semEmergencyManager;
     }
@@ -213,15 +216,15 @@ public class SemEmergencyManager {
     private void stopService() {
         synchronized (SemEmergencyManager.class) {
             try {
-                if (mService != null) {
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.sec.android.emergencymode.service", SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
-                    Elog.d(TAG, "stopService: " + intent);
-                    this.mContext.stopServiceAsUser(intent, UserHandle.OWNER);
-                    mService = null;
-                }
             } catch (Exception e) {
                 Elog.d(TAG, "stopService e : " + e);
+            }
+            if (mService != null) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.sec.android.emergencymode.service", SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
+                Elog.d(TAG, "stopService: " + intent);
+                this.mContext.stopServiceAsUser(intent, UserHandle.OWNER);
+                mService = null;
             }
         }
     }
@@ -253,7 +256,7 @@ public class SemEmergencyManager {
         if (!EMERGENCY_FEATURES_SUPPORTED) {
             return false;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (Settings.System.getIntForUser(context.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE, 0, 0) == 1) {
                 z = true;
@@ -263,12 +266,12 @@ public class SemEmergencyManager {
         } catch (Exception e2) {
             Elog.d(TAG, "getIntForUser failed e " + e2);
         }
-        Binder.restoreCallingIdentity(clearCallingIdentity);
+        Binder.restoreCallingIdentity(jClearCallingIdentity);
         return z;
     }
 
     public static boolean isMinimalBatteryUseMode(Context context) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         boolean z = false;
         try {
             if (mSupport_UPSM) {
@@ -281,7 +284,7 @@ public class SemEmergencyManager {
         } catch (Exception e2) {
             Elog.d(TAG, "getIntForUser failed e " + e2);
         }
-        Binder.restoreCallingIdentity(clearCallingIdentity);
+        Binder.restoreCallingIdentity(jClearCallingIdentity);
         return z;
     }
 
@@ -478,89 +481,66 @@ public class SemEmergencyManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x006c  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x006f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public boolean canSetMode() {
-        /*
-            r6 = this;
-            java.lang.String r0 = "EmergencyManager"
-            boolean r1 = com.samsung.android.emergencymode.SemEmergencyManager.EMERGENCY_FEATURES_SUPPORTED
-            r2 = 0
-            if (r1 != 0) goto L8
-            return r2
-        L8:
-            boolean r1 = r6.isModifying()     // Catch: java.lang.Exception -> L13
-            int r3 = android.app.ActivityManager.getCurrentUser()     // Catch: java.lang.Exception -> L11
-            goto L27
-        L11:
-            r3 = move-exception
-            goto L15
-        L13:
-            r3 = move-exception
-            r1 = r2
-        L15:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "canSetMode Exception : "
-            r4.<init>(r5)
-            r4.append(r3)
-            java.lang.String r3 = r4.toString()
-            com.samsung.android.emergencymode.Elog.d(r0, r3)
-            r3 = r2
-        L27:
-            android.content.Context r6 = r6.mContext
-            android.content.ContentResolver r6 = r6.getContentResolver()
-            java.lang.String r4 = "device_provisioned"
-            int r6 = android.provider.Settings.Global.getInt(r6, r4, r2)
-            if (r6 == 0) goto L39
-            r6 = 1
-            java.lang.String r4 = ""
-            goto L3c
-        L39:
-            java.lang.String r4 = "SETUP_WIZARD_UNFINISHED;"
-            r6 = r2
-        L3c:
-            if (r1 == 0) goto L50
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            r6.<init>()
-            r6.append(r4)
-            java.lang.String r1 = "LLM_ENABLING;"
-            r6.append(r1)
-            java.lang.String r4 = r6.toString()
-            r6 = r2
-        L50:
-            if (r3 == 0) goto L6c
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            r6.<init>()
-            r6.append(r4)
-            java.lang.String r1 = "NOT_OWNER_"
-            r6.append(r1)
-            r6.append(r3)
-            java.lang.String r1 = ";"
-            r6.append(r1)
-            java.lang.String r4 = r6.toString()
-            goto L6d
-        L6c:
-            r2 = r6
-        L6d:
-            if (r2 != 0) goto L81
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r1 = "not Allowed EmergencyMode due to "
-            r6.<init>(r1)
-            r6.append(r4)
-            java.lang.String r6 = r6.toString()
-            com.samsung.android.emergencymode.Elog.v(r0, r6)
-        L81:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.emergencymode.SemEmergencyManager.canSetMode():boolean");
+        boolean zIsModifying;
+        int currentUser;
+        String str;
+        boolean z;
+        boolean z2 = false;
+        if (!EMERGENCY_FEATURES_SUPPORTED) {
+            return false;
+        }
+        try {
+            zIsModifying = isModifying();
+        } catch (Exception e) {
+            e = e;
+            zIsModifying = false;
+        }
+        try {
+            currentUser = ActivityManager.getCurrentUser();
+        } catch (Exception e2) {
+            e = e2;
+            Elog.d(TAG, "canSetMode Exception : " + e);
+            currentUser = 0;
+            if (Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0) == 0) {
+            }
+            if (zIsModifying) {
+            }
+            if (currentUser == 0) {
+            }
+            if (!z2) {
+            }
+            return z2;
+        }
+        if (Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0) == 0) {
+            z = true;
+            str = "";
+        } else {
+            str = "SETUP_WIZARD_UNFINISHED;";
+            z = false;
+        }
+        if (zIsModifying) {
+            str = str + "LLM_ENABLING;";
+            z = false;
+        }
+        if (currentUser == 0) {
+            str = str + "NOT_OWNER_" + currentUser + NavigationBarInflaterView.GRAVITY_SEPARATOR;
+        } else {
+            z2 = z;
+        }
+        if (!z2) {
+            Elog.v(TAG, "not Allowed EmergencyMode due to " + str);
+        }
+        return z2;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

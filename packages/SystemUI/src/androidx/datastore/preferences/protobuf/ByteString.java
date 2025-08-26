@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ByteString implements Iterable<Byte>, Serializable {
     public static final ByteString EMPTY = new LiteralByteString(Internal.EMPTY_BYTE_ARRAY);
@@ -27,7 +26,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     private static final long serialVersionUID = 1;
     private int hash = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.datastore.preferences.protobuf.ByteString$1, reason: invalid class name */
     public class AnonymousClass1 extends AbstractByteIterator {
         public final int limit;
@@ -53,7 +51,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AbstractByteIterator implements Iterator {
         @Override // java.util.Iterator
         public final Object next() {
@@ -68,7 +65,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ArraysByteArrayCopier implements ByteArrayCopier {
         private ArraysByteArrayCopier() {
         }
@@ -83,7 +79,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class BoundedByteString extends LiteralByteString {
         private static final long serialVersionUID = 1;
         private final int bytesLength;
@@ -146,12 +141,10 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ByteArrayCopier {
         byte[] copyFrom(int i, int i2, byte[] bArr);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CodedBuilder {
         public final byte[] buffer;
         public final CodedOutputStream.ArrayEncoder output;
@@ -168,7 +161,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     abstract class LeafByteString extends ByteString {
         private static final long serialVersionUID = 1;
 
@@ -185,7 +177,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class LiteralByteString extends LeafByteString {
         private static final long serialVersionUID = 1;
         protected final byte[] bytes;
@@ -221,9 +212,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
                 return obj.equals(this);
             }
             LiteralByteString literalByteString = (LiteralByteString) obj;
-            int peekCachedHashCode = peekCachedHashCode();
-            int peekCachedHashCode2 = literalByteString.peekCachedHashCode();
-            if (peekCachedHashCode != 0 && peekCachedHashCode2 != 0 && peekCachedHashCode != peekCachedHashCode2) {
+            int iPeekCachedHashCode = peekCachedHashCode();
+            int iPeekCachedHashCode2 = literalByteString.peekCachedHashCode();
+            if (iPeekCachedHashCode != 0 && iPeekCachedHashCode2 != 0 && iPeekCachedHashCode != iPeekCachedHashCode2) {
                 return false;
             }
             int size = size();
@@ -231,9 +222,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
                 throw new IllegalArgumentException("Length too large: " + size + size());
             }
             if (size > literalByteString.size()) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "Ran off end of other: 0, ", ", ");
-                m.append(literalByteString.size());
-                throw new IllegalArgumentException(m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "Ran off end of other: 0, ", ", ");
+                sbM.append(literalByteString.size());
+                throw new IllegalArgumentException(sbM.toString());
             }
             byte[] bArr = this.bytes;
             byte[] bArr2 = literalByteString.bytes;
@@ -282,8 +273,8 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
 
         @Override // androidx.datastore.preferences.protobuf.ByteString
         public final ByteString substring(int i) {
-            int checkRange = ByteString.checkRange(0, i, size());
-            return checkRange == 0 ? ByteString.EMPTY : new BoundedByteString(this.bytes, getOffsetIntoBytes(), checkRange);
+            int iCheckRange = ByteString.checkRange(0, i, size());
+            return iCheckRange == 0 ? ByteString.EMPTY : new BoundedByteString(this.bytes, getOffsetIntoBytes(), iCheckRange);
         }
 
         @Override // androidx.datastore.preferences.protobuf.ByteString
@@ -292,7 +283,6 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SystemByteArrayCopier implements ByteArrayCopier {
         private SystemByteArrayCopier() {
         }
@@ -322,9 +312,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
                 byteString2.getClass();
                 AnonymousClass1 anonymousClass13 = byteString2.new AnonymousClass1();
                 while (anonymousClass12.hasNext() && anonymousClass13.hasNext()) {
-                    int compareTo = Integer.valueOf(anonymousClass12.nextByte() & 255).compareTo(Integer.valueOf(anonymousClass13.nextByte() & 255));
-                    if (compareTo != 0) {
-                        return compareTo;
+                    int iCompareTo = Integer.valueOf(anonymousClass12.nextByte() & 255).compareTo(Integer.valueOf(anonymousClass13.nextByte() & 255));
+                    if (iCompareTo != 0) {
+                        return iCompareTo;
                     }
                 }
                 return Integer.valueOf(byteString.size()).compareTo(Integer.valueOf(byteString2.size()));
@@ -358,16 +348,16 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     public abstract boolean equals(Object obj);
 
     public final int hashCode() {
-        int i = this.hash;
-        if (i == 0) {
+        int iPartialHash = this.hash;
+        if (iPartialHash == 0) {
             int size = size();
-            i = partialHash(size, size);
-            if (i == 0) {
-                i = 1;
+            iPartialHash = partialHash(size, size);
+            if (iPartialHash == 0) {
+                iPartialHash = 1;
             }
-            this.hash = i;
+            this.hash = iPartialHash;
         }
-        return i;
+        return iPartialHash;
     }
 
     public abstract byte internalByteAt(int i);
@@ -390,16 +380,16 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     public abstract ByteString substring(int i);
 
     public final String toString() {
-        String str;
+        String strEscapeBytes;
         Locale locale = Locale.ROOT;
         String hexString = Integer.toHexString(System.identityHashCode(this));
         int size = size();
         if (size() <= 50) {
-            str = TextFormatEscaper.escapeBytes(this);
+            strEscapeBytes = TextFormatEscaper.escapeBytes(this);
         } else {
-            str = TextFormatEscaper.escapeBytes(substring(47)) + "...";
+            strEscapeBytes = TextFormatEscaper.escapeBytes(substring(47)) + "...";
         }
-        return TransitionKt$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(size, "<ByteString@", hexString, " size=", " contents=\""), str, "\">");
+        return TransitionKt$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(size, "<ByteString@", hexString, " size=", " contents=\""), strEscapeBytes, "\">");
     }
 
     public abstract void writeTo(CodedOutputStream codedOutputStream);

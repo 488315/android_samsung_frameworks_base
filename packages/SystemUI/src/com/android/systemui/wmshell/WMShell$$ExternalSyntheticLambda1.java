@@ -5,7 +5,6 @@ import com.android.wm.shell.pip.Pip;
 import com.android.wm.shell.splitscreen.EnterSplitGestureHandler;
 import com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WMShell$$ExternalSyntheticLambda1 implements SysUiState.SysUiStateCallback {
     public final /* synthetic */ int $r8$classId;

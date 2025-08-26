@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.autofill.Helper;
 import com.android.internal.util.Preconditions;
 import com.samsung.android.wifi.SemWifiManager;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -24,19 +25,19 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
     public static final Parcelable.Creator<UserData> CREATOR = new Parcelable.Creator<UserData>() { // from class: android.service.autofill.UserData.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public UserData createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            String[] readStringArray = parcel.readStringArray();
-            String[] readStringArray2 = parcel.readStringArray();
-            String readString2 = parcel.readString();
-            Bundle readBundle = parcel.readBundle();
+        public UserData createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
+            String string = parcel.readString();
+            String[] stringArray = parcel.readStringArray();
+            String[] stringArray2 = parcel.readStringArray();
+            String string2 = parcel.readString();
+            Bundle bundle = parcel.readBundle();
             ArrayMap arrayMap = new ArrayMap();
             parcel.readMap(arrayMap, String.class.getClassLoader());
             Map arrayMap2 = new ArrayMap();
             parcel.readMap(arrayMap2, Bundle.class.getClassLoader());
-            Builder fieldClassificationAlgorithm = new Builder(readString, readStringArray2[0], readStringArray[0]).setFieldClassificationAlgorithm(readString2, readBundle);
-            for (int i = 1; i < readStringArray.length; i++) {
-                fieldClassificationAlgorithm.add(readStringArray2[i], readStringArray[i]);
+            Builder fieldClassificationAlgorithm = new Builder(string, stringArray2[0], stringArray[0]).setFieldClassificationAlgorithm(string2, bundle);
+            for (int i = 1; i < stringArray.length; i++) {
+                fieldClassificationAlgorithm.add(stringArray2[i], stringArray[i]);
             }
             int size = arrayMap.size();
             if (size > 0) {
@@ -336,8 +337,8 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
     }
 
     private static int getInt(String str, int i) {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        ContentResolver contentResolver = currentActivityThread != null ? currentActivityThread.getApplication().getContentResolver() : null;
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        ContentResolver contentResolver = activityThreadCurrentActivityThread != null ? activityThreadCurrentActivityThread.getApplication().getContentResolver() : null;
         if (contentResolver == null) {
             Log.w(TAG, "Could not read from " + str + "; hardcoding " + i);
             return i;

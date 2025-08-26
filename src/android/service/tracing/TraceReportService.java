@@ -70,9 +70,7 @@ public class TraceReportService extends Service {
             this.mMessenger = new Messenger(new Handler(Looper.getMainLooper(), new Handler.Callback() { // from class: android.service.tracing.TraceReportService$$ExternalSyntheticLambda0
                 @Override // android.os.Handler.Callback
                 public final boolean handleMessage(Message message) {
-                    boolean onMessage;
-                    onMessage = TraceReportService.this.onMessage(message);
-                    return onMessage;
+                    return this.f$0.onMessage(message);
                 }
             }));
         }

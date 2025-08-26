@@ -6,7 +6,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class Utils$Companion$sample$7 extends AdaptedFunctionReference implements Function4 {
     public static final Utils$Companion$sample$7 INSTANCE = new Utils$Companion$sample$7();
@@ -17,8 +16,6 @@ final /* synthetic */ class Utils$Companion$sample$7 extends AdaptedFunctionRefe
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Continuation continuation) {
-        Object sample$lambda$4;
-        sample$lambda$4 = Utils.Companion.sample$lambda$4(obj, obj2, obj3, continuation);
-        return sample$lambda$4;
+        return Utils.Companion.sample$lambda$4(obj, obj2, obj3, continuation);
     }
 }

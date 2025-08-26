@@ -1,6 +1,7 @@
 package androidx.constraintlayout.motion.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,7 +11,6 @@ import androidx.constraintlayout.widget.ConstraintHelper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MotionHelper extends ConstraintHelper implements MotionLayout.TransitionListener {
     public boolean mUseOnHide;
@@ -24,20 +24,20 @@ public class MotionHelper extends ConstraintHelper implements MotionLayout.Trans
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintHelper
-    public final void init(AttributeSet attributeSet) {
+    public final void init(AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super.init(attributeSet);
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.MotionHelper);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.MotionHelper);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.MotionHelper_onShow) {
-                    this.mUseOnShow = obtainStyledAttributes.getBoolean(index, this.mUseOnShow);
+                    this.mUseOnShow = typedArrayObtainStyledAttributes.getBoolean(index, this.mUseOnShow);
                 } else if (index == R.styleable.MotionHelper_onHide) {
-                    this.mUseOnHide = obtainStyledAttributes.getBoolean(index, this.mUseOnHide);
+                    this.mUseOnHide = typedArrayObtainStyledAttributes.getBoolean(index, this.mUseOnHide);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -59,14 +59,14 @@ public class MotionHelper extends ConstraintHelper implements MotionLayout.Trans
         }
     }
 
-    public MotionHelper(Context context, AttributeSet attributeSet) {
+    public MotionHelper(Context context, AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super(context, attributeSet);
         this.mUseOnShow = false;
         this.mUseOnHide = false;
         init(attributeSet);
     }
 
-    public MotionHelper(Context context, AttributeSet attributeSet, int i) {
+    public MotionHelper(Context context, AttributeSet attributeSet, int i) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super(context, attributeSet, i);
         this.mUseOnShow = false;
         this.mUseOnHide = false;

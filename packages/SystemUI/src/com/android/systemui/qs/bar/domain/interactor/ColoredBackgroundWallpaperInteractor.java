@@ -11,7 +11,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ColoredBackgroundWallpaperInteractor {
     public static final String TAG;
@@ -21,7 +20,6 @@ public final class ColoredBackgroundWallpaperInteractor {
     public final int uiMode;
     public final WallpaperManager wallpaperManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,6 @@ public final class ColoredBackgroundWallpaperInteractor {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WallPaperStatus {
         public static final /* synthetic */ WallPaperStatus[] $VALUES;
         public static final WallPaperStatus HOME;
@@ -84,11 +81,11 @@ public final class ColoredBackgroundWallpaperInteractor {
     public final int extractColor(int i, String str) {
         int[] seedColors = this.wallpaperManager.getSeedColors(i);
         if (seedColors != null) {
-            Integer valueOf = seedColors.length == 0 ? null : Integer.valueOf(seedColors[0]);
-            if (valueOf != null) {
-                int adjustLegibility = adjustLegibility(valueOf.intValue());
-                Log.d(TAG, AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, " MatchingColor : 0x", Integer.toHexString(adjustLegibility)));
-                return adjustLegibility;
+            Integer numValueOf = seedColors.length == 0 ? null : Integer.valueOf(seedColors[0]);
+            if (numValueOf != null) {
+                int iAdjustLegibility = adjustLegibility(numValueOf.intValue());
+                Log.d(TAG, AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, " MatchingColor : 0x", Integer.toHexString(iAdjustLegibility)));
+                return iAdjustLegibility;
             }
         }
         return this.context.getResources().getColor(R.color.qs_tile_container_bg);
@@ -109,13 +106,13 @@ public final class ColoredBackgroundWallpaperInteractor {
         if (fArr[0] == 0.0f && f2 == 0.0f && fArr[2] == 0.0f) {
             z = true;
         }
-        String name = wallPaperStatus.name();
+        String strName = wallPaperStatus.name();
         String hexString = Integer.toHexString(color);
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("getBGColor isWhiteWallpaper = ", " isBlackWallpaper = ", " wallPaperStatus = ", z2, z);
-        m.append(name);
-        m.append(" 0x");
-        m.append(hexString);
-        Log.d(str2, m.toString());
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("getBGColor isWhiteWallpaper = ", " isBlackWallpaper = ", " wallPaperStatus = ", z2, z);
+        sbM.append(strName);
+        sbM.append(" 0x");
+        sbM.append(hexString);
+        Log.d(str2, sbM.toString());
         return color;
     }
 }

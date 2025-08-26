@@ -21,7 +21,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NearestTouchFrame extends FrameLayout {
     public final List mAttachedChildren;
@@ -62,10 +61,10 @@ public class NearestTouchFrame extends FrameLayout {
             return;
         }
         ((ArrayList) this.mClickableChildren).sort(this.mChildRegionComparator);
-        Stream filter = this.mClickableChildren.stream().filter(new NearestTouchFrame$$ExternalSyntheticLambda1());
+        Stream streamFilter = this.mClickableChildren.stream().filter(new NearestTouchFrame$$ExternalSyntheticLambda1());
         final List list = this.mAttachedChildren;
         Objects.requireNonNull(list);
-        filter.forEachOrdered(new Consumer() { // from class: com.android.systemui.navigationbar.views.buttons.NearestTouchFrame$$ExternalSyntheticLambda3
+        streamFilter.forEachOrdered(new Consumer() { // from class: com.android.systemui.navigationbar.views.buttons.NearestTouchFrame$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 list.add((View) obj);
@@ -127,7 +126,7 @@ public class NearestTouchFrame extends FrameLayout {
                 this.mTouchingChild = (View) this.mClickableChildren.stream().filter(new NearestTouchFrame$$ExternalSyntheticLambda1()).filter(new Predicate() { // from class: com.android.systemui.navigationbar.views.buttons.NearestTouchFrame$$ExternalSyntheticLambda2
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        NearestTouchFrame nearestTouchFrame = NearestTouchFrame.this;
+                        NearestTouchFrame nearestTouchFrame = this.f$0;
                         return ((Rect) ((HashMap) nearestTouchFrame.mTouchableRegions).get((View) obj)).contains(x, y);
                     }
                 }).findFirst().orElse(null);
@@ -155,7 +154,7 @@ public class NearestTouchFrame extends FrameLayout {
         this.mChildRegionComparator = new Comparator() { // from class: com.android.systemui.navigationbar.views.buttons.NearestTouchFrame$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                NearestTouchFrame nearestTouchFrame = NearestTouchFrame.this;
+                NearestTouchFrame nearestTouchFrame = this.f$0;
                 boolean z = nearestTouchFrame.mIsVertical;
                 ((View) obj).getLocationInWindow(nearestTouchFrame.mTmpInt);
                 int[] iArr = nearestTouchFrame.mTmpInt;
@@ -165,8 +164,8 @@ public class NearestTouchFrame extends FrameLayout {
             }
         };
         this.mIsActive = !BasicRune.NAVBAR_ENABLED && configuration.smallestScreenWidthDp < 600;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.isVertical});
-        this.mIsVertical = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.isVertical});
+        this.mIsVertical = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

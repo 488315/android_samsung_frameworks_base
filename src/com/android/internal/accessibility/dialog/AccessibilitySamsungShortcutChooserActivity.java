@@ -48,11 +48,11 @@ public class AccessibilitySamsungShortcutChooserActivity extends Activity {
     @Override // android.app.Activity
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        TypedArray obtainStyledAttributes = getTheme().obtainStyledAttributes(R.styleable.Theme);
-        if (!obtainStyledAttributes.getBoolean(38, false)) {
+        TypedArray typedArrayObtainStyledAttributes = getTheme().obtainStyledAttributes(R.styleable.Theme);
+        if (!typedArrayObtainStyledAttributes.getBoolean(38, false)) {
             requestWindowFeature(1);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -60,12 +60,12 @@ public class AccessibilitySamsungShortcutChooserActivity extends Activity {
         }
         this.mTargets.addAll(AccessibilityTargetHelper.getTargets(this, this.mShortcutType));
         this.mTargetAdapter = new ShortcutTargetAdapter(this.mTargets);
-        AlertDialog createMenuDialog = createMenuDialog();
-        this.mMenuDialog = createMenuDialog;
-        createMenuDialog.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.internal.accessibility.dialog.AccessibilitySamsungShortcutChooserActivity$$ExternalSyntheticLambda1
+        AlertDialog alertDialogCreateMenuDialog = createMenuDialog();
+        this.mMenuDialog = alertDialogCreateMenuDialog;
+        alertDialogCreateMenuDialog.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.internal.accessibility.dialog.AccessibilitySamsungShortcutChooserActivity$$ExternalSyntheticLambda1
             @Override // android.content.DialogInterface.OnShowListener
             public final void onShow(DialogInterface dialogInterface) {
-                AccessibilitySamsungShortcutChooserActivity.this.lambda$onCreate$0(dialogInterface);
+                this.f$0.lambda$onCreate$0(dialogInterface);
             }
         });
         Window window = this.mMenuDialog.getWindow();
@@ -128,9 +128,9 @@ public class AccessibilitySamsungShortcutChooserActivity extends Activity {
     public void onTargetSelected(AdapterView<?> adapterView, View view, int i, long j) {
         AccessibilityTarget accessibilityTarget = this.mTargets.get(i);
         String id = accessibilityTarget.getId();
-        String charSequence = accessibilityTarget.getLabel().toString();
+        String string = accessibilityTarget.getLabel().toString();
         view.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
-        if (AccessibilityUtils.needToShowToast(this, id, charSequence)) {
+        if (AccessibilityUtils.needToShowToast(this, id, string)) {
             this.mMenuDialog.dismiss();
             return;
         }
@@ -152,13 +152,13 @@ public class AccessibilitySamsungShortcutChooserActivity extends Activity {
         this.mMenuDialog.getButton(-1).setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.accessibility.dialog.AccessibilitySamsungShortcutChooserActivity$$ExternalSyntheticLambda2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                AccessibilitySamsungShortcutChooserActivity.this.lambda$updateDialogListeners$1(view);
+                this.f$0.lambda$updateDialogListeners$1(view);
             }
         });
         this.mMenuDialog.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.internal.accessibility.dialog.AccessibilitySamsungShortcutChooserActivity$$ExternalSyntheticLambda3
             @Override // android.widget.AdapterView.OnItemClickListener
             public final void onItemClick(AdapterView adapterView, View view, int i, long j) {
-                AccessibilitySamsungShortcutChooserActivity.this.onTargetSelected(adapterView, view, i, j);
+                this.f$0.onTargetSelected(adapterView, view, i, j);
             }
         });
     }
@@ -189,7 +189,7 @@ public class AccessibilitySamsungShortcutChooserActivity extends Activity {
         AlertDialog.Builder onDismissListener = new AlertDialog.Builder(this).setAdapter(this.mTargetAdapter, null).setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.internal.accessibility.dialog.AccessibilitySamsungShortcutChooserActivity$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                AccessibilitySamsungShortcutChooserActivity.this.lambda$createMenuDialog$2(dialogInterface);
+                this.f$0.lambda$createMenuDialog$2(dialogInterface);
             }
         });
         boolean z = AccessibilityUtils.isUserSetupCompleted(this) && !SemEmergencyManager.isEmergencyMode(this);

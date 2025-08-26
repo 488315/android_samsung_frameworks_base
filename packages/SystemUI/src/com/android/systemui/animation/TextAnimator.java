@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.text.Layout;
 import android.util.Log;
 import com.android.app.animation.Interpolators;
-import com.android.systemui.animation.TextAnimator;
 import com.android.systemui.animation.TextInterpolator;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.Iterator;
@@ -18,7 +17,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextAnimator {
     public static final String TAG;
@@ -29,7 +27,6 @@ public final class TextAnimator {
     public final TextInterpolator textInterpolator;
     public final TypefaceVariantCache typefaceCache;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Animation {
         public static final Companion Companion = new Companion(null);
         public static final Animation DISABLED = new Animation(false, 0, 0, null, null, 30, null);
@@ -39,7 +36,6 @@ public final class TextAnimator {
         public final Runnable onAnimationEnd;
         public final long startDelay;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -65,9 +61,9 @@ public final class TextAnimator {
         }
 
         public final int hashCode() {
-            int hashCode = (this.interpolator.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.animate) * 31, 31, this.startDelay), 31, this.duration)) * 31;
+            int iHashCode = (this.interpolator.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.animate) * 31, 31, this.startDelay), 31, this.duration)) * 31;
             Runnable runnable = this.onAnimationEnd;
-            return hashCode + (runnable == null ? 0 : runnable.hashCode());
+            return iHashCode + (runnable == null ? 0 : runnable.hashCode());
         }
 
         public final String toString() {
@@ -87,7 +83,6 @@ public final class TextAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,7 +92,6 @@ public final class TextAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PositionedGlyph {
         public int color;
         public int lineNo;
@@ -115,7 +109,6 @@ public final class TextAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Style {
         public final Integer color;
         public final String fVar;
@@ -127,9 +120,9 @@ public final class TextAnimator {
         }
 
         public static Style withUpdatedFVar$default(Style style, FontVariationUtils fontVariationUtils, int i) {
-            String str;
+            String string;
             if (i < 0 || fontVariationUtils.mWeight == i) {
-                str = fontVariationUtils.mCurrentFVar;
+                string = fontVariationUtils.mCurrentFVar;
             } else {
                 fontVariationUtils.mWeight = i;
                 StringBuilder sb = new StringBuilder();
@@ -139,10 +132,10 @@ public final class TextAnimator {
                     }
                     sb.append("'" + GSFAxes.WEIGHT.tag + "' " + fontVariationUtils.mWeight);
                 }
-                str = sb.toString();
-                fontVariationUtils.mCurrentFVar = str;
+                string = sb.toString();
+                fontVariationUtils.mCurrentFVar = string;
             }
-            return new Style(str, style.textSize, style.color, style.strokeWidth);
+            return new Style(string, style.textSize, style.color, style.strokeWidth);
         }
 
         public final boolean equals(Object obj) {
@@ -158,13 +151,13 @@ public final class TextAnimator {
 
         public final int hashCode() {
             String str = this.fVar;
-            int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+            int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
             Float f = this.textSize;
-            int hashCode2 = (hashCode + (f == null ? 0 : f.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (f == null ? 0 : f.hashCode())) * 31;
             Integer num = this.color;
-            int hashCode3 = (hashCode2 + (num == null ? 0 : num.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (num == null ? 0 : num.hashCode())) * 31;
             Float f2 = this.strokeWidth;
-            return hashCode3 + (f2 != null ? f2.hashCode() : 0);
+            return iHashCode3 + (f2 != null ? f2.hashCode() : 0);
         }
 
         public final String toString() {
@@ -203,7 +196,7 @@ public final class TextAnimator {
         textAnimator.setTextStyle(style, Animation.DISABLED);
     }
 
-    public final void draw(Canvas canvas) {
+    public final void draw(Canvas canvas) throws Throwable {
         Canvas canvas2;
         Throwable th;
         float lineLeft;
@@ -285,16 +278,16 @@ public final class TextAnimator {
             valueAnimator2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.animation.TextAnimator$Animation$configureAnimator$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    TextAnimator.Animation.this.onAnimationEnd.run();
+                    animation.onAnimationEnd.run();
                 }
             });
         }
         valueAnimator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.animation.TextAnimator$buildAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator3) {
-                TextAnimator.this.textInterpolator.progress = ((Float) valueAnimator3.getAnimatedValue()).floatValue();
-                TextAnimator.this.textInterpolator.linearProgress = valueAnimator3.getCurrentPlayTime() / valueAnimator3.getDuration();
-                TextAnimatorListener textAnimatorListener2 = TextAnimator.this.listener;
+                this.this$0.textInterpolator.progress = ((Float) valueAnimator3.getAnimatedValue()).floatValue();
+                this.this$0.textInterpolator.linearProgress = valueAnimator3.getCurrentPlayTime() / valueAnimator3.getDuration();
+                TextAnimatorListener textAnimatorListener2 = this.this$0.listener;
                 if (textAnimatorListener2 != null) {
                     textAnimatorListener2.onInvalidate();
                 }
@@ -303,12 +296,12 @@ public final class TextAnimator {
         valueAnimator2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.animation.TextAnimator$buildAnimator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
-                TextAnimator.this.textInterpolator.rebase();
+                this.this$0.textInterpolator.rebase();
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                TextAnimator.this.textInterpolator.rebase();
+                this.this$0.textInterpolator.rebase();
             }
         });
         valueAnimator2.start();

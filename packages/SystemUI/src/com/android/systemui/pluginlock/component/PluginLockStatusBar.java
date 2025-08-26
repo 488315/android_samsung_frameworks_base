@@ -6,7 +6,6 @@ import com.android.systemui.pluginlock.PluginLockInstanceState;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockStatusBar extends AbstractPluginLockItem {
     private static final String TAG = "PluginLockStatusBar";
@@ -17,11 +16,11 @@ public class PluginLockStatusBar extends AbstractPluginLockItem {
     }
 
     private void updateVisibility(DynamicLockData dynamicLockData) {
-        boolean isStatusBarIconVisible = dynamicLockData.isStatusBarIconVisible();
-        boolean isStatusBarNetworkVisible = dynamicLockData.isStatusBarNetworkVisible();
+        boolean zIsStatusBarIconVisible = dynamicLockData.isStatusBarIconVisible();
+        boolean zIsStatusBarNetworkVisible = dynamicLockData.isStatusBarNetworkVisible();
         PluginLockStatusBarCallback pluginLockStatusBarCallback = this.mCallback;
         if (pluginLockStatusBarCallback != null) {
-            pluginLockStatusBarCallback.onVisibilityUpdated(isStatusBarIconVisible ? 0 : 4, isStatusBarNetworkVisible ? 0 : 4);
+            pluginLockStatusBarCallback.onVisibilityUpdated(zIsStatusBarIconVisible ? 0 : 4, zIsStatusBarNetworkVisible ? 0 : 4);
         }
     }
 

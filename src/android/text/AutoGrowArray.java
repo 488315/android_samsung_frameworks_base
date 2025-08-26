@@ -50,9 +50,9 @@ public final class AutoGrowArray {
             int i2 = this.mSize;
             int i3 = i + i2;
             if (i3 >= this.mValues.length) {
-                byte[] newUnpaddedByteArray = ArrayUtils.newUnpaddedByteArray(AutoGrowArray.computeNewCapacity(i2, i3));
-                System.arraycopy(this.mValues, 0, newUnpaddedByteArray, 0, this.mSize);
-                this.mValues = newUnpaddedByteArray;
+                byte[] bArrNewUnpaddedByteArray = ArrayUtils.newUnpaddedByteArray(AutoGrowArray.computeNewCapacity(i2, i3));
+                System.arraycopy(this.mValues, 0, bArrNewUnpaddedByteArray, 0, this.mSize);
+                this.mValues = bArrNewUnpaddedByteArray;
             }
         }
 
@@ -120,9 +120,9 @@ public final class AutoGrowArray {
             int i2 = this.mSize;
             int i3 = i + i2;
             if (i3 >= this.mValues.length) {
-                int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(AutoGrowArray.computeNewCapacity(i2, i3));
-                System.arraycopy(this.mValues, 0, newUnpaddedIntArray, 0, this.mSize);
-                this.mValues = newUnpaddedIntArray;
+                int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(AutoGrowArray.computeNewCapacity(i2, i3));
+                System.arraycopy(this.mValues, 0, iArrNewUnpaddedIntArray, 0, this.mSize);
+                this.mValues = iArrNewUnpaddedIntArray;
             }
         }
 
@@ -190,9 +190,9 @@ public final class AutoGrowArray {
             int i2 = this.mSize;
             int i3 = i + i2;
             if (i3 >= this.mValues.length) {
-                float[] newUnpaddedFloatArray = ArrayUtils.newUnpaddedFloatArray(AutoGrowArray.computeNewCapacity(i2, i3));
-                System.arraycopy(this.mValues, 0, newUnpaddedFloatArray, 0, this.mSize);
-                this.mValues = newUnpaddedFloatArray;
+                float[] fArrNewUnpaddedFloatArray = ArrayUtils.newUnpaddedFloatArray(AutoGrowArray.computeNewCapacity(i2, i3));
+                System.arraycopy(this.mValues, 0, fArrNewUnpaddedFloatArray, 0, this.mSize);
+                this.mValues = fArrNewUnpaddedFloatArray;
             }
         }
 

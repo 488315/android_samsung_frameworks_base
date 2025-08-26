@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AppLabelTextView extends TextView {
     public static final int $stable = 0;
@@ -18,13 +17,13 @@ public final class AppLabelTextView extends TextView {
     }
 
     private final void adjustAlignment() {
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.systemui.util.AppLabelTextView$adjustAlignment$1
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.systemui.util.AppLabelTextView.adjustAlignment.1
             @Override // java.lang.Runnable
             public final void run() {
-                float measureText = AppLabelTextView.this.getPaint().measureText(AppLabelTextView.this.getText().toString());
+                float fMeasureText = AppLabelTextView.this.getPaint().measureText(AppLabelTextView.this.getText().toString());
                 int width = (AppLabelTextView.this.getWidth() - AppLabelTextView.this.getTotalPaddingStart()) - AppLabelTextView.this.getTotalPaddingEnd();
                 if (AppLabelTextView.this.getLineCount() == 1) {
-                    AppLabelTextView.this.setTextAlignment(measureText <= ((float) width) ? 5 : 1);
+                    AppLabelTextView.this.setTextAlignment(fMeasureText <= ((float) width) ? 5 : 1);
                 }
             }
         }, 100L);

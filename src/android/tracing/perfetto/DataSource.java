@@ -76,6 +76,6 @@ public abstract class DataSource<DataSourceInstanceType extends DataSourceInstan
     }
 
     private DataSourceInstanceType createInstance(byte[] bArr, int i) {
-        return createInstance(new ProtoInputStream(bArr), i);
+        return (DataSourceInstanceType) createInstance(new ProtoInputStream(bArr), i);
     }
 }

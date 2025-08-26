@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class GammaBrightnessKt$logDiffForTable$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ String $columnName;
@@ -53,6 +52,6 @@ final class GammaBrightnessKt$logDiffForTable$2 extends SuspendLambda implements
             tableLogBuffer.getClass();
             TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer, str, str2, num);
         }
-        return GammaBrightness.m1064boximpl(i);
+        return GammaBrightness.m1066boximpl(i);
     }
 }

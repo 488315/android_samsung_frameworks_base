@@ -12,14 +12,12 @@ import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhysicsPropertyAnimator {
     public static final Companion Companion = new Companion(null);
     public static final int TAG_ANIMATOR_TRANSLATION_Y = R.id.translation_y_animator_tag;
     public static final PhysicsProperty Y_TRANSLATION = new PhysicsProperty(R.id.translation_y_animator_tag, View.TRANSLATION_Y, false, 4, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,28 +30,28 @@ public final class PhysicsPropertyAnimator {
             Consumer animationStartListener;
             if (!z) {
                 physicsProperty.getClass();
-                PropertyData obtainPropertyData = PhysicsPropertyAnimatorKt.obtainPropertyData(view, physicsProperty);
-                if (obtainPropertyData.finalValue == f) {
+                PropertyData propertyDataObtainPropertyData = PhysicsPropertyAnimatorKt.obtainPropertyData(view, physicsProperty);
+                if (propertyDataObtainPropertyData.finalValue == f) {
                     return;
                 }
-                obtainPropertyData.finalValue = f;
-                physicsProperty.property.set(view, Float.valueOf(f + obtainPropertyData.offset));
+                propertyDataObtainPropertyData.finalValue = f;
+                physicsProperty.property.set(view, Float.valueOf(f + propertyDataObtainPropertyData.offset));
                 return;
             }
             Property property = physicsProperty.property;
-            final PropertyData obtainPropertyData2 = PhysicsPropertyAnimatorKt.obtainPropertyData(view, physicsProperty);
-            float f2 = obtainPropertyData2.finalValue;
+            final PropertyData propertyDataObtainPropertyData2 = PhysicsPropertyAnimatorKt.obtainPropertyData(view, physicsProperty);
+            float f2 = propertyDataObtainPropertyData2.finalValue;
             if (f2 == f) {
                 return;
             }
-            obtainPropertyData2.finalValue = f;
+            propertyDataObtainPropertyData2.finalValue = f;
             final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-            ?? r3 = obtainPropertyData2.animator;
+            ?? r3 = propertyDataObtainPropertyData2.animator;
             ref$ObjectRef.element = r3;
             if (r3 == 0) {
                 ?? springAnimation = new SpringAnimation(view, physicsProperty.offsetProperty);
                 ref$ObjectRef.element = springAnimation;
-                obtainPropertyData2.animator = springAnimation;
+                propertyDataObtainPropertyData2.animator = springAnimation;
                 DynamicAnimation.OnAnimationEndListener animationEndListener = animationProperties != null ? animationProperties.getAnimationEndListener(physicsProperty.property) : null;
                 if (animationEndListener != null) {
                     ((SpringAnimation) ref$ObjectRef.element).addEndListener(animationEndListener);
@@ -63,7 +61,7 @@ public final class PhysicsPropertyAnimator {
                 }
                 ((SpringAnimation) ref$ObjectRef.element).addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.notification.PhysicsPropertyAnimatorKt$startAnimation$1
                     public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z2, float f3, float f4) {
-                        PropertyData propertyData = PropertyData.this;
+                        PropertyData propertyData = propertyDataObtainPropertyData2;
                         propertyData.animator = null;
                         propertyData.doubleOvershootAvoidingListener = null;
                         propertyData.offset = 0.0f;
@@ -71,12 +69,12 @@ public final class PhysicsPropertyAnimator {
                 });
             }
             boolean z2 = physicsProperty.avoidDoubleOvershoot;
-            if (z2 && obtainPropertyData2.doubleOvershootAvoidingListener == null) {
+            if (z2 && propertyDataObtainPropertyData2.doubleOvershootAvoidingListener == null) {
                 DynamicAnimation.OnAnimationUpdateListener onAnimationUpdateListener2 = new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.statusbar.notification.PhysicsPropertyAnimatorKt$startAnimation$2
                     public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f3, float f4) {
-                        boolean z3 = Math.signum(f4) == Math.signum(PropertyData.this.startOffset);
+                        boolean z3 = Math.signum(f4) == Math.signum(propertyDataObtainPropertyData2.startOffset);
                         boolean z4 = ((SpringAnimation) ref$ObjectRef.element).getSpring().getDampingRatio() == 1.0f;
-                        boolean z5 = Math.signum(f3) == Math.signum(PropertyData.this.startOffset);
+                        boolean z5 = Math.signum(f3) == Math.signum(propertyDataObtainPropertyData2.startOffset);
                         if (!z5 && z3 && !z4) {
                             ((SpringAnimation) ref$ObjectRef.element).getSpring().setDampingRatio(1.0f);
                         } else if (z5) {
@@ -86,9 +84,9 @@ public final class PhysicsPropertyAnimator {
                         }
                     }
                 };
-                obtainPropertyData2.doubleOvershootAvoidingListener = onAnimationUpdateListener2;
+                propertyDataObtainPropertyData2.doubleOvershootAvoidingListener = onAnimationUpdateListener2;
                 ((SpringAnimation) ref$ObjectRef.element).addUpdateListener(onAnimationUpdateListener2);
-            } else if (!z2 && (onAnimationUpdateListener = obtainPropertyData2.doubleOvershootAvoidingListener) != null) {
+            } else if (!z2 && (onAnimationUpdateListener = propertyDataObtainPropertyData2.doubleOvershootAvoidingListener) != null) {
                 ((SpringAnimation) ref$ObjectRef.element).removeUpdateListener(onAnimationUpdateListener);
             }
             SpringAnimation springAnimation2 = (SpringAnimation) ref$ObjectRef.element;
@@ -97,24 +95,24 @@ public final class PhysicsPropertyAnimator {
             if (onAnimationEndListener != null) {
                 ((SpringAnimation) ref$ObjectRef.element).addEndListener(onAnimationEndListener);
             }
-            float f3 = (f2 - f) + obtainPropertyData2.offset;
-            obtainPropertyData2.offset = f3;
-            obtainPropertyData2.startOffset = f3;
+            float f3 = (f2 - f) + propertyDataObtainPropertyData2.offset;
+            propertyDataObtainPropertyData2.offset = f3;
+            propertyDataObtainPropertyData2.startOffset = f3;
             property.set(view, Float.valueOf(f + f3));
-            view.removeCallbacks(obtainPropertyData2.delayRunnable);
+            view.removeCallbacks(propertyDataObtainPropertyData2.delayRunnable);
             ((SpringAnimation) ref$ObjectRef.element).setStartValue(f3);
             Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.PhysicsPropertyAnimatorKt$startAnimation$startRunnable$1
                 @Override // java.lang.Runnable
                 public final void run() {
                     ((SpringAnimation) ref$ObjectRef.element).animateToFinalPosition(0.0f);
-                    obtainPropertyData2.delayRunnable = null;
+                    propertyDataObtainPropertyData2.delayRunnable = null;
                     ((SpringAnimation) ref$ObjectRef.element).start();
                 }
             };
             if (animationProperties == null || animationProperties.delay <= 0 || ((SpringAnimation) ref$ObjectRef.element).isRunning()) {
                 runnable.run();
             } else {
-                obtainPropertyData2.delayRunnable = runnable;
+                propertyDataObtainPropertyData2.delayRunnable = runnable;
                 view.postDelayed(runnable, animationProperties.delay);
             }
         }

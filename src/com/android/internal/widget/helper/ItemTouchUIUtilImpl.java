@@ -21,9 +21,9 @@ class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
     @Override // com.android.internal.widget.helper.ItemTouchUIUtil
     public void onDraw(Canvas canvas, RecyclerView recyclerView, View view, float f, float f2, int i, boolean z) {
         if (z && view.getTag(R.id.item_touch_helper_previous_elevation) == null) {
-            Float valueOf = Float.valueOf(view.getElevation());
+            Float fValueOf = Float.valueOf(view.getElevation());
             view.setElevation(findMaxElevation(recyclerView, view) + 1.0f);
-            view.setTag(R.id.item_touch_helper_previous_elevation, valueOf);
+            view.setTag(R.id.item_touch_helper_previous_elevation, fValueOf);
         }
         view.setTranslationX(f);
         view.setTranslationY(f2);

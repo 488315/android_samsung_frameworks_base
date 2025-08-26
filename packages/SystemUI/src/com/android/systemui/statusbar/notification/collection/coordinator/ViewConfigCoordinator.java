@@ -1,6 +1,8 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Trace;
 import android.util.Log;
@@ -36,7 +38,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class ViewConfigCoordinator implements Coordinator, ConfigurationController.ConfigurationListener {
@@ -57,28 +58,26 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     private static final boolean DEBUG = false;
     private final ViewConfigCoordinator$mKeyguardUpdateCallback$1 mKeyguardUpdateCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ViewConfigCoordinator$mKeyguardUpdateCallback$1
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-        public void onUserSwitchComplete(int i) {
-            ColorUpdateLogger colorUpdateLogger;
-            colorUpdateLogger = ViewConfigCoordinator.this.colorUpdateLogger;
+        public void onUserSwitchComplete(int i) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+            ColorUpdateLogger colorUpdateLogger = this.this$0.colorUpdateLogger;
             ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
             colorUpdateLogger.getClass();
             if (ViewConfigCoordinator.DEBUG) {
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "ViewConfigCoordinator.onUserSwitchComplete(userId=", ")", "ViewConfigCoordinator");
             }
-            ViewConfigCoordinator.this.mIsSwitchingUser = false;
-            ViewConfigCoordinator.this.applyChangesOnUserSwitched();
+            this.this$0.mIsSwitchingUser = false;
+            this.this$0.applyChangesOnUserSwitched();
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public void onUserSwitching(int i) {
-            ColorUpdateLogger colorUpdateLogger;
-            colorUpdateLogger = ViewConfigCoordinator.this.colorUpdateLogger;
+            ColorUpdateLogger colorUpdateLogger = this.this$0.colorUpdateLogger;
             ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
             colorUpdateLogger.getClass();
             if (ViewConfigCoordinator.DEBUG) {
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "ViewConfigCoordinator.onUserSwitching(userId=", ")", "ViewConfigCoordinator");
             }
-            ViewConfigCoordinator.this.mIsSwitchingUser = true;
+            this.this$0.mIsSwitchingUser = true;
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
@@ -195,15 +194,14 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     };
     private final ViewConfigCoordinator$mUserChangedListener$1 mUserChangedListener = new NotificationLockscreenUserManager.UserChangedListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ViewConfigCoordinator$mUserChangedListener$1
         @Override // com.android.systemui.statusbar.NotificationLockscreenUserManager.UserChangedListener
-        public void onUserChanged(int i) {
-            ColorUpdateLogger colorUpdateLogger;
-            colorUpdateLogger = ViewConfigCoordinator.this.colorUpdateLogger;
+        public void onUserChanged(int i) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+            ColorUpdateLogger colorUpdateLogger = this.this$0.colorUpdateLogger;
             ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
             colorUpdateLogger.getClass();
             if (ViewConfigCoordinator.DEBUG) {
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "ViewConfigCoordinator.onUserChanged(userId=", ")", "ViewConfigCoordinator");
             }
-            ViewConfigCoordinator.this.applyChangesOnUserSwitched();
+            this.this$0.applyChangesOnUserSwitched();
         }
 
         @Override // com.android.systemui.statusbar.NotificationLockscreenUserManager.UserChangedListener
@@ -216,14 +214,13 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     };
     private final SemWindowManager.FoldStateListener foldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ViewConfigCoordinator$foldStateListener$1
         public void onFoldStateChanged(boolean z) {
-            ViewConfigCoordinator.this.isFoldStateChanged = true;
+            this.this$0.isFoldStateChanged = true;
         }
 
         public void onTableModeChanged(boolean z) {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -244,7 +241,7 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public final void applyChangesOnUserSwitched() {
+    public final void applyChangesOnUserSwitched() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ColorUpdateLogger colorUpdateLogger = this.colorUpdateLogger;
         ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
         colorUpdateLogger.getClass();
@@ -264,7 +261,7 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
         }
     }
 
-    private final void updateNotificationsOnDensityOrFontScaleChanged() {
+    private final void updateNotificationsOnDensityOrFontScaleChanged() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         Collection allNotifs;
         ColorUpdateLogger colorUpdateLogger = this.colorUpdateLogger;
         ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
@@ -297,8 +294,8 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
         if (DEBUG) {
             Log.d(TAG, "ViewConfigCoordinator.updateNotificationsOnUiModeChanged()");
         }
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("updateNotifOnUiModeChanged");
         }
         try {
@@ -316,11 +313,11 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
                 }
                 Unit unit = Unit.INSTANCE;
             }
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -351,7 +348,7 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public void onDensityOrFontScaleChanged() {
+    public void onDensityOrFontScaleChanged() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ColorUpdateLogger colorUpdateLogger = this.colorUpdateLogger;
         ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
         colorUpdateLogger.getClass();
@@ -368,7 +365,7 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public void onMaxBoundsChanged() {
+    public void onMaxBoundsChanged() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         if (this.isFoldStateChanged) {
             OngoingActivityDataHelper.INSTANCE.getClass();
             OngoingActivityDataHelper.reinflateOngoingActivity();
@@ -390,7 +387,7 @@ public final class ViewConfigCoordinator implements Coordinator, ConfigurationCo
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public void onThemeChanged() {
+    public void onThemeChanged() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ColorUpdateLogger colorUpdateLogger = this.colorUpdateLogger;
         ColorUpdateLogger.Companion companion = ColorUpdateLogger.Companion;
         colorUpdateLogger.getClass();

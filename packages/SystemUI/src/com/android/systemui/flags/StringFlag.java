@@ -9,7 +9,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StringFlag implements ParcelableFlag {
     public static final Parcelable.Creator<StringFlag> CREATOR;
@@ -21,7 +20,6 @@ public final class StringFlag implements ParcelableFlag {
     public final boolean overridden;
     public final boolean teamfood;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,12 +79,12 @@ public final class StringFlag implements ParcelableFlag {
         String str3 = this.f41default;
         boolean z = this.teamfood;
         boolean z2 = this.overridden;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("StringFlag(name=", str, ", namespace=", str2, ", default=");
-        m.append(str3);
-        m.append(", teamfood=");
-        m.append(z);
-        m.append(", overridden=");
-        return MoveResult$$ExternalSyntheticOutline0.m(m, z2, ")");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("StringFlag(name=", str, ", namespace=", str2, ", default=");
+        sbM.append(str3);
+        sbM.append(", teamfood=");
+        sbM.append(z);
+        sbM.append(", overridden=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sbM, z2, ")");
     }
 
     @Override // android.os.Parcelable
@@ -114,32 +112,13 @@ public final class StringFlag implements ParcelableFlag {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private StringFlag(android.os.Parcel r5) {
-        /*
-            r4 = this;
-            int r0 = r5.readInt()
-            java.lang.String r1 = r5.readString()
-            java.lang.String r2 = ""
-            if (r1 != 0) goto Ld
-            r1 = r2
-        Ld:
-            java.lang.String r3 = r5.readString()
-            if (r3 != 0) goto L14
-            r3 = r2
-        L14:
-            java.lang.String r5 = r5.readString()
-            if (r5 != 0) goto L1b
-            goto L1c
-        L1b:
-            r2 = r5
-        L1c:
-            r4.<init>(r0, r1, r3, r2)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.flags.StringFlag.<init>(android.os.Parcel):void");
+    private StringFlag(Parcel parcel) {
+        int i = parcel.readInt();
+        String string = parcel.readString();
+        string = string == null ? "" : string;
+        String string2 = parcel.readString();
+        string2 = string2 == null ? "" : string2;
+        String string3 = parcel.readString();
+        this(i, string, string2, string3 != null ? string3 : "");
     }
 }

@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PaginatedGridLayout$TileGrid$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ PagerState $pagerState;
@@ -43,17 +42,17 @@ final class PaginatedGridLayout$TileGrid$2$1 extends SuspendLambda implements Fu
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new PaginatedGridLayout$$ExternalSyntheticLambda0(this.$pagerState, 3));
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new PaginatedGridLayout$$ExternalSyntheticLambda0(this.$pagerState, 3));
             final PaginatedGridViewModel paginatedGridViewModel = this.$viewModel;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.panels.ui.compose.PaginatedGridLayout$TileGrid$2$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    PaginatedGridViewModel.this.inFirstPage$receiver.inFirstPage = ((Boolean) obj2).booleanValue();
+                    paginatedGridViewModel.inFirstPage$receiver.inFirstPage = ((Boolean) obj2).booleanValue();
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

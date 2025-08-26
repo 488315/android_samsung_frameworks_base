@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.notification.stack.ui.viewbinder.SharedNot
 import com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel;
 import com.android.systemui.util.kotlin.DisposableHandles;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class NotificationStackScrollLayoutSection extends KeyguardSection {
     public final Context context;
@@ -33,10 +32,10 @@ public abstract class NotificationStackScrollLayoutSection extends KeyguardSecti
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void addViews(ConstraintLayout constraintLayout) {
-        View findViewById = this.notificationPanelView.findViewById(R.id.notification_stack_scroller);
-        if (findViewById != null) {
-            ((ViewGroup) findViewById.getParent()).removeView(findViewById);
-            this.sharedNotificationContainer.addView(findViewById);
+        View viewFindViewById = this.notificationPanelView.findViewById(R.id.notification_stack_scroller);
+        if (viewFindViewById != null) {
+            ((ViewGroup) viewFindViewById.getParent()).removeView(viewFindViewById);
+            this.sharedNotificationContainer.addView(viewFindViewById);
         }
         View view = new View(this.context, null);
         view.setId(this.placeHolderId);

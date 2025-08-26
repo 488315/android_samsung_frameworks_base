@@ -29,6 +29,7 @@ import com.samsung.android.sume.core.types.ColorSpace;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.ImgpType;
+import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.core.types.PadType;
 import com.samsung.android.sume.core.types.SplitType;
 import com.samsung.android.sume.core.types.Status;
@@ -60,7 +61,7 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
     private MediaFormat persistentOutputFormat;
     private ColorFormat preferredColorFormat;
 
-    private native int nativeCreateGainmap(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> hashMap);
+    private native int nativeCreateGainmap(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> map);
 
     private native int nativeCrop(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2);
 
@@ -70,19 +71,19 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
 
     private native int nativeCvtGamutV2(String str, Object obj, String str2, Object obj2);
 
-    private native int nativeDecode(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> hashMap);
+    private native int nativeDecode(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> map);
 
-    private native int nativeEncode(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> hashMap);
+    private native int nativeEncode(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> map);
 
-    private native int nativeEncodeHDR(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> hashMap);
+    private native int nativeEncodeHDR(String str, ByteBuffer byteBuffer, String str2, HashMap<String, Object> map);
 
     private native int nativeFlipV2(String str, String str2, Object obj, String str3, Object obj2);
 
     private native int nativeInit(String str, String str2);
 
-    private native int nativeMeasureQuality(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2, HashMap<String, Object> hashMap);
+    private native int nativeMeasureQuality(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2, HashMap<String, Object> map);
 
-    private native int nativeMerge(String str, String str2, ByteBuffer byteBuffer, String str3, HashMap<String, Object> hashMap);
+    private native int nativeMerge(String str, String str2, ByteBuffer byteBuffer, String str3, HashMap<String, Object> map);
 
     private native int nativeRelease();
 
@@ -90,11 +91,11 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
 
     private native int nativeRotate(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2);
 
-    private native int nativeRun(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2, HashMap<String, Object> hashMap);
+    private native int nativeRun(String str, ByteBuffer byteBuffer, String str2, ByteBuffer byteBuffer2, HashMap<String, Object> map);
 
     private static native void nativeSetup();
 
-    private native int nativeSplit(String str, String str2, ByteBuffer byteBuffer, String str3, HashMap<String, Object> hashMap);
+    private native int nativeSplit(String str, String str2, ByteBuffer byteBuffer, String str3, HashMap<String, Object> map);
 
     public MutableMediaBuffer cvtHdr2Sdr(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
         return mutableMediaBuffer;
@@ -109,7 +110,7 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         Log.d(TAG, "NativeUniImgpPlugin: version= [core=" + Def.getCoreVersion() + NavigationBarInflaterView.SIZE_MOD_END);
     }
 
-    public NativeUniImgpPlugin(List<ImgpType> list, MediaFormat mediaFormat, MediaFormat mediaFormat2, ColorFormat colorFormat) {
+    public NativeUniImgpPlugin(List<ImgpType> list, MediaFormat mediaFormat, MediaFormat mediaFormat2, ColorFormat colorFormat) throws JSONException {
         String str = TAG;
         Log.d(str, "NativeUniImgpPlugin: version= [core=" + Def.getCoreVersion() + NavigationBarInflaterView.SIZE_MOD_END);
         StringBuilder sb = new StringBuilder("opList=");
@@ -167,96 +168,96 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         imgpPlugin.setImgProcessor(ImgpType.RESIZE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda8
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.resize(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.resize(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CVT_COLOR, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda9
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.cvtColor(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.cvtColor(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CVT_DATA, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda10
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.cvtData(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.cvtData(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CVT_GAMUT, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda11
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.cvtGamut(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.cvtGamut(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CVT_HDR2SDR, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda12
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.cvtHdr2Sdr(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.cvtHdr2Sdr(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.ROTATE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda13
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.rotate(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.rotate(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CROP, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda14
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.crop(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.crop(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.SPLIT, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda15
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.split(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.split(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.MERGE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda16
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.merge(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.merge(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.QUALITY_MEASURE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda2
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.measureQuality(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.measureQuality(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.DECODE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda3
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.decode(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.decode(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.ENCODE, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda4
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.encode(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.encode(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.ENCODE_HDR, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda5
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.encodeHDR(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.encodeHDR(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.FLIP, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda6
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.flip(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.flip(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CREATE_GAINMAP, new Operator() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda7
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return NativeUniImgpPlugin.this.createGainmap(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.createGainmap(mediaBuffer, mutableMediaBuffer);
             }
         });
     }
 
-    private JSONObject bufferToJson(MediaBuffer mediaBuffer) {
+    private JSONObject bufferToJson(MediaBuffer mediaBuffer) throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             jSONObject.put("cols", mediaBuffer.getCols());
@@ -310,7 +311,7 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         return jSONObject;
     }
 
-    private JSONObject createJsonImgpOption(MediaBuffer mediaBuffer, MediaBuffer mediaBuffer2) {
+    private JSONObject createJsonImgpOption(MediaBuffer mediaBuffer, MediaBuffer mediaBuffer2) throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             if (mediaBuffer2.getFormat().getSplitType() != SplitType.NONE) {
@@ -350,15 +351,15 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
     public MutableMediaBuffer resize(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
             if (mutableMediaBuffer.getFormat().contains("scale")) {
-                float floatValue = ((Float) mutableMediaBuffer.getFormat().get("scale")).floatValue();
-                copy.setCols((int) (mediaBuffer.getCols() * floatValue));
-                copy.setRows((int) (mediaBuffer.getRows() * floatValue));
+                float fFloatValue = ((Float) mutableMediaBuffer.getFormat().get("scale")).floatValue();
+                mutableMediaFormatCopy.setCols((int) (mediaBuffer.getCols() * fFloatValue));
+                mutableMediaFormatCopy.setRows((int) (mediaBuffer.getRows() * fFloatValue));
             } else {
-                copy.setShape(mutableMediaBuffer.getFormat().getShape());
+                mutableMediaFormatCopy.setShape(mutableMediaBuffer.getFormat().getShape());
             }
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         Def.check(Status.from(nativeResize(bufferToJson(mediaBuffer).toString(), directByteBuffer, bufferToJson(mutableMediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class)))) == Status.OK);
         return mutableMediaBuffer;
@@ -371,9 +372,9 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         }
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setColorFormat(mutableMediaBuffer.getFormat().getColorFormat());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setColorFormat(mutableMediaBuffer.getFormat().getColorFormat());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         Def.check(Status.from(nativeCvtColor(bufferToJson(mediaBuffer).toString(), directByteBuffer, bufferToJson(mutableMediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class)))) == Status.OK);
         return mutableMediaBuffer;
@@ -386,44 +387,44 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         }
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setDataType(mutableMediaBuffer.getFormat().getDataType());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setDataType(mutableMediaBuffer.getFormat().getDataType());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         Def.check(Status.from(nativeCvtData(bufferToJson(mediaBuffer).toString(), directByteBuffer, bufferToJson(mutableMediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class)))) == Status.OK);
         return mutableMediaBuffer;
     }
 
     public MutableMediaBuffer cvtGamut(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
-        MediaBuffer of;
-        MediaBuffer of2;
+        MediaBuffer mediaBufferOf;
+        MediaBuffer mediaBufferOf2;
         String str = TAG;
         Log.d(str, "ibuf=" + mediaBuffer);
         Log.d(str, "obuf=" + mutableMediaBuffer);
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setColorSpace(mutableMediaBuffer.getFormat().getColorSpace());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setColorSpace(mutableMediaBuffer.getFormat().getColorSpace());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         ColorSpace colorSpace = mediaBuffer.getFormat().getColorSpace();
         ColorSpace colorSpace2 = mutableMediaBuffer.getFormat().getColorSpace();
         if (colorSpace == ColorSpace.DISPLAY_P3) {
-            of = mediaBuffer;
+            mediaBufferOf = mediaBuffer;
         } else {
             Log.d(str, "not supported colorSpace. force" + colorSpace + " to display-p3");
             MutableMediaFormat mutableFormat = mediaBuffer.getFormat().toMutableFormat();
             mutableFormat.setColorSpace(ColorSpace.DISPLAY_P3);
-            of = MediaBuffer.of(mutableFormat, mediaBuffer.getData());
+            mediaBufferOf = MediaBuffer.of(mutableFormat, mediaBuffer.getData());
         }
         if (colorSpace2 == ColorSpace.BT709_FR) {
-            of2 = mutableMediaBuffer;
+            mediaBufferOf2 = mutableMediaBuffer;
         } else {
             Log.d(str, "not supported colorSpace. force" + colorSpace2 + " to bt709-fr");
             MutableMediaFormat mutableFormat2 = mutableMediaBuffer.getFormat().toMutableFormat();
             mutableFormat2.setColorSpace(ColorSpace.BT709_FR);
-            of2 = MediaBuffer.of(mutableFormat2, mutableMediaBuffer.getData());
+            mediaBufferOf2 = MediaBuffer.of(mutableFormat2, mutableMediaBuffer.getData());
         }
-        Def.check(Status.from(nativeCvtGamutV2(bufferToJson(mediaBuffer).toString(), getNativeSupportBuffer(of), bufferToJson(mutableMediaBuffer).toString(), getNativeSupportBuffer(of2))) == Status.OK);
+        Def.check(Status.from(nativeCvtGamutV2(bufferToJson(mediaBuffer).toString(), getNativeSupportBuffer(mediaBufferOf), bufferToJson(mutableMediaBuffer).toString(), getNativeSupportBuffer(mediaBufferOf2))) == Status.OK);
         return mutableMediaBuffer;
     }
 
@@ -434,51 +435,51 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         }
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setRotation(mutableMediaBuffer.getFormat().getRotation());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setRotation(mutableMediaBuffer.getFormat().getRotation());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         Def.check(Status.from(nativeRotate(bufferToJson(mediaBuffer).toString(), directByteBuffer, bufferToJson(mutableMediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class)))) == Status.OK);
         return mutableMediaBuffer;
     }
 
-    public MutableMediaBuffer crop(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer crop(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
         if (mutableMediaBuffer.getFormat().getCropRect() == null) {
             mutableMediaBuffer.put(mediaBuffer);
             return mutableMediaBuffer;
         }
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setRotation(mutableMediaBuffer.getFormat().getRotation());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setRotation(mutableMediaBuffer.getFormat().getRotation());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         ByteBuffer directByteBuffer2 = toDirectByteBuffer((ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class));
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
         try {
             if (mutableMediaBuffer.getFormat().getCropRect() != null) {
-                bufferToJson2.put("crop-rect", mutableMediaBuffer.getFormat().getCropRect().flattenToString());
+                jSONObjectBufferToJson2.put("crop-rect", mutableMediaBuffer.getFormat().getCropRect().flattenToString());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Def.check(Status.from(nativeCrop(bufferToJson.toString(), directByteBuffer, bufferToJson2.toString(), directByteBuffer2)) == Status.OK);
+        Def.check(Status.from(nativeCrop(jSONObjectBufferToJson.toString(), directByteBuffer, jSONObjectBufferToJson2.toString(), directByteBuffer2)) == Status.OK);
         return mutableMediaBuffer;
     }
 
     public MutableMediaBuffer split(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
-        HashMap<String, Object> hashMap = new HashMap<>();
-        Def.check(Status.from(nativeSplit(createJsonImgpOption(mediaBuffer, mutableMediaBuffer).toString(), bufferToJson(mediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)), bufferToJson(mutableMediaBuffer).toString(), hashMap)) == Status.OK);
-        MediaBuffer makeBufferFromMap = makeBufferFromMap(hashMap);
-        if (makeBufferFromMap != null) {
-            mutableMediaBuffer.put(makeBufferFromMap);
+        HashMap<String, Object> map = new HashMap<>();
+        Def.check(Status.from(nativeSplit(createJsonImgpOption(mediaBuffer, mutableMediaBuffer).toString(), bufferToJson(mediaBuffer).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)), bufferToJson(mutableMediaBuffer).toString(), map)) == Status.OK);
+        MediaBuffer mediaBufferMakeBufferFromMap = makeBufferFromMap(map);
+        if (mediaBufferMakeBufferFromMap != null) {
+            mutableMediaBuffer.put(mediaBufferMakeBufferFromMap);
         }
         return mutableMediaBuffer;
     }
 
-    public MutableMediaBuffer merge(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
-        HashMap<String, Object> hashMap = new HashMap<>();
+    public MutableMediaBuffer merge(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
+        HashMap<String, Object> map = new HashMap<>();
         ByteBuffer directByteBuffer = mediaBuffer.getData() != null ? toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)) : null;
         if (mutableMediaBuffer.getFormat() == null || mutableMediaBuffer.getFormat().getShape() == null) {
             MutableMediaFormat mutableFormat = mutableMediaBuffer.getFormat().toMutableFormat();
@@ -488,21 +489,21 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         String str = TAG;
         Log.d(str, mediaBuffer.toString());
         Log.d(str, mutableMediaBuffer.toString());
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
-        List<MediaBuffer> asList = mediaBuffer.asList();
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
+        List<MediaBuffer> listAsList = mediaBuffer.asList();
         try {
-            bufferToJson.put("block-num", asList.size());
+            jSONObjectBufferToJson.put("block-num", listAsList.size());
             int i = 0;
-            for (MediaBuffer mediaBuffer2 : asList) {
-                hashMap.put("block" + i + "-format", bufferToJson(mediaBuffer2).toString());
-                hashMap.put("block" + i + "-data", toDirectByteBuffer((ByteBuffer) mediaBuffer2.getTypedData(ByteBuffer.class)));
+            for (MediaBuffer mediaBuffer2 : listAsList) {
+                map.put("block" + i + "-format", bufferToJson(mediaBuffer2).toString());
+                map.put("block" + i + "-data", toDirectByteBuffer((ByteBuffer) mediaBuffer2.getTypedData(ByteBuffer.class)));
                 i++;
             }
-            Def.check(Status.from(nativeMerge(createJsonImgpOption(mediaBuffer, mutableMediaBuffer).toString(), bufferToJson.toString(), directByteBuffer, bufferToJson2.toString(), hashMap)) == Status.OK);
-            MediaBuffer makeBufferFromMap = makeBufferFromMap(hashMap);
-            if (makeBufferFromMap != null) {
-                mutableMediaBuffer.put(makeBufferFromMap);
+            Def.check(Status.from(nativeMerge(createJsonImgpOption(mediaBuffer, mutableMediaBuffer).toString(), jSONObjectBufferToJson.toString(), directByteBuffer, jSONObjectBufferToJson2.toString(), map)) == Status.OK);
+            MediaBuffer mediaBufferMakeBufferFromMap = makeBufferFromMap(map);
+            if (mediaBufferMakeBufferFromMap != null) {
+                mutableMediaBuffer.put(mediaBufferMakeBufferFromMap);
             }
             return mutableMediaBuffer;
         } catch (JSONException e) {
@@ -517,70 +518,70 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         } else if (((Integer) mutableMediaBuffer.getFormat().get("quality-metric")).intValue() != 0) {
             throw new UnsupportedOperationException("currently only PSNR is supported!");
         }
-        HashMap<String, Object> hashMap = new HashMap<>();
-        Def.check(Status.from(nativeMeasureQuality(bufferToJson(mediaBuffer.asList().get(0)).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.asList().get(0).getTypedData(ByteBuffer.class)), bufferToJson(mediaBuffer.asList().get(1)).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.asList().get(1).getTypedData(ByteBuffer.class)), hashMap)) == Status.OK);
-        mutableMediaBuffer.put(MediaBuffer.scalaOf(DataType.F32C1, Shape.of(1, 1), (Float) hashMap.get("quality-value")));
+        HashMap<String, Object> map = new HashMap<>();
+        Def.check(Status.from(nativeMeasureQuality(bufferToJson(mediaBuffer.asList().get(0)).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.asList().get(0).getTypedData(ByteBuffer.class)), bufferToJson(mediaBuffer.asList().get(1)).toString(), toDirectByteBuffer((ByteBuffer) mediaBuffer.asList().get(1).getTypedData(ByteBuffer.class)), map)) == Status.OK);
+        mutableMediaBuffer.put(MediaBuffer.scalaOf(DataType.F32C1, Shape.of(1, 1), (Float) map.get("quality-value")));
         return mutableMediaBuffer;
     }
 
-    public MutableMediaBuffer decode(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
-        HashMap<String, Object> hashMap = new HashMap<>();
+    public MutableMediaBuffer decode(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
+        HashMap<String, Object> map = new HashMap<>();
         String str = TAG;
         Log.d(str, mediaBuffer.toString());
         Log.d(str, mutableMediaBuffer.toString());
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
         if (mediaBuffer.getDataClass() == FileDescriptor.class) {
-            hashMap.put("infile-descriptor", mediaBuffer.getTypedData(FileDescriptor.class));
+            map.put("infile-descriptor", mediaBuffer.getTypedData(FileDescriptor.class));
         } else if (mediaBuffer.getFormat().contains(Message.KEY_FILE_DESCRIPTOR)) {
-            hashMap.put("infile-descriptor", mediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
+            map.put("infile-descriptor", mediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
         }
-        Def.check(Status.from(nativeDecode(bufferToJson.toString(), null, bufferToJson2.toString(), hashMap)) == Status.OK);
-        MediaBuffer makeBufferFromMap = makeBufferFromMap(hashMap);
-        if (makeBufferFromMap != null) {
-            mutableMediaBuffer.put(makeBufferFromMap);
+        Def.check(Status.from(nativeDecode(jSONObjectBufferToJson.toString(), null, jSONObjectBufferToJson2.toString(), map)) == Status.OK);
+        MediaBuffer mediaBufferMakeBufferFromMap = makeBufferFromMap(map);
+        if (mediaBufferMakeBufferFromMap != null) {
+            mutableMediaBuffer.put(mediaBufferMakeBufferFromMap);
         }
         return mutableMediaBuffer;
     }
 
-    public MutableMediaBuffer encode(MediaBuffer mediaBuffer, final MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
-        final HashMap<String, Object> hashMap = new HashMap<>();
+    public MutableMediaBuffer encode(MediaBuffer mediaBuffer, final MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
+        final HashMap<String, Object> map = new HashMap<>();
         mediaBuffer.asList().forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NativeUniImgpPlugin.this.m9599xdfdf96db(mutableMediaBuffer, hashMap, (MediaBuffer) obj);
+                this.f$0.m9612xdfdf96db(mutableMediaBuffer, map, (MediaBuffer) obj);
             }
         });
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
         try {
             if (mutableMediaBuffer.getFormat().contains(Message.KEY_OUT_FILE)) {
-                bufferToJson2.put(Message.KEY_OUT_FILE, (String) mutableMediaBuffer.getFormat().get(Message.KEY_OUT_FILE));
+                jSONObjectBufferToJson2.put(Message.KEY_OUT_FILE, (String) mutableMediaBuffer.getFormat().get(Message.KEY_OUT_FILE));
             }
             if (mutableMediaBuffer.getFormat().contains(Message.KEY_FILE_DESCRIPTOR)) {
-                hashMap.put("outfile-descriptor", (FileDescriptor) mutableMediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
+                map.put("outfile-descriptor", (FileDescriptor) mutableMediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
             }
             if (mutableMediaBuffer.getFormat().getCodecType() != CodecType.NONE) {
-                bufferToJson2.put("codec-type", mutableMediaBuffer.getFormat().getCodecType().stringfy());
+                jSONObjectBufferToJson2.put("codec-type", mutableMediaBuffer.getFormat().getCodecType().stringfy());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Def.check(Status.from(nativeEncode(bufferToJson.toString(), directByteBuffer, bufferToJson2.toString(), hashMap)) == Status.OK);
+        Def.check(Status.from(nativeEncode(jSONObjectBufferToJson.toString(), directByteBuffer, jSONObjectBufferToJson2.toString(), map)) == Status.OK);
         return mutableMediaBuffer;
     }
 
     /* renamed from: lambda$encode$1$com-samsung-android-sume-core-plugin-NativeUniImgpPlugin, reason: not valid java name */
-    /* synthetic */ void m9599xdfdf96db(MutableMediaBuffer mutableMediaBuffer, HashMap hashMap, MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9612xdfdf96db(MutableMediaBuffer mutableMediaBuffer, HashMap map, MediaBuffer mediaBuffer) {
         if (mediaBuffer.getFormat().contains("exif")) {
             if (mutableMediaBuffer.getFormat().getColorFormat().isPlanar()) {
                 mediaBuffer = adjustExif(mediaBuffer);
             }
-            hashMap.put("exif", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("exif", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         } else {
             if (mediaBuffer.getFormat().contains("icc")) {
-                hashMap.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+                map.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
                 return;
             }
             Log.w(TAG, "Unused buffer is given for encoding" + mediaBuffer);
@@ -593,156 +594,156 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         Log.d(str, "obuf=" + mutableMediaBuffer);
         Object nativeSupportBuffer = getNativeSupportBuffer(mediaBuffer);
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setFlipType(mutableMediaBuffer.getFormat().getFlipType());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setFlipType(mutableMediaBuffer.getFormat().getFlipType());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         Def.check(Status.from(nativeFlipV2(createJsonImgpOption(mediaBuffer, mutableMediaBuffer).toString(), bufferToJson(mediaBuffer).toString(), nativeSupportBuffer, bufferToJson(mutableMediaBuffer).toString(), getNativeSupportBuffer(mutableMediaBuffer))) == Status.OK);
         return mutableMediaBuffer;
     }
 
-    public MutableMediaBuffer encodeHDR(MediaBuffer mediaBuffer, final MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer encodeHDR(MediaBuffer mediaBuffer, final MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
         if (!isHDRSupported()) {
             throw new UnsupportedOperationException("HDR is not supported!");
         }
-        final HashMap<String, Object> hashMap = new HashMap<>();
+        final HashMap<String, Object> map = new HashMap<>();
         Log.d(TAG, mutableMediaBuffer.toString());
         mediaBuffer.asList().forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda17
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NativeUniImgpPlugin.this.m9600x6bd652a(mutableMediaBuffer, hashMap, (MediaBuffer) obj);
+                this.f$0.m9613x6bd652a(mutableMediaBuffer, map, (MediaBuffer) obj);
             }
         });
         ByteBuffer directByteBuffer = toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class));
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
         try {
             if (mutableMediaBuffer.getFormat().contains(Message.KEY_OUT_FILE)) {
-                bufferToJson2.put(Message.KEY_OUT_FILE, (String) mutableMediaBuffer.getFormat().get(Message.KEY_OUT_FILE));
+                jSONObjectBufferToJson2.put(Message.KEY_OUT_FILE, (String) mutableMediaBuffer.getFormat().get(Message.KEY_OUT_FILE));
             }
             if (mutableMediaBuffer.getFormat().contains(Message.KEY_FILE_DESCRIPTOR)) {
-                hashMap.put("outfile-descriptor", (FileDescriptor) mutableMediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
+                map.put("outfile-descriptor", (FileDescriptor) mutableMediaBuffer.getFormat().get(Message.KEY_FILE_DESCRIPTOR));
             }
             if (mutableMediaBuffer.getFormat().getCodecType() != CodecType.NONE) {
                 if (mutableMediaBuffer.getFormat().getCodecType() == CodecType.HEIF && !isHeifSupported(mediaBuffer, mutableMediaBuffer.getFormat().getShape())) {
                     throw new UnsupportedOperationException("encode size must bigger than [512x512]");
                 }
-                bufferToJson2.put("codec-type", mutableMediaBuffer.getFormat().getCodecType().stringfy());
+                jSONObjectBufferToJson2.put("codec-type", mutableMediaBuffer.getFormat().getCodecType().stringfy());
             }
             if (mutableMediaBuffer.containsExtra("exposure-value")) {
-                bufferToJson2.put("exposure-value", ((Integer) mutableMediaBuffer.getExtra("exposure-value")).intValue());
+                jSONObjectBufferToJson2.put("exposure-value", ((Integer) mutableMediaBuffer.getExtra("exposure-value")).intValue());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Def.check(Status.from(nativeEncodeHDR(bufferToJson.toString(), directByteBuffer, bufferToJson2.toString(), hashMap)) == Status.OK);
+        Def.check(Status.from(nativeEncodeHDR(jSONObjectBufferToJson.toString(), directByteBuffer, jSONObjectBufferToJson2.toString(), map)) == Status.OK);
         return mutableMediaBuffer;
     }
 
     /* renamed from: lambda$encodeHDR$2$com-samsung-android-sume-core-plugin-NativeUniImgpPlugin, reason: not valid java name */
-    /* synthetic */ void m9600x6bd652a(MutableMediaBuffer mutableMediaBuffer, HashMap hashMap, MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9613x6bd652a(MutableMediaBuffer mutableMediaBuffer, HashMap map, MediaBuffer mediaBuffer) {
         if (mediaBuffer.getFormat().contains("exif")) {
             if (mutableMediaBuffer.getFormat().getColorFormat().isPlanar()) {
                 mediaBuffer = adjustExif(mediaBuffer);
             }
-            hashMap.put("exif", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("exif", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         } else if (mediaBuffer.getFormat().contains("icc")) {
-            hashMap.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         } else if (mediaBuffer.getFormat().contains("gain-map")) {
-            hashMap.put("gain-map-format", bufferToJson(mediaBuffer).toString());
-            hashMap.put("gain-map", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("gain-map-format", bufferToJson(mediaBuffer).toString());
+            map.put("gain-map", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         }
     }
 
-    public MutableMediaBuffer createGainmap(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer createGainmap(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
         if (!isHDRSupported()) {
             throw new UnsupportedOperationException("HDR is not supported!");
         }
         String str = TAG;
         Log.d(str, "create Gain-map");
-        HashMap<String, Object> hashMap = new HashMap<>();
-        JSONObject bufferToJson = bufferToJson(mediaBuffer);
-        JSONObject bufferToJson2 = bufferToJson(mutableMediaBuffer);
+        HashMap<String, Object> map = new HashMap<>();
+        JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+        JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
         Bitmap bitmap = (Bitmap) mediaBuffer.getTypedData(Bitmap.class);
-        hashMap.put("jbitmap", bitmap);
-        Def.check(Status.from(nativeCreateGainmap(bufferToJson.toString(), null, bufferToJson2.toString(), hashMap)) == Status.OK);
-        MediaBuffer makeBufferFromMap = makeBufferFromMap(hashMap);
-        Log.d(str, makeBufferFromMap.toString());
-        Gainmap gainmap = new Gainmap((Bitmap) makeBufferFromMap.getTypedData(Bitmap.class));
-        float floatValue = ((Float) makeBufferFromMap.getExtra("max-content-boost")).floatValue();
-        float floatValue2 = ((Float) makeBufferFromMap.getExtra("min-content-boost")).floatValue();
-        float floatValue3 = ((Float) makeBufferFromMap.getExtra(MediaQualityContract.PictureQuality.PARAMETER_GAMMA)).floatValue();
-        float floatValue4 = ((Float) makeBufferFromMap.getExtra("offset-hdr")).floatValue();
-        float floatValue5 = ((Float) makeBufferFromMap.getExtra("offset-sdr")).floatValue();
-        float floatValue6 = ((Float) makeBufferFromMap.getExtra("max-hdr-capacity")).floatValue();
-        float floatValue7 = ((Float) makeBufferFromMap.getExtra("min-hdr-capacity")).floatValue();
-        float pow = (float) Math.pow(2.0d, floatValue);
-        float pow2 = (float) Math.pow(2.0d, floatValue2);
-        gainmap.setRatioMax(pow, pow, pow);
-        gainmap.setRatioMin(pow2, pow2, pow2);
-        gainmap.setGamma(floatValue3, floatValue3, floatValue3);
-        gainmap.setEpsilonHdr(floatValue4, floatValue4, floatValue4);
-        gainmap.setEpsilonSdr(floatValue5, floatValue5, floatValue5);
-        gainmap.setDisplayRatioForFullHdr((float) Math.pow(2.0d, floatValue6));
-        gainmap.setMinDisplayRatioForHdrTransition((float) Math.pow(2.0d, floatValue7));
+        map.put("jbitmap", bitmap);
+        Def.check(Status.from(nativeCreateGainmap(jSONObjectBufferToJson.toString(), null, jSONObjectBufferToJson2.toString(), map)) == Status.OK);
+        MediaBuffer mediaBufferMakeBufferFromMap = makeBufferFromMap(map);
+        Log.d(str, mediaBufferMakeBufferFromMap.toString());
+        Gainmap gainmap = new Gainmap((Bitmap) mediaBufferMakeBufferFromMap.getTypedData(Bitmap.class));
+        float fFloatValue = ((Float) mediaBufferMakeBufferFromMap.getExtra("max-content-boost")).floatValue();
+        float fFloatValue2 = ((Float) mediaBufferMakeBufferFromMap.getExtra("min-content-boost")).floatValue();
+        float fFloatValue3 = ((Float) mediaBufferMakeBufferFromMap.getExtra(MediaQualityContract.PictureQuality.PARAMETER_GAMMA)).floatValue();
+        float fFloatValue4 = ((Float) mediaBufferMakeBufferFromMap.getExtra("offset-hdr")).floatValue();
+        float fFloatValue5 = ((Float) mediaBufferMakeBufferFromMap.getExtra("offset-sdr")).floatValue();
+        float fFloatValue6 = ((Float) mediaBufferMakeBufferFromMap.getExtra("max-hdr-capacity")).floatValue();
+        float fFloatValue7 = ((Float) mediaBufferMakeBufferFromMap.getExtra("min-hdr-capacity")).floatValue();
+        float fPow = (float) Math.pow(2.0d, fFloatValue);
+        float fPow2 = (float) Math.pow(2.0d, fFloatValue2);
+        gainmap.setRatioMax(fPow, fPow, fPow);
+        gainmap.setRatioMin(fPow2, fPow2, fPow2);
+        gainmap.setGamma(fFloatValue3, fFloatValue3, fFloatValue3);
+        gainmap.setEpsilonHdr(fFloatValue4, fFloatValue4, fFloatValue4);
+        gainmap.setEpsilonSdr(fFloatValue5, fFloatValue5, fFloatValue5);
+        gainmap.setDisplayRatioForFullHdr((float) Math.pow(2.0d, fFloatValue6));
+        gainmap.setMinDisplayRatioForHdrTransition((float) Math.pow(2.0d, fFloatValue7));
         bitmap.setGainmap(gainmap);
         mutableMediaBuffer.put(MediaBuffer.of(mediaBuffer.getFormat(), bitmap));
         return mutableMediaBuffer;
     }
 
-    public MediaBuffer readCompressedImage(MediaFormat mediaFormat, String str) {
+    public MediaBuffer readCompressedImage(MediaFormat mediaFormat, String str) throws IOException {
         String str2 = TAG;
         Log.d(str2, "read compressed image: " + str);
         String lowerCase = str.substring(str.lastIndexOf(46) + 1).toLowerCase(Locale.ROOT);
         if (!lowerCase.equals("jpg") && !lowerCase.equals("heic")) {
             throw new UnsupportedOperationException("not supported yet");
         }
-        MutableMediaBuffer mutableMediaBuffer = null;
+        MutableMediaBuffer mutableMediaBufferMutableOf = null;
         try {
             FileInputStream fileInputStream = new FileInputStream(str);
             try {
-                MediaBuffer compressedImageOf = MediaBuffer.compressedImageOf(fileInputStream.getFD());
+                MediaBuffer mediaBufferCompressedImageOf = MediaBuffer.compressedImageOf(fileInputStream.getFD());
                 MutableMediaFormat mutableFormat = mediaFormat.toMutableFormat();
                 if (mediaFormat.getColorFormat() == ColorFormat.NONE) {
                     mutableFormat.setColorFormat(ColorFormat.RGBA);
                 }
                 Log.d(str2, "decode format: " + mutableFormat);
-                mutableMediaBuffer = MediaBuffer.mutableOf(mutableFormat);
-                decode(compressedImageOf, mutableMediaBuffer);
+                mutableMediaBufferMutableOf = MediaBuffer.mutableOf(mutableFormat);
+                decode(mediaBufferCompressedImageOf, mutableMediaBufferMutableOf);
                 fileInputStream.close();
-                return mutableMediaBuffer;
+                return mutableMediaBufferMutableOf;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return mutableMediaBuffer;
+            return mutableMediaBufferMutableOf;
         }
     }
 
-    public boolean writeCompressedImage(MediaBuffer mediaBuffer, String str) {
+    public boolean writeCompressedImage(MediaBuffer mediaBuffer, String str) throws IOException {
         Log.d(TAG, "write compressed image: " + str);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(str);
             try {
                 FileDescriptor fd = fileOutputStream.getFD();
-                MutableMediaFormat mutableCompressedImageOf = MediaFormat.mutableCompressedImageOf(ColorFormat.NV12);
-                mutableCompressedImageOf.set(Message.KEY_FILE_DESCRIPTOR, fd);
+                MutableMediaFormat mutableMediaFormatMutableCompressedImageOf = MediaFormat.mutableCompressedImageOf(ColorFormat.NV12);
+                mutableMediaFormatMutableCompressedImageOf.set(Message.KEY_FILE_DESCRIPTOR, fd);
                 String lowerCase = str.substring(str.lastIndexOf(46) + 1).toLowerCase(Locale.ROOT);
                 if (lowerCase.equals("jpg")) {
-                    mutableCompressedImageOf.setCodecType(CodecType.JPEG_QURAM);
+                    mutableMediaFormatMutableCompressedImageOf.setCodecType(CodecType.JPEG_QURAM);
                 } else if (lowerCase.equals("heic")) {
-                    mutableCompressedImageOf.setCodecType(CodecType.HEIF);
+                    mutableMediaFormatMutableCompressedImageOf.setCodecType(CodecType.HEIF);
                 } else {
                     throw new UnsupportedOperationException("not supported yet");
                 }
                 if (mediaBuffer.getFormat().contains("encode-shape")) {
-                    mutableCompressedImageOf.setShape((Shape) mediaBuffer.getFormat().get("encode-shape"));
+                    mutableMediaFormatMutableCompressedImageOf.setShape((Shape) mediaBuffer.getFormat().get("encode-shape"));
                 }
-                MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(mutableCompressedImageOf);
+                MutableMediaBuffer mutableMediaBufferMutableOf = MediaBuffer.mutableOf(mutableMediaFormatMutableCompressedImageOf);
                 if (mediaBuffer.getFormat().contains("encode-hdr")) {
-                    encodeHDR(mediaBuffer, mutableOf);
+                    encodeHDR(mediaBuffer, mutableMediaBufferMutableOf);
                 } else {
-                    encode(mediaBuffer, mutableOf);
+                    encode(mediaBuffer, mutableMediaBufferMutableOf);
                 }
                 fileOutputStream.close();
             } finally {
@@ -754,38 +755,120 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x021b  */
     @Override // com.samsung.android.sume.core.functional.Operator
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public com.samsung.android.sume.core.buffer.MutableMediaBuffer run(com.samsung.android.sume.core.buffer.MediaBuffer r15, com.samsung.android.sume.core.buffer.MutableMediaBuffer r16) throws java.lang.UnsupportedOperationException {
-        /*
-            Method dump skipped, instructions count: 573
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin.run(com.samsung.android.sume.core.buffer.MediaBuffer, com.samsung.android.sume.core.buffer.MutableMediaBuffer):com.samsung.android.sume.core.buffer.MutableMediaBuffer");
+    public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+        MediaBuffer mediaBufferMakeBufferFromMap;
+        try {
+            this.lock.lock();
+            if (this.persistentOutputFormat.contains("encode-hdr") && !isHDRSupported()) {
+                throw new UnsupportedOperationException("HDR is not supported!");
+            }
+            if (this.nativeContext == 0) {
+                throw new IllegalStateException();
+            }
+            boolean z = mediaBuffer.getFormat().getMediaType().flag() == 1;
+            boolean z2 = mutableMediaBuffer.getFormat().getMediaType().flag() == 1;
+            ByteBuffer byteBuffer = (ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class);
+            if (mutableMediaBuffer.isEmpty() || z2) {
+                MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+                if (z) {
+                    if (z2) {
+                        if (this.persistentInputFormat.getColorFormat() != ColorFormat.NONE) {
+                            mutableMediaFormatCopy.setColorFormat(this.persistentInputFormat.getColorFormat());
+                            mutableMediaFormatCopy.setDataType(DataType.of(DataType.U8, this.persistentInputFormat.getColorFormat().getChannels()));
+                        }
+                    } else {
+                        mutableMediaFormatCopy.setDataType(DataType.of(DataType.U8, this.persistentOutputFormat.getColorFormat().getChannels()));
+                    }
+                }
+                if (z2) {
+                    mutableMediaFormatCopy.setMediaType(MediaType.COMPRESSED_IMAGE);
+                } else {
+                    mutableMediaFormatCopy.setMediaType(MediaType.IMAGE);
+                }
+                if (this.persistentOutputFormat.contains("scale")) {
+                    Float f = (Float) this.persistentOutputFormat.get("scale");
+                    float fFloatValue = f.floatValue();
+                    mutableMediaFormatCopy.set("scale", f);
+                    mutableMediaFormatCopy.setCols((int) (mediaBuffer.getCols() * fFloatValue));
+                    mutableMediaFormatCopy.setRows((int) (mediaBuffer.getRows() * fFloatValue));
+                }
+                if (this.persistentOutputFormat.getShape() != null) {
+                    mutableMediaFormatCopy.setShape(this.persistentOutputFormat.getShape());
+                }
+                if (this.persistentOutputFormat.getCropRect() != null) {
+                    mutableMediaFormatCopy.setCropRect(this.persistentOutputFormat.getCropRect());
+                }
+                if (this.persistentOutputFormat.getRotation() != 0) {
+                    mutableMediaFormatCopy.setRotation(this.persistentOutputFormat.getRotation());
+                }
+                if (this.persistentOutputFormat.getFlipType() != FlipType.NONE) {
+                    mutableMediaFormatCopy.setFlipType(this.persistentOutputFormat.getFlipType());
+                }
+                if (this.persistentOutputFormat.getColorFormat() != ColorFormat.NONE) {
+                    mutableMediaFormatCopy.setColorFormat(this.persistentOutputFormat.getColorFormat());
+                }
+                if (this.persistentOutputFormat.getColorSpace() != ColorSpace.NONE) {
+                    mutableMediaFormatCopy.setColorSpace(this.persistentOutputFormat.getColorSpace());
+                }
+                if (this.persistentOutputFormat.getCodecType() != CodecType.NONE) {
+                    if (this.persistentOutputFormat.getCodecType() == CodecType.HEIF && !isHeifSupported(mediaBuffer, this.persistentOutputFormat.getShape())) {
+                        throw new UnsupportedOperationException("encode size must bigger than [512x512]");
+                    }
+                    mutableMediaFormatCopy.setCodecType(this.persistentOutputFormat.getCodecType());
+                }
+                if (z2) {
+                    mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy, mutableMediaBuffer.getData()));
+                } else if (mutableMediaFormatCopy.size() == 0 || z) {
+                    mutableMediaBuffer.setFormat(mutableMediaFormatCopy);
+                } else {
+                    mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
+                }
+            }
+            ByteBuffer byteBuffer2 = (z2 || mutableMediaBuffer.isEmpty()) ? null : (ByteBuffer) mutableMediaBuffer.getTypedData(ByteBuffer.class);
+            final HashMap<String, Object> map = new HashMap<>();
+            JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
+            JSONObject jSONObjectBufferToJson2 = bufferToJson(mutableMediaBuffer);
+            if (z && mediaBuffer.getData().getClass() == FileDescriptor.class) {
+                map.put("infile-descriptor", mediaBuffer.getTypedData(FileDescriptor.class));
+            }
+            if (z2 && mutableMediaBuffer.getData().getClass() == FileDescriptor.class) {
+                map.put("outfile-descriptor", mutableMediaBuffer.getTypedData(FileDescriptor.class));
+            }
+            mediaBuffer.asList().forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda18
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) throws JSONException {
+                    this.f$0.m9615xff46b99e(map, (MediaBuffer) obj);
+                }
+            });
+            Def.check(Status.from(nativeRun(jSONObjectBufferToJson.toString(), byteBuffer, jSONObjectBufferToJson2.toString(), byteBuffer2, map)) == Status.OK);
+            if (byteBuffer2 == null && (mediaBufferMakeBufferFromMap = makeBufferFromMap(map)) != null) {
+                mutableMediaBuffer.put(mediaBufferMakeBufferFromMap);
+            }
+            return mutableMediaBuffer;
+        } finally {
+            this.lock.unlock();
+        }
     }
 
     /* renamed from: lambda$run$3$com-samsung-android-sume-core-plugin-NativeUniImgpPlugin, reason: not valid java name */
-    /* synthetic */ void m9602xff46b99e(HashMap hashMap, MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9615xff46b99e(HashMap map, MediaBuffer mediaBuffer) throws JSONException {
         if (mediaBuffer.getFormat().contains("exif")) {
-            hashMap.put("exif", toDirectByteBuffer((ByteBuffer) ((this.persistentOutputFormat.getColorFormat().isPlanar() || this.preferredColorFormat.isPlanar()) ? adjustExif(mediaBuffer) : mediaBuffer).getTypedData(ByteBuffer.class)));
+            map.put("exif", toDirectByteBuffer((ByteBuffer) ((this.persistentOutputFormat.getColorFormat().isPlanar() || this.preferredColorFormat.isPlanar()) ? adjustExif(mediaBuffer) : mediaBuffer).getTypedData(ByteBuffer.class)));
         } else if (mediaBuffer.getFormat().contains("icc")) {
-            hashMap.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("icc", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         } else if (mediaBuffer.getFormat().contains("gain-map")) {
-            JSONObject bufferToJson = bufferToJson(mediaBuffer);
+            JSONObject jSONObjectBufferToJson = bufferToJson(mediaBuffer);
             try {
-                bufferToJson.put("gain-map", true);
+                jSONObjectBufferToJson.put("gain-map", true);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            hashMap.put("gain-map-format", bufferToJson.toString());
-            hashMap.put("gain-map", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
+            map.put("gain-map-format", jSONObjectBufferToJson.toString());
+            map.put("gain-map", toDirectByteBuffer((ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class)));
         }
         if (mediaBuffer.containsExtra("thumbnail")) {
-            hashMap.put("thumbnail", mediaBuffer.getTypedData(ByteBuffer.class));
+            map.put("thumbnail", mediaBuffer.getTypedData(ByteBuffer.class));
         }
     }
 
@@ -794,9 +877,9 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         if (byteBuffer.isDirect()) {
             return byteBuffer;
         }
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
-        allocateDirect.put(byteBuffer);
-        return allocateDirect;
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
+        byteBufferAllocateDirect.put(byteBuffer);
+        return byteBufferAllocateDirect;
     }
 
     private MediaBuffer adjustExif(MediaBuffer mediaBuffer) {
@@ -821,7 +904,7 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         }
     }
 
-    private void extractExtraFromJson(MediaBuffer mediaBuffer, JSONObject jSONObject) {
+    private void extractExtraFromJson(MediaBuffer mediaBuffer, JSONObject jSONObject) throws NumberFormatException {
         String str;
         String str2;
         String str3;
@@ -839,20 +922,20 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
                 str3 = MediaQualityContract.PictureQuality.PARAMETER_GAMMA;
                 c = 0;
             } else {
-                String[] split = jSONObject.getString("roi-on-block").replaceAll("[^0-9|,]", "").split(",");
+                String[] strArrSplit = jSONObject.getString("roi-on-block").replaceAll("[^0-9|,]", "").split(",");
                 c = 0;
-                int parseInt = Integer.parseInt(split[0]);
+                int i = Integer.parseInt(strArrSplit[0]);
                 str = "offset-sdr";
-                int parseInt2 = Integer.parseInt(split[1]);
+                int i2 = Integer.parseInt(strArrSplit[1]);
                 str2 = "offset-hdr";
-                int parseInt3 = Integer.parseInt(split[2]);
-                String str4 = split[3];
+                int i3 = Integer.parseInt(strArrSplit[2]);
+                String str4 = strArrSplit[3];
                 str3 = MediaQualityContract.PictureQuality.PARAMETER_GAMMA;
-                mediaBuffer.setExtra("roi-on-block", new Rect(parseInt, parseInt2, parseInt3, Integer.parseInt(str4)));
+                mediaBuffer.setExtra("roi-on-block", new Rect(i, i2, i3, Integer.parseInt(str4)));
             }
             if (jSONObject.has("roi-on-image")) {
-                String[] split2 = jSONObject.getString("roi-on-image").replaceAll("[^0-9|,]", "").split(",");
-                mediaBuffer.setExtra("roi-on-image", new Rect(Integer.parseInt(split2[c]), Integer.parseInt(split2[1]), Integer.parseInt(split2[2]), Integer.parseInt(split2[3])));
+                String[] strArrSplit2 = jSONObject.getString("roi-on-image").replaceAll("[^0-9|,]", "").split(",");
+                mediaBuffer.setExtra("roi-on-image", new Rect(Integer.parseInt(strArrSplit2[c]), Integer.parseInt(strArrSplit2[1]), Integer.parseInt(strArrSplit2[2]), Integer.parseInt(strArrSplit2[3])));
             }
             if (jSONObject.has("max-content-boost")) {
                 mediaBuffer.setExtra("max-content-boost", Float.valueOf((float) jSONObject.getDouble("max-content-boost")));
@@ -883,81 +966,81 @@ public class NativeUniImgpPlugin implements Plugin<ImgpPlugin>, Operator {
         }
     }
 
-    private MediaBuffer makeImageBuffer(String str, Object obj) {
-        MediaBuffer mediaBuffer;
-        MutableMediaFormat mutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
+    private MediaBuffer makeImageBuffer(String str, Object obj) throws NumberFormatException {
+        MediaBuffer mediaBufferOf;
+        MutableMediaFormat mutableMediaFormatMutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
         try {
             JSONObject jSONObject = new JSONObject(str);
             if (jSONObject.has("cols")) {
-                mutableImageOf.setCols(jSONObject.getInt("cols"));
+                mutableMediaFormatMutableImageOf.setCols(jSONObject.getInt("cols"));
             }
             if (jSONObject.has("rows")) {
-                mutableImageOf.setRows(jSONObject.getInt("rows"));
+                mutableMediaFormatMutableImageOf.setRows(jSONObject.getInt("rows"));
             }
             if (jSONObject.has("data-type")) {
-                mutableImageOf.setDataType(DataType.valueOf(jSONObject.getString("data-type")));
+                mutableMediaFormatMutableImageOf.setDataType(DataType.valueOf(jSONObject.getString("data-type")));
             }
             if (jSONObject.has(android.media.MediaFormat.KEY_COLOR_FORMAT)) {
-                mutableImageOf.setColorFormat(ColorFormat.valueOf(jSONObject.getString(android.media.MediaFormat.KEY_COLOR_FORMAT)));
+                mutableMediaFormatMutableImageOf.setColorFormat(ColorFormat.valueOf(jSONObject.getString(android.media.MediaFormat.KEY_COLOR_FORMAT)));
             }
             if (jSONObject.has("color-space")) {
-                mutableImageOf.setColorSpace(ColorSpace.valueOf(jSONObject.getString("color-space")));
+                mutableMediaFormatMutableImageOf.setColorSpace(ColorSpace.valueOf(jSONObject.getString("color-space")));
             }
             if (obj instanceof ByteBuffer) {
-                mediaBuffer = MediaBuffer.of(mutableImageOf, (ByteBuffer) obj);
+                mediaBufferOf = MediaBuffer.of(mutableMediaFormatMutableImageOf, (ByteBuffer) obj);
             } else if (obj instanceof Bitmap) {
-                mediaBuffer = MediaBuffer.of(mutableImageOf, (Bitmap) obj);
+                mediaBufferOf = MediaBuffer.of(mutableMediaFormatMutableImageOf, (Bitmap) obj);
             } else {
                 Log.d(TAG, "do nothing to obuf");
-                mediaBuffer = null;
+                mediaBufferOf = null;
             }
-            if (mediaBuffer != null) {
-                extractExtraFromJson(mediaBuffer, jSONObject);
+            if (mediaBufferOf != null) {
+                extractExtraFromJson(mediaBufferOf, jSONObject);
             }
-            return mediaBuffer;
+            return mediaBufferOf;
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private MediaBuffer makeBufferFromMap(final HashMap<String, Object> hashMap) {
+    private MediaBuffer makeBufferFromMap(final HashMap<String, Object> map) {
         ByteBuffer byteBuffer;
         ByteBuffer byteBuffer2;
         ArrayList arrayList = new ArrayList();
         List arrayList2 = new ArrayList();
-        MediaBuffer makeImageBuffer = hashMap.containsKey(Message.KEY_OUT_BUFFER) ? makeImageBuffer((String) hashMap.get(Message.KEY_OUT_BUFFER), hashMap.get("output-data")) : null;
-        Integer num = (Integer) hashMap.get("block-num");
+        MediaBuffer mediaBufferMakeImageBuffer = map.containsKey(Message.KEY_OUT_BUFFER) ? makeImageBuffer((String) map.get(Message.KEY_OUT_BUFFER), map.get("output-data")) : null;
+        Integer num = (Integer) map.get("block-num");
         if (num != null) {
             Log.d(TAG, "block num: " + num);
             arrayList2 = (List) IntStream.range(0, num.intValue()).mapToObj(new IntFunction() { // from class: com.samsung.android.sume.core.plugin.NativeUniImgpPlugin$$ExternalSyntheticLambda19
                 @Override // java.util.function.IntFunction
                 public final Object apply(int i) {
-                    return NativeUniImgpPlugin.this.m9601x5755f344(hashMap, i);
+                    return this.f$0.m9614x5755f344(map, i);
                 }
             }).collect(Collectors.toList());
         }
-        if (hashMap.containsKey("exif") && (byteBuffer2 = (ByteBuffer) hashMap.get("exif")) != null && byteBuffer2.isDirect()) {
+        if (map.containsKey("exif") && (byteBuffer2 = (ByteBuffer) map.get("exif")) != null && byteBuffer2.isDirect()) {
             arrayList.add(MediaBuffer.metadataBufferOf(1, byteBuffer2));
         }
-        if (hashMap.containsKey("icc") && (byteBuffer = (ByteBuffer) hashMap.get("icc")) != null && byteBuffer.isDirect()) {
+        if (map.containsKey("icc") && (byteBuffer = (ByteBuffer) map.get("icc")) != null && byteBuffer.isDirect()) {
             arrayList.add(MediaBuffer.metadataBufferOf(2, byteBuffer));
         }
         if (arrayList2.size() > 1) {
             if (arrayList.size() > 0) {
                 arrayList2.addAll(arrayList);
             }
-            return MediaBuffer.groupOf(makeImageBuffer, (List<MediaBuffer>) arrayList2);
+            return MediaBuffer.groupOf(mediaBufferMakeImageBuffer, (List<MediaBuffer>) arrayList2);
         }
-        if (makeImageBuffer == null || arrayList.size() <= 0) {
-            return makeImageBuffer;
+        if (mediaBufferMakeImageBuffer == null || arrayList.size() <= 0) {
+            return mediaBufferMakeImageBuffer;
         }
-        arrayList.add(0, makeImageBuffer);
-        return MediaBuffer.groupOf(makeImageBuffer, arrayList);
+        arrayList.add(0, mediaBufferMakeImageBuffer);
+        return MediaBuffer.groupOf(mediaBufferMakeImageBuffer, arrayList);
     }
 
     /* renamed from: lambda$makeBufferFromMap$4$com-samsung-android-sume-core-plugin-NativeUniImgpPlugin, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9601x5755f344(HashMap hashMap, int i) {
-        return makeImageBuffer((String) hashMap.get("block" + i + "-buffer"), hashMap.get("block" + i + "-data"));
+    /* synthetic */ MediaBuffer m9614x5755f344(HashMap map, int i) {
+        return makeImageBuffer((String) map.get("block" + i + "-buffer"), map.get("block" + i + "-data"));
     }
 
     private boolean isHeifSupported(MediaBuffer mediaBuffer, Shape shape) {

@@ -25,7 +25,6 @@ import com.android.systemui.controls.util.ControlsUtil;
 import com.android.systemui.controls.util.SALogger;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoFavoriteFragment extends Fragment {
     public BadgeObserver badgeObserver;
@@ -35,7 +34,6 @@ public final class NoFavoriteFragment extends Fragment {
     public View mView;
     public final SALogger saLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,18 +84,18 @@ public final class NoFavoriteFragment extends Fragment {
     @Override // androidx.fragment.app.Fragment
     public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         Log.d("NoFavoriteFragment", "onCreateView");
-        View inflate = layoutInflater.inflate(R.layout.fragment_controls_no_favorite, viewGroup, false);
-        this.mView = inflate;
-        if (inflate == null) {
-            inflate = null;
+        View viewInflate = layoutInflater.inflate(R.layout.fragment_controls_no_favorite, viewGroup, false);
+        this.mView = viewInflate;
+        if (viewInflate == null) {
+            viewInflate = null;
         }
-        final Button button = (Button) inflate.requireViewById(R.id.manage_control_btn);
+        final Button button = (Button) viewInflate.requireViewById(R.id.manage_control_btn);
         button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.fragment.NoFavoriteFragment$onCreateView$1$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 Log.d("NoFavoriteFragment", "startProviderSelectorActivity");
-                NoFavoriteFragment.this.saLogger.sendEvent(SALogger.Event.AddDevices.INSTANCE);
-                ((ControlsActivityStarterImpl) NoFavoriteFragment.this.controlsActivityStarter).startActivity(button.getContext(), SecControlsProviderSelectorActivity.class);
+                this.this$0.saLogger.sendEvent(SALogger.Event.AddDevices.INSTANCE);
+                ((ControlsActivityStarterImpl) this.this$0.controlsActivityStarter).startActivity(button.getContext(), SecControlsProviderSelectorActivity.class);
             }
         });
         ControlsUtil.Companion.getClass();

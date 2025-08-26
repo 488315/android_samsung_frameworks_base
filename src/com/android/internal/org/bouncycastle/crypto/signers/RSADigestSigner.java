@@ -99,8 +99,8 @@ public class RSADigestSigner implements Signer {
         byte[] bArr = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr, 0);
         try {
-            byte[] derEncode = derEncode(bArr);
-            return this.rsaEngine.processBlock(derEncode, 0, derEncode.length);
+            byte[] bArrDerEncode = derEncode(bArr);
+            return this.rsaEngine.processBlock(bArrDerEncode, 0, bArrDerEncode.length);
         } catch (IOException e) {
             throw new CryptoException("unable to encode signature: " + e.getMessage(), e);
         }
@@ -108,8 +108,8 @@ public class RSADigestSigner implements Signer {
 
     @Override // com.android.internal.org.bouncycastle.crypto.Signer
     public boolean verifySignature(byte[] bArr) {
-        byte[] processBlock;
-        byte[] derEncode;
+        byte[] bArrProcessBlock;
+        byte[] bArrDerEncode;
         if (this.forSigning) {
             throw new IllegalStateException("RSADigestSigner not initialised for verification");
         }
@@ -117,28 +117,28 @@ public class RSADigestSigner implements Signer {
         byte[] bArr2 = new byte[digestSize];
         this.digest.doFinal(bArr2, 0);
         try {
-            processBlock = this.rsaEngine.processBlock(bArr, 0, bArr.length);
-            derEncode = derEncode(bArr2);
+            bArrProcessBlock = this.rsaEngine.processBlock(bArr, 0, bArr.length);
+            bArrDerEncode = derEncode(bArr2);
         } catch (Exception unused) {
         }
-        if (processBlock.length == derEncode.length) {
-            return Arrays.constantTimeAreEqual(processBlock, derEncode);
+        if (bArrProcessBlock.length == bArrDerEncode.length) {
+            return Arrays.constantTimeAreEqual(bArrProcessBlock, bArrDerEncode);
         }
-        if (processBlock.length == derEncode.length - 2) {
-            int length = (processBlock.length - digestSize) - 2;
-            int length2 = (derEncode.length - digestSize) - 2;
-            derEncode[1] = (byte) (derEncode[1] - 2);
-            derEncode[3] = (byte) (derEncode[3] - 2);
+        if (bArrProcessBlock.length == bArrDerEncode.length - 2) {
+            int length = (bArrProcessBlock.length - digestSize) - 2;
+            int length2 = (bArrDerEncode.length - digestSize) - 2;
+            bArrDerEncode[1] = (byte) (bArrDerEncode[1] - 2);
+            bArrDerEncode[3] = (byte) (bArrDerEncode[3] - 2);
             int i = 0;
             for (int i2 = 0; i2 < digestSize; i2++) {
-                i |= processBlock[length + i2] ^ derEncode[length2 + i2];
+                i |= bArrProcessBlock[length + i2] ^ bArrDerEncode[length2 + i2];
             }
             for (int i3 = 0; i3 < length; i3++) {
-                i |= processBlock[i3] ^ derEncode[i3];
+                i |= bArrProcessBlock[i3] ^ bArrDerEncode[i3];
             }
             return i == 0;
         }
-        Arrays.constantTimeAreEqual(derEncode, derEncode);
+        Arrays.constantTimeAreEqual(bArrDerEncode, bArrDerEncode);
         return false;
     }
 

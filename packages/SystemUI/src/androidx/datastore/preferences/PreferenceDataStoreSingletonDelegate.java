@@ -11,7 +11,6 @@ import kotlin.properties.ReadOnlyProperty;
 import kotlin.reflect.KProperty;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PreferenceDataStoreSingletonDelegate implements ReadOnlyProperty {
     public volatile PreferenceDataStore INSTANCE;
@@ -44,7 +43,7 @@ public final class PreferenceDataStoreSingletonDelegate implements ReadOnlyPrope
                     ReplaceFileCorruptionHandler replaceFileCorruptionHandler = this.corruptionHandler;
                     Function1 function1 = this.produceMigrations;
                     applicationContext.getClass();
-                    List list = (List) function1.mo779invoke(applicationContext);
+                    List list = (List) function1.mo781invoke(applicationContext);
                     CoroutineScope coroutineScope = this.scope;
                     Function0 function0 = new Function0() { // from class: androidx.datastore.preferences.PreferenceDataStoreSingletonDelegate$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0

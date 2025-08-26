@@ -26,9 +26,9 @@ public class CocktailBarFeatures {
         sQueriedTypeCocktail = true;
         PackageManager packageManager = context != null ? context.getPackageManager() : null;
         try {
-            int verifyCocktailFeature = verifyCocktailFeature(packageManager, 1, "com.sec.feature.cocktailbar");
-            sCocktailFeature = verifyCocktailFeature;
-            if (verifyCocktailFeature == 0) {
+            int iVerifyCocktailFeature = verifyCocktailFeature(packageManager, 1, "com.sec.feature.cocktailbar");
+            sCocktailFeature = iVerifyCocktailFeature;
+            if (iVerifyCocktailFeature == 0) {
                 sCocktailFeature = verifyCocktailFeature(packageManager, 2, PackageManager.SEM_FEATURE_COCKTAIL_PANEL);
             }
         } catch (Exception unused) {

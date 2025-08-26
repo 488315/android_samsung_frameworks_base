@@ -233,11 +233,11 @@ public class RadioAccessFamily implements Parcelable {
     public static int rafTypeFromString(String str) {
         int i = 0;
         for (String str2 : str.toUpperCase(Locale.ROOT).split("\\|")) {
-            int singleRafTypeFromString = singleRafTypeFromString(str2.trim());
-            if (singleRafTypeFromString == 0) {
-                return singleRafTypeFromString;
+            int iSingleRafTypeFromString = singleRafTypeFromString(str2.trim());
+            if (iSingleRafTypeFromString == 0) {
+                return iSingleRafTypeFromString;
             }
-            i |= singleRafTypeFromString;
+            i |= iSingleRafTypeFromString;
         }
         return i;
     }

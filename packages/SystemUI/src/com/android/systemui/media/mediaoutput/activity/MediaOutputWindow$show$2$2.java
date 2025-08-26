@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaOutputWindow$show$2$2 extends SuspendLambda implements Function2 {
     int label;
@@ -45,13 +44,13 @@ final class MediaOutputWindow$show$2$2 extends SuspendLambda implements Function
             MediaOutputWindow.Companion companion = MediaOutputWindow.Companion;
             Context context = this.this$0.context;
             companion.getClass();
-            Flow buffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaOutputWindow$Companion$dismissCallback$1(context, null)), -1, 2);
+            Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaOutputWindow$Companion$dismissCallback$1(context, null)), -1, 2);
             final MediaOutputWindow mediaOutputWindow = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.activity.MediaOutputWindow$show$2$2.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Number) obj2).longValue();
-                    PopupWindow popupWindow = MediaOutputWindow.this.popupWindow;
+                    PopupWindow popupWindow = mediaOutputWindow.popupWindow;
                     if (popupWindow == null) {
                         popupWindow = null;
                     }
@@ -60,7 +59,7 @@ final class MediaOutputWindow$show$2$2 extends SuspendLambda implements Function
                 }
             };
             this.label = 1;
-            if (buffer$default.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowBuffer$default.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -19,22 +19,22 @@ public final class GateKeeperResponse implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public GateKeeperResponse createFromParcel(Parcel parcel) {
             byte[] bArr;
-            int readInt = parcel.readInt();
-            if (readInt == 1) {
+            int i = parcel.readInt();
+            if (i == 1) {
                 return GateKeeperResponse.createRetryResponse(parcel.readInt());
             }
-            if (readInt == 0) {
+            if (i == 0) {
                 boolean z = parcel.readInt() == 1;
-                int readInt2 = parcel.readInt();
-                if (readInt2 > 0) {
-                    bArr = new byte[readInt2];
+                int i2 = parcel.readInt();
+                if (i2 > 0) {
+                    bArr = new byte[i2];
                     parcel.readByteArray(bArr);
                 } else {
                     bArr = null;
                 }
                 return GateKeeperResponse.createOkResponse(bArr, z);
             }
-            return GateKeeperResponse.createGenericResponse(readInt);
+            return GateKeeperResponse.createGenericResponse(i);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

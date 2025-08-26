@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MovingActivity extends Activity {
     public static final Parcelable.Creator<MovingActivity> CREATOR = new Creator();
@@ -27,19 +26,18 @@ public final class MovingActivity extends Activity {
     private final Place startLocation;
     private final long startTimestamp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList arrayList = new ArrayList(readInt);
-            int i = 0;
-            while (i != readInt) {
-                i = Engram$Creator$$ExternalSyntheticOutline0.m(MovingActivity.class, parcel, arrayList, i, 1);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList arrayList = new ArrayList(i);
+            int iM = 0;
+            while (iM != i) {
+                iM = Engram$Creator$$ExternalSyntheticOutline0.m(MovingActivity.class, parcel, arrayList, iM, 1);
             }
             Parcelable.Creator<Place> creator = Place.CREATOR;
-            return new MovingActivity(readString, arrayList, creator.createFromParcel(parcel), parcel.readInt() == 0 ? null : creator.createFromParcel(parcel), parcel.readFloat(), parcel.readLong(), parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null);
+            return new MovingActivity(string, arrayList, creator.createFromParcel(parcel), parcel.readInt() == 0 ? null : creator.createFromParcel(parcel), parcel.readFloat(), parcel.readLong(), parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -168,11 +166,11 @@ public final class MovingActivity extends Activity {
     }
 
     public int hashCode() {
-        int hashCode = (this.startLocation.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contents, this.id.hashCode() * 31, 31)) * 31;
+        int iHashCode = (this.startLocation.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contents, this.id.hashCode() * 31, 31)) * 31;
         Place place = this.endLocation;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.movingSpeed, (hashCode + (place == null ? 0 : place.hashCode())) * 31, 31), 31, this.startTimestamp);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.movingSpeed, (iHashCode + (place == null ? 0 : place.hashCode())) * 31, 31), 31, this.startTimestamp);
         Long l = this.endTimestamp;
-        return m + (l != null ? l.hashCode() : 0);
+        return iM + (l != null ? l.hashCode() : 0);
     }
 
     public String toString() {
@@ -182,9 +180,9 @@ public final class MovingActivity extends Activity {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
-        while (m.hasNext()) {
-            parcel.writeParcelable((Parcelable) m.next(), i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
+        while (itM.hasNext()) {
+            parcel.writeParcelable((Parcelable) itM.next(), i);
         }
         this.startLocation.writeToParcel(parcel, i);
         Place place = this.endLocation;

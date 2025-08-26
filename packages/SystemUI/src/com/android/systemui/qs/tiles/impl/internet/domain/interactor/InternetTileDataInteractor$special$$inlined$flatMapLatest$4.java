@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$4 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,32 +40,32 @@ public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$4 e
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Text text;
+        Text resource;
         Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Icon.Resource resource = (Icon.Resource) this.L$1;
-            if (resource == null) {
+            Icon.Resource resource2 = (Icon.Resource) this.L$1;
+            if (resource2 == null) {
                 flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = this.this$0.notConnectedFlow;
             } else {
-                ContentDescription contentDescription = resource.contentDescription;
+                ContentDescription contentDescription = resource2.contentDescription;
                 if (contentDescription != null) {
                     InternetTileDataInteractor.Companion.getClass();
                     if (contentDescription instanceof ContentDescription.Loaded) {
-                        text = new Text.Loaded(((ContentDescription.Loaded) contentDescription).description);
+                        resource = new Text.Loaded(((ContentDescription.Loaded) contentDescription).description);
                     } else {
                         if (!(contentDescription instanceof ContentDescription.Resource)) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        text = new Text.Resource(((ContentDescription.Resource) contentDescription).res);
+                        resource = new Text.Resource(((ContentDescription.Resource) contentDescription).res);
                     }
                 } else {
-                    text = null;
+                    resource = null;
                 }
-                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(null, text, new InternetTileIconModel.ResourceId(resource.res), null, contentDescription, 1, null));
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(null, resource, new InternetTileIconModel.ResourceId(resource2.res), null, contentDescription, 1, null));
             }
             this.label = 1;
             if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {

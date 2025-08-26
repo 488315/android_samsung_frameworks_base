@@ -13,7 +13,6 @@ import com.android.systemui.qp.SubscreenQsPanelController;
 import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.qs.QSHost;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenCustomizerActivity extends Activity implements WakefulnessLifecycle.Observer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -57,7 +56,7 @@ public class SubscreenCustomizerActivity extends Activity implements Wakefulness
         this.mBackButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.customize.SubscreenCustomizerActivity$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubscreenCustomizerActivity subscreenCustomizerActivity = SubscreenCustomizerActivity.this;
+                SubscreenCustomizerActivity subscreenCustomizerActivity = this.f$0;
                 int i = SubscreenCustomizerActivity.$r8$clinit;
                 subscreenCustomizerActivity.finish();
             }

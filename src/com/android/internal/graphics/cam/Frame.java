@@ -84,30 +84,30 @@ public final class Frame {
         float[] fArr5 = fArr2[2];
         float f11 = (f4 * fArr5[0]) + (f6 * fArr5[1]) + (f8 * fArr5[2]);
         float f12 = (f3 / 10.0f) + 0.8f;
-        float lerp = ((double) f12) >= 0.9d ? MathUtils.lerp(0.59f, 0.69f, (f12 - 0.9f) * 10.0f) : MathUtils.lerp(0.525f, 0.59f, (f12 - 0.8f) * 10.0f);
-        float exp = z ? 1.0f : (1.0f - (((float) Math.exp(((-f) - 42.0f) / 92.0f)) * 0.2777778f)) * f12;
-        double d = exp;
+        float fLerp = ((double) f12) >= 0.9d ? MathUtils.lerp(0.59f, 0.69f, (f12 - 0.9f) * 10.0f) : MathUtils.lerp(0.525f, 0.59f, (f12 - 0.8f) * 10.0f);
+        float fExp = z ? 1.0f : (1.0f - (((float) Math.exp(((-f) - 42.0f) / 92.0f)) * 0.2777778f)) * f12;
+        double d = fExp;
         if (d > 1.0d) {
-            exp = 1.0f;
+            fExp = 1.0f;
         } else if (d < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-            exp = 0.0f;
+            fExp = 0.0f;
         }
-        float[] fArr6 = {(((100.0f / f9) * exp) + 1.0f) - exp, (((100.0f / f10) * exp) + 1.0f) - exp, (((100.0f / f11) * exp) + 1.0f) - exp};
+        float[] fArr6 = {(((100.0f / f9) * fExp) + 1.0f) - fExp, (((100.0f / f10) * fExp) + 1.0f) - fExp, (((100.0f / f11) * fExp) + 1.0f) - fExp};
         float f13 = 1.0f / ((5.0f * f) + 1.0f);
         float f14 = f13 * f13 * f13 * f13;
         float f15 = 1.0f - f14;
-        float cbrt = (f14 * f) + (0.1f * f15 * f15 * ((float) Math.cbrt(f * 5.0d)));
-        float yFromLstar = ((float) CamUtils.yFromLstar(f2)) / fArr[1];
-        double d2 = yFromLstar;
-        float sqrt = ((float) Math.sqrt(d2)) + 1.48f;
-        float pow = 0.725f / ((float) Math.pow(d2, 0.2d));
-        float[] fArr7 = {(float) Math.pow(((fArr6[0] * cbrt) * f9) / 100.0d, 0.42d), (float) Math.pow(((fArr6[1] * cbrt) * f10) / 100.0d, 0.42d), (float) Math.pow(((fArr6[2] * cbrt) * f11) / 100.0d, 0.42d)};
+        float fCbrt = (f14 * f) + (0.1f * f15 * f15 * ((float) Math.cbrt(f * 5.0d)));
+        float fYFromLstar = ((float) CamUtils.yFromLstar(f2)) / fArr[1];
+        double d2 = fYFromLstar;
+        float fSqrt = ((float) Math.sqrt(d2)) + 1.48f;
+        float fPow = 0.725f / ((float) Math.pow(d2, 0.2d));
+        float[] fArr7 = {(float) Math.pow(((fArr6[0] * fCbrt) * f9) / 100.0d, 0.42d), (float) Math.pow(((fArr6[1] * fCbrt) * f10) / 100.0d, 0.42d), (float) Math.pow(((fArr6[2] * fCbrt) * f11) / 100.0d, 0.42d)};
         float f16 = fArr7[0];
         float f17 = (f16 * 400.0f) / (f16 + 27.13f);
         float f18 = fArr7[1];
         float f19 = (f18 * 400.0f) / (f18 + 27.13f);
         float f20 = fArr7[2];
         float[] fArr8 = {f17, f19, (400.0f * f20) / (f20 + 27.13f)};
-        return new Frame(yFromLstar, ((fArr8[0] * 2.0f) + fArr8[1] + (fArr8[2] * 0.05f)) * pow, pow, pow, lerp, f12, fArr6, cbrt, (float) Math.pow(cbrt, 0.25d), sqrt);
+        return new Frame(fYFromLstar, ((fArr8[0] * 2.0f) + fArr8[1] + (fArr8[2] * 0.05f)) * fPow, fPow, fPow, fLerp, f12, fArr6, fCbrt, (float) Math.pow(fCbrt, 0.25d), fSqrt);
     }
 }

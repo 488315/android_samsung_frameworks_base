@@ -105,9 +105,9 @@ public final class TvInputInfo implements Parcelable {
     @SystemApi
     @Deprecated
     public static TvInputInfo createTvInputInfo(Context context, ResolveInfo resolveInfo, HdmiDeviceInfo hdmiDeviceInfo, String str, String str2, Uri uri) throws XmlPullParserException, IOException {
-        TvInputInfo build = new Builder(context, resolveInfo).setHdmiDeviceInfo(hdmiDeviceInfo).setParentId(str).setLabel(str2).build();
-        build.mIconUri = uri;
-        return build;
+        TvInputInfo tvInputInfoBuild = new Builder(context, resolveInfo).setHdmiDeviceInfo(hdmiDeviceInfo).setParentId(str).setLabel(str2).build();
+        tvInputInfoBuild.mIconUri = uri;
+        return tvInputInfoBuild;
     }
 
     @SystemApi
@@ -119,9 +119,9 @@ public final class TvInputInfo implements Parcelable {
     @SystemApi
     @Deprecated
     public static TvInputInfo createTvInputInfo(Context context, ResolveInfo resolveInfo, TvInputHardwareInfo tvInputHardwareInfo, String str, Uri uri) throws XmlPullParserException, IOException {
-        TvInputInfo build = new Builder(context, resolveInfo).setTvInputHardwareInfo(tvInputHardwareInfo).setLabel(str).build();
-        build.mIconUri = uri;
-        return build;
+        TvInputInfo tvInputInfoBuild = new Builder(context, resolveInfo).setTvInputHardwareInfo(tvInputHardwareInfo).setLabel(str).build();
+        tvInputInfoBuild.mIconUri = uri;
+        return tvInputInfoBuild;
     }
 
     @SystemApi
@@ -241,24 +241,24 @@ public final class TvInputInfo implements Parcelable {
         return TvInputSettings.getCustomLabel(context, this.mId, UserHandle.myUserId());
     }
 
-    public Drawable loadIcon(Context context) {
+    public Drawable loadIcon(Context context) throws IOException {
         Icon icon = this.mIcon;
         if (icon != null) {
             return icon.loadDrawable(context);
         }
         if (this.mIconUri != null) {
             try {
-                InputStream openInputStream = context.getContentResolver().openInputStream(this.mIconUri);
+                InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(this.mIconUri);
                 try {
-                    Drawable createFromStream = Drawable.createFromStream(openInputStream, null);
-                    if (createFromStream != null) {
-                        if (openInputStream != null) {
-                            openInputStream.close();
+                    Drawable drawableCreateFromStream = Drawable.createFromStream(inputStreamOpenInputStream, null);
+                    if (drawableCreateFromStream != null) {
+                        if (inputStreamOpenInputStream != null) {
+                            inputStreamOpenInputStream.close();
                         }
-                        return createFromStream;
+                        return drawableCreateFromStream;
                     }
-                    if (openInputStream != null) {
-                        openInputStream.close();
+                    if (inputStreamOpenInputStream != null) {
+                        inputStreamOpenInputStream.close();
                     }
                 } finally {
                 }
@@ -405,9 +405,9 @@ public final class TvInputInfo implements Parcelable {
             if (context == null) {
                 throw new IllegalArgumentException("context cannot be null.");
             }
-            ResolveInfo resolveService = context.getPackageManager().resolveService(new Intent(TvInputService.SERVICE_INTERFACE).setComponent(componentName), 132);
-            this.mResolveInfo = resolveService;
-            if (resolveService == null) {
+            ResolveInfo resolveInfoResolveService = context.getPackageManager().resolveService(new Intent(TvInputService.SERVICE_INTERFACE).setComponent(componentName), 132);
+            this.mResolveInfo = resolveInfoResolveService;
+            if (resolveInfoResolveService == null) {
                 throw new IllegalArgumentException("Invalid component. Can't find the service.");
             }
             this.mContext = context;
@@ -511,124 +511,82 @@ public final class TvInputInfo implements Parcelable {
             return this;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x008b  */
-        /* JADX WARN: Removed duplicated region for block: B:13:0x0098  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x00a6  */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x009b  */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x008e  */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x008b  */
+        /* JADX WARN: Removed duplicated region for block: B:20:0x008e  */
+        /* JADX WARN: Removed duplicated region for block: B:23:0x0098  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x009b  */
+        /* JADX WARN: Removed duplicated region for block: B:28:0x00a6  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.media.tv.TvInputInfo build() {
-            /*
-                r25 = this;
-                r0 = r25
-                android.content.ComponentName r1 = new android.content.ComponentName
-                android.content.pm.ResolveInfo r2 = r0.mResolveInfo
-                android.content.pm.ServiceInfo r2 = r2.serviceInfo
-                java.lang.String r2 = r2.packageName
-                android.content.pm.ResolveInfo r3 = r0.mResolveInfo
-                android.content.pm.ServiceInfo r3 = r3.serviceInfo
-                java.lang.String r3 = r3.name
-                r1.<init>(r2, r3)
-                android.hardware.hdmi.HdmiDeviceInfo r2 = r0.mHdmiDeviceInfo
-                r3 = 1
-                r4 = 0
-                if (r2 == 0) goto L34
-                java.lang.String r1 = generateInputId(r1, r2)
-                android.content.Context r2 = r0.mContext
-                android.hardware.hdmi.HdmiDeviceInfo r5 = r0.mHdmiDeviceInfo
-                int r2 = getRelativePosition(r2, r5)
-                r5 = 2
-                if (r2 != r5) goto L2a
-                r5 = r3
-                goto L2b
-            L2a:
-                r5 = r4
-            L2b:
-                r6 = 1007(0x3ef, float:1.411E-42)
-                r7 = r1
-                r21 = r2
-                r9 = r3
-                r20 = r5
-                goto L67
-            L34:
-                android.media.tv.TvInputHardwareInfo r2 = r0.mTvInputHardwareInfo
-                if (r2 == 0) goto L69
-                java.lang.String r1 = generateInputId(r1, r2)
-                android.util.SparseIntArray r2 = android.media.tv.TvInputInfo.Builder.sHardwareTypeToTvInputType
-                android.media.tv.TvInputHardwareInfo r5 = r0.mTvInputHardwareInfo
-                int r5 = r5.getType()
-                int r6 = r2.get(r5, r4)
-                android.media.tv.TvInputHardwareInfo r2 = r0.mTvInputHardwareInfo
-                int r2 = r2.getType()
-                r5 = 9
-                if (r2 != r5) goto L61
-                android.media.tv.TvInputHardwareInfo r2 = r0.mTvInputHardwareInfo
-                int r2 = r2.getHdmiPortId()
-                r5 = 65535(0xffff, float:9.1834E-41)
-                android.hardware.hdmi.HdmiDeviceInfo r2 = android.hardware.hdmi.HdmiDeviceInfo.hardwarePort(r5, r2)
-                r0.mHdmiDeviceInfo = r2
-            L61:
-                r7 = r1
-                r9 = r3
-                r20 = r4
-                r21 = r20
-            L67:
-                r8 = r6
-                goto L74
-            L69:
-                java.lang.String r1 = generateInputId(r1)
-                r7 = r1
-                r8 = r4
-                r9 = r8
-                r20 = r9
-                r21 = r20
-            L74:
-                r0.parseServiceMetadata(r8)
-                android.media.tv.TvInputInfo r5 = new android.media.tv.TvInputInfo
-                android.content.pm.ResolveInfo r6 = r0.mResolveInfo
-                java.lang.CharSequence r10 = r0.mLabel
-                int r11 = r0.mLabelResId
-                android.graphics.drawable.Icon r12 = r0.mIcon
-                android.graphics.drawable.Icon r13 = r0.mIconStandby
-                android.graphics.drawable.Icon r14 = r0.mIconDisconnected
-                java.lang.String r15 = r0.mSetupActivity
-                java.lang.Boolean r1 = r0.mCanRecord
-                if (r1 != 0) goto L8e
-                r16 = r4
-                goto L94
-            L8e:
-                boolean r1 = r1.booleanValue()
-                r16 = r1
-            L94:
-                java.lang.Boolean r1 = r0.mCanPauseRecording
-                if (r1 != 0) goto L9b
-                r17 = r4
-                goto La1
-            L9b:
-                boolean r1 = r1.booleanValue()
-                r17 = r1
-            La1:
-                java.lang.Integer r1 = r0.mTunerCount
-                if (r1 != 0) goto La6
-                goto Laa
-            La6:
-                int r4 = r1.intValue()
-            Laa:
-                r18 = r4
-                android.hardware.hdmi.HdmiDeviceInfo r1 = r0.mHdmiDeviceInfo
-                java.lang.String r2 = r0.mParentId
-                android.os.Bundle r0 = r0.mExtras
-                r24 = 0
-                r23 = r0
-                r19 = r1
-                r22 = r2
-                r5.<init>(r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23)
-                return r5
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.tv.TvInputInfo.Builder.build():android.media.tv.TvInputInfo");
+        public TvInputInfo build() {
+            String strGenerateInputId;
+            int i;
+            boolean z;
+            boolean z2;
+            int i2;
+            int i3;
+            ComponentName componentName = new ComponentName(this.mResolveInfo.serviceInfo.packageName, this.mResolveInfo.serviceInfo.name);
+            HdmiDeviceInfo hdmiDeviceInfo = this.mHdmiDeviceInfo;
+            if (hdmiDeviceInfo != null) {
+                String strGenerateInputId2 = generateInputId(componentName, hdmiDeviceInfo);
+                int relativePosition = getRelativePosition(this.mContext, this.mHdmiDeviceInfo);
+                i3 = 1007;
+                strGenerateInputId = strGenerateInputId2;
+                i2 = relativePosition;
+                z = true;
+                z2 = relativePosition == 2;
+            } else {
+                TvInputHardwareInfo tvInputHardwareInfo = this.mTvInputHardwareInfo;
+                if (tvInputHardwareInfo != null) {
+                    String strGenerateInputId3 = generateInputId(componentName, tvInputHardwareInfo);
+                    i3 = sHardwareTypeToTvInputType.get(this.mTvInputHardwareInfo.getType(), 0);
+                    if (this.mTvInputHardwareInfo.getType() == 9) {
+                        this.mHdmiDeviceInfo = HdmiDeviceInfo.hardwarePort(65535, this.mTvInputHardwareInfo.getHdmiPortId());
+                    }
+                    strGenerateInputId = strGenerateInputId3;
+                    z = true;
+                    z2 = false;
+                    i2 = 0;
+                } else {
+                    strGenerateInputId = generateInputId(componentName);
+                    i = 0;
+                    z = false;
+                    z2 = false;
+                    i2 = 0;
+                    parseServiceMetadata(i);
+                    ResolveInfo resolveInfo = this.mResolveInfo;
+                    CharSequence charSequence = this.mLabel;
+                    int i4 = this.mLabelResId;
+                    Icon icon = this.mIcon;
+                    Icon icon2 = this.mIconStandby;
+                    Icon icon3 = this.mIconDisconnected;
+                    String str = this.mSetupActivity;
+                    Boolean bool = this.mCanRecord;
+                    boolean zBooleanValue = bool != null ? false : bool.booleanValue();
+                    Boolean bool2 = this.mCanPauseRecording;
+                    boolean zBooleanValue2 = bool2 != null ? false : bool2.booleanValue();
+                    Integer num = this.mTunerCount;
+                    return new TvInputInfo(resolveInfo, strGenerateInputId, i, z, charSequence, i4, icon, icon2, icon3, str, zBooleanValue, zBooleanValue2, num != null ? num.intValue() : 0, this.mHdmiDeviceInfo, z2, i2, this.mParentId, this.mExtras);
+                }
+            }
+            i = i3;
+            parseServiceMetadata(i);
+            ResolveInfo resolveInfo2 = this.mResolveInfo;
+            CharSequence charSequence2 = this.mLabel;
+            int i42 = this.mLabelResId;
+            Icon icon4 = this.mIcon;
+            Icon icon22 = this.mIconStandby;
+            Icon icon32 = this.mIconDisconnected;
+            String str2 = this.mSetupActivity;
+            Boolean bool3 = this.mCanRecord;
+            if (bool3 != null) {
+            }
+            Boolean bool22 = this.mCanPauseRecording;
+            if (bool22 != null) {
+            }
+            Integer num2 = this.mTunerCount;
+            return new TvInputInfo(resolveInfo2, strGenerateInputId, i, z, charSequence2, i42, icon4, icon22, icon32, str2, zBooleanValue, zBooleanValue2, num2 != null ? num2.intValue() : 0, this.mHdmiDeviceInfo, z2, i2, this.mParentId, this.mExtras);
         }
 
         private static String generateInputId(ComponentName componentName) {
@@ -657,52 +615,52 @@ public final class TvInputInfo implements Parcelable {
             PackageManager packageManager = this.mContext.getPackageManager();
             try {
                 try {
-                    XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, TvInputService.SERVICE_META_DATA);
+                    XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, TvInputService.SERVICE_META_DATA);
                     try {
-                        if (loadXmlMetaData == null) {
+                        if (xmlResourceParserLoadXmlMetaData == null) {
                             throw new IllegalStateException("No android.media.tv.input meta-data found for " + serviceInfo.name);
                         }
                         Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-                        AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
+                        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
                         do {
-                            next = loadXmlMetaData.next();
+                            next = xmlResourceParserLoadXmlMetaData.next();
                             if (next == 1) {
                                 break;
                             }
                         } while (next != 2);
-                        if (!XML_START_TAG_NAME.equals(loadXmlMetaData.getName())) {
+                        if (!XML_START_TAG_NAME.equals(xmlResourceParserLoadXmlMetaData.getName())) {
                             throw new IllegalStateException("Meta-data does not start with tv-input tag for " + serviceInfo.name);
                         }
-                        TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.TvInputService);
-                        this.mSetupActivity = obtainAttributes.getString(1);
+                        TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.TvInputService);
+                        this.mSetupActivity = typedArrayObtainAttributes.getString(1);
                         if (this.mCanRecord == null) {
-                            this.mCanRecord = Boolean.valueOf(obtainAttributes.getBoolean(2, false));
+                            this.mCanRecord = Boolean.valueOf(typedArrayObtainAttributes.getBoolean(2, false));
                         }
                         if (this.mTunerCount == null && i == 0) {
-                            this.mTunerCount = Integer.valueOf(obtainAttributes.getInt(3, 1));
+                            this.mTunerCount = Integer.valueOf(typedArrayObtainAttributes.getInt(3, 1));
                         }
                         if (this.mCanPauseRecording == null) {
-                            this.mCanPauseRecording = Boolean.valueOf(obtainAttributes.getBoolean(4, false));
+                            this.mCanPauseRecording = Boolean.valueOf(typedArrayObtainAttributes.getBoolean(4, false));
                         }
-                        obtainAttributes.recycle();
-                        if (loadXmlMetaData != null) {
-                            loadXmlMetaData.close();
+                        typedArrayObtainAttributes.recycle();
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
                         }
                     } catch (Throwable th) {
-                        if (loadXmlMetaData != null) {
+                        if (xmlResourceParserLoadXmlMetaData != null) {
                             try {
-                                loadXmlMetaData.close();
+                                xmlResourceParserLoadXmlMetaData.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
                         }
                         throw th;
                     }
-                } catch (IOException | XmlPullParserException e) {
-                    throw new IllegalStateException("Failed reading meta-data for " + serviceInfo.packageName, e);
+                } catch (PackageManager.NameNotFoundException e) {
+                    throw new IllegalStateException("No resources found for " + serviceInfo.packageName, e);
                 }
-            } catch (PackageManager.NameNotFoundException e2) {
-                throw new IllegalStateException("No resources found for " + serviceInfo.packageName, e2);
+            } catch (IOException | XmlPullParserException e2) {
+                throw new IllegalStateException("Failed reading meta-data for " + serviceInfo.packageName, e2);
             }
         }
     }
@@ -740,14 +698,14 @@ public final class TvInputInfo implements Parcelable {
         @SystemApi
         public static Map<String, String> getCustomLabels(Context context, int i) {
             String stringForUser = Settings.Secure.getStringForUser(context.getContentResolver(), Settings.Secure.TV_INPUT_CUSTOM_LABELS, i);
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             if (!TextUtils.isEmpty(stringForUser)) {
                 for (String str : stringForUser.split(":")) {
-                    String[] split = str.split(",");
-                    hashMap.put(Uri.decode(split[0]), Uri.decode(split[1]));
+                    String[] strArrSplit = str.split(",");
+                    map.put(Uri.decode(strArrSplit[0]), Uri.decode(strArrSplit[1]));
                 }
             }
-            return hashMap;
+            return map;
         }
 
         @SystemApi

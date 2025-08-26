@@ -51,9 +51,9 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMuteAwaitConnectionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMuteAwaitConnectionCallback)) {
-                return (IMuteAwaitConnectionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMuteAwaitConnectionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMuteAwaitConnectionCallback)) {
+                return (IMuteAwaitConnectionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,15 +84,15 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
             }
             if (i == 1) {
                 AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                int[] createIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                dispatchOnMutedUntilConnection(audioDeviceAttributes, createIntArray);
+                dispatchOnMutedUntilConnection(audioDeviceAttributes, iArrCreateIntArray);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 AudioDeviceAttributes audioDeviceAttributes2 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                int[] createIntArray2 = parcel.createIntArray();
+                int[] iArrCreateIntArray2 = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                dispatchOnUnmutedEvent(readInt, audioDeviceAttributes2, createIntArray2);
+                dispatchOnUnmutedEvent(i3, audioDeviceAttributes2, iArrCreateIntArray2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,28 +117,28 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
 
             @Override // android.media.IMuteAwaitConnectionCallback
             public void dispatchOnMutedUntilConnection(AudioDeviceAttributes audioDeviceAttributes, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMuteAwaitConnectionCallback
             public void dispatchOnUnmutedEvent(int i, AudioDeviceAttributes audioDeviceAttributes, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

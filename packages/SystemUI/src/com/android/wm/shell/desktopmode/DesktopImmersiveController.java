@@ -12,6 +12,7 @@ import android.window.DesktopModeFlags;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowContainerTransaction;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import com.android.internal.protolog.ProtoLog;
 import com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$$ExternalSyntheticOutline0;
@@ -25,6 +26,7 @@ import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
+import com.samsung.android.rune.CoreRune;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
@@ -42,7 +44,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopImmersiveController implements Transitions.TransitionHandler, Transitions.TransitionObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -56,7 +57,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
     public final Function0 transactionSupplier;
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,7 +71,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction ENTER;
@@ -101,7 +100,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ExitReason {
         public static final /* synthetic */ ExitReason[] $VALUES;
         public static final ExitReason APP_NOT_IMMERSIVE;
@@ -138,10 +136,8 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ExitResult {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Exit extends ExitResult {
             public final int exitingTask;
             public final Function1 runOnTransitionStart;
@@ -172,7 +168,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NoExit extends ExitResult {
             public static final NoExit INSTANCE = new NoExit();
 
@@ -208,7 +203,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PendingTransition {
         public final boolean animate;
         public final Direction direction;
@@ -254,7 +248,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionState {
         public final Direction direction;
         public final int displayId;
@@ -288,7 +281,6 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -340,7 +332,7 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
                     public final void accept(Object obj, Object obj2) {
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
-                        DesktopImmersiveController desktopImmersiveController2 = DesktopImmersiveController.this;
+                        DesktopImmersiveController desktopImmersiveController2 = desktopImmersiveController;
                         int i = DesktopImmersiveController.$r8$clinit;
                         desktopImmersiveController2.getClass();
                         QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str, "DesktopImmersiveController");
@@ -356,52 +348,52 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
     }
 
     public static TransitionInfo.Change getTaskChange(TransitionInfo transitionInfo, int i) {
-        Object obj;
+        Object next;
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) obj).getTaskInfo();
+            next = it.next();
+            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) next).getTaskInfo();
             if (taskInfo != null && taskInfo.taskId == i) {
                 break;
             }
         }
-        return (TransitionInfo.Change) obj;
+        return (TransitionInfo.Change) next;
     }
 
     public static void logD(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopImmersive", objArr);
-        ProtoLog.d(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopImmersive", objArr);
+        ProtoLog.d(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logV(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopImmersive", objArr);
-        ProtoLog.v(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopImmersive", objArr);
+        ProtoLog.v(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public final void animateResize(int i, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
-        Object obj;
+        Object next;
         logD("animateResize for task#%d", Integer.valueOf(i));
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) obj).getTaskInfo();
+            next = it.next();
+            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) next).getTaskInfo();
             if (taskInfo != null && taskInfo.taskId == i) {
                 break;
             }
         }
-        TransitionInfo.Change change = (TransitionInfo.Change) obj;
+        TransitionInfo.Change change = (TransitionInfo.Change) next;
         if (change != null) {
             animateResizeChange(change, transaction, transaction2, transitionFinishCallback);
             return;
@@ -427,10 +419,10 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
             transaction.apply();
         }
         final SurfaceControl.Transaction transaction3 = (SurfaceControl.Transaction) this.transactionSupplier.invoke();
-        ValueAnimator ofObject = ValueAnimator.ofObject(this.rectEvaluator, startAbsBounds, endAbsBounds);
-        ofObject.setDuration(336L);
-        ofObject.setInterpolator(new DecelerateInterpolator());
-        ofObject.addListener(new Animator.AnimatorListener() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$animateResizeChange$lambda$20$$inlined$addListener$default$1
+        ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(this.rectEvaluator, startAbsBounds, endAbsBounds);
+        valueAnimatorOfObject.setDuration(336L);
+        valueAnimatorOfObject.setInterpolator(new DecelerateInterpolator());
+        valueAnimatorOfObject.addListener(new Animator.AnimatorListener() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$animateResizeChange$lambda$20$$inlined$addListener$default$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 SurfaceControl.Transaction transaction4 = transaction2;
@@ -456,11 +448,11 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$animateResizeChange$1$2
+        valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$animateResizeChange$1$2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 Rect rect = (Rect) valueAnimator.getAnimatedValue();
-                transaction3.setPosition(leash, rect.left, rect.top).setWindowCrop(leash, rect.width(), rect.height()).apply();
+                transaction3.setPosition(leash, rect.left, rect.top).setWindowCrop(leash, rect.width(), rect.height());
                 DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = this.onTaskResizeAnimationListener;
                 if (desktopModeOnTaskResizeAnimationListener2 != null) {
                     desktopModeOnTaskResizeAnimationListener2.onBoundsChange(i, transaction3, rect);
@@ -469,7 +461,7 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
                 }
             }
         });
-        ofObject.start();
+        valueAnimatorOfObject.start();
     }
 
     public final ExitResult exitImmersiveIfApplicable(WindowContainerTransaction windowContainerTransaction, final int i, Integer num, ExitReason exitReason) {
@@ -481,8 +473,8 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         if (num2 == null) {
             return ExitResult.NoExit.INSTANCE;
         }
-        final int intValue = num2.intValue();
-        if (num != null && intValue == num.intValue()) {
+        final int iIntValue = num2.intValue();
+        if (num != null && iIntValue == num.intValue()) {
             return ExitResult.NoExit.INSTANCE;
         }
         int i2 = WhenMappings.$EnumSwitchMapping$1[exitReason.ordinal()];
@@ -492,20 +484,20 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         if (i2 == 2) {
             return ExitResult.NoExit.INSTANCE;
         }
-        ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(intValue);
+        ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(iIntValue);
         if (runningTaskInfo == null) {
             return ExitResult.NoExit.INSTANCE;
         }
         logV("Appending immersive exit for task: %d in display: %d for reason: %s", num2, Integer.valueOf(i), exitReason);
         windowContainerTransaction.setBounds(runningTaskInfo.token, getExitDestinationBounds(runningTaskInfo));
-        return new ExitResult.Exit(intValue, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$$ExternalSyntheticLambda1
+        return new ExitResult.Exit(iIntValue, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 IBinder iBinder = (IBinder) obj;
                 int i3 = DesktopImmersiveController.$r8$clinit;
                 DesktopImmersiveController.Direction direction = DesktopImmersiveController.Direction.EXIT;
-                ((ArrayList) DesktopImmersiveController.this.pendingImmersiveTransitions).add(new DesktopImmersiveController.PendingTransition(intValue, i, direction, iBinder, false));
+                ((ArrayList) this.f$0.pendingImmersiveTransitions).add(new DesktopImmersiveController.PendingTransition(iIntValue, i, direction, iBinder, false));
                 return Unit.INSTANCE;
             }
         });
@@ -524,19 +516,19 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
     }
 
     public final PendingTransition getImmersiveTransition(IBinder iBinder) {
-        Object obj;
+        Object next;
         Iterator it = this.pendingImmersiveTransitions.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((PendingTransition) obj).transition, iBinder)) {
+            next = it.next();
+            if (Intrinsics.areEqual(((PendingTransition) next).transition, iBinder)) {
                 break;
             }
         }
-        return (PendingTransition) obj;
+        return (PendingTransition) next;
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -564,9 +556,40 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         return ((ArrayList) this.pendingImmersiveTransitions).size() > 1;
     }
 
-    public final void moveTaskToNonImmersive(ActivityManager.RunningTaskInfo runningTaskInfo, ExitReason exitReason) {
+    public final void moveTaskToImmersive(ActivityManager.RunningTaskInfo runningTaskInfo) {
+        String str;
         if (!runningTaskInfo.isFreeform()) {
-            throw new IllegalStateException("Task must already be in freeform");
+            if (CoreRune.MW_CAPTION_BUG_FIX) {
+                str = "Task must already be in freeform " + runningTaskInfo;
+            } else {
+                str = "Task must already be in freeform";
+            }
+            throw new IllegalStateException(str.toString());
+        }
+        if (!((ArrayList) this.pendingImmersiveTransitions).isEmpty()) {
+            logV("Cannot start entry because transition(s) already in progress: %s", this.pendingImmersiveTransitions);
+            return;
+        }
+        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+        windowContainerTransaction.setBounds(runningTaskInfo.token, new Rect());
+        logV(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "Moving task ", " into immersive mode"), new Object[0]);
+        IBinder iBinderStartTransition = this.transitions.startTransition(6, windowContainerTransaction, this);
+        int i = runningTaskInfo.taskId;
+        int i2 = runningTaskInfo.displayId;
+        Direction direction = Direction.ENTER;
+        iBinderStartTransition.getClass();
+        addPendingImmersiveTransition$default(this, i, i2, direction, iBinderStartTransition);
+    }
+
+    public final void moveTaskToNonImmersive(ActivityManager.RunningTaskInfo runningTaskInfo, ExitReason exitReason) {
+        String str;
+        if (!runningTaskInfo.isFreeform()) {
+            if (CoreRune.MW_CAPTION_BUG_FIX) {
+                str = "Task must already be in freeform " + runningTaskInfo;
+            } else {
+                str = "Task must already be in freeform";
+            }
+            throw new IllegalStateException(str.toString());
         }
         if (!((ArrayList) this.pendingImmersiveTransitions).isEmpty()) {
             logV("Cannot start exit because transition(s) already in progress: %s", this.pendingImmersiveTransitions);
@@ -579,12 +602,12 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
         windowContainerTransaction.setBounds(runningTaskInfo.token, getExitDestinationBounds(runningTaskInfo));
         logV("Moving task %d out of immersive mode, reason: %s", Integer.valueOf(runningTaskInfo.taskId), exitReason);
-        IBinder startTransition = this.transitions.startTransition(6, windowContainerTransaction, this);
+        IBinder iBinderStartTransition = this.transitions.startTransition(6, windowContainerTransaction, this);
         int i2 = runningTaskInfo.taskId;
         int i3 = runningTaskInfo.displayId;
         Direction direction = Direction.EXIT;
-        startTransition.getClass();
-        addPendingImmersiveTransition$default(this, i2, i3, direction, startTransition);
+        iBinderStartTransition.getClass();
+        addPendingImmersiveTransition$default(this, i2, i3, direction, iBinderStartTransition);
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
@@ -648,9 +671,9 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
     public final void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
-        boolean isSwappingModes = isSwappingModes();
+        boolean zIsSwappingModes = isSwappingModes();
         DesktopUserRepositories desktopUserRepositories = this.desktopUserRepositories;
-        if (isSwappingModes) {
+        if (zIsSwappingModes) {
             DesktopRepository current = desktopUserRepositories.getCurrent();
             ArrayList arrayList = (ArrayList) this.pendingImmersiveTransitions;
             int size = arrayList.size();
@@ -816,10 +839,10 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
             return z;
         }
         logD("startAnimation transition=%s", iBinder);
-        animateResize(immersiveTransition.taskId, transitionInfo, transaction, transaction2, new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$startAnimation$1
+        animateResize(immersiveTransition.taskId, transitionInfo, transaction, transaction2, new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController.startAnimation.1
             @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
             public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                Transitions.TransitionFinishCallback.this.onTransitionFinished(null);
+                transitionFinishCallback.onTransitionFinished(null);
                 ((ArrayList) this.pendingImmersiveTransitions).remove(immersiveTransition);
             }
         });
@@ -840,14 +863,14 @@ public final class DesktopImmersiveController implements Transitions.TransitionH
             return new ExitResult.Exit(runningTaskInfo.taskId, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopImmersiveController$$ExternalSyntheticLambda2
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ActivityManager.RunningTaskInfo runningTaskInfo2 = runningTaskInfo;
                     IBinder iBinder = (IBinder) obj;
                     int i = DesktopImmersiveController.$r8$clinit;
                     int i2 = runningTaskInfo2.taskId;
                     int i3 = runningTaskInfo2.displayId;
                     DesktopImmersiveController.Direction direction = DesktopImmersiveController.Direction.EXIT;
-                    ((ArrayList) DesktopImmersiveController.this.pendingImmersiveTransitions).add(new DesktopImmersiveController.PendingTransition(i2, i3, direction, iBinder, false));
+                    ((ArrayList) this.f$0.pendingImmersiveTransitions).add(new DesktopImmersiveController.PendingTransition(i2, i3, direction, iBinder, false));
                     return Unit.INSTANCE;
                 }
             });

@@ -6,7 +6,6 @@ import okio.Buffer;
 import okio.ForwardingSource;
 import okio.Source;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FixedLengthSource extends ForwardingSource {
     public long bytesReceived;
@@ -20,7 +19,7 @@ public final class FixedLengthSource extends ForwardingSource {
     }
 
     @Override // okio.ForwardingSource, okio.Source
-    public final long read(Buffer buffer, long j) {
+    public final long read(Buffer buffer, long j) throws IOException {
         long j2 = this.bytesReceived;
         long j3 = this.size;
         if (j2 > j3) {
@@ -32,26 +31,26 @@ public final class FixedLengthSource extends ForwardingSource {
             }
             j = Math.min(j, j4);
         }
-        long read = this.delegate.read(buffer, j);
-        if (read != -1) {
-            this.bytesReceived += read;
+        long j5 = this.delegate.read(buffer, j);
+        if (j5 != -1) {
+            this.bytesReceived += j5;
         }
-        long j5 = this.bytesReceived;
-        long j6 = this.size;
-        if ((j5 >= j6 || read != -1) && j5 <= j6) {
-            return read;
+        long j6 = this.bytesReceived;
+        long j7 = this.size;
+        if ((j6 >= j7 || j5 != -1) && j6 <= j7) {
+            return j5;
         }
-        if (read > 0 && j5 > j6) {
-            long j7 = buffer.size - (j5 - j6);
+        if (j5 > 0 && j6 > j7) {
+            long j8 = buffer.size - (j6 - j7);
             Buffer buffer2 = new Buffer();
             buffer2.writeAll(buffer);
-            buffer.write(buffer2, j7);
+            buffer.write(buffer2, j8);
             buffer2.skip(buffer2.size);
         }
-        long j8 = this.size;
-        long j9 = this.bytesReceived;
-        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("expected ", j8, " bytes but got ");
-        m.append(j9);
-        throw new IOException(m.toString());
+        long j9 = this.size;
+        long j10 = this.bytesReceived;
+        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("expected ", j9, " bytes but got ");
+        sbM.append(j10);
+        throw new IOException(sbM.toString());
     }
 }

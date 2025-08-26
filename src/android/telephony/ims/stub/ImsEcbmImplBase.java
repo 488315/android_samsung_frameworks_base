@@ -3,7 +3,6 @@ package android.telephony.ims.stub;
 import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.os.RemoteException;
-import android.telephony.ims.stub.ImsEcbmImplBase;
 import android.util.Log;
 import com.android.ims.internal.IImsEcbm;
 import com.android.ims.internal.IImsEcbmListener;
@@ -33,7 +32,7 @@ public class ImsEcbmImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsEcbmImplBase.AnonymousClass1.this.lambda$setListener$0(iImsEcbmListener);
+                    this.f$0.lambda$setListener$0(iImsEcbmListener);
                 }
             }, "setListener");
         }
@@ -66,7 +65,7 @@ public class ImsEcbmImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsEcbmImplBase.AnonymousClass1.this.lambda$exitEmergencyCallbackMode$1();
+                    this.f$0.lambda$exitEmergencyCallbackMode$1();
                 }
             }, "exitEmergencyCallbackMode");
         }

@@ -3,6 +3,7 @@ package android.telephony.mbms;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ public final class FileServiceInfo extends ServiceInfo implements Parcelable {
         this.files = new ArrayList(list2);
     }
 
-    FileServiceInfo(Parcel parcel) {
+    FileServiceInfo(Parcel parcel) throws ClassNotFoundException, IOException {
         super(parcel);
         ArrayList arrayList = new ArrayList();
         this.files = arrayList;
@@ -45,7 +46,7 @@ public final class FileServiceInfo extends ServiceInfo implements Parcelable {
     }
 
     @Override // android.telephony.mbms.ServiceInfo, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         super.writeToParcel(parcel, i);
         parcel.writeList(this.files);
     }

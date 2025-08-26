@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.SemWifiDisplayStatus;
 import android.media.MediaRouter;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.DisplayInfo;
+import android.view.WindowManager;
 import androidx.core.app.NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
@@ -41,7 +43,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceState {
     public static final int CAPTURED_BLUR_THRESHOLD_WIDTH = 720;
@@ -121,45 +122,57 @@ public final class DeviceState {
             proportionalPixel = i;
         }
         proportionalPixel = (i * i7) / i8;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "getDeviceResolutionPixelSize - currentDensity = ", " deviceDensity = ");
-        m.append(deviceDensity);
-        m.append(" initialDisplaySizeFactor = ");
-        m.append(initialDisplaySizeFactor);
-        m.append(" currentDisplaySizeFactor = ");
-        m.append(currentDisplaySizeFactor);
-        m.append(" initialDisplayDensity = ");
-        m.append(initialDisplayDensity);
-        m.append(" proportionalDensity = ");
-        m.append(proportionalDensity);
-        m.append(" proportionalPixel = ");
-        RecyclerView$$ExternalSyntheticOutline0.m(proportionalPixel, TAG, m);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "getDeviceResolutionPixelSize - currentDensity = ", " deviceDensity = ");
+        sbM.append(deviceDensity);
+        sbM.append(" initialDisplaySizeFactor = ");
+        sbM.append(initialDisplaySizeFactor);
+        sbM.append(" currentDisplaySizeFactor = ");
+        sbM.append(currentDisplaySizeFactor);
+        sbM.append(" initialDisplayDensity = ");
+        sbM.append(initialDisplayDensity);
+        sbM.append(" proportionalDensity = ");
+        sbM.append(proportionalDensity);
+        sbM.append(" proportionalPixel = ");
+        RecyclerView$$ExternalSyntheticOutline0.m(proportionalPixel, TAG, sbM);
         return proportionalPixel;
     }
 
+    public static float getDeviceScreenInches(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService("window");
+        Rect bounds = windowManager.getCurrentWindowMetrics().getBounds();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int iWidth = bounds.width();
+        int iHeight = bounds.height();
+        float f = iWidth / displayMetrics.xdpi;
+        float f2 = iHeight / displayMetrics.ydpi;
+        return (float) Math.sqrt((f2 * f2) + (f * f));
+    }
+
     public static int getDisplayHeight(Context context) {
-        boolean updateScreenElements = updateScreenElements(context);
+        boolean zUpdateScreenElements = updateScreenElements(context);
         boolean z = context.getResources().getConfiguration().orientation == 1;
         Point point = sSizePoint;
         int i = point.x;
         int i2 = point.y;
-        int max = z ? Math.max(i, i2) : Math.min(i, i2);
-        if (updateScreenElements) {
-            Log.d(TAG, "getDisplayHeight portrait? " + z + "  displayHeight= " + max);
+        int iMax = z ? Math.max(i, i2) : Math.min(i, i2);
+        if (zUpdateScreenElements) {
+            Log.d(TAG, "getDisplayHeight portrait? " + z + "  displayHeight= " + iMax);
         }
-        return max;
+        return iMax;
     }
 
     public static int getDisplayWidth(Context context) {
-        boolean updateScreenElements = updateScreenElements(context);
+        boolean zUpdateScreenElements = updateScreenElements(context);
         boolean z = context.getResources().getConfiguration().orientation == 1;
         Point point = sSizePoint;
         int i = point.x;
         int i2 = point.y;
-        int min = z ? Math.min(i, i2) : Math.max(i, i2);
-        if (updateScreenElements) {
-            Log.d(TAG, "getDisplayWidth portrait? " + z + "  displayWidth= " + min);
+        int iMin = z ? Math.min(i, i2) : Math.max(i, i2);
+        if (zUpdateScreenElements) {
+            Log.d(TAG, "getDisplayWidth portrait? " + z + "  displayWidth= " + iMin);
         }
-        return min;
+        return iMin;
     }
 
     private static int getESimSwitchingSlotIndex() {
@@ -197,37 +210,21 @@ public final class DeviceState {
         return i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0019, code lost:
-    
-        if (r1 != null) goto L14;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getMSimSystemProperty(java.lang.String r1, int r2, java.lang.String r3) {
-        /*
-            java.lang.String r1 = android.os.SystemProperties.get(r1)
-            if (r1 == 0) goto L1c
-            int r0 = r1.length()
-            if (r0 <= 0) goto L1c
-            java.lang.String r0 = ","
-            java.lang.String[] r1 = r1.split(r0)
-            if (r2 < 0) goto L1c
-            int r0 = r1.length
-            if (r2 >= r0) goto L1c
-            r1 = r1[r2]
-            if (r1 == 0) goto L1c
-            goto L1d
-        L1c:
-            r1 = 0
-        L1d:
-            if (r1 != 0) goto L20
-            return r3
-        L20:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.DeviceState.getMSimSystemProperty(java.lang.String, int, java.lang.String):java.lang.String");
+    public static String getMSimSystemProperty(String str, int i, String str2) {
+        String str3;
+        String str4 = SystemProperties.get(str);
+        if (str4 == null || str4.length() <= 0) {
+            str3 = null;
+        } else {
+            String[] strArrSplit = str4.split(",");
+            if (i < 0 || i >= strArrSplit.length || (str3 = strArrSplit[i]) == null) {
+            }
+        }
+        return str3 == null ? str2 : str3;
     }
 
     public static String getNetworkOperatorNumeric(int i) {
@@ -294,7 +291,7 @@ public final class DeviceState {
         return IS_ALREADY_BOOTED;
     }
 
-    public static boolean isAppInstalled(Context context, String str) {
+    public static boolean isAppInstalled(Context context, String str) throws PackageManager.NameNotFoundException {
         if (str == null) {
             return false;
         }
@@ -309,16 +306,14 @@ public final class DeviceState {
     }
 
     public static synchronized boolean isCapturedBlurAllowed() {
-        synchronized (DeviceState.class) {
-            try {
-                if (sDisplaySize == null) {
-                    sDisplaySize = new Point();
-                    SemWindowManager.getInstance().getInitialDisplaySize(sDisplaySize);
-                }
-                String str = LsRune.VALUE_SUB_DISPLAY_POLICY;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sDisplaySize == null) {
+                sDisplaySize = new Point();
+                SemWindowManager.getInstance().getInitialDisplaySize(sDisplaySize);
             }
+            String str = LsRune.VALUE_SUB_DISPLAY_POLICY;
+        } catch (Throwable th) {
+            throw th;
         }
         return true;
     }
@@ -424,6 +419,10 @@ public final class DeviceState {
         return ((float) sInDisplayFingerprintHeight) / ((float) Math.max(realSize.y, realSize.x)) > FINGERPRINT_HEIGHT_BASE_PERCENT;
     }
 
+    public static boolean isLargeScreenTablet(Context context) {
+        return isTablet() && getDeviceScreenInches(context) >= 12.0f;
+    }
+
     public static boolean isMultiFoldMain() {
         return DeviceType.isMultiFoldDevice() && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened;
     }
@@ -453,17 +452,14 @@ public final class DeviceState {
         return Settings.Secure.getInt(context.getContentResolver(), "shopdemo", 0) == 1;
     }
 
-    public static boolean isShowingPopOverStatusBar() {
+    public static boolean isShowingPopOverStatusBar(Context context) {
         if (!DeviceType.isSupportModelPopOverStatusBar()) {
             return false;
         }
         if (isTablet()) {
             return true;
         }
-        if (DeviceType.isMultiFoldDevice()) {
-            return ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened;
-        }
-        return false;
+        return DeviceType.isMultiFoldDevice() && context != null && context.getResources().getConfiguration().semDisplayDeviceType == 0;
     }
 
     public static boolean isSimCardInserted(int i) {
@@ -483,8 +479,8 @@ public final class DeviceState {
         if (!LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
             return isSmartViewFitToActiveDisplay();
         }
-        SemWifiDisplayStatus semGetWifiDisplayStatus = ((DisplayManager) context.getSystemService("display")).semGetWifiDisplayStatus();
-        boolean z = semGetWifiDisplayStatus != null && semGetWifiDisplayStatus.getActiveDisplayState() == 2;
+        SemWifiDisplayStatus semWifiDisplayStatusSemGetWifiDisplayStatus = ((DisplayManager) context.getSystemService("display")).semGetWifiDisplayStatus();
+        boolean z = semWifiDisplayStatusSemGetWifiDisplayStatus != null && semWifiDisplayStatusSemGetWifiDisplayStatus.getActiveDisplayState() == 2;
         MediaRouter.RouteInfo selectedRoute = ((MediaRouter) context.getSystemService("media_router")).getSelectedRoute(4);
         return (z || ((4 & selectedRoute.getSupportedTypes()) != 0 && selectedRoute.semGetDeviceAddress() == null && selectedRoute.semGetStatusCode() == 6 && (selectedRoute.getPresentationDisplay() != null || (selectedRoute.getDescription() != null && selectedRoute.getDescription().toString().contains("Audio")))) || (Settings.Global.getInt(context.getContentResolver(), LEBO_SETTING_NAME, 0) == 1)) && isSmartViewFitToActiveDisplay();
     }
@@ -526,9 +522,9 @@ public final class DeviceState {
 
     public static boolean isTelephonyIdle(Context context) {
         TelecomManager telecomManager = (TelecomManager) context.getSystemService("telecom");
-        boolean isInCall = telecomManager != null ? true ^ telecomManager.isInCall() : true;
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("isTelephonyIdle() - ", TAG, isInCall);
-        return isInCall;
+        boolean zIsInCall = telecomManager != null ? true ^ telecomManager.isInCall() : true;
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("isTelephonyIdle() - ", TAG, zIsInCall);
+        return zIsInCall;
     }
 
     public static boolean isTestModeIndicatorGarden() {
@@ -548,7 +544,8 @@ public final class DeviceState {
         return false;
     }
 
-    private static void readFingerprintSensor() {
+    private static void readFingerprintSensor() throws Throwable {
+        FileInputStream fileInputStream;
         if (sLoadedSensorValue) {
             return;
         }
@@ -557,51 +554,51 @@ public final class DeviceState {
             Log.w(TAG, "readFingerprintSensor : No file for sensor pos");
             return;
         }
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         try {
             try {
                 try {
-                    FileInputStream fileInputStream2 = new FileInputStream(file);
-                    try {
-                        byte[] bArr = new byte[(int) file.length()];
-                        if (fileInputStream2.read(bArr) > 0) {
-                            fileInputStream2.close();
-                            String[] split = new String(bArr, StandardCharsets.UTF_8).split(",");
-                            sSemSensorMarginBottom = split[0];
-                            sSemSensorAreaHeight = split[3];
-                            sSemSensorImageSize = split[7];
-                            sLoadedSensorValue = true;
-                        } else {
-                            fileInputStream = fileInputStream2;
-                        }
-                    } catch (Exception e) {
-                        e = e;
-                        fileInputStream = fileInputStream2;
-                        Log.e(TAG, "readFingerprintSensor : failure to read sensor info : ", e);
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return;
-                    } catch (Throwable th) {
-                        th = th;
-                        fileInputStream = fileInputStream2;
-                        if (fileInputStream != null) {
-                            try {
-                                fileInputStream.close();
-                            } catch (Exception e2) {
-                                Log.e(TAG, "readFingerprintSensor : failed to close file", e2);
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
+                    fileInputStream = new FileInputStream(file);
+                } catch (Exception e) {
+                    e = e;
                 }
-            } catch (Exception e3) {
-                e = e3;
+            } catch (Throwable th) {
+                th = th;
             }
-            if (fileInputStream != null) {
-                fileInputStream.close();
+            try {
+                byte[] bArr = new byte[(int) file.length()];
+                if (fileInputStream.read(bArr) > 0) {
+                    fileInputStream.close();
+                    String[] strArrSplit = new String(bArr, StandardCharsets.UTF_8).split(",");
+                    sSemSensorMarginBottom = strArrSplit[0];
+                    sSemSensorAreaHeight = strArrSplit[3];
+                    sSemSensorImageSize = strArrSplit[7];
+                    sLoadedSensorValue = true;
+                } else {
+                    fileInputStream2 = fileInputStream;
+                }
+            } catch (Exception e2) {
+                e = e2;
+                fileInputStream2 = fileInputStream;
+                Log.e(TAG, "readFingerprintSensor : failure to read sensor info : ", e);
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                return;
+            } catch (Throwable th2) {
+                th = th2;
+                fileInputStream2 = fileInputStream;
+                if (fileInputStream2 != null) {
+                    try {
+                        fileInputStream2.close();
+                    } catch (Exception e3) {
+                        Log.e(TAG, "readFingerprintSensor : failed to close file", e3);
+                    }
+                }
+                throw th;
+            }
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
             }
         } catch (Exception e4) {
             Log.e(TAG, "readFingerprintSensor : failed to close file", e4);
@@ -612,14 +609,14 @@ public final class DeviceState {
         deviceDensity = 0;
     }
 
-    public static void setInDisplayFingerprintSensorPosition(DisplayMetrics displayMetrics) {
+    public static void setInDisplayFingerprintSensorPosition(DisplayMetrics displayMetrics) throws Throwable {
         readFingerprintSensor();
-        float applyDimension = TypedValue.applyDimension(5, Float.parseFloat(sSemSensorImageSize), displayMetrics);
-        int applyDimension2 = (int) TypedValue.applyDimension(5, Float.parseFloat(sSemSensorMarginBottom), displayMetrics);
-        int i = (int) applyDimension;
-        sInDisplayFingerprintHeight = (i / 2) + (((int) TypedValue.applyDimension(5, Float.parseFloat(sSemSensorAreaHeight), displayMetrics)) / 2) + applyDimension2;
+        float fApplyDimension = TypedValue.applyDimension(5, Float.parseFloat(sSemSensorImageSize), displayMetrics);
+        int iApplyDimension = (int) TypedValue.applyDimension(5, Float.parseFloat(sSemSensorMarginBottom), displayMetrics);
+        int i = (int) fApplyDimension;
+        sInDisplayFingerprintHeight = (i / 2) + (((int) TypedValue.applyDimension(5, Float.parseFloat(sSemSensorAreaHeight), displayMetrics)) / 2) + iApplyDimension;
         sInDisplayFingerprintImageSize = i;
-        sInDisplayFingerprintMarginBottom = applyDimension2;
+        sInDisplayFingerprintMarginBottom = iApplyDimension;
     }
 
     public static void setLandscapeDefaultRotation() {

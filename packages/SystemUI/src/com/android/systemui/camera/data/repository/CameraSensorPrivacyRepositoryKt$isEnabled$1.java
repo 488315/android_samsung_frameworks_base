@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SensorPrivacyManager $this_isEnabled;
@@ -52,7 +51,7 @@ final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda im
             final ?? r1 = new SensorPrivacyManager.OnSensorPrivacyChangedListener() { // from class: com.android.systemui.camera.data.repository.CameraSensorPrivacyRepositoryKt$isEnabled$1$privacyCallback$1
                 public final void onSensorPrivacyChanged(int i2, boolean z) {
                     if (i2 == 2) {
-                        ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 }
             };

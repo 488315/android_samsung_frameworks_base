@@ -1,7 +1,7 @@
 package com.android.systemui.keyguard.ui.viewmodel;
 
 import com.android.systemui.util.ui.AnimatedValue;
-import com.android.systemui.util.ui.AnimatedValueKt$zip$1;
+import com.android.systemui.util.ui.AnimatedValueKt;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRootViewModel$isAodPromotedNotifVisible$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -24,11 +23,11 @@ final class KeyguardRootViewModel$isAodPromotedNotifVisible$1 extends SuspendLam
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
         KeyguardRootViewModel$isAodPromotedNotifVisible$1 keyguardRootViewModel$isAodPromotedNotifVisible$1 = new KeyguardRootViewModel$isAodPromotedNotifVisible$1((Continuation) obj4);
         keyguardRootViewModel$isAodPromotedNotifVisible$1.L$0 = (AnimatedValue) obj;
         keyguardRootViewModel$isAodPromotedNotifVisible$1.L$1 = (AnimatedValue) obj2;
-        keyguardRootViewModel$isAodPromotedNotifVisible$1.Z$0 = booleanValue;
+        keyguardRootViewModel$isAodPromotedNotifVisible$1.Z$0 = zBooleanValue;
         return keyguardRootViewModel$isAodPromotedNotifVisible$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -62,13 +61,13 @@ final class KeyguardRootViewModel$isAodPromotedNotifVisible$1 extends SuspendLam
             }
             value2 = ((AnimatedValue.NotAnimating) animatedValue2).getValue();
         }
-        Boolean valueOf = Boolean.valueOf(((Boolean) value).booleanValue() && !((Boolean) value2).booleanValue() && z);
+        Boolean boolValueOf = Boolean.valueOf(((Boolean) value).booleanValue() && !((Boolean) value2).booleanValue() && z);
         if (z2) {
             if (z3) {
-                return new AnimatedValue.Animating(valueOf, new AnimatedValueKt$zip$1(animatedValue, animatedValue2));
+                return new AnimatedValue.Animating(boolValueOf, new AnimatedValueKt.C11831(animatedValue, animatedValue2));
             }
             if (animatedValue2 instanceof AnimatedValue.NotAnimating) {
-                return new AnimatedValue.Animating(valueOf, ((AnimatedValue.Animating) animatedValue).getOnStopAnimating());
+                return new AnimatedValue.Animating(boolValueOf, ((AnimatedValue.Animating) animatedValue).getOnStopAnimating());
             }
             throw new NoWhenBranchMatchedException();
         }
@@ -76,10 +75,10 @@ final class KeyguardRootViewModel$isAodPromotedNotifVisible$1 extends SuspendLam
             throw new NoWhenBranchMatchedException();
         }
         if (z3) {
-            return new AnimatedValue.Animating(valueOf, ((AnimatedValue.Animating) animatedValue2).getOnStopAnimating());
+            return new AnimatedValue.Animating(boolValueOf, ((AnimatedValue.Animating) animatedValue2).getOnStopAnimating());
         }
         if (animatedValue2 instanceof AnimatedValue.NotAnimating) {
-            return new AnimatedValue.NotAnimating(valueOf);
+            return new AnimatedValue.NotAnimating(boolValueOf);
         }
         throw new NoWhenBranchMatchedException();
     }

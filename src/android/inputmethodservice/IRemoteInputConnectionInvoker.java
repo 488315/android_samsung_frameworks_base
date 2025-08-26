@@ -379,11 +379,11 @@ final class IRemoteInputConnectionInvoker {
             intResultReceiver = null;
         }
         try {
-            CancellationSignalBeamer.Sender.MustClose beamScopeIfNeeded = getCancellationSignalBeamer().beamScopeIfNeeded(handwritingGesture);
+            CancellationSignalBeamer.Sender.MustClose mustCloseBeamScopeIfNeeded = getCancellationSignalBeamer().beamScopeIfNeeded(handwritingGesture);
             try {
                 this.mConnection.performHandwritingGesture(createHeader(), ParcelableHandwritingGesture.of(handwritingGesture), intResultReceiver);
-                if (beamScopeIfNeeded != null) {
-                    beamScopeIfNeeded.close();
+                if (mustCloseBeamScopeIfNeeded != null) {
+                    mustCloseBeamScopeIfNeeded.close();
                 }
             } finally {
             }
@@ -402,13 +402,13 @@ final class IRemoteInputConnectionInvoker {
 
     public boolean previewHandwritingGesture(HandwritingGesture handwritingGesture, CancellationSignal cancellationSignal) {
         try {
-            CancellationSignalBeamer.Sender.CloseableToken beam = beam(cancellationSignal);
+            CancellationSignalBeamer.Sender.CloseableToken closeableTokenBeam = beam(cancellationSignal);
             try {
-                this.mConnection.previewHandwritingGesture(createHeader(), ParcelableHandwritingGesture.of(handwritingGesture), beam);
-                if (beam == null) {
+                this.mConnection.previewHandwritingGesture(createHeader(), ParcelableHandwritingGesture.of(handwritingGesture), closeableTokenBeam);
+                if (closeableTokenBeam == null) {
                     return true;
                 }
-                beam.close();
+                closeableTokenBeam.close();
                 return true;
             } finally {
             }

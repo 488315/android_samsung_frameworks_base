@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.UserHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -31,7 +32,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUITextView;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback {
     public KeyguardSecurityCallback mCallback;
@@ -45,7 +45,6 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
     public SelectedUserInteractor mSelectedUserInteractor;
     public int mSubscriptionId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecESimArea$1, reason: invalid class name */
     public class AnonymousClass1 extends BroadcastReceiver {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -70,7 +69,7 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
                         systemUIDialog.setPositiveButton(R.string.kg_esim_memory_reset_remove_button, new DialogInterface.OnClickListener() { // from class: com.android.keyguard.KeyguardSecESimArea$1$$ExternalSyntheticLambda0
                             @Override // android.content.DialogInterface.OnClickListener
                             public final void onClick(DialogInterface dialogInterface, int i) {
-                                KeyguardSecESimArea.AnonymousClass1 anonymousClass1 = KeyguardSecESimArea.AnonymousClass1.this;
+                                KeyguardSecESimArea.AnonymousClass1 anonymousClass1 = this.f$0;
                                 int i2 = KeyguardSecESimArea.AnonymousClass1.$r8$clinit;
                                 Log.d("KeyguardSecEsimArea", "onClick - Remove button");
                                 KeyguardSecESimArea.this.mKeyguardUpdateMonitor.removeESim(KeyguardSecESimArea.this.mKeyguardUpdateMonitor.getNextSubIdForState(2));
@@ -116,7 +115,7 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
     }
 
     /* renamed from: $r8$lambda$xYLrsvIfM53IKX71aim7tERO9-A, reason: not valid java name */
-    public static /* synthetic */ void m956$r8$lambda$xYLrsvIfM53IKX71aim7tERO9A(KeyguardSecESimArea keyguardSecESimArea) {
+    public static /* synthetic */ void m958$r8$lambda$xYLrsvIfM53IKX71aim7tERO9A(KeyguardSecESimArea keyguardSecESimArea) {
         Log.d("KeyguardSecEsimArea", "onClick - skip button");
         KeyguardSecurityCallback keyguardSecurityCallback = keyguardSecESimArea.mCallback;
         if (keyguardSecurityCallback != null) {
@@ -155,7 +154,7 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mESimText = (SystemUITextView) findViewById(R.id.esim_text);
         SpannableString spannableString = new SpannableString(this.mESimText.getText().toString());
@@ -165,7 +164,7 @@ class KeyguardSecESimArea extends FrameLayout implements SystemUIWidgetCallback 
         this.mESimText.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardSecESimArea$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                KeyguardSecESimArea.m956$r8$lambda$xYLrsvIfM53IKX71aim7tERO9A(KeyguardSecESimArea.this);
+                KeyguardSecESimArea.m958$r8$lambda$xYLrsvIfM53IKX71aim7tERO9A(this.f$0);
             }
         });
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.skip_progress);

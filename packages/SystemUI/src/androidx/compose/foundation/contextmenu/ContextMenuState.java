@@ -8,15 +8,12 @@ import androidx.compose.ui.geometry.Offset;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContextMenuState {
     public final MutableState status$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Status {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Closed extends Status {
             public static final Closed INSTANCE = new Closed();
 
@@ -29,7 +26,6 @@ public final class ContextMenuState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Open extends Status {
             public final long offset;
 
@@ -44,7 +40,7 @@ public final class ContextMenuState {
                 if (!(obj instanceof Open)) {
                     return false;
                 }
-                return Offset.m396equalsimpl0(this.offset, ((Open) obj).offset);
+                return Offset.m398equalsimpl0(this.offset, ((Open) obj).offset);
             }
 
             public final int hashCode() {
@@ -53,7 +49,7 @@ public final class ContextMenuState {
             }
 
             public final String toString() {
-                return "Open(offset=" + ((Object) Offset.m403toStringimpl(this.offset)) + ')';
+                return "Open(offset=" + ((Object) Offset.m405toStringimpl(this.offset)) + ')';
             }
 
             private Open(long j) {
@@ -74,6 +70,7 @@ public final class ContextMenuState {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public ContextMenuState() {
         this(null, 1, 0 == true ? 1 : 0);
     }

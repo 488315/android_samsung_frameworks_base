@@ -90,34 +90,34 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
     }
 
     public String getTime() {
-        String fromByteArray = Strings.fromByteArray(this.contents);
-        if (fromByteArray.charAt(fromByteArray.length() - 1) == 'Z') {
-            return fromByteArray.substring(0, fromByteArray.length() - 1) + "GMT+00:00";
+        String strFromByteArray = Strings.fromByteArray(this.contents);
+        if (strFromByteArray.charAt(strFromByteArray.length() - 1) == 'Z') {
+            return strFromByteArray.substring(0, strFromByteArray.length() - 1) + "GMT+00:00";
         }
-        int length = fromByteArray.length();
-        char charAt = fromByteArray.charAt(length - 6);
-        if ((charAt == '-' || charAt == '+') && fromByteArray.indexOf("GMT") == length - 9) {
-            return fromByteArray;
+        int length = strFromByteArray.length();
+        char cCharAt = strFromByteArray.charAt(length - 6);
+        if ((cCharAt == '-' || cCharAt == '+') && strFromByteArray.indexOf("GMT") == length - 9) {
+            return strFromByteArray;
         }
-        int length2 = fromByteArray.length();
+        int length2 = strFromByteArray.length();
         int i = length2 - 5;
-        char charAt2 = fromByteArray.charAt(i);
-        if (charAt2 == '-' || charAt2 == '+') {
+        char cCharAt2 = strFromByteArray.charAt(i);
+        if (cCharAt2 == '-' || cCharAt2 == '+') {
             StringBuilder sb = new StringBuilder();
-            sb.append(fromByteArray.substring(0, i));
+            sb.append(strFromByteArray.substring(0, i));
             sb.append("GMT");
             int i2 = length2 - 2;
-            sb.append(fromByteArray.substring(i, i2));
+            sb.append(strFromByteArray.substring(i, i2));
             sb.append(":");
-            sb.append(fromByteArray.substring(i2));
+            sb.append(strFromByteArray.substring(i2));
             return sb.toString();
         }
-        int length3 = fromByteArray.length() - 3;
-        char charAt3 = fromByteArray.charAt(length3);
-        if (charAt3 == '-' || charAt3 == '+') {
-            return fromByteArray.substring(0, length3) + "GMT" + fromByteArray.substring(length3) + ":00";
+        int length3 = strFromByteArray.length() - 3;
+        char cCharAt3 = strFromByteArray.charAt(length3);
+        if (cCharAt3 == '-' || cCharAt3 == '+') {
+            return strFromByteArray.substring(0, length3) + "GMT" + strFromByteArray.substring(length3) + ":00";
         }
-        return fromByteArray + calculateGMTOffset(fromByteArray);
+        return strFromByteArray + calculateGMTOffset(strFromByteArray);
     }
 
     private String calculateGMTOffset(String str) {
@@ -162,23 +162,23 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
     }
 
     private String pruneFractionalSeconds(String str) {
-        char charAt;
-        String substring = str.substring(14);
+        char cCharAt;
+        String strSubstring = str.substring(14);
         int i = 1;
-        while (i < substring.length() && '0' <= (charAt = substring.charAt(i)) && charAt <= '9') {
+        while (i < strSubstring.length() && '0' <= (cCharAt = strSubstring.charAt(i)) && cCharAt <= '9') {
             i++;
         }
         int i2 = i - 1;
         if (i2 > 3) {
-            return str.substring(0, 14) + (substring.substring(0, 4) + substring.substring(i));
+            return str.substring(0, 14) + (strSubstring.substring(0, 4) + strSubstring.substring(i));
         }
         if (i2 == 1) {
-            return str.substring(0, 14) + (substring.substring(0, i) + "00" + substring.substring(i));
+            return str.substring(0, 14) + (strSubstring.substring(0, i) + "00" + strSubstring.substring(i));
         }
         if (i2 != 2) {
             return str;
         }
-        return str.substring(0, 14) + (substring.substring(0, i) + "0" + substring.substring(i));
+        return str.substring(0, 14) + (strSubstring.substring(0, i) + "0" + strSubstring.substring(i));
     }
 
     private String convert(int i) {
@@ -189,23 +189,23 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
     }
 
     public Date getDate() throws ParseException {
-        SimpleDateFormat calculateGMTDateFormat;
+        SimpleDateFormat simpleDateFormatCalculateGMTDateFormat;
         SimpleDateFormat simpleDateFormat;
-        String fromByteArray = Strings.fromByteArray(this.contents);
-        if (fromByteArray.endsWith(GnssSignalType.CODE_TYPE_Z)) {
+        String strFromByteArray = Strings.fromByteArray(this.contents);
+        if (strFromByteArray.endsWith(GnssSignalType.CODE_TYPE_Z)) {
             if (hasFractionalSeconds()) {
-                calculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS'Z'", LocaleUtil.EN_Locale);
+                simpleDateFormatCalculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS'Z'", LocaleUtil.EN_Locale);
             } else if (hasSeconds()) {
-                calculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmmss'Z'", LocaleUtil.EN_Locale);
+                simpleDateFormatCalculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmmss'Z'", LocaleUtil.EN_Locale);
             } else if (hasMinutes()) {
-                calculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmm'Z'", LocaleUtil.EN_Locale);
+                simpleDateFormatCalculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHHmm'Z'", LocaleUtil.EN_Locale);
             } else {
-                calculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHH'Z'", LocaleUtil.EN_Locale);
+                simpleDateFormatCalculateGMTDateFormat = new SimpleDateFormat("yyyyMMddHH'Z'", LocaleUtil.EN_Locale);
             }
-            calculateGMTDateFormat.setTimeZone(new SimpleTimeZone(0, GnssSignalType.CODE_TYPE_Z));
-        } else if (fromByteArray.indexOf(45) > 0 || fromByteArray.indexOf(43) > 0) {
-            fromByteArray = getTime();
-            calculateGMTDateFormat = calculateGMTDateFormat();
+            simpleDateFormatCalculateGMTDateFormat.setTimeZone(new SimpleTimeZone(0, GnssSignalType.CODE_TYPE_Z));
+        } else if (strFromByteArray.indexOf(45) > 0 || strFromByteArray.indexOf(43) > 0) {
+            strFromByteArray = getTime();
+            simpleDateFormatCalculateGMTDateFormat = calculateGMTDateFormat();
         } else {
             if (hasFractionalSeconds()) {
                 simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS", Locale.US);
@@ -216,13 +216,13 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
             } else {
                 simpleDateFormat = new SimpleDateFormat("yyyyMMddHH", Locale.US);
             }
-            calculateGMTDateFormat = simpleDateFormat;
-            calculateGMTDateFormat.setTimeZone(new SimpleTimeZone(0, TimeZone.getDefault().getID()));
+            simpleDateFormatCalculateGMTDateFormat = simpleDateFormat;
+            simpleDateFormatCalculateGMTDateFormat.setTimeZone(new SimpleTimeZone(0, TimeZone.getDefault().getID()));
         }
         if (hasFractionalSeconds()) {
-            fromByteArray = pruneFractionalSeconds(fromByteArray);
+            strFromByteArray = pruneFractionalSeconds(strFromByteArray);
         }
-        return calculateGMTDateFormat.parse(fromByteArray);
+        return simpleDateFormatCalculateGMTDateFormat.parse(strFromByteArray);
     }
 
     protected boolean hasFractionalSeconds() {

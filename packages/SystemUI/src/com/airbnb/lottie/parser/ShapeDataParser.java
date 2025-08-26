@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShapeDataParser implements ValueParser {
     public static final ShapeDataParser INSTANCE = new ShapeDataParser();
@@ -24,48 +23,48 @@ public class ShapeDataParser implements ValueParser {
             jsonReader.beginArray();
         }
         jsonReader.beginObject();
-        List list = null;
-        List list2 = null;
-        List list3 = null;
-        boolean z = false;
+        List listJsonToPoints = null;
+        List listJsonToPoints2 = null;
+        List listJsonToPoints3 = null;
+        boolean zNextBoolean = false;
         while (jsonReader.hasNext()) {
-            int selectName = jsonReader.selectName(NAMES);
-            if (selectName == 0) {
-                z = jsonReader.nextBoolean();
-            } else if (selectName == 1) {
-                list = JsonUtils.jsonToPoints(jsonReader, f);
-            } else if (selectName == 2) {
-                list2 = JsonUtils.jsonToPoints(jsonReader, f);
-            } else if (selectName != 3) {
+            int iSelectName = jsonReader.selectName(NAMES);
+            if (iSelectName == 0) {
+                zNextBoolean = jsonReader.nextBoolean();
+            } else if (iSelectName == 1) {
+                listJsonToPoints = JsonUtils.jsonToPoints(jsonReader, f);
+            } else if (iSelectName == 2) {
+                listJsonToPoints2 = JsonUtils.jsonToPoints(jsonReader, f);
+            } else if (iSelectName != 3) {
                 jsonReader.skipName();
                 jsonReader.skipValue();
             } else {
-                list3 = JsonUtils.jsonToPoints(jsonReader, f);
+                listJsonToPoints3 = JsonUtils.jsonToPoints(jsonReader, f);
             }
         }
         jsonReader.endObject();
         if (jsonReader.peek() == JsonReader.Token.END_ARRAY) {
             jsonReader.endArray();
         }
-        if (list == null || list2 == null || list3 == null) {
+        if (listJsonToPoints == null || listJsonToPoints2 == null || listJsonToPoints3 == null) {
             throw new IllegalArgumentException("Shape data was missing information.");
         }
-        if (list.isEmpty()) {
+        if (listJsonToPoints.isEmpty()) {
             return new ShapeData(new PointF(), false, Collections.EMPTY_LIST);
         }
-        int size = list.size();
-        PointF pointF = (PointF) list.get(0);
+        int size = listJsonToPoints.size();
+        PointF pointF = (PointF) listJsonToPoints.get(0);
         ArrayList arrayList = new ArrayList(size);
         for (int i = 1; i < size; i++) {
-            PointF pointF2 = (PointF) list.get(i);
+            PointF pointF2 = (PointF) listJsonToPoints.get(i);
             int i2 = i - 1;
-            arrayList.add(new CubicCurveData(MiscUtils.addPoints((PointF) list.get(i2), (PointF) list3.get(i2)), MiscUtils.addPoints(pointF2, (PointF) list2.get(i)), pointF2));
+            arrayList.add(new CubicCurveData(MiscUtils.addPoints((PointF) listJsonToPoints.get(i2), (PointF) listJsonToPoints3.get(i2)), MiscUtils.addPoints(pointF2, (PointF) listJsonToPoints2.get(i)), pointF2));
         }
-        if (z) {
-            PointF pointF3 = (PointF) list.get(0);
+        if (zNextBoolean) {
+            PointF pointF3 = (PointF) listJsonToPoints.get(0);
             int i3 = size - 1;
-            arrayList.add(new CubicCurveData(MiscUtils.addPoints((PointF) list.get(i3), (PointF) list3.get(i3)), MiscUtils.addPoints(pointF3, (PointF) list2.get(0)), pointF3));
+            arrayList.add(new CubicCurveData(MiscUtils.addPoints((PointF) listJsonToPoints.get(i3), (PointF) listJsonToPoints3.get(i3)), MiscUtils.addPoints(pointF3, (PointF) listJsonToPoints2.get(0)), pointF3));
         }
-        return new ShapeData(pointF, z, arrayList);
+        return new ShapeData(pointF, zNextBoolean, arrayList);
     }
 }

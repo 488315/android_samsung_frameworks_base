@@ -3,7 +3,6 @@ package kotlinx.serialization.internal;
 import kotlin.jvm.internal.BooleanCompanionObject;
 import kotlinx.serialization.encoding.AbstractEncoder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class BooleanArraySerializer extends PrimitiveArraySerializer {
     public static final BooleanArraySerializer INSTANCE = new BooleanArraySerializer();

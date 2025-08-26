@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.app.Notification;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -56,7 +57,7 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         this(context, attributeSet, i, 0);
     }
 
-    public MessagingImageMessage(Context context, AttributeSet attributeSet, int i, int i2) {
+    public MessagingImageMessage(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mState = new MessagingMessageState(this);
         this.mPath = new Path();
@@ -80,17 +81,17 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         try {
             Uri dataUri = message.getDataUri();
             ImageResolver imageResolver = this.mImageResolver;
-            Drawable loadImage = imageResolver != null ? imageResolver.loadImage(dataUri) : LocalImageResolver.resolveImage(dataUri, getContext());
-            if (loadImage == null) {
+            Drawable drawableLoadImage = imageResolver != null ? imageResolver.loadImage(dataUri) : LocalImageResolver.resolveImage(dataUri, getContext());
+            if (drawableLoadImage == null) {
                 return false;
             }
-            int intrinsicHeight = loadImage.getIntrinsicHeight();
+            int intrinsicHeight = drawableLoadImage.getIntrinsicHeight();
             if (intrinsicHeight == 0) {
                 Log.w(TAG, "Drawable with 0 intrinsic height was returned");
                 return false;
             }
-            this.mDrawable = loadImage;
-            this.mAspectRatio = loadImage.getIntrinsicWidth() / intrinsicHeight;
+            this.mDrawable = drawableLoadImage;
+            this.mAspectRatio = drawableLoadImage.getIntrinsicWidth() / intrinsicHeight;
             if (z) {
                 return true;
             }
@@ -104,16 +105,16 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
 
     static MessagingMessage createMessage(IMessagingLayout iMessagingLayout, Notification.MessagingStyle.Message message, ImageResolver imageResolver, boolean z) {
         MessagingLinearLayout messagingLinearLayout = iMessagingLayout.getMessagingLinearLayout();
-        MessagingImageMessage acquire = sInstancePool.acquire();
-        if (acquire == null) {
-            acquire = (MessagingImageMessage) LayoutInflater.from(iMessagingLayout.getContext()).inflate(R.layout.notification_template_messaging_image_message, (ViewGroup) messagingLinearLayout, false);
-            acquire.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
+        MessagingImageMessage messagingImageMessage = (MessagingImageMessage) sInstancePool.acquire();
+        if (messagingImageMessage == null) {
+            messagingImageMessage = (MessagingImageMessage) LayoutInflater.from(iMessagingLayout.getContext()).inflate(R.layout.notification_template_messaging_image_message, (ViewGroup) messagingLinearLayout, false);
+            messagingImageMessage.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
         }
-        acquire.setImageResolver(imageResolver);
-        if (acquire.setMessage(message, false)) {
-            return acquire;
+        messagingImageMessage.setImageResolver(imageResolver);
+        if (messagingImageMessage.setMessage(message, false)) {
+            return messagingImageMessage;
         }
-        acquire.recycle();
+        messagingImageMessage.recycle();
         return MessagingTextMessage.createMessage(iMessagingLayout, message, z);
     }
 
@@ -135,10 +136,10 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         }
         canvas.save();
         canvas.clipPath(getRoundedRectPath());
-        int max = (int) Math.max(Math.min(getHeight(), getActualHeight()) * this.mAspectRatio, getActualWidth());
-        int actualWidth = (int) ((getActualWidth() - max) / 2.0f);
+        int iMax = (int) Math.max(Math.min(getHeight(), getActualHeight()) * this.mAspectRatio, getActualWidth());
+        int actualWidth = (int) ((getActualWidth() - iMax) / 2.0f);
         int actualHeight = (int) ((getActualHeight() - r1) / 2.0f);
-        this.mDrawable.setBounds(actualWidth, actualHeight, max + actualWidth, ((int) Math.max((int) Math.max(Math.min(getWidth(), getActualWidth()) / this.mAspectRatio, getActualHeight()), max / this.mAspectRatio)) + actualHeight);
+        this.mDrawable.setBounds(actualWidth, actualHeight, iMax + actualWidth, ((int) Math.max((int) Math.max(Math.min(getWidth(), getActualWidth()) / this.mAspectRatio, getActualHeight()), iMax / this.mAspectRatio)) + actualHeight);
         this.mDrawable.draw(canvas);
         canvas.restore();
     }
@@ -148,19 +149,19 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         int actualHeight = getActualHeight();
         this.mPath.reset();
         int i = this.mImageRounding;
-        float min = Math.min(actualWidth / 2, i);
-        float min2 = Math.min(actualHeight / 2, i);
+        float fMin = Math.min(actualWidth / 2, i);
+        float fMin2 = Math.min(actualHeight / 2, i);
         float f = 0;
-        float f2 = f + min2;
+        float f2 = f + fMin2;
         this.mPath.moveTo(f, f2);
-        float f3 = f + min;
+        float f3 = f + fMin;
         this.mPath.quadTo(f, f, f3, f);
         float f4 = actualWidth;
-        float f5 = f4 - min;
+        float f5 = f4 - fMin;
         this.mPath.lineTo(f5, f);
         this.mPath.quadTo(f4, f, f4, f2);
         float f6 = actualHeight;
-        float f7 = f6 - min2;
+        float f7 = f6 - fMin2;
         this.mPath.lineTo(f4, f7);
         this.mPath.quadTo(f4, f6, f5, f6);
         this.mPath.lineTo(f3, f6);
@@ -209,8 +210,8 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         } else if (this.mIsIsolated) {
             setMeasuredDimension(View.MeasureSpec.getSize(i), View.MeasureSpec.getSize(i2));
         } else {
-            int min = Math.min(View.MeasureSpec.getSize(i), this.mDrawable.getIntrinsicWidth());
-            setMeasuredDimension(min, (int) Math.min(View.MeasureSpec.getSize(i2), min / this.mAspectRatio));
+            int iMin = Math.min(View.MeasureSpec.getSize(i), this.mDrawable.getIntrinsicWidth());
+            setMeasuredDimension(iMin, (int) Math.min(View.MeasureSpec.getSize(i2), iMin / this.mAspectRatio));
         }
     }
 

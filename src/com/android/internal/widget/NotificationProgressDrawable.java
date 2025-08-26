@@ -83,10 +83,10 @@ public final class NotificationProgressDrawable extends Drawable {
     public void draw(Canvas canvas) {
         float f = this.mState.mPointRadius;
         float f2 = getBounds().left;
-        float centerY = getBounds().centerY();
+        float fCenterY = getBounds().centerY();
         int size = this.mParts.size();
-        float round = Math.round(centerY - f);
-        float round2 = Math.round(f + centerY);
+        float fRound = Math.round(fCenterY - f);
+        float fRound2 = Math.round(f + fCenterY);
         for (int i = 0; i < size; i++) {
             DrawablePart drawablePart = this.mParts.get(i);
             float f3 = drawablePart.mStart + f2;
@@ -97,11 +97,11 @@ public final class NotificationProgressDrawable extends Drawable {
                     float f5 = (drawableSegment.mFaded ? this.mState.mFadedSegmentHeight : this.mState.mSegmentHeight) / 2.0f;
                     float f6 = this.mState.mSegmentCornerRadius;
                     this.mFillPaint.setColor(drawableSegment.mColor);
-                    this.mSegRectF.set(Math.round(f3), Math.round(centerY - f5), Math.round(f4), Math.round(f5 + centerY));
+                    this.mSegRectF.set(Math.round(f3), Math.round(fCenterY - f5), Math.round(f4), Math.round(f5 + fCenterY));
                     canvas.drawRoundRect(this.mSegRectF, f6, f6, this.mFillPaint);
                 }
             } else if (drawablePart instanceof DrawablePoint) {
-                this.mPointRectF.set(Math.round(f3), round, Math.round(f4), round2);
+                this.mPointRectF.set(Math.round(f3), fRound, Math.round(f4), fRound2);
                 float f7 = this.mState.mPointRectInset;
                 float f8 = this.mState.mPointRectCornerRadius;
                 this.mPointRectF.inset(f7, f7);
@@ -113,7 +113,7 @@ public final class NotificationProgressDrawable extends Drawable {
             float f9 = getBounds().right;
             float f10 = this.mState.mFadedSegmentHeight / 2.0f;
             this.mFillPaint.setColor(this.mEndDotColor);
-            this.mSegRectF.set(Math.round(f9 - this.mState.mFadedSegmentHeight), Math.round(centerY - f10), Math.round(f9), Math.round(centerY + f10));
+            this.mSegRectF.set(Math.round(f9 - this.mState.mFadedSegmentHeight), Math.round(fCenterY - f10), Math.round(f9), Math.round(fCenterY + f10));
             canvas.drawRoundRect(this.mSegRectF, this.mState.mSegmentCornerRadius, this.mState.mSegmentCornerRadius, this.mFillPaint);
         }
     }
@@ -188,13 +188,13 @@ public final class NotificationProgressDrawable extends Drawable {
             if (next == 2 && depth2 <= depth) {
                 String name = xmlPullParser.getName();
                 if (name.equals("segments")) {
-                    TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.NotificationProgressDrawableSegments);
-                    updateSegmentsFromTypedArray(obtainAttributes);
-                    obtainAttributes.recycle();
+                    TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.NotificationProgressDrawableSegments);
+                    updateSegmentsFromTypedArray(typedArrayObtainAttributes);
+                    typedArrayObtainAttributes.recycle();
                 } else if (name.equals("points")) {
-                    TypedArray obtainAttributes2 = obtainAttributes(resources, theme, attributeSet, R.styleable.NotificationProgressDrawablePoints);
-                    updatePointsFromTypedArray(obtainAttributes2);
-                    obtainAttributes2.recycle();
+                    TypedArray typedArrayObtainAttributes2 = obtainAttributes(resources, theme, attributeSet, R.styleable.NotificationProgressDrawablePoints);
+                    updatePointsFromTypedArray(typedArrayObtainAttributes2);
+                    typedArrayObtainAttributes2.recycle();
                 } else {
                     Log.w(TAG, "Bad element under NotificationProgressDrawable: " + name);
                 }
@@ -205,14 +205,14 @@ public final class NotificationProgressDrawable extends Drawable {
     private void applyThemeChildElements(Resources.Theme theme) {
         State state = this.mState;
         if (state.mThemeAttrsSegments != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(state.mThemeAttrsSegments, R.styleable.NotificationProgressDrawableSegments);
-            updateSegmentsFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(state.mThemeAttrsSegments, R.styleable.NotificationProgressDrawableSegments);
+            updateSegmentsFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         if (state.mThemeAttrsPoints != null) {
-            TypedArray resolveAttributes2 = theme.resolveAttributes(state.mThemeAttrsPoints, R.styleable.NotificationProgressDrawablePoints);
-            updatePointsFromTypedArray(resolveAttributes2);
-            resolveAttributes2.recycle();
+            TypedArray typedArrayResolveAttributes2 = theme.resolveAttributes(state.mThemeAttrsPoints, R.styleable.NotificationProgressDrawablePoints);
+            updatePointsFromTypedArray(typedArrayResolveAttributes2);
+            typedArrayResolveAttributes2.recycle();
         }
     }
 
@@ -252,8 +252,8 @@ public final class NotificationProgressDrawable extends Drawable {
         if (!z) {
             return (int) f;
         }
-        int round = Math.round(f);
-        return round != 0 ? round : i > 0 ? 1 : -1;
+        int iRound = Math.round(f);
+        return iRound != 0 ? iRound : i > 0 ? 1 : -1;
     }
 
     public static abstract class DrawablePart {
@@ -391,11 +391,11 @@ public final class NotificationProgressDrawable extends Drawable {
             this.mThemeAttrs = state.mThemeAttrs;
             this.mThemeAttrsSegments = state.mThemeAttrsSegments;
             this.mThemeAttrsPoints = state.mThemeAttrsPoints;
-            int resolveDensity = NotificationProgressDrawable.resolveDensity(resources, state.mDensity);
-            this.mDensity = resolveDensity;
+            int iResolveDensity = NotificationProgressDrawable.resolveDensity(resources, state.mDensity);
+            this.mDensity = iResolveDensity;
             int i = state.mDensity;
-            if (i != resolveDensity) {
-                applyDensityScaling(i, resolveDensity);
+            if (i != iResolveDensity) {
+                applyDensityScaling(i, iResolveDensity);
             }
         }
 
@@ -426,6 +426,7 @@ public final class NotificationProgressDrawable extends Drawable {
             }
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new NotificationProgressDrawable(this, null);

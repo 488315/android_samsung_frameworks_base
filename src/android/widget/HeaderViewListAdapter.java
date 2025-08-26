@@ -114,42 +114,42 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
 
     @Override // android.widget.ListAdapter
     public boolean isEnabled(int i) {
-        int i2;
+        int count;
         int headersCount = getHeadersCount();
         if (i < headersCount) {
             return this.mHeaderViewInfos.get(i).isSelectable;
         }
-        int i3 = i - headersCount;
+        int i2 = i - headersCount;
         ListAdapter listAdapter = this.mAdapter;
         if (listAdapter != null) {
-            i2 = listAdapter.getCount();
-            if (i3 < i2) {
-                return this.mAdapter.isEnabled(i3);
+            count = listAdapter.getCount();
+            if (i2 < count) {
+                return this.mAdapter.isEnabled(i2);
             }
         } else {
-            i2 = 0;
+            count = 0;
         }
-        return this.mFooterViewInfos.get(i3 - i2).isSelectable;
+        return this.mFooterViewInfos.get(i2 - count).isSelectable;
     }
 
     @Override // android.widget.Adapter
     public Object getItem(int i) {
-        int i2;
+        int count;
         int headersCount = getHeadersCount();
         if (i < headersCount) {
             return this.mHeaderViewInfos.get(i).data;
         }
-        int i3 = i - headersCount;
+        int i2 = i - headersCount;
         ListAdapter listAdapter = this.mAdapter;
         if (listAdapter != null) {
-            i2 = listAdapter.getCount();
-            if (i3 < i2) {
-                return this.mAdapter.getItem(i3);
+            count = listAdapter.getCount();
+            if (i2 < count) {
+                return this.mAdapter.getItem(i2);
             }
         } else {
-            i2 = 0;
+            count = 0;
         }
-        return this.mFooterViewInfos.get(i3 - i2).data;
+        return this.mFooterViewInfos.get(i2 - count).data;
     }
 
     @Override // android.widget.Adapter
@@ -174,22 +174,22 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
 
     @Override // android.widget.Adapter
     public View getView(int i, View view, ViewGroup viewGroup) {
-        int i2;
+        int count;
         int headersCount = getHeadersCount();
         if (i < headersCount) {
             return this.mHeaderViewInfos.get(i).view;
         }
-        int i3 = i - headersCount;
+        int i2 = i - headersCount;
         ListAdapter listAdapter = this.mAdapter;
         if (listAdapter != null) {
-            i2 = listAdapter.getCount();
-            if (i3 < i2) {
-                return this.mAdapter.getView(i3, view, viewGroup);
+            count = listAdapter.getCount();
+            if (i2 < count) {
+                return this.mAdapter.getView(i2, view, viewGroup);
             }
         } else {
-            i2 = 0;
+            count = 0;
         }
-        return this.mFooterViewInfos.get(i3 - i2).view;
+        return this.mFooterViewInfos.get(i2 - count).view;
     }
 
     @Override // android.widget.Adapter

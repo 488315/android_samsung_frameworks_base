@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
@@ -39,7 +40,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DemoMobileConnectionsRepository implements MobileConnectionsRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,7 +69,6 @@ public final class DemoMobileConnectionsRepository implements MobileConnectionsR
     public Map connectionRepoCache = new LinkedHashMap();
     public final Map subscriptionInfoCache = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,20 +88,19 @@ public final class DemoMobileConnectionsRepository implements MobileConnectionsR
         this.scope = coroutineScope;
         this.logFactory = tableLogBufferFactory;
         SharedFlowKt.MutableSharedFlow$default(0, 1, null, 5);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._subscriptions = MutableStateFlow;
-        FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(MutableStateFlow, new DemoMobileConnectionsRepository$subscriptions$1(this, null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._subscriptions = stateFlowImplMutableStateFlow;
+        FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow, new DemoMobileConnectionsRepository$subscriptions$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), MutableStateFlow.getValue());
-        this.subscriptions = stateIn;
-        ChannelFlowTransformLatest mapLatest = FlowKt.mapLatest(stateIn, new DemoMobileConnectionsRepository$activeMobileDataSubscriptionId$1(null));
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
-        SubscriptionModel subscriptionModel = (SubscriptionModel) CollectionsKt___CollectionsKt.firstOrNull((List) stateIn.$$delegate_0.getValue());
-        final ReadonlyStateFlow stateIn2 = FlowKt.stateIn(mapLatest, coroutineScope, WhileSubscribed$default, Integer.valueOf(subscriptionModel != null ? subscriptionModel.subscriptionId : -1));
-        this.activeMobileDataSubscriptionId = stateIn2;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), stateFlowImplMutableStateFlow.getValue());
+        this.subscriptions = readonlyStateFlowStateIn;
+        ChannelFlowTransformLatest channelFlowTransformLatestMapLatest = FlowKt.mapLatest(readonlyStateFlowStateIn, new DemoMobileConnectionsRepository$activeMobileDataSubscriptionId$1(null));
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        SubscriptionModel subscriptionModel = (SubscriptionModel) CollectionsKt___CollectionsKt.firstOrNull((List) readonlyStateFlowStateIn.$$delegate_0.getValue());
+        final ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(channelFlowTransformLatestMapLatest, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Integer.valueOf(subscriptionModel != null ? subscriptionModel.subscriptionId : -1));
+        this.activeMobileDataSubscriptionId = readonlyStateFlowStateIn2;
         this.activeMobileDataRepository = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -131,69 +129,48 @@ public final class DemoMobileConnectionsRepository implements MobileConnectionsR
                     this.this$0 = demoMobileConnectionsRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L49
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        int r5 = r5.intValue()
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository r6 = r4.this$0
-                        com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepository r5 = r6.getRepoForSubId(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L49
-                        return r1
-                    L49:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepository$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        DemoMobileConnectionRepository repoForSubId = this.this$0.getRepoForSubId(((Number) obj).intValue());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(repoForSubId, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), getRepoForSubId(((Number) stateIn2.$$delegate_0.getValue()).intValue()));
+        }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), getRepoForSubId(((Number) readonlyStateFlowStateIn2.$$delegate_0.getValue()).intValue()));
         this.activeSubChangedInGroupEvent = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$1(new Unit[0]);
         this.defaultDataSubRatConfig = StateFlowKt.MutableStateFlow(MobileMappings.Config.readConfig(context));
         this.defaultMobileIconGroup = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(TelephonyIcons.THREE_G);
@@ -201,9 +178,9 @@ public final class DemoMobileConnectionsRepository implements MobileConnectionsR
         this.isDeviceEmergencyCallCapable = StateFlowKt.MutableStateFlow(bool);
         this.defaultMobileIconMappingTable = StateFlowKt.MutableStateFlow(new LinkedHashMap());
         this.isAnySimSecure = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(TelephonyIcons.ICON_NAME_TO_ICON);
-        this.defaultMobileIconMapping = MutableStateFlow2;
-        this.mobileMappingsReverseLookup = FlowKt.stateIn(FlowKt.mapLatest(MutableStateFlow2, new DemoMobileConnectionsRepository$mobileMappingsReverseLookup$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), reverse$1((Map) MutableStateFlow2.getValue()));
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(TelephonyIcons.ICON_NAME_TO_ICON);
+        this.defaultMobileIconMapping = stateFlowImplMutableStateFlow2;
+        this.mobileMappingsReverseLookup = FlowKt.stateIn(FlowKt.mapLatest(stateFlowImplMutableStateFlow2, new DemoMobileConnectionsRepository$mobileMappingsReverseLookup$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), reverse$1((Map) stateFlowImplMutableStateFlow2.getValue()));
         this.defaultDataSubId = StateFlowKt.MutableStateFlow(null);
         Boolean bool2 = Boolean.TRUE;
         this.mobileIsDefault = StateFlowKt.MutableStateFlow(bool2);
@@ -213,13 +190,13 @@ public final class DemoMobileConnectionsRepository implements MobileConnectionsR
     }
 
     public static Map reverse$1(Map map) {
-        Set<Map.Entry> entrySet = map.entrySet();
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        Set<Map.Entry> setEntrySet = map.entrySet();
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-        for (Map.Entry entry : entrySet) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+        for (Map.Entry entry : setEntrySet) {
             linkedHashMap.put(entry.getValue(), entry.getKey());
         }
         return linkedHashMap;

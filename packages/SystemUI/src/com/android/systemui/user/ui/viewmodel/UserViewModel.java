@@ -7,7 +7,6 @@ import com.android.systemui.common.shared.model.Text;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserViewModel {
     public final float alpha;
@@ -38,9 +37,9 @@ public final class UserViewModel {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, TransitionData$$ExternalSyntheticOutline0.m((this.image.hashCode() + ((this.name.hashCode() + (Integer.hashCode(this.viewKey) * 31)) * 31)) * 31, 31, this.isSelectionMarkerVisible), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, TransitionData$$ExternalSyntheticOutline0.m((this.image.hashCode() + ((this.name.hashCode() + (Integer.hashCode(this.viewKey) * 31)) * 31)) * 31, 31, this.isSelectionMarkerVisible), 31);
         Function0 function0 = this.onClicked;
-        return m + (function0 == null ? 0 : function0.hashCode());
+        return iM + (function0 == null ? 0 : function0.hashCode());
     }
 
     public final String toString() {

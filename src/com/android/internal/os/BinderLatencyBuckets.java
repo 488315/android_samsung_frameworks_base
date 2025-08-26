@@ -36,8 +36,8 @@ public class BinderLatencyBuckets {
         if (i >= iArr[iArr.length - 1]) {
             return iArr.length;
         }
-        int binarySearch = Arrays.binarySearch(iArr, i);
-        return binarySearch < 0 ? -(binarySearch + 1) : binarySearch + 1;
+        int iBinarySearch = Arrays.binarySearch(iArr, i);
+        return iBinarySearch < 0 ? -(iBinarySearch + 1) : iBinarySearch + 1;
     }
 
     public int[] getBuckets() {

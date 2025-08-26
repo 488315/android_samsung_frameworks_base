@@ -2,6 +2,7 @@ package com.android.systemui.wmshell;
 
 import android.app.ActivityManager;
 import android.app.TaskInfo;
+import android.content.res.Resources;
 import android.window.WindowContainerTransaction;
 import com.android.systemui.model.SysUiState;
 import com.android.systemui.model.SysUiStateImpl;
@@ -21,6 +22,7 @@ import com.android.wm.shell.splitscreen.EnterSplitGestureHandler;
 import com.android.wm.shell.splitscreen.SplitScreen;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
+import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WMShell$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -73,7 +74,7 @@ public final /* synthetic */ class WMShell$$ExternalSyntheticLambda0 implements 
             default:
                 DesktopMode desktopMode = (DesktopMode) obj;
                 wMShell.getClass();
-                final DesktopRepository.VisibleTasksListener anonymousClass17 = new DesktopRepository.VisibleTasksListener() { // from class: com.android.systemui.wmshell.WMShell.17
+                final DesktopRepository.VisibleTasksListener visibleTasksListener = new DesktopRepository.VisibleTasksListener() { // from class: com.android.systemui.wmshell.WMShell.17
                     public AnonymousClass17() {
                     }
 
@@ -92,8 +93,8 @@ public final /* synthetic */ class WMShell$$ExternalSyntheticLambda0 implements 
                 desktopTasksController.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$DesktopModeImpl$addVisibleTasksListener$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
-                        desktopTasksController2.taskRepository.addVisibleTasksListener(anonymousClass17, executor);
+                        DesktopTasksController desktopTasksController2 = desktopTasksController;
+                        desktopTasksController2.taskRepository.addVisibleTasksListener(visibleTasksListener, executor);
                     }
                 });
                 wMShell.mCommandQueue.addCallback(new CommandQueue.Callbacks(wMShell, desktopMode) { // from class: com.android.systemui.wmshell.WMShell.18
@@ -106,17 +107,17 @@ public final /* synthetic */ class WMShell$$ExternalSyntheticLambda0 implements 
                     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
                     public final void moveFocusedTaskToDesktop(final int i4) {
                         final DesktopModeTransitionSource desktopModeTransitionSource = DesktopModeTransitionSource.KEYBOARD_SHORTCUT;
-                        DesktopTasksController.DesktopModeImpl desktopModeImpl = (DesktopTasksController.DesktopModeImpl) this.val$desktopMode;
-                        desktopModeImpl.getClass();
-                        DesktopTasksController.Companion companion = DesktopTasksController.Companion;
                         final DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
-                        desktopTasksController2.getClass();
+                        if (MultiWindowUtils.isInSubDisplay(desktopTasksController2.context)) {
+                            DesktopTasksController.logD$1("moveFocusedTaskToDesktop in SubDisplay", new Object[0]);
+                            return;
+                        }
                         DesktopTasksController.logV$1("moveFocusedTaskToDesktop", new Object[0]);
                         desktopTasksController2.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$DesktopModeImpl$moveFocusedTaskToDesktop$1
                             @Override // java.lang.Runnable
                             public final void run() {
                                 ActivityManager.RunningTaskInfo focusedActivityTaskWithWinMode;
-                                DesktopTasksController desktopTasksController3 = DesktopTasksController.this;
+                                DesktopTasksController desktopTasksController3 = desktopTasksController2;
                                 int i5 = i4;
                                 DesktopModeTransitionSource desktopModeTransitionSource2 = desktopModeTransitionSource;
                                 ShellTaskOrganizer shellTaskOrganizer = desktopTasksController3.shellTaskOrganizer;
@@ -207,8 +208,8 @@ public final /* synthetic */ class WMShell$$ExternalSyntheticLambda0 implements 
                         DesktopTasksController.logV$1("moveFocusedTaskToFullscreen", new Object[0]);
                         desktopTasksController2.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$DesktopModeImpl$moveFocusedTaskToFullscreen$1
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                DesktopTasksController desktopTasksController3 = DesktopTasksController.this;
+                            public final void run() throws Resources.NotFoundException {
+                                DesktopTasksController desktopTasksController3 = desktopTasksController2;
                                 int i5 = i4;
                                 DesktopModeTransitionSource desktopModeTransitionSource2 = desktopModeTransitionSource;
                                 if (i5 != 0 && desktopTasksController3.taskRepository.isAnyDeskActive(i5)) {

@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalBackupUtils$getCommunalHubState$widgetsFromDb$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ CommunalDatabase $database;
@@ -48,7 +47,7 @@ final class CommunalBackupUtils$getCommunalHubState$widgetsFromDb$1 extends Susp
         ResultKt.throwOnFailure(obj);
         FlowUtil$createFlow$$inlined$map$1 widgets = ((CommunalWidgetDao_Impl) this.$database.communalWidgetDao()).getWidgets();
         this.label = 1;
-        Object first = FlowKt.first(widgets, this);
-        return first == coroutineSingletons ? coroutineSingletons : first;
+        Object objFirst = FlowKt.first(widgets, this);
+        return objFirst == coroutineSingletons ? coroutineSingletons : objFirst;
     }
 }

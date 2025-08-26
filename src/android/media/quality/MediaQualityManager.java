@@ -256,15 +256,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getPictureProfile(i, str, z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getPictureProfile(i, str, z, this.mUserHandle.getIdentifier());
     }
 
@@ -273,15 +269,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getPictureProfilesByPackage(str, z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getPictureProfilesByPackage(str, z, this.mUserHandle.getIdentifier());
     }
 
@@ -289,15 +281,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getAvailablePictureProfiles(z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getAvailablePictureProfiles(z, this.mUserHandle.getIdentifier());
     }
 
@@ -394,15 +382,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getSoundProfile(i, str, z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getSoundProfile(i, str, z, this.mUserHandle.getIdentifier());
     }
 
@@ -411,15 +395,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getSoundProfilesByPackage(str, z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getSoundProfilesByPackage(str, z, this.mUserHandle.getIdentifier());
     }
 
@@ -427,15 +407,11 @@ public final class MediaQualityManager {
         boolean z;
         if (profileQueryParams != null) {
             try {
-                if (!profileQueryParams.mParametersIncluded) {
-                    z = false;
-                    return this.mService.getAvailableSoundProfiles(z, this.mUserHandle.getIdentifier());
-                }
+                z = profileQueryParams.mParametersIncluded;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        z = true;
         return this.mService.getAvailableSoundProfiles(z, this.mUserHandle.getIdentifier());
     }
 

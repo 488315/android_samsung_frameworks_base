@@ -29,15 +29,9 @@ public class SemExclusiveTaskManager {
     }
 
     public static SemExclusiveTaskManager getInstance(Context context) {
-        int i;
         synchronized (sInstanceSync) {
             if (sInstance == null) {
-                if (Binder.getCallingUid() != 1000 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS) != 0 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) != 0) {
-                    i = UserHandle.myUserId();
-                    sInstance = new SemExclusiveTaskManager(context, null, i);
-                }
-                i = -2;
-                sInstance = new SemExclusiveTaskManager(context, null, i);
+                sInstance = new SemExclusiveTaskManager(context, null, (Binder.getCallingUid() == 1000 || context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS) == 0 || context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) == 0) ? -2 : UserHandle.myUserId());
             }
         }
         return sInstance;

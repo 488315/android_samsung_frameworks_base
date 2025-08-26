@@ -71,33 +71,28 @@ public class UserBatteryConsumer extends BatteryConsumer {
     public static final class Builder extends BatteryConsumer.BaseBuilder<Builder> {
         private List<UidBatteryConsumer.Builder> mUidBatteryConsumers;
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addConsumedPower(int i, double d) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder addConsumedPower(int i, double d) {
             return super.addConsumedPower(i, d);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addConsumedPower(int i, double d, int i2) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder addConsumedPower(int i, double d, int i2) {
             return super.addConsumedPower(i, d, i2);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addConsumedPower(BatteryConsumer.Key key, double d) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder addConsumedPower(BatteryConsumer.Key key, double d) {
             return super.addConsumedPower(key, d);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addUsageDurationMillis(int i, long j) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder addUsageDurationMillis(int i, long j) {
             return super.addUsageDurationMillis(i, j);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addUsageDurationMillis(BatteryConsumer.Key key, long j) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder addUsageDurationMillis(BatteryConsumer.Key key, long j) {
             return super.addUsageDurationMillis(key, j);
         }
 
@@ -121,37 +116,32 @@ public class UserBatteryConsumer extends BatteryConsumer {
             return super.getTotalPower();
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
         @Deprecated
-        public /* bridge */ /* synthetic */ Builder setConsumedPower(int i, double d) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder setConsumedPower(int i, double d) {
             return super.setConsumedPower(i, d);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
         @Deprecated
-        public /* bridge */ /* synthetic */ Builder setConsumedPower(int i, double d, int i2) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder setConsumedPower(int i, double d, int i2) {
             return super.setConsumedPower(i, d, i2);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setConsumedPower(BatteryConsumer.Key key, double d, int i) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder setConsumedPower(BatteryConsumer.Key key, double d, int i) {
             return super.setConsumedPower(key, d, i);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
         @Deprecated
-        public /* bridge */ /* synthetic */ Builder setUsageDurationMillis(int i, long j) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder setUsageDurationMillis(int i, long j) {
             return super.setUsageDurationMillis(i, j);
         }
 
-        /* JADX WARN: Type inference failed for: r0v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UserBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
         @Deprecated
-        public /* bridge */ /* synthetic */ Builder setUsageDurationMillis(BatteryConsumer.Key key, long j) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.BaseBuilder setUsageDurationMillis(BatteryConsumer.Key key, long j) {
             return super.setUsageDurationMillis(key, j);
         }
 

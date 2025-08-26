@@ -46,9 +46,9 @@ public interface IVoiceActionCheckCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVoiceActionCheckCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceActionCheckCallback)) {
-                return (IVoiceActionCheckCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVoiceActionCheckCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceActionCheckCallback)) {
+                return (IVoiceActionCheckCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IVoiceActionCheckCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                onComplete(createStringArrayList);
+                onComplete(arrayListCreateStringArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IVoiceActionCheckCallback extends IInterface {
 
             @Override // com.android.internal.app.IVoiceActionCheckCallback
             public void onComplete(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVoiceActionCheckCallback.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVoiceActionCheckCallback.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

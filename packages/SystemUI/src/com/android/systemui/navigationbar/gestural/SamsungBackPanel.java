@@ -15,7 +15,6 @@ import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungBackPanel extends BackPanel {
     public int arrowDarkColor;
@@ -87,10 +86,10 @@ public final class SamsungBackPanel extends BackPanel {
                 canvas.scale(-1.0f, 1.0f, 0.0f, 0.0f);
                 canvas.translate(-f8, 0.0f);
             }
-            Path calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core = calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core(f8, f9);
+            Path pathCalculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core = calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core(f8, f9);
             Paint paint2 = this.arrowPaint;
             paint2.setAlpha((int) (MathUtils.min(this.arrowAlpha.pos, this.backgroundAlpha.pos) * this.maxArrowAlpha));
-            canvas.drawPath(calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core, paint2);
+            canvas.drawPath(pathCalculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core, paint2);
         }
         canvas.restore();
         if (this.trackingBackArrowLatency) {

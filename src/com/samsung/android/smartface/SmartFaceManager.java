@@ -131,6 +131,10 @@ public class SmartFaceManager {
             notifyAll();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:16:0x0048 A[Catch: all -> 0x0055, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x0004, B:6:0x0029, B:8:0x002d, B:12:0x0039, B:13:0x003f, B:11:0x0032, B:14:0x0044, B:16:0x0048), top: B:22:0x0004, inners: #1 }] */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public synchronized void unbindService(Context context) {
             String str = TAG;
             StringBuilder sb = new StringBuilder("unbind from smart face service, connection count = ");
@@ -153,8 +157,9 @@ public class SmartFaceManager {
                 } else {
                     Log.e(str, "already unbound from smart face service");
                 }
-            }
-            if (this.mConnectionCount < 0) {
+                if (this.mConnectionCount < 0) {
+                }
+            } else if (this.mConnectionCount < 0) {
                 Log.e(TAG, "possible mis-match in bind & unbind or service died.");
                 this.mConnectionCount = 0;
             }
@@ -186,9 +191,9 @@ public class SmartFaceManager {
         this.mContext = context;
         this.mClient = new SmartFaceClient();
         synchronized (obj) {
-            Looper myLooper = Looper.myLooper();
-            if (myLooper != null) {
-                this.mEventHandler = new EventHandler(this, myLooper);
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper != null) {
+                this.mEventHandler = new EventHandler(this, looperMyLooper);
             } else {
                 Looper mainLooper = Looper.getMainLooper();
                 if (mainLooper != null) {
@@ -201,18 +206,18 @@ public class SmartFaceManager {
     }
 
     public synchronized boolean start(int i) {
-        boolean z = false;
+        boolean zRegister = false;
         if (!ServiceManagerGlobal.get().bindToServiceSync(this.mContext)) {
             return false;
         }
         try {
-            z = ServiceManagerGlobal.get().getService().register(this.mClient, i);
+            zRegister = ServiceManagerGlobal.get().getService().register(this.mClient, i);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NullPointerException e2) {
             Log.w(TAG, "null service, ignore", e2);
         }
-        return z;
+        return zRegister;
     }
 
     public synchronized void startAsync(int i) {
@@ -235,11 +240,11 @@ public class SmartFaceManager {
             try {
                 try {
                     ServiceManagerGlobal.get().getService().unregister(this.mClient);
-                } catch (NullPointerException e) {
-                    Log.w(TAG, "null service, ignore", e);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
-            } catch (RemoteException e2) {
-                e2.printStackTrace();
+            } catch (NullPointerException e2) {
+                Log.w(TAG, "null service, ignore", e2);
             }
             synchronized (this.mEventHandlerLock) {
                 EventHandler eventHandler = this.mEventHandler;
@@ -264,11 +269,11 @@ public class SmartFaceManager {
             try {
                 try {
                     ServiceManagerGlobal.get().getService().unregisterAsync(this.mClient);
-                } catch (NullPointerException e) {
-                    Log.w(TAG, "null service, ignore", e);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
-            } catch (RemoteException e2) {
-                e2.printStackTrace();
+            } catch (NullPointerException e2) {
+                Log.w(TAG, "null service, ignore", e2);
             }
             synchronized (this.mEventHandlerLock) {
                 EventHandler eventHandler = this.mEventHandler;
@@ -306,6 +311,10 @@ public class SmartFaceManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0077  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public synchronized boolean checkForSmartStay() {
         SmartFaceInfoListener smartFaceInfoListener;
         boolean z;
@@ -319,7 +328,7 @@ public class SmartFaceManager {
         setListener(new SmartFaceInfoListener() { // from class: com.samsung.android.smartface.SmartFaceManager$$ExternalSyntheticLambda0
             @Override // com.samsung.android.smartface.SmartFaceManager.SmartFaceInfoListener
             public final void onInfo(FaceInfo faceInfo, int i) {
-                SmartFaceManager.this.lambda$checkForSmartStay$0(faceInfo, i);
+                this.f$0.lambda$checkForSmartStay$0(faceInfo, i);
             }
         });
         this.lock.lock();
@@ -335,15 +344,21 @@ public class SmartFaceManager {
                 if (this.mCallbackData > 0) {
                     z = true;
                 }
+                this.lock.unlock();
+                stop();
+                ServiceManagerGlobal.get().unbindService(this.mContext);
+                synchronized (this.mEventHandlerLock) {
+                    this.mInternalEventHandler = null;
+                }
+                setListener(smartFaceInfoListener);
+                Log.e(TAG, "checkForSmartStay X: " + z);
+            } else {
+                this.lock.unlock();
+                stop();
+                ServiceManagerGlobal.get().unbindService(this.mContext);
+                synchronized (this.mEventHandlerLock) {
+                }
             }
-            this.lock.unlock();
-            stop();
-            ServiceManagerGlobal.get().unbindService(this.mContext);
-            synchronized (this.mEventHandlerLock) {
-                this.mInternalEventHandler = null;
-            }
-            setListener(smartFaceInfoListener);
-            Log.e(TAG, "checkForSmartStay X: " + z);
         } catch (Throwable th) {
             this.lock.unlock();
             stop();
@@ -369,18 +384,18 @@ public class SmartFaceManager {
 
     public synchronized int getSupportedServices() {
         try {
-            int i = 0;
+            int supportedServices = 0;
             if (!ServiceManagerGlobal.get().bindToServiceSync(this.mContext)) {
                 return 0;
             }
             try {
-                i = ServiceManagerGlobal.get().getService().getSupportedServices();
+                supportedServices = ServiceManagerGlobal.get().getService().getSupportedServices();
             } catch (RemoteException e) {
                 Log.w(TAG, "remote exception, ignore", e);
             } catch (NullPointerException e2) {
                 Log.w(TAG, "null service, ignore", e2);
             }
-            return i;
+            return supportedServices;
         } finally {
             ServiceManagerGlobal.get().unbindService(this.mContext);
         }
@@ -411,16 +426,16 @@ public class SmartFaceManager {
         }
     }
 
-    private long waitForCallback(int i) {
-        long j = -1;
+    private long waitForCallback(int i) throws InterruptedException {
+        long jAwaitNanos = -1;
         try {
-            j = this.complete.awaitNanos(i * 1000000);
-            if (j <= 0) {
+            jAwaitNanos = this.complete.awaitNanos(i * 1000000);
+            if (jAwaitNanos <= 0) {
                 Log.e(TAG, "No Callback!");
             }
         } catch (Exception unused) {
         }
-        return j;
+        return jAwaitNanos;
     }
 
     private class EventHandler extends Handler {

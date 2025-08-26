@@ -44,9 +44,9 @@ public interface IDecorViewGestureListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDecorViewGestureListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDecorViewGestureListener)) {
-                return (IDecorViewGestureListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDecorViewGestureListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDecorViewGestureListener)) {
+                return (IDecorViewGestureListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IDecorViewGestureListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onInterceptionChanged(readStrongBinder, readBoolean);
+                onInterceptionChanged(strongBinder, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IDecorViewGestureListener extends IInterface {
 
             @Override // android.view.IDecorViewGestureListener
             public void onInterceptionChanged(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDecorViewGestureListener.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDecorViewGestureListener.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

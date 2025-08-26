@@ -19,15 +19,15 @@ public class MediaRouter2Utils {
             Log.w(TAG, "getProviderId: uniqueId shouldn't be empty");
             return null;
         }
-        int indexOf = str.indexOf(":");
-        if (indexOf == -1) {
+        int iIndexOf = str.indexOf(":");
+        if (iIndexOf == -1) {
             return null;
         }
-        String substring = str.substring(0, indexOf);
-        if (TextUtils.isEmpty(substring)) {
+        String strSubstring = str.substring(0, iIndexOf);
+        if (TextUtils.isEmpty(strSubstring)) {
             return null;
         }
-        return substring;
+        return strSubstring;
     }
 
     public static String getOriginalId(String str) {
@@ -36,14 +36,14 @@ public class MediaRouter2Utils {
             Log.w(TAG, "getOriginalId: uniqueId shouldn't be empty");
             return null;
         }
-        int indexOf = str.indexOf(":");
-        if (indexOf == -1 || (i = indexOf + 1) >= str.length()) {
+        int iIndexOf = str.indexOf(":");
+        if (iIndexOf == -1 || (i = iIndexOf + 1) >= str.length()) {
             return null;
         }
-        String substring = str.substring(i);
-        if (TextUtils.isEmpty(substring)) {
+        String strSubstring = str.substring(i);
+        if (TextUtils.isEmpty(strSubstring)) {
             return null;
         }
-        return substring;
+        return strSubstring;
     }
 }

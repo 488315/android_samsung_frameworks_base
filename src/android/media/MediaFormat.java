@@ -1,7 +1,6 @@
 package android.media;
 
 import android.graphics.Rect;
-import android.media.MediaFormat;
 import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -426,8 +425,8 @@ public final class MediaFormat {
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public boolean contains(Object obj) {
             if (obj instanceof String) {
-                String mapItemToKey = mapItemToKey((String) obj);
-                if (keepKey(mapItemToKey) && this.mKeys.contains(mapItemToKey)) {
+                String strMapItemToKey = mapItemToKey((String) obj);
+                if (keepKey(strMapItemToKey) && this.mKeys.contains(strMapItemToKey)) {
                     return true;
                 }
             }
@@ -439,11 +438,11 @@ public final class MediaFormat {
             if (!(obj instanceof String)) {
                 return false;
             }
-            String mapItemToKey = mapItemToKey((String) obj);
-            if (!keepKey(mapItemToKey) || !this.mKeys.remove(mapItemToKey)) {
+            String strMapItemToKey = mapItemToKey((String) obj);
+            if (!keepKey(strMapItemToKey) || !this.mKeys.remove(strMapItemToKey)) {
                 return false;
             }
-            MediaFormat.this.mMap.remove(mapItemToKey);
+            MediaFormat.this.mMap.remove(strMapItemToKey);
             return true;
         }
 
@@ -456,9 +455,7 @@ public final class MediaFormat {
                 this.mIterator = ((List) FilteredMappedKeySet.this.mKeys.stream().filter(new Predicate() { // from class: android.media.MediaFormat$FilteredMappedKeySet$KeyIterator$$ExternalSyntheticLambda0
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean lambda$new$0;
-                        lambda$new$0 = MediaFormat.FilteredMappedKeySet.KeyIterator.this.lambda$new$0((String) obj);
-                        return lambda$new$0;
+                        return this.f$0.lambda$new$0((String) obj);
                     }
                 }).collect(Collectors.toList())).iterator();
             }
@@ -497,7 +494,7 @@ public final class MediaFormat {
             return (int) this.mKeys.stream().filter(new Predicate() { // from class: android.media.MediaFormat$FilteredMappedKeySet$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return MediaFormat.FilteredMappedKeySet.this.keepKey((String) obj);
+                    return this.f$0.keepKey((String) obj);
                 }
             }).count();
         }

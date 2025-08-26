@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Expires extends SIPHeader implements Header {
     private static final long serialVersionUID = 3134344915465784267L;
@@ -21,7 +20,7 @@ public class Expires extends SIPHeader implements Header {
         return stringBuffer.toString();
     }
 
-    public final void setExpires(int i) {
+    public final void setExpires(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "bad argument "));
         }

@@ -28,7 +28,6 @@ import com.android.systemui.res.R$styleable;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher.DarkReceiver {
     public BatteryMeterViewController$$ExternalSyntheticLambda1 mBatteryEstimateFetcher;
@@ -84,21 +83,21 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         samsungBatteryMeterDrawable.getClass();
         printWriter.println("  SamsungBatteryMeterDrawable:");
         Paint paint = samsungBatteryMeterDrawable.batteryOuterPaint;
-        boolean isAntiAlias = paint.isAntiAlias();
+        boolean zIsAntiAlias = paint.isAntiAlias();
         int color = samsungBatteryMeterDrawable.batteryOuterPaint.getColor();
         StringBuilder sb = new StringBuilder("    batteryOuterPaint: ");
         sb.append(paint);
         sb.append(" isAntiAlias: ");
-        sb.append(isAntiAlias);
+        sb.append(zIsAntiAlias);
         sb.append(" color ");
         MagnificationImpl$$ExternalSyntheticOutline0.m(sb, color, printWriter);
         Paint paint2 = samsungBatteryMeterDrawable.roundedRectPaint;
-        boolean isAntiAlias2 = paint2.isAntiAlias();
+        boolean zIsAntiAlias2 = paint2.isAntiAlias();
         int color2 = samsungBatteryMeterDrawable.roundedRectPaint.getColor();
         StringBuilder sb2 = new StringBuilder("    roundedRectPaint: ");
         sb2.append(paint2);
         sb2.append(" isAntiAlias: ");
-        sb2.append(isAntiAlias2);
+        sb2.append(zIsAntiAlias2);
         sb2.append(" color ");
         MagnificationImpl$$ExternalSyntheticOutline0.m(sb2, color2, printWriter);
         Paint paint3 = samsungBatteryMeterDrawable.batteryLevelBackgroundPaint;
@@ -131,7 +130,7 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         updateShowPercent();
     }
@@ -146,23 +145,23 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
     }
 
     public final void onDarkChangedLegacy(ArrayList arrayList, float f, int i) {
-        float f2;
-        boolean isInAreas = DarkIconDispatcher.isInAreas(arrayList, this);
-        if (!isInAreas) {
+        float fM$1;
+        boolean zIsInAreas = DarkIconDispatcher.isInAreas(arrayList, this);
+        if (!zIsInAreas) {
             f = 0.0f;
         }
         this.mSamsungDrawable.darkIntensity = f;
-        if (isInAreas) {
-            float f3 = this.mBatteryIconLightModeAlpha;
-            f2 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mBatteryIconDarkModeAlpha, f3, f, f3);
+        if (zIsInAreas) {
+            float f2 = this.mBatteryIconLightModeAlpha;
+            fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mBatteryIconDarkModeAlpha, f2, f, f2);
         } else {
-            f2 = 0.74f;
+            fM$1 = 0.74f;
         }
         if (this.mIsGrayColor) {
             this.mGrayColor = i;
-            f2 = 1.0f;
+            fM$1 = 1.0f;
         }
-        this.mBatteryIconView.setAlpha(f2);
+        this.mBatteryIconView.setAlpha(fM$1);
         int i2 = this.mLightModeFillColor;
         int i3 = this.mDarkModeFillColor;
         ArgbEvaluator argbEvaluator = ArgbEvaluator.sInstance;
@@ -171,7 +170,7 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         updateColors(this.mNonAdaptedForegroundColor, this.mNonAdaptedBackgroundColor, DarkIconDispatcher.getTint(arrayList, this, i));
     }
 
-    public final void scaleBatteryMeterViewsLegacy() {
+    public final void scaleBatteryMeterViewsLegacy() throws Resources.NotFoundException {
         Resources resources = getContext().getResources();
         TypedValue typedValue = new TypedValue();
         resources.getValue(R.dimen.status_bar_icon_scale_factor, typedValue, true);
@@ -185,15 +184,15 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         if (z) {
             dimensionPixelSize2 = (dimensionPixelSize2 / 12.0f) * 18.0f;
         }
-        int round = z ? Math.round(f2 - dimensionPixelSize) - resources.getDimensionPixelSize(R.dimen.status_bar_battery_extra_vertical_spacing) : 0;
+        int iRound = z ? Math.round(f2 - dimensionPixelSize) - resources.getDimensionPixelSize(R.dimen.status_bar_battery_extra_vertical_spacing) : 0;
         int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.battery_margin_bottom);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Math.round(dimensionPixelSize2), Math.round(f2));
-        layoutParams.setMargins(0, round, 0, dimensionPixelSize3);
+        layoutParams.setMargins(0, iRound, 0, dimensionPixelSize3);
         this.mBatteryIconView.setLayoutParams(layoutParams);
         this.mBatteryIconView.invalidateDrawable(this.mSamsungDrawable);
     }
 
-    public final void setPercentShowMode(int i) {
+    public final void setPercentShowMode(int i) throws Resources.NotFoundException {
         if (i == this.mShowPercentMode) {
             return;
         }
@@ -243,7 +242,7 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         }
     }
 
-    public final void updateShowPercent() {
+    public final void updateShowPercent() throws Resources.NotFoundException {
         int i;
         boolean z = this.mShowPercentSamsungSetting;
         boolean z2 = ((z && this.mShowPercentMode != 2) || (i = this.mShowPercentMode) == 1 || i == 3) && !this.mIsDirectPowerMode;
@@ -265,7 +264,7 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         this.showing = true;
     }
 
-    public BatteryMeterView(Context context, AttributeSet attributeSet, int i) {
+    public BatteryMeterView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         this.mShowPercentMode = 0;
         this.mShowPercentSamsungSetting = true;
@@ -279,9 +278,9 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         this.showing = this.mShowPercentSamsungSetting;
         setOrientation(0);
         setGravity(8388627);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BatteryMeterView, i, 0);
-        obtainStyledAttributes.getColor(0, context.getColor(R.color.meter_background_color));
-        obtainStyledAttributes.getResourceId(1, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BatteryMeterView, i, 0);
+        typedArrayObtainStyledAttributes.getColor(0, context.getColor(R.color.meter_background_color));
+        typedArrayObtainStyledAttributes.getResourceId(1, 0);
         this.mSamsungDrawable = new SamsungBatteryMeterDrawable(context);
         this.mBatteryState = new SamsungBatteryState();
         this.mBatteryIconLightModeAlpha = context.getResources().getFloat(R.dimen.status_bar_battery_light_mode_alpha);
@@ -290,7 +289,7 @@ public class BatteryMeterView extends LinearLayout implements DarkIconDispatcher
         this.mDarkModeFillColor = context.getColor(R.color.status_bar_battery_frame_dark_color);
         this.mLightModeBackgroundColor = context.getColor(R.color.status_bar_battery_level_background_light_color);
         this.mDarkModeBackgroundColor = context.getColor(R.color.status_bar_battery_level_background_dark_color);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         context.getResources().getBoolean(android.R.bool.config_bg_prompt_abusive_apps_to_bg_restricted);
         this.mLevel = ((BatteryManager) context.getSystemService("batterymanager")).getIntProperty(4);
         ImageView imageView = new ImageView(context);

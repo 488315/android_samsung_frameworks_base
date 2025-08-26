@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Snapshot {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +18,6 @@ public abstract class Snapshot {
     public int pinningTrackingHandle;
     public long snapshotId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,9 +42,9 @@ public abstract class Snapshot {
                     return snapshot;
                 }
             }
-            Snapshot createTransparentSnapshotWithNoParentReadObserver = SnapshotKt.createTransparentSnapshotWithNoParentReadObserver(snapshot, null, false);
-            createTransparentSnapshotWithNoParentReadObserver.makeCurrent();
-            return createTransparentSnapshotWithNoParentReadObserver;
+            Snapshot snapshotCreateTransparentSnapshotWithNoParentReadObserver = SnapshotKt.createTransparentSnapshotWithNoParentReadObserver(snapshot, null, false);
+            snapshotCreateTransparentSnapshotWithNoParentReadObserver.makeCurrent();
+            return snapshotCreateTransparentSnapshotWithNoParentReadObserver;
         }
 
         public static Object observe(Function1 function1, Function0 function0) {
@@ -79,13 +77,13 @@ public abstract class Snapshot {
                 transparentObserverMutableSnapshot = snapshot.takeNestedSnapshot(function1);
             }
             try {
-                Snapshot makeCurrent = transparentObserverMutableSnapshot.makeCurrent();
+                Snapshot snapshotMakeCurrent = transparentObserverMutableSnapshot.makeCurrent();
                 try {
-                    Object invoke = function0.invoke();
-                    Snapshot.restoreCurrent(makeCurrent);
-                    return invoke;
+                    Object objInvoke = function0.invoke();
+                    Snapshot.restoreCurrent(snapshotMakeCurrent);
+                    return objInvoke;
                 } catch (Throwable th) {
-                    Snapshot.restoreCurrent(makeCurrent);
+                    Snapshot.restoreCurrent(snapshotMakeCurrent);
                     throw th;
                 }
             } finally {
@@ -133,13 +131,13 @@ public abstract class Snapshot {
         }
 
         public static MutableSnapshot takeMutableSnapshot(Function1 function1, Function1 function12) {
-            MutableSnapshot takeNestedMutableSnapshot;
-            Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-            MutableSnapshot mutableSnapshot = currentSnapshot instanceof MutableSnapshot ? (MutableSnapshot) currentSnapshot : null;
-            if (mutableSnapshot == null || (takeNestedMutableSnapshot = mutableSnapshot.takeNestedMutableSnapshot(function1, function12)) == null) {
+            MutableSnapshot mutableSnapshotTakeNestedMutableSnapshot;
+            Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+            MutableSnapshot mutableSnapshot = snapshotCurrentSnapshot instanceof MutableSnapshot ? (MutableSnapshot) snapshotCurrentSnapshot : null;
+            if (mutableSnapshot == null || (mutableSnapshotTakeNestedMutableSnapshot = mutableSnapshot.takeNestedMutableSnapshot(function1, function12)) == null) {
                 throw new IllegalStateException("Cannot create a mutable snapshot of an read-only snapshot");
             }
-            return takeNestedMutableSnapshot;
+            return mutableSnapshotTakeNestedMutableSnapshot;
         }
 
         private Companion() {
@@ -238,9 +236,9 @@ public abstract class Snapshot {
     }
 
     private Snapshot(long j, SnapshotIdSet snapshotIdSet) {
-        int i;
+        int iAdd;
         long j2;
-        int numberOfTrailingZeros;
+        int iNumberOfTrailingZeros;
         this.invalid = snapshotIdSet;
         this.snapshotId = j;
         Function1 function1 = SnapshotKt.emptyLambda;
@@ -253,23 +251,23 @@ public abstract class Snapshot {
                 long j3 = invalid$runtime_release.lowerSet;
                 if (j3 != 0) {
                     j2 = invalid$runtime_release.lowerBound;
-                    numberOfTrailingZeros = Long.numberOfTrailingZeros(j3);
+                    iNumberOfTrailingZeros = Long.numberOfTrailingZeros(j3);
                 } else {
                     long j4 = invalid$runtime_release.upperSet;
                     if (j4 != 0) {
                         j2 = invalid$runtime_release.lowerBound + 64;
-                        numberOfTrailingZeros = Long.numberOfTrailingZeros(j4);
+                        iNumberOfTrailingZeros = Long.numberOfTrailingZeros(j4);
                     }
                 }
-                j = j2 + numberOfTrailingZeros;
+                j = j2 + iNumberOfTrailingZeros;
             }
             synchronized (SnapshotKt.lock) {
-                i = SnapshotKt.pinningTable.add(j);
+                iAdd = SnapshotKt.pinningTable.add(j);
             }
         } else {
-            i = -1;
+            iAdd = -1;
         }
-        this.pinningTrackingHandle = i;
+        this.pinningTrackingHandle = iAdd;
     }
 
     private Snapshot(int i, SnapshotIdSet snapshotIdSet) {

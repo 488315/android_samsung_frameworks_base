@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.RandomAccess;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SchemaUtil {
     public static final Class GENERATED_MESSAGE_CLASS;
@@ -36,11 +35,11 @@ public final class SchemaUtil {
         if (size == 0) {
             return 0;
         }
-        int computeTagSize = CodedOutputStream.computeTagSize(i) * size;
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i) * size;
         for (int i2 = 0; i2 < list.size(); i2++) {
-            computeTagSize += CodedOutputStream.computeBytesSizeNoTag((ByteString) list.get(i2));
+            iComputeTagSize += CodedOutputStream.computeBytesSizeNoTag((ByteString) list.get(i2));
         }
-        return computeTagSize;
+        return iComputeTagSize;
     }
 
     public static int computeSizeEnumList(int i, List list) {
@@ -58,21 +57,21 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof IntArrayList)) {
-            int i2 = 0;
+            int iComputeInt32SizeNoTag = 0;
             while (i < size) {
-                i2 += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i)).intValue());
+                iComputeInt32SizeNoTag += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i)).intValue());
                 i++;
             }
-            return i2;
+            return iComputeInt32SizeNoTag;
         }
         IntArrayList intArrayList = (IntArrayList) list;
-        int i3 = 0;
+        int iComputeInt32SizeNoTag2 = 0;
         while (i < size) {
             intArrayList.ensureIndexInRange$3(i);
-            i3 += CodedOutputStream.computeInt32SizeNoTag(intArrayList.array[i]);
+            iComputeInt32SizeNoTag2 += CodedOutputStream.computeInt32SizeNoTag(intArrayList.array[i]);
             i++;
         }
-        return i3;
+        return iComputeInt32SizeNoTag2;
     }
 
     public static int computeSizeFixed32List(int i, List list) {
@@ -114,21 +113,21 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof IntArrayList)) {
-            int i2 = 0;
+            int iComputeInt32SizeNoTag = 0;
             while (i < size) {
-                i2 += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i)).intValue());
+                iComputeInt32SizeNoTag += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i)).intValue());
                 i++;
             }
-            return i2;
+            return iComputeInt32SizeNoTag;
         }
         IntArrayList intArrayList = (IntArrayList) list;
-        int i3 = 0;
+        int iComputeInt32SizeNoTag2 = 0;
         while (i < size) {
             intArrayList.ensureIndexInRange$3(i);
-            i3 += CodedOutputStream.computeInt32SizeNoTag(intArrayList.array[i]);
+            iComputeInt32SizeNoTag2 += CodedOutputStream.computeInt32SizeNoTag(intArrayList.array[i]);
             i++;
         }
-        return i3;
+        return iComputeInt32SizeNoTag2;
     }
 
     public static int computeSizeInt64List(int i, List list) {
@@ -145,30 +144,30 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof LongArrayList)) {
-            int i2 = 0;
+            int iComputeUInt64SizeNoTag = 0;
             while (i < size) {
-                i2 += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i)).longValue());
+                iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i)).longValue());
                 i++;
             }
-            return i2;
+            return iComputeUInt64SizeNoTag;
         }
         LongArrayList longArrayList = (LongArrayList) list;
-        int i3 = 0;
+        int iComputeUInt64SizeNoTag2 = 0;
         while (i < size) {
             longArrayList.ensureIndexInRange$4(i);
-            i3 += CodedOutputStream.computeUInt64SizeNoTag(longArrayList.array[i]);
+            iComputeUInt64SizeNoTag2 += CodedOutputStream.computeUInt64SizeNoTag(longArrayList.array[i]);
             i++;
         }
-        return i3;
+        return iComputeUInt64SizeNoTag2;
     }
 
     public static int computeSizeMessage(int i, Object obj, Schema schema) {
         if (obj instanceof LazyFieldLite) {
             return CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) obj) + CodedOutputStream.computeTagSize(i);
         }
-        int computeTagSize = CodedOutputStream.computeTagSize(i);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i);
         int serializedSize = ((AbstractMessageLite) ((MessageLite) obj)).getSerializedSize(schema);
-        return CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + computeTagSize;
+        return CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + iComputeTagSize;
     }
 
     public static int computeSizeMessageList(int i, List list, Schema schema) {
@@ -176,17 +175,17 @@ public final class SchemaUtil {
         if (size == 0) {
             return 0;
         }
-        int computeTagSize = CodedOutputStream.computeTagSize(i) * size;
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i) * size;
         for (int i2 = 0; i2 < size; i2++) {
             Object obj = list.get(i2);
             if (obj instanceof LazyFieldLite) {
-                computeTagSize = CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) obj) + computeTagSize;
+                iComputeTagSize = CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) obj) + iComputeTagSize;
             } else {
                 int serializedSize = ((AbstractMessageLite) ((MessageLite) obj)).getSerializedSize(schema);
-                computeTagSize = CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + computeTagSize;
+                iComputeTagSize = CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + iComputeTagSize;
             }
         }
-        return computeTagSize;
+        return iComputeTagSize;
     }
 
     public static int computeSizeSInt32List(int i, List list) {
@@ -204,23 +203,23 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof IntArrayList)) {
-            int i2 = 0;
+            int iComputeUInt32SizeNoTag = 0;
             while (i < size) {
-                int intValue = ((Integer) list.get(i)).intValue();
-                i2 += CodedOutputStream.computeUInt32SizeNoTag((intValue >> 31) ^ (intValue << 1));
+                int iIntValue = ((Integer) list.get(i)).intValue();
+                iComputeUInt32SizeNoTag += CodedOutputStream.computeUInt32SizeNoTag((iIntValue >> 31) ^ (iIntValue << 1));
                 i++;
             }
-            return i2;
+            return iComputeUInt32SizeNoTag;
         }
         IntArrayList intArrayList = (IntArrayList) list;
-        int i3 = 0;
+        int iComputeUInt32SizeNoTag2 = 0;
         while (i < size) {
             intArrayList.ensureIndexInRange$3(i);
-            int i4 = intArrayList.array[i];
-            i3 += CodedOutputStream.computeUInt32SizeNoTag((i4 >> 31) ^ (i4 << 1));
+            int i2 = intArrayList.array[i];
+            iComputeUInt32SizeNoTag2 += CodedOutputStream.computeUInt32SizeNoTag((i2 >> 31) ^ (i2 << 1));
             i++;
         }
-        return i3;
+        return iComputeUInt32SizeNoTag2;
     }
 
     public static int computeSizeSInt64List(int i, List list) {
@@ -238,23 +237,23 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof LongArrayList)) {
-            int i2 = 0;
+            int iComputeUInt64SizeNoTag = 0;
             while (i < size) {
-                long longValue = ((Long) list.get(i)).longValue();
-                i2 += CodedOutputStream.computeUInt64SizeNoTag((longValue >> 63) ^ (longValue << 1));
+                long jLongValue = ((Long) list.get(i)).longValue();
+                iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag((jLongValue >> 63) ^ (jLongValue << 1));
                 i++;
             }
-            return i2;
+            return iComputeUInt64SizeNoTag;
         }
         LongArrayList longArrayList = (LongArrayList) list;
-        int i3 = 0;
+        int iComputeUInt64SizeNoTag2 = 0;
         while (i < size) {
             longArrayList.ensureIndexInRange$4(i);
             long j = longArrayList.array[i];
-            i3 += CodedOutputStream.computeUInt64SizeNoTag((j >> 63) ^ (j << 1));
+            iComputeUInt64SizeNoTag2 += CodedOutputStream.computeUInt64SizeNoTag((j >> 63) ^ (j << 1));
             i++;
         }
-        return i3;
+        return iComputeUInt64SizeNoTag2;
     }
 
     public static int computeSizeStringList(int i, List list) {
@@ -263,22 +262,22 @@ public final class SchemaUtil {
         if (size == 0) {
             return 0;
         }
-        int computeTagSize = CodedOutputStream.computeTagSize(i) * size;
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i) * size;
         if (!(list instanceof LazyStringList)) {
             while (i2 < size) {
                 Object obj = list.get(i2);
-                computeTagSize = (obj instanceof ByteString ? CodedOutputStream.computeBytesSizeNoTag((ByteString) obj) : CodedOutputStream.computeStringSizeNoTag((String) obj)) + computeTagSize;
+                iComputeTagSize = (obj instanceof ByteString ? CodedOutputStream.computeBytesSizeNoTag((ByteString) obj) : CodedOutputStream.computeStringSizeNoTag((String) obj)) + iComputeTagSize;
                 i2++;
             }
-            return computeTagSize;
+            return iComputeTagSize;
         }
         LazyStringList lazyStringList = (LazyStringList) list;
         while (i2 < size) {
             Object raw = lazyStringList.getRaw(i2);
-            computeTagSize = (raw instanceof ByteString ? CodedOutputStream.computeBytesSizeNoTag((ByteString) raw) : CodedOutputStream.computeStringSizeNoTag((String) raw)) + computeTagSize;
+            iComputeTagSize = (raw instanceof ByteString ? CodedOutputStream.computeBytesSizeNoTag((ByteString) raw) : CodedOutputStream.computeStringSizeNoTag((String) raw)) + iComputeTagSize;
             i2++;
         }
-        return computeTagSize;
+        return iComputeTagSize;
     }
 
     public static int computeSizeUInt32List(int i, List list) {
@@ -296,21 +295,21 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof IntArrayList)) {
-            int i2 = 0;
+            int iComputeUInt32SizeNoTag = 0;
             while (i < size) {
-                i2 += CodedOutputStream.computeUInt32SizeNoTag(((Integer) list.get(i)).intValue());
+                iComputeUInt32SizeNoTag += CodedOutputStream.computeUInt32SizeNoTag(((Integer) list.get(i)).intValue());
                 i++;
             }
-            return i2;
+            return iComputeUInt32SizeNoTag;
         }
         IntArrayList intArrayList = (IntArrayList) list;
-        int i3 = 0;
+        int iComputeUInt32SizeNoTag2 = 0;
         while (i < size) {
             intArrayList.ensureIndexInRange$3(i);
-            i3 += CodedOutputStream.computeUInt32SizeNoTag(intArrayList.array[i]);
+            iComputeUInt32SizeNoTag2 += CodedOutputStream.computeUInt32SizeNoTag(intArrayList.array[i]);
             i++;
         }
-        return i3;
+        return iComputeUInt32SizeNoTag2;
     }
 
     public static int computeSizeUInt64List(int i, List list) {
@@ -328,21 +327,21 @@ public final class SchemaUtil {
             return 0;
         }
         if (!(list instanceof LongArrayList)) {
-            int i2 = 0;
+            int iComputeUInt64SizeNoTag = 0;
             while (i < size) {
-                i2 += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i)).longValue());
+                iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i)).longValue());
                 i++;
             }
-            return i2;
+            return iComputeUInt64SizeNoTag;
         }
         LongArrayList longArrayList = (LongArrayList) list;
-        int i3 = 0;
+        int iComputeUInt64SizeNoTag2 = 0;
         while (i < size) {
             longArrayList.ensureIndexInRange$4(i);
-            i3 += CodedOutputStream.computeUInt64SizeNoTag(longArrayList.array[i]);
+            iComputeUInt64SizeNoTag2 += CodedOutputStream.computeUInt64SizeNoTag(longArrayList.array[i]);
             i++;
         }
-        return i3;
+        return iComputeUInt64SizeNoTag2;
     }
 
     public static Object filterUnknownEnumList(Object obj, int i, List list, Internal.EnumLiteMap enumLiteMap, Object obj2, UnknownFieldSchema unknownFieldSchema) {
@@ -353,14 +352,14 @@ public final class SchemaUtil {
         int i2 = 0;
         for (int i3 = 0; i3 < size; i3++) {
             Integer num = (Integer) list.get(i3);
-            int intValue = num.intValue();
-            if (enumLiteMap.findValueByNumber(intValue) != null) {
+            int iIntValue = num.intValue();
+            if (enumLiteMap.findValueByNumber(iIntValue) != null) {
                 if (i3 != i2) {
                     list.set(i2, num);
                 }
                 i2++;
             } else {
-                obj2 = storeUnknownEnum(obj, i, intValue, obj2, unknownFieldSchema);
+                obj2 = storeUnknownEnum(obj, i, iIntValue, obj2, unknownFieldSchema);
             }
         }
         if (i2 != size) {
@@ -468,9 +467,9 @@ public final class SchemaUtil {
         int i2 = 0;
         if (!z) {
             while (i2 < list.size()) {
-                double doubleValue = ((Double) list.get(i2)).doubleValue();
+                double dDoubleValue = ((Double) list.get(i2)).doubleValue();
                 codedOutputStream.getClass();
-                codedOutputStream.writeFixed64(i, Double.doubleToRawLongBits(doubleValue));
+                codedOutputStream.writeFixed64(i, Double.doubleToRawLongBits(dDoubleValue));
                 i2++;
             }
             return;
@@ -503,11 +502,11 @@ public final class SchemaUtil {
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            i3 += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i4)).intValue());
+        int iComputeInt32SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            iComputeInt32SizeNoTag += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i3)).intValue());
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeInt32SizeNoTag);
         while (i2 < list.size()) {
             codedOutputStream.writeInt32NoTag(((Integer) list.get(i2)).intValue());
             i2++;
@@ -576,9 +575,9 @@ public final class SchemaUtil {
         int i2 = 0;
         if (!z) {
             while (i2 < list.size()) {
-                float floatValue = ((Float) list.get(i2)).floatValue();
+                float fFloatValue = ((Float) list.get(i2)).floatValue();
                 codedOutputStream.getClass();
-                codedOutputStream.writeFixed32(i, Float.floatToRawIntBits(floatValue));
+                codedOutputStream.writeFixed32(i, Float.floatToRawIntBits(fFloatValue));
                 i2++;
             }
             return;
@@ -621,11 +620,11 @@ public final class SchemaUtil {
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            i3 += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i4)).intValue());
+        int iComputeInt32SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            iComputeInt32SizeNoTag += CodedOutputStream.computeInt32SizeNoTag(((Integer) list.get(i3)).intValue());
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeInt32SizeNoTag);
         while (i2 < list.size()) {
             codedOutputStream.writeInt32NoTag(((Integer) list.get(i2)).intValue());
             i2++;
@@ -646,11 +645,11 @@ public final class SchemaUtil {
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            i3 += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i4)).longValue());
+        int iComputeUInt64SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i3)).longValue());
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeUInt64SizeNoTag);
         while (i2 < list.size()) {
             codedOutputStream.writeUInt64NoTag(((Long) list.get(i2)).longValue());
             i2++;
@@ -729,22 +728,22 @@ public final class SchemaUtil {
         int i2 = 0;
         if (!z) {
             while (i2 < list.size()) {
-                int intValue = ((Integer) list.get(i2)).intValue();
-                codedOutputStream.writeUInt32(i, (intValue >> 31) ^ (intValue << 1));
+                int iIntValue = ((Integer) list.get(i2)).intValue();
+                codedOutputStream.writeUInt32(i, (iIntValue >> 31) ^ (iIntValue << 1));
                 i2++;
             }
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            int intValue2 = ((Integer) list.get(i4)).intValue();
-            i3 += CodedOutputStream.computeUInt32SizeNoTag((intValue2 >> 31) ^ (intValue2 << 1));
+        int iComputeUInt32SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            int iIntValue2 = ((Integer) list.get(i3)).intValue();
+            iComputeUInt32SizeNoTag += CodedOutputStream.computeUInt32SizeNoTag((iIntValue2 >> 31) ^ (iIntValue2 << 1));
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeUInt32SizeNoTag);
         while (i2 < list.size()) {
-            int intValue3 = ((Integer) list.get(i2)).intValue();
-            codedOutputStream.writeUInt32NoTag((intValue3 >> 31) ^ (intValue3 << 1));
+            int iIntValue3 = ((Integer) list.get(i2)).intValue();
+            codedOutputStream.writeUInt32NoTag((iIntValue3 >> 31) ^ (iIntValue3 << 1));
             i2++;
         }
     }
@@ -757,22 +756,22 @@ public final class SchemaUtil {
         int i2 = 0;
         if (!z) {
             while (i2 < list.size()) {
-                long longValue = ((Long) list.get(i2)).longValue();
-                codedOutputStream.writeUInt64(i, (longValue >> 63) ^ (longValue << 1));
+                long jLongValue = ((Long) list.get(i2)).longValue();
+                codedOutputStream.writeUInt64(i, (jLongValue >> 63) ^ (jLongValue << 1));
                 i2++;
             }
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            long longValue2 = ((Long) list.get(i4)).longValue();
-            i3 += CodedOutputStream.computeUInt64SizeNoTag((longValue2 >> 63) ^ (longValue2 << 1));
+        int iComputeUInt64SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            long jLongValue2 = ((Long) list.get(i3)).longValue();
+            iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag((jLongValue2 >> 63) ^ (jLongValue2 << 1));
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeUInt64SizeNoTag);
         while (i2 < list.size()) {
-            long longValue3 = ((Long) list.get(i2)).longValue();
-            codedOutputStream.writeUInt64NoTag((longValue3 >> 63) ^ (longValue3 << 1));
+            long jLongValue3 = ((Long) list.get(i2)).longValue();
+            codedOutputStream.writeUInt64NoTag((jLongValue3 >> 63) ^ (jLongValue3 << 1));
             i2++;
         }
     }
@@ -818,11 +817,11 @@ public final class SchemaUtil {
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            i3 += CodedOutputStream.computeUInt32SizeNoTag(((Integer) list.get(i4)).intValue());
+        int iComputeUInt32SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            iComputeUInt32SizeNoTag += CodedOutputStream.computeUInt32SizeNoTag(((Integer) list.get(i3)).intValue());
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeUInt32SizeNoTag);
         while (i2 < list.size()) {
             codedOutputStream.writeUInt32NoTag(((Integer) list.get(i2)).intValue());
             i2++;
@@ -843,11 +842,11 @@ public final class SchemaUtil {
             return;
         }
         codedOutputStream.writeTag(i, 2);
-        int i3 = 0;
-        for (int i4 = 0; i4 < list.size(); i4++) {
-            i3 += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i4)).longValue());
+        int iComputeUInt64SizeNoTag = 0;
+        for (int i3 = 0; i3 < list.size(); i3++) {
+            iComputeUInt64SizeNoTag += CodedOutputStream.computeUInt64SizeNoTag(((Long) list.get(i3)).longValue());
         }
-        codedOutputStream.writeUInt32NoTag(i3);
+        codedOutputStream.writeUInt32NoTag(iComputeUInt64SizeNoTag);
         while (i2 < list.size()) {
             codedOutputStream.writeUInt64NoTag(((Long) list.get(i2)).longValue());
             i2++;
@@ -863,14 +862,14 @@ public final class SchemaUtil {
             int i2 = 0;
             for (int i3 = 0; i3 < size; i3++) {
                 Integer num = (Integer) list.get(i3);
-                int intValue = num.intValue();
-                if (enumVerifier.isInRange(intValue)) {
+                int iIntValue = num.intValue();
+                if (enumVerifier.isInRange(iIntValue)) {
                     if (i3 != i2) {
                         list.set(i2, num);
                     }
                     i2++;
                 } else {
-                    obj2 = storeUnknownEnum(obj, i, intValue, obj2, unknownFieldSchema);
+                    obj2 = storeUnknownEnum(obj, i, iIntValue, obj2, unknownFieldSchema);
                 }
             }
             if (i2 != size) {
@@ -880,9 +879,9 @@ public final class SchemaUtil {
         }
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            int intValue2 = ((Integer) it.next()).intValue();
-            if (!enumVerifier.isInRange(intValue2)) {
-                obj2 = storeUnknownEnum(obj, i, intValue2, obj2, unknownFieldSchema);
+            int iIntValue2 = ((Integer) it.next()).intValue();
+            if (!enumVerifier.isInRange(iIntValue2)) {
+                obj2 = storeUnknownEnum(obj, i, iIntValue2, obj2, unknownFieldSchema);
                 it.remove();
             }
         }

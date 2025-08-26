@@ -2,6 +2,7 @@ package android.inputmethodservice.navigationbar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.ReverseLinearLayout;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -67,7 +68,7 @@ public final class NavigationBarInflaterView extends FrameLayout {
     }
 
     @Override // android.view.View
-    protected void onFinishInflate() {
+    protected void onFinishInflate() throws Resources.NotFoundException, NumberFormatException {
         super.onFinishInflate();
         inflateChildren();
         clearViews();
@@ -120,12 +121,12 @@ public final class NavigationBarInflaterView extends FrameLayout {
         }
     }
 
-    private void initiallyFill(ButtonDispatcher buttonDispatcher) {
+    private void initiallyFill(ButtonDispatcher buttonDispatcher) throws Resources.NotFoundException {
         addAll(buttonDispatcher, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group));
         addAll(buttonDispatcher, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_center_group));
     }
 
-    private void addAll(ButtonDispatcher buttonDispatcher, ViewGroup viewGroup) {
+    private void addAll(ButtonDispatcher buttonDispatcher, ViewGroup viewGroup) throws Resources.NotFoundException {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             if (viewGroup.getChildAt(i).getId() == buttonDispatcher.getId()) {
                 buttonDispatcher.addView(viewGroup.getChildAt(i));
@@ -136,22 +137,22 @@ public final class NavigationBarInflaterView extends FrameLayout {
         }
     }
 
-    protected void inflateLayout(String str) {
+    protected void inflateLayout(String str) throws Resources.NotFoundException, NumberFormatException {
         if (str == null) {
             str = getDefaultLayout();
         }
-        String[] split = str.split(GRAVITY_SEPARATOR, 3);
-        if (split.length != 3) {
+        String[] strArrSplit = str.split(GRAVITY_SEPARATOR, 3);
+        if (strArrSplit.length != 3) {
             Log.d(TAG, "Invalid layout.");
-            split = getDefaultLayout().split(GRAVITY_SEPARATOR, 3);
+            strArrSplit = getDefaultLayout().split(GRAVITY_SEPARATOR, 3);
         }
-        String[] split2 = split[0].split(",");
-        String[] split3 = split[1].split(",");
-        String[] split4 = split[2].split(",");
-        inflateButtons(split2, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group), false, true);
-        inflateButtons(split3, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_center_group), false, false);
+        String[] strArrSplit2 = strArrSplit[0].split(",");
+        String[] strArrSplit3 = strArrSplit[1].split(",");
+        String[] strArrSplit4 = strArrSplit[2].split(",");
+        inflateButtons(strArrSplit2, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group), false, true);
+        inflateButtons(strArrSplit3, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_center_group), false, false);
         addGravitySpacer((LinearLayout) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group));
-        inflateButtons(split4, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group), false, false);
+        inflateButtons(strArrSplit4, (ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_ends_group), false, false);
         updateButtonDispatchersCurrentView();
     }
 
@@ -159,7 +160,7 @@ public final class NavigationBarInflaterView extends FrameLayout {
         linearLayout.addView(new Space(this.mContext), new LinearLayout.LayoutParams(0, 0, 1.0f));
     }
 
-    private void inflateButtons(String[] strArr, ViewGroup viewGroup, boolean z, boolean z2) {
+    private void inflateButtons(String[] strArr, ViewGroup viewGroup, boolean z, boolean z2) throws Resources.NotFoundException, NumberFormatException {
         for (String str : strArr) {
             inflateButton(str, viewGroup, z, z2);
         }
@@ -172,77 +173,77 @@ public final class NavigationBarInflaterView extends FrameLayout {
         return new FrameLayout.LayoutParams(layoutParams.width, layoutParams.height);
     }
 
-    protected View inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) {
-        View createView = createView(str, viewGroup, z ? this.mLandscapeInflater : this.mLayoutInflater);
-        if (createView == null) {
+    protected View inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) throws Resources.NotFoundException, NumberFormatException {
+        View viewCreateView = createView(str, viewGroup, z ? this.mLandscapeInflater : this.mLayoutInflater);
+        if (viewCreateView == null) {
             return null;
         }
-        View applySize = applySize(createView, str, z, z2);
-        viewGroup.addView(applySize);
-        addToDispatchers(applySize);
+        View viewApplySize = applySize(viewCreateView, str, z, z2);
+        viewGroup.addView(viewApplySize);
+        addToDispatchers(viewApplySize);
         View view = z ? this.mLastLandscape : this.mLastPortrait;
-        View childAt = applySize instanceof ReverseLinearLayout.ReverseRelativeLayout ? ((ReverseLinearLayout.ReverseRelativeLayout) applySize).getChildAt(0) : applySize;
+        View childAt = viewApplySize instanceof ReverseLinearLayout.ReverseRelativeLayout ? ((ReverseLinearLayout.ReverseRelativeLayout) viewApplySize).getChildAt(0) : viewApplySize;
         if (view != null) {
             childAt.setAccessibilityTraversalAfter(view.getId());
         }
         if (z) {
             this.mLastLandscape = childAt;
-            return applySize;
+            return viewApplySize;
         }
         this.mLastPortrait = childAt;
-        return applySize;
+        return viewApplySize;
     }
 
-    private View applySize(View view, String str, boolean z, boolean z2) {
-        String extractSize = extractSize(str);
-        if (extractSize == null) {
+    private View applySize(View view, String str, boolean z, boolean z2) throws NumberFormatException {
+        String strExtractSize = extractSize(str);
+        if (strExtractSize == null) {
             return view;
         }
-        if (extractSize.contains("W") || extractSize.contains("A")) {
+        if (strExtractSize.contains("W") || strExtractSize.contains("A")) {
             ReverseLinearLayout.ReverseRelativeLayout reverseRelativeLayout = new ReverseLinearLayout.ReverseRelativeLayout(this.mContext);
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(view.getLayoutParams());
             int i = z ? z2 ? 48 : 80 : z2 ? Gravity.START : Gravity.END;
-            if (extractSize.endsWith(WEIGHT_CENTERED_SUFFIX)) {
+            if (strExtractSize.endsWith(WEIGHT_CENTERED_SUFFIX)) {
                 i = 17;
-            } else if (extractSize.endsWith("C")) {
+            } else if (strExtractSize.endsWith("C")) {
                 i = 16;
             }
             reverseRelativeLayout.setDefaultGravity(i);
             reverseRelativeLayout.setGravity(i);
             reverseRelativeLayout.addView(view, layoutParams);
-            if (extractSize.contains("W")) {
-                reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams(0, -1, Float.parseFloat(extractSize.substring(0, extractSize.indexOf("W")))));
+            if (strExtractSize.contains("W")) {
+                reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams(0, -1, Float.parseFloat(strExtractSize.substring(0, strExtractSize.indexOf("W")))));
             } else {
-                reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams((int) convertDpToPx(this.mContext, Float.parseFloat(extractSize.substring(0, extractSize.indexOf("A")))), -1));
+                reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams((int) convertDpToPx(this.mContext, Float.parseFloat(strExtractSize.substring(0, strExtractSize.indexOf("A")))), -1));
             }
             reverseRelativeLayout.setClipChildren(false);
             reverseRelativeLayout.setClipToPadding(false);
             return reverseRelativeLayout;
         }
-        float parseFloat = Float.parseFloat(extractSize);
-        view.getLayoutParams().width = (int) (r7.width * parseFloat);
+        float f = Float.parseFloat(strExtractSize);
+        view.getLayoutParams().width = (int) (r7.width * f);
         return view;
     }
 
     View createView(String str, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-        String extractButton = extractButton(str);
-        if ("left".equals(extractButton)) {
-            extractButton = extractButton(NAVSPACE);
-        } else if ("right".equals(extractButton)) {
-            extractButton = extractButton(MENU_IME_ROTATE);
+        String strExtractButton = extractButton(str);
+        if ("left".equals(strExtractButton)) {
+            strExtractButton = extractButton(NAVSPACE);
+        } else if ("right".equals(strExtractButton)) {
+            strExtractButton = extractButton(MENU_IME_ROTATE);
         }
-        if (!"home".equals(extractButton)) {
-            if (BACK.equals(extractButton)) {
+        if (!"home".equals(strExtractButton)) {
+            if (BACK.equals(strExtractButton)) {
                 return layoutInflater.inflate(R.layout.input_method_nav_back, viewGroup, false);
             }
-            if (!RECENT.equals(extractButton) && !MENU_IME_ROTATE.equals(extractButton) && !NAVSPACE.equals(extractButton) && !"clipboard".equals(extractButton) && !CONTEXTUAL.equals(extractButton)) {
-                if (HOME_HANDLE.equals(extractButton)) {
+            if (!RECENT.equals(strExtractButton) && !MENU_IME_ROTATE.equals(strExtractButton) && !NAVSPACE.equals(strExtractButton) && !"clipboard".equals(strExtractButton) && !CONTEXTUAL.equals(strExtractButton)) {
+                if (HOME_HANDLE.equals(strExtractButton)) {
                     return layoutInflater.inflate(R.layout.input_method_nav_home_handle, viewGroup, false);
                 }
-                if (IME_SWITCHER.equals(extractButton)) {
+                if (IME_SWITCHER.equals(strExtractButton)) {
                     return layoutInflater.inflate(R.layout.input_method_nav_ime_switcher, viewGroup, false);
                 }
-                extractButton.startsWith("key");
+                strExtractButton.startsWith("key");
                 return null;
             }
         }
@@ -260,12 +261,12 @@ public final class NavigationBarInflaterView extends FrameLayout {
         return !str.contains(SIZE_MOD_START) ? str : str.substring(0, str.indexOf(SIZE_MOD_START));
     }
 
-    private void addToDispatchers(View view) {
+    private void addToDispatchers(View view) throws Resources.NotFoundException {
         SparseArray<ButtonDispatcher> sparseArray = this.mButtonDispatchers;
         if (sparseArray != null) {
-            int indexOfKey = sparseArray.indexOfKey(view.getId());
-            if (indexOfKey >= 0) {
-                this.mButtonDispatchers.valueAt(indexOfKey).addView(view);
+            int iIndexOfKey = sparseArray.indexOfKey(view.getId());
+            if (iIndexOfKey >= 0) {
+                this.mButtonDispatchers.valueAt(iIndexOfKey).addView(view);
             }
             if (view instanceof ViewGroup) {
                 ViewGroup viewGroup = (ViewGroup) view;
@@ -277,7 +278,7 @@ public final class NavigationBarInflaterView extends FrameLayout {
         }
     }
 
-    private void clearViews() {
+    private void clearViews() throws Resources.NotFoundException {
         if (this.mButtonDispatchers != null) {
             for (int i = 0; i < this.mButtonDispatchers.size(); i++) {
                 this.mButtonDispatchers.valueAt(i).clear();
@@ -286,7 +287,7 @@ public final class NavigationBarInflaterView extends FrameLayout {
         clearAllChildren((ViewGroup) this.mHorizontal.findViewById(R.id.input_method_nav_buttons));
     }
 
-    private void clearAllChildren(ViewGroup viewGroup) {
+    private void clearAllChildren(ViewGroup viewGroup) throws Resources.NotFoundException {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             ((ViewGroup) viewGroup.getChildAt(i)).removeAllViews();
         }

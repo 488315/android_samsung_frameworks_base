@@ -165,8 +165,8 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
                             }
                             this.mKeymasterDigests = new int[]{this.mKeymasterDigest};
                             if (keyGenParameterSpec.isDigestsSpecified()) {
-                                int[] allToKeymaster = KeyProperties.Digest.allToKeymaster(keyGenParameterSpec.getDigests());
-                                if (allToKeymaster.length != 1 || allToKeymaster[0] != this.mKeymasterDigest) {
+                                int[] iArrAllToKeymaster = KeyProperties.Digest.allToKeymaster(keyGenParameterSpec.getDigests());
+                                if (iArrAllToKeymaster.length != 1 || iArrAllToKeymaster[0] != this.mKeymasterDigest) {
                                     throw new InvalidAlgorithmParameterException("Unsupported digests specification: " + Arrays.asList(keyGenParameterSpec.getDigests()) + ". Only " + KeyProperties.Digest.fromKeymaster(this.mKeymasterDigest) + " supported for this HMAC key algorithm");
                                 }
                             }
@@ -198,7 +198,7 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
     }
 
     @Override // javax.crypto.KeyGeneratorSpi
-    protected SecretKey engineGenerateKey() {
+    protected SecretKey engineGenerateKey() throws InterruptedException {
         StrictMode.noteSlowCall("engineGenerateKey");
         KeyGenParameterSpec keyGenParameterSpec = this.mSpec;
         if (keyGenParameterSpec == null) {
@@ -216,7 +216,7 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
         ArrayUtils.forEach(this.mKeymasterBlockModes, new Consumer() { // from class: android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AndroidKeyStoreKeyGeneratorSpi.this.lambda$engineGenerateKey$1(arrayList, (Integer) obj);
+                this.f$0.lambda$engineGenerateKey$1(arrayList, (Integer) obj);
             }
         });
         ArrayUtils.forEach(this.mKeymasterPaddings, new Consumer() { // from class: android.security.keystore2.AndroidKeyStoreKeyGeneratorSpi$$ExternalSyntheticLambda2
@@ -260,7 +260,7 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
         byte[] randomBytesToMixIntoKeystoreRng = KeyStoreCryptoOperationUtils.getRandomBytesToMixIntoKeystoreRng(this.mRng, (this.mKeySizeBits + 7) / 8);
         int i = keyGenParameterSpec.isStrongBoxBacked() ? 2 : 1;
         int i2 = 0;
-        boolean isCriticalToDeviceEncryption = keyGenParameterSpec.isCriticalToDeviceEncryption();
+        boolean zIsCriticalToDeviceEncryption = keyGenParameterSpec.isCriticalToDeviceEncryption();
         int i3 = i;
         KeyDescriptor keyDescriptor = new KeyDescriptor();
         keyDescriptor.alias = keyGenParameterSpec.getKeystoreAlias();
@@ -273,7 +273,7 @@ public abstract class AndroidKeyStoreKeyGeneratorSpi extends KeyGeneratorSpi {
         try {
             KeyStoreSecurityLevel securityLevel = this.mKeyStore.getSecurityLevel(i3);
             try {
-                return new AndroidKeyStoreSecretKey(keyDescriptor, securityLevel.generateKey(keyDescriptor, null, arrayList, isCriticalToDeviceEncryption ? 1 : 0, randomBytesToMixIntoKeystoreRng), KeyProperties.KeyAlgorithm.fromKeymasterSecretKeyAlgorithm(this.mKeymasterAlgorithm, this.mKeymasterDigest), securityLevel);
+                return new AndroidKeyStoreSecretKey(keyDescriptor, securityLevel.generateKey(keyDescriptor, null, arrayList, zIsCriticalToDeviceEncryption ? 1 : 0, randomBytesToMixIntoKeystoreRng), KeyProperties.KeyAlgorithm.fromKeymasterSecretKeyAlgorithm(this.mKeymasterAlgorithm, this.mKeymasterDigest), securityLevel);
             } catch (IllegalArgumentException e) {
                 try {
                     this.mKeyStore.deleteKey(keyDescriptor);

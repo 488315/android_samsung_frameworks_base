@@ -17,7 +17,6 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GroupedTaskInfo implements Parcelable {
     public static final Parcelable.Creator<GroupedTaskInfo> CREATOR = new Parcelable.Creator() { // from class: com.android.wm.shell.shared.GroupedTaskInfo.1
@@ -133,7 +132,7 @@ public class GroupedTaskInfo implements Parcelable {
             sb.append("Tasks=" + ((String) this.mTasks.stream().map(new Function() { // from class: com.android.wm.shell.shared.GroupedTaskInfo$$ExternalSyntheticLambda2
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    GroupedTaskInfo groupedTaskInfo = GroupedTaskInfo.this;
+                    GroupedTaskInfo groupedTaskInfo = this.f$0;
                     TaskInfo taskInfo = (TaskInfo) obj;
                     Parcelable.Creator<GroupedTaskInfo> creator = GroupedTaskInfo.CREATOR;
                     groupedTaskInfo.getClass();
@@ -199,8 +198,8 @@ public class GroupedTaskInfo implements Parcelable {
         this.mDeskId = parcel.readInt();
         this.mDeskDisplayId = parcel.readInt();
         this.mTasks = new ArrayList();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mTasks.add(new TaskInfo(parcel));
         }
         this.mGroupedTasks = parcel.createTypedArrayList(CREATOR);

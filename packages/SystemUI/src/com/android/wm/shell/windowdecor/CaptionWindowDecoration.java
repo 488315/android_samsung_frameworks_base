@@ -33,7 +33,6 @@ import com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHostSuppl
 import com.android.wm.shell.windowdecor.extension.TaskInfoKt;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CaptionWindowDecoration extends WindowDecoration {
     public final ShellExecutor mBgExecutor;
@@ -65,9 +64,9 @@ public class CaptionWindowDecoration extends WindowDecoration {
         relayoutParams.mLayoutResId = R.layout.caption_window_decor;
         runningTaskInfo.getWindowingMode();
         relayoutParams.mCaptionHeightId = R.dimen.freeform_decor_caption_height;
-        boolean isTrue = DesktopExperienceFlags.ENABLE_DYNAMIC_RADIUS_COMPUTATION_BUGFIX.isTrue();
+        boolean zIsTrue = DesktopExperienceFlags.ENABLE_DYNAMIC_RADIUS_COMPUTATION_BUGFIX.isTrue();
         int i = R.dimen.freeform_decor_shadow_unfocused_thickness;
-        if (isTrue) {
+        if (zIsTrue) {
             if (z5) {
                 i = R.dimen.freeform_decor_shadow_focused_thickness;
             }
@@ -110,26 +109,26 @@ public class CaptionWindowDecoration extends WindowDecoration {
     }
 
     @Override // com.android.wm.shell.windowdecor.WindowDecoration
-    public final void relayout(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, Region region) {
+    public final void relayout(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, Region region) throws Resources.NotFoundException {
         SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
         relayout(runningTaskInfo, transaction, transaction, true, this.mTaskDragResizer.isResizingOrAnimating(), z, region);
     }
 
-    public final void setCaptionColor(int i) {
+    public final void setCaptionColor(int i) throws Resources.NotFoundException {
         View view = this.mResult.mRootView;
         if (view == null) {
             return;
         }
-        View findViewById = ((WindowDecorLinearLayout) view).findViewById(R.id.caption);
-        ((GradientDrawable) findViewById.getBackground()).setColor(i);
-        ColorStateList colorStateList = findViewById.getResources().getColorStateList(((double) Color.valueOf(i).luminance()) < 0.5d ? R.color.decor_button_light_color : R.color.decor_button_dark_color, null);
-        findViewById.findViewById(R.id.back_button).setBackgroundTintList(colorStateList);
-        findViewById.findViewById(R.id.minimize_window).setBackgroundTintList(colorStateList);
-        findViewById.findViewById(R.id.maximize_window).setBackgroundTintList(colorStateList);
-        findViewById.findViewById(R.id.close_window).setBackgroundTintList(colorStateList);
+        View viewFindViewById = ((WindowDecorLinearLayout) view).findViewById(R.id.caption);
+        ((GradientDrawable) viewFindViewById.getBackground()).setColor(i);
+        ColorStateList colorStateList = viewFindViewById.getResources().getColorStateList(((double) Color.valueOf(i).luminance()) < 0.5d ? R.color.decor_button_light_color : R.color.decor_button_dark_color, null);
+        viewFindViewById.findViewById(R.id.back_button).setBackgroundTintList(colorStateList);
+        viewFindViewById.findViewById(R.id.minimize_window).setBackgroundTintList(colorStateList);
+        viewFindViewById.findViewById(R.id.maximize_window).setBackgroundTintList(colorStateList);
+        viewFindViewById.findViewById(R.id.close_window).setBackgroundTintList(colorStateList);
     }
 
-    public final void relayout(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, boolean z, boolean z2, boolean z3, Region region) {
+    public final void relayout(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, boolean z, boolean z2, boolean z3, Region region) throws Resources.NotFoundException {
         boolean z4;
         int dimensionPixelSize;
         boolean z5 = runningTaskInfo.getWindowingMode() == 5;
@@ -153,7 +152,7 @@ public class CaptionWindowDecoration extends WindowDecoration {
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.CaptionWindowDecoration$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CaptionWindowDecoration captionWindowDecoration = CaptionWindowDecoration.this;
+                CaptionWindowDecoration captionWindowDecoration = this.f$0;
                 captionWindowDecoration.mTaskOrganizer.applyTransaction(windowContainerTransaction);
             }
         });
@@ -162,12 +161,12 @@ public class CaptionWindowDecoration extends WindowDecoration {
             return;
         }
         if (windowDecorLinearLayout != view) {
-            View findViewById = ((WindowDecorLinearLayout) view).findViewById(R.id.caption);
-            findViewById.setOnTouchListener(this.mOnCaptionTouchListener);
-            findViewById.findViewById(R.id.close_window).setOnClickListener(this.mOnCaptionButtonClickListener);
-            findViewById.findViewById(R.id.back_button).setOnClickListener(this.mOnCaptionButtonClickListener);
-            findViewById.findViewById(R.id.minimize_window).setOnClickListener(this.mOnCaptionButtonClickListener);
-            findViewById.findViewById(R.id.maximize_window).setOnClickListener(this.mOnCaptionButtonClickListener);
+            View viewFindViewById = ((WindowDecorLinearLayout) view).findViewById(R.id.caption);
+            viewFindViewById.setOnTouchListener(this.mOnCaptionTouchListener);
+            viewFindViewById.findViewById(R.id.close_window).setOnClickListener(this.mOnCaptionButtonClickListener);
+            viewFindViewById.findViewById(R.id.back_button).setOnClickListener(this.mOnCaptionButtonClickListener);
+            viewFindViewById.findViewById(R.id.minimize_window).setOnClickListener(this.mOnCaptionButtonClickListener);
+            viewFindViewById.findViewById(R.id.maximize_window).setOnClickListener(this.mOnCaptionButtonClickListener);
         }
         View view2 = this.mResult.mRootView;
         if (TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo)) {
@@ -207,7 +206,7 @@ public class CaptionWindowDecoration extends WindowDecoration {
         Runnable runnable = new Runnable() { // from class: com.android.wm.shell.windowdecor.CaptionWindowDecoration$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                CaptionWindowDecoration captionWindowDecoration = CaptionWindowDecoration.this;
+                CaptionWindowDecoration captionWindowDecoration = this.f$0;
                 captionWindowDecoration.mDragResizeListener.setGeometry(dragResizeWindowGeometry, scaledTouchSlop, true);
             }
         };

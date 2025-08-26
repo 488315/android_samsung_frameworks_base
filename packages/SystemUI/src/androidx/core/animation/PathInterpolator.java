@@ -10,7 +10,6 @@ import androidx.core.content.res.TypedArrayUtils;
 import androidx.core.graphics.PathParser;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PathInterpolator implements Interpolator {
     public float[] mData;
@@ -59,9 +58,9 @@ public class PathInterpolator implements Interpolator {
     }
 
     public final void initPath(Path path) {
-        float[] approximate = PathUtils$Api26Impl.approximate(path, 0.002f);
-        this.mData = approximate;
-        int length = approximate.length / 3;
+        float[] fArrApproximate = PathUtils$Api26Impl.approximate(path, 0.002f);
+        this.mData = fArrApproximate;
+        int length = fArrApproximate.length / 3;
         int i = 0;
         float f = 0.0f;
         if (floatEquals(getXAtIndex(0), 0.0f) && floatEquals(getYAtIndex(0), 0.0f)) {
@@ -88,15 +87,15 @@ public class PathInterpolator implements Interpolator {
     }
 
     public PathInterpolator(float f, float f2) {
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m.quadTo(f, f2, 1.0f, 1.0f);
-        initPath(m);
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM.quadTo(f, f2, 1.0f, 1.0f);
+        initPath(pathM);
     }
 
     public PathInterpolator(float f, float f2, float f3, float f4) {
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m.cubicTo(f, f2, f3, f4, 1.0f, 1.0f);
-        initPath(m);
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM.cubicTo(f, f2, f3, f4, 1.0f, 1.0f);
+        initPath(pathM);
     }
 
     public PathInterpolator(Context context, AttributeSet attributeSet, XmlPullParser xmlPullParser) {
@@ -104,33 +103,33 @@ public class PathInterpolator implements Interpolator {
     }
 
     public PathInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet, XmlPullParser xmlPullParser) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         int[] iArr = AndroidResources.STYLEABLE_PATH_INTERPOLATOR;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, iArr, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, iArr, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, iArr);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, iArr);
         }
         if (TypedArrayUtils.hasAttribute(xmlPullParser, "pathData")) {
-            initPath(PathParser.createPathFromPathData(TypedArrayUtils.getNamedString(obtainAttributes, xmlPullParser, "pathData", 4)));
+            initPath(PathParser.createPathFromPathData(TypedArrayUtils.getNamedString(typedArrayObtainAttributes, xmlPullParser, "pathData", 4)));
         } else if (xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX1") != null) {
             if (xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY1") != null) {
-                float f = !(xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX1") != null) ? 0.0f : obtainAttributes.getFloat(0, 0.0f);
-                float f2 = !(xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY1") != null) ? 0.0f : obtainAttributes.getFloat(1, 0.0f);
+                float f = !(xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX1") != null) ? 0.0f : typedArrayObtainAttributes.getFloat(0, 0.0f);
+                float f2 = !(xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY1") != null) ? 0.0f : typedArrayObtainAttributes.getFloat(1, 0.0f);
                 boolean z = xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX2") != null;
                 if (z != (xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY2") != null)) {
                     throw new InflateException("pathInterpolator requires both controlX2 and controlY2 for cubic Beziers.");
                 }
                 if (!z) {
-                    Path m = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-                    m.quadTo(f, f2, 1.0f, 1.0f);
-                    initPath(m);
+                    Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+                    pathM.quadTo(f, f2, 1.0f, 1.0f);
+                    initPath(pathM);
                 } else {
-                    float f3 = xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX2") != null ? obtainAttributes.getFloat(2, 0.0f) : 0.0f;
-                    float f4 = xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY2") != null ? obtainAttributes.getFloat(3, 0.0f) : 0.0f;
-                    Path m2 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-                    m2.cubicTo(f, f2, f3, f4, 1.0f, 1.0f);
-                    initPath(m2);
+                    float f3 = xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlX2") != null ? typedArrayObtainAttributes.getFloat(2, 0.0f) : 0.0f;
+                    float f4 = xmlPullParser.getAttributeValue("http://schemas.android.com/apk/res/android", "controlY2") != null ? typedArrayObtainAttributes.getFloat(3, 0.0f) : 0.0f;
+                    Path pathM2 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+                    pathM2.cubicTo(f, f2, f3, f4, 1.0f, 1.0f);
+                    initPath(pathM2);
                 }
             } else {
                 throw new InflateException("pathInterpolator requires the controlY1 attribute");
@@ -138,6 +137,6 @@ public class PathInterpolator implements Interpolator {
         } else {
             throw new InflateException("pathInterpolator requires the controlX1 attribute");
         }
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
     }
 }

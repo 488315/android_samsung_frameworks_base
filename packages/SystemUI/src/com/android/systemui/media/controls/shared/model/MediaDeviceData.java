@@ -7,7 +7,6 @@ import com.android.systemui.media.SecMediaDeviceDataImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDeviceData {
     public final SecMediaDeviceDataImpl customMediaDeviceData;
@@ -34,15 +33,15 @@ public final class MediaDeviceData {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.enabled) * 31;
+        int iHashCode = Boolean.hashCode(this.enabled) * 31;
         Drawable drawable = this.icon;
-        int hashCode2 = (hashCode + (drawable == null ? 0 : drawable.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (drawable == null ? 0 : drawable.hashCode())) * 31;
         CharSequence charSequence = this.name;
-        int hashCode3 = (hashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         PendingIntent pendingIntent = this.intent;
-        int hashCode4 = (hashCode3 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
         String str = this.id;
-        return this.customMediaDeviceData.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode4 + (str != null ? str.hashCode() : 0)) * 31, 31, this.showBroadcastButton);
+        return this.customMediaDeviceData.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode4 + (str != null ? str.hashCode() : 0)) * 31, 31, this.showBroadcastButton);
     }
 
     public final String toString() {

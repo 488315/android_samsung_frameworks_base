@@ -34,12 +34,12 @@ public final class BrightnessConfiguration implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public BrightnessConfiguration createFromParcel(Parcel parcel) {
             Builder builder = new Builder(parcel.createFloatArray(), parcel.createFloatArray());
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
                 builder.addCorrectionByPackageName(parcel.readString(), BrightnessCorrection.CREATOR.createFromParcel(parcel));
             }
-            int readInt2 = parcel.readInt();
-            for (int i2 = 0; i2 < readInt2; i2++) {
+            int i3 = parcel.readInt();
+            for (int i4 = 0; i4 < i3; i4++) {
                 builder.addCorrectionByCategory(parcel.readInt(), BrightnessCorrection.CREATOR.createFromParcel(parcel));
             }
             builder.setDescription(parcel.readString());
@@ -91,9 +91,9 @@ public final class BrightnessConfiguration implements Parcelable {
 
     public Pair<float[], float[]> getCurve() {
         float[] fArr = this.mLux;
-        float[] copyOf = Arrays.copyOf(fArr, fArr.length);
+        float[] fArrCopyOf = Arrays.copyOf(fArr, fArr.length);
         float[] fArr2 = this.mNits;
-        return Pair.create(copyOf, Arrays.copyOf(fArr2, fArr2.length));
+        return Pair.create(fArrCopyOf, Arrays.copyOf(fArr2, fArr2.length));
     }
 
     public BrightnessCorrection getCorrectionByPackageName(String str) {
@@ -137,9 +137,9 @@ public final class BrightnessConfiguration implements Parcelable {
         }
         parcel.writeInt(this.mCorrectionsByCategory.size());
         for (Map.Entry<Integer, BrightnessCorrection> entry2 : this.mCorrectionsByCategory.entrySet()) {
-            int intValue = entry2.getKey().intValue();
+            int iIntValue = entry2.getKey().intValue();
             BrightnessCorrection value2 = entry2.getValue();
-            parcel.writeInt(intValue);
+            parcel.writeInt(iIntValue);
             value2.writeToParcel(parcel, i);
         }
         parcel.writeString(this.mDescription);
@@ -189,12 +189,12 @@ public final class BrightnessConfiguration implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = ((((((Arrays.hashCode(this.mLux) + 31) * 31) + Arrays.hashCode(this.mNits)) * 31) + this.mCorrectionsByPackageName.hashCode()) * 31) + this.mCorrectionsByCategory.hashCode();
+        int iHashCode = ((((((Arrays.hashCode(this.mLux) + 31) * 31) + Arrays.hashCode(this.mNits)) * 31) + this.mCorrectionsByPackageName.hashCode()) * 31) + this.mCorrectionsByCategory.hashCode();
         String str = this.mDescription;
         if (str != null) {
-            hashCode = (hashCode * 31) + str.hashCode();
+            iHashCode = (iHashCode * 31) + str.hashCode();
         }
-        return (((((((hashCode * 31) + Boolean.hashCode(this.mShouldCollectColorSamples)) * 31) + Long.hashCode(this.mShortTermModelTimeout)) * 31) + Float.hashCode(this.mShortTermModelLowerLuxMultiplier)) * 31) + Float.hashCode(this.mShortTermModelUpperLuxMultiplier);
+        return (((((((iHashCode * 31) + Boolean.hashCode(this.mShouldCollectColorSamples)) * 31) + Long.hashCode(this.mShortTermModelTimeout)) * 31) + Float.hashCode(this.mShortTermModelLowerLuxMultiplier)) * 31) + Float.hashCode(this.mShortTermModelUpperLuxMultiplier);
     }
 
     public boolean equals(Object obj) {
@@ -235,10 +235,10 @@ public final class BrightnessConfiguration implements Parcelable {
             typedXmlSerializer.endTag(null, TAG_BRIGHTNESS_CORRECTION);
         }
         for (Map.Entry<Integer, BrightnessCorrection> entry2 : this.mCorrectionsByCategory.entrySet()) {
-            int intValue = entry2.getKey().intValue();
+            int iIntValue = entry2.getKey().intValue();
             BrightnessCorrection value2 = entry2.getValue();
             typedXmlSerializer.startTag(null, TAG_BRIGHTNESS_CORRECTION);
-            typedXmlSerializer.attributeInt(null, ATTR_CATEGORY, intValue);
+            typedXmlSerializer.attributeInt(null, ATTR_CATEGORY, iIntValue);
             value2.saveToXml(typedXmlSerializer);
             typedXmlSerializer.endTag(null, TAG_BRIGHTNESS_CORRECTION);
         }
@@ -260,29 +260,29 @@ public final class BrightnessConfiguration implements Parcelable {
         typedXmlSerializer.endTag(null, TAG_BRIGHTNESS_PARAMS);
     }
 
-    public static BrightnessConfiguration loadFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public static BrightnessConfiguration loadFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         int i;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
-        HashMap hashMap = new HashMap();
-        HashMap hashMap2 = new HashMap();
+        HashMap map = new HashMap();
+        HashMap map2 = new HashMap();
         int depth = typedXmlPullParser.getDepth();
         String str = null;
-        long j = -1;
-        float f = Float.NaN;
-        String str2 = null;
-        float f2 = Float.NaN;
-        boolean z = false;
+        long jLongValue = -1;
+        float fLoadFloatFromXml = Float.NaN;
+        String attributeValue = null;
+        float fLoadFloatFromXml2 = Float.NaN;
+        boolean attributeBoolean = false;
         while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
             if (TAG_BRIGHTNESS_CURVE.equals(typedXmlPullParser.getName())) {
-                str2 = typedXmlPullParser.getAttributeValue(str, "description");
+                attributeValue = typedXmlPullParser.getAttributeValue(str, "description");
                 int depth2 = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth2)) {
                     if (TAG_BRIGHTNESS_POINT.equals(typedXmlPullParser.getName())) {
-                        float loadFloatFromXml = loadFloatFromXml(typedXmlPullParser, ATTR_LUX);
-                        float loadFloatFromXml2 = loadFloatFromXml(typedXmlPullParser, "nits");
-                        arrayList.add(Float.valueOf(loadFloatFromXml));
-                        arrayList2.add(Float.valueOf(loadFloatFromXml2));
+                        float fLoadFloatFromXml3 = loadFloatFromXml(typedXmlPullParser, ATTR_LUX);
+                        float fLoadFloatFromXml4 = loadFloatFromXml(typedXmlPullParser, "nits");
+                        arrayList.add(Float.valueOf(fLoadFloatFromXml3));
+                        arrayList2.add(Float.valueOf(fLoadFloatFromXml4));
                     }
                 }
             } else {
@@ -290,14 +290,14 @@ public final class BrightnessConfiguration implements Parcelable {
                     int depth3 = typedXmlPullParser.getDepth();
                     while (XmlUtils.nextElementWithin(typedXmlPullParser, depth3)) {
                         if (TAG_BRIGHTNESS_CORRECTION.equals(typedXmlPullParser.getName())) {
-                            String attributeValue = typedXmlPullParser.getAttributeValue(str, ATTR_PACKAGE_NAME);
+                            String attributeValue2 = typedXmlPullParser.getAttributeValue(str, ATTR_PACKAGE_NAME);
                             int i2 = depth;
                             int attributeInt = typedXmlPullParser.getAttributeInt(str, ATTR_CATEGORY, -1);
-                            BrightnessCorrection loadFromXml = BrightnessCorrection.loadFromXml(typedXmlPullParser);
-                            if (attributeValue != null) {
-                                hashMap.put(attributeValue, loadFromXml);
+                            BrightnessCorrection brightnessCorrectionLoadFromXml = BrightnessCorrection.loadFromXml(typedXmlPullParser);
+                            if (attributeValue2 != null) {
+                                map.put(attributeValue2, brightnessCorrectionLoadFromXml);
                             } else if (attributeInt != -1) {
-                                hashMap2.put(Integer.valueOf(attributeInt), loadFromXml);
+                                map2.put(Integer.valueOf(attributeInt), brightnessCorrectionLoadFromXml);
                             }
                             depth = i2;
                             str = null;
@@ -308,13 +308,13 @@ public final class BrightnessConfiguration implements Parcelable {
                     i = depth;
                     if (TAG_BRIGHTNESS_PARAMS.equals(typedXmlPullParser.getName())) {
                         str = null;
-                        z = typedXmlPullParser.getAttributeBoolean(null, ATTR_COLLECT_COLOR, false);
-                        Long loadLongFromXml = loadLongFromXml(typedXmlPullParser, ATTR_MODEL_TIMEOUT);
-                        if (loadLongFromXml != null) {
-                            j = loadLongFromXml.longValue();
+                        attributeBoolean = typedXmlPullParser.getAttributeBoolean(null, ATTR_COLLECT_COLOR, false);
+                        Long lLoadLongFromXml = loadLongFromXml(typedXmlPullParser, ATTR_MODEL_TIMEOUT);
+                        if (lLoadLongFromXml != null) {
+                            jLongValue = lLoadLongFromXml.longValue();
                         }
-                        f = loadFloatFromXml(typedXmlPullParser, ATTR_MODEL_LOWER_BOUND);
-                        f2 = loadFloatFromXml(typedXmlPullParser, ATTR_MODEL_UPPER_BOUND);
+                        fLoadFloatFromXml = loadFloatFromXml(typedXmlPullParser, ATTR_MODEL_LOWER_BOUND);
+                        fLoadFloatFromXml2 = loadFloatFromXml(typedXmlPullParser, ATTR_MODEL_UPPER_BOUND);
                         depth = i;
                     } else {
                         str = null;
@@ -331,17 +331,17 @@ public final class BrightnessConfiguration implements Parcelable {
             fArr2[i3] = ((Float) arrayList2.get(i3)).floatValue();
         }
         Builder builder = new Builder(fArr, fArr2);
-        builder.setDescription(str2);
-        for (Map.Entry entry : hashMap.entrySet()) {
+        builder.setDescription(attributeValue);
+        for (Map.Entry entry : map.entrySet()) {
             builder.addCorrectionByPackageName((String) entry.getKey(), (BrightnessCorrection) entry.getValue());
         }
-        for (Map.Entry entry2 : hashMap2.entrySet()) {
+        for (Map.Entry entry2 : map2.entrySet()) {
             builder.addCorrectionByCategory(((Integer) entry2.getKey()).intValue(), (BrightnessCorrection) entry2.getValue());
         }
-        builder.setShouldCollectColorSamples(z);
-        builder.setShortTermModelTimeoutMillis(j);
-        builder.setShortTermModelLowerLuxMultiplier(f);
-        builder.setShortTermModelUpperLuxMultiplier(f2);
+        builder.setShouldCollectColorSamples(attributeBoolean);
+        builder.setShortTermModelTimeoutMillis(jLongValue);
+        builder.setShortTermModelLowerLuxMultiplier(fLoadFloatFromXml);
+        builder.setShortTermModelUpperLuxMultiplier(fLoadFloatFromXml2);
         return builder.build();
     }
 

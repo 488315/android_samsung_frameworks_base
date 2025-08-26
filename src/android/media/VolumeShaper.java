@@ -59,14 +59,14 @@ public final class VolumeShaper implements AutoCloseable {
             if (playerBase == null) {
                 throw new IllegalStateException("player deallocated");
             }
-            int playerApplyVolumeShaper = playerBase.playerApplyVolumeShaper(configuration, operation);
-            if (playerApplyVolumeShaper >= 0) {
-                return playerApplyVolumeShaper;
+            int iPlayerApplyVolumeShaper = playerBase.playerApplyVolumeShaper(configuration, operation);
+            if (iPlayerApplyVolumeShaper >= 0) {
+                return iPlayerApplyVolumeShaper;
             }
-            if (playerApplyVolumeShaper == -38) {
+            if (iPlayerApplyVolumeShaper == -38) {
                 throw new IllegalStateException("player or VolumeShaper deallocated");
             }
-            throw new IllegalArgumentException("invalid configuration or operation: " + playerApplyVolumeShaper);
+            throw new IllegalArgumentException("invalid configuration or operation: " + iPlayerApplyVolumeShaper);
         }
         throw new IllegalStateException("uninitialized shaper");
     }
@@ -78,9 +78,9 @@ public final class VolumeShaper implements AutoCloseable {
             if (playerBase == null) {
                 throw new IllegalStateException("player deallocated");
             }
-            State playerGetVolumeShaperState = playerBase.playerGetVolumeShaperState(i);
-            if (playerGetVolumeShaperState != null) {
-                return playerGetVolumeShaperState;
+            State statePlayerGetVolumeShaperState = playerBase.playerGetVolumeShaperState(i);
+            if (statePlayerGetVolumeShaperState != null) {
+                return statePlayerGetVolumeShaperState;
             }
             throw new IllegalStateException("shaper cannot be found");
         }
@@ -149,9 +149,9 @@ public final class VolumeShaper implements AutoCloseable {
             for (int i = 0; i < 16; i++) {
                 float f = i / 15.0f;
                 fArr[i] = f;
-                float sin = (float) Math.sin((f * 3.141592653589793d) / 2.0d);
-                fArr2[i] = sin;
-                fArr3[i] = sin * sin;
+                float fSin = (float) Math.sin((f * 3.141592653589793d) / 2.0d);
+                fArr2[i] = fSin;
+                fArr3[i] = fSin * fSin;
             }
             SINE_RAMP = new Builder().setInterpolatorType(2).setCurve(fArr, fArr2).setDuration(1000L).build();
             SCURVE_RAMP = new Builder().setInterpolatorType(2).setCurve(fArr, fArr3).setDuration(1000L).build();
@@ -235,14 +235,14 @@ public final class VolumeShaper implements AutoCloseable {
         }
 
         public static Configuration fromParcelable(VolumeShaperConfiguration volumeShaperConfiguration) {
-            int typeFromAidl = typeFromAidl(volumeShaperConfiguration.type);
+            int iTypeFromAidl = typeFromAidl(volumeShaperConfiguration.type);
             int i = volumeShaperConfiguration.id;
-            if (typeFromAidl == 0) {
+            if (iTypeFromAidl == 0) {
                 return new Configuration(i);
             }
-            int optionFlagsFromAidl = optionFlagsFromAidl(volumeShaperConfiguration.optionFlags);
+            int iOptionFlagsFromAidl = optionFlagsFromAidl(volumeShaperConfiguration.optionFlags);
             double d = volumeShaperConfiguration.durationMs;
-            int interpolatorTypeFromAidl = interpolatorTypeFromAidl(volumeShaperConfiguration.interpolatorConfig.type);
+            int iInterpolatorTypeFromAidl = interpolatorTypeFromAidl(volumeShaperConfiguration.interpolatorConfig.type);
             int length = volumeShaperConfiguration.interpolatorConfig.xy.length;
             if (length % 2 != 0) {
                 throw new BadParcelableException("xy length must be even");
@@ -255,7 +255,7 @@ public final class VolumeShaper implements AutoCloseable {
                 fArr[i3] = volumeShaperConfiguration.interpolatorConfig.xy[i4];
                 fArr2[i3] = volumeShaperConfiguration.interpolatorConfig.xy[i4 + 1];
             }
-            return new Configuration(typeFromAidl, i, optionFlagsFromAidl, d, interpolatorTypeFromAidl, fArr, fArr2);
+            return new Configuration(iTypeFromAidl, i, iOptionFlagsFromAidl, d, iInterpolatorTypeFromAidl, fArr, fArr2);
         }
 
         private static int interpolatorTypeFromAidl(int i) {
@@ -416,12 +416,12 @@ public final class VolumeShaper implements AutoCloseable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static void checkCurveForErrorsAndThrowException(float[] fArr, float[] fArr2, boolean z, boolean z2) {
-            String checkCurveForErrors = checkCurveForErrors(fArr, fArr2, z);
-            if (checkCurveForErrors != null) {
+            String strCheckCurveForErrors = checkCurveForErrors(fArr, fArr2, z);
+            if (strCheckCurveForErrors != null) {
                 if (z2) {
-                    throw new IllegalStateException(checkCurveForErrors);
+                    throw new IllegalStateException(strCheckCurveForErrors);
                 }
-                throw new IllegalArgumentException(checkCurveForErrors);
+                throw new IllegalArgumentException(strCheckCurveForErrors);
             }
         }
 

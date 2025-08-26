@@ -10,7 +10,6 @@ import kotlin.Result;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class AudioManagerExtKt {
     public static final Lazy mediaStrategy$delegate = LazyKt__LazyJVMKt.lazy(new AudioManagerExtKt$$ExternalSyntheticLambda0());
@@ -42,9 +41,9 @@ public abstract class AudioManagerExtKt {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            m3422exceptionOrNullimpl.printStackTrace();
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            thM3442exceptionOrNullimpl.printStackTrace();
         }
         if (failure instanceof Result.Failure) {
             failure = null;
@@ -58,11 +57,11 @@ public abstract class AudioManagerExtKt {
                 int i3 = Result.$r8$clinit;
                 failure2 = new Result.Failure(th2);
             }
-            Throwable m3422exceptionOrNullimpl2 = Result.m3422exceptionOrNullimpl(failure2);
-            if (m3422exceptionOrNullimpl2 != null) {
-                m3422exceptionOrNullimpl2.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
+            if (thM3442exceptionOrNullimpl2 != null) {
+                thM3442exceptionOrNullimpl2.printStackTrace();
             }
-            Result.m3421boximpl(failure2);
+            Result.m3441boximpl(failure2);
         }
     }
 

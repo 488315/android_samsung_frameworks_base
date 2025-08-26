@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewModel$deviceEntryViewAlpha$1 extends SuspendLambda implements Function3 {
     /* synthetic */ float F$0;
@@ -20,11 +19,11 @@ final class DeviceEntryIconViewModel$deviceEntryViewAlpha$1 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        float floatValue = ((Number) obj).floatValue();
-        float floatValue2 = ((Number) obj2).floatValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        float fFloatValue2 = ((Number) obj2).floatValue();
         DeviceEntryIconViewModel$deviceEntryViewAlpha$1 deviceEntryIconViewModel$deviceEntryViewAlpha$1 = new DeviceEntryIconViewModel$deviceEntryViewAlpha$1((Continuation) obj3);
-        deviceEntryIconViewModel$deviceEntryViewAlpha$1.F$0 = floatValue;
-        deviceEntryIconViewModel$deviceEntryViewAlpha$1.F$1 = floatValue2;
+        deviceEntryIconViewModel$deviceEntryViewAlpha$1.F$0 = fFloatValue;
+        deviceEntryIconViewModel$deviceEntryViewAlpha$1.F$1 = fFloatValue2;
         return deviceEntryIconViewModel$deviceEntryViewAlpha$1.invokeSuspend(Unit.INSTANCE);
     }
 

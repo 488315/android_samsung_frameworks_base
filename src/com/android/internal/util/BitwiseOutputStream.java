@@ -59,9 +59,9 @@ public class BitwiseOutputStream {
 
     public void writeByteArray(int i, byte[] bArr) throws AccessException {
         for (int i2 = 0; i2 < bArr.length; i2++) {
-            int min = Math.min(8, i - (i2 << 3));
-            if (min > 0) {
-                write(min, (byte) (bArr[i2] >>> (8 - min)));
+            int iMin = Math.min(8, i - (i2 << 3));
+            if (iMin > 0) {
+                write(iMin, (byte) (bArr[i2] >>> (8 - iMin)));
             }
         }
     }

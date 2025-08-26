@@ -1,19 +1,32 @@
 package com.android.systemui.keyguard.data.repository;
 
+import android.content.res.Resources;
+import com.android.systemui.R;
+import com.android.systemui.dump.DumpManager;
 import com.android.systemui.keyguard.shared.model.DevicePosture;
 import com.android.systemui.util.kotlin.FlowDumperImpl;
+import com.android.systemui.util.settings.repository.UserAwareSecureSettingsRepository;
 import kotlin.Lazy;
+import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardBypassRepository extends FlowDumperImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Lazy configFaceAuthSupportedPosture$delegate;
     public final Flow isBypassAvailable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -23,7 +36,6 @@ public final class KeyguardBypassRepository extends FlowDumperImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -41,82 +53,143 @@ public final class KeyguardBypassRepository extends FlowDumperImpl {
         new Companion(null);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0063  */
     /* JADX WARN: Removed duplicated region for block: B:12:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0063  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public KeyguardBypassRepository(final android.content.res.Resources r5, com.android.systemui.keyguard.data.repository.BiometricSettingsRepository r6, com.android.systemui.keyguard.data.repository.DevicePostureRepository r7, com.android.systemui.dump.DumpManager r8, com.android.systemui.util.settings.repository.UserAwareSecureSettingsRepository r9, kotlinx.coroutines.CoroutineDispatcher r10) {
-        /*
-            r4 = this;
-            r0 = 0
-            r1 = 2
-            r4.<init>(r8, r0, r1, r0)
-            com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0 r8 = new com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0
-            r2 = 0
-            r8.<init>()
-            kotlin.Lazy r8 = kotlin.LazyKt__LazyJVMKt.lazy(r8)
-            com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0 r2 = new com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0
-            r3 = 1
-            r2.<init>()
-            kotlin.Lazy r2 = kotlin.LazyKt__LazyJVMKt.lazy(r2)
-            r4.configFaceAuthSupportedPosture$delegate = r2
-            r3 = 17891761(0x11101b1, float:2.6633507E-38)
-            boolean r5 = r5.getBoolean(r3)
-            java.lang.String r3 = "face_unlock_dismisses_keyguard"
-            kotlinx.coroutines.flow.Flow r5 = r9.boolSetting(r3, r5)
-            kotlinx.coroutines.flow.Flow r5 = kotlinx.coroutines.flow.FlowKt.flowOn(r5, r10)
-            java.lang.String r9 = "bypassEnabledSetting"
-            kotlinx.coroutines.flow.Flow r5 = r4.dumpWhileCollecting(r5, r9)
-            java.lang.Object r8 = r8.getValue()
-            java.lang.Number r8 = (java.lang.Number) r8
-            int r8 = r8.intValue()
-            r9 = 1
-            if (r8 == r9) goto L4b
-            if (r8 == r1) goto L42
-            goto L53
-        L42:
-            java.lang.Boolean r5 = java.lang.Boolean.FALSE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r8 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r8.<init>(r5)
-        L49:
-            r5 = r8
-            goto L53
-        L4b:
-            java.lang.Boolean r5 = java.lang.Boolean.TRUE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r8 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r8.<init>(r5)
-            goto L49
-        L53:
-            java.lang.Object r8 = r2.getValue()
-            com.android.systemui.keyguard.shared.model.DevicePosture r8 = (com.android.systemui.keyguard.shared.model.DevicePosture) r8
-            int[] r10 = com.android.systemui.keyguard.data.repository.KeyguardBypassRepository.WhenMappings.$EnumSwitchMapping$0
-            int r8 = r8.ordinal()
-            r8 = r10[r8]
-            if (r8 != r9) goto L6b
-            java.lang.Boolean r7 = java.lang.Boolean.TRUE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r8 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r8.<init>(r7)
-            goto L7a
-        L6b:
-            com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl r7 = (com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl) r7
-            kotlinx.coroutines.flow.Flow r7 = r7.getCurrentDevicePosture()
-            com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$special$$inlined$map$1 r8 = new com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$special$$inlined$map$1
-            r8.<init>()
-            kotlinx.coroutines.flow.Flow r8 = kotlinx.coroutines.flow.FlowKt.distinctUntilChanged(r8)
-        L7a:
-            com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl r6 = (com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl) r6
-            kotlinx.coroutines.flow.ReadonlyStateFlow r6 = r6.isFaceAuthEnrolledAndEnabled
-            com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$isBypassAvailable$1 r7 = new com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$isBypassAvailable$1
-            r7.<init>(r0)
-            kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 r5 = kotlinx.coroutines.flow.FlowKt.combine(r5, r6, r8, r7)
-            kotlinx.coroutines.flow.Flow r5 = kotlinx.coroutines.flow.FlowKt.distinctUntilChanged(r5)
-            java.lang.String r6 = "isBypassAvailable"
-            kotlinx.coroutines.flow.Flow r5 = r4.dumpWhileCollecting(r5, r6)
-            r4.isBypassAvailable = r5
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository.<init>(android.content.res.Resources, com.android.systemui.keyguard.data.repository.BiometricSettingsRepository, com.android.systemui.keyguard.data.repository.DevicePostureRepository, com.android.systemui.dump.DumpManager, com.android.systemui.util.settings.repository.UserAwareSecureSettingsRepository, kotlinx.coroutines.CoroutineDispatcher):void");
+    public KeyguardBypassRepository(final Resources resources, BiometricSettingsRepository biometricSettingsRepository, DevicePostureRepository devicePostureRepository, DumpManager dumpManager, UserAwareSecureSettingsRepository userAwareSecureSettingsRepository, CoroutineDispatcher coroutineDispatcher) {
+        FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+        Flow flowDistinctUntilChanged;
+        super(dumpManager, null, 2, null);
+        final int i = 0;
+        Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() throws Resources.NotFoundException {
+                int i2 = i;
+                Resources resources2 = resources;
+                switch (i2) {
+                    case 0:
+                        int i3 = KeyguardBypassRepository.$r8$clinit;
+                        return Integer.valueOf(resources2.getInteger(R.integer.config_face_unlock_bypass_override));
+                    default:
+                        int i4 = KeyguardBypassRepository.$r8$clinit;
+                        DevicePosture.Companion companion = DevicePosture.Companion;
+                        int integer = resources2.getInteger(R.integer.config_face_auth_supported_posture);
+                        companion.getClass();
+                        return DevicePosture.Companion.toPosture(integer);
+                }
+            }
+        });
+        final int i2 = 1;
+        Lazy lazy2 = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() throws Resources.NotFoundException {
+                int i22 = i2;
+                Resources resources2 = resources;
+                switch (i22) {
+                    case 0:
+                        int i3 = KeyguardBypassRepository.$r8$clinit;
+                        return Integer.valueOf(resources2.getInteger(R.integer.config_face_unlock_bypass_override));
+                    default:
+                        int i4 = KeyguardBypassRepository.$r8$clinit;
+                        DevicePosture.Companion companion = DevicePosture.Companion;
+                        int integer = resources2.getInteger(R.integer.config_face_auth_supported_posture);
+                        companion.getClass();
+                        return DevicePosture.Companion.toPosture(integer);
+                }
+            }
+        });
+        this.configFaceAuthSupportedPosture$delegate = lazy2;
+        Flow flowDumpWhileCollecting = dumpWhileCollecting(FlowKt.flowOn(userAwareSecureSettingsRepository.boolSetting("face_unlock_dismisses_keyguard", resources.getBoolean(android.R.bool.config_isPreApprovalRequestAvailable)), coroutineDispatcher), "bypassEnabledSetting");
+        int iIntValue = ((Number) lazy.getValue()).intValue();
+        if (iIntValue != 1) {
+            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = iIntValue == 2 ? new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE) : flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+            if (WhenMappings.$EnumSwitchMapping$0[((DevicePosture) lazy2.getValue()).ordinal()] != 1) {
+                flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
+            } else {
+                final Flow currentDevicePosture = ((DevicePostureRepositoryImpl) devicePostureRepository).getCurrentDevicePosture();
+                flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$special$$inlined$map$1
+
+                    /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$special$$inlined$map$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                        public final /* synthetic */ KeyguardBypassRepository this$0;
+
+                        /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardBypassRepository$special$$inlined$map$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector, KeyguardBypassRepository keyguardBypassRepository) {
+                            this.$this_unsafeFlow = flowCollector;
+                            this.this$0 = keyguardBypassRepository;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                DevicePosture devicePosture = (DevicePosture) obj;
+                                int i3 = KeyguardBypassRepository.$r8$clinit;
+                                Boolean boolValueOf = Boolean.valueOf(devicePosture == ((DevicePosture) this.this$0.configFaceAuthSupportedPosture$delegate.getValue()));
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = currentDevicePosture.collect(new AnonymousClass2(flowCollector, this), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                });
+            }
+            this.isBypassAvailable = dumpWhileCollecting(FlowKt.distinctUntilChanged(FlowKt.combine(flowDumpWhileCollecting, ((BiometricSettingsRepositoryImpl) biometricSettingsRepository).isFaceAuthEnrolledAndEnabled, flowDistinctUntilChanged, new KeyguardBypassRepository$isBypassAvailable$1(null))), "isBypassAvailable");
+        }
+        flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
+        flowDumpWhileCollecting = flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+        if (WhenMappings.$EnumSwitchMapping$0[((DevicePosture) lazy2.getValue()).ordinal()] != 1) {
+        }
+        this.isBypassAvailable = dumpWhileCollecting(FlowKt.distinctUntilChanged(FlowKt.combine(flowDumpWhileCollecting, ((BiometricSettingsRepositoryImpl) biometricSettingsRepository).isFaceAuthEnrolledAndEnabled, flowDistinctUntilChanged, new KeyguardBypassRepository$isBypassAvailable$1(null))), "isBypassAvailable");
     }
 }

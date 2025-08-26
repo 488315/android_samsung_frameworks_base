@@ -6,12 +6,10 @@ import com.airbnb.lottie.parser.moshi.JsonReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class JsonUtils {
     public static final JsonReader.Options POINT_NAMES = JsonReader.Options.of("x", "y");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.parser.JsonUtils$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$airbnb$lottie$parser$moshi$JsonReader$Token;
@@ -39,55 +37,55 @@ public class JsonUtils {
 
     public static int jsonToColor(JsonReader jsonReader) {
         jsonReader.beginArray();
-        int nextDouble = (int) (jsonReader.nextDouble() * 255.0d);
-        int nextDouble2 = (int) (jsonReader.nextDouble() * 255.0d);
-        int nextDouble3 = (int) (jsonReader.nextDouble() * 255.0d);
+        int iNextDouble = (int) (jsonReader.nextDouble() * 255.0d);
+        int iNextDouble2 = (int) (jsonReader.nextDouble() * 255.0d);
+        int iNextDouble3 = (int) (jsonReader.nextDouble() * 255.0d);
         while (jsonReader.hasNext()) {
             jsonReader.skipValue();
         }
         jsonReader.endArray();
-        return Color.argb(255, nextDouble, nextDouble2, nextDouble3);
+        return Color.argb(255, iNextDouble, iNextDouble2, iNextDouble3);
     }
 
     public static PointF jsonToPoint(JsonReader jsonReader, float f) {
         int i = AnonymousClass1.$SwitchMap$com$airbnb$lottie$parser$moshi$JsonReader$Token[jsonReader.peek().ordinal()];
         if (i == 1) {
-            float nextDouble = (float) jsonReader.nextDouble();
-            float nextDouble2 = (float) jsonReader.nextDouble();
+            float fNextDouble = (float) jsonReader.nextDouble();
+            float fNextDouble2 = (float) jsonReader.nextDouble();
             while (jsonReader.hasNext()) {
                 jsonReader.skipValue();
             }
-            return new PointF(nextDouble * f, nextDouble2 * f);
+            return new PointF(fNextDouble * f, fNextDouble2 * f);
         }
         if (i == 2) {
             jsonReader.beginArray();
-            float nextDouble3 = (float) jsonReader.nextDouble();
-            float nextDouble4 = (float) jsonReader.nextDouble();
+            float fNextDouble3 = (float) jsonReader.nextDouble();
+            float fNextDouble4 = (float) jsonReader.nextDouble();
             while (jsonReader.peek() != JsonReader.Token.END_ARRAY) {
                 jsonReader.skipValue();
             }
             jsonReader.endArray();
-            return new PointF(nextDouble3 * f, nextDouble4 * f);
+            return new PointF(fNextDouble3 * f, fNextDouble4 * f);
         }
         if (i != 3) {
             throw new IllegalArgumentException("Unknown point starts with " + jsonReader.peek());
         }
         jsonReader.beginObject();
-        float f2 = 0.0f;
-        float f3 = 0.0f;
+        float fValueFromObject = 0.0f;
+        float fValueFromObject2 = 0.0f;
         while (jsonReader.hasNext()) {
-            int selectName = jsonReader.selectName(POINT_NAMES);
-            if (selectName == 0) {
-                f2 = valueFromObject(jsonReader);
-            } else if (selectName != 1) {
+            int iSelectName = jsonReader.selectName(POINT_NAMES);
+            if (iSelectName == 0) {
+                fValueFromObject = valueFromObject(jsonReader);
+            } else if (iSelectName != 1) {
                 jsonReader.skipName();
                 jsonReader.skipValue();
             } else {
-                f3 = valueFromObject(jsonReader);
+                fValueFromObject2 = valueFromObject(jsonReader);
             }
         }
         jsonReader.endObject();
-        return new PointF(f2 * f, f3 * f);
+        return new PointF(fValueFromObject * f, fValueFromObject2 * f);
     }
 
     public static List jsonToPoints(JsonReader jsonReader, float f) {
@@ -103,20 +101,20 @@ public class JsonUtils {
     }
 
     public static float valueFromObject(JsonReader jsonReader) {
-        JsonReader.Token peek = jsonReader.peek();
-        int i = AnonymousClass1.$SwitchMap$com$airbnb$lottie$parser$moshi$JsonReader$Token[peek.ordinal()];
+        JsonReader.Token tokenPeek = jsonReader.peek();
+        int i = AnonymousClass1.$SwitchMap$com$airbnb$lottie$parser$moshi$JsonReader$Token[tokenPeek.ordinal()];
         if (i == 1) {
             return (float) jsonReader.nextDouble();
         }
         if (i != 2) {
-            throw new IllegalArgumentException("Unknown value for token of type " + peek);
+            throw new IllegalArgumentException("Unknown value for token of type " + tokenPeek);
         }
         jsonReader.beginArray();
-        float nextDouble = (float) jsonReader.nextDouble();
+        float fNextDouble = (float) jsonReader.nextDouble();
         while (jsonReader.hasNext()) {
             jsonReader.skipValue();
         }
         jsonReader.endArray();
-        return nextDouble;
+        return fNextDouble;
     }
 }

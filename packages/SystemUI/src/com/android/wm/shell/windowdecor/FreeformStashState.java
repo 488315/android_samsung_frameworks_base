@@ -8,7 +8,6 @@ import android.view.SurfaceControl;
 import com.android.systemui.R;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformStashState {
     public int mAnimType;
@@ -25,7 +24,7 @@ public class FreeformStashState {
         if (this.mStashDimOverlay == null && surfaceControl != null && surfaceControl.isValid()) {
             this.mStashDimOverlay = new FreeformColorOverlay();
             this.mTaskInfo = runningTaskInfo;
-            Color valueOf = Color.valueOf(context.getColor(R.color.freeform_stash_dim_overlay));
+            Color colorValueOf = Color.valueOf(context.getColor(R.color.freeform_stash_dim_overlay));
             int freeformRoundedCornerRadius = (int) MultiWindowUtils.getFreeformRoundedCornerRadius(context);
             FreeformColorOverlay freeformColorOverlay = this.mStashDimOverlay;
             Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
@@ -34,7 +33,7 @@ public class FreeformStashState {
                     if (freeformColorOverlay.isLeashValidLocked()) {
                         freeformColorOverlay.mTransaction.show(freeformColorOverlay.mLeash);
                         freeformColorOverlay.mTransaction.setLayer(freeformColorOverlay.mLeash, 30002);
-                        freeformColorOverlay.mTransaction.setColor(freeformColorOverlay.mLeash, valueOf.getComponents());
+                        freeformColorOverlay.mTransaction.setColor(freeformColorOverlay.mLeash, colorValueOf.getComponents());
                         freeformColorOverlay.mTransaction.setAlpha(freeformColorOverlay.mLeash, 0.0f);
                         freeformColorOverlay.mTransaction.reparent(freeformColorOverlay.mLeash, surfaceControl);
                         freeformColorOverlay.mTransaction.setPosition(freeformColorOverlay.mLeash, 0.0f, 0.0f);

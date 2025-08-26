@@ -2,7 +2,6 @@ package androidx.compose.animation.core;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FloatTweenSpec implements FloatAnimationSpec {
     public final long delayNanos;
@@ -29,8 +28,8 @@ public final class FloatTweenSpec implements FloatAnimationSpec {
         if (j2 > j3) {
             j2 = j3;
         }
-        float transform = this.easing.transform(this.duration == 0 ? 1.0f : j2 / j3);
-        return (f2 * transform) + ((1 - transform) * f);
+        float fTransform = this.easing.transform(this.duration == 0 ? 1.0f : j2 / j3);
+        return (f2 * fTransform) + ((1 - fTransform) * f);
     }
 
     @Override // androidx.compose.animation.core.FloatAnimationSpec

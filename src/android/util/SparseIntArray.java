@@ -19,15 +19,15 @@ public class SparseIntArray implements Cloneable {
             this.mKeys = EmptyArray.INT;
             this.mValues = EmptyArray.INT;
         } else {
-            int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i);
-            this.mKeys = newUnpaddedIntArray;
-            this.mValues = new int[newUnpaddedIntArray.length];
+            int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i);
+            this.mKeys = iArrNewUnpaddedIntArray;
+            this.mValues = new int[iArrNewUnpaddedIntArray.length];
         }
         this.mSize = 0;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SparseIntArray m5532clone() {
+    public SparseIntArray m5539clone() {
         try {
             SparseIntArray sparseIntArray = (SparseIntArray) super.clone();
             try {
@@ -47,14 +47,14 @@ public class SparseIntArray implements Cloneable {
     }
 
     public int get(int i, int i2) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        return binarySearch < 0 ? i2 : this.mValues[binarySearch];
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        return iBinarySearch < 0 ? i2 : this.mValues[iBinarySearch];
     }
 
     public void delete(int i) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            removeAt(binarySearch);
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            removeAt(iBinarySearch);
         }
     }
 
@@ -68,12 +68,12 @@ public class SparseIntArray implements Cloneable {
     }
 
     public void put(int i, int i2) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = i2;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = i2;
             return;
         }
-        int i3 = ~binarySearch;
+        int i3 = ~iBinarySearch;
         this.mKeys = GrowingArrayUtils.insert(this.mKeys, this.mSize, i3, i);
         this.mValues = GrowingArrayUtils.insert(this.mValues, this.mSize, i3, i2);
         this.mSize++;

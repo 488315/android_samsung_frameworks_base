@@ -7,7 +7,6 @@ import kotlin.jvm.internal.FunctionAdapter;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MuteQuickAffordanceCoreStartable$observer$1 implements Observer, FunctionAdapter {
     public final /* synthetic */ MuteQuickAffordanceCoreStartable $tmp0;
@@ -34,10 +33,10 @@ public final /* synthetic */ class MuteQuickAffordanceCoreStartable$observer$1 i
 
     @Override // androidx.lifecycle.Observer
     public final void onChanged(Object obj) {
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         int i = MuteQuickAffordanceCoreStartable.$r8$clinit;
         MuteQuickAffordanceCoreStartable muteQuickAffordanceCoreStartable = this.$tmp0;
         muteQuickAffordanceCoreStartable.getClass();
-        CoroutineTracingKt.launchTraced$default(muteQuickAffordanceCoreStartable.coroutineScope, muteQuickAffordanceCoreStartable.backgroundDispatcher, null, new MuteQuickAffordanceCoreStartable$updateLastNonSilentRingerMode$1(intValue, muteQuickAffordanceCoreStartable, null), 5);
+        CoroutineTracingKt.launchTraced$default(muteQuickAffordanceCoreStartable.coroutineScope, muteQuickAffordanceCoreStartable.backgroundDispatcher, null, new MuteQuickAffordanceCoreStartable$updateLastNonSilentRingerMode$1(iIntValue, muteQuickAffordanceCoreStartable, null), 5);
     }
 }

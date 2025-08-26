@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PinInputEntry$animateClearAllCollapse$2 extends SuspendLambda implements Function2 {
     int label;
@@ -46,10 +45,10 @@ final class PinInputEntry$animateClearAllCollapse$2 extends SuspendLambda implem
         }
         ResultKt.throwOnFailure(obj);
         Animatable animatable = this.this$0.shapeSize;
-        Dp m835boximpl = Dp.m835boximpl(0);
+        Dp dpM837boximpl = Dp.m837boximpl(0);
         TweenSpec tweenSpec = this.this$0.shapeAnimations.clearAllShapeSizeAnimationSpec;
         this.label = 1;
-        Object animateTo$default = Animatable.animateTo$default(animatable, m835boximpl, tweenSpec, null, null, this, 12);
-        return animateTo$default == coroutineSingletons ? coroutineSingletons : animateTo$default;
+        Object objAnimateTo$default = Animatable.animateTo$default(animatable, dpM837boximpl, tweenSpec, null, null, this, 12);
+        return objAnimateTo$default == coroutineSingletons ? coroutineSingletons : objAnimateTo$default;
     }
 }

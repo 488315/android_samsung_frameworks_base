@@ -169,51 +169,32 @@ public class SyncAdapterType implements Parcelable {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public SyncAdapterType(android.os.Parcel r10) {
-        /*
-            r9 = this;
-            java.lang.String r1 = r10.readString()
-            java.lang.String r2 = r10.readString()
-            int r0 = r10.readInt()
-            r3 = 1
-            r4 = 0
-            if (r0 == 0) goto L12
-            r0 = r3
-            goto L14
-        L12:
-            r0 = r3
-            r3 = r4
-        L14:
-            int r5 = r10.readInt()
-            if (r5 == 0) goto L1d
-            r5 = r4
-            r4 = r0
-            goto L1e
-        L1d:
-            r5 = r4
-        L1e:
-            int r6 = r10.readInt()
-            if (r6 == 0) goto L27
-            r6 = r5
-            r5 = r0
-            goto L28
-        L27:
-            r6 = r5
-        L28:
-            int r7 = r10.readInt()
-            if (r7 == 0) goto L2f
-            r6 = r0
-        L2f:
-            java.lang.String r7 = r10.readString()
-            java.lang.String r8 = r10.readString()
-            r0 = r9
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.SyncAdapterType.<init>(android.os.Parcel):void");
+    public SyncAdapterType(Parcel parcel) {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        String string = parcel.readString();
+        String string2 = parcel.readString();
+        boolean z4 = true;
+        boolean z5 = false;
+        if (parcel.readInt() != 0) {
+            z = true;
+        } else {
+            z = true;
+            z4 = false;
+        }
+        if (parcel.readInt() != 0) {
+            z2 = false;
+            z5 = z;
+        } else {
+            z2 = false;
+        }
+        if (parcel.readInt() != 0) {
+            z3 = z2;
+            z2 = z;
+        } else {
+            z3 = z2;
+        }
+        this(string, string2, z4, z5, z2, parcel.readInt() != 0 ? z : z3, parcel.readString(), parcel.readString());
     }
 }

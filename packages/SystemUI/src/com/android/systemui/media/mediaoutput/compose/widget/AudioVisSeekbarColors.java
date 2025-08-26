@@ -2,7 +2,6 @@ package com.android.systemui.media.mediaoutput.compose.widget;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioVisSeekbarColors {
     public final long activeTrackColor;
@@ -19,7 +18,7 @@ public final class AudioVisSeekbarColors {
     }
 
     /* renamed from: trackColor-WaAFU9c$frameworks__base__packages__SystemUI__android_common__SystemUI_core, reason: not valid java name */
-    public final long m2614x119e4b41(boolean z, boolean z2) {
+    public final long m2631x119e4b41(boolean z, boolean z2) {
         return z ? z2 ? this.activeTrackColor : this.inactiveTrackColor : z2 ? this.disabledActiveTrackColor : this.disabledInactiveTrackColor;
     }
 

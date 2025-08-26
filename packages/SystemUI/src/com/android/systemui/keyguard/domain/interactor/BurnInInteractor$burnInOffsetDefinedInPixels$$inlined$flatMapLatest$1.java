@@ -1,5 +1,6 @@
 package com.android.systemui.keyguard.domain.interactor;
 
+import android.content.res.Resources;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -10,7 +11,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BurnInInteractor$burnInOffsetDefinedInPixels$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ boolean $isXAxis$inlined;
@@ -37,18 +37,18 @@ public final class BurnInInteractor$burnInOffsetDefinedInPixels$$inlined$flatMap
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            float floatValue = ((Number) this.L$1).floatValue();
+            float fFloatValue = ((Number) this.L$1).floatValue();
             int dimensionPixelSize = this.this$0.context.getResources().getDimensionPixelSize(this.$maxBurnInOffsetResourceId$inlined);
             BurnInInteractor burnInInteractor = this.this$0;
-            ChannelFlowTransformLatest mapLatest = FlowKt.mapLatest(burnInInteractor.keyguardInteractor.dozeTimeTick, new BurnInInteractor$burnInOffsetDefinedInPixels$1$1(burnInInteractor, dimensionPixelSize, this.$isXAxis$inlined, floatValue, null));
+            ChannelFlowTransformLatest channelFlowTransformLatestMapLatest = FlowKt.mapLatest(burnInInteractor.keyguardInteractor.dozeTimeTick, new BurnInInteractor$burnInOffsetDefinedInPixels$1$1(burnInInteractor, dimensionPixelSize, this.$isXAxis$inlined, fFloatValue, null));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, mapLatest, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, channelFlowTransformLatestMapLatest, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

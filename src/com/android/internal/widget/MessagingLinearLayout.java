@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -52,14 +53,14 @@ public class MessagingLinearLayout extends ViewGroup {
     public MessagingLinearLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mMaxDisplayedLines = Integer.MAX_VALUE;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MessagingLinearLayout, 0, 0);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MessagingLinearLayout, 0, 0);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            if (obtainStyledAttributes.getIndex(i) == 0) {
-                this.mSpacing = obtainStyledAttributes.getDimensionPixelSize(i, 0);
+            if (typedArrayObtainStyledAttributes.getIndex(i) == 0) {
+                this.mSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(i, 0);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -72,7 +73,7 @@ public class MessagingLinearLayout extends ViewGroup {
         MessagingChild messagingChild;
         int i4;
         int i5;
-        int i6;
+        int measuredHeight;
         if (TRACE_ONMEASURE) {
             Trace.beginSection("MessagingLinearLayout#onMeasure");
             trackMeasureSpecs(i, i2);
@@ -81,11 +82,11 @@ public class MessagingLinearLayout extends ViewGroup {
         if (View.MeasureSpec.getMode(i2) == 0) {
             size = Integer.MAX_VALUE;
         }
-        int i7 = size;
-        int i8 = this.mPaddingLeft + this.mPaddingRight;
+        int i6 = size;
+        int i7 = this.mPaddingLeft + this.mPaddingRight;
         int childCount = getChildCount();
-        for (int i9 = 0; i9 < childCount; i9++) {
-            View childAt = getChildAt(i9);
+        for (int i8 = 0; i8 < childCount; i8++) {
+            View childAt = getChildAt(i8);
             ((LayoutParams) childAt.getLayoutParams()).hide = true;
             if (Flags.messagingChildRequestLayout()) {
                 childAt.requestLayout();
@@ -94,87 +95,87 @@ public class MessagingLinearLayout extends ViewGroup {
                 ((MessagingChild) childAt).setIsFirstInLayout(true);
             }
         }
-        int i10 = i8;
-        int i11 = this.mPaddingTop + this.mPaddingBottom;
-        int i12 = this.mMaxDisplayedLines;
-        int i13 = 0;
-        int i14 = 0;
-        int i15 = 0;
+        int iMax = i7;
+        int i9 = this.mPaddingTop + this.mPaddingBottom;
+        int consumedLines = this.mMaxDisplayedLines;
+        int i10 = 0;
+        int i11 = 0;
+        int consumedLines2 = 0;
         boolean z = true;
         View view3 = null;
         MessagingChild messagingChild2 = null;
-        for (int i16 = childCount - 1; i16 >= 0 && i11 < i7; i16--) {
-            if (getChildAt(i16).getVisibility() != 8) {
-                View childAt2 = getChildAt(i16);
-                LayoutParams layoutParams2 = (LayoutParams) getChildAt(i16).getLayoutParams();
-                int i17 = this.mSpacing;
+        for (int i12 = childCount - 1; i12 >= 0 && i9 < i6; i12--) {
+            if (getChildAt(i12).getVisibility() != 8) {
+                View childAt2 = getChildAt(i12);
+                LayoutParams layoutParams2 = (LayoutParams) getChildAt(i12).getLayoutParams();
+                int extraSpacing = this.mSpacing;
                 if (childAt2 instanceof MessagingChild) {
                     if (messagingChild2 == null || !messagingChild2.hasDifferentHeightWhenFirst()) {
                         view = view3;
                         view2 = childAt2;
                         layoutParams = layoutParams2;
-                        i5 = i17;
-                        i6 = 0;
+                        i5 = extraSpacing;
+                        measuredHeight = 0;
                     } else {
                         messagingChild2.setIsFirstInLayout(false);
                         view2 = childAt2;
                         layoutParams = layoutParams2;
-                        i5 = i17;
-                        measureChildWithMargins(view3, i, 0, i2, i13 - i14);
+                        i5 = extraSpacing;
+                        measureChildWithMargins(view3, i, 0, i2, i10 - i11);
                         view = view3;
-                        i6 = view.getMeasuredHeight() - i14;
-                        i12 -= messagingChild2.getConsumedLines() - i15;
+                        measuredHeight = view.getMeasuredHeight() - i11;
+                        consumedLines -= messagingChild2.getConsumedLines() - consumedLines2;
                     }
                     MessagingChild messagingChild3 = (MessagingChild) view2;
-                    messagingChild3.setMaxDisplayedLines(Math.max(0, i12));
-                    i17 = i5 + messagingChild3.getExtraSpacing();
+                    messagingChild3.setMaxDisplayedLines(Math.max(0, consumedLines));
+                    extraSpacing = i5 + messagingChild3.getExtraSpacing();
                     messagingChild = messagingChild3;
-                    i3 = i12;
-                    i4 = i6;
+                    i3 = consumedLines;
+                    i4 = measuredHeight;
                 } else {
                     view = view3;
                     view2 = childAt2;
                     layoutParams = layoutParams2;
-                    i3 = i12;
+                    i3 = consumedLines;
                     messagingChild = null;
                     i4 = 0;
                 }
-                int i18 = z ? 0 : i17;
+                int i13 = z ? 0 : extraSpacing;
                 View view4 = view2;
-                measureChildWithMargins(view4, i, 0, i2, ((i11 - this.mPaddingTop) - this.mPaddingBottom) + i18);
-                int measuredHeight = view4.getMeasuredHeight();
-                int max = Math.max(i11, i11 + measuredHeight + layoutParams.topMargin + layoutParams.bottomMargin + i18 + i4);
+                measureChildWithMargins(view4, i, 0, i2, ((i9 - this.mPaddingTop) - this.mPaddingBottom) + i13);
+                int measuredHeight2 = view4.getMeasuredHeight();
+                int iMax2 = Math.max(i9, i9 + measuredHeight2 + layoutParams.topMargin + layoutParams.bottomMargin + i13 + i4);
                 int measuredType = messagingChild != null ? messagingChild.getMeasuredType() : 0;
                 boolean z2 = measuredType == 2 && !z;
                 boolean z3 = measuredType == 1 || (measuredType == 2 && z);
-                if (max <= i7 && !z2) {
+                if (iMax2 <= i6 && !z2) {
                     if (messagingChild != null) {
-                        i15 = messagingChild.getConsumedLines();
-                        i3 -= i15;
+                        consumedLines2 = messagingChild.getConsumedLines();
+                        i3 -= consumedLines2;
                         view = view4;
-                        i14 = measuredHeight;
+                        i11 = measuredHeight2;
                         messagingChild2 = messagingChild;
                     } else {
-                        i11 = i13;
+                        i9 = i10;
                     }
-                    i10 = Math.max(i10, view4.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin + this.mPaddingLeft + this.mPaddingRight);
+                    iMax = Math.max(iMax, view4.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin + this.mPaddingLeft + this.mPaddingRight);
                     layoutParams.hide = false;
                     if (z3 || i3 <= 0) {
-                        i11 = max;
+                        i9 = iMax2;
                         break;
                     }
                     z = false;
-                    i13 = i11;
+                    i10 = i9;
                     view3 = view;
-                    i12 = i3;
-                    i11 = max;
+                    consumedLines = i3;
+                    i9 = iMax2;
                 } else if (messagingChild2 != null && messagingChild2.hasDifferentHeightWhenFirst()) {
                     messagingChild2.setIsFirstInLayout(true);
-                    measureChildWithMargins(view, i, 0, i2, i13 - i14);
+                    measureChildWithMargins(view, i, 0, i2, i10 - i11);
                 }
             }
         }
-        setMeasuredDimension(resolveSize(Math.max(getSuggestedMinimumWidth(), i10), i), Math.max(getSuggestedMinimumHeight(), i11));
+        setMeasuredDimension(resolveSize(Math.max(getSuggestedMinimumWidth(), iMax), i), Math.max(getSuggestedMinimumHeight(), i9));
         if (TRACE_ONMEASURE) {
             Trace.endSection();
         }
@@ -182,7 +183,7 @@ public class MessagingLinearLayout extends ViewGroup {
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int i5;
         int i6;
         int i7 = this.mPaddingLeft;
@@ -190,7 +191,7 @@ public class MessagingLinearLayout extends ViewGroup {
         int layoutDirection = getLayoutDirection();
         int childCount = getChildCount();
         int i9 = this.mPaddingTop;
-        boolean isShown = isShown();
+        boolean zIsShown = isShown();
         int i10 = 1;
         boolean z2 = true;
         int i11 = 0;
@@ -208,7 +209,7 @@ public class MessagingLinearLayout extends ViewGroup {
                 }
                 int i12 = i5;
                 if (layoutParams.hide) {
-                    if (isShown && layoutParams.visibleBefore) {
+                    if (zIsShown && layoutParams.visibleBefore) {
                         childAt.layout(i12, i9, measuredWidth + i12, layoutParams.lastVisibleHeight + i9);
                         messagingChild.hideAnimated();
                     }

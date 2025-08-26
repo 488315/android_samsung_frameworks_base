@@ -6,7 +6,6 @@ import kotlin.jvm.internal.FunctionAdapter;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ScrimShadeTransitionController$init$1 implements ShadeStateListener, FunctionAdapter {
     public final /* synthetic */ ScrimShadeTransitionController $tmp0;
@@ -32,10 +31,10 @@ public final /* synthetic */ class ScrimShadeTransitionController$init$1 impleme
     }
 
     @Override // com.android.systemui.shade.ShadeStateListener
-    public final void onPanelStateChanged$1(int i) {
-        Integer valueOf = Integer.valueOf(i);
+    public final void onPanelStateChanged$2(int i) {
+        Integer numValueOf = Integer.valueOf(i);
         ScrimShadeTransitionController scrimShadeTransitionController = this.$tmp0;
-        scrimShadeTransitionController.currentPanelState = valueOf;
+        scrimShadeTransitionController.currentPanelState = numValueOf;
         scrimShadeTransitionController.onStateChanged();
     }
 }

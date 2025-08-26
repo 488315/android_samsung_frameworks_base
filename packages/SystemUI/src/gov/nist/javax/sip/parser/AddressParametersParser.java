@@ -6,33 +6,37 @@ import gov.nist.javax.sip.header.AddressParametersHeader;
 import gov.nist.javax.sip.header.ParametersHeader;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AddressParametersParser extends ParametersParser {
     public AddressParametersParser(Lexer lexer) {
         super(lexer);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0040 A[Catch: ParseException -> 0x0047, all -> 0x0049, TRY_LEAVE, TryCatch #1 {ParseException -> 0x0047, blocks: (B:3:0x0003, B:8:0x002d, B:11:0x003c, B:12:0x0040), top: B:21:0x0003, outer: #0 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void parse(AddressParametersHeader addressParametersHeader) {
         ParserCore.dbg_enter();
         try {
             try {
                 addressParametersHeader.setAddress(new AddressParser((Lexer) this.lexer).address());
                 this.lexer.SPorHT();
-                boolean z = false;
-                char lookAhead = this.lexer.lookAhead(0);
-                if (this.lexer.hasMoreChars() && lookAhead != 0 && lookAhead != '\n') {
+                boolean zIsTokenChar = false;
+                char cLookAhead = this.lexer.lookAhead(0);
+                if (!this.lexer.hasMoreChars() || cLookAhead == 0 || cLookAhead == '\n') {
+                    parse((ParametersHeader) addressParametersHeader);
+                } else {
                     LexerCore lexerCore = this.lexer;
                     lexerCore.getClass();
                     try {
-                        z = LexerCore.isTokenChar(lexerCore.lookAhead(0));
+                        zIsTokenChar = LexerCore.isTokenChar(lexerCore.lookAhead(0));
                     } catch (ParseException unused) {
                     }
-                    if (z) {
+                    if (zIsTokenChar) {
                         parseNameValueList(addressParametersHeader);
                     }
                 }
-                parse((ParametersHeader) addressParametersHeader);
             } catch (ParseException e) {
                 throw e;
             }

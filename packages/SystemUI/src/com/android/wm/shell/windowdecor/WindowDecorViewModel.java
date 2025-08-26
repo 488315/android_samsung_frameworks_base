@@ -7,7 +7,6 @@ import android.window.TransitionInfo;
 import com.android.wm.shell.freeform.FreeformTaskTransitionStarter;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface WindowDecorViewModel {
     void destroyWindowDecoration(ActivityManager.RunningTaskInfo runningTaskInfo);
@@ -33,6 +32,9 @@ public interface WindowDecorViewModel {
     }
 
     default void onTransitionFinished(IBinder iBinder) {
+    }
+
+    default void onTransitionStarting(IBinder iBinder) {
     }
 
     default void onDecorationTaskTransitionReady(IBinder iBinder, TransitionInfo.Change change) {

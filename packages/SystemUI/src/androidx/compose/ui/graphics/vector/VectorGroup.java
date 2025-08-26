@@ -9,7 +9,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorGroup extends VectorNode implements Iterable<VectorNode>, KMappedMarker {
     public final List children;
@@ -22,6 +21,30 @@ public final class VectorGroup extends VectorNode implements Iterable<VectorNode
     public final float scaleY;
     public final float translationX;
     public final float translationY;
+
+    /* renamed from: androidx.compose.ui.graphics.vector.VectorGroup$iterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Iterator<VectorNode>, KMappedMarker {
+        public final Iterator it;
+
+        public AnonymousClass1(VectorGroup vectorGroup) {
+            this.it = vectorGroup.children.iterator();
+        }
+
+        @Override // java.util.Iterator
+        public final boolean hasNext() {
+            return this.it.hasNext();
+        }
+
+        @Override // java.util.Iterator
+        public final VectorNode next() {
+            return (VectorNode) this.it.next();
+        }
+
+        @Override // java.util.Iterator
+        public final void remove() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+    }
 
     public VectorGroup() {
         this(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, null, null, 1023, null);
@@ -44,7 +67,7 @@ public final class VectorGroup extends VectorNode implements Iterable<VectorNode
 
     @Override // java.lang.Iterable
     public final Iterator<VectorNode> iterator() {
-        return new VectorGroup$iterator$1(this);
+        return new AnonymousClass1(this);
     }
 
     public VectorGroup(String str, float f, float f2, float f3, float f4, float f5, float f6, float f7, List list, List list2, int i, DefaultConstructorMarker defaultConstructorMarker) {

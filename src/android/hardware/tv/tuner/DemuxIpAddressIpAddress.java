@@ -92,13 +92,13 @@ public final class DemuxIpAddressIpAddress implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, parcel.createByteArray());
-        } else if (readInt == 1) {
-            _set(readInt, parcel.createByteArray());
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, parcel.createByteArray());
+        } else if (i == 1) {
+            _set(i, parcel.createByteArray());
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

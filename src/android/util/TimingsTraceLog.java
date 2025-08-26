@@ -84,20 +84,20 @@ public class TimingsTraceLog {
             return;
         }
         String str = this.mStartNames[i];
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         long[] jArr = this.mStartTimes;
         int i2 = this.mCurrentLevel;
-        long j = elapsedRealtime - jArr[i2];
+        long j = jElapsedRealtime - jArr[i2];
         this.mCurrentLevel = i2 - 1;
         logDuration(str, j);
     }
 
     private void assertSameThread() {
-        Thread currentThread = Thread.currentThread();
-        if (currentThread.getId() == this.mThreadId) {
+        Thread threadCurrentThread = Thread.currentThread();
+        if (threadCurrentThread.getId() == this.mThreadId) {
             return;
         }
-        throw new IllegalStateException("Instance of TimingsTraceLog can only be called from the thread it was created on (tid: " + this.mThreadId + "), but was from " + currentThread.getName() + " (tid: " + currentThread.getId() + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalStateException("Instance of TimingsTraceLog can only be called from the thread it was created on (tid: " + this.mThreadId + "), but was from " + threadCurrentThread.getName() + " (tid: " + threadCurrentThread.getId() + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public void logDuration(String str, long j) {

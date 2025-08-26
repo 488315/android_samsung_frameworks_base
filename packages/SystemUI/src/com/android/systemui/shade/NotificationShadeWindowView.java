@@ -1,5 +1,6 @@
 package com.android.systemui.shade;
 
+import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -9,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.InputQueue;
 import android.view.KeyEvent;
@@ -32,29 +35,42 @@ import com.android.internal.widget.floatingtoolbar.FloatingToolbar;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.CscRune;
 import com.android.systemui.Dependency;
+import com.android.systemui.LsRune;
 import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.keyguard.KeyguardVisibilityMonitor$registerMonitor$1$1;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.plugins.FalsingManager;
+import com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.scene.ui.view.WindowRootView;
 import com.android.systemui.shade.NotificationShadeWindowViewController;
 import com.android.systemui.shade.PanelSlideEventHandler;
+import com.android.systemui.shade.TouchLogger;
+import com.android.systemui.shade.domain.interactor.PanelExpansionInteractor;
 import com.android.systemui.shade.domain.interactor.SecNotificationShadeWindowStateInteractor;
 import com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor;
 import com.android.systemui.shade.shared.flag.ShadeWindowGoesAround;
 import com.android.systemui.statusbar.DragDownHelper;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
+import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
+import com.android.systemui.statusbar.notification.row.NotificationGuts;
+import com.android.systemui.statusbar.notification.row.NotificationGutsManager;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
+import com.android.systemui.statusbar.notification.stack.NotificationSwipeHelper;
 import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.ConfigurationForwarder;
+import com.android.systemui.statusbar.phone.DozeScrimController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationShadeWindowView extends WindowRootView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,7 +85,6 @@ public class NotificationShadeWindowView extends WindowRootView {
     public final SecNotificationShadeWindowStateInteractor mSecNotificationShadeWindowStateInteractor;
     public KeyguardVisibilityMonitor$registerMonitor$1$1 mVisibilityChangedListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActionModeCallback2Wrapper extends ActionMode.Callback2 {
         public final ActionMode.Callback mWrapped;
 
@@ -380,21 +395,168 @@ public class NotificationShadeWindowView extends WindowRootView {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00c8  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0205  */
+    /* JADX WARN: Removed duplicated region for block: B:126:0x0205  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x007c  */
     /* JADX WARN: Type inference failed for: r15v1, types: [android.view.View] */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean dispatchTouchEvent(android.view.MotionEvent r17) {
-        /*
-            Method dump skipped, instructions count: 591
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationShadeWindowView.dispatchTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
+        Boolean boolValueOf;
+        NotificationShadeWindowView notificationShadeWindowView;
+        NotificationShadeWindowViewController notificationShadeWindowViewController = NotificationShadeWindowViewController.this;
+        if (notificationShadeWindowViewController.mStatusBarViewController == null) {
+            boolValueOf = Boolean.FALSE;
+            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "Ignoring touch while statusBarView not yet set", boolValueOf);
+        } else {
+            boolean z = motionEvent.getActionMasked() == 0;
+            boolean z2 = motionEvent.getActionMasked() == 1;
+            boolean z3 = motionEvent.getActionMasked() == 3;
+            boolean z4 = notificationShadeWindowViewController.mExpandingBelowNotch;
+            if (z2 || z3) {
+                notificationShadeWindowViewController.mExpandingBelowNotch = false;
+            }
+            CentralSurfaces centralSurfaces = notificationShadeWindowViewController.mService;
+            if (z3 || !((CentralSurfacesImpl) centralSurfaces).shouldIgnoreTouch()) {
+                if (z) {
+                    notificationShadeWindowViewController.mTouchActive = true;
+                    notificationShadeWindowViewController.mTouchCancelled = false;
+                    notificationShadeWindowViewController.mDownEvent = motionEvent;
+                    ((CentralSurfacesImpl) centralSurfaces).userActivity();
+                } else if (motionEvent.getActionMasked() == 1 || motionEvent.getActionMasked() == 3) {
+                    notificationShadeWindowViewController.mTouchActive = false;
+                    notificationShadeWindowViewController.mDownEvent = null;
+                }
+                boolean z5 = notificationShadeWindowViewController.mTouchCancelled;
+                NotificationShadeWindowView notificationShadeWindowView2 = notificationShadeWindowViewController.mView;
+                if (z5 || notificationShadeWindowViewController.mExpandAnimationRunning) {
+                    if (notificationShadeWindowView2.getVisibility() != 0 && motionEvent.getActionMasked() == 3) {
+                        boolValueOf = null;
+                    } else if (notificationShadeWindowViewController.mTouchCancelled) {
+                        boolValueOf = Boolean.FALSE;
+                        NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "touch cancelled", boolValueOf);
+                    } else {
+                        if (notificationShadeWindowViewController.mExpandAnimationRunning) {
+                            if (z) {
+                                notificationShadeWindowView = notificationShadeWindowView2;
+                                if (notificationShadeWindowViewController.mClock.uptimeMillis() > notificationShadeWindowViewController.mLaunchAnimationTimeout) {
+                                    Log.wtf("NotifShadeWindowVC", "NSWVC: launch animation timed out");
+                                    notificationShadeWindowViewController.setExpandAnimationRunning(false);
+                                }
+                            }
+                            boolValueOf = Boolean.FALSE;
+                            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "expand animation running", boolValueOf);
+                        } else {
+                            notificationShadeWindowView = notificationShadeWindowView2;
+                        }
+                        if (notificationShadeWindowViewController.mKeyguardUnlockAnimationController.playingCannedUnlockAnimation) {
+                            boolValueOf = null;
+                        } else if (notificationShadeWindowViewController.mIsOcclusionTransitionRunning) {
+                            boolValueOf = Boolean.FALSE;
+                            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "occlusion transition running", boolValueOf);
+                        } else {
+                            notificationShadeWindowViewController.mFalsingCollector.onTouchEvent(motionEvent);
+                            int i = SceneContainerFlag.$r8$clinit;
+                            if (notificationShadeWindowViewController.mGlanceableHubContainerController.onTouchEvent(motionEvent)) {
+                                boolValueOf = Boolean.TRUE;
+                                NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "dispatched to glanceable hub container", boolValueOf);
+                            } else {
+                                View view = notificationShadeWindowViewController.mBrightnessMirror;
+                                if (view != null && view.getVisibility() == 0 && motionEvent.getActionMasked() == 5) {
+                                    boolValueOf = Boolean.FALSE;
+                                    NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "disallowed new pointer", boolValueOf);
+                                } else {
+                                    if (z) {
+                                        NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationShadeWindowViewController.mNotificationStackScrollLayoutController;
+                                        notificationStackScrollLayoutController.getClass();
+                                        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                        NotificationGutsManager notificationGutsManager = notificationStackScrollLayoutController.mNotificationGutsManager;
+                                        NotificationGuts notificationGuts = notificationGutsManager.mNotificationGutsExposed;
+                                        NotificationMenuRowPlugin currentMenuRow = notificationStackScrollLayoutController.mSwipeHelper.getCurrentMenuRow();
+                                        ?? r15 = notificationStackScrollLayoutController.mSwipeHelper.mTranslatingParentView;
+                                        NotificationGuts notificationGuts2 = (notificationGuts == null || notificationGuts.mGutsContent.isLeavebehind()) ? (currentMenuRow == null || !currentMenuRow.isMenuVisible() || r15 == 0) ? null : r15 : notificationGuts;
+                                        if (notificationGuts2 != null && !NotificationSwipeHelper.isTouchInView(notificationGuts2, motionEvent)) {
+                                            notificationGutsManager.closeAndSaveGuts(false, false, true, false);
+                                            notificationStackScrollLayoutController.mSwipeHelper.resetExposedMenuView$1(true, true);
+                                        }
+                                    }
+                                    if (notificationShadeWindowViewController.mStatusBarStateController.isDozing()) {
+                                        DozeScrimController dozeScrimController = notificationShadeWindowViewController.mDozeScrimController;
+                                        dozeScrimController.mHandler.removeCallbacks(dozeScrimController.mPulseOut);
+                                    }
+                                    if (CscRune.SECURITY_SIM_PERM_DISABLED && notificationShadeWindowViewController.mKeyguardUpdateMonitor.isIccBlockedPermanently()) {
+                                        notificationShadeWindowViewController.mExpandingBelowNotch = false;
+                                        z4 = false;
+                                    } else if (z && motionEvent.getY() >= notificationShadeWindowView.getBottom()) {
+                                        notificationShadeWindowViewController.mExpandingBelowNotch = true;
+                                        z4 = true;
+                                    }
+                                    if (z4) {
+                                        boolValueOf = Boolean.valueOf(notificationShadeWindowViewController.mStatusBarViewController.sendTouchToView(motionEvent));
+                                        NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "expand below notch. sending touch to status bar", boolValueOf);
+                                    } else {
+                                        boolean z6 = notificationShadeWindowViewController.mIsTrackingBarGesture;
+                                        ShadeLogger shadeLogger = notificationShadeWindowViewController.mShadeLogger;
+                                        if (!z6 && z && notificationShadeWindowViewController.mPanelExpansionInteractor.isFullyCollapsed()) {
+                                            if (!notificationShadeWindowViewController.mStatusBarViewController.touchIsWithinView(motionEvent.getRawX(), motionEvent.getRawY())) {
+                                                shadeLogger.d("NSWVC: touch not within view");
+                                            } else if (notificationShadeWindowViewController.mPrimaryBouncerInteractor.isBouncerShowing()) {
+                                                shadeLogger.d("NSWVC: bouncer showing");
+                                            } else {
+                                                if (notificationShadeWindowViewController.mStatusBarWindowStateController.windowState == 0) {
+                                                    notificationShadeWindowViewController.mIsTrackingBarGesture = true;
+                                                    boolValueOf = Boolean.valueOf(notificationShadeWindowViewController.mStatusBarViewController.sendTouchToView(motionEvent));
+                                                    NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "sending touch to status bar", boolValueOf);
+                                                } else {
+                                                    boolValueOf = Boolean.TRUE;
+                                                    NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "hidden or hiding", boolValueOf);
+                                                }
+                                            }
+                                            if (z) {
+                                            }
+                                            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "no custom touch dispatch of down event", null);
+                                            boolValueOf = null;
+                                        } else if (notificationShadeWindowViewController.mIsTrackingBarGesture) {
+                                            boolean zSendTouchToView = notificationShadeWindowViewController.mStatusBarViewController.sendTouchToView(motionEvent);
+                                            if (z2 || z3) {
+                                                notificationShadeWindowViewController.mIsTrackingBarGesture = false;
+                                            }
+                                            boolValueOf = Boolean.valueOf(zSendTouchToView);
+                                            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "sending bar gesture to status bar", boolValueOf);
+                                        } else {
+                                            if (z) {
+                                                boolean z7 = notificationShadeWindowViewController.mIsTrackingBarGesture;
+                                                boolean z8 = notificationShadeWindowViewController.mExpandAnimationRunning;
+                                                shadeLogger.getClass();
+                                                LogLevel logLevel = LogLevel.VERBOSE;
+                                                ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(10);
+                                                LogBuffer logBuffer = shadeLogger.buffer;
+                                                LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                                                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                                                logMessageImpl.bool1 = z7;
+                                                logMessageImpl.bool2 = z8;
+                                                logBuffer.commit(logMessageObtain);
+                                            }
+                                            NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "no custom touch dispatch of down event", null);
+                                            boolValueOf = null;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                boolValueOf = Boolean.FALSE;
+                NotificationShadeWindowViewController.m2948$$Nest$mlogDownDispatch(notificationShadeWindowViewController, motionEvent, "touch ignored by CS", boolValueOf);
+            }
+        }
+        boolean zBooleanValue = boolValueOf != null ? boolValueOf.booleanValue() : super.dispatchTouchEvent(motionEvent);
+        TouchLogger.Companion.getClass();
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "NotificationShadeWindowView", zBooleanValue);
+        NotificationShadeWindowViewController.this.mFalsingCollector.onMotionEventComplete();
+        return zBooleanValue;
     }
 
     @Override // com.android.systemui.scene.ui.view.WindowRootView, android.view.ViewGroup, android.view.View
@@ -418,24 +580,140 @@ public class NotificationShadeWindowView extends WindowRootView {
         super.onDraw(canvas);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:96:0x01c6, code lost:
-    
-        if (java.lang.Math.abs(r4) < java.lang.Math.abs(r0)) goto L93;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x0246  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x024c  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x023d  */
+    /* JADX WARN: Removed duplicated region for block: B:101:0x0250  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x01c8  */
+    /* JADX WARN: Removed duplicated region for block: B:97:0x0241  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x024a  */
     @Override // android.view.ViewGroup
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onInterceptTouchEvent(android.view.MotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 619
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationShadeWindowView.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        boolean zOnInterceptTouchEvent = true;
+        if (CscRune.SECURITY_SIM_PERM_DISABLED && ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isSimDisabledPermanently() && CscRune.LOCKUI_BOTTOM_USIM_TEXT && !NotificationShadeWindowViewController.this.mShadeViewController.isTouchableArea(motionEvent)) {
+            return true;
+        }
+        NotificationShadeWindowViewController.AnonymousClass1 anonymousClass1 = this.mInteractionEventHandler;
+        anonymousClass1.getClass();
+        int action = motionEvent.getAction();
+        NotificationShadeWindowViewController notificationShadeWindowViewController = NotificationShadeWindowViewController.this;
+        if (action == 0) {
+            notificationShadeWindowViewController.mInitialExpandX = motionEvent.getX();
+            notificationShadeWindowViewController.mInitialExpandY = motionEvent.getY();
+        }
+        boolean zOnInterceptTouchEvent2 = false;
+        anonymousClass1.mLastInterceptWasDragDownHelper = false;
+        if (motionEvent.getActionMasked() == 0) {
+            if (notificationShadeWindowViewController.mStatusBarStateController.getState() == 1) {
+                notificationShadeWindowViewController.mPluginLockTouchArea = notificationShadeWindowViewController.mShadeViewController.isInLockStarContainer(motionEvent);
+            } else {
+                notificationShadeWindowViewController.mPluginLockTouchArea = false;
+            }
+        }
+        if (motionEvent.getActionMasked() == 0) {
+            if (notificationShadeWindowViewController.mStatusBarStateController.getState() == 1) {
+                notificationShadeWindowViewController.mSecKeyguardStatusViewTouchArea = notificationShadeWindowViewController.mShadeViewController.isInFaceWidgetContainer(motionEvent);
+            } else {
+                notificationShadeWindowViewController.mSecKeyguardStatusViewTouchArea = false;
+            }
+        }
+        boolean zIsBouncerShowing = notificationShadeWindowViewController.mPrimaryBouncerInteractor.isBouncerShowing();
+        int actionMasked = motionEvent.getActionMasked();
+        PanelExpansionInteractor panelExpansionInteractor = notificationShadeWindowViewController.mPanelExpansionInteractor;
+        SysuiStatusBarStateController sysuiStatusBarStateController = notificationShadeWindowViewController.mStatusBarStateController;
+        if (actionMasked == 0) {
+            Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: isFullyExpanded: " + panelExpansionInteractor.isFullyExpanded() + " StatusBarState: " + sysuiStatusBarStateController.getState());
+        }
+        boolean zIsFullyExpanded = panelExpansionInteractor.isFullyExpanded();
+        ShadeLogger shadeLogger = notificationShadeWindowViewController.mShadeLogger;
+        if ((!zIsFullyExpanded && sysuiStatusBarStateController.getState() != 1) || zIsBouncerShowing || sysuiStatusBarStateController.isDozing() || notificationShadeWindowViewController.mPluginLockTouchArea || notificationShadeWindowViewController.mSecKeyguardStatusViewTouchArea) {
+            if ((sysuiStatusBarStateController.getState() == 1 || notificationShadeWindowViewController.mStackScrollLayout.mInHeadsUpPinnedMode) && !zIsBouncerShowing && NotificationShadeWindowViewController.m2947$$Nest$mdidNotificationPanelInterceptEvent(notificationShadeWindowViewController, motionEvent)) {
+                shadeLogger.d("NSWVC: intercepted for HUN/PULSING");
+                Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by intercepted for HUN/PULSING: " + motionEvent.getAction());
+            } else {
+                if (sysuiStatusBarStateController.getState() == 2 && LsRune.SECURITY_BOUNCER_WINDOW && zIsBouncerShowing && NotificationShadeWindowViewController.m2947$$Nest$mdidNotificationPanelInterceptEvent(notificationShadeWindowViewController, motionEvent)) {
+                    Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by !isDragDownEnabled && bouncerShowing && SHADE_LOCKED && didNotificationPanelInterceptEvent: " + motionEvent.getAction());
+                }
+                if (motionEvent.getActionMasked() == 0) {
+                }
+            }
+            if (!zOnInterceptTouchEvent) {
+            }
+            if (zOnInterceptTouchEvent) {
+            }
+            return zOnInterceptTouchEvent;
+        }
+        SecPanelTouchBlockHelper secPanelTouchBlockHelper = notificationShadeWindowViewController.mPanelTouchBlockHelper;
+        if (secPanelTouchBlockHelper == null || !secPanelTouchBlockHelper.isKeyguardPanelDisabled()) {
+            if (notificationShadeWindowViewController.mDragDownHelper.dragDownCallback.isDragDownEnabledForView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(null)) {
+                if (sysuiStatusBarStateController.getState() == 1) {
+                    if (notificationShadeWindowViewController.mQuickSettingsController.shouldQuickSettingsIntercept(motionEvent.getX(), motionEvent.getY(), 0.0f)) {
+                        shadeLogger.d("NSWVC: QS intercepted");
+                        Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by QS intercepted: " + motionEvent.getAction());
+                    }
+                }
+                zOnInterceptTouchEvent2 = notificationShadeWindowViewController.mDragDownHelper.onInterceptTouchEvent(motionEvent);
+                if (zOnInterceptTouchEvent2) {
+                    anonymousClass1.mLastInterceptWasDragDownHelper = true;
+                    if (motionEvent.getAction() == 0) {
+                        shadeLogger.d("NSWVC: drag down helper intercepted");
+                        Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: drag down helper intercepted");
+                    }
+                }
+                if (zOnInterceptTouchEvent2) {
+                    Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by isDragDownEnabled: " + motionEvent.getAction());
+                }
+            } else if (sysuiStatusBarStateController.getState() == 2 || !NotificationShadeWindowViewController.m2947$$Nest$mdidNotificationPanelInterceptEvent(notificationShadeWindowViewController, motionEvent)) {
+                if (sysuiStatusBarStateController.getState() == 2) {
+                    NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationShadeWindowViewController.mNotificationStackScrollLayoutController;
+                    notificationStackScrollLayoutController.getClass();
+                    int i = SceneContainerFlag.$r8$clinit;
+                    RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                    NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
+                    notificationStackScrollLayout.getClass();
+                    NotificationStackScrollLayout notificationStackScrollLayout2 = NotificationStackScrollLayout.this;
+                    if (notificationStackScrollLayout2.getOwnScrollY() >= notificationStackScrollLayout2.getScrollRange()) {
+                        if (motionEvent.getAction() != 0) {
+                            float x = motionEvent.getX();
+                            float y = motionEvent.getY();
+                            float f = x - notificationShadeWindowViewController.mInitialExpandX;
+                            float f2 = y - notificationShadeWindowViewController.mInitialExpandY;
+                            if (f2 < 0.0f && Math.abs(f2) >= Math.abs(f)) {
+                                if (NotificationShadeWindowViewController.m2947$$Nest$mdidNotificationPanelInterceptEvent(notificationShadeWindowViewController, motionEvent)) {
+                                    Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by !isDragDownEnabled && SHADE_LOCKED && isScrolledToBottom && didNotificationPanelInterceptEvent: " + motionEvent.getAction());
+                                }
+                            }
+                        }
+                    }
+                }
+                if (motionEvent.getActionMasked() == 0) {
+                    Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return false");
+                }
+            } else {
+                Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return true by !isDragDownEnabled && !SHADE_LOCKED && didNotificationPanelInterceptEvent: " + motionEvent.getAction());
+            }
+            if (!zOnInterceptTouchEvent) {
+                zOnInterceptTouchEvent = super.onInterceptTouchEvent(motionEvent);
+            }
+            if (zOnInterceptTouchEvent) {
+                NotificationShadeWindowViewController.AnonymousClass1 anonymousClass12 = this.mInteractionEventHandler;
+                anonymousClass12.getClass();
+                MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                motionEventObtain.setAction(3);
+                Log.w("KeyguardTouchAnimator", "ACTION_CANCEL is called on didIntercept");
+                NotificationShadeWindowViewController.this.mStackScrollLayout.onInterceptTouchEvent(motionEventObtain);
+                motionEventObtain.recycle();
+            }
+            return zOnInterceptTouchEvent;
+        }
+        shadeLogger.d("NSWVC: return false by isKeyguardPanelDisabled");
+        Log.d("NotifShadeWindowVC", "[NSWVC] shouldInterceptTouchEventInternal: return false by isKeyguardPanelDisabled: " + motionEvent.getAction());
+        zOnInterceptTouchEvent = zOnInterceptTouchEvent2;
+        if (!zOnInterceptTouchEvent) {
+        }
+        if (zOnInterceptTouchEvent) {
+        }
+        return zOnInterceptTouchEvent;
     }
 
     @Override // android.widget.FrameLayout, android.view.View
@@ -481,18 +759,27 @@ public class NotificationShadeWindowView extends WindowRootView {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:138:0x021b  */
     @Override // android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         if (CscRune.SECURITY_SIM_PERM_DISABLED && ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isSimDisabledPermanently() && CscRune.LOCKUI_BOTTOM_USIM_TEXT && !NotificationShadeWindowViewController.this.mShadeViewController.isTouchableArea(motionEvent)) {
             return true;
         }
         NotificationShadeWindowViewController.AnonymousClass1 anonymousClass1 = this.mInteractionEventHandler;
         NotificationShadeWindowViewController notificationShadeWindowViewController = NotificationShadeWindowViewController.this;
-        boolean z = notificationShadeWindowViewController.mStatusBarStateController.isDozing() ? !notificationShadeWindowViewController.mDozeServiceHost.mPulsing : false;
+        boolean zOnTouchEvent = notificationShadeWindowViewController.mStatusBarStateController.isDozing() ? !notificationShadeWindowViewController.mDozeServiceHost.mPulsing : false;
         if (anonymousClass1.mLastInterceptWasDragDownHelper) {
             DragDownHelper dragDownHelper = notificationShadeWindowViewController.mDragDownHelper;
             if (dragDownHelper.isDraggingDown) {
-                if (((dragDownHelper.maxDragDownAnimator == null && dragDownHelper.overDragDownAnimator == null) ? false : true) == false) {
+                if (((dragDownHelper.maxDragDownAnimator == null && dragDownHelper.overDragDownAnimator == null) ? false : true) == true) {
+                    z = true;
+                    if (z) {
+                        zOnTouchEvent |= !z || zOnTouchEvent;
+                    }
+                } else {
                     if (dragDownHelper.isDraggingDown) {
                         float y = motionEvent.getY();
                         dragDownHelper.velocityTracker.addMovement(motionEvent);
@@ -535,6 +822,7 @@ public class NotificationShadeWindowView extends WindowRootView {
                                     }
                                     dragDownHelper.animateToMaxDragDown(dragDownHelper.velocityTracker.getYVelocity(), lockscreenShadeTransitionController.isOverDraggingAllowed() ? 1.0f : 0.0f, dragDownHelper.velocityTracker.getYVelocity() > 0.0f);
                                 }
+                                z = true;
                             } else if (lockscreenShadeTransitionController.overDragAmount > 0.0f) {
                                 dragDownHelper.springBack$1();
                             } else {
@@ -549,12 +837,12 @@ public class NotificationShadeWindowView extends WindowRootView {
                             if (expandableView != null) {
                                 float f2 = dragDownHelper.lastHeight;
                                 float f3 = f2 >= 0.0f ? f2 : 0.0f;
-                                boolean isContentExpandable = expandableView.isContentExpandable();
-                                float f4 = f3 * (isContentExpandable ? 0.5f : 0.15f);
-                                if (isContentExpandable && expandableView.getCollapsedHeight() + f4 > expandableView.getMaxContentHeight()) {
-                                    f4 -= ((expandableView.getCollapsedHeight() + f4) - expandableView.getMaxContentHeight()) * 0.85f;
+                                boolean zIsContentExpandable = expandableView.isContentExpandable();
+                                float collapsedHeight = f3 * (zIsContentExpandable ? 0.5f : 0.15f);
+                                if (zIsContentExpandable && expandableView.getCollapsedHeight() + collapsedHeight > expandableView.getMaxContentHeight()) {
+                                    collapsedHeight -= ((expandableView.getCollapsedHeight() + collapsedHeight) - expandableView.getMaxContentHeight()) * 0.85f;
                                 }
-                                expandableView.setActualHeight((int) (expandableView.getCollapsedHeight() + f4), true);
+                                expandableView.setActualHeight((int) (expandableView.getCollapsedHeight() + collapsedHeight), true);
                                 ((CentralSurfacesImpl) ((CentralSurfaces) Dependency.sDependency.getDependencyInner(CentralSurfaces.class))).userActivity();
                             }
                             if (dragDownHelper.lastHeight > dragDownHelper.minDragDistance) {
@@ -583,25 +871,24 @@ public class NotificationShadeWindowView extends WindowRootView {
                                     notificationStackScrollLayout2.requestChildrenUpdate();
                                 }
                             }
+                            z = true;
                         } else if (actionMasked == 3) {
                             dragDownHelper.isInitialDirectionMeasured = false;
                             dragDownHelper.isInitiallyDraggedDownard = false;
                             dragDownHelper.stopDragging();
                         }
                     }
-                    z |= !r6 || z;
+                    zOnTouchEvent |= !z || zOnTouchEvent;
                 }
-                r6 = true;
-                z |= !r6 || z;
             }
         }
-        if (!z && notificationShadeWindowViewController.mShadeViewController.handleExternalTouch(motionEvent)) {
-            z = true;
+        if (!zOnTouchEvent && notificationShadeWindowViewController.mShadeViewController.handleExternalTouch(motionEvent)) {
+            zOnTouchEvent = true;
         }
-        if (!z) {
-            z = super.onTouchEvent(motionEvent);
+        if (!zOnTouchEvent) {
+            zOnTouchEvent = super.onTouchEvent(motionEvent);
         }
-        if (!z) {
+        if (!zOnTouchEvent) {
             NotificationShadeWindowViewController.AnonymousClass1 anonymousClass12 = this.mInteractionEventHandler;
             anonymousClass12.getClass();
             int actionMasked2 = motionEvent.getActionMasked();
@@ -609,7 +896,7 @@ public class NotificationShadeWindowView extends WindowRootView {
                 ((CentralSurfacesImpl) NotificationShadeWindowViewController.this.mService).setInteracting(1, false);
             }
         }
-        return z;
+        return zOnTouchEvent;
     }
 
     @Override // android.view.View
@@ -645,9 +932,14 @@ public class NotificationShadeWindowView extends WindowRootView {
         return super.requestSendAccessibilityEvent(view, accessibilityEvent);
     }
 
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.shade.NotificationShadeWindowView$$ExternalSyntheticLambda0] */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x003a  */
+    /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.shade.NotificationShadeWindowView$$ExternalSyntheticLambda0] */
     @Override // android.view.ViewGroup, android.view.ViewParent
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final ActionMode startActionModeForChild(View view, ActionMode.Callback callback, int i) {
+        boolean z = true;
         if (i != 1) {
             return super.startActionModeForChild(view, callback, i);
         }
@@ -657,7 +949,16 @@ public class NotificationShadeWindowView extends WindowRootView {
             actionMode.finish();
         }
         cleanupFloatingActionModeViews();
-        this.mFloatingToolbar = new FloatingToolbar(this.mFakeWindow);
+        AnonymousClass1 anonymousClass1 = this.mFakeWindow;
+        Context context = ((FrameLayout) this).mContext;
+        if (context == null || context.getTheme() == null) {
+            z = false;
+        } else {
+            TypedValue typedValue = new TypedValue();
+            if (!((FrameLayout) this).mContext.getTheme().resolveAttribute(R.^attr-private.materialColorOnSurface, typedValue, true) || typedValue.data == 0) {
+            }
+        }
+        this.mFloatingToolbar = new FloatingToolbar(anonymousClass1, z);
         final ActionMode floatingActionMode = new FloatingActionMode(((FrameLayout) this).mContext, actionModeCallback2Wrapper, view, this.mFloatingToolbar);
         this.mFloatingActionModeOriginatingView = view;
         this.mFloatingToolbarPreDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.shade.NotificationShadeWindowView$$ExternalSyntheticLambda0

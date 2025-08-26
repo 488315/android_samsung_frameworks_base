@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ReachabilityEduLayout extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,8 +30,8 @@ public class ReachabilityEduLayout extends FrameLayout {
 
     public static Animator marginAnimator(final View view, Function function, final BiConsumer biConsumer, int i, int i2) {
         final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
-        ValueAnimator ofInt = ValueAnimator.ofInt(((Integer) function.apply(layoutParams)).intValue(), i, i2);
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda8
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(((Integer) function.apply(layoutParams)).intValue(), i, i2);
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda8
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 BiConsumer biConsumer2 = biConsumer;
@@ -43,8 +42,8 @@ public class ReachabilityEduLayout extends FrameLayout {
                 view2.requestLayout();
             }
         });
-        ofInt.setDuration(250L);
-        return ofInt;
+        valueAnimatorOfInt.setDuration(250L);
+        return valueAnimatorOfInt;
     }
 
     public final void hideAllImmediately() {
@@ -67,15 +66,15 @@ public class ReachabilityEduLayout extends FrameLayout {
     }
 
     public final void hideItem(final View view) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", 1.0f, 0.0f);
-        ofFloat.setDuration(400L);
-        ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout.2
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 view.setVisibility(4);
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     @Override // android.view.View
@@ -93,15 +92,15 @@ public class ReachabilityEduLayout extends FrameLayout {
 
     public final void showItem(final View view) {
         view.setVisibility(0);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", 0.0f, 1.0f);
-        ofFloat.setDuration(400L);
-        ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout.1
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 view.setVisibility(0);
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     public ReachabilityEduLayout(Context context, AttributeSet attributeSet) {

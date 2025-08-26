@@ -17,7 +17,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListBuilder extends TemplateSliceBuilder {
     public androidx.slice.builders.impl.ListBuilder mImpl;
@@ -30,9 +29,9 @@ public class ListBuilder extends TemplateSliceBuilder {
     @Override // androidx.slice.builders.TemplateSliceBuilder
     public final TemplateBuilderImpl selectImpl() {
         SliceSpec sliceSpec = SliceSpecs.LIST_V2;
-        boolean checkCompatible = checkCompatible(sliceSpec);
+        boolean zCheckCompatible = checkCompatible(sliceSpec);
         Slice.Builder builder = this.mBuilder;
-        if (checkCompatible) {
+        if (zCheckCompatible) {
             ArraySet arraySet = SliceProvider.sSpecs;
             return new ListBuilderImpl(builder, sliceSpec, new SystemClock());
         }
@@ -54,7 +53,6 @@ public class ListBuilder extends TemplateSliceBuilder {
         this.mImpl = (androidx.slice.builders.impl.ListBuilder) templateBuilderImpl;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeaderBuilder {
         public CharSequence mTitle;
         public final Uri mUri;
@@ -73,7 +71,6 @@ public class ListBuilder extends TemplateSliceBuilder {
         this.mImpl.setTtl(duration);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RowBuilder {
         public CharSequence mContentDescription;
         public final List mEndItems;

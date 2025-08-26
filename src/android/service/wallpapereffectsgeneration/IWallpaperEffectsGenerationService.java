@@ -45,9 +45,9 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWallpaperEffectsGenerationService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWallpaperEffectsGenerationService)) {
-                return (IWallpaperEffectsGenerationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWallpaperEffectsGenerationService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWallpaperEffectsGenerationService)) {
+                return (IWallpaperEffectsGenerationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
 
             @Override // android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService
             public void onGenerateCinematicEffect(CinematicEffectRequest cinematicEffectRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWallpaperEffectsGenerationService.DESCRIPTOR);
-                    obtain.writeTypedObject(cinematicEffectRequest, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWallpaperEffectsGenerationService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cinematicEffectRequest, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

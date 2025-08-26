@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DefaultItemAnimator extends SimpleItemAnimator {
     public static final Interpolator ITEM_MOVE_INTERPOLATOR = new PathInterpolator(0.4f, 0.6f, 0.0f, 1.0f);
@@ -29,7 +28,6 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
     public int mPendingAnimFlag = 0;
     public int mLastItemBottom = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MoveInfo {
         public final int fromX;
         public final int fromY;
@@ -341,7 +339,6 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         endAnimation(viewHolder);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChangeInfo {
         public final int fromX;
         public final int fromY;

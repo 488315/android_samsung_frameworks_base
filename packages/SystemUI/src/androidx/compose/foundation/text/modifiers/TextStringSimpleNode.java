@@ -3,13 +3,33 @@ package androidx.compose.foundation.text.modifiers;
 import androidx.compose.animation.BoundsAnimationElement$$ExternalSyntheticOutline0;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
-import androidx.compose.foundation.text.modifiers.TextStringSimpleNode;
+import androidx.compose.foundation.internal.InlineClassHelperKt;
+import androidx.compose.foundation.text.TextDelegateKt;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.graphics.Brush;
+import androidx.compose.ui.graphics.Canvas;
+import androidx.compose.ui.graphics.ClipOp;
+import androidx.compose.ui.graphics.Color;
 import androidx.compose.ui.graphics.ColorProducer;
+import androidx.compose.ui.graphics.Shadow;
+import androidx.compose.ui.graphics.drawscope.DrawScope;
+import androidx.compose.ui.graphics.drawscope.DrawStyle;
+import androidx.compose.ui.graphics.drawscope.Fill;
+import androidx.compose.ui.layout.AlignmentLineKt;
+import androidx.compose.ui.layout.HorizontalAlignmentLine;
+import androidx.compose.ui.layout.IntrinsicMeasurable;
+import androidx.compose.ui.layout.IntrinsicMeasureScope;
+import androidx.compose.ui.layout.Measurable;
+import androidx.compose.ui.layout.MeasureResult;
+import androidx.compose.ui.layout.MeasureScope;
+import androidx.compose.ui.layout.Placeable;
+import androidx.compose.ui.node.DelegatableNodeKt;
 import androidx.compose.ui.node.DrawModifierNode;
 import androidx.compose.ui.node.DrawModifierNodeKt;
 import androidx.compose.ui.node.LayoutModifierNode;
 import androidx.compose.ui.node.LayoutModifierNodeKt;
+import androidx.compose.ui.node.LayoutNodeDrawScope;
+import androidx.compose.ui.node.LookaheadCapablePlaceable;
 import androidx.compose.ui.node.SemanticsModifierNode;
 import androidx.compose.ui.node.SemanticsModifierNodeKt;
 import androidx.compose.ui.semantics.AccessibilityAction;
@@ -19,19 +39,37 @@ import androidx.compose.ui.semantics.SemanticsProperties;
 import androidx.compose.ui.semantics.SemanticsPropertiesKt;
 import androidx.compose.ui.semantics.SemanticsPropertyKey;
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
+import androidx.compose.ui.text.AndroidParagraph;
 import androidx.compose.ui.text.AnnotatedString;
+import androidx.compose.ui.text.MultiParagraph;
+import androidx.compose.ui.text.MultiParagraphIntrinsics;
+import androidx.compose.ui.text.ParagraphIntrinsics;
+import androidx.compose.ui.text.SpanStyle;
+import androidx.compose.ui.text.TextLayoutInput;
+import androidx.compose.ui.text.TextLayoutResult;
 import androidx.compose.ui.text.TextStyle;
+import androidx.compose.ui.text.android.TextLayout;
 import androidx.compose.ui.text.font.FontFamily;
+import androidx.compose.ui.text.platform.AndroidParagraphIntrinsics;
+import androidx.compose.ui.text.style.TextDecoration;
+import androidx.compose.ui.text.style.TextOverflow;
+import androidx.compose.ui.unit.Constraints;
+import androidx.compose.ui.unit.ConstraintsKt;
+import androidx.compose.ui.unit.IntSize;
+import androidx.compose.ui.unit.LayoutDirection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import kotlin.KotlinNothingValueException;
 import kotlin.Unit;
+import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextStringSimpleNode extends Modifier.Node implements LayoutModifierNode, DrawModifierNode, SemanticsModifierNode {
     public ParagraphLayoutCache _layoutCache;
@@ -55,124 +93,47 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
     public final void applySemantics(SemanticsPropertyReceiver semanticsPropertyReceiver) {
         Function1 function1 = this.semanticsTextLayoutResult;
         if (function1 == null) {
-            function1 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$applySemantics$1
-                {
-                    super(1);
-                }
-
-                /* JADX WARN: Removed duplicated region for block: B:10:0x00a8  */
-                /* JADX WARN: Removed duplicated region for block: B:14:0x00aa  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x00a2  */
+            function1 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.applySemantics.1
+                /* JADX WARN: Removed duplicated region for block: B:8:0x0037  */
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object mo779invoke(java.lang.Object r32) {
-                    /*
-                        r31 = this;
-                        r0 = r31
-                        r1 = r32
-                        java.util.List r1 = (java.util.List) r1
-                        androidx.compose.foundation.text.modifiers.TextStringSimpleNode r2 = androidx.compose.foundation.text.modifiers.TextStringSimpleNode.this
-                        androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r2 = r2.getLayoutCache()
-                        androidx.compose.foundation.text.modifiers.TextStringSimpleNode r0 = androidx.compose.foundation.text.modifiers.TextStringSimpleNode.this
-                        androidx.compose.ui.text.TextStyle r3 = r0.style
-                        androidx.compose.ui.graphics.ColorProducer r0 = r0.overrideColor
-                        if (r0 == 0) goto L19
-                        long r4 = r0.mo261invoke0d7_KjU()
-                        goto L20
-                    L19:
-                        androidx.compose.ui.graphics.Color$Companion r0 = androidx.compose.ui.graphics.Color.Companion
-                        r0.getClass()
-                        long r4 = androidx.compose.ui.graphics.Color.Unspecified
-                    L20:
-                        r15 = 0
-                        r17 = 16777214(0xfffffe, float:2.3509884E-38)
-                        r6 = 0
-                        r8 = 0
-                        r9 = 0
-                        r10 = 0
-                        r11 = 0
-                        r13 = 0
-                        r14 = 0
-                        androidx.compose.ui.text.TextStyle r20 = androidx.compose.ui.text.TextStyle.m755mergedA7vx0o$default(r3, r4, r6, r8, r9, r10, r11, r13, r14, r15, r17)
-                        androidx.compose.ui.unit.LayoutDirection r0 = r2.intrinsicsLayoutDirection
-                        r3 = 0
-                        if (r0 != 0) goto L3a
-                    L37:
-                        r7 = r3
-                        goto La0
-                    L3a:
-                        androidx.compose.ui.layout.IntrinsicMeasureScope r4 = r2.density
-                        if (r4 != 0) goto L3f
-                        goto L37
-                    L3f:
-                        androidx.compose.ui.text.AnnotatedString r5 = new androidx.compose.ui.text.AnnotatedString
-                        java.lang.String r6 = r2.text
-                        r7 = 2
-                        r5.<init>(r6, r3, r7, r3)
-                        androidx.compose.ui.text.AndroidParagraph r6 = r2.paragraph
-                        if (r6 != 0) goto L4c
-                        goto L37
-                    L4c:
-                        androidx.compose.ui.text.ParagraphIntrinsics r6 = r2.paragraphIntrinsics
-                        if (r6 != 0) goto L51
-                        goto L37
-                    L51:
-                        long r6 = r2.prevConstraints
-                        r8 = -8589934589(0xfffffffe00000003, double:NaN)
-                        long r28 = r6 & r8
-                        androidx.compose.ui.unit.Constraints$Companion r6 = androidx.compose.ui.unit.Constraints.Companion
-                        androidx.compose.ui.text.TextLayoutResult r7 = new androidx.compose.ui.text.TextLayoutResult
-                        androidx.compose.ui.text.TextLayoutInput r18 = new androidx.compose.ui.text.TextLayoutInput
-                        kotlin.collections.EmptyList r21 = kotlin.collections.EmptyList.INSTANCE
-                        int r6 = r2.maxLines
-                        boolean r8 = r2.softWrap
-                        int r9 = r2.overflow
-                        androidx.compose.ui.text.font.FontFamily$Resolver r10 = r2.fontFamilyResolver
-                        r30 = 0
-                        r26 = r0
-                        r25 = r4
-                        r19 = r5
-                        r22 = r6
-                        r23 = r8
-                        r24 = r9
-                        r27 = r10
-                        r18.<init>(r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r30)
-                        r8 = r18
-                        r22 = r25
-                        androidx.compose.ui.text.MultiParagraph r9 = new androidx.compose.ui.text.MultiParagraph
-                        androidx.compose.ui.text.MultiParagraphIntrinsics r18 = new androidx.compose.ui.text.MultiParagraphIntrinsics
-                        androidx.compose.ui.text.font.FontFamily$Resolver r0 = r2.fontFamilyResolver
-                        r23 = r0
-                        r18.<init>(r19, r20, r21, r22, r23)
-                        int r14 = r2.maxLines
-                        int r15 = r2.overflow
-                        r16 = 0
-                        r10 = r9
-                        r11 = r18
-                        r12 = r28
-                        r10.<init>(r11, r12, r14, r15, r16)
-                        long r10 = r2.layoutSize
-                        r12 = 0
-                        r7.<init>(r8, r9, r10, r12)
-                    La0:
-                        if (r7 == 0) goto La6
-                        r1.add(r7)
-                        r3 = r7
-                    La6:
-                        if (r3 == 0) goto Laa
-                        r0 = 1
-                        goto Lab
-                    Laa:
-                        r0 = 0
-                    Lab:
-                        java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-                        return r0
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$applySemantics$1.mo779invoke(java.lang.Object):java.lang.Object");
+                public final Object mo781invoke(Object obj) {
+                    long jMo262invoke0d7_KjU;
+                    IntrinsicMeasureScope intrinsicMeasureScope;
+                    TextLayoutResult textLayoutResult;
+                    List list = (List) obj;
+                    ParagraphLayoutCache layoutCache = TextStringSimpleNode.this.getLayoutCache();
+                    TextStringSimpleNode textStringSimpleNode = TextStringSimpleNode.this;
+                    TextStyle textStyle = textStringSimpleNode.style;
+                    ColorProducer colorProducer = textStringSimpleNode.overrideColor;
+                    if (colorProducer != null) {
+                        jMo262invoke0d7_KjU = colorProducer.mo262invoke0d7_KjU();
+                    } else {
+                        Color.Companion.getClass();
+                        jMo262invoke0d7_KjU = Color.Unspecified;
+                    }
+                    TextStyle textStyleM757mergedA7vx0o$default = TextStyle.m757mergedA7vx0o$default(textStyle, jMo262invoke0d7_KjU, 0L, null, null, null, 0L, null, 0, 0L, 16777214);
+                    LayoutDirection layoutDirection = layoutCache.intrinsicsLayoutDirection;
+                    TextLayoutResult textLayoutResult2 = null;
+                    if (layoutDirection != null && (intrinsicMeasureScope = layoutCache.density) != null) {
+                        AnnotatedString annotatedString = new AnnotatedString(layoutCache.text, null, 2, null);
+                        if (layoutCache.paragraph == null || layoutCache.paragraphIntrinsics == null) {
+                            textLayoutResult = null;
+                        } else {
+                            long j = layoutCache.prevConstraints & (-8589934589L);
+                            Constraints.Companion companion = Constraints.Companion;
+                            EmptyList emptyList = EmptyList.INSTANCE;
+                            textLayoutResult = new TextLayoutResult(new TextLayoutInput(annotatedString, textStyleM757mergedA7vx0o$default, emptyList, layoutCache.maxLines, layoutCache.softWrap, layoutCache.overflow, intrinsicMeasureScope, layoutDirection, layoutCache.fontFamilyResolver, j, (DefaultConstructorMarker) null), new MultiParagraph(new MultiParagraphIntrinsics(annotatedString, textStyleM757mergedA7vx0o$default, emptyList, intrinsicMeasureScope, layoutCache.fontFamilyResolver), j, layoutCache.maxLines, layoutCache.overflow, (DefaultConstructorMarker) null), layoutCache.layoutSize, null);
+                        }
+                    }
+                    if (textLayoutResult != null) {
+                        list.add(textLayoutResult);
+                        textLayoutResult2 = textLayoutResult;
+                    }
+                    return Boolean.valueOf(textLayoutResult2 != null);
                 }
             };
             this.semanticsTextLayoutResult = function1;
@@ -197,19 +158,15 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
             KProperty kProperty2 = kPropertyArr2[14];
             semanticsPropertyKey2.setValue(semanticsPropertyReceiver, annotatedString2);
         }
-        Function1 function12 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$applySemantics$2
-            {
-                super(1);
-            }
-
+        Function1 function12 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.applySemantics.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 TextStringSimpleNode textStringSimpleNode = TextStringSimpleNode.this;
                 String str = ((AnnotatedString) obj).text;
-                TextStringSimpleNode.TextSubstitutionValue textSubstitutionValue2 = textStringSimpleNode.textSubstitution;
+                TextSubstitutionValue textSubstitutionValue2 = textStringSimpleNode.textSubstitution;
                 if (textSubstitutionValue2 == null) {
-                    TextStringSimpleNode.TextSubstitutionValue textSubstitutionValue3 = new TextStringSimpleNode.TextSubstitutionValue(textStringSimpleNode.text, str, false, null, 12, null);
+                    TextSubstitutionValue textSubstitutionValue3 = new TextSubstitutionValue(textStringSimpleNode.text, str, false, null, 12, null);
                     ParagraphLayoutCache paragraphLayoutCache = new ParagraphLayoutCache(str, textStringSimpleNode.style, textStringSimpleNode.fontFamilyResolver, textStringSimpleNode.overflow, textStringSimpleNode.softWrap, textStringSimpleNode.maxLines, textStringSimpleNode.minLines, null);
                     paragraphLayoutCache.setDensity$foundation_release(textStringSimpleNode.getLayoutCache().density);
                     textSubstitutionValue3.layoutCache = paragraphLayoutCache;
@@ -246,21 +203,17 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
         SemanticsActions semanticsActions = SemanticsActions.INSTANCE;
         semanticsActions.getClass();
         semanticsConfiguration.set(SemanticsActions.SetTextSubstitution, new AccessibilityAction(null, function12));
-        Function1 function13 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$applySemantics$3
-            {
-                super(1);
-            }
-
+        Function1 function13 = new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.applySemantics.3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+            public final Object mo781invoke(Object obj) {
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 TextStringSimpleNode textStringSimpleNode = TextStringSimpleNode.this;
-                TextStringSimpleNode.TextSubstitutionValue textSubstitutionValue2 = textStringSimpleNode.textSubstitution;
+                TextSubstitutionValue textSubstitutionValue2 = textStringSimpleNode.textSubstitution;
                 if (textSubstitutionValue2 == null) {
                     return Boolean.FALSE;
                 }
-                textSubstitutionValue2.isShowingSubstitution = booleanValue;
+                textSubstitutionValue2.isShowingSubstitution = zBooleanValue;
                 SemanticsModifierNodeKt.invalidateSemantics(textStringSimpleNode);
                 LayoutModifierNodeKt.invalidateMeasurement(textStringSimpleNode);
                 DrawModifierNodeKt.invalidateDraw(textStringSimpleNode);
@@ -269,11 +222,7 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
         };
         semanticsActions.getClass();
         semanticsConfiguration.set(SemanticsActions.ShowTextSubstitution, new AccessibilityAction(null, function13));
-        Function0 function0 = new Function0() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$applySemantics$4
-            {
-                super(0);
-            }
-
+        Function0 function0 = new Function0() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.applySemantics.4
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 TextStringSimpleNode textStringSimpleNode = TextStringSimpleNode.this;
@@ -289,21 +238,88 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
         SemanticsPropertiesKt.getTextLayoutResult$default(semanticsPropertyReceiver, function1);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0014, code lost:
-    
-        if (r0 != null) goto L15;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0016  */
     @Override // androidx.compose.ui.node.DrawModifierNode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void draw(androidx.compose.ui.node.LayoutNodeDrawScope r11) {
-        /*
-            Method dump skipped, instructions count: 259
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.draw(androidx.compose.ui.node.LayoutNodeDrawScope):void");
+    public final void draw(LayoutNodeDrawScope layoutNodeDrawScope) {
+        ParagraphLayoutCache layoutCache;
+        long jM758getColor0d7_KjU;
+        if (!this.isAttached) {
+            return;
+        }
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        AndroidParagraph androidParagraph = layoutCache.paragraph;
+        if (androidParagraph == null) {
+            InlineClassHelperKt.throwIllegalArgumentExceptionForNullCheck("no paragraph (layoutCache=" + this._layoutCache + ", textSubstitution=" + this.textSubstitution + ')');
+            throw new KotlinNothingValueException();
+        }
+        Canvas canvas = layoutNodeDrawScope.canvasDrawScope.drawContext.getCanvas();
+        boolean z = layoutCache.didOverflow;
+        if (z) {
+            long j = layoutCache.layoutSize;
+            canvas.save();
+            ClipOp.Companion.getClass();
+            canvas.mo426clipRectN_I0leg(0.0f, 0.0f, (int) (j >> 32), (int) (j & 4294967295L), ClipOp.Intersect);
+        }
+        try {
+            TextDecoration textDecoration = this.style.spanStyle.textDecoration;
+            if (textDecoration == null) {
+                TextDecoration.Companion.getClass();
+                textDecoration = TextDecoration.None;
+            }
+            TextDecoration textDecoration2 = textDecoration;
+            Shadow shadow = this.style.spanStyle.shadow;
+            if (shadow == null) {
+                Shadow.Companion.getClass();
+                shadow = Shadow.None;
+            }
+            Shadow shadow2 = shadow;
+            SpanStyle spanStyle = this.style.spanStyle;
+            DrawStyle drawStyle = spanStyle.drawStyle;
+            if (drawStyle == null) {
+                drawStyle = Fill.INSTANCE;
+            }
+            DrawStyle drawStyle2 = drawStyle;
+            Brush brush = spanStyle.textForegroundStyle.getBrush();
+            if (brush != null) {
+                float alpha = this.style.spanStyle.textForegroundStyle.getAlpha();
+                DrawScope.Companion.getClass();
+                androidParagraph.m730painthn5TExg(canvas, brush, alpha, shadow2, textDecoration2, drawStyle2, DrawScope.Companion.DefaultBlendMode);
+            } else {
+                ColorProducer colorProducer = this.overrideColor;
+                if (colorProducer != null) {
+                    jM758getColor0d7_KjU = colorProducer.mo262invoke0d7_KjU();
+                } else {
+                    Color.Companion.getClass();
+                    jM758getColor0d7_KjU = Color.Unspecified;
+                }
+                if (jM758getColor0d7_KjU == 16) {
+                    if (this.style.m758getColor0d7_KjU() != 16) {
+                        jM758getColor0d7_KjU = this.style.m758getColor0d7_KjU();
+                    } else {
+                        Color.Companion.getClass();
+                        jM758getColor0d7_KjU = Color.Black;
+                    }
+                }
+                DrawScope.Companion.getClass();
+                androidParagraph.m729paintLG529CI(canvas, jM758getColor0d7_KjU, shadow2, textDecoration2, drawStyle2, DrawScope.Companion.DefaultBlendMode);
+            }
+            if (z) {
+                canvas.restore();
+            }
+        } finally {
+        }
     }
 
     public final ParagraphLayoutCache getLayoutCache() {
@@ -320,226 +336,205 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000e, code lost:
-    
-        if (r3 != null) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0010  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int maxIntrinsicHeight(androidx.compose.ui.node.LookaheadCapablePlaceable r2, androidx.compose.ui.layout.IntrinsicMeasurable r3, int r4) {
-        /*
-            r1 = this;
-            androidx.compose.foundation.text.modifiers.TextStringSimpleNode$TextSubstitutionValue r3 = r1.textSubstitution
-            if (r3 == 0) goto L10
-            boolean r0 = r3.isShowingSubstitution
-            if (r0 == 0) goto L9
-            goto La
-        L9:
-            r3 = 0
-        La:
-            if (r3 == 0) goto L10
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r3 = r3.layoutCache
-            if (r3 != 0) goto L14
-        L10:
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r3 = r1.getLayoutCache()
-        L14:
-            r3.setDensity$foundation_release(r2)
-            androidx.compose.ui.unit.LayoutDirection r1 = r2.getLayoutDirection()
-            int r1 = r3.intrinsicHeight(r4, r1)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.maxIntrinsicHeight(androidx.compose.ui.node.LookaheadCapablePlaceable, androidx.compose.ui.layout.IntrinsicMeasurable, int):int");
+    public final int maxIntrinsicHeight(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
+        ParagraphLayoutCache layoutCache;
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        layoutCache.setDensity$foundation_release(lookaheadCapablePlaceable);
+        return layoutCache.intrinsicHeight(i, lookaheadCapablePlaceable.getLayoutDirection());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000e, code lost:
-    
-        if (r2 != null) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0010  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int maxIntrinsicWidth(androidx.compose.ui.node.LookaheadCapablePlaceable r1, androidx.compose.ui.layout.IntrinsicMeasurable r2, int r3) {
-        /*
-            r0 = this;
-            androidx.compose.foundation.text.modifiers.TextStringSimpleNode$TextSubstitutionValue r2 = r0.textSubstitution
-            if (r2 == 0) goto L10
-            boolean r3 = r2.isShowingSubstitution
-            if (r3 == 0) goto L9
-            goto La
-        L9:
-            r2 = 0
-        La:
-            if (r2 == 0) goto L10
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r2 = r2.layoutCache
-            if (r2 != 0) goto L14
-        L10:
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r2 = r0.getLayoutCache()
-        L14:
-            r2.setDensity$foundation_release(r1)
-            androidx.compose.ui.unit.LayoutDirection r0 = r1.getLayoutDirection()
-            androidx.compose.ui.text.ParagraphIntrinsics r0 = r2.setLayoutDirection(r0)
-            float r0 = r0.getMaxIntrinsicWidth()
-            int r0 = androidx.compose.foundation.text.TextDelegateKt.ceilToIntPx(r0)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.maxIntrinsicWidth(androidx.compose.ui.node.LookaheadCapablePlaceable, androidx.compose.ui.layout.IntrinsicMeasurable, int):int");
+    public final int maxIntrinsicWidth(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
+        ParagraphLayoutCache layoutCache;
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        layoutCache.setDensity$foundation_release(lookaheadCapablePlaceable);
+        return TextDelegateKt.ceilToIntPx(layoutCache.setLayoutDirection(lookaheadCapablePlaceable.getLayoutDirection()).getMaxIntrinsicWidth());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0012, code lost:
-    
-        if (r2 != null) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0014  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.compose.ui.layout.MeasureResult mo4measure3p2s80s(androidx.compose.ui.layout.MeasureScope r25, androidx.compose.ui.layout.Measurable r26, long r27) {
-        /*
-            Method dump skipped, instructions count: 479
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.mo4measure3p2s80s(androidx.compose.ui.layout.MeasureScope, androidx.compose.ui.layout.Measurable, long):androidx.compose.ui.layout.MeasureResult");
+    public final MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
+        ParagraphLayoutCache layoutCache;
+        ParagraphIntrinsics paragraphIntrinsics;
+        char c;
+        long j2;
+        boolean z;
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        layoutCache.setDensity$foundation_release(measureScope);
+        LayoutDirection layoutDirection = measureScope.getLayoutDirection();
+        long jM229useMinLinesConstrainereuUD3Qg$default = layoutCache.minLines > 1 ? ParagraphLayoutCache.m229useMinLinesConstrainereuUD3Qg$default(layoutCache, j, layoutDirection) : j;
+        AndroidParagraph androidParagraph = layoutCache.paragraph;
+        if (androidParagraph == null || (paragraphIntrinsics = layoutCache.paragraphIntrinsics) == null || paragraphIntrinsics.getHasStaleResolvedFonts() || layoutDirection != layoutCache.intrinsicsLayoutDirection || (!Constraints.m817equalsimpl0(jM229useMinLinesConstrainereuUD3Qg$default, layoutCache.prevConstraints) && (Constraints.m823getMaxWidthimpl(jM229useMinLinesConstrainereuUD3Qg$default) != Constraints.m823getMaxWidthimpl(layoutCache.prevConstraints) || Constraints.m822getMaxHeightimpl(jM229useMinLinesConstrainereuUD3Qg$default) < androidParagraph.getHeight() || androidParagraph.layout.didExceedMaxLines))) {
+            c = ' ';
+            j2 = 4294967295L;
+            ParagraphIntrinsics layoutDirection2 = layoutCache.setLayoutDirection(layoutDirection);
+            long jM222finalConstraintstfFHcEY = LayoutUtilsKt.m222finalConstraintstfFHcEY(jM229useMinLinesConstrainereuUD3Qg$default, layoutCache.softWrap, layoutCache.overflow, layoutDirection2.getMaxIntrinsicWidth());
+            boolean z2 = layoutCache.softWrap;
+            int i = layoutCache.overflow;
+            int i2 = layoutCache.maxLines;
+            AndroidParagraph androidParagraph2 = new AndroidParagraph((AndroidParagraphIntrinsics) layoutDirection2, ((z2 || !LayoutUtilsKt.m223isEllipsisMW5ApA(i)) && i2 >= 1) ? i2 : 1, layoutCache.overflow, jM222finalConstraintstfFHcEY, null);
+            layoutCache.prevConstraints = jM229useMinLinesConstrainereuUD3Qg$default;
+            IntSize.Companion companion = IntSize.Companion;
+            long jM831constrain4WqzIAM = ConstraintsKt.m831constrain4WqzIAM(jM229useMinLinesConstrainereuUD3Qg$default, (TextDelegateKt.ceilToIntPx(androidParagraph2.getWidth()) << 32) | (TextDelegateKt.ceilToIntPx(androidParagraph2.getHeight()) & 4294967295L));
+            layoutCache.layoutSize = jM831constrain4WqzIAM;
+            int i3 = layoutCache.overflow;
+            TextOverflow.Companion.getClass();
+            layoutCache.didOverflow = i3 != TextOverflow.Visible && (((float) ((int) (jM831constrain4WqzIAM >> 32))) < androidParagraph2.getWidth() || ((float) ((int) (jM831constrain4WqzIAM & 4294967295L))) < androidParagraph2.getHeight());
+            layoutCache.paragraph = androidParagraph2;
+            z = true;
+        } else {
+            if (Constraints.m817equalsimpl0(jM229useMinLinesConstrainereuUD3Qg$default, layoutCache.prevConstraints)) {
+                c = ' ';
+                j2 = 4294967295L;
+            } else {
+                AndroidParagraph androidParagraph3 = layoutCache.paragraph;
+                androidParagraph3.getClass();
+                c = ' ';
+                j2 = 4294967295L;
+                IntSize.Companion companion2 = IntSize.Companion;
+                long jM831constrain4WqzIAM2 = ConstraintsKt.m831constrain4WqzIAM(jM229useMinLinesConstrainereuUD3Qg$default, (TextDelegateKt.ceilToIntPx(androidParagraph3.getHeight()) & 4294967295L) | (TextDelegateKt.ceilToIntPx(Math.min(androidParagraph3.paragraphIntrinsics.layoutIntrinsics.getMaxIntrinsicWidth(), androidParagraph3.getWidth())) << 32));
+                layoutCache.layoutSize = jM831constrain4WqzIAM2;
+                int i4 = layoutCache.overflow;
+                TextOverflow.Companion.getClass();
+                layoutCache.didOverflow = i4 != TextOverflow.Visible && (((float) ((int) (jM831constrain4WqzIAM2 >> 32))) < androidParagraph3.getWidth() || ((float) ((int) (jM831constrain4WqzIAM2 & 4294967295L))) < androidParagraph3.getHeight());
+                layoutCache.prevConstraints = jM229useMinLinesConstrainereuUD3Qg$default;
+            }
+            z = false;
+        }
+        ParagraphIntrinsics paragraphIntrinsics2 = layoutCache.paragraphIntrinsics;
+        if (paragraphIntrinsics2 != null) {
+            paragraphIntrinsics2.getHasStaleResolvedFonts();
+        }
+        Unit unit = Unit.INSTANCE;
+        AndroidParagraph androidParagraph4 = layoutCache.paragraph;
+        androidParagraph4.getClass();
+        long j3 = layoutCache.layoutSize;
+        if (z) {
+            DelegatableNodeKt.m634requireCoordinator64DMado(this, 2).invalidateLayer();
+            Map map = this.baselineCache;
+            if (map == null) {
+                map = new HashMap(2);
+                this.baselineCache = map;
+            }
+            HorizontalAlignmentLine horizontalAlignmentLine = AlignmentLineKt.FirstBaseline;
+            TextLayout textLayout = androidParagraph4.layout;
+            map.put(horizontalAlignmentLine, Integer.valueOf(Math.round(textLayout.getLineBaseline(0))));
+            map.put(AlignmentLineKt.LastBaseline, Integer.valueOf(Math.round(textLayout.getLineBaseline(textLayout.lineCount - 1))));
+        }
+        int i5 = (int) (j3 >> c);
+        int i6 = (int) (j3 & j2);
+        Constraints.Companion.getClass();
+        final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(Constraints.Companion.m828fitPrioritizingWidthZbe2FdA(i5, i5, i6, i6));
+        Map map2 = this.baselineCache;
+        map2.getClass();
+        return measureScope.layout$1(i5, i6, map2, new Function1() { // from class: androidx.compose.foundation.text.modifiers.TextStringSimpleNode$measure$1
+            {
+                super(1);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                ((Placeable.PlacementScope) obj).place(placeableMo610measureBRTryo0, 0, 0, 0.0f);
+                return Unit.INSTANCE;
+            }
+        });
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000e, code lost:
-    
-        if (r3 != null) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0010  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int minIntrinsicHeight(androidx.compose.ui.node.LookaheadCapablePlaceable r2, androidx.compose.ui.layout.IntrinsicMeasurable r3, int r4) {
-        /*
-            r1 = this;
-            androidx.compose.foundation.text.modifiers.TextStringSimpleNode$TextSubstitutionValue r3 = r1.textSubstitution
-            if (r3 == 0) goto L10
-            boolean r0 = r3.isShowingSubstitution
-            if (r0 == 0) goto L9
-            goto La
-        L9:
-            r3 = 0
-        La:
-            if (r3 == 0) goto L10
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r3 = r3.layoutCache
-            if (r3 != 0) goto L14
-        L10:
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r3 = r1.getLayoutCache()
-        L14:
-            r3.setDensity$foundation_release(r2)
-            androidx.compose.ui.unit.LayoutDirection r1 = r2.getLayoutDirection()
-            int r1 = r3.intrinsicHeight(r4, r1)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.minIntrinsicHeight(androidx.compose.ui.node.LookaheadCapablePlaceable, androidx.compose.ui.layout.IntrinsicMeasurable, int):int");
+    public final int minIntrinsicHeight(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
+        ParagraphLayoutCache layoutCache;
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        layoutCache.setDensity$foundation_release(lookaheadCapablePlaceable);
+        return layoutCache.intrinsicHeight(i, lookaheadCapablePlaceable.getLayoutDirection());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000e, code lost:
-    
-        if (r2 != null) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0010  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int minIntrinsicWidth(androidx.compose.ui.node.LookaheadCapablePlaceable r1, androidx.compose.ui.layout.IntrinsicMeasurable r2, int r3) {
-        /*
-            r0 = this;
-            androidx.compose.foundation.text.modifiers.TextStringSimpleNode$TextSubstitutionValue r2 = r0.textSubstitution
-            if (r2 == 0) goto L10
-            boolean r3 = r2.isShowingSubstitution
-            if (r3 == 0) goto L9
-            goto La
-        L9:
-            r2 = 0
-        La:
-            if (r2 == 0) goto L10
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r2 = r2.layoutCache
-            if (r2 != 0) goto L14
-        L10:
-            androidx.compose.foundation.text.modifiers.ParagraphLayoutCache r2 = r0.getLayoutCache()
-        L14:
-            r2.setDensity$foundation_release(r1)
-            androidx.compose.ui.unit.LayoutDirection r0 = r1.getLayoutDirection()
-            androidx.compose.ui.text.ParagraphIntrinsics r0 = r2.setLayoutDirection(r0)
-            float r0 = r0.getMinIntrinsicWidth()
-            int r0 = androidx.compose.foundation.text.TextDelegateKt.ceilToIntPx(r0)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.minIntrinsicWidth(androidx.compose.ui.node.LookaheadCapablePlaceable, androidx.compose.ui.layout.IntrinsicMeasurable, int):int");
+    public final int minIntrinsicWidth(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
+        ParagraphLayoutCache layoutCache;
+        TextSubstitutionValue textSubstitutionValue = this.textSubstitution;
+        if (textSubstitutionValue == null) {
+            layoutCache = getLayoutCache();
+        } else {
+            if (!textSubstitutionValue.isShowingSubstitution) {
+                textSubstitutionValue = null;
+            }
+            if (textSubstitutionValue == null || (layoutCache = textSubstitutionValue.layoutCache) == null) {
+            }
+        }
+        layoutCache.setDensity$foundation_release(lookaheadCapablePlaceable);
+        return TextDelegateKt.ceilToIntPx(layoutCache.setLayoutDirection(lookaheadCapablePlaceable.getLayoutDirection()).getMinIntrinsicWidth());
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TextStringSimpleNode(java.lang.String r13, androidx.compose.ui.text.TextStyle r14, androidx.compose.ui.text.font.FontFamily.Resolver r15, int r16, boolean r17, int r18, int r19, androidx.compose.ui.graphics.ColorProducer r20, int r21, kotlin.jvm.internal.DefaultConstructorMarker r22) {
-        /*
-            r12 = this;
-            r0 = r21
-            r1 = r0 & 8
-            if (r1 == 0) goto Lf
-            androidx.compose.ui.text.style.TextOverflow$Companion r1 = androidx.compose.ui.text.style.TextOverflow.Companion
-            r1.getClass()
-            int r1 = androidx.compose.ui.text.style.TextOverflow.Clip
-            r6 = r1
-            goto L11
-        Lf:
-            r6 = r16
-        L11:
-            r1 = r0 & 16
-            r2 = 1
-            if (r1 == 0) goto L18
-            r7 = r2
-            goto L1a
-        L18:
-            r7 = r17
-        L1a:
-            r1 = r0 & 32
-            if (r1 == 0) goto L23
-            r1 = 2147483647(0x7fffffff, float:NaN)
-            r8 = r1
-            goto L25
-        L23:
-            r8 = r18
-        L25:
-            r1 = r0 & 64
-            if (r1 == 0) goto L2b
-            r9 = r2
-            goto L2d
-        L2b:
-            r9 = r19
-        L2d:
-            r0 = r0 & 128(0x80, float:1.8E-43)
-            if (r0 == 0) goto L34
-            r0 = 0
-            r10 = r0
-            goto L36
-        L34:
-            r10 = r20
-        L36:
-            r11 = 0
-            r2 = r12
-            r3 = r13
-            r4 = r14
-            r5 = r15
-            r2.<init>(r3, r4, r5, r6, r7, r8, r9, r10, r11)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.modifiers.TextStringSimpleNode.<init>(java.lang.String, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.font.FontFamily$Resolver, int, boolean, int, int, androidx.compose.ui.graphics.ColorProducer, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public TextStringSimpleNode(String str, TextStyle textStyle, FontFamily.Resolver resolver, int i, boolean z, int i2, int i3, ColorProducer colorProducer, int i4, DefaultConstructorMarker defaultConstructorMarker) {
+        int i5;
+        if ((i4 & 8) != 0) {
+            TextOverflow.Companion.getClass();
+            i5 = TextOverflow.Clip;
+        } else {
+            i5 = i;
+        }
+        this(str, textStyle, resolver, i5, (i4 & 16) != 0 ? true : z, (i4 & 32) != 0 ? Integer.MAX_VALUE : i2, (i4 & 64) != 0 ? 1 : i3, (i4 & 128) != 0 ? null : colorProducer, null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TextSubstitutionValue {
         public boolean isShowingSubstitution;
         public ParagraphLayoutCache layoutCache;
@@ -565,9 +560,9 @@ public final class TextStringSimpleNode extends Modifier.Node implements LayoutM
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.original.hashCode() * 31, 31, this.substitution), 31, this.isShowingSubstitution);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.original.hashCode() * 31, 31, this.substitution), 31, this.isShowingSubstitution);
             ParagraphLayoutCache paragraphLayoutCache = this.layoutCache;
-            return m + (paragraphLayoutCache == null ? 0 : paragraphLayoutCache.hashCode());
+            return iM + (paragraphLayoutCache == null ? 0 : paragraphLayoutCache.hashCode());
         }
 
         public final String toString() {

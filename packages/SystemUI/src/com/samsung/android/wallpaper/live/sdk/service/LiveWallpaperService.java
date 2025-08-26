@@ -24,7 +24,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.SdkReflectUtils;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class LiveWallpaperService extends WallpaperService {
     private static final boolean DEBUG = !SemSystemProperties.getBoolean("ro.product_ship", true);
@@ -50,12 +49,10 @@ public abstract class LiveWallpaperService extends WallpaperService {
         return null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseEngine extends WallpaperService.Engine {
         public String TAG;
         public DisplayStateMonitor mDisplayStateMonitor;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.samsung.android.wallpaper.live.sdk.service.LiveWallpaperService$BaseEngine$1, reason: invalid class name */
         public class AnonymousClass1 {
             public AnonymousClass1() {
@@ -123,10 +120,10 @@ public abstract class LiveWallpaperService extends WallpaperService {
         public Bundle onCommand(String str, int i, int i2, int i3, Bundle bundle, boolean z) {
             if (LiveWallpaperService.DEBUG && !TextUtils.equals(str, "samsung.android.wallpaper.blocktoucharea")) {
                 String str2 = this.TAG;
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "onCommand: ", str, ", x=", ", y=");
-                ViewPager$$ExternalSyntheticOutline0.m(m888m, i2, ", z=", i3, ", hasExtras=");
-                m888m.append((bundle == null || bundle.isEmpty()) ? false : true);
-                SdkLog.d(str2, m888m.toString());
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "onCommand: ", str, ", x=", ", y=");
+                ViewPager$$ExternalSyntheticOutline0.m(sbM890m, i2, ", z=", i3, ", hasExtras=");
+                sbM890m.append((bundle == null || bundle.isEmpty()) ? false : true);
+                SdkLog.d(str2, sbM890m.toString());
             }
             this.mDisplayStateMonitor.onCommand(i, str);
             if (str.equals("android.wallpaper.reapply")) {
@@ -196,7 +193,7 @@ public abstract class LiveWallpaperService extends WallpaperService {
             return null;
         }
 
-        public void setFixedOrientation(boolean z, boolean z2) {
+        public void setFixedOrientation(boolean z, boolean z2) throws NoSuchMethodException, SecurityException {
             try {
                 Class cls = Boolean.TYPE;
                 Method declaredMethod = WallpaperService.Engine.class.getDeclaredMethod("semSetFixedOrientation", cls, cls);

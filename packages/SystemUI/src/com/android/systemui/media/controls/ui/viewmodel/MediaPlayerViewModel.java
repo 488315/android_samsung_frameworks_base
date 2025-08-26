@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaPlayerViewModel {
     public final List actionButtons;
@@ -66,11 +65,11 @@ public final class MediaPlayerViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = this.contentDescription.hashCode() * 31;
+        int iHashCode = this.contentDescription.hashCode() * 31;
         Icon icon = this.backgroundCover;
-        int hashCode2 = (hashCode + (icon == null ? 0 : icon.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (icon == null ? 0 : icon.hashCode())) * 31;
         Icon icon2 = this.appIcon;
-        return this.onLocationChanged.hashCode() + ((this.onBindSeekbar.hashCode() + ((this.onSeek.hashCode() + ((this.onLongClicked.hashCode() + ((this.onClicked.hashCode() + ((this.gutsMenu.hashCode() + ((this.outputSwitcher.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionButtons, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.launcherIcon.hashCode() + ((hashCode2 + (icon2 != null ? icon2.hashCode() : 0)) * 31)) * 31, 31, this.useGrayColorFilter), 31, this.artistName), 31, this.titleName), 31, this.isExplicitVisible), 31, this.canShowTime), 31, this.playTurbulenceNoise), 31, this.useSemanticActions), 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
+        return this.onLocationChanged.hashCode() + ((this.onBindSeekbar.hashCode() + ((this.onSeek.hashCode() + ((this.onLongClicked.hashCode() + ((this.onClicked.hashCode() + ((this.gutsMenu.hashCode() + ((this.outputSwitcher.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionButtons, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.launcherIcon.hashCode() + ((iHashCode2 + (icon2 != null ? icon2.hashCode() : 0)) * 31)) * 31, 31, this.useGrayColorFilter), 31, this.artistName), 31, this.titleName), 31, this.isExplicitVisible), 31, this.canShowTime), 31, this.playTurbulenceNoise), 31, this.useSemanticActions), 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
     }
 
     public final String toString() {

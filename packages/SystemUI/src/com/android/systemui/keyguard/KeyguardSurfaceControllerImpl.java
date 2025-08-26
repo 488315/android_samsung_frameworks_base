@@ -16,9 +16,10 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.reflect.KFunction;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSurfaceControllerImpl {
     public final KFunction isExpandedChangedListener = new KeyguardSurfaceControllerImpl$isExpandedChangedListener$1(this);
@@ -28,6 +29,19 @@ public final class KeyguardSurfaceControllerImpl {
     public final Executor mainExecutor;
     public final Lazy surfaceTransactionApplier$delegate;
     public final Lazy viewRootImpl$delegate;
+
+    /* renamed from: com.android.systemui.keyguard.KeyguardSurfaceControllerImpl$internalRestoreKeyguardSurfaceIfVisible$1, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function2 {
+        public AnonymousClass1(Object obj) {
+            super(2, obj, KeyguardSurfaceControllerImpl.class, "onPanelStateChanged", "onPanelStateChanged(II)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            KeyguardSurfaceControllerImpl.access$onPanelStateChanged((KeyguardSurfaceControllerImpl) this.receiver, ((Number) obj).intValue(), ((Number) obj2).intValue());
+            return Unit.INSTANCE;
+        }
+    }
 
     public KeyguardSurfaceControllerImpl(KeyguardViewController keyguardViewController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, dagger.Lazy lazy, Executor executor) {
         this.keyguardViewController = keyguardViewController;
@@ -106,23 +120,23 @@ public final class KeyguardSurfaceControllerImpl {
         Log.d("KeyguardSurface", "internalRestoreKeyguardSurfaceIfVisible " + z);
         if (z) {
             SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParams = this.lastKeyguardSurfaceParams;
-            boolean z2 = true;
+            boolean zIsValid = true;
             if (surfaceParams != null) {
                 SurfaceControl surfaceControl = surfaceParams.surface;
-                z2 = true ^ (surfaceControl != null ? surfaceControl.isValid() : false);
+                zIsValid = true ^ (surfaceControl != null ? surfaceControl.isValid() : false);
             }
-            if (!z2) {
+            if (!zIsValid) {
                 restoreKeyguardSurface();
             }
             Function1 function1 = (Function1) this.isExpandedChangedListener;
             KeyguardVisibilityMonitor keyguardVisibilityMonitor = this.keyguardVisibilityMonitor;
             ((ArrayList) keyguardVisibilityMonitor.isExpandedChangedListeners).remove(function1);
-            ((ArrayList) keyguardVisibilityMonitor.panelStateChangedListeners).remove(new KeyguardSurfaceControllerImpl$internalRestoreKeyguardSurfaceIfVisible$1(this));
+            ((ArrayList) keyguardVisibilityMonitor.panelStateChangedListeners).remove(new AnonymousClass1(this));
         }
     }
 
     public final void restoreKeyguardSurface() {
-        Boolean bool;
+        Boolean boolValueOf;
         SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParams = this.lastKeyguardSurfaceParams;
         if (surfaceParams != null) {
             boolean z = false;
@@ -130,23 +144,23 @@ public final class KeyguardSurfaceControllerImpl {
                 ((SyncRtSurfaceTransactionApplier) this.surfaceTransactionApplier$delegate.getValue()).scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceParams.surface).withVisibility(true).withAlpha(1.0f).build()});
                 z = true;
             }
-            bool = Boolean.valueOf(z);
+            boolValueOf = Boolean.valueOf(z);
         } else {
-            bool = null;
+            boolValueOf = null;
         }
-        String str = "restoreKeyguardSurface surfaceParam=" + this.lastKeyguardSurfaceParams + " restored=" + bool;
+        String strM = "restoreKeyguardSurface surfaceParam=" + this.lastKeyguardSurfaceParams + " restored=" + boolValueOf;
         if (DeviceType.isDebuggable()) {
-            str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\n", Debug.getCallers(3, " "));
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "\n", Debug.getCallers(3, " "));
         }
-        Log.d("KeyguardSurface", str);
+        Log.d("KeyguardSurface", strM);
         this.lastKeyguardSurfaceParams = null;
     }
 
     public final void restoreKeyguardSurfaceByTransaction() {
         View view = getViewRootImpl().getView();
-        Integer valueOf = view != null ? Integer.valueOf(view.getVisibility()) : null;
+        Integer numValueOf = view != null ? Integer.valueOf(view.getVisibility()) : null;
         KeyguardVisibilityMonitor keyguardVisibilityMonitor = this.keyguardVisibilityMonitor;
-        Log.d("KeyguardSurface", "restoreKeyguardSurfaceByTransaction viewRootImpl.view.visibility=" + valueOf + ", keyguardVisibilityMonitor.isVisible()=" + keyguardVisibilityMonitor.isVisible());
+        Log.d("KeyguardSurface", "restoreKeyguardSurfaceByTransaction viewRootImpl.view.visibility=" + numValueOf + ", keyguardVisibilityMonitor.isVisible()=" + keyguardVisibilityMonitor.isVisible());
         try {
             View view2 = getViewRootImpl().getView();
             if ((view2 == null || view2.getVisibility() != 0) && !keyguardVisibilityMonitor.isVisible()) {
@@ -168,9 +182,9 @@ public final class KeyguardSurfaceControllerImpl {
 
     public final void restoreKeyguardSurfaceIfVisible() {
         View view = getViewRootImpl().getView();
-        Integer valueOf = view != null ? Integer.valueOf(view.getVisibility()) : null;
+        Integer numValueOf = view != null ? Integer.valueOf(view.getVisibility()) : null;
         KeyguardVisibilityMonitor keyguardVisibilityMonitor = this.keyguardVisibilityMonitor;
-        Log.d("KeyguardSurface", "restoreKeyguardSurfaceIfVisible viewRootImpl.view.visibility=" + valueOf + ", keyguardVisibilityMonitor.isVisible()=" + keyguardVisibilityMonitor.isVisible());
+        Log.d("KeyguardSurface", "restoreKeyguardSurfaceIfVisible viewRootImpl.view.visibility=" + numValueOf + ", keyguardVisibilityMonitor.isVisible()=" + keyguardVisibilityMonitor.isVisible());
         View view2 = getViewRootImpl().getView();
         internalRestoreKeyguardSurfaceIfVisible((view2 != null && view2.getVisibility() == 0) || keyguardVisibilityMonitor.isVisible());
     }
@@ -195,19 +209,19 @@ public final class KeyguardSurfaceControllerImpl {
                 public final Object invoke() {
                     SurfaceControl surfaceControl2 = surfaceControl;
                     SurfaceControl.Transaction transaction2 = transaction;
-                    KeyguardSurfaceControllerImpl keyguardSurfaceControllerImpl = KeyguardSurfaceControllerImpl.this;
-                    SyncRtSurfaceTransactionApplier.SurfaceParams build = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceControl2).withAlpha(0.001f).build();
+                    KeyguardSurfaceControllerImpl keyguardSurfaceControllerImpl = this.f$0;
+                    SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParamsBuild = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceControl2).withAlpha(0.001f).build();
                     if (transaction2 == null) {
                         try {
-                            build.getClass();
-                            ((SyncRtSurfaceTransactionApplier) keyguardSurfaceControllerImpl.surfaceTransactionApplier$delegate.getValue()).scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{build});
+                            surfaceParamsBuild.getClass();
+                            ((SyncRtSurfaceTransactionApplier) keyguardSurfaceControllerImpl.surfaceTransactionApplier$delegate.getValue()).scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{surfaceParamsBuild});
                         } catch (Exception unused2) {
                             String hexString2 = Long.toHexString(j);
                             KeyguardViewController keyguardViewController2 = keyguardSurfaceControllerImpl.keyguardViewController;
                             Log.d("KeyguardSurface", "setKeyguardSurfaceAppearAmount in runOnMainThread previousSurface : " + surfaceControl2 + ", id : " + hexString2 + ", currentSurface : " + keyguardViewController2.getViewRootImpl().getSurfaceControl() + ", id : " + Long.toHexString(keyguardViewController2.getViewRootImpl().getSurfaceControl().mNativeObject));
                         }
                     }
-                    keyguardSurfaceControllerImpl.lastKeyguardSurfaceParams = build;
+                    keyguardSurfaceControllerImpl.lastKeyguardSurfaceParams = surfaceParamsBuild;
                     Function1 function1 = (Function1) keyguardSurfaceControllerImpl.isExpandedChangedListener;
                     KeyguardVisibilityMonitor keyguardVisibilityMonitor = keyguardSurfaceControllerImpl.keyguardVisibilityMonitor;
                     ArrayList arrayList = (ArrayList) keyguardVisibilityMonitor.isExpandedChangedListeners;
@@ -257,19 +271,19 @@ public final class KeyguardSurfaceControllerImpl {
                 public final Object invoke() {
                     SurfaceControl surfaceControl2 = surfaceControl;
                     SurfaceControl.Transaction transaction2 = transaction;
-                    SyncRtSurfaceTransactionApplier.SurfaceParams build = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceControl2).withVisibility(false).build();
-                    KeyguardSurfaceControllerImpl keyguardSurfaceControllerImpl = KeyguardSurfaceControllerImpl.this;
+                    SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParamsBuild = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceControl2).withVisibility(false).build();
+                    KeyguardSurfaceControllerImpl keyguardSurfaceControllerImpl = this.f$0;
                     if (transaction2 == null) {
                         try {
-                            build.getClass();
-                            ((SyncRtSurfaceTransactionApplier) keyguardSurfaceControllerImpl.surfaceTransactionApplier$delegate.getValue()).scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{build});
+                            surfaceParamsBuild.getClass();
+                            ((SyncRtSurfaceTransactionApplier) keyguardSurfaceControllerImpl.surfaceTransactionApplier$delegate.getValue()).scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{surfaceParamsBuild});
                         } catch (Exception unused2) {
                             String hexString2 = Long.toHexString(j);
                             KeyguardViewController keyguardViewController2 = keyguardSurfaceControllerImpl.keyguardViewController;
                             Log.d("KeyguardSurface", "setKeyguardSurfaceVisible in runOnMainThread previousSurface : " + surfaceControl2 + ", id : " + hexString2 + ", currentSurface : " + keyguardViewController2.getViewRootImpl().getSurfaceControl() + ", id : " + Long.toHexString(keyguardViewController2.getViewRootImpl().getSurfaceControl().mNativeObject));
                         }
                     }
-                    keyguardSurfaceControllerImpl.lastKeyguardSurfaceParams = build;
+                    keyguardSurfaceControllerImpl.lastKeyguardSurfaceParams = surfaceParamsBuild;
                     Function1 function1 = (Function1) keyguardSurfaceControllerImpl.isExpandedChangedListener;
                     ArrayList arrayList = (ArrayList) keyguardSurfaceControllerImpl.keyguardVisibilityMonitor.isExpandedChangedListeners;
                     if (!arrayList.contains(function1)) {

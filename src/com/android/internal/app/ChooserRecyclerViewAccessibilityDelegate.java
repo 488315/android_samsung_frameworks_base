@@ -1,5 +1,6 @@
 package com.android.internal.app;
 
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,24 +20,24 @@ class ChooserRecyclerViewAccessibilityDelegate extends RecyclerViewAccessibility
     }
 
     @Override // android.view.View.AccessibilityDelegate
-    public boolean onRequestSendAccessibilityEvent(ViewGroup viewGroup, View view, AccessibilityEvent accessibilityEvent) {
-        boolean onRequestSendAccessibilityEvent = super.onRequestSendAccessibilityEvent(viewGroup, view, accessibilityEvent);
-        if (onRequestSendAccessibilityEvent && accessibilityEvent.getEventType() == 32768) {
+    public boolean onRequestSendAccessibilityEvent(ViewGroup viewGroup, View view, AccessibilityEvent accessibilityEvent) throws Resources.NotFoundException {
+        boolean zOnRequestSendAccessibilityEvent = super.onRequestSendAccessibilityEvent(viewGroup, view, accessibilityEvent);
+        if (zOnRequestSendAccessibilityEvent && accessibilityEvent.getEventType() == 32768) {
             ensureViewOnScreenVisibility((RecyclerView) viewGroup, view);
         }
-        return onRequestSendAccessibilityEvent;
+        return zOnRequestSendAccessibilityEvent;
     }
 
-    private void ensureViewOnScreenVisibility(RecyclerView recyclerView, View view) {
+    private void ensureViewOnScreenVisibility(RecyclerView recyclerView, View view) throws Resources.NotFoundException {
         int i;
-        View findContainingItemView = recyclerView.findContainingItemView(view);
-        if (findContainingItemView == null) {
+        View viewFindContainingItemView = recyclerView.findContainingItemView(view);
+        if (viewFindContainingItemView == null) {
             return;
         }
         recyclerView.getBoundsOnScreen(this.mTempRect, true);
         int i2 = this.mTempRect.top;
         int i3 = this.mTempRect.bottom;
-        findContainingItemView.getBoundsOnScreen(this.mTempRect);
+        viewFindContainingItemView.getBoundsOnScreen(this.mTempRect);
         if (this.mTempRect.top < i2) {
             i = this.mTempRect.bottom - i3;
         } else {
@@ -45,7 +46,7 @@ class ChooserRecyclerViewAccessibilityDelegate extends RecyclerViewAccessibility
         nestedVerticalScrollBy(recyclerView, i);
     }
 
-    private void nestedVerticalScrollBy(RecyclerView recyclerView, int i) {
+    private void nestedVerticalScrollBy(RecyclerView recyclerView, int i) throws Resources.NotFoundException {
         if (i == 0) {
             return;
         }

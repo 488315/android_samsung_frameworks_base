@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.TextFieldDelegate;
 import androidx.compose.ui.text.input.EditProcessor;
 import androidx.compose.ui.text.input.TextFieldValue;
 import androidx.compose.ui.text.input.TextInputSession;
+import java.io.IOException;
 import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -11,7 +12,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Lambda;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TextFieldDelegate$Companion$restartInput$1 extends Lambda implements Function1 {
     final /* synthetic */ EditProcessor $editProcessor;
@@ -28,17 +28,17 @@ final class TextFieldDelegate$Companion$restartInput$1 extends Lambda implements
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) throws IOException {
         TextFieldDelegate.Companion companion = TextFieldDelegate.Companion;
         EditProcessor editProcessor = this.$editProcessor;
         Function1 function1 = this.$onValueChange;
         TextInputSession textInputSession = this.$session.element;
         companion.getClass();
-        TextFieldValue apply = editProcessor.apply((List) obj);
+        TextFieldValue textFieldValueApply = editProcessor.apply((List) obj);
         if (textInputSession != null && Intrinsics.areEqual((TextInputSession) textInputSession.textInputService._currentInputSession.get(), textInputSession)) {
-            textInputSession.platformTextInputService.updateState(null, apply);
+            textInputSession.platformTextInputService.updateState(null, textFieldValueApply);
         }
-        function1.mo779invoke(apply);
+        function1.mo781invoke(textFieldValueApply);
         return Unit.INSTANCE;
     }
 }

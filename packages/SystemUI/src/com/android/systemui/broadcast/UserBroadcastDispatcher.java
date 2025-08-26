@@ -25,6 +25,7 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
@@ -40,7 +41,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class UserBroadcastDispatcher implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -54,7 +54,6 @@ public class UserBroadcastDispatcher implements Dumpable {
     public final ArrayMap actionsToActionsReceivers = new ArrayMap();
     public final ArrayMap receiverToActions = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -64,7 +63,6 @@ public class UserBroadcastDispatcher implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReceiverProperties {
         public final String action;
         public final int flags;
@@ -88,9 +86,9 @@ public class UserBroadcastDispatcher implements Dumpable {
         }
 
         public final int hashCode() {
-            int m = ReorderTile$$ExternalSyntheticOutline0.m(this.flags, this.action.hashCode() * 31, 31);
+            int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.flags, this.action.hashCode() * 31, 31);
             String str = this.permission;
-            return m + (str == null ? 0 : str.hashCode());
+            return iM + (str == null ? 0 : str.hashCode());
         }
 
         public final String toString() {
@@ -121,46 +119,46 @@ public class UserBroadcastDispatcher implements Dumpable {
     public ActionReceiver createActionReceiver$frameworks__base__packages__SystemUI__android_common__SystemUI_core(final String str, final String str2, final int i) {
         return new ActionReceiver(str, this.userId, new Function2() { // from class: com.android.systemui.broadcast.UserBroadcastDispatcher$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
-            public final Object invoke(Object obj, Object obj2) {
+            public final Object invoke(Object obj, Object obj2) throws IOException {
                 BroadcastReceiver broadcastReceiver = (BroadcastReceiver) obj;
                 IntentFilter intentFilter = (IntentFilter) obj2;
                 int i2 = UserBroadcastDispatcher.$r8$clinit;
-                boolean isEnabled = Trace.isEnabled();
+                boolean zIsEnabled = Trace.isEnabled();
                 UserBroadcastDispatcher userBroadcastDispatcher = this;
                 int i3 = userBroadcastDispatcher.userId;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     Trace.traceBegin(4096L, "registerReceiver act=" + str + " user=" + i3);
                 }
                 Context context = userBroadcastDispatcher.context;
-                UserHandle of = UserHandle.of(i3);
+                UserHandle userHandleOf = UserHandle.of(i3);
                 Handler handler = userBroadcastDispatcher.workerHandler;
                 String str3 = str2;
                 int i4 = i;
-                context.registerReceiverAsUser(broadcastReceiver, of, intentFilter, str3, handler, i4);
+                context.registerReceiverAsUser(broadcastReceiver, userHandleOf, intentFilter, str3, handler, i4);
                 Trace.endSection();
                 BroadcastDispatcherLogger broadcastDispatcherLogger = userBroadcastDispatcher.logger;
                 broadcastDispatcherLogger.getClass();
-                String joinToString$default = SequencesKt___SequencesKt.joinToString$default(SequencesKt__SequencesKt.asSequence(intentFilter.actionsIterator()), ",", "Actions(", 56);
-                String joinToString$default2 = intentFilter.countCategories() != 0 ? SequencesKt___SequencesKt.joinToString$default(SequencesKt__SequencesKt.asSequence(intentFilter.categoriesIterator()), ",", "Categories(", 56) : "";
+                String strJoinToString$default = SequencesKt___SequencesKt.joinToString$default(SequencesKt__SequencesKt.asSequence(intentFilter.actionsIterator()), ",", "Actions(", 56);
+                String strJoinToString$default2 = intentFilter.countCategories() != 0 ? SequencesKt___SequencesKt.joinToString$default(SequencesKt__SequencesKt.asSequence(intentFilter.categoriesIterator()), ",", "Categories(", 56) : "";
                 LogLevel logLevel = LogLevel.INFO;
                 BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda0 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(6);
                 LogBuffer logBuffer = broadcastDispatcherLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.int1 = i3;
-                if (!Intrinsics.areEqual(joinToString$default2, "")) {
-                    joinToString$default = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(joinToString$default, "\n", joinToString$default2);
+                if (!Intrinsics.areEqual(strJoinToString$default2, "")) {
+                    strJoinToString$default = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strJoinToString$default, "\n", strJoinToString$default2);
                 }
-                logMessageImpl.str1 = joinToString$default;
+                logMessageImpl.str1 = strJoinToString$default;
                 BroadcastDispatcherLogger.Companion.getClass();
                 logMessageImpl.str2 = BroadcastDispatcherLogger.Companion.flagToString(i4);
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 return Unit.INSTANCE;
             }
         }, new Function1() { // from class: com.android.systemui.broadcast.UserBroadcastDispatcher$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 String str3 = str;
                 UserBroadcastDispatcher userBroadcastDispatcher = this;
                 BroadcastReceiver broadcastReceiver = (BroadcastReceiver) obj;
@@ -177,10 +175,10 @@ public class UserBroadcastDispatcher implements Dumpable {
                     LogLevel logLevel = LogLevel.INFO;
                     BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda0 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(7);
                     LogBuffer logBuffer = broadcastDispatcherLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).int1 = i3;
-                    ((LogMessageImpl) obtain).str1 = str3;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).int1 = i3;
+                    ((LogMessageImpl) logMessageObtain).str1 = str3;
+                    logBuffer.commit(logMessageObtain);
                 } catch (IllegalArgumentException e) {
                     Log.e("UserBroadcastDispatcher", BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(userBroadcastDispatcher.userId, "Trying to unregister unregistered receiver for user ", ", action ", str3), new IllegalStateException(e));
                 }
@@ -200,13 +198,13 @@ public class UserBroadcastDispatcher implements Dumpable {
             ActionReceiver actionReceiver = (ActionReceiver) entry.getValue();
             String str = receiverProperties.action;
             BroadcastDispatcherLogger.Companion.getClass();
-            String flagToString = BroadcastDispatcherLogger.Companion.flagToString(receiverProperties.flags);
-            String str2 = "):";
-            String str3 = receiverProperties.permission;
-            if (str3 != null) {
-                str2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m(":", str3, "):");
+            String strFlagToString = BroadcastDispatcherLogger.Companion.flagToString(receiverProperties.flags);
+            String strM = "):";
+            String str2 = receiverProperties.permission;
+            if (str2 != null) {
+                strM = ContentInViewNode$Request$$ExternalSyntheticOutline0.m(":", str2, "):");
             }
-            printWriter.println(MotionLayout$$ExternalSyntheticOutline0.m("(", str, ": ", flagToString, str2));
+            printWriter.println(MotionLayout$$ExternalSyntheticOutline0.m("(", str, ": ", strFlagToString, strM));
             actionReceiver.dump(printWriter, strArr);
         }
         if (z) {
@@ -215,9 +213,9 @@ public class UserBroadcastDispatcher implements Dumpable {
     }
 
     public final boolean isReceiverReferenceHeld$frameworks__base__packages__SystemUI__android_common__SystemUI_core(BroadcastReceiver broadcastReceiver) {
-        Collection values = this.actionsToActionsReceivers.values();
-        if (!values.isEmpty()) {
-            Iterator it = values.iterator();
+        Collection collectionValues = this.actionsToActionsReceivers.values();
+        if (!collectionValues.isEmpty()) {
+            Iterator it = collectionValues.iterator();
             while (it.hasNext()) {
                 ArraySet arraySet = ((ActionReceiver) it.next()).receiverDatas;
                 if (arraySet == null || !arraySet.isEmpty()) {
@@ -251,7 +249,7 @@ public class UserBroadcastDispatcher implements Dumpable {
                         }
                     }
                     if (z && actionReceiver.receiverDatas.isEmpty() && actionReceiver.registered) {
-                        actionReceiver.unregisterAction.mo779invoke(actionReceiver);
+                        actionReceiver.unregisterAction.mo781invoke(actionReceiver);
                         actionReceiver.registered = false;
                         actionReceiver.activeCategories.clear();
                     }
@@ -261,15 +259,15 @@ public class UserBroadcastDispatcher implements Dumpable {
         this.receiverToActions.remove(broadcastReceiver);
         BroadcastDispatcherLogger broadcastDispatcherLogger = this.logger;
         broadcastDispatcherLogger.getClass();
-        String broadcastReceiver2 = broadcastReceiver.toString();
+        String string = broadcastReceiver.toString();
         LogLevel logLevel = LogLevel.INFO;
         BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda0 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = broadcastDispatcherLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = this.userId;
-        logMessageImpl.str1 = broadcastReceiver2;
-        logBuffer.commit(obtain);
+        logMessageImpl.str1 = string;
+        logBuffer.commit(logMessageObtain);
     }
 
     public static /* synthetic */ void getActionsToActionsReceivers$frameworks__base__packages__SystemUI__android_common__SystemUI_core$annotations() {

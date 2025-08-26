@@ -103,16 +103,16 @@ public class ParsedIntentInfoImpl implements ParsedIntentInfo, Parcelable {
 
     protected ParsedIntentInfoImpl(Parcel parcel) {
         this.mIntentFilter = new IntentFilter();
-        byte readByte = parcel.readByte();
-        boolean z = (readByte & 1) != 0;
-        int readInt = parcel.readInt();
-        CharSequence readCharSequence = (readByte & 4) == 0 ? null : parcel.readCharSequence();
-        int readInt2 = parcel.readInt();
+        byte b = parcel.readByte();
+        boolean z = (b & 1) != 0;
+        int i = parcel.readInt();
+        CharSequence charSequence = (b & 4) == 0 ? null : parcel.readCharSequence();
+        int i2 = parcel.readInt();
         IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
         this.mHasDefault = z;
-        this.mLabelRes = readInt;
-        this.mNonLocalizedLabel = readCharSequence;
-        this.mIcon = readInt2;
+        this.mLabelRes = i;
+        this.mNonLocalizedLabel = charSequence;
+        this.mIcon = i2;
         this.mIntentFilter = intentFilter;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) intentFilter);
     }

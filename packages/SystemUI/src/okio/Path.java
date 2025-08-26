@@ -6,14 +6,12 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Path implements Comparable {
     public static final Companion Companion = new Companion(null);
     public static final String DIRECTORY_SEPARATOR = File.separator;
     public final ByteString bytes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,20 +53,20 @@ public final class Path implements Comparable {
 
     public final List getSegmentsBytes() {
         ArrayList arrayList = new ArrayList();
-        int access$rootLength = okio.internal.Path.access$rootLength(this);
-        if (access$rootLength == -1) {
-            access$rootLength = 0;
-        } else if (access$rootLength < this.bytes.getSize$external__okio__android_common__okio_lib() && this.bytes.internalGet$external__okio__android_common__okio_lib(access$rootLength) == 92) {
-            access$rootLength++;
+        int iAccess$rootLength = okio.internal.Path.access$rootLength(this);
+        if (iAccess$rootLength == -1) {
+            iAccess$rootLength = 0;
+        } else if (iAccess$rootLength < this.bytes.getSize$external__okio__android_common__okio_lib() && this.bytes.internalGet$external__okio__android_common__okio_lib(iAccess$rootLength) == 92) {
+            iAccess$rootLength++;
         }
         int size$external__okio__android_common__okio_lib = this.bytes.getSize$external__okio__android_common__okio_lib();
-        int i = access$rootLength;
-        while (access$rootLength < size$external__okio__android_common__okio_lib) {
-            if (this.bytes.internalGet$external__okio__android_common__okio_lib(access$rootLength) == 47 || this.bytes.internalGet$external__okio__android_common__okio_lib(access$rootLength) == 92) {
-                arrayList.add(this.bytes.substring(i, access$rootLength));
-                i = access$rootLength + 1;
+        int i = iAccess$rootLength;
+        while (iAccess$rootLength < size$external__okio__android_common__okio_lib) {
+            if (this.bytes.internalGet$external__okio__android_common__okio_lib(iAccess$rootLength) == 47 || this.bytes.internalGet$external__okio__android_common__okio_lib(iAccess$rootLength) == 92) {
+                arrayList.add(this.bytes.substring(i, iAccess$rootLength));
+                i = iAccess$rootLength + 1;
             }
-            access$rootLength++;
+            iAccess$rootLength++;
         }
         if (i < this.bytes.getSize$external__okio__android_common__okio_lib()) {
             ByteString byteString = this.bytes;
@@ -83,11 +81,11 @@ public final class Path implements Comparable {
 
     public final String name() {
         ByteString byteString = okio.internal.Path.SLASH;
-        int lastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, okio.internal.Path.SLASH);
-        if (lastIndexOf$default == -1) {
-            lastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, okio.internal.Path.BACKSLASH);
+        int iLastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, okio.internal.Path.SLASH);
+        if (iLastIndexOf$default == -1) {
+            iLastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, okio.internal.Path.BACKSLASH);
         }
-        return (lastIndexOf$default != -1 ? ByteString.substring$default(this.bytes, lastIndexOf$default + 1, 0, 2) : (volumeLetter() == null || this.bytes.getSize$external__okio__android_common__okio_lib() != 2) ? this.bytes : ByteString.EMPTY).utf8();
+        return (iLastIndexOf$default != -1 ? ByteString.substring$default(this.bytes, iLastIndexOf$default + 1, 0, 2) : (volumeLetter() == null || this.bytes.getSize$external__okio__android_common__okio_lib() != 2) ? this.bytes : ByteString.EMPTY).utf8();
     }
 
     public final Path parent() {
@@ -121,25 +119,25 @@ public final class Path implements Comparable {
                 return null;
             }
         }
-        int lastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, byteString4);
-        if (lastIndexOf$default == -1) {
-            lastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, byteString6);
+        int iLastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, byteString4);
+        if (iLastIndexOf$default == -1) {
+            iLastIndexOf$default = ByteString.lastIndexOf$default(this.bytes, byteString6);
         }
-        if (lastIndexOf$default == 2 && volumeLetter() != null) {
+        if (iLastIndexOf$default == 2 && volumeLetter() != null) {
             if (this.bytes.getSize$external__okio__android_common__okio_lib() == 3) {
                 return null;
             }
             return new Path(ByteString.substring$default(this.bytes, 0, 3, 1));
         }
-        if (lastIndexOf$default == 1) {
+        if (iLastIndexOf$default == 1) {
             ByteString byteString11 = this.bytes;
             byteString11.getClass();
             if (byteString11.rangeEquals(0, byteString6, byteString6.getSize$external__okio__android_common__okio_lib())) {
                 return null;
             }
         }
-        if (lastIndexOf$default != -1 || volumeLetter() == null) {
-            return lastIndexOf$default == -1 ? new Path(byteString2) : lastIndexOf$default == 0 ? new Path(ByteString.substring$default(this.bytes, 0, 1, 1)) : new Path(ByteString.substring$default(this.bytes, 0, lastIndexOf$default, 1));
+        if (iLastIndexOf$default != -1 || volumeLetter() == null) {
+            return iLastIndexOf$default == -1 ? new Path(byteString2) : iLastIndexOf$default == 0 ? new Path(ByteString.substring$default(this.bytes, 0, 1, 1)) : new Path(ByteString.substring$default(this.bytes, 0, iLastIndexOf$default, 1));
         }
         if (this.bytes.getSize$external__okio__android_common__okio_lib() == 2) {
             return null;
@@ -148,21 +146,21 @@ public final class Path implements Comparable {
     }
 
     public final Path relativeTo(Path path) {
-        int access$rootLength = okio.internal.Path.access$rootLength(this);
-        Path path2 = access$rootLength == -1 ? null : new Path(this.bytes.substring(0, access$rootLength));
+        int iAccess$rootLength = okio.internal.Path.access$rootLength(this);
+        Path path2 = iAccess$rootLength == -1 ? null : new Path(this.bytes.substring(0, iAccess$rootLength));
         path.getClass();
-        int access$rootLength2 = okio.internal.Path.access$rootLength(path);
-        if (!Intrinsics.areEqual(path2, access$rootLength2 != -1 ? new Path(path.bytes.substring(0, access$rootLength2)) : null)) {
+        int iAccess$rootLength2 = okio.internal.Path.access$rootLength(path);
+        if (!Intrinsics.areEqual(path2, iAccess$rootLength2 != -1 ? new Path(path.bytes.substring(0, iAccess$rootLength2)) : null)) {
             throw new IllegalArgumentException(("Paths of different roots cannot be relative to each other: " + this + " and " + path).toString());
         }
         ArrayList arrayList = (ArrayList) getSegmentsBytes();
         ArrayList arrayList2 = (ArrayList) path.getSegmentsBytes();
-        int min = Math.min(arrayList.size(), arrayList2.size());
+        int iMin = Math.min(arrayList.size(), arrayList2.size());
         int i = 0;
-        while (i < min && Intrinsics.areEqual(arrayList.get(i), arrayList2.get(i))) {
+        while (i < iMin && Intrinsics.areEqual(arrayList.get(i), arrayList2.get(i))) {
             i++;
         }
-        if (i == min && this.bytes.getSize$external__okio__android_common__okio_lib() == path.bytes.getSize$external__okio__android_common__okio_lib()) {
+        if (i == iMin && this.bytes.getSize$external__okio__android_common__okio_lib() == path.bytes.getSize$external__okio__android_common__okio_lib()) {
             return Companion.get$default(Companion, ".");
         }
         if (arrayList2.subList(i, arrayList2.size()).indexOf(okio.internal.Path.DOT_DOT) != -1) {
@@ -208,10 +206,10 @@ public final class Path implements Comparable {
         if (ByteString.indexOf$default(this.bytes, okio.internal.Path.SLASH) != -1 || this.bytes.getSize$external__okio__android_common__okio_lib() < 2 || this.bytes.internalGet$external__okio__android_common__okio_lib(1) != 58) {
             return null;
         }
-        char internalGet$external__okio__android_common__okio_lib = (char) this.bytes.internalGet$external__okio__android_common__okio_lib(0);
-        if (('a' > internalGet$external__okio__android_common__okio_lib || internalGet$external__okio__android_common__okio_lib >= '{') && ('A' > internalGet$external__okio__android_common__okio_lib || internalGet$external__okio__android_common__okio_lib >= '[')) {
+        char cInternalGet$external__okio__android_common__okio_lib = (char) this.bytes.internalGet$external__okio__android_common__okio_lib(0);
+        if (('a' > cInternalGet$external__okio__android_common__okio_lib || cInternalGet$external__okio__android_common__okio_lib >= '{') && ('A' > cInternalGet$external__okio__android_common__okio_lib || cInternalGet$external__okio__android_common__okio_lib >= '[')) {
             return null;
         }
-        return Character.valueOf(internalGet$external__okio__android_common__okio_lib);
+        return Character.valueOf(cInternalGet$external__okio__android_common__okio_lib);
     }
 }

@@ -11,6 +11,7 @@ import android.util.Slog;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
+import com.android.systemui.Dependency;
 import com.android.systemui.PowerUiRune;
 import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
@@ -21,7 +22,6 @@ import com.android.systemui.power.utils.SettingsUtils;
 import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ChargingNotification extends PowerUiNotification {
     public int mBatteryLevel;
@@ -44,15 +44,15 @@ public class ChargingNotification extends PowerUiNotification {
                     Slog.d("PowerUi.ChargingNotification", "First charge has been completed.");
                     SharedPreferences sharedPreferences3 = this.mSharedPref;
                     if (sharedPreferences3 != null) {
-                        SharedPreferences.Editor edit = sharedPreferences3.edit();
-                        edit.putBoolean("key_first_charge", false);
-                        edit.commit();
+                        SharedPreferences.Editor editorEdit = sharedPreferences3.edit();
+                        editorEdit.putBoolean("key_first_charge", false);
+                        editorEdit.commit();
                     }
                     SharedPreferences sharedPreferences4 = this.mSharedPref;
                     if (sharedPreferences4 != null) {
-                        SharedPreferences.Editor edit2 = sharedPreferences4.edit();
-                        edit2.putBoolean("key_first_charge_content_added", false);
-                        edit2.commit();
+                        SharedPreferences.Editor editorEdit2 = sharedPreferences4.edit();
+                        editorEdit2.putBoolean("key_first_charge_content_added", false);
+                        editorEdit2.commit();
                     }
                 }
             }
@@ -65,65 +65,67 @@ public class ChargingNotification extends PowerUiNotification {
         bundle.putString("android.substName", this.mContext.getString(R.string.charging_notice_app_name));
         String str = NotificationChannels.CHARGING;
         String title = getTitle();
-        if (this.mChargingType == 12) {
-            title = this.mContext.getString(R.string.charging_notice_after_charging);
-        }
-        long j = this.mChargingTime;
-        if (j > 0) {
-            title = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(title, " ", DateTimeUtils.getFormattedTime(this.mContext, j));
+        if (!((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantMinimized()) {
+            if (this.mChargingType == 12) {
+                title = this.mContext.getString(R.string.charging_notice_after_charging);
+            }
+            long j = this.mChargingTime;
+            if (j > 0) {
+                title = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(title, " ", DateTimeUtils.getFormattedTime(this.mContext, j));
+            }
         }
         return getCommonBuilder(str, title, getContentText()).setSmallIcon(R.drawable.ic_charging_noti).setGroup("CHARGING").setOnlyAlertOnce(true).setDeleteIntent(PowerUtils.pendingBroadcast(this.mContext, "com.samsung.android.systemui.action.DELETED_CHARGING_NOTI")).setContentIntent(PowerUtils.pendingBroadcast(this.mContext, "PNW.batteryInfo")).setOngoing(true).addExtras(bundle).setPriority(-2).setCategory("sys");
     }
 
     public final String getContentText() {
-        String sb;
+        String string;
         int i = this.mChargingType;
-        String m = i == 8 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.mContext.getString(R.string.battery_slow_charging_text), "\n\n") : i == 9 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.mContext.getString(R.string.battery_not_fully_connected_charging_popup_text_connection), "\n\n") : "";
+        String strM = i == 8 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.mContext.getString(R.string.battery_slow_charging_text), "\n\n") : i == 9 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.mContext.getString(R.string.battery_not_fully_connected_charging_popup_text_connection), "\n\n") : "";
         long j = this.mChargingTime;
         if (j > 0) {
             String formattedTime = DateTimeUtils.getFormattedTime(this.mContext, j);
-            StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m2.append(this.mContext.getString(R.string.used_percentage, String.format("%d", Integer.valueOf(this.mBatteryLevel))));
-            sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2.toString(), " ", formattedTime);
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM.append(this.mContext.getString(R.string.used_percentage, String.format("%d", Integer.valueOf(this.mBatteryLevel))));
+            string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM.toString(), " ", formattedTime);
         } else {
-            StringBuilder m3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m3.append(this.mContext.getString(R.string.used_percentage, String.format("%d", Integer.valueOf(this.mBatteryLevel))));
-            sb = m3.toString();
+            StringBuilder sbM2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM2.append(this.mContext.getString(R.string.used_percentage, String.format("%d", Integer.valueOf(this.mBatteryLevel))));
+            string = sbM2.toString();
         }
         if (BatteryProtectionUtils.isMaximumProtectionEnabled(this.mContext)) {
             if (!PowerUiRune.BATTERY_PROTECTION) {
-                sb = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.protect_battery_notification_text, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, "\n"));
+                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.protect_battery_notification_text, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n"));
             } else if (BatteryProtectionUtils.getProtectBatteryValue(this.mContext) == 1) {
-                StringBuilder m4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, "\n");
+                StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n");
                 Context context = this.mContext;
-                m4.append(context.getString(R.string.maximum_protection_notification_text, Integer.valueOf(SettingsUtils.globalGetInt(context, "battery_protection_threshold", Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE))));
-                sb = m4.toString();
+                sbM3.append(context.getString(R.string.maximum_protection_notification_text, Integer.valueOf(SettingsUtils.globalGetInt(context, "battery_protection_threshold", Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE))));
+                string = sbM3.toString();
             } else {
-                StringBuilder m5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, "\n");
-                m5.append(this.mContext.getString(R.string.maximum_protection_notification_text, Integer.valueOf(Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE)));
-                sb = m5.toString();
+                StringBuilder sbM4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n");
+                sbM4.append(this.mContext.getString(R.string.maximum_protection_notification_text, Integer.valueOf(Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE)));
+                string = sbM4.toString();
             }
         } else if (PowerUiRune.BATTERY_PROTECTION) {
             SharedPreferences sharedPreferences = this.mSharedPref;
             if (sharedPreferences != null ? sharedPreferences.getBoolean("key_first_charge", true) : false) {
                 if (Settings.Secure.getIntForUser(this.mContext.getContentResolver(), SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0, 0) != 0) {
-                    StringBuilder m6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, "\n");
-                    m6.append(this.mContext.getString(R.string.recommend_battery_protection_first_charge, Integer.valueOf(Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE)));
-                    sb = m6.toString();
+                    StringBuilder sbM5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n");
+                    sbM5.append(this.mContext.getString(R.string.recommend_battery_protection_first_charge, Integer.valueOf(Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE)));
+                    string = sbM5.toString();
                     SharedPreferences sharedPreferences2 = this.mSharedPref;
                     if (sharedPreferences2 != null) {
-                        SharedPreferences.Editor edit = sharedPreferences2.edit();
-                        edit.putBoolean("key_first_charge_content_added", true);
-                        edit.commit();
+                        SharedPreferences.Editor editorEdit = sharedPreferences2.edit();
+                        editorEdit.putBoolean("key_first_charge_content_added", true);
+                        editorEdit.commit();
                     }
                 }
             }
         }
         int i2 = this.mChargingType;
         if (i2 == 6 || i2 == 7 || i2 == 10) {
-            return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.wireless_charging_use_more_energy, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, "\n"));
+            return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.wireless_charging_use_more_energy, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n"));
         }
-        return sb;
+        return string;
     }
 
     public final String getTitle() {
@@ -162,63 +164,24 @@ public class ChargingNotification extends PowerUiNotification {
         this.mSharedPref = this.mContext.getSharedPreferences("charging_shared_pref", 0);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0034, code lost:
-    
-        if (com.android.systemui.power.utils.BatteryProtectionUtils.isMaximumProtectionEnabled(r5.mContext) == false) goto L22;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0036  */
     @Override // com.android.systemui.power.notification.PowerUiNotification
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void showNotification() {
-        /*
-            r5 = this;
-            android.app.Notification$Builder r0 = r5.getBuilder()
-            long r1 = r5.mChargingTime
-            r3 = 0
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 > 0) goto L36
-            int r1 = r5.mChargingType
-            r2 = 8
-            if (r1 == r2) goto L36
-            r2 = 9
-            if (r1 == r2) goto L36
-            r2 = 6
-            if (r1 == r2) goto L36
-            r2 = 7
-            if (r1 == r2) goto L36
-            r2 = 10
-            if (r1 != r2) goto L21
-            goto L36
-        L21:
-            android.content.SharedPreferences r1 = r5.mSharedPref
-            r2 = 0
-            if (r1 == 0) goto L2c
-            java.lang.String r3 = "key_first_charge_content_added"
-            boolean r2 = r1.getBoolean(r3, r2)
-        L2c:
-            if (r2 != 0) goto L36
-            android.content.Context r1 = r5.mContext
-            boolean r1 = com.android.systemui.power.utils.BatteryProtectionUtils.isMaximumProtectionEnabled(r1)
-            if (r1 == 0) goto L4c
-        L36:
-            android.app.Notification$BigTextStyle r1 = new android.app.Notification$BigTextStyle
-            r1.<init>()
-            java.lang.String r2 = r5.getTitle()
-            r1.setBigContentTitle(r2)
-            java.lang.String r2 = r5.getContentText()
-            r1.bigText(r2)
-            r0.setStyle(r1)
-        L4c:
-            android.app.Notification r0 = r0.build()
-            android.app.NotificationManager r5 = r5.mNotificationManager
-            android.os.UserHandle r1 = android.os.UserHandle.ALL
-            java.lang.String r2 = "charging_state"
-            r3 = 2131364000(0x7f0a08a0, float:1.8347825E38)
-            r5.notifyAsUser(r2, r3, r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.power.notification.ChargingNotification.showNotification():void");
+        int i;
+        Notification.Builder builder = getBuilder();
+        if (this.mChargingTime > 0 || (i = this.mChargingType) == 8 || i == 9 || i == 6 || i == 7 || i == 10) {
+            Notification.BigTextStyle bigTextStyle = new Notification.BigTextStyle();
+            bigTextStyle.setBigContentTitle(getTitle());
+            bigTextStyle.bigText(getContentText());
+            builder.setStyle(bigTextStyle);
+        } else {
+            SharedPreferences sharedPreferences = this.mSharedPref;
+            if ((sharedPreferences != null ? sharedPreferences.getBoolean("key_first_charge_content_added", false) : false) || BatteryProtectionUtils.isMaximumProtectionEnabled(this.mContext)) {
+            }
+        }
+        this.mNotificationManager.notifyAsUser("charging_state", R.id.notification_power, builder.build(), UserHandle.ALL);
     }
 }

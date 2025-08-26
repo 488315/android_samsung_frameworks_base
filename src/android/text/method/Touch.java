@@ -13,43 +13,43 @@ public class Touch {
     }
 
     public static void scrollTo(TextView textView, Layout layout, int i, int i2) {
+        int iMax;
         int i3;
-        int i4;
         int width = textView.getWidth() - (textView.getTotalPaddingLeft() + textView.getTotalPaddingRight());
         int lineForVertical = layout.getLineForVertical(i2);
         Layout.Alignment paragraphAlignment = layout.getParagraphAlignment(lineForVertical);
-        int i5 = 0;
+        int iMax2 = 0;
         boolean z = layout.getParagraphDirection(lineForVertical) > 0;
         if (textView.getHorizontallyScrolling()) {
             int lineForVertical2 = layout.getLineForVertical((textView.getHeight() + i2) - (textView.getTotalPaddingTop() + textView.getTotalPaddingBottom()));
-            i3 = 0;
-            i5 = Integer.MAX_VALUE;
+            iMax = 0;
+            iMax2 = Integer.MAX_VALUE;
             while (lineForVertical <= lineForVertical2) {
-                i5 = (int) Math.min(i5, layout.getLineLeft(lineForVertical));
-                i3 = (int) Math.max(i3, layout.getLineRight(lineForVertical));
+                iMax2 = (int) Math.min(iMax2, layout.getLineLeft(lineForVertical));
+                iMax = (int) Math.max(iMax, layout.getLineRight(lineForVertical));
                 lineForVertical++;
             }
         } else {
-            i3 = width;
+            iMax = width;
         }
-        int i6 = i3 - i5;
-        if (i6 < width) {
+        int i4 = iMax - iMax2;
+        if (i4 < width) {
             if (paragraphAlignment == Layout.Alignment.ALIGN_CENTER) {
-                i4 = (width - i6) / 2;
+                i3 = (width - i4) / 2;
             } else if ((z && paragraphAlignment == Layout.Alignment.ALIGN_OPPOSITE) || ((!z && paragraphAlignment == Layout.Alignment.ALIGN_NORMAL) || paragraphAlignment == Layout.Alignment.ALIGN_RIGHT)) {
-                i4 = width - i6;
+                i3 = width - i4;
             }
-            i5 -= i4;
+            iMax2 -= i3;
         } else {
-            i5 = Math.max(Math.min(i, i3 - width), i5);
+            iMax2 = Math.max(Math.min(i, iMax - width), iMax2);
         }
-        textView.scrollTo(i5, i2);
+        textView.scrollTo(iMax2, i2);
     }
 
     public static boolean onTouchEvent(TextView textView, Spannable spannable, MotionEvent motionEvent) {
         float x;
         float y;
-        float f;
+        float y2;
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
             for (Object obj : (DragState[]) spannable.getSpans(0, spannable.length(), DragState.class)) {
@@ -79,23 +79,23 @@ public class Touch {
                     if ((motionEvent.getMetaState() & 1) != 0 || MetaKeyKeyListener.getMetaState(spannable, 1) == 1 || MetaKeyKeyListener.getMetaState(spannable, 2048) != 0) {
                         x = motionEvent.getX() - dragStateArr2[0].mX;
                         y = motionEvent.getY();
-                        f = dragStateArr2[0].mY;
+                        y2 = dragStateArr2[0].mY;
                     } else {
                         x = dragStateArr2[0].mX - motionEvent.getX();
                         y = dragStateArr2[0].mY;
-                        f = motionEvent.getY();
+                        y2 = motionEvent.getY();
                     }
-                    float f2 = y - f;
+                    float f = y - y2;
                     dragStateArr2[0].mX = motionEvent.getX();
                     dragStateArr2[0].mY = motionEvent.getY();
                     int scrollX = textView.getScrollX() + ((int) x);
-                    int scrollY = textView.getScrollY() + ((int) f2);
+                    int scrollY = textView.getScrollY() + ((int) f);
                     int totalPaddingTop = textView.getTotalPaddingTop() + textView.getTotalPaddingBottom();
                     Layout layout = textView.getLayout();
-                    int max = Math.max(Math.min(scrollY, layout.getHeight() - (textView.getHeight() - totalPaddingTop)), 0);
+                    int iMax = Math.max(Math.min(scrollY, layout.getHeight() - (textView.getHeight() - totalPaddingTop)), 0);
                     int scrollX2 = textView.getScrollX();
                     int scrollY2 = textView.getScrollY();
-                    scrollTo(textView, layout, scrollX, max);
+                    scrollTo(textView, layout, scrollX, iMax);
                     if (scrollX2 != textView.getScrollX() || scrollY2 != textView.getScrollY()) {
                         textView.cancelLongPress();
                     }

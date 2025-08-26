@@ -33,9 +33,9 @@ public final class Message implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Message createFromParcel(Parcel parcel) {
-            Message obtain = Message.obtain();
-            obtain.readFromParcel(parcel);
-            return obtain;
+            Message messageObtain = Message.obtain();
+            messageObtain.readFromParcel(parcel);
+            return messageObtain;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -68,67 +68,67 @@ public final class Message implements Parcelable {
     }
 
     public static Message obtain(Message message) {
-        Message obtain = obtain();
-        obtain.what = message.what;
-        obtain.arg1 = message.arg1;
-        obtain.arg2 = message.arg2;
-        obtain.obj = message.obj;
-        obtain.replyTo = message.replyTo;
-        obtain.sendingUid = message.sendingUid;
-        obtain.workSourceUid = message.workSourceUid;
+        Message messageObtain = obtain();
+        messageObtain.what = message.what;
+        messageObtain.arg1 = message.arg1;
+        messageObtain.arg2 = message.arg2;
+        messageObtain.obj = message.obj;
+        messageObtain.replyTo = message.replyTo;
+        messageObtain.sendingUid = message.sendingUid;
+        messageObtain.workSourceUid = message.workSourceUid;
         if (message.data != null) {
-            obtain.data = new Bundle(message.data);
+            messageObtain.data = new Bundle(message.data);
         }
-        obtain.target = message.target;
-        obtain.callback = message.callback;
-        return obtain;
+        messageObtain.target = message.target;
+        messageObtain.callback = message.callback;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler, Runnable runnable) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        obtain.callback = runnable;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        messageObtain.callback = runnable;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler, int i) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        obtain.what = i;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        messageObtain.what = i;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler, int i, Object obj) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        obtain.what = i;
-        obtain.obj = obj;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        messageObtain.what = i;
+        messageObtain.obj = obj;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler, int i, int i2, int i3) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        return messageObtain;
     }
 
     public static Message obtain(Handler handler, int i, int i2, int i3, Object obj) {
-        Message obtain = obtain();
-        obtain.target = handler;
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        obtain.obj = obj;
-        return obtain;
+        Message messageObtain = obtain();
+        messageObtain.target = handler;
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        messageObtain.obj = obj;
+        return messageObtain;
     }
 
     public static void updateCheckRecycle(int i) {
@@ -291,7 +291,7 @@ public final class Message implements Parcelable {
     }
 
     void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1112396529665L, this.when);
         if (this.target != null) {
             Runnable runnable = this.callback;
@@ -316,7 +316,7 @@ public final class Message implements Parcelable {
         } else {
             protoOutputStream.write(1120986464264L, this.arg1);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     @Override // android.os.Parcelable

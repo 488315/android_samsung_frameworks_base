@@ -11,9 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import androidx.appcompat.graphics.drawable.DrawableWrapperCompat;
 import androidx.core.widget.ListViewAutoScrollHelper;
+import androidx.reflect.SeslBaseReflector;
+import androidx.reflect.widget.SeslAdapterViewReflector;
 import com.android.systemui.R;
+import java.lang.reflect.Field;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DropDownListView extends ListView {
     public boolean mDrawsInPressedState;
@@ -29,7 +31,6 @@ public class DropDownListView extends ListView {
     public GateKeeperDrawable mSelector;
     public final Rect mSelectorRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GateKeeperDrawable extends DrawableWrapperCompat {
         public boolean mEnabled;
 
@@ -76,7 +77,6 @@ public class DropDownListView extends ListView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResolveHoverRunnable implements Runnable {
         public ResolveHoverRunnable() {
         }
@@ -155,37 +155,37 @@ public class DropDownListView extends ListView {
         if (adapter == null) {
             return listPaddingTop + listPaddingBottom;
         }
-        int i3 = listPaddingTop + listPaddingBottom;
+        int measuredHeight = listPaddingTop + listPaddingBottom;
         if (dividerHeight <= 0 || divider == null) {
             dividerHeight = 0;
         }
         int count = adapter.getCount();
-        int i4 = 0;
+        int i3 = 0;
         View view = null;
-        for (int i5 = 0; i5 < count; i5++) {
-            int itemViewType = adapter.getItemViewType(i5);
-            if (itemViewType != i4) {
+        for (int i4 = 0; i4 < count; i4++) {
+            int itemViewType = adapter.getItemViewType(i4);
+            if (itemViewType != i3) {
                 view = null;
-                i4 = itemViewType;
+                i3 = itemViewType;
             }
-            view = adapter.getView(i5, view, this);
+            view = adapter.getView(i4, view, this);
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             if (layoutParams == null) {
                 layoutParams = generateDefaultLayoutParams();
                 view.setLayoutParams(layoutParams);
             }
-            int i6 = layoutParams.height;
-            view.measure(i, i6 > 0 ? View.MeasureSpec.makeMeasureSpec(i6, 1073741824) : View.MeasureSpec.makeMeasureSpec(0, 0));
+            int i5 = layoutParams.height;
+            view.measure(i, i5 > 0 ? View.MeasureSpec.makeMeasureSpec(i5, 1073741824) : View.MeasureSpec.makeMeasureSpec(0, 0));
             view.forceLayout();
-            if (i5 > 0) {
-                i3 += dividerHeight;
+            if (i4 > 0) {
+                measuredHeight += dividerHeight;
             }
-            i3 += view.getMeasuredHeight();
-            if (i3 >= i2) {
+            measuredHeight += view.getMeasuredHeight();
+            if (measuredHeight >= i2) {
                 return i2;
             }
         }
-        return i3;
+        return measuredHeight;
     }
 
     @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView, android.view.ViewGroup, android.view.View
@@ -194,89 +194,172 @@ public class DropDownListView extends ListView {
         super.onDetachedFromWindow();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x013c  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0152  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0137  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0120 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x0122  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0137  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x013c  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0152  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onForwardedEvent(android.view.MotionEvent r18, int r19) {
-        /*
-            Method dump skipped, instructions count: 352
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.DropDownListView.onForwardedEvent(android.view.MotionEvent, int):boolean");
+    public final boolean onForwardedEvent(MotionEvent motionEvent, int i) {
+        boolean z;
+        View childAt;
+        View childAt2;
+        int actionMasked = motionEvent.getActionMasked();
+        boolean z2 = true;
+        if (actionMasked == 1) {
+            z = false;
+        } else {
+            if (actionMasked != 2) {
+                if (actionMasked != 3) {
+                    z = true;
+                    z2 = false;
+                } else {
+                    z2 = false;
+                    z = false;
+                }
+                if (z || z2) {
+                    this.mDrawsInPressedState = false;
+                    setPressed(false);
+                    drawableStateChanged();
+                    childAt2 = getChildAt(this.mMotionPosition - getFirstVisiblePosition());
+                    if (childAt2 != null) {
+                        childAt2.setPressed(false);
+                    }
+                }
+                if (z) {
+                    ListViewAutoScrollHelper listViewAutoScrollHelper = this.mScrollHelper;
+                    if (listViewAutoScrollHelper != null) {
+                        if (listViewAutoScrollHelper.mEnabled) {
+                            listViewAutoScrollHelper.requestStop();
+                        }
+                        listViewAutoScrollHelper.mEnabled = false;
+                    }
+                    return z;
+                }
+                if (this.mScrollHelper == null) {
+                    this.mScrollHelper = new ListViewAutoScrollHelper(this);
+                }
+                ListViewAutoScrollHelper listViewAutoScrollHelper2 = this.mScrollHelper;
+                boolean z3 = listViewAutoScrollHelper2.mEnabled;
+                listViewAutoScrollHelper2.mEnabled = true;
+                listViewAutoScrollHelper2.onTouch(this, motionEvent);
+                return z;
+            }
+            z = true;
+        }
+        int iFindPointerIndex = motionEvent.findPointerIndex(i);
+        if (iFindPointerIndex >= 0) {
+            int x = (int) motionEvent.getX(iFindPointerIndex);
+            int y = (int) motionEvent.getY(iFindPointerIndex);
+            int iPointToPosition = pointToPosition(x, y);
+            if (iPointToPosition != -1) {
+                View childAt3 = getChildAt(iPointToPosition - getFirstVisiblePosition());
+                float f = x;
+                float f2 = y;
+                this.mDrawsInPressedState = true;
+                drawableHotspotChanged(f, f2);
+                if (!isPressed()) {
+                    setPressed(true);
+                }
+                layoutChildren();
+                int i2 = this.mMotionPosition;
+                if (i2 != -1 && (childAt = getChildAt(i2 - getFirstVisiblePosition())) != null && childAt != childAt3 && childAt.isPressed()) {
+                    childAt.setPressed(false);
+                }
+                this.mMotionPosition = iPointToPosition;
+                childAt3.drawableHotspotChanged(f - childAt3.getLeft(), f2 - childAt3.getTop());
+                if (!childAt3.isPressed()) {
+                    childAt3.setPressed(true);
+                }
+                Drawable selector = getSelector();
+                boolean z4 = (selector == null || iPointToPosition == -1) ? false : true;
+                if (z4) {
+                    selector.setVisible(false, false);
+                }
+                Rect rect = this.mSelectorRect;
+                rect.set(childAt3.getLeft(), childAt3.getTop(), childAt3.getRight(), childAt3.getBottom());
+                rect.left -= this.mSelectionLeftPadding;
+                rect.top -= this.mSelectionTopPadding;
+                rect.right += this.mSelectionRightPadding;
+                rect.bottom += this.mSelectionBottomPadding;
+                boolean zIsSelectedChildViewEnabled = isSelectedChildViewEnabled();
+                if (childAt3.isEnabled() != zIsSelectedChildViewEnabled) {
+                    setSelectedChildViewEnabled(!zIsSelectedChildViewEnabled);
+                    if (iPointToPosition != -1) {
+                        refreshDrawableState();
+                    }
+                }
+                if (z4) {
+                    Rect rect2 = this.mSelectorRect;
+                    float fExactCenterX = rect2.exactCenterX();
+                    float fExactCenterY = rect2.exactCenterY();
+                    selector.setVisible(getVisibility() == 0, false);
+                    selector.setHotspot(fExactCenterX, fExactCenterY);
+                }
+                Drawable selector2 = getSelector();
+                if (selector2 != null && iPointToPosition != -1) {
+                    selector2.setHotspot(f, f2);
+                }
+                GateKeeperDrawable gateKeeperDrawable = this.mSelector;
+                if (gateKeeperDrawable != null) {
+                    gateKeeperDrawable.mEnabled = false;
+                }
+                refreshDrawableState();
+                if (actionMasked == 1) {
+                    performItemClick(childAt3, iPointToPosition, getItemIdAtPosition(iPointToPosition));
+                }
+                z2 = false;
+                z = true;
+            }
+        }
+        if (z) {
+            this.mDrawsInPressedState = false;
+            setPressed(false);
+            drawableStateChanged();
+            childAt2 = getChildAt(this.mMotionPosition - getFirstVisiblePosition());
+            if (childAt2 != null) {
+            }
+        }
+        if (z) {
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0064  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0050  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onHoverEvent(android.view.MotionEvent r5) {
-        /*
-            r4 = this;
-            int r0 = r5.getActionMasked()
-            r1 = 10
-            if (r0 != r1) goto L18
-            androidx.appcompat.widget.DropDownListView$ResolveHoverRunnable r1 = r4.mResolveHoverRunnable
-            if (r1 != 0) goto L18
-            androidx.appcompat.widget.DropDownListView$ResolveHoverRunnable r1 = new androidx.appcompat.widget.DropDownListView$ResolveHoverRunnable
-            r1.<init>()
-            r4.mResolveHoverRunnable = r1
-            androidx.appcompat.widget.DropDownListView r2 = androidx.appcompat.widget.DropDownListView.this
-            r2.post(r1)
-        L18:
-            boolean r1 = super.onHoverEvent(r5)
-            r2 = 9
-            r3 = -1
-            if (r0 == r2) goto L29
-            r2 = 7
-            if (r0 != r2) goto L25
-            goto L29
-        L25:
-            r4.setSelection(r3)
-            return r1
-        L29:
-            float r0 = r5.getX()
-            int r0 = (int) r0
-            float r5 = r5.getY()
-            int r5 = (int) r5
-            int r5 = r4.pointToPosition(r0, r5)
-            java.lang.Class r0 = androidx.reflect.widget.SeslAdapterViewReflector.mClass
-            java.lang.String r2 = "mSelectedPosition"
-            java.lang.reflect.Field r0 = androidx.reflect.SeslBaseReflector.getDeclaredField(r0, r2)
-            if (r0 == 0) goto L50
-            java.lang.Object r0 = androidx.reflect.SeslBaseReflector.get(r0, r4)
-            boolean r2 = r0 instanceof java.lang.Integer
-            if (r2 == 0) goto L50
-            java.lang.Integer r0 = (java.lang.Integer) r0
-            int r0 = r0.intValue()
-            goto L51
-        L50:
-            r0 = r3
-        L51:
-            if (r5 == r3) goto L74
-            if (r5 == r0) goto L74
-            int r0 = r4.getFirstVisiblePosition()
-            int r5 = r5 - r0
-            android.view.View r5 = r4.getChildAt(r5)
-            boolean r5 = r5.isEnabled()
-            if (r5 == 0) goto L71
-            r4.requestFocus()
-            boolean r5 = r4.isHovered()
-            if (r5 != 0) goto L71
-            r5 = 1
-            r4.setHovered(r5)
-        L71:
-            r4.drawableStateChanged()
-        L74:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.DropDownListView.onHoverEvent(android.view.MotionEvent):boolean");
+    public boolean onHoverEvent(MotionEvent motionEvent) {
+        int iIntValue;
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked == 10 && this.mResolveHoverRunnable == null) {
+            ResolveHoverRunnable resolveHoverRunnable = new ResolveHoverRunnable();
+            this.mResolveHoverRunnable = resolveHoverRunnable;
+            DropDownListView.this.post(resolveHoverRunnable);
+        }
+        boolean zOnHoverEvent = super.onHoverEvent(motionEvent);
+        if (actionMasked != 9 && actionMasked != 7) {
+            setSelection(-1);
+            return zOnHoverEvent;
+        }
+        int iPointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY());
+        Field declaredField = SeslBaseReflector.getDeclaredField(SeslAdapterViewReflector.mClass, "mSelectedPosition");
+        if (declaredField != null) {
+            Object obj = SeslBaseReflector.get(declaredField, this);
+            iIntValue = obj instanceof Integer ? ((Integer) obj).intValue() : -1;
+        }
+        if (iPointToPosition != -1 && iPointToPosition != iIntValue) {
+            if (getChildAt(iPointToPosition - getFirstVisiblePosition()).isEnabled()) {
+                requestFocus();
+                if (!isHovered()) {
+                    setHovered(true);
+                }
+            }
+            drawableStateChanged();
+        }
+        return zOnHoverEvent;
     }
 
     @Override // android.widget.AbsListView, android.view.View

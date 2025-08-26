@@ -21,7 +21,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationShelfViewBinder$bindSettingsButton$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationActivityStarter $notificationActivityStarter;
@@ -56,8 +55,8 @@ final class NotificationShelfViewBinder$bindSettingsButton$2 extends SuspendLamb
         final Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder$bindSettingsButton$2$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                StatusBarNotificationActivityStarter statusBarNotificationActivityStarter = (StatusBarNotificationActivityStarter) NotificationActivityStarter.this;
+            public final Object mo781invoke(Object obj2) {
+                StatusBarNotificationActivityStarter statusBarNotificationActivityStarter = (StatusBarNotificationActivityStarter) notificationActivityStarter;
                 statusBarNotificationActivityStarter.getClass();
                 int i = ModesEmptyShadeFix.$r8$clinit;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
@@ -71,7 +70,7 @@ final class NotificationShelfViewBinder$bindSettingsButton$2 extends SuspendLamb
         View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder$sam$android_view_View_OnClickListener$0
             @Override // android.view.View.OnClickListener
             public final /* synthetic */ void onClick(View view) {
-                Function1.this.mo779invoke(view);
+                function1.mo781invoke(view);
             }
         };
         LaunchableTextView launchableTextView = notificationShelfManager.mSettingButton;

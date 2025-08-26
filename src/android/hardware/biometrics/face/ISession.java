@@ -203,9 +203,9 @@ public interface ISession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISession)) {
-                return (ISession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISession)) {
+                return (ISession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -293,48 +293,48 @@ public interface ISession extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    revokeChallenge(readLong);
+                    revokeChallenge(j);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    byte readByte = parcel.readByte();
+                    byte b = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    EnrollmentStageConfig[] enrollmentConfig = getEnrollmentConfig(readByte);
+                    EnrollmentStageConfig[] enrollmentConfig = getEnrollmentConfig(b);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(enrollmentConfig, 1);
                     return true;
                 case 4:
                     HardwareAuthToken hardwareAuthToken = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
-                    byte readByte2 = parcel.readByte();
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte b2 = parcel.readByte();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     NativeHandle nativeHandle = (NativeHandle) parcel.readTypedObject(NativeHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal enroll = enroll(hardwareAuthToken, readByte2, createByteArray, nativeHandle);
+                    ICancellationSignal iCancellationSignalEnroll = enroll(hardwareAuthToken, b2, bArrCreateByteArray, nativeHandle);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(enroll);
+                    parcel2.writeStrongInterface(iCancellationSignalEnroll);
                     return true;
                 case 5:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal authenticate = authenticate(readLong2);
+                    ICancellationSignal iCancellationSignalAuthenticate = authenticate(j2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(authenticate);
+                    parcel2.writeStrongInterface(iCancellationSignalAuthenticate);
                     return true;
                 case 6:
-                    ICancellationSignal detectInteraction = detectInteraction();
+                    ICancellationSignal iCancellationSignalDetectInteraction = detectInteraction();
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(detectInteraction);
+                    parcel2.writeStrongInterface(iCancellationSignalDetectInteraction);
                     return true;
                 case 7:
                     enumerateEnrollments();
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    removeEnrollments(createIntArray);
+                    removeEnrollments(iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -343,10 +343,10 @@ public interface ISession extends IInterface {
                     return true;
                 case 10:
                     HardwareAuthToken hardwareAuthToken2 = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
-                    byte readByte3 = parcel.readByte();
-                    boolean readBoolean = parcel.readBoolean();
+                    byte b3 = parcel.readByte();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setFeature(hardwareAuthToken2, readByte3, readBoolean);
+                    setFeature(hardwareAuthToken2, b3, z);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -368,30 +368,30 @@ public interface ISession extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     OperationContext operationContext = (OperationContext) parcel.readTypedObject(OperationContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal authenticateWithContext = authenticateWithContext(readLong3, operationContext);
+                    ICancellationSignal iCancellationSignalAuthenticateWithContext = authenticateWithContext(j3, operationContext);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(authenticateWithContext);
+                    parcel2.writeStrongInterface(iCancellationSignalAuthenticateWithContext);
                     return true;
                 case 16:
                     HardwareAuthToken hardwareAuthToken4 = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
-                    byte readByte4 = parcel.readByte();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    byte b4 = parcel.readByte();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     NativeHandle nativeHandle2 = (NativeHandle) parcel.readTypedObject(NativeHandle.CREATOR);
                     OperationContext operationContext2 = (OperationContext) parcel.readTypedObject(OperationContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal enrollWithContext = enrollWithContext(hardwareAuthToken4, readByte4, createByteArray2, nativeHandle2, operationContext2);
+                    ICancellationSignal iCancellationSignalEnrollWithContext = enrollWithContext(hardwareAuthToken4, b4, bArrCreateByteArray2, nativeHandle2, operationContext2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(enrollWithContext);
+                    parcel2.writeStrongInterface(iCancellationSignalEnrollWithContext);
                     return true;
                 case 17:
                     OperationContext operationContext3 = (OperationContext) parcel.readTypedObject(OperationContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal detectInteractionWithContext = detectInteractionWithContext(operationContext3);
+                    ICancellationSignal iCancellationSignalDetectInteractionWithContext = detectInteractionWithContext(operationContext3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(detectInteractionWithContext);
+                    parcel2.writeStrongInterface(iCancellationSignalDetectInteractionWithContext);
                     return true;
                 case 18:
                     OperationContext operationContext4 = (OperationContext) parcel.readTypedObject(OperationContext.CREATOR);
@@ -402,9 +402,9 @@ public interface ISession extends IInterface {
                 case 19:
                     FaceEnrollOptions faceEnrollOptions = (FaceEnrollOptions) parcel.readTypedObject(FaceEnrollOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal enrollWithOptions = enrollWithOptions(faceEnrollOptions);
+                    ICancellationSignal iCancellationSignalEnrollWithOptions = enrollWithOptions(faceEnrollOptions);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(enrollWithOptions);
+                    parcel2.writeStrongInterface(iCancellationSignalEnrollWithOptions);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -431,351 +431,351 @@ public interface ISession extends IInterface {
 
             @Override // android.hardware.biometrics.face.ISession
             public void generateChallenge() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method generateChallenge is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void revokeChallenge(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method revokeChallenge is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public EnrollmentStageConfig[] getEnrollmentConfig(byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByte(b);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getEnrollmentConfig is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (EnrollmentStageConfig[]) obtain2.createTypedArray(EnrollmentStageConfig.CREATOR);
+                    parcelObtain2.readException();
+                    return (EnrollmentStageConfig[]) parcelObtain2.createTypedArray(EnrollmentStageConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeByte(b);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(nativeHandle, 0);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(nativeHandle, 0);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enroll is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal authenticate(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method authenticate is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal detectInteraction() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method detectInteraction is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void enumerateEnrollments() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enumerateEnrollments is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void removeEnrollments(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method removeEnrollments is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void getFeatures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFeatures is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void setFeature(HardwareAuthToken hardwareAuthToken, byte b, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeByte(b);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setFeature is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void getAuthenticatorId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getAuthenticatorId is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void invalidateAuthenticatorId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method invalidateAuthenticatorId is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void resetLockout(HardwareAuthToken hardwareAuthToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    if (!this.mRemote.transact(13, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method resetLockout is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(14, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method close is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(operationContext, 0);
-                    if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(operationContext, 0);
+                    if (!this.mRemote.transact(15, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method authenticateWithContext is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle, OperationContext operationContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeByte(b);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(nativeHandle, 0);
-                    obtain.writeTypedObject(operationContext, 0);
-                    if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(nativeHandle, 0);
+                    parcelObtain.writeTypedObject(operationContext, 0);
+                    if (!this.mRemote.transact(16, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enrollWithContext is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal detectInteractionWithContext(OperationContext operationContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(operationContext, 0);
-                    if (!this.mRemote.transact(17, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(operationContext, 0);
+                    if (!this.mRemote.transact(17, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method detectInteractionWithContext is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public void onContextChanged(OperationContext operationContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(operationContext, 0);
-                    if (!this.mRemote.transact(18, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(operationContext, 0);
+                    if (!this.mRemote.transact(18, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method onContextChanged is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public ICancellationSignal enrollWithOptions(FaceEnrollOptions faceEnrollOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(faceEnrollOptions, 0);
-                    if (!this.mRemote.transact(19, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(faceEnrollOptions, 0);
+                    if (!this.mRemote.transact(19, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enrollWithOptions is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.face.ISession
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -784,18 +784,18 @@ public interface ISession extends IInterface {
             @Override // android.hardware.biometrics.face.ISession
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

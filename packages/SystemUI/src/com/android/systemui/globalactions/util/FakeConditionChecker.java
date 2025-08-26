@@ -10,7 +10,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.LogWrapper;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FakeConditionChecker implements ConditionChecker {
     public static final HashMap sConditionMap = new HashMap();
@@ -25,19 +24,19 @@ public class FakeConditionChecker implements ConditionChecker {
         this.mDefaultSystemCondition = conditionChecker;
         this.mLogWrapper = logWrapper;
         if (this.mReceiver == null) {
-            IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_CONDITION", "com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_CONDITION");
+            IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_CONDITION", "com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_CONDITION");
             ?? r0 = new BroadcastReceiver() { // from class: com.android.systemui.globalactions.util.FakeConditionChecker.1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context2, Intent intent) {
                     String action = intent.getAction();
                     String stringExtra = intent.getStringExtra("key");
-                    Boolean valueOf = Boolean.valueOf(intent.getBooleanExtra("enabled", false));
+                    Boolean boolValueOf = Boolean.valueOf(intent.getBooleanExtra("enabled", false));
                     LogWrapper logWrapper2 = FakeConditionChecker.this.mLogWrapper;
-                    StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onReceive: ", action, ",", stringExtra, ",");
-                    m2.append(valueOf);
-                    logWrapper2.v("FakeConditionChecker", m2.toString());
+                    StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onReceive: ", action, ",", stringExtra, ",");
+                    sbM.append(boolValueOf);
+                    logWrapper2.v("FakeConditionChecker", sbM.toString());
                     if ("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_CONDITION".equals(action)) {
-                        FakeConditionChecker.this.updateCondition(stringExtra, valueOf);
+                        FakeConditionChecker.this.updateCondition(stringExtra, boolValueOf);
                     } else if ("com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_CONDITION".equals(action)) {
                         FakeConditionChecker fakeConditionChecker = FakeConditionChecker.this;
                         fakeConditionChecker.getClass();
@@ -47,30 +46,30 @@ public class FakeConditionChecker implements ConditionChecker {
                 }
             };
             this.mReceiver = r0;
-            context.registerReceiver(r0, m, 2);
+            context.registerReceiver(r0, intentFilterM, 2);
             logWrapper.v("FakeConditionChecker", "initialized");
         }
         sInstance = this;
     }
 
     public final boolean isEnabled(Object obj) {
-        String obj2 = obj.toString();
-        HashMap hashMap = sConditionMap;
-        if (!hashMap.containsKey(obj2)) {
+        String string = obj.toString();
+        HashMap map = sConditionMap;
+        if (!map.containsKey(string)) {
             return this.mDefaultSystemCondition.isEnabled(obj);
         }
-        boolean booleanValue = ((Boolean) hashMap.get(obj2)).booleanValue();
-        this.mLogWrapper.v("FakeConditionChecker", "[Fake : " + obj2.toLowerCase() + "] " + booleanValue);
-        return booleanValue;
+        boolean zBooleanValue = ((Boolean) map.get(string)).booleanValue();
+        this.mLogWrapper.v("FakeConditionChecker", "[Fake : " + string.toLowerCase() + "] " + zBooleanValue);
+        return zBooleanValue;
     }
 
     public final void updateCondition(String str, Boolean bool) {
-        HashMap hashMap = sConditionMap;
-        if (hashMap.containsKey(str)) {
-            hashMap.replace(str, bool);
+        HashMap map = sConditionMap;
+        if (map.containsKey(str)) {
+            map.replace(str, bool);
             this.mLogWrapper.v("FakeConditionChecker", "updated");
         } else {
-            hashMap.put(str, bool);
+            map.put(str, bool);
             this.mLogWrapper.v("FakeConditionChecker", "added");
         }
     }

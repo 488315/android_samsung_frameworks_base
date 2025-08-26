@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import com.sec.ims.IImsRegistrationListener;
 import com.sec.ims.volte2.IImsCallEventListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImsStatusService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.openapi.IImsStatusService";
@@ -23,7 +22,6 @@ public interface IImsStatusService extends IInterface {
 
     void unregisterImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImsStatusService {
         static final int TRANSACTION_getCallCount = 5;
         static final int TRANSACTION_registerImsCallEventListener = 3;
@@ -31,7 +29,6 @@ public interface IImsStatusService extends IInterface {
         static final int TRANSACTION_unregisterImsCallEventListener = 4;
         static final int TRANSACTION_unregisterImsRegistrationListener = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImsStatusService {
             private IBinder mRemote;
 
@@ -46,16 +43,16 @@ public interface IImsStatusService extends IInterface {
 
             @Override // com.sec.ims.openapi.IImsStatusService
             public int[] getCallCount() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -65,61 +62,61 @@ public interface IImsStatusService extends IInterface {
 
             @Override // com.sec.ims.openapi.IImsStatusService
             public void registerImsCallEventListener(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IImsStatusService
             public void registerImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IImsStatusService
             public void unregisterImsCallEventListener(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IImsStatusService
             public void unregisterImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsStatusService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -132,8 +129,8 @@ public interface IImsStatusService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsStatusService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImsStatusService)) ? new Proxy(iBinder) : (IImsStatusService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsStatusService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImsStatusService)) ? new Proxy(iBinder) : (IImsStatusService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -146,24 +143,24 @@ public interface IImsStatusService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IImsRegistrationListener asInterface = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                IImsRegistrationListener iImsRegistrationListenerAsInterface = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerImsRegistrationListener(asInterface);
+                registerImsRegistrationListener(iImsRegistrationListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IImsRegistrationListener asInterface2 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                IImsRegistrationListener iImsRegistrationListenerAsInterface2 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterImsRegistrationListener(asInterface2);
+                unregisterImsRegistrationListener(iImsRegistrationListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IImsCallEventListener asInterface3 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                IImsCallEventListener iImsCallEventListenerAsInterface = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerImsCallEventListener(asInterface3);
+                registerImsCallEventListener(iImsCallEventListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                IImsCallEventListener asInterface4 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                IImsCallEventListener iImsCallEventListenerAsInterface2 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterImsCallEventListener(asInterface4);
+                unregisterImsCallEventListener(iImsCallEventListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 if (i != 5) {
@@ -182,7 +179,6 @@ public interface IImsStatusService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImsStatusService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

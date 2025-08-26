@@ -44,9 +44,9 @@ public interface IProximityUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProximityUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProximityUpdateCallback)) {
-                return (IProximityUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProximityUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProximityUpdateCallback)) {
+                return (IProximityUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IProximityUpdateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                double readDouble = parcel.readDouble();
+                double d = parcel.readDouble();
                 parcel.enforceNoDataAvail();
-                onProximityUpdate(readDouble);
+                onProximityUpdate(d);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IProximityUpdateCallback extends IInterface {
 
             @Override // android.service.attention.IProximityUpdateCallback
             public void onProximityUpdate(double d) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IProximityUpdateCallback.DESCRIPTOR);
-                    obtain.writeDouble(d);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IProximityUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeDouble(d);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

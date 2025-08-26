@@ -24,25 +24,33 @@ import com.android.systemui.statusbar.phone.NotificationIconAreaController;
 import com.android.systemui.statusbar.phone.PhoneStatusBarView;
 import com.android.systemui.statusbar.phone.TouchInterceptFrameLayout;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
+import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController;
 import com.android.systemui.statusbar.phone.ongoingactivity.animation.ViewPropertyCapture;
 import com.android.systemui.statusbar.phone.ongoingactivity.animation.VisibilityTransition;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.Boxing;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Dispatchers;
+import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobImpl;
 import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.android.HandlerContext;
@@ -50,10 +58,10 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.internal.Symbol;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
+import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ChipAnimationController {
     public static final PathInterpolator AlPHA_INTERPOLATOR;
@@ -74,13 +82,325 @@ public final class ChipAnimationController {
     public final TouchInterceptFrameLayout touchInterceptActivityChip;
     public final TouchInterceptFrameLayout touchInterceptCallChip;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateChipHide$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $animate;
+        final /* synthetic */ int $state;
+        final /* synthetic */ View $v;
+        int I$0;
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        boolean Z$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(View view, int i, boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$v = view;
+            this.$state = i;
+            this.$animate = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ChipAnimationController.this.new AnonymousClass1(this.$v, this.$state, this.$animate, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Can't wrap try/catch for region: R(7:0|2|(5:(1:(1:(7:6|53|7|(5:33|(1:35)(1:36)|37|38|39)|40|41|42)(2:11|12))(1:13))(3:14|(1:17)|22)|54|20|(5:23|(7:25|30|33|(0)(0)|37|38|39)|40|41|42)|22)|18|51|19|(1:(0))) */
+        /* JADX WARN: Code restructure failed: missing block: B:46:0x00f1, code lost:
+        
+            r15 = r14;
+         */
+        /* JADX WARN: Code restructure failed: missing block: B:47:0x00f3, code lost:
+        
+            r14 = move-exception;
+         */
+        /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:35:0x00d3 A[Catch: all -> 0x0024, TryCatch #1 {all -> 0x0024, blocks: (B:7:0x001f, B:25:0x00ba, B:27:0x00be, B:30:0x00c3, B:33:0x00ca, B:35:0x00d3, B:37:0x00da, B:36:0x00d7, B:40:0x00e2), top: B:53:0x001f }] */
+        /* JADX WARN: Removed duplicated region for block: B:36:0x00d7 A[Catch: all -> 0x0024, TryCatch #1 {all -> 0x0024, blocks: (B:7:0x001f, B:25:0x00ba, B:27:0x00be, B:30:0x00c3, B:33:0x00ca, B:35:0x00d3, B:37:0x00da, B:36:0x00d7, B:40:0x00e2), top: B:53:0x001f }] */
+        /* JADX WARN: Type inference failed for: r9v3, types: [kotlinx.coroutines.sync.Mutex] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            ChipAnimationController chipAnimationController;
+            MutexImpl mutexImpl;
+            boolean z;
+            View view;
+            int i;
+            Throwable th;
+            Mutex mutex;
+            String strViewInfo;
+            ChipAnimationController chipAnimationController2;
+            int i2;
+            View view2;
+            boolean z2;
+            TouchInterceptFrameLayout touchInterceptFrameLayout;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i3 = this.label;
+            try {
+                if (i3 == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    chipAnimationController = ChipAnimationController.this;
+                    mutexImpl = chipAnimationController.animationMutex;
+                    View view3 = this.$v;
+                    int i4 = this.$state;
+                    z = this.$animate;
+                    this.L$0 = mutexImpl;
+                    this.L$1 = chipAnimationController;
+                    this.L$2 = view3;
+                    this.I$0 = i4;
+                    this.Z$0 = z;
+                    this.label = 1;
+                    if (mutexImpl.lock(this) != coroutineSingletons) {
+                        view = view3;
+                        i = i4;
+                    }
+                    return coroutineSingletons;
+                }
+                if (i3 != 1) {
+                    if (i3 != 2) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    z2 = this.Z$0;
+                    i2 = this.I$0;
+                    view2 = (View) this.L$2;
+                    chipAnimationController2 = (ChipAnimationController) this.L$1;
+                    mutex = (Mutex) this.L$0;
+                    try {
+                        ResultKt.throwOnFailure(obj);
+                        if (z2 && (((touchInterceptFrameLayout = chipAnimationController2.touchInterceptCallChip) == null || !touchInterceptFrameLayout.isTouchInProgress) && view2.getVisibility() != i2)) {
+                            if (view2.equals(chipAnimationController2.onGoingCallChip)) {
+                                ChipAnimationController.access$handleOnGoingActivityChipAnimation(chipAnimationController2, false);
+                            } else {
+                                ChipAnimationController.access$handleOnGoingCallChipAnimation(chipAnimationController2, false);
+                            }
+                            Unit unit = Unit.INSTANCE;
+                            mutex.unlock(null);
+                            return Unit.INSTANCE;
+                        }
+                        PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
+                        chipAnimationController2.hideView(view2, i2);
+                        Unit unit2 = Unit.INSTANCE;
+                        mutex.unlock(null);
+                        return unit2;
+                    } catch (Throwable th2) {
+                        th = th2;
+                        mutex.unlock(null);
+                        throw th;
+                    }
+                }
+                boolean z3 = this.Z$0;
+                i = this.I$0;
+                view = (View) this.L$2;
+                ChipAnimationController chipAnimationController3 = (ChipAnimationController) this.L$1;
+                ?? r9 = (Mutex) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                chipAnimationController = chipAnimationController3;
+                z = z3;
+                mutexImpl = r9;
+                Log.i("{ChipAnimationController}", "animateChipHide() view:" + strViewInfo + " state:" + i + " animate:" + z + " visibility:" + view.getVisibility());
+                this.L$0 = mutexImpl;
+                this.L$1 = chipAnimationController;
+                this.L$2 = view;
+                this.I$0 = i;
+                this.Z$0 = z;
+                this.label = 2;
+                if (ChipAnimationController.access$cancelAnimation(chipAnimationController, view, this) != coroutineSingletons) {
+                    chipAnimationController2 = chipAnimationController;
+                    mutex = mutexImpl;
+                    i2 = i;
+                    view2 = view;
+                    z2 = z;
+                    if (z2) {
+                        if (view2.equals(chipAnimationController2.onGoingCallChip)) {
+                        }
+                        Unit unit3 = Unit.INSTANCE;
+                        mutex.unlock(null);
+                        return Unit.INSTANCE;
+                    }
+                    PathInterpolator pathInterpolator2 = ChipAnimationController.AlPHA_INTERPOLATOR;
+                    chipAnimationController2.hideView(view2, i2);
+                    Unit unit22 = Unit.INSTANCE;
+                    mutex.unlock(null);
+                    return unit22;
+                }
+                return coroutineSingletons;
+            } catch (Throwable th3) {
+                th = th3;
+                mutex = mutexImpl;
+                mutex.unlock(null);
+                throw th;
+            }
+            PathInterpolator pathInterpolator3 = ChipAnimationController.AlPHA_INTERPOLATOR;
+            chipAnimationController.getClass();
+            strViewInfo = ChipAnimationController.viewInfo(view);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateChipShow$1, reason: invalid class name and case insensitive filesystem */
+    final class C10971 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $animate;
+        final /* synthetic */ View $v;
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        boolean Z$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C10971(View view, boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$v = view;
+            this.$animate = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ChipAnimationController.this.new C10971(this.$v, this.$animate, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10971) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x00ac A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:7:0x0022, B:22:0x00a4, B:24:0x00ac, B:26:0x00b3, B:29:0x00ba, B:31:0x00c2, B:36:0x00e5, B:32:0x00c6, B:34:0x00ce, B:35:0x00d2, B:39:0x00ed), top: B:50:0x0022 }] */
+        /* JADX WARN: Removed duplicated region for block: B:31:0x00c2 A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:7:0x0022, B:22:0x00a4, B:24:0x00ac, B:26:0x00b3, B:29:0x00ba, B:31:0x00c2, B:36:0x00e5, B:32:0x00c6, B:34:0x00ce, B:35:0x00d2, B:39:0x00ed), top: B:50:0x0022 }] */
+        /* JADX WARN: Removed duplicated region for block: B:32:0x00c6 A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:7:0x0022, B:22:0x00a4, B:24:0x00ac, B:26:0x00b3, B:29:0x00ba, B:31:0x00c2, B:36:0x00e5, B:32:0x00c6, B:34:0x00ce, B:35:0x00d2, B:39:0x00ed), top: B:50:0x0022 }] */
+        /* JADX WARN: Type inference failed for: r10v4, types: [kotlinx.coroutines.sync.Mutex] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            ChipAnimationController chipAnimationController;
+            MutexImpl mutexImpl;
+            View view;
+            boolean z;
+            Throwable th;
+            Mutex mutex;
+            String strViewInfo;
+            View view2;
+            boolean z2;
+            ChipAnimationController chipAnimationController2;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            try {
+                try {
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        chipAnimationController = ChipAnimationController.this;
+                        mutexImpl = chipAnimationController.animationMutex;
+                        view = this.$v;
+                        z = this.$animate;
+                        this.L$0 = mutexImpl;
+                        this.L$1 = chipAnimationController;
+                        this.L$2 = view;
+                        this.Z$0 = z;
+                        this.label = 1;
+                        if (mutexImpl.lock(this) != coroutineSingletons) {
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i != 1) {
+                        if (i != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        z2 = this.Z$0;
+                        view2 = (View) this.L$2;
+                        chipAnimationController2 = (ChipAnimationController) this.L$1;
+                        mutex = (Mutex) this.L$0;
+                        try {
+                            ResultKt.throwOnFailure(obj);
+                            if (Intrinsics.areEqual(chipAnimationController2.hideTransitionView, view2)) {
+                                TransitionManager.endTransitions(chipAnimationController2.statusBar);
+                            }
+                            if (z2 && view2.getVisibility() != 0) {
+                                if (!view2.equals(chipAnimationController2.onGoingCallChip)) {
+                                    ChipAnimationController.access$handleOnGoingCallChipAnimation(chipAnimationController2, true);
+                                } else if (view2.equals(chipAnimationController2.onGoingActivityChip)) {
+                                    ChipAnimationController.access$handleOnGoingActivityChipAnimation(chipAnimationController2, true);
+                                } else {
+                                    Boxing.boxInt(Log.d("{ChipAnimationController}", "animateChipShow() else case v:" + view2));
+                                }
+                                Unit unit = Unit.INSTANCE;
+                                mutex.unlock(null);
+                                return Unit.INSTANCE;
+                            }
+                            chipAnimationController2.showView(view2);
+                            Unit unit2 = Unit.INSTANCE;
+                            mutex.unlock(null);
+                            return unit2;
+                        } catch (Throwable th2) {
+                            th = th2;
+                            mutex.unlock(null);
+                            throw th;
+                        }
+                    }
+                    boolean z3 = this.Z$0;
+                    view = (View) this.L$2;
+                    ChipAnimationController chipAnimationController3 = (ChipAnimationController) this.L$1;
+                    ?? r10 = (Mutex) this.L$0;
+                    ResultKt.throwOnFailure(obj);
+                    chipAnimationController = chipAnimationController3;
+                    z = z3;
+                    mutexImpl = r10;
+                    Log.i("{ChipAnimationController}", "animateChipShow() view:" + strViewInfo + " animate:" + z + " view_visibility:" + view.getVisibility());
+                    this.L$0 = mutexImpl;
+                    this.L$1 = chipAnimationController;
+                    this.L$2 = view;
+                    this.Z$0 = z;
+                    this.label = 2;
+                    if (ChipAnimationController.access$cancelAnimation(chipAnimationController, view, this) != coroutineSingletons) {
+                        mutex = mutexImpl;
+                        view2 = view;
+                        z2 = z;
+                        chipAnimationController2 = chipAnimationController;
+                        if (Intrinsics.areEqual(chipAnimationController2.hideTransitionView, view2)) {
+                        }
+                        if (z2) {
+                            if (!view2.equals(chipAnimationController2.onGoingCallChip)) {
+                            }
+                            Unit unit3 = Unit.INSTANCE;
+                            mutex.unlock(null);
+                            return Unit.INSTANCE;
+                        }
+                        chipAnimationController2.showView(view2);
+                        Unit unit22 = Unit.INSTANCE;
+                        mutex.unlock(null);
+                        return unit22;
+                    }
+                    return coroutineSingletons;
+                } catch (Throwable th3) {
+                    th = th3;
+                    mutex = mutexImpl;
+                    mutex.unlock(null);
+                    throw th;
+                }
+                PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
+                chipAnimationController.getClass();
+                strViewInfo = ChipAnimationController.viewInfo(view);
+            } catch (Throwable th4) {
+                th = th4;
+            }
         }
     }
 
@@ -102,12 +422,12 @@ public final class ChipAnimationController {
         this.ongoingActivityController = ongoingActivityController;
         this.isLeftClockPosition = function0;
         this.clockView = phoneStatusBarView.findViewById(R.id.clock);
-        View findViewById = phoneStatusBarView.findViewById(R.id.ongoing_call_chip);
-        this.onGoingCallChip = findViewById;
-        this.touchInterceptCallChip = findViewById instanceof TouchInterceptFrameLayout ? (TouchInterceptFrameLayout) findViewById : null;
-        View findViewById2 = phoneStatusBarView.findViewById(R.id.ongoing_activity_capsule);
-        this.onGoingActivityChip = findViewById2;
-        this.touchInterceptActivityChip = findViewById2 instanceof TouchInterceptFrameLayout ? (TouchInterceptFrameLayout) findViewById2 : null;
+        View viewFindViewById = phoneStatusBarView.findViewById(R.id.ongoing_call_chip);
+        this.onGoingCallChip = viewFindViewById;
+        this.touchInterceptCallChip = viewFindViewById instanceof TouchInterceptFrameLayout ? (TouchInterceptFrameLayout) viewFindViewById : null;
+        View viewFindViewById2 = phoneStatusBarView.findViewById(R.id.ongoing_activity_capsule);
+        this.onGoingActivityChip = viewFindViewById2;
+        this.touchInterceptActivityChip = viewFindViewById2 instanceof TouchInterceptFrameLayout ? (TouchInterceptFrameLayout) viewFindViewById2 : null;
         this.animationMap = new LinkedHashMap();
         Symbol symbol = MutexKt.NO_OWNER;
         this.animationMutex = new MutexImpl(false);
@@ -126,14 +446,14 @@ public final class ChipAnimationController {
         springAnimation.setSpring(springForce);
         springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateSpring$2$springAnimation$1$2
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f2, float f3) {
-                if (CancellableContinuation.this.isActive()) {
+                if (cancellableContinuationImpl.isActive()) {
                     DynamicAnimation.ViewProperty viewProperty2 = viewProperty;
                     ChipAnimationController chipAnimationController2 = chipAnimationController;
                     View view2 = view;
                     PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
                     chipAnimationController2.getClass();
                     Log.d("{ChipAnimationController}", "animateSpring(" + viewProperty2 + ") End! V:" + ChipAnimationController.viewInfo(view2));
-                    CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                    CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                     int i = Result.$r8$clinit;
                     cancellableContinuation.resumeWith(Unit.INSTANCE);
                 }
@@ -143,7 +463,7 @@ public final class ChipAnimationController {
         cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$animateSpring$2$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 String name = viewProperty.getName();
                 View view2 = view;
                 PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
@@ -157,85 +477,51 @@ public final class ChipAnimationController {
         return result == CoroutineSingletons.COROUTINE_SUSPENDED ? result : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$cancelAnimation(com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController r5, android.view.View r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5.getClass()
-            boolean r0 = r7 instanceof com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$cancelAnimation$1
-            if (r0 == 0) goto L16
-            r0 = r7
-            com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$cancelAnimation$1 r0 = (com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$cancelAnimation$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$cancelAnimation$1 r0 = new com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$cancelAnimation$1
-            r0.<init>(r5, r7)
-        L1b:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3b
-            if (r2 != r3) goto L33
-            java.lang.Object r5 = r0.L$1
-            r6 = r5
-            android.view.View r6 = (android.view.View) r6
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController r5 = (com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController) r5
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L87
-        L33:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            java.lang.String r7 = viewInfo(r6)
-            java.lang.String r2 = "cancelAnimation() v:"
-            java.lang.String r4 = "{ChipAnimationController}"
-            android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r2, r7, r4)
-            java.util.Map r7 = r5.animationMap
-            java.util.LinkedHashMap r7 = (java.util.LinkedHashMap) r7
-            java.lang.Object r7 = r7.get(r6)
-            kotlinx.coroutines.Job r7 = (kotlinx.coroutines.Job) r7
-            if (r7 == 0) goto L87
-            boolean r2 = r7.isActive()
-            if (r2 == 0) goto L69
-            r0.L$0 = r5
-            r0.L$1 = r6
-            r0.label = r3
-            java.lang.Object r7 = kotlinx.coroutines.JobKt.cancelAndJoin(r7, r0)
-            if (r7 != r1) goto L87
-            return r1
-        L69:
-            java.lang.String r7 = viewInfo(r6)
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "View:"
-            r0.<init>(r1)
-            r0.append(r7)
-            java.lang.String r7 = " Animation already cancelled/completed !"
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            int r7 = android.util.Log.d(r4, r7)
-            kotlin.coroutines.jvm.internal.Boxing.boxInt(r7)
-        L87:
-            java.util.Map r5 = r5.animationMap
-            r5.remove(r6)
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController.access$cancelAnimation(com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController, android.view.View, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$cancelAnimation(ChipAnimationController chipAnimationController, View view, ContinuationImpl continuationImpl) {
+        ChipAnimationController$cancelAnimation$1 chipAnimationController$cancelAnimation$1;
+        chipAnimationController.getClass();
+        if (continuationImpl instanceof ChipAnimationController$cancelAnimation$1) {
+            chipAnimationController$cancelAnimation$1 = (ChipAnimationController$cancelAnimation$1) continuationImpl;
+            int i = chipAnimationController$cancelAnimation$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                chipAnimationController$cancelAnimation$1.label = i - Integer.MIN_VALUE;
+            } else {
+                chipAnimationController$cancelAnimation$1 = new ChipAnimationController$cancelAnimation$1(chipAnimationController, continuationImpl);
+            }
+        }
+        Object obj = chipAnimationController$cancelAnimation$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = chipAnimationController$cancelAnimation$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("cancelAnimation() v:", viewInfo(view), "{ChipAnimationController}");
+            Job job = (Job) ((LinkedHashMap) chipAnimationController.animationMap).get(view);
+            if (job != null) {
+                if (job.isActive()) {
+                    chipAnimationController$cancelAnimation$1.L$0 = chipAnimationController;
+                    chipAnimationController$cancelAnimation$1.L$1 = view;
+                    chipAnimationController$cancelAnimation$1.label = 1;
+                    if (JobKt.cancelAndJoin(job, chipAnimationController$cancelAnimation$1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    Boxing.boxInt(Log.d("{ChipAnimationController}", "View:" + viewInfo(view) + " Animation already cancelled/completed !"));
+                }
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            view = (View) chipAnimationController$cancelAnimation$1.L$1;
+            chipAnimationController = (ChipAnimationController) chipAnimationController$cancelAnimation$1.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        chipAnimationController.animationMap.remove(view);
+        return Unit.INSTANCE;
     }
 
     public static final void access$handleOnGoingActivityChipAnimation(ChipAnimationController chipAnimationController, boolean z) {
@@ -270,9 +556,9 @@ public final class ChipAnimationController {
     }
 
     public static void startAnimation$default(final ChipAnimationController chipAnimationController, final View view) {
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(view.getVisibility(), "startAnimation() v:", viewInfo(view), " show:true view_visibility:", " required_state:");
-        m888m.append(0);
-        Log.d("{ChipAnimationController}", m888m.toString());
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(view.getVisibility(), "startAnimation() v:", viewInfo(view), " show:true view_visibility:", " required_state:");
+        sbM890m.append(0);
+        Log.d("{ChipAnimationController}", sbM890m.toString());
         if (view.getVisibility() == 0) {
             Log.i("{ChipAnimationController}", "startAnimation() Already hidden/Visible! Ignore Animation");
             chipAnimationController.showView(view);
@@ -282,23 +568,23 @@ public final class ChipAnimationController {
         view.setAlpha(0.0f);
         view.setScaleX(0.0f);
         view.setScaleY(0.0f);
-        JobImpl Job$default = JobKt.Job$default();
-        Job$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$$ExternalSyntheticLambda0
+        JobImpl jobImplJob$default = JobKt.Job$default();
+        jobImplJob$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 View view2 = view;
                 PathInterpolator pathInterpolator = ChipAnimationController.AlPHA_INTERPOLATOR;
                 Log.d("{ChipAnimationController}", "Job invokeOnCompletion() show:true");
-                ChipAnimationController.this.showView(view2);
+                this.f$1.showView(view2);
                 return Unit.INSTANCE;
             }
         });
         DefaultScheduler defaultScheduler = Dispatchers.Default;
         HandlerContext handlerContext = MainDispatcherLoader.dispatcher;
         handlerContext.getClass();
-        BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(handlerContext, Job$default)), null, null, new ChipAnimationController$startAnimation$2(chipAnimationController, view, true, 0, null), 3);
-        chipAnimationController.animationMap.put(view, Job$default);
+        BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(handlerContext, jobImplJob$default)), null, null, new ChipAnimationController$startAnimation$2(chipAnimationController, view, true, 0, null), 3);
+        chipAnimationController.animationMap.put(view, jobImplJob$default);
     }
 
     public static String viewInfo(View view) {
@@ -307,12 +593,12 @@ public final class ChipAnimationController {
     }
 
     public final void animateChipHide(View view, int i, boolean z) {
-        BuildersKt.launch$default(this.coroutineScope, null, null, new ChipAnimationController$animateChipHide$1(this, view, i, z, null), 3);
+        BuildersKt.launch$default(this.coroutineScope, null, null, new AnonymousClass1(view, i, z, null), 3);
     }
 
     public final void animateChipShow(View view, boolean z) {
         this.notificationIconAreaController.setAnimationsEnabled(false);
-        BuildersKt.launch$default(this.coroutineScope, null, null, new ChipAnimationController$animateChipShow$1(this, view, z, null), 3);
+        BuildersKt.launch$default(this.coroutineScope, null, null, new C10971(view, z, null), 3);
     }
 
     public final void clockViewNudgeAnimation() {
@@ -321,9 +607,9 @@ public final class ChipAnimationController {
             return;
         }
         Log.d("{ChipAnimationController}", "nudgeAnimation() view:" + viewInfo(view));
-        float applyDimension = TypedValue.applyDimension(1, 2.0f, view.getResources().getDisplayMetrics());
+        float fApplyDimension = TypedValue.applyDimension(1, 2.0f, view.getResources().getDisplayMetrics());
         if (this.statusBar.getLayoutDirection() == 1) {
-            applyDimension = -applyDimension;
+            fApplyDimension = -fApplyDimension;
         }
         SpringForce stiffness = new SpringForce().setDampingRatio(0.85f).setStiffness(400.0f);
         SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.TRANSLATION_X);
@@ -344,7 +630,7 @@ public final class ChipAnimationController {
                 springAnimation2.animateToFinalPosition(0.0f);
             }
         });
-        springAnimation.animateToFinalPosition(-applyDimension);
+        springAnimation.animateToFinalPosition(-fApplyDimension);
     }
 
     public final void hideView(View view, int i) {
@@ -366,12 +652,12 @@ public final class ChipAnimationController {
         this.ongoingActivityController.startMarqueeAnimation();
     }
 
-    public final void startChipTransitionAnimation(final boolean z, final View view, int i, Interpolator interpolator, OngoingCardController$collapseAnimation$2 ongoingCardController$collapseAnimation$2) {
+    public final void startChipTransitionAnimation(final boolean z, final View view, int i, Interpolator interpolator, OngoingCardController.AnonymousClass2 anonymousClass2) {
         View view2;
         Log.d("{ChipAnimationController}", "startChipTransitionAnimation() start! show:" + z);
         final TransitionSet transitionSet = new TransitionSet();
-        if (ongoingCardController$collapseAnimation$2 != null) {
-            transitionSet.addTransition(new ViewPropertyCapture(view, ongoingCardController$collapseAnimation$2));
+        if (anonymousClass2 != null) {
+            transitionSet.addTransition(new ViewPropertyCapture(view, anonymousClass2));
         }
         if (!z) {
             VisibilityTransition visibilityTransition = new VisibilityTransition();
@@ -391,7 +677,7 @@ public final class ChipAnimationController {
         transitionSet.setOrdering(0);
         PhoneStatusBarView phoneStatusBarView = this.statusBar;
         TransitionManager.endTransitions(phoneStatusBarView);
-        transitionSet.addListener((Transition.TransitionListener) new TransitionListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController$startChipTransitionAnimation$2
+        transitionSet.addListener((Transition.TransitionListener) new TransitionListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController.startChipTransitionAnimation.2
             @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
             public final void onTransitionCancel(Transition transition) {
                 Log.d("{ChipAnimationController}", "onTransitionCancel()");

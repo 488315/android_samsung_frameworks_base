@@ -6,12 +6,10 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Utf8 {
     public static final Processor processor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DecodeUtil {
         private DecodeUtil() {
         }
@@ -21,17 +19,15 @@ public final class Utf8 {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Processor {
         public abstract String decodeUtf8(int i, int i2, byte[] bArr);
 
         public abstract int encodeUtf8(String str, byte[] bArr, int i, int i2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SafeProcessor extends Processor {
         @Override // androidx.datastore.preferences.protobuf.Utf8.Processor
-        public final String decodeUtf8(int i, int i2, byte[] bArr) {
+        public final String decodeUtf8(int i, int i2, byte[] bArr) throws InvalidProtocolBufferException {
             if ((i | i2 | ((bArr.length - i) - i2)) < 0) {
                 throw new ArrayIndexOutOfBoundsException(String.format("buffer length=%d, index=%d, size=%d", Integer.valueOf(bArr.length), Integer.valueOf(i), Integer.valueOf(i2)));
             }
@@ -115,35 +111,79 @@ public final class Utf8 {
             return new String(cArr, 0, i4);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:12:0x001d, code lost:
-        
-            return r9 + r6;
-         */
         @Override // androidx.datastore.preferences.protobuf.Utf8.Processor
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public final int encodeUtf8(java.lang.String r7, byte[] r8, int r9, int r10) {
-            /*
-                Method dump skipped, instructions count: 251
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.preferences.protobuf.Utf8.SafeProcessor.encodeUtf8(java.lang.String, byte[], int, int):int");
+        public final int encodeUtf8(String str, byte[] bArr, int i, int i2) {
+            int i3;
+            int i4;
+            char cCharAt;
+            int length = str.length();
+            int i5 = i2 + i;
+            int i6 = 0;
+            while (i6 < length && (i4 = i6 + i) < i5 && (cCharAt = str.charAt(i6)) < 128) {
+                bArr[i4] = (byte) cCharAt;
+                i6++;
+            }
+            if (i6 == length) {
+                return i + length;
+            }
+            int i7 = i + i6;
+            while (i6 < length) {
+                char cCharAt2 = str.charAt(i6);
+                if (cCharAt2 < 128 && i7 < i5) {
+                    bArr[i7] = (byte) cCharAt2;
+                    i7++;
+                } else if (cCharAt2 < 2048 && i7 <= i5 - 2) {
+                    int i8 = i7 + 1;
+                    bArr[i7] = (byte) ((cCharAt2 >>> 6) | 960);
+                    i7 += 2;
+                    bArr[i8] = (byte) ((cCharAt2 & '?') | 128);
+                } else {
+                    if ((cCharAt2 >= 55296 && 57343 >= cCharAt2) || i7 > i5 - 3) {
+                        if (i7 > i5 - 4) {
+                            if (55296 <= cCharAt2 && cCharAt2 <= 57343 && ((i3 = i6 + 1) == str.length() || !Character.isSurrogatePair(cCharAt2, str.charAt(i3)))) {
+                                throw new UnpairedSurrogateException(i6, length);
+                            }
+                            throw new ArrayIndexOutOfBoundsException("Failed writing " + cCharAt2 + " at index " + i7);
+                        }
+                        int i9 = i6 + 1;
+                        if (i9 != str.length()) {
+                            char cCharAt3 = str.charAt(i9);
+                            if (Character.isSurrogatePair(cCharAt2, cCharAt3)) {
+                                int codePoint = Character.toCodePoint(cCharAt2, cCharAt3);
+                                bArr[i7] = (byte) ((codePoint >>> 18) | IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp);
+                                bArr[i7 + 1] = (byte) (((codePoint >>> 12) & 63) | 128);
+                                int i10 = i7 + 3;
+                                bArr[i7 + 2] = (byte) (((codePoint >>> 6) & 63) | 128);
+                                i7 += 4;
+                                bArr[i10] = (byte) ((codePoint & 63) | 128);
+                                i6 = i9;
+                            } else {
+                                i6 = i9;
+                            }
+                        }
+                        throw new UnpairedSurrogateException(i6 - 1, length);
+                    }
+                    bArr[i7] = (byte) ((cCharAt2 >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                    int i11 = i7 + 2;
+                    bArr[i7 + 1] = (byte) (((cCharAt2 >>> 6) & 63) | 128);
+                    i7 += 3;
+                    bArr[i11] = (byte) ((cCharAt2 & '?') | 128);
+                }
+                i6++;
+            }
+            return i7;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class UnpairedSurrogateException extends IllegalArgumentException {
         public UnpairedSurrogateException(int i, int i2) {
             super(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "Unpaired surrogate at index ", " of "));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UnsafeProcessor extends Processor {
         @Override // androidx.datastore.preferences.protobuf.Utf8.Processor
-        public final String decodeUtf8(int i, int i2, byte[] bArr) {
+        public final String decodeUtf8(int i, int i2, byte[] bArr) throws InvalidProtocolBufferException {
             Charset charset = Internal.UTF_8;
             String str = new String(bArr, i, i2, charset);
             if (str.indexOf(65533) >= 0 && !Arrays.equals(str.getBytes(charset), Arrays.copyOfRange(bArr, i, i2 + i))) {
@@ -158,7 +198,7 @@ public final class Utf8 {
             long j2;
             long j3;
             int i3;
-            char charAt;
+            char cCharAt;
             long j4 = i;
             long j5 = i2 + j4;
             int length = str.length();
@@ -168,10 +208,10 @@ public final class Utf8 {
             int i4 = 0;
             while (true) {
                 j = 1;
-                if (i4 >= length || (charAt = str.charAt(i4)) >= 128) {
+                if (i4 >= length || (cCharAt = str.charAt(i4)) >= 128) {
                     break;
                 }
-                UnsafeUtil.putByte(bArr, j4, (byte) charAt);
+                UnsafeUtil.putByte(bArr, j4, (byte) cCharAt);
                 i4++;
                 j4 = 1 + j4;
             }
@@ -179,27 +219,27 @@ public final class Utf8 {
                 return (int) j4;
             }
             while (i4 < length) {
-                char charAt2 = str.charAt(i4);
-                if (charAt2 < 128 && j4 < j5) {
-                    UnsafeUtil.putByte(bArr, j4, (byte) charAt2);
+                char cCharAt2 = str.charAt(i4);
+                if (cCharAt2 < 128 && j4 < j5) {
+                    UnsafeUtil.putByte(bArr, j4, (byte) cCharAt2);
                     j3 = j5;
                     j2 = j;
                     j4 += j;
-                } else if (charAt2 >= 2048 || j4 > j5 - 2) {
+                } else if (cCharAt2 >= 2048 || j4 > j5 - 2) {
                     j2 = j;
-                    if ((charAt2 >= 55296 && 57343 >= charAt2) || j4 > j5 - 3) {
+                    if ((cCharAt2 >= 55296 && 57343 >= cCharAt2) || j4 > j5 - 3) {
                         j3 = j5;
                         if (j4 > j3 - 4) {
-                            if (55296 <= charAt2 && charAt2 <= 57343 && ((i3 = i4 + 1) == length || !Character.isSurrogatePair(charAt2, str.charAt(i3)))) {
+                            if (55296 <= cCharAt2 && cCharAt2 <= 57343 && ((i3 = i4 + 1) == length || !Character.isSurrogatePair(cCharAt2, str.charAt(i3)))) {
                                 throw new UnpairedSurrogateException(i4, length);
                             }
-                            throw new ArrayIndexOutOfBoundsException("Failed writing " + charAt2 + " at index " + j4);
+                            throw new ArrayIndexOutOfBoundsException("Failed writing " + cCharAt2 + " at index " + j4);
                         }
                         int i5 = i4 + 1;
                         if (i5 != length) {
-                            char charAt3 = str.charAt(i5);
-                            if (Character.isSurrogatePair(charAt2, charAt3)) {
-                                int codePoint = Character.toCodePoint(charAt2, charAt3);
+                            char cCharAt3 = str.charAt(i5);
+                            if (Character.isSurrogatePair(cCharAt2, cCharAt3)) {
+                                int codePoint = Character.toCodePoint(cCharAt2, cCharAt3);
                                 UnsafeUtil.putByte(bArr, j4, (byte) ((codePoint >>> 18) | IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp));
                                 UnsafeUtil.putByte(bArr, j4 + j2, (byte) (((codePoint >>> 12) & 63) | 128));
                                 long j6 = j4 + 3;
@@ -213,18 +253,18 @@ public final class Utf8 {
                         }
                         throw new UnpairedSurrogateException(i4 - 1, length);
                     }
-                    UnsafeUtil.putByte(bArr, j4, (byte) ((charAt2 >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE));
+                    UnsafeUtil.putByte(bArr, j4, (byte) ((cCharAt2 >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE));
                     long j7 = j4 + 2;
                     j3 = j5;
-                    UnsafeUtil.putByte(bArr, j4 + j2, (byte) (((charAt2 >>> 6) & 63) | 128));
+                    UnsafeUtil.putByte(bArr, j4 + j2, (byte) (((cCharAt2 >>> 6) & 63) | 128));
                     j4 += 3;
-                    UnsafeUtil.putByte(bArr, j7, (byte) ((charAt2 & '?') | 128));
+                    UnsafeUtil.putByte(bArr, j7, (byte) ((cCharAt2 & '?') | 128));
                 } else {
                     j2 = j;
                     long j8 = j4 + j2;
-                    UnsafeUtil.putByte(bArr, j4, (byte) ((charAt2 >>> 6) | 960));
+                    UnsafeUtil.putByte(bArr, j4, (byte) ((cCharAt2 >>> 6) | 960));
                     j4 += 2;
-                    UnsafeUtil.putByte(bArr, j8, (byte) ((charAt2 & '?') | 128));
+                    UnsafeUtil.putByte(bArr, j8, (byte) ((cCharAt2 & '?') | 128));
                     j3 = j5;
                 }
                 i4++;
@@ -254,19 +294,19 @@ public final class Utf8 {
             if (i2 >= length) {
                 break;
             }
-            char charAt = str.charAt(i2);
-            if (charAt < 2048) {
-                i3 += (127 - charAt) >>> 31;
+            char cCharAt = str.charAt(i2);
+            if (cCharAt < 2048) {
+                i3 += (127 - cCharAt) >>> 31;
                 i2++;
             } else {
                 int length2 = str.length();
                 while (i2 < length2) {
-                    char charAt2 = str.charAt(i2);
-                    if (charAt2 < 2048) {
-                        i += (127 - charAt2) >>> 31;
+                    char cCharAt2 = str.charAt(i2);
+                    if (cCharAt2 < 2048) {
+                        i += (127 - cCharAt2) >>> 31;
                     } else {
                         i += 2;
-                        if (55296 <= charAt2 && charAt2 <= 57343) {
+                        if (55296 <= cCharAt2 && cCharAt2 <= 57343) {
                             if (Character.codePointAt(str, i2) < 65536) {
                                 throw new UnpairedSurrogateException(i2, length2);
                             }

@@ -18,7 +18,7 @@ public interface NumericEnum {
 
     String stringfy();
 
-    static <T> T fromValue(Class<T> cls, final int i) {
+    static <T> T fromValue(Class<T> cls, final int i) throws NoSuchMethodException, SecurityException {
         if (!NumericEnum.class.isAssignableFrom(cls)) {
             throw new UnsupportedOperationException("type is not NumericEnum");
         }
@@ -52,16 +52,12 @@ public interface NumericEnum {
         return (T) Stream.of((Object[]) str.split(":")).filter(new Predicate() { // from class: com.samsung.android.sume.core.types.NumericEnum$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean matches;
-                matches = Pattern.compile("-?\\d+(\\.\\d+)?").matcher((String) obj).matches();
-                return matches;
+                return Pattern.compile("-?\\d+(\\.\\d+)?").matcher((String) obj).matches();
             }
         }).map(new Function() { // from class: com.samsung.android.sume.core.types.NumericEnum$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Object fromValue;
-                fromValue = NumericEnum.fromValue(cls, Integer.parseInt((String) obj));
-                return fromValue;
+                return NumericEnum.fromValue(cls, Integer.parseInt((String) obj));
             }
         }).findFirst().orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
     }

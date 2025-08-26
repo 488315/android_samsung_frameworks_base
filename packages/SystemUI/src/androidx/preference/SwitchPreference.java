@@ -13,7 +13,6 @@ import androidx.core.content.res.TypedArrayUtils;
 import androidx.core.view.ViewCompat;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SwitchPreference extends TwoStatePreference {
     public final DummyClickListener mClickListener;
@@ -23,7 +22,6 @@ public class SwitchPreference extends TwoStatePreference {
     public CharSequence mSwitchOn;
     public int mWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DummyClickListener implements View.OnClickListener {
         private DummyClickListener() {
         }
@@ -34,7 +32,6 @@ public class SwitchPreference extends TwoStatePreference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Listener implements CompoundButton.OnCheckedChangeListener {
         public Listener() {
         }
@@ -54,26 +51,26 @@ public class SwitchPreference extends TwoStatePreference {
         this.mListener = new Listener();
         this.mWidth = 0;
         this.mClickListener = new DummyClickListener();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SwitchPreference, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SwitchPreference, i, i2);
         this.mIsLargeLayout = 0;
-        String string = obtainStyledAttributes.getString(7);
-        this.mSummaryOn = string == null ? obtainStyledAttributes.getString(0) : string;
+        String string = typedArrayObtainStyledAttributes.getString(7);
+        this.mSummaryOn = string == null ? typedArrayObtainStyledAttributes.getString(0) : string;
         if (this.mChecked) {
             notifyChanged();
         }
-        String string2 = obtainStyledAttributes.getString(6);
-        this.mSummaryOff = string2 == null ? obtainStyledAttributes.getString(1) : string2;
+        String string2 = typedArrayObtainStyledAttributes.getString(6);
+        this.mSummaryOff = string2 == null ? typedArrayObtainStyledAttributes.getString(1) : string2;
         if (!this.mChecked) {
             notifyChanged();
         }
-        String string3 = obtainStyledAttributes.getString(9);
-        this.mSwitchOn = string3 == null ? obtainStyledAttributes.getString(3) : string3;
+        String string3 = typedArrayObtainStyledAttributes.getString(9);
+        this.mSwitchOn = string3 == null ? typedArrayObtainStyledAttributes.getString(3) : string3;
         notifyChanged();
-        String string4 = obtainStyledAttributes.getString(8);
-        this.mSwitchOff = string4 == null ? obtainStyledAttributes.getString(4) : string4;
+        String string4 = typedArrayObtainStyledAttributes.getString(8);
+        this.mSwitchOff = string4 == null ? typedArrayObtainStyledAttributes.getString(4) : string4;
         notifyChanged();
-        this.mDisableDependentsState = obtainStyledAttributes.getBoolean(5, obtainStyledAttributes.getBoolean(2, false));
-        obtainStyledAttributes.recycle();
+        this.mDisableDependentsState = typedArrayObtainStyledAttributes.getBoolean(5, typedArrayObtainStyledAttributes.getBoolean(2, false));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.preference.Preference

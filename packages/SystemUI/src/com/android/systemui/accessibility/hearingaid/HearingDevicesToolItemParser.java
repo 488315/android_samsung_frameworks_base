@@ -12,7 +12,6 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesToolItemParser {
     static final int MAX_NUM = 2;
@@ -31,11 +30,11 @@ public class HearingDevicesToolItemParser {
         ArrayList arrayList = new ArrayList();
         for (String str : strArr3) {
             if (str.split("/").length == 2) {
-                ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
+                ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
                 try {
-                    arrayList.add(packageManager2.getActivityInfo(unflattenFromString, 0));
+                    arrayList.add(packageManager2.getActivityInfo(componentNameUnflattenFromString, 0));
                 } catch (PackageManager.NameNotFoundException unused) {
-                    Log.e("HearingDevicesToolItemParser", "Unable to find hearing device related tool: " + unflattenFromString.flattenToString());
+                    Log.e("HearingDevicesToolItemParser", "Unable to find hearing device related tool: " + componentNameUnflattenFromString.flattenToString());
                 }
             } else {
                 Log.e("HearingDevicesToolItemParser", "Malformed hearing device related tool name item in array: ".concat(str));
@@ -52,7 +51,7 @@ public class HearingDevicesToolItemParser {
         int size = arrayList.size();
         boolean z = size == arrayList2.size();
         for (int i = 0; i < size; i++) {
-            builder.m3267add((Object) new ToolItem(((ActivityInfo) arrayList.get(i)).loadLabel(packageManager).toString(), z ? (Drawable) arrayList2.get(i) : ((ActivityInfo) arrayList.get(i)).loadIcon(packageManager), new Intent("android.intent.action.MAIN").setComponent(((ActivityInfo) arrayList.get(i)).getComponentName()), z));
+            builder.m3285add((Object) new ToolItem(((ActivityInfo) arrayList.get(i)).loadLabel(packageManager).toString(), z ? (Drawable) arrayList2.get(i) : ((ActivityInfo) arrayList.get(i)).loadIcon(packageManager), new Intent("android.intent.action.MAIN").setComponent(((ActivityInfo) arrayList.get(i)).getComponentName()), z));
         }
         return builder.build();
     }

@@ -19,7 +19,6 @@ import android.view.animation.LinearInterpolator;
 import com.android.app.animation.Interpolators;
 import com.android.systemui.navigationbar.BasicRuneWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BarTransitions {
     public BarBackgroundDrawable mBarBackground;
@@ -75,9 +74,9 @@ public class BarTransitions {
         barBackgroundDrawable.mMode = i;
         barBackgroundDrawable.mAnimating = z;
         if (z) {
-            long elapsedRealtime = SystemClock.elapsedRealtime();
-            barBackgroundDrawable.mStartTime = elapsedRealtime;
-            barBackgroundDrawable.mEndTime = elapsedRealtime + 200;
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
+            barBackgroundDrawable.mStartTime = jElapsedRealtime;
+            barBackgroundDrawable.mEndTime = jElapsedRealtime + 200;
             barBackgroundDrawable.mGradientAlphaStart = barBackgroundDrawable.mGradientAlpha;
             barBackgroundDrawable.mColorStart = barBackgroundDrawable.mColor;
         }
@@ -100,7 +99,6 @@ public class BarTransitions {
         onTransition(i2, this.mMode, z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BarBackgroundDrawable extends Drawable {
         public boolean mAnimating;
         public int mColor;
@@ -124,10 +122,10 @@ public class BarTransitions {
         public BarBackgroundDrawable(Context context, int i) {
             context.getResources();
             this.mOpaque = -16777216;
-            this.mSemiTransparent = context.getColor(17171625);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorError});
-            int color = obtainStyledAttributes.getColor(0, 0);
-            obtainStyledAttributes.recycle();
+            this.mSemiTransparent = context.getColor(17171624);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorError});
+            int color = typedArrayObtainStyledAttributes.getColor(0, 0);
+            typedArrayObtainStyledAttributes.recycle();
             this.mWarning = color;
             this.mGradient = context.getDrawable(i);
         }
@@ -136,7 +134,7 @@ public class BarTransitions {
         public void draw(Canvas canvas) {
             boolean z;
             int i = this.mMode;
-            int i2 = i == 5 ? this.mWarning : i == 2 ? this.mSemiTransparent : i == 1 ? this.mSemiTransparent : (i == 0 || i == 6 || ((z = BasicRuneWrapper.NAVBAR_ENABLED) && i == 8)) ? 0 : (z && i == 7) ? this.mLightSemiTransparent : this.mOpaque;
+            int i2 = i == 5 ? this.mWarning : (i == 2 || i == 1) ? this.mSemiTransparent : (i == 0 || i == 6 || ((z = BasicRuneWrapper.NAVBAR_ENABLED) && i == 8)) ? 0 : (z && i == 7) ? this.mLightSemiTransparent : this.mOpaque;
             if (this.mAnimating) {
                 if (SystemClock.elapsedRealtime() >= this.mEndTime) {
                     this.mAnimating = false;
@@ -144,10 +142,10 @@ public class BarTransitions {
                     this.mGradientAlpha = 0;
                 } else {
                     long j = this.mStartTime;
-                    float max = Math.max(0.0f, Math.min(((LinearInterpolator) Interpolators.LINEAR).getInterpolation((r3 - j) / (r5 - j)), 1.0f));
-                    float f = 1.0f - max;
-                    this.mGradientAlpha = (int) ((this.mGradientAlphaStart * f) + (0 * max));
-                    this.mColor = Color.argb((int) ((Color.alpha(this.mColorStart) * f) + (Color.alpha(i2) * max)), (int) ((Color.red(this.mColorStart) * f) + (Color.red(i2) * max)), (int) ((Color.green(this.mColorStart) * f) + (Color.green(i2) * max)), (int) ((Color.blue(this.mColorStart) * f) + (max * Color.blue(i2))));
+                    float fMax = Math.max(0.0f, Math.min(((LinearInterpolator) Interpolators.LINEAR).getInterpolation((r3 - j) / (r5 - j)), 1.0f));
+                    float f = 1.0f - fMax;
+                    this.mGradientAlpha = (int) ((this.mGradientAlphaStart * f) + (0 * fMax));
+                    this.mColor = Color.argb((int) ((Color.alpha(this.mColorStart) * f) + (Color.alpha(i2) * fMax)), (int) ((Color.red(this.mColorStart) * f) + (Color.red(i2) * fMax)), (int) ((Color.green(this.mColorStart) * f) + (Color.green(i2) * fMax)), (int) ((Color.blue(this.mColorStart) * f) + (fMax * Color.blue(i2))));
                 }
             } else {
                 this.mColor = i2;

@@ -45,9 +45,9 @@ public interface IGetRulesAuthTableCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetRulesAuthTableCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetRulesAuthTableCallback)) {
-                return (IGetRulesAuthTableCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetRulesAuthTableCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetRulesAuthTableCallback)) {
+                return (IGetRulesAuthTableCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IGetRulesAuthTableCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 EuiccRulesAuthTable euiccRulesAuthTable = (EuiccRulesAuthTable) parcel.readTypedObject(EuiccRulesAuthTable.CREATOR);
                 parcel.enforceNoDataAvail();
-                onComplete(readInt, euiccRulesAuthTable);
+                onComplete(i3, euiccRulesAuthTable);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IGetRulesAuthTableCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.IGetRulesAuthTableCallback
             public void onComplete(int i, EuiccRulesAuthTable euiccRulesAuthTable) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetRulesAuthTableCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(euiccRulesAuthTable, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetRulesAuthTableCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(euiccRulesAuthTable, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

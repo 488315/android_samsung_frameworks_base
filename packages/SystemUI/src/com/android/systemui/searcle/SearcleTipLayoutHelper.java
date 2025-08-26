@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SearcleTipLayoutHelper {
     public final int bubbleLayoutWidth;
@@ -22,7 +21,6 @@ public final class SearcleTipLayoutHelper {
     public final int naviBarHeight;
     public final int rotation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +32,6 @@ public final class SearcleTipLayoutHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DirectionType {
         public static final /* synthetic */ DirectionType[] $VALUES;
         public static final DirectionType XOnLTR;
@@ -73,7 +70,6 @@ public final class SearcleTipLayoutHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TipsNaviAlign {
         public static final /* synthetic */ TipsNaviAlign[] $VALUES;
         public static final TipsNaviAlign Center;
@@ -107,7 +103,6 @@ public final class SearcleTipLayoutHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -164,7 +159,7 @@ public final class SearcleTipLayoutHelper {
         this.rotation = i;
         this.isTablet = z;
         this.isFoldWithMainDisplay = z2;
-        this.naviBarHeight = context.getResources().getDimensionPixelSize(R.dimen.seekbar_track_progress_height_material);
+        this.naviBarHeight = context.getResources().getDimensionPixelSize(R.dimen.select_dialog_drawable_padding_start_material);
         boolean z5 = false;
         boolean z6 = context.getResources().getConfiguration().orientation == 2;
         this.isLandscape = z6;

@@ -65,7 +65,7 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
     }
 
     @Override // android.speech.tts.SynthesisCallback
-    public int start(int i, int i2, int i3) {
+    public int start(int i, int i2, int i3) throws IOException {
         if (i2 != 3 && i2 != 2 && i2 != 4) {
             Log.e(TAG, "Audio format encoding " + i2 + " not supported. Please use one of AudioFormat.ENCODING_PCM_8BIT, AudioFormat.ENCODING_PCM_16BIT or AudioFormat.ENCODING_PCM_FLOAT");
         }
@@ -103,7 +103,7 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
     }
 
     @Override // android.speech.tts.SynthesisCallback
-    public int audioAvailable(byte[] bArr, int i, int i2) {
+    public int audioAvailable(byte[] bArr, int i, int i2) throws IOException {
         synchronized (this.mStateLock) {
             int i3 = this.mStatusCode;
             if (i3 == -2) {
@@ -140,7 +140,7 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
     }
 
     @Override // android.speech.tts.SynthesisCallback
-    public int done() {
+    public int done() throws IOException {
         synchronized (this.mStateLock) {
             if (this.mDone) {
                 Log.w(TAG, "Duplicate call to done()");
@@ -217,23 +217,23 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
 
     private ByteBuffer makeWavHeader(int i, int i2, int i3, int i4) {
         int bytesPerSample = AudioFormat.getBytesPerSample(i2);
-        ByteBuffer wrap = ByteBuffer.wrap(new byte[44]);
-        wrap.order(ByteOrder.LITTLE_ENDIAN);
-        wrap.put(new byte[]{82, 73, 70, 70});
-        wrap.putInt(i4 + 36);
-        wrap.put(new byte[]{87, 65, 86, 69});
-        wrap.put(new byte[]{102, 109, 116, 32});
-        wrap.putInt(16);
-        wrap.putShort((short) 1);
-        wrap.putShort((short) i3);
-        wrap.putInt(i);
-        wrap.putInt(i * bytesPerSample * i3);
-        wrap.putShort((short) (bytesPerSample * i3));
-        wrap.putShort((short) (bytesPerSample * 8));
-        wrap.put(new byte[]{100, SprAttributeBase.TYPE_ANIMATOR_SET, 116, SprAttributeBase.TYPE_ANIMATOR_SET});
-        wrap.putInt(i4);
-        wrap.flip();
-        return wrap;
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(new byte[44]);
+        byteBufferWrap.order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferWrap.put(new byte[]{82, 73, 70, 70});
+        byteBufferWrap.putInt(i4 + 36);
+        byteBufferWrap.put(new byte[]{87, 65, 86, 69});
+        byteBufferWrap.put(new byte[]{102, 109, 116, 32});
+        byteBufferWrap.putInt(16);
+        byteBufferWrap.putShort((short) 1);
+        byteBufferWrap.putShort((short) i3);
+        byteBufferWrap.putInt(i);
+        byteBufferWrap.putInt(i * bytesPerSample * i3);
+        byteBufferWrap.putShort((short) (bytesPerSample * i3));
+        byteBufferWrap.putShort((short) (bytesPerSample * 8));
+        byteBufferWrap.put(new byte[]{100, SprAttributeBase.TYPE_ANIMATOR_SET, 116, SprAttributeBase.TYPE_ANIMATOR_SET});
+        byteBufferWrap.putInt(i4);
+        byteBufferWrap.flip();
+        return byteBufferWrap;
     }
 
     @Override // android.speech.tts.SynthesisCallback

@@ -1,19 +1,18 @@
 package com.android.systemui.authentication.data.repository;
 
-import com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl$refreshingFlow$1;
+import com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AuthenticationRepositoryImpl$refreshingFlow$1$3$emit$1 extends ContinuationImpl {
     Object L$0;
     int label;
     /* synthetic */ Object result;
-    final /* synthetic */ AuthenticationRepositoryImpl$refreshingFlow$1.AnonymousClass3 this$0;
+    final /* synthetic */ AuthenticationRepositoryImpl.C07991.AnonymousClass3 this$0;
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public AuthenticationRepositoryImpl$refreshingFlow$1$3$emit$1(AuthenticationRepositoryImpl$refreshingFlow$1.AnonymousClass3 anonymousClass3, Continuation continuation) {
+    public AuthenticationRepositoryImpl$refreshingFlow$1$3$emit$1(AuthenticationRepositoryImpl.C07991.AnonymousClass3 anonymousClass3, Continuation continuation) {
         super(continuation);
         this.this$0 = anonymousClass3;
     }

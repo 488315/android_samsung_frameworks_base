@@ -59,18 +59,18 @@ public class ViewAnimator extends FrameLayout {
         this.mWhichChild = 0;
         this.mFirstTime = true;
         this.mAnimateFirstTime = true;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewAnimator);
-        saveAttributeDataForStyleable(context, R.styleable.ViewAnimator, attributeSet, obtainStyledAttributes, 0, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewAnimator);
+        saveAttributeDataForStyleable(context, R.styleable.ViewAnimator, attributeSet, typedArrayObtainStyledAttributes, 0, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId > 0) {
             setInAnimation(context, resourceId);
         }
-        int resourceId2 = obtainStyledAttributes.getResourceId(1, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(1, 0);
         if (resourceId2 > 0) {
             setOutAnimation(context, resourceId2);
         }
-        setAnimateFirstView(obtainStyledAttributes.getBoolean(2, true));
-        obtainStyledAttributes.recycle();
+        setAnimateFirstView(typedArrayObtainStyledAttributes.getBoolean(2, true));
+        typedArrayObtainStyledAttributes.recycle();
         initViewAnimator(context, attributeSet);
     }
 
@@ -79,10 +79,10 @@ public class ViewAnimator extends FrameLayout {
             this.mMeasureAllChildren = true;
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.FrameLayout);
-        saveAttributeDataForStyleable(context, R.styleable.FrameLayout, attributeSet, obtainStyledAttributes, 0, 0);
-        setMeasureAllChildren(obtainStyledAttributes.getBoolean(0, true));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.FrameLayout);
+        saveAttributeDataForStyleable(context, R.styleable.FrameLayout, attributeSet, typedArrayObtainStyledAttributes, 0, 0);
+        setMeasureAllChildren(typedArrayObtainStyledAttributes.getBoolean(0, true));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @RemotableViewMethod
@@ -164,9 +164,9 @@ public class ViewAnimator extends FrameLayout {
 
     @Override // android.view.ViewGroup, android.view.ViewManager
     public void removeView(View view) {
-        int indexOfChild = indexOfChild(view);
-        if (indexOfChild >= 0) {
-            removeViewAt(indexOfChild);
+        int iIndexOfChild = indexOfChild(view);
+        if (iIndexOfChild >= 0) {
+            removeViewAt(iIndexOfChild);
         }
     }
 

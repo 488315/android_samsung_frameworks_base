@@ -1,7 +1,6 @@
 package android.app.contextualsearch;
 
 import android.annotation.SystemApi;
-import android.app.contextualsearch.CallbackToken;
 import android.app.contextualsearch.IContextualSearchCallback;
 import android.app.contextualsearch.IContextualSearchManager;
 import android.content.Context;
@@ -57,21 +56,21 @@ public final class CallbackToken implements Parcelable {
     }
 
     public void getContextualSearchState(Executor executor, OutcomeReceiver<ContextualSearchState, Throwable> outcomeReceiver) {
-        boolean markUsedLocked;
+        boolean zMarkUsedLocked;
         String str = TAG;
         Log.d(str, "getContextualSearchState for token:" + this.mToken);
         synchronized (this.mLock) {
-            markUsedLocked = markUsedLocked();
+            zMarkUsedLocked = markUsedLocked();
         }
-        if (markUsedLocked) {
+        if (zMarkUsedLocked) {
             outcomeReceiver.onError(new IllegalAccessException("Token already used."));
             return;
         }
         try {
-            IContextualSearchManager asInterface = IContextualSearchManager.Stub.asInterface(ServiceManager.getService(Context.CONTEXTUAL_SEARCH_SERVICE));
+            IContextualSearchManager iContextualSearchManagerAsInterface = IContextualSearchManager.Stub.asInterface(ServiceManager.getService(Context.CONTEXTUAL_SEARCH_SERVICE));
             CallbackWrapper callbackWrapper = new CallbackWrapper(executor, outcomeReceiver);
-            if (asInterface != null) {
-                asInterface.getContextualSearchState(this.mToken, callbackWrapper);
+            if (iContextualSearchManagerAsInterface != null) {
+                iContextualSearchManagerAsInterface.getContextualSearchState(this.mToken, callbackWrapper);
             } else {
                 Log.w(str, "Failed to getContextualSearchState. Service null.");
             }
@@ -110,8 +109,8 @@ public final class CallbackToken implements Parcelable {
         public void onResult(final ContextualSearchState contextualSearchState) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.app.contextualsearch.CallbackToken$CallbackWrapper$$ExternalSyntheticLambda2
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    CallbackToken.CallbackWrapper.this.lambda$onResult$1(contextualSearchState);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onResult$1(contextualSearchState);
                 }
             });
         }
@@ -122,7 +121,7 @@ public final class CallbackToken implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.app.contextualsearch.CallbackToken$CallbackWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallbackToken.CallbackWrapper.this.lambda$onResult$0(contextualSearchState);
+                    this.f$0.lambda$onResult$0(contextualSearchState);
                 }
             });
         }
@@ -136,8 +135,8 @@ public final class CallbackToken implements Parcelable {
         public void onError(final ParcelableException parcelableException) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.app.contextualsearch.CallbackToken$CallbackWrapper$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    CallbackToken.CallbackWrapper.this.lambda$onError$3(parcelableException);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onError$3(parcelableException);
                 }
             });
         }
@@ -148,7 +147,7 @@ public final class CallbackToken implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.app.contextualsearch.CallbackToken$CallbackWrapper$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallbackToken.CallbackWrapper.this.lambda$onError$2(parcelableException);
+                    this.f$0.lambda$onError$2(parcelableException);
                 }
             });
         }

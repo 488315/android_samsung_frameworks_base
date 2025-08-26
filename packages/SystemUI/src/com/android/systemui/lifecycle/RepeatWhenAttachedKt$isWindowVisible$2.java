@@ -11,7 +11,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RepeatWhenAttachedKt$isWindowVisible$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ ViewTreeObserver $this_isWindowVisible;
@@ -46,7 +45,7 @@ final class RepeatWhenAttachedKt$isWindowVisible$2 extends SuspendLambda impleme
             ViewTreeObserver.OnWindowVisibilityChangeListener onWindowVisibilityChangeListener = new ViewTreeObserver.OnWindowVisibilityChangeListener() { // from class: com.android.systemui.lifecycle.RepeatWhenAttachedKt$isWindowVisible$2$listener$1
                 @Override // android.view.ViewTreeObserver.OnWindowVisibilityChangeListener
                 public final void onWindowVisibilityChanged(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(i2 == 0));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(i2 == 0));
                 }
             };
             this.$this_isWindowVisible.addOnWindowVisibilityChangeListener(onWindowVisibilityChangeListener);

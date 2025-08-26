@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import androidx.dynamicanimation.animation.FloatPropertyCompat;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FloatProperties {
     public static final FloatProperties$Companion$RECT_HEIGHT$1 RECT_HEIGHT;
@@ -13,7 +12,6 @@ public final class FloatProperties {
     public static final FloatProperties$Companion$RECT_X$1 RECT_X;
     public static final FloatProperties$Companion$RECT_Y$1 RECT_Y;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

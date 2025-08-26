@@ -1227,855 +1227,857 @@ public class TelephonyStatsLog {
     public static final int VOICE_CALL_SESSION__SIGNAL_STRENGTH_AT_END__SIGNAL_STRENGTH_POOR = 1;
 
     public static void write(int i, boolean z, boolean z2, int i2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
         if (713 == i) {
-            newBuilder.addBooleanAnnotation((byte) 4, true);
-            newBuilder.addBooleanAnnotation((byte) 8, false);
+            builderNewBuilder.addBooleanAnnotation((byte) 4, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 8, false);
         }
         if (854 == i) {
-            newBuilder.addBooleanAnnotation((byte) 4, true);
-            newBuilder.addBooleanAnnotation((byte) 8, false);
+            builderNewBuilder.addBooleanAnnotation((byte) 4, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 8, false);
         }
         if (882 == i) {
-            newBuilder.addBooleanAnnotation((byte) 4, true);
-            newBuilder.addBooleanAnnotation((byte) 8, false);
+            builderNewBuilder.addBooleanAnnotation((byte) 4, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 8, false);
         }
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, int i4) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, int i4, int i5) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, int i4, int i5, boolean z, boolean z2, int i6, boolean z3, int i7, int i8, int i9, int i10, int i11, boolean z4, int i12, int i13, int i14, int i15, int i16) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeInt(i12);
-        newBuilder.writeInt(i13);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeInt(i16);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeInt(i16);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, int i4, int i5, int i6, int i7, boolean z, boolean z2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
         if (800 == i) {
-            newBuilder.addIntAnnotation((byte) 9, 4);
+            builderNewBuilder.addIntAnnotation((byte) 9, 4);
         }
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, int i4, long j, boolean z) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, int i3, String str) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeString(str);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, long j, long j2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, String str, String str2, String str3, String str4) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeString(str);
-        newBuilder.writeString(str2);
-        newBuilder.writeString(str3);
-        newBuilder.writeString(str4);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeString(str2);
+        builderNewBuilder.writeString(str3);
+        builderNewBuilder.writeString(str4);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, String str, String str2, int i2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeString(str);
-        newBuilder.writeString(str2);
-        newBuilder.writeInt(i2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeString(str2);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static StatsEvent buildStatsEvent(int i, boolean z, boolean z2, int i2, boolean z3, int i3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i2);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i3);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, boolean z, int i2, boolean z2, int i3, int i4, boolean z3, int i5, boolean z4, boolean z5, int i6, boolean z6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i2);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z6);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, boolean z, int i2, int i3, String str, String str2, String str3, int i4, String[] strArr, int[] iArr, int[] iArr2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeString(str);
-        newBuilder.writeString(str2);
-        newBuilder.writeString(str3);
-        newBuilder.writeInt(i4);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeString(str2);
+        builderNewBuilder.writeString(str3);
+        builderNewBuilder.writeInt(i4);
         if (strArr == null) {
             strArr = new String[0];
         }
-        newBuilder.writeStringArray(strArr);
+        builderNewBuilder.writeStringArray(strArr);
         if (iArr == null) {
             iArr = new int[0];
         }
-        newBuilder.writeIntArray(iArr);
+        builderNewBuilder.writeIntArray(iArr);
         if (iArr2 == null) {
             iArr2 = new int[0];
         }
-        newBuilder.writeIntArray(iArr2);
-        return newBuilder.build();
+        builderNewBuilder.writeIntArray(iArr2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, boolean z, boolean z2, int i3, int i4, int i5, boolean z3, int i6, boolean z4, long j, boolean z5, int i7, boolean z6, int i8, int i9, int i10, long j2, boolean z7, int i11, int[] iArr, int[] iArr2, boolean z8, boolean z9, boolean z10, boolean z11, boolean z12, boolean z13) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeInt(i7);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeLong(j2);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeInt(i11);
-        newBuilder.writeIntArray(iArr == null ? new int[0] : iArr);
-        newBuilder.writeIntArray(iArr2 == null ? new int[0] : iArr2);
-        newBuilder.writeBoolean(z8);
-        newBuilder.writeBoolean(z9);
-        newBuilder.writeBoolean(z10);
-        newBuilder.writeBoolean(z11);
-        newBuilder.writeBoolean(z12);
-        newBuilder.writeBoolean(z13);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeIntArray(iArr == null ? new int[0] : iArr);
+        builderNewBuilder.writeIntArray(iArr2 == null ? new int[0] : iArr2);
+        builderNewBuilder.writeBoolean(z8);
+        builderNewBuilder.writeBoolean(z9);
+        builderNewBuilder.writeBoolean(z10);
+        builderNewBuilder.writeBoolean(z11);
+        builderNewBuilder.writeBoolean(z12);
+        builderNewBuilder.writeBoolean(z13);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, boolean z, int i3, boolean z2, int i4, int i5, String str, int i6, boolean z3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i3);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeString(str);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z3);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, boolean z, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int[] iArr, int i17, long j, boolean z2, boolean z3, int i18, int[] iArr2, int i19, int i20, int i21, int i22, int i23, int i24, int i25, int i26, String[] strArr, int[] iArr3, long[] jArr) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeInt(i13);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeInt(i16);
-        newBuilder.writeIntArray(iArr == null ? new int[0] : iArr);
-        newBuilder.writeInt(i17);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i18);
-        newBuilder.writeIntArray(iArr2 == null ? new int[0] : iArr2);
-        newBuilder.writeInt(i19);
-        newBuilder.writeInt(i20);
-        newBuilder.writeInt(i21);
-        newBuilder.writeInt(i22);
-        newBuilder.writeInt(i23);
-        newBuilder.writeInt(i24);
-        newBuilder.writeInt(i25);
-        newBuilder.writeInt(i26);
-        newBuilder.writeStringArray(strArr == null ? new String[0] : strArr);
-        newBuilder.writeIntArray(iArr3 == null ? new int[0] : iArr3);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeInt(i16);
+        builderNewBuilder.writeIntArray(iArr == null ? new int[0] : iArr);
+        builderNewBuilder.writeInt(i17);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i18);
+        builderNewBuilder.writeIntArray(iArr2 == null ? new int[0] : iArr2);
+        builderNewBuilder.writeInt(i19);
+        builderNewBuilder.writeInt(i20);
+        builderNewBuilder.writeInt(i21);
+        builderNewBuilder.writeInt(i22);
+        builderNewBuilder.writeInt(i23);
+        builderNewBuilder.writeInt(i24);
+        builderNewBuilder.writeInt(i25);
+        builderNewBuilder.writeInt(i26);
+        builderNewBuilder.writeStringArray(strArr == null ? new String[0] : strArr);
+        builderNewBuilder.writeIntArray(iArr3 == null ? new int[0] : iArr3);
         if (10211 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.writeLongArray(jArr == null ? new long[0] : jArr);
-        return newBuilder.build();
+        builderNewBuilder.writeLongArray(jArr == null ? new long[0] : jArr);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
         if (10213 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.writeInt(i3);
-        return newBuilder.build();
+        builderNewBuilder.writeInt(i3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, boolean z, boolean z2, int i4, boolean z3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z3);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, boolean z, int i4, int i5) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, boolean z, int i5, boolean z2, int[] iArr, int i6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z2);
         if (iArr == null) {
             iArr = new int[0];
         }
-        newBuilder.writeIntArray(iArr);
-        newBuilder.writeInt(i6);
-        return newBuilder.build();
+        builderNewBuilder.writeIntArray(iArr);
+        builderNewBuilder.writeInt(i6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, boolean z, int i5, int i6, boolean z2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z2);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, boolean z, int i5, int i6, int i7) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, boolean z, int i5, int i6, int i7, int i8) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, boolean z, int i6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i6);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, boolean z, int i6, boolean z2, int i7, int i8, boolean z3, boolean z4, int i9, boolean z5, boolean z6, boolean z7, boolean z8, boolean z9, boolean z10) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeInt(i9);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeBoolean(z8);
-        newBuilder.writeBoolean(z9);
-        newBuilder.writeBoolean(z10);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeBoolean(z8);
+        builderNewBuilder.writeBoolean(z9);
+        builderNewBuilder.writeBoolean(z10);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, boolean z, int i6, int i7) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, boolean z, int i6, int i7, String str, int i8, int i9, long j, long j2, int i10, int i11, int i12, boolean z2, boolean z3, int i13, boolean z4, long j3, long j4, boolean z5, boolean z6, boolean z7, int i14, int i15, int i16, int i17, int i18, boolean z8, int i19, boolean z9, int i20, int i21, int i22, long j5, boolean z10, boolean z11, boolean z12, boolean z13, boolean z14, boolean z15, boolean z16, int i23, int i24) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeString(str);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i13);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeLong(j3);
-        newBuilder.writeLong(j4);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeInt(i16);
-        newBuilder.writeInt(i17);
-        newBuilder.writeInt(i18);
-        newBuilder.writeBoolean(z8);
-        newBuilder.writeInt(i19);
-        newBuilder.writeBoolean(z9);
-        newBuilder.writeInt(i20);
-        newBuilder.writeInt(i21);
-        newBuilder.writeInt(i22);
-        newBuilder.writeLong(j5);
-        newBuilder.writeBoolean(z10);
-        newBuilder.writeBoolean(z11);
-        newBuilder.writeBoolean(z12);
-        newBuilder.writeBoolean(z13);
-        newBuilder.writeBoolean(z14);
-        newBuilder.writeBoolean(z15);
-        newBuilder.writeBoolean(z16);
-        newBuilder.writeInt(i23);
-        newBuilder.writeInt(i24);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeLong(j3);
+        builderNewBuilder.writeLong(j4);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeInt(i16);
+        builderNewBuilder.writeInt(i17);
+        builderNewBuilder.writeInt(i18);
+        builderNewBuilder.writeBoolean(z8);
+        builderNewBuilder.writeInt(i19);
+        builderNewBuilder.writeBoolean(z9);
+        builderNewBuilder.writeInt(i20);
+        builderNewBuilder.writeInt(i21);
+        builderNewBuilder.writeInt(i22);
+        builderNewBuilder.writeLong(j5);
+        builderNewBuilder.writeBoolean(z10);
+        builderNewBuilder.writeBoolean(z11);
+        builderNewBuilder.writeBoolean(z12);
+        builderNewBuilder.writeBoolean(z13);
+        builderNewBuilder.writeBoolean(z14);
+        builderNewBuilder.writeBoolean(z15);
+        builderNewBuilder.writeBoolean(z16);
+        builderNewBuilder.writeInt(i23);
+        builderNewBuilder.writeInt(i24);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, boolean z, boolean z2, boolean z3, int i7) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i7);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i7);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, boolean z, boolean z2, int i7, boolean z3, boolean z4, int i8, long j, int i9, long j2, int i10, int i11, int i12, boolean z5, boolean z6, boolean z7, boolean z8, boolean z9, int i13) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i7);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeInt(i8);
-        newBuilder.writeLong(j);
-        newBuilder.writeInt(i9);
-        newBuilder.writeLong(j2);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeBoolean(z8);
-        newBuilder.writeBoolean(z9);
-        newBuilder.writeInt(i13);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeBoolean(z8);
+        builderNewBuilder.writeBoolean(z9);
+        builderNewBuilder.writeInt(i13);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, boolean z, boolean z2, int i7, int i8, boolean z3, boolean z4, long j, boolean z5, boolean z6, int i9, int i10, long j2, boolean z7, boolean z8) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeLong(j2);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeBoolean(z8);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeBoolean(z8);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, boolean z, int i8, boolean z2, int i9, boolean z3, boolean z4, int i10, long j, int i11, boolean z5, boolean z6, boolean z7, boolean z8, int i12) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i8);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i9);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeBoolean(z4);
-        newBuilder.writeInt(i10);
-        newBuilder.writeLong(j);
-        newBuilder.writeInt(i11);
-        newBuilder.writeBoolean(z5);
-        newBuilder.writeBoolean(z6);
-        newBuilder.writeBoolean(z7);
-        newBuilder.writeBoolean(z8);
-        newBuilder.writeInt(i12);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeBoolean(z4);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeBoolean(z5);
+        builderNewBuilder.writeBoolean(z6);
+        builderNewBuilder.writeBoolean(z7);
+        builderNewBuilder.writeBoolean(z8);
+        builderNewBuilder.writeInt(i12);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, boolean z, boolean z2, int i10, boolean z3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i10);
-        newBuilder.writeBoolean(z3);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeBoolean(z3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, boolean z, int i16) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeInt(i13);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i16);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i16);
+        return builderNewBuilder.build();
     }
 
-    public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18, int i19, int i20, int i21, int i22, int i23, int i24, int i25, int i26, int i27, int i28, int i29, boolean z, int i30, int i31, int i32, int i33, int i34, int i35, boolean z2, int i36, int i37, int i38, int i39, int i40, int i41, int i42) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeInt(i13);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeInt(i16);
-        newBuilder.writeInt(i17);
-        newBuilder.writeInt(i18);
-        newBuilder.writeInt(i19);
-        newBuilder.writeInt(i20);
-        newBuilder.writeInt(i21);
-        newBuilder.writeInt(i22);
-        newBuilder.writeInt(i23);
-        newBuilder.writeInt(i24);
-        newBuilder.writeInt(i25);
-        newBuilder.writeInt(i26);
-        newBuilder.writeInt(i27);
-        newBuilder.writeInt(i28);
-        newBuilder.writeInt(i29);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i30);
-        newBuilder.writeInt(i31);
-        newBuilder.writeInt(i32);
-        newBuilder.writeInt(i33);
-        newBuilder.writeInt(i34);
-        newBuilder.writeInt(i35);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i36);
-        newBuilder.writeInt(i37);
-        newBuilder.writeInt(i38);
-        newBuilder.writeInt(i39);
-        newBuilder.writeInt(i40);
-        newBuilder.writeInt(i41);
-        newBuilder.writeInt(i42);
-        return newBuilder.build();
+    public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18, int i19, int i20, int i21, int i22, int i23, int i24, int i25, int i26, int i27, int i28, int i29, boolean z, int i30, int i31, int i32, int i33, int i34, int i35, boolean z2, int i36, int i37, int i38, int i39, int i40, int i41, int i42, int i43, int i44) {
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeInt(i16);
+        builderNewBuilder.writeInt(i17);
+        builderNewBuilder.writeInt(i18);
+        builderNewBuilder.writeInt(i19);
+        builderNewBuilder.writeInt(i20);
+        builderNewBuilder.writeInt(i21);
+        builderNewBuilder.writeInt(i22);
+        builderNewBuilder.writeInt(i23);
+        builderNewBuilder.writeInt(i24);
+        builderNewBuilder.writeInt(i25);
+        builderNewBuilder.writeInt(i26);
+        builderNewBuilder.writeInt(i27);
+        builderNewBuilder.writeInt(i28);
+        builderNewBuilder.writeInt(i29);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i30);
+        builderNewBuilder.writeInt(i31);
+        builderNewBuilder.writeInt(i32);
+        builderNewBuilder.writeInt(i33);
+        builderNewBuilder.writeInt(i34);
+        builderNewBuilder.writeInt(i35);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i36);
+        builderNewBuilder.writeInt(i37);
+        builderNewBuilder.writeInt(i38);
+        builderNewBuilder.writeInt(i39);
+        builderNewBuilder.writeInt(i40);
+        builderNewBuilder.writeInt(i41);
+        builderNewBuilder.writeInt(i42);
+        builderNewBuilder.writeInt(i43);
+        builderNewBuilder.writeInt(i44);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, long j, boolean z, int i6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i6);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, int i5, long j, long j2, int i6, int i7, int i8, int i9, int i10, boolean z, int i11, int i12, int i13, int i14, int i15, boolean z2, boolean z3, int i16) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeInt(i10);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i11);
-        newBuilder.writeInt(i12);
-        newBuilder.writeInt(i13);
-        newBuilder.writeInt(i14);
-        newBuilder.writeInt(i15);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeBoolean(z3);
-        newBuilder.writeInt(i16);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeInt(i10);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i11);
+        builderNewBuilder.writeInt(i12);
+        builderNewBuilder.writeInt(i13);
+        builderNewBuilder.writeInt(i14);
+        builderNewBuilder.writeInt(i15);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeBoolean(z3);
+        builderNewBuilder.writeInt(i16);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, long j, boolean z, int i5, boolean z2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i5);
-        newBuilder.writeBoolean(z2);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeBoolean(z2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, int i4, float f, int i5, int i6) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeFloat(f);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeFloat(f);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, long j, boolean z, int i4, boolean z2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeLong(j);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i4);
-        newBuilder.writeBoolean(z2);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeBoolean(z2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, int i3, long j, long j2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, int i2, long j, long j2, long j3, boolean z, boolean z2, int i3, String[] strArr, int i4, int i5, int i6, boolean z3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeLong(j3);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.writeInt(i3);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeLong(j3);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.writeInt(i3);
         if (strArr == null) {
             strArr = new String[0];
         }
-        newBuilder.writeStringArray(strArr);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeBoolean(z3);
-        return newBuilder.build();
+        builderNewBuilder.writeStringArray(strArr);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeBoolean(z3);
+        return builderNewBuilder.build();
     }
 
     public static StatsEvent buildStatsEvent(int i, long j) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeLong(j);
-        return newBuilder.build();
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeLong(j);
+        return builderNewBuilder.build();
     }
 }

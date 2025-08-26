@@ -1,12 +1,12 @@
 package com.android.systemui.statusbar.phone.nio;
 
 import android.content.Context;
+import android.content.res.Resources;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardStatusBarNioLayoutModel {
     public int bottomMargin;
@@ -38,7 +38,7 @@ public final class KeyguardStatusBarNioLayoutModel {
         this.isNotificationIconsOnlyOn = settingsHelper.isNotificationIconsOnlyOn();
     }
 
-    public final int getEndMargin() {
+    public final int getEndMargin() throws Resources.NotFoundException {
         if (!this.isNotificationIconsOnlyOn || !this.isShowNotificationOnKeyguard || this.visibleCallChip || this.numberOfNio <= 0) {
             return 0;
         }

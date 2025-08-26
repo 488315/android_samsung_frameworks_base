@@ -47,10 +47,10 @@ public class MediaBufferFileWriter {
 
     public MediaBufferFileWriter(String str, String str2) {
         this.path = str;
-        int lastIndexOf = str2.lastIndexOf(MediaMetrics.SEPARATOR);
-        if (lastIndexOf > 0) {
-            this.prefix = str2.substring(0, lastIndexOf);
-            this.ext = str2.substring(lastIndexOf + 1);
+        int iLastIndexOf = str2.lastIndexOf(MediaMetrics.SEPARATOR);
+        if (iLastIndexOf > 0) {
+            this.prefix = str2.substring(0, iLastIndexOf);
+            this.ext = str2.substring(iLastIndexOf + 1);
         } else {
             this.prefix = str2;
             this.ext = null;
@@ -58,15 +58,15 @@ public class MediaBufferFileWriter {
     }
 
     public MediaBufferFileWriter(String str) {
-        int lastIndexOf = str.lastIndexOf("/");
-        this.path = str.substring(0, lastIndexOf);
-        String substring = str.substring(lastIndexOf + 1);
-        int lastIndexOf2 = substring.lastIndexOf(MediaMetrics.SEPARATOR);
-        if (lastIndexOf2 > 0) {
-            this.prefix = substring.substring(0, lastIndexOf2);
-            this.ext = substring.substring(lastIndexOf2 + 1);
+        int iLastIndexOf = str.lastIndexOf("/");
+        this.path = str.substring(0, iLastIndexOf);
+        String strSubstring = str.substring(iLastIndexOf + 1);
+        int iLastIndexOf2 = strSubstring.lastIndexOf(MediaMetrics.SEPARATOR);
+        if (iLastIndexOf2 > 0) {
+            this.prefix = strSubstring.substring(0, iLastIndexOf2);
+            this.ext = strSubstring.substring(iLastIndexOf2 + 1);
         } else {
-            this.prefix = substring;
+            this.prefix = strSubstring;
             this.ext = null;
         }
     }
@@ -83,9 +83,9 @@ public class MediaBufferFileWriter {
             extractMetaBuffers(mediaBuffer);
             return writeSingle(((MediaBufferGroup) mediaBuffer).getPrimaryBuffer(), "");
         } catch (UnsupportedOperationException unused) {
-            List<MediaBuffer> asList = mediaBuffer.asList();
-            for (int i = 0; i < asList.size(); i++) {
-                if (!this.writeSingle(asList.get(i), Session.SESSION_SEPARATION_CHAR_CHILD + i)) {
+            List<MediaBuffer> listAsList = mediaBuffer.asList();
+            for (int i = 0; i < listAsList.size(); i++) {
+                if (!this.writeSingle(listAsList.get(i), Session.SESSION_SEPARATION_CHAR_CHILD + i)) {
                     return false;
                 }
             }
@@ -93,9 +93,9 @@ public class MediaBufferFileWriter {
         }
     }
 
-    private boolean writeSingle(MediaBuffer mediaBuffer, String str) {
-        String fmtstr;
-        boolean writeRawImageSingle;
+    private boolean writeSingle(MediaBuffer mediaBuffer, String str) throws UnsupportedOperationException, IOException {
+        String strFmtstr;
+        boolean zWriteRawImageSingle;
         Supplier<ExifInterface> supplier;
         ExifInterface exifInterface;
         Log.d(TAG, "writeSingle: " + mediaBuffer);
@@ -110,7 +110,7 @@ public class MediaBufferFileWriter {
         if (this.isHDR) {
             mutableFormat.set("encode-hdr", true);
         }
-        MediaBuffer of = MediaBuffer.of(mutableFormat, mediaBuffer.getData());
+        MediaBuffer mediaBufferOf = MediaBuffer.of(mutableFormat, mediaBuffer.getData());
         ArrayList arrayList = new ArrayList();
         UniExifInterface uniExifInterface = this.uniExifInterface;
         if (uniExifInterface != null) {
@@ -130,30 +130,30 @@ public class MediaBufferFileWriter {
             arrayList.add(MediaBuffer.metadataBufferOf(3, bitmap));
         }
         if (!arrayList.isEmpty()) {
-            of = MediaBuffer.groupOf(of, arrayList);
+            mediaBufferOf = MediaBuffer.groupOf(mediaBufferOf, arrayList);
         }
         String str2 = this.ext;
         if (str2 != null) {
-            fmtstr = Def.fmtstr("%s/%s%s.%s", this.path, this.prefix, str, str2);
-            writeRawImageSingle = ((Boolean) ((BiFunction) Optional.ofNullable(this.compressImageWriter).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda3
+            strFmtstr = Def.fmtstr("%s/%s%s.%s", this.path, this.prefix, str, str2);
+            zWriteRawImageSingle = ((Boolean) ((BiFunction) Optional.ofNullable(this.compressImageWriter).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda3
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     return MediaBufferFileWriter.lambda$writeSingle$1();
                 }
-            })).apply(of, fmtstr)).booleanValue();
+            })).apply(mediaBufferOf, strFmtstr)).booleanValue();
         } else {
-            this.ext = (String) Optional.ofNullable(of.getFormat().getColorFormat()).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda4
+            this.ext = (String) Optional.ofNullable(mediaBufferOf.getFormat().getColorFormat()).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda4
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     return MediaBufferFileWriter.lambda$writeSingle$2((ColorFormat) obj);
                 }
             }).orElse("raw");
-            fmtstr = Def.fmtstr("%s/%s_%dx%d%s.%s", this.path, this.prefix, Integer.valueOf(of.getStride() / of.getChannels()), Integer.valueOf(of.getScanline()), str, this.ext);
-            writeRawImageSingle = writeRawImageSingle(of, fmtstr);
+            strFmtstr = Def.fmtstr("%s/%s_%dx%d%s.%s", this.path, this.prefix, Integer.valueOf(mediaBufferOf.getStride() / mediaBufferOf.getChannels()), Integer.valueOf(mediaBufferOf.getScanline()), str, this.ext);
+            zWriteRawImageSingle = writeRawImageSingle(mediaBufferOf, strFmtstr);
         }
-        if (writeRawImageSingle && (supplier = this.exifSupplier) != null && (exifInterface = supplier.get()) != null) {
+        if (zWriteRawImageSingle && (supplier = this.exifSupplier) != null && (exifInterface = supplier.get()) != null) {
             try {
-                RandomAccessFile randomAccessFile = new RandomAccessFile(fmtstr, "rw");
+                RandomAccessFile randomAccessFile = new RandomAccessFile(strFmtstr, "rw");
                 try {
                     randomAccessFile.getChannel().position(0L);
                     ExifInterface exifInterface2 = new ExifInterface(randomAccessFile.getFD());
@@ -164,14 +164,14 @@ public class MediaBufferFileWriter {
                     }
                     exifInterface2.saveAttributes();
                     randomAccessFile.close();
-                    return writeRawImageSingle;
+                    return zWriteRawImageSingle;
                 } finally {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return writeRawImageSingle;
+        return zWriteRawImageSingle;
     }
 
     static /* synthetic */ BiFunction lambda$writeSingle$1() {
@@ -217,19 +217,19 @@ public class MediaBufferFileWriter {
         return colorFormat.name().toLowerCase(Locale.ROOT);
     }
 
-    private boolean writeRawImageSingle(MediaBuffer mediaBuffer, String str) {
+    private boolean writeRawImageSingle(MediaBuffer mediaBuffer, String str) throws UnsupportedOperationException, IOException {
         final DataType dataType = mediaBuffer.getFormat().getDataType();
         if (Arrays.stream(new DataType[]{DataType.U8, DataType.S8}).noneMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return MediaBufferFileWriter.lambda$writeRawImageSingle$3(DataType.this, (DataType) obj);
+                return MediaBufferFileWriter.lambda$writeRawImageSingle$3(dataType, (DataType) obj);
             }
         })) {
-            MutableMediaFormat mutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
-            mutableImageOf.setDataType(DataType.of(DataType.U8, mediaBuffer.getChannels()));
-            MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(mutableImageOf.toMediaFormat());
-            UniImgp.ofCvtData().run(mediaBuffer, mutableOf);
-            mediaBuffer = mutableOf;
+            MutableMediaFormat mutableMediaFormatMutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
+            mutableMediaFormatMutableImageOf.setDataType(DataType.of(DataType.U8, mediaBuffer.getChannels()));
+            MutableMediaBuffer mutableMediaBufferMutableOf = MediaBuffer.mutableOf(mutableMediaFormatMutableImageOf.toMediaFormat());
+            UniImgp.ofCvtData().run(mediaBuffer, mutableMediaBufferMutableOf);
+            mediaBuffer = mutableMediaBufferMutableOf;
         }
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(str);
@@ -255,13 +255,13 @@ public class MediaBufferFileWriter {
         mediaBuffer.asList().forEach(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaBufferFileWriter.this.m9514xaf869f87((MediaBuffer) obj);
+                this.f$0.m9527xaf869f87((MediaBuffer) obj);
             }
         });
     }
 
     /* renamed from: lambda$extractMetaBuffers$5$com-samsung-android-sume-core-buffer-MediaBufferFileWriter, reason: not valid java name */
-    /* synthetic */ void m9514xaf869f87(final MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9527xaf869f87(final MediaBuffer mediaBuffer) {
         if (mediaBuffer.getFormat().getMediaType() == MediaType.META) {
             if (mediaBuffer.getFormat().contains("exif")) {
                 if (mediaBuffer.getData() instanceof UniExifInterface) {
@@ -271,7 +271,7 @@ public class MediaBufferFileWriter {
                     this.exifSupplier = new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda2
                         @Override // java.util.function.Supplier
                         public final Object get() {
-                            return MediaBufferFileWriter.lambda$extractMetaBuffers$4(MediaBuffer.this);
+                            return MediaBufferFileWriter.lambda$extractMetaBuffers$4(mediaBuffer);
                         }
                     };
                     return;

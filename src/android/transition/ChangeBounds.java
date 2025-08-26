@@ -8,6 +8,7 @@ import android.animation.PropertyValuesHolder;
 import android.animation.RectEvaluator;
 import android.animation.TypeConverter;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -61,10 +62,10 @@ public class ChangeBounds extends Transition {
         }
 
         @Override // android.util.Property
-        public void set(View view, PointF pointF) {
-            int round = Math.round(pointF.x);
-            int round2 = Math.round(pointF.y);
-            view.setLeftTopRightBottom(round, round2, view.getWidth() + round, view.getHeight() + round2);
+        public void set(View view, PointF pointF) throws Resources.NotFoundException {
+            int iRound = Math.round(pointF.x);
+            int iRound2 = Math.round(pointF.y);
+            view.setLeftTopRightBottom(iRound, iRound2, view.getWidth() + iRound, view.getHeight() + iRound2);
         }
     };
     private static RectEvaluator sRectEvaluator = new RectEvaluator();
@@ -78,7 +79,7 @@ public class ChangeBounds extends Transition {
             }
 
             @Override // android.util.Property
-            public void set(ViewBounds viewBounds, PointF pointF) {
+            public void set(ViewBounds viewBounds, PointF pointF) throws Resources.NotFoundException {
                 viewBounds.setTopLeft(pointF);
             }
         };
@@ -90,7 +91,7 @@ public class ChangeBounds extends Transition {
             }
 
             @Override // android.util.Property
-            public void set(ViewBounds viewBounds, PointF pointF) {
+            public void set(ViewBounds viewBounds, PointF pointF) throws Resources.NotFoundException {
                 viewBounds.setBottomRight(pointF);
             }
         };
@@ -101,7 +102,7 @@ public class ChangeBounds extends Transition {
             }
 
             @Override // android.util.Property
-            public void set(View view, PointF pointF) {
+            public void set(View view, PointF pointF) throws Resources.NotFoundException {
                 view.setLeftTopRightBottom(view.getLeft(), view.getTop(), Math.round(pointF.x), Math.round(pointF.y));
             }
         };
@@ -112,7 +113,7 @@ public class ChangeBounds extends Transition {
             }
 
             @Override // android.util.Property
-            public void set(View view, PointF pointF) {
+            public void set(View view, PointF pointF) throws Resources.NotFoundException {
                 view.setLeftTopRightBottom(Math.round(pointF.x), Math.round(pointF.y), view.getRight(), view.getBottom());
             }
         };
@@ -129,9 +130,9 @@ public class ChangeBounds extends Transition {
         this.tempLocation = new int[2];
         this.mResizeClip = false;
         this.mReparent = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ChangeBounds);
-        boolean z = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ChangeBounds);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
         setResizeClip(z);
     }
 
@@ -189,7 +190,7 @@ public class ChangeBounds extends Transition {
     }
 
     @Override // android.transition.Transition
-    public Animator createAnimator(final ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
+    public Animator createAnimator(final ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) throws Resources.NotFoundException {
         int i;
         Rect rect;
         int i2;
@@ -283,10 +284,10 @@ public class ChangeBounds extends Transition {
                     return ObjectAnimator.ofObject(view, (Property<View, V>) POSITION_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i3, i5, i4, i6));
                 }
                 ViewBounds viewBounds = new ViewBounds(view);
-                ObjectAnimator ofObject = ObjectAnimator.ofObject(viewBounds, (Property<ViewBounds, V>) TOP_LEFT_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i3, i5, i4, i6));
-                ObjectAnimator ofObject2 = ObjectAnimator.ofObject(viewBounds, (Property<ViewBounds, V>) BOTTOM_RIGHT_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i7, i9, i8, i10));
+                ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(viewBounds, (Property<ViewBounds, V>) TOP_LEFT_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i3, i5, i4, i6));
+                ObjectAnimator objectAnimatorOfObject2 = ObjectAnimator.ofObject(viewBounds, (Property<ViewBounds, V>) BOTTOM_RIGHT_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i7, i9, i8, i10));
                 AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playTogether(ofObject, ofObject2);
+                animatorSet.playTogether(objectAnimatorOfObject, objectAnimatorOfObject2);
                 animatorSet.addListener(new AnimatorListenerAdapter(this, viewBounds) { // from class: android.transition.ChangeBounds.8
                     private ViewBounds mViewBounds;
                     final /* synthetic */ ViewBounds val$viewBounds;
@@ -299,7 +300,7 @@ public class ChangeBounds extends Transition {
                 return animatorSet;
             }
             view.setLeftTopRightBottom(i3, i5, Math.max(i11, i13) + i3, Math.max(i12, i14) + i5);
-            ObjectAnimator ofObject3 = (i3 == i4 && i5 == i6) ? null : ObjectAnimator.ofObject(view, (Property<View, V>) POSITION_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i3, i5, i4, i6));
+            ObjectAnimator objectAnimatorOfObject3 = (i3 == i4 && i5 == i6) ? null : ObjectAnimator.ofObject(view, (Property<View, V>) POSITION_PROPERTY, (TypeConverter) null, getPathMotion().getPath(i3, i5, i4, i6));
             if (rect5 == null) {
                 i2 = 0;
                 rect2 = new Rect(0, 0, i11, i12);
@@ -312,9 +313,9 @@ public class ChangeBounds extends Transition {
                 objectAnimator = null;
             } else {
                 view.setClipBounds(rect2);
-                ObjectAnimator ofObject4 = ObjectAnimator.ofObject(view, "clipBounds", sRectEvaluator, rect2, rect7);
+                ObjectAnimator objectAnimatorOfObject4 = ObjectAnimator.ofObject(view, "clipBounds", sRectEvaluator, rect2, rect7);
                 final Rect rect8 = rect;
-                ofObject4.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeBounds.9
+                objectAnimatorOfObject4.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeBounds.9
                     private boolean mIsCanceled;
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -323,7 +324,7 @@ public class ChangeBounds extends Transition {
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animator) {
+                    public void onAnimationEnd(Animator animator) throws Resources.NotFoundException {
                         if (this.mIsCanceled) {
                             return;
                         }
@@ -331,36 +332,36 @@ public class ChangeBounds extends Transition {
                         view.setLeftTopRightBottom(i4, i6, i8, i10);
                     }
                 });
-                objectAnimator = ofObject4;
+                objectAnimator = objectAnimatorOfObject4;
             }
-            return TransitionUtils.mergeAnimators(ofObject3, objectAnimator);
+            return TransitionUtils.mergeAnimators(objectAnimatorOfObject3, objectAnimator);
         }
         viewGroup.getLocationInWindow(this.tempLocation);
-        int intValue = ((Integer) transitionValues.values.get(PROPNAME_WINDOW_X)).intValue() - this.tempLocation[0];
-        int intValue2 = ((Integer) transitionValues.values.get(PROPNAME_WINDOW_Y)).intValue() - this.tempLocation[1];
-        int intValue3 = ((Integer) transitionValues2.values.get(PROPNAME_WINDOW_X)).intValue() - this.tempLocation[0];
-        int intValue4 = ((Integer) transitionValues2.values.get(PROPNAME_WINDOW_Y)).intValue() - this.tempLocation[1];
-        if (intValue == intValue3 && intValue2 == intValue4) {
+        int iIntValue = ((Integer) transitionValues.values.get(PROPNAME_WINDOW_X)).intValue() - this.tempLocation[0];
+        int iIntValue2 = ((Integer) transitionValues.values.get(PROPNAME_WINDOW_Y)).intValue() - this.tempLocation[1];
+        int iIntValue3 = ((Integer) transitionValues2.values.get(PROPNAME_WINDOW_X)).intValue() - this.tempLocation[0];
+        int iIntValue4 = ((Integer) transitionValues2.values.get(PROPNAME_WINDOW_Y)).intValue() - this.tempLocation[1];
+        if (iIntValue == iIntValue3 && iIntValue2 == iIntValue4) {
             return null;
         }
         int width = view.getWidth();
         int height = view.getHeight();
-        Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        view.draw(new Canvas(createBitmap));
-        final BitmapDrawable bitmapDrawable = new BitmapDrawable(createBitmap);
-        bitmapDrawable.setBounds(intValue, intValue2, width + intValue, height + intValue2);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmapCreateBitmap));
+        final BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmapCreateBitmap);
+        bitmapDrawable.setBounds(iIntValue, iIntValue2, width + iIntValue, height + iIntValue2);
         final float transitionAlpha = view.getTransitionAlpha();
         view.setTransitionAlpha(0.0f);
         viewGroup.getOverlay().add(bitmapDrawable);
-        ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(bitmapDrawable, PropertyValuesHolder.ofObject(DRAWABLE_ORIGIN_PROPERTY, (TypeConverter) null, getPathMotion().getPath(intValue, intValue2, intValue3, intValue4)));
-        ofPropertyValuesHolder.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeBounds.10
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(bitmapDrawable, PropertyValuesHolder.ofObject(DRAWABLE_ORIGIN_PROPERTY, (TypeConverter) null, getPathMotion().getPath(iIntValue, iIntValue2, iIntValue3, iIntValue4)));
+        objectAnimatorOfPropertyValuesHolder.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeBounds.10
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {
                 viewGroup.getOverlay().remove(bitmapDrawable);
                 view.setTransitionAlpha(transitionAlpha);
             }
         });
-        return ofPropertyValuesHolder;
+        return objectAnimatorOfPropertyValuesHolder;
     }
 
     private static class ViewBounds {
@@ -376,7 +377,7 @@ public class ChangeBounds extends Transition {
             this.mView = view;
         }
 
-        public void setTopLeft(PointF pointF) {
+        public void setTopLeft(PointF pointF) throws Resources.NotFoundException {
             this.mLeft = Math.round(pointF.x);
             this.mTop = Math.round(pointF.y);
             int i = this.mTopLeftCalls + 1;
@@ -386,7 +387,7 @@ public class ChangeBounds extends Transition {
             }
         }
 
-        public void setBottomRight(PointF pointF) {
+        public void setBottomRight(PointF pointF) throws Resources.NotFoundException {
             this.mRight = Math.round(pointF.x);
             this.mBottom = Math.round(pointF.y);
             int i = this.mBottomRightCalls + 1;
@@ -396,7 +397,7 @@ public class ChangeBounds extends Transition {
             }
         }
 
-        private void setLeftTopRightBottom() {
+        private void setLeftTopRightBottom() throws Resources.NotFoundException {
             this.mView.setLeftTopRightBottom(this.mLeft, this.mTop, this.mRight, this.mBottom);
             this.mTopLeftCalls = 0;
             this.mBottomRightCalls = 0;

@@ -22,6 +22,7 @@ import android.widget.RemoteViews;
 import android.widget.TextClock;
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.Duration;
@@ -140,11 +141,11 @@ public class AnalogClock extends View {
                 long millis;
                 AnalogClock.this.removeCallbacks(this);
                 if (AnalogClock.this.mVisible) {
-                    Instant now = AnalogClock.this.now();
-                    ZonedDateTime atZone = now.atZone(AnalogClock.this.mClock.getZone());
-                    LocalTime localTime = atZone.toLocalTime();
+                    Instant instantNow = AnalogClock.this.now();
+                    ZonedDateTime zonedDateTimeAtZone = instantNow.atZone(AnalogClock.this.mClock.getZone());
+                    LocalTime localTime = zonedDateTimeAtZone.toLocalTime();
                     if (AnalogClock.this.mSecondHand == null || AnalogClock.this.mSecondsHandFps <= 0) {
-                        long millis2 = Duration.between(now, atZone.plusMinutes(1L).withSecond(0).toInstant()).toMillis();
+                        long millis2 = Duration.between(instantNow, zonedDateTimeAtZone.plusMinutes(1L).withSecond(0).toInstant()).toMillis();
                         millis = millis2 <= 0 ? Duration.ofMinutes(1L).toMillis() : millis2;
                     } else {
                         long millis3 = Duration.ofNanos(localTime.getNano()).toMillis();
@@ -155,95 +156,95 @@ public class AnalogClock extends View {
                         }
                     }
                     AnalogClock.this.postDelayed(this, millis);
-                    AnalogClock.this.onTimeChanged(localTime, now.toEpochMilli());
+                    AnalogClock.this.onTimeChanged(localTime, instantNow.toEpochMilli());
                     AnalogClock.this.invalidate();
                 }
             }
         };
         this.mClockEventDelegate = new TextClock.ClockEventDelegate(context);
         this.mSecondsHandFps = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_ANALOG_CLOCK_SECONDS_HAND_FPS, context.getResources().getInteger(R.integer.config_defaultAnalogClockSecondsHandFps));
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AnalogClock, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AnalogClock, attributeSet, obtainStyledAttributes, i, i2);
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AnalogClock, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.AnalogClock, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         this.mDial = drawable;
         if (drawable == null) {
             this.mDial = context.getDrawable(R.drawable.clock_dial);
         }
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(5);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(5);
         if (colorStateList != null) {
             tintInfo4.mTintList = colorStateList;
             tintInfo4.mHasTintList = true;
         }
-        BlendMode parseBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(6, -1), null);
-        if (parseBlendMode != null) {
-            tintInfo4.mTintBlendMode = parseBlendMode;
+        BlendMode blendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(6, -1), null);
+        if (blendMode != null) {
+            tintInfo4.mTintBlendMode = blendMode;
             tintInfo4.mHasTintBlendMode = true;
         }
         if (tintInfo4.mHasTintList || tintInfo4.mHasTintBlendMode) {
             this.mDial = tintInfo4.apply(this.mDial);
         }
-        Drawable drawable2 = obtainStyledAttributes.getDrawable(1);
+        Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(1);
         this.mHourHand = drawable2;
         if (drawable2 == null) {
             this.mHourHand = context.getDrawable(R.drawable.clock_hand_hour);
         }
-        ColorStateList colorStateList2 = obtainStyledAttributes.getColorStateList(7);
+        ColorStateList colorStateList2 = typedArrayObtainStyledAttributes.getColorStateList(7);
         if (colorStateList2 != null) {
             tintInfo.mTintList = colorStateList2;
             tintInfo.mHasTintList = true;
         }
-        BlendMode parseBlendMode2 = Drawable.parseBlendMode(obtainStyledAttributes.getInt(8, -1), null);
-        if (parseBlendMode2 != null) {
-            tintInfo.mTintBlendMode = parseBlendMode2;
+        BlendMode blendMode2 = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(8, -1), null);
+        if (blendMode2 != null) {
+            tintInfo.mTintBlendMode = blendMode2;
             tintInfo.mHasTintBlendMode = true;
         }
         if (tintInfo.mHasTintList || tintInfo.mHasTintBlendMode) {
             this.mHourHand = tintInfo.apply(this.mHourHand);
         }
-        Drawable drawable3 = obtainStyledAttributes.getDrawable(2);
+        Drawable drawable3 = typedArrayObtainStyledAttributes.getDrawable(2);
         this.mMinuteHand = drawable3;
         if (drawable3 == null) {
             this.mMinuteHand = context.getDrawable(R.drawable.clock_hand_minute);
         }
-        ColorStateList colorStateList3 = obtainStyledAttributes.getColorStateList(9);
+        ColorStateList colorStateList3 = typedArrayObtainStyledAttributes.getColorStateList(9);
         if (colorStateList3 != null) {
             tintInfo2.mTintList = colorStateList3;
             tintInfo2.mHasTintList = true;
         }
-        BlendMode parseBlendMode3 = Drawable.parseBlendMode(obtainStyledAttributes.getInt(10, -1), null);
-        if (parseBlendMode3 != null) {
-            tintInfo2.mTintBlendMode = parseBlendMode3;
+        BlendMode blendMode3 = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(10, -1), null);
+        if (blendMode3 != null) {
+            tintInfo2.mTintBlendMode = blendMode3;
             tintInfo2.mHasTintBlendMode = true;
         }
         if (tintInfo2.mHasTintList || tintInfo2.mHasTintBlendMode) {
             this.mMinuteHand = tintInfo2.apply(this.mMinuteHand);
         }
-        this.mSecondHand = obtainStyledAttributes.getDrawable(4);
-        ColorStateList colorStateList4 = obtainStyledAttributes.getColorStateList(11);
+        this.mSecondHand = typedArrayObtainStyledAttributes.getDrawable(4);
+        ColorStateList colorStateList4 = typedArrayObtainStyledAttributes.getColorStateList(11);
         if (colorStateList4 != null) {
             tintInfo3.mTintList = colorStateList4;
             tintInfo3.mHasTintList = true;
         }
-        BlendMode parseBlendMode4 = Drawable.parseBlendMode(obtainStyledAttributes.getInt(12, -1), null);
-        if (parseBlendMode4 != null) {
-            tintInfo3.mTintBlendMode = parseBlendMode4;
+        BlendMode blendMode4 = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(12, -1), null);
+        if (blendMode4 != null) {
+            tintInfo3.mTintBlendMode = blendMode4;
             tintInfo3.mHasTintBlendMode = true;
         }
         if (tintInfo3.mHasTintList || tintInfo3.mHasTintBlendMode) {
             this.mSecondHand = tintInfo3.apply(this.mSecondHand);
         }
-        this.mTimeZone = toZoneId(obtainStyledAttributes.getString(3));
+        this.mTimeZone = toZoneId(typedArrayObtainStyledAttributes.getString(3));
         createClock();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.mDialWidth = this.mDial.getIntrinsicWidth();
         this.mDialHeight = this.mDial.getIntrinsicHeight();
     }
 
     @RemotableViewMethod
-    public void setDial(Icon icon) {
-        Drawable loadDrawable = icon.loadDrawable(getContext());
-        this.mDial = loadDrawable;
-        this.mDialWidth = loadDrawable.getIntrinsicWidth();
+    public void setDial(Icon icon) throws IOException {
+        Drawable drawableLoadDrawable = icon.loadDrawable(getContext());
+        this.mDial = drawableLoadDrawable;
+        this.mDialWidth = drawableLoadDrawable.getIntrinsicWidth();
         this.mDialHeight = this.mDial.getIntrinsicHeight();
         if (this.mDialTintInfo.mHasTintList || this.mDialTintInfo.mHasTintBlendMode) {
             this.mDial = this.mDialTintInfo.apply(this.mDial);
@@ -449,8 +450,8 @@ public class AnalogClock extends View {
         if (mode2 != 0 && size2 < (i3 = this.mDialHeight)) {
             f = size2 / i3;
         }
-        float min = Math.min(f2, f);
-        setMeasuredDimension(resolveSizeAndState((int) (this.mDialWidth * min), i, 0), resolveSizeAndState((int) (this.mDialHeight * min), i2, 0));
+        float fMin = Math.min(f2, f);
+        setMeasuredDimension(resolveSizeAndState((int) (this.mDialWidth * fMin), i, 0), resolveSizeAndState((int) (this.mDialHeight * fMin), i2, 0));
     }
 
     @Override // android.view.View
@@ -475,9 +476,9 @@ public class AnalogClock extends View {
         int intrinsicWidth = drawable.getIntrinsicWidth();
         int intrinsicHeight = drawable.getIntrinsicHeight();
         if (i < intrinsicWidth || i2 < intrinsicHeight) {
-            float min = Math.min(i / intrinsicWidth, i2 / intrinsicHeight);
+            float fMin = Math.min(i / intrinsicWidth, i2 / intrinsicHeight);
             canvas.save();
-            canvas.scale(min, min, i3, i4);
+            canvas.scale(fMin, fMin, i3, i4);
             z2 = true;
         }
         if (z) {
@@ -530,8 +531,8 @@ public class AnalogClock extends View {
     }
 
     protected void onTimeChanged() {
-        Instant now = now();
-        onTimeChanged(now.atZone(this.mClock.getZone()).toLocalTime(), now.toEpochMilli());
+        Instant instantNow = now();
+        onTimeChanged(instantNow.atZone(this.mClock.getZone()).toLocalTime(), instantNow.toEpochMilli());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -594,17 +595,17 @@ public class AnalogClock extends View {
             if (drawable == null) {
                 return null;
             }
-            Drawable mutate = drawable.mutate();
+            Drawable drawableMutate = drawable.mutate();
             if (this.mHasTintList) {
-                mutate.setTintList(this.mTintList);
+                drawableMutate.setTintList(this.mTintList);
             }
             if (this.mHasTintBlendMode) {
-                mutate.setTintBlendMode(this.mTintBlendMode);
+                drawableMutate.setTintBlendMode(this.mTintBlendMode);
             }
             if (drawable.isStateful()) {
-                mutate.setState(AnalogClock.this.getDrawableState());
+                drawableMutate.setState(AnalogClock.this.getDrawableState());
             }
-            return mutate;
+            return drawableMutate;
         }
     }
 }

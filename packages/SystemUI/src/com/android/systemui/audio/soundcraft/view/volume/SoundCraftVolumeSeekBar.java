@@ -39,7 +39,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -55,7 +54,6 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
     public float touchedX;
     public final Lazy viewModel$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekbarChangeListener implements SeslSeekBar.OnSeekBarChangeListener {
         public SeekbarChangeListener() {
         }
@@ -71,9 +69,9 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
                 int i3 = i * 10;
                 VolumeManager volumeManager = viewModel$1.volumeManager;
                 volumeManager.getClass();
-                boolean isTagEnabled = Trace.isTagEnabled(4096L);
+                boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
                 Lazy lazy = volumeManager.volumeController$delegate;
-                if (isTagEnabled) {
+                if (zIsTagEnabled) {
                     Trace.traceBegin(4096L, "#soundCraft.VolumeManager_setStreamVolume");
                     try {
                         VolumeDialogController volumeDialogController = (VolumeDialogController) lazy.getValue();
@@ -166,7 +164,7 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
         springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeSeekBar$progressBarSpring$1$2
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                SoundCraftVolumeSeekBar.this.setProgress((int) f);
+                this.this$0.setProgress((int) f);
             }
         });
         this.progressBarSpring = springAnimation;
@@ -176,10 +174,10 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
     public final void animateSeekBarButton(final boolean z) {
         final SoundCraftRoundedCornerSeekBarDrawable soundCraftRoundedCornerSeekBarDrawable = (SoundCraftRoundedCornerSeekBarDrawable) ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(R.id.progress);
         this.handler.removeCallbacks(this.buttonAnimatorRunnable);
-        Runnable runnable = new Runnable() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeSeekBar$animateSeekBarButton$1
+        Runnable runnable = new Runnable() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeSeekBar.animateSeekBarButton.1
             @Override // java.lang.Runnable
             public final void run() {
-                final SoundCraftRoundedCornerSeekBarDrawable soundCraftRoundedCornerSeekBarDrawable2 = SoundCraftRoundedCornerSeekBarDrawable.this;
+                final SoundCraftRoundedCornerSeekBarDrawable soundCraftRoundedCornerSeekBarDrawable2 = soundCraftRoundedCornerSeekBarDrawable;
                 boolean z2 = z;
                 if (soundCraftRoundedCornerSeekBarDrawable2.buttonAnimator.isRunning()) {
                     soundCraftRoundedCornerSeekBarDrawable2.buttonAnimator.cancel();
@@ -205,8 +203,8 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
                 soundCraftRoundedCornerSeekBarDrawable2.buttonAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftRoundedCornerSeekBarDrawable$animateButton$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        SoundCraftRoundedCornerSeekBarDrawable.this.buttonColor = ((Integer) valueAnimator.getAnimatedValue()).intValue();
-                        SoundCraftRoundedCornerSeekBarDrawable.this.invalidateSelf();
+                        soundCraftRoundedCornerSeekBarDrawable2.buttonColor = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        soundCraftRoundedCornerSeekBarDrawable2.invalidateSelf();
                     }
                 });
             }
@@ -219,36 +217,41 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
         return (VolumeBarViewModel) this.viewModel$delegate.getValue();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00a4  */
     @Override // androidx.appcompat.widget.SeslAbsSeekBar, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         if (isEnabled()) {
             int action = motionEvent.getAction();
             if (action != 0) {
-                if (action != 1) {
-                    if (action != 2) {
-                        if (action != 3) {
-                            return super.onTouchEvent(motionEvent);
-                        }
-                    } else if (!Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
-                        float x = motionEvent.getX() - this.touchedX;
-                        if (this.isTracking || Math.abs(x) > this.scaledTouchSlop) {
-                            ViewParent parent = getParent();
-                            if (parent != null) {
-                                parent.requestDisallowInterceptTouchEvent(true);
-                            }
-                            this.isTracking = true;
-                            float width = x / ((getWidth() - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
-                            int max = getMax() - getMin();
-                            setProgress(Math.round(getResources().getConfiguration().getLayoutDirection() == 1 ? ((width * max) - this.currentProgress) * (-1) : (width * max) + this.currentProgress));
-                            return true;
-                        }
+                if (action == 1) {
+                    if (!Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
+                        this.seekbarChangeListener.onStopTrackingTouch(this);
+                        this.isTracking = false;
+                        animateSeekBarButton(false);
+                        return true;
                     }
-                }
-                if (!Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
-                    this.seekbarChangeListener.onStopTrackingTouch(this);
-                    this.isTracking = false;
-                    animateSeekBarButton(false);
-                    return true;
+                } else if (action != 2) {
+                    if (action != 3) {
+                        return super.onTouchEvent(motionEvent);
+                    }
+                    if (!Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
+                    }
+                } else if (!Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
+                    float x = motionEvent.getX() - this.touchedX;
+                    if (this.isTracking || Math.abs(x) > this.scaledTouchSlop) {
+                        ViewParent parent = getParent();
+                        if (parent != null) {
+                            parent.requestDisallowInterceptTouchEvent(true);
+                        }
+                        this.isTracking = true;
+                        float width = x / ((getWidth() - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
+                        int max = getMax() - getMin();
+                        setProgress(Math.round(getResources().getConfiguration().getLayoutDirection() == 1 ? ((width * max) - this.currentProgress) * (-1) : (width * max) + this.currentProgress));
+                        return true;
+                    }
                 }
             } else {
                 if (Intrinsics.areEqual(getViewModel$1().smartViewEnabled.getValue(), Boolean.TRUE)) {
@@ -300,7 +303,7 @@ public final class SoundCraftVolumeSeekBar extends SeslSeekBar implements SoundC
         springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeSeekBar$progressBarSpring$1$2
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                SoundCraftVolumeSeekBar.this.setProgress((int) f);
+                this.this$0.setProgress((int) f);
             }
         });
         this.progressBarSpring = springAnimation;

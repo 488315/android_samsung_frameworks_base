@@ -70,9 +70,9 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBatteryPropertiesRegistrar)) {
-                return (IBatteryPropertiesRegistrar) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBatteryPropertiesRegistrar)) {
+                return (IBatteryPropertiesRegistrar) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -111,33 +111,33 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 BatteryProperty batteryProperty = new BatteryProperty();
                 parcel.enforceNoDataAvail();
-                int property = getProperty(readInt, batteryProperty);
+                int property = getProperty(i3, batteryProperty);
                 parcel2.writeNoException();
                 parcel2.writeInt(property);
                 parcel2.writeTypedObject(batteryProperty, 1);
             } else if (i == 2) {
                 scheduleUpdate();
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                long[] semGetValuesAsLong = semGetValuesAsLong(readInt2);
+                long[] jArrSemGetValuesAsLong = semGetValuesAsLong(i4);
                 parcel2.writeNoException();
-                parcel2.writeLongArray(semGetValuesAsLong);
+                parcel2.writeLongArray(jArrSemGetValuesAsLong);
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                String[] semGetValuesAsString = semGetValuesAsString(readInt3);
+                String[] strArrSemGetValuesAsString = semGetValuesAsString(i5);
                 parcel2.writeNoException();
-                parcel2.writeStringArray(semGetValuesAsString);
+                parcel2.writeStringArray(strArrSemGetValuesAsString);
             } else if (i == 5) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean semGetValueAsBoolean = semGetValueAsBoolean(readInt4);
+                boolean zSemGetValueAsBoolean = semGetValueAsBoolean(i6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(semGetValueAsBoolean);
+                parcel2.writeBoolean(zSemGetValueAsBoolean);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -162,80 +162,80 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
 
             @Override // android.os.IBatteryPropertiesRegistrar
             public int getProperty(int i, BatteryProperty batteryProperty) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        batteryProperty.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        batteryProperty.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IBatteryPropertiesRegistrar
             public void scheduleUpdate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IBatteryPropertiesRegistrar
             public long[] semGetValuesAsLong(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IBatteryPropertiesRegistrar
             public String[] semGetValuesAsString(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IBatteryPropertiesRegistrar
             public boolean semGetValueAsBoolean(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

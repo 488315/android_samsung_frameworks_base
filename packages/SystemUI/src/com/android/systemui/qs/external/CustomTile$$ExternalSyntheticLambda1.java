@@ -1,11 +1,11 @@
 package com.android.systemui.qs.external;
 
+import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import com.android.systemui.QpRune;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.qs.tileimpl.SQSTileImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CustomTile$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -16,8 +16,12 @@ public final /* synthetic */ class CustomTile$$ExternalSyntheticLambda1 implemen
         this.f$0 = customTile;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0065  */
     @Override // java.lang.Runnable
-    public final void run() {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void run() throws PackageManager.NameNotFoundException {
         long j;
         int i = this.$r8$classId;
         CustomTile customTile = this.f$0;
@@ -29,12 +33,12 @@ public final /* synthetic */ class CustomTile$$ExternalSyntheticLambda1 implemen
                     DisplayLifecycle displayLifecycle = customTile.mDisplayLifecycle;
                     if (!(displayLifecycle != null ? displayLifecycle.mIsFolderOpened : false)) {
                         j = 0;
-                        ((SQSTileImpl) customTile).mHandler.postDelayed(customTile$$ExternalSyntheticLambda1, j);
-                        break;
                     }
+                } else {
+                    j = 200;
                 }
-                j = 200;
                 ((SQSTileImpl) customTile).mHandler.postDelayed(customTile$$ExternalSyntheticLambda1, j);
+                break;
             case 1:
                 customTile.updateDefaultTileAndIcon();
                 break;

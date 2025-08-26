@@ -40,13 +40,13 @@ public final class DataRegStateResult {
 
     public static final ArrayList<DataRegStateResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<DataRegStateResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             DataRegStateResult dataRegStateResult = new DataRegStateResult();
-            dataRegStateResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 104);
+            dataRegStateResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 104);
             arrayList.add(dataRegStateResult);
         }
         return arrayList;

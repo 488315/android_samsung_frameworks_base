@@ -5,7 +5,6 @@ import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0
 import androidx.compose.ui.geometry.Rect;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeScrimBounds {
     public final float bottom;

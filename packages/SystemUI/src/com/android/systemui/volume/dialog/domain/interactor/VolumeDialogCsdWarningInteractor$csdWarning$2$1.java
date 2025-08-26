@@ -1,13 +1,15 @@
 package com.android.systemui.volume.dialog.domain.interactor;
 
 import com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogCsdWarningInteractor$csdWarning$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ VolumeDialogCsdWarningModel $model;
@@ -32,85 +34,52 @@ final class VolumeDialogCsdWarningInteractor$csdWarning$2$1 extends SuspendLambd
         return ((VolumeDialogCsdWarningInteractor$csdWarning$2$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0063, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0063, code lost:
     
-        if (r1.emit(null, r6) == r0) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0057, code lost:
-    
-        if (kotlinx.coroutines.DelayKt.m3449delayVtjQ1oo(r4, r6) == r0) goto L21;
+        if (r1.emit(null, r6) != r0) goto L22;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-        /*
-            r6 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r6.label
-            r2 = 3
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L2b
-            if (r1 == r4) goto L23
-            if (r1 == r3) goto L1b
-            if (r1 != r2) goto L13
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L66
-        L13:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L1b:
-            java.lang.Object r1 = r6.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L5a
-        L23:
-            java.lang.Object r1 = r6.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L49
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            java.lang.Object r7 = r6.L$0
-            kotlinx.coroutines.flow.FlowCollector r7 = (kotlinx.coroutines.flow.FlowCollector) r7
-            com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel r1 = r6.$model
-            com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel$Visible r1 = (com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel.Visible) r1
-            int r1 = r1.warning
-            java.lang.Integer r5 = new java.lang.Integer
-            r5.<init>(r1)
-            r6.L$0 = r7
-            r6.label = r4
-            java.lang.Object r1 = r7.emit(r5, r6)
-            if (r1 != r0) goto L48
-            goto L65
-        L48:
-            r1 = r7
-        L49:
-            com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel r7 = r6.$model
-            com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel$Visible r7 = (com.android.systemui.volume.dialog.shared.model.VolumeDialogCsdWarningModel.Visible) r7
-            long r4 = r7.duration
-            r6.L$0 = r1
-            r6.label = r3
-            java.lang.Object r7 = kotlinx.coroutines.DelayKt.m3449delayVtjQ1oo(r4, r6)
-            if (r7 != r0) goto L5a
-            goto L65
-        L5a:
-            r7 = 0
-            r6.L$0 = r7
-            r6.label = r2
-            java.lang.Object r6 = r1.emit(r7, r6)
-            if (r6 != r0) goto L66
-        L65:
-            return r0
-        L66:
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.dialog.domain.interactor.VolumeDialogCsdWarningInteractor$csdWarning$2$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        FlowCollector flowCollector;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector2 = (FlowCollector) this.L$0;
+            Integer num = new Integer(((VolumeDialogCsdWarningModel.Visible) this.$model).warning);
+            this.L$0 = flowCollector2;
+            this.label = 1;
+            if (flowCollector2.emit(num, this) != coroutineSingletons) {
+                flowCollector = flowCollector2;
+            }
+            return coroutineSingletons;
+        }
+        if (i == 1) {
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+        } else {
+            if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            this.L$0 = null;
+            this.label = 3;
+        }
+        long j = ((VolumeDialogCsdWarningModel.Visible) this.$model).duration;
+        this.L$0 = flowCollector;
+        this.label = 2;
+        if (DelayKt.m3469delayVtjQ1oo(j, this) != coroutineSingletons) {
+            this.L$0 = null;
+            this.label = 3;
+        }
+        return coroutineSingletons;
     }
 }

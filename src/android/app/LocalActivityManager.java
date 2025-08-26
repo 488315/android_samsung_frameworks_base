@@ -145,45 +145,45 @@ public class LocalActivityManager {
 
     private void performPause(LocalActivityRecord localActivityRecord, boolean z) {
         boolean z2 = localActivityRecord.instanceState == null;
-        Bundle performPauseActivity = this.mActivityThread.performPauseActivity(localActivityRecord, z, "performPause", (PendingTransactionActions) null);
+        Bundle bundlePerformPauseActivity = this.mActivityThread.performPauseActivity(localActivityRecord, z, "performPause", (PendingTransactionActions) null);
         if (z2) {
-            localActivityRecord.instanceState = performPauseActivity;
+            localActivityRecord.instanceState = bundlePerformPauseActivity;
         }
     }
 
     public Window startActivity(String str, Intent intent) {
-        boolean z;
+        boolean zFilterEquals;
         LocalActivityRecord localActivityRecord;
         if (this.mCurState == 1) {
             throw new IllegalStateException("Activities can't be added until the containing group has been created.");
         }
         LocalActivityRecord localActivityRecord2 = this.mActivities.get(str);
-        boolean z2 = false;
-        ActivityInfo activityInfo = null;
+        boolean z = false;
+        ActivityInfo activityInfoResolveActivityInfo = null;
         if (localActivityRecord2 == null) {
             localActivityRecord2 = new LocalActivityRecord(str, intent);
-            z = false;
-            z2 = true;
+            zFilterEquals = false;
+            z = true;
         } else if (localActivityRecord2.intent != null) {
-            z = localActivityRecord2.intent.filterEquals(intent);
-            if (z) {
-                activityInfo = localActivityRecord2.activityInfo;
+            zFilterEquals = localActivityRecord2.intent.filterEquals(intent);
+            if (zFilterEquals) {
+                activityInfoResolveActivityInfo = localActivityRecord2.activityInfo;
             }
         } else {
-            z = false;
+            zFilterEquals = false;
         }
-        if (activityInfo == null) {
-            activityInfo = this.mActivityThread.resolveActivityInfo(intent);
+        if (activityInfoResolveActivityInfo == null) {
+            activityInfoResolveActivityInfo = this.mActivityThread.resolveActivityInfo(intent);
         }
         if (this.mSingleMode && (localActivityRecord = this.mResumed) != null && localActivityRecord != localActivityRecord2 && this.mCurState == 4) {
             moveToState(localActivityRecord, 3);
         }
-        if (z2) {
+        if (z) {
             this.mActivities.put(str, localActivityRecord2);
             this.mActivityArray.add(localActivityRecord2);
         } else if (localActivityRecord2.activityInfo != null) {
-            if (activityInfo == localActivityRecord2.activityInfo || (activityInfo.name.equals(localActivityRecord2.activityInfo.name) && activityInfo.packageName.equals(localActivityRecord2.activityInfo.packageName))) {
-                if (activityInfo.launchMode != 0 || (intent.getFlags() & 536870912) != 0) {
+            if (activityInfoResolveActivityInfo == localActivityRecord2.activityInfo || (activityInfoResolveActivityInfo.name.equals(localActivityRecord2.activityInfo.name) && activityInfoResolveActivityInfo.packageName.equals(localActivityRecord2.activityInfo.packageName))) {
+                if (activityInfoResolveActivityInfo.launchMode != 0 || (intent.getFlags() & 536870912) != 0) {
                     ArrayList arrayList = new ArrayList(1);
                     arrayList.add(new ReferrerIntent(intent, this.mParent.getPackageName()));
                     this.mActivityThread.handleNewIntent(this.mActivityThread.getActivityClient(localActivityRecord2), arrayList);
@@ -194,7 +194,7 @@ public class LocalActivityManager {
                     }
                     return localActivityRecord2.window;
                 }
-                if (z && (intent.getFlags() & 67108864) == 0) {
+                if (zFilterEquals && (intent.getFlags() & 67108864) == 0) {
                     localActivityRecord2.intent = intent;
                     moveToState(localActivityRecord2, this.mCurState);
                     if (this.mSingleMode) {
@@ -207,7 +207,7 @@ public class LocalActivityManager {
         }
         localActivityRecord2.intent = intent;
         localActivityRecord2.curState = 1;
-        localActivityRecord2.activityInfo = activityInfo;
+        localActivityRecord2.activityInfo = activityInfoResolveActivityInfo;
         moveToState(localActivityRecord2, this.mCurState);
         if (this.mSingleMode) {
             this.mResumed = localActivityRecord2;
@@ -238,12 +238,12 @@ public class LocalActivityManager {
         if (localActivityRecord == null) {
             return null;
         }
-        Window performDestroy = performDestroy(localActivityRecord, z);
+        Window windowPerformDestroy = performDestroy(localActivityRecord, z);
         if (z) {
             this.mActivities.remove(str);
             this.mActivityArray.remove(localActivityRecord);
         }
-        return performDestroy;
+        return windowPerformDestroy;
     }
 
     public Activity getCurrentActivity() {
@@ -359,19 +359,19 @@ public class LocalActivityManager {
     }
 
     public HashMap<String, Object> dispatchRetainNonConfigurationInstance() {
-        Object onRetainNonConfigurationInstance;
+        Object objOnRetainNonConfigurationInstance;
         int size = this.mActivityArray.size();
-        HashMap<String, Object> hashMap = null;
+        HashMap<String, Object> map = null;
         for (int i = 0; i < size; i++) {
             LocalActivityRecord localActivityRecord = this.mActivityArray.get(i);
-            if (localActivityRecord != null && localActivityRecord.activity != null && (onRetainNonConfigurationInstance = localActivityRecord.activity.onRetainNonConfigurationInstance()) != null) {
-                if (hashMap == null) {
-                    hashMap = new HashMap<>();
+            if (localActivityRecord != null && localActivityRecord.activity != null && (objOnRetainNonConfigurationInstance = localActivityRecord.activity.onRetainNonConfigurationInstance()) != null) {
+                if (map == null) {
+                    map = new HashMap<>();
                 }
-                hashMap.put(localActivityRecord.id, onRetainNonConfigurationInstance);
+                map.put(localActivityRecord.id, objOnRetainNonConfigurationInstance);
             }
         }
-        return hashMap;
+        return map;
     }
 
     public void removeAllActivities() {

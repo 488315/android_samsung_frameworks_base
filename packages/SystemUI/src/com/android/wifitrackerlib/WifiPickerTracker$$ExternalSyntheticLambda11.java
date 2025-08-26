@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WifiPickerTracker$$ExternalSyntheticLambda11 implements Predicate {
     public final /* synthetic */ int $r8$classId;
@@ -43,7 +42,7 @@ public final /* synthetic */ class WifiPickerTracker$$ExternalSyntheticLambda11 
                 SemWifiEntryFilter semWifiEntryFilter = ((WifiPickerTracker) obj2).mSemFilter;
                 semWifiEntryFilter.getClass();
                 synchronized (wifiEntry) {
-                    connectedInfo = (wifiEntry.getConnectedState() == 2 && (connectedInfo2 = wifiEntry.mConnectedInfo) != null) ? new WifiEntry.ConnectedInfo(connectedInfo2) : null;
+                    connectedInfo = (wifiEntry.getConnectedState() != 2 || (connectedInfo2 = wifiEntry.mConnectedInfo) == null) ? null : new WifiEntry.ConnectedInfo(connectedInfo2);
                 }
                 return connectedInfo == null ? !(semWifiEntryFilter.CSC_WIFI_SUPPORT_VZW_EAP_AKA && "VerizonWiFi".equals(wifiEntry.getSsid())) : !(semWifiEntryFilter.DISPLAY_SSID_STATUS_BAR_INFO && "Swisscom".equals(wifiEntry.getSsid()));
         }

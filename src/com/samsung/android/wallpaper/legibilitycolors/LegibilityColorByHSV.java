@@ -33,89 +33,89 @@ public class LegibilityColorByHSV {
     private static float getLABLfromHSV(float f, float f2, float f3) {
         double d;
         double d2;
+        double dPow;
         double d3;
         double d4;
         double d5;
         double d6;
-        double d7;
-        double d8 = f;
-        double d9 = f2;
-        double d10 = f3;
-        double d11 = ((2.0d - d9) * d10) / 2.0d;
-        if (SContextConstants.ENVIRONMENT_VALUE_UNKNOWN != d11) {
-            if (1.0d == d11) {
-                d9 = 0.0d;
+        double d7 = f;
+        double d8 = f2;
+        double d9 = f3;
+        double d10 = ((2.0d - d8) * d9) / 2.0d;
+        if (SContextConstants.ENVIRONMENT_VALUE_UNKNOWN != d10) {
+            if (1.0d == d10) {
+                d8 = 0.0d;
             } else {
-                if (d11 < 0.5d) {
-                    d6 = d9 * d10;
-                    d7 = d11 * 2.0d;
+                if (d10 < 0.5d) {
+                    d5 = d8 * d9;
+                    d6 = d10 * 2.0d;
                 } else {
-                    d6 = d9 * d10;
-                    d7 = 2.0d - (d11 * 2.0d);
+                    d5 = d8 * d9;
+                    d6 = 2.0d - (d10 * 2.0d);
                 }
-                d9 = d6 / d7;
+                d8 = d5 / d6;
             }
         }
-        int i = ((int) d8) / 60;
-        double abs = 1.0d - Math.abs(((d8 / 60.0d) % 2.0d) - 1.0d);
-        double d12 = (2.0d * d11) - 1.0d;
-        if (d12 <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-            d12 = -d12;
+        int i = ((int) d7) / 60;
+        double dAbs = 1.0d - Math.abs(((d7 / 60.0d) % 2.0d) - 1.0d);
+        double d11 = (2.0d * d10) - 1.0d;
+        if (d11 <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+            d11 = -d11;
         }
-        double d13 = (1.0d - d12) * d9;
-        double d14 = d11 - (0.5d * d13);
-        double d15 = abs * d13;
+        double d12 = (1.0d - d11) * d8;
+        double d13 = d10 - (0.5d * d12);
+        double d14 = dAbs * d12;
         switch (i) {
             case 0:
-                d = d13 + d14;
-                d2 = d15 + d14;
-                d3 = d14;
-                d14 = d;
+                d = d12 + d13;
+                d2 = d14 + d13;
+                dPow = d13;
+                d13 = d;
                 break;
             case 1:
-                d2 = d13 + d14;
-                d4 = d14;
-                d14 = d15 + d14;
-                d3 = d4;
+                d2 = d12 + d13;
+                d3 = d13;
+                d13 = d14 + d13;
+                dPow = d3;
                 break;
             case 2:
-                d2 = d13 + d14;
-                d3 = d15 + d14;
+                d2 = d12 + d13;
+                dPow = d14 + d13;
                 break;
             case 3:
-                d4 = d13 + d14;
-                d2 = d15 + d14;
-                d3 = d4;
+                d3 = d12 + d13;
+                d2 = d14 + d13;
+                dPow = d3;
                 break;
             case 4:
-                double d16 = d13 + d14;
-                d14 = d15 + d14;
-                d3 = d16;
-                d2 = d14;
+                double d15 = d12 + d13;
+                d13 = d14 + d13;
+                dPow = d15;
+                d2 = d13;
                 break;
             case 5:
             case 6:
-                d3 = d15 + d14;
-                d = d13 + d14;
-                d2 = d14;
-                d14 = d;
+                dPow = d14 + d13;
+                d = d12 + d13;
+                d2 = d13;
+                d13 = d;
                 break;
             default:
-                d3 = 0.0d;
-                d14 = 0.0d;
+                dPow = 0.0d;
+                d13 = 0.0d;
                 d2 = 0.0d;
                 break;
         }
-        double pow = d14 < 0.04045d ? d14 * 0.01645510835913313d : 0.2126d * Math.pow((d14 / 1.055d) + 0.05213270142180095d, 2.4d);
-        double pow2 = d2 < 0.04045d ? d2 * 0.05535603715170278d : Math.pow((d2 / 1.055d) + 0.05213270142180095d, 2.4d) * 0.7152d;
-        if (d3 < 0.04045d) {
-            d5 = 0.005588235294117647d;
+        double dPow2 = d13 < 0.04045d ? d13 * 0.01645510835913313d : 0.2126d * Math.pow((d13 / 1.055d) + 0.05213270142180095d, 2.4d);
+        double dPow3 = d2 < 0.04045d ? d2 * 0.05535603715170278d : Math.pow((d2 / 1.055d) + 0.05213270142180095d, 2.4d) * 0.7152d;
+        if (dPow < 0.04045d) {
+            d4 = 0.005588235294117647d;
         } else {
-            d3 = Math.pow((d3 / 1.055d) + 0.05213270142180095d, 2.4d);
-            d5 = 0.0722d;
+            dPow = Math.pow((dPow / 1.055d) + 0.05213270142180095d, 2.4d);
+            d4 = 0.0722d;
         }
-        double d17 = pow + pow2 + (d3 * d5);
-        return (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, ((d17 > XYZ_EPSILON ? Math.cbrt(d17) : 0.13793103448275862d + (d17 * 7.787068965517241d)) * 116.0d) - 16.0d);
+        double d16 = dPow2 + dPow3 + (dPow * d4);
+        return (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, ((d16 > XYZ_EPSILON ? Math.cbrt(d16) : 0.13793103448275862d + (d16 * 7.787068965517241d)) * 116.0d) - 16.0d);
     }
 
     public static LegibilityDefinition.ColorType getLegibilityColorType(float f, float f2, float f3) {

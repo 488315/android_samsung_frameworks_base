@@ -15,13 +15,13 @@ public class SimpleConveyorFilter extends SequentialFilter {
     @Override // com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
         Iterator<MediaFilter> it = this.filters.iterator();
-        MutableMediaBuffer mutableMediaBuffer2 = null;
+        MutableMediaBuffer mutableMediaBufferRun = null;
         while (it.hasNext()) {
-            mutableMediaBuffer2 = it.next().run(mediaBuffer);
-            mediaBuffer = mutableMediaBuffer2;
+            mutableMediaBufferRun = it.next().run(mediaBuffer);
+            mediaBuffer = mutableMediaBufferRun;
         }
-        if (mutableMediaBuffer2 != null) {
-            mutableMediaBuffer.put((MediaBuffer) mutableMediaBuffer2);
+        if (mutableMediaBufferRun != null) {
+            mutableMediaBuffer.put((MediaBuffer) mutableMediaBufferRun);
         }
         return mutableMediaBuffer;
     }

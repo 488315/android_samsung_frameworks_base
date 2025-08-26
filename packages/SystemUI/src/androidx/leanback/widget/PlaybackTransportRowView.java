@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PlaybackTransportRowView extends LinearLayout {
     public PlaybackTransportRowView(Context context, AttributeSet attributeSet) {
@@ -27,19 +26,19 @@ public class PlaybackTransportRowView extends LinearLayout {
         View childAt;
         if (view != null) {
             if (i == 33) {
-                for (int indexOfChild = indexOfChild(getFocusedChild()) - 1; indexOfChild >= 0; indexOfChild--) {
-                    View childAt2 = getChildAt(indexOfChild);
+                for (int iIndexOfChild = indexOfChild(getFocusedChild()) - 1; iIndexOfChild >= 0; iIndexOfChild--) {
+                    View childAt2 = getChildAt(iIndexOfChild);
                     if (childAt2.hasFocusable()) {
                         return childAt2;
                     }
                 }
             } else {
                 if (i == 130) {
-                    int indexOfChild2 = indexOfChild(getFocusedChild());
+                    int iIndexOfChild2 = indexOfChild(getFocusedChild());
                     do {
-                        indexOfChild2++;
-                        if (indexOfChild2 < getChildCount()) {
-                            childAt = getChildAt(indexOfChild2);
+                        iIndexOfChild2++;
+                        if (iIndexOfChild2 < getChildCount()) {
+                            childAt = getChildAt(iIndexOfChild2);
                         }
                     } while (!childAt.hasFocusable());
                     return childAt;
@@ -59,12 +58,12 @@ public class PlaybackTransportRowView extends LinearLayout {
 
     @Override // android.view.ViewGroup
     public final boolean onRequestFocusInDescendants(int i, Rect rect) {
-        View findFocus = findFocus();
-        if (findFocus != null && findFocus.requestFocus(i, rect)) {
+        View viewFindFocus = findFocus();
+        if (viewFindFocus != null && viewFindFocus.requestFocus(i, rect)) {
             return true;
         }
-        View findViewById = findViewById(R.id.playback_progress);
-        if (findViewById != null && findViewById.isFocusable() && findViewById.requestFocus(i, rect)) {
+        View viewFindViewById = findViewById(R.id.playback_progress);
+        if (viewFindViewById != null && viewFindViewById.isFocusable() && viewFindViewById.requestFocus(i, rect)) {
             return true;
         }
         return super.onRequestFocusInDescendants(i, rect);

@@ -36,13 +36,13 @@ public final class CdmaT53AudioControlInfoRecord {
 
     public static final ArrayList<CdmaT53AudioControlInfoRecord> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaT53AudioControlInfoRecord> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaT53AudioControlInfoRecord cdmaT53AudioControlInfoRecord = new CdmaT53AudioControlInfoRecord();
-            cdmaT53AudioControlInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 2);
+            cdmaT53AudioControlInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 2);
             arrayList.add(cdmaT53AudioControlInfoRecord);
         }
         return arrayList;

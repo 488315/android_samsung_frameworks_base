@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class RecordingController implements CallbackController {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -50,7 +49,7 @@ public class RecordingController implements CallbackController {
     public final CopyOnWriteArrayList mListeners = new CopyOnWriteArrayList();
     final UserTracker.Callback mUserChangedCallback = new UserTracker.Callback() { // from class: com.android.systemui.screenrecord.RecordingController.1
         @Override // com.android.systemui.settings.UserTracker.Callback
-        public final void onUserChanged(int i, Context context) {
+        public final void onUserChanged(int i, Context context) throws PendingIntent.CanceledException {
             RecordingController.this.stopRecording(6);
         }
     };
@@ -75,14 +74,13 @@ public class RecordingController implements CallbackController {
             LogLevel logLevel2 = LogLevel.DEBUG;
             RecordingControllerLogger$$ExternalSyntheticLambda0 recordingControllerLogger$$ExternalSyntheticLambda02 = new RecordingControllerLogger$$ExternalSyntheticLambda0(6);
             LogBuffer logBuffer2 = recordingControllerLogger2.logger;
-            LogMessage obtain = logBuffer2.obtain("RecordingController", logLevel2, recordingControllerLogger$$ExternalSyntheticLambda02, null);
-            ((LogMessageImpl) obtain).bool1 = booleanExtra;
-            logBuffer2.commit(obtain);
+            LogMessage logMessageObtain = logBuffer2.obtain("RecordingController", logLevel2, recordingControllerLogger$$ExternalSyntheticLambda02, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = booleanExtra;
+            logBuffer2.commit(logMessageObtain);
             RecordingController.this.updateState(booleanExtra);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenrecord.RecordingController$3, reason: invalid class name */
     public class AnonymousClass3 extends CountDownTimer {
         public final /* synthetic */ PendingIntent val$startIntent;
@@ -94,7 +92,7 @@ public class RecordingController implements CallbackController {
         }
 
         @Override // android.os.CountDownTimer
-        public final void onFinish() {
+        public final void onFinish() throws PendingIntent.CanceledException {
             RecordingController recordingController = RecordingController.this;
             recordingController.mIsStarting = false;
             recordingController.mIsRecording = true;
@@ -143,9 +141,9 @@ public class RecordingController implements CallbackController {
         this.mMediaProjectionMetricsLogger = mediaProjectionMetricsLogger;
         this.mScreenCaptureDisabledDialogDelegate = screenCaptureDisabledDialogDelegate;
         this.mScreenRecordPermissionDialogDelegateFactory = factory;
-        BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
-        makeBasic.setInteractive(true);
-        this.mInteractiveBroadcastOption = makeBasic.toBundle();
+        BroadcastOptions broadcastOptionsMakeBasic = BroadcastOptions.makeBasic();
+        broadcastOptionsMakeBasic.setInteractive(true);
+        this.mInteractiveBroadcastOption = broadcastOptionsMakeBasic.toBundle();
     }
 
     @Override // com.android.systemui.statusbar.policy.CallbackController
@@ -198,7 +196,7 @@ public class RecordingController implements CallbackController {
         this.mListeners.remove((RecordingStateChangeCallback) obj);
     }
 
-    public final void stopRecording(int i) {
+    public final void stopRecording(int i) throws PendingIntent.CanceledException {
         RecordingControllerLogger recordingControllerLogger = this.mRecordingControllerLogger;
         this.mStopReason = i;
         try {
@@ -233,9 +231,9 @@ public class RecordingController implements CallbackController {
             LogLevel logLevel = LogLevel.DEBUG;
             RecordingControllerLogger$$ExternalSyntheticLambda0 recordingControllerLogger$$ExternalSyntheticLambda0 = new RecordingControllerLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = recordingControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("RecordingController", logLevel, recordingControllerLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = z;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("RecordingController", logLevel, recordingControllerLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
             if (!z && this.mIsRecording) {
                 ((UserTrackerImpl) this.mUserTracker).removeCallback(this.mUserChangedCallback);
                 this.mBroadcastDispatcher.unregisterReceiver(this.mStateChangeReceiver);
@@ -255,7 +253,6 @@ public class RecordingController implements CallbackController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RecordingStateChangeCallback {
         default void onCountdown(long j) {
         }

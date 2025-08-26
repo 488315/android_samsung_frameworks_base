@@ -28,7 +28,6 @@ import com.android.systemui.shared.system.QuickStepContract;
 import com.sec.ims.settings.ImsProfile;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NavigationBarInflaterView extends FrameLayout {
     public boolean mAlternativeOrder;
@@ -45,7 +44,6 @@ public class NavigationBarInflaterView extends FrameLayout {
     public int mNavBarMode;
     public FrameLayout mVertical;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Listener implements NavigationModeController.ModeChangedListener {
         public final WeakReference mSelf;
 
@@ -108,9 +106,9 @@ public class NavigationBarInflaterView extends FrameLayout {
     public final void addToDispatchers(View view) {
         SparseArray<ButtonDispatcher> sparseArray = this.mButtonDispatchers;
         if (sparseArray != null) {
-            int indexOfKey = sparseArray.indexOfKey(view.getId());
-            if (indexOfKey >= 0) {
-                this.mButtonDispatchers.valueAt(indexOfKey).addView(view);
+            int iIndexOfKey = sparseArray.indexOfKey(view.getId());
+            if (iIndexOfKey >= 0) {
+                this.mButtonDispatchers.valueAt(iIndexOfKey).addView(view);
             }
             if (view instanceof ViewGroup) {
                 ViewGroup viewGroup = (ViewGroup) view;
@@ -122,31 +120,31 @@ public class NavigationBarInflaterView extends FrameLayout {
         }
     }
 
-    public final View applySize(View view, String str, boolean z, boolean z2) {
-        String substring = !str.contains("[") ? null : str.substring(str.indexOf("[") + 1, str.indexOf("]"));
-        if (substring == null) {
+    public final View applySize(View view, String str, boolean z, boolean z2) throws NumberFormatException {
+        String strSubstring = !str.contains("[") ? null : str.substring(str.indexOf("[") + 1, str.indexOf("]"));
+        if (strSubstring == null) {
             return view;
         }
-        if (!substring.contains("W") && !substring.contains(ImsProfile.TIMER_NAME_A)) {
-            float parseFloat = Float.parseFloat(substring);
-            view.getLayoutParams().width = (int) (r7.width * parseFloat);
+        if (!strSubstring.contains("W") && !strSubstring.contains(ImsProfile.TIMER_NAME_A)) {
+            float f = Float.parseFloat(strSubstring);
+            view.getLayoutParams().width = (int) (r7.width * f);
             return view;
         }
         ReverseLinearLayout.ReverseRelativeLayout reverseRelativeLayout = new ReverseLinearLayout.ReverseRelativeLayout(((FrameLayout) this).mContext);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(view.getLayoutParams());
         int i = z ? z2 ? 48 : 80 : z2 ? 8388611 : 8388613;
-        if (substring.endsWith("WC")) {
+        if (strSubstring.endsWith("WC")) {
             i = 17;
-        } else if (substring.endsWith(ImsProfile.TIMER_NAME_C)) {
+        } else if (strSubstring.endsWith(ImsProfile.TIMER_NAME_C)) {
             i = 16;
         }
         reverseRelativeLayout.mDefaultGravity = i;
         reverseRelativeLayout.setGravity(i);
         reverseRelativeLayout.addView(view, layoutParams);
-        if (substring.contains("W")) {
-            reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams(0, -1, Float.parseFloat(substring.substring(0, substring.indexOf("W")))));
+        if (strSubstring.contains("W")) {
+            reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams(0, -1, Float.parseFloat(strSubstring.substring(0, strSubstring.indexOf("W")))));
         } else {
-            reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams((int) (Float.parseFloat(substring.substring(0, substring.indexOf(ImsProfile.TIMER_NAME_A))) * ((FrameLayout) this).mContext.getResources().getDisplayMetrics().density), -1));
+            reverseRelativeLayout.setLayoutParams(new LinearLayout.LayoutParams((int) (Float.parseFloat(strSubstring.substring(0, strSubstring.indexOf(ImsProfile.TIMER_NAME_A))) * ((FrameLayout) this).mContext.getResources().getDisplayMetrics().density), -1));
         }
         reverseRelativeLayout.setClipChildren(false);
         reverseRelativeLayout.setClipToPadding(false);
@@ -182,49 +180,49 @@ public class NavigationBarInflaterView extends FrameLayout {
     }
 
     public View createView(String str, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-        String extractButton = extractButton(str);
-        if ("left".equals(extractButton)) {
-            extractButton = extractButton("space");
-        } else if ("right".equals(extractButton)) {
-            extractButton = extractButton("menu_ime");
+        String strExtractButton = extractButton(str);
+        if ("left".equals(strExtractButton)) {
+            strExtractButton = extractButton("space");
+        } else if ("right".equals(strExtractButton)) {
+            strExtractButton = extractButton("menu_ime");
         }
-        if (BcSmartspaceDataPlugin.UI_SURFACE_HOME_SCREEN.equals(extractButton)) {
+        if (BcSmartspaceDataPlugin.UI_SURFACE_HOME_SCREEN.equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.home, viewGroup, false);
         }
-        if ("back".equals(extractButton)) {
+        if ("back".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.back, viewGroup, false);
         }
-        if ("recent".equals(extractButton)) {
+        if ("recent".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.recent_apps, viewGroup, false);
         }
-        if ("menu_ime".equals(extractButton)) {
+        if ("menu_ime".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.menu_ime, viewGroup, false);
         }
-        if ("space".equals(extractButton)) {
+        if ("space".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.nav_key_space, viewGroup, false);
         }
-        if ("clipboard".equals(extractButton)) {
+        if ("clipboard".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.clipboard, viewGroup, false);
         }
-        if ("contextual".equals(extractButton)) {
+        if ("contextual".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.contextual, viewGroup, false);
         }
-        if ("home_handle".equals(extractButton)) {
+        if ("home_handle".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.home_handle, viewGroup, false);
         }
-        if ("ime_switcher".equals(extractButton)) {
+        if ("ime_switcher".equals(strExtractButton)) {
             return layoutInflater.inflate(R.layout.ime_switcher, viewGroup, false);
         }
-        if (!extractButton.startsWith("key")) {
+        if (!strExtractButton.startsWith("key")) {
             return null;
         }
-        String extractImage = extractImage(extractButton);
-        int extractKeycode = extractKeycode(extractButton);
-        View inflate = layoutInflater.inflate(R.layout.custom_key, viewGroup, false);
-        KeyButtonView keyButtonView = (KeyButtonView) inflate;
-        keyButtonView.mCode = extractKeycode;
-        if (extractImage != null) {
-            if (extractImage.contains(":")) {
+        String strExtractImage = extractImage(strExtractButton);
+        int iExtractKeycode = extractKeycode(strExtractButton);
+        View viewInflate = layoutInflater.inflate(R.layout.custom_key, viewGroup, false);
+        KeyButtonView keyButtonView = (KeyButtonView) viewInflate;
+        keyButtonView.mCode = iExtractKeycode;
+        if (strExtractImage != null) {
+            if (strExtractImage.contains(":")) {
                 new AsyncTask() { // from class: com.android.systemui.navigationbar.views.buttons.KeyButtonView.2
                     public AnonymousClass2() {
                     }
@@ -238,11 +236,11 @@ public class NavigationBarInflaterView extends FrameLayout {
                     public final void onPostExecute(Object obj) {
                         KeyButtonView.this.setImageDrawable((Drawable) obj);
                     }
-                }.execute(Icon.createWithContentUri(extractImage));
-                return inflate;
+                }.execute(Icon.createWithContentUri(strExtractImage));
+                return viewInflate;
             }
-            if (extractImage.contains("/")) {
-                int indexOf = extractImage.indexOf(47);
+            if (strExtractImage.contains("/")) {
+                int iIndexOf = strExtractImage.indexOf(47);
                 new AsyncTask() { // from class: com.android.systemui.navigationbar.views.buttons.KeyButtonView.2
                     public AnonymousClass2() {
                     }
@@ -256,39 +254,39 @@ public class NavigationBarInflaterView extends FrameLayout {
                     public final void onPostExecute(Object obj) {
                         KeyButtonView.this.setImageDrawable((Drawable) obj);
                     }
-                }.execute(Icon.createWithResource(extractImage.substring(0, indexOf), Integer.parseInt(extractImage.substring(indexOf + 1))));
+                }.execute(Icon.createWithResource(strExtractImage.substring(0, iIndexOf), Integer.parseInt(strExtractImage.substring(iIndexOf + 1))));
             }
         }
-        return inflate;
+        return viewInflate;
     }
 
     public String getDefaultLayout() {
         return getContext().getString(QuickStepContract.isGesturalMode(this.mNavBarMode) ? R.string.config_navBarLayoutHandle : this.mLauncherProxyService.shouldShowSwipeUpUI() ? R.string.config_navBarLayoutQuickstep : R.string.config_navBarLayout);
     }
 
-    public void inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) {
-        View createView = createView(str, viewGroup, z ? this.mLandscapeInflater : this.mLayoutInflater);
-        if (createView == null) {
+    public void inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) throws NumberFormatException {
+        View viewCreateView = createView(str, viewGroup, z ? this.mLandscapeInflater : this.mLayoutInflater);
+        if (viewCreateView == null) {
             return;
         }
-        View applySize = applySize(createView, str, z, z2);
-        viewGroup.addView(applySize);
-        addToDispatchers(applySize);
+        View viewApplySize = applySize(viewCreateView, str, z, z2);
+        viewGroup.addView(viewApplySize);
+        addToDispatchers(viewApplySize);
         View view = z ? this.mLastLandscape : this.mLastPortrait;
-        if (applySize instanceof ReverseLinearLayout.ReverseRelativeLayout) {
-            applySize = ((ReverseLinearLayout.ReverseRelativeLayout) applySize).getChildAt(0);
+        if (viewApplySize instanceof ReverseLinearLayout.ReverseRelativeLayout) {
+            viewApplySize = ((ReverseLinearLayout.ReverseRelativeLayout) viewApplySize).getChildAt(0);
         }
         if (view != null) {
-            applySize.setAccessibilityTraversalAfter(view.getId());
+            viewApplySize.setAccessibilityTraversalAfter(view.getId());
         }
         if (z) {
-            this.mLastLandscape = applySize;
+            this.mLastLandscape = viewApplySize;
         } else {
-            this.mLastPortrait = applySize;
+            this.mLastPortrait = viewApplySize;
         }
     }
 
-    public final void inflateButtons(String[] strArr, ViewGroup viewGroup, boolean z, boolean z2) {
+    public final void inflateButtons(String[] strArr, ViewGroup viewGroup, boolean z, boolean z2) throws NumberFormatException {
         for (String str : strArr) {
             inflateButton(str, viewGroup, z, z2);
         }
@@ -310,22 +308,22 @@ public class NavigationBarInflaterView extends FrameLayout {
         if (str == null) {
             str = getDefaultLayout();
         }
-        String[] split = str.split(";", 3);
-        if (split.length != 3) {
+        String[] strArrSplit = str.split(";", 3);
+        if (strArrSplit.length != 3) {
             Log.d("NavBarInflater", "Invalid layout.");
-            split = getDefaultLayout().split(";", 3);
+            strArrSplit = getDefaultLayout().split(";", 3);
         }
-        String[] split2 = split[0].split(",");
-        String[] split3 = split[1].split(",");
-        String[] split4 = split[2].split(",");
-        inflateButtons(split2, (ViewGroup) this.mHorizontal.findViewById(R.id.ends_group), false, true);
-        inflateButtons(split2, (ViewGroup) this.mVertical.findViewById(R.id.ends_group), true, true);
-        inflateButtons(split3, (ViewGroup) this.mHorizontal.findViewById(R.id.center_group), false, false);
-        inflateButtons(split3, (ViewGroup) this.mVertical.findViewById(R.id.center_group), true, false);
+        String[] strArrSplit2 = strArrSplit[0].split(",");
+        String[] strArrSplit3 = strArrSplit[1].split(",");
+        String[] strArrSplit4 = strArrSplit[2].split(",");
+        inflateButtons(strArrSplit2, (ViewGroup) this.mHorizontal.findViewById(R.id.ends_group), false, true);
+        inflateButtons(strArrSplit2, (ViewGroup) this.mVertical.findViewById(R.id.ends_group), true, true);
+        inflateButtons(strArrSplit3, (ViewGroup) this.mHorizontal.findViewById(R.id.center_group), false, false);
+        inflateButtons(strArrSplit3, (ViewGroup) this.mVertical.findViewById(R.id.center_group), true, false);
         addGravitySpacer((LinearLayout) this.mHorizontal.findViewById(R.id.ends_group));
         addGravitySpacer((LinearLayout) this.mVertical.findViewById(R.id.ends_group));
-        inflateButtons(split4, (ViewGroup) this.mHorizontal.findViewById(R.id.ends_group), false, false);
-        inflateButtons(split4, (ViewGroup) this.mVertical.findViewById(R.id.ends_group), true, false);
+        inflateButtons(strArrSplit4, (ViewGroup) this.mHorizontal.findViewById(R.id.ends_group), false, false);
+        inflateButtons(strArrSplit4, (ViewGroup) this.mVertical.findViewById(R.id.ends_group), true, false);
         updateButtonDispatchersCurrentView();
     }
 
@@ -366,18 +364,18 @@ public class NavigationBarInflaterView extends FrameLayout {
         if (this.mButtonDispatchers != null) {
             FrameLayout frameLayout = this.mIsVertical ? this.mVertical : this.mHorizontal;
             for (int i = 0; i < this.mButtonDispatchers.size(); i++) {
-                ButtonDispatcher valueAt = this.mButtonDispatchers.valueAt(i);
-                View findViewById = frameLayout.findViewById(valueAt.mId);
-                valueAt.mCurrentView = findViewById;
-                KeyButtonDrawable keyButtonDrawable = valueAt.mImageDrawable;
+                ButtonDispatcher buttonDispatcherValueAt = this.mButtonDispatchers.valueAt(i);
+                View viewFindViewById = frameLayout.findViewById(buttonDispatcherValueAt.mId);
+                buttonDispatcherValueAt.mCurrentView = viewFindViewById;
+                KeyButtonDrawable keyButtonDrawable = buttonDispatcherValueAt.mImageDrawable;
                 if (keyButtonDrawable != null) {
-                    keyButtonDrawable.setCallback(findViewById);
+                    keyButtonDrawable.setCallback(viewFindViewById);
                 }
-                View view = valueAt.mCurrentView;
+                View view = buttonDispatcherValueAt.mCurrentView;
                 if (view != null) {
                     view.setTranslationX(0.0f);
-                    valueAt.mCurrentView.setTranslationY(0.0f);
-                    valueAt.mCurrentView.setTranslationZ(0.0f);
+                    buttonDispatcherValueAt.mCurrentView.setTranslationY(0.0f);
+                    buttonDispatcherValueAt.mCurrentView.setTranslationZ(0.0f);
                 }
             }
         }

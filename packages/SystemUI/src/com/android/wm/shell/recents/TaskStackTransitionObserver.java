@@ -26,7 +26,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TaskStackTransitionObserver implements Transitions.TransitionObserver, ShellTaskOrganizer.TaskVanishedListener {
     public final ShellCommandHandler shellCommandHandler;
@@ -35,7 +34,6 @@ public final class TaskStackTransitionObserver implements Transitions.Transition
     public final Lazy transitions;
     public final List visibleTasks = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,7 +43,6 @@ public final class TaskStackTransitionObserver implements Transitions.Transition
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TaskStackTransitionObserverListener {
     }
 
@@ -70,7 +67,7 @@ public final class TaskStackTransitionObserver implements Transitions.Transition
                     public final void accept(Object obj, Object obj2) {
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
-                        TaskStackTransitionObserver taskStackTransitionObserver2 = TaskStackTransitionObserver.this;
+                        TaskStackTransitionObserver taskStackTransitionObserver2 = taskStackTransitionObserver;
                         taskStackTransitionObserver2.getClass();
                         printWriter.println(str + "TaskStackTransitionObserver:");
                         if (taskStackTransitionObserver2.visibleTasks.isEmpty()) {
@@ -101,7 +98,7 @@ public final class TaskStackTransitionObserver implements Transitions.Transition
                             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.recents.TaskStackTransitionObserver$notifyOnTaskMovedToFront$1$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    TaskStackTransitionObserver.TaskStackTransitionObserverListener taskStackTransitionObserverListener2 = TaskStackTransitionObserver.TaskStackTransitionObserverListener.this;
+                                    TaskStackTransitionObserver.TaskStackTransitionObserverListener taskStackTransitionObserverListener2 = taskStackTransitionObserverListener;
                                     ActivityManager.RunningTaskInfo runningTaskInfo = taskInfo;
                                     RecentTasksController recentTasksController = (RecentTasksController) taskStackTransitionObserverListener2;
                                     if (recentTasksController.mListener == null || !DesktopModeFlags.ENABLE_TASK_STACK_OBSERVER_IN_SHELL.isTrue() || runningTaskInfo.realActivity == null || RecentTasksController.excludeTaskFromGeneratedList(runningTaskInfo)) {
@@ -123,7 +120,7 @@ public final class TaskStackTransitionObserver implements Transitions.Transition
                             ((Executor) entry2.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.recents.TaskStackTransitionObserver$notifyOnTaskChanged$1$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    TaskStackTransitionObserver.TaskStackTransitionObserverListener taskStackTransitionObserverListener3 = TaskStackTransitionObserver.TaskStackTransitionObserverListener.this;
+                                    TaskStackTransitionObserver.TaskStackTransitionObserverListener taskStackTransitionObserverListener3 = taskStackTransitionObserverListener2;
                                     ActivityManager.RunningTaskInfo runningTaskInfo = taskInfo;
                                     RecentTasksController recentTasksController = (RecentTasksController) taskStackTransitionObserverListener3;
                                     if (recentTasksController.mListener == null || !DesktopModeFlags.ENABLE_TASK_STACK_OBSERVER_IN_SHELL.isTrue() || runningTaskInfo.realActivity == null || RecentTasksController.excludeTaskFromGeneratedList(runningTaskInfo)) {

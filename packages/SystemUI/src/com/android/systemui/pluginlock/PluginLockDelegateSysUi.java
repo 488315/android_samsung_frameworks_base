@@ -18,7 +18,6 @@ import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import com.samsung.systemui.splugins.pluginlock.PluginLockBasicManager;
 import java.util.Scanner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockDelegateSysUi implements PluginLockBasicManager.Callback {
     public static final String TAG = "PluginLockDelegateSysUi";
@@ -33,9 +32,9 @@ public class PluginLockDelegateSysUi implements PluginLockBasicManager.Callback 
         StringBuilder sb = new StringBuilder();
         Scanner scanner = new Scanner(str);
         while (scanner.hasNextLine()) {
-            String trim = scanner.nextLine().trim();
-            if (trim.contains("</Version>") || trim.contains("</Which>") || trim.contains("</FontColor>")) {
-                sb.append(trim.replace("</Version>", "").replace("</Which>", "").replace("</FontColor>", ""));
+            String strTrim = scanner.nextLine().trim();
+            if (strTrim.contains("</Version>") || strTrim.contains("</Which>") || strTrim.contains("</FontColor>")) {
+                sb.append(strTrim.replace("</Version>", "").replace("</Which>", "").replace("</FontColor>", ""));
                 sb.append(",");
             }
         }

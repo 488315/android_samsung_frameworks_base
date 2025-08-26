@@ -2,8 +2,8 @@ package androidx.media;
 
 import androidx.versionedparcelable.VersionedParcel;
 import androidx.versionedparcelable.VersionedParcelable;
+import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AudioAttributesCompatParcelizer {
     public static AudioAttributesCompat read(VersionedParcel versionedParcel) {
@@ -16,7 +16,7 @@ public class AudioAttributesCompatParcelizer {
         return audioAttributesCompat;
     }
 
-    public static void write(AudioAttributesCompat audioAttributesCompat, VersionedParcel versionedParcel) {
+    public static void write(AudioAttributesCompat audioAttributesCompat, VersionedParcel versionedParcel) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         versionedParcel.getClass();
         AudioAttributesImpl audioAttributesImpl = audioAttributesCompat.mImpl;
         versionedParcel.setOutputField(1);

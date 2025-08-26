@@ -47,9 +47,9 @@ public interface IActiveSessionsListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActiveSessionsListener)) {
-                return (IActiveSessionsListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActiveSessionsListener)) {
+                return (IActiveSessionsListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,9 +76,9 @@ public interface IActiveSessionsListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(MediaSession.Token.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(MediaSession.Token.CREATOR);
                 parcel.enforceNoDataAvail();
-                onActiveSessionsChanged(createTypedArrayList);
+                onActiveSessionsChanged(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,13 +102,13 @@ public interface IActiveSessionsListener extends IInterface {
 
             @Override // android.media.session.IActiveSessionsListener
             public void onActiveSessionsChanged(List<MediaSession.Token> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

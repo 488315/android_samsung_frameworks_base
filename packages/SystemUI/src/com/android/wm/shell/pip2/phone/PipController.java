@@ -59,7 +59,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipController implements ConfigurationChangeListener, PipTransitionState.PipTransitionStateChangedListener, DisplayController.OnDisplaysChangedListener, DisplayChangeController.OnDisplayChangingListener, RemoteCallable {
     public final Context mContext;
@@ -83,7 +82,6 @@ public class PipController implements ConfigurationChangeListener, PipTransition
     public final ShellTaskOrganizer mShellTaskOrganizer;
     public final TaskStackListenerImpl mTaskStackListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipAnimationListener {
     }
 
@@ -111,11 +109,11 @@ public class PipController implements ConfigurationChangeListener, PipTransition
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final PipController pipController = PipController.this;
+                    final PipController pipController = this.f$0;
                     pipController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.pip2.phone.PipController$$ExternalSyntheticLambda1
                         @Override // java.util.function.BiConsumer
                         public final void accept(Object obj, Object obj2) {
-                            PipController pipController2 = PipController.this;
+                            PipController pipController2 = pipController;
                             PrintWriter printWriter = (PrintWriter) obj;
                             printWriter.println("PipController");
                             pipController2.mPipBoundsAlgorithm.dump(printWriter, "  ");
@@ -146,7 +144,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
                             Runnable runnable = new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipTouchHandler$$ExternalSyntheticLambda13
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    PipTouchHandler pipTouchHandler3 = PipTouchHandler.this;
+                                    PipTouchHandler pipTouchHandler3 = pipTouchHandler2;
                                     boolean z2 = z;
                                     PipBoundsState pipBoundsState2 = pipTouchHandler3.mPipBoundsState;
                                     int i3 = pipBoundsState2.mMovementBounds.bottom - pipBoundsState2.getBounds().top;
@@ -168,7 +166,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
                     Supplier supplier = new Supplier() { // from class: com.android.wm.shell.pip2.phone.PipController$$ExternalSyntheticLambda2
                         @Override // java.util.function.Supplier
                         public final Object get() {
-                            PipController pipController2 = PipController.this;
+                            PipController pipController2 = pipController;
                             pipController2.getClass();
                             return new PipController.IPipImpl(pipController2);
                         }
@@ -217,7 +215,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         this.mPipDisplayLayoutState.reloadResources();
         PipTouchHandler pipTouchHandler = this.mPipTouchHandler;
         PipResizeGestureHandler pipResizeGestureHandler = pipTouchHandler.mPipResizeGestureHandler;
@@ -238,7 +236,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onDensityOrFontScaleChanged$1() {
+    public final void onDensityOrFontScaleChanged$1() throws Resources.NotFoundException {
         IPipImpl.AnonymousClass1 anonymousClass1 = this.mPipRecentsAnimationListener;
         if (anonymousClass1 != null) {
             int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.pip_corner_radius);
@@ -266,7 +264,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
     }
 
     @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
-    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
+    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) throws Resources.NotFoundException {
         PipDisplayLayoutState pipDisplayLayoutState = this.mPipDisplayLayoutState;
         if (i != pipDisplayLayoutState.mDisplayId) {
             return;
@@ -393,14 +391,12 @@ public class PipController implements ConfigurationChangeListener, PipTransition
         this.mPipDisplayLayoutState.mDisplayLayout.set(new DisplayLayout(context, context.getDisplay()));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IPipImpl extends IPip.Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public PipController mController;
         public final SingleInstanceRemoteListener mListener;
         public final AnonymousClass1 mPipAnimationListener = new AnonymousClass1();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.pip2.phone.PipController$IPipImpl$1, reason: invalid class name */
         public class AnonymousClass1 implements PipAnimationListener {
             public AnonymousClass1() {
@@ -411,9 +407,9 @@ public class PipController implements ConfigurationChangeListener, PipTransition
             this.mController = pipController;
             this.mListener = new SingleInstanceRemoteListener(pipController, new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipController$IPipImpl$$ExternalSyntheticLambda5
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
+                public final void accept(Object obj) throws Resources.NotFoundException {
                     PipController pipController2 = (PipController) obj;
-                    PipController.IPipImpl.AnonymousClass1 anonymousClass1 = PipController.IPipImpl.this.mPipAnimationListener;
+                    PipController.IPipImpl.AnonymousClass1 anonymousClass1 = this.f$0.mPipAnimationListener;
                     pipController2.mPipRecentsAnimationListener = anonymousClass1;
                     if (anonymousClass1 != null) {
                         int dimensionPixelSize = pipController2.mContext.getResources().getDimensionPixelSize(R.dimen.pip_corner_radius);
@@ -467,7 +463,7 @@ public class PipController implements ConfigurationChangeListener, PipTransition
                     Runnable runnable = new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipController$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            PipController pipController2 = PipController.this;
+                            PipController pipController2 = pipController;
                             boolean z3 = z2;
                             int i4 = i2;
                             PipBoundsState pipBoundsState = pipController2.mPipBoundsState;
@@ -497,8 +493,8 @@ public class PipController implements ConfigurationChangeListener, PipTransition
         public final void setPipAnimationListener(final IPipAnimationListener$Stub$Proxy iPipAnimationListener$Stub$Proxy) {
             ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(this.mController, "setPipAnimationListener", new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipController$IPipImpl$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    PipController.IPipImpl iPipImpl = PipController.IPipImpl.this;
+                public final void accept(Object obj) throws RemoteException {
+                    PipController.IPipImpl iPipImpl = this.f$0;
                     IPipAnimationListener$Stub$Proxy iPipAnimationListener$Stub$Proxy2 = iPipAnimationListener$Stub$Proxy;
                     if (iPipAnimationListener$Stub$Proxy2 != null) {
                         iPipImpl.mListener.register(iPipAnimationListener$Stub$Proxy2);
@@ -537,7 +533,6 @@ public class PipController implements ConfigurationChangeListener, PipTransition
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipImpl implements Pip {
         public PipImpl() {
         }

@@ -32,14 +32,14 @@ public class BufferedConveyorFilter extends SequentialFilter {
         list.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BufferedConveyorFilter.this.m9556xdcaa7b8f((MediaFilter) obj);
+                this.f$0.m9569xdcaa7b8f((MediaFilter) obj);
             }
         });
         return super.addFilter(list);
     }
 
     /* renamed from: lambda$addFilter$1$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter, reason: not valid java name */
-    /* synthetic */ void m9556xdcaa7b8f(final MediaFilter mediaFilter) {
+    /* synthetic */ void m9569xdcaa7b8f(final MediaFilter mediaFilter) {
         final BufferChannel bufferChannel = (BufferChannel) Optional.ofNullable(this.lastOutChannel).orElseGet(new BufferedConveyorFilter$$ExternalSyntheticLambda1());
         if (this.firstInChannel == null) {
             this.firstInChannel = bufferChannel;
@@ -48,14 +48,14 @@ public class BufferedConveyorFilter extends SequentialFilter {
         this.threadPool.submit(new Runnable() { // from class: com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                BufferedConveyorFilter.this.m9555x5a5fc6b0(bufferChannel, mediaFilter, blockingBufferChannel);
+                this.f$0.m9568x5a5fc6b0(bufferChannel, mediaFilter, blockingBufferChannel);
             }
         });
         this.lastOutChannel = blockingBufferChannel;
     }
 
     /* renamed from: lambda$addFilter$0$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter, reason: not valid java name */
-    /* synthetic */ void m9555x5a5fc6b0(BufferChannel bufferChannel, MediaFilter mediaFilter, BufferChannel bufferChannel2) {
+    /* synthetic */ void m9568x5a5fc6b0(BufferChannel bufferChannel, MediaFilter mediaFilter, BufferChannel bufferChannel2) {
         while (!this.done.get()) {
             bufferChannel2.send(mediaFilter.run(bufferChannel.receive()));
         }

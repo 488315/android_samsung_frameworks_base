@@ -8,7 +8,6 @@ import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RotationUtils {
     public static final int ROTATION_LANDSCAPE = 1;
@@ -16,7 +15,6 @@ public final class RotationUtils {
     public static final int ROTATION_SEASCAPE = 3;
     public static final int ROTATION_UPSIDE_DOWN = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     public @interface Rotation {
     }
@@ -35,14 +33,14 @@ public final class RotationUtils {
     public static Resources getResourcesForRotation(int i, Context context) {
         int i2 = 1;
         if (i != 0) {
-            if (i != 1) {
-                if (i != 2) {
-                    if (i != 3) {
-                        throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown rotation: "));
-                    }
+            if (i == 1) {
+                i2 = 2;
+            } else if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown rotation: "));
                 }
+                i2 = 2;
             }
-            i2 = 2;
         }
         Configuration configuration = new Configuration(context.getResources().getConfiguration());
         configuration.orientation = i2;

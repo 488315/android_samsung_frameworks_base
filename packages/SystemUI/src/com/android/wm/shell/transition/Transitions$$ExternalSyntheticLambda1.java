@@ -24,7 +24,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -50,17 +49,17 @@ public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 impleme
                 transitions.mShellController.addExternalInterface("com.android.wm.shell.shared.IShellTransitions", new Supplier() { // from class: com.android.wm.shell.transition.Transitions$$ExternalSyntheticLambda5
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Transitions transitions2 = Transitions.this;
+                        Transitions transitions2 = transitions;
                         boolean z2 = Transitions.DEBUG_START_TRANSITION;
                         transitions2.getClass();
                         return new Transitions.IShellTransitionsImpl(transitions2);
                     }
                 }, transitions);
                 ContentResolver contentResolver = transitions.mContext.getContentResolver();
-                float fixScale = WindowManager.fixScale(Settings.Global.getFloat(transitions.mContext.getContentResolver(), SettingsHelper.INDEX_TRANSITION_ANIMATION_SCALE, transitions.mContext.getResources().getFloat(R.dimen.config_resActivitySnapshotScale)));
-                transitions.mTransitionAnimationScaleSetting = fixScale;
+                float fFixScale = WindowManager.fixScale(Settings.Global.getFloat(transitions.mContext.getContentResolver(), SettingsHelper.INDEX_TRANSITION_ANIMATION_SCALE, transitions.mContext.getResources().getFloat(R.dimen.config_resActivitySnapshotScale)));
+                transitions.mTransitionAnimationScaleSetting = fFixScale;
                 for (int size = transitions.mHandlers.size() - 1; size >= 0; size--) {
-                    ((Transitions.TransitionHandler) transitions.mHandlers.get(size)).setAnimScaleSetting(fixScale);
+                    ((Transitions.TransitionHandler) transitions.mHandlers.get(size)).setAnimScaleSetting(fFixScale);
                 }
                 contentResolver.registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_TRANSITION_ANIMATION_SCALE), false, transitions.new SettingsObserver());
                 if (z) {
@@ -78,7 +77,7 @@ public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 impleme
                 shellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.transition.Transitions$$ExternalSyntheticLambda6
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj2, Object obj3) {
-                        Transitions transitions2 = Transitions.this;
+                        Transitions transitions2 = transitions;
                         final PrintWriter printWriter = (PrintWriter) obj2;
                         String str = (String) obj3;
                         boolean z2 = Transitions.DEBUG_START_TRANSITION;
@@ -92,19 +91,19 @@ public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 impleme
                             printWriter.println(" (" + Integer.toHexString(System.identityHashCode(transitionHandler)) + ")");
                             if (transitionHandler instanceof TaskViewTransitions) {
                                 TaskViewTransitions taskViewTransitions = (TaskViewTransitions) transitionHandler;
-                                final String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "  ");
-                                StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, "mTaskViews=");
-                                m2.append(taskViewTransitions.mTaskViews);
-                                printWriter.println(m2.toString());
-                                printWriter.println(m + "mPending=" + taskViewTransitions.mPending);
+                                final String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "  ");
+                                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, "mTaskViews=");
+                                sbM.append(taskViewTransitions.mTaskViews);
+                                printWriter.println(sbM.toString());
+                                printWriter.println(strM + "mPending=" + taskViewTransitions.mPending);
                                 StringBuilder sb = new StringBuilder();
-                                sb.append(m);
+                                sb.append(strM);
                                 sb.append("mLogHistory");
                                 printWriter.println(sb.toString());
                                 taskViewTransitions.mLogHistory.forEach(new Consumer() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda2
                                     @Override // java.util.function.Consumer
                                     public final void accept(Object obj4) {
-                                        QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, m, (String) obj4);
+                                        QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, strM, (String) obj4);
                                     }
                                 });
                                 printWriter.println();
@@ -154,7 +153,7 @@ public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 impleme
                         int size6 = arrayList4.size();
                         int i5 = 0;
                         while (true) {
-                            String str4 = null;
+                            String simpleName = null;
                             if (i5 >= size6) {
                                 break;
                             }
@@ -169,9 +168,9 @@ public final /* synthetic */ class Transitions$$ExternalSyntheticLambda1 impleme
                             printWriter.print(str2 + "handler=");
                             Transitions.TransitionHandler transitionHandler2 = activeTransition.mHandler;
                             if (transitionHandler2 != null) {
-                                str4 = transitionHandler2.getClass().getSimpleName();
+                                simpleName = transitionHandler2.getClass().getSimpleName();
                             }
-                            printWriter.println(str4);
+                            printWriter.println(simpleName);
                         }
                         if (transitions2.mPendingTransitions.isEmpty()) {
                             QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str2, SignalSeverity.NONE);

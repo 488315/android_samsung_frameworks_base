@@ -97,10 +97,10 @@ public abstract class InstantAppResolverService extends Service {
                 if (InstantAppResolverService.DEBUG_INSTANT) {
                     Slog.v(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + instantAppRequestInfo.getToken() + "] Phase1 called; posting");
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = instantAppRequestInfo;
-                obtain.arg2 = iRemoteCallback;
-                InstantAppResolverService.this.mHandler.obtainMessage(1, i, 0, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = instantAppRequestInfo;
+                someArgsObtain.arg2 = iRemoteCallback;
+                InstantAppResolverService.this.mHandler.obtainMessage(1, i, 0, someArgsObtain).sendToTarget();
             }
 
             @Override // android.app.IInstantAppResolver
@@ -108,10 +108,10 @@ public abstract class InstantAppResolverService extends Service {
                 if (InstantAppResolverService.DEBUG_INSTANT) {
                     Slog.v(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + instantAppRequestInfo.getToken() + "] Phase2 called; posting");
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = instantAppRequestInfo;
-                obtain.arg2 = iRemoteCallback;
-                InstantAppResolverService.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = instantAppRequestInfo;
+                someArgsObtain.arg2 = iRemoteCallback;
+                InstantAppResolverService.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
             }
         };
     }

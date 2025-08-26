@@ -44,9 +44,9 @@ public interface IGbaService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGbaService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGbaService)) {
-                return (IGbaService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGbaService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGbaService)) {
+                return (IGbaService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IGbaService extends IInterface {
 
             @Override // android.telephony.gba.IGbaService
             public void authenticationRequest(GbaAuthRequest gbaAuthRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGbaService.DESCRIPTOR);
-                    obtain.writeTypedObject(gbaAuthRequest, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGbaService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gbaAuthRequest, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

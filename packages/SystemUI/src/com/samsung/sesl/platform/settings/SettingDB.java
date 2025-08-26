@@ -9,7 +9,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SettingDB {
     public static final /* synthetic */ SettingDB[] $VALUES;
@@ -17,7 +16,6 @@ public final class SettingDB {
     private final Function3 getInt;
     private final Function1 getUriFor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
@@ -28,12 +26,11 @@ public final class SettingDB {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return Settings.Global.getUriFor((String) obj);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$2, reason: invalid class name */
     final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass2 INSTANCE = new AnonymousClass2();
@@ -48,7 +45,6 @@ public final class SettingDB {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function1 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -59,12 +55,11 @@ public final class SettingDB {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return Settings.System.getUriFor((String) obj);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$4, reason: invalid class name */
     final /* synthetic */ class AnonymousClass4 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass4 INSTANCE = new AnonymousClass4();
@@ -79,7 +74,6 @@ public final class SettingDB {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$5, reason: invalid class name */
     final /* synthetic */ class AnonymousClass5 extends FunctionReferenceImpl implements Function1 {
         public static final AnonymousClass5 INSTANCE = new AnonymousClass5();
@@ -90,12 +84,11 @@ public final class SettingDB {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return Settings.Secure.getUriFor((String) obj);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.sesl.platform.settings.SettingDB$6, reason: invalid class name */
     final /* synthetic */ class AnonymousClass6 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass6 INSTANCE = new AnonymousClass6();

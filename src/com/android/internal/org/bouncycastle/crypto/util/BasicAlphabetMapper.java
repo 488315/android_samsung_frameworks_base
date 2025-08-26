@@ -43,10 +43,10 @@ public class BasicAlphabetMapper implements AlphabetMapper {
         }
         byte[] bArr2 = new byte[cArr.length * 2];
         while (i != cArr.length) {
-            int intValue = this.indexMap.get(Character.valueOf(cArr[i])).intValue();
+            int iIntValue = this.indexMap.get(Character.valueOf(cArr[i])).intValue();
             int i2 = i * 2;
-            bArr2[i2] = (byte) ((intValue >> 8) & 255);
-            bArr2[i2 + 1] = (byte) (intValue & 255);
+            bArr2[i2] = (byte) ((iIntValue >> 8) & 255);
+            bArr2[i2 + 1] = (byte) (iIntValue & 255);
             i++;
         }
         return bArr2;

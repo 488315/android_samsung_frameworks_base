@@ -15,19 +15,18 @@ import java.io.EOFException;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.zip.CRC32;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BackupRestoreStorage implements BackupHelper {
     public static final Companion Companion = new Companion(null);
     public List entities;
     public final MutableScatterMap entityStates = new MutableScatterMap(0, 1, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +41,7 @@ public abstract class BackupRestoreStorage implements BackupHelper {
     public abstract String getName();
 
     @Override // android.app.backup.BackupHelper
-    public final void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) {
+    public final void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) throws IOException {
         readEntityStates$frameworks__base__packages__SettingsLib__DataStore__android_common__SeslSettingsLibDataStore(parcelFileDescriptor, this.entityStates);
         new BackupContext(backupDataOutput);
         Log.i("BackupRestoreStorage", "[" + getName() + "] Backup start");
@@ -56,7 +55,7 @@ public abstract class BackupRestoreStorage implements BackupHelper {
         Log.i("BackupRestoreStorage", "[" + getName() + "] Backup end");
     }
 
-    public final void readEntityStates$frameworks__base__packages__SettingsLib__DataStore__android_common__SeslSettingsLibDataStore(ParcelFileDescriptor parcelFileDescriptor, MutableScatterMap mutableScatterMap) {
+    public final void readEntityStates$frameworks__base__packages__SettingsLib__DataStore__android_common__SeslSettingsLibDataStore(ParcelFileDescriptor parcelFileDescriptor, MutableScatterMap mutableScatterMap) throws IOException {
         FileDescriptor fileDescriptor;
         mutableScatterMap.clear();
         if (parcelFileDescriptor == null || (fileDescriptor = parcelFileDescriptor.getFileDescriptor()) == null) {
@@ -64,22 +63,22 @@ public abstract class BackupRestoreStorage implements BackupHelper {
         }
         DataInputStream dataInputStream = new DataInputStream(new FileInputStream(fileDescriptor));
         try {
-            byte readByte = dataInputStream.readByte();
-            if (readByte != 0) {
-                Log.w("BackupRestoreStorage", "[" + getName() + "] Unexpected state version, read:" + ((int) readByte) + ", expected:0");
+            byte b = dataInputStream.readByte();
+            if (b != 0) {
+                Log.w("BackupRestoreStorage", "[" + getName() + "] Unexpected state version, read:" + ((int) b) + ", expected:0");
                 return;
             }
-            int readInt = dataInputStream.readInt();
+            int i = dataInputStream.readInt();
             while (true) {
-                int i = readInt - 1;
-                if (readInt <= 0) {
+                int i2 = i - 1;
+                if (i <= 0) {
                     return;
                 }
-                String readUTF = dataInputStream.readUTF();
-                long readLong = dataInputStream.readLong();
-                readUTF.getClass();
-                mutableScatterMap.set(readUTF, Long.valueOf(readLong));
-                readInt = i;
+                String utf = dataInputStream.readUTF();
+                long j = dataInputStream.readLong();
+                utf.getClass();
+                mutableScatterMap.set(utf, Long.valueOf(j));
+                i = i2;
             }
         } catch (Exception e) {
             if (e instanceof EOFException) {
@@ -94,71 +93,91 @@ public abstract class BackupRestoreStorage implements BackupHelper {
     @Override // android.app.backup.BackupHelper
     public final void restoreEntity(BackupDataInputStream backupDataInputStream) {
         String key = backupDataInputStream.getKey();
-        List list = this.entities;
-        if (list == null) {
-            list = createBackupRestoreEntities();
-            this.entities = list;
+        List listCreateBackupRestoreEntities = this.entities;
+        if (listCreateBackupRestoreEntities == null) {
+            listCreateBackupRestoreEntities = createBackupRestoreEntities();
+            this.entities = listCreateBackupRestoreEntities;
         }
-        Iterator it = list.iterator();
+        Iterator it = listCreateBackupRestoreEntities.iterator();
         if (it.hasNext()) {
             throw FragmentManager$$ExternalSyntheticOutline0.m(it);
         }
         Log.w("BackupRestoreStorage", "[" + getName() + "] Cannot find handler for entity " + key);
     }
 
-    public final void writeAndClearEntityStates(ParcelFileDescriptor parcelFileDescriptor) {
+    /* JADX WARN: Removed duplicated region for block: B:17:0x006f  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x00af  */
+    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void writeAndClearEntityStates(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
+        int i;
+        int iNormalizeCapacity;
+        Object[] objArr;
+        Object[] objArr2;
+        long[] jArr;
+        int length;
         DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(parcelFileDescriptor.getFileDescriptor()));
-        int i = 0;
+        int i2 = 0;
         try {
             dataOutputStream.writeByte(0);
             dataOutputStream.writeInt(this.entityStates._size);
             MutableScatterMap mutableScatterMap = this.entityStates;
-            Object[] objArr = mutableScatterMap.keys;
-            Object[] objArr2 = mutableScatterMap.values;
-            long[] jArr = mutableScatterMap.metadata;
-            int length = jArr.length - 2;
-            if (length >= 0) {
-                int i2 = 0;
-                while (true) {
-                    long j = jArr[i2];
-                    if ((((~j) << 7) & j & (-9187201950435737472L)) != -9187201950435737472L) {
-                        int i3 = 8 - ((~(i2 - length)) >>> 31);
-                        for (int i4 = i; i4 < i3; i4++) {
-                            if ((255 & j) < 128) {
-                                int i5 = (i2 << 3) + i4;
-                                Object obj = objArr[i5];
-                                long longValue = ((Number) objArr2[i5]).longValue();
-                                dataOutputStream.writeUTF((String) obj);
-                                dataOutputStream.writeLong(longValue);
-                            }
-                            j >>= 8;
-                        }
-                        if (i3 != 8) {
-                            break;
-                        }
-                    }
-                    if (i2 == length) {
-                        break;
-                    }
-                    i2++;
-                    i = 0;
-                }
-            }
-            dataOutputStream.flush();
+            objArr = mutableScatterMap.keys;
+            objArr2 = mutableScatterMap.values;
+            jArr = mutableScatterMap.metadata;
+            length = jArr.length - 2;
         } catch (Exception e) {
             Log.e("BackupRestoreStorage", "[" + getName() + "] Fail to write state file", e);
         }
+        if (length >= 0) {
+            int i3 = 0;
+            while (true) {
+                long j = jArr[i3];
+                if ((((~j) << 7) & j & (-9187201950435737472L)) != -9187201950435737472L) {
+                    int i4 = 8 - ((~(i3 - length)) >>> 31);
+                    for (int i5 = i2; i5 < i4; i5++) {
+                        if ((255 & j) < 128) {
+                            int i6 = (i3 << 3) + i5;
+                            Object obj = objArr[i6];
+                            long jLongValue = ((Number) objArr2[i6]).longValue();
+                            dataOutputStream.writeUTF((String) obj);
+                            dataOutputStream.writeLong(jLongValue);
+                        }
+                        j >>= 8;
+                    }
+                    if (i4 != 8) {
+                        break;
+                    }
+                    if (i3 == length) {
+                        break;
+                    }
+                    i3++;
+                    i2 = 0;
+                }
+                this.entityStates.clear();
+                MutableScatterMap mutableScatterMap2 = this.entityStates;
+                i = mutableScatterMap2._capacity;
+                iNormalizeCapacity = ScatterMapKt.normalizeCapacity(ScatterMapKt.unloadedCapacity(mutableScatterMap2._size));
+                if (iNormalizeCapacity >= i) {
+                    mutableScatterMap2.resizeStorage$collection(iNormalizeCapacity);
+                    return;
+                }
+                return;
+            }
+        }
+        dataOutputStream.flush();
         this.entityStates.clear();
-        MutableScatterMap mutableScatterMap2 = this.entityStates;
-        int i6 = mutableScatterMap2._capacity;
-        int normalizeCapacity = ScatterMapKt.normalizeCapacity(ScatterMapKt.unloadedCapacity(mutableScatterMap2._size));
-        if (normalizeCapacity < i6) {
-            mutableScatterMap2.resizeStorage$collection(normalizeCapacity);
+        MutableScatterMap mutableScatterMap22 = this.entityStates;
+        i = mutableScatterMap22._capacity;
+        iNormalizeCapacity = ScatterMapKt.normalizeCapacity(ScatterMapKt.unloadedCapacity(mutableScatterMap22._size));
+        if (iNormalizeCapacity >= i) {
         }
     }
 
     @Override // android.app.backup.BackupHelper
-    public final void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) {
+    public final void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
         this.entities = null;
         writeAndClearEntityStates(parcelFileDescriptor);
     }

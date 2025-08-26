@@ -1,8 +1,10 @@
 package com.samsung.android.lock;
 
 import android.content.Context;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.util.SparseIntArray;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /* loaded from: classes6.dex */
@@ -141,7 +143,7 @@ public final class LsLog {
         Log.w("LsLog." + lsLogType, str);
     }
 
-    public static void prepare() {
+    public static void prepare() throws IOException, ErrnoException {
         LsLogFile.prepare();
         LsLogSummary.prefetchData();
     }
@@ -150,7 +152,7 @@ public final class LsLog {
         LsLogUploader.tryUpload(context);
     }
 
-    public static void migrate(int i) {
+    public static void migrate(int i) throws Throwable {
         LsLogFile.migrate(i);
     }
 
@@ -164,7 +166,7 @@ public final class LsLog {
         LsLogFile.dump(printWriter);
     }
 
-    public static void setSecurityDebugLevel(int i) {
+    public static void setSecurityDebugLevel(int i) throws IOException {
         Log.d(TAG, "setSecurityDebugLevel " + i);
         mSecurityDebugLevel = i;
         if (i >= 1) {
@@ -173,17 +175,11 @@ public final class LsLog {
     }
 
     public static synchronized void setFailureCount(int i, int i2) {
-        synchronized (LsLog.class) {
-            Log.w(TAG, "User " + i + " setFailureCount = " + i2);
-            mFailureCount.put(i, i2);
-        }
+        Log.w(TAG, "User " + i + " setFailureCount = " + i2);
+        mFailureCount.put(i, i2);
     }
 
     public static synchronized int getFailureCount(int i) {
-        int i2;
-        synchronized (LsLog.class) {
-            i2 = mFailureCount.get(i);
-        }
-        return i2;
+        return mFailureCount.get(i);
     }
 }

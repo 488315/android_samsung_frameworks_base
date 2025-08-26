@@ -8,8 +8,8 @@ import com.android.wm.shell.controlpanel.activity.FlexPanelActivity$$ExternalSyn
 import com.android.wm.shell.controlpanel.activity.TouchPad;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
+import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TouchPadAction extends MenuActionType {
     private TouchPadAction() {
@@ -20,7 +20,7 @@ public class TouchPadAction extends MenuActionType {
     }
 
     @Override // com.android.wm.shell.controlpanel.action.MenuActionType
-    public final void doControlAction(String str, FlexPanelActivity flexPanelActivity) {
+    public final void doControlAction(String str, FlexPanelActivity flexPanelActivity) throws JSONException {
         ControlPanelAction.Action action = ControlPanelAction.Action.TouchPad;
         if (action.getValue() != action.getValue()) {
             return;

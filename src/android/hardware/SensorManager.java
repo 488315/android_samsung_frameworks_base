@@ -184,11 +184,11 @@ public abstract class SensorManager {
     }
 
     public List<Sensor> getSensorList(int i) {
-        List<Sensor> list;
+        List<Sensor> listUnmodifiableList;
         List<Sensor> fullSensorList = getFullSensorList();
         synchronized (this.mSensorListByType) {
-            list = this.mSensorListByType.get(i);
-            if (list == null) {
+            listUnmodifiableList = this.mSensorListByType.get(i);
+            if (listUnmodifiableList == null) {
                 if (i != -1) {
                     ArrayList arrayList = new ArrayList();
                     for (Sensor sensor : fullSensorList) {
@@ -198,11 +198,11 @@ public abstract class SensorManager {
                     }
                     fullSensorList = arrayList;
                 }
-                list = Collections.unmodifiableList(fullSensorList);
-                this.mSensorListByType.append(i, list);
+                listUnmodifiableList = Collections.unmodifiableList(fullSensorList);
+                this.mSensorListByType.append(i, listUnmodifiableList);
             }
         }
-        return list;
+        return listUnmodifiableList;
     }
 
     public Sensor getSensorByHandle(int i) {
@@ -357,27 +357,114 @@ public abstract class SensorManager {
         return getSensorList(32).size() > 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00d8  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static boolean getRotationMatrix(float[] r32, float[] r33, float[] r34, float[] r35) {
-        /*
-            Method dump skipped, instructions count: 310
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.SensorManager.getRotationMatrix(float[], float[], float[], float[]):boolean");
+    public static boolean getRotationMatrix(float[] fArr, float[] fArr2, float[] fArr3, float[] fArr4) {
+        int i;
+        float f = fArr3[0];
+        float f2 = fArr3[1];
+        float f3 = fArr3[2];
+        float f4 = (f * f) + (f2 * f2) + (f3 * f3);
+        if (f4 < 0.96236104f) {
+            return false;
+        }
+        float f5 = fArr4[0];
+        float f6 = fArr4[1];
+        float f7 = fArr4[2];
+        float f8 = (f6 * f3) - (f7 * f2);
+        float f9 = (f7 * f) - (f5 * f3);
+        float f10 = (f5 * f2) - (f6 * f);
+        float fSqrt = (float) Math.sqrt((f8 * f8) + (f9 * f9) + (f10 * f10));
+        if (fSqrt < 0.1f) {
+            return false;
+        }
+        float f11 = 1.0f / fSqrt;
+        float f12 = f8 * f11;
+        float f13 = f9 * f11;
+        float f14 = f10 * f11;
+        float fSqrt2 = 1.0f / ((float) Math.sqrt(f4));
+        float f15 = f * fSqrt2;
+        float f16 = f2 * fSqrt2;
+        float f17 = f3 * fSqrt2;
+        float f18 = (f16 * f14) - (f17 * f13);
+        float f19 = (f17 * f12) - (f15 * f14);
+        float f20 = (f15 * f13) - (f16 * f12);
+        if (fArr == null) {
+            i = 9;
+        } else if (fArr.length == 9) {
+            fArr[0] = f12;
+            fArr[1] = f13;
+            fArr[2] = f14;
+            fArr[3] = f18;
+            fArr[4] = f19;
+            fArr[5] = f20;
+            fArr[6] = f15;
+            fArr[7] = f16;
+            fArr[8] = f17;
+            i = 9;
+        } else {
+            i = 9;
+            if (fArr.length == 16) {
+                fArr[0] = f12;
+                fArr[1] = f13;
+                fArr[2] = f14;
+                fArr[3] = 0.0f;
+                fArr[4] = f18;
+                fArr[5] = f19;
+                fArr[6] = f20;
+                fArr[7] = 0.0f;
+                fArr[8] = f15;
+                fArr[9] = f16;
+                fArr[10] = f17;
+                fArr[11] = 0.0f;
+                fArr[12] = 0.0f;
+                fArr[13] = 0.0f;
+                fArr[14] = 0.0f;
+                fArr[15] = 1.0f;
+            }
+        }
+        if (fArr2 != null) {
+            float fSqrt3 = 1.0f / ((float) Math.sqrt(((f5 * f5) + (f6 * f6)) + (f7 * f7)));
+            float f21 = ((f18 * f5) + (f19 * f6) + (f20 * f7)) * fSqrt3;
+            float f22 = ((f5 * f15) + (f6 * f16) + (f7 * f17)) * fSqrt3;
+            if (fArr2.length == i) {
+                fArr2[0] = 1.0f;
+                fArr2[1] = 0.0f;
+                fArr2[2] = 0.0f;
+                fArr2[3] = 0.0f;
+                fArr2[4] = f21;
+                fArr2[5] = f22;
+                fArr2[6] = 0.0f;
+                fArr2[7] = -f22;
+                fArr2[8] = f21;
+            } else if (fArr2.length == 16) {
+                fArr2[0] = 1.0f;
+                fArr2[1] = 0.0f;
+                fArr2[2] = 0.0f;
+                fArr2[4] = 0.0f;
+                fArr2[5] = f21;
+                fArr2[6] = f22;
+                fArr2[8] = 0.0f;
+                fArr2[9] = -f22;
+                fArr2[10] = f21;
+                fArr2[14] = 0.0f;
+                fArr2[13] = 0.0f;
+                fArr2[12] = 0.0f;
+                fArr2[11] = 0.0f;
+                fArr2[7] = 0.0f;
+                fArr2[3] = 0.0f;
+                fArr2[15] = 1.0f;
+            }
+        }
+        return true;
     }
 
     public static float getInclination(float[] fArr) {
-        double atan2;
+        double dAtan2;
         if (fArr.length == 9) {
-            atan2 = Math.atan2(fArr[5], fArr[4]);
+            dAtan2 = Math.atan2(fArr[5], fArr[4]);
         } else {
-            atan2 = Math.atan2(fArr[6], fArr[5]);
+            dAtan2 = Math.atan2(fArr[6], fArr[5]);
         }
-        return (float) atan2;
+        return (float) dAtan2;
     }
 
     public static boolean remapCoordinateSystem(float[] fArr, int i, int i2, float[] fArr2) {
@@ -496,30 +583,124 @@ public abstract class SensorManager {
         return (1.0f - ((float) Math.pow(f2 / f, 0.19029495120048523d))) * 44330.0f;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0058  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0058  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0070  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void getAngleChange(float[] r25, float[] r26, float[] r27) {
-        /*
-            Method dump skipped, instructions count: 219
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.SensorManager.getAngleChange(float[], float[], float[]):void");
+    public static void getAngleChange(float[] fArr, float[] fArr2, float[] fArr3) {
+        char c;
+        float f;
+        float f2;
+        float f3;
+        float f4;
+        float f5;
+        float f6;
+        float f7;
+        float f8;
+        float f9;
+        float f10;
+        float f11;
+        float f12;
+        float f13;
+        float f14;
+        float f15;
+        float f16;
+        float f17;
+        float f18 = 0.0f;
+        if (fArr2.length == 9) {
+            f2 = fArr2[0];
+            f3 = fArr2[1];
+            f4 = fArr2[2];
+            f5 = fArr2[3];
+            f6 = fArr2[4];
+            f7 = fArr2[5];
+            f8 = fArr2[6];
+            f9 = fArr2[7];
+            f = fArr2[8];
+        } else if (fArr2.length == 16) {
+            f2 = fArr2[0];
+            f3 = fArr2[1];
+            f4 = fArr2[2];
+            f5 = fArr2[4];
+            f6 = fArr2[5];
+            f7 = fArr2[6];
+            f8 = fArr2[8];
+            f9 = fArr2[9];
+            f = fArr2[10];
+        } else {
+            c = '\n';
+            f = 0.0f;
+            f2 = 0.0f;
+            f3 = 0.0f;
+            f4 = 0.0f;
+            f5 = 0.0f;
+            f6 = 0.0f;
+            f7 = 0.0f;
+            f8 = 0.0f;
+            f9 = 0.0f;
+            if (fArr3.length != 9) {
+                f18 = fArr3[0];
+                f11 = fArr3[1];
+                float f19 = fArr3[2];
+                f13 = fArr3[3];
+                float f20 = fArr3[4];
+                float f21 = fArr3[5];
+                float f22 = fArr3[6];
+                f12 = fArr3[7];
+                f15 = f22;
+                f16 = f21;
+                f17 = fArr3[8];
+                f10 = f19;
+                f14 = f20;
+            } else if (fArr3.length == 16) {
+                f18 = fArr3[0];
+                f11 = fArr3[1];
+                float f23 = fArr3[2];
+                f13 = fArr3[4];
+                f14 = fArr3[5];
+                f16 = fArr3[6];
+                f15 = fArr3[8];
+                float f24 = fArr3[9];
+                f17 = fArr3[c];
+                f10 = f23;
+                f12 = f24;
+            } else {
+                f10 = 0.0f;
+                f11 = 0.0f;
+                f12 = 0.0f;
+                f13 = 0.0f;
+                f14 = 0.0f;
+                f15 = 0.0f;
+                f16 = 0.0f;
+                f17 = 0.0f;
+            }
+            float f25 = (f11 * f3) + (f14 * f6) + (f12 * f9);
+            float f26 = (f3 * f10) + (f6 * f16) + (f9 * f17);
+            fArr[0] = (float) Math.atan2((f18 * f3) + (f13 * f6) + (f15 * f9), f25);
+            fArr[1] = (float) Math.asin(-f26);
+            fArr[2] = (float) Math.atan2(-((f2 * f10) + (f5 * f16) + (f8 * f17)), (f10 * f4) + (f16 * f7) + (f17 * f));
+        }
+        c = '\n';
+        if (fArr3.length != 9) {
+        }
+        float f252 = (f11 * f3) + (f14 * f6) + (f12 * f9);
+        float f262 = (f3 * f10) + (f6 * f16) + (f9 * f17);
+        fArr[0] = (float) Math.atan2((f18 * f3) + (f13 * f6) + (f15 * f9), f252);
+        fArr[1] = (float) Math.asin(-f262);
+        fArr[2] = (float) Math.atan2(-((f2 * f10) + (f5 * f16) + (f8 * f17)), (f10 * f4) + (f16 * f7) + (f17 * f));
     }
 
     public static void getRotationMatrixFromVector(float[] fArr, float[] fArr2) {
-        float sqrt;
+        float fSqrt;
         float f = fArr2[0];
         float f2 = fArr2[1];
         float f3 = fArr2[2];
         if (fArr2.length >= 4) {
-            sqrt = fArr2[3];
+            fSqrt = fArr2[3];
         } else {
             float f4 = ((1.0f - (f * f)) - (f2 * f2)) - (f3 * f3);
-            sqrt = f4 > 0.0f ? (float) Math.sqrt(f4) : 0.0f;
+            fSqrt = f4 > 0.0f ? (float) Math.sqrt(f4) : 0.0f;
         }
         float f5 = f * 2.0f;
         float f6 = f * f5;
@@ -528,11 +709,11 @@ public abstract class SensorManager {
         float f9 = 2.0f * f3;
         float f10 = f9 * f3;
         float f11 = f2 * f5;
-        float f12 = f9 * sqrt;
+        float f12 = f9 * fSqrt;
         float f13 = f5 * f3;
-        float f14 = f7 * sqrt;
+        float f14 = f7 * fSqrt;
         float f15 = f7 * f3;
-        float f16 = f5 * sqrt;
+        float f16 = f5 * fSqrt;
         if (fArr.length == 9) {
             fArr[0] = (1.0f - f8) - f10;
             fArr[1] = f11 - f12;
@@ -653,9 +834,9 @@ public abstract class SensorManager {
             } else if (i == 1) {
                 iArr[1] = 50350017;
             }
-            SensorAdditionalInfo createSContextData = SensorAdditionalInfo.createSContextData(next, iArr);
+            SensorAdditionalInfo sensorAdditionalInfoCreateSContextData = SensorAdditionalInfo.createSContextData(next, iArr);
             Log.d(TAG, "set parameter active screen = " + i + ", " + iArr[1]);
-            if (setOperationParameterImpl(createSContextData)) {
+            if (setOperationParameterImpl(sensorAdditionalInfoCreateSContextData)) {
                 return;
             }
             Log.d(TAG, "set parameter active screen failed ");

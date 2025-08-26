@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardBiometricLockoutLogger implements CoreStartable {
     public static final Companion Companion = new Companion(null);
@@ -26,15 +25,15 @@ public final class KeyguardBiometricLockoutLogger implements CoreStartable {
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onLockedOutStateChanged(BiometricSourceType biometricSourceType) {
             BiometricSourceType biometricSourceType2 = BiometricSourceType.FINGERPRINT;
-            KeyguardBiometricLockoutLogger keyguardBiometricLockoutLogger = KeyguardBiometricLockoutLogger.this;
+            KeyguardBiometricLockoutLogger keyguardBiometricLockoutLogger = this.this$0;
             if (biometricSourceType == biometricSourceType2) {
-                boolean isFingerprintLockedOut = keyguardBiometricLockoutLogger.keyguardUpdateMonitor.isFingerprintLockedOut();
-                if (isFingerprintLockedOut && !keyguardBiometricLockoutLogger.fingerprintLockedOut) {
+                boolean zIsFingerprintLockedOut = keyguardBiometricLockoutLogger.keyguardUpdateMonitor.isFingerprintLockedOut();
+                if (zIsFingerprintLockedOut && !keyguardBiometricLockoutLogger.fingerprintLockedOut) {
                     keyguardBiometricLockoutLogger.uiEventLogger.log(KeyguardBiometricLockoutLogger.PrimaryAuthRequiredEvent.PRIMARY_AUTH_REQUIRED_FINGERPRINT_LOCKED_OUT, keyguardBiometricLockoutLogger.sessionTracker.getSessionId(1));
-                } else if (!isFingerprintLockedOut && keyguardBiometricLockoutLogger.fingerprintLockedOut) {
+                } else if (!zIsFingerprintLockedOut && keyguardBiometricLockoutLogger.fingerprintLockedOut) {
                     keyguardBiometricLockoutLogger.uiEventLogger.log(KeyguardBiometricLockoutLogger.PrimaryAuthRequiredEvent.PRIMARY_AUTH_REQUIRED_FINGERPRINT_LOCKED_OUT_RESET, keyguardBiometricLockoutLogger.sessionTracker.getSessionId(1));
                 }
-                keyguardBiometricLockoutLogger.fingerprintLockedOut = isFingerprintLockedOut;
+                keyguardBiometricLockoutLogger.fingerprintLockedOut = zIsFingerprintLockedOut;
                 return;
             }
             if (biometricSourceType == BiometricSourceType.FACE) {
@@ -51,14 +50,14 @@ public final class KeyguardBiometricLockoutLogger implements CoreStartable {
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onStrongAuthStateChanged(int i) {
             String str;
-            KeyguardBiometricLockoutLogger keyguardBiometricLockoutLogger = KeyguardBiometricLockoutLogger.this;
+            KeyguardBiometricLockoutLogger keyguardBiometricLockoutLogger = this.this$0;
             int strongAuthForUser = keyguardBiometricLockoutLogger.keyguardUpdateMonitor.mStrongAuthTracker.getStrongAuthForUser(i);
             int bouncerPromptReason = keyguardBiometricLockoutLogger.viewMediatorCallback.getBouncerPromptReason();
             String hexString = Integer.toHexString(keyguardBiometricLockoutLogger.strongAuthFlags);
             String hexString2 = Integer.toHexString(strongAuthForUser);
-            StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(bouncerPromptReason, "onStrongAuthStateChanged() PromptReason ", " StrongAuth Flag 0x ", hexString, "  -> 0x");
-            m.append(hexString2);
-            String sb = m.toString();
+            StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(bouncerPromptReason, "onStrongAuthStateChanged() PromptReason ", " StrongAuth Flag 0x ", hexString, "  -> 0x");
+            sbM.append(hexString2);
+            String string = sbM.toString();
             int i2 = strongAuthForUser != 0 ? keyguardBiometricLockoutLogger.strongAuthFlags ^ strongAuthForUser : 0;
             if (i2 == 0 && bouncerPromptReason == 1) {
                 i2 = 1;
@@ -74,34 +73,34 @@ public final class KeyguardBiometricLockoutLogger implements CoreStartable {
             } else if (i2 == 8) {
                 str = "4";
             } else if (i2 == 16) {
-                sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, ", 72hr timeout");
+                string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", 72hr timeout");
                 str = "5";
             } else if (i2 == 32) {
                 str = "6";
             } else if (i2 == 64) {
                 str = "9";
             } else if (i2 == 128) {
-                sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, ", 24hr timeout");
+                string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", 24hr timeout");
                 str = "7";
             } else if (keyguardUpdateMonitor.mStrongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(i)) {
                 str = "";
             } else {
-                sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, ", 4hr idle timeout");
+                string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", 4hr idle timeout");
                 str = "8";
             }
             if (!TextUtils.isEmpty(str)) {
                 SystemUIAnalytics.sendEventLog("102", SystemUIAnalytics.EID_STRONG_AUTH, str);
             }
-            SecurityLog.d("KeyguardBiometricLockoutLogger", sb);
+            SecurityLog.d("KeyguardBiometricLockoutLogger", string);
             if (i != keyguardBiometricLockoutLogger.selectedUserInteractor.getSelectedUserId()) {
                 return;
             }
             int strongAuthForUser2 = keyguardUpdateMonitor.mStrongAuthTracker.getStrongAuthForUser(i);
-            boolean isEncryptedOrLockdown = keyguardUpdateMonitor.isEncryptedOrLockdown(i);
-            if (isEncryptedOrLockdown && !keyguardBiometricLockoutLogger.encryptedOrLockdown) {
+            boolean zIsEncryptedOrLockdown = keyguardUpdateMonitor.isEncryptedOrLockdown(i);
+            if (zIsEncryptedOrLockdown && !keyguardBiometricLockoutLogger.encryptedOrLockdown) {
                 keyguardBiometricLockoutLogger.uiEventLogger.log(KeyguardBiometricLockoutLogger.PrimaryAuthRequiredEvent.PRIMARY_AUTH_REQUIRED_ENCRYPTED_OR_LOCKDOWN, keyguardBiometricLockoutLogger.sessionTracker.getSessionId(1));
             }
-            keyguardBiometricLockoutLogger.encryptedOrLockdown = isEncryptedOrLockdown;
+            keyguardBiometricLockoutLogger.encryptedOrLockdown = zIsEncryptedOrLockdown;
             KeyguardBiometricLockoutLogger.Companion.getClass();
             boolean z = (strongAuthForUser2 & 64) != 0;
             if (z && !keyguardBiometricLockoutLogger.unattendedUpdate) {
@@ -123,7 +122,6 @@ public final class KeyguardBiometricLockoutLogger implements CoreStartable {
     public boolean unattendedUpdate;
     public final ViewMediatorCallback viewMediatorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -135,7 +133,6 @@ public final class KeyguardBiometricLockoutLogger implements CoreStartable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PrimaryAuthRequiredEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ PrimaryAuthRequiredEvent[] $VALUES;
         public static final PrimaryAuthRequiredEvent PRIMARY_AUTH_REQUIRED_ENCRYPTED_OR_LOCKDOWN;

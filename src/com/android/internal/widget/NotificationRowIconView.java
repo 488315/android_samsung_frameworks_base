@@ -83,10 +83,10 @@ public class NotificationRowIconView extends CachingIconView {
             if (this.mAppIcon != null) {
                 return;
             }
-            Drawable loadAppIcon = loadAppIcon();
-            this.mAppIcon = loadAppIcon;
-            if (loadAppIcon != null) {
-                lambda$setImageURIAsync$2(loadAppIcon);
+            Drawable drawableLoadAppIcon = loadAppIcon();
+            this.mAppIcon = drawableLoadAppIcon;
+            if (drawableLoadAppIcon != null) {
+                lambda$setImageURIAsync$2(drawableLoadAppIcon);
                 adjustViewForAppIcon();
                 return;
             } else {
@@ -110,20 +110,20 @@ public class NotificationRowIconView extends CachingIconView {
                     }
                 };
             }
-            Drawable loadAppIcon = loadAppIcon();
-            this.mAppIcon = loadAppIcon;
-            if (loadAppIcon != null) {
+            Drawable drawableLoadAppIcon = loadAppIcon();
+            this.mAppIcon = drawableLoadAppIcon;
+            if (drawableLoadAppIcon != null) {
                 return new Runnable() { // from class: com.android.internal.widget.NotificationRowIconView$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationRowIconView.this.lambda$setImageIconAsync$1();
+                        this.f$0.lambda$setImageIconAsync$1();
                     }
                 };
             }
             return new Runnable() { // from class: com.android.internal.widget.NotificationRowIconView$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NotificationRowIconView.this.lambda$setImageIconAsync$2(icon);
+                    this.f$0.lambda$setImageIconAsync$2(icon);
                 }
             };
         }

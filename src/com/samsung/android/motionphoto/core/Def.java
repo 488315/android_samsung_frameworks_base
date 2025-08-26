@@ -2,6 +2,7 @@ package com.samsung.android.motionphoto.core;
 
 /* loaded from: classes6.dex */
 public class Def {
+    public static final String JUNIT_TEST_EXECUTION_MODE = "secmm.sum.junit-test";
     public static final int MP_EVENT_ERROR = 3002;
     public static final int MP_EVENT_INFO = 3001;
     public static final int MP_EVENT_START = 3000;

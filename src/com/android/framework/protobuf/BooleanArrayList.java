@@ -65,11 +65,11 @@ final class BooleanArrayList extends AbstractProtobufList<Boolean> implements In
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Internal.hashBoolean(this.array[i2]);
+        int iHashBoolean = 1;
+        for (int i = 0; i < this.size; i++) {
+            iHashBoolean = (iHashBoolean * 31) + Internal.hashBoolean(this.array[i]);
         }
-        return i;
+        return iHashBoolean;
     }
 
     @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
@@ -97,10 +97,10 @@ final class BooleanArrayList extends AbstractProtobufList<Boolean> implements In
         if (!(obj instanceof Boolean)) {
             return -1;
         }
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         int size = size();
         for (int i = 0; i < size; i++) {
-            if (this.array[i] == booleanValue) {
+            if (this.array[i] == zBooleanValue) {
                 return i;
             }
         }

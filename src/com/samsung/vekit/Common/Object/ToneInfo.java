@@ -8,9 +8,9 @@ public class ToneInfo {
     private float[] toneArray;
 
     public ToneInfo() {
-        Integer valueOf = Integer.valueOf(ToneType.values().length);
-        this.maxToneType = valueOf;
-        this.toneArray = new float[valueOf.intValue()];
+        Integer numValueOf = Integer.valueOf(ToneType.values().length);
+        this.maxToneType = numValueOf;
+        this.toneArray = new float[numValueOf.intValue()];
         for (ToneType toneType : ToneType.values()) {
             this.toneArray[toneType.ordinal()] = 0.0f;
         }

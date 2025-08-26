@@ -309,19 +309,20 @@ public class SemTelecomManager {
     public void acceptRingingCallWithVideoState(int i, int i2) {
         int i3;
         ISamsungTelecomService samsungTelecomService = getSamsungTelecomService();
-        if (samsungTelecomService != null) {
-            try {
-                i3 = i2;
-            } catch (RemoteException e) {
-                e = e;
-                i3 = i2;
-            }
+        if (samsungTelecomService == null) {
+            return;
+        }
+        try {
+            i3 = i2;
             try {
                 samsungTelecomService.acceptRingingCallWithVideoState(i, i3, new Bundle(), this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
-            } catch (RemoteException e2) {
-                e = e2;
+            } catch (RemoteException e) {
+                e = e;
                 Log.e(TAG, "Error calling ISamsungTelecomService#acceptRingingCallWithVideoState - keyCode : " + i3, e);
             }
+        } catch (RemoteException e2) {
+            e = e2;
+            i3 = i2;
         }
     }
 
@@ -373,12 +374,12 @@ public class SemTelecomManager {
             return iSamsungTelecomService;
         }
         if (sSamsungTelecomService == null) {
-            ISamsungTelecomService asInterface = ISamsungTelecomService.Stub.asInterface(ServiceManager.getService(Context.SEM_TELECOM_SERVICE));
+            ISamsungTelecomService iSamsungTelecomServiceAsInterface = ISamsungTelecomService.Stub.asInterface(ServiceManager.getService(Context.SEM_TELECOM_SERVICE));
             synchronized (CACHE_LOCK) {
-                if (sSamsungTelecomService == null && asInterface != null) {
+                if (sSamsungTelecomService == null && iSamsungTelecomServiceAsInterface != null) {
                     try {
-                        sSamsungTelecomService = asInterface;
-                        asInterface.asBinder().linkToDeath(SERVICE_DEATH, 0);
+                        sSamsungTelecomService = iSamsungTelecomServiceAsInterface;
+                        iSamsungTelecomServiceAsInterface.asBinder().linkToDeath(SERVICE_DEATH, 0);
                     } catch (Exception unused) {
                         sSamsungTelecomService = null;
                     }

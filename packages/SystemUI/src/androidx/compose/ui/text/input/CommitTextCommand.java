@@ -5,7 +5,6 @@ import androidx.compose.ui.text.AnnotatedString;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CommitTextCommand implements EditCommand {
     public final AnnotatedString annotatedString;
@@ -18,17 +17,17 @@ public final class CommitTextCommand implements EditCommand {
 
     @Override // androidx.compose.ui.text.input.EditCommand
     public final void applyTo(EditingBuffer editingBuffer) {
-        boolean hasComposition$ui_text_release = editingBuffer.hasComposition$ui_text_release();
+        boolean zHasComposition$ui_text_release = editingBuffer.hasComposition$ui_text_release();
         AnnotatedString annotatedString = this.annotatedString;
-        if (hasComposition$ui_text_release) {
+        if (zHasComposition$ui_text_release) {
             editingBuffer.replace$ui_text_release(editingBuffer.compositionStart, editingBuffer.compositionEnd, annotatedString.text);
         } else {
             editingBuffer.replace$ui_text_release(editingBuffer.selectionStart, editingBuffer.selectionEnd, annotatedString.text);
         }
         int cursor$ui_text_release = editingBuffer.getCursor$ui_text_release();
         int i = this.newCursorPosition;
-        int coerceIn = RangesKt___RangesKt.coerceIn(i > 0 ? (cursor$ui_text_release + i) - 1 : (cursor$ui_text_release + i) - annotatedString.text.length(), 0, editingBuffer.gapBuffer.getLength());
-        editingBuffer.setSelection$ui_text_release(coerceIn, coerceIn);
+        int iCoerceIn = RangesKt___RangesKt.coerceIn(i > 0 ? (cursor$ui_text_release + i) - 1 : (cursor$ui_text_release + i) - annotatedString.text.length(), 0, editingBuffer.gapBuffer.getLength());
+        editingBuffer.setSelection$ui_text_release(iCoerceIn, iCoerceIn);
     }
 
     public final boolean equals(Object obj) {

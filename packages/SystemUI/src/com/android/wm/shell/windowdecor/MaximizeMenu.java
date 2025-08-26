@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -37,6 +38,7 @@ import com.android.wm.shell.windowdecor.common.DecorThemeUtil;
 import com.android.wm.shell.windowdecor.common.ThemeUtilsKt;
 import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import kotlin.NoWhenBranchMatchedException;
@@ -45,7 +47,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MaximizeMenu {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -65,7 +66,6 @@ public final class MaximizeMenu {
     public final Supplier transactionSupplier;
     public SurfaceControlViewHost viewHost;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,7 +75,6 @@ public final class MaximizeMenu {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MaximizeMenuView {
         public final View container;
         public final DecorThemeUtil decorThemeUtil;
@@ -90,12 +89,12 @@ public final class MaximizeMenu {
         public final Rect maximizeRestoreFillPaddingRect;
         public AnimatorSet menuAnimatorSet;
         public final int menuPadding;
-        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda11 onImmersiveOrRestoreClickListener;
-        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 onLeftSnapClickListener;
-        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 onMaximizeClickListener;
-        public DesktopModeWindowDecoration$$ExternalSyntheticLambda11 onMenuHoverListener;
-        public DesktopModeWindowDecoration$$ExternalSyntheticLambda8 onOutsideTouchListener;
-        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 onRightSnapClickListener;
+        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 onImmersiveOrRestoreClickListener;
+        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 onLeftSnapClickListener;
+        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 onMaximizeClickListener;
+        public DesktopModeWindowDecoration$$ExternalSyntheticLambda12 onMenuHoverListener;
+        public DesktopModeWindowDecoration$$ExternalSyntheticLambda6 onOutsideTouchListener;
+        public DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 onRightSnapClickListener;
         public final int outlineRadius;
         public final int outlineStroke;
         public final View overlay;
@@ -112,10 +111,8 @@ public final class MaximizeMenu {
         public MenuStyle style;
         public ActivityManager.RunningTaskInfo taskInfo;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class ImmersiveConfig {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Hidden extends ImmersiveConfig {
                 public static final Hidden INSTANCE = new Hidden();
 
@@ -136,7 +133,6 @@ public final class MaximizeMenu {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Visible extends ImmersiveConfig {
                 public final ImmersiveToggleDirection direction;
 
@@ -171,7 +167,6 @@ public final class MaximizeMenu {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ImmersiveToggleDirection {
             public static final /* synthetic */ ImmersiveToggleDirection[] $VALUES;
             public static final ImmersiveToggleDirection ENTER;
@@ -199,7 +194,6 @@ public final class MaximizeMenu {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MenuStyle {
             public final int backgroundColor;
             public final ImmersiveOption immersiveOption;
@@ -207,7 +201,6 @@ public final class MaximizeMenu {
             public final SnapOptions snapOptions;
             public final int textColor;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class ImmersiveOption {
                 public final StateListDrawable drawable;
 
@@ -231,7 +224,6 @@ public final class MaximizeMenu {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class MaximizeOption {
                 public final StateListDrawable drawable;
 
@@ -255,7 +247,6 @@ public final class MaximizeMenu {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class SnapOptions {
                 public final int activeBackgroundColor;
                 public final int activeSnapSideColor;
@@ -338,7 +329,6 @@ public final class MaximizeMenu {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SizeToggleDirection {
             public static final /* synthetic */ SizeToggleDirection[] $VALUES;
             public static final SizeToggleDirection MAXIMIZE;
@@ -368,7 +358,6 @@ public final class MaximizeMenu {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SnapToHalfSelection {
             public static final /* synthetic */ SnapToHalfSelection[] $VALUES;
             public static final SnapToHalfSelection LEFT;
@@ -399,7 +388,6 @@ public final class MaximizeMenu {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
             public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -443,7 +431,7 @@ public final class MaximizeMenu {
             }
         }
 
-        public MaximizeMenuView(final Context context, DesktopModeUiEventLogger desktopModeUiEventLogger, SizeToggleDirection sizeToggleDirection, ImmersiveConfig immersiveConfig, boolean z, int i) {
+        public MaximizeMenuView(final Context context, DesktopModeUiEventLogger desktopModeUiEventLogger, SizeToggleDirection sizeToggleDirection, ImmersiveConfig immersiveConfig, boolean z, int i) throws Resources.NotFoundException {
             TextView textView;
             int i2;
             this.desktopModeUiEventLogger = desktopModeUiEventLogger;
@@ -452,22 +440,22 @@ public final class MaximizeMenu {
             ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.desktop_mode_window_decor_maximize_menu, (ViewGroup) null);
             this.rootView = viewGroup;
             this.container = viewGroup.requireViewById(R.id.container);
-            View requireViewById = viewGroup.requireViewById(R.id.maximize_menu_overlay);
-            this.overlay = requireViewById;
-            View requireViewById2 = viewGroup.requireViewById(R.id.maximize_menu_immersive_toggle_container);
-            this.immersiveToggleContainer = requireViewById2;
+            View viewRequireViewById = viewGroup.requireViewById(R.id.maximize_menu_overlay);
+            this.overlay = viewRequireViewById;
+            View viewRequireViewById2 = viewGroup.requireViewById(R.id.maximize_menu_immersive_toggle_container);
+            this.immersiveToggleContainer = viewRequireViewById2;
             TextView textView2 = (TextView) viewGroup.requireViewById(R.id.maximize_menu_immersive_toggle_button_text);
             this.immersiveToggleButtonText = textView2;
             Button button = (Button) viewGroup.requireViewById(R.id.maximize_menu_immersive_toggle_button);
             this.immersiveToggleButton = button;
-            View requireViewById3 = viewGroup.requireViewById(R.id.maximize_menu_size_toggle_container);
-            this.sizeToggleContainer = requireViewById3;
+            View viewRequireViewById3 = viewGroup.requireViewById(R.id.maximize_menu_size_toggle_container);
+            this.sizeToggleContainer = viewRequireViewById3;
             TextView textView3 = (TextView) viewGroup.requireViewById(R.id.maximize_menu_size_toggle_button_text);
             this.sizeToggleButtonText = textView3;
             Button button2 = (Button) viewGroup.requireViewById(R.id.maximize_menu_size_toggle_button);
             this.sizeToggleButton = button2;
-            View requireViewById4 = viewGroup.requireViewById(R.id.maximize_menu_snap_container);
-            this.snapContainer = requireViewById4;
+            View viewRequireViewById4 = viewGroup.requireViewById(R.id.maximize_menu_snap_container);
+            this.snapContainer = viewRequireViewById4;
             this.snapWindowText = (TextView) viewGroup.requireViewById(R.id.maximize_menu_snap_window_text);
             this.snapButtonsLayout = viewGroup.requireViewById(R.id.maximize_menu_snap_menu_layout);
             boolean z2 = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(context) == 1;
@@ -487,18 +475,18 @@ public final class MaximizeMenu {
             this.maximizeRestoreFillPaddingRect = new Rect(dimensionPixelSize4, dimensionPixelSize3, dimensionPixelSize4, dimensionPixelSize3);
             this.immersiveFillPaddingRect = new Rect(dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
             this.hoverTempRect = new Rect();
-            requireViewById.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.1
+            viewRequireViewById.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.1
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    DesktopModeWindowDecoration$$ExternalSyntheticLambda11 desktopModeWindowDecoration$$ExternalSyntheticLambda11;
+                    DesktopModeWindowDecoration$$ExternalSyntheticLambda12 desktopModeWindowDecoration$$ExternalSyntheticLambda12;
                     int action = motionEvent.getAction();
                     if (action == 9) {
-                        DesktopModeWindowDecoration$$ExternalSyntheticLambda11 desktopModeWindowDecoration$$ExternalSyntheticLambda112 = MaximizeMenuView.this.onMenuHoverListener;
-                        if (desktopModeWindowDecoration$$ExternalSyntheticLambda112 != null) {
-                            desktopModeWindowDecoration$$ExternalSyntheticLambda112.mo779invoke(Boolean.TRUE);
+                        DesktopModeWindowDecoration$$ExternalSyntheticLambda12 desktopModeWindowDecoration$$ExternalSyntheticLambda122 = MaximizeMenuView.this.onMenuHoverListener;
+                        if (desktopModeWindowDecoration$$ExternalSyntheticLambda122 != null) {
+                            desktopModeWindowDecoration$$ExternalSyntheticLambda122.mo781invoke(Boolean.TRUE);
                         }
-                    } else if (action == 10 && (desktopModeWindowDecoration$$ExternalSyntheticLambda11 = MaximizeMenuView.this.onMenuHoverListener) != null) {
-                        desktopModeWindowDecoration$$ExternalSyntheticLambda11.mo779invoke(Boolean.FALSE);
+                    } else if (action == 10 && (desktopModeWindowDecoration$$ExternalSyntheticLambda12 = MaximizeMenuView.this.onMenuHoverListener) != null) {
+                        desktopModeWindowDecoration$$ExternalSyntheticLambda12.mo781invoke(Boolean.FALSE);
                     }
                     MaximizeMenuView maximizeMenuView = MaximizeMenuView.this;
                     Rect rect = maximizeMenuView.hoverTempRect;
@@ -519,42 +507,42 @@ public final class MaximizeMenu {
                     return false;
                 }
             });
-            requireViewById2.setVisibility(immersiveConfig instanceof ImmersiveConfig.Hidden ? 8 : 0);
-            requireViewById3.setVisibility(0);
-            requireViewById4.setVisibility(z ? 0 : 8);
+            viewRequireViewById2.setVisibility(immersiveConfig instanceof ImmersiveConfig.Hidden ? 8 : 0);
+            viewRequireViewById3.setVisibility(0);
+            viewRequireViewById4.setVisibility(z ? 0 : 8);
             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.2
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda11 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda11 = MaximizeMenuView.this.onImmersiveOrRestoreClickListener;
-                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda11 != null) {
-                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda11.invoke();
+                public final void onClick(View view) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException, InvocationTargetException {
+                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = MaximizeMenuView.this.onImmersiveOrRestoreClickListener;
+                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
+                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
                     }
                 }
             });
             button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.3
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = MaximizeMenuView.this.onMaximizeClickListener;
-                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = MaximizeMenuView.this.onMaximizeClickListener;
+                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                     }
                 }
             });
             button3.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.4
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = MaximizeMenuView.this.onRightSnapClickListener;
-                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = MaximizeMenuView.this.onRightSnapClickListener;
+                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                     }
                 }
             });
             button4.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.windowdecor.MaximizeMenu.MaximizeMenuView.5
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = MaximizeMenuView.this.onLeftSnapClickListener;
-                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                    DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = MaximizeMenuView.this.onLeftSnapClickListener;
+                    if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                        desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                     }
                 }
             });
@@ -564,11 +552,11 @@ public final class MaximizeMenu {
                     if (motionEvent.getActionMasked() != 4) {
                         return true;
                     }
-                    DesktopModeWindowDecoration$$ExternalSyntheticLambda8 desktopModeWindowDecoration$$ExternalSyntheticLambda8 = MaximizeMenuView.this.onOutsideTouchListener;
-                    if (desktopModeWindowDecoration$$ExternalSyntheticLambda8 == null) {
+                    DesktopModeWindowDecoration$$ExternalSyntheticLambda6 desktopModeWindowDecoration$$ExternalSyntheticLambda6 = MaximizeMenuView.this.onOutsideTouchListener;
+                    if (desktopModeWindowDecoration$$ExternalSyntheticLambda6 == null) {
                         return false;
                     }
-                    desktopModeWindowDecoration$$ExternalSyntheticLambda8.invoke();
+                    desktopModeWindowDecoration$$ExternalSyntheticLambda6.invoke();
                     return false;
                 }
             });
@@ -590,9 +578,9 @@ public final class MaximizeMenu {
                             runningTaskInfo = null;
                         }
                         desktopModeUiEventLogger2.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.A11Y_MAXIMIZE_MENU_MAXIMIZE);
-                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = this.onMaximizeClickListener;
-                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = this.onMaximizeClickListener;
+                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                         }
                     }
                     return super.performAccessibilityAction(view, i3, bundle);
@@ -616,9 +604,9 @@ public final class MaximizeMenu {
                             runningTaskInfo = null;
                         }
                         desktopModeUiEventLogger2.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.A11Y_MAXIMIZE_MENU_RESIZE_LEFT);
-                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = this.onLeftSnapClickListener;
-                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = this.onLeftSnapClickListener;
+                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                         }
                     }
                     return super.performAccessibilityAction(view, i3, bundle);
@@ -642,9 +630,9 @@ public final class MaximizeMenu {
                             runningTaskInfo = null;
                         }
                         desktopModeUiEventLogger2.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.A11Y_MAXIMIZE_MENU_RESIZE_RIGHT);
-                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 = this.onRightSnapClickListener;
-                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9 != null) {
-                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda9.invoke();
+                        DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 = this.onRightSnapClickListener;
+                        if (desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8 != null) {
+                            desktopModeWindowDecorViewModel$$ExternalSyntheticLambda8.invoke();
                         }
                     }
                     return super.performAccessibilityAction(view, i3, bundle);
@@ -732,14 +720,14 @@ public final class MaximizeMenu {
             shapeDrawable.getPaint().setStyle(Paint.Style.FILL);
             arrayList.add(shapeDrawable);
             if (num != null) {
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 ShapeDrawable shapeDrawable2 = new ShapeDrawable();
                 float[] fArr2 = new float[8];
                 for (int i6 = 0; i6 < 8; i6++) {
                     fArr2[i6] = i4;
                 }
                 shapeDrawable2.setShape(new RoundRectShape(fArr2, null, null));
-                shapeDrawable2.getPaint().setColor(intValue);
+                shapeDrawable2.getPaint().setColor(iIntValue);
                 shapeDrawable2.getPaint().setStyle(Paint.Style.FILL);
                 arrayList.add(shapeDrawable2);
             }
@@ -784,16 +772,16 @@ public final class MaximizeMenu {
 
         public final StateListDrawable createMaximizeOrImmersiveDrawable(int i, ColorScheme colorScheme, Rect rect) {
             long j = colorScheme.primary;
-            int m467toArgb8_81llA = ColorKt.m467toArgb8_81llA(j);
-            LayerDrawable createMaximizeOrImmersiveButtonDrawable = createMaximizeOrImmersiveButtonDrawable(m467toArgb8_81llA, m467toArgb8_81llA, ThemeUtilsKt.withAlpha(ColorKt.m467toArgb8_81llA(j), 31), Integer.valueOf(i), rect);
+            int iM469toArgb8_81llA = ColorKt.m469toArgb8_81llA(j);
+            LayerDrawable layerDrawableCreateMaximizeOrImmersiveButtonDrawable = createMaximizeOrImmersiveButtonDrawable(iM469toArgb8_81llA, iM469toArgb8_81llA, ThemeUtilsKt.withAlpha(ColorKt.m469toArgb8_81llA(j), 31), Integer.valueOf(i), rect);
             StateListDrawable stateListDrawable = new StateListDrawable();
-            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, createMaximizeOrImmersiveButtonDrawable);
-            stateListDrawable.addState(new int[]{android.R.attr.state_focused}, createMaximizeOrImmersiveButtonDrawable);
-            stateListDrawable.addState(new int[]{android.R.attr.state_selected}, createMaximizeOrImmersiveButtonDrawable);
-            stateListDrawable.addState(new int[]{android.R.attr.state_hovered}, createMaximizeOrImmersiveButtonDrawable);
+            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, layerDrawableCreateMaximizeOrImmersiveButtonDrawable);
+            stateListDrawable.addState(new int[]{android.R.attr.state_focused}, layerDrawableCreateMaximizeOrImmersiveButtonDrawable);
+            stateListDrawable.addState(new int[]{android.R.attr.state_selected}, layerDrawableCreateMaximizeOrImmersiveButtonDrawable);
+            stateListDrawable.addState(new int[]{android.R.attr.state_hovered}, layerDrawableCreateMaximizeOrImmersiveButtonDrawable);
             int[] iArr = StateSet.WILD_CARD;
             long j2 = colorScheme.outlineVariant;
-            stateListDrawable.addState(iArr, createMaximizeOrImmersiveButtonDrawable(ThemeUtilsKt.withAlpha(ColorKt.m467toArgb8_81llA(j2), 153), ColorKt.m467toArgb8_81llA(j2), ColorKt.m467toArgb8_81llA(colorScheme.surfaceContainerLow), null, rect));
+            stateListDrawable.addState(iArr, createMaximizeOrImmersiveButtonDrawable(ThemeUtilsKt.withAlpha(ColorKt.m469toArgb8_81llA(j2), 153), ColorKt.m469toArgb8_81llA(j2), ColorKt.m469toArgb8_81llA(colorScheme.surfaceContainerLow), null, rect));
             return stateListDrawable;
         }
 

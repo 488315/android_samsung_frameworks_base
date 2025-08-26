@@ -60,10 +60,10 @@ public abstract class CallStreamingService extends Service {
             if (i != 4) {
                 return;
             }
-            int intValue = ((Integer) message.obj).intValue();
+            int iIntValue = ((Integer) message.obj).intValue();
             if (CallStreamingService.this.mStreamingCallAdapter != null) {
-                CallStreamingService.this.mCall.requestStreamingState(intValue);
-                CallStreamingService.this.onCallStreamingStateChanged(intValue);
+                CallStreamingService.this.mCall.requestStreamingState(iIntValue);
+                CallStreamingService.this.onCallStreamingStateChanged(iIntValue);
             }
         }
     };

@@ -31,7 +31,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PluginActionManager {
     public final String mAction;
@@ -51,7 +50,6 @@ public class PluginActionManager {
     public final PackageManager mPm;
     public final ArraySet mPrivilegedPlugins;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final Executor mBgExecutor;
         public final Context mContext;
@@ -75,7 +73,7 @@ public class PluginActionManager {
     }
 
     /* renamed from: $r8$lambda$5F1fdvH66AX-KG-8BByIAWoLe8U, reason: not valid java name */
-    public static void m2937$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(PluginActionManager pluginActionManager) {
+    public static void m2954$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(PluginActionManager pluginActionManager) {
         ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("queryAll "), pluginActionManager.mAction, "PluginActionManager");
         for (int size = pluginActionManager.mPluginInstances.size() - 1; size >= 0; size--) {
             pluginActionManager.mMainExecutor.execute(new PluginActionManager$$ExternalSyntheticLambda2(pluginActionManager, pluginActionManager.mPluginInstances.get(size), 3));
@@ -85,7 +83,7 @@ public class PluginActionManager {
     }
 
     /* renamed from: $r8$lambda$e2-SW2bOJhdGs27PogmcioXOXds, reason: not valid java name */
-    public static void m2938$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(PluginActionManager pluginActionManager, String str) {
+    public static void m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(PluginActionManager pluginActionManager, String str) {
         pluginActionManager.removePkg(str);
         StringBuilder sb = new StringBuilder("queryPkg ");
         sb.append(str);
@@ -119,17 +117,17 @@ public class PluginActionManager {
     public final boolean checkAndDisable(String str) {
         ArrayList arrayList = new ArrayList(this.mPluginInstances);
         int size = arrayList.size();
-        boolean z = false;
+        boolean zDisable = false;
         int i = 0;
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
             PluginInstance pluginInstance = (PluginInstance) obj;
             if (str.startsWith(pluginInstance.mComponentName.getPackageName())) {
-                z |= disable(pluginInstance, 3);
+                zDisable |= disable(pluginInstance, 3);
             }
         }
-        return z;
+        return zDisable;
     }
 
     public final boolean dependsOn(Plugin plugin, Class cls) {
@@ -177,11 +175,11 @@ public class PluginActionManager {
 
     public final boolean disableAll() {
         ArrayList arrayList = new ArrayList(this.mPluginInstances);
-        boolean z = false;
+        boolean zDisable = false;
         for (int i = 0; i < arrayList.size(); i++) {
-            z |= disable((PluginInstance) arrayList.get(i), 4);
+            zDisable |= disable((PluginInstance) arrayList.get(i), 4);
         }
-        return z;
+        return zDisable;
     }
 
     public final void handleQueryPlugins(String str) {
@@ -190,22 +188,22 @@ public class PluginActionManager {
         if (str != null) {
             intent.setPackage(str);
         }
-        List<ResolveInfo> queryIntentServices = this.mPm.queryIntentServices(intent, 0);
-        Log.d("PluginActionManager", "Found " + queryIntentServices.size() + " plugins");
-        Iterator<ResolveInfo> it = queryIntentServices.iterator();
+        List<ResolveInfo> listQueryIntentServices = this.mPm.queryIntentServices(intent, 0);
+        Log.d("PluginActionManager", "Found " + listQueryIntentServices.size() + " plugins");
+        Iterator<ResolveInfo> it = listQueryIntentServices.iterator();
         while (it.hasNext()) {
             ServiceInfo serviceInfo = it.next().serviceInfo;
             NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("  ", new ComponentName(serviceInfo.packageName, serviceInfo.name), "PluginActionManager");
         }
-        if (queryIntentServices.size() > 1 && !this.mAllowMultiple) {
+        if (listQueryIntentServices.size() > 1 && !this.mAllowMultiple) {
             MotionLayout$$ExternalSyntheticOutline0.m("Multiple plugins found for ", str2, "PluginActionManager");
             return;
         }
-        Iterator<ResolveInfo> it2 = queryIntentServices.iterator();
+        Iterator<ResolveInfo> it2 = listQueryIntentServices.iterator();
         while (it2.hasNext()) {
             ServiceInfo serviceInfo2 = it2.next().serviceInfo;
             ComponentName componentName = new ComponentName(serviceInfo2.packageName, serviceInfo2.name);
-            PluginInstance pluginInstance = null;
+            PluginInstance pluginInstanceCreate = null;
             if (!this.mIsDebuggable && !isPluginPrivileged(componentName)) {
                 Log.w("PluginActionManager", "Plugin cannot be loaded on production build: " + componentName);
             } else if (this.mPluginEnabler.isEnabled(componentName)) {
@@ -217,7 +215,7 @@ public class PluginActionManager {
                         ApplicationInfo applicationInfoAsUser = this.mAllowMultipleUsers ? this.mPm.getApplicationInfoAsUser(packageName, 0, ActivityManager.getCurrentUser()) : this.mPm.getApplicationInfo(packageName, 0);
                         Log.d("PluginActionManager", "createPlugin: " + componentName);
                         try {
-                            pluginInstance = this.mPluginInstanceFactory.create(this.mContext, applicationInfoAsUser, componentName, this.mPluginClass, this.mListener, this.mDisplayId);
+                            pluginInstanceCreate = this.mPluginInstanceFactory.create(this.mContext, applicationInfoAsUser, componentName, this.mPluginClass, this.mListener, this.mDisplayId);
                         } catch (VersionInfo.InvalidVersionException e) {
                             reportInvalidVersion(componentName, componentName.getClassName(), e);
                         }
@@ -228,9 +226,9 @@ public class PluginActionManager {
             } else {
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("Plugin is not enabled, aborting load: ", componentName, "PluginActionManager");
             }
-            if (pluginInstance != null) {
-                this.mPluginInstances.add(pluginInstance);
-                this.mMainExecutor.execute(new PluginActionManager$$ExternalSyntheticLambda2(this, pluginInstance, 1));
+            if (pluginInstanceCreate != null) {
+                this.mPluginInstances.add(pluginInstanceCreate);
+                this.mMainExecutor.execute(new PluginActionManager$$ExternalSyntheticLambda2(this, pluginInstanceCreate, 1));
             }
         }
     }
@@ -239,12 +237,12 @@ public class PluginActionManager {
         Iterator it = this.mPrivilegedPlugins.iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-            if (unflattenFromString == null) {
+            ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+            if (componentNameUnflattenFromString == null) {
                 if (str.equals(componentName.getPackageName())) {
                     return true;
                 }
-            } else if (unflattenFromString.equals(componentName)) {
+            } else if (componentNameUnflattenFromString.equals(componentName)) {
                 return true;
             }
         }
@@ -256,7 +254,7 @@ public class PluginActionManager {
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.plugins.PluginActionManager$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                PluginActionManager.m2937$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(PluginActionManager.this);
+                PluginActionManager.m2954$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(this.f$0);
             }
         });
     }
@@ -318,7 +316,6 @@ public class PluginActionManager {
         this.mDisplayId = i;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PluginContextWrapper extends ContextWrapper {
         public final ClassLoader mClassLoader;
         public LayoutInflater mInflater;

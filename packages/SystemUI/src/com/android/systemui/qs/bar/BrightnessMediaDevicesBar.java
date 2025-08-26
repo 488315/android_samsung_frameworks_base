@@ -11,7 +11,6 @@ import com.android.systemui.util.ConfigurationState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BrightnessMediaDevicesBar extends BarItemImpl {
     public final BrightnessBar mBrightnessBar;
@@ -22,12 +21,12 @@ public class BrightnessMediaDevicesBar extends BarItemImpl {
     public BrightnessMediaDevicesBar(Context context, BarFactory barFactory) {
         super(context);
         this.mLastConfigurationState = new ConfigurationState(Arrays.asList(ConfigurationState.ConfigurationField.ORIENTATION, ConfigurationState.ConfigurationField.SCREEN_HEIGHT_DP, ConfigurationState.ConfigurationField.DISPLAY_DEVICE_TYPE));
-        BarItemImpl createBarItem = barFactory.createBarItem(BarType.BRIGHTNESS);
-        createBarItem.mIsOnCollapsedState = true;
-        this.mBrightnessBar = (BrightnessBar) createBarItem;
-        BarItemImpl createBarItem2 = barFactory.createBarItem(BarType.MEDIA_DEVICES);
-        createBarItem2.mIsOnCollapsedState = true;
-        this.mMediaDevicesBar = (MediaDevicesBar) createBarItem2;
+        BarItemImpl barItemImplCreateBarItem = barFactory.createBarItem(BarType.BRIGHTNESS);
+        barItemImplCreateBarItem.mIsOnCollapsedState = true;
+        this.mBrightnessBar = (BrightnessBar) barItemImplCreateBarItem;
+        BarItemImpl barItemImplCreateBarItem2 = barFactory.createBarItem(BarType.MEDIA_DEVICES);
+        barItemImplCreateBarItem2.mIsOnCollapsedState = true;
+        this.mMediaDevicesBar = (MediaDevicesBar) barItemImplCreateBarItem2;
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
@@ -66,10 +65,10 @@ public class BrightnessMediaDevicesBar extends BarItemImpl {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, viewGroup, false);
-        this.mBarRootView = inflate;
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, viewGroup, false);
+        this.mBarRootView = viewInflate;
         BrightnessBar brightnessBar = this.mBrightnessBar;
-        brightnessBar.inflateViews((ViewGroup) inflate);
+        brightnessBar.inflateViews((ViewGroup) viewInflate);
         View view = brightnessBar.mBarRootView;
         ((ViewGroup) this.mBarRootView).removeView(view);
         ((ViewGroup) this.mBarRootView).addView(view);

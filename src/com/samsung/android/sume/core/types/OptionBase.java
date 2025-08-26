@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +24,10 @@ public abstract class OptionBase implements Parcelable, Serializable {
         this.data = new HashMap();
     }
 
-    protected OptionBase(Parcel parcel) {
-        HashMap hashMap = new HashMap();
-        this.data = hashMap;
-        parcel.readMap(hashMap, null);
+    protected OptionBase(Parcel parcel) throws ClassNotFoundException, IOException {
+        HashMap map = new HashMap();
+        this.data = map;
+        parcel.readMap(map, null);
     }
 
     @Override // android.os.Parcelable

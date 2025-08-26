@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SwitchableDoubleShadowTextView extends TextView {
     public boolean aggregatedVisible;
@@ -23,7 +22,7 @@ public final class SwitchableDoubleShadowTextView extends TextView {
     public boolean shadowEnabled;
 
     /* renamed from: $r8$lambda$beoBxlXxQAhP91V-cdfHl-HB8rI, reason: not valid java name */
-    public static Unit m3077$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(SwitchableDoubleShadowTextView switchableDoubleShadowTextView, Canvas canvas) {
+    public static Unit m3094$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(SwitchableDoubleShadowTextView switchableDoubleShadowTextView, Canvas canvas) {
         super.onDraw(canvas);
         return Unit.INSTANCE;
     }
@@ -44,7 +43,7 @@ public final class SwitchableDoubleShadowTextView extends TextView {
         Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.SwitchableDoubleShadowTextView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SwitchableDoubleShadowTextView.m3077$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(SwitchableDoubleShadowTextView.this, canvas);
+                return SwitchableDoubleShadowTextView.m3094$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(this.f$0, canvas);
             }
         };
         doubleShadowTextHelper.getClass();
@@ -81,13 +80,13 @@ public final class SwitchableDoubleShadowTextView extends TextView {
 
     public SwitchableDoubleShadowTextView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.DoubleShadowTextView, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.DoubleShadowTextView, i, i2);
         try {
-            this.mKeyShadowInfo = new DoubleShadowTextHelper.ShadowInfo(obtainStyledAttributes.getDimension(7, 0.0f), obtainStyledAttributes.getDimension(8, 0.0f), obtainStyledAttributes.getDimension(9, 0.0f), obtainStyledAttributes.getFloat(6, 0.0f));
-            this.mAmbientShadowInfo = new DoubleShadowTextHelper.ShadowInfo(obtainStyledAttributes.getDimension(1, 0.0f), obtainStyledAttributes.getDimension(2, 0.0f), obtainStyledAttributes.getDimension(3, 0.0f), obtainStyledAttributes.getFloat(0, 0.0f));
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(5, 0);
-            int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(4, 0);
-            obtainStyledAttributes.recycle();
+            this.mKeyShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArrayObtainStyledAttributes.getDimension(7, 0.0f), typedArrayObtainStyledAttributes.getDimension(8, 0.0f), typedArrayObtainStyledAttributes.getDimension(9, 0.0f), typedArrayObtainStyledAttributes.getFloat(6, 0.0f));
+            this.mAmbientShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArrayObtainStyledAttributes.getDimension(1, 0.0f), typedArrayObtainStyledAttributes.getDimension(2, 0.0f), typedArrayObtainStyledAttributes.getDimension(3, 0.0f), typedArrayObtainStyledAttributes.getFloat(0, 0.0f));
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(5, 0);
+            int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, 0);
+            typedArrayObtainStyledAttributes.recycle();
             Drawable[] drawableArr = new Drawable[4];
             drawableArr[0] = null;
             drawableArr[1] = null;
@@ -103,7 +102,7 @@ public final class SwitchableDoubleShadowTextView extends TextView {
             }
             setCompoundDrawablesRelative(drawableArr[0], drawableArr[1], drawableArr[2], drawableArr[3]);
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

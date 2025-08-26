@@ -8,7 +8,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CardPreference extends Preference {
     public CardPreference(Context context) {
@@ -20,13 +19,13 @@ public final class CardPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedBelow = false;
         preferenceViewHolder.mDividerAllowedAbove = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.closeButton);
-        if (findViewById != null) {
-            findViewById.setVisibility(8);
-            findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.CardPreference$onBindViewHolder$1$1
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.closeButton);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(8);
+            viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.CardPreference$onBindViewHolder$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    CardPreference.this.setVisible(false);
+                    this.this$0.setVisible(false);
                 }
             });
         }

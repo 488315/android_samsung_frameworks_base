@@ -13,6 +13,7 @@ import android.database.ContentObserver;
 import android.database.ExecutorContentObserver;
 import android.net.Uri;
 import android.os.Looper;
+import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -76,7 +77,6 @@ import java.util.function.Supplier;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationLockscreenUserManagerImpl implements Dumpable, NotificationLockscreenUserManager, StatusBarStateController.StateListener {
     public final AnonymousClass2 mAllUsersReceiver;
@@ -133,14 +133,13 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
     public int mState = 0;
     public final ListenerSet mNotifStateChangedListeners = new ListenerSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$3, reason: invalid class name */
     public class AnonymousClass3 extends BroadcastReceiver {
         public AnonymousClass3() {
         }
 
         @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
+        public final void onReceive(Context context, Intent intent) throws IntentSender.SendIntentException {
             String action = intent.getAction();
             if (Objects.equals(action, "android.intent.action.USER_REMOVED")) {
                 int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -1);
@@ -167,7 +166,7 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
                 NotificationLockscreenUserManagerImpl.this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationLockscreenUserManagerImpl.AnonymousClass3 anonymousClass3 = NotificationLockscreenUserManagerImpl.AnonymousClass3.this;
+                        NotificationLockscreenUserManagerImpl.AnonymousClass3 anonymousClass3 = this.f$0;
                         int i2 = intExtra2;
                         NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl3 = NotificationLockscreenUserManagerImpl.this;
                         Uri uri3 = NotificationLockscreenUserManagerImpl.SHOW_LOCKSCREEN;
@@ -190,9 +189,9 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
                 String stringExtra = intent.getStringExtra("android.intent.extra.INDEX");
                 if (intentSender != null) {
                     try {
-                        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                        makeBasic.setPendingIntentBackgroundActivityStartMode(1);
-                        NotificationLockscreenUserManagerImpl.this.mContext.startIntentSender(intentSender, null, 0, 0, 0, makeBasic.toBundle());
+                        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
+                        NotificationLockscreenUserManagerImpl.this.mContext.startIntentSender(intentSender, null, 0, 0, 0, activityOptionsMakeBasic.toBundle());
                     } catch (IntentSender.SendIntentException unused) {
                     }
                 }
@@ -224,26 +223,26 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
         ?? r11 = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.2
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                boolean updateDpcSettings;
+                boolean zUpdateDpcSettings;
                 if ("android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED".equals(intent.getAction())) {
                     int sendingUserId = getSendingUserId();
                     if (sendingUserId == -1) {
                         NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = NotificationLockscreenUserManagerImpl.this;
                         int i = notificationLockscreenUserManagerImpl.mCurrentUserId;
                         List users = notificationLockscreenUserManagerImpl.mUserManager.getUsers();
-                        updateDpcSettings = false;
+                        zUpdateDpcSettings = false;
                         for (int size = users.size() - 1; size >= 0; size--) {
-                            updateDpcSettings |= NotificationLockscreenUserManagerImpl.this.updateDpcSettings(((UserInfo) users.get(size)).id);
+                            zUpdateDpcSettings |= NotificationLockscreenUserManagerImpl.this.updateDpcSettings(((UserInfo) users.get(size)).id);
                         }
                         sendingUserId = i;
                     } else {
-                        updateDpcSettings = NotificationLockscreenUserManagerImpl.this.updateDpcSettings(sendingUserId);
+                        zUpdateDpcSettings = NotificationLockscreenUserManagerImpl.this.updateDpcSettings(sendingUserId);
                     }
                     NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = NotificationLockscreenUserManagerImpl.this;
                     if (notificationLockscreenUserManagerImpl2.mCurrentUserId == sendingUserId) {
-                        updateDpcSettings |= notificationLockscreenUserManagerImpl2.updateLockscreenNotificationSetting();
+                        zUpdateDpcSettings |= notificationLockscreenUserManagerImpl2.updateLockscreenNotificationSetting();
                     }
-                    if (updateDpcSettings) {
+                    if (zUpdateDpcSettings) {
                         NotificationLockscreenUserManagerImpl.this.notifyNotificationStateChanged();
                     }
                 }
@@ -353,7 +352,7 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
             executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = NotificationLockscreenUserManagerImpl.this;
+                    final NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = this.f$0;
                     CoroutineScope coroutineScope2 = coroutineScope;
                     Lazy lazy8 = lazy5;
                     final Lazy lazy9 = lazy6;
@@ -361,7 +360,7 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
                     JavaAdapterKt.collectFlow(coroutineScope2, ((KeyguardInteractor) lazy8.get()).isKeyguardDismissible, new Consumer() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$$ExternalSyntheticLambda2
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = NotificationLockscreenUserManagerImpl.this;
+                            NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = notificationLockscreenUserManagerImpl;
                             Boolean bool = (Boolean) obj;
                             Uri uri6 = NotificationLockscreenUserManagerImpl.SHOW_LOCKSCREEN;
                             notificationLockscreenUserManagerImpl2.getClass();
@@ -376,7 +375,7 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
                             String str;
-                            NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = NotificationLockscreenUserManagerImpl.this;
+                            NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = notificationLockscreenUserManagerImpl;
                             Lazy lazy10 = lazy9;
                             boolean z = notificationLockscreenUserManagerImpl2.mConnectedToWifi.get();
                             WifiNetworkModel wifiNetworkModel = (WifiNetworkModel) ((WifiRepository) lazy10.get()).getWifiNetwork().getValue();
@@ -452,14 +451,14 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
         int i;
         boolean z;
         int userId = notificationEntry.mSbn.getUserId();
-        boolean userAllowsPrivateNotificationsInPublic = userAllowsPrivateNotificationsInPublic(this.mCurrentUserId);
-        boolean z2 = ((this.mCurrentManagedProfiles.contains(userId) || userAllowsPrivateNotificationsInPublic) && userAllowsPrivateNotificationsInPublic(userId) && (userAllowsPrivateNotificationsInPublic || !isLockscreenPublicMode(this.mCurrentUserId) || !SemPersonaManager.isSecureFolderId(userId))) ? false : true;
+        boolean zUserAllowsPrivateNotificationsInPublic = userAllowsPrivateNotificationsInPublic(this.mCurrentUserId);
+        boolean z2 = ((this.mCurrentManagedProfiles.contains(userId) || zUserAllowsPrivateNotificationsInPublic) && userAllowsPrivateNotificationsInPublic(userId) && (zUserAllowsPrivateNotificationsInPublic || !isLockscreenPublicMode(this.mCurrentUserId) || !SemPersonaManager.isSecureFolderId(userId))) ? false : true;
         boolean z3 = (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && ((SettingsHelper) this.mSettingsHelperLazy.get()).isAllowPrivateNotificationsWhenUnsecure(userId)) || notificationEntry.mSbn.getNotification().visibility == 0;
-        boolean packageHasVisibilityOverride = packageHasVisibilityOverride(notificationEntry.mSbn.getKey());
+        boolean zPackageHasVisibilityOverride = packageHasVisibilityOverride(notificationEntry.mSbn.getKey());
         if (packageHasVisibilityOverrideToShowContent(notificationEntry.mSbn.getKey())) {
             return 0;
         }
-        if (packageHasVisibilityOverride || ((z3 && z2) || !this.mKeyguardAllowingNotifications)) {
+        if (zPackageHasVisibilityOverride || ((z3 && z2) || !this.mKeyguardAllowingNotifications)) {
             return 1;
         }
         int i2 = LockscreenOtpRedaction.$r8$clinit;
@@ -471,7 +470,7 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
             long when = notificationEntry.mSbn.getNotification().getWhen();
             long when2 = notificationEntry.mSbn.getNotification().getWhen();
             int i3 = UseElapsedRealtimeForCreationTime.$r8$clinit;
-            long min = Math.min(when2, System.currentTimeMillis() - (SystemClock.uptimeMillis() - notificationEntry.mCreationTime));
+            long jMin = Math.min(when2, System.currentTimeMillis() - (SystemClock.uptimeMillis() - notificationEntry.mCreationTime));
             boolean z4 = this.mLocked.get();
             long j = this.mLastLockTime.get();
             boolean z5 = this.mConnectedToWifi.get();
@@ -480,27 +479,27 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
                 z = z4;
             } else {
                 z = z5 ? false : z4;
-                if (min < j2) {
+                if (jMin < j2) {
                     z = false;
                 }
             }
-            if (min < this.mOtpRedactionRequiredLockTimeMs.get() + j) {
+            if (jMin < this.mOtpRedactionRequiredLockTimeMs.get() + j) {
                 z = false;
             }
-            int min2 = (int) Math.min(2147483647L, Math.max(-2147483648L, when - min));
+            int iMin = (int) Math.min(2147483647L, Math.max(-2147483648L, when - jMin));
             i = 0;
-            int min3 = (int) Math.min(2147483647L, Math.max(-2147483648L, j - min));
-            int min4 = (int) Math.min(2147483647L, Math.max(-2147483648L, j2 - min));
-            StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-            newBuilder.setAtomId(1032);
-            newBuilder.writeBoolean(z);
-            newBuilder.writeInt(min2);
-            newBuilder.writeBoolean(z4);
-            newBuilder.writeInt(min3);
-            newBuilder.writeBoolean(z5);
-            newBuilder.writeInt(min4);
-            newBuilder.usePooledBuffer();
-            StatsLog.write(newBuilder.build());
+            int iMin2 = (int) Math.min(2147483647L, Math.max(-2147483648L, j - jMin));
+            int iMin3 = (int) Math.min(2147483647L, Math.max(-2147483648L, j2 - jMin));
+            StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+            builderNewBuilder.setAtomId(1032);
+            builderNewBuilder.writeBoolean(z);
+            builderNewBuilder.writeInt(iMin);
+            builderNewBuilder.writeBoolean(z4);
+            builderNewBuilder.writeInt(iMin2);
+            builderNewBuilder.writeBoolean(z5);
+            builderNewBuilder.writeInt(iMin3);
+            builderNewBuilder.usePooledBuffer();
+            StatsLog.write(builderNewBuilder.build());
         }
         if (z) {
             return 2;
@@ -528,13 +527,10 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
         synchronized (this.mLock) {
             if (i != -1) {
                 try {
-                    if (this.mCurrentProfiles.get(i) == null) {
-                        z = false;
-                    }
+                    z = this.mCurrentProfiles.get(i) != null;
                 } finally {
                 }
             }
-            z = true;
         }
         return z;
     }
@@ -544,17 +540,17 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
     }
 
     public final boolean isProfileAvailable(int i) {
-        boolean isUserRunning;
+        boolean zIsUserRunning;
         synchronized (this.mLock) {
-            isUserRunning = this.mUserManager.isUserRunning(i);
+            zIsUserRunning = this.mUserManager.isUserRunning(i);
         }
-        return isUserRunning;
+        return zIsUserRunning;
     }
 
     public final void notifyNotificationStateChanged() {
-        boolean isCurrentThread = Looper.getMainLooper().isCurrentThread();
+        boolean zIsCurrentThread = Looper.getMainLooper().isCurrentThread();
         ListenerSet listenerSet = this.mNotifStateChangedListeners;
-        if (isCurrentThread) {
+        if (zIsCurrentThread) {
             Iterator it = listenerSet.iterator();
             while (it.hasNext()) {
                 ((NotificationLockscreenUserManager.NotificationStateChangedListener) it.next()).onNotificationStateChanged();
@@ -645,22 +641,22 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
         boolean z = this.mState != 0 || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing;
         int i = SceneContainerFlag.$r8$clinit;
         SparseArray sparseArray = this.mCurrentProfiles;
-        SparseBooleanArray clone = this.mLockscreenPublicMode.clone();
-        SparseBooleanArray clone2 = this.mUsersWithSeparateWorkChallenge.clone();
+        SparseBooleanArray sparseBooleanArrayClone = this.mLockscreenPublicMode.clone();
+        SparseBooleanArray sparseBooleanArrayClone2 = this.mUsersWithSeparateWorkChallenge.clone();
         this.mUsersWithSeparateWorkChallenge.clear();
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
             final int i2 = ((UserInfo) sparseArray.valueAt(size)).id;
-            boolean booleanValue = ((Boolean) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$$ExternalSyntheticLambda1
+            boolean zBooleanValue = ((Boolean) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = NotificationLockscreenUserManagerImpl.this;
+                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = this.f$0;
                     return Boolean.valueOf(notificationLockscreenUserManagerImpl.mLockPatternUtils.isSeparateProfileChallengeEnabled(i2));
                 }
             })).booleanValue();
-            setLockscreenPublicMode((z || i2 == this.mCurrentUserId || !booleanValue || !this.mLockPatternUtils.isSecure(i2)) ? z : z || this.mKeyguardManager.isDeviceLocked(i2), i2);
-            this.mUsersWithSeparateWorkChallenge.put(i2, booleanValue);
+            setLockscreenPublicMode((z || i2 == this.mCurrentUserId || !zBooleanValue || !this.mLockPatternUtils.isSecure(i2)) ? z : z || this.mKeyguardManager.isDeviceLocked(i2), i2);
+            this.mUsersWithSeparateWorkChallenge.put(i2, zBooleanValue);
         }
-        if (this.mLockscreenPublicMode.equals(clone) && this.mUsersWithSeparateWorkChallenge.equals(clone2)) {
+        if (this.mLockscreenPublicMode.equals(sparseBooleanArrayClone) && this.mUsersWithSeparateWorkChallenge.equals(sparseBooleanArrayClone2)) {
             return;
         }
         notifyNotificationStateChanged();
@@ -697,7 +693,6 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
         return false;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl$5, reason: invalid class name */
     public class AnonymousClass5 extends ExecutorContentObserver {
         public AnonymousClass5(Executor executor) {
@@ -711,148 +706,59 @@ public class NotificationLockscreenUserManagerImpl implements Dumpable, Notifica
             }
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:14:0x00bf, code lost:
-        
-            if (r3 != r5) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:15:0x003c, code lost:
-        
-            r2 = false;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x003d, code lost:
-        
-            r12 = r12 | r2;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:25:0x0093, code lost:
-        
-            if (r1 != r3) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:32:0x0065, code lost:
-        
-            if (r4 != r3) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:39:0x0039, code lost:
-        
-            if (r4 != r3) goto L15;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:14:0x003c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onChange(boolean r10, java.util.Collection r11, int r12, android.os.UserHandle r13) {
-            /*
-                r9 = this;
-                java.util.Iterator r10 = r11.iterator()
-                r11 = 0
-                r12 = r11
-            L6:
-                boolean r0 = r10.hasNext()
-                if (r0 == 0) goto Lc3
-                java.lang.Object r0 = r10.next()
-                android.net.Uri r0 = (android.net.Uri) r0
-                android.net.Uri r1 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.SHOW_LOCKSCREEN
-                boolean r1 = r1.equals(r0)
-                r2 = 1
-                if (r1 == 0) goto L3f
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r0 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                int r1 = r13.getIdentifier()
-                android.util.SparseBooleanArray r3 = r0.mUsersUsersAllowingNotifications
-                boolean r3 = r3.get(r1)
-                com.android.systemui.util.settings.SecureSettings r4 = r0.mSecureSettings
-                java.lang.String r5 = "lock_screen_show_notifications"
-                int r4 = r4.getIntForUser(r5, r2, r1)
-                if (r4 == 0) goto L33
-                r4 = r2
-                goto L34
-            L33:
-                r4 = r11
-            L34:
-                android.util.SparseBooleanArray r0 = r0.mUsersUsersAllowingNotifications
-                r0.put(r1, r4)
-                if (r4 == r3) goto L3c
-                goto L3d
-            L3c:
-                r2 = r11
-            L3d:
-                r12 = r12 | r2
-                goto L6
-            L3f:
-                android.net.Uri r1 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.SHOW_PRIVATE_LOCKSCREEN
-                boolean r1 = r1.equals(r0)
-                if (r1 == 0) goto L68
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r0 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                int r1 = r13.getIdentifier()
-                android.util.SparseBooleanArray r3 = r0.mUsersUsersAllowingPrivateNotifications
-                boolean r3 = r3.get(r1)
-                com.android.systemui.util.settings.SecureSettings r4 = r0.mSecureSettings
-                java.lang.String r5 = "lock_screen_allow_private_notifications"
-                int r4 = r4.getIntForUser(r5, r11, r1)
-                if (r4 == 0) goto L5f
-                r4 = r2
-                goto L60
-            L5f:
-                r4 = r11
-            L60:
-                android.util.SparseBooleanArray r0 = r0.mUsersUsersAllowingPrivateNotifications
-                r0.put(r1, r4)
-                if (r4 == r3) goto L3c
-                goto L3d
-            L68:
-                android.net.Uri r1 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.REDACT_OTP_ON_WIFI
-                boolean r1 = r1.equals(r0)
-                if (r1 == 0) goto L96
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r0 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                java.util.concurrent.atomic.AtomicBoolean r1 = r0.mRedactOtpOnWifi
-                boolean r1 = r1.get()
-                android.os.UserHandle r3 = android.os.Process.myUserHandle()
-                int r3 = r3.getIdentifier()
-                com.android.systemui.util.settings.SecureSettings r4 = r0.mSecureSettings
-                java.lang.String r5 = "redact_otp_on_wifi"
-                int r3 = r4.getIntForUser(r5, r11, r3)
-                if (r3 == 0) goto L8d
-                r3 = r2
-                goto L8e
-            L8d:
-                r3 = r11
-            L8e:
-                java.util.concurrent.atomic.AtomicBoolean r0 = r0.mRedactOtpOnWifi
-                r0.set(r3)
-                if (r1 == r3) goto L3c
-                goto L3d
-            L96:
-                android.net.Uri r1 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.OTP_REDACTION_LOCK_TIME
-                boolean r0 = r1.equals(r0)
-                if (r0 == 0) goto L6
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r0 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                java.util.concurrent.atomic.AtomicLong r1 = r0.mOtpRedactionRequiredLockTimeMs
-                long r3 = r1.get()
-                android.os.UserHandle r1 = android.os.Process.myUserHandle()
-                int r1 = r1.getIdentifier()
-                long r5 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.DEFAULT_LOCK_TIME_FOR_SENSITIVE_REDACTION_MS
-                com.android.systemui.util.settings.SecureSettings r7 = r0.mSecureSettings
-                java.lang.String r8 = "otp_redaction_lock_time"
-                long r5 = r7.getLongForUser(r8, r5, r1)
-                java.util.concurrent.atomic.AtomicLong r0 = r0.mOtpRedactionRequiredLockTimeMs
-                r0.set(r5)
-                int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-                if (r0 == 0) goto L3c
-                goto L3d
-            Lc3:
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r10 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                int r10 = r10.mCurrentUserId
-                int r11 = r13.getIdentifier()
-                if (r10 != r11) goto Ld4
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r10 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                boolean r10 = r10.updateLockscreenNotificationSetting()
-                r12 = r12 | r10
-            Ld4:
-                if (r12 == 0) goto Ldb
-                com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl r9 = com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.this
-                r9.notifyNotificationStateChanged()
-            Ldb:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl.AnonymousClass5.onChange(boolean, java.util.Collection, int, android.os.UserHandle):void");
+        public final void onChange(boolean z, Collection collection, int i, UserHandle userHandle) {
+            Iterator it = collection.iterator();
+            boolean zUpdateLockscreenNotificationSetting = false;
+            while (it.hasNext()) {
+                Uri uri = (Uri) it.next();
+                boolean z2 = true;
+                if (NotificationLockscreenUserManagerImpl.SHOW_LOCKSCREEN.equals(uri)) {
+                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = NotificationLockscreenUserManagerImpl.this;
+                    int identifier = userHandle.getIdentifier();
+                    boolean z3 = notificationLockscreenUserManagerImpl.mUsersUsersAllowingNotifications.get(identifier);
+                    boolean z4 = notificationLockscreenUserManagerImpl.mSecureSettings.getIntForUser(SettingsHelper.INDEX_LOCK_SCREEN_SHOW_NOTIFICATIONS, 1, identifier) != 0;
+                    notificationLockscreenUserManagerImpl.mUsersUsersAllowingNotifications.put(identifier, z4);
+                    if (z4 == z3) {
+                        z2 = false;
+                    }
+                    zUpdateLockscreenNotificationSetting |= z2;
+                } else if (NotificationLockscreenUserManagerImpl.SHOW_PRIVATE_LOCKSCREEN.equals(uri)) {
+                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl2 = NotificationLockscreenUserManagerImpl.this;
+                    int identifier2 = userHandle.getIdentifier();
+                    boolean z5 = notificationLockscreenUserManagerImpl2.mUsersUsersAllowingPrivateNotifications.get(identifier2);
+                    boolean z6 = notificationLockscreenUserManagerImpl2.mSecureSettings.getIntForUser("lock_screen_allow_private_notifications", 0, identifier2) != 0;
+                    notificationLockscreenUserManagerImpl2.mUsersUsersAllowingPrivateNotifications.put(identifier2, z6);
+                    if (z6 == z5) {
+                    }
+                    zUpdateLockscreenNotificationSetting |= z2;
+                } else if (NotificationLockscreenUserManagerImpl.REDACT_OTP_ON_WIFI.equals(uri)) {
+                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl3 = NotificationLockscreenUserManagerImpl.this;
+                    boolean z7 = notificationLockscreenUserManagerImpl3.mRedactOtpOnWifi.get();
+                    boolean z8 = notificationLockscreenUserManagerImpl3.mSecureSettings.getIntForUser("redact_otp_on_wifi", 0, Process.myUserHandle().getIdentifier()) != 0;
+                    notificationLockscreenUserManagerImpl3.mRedactOtpOnWifi.set(z8);
+                    if (z7 == z8) {
+                    }
+                    zUpdateLockscreenNotificationSetting |= z2;
+                } else if (NotificationLockscreenUserManagerImpl.OTP_REDACTION_LOCK_TIME.equals(uri)) {
+                    NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl4 = NotificationLockscreenUserManagerImpl.this;
+                    long j = notificationLockscreenUserManagerImpl4.mOtpRedactionRequiredLockTimeMs.get();
+                    long longForUser = notificationLockscreenUserManagerImpl4.mSecureSettings.getLongForUser("otp_redaction_lock_time", NotificationLockscreenUserManagerImpl.DEFAULT_LOCK_TIME_FOR_SENSITIVE_REDACTION_MS, Process.myUserHandle().getIdentifier());
+                    notificationLockscreenUserManagerImpl4.mOtpRedactionRequiredLockTimeMs.set(longForUser);
+                    if (j == longForUser) {
+                    }
+                    zUpdateLockscreenNotificationSetting |= z2;
+                }
+            }
+            if (NotificationLockscreenUserManagerImpl.this.mCurrentUserId == userHandle.getIdentifier()) {
+                zUpdateLockscreenNotificationSetting |= NotificationLockscreenUserManagerImpl.this.updateLockscreenNotificationSetting();
+            }
+            if (zUpdateLockscreenNotificationSetting) {
+                NotificationLockscreenUserManagerImpl.this.notifyNotificationStateChanged();
+            }
         }
     }
 }

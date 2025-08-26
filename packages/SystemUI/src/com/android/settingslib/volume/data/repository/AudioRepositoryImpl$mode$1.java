@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioRepositoryImpl$mode$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -47,7 +46,7 @@ final class AudioRepositoryImpl$mode$1 extends SuspendLambda implements Function
             AudioManager.OnModeChangedListener onModeChangedListener = new AudioManager.OnModeChangedListener() { // from class: com.android.settingslib.volume.data.repository.AudioRepositoryImpl$mode$1$listener$1
                 @Override // android.media.AudioManager.OnModeChangedListener
                 public final void onModeChanged(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Integer.valueOf(i2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
                 }
             };
             this.this$0.audioManager.addOnModeChangedListener(ConcurrentUtils.DIRECT_EXECUTOR, onModeChangedListener);

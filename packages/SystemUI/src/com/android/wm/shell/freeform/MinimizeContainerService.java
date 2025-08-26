@@ -17,7 +17,6 @@ import com.android.wm.shell.freeform.FreeformContainerManager;
 import com.samsung.android.multiwindow.IFreeformCallback;
 import com.samsung.android.multiwindow.MultiWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MinimizeContainerService extends Service {
     public static int sFlipFont;
@@ -69,8 +68,10 @@ public class MinimizeContainerService extends Service {
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
         Log.i("FreeformContainer", "[MinimizeContainerService] onBind()");
+        boolean booleanExtra = intent.getBooleanExtra("load_all_items", false);
         this.mMultiWindowManager.registerFreeformCallback(this.mFreeformCallback);
-        FreeformContainerManager.getInstance(this).mH.sendMessage(11);
+        FreeformContainerManager.H h = FreeformContainerManager.getInstance(this).mH;
+        h.sendMessage(h.obtainMessage(11, booleanExtra ? 1 : 0, 0));
         return this.mBinder;
     }
 
@@ -78,13 +79,13 @@ public class MinimizeContainerService extends Service {
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
         FreeformContainerManager freeformContainerManager = FreeformContainerManager.getInstance(this);
-        int diff = freeformContainerManager.mConfiguration.diff(configuration);
+        int iDiff = freeformContainerManager.mConfiguration.diff(configuration);
         freeformContainerManager.mConfiguration.updateFrom(configuration);
-        if (((-2147405308) & diff) != 0) {
+        if (((-2147405308) & iDiff) != 0) {
             freeformContainerManager.rebuildAll("ConfigurationChanged");
         } else {
             freeformContainerManager.mH.sendMessage(36);
-            Log.i("FreeformContainer", "[Manager] updateConfigurationChanged: diff=0x" + Integer.toHexString(diff) + ", No need to rebuild all");
+            Log.i("FreeformContainer", "[Manager] updateConfigurationChanged: diff=0x" + Integer.toHexString(iDiff) + ", No need to rebuild all");
         }
         int i = configuration.FlipFont;
         if (i <= 0 || sFlipFont == i) {

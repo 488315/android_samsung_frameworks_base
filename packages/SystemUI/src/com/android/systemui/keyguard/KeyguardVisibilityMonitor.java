@@ -18,7 +18,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardVisibilityMonitor implements Runnable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public class KeyguardVisibilityMonitor implements Runnable {
     public final List isExpandedChangedListeners = new ArrayList();
     public final List panelStateChangedListeners = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,7 +54,7 @@ public class KeyguardVisibilityMonitor implements Runnable {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = KeyguardVisibilityMonitor.$r8$clinit;
-                return (KeyguardStateController) dagger.Lazy.this.get();
+                return (KeyguardStateController) lazy.get();
             }
         });
     }
@@ -92,30 +90,30 @@ public class KeyguardVisibilityMonitor implements Runnable {
         if (this.panelExpansionChangeEvent == null) {
             return;
         }
-        int intValue = num != null ? num.intValue() : this.panelState;
+        int iIntValue = num != null ? num.intValue() : this.panelState;
         if (shadeExpansionChangeEvent == null) {
             shadeExpansionChangeEvent = this.panelExpansionChangeEvent;
         }
         ShadeExpansionChangeEvent shadeExpansionChangeEvent2 = this.panelExpansionChangeEvent;
         if (Intrinsics.areEqual(shadeExpansionChangeEvent2 != null ? Boolean.valueOf(shadeExpansionChangeEvent2.tracking) : null, shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.tracking) : null)) {
             ShadeExpansionChangeEvent shadeExpansionChangeEvent3 = this.panelExpansionChangeEvent;
-            if (Intrinsics.areEqual(shadeExpansionChangeEvent3 != null ? Boolean.valueOf(shadeExpansionChangeEvent3.expanded) : null, shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.expanded) : null) && this.panelState == intValue) {
+            if (Intrinsics.areEqual(shadeExpansionChangeEvent3 != null ? Boolean.valueOf(shadeExpansionChangeEvent3.expanded) : null, shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.expanded) : null) && this.panelState == iIntValue) {
                 return;
             }
         }
         int i = this.panelState;
-        String valueOf = i != 0 ? i != 1 ? i != 2 ? String.valueOf(i) : "OPEN" : "OPENING" : "CLOSED";
-        String valueOf2 = intValue != 0 ? intValue != 1 ? intValue != 2 ? String.valueOf(intValue) : "OPEN" : "OPENING" : "CLOSED";
-        Boolean valueOf3 = shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.tracking) : null;
-        Boolean valueOf4 = shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.expanded) : null;
-        Float valueOf5 = shadeExpansionChangeEvent != null ? Float.valueOf(shadeExpansionChangeEvent.fraction) : null;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("go panelState: ", valueOf, " -> ", valueOf2, " tracking=");
-        m.append(valueOf3);
-        m.append(", expanded=");
-        m.append(valueOf4);
-        m.append(", fraction=");
-        m.append(valueOf5);
-        android.util.Log.d("KeyguardVisible", m.toString());
+        String strValueOf = i != 0 ? i != 1 ? i != 2 ? String.valueOf(i) : "OPEN" : "OPENING" : "CLOSED";
+        String strValueOf2 = iIntValue != 0 ? iIntValue != 1 ? iIntValue != 2 ? String.valueOf(iIntValue) : "OPEN" : "OPENING" : "CLOSED";
+        Boolean boolValueOf = shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.tracking) : null;
+        Boolean boolValueOf2 = shadeExpansionChangeEvent != null ? Boolean.valueOf(shadeExpansionChangeEvent.expanded) : null;
+        Float fValueOf = shadeExpansionChangeEvent != null ? Float.valueOf(shadeExpansionChangeEvent.fraction) : null;
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("go panelState: ", strValueOf, " -> ", strValueOf2, " tracking=");
+        sbM.append(boolValueOf);
+        sbM.append(", expanded=");
+        sbM.append(boolValueOf2);
+        sbM.append(", fraction=");
+        sbM.append(fValueOf);
+        android.util.Log.d("KeyguardVisible", sbM.toString());
     }
 
     @Override // java.lang.Runnable

@@ -9,7 +9,6 @@ import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.bubbles.BubbleTransitions;
 import com.android.wm.shell.shared.bubbles.BubbleBarLocation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -38,14 +37,14 @@ public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSynthet
                 bubbleController.getClass();
                 try {
                     BubbleStackView bubbleStackView = bubbleController.mStackView;
-                    ScreenCapture.CaptureArgs captureArgs = null;
+                    ScreenCapture.CaptureArgs captureArgsBuild = null;
                     if (bubbleStackView == null) {
                         bubbleStackView = null;
                     }
                     if (bubbleStackView != null && (viewRootImpl = bubbleStackView.getViewRootImpl()) != null && (surfaceControl = viewRootImpl.getSurfaceControl()) != null) {
-                        captureArgs = new ScreenCapture.CaptureArgs.Builder().setExcludeLayers(new SurfaceControl[]{surfaceControl}).build();
+                        captureArgsBuild = new ScreenCapture.CaptureArgs.Builder().setExcludeLayers(new SurfaceControl[]{surfaceControl}).build();
                     }
-                    bubbleController.mWmService.captureDisplay(i, captureArgs, synchronousScreenCaptureListener);
+                    bubbleController.mWmService.captureDisplay(i, captureArgsBuild, synchronousScreenCaptureListener);
                     break;
                 } catch (RemoteException unused) {
                     Log.e("Bubbles", "Failed to capture screenshot");

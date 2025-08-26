@@ -10,18 +10,18 @@ public class SubtypeLocaleUtils {
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String[] split = str.split(Session.SESSION_SEPARATION_CHAR_CHILD, 3);
-        if (split.length >= 1 && "tl".equals(split[0])) {
-            split[0] = "fil";
+        String[] strArrSplit = str.split(Session.SESSION_SEPARATION_CHAR_CHILD, 3);
+        if (strArrSplit.length >= 1 && "tl".equals(strArrSplit[0])) {
+            strArrSplit[0] = "fil";
         }
-        if (split.length == 1) {
-            return new Locale(split[0]);
+        if (strArrSplit.length == 1) {
+            return new Locale(strArrSplit[0]);
         }
-        if (split.length == 2) {
-            return new Locale(split[0], split[1]);
+        if (strArrSplit.length == 2) {
+            return new Locale(strArrSplit[0], strArrSplit[1]);
         }
-        if (split.length == 3) {
-            return new Locale(split[0], split[1], split[2]);
+        if (strArrSplit.length == 3) {
+            return new Locale(strArrSplit[0], strArrSplit[1], strArrSplit[2]);
         }
         return null;
     }

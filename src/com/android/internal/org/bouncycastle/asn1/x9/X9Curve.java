@@ -32,9 +32,9 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
     }
 
     public X9Curve(X9FieldID x9FieldID, BigInteger bigInteger, BigInteger bigInteger2, ASN1Sequence aSN1Sequence) {
-        int intValueExact;
+        int iIntValueExact;
+        int iIntValueExact2;
         int i;
-        int i2;
         this.fieldIdentifier = null;
         ASN1ObjectIdentifier identifier = x9FieldID.getIdentifier();
         this.fieldIdentifier = identifier;
@@ -42,23 +42,23 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
             this.curve = new ECCurve.Fp(((ASN1Integer) x9FieldID.getParameters()).getValue(), new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(0)).getOctets()), new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(1)).getOctets()), bigInteger, bigInteger2);
         } else if (this.fieldIdentifier.equals((ASN1Primitive) characteristic_two_field)) {
             ASN1Sequence aSN1Sequence2 = ASN1Sequence.getInstance(x9FieldID.getParameters());
-            int intValueExact2 = ((ASN1Integer) aSN1Sequence2.getObjectAt(0)).intValueExact();
+            int iIntValueExact3 = ((ASN1Integer) aSN1Sequence2.getObjectAt(0)).intValueExact();
             ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) aSN1Sequence2.getObjectAt(1);
             if (aSN1ObjectIdentifier.equals((ASN1Primitive) tpBasis)) {
-                i = ASN1Integer.getInstance(aSN1Sequence2.getObjectAt(2)).intValueExact();
-                i2 = 0;
-                intValueExact = 0;
+                iIntValueExact2 = ASN1Integer.getInstance(aSN1Sequence2.getObjectAt(2)).intValueExact();
+                i = 0;
+                iIntValueExact = 0;
             } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) ppBasis)) {
                 ASN1Sequence aSN1Sequence3 = ASN1Sequence.getInstance(aSN1Sequence2.getObjectAt(2));
-                int intValueExact3 = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(0)).intValueExact();
-                int intValueExact4 = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(1)).intValueExact();
-                intValueExact = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(2)).intValueExact();
-                i = intValueExact3;
-                i2 = intValueExact4;
+                int iIntValueExact4 = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(0)).intValueExact();
+                int iIntValueExact5 = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(1)).intValueExact();
+                iIntValueExact = ASN1Integer.getInstance(aSN1Sequence3.getObjectAt(2)).intValueExact();
+                iIntValueExact2 = iIntValueExact4;
+                i = iIntValueExact5;
             } else {
                 throw new IllegalArgumentException("This type of EC basis is not implemented");
             }
-            this.curve = new ECCurve.F2m(intValueExact2, i, i2, intValueExact, new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(0)).getOctets()), new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(1)).getOctets()), bigInteger, bigInteger2);
+            this.curve = new ECCurve.F2m(iIntValueExact3, iIntValueExact2, i, iIntValueExact, new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(0)).getOctets()), new BigInteger(1, ASN1OctetString.getInstance(aSN1Sequence.getObjectAt(1)).getOctets()), bigInteger, bigInteger2);
         } else {
             throw new IllegalArgumentException("This type of ECCurve is not implemented");
         }
@@ -90,10 +90,7 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(3);
-        if (this.fieldIdentifier.equals((ASN1Primitive) prime_field)) {
-            aSN1EncodableVector.add(new X9FieldElement(this.curve.getA()).toASN1Primitive());
-            aSN1EncodableVector.add(new X9FieldElement(this.curve.getB()).toASN1Primitive());
-        } else if (this.fieldIdentifier.equals((ASN1Primitive) characteristic_two_field)) {
+        if (this.fieldIdentifier.equals((ASN1Primitive) prime_field) || this.fieldIdentifier.equals((ASN1Primitive) characteristic_two_field)) {
             aSN1EncodableVector.add(new X9FieldElement(this.curve.getA()).toASN1Primitive());
             aSN1EncodableVector.add(new X9FieldElement(this.curve.getB()).toASN1Primitive());
         }

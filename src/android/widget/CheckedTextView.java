@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
@@ -24,6 +25,7 @@ import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
 import com.android.internal.R;
+import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class CheckedTextView extends TextView implements Checkable {
@@ -96,9 +98,9 @@ public class CheckedTextView extends TextView implements Checkable {
         this.mCheckMarkGravity = Gravity.END;
         this.mIsSetCheckMark = false;
         this.mIsDeviceDefault = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CheckedTextView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.CheckedTextView, attributeSet, obtainStyledAttributes, i, i2);
-        Drawable drawable = obtainStyledAttributes.getDrawable(1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CheckedTextView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.CheckedTextView, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
         TypedValue typedValue = new TypedValue();
         getContext().getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true);
         if (typedValue.data != 0) {
@@ -108,22 +110,22 @@ public class CheckedTextView extends TextView implements Checkable {
         if (drawable != null) {
             setCheckMarkDrawable(drawable);
         }
-        if (obtainStyledAttributes.hasValue(3)) {
-            this.mCheckMarkBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(3, -1), this.mCheckMarkBlendMode);
+        if (typedArrayObtainStyledAttributes.hasValue(3)) {
+            this.mCheckMarkBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(3, -1), this.mCheckMarkBlendMode);
             this.mHasCheckMarkTintMode = true;
         }
-        if (obtainStyledAttributes.hasValue(2)) {
-            this.mCheckMarkTintList = obtainStyledAttributes.getColorStateList(2);
+        if (typedArrayObtainStyledAttributes.hasValue(2)) {
+            this.mCheckMarkTintList = typedArrayObtainStyledAttributes.getColorStateList(2);
             this.mHasCheckMarkTint = true;
         }
         if (this.mIsDeviceDefault) {
             this.mIsSetCheckMark = true;
-            this.mCheckMarkGravity = obtainStyledAttributes.getInt(4, Gravity.START);
+            this.mCheckMarkGravity = typedArrayObtainStyledAttributes.getInt(4, Gravity.START);
         } else {
-            this.mCheckMarkGravity = obtainStyledAttributes.getInt(4, Gravity.END);
+            this.mCheckMarkGravity = typedArrayObtainStyledAttributes.getInt(4, Gravity.END);
         }
-        setChecked(obtainStyledAttributes.getBoolean(0, false));
-        obtainStyledAttributes.recycle();
+        setChecked(typedArrayObtainStyledAttributes.getBoolean(0, false));
+        typedArrayObtainStyledAttributes.recycle();
         applyCheckMarkTint();
     }
 
@@ -222,10 +224,10 @@ public class CheckedTextView extends TextView implements Checkable {
         Drawable drawable = this.mCheckMarkDrawable;
         if (drawable != null) {
             if (this.mHasCheckMarkTint || this.mHasCheckMarkTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mCheckMarkDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mCheckMarkDrawable = drawableMutate;
                 if (this.mHasCheckMarkTint) {
-                    mutate.setTintList(this.mCheckMarkTintList);
+                    drawableMutate.setTintList(this.mCheckMarkTintList);
                 }
                 if (this.mHasCheckMarkTintMode) {
                     this.mCheckMarkDrawable.setTintBlendMode(this.mCheckMarkBlendMode);
@@ -342,10 +344,10 @@ public class CheckedTextView extends TextView implements Checkable {
             } else {
                 height = (getHeight() - intrinsicHeight) / 2;
             }
-            boolean isCheckMarkAtStart = isCheckMarkAtStart();
+            boolean zIsCheckMarkAtStart = isCheckMarkAtStart();
             int width = getWidth();
             int i3 = intrinsicHeight + height;
-            if (isCheckMarkAtStart) {
+            if (zIsCheckMarkAtStart) {
                 i2 = this.mBasePadding;
                 i = this.mCheckMarkWidth + i2;
             } else {
@@ -367,11 +369,11 @@ public class CheckedTextView extends TextView implements Checkable {
 
     @Override // android.widget.TextView, android.view.View
     protected int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (isChecked()) {
-            mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.TextView, android.view.View
@@ -423,7 +425,7 @@ public class CheckedTextView extends TextView implements Checkable {
         }
 
         @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
-        public void writeToParcel(Parcel parcel, int i) {
+        public void writeToParcel(Parcel parcel, int i) throws IOException {
             super.writeToParcel(parcel, i);
             parcel.writeValue(Boolean.valueOf(this.checked));
         }
@@ -455,7 +457,7 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     @Override // android.widget.TextView, android.view.View
-    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) {
+    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) throws Resources.NotFoundException {
         super.onInitializeAccessibilityNodeInfoInternal(accessibilityNodeInfo);
         accessibilityNodeInfo.setCheckable(true);
         if (Flags.triStateChecked()) {
@@ -466,7 +468,7 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     @Override // android.widget.TextView, android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws Resources.NotFoundException, IOException {
         super.encodeProperties(viewHierarchyEncoder);
         viewHierarchyEncoder.addProperty("text:checked", isChecked());
     }

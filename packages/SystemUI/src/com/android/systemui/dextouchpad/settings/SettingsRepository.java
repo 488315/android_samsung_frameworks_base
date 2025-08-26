@@ -7,7 +7,6 @@ import android.util.Log;
 import com.android.systemui.dextouchpad.util.Features;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SettingsRepository {
     public static final Object sInstanceLock = new Object();
@@ -15,8 +14,12 @@ public class SettingsRepository {
     public final Object mLock;
     public final SharedPreferences mPrefs;
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private SettingsRepository(Context context) {
-        String str;
+        String string;
         Object obj = new Object();
         this.mLock = obj;
         synchronized (obj) {
@@ -27,17 +30,17 @@ public class SettingsRepository {
                     for (Map.Entry<String, ?> entry : defaultSharedPreferences.getAll().entrySet()) {
                         String key = entry.getKey();
                         Settings$Key settings$Key = (Settings$Key) SettingsKeys.STRING_TO_KEY.get(key);
-                        if (settings$Key != null) {
+                        if (settings$Key == null) {
+                            string = null;
+                        } else {
                             Class cls = settings$Key.mType;
                             if (cls == Integer.class) {
-                                str = Integer.toString(((Integer) entry.getValue()).intValue());
+                                string = Integer.toString(((Integer) entry.getValue()).intValue());
                             } else if (cls == String.class) {
-                                str = (String) entry.getValue();
+                                string = (String) entry.getValue();
                             }
-                            Log.d("DexTouchpadSettingsRepository", "init prefs key=" + key + " value=" + str);
                         }
-                        str = null;
-                        Log.d("DexTouchpadSettingsRepository", "init prefs key=" + key + " value=" + str);
+                        Log.d("DexTouchpadSettingsRepository", "init prefs key=" + key + " value=" + string);
                     }
                 }
             } catch (Throwable th) {

@@ -25,7 +25,7 @@ public class BinderTransactionNameResolver {
         return String.valueOf(i);
     }
 
-    public String getMethodName(Class<? extends Binder> cls, int i) {
+    public String getMethodName(Class<? extends Binder> cls, int i) throws NoSuchMethodException, SecurityException {
         Method method = this.mGetDefaultTransactionNameMethods.get(cls);
         if (method == null) {
             try {

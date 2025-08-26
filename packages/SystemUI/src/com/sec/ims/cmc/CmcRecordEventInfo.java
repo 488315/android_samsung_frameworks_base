@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcRecordEventInfo implements Parcelable {
     public static final Parcelable.Creator<CmcRecordEventInfo> CREATOR = new Parcelable.Creator<CmcRecordEventInfo>() { // from class: com.sec.ims.cmc.CmcRecordEventInfo.1
@@ -24,7 +23,6 @@ public class CmcRecordEventInfo implements Parcelable {
     private int mCallId;
     private int mRecordEvent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         protected int mCallId = -1;
         protected int mRecordEvent = -1;

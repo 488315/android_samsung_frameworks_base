@@ -95,7 +95,7 @@ public class MediaController extends FrameLayout {
         this.mBackCallback = new OnBackInvokedCallback() { // from class: android.widget.MediaController$$ExternalSyntheticLambda0
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                MediaController.this.hide();
+                this.f$0.hide();
             }
         };
         this.mAttachStateListener = new View.OnAttachStateChangeListener() { // from class: android.widget.MediaController.1
@@ -217,7 +217,7 @@ public class MediaController extends FrameLayout {
         this.mBackCallback = new OnBackInvokedCallback() { // from class: android.widget.MediaController$$ExternalSyntheticLambda0
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                MediaController.this.hide();
+                this.f$0.hide();
             }
         };
         this.mAttachStateListener = new View.OnAttachStateChangeListener() { // from class: android.widget.MediaController.1
@@ -394,9 +394,9 @@ public class MediaController extends FrameLayout {
     }
 
     protected View makeControllerView() {
-        View inflate = ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.media_controller, (ViewGroup) null);
-        this.mRoot = inflate;
-        initControllerView(inflate);
+        View viewInflate = ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.media_controller, (ViewGroup) null);
+        this.mRoot = viewInflate;
+        initControllerView(viewInflate);
         return this.mRoot;
     }
 

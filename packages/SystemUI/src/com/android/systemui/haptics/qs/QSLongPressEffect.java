@@ -17,7 +17,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSLongPressEffect {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,6 @@ public final class QSLongPressEffect {
     public State state = State.IDLE;
     public final VibratorHelper vibratorHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,6 @@ public final class QSLongPressEffect {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State {
         public static final /* synthetic */ State[] $VALUES;
         public static final State CLICKED;
@@ -89,7 +86,6 @@ public final class QSLongPressEffect {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -132,17 +128,17 @@ public final class QSLongPressEffect {
     }
 
     public QSLongPressEffect(VibratorHelper vibratorHelper, KeyguardStateController keyguardStateController, FalsingManager falsingManager, LogBuffer logBuffer) {
-        int[] iArr;
+        int[] primitiveDurations;
         this.vibratorHelper = vibratorHelper;
         this.keyguardStateController = keyguardStateController;
         this.falsingManager = falsingManager;
         this.logBuffer = logBuffer;
         if (vibratorHelper != null) {
-            iArr = vibratorHelper.mVibrator.getPrimitiveDurations(8, 3);
+            primitiveDurations = vibratorHelper.mVibrator.getPrimitiveDurations(8, 3);
         } else {
-            iArr = null;
+            primitiveDurations = null;
         }
-        this.durations = iArr;
+        this.durations = primitiveDurations;
         LongPressHapticBuilder.INSTANCE.getClass();
         this.snapEffect = VibrationEffect.startComposition().addPrimitive(1, 0.5f, 0).compose();
     }
@@ -177,12 +173,12 @@ public final class QSLongPressEffect {
         LogLevel logLevel = LogLevel.DEBUG;
         QSLongPressEffect$$ExternalSyntheticLambda0 qSLongPressEffect$$ExternalSyntheticLambda0 = new QSLongPressEffect$$ExternalSyntheticLambda0();
         LogBuffer logBuffer = this.logBuffer;
-        LogMessage obtain = logBuffer.obtain("QSLongPressEffect", logLevel, qSLongPressEffect$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLongPressEffect", logLevel, qSLongPressEffect$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = str2;
         logMessageImpl.str3 = state.name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void setState(State state) {

@@ -45,9 +45,9 @@ public interface IDsmsInfoService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDsmsInfoService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDsmsInfoService)) {
-                return (IDsmsInfoService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDsmsInfoService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDsmsInfoService)) {
+                return (IDsmsInfoService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IDsmsInfoService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean isCommercializedDevice = isCommercializedDevice();
+                boolean zIsCommercializedDevice = isCommercializedDevice();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isCommercializedDevice);
+                parcel2.writeBoolean(zIsCommercializedDevice);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,16 +100,16 @@ public interface IDsmsInfoService extends IInterface {
 
             @Override // com.samsung.android.dsms.aidl.IDsmsInfoService
             public boolean isCommercializedDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDsmsInfoService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDsmsInfoService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

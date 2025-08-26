@@ -28,12 +28,12 @@ public final class AmrInputStream extends InputStream {
         mediaFormat.setInteger(MediaFormat.KEY_SAMPLE_RATE, 8000);
         mediaFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);
         mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, 12200);
-        String findEncoderForFormat = new MediaCodecList(0).findEncoderForFormat(mediaFormat);
-        if (findEncoderForFormat != null) {
+        String strFindEncoderForFormat = new MediaCodecList(0).findEncoderForFormat(mediaFormat);
+        if (strFindEncoderForFormat != null) {
             try {
-                MediaCodec createByCodecName = MediaCodec.createByCodecName(findEncoderForFormat);
-                this.mCodec = createByCodecName;
-                createByCodecName.configure(mediaFormat, (Surface) null, (MediaCrypto) null, 1);
+                MediaCodec mediaCodecCreateByCodecName = MediaCodec.createByCodecName(strFindEncoderForFormat);
+                this.mCodec = mediaCodecCreateByCodecName;
+                mediaCodecCreateByCodecName.configure(mediaFormat, (Surface) null, (MediaCrypto) null, 1);
                 this.mCodec.start();
             } catch (IOException unused) {
                 MediaCodec mediaCodec = this.mCodec;
@@ -60,49 +60,49 @@ public final class AmrInputStream extends InputStream {
     }
 
     @Override // java.io.InputStream
-    public int read(byte[] bArr, int i, int i2) throws IOException {
-        int dequeueInputBuffer;
+    public int read(byte[] bArr, int i, int i2) throws MediaCodec.CryptoException, IOException {
+        int iDequeueInputBuffer;
         if (this.mCodec == null) {
             throw new IllegalStateException("not open");
         }
         if (this.mBufOut >= this.mBufIn && !this.mSawOutputEOS) {
             this.mBufOut = 0;
             this.mBufIn = 0;
-            while (!this.mSawInputEOS && (dequeueInputBuffer = this.mCodec.dequeueInputBuffer(0L)) >= 0) {
+            while (!this.mSawInputEOS && (iDequeueInputBuffer = this.mCodec.dequeueInputBuffer(0L)) >= 0) {
                 int i3 = 0;
                 while (true) {
                     if (i3 >= 320) {
                         break;
                     }
-                    int read = this.mInputStream.read(this.mBuf, i3, 320 - i3);
-                    if (read == -1) {
+                    int i4 = this.mInputStream.read(this.mBuf, i3, 320 - i3);
+                    if (i4 == -1) {
                         this.mSawInputEOS = true;
                         break;
                     }
-                    i3 += read;
+                    i3 += i4;
                 }
-                this.mCodec.getInputBuffer(dequeueInputBuffer).put(this.mBuf, 0, i3);
-                this.mCodec.queueInputBuffer(dequeueInputBuffer, 0, i3, 0L, this.mSawInputEOS ? 4 : 0);
+                this.mCodec.getInputBuffer(iDequeueInputBuffer).put(this.mBuf, 0, i3);
+                this.mCodec.queueInputBuffer(iDequeueInputBuffer, 0, i3, 0L, this.mSawInputEOS ? 4 : 0);
             }
-            int dequeueOutputBuffer = this.mCodec.dequeueOutputBuffer(this.mInfo, 0L);
-            if (dequeueOutputBuffer >= 0) {
+            int iDequeueOutputBuffer = this.mCodec.dequeueOutputBuffer(this.mInfo, 0L);
+            if (iDequeueOutputBuffer >= 0) {
                 this.mBufIn = this.mInfo.size;
-                this.mCodec.getOutputBuffer(dequeueOutputBuffer).get(this.mBuf, 0, this.mBufIn);
-                this.mCodec.releaseOutputBuffer(dequeueOutputBuffer, false);
+                this.mCodec.getOutputBuffer(iDequeueOutputBuffer).get(this.mBuf, 0, this.mBufIn);
+                this.mCodec.releaseOutputBuffer(iDequeueOutputBuffer, false);
                 if ((this.mInfo.flags & 4) != 0) {
                     this.mSawOutputEOS = true;
                 }
             }
         }
-        int i4 = this.mBufOut;
-        int i5 = this.mBufIn;
-        if (i4 >= i5) {
+        int i5 = this.mBufOut;
+        int i6 = this.mBufIn;
+        if (i5 >= i6) {
             return (this.mSawInputEOS && this.mSawOutputEOS) ? -1 : 0;
         }
-        int i6 = i2 > i5 - i4 ? i5 - i4 : i2;
-        System.arraycopy(this.mBuf, i4, bArr, i, i6);
-        this.mBufOut += i6;
-        return i6;
+        int i7 = i2 > i6 - i5 ? i6 - i5 : i2;
+        System.arraycopy(this.mBuf, i5, bArr, i, i7);
+        this.mBufOut += i7;
+        return i7;
     }
 
     @Override // java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable

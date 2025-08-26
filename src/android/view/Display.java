@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /* loaded from: classes4.dex */
 public final class Display {
@@ -263,11 +262,11 @@ public final class Display {
             }
         }
         boolean z = (this.mFlags & 131072) != 0;
-        boolean isExternalDesktopDisplay = DisplayManager.isExternalDesktopDisplay(this.mDisplayInfo);
-        if (!z && isExternalDesktopDisplay) {
+        boolean zIsExternalDesktopDisplay = DisplayManager.isExternalDesktopDisplay(this.mDisplayInfo);
+        if (!z && zIsExternalDesktopDisplay) {
             return this.mFlags | 131072;
         }
-        if (z && !isExternalDesktopDisplay) {
+        if (z && !zIsExternalDesktopDisplay) {
             return this.mFlags & (-131073);
         }
         return this.mFlags;
@@ -361,22 +360,22 @@ public final class Display {
     }
 
     public int getMaximumSizeDimension() {
-        int max;
+        int iMax;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
-            max = Math.max(this.mDisplayInfo.logicalWidth, this.mDisplayInfo.logicalHeight);
+            iMax = Math.max(this.mDisplayInfo.logicalWidth, this.mDisplayInfo.logicalHeight);
         }
-        return max;
+        return iMax;
     }
 
     public float getMinSizeDimensionDp() {
-        float deriveDimension;
+        float fDeriveDimension;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
             this.mDisplayInfo.getAppMetrics(this.mTempMetrics);
-            deriveDimension = TypedValue.deriveDimension(1, Math.min(this.mDisplayInfo.logicalWidth, this.mDisplayInfo.logicalHeight), this.mTempMetrics);
+            fDeriveDimension = TypedValue.deriveDimension(1, Math.min(this.mDisplayInfo.logicalWidth, this.mDisplayInfo.logicalHeight), this.mTempMetrics);
         }
-        return deriveDimension;
+        return fDeriveDimension;
     }
 
     @Deprecated
@@ -489,23 +488,31 @@ public final class Display {
     }
 
     public float[] getSupportedRefreshRates() {
-        float[] defaultRefreshRates;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
-            defaultRefreshRates = this.mDisplayInfo.getDefaultRefreshRates();
+            if (CoreRune.FW_VRR_REFRESH_RATE_MODE) {
+                float[] fArrFilteredSupportedRefreshRates = filteredSupportedRefreshRates(this.mDisplayInfo.getDefaultRefreshRates());
+                Objects.requireNonNull(fArrFilteredSupportedRefreshRates);
+                return fArrFilteredSupportedRefreshRates;
+            }
+            float[] defaultRefreshRates = this.mDisplayInfo.getDefaultRefreshRates();
             Objects.requireNonNull(defaultRefreshRates);
+            return defaultRefreshRates;
         }
-        return defaultRefreshRates;
     }
 
     public float[] getSupportedRefreshRatesLegacy() {
-        float[] defaultRefreshRatesLegacy;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
-            defaultRefreshRatesLegacy = this.mDisplayInfo.getDefaultRefreshRatesLegacy();
+            if (CoreRune.FW_VRR_REFRESH_RATE_MODE) {
+                float[] fArrFilteredSupportedRefreshRates = filteredSupportedRefreshRates(this.mDisplayInfo.getDefaultRefreshRatesLegacy());
+                Objects.requireNonNull(fArrFilteredSupportedRefreshRates);
+                return fArrFilteredSupportedRefreshRates;
+            }
+            float[] defaultRefreshRatesLegacy = this.mDisplayInfo.getDefaultRefreshRatesLegacy();
             Objects.requireNonNull(defaultRefreshRatesLegacy);
+            return defaultRefreshRatesLegacy;
         }
-        return defaultRefreshRatesLegacy;
     }
 
     public Mode getMode() {
@@ -554,92 +561,52 @@ public final class Display {
         }
         final RefreshRateConfig refreshRateConfig = RefreshRateConfig.getInstance(getDisplayId());
         final Mode mode = this.mDisplayInfo.getMode();
-        Stream stream = Arrays.stream(modeArr);
-        if (this.mDisplayInfo.refreshRateMode == 0) {
-            if (refreshRateConfig.isSwitchable()) {
-                return (Mode[]) stream.filter(new Predicate() { // from class: android.view.Display$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        return Display.lambda$filteredSupportedModes$0(RefreshRateConfig.this, mode, (Display.Mode) obj);
-                    }
-                }).toArray(new IntFunction() { // from class: android.view.Display$$ExternalSyntheticLambda1
-                    @Override // java.util.function.IntFunction
-                    public final Object apply(int i) {
-                        return Display.lambda$filteredSupportedModes$1(i);
-                    }
-                });
+        return (Mode[]) Arrays.stream(modeArr).filter(new Predicate() { // from class: android.view.Display$$ExternalSyntheticLambda0
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                return this.f$0.lambda$filteredSupportedModes$0(refreshRateConfig, mode, (Display.Mode) obj);
             }
-            return (Mode[]) stream.filter(new Predicate() { // from class: android.view.Display$$ExternalSyntheticLambda2
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return Display.lambda$filteredSupportedModes$2(RefreshRateConfig.this, (Display.Mode) obj);
-                }
-            }).toArray(new IntFunction() { // from class: android.view.Display$$ExternalSyntheticLambda3
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return Display.lambda$filteredSupportedModes$3(i);
-                }
-            });
-        }
-        if (this.mDisplayInfo.refreshRateMode == 2) {
-            return (Mode[]) stream.filter(new Predicate() { // from class: android.view.Display$$ExternalSyntheticLambda4
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return Display.lambda$filteredSupportedModes$4(RefreshRateConfig.this, mode, (Display.Mode) obj);
-                }
-            }).toArray(new IntFunction() { // from class: android.view.Display$$ExternalSyntheticLambda5
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return Display.lambda$filteredSupportedModes$5(i);
-                }
-            });
-        }
-        if (this.mDisplayInfo.refreshRateMode == 1) {
-            return (Mode[]) stream.filter(new Predicate() { // from class: android.view.Display$$ExternalSyntheticLambda6
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return Display.lambda$filteredSupportedModes$6(RefreshRateConfig.this, (Display.Mode) obj);
-                }
-            }).toArray(new IntFunction() { // from class: android.view.Display$$ExternalSyntheticLambda7
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return Display.lambda$filteredSupportedModes$7(i);
-                }
-            });
-        }
-        return (Mode[]) Arrays.copyOf(modeArr, modeArr.length);
+        }).toArray(new IntFunction() { // from class: android.view.Display$$ExternalSyntheticLambda1
+            @Override // java.util.function.IntFunction
+            public final Object apply(int i) {
+                return Display.lambda$filteredSupportedModes$1(i);
+            }
+        });
     }
 
-    static /* synthetic */ boolean lambda$filteredSupportedModes$0(RefreshRateConfig refreshRateConfig, Mode mode, Mode mode2) {
-        return ((int) mode2.getRefreshRate()) == refreshRateConfig.getNormalSpeedRefreshRates().max() && mode2.equalsExceptRefreshRate(mode);
+    /* JADX INFO: Access modifiers changed from: private */
+    public /* synthetic */ boolean lambda$filteredSupportedModes$0(RefreshRateConfig refreshRateConfig, Mode mode, Mode mode2) {
+        if (isAcceptableRefreshRates(refreshRateConfig, (int) mode2.getRefreshRate())) {
+            return !refreshRateConfig.isSwitchable() || mode2.equalsExceptRefreshRate(mode);
+        }
+        return false;
     }
 
     static /* synthetic */ Mode[] lambda$filteredSupportedModes$1(int i) {
         return new Mode[i];
     }
 
-    static /* synthetic */ boolean lambda$filteredSupportedModes$2(RefreshRateConfig refreshRateConfig, Mode mode) {
-        return ((int) mode.getRefreshRate()) >= refreshRateConfig.getNormalSpeedRefreshRates().min() && ((int) mode.getRefreshRate()) <= refreshRateConfig.getNormalSpeedRefreshRates().max();
+    private float[] filteredSupportedRefreshRates(float[] fArr) {
+        if (this.mType != 1) {
+            return Arrays.copyOf(fArr, fArr.length);
+        }
+        RefreshRateConfig refreshRateConfig = RefreshRateConfig.getInstance(getDisplayId());
+        ArrayList arrayList = new ArrayList();
+        for (float f : fArr) {
+            if (isAcceptableRefreshRates(refreshRateConfig, (int) f)) {
+                arrayList.add(Float.valueOf(f));
+            }
+        }
+        float[] fArr2 = new float[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            fArr2[i] = ((Float) arrayList.get(i)).floatValue();
+        }
+        return fArr2;
     }
 
-    static /* synthetic */ Mode[] lambda$filteredSupportedModes$3(int i) {
-        return new Mode[i];
-    }
-
-    static /* synthetic */ boolean lambda$filteredSupportedModes$4(RefreshRateConfig refreshRateConfig, Mode mode, Mode mode2) {
-        return ((int) mode2.getRefreshRate()) == refreshRateConfig.getHighSpeedRefreshRates().max() && mode2.equalsExceptRefreshRate(mode);
-    }
-
-    static /* synthetic */ Mode[] lambda$filteredSupportedModes$5(int i) {
-        return new Mode[i];
-    }
-
-    static /* synthetic */ boolean lambda$filteredSupportedModes$6(RefreshRateConfig refreshRateConfig, Mode mode) {
-        return ((int) mode.getRefreshRate()) >= refreshRateConfig.getHighSpeedRefreshRates().min() && ((int) mode.getRefreshRate()) <= refreshRateConfig.getHighSpeedRefreshRates().max();
-    }
-
-    static /* synthetic */ Mode[] lambda$filteredSupportedModes$7(int i) {
-        return new Mode[i];
+    private boolean isAcceptableRefreshRates(RefreshRateConfig refreshRateConfig, int i) {
+        int i2 = this.mDisplayInfo.refreshRateMode;
+        return i2 != 0 ? i2 != 1 ? i2 == 2 && i == refreshRateConfig.getHighSpeedRefreshRates().max() : i >= refreshRateConfig.getHighSpeedRefreshRates().min() && i <= refreshRateConfig.getHighSpeedRefreshRates().max() : refreshRateConfig.isSwitchable() ? i == refreshRateConfig.getNormalSpeedRefreshRates().max() : i >= refreshRateConfig.getNormalSpeedRefreshRates().min() && i <= refreshRateConfig.getNormalSpeedRefreshRates().max();
     }
 
     public boolean hasArrSupport() {
@@ -695,13 +662,13 @@ public final class Display {
     }
 
     public HdrCapabilities getHdrCapabilities() {
-        int[] iArr;
+        int[] iArrCopyOf;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
             if (this.mDisplayInfo.hdrCapabilities != null && !this.mDisplayInfo.isForceSdr) {
                 if (this.mDisplayInfo.userDisabledHdrTypes.length == 0) {
                     int[] supportedHdrTypes = getMode().getSupportedHdrTypes();
-                    iArr = Arrays.copyOf(supportedHdrTypes, supportedHdrTypes.length);
+                    iArrCopyOf = Arrays.copyOf(supportedHdrTypes, supportedHdrTypes.length);
                 } else {
                     ArraySet arraySet = new ArraySet();
                     int i = 0;
@@ -710,15 +677,15 @@ public final class Display {
                             arraySet.add(Integer.valueOf(i2));
                         }
                     }
-                    int[] iArr2 = new int[arraySet.size()];
+                    int[] iArr = new int[arraySet.size()];
                     Iterator it = arraySet.iterator();
                     while (it.hasNext()) {
-                        iArr2[i] = ((Integer) it.next()).intValue();
+                        iArr[i] = ((Integer) it.next()).intValue();
                         i++;
                     }
-                    iArr = iArr2;
+                    iArrCopyOf = iArr;
                 }
-                return new HdrCapabilities(iArr, this.mDisplayInfo.hdrCapabilities.mMaxLuminance, this.mDisplayInfo.hdrCapabilities.mMaxAverageLuminance, this.mDisplayInfo.hdrCapabilities.mMinLuminance);
+                return new HdrCapabilities(iArrCopyOf, this.mDisplayInfo.hdrCapabilities.mMaxLuminance, this.mDisplayInfo.hdrCapabilities.mMaxAverageLuminance, this.mDisplayInfo.hdrCapabilities.mMinLuminance);
             }
             return null;
         }
@@ -781,6 +748,7 @@ public final class Display {
         return -1;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void registerHdrSdrRatioChangedListener(Executor executor, Consumer<Display> consumer) {
         HdrSdrRatioListenerWrapper hdrSdrRatioListenerWrapper;
         if (!isHdrSdrRatioAvailable()) {
@@ -788,7 +756,7 @@ public final class Display {
         }
         synchronized (this.mLock) {
             hdrSdrRatioListenerWrapper = null;
-            byte b = 0;
+            Object[] objArr = 0;
             if (findHdrSdrRatioListenerLocked(consumer) == -1) {
                 HdrSdrRatioListenerWrapper hdrSdrRatioListenerWrapper2 = new HdrSdrRatioListenerWrapper(consumer);
                 this.mHdrSdrRatioListeners.add(hdrSdrRatioListenerWrapper2);
@@ -801,13 +769,13 @@ public final class Display {
     }
 
     public void unregisterHdrSdrRatioChangedListener(Consumer<Display> consumer) {
-        HdrSdrRatioListenerWrapper remove;
+        HdrSdrRatioListenerWrapper hdrSdrRatioListenerWrapperRemove;
         synchronized (this.mLock) {
-            int findHdrSdrRatioListenerLocked = findHdrSdrRatioListenerLocked(consumer);
-            remove = findHdrSdrRatioListenerLocked != -1 ? this.mHdrSdrRatioListeners.remove(findHdrSdrRatioListenerLocked) : null;
+            int iFindHdrSdrRatioListenerLocked = findHdrSdrRatioListenerLocked(consumer);
+            hdrSdrRatioListenerWrapperRemove = iFindHdrSdrRatioListenerLocked != -1 ? this.mHdrSdrRatioListeners.remove(iFindHdrSdrRatioListenerLocked) : null;
         }
-        if (remove != null) {
-            this.mGlobal.unregisterDisplayListener(remove);
+        if (hdrSdrRatioListenerWrapperRemove != null) {
+            this.mGlobal.unregisterDisplayListener(hdrSdrRatioListenerWrapperRemove);
         }
     }
 
@@ -828,12 +796,12 @@ public final class Display {
     }
 
     public boolean isWideColorGamut() {
-        boolean isWideColorGamut;
+        boolean zIsWideColorGamut;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
-            isWideColorGamut = this.mDisplayInfo.isWideColorGamut();
+            zIsWideColorGamut = this.mDisplayInfo.isWideColorGamut();
         }
-        return isWideColorGamut;
+        return zIsWideColorGamut;
     }
 
     public ColorSpace getPreferredWideGamutColorSpace() {
@@ -857,13 +825,13 @@ public final class Display {
     }
 
     public int[] getSupportedColorModes() {
-        int[] copyOf;
+        int[] iArrCopyOf;
         synchronized (this.mLock) {
             updateDisplayInfoLocked();
             int[] iArr = this.mDisplayInfo.supportedColorModes;
-            copyOf = Arrays.copyOf(iArr, iArr.length);
+            iArrCopyOf = Arrays.copyOf(iArr, iArr.length);
         }
-        return copyOf;
+        return iArrCopyOf;
     }
 
     public ColorSpace[] getSupportedWideColorGamut() {
@@ -1027,13 +995,13 @@ public final class Display {
     }
 
     private void updateCachedAppSizeIfNeededLocked() {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        if (uptimeMillis > this.mLastCachedAppSizeUpdate + 20) {
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        if (jUptimeMillis > this.mLastCachedAppSizeUpdate + 20) {
             updateDisplayInfoLocked();
             this.mDisplayInfo.getAppMetrics(this.mTempMetrics, getDisplayAdjustments());
             this.mCachedAppWidthCompat = this.mTempMetrics.widthPixels;
             this.mCachedAppHeightCompat = this.mTempMetrics.heightPixels;
-            this.mLastCachedAppSizeUpdate = uptimeMillis;
+            this.mLastCachedAppSizeUpdate = jUptimeMillis;
         }
     }
 
@@ -1204,12 +1172,12 @@ public final class Display {
             this.mPeakRefreshRate = f;
             this.mVsyncRate = f2;
             this.mIsSynthetic = z;
-            float[] copyOf = Arrays.copyOf(fArr, fArr.length);
-            this.mAlternativeRefreshRates = copyOf;
-            Arrays.sort(copyOf);
-            int[] copyOf2 = Arrays.copyOf(iArr, iArr.length);
-            this.mSupportedHdrTypes = copyOf2;
-            Arrays.sort(copyOf2);
+            float[] fArrCopyOf = Arrays.copyOf(fArr, fArr.length);
+            this.mAlternativeRefreshRates = fArrCopyOf;
+            Arrays.sort(fArrCopyOf);
+            int[] iArrCopyOf = Arrays.copyOf(iArr, iArr.length);
+            this.mSupportedHdrTypes = iArrCopyOf;
+            Arrays.sort(iArrCopyOf);
         }
 
         public int getModeId() {
@@ -1430,10 +1398,10 @@ public final class Display {
         }
 
         public void readFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            this.mSupportedHdrTypes = new int[readInt];
-            for (int i = 0; i < readInt; i++) {
-                this.mSupportedHdrTypes[i] = parcel.readInt();
+            int i = parcel.readInt();
+            this.mSupportedHdrTypes = new int[i];
+            for (int i2 = 0; i2 < i; i2++) {
+                this.mSupportedHdrTypes[i2] = parcel.readInt();
             }
             this.mMaxLuminance = parcel.readFloat();
             this.mMaxAverageLuminance = parcel.readFloat();

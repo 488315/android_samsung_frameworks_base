@@ -47,7 +47,6 @@ import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.MainCoroutineDispatcher;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OpenByDefaultDialog {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,15 +68,13 @@ public final class OpenByDefaultDialog {
     public final WindowDecorTaskResourceLoader taskResourceLoader;
     public final SurfaceControlViewHost viewHost;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.apptoweb.OpenByDefaultDialog$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.apptoweb.OpenByDefaultDialog$1$1, reason: invalid class name and collision with other inner class name */
-        final class C04241 extends SuspendLambda implements Function2 {
+        final class C06541 extends SuspendLambda implements Function2 {
             final /* synthetic */ Bitmap $icon;
             final /* synthetic */ CharSequence $name;
             private /* synthetic */ Object L$0;
@@ -85,7 +82,7 @@ public final class OpenByDefaultDialog {
             final /* synthetic */ OpenByDefaultDialog this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C04241(OpenByDefaultDialog openByDefaultDialog, Bitmap bitmap, CharSequence charSequence, Continuation continuation) {
+            public C06541(OpenByDefaultDialog openByDefaultDialog, Bitmap bitmap, CharSequence charSequence, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = openByDefaultDialog;
                 this.$icon = bitmap;
@@ -94,14 +91,14 @@ public final class OpenByDefaultDialog {
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C04241 c04241 = new C04241(this.this$0, this.$icon, this.$name, continuation);
-                c04241.L$0 = obj;
-                return c04241;
+                C06541 c06541 = new C06541(this.this$0, this.$icon, this.$name, continuation);
+                c06541.L$0 = obj;
+                return c06541;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C04241) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C06541) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -158,9 +155,9 @@ public final class OpenByDefaultDialog {
                 OpenByDefaultDialog openByDefaultDialog2 = OpenByDefaultDialog.this;
                 Bitmap headerIcon = openByDefaultDialog2.taskResourceLoader.getHeaderIcon(openByDefaultDialog2.taskInfo);
                 MainCoroutineDispatcher immediate = OpenByDefaultDialog.this.mainDispatcher.getImmediate();
-                C04241 c04241 = new C04241(OpenByDefaultDialog.this, headerIcon, name, null);
+                C06541 c06541 = new C06541(OpenByDefaultDialog.this, headerIcon, name, null);
                 this.label = 1;
-                if (BuildersKt.withContext(immediate, c04241, this) == coroutineSingletons) {
+                if (BuildersKt.withContext(immediate, c06541, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -173,7 +170,6 @@ public final class OpenByDefaultDialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -183,7 +179,6 @@ public final class OpenByDefaultDialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DialogLifecycleListener {
     }
 
@@ -191,7 +186,7 @@ public final class OpenByDefaultDialog {
         new Companion(null);
     }
 
-    public OpenByDefaultDialog(Context context, ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, DisplayController displayController, WindowDecorTaskResourceLoader windowDecorTaskResourceLoader, Supplier<SurfaceControl.Transaction> supplier, MainCoroutineDispatcher mainCoroutineDispatcher, CoroutineScope coroutineScope, DialogLifecycleListener dialogLifecycleListener) {
+    public OpenByDefaultDialog(Context context, ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, DisplayController displayController, WindowDecorTaskResourceLoader windowDecorTaskResourceLoader, Supplier<SurfaceControl.Transaction> supplier, MainCoroutineDispatcher mainCoroutineDispatcher, CoroutineScope coroutineScope, DialogLifecycleListener dialogLifecycleListener) throws PackageManager.NameNotFoundException {
         DomainVerificationUserState domainVerificationUserState;
         final int i = 1;
         this.taskInfo = runningTaskInfo;
@@ -216,9 +211,9 @@ public final class OpenByDefaultDialog {
         OpenByDefaultDialogView openByDefaultDialogView2 = this.dialog;
         this.appNameView = (TextView) (openByDefaultDialogView2 == null ? null : openByDefaultDialogView2).requireViewById(R.id.application_name);
         Display display = displayController.mDisplayManager.getDisplay(runningTaskInfo.displayId);
-        SurfaceControl build = new SurfaceControl.Builder().setName("Open by Default Dialog of Task=" + runningTaskInfo.taskId).setContainerLayer().setParent(surfaceControl).setCallsite("OpenByDefaultDialog#createDialog").build();
-        this.dialogSurfaceControl = build;
-        SurfaceControl.Transaction position = transaction.setPosition(build == null ? null : build, 0.0f, 0.0f);
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName("Open by Default Dialog of Task=" + runningTaskInfo.taskId).setContainerLayer().setParent(surfaceControl).setCallsite("OpenByDefaultDialog#createDialog").build();
+        this.dialogSurfaceControl = surfaceControlBuild;
+        SurfaceControl.Transaction position = transaction.setPosition(surfaceControlBuild == null ? null : surfaceControlBuild, 0.0f, 0.0f);
         SurfaceControl surfaceControl2 = this.dialogSurfaceControl;
         SurfaceControl.Transaction windowCrop = position.setWindowCrop(surfaceControl2 == null ? null : surfaceControl2, bounds.width(), bounds.height());
         SurfaceControl surfaceControl3 = this.dialogSurfaceControl;
@@ -249,7 +244,7 @@ public final class OpenByDefaultDialog {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 OpenByDefaultDialog openByDefaultDialog = this.f$0;
                 switch (i2) {
                     case 0:
@@ -297,7 +292,7 @@ public final class OpenByDefaultDialog {
         openByDefaultDialogView4.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.apptoweb.OpenByDefaultDialogView$sam$android_view_View_OnClickListener$0
             @Override // android.view.View.OnClickListener
             public final /* synthetic */ void onClick(View view) {
-                Function1.this.mo779invoke(view);
+                function1.mo781invoke(view);
             }
         });
         View view = openByDefaultDialogView4.dialogContainer;
@@ -317,7 +312,7 @@ public final class OpenByDefaultDialog {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 OpenByDefaultDialog openByDefaultDialog = this.f$0;
                 switch (i) {
                     case 0:
@@ -365,7 +360,7 @@ public final class OpenByDefaultDialog {
         ((Button) (view2 == null ? null : view2).requireViewById(R.id.open_by_default_settings_dialog_confirm_button)).setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.apptoweb.OpenByDefaultDialogView$sam$android_view_View_OnClickListener$0
             @Override // android.view.View.OnClickListener
             public final /* synthetic */ void onClick(View view3) {
-                Function1.this.mo779invoke(view3);
+                function12.mo781invoke(view3);
             }
         });
         DesktopModeWindowDecoration.this.closeHandleMenu();
@@ -384,11 +379,11 @@ public final class OpenByDefaultDialog {
             domainVerificationUserState = null;
         }
         if (domainVerificationUserState != null) {
-            boolean isLinkHandlingAllowed = domainVerificationUserState.isLinkHandlingAllowed();
+            boolean zIsLinkHandlingAllowed = domainVerificationUserState.isLinkHandlingAllowed();
             RadioButton radioButton = this.openInAppButton;
-            (radioButton == null ? null : radioButton).setChecked(isLinkHandlingAllowed);
+            (radioButton == null ? null : radioButton).setChecked(zIsLinkHandlingAllowed);
             RadioButton radioButton2 = this.openInBrowserButton;
-            (radioButton2 == null ? null : radioButton2).setChecked(!isLinkHandlingAllowed);
+            (radioButton2 == null ? null : radioButton2).setChecked(!zIsLinkHandlingAllowed);
         }
         this.loadAppInfoJob = BuildersKt.launch$default(this.bgScope, null, null, new AnonymousClass1(null), 3);
     }

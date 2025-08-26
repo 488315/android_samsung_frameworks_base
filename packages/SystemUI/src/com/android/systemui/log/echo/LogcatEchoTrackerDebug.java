@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogcatEchoTrackerDebug implements LogcatEchoTracker {
     public final CoroutineScope applicationScope;
@@ -71,7 +70,7 @@ public final class LogcatEchoTrackerDebug implements LogcatEchoTracker {
         this.commandRegistry.registerCommand("echo", new Function0() { // from class: com.android.systemui.log.echo.LogcatEchoTrackerDebug$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return new LogcatEchoTrackerCommand(LogcatEchoTrackerDebug.this);
+                return new LogcatEchoTrackerCommand(this.f$0);
             }
         });
     }

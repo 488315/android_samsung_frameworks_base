@@ -32,7 +32,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ExpandableView extends FrameLayout implements Dumpable, Roundable {
     public static final PhysicsProperty HEIGHT_PROPERTY = new PhysicsProperty(R.id.height_animator_tag, new FloatProperty("ActualHeight") { // from class: com.android.systemui.statusbar.notification.row.ExpandableView.1
@@ -68,7 +67,6 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
     public final ExpandableViewState mViewState;
     public boolean mWillBeGone;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableView$2, reason: invalid class name */
     public class AnonymousClass2 implements MagneticRowListener {
         public AnonymousClass2() {
@@ -96,7 +94,6 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ClipSide {
         TOP,
         BOTTOM
@@ -130,13 +127,13 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
     }
 
     public void dump(PrintWriter printWriter, final String[] strArr) {
-        final IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println(getClass().getSimpleName());
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.ExpandableView$$ExternalSyntheticLambda0
+        final IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.println(getClass().getSimpleName());
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.ExpandableView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ExpandableView expandableView = ExpandableView.this;
-                PrintWriter printWriter2 = asIndenting;
+                ExpandableView expandableView = this.f$0;
+                PrintWriter printWriter2 = indentingPrintWriterAsIndenting;
                 String[] strArr2 = strArr;
                 ExpandableViewState expandableViewState = expandableView.mViewState;
                 if (expandableViewState == null) {
@@ -209,15 +206,15 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
     }
 
     public final int getRelativeTopPadding(View view) {
-        int i = 0;
+        int top = 0;
         while (view.getParent() instanceof ViewGroup) {
-            i += view.getTop();
+            top += view.getTop();
             view = (View) view.getParent();
             if (view == this) {
                 break;
             }
         }
-        return i;
+        return top;
     }
 
     public RoundableState getRoundableState() {
@@ -298,6 +295,10 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
         return false;
     }
 
+    public boolean isUserGroupExpanded() {
+        return false;
+    }
+
     public boolean mustStayOnScreen() {
         return false;
     }
@@ -331,38 +332,38 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
         int size = View.MeasureSpec.getSize(i2);
         int paddingEnd = getPaddingEnd() + getPaddingStart();
         int mode = View.MeasureSpec.getMode(i2);
-        int i3 = Integer.MAX_VALUE;
+        int iMin = Integer.MAX_VALUE;
         if (mode != 0 && size != 0) {
-            i3 = Math.min(size, Integer.MAX_VALUE);
+            iMin = Math.min(size, Integer.MAX_VALUE);
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, Integer.MIN_VALUE);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(iMin, Integer.MIN_VALUE);
         int childCount = getChildCount();
-        int i4 = 0;
-        int i5 = 0;
-        for (int i6 = 0; i6 < childCount; i6++) {
-            View childAt = getChildAt(i6);
+        int i3 = 0;
+        int iMax = 0;
+        for (int i4 = 0; i4 < childCount; i4++) {
+            View childAt = getChildAt(i4);
             if (childAt.getVisibility() != 8) {
                 ViewGroup.LayoutParams layoutParams = childAt.getLayoutParams();
-                int i7 = layoutParams.height;
-                if (i7 != -1) {
-                    childAt.measure(FrameLayout.getChildMeasureSpec(i, paddingEnd, layoutParams.width), i7 >= 0 ? View.MeasureSpec.makeMeasureSpec(Math.min(i7, i3), 1073741824) : makeMeasureSpec);
-                    i5 = Math.max(i5, childAt.getMeasuredHeight());
+                int i5 = layoutParams.height;
+                if (i5 != -1) {
+                    childAt.measure(FrameLayout.getChildMeasureSpec(i, paddingEnd, layoutParams.width), i5 >= 0 ? View.MeasureSpec.makeMeasureSpec(Math.min(i5, iMin), 1073741824) : iMakeMeasureSpec);
+                    iMax = Math.max(iMax, childAt.getMeasuredHeight());
                 } else {
                     this.mMatchParentViews.add(childAt);
                 }
             }
         }
         if (mode != 1073741824) {
-            size = Math.min(i3, i5);
+            size = Math.min(iMin, iMax);
         }
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size, 1073741824);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size, 1073741824);
         ArrayList arrayList = this.mMatchParentViews;
         int size2 = arrayList.size();
-        while (i4 < size2) {
-            Object obj = arrayList.get(i4);
-            i4++;
+        while (i3 < size2) {
+            Object obj = arrayList.get(i3);
+            i3++;
             View view = (View) obj;
-            view.measure(FrameLayout.getChildMeasureSpec(i, paddingEnd, view.getLayoutParams().width), makeMeasureSpec2);
+            view.measure(FrameLayout.getChildMeasureSpec(i, paddingEnd, view.getLayoutParams().width), iMakeMeasureSpec2);
         }
         this.mMatchParentViews.clear();
         setMeasuredDimension(View.MeasureSpec.getSize(i), size);
@@ -494,9 +495,9 @@ public abstract class ExpandableView extends FrameLayout implements Dumpable, Ro
             return;
         }
         int i = this.mClipTopAmount;
-        int max = Math.max(Math.max(this.mActualHeight - this.mClipBottomAmount, i), this.mMinimumHeightForClipping);
+        int iMax = Math.max(Math.max(this.mActualHeight - this.mClipBottomAmount, i), this.mMinimumHeightForClipping);
         Rect rect = mClipRect;
-        rect.set(Integer.MIN_VALUE, i, Integer.MAX_VALUE, max);
+        rect.set(Integer.MIN_VALUE, i, Integer.MAX_VALUE, iMax);
         setClipBounds(rect);
     }
 

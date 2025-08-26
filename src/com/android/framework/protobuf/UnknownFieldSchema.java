@@ -70,13 +70,13 @@ abstract class UnknownFieldSchema<T, B> {
             }
             throw InvalidProtocolBufferException.invalidWireType();
         }
-        B newBuilder = newBuilder();
-        int makeTag = WireFormat.makeTag(tagFieldNumber, 4);
-        mergeFrom(newBuilder, reader);
-        if (makeTag != reader.getTag()) {
+        B bNewBuilder = newBuilder();
+        int iMakeTag = WireFormat.makeTag(tagFieldNumber, 4);
+        mergeFrom(bNewBuilder, reader);
+        if (iMakeTag != reader.getTag()) {
             throw InvalidProtocolBufferException.invalidEndTag();
         }
-        addGroup(b, tagFieldNumber, toImmutable(newBuilder));
+        addGroup(b, tagFieldNumber, toImmutable(bNewBuilder));
         return true;
     }
 

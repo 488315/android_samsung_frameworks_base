@@ -26,7 +26,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExpandableControllerImpl {
     public ExpandableControllerImpl$activityController$1 activityControllerForDisposal;
@@ -72,7 +71,7 @@ public final class ExpandableControllerImpl {
         this.expandable = new Expandable() { // from class: com.android.compose.animation.ExpandableControllerImpl$expandable$1
             @Override // com.android.systemui.animation.Expandable
             public final ActivityTransitionAnimator.Controller activityTransitionController(Integer num, ActivityTransitionAnimator.TransitionCookie transitionCookie, ComponentName componentName, Integer num2, boolean z) {
-                ExpandableControllerImpl expandableControllerImpl = ExpandableControllerImpl.this;
+                ExpandableControllerImpl expandableControllerImpl = this.this$0;
                 if (!((Boolean) expandableControllerImpl.isComposed.invoke()).booleanValue()) {
                     return null;
                 }
@@ -86,7 +85,7 @@ public final class ExpandableControllerImpl {
 
             @Override // com.android.systemui.animation.Expandable
             public final DialogTransitionAnimator.Controller dialogTransitionController(DialogCuj dialogCuj) {
-                ExpandableControllerImpl expandableControllerImpl = ExpandableControllerImpl.this;
+                ExpandableControllerImpl expandableControllerImpl = this.this$0;
                 if (!((Boolean) expandableControllerImpl.isComposed.invoke()).booleanValue()) {
                     return null;
                 }
@@ -99,14 +98,14 @@ public final class ExpandableControllerImpl {
 
                     {
                         this.$cuj = dialogCuj;
-                        this.viewRoot = ExpandableControllerImpl.this.composeViewRoot.getViewRootImpl();
-                        this.sourceIdentity = ExpandableControllerImpl.this;
+                        this.viewRoot = this.this$0.composeViewRoot.getViewRootImpl();
+                        this.sourceIdentity = this.this$0;
                         this.cuj = dialogCuj;
                     }
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final TransitionAnimator.Controller createExitController() {
-                        final ExpandableControllerImpl expandableControllerImpl2 = ExpandableControllerImpl.this;
+                        final ExpandableControllerImpl expandableControllerImpl2 = this.this$0;
                         expandableControllerImpl2.getClass();
                         final ExpandableControllerImpl$transitionController$1 expandableControllerImpl$transitionController$1 = new ExpandableControllerImpl$transitionController$1(expandableControllerImpl2);
                         return new TransitionAnimator.Controller(expandableControllerImpl2) { // from class: com.android.compose.animation.ExpandableControllerImpl$dialogController$1$createExitController$1
@@ -115,7 +114,7 @@ public final class ExpandableControllerImpl {
 
                             {
                                 this.this$0 = expandableControllerImpl2;
-                                this.$$delegate_0 = TransitionAnimator.Controller.this;
+                                this.$$delegate_0 = this.$delegate;
                             }
 
                             @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -145,7 +144,7 @@ public final class ExpandableControllerImpl {
 
                             @Override // com.android.systemui.animation.TransitionAnimator.Controller
                             public final void onTransitionAnimationEnd(boolean z) {
-                                TransitionAnimator.Controller.this.onTransitionAnimationEnd(z);
+                                this.$delegate.onTransitionAnimationEnd(z);
                                 ((SnapshotMutableStateImpl) this.this$0.isDialogShowing$delegate).setValue(Boolean.FALSE);
                             }
 
@@ -168,7 +167,7 @@ public final class ExpandableControllerImpl {
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final TransitionAnimator.Controller createTransitionController() {
-                        final ExpandableControllerImpl expandableControllerImpl2 = ExpandableControllerImpl.this;
+                        final ExpandableControllerImpl expandableControllerImpl2 = this.this$0;
                         expandableControllerImpl2.getClass();
                         final ExpandableControllerImpl$transitionController$1 expandableControllerImpl$transitionController$1 = new ExpandableControllerImpl$transitionController$1(expandableControllerImpl2);
                         return new TransitionAnimator.Controller(expandableControllerImpl2) { // from class: com.android.compose.animation.ExpandableControllerImpl$dialogController$1$createTransitionController$1
@@ -177,7 +176,7 @@ public final class ExpandableControllerImpl {
 
                             {
                                 this.this$0 = expandableControllerImpl2;
-                                this.$$delegate_0 = TransitionAnimator.Controller.this;
+                                this.$$delegate_0 = this.$delegate;
                             }
 
                             @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -207,7 +206,7 @@ public final class ExpandableControllerImpl {
 
                             @Override // com.android.systemui.animation.TransitionAnimator.Controller
                             public final void onTransitionAnimationEnd(boolean z) {
-                                TransitionAnimator.Controller.this.onTransitionAnimationEnd(z);
+                                this.$delegate.onTransitionAnimationEnd(z);
                                 ((SnapshotMutableStateImpl) this.this$0.isDialogShowing$delegate).setValue(Boolean.TRUE);
                             }
 
@@ -249,24 +248,24 @@ public final class ExpandableControllerImpl {
                         if (dialogCuj2 == null) {
                             return null;
                         }
-                        return InteractionJankMonitor.Configuration.Builder.withView(dialogCuj2.cujType, ExpandableControllerImpl.this.composeViewRoot);
+                        return InteractionJankMonitor.Configuration.Builder.withView(dialogCuj2.cujType, this.this$0.composeViewRoot);
                     }
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final void onExitAnimationCancelled() {
-                        ((SnapshotMutableStateImpl) ExpandableControllerImpl.this.isDialogShowing$delegate).setValue(Boolean.FALSE);
+                        ((SnapshotMutableStateImpl) this.this$0.isDialogShowing$delegate).setValue(Boolean.FALSE);
                     }
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final boolean shouldAnimateExit() {
-                        ExpandableControllerImpl expandableControllerImpl2 = ExpandableControllerImpl.this;
+                        ExpandableControllerImpl expandableControllerImpl2 = this.this$0;
                         return ((Boolean) expandableControllerImpl2.isComposed.invoke()).booleanValue() && expandableControllerImpl2.composeViewRoot.isAttachedToWindow() && expandableControllerImpl2.composeViewRoot.isShown();
                     }
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final void startDrawingInOverlayOf(ViewGroup viewGroup) {
                         ViewGroupOverlay overlay = viewGroup.getOverlay();
-                        ExpandableControllerImpl expandableControllerImpl2 = ExpandableControllerImpl.this;
+                        ExpandableControllerImpl expandableControllerImpl2 = this.this$0;
                         if (Intrinsics.areEqual(overlay, (ViewGroupOverlay) ((SnapshotMutableStateImpl) expandableControllerImpl2.overlay$delegate).getValue())) {
                             return;
                         }
@@ -275,7 +274,7 @@ public final class ExpandableControllerImpl {
 
                     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                     public final void stopDrawingInOverlay() {
-                        ExpandableControllerImpl expandableControllerImpl2 = ExpandableControllerImpl.this;
+                        ExpandableControllerImpl expandableControllerImpl2 = this.this$0;
                         if (((ViewGroupOverlay) ((SnapshotMutableStateImpl) expandableControllerImpl2.overlay$delegate).getValue()) != null) {
                             ((SnapshotMutableStateImpl) expandableControllerImpl2.overlay$delegate).setValue(null);
                         }
@@ -286,7 +285,7 @@ public final class ExpandableControllerImpl {
         this.isAnimating$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.compose.animation.ExpandableControllerImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                ExpandableControllerImpl expandableControllerImpl = ExpandableControllerImpl.this;
+                ExpandableControllerImpl expandableControllerImpl = this.f$0;
                 return Boolean.valueOf((((TransitionAnimator.State) ((SnapshotMutableStateImpl) expandableControllerImpl.animatorState$delegate).getValue()) == null || ((ViewGroupOverlay) ((SnapshotMutableStateImpl) expandableControllerImpl.overlay$delegate).getValue()) == null) ? false : true);
             }
         });

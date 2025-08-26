@@ -2,6 +2,7 @@ package com.android.systemui.audio.soundcraft.view.volume;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftVolumeIcon extends FrameLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +40,6 @@ public final class SoundCraftVolumeIcon extends FrameLayout implements SoundCraf
     public final Lazy viewModel$delegate;
     public final SoundCraftVolumeIconMotion volumeIconMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,16 +80,16 @@ public final class SoundCraftVolumeIcon extends FrameLayout implements SoundCraf
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void updateLayout$2(int i) {
+    public final void updateLayout$2(int i) throws Resources.NotFoundException {
         int i2;
         BluetoothDevice activeDevice;
         if (this.shouldUpdateIcon) {
             if (getChildCount() > 0) {
                 removeAllViews();
             }
-            View inflate = LayoutInflater.from(this.context).inflate(getViewModel().getSupportAnimatedIcon() ? R.layout.soundcraft_volume_animated_media_icon : R.layout.soundcraft_volume_default_icon, (ViewGroup) (getViewModel().getIconType() == 9 ? this : null), false);
-            this.icon = inflate;
-            addView(inflate);
+            View viewInflate = LayoutInflater.from(this.context).inflate(getViewModel().getSupportAnimatedIcon() ? R.layout.soundcraft_volume_animated_media_icon : R.layout.soundcraft_volume_default_icon, (ViewGroup) (getViewModel().getIconType() == 9 ? this : null), false);
+            this.icon = viewInflate;
+            addView(viewInflate);
         }
         if (this.shouldUpdateIcon || this.isAnimateType) {
             if (getViewModel().getSupportAnimatedIcon()) {

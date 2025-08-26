@@ -22,21 +22,21 @@ public final class DateIntervalFormat {
     }
 
     public static String formatDateRange(ULocale uLocale, android.icu.util.TimeZone timeZone, long j, long j2, int i) {
-        String stringBuffer;
-        Calendar createIcuCalendar = DateUtilsBridge.createIcuCalendar(timeZone, uLocale, j);
-        Calendar createIcuCalendar2 = j == j2 ? createIcuCalendar : DateUtilsBridge.createIcuCalendar(timeZone, uLocale, j2);
-        if (isExactlyMidnight(createIcuCalendar2)) {
+        String string;
+        Calendar calendarCreateIcuCalendar = DateUtilsBridge.createIcuCalendar(timeZone, uLocale, j);
+        Calendar calendarCreateIcuCalendar2 = j == j2 ? calendarCreateIcuCalendar : DateUtilsBridge.createIcuCalendar(timeZone, uLocale, j2);
+        if (isExactlyMidnight(calendarCreateIcuCalendar2)) {
             boolean z = (i & 1) == 1;
-            boolean z2 = DateUtilsBridge.dayDistance(createIcuCalendar, createIcuCalendar2) == 1;
-            if ((!z && j != j2) || (z2 && !DateUtilsBridge.isDisplayMidnightUsingSkeleton(createIcuCalendar))) {
-                createIcuCalendar2.add(5, -1);
+            boolean z2 = DateUtilsBridge.dayDistance(calendarCreateIcuCalendar, calendarCreateIcuCalendar2) == 1;
+            if ((!z && j != j2) || (z2 && !DateUtilsBridge.isDisplayMidnightUsingSkeleton(calendarCreateIcuCalendar))) {
+                calendarCreateIcuCalendar2.add(5, -1);
             }
         }
-        String skeleton = DateUtilsBridge.toSkeleton(createIcuCalendar, createIcuCalendar2, i);
+        String skeleton = DateUtilsBridge.toSkeleton(calendarCreateIcuCalendar, calendarCreateIcuCalendar2, i);
         synchronized (CACHED_FORMATTERS) {
-            stringBuffer = getFormatter(skeleton, uLocale, timeZone).format(createIcuCalendar, createIcuCalendar2, new StringBuffer(), new FieldPosition(0)).toString();
+            string = getFormatter(skeleton, uLocale, timeZone).format(calendarCreateIcuCalendar, calendarCreateIcuCalendar2, new StringBuffer(), new FieldPosition(0)).toString();
         }
-        return stringBuffer;
+        return string;
     }
 
     private static android.icu.text.DateIntervalFormat getFormatter(String str, ULocale uLocale, android.icu.util.TimeZone timeZone) {

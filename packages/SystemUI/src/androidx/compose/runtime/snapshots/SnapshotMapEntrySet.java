@@ -14,7 +14,6 @@ import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SnapshotMapEntrySet<K, V> extends SnapshotMapSet<K, V, Map.Entry<K, V>> {
     public SnapshotMapEntrySet(SnapshotStateMap<K, V> snapshotStateMap) {
@@ -87,14 +86,14 @@ final class SnapshotMapEntrySet<K, V> extends SnapshotMapSet<K, V, Map.Entry<K, 
     public final boolean retainAll(Collection collection) {
         PersistentMap persistentMap;
         int i;
-        Snapshot currentSnapshot;
-        boolean access$attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAccess$attemptUpdate;
         Collection<Map.Entry> collection2 = collection;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(collection2, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(collection2, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
         for (Map.Entry entry : collection2) {
             Pair pair = new Pair(entry.getKey(), entry.getValue());
             linkedHashMap.put(pair.getFirst(), pair.getSecond());
@@ -119,18 +118,18 @@ final class SnapshotMapEntrySet<K, V> extends SnapshotMapSet<K, V, Map.Entry<K, 
                 }
             }
             Unit unit2 = Unit.INSTANCE;
-            PersistentMap build = builder.build();
-            if (Intrinsics.areEqual(build, persistentMap)) {
+            PersistentMap persistentMapBuild = builder.build();
+            if (Intrinsics.areEqual(persistentMapBuild, persistentMap)) {
                 break;
             }
             SnapshotStateMap.StateMapStateRecord stateMapStateRecord2 = snapshotStateMap.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                access$attemptUpdate = SnapshotStateMap.access$attemptUpdate(snapshotStateMap, (SnapshotStateMap.StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, snapshotStateMap, currentSnapshot), i, build);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAccess$attemptUpdate = SnapshotStateMap.access$attemptUpdate(snapshotStateMap, (SnapshotStateMap.StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, snapshotStateMap, snapshotCurrentSnapshot), i, persistentMapBuild);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, snapshotStateMap);
-        } while (!access$attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, snapshotStateMap);
+        } while (!zAccess$attemptUpdate);
         return z;
     }
 }

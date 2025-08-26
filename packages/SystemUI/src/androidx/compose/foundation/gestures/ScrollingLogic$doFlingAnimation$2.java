@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$LongRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollingLogic$doFlingAnimation$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $available;
@@ -60,17 +59,17 @@ final class ScrollingLogic$doFlingAnimation$2 extends SuspendLambda implements F
                 @Override // androidx.compose.foundation.gestures.ScrollScope
                 public final float scrollBy(float f) {
                     boolean z = ComposeFoundationFlags.NewNestedFlingPropagationEnabled;
-                    ScrollingLogic scrollingLogic4 = ScrollingLogic.this;
+                    ScrollingLogic scrollingLogic4 = scrollingLogic3;
                     if (z && Math.abs(f) != 0.0f && ((f > 0.0f && !scrollingLogic4.scrollableState.getCanScrollForward()) || ((f < 0.0f && !scrollingLogic4.scrollableState.getCanScrollBackward()) || !((Boolean) scrollingLogic4.isScrollableNodeAttached.invoke()).booleanValue()))) {
                         throw new FlingCancellationException();
                     }
-                    long m83reverseIfNeededMKHz9U = scrollingLogic4.m83reverseIfNeededMKHz9U(scrollingLogic4.m85toOffsettuRUvjQ(f));
+                    long jM84reverseIfNeededMKHz9U = scrollingLogic4.m84reverseIfNeededMKHz9U(scrollingLogic4.m86toOffsettuRUvjQ(f));
                     NestedScrollSource.Companion.getClass();
                     int i2 = NestedScrollSource.SideEffect;
                     ScrollingLogic scrollingLogic5 = ((ScrollingLogic$nestedScrollScope$1) nestedScrollScope).this$0;
                     scrollingLogic5.latestScrollSource = i2;
                     OverscrollEffect overscrollEffect = scrollingLogic5.overscrollEffect;
-                    return scrollingLogic4.reverseIfNeeded(scrollingLogic4.m84toFloatk4lQ0M((overscrollEffect == null || !(scrollingLogic5.scrollableState.getCanScrollForward() || scrollingLogic5.scrollableState.getCanScrollBackward())) ? ScrollingLogic.m80access$performScroll3eAAhYA(scrollingLogic5, scrollingLogic5.outerStateScope, m83reverseIfNeededMKHz9U, i2) : overscrollEffect.mo20applyToScrollRhakbz0(scrollingLogic5.latestScrollSource, m83reverseIfNeededMKHz9U, scrollingLogic5.performScrollForOverscroll)));
+                    return scrollingLogic4.reverseIfNeeded(scrollingLogic4.m85toFloatk4lQ0M((overscrollEffect == null || !(scrollingLogic5.scrollableState.getCanScrollForward() || scrollingLogic5.scrollableState.getCanScrollBackward())) ? ScrollingLogic.m81access$performScroll3eAAhYA(scrollingLogic5, scrollingLogic5.outerStateScope, jM84reverseIfNeededMKHz9U, i2) : overscrollEffect.mo20applyToScrollRhakbz0(scrollingLogic5.latestScrollSource, jM84reverseIfNeededMKHz9U, scrollingLogic5.performScrollForOverscroll)));
                 }
             };
             scrollingLogic = this.this$0;
@@ -78,13 +77,13 @@ final class ScrollingLogic$doFlingAnimation$2 extends SuspendLambda implements F
             long j2 = this.$available;
             FlingBehavior flingBehavior = scrollingLogic.flingBehavior;
             long j3 = ref$LongRef.element;
-            float reverseIfNeeded = scrollingLogic.reverseIfNeeded(scrollingLogic.orientation == Orientation.Horizontal ? Velocity.m878getXimpl(j2) : Velocity.m879getYimpl(j2));
+            float fReverseIfNeeded = scrollingLogic.reverseIfNeeded(scrollingLogic.orientation == Orientation.Horizontal ? Velocity.m880getXimpl(j2) : Velocity.m881getYimpl(j2));
             this.L$0 = scrollingLogic;
             this.L$1 = scrollingLogic;
             this.L$2 = ref$LongRef;
             this.J$0 = j3;
             this.label = 1;
-            obj = flingBehavior.performFling(scrollScope, reverseIfNeeded, this);
+            obj = flingBehavior.performFling(scrollScope, fReverseIfNeeded, this);
             if (obj == coroutineSingletons) {
                 return coroutineSingletons;
             }
@@ -100,8 +99,8 @@ final class ScrollingLogic$doFlingAnimation$2 extends SuspendLambda implements F
             scrollingLogic2 = (ScrollingLogic) this.L$0;
             ResultKt.throwOnFailure(obj);
         }
-        float reverseIfNeeded2 = scrollingLogic2.reverseIfNeeded(((Number) obj).floatValue());
-        ref$LongRef.element = scrollingLogic.orientation == Orientation.Horizontal ? Velocity.m877copyOhffZ5M$default(reverseIfNeeded2, 0.0f, j, 2) : Velocity.m877copyOhffZ5M$default(0.0f, reverseIfNeeded2, j, 1);
+        float fReverseIfNeeded2 = scrollingLogic2.reverseIfNeeded(((Number) obj).floatValue());
+        ref$LongRef.element = scrollingLogic.orientation == Orientation.Horizontal ? Velocity.m879copyOhffZ5M$default(fReverseIfNeeded2, 0.0f, j, 2) : Velocity.m879copyOhffZ5M$default(0.0f, fReverseIfNeeded2, j, 1);
         return Unit.INSTANCE;
     }
 }

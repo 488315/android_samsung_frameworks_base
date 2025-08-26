@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DoubleShadowTextView extends TextView {
     private DoubleShadowTextHelper.ShadowInfo mAmbientShadowInfo;
@@ -39,7 +38,7 @@ public class DoubleShadowTextView extends TextView {
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.shadow.DoubleShadowTextView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return DoubleShadowTextView.$r8$lambda$yC14j5wcj7kwjbyrqQmbREx4iTg(DoubleShadowTextView.this, canvas);
+                return DoubleShadowTextView.$r8$lambda$yC14j5wcj7kwjbyrqQmbREx4iTg(this.f$0, canvas);
             }
         };
         doubleShadowTextHelper.getClass();

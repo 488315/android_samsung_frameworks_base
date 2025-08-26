@@ -1,13 +1,13 @@
 package com.android.wm.shell.sysui;
 
 import android.graphics.Rect;
+import android.hardware.HardwareBufferInfoRegistry;
 import android.view.SurfaceControlRegistry;
 import com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$$ExternalSyntheticOutline0;
 import com.android.wm.shell.sysui.ShellController;
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ShellController$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -31,7 +31,7 @@ public final /* synthetic */ class ShellController$$ExternalSyntheticLambda2 imp
                 shellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.sysui.ShellController$$ExternalSyntheticLambda4
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj2, Object obj3) {
-                        ShellController shellController2 = ShellController.this;
+                        ShellController shellController2 = shellController;
                         PrintWriter printWriter = (PrintWriter) obj2;
                         String str = (String) obj3;
                         shellController2.getClass();
@@ -62,6 +62,7 @@ public final /* synthetic */ class ShellController$$ExternalSyntheticLambda2 imp
             case 3:
                 ShellController shellController2 = (ShellController) obj;
                 SurfaceControlRegistry.createProcessInstance(shellController2.mContext);
+                HardwareBufferInfoRegistry.getInstance().enable(shellController2.mContext);
                 shellController2.mShellInit.init();
                 return;
             default:

@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialCheckBox extends AppCompatCheckBox {
     public boolean broadcasting;
@@ -66,7 +65,6 @@ public class MaterialCheckBox extends AppCompatCheckBox {
     public static final int[][] CHECKBOX_STATES = {new int[]{android.R.attr.state_enabled, R.attr.state_error}, new int[]{android.R.attr.state_enabled, android.R.attr.state_checked}, new int[]{android.R.attr.state_enabled, -16842912}, new int[]{-16842910, android.R.attr.state_checked}, new int[]{-16842910, -16842912}};
     public static final int FRAMEWORK_BUTTON_DRAWABLE_RES_ID = Resources.getSystem().getIdentifier("btn_check_material_anim", "drawable", "android");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: com.google.android.material.checkbox.MaterialCheckBox.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -142,15 +140,15 @@ public class MaterialCheckBox extends AppCompatCheckBox {
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 2);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 2);
         if (this.checkedState == 2) {
-            CheckBox.mergeDrawableStates(onCreateDrawableState, INDETERMINATE_STATE_SET);
+            CheckBox.mergeDrawableStates(iArrOnCreateDrawableState, INDETERMINATE_STATE_SET);
         }
         if (this.errorShown) {
-            CheckBox.mergeDrawableStates(onCreateDrawableState, ERROR_STATE_SET);
+            CheckBox.mergeDrawableStates(iArrOnCreateDrawableState, ERROR_STATE_SET);
         }
-        this.currentStateChecked = DrawableUtils.getCheckedState(onCreateDrawableState);
-        return onCreateDrawableState;
+        this.currentStateChecked = DrawableUtils.getCheckedState(iArrOnCreateDrawableState);
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
@@ -161,10 +159,10 @@ public class MaterialCheckBox extends AppCompatCheckBox {
             return;
         }
         int width = ((getWidth() - buttonDrawable.getIntrinsicWidth()) / 2) * (ViewUtils.isLayoutRtl(this) ? -1 : 1);
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.translate(width, 0.0f);
         super.onDraw(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
         if (getBackground() != null) {
             Rect bounds = buttonDrawable.getBounds();
             getBackground().setHotspotBounds(bounds.left + width, bounds.top, bounds.right + width, bounds.bottom);
@@ -379,11 +377,11 @@ public class MaterialCheckBox extends AppCompatCheckBox {
         int[] iArr = R$styleable.MaterialCheckBox;
         ThemeEnforcement.checkCompatibleTheme(context2, attributeSet, i, R.style.Widget_MaterialComponents_CompoundButton_CheckBox);
         ThemeEnforcement.checkTextAppearance(context2, attributeSet, iArr, i, R.style.Widget_MaterialComponents_CompoundButton_CheckBox, new int[0]);
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context2, attributeSet, iArr, i, R.style.Widget_MaterialComponents_CompoundButton_CheckBox);
-        this.buttonIconDrawable = obtainStyledAttributes.getDrawable(2);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context2, attributeSet, iArr, i, R.style.Widget_MaterialComponents_CompoundButton_CheckBox);
+        this.buttonIconDrawable = tintTypedArrayObtainStyledAttributes.getDrawable(2);
         if (this.buttonDrawable != null && MaterialAttributes.resolveBoolean(context2, R.attr.isMaterial3Theme, false)) {
-            int resourceId = obtainStyledAttributes.mWrapped.getResourceId(0, 0);
-            int resourceId2 = obtainStyledAttributes.mWrapped.getResourceId(1, 0);
+            int resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(0, 0);
+            int resourceId2 = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(1, 0);
             if (resourceId == FRAMEWORK_BUTTON_DRAWABLE_RES_ID && resourceId2 == 0) {
                 super.setButtonDrawable((Drawable) null);
                 this.buttonDrawable = AppCompatResources.getDrawable(R.drawable.mtrl_checkbox_button, context2);
@@ -393,16 +391,16 @@ public class MaterialCheckBox extends AppCompatCheckBox {
                 }
             }
         }
-        this.buttonIconTintList = MaterialResources.getColorStateList(context2, obtainStyledAttributes, 3);
-        this.buttonIconTintMode = ViewUtils.parseTintMode(obtainStyledAttributes.mWrapped.getInt(4, -1), PorterDuff.Mode.SRC_IN);
-        this.useMaterialThemeColors = obtainStyledAttributes.mWrapped.getBoolean(10, false);
-        this.centerIfNoTextEnabled = obtainStyledAttributes.mWrapped.getBoolean(6, true);
-        this.errorShown = obtainStyledAttributes.mWrapped.getBoolean(9, false);
-        this.errorAccessibilityLabel = obtainStyledAttributes.mWrapped.getText(8);
-        if (obtainStyledAttributes.mWrapped.hasValue(7)) {
-            setCheckedState(obtainStyledAttributes.mWrapped.getInt(7, 0));
+        this.buttonIconTintList = MaterialResources.getColorStateList(context2, tintTypedArrayObtainStyledAttributes, 3);
+        this.buttonIconTintMode = ViewUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(4, -1), PorterDuff.Mode.SRC_IN);
+        this.useMaterialThemeColors = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(10, false);
+        this.centerIfNoTextEnabled = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(6, true);
+        this.errorShown = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(9, false);
+        this.errorAccessibilityLabel = tintTypedArrayObtainStyledAttributes.mWrapped.getText(8);
+        if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(7)) {
+            setCheckedState(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(7, 0));
         }
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         refreshButtonDrawable();
     }
 }

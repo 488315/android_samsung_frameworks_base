@@ -16,7 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VersionedParcel {
     public final ArrayMap mParcelizerCache;
@@ -31,7 +30,7 @@ public abstract class VersionedParcel {
 
     public abstract VersionedParcelParcel createSubParcel();
 
-    public final Class findParcelClass(Class cls) {
+    public final Class findParcelClass(Class cls) throws ClassNotFoundException {
         String name = cls.getName();
         ArrayMap arrayMap = this.mParcelizerCache;
         Class cls2 = (Class) arrayMap.get(name);
@@ -43,7 +42,7 @@ public abstract class VersionedParcel {
         return cls3;
     }
 
-    public final Method getReadMethod(String str) {
+    public final Method getReadMethod(String str) throws NoSuchMethodException, SecurityException {
         ArrayMap arrayMap = this.mReadCache;
         Method method = (Method) arrayMap.get(str);
         if (method != null) {
@@ -56,16 +55,16 @@ public abstract class VersionedParcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final Method getWriteMethod(Class cls) {
+    public final Method getWriteMethod(Class cls) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         String name = cls.getName();
         ArrayMap arrayMap = this.mWriteCache;
         Method method = (Method) arrayMap.get(name);
         if (method != null) {
             return method;
         }
-        Class findParcelClass = findParcelClass(cls);
+        Class clsFindParcelClass = findParcelClass(cls);
         System.currentTimeMillis();
-        Method declaredMethod = findParcelClass.getDeclaredMethod("write", cls, VersionedParcel.class);
+        Method declaredMethod = clsFindParcelClass.getDeclaredMethod("write", cls, VersionedParcel.class);
         arrayMap.put(cls.getName(), declaredMethod);
         return declaredMethod;
     }
@@ -75,54 +74,54 @@ public abstract class VersionedParcel {
         if (!readField(i)) {
             return objArr;
         }
-        int readInt = readInt();
-        if (readInt >= 0) {
-            ArrayList arrayList = new ArrayList(readInt);
-            if (readInt != 0) {
-                int readInt2 = readInt();
-                if (readInt >= 0) {
-                    if (readInt2 == 1) {
-                        while (readInt > 0) {
+        int i2 = readInt();
+        if (i2 >= 0) {
+            ArrayList arrayList = new ArrayList(i2);
+            if (i2 != 0) {
+                int i3 = readInt();
+                if (i2 >= 0) {
+                    if (i3 == 1) {
+                        while (i2 > 0) {
                             arrayList.add(readVersionedParcelable());
-                            readInt--;
+                            i2--;
                         }
-                    } else if (readInt2 == 2) {
-                        while (readInt > 0) {
+                    } else if (i3 == 2) {
+                        while (i2 > 0) {
                             arrayList.add(readParcelable());
-                            readInt--;
+                            i2--;
                         }
-                    } else if (readInt2 == 3) {
-                        while (readInt > 0) {
-                            String readString = readString();
-                            if (readString == null) {
+                    } else if (i3 == 3) {
+                        while (i2 > 0) {
+                            String string = readString();
+                            if (string == null) {
                                 serializable = null;
                             } else {
                                 try {
                                     serializable = (Serializable) new ObjectInputStream(this, new ByteArrayInputStream(readByteArray())) { // from class: androidx.versionedparcelable.VersionedParcel.1
                                         @Override // java.io.ObjectInputStream
-                                        public final Class resolveClass(ObjectStreamClass objectStreamClass) {
+                                        public final Class resolveClass(ObjectStreamClass objectStreamClass) throws ClassNotFoundException {
                                             Class<?> cls = Class.forName(objectStreamClass.getName(), false, getClass().getClassLoader());
                                             return cls != null ? cls : super.resolveClass(objectStreamClass);
                                         }
                                     }.readObject();
                                 } catch (IOException e) {
-                                    throw new RuntimeException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("VersionedParcelable encountered IOException reading a Serializable object (name = ", readString, ")"), e);
+                                    throw new RuntimeException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("VersionedParcelable encountered IOException reading a Serializable object (name = ", string, ")"), e);
                                 } catch (ClassNotFoundException e2) {
-                                    throw new RuntimeException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("VersionedParcelable encountered ClassNotFoundException reading a Serializable object (name = ", readString, ")"), e2);
+                                    throw new RuntimeException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("VersionedParcelable encountered ClassNotFoundException reading a Serializable object (name = ", string, ")"), e2);
                                 }
                             }
                             arrayList.add(serializable);
-                            readInt--;
+                            i2--;
                         }
-                    } else if (readInt2 == 4) {
-                        while (readInt > 0) {
+                    } else if (i3 == 4) {
+                        while (i2 > 0) {
                             arrayList.add(readString());
-                            readInt--;
+                            i2--;
                         }
-                    } else if (readInt2 == 5) {
-                        while (readInt > 0) {
+                    } else if (i3 == 5) {
+                        while (i2 > 0) {
                             arrayList.add(readStrongBinder());
-                            readInt--;
+                            i2--;
                         }
                     }
                 }
@@ -165,12 +164,12 @@ public abstract class VersionedParcel {
     public abstract IBinder readStrongBinder();
 
     public final VersionedParcelable readVersionedParcelable() {
-        String readString = readString();
-        if (readString == null) {
+        String string = readString();
+        if (string == null) {
             return null;
         }
         try {
-            return (VersionedParcelable) getReadMethod(readString).invoke(null, createSubParcel());
+            return (VersionedParcelable) getReadMethod(string).invoke(null, createSubParcel());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("VersionedParcel encountered ClassNotFoundException", e);
         } catch (IllegalAccessException e2) {
@@ -187,7 +186,7 @@ public abstract class VersionedParcel {
 
     public abstract void setOutputField(int i);
 
-    public final void writeArray(int i, Object[] objArr) {
+    public final void writeArray(int i, Object[] objArr) throws IllegalAccessException, IOException, IllegalArgumentException, InvocationTargetException {
         int i2;
         setOutputField(i);
         if (objArr == null) {
@@ -305,17 +304,17 @@ public abstract class VersionedParcel {
 
     public abstract void writeStrongBinder(IBinder iBinder);
 
-    public final void writeVersionedParcelable(VersionedParcelable versionedParcelable) {
+    public final void writeVersionedParcelable(VersionedParcelable versionedParcelable) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (versionedParcelable == null) {
             writeString(null);
             return;
         }
         try {
             writeString(findParcelClass(versionedParcelable.getClass()).getName());
-            VersionedParcelParcel createSubParcel = createSubParcel();
+            VersionedParcelParcel versionedParcelParcelCreateSubParcel = createSubParcel();
             try {
-                getWriteMethod(versionedParcelable.getClass()).invoke(null, versionedParcelable, createSubParcel);
-                createSubParcel.closeField();
+                getWriteMethod(versionedParcelable.getClass()).invoke(null, versionedParcelable, versionedParcelParcelCreateSubParcel);
+                versionedParcelParcelCreateSubParcel.closeField();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException("VersionedParcel encountered ClassNotFoundException", e);
             } catch (IllegalAccessException e2) {

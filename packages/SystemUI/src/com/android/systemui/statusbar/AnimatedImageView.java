@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.RemoteViews;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @RemoteViews.RemoteView
 /* loaded from: classes3.dex */
 public class AnimatedImageView extends ImageView {
@@ -100,11 +99,11 @@ public class AnimatedImageView extends ImageView {
     public AnimatedImageView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mAllowAnimation = true;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.AnimatedImageView, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.AnimatedImageView, 0, 0);
         try {
-            this.mHasOverlappingRendering = obtainStyledAttributes.getBoolean(0, true);
+            this.mHasOverlappingRendering = typedArrayObtainStyledAttributes.getBoolean(0, true);
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 }

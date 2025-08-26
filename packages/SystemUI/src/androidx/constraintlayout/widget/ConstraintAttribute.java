@@ -16,7 +16,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ConstraintAttribute {
     private static final boolean DEBUG = false;
@@ -30,7 +29,6 @@ public class ConstraintAttribute {
     private String mStringValue;
     private AttributeType mType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.widget.ConstraintAttribute$1, reason: invalid class name */
     /* synthetic */ class AnonymousClass1 {
         static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$widget$ConstraintAttribute$AttributeType;
@@ -73,7 +71,6 @@ public class ConstraintAttribute {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum AttributeType {
         INT_TYPE,
         FLOAT_TYPE,
@@ -96,187 +93,187 @@ public class ConstraintAttribute {
         return (i2 & (i2 >> 31)) + 255;
     }
 
-    public static HashMap<String, ConstraintAttribute> extractAttributes(HashMap<String, ConstraintAttribute> hashMap, View view) {
-        HashMap<String, ConstraintAttribute> hashMap2 = new HashMap<>();
+    public static HashMap<String, ConstraintAttribute> extractAttributes(HashMap<String, ConstraintAttribute> map, View view) {
+        HashMap<String, ConstraintAttribute> map2 = new HashMap<>();
         Class<?> cls = view.getClass();
-        for (String str : hashMap.keySet()) {
-            ConstraintAttribute constraintAttribute = hashMap.get(str);
+        for (String str : map.keySet()) {
+            ConstraintAttribute constraintAttribute = map.get(str);
             try {
                 if (str.equals("BackgroundColor")) {
-                    hashMap2.put(str, new ConstraintAttribute(constraintAttribute, Integer.valueOf(((ColorDrawable) view.getBackground()).getColor())));
+                    map2.put(str, new ConstraintAttribute(constraintAttribute, Integer.valueOf(((ColorDrawable) view.getBackground()).getColor())));
                 } else {
                     Class[] clsArr = new Class[0];
-                    hashMap2.put(str, new ConstraintAttribute(constraintAttribute, cls.getMethod("getMap" + str, null).invoke(view, null)));
+                    map2.put(str, new ConstraintAttribute(constraintAttribute, cls.getMethod("getMap" + str, null).invoke(view, null)));
                 }
             } catch (IllegalAccessException e) {
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-                m.append(cls.getName());
-                Log.e(TAG, m.toString(), e);
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+                sbM.append(cls.getName());
+                Log.e(TAG, sbM.toString(), e);
             } catch (NoSuchMethodException e2) {
                 Log.e(TAG, cls.getName() + " must have a method " + str, e2);
             } catch (InvocationTargetException e3) {
-                StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-                m2.append(cls.getName());
-                Log.e(TAG, m2.toString(), e3);
+                StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+                sbM2.append(cls.getName());
+                Log.e(TAG, sbM2.toString(), e3);
             }
         }
-        return hashMap2;
+        return map2;
     }
 
-    public static void parse(Context context, XmlPullParser xmlPullParser, HashMap<String, ConstraintAttribute> hashMap) {
+    public static void parse(Context context, XmlPullParser xmlPullParser, HashMap<String, ConstraintAttribute> map) {
         AttributeType attributeType;
-        Object valueOf;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.CustomAttribute);
-        int indexCount = obtainStyledAttributes.getIndexCount();
-        String str = null;
-        Object obj = null;
+        Object objValueOf;
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.CustomAttribute);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
+        String string = null;
+        Object objValueOf2 = null;
         AttributeType attributeType2 = null;
         boolean z = false;
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             if (index == R.styleable.CustomAttribute_attributeName) {
-                str = obtainStyledAttributes.getString(index);
-                if (str != null && str.length() > 0) {
-                    str = Character.toUpperCase(str.charAt(0)) + str.substring(1);
+                string = typedArrayObtainStyledAttributes.getString(index);
+                if (string != null && string.length() > 0) {
+                    string = Character.toUpperCase(string.charAt(0)) + string.substring(1);
                 }
             } else if (index == R.styleable.CustomAttribute_methodName) {
-                str = obtainStyledAttributes.getString(index);
+                string = typedArrayObtainStyledAttributes.getString(index);
                 z = true;
             } else if (index == R.styleable.CustomAttribute_customBoolean) {
-                obj = Boolean.valueOf(obtainStyledAttributes.getBoolean(index, false));
+                objValueOf2 = Boolean.valueOf(typedArrayObtainStyledAttributes.getBoolean(index, false));
                 attributeType2 = AttributeType.BOOLEAN_TYPE;
             } else {
                 if (index == R.styleable.CustomAttribute_customColorValue) {
                     attributeType = AttributeType.COLOR_TYPE;
-                    valueOf = Integer.valueOf(obtainStyledAttributes.getColor(index, 0));
+                    objValueOf = Integer.valueOf(typedArrayObtainStyledAttributes.getColor(index, 0));
                 } else if (index == R.styleable.CustomAttribute_customColorDrawableValue) {
                     attributeType = AttributeType.COLOR_DRAWABLE_TYPE;
-                    valueOf = Integer.valueOf(obtainStyledAttributes.getColor(index, 0));
+                    objValueOf = Integer.valueOf(typedArrayObtainStyledAttributes.getColor(index, 0));
                 } else if (index == R.styleable.CustomAttribute_customPixelDimension) {
                     attributeType = AttributeType.DIMENSION_TYPE;
-                    valueOf = Float.valueOf(TypedValue.applyDimension(1, obtainStyledAttributes.getDimension(index, 0.0f), context.getResources().getDisplayMetrics()));
+                    objValueOf = Float.valueOf(TypedValue.applyDimension(1, typedArrayObtainStyledAttributes.getDimension(index, 0.0f), context.getResources().getDisplayMetrics()));
                 } else if (index == R.styleable.CustomAttribute_customDimension) {
                     attributeType = AttributeType.DIMENSION_TYPE;
-                    valueOf = Float.valueOf(obtainStyledAttributes.getDimension(index, 0.0f));
+                    objValueOf = Float.valueOf(typedArrayObtainStyledAttributes.getDimension(index, 0.0f));
                 } else if (index == R.styleable.CustomAttribute_customFloatValue) {
                     attributeType = AttributeType.FLOAT_TYPE;
-                    valueOf = Float.valueOf(obtainStyledAttributes.getFloat(index, Float.NaN));
+                    objValueOf = Float.valueOf(typedArrayObtainStyledAttributes.getFloat(index, Float.NaN));
                 } else if (index == R.styleable.CustomAttribute_customIntegerValue) {
                     attributeType = AttributeType.INT_TYPE;
-                    valueOf = Integer.valueOf(obtainStyledAttributes.getInteger(index, -1));
+                    objValueOf = Integer.valueOf(typedArrayObtainStyledAttributes.getInteger(index, -1));
                 } else if (index == R.styleable.CustomAttribute_customStringValue) {
                     attributeType = AttributeType.STRING_TYPE;
-                    valueOf = obtainStyledAttributes.getString(index);
+                    objValueOf = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == R.styleable.CustomAttribute_customReference) {
                     attributeType = AttributeType.REFERENCE_TYPE;
-                    int resourceId = obtainStyledAttributes.getResourceId(index, -1);
+                    int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, -1);
                     if (resourceId == -1) {
-                        resourceId = obtainStyledAttributes.getInt(index, -1);
+                        resourceId = typedArrayObtainStyledAttributes.getInt(index, -1);
                     }
-                    valueOf = Integer.valueOf(resourceId);
+                    objValueOf = Integer.valueOf(resourceId);
                 }
-                Object obj2 = valueOf;
+                Object obj = objValueOf;
                 attributeType2 = attributeType;
-                obj = obj2;
+                objValueOf2 = obj;
             }
         }
-        if (str != null && obj != null) {
-            hashMap.put(str, new ConstraintAttribute(str, attributeType2, obj, z));
+        if (string != null && objValueOf2 != null) {
+            map.put(string, new ConstraintAttribute(string, attributeType2, objValueOf2, z));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
-    public static void setAttributes(View view, HashMap<String, ConstraintAttribute> hashMap) {
+    public static void setAttributes(View view, HashMap<String, ConstraintAttribute> map) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Class<?> cls = view.getClass();
-        for (String str : hashMap.keySet()) {
-            ConstraintAttribute constraintAttribute = hashMap.get(str);
-            String m = !constraintAttribute.mMethod ? AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("set", str) : str;
+        for (String str : map.keySet()) {
+            ConstraintAttribute constraintAttribute = map.get(str);
+            String strM = !constraintAttribute.mMethod ? AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("set", str) : str;
             try {
                 switch (constraintAttribute.mType) {
                     case INT_TYPE:
-                        cls.getMethod(m, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mIntegerValue));
+                        cls.getMethod(strM, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mIntegerValue));
                         break;
                     case FLOAT_TYPE:
-                        cls.getMethod(m, Float.TYPE).invoke(view, Float.valueOf(constraintAttribute.mFloatValue));
+                        cls.getMethod(strM, Float.TYPE).invoke(view, Float.valueOf(constraintAttribute.mFloatValue));
                         break;
                     case COLOR_TYPE:
-                        cls.getMethod(m, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mColorValue));
+                        cls.getMethod(strM, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mColorValue));
                         break;
                     case COLOR_DRAWABLE_TYPE:
-                        Method method = cls.getMethod(m, Drawable.class);
+                        Method method = cls.getMethod(strM, Drawable.class);
                         ColorDrawable colorDrawable = new ColorDrawable();
                         colorDrawable.setColor(constraintAttribute.mColorValue);
                         method.invoke(view, colorDrawable);
                         break;
                     case STRING_TYPE:
-                        cls.getMethod(m, CharSequence.class).invoke(view, constraintAttribute.mStringValue);
+                        cls.getMethod(strM, CharSequence.class).invoke(view, constraintAttribute.mStringValue);
                         break;
                     case BOOLEAN_TYPE:
-                        cls.getMethod(m, Boolean.TYPE).invoke(view, Boolean.valueOf(constraintAttribute.mBooleanValue));
+                        cls.getMethod(strM, Boolean.TYPE).invoke(view, Boolean.valueOf(constraintAttribute.mBooleanValue));
                         break;
                     case DIMENSION_TYPE:
-                        cls.getMethod(m, Float.TYPE).invoke(view, Float.valueOf(constraintAttribute.mFloatValue));
+                        cls.getMethod(strM, Float.TYPE).invoke(view, Float.valueOf(constraintAttribute.mFloatValue));
                         break;
                     case REFERENCE_TYPE:
-                        cls.getMethod(m, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mIntegerValue));
+                        cls.getMethod(strM, Integer.TYPE).invoke(view, Integer.valueOf(constraintAttribute.mIntegerValue));
                         break;
                 }
             } catch (IllegalAccessException e) {
-                StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-                m2.append(cls.getName());
-                Log.e(TAG, m2.toString(), e);
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+                sbM.append(cls.getName());
+                Log.e(TAG, sbM.toString(), e);
             } catch (NoSuchMethodException e2) {
-                Log.e(TAG, cls.getName() + " must have a method " + m, e2);
+                Log.e(TAG, cls.getName() + " must have a method " + strM, e2);
             } catch (InvocationTargetException e3) {
-                StringBuilder m3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-                m3.append(cls.getName());
-                Log.e(TAG, m3.toString(), e3);
+                StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+                sbM2.append(cls.getName());
+                Log.e(TAG, sbM2.toString(), e3);
             }
         }
     }
 
-    public void applyCustom(View view) {
+    public void applyCustom(View view) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Class<?> cls = view.getClass();
         String str = this.mName;
-        String m = !this.mMethod ? AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("set", str) : str;
+        String strM = !this.mMethod ? AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("set", str) : str;
         try {
             switch (this.mType) {
                 case INT_TYPE:
                 case REFERENCE_TYPE:
-                    cls.getMethod(m, Integer.TYPE).invoke(view, Integer.valueOf(this.mIntegerValue));
+                    cls.getMethod(strM, Integer.TYPE).invoke(view, Integer.valueOf(this.mIntegerValue));
                     break;
                 case FLOAT_TYPE:
-                    cls.getMethod(m, Float.TYPE).invoke(view, Float.valueOf(this.mFloatValue));
+                    cls.getMethod(strM, Float.TYPE).invoke(view, Float.valueOf(this.mFloatValue));
                     break;
                 case COLOR_TYPE:
-                    cls.getMethod(m, Integer.TYPE).invoke(view, Integer.valueOf(this.mColorValue));
+                    cls.getMethod(strM, Integer.TYPE).invoke(view, Integer.valueOf(this.mColorValue));
                     break;
                 case COLOR_DRAWABLE_TYPE:
-                    Method method = cls.getMethod(m, Drawable.class);
+                    Method method = cls.getMethod(strM, Drawable.class);
                     ColorDrawable colorDrawable = new ColorDrawable();
                     colorDrawable.setColor(this.mColorValue);
                     method.invoke(view, colorDrawable);
                     break;
                 case STRING_TYPE:
-                    cls.getMethod(m, CharSequence.class).invoke(view, this.mStringValue);
+                    cls.getMethod(strM, CharSequence.class).invoke(view, this.mStringValue);
                     break;
                 case BOOLEAN_TYPE:
-                    cls.getMethod(m, Boolean.TYPE).invoke(view, Boolean.valueOf(this.mBooleanValue));
+                    cls.getMethod(strM, Boolean.TYPE).invoke(view, Boolean.valueOf(this.mBooleanValue));
                     break;
                 case DIMENSION_TYPE:
-                    cls.getMethod(m, Float.TYPE).invoke(view, Float.valueOf(this.mFloatValue));
+                    cls.getMethod(strM, Float.TYPE).invoke(view, Float.valueOf(this.mFloatValue));
                     break;
             }
         } catch (IllegalAccessException e) {
-            StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-            m2.append(cls.getName());
-            Log.e(TAG, m2.toString(), e);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+            sbM.append(cls.getName());
+            Log.e(TAG, sbM.toString(), e);
         } catch (NoSuchMethodException e2) {
-            Log.e(TAG, cls.getName() + " must have a method " + m, e2);
+            Log.e(TAG, cls.getName() + " must have a method " + strM, e2);
         } catch (InvocationTargetException e3) {
-            StringBuilder m3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
-            m3.append(cls.getName());
-            Log.e(TAG, m3.toString(), e3);
+            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" Custom Attribute \"", str, "\" not found on ");
+            sbM2.append(cls.getName());
+            Log.e(TAG, sbM2.toString(), e3);
         }
     }
 
@@ -362,12 +359,12 @@ public class ConstraintAttribute {
             case COLOR_TYPE:
             case COLOR_DRAWABLE_TYPE:
                 int i = (this.mColorValue >> 24) & 255;
-                float pow = (float) Math.pow(((r9 >> 16) & 255) / 255.0f, 2.2d);
-                float pow2 = (float) Math.pow(((r9 >> 8) & 255) / 255.0f, 2.2d);
-                float pow3 = (float) Math.pow((r9 & 255) / 255.0f, 2.2d);
-                fArr[0] = pow;
-                fArr[1] = pow2;
-                fArr[2] = pow3;
+                float fPow = (float) Math.pow(((r9 >> 16) & 255) / 255.0f, 2.2d);
+                float fPow2 = (float) Math.pow(((r9 >> 8) & 255) / 255.0f, 2.2d);
+                float fPow3 = (float) Math.pow((r9 & 255) / 255.0f, 2.2d);
+                fArr[0] = fPow;
+                fArr[1] = fPow2;
+                fArr[2] = fPow3;
                 fArr[3] = i / 255.0f;
                 return;
             case STRING_TYPE:
@@ -388,8 +385,8 @@ public class ConstraintAttribute {
     }
 
     public boolean isContinuous() {
-        int ordinal = this.mType.ordinal();
-        return (ordinal == 4 || ordinal == 5 || ordinal == 7) ? false : true;
+        int iOrdinal = this.mType.ordinal();
+        return (iOrdinal == 4 || iOrdinal == 5 || iOrdinal == 7) ? false : true;
     }
 
     public boolean isMethod() {
@@ -397,8 +394,8 @@ public class ConstraintAttribute {
     }
 
     public int numberOfInterpolatedValues() {
-        int ordinal = this.mType.ordinal();
-        return (ordinal == 2 || ordinal == 3) ? 4 : 1;
+        int iOrdinal = this.mType.ordinal();
+        return (iOrdinal == 2 || iOrdinal == 3) ? 4 : 1;
     }
 
     public void setColorValue(int i) {
@@ -428,9 +425,9 @@ public class ConstraintAttribute {
                 return;
             case COLOR_TYPE:
             case COLOR_DRAWABLE_TYPE:
-                int HSVToColor = Color.HSVToColor(fArr);
-                this.mColorValue = HSVToColor;
-                this.mColorValue = (clamp((int) (fArr[3] * 255.0f)) << 24) | (HSVToColor & 16777215);
+                int iHSVToColor = Color.HSVToColor(fArr);
+                this.mColorValue = iHSVToColor;
+                this.mColorValue = (clamp((int) (fArr[3] * 255.0f)) << 24) | (iHSVToColor & 16777215);
                 return;
             case STRING_TYPE:
                 throw new RuntimeException("Color does not have a single color to interpolate");

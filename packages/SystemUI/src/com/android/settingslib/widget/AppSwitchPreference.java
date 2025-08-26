@@ -7,7 +7,6 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppSwitchPreference extends SwitchPreference {
     public AppSwitchPreference(Context context, AttributeSet attributeSet, int i, int i2) {
@@ -18,9 +17,9 @@ public class AppSwitchPreference extends SwitchPreference {
     @Override // androidx.preference.SwitchPreference, androidx.preference.Preference
     public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
         super.onBindViewHolder(preferenceViewHolder);
-        View findViewById = preferenceViewHolder.findViewById(android.R.id.switch_widget);
-        if (findViewById != null) {
-            findViewById.getRootView().setFilterTouchesWhenObscured(true);
+        View viewFindViewById = preferenceViewHolder.findViewById(android.R.id.switch_widget);
+        if (viewFindViewById != null) {
+            viewFindViewById.getRootView().setFilterTouchesWhenObscured(true);
         }
     }
 

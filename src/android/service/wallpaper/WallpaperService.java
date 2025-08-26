@@ -40,7 +40,6 @@ import android.os.Trace;
 import android.provider.Settings;
 import android.service.wallpaper.IWallpaperEngine;
 import android.service.wallpaper.IWallpaperService;
-import android.service.wallpaper.WallpaperService;
 import android.telecom.Logging.Session;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -49,6 +48,7 @@ import android.util.MergedConfiguration;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayCutout;
+import android.view.DisplayInfo;
 import android.view.IWindowSession;
 import android.view.InputChannel;
 import android.view.InputEvent;
@@ -61,6 +61,7 @@ import android.view.Surface;
 import android.view.SurfaceControl;
 import android.view.SurfaceHolder;
 import android.view.WindowInsets;
+import android.view.WindowLayout;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.WindowRelayoutResult;
@@ -354,9 +355,9 @@ public abstract class WallpaperService extends Service {
             @Override // com.android.internal.view.BaseIWindow, android.view.IWindow
             public void resized(ClientWindowFrames clientWindowFrames, boolean z, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean z2, boolean z3, int i, int i2, boolean z4, ActivityWindowInfo activityWindowInfo) {
                 Log.i(WallpaperService.TAG, "resized: " + Engine.this.getWallpaperFlagsString() + ", reportDraw=" + z + ", forceLayout=" + z2 + ", displayId=" + i);
-                Message obtainMessageIO = Engine.this.mCaller.obtainMessageIO(10030, z ? 1 : 0, mergedConfiguration);
+                Message messageObtainMessageIO = Engine.this.mCaller.obtainMessageIO(10030, z ? 1 : 0, mergedConfiguration);
                 Engine.this.mIWallpaperEngine.mPendingResizeCount.incrementAndGet();
-                Engine.this.mCaller.sendMessage(obtainMessageIO);
+                Engine.this.mCaller.sendMessage(messageObtainMessageIO);
             }
 
             @Override // com.android.internal.view.BaseIWindow, android.view.IWindow
@@ -370,20 +371,20 @@ public abstract class WallpaperService extends Service {
                 if (!Engine.this.mIWallpaperEngine.mIsPreview) {
                     Engine.this.mCaller.sendMessage(Engine.this.mCaller.obtainMessageI(10010, z ? 1 : 0));
                 }
-                int semGetWallpaperFlags = Engine.this.semGetWallpaperFlags();
-                if (Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && Engine.this.mLidState == 1 && WhichChecker.isPhone(semGetWallpaperFlags) && z && Engine.this.mNeedUpdateSurfaceAfterVisibilityChanged) {
+                int iSemGetWallpaperFlags = Engine.this.semGetWallpaperFlags();
+                if (Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && Engine.this.mLidState == 1 && WhichChecker.isPhone(iSemGetWallpaperFlags) && z && Engine.this.mNeedUpdateSurfaceAfterVisibilityChanged) {
                     Engine.this.mNeedUpdateSurfaceAfterVisibilityChanged = false;
                     Engine.this.mCaller.getHandler().post(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$3$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            WallpaperService.Engine.AnonymousClass3.this.lambda$dispatchAppVisibility$0();
+                        public final void run() throws Throwable {
+                            this.f$0.lambda$dispatchAppVisibility$0();
                         }
                     });
                 }
             }
 
             /* JADX INFO: Access modifiers changed from: private */
-            public /* synthetic */ void lambda$dispatchAppVisibility$0() {
+            public /* synthetic */ void lambda$dispatchAppVisibility$0() throws Throwable {
                 Engine.this.updateSurface(true, false, true);
             }
 
@@ -418,9 +419,9 @@ public abstract class WallpaperService extends Service {
                     wallpaperCommand.z = i3;
                     wallpaperCommand.extras = bundle;
                     wallpaperCommand.sync = z;
-                    Message obtainMessage = Engine.this.mCaller.obtainMessage(10025);
-                    obtainMessage.obj = wallpaperCommand;
-                    Engine.this.mCaller.sendMessage(obtainMessage);
+                    Message messageObtainMessage = Engine.this.mCaller.obtainMessage(10025);
+                    messageObtainMessage.obj = wallpaperCommand;
+                    Engine.this.mCaller.sendMessage(messageObtainMessage);
                 }
             }
         }
@@ -470,7 +471,7 @@ public abstract class WallpaperService extends Service {
             this.mNotifyColorsChanged = new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperService.Engine.this.notifyColorsChanged();
+                    this.f$0.notifyColorsChanged();
                 }
             };
             this.mCustomDimAmount = 0.0f;
@@ -576,7 +577,7 @@ public abstract class WallpaperService extends Service {
                 }
 
                 @Override // android.hardware.display.DisplayManager.DisplayListener
-                public void onDisplayChanged(int i) {
+                public void onDisplayChanged(int i) throws Throwable {
                     if (Engine.this.mDisplay.getDisplayId() == i) {
                         Engine.this.reportVisibility((Flags.noVisibilityEventOnDisplayStateChange() || !WallpaperService.this.mIsWearOs || Engine.this.mDisplay.getState() == 4) ? false : true);
                     }
@@ -663,16 +664,16 @@ public abstract class WallpaperService extends Service {
             Trace.beginSection("WPMS.reportEngineShown-" + z);
             Log.d(WallpaperService.TAG, "reportEngineShown: shouldWait=" + z);
             if (!z) {
-                Message obtainMessage = this.mCaller.obtainMessage(10150);
+                Message messageObtainMessage = this.mCaller.obtainMessage(10150);
                 this.mCaller.removeMessages(10150);
-                this.mCaller.sendMessage(obtainMessage);
+                this.mCaller.sendMessage(messageObtainMessage);
             } else if (!this.mCaller.hasMessages(10150)) {
                 this.mCaller.sendMessageDelayed(this.mCaller.obtainMessage(10150), TimeUnit.SECONDS.toMillis(5L));
             }
             Trace.endSection();
         }
 
-        public void setTouchEventsEnabled(boolean z) {
+        public void setTouchEventsEnabled(boolean z) throws Throwable {
             int i;
             if (z) {
                 i = this.mWindowFlags & (-17);
@@ -685,7 +686,7 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        public void setOffsetNotificationsEnabled(boolean z) {
+        public void setOffsetNotificationsEnabled(boolean z) throws Throwable {
             int i;
             if (z) {
                 i = this.mWindowPrivateFlags | 4;
@@ -698,7 +699,7 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        public void setShowForAllUsers(boolean z) {
+        public void setShowForAllUsers(boolean z) throws Throwable {
             int i;
             if (z) {
                 i = this.mWindowPrivateFlags | 16;
@@ -724,8 +725,8 @@ public abstract class WallpaperService extends Service {
                 Log.i(WallpaperService.TAG, "Ignoring notifyColorsChanged(), Engine has already been destroyed.");
                 return;
             }
-            long longValue = this.mClockFunction.get().longValue();
-            if (longValue - this.mLastColorInvalidation < 1000) {
+            long jLongValue = this.mClockFunction.get().longValue();
+            if (jLongValue - this.mLastColorInvalidation < 1000) {
                 Log.w(WallpaperService.TAG, "This call has been deferred. You should only call notifyColorsChanged() once every 1.0 seconds.");
                 if (this.mHandler.hasCallbacks(this.mNotifyColorsChanged)) {
                     return;
@@ -733,13 +734,13 @@ public abstract class WallpaperService extends Service {
                 this.mHandler.postDelayed(this.mNotifyColorsChanged, 1000L);
                 return;
             }
-            this.mLastColorInvalidation = longValue;
+            this.mLastColorInvalidation = jLongValue;
             this.mHandler.removeCallbacks(this.mNotifyColorsChanged);
             try {
-                WallpaperColors onComputeColors = onComputeColors();
+                WallpaperColors wallpaperColorsOnComputeColors = onComputeColors();
                 IWallpaperConnection iWallpaperConnection = this.mConnection;
                 if (iWallpaperConnection != null) {
-                    iWallpaperConnection.onWallpaperColorsChanged(onComputeColors, this.mDisplay.getDisplayId());
+                    iWallpaperConnection.onWallpaperColorsChanged(wallpaperColorsOnComputeColors, this.mDisplay.getDisplayId());
                 } else {
                     Log.w(WallpaperService.TAG, "Can't notify system because wallpaper connection was not established.");
                 }
@@ -796,20 +797,20 @@ public abstract class WallpaperService extends Service {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void updateWallpaperDimming(float f) {
-            float min = Math.min(1.0f, f);
-            this.mCustomDimAmount = min;
+            float fMin = Math.min(1.0f, f);
+            this.mCustomDimAmount = fMin;
             if (this.mShouldDimByDefault) {
-                min = Math.max(this.mDefaultDimAmount, min);
+                fMin = Math.max(this.mDefaultDimAmount, fMin);
             }
-            this.mWallpaperDimAmount = min;
+            this.mWallpaperDimAmount = fMin;
         }
 
         private /* synthetic */ void lambda$updateWallpaperDimming$0(SurfaceControl.Transaction transaction, ValueAnimator valueAnimator) {
-            float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+            float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
             synchronized (this.mSurfaceReleaseLock) {
                 SurfaceControl surfaceControl = this.mBbqSurfaceControl;
                 if (surfaceControl != null && surfaceControl.isValid()) {
-                    transaction.setAlpha(this.mBbqSurfaceControl, 1.0f - floatValue).apply();
+                    transaction.setAlpha(this.mBbqSurfaceControl, 1.0f - fFloatValue).apply();
                 }
             }
         }
@@ -820,7 +821,7 @@ public abstract class WallpaperService extends Service {
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
+            public void onAnimationEnd(Animator animator) throws Throwable {
                 Engine.this.updateSurface(false, false, true);
             }
         }
@@ -982,24 +983,374 @@ public abstract class WallpaperService extends Service {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:127:0x059d A[Catch: all -> 0x06c7, TryCatch #1 {all -> 0x06c7, blocks: (B:111:0x055a, B:113:0x0561, B:115:0x057b, B:117:0x057f, B:121:0x058e, B:125:0x0598, B:127:0x059d, B:129:0x05a1), top: B:110:0x055a }] */
-        /* JADX WARN: Removed duplicated region for block: B:138:0x05f2 A[Catch: all -> 0x060a, TRY_LEAVE, TryCatch #2 {all -> 0x060a, blocks: (B:138:0x05f2, B:142:0x063e, B:144:0x0642, B:147:0x064b, B:150:0x0653, B:151:0x066b, B:152:0x067b, B:154:0x0681, B:179:0x0628, B:181:0x062c, B:183:0x0632, B:185:0x0639, B:199:0x05e3), top: B:198:0x05e3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:147:0x064b A[Catch: all -> 0x060a, TRY_ENTER, TRY_LEAVE, TryCatch #2 {all -> 0x060a, blocks: (B:138:0x05f2, B:142:0x063e, B:144:0x0642, B:147:0x064b, B:150:0x0653, B:151:0x066b, B:152:0x067b, B:154:0x0681, B:179:0x0628, B:181:0x062c, B:183:0x0632, B:185:0x0639, B:199:0x05e3), top: B:198:0x05e3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:154:0x0681 A[Catch: all -> 0x060a, TRY_LEAVE, TryCatch #2 {all -> 0x060a, blocks: (B:138:0x05f2, B:142:0x063e, B:144:0x0642, B:147:0x064b, B:150:0x0653, B:151:0x066b, B:152:0x067b, B:154:0x0681, B:179:0x0628, B:181:0x062c, B:183:0x0632, B:185:0x0639, B:199:0x05e3), top: B:198:0x05e3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:161:0x06d2 A[Catch: RemoteException -> 0x06f7, TryCatch #4 {RemoteException -> 0x06f7, blocks: (B:58:0x0154, B:61:0x01b5, B:62:0x024e, B:65:0x026a, B:66:0x0275, B:68:0x02b2, B:70:0x0315, B:72:0x031b, B:74:0x0321, B:75:0x0325, B:76:0x033e, B:78:0x034a, B:79:0x035e, B:81:0x039a, B:83:0x03c7, B:85:0x03ec, B:87:0x0408, B:88:0x0448, B:90:0x045d, B:91:0x0464, B:93:0x046e, B:94:0x047b, B:96:0x04d3, B:97:0x04f8, B:99:0x04fc, B:100:0x0500, B:102:0x0504, B:103:0x0508, B:105:0x051e, B:106:0x0522, B:108:0x0556, B:168:0x068f, B:170:0x0696, B:172:0x069a, B:173:0x069f, B:174:0x06b2, B:159:0x06ca, B:161:0x06d2, B:163:0x06d6, B:164:0x06db, B:165:0x06ec, B:166:0x06f6, B:209:0x0356, B:210:0x0270, B:211:0x01af, B:213:0x01cb, B:215:0x01ea, B:217:0x01ee, B:219:0x01fa, B:220:0x020d, B:223:0x0213, B:224:0x0232), top: B:57:0x0154 }] */
-        /* JADX WARN: Removed duplicated region for block: B:170:0x0696 A[Catch: RemoteException -> 0x06f7, TryCatch #4 {RemoteException -> 0x06f7, blocks: (B:58:0x0154, B:61:0x01b5, B:62:0x024e, B:65:0x026a, B:66:0x0275, B:68:0x02b2, B:70:0x0315, B:72:0x031b, B:74:0x0321, B:75:0x0325, B:76:0x033e, B:78:0x034a, B:79:0x035e, B:81:0x039a, B:83:0x03c7, B:85:0x03ec, B:87:0x0408, B:88:0x0448, B:90:0x045d, B:91:0x0464, B:93:0x046e, B:94:0x047b, B:96:0x04d3, B:97:0x04f8, B:99:0x04fc, B:100:0x0500, B:102:0x0504, B:103:0x0508, B:105:0x051e, B:106:0x0522, B:108:0x0556, B:168:0x068f, B:170:0x0696, B:172:0x069a, B:173:0x069f, B:174:0x06b2, B:159:0x06ca, B:161:0x06d2, B:163:0x06d6, B:164:0x06db, B:165:0x06ec, B:166:0x06f6, B:209:0x0356, B:210:0x0270, B:211:0x01af, B:213:0x01cb, B:215:0x01ea, B:217:0x01ee, B:219:0x01fa, B:220:0x020d, B:223:0x0213, B:224:0x0232), top: B:57:0x0154 }] */
-        /* JADX WARN: Removed duplicated region for block: B:179:0x0628 A[Catch: all -> 0x060a, TRY_ENTER, TryCatch #2 {all -> 0x060a, blocks: (B:138:0x05f2, B:142:0x063e, B:144:0x0642, B:147:0x064b, B:150:0x0653, B:151:0x066b, B:152:0x067b, B:154:0x0681, B:179:0x0628, B:181:0x062c, B:183:0x0632, B:185:0x0639, B:199:0x05e3), top: B:198:0x05e3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:194:0x05d5 A[Catch: all -> 0x06c3, TryCatch #0 {all -> 0x06c3, blocks: (B:192:0x05ba, B:194:0x05d5, B:196:0x05d9), top: B:191:0x05ba }] */
+        /* JADX WARN: Removed duplicated region for block: B:221:0x06d2 A[Catch: RemoteException -> 0x06f7, TryCatch #4 {RemoteException -> 0x06f7, blocks: (B:68:0x0154, B:73:0x01b5, B:89:0x024e, B:92:0x026a, B:94:0x0275, B:96:0x02b2, B:98:0x0315, B:100:0x031b, B:102:0x0321, B:103:0x0325, B:104:0x033e, B:106:0x034a, B:108:0x035e, B:110:0x039a, B:112:0x03c7, B:114:0x03ec, B:116:0x0408, B:117:0x0448, B:119:0x045d, B:120:0x0464, B:122:0x046e, B:123:0x047b, B:125:0x04d3, B:127:0x04f8, B:129:0x04fc, B:130:0x0500, B:132:0x0504, B:133:0x0508, B:135:0x051e, B:136:0x0522, B:138:0x0556, B:205:0x068f, B:207:0x0696, B:209:0x069a, B:210:0x069f, B:211:0x06b2, B:219:0x06ca, B:221:0x06d2, B:223:0x06d6, B:224:0x06db, B:225:0x06ec, B:226:0x06f6, B:107:0x0356, B:93:0x0270, B:71:0x01af, B:74:0x01cb, B:76:0x01ea, B:78:0x01ee, B:80:0x01fa, B:83:0x020d, B:86:0x0213, B:88:0x0232), top: B:237:0x0154 }] */
+        /* JADX WARN: Removed duplicated region for block: B:87:0x0230  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        void updateSurface(boolean r42, boolean r43, boolean r44) {
-            /*
-                Method dump skipped, instructions count: 1784
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.service.wallpaper.WallpaperService.Engine.updateSurface(boolean, boolean, boolean):void");
+        void updateSurface(boolean z, boolean z2, boolean z3) throws Throwable {
+            boolean z4;
+            boolean z5;
+            float f;
+            float fMax;
+            int i;
+            int i2;
+            boolean z6;
+            String str;
+            boolean z7;
+            boolean z8;
+            boolean z9 = z3;
+            if (this.mDestroyed) {
+                Log.w(WallpaperService.TAG, "Ignoring updateSurface due to destroyed");
+                return;
+            }
+            int requestedWidth = (WhichChecker.isLock(getWallpaperFlags()) || !this.mIWallpaperEngine.mIsPreview) ? this.mSurfaceHolder.getRequestedWidth() : this.mIWallpaperEngine.mReqWidth;
+            if (requestedWidth <= 0) {
+                requestedWidth = -1;
+                z4 = false;
+            } else {
+                z4 = true;
+            }
+            int requestedHeight = (WhichChecker.isLock(getWallpaperFlags()) || !this.mIWallpaperEngine.mIsPreview) ? this.mSurfaceHolder.getRequestedHeight() : this.mIWallpaperEngine.mReqHeight;
+            if (requestedHeight <= 0) {
+                requestedHeight = -1;
+            } else {
+                z4 = true;
+            }
+            int i3 = this.mIWallpaperEngine.mIsPreview ? this.mIWallpaperEngine.mDisplayPadding.left : 0;
+            int i4 = this.mIWallpaperEngine.mIsPreview ? this.mIWallpaperEngine.mDisplayPadding.top : 0;
+            Log.i(WallpaperService.TAG, "updateSurface " + getWallpaperFlagsString() + " forceRelayout=" + z + " forceReport=" + z2 + " redrawNeeded=" + z9 + " myWidth=" + requestedWidth + " myHeight=" + requestedHeight + " fixedSize=" + z4 + " x = " + i3 + " y = " + i4 + " mWidth=" + this.mWidth + " mHeight=" + this.mHeight);
+            boolean z10 = this.mCreated;
+            boolean z11 = this.mSurfaceCreated;
+            boolean z12 = this.mFormat != this.mSurfaceHolder.getRequestedFormat();
+            boolean z13 = (this.mWidth == requestedWidth && this.mHeight == requestedHeight && this.mX == i3 && this.mY == i4) ? false : true;
+            boolean z14 = z12;
+            boolean z15 = !this.mCreated;
+            boolean z16 = z13;
+            boolean z17 = this.mType != this.mSurfaceHolder.getRequestedType();
+            boolean z18 = (this.mCurWindowFlags == this.mWindowFlags && this.mCurWindowPrivateFlags == this.mWindowPrivateFlags) ? false : true;
+            if (!z && z10 && z11 && !z14 && !z16 && !z17 && !z18 && !z9 && this.mIWallpaperEngine.mShownReported) {
+                return;
+            }
+            try {
+                this.mX = i3;
+                this.mY = i4;
+                this.mWidth = requestedWidth;
+                this.mHeight = requestedHeight;
+                this.mFormat = this.mSurfaceHolder.getRequestedFormat();
+                this.mType = this.mSurfaceHolder.getRequestedType();
+                this.mLayout.x = i3;
+                this.mLayout.y = i4;
+                DisplayInfo displayInfo = new DisplayInfo();
+                this.mDisplay.getDisplayInfo(displayInfo);
+                boolean zIsExternalDesktopDisplay = DisplayManager.isExternalDesktopDisplay(this.mDisplay);
+                this.mLayout.format = this.mFormat;
+                int i5 = this.mWindowFlags;
+                this.mCurWindowFlags = i5;
+                this.mLayout.flags = i5 | 66312;
+                Configuration mergedConfiguration = this.mMergedConfiguration.getMergedConfiguration();
+                Rect rect = new Rect(mergedConfiguration.windowConfiguration.getMaxBounds());
+                if ((requestedWidth == -1 && requestedHeight == -1) || this.mIWallpaperEngine.mIsPreview) {
+                    this.mLayout.width = requestedWidth;
+                    this.mLayout.height = requestedHeight;
+                    z5 = z10;
+                    this.mLayout.flags &= -16385;
+                    i = requestedWidth;
+                } else {
+                    z5 = z10;
+                    float f2 = requestedWidth;
+                    float f3 = requestedHeight;
+                    float fMax2 = Math.max(rect.width() / f2, rect.height() / f3);
+                    if (!Rune.SUPPORT_SUB_DISPLAY_MODE || Rune.SUPPORT_COVER_DISPLAY_WATCHFACE) {
+                        f = fMax2;
+                    } else {
+                        f = fMax2;
+                        if (isDisplaySizeChanged(displayInfo.logicalWidth, displayInfo.logicalHeight)) {
+                            fMax = Math.max(displayInfo.logicalWidth / f2, displayInfo.logicalHeight / f3);
+                        }
+                        if (this.mIsFixedOrientationRequested || zIsExternalDesktopDisplay) {
+                            i = requestedWidth;
+                        } else {
+                            i = requestedWidth;
+                            fMax = Math.max(Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight) / f3, Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight) / f2);
+                        }
+                        this.mLayout.width = (int) ((f2 * fMax) + 0.5f);
+                        this.mLayout.height = (int) ((fMax * f3) + 0.5f);
+                        this.mLayout.flags |= 16384;
+                    }
+                    fMax = f;
+                    if (this.mIsFixedOrientationRequested) {
+                        i = requestedWidth;
+                        this.mLayout.width = (int) ((f2 * fMax) + 0.5f);
+                        this.mLayout.height = (int) ((fMax * f3) + 0.5f);
+                        this.mLayout.flags |= 16384;
+                    }
+                }
+                int i6 = this.mWindowPrivateFlags;
+                this.mCurWindowPrivateFlags = i6;
+                this.mLayout.privateFlags = i6;
+                this.mLayout.memoryType = this.mType;
+                this.mLayout.token = this.mWindowToken;
+                if (!this.mIsFixedOrientationRequested || zIsExternalDesktopDisplay) {
+                    this.mLayout.semClearExtensionFlags(8);
+                } else {
+                    this.mLayout.semAddExtensionFlags(8);
+                }
+                this.mDisplayHeight = displayInfo.logicalHeight;
+                this.mDisplayWidth = displayInfo.logicalWidth;
+                this.mDisplayRotation = displayInfo.rotation;
+                Log.i(WallpaperService.TAG, "maxBounds : " + rect + " , mDeviceHeight : " + this.mDisplayHeight + ", mDeviceWidth : " + this.mDisplayWidth + ",mDeviceRotation  : " + this.mDisplayRotation);
+                if (!this.mCreated) {
+                    this.mLayout.type = this.mIWallpaperEngine.mWindowType;
+                    this.mLayout.gravity = 8388659;
+                    this.mLayout.setFitInsetsTypes(0);
+                    this.mLayout.setTitle(WallpaperService.this.getClass().getName());
+                    this.mLayout.windowAnimations = R.style.Animation_Wallpaper;
+                    InputChannel inputChannel = new InputChannel();
+                    if (this.mSession.addToDisplay(this.mWindow, this.mLayout, 0, this.mDisplay.getDisplayId(), WindowInsets.Type.defaultVisible(), inputChannel, this.mInsetsState, this.mTempControls, new Rect(), new float[1]) < 0) {
+                        Log.w(WallpaperService.TAG, "Failed to add window while updating wallpaper surface.");
+                        return;
+                    }
+                    if (isKeyguardTouchEventRequired()) {
+                        enableKeyguardTouchEventReceiving(true);
+                    }
+                    this.mSession.setShouldZoomOutWallpaper(this.mWindow, shouldZoomOutWallpaper());
+                    this.mCreated = true;
+                    this.mInputEventReceiver = new WallpaperInputEventReceiver(inputChannel, Looper.myLooper());
+                }
+                this.mSurfaceHolder.mSurfaceLock.lock();
+                this.mDrawingAllowed = true;
+                if (z4) {
+                    this.mLayout.surfaceInsets.set(0, 0, 0, 0);
+                } else {
+                    this.mLayout.surfaceInsets.set(this.mIWallpaperEngine.mDisplayPadding);
+                }
+                Log.i(WallpaperService.TAG, "updateSurface: invoke Session.relayout");
+                int iRelayout = this.mSession.relayout(this.mWindow, this.mLayout, this.mWidth, this.mHeight, 0, 0, 0, 0, this.mRelayoutResult);
+                Rect maxBounds = this.mMergedConfiguration.getMergedConfiguration().windowConfiguration.getMaxBounds();
+                if (!maxBounds.equals(rect)) {
+                    Log.i(WallpaperService.TAG, "Retry updateSurface because bounds changed from relayout: " + rect + " -> " + maxBounds);
+                    this.mSurfaceHolder.mSurfaceLock.unlock();
+                    this.mDrawingAllowed = false;
+                    HandlerCaller handlerCaller = this.mCaller;
+                    handlerCaller.sendMessage(handlerCaller.obtainMessageI(10030, z9 ? 1 : 0));
+                    return;
+                }
+                WindowLayout.computeSurfaceSize(this.mLayout, rect, this.mWidth, this.mHeight, this.mWinFrames.frame, false, this.mSurfaceSize);
+                if (this.mSurfaceControl.isValid()) {
+                    int iRotationToBufferTransform = SurfaceControl.rotationToBufferTransform((this.mDisplay.getInstallOrientation() + this.mDisplay.getRotation()) % 4);
+                    this.mSurfaceControl.setTransformHint(iRotationToBufferTransform);
+                    if (this.mBbqSurfaceControl == null) {
+                        this.mBbqSurfaceControl = new SurfaceControl.Builder().setName("Wallpaper BBQ wrapper " + semGetWallpaperFlags() + Session.SESSION_SEPARATION_CHAR_CHILD + getWallpaperFlagsString()).setHidden(false).setBLASTLayer().setParent(this.mSurfaceControl).setCallsite("Wallpaper#relayout").build();
+                    }
+                    this.mBbqSurfaceControl.setTransformHint(iRotationToBufferTransform);
+                    Surface orCreateBLASTSurface = getOrCreateBLASTSurface(this.mSurfaceSize.x, this.mSurfaceSize.y, this.mFormat);
+                    if (orCreateBLASTSurface != null) {
+                        this.mSurfaceHolder.mSurface.transferFrom(orCreateBLASTSurface);
+                    }
+                }
+                if (!this.mLastSurfaceSize.equals(this.mSurfaceSize)) {
+                    this.mLastSurfaceSize.set(this.mSurfaceSize.x, this.mSurfaceSize.y);
+                }
+                int iWidth = this.mWinFrames.frame.width();
+                int iHeight = this.mWinFrames.frame.height();
+                DisplayCutout displayCutout = this.mInsetsState.getDisplayCutout();
+                Rect rect2 = new Rect(this.mWinFrames.frame);
+                rect2.intersect(this.mInsetsState.getDisplayFrame());
+                WindowInsets windowInsetsCalculateInsets = this.mInsetsState.calculateInsets(rect2, null, mergedConfiguration.isScreenRound(), this.mLayout.softInputMode, this.mLayout.flags, 0, this.mLayout.type, mergedConfiguration.windowConfiguration.getActivityType(), null);
+                if (z4) {
+                    i2 = i;
+                } else {
+                    Rect rect3 = this.mIWallpaperEngine.mDisplayPadding;
+                    i2 = iWidth + rect3.left + rect3.right;
+                    requestedHeight = iHeight + rect3.top + rect3.bottom;
+                    windowInsetsCalculateInsets = windowInsetsCalculateInsets.insetUnchecked(-rect3.left, -rect3.top, -rect3.right, -rect3.bottom);
+                }
+                if (this.mCurWidth != i2) {
+                    this.mCurWidth = i2;
+                    z16 = true;
+                }
+                if (this.mCurHeight != requestedHeight) {
+                    this.mCurHeight = requestedHeight;
+                    z16 = true;
+                }
+                Rect rect4 = windowInsetsCalculateInsets.getSystemWindowInsets().toRect();
+                Rect rect5 = windowInsetsCalculateInsets.getStableInsets().toRect();
+                if (windowInsetsCalculateInsets.getDisplayCutout() != null) {
+                    displayCutout = windowInsetsCalculateInsets.getDisplayCutout();
+                }
+                boolean z19 = z15 | (!this.mDispatchedContentInsets.equals(rect4)) | (!this.mDispatchedStableInsets.equals(rect5)) | (!this.mDispatchedDisplayCutout.equals(displayCutout));
+                this.mSurfaceHolder.setSurfaceFrameSize(i2, requestedHeight);
+                this.mSurfaceHolder.mSurfaceLock.unlock();
+                if (!this.mSurfaceHolder.mSurface.isValid()) {
+                    reportSurfaceDestroyed();
+                    return;
+                }
+                try {
+                    this.mSurfaceHolder.ungetCallbacks();
+                    if (z11) {
+                        z7 = false;
+                    } else {
+                        this.mIsCreating = true;
+                        this.mReportedSurfaceCreated = true;
+                        Trace.beginSection("WPMS.Engine.onSurfaceCreated");
+                        onSurfaceCreated(this.mSurfaceHolder);
+                        Trace.endSection();
+                        SurfaceHolder.Callback[] callbacks = this.mSurfaceHolder.getCallbacks();
+                        if (callbacks != null) {
+                            for (SurfaceHolder.Callback callback : callbacks) {
+                                callback.surfaceCreated(this.mSurfaceHolder);
+                            }
+                        }
+                        z7 = true;
+                    }
+                    boolean z20 = (z9 ? 1 : 0) | ((z5 && (iRelayout & 1) == 0) ? (char) 0 : (char) 1);
+                    z9 = z20;
+                    if (this.mNeedToRedrawAfterVisible) {
+                        z9 = z20;
+                        if (this.mVisible) {
+                            Log.d(WallpaperService.TAG, "Set redraw after visible because drawn on invisible state");
+                            z9 = (z20 ? 1 : 0) | (this.mNeedToRedrawAfterVisible ? 1 : 0);
+                            this.mNeedToRedrawAfterVisible = false;
+                            z9 = z9;
+                        }
+                    }
+                    if (z2 || !z5 || !z11 || z14 || z16) {
+                        try {
+                            Trace.beginSection("WPMS.Engine.onSurfaceChanged");
+                            onSurfaceChanged(this.mSurfaceHolder, this.mFormat, this.mCurWidth, this.mCurHeight);
+                            Trace.endSection();
+                            SurfaceHolder.Callback[] callbacks2 = this.mSurfaceHolder.getCallbacks();
+                            if (callbacks2 != null) {
+                                int length = callbacks2.length;
+                                int i7 = 0;
+                                z9 = z9;
+                                while (i7 < length) {
+                                    SurfaceHolder.Callback callback2 = callbacks2[i7];
+                                    BaseSurfaceHolder baseSurfaceHolder = this.mSurfaceHolder;
+                                    int i8 = this.mFormat;
+                                    int i9 = this.mCurWidth;
+                                    z8 = z9 ? 1 : 0;
+                                    try {
+                                        callback2.surfaceChanged(baseSurfaceHolder, i8, i9, this.mCurHeight);
+                                        i7++;
+                                        z9 = z8;
+                                    } catch (Throwable th) {
+                                        th = th;
+                                        z9 = z8;
+                                        str = "updateSurface: invoke Session.finishDrawing";
+                                        z6 = z9;
+                                        this.mIsCreating = false;
+                                        this.mSurfaceCreated = true;
+                                        if (z6) {
+                                        }
+                                        reposition();
+                                        reportEngineShown(shouldWaitForEngineShown());
+                                        throw th;
+                                    }
+                                }
+                            }
+                            z8 = z9;
+                            z7 = true;
+                        } catch (Throwable th2) {
+                            th = th2;
+                            boolean z21 = z9 ? 1 : 0;
+                            str = "updateSurface: invoke Session.finishDrawing";
+                            z6 = z9;
+                            this.mIsCreating = false;
+                            this.mSurfaceCreated = true;
+                            if (z6) {
+                                if (!this.mVisible) {
+                                    Log.d(WallpaperService.TAG, "updateSurface : finish redrawing reserve to redraw after visible cause currently not visible.");
+                                    this.mNeedToRedrawAfterVisible = true;
+                                }
+                                Log.i(WallpaperService.TAG, str);
+                                this.mSession.finishDrawing(this.mWindow, null, Integer.MAX_VALUE);
+                                processLocalColors();
+                            }
+                            reposition();
+                            reportEngineShown(shouldWaitForEngineShown());
+                            throw th;
+                        }
+                    } else {
+                        z8 = z9 ? 1 : 0;
+                    }
+                    if (z19) {
+                        this.mDispatchedContentInsets.set(rect4);
+                        this.mDispatchedStableInsets.set(rect5);
+                        this.mDispatchedDisplayCutout = displayCutout;
+                        Trace.beginSection("WPMS.Engine.onApplyWindowInsets");
+                        onApplyWindowInsets(windowInsetsCalculateInsets);
+                        Trace.endSection();
+                    }
+                    if (z8 || z16) {
+                        try {
+                            Trace.beginSection("WPMS.Engine.onSurfaceRedrawNeeded");
+                            onSurfaceRedrawNeeded(this.mSurfaceHolder);
+                            Trace.endSection();
+                            SurfaceHolder.Callback[] callbacks3 = this.mSurfaceHolder.getCallbacks();
+                            if (callbacks3 != null) {
+                                for (SurfaceHolder.Callback callback3 : callbacks3) {
+                                    if (callback3 instanceof SurfaceHolder.Callback2) {
+                                        ((SurfaceHolder.Callback2) callback3).surfaceRedrawNeeded(this.mSurfaceHolder);
+                                    }
+                                }
+                            }
+                        } catch (Throwable th3) {
+                            th = th3;
+                            str = "updateSurface: invoke Session.finishDrawing";
+                            z6 = z8;
+                            this.mIsCreating = false;
+                            this.mSurfaceCreated = true;
+                            if (z6) {
+                            }
+                            reposition();
+                            reportEngineShown(shouldWaitForEngineShown());
+                            throw th;
+                        }
+                    }
+                    if (z7 && !this.mReportedVisible) {
+                        if (this.mIsCreating) {
+                            if (Flags.noConsecutiveVisibilityEvents()) {
+                                Trace.beginSection("WPMS.Engine.onVisibilityChanged-true");
+                                onVisibilityChanged(true);
+                                Trace.endSection();
+                                Trace.beginSection("WPMS.Engine.onVisibilityChanged-false");
+                                onVisibilityChanged(false);
+                                Trace.endSection();
+                                Log.d(WallpaperService.TAG, "updateSurface onVisibilityChanged visible: false");
+                            } else {
+                                Trace.beginSection("WPMS.Engine.onVisibilityChanged-true");
+                                onVisibilityChanged(true);
+                                Log.d(WallpaperService.TAG, "updateSurface onVisibilityChanged visible: true");
+                                Trace.endSection();
+                            }
+                        }
+                        if (!Flags.noConsecutiveVisibilityEvents()) {
+                            Trace.beginSection("WPMS.Engine.onVisibilityChanged-false");
+                            onVisibilityChanged(false);
+                            Log.d(WallpaperService.TAG, "updateSurface onVisibilityChanged visible: false");
+                            Trace.endSection();
+                        }
+                    }
+                    this.mIsCreating = false;
+                    this.mSurfaceCreated = true;
+                    if (z8) {
+                        if (!this.mVisible) {
+                            Log.d(WallpaperService.TAG, "updateSurface : finish redrawing reserve to redraw after visible cause currently not visible.");
+                            this.mNeedToRedrawAfterVisible = true;
+                        }
+                        Log.i(WallpaperService.TAG, "updateSurface: invoke Session.finishDrawing");
+                        this.mSession.finishDrawing(this.mWindow, null, Integer.MAX_VALUE);
+                        processLocalColors();
+                    }
+                    reposition();
+                    reportEngineShown(shouldWaitForEngineShown());
+                } catch (Throwable th4) {
+                    th = th4;
+                }
+            } catch (RemoteException unused) {
+            }
         }
 
         private boolean isDisplaySizeChanged(int i, int i2) {
@@ -1028,7 +1379,7 @@ public abstract class WallpaperService extends Service {
             transaction.apply();
         }
 
-        void attach(IWallpaperEngineWrapper iWallpaperEngineWrapper) {
+        void attach(IWallpaperEngineWrapper iWallpaperEngineWrapper) throws Throwable {
             if (this.mDestroyed) {
                 return;
             }
@@ -1049,9 +1400,9 @@ public abstract class WallpaperService extends Service {
             }
             Display display = this.mIWallpaperEngine.mDisplay;
             this.mDisplay = display;
-            Context createWindowContext = WallpaperService.this.createDisplayContext(display).createWindowContext(2013, null);
-            this.mDisplayContext = createWindowContext;
-            this.mDefaultDimAmount = createWindowContext.getResources().getFloat(R.dimen.config_wallpaperDimAmount);
+            Context contextCreateWindowContext = WallpaperService.this.createDisplayContext(display).createWindowContext(2013, null);
+            this.mDisplayContext = contextCreateWindowContext;
+            this.mDefaultDimAmount = contextCreateWindowContext.getResources().getFloat(R.dimen.config_wallpaperDimAmount);
             this.mDisplayState = getDisplayState(this.mDisplay);
             this.mMergedConfiguration.setOverrideConfiguration(this.mDisplayContext.getResources().getConfiguration());
             Trace.beginSection("WPMS.Engine.onCreate");
@@ -1095,7 +1446,7 @@ public abstract class WallpaperService extends Service {
             doOffsetsChanged(true);
         }
 
-        void doDisplayPaddingChanged(Rect rect) {
+        void doDisplayPaddingChanged(Rect rect) throws Throwable {
             if (this.mDestroyed || this.mIWallpaperEngine.mDisplayPadding.equals(rect)) {
                 return;
             }
@@ -1103,7 +1454,7 @@ public abstract class WallpaperService extends Service {
             updateSurface(true, false, false);
         }
 
-        void onScreenTurningOnChanged(boolean z) {
+        void onScreenTurningOnChanged(boolean z) throws Throwable {
             if (this.mDestroyed) {
                 return;
             }
@@ -1111,7 +1462,7 @@ public abstract class WallpaperService extends Service {
             reportVisibility(false);
         }
 
-        void doVisibilityChanged(boolean z) {
+        void doVisibilityChanged(boolean z) throws Throwable {
             if (!this.mDestroyed) {
                 this.mVisible = z;
                 reportVisibility(false);
@@ -1124,128 +1475,47 @@ public abstract class WallpaperService extends Service {
             AnimationHandler.requestAnimatorsEnabled(z, this);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x005f  */
-        /* JADX WARN: Removed duplicated region for block: B:38:0x0081  */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x008f  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x0061  */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x0049  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        void reportVisibility(boolean r7) {
-            /*
-                r6 = this;
-                android.view.SurfaceControl r0 = r6.mScreenshotSurfaceControl
-                if (r0 == 0) goto La
-                boolean r0 = r6.mVisible
-                if (r0 == 0) goto La
-                goto Lcf
-            La:
-                boolean r0 = r6.mDestroyed
-                if (r0 != 0) goto Lcf
-                android.view.Display r0 = r6.mDisplay
-                int r0 = r6.getDisplayState(r0)
-                r6.mDisplayState = r0
-                int r0 = r6.semGetWallpaperFlags()
-                boolean r1 = r6.isSupportFullscreenAod()
-                r2 = 1
-                r3 = 0
-                if (r1 == 0) goto L49
-                android.service.wallpaper.WallpaperService r1 = android.service.wallpaper.WallpaperService.this
-                boolean r1 = android.service.wallpaper.WallpaperService.m4497$$Nest$misAodTransitionRequired(r1)
-                int r4 = r6.mDisplayState
-                boolean r4 = android.view.Display.isDozeState(r4)
-                if (r4 == 0) goto L49
-                if (r1 == 0) goto L49
-                boolean r1 = com.samsung.android.wallpaper.utils.WhichChecker.isSystemAndLock(r0)
-                if (r1 == 0) goto L49
-                android.service.wallpaper.WallpaperService r1 = android.service.wallpaper.WallpaperService.this
-                android.app.WallpaperManager r1 = r1.mWallpaperManager
-                int r0 = com.samsung.android.wallpaper.utils.WhichChecker.getMode(r0)
-                r0 = r0 | r2
-                boolean r0 = r1.isStockLiveWallpaper(r0)
-                if (r0 == 0) goto L49
-                r0 = r2
-                goto L4a
-            L49:
-                r0 = r3
-            L4a:
-                int r1 = r6.mDisplayState
-                boolean r1 = android.view.Display.isOnState(r1)
-                if (r1 == 0) goto L58
-                boolean r1 = r6.mIsScreenTurningOn
-                if (r1 != 0) goto L58
-                r1 = r2
-                goto L59
-            L58:
-                r1 = r3
-            L59:
-                android.service.wallpaper.WallpaperService$IWallpaperEngineWrapper r4 = r6.mIWallpaperEngine
-                android.app.WallpaperInfo r4 = r4.mInfo
-                if (r4 != 0) goto L61
-                r4 = r3
-                goto L69
-            L61:
-                android.service.wallpaper.WallpaperService$IWallpaperEngineWrapper r4 = r6.mIWallpaperEngine
-                android.app.WallpaperInfo r4 = r4.mInfo
-                boolean r4 = r4.supportsAmbientMode()
-            L69:
-                boolean r5 = r6.mVisible
-                if (r5 == 0) goto L74
-                if (r1 != 0) goto L75
-                if (r4 != 0) goto L75
-                if (r0 == 0) goto L74
-                goto L75
-            L74:
-                r2 = r3
-            L75:
-                boolean r0 = r6.mReportedVisible
-                if (r0 != r2) goto L7b
-                if (r7 == 0) goto Lcf
-            L7b:
-                r6.mReportedVisible = r2
-                boolean r7 = com.samsung.android.wallpaper.Rune.SUPPORT_SUB_DISPLAY_MODE
-                if (r7 == 0) goto L8b
-                android.service.wallpaper.WallpaperService r7 = android.service.wallpaper.WallpaperService.this
-                android.app.WallpaperManager r7 = r7.mWallpaperManager
-                int r7 = r7.getLidState()
-                r6.mLidState = r7
-            L8b:
-                java.lang.String r7 = "WallpaperService"
-                if (r2 == 0) goto La1
-                r6.doOffsetsChanged(r3)
-                boolean r0 = r6.mNeedToRedrawAfterVisible
-                if (r0 == 0) goto L9c
-                java.lang.String r0 = "reportVisibility: enforce redraw"
-                android.util.Log.i(r7, r0)
-            L9c:
-                boolean r0 = r6.mNeedToRedrawAfterVisible
-                r6.updateSurface(r3, r3, r0)
-            La1:
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "reportVisibility: visibility changed. visible="
-                r0.<init>(r1)
-                r0.append(r2)
-                java.lang.String r0 = r0.toString()
-                android.util.Log.i(r7, r0)
-                r6.onVisibilityChanged(r2)
-                if (r2 == 0) goto Lc1
-                android.service.wallpaper.WallpaperService$IWallpaperEngineWrapper r7 = r6.mIWallpaperEngine
-                boolean r7 = r7.mIsPreview
-                if (r7 != 0) goto Lc1
-                r6.notifyWallpaperPid()
-            Lc1:
-                boolean r7 = r6.mReportedVisible
-                if (r7 == 0) goto Lcc
-                boolean r7 = r6.mFrozenRequested
-                if (r7 == 0) goto Lcc
-                r6.freeze()
-            Lcc:
-                android.animation.AnimationHandler.requestAnimatorsEnabled(r2, r6)
-            Lcf:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.service.wallpaper.WallpaperService.Engine.reportVisibility(boolean):void");
+        void reportVisibility(boolean z) throws Throwable {
+            boolean z2;
+            if ((this.mScreenshotSurfaceControl == null || !this.mVisible) && !this.mDestroyed) {
+                this.mDisplayState = getDisplayState(this.mDisplay);
+                int iSemGetWallpaperFlags = semGetWallpaperFlags();
+                boolean z3 = true;
+                if (isSupportFullscreenAod()) {
+                    z2 = Display.isDozeState(this.mDisplayState) && WallpaperService.this.isAodTransitionRequired() && WhichChecker.isSystemAndLock(iSemGetWallpaperFlags) && WallpaperService.this.mWallpaperManager.isStockLiveWallpaper(WhichChecker.getMode(iSemGetWallpaperFlags) | 1);
+                }
+                boolean z4 = Display.isOnState(this.mDisplayState) && !this.mIsScreenTurningOn;
+                boolean zSupportsAmbientMode = this.mIWallpaperEngine.mInfo == null ? false : this.mIWallpaperEngine.mInfo.supportsAmbientMode();
+                if (!this.mVisible || (!z4 && !zSupportsAmbientMode && !z2)) {
+                    z3 = false;
+                }
+                if (this.mReportedVisible != z3 || z) {
+                    this.mReportedVisible = z3;
+                    if (Rune.SUPPORT_SUB_DISPLAY_MODE) {
+                        this.mLidState = WallpaperService.this.mWallpaperManager.getLidState();
+                    }
+                    if (z3) {
+                        doOffsetsChanged(false);
+                        if (this.mNeedToRedrawAfterVisible) {
+                            Log.i(WallpaperService.TAG, "reportVisibility: enforce redraw");
+                        }
+                        updateSurface(false, false, this.mNeedToRedrawAfterVisible);
+                    }
+                    Log.i(WallpaperService.TAG, "reportVisibility: visibility changed. visible=" + z3);
+                    onVisibilityChanged(z3);
+                    if (z3 && !this.mIWallpaperEngine.mIsPreview) {
+                        notifyWallpaperPid();
+                    }
+                    if (this.mReportedVisible && this.mFrozenRequested) {
+                        freeze();
+                    }
+                    AnimationHandler.requestAnimatorsEnabled(z3, this);
+                }
+            }
         }
 
         void doOffsetsChanged(boolean z) {
@@ -1292,14 +1562,14 @@ public abstract class WallpaperService extends Service {
 
         private void processLocalColors() {
             if (this.mProcessLocalColorsPending.compareAndSet(false, true)) {
-                final long longValue = this.mClockFunction.get().longValue();
-                final long max = Math.max(0L, 2000 - (longValue - this.mLastProcessLocalColorsTimestamp));
+                final long jLongValue = this.mClockFunction.get().longValue();
+                final long jMax = Math.max(0L, 2000 - (jLongValue - this.mLastProcessLocalColorsTimestamp));
                 this.mHandler.postDelayed(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda7
                     @Override // java.lang.Runnable
                     public final void run() {
-                        WallpaperService.Engine.this.lambda$processLocalColors$1(longValue, max);
+                        this.f$0.lambda$processLocalColors$1(jLongValue, jMax);
                     }
-                }, max);
+                }, jMax);
             }
         }
 
@@ -1311,7 +1581,7 @@ public abstract class WallpaperService extends Service {
         }
 
         private void processLocalColorsInternal() {
-            int round;
+            int iRound;
             int i;
             if (supportsLocalColorExtraction()) {
                 return;
@@ -1323,14 +1593,14 @@ public abstract class WallpaperService extends Service {
                 if (f % f2 <= WallpaperService.MIN_PAGE_ALLOWED_MARGIN && this.mSurfaceHolder.getSurface().isValid()) {
                     float f4 = 1.0f;
                     if (validStep(f2)) {
-                        int round2 = Math.round(1.0f / f2);
-                        int i2 = round2 + 1;
+                        int iRound2 = Math.round(1.0f / f2);
+                        int i2 = iRound2 + 1;
                         float f5 = i2;
                         f4 = 1.0f / f5;
-                        round = Math.round((f * (round2 / f5)) / f4);
+                        iRound = Math.round((f * (iRound2 / f5)) / f4);
                         i = i2;
                     } else {
-                        round = 0;
+                        iRound = 0;
                         i = 1;
                     }
                     resetWindowPages();
@@ -1354,10 +1624,10 @@ public abstract class WallpaperService extends Service {
                         this.mLocalColorsToAdd.clear();
                     }
                     EngineWindowPage[] engineWindowPageArr3 = this.mWindowPages;
-                    if (round >= engineWindowPageArr3.length) {
-                        round = engineWindowPageArr3.length - 1;
+                    if (iRound >= engineWindowPageArr3.length) {
+                        iRound = engineWindowPageArr3.length - 1;
                     }
-                    int i3 = round;
+                    int i3 = iRound;
                     EngineWindowPage engineWindowPage2 = engineWindowPageArr3[i3];
                     updatePage(engineWindowPage2, new HashSet(engineWindowPage2.getAreas()), i3, i, f3);
                 }
@@ -1383,8 +1653,8 @@ public abstract class WallpaperService extends Service {
 
         void updatePage(final EngineWindowPage engineWindowPage, final Set<RectF> set, final int i, final int i2, final float f) {
             int i3;
-            final long elapsedRealtime = SystemClock.elapsedRealtime() - 60000;
-            if (elapsedRealtime - engineWindowPage.getLastUpdateTime() < 60000) {
+            final long jElapsedRealtime = SystemClock.elapsedRealtime() - 60000;
+            if (jElapsedRealtime - engineWindowPage.getLastUpdateTime() < 60000) {
                 return;
             }
             Surface surface = this.mSurfaceHolder.getSurface();
@@ -1404,12 +1674,12 @@ public abstract class WallpaperService extends Service {
                 final int i6 = this.mPixelCopyCount;
                 this.mPixelCopyCount = i6 + 1;
                 Trace.beginAsyncSection("WallpaperService#pixelCopy", i6);
-                final Bitmap createBitmap = Bitmap.createBitmap(i4, i5, Bitmap.Config.ARGB_8888);
+                final Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i4, i5, Bitmap.Config.ARGB_8888);
                 try {
-                    PixelCopy.request(surface, createBitmap, new PixelCopy.OnPixelCopyFinishedListener() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda1
+                    PixelCopy.request(surface, bitmapCreateBitmap, new PixelCopy.OnPixelCopyFinishedListener() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda1
                         @Override // android.view.PixelCopy.OnPixelCopyFinishedListener
                         public final void onPixelCopyFinished(int i7) {
-                            WallpaperService.Engine.this.lambda$updatePage$2(i6, engineWindowPage, set, i, i2, f, createBitmap, elapsedRealtime, i7);
+                            this.f$0.lambda$updatePage$2(i6, engineWindowPage, set, i, i2, f, bitmapCreateBitmap, jElapsedRealtime, i7);
                         }
                     }, WallpaperService.this.mBackgroundHandler);
                 } catch (IllegalArgumentException unused) {
@@ -1447,18 +1717,18 @@ public abstract class WallpaperService extends Service {
             Trace.beginSection("WallpaperService#updatePageColors");
             for (final RectF rectF : set) {
                 if (rectF != null) {
-                    RectF generateSubRect = generateSubRect(rectF, i, i2);
+                    RectF rectFGenerateSubRect = generateSubRect(rectF, i, i2);
                     try {
-                        Bitmap createBitmap = Bitmap.createBitmap(engineWindowPage.getBitmap(), Math.round(r2.getWidth() * generateSubRect.left), Math.round(r2.getHeight() * generateSubRect.top), Math.round(r2.getWidth() * generateSubRect.width()), Math.round(r2.getHeight() * generateSubRect.height()));
-                        final WallpaperColors fromBitmap = WallpaperColors.fromBitmap(createBitmap, f);
-                        createBitmap.recycle();
+                        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(engineWindowPage.getBitmap(), Math.round(r2.getWidth() * rectFGenerateSubRect.left), Math.round(r2.getHeight() * rectFGenerateSubRect.top), Math.round(r2.getWidth() * rectFGenerateSubRect.width()), Math.round(r2.getHeight() * rectFGenerateSubRect.height()));
+                        final WallpaperColors wallpaperColorsFromBitmap = WallpaperColors.fromBitmap(bitmapCreateBitmap, f);
+                        bitmapCreateBitmap.recycle();
                         WallpaperColors colors = engineWindowPage.getColors(rectF);
-                        if (colors == null || !fromBitmap.equals(colors)) {
-                            engineWindowPage.addWallpaperColors(rectF, fromBitmap);
+                        if (colors == null || !wallpaperColorsFromBitmap.equals(colors)) {
+                            engineWindowPage.addWallpaperColors(rectF, wallpaperColorsFromBitmap);
                             this.mHandler.post(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    WallpaperService.Engine.this.lambda$updatePageColors$3(rectF, fromBitmap);
+                                    this.f$0.lambda$updatePageColors$3(rectF, wallpaperColorsFromBitmap);
                                 }
                             });
                         }
@@ -1515,12 +1785,12 @@ public abstract class WallpaperService extends Service {
             if (!WallpaperService.this.isValid(rectF) || !validStep(f)) {
                 return 0;
             }
-            int round = Math.round(1.0f / f);
-            int round2 = Math.round(rectF.centerX() * round);
-            if (round2 == round) {
-                return round - 1;
+            int iRound = Math.round(1.0f / f);
+            int iRound2 = Math.round(rectF.centerX() * iRound);
+            if (iRound2 == iRound) {
+                return iRound - 1;
             }
-            return round2 == this.mWindowPages.length ? r2.length - 1 : round2;
+            return iRound2 == this.mWindowPages.length ? r2.length - 1 : iRound2;
         }
 
         public void addLocalColorsAreas(final List<RectF> list) {
@@ -1530,7 +1800,7 @@ public abstract class WallpaperService extends Service {
             WallpaperService.this.mBackgroundHandler.post(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperService.Engine.this.lambda$addLocalColorsAreas$4(list);
+                    this.f$0.lambda$addLocalColorsAreas$4(list);
                 }
             });
         }
@@ -1550,7 +1820,7 @@ public abstract class WallpaperService extends Service {
             WallpaperService.this.mBackgroundHandler.post(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperService.Engine.this.lambda$removeLocalColorsAreas$5(list);
+                    this.f$0.lambda$removeLocalColorsAreas$5(list);
                 }
             });
         }
@@ -1587,28 +1857,28 @@ public abstract class WallpaperService extends Service {
             return !Float.isNaN(f) && f > 0.0f && f <= 1.0f;
         }
 
-        void doCommand(WallpaperCommand wallpaperCommand) {
+        void doCommand(WallpaperCommand wallpaperCommand) throws Throwable {
             Engine engine;
-            Bundle bundle;
+            Bundle bundleOnCommand;
             if (this.mDestroyed) {
                 engine = this;
-                bundle = null;
+                bundleOnCommand = null;
             } else {
                 if (WallpaperManager.COMMAND_FREEZE.equals(wallpaperCommand.action) || WallpaperManager.COMMAND_UNFREEZE.equals(wallpaperCommand.action)) {
                     updateFrozenState(!WallpaperManager.COMMAND_UNFREEZE.equals(wallpaperCommand.action));
                 }
                 engine = this;
-                bundle = engine.onCommand(wallpaperCommand.action, wallpaperCommand.x, wallpaperCommand.y, wallpaperCommand.z, wallpaperCommand.extras, wallpaperCommand.sync);
+                bundleOnCommand = engine.onCommand(wallpaperCommand.action, wallpaperCommand.x, wallpaperCommand.y, wallpaperCommand.z, wallpaperCommand.extras, wallpaperCommand.sync);
             }
             if (wallpaperCommand.sync) {
                 try {
-                    engine.mSession.wallpaperCommandComplete(engine.mWindow.asBinder(), bundle);
+                    engine.mSession.wallpaperCommandComplete(engine.mWindow.asBinder(), bundleOnCommand);
                 } catch (RemoteException unused) {
                 }
             }
         }
 
-        private void updateFrozenState(boolean z) {
+        private void updateFrozenState(boolean z) throws Throwable {
             if (this.mIWallpaperEngine.mInfo == null && z) {
                 return;
             }
@@ -1623,14 +1893,14 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        private void freeze() {
+        private void freeze() throws Throwable {
             if (this.mReportedVisible && !this.mDestroyed && showScreenshotOfWallpaper()) {
                 doVisibilityChanged(false);
                 this.mVisible = true;
             }
         }
 
-        private void unfreeze() {
+        private void unfreeze() throws Throwable {
             cleanUpScreenshotSurfaceControl();
             if (this.mVisible) {
                 doVisibilityChanged(true);
@@ -1651,11 +1921,11 @@ public abstract class WallpaperService extends Service {
             if (this.mScreenshotSize.x <= 0 || this.mScreenshotSize.y <= 0) {
                 Log.w(WallpaperService.TAG, "Unexpected screenshot size: " + this.mScreenshotSize);
             } else {
-                float max = Math.max(1.0f, Math.max(this.mSurfaceSize.x / this.mScreenshotSize.x, this.mSurfaceSize.y / this.mScreenshotSize.y));
-                int i = ((int) (this.mScreenshotSize.x * max)) - this.mSurfaceSize.x;
+                float fMax = Math.max(1.0f, Math.max(this.mSurfaceSize.x / this.mScreenshotSize.x, this.mSurfaceSize.y / this.mScreenshotSize.y));
+                int i = ((int) (this.mScreenshotSize.x * fMax)) - this.mSurfaceSize.x;
                 int i2 = i / 2;
-                int i3 = (((int) (this.mScreenshotSize.y * max)) - this.mSurfaceSize.y) / 2;
-                new SurfaceControl.Transaction().setMatrix(this.mScreenshotSurfaceControl, max, 0.0f, 0.0f, max).setWindowCrop(this.mScreenshotSurfaceControl, new Rect(i2, i3, this.mScreenshotSize.x + i2, this.mScreenshotSize.y + i3)).setPosition(this.mScreenshotSurfaceControl, (-i) / 2, (-r1) / 2).apply();
+                int i3 = (((int) (this.mScreenshotSize.y * fMax)) - this.mSurfaceSize.y) / 2;
+                new SurfaceControl.Transaction().setMatrix(this.mScreenshotSurfaceControl, fMax, 0.0f, 0.0f, fMax).setWindowCrop(this.mScreenshotSurfaceControl, new Rect(i2, i3, this.mScreenshotSize.x + i2, this.mScreenshotSize.y + i3)).setPosition(this.mScreenshotSurfaceControl, (-i) / 2, (-r1) / 2).apply();
             }
         }
 
@@ -1673,17 +1943,17 @@ public abstract class WallpaperService extends Service {
                 Log.e(WallpaperService.TAG, "Screenshot is unexpectedly not null");
                 cleanUpScreenshotSurfaceControl();
             }
-            ScreenCapture.ScreenshotHardwareBuffer captureLayers = ScreenCapture.captureLayers(new ScreenCapture.LayerCaptureArgs.Builder(this.mSurfaceControl).setUid(Process.myUid()).setChildrenOnly(false).setSourceCrop(rect).build());
-            if (captureLayers == null) {
+            ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBufferCaptureLayers = ScreenCapture.captureLayers(new ScreenCapture.LayerCaptureArgs.Builder(this.mSurfaceControl).setUid(Process.myUid()).setChildrenOnly(false).setSourceCrop(rect).build());
+            if (screenshotHardwareBufferCaptureLayers == null) {
                 Log.w(WallpaperService.TAG, "Failed to screenshot wallpaper: screenshotBuffer is null");
                 return false;
             }
-            HardwareBuffer hardwareBuffer = captureLayers.getHardwareBuffer();
+            HardwareBuffer hardwareBuffer = screenshotHardwareBufferCaptureLayers.getHardwareBuffer();
             SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-            this.mScreenshotSurfaceControl = new SurfaceControl.Builder().setName("Wallpaper snapshot for engine " + this).setFormat(hardwareBuffer.getFormat()).setParent(this.mSurfaceControl).setSecure(captureLayers.containsSecureLayers()).setCallsite("WallpaperService.Engine.showScreenshotOfWallpaper").setBLASTLayer().build();
+            this.mScreenshotSurfaceControl = new SurfaceControl.Builder().setName("Wallpaper snapshot for engine " + this).setFormat(hardwareBuffer.getFormat()).setParent(this.mSurfaceControl).setSecure(screenshotHardwareBufferCaptureLayers.containsSecureLayers()).setCallsite("WallpaperService.Engine.showScreenshotOfWallpaper").setBLASTLayer().build();
             this.mScreenshotSize.set(this.mSurfaceSize.x, this.mSurfaceSize.y);
             transaction.setBuffer(this.mScreenshotSurfaceControl, hardwareBuffer);
-            transaction.setColorSpace(this.mScreenshotSurfaceControl, captureLayers.getColorSpace());
+            transaction.setColorSpace(this.mScreenshotSurfaceControl, screenshotHardwareBufferCaptureLayers.getColorSpace());
             transaction.setLayer(this.mScreenshotSurfaceControl, Integer.MAX_VALUE);
             transaction.show(this.mScreenshotSurfaceControl);
             transaction.hide(this.mBbqSurfaceControl);
@@ -1762,17 +2032,17 @@ public abstract class WallpaperService extends Service {
         void switchDisplay(boolean z) {
             if (Rune.SUPPORT_SUB_DISPLAY_MODE) {
                 this.mLidState = WallpaperService.this.mWallpaperManager.getLidState();
-                int semGetWallpaperFlags = semGetWallpaperFlags();
-                Log.i(WallpaperService.TAG, " switchDisplay start " + z + " , lidState = " + this.mLidState + " , which = " + semGetWallpaperFlags);
-                if (!Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mLidState == 1 && WhichChecker.isPhone(semGetWallpaperFlags)) {
+                int iSemGetWallpaperFlags = semGetWallpaperFlags();
+                Log.i(WallpaperService.TAG, " switchDisplay start " + z + " , lidState = " + this.mLidState + " , which = " + iSemGetWallpaperFlags);
+                if (!Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mLidState == 1 && WhichChecker.isPhone(iSemGetWallpaperFlags)) {
                     this.mNeedUpdateSurfaceAfterVisibilityChanged = true;
                 }
                 onSwitchDisplayChanged(z);
-                if ((WhichChecker.getMode(semGetWallpaperFlags) == 16) == z) {
+                if ((WhichChecker.getMode(iSemGetWallpaperFlags) == 16) == z) {
                     this.mCaller.getHandler().post(new Runnable() { // from class: android.service.wallpaper.WallpaperService$Engine$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            WallpaperService.Engine.this.lambda$switchDisplay$6();
+                        public final void run() throws Throwable {
+                            this.f$0.lambda$switchDisplay$6();
                         }
                     });
                 }
@@ -1781,11 +2051,11 @@ public abstract class WallpaperService extends Service {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$switchDisplay$6() {
+        public /* synthetic */ void lambda$switchDisplay$6() throws Throwable {
             updateSurface(true, false, true);
         }
 
-        protected void semSetFixedOrientation(boolean z, boolean z2) {
+        protected void semSetFixedOrientation(boolean z, boolean z2) throws Throwable {
             Log.i(WallpaperService.TAG, "semSetFixedOrientation: fixed=" + z + ", update=" + z2);
             this.mIsFixedOrientationRequested = z;
             if (z2 && this.mCreated) {
@@ -1825,7 +2095,7 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        public SurfaceData semCreateSurface(boolean z, float f) {
+        public SurfaceData semCreateSurface(boolean z, float f) throws Throwable {
             Log.i(WallpaperService.TAG, "semCreateSurface: keepPrevSurface=" + z + ", alpha=" + f);
             if (this.mSurfaceControl == null || this.mBbqSurfaceControl == null || this.mBlastBufferQueue == null) {
                 Log.e(WallpaperService.TAG, "semCreateSurface: current surface control is not ready");
@@ -1927,13 +2197,13 @@ public abstract class WallpaperService extends Service {
         }
 
         private boolean isSupportFullscreenAod() {
-            int semGetWallpaperFlags = semGetWallpaperFlags();
-            boolean isPhone = WhichChecker.isPhone(semGetWallpaperFlags);
-            boolean isSubDisplay = WhichChecker.isSubDisplay(semGetWallpaperFlags);
-            if (Rune.SUPPORT_AOD_FULLSCREEN_MAIN_DISPLAY && isPhone) {
+            int iSemGetWallpaperFlags = semGetWallpaperFlags();
+            boolean zIsPhone = WhichChecker.isPhone(iSemGetWallpaperFlags);
+            boolean zIsSubDisplay = WhichChecker.isSubDisplay(iSemGetWallpaperFlags);
+            if (Rune.SUPPORT_AOD_FULLSCREEN_MAIN_DISPLAY && zIsPhone) {
                 return true;
             }
-            return Rune.SUPPORT_AOD_FULLSCREEN_SUB_DISPLAY && isSubDisplay;
+            return Rune.SUPPORT_AOD_FULLSCREEN_SUB_DISPLAY && zIsSubDisplay;
         }
     }
 
@@ -2111,9 +2381,9 @@ public abstract class WallpaperService extends Service {
 
         @Override // android.service.wallpaper.IWallpaperEngine
         public void destroy() {
-            Message obtainMessage = this.mCaller.obtainMessage(20);
+            Message messageObtainMessage = this.mCaller.obtainMessage(20);
             this.mCaller.getHandler().removeCallbacksAndMessages(null);
-            this.mCaller.sendMessage(obtainMessage);
+            this.mCaller.sendMessage(messageObtainMessage);
         }
 
         @Override // android.service.wallpaper.IWallpaperEngine
@@ -2139,27 +2409,27 @@ public abstract class WallpaperService extends Service {
             return null;
         }
 
-        private void doAttachEngine() {
+        private void doAttachEngine() throws Throwable {
             Trace.beginSection("WPMS.onCreateEngine");
-            Engine onCreateEngine = WallpaperService.this.onCreateEngine(this.mWhich);
-            if (onCreateEngine == null) {
+            Engine engineOnCreateEngine = WallpaperService.this.onCreateEngine(this.mWhich);
+            if (engineOnCreateEngine == null) {
                 if ((Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mDisplayId == 1) || (Rune.VIRTUAL_DISPLAY_WALLPAPER && WallpaperManager.isVirtualWallpaperDisplay(WallpaperService.this.getApplicationContext(), this.mDisplayId))) {
-                    onCreateEngine = WallpaperService.this.onCreateSubEngine(this.mDisplayId);
+                    engineOnCreateEngine = WallpaperService.this.onCreateSubEngine(this.mDisplayId);
                 } else {
-                    onCreateEngine = WallpaperService.this.onCreateEngine();
+                    engineOnCreateEngine = WallpaperService.this.onCreateEngine();
                 }
             }
             Trace.endSection();
-            this.mEngine = onCreateEngine;
+            this.mEngine = engineOnCreateEngine;
             Trace.beginSection("WPMS.mConnection.attachEngine-" + this.mDisplayId);
             try {
                 this.mConnection.attachEngine(this, this.mDisplayId);
                 Trace.endSection();
                 Trace.beginSection("WPMS.engine.attach");
-                onCreateEngine.attach(this);
-                onCreateEngine.setCurrentUserId(this.mCurrentUserId);
+                engineOnCreateEngine.attach(this);
+                engineOnCreateEngine.setCurrentUserId(this.mCurrentUserId);
             } catch (RemoteException e) {
-                onCreateEngine.detach();
+                engineOnCreateEngine.detach();
                 Log.w(WallpaperService.TAG, "Wallpaper host disappeared", e);
             } catch (IllegalStateException e2) {
                 Log.w(WallpaperService.TAG, "Connector instance already destroyed, can't attach engine to non existing connector", e2);
@@ -2200,7 +2470,7 @@ public abstract class WallpaperService extends Service {
         }
 
         @Override // com.android.internal.os.HandlerCaller.Callback
-        public void executeMessage(Message message) {
+        public void executeMessage(Message message) throws Throwable {
             switch (message.what) {
                 case 10:
                     Trace.beginSection("WPMS.DO_ATTACH");
@@ -2245,11 +2515,11 @@ public abstract class WallpaperService extends Service {
                             if (this.mEngine.mPendingMove == motionEvent) {
                                 this.mEngine.mPendingMove = null;
                             } else {
-                                r1 = true;
+                                z = true;
                             }
                         }
                     }
-                    if (!r1) {
+                    if (!z) {
                         this.mEngine.onTouchEvent(motionEvent);
                     }
                     motionEvent.recycle();
@@ -2259,9 +2529,9 @@ public abstract class WallpaperService extends Service {
                         return;
                     }
                     try {
-                        WallpaperColors onComputeColors = this.mEngine.onComputeColors();
-                        this.mEngine.setPrimaryWallpaperColors(onComputeColors);
-                        this.mConnection.onWallpaperColorsChanged(onComputeColors, this.mDisplayId);
+                        WallpaperColors wallpaperColorsOnComputeColors = this.mEngine.onComputeColors();
+                        this.mEngine.setPrimaryWallpaperColors(wallpaperColorsOnComputeColors);
+                        this.mConnection.onWallpaperColorsChanged(wallpaperColorsOnComputeColors, this.mDisplayId);
                         return;
                     } catch (RemoteException unused) {
                         return;
@@ -2292,13 +2562,13 @@ public abstract class WallpaperService extends Service {
             }
         }
 
-        private void handleResized(MergedConfiguration mergedConfiguration, boolean z) {
+        private void handleResized(MergedConfiguration mergedConfiguration, boolean z) throws Throwable {
             Log.i(WallpaperService.TAG, "handleResized: which=" + this.mWhich + ", reportDraw=" + z);
-            int decrementAndGet = mergedConfiguration != null ? this.mPendingResizeCount.decrementAndGet() : -1;
+            int iDecrementAndGet = mergedConfiguration != null ? this.mPendingResizeCount.decrementAndGet() : -1;
             if (z) {
                 this.mReportDraw = true;
             }
-            if (decrementAndGet > 0) {
+            if (iDecrementAndGet > 0) {
                 return;
             }
             if (mergedConfiguration != null) {

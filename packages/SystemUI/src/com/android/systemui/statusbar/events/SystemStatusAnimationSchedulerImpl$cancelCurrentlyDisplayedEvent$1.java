@@ -13,38 +13,35 @@ import kotlinx.coroutines.TimeoutKt;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ SystemStatusAnimationSchedulerImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
         final /* synthetic */ SystemStatusAnimationSchedulerImpl this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03101 extends SuspendLambda implements Function2 {
+        final class C04921 extends SuspendLambda implements Function2 {
             /* synthetic */ Object L$0;
             int label;
 
-            public C03101(Continuation continuation) {
+            public C04921(Continuation continuation) {
                 super(2, continuation);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C03101 c03101 = new C03101(continuation);
-                c03101.L$0 = obj;
-                return c03101;
+                C04921 c04921 = new C04921(continuation);
+                c04921.L$0 = obj;
+                return c04921;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C03101) create((SystemEventAnimationState) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04921) create((SystemEventAnimationState) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -81,9 +78,9 @@ final class SystemStatusAnimationSchedulerImpl$cancelCurrentlyDisplayedEvent$1 e
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 StateFlowImpl stateFlowImpl = this.this$0._animationState;
-                C03101 c03101 = new C03101(null);
+                C04921 c04921 = new C04921(null);
                 this.label = 1;
-                if (FlowKt.first(stateFlowImpl, c03101, this) == coroutineSingletons) {
+                if (FlowKt.first(stateFlowImpl, c04921, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

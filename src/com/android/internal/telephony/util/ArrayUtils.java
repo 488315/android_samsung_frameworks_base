@@ -36,21 +36,21 @@ public final class ArrayUtils {
         if (tArr == null || tArr.length == 0) {
             return (T[]) createEmptyArray(cls);
         }
-        int i = 0;
+        int length = 0;
         for (T[] tArr2 : tArr) {
             if (tArr2 != null) {
-                i += tArr2.length;
+                length += tArr2.length;
             }
         }
-        if (i == 0) {
+        if (length == 0) {
             return (T[]) createEmptyArray(cls);
         }
-        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, i));
-        int i2 = 0;
+        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, length));
+        int length2 = 0;
         for (T[] tArr4 : tArr) {
             if (tArr4 != null && tArr4.length != 0) {
-                System.arraycopy(tArr4, 0, tArr3, i2, tArr4.length);
-                i2 += tArr4.length;
+                System.arraycopy(tArr4, 0, tArr3, length2, tArr4.length);
+                length2 += tArr4.length;
             }
         }
         return tArr3;

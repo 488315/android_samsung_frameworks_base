@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RealBufferedSource$inputStream$1 extends InputStream {
     public final /* synthetic */ RealBufferedSource this$0;
@@ -15,7 +14,7 @@ public final class RealBufferedSource$inputStream$1 extends InputStream {
     }
 
     @Override // java.io.InputStream
-    public final int available() {
+    public final int available() throws IOException {
         RealBufferedSource realBufferedSource = this.this$0;
         if (realBufferedSource.closed) {
             throw new IOException(ServiceTuple.BASIC_STATUS_CLOSED);
@@ -29,7 +28,7 @@ public final class RealBufferedSource$inputStream$1 extends InputStream {
     }
 
     @Override // java.io.InputStream
-    public final int read() {
+    public final int read() throws IOException {
         RealBufferedSource realBufferedSource = this.this$0;
         if (realBufferedSource.closed) {
             throw new IOException(ServiceTuple.BASIC_STATUS_CLOSED);
@@ -46,7 +45,7 @@ public final class RealBufferedSource$inputStream$1 extends InputStream {
     }
 
     @Override // java.io.InputStream
-    public final long transferTo(OutputStream outputStream) {
+    public final long transferTo(OutputStream outputStream) throws IOException {
         if (this.this$0.closed) {
             throw new IOException(ServiceTuple.BASIC_STATUS_CLOSED);
         }
@@ -64,25 +63,25 @@ public final class RealBufferedSource$inputStream$1 extends InputStream {
             Segment segment = buffer2.head;
             while (j2 > 0) {
                 segment.getClass();
-                int min = (int) Math.min(j2, segment.limit - segment.pos);
-                outputStream.write(segment.data, segment.pos, min);
-                int i = segment.pos + min;
+                int iMin = (int) Math.min(j2, segment.limit - segment.pos);
+                outputStream.write(segment.data, segment.pos, iMin);
+                int i = segment.pos + iMin;
                 segment.pos = i;
-                long j3 = min;
+                long j3 = iMin;
                 buffer2.size -= j3;
                 j2 -= j3;
                 if (i == segment.limit) {
-                    Segment pop = segment.pop();
-                    buffer2.head = pop;
+                    Segment segmentPop = segment.pop();
+                    buffer2.head = segmentPop;
                     SegmentPool.recycle(segment);
-                    segment = pop;
+                    segment = segmentPop;
                 }
             }
         }
     }
 
     @Override // java.io.InputStream
-    public final int read(byte[] bArr, int i, int i2) {
+    public final int read(byte[] bArr, int i, int i2) throws IOException {
         if (!this.this$0.closed) {
             SegmentedByteString.checkOffsetAndCount(bArr.length, i, i2);
             RealBufferedSource realBufferedSource = this.this$0;

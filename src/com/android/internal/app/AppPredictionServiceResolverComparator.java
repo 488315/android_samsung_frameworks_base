@@ -12,7 +12,6 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.util.Log;
 import com.android.internal.app.AbstractResolverComparator;
-import com.android.internal.app.AppPredictionServiceResolverComparator;
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.app.chooser.TargetInfo;
 import com.google.android.collect.Lists;
@@ -106,7 +105,7 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         this.mSortingCallback = new ResolverAppPredictorCallback(new Consumer() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AppPredictionServiceResolverComparator.this.lambda$doCompute$0(list, (List) obj);
+                this.f$0.lambda$doCompute$0(list, (List) obj);
             }
         });
         this.mAppPredictor.sortTargets(arrayList, Executors.newSingleThreadExecutor(), this.mSortingCallback.asConsumer());
@@ -127,7 +126,7 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         ResolverRankerServiceResolverComparator resolverRankerServiceResolverComparator = new ResolverRankerServiceResolverComparator(this.mContext, this.mIntent, this.mReferrerPackage, new AbstractResolverComparator.AfterCompute() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda1
             @Override // com.android.internal.app.AbstractResolverComparator.AfterCompute
             public final void afterCompute() {
-                AppPredictionServiceResolverComparator.this.lambda$setupFallbackModel$1();
+                this.f$0.lambda$setupFallbackModel$1();
             }
         }, getChooserActivityLogger(), this.mUser);
         this.mResolverRankerService = resolverRankerServiceResolverComparator;
@@ -166,13 +165,13 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         }
 
         private Map<ComponentName, Integer> buildTargetRanksMapFromSortedTargets(List<AppTarget> list) {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             for (int i = 0; i < list.size(); i++) {
                 ComponentName componentName = new ComponentName(list.get(i).getPackageName(), list.get(i).getClassName());
-                hashMap.put(componentName, Integer.valueOf(i));
+                map.put(componentName, Integer.valueOf(i));
                 Log.i(AppPredictionServiceResolverComparator.TAG, "handleSortedAppTargets, sortedAppTargets #" + i + ": " + componentName);
             }
-            return hashMap;
+            return map;
         }
 
         /* renamed from: com.android.internal.app.AppPredictionServiceResolverComparator$ModelBuilder$1, reason: invalid class name */
@@ -189,9 +188,7 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
                 return new Comparator() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$ModelBuilder$1$$ExternalSyntheticLambda0
                     @Override // java.util.Comparator
                     public final int compare(Object obj, Object obj2) {
-                        int compare;
-                        compare = AbstractResolverComparator.this.compare((ResolveInfo) obj, (ResolveInfo) obj2);
-                        return compare;
+                        return abstractResolverComparator.compare((ResolveInfo) obj, (ResolveInfo) obj2);
                     }
                 };
             }
@@ -228,9 +225,7 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
             return new Comparator() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$AppPredictionServiceComparatorModel$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int lambda$getComparator$0;
-                    lambda$getComparator$0 = AppPredictionServiceResolverComparator.AppPredictionServiceComparatorModel.this.lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
-                    return lambda$getComparator$0;
+                    return this.f$0.lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
                 }
             };
         }

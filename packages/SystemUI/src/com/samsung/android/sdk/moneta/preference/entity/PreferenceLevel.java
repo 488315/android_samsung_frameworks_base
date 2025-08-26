@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PreferenceLevel {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -17,7 +16,6 @@ public final class PreferenceLevel {
     public static final PreferenceLevel MIDDLE = new PreferenceLevel("MIDDLE", 1, 2);
     public static final PreferenceLevel HIGH = new PreferenceLevel("HIGH", 2, 3);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,9 +30,9 @@ public final class PreferenceLevel {
     }
 
     static {
-        PreferenceLevel[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        PreferenceLevel[] preferenceLevelArr$values = $values();
+        $VALUES = preferenceLevelArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(preferenceLevelArr$values);
         Companion = new Companion(null);
     }
 

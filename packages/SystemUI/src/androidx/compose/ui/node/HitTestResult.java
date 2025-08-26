@@ -16,14 +16,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HitTestResult implements List<Modifier.Node>, KMappedMarker {
     public final MutableObjectList values = new MutableObjectList(16);
     public final MutableLongList distanceFromEdgeAndFlags = new MutableLongList(16);
     public int hitDepth = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SubList implements List<Modifier.Node>, KMappedMarker {
         public final int maxIndex;
         public final int minIndex;
@@ -258,62 +256,44 @@ public final class HitTestResult implements List<Modifier.Node>, KMappedMarker {
         return true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x003b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x003f, code lost:
     
-        return r0;
+        androidx.collection.internal.RuntimeHelpersKt.throwIndexOutOfBoundsException("Index must be between 0 and size");
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0045, code lost:
+    
+        throw null;
      */
     /* renamed from: findBestHitDistance-fn2tFes, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final long m637findBestHitDistancefn2tFes() {
-        /*
-            r7 = this;
-            r0 = 2139095040(0x7f800000, float:Infinity)
-            r1 = 0
-            long r0 = androidx.compose.ui.node.HitTestResultKt.DistanceAndFlags(r0, r1, r1)
-            int r2 = r7.hitDepth
-            int r2 = r2 + 1
-            androidx.collection.MutableObjectList r3 = r7.values
-            int r3 = r3._size
-            int r3 = r3 + (-1)
-            if (r2 > r3) goto L46
-        L13:
-            androidx.collection.MutableLongList r4 = r7.distanceFromEdgeAndFlags
-            if (r2 < 0) goto L3c
-            int r5 = r4._size
-            if (r2 >= r5) goto L3f
-            long[] r4 = r4.content
-            r4 = r4[r2]
-            int r6 = androidx.compose.ui.node.DistanceAndFlags.m633compareTo9YPOF3E(r4, r0)
-            if (r6 >= 0) goto L26
-            r0 = r4
-        L26:
-            float r4 = androidx.compose.ui.node.DistanceAndFlags.m634getDistanceimpl(r0)
-            r5 = 0
-            int r4 = (r4 > r5 ? 1 : (r4 == r5 ? 0 : -1))
-            if (r4 >= 0) goto L36
-            boolean r4 = androidx.compose.ui.node.DistanceAndFlags.m636isInLayerimpl(r0)
-            if (r4 == 0) goto L36
-            goto L3b
-        L36:
-            if (r2 == r3) goto L3b
-            int r2 = r2 + 1
-            goto L13
-        L3b:
-            return r0
-        L3c:
-            r4.getClass()
-        L3f:
-            java.lang.String r7 = "Index must be between 0 and size"
-            androidx.collection.internal.RuntimeHelpersKt.throwIndexOutOfBoundsException(r7)
-            r7 = 0
-            throw r7
-        L46:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.node.HitTestResult.m637findBestHitDistancefn2tFes():long");
+    public final long m639findBestHitDistancefn2tFes() {
+        long jDistanceAndFlags = HitTestResultKt.DistanceAndFlags(Float.POSITIVE_INFINITY, false, false);
+        int i = this.hitDepth + 1;
+        int i2 = this.values._size - 1;
+        if (i > i2) {
+            return jDistanceAndFlags;
+        }
+        while (true) {
+            MutableLongList mutableLongList = this.distanceFromEdgeAndFlags;
+            if (i < 0) {
+                mutableLongList.getClass();
+                break;
+            }
+            if (i >= mutableLongList._size) {
+                break;
+            }
+            long j = mutableLongList.content[i];
+            if (DistanceAndFlags.m635compareTo9YPOF3E(j, jDistanceAndFlags) < 0) {
+                jDistanceAndFlags = j;
+            }
+            if ((DistanceAndFlags.m636getDistanceimpl(jDistanceAndFlags) < 0.0f && DistanceAndFlags.m638isInLayerimpl(jDistanceAndFlags)) || i == i2) {
+                break;
+            }
+            i++;
+        }
+        return jDistanceAndFlags;
     }
 
     @Override // java.util.List
@@ -477,7 +457,6 @@ public final class HitTestResult implements List<Modifier.Node>, KMappedMarker {
         return CollectionToArray.toArray(this, objArr);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class HitTestResultIterator implements ListIterator<Modifier.Node>, KMappedMarker {
         public int index;
         public final int maxIndex;

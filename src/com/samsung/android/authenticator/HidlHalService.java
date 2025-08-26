@@ -51,7 +51,7 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
         return load(translateTaType(trustedAppAssetType), parcelFileDescriptor, j, j2);
     }
 
-    private boolean load(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2) {
+    private boolean load(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws IOException {
         if (i == 0) {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
@@ -69,11 +69,11 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
                             AuthenticatorLog.e(TAG, "Skipped fewer bytes than requested.");
                         }
                         while (true) {
-                            int read = autoCloseInputStream.read(bArr);
-                            if (read == -1) {
+                            int i2 = autoCloseInputStream.read(bArr);
+                            if (i2 == -1) {
                                 break;
                             }
-                            byteArrayOutputStream.write(bArr, 0, read);
+                            byteArrayOutputStream.write(bArr, 0, i2);
                         }
                         for (byte b : byteArrayOutputStream.toByteArray()) {
                             arrayList.add(Byte.valueOf(b));
@@ -90,11 +90,11 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             }
         }
         try {
-            boolean load = iSehAuthenticationFramework.load(i, arrayList);
-            if (load) {
+            boolean zLoad = iSehAuthenticationFramework.load(i, arrayList);
+            if (zLoad) {
                 return true;
             }
-            AuthenticatorLog.e(TAG, "load fail. " + load);
+            AuthenticatorLog.e(TAG, "load fail. " + zLoad);
             return false;
         } catch (RemoteException e2) {
             AuthenticatorLog.e(TAG, "initialize failed : " + e2.getMessage());
@@ -119,11 +119,11 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             return false;
         }
         try {
-            boolean terminate = ((ISehAuthenticationFramework) checkNotNullState(getService())).terminate(i);
-            if (terminate) {
+            boolean zTerminate = ((ISehAuthenticationFramework) checkNotNullState(getService())).terminate(i);
+            if (zTerminate) {
                 return true;
             }
-            AuthenticatorLog.e(TAG, "unload fail. " + terminate);
+            AuthenticatorLog.e(TAG, "unload fail. " + zTerminate);
             return false;
         } catch (RemoteException e) {
             AuthenticatorLog.e(TAG, "terminate failed : " + e.getMessage());
@@ -157,7 +157,7 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             iSehAuthenticationFramework.execute(i, arrayList, new ISehAuthenticationFramework.executeCallback() { // from class: com.samsung.android.authenticator.HidlHalService$$ExternalSyntheticLambda0
                 @Override // vendor.samsung.hardware.authfw.V1_0.ISehAuthenticationFramework.executeCallback
                 public final void onValues(boolean z, ArrayList arrayList2) {
-                    HidlHalService.this.lambda$execute$0(z, arrayList2);
+                    this.f$0.lambda$execute$0(z, arrayList2);
                 }
             });
         } catch (RemoteException e) {

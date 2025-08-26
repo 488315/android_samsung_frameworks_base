@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -36,9 +35,9 @@ public final class DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatM
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            StateFlow isSatelliteProvisioned = ((DeviceBasedSatelliteRepository) this.L$1).isSatelliteProvisioned();
+            StateFlow stateFlowIsSatelliteProvisioned = ((DeviceBasedSatelliteRepository) this.L$1).isSatelliteProvisioned();
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, isSatelliteProvisioned, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, stateFlowIsSatelliteProvisioned, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

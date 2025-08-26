@@ -56,11 +56,11 @@ public final class Credential implements Parcelable {
     }
 
     private Credential(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        Bundle readBundle = parcel.readBundle();
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        String string8 = parcel.readString8();
+        Bundle bundle = parcel.readBundle();
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 }

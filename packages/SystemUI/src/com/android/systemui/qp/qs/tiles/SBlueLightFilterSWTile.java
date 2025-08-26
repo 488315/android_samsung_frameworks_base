@@ -3,14 +3,14 @@ package com.android.systemui.qp.qs.tiles;
 import android.content.Context;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.util.SettingsHelper;
+import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SBlueLightFilterSWTile implements CommandQueue.Callbacks {
+    public static final /* synthetic */ int $r8$clinit = 0;
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -25,6 +25,7 @@ public final class SBlueLightFilterSWTile implements CommandQueue.Callbacks {
     }
 
     public SBlueLightFilterSWTile(Context context, SettingsHelper settingsHelper) {
+        LazyKt__LazyJVMKt.lazy(new SBlueLightFilterSWTile$$ExternalSyntheticLambda0());
         this.settingsHelper = settingsHelper;
     }
 }

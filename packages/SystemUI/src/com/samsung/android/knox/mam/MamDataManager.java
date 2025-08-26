@@ -9,9 +9,9 @@ import android.os.UserHandle;
 import android.util.Log;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MamDataManager {
     public static final String KNOX_CUSTOM_MANAGER_SERVICE = "knoxcustom";
@@ -25,37 +25,33 @@ public class MamDataManager {
     }
 
     public static synchronized MamDataManager getInstance() {
-        MamDataManager mamDataManager;
-        synchronized (MamDataManager.class) {
-            try {
-                if (sMamDeviceManager == null) {
-                    sMamDeviceManager = new MamDataManager();
-                }
-                if (sContextInfo == null) {
-                    if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
-                        sContextInfo = new ContextInfo();
-                    } else {
-                        sContextInfo = new ContextInfo(Process.myUid(), true);
-                    }
-                }
-                mamDataManager = sMamDeviceManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sMamDeviceManager == null) {
+                sMamDeviceManager = new MamDataManager();
             }
+            if (sContextInfo == null) {
+                if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
+                    sContextInfo = new ContextInfo();
+                } else {
+                    sContextInfo = new ContextInfo(Process.myUid(), true);
+                }
+            }
+        } catch (Throwable th) {
+            throw th;
         }
-        return mamDataManager;
+        return sMamDeviceManager;
     }
 
-    public final ContentResolver getContentResolver() {
+    public final ContentResolver getContentResolver() throws IllegalAccessException, NoSuchMethodException, ClassNotFoundException, SecurityException, IllegalArgumentException, InvocationTargetException {
         if (this.mContentResolver == null) {
             try {
                 Class<?> cls = Class.forName("android.app.ActivityThread");
                 Class[] clsArr = new Class[0];
-                Object invoke = cls.getMethod("currentActivityThread", null).invoke(null, null);
+                Object objInvoke = cls.getMethod("currentActivityThread", null).invoke(null, null);
                 Class[] clsArr2 = new Class[0];
                 Method method = cls.getMethod("getSystemContext", null);
                 if (method != null) {
-                    this.mContentResolver = ((Context) method.invoke(invoke, null)).getContentResolver();
+                    this.mContentResolver = ((Context) method.invoke(objInvoke, null)).getContentResolver();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

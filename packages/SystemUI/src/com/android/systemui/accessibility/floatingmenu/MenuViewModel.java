@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuViewModel implements MenuInfoRepository.OnContentsChanged {
     public final MutableLiveData mFadeEffectInfoData;
@@ -38,9 +37,9 @@ public class MenuViewModel implements MenuInfoRepository.OnContentsChanged {
         this.mHearingDeviceTargetIndex = Transformations.map(mutableLiveData, new Function1() { // from class: com.android.systemui.accessibility.floatingmenu.MenuViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 List list = (List) obj;
-                MenuViewModel.this.getClass();
+                this.f$0.getClass();
                 int size = list.size();
                 int i = 0;
                 while (true) {

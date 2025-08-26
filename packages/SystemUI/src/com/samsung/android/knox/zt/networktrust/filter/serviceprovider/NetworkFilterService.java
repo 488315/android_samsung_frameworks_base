@@ -23,7 +23,6 @@ import com.samsung.android.knox.container.RCPPolicy$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NetworkFilterService {
     public static final String ACTION_NOTIFY_STATUS = "com.samsung.android.knox.intent.action.NOTIFY_STATUS";
@@ -67,15 +66,12 @@ public class NetworkFilterService {
     public static final Object mSync = new Object();
     public Context mContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UnSupportedManagedUserException extends RuntimeException {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UnSupportedRegionException extends RuntimeException {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UnSupportedUserException extends RuntimeException {
     }
 
@@ -89,7 +85,7 @@ public class NetworkFilterService {
         countryIso.getClass();
     }
 
-    public static void enforceUser(Context context) throws UnSupportedUserException, UnSupportedManagedUserException {
+    public static void enforceUser(Context context) throws UnSupportedManagedUserException, UnSupportedUserException {
         int userId = UserHandle.getUserId(Process.myUid());
         try {
         } catch (RemoteException e) {
@@ -99,15 +95,15 @@ public class NetworkFilterService {
             Log.e(TAG, "prepare filtering failed since device owner is configured for user " + userId);
             throw new UnSupportedManagedUserException();
         }
-        boolean isOrganizationOwnedDeviceWithManagedProfile = ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).isOrganizationOwnedDeviceWithManagedProfile();
+        boolean zIsOrganizationOwnedDeviceWithManagedProfile = ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).isOrganizationOwnedDeviceWithManagedProfile();
         if (userId == 0) {
-            if (isOrganizationOwnedDeviceWithManagedProfile) {
+            if (zIsOrganizationOwnedDeviceWithManagedProfile) {
                 Log.e(TAG, "prepare filtering failed since wpc configured for user " + userId);
                 throw new UnSupportedUserException();
             }
             return;
         }
-        if (isOrganizationOwnedDeviceWithManagedProfile) {
+        if (zIsOrganizationOwnedDeviceWithManagedProfile) {
             Log.e(TAG, "prepare filtering failed since wpc configured for user " + userId);
             throw new UnSupportedManagedUserException();
         }
@@ -157,8 +153,8 @@ public class NetworkFilterService {
         }
         Intent intent = new Intent();
         intent.putExtras(bundle);
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.expires_on));
-        intent.setClassName(unflattenFromString.getPackageName(), unflattenFromString.getClassName());
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.ext_media_badremoval_notification_title));
+        intent.setClassName(componentNameUnflattenFromString.getPackageName(), componentNameUnflattenFromString.getClassName());
         return intent;
     }
 
@@ -177,7 +173,7 @@ public class NetworkFilterService {
         }
     }
 
-    public static Intent prepare(Context context, Bundle bundle) throws UnSupportedUserException, UnSupportedManagedUserException, UnSupportedRegionException, SecurityException, LimitExceededException {
+    public static Intent prepare(Context context, Bundle bundle) throws LimitExceededException, UnSupportedRegionException, UnSupportedManagedUserException, UnSupportedUserException, SecurityException {
         boolean z;
         try {
             enforceUser(context);
@@ -205,9 +201,9 @@ public class NetworkFilterService {
                     return getIntentForConfirmation(bundle);
                 }
                 try {
-                    int prepareFiltering = mNwFilterMgrService.prepareFiltering(context.getPackageName(), bundle);
-                    Log.i(TAG, "prepare: packageName: " + context.getPackageName() + " result: " + prepareFiltering);
-                    if (prepareFiltering != -16) {
+                    int iPrepareFiltering = mNwFilterMgrService.prepareFiltering(context.getPackageName(), bundle);
+                    Log.i(TAG, "prepare: packageName: " + context.getPackageName() + " result: " + iPrepareFiltering);
+                    if (iPrepareFiltering != -16) {
                         showManagedUserDialog(context);
                         return null;
                     }
@@ -230,8 +226,8 @@ public class NetworkFilterService {
     public static void showManagedUserDialog(Context context) {
         int userId = UserHandle.getUserId(Binder.getCallingUid());
         Intent intent = new Intent();
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.ext_media_badremoval_notification_message));
-        intent.setClassName(unflattenFromString.getPackageName(), unflattenFromString.getClassName());
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.ext_media_browse_action));
+        intent.setClassName(componentNameUnflattenFromString.getPackageName(), componentNameUnflattenFromString.getClassName());
         intent.addFlags(1350565888);
         Log.i(TAG, "startActivityAsUser  KnoxVpnPPDialog userId = " + userId);
         context.startActivityAsUser(intent, new UserHandle(userId));

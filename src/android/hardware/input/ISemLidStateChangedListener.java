@@ -44,9 +44,9 @@ public interface ISemLidStateChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemLidStateChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemLidStateChangedListener)) {
-                return (ISemLidStateChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemLidStateChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemLidStateChangedListener)) {
+                return (ISemLidStateChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface ISemLidStateChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                boolean readBoolean = parcel.readBoolean();
+                long j = parcel.readLong();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onLidStateChanged(readLong, readBoolean);
+                onLidStateChanged(j, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface ISemLidStateChangedListener extends IInterface {
 
             @Override // android.hardware.input.ISemLidStateChangedListener
             public void onLidStateChanged(long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemLidStateChangedListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemLidStateChangedListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

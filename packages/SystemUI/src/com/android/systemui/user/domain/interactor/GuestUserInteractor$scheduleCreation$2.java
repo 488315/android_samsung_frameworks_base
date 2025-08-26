@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class GuestUserInteractor$scheduleCreation$2 extends SuspendLambda implements Function2 {
     int label;
@@ -34,7 +33,7 @@ final class GuestUserInteractor$scheduleCreation$2 extends SuspendLambda impleme
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -53,10 +52,10 @@ final class GuestUserInteractor$scheduleCreation$2 extends SuspendLambda impleme
             }
             ResultKt.throwOnFailure(obj);
         }
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         ((UserRepositoryImpl) this.this$0.repository).isGuestUserCreationScheduled.set(false);
         ((UserRepositoryImpl) this.this$0.repository).isGuestUserResetting = false;
-        if (intValue == -10000) {
+        if (iIntValue == -10000) {
             Log.w("GuestUserInteractor", "Could not create new guest while exiting existing guest");
             this.this$0.refreshUsersScheduler.refreshIfNotPaused();
         }

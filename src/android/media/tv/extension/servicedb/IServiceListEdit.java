@@ -240,9 +240,9 @@ public interface IServiceListEdit extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListEdit");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceListEdit)) {
-                return (IServiceListEdit) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListEdit");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceListEdit)) {
+                return (IServiceListEdit) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -320,77 +320,77 @@ public interface IServiceListEdit extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IServiceListEditListener asInterface = IServiceListEditListener.Stub.asInterface(parcel.readStrongBinder());
+                    IServiceListEditListener iServiceListEditListenerAsInterface = IServiceListEditListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int open = open(asInterface);
+                    int iOpen = open(iServiceListEditListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(open);
+                    parcel2.writeInt(iOpen);
                     return true;
                 case 2:
-                    int close = close();
+                    int iClose = close();
                     parcel2.writeNoException();
-                    parcel2.writeInt(close);
+                    parcel2.writeInt(iClose);
                     return true;
                 case 3:
-                    int commit = commit();
+                    int iCommit = commit();
                     parcel2.writeNoException();
-                    parcel2.writeInt(commit);
+                    parcel2.writeInt(iCommit);
                     return true;
                 case 4:
-                    int userEditCommit = userEditCommit();
+                    int iUserEditCommit = userEditCommit();
                     parcel2.writeNoException();
-                    parcel2.writeInt(userEditCommit);
+                    parcel2.writeInt(iUserEditCommit);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
-                    String[] createStringArray = parcel.createStringArray();
+                    String string = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle serviceInfoFromDatabase = getServiceInfoFromDatabase(readString, createStringArray);
+                    Bundle serviceInfoFromDatabase = getServiceInfoFromDatabase(string, strArrCreateStringArray);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(serviceInfoFromDatabase, 1);
                     return true;
                 case 6:
-                    String readString2 = parcel.readString();
-                    String[] createStringArray2 = parcel.createStringArray();
+                    String string2 = parcel.readString();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle serviceInfoListFromDatabase = getServiceInfoListFromDatabase(readString2, createStringArray2);
+                    Bundle serviceInfoListFromDatabase = getServiceInfoListFromDatabase(string2, strArrCreateStringArray2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(serviceInfoListFromDatabase, 1);
                     return true;
                 case 7:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String[] serviceInfoIdsFromDatabase = getServiceInfoIdsFromDatabase(readString3);
+                    String[] serviceInfoIdsFromDatabase = getServiceInfoIdsFromDatabase(string3);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(serviceInfoIdsFromDatabase);
                     return true;
                 case 8:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int updateServiceInfoFromDatabase = updateServiceInfoFromDatabase(bundle);
+                    int iUpdateServiceInfoFromDatabase = updateServiceInfoFromDatabase(bundle);
                     parcel2.writeNoException();
-                    parcel2.writeInt(updateServiceInfoFromDatabase);
+                    parcel2.writeInt(iUpdateServiceInfoFromDatabase);
                     return true;
                 case 9:
                     Bundle[] bundleArr = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int updateServiceInfoByListFromDatabase = updateServiceInfoByListFromDatabase(bundleArr);
+                    int iUpdateServiceInfoByListFromDatabase = updateServiceInfoByListFromDatabase(bundleArr);
                     parcel2.writeNoException();
-                    parcel2.writeInt(updateServiceInfoByListFromDatabase);
+                    parcel2.writeInt(iUpdateServiceInfoByListFromDatabase);
                     return true;
                 case 10:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int removeServiceInfoFromDatabase = removeServiceInfoFromDatabase(readString4);
+                    int iRemoveServiceInfoFromDatabase = removeServiceInfoFromDatabase(string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeServiceInfoFromDatabase);
+                    parcel2.writeInt(iRemoveServiceInfoFromDatabase);
                     return true;
                 case 11:
-                    String[] createStringArray3 = parcel.createStringArray();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    int removeServiceInfoByListFromDatabase = removeServiceInfoByListFromDatabase(createStringArray3);
+                    int iRemoveServiceInfoByListFromDatabase = removeServiceInfoByListFromDatabase(strArrCreateStringArray3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeServiceInfoByListFromDatabase);
+                    parcel2.writeInt(iRemoveServiceInfoByListFromDatabase);
                     return true;
                 case 12:
                     String[] serviceListChannelIds = getServiceListChannelIds();
@@ -398,100 +398,100 @@ public interface IServiceListEdit extends IInterface {
                     parcel2.writeStringArray(serviceListChannelIds);
                     return true;
                 case 13:
-                    String readString5 = parcel.readString();
-                    String[] createStringArray4 = parcel.createStringArray();
+                    String string5 = parcel.readString();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle serviceListInfoByChannelId = getServiceListInfoByChannelId(readString5, createStringArray4);
+                    Bundle serviceListInfoByChannelId = getServiceListInfoByChannelId(string5, strArrCreateStringArray4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(serviceListInfoByChannelId, 1);
                     return true;
                 case 14:
-                    String readString6 = parcel.readString();
-                    String[] createStringArray5 = parcel.createStringArray();
+                    String string6 = parcel.readString();
+                    String[] strArrCreateStringArray5 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle transportStreamInfoList = getTransportStreamInfoList(readString6, createStringArray5);
+                    Bundle transportStreamInfoList = getTransportStreamInfoList(string6, strArrCreateStringArray5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(transportStreamInfoList, 1);
                     return true;
                 case 15:
-                    String readString7 = parcel.readString();
-                    String[] createStringArray6 = parcel.createStringArray();
+                    String string7 = parcel.readString();
+                    String[] strArrCreateStringArray6 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle transportStreamInfoListForce = getTransportStreamInfoListForce(readString7, createStringArray6);
+                    Bundle transportStreamInfoListForce = getTransportStreamInfoListForce(string7, strArrCreateStringArray6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(transportStreamInfoListForce, 1);
                     return true;
                 case 16:
-                    String readString8 = parcel.readString();
-                    String[] createStringArray7 = parcel.createStringArray();
+                    String string8 = parcel.readString();
+                    String[] strArrCreateStringArray7 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle networkInfoList = getNetworkInfoList(readString8, createStringArray7);
+                    Bundle networkInfoList = getNetworkInfoList(string8, strArrCreateStringArray7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(networkInfoList, 1);
                     return true;
                 case 17:
-                    String readString9 = parcel.readString();
-                    String[] createStringArray8 = parcel.createStringArray();
+                    String string9 = parcel.readString();
+                    String[] strArrCreateStringArray8 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    Bundle satelliteInfoList = getSatelliteInfoList(readString9, createStringArray8);
+                    Bundle satelliteInfoList = getSatelliteInfoList(string9, strArrCreateStringArray8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(satelliteInfoList, 1);
                     return true;
                 case 18:
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String recordInfoByType = toRecordInfoByType(bundle2, readString10);
+                    String recordInfoByType = toRecordInfoByType(bundle2, string10);
                     parcel2.writeNoException();
                     parcel2.writeString(recordInfoByType);
                     return true;
                 case 19:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int putRecordIdList = putRecordIdList(readString11, bundle3, readInt);
+                    int iPutRecordIdList = putRecordIdList(string11, bundle3, i3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(putRecordIdList);
+                    parcel2.writeInt(iPutRecordIdList);
                     return true;
                 case 20:
-                    int readInt2 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String addPredefinedServiceListInfo = addPredefinedServiceListInfo(readInt2, readString12, readString13, readString14, readInt3);
+                    String strAddPredefinedServiceListInfo = addPredefinedServiceListInfo(i4, string12, string13, string14, i5);
                     parcel2.writeNoException();
-                    parcel2.writeString(addPredefinedServiceListInfo);
+                    parcel2.writeString(strAddPredefinedServiceListInfo);
                     return true;
                 case 21:
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     Bundle[] bundleArr2 = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addPredefinedChannelList = addPredefinedChannelList(readString15, bundleArr2);
+                    int iAddPredefinedChannelList = addPredefinedChannelList(string15, bundleArr2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addPredefinedChannelList);
+                    parcel2.writeInt(iAddPredefinedChannelList);
                     return true;
                 case 22:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addPredefinedSatInfo = addPredefinedSatInfo(readString16, bundle4);
+                    int iAddPredefinedSatInfo = addPredefinedSatInfo(string16, bundle4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addPredefinedSatInfo);
+                    parcel2.writeInt(iAddPredefinedSatInfo);
                     return true;
                 case 23:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String serviceLogoUri = getServiceLogoUri(readInt4);
+                    String serviceLogoUri = getServiceLogoUri(i6);
                     parcel2.writeNoException();
                     parcel2.writeString(serviceLogoUri);
                     return true;
                 case 24:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle installedServiceListInfo = getInstalledServiceListInfo(readString17);
+                    Bundle installedServiceListInfo = getInstalledServiceListInfo(string17);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(installedServiceListInfo, 1);
                     return true;
@@ -523,412 +523,412 @@ public interface IServiceListEdit extends IInterface {
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int open(IServiceListEditListener iServiceListEditListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeStrongInterface(iServiceListEditListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeStrongInterface(iServiceListEditListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int commit() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int userEditCommit() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getServiceInfoFromDatabase(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getServiceInfoListFromDatabase(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public String[] getServiceInfoIdsFromDatabase(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int updateServiceInfoFromDatabase(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int updateServiceInfoByListFromDatabase(Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int removeServiceInfoFromDatabase(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int removeServiceInfoByListFromDatabase(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public String[] getServiceListChannelIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getServiceListInfoByChannelId(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getTransportStreamInfoList(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getTransportStreamInfoListForce(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getNetworkInfoList(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getSatelliteInfoList(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public String toRecordInfoByType(Bundle bundle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int putRecordIdList(String str, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public String addPredefinedServiceListInfo(int i, String str, String str2, String str3, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int addPredefinedChannelList(String str, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public int addPredefinedSatInfo(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public String getServiceLogoUri(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle getInstalledServiceListInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    obtain.writeString(str);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListEdit
             public Bundle[] getAllInstalledServiceListInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListEdit");
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

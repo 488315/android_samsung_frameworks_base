@@ -2,6 +2,8 @@ package com.android.settingslib.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHapClient;
+import android.bluetooth.BluetoothHearingAid;
+import android.bluetooth.BluetoothLeAudio;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioAttributes;
@@ -15,6 +17,7 @@ import android.util.Log;
 import androidx.collection.ArraySet;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.systemui.accessibility.floatingmenu.MenuInfoRepository$$ExternalSyntheticLambda1;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
@@ -30,7 +33,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingAidDeviceManager {
     public static final boolean DEBUG = BluetoothUtils.DEBUG;
@@ -72,7 +74,7 @@ public class HearingAidDeviceManager {
                         listeningExecutorService.execute(new Runnable(anonymizedAddress) { // from class: com.android.settingslib.bluetooth.HearingDeviceLocalDataManager$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                HearingDeviceLocalDataManager.this.mListener.getClass();
+                                this.f$0.mListener.getClass();
                             }
                         });
                     }
@@ -99,100 +101,69 @@ public class HearingAidDeviceManager {
                         break loop0;
                     }
                 }
+                if (isValidHiSyncId(cachedBluetoothDevice3.getHiSyncId()) || (cachedBluetoothDevice2 = cachedBluetoothDevice3.mSubDevice) == null || !cachedBluetoothDevice2.equals(cachedBluetoothDevice)) {
+                }
+            } else if (isValidHiSyncId(cachedBluetoothDevice3.getHiSyncId())) {
             }
-            if (isValidHiSyncId(cachedBluetoothDevice3.getHiSyncId()) && (cachedBluetoothDevice2 = cachedBluetoothDevice3.mSubDevice) != null && cachedBluetoothDevice2.equals(cachedBluetoothDevice)) {
-                return cachedBluetoothDevice3;
-            }
+            return cachedBluetoothDevice3;
         }
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0059  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void initHearingAidDeviceIfNeeded(com.android.settingslib.bluetooth.CachedBluetoothDevice r10) {
-        /*
-            r9 = this;
-            android.bluetooth.BluetoothDevice r0 = r10.mDevice
-            com.android.settingslib.bluetooth.LocalBluetoothManager r9 = r9.mBtManager
-            com.android.settingslib.bluetooth.LocalBluetoothProfileManager r1 = r9.mProfileManager
-            r2 = 0
-            if (r1 != 0) goto Lb
-            goto L1b
-        Lb:
-            com.android.settingslib.bluetooth.HearingAidProfile r1 = r1.mHearingAidProfile
-            if (r1 != 0) goto L10
-            goto L1b
-        L10:
-            android.bluetooth.BluetoothHearingAid r1 = r1.mService
-            if (r1 == 0) goto L1b
-            if (r0 != 0) goto L17
-            goto L1b
-        L17:
-            long r2 = r1.getHiSyncId(r0)
-        L1b:
-            boolean r0 = isValidHiSyncId(r2)
-            if (r0 == 0) goto L80
-            com.android.settingslib.bluetooth.HearingAidInfo$Builder r0 = new com.android.settingslib.bluetooth.HearingAidInfo$Builder
-            r0.<init>()
-            android.bluetooth.BluetoothDevice r1 = r10.mDevice
-            java.lang.String r4 = "Proxy not attached to HearingAidService"
-            java.lang.String r5 = "HearingAidProfile"
-            r6 = -1
-            com.android.settingslib.bluetooth.LocalBluetoothProfileManager r9 = r9.mProfileManager
-            java.lang.String r7 = "HearingAidDeviceManager"
-            if (r9 != 0) goto L35
-        L33:
-            r1 = r6
-            goto L4b
-        L35:
-            com.android.settingslib.bluetooth.HearingAidProfile r8 = r9.mHearingAidProfile
-            if (r8 != 0) goto L3f
-            java.lang.String r1 = "HearingAidProfile is not supported and not ready to fetch device side"
-            android.util.Log.w(r7, r1)
-            goto L33
-        L3f:
-            android.bluetooth.BluetoothHearingAid r8 = r8.mService
-            if (r8 != 0) goto L47
-            android.util.Log.w(r5, r4)
-            goto L33
-        L47:
-            int r1 = r8.getDeviceSide(r1)
-        L4b:
-            android.util.SparseIntArray r8 = com.android.settingslib.bluetooth.HearingAidInfo.ASHA_DEVICE_SIDE_TO_INTERNAL_SIDE_MAPPING
-            int r1 = r8.get(r1, r6)
-            r0.mSide = r1
-            android.bluetooth.BluetoothDevice r1 = r10.mDevice
-            if (r9 != 0) goto L59
-        L57:
-            r9 = r6
-            goto L6f
-        L59:
-            com.android.settingslib.bluetooth.HearingAidProfile r9 = r9.mHearingAidProfile
-            if (r9 != 0) goto L63
-            java.lang.String r9 = "HearingAidProfile is not supported and not ready to fetch device mode"
-            android.util.Log.w(r7, r9)
-            goto L57
-        L63:
-            android.bluetooth.BluetoothHearingAid r9 = r9.mService
-            if (r9 != 0) goto L6b
-            android.util.Log.w(r5, r4)
-            goto L57
-        L6b:
-            int r9 = r9.getDeviceMode(r1)
-        L6f:
-            android.util.SparseIntArray r1 = com.android.settingslib.bluetooth.HearingAidInfo.ASHA_DEVICE_MODE_TO_INTERNAL_MODE_MAPPING
-            int r9 = r1.get(r9, r6)
-            r0.mMode = r9
-            r0.mHiSyncId = r2
-            com.android.settingslib.bluetooth.HearingAidInfo r9 = r0.build()
-            r10.setHearingAidInfo(r9)
-        L80:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.HearingAidDeviceManager.initHearingAidDeviceIfNeeded(com.android.settingslib.bluetooth.CachedBluetoothDevice):void");
+    public final void initHearingAidDeviceIfNeeded(CachedBluetoothDevice cachedBluetoothDevice) {
+        int deviceSide;
+        int deviceMode;
+        HearingAidProfile hearingAidProfile;
+        BluetoothHearingAid bluetoothHearingAid;
+        BluetoothDevice bluetoothDevice = cachedBluetoothDevice.mDevice;
+        LocalBluetoothManager localBluetoothManager = this.mBtManager;
+        LocalBluetoothProfileManager localBluetoothProfileManager = localBluetoothManager.mProfileManager;
+        long hiSyncId = 0;
+        if (localBluetoothProfileManager != null && (hearingAidProfile = localBluetoothProfileManager.mHearingAidProfile) != null && (bluetoothHearingAid = hearingAidProfile.mService) != null && bluetoothDevice != null) {
+            hiSyncId = bluetoothHearingAid.getHiSyncId(bluetoothDevice);
+        }
+        if (isValidHiSyncId(hiSyncId)) {
+            HearingAidInfo.Builder builder = new HearingAidInfo.Builder();
+            BluetoothDevice bluetoothDevice2 = cachedBluetoothDevice.mDevice;
+            LocalBluetoothProfileManager localBluetoothProfileManager2 = localBluetoothManager.mProfileManager;
+            if (localBluetoothProfileManager2 != null) {
+                HearingAidProfile hearingAidProfile2 = localBluetoothProfileManager2.mHearingAidProfile;
+                if (hearingAidProfile2 == null) {
+                    Log.w("HearingAidDeviceManager", "HearingAidProfile is not supported and not ready to fetch device side");
+                } else {
+                    BluetoothHearingAid bluetoothHearingAid2 = hearingAidProfile2.mService;
+                    if (bluetoothHearingAid2 == null) {
+                        Log.w("HearingAidProfile", "Proxy not attached to HearingAidService");
+                    } else {
+                        deviceSide = bluetoothHearingAid2.getDeviceSide(bluetoothDevice2);
+                    }
+                }
+                deviceSide = -1;
+            } else {
+                deviceSide = -1;
+            }
+            builder.mSide = HearingAidInfo.ASHA_DEVICE_SIDE_TO_INTERNAL_SIDE_MAPPING.get(deviceSide, -1);
+            BluetoothDevice bluetoothDevice3 = cachedBluetoothDevice.mDevice;
+            if (localBluetoothProfileManager2 != null) {
+                HearingAidProfile hearingAidProfile3 = localBluetoothProfileManager2.mHearingAidProfile;
+                if (hearingAidProfile3 == null) {
+                    Log.w("HearingAidDeviceManager", "HearingAidProfile is not supported and not ready to fetch device mode");
+                } else {
+                    BluetoothHearingAid bluetoothHearingAid3 = hearingAidProfile3.mService;
+                    if (bluetoothHearingAid3 == null) {
+                        Log.w("HearingAidProfile", "Proxy not attached to HearingAidService");
+                    } else {
+                        deviceMode = bluetoothHearingAid3.getDeviceMode(bluetoothDevice3);
+                    }
+                }
+                deviceMode = -1;
+            } else {
+                deviceMode = -1;
+            }
+            builder.mMode = HearingAidInfo.ASHA_DEVICE_MODE_TO_INTERNAL_MODE_MAPPING.get(deviceMode, -1);
+            builder.mHiSyncId = hiSyncId;
+            cachedBluetoothDevice.setHearingAidInfo(builder.build());
+        }
     }
 
     public final synchronized void notifyDevicesConnectionStatusChanged() {
@@ -209,7 +180,7 @@ public class HearingAidDeviceManager {
                     ((Executor) obj2).execute(new Runnable() { // from class: com.android.settingslib.bluetooth.HearingAidDeviceManager$$ExternalSyntheticLambda7
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MenuInfoRepository$$ExternalSyntheticLambda1 menuInfoRepository$$ExternalSyntheticLambda12 = MenuInfoRepository$$ExternalSyntheticLambda1.this;
+                            MenuInfoRepository$$ExternalSyntheticLambda1 menuInfoRepository$$ExternalSyntheticLambda12 = menuInfoRepository$$ExternalSyntheticLambda1;
                             int i4 = i3;
                             boolean z2 = HearingAidDeviceManager.DEBUG;
                             menuInfoRepository$$ExternalSyntheticLambda12.f$0.mSettingsContentsCallback.onDevicesConnectionStatusChanged(i4);
@@ -221,9 +192,9 @@ public class HearingAidDeviceManager {
     }
 
     public final void onActiveDeviceChanged(CachedBluetoothDevice cachedBluetoothDevice) {
-        boolean isEnabled = FeatureFlagUtils.isEnabled(this.mContext, "settings_audio_routing");
+        boolean zIsEnabled = FeatureFlagUtils.isEnabled(this.mContext, "settings_audio_routing");
         HearingAidAudioRoutingHelper hearingAidAudioRoutingHelper = this.mRoutingHelper;
-        if (isEnabled) {
+        if (zIsEnabled) {
             AudioDeviceAttributes audioDeviceAttributes = null;
             if (cachedBluetoothDevice.isConnectedHearingAidDevice() && (cachedBluetoothDevice.isActiveDevice(21) || cachedBluetoothDevice.isActiveDevice(22))) {
                 hearingAidAudioRoutingHelper.getClass();
@@ -319,12 +290,12 @@ public class HearingAidDeviceManager {
                 return false;
             }
             onHiSyncIdChanged(cachedBluetoothDevice.getHiSyncId());
-            CachedBluetoothDevice findMainDevice = findMainDevice(cachedBluetoothDevice);
-            if (findMainDevice == null) {
+            CachedBluetoothDevice cachedBluetoothDeviceFindMainDevice = findMainDevice(cachedBluetoothDevice);
+            if (cachedBluetoothDeviceFindMainDevice == null) {
                 return false;
             }
-            if (!findMainDevice.isConnected()) {
-                switchDeviceContent(findMainDevice, cachedBluetoothDevice);
+            if (!cachedBluetoothDeviceFindMainDevice.isConnected()) {
+                switchDeviceContent(cachedBluetoothDeviceFindMainDevice, cachedBluetoothDevice);
                 return true;
             }
         } else if (!cachedBluetoothDevice.mUnpairing && findMainDevice(cachedBluetoothDevice) == null) {
@@ -340,7 +311,7 @@ public class HearingAidDeviceManager {
     }
 
     public final void setPreferredDeviceRoutingStrategies(int i, AudioDeviceAttributes audioDeviceAttributes, int[] iArr) {
-        boolean removePreferredDeviceForStrategies;
+        boolean zRemovePreferredDeviceForStrategies;
         HearingAidAudioRoutingHelper hearingAidAudioRoutingHelper = this.mRoutingHelper;
         hearingAidAudioRoutingHelper.getClass();
         ArrayList arrayList = new ArrayList(iArr.length);
@@ -362,30 +333,30 @@ public class HearingAidDeviceManager {
         }
         List list = (List) arrayList2.stream().distinct().collect(Collectors.toList());
         if (i != 0) {
-            boolean z = true;
+            boolean preferredDeviceForStrategy = true;
             if (i == 1) {
-                boolean removePreferredDeviceForStrategies2 = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
+                boolean zRemovePreferredDeviceForStrategies2 = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
                 Iterator it = list.iterator();
                 while (it.hasNext()) {
-                    z &= hearingAidAudioRoutingHelper.mAudioManager.setPreferredDeviceForStrategy((AudioProductStrategy) it.next(), audioDeviceAttributes);
+                    preferredDeviceForStrategy &= hearingAidAudioRoutingHelper.mAudioManager.setPreferredDeviceForStrategy((AudioProductStrategy) it.next(), audioDeviceAttributes);
                 }
-                removePreferredDeviceForStrategies = removePreferredDeviceForStrategies2 & z;
+                zRemovePreferredDeviceForStrategies = zRemovePreferredDeviceForStrategies2 & preferredDeviceForStrategy;
             } else {
                 if (i != 2) {
                     throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unexpected routingValue: "));
                 }
-                boolean removePreferredDeviceForStrategies3 = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
+                boolean zRemovePreferredDeviceForStrategies3 = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
                 AudioDeviceAttributes audioDeviceAttributes2 = HearingAidAudioRoutingConstants.BUILTIN_SPEAKER;
                 Iterator it2 = list.iterator();
                 while (it2.hasNext()) {
-                    z &= hearingAidAudioRoutingHelper.mAudioManager.setPreferredDeviceForStrategy((AudioProductStrategy) it2.next(), audioDeviceAttributes2);
+                    preferredDeviceForStrategy &= hearingAidAudioRoutingHelper.mAudioManager.setPreferredDeviceForStrategy((AudioProductStrategy) it2.next(), audioDeviceAttributes2);
                 }
-                removePreferredDeviceForStrategies = removePreferredDeviceForStrategies3 & z;
+                zRemovePreferredDeviceForStrategies = zRemovePreferredDeviceForStrategies3 & preferredDeviceForStrategy;
             }
         } else {
-            removePreferredDeviceForStrategies = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
+            zRemovePreferredDeviceForStrategies = hearingAidAudioRoutingHelper.removePreferredDeviceForStrategies(list);
         }
-        if (removePreferredDeviceForStrategies) {
+        if (zRemovePreferredDeviceForStrategies) {
             return;
         }
         Log.w("HearingAidDeviceManager", "routingStrategies: " + list.toString() + "routingValue: " + i + " fail to configure AudioProductStrategy");
@@ -449,17 +420,17 @@ public class HearingAidDeviceManager {
     }
 
     public final void syncDeviceIfNeeded(CachedBluetoothDevice cachedBluetoothDevice) {
-        CachedBluetoothDevice findMainDevice;
+        CachedBluetoothDevice cachedBluetoothDeviceFindMainDevice;
         int activePresetIndex;
         HapClientProfile hapClientProfile = this.mBtManager.mProfileManager.mHapClientProfile;
         if (hapClientProfile != null) {
             BluetoothDevice bluetoothDevice = cachedBluetoothDevice.mDevice;
             BluetoothHapClient bluetoothHapClient = hapClientProfile.mService;
-            int i = 0;
-            if ((bluetoothHapClient == null ? false : bluetoothHapClient.supportsSynchronizedPresets(bluetoothDevice)) || (findMainDevice = findMainDevice(cachedBluetoothDevice)) == null) {
+            int activePresetIndex2 = 0;
+            if ((bluetoothHapClient == null ? false : bluetoothHapClient.supportsSynchronizedPresets(bluetoothDevice)) || (cachedBluetoothDeviceFindMainDevice = findMainDevice(cachedBluetoothDevice)) == null) {
                 return;
             }
-            BluetoothDevice bluetoothDevice2 = findMainDevice.mDevice;
+            BluetoothDevice bluetoothDevice2 = cachedBluetoothDeviceFindMainDevice.mDevice;
             BluetoothHapClient bluetoothHapClient2 = hapClientProfile.mService;
             if (bluetoothHapClient2 == null) {
                 Log.w("HapClientProfile", "Proxy not attached to service. Cannot get active preset index.");
@@ -472,31 +443,35 @@ public class HearingAidDeviceManager {
             if (bluetoothHapClient3 == null) {
                 Log.w("HapClientProfile", "Proxy not attached to service. Cannot get active preset index.");
             } else {
-                i = bluetoothHapClient3.getActivePresetIndex(bluetoothDevice3);
+                activePresetIndex2 = bluetoothHapClient3.getActivePresetIndex(bluetoothDevice3);
             }
-            if (activePresetIndex == 0 || activePresetIndex == i) {
+            if (activePresetIndex == 0 || activePresetIndex == activePresetIndex2) {
                 return;
             }
             if (DEBUG) {
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, activePresetIndex, "syncing preset from ", "->", ", device=");
-                m.append(cachedBluetoothDevice);
-                Log.d("HearingAidDeviceManager", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(activePresetIndex2, activePresetIndex, "syncing preset from ", "->", ", device=");
+                sbM.append(cachedBluetoothDevice);
+                Log.d("HearingAidDeviceManager", sbM.toString());
             }
             hapClientProfile.selectPreset(cachedBluetoothDevice.mDevice, activePresetIndex);
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0094  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateDevicesConnectionStatus() {
-        boolean z;
+        boolean zIsConnectedProfile;
         int profileConnectionState;
         int profileConnectionState2;
         this.mInitialDevicesConnectionStatusUpdate = true;
         Set<CachedBluetoothDevice> set = (Set) this.mCachedDevices.stream().filter(new HearingAidDeviceManager$$ExternalSyntheticLambda0(1)).flatMap(new Function() { // from class: com.android.settingslib.bluetooth.HearingAidDeviceManager$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                HearingAidDeviceManager hearingAidDeviceManager = HearingAidDeviceManager.this;
+                HearingAidDeviceManager hearingAidDeviceManager = this.f$0;
                 CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) obj;
-                boolean z2 = HearingAidDeviceManager.DEBUG;
+                boolean z = HearingAidDeviceManager.DEBUG;
                 hearingAidDeviceManager.getClass();
                 ArraySet arraySet = new ArraySet();
                 arraySet.add(cachedBluetoothDevice);
@@ -523,40 +498,40 @@ public class HearingAidDeviceManager {
         }
         Iterator it = set.iterator();
         while (true) {
-            boolean z2 = false;
+            boolean zIsConnectedProfile2 = false;
             if (it.hasNext()) {
                 CachedBluetoothDevice cachedBluetoothDevice2 = (CachedBluetoothDevice) it.next();
                 if (cachedBluetoothDevice2.isActiveDevice(21)) {
                     Iterator it2 = cachedBluetoothDevice2.getProfiles().iterator();
                     while (true) {
                         if (!it2.hasNext()) {
-                            z = false;
+                            zIsConnectedProfile = false;
                             break;
                         }
                         LocalBluetoothProfile localBluetoothProfile = (LocalBluetoothProfile) it2.next();
                         if (localBluetoothProfile.getProfileId() == 21) {
-                            z = cachedBluetoothDevice2.isConnectedProfile(localBluetoothProfile);
+                            zIsConnectedProfile = cachedBluetoothDevice2.isConnectedProfile(localBluetoothProfile);
                             break;
                         }
                     }
-                    if (z) {
+                    if (zIsConnectedProfile) {
                         break;
                     }
-                }
-                if (cachedBluetoothDevice2.isActiveDevice(22)) {
-                    Iterator it3 = cachedBluetoothDevice2.getProfiles().iterator();
-                    while (true) {
-                        if (!it3.hasNext()) {
+                    if (cachedBluetoothDevice2.isActiveDevice(22)) {
+                        Iterator it3 = cachedBluetoothDevice2.getProfiles().iterator();
+                        while (true) {
+                            if (!it3.hasNext()) {
+                                break;
+                            }
+                            LocalBluetoothProfile localBluetoothProfile2 = (LocalBluetoothProfile) it3.next();
+                            if (localBluetoothProfile2.getProfileId() == 22) {
+                                zIsConnectedProfile2 = cachedBluetoothDevice2.isConnectedProfile(localBluetoothProfile2);
+                                break;
+                            }
+                        }
+                        if (zIsConnectedProfile2) {
                             break;
                         }
-                        LocalBluetoothProfile localBluetoothProfile2 = (LocalBluetoothProfile) it3.next();
-                        if (localBluetoothProfile2.getProfileId() == 22) {
-                            z2 = cachedBluetoothDevice2.isConnectedProfile(localBluetoothProfile2);
-                            break;
-                        }
-                    }
-                    if (z2) {
-                        break;
                     }
                 }
             } else if (set.stream().anyMatch(new HearingAidDeviceManager$$ExternalSyntheticLambda0(5))) {
@@ -573,17 +548,100 @@ public class HearingAidDeviceManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x011d  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x011d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateHearingAidsDevices() {
-        /*
-            Method dump skipped, instructions count: 332
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.HearingAidDeviceManager.updateHearingAidsDevices():void");
+        int deviceSide;
+        Iterator it;
+        int deviceMode;
+        HearingAidInfo hearingAidInfoBuild;
+        HashSet hashSet = new HashSet();
+        Iterator it2 = this.mCachedDevices.iterator();
+        while (it2.hasNext()) {
+            CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) it2.next();
+            if (!isValidHiSyncId(cachedBluetoothDevice.getHiSyncId())) {
+                LocalBluetoothProfileManager localBluetoothProfileManager = this.mBtManager.mProfileManager;
+                HearingAidProfile hearingAidProfile = localBluetoothProfileManager.mHearingAidProfile;
+                boolean z = DEBUG;
+                if (hearingAidProfile == null) {
+                    Log.w("HearingAidDeviceManager", "HearingAidProfile is not supported on this device");
+                } else {
+                    BluetoothDevice bluetoothDevice = cachedBluetoothDevice.mDevice;
+                    BluetoothHearingAid bluetoothHearingAid = hearingAidProfile.mService;
+                    long hiSyncId = (bluetoothHearingAid == null || bluetoothDevice == null) ? 0L : bluetoothHearingAid.getHiSyncId(bluetoothDevice);
+                    if (isValidHiSyncId(hiSyncId)) {
+                        HearingAidInfo.Builder builder = new HearingAidInfo.Builder();
+                        BluetoothDevice bluetoothDevice2 = cachedBluetoothDevice.mDevice;
+                        BluetoothHearingAid bluetoothHearingAid2 = hearingAidProfile.mService;
+                        if (bluetoothHearingAid2 == null) {
+                            Log.w("HearingAidProfile", "Proxy not attached to HearingAidService");
+                            deviceSide = -1;
+                        } else {
+                            deviceSide = bluetoothHearingAid2.getDeviceSide(bluetoothDevice2);
+                        }
+                        it = it2;
+                        builder.mSide = HearingAidInfo.ASHA_DEVICE_SIDE_TO_INTERNAL_SIDE_MAPPING.get(deviceSide, -1);
+                        BluetoothDevice bluetoothDevice3 = cachedBluetoothDevice.mDevice;
+                        BluetoothHearingAid bluetoothHearingAid3 = hearingAidProfile.mService;
+                        if (bluetoothHearingAid3 == null) {
+                            Log.w("HearingAidProfile", "Proxy not attached to HearingAidService");
+                            deviceMode = -1;
+                        } else {
+                            deviceMode = bluetoothHearingAid3.getDeviceMode(bluetoothDevice3);
+                        }
+                        builder.mMode = HearingAidInfo.ASHA_DEVICE_MODE_TO_INTERNAL_MODE_MAPPING.get(deviceMode, -1);
+                        builder.mHiSyncId = hiSyncId;
+                        hearingAidInfoBuild = builder.build();
+                        if (z) {
+                            Log.d("HearingAidDeviceManager", "generateHearingAidInfo, " + cachedBluetoothDevice + ", info=" + hearingAidInfoBuild);
+                        }
+                    }
+                    if (hearingAidInfoBuild != null) {
+                        cachedBluetoothDevice.setHearingAidInfo(hearingAidInfoBuild);
+                        long j = hearingAidInfoBuild.mHiSyncId;
+                        if (isValidHiSyncId(j)) {
+                            hashSet.add(Long.valueOf(j));
+                        }
+                    }
+                    it2 = it;
+                }
+                it = it2;
+                HapClientProfile hapClientProfile = localBluetoothProfileManager.mHapClientProfile;
+                LeAudioProfile leAudioProfile = localBluetoothProfileManager.mLeAudioProfile;
+                if (hapClientProfile == null || leAudioProfile == null) {
+                    Log.w("HearingAidDeviceManager", "HapClientProfile or LeAudioProfile is not supported on this device");
+                } else if (cachedBluetoothDevice.getProfiles().stream().anyMatch(new HearingAidDeviceManager$$ExternalSyntheticLambda0(3))) {
+                    BluetoothDevice bluetoothDevice4 = cachedBluetoothDevice.mDevice;
+                    BluetoothLeAudio bluetoothLeAudio = leAudioProfile.mService;
+                    int audioLocation = (bluetoothLeAudio == null || bluetoothDevice4 == null) ? 0 : bluetoothLeAudio.getAudioLocation(bluetoothDevice4);
+                    BluetoothDevice bluetoothDevice5 = cachedBluetoothDevice.mDevice;
+                    BluetoothHapClient bluetoothHapClient = hapClientProfile.mService;
+                    int hearingAidType = bluetoothHapClient == null ? -1 : bluetoothHapClient.getHearingAidType(bluetoothDevice5);
+                    if (hearingAidType != -1) {
+                        HearingAidInfo.Builder builder2 = new HearingAidInfo.Builder();
+                        builder2.setLeAudioLocation(audioLocation);
+                        builder2.mMode = HearingAidInfo.HAP_DEVICE_TYPE_TO_INTERNAL_MODE_MAPPING.get(hearingAidType, -1);
+                        hearingAidInfoBuild = builder2.build();
+                        if (z) {
+                            Log.d("HearingAidDeviceManager", "generateHearingAidInfo, " + cachedBluetoothDevice + ", info=" + hearingAidInfoBuild);
+                        }
+                    }
+                    if (hearingAidInfoBuild != null) {
+                    }
+                    it2 = it;
+                }
+                hearingAidInfoBuild = null;
+                if (hearingAidInfoBuild != null) {
+                }
+                it2 = it;
+            }
+        }
+        Iterator it3 = hashSet.iterator();
+        while (it3.hasNext()) {
+            onHiSyncIdChanged(((Long) it3.next()).longValue());
+        }
     }
 
     public HearingAidDeviceManager(Context context, LocalBluetoothManager localBluetoothManager, List<CachedBluetoothDevice> list, HearingAidAudioRoutingHelper hearingAidAudioRoutingHelper) {

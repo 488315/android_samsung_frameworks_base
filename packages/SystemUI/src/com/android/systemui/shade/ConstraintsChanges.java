@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConstraintsChanges {
     public final Function1 largeScreenConstraintsChanges;
@@ -30,11 +29,11 @@ public final class ConstraintsChanges {
 
     public final int hashCode() {
         Function1 function1 = this.qqsConstraintsChanges;
-        int hashCode = (function1 == null ? 0 : function1.hashCode()) * 31;
+        int iHashCode = (function1 == null ? 0 : function1.hashCode()) * 31;
         Function1 function12 = this.qsConstraintsChanges;
-        int hashCode2 = (hashCode + (function12 == null ? 0 : function12.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (function12 == null ? 0 : function12.hashCode())) * 31;
         Function1 function13 = this.largeScreenConstraintsChanges;
-        return hashCode2 + (function13 != null ? function13.hashCode() : 0);
+        return iHashCode2 + (function13 != null ? function13.hashCode() : 0);
     }
 
     public final ConstraintsChanges plus(ConstraintsChanges constraintsChanges) {
@@ -44,10 +43,10 @@ public final class ConstraintsChanges {
             function1 = function1 == null ? function12 : new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ConstraintSet constraintSet = (ConstraintSet) obj;
-                    Function1.this.mo779invoke(constraintSet);
-                    function1.mo779invoke(constraintSet);
+                    function12.mo781invoke(constraintSet);
+                    function1.mo781invoke(constraintSet);
                     return Unit.INSTANCE;
                 }
             };
@@ -60,10 +59,10 @@ public final class ConstraintsChanges {
             function13 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ConstraintSet constraintSet = (ConstraintSet) obj;
-                    Function1.this.mo779invoke(constraintSet);
-                    function14.mo779invoke(constraintSet);
+                    function13.mo781invoke(constraintSet);
+                    function14.mo781invoke(constraintSet);
                     return Unit.INSTANCE;
                 }
             };
@@ -76,10 +75,10 @@ public final class ConstraintsChanges {
             function15 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ConstraintSet constraintSet = (ConstraintSet) obj;
-                    Function1.this.mo779invoke(constraintSet);
-                    function16.mo779invoke(constraintSet);
+                    function15.mo781invoke(constraintSet);
+                    function16.mo781invoke(constraintSet);
                     return Unit.INSTANCE;
                 }
             };

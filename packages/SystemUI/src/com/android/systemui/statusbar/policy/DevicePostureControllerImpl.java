@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.policy;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.devicestate.DeviceStateUtil;
@@ -18,7 +19,6 @@ import java.util.concurrent.Executor;
 import kotlin.Unit;
 import kotlin.jvm.internal.PropertyReference0Impl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DevicePostureControllerImpl implements DevicePostureController {
     public DeviceState mCurrentDeviceState;
@@ -27,12 +27,12 @@ public class DevicePostureControllerImpl implements DevicePostureController {
     public int mCurrentDevicePosture = 0;
     public final SparseIntArray mDeviceStateToPostureMap = new SparseIntArray();
 
-    public DevicePostureControllerImpl(Context context, DeviceStateManager deviceStateManager, Executor executor) {
-        for (String str : context.getResources().getStringArray(R.array.config_twoDigitNumberPattern)) {
-            String[] split = str.split(":");
-            if (split.length == 2) {
+    public DevicePostureControllerImpl(Context context, DeviceStateManager deviceStateManager, Executor executor) throws Resources.NotFoundException, NumberFormatException {
+        for (String str : context.getResources().getStringArray(R.array.config_udfps_enroll_stage_thresholds)) {
+            String[] strArrSplit = str.split(":");
+            if (strArrSplit.length == 2) {
                 try {
-                    this.mDeviceStateToPostureMap.put(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+                    this.mDeviceStateToPostureMap.put(Integer.parseInt(strArrSplit[0]), Integer.parseInt(strArrSplit[1]));
                 } catch (NumberFormatException unused) {
                 }
             }
@@ -53,8 +53,8 @@ public class DevicePostureControllerImpl implements DevicePostureController {
                     Iterator it = ((CopyOnWriteArrayList) list).iterator();
                     while (it.hasNext()) {
                         final Object next = it.next();
-                        boolean isEnabled = Trace.isEnabled();
-                        if (isEnabled) {
+                        boolean zIsEnabled = Trace.isEnabled();
+                        if (zIsEnabled) {
                             TraceUtilsKt.beginSlice("DevicePostureControllerImpl#".concat(((Class) new PropertyReference0Impl(next) { // from class: com.android.app.tracing.ListenersTracing$forEachTraced$1$1$1
                                 @Override // kotlin.jvm.internal.PropertyReference0Impl, kotlin.reflect.KProperty0
                                 public final Object get() {
@@ -66,11 +66,11 @@ public class DevicePostureControllerImpl implements DevicePostureController {
                             ((DevicePostureController.Callback) next).onPostureChanged(DevicePostureControllerImpl.this.getDevicePosture());
                             Unit unit = Unit.INSTANCE;
                             Unit unit2 = Unit.INSTANCE;
-                            if (isEnabled) {
+                            if (zIsEnabled) {
                                 TraceUtilsKt.endSlice();
                             }
                         } catch (Throwable th) {
-                            if (isEnabled) {
+                            if (zIsEnabled) {
                                 TraceUtilsKt.endSlice();
                             }
                             throw th;

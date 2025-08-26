@@ -9,7 +9,6 @@ import com.android.compose.animation.scene.content.Content;
 import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Swipes {
     public final Swipe.Resolved downOrRight;
@@ -42,17 +41,17 @@ public final class Swipes {
                             PointerType pointerType = resolved3.pointerType;
                             PointerType pointerType2 = resolved.pointerType;
                             if (pointerType == null || pointerType.equals(pointerType2)) {
-                                ?? areEqual = Intrinsics.areEqual(resolved4, resolved5);
-                                boolean areEqual2 = Intrinsics.areEqual(pointerType, pointerType2);
-                                if (areEqual != 0 && areEqual2) {
+                                ?? AreEqual = Intrinsics.areEqual(resolved4, resolved5);
+                                boolean zAreEqual = Intrinsics.areEqual(pointerType, pointerType2);
+                                if (AreEqual != 0 && zAreEqual) {
                                     return userActionResult2;
                                 }
-                                if (areEqual2) {
-                                    areEqual++;
+                                if (zAreEqual) {
+                                    AreEqual++;
                                 }
-                                if (areEqual > c) {
+                                if (AreEqual > c) {
                                     userActionResult = userActionResult2;
-                                    c = areEqual;
+                                    c = AreEqual;
                                 }
                             }
                         }

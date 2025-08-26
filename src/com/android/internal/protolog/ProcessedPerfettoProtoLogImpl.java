@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProcessedPerfettoProtoLogImpl extends PerfettoProtoLogImpl {
     private static final String LOG_TAG = "PerfettoProtoLogImpl";
     private final String mViewerConfigFilePath;
@@ -70,12 +70,12 @@ public class ProcessedPerfettoProtoLogImpl extends PerfettoProtoLogImpl {
         if (!validateGroups(iLogger, strArr)) {
             return -1;
         }
-        int stopLoggingToLogcat = super.stopLoggingToLogcat(strArr, iLogger);
-        if (stopLoggingToLogcat != 0) {
+        int iStopLoggingToLogcat = super.stopLoggingToLogcat(strArr, iLogger);
+        if (iStopLoggingToLogcat != 0) {
             throw new RuntimeException("Failed to stop logging to logcat");
         }
         this.mViewerConfigReader.unloadViewerConfig(strArr, iLogger);
-        return stopLoggingToLogcat;
+        return iStopLoggingToLogcat;
     }
 
     @Override // com.android.internal.protolog.PerfettoProtoLogImpl
@@ -119,7 +119,7 @@ public class ProcessedPerfettoProtoLogImpl extends PerfettoProtoLogImpl {
         this.mBackgroundLoggingService.execute(new Runnable() { // from class: com.android.internal.protolog.ProcessedPerfettoProtoLogImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ProcessedPerfettoProtoLogImpl.this.lambda$loadLogcatGroupsViewerConfig$0(arrayList);
+                this.f$0.lambda$loadLogcatGroupsViewerConfig$0(arrayList);
             }
         });
     }

@@ -95,9 +95,9 @@ public final class ImsFeatureConfiguration implements Parcelable {
     }
 
     protected ImsFeatureConfiguration(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mFeatures = new ArraySet(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mFeatures = new ArraySet(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mFeatures.add(new FeatureSlotPair(parcel.readInt(), parcel.readInt()));
         }
     }

@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StackedMobileIconViewModelImpl$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -55,7 +54,6 @@ public final class StackedMobileIconViewModelImpl$special$$inlined$flatMapLatest
             final Flow[] flowArr = (Flow[]) CollectionsKt___CollectionsKt.toList(arrayList).toArray(new Flow[0]);
             Flow flow = new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.StackedMobileIconViewModelImpl$dualSim_delegate$lambda$4$$inlined$combine$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.StackedMobileIconViewModelImpl$dualSim_delegate$lambda$4$$inlined$combine$1$3, reason: invalid class name */
                 public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                     private /* synthetic */ Object L$0;
@@ -109,13 +107,13 @@ public final class StackedMobileIconViewModelImpl$special$$inlined$flatMapLatest
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                     final Flow[] flowArr2 = flowArr;
-                    Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.StackedMobileIconViewModelImpl$dualSim_delegate$lambda$4$$inlined$combine$1.2
+                    Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.StackedMobileIconViewModelImpl$dualSim_delegate$lambda$4$$inlined$combine$1.2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             return new SignalIconModel[flowArr2.length];
                         }
                     }, new AnonymousClass3(null), flowCollector2, continuation);
-                    return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                    return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                 }
             };
             this.label = 1;

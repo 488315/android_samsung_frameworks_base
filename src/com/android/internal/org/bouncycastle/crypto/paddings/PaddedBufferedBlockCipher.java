@@ -62,12 +62,12 @@ public class PaddedBufferedBlockCipher extends DefaultBufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processByte(byte b, byte[] bArr, int i) throws DataLengthException, IllegalStateException {
+    public int processByte(byte b, byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         int i2 = 0;
         if (this.bufOff == this.buf.length) {
-            int processBlock = this.cipher.processBlock(this.buf, 0, bArr, i);
+            int iProcessBlock = this.cipher.processBlock(this.buf, 0, bArr, i);
             this.bufOff = 0;
-            i2 = processBlock;
+            i2 = iProcessBlock;
         }
         byte[] bArr2 = this.buf;
         int i3 = this.bufOff;
@@ -77,7 +77,7 @@ public class PaddedBufferedBlockCipher extends DefaultBufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         if (i2 < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -87,50 +87,50 @@ public class PaddedBufferedBlockCipher extends DefaultBufferedBlockCipher {
             throw new OutputLengthException("output buffer too short");
         }
         int length = this.buf.length - this.bufOff;
-        int i4 = 0;
+        int iProcessBlock = 0;
         if (i2 > length) {
             System.arraycopy(bArr, i, this.buf, this.bufOff, length);
-            int processBlock = this.cipher.processBlock(this.buf, 0, bArr2, i3);
+            int iProcessBlock2 = this.cipher.processBlock(this.buf, 0, bArr2, i3);
             this.bufOff = 0;
             i2 -= length;
             i += length;
-            i4 = processBlock;
+            iProcessBlock = iProcessBlock2;
             while (i2 > this.buf.length) {
-                i4 += this.cipher.processBlock(bArr, i, bArr2, i3 + i4);
+                iProcessBlock += this.cipher.processBlock(bArr, i, bArr2, i3 + iProcessBlock);
                 i2 -= blockSize;
                 i += blockSize;
             }
         }
         System.arraycopy(bArr, i, this.buf, this.bufOff, i2);
         this.bufOff += i2;
-        return i4;
+        return iProcessBlock;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int doFinal(byte[] bArr, int i) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
-        int i2;
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
+        int iProcessBlock;
         int blockSize = this.cipher.getBlockSize();
         if (this.forEncryption) {
             if (this.bufOff != blockSize) {
-                i2 = 0;
+                iProcessBlock = 0;
             } else {
                 if ((blockSize * 2) + i > bArr.length) {
                     reset();
                     throw new OutputLengthException("output buffer too short");
                 }
-                i2 = this.cipher.processBlock(this.buf, 0, bArr, i);
+                iProcessBlock = this.cipher.processBlock(this.buf, 0, bArr, i);
                 this.bufOff = 0;
             }
             this.padding.addPadding(this.buf, this.bufOff);
-            return i2 + this.cipher.processBlock(this.buf, 0, bArr, i + i2);
+            return iProcessBlock + this.cipher.processBlock(this.buf, 0, bArr, i + iProcessBlock);
         }
         if (this.bufOff == blockSize) {
-            int processBlock = this.cipher.processBlock(this.buf, 0, this.buf, 0);
+            int iProcessBlock2 = this.cipher.processBlock(this.buf, 0, this.buf, 0);
             this.bufOff = 0;
             try {
-                int padCount = processBlock - this.padding.padCount(this.buf);
-                System.arraycopy(this.buf, 0, bArr, i, padCount);
-                return padCount;
+                int iPadCount = iProcessBlock2 - this.padding.padCount(this.buf);
+                System.arraycopy(this.buf, 0, bArr, i, iPadCount);
+                return iPadCount;
             } finally {
                 reset();
             }

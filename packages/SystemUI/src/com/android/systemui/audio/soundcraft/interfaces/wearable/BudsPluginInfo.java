@@ -10,7 +10,6 @@ import kotlin.text.StringsKt__StringsKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BudsPluginInfo {
     public static final /* synthetic */ BudsPluginInfo[] $VALUES;
@@ -19,18 +18,17 @@ public final class BudsPluginInfo {
     private final String packageName;
     private final String projectName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static String findProjectName(String str) {
-            List split$default = StringsKt__StringsKt.split$default(str, new String[]{"."}, 0, 6);
-            if (!split$default.isEmpty()) {
+            List listSplit$default = StringsKt__StringsKt.split$default(str, new String[]{"."}, 0, 6);
+            if (!listSplit$default.isEmpty()) {
                 try {
                     int i = Result.$r8$clinit;
-                    String str2 = (String) split$default.get(split$default.size() - 1);
+                    String str2 = (String) listSplit$default.get(listSplit$default.size() - 1);
                     if (str2.length() > 0) {
                         return str2.substring(0, str2.length() - 3);
                     }

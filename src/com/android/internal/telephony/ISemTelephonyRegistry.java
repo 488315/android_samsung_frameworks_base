@@ -68,9 +68,9 @@ public interface ISemTelephonyRegistry extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemTelephonyRegistry.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemTelephonyRegistry)) {
-                return (ISemTelephonyRegistry) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemTelephonyRegistry.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemTelephonyRegistry)) {
+                return (ISemTelephonyRegistry) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,31 +106,31 @@ public interface ISemTelephonyRegistry extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ITiantongSatelliteChangeListener asInterface = ITiantongSatelliteChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                ITiantongSatelliteChangeListener iTiantongSatelliteChangeListenerAsInterface = ITiantongSatelliteChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                addTiantongSatelliteChangeListener(asInterface, readString, readString2);
+                addTiantongSatelliteChangeListener(iTiantongSatelliteChangeListenerAsInterface, string, string2);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ITiantongSatelliteChangeListener asInterface2 = ITiantongSatelliteChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                String readString3 = parcel.readString();
+                ITiantongSatelliteChangeListener iTiantongSatelliteChangeListenerAsInterface2 = ITiantongSatelliteChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                removeTiantongSatelliteChangeListener(asInterface2, readString3);
+                removeTiantongSatelliteChangeListener(iTiantongSatelliteChangeListenerAsInterface2, string3);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 SemSatelliteServiceState semSatelliteServiceState = (SemSatelliteServiceState) parcel.readTypedObject(SemSatelliteServiceState.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifySemSatelliteServiceStateChanged(readInt, readInt2, semSatelliteServiceState);
+                notifySemSatelliteServiceStateChanged(i3, i4, semSatelliteServiceState);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 SemSatelliteSignalStrength semSatelliteSignalStrength = (SemSatelliteSignalStrength) parcel.readTypedObject(SemSatelliteSignalStrength.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifySemSatelliteSignalStrengthChanged(readInt3, readInt4, semSatelliteSignalStrength);
+                notifySemSatelliteSignalStrengthChanged(i5, i6, semSatelliteSignalStrength);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -156,68 +156,68 @@ public interface ISemTelephonyRegistry extends IInterface {
 
             @Override // com.android.internal.telephony.ISemTelephonyRegistry
             public void addTiantongSatelliteChangeListener(ITiantongSatelliteChangeListener iTiantongSatelliteChangeListener, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTiantongSatelliteChangeListener);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTiantongSatelliteChangeListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephonyRegistry
             public void removeTiantongSatelliteChangeListener(ITiantongSatelliteChangeListener iTiantongSatelliteChangeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTiantongSatelliteChangeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTiantongSatelliteChangeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephonyRegistry
             public void notifySemSatelliteServiceStateChanged(int i, int i2, SemSatelliteServiceState semSatelliteServiceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(semSatelliteServiceState, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(semSatelliteServiceState, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephonyRegistry
             public void notifySemSatelliteSignalStrengthChanged(int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(semSatelliteSignalStrength, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephonyRegistry.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(semSatelliteSignalStrength, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

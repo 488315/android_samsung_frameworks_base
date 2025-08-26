@@ -73,6 +73,11 @@ public abstract class SpannableStringInternal {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0025 A[PHI: r6
+      0x0025: PHI (r6v8 boolean) = (r6v1 boolean), (r6v9 boolean) binds: [B:8:0x001f, B:10:0x0022] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void copySpansFromInternal(SpannableStringInternal spannableStringInternal, int i, int i2, boolean z) {
         int[] iArr = spannableStringInternal.mSpanData;
         Object[] objArr = spannableStringInternal.mSpans;
@@ -84,31 +89,31 @@ public abstract class SpannableStringInternal {
             if (!isOutOfCopyRange(i, i2, iArr[i6], iArr[i6 + 1])) {
                 if (objArr[i5] instanceof NoCopySpan) {
                     z2 = true;
-                    if (z) {
+                    if (!z) {
+                        i4++;
                     }
                 }
-                i4++;
             }
         }
         if (i4 == 0) {
             return;
         }
         if (!z2 && i == 0 && i2 == spannableStringInternal.length()) {
-            Object[] newUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(spannableStringInternal.mSpans.length);
-            this.mSpans = newUnpaddedObjectArray;
+            Object[] objArrNewUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(spannableStringInternal.mSpans.length);
+            this.mSpans = objArrNewUnpaddedObjectArray;
             this.mSpanData = new int[spannableStringInternal.mSpanData.length];
             this.mSpanCount = spannableStringInternal.mSpanCount;
             Object[] objArr2 = spannableStringInternal.mSpans;
-            System.arraycopy(objArr2, 0, newUnpaddedObjectArray, 0, objArr2.length);
+            System.arraycopy(objArr2, 0, objArrNewUnpaddedObjectArray, 0, objArr2.length);
             int[] iArr2 = spannableStringInternal.mSpanData;
             int[] iArr3 = this.mSpanData;
             System.arraycopy(iArr2, 0, iArr3, 0, iArr3.length);
             return;
         }
         this.mSpanCount = i4;
-        Object[] newUnpaddedObjectArray2 = ArrayUtils.newUnpaddedObjectArray(i4);
-        this.mSpans = newUnpaddedObjectArray2;
-        this.mSpanData = new int[newUnpaddedObjectArray2.length * 3];
+        Object[] objArrNewUnpaddedObjectArray2 = ArrayUtils.newUnpaddedObjectArray(i4);
+        this.mSpans = objArrNewUnpaddedObjectArray2;
+        this.mSpanData = new int[objArrNewUnpaddedObjectArray2.length * 3];
         int i7 = 0;
         for (int i8 = 0; i8 < i3; i8++) {
             int i9 = i8 * 3;
@@ -199,11 +204,11 @@ public abstract class SpannableStringInternal {
         int i13 = i;
         int i14 = this.mSpanCount;
         if (i14 + 1 >= this.mSpans.length) {
-            Object[] newUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(i14));
-            int[] iArr2 = new int[newUnpaddedObjectArray.length * 3];
-            System.arraycopy(this.mSpans, 0, newUnpaddedObjectArray, 0, this.mSpanCount);
+            Object[] objArrNewUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(i14));
+            int[] iArr2 = new int[objArrNewUnpaddedObjectArray.length * 3];
+            System.arraycopy(this.mSpans, 0, objArrNewUnpaddedObjectArray, 0, this.mSpanCount);
             System.arraycopy(this.mSpanData, 0, iArr2, 0, this.mSpanCount * 3);
-            this.mSpans = newUnpaddedObjectArray;
+            this.mSpans = objArrNewUnpaddedObjectArray;
             this.mSpanData = iArr2;
         }
         Object[] objArr2 = this.mSpans;
@@ -418,15 +423,15 @@ public abstract class SpannableStringInternal {
     }
 
     public int hashCode() {
-        int hashCode = (toString().hashCode() * 31) + this.mSpanCount;
+        int iHashCode = (toString().hashCode() * 31) + this.mSpanCount;
         for (int i = 0; i < this.mSpanCount; i++) {
             Object obj = this.mSpans[i];
             if (obj != this) {
-                hashCode = (hashCode * 31) + obj.hashCode();
+                iHashCode = (iHashCode * 31) + obj.hashCode();
             }
-            hashCode = (((((hashCode * 31) + getSpanStart(obj)) * 31) + getSpanEnd(obj)) * 31) + getSpanFlags(obj);
+            iHashCode = (((((iHashCode * 31) + getSpanStart(obj)) * 31) + getSpanEnd(obj)) * 31) + getSpanFlags(obj);
         }
-        return hashCode;
+        return iHashCode;
     }
 
     private void copySpans(Spanned spanned, int i, int i2) {

@@ -5,28 +5,35 @@ import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.State;
-import com.android.systemui.media.MediaOutputView$$ExternalSyntheticLambda0;
+import com.android.systemui.media.MediaOutputView$$ExternalSyntheticLambda2;
 import com.android.systemui.media.mediaoutput.compose.Screen;
 import com.android.systemui.media.mediaoutput.compose.common.MediaOutputState;
 import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class Feature implements MediaOutputState, TransitionInfo, DismissCallback {
     public static final Companion Companion = new Companion(null);
     public final MutableState _state;
-    public MediaOutputView$$ExternalSyntheticLambda0 anchorRectCallback;
+    public MediaOutputView$$ExternalSyntheticLambda2 anchorRectCallback;
     public int anchorViewId;
     public String anchorViewTag;
     public Screen defaultScreen;
@@ -41,7 +48,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
     public boolean showMediaController;
     public final State state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public final Lazy feature$delegate = LazyKt__LazyJVMKt.lazy(new Feature$Builder$$ExternalSyntheticLambda0());
 
@@ -50,7 +56,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -60,7 +65,6 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -90,6 +94,50 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
+    /* renamed from: com.android.systemui.media.mediaoutput.compose.common.Feature$animateDismiss$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return Feature.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                this.label = 1;
+                if (DelayKt.delay(50L, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            Feature feature = Feature.this;
+            Function0 function0 = feature.dismissCallback;
+            if (function0 != null) {
+                function0.invoke();
+            }
+            feature.setState(MediaOutputState.StateInfo.Dismissed);
+            return Unit.INSTANCE;
+        }
+    }
+
     private Feature(String str, boolean z, int i, boolean z2, boolean z3, Screen screen, boolean z4) {
         this.packageName = str;
         this.showMediaController = z;
@@ -97,20 +145,20 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         this.isFullScreen = z3;
         this.defaultScreen = screen;
         this.isWindow = z4;
-        MutableState mutableStateOf$default = SnapshotStateKt.mutableStateOf$default(MediaOutputState.StateInfo.PreShow);
-        this._state = mutableStateOf$default;
-        this.state = mutableStateOf$default;
+        MutableState mutableStateMutableStateOf$default = SnapshotStateKt.mutableStateOf$default(MediaOutputState.StateInfo.PreShow);
+        this._state = mutableStateMutableStateOf$default;
+        this.state = mutableStateMutableStateOf$default;
         this.anchorViewId = -1;
     }
 
     public final void animateDismiss() {
-        MediaOutputView$$ExternalSyntheticLambda0 mediaOutputView$$ExternalSyntheticLambda0 = this.anchorRectCallback;
-        Rect rect = mediaOutputView$$ExternalSyntheticLambda0 != null ? (Rect) mediaOutputView$$ExternalSyntheticLambda0.invoke(Integer.valueOf(this.anchorViewId), this.anchorViewTag) : null;
+        MediaOutputView$$ExternalSyntheticLambda2 mediaOutputView$$ExternalSyntheticLambda2 = this.anchorRectCallback;
+        Rect rect = mediaOutputView$$ExternalSyntheticLambda2 != null ? (Rect) mediaOutputView$$ExternalSyntheticLambda2.invoke(Integer.valueOf(this.anchorViewId), this.anchorViewTag) : null;
         this.fromRect = rect;
         if (rect != null) {
             setState(MediaOutputState.StateInfo.Dismissing);
             DefaultScheduler defaultScheduler = Dispatchers.Default;
-            BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new Feature$animateDismiss$1(this, null), 3);
+            BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new AnonymousClass1(null), 3);
         } else {
             Function0 function0 = this.dismissCallback;
             if (function0 != null) {
@@ -120,12 +168,12 @@ public final class Feature implements MediaOutputState, TransitionInfo, DismissC
         }
     }
 
-    public final void setAnchorRectCallback(MediaOutputView$$ExternalSyntheticLambda0 mediaOutputView$$ExternalSyntheticLambda0) {
-        if (Intrinsics.areEqual(this.anchorRectCallback, mediaOutputView$$ExternalSyntheticLambda0)) {
+    public final void setAnchorRectCallback(MediaOutputView$$ExternalSyntheticLambda2 mediaOutputView$$ExternalSyntheticLambda2) {
+        if (Intrinsics.areEqual(this.anchorRectCallback, mediaOutputView$$ExternalSyntheticLambda2)) {
             return;
         }
-        this.anchorRectCallback = mediaOutputView$$ExternalSyntheticLambda0;
-        this.fromRect = mediaOutputView$$ExternalSyntheticLambda0 != null ? (Rect) mediaOutputView$$ExternalSyntheticLambda0.invoke(Integer.valueOf(this.anchorViewId), this.anchorViewTag) : null;
+        this.anchorRectCallback = mediaOutputView$$ExternalSyntheticLambda2;
+        this.fromRect = mediaOutputView$$ExternalSyntheticLambda2 != null ? (Rect) mediaOutputView$$ExternalSyntheticLambda2.invoke(Integer.valueOf(this.anchorViewId), this.anchorViewTag) : null;
     }
 
     public final void setState(MediaOutputState.StateInfo stateInfo) {

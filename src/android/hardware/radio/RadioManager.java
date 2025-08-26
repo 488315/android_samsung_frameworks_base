@@ -229,8 +229,8 @@ public class RadioManager {
 
         private ModuleProperties(Parcel parcel) {
             this.mId = parcel.readInt();
-            String readString = parcel.readString();
-            this.mServiceName = TextUtils.isEmpty(readString) ? "default" : readString;
+            String string = parcel.readString();
+            this.mServiceName = TextUtils.isEmpty(string) ? "default" : string;
             this.mClassId = parcel.readInt();
             this.mImplementor = parcel.readString();
             this.mProduct = parcel.readString();
@@ -248,8 +248,8 @@ public class RadioManager {
             this.mIsBgScanSupported = parcel.readInt() == 1;
             this.mSupportedProgramTypes = arrayToSet(parcel.createIntArray());
             this.mSupportedIdentifierTypes = arrayToSet(parcel.createIntArray());
-            Map<String, Integer> readStringIntMap = Utils.readStringIntMap(parcel);
-            this.mDabFrequencyTable = readStringIntMap.isEmpty() ? null : readStringIntMap;
+            Map<String, Integer> stringIntMap = Utils.readStringIntMap(parcel);
+            this.mDabFrequencyTable = stringIntMap.isEmpty() ? null : stringIntMap;
             this.mVendorInfo = Utils.readStringMap(parcel);
         }
 
@@ -299,13 +299,13 @@ public class RadioManager {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public BandDescriptor createFromParcel(Parcel parcel) {
-                int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
-                if (lookupTypeFromParcel != 0) {
-                    if (lookupTypeFromParcel == 1 || lookupTypeFromParcel == 2) {
+                int iLookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
+                if (iLookupTypeFromParcel != 0) {
+                    if (iLookupTypeFromParcel == 1 || iLookupTypeFromParcel == 2) {
                         return new FmBandDescriptor(parcel);
                     }
-                    if (lookupTypeFromParcel != 3) {
-                        throw new IllegalArgumentException("Unsupported band: " + lookupTypeFromParcel);
+                    if (iLookupTypeFromParcel != 3) {
+                        throw new IllegalArgumentException("Unsupported band: " + iLookupTypeFromParcel);
                     }
                 }
                 return new AmBandDescriptor(parcel);
@@ -379,11 +379,11 @@ public class RadioManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static int lookupTypeFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.readInt();
-            int readInt = parcel.readInt();
-            parcel.setDataPosition(dataPosition);
-            return readInt;
+            int i = parcel.readInt();
+            parcel.setDataPosition(iDataPosition);
+            return i;
         }
 
         @Override // android.os.Parcelable
@@ -576,13 +576,13 @@ public class RadioManager {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public BandConfig createFromParcel(Parcel parcel) {
-                int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
-                if (lookupTypeFromParcel != 0) {
-                    if (lookupTypeFromParcel == 1 || lookupTypeFromParcel == 2) {
+                int iLookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
+                if (iLookupTypeFromParcel != 0) {
+                    if (iLookupTypeFromParcel == 1 || iLookupTypeFromParcel == 2) {
                         return new FmBandConfig(parcel);
                     }
-                    if (lookupTypeFromParcel != 3) {
-                        throw new IllegalArgumentException("Unsupported band: " + lookupTypeFromParcel);
+                    if (iLookupTypeFromParcel != 3) {
+                        throw new IllegalArgumentException("Unsupported band: " + iLookupTypeFromParcel);
                     }
                 }
                 return new AmBandConfig(parcel);
@@ -1021,11 +1021,11 @@ public class RadioManager {
 
         @Deprecated
         public boolean isDigital() {
-            ProgramSelector.Identifier identifier = this.mLogicallyTunedTo;
-            if (identifier == null) {
-                identifier = this.mSelector.getPrimaryId();
+            ProgramSelector.Identifier primaryId = this.mLogicallyTunedTo;
+            if (primaryId == null) {
+                primaryId = this.mSelector.getPrimaryId();
             }
-            int type = identifier.getType();
+            int type = primaryId.getType();
             return (type == 1 || type == 2) ? false : true;
         }
 
@@ -1149,12 +1149,12 @@ public class RadioManager {
         }
         Log.d(TAG, "Listing available tuners...");
         try {
-            List<ModuleProperties> listModules = this.mService.listModules();
-            if (listModules == null) {
+            List<ModuleProperties> listListModules = this.mService.listModules();
+            if (listListModules == null) {
                 Log.e(TAG, "Returned list was a null");
                 return Integer.MIN_VALUE;
             }
-            list.addAll(listModules);
+            list.addAll(listListModules);
             return 0;
         } catch (RemoteException e) {
             Log.e(TAG, "Failed listing available tuners", e);
@@ -1169,12 +1169,12 @@ public class RadioManager {
         Log.d(TAG, "Opening tuner " + i + Session.TRUNCATE_STRING);
         TunerCallbackAdapter tunerCallbackAdapter = new TunerCallbackAdapter(callback, handler);
         try {
-            ITuner openTuner = this.mService.openTuner(i, bandConfig, z, tunerCallbackAdapter);
-            if (openTuner == null) {
+            ITuner iTunerOpenTuner = this.mService.openTuner(i, bandConfig, z, tunerCallbackAdapter);
+            if (iTunerOpenTuner == null) {
                 Log.e(TAG, "Failed to open tuner");
                 return null;
             }
-            return new TunerAdapter(openTuner, tunerCallbackAdapter, bandConfig != null ? bandConfig.getType() : -1);
+            return new TunerAdapter(iTunerOpenTuner, tunerCallbackAdapter, bandConfig != null ? bandConfig.getType() : -1);
         } catch (RemoteException | IllegalArgumentException | IllegalStateException e) {
             Log.e(TAG, "Failed to open tuner", e);
             return null;
@@ -1191,22 +1191,22 @@ public class RadioManager {
     }
 
     public void addAnnouncementListener(Executor executor, Set<Integer> set, Announcement.OnListUpdatedListener onListUpdatedListener) {
-        ICloseHandle iCloseHandle;
+        ICloseHandle iCloseHandleAddAnnouncementListener;
         Objects.requireNonNull(executor);
         Objects.requireNonNull(onListUpdatedListener);
         int[] array = set.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(this, executor, onListUpdatedListener);
         synchronized (this.mAnnouncementListeners) {
             try {
-                iCloseHandle = this.mService.addAnnouncementListener(array, anonymousClass1);
+                iCloseHandleAddAnnouncementListener = this.mService.addAnnouncementListener(array, anonymousClass1);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
-                iCloseHandle = null;
+                iCloseHandleAddAnnouncementListener = null;
             }
-            Objects.requireNonNull(iCloseHandle);
-            ICloseHandle put = this.mAnnouncementListeners.put(onListUpdatedListener, iCloseHandle);
-            if (put != null) {
-                Utils.close(put);
+            Objects.requireNonNull(iCloseHandleAddAnnouncementListener);
+            ICloseHandle iCloseHandlePut = this.mAnnouncementListeners.put(onListUpdatedListener, iCloseHandleAddAnnouncementListener);
+            if (iCloseHandlePut != null) {
+                Utils.close(iCloseHandlePut);
             }
         }
     }
@@ -1228,7 +1228,7 @@ public class RadioManager {
             executor.execute(new Runnable() { // from class: android.hardware.radio.RadioManager$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Announcement.OnListUpdatedListener.this.onListUpdated(list);
+                    onListUpdatedListener.onListUpdated(list);
                 }
             });
         }
@@ -1237,9 +1237,9 @@ public class RadioManager {
     public void removeAnnouncementListener(Announcement.OnListUpdatedListener onListUpdatedListener) {
         Objects.requireNonNull(onListUpdatedListener);
         synchronized (this.mAnnouncementListeners) {
-            ICloseHandle remove = this.mAnnouncementListeners.remove(onListUpdatedListener);
-            if (remove != null) {
-                Utils.close(remove);
+            ICloseHandle iCloseHandleRemove = this.mAnnouncementListeners.remove(onListUpdatedListener);
+            if (iCloseHandleRemove != null) {
+                Utils.close(iCloseHandleRemove);
             }
         }
     }

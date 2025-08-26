@@ -5,7 +5,6 @@ import android.app.ActivityOptions;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetHost;
-import android.appwidget.AppWidgetHostView;
 import android.appwidget.flags.Flags;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,6 +12,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -21,6 +21,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.AttributeSet;
@@ -64,9 +65,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     private static final LayoutInflater.Filter INFLATER_FILTER = new LayoutInflater.Filter() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda3
         @Override // android.view.LayoutInflater.Filter
         public final boolean onLoadClass(Class cls) {
-            boolean isAnnotationPresent;
-            isAnnotationPresent = cls.isAnnotationPresent(RemoteViews.RemoteView.class);
-            return isAnnotationPresent;
+            return cls.isAnnotationPresent(RemoteViews.RemoteView.class);
         }
     };
     private static final String KEY_INFLATION_ID = "inflation_id";
@@ -149,17 +148,17 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
     }
 
-    public void setAppWidget(int i, AppWidgetProviderInfo appWidgetProviderInfo) {
+    public void setAppWidget(int i, AppWidgetProviderInfo appWidgetProviderInfo) throws Resources.NotFoundException {
         this.mAppWidgetId = i;
         this.mInfo = appWidgetProviderInfo;
         Rect defaultPadding = getDefaultPadding();
         setPadding(defaultPadding.left, defaultPadding.top, defaultPadding.right, defaultPadding.bottom);
         if (appWidgetProviderInfo != null) {
-            String loadLabel = appWidgetProviderInfo.loadLabel(getContext().getPackageManager());
+            String strLoadLabel = appWidgetProviderInfo.loadLabel(getContext().getPackageManager());
             if ((appWidgetProviderInfo.providerInfo.applicationInfo.flags & 1073741824) != 0) {
-                loadLabel = Resources.getSystem().getString(R.string.suspended_widget_accessibility, loadLabel);
+                strLoadLabel = Resources.getSystem().getString(R.string.suspended_widget_accessibility, strLoadLabel);
             }
-            setContentDescription(loadLabel);
+            setContentDescription(strLoadLabel);
         }
     }
 
@@ -254,14 +253,14 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         RemoteViews remoteViewsToApplyIfDifferent;
         try {
             SizeF sizeF = this.mCurrentSize;
-            SizeF computeSizeFromLayout = computeSizeFromLayout(i, i2, i3, i4);
-            this.mCurrentSize = computeSizeFromLayout;
+            SizeF sizeFComputeSizeFromLayout = computeSizeFromLayout(i, i2, i3, i4);
+            this.mCurrentSize = sizeFComputeSizeFromLayout;
             RemoteViews remoteViews = this.mLastInflatedRemoteViews;
-            if (remoteViews != null && (remoteViewsToApplyIfDifferent = remoteViews.getRemoteViewsToApplyIfDifferent(sizeF, computeSizeFromLayout)) != null) {
+            if (remoteViews != null && (remoteViewsToApplyIfDifferent = remoteViews.getRemoteViewsToApplyIfDifferent(sizeF, sizeFComputeSizeFromLayout)) != null) {
                 applyRemoteViews(remoteViewsToApplyIfDifferent, false);
                 try {
                     measureChildWithMargins(this.mView, View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824), 0, View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824), 0);
@@ -279,7 +278,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 post(new Runnable() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppWidgetHostView.InteractionLogger.this.onPositionChanged();
+                        interactionLogger.onPositionChanged();
                     }
                 });
             }
@@ -296,7 +295,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleViewError() {
+    public void handleViewError() throws Resources.NotFoundException {
         removeViewInLayout(this.mView);
         View errorView = getErrorView();
         prepareView(errorView);
@@ -319,29 +318,29 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         float f2 = (defaultPadding.left + defaultPadding.right) / f;
         float f3 = (defaultPadding.top + defaultPadding.bottom) / f;
         ArrayList<? extends Parcelable> arrayList = new ArrayList<>(list.size());
-        float f4 = Float.MAX_VALUE;
-        float f5 = 0.0f;
-        float f6 = 0.0f;
-        float f7 = Float.MAX_VALUE;
+        float fMin = Float.MAX_VALUE;
+        float fMax = 0.0f;
+        float fMax2 = 0.0f;
+        float fMin2 = Float.MAX_VALUE;
         for (int i = 0; i < list.size(); i++) {
             SizeF sizeF = list.get(i);
             SizeF sizeF2 = new SizeF(Math.max(0.0f, sizeF.getWidth() - f2), Math.max(0.0f, sizeF.getHeight() - f3));
             arrayList.add(sizeF2);
-            f4 = Math.min(f4, sizeF2.getWidth());
-            f5 = Math.max(f5, sizeF2.getWidth());
-            f7 = Math.min(f7, sizeF2.getHeight());
-            f6 = Math.max(f6, sizeF2.getHeight());
+            fMin = Math.min(fMin, sizeF2.getWidth());
+            fMax = Math.max(fMax, sizeF2.getWidth());
+            fMin2 = Math.min(fMin2, sizeF2.getHeight());
+            fMax2 = Math.max(fMax2, sizeF2.getHeight());
         }
         if (arrayList.equals(appWidgetManager.getAppWidgetOptions(this.mAppWidgetId).getParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES))) {
             return;
         }
-        Bundle deepCopy = bundle.deepCopy();
-        deepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, (int) f4);
-        deepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, (int) f7);
-        deepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, (int) f5);
-        deepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, (int) f6);
-        deepCopy.putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, arrayList);
-        updateAppWidgetOptions(deepCopy);
+        Bundle bundleDeepCopy = bundle.deepCopy();
+        bundleDeepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, (int) fMin);
+        bundleDeepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, (int) fMin2);
+        bundleDeepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, (int) fMax);
+        bundleDeepCopy.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, (int) fMax2);
+        bundleDeepCopy.putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, arrayList);
+        updateAppWidgetOptions(bundleDeepCopy);
     }
 
     public void updateAppWidgetSize(Bundle bundle, int i, int i2, int i3, int i4, boolean z) {
@@ -401,14 +400,14 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     @Override // android.appwidget.AppWidgetHost.AppWidgetHostListener
-    public void onUpdateProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo) {
+    public void onUpdateProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo) throws Resources.NotFoundException {
         setAppWidget(this.mAppWidgetId, appWidgetProviderInfo);
         this.mViewMode = 0;
         updateAppWidget(null);
     }
 
     @Override // android.appwidget.AppWidgetHost.AppWidgetHostListener
-    public void updateAppWidget(RemoteViews remoteViews) {
+    public void updateAppWidget(RemoteViews remoteViews) throws Resources.NotFoundException {
         this.mLastInflatedRemoteViews = remoteViews;
         applyRemoteViews(remoteViews, true);
         AppWidgetProviderInfo appWidgetProviderInfo = this.mInfo;
@@ -422,7 +421,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         SemPersonaManager.drawKnoxAppBadge(this.mContext, this, this.mInfo.getProfile());
     }
 
-    private void reapplyLastRemoteViews() {
+    private void reapplyLastRemoteViews() throws Resources.NotFoundException {
         SparseArray<Parcelable> sparseArray = new SparseArray<>();
         saveHierarchyState(sparseArray);
         applyRemoteViews(this.mLastInflatedRemoteViews, true);
@@ -436,7 +435,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         	at jadx.core.dex.visitors.typeinference.TypeInferenceVisitor.visit(TypeInferenceVisitor.java:77)
         */
-    protected void applyRemoteViews(android.widget.RemoteViews r13, boolean r14) {
+    protected void applyRemoteViews(android.widget.RemoteViews r13, boolean r14) throws android.content.res.Resources.NotFoundException {
         /*
             r12 = this;
             r0 = -1
@@ -560,7 +559,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void applyContent(View view, boolean z, Exception exc) {
+    public void applyContent(View view, boolean z, Exception exc) throws Resources.NotFoundException {
         this.mColorMappingChanged = false;
         if (view == null) {
             if (this.mViewMode == 2) {
@@ -604,85 +603,43 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         this.mOnContentAppliedListener = onClickListener;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0072  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void inflateAsync(android.widget.RemoteViews r14) {
-        /*
-            r13 = this;
-            android.content.Context r0 = r13.getRemoteContextEnsuringCorrectCachedApkPath()
-            r13.mRemoteContext = r0
-            int r0 = r14.getLayoutId()
-            android.os.CancellationSignal r1 = r13.mLastExecutionSignal
-            if (r1 == 0) goto L11
-            r1.cancel()
-        L11:
-            android.appwidget.AppWidgetProviderInfo r1 = r13.mInfo
-            r2 = 1
-            r3 = 0
-            if (r1 == 0) goto L1d
-            int r1 = r1.hidden_semAppWidgeAdditionOptions
-            if (r1 != r2) goto L1d
-            r1 = r2
-            goto L1e
-        L1d:
-            r1 = r3
-        L1e:
-            if (r1 == 0) goto L28
-            java.lang.String r4 = "AppWidgetHostView"
-            java.lang.String r5 = "skip reapplyAsync requested"
-            android.util.Log.i(r4, r5)
-        L28:
-            boolean r4 = r13.mColorMappingChanged
-            if (r4 != 0) goto L56
-            android.view.View r4 = r13.mView
-            boolean r4 = r14.canRecycleView(r4)
-            if (r4 == 0) goto L56
-            boolean r4 = r13.mConfigChanged
-            if (r4 != 0) goto L56
-            if (r1 != 0) goto L56
-            android.content.Context r6 = r13.mContext     // Catch: java.lang.Exception -> L56
-            android.view.View r7 = r13.mView     // Catch: java.lang.Exception -> L56
-            java.util.concurrent.Executor r8 = r13.mAsyncExecutor     // Catch: java.lang.Exception -> L56
-            android.appwidget.AppWidgetHostView$ViewApplyListener r9 = new android.appwidget.AppWidgetHostView$ViewApplyListener     // Catch: java.lang.Exception -> L56
-            r9.<init>(r14, r0, r2)     // Catch: java.lang.Exception -> L56
-            android.appwidget.AppWidgetHostView$InteractionLogger r10 = r13.mInteractionLogger     // Catch: java.lang.Exception -> L56
-            android.util.SizeF r11 = r13.mCurrentSize     // Catch: java.lang.Exception -> L56
-            android.widget.RemoteViews$ColorResources r12 = r13.mColorResources     // Catch: java.lang.Exception -> L56
-            r5 = r14
-            android.os.CancellationSignal r14 = r5.reapplyAsync(r6, r7, r8, r9, r10, r11, r12)     // Catch: java.lang.Exception -> L54
-            r4 = r5
-            r13.mLastExecutionSignal = r14     // Catch: java.lang.Exception -> L57
-            goto L57
-        L54:
-            r4 = r5
-            goto L57
-        L56:
-            r4 = r14
-        L57:
-            android.os.CancellationSignal r14 = r13.mLastExecutionSignal
-            if (r14 != 0) goto L72
-            android.content.Context r5 = r13.mContext
-            java.util.concurrent.Executor r7 = r13.mAsyncExecutor
-            android.appwidget.AppWidgetHostView$ViewApplyListener r8 = new android.appwidget.AppWidgetHostView$ViewApplyListener
-            r8.<init>(r4, r0, r3)
-            android.appwidget.AppWidgetHostView$InteractionLogger r9 = r13.mInteractionLogger
-            android.util.SizeF r10 = r13.mCurrentSize
-            android.widget.RemoteViews$ColorResources r11 = r13.mColorResources
-            r6 = r13
-            android.os.CancellationSignal r13 = r4.applyAsync(r5, r6, r7, r8, r9, r10, r11)
-            r6.mLastExecutionSignal = r13
-            goto L73
-        L72:
-            r6 = r13
-        L73:
-            r6.mConfigChanged = r3
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.appwidget.AppWidgetHostView.inflateAsync(android.widget.RemoteViews):void");
+    private void inflateAsync(RemoteViews remoteViews) {
+        RemoteViews remoteViews2;
+        AppWidgetHostView appWidgetHostView;
+        this.mRemoteContext = getRemoteContextEnsuringCorrectCachedApkPath();
+        int layoutId = remoteViews.getLayoutId();
+        CancellationSignal cancellationSignal = this.mLastExecutionSignal;
+        if (cancellationSignal != null) {
+            cancellationSignal.cancel();
+        }
+        AppWidgetProviderInfo appWidgetProviderInfo = this.mInfo;
+        boolean z = appWidgetProviderInfo != null && appWidgetProviderInfo.hidden_semAppWidgeAdditionOptions == 1;
+        if (z) {
+            Log.i(TAG, "skip reapplyAsync requested");
+        }
+        if (this.mColorMappingChanged || !remoteViews.canRecycleView(this.mView) || this.mConfigChanged || z) {
+            remoteViews2 = remoteViews;
+        } else {
+            try {
+                try {
+                    remoteViews2 = remoteViews;
+                    try {
+                        this.mLastExecutionSignal = remoteViews.reapplyAsync(this.mContext, this.mView, this.mAsyncExecutor, new ViewApplyListener(remoteViews, layoutId, true), this.mInteractionLogger, this.mCurrentSize, this.mColorResources);
+                    } catch (Exception unused) {
+                    }
+                } catch (Exception unused2) {
+                    remoteViews2 = remoteViews;
+                }
+            } catch (Exception unused3) {
+            }
+        }
+        if (this.mLastExecutionSignal == null) {
+            appWidgetHostView = this;
+            appWidgetHostView.mLastExecutionSignal = remoteViews2.applyAsync(this.mContext, appWidgetHostView, this.mAsyncExecutor, new ViewApplyListener(remoteViews2, layoutId, false), this.mInteractionLogger, this.mCurrentSize, this.mColorResources);
+        } else {
+            appWidgetHostView = this;
+        }
+        appWidgetHostView.mConfigChanged = false;
     }
 
     private class ViewApplyListener implements RemoteViews.OnViewAppliedListener {
@@ -697,7 +654,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
 
         @Override // android.widget.RemoteViews.OnViewAppliedListener
-        public void onViewApplied(View view) {
+        public void onViewApplied(View view) throws Resources.NotFoundException {
             AppWidgetHostView.this.mViewMode = 1;
             AppWidgetHostView.this.applyContent(view, this.mIsReapply, null);
             int i = AppWidgetHostView.this.mLastViewIdToDataChanged;
@@ -713,7 +670,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
 
         @Override // android.widget.RemoteViews.OnViewAppliedListener
-        public void onError(Exception exc) {
+        public void onError(Exception exc) throws Resources.NotFoundException {
             if (this.mIsReapply) {
                 AppWidgetHostView appWidgetHostView = AppWidgetHostView.this;
                 RemoteViews remoteViews = this.mViews;
@@ -730,10 +687,10 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     /* JADX WARN: Multi-variable type inference failed */
     @Override // android.appwidget.AppWidgetHost.AppWidgetHostListener
     public void onViewDataChanged(int i) {
-        View findViewById = findViewById(i);
-        Log.i(TAG, "viewDataChanged, viewId = " + i + ", v = " + findViewById);
-        if (findViewById != null && (findViewById instanceof AdapterView)) {
-            AdapterView adapterView = (AdapterView) findViewById;
+        View viewFindViewById = findViewById(i);
+        Log.i(TAG, "viewDataChanged, viewId = " + i + ", v = " + viewFindViewById);
+        if (viewFindViewById != null && (viewFindViewById instanceof AdapterView)) {
+            AdapterView adapterView = (AdapterView) viewFindViewById;
             Adapter adapter = adapterView.getAdapter();
             if (adapter instanceof BaseAdapter) {
                 ((BaseAdapter) adapter).notifyDataSetChanged();
@@ -747,108 +704,49 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         Log.i(TAG, "view is null, will retry when view inflating is finished.");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x006f  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0072 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x006f  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0072 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected android.content.Context getRemoteContextEnsuringCorrectCachedApkPath() {
-        /*
-            r7 = this;
-            java.lang.String r0 = " not found"
-            java.lang.String r1 = "Package name "
-            java.lang.String r2 = "AppWidgetHostView"
-            r3 = 4
-            android.content.Context r4 = r7.mContext     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            android.appwidget.AppWidgetProviderInfo r5 = r7.mInfo     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            android.content.pm.ActivityInfo r5 = r5.providerInfo     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            android.content.pm.ApplicationInfo r5 = r5.applicationInfo     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            android.content.Context r4 = r4.createApplicationContext(r5, r3)     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            android.widget.RemoteViews$ColorResources r5 = r7.mColorResources     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-            if (r5 == 0) goto L1a
-            r5.apply(r4)     // Catch: android.content.res.Resources.NotFoundException -> L1b java.lang.NullPointerException -> L3e android.content.pm.PackageManager.NameNotFoundException -> L47
-        L1a:
-            return r4
-        L1b:
-            r4 = move-exception
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r6 = "Failed to get RemoteContext."
-            r5.<init>(r6)
-            android.appwidget.AppWidgetProviderInfo r6 = r7.mInfo
-            android.content.pm.ActivityInfo r6 = r6.providerInfo
-            android.content.pm.ApplicationInfo r6 = r6.applicationInfo
-            java.lang.String r6 = r6.sourceDir
-            r5.append(r6)
-            java.lang.String r6 = ", "
-            r5.append(r6)
-            r5.append(r4)
-            java.lang.String r5 = r5.toString()
-            android.util.Log.w(r2, r5, r4)
-            goto L5f
-        L3e:
-            r0 = move-exception
-            java.lang.String r1 = "Error trying to create the remote context."
-            android.util.Log.e(r2, r1, r0)
-            android.content.Context r7 = r7.mContext
-            return r7
-        L47:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            r4.<init>(r1)
-            android.appwidget.AppWidgetProviderInfo r5 = r7.mInfo
-            android.content.pm.ActivityInfo r5 = r5.providerInfo
-            java.lang.String r5 = r5.packageName
-            r4.append(r5)
-            r4.append(r0)
-            java.lang.String r4 = r4.toString()
-            android.util.Log.e(r2, r4)
-        L5f:
-            android.appwidget.AppWidgetProviderInfo r4 = r7.mInfo
-            android.content.pm.ActivityInfo r4 = r4.providerInfo
-            android.content.pm.ApplicationInfo r4 = r4.applicationInfo
-            java.lang.String r4 = r4.packageName
-            android.content.Context r5 = r7.mContext
-            boolean r5 = r7.clearResourcePackageCache(r5, r4)
-            if (r5 != 0) goto L72
-            android.content.Context r7 = r7.mContext
-            return r7
-        L72:
-            android.content.Context r5 = r7.mContext     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L9f
-            android.content.pm.PackageManager r5 = r5.getPackageManager()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L9f
-            r6 = 0
-            android.content.pm.ApplicationInfo r4 = r5.getApplicationInfo(r4, r6)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L9f
-            android.content.Context r5 = r7.mContext     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L84
-            android.content.Context r7 = r5.createApplicationContext(r4, r3)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L84
-            return r7
-        L84:
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            r3.<init>(r1)
-            android.appwidget.AppWidgetProviderInfo r1 = r7.mInfo
-            android.content.pm.ActivityInfo r1 = r1.providerInfo
-            java.lang.String r1 = r1.packageName
-            r3.append(r1)
-            r3.append(r0)
-            java.lang.String r0 = r3.toString()
-            android.util.Log.e(r2, r0)
-            android.content.Context r7 = r7.mContext
-            return r7
-        L9f:
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            r3.<init>(r1)
-            android.appwidget.AppWidgetProviderInfo r1 = r7.mInfo
-            android.content.pm.ActivityInfo r1 = r1.providerInfo
-            java.lang.String r1 = r1.packageName
-            r3.append(r1)
-            r3.append(r0)
-            java.lang.String r0 = r3.toString()
-            android.util.Log.e(r2, r0)
-            android.content.Context r7 = r7.mContext
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.appwidget.AppWidgetHostView.getRemoteContextEnsuringCorrectCachedApkPath():android.content.Context");
+    protected Context getRemoteContextEnsuringCorrectCachedApkPath() {
+        String str;
+        try {
+            Context contextCreateApplicationContext = this.mContext.createApplicationContext(this.mInfo.providerInfo.applicationInfo, 4);
+            RemoteViews.ColorResources colorResources = this.mColorResources;
+            if (colorResources != null) {
+                colorResources.apply(contextCreateApplicationContext);
+            }
+            return contextCreateApplicationContext;
+        } catch (PackageManager.NameNotFoundException unused) {
+            Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
+            str = this.mInfo.providerInfo.applicationInfo.packageName;
+            if (clearResourcePackageCache(this.mContext, str)) {
+                return this.mContext;
+            }
+            try {
+                try {
+                    return this.mContext.createApplicationContext(this.mContext.getPackageManager().getApplicationInfo(str, 0), 4);
+                } catch (PackageManager.NameNotFoundException unused2) {
+                    Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
+                    return this.mContext;
+                }
+            } catch (PackageManager.NameNotFoundException unused3) {
+                Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
+                return this.mContext;
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.w(TAG, "Failed to get RemoteContext." + this.mInfo.providerInfo.applicationInfo.sourceDir + ", " + e, e);
+            str = this.mInfo.providerInfo.applicationInfo.packageName;
+            if (clearResourcePackageCache(this.mContext, str)) {
+            }
+        } catch (NullPointerException e2) {
+            Log.e(TAG, "Error trying to create the remote context.", e2);
+            return this.mContext;
+        }
     }
 
-    private boolean clearResourcePackageCache(Context context, String str) {
+    private boolean clearResourcePackageCache(Context context, String str) throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
         try {
             if (context instanceof ContextWrapper) {
                 context = ((ContextWrapper) context).getBaseContext();
@@ -882,27 +780,27 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     protected View getDefaultView() {
-        View view;
+        View viewInflate;
         int i;
         RuntimeException e = null;
         try {
             if (this.mInfo != null) {
                 Context remoteContextEnsuringCorrectCachedApkPath = getRemoteContextEnsuringCorrectCachedApkPath();
                 this.mRemoteContext = remoteContextEnsuringCorrectCachedApkPath;
-                LayoutInflater cloneInContext = ((LayoutInflater) remoteContextEnsuringCorrectCachedApkPath.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).cloneInContext(remoteContextEnsuringCorrectCachedApkPath);
-                cloneInContext.setFilter(INFLATER_FILTER);
+                LayoutInflater layoutInflaterCloneInContext = ((LayoutInflater) remoteContextEnsuringCorrectCachedApkPath.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).cloneInContext(remoteContextEnsuringCorrectCachedApkPath);
+                layoutInflaterCloneInContext.setFilter(INFLATER_FILTER);
                 Bundle appWidgetOptions = AppWidgetManager.getInstance(this.mContext).getAppWidgetOptions(this.mAppWidgetId);
                 int i2 = this.mInfo.initialLayout;
                 if (appWidgetOptions.containsKey(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY) && appWidgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY) == 2 && (i = this.mInfo.initialKeyguardLayout) != 0) {
                     i2 = i;
                 }
-                view = cloneInContext.inflate(i2, (ViewGroup) this, false);
+                viewInflate = layoutInflaterCloneInContext.inflate(i2, (ViewGroup) this, false);
                 try {
-                    if (!(view instanceof AdapterView)) {
-                        view.setOnClickListener(new View.OnClickListener() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda2
+                    if (!(viewInflate instanceof AdapterView)) {
+                        viewInflate.setOnClickListener(new View.OnClickListener() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda2
                             @Override // android.view.View.OnClickListener
-                            public final void onClick(View view2) {
-                                AppWidgetHostView.this.onDefaultViewClicked(view2);
+                            public final void onClick(View view) {
+                                this.f$0.onDefaultViewClicked(view);
                             }
                         });
                     }
@@ -911,16 +809,16 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 }
             } else {
                 Log.w(TAG, "can't inflate defaultView because mInfo is missing");
-                view = null;
+                viewInflate = null;
             }
         } catch (RuntimeException e3) {
             e = e3;
-            view = null;
+            viewInflate = null;
         }
         if (e != null) {
             Log.w(TAG, "Error inflating AppWidget " + this.mInfo, e);
         }
-        return view == null ? getErrorView() : view;
+        return viewInflate == null ? getErrorView() : viewInflate;
     }
 
     protected void onDefaultViewClicked(View view) {
@@ -963,22 +861,22 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         ArrayList arrayList = new ArrayList();
         Bundle bundle = new Bundle();
         for (int i = 0; i < iArr.length; i++) {
-            View findViewById = findViewById(iArr[i]);
-            if (findViewById != null) {
-                arrayList.add(Pair.create(findViewById, strArr[i]));
-                bundle.putParcelable(strArr[i], RemoteViews.getSourceBounds(findViewById));
+            View viewFindViewById = findViewById(iArr[i]);
+            if (viewFindViewById != null) {
+                arrayList.add(Pair.create(viewFindViewById, strArr[i]));
+                bundle.putParcelable(strArr[i], RemoteViews.getSourceBounds(viewFindViewById));
             }
         }
         if (arrayList.isEmpty()) {
             return null;
         }
         intent.putExtra(RemoteViews.EXTRA_SHARED_ELEMENT_BOUNDS, bundle);
-        ActivityOptions makeSceneTransitionAnimation = ActivityOptions.makeSceneTransitionAnimation((Activity) context, (Pair[]) arrayList.toArray(new Pair[arrayList.size()]));
-        makeSceneTransitionAnimation.setPendingIntentLaunchFlags(268435456);
-        return makeSceneTransitionAnimation;
+        ActivityOptions activityOptionsMakeSceneTransitionAnimation = ActivityOptions.makeSceneTransitionAnimation((Activity) context, (Pair[]) arrayList.toArray(new Pair[arrayList.size()]));
+        activityOptionsMakeSceneTransitionAnimation.setPendingIntentLaunchFlags(268435456);
+        return activityOptionsMakeSceneTransitionAnimation;
     }
 
-    public void setColorResources(SparseIntArray sparseIntArray) {
+    public void setColorResources(SparseIntArray sparseIntArray) throws Resources.NotFoundException {
         RemoteViews.ColorResources colorResources = this.mColorResources;
         if (colorResources == null || !isSameColorMapping(colorResources.getColorMapping(), sparseIntArray)) {
             setColorResources(RemoteViews.ColorResources.create(this.mContext, sparseIntArray));
@@ -991,7 +889,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         this.mViewMode = 0;
     }
 
-    public void setColorResources(RemoteViews.ColorResources colorResources) {
+    public void setColorResources(RemoteViews.ColorResources colorResources) throws Resources.NotFoundException {
         if (colorResources == this.mColorResources) {
             return;
         }
@@ -1018,7 +916,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         return true;
     }
 
-    public void resetColorResources() {
+    public void resetColorResources() throws Resources.NotFoundException {
         if (this.mColorResources != null) {
             this.mColorResources = null;
             this.mColorMappingChanged = true;
@@ -1036,8 +934,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             Log.e(TAG, "Drawing view failed: " + e);
             post(new Runnable() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    AppWidgetHostView.this.handleViewError();
+                public final void run() throws Resources.NotFoundException {
+                    this.f$0.handleViewError();
                 }
             });
         }
@@ -1142,8 +1040,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         }
 
         private void applyScrollOffset() {
-            int i;
-            int i2;
+            int scrollX;
+            int scrollY;
             if (this.mPosition == null) {
                 return;
             }
@@ -1151,15 +1049,15 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 if (parent instanceof View) {
                     View view = (View) parent;
                     if (view.getScrollX() != 0 || view.getScrollY() != 0) {
-                        i = view.getScrollX();
-                        i2 = view.getScrollY();
+                        scrollX = view.getScrollX();
+                        scrollY = view.getScrollY();
                         break;
                     }
                 }
             }
-            i = 0;
-            i2 = 0;
-            this.mPosition.offset(i, i2);
+            scrollX = 0;
+            scrollY = 0;
+            this.mPosition.offset(scrollX, scrollY);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1186,7 +1084,7 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             AppWidgetHostView.this.postDelayed(new Runnable() { // from class: android.appwidget.AppWidgetHostView$InteractionLogger$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppWidgetHostView.InteractionLogger.this.lambda$scheduleUpdateVisibility$0();
+                    this.f$0.lambda$scheduleUpdateVisibility$0();
                 }
             }, 1000L);
             this.mUpdateVisibilityScheduled = true;
@@ -1197,70 +1095,25 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             updateVisibility(AppWidgetHostView.this.hasWindowFocus());
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x002e, code lost:
-        
-            if (r9 == false) goto L18;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x0030, code lost:
-        
-            r8.mVisibilityChangeMs = android.os.SystemClock.uptimeMillis();
-         */
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Type inference failed for: r2v5, types: [android.view.ViewParent] */
         /* JADX WARN: Type inference failed for: r2v7 */
         /* JADX WARN: Type inference failed for: r2v8 */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        private void updateVisibility(boolean r9) {
-            /*
-                r8 = this;
-                boolean r0 = r8.mIsVisible
-                r1 = 0
-                if (r9 == 0) goto Lf
-                android.appwidget.AppWidgetHostView r9 = android.appwidget.AppWidgetHostView.this
-                boolean r9 = r8.testVisibility(r9)
-                if (r9 == 0) goto Lf
-                r9 = 1
-                goto L10
-            Lf:
-                r9 = r1
-            L10:
-                if (r9 == 0) goto L2c
-                android.appwidget.AppWidgetHostView r2 = android.appwidget.AppWidgetHostView.this
-                android.view.ViewParent r2 = r2.getParent()
-            L18:
-                if (r2 == 0) goto L2c
-                if (r9 == 0) goto L2c
-                boolean r3 = r2 instanceof android.view.View
-                if (r3 == 0) goto L2c
-                r9 = r2
-                android.view.View r9 = (android.view.View) r9
-                boolean r9 = r8.testVisibility(r9)
-                android.view.ViewParent r2 = r2.getParent()
-                goto L18
-            L2c:
-                if (r0 != 0) goto L37
-                if (r9 == 0) goto L37
-                long r2 = android.os.SystemClock.uptimeMillis()
-                r8.mVisibilityChangeMs = r2
-                goto L47
-            L37:
-                if (r0 == 0) goto L47
-                if (r9 != 0) goto L47
-                long r2 = r8.mDurationMs
-                long r4 = android.os.SystemClock.uptimeMillis()
-                long r6 = r8.mVisibilityChangeMs
-                long r4 = r4 - r6
-                long r2 = r2 + r4
-                r8.mDurationMs = r2
-            L47:
-                r8.mIsVisible = r9
-                r8.mUpdateVisibilityScheduled = r1
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.appwidget.AppWidgetHostView.InteractionLogger.updateVisibility(boolean):void");
+        private void updateVisibility(boolean z) {
+            boolean z2 = this.mIsVisible;
+            boolean zTestVisibility = z && testVisibility(AppWidgetHostView.this);
+            if (zTestVisibility) {
+                for (View parent = AppWidgetHostView.this.getParent(); parent != 0 && zTestVisibility && (parent instanceof View); parent = parent.getParent()) {
+                    zTestVisibility = testVisibility(parent);
+                }
+            }
+            if (!z2 && zTestVisibility) {
+                this.mVisibilityChangeMs = SystemClock.uptimeMillis();
+            } else if (z2 && !zTestVisibility) {
+                this.mDurationMs += SystemClock.uptimeMillis() - this.mVisibilityChangeMs;
+            }
+            this.mIsVisible = zTestVisibility;
+            this.mUpdateVisibilityScheduled = false;
         }
 
         private boolean testVisibility(View view) {

@@ -76,7 +76,7 @@ public class ZygoteInit {
 
     private static native void nativeZygoteInit();
 
-    static void preload(TimingsTraceLog timingsTraceLog) {
+    static void preload(TimingsTraceLog timingsTraceLog) throws Throwable {
         Log.d(TAG, "begin preload");
         if (startSystemServer) {
             Log.i(TAG, "!@Boot: Begin of preload()");
@@ -175,18 +175,18 @@ public class ZygoteInit {
     }
 
     private static void warmUpJcaProviders() {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         Trace.traceBegin(16384L, "Starting installation of AndroidKeyStoreProvider");
         AndroidKeyStoreProvider.install();
-        Log.i(TAG, "Installed AndroidKeyStoreProvider in " + (SystemClock.uptimeMillis() - uptimeMillis) + "ms.");
+        Log.i(TAG, "Installed AndroidKeyStoreProvider in " + (SystemClock.uptimeMillis() - jUptimeMillis) + "ms.");
         Trace.traceEnd(16384L);
         addUcmKeyStoreProvider();
-        long uptimeMillis2 = SystemClock.uptimeMillis();
+        long jUptimeMillis2 = SystemClock.uptimeMillis();
         Trace.traceBegin(16384L, "Starting warm up of JCA providers");
         for (Provider provider : Security.getProviders()) {
             provider.warmUpServiceProvision();
         }
-        Log.i(TAG, "Warmed up JCA providers in " + (SystemClock.uptimeMillis() - uptimeMillis2) + "ms.");
+        Log.i(TAG, "Warmed up JCA providers in " + (SystemClock.uptimeMillis() - jUptimeMillis2) + "ms.");
         Trace.traceEnd(16384L);
     }
 
@@ -202,14 +202,14 @@ public class ZygoteInit {
         return isExperimentEnabled("profilebootclasspath");
     }
 
-    private static void preloadClasses() {
+    private static void preloadClasses() throws Throwable {
         boolean z;
         long j;
         VMRuntime runtime = VMRuntime.getRuntime();
         try {
             FileInputStream fileInputStream = new FileInputStream(PRELOADED_CLASSES);
             Log.i(TAG, "Preloading classes...");
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             int i = Os.getuid();
             int i2 = Os.getgid();
             int i3 = 0;
@@ -230,30 +230,32 @@ public class ZygoteInit {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream), 256);
                     int i4 = 0;
                     while (true) {
-                        String readLine = bufferedReader.readLine();
-                        if (readLine == null) {
+                        String line = bufferedReader.readLine();
+                        if (line == null) {
                             break;
                         }
                         try {
-                            String trim = readLine.trim();
-                            if (!trim.startsWith("#") && !trim.equals("")) {
-                                Trace.traceBegin(j2, trim);
+                            String strTrim = line.trim();
+                            if (strTrim.startsWith("#") || strTrim.equals("")) {
+                                j = j2;
+                            } else {
+                                Trace.traceBegin(j2, strTrim);
                                 j = j2;
                                 try {
-                                    Class.forName(trim, true, null);
+                                    Class.forName(strTrim, true, null);
                                     i4++;
                                 } catch (ClassNotFoundException unused) {
-                                    if (trim.contains("$$Lambda$")) {
+                                    if (strTrim.contains("$$Lambda$")) {
                                         if (LOGGING_DEBUG) {
                                             i3++;
                                         }
                                     } else {
-                                        Log.w(TAG, "Class not found for preloading: " + trim);
+                                        Log.w(TAG, "Class not found for preloading: " + strTrim);
                                     }
                                 } catch (UnsatisfiedLinkError e2) {
-                                    Log.w(TAG, "Problem preloading " + trim + ": " + e2);
+                                    Log.w(TAG, "Problem preloading " + strTrim + ": " + e2);
                                 } catch (Throwable th) {
-                                    Log.e(TAG, "Error preloading " + trim + MediaMetrics.SEPARATOR, th);
+                                    Log.e(TAG, "Error preloading " + strTrim + MediaMetrics.SEPARATOR, th);
                                     if (th instanceof Error) {
                                         throw ((Error) th);
                                     }
@@ -263,9 +265,7 @@ public class ZygoteInit {
                                     throw new RuntimeException(th);
                                 }
                                 Trace.traceEnd(j);
-                                j2 = j;
                             }
-                            j = j2;
                             j2 = j;
                         } catch (IOException e3) {
                             e = e3;
@@ -312,7 +312,7 @@ public class ZygoteInit {
                         }
                     }
                     long j3 = j2;
-                    Log.i(TAG, "...preloaded " + i4 + " classes in " + (SystemClock.uptimeMillis() - uptimeMillis) + "ms.");
+                    Log.i(TAG, "...preloaded " + i4 + " classes in " + (SystemClock.uptimeMillis() - jUptimeMillis) + "ms.");
                     if (LOGGING_DEBUG && i3 != 0) {
                         Log.i(TAG, "Unresolved lambda preloads: " + i3);
                     }
@@ -450,9 +450,9 @@ public class ZygoteInit {
         if (str.isEmpty()) {
             return;
         }
-        String[] split = str.split(":");
-        IInstalld.Stub.asInterface(ServiceManager.getService("installd")).prepareAppProfile("android", 0, UserHandle.getAppId(1000), "primary.prof", split[0], null);
-        VMRuntime.registerAppInfo("android", new File(Environment.getDataProfilesDePackageDirectory(0, "android"), "primary.prof").getAbsolutePath(), new File(Environment.getDataProfilesDePackageDirectory(0, "android"), "primary.prof").getAbsolutePath(), split, 1);
+        String[] strArrSplit = str.split(":");
+        IInstalld.Stub.asInterface(ServiceManager.getService("installd")).prepareAppProfile("android", 0, UserHandle.getAppId(1000), "primary.prof", strArrSplit[0], null);
+        VMRuntime.registerAppInfo("android", new File(Environment.getDataProfilesDePackageDirectory(0, "android"), "primary.prof").getAbsolutePath(), new File(Environment.getDataProfilesDePackageDirectory(0, "android"), "primary.prof").getAbsolutePath(), strArrSplit, 1);
     }
 
     public static void setApiDenylistExemptions(String[] strArr) {
@@ -473,11 +473,11 @@ public class ZygoteInit {
         return ClassLoaderFactory.createClassLoader(str, property, property, ClassLoader.getSystemClassLoader().getParent(), i, true, null);
     }
 
-    private static Runnable forkSystemServer(String str, String str2, ZygoteServer zygoteServer) {
+    private static Runnable forkSystemServer(String str, String str2, ZygoteServer zygoteServer) throws InterruptedException, ErrnoException {
         long j = (1 << OsConstants.CAP_BLOCK_SUSPEND) | (1 << OsConstants.CAP_IPC_LOCK) | (1 << OsConstants.CAP_KILL) | (1 << OsConstants.CAP_NET_ADMIN) | (1 << OsConstants.CAP_NET_BIND_SERVICE) | (1 << OsConstants.CAP_NET_BROADCAST) | (1 << OsConstants.CAP_NET_RAW) | (1 << OsConstants.CAP_SYS_MODULE) | (1 << OsConstants.CAP_SYS_NICE) | (1 << OsConstants.CAP_SYS_PTRACE) | (1 << OsConstants.CAP_SYS_TIME) | (1 << OsConstants.CAP_SYS_TTY_CONFIG) | (1 << OsConstants.CAP_WAKE_ALARM);
         try {
-            StructCapUserData[] capget = Os.capget(new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0));
-            long unsignedLong = j & (Integer.toUnsignedLong(capget[0].effective) | (Integer.toUnsignedLong(capget[1].effective) << 32));
+            StructCapUserData[] structCapUserDataArrCapget = Os.capget(new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0));
+            long unsignedLong = j & (Integer.toUnsignedLong(structCapUserDataArrCapget[0].effective) | (Integer.toUnsignedLong(structCapUserDataArrCapget[1].effective) << 32));
             try {
                 ZygoteCommandBuffer zygoteCommandBuffer = new ZygoteCommandBuffer(new String[]{"--setuid=1000", "--setgid=1000", "--setgroups=1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1018,1021,1023,1024,1032,1065,3001,3002,3003,3005,3006,3007,3009,3010,3011,3012,5666,5678", "--capabilities=" + unsignedLong + "," + unsignedLong, "--nice-name=system_server", "--runtime-args", "--target-sdk-version=10000", "com.android.server.SystemServer"});
                 try {
@@ -524,43 +524,43 @@ public class ZygoteInit {
         }
     }
 
-    public static void main(String[] strArr) {
+    public static void main(String[] strArr) throws ErrnoException {
         ZygoteHooks.startZygoteNoThreadCreation();
         boolean z = false;
         try {
             Os.setpgid(0, 0);
             ZygoteServer zygoteServer = null;
             try {
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                boolean equals = "1".equals(SystemProperties.get("sys.boot_completed"));
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                boolean zEquals = "1".equals(SystemProperties.get("sys.boot_completed"));
                 TimingsTraceLog timingsTraceLog = new TimingsTraceLog(Process.is64Bit() ? "Zygote64Timing" : "Zygote32Timing", 16384L);
                 timingsTraceLog.traceBegin("ZygoteInit");
                 RuntimeInit.preForkInit();
                 startSystemServer = false;
-                String str = null;
-                String str2 = Zygote.PRIMARY_SOCKET_NAME;
+                String strSubstring = null;
+                String strSubstring2 = Zygote.PRIMARY_SOCKET_NAME;
                 for (int i = 1; i < strArr.length; i++) {
                     if ("start-system-server".equals(strArr[i])) {
                         startSystemServer = true;
                     } else if ("--enable-lazy-preload".equals(strArr[i])) {
                         z = true;
                     } else if (strArr[i].startsWith("--abi-list=")) {
-                        str = strArr[i].substring(11);
+                        strSubstring = strArr[i].substring(11);
                     } else if (strArr[i].startsWith(SOCKET_NAME_ARG)) {
-                        str2 = strArr[i].substring(14);
+                        strSubstring2 = strArr[i].substring(14);
                     } else {
                         throw new RuntimeException("Unknown command line argument: " + strArr[i]);
                     }
                 }
-                boolean equals2 = str2.equals(Zygote.PRIMARY_SOCKET_NAME);
-                if (!equals) {
-                    if (equals2) {
-                        FrameworkStatsLog.write(240, 17, elapsedRealtime);
-                    } else if (str2.equals(Zygote.SECONDARY_SOCKET_NAME)) {
-                        FrameworkStatsLog.write(240, 18, elapsedRealtime);
+                boolean zEquals2 = strSubstring2.equals(Zygote.PRIMARY_SOCKET_NAME);
+                if (!zEquals) {
+                    if (zEquals2) {
+                        FrameworkStatsLog.write(240, 17, jElapsedRealtime);
+                    } else if (strSubstring2.equals(Zygote.SECONDARY_SOCKET_NAME)) {
+                        FrameworkStatsLog.write(240, 18, jElapsedRealtime);
                     }
                 }
-                if (str == null) {
+                if (strSubstring == null) {
                     throw new RuntimeException("No ABI list supplied.");
                 }
                 if (!z) {
@@ -574,24 +574,24 @@ public class ZygoteInit {
                 gcAndFinalize();
                 timingsTraceLog.traceEnd();
                 timingsTraceLog.traceEnd();
-                Zygote.initNativeState(equals2);
+                Zygote.initNativeState(zEquals2);
                 ZygoteHooks.stopZygoteNoThreadCreation();
-                ZygoteServer zygoteServer2 = new ZygoteServer(equals2);
+                ZygoteServer zygoteServer2 = new ZygoteServer(zEquals2);
                 try {
                     if (startSystemServer) {
                         Log.i(TAG, "!@Boot_EBS_F: zygote forkSystemServer");
-                        Runnable forkSystemServer = forkSystemServer(str, str2, zygoteServer2);
-                        if (forkSystemServer != null) {
-                            forkSystemServer.run();
+                        Runnable runnableForkSystemServer = forkSystemServer(strSubstring, strSubstring2, zygoteServer2);
+                        if (runnableForkSystemServer != null) {
+                            runnableForkSystemServer.run();
                             zygoteServer2.closeServerSocket();
                             return;
                         }
                     }
                     Log.i(TAG, "Accepting command socket connections");
-                    Runnable runSelectLoop = zygoteServer2.runSelectLoop(str);
+                    Runnable runnableRunSelectLoop = zygoteServer2.runSelectLoop(strSubstring);
                     zygoteServer2.closeServerSocket();
-                    if (runSelectLoop != null) {
-                        runSelectLoop.run();
+                    if (runnableRunSelectLoop != null) {
+                        runnableRunSelectLoop.run();
                     }
                 } catch (Throwable th) {
                     th = th;
@@ -618,7 +618,7 @@ public class ZygoteInit {
         return !SystemProperties.get("ro.product.cpu.abilist").equals(str);
     }
 
-    private static void waitForSecondaryZygote(String str) {
+    private static void waitForSecondaryZygote(String str) throws InterruptedException {
         String str2 = Zygote.PRIMARY_SOCKET_NAME;
         if (Zygote.PRIMARY_SOCKET_NAME.equals(str)) {
             str2 = Zygote.SECONDARY_SOCKET_NAME;
@@ -633,7 +633,7 @@ public class ZygoteInit {
     private ZygoteInit() {
     }
 
-    public static Runnable zygoteInit(int i, long[] jArr, String[] strArr, ClassLoader classLoader) {
+    public static Runnable zygoteInit(int i, long[] jArr, String[] strArr, ClassLoader classLoader) throws SecurityException {
         Trace.traceBegin(64L, "ZygoteInit");
         RuntimeInit.redirectLogStreams();
         RuntimeInit.commonInit();

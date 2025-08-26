@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DrawablePainter extends Painter implements RememberObserver {
     public final Drawable drawable;
@@ -31,15 +30,15 @@ public final class DrawablePainter extends Painter implements RememberObserver {
     public final Lazy callback$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.compose.ui.graphics.painter.DrawablePainter$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            final DrawablePainter drawablePainter = DrawablePainter.this;
+            final DrawablePainter drawablePainter = this.f$0;
             return new Drawable.Callback() { // from class: com.android.compose.ui.graphics.painter.DrawablePainter$callback$2$1
                 @Override // android.graphics.drawable.Drawable.Callback
                 public final void invalidateDrawable(Drawable drawable) {
-                    int intValue = ((Number) ((SnapshotMutableStateImpl) DrawablePainter.this.drawInvalidateTick$delegate).getValue()).intValue();
-                    ((SnapshotMutableStateImpl) DrawablePainter.this.drawInvalidateTick$delegate).setValue(Integer.valueOf(intValue + 1));
-                    DrawablePainter drawablePainter2 = DrawablePainter.this;
-                    long access$getIntrinsicSize = DrawablePainterKt.access$getIntrinsicSize(drawablePainter2.drawable);
-                    ((SnapshotMutableStateImpl) drawablePainter2.drawableIntrinsicSize$delegate).setValue(Size.m413boximpl(access$getIntrinsicSize));
+                    int iIntValue = ((Number) ((SnapshotMutableStateImpl) drawablePainter.drawInvalidateTick$delegate).getValue()).intValue();
+                    ((SnapshotMutableStateImpl) drawablePainter.drawInvalidateTick$delegate).setValue(Integer.valueOf(iIntValue + 1));
+                    DrawablePainter drawablePainter2 = drawablePainter;
+                    long jAccess$getIntrinsicSize = DrawablePainterKt.access$getIntrinsicSize(drawablePainter2.drawable);
+                    ((SnapshotMutableStateImpl) drawablePainter2.drawableIntrinsicSize$delegate).setValue(Size.m415boximpl(jAccess$getIntrinsicSize));
                 }
 
                 @Override // android.graphics.drawable.Drawable.Callback
@@ -55,7 +54,6 @@ public final class DrawablePainter extends Painter implements RememberObserver {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -75,7 +73,7 @@ public final class DrawablePainter extends Painter implements RememberObserver {
 
     public DrawablePainter(Drawable drawable) {
         this.drawable = drawable;
-        this.drawableIntrinsicSize$delegate = SnapshotStateKt.mutableStateOf$default(Size.m413boximpl(DrawablePainterKt.access$getIntrinsicSize(drawable)));
+        this.drawableIntrinsicSize$delegate = SnapshotStateKt.mutableStateOf$default(Size.m415boximpl(DrawablePainterKt.access$getIntrinsicSize(drawable)));
         if (drawable.getIntrinsicWidth() < 0 || drawable.getIntrinsicHeight() < 0) {
             return;
         }
@@ -109,7 +107,7 @@ public final class DrawablePainter extends Painter implements RememberObserver {
 
     @Override // androidx.compose.ui.graphics.painter.Painter
     /* renamed from: getIntrinsicSize-NH-jbRc */
-    public final long mo561getIntrinsicSizeNHjbRc() {
+    public final long mo563getIntrinsicSizeNHjbRc() {
         return ((Size) ((SnapshotMutableStateImpl) this.drawableIntrinsicSize$delegate).getValue()).packedValue;
     }
 
@@ -122,7 +120,7 @@ public final class DrawablePainter extends Painter implements RememberObserver {
     public final void onDraw(DrawScope drawScope) {
         Canvas canvas = drawScope.getDrawContext().getCanvas();
         ((Number) ((SnapshotMutableStateImpl) this.drawInvalidateTick$delegate).getValue()).intValue();
-        this.drawable.setBounds(0, 0, MathKt__MathJVMKt.roundToInt(Float.intBitsToFloat((int) (drawScope.mo545getSizeNHjbRc() >> 32))), MathKt__MathJVMKt.roundToInt(Float.intBitsToFloat((int) (drawScope.mo545getSizeNHjbRc() & 4294967295L))));
+        this.drawable.setBounds(0, 0, MathKt__MathJVMKt.roundToInt(Float.intBitsToFloat((int) (drawScope.mo547getSizeNHjbRc() >> 32))), MathKt__MathJVMKt.roundToInt(Float.intBitsToFloat((int) (drawScope.mo547getSizeNHjbRc() & 4294967295L))));
         try {
             canvas.save();
             Drawable drawable = this.drawable;

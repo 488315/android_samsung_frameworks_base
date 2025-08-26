@@ -75,9 +75,9 @@ public interface IHdmiSignalInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IHdmiSignalInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiSignalInterface)) {
-                return (IHdmiSignalInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IHdmiSignalInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHdmiSignalInterface)) {
+                return (IHdmiSignalInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -116,34 +116,34 @@ public interface IHdmiSignalInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IHdmiSignalInfoListener asInterface = IHdmiSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IHdmiSignalInfoListener iHdmiSignalInfoListenerAsInterface = IHdmiSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addHdmiSignalInfoListener(readString, asInterface);
+                addHdmiSignalInfoListener(string, iHdmiSignalInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IHdmiSignalInfoListener asInterface2 = IHdmiSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IHdmiSignalInfoListener iHdmiSignalInfoListenerAsInterface2 = IHdmiSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeHdmiSignalInfoListener(readString2, asInterface2);
+                removeHdmiSignalInfoListener(string2, iHdmiSignalInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle hdmiSignalInfo = getHdmiSignalInfo(readString3);
+                Bundle hdmiSignalInfo = getHdmiSignalInfo(string3);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(hdmiSignalInfo, 1);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string4 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                setLowLatency(readString4, readInt);
+                setLowLatency(string4, i3);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                String readString5 = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string5 = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                setForceVrr(readString5, readInt2);
+                setForceVrr(string5, i4);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -169,81 +169,81 @@ public interface IHdmiSignalInterface extends IInterface {
 
             @Override // android.media.tv.extension.signal.IHdmiSignalInterface
             public void addHdmiSignalInfoListener(String str, IHdmiSignalInfoListener iHdmiSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iHdmiSignalInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iHdmiSignalInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IHdmiSignalInterface
             public void removeHdmiSignalInfoListener(String str, IHdmiSignalInfoListener iHdmiSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iHdmiSignalInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iHdmiSignalInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IHdmiSignalInterface
             public Bundle getHdmiSignalInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IHdmiSignalInterface
             public void setLowLatency(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IHdmiSignalInterface
             public void setForceVrr(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IHdmiSignalInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

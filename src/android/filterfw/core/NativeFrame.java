@@ -122,7 +122,7 @@ public class NativeFrame extends Frame {
     @Override // android.filterfw.core.Frame
     public void setData(ByteBuffer byteBuffer, int i, int i2) {
         assertFrameMutable();
-        byte[] array = byteBuffer.array();
+        byte[] bArrArray = byteBuffer.array();
         int i3 = i2 + i;
         if (i3 > byteBuffer.limit()) {
             throw new RuntimeException("Offset and length exceed buffer size in native setData: " + i3 + " bytes given, but only " + byteBuffer.limit() + " bytes available!");
@@ -130,7 +130,7 @@ public class NativeFrame extends Frame {
         if (getFormat().getSize() != i2) {
             throw new RuntimeException("Data size in setData does not match native frame size: Frame size is " + getFormat().getSize() + " bytes, but " + i2 + " bytes given!");
         }
-        if (!setNativeData(array, i, i2)) {
+        if (!setNativeData(bArrArray, i, i2)) {
             throw new RuntimeException("Could not set native frame data!");
         }
     }
@@ -153,8 +153,8 @@ public class NativeFrame extends Frame {
         if (getFormat().getWidth() != bitmap.getWidth() || getFormat().getHeight() != bitmap.getHeight()) {
             throw new RuntimeException("Bitmap dimensions do not match native frame dimensions!");
         }
-        Bitmap convertBitmapToRGBA = convertBitmapToRGBA(bitmap);
-        if (!setNativeBitmap(convertBitmapToRGBA, convertBitmapToRGBA.getByteCount(), getFormat().getBytesPerSample())) {
+        Bitmap bitmapConvertBitmapToRGBA = convertBitmapToRGBA(bitmap);
+        if (!setNativeBitmap(bitmapConvertBitmapToRGBA, bitmapConvertBitmapToRGBA.getByteCount(), getFormat().getBytesPerSample())) {
             throw new RuntimeException("Could not set native frame bitmap data!");
         }
     }
@@ -164,9 +164,9 @@ public class NativeFrame extends Frame {
         if (getFormat().getNumberOfDimensions() != 2) {
             throw new RuntimeException("Attempting to get Bitmap for non 2-dimensional native frame!");
         }
-        Bitmap createBitmap = Bitmap.createBitmap(getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
-        if (getNativeBitmap(createBitmap, createBitmap.getByteCount(), getFormat().getBytesPerSample())) {
-            return createBitmap;
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
+        if (getNativeBitmap(bitmapCreateBitmap, bitmapCreateBitmap.getByteCount(), getFormat().getBytesPerSample())) {
+            return bitmapCreateBitmap;
         }
         throw new RuntimeException("Could not get bitmap data from native frame!");
     }

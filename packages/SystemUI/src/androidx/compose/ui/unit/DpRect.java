@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderModifierNodeElement$$ExternalSyntheticO
 import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DpRect {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -14,7 +13,6 @@ public final class DpRect {
     public final float right;
     public final float top;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,7 +38,7 @@ public final class DpRect {
             return false;
         }
         DpRect dpRect = (DpRect) obj;
-        return Dp.m836equalsimpl0(this.left, dpRect.left) && Dp.m836equalsimpl0(this.top, dpRect.top) && Dp.m836equalsimpl0(this.right, dpRect.right) && Dp.m836equalsimpl0(this.bottom, dpRect.bottom);
+        return Dp.m838equalsimpl0(this.left, dpRect.left) && Dp.m838equalsimpl0(this.top, dpRect.top) && Dp.m838equalsimpl0(this.right, dpRect.right) && Dp.m838equalsimpl0(this.bottom, dpRect.bottom);
     }
 
     public final int hashCode() {
@@ -53,7 +51,7 @@ public final class DpRect {
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.left, ", top=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.top, ", right=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.right, ", bottom=", sb);
-        sb.append((Object) Dp.m837toStringimpl(this.bottom));
+        sb.append((Object) Dp.m839toStringimpl(this.bottom));
         sb.append(')');
         return sb.toString();
     }
@@ -70,27 +68,11 @@ public final class DpRect {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private DpRect(long r7, long r9) {
-        /*
-            r6 = this;
-            float r1 = androidx.compose.ui.unit.DpOffset.m840getXD9Ej5fM(r7)
-            float r2 = androidx.compose.ui.unit.DpOffset.m841getYD9Ej5fM(r7)
-            float r0 = androidx.compose.ui.unit.DpOffset.m840getXD9Ej5fM(r7)
-            float r3 = androidx.compose.ui.unit.DpSize.m845getWidthD9Ej5fM(r9)
-            float r3 = r3 + r0
-            androidx.compose.ui.unit.Dp$Companion r0 = androidx.compose.ui.unit.Dp.Companion
-            float r7 = androidx.compose.ui.unit.DpOffset.m841getYD9Ej5fM(r7)
-            float r8 = androidx.compose.ui.unit.DpSize.m844getHeightD9Ej5fM(r9)
-            float r4 = r8 + r7
-            r5 = 0
-            r0 = r6
-            r0.<init>(r1, r2, r3, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.unit.DpRect.<init>(long, long):void");
+    private DpRect(long j, long j2) {
+        float fM842getXD9Ej5fM = DpOffset.m842getXD9Ej5fM(j);
+        float fM843getYD9Ej5fM = DpOffset.m843getYD9Ej5fM(j);
+        float fM847getWidthD9Ej5fM = DpSize.m847getWidthD9Ej5fM(j2) + DpOffset.m842getXD9Ej5fM(j);
+        Dp.Companion companion = Dp.Companion;
+        this(fM842getXD9Ej5fM, fM843getYD9Ej5fM, fM847getWidthD9Ej5fM, DpSize.m846getHeightD9Ej5fM(j2) + DpOffset.m843getYD9Ej5fM(j), null);
     }
 }

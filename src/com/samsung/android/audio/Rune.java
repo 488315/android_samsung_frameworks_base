@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
+import com.samsung.android.core.CoreSaConstant;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.lock.LsConstants;
@@ -172,7 +173,7 @@ public class Rune {
     public static final boolean SEC_MUTE_MEDIA_BY_VIBRATE_OR_SILENT_MODE = true;
 
     static {
-        SEC_AUDIO_UHQ = Integer.parseInt("300") > 0;
+        SEC_AUDIO_UHQ = Integer.parseInt(CoreSaConstant.DESKTOP_SCREEN_ID) > 0;
         SEC_AUDIO_USB_HEADSET_FOR_CAMCORDER = true;
         SEC_AUDIO_USB_HEADSET_CALL_SUPPORT = true;
         SEC_AUDIO_GAMECHAT_SPEAKER_AEC = TextUtils.equals("SPK_AEC", "SPK_AEC");

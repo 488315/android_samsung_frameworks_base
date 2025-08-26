@@ -38,9 +38,9 @@ public class BitmapSource extends Filter {
 
     public void loadImage(FilterContext filterContext) {
         this.mTarget = FrameFormat.readTargetString(this.mTargetString);
-        Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mBitmap.getWidth(), this.mBitmap.getHeight(), 3, this.mTarget));
-        this.mImageFrame = newFrame;
-        newFrame.setBitmap(this.mBitmap);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mBitmap.getWidth(), this.mBitmap.getHeight(), 3, this.mTarget));
+        this.mImageFrame = frameNewFrame;
+        frameNewFrame.setBitmap(this.mBitmap);
         this.mImageFrame.setTimestamp(-1L);
         if (this.mRecycleBitmap) {
             this.mBitmap.recycle();

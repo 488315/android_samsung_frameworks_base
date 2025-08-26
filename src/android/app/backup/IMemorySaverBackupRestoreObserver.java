@@ -72,9 +72,9 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMemorySaverBackupRestoreObserver)) {
-                return (IMemorySaverBackupRestoreObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMemorySaverBackupRestoreObserver)) {
+                return (IMemorySaverBackupRestoreObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,23 +113,23 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onStartBackup(readString);
+                onStartBackup(string);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                String string2 = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onBackupCompleted(readString2, readBoolean);
+                onBackupCompleted(string2, z);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onRestoreStart(readString3);
+                onRestoreStart(string3);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                boolean readBoolean2 = parcel.readBoolean();
+                String string4 = parcel.readString();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onRestoreCompleted(readString4, readBoolean2);
+                onRestoreCompleted(string4, z2);
             } else if (i == 5) {
                 onTimeout();
             } else {
@@ -156,62 +156,62 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
             public void onStartBackup(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
             public void onBackupCompleted(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
             public void onRestoreStart(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
             public void onRestoreCompleted(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
             public void onTimeout() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

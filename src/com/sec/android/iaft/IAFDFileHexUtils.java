@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -33,7 +34,7 @@ public class IAFDFileHexUtils {
         }
     }
 
-    private void convertToHex(String str, String str2) {
+    private void convertToHex(String str, String str2) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(str);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -43,11 +44,11 @@ public class IAFDFileHexUtils {
                 i = fileInputStream.read(bArr, 0, 1024);
                 byteArrayOutputStream.write(bArr, 0, i);
             }
-            String byteToHexStr = byteToHexStr(byteArrayOutputStream.toByteArray());
+            String strByteToHexStr = byteToHexStr(byteArrayOutputStream.toByteArray());
             fileInputStream.close();
             byteArrayOutputStream.close();
             FileOutputStream fileOutputStream = new FileOutputStream(str2);
-            byte[] bytes = byteToHexStr.getBytes();
+            byte[] bytes = strByteToHexStr.getBytes();
             fileOutputStream.write(bytes, 0, bytes.length);
             fileOutputStream.close();
         } catch (Exception e) {
@@ -81,7 +82,7 @@ public class IAFDFileHexUtils {
         }
     }
 
-    public boolean makeHexStringToFile(String str, String str2, String str3) {
+    public boolean makeHexStringToFile(String str, String str2, String str3) throws IOException {
         try {
             File file = new File(str + str3);
             if (file.exists()) {
@@ -89,9 +90,9 @@ public class IAFDFileHexUtils {
             } else if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            byte[] makeHexStringToBytes = makeHexStringToBytes(str2);
+            byte[] bArrMakeHexStringToBytes = makeHexStringToBytes(str2);
             FileOutputStream fileOutputStream = new FileOutputStream(new File(str + str3));
-            fileOutputStream.write(makeHexStringToBytes, 0, makeHexStringToBytes.length);
+            fileOutputStream.write(bArrMakeHexStringToBytes, 0, bArrMakeHexStringToBytes.length);
             fileOutputStream.close();
             return false;
         } catch (Exception e) {

@@ -5,6 +5,7 @@ import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.IndentingPrintWriter;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.Dumpable;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.RefactorFlagUtils;
@@ -16,14 +17,18 @@ import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotifPipeline;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.PipelineEntry;
+import com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator;
 import com.android.systemui.statusbar.notification.collection.coordinator.dagger.CoordinatorScope;
+import com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeTransformGroupsListener;
 import com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifPromoter;
 import com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner;
 import com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener;
 import com.android.systemui.statusbar.notification.collection.notifcollection.UpdateSource;
 import com.android.systemui.statusbar.notification.data.repository.ActiveNotificationListRepository;
+import com.android.systemui.statusbar.notification.data.repository.HeadsUpRowRepository;
 import com.android.systemui.statusbar.notification.domain.interactor.HeadsUpNotificationInteractor;
 import com.android.systemui.statusbar.notification.domain.interactor.SeenNotificationsInteractor;
+import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.shared.NotificationMinimalism;
 import com.android.systemui.util.DumpUtilsKt;
 import java.io.PrintWriter;
@@ -32,25 +37,31 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.time.Duration;
 import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpable {
@@ -72,35 +83,17 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
     private final LockScreenMinimalismCoordinator$collectionListener$1 collectionListener = new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$collectionListener$1
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryAdded(NotificationEntry notificationEntry) {
-            boolean z;
-            boolean z2;
-            LockScreenMinimalismCoordinatorLogger lockScreenMinimalismCoordinatorLogger;
-            Set set;
-            z = LockScreenMinimalismCoordinator.this.minimalismEnabled;
-            if (z) {
-                z2 = LockScreenMinimalismCoordinator.this.isShadeVisible;
-                if (z2) {
-                    return;
-                }
-                lockScreenMinimalismCoordinatorLogger = LockScreenMinimalismCoordinator.this.logger;
-                lockScreenMinimalismCoordinatorLogger.logUnseenAdded(notificationEntry.mKey);
-                set = LockScreenMinimalismCoordinator.this.unseenNotifications;
-                set.add(notificationEntry);
+            if (!this.this$0.minimalismEnabled || this.this$0.isShadeVisible) {
+                return;
             }
+            this.this$0.logger.logUnseenAdded(notificationEntry.mKey);
+            this.this$0.unseenNotifications.add(notificationEntry);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryRemoved(NotificationEntry notificationEntry, int i) {
-            boolean z;
-            Set set;
-            LockScreenMinimalismCoordinatorLogger lockScreenMinimalismCoordinatorLogger;
-            z = LockScreenMinimalismCoordinator.this.minimalismEnabled;
-            if (z) {
-                set = LockScreenMinimalismCoordinator.this.unseenNotifications;
-                if (set.remove(notificationEntry)) {
-                    lockScreenMinimalismCoordinatorLogger = LockScreenMinimalismCoordinator.this.logger;
-                    lockScreenMinimalismCoordinatorLogger.logUnseenRemoved(notificationEntry.mKey);
-                }
+            if (this.this$0.minimalismEnabled && this.this$0.unseenNotifications.remove(notificationEntry)) {
+                this.this$0.logger.logUnseenRemoved(notificationEntry.mKey);
             }
         }
 
@@ -111,21 +104,11 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryUpdated(NotificationEntry notificationEntry) {
-            boolean z;
-            boolean z2;
-            LockScreenMinimalismCoordinatorLogger lockScreenMinimalismCoordinatorLogger;
-            Set set;
-            z = LockScreenMinimalismCoordinator.this.minimalismEnabled;
-            if (z) {
-                z2 = LockScreenMinimalismCoordinator.this.isShadeVisible;
-                if (z2) {
-                    return;
-                }
-                lockScreenMinimalismCoordinatorLogger = LockScreenMinimalismCoordinator.this.logger;
-                lockScreenMinimalismCoordinatorLogger.logUnseenUpdated(notificationEntry.mKey);
-                set = LockScreenMinimalismCoordinator.this.unseenNotifications;
-                set.add(notificationEntry);
+            if (!this.this$0.minimalismEnabled || this.this$0.isShadeVisible) {
+                return;
             }
+            this.this$0.logger.logUnseenUpdated(notificationEntry.mKey);
+            this.this$0.unseenNotifications.add(notificationEntry);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
@@ -173,9 +156,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
         }
 
         private static final boolean isInSection$lambda$0(LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator, NotificationEntry notificationEntry) {
-            SeenNotificationsInteractor seenNotificationsInteractor;
-            seenNotificationsInteractor = lockScreenMinimalismCoordinator.seenNotificationsInteractor;
-            seenNotificationsInteractor.getClass();
+            lockScreenMinimalismCoordinator.seenNotificationsInteractor.getClass();
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
             int i = NotificationMinimalism.$r8$clinit;
             refactorFlagUtils.getClass();
@@ -198,9 +179,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
         }
 
         private static final boolean isInSection$lambda$0(LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator, NotificationEntry notificationEntry) {
-            SeenNotificationsInteractor seenNotificationsInteractor;
-            seenNotificationsInteractor = lockScreenMinimalismCoordinator.seenNotificationsInteractor;
-            seenNotificationsInteractor.getClass();
+            lockScreenMinimalismCoordinator.seenNotificationsInteractor.getClass();
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
             int i = NotificationMinimalism.$r8$clinit;
             refactorFlagUtils.getClass();
@@ -218,13 +197,380 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$attach$1, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass1 implements OnBeforeTransformGroupsListener {
+        public AnonymousClass1() {
+        }
+
+        @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeTransformGroupsListener
+        public final void onBeforeTransformGroups(List<? extends PipelineEntry> list) {
+            LockScreenMinimalismCoordinator.this.pickOutTopUnseenNotifs(list);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$attach$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return LockScreenMinimalismCoordinator.this.new AnonymousClass2(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator = LockScreenMinimalismCoordinator.this;
+                this.label = 1;
+                if (lockScreenMinimalismCoordinator.trackLockScreenNotificationMinimalismSettingChanges(this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass2) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$clearUnseenNotificationsWhenShadeIsExpanded$2, reason: invalid class name and case insensitive filesystem */
+    final class C10692 extends SuspendLambda implements Function2 {
+        /* synthetic */ boolean Z$0;
+        int label;
+
+        public C10692(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C10692 c10692 = LockScreenMinimalismCoordinator.this.new C10692(continuation);
+            c10692.Z$0 = ((Boolean) obj).booleanValue();
+            return c10692;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public /* bridge */ /* synthetic */ Object invoke(Object obj, Object obj2) {
+            return invoke(((Boolean) obj).booleanValue(), (Continuation) obj2);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            boolean z;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                boolean z2 = this.Z$0;
+                long j = LockScreenMinimalismCoordinator.SHADE_VISIBLE_SEEN_TIMEOUT;
+                this.Z$0 = z2;
+                this.label = 1;
+                if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                z = z2;
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                z = this.Z$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            LockScreenMinimalismCoordinator.this.isShadeVisible = z;
+            if (z) {
+                LockScreenMinimalismCoordinator.this.logger.logShadeVisible(LockScreenMinimalismCoordinator.this.unseenNotifications.size());
+                LockScreenMinimalismCoordinator.this.unseenNotifications.clear();
+            } else {
+                LockScreenMinimalismCoordinator.this.logger.logShadeHidden();
+            }
+            return Unit.INSTANCE;
+        }
+
+        public final Object invoke(boolean z, Continuation continuation) {
+            return ((C10692) create(Boolean.valueOf(z), continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        /* JADX INFO: Access modifiers changed from: private */
+        public static final boolean invokeSuspend$lambda$1(String str, NotificationEntry notificationEntry) {
+            return Intrinsics.areEqual(notificationEntry.mKey, str);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass3 anonymousClass3 = LockScreenMinimalismCoordinator.this.new AnonymousClass3(continuation);
+            anonymousClass3.L$0 = obj;
+            return anonymousClass3;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            final String str;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                String str2 = (String) this.L$0;
+                boolean z = false;
+                if (str2 == null) {
+                    LockScreenMinimalismCoordinator.this.logger.logTopHeadsUpRow(null, false);
+                } else {
+                    Set set = LockScreenMinimalismCoordinator.this.unseenNotifications;
+                    if (!(set instanceof Collection) || !set.isEmpty()) {
+                        Iterator it = set.iterator();
+                        while (true) {
+                            if (!it.hasNext()) {
+                                break;
+                            }
+                            if (Intrinsics.areEqual(((NotificationEntry) it.next()).mKey, str2)) {
+                                z = true;
+                                break;
+                            }
+                        }
+                    }
+                    LockScreenMinimalismCoordinator.this.logger.logTopHeadsUpRow(str2, z);
+                    if (z) {
+                        long j = LockScreenMinimalismCoordinator.HEADS_UP_SEEN_TIMEOUT;
+                        this.L$0 = str2;
+                        this.label = 1;
+                        if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                        str = str2;
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            str = (String) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            Set set2 = LockScreenMinimalismCoordinator.this.unseenNotifications;
+            final Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$3$$ExternalSyntheticLambda0
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj2) {
+                    return Boolean.valueOf(LockScreenMinimalismCoordinator.AnonymousClass3.invokeSuspend$lambda$1(str, (NotificationEntry) obj2));
+                }
+            };
+            LockScreenMinimalismCoordinator.this.logger.logHunHasBeenSeen(str, set2.removeIf(new Predicate() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$sam$java_util_function_Predicate$0
+                @Override // java.util.function.Predicate
+                public final /* synthetic */ boolean test(Object obj2) {
+                    return ((Boolean) function1.mo781invoke(obj2)).booleanValue();
+                }
+            }));
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(String str, Continuation continuation) {
+            return ((AnonymousClass3) create(str, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$trackLockScreenNotificationMinimalismSettingChanges$2, reason: invalid class name and case insensitive filesystem */
+    final class C10702 extends SuspendLambda implements Function2 {
+        /* synthetic */ boolean Z$0;
+        int label;
+
+        public C10702(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C10702 c10702 = LockScreenMinimalismCoordinator.this.new C10702(continuation);
+            c10702.Z$0 = ((Boolean) obj).booleanValue();
+            return c10702;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public /* bridge */ /* synthetic */ Object invoke(Object obj, Object obj2) {
+            return invoke(((Boolean) obj).booleanValue(), (Continuation) obj2);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                boolean z = this.Z$0;
+                if (z != LockScreenMinimalismCoordinator.this.minimalismEnabled) {
+                    LockScreenMinimalismCoordinator.this.minimalismEnabled = z;
+                    LockScreenMinimalismCoordinator.this.unseenNotifications.clear();
+                    LockScreenMinimalismCoordinator.this.getUnseenNotifPromoter().invalidateList("unseen setting changed");
+                }
+                LockScreenMinimalismCoordinator.this.logger.logTrackingUnseen(z);
+                if (z) {
+                    LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator = LockScreenMinimalismCoordinator.this;
+                    this.label = 1;
+                    if (lockScreenMinimalismCoordinator.trackSeenNotifications(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+
+        public final Object invoke(boolean z, Continuation continuation) {
+            return ((C10702) create(Boolean.valueOf(z), continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$trackSeenNotifications$2, reason: invalid class name and case insensitive filesystem */
+    final class C10712 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$trackSeenNotifications$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ LockScreenMinimalismCoordinator this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = lockScreenMinimalismCoordinator;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator = this.this$0;
+                    this.label = 1;
+                    if (lockScreenMinimalismCoordinator.clearUnseenNotificationsWhenShadeIsExpanded(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+                return ((AnonymousClass1) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+            }
+        }
+
+        /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$trackSeenNotifications$2$2, reason: invalid class name and collision with other inner class name */
+        final class C04932 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ LockScreenMinimalismCoordinator this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C04932(LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = lockScreenMinimalismCoordinator;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C04932(this.this$0, continuation);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    LockScreenMinimalismCoordinator lockScreenMinimalismCoordinator = this.this$0;
+                    this.label = 1;
+                    if (lockScreenMinimalismCoordinator.markHeadsUpNotificationsAsSeen(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+                return ((C04932) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+            }
+        }
+
+        public C10712(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C10712 c10712 = LockScreenMinimalismCoordinator.this.new C10712(continuation);
+            c10712.L$0 = obj;
+            return c10712;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(LockScreenMinimalismCoordinator.this, null), 7);
+            return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C04932(LockScreenMinimalismCoordinator.this, null), 7);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C10712) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
         }
     }
 
@@ -248,7 +594,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
 
     /* JADX INFO: Access modifiers changed from: private */
     public final boolean anyEntry(PipelineEntry pipelineEntry, Function1 function1) {
-        if (((Boolean) function1.mo779invoke(pipelineEntry.getRepresentativeEntry())).booleanValue()) {
+        if (((Boolean) function1.mo781invoke(pipelineEntry.getRepresentativeEntry())).booleanValue()) {
             return true;
         }
         if (!(pipelineEntry instanceof GroupEntry)) {
@@ -260,7 +606,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
         }
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            if (((Boolean) function1.mo779invoke(it.next())).booleanValue()) {
+            if (((Boolean) function1.mo781invoke(it.next())).booleanValue()) {
                 return true;
             }
         }
@@ -269,16 +615,15 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
 
     /* JADX INFO: Access modifiers changed from: private */
     public final Object clearUnseenNotificationsWhenShadeIsExpanded(Continuation continuation) {
-        Object collectLatest = FlowKt.collectLatest(((ShadeInteractorImpl) this.shadeInteractor).isShadeFullyExpanded, new LockScreenMinimalismCoordinator$clearUnseenNotificationsWhenShadeIsExpanded$2(this, null), continuation);
-        return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
+        Object objCollectLatest = FlowKt.collectLatest(((ShadeInteractorImpl) this.shadeInteractor).isShadeFullyExpanded, new C10692(null), continuation);
+        return objCollectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollectLatest : Unit.INSTANCE;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public final Object markHeadsUpNotificationsAsSeen(Continuation continuation) {
         final Flow flow = this.headsUpInteractor.topHeadsUpRowIfPinned;
-        Object collectLatest = FlowKt.collectLatest(new Flow() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1
+        Object objCollectLatest = FlowKt.collectLatest(new Flow() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2<T> implements FlowCollector {
                 final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -307,79 +652,59 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
                     this.this$0 = lockScreenMinimalismCoordinator;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L55
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlinx.coroutines.flow.FlowCollector r6 = r4.$this_unsafeFlow
-                        com.android.systemui.statusbar.notification.data.repository.HeadsUpRowRepository r5 = (com.android.systemui.statusbar.notification.data.repository.HeadsUpRowRepository) r5
-                        if (r5 == 0) goto L4b
-                        com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator r4 = r4.this$0
-                        com.android.systemui.statusbar.notification.domain.interactor.HeadsUpNotificationInteractor r4 = com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator.access$getHeadsUpInteractor$p(r4)
-                        r4.getClass()
-                        com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$HeadsUpEntry r5 = (com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl.HeadsUpEntry) r5
-                        com.android.systemui.statusbar.notification.collection.NotificationEntry r4 = r5.mEntry
-                        java.util.Objects.requireNonNull(r4)
-                        java.lang.String r4 = r4.mKey
-                        goto L4c
-                    L4b:
-                        r4 = 0
-                    L4c:
-                        r0.label = r3
-                        java.lang.Object r4 = r6.emit(r4, r0)
-                        if (r4 != r1) goto L55
-                        return r1
-                    L55:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    String str;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        FlowCollector flowCollector = this.$this_unsafeFlow;
+                        HeadsUpRowRepository headsUpRowRepository = (HeadsUpRowRepository) obj;
+                        if (headsUpRowRepository != null) {
+                            this.this$0.headsUpInteractor.getClass();
+                            NotificationEntry notificationEntry = ((HeadsUpManagerImpl.HeadsUpEntry) headsUpRowRepository).mEntry;
+                            Objects.requireNonNull(notificationEntry);
+                            str = notificationEntry.mKey;
+                        } else {
+                            str = null;
+                        }
+                        anonymousClass1.label = 1;
+                        if (flowCollector.emit(str, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public Object collect(FlowCollector flowCollector, Continuation continuation2) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation2);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector, this), continuation2);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, new LockScreenMinimalismCoordinator$markHeadsUpNotificationsAsSeen$3(this, null), continuation);
-        return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
+        }, new AnonymousClass3(null), continuation);
+        return objCollectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollectLatest : Unit.INSTANCE;
     }
 
     private final Flow minimalismFeatureSettingEnabled() {
@@ -395,18 +720,18 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
     }
 
     private static final Iterable pickOutTopUnseenNotifs$lambda$2(PipelineEntry pipelineEntry) {
-        Iterable iterable;
+        Iterable iterableSingletonList;
         if (pipelineEntry instanceof NotificationEntry) {
-            iterable = pipelineEntry != null ? Collections.singletonList(pipelineEntry) : EmptyList.INSTANCE;
+            iterableSingletonList = pipelineEntry != null ? Collections.singletonList(pipelineEntry) : EmptyList.INSTANCE;
         } else if (pipelineEntry instanceof GroupEntry) {
-            iterable = ((GroupEntry) pipelineEntry).mUnmodifiableChildren;
+            iterableSingletonList = ((GroupEntry) pipelineEntry).mUnmodifiableChildren;
         } else {
             if (!(pipelineEntry instanceof BundleEntry)) {
                 throw new IllegalStateException(("unhandled type of " + pipelineEntry).toString());
             }
-            iterable = EmptyList.INSTANCE;
+            iterableSingletonList = EmptyList.INSTANCE;
         }
-        return iterable;
+        return iterableSingletonList;
     }
 
     private static final boolean pickOutTopUnseenNotifs$lambda$3(NotificationEntry notificationEntry) {
@@ -419,14 +744,14 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
 
     /* JADX INFO: Access modifiers changed from: private */
     public final Object trackLockScreenNotificationMinimalismSettingChanges(Continuation continuation) {
-        Object collectLatest = FlowKt.collectLatest(minimalismFeatureSettingEnabled(), new LockScreenMinimalismCoordinator$trackLockScreenNotificationMinimalismSettingChanges$2(this, null), continuation);
-        return collectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? collectLatest : Unit.INSTANCE;
+        Object objCollectLatest = FlowKt.collectLatest(minimalismFeatureSettingEnabled(), new C10702(null), continuation);
+        return objCollectLatest == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollectLatest : Unit.INSTANCE;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public final Object trackSeenNotifications(Continuation continuation) {
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new LockScreenMinimalismCoordinator$trackSeenNotifications$2(this, null), continuation);
-        return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new C10712(null), continuation);
+        return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
@@ -439,22 +764,22 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
 
     @Override // com.android.systemui.Dumpable
     public void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
         ActiveNotificationListRepository activeNotificationListRepository = this.seenNotificationsInteractor.notificationListRepository;
-        asIndenting.append("SeenNotificationsInteractor").println(":");
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("SeenNotificationsInteractor").println(":");
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
-            asIndenting.print("hasFilteredOutSeenNotifications", activeNotificationListRepository.hasFilteredOutSeenNotifications.getValue());
-            asIndenting.print("topOngoingNotificationKey", activeNotificationListRepository.topOngoingNotificationKey.getValue());
-            asIndenting.print("topUnseenNotificationKey", activeNotificationListRepository.topUnseenNotificationKey.getValue());
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.print("hasFilteredOutSeenNotifications", activeNotificationListRepository.hasFilteredOutSeenNotifications.getValue());
+            indentingPrintWriterAsIndenting.print("topOngoingNotificationKey", activeNotificationListRepository.topOngoingNotificationKey.getValue());
+            indentingPrintWriterAsIndenting.print("topUnseenNotificationKey", activeNotificationListRepository.topUnseenNotificationKey.getValue());
+            indentingPrintWriterAsIndenting.decreaseIndent();
             Set<NotificationEntry> set = this.unseenNotifications;
-            asIndenting.append("unseen notifications").append((CharSequence) ": ").println(set.size());
-            asIndenting.increaseIndent();
+            indentingPrintWriterAsIndenting.append("unseen notifications").append((CharSequence) ": ").println(set.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
             try {
                 Iterator<T> it = set.iterator();
                 while (it.hasNext()) {
-                    asIndenting.println(((NotificationEntry) it.next()).mKey);
+                    indentingPrintWriterAsIndenting.println(((NotificationEntry) it.next()).mKey);
                 }
             } finally {
             }

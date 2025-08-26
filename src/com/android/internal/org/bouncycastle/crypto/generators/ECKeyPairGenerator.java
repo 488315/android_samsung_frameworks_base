@@ -45,12 +45,12 @@ public class ECKeyPairGenerator implements AsymmetricCipherKeyPairGenerator, ECC
     @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
     public AsymmetricCipherKeyPair generateKeyPair() {
         BigInteger n = this.params.getN();
-        int bitLength = n.bitLength();
-        int i = bitLength >>> 2;
+        int iBitLength = n.bitLength();
+        int i = iBitLength >>> 2;
         while (true) {
-            BigInteger createRandomBigInteger = BigIntegers.createRandomBigInteger(bitLength, this.random);
-            if (!isOutOfRangeD(createRandomBigInteger, n) && WNafUtil.getNafWeight(createRandomBigInteger) >= i) {
-                return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new ECPublicKeyParameters(createBasePointMultiplier().multiply(this.params.getG(), createRandomBigInteger), this.params), (AsymmetricKeyParameter) new ECPrivateKeyParameters(createRandomBigInteger, this.params));
+            BigInteger bigIntegerCreateRandomBigInteger = BigIntegers.createRandomBigInteger(iBitLength, this.random);
+            if (!isOutOfRangeD(bigIntegerCreateRandomBigInteger, n) && WNafUtil.getNafWeight(bigIntegerCreateRandomBigInteger) >= i) {
+                return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new ECPublicKeyParameters(createBasePointMultiplier().multiply(this.params.getG(), bigIntegerCreateRandomBigInteger), this.params), (AsymmetricKeyParameter) new ECPrivateKeyParameters(bigIntegerCreateRandomBigInteger, this.params));
             }
         }
     }

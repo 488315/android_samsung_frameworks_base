@@ -11,7 +11,6 @@ import com.samsung.sesl.compose.foundation.theme.BasicThemeKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class DelegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -31,11 +30,11 @@ public final /* synthetic */ class DelegatingConfigurationAwareRecoilNode$$Exter
                     ColorProducer colorProducer = new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.DelegatingConfigurationAwareRecoilNode$attachNewRecoil$calculateColor$1
                         @Override // androidx.compose.ui.graphics.ColorProducer
                         /* renamed from: invoke-0d7_KjU */
-                        public final long mo261invoke0d7_KjU() {
-                            DelegatingConfigurationAwareRecoilNode delegatingConfigurationAwareRecoilNode2 = DelegatingConfigurationAwareRecoilNode.this;
-                            long mo261invoke0d7_KjU = delegatingConfigurationAwareRecoilNode2.color.mo261invoke0d7_KjU();
-                            if (mo261invoke0d7_KjU != 16) {
-                                return mo261invoke0d7_KjU;
+                        public final long mo262invoke0d7_KjU() {
+                            DelegatingConfigurationAwareRecoilNode delegatingConfigurationAwareRecoilNode2 = delegatingConfigurationAwareRecoilNode;
+                            long jMo262invoke0d7_KjU = delegatingConfigurationAwareRecoilNode2.color.mo262invoke0d7_KjU();
+                            if (jMo262invoke0d7_KjU != 16) {
+                                return jMo262invoke0d7_KjU;
                             }
                             SeslRecoilConfiguration seslRecoilConfiguration = (SeslRecoilConfiguration) CompositionLocalConsumerModifierNodeKt.currentValueOf(delegatingConfigurationAwareRecoilNode2, RecoilKt.LocalSeslRecoilConfiguration);
                             if (seslRecoilConfiguration != null) {
@@ -44,9 +43,9 @@ public final /* synthetic */ class DelegatingConfigurationAwareRecoilNode$$Exter
                                     return j;
                                 }
                             }
-                            boolean booleanValue = ((Boolean) CompositionLocalConsumerModifierNodeKt.currentValueOf(delegatingConfigurationAwareRecoilNode2, BasicThemeKt.LocalSeslInDarkTheme)).booleanValue();
+                            boolean zBooleanValue = ((Boolean) CompositionLocalConsumerModifierNodeKt.currentValueOf(delegatingConfigurationAwareRecoilNode2, BasicThemeKt.LocalSeslInDarkTheme)).booleanValue();
                             SeslRecoilDefaults.INSTANCE.getClass();
-                            if (booleanValue) {
+                            if (zBooleanValue) {
                                 SeslCommonTokens.Companion.getClass();
                                 return SeslCommonTokens.darkCommonTokens.rippleColor;
                             }
@@ -56,9 +55,9 @@ public final /* synthetic */ class DelegatingConfigurationAwareRecoilNode$$Exter
                     };
                     DelegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0 delegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0 = new DelegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0(delegatingConfigurationAwareRecoilNode, 1);
                     Shape shape = (Shape) delegatingConfigurationAwareRecoilNode.shape.invoke();
-                    float floatValue = ((Number) delegatingConfigurationAwareRecoilNode.scale.invoke()).floatValue();
+                    float fFloatValue = ((Number) delegatingConfigurationAwareRecoilNode.scale.invoke()).floatValue();
                     Dp.Companion companion = Dp.Companion;
-                    delegatingConfigurationAwareRecoilNode.delegate(new SeslRecoilNode(delegatingConfigurationAwareRecoilNode.interactionSource, true, floatValue, shape, colorProducer, PaddingKt.m119PaddingValues0680j_4(0), delegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0, delegatingConfigurationAwareRecoilNode.drawStrategy));
+                    delegatingConfigurationAwareRecoilNode.delegate(new SeslRecoilNode(delegatingConfigurationAwareRecoilNode.interactionSource, true, fFloatValue, shape, colorProducer, PaddingKt.m120PaddingValues0680j_4(0), delegatingConfigurationAwareRecoilNode$$ExternalSyntheticLambda0, delegatingConfigurationAwareRecoilNode.drawStrategy));
                 }
                 return Unit.INSTANCE;
             default:

@@ -15,6 +15,7 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AvalancheController implements Dumpable {
     public final Handler bgHandler;
@@ -45,7 +45,6 @@ public final class AvalancheController implements Dumpable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ThrottleEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ ThrottleEvent[] $VALUES;
         public static final ThrottleEvent AVALANCHE_THROTTLING_HUN_DROPPED;
@@ -103,12 +102,12 @@ public final class AvalancheController implements Dumpable {
         ((ArrayList) this.nextList).add(headsUpEntry);
     }
 
-    public final void delete(HeadsUpManagerImpl.HeadsUpEntry headsUpEntry, Runnable runnable, String str) {
-        String m;
-        boolean isEnabled = isEnabled();
+    public final void delete(HeadsUpManagerImpl.HeadsUpEntry headsUpEntry, Runnable runnable, String str) throws IOException {
+        String strM;
+        boolean zIsEnabled = isEnabled();
         String key = getKey(headsUpEntry);
         HeadsUpManagerLogger headsUpManagerLogger = this.headsUpManagerLogger;
-        if (!isEnabled) {
+        if (!zIsEnabled) {
             runnable.run();
             headsUpManagerLogger.logAvalancheDelete(str, key, AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("NOT ENABLED, run runnable. ", getStateStr()), false);
             return;
@@ -126,7 +125,7 @@ public final class AvalancheController implements Dumpable {
                 ((ArrayList) this.nextList).remove(headsUpEntry);
             }
             this.uiEventLogger.log(ThrottleEvent.AVALANCHE_THROTTLING_HUN_REMOVED);
-            m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("remove from next. ", getStateStr());
+            strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("remove from next. ", getStateStr());
         } else if (isShowing(headsUpEntry)) {
             this.previousHunKey = getKey(this.headsUpEntryShowing);
             headsUpManagerLogger.logAvalancheStage("show next", "");
@@ -142,15 +141,15 @@ public final class AvalancheController implements Dumpable {
                 obj.getClass();
                 this.headsUpEntryShowingRunnableList = (List) obj;
                 ArrayList arrayList = (ArrayList) this.nextList;
-                List subList = arrayList.subList(1, arrayList.size());
-                this.bgHandler.post(new AvalancheController$logDroppedHunsInBackground$1(subList.size(), this));
-                String joinToString$default = CollectionsKt___CollectionsKt.joinToString$default(subList, "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(0, this), 30);
+                List listSubList = arrayList.subList(1, arrayList.size());
+                this.bgHandler.post(new AvalancheController$logDroppedHunsInBackground$1(listSubList.size(), this));
+                String strJoinToString$default = CollectionsKt___CollectionsKt.joinToString$default(listSubList, "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(0, this), 30);
                 LogLevel logLevel = LogLevel.VERBOSE;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(16);
                 LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = joinToString$default;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = strJoinToString$default;
+                logBuffer.commit(logMessageObtain);
                 ((ArrayList) this.nextList).clear();
                 ((HashMap) this.nextMap).clear();
                 HeadsUpManagerImpl.HeadsUpEntry headsUpEntry3 = this.headsUpEntryShowing;
@@ -158,12 +157,12 @@ public final class AvalancheController implements Dumpable {
                 showNow(headsUpEntry3, this.headsUpEntryShowingRunnableList);
             }
             runnable.run();
-            m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("remove showing. ", getStateStr());
+            strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("remove showing. ", getStateStr());
         } else {
             runnable.run();
-            m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("run runnable for untracked HUN (was dropped or shown when AC was disabled). ", getStateStr());
+            strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("run runnable for untracked HUN (was dropped or shown when AC was disabled). ", getStateStr());
         }
-        headsUpManagerLogger.logAvalancheDelete(str, getKey(headsUpEntry), m, isEnabled());
+        headsUpManagerLogger.logAvalancheDelete(str, getKey(headsUpEntry), strM, isEnabled());
     }
 
     @Override // com.android.systemui.Dumpable
@@ -171,30 +170,30 @@ public final class AvalancheController implements Dumpable {
         ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "AvalancheController: ", getStateStr());
     }
 
-    public final String getStateStr() {
-        String sb;
+    public final String getStateStr() throws IOException {
+        String string;
         String key = getKey(this.headsUpEntryShowing);
         String str = this.previousHunKey;
-        String joinToString$default = CollectionsKt___CollectionsKt.joinToString$default(this.nextList, "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(1, this), 30);
+        String strJoinToString$default = CollectionsKt___CollectionsKt.joinToString$default(this.nextList, "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(1, this), 30);
         if (Intrinsics.areEqual(CollectionsKt___CollectionsKt.toSet(this.nextList), CollectionsKt___CollectionsKt.toSet(((HashMap) this.nextMap).keySet()))) {
-            sb = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(((ArrayList) this.nextList).size(), "next (", "):\n ", joinToString$default);
+            string = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(((ArrayList) this.nextList).size(), "next (", "):\n ", strJoinToString$default);
         } else {
-            String joinToString$default2 = CollectionsKt___CollectionsKt.joinToString$default(((HashMap) this.nextMap).keySet(), "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(2, this), 30);
+            String strJoinToString$default2 = CollectionsKt___CollectionsKt.joinToString$default(((HashMap) this.nextMap).keySet(), "\n ", null, null, new AvalancheController$$ExternalSyntheticLambda1(2, this), 30);
             int size = ((ArrayList) this.nextList).size();
             int size2 = ((HashMap) this.nextMap).size();
-            StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(size, "next list (", "):\n ", joinToString$default, "\nnext map (");
-            m.append(size2);
-            m.append("):\n ");
-            m.append(joinToString$default2);
-            sb = m.toString();
+            StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(size, "next list (", "):\n ", strJoinToString$default, "\nnext map (");
+            sbM.append(size2);
+            sbM.append("):\n ");
+            sbM.append(strJoinToString$default2);
+            string = sbM.toString();
         }
-        Object invoke = this.baseEntryMapStr.invoke();
-        StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("\n[AC state]\nshow: ", key, "\nprevious: ", str, "\n");
-        m2.append(sb);
-        m2.append("\n[HeadsUpManagerImpl.mHeadsUpEntryMap] ");
-        m2.append(invoke);
-        m2.append("\n");
-        return m2.toString();
+        Object objInvoke = this.baseEntryMapStr.invoke();
+        StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("\n[AC state]\nshow: ", key, "\nprevious: ", str, "\n");
+        sbM2.append(string);
+        sbM2.append("\n[HeadsUpManagerImpl.mHeadsUpEntryMap] ");
+        sbM2.append(objInvoke);
+        sbM2.append("\n");
+        return sbM2.toString();
     }
 
     public final HeadsUpManagerImpl.HeadsUpEntry getWaitingEntry(String str) {
@@ -269,16 +268,16 @@ public final class AvalancheController implements Dumpable {
 
     public final void update(HeadsUpManagerImpl.HeadsUpEntry headsUpEntry, Runnable runnable, String str) {
         String str2;
-        boolean isEnabled = isEnabled();
+        boolean zIsEnabled = isEnabled();
         String key = getKey(headsUpEntry);
         HeadsUpManagerLogger headsUpManagerLogger = this.headsUpManagerLogger;
-        if (!isEnabled) {
-            headsUpManagerLogger.logAvalancheUpdate(str, key, AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("NOT ENABLED, run runnable. ", getStateStr()), isEnabled);
+        if (!zIsEnabled) {
+            headsUpManagerLogger.logAvalancheUpdate(str, key, AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("NOT ENABLED, run runnable. ", getStateStr()), zIsEnabled);
             runnable.run();
             return;
         }
         if (headsUpEntry == null) {
-            headsUpManagerLogger.logAvalancheUpdate(str, key, AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Entry NULL, stop. ", getStateStr()), isEnabled);
+            headsUpManagerLogger.logAvalancheUpdate(str, key, AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Entry NULL, stop. ", getStateStr()), zIsEnabled);
             return;
         }
         if (isShowing(headsUpEntry)) {
@@ -308,7 +307,7 @@ public final class AvalancheController implements Dumpable {
             }
             str2 = "add next";
         }
-        headsUpManagerLogger.logAvalancheUpdate(str, key, ((Object) str2) + getStateStr(), isEnabled);
+        headsUpManagerLogger.logAvalancheUpdate(str, key, ((Object) str2) + getStateStr(), zIsEnabled);
     }
 
     public static /* synthetic */ void getHeadsUpEntryShowing$annotations() {

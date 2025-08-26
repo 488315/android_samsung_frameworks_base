@@ -94,34 +94,33 @@ public class ChooseAccountTypeActivity extends Activity {
 
     private void buildTypeToAuthDescriptionMap() {
         Drawable drawable;
-        Context createPackageContext;
         for (AuthenticatorDescription authenticatorDescription : AccountManager.get(this).getAuthenticatorTypes()) {
-            String str = null;
+            String string = null;
             try {
-                createPackageContext = createPackageContext(authenticatorDescription.packageName, 0);
-                drawable = createPackageContext.getDrawable(authenticatorDescription.iconId);
-            } catch (PackageManager.NameNotFoundException unused) {
-                drawable = null;
-            } catch (Resources.NotFoundException unused2) {
-                drawable = null;
-            }
-            try {
-                CharSequence text = createPackageContext.getResources().getText(authenticatorDescription.labelId);
-                if (text != null) {
-                    str = text.toString();
+                Context contextCreatePackageContext = createPackageContext(authenticatorDescription.packageName, 0);
+                drawable = contextCreatePackageContext.getDrawable(authenticatorDescription.iconId);
+                try {
+                    CharSequence text = contextCreatePackageContext.getResources().getText(authenticatorDescription.labelId);
+                    if (text != null) {
+                        string = text.toString();
+                    }
+                } catch (PackageManager.NameNotFoundException unused) {
+                    if (Log.isLoggable(TAG, 5)) {
+                        Log.w(TAG, "No icon name for account type " + authenticatorDescription.type);
+                    }
+                    this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, string, drawable));
+                } catch (Resources.NotFoundException unused2) {
+                    if (Log.isLoggable(TAG, 5)) {
+                        Log.w(TAG, "No icon resource for account type " + authenticatorDescription.type);
+                    }
+                    this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, string, drawable));
                 }
             } catch (PackageManager.NameNotFoundException unused3) {
-                if (Log.isLoggable(TAG, 5)) {
-                    Log.w(TAG, "No icon name for account type " + authenticatorDescription.type);
-                }
-                this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, str, drawable));
+                drawable = null;
             } catch (Resources.NotFoundException unused4) {
-                if (Log.isLoggable(TAG, 5)) {
-                    Log.w(TAG, "No icon resource for account type " + authenticatorDescription.type);
-                }
-                this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, str, drawable));
+                drawable = null;
             }
-            this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, str, drawable));
+            this.mTypeToAuthenticatorInfo.put(authenticatorDescription.type, new AuthInfo(authenticatorDescription, string, drawable));
         }
     }
 

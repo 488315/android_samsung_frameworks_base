@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginsModule_ProvidesPrivilegedPluginsFactory implements Provider {
     private final Provider contextProvider;
@@ -19,9 +18,9 @@ public final class PluginsModule_ProvidesPrivilegedPluginsFactory implements Pro
     }
 
     public static List<String> providesPrivilegedPlugins(Context context) {
-        List<String> providesPrivilegedPlugins = PluginsModule.providesPrivilegedPlugins(context);
-        providesPrivilegedPlugins.getClass();
-        return providesPrivilegedPlugins;
+        List<String> listProvidesPrivilegedPlugins = PluginsModule.providesPrivilegedPlugins(context);
+        listProvidesPrivilegedPlugins.getClass();
+        return listProvidesPrivilegedPlugins;
     }
 
     public static PluginsModule_ProvidesPrivilegedPluginsFactory create(Provider provider) {

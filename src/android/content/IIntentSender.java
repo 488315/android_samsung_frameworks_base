@@ -46,9 +46,9 @@ public interface IIntentSender extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIntentSender)) {
-                return (IIntentSender) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIntentSender)) {
+                return (IIntentSender) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,15 +75,15 @@ public interface IIntentSender extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                String readString = parcel.readString();
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                IIntentReceiver asInterface = IIntentReceiver.Stub.asInterface(parcel.readStrongBinder());
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                IBinder strongBinder = parcel.readStrongBinder();
+                IIntentReceiver iIntentReceiverAsInterface = IIntentReceiver.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                send(readInt, intent, readString, readStrongBinder, asInterface, readString2, bundle);
+                send(i3, intent, string, strongBinder, iIntentReceiverAsInterface, string2, bundle);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -107,19 +107,19 @@ public interface IIntentSender extends IInterface {
 
             @Override // android.content.IIntentSender
             public void send(int i, Intent intent, String str, IBinder iBinder, IIntentReceiver iIntentReceiver, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iIntentReceiver);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iIntentReceiver);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

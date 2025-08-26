@@ -71,33 +71,33 @@ public class GCMSIVBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException {
+    public void init(boolean z, CipherParameters cipherParameters) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         byte[] iv;
-        KeyParameter keyParameter;
-        byte[] bArr;
+        KeyParameter key;
+        byte[] associatedText;
         if (cipherParameters instanceof AEADParameters) {
             AEADParameters aEADParameters = (AEADParameters) cipherParameters;
-            bArr = aEADParameters.getAssociatedText();
+            associatedText = aEADParameters.getAssociatedText();
             iv = aEADParameters.getNonce();
-            keyParameter = aEADParameters.getKey();
+            key = aEADParameters.getKey();
         } else if (cipherParameters instanceof ParametersWithIV) {
             ParametersWithIV parametersWithIV = (ParametersWithIV) cipherParameters;
             iv = parametersWithIV.getIV();
-            keyParameter = (KeyParameter) parametersWithIV.getParameters();
-            bArr = null;
+            key = (KeyParameter) parametersWithIV.getParameters();
+            associatedText = null;
         } else {
             throw new IllegalArgumentException("invalid parameters passed to GCM-SIV");
         }
         if (iv == null || iv.length != 12) {
             throw new IllegalArgumentException("Invalid nonce");
         }
-        if (keyParameter == null || (keyParameter.getKeyLength() != 16 && keyParameter.getKeyLength() != 32)) {
+        if (key == null || (key.getKeyLength() != 16 && key.getKeyLength() != 32)) {
             throw new IllegalArgumentException("Invalid key");
         }
         this.forEncryption = z;
-        this.theInitialAEAD = bArr;
+        this.theInitialAEAD = associatedText;
         this.theNonce = iv;
-        deriveKeys(keyParameter);
+        deriveKeys(key);
         resetStreams();
     }
 
@@ -180,17 +180,17 @@ public class GCMSIVBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] bArr, int i) throws IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         checkStatus(0);
         checkBuffer(bArr, i, getOutputSize(0), true);
         if (this.forEncryption) {
-            byte[] calculateTag = calculateTag();
-            int encryptPlain = encryptPlain(calculateTag, bArr, i) + 16;
-            System.arraycopy(calculateTag, 0, bArr, i + this.thePlain.size(), 16);
+            byte[] bArrCalculateTag = calculateTag();
+            int iEncryptPlain = encryptPlain(bArrCalculateTag, bArr, i) + 16;
+            System.arraycopy(bArrCalculateTag, 0, bArr, i + this.thePlain.size(), 16);
             byte[] bArr2 = this.macBlock;
-            System.arraycopy(calculateTag, 0, bArr2, 0, bArr2.length);
+            System.arraycopy(bArrCalculateTag, 0, bArr2, 0, bArr2.length);
             resetStreams();
-            return encryptPlain;
+            return iEncryptPlain;
         }
         decryptPlain();
         int size = this.thePlain.size();
@@ -246,9 +246,9 @@ public class GCMSIVBlockCipher implements AEADBlockCipher {
     }
 
     private static void checkBuffer(byte[] bArr, int i, int i2, boolean z) {
-        int bufLength = bufLength(bArr);
+        int iBufLength = bufLength(bArr);
         int i3 = i + i2;
-        if (i2 < 0 || i < 0 || i3 < 0 || i3 > bufLength) {
+        if (i2 < 0 || i < 0 || i3 < 0 || i3 > iBufLength) {
             if (z) {
                 throw new OutputLengthException("Output buffer too short.");
             }
@@ -256,65 +256,65 @@ public class GCMSIVBlockCipher implements AEADBlockCipher {
         }
     }
 
-    private int encryptPlain(byte[] bArr, byte[] bArr2, int i) {
+    private int encryptPlain(byte[] bArr, byte[] bArr2, int i) throws IllegalStateException, DataLengthException {
         byte[] buffer = this.thePlain.getBuffer();
-        byte[] clone = Arrays.clone(bArr);
-        clone[15] = (byte) (clone[15] | Byte.MIN_VALUE);
+        byte[] bArrClone = Arrays.clone(bArr);
+        bArrClone[15] = (byte) (bArrClone[15] | Byte.MIN_VALUE);
         byte[] bArr3 = new byte[16];
         int size = this.thePlain.size();
         int i2 = 0;
         while (size > 0) {
-            this.theCipher.processBlock(clone, 0, bArr3, 0);
-            int min = Math.min(16, size);
-            xorBlock(bArr3, buffer, i2, min);
-            System.arraycopy(bArr3, 0, bArr2, i + i2, min);
-            size -= min;
-            i2 += min;
-            incrementCounter(clone);
+            this.theCipher.processBlock(bArrClone, 0, bArr3, 0);
+            int iMin = Math.min(16, size);
+            xorBlock(bArr3, buffer, i2, iMin);
+            System.arraycopy(bArr3, 0, bArr2, i + i2, iMin);
+            size -= iMin;
+            i2 += iMin;
+            incrementCounter(bArrClone);
         }
         return this.thePlain.size();
     }
 
-    private void decryptPlain() throws InvalidCipherTextException {
+    private void decryptPlain() throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         byte[] buffer = this.theEncData.getBuffer();
         int size = this.theEncData.size();
         int i = size - 16;
         if (i < 0) {
             throw new InvalidCipherTextException("Data too short");
         }
-        byte[] copyOfRange = Arrays.copyOfRange(buffer, i, size);
-        byte[] clone = Arrays.clone(copyOfRange);
-        clone[15] = (byte) (clone[15] | Byte.MIN_VALUE);
+        byte[] bArrCopyOfRange = Arrays.copyOfRange(buffer, i, size);
+        byte[] bArrClone = Arrays.clone(bArrCopyOfRange);
+        bArrClone[15] = (byte) (bArrClone[15] | Byte.MIN_VALUE);
         byte[] bArr = new byte[16];
         int i2 = 0;
         while (i > 0) {
-            this.theCipher.processBlock(clone, 0, bArr, 0);
-            int min = Math.min(16, i);
-            xorBlock(bArr, buffer, i2, min);
-            this.thePlain.write(bArr, 0, min);
-            this.theDataHasher.updateHash(bArr, 0, min);
-            i -= min;
-            i2 += min;
-            incrementCounter(clone);
+            this.theCipher.processBlock(bArrClone, 0, bArr, 0);
+            int iMin = Math.min(16, i);
+            xorBlock(bArr, buffer, i2, iMin);
+            this.thePlain.write(bArr, 0, iMin);
+            this.theDataHasher.updateHash(bArr, 0, iMin);
+            i -= iMin;
+            i2 += iMin;
+            incrementCounter(bArrClone);
         }
-        byte[] calculateTag = calculateTag();
-        if (!Arrays.constantTimeAreEqual(calculateTag, copyOfRange)) {
+        byte[] bArrCalculateTag = calculateTag();
+        if (!Arrays.constantTimeAreEqual(bArrCalculateTag, bArrCopyOfRange)) {
             reset();
             throw new InvalidCipherTextException("mac check failed");
         }
         byte[] bArr2 = this.macBlock;
-        System.arraycopy(calculateTag, 0, bArr2, 0, bArr2.length);
+        System.arraycopy(bArrCalculateTag, 0, bArr2, 0, bArr2.length);
     }
 
-    private byte[] calculateTag() {
+    private byte[] calculateTag() throws IllegalStateException, DataLengthException {
         this.theDataHasher.completeHash();
-        byte[] completePolyVal = completePolyVal();
+        byte[] bArrCompletePolyVal = completePolyVal();
         byte[] bArr = new byte[16];
         for (int i = 0; i < 12; i++) {
-            completePolyVal[i] = (byte) (completePolyVal[i] ^ this.theNonce[i]);
+            bArrCompletePolyVal[i] = (byte) (bArrCompletePolyVal[i] ^ this.theNonce[i]);
         }
-        completePolyVal[15] = (byte) (completePolyVal[15] & (-129));
-        this.theCipher.processBlock(completePolyVal, 0, bArr, 0);
+        bArrCompletePolyVal[15] = (byte) (bArrCompletePolyVal[15] & (-129));
+        this.theCipher.processBlock(bArrCompletePolyVal, 0, bArr, 0);
         return bArr;
     }
 
@@ -383,7 +383,7 @@ public class GCMSIVBlockCipher implements AEADBlockCipher {
         }
     }
 
-    private void deriveKeys(KeyParameter keyParameter) {
+    private void deriveKeys(KeyParameter keyParameter) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         byte[] bArr = new byte[16];
         byte[] bArr2 = new byte[16];
         byte[] bArr3 = new byte[16];

@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import com.sec.ims.settings.ImsSettings;
 import java.io.ByteArrayOutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PowerItem implements Parcelable {
     public static final int ACTION_SEND_BROADCAST = 1;
@@ -115,9 +114,9 @@ public class PowerItem implements Parcelable {
         this.mIntentAction = parcel.readInt();
         this.mId = parcel.readInt();
         this.mText = parcel.readString();
-        int readInt = parcel.readInt();
-        byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        byte[] bArr = new byte[i];
         parcel.readByteArray(bArr);
-        this.mIcon = new BitmapDrawable(BitmapFactory.decodeByteArray(bArr, 0, readInt));
+        this.mIcon = new BitmapDrawable(BitmapFactory.decodeByteArray(bArr, 0, i));
     }
 }

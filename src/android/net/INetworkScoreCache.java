@@ -53,9 +53,9 @@ public interface INetworkScoreCache extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INetworkScoreCache)) {
-                return (INetworkScoreCache) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INetworkScoreCache)) {
+                return (INetworkScoreCache) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface INetworkScoreCache extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ScoredNetwork.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ScoredNetwork.CREATOR);
                 parcel.enforceNoDataAvail();
-                updateScores(createTypedArrayList);
+                updateScores(arrayListCreateTypedArrayList);
             } else if (i == 2) {
                 clearScores();
             } else {
@@ -114,24 +114,24 @@ public interface INetworkScoreCache extends IInterface {
 
             @Override // android.net.INetworkScoreCache
             public void updateScores(List<ScoredNetwork> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkScoreCache
             public void clearScores() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

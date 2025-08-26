@@ -15,7 +15,6 @@ import com.android.wm.shell.sysui.ShellInit;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayInsetsController implements DisplayController.OnDisplaysChangedListener {
     public final DisplayController mDisplayController;
@@ -25,7 +24,6 @@ public class DisplayInsetsController implements DisplayController.OnDisplaysChan
     public final SparseArray mListeners = new SparseArray();
     public final CopyOnWriteArrayList mGlobalListeners = new CopyOnWriteArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnInsetsChangedListener {
         default void insetsChanged(InsetsState insetsState) {
         }
@@ -47,12 +45,10 @@ public class DisplayInsetsController implements DisplayController.OnDisplaysChan
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PerDisplay {
         public final int mDisplayId;
         public final DisplayWindowInsetsControllerImpl mInsetsControllerImpl = new DisplayWindowInsetsControllerImpl(this, 0);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class DisplayWindowInsetsControllerImpl extends IDisplayWindowInsetsController.Stub {
             public /* synthetic */ DisplayWindowInsetsControllerImpl(PerDisplay perDisplay, int i) {
                 this();
@@ -70,7 +66,7 @@ public class DisplayInsetsController implements DisplayController.OnDisplaysChan
                 DisplayInsetsController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl displayWindowInsetsControllerImpl = DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl.this;
+                        DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl displayWindowInsetsControllerImpl = this.f$0;
                         InsetsState insetsState2 = insetsState;
                         InsetsSourceControl[] insetsSourceControlArr2 = insetsSourceControlArr;
                         DisplayInsetsController.PerDisplay perDisplay = DisplayInsetsController.PerDisplay.this;
@@ -90,7 +86,7 @@ public class DisplayInsetsController implements DisplayController.OnDisplaysChan
                 DisplayInsetsController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl displayWindowInsetsControllerImpl = DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl.this;
+                        DisplayInsetsController.PerDisplay.DisplayWindowInsetsControllerImpl displayWindowInsetsControllerImpl = this.f$0;
                         boolean z2 = z;
                         ImeTracker.Token token2 = token;
                         DisplayInsetsController.PerDisplay perDisplay = DisplayInsetsController.PerDisplay.this;
@@ -130,7 +126,7 @@ public class DisplayInsetsController implements DisplayController.OnDisplaysChan
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.common.DisplayInsetsController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DisplayInsetsController displayInsetsController = DisplayInsetsController.this;
+                DisplayInsetsController displayInsetsController = this.f$0;
                 displayInsetsController.mDisplayController.addDisplayWindowListener(displayInsetsController, -1);
             }
         }, this);

@@ -112,8 +112,8 @@ public final class SpringForce implements Force {
     }
 
     DynamicAnimation.MassState updateValues(double d, double d2, long j) {
-        double pow;
-        double cos;
+        double dPow;
+        double dCos;
         init();
         double d3 = j / 1000.0d;
         double d4 = d - this.mFinalPosition;
@@ -123,40 +123,40 @@ public final class SpringForce implements Force {
             double d7 = this.mGammaPlus;
             double d8 = d4 - (((d6 * d4) - d2) / (d6 - d7));
             double d9 = ((d4 * d6) - d2) / (d6 - d7);
-            pow = (Math.pow(2.718281828459045d, d6 * d3) * d8) + (Math.pow(2.718281828459045d, this.mGammaPlus * d3) * d9);
+            dPow = (Math.pow(2.718281828459045d, d6 * d3) * d8) + (Math.pow(2.718281828459045d, this.mGammaPlus * d3) * d9);
             double d10 = this.mGammaMinus;
-            double pow2 = d8 * d10 * Math.pow(2.718281828459045d, d10 * d3);
+            double dPow2 = d8 * d10 * Math.pow(2.718281828459045d, d10 * d3);
             double d11 = this.mGammaPlus;
-            cos = pow2 + (d9 * d11 * Math.pow(2.718281828459045d, d11 * d3));
+            dCos = dPow2 + (d9 * d11 * Math.pow(2.718281828459045d, d11 * d3));
         } else if (d5 == 1.0d) {
             double d12 = this.mNaturalFreq;
             double d13 = d2 + (d12 * d4);
             double d14 = d4 + (d13 * d3);
-            pow = Math.pow(2.718281828459045d, (-d12) * d3) * d14;
-            double pow3 = d14 * Math.pow(2.718281828459045d, (-this.mNaturalFreq) * d3);
+            dPow = Math.pow(2.718281828459045d, (-d12) * d3) * d14;
+            double dPow3 = d14 * Math.pow(2.718281828459045d, (-this.mNaturalFreq) * d3);
             double d15 = this.mNaturalFreq;
-            cos = (d13 * Math.pow(2.718281828459045d, (-d15) * d3)) + (pow3 * (-d15));
+            dCos = (d13 * Math.pow(2.718281828459045d, (-d15) * d3)) + (dPow3 * (-d15));
         } else {
             double d16 = 1.0d / this.mDampedFreq;
             double d17 = this.mNaturalFreq;
             double d18 = d16 * ((d5 * d17 * d4) + d2);
-            pow = Math.pow(2.718281828459045d, (-d5) * d17 * d3) * ((Math.cos(this.mDampedFreq * d3) * d4) + (Math.sin(this.mDampedFreq * d3) * d18));
+            dPow = Math.pow(2.718281828459045d, (-d5) * d17 * d3) * ((Math.cos(this.mDampedFreq * d3) * d4) + (Math.sin(this.mDampedFreq * d3) * d18));
             double d19 = this.mNaturalFreq;
             double d20 = this.mDampingRatio;
-            double pow4 = Math.pow(2.718281828459045d, (-d20) * d19 * d3);
+            double dPow4 = Math.pow(2.718281828459045d, (-d20) * d19 * d3);
             double d21 = this.mDampedFreq;
-            double sin = (-d21) * d4 * Math.sin(d21 * d3);
+            double dSin = (-d21) * d4 * Math.sin(d21 * d3);
             double d22 = this.mDampedFreq;
-            cos = ((-d19) * pow * d20) + (pow4 * (sin + (d18 * d22 * Math.cos(d22 * d3))));
+            dCos = ((-d19) * dPow * d20) + (dPow4 * (dSin + (d18 * d22 * Math.cos(d22 * d3))));
         }
-        this.mMassState.mValue = (float) (pow + this.mFinalPosition);
-        this.mMassState.mVelocity = (float) cos;
+        this.mMassState.mValue = (float) (dPow + this.mFinalPosition);
+        this.mMassState.mVelocity = (float) dCos;
         return this.mMassState;
     }
 
     void setValueThreshold(double d) {
-        double abs = Math.abs(d);
-        this.mValueThreshold = abs;
-        this.mVelocityThreshold = abs * VELOCITY_THRESHOLD_MULTIPLIER;
+        double dAbs = Math.abs(d);
+        this.mValueThreshold = dAbs;
+        this.mVelocityThreshold = dAbs * VELOCITY_THRESHOLD_MULTIPLIER;
     }
 }

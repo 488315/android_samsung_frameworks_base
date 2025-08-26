@@ -13,7 +13,6 @@ import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NetworkFilterManager {
     public static final String ACTION_NOTIFY_NETWORK_FILTER_STATUS = "com.samsung.android.knox.intent.action.NOTIFY_NETWORK_FILTER_STATUS";
@@ -67,14 +66,14 @@ public class NetworkFilterManager {
     }
 
     public int registerNetworkFilter(String str, String str2, Bundle bundle) {
-        int i = 0;
+        int iRegisterApplication = 0;
         if (getService() != null) {
             try {
-                i = this.mNwFilterMgrService.registerApplication(this.mContextInfo, str, str2, bundle);
+                iRegisterApplication = this.mNwFilterMgrService.registerApplication(this.mContextInfo, str, str2, bundle);
             } catch (RemoteException unused) {
                 Log.w(TAG, "Failed to registerNetworkFilter");
             }
-            if (i == 0) {
+            if (iRegisterApplication == 0) {
                 Intent intent = new Intent();
                 int userId = UserHandle.getUserId(Binder.getCallingUid());
                 intent.setClassName("com.android.vpndialogs", "com.android.vpndialogs.KnoxVpnPPDialog");
@@ -85,7 +84,7 @@ public class NetworkFilterManager {
                 }
             }
         }
-        return i;
+        return iRegisterApplication;
     }
 
     public int unregisterNetworkFilter(String str) {

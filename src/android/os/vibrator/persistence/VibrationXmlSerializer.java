@@ -30,25 +30,25 @@ public final class VibrationXmlSerializer {
 
     public static void serialize(VibrationEffect vibrationEffect, Writer writer, int i) throws IOException {
         XmlSerializedVibration<? extends VibrationEffect> serializedVibration = toSerializedVibration(vibrationEffect, i);
-        TypedXmlSerializer newFastSerializer = Xml.newFastSerializer();
-        newFastSerializer.setFeature(XML_FEATURE_INDENT_OUTPUT, (i & 2) != 0);
-        newFastSerializer.setOutput(writer);
-        newFastSerializer.startDocument(XML_ENCODING, false);
-        serializedVibration.write(newFastSerializer);
-        newFastSerializer.endDocument();
+        TypedXmlSerializer typedXmlSerializerNewFastSerializer = Xml.newFastSerializer();
+        typedXmlSerializerNewFastSerializer.setFeature(XML_FEATURE_INDENT_OUTPUT, (i & 2) != 0);
+        typedXmlSerializerNewFastSerializer.setOutput(writer);
+        typedXmlSerializerNewFastSerializer.startDocument(XML_ENCODING, false);
+        serializedVibration.write(typedXmlSerializerNewFastSerializer);
+        typedXmlSerializerNewFastSerializer.endDocument();
     }
 
     private static XmlSerializedVibration<? extends VibrationEffect> toSerializedVibration(VibrationEffect vibrationEffect, int i) throws SerializationFailedException {
-        XmlSerializedVibration<? extends VibrationEffect> serialize;
+        XmlSerializedVibration<? extends VibrationEffect> xmlSerializedVibrationSerialize;
         int i2 = (i & 1) == 0 ? 0 : 1;
         try {
             if (android.os.vibrator.Flags.normalizedPwleEffects()) {
-                serialize = VibrationEffectSerializer.serialize(vibrationEffect, i2);
+                xmlSerializedVibrationSerialize = VibrationEffectSerializer.serialize(vibrationEffect, i2);
             } else {
-                serialize = LegacyVibrationEffectXmlSerializer.serialize(vibrationEffect, i2);
+                xmlSerializedVibrationSerialize = LegacyVibrationEffectXmlSerializer.serialize(vibrationEffect, i2);
             }
-            XmlValidator.checkSerializedVibration(serialize, vibrationEffect);
-            return serialize;
+            XmlValidator.checkSerializedVibration(xmlSerializedVibrationSerialize, vibrationEffect);
+            return xmlSerializedVibrationSerialize;
         } catch (XmlSerializerException e) {
             throw new SerializationFailedException(vibrationEffect, e);
         }

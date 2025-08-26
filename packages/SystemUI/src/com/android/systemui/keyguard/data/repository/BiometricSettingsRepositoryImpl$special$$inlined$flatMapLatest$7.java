@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$7 extends SuspendLambda implements Function3 {
     final /* synthetic */ CoroutineDispatcher $backgroundDispatcher$inlined;
@@ -46,10 +45,10 @@ public final class BiometricSettingsRepositoryImpl$special$$inlined$flatMapLates
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            int intValue = ((Number) this.L$1).intValue();
-            Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$2(this.$devicePolicyManager$inlined, intValue, null), FlowKt.transformLatest(this.this$0.devicePolicyChangedForAllUsers, new BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$1(this.$devicePolicyManager$inlined, intValue, null))), this.$backgroundDispatcher$inlined));
+            int iIntValue = ((Number) this.L$1).intValue();
+            Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$2(this.$devicePolicyManager$inlined, iIntValue, null), FlowKt.transformLatest(this.this$0.devicePolicyChangedForAllUsers, new BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$1(this.$devicePolicyManager$inlined, iIntValue, null))), this.$backgroundDispatcher$inlined));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, distinctUntilChanged, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowDistinctUntilChanged, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

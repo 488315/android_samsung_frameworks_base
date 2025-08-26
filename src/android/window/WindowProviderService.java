@@ -83,15 +83,15 @@ public abstract class WindowProviderService extends Service implements WindowPro
 
     @Override // android.app.Service
     public final Context createServiceBaseContext(ActivityThread activityThread, LoadedApk loadedApk) {
-        Context createServiceBaseContext = super.createServiceBaseContext(activityThread, loadedApk);
-        DisplayManager displayManager = (DisplayManager) createServiceBaseContext.getSystemService(DisplayManager.class);
+        Context contextCreateServiceBaseContext = super.createServiceBaseContext(activityThread, loadedApk);
+        DisplayManager displayManager = (DisplayManager) contextCreateServiceBaseContext.getSystemService(DisplayManager.class);
         int initialDisplayId = getInitialDisplayId();
         Display display = displayManager.getDisplay(initialDisplayId);
         if (display == null) {
             Log.e(TAG, "Display with id " + initialDisplayId + " not found, falling back to DEFAULT_DISPLAY");
             display = displayManager.getDisplay(0);
         }
-        return createServiceBaseContext.createTokenContext(this.mWindowToken, display);
+        return contextCreateServiceBaseContext.createTokenContext(this.mWindowToken, display);
     }
 
     @Override // android.app.Service, android.content.ContextWrapper

@@ -15,7 +15,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class TouchpadTutorialScreenViewModelKt$mapToTutorialState$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Flow $this_mapToTutorialState;
@@ -75,8 +74,8 @@ final class TouchpadTutorialScreenViewModelKt$mapToTutorialState$1 extends Suspe
                         finished = TutorialActionState.Error.INSTANCE;
                     }
                     ref$ObjectRef2.element = finished;
-                    Object emit = flowCollector.emit(finished, continuation);
-                    return emit == CoroutineSingletons.COROUTINE_SUSPENDED ? emit : Unit.INSTANCE;
+                    Object objEmit = flowCollector.emit(finished, continuation);
+                    return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
                 }
             };
             this.label = 1;

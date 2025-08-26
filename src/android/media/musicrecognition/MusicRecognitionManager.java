@@ -3,7 +3,6 @@ package android.media.musicrecognition;
 import android.annotation.SystemApi;
 import android.media.MediaMetadata;
 import android.media.musicrecognition.IMusicRecognitionManagerCallback;
-import android.media.musicrecognition.MusicRecognitionManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import java.lang.annotation.Retention;
@@ -65,7 +64,7 @@ public class MusicRecognitionManager {
             this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MusicRecognitionManager.MusicRecognitionCallbackWrapper.this.lambda$onRecognitionSucceeded$0(mediaMetadata, bundle);
+                    this.f$0.lambda$onRecognitionSucceeded$0(mediaMetadata, bundle);
                 }
             });
         }
@@ -80,7 +79,7 @@ public class MusicRecognitionManager {
             this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MusicRecognitionManager.MusicRecognitionCallbackWrapper.this.lambda$onRecognitionFailed$1(i);
+                    this.f$0.lambda$onRecognitionFailed$1(i);
                 }
             });
         }
@@ -98,7 +97,7 @@ public class MusicRecognitionManager {
             executor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MusicRecognitionManager.RecognitionCallback.this.onAudioStreamClosed();
+                    recognitionCallback.onAudioStreamClosed();
                 }
             });
         }

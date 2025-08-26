@@ -32,19 +32,16 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RecentTasksAdapter extends RecyclerView.Adapter {
     public final List items;
     public final RecentTaskClickListener listener;
     public final RecentTaskViewHolder.Factory viewHolderFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         RecentTasksAdapter create(List list, RecentTaskClickListener recentTaskClickListener);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RecentTaskClickListener {
     }
 
@@ -66,9 +63,9 @@ public final class RecentTasksAdapter extends RecyclerView.Adapter {
         final Function1 function1 = new Function1() { // from class: com.android.systemui.mediaprojection.appselector.view.RecentTasksAdapter$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ActivityOptions makeScaleUpAnimation;
-                RecentTasksAdapter.RecentTaskClickListener recentTaskClickListener = RecentTasksAdapter.this.listener;
+            public final Object mo781invoke(Object obj) {
+                ActivityOptions activityOptionsMakeScaleUpAnimation;
+                RecentTasksAdapter.RecentTaskClickListener recentTaskClickListener = this.f$0.listener;
                 View view = recentTaskViewHolder.itemView;
                 final MediaProjectionRecentsViewController mediaProjectionRecentsViewController = (MediaProjectionRecentsViewController) recentTaskClickListener;
                 mediaProjectionRecentsViewController.getClass();
@@ -77,23 +74,23 @@ public final class RecentTasksAdapter extends RecyclerView.Adapter {
                 boolean z = recentTask2.isForegroundTask;
                 SplitBounds splitBounds = recentTask2.splitBounds;
                 if (z) {
-                    makeScaleUpAnimation = ActivityOptions.makeCustomTaskAnimation(view.getContext(), 0, R.anim.task_close_enter, null, null, null);
-                    makeScaleUpAnimation.getClass();
+                    activityOptionsMakeScaleUpAnimation = ActivityOptions.makeCustomTaskAnimation(view.getContext(), 0, R.anim.task_close_enter, null, null, null);
+                    activityOptionsMakeScaleUpAnimation.getClass();
                 } else if (!mediaProjectionRecentsViewController.splitScreen.isPresent() || splitBounds == null) {
-                    makeScaleUpAnimation = ActivityOptions.makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight());
-                    makeScaleUpAnimation.getClass();
+                    activityOptionsMakeScaleUpAnimation = ActivityOptions.makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight());
+                    activityOptionsMakeScaleUpAnimation.getClass();
                 } else {
-                    makeScaleUpAnimation = ActivityOptions.makeBasic();
-                    makeScaleUpAnimation.getClass();
+                    activityOptionsMakeScaleUpAnimation = ActivityOptions.makeBasic();
+                    activityOptionsMakeScaleUpAnimation.getClass();
                 }
-                makeScaleUpAnimation.setPendingIntentBackgroundActivityStartMode(1);
-                makeScaleUpAnimation.setLaunchDisplayId(recentTask2.displayId);
-                makeScaleUpAnimation.setLaunchCookie(launchCookie);
+                activityOptionsMakeScaleUpAnimation.setPendingIntentBackgroundActivityStartMode(1);
+                activityOptionsMakeScaleUpAnimation.setLaunchDisplayId(recentTask2.displayId);
+                activityOptionsMakeScaleUpAnimation.setLaunchCookie(launchCookie);
                 final int i2 = recentTask2.taskId;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.mediaprojection.appselector.view.MediaProjectionRecentsViewController$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        ((MediaProjectionAppSelectorActivity) MediaProjectionRecentsViewController.this.resultHandler).returnSelectedApp(launchCookie, i2);
+                        ((MediaProjectionAppSelectorActivity) mediaProjectionRecentsViewController.resultHandler).returnSelectedApp(launchCookie, i2);
                         return Unit.INSTANCE;
                     }
                 };
@@ -107,7 +104,7 @@ public final class RecentTasksAdapter extends RecyclerView.Adapter {
                     }
                 }
                 if (!mediaProjectionRecentsViewController.splitScreen.isPresent() || splitBounds == null || recentTask2.isForegroundTask) {
-                    mediaProjectionRecentsViewController.activityTaskManager.startActivityFromRecents(i2, makeScaleUpAnimation.toBundle());
+                    mediaProjectionRecentsViewController.activityTaskManager.startActivityFromRecents(i2, activityOptionsMakeScaleUpAnimation.toBundle());
                     function0.invoke();
                 } else {
                     splitBounds.getClass();
@@ -124,14 +121,14 @@ public final class RecentTasksAdapter extends RecyclerView.Adapter {
                     display.getDisplayInfo(displayInfo);
                     final RemoteTransition remoteTransition = new RemoteTransition(new RemoteRecentSplitTaskTransitionRunner(i2, i5, locationOnScreen, new Rect(0, 0, displayInfo.getNaturalWidth(), displayInfo.getNaturalHeight()), function0), view.getContext().getIApplicationThread(), "startSplitScreenTask");
                     SplitScreen splitScreen = (SplitScreen) mediaProjectionRecentsViewController.splitScreen.get();
-                    final Bundle bundle = makeScaleUpAnimation.toBundle();
+                    final Bundle bundle = activityOptionsMakeScaleUpAnimation.toBundle();
                     final int i7 = splitBounds.snapPosition;
                     final SplitScreenController.SplitScreenImpl splitScreenImpl = (SplitScreenController.SplitScreenImpl) splitScreen;
                     SplitScreenController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SplitScreenController.SplitScreenImpl splitScreenImpl2 = SplitScreenController.SplitScreenImpl.this;
-                            SplitScreenController.this.mStageCoordinator.startTasks(i2, bundle, i5, null, -1, null, i6, i7, 0.5f, 0, 0.5f, remoteTransition, null, -1, null);
+                            SplitScreenController.SplitScreenImpl splitScreenImpl2 = splitScreenImpl;
+                            SplitScreenController.this.mStageCoordinator.startTasks(i2, bundle, i5, null, -1, null, i6, i7, 0.5f, 0, 0.5f, remoteTransition, null, -1, false, null);
                         }
                     });
                 }
@@ -147,7 +144,7 @@ public final class RecentTasksAdapter extends RecyclerView.Adapter {
         recentTaskViewHolder.root.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.mediaprojection.appselector.view.RecentTaskViewHolder$sam$android_view_View_OnClickListener$0
             @Override // android.view.View.OnClickListener
             public final /* synthetic */ void onClick(View view) {
-                Function1.this.mo779invoke(view);
+                function1.mo781invoke(view);
             }
         });
     }

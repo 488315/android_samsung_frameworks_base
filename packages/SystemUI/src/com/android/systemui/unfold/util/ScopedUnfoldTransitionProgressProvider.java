@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider, UnfoldTransitionProgressProvider.TransitionProgressListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -22,7 +21,6 @@ public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionP
     public Handler progressHandler;
     public final UnfoldTransitionProgressProvider source;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,6 +34,7 @@ public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionP
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public ScopedUnfoldTransitionProgressProvider() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -48,11 +47,11 @@ public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionP
     public final void assertInProgressThread() {
         Handler handler = this.progressHandler;
         if (handler == null) {
-            Looper myLooper = Looper.myLooper();
-            if (myLooper == null) {
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper == null) {
                 throw new IllegalStateException("This thread is expected to have a looper.");
             }
-            this.progressHandler = new Handler(myLooper);
+            this.progressHandler = new Handler(looperMyLooper);
             return;
         }
         if (handler.getLooper().isCurrentThread()) {
@@ -151,7 +150,7 @@ public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionP
                     final Function0 function0 = new Function0() { // from class: com.android.systemui.unfold.util.ScopedUnfoldTransitionProgressProvider$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
-                            ScopedUnfoldTransitionProgressProvider scopedUnfoldTransitionProgressProvider = ScopedUnfoldTransitionProgressProvider.this;
+                            ScopedUnfoldTransitionProgressProvider scopedUnfoldTransitionProgressProvider = this.f$0;
                             int i = ScopedUnfoldTransitionProgressProvider.$r8$clinit;
                             scopedUnfoldTransitionProgressProvider.assertInProgressThread();
                             synchronized (scopedUnfoldTransitionProgressProvider.lock) {
@@ -190,7 +189,7 @@ public class ScopedUnfoldTransitionProgressProvider implements UnfoldTransitionP
                         handler.post(new Runnable() { // from class: com.android.systemui.unfold.util.ScopedUnfoldTransitionProgressProvider$sam$java_lang_Runnable$0
                             @Override // java.lang.Runnable
                             public final /* synthetic */ void run() {
-                                Function0.this.invoke();
+                                function0.invoke();
                             }
                         });
                     }

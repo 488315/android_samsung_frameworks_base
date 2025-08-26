@@ -52,9 +52,9 @@ public interface IConvertCredentialCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IConvertCredentialCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IConvertCredentialCallback)) {
-                return (IConvertCredentialCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IConvertCredentialCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IConvertCredentialCallback)) {
+                return (IConvertCredentialCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,30 +115,30 @@ public interface IConvertCredentialCallback extends IInterface {
 
             @Override // android.service.autofill.IConvertCredentialCallback
             public void onSuccess(ConvertCredentialResponse convertCredentialResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConvertCredentialCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(convertCredentialResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IConvertCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(convertCredentialResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IConvertCredentialCallback
             public void onFailure(CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConvertCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeInterfaceToken(IConvertCredentialCallback.DESCRIPTOR);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(2, obtain, null, 1);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

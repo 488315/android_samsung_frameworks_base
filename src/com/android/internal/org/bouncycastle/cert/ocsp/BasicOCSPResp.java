@@ -114,7 +114,7 @@ public class BasicOCSPResp implements Encodable {
         return OCSPUtils.EMPTY_CERTS;
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws OCSPException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws OCSPException, IOException {
         try {
             ContentVerifier contentVerifier = contentVerifierProvider.get(this.resp.getSignatureAlgorithm());
             OutputStream outputStream = contentVerifier.getOutputStream();

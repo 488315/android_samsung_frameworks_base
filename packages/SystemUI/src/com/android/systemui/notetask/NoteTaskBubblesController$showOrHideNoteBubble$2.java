@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Reflection;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NoteTaskBubblesController$showOrHideNoteBubble$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ NoteTaskBubbleExpandBehavior $bubbleExpandBehavior;
@@ -62,7 +61,7 @@ final class NoteTaskBubblesController$showOrHideNoteBubble$2 extends SuspendLamb
         final UserHandle userHandle = this.$userHandle;
         final Icon icon = this.$icon;
         final NoteTaskBubbleExpandBehavior noteTaskBubbleExpandBehavior = this.$bubbleExpandBehavior;
-        AndroidFuture post = impl.post(new ServiceConnector.VoidJob() { // from class: com.android.systemui.notetask.NoteTaskBubblesController$showOrHideNoteBubble$2.1
+        AndroidFuture androidFuturePost = impl.post(new ServiceConnector.VoidJob() { // from class: com.android.systemui.notetask.NoteTaskBubblesController$showOrHideNoteBubble$2.1
             public final void runNoResult(Object obj2) {
                 ((INoteTaskBubblesService) obj2).showOrHideNoteBubble(intent, userHandle, icon, noteTaskBubbleExpandBehavior);
             }
@@ -70,11 +69,11 @@ final class NoteTaskBubblesController$showOrHideNoteBubble$2 extends SuspendLamb
         final Intent intent2 = this.$intent;
         final UserHandle userHandle2 = this.$userHandle;
         final Icon icon2 = this.$icon;
-        return post.whenComplete(new NoteTaskBubblesController$sam$java_util_function_BiConsumer$0(new Function2(intent2, userHandle2, icon2) { // from class: com.android.systemui.notetask.NoteTaskBubblesController$showOrHideNoteBubble$2$$ExternalSyntheticLambda0
+        return androidFuturePost.whenComplete(new NoteTaskBubblesController$sam$java_util_function_BiConsumer$0(new Function2(intent2, userHandle2, icon2) { // from class: com.android.systemui.notetask.NoteTaskBubblesController$showOrHideNoteBubble$2$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj2, Object obj3) {
                 Throwable th = (Throwable) obj3;
-                CoroutineScope coroutineScope2 = CoroutineScope.this;
+                CoroutineScope coroutineScope2 = this.f$0;
                 if (th != null) {
                     DebugLogger debugLogger = DebugLogger.INSTANCE;
                     boolean z = Build.IS_DEBUGGABLE;

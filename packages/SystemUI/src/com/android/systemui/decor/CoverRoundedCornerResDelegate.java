@@ -9,7 +9,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.R;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverRoundedCornerResDelegate implements RoundedCornerResDelegate {
     public final Size bottomRoundedSize;
@@ -17,7 +16,7 @@ public final class CoverRoundedCornerResDelegate implements RoundedCornerResDele
     public final Drawable topRoundedDrawable;
     public final Size topRoundedSize;
 
-    public CoverRoundedCornerResDelegate(Resources resources) {
+    public CoverRoundedCornerResDelegate(Resources resources) throws Resources.NotFoundException {
         this.hasTop = resources.getBoolean(R.bool.config_enableCoverScreenRoundedCorner);
         Drawable drawable = resources.getDrawable(R.drawable.rounded_corner_cover, null);
         this.topRoundedDrawable = drawable;

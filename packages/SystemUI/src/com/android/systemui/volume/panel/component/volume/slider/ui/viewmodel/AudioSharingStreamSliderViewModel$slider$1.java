@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioSharingStreamSliderViewModel$slider$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -48,14 +47,14 @@ final class AudioSharingStreamSliderViewModel$slider$1 extends SuspendLambda imp
         Integer num = (Integer) this.L$0;
         if (num != null) {
             VolumePanelLogger volumePanelLogger = this.this$0.volumePanelLogger;
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             volumePanelLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = volumePanelLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = intValue;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = iIntValue;
+            logBuffer.commit(logMessageObtain);
         }
         return Unit.INSTANCE;
     }

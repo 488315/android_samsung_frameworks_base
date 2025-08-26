@@ -627,11 +627,11 @@ public abstract class Connection extends Conferenceable {
         }
 
         public String read() throws IOException {
-            int read = this.mPipeFromInCall.read(this.mReadBuffer, 0, 1000);
-            if (read < 0) {
+            int i = this.mPipeFromInCall.read(this.mReadBuffer, 0, 1000);
+            if (i < 0) {
                 return null;
             }
-            return new String(this.mReadBuffer, 0, read);
+            return new String(this.mReadBuffer, 0, i);
         }
 
         public String readImmediately() throws IOException {
@@ -739,15 +739,15 @@ public abstract class Connection extends Conferenceable {
                 switch (message.what) {
                     case 1:
                         IBinder iBinder = (IBinder) message.obj;
-                        IVideoCallback asInterface = IVideoCallback.Stub.asInterface((IBinder) message.obj);
-                        if (asInterface == null) {
+                        IVideoCallback iVideoCallbackAsInterface = IVideoCallback.Stub.asInterface((IBinder) message.obj);
+                        if (iVideoCallbackAsInterface == null) {
                             Log.w(this, "addVideoProvider - skipped; callback is null.", new Object[0]);
                             return;
                         } else if (VideoProvider.this.mVideoCallbacks.containsKey(iBinder)) {
                             Log.i(this, "addVideoProvider - skipped; already present.", new Object[0]);
                             return;
                         } else {
-                            VideoProvider.this.mVideoCallbacks.put(iBinder, asInterface);
+                            VideoProvider.this.mVideoCallbacks.put(iBinder, iVideoCallbackAsInterface);
                             return;
                         }
                     case 2:
@@ -841,13 +841,13 @@ public abstract class Connection extends Conferenceable {
 
             @Override // com.android.internal.telecom.IVideoProvider
             public void setCamera(String str, String str2, int i) {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = str2;
-                obtain.argi1 = Binder.getCallingUid();
-                obtain.argi2 = Binder.getCallingPid();
-                obtain.argi3 = i;
-                this.mMessageHandler.obtainMessage(2, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = str2;
+                someArgsObtain.argi1 = Binder.getCallingUid();
+                someArgsObtain.argi2 = Binder.getCallingPid();
+                someArgsObtain.argi3 = i;
+                this.mMessageHandler.obtainMessage(2, someArgsObtain).sendToTarget();
             }
 
             @Override // com.android.internal.telecom.IVideoProvider
@@ -872,10 +872,10 @@ public abstract class Connection extends Conferenceable {
 
             @Override // com.android.internal.telecom.IVideoProvider
             public void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2) {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = videoProfile;
-                obtain.arg2 = videoProfile2;
-                this.mMessageHandler.obtainMessage(7, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = videoProfile;
+                someArgsObtain.arg2 = videoProfile2;
+                this.mMessageHandler.obtainMessage(7, someArgsObtain).sendToTarget();
             }
 
             @Override // com.android.internal.telecom.IVideoProvider
@@ -1226,15 +1226,15 @@ public abstract class Connection extends Conferenceable {
 
     public final void setCallerDisplayName(String str, int i) {
         checkImmutable();
-        boolean equals = Objects.equals(this.mCallerDisplayName, str);
+        boolean zEquals = Objects.equals(this.mCallerDisplayName, str);
         boolean z = this.mCallerDisplayNamePresentation != i;
-        if (!equals) {
+        if (!zEquals) {
             this.mCallerDisplayName = str;
         }
         if (z) {
             this.mCallerDisplayNamePresentation = i;
         }
-        if (!equals || z) {
+        if (!zEquals || z) {
             Iterator<Listener> it = this.mListeners.iterator();
             while (it.hasNext()) {
                 it.next().onCallerDisplayNameChanged(this, this.mCallerDisplayName, this.mCallerDisplayNamePresentation);
@@ -1542,10 +1542,10 @@ public abstract class Connection extends Conferenceable {
                 }
             }
         }
-        List<String> unmodifiableList = Collections.unmodifiableList(list);
+        List<String> listUnmodifiableList = Collections.unmodifiableList(list);
         Iterator<Listener> it2 = this.mListeners.iterator();
         while (it2.hasNext()) {
-            it2.next().onExtrasRemoved(this, unmodifiableList);
+            it2.next().onExtrasRemoved(this, listUnmodifiableList);
         }
     }
 
@@ -1589,7 +1589,7 @@ public abstract class Connection extends Conferenceable {
         this.mListeners.forEach(new Consumer() { // from class: android.telecom.Connection$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Connection.this.lambda$sendRttInitiationSuccess$0((Connection.Listener) obj);
+                this.f$0.lambda$sendRttInitiationSuccess$0((Connection.Listener) obj);
             }
         });
     }
@@ -1603,7 +1603,7 @@ public abstract class Connection extends Conferenceable {
         this.mListeners.forEach(new Consumer() { // from class: android.telecom.Connection$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Connection.this.lambda$sendRttInitiationFailure$1(i, (Connection.Listener) obj);
+                this.f$0.lambda$sendRttInitiationFailure$1(i, (Connection.Listener) obj);
             }
         });
     }
@@ -1617,7 +1617,7 @@ public abstract class Connection extends Conferenceable {
         this.mListeners.forEach(new Consumer() { // from class: android.telecom.Connection$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Connection.this.lambda$sendRttSessionRemotelyTerminated$2((Connection.Listener) obj);
+                this.f$0.lambda$sendRttSessionRemotelyTerminated$2((Connection.Listener) obj);
             }
         });
     }
@@ -1631,7 +1631,7 @@ public abstract class Connection extends Conferenceable {
         this.mListeners.forEach(new Consumer() { // from class: android.telecom.Connection$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Connection.this.lambda$sendRemoteRttRequest$3((Connection.Listener) obj);
+                this.f$0.lambda$sendRemoteRttRequest$3((Connection.Listener) obj);
             }
         });
     }
@@ -1646,7 +1646,7 @@ public abstract class Connection extends Conferenceable {
         this.mListeners.forEach(new Consumer() { // from class: android.telecom.Connection$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                Connection.this.lambda$queryLocationForEmergency$4(j, str, executor, outcomeReceiver, (Connection.Listener) obj);
+                this.f$0.lambda$queryLocationForEmergency$4(j, str, executor, outcomeReceiver, (Connection.Listener) obj);
             }
         });
     }
@@ -1739,9 +1739,9 @@ public abstract class Connection extends Conferenceable {
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '-' || charAt == '@' || charAt == '.') {
-                sb.append(charAt);
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '-' || cCharAt == '@' || cCharAt == '.') {
+                sb.append(cCharAt);
             } else {
                 sb.append(EpicenterTranslateClipReveal.StateProperty.TARGET_X);
             }

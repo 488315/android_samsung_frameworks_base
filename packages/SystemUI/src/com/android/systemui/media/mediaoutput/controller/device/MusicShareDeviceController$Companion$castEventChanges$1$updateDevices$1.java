@@ -15,7 +15,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ProducerScope $$this$callbackFlow;
@@ -41,18 +40,18 @@ final class MusicShareDeviceController$Companion$castEventChanges$1$updateDevice
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
+        Object list;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             SendChannel sendChannel = this.$$this$callbackFlow;
             CachedBluetoothCastDeviceManager cachedBluetoothCastDeviceManager = this.$this_castEventChanges.mCachedCastDeviceManager;
-            if (cachedBluetoothCastDeviceManager == null || (obj2 = CollectionsKt___CollectionsKt.toList(cachedBluetoothCastDeviceManager.getCachedCastDevicesCopy())) == null) {
-                obj2 = EmptyList.INSTANCE;
+            if (cachedBluetoothCastDeviceManager == null || (list = CollectionsKt___CollectionsKt.toList(cachedBluetoothCastDeviceManager.getCachedCastDevicesCopy())) == null) {
+                list = EmptyList.INSTANCE;
             }
             this.label = 1;
-            if (((ChannelCoroutine) sendChannel)._channel.send(obj2, this) == coroutineSingletons) {
+            if (((ChannelCoroutine) sendChannel)._channel.send(list, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

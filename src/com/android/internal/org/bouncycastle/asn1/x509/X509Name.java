@@ -325,9 +325,9 @@ public class X509Name extends ASN1Object {
                 this.added.addElement(FALSE);
             }
         } else {
-            Enumeration keys = hashtable.keys();
-            while (keys.hasMoreElements()) {
-                this.ordering.addElement(keys.nextElement());
+            Enumeration enumerationKeys = hashtable.keys();
+            while (enumerationKeys.hasMoreElements()) {
+                this.ordering.addElement(enumerationKeys.nextElement());
                 this.added.addElement(FALSE);
             }
         }
@@ -381,18 +381,18 @@ public class X509Name extends ASN1Object {
     }
 
     private ASN1ObjectIdentifier decodeOID(String str, Hashtable hashtable) {
-        String trim = str.trim();
-        if (Strings.toUpperCase(trim).startsWith("OID.")) {
-            return new ASN1ObjectIdentifier(trim.substring(4));
+        String strTrim = str.trim();
+        if (Strings.toUpperCase(strTrim).startsWith("OID.")) {
+            return new ASN1ObjectIdentifier(strTrim.substring(4));
         }
-        if (trim.charAt(0) >= '0' && trim.charAt(0) <= '9') {
-            return new ASN1ObjectIdentifier(trim);
+        if (strTrim.charAt(0) >= '0' && strTrim.charAt(0) <= '9') {
+            return new ASN1ObjectIdentifier(strTrim);
         }
-        ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) hashtable.get(Strings.toLowerCase(trim));
+        ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) hashtable.get(Strings.toLowerCase(strTrim));
         if (aSN1ObjectIdentifier != null) {
             return aSN1ObjectIdentifier;
         }
-        throw new IllegalArgumentException("Unknown object id - " + trim + " - passed to distinguished name");
+        throw new IllegalArgumentException("Unknown object id - " + strTrim + " - passed to distinguished name");
     }
 
     private String unescape(String str) {
@@ -409,7 +409,7 @@ public class X509Name extends ASN1Object {
             i = 0;
         }
         boolean z = false;
-        int i2 = 0;
+        int length = 0;
         boolean z2 = false;
         boolean z3 = false;
         while (i != charArray.length) {
@@ -419,7 +419,7 @@ public class X509Name extends ASN1Object {
             }
             if (c != '\"') {
                 if (c == '\\' && !z && !z2) {
-                    i2 = stringBuffer.length();
+                    length = stringBuffer.length();
                     z = true;
                 } else if (c != ' ' || z || z3) {
                     stringBuffer.append(c);
@@ -434,7 +434,7 @@ public class X509Name extends ASN1Object {
             i++;
         }
         if (stringBuffer.length() > 0) {
-            while (stringBuffer.charAt(stringBuffer.length() - 1) == ' ' && i2 != stringBuffer.length() - 1) {
+            while (stringBuffer.charAt(stringBuffer.length() - 1) == ' ' && length != stringBuffer.length() - 1) {
                 stringBuffer.setLength(stringBuffer.length() - 1);
             }
         }
@@ -449,15 +449,15 @@ public class X509Name extends ASN1Object {
         this.converter = x509NameEntryConverter;
         X509NameTokenizer x509NameTokenizer = new X509NameTokenizer(str);
         while (x509NameTokenizer.hasMoreTokens()) {
-            String nextToken = x509NameTokenizer.nextToken();
-            if (nextToken.indexOf(43) > 0) {
-                X509NameTokenizer x509NameTokenizer2 = new X509NameTokenizer(nextToken, '+');
+            String strNextToken = x509NameTokenizer.nextToken();
+            if (strNextToken.indexOf(43) > 0) {
+                X509NameTokenizer x509NameTokenizer2 = new X509NameTokenizer(strNextToken, '+');
                 addEntry(hashtable, x509NameTokenizer2.nextToken(), FALSE);
                 while (x509NameTokenizer2.hasMoreTokens()) {
                     addEntry(hashtable, x509NameTokenizer2.nextToken(), TRUE);
                 }
             } else {
-                addEntry(hashtable, nextToken, FALSE);
+                addEntry(hashtable, strNextToken, FALSE);
             }
         }
         if (z) {
@@ -486,13 +486,13 @@ public class X509Name extends ASN1Object {
 
     private void addEntry(Hashtable hashtable, String str, Boolean bool) {
         X509NameTokenizer x509NameTokenizer = new X509NameTokenizer(str, '=');
-        String nextToken = x509NameTokenizer.nextToken();
+        String strNextToken = x509NameTokenizer.nextToken();
         if (!x509NameTokenizer.hasMoreTokens()) {
             throw new IllegalArgumentException("badly formatted directory string");
         }
-        String nextToken2 = x509NameTokenizer.nextToken();
-        this.ordering.addElement(decodeOID(nextToken, hashtable));
-        this.values.addElement(unescape(nextToken2));
+        String strNextToken2 = x509NameTokenizer.nextToken();
+        this.ordering.addElement(decodeOID(strNextToken, hashtable));
+        this.values.addElement(unescape(strNextToken2));
         this.added.addElement(bool);
     }
 
@@ -592,15 +592,15 @@ public class X509Name extends ASN1Object {
         }
         this.isHashCodeCalculated = true;
         for (int i = 0; i != this.ordering.size(); i++) {
-            String stripInternalSpaces = stripInternalSpaces(canonicalize((String) this.values.elementAt(i)));
-            int hashCode = this.hashCodeValue ^ this.ordering.elementAt(i).hashCode();
-            this.hashCodeValue = hashCode;
-            this.hashCodeValue = stripInternalSpaces.hashCode() ^ hashCode;
+            String strStripInternalSpaces = stripInternalSpaces(canonicalize((String) this.values.elementAt(i)));
+            int iHashCode = this.hashCodeValue ^ this.ordering.elementAt(i).hashCode();
+            this.hashCodeValue = iHashCode;
+            this.hashCodeValue = strStripInternalSpaces.hashCode() ^ iHashCode;
         }
         return this.hashCodeValue;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x0085, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x0085, code lost:
     
         r3[r9] = true;
         r4 = r4 + r6;
@@ -608,106 +608,66 @@ public class X509Name extends ASN1Object {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean equals(java.lang.Object r12) {
-        /*
-            r11 = this;
-            r0 = 1
-            if (r12 != r11) goto L4
-            return r0
-        L4:
-            boolean r1 = r12 instanceof com.android.internal.org.bouncycastle.asn1.x509.X509Name
-            r2 = 0
-            if (r1 != 0) goto Le
-            boolean r1 = r12 instanceof com.android.internal.org.bouncycastle.asn1.ASN1Sequence
-            if (r1 != 0) goto Le
-            return r2
-        Le:
-            r1 = r12
-            com.android.internal.org.bouncycastle.asn1.ASN1Encodable r1 = (com.android.internal.org.bouncycastle.asn1.ASN1Encodable) r1
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r1 = r1.toASN1Primitive()
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r3 = r11.toASN1Primitive()
-            boolean r1 = r3.equals(r1)
-            if (r1 == 0) goto L20
-            return r0
-        L20:
-            com.android.internal.org.bouncycastle.asn1.x509.X509Name r12 = getInstance(r12)     // Catch: java.lang.IllegalArgumentException -> L8e
-            java.util.Vector r1 = r11.ordering
-            int r1 = r1.size()
-            java.util.Vector r3 = r12.ordering
-            int r3 = r3.size()
-            if (r1 == r3) goto L33
-            return r2
-        L33:
-            boolean[] r3 = new boolean[r1]
-            java.util.Vector r4 = r11.ordering
-            java.lang.Object r4 = r4.elementAt(r2)
-            java.util.Vector r5 = r12.ordering
-            java.lang.Object r5 = r5.elementAt(r2)
-            boolean r4 = r4.equals(r5)
-            if (r4 == 0) goto L4b
-            r6 = r0
-            r5 = r1
-            r4 = r2
-            goto L4f
-        L4b:
-            int r4 = r1 + (-1)
-            r5 = -1
-            r6 = r5
-        L4f:
-            if (r4 == r5) goto L8d
-            java.util.Vector r7 = r11.ordering
-            java.lang.Object r7 = r7.elementAt(r4)
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r7 = (com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier) r7
-            java.util.Vector r8 = r11.values
-            java.lang.Object r8 = r8.elementAt(r4)
-            java.lang.String r8 = (java.lang.String) r8
-            r9 = r2
-        L62:
-            if (r9 >= r1) goto L8c
-            boolean r10 = r3[r9]
-            if (r10 == 0) goto L69
-            goto L89
-        L69:
-            java.util.Vector r10 = r12.ordering
-            java.lang.Object r10 = r10.elementAt(r9)
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r10 = (com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier) r10
-            boolean r10 = r7.equals(r10)
-            if (r10 == 0) goto L89
-            java.util.Vector r10 = r12.values
-            java.lang.Object r10 = r10.elementAt(r9)
-            java.lang.String r10 = (java.lang.String) r10
-            boolean r10 = r11.equivalentStrings(r8, r10)
-            if (r10 == 0) goto L89
-            r3[r9] = r0
-            int r4 = r4 + r6
-            goto L4f
-        L89:
-            int r9 = r9 + 1
-            goto L62
-        L8c:
-            return r2
-        L8d:
-            return r0
-        L8e:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.asn1.x509.X509Name.equals(java.lang.Object):boolean");
+    public boolean equals(Object obj) {
+        int i;
+        int i2;
+        int i3;
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof X509Name) && !(obj instanceof ASN1Sequence)) {
+            return false;
+        }
+        if (toASN1Primitive().equals(((ASN1Encodable) obj).toASN1Primitive())) {
+            return true;
+        }
+        try {
+            X509Name x509Name = getInstance(obj);
+            int size = this.ordering.size();
+            if (size != x509Name.ordering.size()) {
+                return false;
+            }
+            boolean[] zArr = new boolean[size];
+            if (this.ordering.elementAt(0).equals(x509Name.ordering.elementAt(0))) {
+                i3 = 1;
+                i2 = size;
+                i = 0;
+            } else {
+                i = size - 1;
+                i2 = -1;
+                i3 = -1;
+            }
+            while (i != i2) {
+                ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) this.ordering.elementAt(i);
+                String str = (String) this.values.elementAt(i);
+                int i4 = 0;
+                while (i4 < size) {
+                    if (!zArr[i4] && aSN1ObjectIdentifier.equals((ASN1Primitive) x509Name.ordering.elementAt(i4)) && equivalentStrings(str, (String) x509Name.values.elementAt(i4))) {
+                        break;
+                    }
+                    i4++;
+                }
+                return false;
+            }
+            return true;
+        } catch (IllegalArgumentException unused) {
+            return false;
+        }
     }
 
     private boolean equivalentStrings(String str, String str2) {
-        String canonicalize = canonicalize(str);
-        String canonicalize2 = canonicalize(str2);
-        return canonicalize.equals(canonicalize2) || stripInternalSpaces(canonicalize).equals(stripInternalSpaces(canonicalize2));
+        String strCanonicalize = canonicalize(str);
+        String strCanonicalize2 = canonicalize(str2);
+        return strCanonicalize.equals(strCanonicalize2) || stripInternalSpaces(strCanonicalize).equals(stripInternalSpaces(strCanonicalize2));
     }
 
     private String canonicalize(String str) {
         String lowerCase = Strings.toLowerCase(str.trim());
         if (lowerCase.length() > 0 && lowerCase.charAt(0) == '#') {
-            ASN1Encodable decodeObject = decodeObject(lowerCase);
-            if (decodeObject instanceof ASN1String) {
-                return Strings.toLowerCase(((ASN1String) decodeObject).getString().trim());
+            ASN1Encodable aSN1EncodableDecodeObject = decodeObject(lowerCase);
+            if (aSN1EncodableDecodeObject instanceof ASN1String) {
+                return Strings.toLowerCase(((ASN1String) aSN1EncodableDecodeObject).getString().trim());
             }
         }
         return lowerCase;
@@ -724,16 +684,16 @@ public class X509Name extends ASN1Object {
     private String stripInternalSpaces(String str) {
         StringBuffer stringBuffer = new StringBuffer();
         if (str.length() != 0) {
-            char charAt = str.charAt(0);
-            stringBuffer.append(charAt);
+            char cCharAt = str.charAt(0);
+            stringBuffer.append(cCharAt);
             int i = 1;
             while (i < str.length()) {
-                char charAt2 = str.charAt(i);
-                if (charAt != ' ' || charAt2 != ' ') {
-                    stringBuffer.append(charAt2);
+                char cCharAt2 = str.charAt(i);
+                if (cCharAt != ' ' || cCharAt2 != ' ') {
+                    stringBuffer.append(cCharAt2);
                 }
                 i++;
-                charAt = charAt2;
+                cCharAt = cCharAt2;
             }
         }
         return stringBuffer.toString();
@@ -767,9 +727,9 @@ public class X509Name extends ASN1Object {
             }
         }
         while (length <= length2) {
-            char charAt = stringBuffer.charAt(length);
-            if (charAt != '\"' && charAt != '\\' && charAt != '+' && charAt != ',') {
-                switch (charAt) {
+            char cCharAt = stringBuffer.charAt(length);
+            if (cCharAt != '\"' && cCharAt != '\\' && cCharAt != '+' && cCharAt != ',') {
+                switch (cCharAt) {
                     case ';':
                     case '<':
                     case '=':
@@ -777,7 +737,6 @@ public class X509Name extends ASN1Object {
                         break;
                     default:
                         length++;
-                        break;
                 }
             }
             stringBuffer.insert(length, "\\");

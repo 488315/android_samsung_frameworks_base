@@ -95,17 +95,17 @@ public abstract class SearchIndexablesProvider extends ContentProvider {
 
     @Override // android.content.ContentProvider, android.content.ContentInterface
     public String getType(Uri uri) {
-        int match = this.mMatcher.match(uri);
-        if (match == 1) {
+        int iMatch = this.mMatcher.match(uri);
+        if (iMatch == 1) {
             return SearchIndexablesContract.XmlResource.MIME_TYPE;
         }
-        if (match == 2) {
+        if (iMatch == 2) {
             return SearchIndexablesContract.RawData.MIME_TYPE;
         }
-        if (match == 3) {
+        if (iMatch == 3) {
             return SearchIndexablesContract.NonIndexableKey.MIME_TYPE;
         }
-        if (match == 6) {
+        if (iMatch == 6) {
             return SearchIndexablesContract.RawData.MIME_TYPE;
         }
         throw new IllegalArgumentException("Unknown URI " + uri);

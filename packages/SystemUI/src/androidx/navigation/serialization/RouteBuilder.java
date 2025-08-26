@@ -2,7 +2,6 @@ package androidx.navigation.serialization;
 
 import kotlinx.serialization.KSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RouteBuilder {
     public final String path;
@@ -10,13 +9,11 @@ public final class RouteBuilder {
     public String queryArgs = "";
     public final KSerializer serializer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ParamType {
         PATH,
         QUERY
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

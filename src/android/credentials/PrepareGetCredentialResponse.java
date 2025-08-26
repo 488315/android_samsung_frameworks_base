@@ -40,7 +40,7 @@ public final class PrepareGetCredentialResponse {
                 executor.execute(new Runnable() { // from class: android.credentials.PrepareGetCredentialResponse$PendingGetCredentialHandle$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new GetCredentialException(GetCredentialException.TYPE_NO_CREDENTIAL));
+                        outcomeReceiver.onError(new GetCredentialException(GetCredentialException.TYPE_NO_CREDENTIAL));
                     }
                 });
                 return;
@@ -53,7 +53,7 @@ public final class PrepareGetCredentialResponse {
                 executor.execute(new Runnable() { // from class: android.credentials.PrepareGetCredentialResponse$PendingGetCredentialHandle$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new GetCredentialException(GetCredentialException.TYPE_UNKNOWN));
+                        outcomeReceiver.onError(new GetCredentialException(GetCredentialException.TYPE_UNKNOWN));
                     }
                 });
             }
@@ -82,7 +82,7 @@ public final class PrepareGetCredentialResponse {
                     executor.execute(new Runnable() { // from class: android.credentials.PrepareGetCredentialResponse$PendingGetCredentialHandle$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onError(new GetCredentialException(GetCredentialException.TYPE_UNKNOWN));
+                            outcomeReceiver.onError(new GetCredentialException(GetCredentialException.TYPE_UNKNOWN));
                         }
                     });
                 }
@@ -95,7 +95,7 @@ public final class PrepareGetCredentialResponse {
                 executor.execute(new Runnable() { // from class: android.credentials.PrepareGetCredentialResponse$PendingGetCredentialHandle$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult(getCredentialResponse);
+                        outcomeReceiver.onResult(getCredentialResponse);
                     }
                 });
             }
@@ -107,7 +107,7 @@ public final class PrepareGetCredentialResponse {
                 executor.execute(new Runnable() { // from class: android.credentials.PrepareGetCredentialResponse$PendingGetCredentialHandle$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new GetCredentialException(str, str2));
+                        outcomeReceiver.onError(new GetCredentialException(str, str2));
                     }
                 });
             }

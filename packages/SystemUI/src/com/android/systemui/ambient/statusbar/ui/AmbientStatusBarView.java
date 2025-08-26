@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AmbientStatusBarView extends ConstraintLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,9 +37,9 @@ public class AmbientStatusBarView extends ConstraintLayout {
     }
 
     public final View fetchStatusIconForResId(int i) {
-        View findViewById = findViewById(i);
-        Objects.requireNonNull(findViewById);
-        return findViewById;
+        View viewFindViewById = findViewById(i);
+        Objects.requireNonNull(viewFindViewById);
+        return viewFindViewById;
     }
 
     @Override // android.view.View
@@ -51,21 +50,21 @@ public class AmbientStatusBarView extends ConstraintLayout {
         this.mDrawableSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.dream_overlay_status_bar_icon_size);
         this.mDrawableInsetSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.dream_overlay_icon_inset_dimen);
         Map map = this.mStatusIcons;
-        View fetchStatusIconForResId = fetchStatusIconForResId(R.id.dream_overlay_wifi_status);
-        addDoubleShadow(fetchStatusIconForResId);
-        ((HashMap) map).put(1, fetchStatusIconForResId);
+        View viewFetchStatusIconForResId = fetchStatusIconForResId(R.id.dream_overlay_wifi_status);
+        addDoubleShadow(viewFetchStatusIconForResId);
+        ((HashMap) map).put(1, viewFetchStatusIconForResId);
         Map map2 = this.mStatusIcons;
-        View fetchStatusIconForResId2 = fetchStatusIconForResId(R.id.dream_overlay_alarm_set);
-        addDoubleShadow(fetchStatusIconForResId2);
-        ((HashMap) map2).put(2, fetchStatusIconForResId2);
+        View viewFetchStatusIconForResId2 = fetchStatusIconForResId(R.id.dream_overlay_alarm_set);
+        addDoubleShadow(viewFetchStatusIconForResId2);
+        ((HashMap) map2).put(2, viewFetchStatusIconForResId2);
         ((HashMap) this.mStatusIcons).put(3, fetchStatusIconForResId(R.id.dream_overlay_camera_off));
         ((HashMap) this.mStatusIcons).put(4, fetchStatusIconForResId(R.id.dream_overlay_mic_off));
         ((HashMap) this.mStatusIcons).put(5, fetchStatusIconForResId(R.id.dream_overlay_camera_mic_off));
         ((HashMap) this.mStatusIcons).put(0, fetchStatusIconForResId(R.id.dream_overlay_notification_indicator));
         Map map3 = this.mStatusIcons;
-        View fetchStatusIconForResId3 = fetchStatusIconForResId(R.id.dream_overlay_priority_mode);
-        addDoubleShadow(fetchStatusIconForResId3);
-        ((HashMap) map3).put(6, fetchStatusIconForResId3);
+        View viewFetchStatusIconForResId3 = fetchStatusIconForResId(R.id.dream_overlay_priority_mode);
+        addDoubleShadow(viewFetchStatusIconForResId3);
+        ((HashMap) map3).put(6, viewFetchStatusIconForResId3);
         ((HashMap) this.mStatusIcons).put(7, fetchStatusIconForResId(R.id.dream_overlay_assistant_attention_indicator));
         ((HashMap) this.mStatusIcons).put(8, fetchStatusIconForResId(R.id.dream_overlay_location_active));
         this.mSystemStatusViewGroup = (ViewGroup) findViewById(R.id.dream_overlay_system_status);

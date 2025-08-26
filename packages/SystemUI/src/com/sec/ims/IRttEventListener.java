@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IRttEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.IRttEventListener";
@@ -19,14 +18,12 @@ public interface IRttEventListener extends IInterface {
 
     void onSendRttSessionModifyResponse(int i, boolean z, boolean z2) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRttEventListener {
         static final int TRANSACTION_onRttEvent = 1;
         static final int TRANSACTION_onRttEventBySession = 2;
         static final int TRANSACTION_onSendRttSessionModifyRequest = 3;
         static final int TRANSACTION_onSendRttSessionModifyResponse = 4;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IRttEventListener {
             private IBinder mRemote;
 
@@ -45,65 +42,65 @@ public interface IRttEventListener extends IInterface {
 
             @Override // com.sec.ims.IRttEventListener
             public void onRttEvent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IRttEventListener
             public void onRttEventBySession(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IRttEventListener
             public void onSendRttSessionModifyRequest(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IRttEventListener
             public void onSendRttSessionModifyResponse(int i, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRttEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -116,8 +113,8 @@ public interface IRttEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRttEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IRttEventListener)) ? new Proxy(iBinder) : (IRttEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRttEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IRttEventListener)) ? new Proxy(iBinder) : (IRttEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -130,31 +127,31 @@ public interface IRttEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onRttEvent(readString);
+                onRttEvent(string);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onRttEventBySession(readInt, readString2);
+                onRttEventBySession(i3, string2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onSendRttSessionModifyRequest(readInt2, readBoolean);
+                onSendRttSessionModifyRequest(i4, z);
                 parcel2.writeNoException();
             } else {
                 if (i != 4) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                int readInt3 = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
-                boolean readBoolean3 = parcel.readBoolean();
+                int i5 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onSendRttSessionModifyResponse(readInt3, readBoolean2, readBoolean3);
+                onSendRttSessionModifyResponse(i5, z2, z3);
                 parcel2.writeNoException();
             }
             return true;
@@ -166,7 +163,6 @@ public interface IRttEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IRttEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

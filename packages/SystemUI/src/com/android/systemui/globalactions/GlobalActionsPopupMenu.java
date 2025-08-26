@@ -8,7 +8,6 @@ import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsPopupMenu extends ListPopupWindow {
     public ListAdapter mAdapter;
@@ -62,21 +61,21 @@ public class GlobalActionsPopupMenu extends ListPopupWindow {
             int i = Resources.getSystem().getDisplayMetrics().widthPixels;
             float f = i / Resources.getSystem().getDisplayMetrics().density;
             double d = i;
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (0.9d * d), Integer.MIN_VALUE);
-            int i2 = 0;
-            for (int i3 = 0; i3 < this.mAdapter.getCount(); i3++) {
-                View view = this.mAdapter.getView(i3, null, listView);
-                view.measure(makeMeasureSpec, 0);
-                i2 = Math.max(view.getMeasuredWidth(), i2);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (0.9d * d), Integer.MIN_VALUE);
+            int iMax = 0;
+            for (int i2 = 0; i2 < this.mAdapter.getCount(); i2++) {
+                View view = this.mAdapter.getView(i2, null, listView);
+                view.measure(iMakeMeasureSpec, 0);
+                iMax = Math.max(view.getMeasuredWidth(), iMax);
             }
             if (f < this.mMaximumWidthThresholdDp) {
-                i2 = Math.max(i2, (int) (d * 0.5d));
+                iMax = Math.max(iMax, (int) (d * 0.5d));
             }
-            int i4 = this.mMenuVerticalPadding;
-            listView.setPadding(0, i4, 0, i4);
-            setWidth(i2);
+            int i3 = this.mMenuVerticalPadding;
+            listView.setPadding(0, i3, 0, i3);
+            setWidth(iMax);
             if (getAnchorView().getLayoutDirection() == 0) {
-                setHorizontalOffset((getAnchorView().getWidth() - this.mGlobalActionsSidePadding) - i2);
+                setHorizontalOffset((getAnchorView().getWidth() - this.mGlobalActionsSidePadding) - iMax);
             } else {
                 setHorizontalOffset(this.mGlobalActionsSidePadding);
             }

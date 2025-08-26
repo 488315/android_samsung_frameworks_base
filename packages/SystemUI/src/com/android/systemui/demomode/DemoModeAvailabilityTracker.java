@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import com.android.systemui.util.settings.GlobalSettings;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class DemoModeAvailabilityTracker {
     public final DemoModeAvailabilityTracker$allowedObserver$1 allowedObserver;
@@ -28,8 +27,8 @@ public abstract class DemoModeAvailabilityTracker {
         this.allowedObserver = new ContentObserver(handler) { // from class: com.android.systemui.demomode.DemoModeAvailabilityTracker$allowedObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                boolean z2 = DemoModeAvailabilityTracker.this.globalSettings.getInt("sysui_demo_allowed", 0) != 0;
-                DemoModeAvailabilityTracker demoModeAvailabilityTracker = DemoModeAvailabilityTracker.this;
+                boolean z2 = this.this$0.globalSettings.getInt("sysui_demo_allowed", 0) != 0;
+                DemoModeAvailabilityTracker demoModeAvailabilityTracker = this.this$0;
                 if (demoModeAvailabilityTracker.isDemoModeAvailable == z2) {
                     return;
                 }
@@ -41,8 +40,8 @@ public abstract class DemoModeAvailabilityTracker {
         this.onObserver = new ContentObserver(handler2) { // from class: com.android.systemui.demomode.DemoModeAvailabilityTracker$onObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                boolean z2 = DemoModeAvailabilityTracker.this.globalSettings.getInt("sysui_tuner_demo_on", 0) != 0;
-                DemoModeAvailabilityTracker demoModeAvailabilityTracker = DemoModeAvailabilityTracker.this;
+                boolean z2 = this.this$0.globalSettings.getInt("sysui_tuner_demo_on", 0) != 0;
+                DemoModeAvailabilityTracker demoModeAvailabilityTracker = this.this$0;
                 if (demoModeAvailabilityTracker.isInDemoMode == z2) {
                     return;
                 }

@@ -61,9 +61,9 @@ public interface IIntrusionDetectionEventTransport extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionEventTransport.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIntrusionDetectionEventTransport)) {
-                return (IIntrusionDetectionEventTransport) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionEventTransport.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIntrusionDetectionEventTransport)) {
+                return (IIntrusionDetectionEventTransport) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,10 +100,10 @@ public interface IIntrusionDetectionEventTransport extends IInterface {
                 parcel.enforceNoDataAvail();
                 initialize(androidFuture);
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(IntrusionDetectionEvent.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(IntrusionDetectionEvent.CREATOR);
                 AndroidFuture<Boolean> androidFuture2 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                 parcel.enforceNoDataAvail();
-                addData(createTypedArrayList, androidFuture2);
+                addData(arrayListCreateTypedArrayList, androidFuture2);
             } else if (i == 3) {
                 AndroidFuture<Boolean> androidFuture3 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -132,38 +132,38 @@ public interface IIntrusionDetectionEventTransport extends IInterface {
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionEventTransport
             public void initialize(AndroidFuture<Boolean> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionEventTransport
             public void addData(List<IntrusionDetectionEvent> list, AndroidFuture<Boolean> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionEventTransport
             public void release(AndroidFuture<Boolean> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionEventTransport.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

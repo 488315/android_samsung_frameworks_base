@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.content.IntentFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public final class InstantAppIntentFilter implements Parcelable {
         arrayList.addAll(list);
     }
 
-    InstantAppIntentFilter(Parcel parcel) {
+    InstantAppIntentFilter(Parcel parcel) throws ClassNotFoundException, IOException {
         ArrayList arrayList = new ArrayList();
         this.mFilters = arrayList;
         this.mSplitName = parcel.readString();

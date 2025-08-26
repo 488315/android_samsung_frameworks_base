@@ -59,8 +59,10 @@ public class RemoteCallbackList<E extends IInterface> {
                         this.mCallbackQueue.poll().accept(this.mInterface);
                     }
                 }
+                this.mCurrentState = i;
+            } else {
+                this.mCurrentState = i;
             }
-            this.mCurrentState = i;
         }
 
         void addCallback(Consumer<E> consumer) {
@@ -150,19 +152,19 @@ public class RemoteCallbackList<E extends IInterface> {
         }
 
         public RemoteCallbackList<E> build() {
-            Executor executor = this.mExecutor;
-            if (executor == null && this.mFrozenCalleePolicy != 0) {
-                executor = new HandlerExecutor(Handler.getMain());
+            Executor handlerExecutor = this.mExecutor;
+            if (handlerExecutor == null && this.mFrozenCalleePolicy != 0) {
+                handlerExecutor = new HandlerExecutor(Handler.getMain());
             }
             if (this.mInterfaceDiedCallback != null) {
-                return (RemoteCallbackList<E>) new RemoteCallbackList<E>(this.mFrozenCalleePolicy, this.mMaxQueueSize, executor) { // from class: android.os.RemoteCallbackList.Builder.1
+                return (RemoteCallbackList<E>) new RemoteCallbackList<E>(this.mFrozenCalleePolicy, this.mMaxQueueSize, handlerExecutor) { // from class: android.os.RemoteCallbackList.Builder.1
                     @Override // android.os.RemoteCallbackList
                     public void onCallbackDied(E e, Object obj) {
                         Builder.this.mInterfaceDiedCallback.onInterfaceDied(this, e, obj);
                     }
                 };
             }
-            return new RemoteCallbackList<>(this.mFrozenCalleePolicy, this.mMaxQueueSize, executor);
+            return new RemoteCallbackList<>(this.mFrozenCalleePolicy, this.mMaxQueueSize, handlerExecutor);
         }
     }
 
@@ -201,13 +203,13 @@ public class RemoteCallbackList<E extends IInterface> {
                 return false;
             }
             logExcessiveInterfaces();
-            IBinder asBinder = e.asBinder();
+            IBinder iBinderAsBinder = e.asBinder();
             try {
                 RemoteCallbackList<E>.Interface r3 = new Interface(e, obj);
                 unregister(e);
-                asBinder.linkToDeath(r3, 0);
+                iBinderAsBinder.linkToDeath(r3, 0);
                 r3.maybeSubscribeToFrozenCallback();
-                this.mInterfaces.put(asBinder, r3);
+                this.mInterfaces.put(iBinderAsBinder, r3);
                 return true;
             } catch (RemoteException unused) {
                 return false;
@@ -215,26 +217,24 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r1v0, types: [E extends android.os.IInterface, android.os.IInterface] */
     public boolean unregister(E e) {
         synchronized (this.mInterfaces) {
-            RemoteCallbackList<E>.Interface remove = this.mInterfaces.remove(e.asBinder());
-            if (remove == null) {
+            RemoteCallbackList<E>.Interface interfaceRemove = this.mInterfaces.remove(e.asBinder());
+            if (interfaceRemove == null) {
                 return false;
             }
-            remove.mInterface.asBinder().unlinkToDeath(remove, 0);
-            remove.maybeUnsubscribeFromFrozenCallback();
+            interfaceRemove.mInterface.asBinder().unlinkToDeath(interfaceRemove, 0);
+            interfaceRemove.maybeUnsubscribeFromFrozenCallback();
             return true;
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v0, types: [E extends android.os.IInterface, android.os.IInterface] */
     public void kill() {
         synchronized (this.mInterfaces) {
             for (int size = this.mInterfaces.size() - 1; size >= 0; size--) {
-                RemoteCallbackList<E>.Interface valueAt = this.mInterfaces.valueAt(size);
-                valueAt.mInterface.asBinder().unlinkToDeath(valueAt, 0);
-                valueAt.maybeUnsubscribeFromFrozenCallback();
+                RemoteCallbackList<E>.Interface interfaceValueAt = this.mInterfaces.valueAt(size);
+                interfaceValueAt.mInterface.asBinder().unlinkToDeath(interfaceValueAt, 0);
+                interfaceValueAt.maybeUnsubscribeFromFrozenCallback();
             }
             this.mInterfaces.clear();
             this.mKilled = true;
@@ -299,8 +299,8 @@ public class RemoteCallbackList<E extends IInterface> {
     }
 
     public void broadcast(Consumer<E> consumer) {
-        int beginBroadcastInternal = beginBroadcastInternal();
-        for (int i = 0; i < beginBroadcastInternal; i++) {
+        int iBeginBroadcastInternal = beginBroadcastInternal();
+        for (int i = 0; i < iBeginBroadcastInternal; i++) {
             try {
                 ((Interface) this.mActiveBroadcast[i]).addCallback(consumer);
             } finally {
@@ -311,8 +311,8 @@ public class RemoteCallbackList<E extends IInterface> {
 
     /* JADX WARN: Multi-variable type inference failed */
     public <C> void broadcastForEachCookie(Consumer<C> consumer) {
-        int beginBroadcast = beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
                 consumer.accept(getBroadcastCookie(i));
             } finally {
@@ -323,8 +323,8 @@ public class RemoteCallbackList<E extends IInterface> {
 
     /* JADX WARN: Multi-variable type inference failed */
     public <C> void broadcast(BiConsumer<E, C> biConsumer) {
-        int beginBroadcast = beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
                 biConsumer.accept(getBroadcastItem(i), getBroadcastCookie(i));
             } finally {
@@ -347,7 +347,7 @@ public class RemoteCallbackList<E extends IInterface> {
             if (this.mKilled) {
                 return null;
             }
-            return (E) this.mInterfaces.valueAt(i).mInterface;
+            return this.mInterfaces.valueAt(i).mInterface;
         }
     }
 

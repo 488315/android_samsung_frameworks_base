@@ -36,25 +36,25 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
     }
 
     public PathInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.PathInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.PathInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.PathInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.PathInterpolator);
         }
-        parseInterpolatorFromTypeArray(obtainAttributes);
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        parseInterpolatorFromTypeArray(typedArrayObtainAttributes);
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     private void parseInterpolatorFromTypeArray(TypedArray typedArray) {
         if (typedArray.hasValue(4)) {
             String string = typedArray.getString(4);
-            Path createPathFromPathData = PathParser.createPathFromPathData(string);
-            if (createPathFromPathData == null) {
+            Path pathCreatePathFromPathData = PathParser.createPathFromPathData(string);
+            if (pathCreatePathFromPathData == null) {
                 throw new InflateException("The path is null, which is created from " + string);
             }
-            initPath(createPathFromPathData);
+            initPath(pathCreatePathFromPathData);
             return;
         }
         if (!typedArray.hasValue(0)) {
@@ -65,11 +65,11 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
         }
         float f = typedArray.getFloat(0, 0.0f);
         float f2 = typedArray.getFloat(1, 0.0f);
-        boolean hasValue = typedArray.hasValue(2);
-        if (hasValue != typedArray.hasValue(3)) {
+        boolean zHasValue = typedArray.hasValue(2);
+        if (zHasValue != typedArray.hasValue(3)) {
             throw new InflateException("pathInterpolator requires both controlX2 and controlY2 for cubic Beziers.");
         }
-        if (!hasValue) {
+        if (!zHasValue) {
             initQuad(f, f2);
         } else {
             initCubic(f, f2, typedArray.getFloat(2, 0.0f), typedArray.getFloat(3, 0.0f));
@@ -91,10 +91,10 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
     }
 
     private void initPath(Path path) {
-        float[] approximate = path.approximate(0.002f);
-        int length = approximate.length / 3;
+        float[] fArrApproximate = path.approximate(0.002f);
+        int length = fArrApproximate.length / 3;
         float f = 0.0f;
-        if (approximate[1] != 0.0f || approximate[2] != 0.0f || approximate[approximate.length - 2] != 1.0f || approximate[approximate.length - 1] != 1.0f) {
+        if (fArrApproximate[1] != 0.0f || fArrApproximate[2] != 0.0f || fArrApproximate[fArrApproximate.length - 2] != 1.0f || fArrApproximate[fArrApproximate.length - 1] != 1.0f) {
             throw new IllegalArgumentException("The Path must start at (0,0) and end at (1,1)");
         }
         this.mX = new float[length];
@@ -103,11 +103,11 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
         int i2 = 0;
         float f2 = 0.0f;
         while (i < length) {
-            float f3 = approximate[i2];
+            float f3 = fArrApproximate[i2];
             int i3 = i2 + 2;
-            float f4 = approximate[i2 + 1];
+            float f4 = fArrApproximate[i2 + 1];
             i2 += 3;
-            float f5 = approximate[i3];
+            float f5 = fArrApproximate[i3];
             if (f3 == f && f4 != f2) {
                 throw new IllegalArgumentException("The Path cannot have discontinuity in the X axis.");
             }

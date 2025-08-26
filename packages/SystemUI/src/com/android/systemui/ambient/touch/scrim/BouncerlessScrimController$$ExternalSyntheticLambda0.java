@@ -4,7 +4,6 @@ import com.android.systemui.dreams.DreamOverlayContainerViewController;
 import com.android.systemui.shade.ShadeExpansionChangeEvent;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class BouncerlessScrimController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -34,10 +33,10 @@ public final /* synthetic */ class BouncerlessScrimController$$ExternalSynthetic
                 bouncerlessScrimController3.mCallbacks.forEach(new Consumer() { // from class: com.android.systemui.ambient.touch.scrim.BouncerlessScrimController$$ExternalSyntheticLambda4
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ShadeExpansionChangeEvent shadeExpansionChangeEvent2 = ShadeExpansionChangeEvent.this;
+                        ShadeExpansionChangeEvent shadeExpansionChangeEvent2 = shadeExpansionChangeEvent;
                         DreamOverlayContainerViewController.AnonymousClass1 anonymousClass1 = (DreamOverlayContainerViewController.AnonymousClass1) obj;
                         anonymousClass1.getClass();
-                        DreamOverlayContainerViewController.m2552$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, shadeExpansionChangeEvent2.fraction);
+                        DreamOverlayContainerViewController.m2569$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, shadeExpansionChangeEvent2.fraction);
                     }
                 });
                 break;

@@ -59,7 +59,7 @@ public final class IntentFilterVerificationInfo implements Parcelable {
         this.mStatus = 0;
     }
 
-    public IntentFilterVerificationInfo(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public IntentFilterVerificationInfo(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         this.mDomains = new ArraySet<>();
         readFromXml(typedXmlPullParser);
     }

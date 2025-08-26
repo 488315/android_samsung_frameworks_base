@@ -11,6 +11,7 @@ import com.samsung.android.allshare.extension.impl.SimpleFolderItem;
 import com.samsung.android.allshare.extension.impl.SimpleImageItem;
 import com.samsung.android.allshare.extension.impl.SimpleVideoItem;
 import com.sec.android.allshare.iface.message.AllShareKey;
+import java.util.StringTokenizer;
 
 /* loaded from: classes6.dex */
 public class ItemExtractor {
@@ -43,13 +44,13 @@ public class ItemExtractor {
 
         public String getSeedString() {
             Uri uri = this.mSubtitle;
-            String str = PerfettoProtoLogImpl.NULL_STRING;
-            String uri2 = (uri == null || uri.toString() == null || this.mSubtitle.toString().length() <= 0) ? PerfettoProtoLogImpl.NULL_STRING : this.mSubtitle.toString();
-            Uri uri3 = this.mItemUri;
-            if (uri3 != null && uri3.toString() != null && this.mItemUri.toString().length() > 0) {
-                str = this.mItemUri.toString();
+            String string = PerfettoProtoLogImpl.NULL_STRING;
+            String string2 = (uri == null || uri.toString() == null || this.mSubtitle.toString().length() <= 0) ? PerfettoProtoLogImpl.NULL_STRING : this.mSubtitle.toString();
+            Uri uri2 = this.mItemUri;
+            if (uri2 != null && uri2.toString() != null && this.mItemUri.toString().length() > 0) {
+                string = this.mItemUri.toString();
             }
-            return this.mItemType + DELIMITER + this.mProviderId + DELIMITER + this.mObjectId + DELIMITER + this.mTitle + DELIMITER + uri2 + DELIMITER + this.mDuration + DELIMITER + str + DELIMITER + this.mMimeType + DELIMITER + this.mFileSize;
+            return this.mItemType + DELIMITER + this.mProviderId + DELIMITER + this.mObjectId + DELIMITER + this.mTitle + DELIMITER + string2 + DELIMITER + this.mDuration + DELIMITER + string + DELIMITER + this.mMimeType + DELIMITER + this.mFileSize;
         }
 
         public String getObjectID() {
@@ -88,218 +89,195 @@ public class ItemExtractor {
             return this.mFileSize;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0074  */
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0075 A[Catch: Exception -> 0x007a, TRY_LEAVE, TryCatch #1 {Exception -> 0x007a, blocks: (B:17:0x006e, B:27:0x0075), top: B:16:0x006e }] */
-        @java.lang.Deprecated
+        /* JADX WARN: Removed duplicated region for block: B:20:0x0074  */
+        /* JADX WARN: Removed duplicated region for block: B:21:0x0075 A[Catch: Exception -> 0x007a, TRY_LEAVE, TryCatch #1 {Exception -> 0x007a, blocks: (B:18:0x006e, B:21:0x0075), top: B:32:0x006e }] */
+        @Deprecated
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static com.samsung.android.allshare.extension.ItemExtractor.Seed parseSeedString(java.lang.String r12) {
-            /*
-                java.lang.String r0 = "null"
-                java.lang.StringBuilder r1 = new java.lang.StringBuilder
-                java.lang.String r2 = "parseSeedString : "
-                r1.<init>(r2)
-                r1.append(r12)
-                java.lang.String r1 = r1.toString()
-                java.lang.String r2 = "ItemExtractor"
-                com.samsung.android.allshare.DLog.v_api(r2, r1)
-                java.util.StringTokenizer r1 = new java.util.StringTokenizer
-                java.lang.String r3 = ",@,#,"
-                r1.<init>(r12, r3)
-                int r12 = r1.countTokens()
-                r3 = 9
-                r4 = 0
-                if (r12 == r3) goto L39
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "count : "
-                r0.<init>(r1)
-                r0.append(r12)
-                java.lang.String r12 = r0.toString()
-                com.samsung.android.allshare.DLog.w_api(r2, r12)
-                return r4
-            L39:
-                java.lang.String r12 = r1.nextToken()
-                java.lang.String r2 = r1.nextToken()
-                java.lang.String r3 = r1.nextToken()
-                java.lang.String r5 = r1.nextToken()
-                java.lang.String r6 = r1.nextToken()
-                boolean r7 = r6.equals(r0)     // Catch: java.lang.Exception -> L59
-                if (r7 == 0) goto L54
-                goto L59
-            L54:
-                android.net.Uri r6 = android.net.Uri.parse(r6)     // Catch: java.lang.Exception -> L59
-                goto L5a
-            L59:
-                r6 = r4
-            L5a:
-                java.lang.String r7 = r1.nextToken()
-                r8 = -1
-                java.lang.Long r7 = java.lang.Long.valueOf(r7)     // Catch: java.lang.Exception -> L69
-                long r10 = r7.longValue()     // Catch: java.lang.Exception -> L69
-                goto L6a
-            L69:
-                r10 = r8
-            L6a:
-                java.lang.String r7 = r1.nextToken()
-                boolean r0 = r7.equals(r0)     // Catch: java.lang.Exception -> L7a
-                if (r0 == 0) goto L75
-                goto L7a
-            L75:
-                android.net.Uri r0 = android.net.Uri.parse(r7)     // Catch: java.lang.Exception -> L7a
-                r4 = r0
-            L7a:
-                java.lang.String r0 = r1.nextToken()
-                java.lang.String r1 = r1.nextToken()
-                java.lang.Long r1 = java.lang.Long.valueOf(r1)     // Catch: java.lang.Exception -> L8a
-                long r8 = r1.longValue()     // Catch: java.lang.Exception -> L8a
-            L8a:
-                com.samsung.android.allshare.extension.ItemExtractor$Seed r1 = new com.samsung.android.allshare.extension.ItemExtractor$Seed
-                r1.<init>()
-                r1.mItemType = r12
-                r1.mProviderId = r2
-                r1.mObjectId = r3
-                r1.mTitle = r5
-                r1.mSubtitle = r6
-                r1.mDuration = r10
-                r1.mItemUri = r4
-                r1.mMimeType = r0
-                r1.mFileSize = r8
-                return r1
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.allshare.extension.ItemExtractor.Seed.parseSeedString(java.lang.String):com.samsung.android.allshare.extension.ItemExtractor$Seed");
+        public static Seed parseSeedString(String str) {
+            Uri uri;
+            long jLongValue;
+            String strNextToken;
+            DLog.v_api(ItemExtractor.CLASS_TAG, "parseSeedString : " + str);
+            StringTokenizer stringTokenizer = new StringTokenizer(str, DELIMITER);
+            int iCountTokens = stringTokenizer.countTokens();
+            Uri uri2 = null;
+            if (iCountTokens != 9) {
+                DLog.w_api(ItemExtractor.CLASS_TAG, "count : " + iCountTokens);
+                return null;
+            }
+            String strNextToken2 = stringTokenizer.nextToken();
+            String strNextToken3 = stringTokenizer.nextToken();
+            String strNextToken4 = stringTokenizer.nextToken();
+            String strNextToken5 = stringTokenizer.nextToken();
+            String strNextToken6 = stringTokenizer.nextToken();
+            if (!strNextToken6.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                uri = Uri.parse(strNextToken6);
+                long jLongValue2 = -1;
+                jLongValue = Long.valueOf(stringTokenizer.nextToken()).longValue();
+                strNextToken = stringTokenizer.nextToken();
+                if (strNextToken.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                }
+                String strNextToken7 = stringTokenizer.nextToken();
+                jLongValue2 = Long.valueOf(stringTokenizer.nextToken()).longValue();
+                Seed seed = new Seed();
+                seed.mItemType = strNextToken2;
+                seed.mProviderId = strNextToken3;
+                seed.mObjectId = strNextToken4;
+                seed.mTitle = strNextToken5;
+                seed.mSubtitle = uri;
+                seed.mDuration = jLongValue;
+                seed.mItemUri = uri2;
+                seed.mMimeType = strNextToken7;
+                seed.mFileSize = jLongValue2;
+                return seed;
+            }
+            uri = null;
+            long jLongValue22 = -1;
+            try {
+                jLongValue = Long.valueOf(stringTokenizer.nextToken()).longValue();
+            } catch (Exception unused) {
+                jLongValue = -1;
+            }
+            strNextToken = stringTokenizer.nextToken();
+            try {
+                if (strNextToken.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                    uri2 = Uri.parse(strNextToken);
+                }
+            } catch (Exception unused2) {
+            }
+            String strNextToken72 = stringTokenizer.nextToken();
+            try {
+                jLongValue22 = Long.valueOf(stringTokenizer.nextToken()).longValue();
+            } catch (Exception unused3) {
+            }
+            Seed seed2 = new Seed();
+            seed2.mItemType = strNextToken2;
+            seed2.mProviderId = strNextToken3;
+            seed2.mObjectId = strNextToken4;
+            seed2.mTitle = strNextToken5;
+            seed2.mSubtitle = uri;
+            seed2.mDuration = jLongValue;
+            seed2.mItemUri = uri2;
+            seed2.mMimeType = strNextToken72;
+            seed2.mFileSize = jLongValue22;
+            return seed2;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0073 A[Catch: Exception -> 0x0078, TRY_LEAVE, TryCatch #1 {Exception -> 0x0078, blocks: (B:21:0x006c, B:31:0x0073), top: B:20:0x006c }] */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0072  */
+        /* JADX WARN: Removed duplicated region for block: B:25:0x0073 A[Catch: Exception -> 0x0078, TRY_LEAVE, TryCatch #1 {Exception -> 0x0078, blocks: (B:22:0x006c, B:25:0x0073), top: B:36:0x006c }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static com.samsung.android.allshare.extension.ItemExtractor.Seed parseSeedStringUsingSplit(java.lang.String r12) {
-            /*
-                java.lang.String r0 = "null"
-                java.lang.String r1 = "ItemExtractor"
-                r2 = 0
-                if (r12 != 0) goto Lf
-                java.lang.String r12 = "seedString == null"
-                com.samsung.android.allshare.DLog.w_api(r1, r12)
-                return r2
-            Lf:
-                java.lang.StringBuilder r3 = new java.lang.StringBuilder
-                java.lang.String r4 = "parseSeedStringUsingSplit : "
-                r3.<init>(r4)
-                r3.append(r12)
-                java.lang.String r3 = r3.toString()
-                com.samsung.android.allshare.DLog.v_api(r1, r3)
-                java.lang.String r3 = ",@,#,"
-                java.lang.String[] r12 = r12.split(r3)
-                int r3 = r12.length
-                r4 = 9
-                if (r3 == r4) goto L3e
-                java.lang.StringBuilder r12 = new java.lang.StringBuilder
-                java.lang.String r0 = "count : "
-                r12.<init>(r0)
-                r12.append(r3)
-                java.lang.String r12 = r12.toString()
-                com.samsung.android.allshare.DLog.w_api(r1, r12)
-                return r2
-            L3e:
-                r1 = 0
-                r1 = r12[r1]
-                r3 = 1
-                r3 = r12[r3]
-                r4 = 2
-                r4 = r12[r4]
-                r5 = 3
-                r5 = r12[r5]
-                r6 = 4
-                r6 = r12[r6]
-                boolean r7 = r6.equals(r0)     // Catch: java.lang.Exception -> L59
-                if (r7 == 0) goto L54
-                goto L59
-            L54:
-                android.net.Uri r6 = android.net.Uri.parse(r6)     // Catch: java.lang.Exception -> L59
-                goto L5a
-            L59:
-                r6 = r2
-            L5a:
-                r7 = 5
-                r7 = r12[r7]
-                r8 = -1
-                java.lang.Long r7 = java.lang.Long.valueOf(r7)     // Catch: java.lang.Exception -> L68
-                long r10 = r7.longValue()     // Catch: java.lang.Exception -> L68
-                goto L69
-            L68:
-                r10 = r8
-            L69:
-                r7 = 6
-                r7 = r12[r7]
-                boolean r0 = r7.equals(r0)     // Catch: java.lang.Exception -> L78
-                if (r0 == 0) goto L73
-                goto L78
-            L73:
-                android.net.Uri r0 = android.net.Uri.parse(r7)     // Catch: java.lang.Exception -> L78
-                r2 = r0
-            L78:
-                r0 = 7
-                r0 = r12[r0]
-                r7 = 8
-                r12 = r12[r7]
-                java.lang.Long r12 = java.lang.Long.valueOf(r12)     // Catch: java.lang.Exception -> L87
-                long r8 = r12.longValue()     // Catch: java.lang.Exception -> L87
-            L87:
-                com.samsung.android.allshare.extension.ItemExtractor$Seed r12 = new com.samsung.android.allshare.extension.ItemExtractor$Seed
-                r12.<init>()
-                r12.mItemType = r1
-                r12.mProviderId = r3
-                r12.mObjectId = r4
-                r12.mTitle = r5
-                r12.mSubtitle = r6
-                r12.mDuration = r10
-                r12.mItemUri = r2
-                r12.mMimeType = r0
-                r12.mFileSize = r8
-                return r12
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.allshare.extension.ItemExtractor.Seed.parseSeedStringUsingSplit(java.lang.String):com.samsung.android.allshare.extension.ItemExtractor$Seed");
+        public static Seed parseSeedStringUsingSplit(String str) {
+            Uri uri;
+            long jLongValue;
+            String str2;
+            Uri uri2 = null;
+            if (str == null) {
+                DLog.w_api(ItemExtractor.CLASS_TAG, "seedString == null");
+                return null;
+            }
+            DLog.v_api(ItemExtractor.CLASS_TAG, "parseSeedStringUsingSplit : " + str);
+            String[] strArrSplit = str.split(DELIMITER);
+            int length = strArrSplit.length;
+            if (length != 9) {
+                DLog.w_api(ItemExtractor.CLASS_TAG, "count : " + length);
+                return null;
+            }
+            String str3 = strArrSplit[0];
+            String str4 = strArrSplit[1];
+            String str5 = strArrSplit[2];
+            String str6 = strArrSplit[3];
+            String str7 = strArrSplit[4];
+            if (!str7.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                uri = Uri.parse(str7);
+                long jLongValue2 = -1;
+                jLongValue = Long.valueOf(strArrSplit[5]).longValue();
+                str2 = strArrSplit[6];
+                if (str2.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                }
+                String str8 = strArrSplit[7];
+                jLongValue2 = Long.valueOf(strArrSplit[8]).longValue();
+                Seed seed = new Seed();
+                seed.mItemType = str3;
+                seed.mProviderId = str4;
+                seed.mObjectId = str5;
+                seed.mTitle = str6;
+                seed.mSubtitle = uri;
+                seed.mDuration = jLongValue;
+                seed.mItemUri = uri2;
+                seed.mMimeType = str8;
+                seed.mFileSize = jLongValue2;
+                return seed;
+            }
+            uri = null;
+            long jLongValue22 = -1;
+            try {
+                jLongValue = Long.valueOf(strArrSplit[5]).longValue();
+            } catch (Exception unused) {
+                jLongValue = -1;
+            }
+            str2 = strArrSplit[6];
+            try {
+                if (str2.equals(PerfettoProtoLogImpl.NULL_STRING)) {
+                    uri2 = Uri.parse(str2);
+                }
+            } catch (Exception unused2) {
+            }
+            String str82 = strArrSplit[7];
+            try {
+                jLongValue22 = Long.valueOf(strArrSplit[8]).longValue();
+            } catch (Exception unused3) {
+            }
+            Seed seed2 = new Seed();
+            seed2.mItemType = str3;
+            seed2.mProviderId = str4;
+            seed2.mObjectId = str5;
+            seed2.mTitle = str6;
+            seed2.mSubtitle = uri;
+            seed2.mDuration = jLongValue;
+            seed2.mItemUri = uri2;
+            seed2.mMimeType = str82;
+            seed2.mFileSize = jLongValue22;
+            return seed2;
         }
     }
 
     public static Item create(String str) {
-        Seed parseSeedStringUsingSplit = Seed.parseSeedStringUsingSplit(str);
-        if (parseSeedStringUsingSplit == null) {
+        Seed seedStringUsingSplit = Seed.parseSeedStringUsingSplit(str);
+        if (seedStringUsingSplit == null) {
             DLog.w_api(CLASS_TAG, "create : return seed is null");
             return null;
         }
-        Item.MediaType stringToEnum = Item.MediaType.stringToEnum(parseSeedStringUsingSplit.getItemType());
+        Item.MediaType mediaTypeStringToEnum = Item.MediaType.stringToEnum(seedStringUsingSplit.getItemType());
         Bundle bundle = new Bundle();
-        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_TYPE, stringToEnum.enumToString());
-        bundle.putString(AllShareKey.BUNDLE_STRING_OBJECT_ID, parseSeedStringUsingSplit.getObjectID());
-        bundle.putString("BUNDLE_STRING_ID", parseSeedStringUsingSplit.getProviderID());
+        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_TYPE, mediaTypeStringToEnum.enumToString());
+        bundle.putString(AllShareKey.BUNDLE_STRING_OBJECT_ID, seedStringUsingSplit.getObjectID());
+        bundle.putString("BUNDLE_STRING_ID", seedStringUsingSplit.getProviderID());
         bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY, "MEDIA_SERVER");
-        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_TITLE, parseSeedStringUsingSplit.getTitle());
-        bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI, parseSeedStringUsingSplit.getItemUri());
-        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE, parseSeedStringUsingSplit.getMimeType());
-        bundle.putLong(AllShareKey.BUNDLE_LONG_ITEM_FILE_SIZE, parseSeedStringUsingSplit.getFileSize());
-        int i = AnonymousClass1.$SwitchMap$com$samsung$android$allshare$Item$MediaType[stringToEnum.ordinal()];
+        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_TITLE, seedStringUsingSplit.getTitle());
+        bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI, seedStringUsingSplit.getItemUri());
+        bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE, seedStringUsingSplit.getMimeType());
+        bundle.putLong(AllShareKey.BUNDLE_LONG_ITEM_FILE_SIZE, seedStringUsingSplit.getFileSize());
+        int i = AnonymousClass1.$SwitchMap$com$samsung$android$allshare$Item$MediaType[mediaTypeStringToEnum.ordinal()];
         if (i == 1) {
-            bundle.putLong(AllShareKey.BUNDLE_LONG_AUDIO_ITEM_DURATION, parseSeedStringUsingSplit.getDuration());
+            bundle.putLong(AllShareKey.BUNDLE_LONG_AUDIO_ITEM_DURATION, seedStringUsingSplit.getDuration());
             return new SimpleAudioItem(bundle);
         }
         if (i == 2) {
             return new SimpleImageItem(bundle);
         }
         if (i == 3) {
-            bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE, parseSeedStringUsingSplit.getSubtitle());
-            bundle.putLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION, parseSeedStringUsingSplit.getDuration());
+            bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE, seedStringUsingSplit.getSubtitle());
+            bundle.putLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION, seedStringUsingSplit.getDuration());
             return new SimpleVideoItem(bundle);
         }
         if (i == 4) {
             return new SimpleFolderItem(bundle);
         }
-        DLog.w_api(CLASS_TAG, "create : type is " + stringToEnum);
+        DLog.w_api(CLASS_TAG, "create : type is " + mediaTypeStringToEnum);
         return null;
     }
 
@@ -337,27 +315,27 @@ public class ItemExtractor {
             DLog.w_api(CLASS_TAG, "extract : return item is null");
             return null;
         }
-        Parcel obtain = Parcel.obtain();
-        item.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        Bundle readBundle = obtain.readBundle();
-        obtain.recycle();
-        Item.MediaType stringToEnum = Item.MediaType.stringToEnum(readBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TYPE));
-        String string = readBundle.getString(AllShareKey.BUNDLE_STRING_OBJECT_ID);
-        String string2 = readBundle.getString("BUNDLE_STRING_ID");
-        String string3 = readBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY);
-        String string4 = readBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
-        Uri uri2 = (Uri) readBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI);
-        String string5 = readBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
-        long j3 = readBundle.getLong(AllShareKey.BUNDLE_LONG_ITEM_FILE_SIZE);
-        Long valueOf = Long.valueOf(j3);
-        int i = AnonymousClass1.$SwitchMap$com$samsung$android$allshare$Item$MediaType[stringToEnum.ordinal()];
+        Parcel parcelObtain = Parcel.obtain();
+        item.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        Bundle bundle = parcelObtain.readBundle();
+        parcelObtain.recycle();
+        Item.MediaType mediaTypeStringToEnum = Item.MediaType.stringToEnum(bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TYPE));
+        String string = bundle.getString(AllShareKey.BUNDLE_STRING_OBJECT_ID);
+        String string2 = bundle.getString("BUNDLE_STRING_ID");
+        String string3 = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY);
+        String string4 = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
+        Uri uri2 = (Uri) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI);
+        String string5 = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+        long j3 = bundle.getLong(AllShareKey.BUNDLE_LONG_ITEM_FILE_SIZE);
+        Long lValueOf = Long.valueOf(j3);
+        int i = AnonymousClass1.$SwitchMap$com$samsung$android$allshare$Item$MediaType[mediaTypeStringToEnum.ordinal()];
         if (i == 1) {
-            j = readBundle.getLong(AllShareKey.BUNDLE_LONG_AUDIO_ITEM_DURATION);
+            j = bundle.getLong(AllShareKey.BUNDLE_LONG_AUDIO_ITEM_DURATION);
         } else {
             if (i == 3) {
-                uri = (Uri) readBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE);
-                j2 = readBundle.getLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION);
+                uri = (Uri) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE);
+                j2 = bundle.getLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION);
                 if (string != null || string.isEmpty() || string2 == null || string2.isEmpty()) {
                     DLog.w_api(CLASS_TAG, "extract : return something is empty");
                     return null;
@@ -375,7 +353,7 @@ public class ItemExtractor {
                     return null;
                 }
                 Seed seed = new Seed();
-                seed.mItemType = stringToEnum.toString();
+                seed.mItemType = mediaTypeStringToEnum.toString();
                 seed.mObjectId = string;
                 seed.mProviderId = string2;
                 seed.mTitle = string4;
@@ -383,7 +361,7 @@ public class ItemExtractor {
                 seed.mDuration = j2;
                 seed.mItemUri = uri2;
                 seed.mMimeType = string5;
-                valueOf.getClass();
+                lValueOf.getClass();
                 seed.mFileSize = j3;
                 return seed;
             }

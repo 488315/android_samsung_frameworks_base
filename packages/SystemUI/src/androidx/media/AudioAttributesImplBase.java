@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AudioAttributesImplBase implements AudioAttributesImpl {
     public int mContentType;
@@ -93,7 +92,7 @@ public class AudioAttributesImplBase implements AudioAttributesImpl {
     }
 
     public final String toString() {
-        String str;
+        String strM;
         StringBuilder sb = new StringBuilder("AudioAttributesCompat:");
         if (this.mLegacyStream != -1) {
             sb.append(" stream=");
@@ -105,59 +104,59 @@ public class AudioAttributesImplBase implements AudioAttributesImpl {
         int i2 = AudioAttributesCompat.$r8$clinit;
         switch (i) {
             case 0:
-                str = "USAGE_UNKNOWN";
+                strM = "USAGE_UNKNOWN";
                 break;
             case 1:
-                str = "USAGE_MEDIA";
+                strM = "USAGE_MEDIA";
                 break;
             case 2:
-                str = "USAGE_VOICE_COMMUNICATION";
+                strM = "USAGE_VOICE_COMMUNICATION";
                 break;
             case 3:
-                str = "USAGE_VOICE_COMMUNICATION_SIGNALLING";
+                strM = "USAGE_VOICE_COMMUNICATION_SIGNALLING";
                 break;
             case 4:
-                str = "USAGE_ALARM";
+                strM = "USAGE_ALARM";
                 break;
             case 5:
-                str = "USAGE_NOTIFICATION";
+                strM = "USAGE_NOTIFICATION";
                 break;
             case 6:
-                str = "USAGE_NOTIFICATION_RINGTONE";
+                strM = "USAGE_NOTIFICATION_RINGTONE";
                 break;
             case 7:
-                str = "USAGE_NOTIFICATION_COMMUNICATION_REQUEST";
+                strM = "USAGE_NOTIFICATION_COMMUNICATION_REQUEST";
                 break;
             case 8:
-                str = "USAGE_NOTIFICATION_COMMUNICATION_INSTANT";
+                strM = "USAGE_NOTIFICATION_COMMUNICATION_INSTANT";
                 break;
             case 9:
-                str = "USAGE_NOTIFICATION_COMMUNICATION_DELAYED";
+                strM = "USAGE_NOTIFICATION_COMMUNICATION_DELAYED";
                 break;
             case 10:
-                str = "USAGE_NOTIFICATION_EVENT";
+                strM = "USAGE_NOTIFICATION_EVENT";
                 break;
             case 11:
-                str = "USAGE_ASSISTANCE_ACCESSIBILITY";
+                strM = "USAGE_ASSISTANCE_ACCESSIBILITY";
                 break;
             case 12:
-                str = "USAGE_ASSISTANCE_NAVIGATION_GUIDANCE";
+                strM = "USAGE_ASSISTANCE_NAVIGATION_GUIDANCE";
                 break;
             case 13:
-                str = "USAGE_ASSISTANCE_SONIFICATION";
+                strM = "USAGE_ASSISTANCE_SONIFICATION";
                 break;
             case 14:
-                str = "USAGE_GAME";
+                strM = "USAGE_GAME";
                 break;
             case 15:
             default:
-                str = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "unknown usage ");
+                strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "unknown usage ");
                 break;
             case 16:
-                str = "USAGE_ASSISTANT";
+                strM = "USAGE_ASSISTANT";
                 break;
         }
-        sb.append(str);
+        sb.append(strM);
         sb.append(" content=");
         sb.append(this.mContentType);
         sb.append(" flags=0x");

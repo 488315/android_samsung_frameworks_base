@@ -101,12 +101,12 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
             findViewById(R.id.allow_button).setOnClickListener(this);
             findViewById(R.id.deny_button).setOnClickListener(this);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.packages_list);
-            for (String str : packagesForUid) {
+            for (String string : packagesForUid) {
                 try {
-                    str = packageManager.getApplicationLabel(packageManager.getApplicationInfo(str, 0)).toString();
+                    string = packageManager.getApplicationLabel(packageManager.getApplicationInfo(string, 0)).toString();
                 } catch (PackageManager.NameNotFoundException unused) {
                 }
-                linearLayout.addView(newPackageView(str));
+                linearLayout.addView(newPackageView(string));
             }
             ((TextView) findViewById(R.id.account_name)).lambda$setTextAsync$0(this.mAccount.name);
             ((TextView) findViewById(R.id.account_type)).lambda$setTextAsync$0(accountLabel);
@@ -138,9 +138,9 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
     }
 
     private View newPackageView(String str) {
-        View inflate = this.mInflater.inflate(R.layout.permissions_package_list_item, (ViewGroup) null);
-        ((TextView) inflate.findViewById(R.id.package_label)).lambda$setTextAsync$0(str);
-        return inflate;
+        View viewInflate = this.mInflater.inflate(R.layout.permissions_package_list_item, (ViewGroup) null);
+        ((TextView) viewInflate.findViewById(R.id.package_label)).lambda$setTextAsync$0(str);
+        return viewInflate;
     }
 
     @Override // android.view.View.OnClickListener

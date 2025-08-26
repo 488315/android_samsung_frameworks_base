@@ -19,7 +19,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.DeviceState;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class VIDirector {
     public static final String PUNCH_HOLE_VI_INFO = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_PUNCHHOLE_VI");
@@ -65,7 +64,12 @@ public class VIDirector {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public final Rect getVIViewLocation(Rect rect, boolean z) {
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0037  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final Rect getVIViewLocation(Rect rect, boolean z) throws Resources.NotFoundException {
         char c;
         Rect rect2;
         PointF pointF;
@@ -73,35 +77,30 @@ public class VIDirector {
         String str = this.mVIType;
         switch (str.hashCode()) {
             case -1360216880:
-                if (str.equals("circle")) {
+                if (!str.equals("circle")) {
+                    c = 65535;
+                    break;
+                } else {
                     c = 3;
                     break;
                 }
-                c = 65535;
-                break;
             case -1047363022:
                 if (str.equals("infinity-ucut")) {
                     c = 2;
                     break;
                 }
-                c = 65535;
                 break;
             case 3584429:
                 if (str.equals("ucut")) {
                     c = 1;
                     break;
                 }
-                c = 65535;
                 break;
             case 3614220:
                 if (str.equals("vcut")) {
                     c = 0;
                     break;
                 }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
                 break;
         }
         if (c == 0 || c == 1 || c == 2) {
@@ -118,11 +117,11 @@ public class VIDirector {
             Resources resources = this.mContext.getResources();
             rect2 = new Rect();
             float dimension = resources.getDimension(R.dimen.status_bar_height);
-            float dimension2 = resources.getDimension(17106375);
+            float dimension2 = resources.getDimension(17106376);
             float dimension3 = resources.getBoolean(R.bool.config_enableDisplayCutoutProtection) ? resources.getDimension(R.dimen.camera_protection_stroke_width) : 0.0f;
-            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("statusBarHeight = ", dimension, " cameraTopMargin = ", dimension2, " cameraProtectionStroke = ");
-            m.append(dimension3);
-            Log.d("KeyguardPunchHoleVIView_VIDirector", m.toString());
+            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("statusBarHeight = ", dimension, " cameraTopMargin = ", dimension2, " cameraProtectionStroke = ");
+            sbM.append(dimension3);
+            Log.d("KeyguardPunchHoleVIView_VIDirector", sbM.toString());
             int screenRotation = getScreenRotation();
             int i = screenRotation == 0 ? (rect.right - rect.left) / 3 : (rect.bottom - rect.top) / 3;
             int i2 = (int) (dimension3 == 0.0f ? 0.0f : (dimension3 / 2.0f) + 1.0f);
@@ -168,41 +167,41 @@ public class VIDirector {
         if (TextUtils.isEmpty(this.mPunchHoleVIInfo)) {
             return false;
         }
-        String[] split = TextUtils.split(this.mPunchHoleVIInfo, ",");
-        int length = split.length;
+        String[] strArrSplit = TextUtils.split(this.mPunchHoleVIInfo, ",");
+        int length = strArrSplit.length;
         int i = 0;
         while (i < length) {
-            String str = split[i];
+            String str = strArrSplit[i];
             if (str.contains("pos")) {
-                String[] split2 = TextUtils.split(str, ":");
+                String[] strArrSplit2 = TextUtils.split(str, ":");
                 boolean z3 = LsRune.SECURITY_SUB_DISPLAY_LOCK;
                 z = z2;
-                if (split2.length == (z3 ? 5 : 3)) {
+                if (strArrSplit2.length == (z3 ? 5 : 3)) {
                     if (z3) {
-                        this.mCameraLocPercent = new PointF(Float.valueOf(split2[this.mIsFolderOpened ? (char) 1 : (char) 3]).floatValue(), Float.valueOf(split2[this.mIsFolderOpened ? (char) 2 : (char) 4]).floatValue());
+                        this.mCameraLocPercent = new PointF(Float.valueOf(strArrSplit2[this.mIsFolderOpened ? (char) 1 : (char) 3]).floatValue(), Float.valueOf(strArrSplit2[this.mIsFolderOpened ? (char) 2 : (char) 4]).floatValue());
                     } else {
-                        this.mCameraLocPercent = new PointF(Float.valueOf(split2[1]).floatValue(), Float.valueOf(split2[2]).floatValue());
+                        this.mCameraLocPercent = new PointF(Float.valueOf(strArrSplit2[1]).floatValue(), Float.valueOf(strArrSplit2[2]).floatValue());
                     }
                 }
             } else {
                 z = z2;
             }
             if (str.contains("size")) {
-                String[] split3 = TextUtils.split(str, ":");
+                String[] strArrSplit3 = TextUtils.split(str, ":");
                 boolean z4 = LsRune.SECURITY_SUB_DISPLAY_LOCK;
-                if (split3.length == (z4 ? 5 : 3)) {
+                if (strArrSplit3.length == (z4 ? 5 : 3)) {
                     if (z4) {
-                        this.mFaceVISizePercent = new PointF(Float.valueOf(split3[this.mIsFolderOpened ? (char) 1 : (char) 3]).floatValue(), Float.valueOf(split3[this.mIsFolderOpened ? (char) 2 : (char) 4]).floatValue());
+                        this.mFaceVISizePercent = new PointF(Float.valueOf(strArrSplit3[this.mIsFolderOpened ? (char) 1 : (char) 3]).floatValue(), Float.valueOf(strArrSplit3[this.mIsFolderOpened ? (char) 2 : (char) 4]).floatValue());
                     } else {
-                        this.mFaceVISizePercent = new PointF(Float.valueOf(split3[1]).floatValue(), Float.valueOf(split3[2]).floatValue());
+                        this.mFaceVISizePercent = new PointF(Float.valueOf(strArrSplit3[1]).floatValue(), Float.valueOf(strArrSplit3[2]).floatValue());
                     }
                 }
             }
             if (str.contains("type")) {
-                String[] split4 = TextUtils.split(str, ":");
-                if (split4.length >= 2) {
-                    this.mVIFileName = "punch_hole_ic_" + split4[1];
-                    this.mVIType = split4[1];
+                String[] strArrSplit4 = TextUtils.split(str, ":");
+                if (strArrSplit4.length >= 2) {
+                    this.mVIFileName = "punch_hole_ic_" + strArrSplit4[1];
+                    this.mVIType = strArrSplit4[1];
                 }
             }
             i++;
@@ -260,14 +259,14 @@ public class VIDirector {
         float f13 = screenWidth;
         float f14 = pointF.x;
         float f15 = pointF2.x;
-        int m = (int) Frame$$ExternalSyntheticOutline0.m(f15, 0.5f, f14, f13);
-        rect.left = m;
+        int iM = (int) Frame$$ExternalSyntheticOutline0.m(f15, 0.5f, f14, f13);
+        rect.left = iM;
         float f16 = screenHeight;
         float f17 = pointF.y;
         float f18 = pointF2.y;
-        int m2 = (int) Frame$$ExternalSyntheticOutline0.m(f18, 0.5f, f17, f16);
-        rect.top = m2;
-        rect.right = (int) ((f13 * f15) + m);
-        rect.bottom = (int) ((f16 * f18) + m2);
+        int iM2 = (int) Frame$$ExternalSyntheticOutline0.m(f18, 0.5f, f17, f16);
+        rect.top = iM2;
+        rect.right = (int) ((f13 * f15) + iM);
+        rect.bottom = (int) ((f16 * f18) + iM2);
     }
 }

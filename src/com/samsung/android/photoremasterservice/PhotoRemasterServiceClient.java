@@ -122,7 +122,7 @@ public class PhotoRemasterServiceClient {
         return getServiceReturnValue(RESPONSE_TIME_OUT_SECOND_DEFAULT);
     }
 
-    private Bundle doGetServiceReturnValue(long j) throws TimeoutException, ExecutionException, InterruptedException {
+    private Bundle doGetServiceReturnValue(long j) throws ExecutionException, InterruptedException, TimeoutException {
         while (true) {
             try {
                 return this.mServiceReturnValue.get(j, TimeUnit.SECONDS);
@@ -139,13 +139,13 @@ public class PhotoRemasterServiceClient {
 
     private Bundle getServiceReturnValue(long j) {
         try {
-            Bundle doGetServiceReturnValue = doGetServiceReturnValue(j);
+            Bundle bundleDoGetServiceReturnValue = doGetServiceReturnValue(j);
             this.mServiceReturnValue = new CompletableFuture<>();
-            if (!isExceptionContained(doGetServiceReturnValue)) {
-                return doGetServiceReturnValue;
+            if (!isExceptionContained(bundleDoGetServiceReturnValue)) {
+                return bundleDoGetServiceReturnValue;
             }
             LogUtil.e(TAG, "Exception is received from service.");
-            Exception exc = (Exception) doGetServiceReturnValue.getSerializable("exception", Exception.class);
+            Exception exc = (Exception) bundleDoGetServiceReturnValue.getSerializable("exception", Exception.class);
             if (exc == null) {
                 throw new RuntimeException("Unknown exception form service-server.");
             }
@@ -201,10 +201,10 @@ public class PhotoRemasterServiceClient {
             public void run() {
                 try {
                     LogUtil.d(PhotoRemasterServiceClient.TAG, "Send message to service...");
-                    Message obtain = Message.obtain((Handler) null, i);
-                    obtain.setData(bundle);
-                    obtain.replyTo = PhotoRemasterServiceClient.this.mIncomingMessenger;
-                    PhotoRemasterServiceClient.this.mServiceMessenger.send(obtain);
+                    Message messageObtain = Message.obtain((Handler) null, i);
+                    messageObtain.setData(bundle);
+                    messageObtain.replyTo = PhotoRemasterServiceClient.this.mIncomingMessenger;
+                    PhotoRemasterServiceClient.this.mServiceMessenger.send(messageObtain);
                 } catch (RemoteException e) {
                     if (PhotoRemasterServiceClient.this.mIncomingMessenger.getBinder() == null) {
                         LogUtil.e(PhotoRemasterServiceClient.TAG, "mIncomingMessenger is null!");

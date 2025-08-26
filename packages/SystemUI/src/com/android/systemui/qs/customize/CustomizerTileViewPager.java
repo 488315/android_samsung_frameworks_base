@@ -23,7 +23,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CustomizerTileViewPager extends ViewPager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,7 +47,6 @@ public class CustomizerTileViewPager extends ViewPager {
     public int mRows;
     public boolean mShowLabel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.customize.CustomizerTileViewPager$1, reason: invalid class name */
     public class AnonymousClass1 extends PagerAdapter {
         public AnonymousClass1() {
@@ -68,11 +66,11 @@ public class CustomizerTileViewPager extends ViewPager {
         @Override // androidx.viewpager.widget.PagerAdapter
         public final int getItemPosition(Object obj) {
             CustomizerTileViewPager customizerTileViewPager = CustomizerTileViewPager.this;
-            int indexOf = customizerTileViewPager.mPages.indexOf(obj);
-            if (indexOf == -1) {
+            int iIndexOf = customizerTileViewPager.mPages.indexOf(obj);
+            if (iIndexOf == -1) {
                 return -2;
             }
-            return customizerTileViewPager.isLayoutRtl() ? (customizerTileViewPager.mPages.size() - 1) - indexOf : indexOf;
+            return customizerTileViewPager.isLayoutRtl() ? (customizerTileViewPager.mPages.size() - 1) - iIndexOf : iIndexOf;
         }
 
         @Override // androidx.viewpager.widget.PagerAdapter
@@ -93,14 +91,12 @@ public class CustomizerTileViewPager extends ViewPager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.customize.CustomizerTileViewPager$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomizerTilePage extends CustomizerTileLayout {
         public int mCurrentRows;
 
@@ -186,9 +182,9 @@ public class CustomizerTileViewPager extends ViewPager {
             }
         });
         setCurrentItem(0, false);
-        boolean isLargeScreen = isLargeScreen();
-        setHorizontalFadingEdgeEnabled(isLargeScreen);
-        setFadingEdgeLength(isLargeScreen ? (int) (secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getPanelWidth(context) * 0.0192f) : 0);
+        boolean zIsLargeScreen = isLargeScreen();
+        setHorizontalFadingEdgeEnabled(zIsLargeScreen);
+        setFadingEdgeLength(zIsLargeScreen ? (int) (secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getPanelWidth(context) * 0.0192f) : 0);
     }
 
     public static boolean isLargeScreen() {
@@ -242,12 +238,12 @@ public class CustomizerTileViewPager extends ViewPager {
                             setCurrentItem(currentItem, false);
                             break;
                         } else {
-                            CustomTileInfo customTileInfo2 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo, 1);
+                            CustomTileInfo customTileInfo2 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(1, ((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo);
                             ((CustomizerTilePage) this.mPages.get(i2 + 1)).addTile(customTileInfo2, 0, false);
                             ((CustomizerTilePage) this.mPages.get(i2)).removeTile(customTileInfo2, false);
                         }
                     } else {
-                        CustomTileInfo customTileInfo3 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo, 1);
+                        CustomTileInfo customTileInfo3 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(1, ((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo);
                         ((CustomizerTilePage) this.mPages.get(i2 + 1)).addTile(customTileInfo3, 0, false);
                         ((CustomizerTilePage) this.mPages.get(i2)).removeTile(customTileInfo3, false);
                     }
@@ -333,12 +329,12 @@ public class CustomizerTileViewPager extends ViewPager {
         customizerTilePage.getChildAt(0);
         int childCount = customizerTilePage.getChildCount();
         for (int i5 = 0; i5 < childCount; i5++) {
-            View findViewById = customizerTilePage.getChildAt(i5).findViewById(SecQSSettingEditResources.REMOVE_ICON_ID);
-            if (findViewById != null) {
-                findViewById.setScaleX(0.5f);
-                findViewById.setScaleY(0.5f);
-                findViewById.setAlpha(0.0f);
-                findViewById.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(200L).setStartDelay(200L).start();
+            View viewFindViewById = customizerTilePage.getChildAt(i5).findViewById(SecQSSettingEditResources.REMOVE_ICON_ID);
+            if (viewFindViewById != null) {
+                viewFindViewById.setScaleX(0.5f);
+                viewFindViewById.setScaleY(0.5f);
+                viewFindViewById.setAlpha(0.0f);
+                viewFindViewById.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(200L).setStartDelay(200L).start();
             }
         }
     }
@@ -447,7 +443,7 @@ public class CustomizerTileViewPager extends ViewPager {
         if (tiledPageIndex > columnMaxCountInPage) {
             int i2 = columnMaxCountInPage;
             while (i2 < tiledPageIndex) {
-                CustomTileInfo customTileInfo2 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo, 1);
+                CustomTileInfo customTileInfo2 = (CustomTileInfo) AlertController$$ExternalSyntheticOutline0.m(1, ((CustomizerTilePage) this.mPages.get(i2)).mCustomTilesInfo);
                 int i3 = i2 + 1;
                 ((CustomizerTilePage) this.mPages.get(i3)).addTile(customTileInfo2, 0, false);
                 ((CustomizerTilePage) this.mPages.get(i2)).removeTile(customTileInfo2, false);
@@ -571,7 +567,7 @@ public class CustomizerTileViewPager extends ViewPager {
 
     public final boolean updateResources() {
         Log.d("CSTMPagedTileLayout", "updateResources");
-        boolean z = false;
+        boolean zUpdateResources = false;
         for (int i = 0; i < this.mPages.size(); i++) {
             CustomizerTilePage customizerTilePage = (CustomizerTilePage) this.mPages.get(i);
             int i2 = this.mRows;
@@ -584,9 +580,9 @@ public class CustomizerTileViewPager extends ViewPager {
             customizerTilePage.mColumns = i3;
             ((CustomizerTilePage) this.mPages.get(i)).mIsScrollView = this.mIsScrollView;
             ((CustomizerTilePage) this.mPages.get(i)).mShowLabel = this.mShowLabel;
-            z |= ((CustomizerTilePage) this.mPages.get(i)).updateResources();
+            zUpdateResources |= ((CustomizerTilePage) this.mPages.get(i)).updateResources();
         }
-        if (!z) {
+        if (!zUpdateResources) {
             return true;
         }
         this.mInitialTiles.clear();

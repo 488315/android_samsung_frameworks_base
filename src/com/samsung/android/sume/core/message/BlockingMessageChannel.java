@@ -30,7 +30,7 @@ public class BlockingMessageChannel implements MessageChannel {
     }
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void send(Message message) {
+    public void send(Message message) throws InterruptedException {
         try {
             this.queue.put(message);
         } catch (InterruptedException unused) {

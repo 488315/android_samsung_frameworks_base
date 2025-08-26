@@ -8,7 +8,6 @@ import com.android.systemui.screenshot.ui.SwipeGestureListener;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ScreenshotShelfViewBinder$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class ScreenshotShelfViewBinder$$ExternalSyntheticL
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         boolean z;
         switch (this.$r8$classId) {
             case 0:
@@ -38,20 +37,16 @@ public final /* synthetic */ class ScreenshotShelfViewBinder$$ExternalSyntheticL
                     if (actionMasked == 1) {
                         swipeGestureListener.velocityTracker.computeCurrentVelocity(1);
                         float xVelocity = swipeGestureListener.velocityTracker.getXVelocity();
-                        float abs = Math.abs(xVelocity);
-                        float dpToPx = FloatingWindowUtil.dpToPx(swipeGestureListener.displayMetrics, 0.8f);
+                        float fAbs = Math.abs(xVelocity);
+                        float fDpToPx = FloatingWindowUtil.dpToPx(swipeGestureListener.displayMetrics, 0.8f);
                         Function1 function1 = swipeGestureListener.onDismiss;
-                        if (abs > dpToPx) {
-                            function1.mo779invoke(Float.valueOf(xVelocity));
-                        } else if (Math.abs(swipeGestureListener.view.getTranslationX()) > FloatingWindowUtil.dpToPx(swipeGestureListener.displayMetrics, 80.0f)) {
-                            function1.mo779invoke(Float.valueOf(xVelocity));
-                        } else {
-                            swipeGestureListener.onCancel.invoke();
-                            swipeGestureListener.velocityTracker.clear();
+                        if (fAbs > fDpToPx || Math.abs(swipeGestureListener.view.getTranslationX()) > FloatingWindowUtil.dpToPx(swipeGestureListener.displayMetrics, 80.0f)) {
+                            function1.mo781invoke(Float.valueOf(xVelocity));
+                            return Boolean.valueOf(z);
                         }
-                        return Boolean.valueOf(z);
-                    }
-                    if (actionMasked == 2) {
+                        swipeGestureListener.onCancel.invoke();
+                        swipeGestureListener.velocityTracker.clear();
+                    } else if (actionMasked == 2) {
                         swipeGestureListener.velocityTracker.addMovement(motionEvent);
                         swipeGestureListener.view.setTranslationX(motionEvent.getRawX() - swipeGestureListener.startX);
                     }

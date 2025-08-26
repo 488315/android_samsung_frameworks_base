@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class IAFDHotfix {
     private static final String TAG = "IAFT_IAFDHotfix";
 
-    public static boolean hotfix(Context context, int i, String str) {
+    public static boolean hotfix(Context context, int i, String str) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         if (context == null) {
             Log.i(TAG, "context is null");
             return false;
@@ -21,16 +21,16 @@ public class IAFDHotfix {
                 Log.i(TAG, file.toString() + " not found.");
                 return false;
             }
-            byte[] decryptFileToBytes = IAFDRSAUtils.decryptFileToBytes(file.toString(), "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB");
-            if (decryptFileToBytes.length < 100) {
+            byte[] bArrDecryptFileToBytes = IAFDRSAUtils.decryptFileToBytes(file.toString(), "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB");
+            if (bArrDecryptFileToBytes.length < 100) {
                 return false;
             }
             Log.i(TAG, "hotfix start");
-            Class<?> loadClass = new InMemoryDexClassLoader(ByteBuffer.wrap(decryptFileToBytes), ClassLoader.getSystemClassLoader()).loadClass("com.samsung.hotfix.hotfix");
+            Class<?> clsLoadClass = new InMemoryDexClassLoader(ByteBuffer.wrap(bArrDecryptFileToBytes), ClassLoader.getSystemClassLoader()).loadClass("com.samsung.hotfix.hotfix");
             Class[] clsArr = new Class[0];
-            boolean booleanValue = ((Boolean) loadClass.getMethod("iafdrepair", Context.class, Integer.TYPE, String.class).invoke(loadClass.getConstructor(null).newInstance(null), context, Integer.valueOf(i), str)).booleanValue();
+            boolean zBooleanValue = ((Boolean) clsLoadClass.getMethod("iafdrepair", Context.class, Integer.TYPE, String.class).invoke(clsLoadClass.getConstructor(null).newInstance(null), context, Integer.valueOf(i), str)).booleanValue();
             Log.i(TAG, "hotfix end");
-            return booleanValue;
+            return zBooleanValue;
         } catch (Exception unused) {
             Log.i(TAG, "hotfix fail");
             return false;

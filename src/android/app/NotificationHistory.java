@@ -325,23 +325,23 @@ public final class NotificationHistory implements Parcelable {
         this.mStringsToWrite = new HashSet();
         this.mParcel = null;
         this.mIndex = 0;
-        byte[] readBlob = parcel.readBlob();
-        Parcel obtain = Parcel.obtain();
-        obtain.unmarshall(readBlob, 0, readBlob.length);
-        obtain.setDataPosition(0);
-        this.mHistoryCount = obtain.readInt();
-        this.mIndex = obtain.readInt();
+        byte[] blob = parcel.readBlob();
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.unmarshall(blob, 0, blob.length);
+        parcelObtain.setDataPosition(0);
+        this.mHistoryCount = parcelObtain.readInt();
+        this.mIndex = parcelObtain.readInt();
         if (this.mHistoryCount > 0) {
-            this.mStringPool = obtain.createStringArray();
-            int readInt = obtain.readInt();
-            int readInt2 = obtain.readInt();
-            Parcel obtain2 = Parcel.obtain();
-            this.mParcel = obtain2;
-            obtain2.setDataPosition(0);
-            this.mParcel.appendFrom(obtain, obtain.dataPosition(), readInt);
+            this.mStringPool = parcelObtain.createStringArray();
+            int i = parcelObtain.readInt();
+            int i2 = parcelObtain.readInt();
+            Parcel parcelObtain2 = Parcel.obtain();
+            this.mParcel = parcelObtain2;
+            parcelObtain2.setDataPosition(0);
+            this.mParcel.appendFrom(parcelObtain, parcelObtain.dataPosition(), i);
             Parcel parcel2 = this.mParcel;
             parcel2.setDataSize(parcel2.dataPosition());
-            this.mParcel.setDataPosition(readInt2);
+            this.mParcel.setDataPosition(i2);
         }
     }
 
@@ -361,13 +361,13 @@ public final class NotificationHistory implements Parcelable {
         if (!hasNextNotification()) {
             return null;
         }
-        HistoricalNotification readNotificationFromParcel = readNotificationFromParcel(this.mParcel);
+        HistoricalNotification notificationFromParcel = readNotificationFromParcel(this.mParcel);
         this.mIndex++;
         if (!hasNextNotification()) {
             this.mParcel.recycle();
             this.mParcel = null;
         }
-        return readNotificationFromParcel;
+        return notificationFromParcel;
     }
 
     public boolean updateNotificationToWrite(String str, boolean z) {
@@ -603,22 +603,22 @@ public final class NotificationHistory implements Parcelable {
     }
 
     private int findStringIndex(String str) {
-        int binarySearch = Arrays.binarySearch(this.mStringPool, str);
-        if (binarySearch >= 0) {
-            return binarySearch;
+        int iBinarySearch = Arrays.binarySearch(this.mStringPool, str);
+        if (iBinarySearch >= 0) {
+            return iBinarySearch;
         }
         throw new IllegalStateException("String '" + str + "' is not in the string pool");
     }
 
     private void writeNotificationToParcel(HistoricalNotification historicalNotification, Parcel parcel, int i) {
-        int findStringIndex = historicalNotification.mPackage != null ? findStringIndex(historicalNotification.mPackage) : -1;
-        int findStringIndex2 = historicalNotification.getChannelName() != null ? findStringIndex(historicalNotification.getChannelName()) : -1;
-        int findStringIndex3 = historicalNotification.getChannelId() != null ? findStringIndex(historicalNotification.getChannelId()) : -1;
-        int findStringIndex4 = TextUtils.isEmpty(historicalNotification.getConversationId()) ? -1 : findStringIndex(historicalNotification.getConversationId());
-        parcel.writeInt(findStringIndex);
-        parcel.writeInt(findStringIndex2);
-        parcel.writeInt(findStringIndex3);
-        parcel.writeInt(findStringIndex4);
+        int iFindStringIndex = historicalNotification.mPackage != null ? findStringIndex(historicalNotification.mPackage) : -1;
+        int iFindStringIndex2 = historicalNotification.getChannelName() != null ? findStringIndex(historicalNotification.getChannelName()) : -1;
+        int iFindStringIndex3 = historicalNotification.getChannelId() != null ? findStringIndex(historicalNotification.getChannelId()) : -1;
+        int iFindStringIndex4 = TextUtils.isEmpty(historicalNotification.getConversationId()) ? -1 : findStringIndex(historicalNotification.getConversationId());
+        parcel.writeInt(iFindStringIndex);
+        parcel.writeInt(iFindStringIndex2);
+        parcel.writeInt(iFindStringIndex3);
+        parcel.writeInt(iFindStringIndex4);
         parcel.writeInt(historicalNotification.getUid());
         parcel.writeInt(historicalNotification.getUserId());
         parcel.writeLong(historicalNotification.getPostedTimeMs());
@@ -639,27 +639,27 @@ public final class NotificationHistory implements Parcelable {
 
     private HistoricalNotification readNotificationFromParcel(Parcel parcel) {
         HistoricalNotification.Builder builder = new HistoricalNotification.Builder();
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            builder.mPackage = this.mStringPool[readInt];
+        int i = parcel.readInt();
+        if (i >= 0) {
+            builder.mPackage = this.mStringPool[i];
         } else {
             builder.mPackage = null;
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 >= 0) {
-            builder.setChannelName(this.mStringPool[readInt2]);
+        int i2 = parcel.readInt();
+        if (i2 >= 0) {
+            builder.setChannelName(this.mStringPool[i2]);
         } else {
             builder.setChannelName(null);
         }
-        int readInt3 = parcel.readInt();
-        if (readInt3 >= 0) {
-            builder.setChannelId(this.mStringPool[readInt3]);
+        int i3 = parcel.readInt();
+        if (i3 >= 0) {
+            builder.setChannelId(this.mStringPool[i3]);
         } else {
             builder.setChannelId(null);
         }
-        int readInt4 = parcel.readInt();
-        if (readInt4 >= 0) {
-            builder.setConversationId(this.mStringPool[readInt4]);
+        int i4 = parcel.readInt();
+        if (i4 >= 0) {
+            builder.setConversationId(this.mStringPool[i4]);
         } else {
             builder.setConversationId(null);
         }
@@ -671,8 +671,8 @@ public final class NotificationHistory implements Parcelable {
         builder.setSbnKey(parcel.readString());
         builder.setType(parcel.readInt());
         builder.setChecked(parcel.readBoolean());
-        String readString = parcel.readString();
-        builder.setUri(readString != null ? Uri.parse(readString) : null);
+        String string = parcel.readString();
+        builder.setUri(string != null ? Uri.parse(string) : null);
         builder.setWhen(parcel.readLong());
         builder.setExtraTitle(parcel.readString());
         if (parcel.readBoolean()) {
@@ -683,40 +683,40 @@ public final class NotificationHistory implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        Parcel obtain = Parcel.obtain();
-        obtain.writeInt(this.mHistoryCount);
-        obtain.writeInt(this.mIndex);
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.writeInt(this.mHistoryCount);
+        parcelObtain.writeInt(this.mIndex);
         if (this.mHistoryCount > 0) {
             String[] pooledStringsToWrite = getPooledStringsToWrite();
             this.mStringPool = pooledStringsToWrite;
-            obtain.writeStringArray(pooledStringsToWrite);
+            parcelObtain.writeStringArray(pooledStringsToWrite);
             if (!this.mNotificationsToWrite.isEmpty()) {
-                obtain = Parcel.obtain();
+                parcelObtain = Parcel.obtain();
                 try {
-                    obtain.setDataPosition(0);
+                    parcelObtain.setDataPosition(0);
                     for (int i2 = 0; i2 < this.mHistoryCount; i2++) {
-                        writeNotificationToParcel(this.mNotificationsToWrite.get(i2), obtain, i);
+                        writeNotificationToParcel(this.mNotificationsToWrite.get(i2), parcelObtain, i);
                     }
-                    int dataPosition = obtain.dataPosition();
-                    obtain.writeInt(dataPosition);
-                    obtain.writeInt(0);
-                    obtain.appendFrom(obtain, 0, dataPosition);
-                    obtain.recycle();
+                    int iDataPosition = parcelObtain.dataPosition();
+                    parcelObtain.writeInt(iDataPosition);
+                    parcelObtain.writeInt(0);
+                    parcelObtain.appendFrom(parcelObtain, 0, iDataPosition);
+                    parcelObtain.recycle();
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             } else {
                 Parcel parcel2 = this.mParcel;
                 if (parcel2 != null) {
-                    obtain.writeInt(parcel2.dataSize());
-                    obtain.writeInt(this.mParcel.dataPosition());
+                    parcelObtain.writeInt(parcel2.dataSize());
+                    parcelObtain.writeInt(this.mParcel.dataPosition());
                     Parcel parcel3 = this.mParcel;
-                    obtain.appendFrom(parcel3, 0, parcel3.dataSize());
+                    parcelObtain.appendFrom(parcel3, 0, parcel3.dataSize());
                 } else {
                     throw new IllegalStateException("Either mParcel or mNotificationsToWrite must not be null");
                 }
             }
         }
-        parcel.writeBlob(obtain.marshall());
+        parcel.writeBlob(parcelObtain.marshall());
     }
 }

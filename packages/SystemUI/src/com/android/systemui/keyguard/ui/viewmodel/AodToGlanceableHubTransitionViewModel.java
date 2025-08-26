@@ -21,7 +21,6 @@ import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodToGlanceableHubTransitionViewModel implements DeviceEntryIconTransition, GlanceableHubTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryParentViewAlpha;
@@ -35,10 +34,10 @@ public final class AodToGlanceableHubTransitionViewModel implements DeviceEntryI
         KeyguardState keyguardState = KeyguardState.AOD;
         SceneKey sceneKey = Scenes.Communal;
         companion2.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(duration, new Edge.StateToContent(keyguardState, sceneKey)));
-        this.transitionAnimation = m;
-        this.deviceEntryParentViewAlpha = m.immediatelyTransitionTo(1.0f);
-        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(m)).getBlurProvider().enterBlurRadius;
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(duration, new Edge.StateToContent(keyguardState, sceneKey)));
+        this.transitionAnimation = flowBuilderM;
+        this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
+        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(flowBuilderM)).getBlurProvider().enterBlurRadius;
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition
@@ -52,16 +51,16 @@ public final class AodToGlanceableHubTransitionViewModel implements DeviceEntryI
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
         long duration = DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit);
         long duration2 = DurationKt.toDuration(0, durationUnit);
-        return KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToGlanceableHubTransitionViewModel$$ExternalSyntheticLambda0
+        return KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToGlanceableHubTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return Float.valueOf(MathUtils.lerp(Ref$FloatRef.this.element, 0.0f, ((Float) obj).floatValue()));
+            public final Object mo781invoke(Object obj) {
+                return Float.valueOf(MathUtils.lerp(ref$FloatRef.element, 0.0f, ((Float) obj).floatValue()));
             }
         }, duration2, new Function0(viewStateAccessor) { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToGlanceableHubTransitionViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Ref$FloatRef.this.element = 0.0f;
+                this.f$0.element = 0.0f;
                 return Unit.INSTANCE;
             }
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp);

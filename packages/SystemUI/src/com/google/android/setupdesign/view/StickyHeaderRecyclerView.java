@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StickyHeaderRecyclerView extends HeaderRecyclerView {
     public int statusBarInset;
@@ -36,7 +35,7 @@ public class StickyHeaderRecyclerView extends HeaderRecyclerView {
         super.draw(canvas);
         if (this.sticky != null) {
             View view = this.header;
-            int save = canvas.save();
+            int iSave = canvas.save();
             View view2 = view != null ? view : this.sticky;
             if (view2.getTop() + (view != null ? this.sticky.getTop() : 0) < this.statusBarInset || !view2.isShown()) {
                 this.stickyRect.set(0.0f, (-r0) + this.statusBarInset, view2.getWidth(), (view2.getHeight() - r0) + this.statusBarInset);
@@ -46,7 +45,7 @@ public class StickyHeaderRecyclerView extends HeaderRecyclerView {
             } else {
                 this.stickyRect.setEmpty();
             }
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
     }
 

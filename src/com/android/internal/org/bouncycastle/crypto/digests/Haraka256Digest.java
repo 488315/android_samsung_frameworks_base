@@ -110,9 +110,9 @@ public class Haraka256Digest extends HarakaBase {
         if (bArr.length - i < 32) {
             throw new IllegalArgumentException("output too short to receive digest");
         }
-        int haraka256256 = haraka256256(this.buffer, bArr, i);
+        int iHaraka256256 = haraka256256(this.buffer, bArr, i);
         reset();
-        return haraka256256;
+        return iHaraka256256;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Digest

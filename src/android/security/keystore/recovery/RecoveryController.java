@@ -57,7 +57,7 @@ public class RecoveryController {
         return keyguardManager != null && keyguardManager.isDeviceSecure();
     }
 
-    public void initRecoveryService(String str, byte[] bArr, byte[] bArr2) throws CertificateException, InternalRecoveryServiceException {
+    public void initRecoveryService(String str, byte[] bArr, byte[] bArr2) throws InternalRecoveryServiceException, CertificateException {
         try {
             this.mBinder.initRecoveryServiceWithSigFile(str, bArr, bArr2);
         } catch (RemoteException e) {
@@ -163,11 +163,11 @@ public class RecoveryController {
     @Deprecated
     public Key generateKey(String str) throws InternalRecoveryServiceException, LockScreenRequiredException {
         try {
-            String generateKey = this.mBinder.generateKey(str);
-            if (generateKey == null) {
+            String strGenerateKey = this.mBinder.generateKey(str);
+            if (strGenerateKey == null) {
                 throw new InternalRecoveryServiceException("null grant alias");
             }
-            return getKeyFromGrant(generateKey);
+            return getKeyFromGrant(strGenerateKey);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException e2) {
@@ -182,11 +182,11 @@ public class RecoveryController {
 
     public Key generateKey(String str, byte[] bArr) throws InternalRecoveryServiceException, LockScreenRequiredException {
         try {
-            String generateKeyWithMetadata = this.mBinder.generateKeyWithMetadata(str, bArr);
-            if (generateKeyWithMetadata == null) {
+            String strGenerateKeyWithMetadata = this.mBinder.generateKeyWithMetadata(str, bArr);
+            if (strGenerateKeyWithMetadata == null) {
                 throw new InternalRecoveryServiceException("null grant alias");
             }
-            return getKeyFromGrant(generateKeyWithMetadata);
+            return getKeyFromGrant(strGenerateKeyWithMetadata);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException e2) {
@@ -202,11 +202,11 @@ public class RecoveryController {
     @Deprecated
     public Key importKey(String str, byte[] bArr) throws InternalRecoveryServiceException, LockScreenRequiredException {
         try {
-            String importKey = this.mBinder.importKey(str, bArr);
-            if (importKey == null) {
+            String strImportKey = this.mBinder.importKey(str, bArr);
+            if (strImportKey == null) {
                 throw new InternalRecoveryServiceException("Null grant alias");
             }
-            return getKeyFromGrant(importKey);
+            return getKeyFromGrant(strImportKey);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException e2) {
@@ -221,11 +221,11 @@ public class RecoveryController {
 
     public Key importKey(String str, byte[] bArr, byte[] bArr2) throws InternalRecoveryServiceException, LockScreenRequiredException {
         try {
-            String importKeyWithMetadata = this.mBinder.importKeyWithMetadata(str, bArr, bArr2);
-            if (importKeyWithMetadata == null) {
+            String strImportKeyWithMetadata = this.mBinder.importKeyWithMetadata(str, bArr, bArr2);
+            if (strImportKeyWithMetadata == null) {
                 throw new InternalRecoveryServiceException("Null grant alias");
             }
-            return getKeyFromGrant(importKeyWithMetadata);
+            return getKeyFromGrant(strImportKeyWithMetadata);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException e2) {
@@ -238,7 +238,7 @@ public class RecoveryController {
         }
     }
 
-    public Key getKey(String str) throws InternalRecoveryServiceException, UnrecoverableKeyException {
+    public Key getKey(String str) throws UnrecoverableKeyException, InternalRecoveryServiceException {
         try {
             String key = this.mBinder.getKey(str);
             if (key != null && !"".equals(key)) {
@@ -257,7 +257,7 @@ public class RecoveryController {
         }
     }
 
-    Key getKeyFromGrant(String str) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
+    Key getKeyFromGrant(String str) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
         return AndroidKeyStoreProvider.loadAndroidKeyStoreSecretKeyFromKeystore(KeyStore2.getInstance(), getGrantDescriptor(str));
     }
 

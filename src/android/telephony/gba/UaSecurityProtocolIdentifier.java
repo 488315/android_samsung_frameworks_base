@@ -37,25 +37,25 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public UaSecurityProtocolIdentifier createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            if (readInt < 0 || readInt2 < 0 || readInt3 < 0) {
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            if (i < 0 || i2 < 0 || i3 < 0) {
                 return null;
             }
             Builder builder = new Builder();
-            if (readInt > 0) {
+            if (i > 0) {
                 try {
-                    builder.setOrg(readInt);
+                    builder.setOrg(i);
                 } catch (IllegalArgumentException unused) {
                     return null;
                 }
             }
-            if (readInt2 > 0) {
-                builder.setProtocol(readInt2);
+            if (i2 > 0) {
+                builder.setProtocol(i2);
             }
-            if (readInt3 > 0) {
-                builder.setTlsCipherSuite(readInt3);
+            if (i3 > 0) {
+                builder.setTlsCipherSuite(i3);
             }
             return builder.build();
         }
@@ -91,9 +91,9 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
 
     public byte[] toByteArray() {
         byte[] bArr = new byte[5];
-        ByteBuffer wrap = ByteBuffer.wrap(bArr);
-        wrap.put((byte) this.mOrg);
-        wrap.putInt(this.mTlsCipherSuite | this.mProtocol);
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+        byteBufferWrap.put((byte) this.mOrg);
+        byteBufferWrap.putInt(this.mTlsCipherSuite | this.mProtocol);
         return bArr;
     }
 

@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 /* loaded from: classes4.dex */
 public class RemoteCallbackListExt<E extends IInterface> extends RemoteCallbackList<E> {
     public void broadcastAction(Consumer<E> consumer) {
-        int beginBroadcast = beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
                 consumer.accept(getBroadcastItem(i));
             } finally {

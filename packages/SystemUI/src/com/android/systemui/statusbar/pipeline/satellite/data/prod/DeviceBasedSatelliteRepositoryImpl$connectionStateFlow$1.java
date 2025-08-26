@@ -20,7 +20,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -59,13 +58,13 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
                 public final void onSatelliteModemStateChanged(int i2) {
                     SatelliteConnectionState satelliteConnectionState;
                     DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
-                    LogBuffer logBuffer = DeviceBasedSatelliteRepositoryImpl.this.logBuffer;
+                    LogBuffer logBuffer = deviceBasedSatelliteRepositoryImpl.logBuffer;
                     DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 = new DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0(3);
                     companion.getClass();
-                    LogMessage obtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
-                    obtain.setInt1(i2);
+                    LogMessage logMessageObtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
+                    logMessageObtain.setInt1(i2);
                     Unit unit = Unit.INSTANCE;
-                    logBuffer.commit(obtain);
+                    logBuffer.commit(logMessageObtain);
                     SendChannel sendChannel = producerScope;
                     SatelliteConnectionState.Companion.getClass();
                     switch (i2) {
@@ -90,7 +89,7 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
                             satelliteConnectionState = SatelliteConnectionState.Unknown;
                             break;
                     }
-                    ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(satelliteConnectionState);
+                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(satelliteConnectionState);
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

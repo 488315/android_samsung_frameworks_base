@@ -38,7 +38,7 @@ public class ParallelDescriptor extends MFDescriptorBase {
         this.descriptors.forEach(new Consumer() { // from class: com.samsung.android.sume.core.descriptor.ParallelDescriptor$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((MediaFilter.Option) ((MFDescriptor) obj)).setSplitType(SplitType.this);
+                ((MediaFilter.Option) ((MFDescriptor) obj)).setSplitType(splitType);
             }
         });
     }
@@ -49,7 +49,7 @@ public class ParallelDescriptor extends MFDescriptorBase {
         this.descriptors.forEach(new Consumer() { // from class: com.samsung.android.sume.core.descriptor.ParallelDescriptor$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((MediaFilter.Option) ((MFDescriptor) obj)).setPad(Pair.this);
+                ((MediaFilter.Option) ((MFDescriptor) obj)).setPad(pair);
             }
         });
     }

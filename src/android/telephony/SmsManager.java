@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -17,12 +18,15 @@ import android.util.Pair;
 import com.android.internal.hidden_from_bootclasspath.com.android.internal.telephony.flags.Flags;
 import com.android.internal.telephony.EncodeException;
 import com.android.internal.telephony.GsmAlphabet;
+import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.telephony.IPhoneSubInfo;
 import com.android.internal.telephony.ISms;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.SmsRawData;
+import com.android.internal.telephony.TelephonyFeatures;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.internal.telephony.uicc.IccUtils;
+import com.samsung.android.telephony.gsm.SemCbConfig;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -651,51 +655,32 @@ public final class SmsManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0020  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x001c  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void resolveSubscriptionForOperation(final android.telephony.SmsManager.SubscriptionResolverResult r6) {
-        /*
-            r5 = this;
-            java.lang.String r0 = "SmsManager"
-            int r1 = r5.getSubscriptionId()
-            r2 = 0
-            com.android.internal.telephony.ISms r3 = getISmsService()     // Catch: android.os.RemoteException -> L12
-            if (r3 == 0) goto L19
-            boolean r3 = r3.isSmsSimPickActivityNeeded(r1)     // Catch: android.os.RemoteException -> L12
-            goto L1a
-        L12:
-            r3 = move-exception
-            java.lang.String r4 = "resolveSubscriptionForOperation"
-            android.util.Log.e(r0, r4, r3)
-        L19:
-            r3 = r2
-        L1a:
-            if (r3 != 0) goto L20
-            r5.sendResolverResult(r6, r1, r2)
-            return
-        L20:
-            java.lang.String r2 = "resolveSubscriptionForOperation isSmsSimPickActivityNeeded is true for calling package. "
-            android.util.Log.d(r0, r2)
-            com.android.internal.telephony.ITelephony r2 = getITelephony()     // Catch: android.os.RemoteException -> L34
-            android.telephony.SmsManager$6 r3 = new android.telephony.SmsManager$6     // Catch: android.os.RemoteException -> L34
-            r3.<init>()     // Catch: android.os.RemoteException -> L34
-            r4 = 0
-            r2.enqueueSmsPickResult(r4, r4, r3)     // Catch: android.os.RemoteException -> L34
-            goto L3e
-        L34:
-            r2 = move-exception
-            java.lang.String r3 = "Unable to launch activity"
-            android.util.Log.e(r0, r3, r2)
-            r0 = 1
-            r5.sendResolverResult(r6, r1, r0)
-        L3e:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.SmsManager.resolveSubscriptionForOperation(android.telephony.SmsManager$SubscriptionResolverResult):void");
+    private void resolveSubscriptionForOperation(final SubscriptionResolverResult subscriptionResolverResult) {
+        ISms iSmsService;
+        int subscriptionId = getSubscriptionId();
+        try {
+            iSmsService = getISmsService();
+        } catch (RemoteException e) {
+            Log.e(TAG, "resolveSubscriptionForOperation", e);
+        }
+        boolean zIsSmsSimPickActivityNeeded = iSmsService != null ? iSmsService.isSmsSimPickActivityNeeded(subscriptionId) : false;
+        if (zIsSmsSimPickActivityNeeded) {
+            Log.d(TAG, "resolveSubscriptionForOperation isSmsSimPickActivityNeeded is true for calling package. ");
+            try {
+                getITelephony().enqueueSmsPickResult(null, null, new IIntegerConsumer.Stub() { // from class: android.telephony.SmsManager.6
+                    @Override // com.android.internal.telephony.IIntegerConsumer
+                    public void accept(int i) {
+                        SmsManager.this.sendResolverResult(subscriptionResolverResult, i, true);
+                    }
+                });
+                return;
+            } catch (RemoteException e2) {
+                Log.e(TAG, "Unable to launch activity", e2);
+                sendResolverResult(subscriptionResolverResult, subscriptionId, true);
+                return;
+            }
+        }
+        sendResolverResult(subscriptionResolverResult, subscriptionId, false);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -710,9 +695,9 @@ public final class SmsManager {
     }
 
     private static ITelephony getITelephony() {
-        ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
-        if (asInterface != null) {
-            return asInterface;
+        ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        if (iTelephonyAsInterface != null) {
+            return iTelephonyAsInterface;
         }
         throw new RuntimeException("Could not find Telephony Service.");
     }
@@ -794,21 +779,21 @@ public final class SmsManager {
     }
 
     public ArrayList<SmsMessage> getAllMessagesFromIcc() {
-        List<SmsRawData> list = null;
+        List<SmsRawData> allMessagesFromIccEfForSubscriber = null;
         try {
             ISms iSmsService = getISmsService();
             if (iSmsService != null) {
-                list = iSmsService.getAllMessagesFromIccEfForSubscriber(getSubscriptionId(), null);
+                allMessagesFromIccEfForSubscriber = iSmsService.getAllMessagesFromIccEfForSubscriber(getSubscriptionId(), null);
             }
         } catch (RemoteException unused) {
         }
-        return createMessageListFromRawRecords(list);
+        return createMessageListFromRawRecords(allMessagesFromIccEfForSubscriber);
     }
 
     @SystemApi
     @Deprecated
     public boolean enableCellBroadcastRange(int i, int i2, int i3) {
-        boolean z = false;
+        boolean zEnableCellBroadcastRangeForSubscriber = false;
         if (i3 == 2 && Flags.cleanupCdma()) {
             com.android.telephony.Rlog.d(TAG, "CDMA cellbroadcast is not supported.");
             return false;
@@ -820,24 +805,24 @@ public final class SmsManager {
             ISms iSmsService = getISmsService();
             if (iSmsService != null) {
                 int subscriptionId = getSubscriptionId();
-                z = iSmsService.enableCellBroadcastRangeForSubscriber(subscriptionId, i, i2, i3);
+                zEnableCellBroadcastRangeForSubscriber = iSmsService.enableCellBroadcastRangeForSubscriber(subscriptionId, i, i2, i3);
                 StringBuilder sb = new StringBuilder("enableCellBroadcastRange: ");
-                sb.append(z ? "succeeded" : "failed");
+                sb.append(zEnableCellBroadcastRangeForSubscriber ? "succeeded" : "failed");
                 sb.append(" at calling enableCellBroadcastRangeForSubscriber. subId = ");
                 sb.append(subscriptionId);
                 com.android.telephony.Rlog.d(TAG, sb.toString());
             }
-            return z;
+            return zEnableCellBroadcastRangeForSubscriber;
         } catch (RemoteException e) {
             com.android.telephony.Rlog.d(TAG, "enableCellBroadcastRange: ", e);
-            return z;
+            return zEnableCellBroadcastRangeForSubscriber;
         }
     }
 
     @SystemApi
     @Deprecated
     public boolean disableCellBroadcastRange(int i, int i2, int i3) {
-        boolean z = false;
+        boolean zDisableCellBroadcastRangeForSubscriber = false;
         if (i3 == 2 && Flags.cleanupCdma()) {
             com.android.telephony.Rlog.d(TAG, "CDMA cellbroadcast is not supported.");
             return false;
@@ -849,29 +834,29 @@ public final class SmsManager {
             ISms iSmsService = getISmsService();
             if (iSmsService != null) {
                 int subscriptionId = getSubscriptionId();
-                z = iSmsService.disableCellBroadcastRangeForSubscriber(subscriptionId, i, i2, i3);
+                zDisableCellBroadcastRangeForSubscriber = iSmsService.disableCellBroadcastRangeForSubscriber(subscriptionId, i, i2, i3);
                 StringBuilder sb = new StringBuilder("disableCellBroadcastRange: ");
-                sb.append(z ? "succeeded" : "failed");
+                sb.append(zDisableCellBroadcastRangeForSubscriber ? "succeeded" : "failed");
                 sb.append(" at calling disableCellBroadcastRangeForSubscriber. subId = ");
                 sb.append(subscriptionId);
                 com.android.telephony.Rlog.d(TAG, sb.toString());
             }
-            return z;
+            return zDisableCellBroadcastRangeForSubscriber;
         } catch (RemoteException e) {
             com.android.telephony.Rlog.d(TAG, "disableCellBroadcastRange: ", e);
-            return z;
+            return zDisableCellBroadcastRangeForSubscriber;
         }
     }
 
     private ArrayList<SmsMessage> createMessageListFromRawRecords(List<SmsRawData> list) {
-        SmsMessage createFromEfRecord;
+        SmsMessage smsMessageCreateFromEfRecord;
         ArrayList<SmsMessage> arrayList = new ArrayList<>();
         if (list != null) {
             int size = list.size();
             for (int i = 0; i < size; i++) {
                 SmsRawData smsRawData = list.get(i);
-                if (smsRawData != null && (createFromEfRecord = SmsMessage.createFromEfRecord(i + 1, smsRawData.getBytes(), getSubscriptionId())) != null) {
-                    arrayList.add(createFromEfRecord);
+                if (smsRawData != null && (smsMessageCreateFromEfRecord = SmsMessage.createFromEfRecord(i + 1, smsRawData.getBytes(), getSubscriptionId())) != null) {
+                    arrayList.add(smsMessageCreateFromEfRecord);
                 }
             }
         }
@@ -1064,8 +1049,8 @@ public final class SmsManager {
     }
 
     public boolean setSmscAddress(String str) {
-        byte[] stringToGsm7BitPacked;
-        boolean isDialable = PhoneNumberUtils.isDialable(str.charAt(0));
+        byte[] bArrStringToGsm7BitPacked;
+        boolean zIsDialable = PhoneNumberUtils.isDialable(str.charAt(0));
         if (str == null) {
             return false;
         }
@@ -1076,13 +1061,13 @@ public final class SmsManager {
         if (length > 20) {
             return false;
         }
-        if (isDialable) {
+        if (zIsDialable) {
             com.android.telephony.Rlog.d(TAG, "Smsc is Numeric.");
-            stringToGsm7BitPacked = PhoneNumberUtils.networkPortionToCalledPartyBCDWithLength(str);
+            bArrStringToGsm7BitPacked = PhoneNumberUtils.networkPortionToCalledPartyBCDWithLength(str);
         } else {
             com.android.telephony.Rlog.i(TAG, "Smsc is Alphabetic.");
             try {
-                stringToGsm7BitPacked = GsmAlphabet.stringToGsm7BitPacked(str);
+                bArrStringToGsm7BitPacked = GsmAlphabet.stringToGsm7BitPacked(str);
             } catch (EncodeException e) {
                 Log.e(TAG, "Implausible UnsupportedEncodingException ", e);
                 return false;
@@ -1091,7 +1076,7 @@ public final class SmsManager {
         try {
             ISms iSmsService = getISmsService();
             if (iSmsService != null) {
-                return iSmsService.setSmscAddressOnIccEfForSubscriber(IccUtils.bytesToHexString(stringToGsm7BitPacked), getSubscriptionId(), null);
+                return iSmsService.setSmscAddressOnIccEfForSubscriber(IccUtils.bytesToHexString(bArrStringToGsm7BitPacked), getSubscriptionId(), null);
             }
             return false;
         } catch (RemoteException e2) {
@@ -1177,18 +1162,76 @@ public final class SmsManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005c A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x005d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.samsung.android.telephony.gsm.SemCbConfig semGetCbSettings() {
-        /*
-            Method dump skipped, instructions count: 231
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.SmsManager.semGetCbSettings():com.samsung.android.telephony.gsm.SemCbConfig");
+    public SemCbConfig semGetCbSettings() {
+        byte[] cbSettingsForSubscriber;
+        ISms iSmsService;
+        com.android.telephony.Rlog.d(TAG, "[CB] In getCbConfig");
+        SemCbConfig semCbConfig = new SemCbConfig();
+        if (TelephonyFeatures.IS_QCOM) {
+            semCbConfig.msgIdMaxCount = 1000;
+            return semCbConfig;
+        }
+        try {
+            iSmsService = getISmsService();
+        } catch (RemoteException unused) {
+            com.android.telephony.Rlog.d(TAG, "[CB] Exception In getCbConfig of SmsManager");
+            cbSettingsForSubscriber = null;
+            if (cbSettingsForSubscriber != null) {
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            com.android.telephony.Rlog.d(TAG, "[CB] IllegalArgumentException Exception In getCbConfig of SmsManager");
+            cbSettingsForSubscriber = null;
+            if (cbSettingsForSubscriber != null) {
+            }
+        } catch (NullPointerException unused2) {
+            cbSettingsForSubscriber = null;
+            if (cbSettingsForSubscriber != null) {
+            }
+        }
+        if (iSmsService != null) {
+            int subscriptionId = getSubscriptionId();
+            com.android.telephony.Rlog.d(TAG, "getCbSettings subId: " + subscriptionId);
+            if (subscriptionId >= 0) {
+                cbSettingsForSubscriber = iSmsService.getCbSettingsForSubscriber(subscriptionId);
+                if (cbSettingsForSubscriber != null) {
+                    return null;
+                }
+                if (cbSettingsForSubscriber[0] == 1) {
+                    semCbConfig.bCBEnabled = true;
+                } else {
+                    semCbConfig.bCBEnabled = false;
+                }
+                semCbConfig.selectedId = cbSettingsForSubscriber[1];
+                semCbConfig.msgIdMaxCount = 1000;
+                semCbConfig.msgIdCount = cbSettingsForSubscriber[3];
+                int i = semCbConfig.msgIdCount;
+                int[] iArr = new int[i];
+                int i2 = 4;
+                for (int i3 = 0; i3 < i; i3++) {
+                    try {
+                        iArr[i3] = (short) ((cbSettingsForSubscriber[i2] & 255) | ((cbSettingsForSubscriber[i2 + 1] & 255) << 8));
+                        i2 += 2;
+                    } catch (ArrayIndexOutOfBoundsException unused3) {
+                        com.android.telephony.Rlog.d(TAG, "[CB ] ArrayIndexOutOfBoundsException In getCbConfig of SmsManager.java");
+                        return null;
+                    }
+                }
+                semCbConfig.msgIds = iArr;
+                com.android.telephony.Rlog.d(TAG, "[SmsManger- CB] bCBEnabled = " + semCbConfig.bCBEnabled + " selectedId = " + semCbConfig.selectedId + " msgIdMaxCount = " + semCbConfig.msgIdMaxCount + " msgIdCount = " + semCbConfig.msgIdCount);
+                for (int i4 = 0; i4 < semCbConfig.msgIds.length; i4++) {
+                    com.android.telephony.Rlog.d(TAG, "[CB] msgIDs =  " + semCbConfig.msgIds[i4]);
+                }
+                return semCbConfig;
+            }
+            com.android.telephony.Rlog.e(TAG, "getCbSettings invalid subID : " + subscriptionId);
+        }
+        return null;
     }
 
     public void semSendMultipartTextMessage(String str, String str2, ArrayList<String> arrayList, ArrayList<PendingIntent> arrayList2, ArrayList<PendingIntent> arrayList3, boolean z, int i, int i2, int i3) {
@@ -1392,144 +1435,74 @@ public final class SmsManager {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x00b7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:49:0x00b7, code lost:
     
         r2 = "3gpp2";
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00a9  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00a9  */
     /* JADX WARN: Type inference failed for: r17v1 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.util.ArrayList<android.telephony.SmsMessage> getAllMessagesFromIccSimType(int r17) {
-        /*
-            r16 = this;
-            r0 = r17
-            java.lang.String r1 = "getAllMessagesFromIccSimType - exception - iccType:"
-            java.lang.String r2 = r16.getCurrentFormat()
-            int r3 = r16.getSubscriptionId()
-            int r4 = android.telephony.SubscriptionManager.getPhoneId(r3)
-            r5 = -1
-            if (r0 == r5) goto L15
-            if (r0 != 0) goto L19
-        L15:
-            int r0 = com.android.internal.telephony.uicc.IccUtils.getIccType(r4)
-        L19:
-            java.lang.String r6 = "SmsManager"
-            r7 = 0
-            java.lang.String r8 = "3gpp"
-            if (r0 != 0) goto L2a
-            java.lang.String r0 = "IccType is Unknown"
-            com.android.telephony.Rlog.d(r6, r0)
-            java.util.ArrayList r0 = createMessageListFromRawRecords(r7, r8)
-            return r0
-        L2a:
-            r9 = 10
-            r10 = 4
-            com.android.internal.telephony.ISms r12 = getISmsService()     // Catch: java.lang.Throwable -> L90 android.os.RemoteException -> L94
-            if (r12 == 0) goto L8b
-            android.telephony.TelephonyManager.getDefault()     // Catch: java.lang.Throwable -> L90 android.os.RemoteException -> L94
-            java.lang.String r13 = "gsm.operator.isroaming"
-            java.lang.String r14 = "false"
-            java.lang.String r13 = android.telephony.TelephonyManager.getTelephonyProperty(r4, r13, r14)     // Catch: java.lang.Throwable -> L90 android.os.RemoteException -> L94
-            boolean r13 = java.lang.Boolean.parseBoolean(r13)     // Catch: java.lang.Throwable -> L90 android.os.RemoteException -> L94
-            java.lang.String r14 = "CHN"
-            java.lang.String r15 = "HKG"
-            r17 = 0
-            java.lang.String r11 = "TPE"
-            java.lang.String[] r11 = new java.lang.String[]{r14, r15, r11}     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            boolean r11 = com.android.internal.telephony.TelephonyFeatures.isCountrySpecific(r4, r11)     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            if (r4 != 0) goto L58
-            java.lang.String r4 = "voicecall_type"
-            goto L5b
-        L58:
-            java.lang.String r4 = "voicecall_type2"
-        L5b:
-            android.app.Application r14 = android.app.ActivityThread.currentApplication()     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            android.content.Context r14 = r14.getApplicationContext()     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            android.content.ContentResolver r14 = r14.getContentResolver()     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            int r4 = android.provider.Settings.System.getInt(r14, r4, r5)     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            r5 = 1
-            if (r4 != 0) goto L70
-            r4 = r5
-            goto L72
-        L70:
-            r4 = r17
-        L72:
-            if (r0 != r9) goto L78
-            if (r13 != 0) goto L78
-            if (r4 == 0) goto L80
-        L78:
-            if (r0 != r10) goto L82
-            if (r13 != 0) goto L7e
-            if (r4 == 0) goto L82
-        L7e:
-            if (r11 == 0) goto L82
-        L80:
-            android.telephony.TelephonyManager.isSelecttelecomDF = r5     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-        L82:
-            int r4 = r16.getSubscriptionId()     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            java.util.List r7 = r12.getAllMessagesFromIccEfForSubscriber(r4, r7)     // Catch: android.os.RemoteException -> L96 java.lang.Throwable -> Le0
-            goto L8d
-        L8b:
-            r17 = 0
-        L8d:
-            android.telephony.TelephonyManager.isSelecttelecomDF = r17
-            goto La6
-        L90:
-            r0 = move-exception
-            r17 = 0
-            goto Le1
-        L94:
-            r17 = 0
-        L96:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> Le0
-            r4.<init>(r1)     // Catch: java.lang.Throwable -> Le0
-            r4.append(r0)     // Catch: java.lang.Throwable -> Le0
-            java.lang.String r1 = r4.toString()     // Catch: java.lang.Throwable -> Le0
-            com.android.telephony.Rlog.d(r6, r1)     // Catch: java.lang.Throwable -> Le0
-            goto L8d
-        La6:
-            if (r0 != r10) goto La9
-            goto Lba
-        La9:
-            java.lang.String r1 = "3gpp2"
-            if (r0 != r9) goto Lb4
-            boolean r2 = r8.equals(r2)
-            if (r2 == 0) goto Lb9
-            goto Lb7
-        Lb4:
-            r2 = 3
-            if (r0 != r2) goto Lb9
-        Lb7:
-            r2 = r1
-            goto Lba
-        Lb9:
-            r2 = r8
-        Lba:
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r4 = "getAllMessagesFromIccSimType, subId = "
-            r1.<init>(r4)
-            r1.append(r3)
-            java.lang.String r3 = " format = "
-            r1.append(r3)
-            r1.append(r2)
-            java.lang.String r3 = " iccType = "
-            r1.append(r3)
-            r1.append(r0)
-            java.lang.String r0 = r1.toString()
-            com.android.telephony.Rlog.d(r6, r0)
-            java.util.ArrayList r0 = createMessageListFromRawRecords(r7, r2)
-            return r0
-        Le0:
-            r0 = move-exception
-        Le1:
-            android.telephony.TelephonyManager.isSelecttelecomDF = r17
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.SmsManager.getAllMessagesFromIccSimType(int):java.util.ArrayList");
+    public ArrayList<SmsMessage> getAllMessagesFromIccSimType(int i) throws Throwable {
+        boolean z;
+        int iccType = i;
+        String currentFormat = getCurrentFormat();
+        int subscriptionId = getSubscriptionId();
+        int phoneId = SubscriptionManager.getPhoneId(subscriptionId);
+        if (iccType == -1 || iccType == 0) {
+            iccType = IccUtils.getIccType(phoneId);
+        }
+        List<SmsRawData> allMessagesFromIccEfForSubscriber = null;
+        if (iccType == 0) {
+            com.android.telephony.Rlog.d(TAG, "IccType is Unknown");
+            return createMessageListFromRawRecords(null, "3gpp");
+        }
+        try {
+            try {
+                ISms iSmsService = getISmsService();
+                if (iSmsService != null) {
+                    TelephonyManager.getDefault();
+                    boolean z2 = Boolean.parseBoolean(TelephonyManager.getTelephonyProperty(phoneId, TelephonyProperties.PROPERTY_OPERATOR_ISROAMING, "false"));
+                    z = false;
+                    try {
+                        boolean zIsCountrySpecific = TelephonyFeatures.isCountrySpecific(phoneId, "CHN", "HKG", "TPE");
+                        boolean z3 = Settings.System.getInt(ActivityThread.currentApplication().getApplicationContext().getContentResolver(), phoneId == 0 ? "voicecall_type" : "voicecall_type2", -1) == 0;
+                        if ((iccType == 10 && !z2 && !z3) || (iccType == 4 && ((z2 || z3) && zIsCountrySpecific))) {
+                            TelephonyManager.isSelecttelecomDF = true;
+                        }
+                        allMessagesFromIccEfForSubscriber = iSmsService.getAllMessagesFromIccEfForSubscriber(getSubscriptionId(), null);
+                    } catch (RemoteException unused) {
+                        com.android.telephony.Rlog.d(TAG, "getAllMessagesFromIccSimType - exception - iccType:" + iccType);
+                        TelephonyManager.isSelecttelecomDF = z;
+                        if (iccType != 4) {
+                        }
+                        com.android.telephony.Rlog.d(TAG, "getAllMessagesFromIccSimType, subId = " + subscriptionId + " format = " + currentFormat + " iccType = " + iccType);
+                        return createMessageListFromRawRecords(allMessagesFromIccEfForSubscriber, currentFormat);
+                    }
+                } else {
+                    z = false;
+                }
+            } catch (Throwable th) {
+                th = th;
+                TelephonyManager.isSelecttelecomDF = i;
+                throw th;
+            }
+        } catch (RemoteException unused2) {
+            z = false;
+        } catch (Throwable th2) {
+            th = th2;
+            i = 0;
+            TelephonyManager.isSelecttelecomDF = i;
+            throw th;
+        }
+        TelephonyManager.isSelecttelecomDF = z;
+        if (iccType != 4) {
+            currentFormat = iccType == 10 ? "3gpp" : "3gpp";
+        }
+        com.android.telephony.Rlog.d(TAG, "getAllMessagesFromIccSimType, subId = " + subscriptionId + " format = " + currentFormat + " iccType = " + iccType);
+        return createMessageListFromRawRecords(allMessagesFromIccEfForSubscriber, currentFormat);
     }
 
     private static ArrayList<SmsMessage> createMessageListFromRawRecords(List<SmsRawData> list, String str) {
@@ -1539,9 +1512,9 @@ public final class SmsManager {
             for (int i = 0; i < size; i++) {
                 SmsRawData smsRawData = list.get(i);
                 if (smsRawData != null) {
-                    SmsMessage createFromEfRecord = SmsMessage.createFromEfRecord(i + 1, smsRawData.getBytes(), str);
-                    arrayList.add(createFromEfRecord);
-                    if (createFromEfRecord == null) {
+                    SmsMessage smsMessageCreateFromEfRecord = SmsMessage.createFromEfRecord(i + 1, smsRawData.getBytes(), str);
+                    arrayList.add(smsMessageCreateFromEfRecord);
+                    if (smsMessageCreateFromEfRecord == null) {
                         Log.d(TAG, "createFromEfRecord NULL:" + str + "index:" + i);
                     }
                 } else {
@@ -1638,9 +1611,7 @@ public final class SmsManager {
         return Arrays.stream(new String[]{"BST", "TEL", "TLP"}).anyMatch(new Predicate() { // from class: android.telephony.SmsManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((String) obj).equals(str);
-                return equals;
+                return ((String) obj).equals(str);
             }
         });
     }

@@ -195,11 +195,11 @@ public final class BarringInfo implements Parcelable {
 
     public int hashCode() {
         CellIdentity cellIdentity = this.mCellIdentity;
-        int hashCode = cellIdentity != null ? cellIdentity.hashCode() : 7;
+        int iHashCode = cellIdentity != null ? cellIdentity.hashCode() : 7;
         for (int i = 0; i < this.mBarringServiceInfos.size(); i++) {
-            hashCode = hashCode + (this.mBarringServiceInfos.keyAt(i) * 15) + (this.mBarringServiceInfos.valueAt(i).hashCode() * 31);
+            iHashCode = iHashCode + (this.mBarringServiceInfos.keyAt(i) * 15) + (this.mBarringServiceInfos.valueAt(i).hashCode() * 31);
         }
-        return hashCode;
+        return iHashCode;
     }
 
     public boolean equals(Object obj) {

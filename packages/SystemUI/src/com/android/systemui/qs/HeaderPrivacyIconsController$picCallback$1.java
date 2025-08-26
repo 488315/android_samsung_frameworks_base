@@ -11,7 +11,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HeaderPrivacyIconsController$picCallback$1 implements PrivacyItemController.Callback {
     public final /* synthetic */ HeaderPrivacyIconsController this$0;
@@ -25,7 +24,7 @@ public final class HeaderPrivacyIconsController$picCallback$1 implements Privacy
         HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
         if (headerPrivacyIconsController.locationIndicatorsEnabled != z) {
             headerPrivacyIconsController.locationIndicatorsEnabled = z;
-            update$1$1();
+            update$2$1();
         }
     }
 
@@ -34,7 +33,7 @@ public final class HeaderPrivacyIconsController$picCallback$1 implements Privacy
         HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
         if (headerPrivacyIconsController.micCameraIndicatorsEnabled != z) {
             headerPrivacyIconsController.micCameraIndicatorsEnabled = z;
-            update$1$1();
+            update$2$1();
         }
     }
 
@@ -78,9 +77,9 @@ public final class HeaderPrivacyIconsController$picCallback$1 implements Privacy
                     arrayList2.add(obj3);
                 }
             }
-            List plus = CollectionsKt___CollectionsKt.plus((Iterable) arrayList, (Collection) arrayList2);
+            List listPlus = CollectionsKt___CollectionsKt.plus((Iterable) arrayList, (Collection) arrayList2);
             synchronized (headerPrivacyIconsController3) {
-                headerPrivacyIconsController3.recentLocationPrivacyList = plus;
+                headerPrivacyIconsController3.recentLocationPrivacyList = listPlus;
             }
             Log.i("HeaderPrivacyIconsController", "update recentLocationPrivacyList  " + this.this$0.getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core());
             HeaderPrivacyIconsController headerPrivacyIconsController5 = this.this$0;
@@ -107,18 +106,18 @@ public final class HeaderPrivacyIconsController$picCallback$1 implements Privacy
                 headerPrivacyIconsController8.delayableUiExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$picCallback$1$onPrivacyItemsChanged$3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        List privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core3 = HeaderPrivacyIconsController.this.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                        List privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core3 = headerPrivacyIconsController8.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
                         ArrayList arrayList4 = new ArrayList();
                         for (Object obj5 : privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core3) {
                             if (((PrivacyItem) obj5).privacyType == PrivacyType.TYPE_LOCATION) {
                                 arrayList4.add(obj5);
                             }
                         }
-                        if (!arrayList4.isEmpty() || HeaderPrivacyIconsController.this.getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core().isEmpty()) {
+                        if (!arrayList4.isEmpty() || headerPrivacyIconsController8.getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core().isEmpty()) {
                             return;
                         }
-                        Log.d("HeaderPrivacyIconsController", "Do executeDelayed  " + HeaderPrivacyIconsController.this.getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core());
-                        this.onPrivacyItemsChanged(HeaderPrivacyIconsController.this.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core());
+                        Log.d("HeaderPrivacyIconsController", "Do executeDelayed  " + headerPrivacyIconsController8.getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core());
+                        this.onPrivacyItemsChanged(headerPrivacyIconsController8.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core());
                     }
                 }, this.this$0.UPDATE_CHIP_VISIBILITY);
             }
@@ -131,7 +130,7 @@ public final class HeaderPrivacyIconsController$picCallback$1 implements Privacy
         headerPrivacyIconsController9.notifyPrivacyItemsChanged(list);
     }
 
-    public final void update$1$1() {
+    public final void update$2$1() {
         int i = HeaderPrivacyIconsController.$r8$clinit;
         HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
         headerPrivacyIconsController.updatePrivacyIconSlots();

@@ -10,14 +10,13 @@ import com.android.systemui.log.core.LogMessage;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ShadeListBuilderLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -126,23 +125,23 @@ public final /* synthetic */ class ShadeListBuilderLogger$$ExternalSyntheticLamb
             case 14:
                 return "(empty list)";
             case 15:
-                String m = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "[", "] ", logMessage.getStr1());
+                String strM = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "[", "] ", logMessage.getStr1());
                 if (!logMessage.getBool1()) {
-                    return m;
+                    return strM;
                 }
-                return m + " rank=" + logMessage.getInt2();
+                return strM + " rank=" + logMessage.getInt2();
             case 16:
-                String m2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("  [*] ", logMessage.getStr1(), " (summary)");
+                String strM2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("  [*] ", logMessage.getStr1(), " (summary)");
                 if (!logMessage.getBool1()) {
-                    return m2;
+                    return strM2;
                 }
-                return m2 + " rank=" + logMessage.getInt2();
+                return strM2 + " rank=" + logMessage.getInt2();
             case 17:
-                String m3 = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "  [", "] ", logMessage.getStr1());
+                String strM3 = BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "  [", "] ", logMessage.getStr1());
                 if (!logMessage.getBool1()) {
-                    return m3;
+                    return strM3;
                 }
-                return m3 + " rank=" + logMessage.getInt2();
+                return strM3 + " rank=" + logMessage.getInt2();
             case 18:
                 long long110 = logMessage.getLong1();
                 String str110 = logMessage.getStr1();

@@ -17,7 +17,6 @@ import kotlinx.coroutines.selects.SelectImplementation;
 import kotlinx.coroutines.selects.SelectInstance;
 import kotlinx.coroutines.sync.MutexImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SemaphoreAndMutexImpl {
     public final AtomicInt _availablePermits;
@@ -44,14 +43,14 @@ public class SemaphoreAndMutexImpl {
         this.onCancellationRelease = new Function3() { // from class: kotlinx.coroutines.sync.SemaphoreAndMutexImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                SemaphoreAndMutexImpl.this.release();
+                this.f$0.release();
                 return Unit.INSTANCE;
             }
         };
     }
 
     public final void acquire(MutexImpl.CancellableContinuationWithOwner cancellableContinuationWithOwner) {
-        Object findSegmentInternal;
+        Object objFindSegmentInternal;
         while (true) {
             AtomicInt atomicInt = this._availablePermits;
             atomicInt.getClass();
@@ -72,30 +71,30 @@ public class SemaphoreAndMutexImpl {
                 AtomicRef atomicRef = this.tail;
                 long j = andIncrement / SemaphoreKt.SEGMENT_SIZE;
                 while (true) {
-                    findSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(semaphoreSegment, j, semaphoreAndMutexImpl$addAcquireToQueue$createNewSegment$1);
-                    if (!SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
-                        Segment m3465getSegmentimpl = SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+                    objFindSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(semaphoreSegment, j, semaphoreAndMutexImpl$addAcquireToQueue$createNewSegment$1);
+                    if (!SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
+                        Segment segmentM3485getSegmentimpl = SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                         while (true) {
                             Segment segment = (Segment) atomicRef.value;
-                            if (segment.id >= m3465getSegmentimpl.id) {
+                            if (segment.id >= segmentM3485getSegmentimpl.id) {
                                 break;
                             }
-                            if (!m3465getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                            if (!segmentM3485getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                 break;
                             }
-                            if (atomicRef.compareAndSet(segment, m3465getSegmentimpl)) {
+                            if (atomicRef.compareAndSet(segment, segmentM3485getSegmentimpl)) {
                                 if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                     segment.remove();
                                 }
-                            } else if (m3465getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                                m3465getSegmentimpl.remove();
+                            } else if (segmentM3485getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                                segmentM3485getSegmentimpl.remove();
                             }
                         }
                     } else {
                         break;
                     }
                 }
-                SemaphoreSegment semaphoreSegment2 = (SemaphoreSegment) SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+                SemaphoreSegment semaphoreSegment2 = (SemaphoreSegment) SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                 int i = (int) (andIncrement % SemaphoreKt.SEGMENT_SIZE);
                 if (semaphoreSegment2.acquirers.array[i].compareAndSet(null, cancellableContinuationWithOwner)) {
                     cancellableContinuationWithOwner.invokeOnCancellation(semaphoreSegment2, i);
@@ -112,7 +111,7 @@ public class SemaphoreAndMutexImpl {
     public final void release() {
         int i;
         int i2;
-        Object findSegmentInternal;
+        Object objFindSegmentInternal;
         int i3;
         do {
             AtomicInt atomicInt = this._availablePermits;
@@ -142,30 +141,30 @@ public class SemaphoreAndMutexImpl {
             SemaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1 semaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1 = SemaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1.INSTANCE;
             AtomicRef atomicRef = this.head;
             while (true) {
-                findSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(semaphoreSegment, j, semaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1);
-                if (!SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
-                    Segment m3465getSegmentimpl = SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+                objFindSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(semaphoreSegment, j, semaphoreAndMutexImpl$tryResumeNextFromQueue$createNewSegment$1);
+                if (!SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
+                    Segment segmentM3485getSegmentimpl = SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                     while (true) {
                         Segment segment = (Segment) atomicRef.value;
-                        if (segment.id >= m3465getSegmentimpl.id) {
+                        if (segment.id >= segmentM3485getSegmentimpl.id) {
                             break;
                         }
-                        if (!m3465getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                        if (!segmentM3485getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                             break;
                         }
-                        if (atomicRef.compareAndSet(segment, m3465getSegmentimpl)) {
+                        if (atomicRef.compareAndSet(segment, segmentM3485getSegmentimpl)) {
                             if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                 segment.remove();
                             }
-                        } else if (m3465getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                            m3465getSegmentimpl.remove();
+                        } else if (segmentM3485getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                            segmentM3485getSegmentimpl.remove();
                         }
                     }
                 } else {
                     break;
                 }
             }
-            SemaphoreSegment semaphoreSegment2 = (SemaphoreSegment) SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+            SemaphoreSegment semaphoreSegment2 = (SemaphoreSegment) SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
             semaphoreSegment2.cleanPrev();
             i3 = 0;
             if (semaphoreSegment2.id <= j) {
@@ -182,23 +181,24 @@ public class SemaphoreAndMutexImpl {
                     }
                     i3 = !semaphoreSegment2.acquirers.array[i4].compareAndSet(SemaphoreKt.PERMIT, SemaphoreKt.BROKEN) ? 1 : 0;
                 } else if (andSet != SemaphoreKt.CANCELLED) {
-                    if (!(andSet instanceof CancellableContinuation)) {
+                    if (andSet instanceof CancellableContinuation) {
+                        CancellableContinuation cancellableContinuation = (CancellableContinuation) andSet;
+                        Symbol symbolTryResume = cancellableContinuation.tryResume(Unit.INSTANCE, this.onCancellationRelease);
+                        if (symbolTryResume != null) {
+                            cancellableContinuation.completeResume(symbolTryResume);
+                            i3 = 1;
+                            break;
+                            break;
+                        }
+                    } else {
                         if (!(andSet instanceof SelectInstance)) {
                             throw new IllegalStateException(("unexpected: " + andSet).toString());
                         }
-                        if (((SelectImplementation) ((SelectInstance) andSet)).trySelectInternal(this, Unit.INSTANCE) != 0) {
+                        if (((SelectImplementation) ((SelectInstance) andSet)).trySelectInternal(this, Unit.INSTANCE) == 0) {
+                            i3 = 1;
+                            break;
+                            break;
                         }
-                        i3 = 1;
-                        break;
-                        break;
-                    }
-                    CancellableContinuation cancellableContinuation = (CancellableContinuation) andSet;
-                    Symbol tryResume = cancellableContinuation.tryResume(Unit.INSTANCE, this.onCancellationRelease);
-                    if (tryResume != null) {
-                        cancellableContinuation.completeResume(tryResume);
-                        i3 = 1;
-                        break;
-                        break;
                     }
                 }
             }

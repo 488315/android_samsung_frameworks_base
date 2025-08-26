@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PromotedNotificationsInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -37,17 +36,15 @@ public final class PromotedNotificationsInteractor$special$$inlined$flatMapLates
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow distinctUntilChanged;
+        Flow flowDistinctUntilChanged;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             ScreenRecordChipModel screenRecordChipModel = (ScreenRecordChipModel) this.L$1;
-            if (screenRecordChipModel instanceof ScreenRecordChipModel.DoingNothing) {
-                distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
-            } else if (screenRecordChipModel instanceof ScreenRecordChipModel.Starting) {
-                distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+            if ((screenRecordChipModel instanceof ScreenRecordChipModel.DoingNothing) || (screenRecordChipModel instanceof ScreenRecordChipModel.Starting)) {
+                flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
             } else {
                 if (!(screenRecordChipModel instanceof ScreenRecordChipModel.Recording)) {
                     throw new NoWhenBranchMatchedException();
@@ -56,13 +53,13 @@ public final class PromotedNotificationsInteractor$special$$inlined$flatMapLates
                 String str = ((ScreenRecordChipModel.Recording) screenRecordChipModel).hostPackage;
                 if (str == null) {
                     promotedNotificationsInteractor.getClass();
-                    distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+                    flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
                 } else {
-                    distinctUntilChanged = FlowKt.distinctUntilChanged(new PromotedNotificationsInteractor$createRecordingNotificationFlow$$inlined$map$1(promotedNotificationsInteractor.activeNotificationsInteractor.allRepresentativeNotifications, promotedNotificationsInteractor, str));
+                    flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new PromotedNotificationsInteractor$createRecordingNotificationFlow$$inlined$map$1(promotedNotificationsInteractor.activeNotificationsInteractor.allRepresentativeNotifications, promotedNotificationsInteractor, str));
                 }
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, distinctUntilChanged, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowDistinctUntilChanged, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

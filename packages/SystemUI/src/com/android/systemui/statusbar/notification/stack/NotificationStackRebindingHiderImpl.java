@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.notification.stack;
 import android.animation.ObjectAnimator;
 import com.android.app.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationStackRebindingHiderImpl implements NotificationStackRebindingHider {
     public final NotificationStackScrollLayoutController nsslController;
@@ -23,10 +22,10 @@ public final class NotificationStackRebindingHiderImpl implements NotificationSt
             NotificationStackScrollLayoutController.HIDE_DURING_REBINDING_PROPERTY.set(notificationStackScrollLayoutController, Float.valueOf(f));
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(notificationStackScrollLayoutController, NotificationStackScrollLayoutController.HIDE_DURING_REBINDING_PROPERTY, f);
-        ofFloat.setInterpolator(Interpolators.STANDARD);
-        ofFloat.setDuration(360L);
-        notificationStackScrollLayoutController.mRebindAlphaAnimator = ofFloat;
-        ofFloat.start();
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(notificationStackScrollLayoutController, NotificationStackScrollLayoutController.HIDE_DURING_REBINDING_PROPERTY, f);
+        objectAnimatorOfFloat.setInterpolator(Interpolators.STANDARD);
+        objectAnimatorOfFloat.setDuration(360L);
+        notificationStackScrollLayoutController.mRebindAlphaAnimator = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.start();
     }
 }

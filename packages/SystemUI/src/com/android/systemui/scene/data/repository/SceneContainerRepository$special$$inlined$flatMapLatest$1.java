@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneContainerRepository$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -40,12 +39,12 @@ public final class SceneContainerRepository$special$$inlined$flatMapLatest$1 ext
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Flow flow = (Flow) this.L$1;
-            if (flow == null) {
-                flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.this$0.defaultTransitionState);
+            Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = (Flow) this.L$1;
+            if (flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 == null) {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.this$0.defaultTransitionState);
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

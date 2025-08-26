@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScrollState implements ScrollableState {
     public static final Companion Companion = new Companion(null);
@@ -39,20 +38,20 @@ public final class ScrollState implements ScrollableState {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
-            float floatValue = ((Number) obj).floatValue();
-            float value = ScrollState.this.getValue() + floatValue + ScrollState.this.accumulator;
-            float coerceIn = RangesKt___RangesKt.coerceIn(value, 0.0f, r1.getMaxValue());
-            boolean z = value == coerceIn;
-            float value2 = coerceIn - ScrollState.this.getValue();
-            int round = Math.round(value2);
-            ScrollState scrollState = ScrollState.this;
-            ((SnapshotMutableIntStateImpl) scrollState.value$delegate).setIntValue(scrollState.getValue() + round);
-            ScrollState.this.accumulator = value2 - round;
+        public final Object mo781invoke(Object obj) {
+            float fFloatValue = ((Number) obj).floatValue();
+            float value = this.this$0.getValue() + fFloatValue + this.this$0.accumulator;
+            float fCoerceIn = RangesKt___RangesKt.coerceIn(value, 0.0f, r1.getMaxValue());
+            boolean z = value == fCoerceIn;
+            float value2 = fCoerceIn - this.this$0.getValue();
+            int iRound = Math.round(value2);
+            ScrollState scrollState = this.this$0;
+            ((SnapshotMutableIntStateImpl) scrollState.value$delegate).setIntValue(scrollState.getValue() + iRound);
+            this.this$0.accumulator = value2 - iRound;
             if (!z) {
-                floatValue = value2;
+                fFloatValue = value2;
             }
-            return Float.valueOf(floatValue);
+            return Float.valueOf(fFloatValue);
         }
     });
     public final State canScrollForward$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: androidx.compose.foundation.ScrollState$canScrollForward$2
@@ -62,7 +61,7 @@ public final class ScrollState implements ScrollableState {
 
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return Boolean.valueOf(ScrollState.this.getValue() < ScrollState.this.getMaxValue());
+            return Boolean.valueOf(this.this$0.getValue() < this.this$0.getMaxValue());
         }
     });
     public final State canScrollBackward$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: androidx.compose.foundation.ScrollState$canScrollBackward$2
@@ -72,11 +71,10 @@ public final class ScrollState implements ScrollableState {
 
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return Boolean.valueOf(ScrollState.this.getValue() > 0);
+            return Boolean.valueOf(this.this$0.getValue() > 0);
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -96,7 +94,7 @@ public final class ScrollState implements ScrollableState {
         ScrollState$Companion$Saver$2 scrollState$Companion$Saver$2 = new Function1() { // from class: androidx.compose.foundation.ScrollState$Companion$Saver$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return new ScrollState(((Number) obj).intValue());
             }
         };
@@ -138,8 +136,8 @@ public final class ScrollState implements ScrollableState {
 
     @Override // androidx.compose.foundation.gestures.ScrollableState
     public final Object scroll(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
-        Object scroll = this.scrollableState.scroll(mutatePriority, function2, continuation);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = this.scrollableState.scroll(mutatePriority, function2, continuation);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
     public final Object scrollTo(int i, ContinuationImpl continuationImpl) {

@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SemFace implements Parcelable {
     public static final Parcelable.Creator<SemFace> CREATOR = new Parcelable.Creator() { // from class: com.samsung.android.media.face.SemFace.1

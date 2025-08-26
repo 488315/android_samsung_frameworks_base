@@ -49,13 +49,13 @@ public final class SetupDataCallResult {
 
     public static final ArrayList<SetupDataCallResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SetupDataCallResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SetupDataCallResult setupDataCallResult = new SetupDataCallResult();
-            setupDataCallResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 112);
+            setupDataCallResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 112);
             arrayList.add(setupDataCallResult);
         }
         return arrayList;
@@ -71,41 +71,41 @@ public final class SetupDataCallResult {
         this.ifname = hwBlob.getString(j2);
         hwParcel.readEmbeddedBuffer(r2.getBytes().length + 1, hwBlob.handle(), j2, false);
         int int32 = hwBlob.getInt32(j + 48);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, hwBlob.handle(), j + 40, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, hwBlob.handle(), j + 40, true);
         this.addresses.clear();
         for (int i = 0; i < int32; i++) {
             LinkAddress linkAddress = new LinkAddress();
-            linkAddress.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            linkAddress.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             this.addresses.add(linkAddress);
         }
         int int322 = hwBlob.getInt32(j + 64);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 56, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 56, true);
         this.dnses.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             new String();
             int i3 = i2 * 16;
-            String string = readEmbeddedBuffer2.getString(i3);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer2.handle(), i3, false);
+            String string = embeddedBuffer2.getString(i3);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer2.handle(), i3, false);
             this.dnses.add(string);
         }
         int int323 = hwBlob.getInt32(j + 80);
-        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 72, true);
+        HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 72, true);
         this.gateways.clear();
         for (int i4 = 0; i4 < int323; i4++) {
             new String();
             int i5 = i4 * 16;
-            String string2 = readEmbeddedBuffer3.getString(i5);
-            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, readEmbeddedBuffer3.handle(), i5, false);
+            String string2 = embeddedBuffer3.getString(i5);
+            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, embeddedBuffer3.handle(), i5, false);
             this.gateways.add(string2);
         }
         int int324 = hwBlob.getInt32(j + 96);
-        HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 16, hwBlob.handle(), j + 88, true);
+        HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 16, hwBlob.handle(), j + 88, true);
         this.pcscf.clear();
         for (int i6 = 0; i6 < int324; i6++) {
             new String();
             int i7 = i6 * 16;
-            String string3 = readEmbeddedBuffer4.getString(i7);
-            hwParcel.readEmbeddedBuffer(string3.getBytes().length + 1, readEmbeddedBuffer4.handle(), i7, false);
+            String string3 = embeddedBuffer4.getString(i7);
+            hwParcel.readEmbeddedBuffer(string3.getBytes().length + 1, embeddedBuffer4.handle(), i7, false);
             this.pcscf.add(string3);
         }
         this.mtuV4 = hwBlob.getInt32(j + 104);

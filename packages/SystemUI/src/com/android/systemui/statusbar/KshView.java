@@ -33,7 +33,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KshView {
     public final AccessibilityManager mA11yManager;
@@ -61,7 +60,6 @@ public class KshView {
     public final KshView$$ExternalSyntheticLambda0 mForceScroll = new KshView$$ExternalSyntheticLambda0(this, 0);
     public final AnonymousClass1 mHorizontalScrollListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.KshView$1, reason: invalid class name */
     public class AnonymousClass1 extends RecyclerView.OnScrollListener {
         public AnonymousClass1() {
@@ -90,11 +88,11 @@ public class KshView {
                     kshView.mRightScrolled = !kshView.mRightScrolled;
                 }
                 LinearLayoutManager linearLayoutManager = kshView.mLayoutManager;
-                View findOneVisibleChild = linearLayoutManager.findOneVisibleChild(0, linearLayoutManager.getChildCount(), true, false);
-                int position = findOneVisibleChild == null ? -1 : RecyclerView.LayoutManager.getPosition(findOneVisibleChild);
-                int findLastCompletelyVisibleItemPosition = kshView.mLayoutManager.findLastCompletelyVisibleItemPosition();
+                View viewFindOneVisibleChild = linearLayoutManager.findOneVisibleChild(0, linearLayoutManager.getChildCount(), true, false);
+                int position = viewFindOneVisibleChild == null ? -1 : RecyclerView.LayoutManager.getPosition(viewFindOneVisibleChild);
+                int iFindLastCompletelyVisibleItemPosition = kshView.mLayoutManager.findLastCompletelyVisibleItemPosition();
                 if (kshView.mRightScrolled) {
-                    position = findLastCompletelyVisibleItemPosition;
+                    position = iFindLastCompletelyVisibleItemPosition;
                 }
                 kshView.mPosition = position;
                 if (position != kshView.mLastPosition) {
@@ -138,9 +136,9 @@ public class KshView {
     }
 
     public final void moveSelector(int i) {
-        int abs;
+        int iAbs;
         int i2 = this.mLastPosition;
-        if (i != i2 && (abs = Math.abs(i2 - i)) >= this.mMaxColumn) {
+        if (i != i2 && (iAbs = Math.abs(i2 - i)) >= this.mMaxColumn) {
             int size = this.mKshViewAdapter.mData.size();
             int i3 = this.mMaxColumn;
             int i4 = size - i3;
@@ -151,7 +149,7 @@ public class KshView {
             if (i4 == i5) {
                 return;
             }
-            int i6 = (abs - i3) + 1;
+            int i6 = (iAbs - i3) + 1;
             this.mRightScrolled = i4 > i5;
             if (isRTL()) {
                 this.mRightScrolled = !this.mRightScrolled;
@@ -164,56 +162,59 @@ public class KshView {
                 this.mMoveSelectorX -= f * i6;
             }
             this.mLastPosition = i;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mSelectorView, "translationX", this.mMoveSelectorX);
-            ofFloat.setDuration(250L);
-            ofFloat.start();
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mSelectorView, "translationX", this.mMoveSelectorX);
+            objectAnimatorOfFloat.setDuration(250L);
+            objectAnimatorOfFloat.start();
         }
     }
 
-    public final void showKshDialog(final List list) {
-        int i;
-        int i2;
+    public final void showKshDialog(final List list) throws Resources.NotFoundException {
+        int iWidth;
+        int iHeight;
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
         ViewGroup viewGroup = null;
-        View inflate = this.mInflater.inflate(R.layout.samsung_keyboard_shortcuts_view, (ViewGroup) null);
+        View viewInflate = this.mInflater.inflate(R.layout.samsung_keyboard_shortcuts_view, (ViewGroup) null);
         TypedValue typedValue = new TypedValue();
         Context context = this.mContext;
         int displayId = context.getDisplay().getDisplayId();
-        if (displayId != 0) {
+        if (displayId == 0) {
+            iWidth = this.mResources.getDisplayMetrics().widthPixels;
+            iHeight = this.mResources.getDisplayMetrics().heightPixels;
+        } else {
             for (Display display : ((DisplayManager) context.getSystemService("display")).getDisplays()) {
                 if (display.getDisplayId() == displayId && (display.getFlags() & 131072) != 0) {
                     Context context2 = this.mContext;
                     Rect boundsExcludingNavigationBarAndCutout = WindowMetricsHelper.getBoundsExcludingNavigationBarAndCutout(((WindowManager) context2.createDisplayContext(context2.getDisplay()).createWindowContext(2, null).getSystemService(WindowManager.class)).getCurrentWindowMetrics());
-                    i = boundsExcludingNavigationBarAndCutout.width();
-                    i2 = boundsExcludingNavigationBarAndCutout.height();
+                    iWidth = boundsExcludingNavigationBarAndCutout.width();
+                    iHeight = boundsExcludingNavigationBarAndCutout.height();
                     break;
                 }
             }
+            iWidth = this.mResources.getDisplayMetrics().widthPixels;
+            iHeight = this.mResources.getDisplayMetrics().heightPixels;
         }
-        i = this.mResources.getDisplayMetrics().widthPixels;
-        i2 = this.mResources.getDisplayMetrics().heightPixels;
-        int i3 = (int) (this.mResources.getDisplayMetrics().density * 600.0f);
+        int i = (int) (this.mResources.getDisplayMetrics().density * 600.0f);
         this.mResources.getValue(R.dimen.ksh_dialog_width_ratio, typedValue, true);
-        float f = i;
+        float f = iWidth;
         this.mViewWidth = (int) typedValue.getFraction(f, f);
         this.mResources.getValue(R.dimen.ksh_dialog_height_ratio, typedValue, true);
-        float f2 = i2;
+        float f2 = iHeight;
         int fraction = (int) typedValue.getFraction(f2, f2);
         this.mViewHeight = fraction;
-        if (fraction >= i2) {
+        if (fraction >= iHeight) {
             this.mViewHeight = -1;
         }
-        if (this.mViewHeight > i3) {
-            this.mViewHeight = i3;
+        if (this.mViewHeight > i) {
+            this.mViewHeight = i;
         }
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.ksh_view);
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.ksh_view);
         linearLayout.setLayoutParams(new FrameLayout.LayoutParams(this.mViewWidth, this.mViewHeight));
         this.mMaxColumn = this.mResources.getInteger(R.integer.ksh_max_column);
         int size = list.size();
         if (size < this.mMaxColumn) {
             this.mMaxColumn = size;
         }
-        this.mKshGroupRecyclerView = (RecyclerView) inflate.findViewById(R.id.ksh_group_recycler_view);
+        this.mKshGroupRecyclerView = (RecyclerView) viewInflate.findViewById(R.id.ksh_group_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.mContext, 0, false);
         this.mLayoutManager = linearLayoutManager;
         this.mKshGroupRecyclerView.setLayoutManager(linearLayoutManager);
@@ -227,57 +228,57 @@ public class KshView {
         this.mMoveSelectorX = 0.0f;
         this.mLastPosition = 0;
         this.mPosition = 0;
-        FrameLayout frameLayout = (FrameLayout) inflate.findViewById(R.id.indicator_frame);
-        int i4 = this.mMaxColumn;
+        FrameLayout frameLayout = (FrameLayout) viewInflate.findViewById(R.id.indicator_frame);
+        int i2 = this.mMaxColumn;
         AnonymousClass1 anonymousClass1 = this.mHorizontalScrollListener;
-        if (size > i4) {
+        if (size > i2) {
             int size2 = list.size();
             LinearLayout linearLayout2 = (LinearLayout) frameLayout.findViewById(R.id.label_container);
-            int i5 = 0;
-            while (i5 < size2) {
+            int i3 = 0;
+            while (i3 < size2) {
                 TextView textView = (TextView) this.mInflater.inflate(R.layout.samsung_ksh_indicator_label_view, viewGroup);
-                CharSequence label = getLabel(i5, list);
+                CharSequence label = getLabel(i3, list);
                 textView.setText(label);
-                textView.setTag(Integer.valueOf(i5));
+                textView.setTag(Integer.valueOf(i3));
                 textView.setContentDescription(((Object) label) + ", " + this.mContext.getResources().getString(R.string.keyboard_shortcut_indicator_selector_tab_description));
                 textView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.KshView$$ExternalSyntheticLambda3
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        final KshView kshView = KshView.this;
+                        final KshView kshView = this.f$0;
                         final List list2 = list;
                         kshView.getClass();
-                        final int intValue = ((Integer) view.getTag()).intValue();
-                        if (intValue != kshView.mLastPosition) {
+                        final int iIntValue = ((Integer) view.getTag()).intValue();
+                        if (iIntValue != kshView.mLastPosition) {
                             kshView.mKshGroupRecyclerView.post(new Runnable() { // from class: com.android.systemui.statusbar.KshView$$ExternalSyntheticLambda4
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    KshView kshView2 = KshView.this;
-                                    int i6 = intValue;
+                                    KshView kshView2 = kshView;
+                                    int i4 = iIntValue;
                                     List list3 = list2;
-                                    kshView2.mPosition = i6;
-                                    kshView2.mKshGroupRecyclerView.scrollToPosition(i6);
-                                    kshView2.moveSelector(i6);
+                                    kshView2.mPosition = i4;
+                                    kshView2.mKshGroupRecyclerView.scrollToPosition(i4);
+                                    kshView2.moveSelector(i4);
                                     AccessibilityManager accessibilityManager = kshView2.mA11yManager;
                                     if (accessibilityManager == null || !accessibilityManager.isEnabled()) {
                                         return;
                                     }
-                                    AccessibilityEvent obtain = AccessibilityEvent.obtain();
-                                    obtain.setEventType(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
-                                    obtain.getText().add(((Object) kshView2.getLabel(i6, list3)) + ", " + kshView2.mContext.getResources().getString(R.string.keyboard_shortcut_indicator_selector_tab_description));
-                                    kshView2.mA11yManager.sendAccessibilityEvent(obtain);
+                                    AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+                                    accessibilityEventObtain.setEventType(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
+                                    accessibilityEventObtain.getText().add(((Object) kshView2.getLabel(i4, list3)) + ", " + kshView2.mContext.getResources().getString(R.string.keyboard_shortcut_indicator_selector_tab_description));
+                                    kshView2.mA11yManager.sendAccessibilityEvent(accessibilityEventObtain);
                                 }
                             });
                         }
                     }
                 });
-                linearLayout2.addView(textView, i5);
-                i5++;
+                linearLayout2.addView(textView, i3);
+                i3++;
                 viewGroup = null;
             }
             linearLayout2.setVisibility(0);
-            View findViewById = frameLayout.findViewById(R.id.label_selector);
-            this.mSelectorView = findViewById;
-            findViewById.setLayoutParams(new LinearLayout.LayoutParams(this.mResources.getDimensionPixelSize(R.dimen.ksh_selector_width) * this.mMaxColumn, -1));
+            View viewFindViewById = frameLayout.findViewById(R.id.label_selector);
+            this.mSelectorView = viewFindViewById;
+            viewFindViewById.setLayoutParams(new LinearLayout.LayoutParams(this.mResources.getDimensionPixelSize(R.dimen.ksh_selector_width) * this.mMaxColumn, -1));
             this.mSelectorView.setVisibility(0);
             linearLayout.setPadding(0, 0, 0, this.mResources.getDimensionPixelSize(R.dimen.ksh_padding_bottom_with_indicator));
             this.mKshGroupRecyclerView.addOnScrollListener(anonymousClass1);
@@ -289,10 +290,10 @@ public class KshView {
                 ((ArrayList) list2).remove(anonymousClass1);
             }
         }
-        builder.setView(inflate);
-        AlertDialog create = builder.create();
-        this.mKeyboardShortcutsDialog = create;
-        Window window = create.getWindow();
+        builder.setView(viewInflate);
+        AlertDialog alertDialogCreate = builder.create();
+        this.mKeyboardShortcutsDialog = alertDialogCreate;
+        Window window = alertDialogCreate.getWindow();
         window.setType(2008);
         this.mKeyboardShortcutsDialog.setCanceledOnTouchOutside(true);
         this.mKeyboardShortcutsDialog.show();
@@ -304,13 +305,13 @@ public class KshView {
         window.setAttributes(attributes);
         this.mKeyboardShortcutsDialog.setOnKeyListener(new DialogInterface.OnKeyListener() { // from class: com.android.systemui.statusbar.KshView$$ExternalSyntheticLambda2
             @Override // android.content.DialogInterface.OnKeyListener
-            public final boolean onKey(DialogInterface dialogInterface, int i6, KeyEvent keyEvent) {
-                KshView kshView = KshView.this;
+            public final boolean onKey(DialogInterface dialogInterface, int i4, KeyEvent keyEvent) {
+                KshView kshView = this.f$0;
                 kshView.getClass();
-                if (i6 == 21 || i6 == 22) {
+                if (i4 == 21 || i4 == 22) {
                     kshView.mHardKeyScrolled = true;
                 }
-                if (i6 != 61) {
+                if (i4 != 61) {
                     return false;
                 }
                 kshView.mTabKeyIn = true;

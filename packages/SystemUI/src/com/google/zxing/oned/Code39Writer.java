@@ -6,7 +6,6 @@ import com.google.zxing.BarcodeFormat;
 import java.util.Collection;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Code39Writer extends OneDimensionalCodeWriter {
     public static void toIntArray(int i, int[] iArr) {
@@ -19,7 +18,11 @@ public final class Code39Writer extends OneDimensionalCodeWriter {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:58:0x00ee  */
     @Override // com.google.zxing.oned.OneDimensionalCodeWriter
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean[] encode(String str) {
         int length = str.length();
         if (length > 80) {
@@ -34,48 +37,45 @@ public final class Code39Writer extends OneDimensionalCodeWriter {
                 int length2 = str.length();
                 StringBuilder sb = new StringBuilder();
                 for (int i2 = 0; i2 < length2; i2++) {
-                    char charAt = str.charAt(i2);
-                    if (charAt != 0) {
-                        if (charAt != ' ') {
-                            if (charAt == '@') {
-                                sb.append("%V");
-                            } else if (charAt == '`') {
-                                sb.append("%W");
-                            } else if (charAt != '-' && charAt != '.') {
-                                if (charAt <= 26) {
-                                    sb.append('$');
-                                    sb.append((char) (charAt + '@'));
-                                } else if (charAt < ' ') {
-                                    sb.append('%');
-                                    sb.append((char) (charAt + '&'));
-                                } else if (charAt <= ',' || charAt == '/' || charAt == ':') {
-                                    sb.append('/');
-                                    sb.append((char) (charAt + ' '));
-                                } else if (charAt <= '9') {
-                                    sb.append(charAt);
-                                } else if (charAt <= '?') {
-                                    sb.append('%');
-                                    sb.append((char) (charAt + 11));
-                                } else if (charAt <= 'Z') {
-                                    sb.append(charAt);
-                                } else if (charAt <= '_') {
-                                    sb.append('%');
-                                    sb.append((char) (charAt - 16));
-                                } else if (charAt <= 'z') {
-                                    sb.append('+');
-                                    sb.append((char) (charAt - ' '));
-                                } else {
-                                    if (charAt > 127) {
-                                        throw new IllegalArgumentException("Requested content contains a non-encodable character: '" + str.charAt(i2) + "'");
-                                    }
-                                    sb.append('%');
-                                    sb.append((char) (charAt - '+'));
-                                }
-                            }
-                        }
-                        sb.append(charAt);
-                    } else {
+                    char cCharAt = str.charAt(i2);
+                    if (cCharAt == 0) {
                         sb.append("%U");
+                    } else if (cCharAt == ' ') {
+                        sb.append(cCharAt);
+                    } else if (cCharAt == '@') {
+                        sb.append("%V");
+                    } else if (cCharAt == '`') {
+                        sb.append("%W");
+                    } else if (cCharAt != '-' && cCharAt != '.') {
+                        if (cCharAt <= 26) {
+                            sb.append('$');
+                            sb.append((char) (cCharAt + '@'));
+                        } else if (cCharAt < ' ') {
+                            sb.append('%');
+                            sb.append((char) (cCharAt + '&'));
+                        } else if (cCharAt <= ',' || cCharAt == '/' || cCharAt == ':') {
+                            sb.append('/');
+                            sb.append((char) (cCharAt + ' '));
+                        } else if (cCharAt <= '9') {
+                            sb.append(cCharAt);
+                        } else if (cCharAt <= '?') {
+                            sb.append('%');
+                            sb.append((char) (cCharAt + 11));
+                        } else if (cCharAt <= 'Z') {
+                            sb.append(cCharAt);
+                        } else if (cCharAt <= '_') {
+                            sb.append('%');
+                            sb.append((char) (cCharAt - 16));
+                        } else if (cCharAt <= 'z') {
+                            sb.append('+');
+                            sb.append((char) (cCharAt - ' '));
+                        } else {
+                            if (cCharAt > 127) {
+                                throw new IllegalArgumentException("Requested content contains a non-encodable character: '" + str.charAt(i2) + "'");
+                            }
+                            sb.append('%');
+                            sb.append((char) (cCharAt - '+'));
+                        }
                     }
                 }
                 str = sb.toString();
@@ -90,16 +90,16 @@ public final class Code39Writer extends OneDimensionalCodeWriter {
         int[] iArr = new int[9];
         boolean[] zArr = new boolean[(length * 13) + 25];
         toIntArray(148, iArr);
-        int appendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, iArr, true);
+        int iAppendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, iArr, true);
         int[] iArr2 = {1};
-        int appendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, appendPattern, iArr2, false) + appendPattern;
+        int iAppendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern, iArr2, false) + iAppendPattern;
         for (int i3 = 0; i3 < length; i3++) {
             toIntArray(Code39Reader.CHARACTER_ENCODINGS["0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%".indexOf(str.charAt(i3))], iArr);
-            int appendPattern3 = OneDimensionalCodeWriter.appendPattern(zArr, appendPattern2, iArr, true) + appendPattern2;
-            appendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, appendPattern3, iArr2, false) + appendPattern3;
+            int iAppendPattern3 = OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern2, iArr, true) + iAppendPattern2;
+            iAppendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern3, iArr2, false) + iAppendPattern3;
         }
         toIntArray(148, iArr);
-        OneDimensionalCodeWriter.appendPattern(zArr, appendPattern2, iArr, true);
+        OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern2, iArr, true);
         return zArr;
     }
 

@@ -30,7 +30,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WalletActivity extends ComponentActivity implements QuickAccessWalletClient.WalletServiceEventListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -117,7 +116,7 @@ public class WalletActivity extends ComponentActivity implements QuickAccessWall
                                     walletActivity.mKeyguardDismissUtil.executeWhenUnlocked(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.wallet.ui.WalletActivity$$ExternalSyntheticLambda2
                                         @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                                         public final boolean onDismiss() {
-                                            WalletActivity walletActivity2 = WalletActivity.this;
+                                            WalletActivity walletActivity2 = walletActivity;
                                             walletActivity2.mUiEventLogger.log(WalletUiEvent.QAW_SHOW_ALL);
                                             walletActivity2.mActivityStarter.startActivity(walletActivity2.mWalletClient.createWalletIntent(), true, null, true, walletActivity2.mWalletClient.getUser());
                                             walletActivity2.finish();
@@ -173,7 +172,7 @@ public class WalletActivity extends ComponentActivity implements QuickAccessWall
                                     walletActivity.mKeyguardDismissUtil.executeWhenUnlocked(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.wallet.ui.WalletActivity$$ExternalSyntheticLambda2
                                         @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                                         public final boolean onDismiss() {
-                                            WalletActivity walletActivity2 = WalletActivity.this;
+                                            WalletActivity walletActivity2 = walletActivity;
                                             walletActivity2.mUiEventLogger.log(WalletUiEvent.QAW_SHOW_ALL);
                                             walletActivity2.mActivityStarter.startActivity(walletActivity2.mWalletClient.createWalletIntent(), true, null, true, walletActivity2.mWalletClient.getUser());
                                             walletActivity2.finish();

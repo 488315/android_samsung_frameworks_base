@@ -12,9 +12,7 @@ import com.android.systemui.kairos.internal.PullNodesKt;
 import com.android.systemui.kairos.internal.Schedulable;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class EventsKt {
     public static final EmptyEvents emptyEvents;
@@ -41,12 +39,12 @@ public abstract class EventsKt {
             return new Init(str, new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.InputsKt$activated$$inlined$EventsImplCheap$1
                 @Override // com.android.systemui.kairos.internal.EventsImpl
                 public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                    InputNode inputNode2 = InputNode.this;
+                    InputNode inputNode2 = inputNode;
                     DownstreamSet downstreamSet = inputNode2.downstreamSet;
-                    boolean isEmpty = GraphKt.isEmpty(downstreamSet);
+                    boolean zIsEmpty = GraphKt.isEmpty(downstreamSet);
                     downstreamSet.add(schedulable);
-                    if (isEmpty && !inputNode2.activated.getAndSet(true)) {
-                        inputNode2.activate.mo779invoke(evalScope);
+                    if (zIsEmpty && !inputNode2.activated.getAndSet(true)) {
+                        inputNode2.activate.mo781invoke(evalScope);
                     }
                     return new ActivationResult(new NodeConnection(inputNode2, inputNode2), inputNode2.transactionCache.epoch == evalScope.getEpoch());
                 }
@@ -61,12 +59,12 @@ public abstract class EventsKt {
         return new Init(null, new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.InputsKt$activated$$inlined$EventsImplCheap$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                InputNode inputNode22 = InputNode.this;
+                InputNode inputNode22 = inputNode2;
                 DownstreamSet downstreamSet = inputNode22.downstreamSet;
-                boolean isEmpty = GraphKt.isEmpty(downstreamSet);
+                boolean zIsEmpty = GraphKt.isEmpty(downstreamSet);
                 downstreamSet.add(schedulable);
-                if (isEmpty && !inputNode22.activated.getAndSet(true)) {
-                    inputNode22.activate.mo779invoke(evalScope);
+                if (zIsEmpty && !inputNode22.activated.getAndSet(true)) {
+                    inputNode22.activate.mo781invoke(evalScope);
                 }
                 return new ActivationResult(new NodeConnection(inputNode22, inputNode22), inputNode22.transactionCache.epoch == evalScope.getEpoch());
             }
@@ -78,12 +76,12 @@ public abstract class EventsKt {
         return new EventsInit(new Init(null, new InitKt$constInit$1(PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.EventsKt$map$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope)).activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope)).activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, eventsKt$$ExternalSyntheticLambda1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         }))));
     }
@@ -93,12 +91,12 @@ public abstract class EventsKt {
         return new EventsInit(new Init(null, new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.EventsKt$mapCheap$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope)).activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope)).activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, eventsKt$$ExternalSyntheticLambda1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         })));
     }

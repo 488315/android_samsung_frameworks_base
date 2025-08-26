@@ -23,13 +23,11 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeWarningWalletMiniDialog extends Dialog implements VolumeObserver {
     public final WarningDialogType dialogType;
     public final StoreInteractor storeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,6 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WarningDialogType {
         public static final /* synthetic */ WarningDialogType[] $VALUES;
         public static final WarningDialogType DEFAULT_SAFETY_VOLUME_WARNING;
@@ -72,7 +69,6 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -207,7 +203,6 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
         }
         ((Button) requireViewById(R.id.negative_button)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.warnings.VolumeWarningWalletMiniDialog$setClickListener$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -227,20 +222,19 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i2 = WhenMappings.$EnumSwitchMapping$0[VolumeWarningWalletMiniDialog.this.dialogType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.dialogType.ordinal()];
                 if (i2 == 1) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_CANCEL_CLICKED), true, VolumeWarningWalletMiniDialog.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_CANCEL_CLICKED), true, this.this$0.storeInteractor, false);
                 } else {
                     if (i2 != 2) {
                         return;
                     }
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_CANCEL_CLICKED), true, VolumeWarningWalletMiniDialog.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_CANCEL_CLICKED), true, this.this$0.storeInteractor, false);
                 }
             }
         });
         ((Button) requireViewById(R.id.positive_button)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.warnings.VolumeWarningWalletMiniDialog$setClickListener$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -264,16 +258,16 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i2 = WhenMappings.$EnumSwitchMapping$0[VolumeWarningWalletMiniDialog.this.dialogType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.dialogType.ordinal()];
                 if (i2 == 1) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_OK_CLICKED), true, VolumeWarningWalletMiniDialog.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_SAFETY_WARNING_DIALOG_OK_CLICKED), true, this.this$0.storeInteractor, false);
                 } else if (i2 == 2) {
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_SETTINS_CLICKED), true, VolumeWarningWalletMiniDialog.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_LIMITER_DIALOG_SETTINS_CLICKED), true, this.this$0.storeInteractor, false);
                 } else {
                     if (i2 != 3) {
                         throw new NoWhenBranchMatchedException();
                     }
-                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_OK_CLICKED), true, VolumeWarningWalletMiniDialog.this.storeInteractor, false);
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_OK_CLICKED), true, this.this$0.storeInteractor, false);
                 }
             }
         });
@@ -333,9 +327,9 @@ public final class VolumeWarningWalletMiniDialog extends Dialog implements Volum
                 break;
             case 9:
                 ViewVisibilityUtil viewVisibilityUtil = ViewVisibilityUtil.INSTANCE;
-                View requireViewById = requireViewById(R.id.volume_warning_wallet_mini_dialog_text_view);
+                View viewRequireViewById = requireViewById(R.id.volume_warning_wallet_mini_dialog_text_view);
                 viewVisibilityUtil.getClass();
-                ViewVisibilityUtil.setGone(requireViewById);
+                ViewVisibilityUtil.setGone(viewRequireViewById);
                 ViewVisibilityUtil.setGone(requireViewById(R.id.volume_warning_wallet_mini_dialog_buttons));
                 requireViewById(R.id.volume_warning_toast_text_view).setVisibility(0);
                 getWindow().setBackgroundDrawable(new ColorDrawable(-872415232));

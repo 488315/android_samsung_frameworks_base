@@ -112,8 +112,8 @@ public final class Gainmap implements Parcelable {
     }
 
     public Gainmap asShared() {
-        Bitmap asShared = this.mGainmapContents.asShared();
-        return asShared == this.mGainmapContents ? this : new Gainmap(asShared, nCreateCopy(this.mNativePtr));
+        Bitmap bitmapAsShared = this.mGainmapContents.asShared();
+        return bitmapAsShared == this.mGainmapContents ? this : new Gainmap(bitmapAsShared, nCreateCopy(this.mNativePtr));
     }
 
     public Bitmap getGainmapContents() {

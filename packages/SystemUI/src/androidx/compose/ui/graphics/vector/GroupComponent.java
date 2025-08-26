@@ -18,7 +18,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GroupComponent extends VNode {
     public final List children;
@@ -56,12 +55,12 @@ public final class GroupComponent extends VNode {
             /* JADX WARN: Type inference failed for: r1v2, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.Lambda] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 VNode vNode = (VNode) obj;
-                GroupComponent.this.markTintForVNode(vNode);
-                ?? r1 = GroupComponent.this.invalidateListener;
+                this.this$0.markTintForVNode(vNode);
+                ?? r1 = this.this$0.invalidateListener;
                 if (r1 != 0) {
-                    r1.mo779invoke(vNode);
+                    r1.mo781invoke(vNode);
                 }
                 return Unit.INSTANCE;
             }
@@ -75,52 +74,52 @@ public final class GroupComponent extends VNode {
     @Override // androidx.compose.ui.graphics.vector.VNode
     public final void draw(DrawScope drawScope) {
         if (this.isMatrixDirty) {
-            float[] fArr = this.groupMatrix;
-            if (fArr == null) {
-                fArr = Matrix.m481constructorimpl$default();
-                this.groupMatrix = fArr;
+            float[] fArrM483constructorimpl$default = this.groupMatrix;
+            if (fArrM483constructorimpl$default == null) {
+                fArrM483constructorimpl$default = Matrix.m483constructorimpl$default();
+                this.groupMatrix = fArrM483constructorimpl$default;
             } else {
-                Matrix.m484resetimpl(fArr);
+                Matrix.m486resetimpl(fArrM483constructorimpl$default);
             }
-            Matrix.m488translateimpl(this.translationX + this.pivotX, this.translationY + this.pivotY, fArr);
-            Matrix.m485rotateZimpl(this.rotation, fArr);
-            Matrix.m486scaleimpl(this.scaleX, this.scaleY, fArr);
-            Matrix.m488translateimpl(-this.pivotX, -this.pivotY, fArr);
+            Matrix.m490translateimpl(this.translationX + this.pivotX, this.translationY + this.pivotY, fArrM483constructorimpl$default);
+            Matrix.m487rotateZimpl(this.rotation, fArrM483constructorimpl$default);
+            Matrix.m488scaleimpl(this.scaleX, this.scaleY, fArrM483constructorimpl$default);
+            Matrix.m490translateimpl(-this.pivotX, -this.pivotY, fArrM483constructorimpl$default);
             this.isMatrixDirty = false;
         }
         if (this.isClipPathDirty) {
             if (!this.clipPathData.isEmpty()) {
-                AndroidPath androidPath = this.clipPath;
-                if (androidPath == null) {
-                    androidPath = AndroidPath_androidKt.Path();
-                    this.clipPath = androidPath;
+                AndroidPath androidPathPath = this.clipPath;
+                if (androidPathPath == null) {
+                    androidPathPath = AndroidPath_androidKt.Path();
+                    this.clipPath = androidPathPath;
                 }
-                PathParserKt.toPath(this.clipPathData, androidPath);
+                PathParserKt.toPath(this.clipPathData, androidPathPath);
             }
             this.isClipPathDirty = false;
         }
         CanvasDrawScope$drawContext$1 drawContext = drawScope.getDrawContext();
-        long m526getSizeNHjbRc = drawContext.m526getSizeNHjbRc();
+        long jM528getSizeNHjbRc = drawContext.m528getSizeNHjbRc();
         drawContext.getCanvas().save();
         try {
             CanvasDrawScopeKt$asDrawTransform$1 canvasDrawScopeKt$asDrawTransform$1 = drawContext.transform;
-            float[] fArr2 = this.groupMatrix;
-            if (fArr2 != null) {
-                ((CanvasDrawScope$drawContext$1) canvasDrawScopeKt$asDrawTransform$1.$this_asDrawTransform).getCanvas().mo425concat58bKbWc(Matrix.m480boximpl(fArr2).values);
+            float[] fArr = this.groupMatrix;
+            if (fArr != null) {
+                ((CanvasDrawScope$drawContext$1) canvasDrawScopeKt$asDrawTransform$1.$this_asDrawTransform).getCanvas().mo427concat58bKbWc(Matrix.m482boximpl(fArr).values);
             }
-            AndroidPath androidPath2 = this.clipPath;
-            if (!this.clipPathData.isEmpty() && androidPath2 != null) {
+            AndroidPath androidPath = this.clipPath;
+            if (!this.clipPathData.isEmpty() && androidPath != null) {
                 ClipOp.Companion.getClass();
-                ((CanvasDrawScope$drawContext$1) canvasDrawScopeKt$asDrawTransform$1.$this_asDrawTransform).getCanvas().mo423clipPathmtrdDE(androidPath2, ClipOp.Intersect);
+                ((CanvasDrawScope$drawContext$1) canvasDrawScopeKt$asDrawTransform$1.$this_asDrawTransform).getCanvas().mo425clipPathmtrdDE(androidPath, ClipOp.Intersect);
             }
             ArrayList arrayList = (ArrayList) this.children;
             int size = arrayList.size();
             for (int i = 0; i < size; i++) {
                 ((VNode) arrayList.get(i)).draw(drawScope);
             }
-            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
         } catch (Throwable th) {
-            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
             throw th;
         }
     }
@@ -143,7 +142,7 @@ public final class GroupComponent extends VNode {
     }
 
     /* renamed from: markTintForColor-8_81llA, reason: not valid java name */
-    public final void m563markTintForColor8_81llA(long j) {
+    public final void m565markTintForColor8_81llA(long j) {
         if (this.isTintable && j != 16) {
             long j2 = this.tintColor;
             if (j2 == 16) {
@@ -151,7 +150,7 @@ public final class GroupComponent extends VNode {
                 return;
             }
             EmptyList emptyList = VectorKt.EmptyPath;
-            if (Color.m461getRedimpl(j2) == Color.m461getRedimpl(j) && Color.m460getGreenimpl(j2) == Color.m460getGreenimpl(j) && Color.m458getBlueimpl(j2) == Color.m458getBlueimpl(j)) {
+            if (Color.m463getRedimpl(j2) == Color.m463getRedimpl(j) && Color.m462getGreenimpl(j2) == Color.m462getGreenimpl(j) && Color.m460getBlueimpl(j2) == Color.m460getBlueimpl(j)) {
                 return;
             }
             this.isTintable = false;
@@ -165,7 +164,7 @@ public final class GroupComponent extends VNode {
             if (vNode instanceof GroupComponent) {
                 GroupComponent groupComponent = (GroupComponent) vNode;
                 if (groupComponent.isTintable && this.isTintable) {
-                    m563markTintForColor8_81llA(groupComponent.tintColor);
+                    m565markTintForColor8_81llA(groupComponent.tintColor);
                     return;
                 }
                 this.isTintable = false;
@@ -179,7 +178,7 @@ public final class GroupComponent extends VNode {
         Brush brush = pathComponent.fill;
         if (this.isTintable && brush != null) {
             if (brush instanceof SolidColor) {
-                m563markTintForColor8_81llA(((SolidColor) brush).value);
+                m565markTintForColor8_81llA(((SolidColor) brush).value);
             } else {
                 this.isTintable = false;
                 Color.Companion.getClass();
@@ -189,7 +188,7 @@ public final class GroupComponent extends VNode {
         Brush brush2 = pathComponent.stroke;
         if (this.isTintable && brush2 != null) {
             if (brush2 instanceof SolidColor) {
-                m563markTintForColor8_81llA(((SolidColor) brush2).value);
+                m565markTintForColor8_81llA(((SolidColor) brush2).value);
                 return;
             }
             this.isTintable = false;

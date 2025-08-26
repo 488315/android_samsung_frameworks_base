@@ -47,9 +47,9 @@ public final class SystemOnBackInvokedCallbacks {
                         weakReference = null;
                         break;
                     }
-                    WeakReference<TYPE> keyAt = this.mObjectMap.keyAt(size);
-                    if (keyAt.get() == type) {
-                        weakReference = this.mObjectMap.get(keyAt);
+                    WeakReference<TYPE> weakReferenceKeyAt = this.mObjectMap.keyAt(size);
+                    if (weakReferenceKeyAt.get() == type) {
+                        weakReference = this.mObjectMap.get(weakReferenceKeyAt);
                         break;
                     }
                     size--;
@@ -57,11 +57,11 @@ public final class SystemOnBackInvokedCallbacks {
                 if (weakReference != null) {
                     return weakReference.get();
                 }
-                SystemOverrideOnBackInvokedCallback createCallback = createCallback(type);
-                if (createCallback != null) {
-                    this.mObjectMap.put(new WeakReference<>(type), new WeakReference<>(createCallback));
+                SystemOverrideOnBackInvokedCallback systemOverrideOnBackInvokedCallbackCreateCallback = createCallback(type);
+                if (systemOverrideOnBackInvokedCallbackCreateCallback != null) {
+                    this.mObjectMap.put(new WeakReference<>(type), new WeakReference<>(systemOverrideOnBackInvokedCallbackCreateCallback));
                 }
-                return createCallback;
+                return systemOverrideOnBackInvokedCallbackCreateCallback;
             }
         }
     }

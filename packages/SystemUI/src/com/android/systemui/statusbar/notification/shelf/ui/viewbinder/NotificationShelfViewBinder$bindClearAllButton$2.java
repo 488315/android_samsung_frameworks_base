@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationShelfViewBinder$bindClearAllButton$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationShelfManager $shelfManager;
@@ -22,7 +21,6 @@ final class NotificationShelfViewBinder$bindClearAllButton$2 extends SuspendLamb
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder$bindClearAllButton$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ NotificationShelfManager $shelfManager;
@@ -57,11 +55,11 @@ final class NotificationShelfViewBinder$bindClearAllButton$2 extends SuspendLamb
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder.bindClearAllButton.2.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        NotificationShelfManager notificationShelfManager2 = NotificationShelfManager.this;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        NotificationShelfManager notificationShelfManager2 = notificationShelfManager;
                         notificationShelfManager2.getClass();
-                        Log.d("NotificationShelf", " setClearAllButtonVisible :" + booleanValue);
-                        notificationShelfManager2.clearButtonVisible = booleanValue;
+                        Log.d("NotificationShelf", " setClearAllButtonVisible :" + zBooleanValue);
+                        notificationShelfManager2.clearButtonVisible = zBooleanValue;
                         notificationShelfManager2.updateClearButton();
                         return Unit.INSTANCE;
                     }

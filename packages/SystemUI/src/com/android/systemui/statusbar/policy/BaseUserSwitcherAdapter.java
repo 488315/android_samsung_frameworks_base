@@ -25,14 +25,12 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class BaseUserSwitcherAdapter extends BaseAdapter {
     public static final Companion Companion = new Companion(null);
     public static final Lazy disabledUserAvatarColorFilter$delegate = LazyKt__LazyJVMKt.lazy(new BaseUserSwitcherAdapter$$ExternalSyntheticLambda0());
     public final UserSwitcherController controller;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,19 +104,19 @@ public abstract class BaseUserSwitcherAdapter extends BaseAdapter {
             i++;
             UserRecord userRecord = (UserRecord) obj;
             if (LsRune.LOCKUI_MULTI_USER) {
-                if (!((KeyguardInteractor) this.controller.keyguardInteractor$delegate.getValue()).isKeyguardShowing()) {
-                    if (!this.controller.isUserSwitcherEnabled() && !userRecord.isCurrent) {
+                if (((KeyguardInteractor) this.controller.keyguardInteractor$delegate.getValue()).isKeyguardShowing()) {
+                    if (!userRecord.isRestricted && (this.controller.isUserSwitcherEnabled() || userRecord.isCurrent)) {
+                        if (userRecord.info != null) {
+                            arrayList2.add(obj);
+                        }
                     }
+                } else if (this.controller.isUserSwitcherEnabled() || userRecord.isCurrent) {
                     arrayList2.add(obj);
-                } else if (!userRecord.isRestricted && (this.controller.isUserSwitcherEnabled() || userRecord.isCurrent)) {
-                    if (userRecord.info != null) {
-                        arrayList2.add(obj);
-                    }
                 }
             } else if (!((KeyguardInteractor) this.controller.keyguardInteractor$delegate.getValue()).isKeyguardShowing() || !userRecord.isRestricted) {
-                if (!this.controller.isUserSwitcherEnabled() && !userRecord.isCurrent && !userRecord.isSignOut) {
+                if (this.controller.isUserSwitcherEnabled() || userRecord.isCurrent || userRecord.isSignOut) {
+                    arrayList2.add(obj);
                 }
-                arrayList2.add(obj);
             }
         }
         return arrayList2;

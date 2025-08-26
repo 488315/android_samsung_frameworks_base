@@ -14,7 +14,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileState {
     public static final Companion Companion = new Companion(null);
@@ -31,7 +30,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActivationState {
         public static final /* synthetic */ ActivationState[] $VALUES;
         public static final ActivationState ACTIVE;
@@ -40,7 +38,6 @@ public final class QSTileState {
         public static final ActivationState UNAVAILABLE;
         private final int legacyState;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -80,7 +77,6 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public CharSequence contentDescription;
         public Icon icon;
@@ -99,13 +95,12 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
-        public static QSTileState build(Resources resources, Resources.Theme theme, QSTileUIConfig qSTileUIConfig, Function1 function1) {
+        public static QSTileState build(Resources resources, Resources.Theme theme, QSTileUIConfig qSTileUIConfig, Function1 function1) throws Resources.NotFoundException {
             Drawable drawable = resources.getDrawable(qSTileUIConfig.getIconRes(), theme);
             drawable.getClass();
             return build(new Icon.Loaded(drawable, null, Integer.valueOf(qSTileUIConfig.getIconRes())), resources.getString(qSTileUIConfig.getLabelRes()), function1);
@@ -116,7 +111,7 @@ public final class QSTileState {
 
         public static QSTileState build(Icon icon, CharSequence charSequence, Function1 function1) {
             Builder builder = new Builder(icon, charSequence);
-            function1.mo779invoke(builder);
+            function1.mo781invoke(builder);
             Icon icon2 = builder.icon;
             CharSequence charSequence2 = builder.label;
             ActivationState activationState = builder.activationState;
@@ -132,7 +127,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EnabledState {
         public static final /* synthetic */ EnabledState[] $VALUES;
         public static final EnabledState DISABLED;
@@ -160,10 +154,8 @@ public final class QSTileState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SideViewIcon {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Chevron implements SideViewIcon {
             public static final Chevron INSTANCE = new Chevron();
 
@@ -183,7 +175,6 @@ public final class QSTileState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Custom implements SideViewIcon {
             public final Icon icon;
 
@@ -207,7 +198,6 @@ public final class QSTileState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class None implements SideViewIcon {
             public static final None INSTANCE = new None();
 
@@ -230,7 +220,6 @@ public final class QSTileState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UserAction {
         public static final /* synthetic */ UserAction[] $VALUES;
         public static final UserAction CLICK;
@@ -287,15 +276,15 @@ public final class QSTileState {
 
     public final int hashCode() {
         Icon icon = this.icon;
-        int hashCode = (this.activationState.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m((icon == null ? 0 : icon.hashCode()) * 31, 31, this.label)) * 31;
+        int iHashCode = (this.activationState.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m((icon == null ? 0 : icon.hashCode()) * 31, 31, this.label)) * 31;
         CharSequence charSequence = this.secondaryLabel;
-        int hashCode2 = (this.supportedActions.hashCode() + ((hashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31)) * 31;
+        int iHashCode2 = (this.supportedActions.hashCode() + ((iHashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31)) * 31;
         CharSequence charSequence2 = this.contentDescription;
-        int hashCode3 = (hashCode2 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
         CharSequence charSequence3 = this.stateDescription;
-        int hashCode4 = (this.enabledState.hashCode() + ((this.sideViewIcon.hashCode() + ((hashCode3 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31)) * 31)) * 31;
+        int iHashCode4 = (this.enabledState.hashCode() + ((this.sideViewIcon.hashCode() + ((iHashCode3 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31)) * 31)) * 31;
         String str = this.expandedAccessibilityClassName;
-        return hashCode4 + (str != null ? str.hashCode() : 0);
+        return iHashCode4 + (str != null ? str.hashCode() : 0);
     }
 
     public final String toString() {

@@ -34,7 +34,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptySet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate {
     public final Executor bgExecutor;
@@ -49,7 +48,6 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
     public final IssueRecordingState state;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         RecordIssueDialogDelegate create(Runnable runnable);
     }
@@ -80,7 +78,7 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
         systemUIDialog.setPositiveButton(R.string.qs_record_issue_start, new DialogInterface.OnClickListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$beforeCreate$1$2
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                RecordIssueDialogDelegate.this.onStarted.run();
+                this.this$0.onStarted.run();
             }
         });
     }
@@ -105,25 +103,25 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
         r6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onCreate$1$2$1
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                RecordIssueDialogDelegate.this.state.getPrefs().edit().putBoolean("key_recordScreen", z).apply();
+                this.this$0.state.getPrefs().edit().putBoolean("key_recordScreen", z).apply();
                 if (z) {
-                    final RecordIssueDialogDelegate recordIssueDialogDelegate = RecordIssueDialogDelegate.this;
+                    final RecordIssueDialogDelegate recordIssueDialogDelegate = this.this$0;
                     recordIssueDialogDelegate.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onCreate$1$2$1.1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            final RecordIssueDialogDelegate recordIssueDialogDelegate2 = RecordIssueDialogDelegate.this;
+                            final RecordIssueDialogDelegate recordIssueDialogDelegate2 = recordIssueDialogDelegate;
                             ScreenCaptureDevicePolicyResolver screenCaptureDevicePolicyResolver = (ScreenCaptureDevicePolicyResolver) recordIssueDialogDelegate2.devicePolicyResolver.get();
                             UserTrackerImpl userTrackerImpl = (UserTrackerImpl) recordIssueDialogDelegate2.userTracker;
                             if (screenCaptureDevicePolicyResolver.isScreenCaptureCompletelyDisabled(UserHandle.of(userTrackerImpl.getUserId()))) {
                                 recordIssueDialogDelegate2.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onScreenRecordSwitchClicked$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        ScreenCaptureDisabledDialogDelegate screenCaptureDisabledDialogDelegate = RecordIssueDialogDelegate.this.screenCaptureDisabledDialogDelegate;
+                                        ScreenCaptureDisabledDialogDelegate screenCaptureDisabledDialogDelegate = recordIssueDialogDelegate2.screenCaptureDisabledDialogDelegate;
                                         screenCaptureDisabledDialogDelegate.getClass();
                                         SystemUIDialog systemUIDialog2 = new SystemUIDialog(screenCaptureDisabledDialogDelegate.context);
                                         screenCaptureDisabledDialogDelegate.initDialog(systemUIDialog2);
                                         systemUIDialog2.show();
-                                        Switch r3 = RecordIssueDialogDelegate.this.screenRecordSwitch;
+                                        Switch r3 = recordIssueDialogDelegate2.screenRecordSwitch;
                                         if (r3 == null) {
                                             r3 = null;
                                         }
@@ -139,20 +137,20 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
                             recordIssueDialogDelegate2.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onScreenRecordSwitchClicked$2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    RecordIssueDialogDelegate recordIssueDialogDelegate3 = RecordIssueDialogDelegate.this;
-                                    SystemUIDialog createDialog = new ScreenCapturePermissionDialogDelegate(recordIssueDialogDelegate3.factory, recordIssueDialogDelegate3.state).createDialog();
-                                    final RecordIssueDialogDelegate recordIssueDialogDelegate4 = RecordIssueDialogDelegate.this;
-                                    createDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onScreenRecordSwitchClicked$2$1$1
+                                    RecordIssueDialogDelegate recordIssueDialogDelegate3 = recordIssueDialogDelegate2;
+                                    SystemUIDialog systemUIDialogCreateDialog = new ScreenCapturePermissionDialogDelegate(recordIssueDialogDelegate3.factory, recordIssueDialogDelegate3.state).createDialog();
+                                    final RecordIssueDialogDelegate recordIssueDialogDelegate4 = recordIssueDialogDelegate2;
+                                    systemUIDialogCreateDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onScreenRecordSwitchClicked$2$1$1
                                         @Override // android.content.DialogInterface.OnCancelListener
                                         public final void onCancel(DialogInterface dialogInterface) {
-                                            Switch r0 = RecordIssueDialogDelegate.this.screenRecordSwitch;
+                                            Switch r0 = recordIssueDialogDelegate4.screenRecordSwitch;
                                             if (r0 == null) {
                                                 r0 = null;
                                             }
                                             r0.setChecked(false);
                                         }
                                     });
-                                    createDialog.show();
+                                    systemUIDialogCreateDialog.show();
                                 }
                             });
                         }
@@ -166,7 +164,7 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
         r62.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onCreate$1$3$1
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                RecordIssueDialogDelegate.this.state.getPrefs().edit().putBoolean("key_takeBugReport", z).apply();
+                this.this$0.state.getPrefs().edit().putBoolean("key_takeBugReport", z).apply();
             }
         });
         final Button button = (Button) systemUIDialog.requireViewById(R.id.issue_type_button);
@@ -179,7 +177,7 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
         button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onCreate$1$4$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                final RecordIssueDialogDelegate recordIssueDialogDelegate = RecordIssueDialogDelegate.this;
+                final RecordIssueDialogDelegate recordIssueDialogDelegate = this.this$0;
                 Context context = button.getContext();
                 final Button button3 = button2;
                 final Runnable runnable = new Runnable() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onCreate$1$4$1.1
@@ -197,12 +195,12 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
                 final PopupMenu.OnMenuItemClickListener onMenuItemClickListener = new PopupMenu.OnMenuItemClickListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onIssueTypeClicked$onMenuItemClickListener$1
                     @Override // android.widget.PopupMenu.OnMenuItemClickListener
                     public final boolean onMenuItemClick(MenuItem menuItem) {
-                        Button button5 = RecordIssueDialogDelegate.this.issueTypeButton;
+                        Button button5 = recordIssueDialogDelegate.issueTypeButton;
                         if (button5 == null) {
                             button5 = null;
                         }
                         button5.setText(menuItem.getTitle());
-                        IssueRecordingState issueRecordingState2 = RecordIssueDialogDelegate.this.state;
+                        IssueRecordingState issueRecordingState2 = recordIssueDialogDelegate.state;
                         Intent intent = menuItem.getIntent();
                         int intExtra = intent != null ? intent.getIntExtra("extra_issueTypeRes", -1) : -1;
                         issueRecordingState2.getClass();
@@ -215,19 +213,19 @@ public final class RecordIssueDialogDelegate implements SystemUIDialog.Delegate 
                 for (Integer num : IssueRecordingState.ALL_ISSUE_TYPES.keySet()) {
                     Menu menu = popupMenu.getMenu();
                     num.getClass();
-                    MenuItem add = menu.add(num.intValue());
-                    add.setIcon(R.drawable.arrow_pointing_down);
+                    MenuItem menuItemAdd = menu.add(num.intValue());
+                    menuItemAdd.setIcon(R.drawable.arrow_pointing_down);
                     if (num.intValue() != recordIssueDialogDelegate.state.getIssueTypeRes()) {
-                        add.setIconTintList(ColorStateList.valueOf(0));
+                        menuItemAdd.setIconTintList(ColorStateList.valueOf(0));
                     } else {
-                        add.setContentDescription(context.getString(17042934) + " " + context.getString(num.intValue()));
+                        menuItemAdd.setContentDescription(context.getString(17042938) + " " + context.getString(num.intValue()));
                     }
-                    add.setIntent(new Intent().putExtra("extra_issueTypeRes", num.intValue()));
+                    menuItemAdd.setIntent(new Intent().putExtra("extra_issueTypeRes", num.intValue()));
                     if (num.intValue() == R.string.custom) {
-                        add.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onIssueTypeClicked$1$1$1
+                        menuItemAdd.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: com.android.systemui.recordissue.RecordIssueDialogDelegate$onIssueTypeClicked$1$1$1
                             @Override // android.view.MenuItem.OnMenuItemClickListener
                             public final boolean onMenuItemClick(final MenuItem menuItem) {
-                                RecordIssueDialogDelegate recordIssueDialogDelegate2 = RecordIssueDialogDelegate.this;
+                                RecordIssueDialogDelegate recordIssueDialogDelegate2 = recordIssueDialogDelegate;
                                 SystemUIDialog.Factory factory = recordIssueDialogDelegate2.factory;
                                 IssueRecordingState issueRecordingState2 = recordIssueDialogDelegate2.state;
                                 CustomTraceState customTraceState = issueRecordingState2.customTraceState;

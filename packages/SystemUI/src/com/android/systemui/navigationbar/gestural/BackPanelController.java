@@ -34,6 +34,7 @@ import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.util.time.SystemClock;
+import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import kotlin.NoWhenBranchMatchedException;
@@ -41,7 +42,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.ClosedFloatRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BackPanelController extends ViewController implements NavigationEdgeBackPlugin {
     public NavigationEdgeBackPlugin.BackCallback backCallback;
@@ -80,7 +80,6 @@ public final class BackPanelController extends ViewController implements Navigat
     public final ViewConfiguration viewConfiguration;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DelayedOnAnimationEndListener implements DynamicAnimation.OnAnimationEndListener {
         public final Handler handler;
         public final Runnable runnable;
@@ -103,14 +102,12 @@ public final class BackPanelController extends ViewController implements Navigat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         BackPanelController create(Context context, WindowManager windowManager, Handler handler);
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GestureState {
         public static final /* synthetic */ GestureState[] $VALUES;
         public static final GestureState ACTIVE;
@@ -153,7 +150,6 @@ public final class BackPanelController extends ViewController implements Navigat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -212,7 +208,7 @@ public final class BackPanelController extends ViewController implements Navigat
         this.failsafeRunnable = new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$failsafeRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                BackPanelController backPanelController = BackPanelController.this;
+                BackPanelController backPanelController = this.this$0;
                 backPanelController.getClass();
                 backPanelController.updateArrowState(BackPanelController.GestureState.GONE, true);
             }
@@ -220,35 +216,32 @@ public final class BackPanelController extends ViewController implements Navigat
         this.onEndSetCommittedStateListener = new DelayedOnAnimationEndListener(handler, 0L, new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onEndSetCommittedStateListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                BackPanelController.this.updateArrowState(BackPanelController.GestureState.COMMITTED, false);
+                this.this$0.updateArrowState(BackPanelController.GestureState.COMMITTED, false);
             }
         });
         this.onEndSetGoneStateListener = new DelayedOnAnimationEndListener(handler, 0L, new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onEndSetGoneStateListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                BackPanelController backPanelController = BackPanelController.this;
+                BackPanelController backPanelController = this.this$0;
                 backPanelController.mainHandler.removeCallbacks(backPanelController.failsafeRunnable);
-                BackPanelController.this.updateArrowState(BackPanelController.GestureState.GONE, false);
+                this.this$0.updateArrowState(BackPanelController.GestureState.GONE, false);
             }
         });
         this.onAlphaEndSetGoneStateListener = new DelayedOnAnimationEndListener(handler, 0L, new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onAlphaEndSetGoneStateListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                View view;
-                View view2;
-                BackPanelController.this.updateRestingArrowDimens();
-                view = ((ViewController) BackPanelController.this).mView;
-                view2 = ((ViewController) BackPanelController.this).mView;
-                BackPanel.AnimatedFloat animatedFloat = ((BackPanel) view2).backgroundAlpha;
-                BackPanelController.DelayedOnAnimationEndListener delayedOnAnimationEndListener = BackPanelController.this.onEndSetGoneStateListener;
-                ((BackPanel) view).getClass();
+                this.this$0.updateRestingArrowDimens();
+                BackPanel backPanel = (BackPanel) ((ViewController) this.this$0).mView;
+                BackPanel.AnimatedFloat animatedFloat = ((BackPanel) ((ViewController) this.this$0).mView).backgroundAlpha;
+                BackPanelController.DelayedOnAnimationEndListener delayedOnAnimationEndListener = this.this$0.onEndSetGoneStateListener;
+                backPanel.getClass();
                 SpringAnimation springAnimation = animatedFloat.animation;
                 if (springAnimation.mRunning) {
                     springAnimation.addEndListener(delayedOnAnimationEndListener);
                     return;
                 }
                 delayedOnAnimationEndListener.runnable.run();
-                BackPanelController backPanelController = BackPanelController.this;
+                BackPanelController backPanelController = this.this$0;
                 Handler handler2 = backPanelController.mainHandler;
                 BackPanelController$failsafeRunnable$1 backPanelController$failsafeRunnable$1 = backPanelController.failsafeRunnable;
                 handler2.removeCallbacks(backPanelController$failsafeRunnable$1);
@@ -257,13 +250,13 @@ public final class BackPanelController extends ViewController implements Navigat
         });
         this.configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
-                BackPanelController.this.updateConfiguration$1();
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
+                this.this$0.updateConfiguration$1();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onLayoutDirectionChanged(boolean z) {
-                BackPanelController.this.updateArrowDirection(z);
+                this.this$0.updateArrowDirection(z);
             }
         };
         PathInterpolator pathInterpolator = edgePanelParams.entryWidthInterpolator;
@@ -271,33 +264,33 @@ public final class BackPanelController extends ViewController implements Navigat
     }
 
     public static boolean isFlungAwayFromEdge$default(BackPanelController backPanelController, float f) {
-        float f2;
-        float f3 = backPanelController.touchDeltaStartX;
-        float f4 = ((BackPanel) backPanelController.mView).isLeftPanel ? f - f3 : f3 - f;
+        float fFloatValue;
+        float f2 = backPanelController.touchDeltaStartX;
+        float f3 = ((BackPanel) backPanelController.mView).isLeftPanel ? f - f2 : f2 - f;
         if (backPanelController.velocityTracker == null) {
             backPanelController.velocityTracker = VelocityTracker.obtain();
         }
         VelocityTracker velocityTracker = backPanelController.velocityTracker;
         if (velocityTracker != null) {
             velocityTracker.computeCurrentVelocity(1000);
-            Float valueOf = Float.valueOf(velocityTracker.getXVelocity());
+            Float fValueOf = Float.valueOf(velocityTracker.getXVelocity());
             if (!((BackPanel) backPanelController.mView).isLeftPanel) {
-                valueOf = null;
+                fValueOf = null;
             }
-            f2 = valueOf != null ? valueOf.floatValue() : velocityTracker.getXVelocity() * (-1);
+            fFloatValue = fValueOf != null ? fValueOf.floatValue() : velocityTracker.getXVelocity() * (-1);
         } else {
-            f2 = 0.0f;
+            fFloatValue = 0.0f;
         }
-        return f4 > ((float) backPanelController.minFlingDistance) && ((f2 > ((float) backPanelController.viewConfiguration.getScaledMinimumFlingVelocity()) ? 1 : (f2 == ((float) backPanelController.viewConfiguration.getScaledMinimumFlingVelocity()) ? 0 : -1)) > 0);
+        return f3 > ((float) backPanelController.minFlingDistance) && ((fFloatValue > ((float) backPanelController.viewConfiguration.getScaledMinimumFlingVelocity()) ? 1 : (fFloatValue == ((float) backPanelController.viewConfiguration.getScaledMinimumFlingVelocity()) ? 0 : -1)) > 0);
     }
 
     public static boolean isPastThresholdToActive$default(BackPanelController backPanelController, boolean z, BackPanelController$$ExternalSyntheticLambda0 backPanelController$$ExternalSyntheticLambda0, int i) {
-        Float valueOf = Float.valueOf(160.0f);
+        Float fValueOf = Float.valueOf(160.0f);
         if ((i & 2) != 0) {
-            valueOf = null;
+            fValueOf = null;
         }
         if ((i & 4) != 0) {
-            backPanelController$$ExternalSyntheticLambda0 = new BackPanelController$$ExternalSyntheticLambda0(valueOf, 0);
+            backPanelController$$ExternalSyntheticLambda0 = new BackPanelController$$ExternalSyntheticLambda0(fValueOf, 0);
         }
         boolean z2 = backPanelController.pastThresholdWhileEntryOrInactiveTime == 0;
         if (!z) {
@@ -363,9 +356,9 @@ public final class BackPanelController extends ViewController implements Navigat
             this.startX = motionEvent.getX();
             this.startY = motionEvent.getY();
             updateArrowState(GestureState.GONE, false);
-            float max = Math.max(this.startY - edgePanelParams.fingerOffset, edgePanelParams.minArrowYPosition);
+            float fMax = Math.max(this.startY - edgePanelParams.fingerOffset, edgePanelParams.minArrowYPosition);
             WindowManager.LayoutParams layoutParams = this.layoutParams;
-            (layoutParams != null ? layoutParams : null).y = MathUtils.constrain((int) (max - ((layoutParams == null ? null : layoutParams).height / 2.0f)), 0, this.displaySize.y);
+            (layoutParams != null ? layoutParams : null).y = MathUtils.constrain((int) (fMax - ((layoutParams == null ? null : layoutParams).height / 2.0f)), 0, this.displaySize.y);
             BackPanel backPanel = (BackPanel) this.mView;
             boolean z2 = backPanel.isLeftPanel;
             this.hasPassedDragSlop = false;
@@ -398,7 +391,7 @@ public final class BackPanelController extends ViewController implements Navigat
                             handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onMotionEvent$$inlined$postDelayed$default$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    BackPanelController.this.vibratorHelper.vibrateGesture();
+                                    this.this$0.vibratorHelper.vibrateGesture();
                                 }
                             }, 10L);
                             break;
@@ -420,14 +413,14 @@ public final class BackPanelController extends ViewController implements Navigat
                             handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onMotionEvent$$inlined$postDelayed$default$2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    BackPanelController.this.vibratorHelper.vibrateGesture();
+                                    this.this$0.vibratorHelper.vibrateGesture();
                                 }
                             }, 10L);
                         }
                         handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onMotionEvent$$inlined$postDelayed$default$3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BackPanelController.this.updateArrowState(BackPanelController.GestureState.FLUNG, false);
+                                this.this$0.updateArrowState(BackPanelController.GestureState.FLUNG, false);
                             }
                         }, 50L);
                         break;
@@ -440,7 +433,7 @@ public final class BackPanelController extends ViewController implements Navigat
                         handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$onMotionEvent$$inlined$postDelayed$default$4
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BackPanelController.this.updateArrowState(BackPanelController.GestureState.COMMITTED, false);
+                                this.this$0.updateArrowState(BackPanelController.GestureState.COMMITTED, false);
                             }
                         }, 130L);
                         break;
@@ -507,10 +500,10 @@ public final class BackPanelController extends ViewController implements Navigat
         if (z) {
             float x2 = motionEvent.getX();
             float y = motionEvent.getY() - this.startY;
-            float abs = Math.abs(y);
-            float max2 = Math.max(0.0f, ((BackPanel) this.mView).isLeftPanel ? x2 - this.startX : this.startX - x2);
-            float f5 = max2 - this.previousXTranslation;
-            this.previousXTranslation = max2;
+            float fAbs = Math.abs(y);
+            float fMax2 = Math.max(0.0f, ((BackPanel) this.mView).isLeftPanel ? x2 - this.startX : this.startX - x2);
+            float f5 = fMax2 - this.previousXTranslation;
+            this.previousXTranslation = fMax2;
             if (Math.abs(f5) > 0.0f) {
                 f3 = 2.0f;
                 boolean z3 = Math.signum(f5) == Math.signum(this.totalTouchDeltaActive);
@@ -520,8 +513,8 @@ public final class BackPanelController extends ViewController implements Navigat
                     closedFloatRange = null;
                 }
                 f = 0.0f;
-                boolean contains = closedFloatRange.contains(Float.valueOf(this.totalTouchDeltaActive));
-                if (z3 || contains) {
+                boolean zContains = closedFloatRange.contains(Float.valueOf(this.totalTouchDeltaActive));
+                if (z3 || zContains) {
                     this.totalTouchDeltaActive += f5;
                 } else {
                     this.totalTouchDeltaActive = f5;
@@ -538,8 +531,8 @@ public final class BackPanelController extends ViewController implements Navigat
                 f2 = 1.0f;
                 f3 = 2.0f;
             }
-            boolean z4 = ((float) 2) * max2 >= abs;
-            boolean z5 = max2 > edgePanelParams.staticTriggerThreshold;
+            boolean z4 = ((float) 2) * fMax2 >= fAbs;
+            boolean z5 = fMax2 > edgePanelParams.staticTriggerThreshold;
             GestureState gestureState = this.currentState;
             int[] iArr = WhenMappings.$EnumSwitchMapping$0;
             int i2 = iArr[gestureState.ordinal()];
@@ -559,102 +552,102 @@ public final class BackPanelController extends ViewController implements Navigat
                 updateArrowState(GestureState.ACTIVE, false);
             }
             int i3 = iArr[this.currentState.ordinal()];
-            Float valueOf = i3 != 1 ? i3 != 2 ? (i3 == 3 && !BasicRune.NAVBAR_GESTURE) ? Float.valueOf(MathUtils.saturate((max2 - this.previousXTranslationOnActiveOffset) / this.fullyStretchedThreshold)) : null : Float.valueOf(MathUtils.saturate(this.totalTouchDeltaInactive / edgePanelParams.reactivationTriggerThreshold)) : Float.valueOf(MathUtils.saturate(max2 / edgePanelParams.staticTriggerThreshold));
-            if (valueOf != null) {
+            Float fValueOf = i3 != 1 ? i3 != 2 ? (i3 == 3 && !BasicRune.NAVBAR_GESTURE) ? Float.valueOf(MathUtils.saturate((fMax2 - this.previousXTranslationOnActiveOffset) / this.fullyStretchedThreshold)) : null : Float.valueOf(MathUtils.saturate(this.totalTouchDeltaInactive / edgePanelParams.reactivationTriggerThreshold)) : Float.valueOf(MathUtils.saturate(fMax2 / edgePanelParams.staticTriggerThreshold));
+            if (fValueOf != null) {
                 int i4 = iArr[this.currentState.ordinal()];
                 if (i4 == 1) {
-                    float floatValue = valueOf.floatValue();
+                    float fFloatValue = fValueOf.floatValue();
                     BackPanel backPanel3 = (BackPanel) this.mView;
                     Interpolator interpolator2 = edgePanelParams.arrowAngleInterpolator;
                     if (interpolator2 == null) {
                         interpolator2 = null;
                     }
-                    float interpolation = interpolator2.getInterpolation(floatValue);
+                    float interpolation = interpolator2.getInterpolation(fFloatValue);
                     PathInterpolator pathInterpolator = edgePanelParams.entryWidthInterpolator;
                     if (pathInterpolator == null) {
                         pathInterpolator = null;
                     }
-                    float interpolation2 = pathInterpolator.getInterpolation(floatValue);
+                    float interpolation2 = pathInterpolator.getInterpolation(fFloatValue);
                     PathInterpolator pathInterpolator2 = edgePanelParams.heightInterpolator;
                     if (pathInterpolator2 == null) {
                         pathInterpolator2 = null;
                     }
-                    float interpolation3 = pathInterpolator2.getInterpolation(floatValue);
+                    float interpolation3 = pathInterpolator2.getInterpolation(fFloatValue);
                     EdgePanelParams.BackIndicatorDimens backIndicatorDimens2 = edgePanelParams.entryIndicator;
                     if (backIndicatorDimens2 == null) {
                         backIndicatorDimens2 = null;
                     }
                     Step step = backIndicatorDimens2.arrowDimens.alphaInterpolator;
-                    float floatValue2 = (step == null || (value2 = step.get(floatValue)) == null) ? f : ((Number) value2.value).floatValue();
+                    float fFloatValue2 = (step == null || (value2 = step.get(fFloatValue)) == null) ? f : ((Number) value2.value).floatValue();
                     PathInterpolator pathInterpolator3 = edgePanelParams.edgeCornerInterpolator;
                     if (pathInterpolator3 == null) {
                         pathInterpolator3 = null;
                     }
-                    float interpolation4 = pathInterpolator3.getInterpolation(floatValue);
+                    float interpolation4 = pathInterpolator3.getInterpolation(fFloatValue);
                     PathInterpolator pathInterpolator4 = edgePanelParams.farCornerInterpolator;
                     if (pathInterpolator4 == null) {
                         pathInterpolator4 = null;
                     }
-                    float interpolation5 = pathInterpolator4.getInterpolation(floatValue);
+                    float interpolation5 = pathInterpolator4.getInterpolation(fFloatValue);
                     EdgePanelParams.BackIndicatorDimens backIndicatorDimens3 = edgePanelParams.preThresholdIndicator;
-                    backPanel3.setStretch(0.0f, interpolation, floatValue2, interpolation2, interpolation3, interpolation4, interpolation5, backIndicatorDimens3 != null ? backIndicatorDimens3 : null);
+                    backPanel3.setStretch(0.0f, interpolation, fFloatValue2, interpolation2, interpolation3, interpolation4, interpolation5, backIndicatorDimens3 != null ? backIndicatorDimens3 : null);
                 } else if (i4 == 2) {
-                    float floatValue3 = valueOf.floatValue();
+                    float fFloatValue3 = fValueOf.floatValue();
                     BackPanel backPanel4 = (BackPanel) this.mView;
                     Interpolator interpolator3 = edgePanelParams.arrowAngleInterpolator;
                     if (interpolator3 == null) {
                         interpolator3 = null;
                     }
-                    float interpolation6 = interpolator3.getInterpolation(floatValue3);
+                    float interpolation6 = interpolator3.getInterpolation(fFloatValue3);
                     if (this.totalTouchDeltaInactive <= this.viewConfiguration.getScaledTouchSlop()) {
                         interpolator = this.previousPreThresholdWidthInterpolator;
                     } else if (this.totalTouchDeltaInactive <= f ? (interpolator = edgePanelParams.entryWidthTowardsEdgeInterpolator) == null : (interpolator = edgePanelParams.entryWidthInterpolator) == null) {
                         interpolator = null;
                     }
                     this.previousPreThresholdWidthInterpolator = interpolator;
-                    float interpolation7 = interpolator.getInterpolation(floatValue3);
+                    float interpolation7 = interpolator.getInterpolation(fFloatValue3);
                     float f8 = interpolation7 < f ? f : interpolation7;
                     PathInterpolator pathInterpolator5 = edgePanelParams.heightInterpolator;
                     if (pathInterpolator5 == null) {
                         pathInterpolator5 = null;
                     }
-                    float interpolation8 = pathInterpolator5.getInterpolation(floatValue3);
+                    float interpolation8 = pathInterpolator5.getInterpolation(fFloatValue3);
                     EdgePanelParams.BackIndicatorDimens backIndicatorDimens4 = edgePanelParams.preThresholdIndicator;
                     if (backIndicatorDimens4 == null) {
                         backIndicatorDimens4 = null;
                     }
                     Step step2 = backIndicatorDimens4.arrowDimens.alphaInterpolator;
-                    float floatValue4 = (step2 == null || (value3 = step2.get(floatValue3)) == null) ? f : ((Number) value3.value).floatValue();
+                    float fFloatValue4 = (step2 == null || (value3 = step2.get(fFloatValue3)) == null) ? f : ((Number) value3.value).floatValue();
                     PathInterpolator pathInterpolator6 = edgePanelParams.edgeCornerInterpolator;
                     if (pathInterpolator6 == null) {
                         pathInterpolator6 = null;
                     }
-                    float interpolation9 = pathInterpolator6.getInterpolation(floatValue3);
+                    float interpolation9 = pathInterpolator6.getInterpolation(fFloatValue3);
                     PathInterpolator pathInterpolator7 = edgePanelParams.farCornerInterpolator;
                     if (pathInterpolator7 == null) {
                         pathInterpolator7 = null;
                     }
-                    float interpolation10 = pathInterpolator7.getInterpolation(floatValue3);
+                    float interpolation10 = pathInterpolator7.getInterpolation(fFloatValue3);
                     EdgePanelParams.BackIndicatorDimens backIndicatorDimens5 = edgePanelParams.preThresholdIndicator;
-                    backPanel4.setStretch(0.0f, interpolation6, floatValue4, f8, interpolation8, interpolation9, interpolation10, backIndicatorDimens5 != null ? backIndicatorDimens5 : null);
+                    backPanel4.setStretch(0.0f, interpolation6, fFloatValue4, f8, interpolation8, interpolation9, interpolation10, backIndicatorDimens5 != null ? backIndicatorDimens5 : null);
                 } else if (i4 == 3) {
-                    float floatValue5 = valueOf.floatValue();
+                    float fFloatValue5 = fValueOf.floatValue();
                     BackPanel backPanel5 = (BackPanel) this.mView;
                     PathInterpolator pathInterpolator8 = edgePanelParams.horizontalTranslationInterpolator;
                     if (pathInterpolator8 == null) {
                         pathInterpolator8 = null;
                     }
-                    float interpolation11 = pathInterpolator8.getInterpolation(floatValue5);
+                    float interpolation11 = pathInterpolator8.getInterpolation(fFloatValue5);
                     Interpolator interpolator4 = edgePanelParams.arrowAngleInterpolator;
                     if (interpolator4 == null) {
                         interpolator4 = null;
                     }
-                    float interpolation12 = interpolator4.getInterpolation(floatValue5);
+                    float interpolation12 = interpolator4.getInterpolation(fFloatValue5);
                     PathInterpolator pathInterpolator9 = edgePanelParams.activeWidthInterpolator;
                     if (pathInterpolator9 == null) {
                         pathInterpolator9 = null;
                     }
-                    float interpolation13 = pathInterpolator9.getInterpolation(floatValue5);
+                    float interpolation13 = pathInterpolator9.getInterpolation(fFloatValue5);
                     EdgePanelParams.BackIndicatorDimens backIndicatorDimens6 = edgePanelParams.fullyStretchedIndicator;
                     backPanel5.setStretch(interpolation11, interpolation12, 1.0f, interpolation13, 1.0f, 1.0f, 1.0f, backIndicatorDimens6 != null ? backIndicatorDimens6 : null);
                 }
@@ -666,11 +659,11 @@ public final class BackPanelController extends ViewController implements Navigat
                 case 3:
                 case 5:
                 case 6:
-                    valueOf = Float.valueOf(f2);
+                    fValueOf = Float.valueOf(f2);
                     break;
                 case 4:
                 case 7:
-                    valueOf = Float.valueOf(f);
+                    fValueOf = Float.valueOf(f);
                     break;
                 default:
                     throw new NoWhenBranchMatchedException();
@@ -679,10 +672,10 @@ public final class BackPanelController extends ViewController implements Navigat
             if (i5 == 1 ? (backIndicatorDimens = edgePanelParams.entryIndicator) == null : i5 == 2 ? (backIndicatorDimens = edgePanelParams.preThresholdIndicator) == null : i5 == 3 ? (backIndicatorDimens = edgePanelParams.activeIndicator) == null : (backIndicatorDimens = edgePanelParams.preThresholdIndicator) == null) {
                 backIndicatorDimens = null;
             }
-            if (valueOf != null) {
-                float floatValue6 = valueOf.floatValue();
+            if (fValueOf != null) {
+                float fFloatValue6 = fValueOf.floatValue();
                 Step step3 = backIndicatorDimens.arrowDimens.alphaSpring;
-                if (step3 != null && (value = step3.get(floatValue6)) != null) {
+                if (step3 != null && (value = step3.get(fFloatValue6)) != null) {
                     if (!value.isNewState) {
                         value = null;
                     }
@@ -701,24 +694,24 @@ public final class BackPanelController extends ViewController implements Navigat
                     }
                 }
             }
-            float abs2 = Math.abs(y);
+            float fAbs2 = Math.abs(y);
             float height = ((BackPanel) this.mView).getHeight();
             EdgePanelParams.BackIndicatorDimens backIndicatorDimens7 = edgePanelParams.entryIndicator;
             if (backIndicatorDimens7 == null) {
                 backIndicatorDimens7 = null;
             }
             float f10 = (height - backIndicatorDimens7.backgroundDimens.height) / f3;
-            float saturate = MathUtils.saturate(abs2 / (15.0f * f10));
+            float fSaturate = MathUtils.saturate(fAbs2 / (15.0f * f10));
             PathInterpolator pathInterpolator10 = edgePanelParams.verticalTranslationInterpolator;
             if (pathInterpolator10 == null) {
                 pathInterpolator10 = null;
             }
-            BackPanel.AnimatedFloat.stretchTo$default(((BackPanel) this.mView).verticalTranslation, Math.signum(y) * pathInterpolator10.getInterpolation(saturate) * f10, null, 6);
+            BackPanel.AnimatedFloat.stretchTo$default(((BackPanel) this.mView).verticalTranslation, Math.signum(y) * pathInterpolator10.getInterpolation(fSaturate) * f10, null, 6);
         }
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         updateConfiguration$1();
         ConfigurationController configurationController = this.configurationController;
         updateArrowDirection(((ConfigurationControllerImpl) configurationController).isLayoutRtl());
@@ -738,7 +731,7 @@ public final class BackPanelController extends ViewController implements Navigat
             handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$playWithBackgroundWidthAnimation$$inlined$postDelayed$default$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BackPanelController.this.playWithBackgroundWidthAnimation(delayedOnAnimationEndListener, 0L);
+                    this.this$0.playWithBackgroundWidthAnimation(delayedOnAnimationEndListener, 0L);
                 }
             }, j);
             return;
@@ -898,7 +891,7 @@ public final class BackPanelController extends ViewController implements Navigat
                         handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$updateArrowState$$inlined$postDelayed$default$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BackPanelController.this.vibratorHelper.vibrateGesture();
+                                this.this$0.vibratorHelper.vibrateGesture();
                             }
                         }, 10L);
                     } else {
@@ -921,9 +914,7 @@ public final class BackPanelController extends ViewController implements Navigat
                     handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.BackPanelController$updateArrowState$$inlined$postDelayed$default$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            View view;
-                            view = ((ViewController) BackPanelController.this).mView;
-                            BackPanel backPanel = (BackPanel) view;
+                            BackPanel backPanel = (BackPanel) ((ViewController) this.this$0).mView;
                             backPanel.scalePivotX.snapTo(backPanel.backgroundWidth.pos / 2);
                             BackPanel.AnimatedFloat.stretchTo$default(backPanel.scale, 0.0f, Float.valueOf(2.0f), 4);
                         }
@@ -979,7 +970,7 @@ public final class BackPanelController extends ViewController implements Navigat
     }
 
     @Override // com.android.systemui.plugins.NavigationEdgeBackPlugin
-    public final void updateBackPanelColor(int i, int i2, int i3, int i4) {
+    public final void updateBackPanelColor(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         T t = this.mView;
         if (t == 0) {
             Log.d("BackPanelController", "updateBackPanelColor fail, view is null");
@@ -989,7 +980,7 @@ public final class BackPanelController extends ViewController implements Navigat
         }
     }
 
-    public final void updateConfiguration$1() {
+    public final void updateConfiguration$1() throws Resources.NotFoundException {
         Resources resources = getResources();
         EdgePanelParams edgePanelParams = this.params;
         edgePanelParams.update(resources);
@@ -997,28 +988,320 @@ public final class BackPanelController extends ViewController implements Navigat
         this.minFlingDistance = this.viewConfiguration.getScaledTouchSlop() * 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:205:0x029f  */
-    /* JADX WARN: Removed duplicated region for block: B:207:0x02a5  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x02de  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x02e4  */
-    /* JADX WARN: Removed duplicated region for block: B:223:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x02f5  */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x02fd  */
-    /* JADX WARN: Removed duplicated region for block: B:235:0x0305  */
-    /* JADX WARN: Removed duplicated region for block: B:239:0x02af  */
-    /* JADX WARN: Removed duplicated region for block: B:243:0x02b8  */
-    /* JADX WARN: Removed duplicated region for block: B:247:0x02c1  */
-    /* JADX WARN: Removed duplicated region for block: B:251:0x02ca  */
+    /* JADX WARN: Removed duplicated region for block: B:263:0x029f  */
+    /* JADX WARN: Removed duplicated region for block: B:265:0x02a5  */
+    /* JADX WARN: Removed duplicated region for block: B:271:0x02af  */
+    /* JADX WARN: Removed duplicated region for block: B:276:0x02b8  */
+    /* JADX WARN: Removed duplicated region for block: B:281:0x02c1  */
+    /* JADX WARN: Removed duplicated region for block: B:286:0x02ca  */
+    /* JADX WARN: Removed duplicated region for block: B:293:0x02de  */
+    /* JADX WARN: Removed duplicated region for block: B:295:0x02e4  */
+    /* JADX WARN: Removed duplicated region for block: B:300:0x02ed  */
+    /* JADX WARN: Removed duplicated region for block: B:304:0x02f5  */
+    /* JADX WARN: Removed duplicated region for block: B:308:0x02fd  */
+    /* JADX WARN: Removed duplicated region for block: B:312:0x0305  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateRestingArrowDimens() {
-        /*
-            Method dump skipped, instructions count: 974
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.gestural.BackPanelController.updateRestingArrowDimens():void");
+        float f;
+        Float f2;
+        Float fValueOf;
+        Float f3;
+        EdgePanelParams.ArrowDimens arrowDimens;
+        EdgePanelParams.BackgroundDimens backgroundDimens;
+        GestureState gestureState = this.currentState;
+        int[] iArr = WhenMappings.$EnumSwitchMapping$0;
+        int i = iArr[gestureState.ordinal()];
+        EdgePanelParams edgePanelParams = this.params;
+        switch (i) {
+            case 1:
+            case 4:
+                BackPanel backPanel = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens = edgePanelParams.entryIndicator;
+                SpringForce springForce = (backIndicatorDimens != null ? backIndicatorDimens : null).arrowDimens.lengthSpring;
+                SpringForce springForce2 = (backIndicatorDimens != null ? backIndicatorDimens : null).arrowDimens.heightSpring;
+                SpringForce springForce3 = (backIndicatorDimens != null ? backIndicatorDimens : null).scaleSpring;
+                SpringForce springForce4 = (backIndicatorDimens != null ? backIndicatorDimens : null).verticalTranslationSpring;
+                SpringForce springForce5 = (backIndicatorDimens != null ? backIndicatorDimens : null).horizontalTranslationSpring;
+                SpringForce springForce6 = (backIndicatorDimens != null ? backIndicatorDimens : null).backgroundDimens.alphaSpring;
+                SpringForce springForce7 = (backIndicatorDimens != null ? backIndicatorDimens : null).backgroundDimens.widthSpring;
+                SpringForce springForce8 = (backIndicatorDimens != null ? backIndicatorDimens : null).backgroundDimens.heightSpring;
+                SpringForce springForce9 = (backIndicatorDimens != null ? backIndicatorDimens : null).backgroundDimens.edgeCornerRadiusSpring;
+                if (backIndicatorDimens == null) {
+                    backIndicatorDimens = null;
+                }
+                BackPanel.setSpring$default(backPanel, springForce5, springForce4, springForce3, springForce, springForce2, springForce6, backIndicatorDimens.backgroundDimens.farCornerRadiusSpring, springForce9, springForce7, springForce8, 32);
+                break;
+            case 2:
+                BackPanel backPanel2 = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens2 = edgePanelParams.preThresholdIndicator;
+                SpringForce springForce10 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).arrowDimens.lengthSpring;
+                SpringForce springForce11 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).arrowDimens.heightSpring;
+                SpringForce springForce12 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).horizontalTranslationSpring;
+                SpringForce springForce13 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).scaleSpring;
+                SpringForce springForce14 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).backgroundDimens.widthSpring;
+                SpringForce springForce15 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).backgroundDimens.heightSpring;
+                SpringForce springForce16 = (backIndicatorDimens2 != null ? backIndicatorDimens2 : null).backgroundDimens.edgeCornerRadiusSpring;
+                if (backIndicatorDimens2 == null) {
+                    backIndicatorDimens2 = null;
+                }
+                BackPanel.setSpring$default(backPanel2, springForce12, null, springForce13, springForce10, springForce11, null, backIndicatorDimens2.backgroundDimens.farCornerRadiusSpring, springForce16, springForce14, springForce15, 98);
+                break;
+            case 3:
+                BackPanel backPanel3 = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens3 = edgePanelParams.activeIndicator;
+                SpringForce springForce17 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).arrowDimens.lengthSpring;
+                SpringForce springForce18 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).arrowDimens.heightSpring;
+                SpringForce springForce19 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).scaleSpring;
+                SpringForce springForce20 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).horizontalTranslationSpring;
+                SpringForce springForce21 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).backgroundDimens.widthSpring;
+                SpringForce springForce22 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).backgroundDimens.heightSpring;
+                SpringForce springForce23 = (backIndicatorDimens3 != null ? backIndicatorDimens3 : null).backgroundDimens.edgeCornerRadiusSpring;
+                if (backIndicatorDimens3 == null) {
+                    backIndicatorDimens3 = null;
+                }
+                BackPanel.setSpring$default(backPanel3, springForce20, null, springForce19, springForce17, springForce18, null, backIndicatorDimens3.backgroundDimens.farCornerRadiusSpring, springForce23, springForce21, springForce22, 98);
+                break;
+            case 5:
+                BackPanel backPanel4 = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens4 = edgePanelParams.flungIndicator;
+                SpringForce springForce24 = (backIndicatorDimens4 != null ? backIndicatorDimens4 : null).arrowDimens.lengthSpring;
+                SpringForce springForce25 = (backIndicatorDimens4 != null ? backIndicatorDimens4 : null).arrowDimens.heightSpring;
+                SpringForce springForce26 = (backIndicatorDimens4 != null ? backIndicatorDimens4 : null).backgroundDimens.widthSpring;
+                SpringForce springForce27 = (backIndicatorDimens4 != null ? backIndicatorDimens4 : null).backgroundDimens.heightSpring;
+                SpringForce springForce28 = (backIndicatorDimens4 != null ? backIndicatorDimens4 : null).backgroundDimens.edgeCornerRadiusSpring;
+                if (backIndicatorDimens4 == null) {
+                    backIndicatorDimens4 = null;
+                }
+                BackPanel.setSpring$default(backPanel4, null, null, null, springForce24, springForce25, null, backIndicatorDimens4.backgroundDimens.farCornerRadiusSpring, springForce28, springForce26, springForce27, 103);
+                break;
+            case 6:
+                BackPanel backPanel5 = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens5 = edgePanelParams.committedIndicator;
+                SpringForce springForce29 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).arrowDimens.lengthSpring;
+                SpringForce springForce30 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).arrowDimens.heightSpring;
+                SpringForce springForce31 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).scaleSpring;
+                SpringForce springForce32 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).backgroundDimens.alphaSpring;
+                SpringForce springForce33 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).backgroundDimens.widthSpring;
+                SpringForce springForce34 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).backgroundDimens.heightSpring;
+                SpringForce springForce35 = (backIndicatorDimens5 != null ? backIndicatorDimens5 : null).backgroundDimens.edgeCornerRadiusSpring;
+                if (backIndicatorDimens5 == null) {
+                    backIndicatorDimens5 = null;
+                }
+                BackPanel.setSpring$default(backPanel5, null, null, springForce31, springForce29, springForce30, springForce32, backIndicatorDimens5.backgroundDimens.farCornerRadiusSpring, springForce35, springForce33, springForce34, 35);
+                break;
+            case 7:
+                BackPanel backPanel6 = (BackPanel) this.mView;
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens6 = edgePanelParams.cancelledIndicator;
+                if (backIndicatorDimens6 == null) {
+                    backIndicatorDimens6 = null;
+                }
+                BackPanel.setSpring$default(backPanel6, null, null, null, null, null, backIndicatorDimens6.backgroundDimens.alphaSpring, null, null, null, null, 1983);
+                break;
+        }
+        BackPanel backPanel7 = (BackPanel) this.mView;
+        GestureState gestureState2 = this.currentState;
+        boolean z = (gestureState2 == GestureState.FLUNG || gestureState2 == GestureState.COMMITTED) ? false : true;
+        int i2 = iArr[gestureState2.ordinal()];
+        if (i2 == 3 || i2 == 5) {
+            EdgePanelParams.BackIndicatorDimens backIndicatorDimens7 = edgePanelParams.activeIndicator;
+            if (backIndicatorDimens7 == null) {
+                backIndicatorDimens7 = null;
+            }
+            f = backIndicatorDimens7.scale;
+        } else if (i2 != 6) {
+            EdgePanelParams.BackIndicatorDimens backIndicatorDimens8 = edgePanelParams.preThresholdIndicator;
+            if (backIndicatorDimens8 == null) {
+                backIndicatorDimens8 = null;
+            }
+            f = backIndicatorDimens8.scale;
+        } else {
+            EdgePanelParams.BackIndicatorDimens backIndicatorDimens9 = edgePanelParams.committedIndicator;
+            if (backIndicatorDimens9 == null) {
+                backIndicatorDimens9 = null;
+            }
+            f = backIndicatorDimens9.scale;
+        }
+        float f4 = f;
+        switch (iArr[this.currentState.ordinal()]) {
+            case 1:
+            case 2:
+            case 4:
+            case 7:
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens10 = edgePanelParams.preThresholdIndicator;
+                if (backIndicatorDimens10 == null) {
+                    backIndicatorDimens10 = null;
+                }
+                f2 = backIndicatorDimens10.scalePivotX;
+                break;
+            case 3:
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens11 = edgePanelParams.activeIndicator;
+                if (backIndicatorDimens11 == null) {
+                    backIndicatorDimens11 = null;
+                }
+                f2 = backIndicatorDimens11.scalePivotX;
+                break;
+            case 5:
+            case 6:
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens12 = edgePanelParams.committedIndicator;
+                if (backIndicatorDimens12 == null) {
+                    backIndicatorDimens12 = null;
+                }
+                f2 = backIndicatorDimens12.scalePivotX;
+                break;
+            default:
+                throw new NoWhenBranchMatchedException();
+        }
+        Float f5 = f2;
+        int i3 = iArr[this.currentState.ordinal()];
+        if (i3 == 1 || i3 == 2) {
+            EdgePanelParams.BackIndicatorDimens backIndicatorDimens13 = edgePanelParams.entryIndicator;
+            if (backIndicatorDimens13 == null) {
+                backIndicatorDimens13 = null;
+            }
+            fValueOf = backIndicatorDimens13.horizontalTranslation;
+        } else {
+            if (i3 != 3) {
+                if (i3 == 4) {
+                    EdgePanelParams.BackIndicatorDimens backIndicatorDimens14 = edgePanelParams.activeIndicator;
+                    if (backIndicatorDimens14 == null) {
+                        backIndicatorDimens14 = null;
+                    }
+                    Float f6 = backIndicatorDimens14.backgroundDimens.width;
+                    if (f6 != null) {
+                        fValueOf = Float.valueOf(f6.floatValue() * (-1));
+                    }
+                    f3 = null;
+                } else if (i3 != 5) {
+                    if (i3 == 7) {
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens15 = edgePanelParams.cancelledIndicator;
+                        if (backIndicatorDimens15 == null) {
+                            backIndicatorDimens15 = null;
+                        }
+                        fValueOf = backIndicatorDimens15.horizontalTranslation;
+                    }
+                    f3 = null;
+                } else {
+                    EdgePanelParams.BackIndicatorDimens backIndicatorDimens16 = edgePanelParams.activeIndicator;
+                    if (backIndicatorDimens16 == null) {
+                        backIndicatorDimens16 = null;
+                    }
+                    fValueOf = backIndicatorDimens16.horizontalTranslation;
+                }
+                switch (iArr[this.currentState.ordinal()]) {
+                    case 1:
+                    case 2:
+                    case 4:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens17 = edgePanelParams.entryIndicator;
+                        if (backIndicatorDimens17 == null) {
+                            backIndicatorDimens17 = null;
+                        }
+                        arrowDimens = backIndicatorDimens17.arrowDimens;
+                        break;
+                    case 3:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens18 = edgePanelParams.activeIndicator;
+                        if (backIndicatorDimens18 == null) {
+                            backIndicatorDimens18 = null;
+                        }
+                        arrowDimens = backIndicatorDimens18.arrowDimens;
+                        break;
+                    case 5:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens19 = edgePanelParams.flungIndicator;
+                        if (backIndicatorDimens19 == null) {
+                            backIndicatorDimens19 = null;
+                        }
+                        arrowDimens = backIndicatorDimens19.arrowDimens;
+                        break;
+                    case 6:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens20 = edgePanelParams.committedIndicator;
+                        if (backIndicatorDimens20 == null) {
+                            backIndicatorDimens20 = null;
+                        }
+                        arrowDimens = backIndicatorDimens20.arrowDimens;
+                        break;
+                    case 7:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens21 = edgePanelParams.cancelledIndicator;
+                        if (backIndicatorDimens21 == null) {
+                            backIndicatorDimens21 = null;
+                        }
+                        arrowDimens = backIndicatorDimens21.arrowDimens;
+                        break;
+                    default:
+                        throw new NoWhenBranchMatchedException();
+                }
+                EdgePanelParams.ArrowDimens arrowDimens2 = arrowDimens;
+                switch (iArr[this.currentState.ordinal()]) {
+                    case 1:
+                    case 2:
+                    case 4:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens22 = edgePanelParams.entryIndicator;
+                        backgroundDimens = (backIndicatorDimens22 != null ? backIndicatorDimens22 : null).backgroundDimens;
+                        break;
+                    case 3:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens23 = edgePanelParams.activeIndicator;
+                        backgroundDimens = (backIndicatorDimens23 != null ? backIndicatorDimens23 : null).backgroundDimens;
+                        break;
+                    case 5:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens24 = edgePanelParams.activeIndicator;
+                        backgroundDimens = (backIndicatorDimens24 != null ? backIndicatorDimens24 : null).backgroundDimens;
+                        break;
+                    case 6:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens25 = edgePanelParams.committedIndicator;
+                        backgroundDimens = (backIndicatorDimens25 != null ? backIndicatorDimens25 : null).backgroundDimens;
+                        break;
+                    case 7:
+                        EdgePanelParams.BackIndicatorDimens backIndicatorDimens26 = edgePanelParams.cancelledIndicator;
+                        backgroundDimens = (backIndicatorDimens26 != null ? backIndicatorDimens26 : null).backgroundDimens;
+                        break;
+                    default:
+                        throw new NoWhenBranchMatchedException();
+                }
+                EdgePanelParams.BackIndicatorDimens backIndicatorDimens27 = new EdgePanelParams.BackIndicatorDimens(f3, f4, f5, arrowDimens2, backgroundDimens, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType, null);
+                backPanel7.horizontalTranslation.updateRestingPosition(true, backIndicatorDimens27.horizontalTranslation);
+                backPanel7.scale.updateRestingPosition(true, Float.valueOf(backIndicatorDimens27.scale));
+                BackPanel.AnimatedFloat animatedFloat = backPanel7.backgroundAlpha;
+                EdgePanelParams.BackgroundDimens backgroundDimens2 = backIndicatorDimens27.backgroundDimens;
+                animatedFloat.updateRestingPosition(true, Float.valueOf(backgroundDimens2.alpha));
+                BackPanel.AnimatedFloat animatedFloat2 = backPanel7.arrowAlpha;
+                EdgePanelParams.ArrowDimens arrowDimens3 = backIndicatorDimens27.arrowDimens;
+                animatedFloat2.updateRestingPosition(z, Float.valueOf(arrowDimens3.alpha));
+                backPanel7.arrowLength.updateRestingPosition(z, arrowDimens3.length);
+                backPanel7.arrowHeight.updateRestingPosition(z, arrowDimens3.height);
+                backPanel7.scalePivotX.updateRestingPosition(z, backIndicatorDimens27.scalePivotX);
+                backPanel7.backgroundWidth.updateRestingPosition(z, backgroundDimens2.width);
+                backPanel7.backgroundHeight.updateRestingPosition(z, Float.valueOf(backgroundDimens2.height));
+                backPanel7.backgroundEdgeCornerRadius.updateRestingPosition(z, Float.valueOf(backgroundDimens2.edgeCornerRadius));
+                backPanel7.backgroundFarCornerRadius.updateRestingPosition(z, Float.valueOf(backgroundDimens2.farCornerRadius));
+            }
+            EdgePanelParams.BackIndicatorDimens backIndicatorDimens28 = edgePanelParams.activeIndicator;
+            if (backIndicatorDimens28 == null) {
+                backIndicatorDimens28 = null;
+            }
+            fValueOf = backIndicatorDimens28.horizontalTranslation;
+        }
+        f3 = fValueOf;
+        switch (iArr[this.currentState.ordinal()]) {
+        }
+        EdgePanelParams.ArrowDimens arrowDimens22 = arrowDimens;
+        switch (iArr[this.currentState.ordinal()]) {
+        }
+        EdgePanelParams.BackIndicatorDimens backIndicatorDimens272 = new EdgePanelParams.BackIndicatorDimens(f3, f4, f5, arrowDimens22, backgroundDimens, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType, null);
+        backPanel7.horizontalTranslation.updateRestingPosition(true, backIndicatorDimens272.horizontalTranslation);
+        backPanel7.scale.updateRestingPosition(true, Float.valueOf(backIndicatorDimens272.scale));
+        BackPanel.AnimatedFloat animatedFloat3 = backPanel7.backgroundAlpha;
+        EdgePanelParams.BackgroundDimens backgroundDimens22 = backIndicatorDimens272.backgroundDimens;
+        animatedFloat3.updateRestingPosition(true, Float.valueOf(backgroundDimens22.alpha));
+        BackPanel.AnimatedFloat animatedFloat22 = backPanel7.arrowAlpha;
+        EdgePanelParams.ArrowDimens arrowDimens32 = backIndicatorDimens272.arrowDimens;
+        animatedFloat22.updateRestingPosition(z, Float.valueOf(arrowDimens32.alpha));
+        backPanel7.arrowLength.updateRestingPosition(z, arrowDimens32.length);
+        backPanel7.arrowHeight.updateRestingPosition(z, arrowDimens32.height);
+        backPanel7.scalePivotX.updateRestingPosition(z, backIndicatorDimens272.scalePivotX);
+        backPanel7.backgroundWidth.updateRestingPosition(z, backgroundDimens22.width);
+        backPanel7.backgroundHeight.updateRestingPosition(z, Float.valueOf(backgroundDimens22.height));
+        backPanel7.backgroundEdgeCornerRadius.updateRestingPosition(z, Float.valueOf(backgroundDimens22.edgeCornerRadius));
+        backPanel7.backgroundFarCornerRadius.updateRestingPosition(z, Float.valueOf(backgroundDimens22.farCornerRadius));
     }
 
     public static /* synthetic */ void getCurrentState$frameworks__base__packages__SystemUI__android_common__SystemUI_core$annotations() {

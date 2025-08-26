@@ -18,16 +18,19 @@ public class MPRecorderListener {
     private native void native_setup(Object obj);
 
     static {
-        System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
-        native_init();
+        String property = System.getProperty(Def.JUNIT_TEST_EXECUTION_MODE);
+        if (property == null || !Boolean.parseBoolean(property)) {
+            System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
+            native_init();
+        }
         TAG = "MPRecorderListener";
     }
 
     public MPRecorderListener() {
         Log.d(TAG, "MPRecorderListener");
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new MPClientEventHandler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new MPClientEventHandler(looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {

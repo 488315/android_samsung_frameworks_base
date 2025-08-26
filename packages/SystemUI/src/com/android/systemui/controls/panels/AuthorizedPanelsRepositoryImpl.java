@@ -15,7 +15,6 @@ import kotlin.collections.EmptySet;
 import kotlin.collections.SetsKt___SetsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AuthorizedPanelsRepositoryImpl implements AuthorizedPanelsRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,7 +22,6 @@ public final class AuthorizedPanelsRepositoryImpl implements AuthorizedPanelsRep
     public final UserFileManager userFileManager;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,10 +42,10 @@ public final class AuthorizedPanelsRepositoryImpl implements AuthorizedPanelsRep
     }
 
     public final void addAuthorizedPanels(Set set) {
-        SharedPreferences instantiateSharedPrefs = instantiateSharedPrefs(((UserTrackerImpl) this.userTracker).getUserHandle());
-        Set<String> stringSet = instantiateSharedPrefs.getStringSet("authorized_panels", EmptySet.INSTANCE);
+        SharedPreferences sharedPreferencesInstantiateSharedPrefs = instantiateSharedPrefs(((UserTrackerImpl) this.userTracker).getUserHandle());
+        Set<String> stringSet = sharedPreferencesInstantiateSharedPrefs.getStringSet("authorized_panels", EmptySet.INSTANCE);
         stringSet.getClass();
-        instantiateSharedPrefs.edit().putStringSet("authorized_panels", SetsKt___SetsKt.plus((Set) stringSet, (Iterable) set)).apply();
+        sharedPreferencesInstantiateSharedPrefs.edit().putStringSet("authorized_panels", SetsKt___SetsKt.plus((Set) stringSet, (Iterable) set)).apply();
     }
 
     public final SharedPreferences instantiateSharedPrefs(UserHandle userHandle) {

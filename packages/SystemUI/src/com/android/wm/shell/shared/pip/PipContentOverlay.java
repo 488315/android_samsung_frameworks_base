@@ -15,12 +15,10 @@ import android.window.TaskSnapshot;
 import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class PipContentOverlay {
     public SurfaceControl mLeash;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PipAppIconOverlay extends PipContentOverlay {
         public final int mAppIconSizePx;
         public Bitmap mBitmap;
@@ -30,24 +28,24 @@ public abstract class PipContentOverlay {
         public final float[] mTmpFloat9 = new float[9];
 
         public PipAppIconOverlay(Context context, Rect rect, Rect rect2, Drawable drawable, int i) {
-            int m = (int) ActionRow$$ExternalSyntheticOutline0.m(context, 1, 72.0f);
-            if (Math.min(m, i) == 0) {
-                this.mAppIconSizePx = m;
+            int iM = (int) ActionRow$$ExternalSyntheticOutline0.m(context, 1, 72.0f);
+            if (Math.min(iM, i) == 0) {
+                this.mAppIconSizePx = iM;
             } else {
-                this.mAppIconSizePx = Math.min(m, i);
+                this.mAppIconSizePx = Math.min(iM, i);
             }
-            int max = Math.max(Math.max(rect.width(), rect.height()), Math.max(rect2.width(), rect2.height())) + 1;
-            int i2 = max >> 1;
+            int iMax = Math.max(Math.max(rect.width(), rect.height()), Math.max(rect2.width(), rect2.height())) + 1;
+            int i2 = iMax >> 1;
             this.mOverlayHalfSize = i2;
             this.mRelativeAppBounds = rect;
-            this.mBitmap = Bitmap.createBitmap(max, max, Bitmap.Config.ARGB_8888);
+            this.mBitmap = Bitmap.createBitmap(iMax, iMax, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas();
             canvas.setBitmap(this.mBitmap);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorBackground});
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorBackground});
             try {
-                int color = obtainStyledAttributes.getColor(0, 0);
+                int color = typedArrayObtainStyledAttributes.getColor(0, 0);
                 canvas.drawRGB(Color.red(color), Color.green(color), Color.blue(color));
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 int i3 = this.mAppIconSizePx / 2;
                 int i4 = i2 - i3;
                 int i5 = i3 + i2;
@@ -58,7 +56,7 @@ public abstract class PipContentOverlay {
                 bitmap.recycle();
                 this.mLeash = new SurfaceControl.Builder().setCallsite("PipContentOverlay$PipAppIconOverlay").setName("PipContentOverlay").build();
             } catch (Throwable th) {
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 throw th;
             }
         }
@@ -81,18 +79,17 @@ public abstract class PipContentOverlay {
         @Override // com.android.wm.shell.shared.pip.PipContentOverlay
         public final void onAnimationUpdate(SurfaceControl.Transaction transaction, Rect rect, float f) {
             this.mTmpTransform.reset();
-            int centerX = this.mRelativeAppBounds.centerX();
-            int centerY = this.mRelativeAppBounds.centerY();
+            int iCenterX = this.mRelativeAppBounds.centerX();
+            int iCenterY = this.mRelativeAppBounds.centerY();
             Matrix matrix = this.mTmpTransform;
             int i = this.mOverlayHalfSize;
-            matrix.setTranslate(centerX - i, centerY - i);
-            float min = Math.min(this.mRelativeAppBounds.width() / rect.width(), this.mRelativeAppBounds.height() / rect.height());
-            this.mTmpTransform.postScale(min, min, centerX, centerY);
+            matrix.setTranslate(iCenterX - i, iCenterY - i);
+            float fMin = Math.min(this.mRelativeAppBounds.width() / rect.width(), this.mRelativeAppBounds.height() / rect.height());
+            this.mTmpTransform.postScale(fMin, fMin, iCenterX, iCenterY);
             transaction.setMatrix(this.mLeash, this.mTmpTransform, this.mTmpFloat9).setAlpha(this.mLeash, f < 0.5f ? 0.0f : 2.0f * (f - 0.5f));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PipColorOverlay extends PipContentOverlay {
         public final Context mContext;
 
@@ -107,17 +104,17 @@ public abstract class PipContentOverlay {
             transaction.show(this.mLeash);
             transaction.setLayer(this.mLeash, Integer.MAX_VALUE);
             SurfaceControl surfaceControl2 = this.mLeash;
-            TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(new int[]{R.attr.colorBackground});
+            TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(new int[]{R.attr.colorBackground});
             try {
-                int color = obtainStyledAttributes.getColor(0, 0);
+                int color = typedArrayObtainStyledAttributes.getColor(0, 0);
                 float[] fArr = {Color.red(color) / 255.0f, Color.green(color) / 255.0f, Color.blue(color) / 255.0f};
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 transaction.setColor(surfaceControl2, fArr);
                 transaction.setAlpha(this.mLeash, 0.0f);
                 transaction.reparent(this.mLeash, surfaceControl);
                 transaction.apply();
             } catch (Throwable th) {
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 throw th;
             }
         }
@@ -140,7 +137,6 @@ public abstract class PipContentOverlay {
         transaction.apply();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PipSnapshotOverlay extends PipContentOverlay {
         public final TaskSnapshot mSnapshot;
         public final Rect mSourceRectHint;

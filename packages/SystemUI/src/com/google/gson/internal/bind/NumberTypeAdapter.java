@@ -12,13 +12,11 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class NumberTypeAdapter extends TypeAdapter<Number> {
     private static final TypeAdapterFactory LAZILY_PARSED_NUMBER_FACTORY = newFactory(ToNumberPolicy.LAZILY_PARSED_NUMBER);
     private final ToNumberStrategy toNumberStrategy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.gson.internal.bind.NumberTypeAdapter$2, reason: invalid class name */
     /* synthetic */ class AnonymousClass2 {
         static final /* synthetic */ int[] $SwitchMap$com$google$gson$stream$JsonToken;
@@ -65,8 +63,8 @@ public final class NumberTypeAdapter extends TypeAdapter<Number> {
     @Override // com.google.gson.TypeAdapter
     /* renamed from: read */
     public Number read2(JsonReader jsonReader) throws IOException {
-        JsonToken peek = jsonReader.peek();
-        int i = AnonymousClass2.$SwitchMap$com$google$gson$stream$JsonToken[peek.ordinal()];
+        JsonToken jsonTokenPeek = jsonReader.peek();
+        int i = AnonymousClass2.$SwitchMap$com$google$gson$stream$JsonToken[jsonTokenPeek.ordinal()];
         if (i == 1) {
             jsonReader.nextNull();
             return null;
@@ -74,7 +72,7 @@ public final class NumberTypeAdapter extends TypeAdapter<Number> {
         if (i == 2 || i == 3) {
             return this.toNumberStrategy.readNumber(jsonReader);
         }
-        throw new JsonSyntaxException("Expecting number, got: " + peek + "; at path " + jsonReader.getPath());
+        throw new JsonSyntaxException("Expecting number, got: " + jsonTokenPeek + "; at path " + jsonReader.getPath());
     }
 
     @Override // com.google.gson.TypeAdapter

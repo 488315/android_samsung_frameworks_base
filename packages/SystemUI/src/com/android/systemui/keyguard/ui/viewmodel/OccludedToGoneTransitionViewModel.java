@@ -10,14 +10,12 @@ import kotlin.time.Duration;
 import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OccludedToGoneTransitionViewModel {
     public static final /* synthetic */ int $r8$clinit = 0;
     public static final long DEFAULT_DURATION;
     public final KeyguardTransitionAnimationFlow.FlowBuilder transitionAnimation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,9 +36,9 @@ public final class OccludedToGoneTransitionViewModel {
         KeyguardState keyguardState = KeyguardState.OCCLUDED;
         SceneKey sceneKey = Scenes.Gone;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m2598setupVtjQ1oo = keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(DEFAULT_DURATION, new Edge.StateToContent(keyguardState, sceneKey));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(DEFAULT_DURATION, new Edge.StateToContent(keyguardState, sceneKey));
         KeyguardState keyguardState2 = KeyguardState.GONE;
         companion.getClass();
-        this.transitionAnimation = m2598setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
+        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
     }
 }

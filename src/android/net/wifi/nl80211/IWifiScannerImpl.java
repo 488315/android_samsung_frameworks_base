@@ -147,9 +147,9 @@ public interface IWifiScannerImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWifiScannerImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWifiScannerImpl)) {
-                return (IWifiScannerImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWifiScannerImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWifiScannerImpl)) {
+                return (IWifiScannerImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -220,29 +220,29 @@ public interface IWifiScannerImpl extends IInterface {
                 case 4:
                     SingleScanSettings singleScanSettings = (SingleScanSettings) parcel.readTypedObject(SingleScanSettings.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean scan = scan(singleScanSettings);
+                    boolean zScan = scan(singleScanSettings);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(scan);
+                    parcel2.writeBoolean(zScan);
                     return true;
                 case 5:
                     SingleScanSettings singleScanSettings2 = (SingleScanSettings) parcel.readTypedObject(SingleScanSettings.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int scanRequest = scanRequest(singleScanSettings2);
+                    int iScanRequest = scanRequest(singleScanSettings2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(scanRequest);
+                    parcel2.writeInt(iScanRequest);
                     return true;
                 case 6:
-                    IScanEvent asInterface = IScanEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IScanEvent iScanEventAsInterface = IScanEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    subscribeScanEvents(asInterface);
+                    subscribeScanEvents(iScanEventAsInterface);
                     return true;
                 case 7:
                     unsubscribeScanEvents();
                     return true;
                 case 8:
-                    IPnoScanEvent asInterface2 = IPnoScanEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IPnoScanEvent iPnoScanEventAsInterface = IPnoScanEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    subscribePnoScanEvents(asInterface2);
+                    subscribePnoScanEvents(iPnoScanEventAsInterface);
                     return true;
                 case 9:
                     unsubscribePnoScanEvents();
@@ -250,14 +250,14 @@ public interface IWifiScannerImpl extends IInterface {
                 case 10:
                     PnoSettings pnoSettings = (PnoSettings) parcel.readTypedObject(PnoSettings.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean startPnoScan = startPnoScan(pnoSettings);
+                    boolean zStartPnoScan = startPnoScan(pnoSettings);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startPnoScan);
+                    parcel2.writeBoolean(zStartPnoScan);
                     return true;
                 case 11:
-                    boolean stopPnoScan = stopPnoScan();
+                    boolean zStopPnoScan = stopPnoScan();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(stopPnoScan);
+                    parcel2.writeBoolean(zStopPnoScan);
                     return true;
                 case 12:
                     abortScan();
@@ -290,183 +290,183 @@ public interface IWifiScannerImpl extends IInterface {
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public NativeScanResult[] getScanResults() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (NativeScanResult[]) obtain2.createTypedArray(NativeScanResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (NativeScanResult[]) parcelObtain2.createTypedArray(NativeScanResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public NativeScanResult[] getPnoScanResults() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (NativeScanResult[]) obtain2.createTypedArray(NativeScanResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (NativeScanResult[]) parcelObtain2.createTypedArray(NativeScanResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public int getMaxSsidsPerScan() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public boolean scan(SingleScanSettings singleScanSettings) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(singleScanSettings, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(singleScanSettings, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public int scanRequest(SingleScanSettings singleScanSettings) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(singleScanSettings, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(singleScanSettings, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void subscribeScanEvents(IScanEvent iScanEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    obtain.writeStrongInterface(iScanEvent);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iScanEvent);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void unsubscribeScanEvents() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void subscribePnoScanEvents(IPnoScanEvent iPnoScanEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPnoScanEvent);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPnoScanEvent);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void unsubscribePnoScanEvents() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public boolean startPnoScan(PnoSettings pnoSettings) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(pnoSettings, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pnoSettings, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public boolean stopPnoScan() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void abortScan() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWifiScannerImpl
             public void disableRandomMac() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

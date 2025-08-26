@@ -2,7 +2,6 @@ package androidx.compose.ui.graphics;
 
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidShader_androidKt {
     public static final void validateColorStops(List list, List list2) {

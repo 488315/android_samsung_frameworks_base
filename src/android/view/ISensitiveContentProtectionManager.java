@@ -44,9 +44,9 @@ public interface ISensitiveContentProtectionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISensitiveContentProtectionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISensitiveContentProtectionManager)) {
-                return (ISensitiveContentProtectionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISensitiveContentProtectionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISensitiveContentProtectionManager)) {
+                return (ISensitiveContentProtectionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface ISensitiveContentProtectionManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                String readString = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setSensitiveContentProtection(readStrongBinder, readString, readBoolean);
+                setSensitiveContentProtection(strongBinder, string, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface ISensitiveContentProtectionManager extends IInterface {
 
             @Override // android.view.ISensitiveContentProtectionManager
             public void setSensitiveContentProtection(IBinder iBinder, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISensitiveContentProtectionManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISensitiveContentProtectionManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

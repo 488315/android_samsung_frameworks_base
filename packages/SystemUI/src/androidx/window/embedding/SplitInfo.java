@@ -7,7 +7,6 @@ import androidx.window.extensions.embedding.SplitInfo;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SplitInfo {
     public final IBinder binder;
@@ -36,11 +35,11 @@ public final class SplitInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (this.splitAttributes.hashCode() + ((this.secondaryActivityStack.hashCode() + (this.primaryActivityStack.hashCode() * 31)) * 31)) * 31;
+        int iHashCode = (this.splitAttributes.hashCode() + ((this.secondaryActivityStack.hashCode() + (this.primaryActivityStack.hashCode() * 31)) * 31)) * 31;
         SplitInfo.Token token = this.token;
-        int hashCode2 = (hashCode + (token != null ? token.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (token != null ? token.hashCode() : 0)) * 31;
         IBinder iBinder = this.binder;
-        return hashCode2 + (iBinder != null ? iBinder.hashCode() : 0);
+        return iHashCode2 + (iBinder != null ? iBinder.hashCode() : 0);
     }
 
     public final String toString() {

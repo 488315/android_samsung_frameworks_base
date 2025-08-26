@@ -60,15 +60,15 @@ public class PBKDF2Params extends ASN1Object {
         this.octStr = (ASN1OctetString) objects.nextElement();
         this.iterationCount = (ASN1Integer) objects.nextElement();
         if (objects.hasMoreElements()) {
-            Object nextElement = objects.nextElement();
-            if (nextElement instanceof ASN1Integer) {
-                this.keyLength = ASN1Integer.getInstance(nextElement);
-                nextElement = objects.hasMoreElements() ? objects.nextElement() : null;
+            Object objNextElement = objects.nextElement();
+            if (objNextElement instanceof ASN1Integer) {
+                this.keyLength = ASN1Integer.getInstance(objNextElement);
+                objNextElement = objects.hasMoreElements() ? objects.nextElement() : null;
             } else {
                 this.keyLength = null;
             }
-            if (nextElement != null) {
-                this.prf = AlgorithmIdentifier.getInstance(nextElement);
+            if (objNextElement != null) {
+                this.prf = AlgorithmIdentifier.getInstance(objNextElement);
                 return;
             } else {
                 this.prf = null;

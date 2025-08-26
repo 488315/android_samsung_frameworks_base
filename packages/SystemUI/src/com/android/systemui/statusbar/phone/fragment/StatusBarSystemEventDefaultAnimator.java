@@ -12,7 +12,6 @@ import com.android.systemui.util.animation.AnimationUtil;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimationCallback {
     public static final Companion Companion = new Companion(null);
@@ -22,7 +21,6 @@ public class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimatio
     public final int translationXIn;
     public final int translationXOut;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,39 +41,39 @@ public class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimatio
         final int i = this.translationXIn;
         final Function1 function1 = this.onTranslationXChanged;
         final Function1 function12 = this.onAlphaChanged;
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
         AnimationUtil.Companion companion = AnimationUtil.Companion;
-        ofFloat.setDuration(companion.getFrames(23));
-        ofFloat.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_OUT);
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$moveOut$1$1
+        valueAnimatorOfFloat.setDuration(companion.getFrames(23));
+        valueAnimatorOfFloat.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_OUT);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$moveOut$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                Function1.this.mo779invoke(Float.valueOf(-(((Float) ofFloat.getAnimatedValue()).floatValue() * i)));
+                function1.mo781invoke(Float.valueOf(-(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue() * i)));
             }
         });
-        final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat2.setDuration(companion.getFrames(8));
-        ofFloat2.setInterpolator(null);
-        ofFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$alphaOut$1$1
+        final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat2.setDuration(companion.getFrames(8));
+        valueAnimatorOfFloat2.setInterpolator(null);
+        valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$alphaOut$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                Function1.this.mo779invoke((Float) ofFloat2.getAnimatedValue());
+                function12.mo781invoke((Float) valueAnimatorOfFloat2.getAnimatedValue());
             }
         });
         AnimatorSet animatorSet = new AnimatorSet();
         if (z2) {
-            final ValueAnimator ofFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat3.setDuration(100L);
-            ofFloat3.setInterpolator(null);
-            ofFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$batteryAlphaOut$1$1
+            final ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat3.setDuration(100L);
+            valueAnimatorOfFloat3.setInterpolator(null);
+            valueAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipEnter$batteryAlphaOut$1$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
-                    Function1.this.mo779invoke((Float) ofFloat3.getAnimatedValue());
+                    function12.mo781invoke((Float) valueAnimatorOfFloat3.getAnimatedValue());
                 }
             });
-            animatorSet.playTogether(ofFloat3);
+            animatorSet.playTogether(valueAnimatorOfFloat3);
         } else {
-            animatorSet.playTogether(ofFloat, ofFloat2);
+            animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         }
         SpringAnimatorSet springAnimatorSet = new SpringAnimatorSet();
         springAnimatorSet.playTogether(animatorSet);
@@ -85,55 +83,55 @@ public class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimatio
     @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     public final SpringAnimatorSet onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
         final int i = this.translationXOut;
-        Float valueOf = Float.valueOf(i);
+        Float fValueOf = Float.valueOf(i);
         final Function1 function1 = this.onTranslationXChanged;
-        function1.mo779invoke(valueOf);
+        function1.mo781invoke(fValueOf);
         Companion.getClass();
         final Function1 function12 = this.onAlphaChanged;
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
         AnimationUtil.Companion companion = AnimationUtil.Companion;
-        ofFloat.setDuration(companion.getFrames(23));
-        ofFloat.setStartDelay(companion.getFrames(7));
-        ofFloat.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_IN);
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$moveIn$1$1
+        valueAnimatorOfFloat.setDuration(companion.getFrames(23));
+        valueAnimatorOfFloat.setStartDelay(companion.getFrames(7));
+        valueAnimatorOfFloat.setInterpolator(SystemStatusAnimationSchedulerKt.STATUS_BAR_X_MOVE_IN);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$moveIn$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                Function1.this.mo779invoke(Float.valueOf(((Float) ofFloat.getAnimatedValue()).floatValue() * i));
+                function1.mo781invoke(Float.valueOf(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue() * i));
             }
         });
-        final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat2.setDuration(companion.getFrames(5));
-        ofFloat2.setStartDelay(companion.getFrames(11));
-        ofFloat2.setInterpolator(null);
-        ofFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$alphaIn$1$1
+        final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat2.setDuration(companion.getFrames(5));
+        valueAnimatorOfFloat2.setStartDelay(companion.getFrames(11));
+        valueAnimatorOfFloat2.setInterpolator(null);
+        valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$alphaIn$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                Function1.this.mo779invoke((Float) ofFloat2.getAnimatedValue());
+                function12.mo781invoke((Float) valueAnimatorOfFloat2.getAnimatedValue());
             }
         });
         AnimatorSet animatorSet = new AnimatorSet();
         if (z2) {
-            animatorSet.playTogether(ofFloat);
+            animatorSet.playTogether(valueAnimatorOfFloat);
         } else if (z3) {
-            function1.mo779invoke(Float.valueOf(0.0f));
-            final ValueAnimator ofFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat3.setDuration(300L);
-            ofFloat3.setStartDelay(companion.getFrames(13));
-            ofFloat3.setInterpolator(null);
-            ofFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$batteryAlphaIn$1$1
+            function1.mo781invoke(Float.valueOf(0.0f));
+            final ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat3.setDuration(200L);
+            valueAnimatorOfFloat3.setStartDelay(companion.getFrames(5));
+            valueAnimatorOfFloat3.setInterpolator(null);
+            valueAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$Companion$getDefaultStatusBarAnimationForChipExit$batteryAlphaIn$1$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
-                    Function1.this.mo779invoke((Float) ofFloat3.getAnimatedValue());
+                    function12.mo781invoke((Float) valueAnimatorOfFloat3.getAnimatedValue());
                 }
             });
-            animatorSet.playTogether(ofFloat3);
+            animatorSet.playTogether(valueAnimatorOfFloat3);
         } else {
-            animatorSet.playTogether(ofFloat, ofFloat2);
+            animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         }
         animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$onSystemEventAnimationFinish$$inlined$doOnEnd$1
             @Override // androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                StatusBarSystemEventDefaultAnimator.this.isAnimationRunning = false;
+                this.this$0.isAnimationRunning = false;
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener
@@ -151,7 +149,7 @@ public class StatusBarSystemEventDefaultAnimator implements SystemStatusAnimatio
         animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$onSystemEventAnimationFinish$$inlined$doOnCancel$1
             @Override // androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
-                StatusBarSystemEventDefaultAnimator.this.isAnimationRunning = false;
+                this.this$0.isAnimationRunning = false;
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener

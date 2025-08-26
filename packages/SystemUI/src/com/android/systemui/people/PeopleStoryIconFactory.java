@@ -14,7 +14,6 @@ import android.view.ContextThemeWrapper;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import com.android.settingslib.Utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleStoryIconFactory implements AutoCloseable {
     public final int mAccentColor;
@@ -38,7 +37,6 @@ public class PeopleStoryIconFactory implements AutoCloseable {
         this.mAccentColor = Utils.getColorAttr(R.^attr-private.colorAccentPrimary, contextThemeWrapper).getDefaultColor();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PeopleStoryIconDrawable extends Drawable {
         public final RoundedBitmapDrawable mAvatar;
         public final Drawable mBadgeIcon;
@@ -76,14 +74,14 @@ public class PeopleStoryIconFactory implements AutoCloseable {
         @Override // android.graphics.drawable.Drawable
         public final void draw(Canvas canvas) {
             Rect bounds = getBounds();
-            float min = Math.min(bounds.height(), bounds.width()) / this.mFullIconSize;
+            float fMin = Math.min(bounds.height(), bounds.width()) / this.mFullIconSize;
             float f = this.mDensity;
             int i = (int) (f * 2.0f);
             int i2 = (int) (f * 2.0f);
             float f2 = i2;
             this.mPriorityRingPaint.setStrokeWidth(f2);
             this.mStoryPaint.setStrokeWidth(f2);
-            int i3 = (int) (this.mFullIconSize * min);
+            int i3 = (int) (this.mFullIconSize * fMin);
             int i4 = i3 - (i * 2);
             if (this.mAvatar != null) {
                 int i5 = i4 + i;
@@ -99,15 +97,15 @@ public class PeopleStoryIconFactory implements AutoCloseable {
             } else {
                 Log.w("PeopleStoryIconFactory", "Null avatar icon");
             }
-            int min2 = Math.min((int) (this.mDensity * 40.0f), (int) (i4 / 2.4d));
+            int iMin = Math.min((int) (this.mDensity * 40.0f), (int) (i4 / 2.4d));
             if (this.mBadgeIcon == null) {
                 Log.w("PeopleStoryIconFactory", "Null badge icon");
                 return;
             }
-            int i7 = i3 - min2;
+            int i7 = i3 - iMin;
             if (this.mShowImportantRing) {
-                float f4 = (min2 / 2) + i7;
-                canvas.drawCircle(f4, f4, (min2 - i2) / 2, this.mPriorityRingPaint);
+                float f4 = (iMin / 2) + i7;
+                canvas.drawCircle(f4, f4, (iMin - i2) / 2, this.mPriorityRingPaint);
                 i7 += i2;
                 i3 -= i2;
             }

@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+import android.system.ErrnoException;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Xml;
@@ -320,8 +321,8 @@ public final class ApplicationStartInfo implements Parcelable {
         this.mPackageName = intern(parcel.readString());
         this.mProcessName = intern(parcel.readString());
         this.mReason = parcel.readInt();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             addStartupTimestamp(parcel.readInt(), parcel.readLong());
         }
         this.mStartType = parcel.readInt();
@@ -339,8 +340,8 @@ public final class ApplicationStartInfo implements Parcelable {
         return null;
     }
 
-    public void writeToProto(ProtoOutputStream protoOutputStream, long j, ByteArrayOutputStream byteArrayOutputStream, ObjectOutputStream objectOutputStream, TypedXmlSerializer typedXmlSerializer) throws IOException {
-        long start = protoOutputStream.start(j);
+    public void writeToProto(ProtoOutputStream protoOutputStream, long j, ByteArrayOutputStream byteArrayOutputStream, ObjectOutputStream objectOutputStream, TypedXmlSerializer typedXmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.mPid);
         protoOutputStream.write(1120986464258L, this.mRealUid);
         protoOutputStream.write(1120986464259L, this.mPackageUid);
@@ -352,17 +353,17 @@ public final class ApplicationStartInfo implements Parcelable {
         if (arrayMap != null && arrayMap.size() > 0) {
             ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(byteArrayOutputStream2);
-            TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(objectOutputStream2);
-            resolveSerializer.startDocument(null, true);
-            resolveSerializer.startTag(null, "timestamps");
+            TypedXmlSerializer typedXmlSerializerResolveSerializer = Xml.resolveSerializer(objectOutputStream2);
+            typedXmlSerializerResolveSerializer.startDocument(null, true);
+            typedXmlSerializerResolveSerializer.startTag(null, "timestamps");
             for (int i = 0; i < this.mStartupTimestampsNs.size(); i++) {
-                resolveSerializer.startTag(null, "timestamp");
-                resolveSerializer.attributeInt(null, "key", this.mStartupTimestampsNs.keyAt(i).intValue());
-                resolveSerializer.attributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS, this.mStartupTimestampsNs.valueAt(i).longValue());
-                resolveSerializer.endTag(null, "timestamp");
+                typedXmlSerializerResolveSerializer.startTag(null, "timestamp");
+                typedXmlSerializerResolveSerializer.attributeInt(null, "key", this.mStartupTimestampsNs.keyAt(i).intValue());
+                typedXmlSerializerResolveSerializer.attributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS, this.mStartupTimestampsNs.valueAt(i).longValue());
+                typedXmlSerializerResolveSerializer.endTag(null, "timestamp");
             }
-            resolveSerializer.endTag(null, "timestamps");
-            resolveSerializer.endDocument();
+            typedXmlSerializerResolveSerializer.endTag(null, "timestamps");
+            typedXmlSerializerResolveSerializer.endDocument();
             protoOutputStream.write(1151051235336L, byteArrayOutputStream2.toByteArray());
             objectOutputStream2.close();
         }
@@ -370,12 +371,12 @@ public final class ApplicationStartInfo implements Parcelable {
         if (this.mStartIntent != null) {
             ByteArrayOutputStream byteArrayOutputStream3 = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(byteArrayOutputStream3);
-            TypedXmlSerializer resolveSerializer2 = Xml.resolveSerializer(objectOutputStream3);
-            resolveSerializer2.startDocument(null, true);
-            resolveSerializer2.startTag(null, "intent");
-            this.mStartIntent.saveToXml(resolveSerializer2);
-            resolveSerializer2.endTag(null, "intent");
-            resolveSerializer2.endDocument();
+            TypedXmlSerializer typedXmlSerializerResolveSerializer2 = Xml.resolveSerializer(objectOutputStream3);
+            typedXmlSerializerResolveSerializer2.startDocument(null, true);
+            typedXmlSerializerResolveSerializer2.startTag(null, "intent");
+            this.mStartIntent.saveToXml(typedXmlSerializerResolveSerializer2);
+            typedXmlSerializerResolveSerializer2.endTag(null, "intent");
+            typedXmlSerializerResolveSerializer2.endDocument();
             protoOutputStream.write(ApplicationStartInfoProto.START_INTENT, byteArrayOutputStream3.toByteArray());
             objectOutputStream3.close();
         }
@@ -383,11 +384,11 @@ public final class ApplicationStartInfo implements Parcelable {
         protoOutputStream.write(1133871366156L, this.mWasForceStopped);
         protoOutputStream.write(1112396529677L, this.mMonotonicCreationTimeMs);
         protoOutputStream.write(1120986464270L, this.mStartComponent);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public void readFromProto(ProtoInputStream protoInputStream, long j, ByteArrayInputStream byteArrayInputStream, ObjectInputStream objectInputStream, TypedXmlPullParser typedXmlPullParser) throws IOException, WireTypeMismatchException, ClassNotFoundException {
-        long start = protoInputStream.start(j);
+    public void readFromProto(ProtoInputStream protoInputStream, long j, ByteArrayInputStream byteArrayInputStream, ObjectInputStream objectInputStream, TypedXmlPullParser typedXmlPullParser) throws WireTypeMismatchException, IOException, ClassNotFoundException, ErrnoException {
+        long jStart = protoInputStream.start(j);
         while (protoInputStream.nextField() != -1) {
             switch (protoInputStream.getFieldNumber()) {
                 case 1:
@@ -415,12 +416,12 @@ public final class ApplicationStartInfo implements Parcelable {
                     ObjectInputStream objectInputStream2 = new ObjectInputStream(new ByteArrayInputStream(protoInputStream.readBytes(1151051235336L)));
                     this.mStartupTimestampsNs = new ArrayMap<>();
                     try {
-                        TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(objectInputStream2);
-                        XmlUtils.beginDocument(resolvePullParser, "timestamps");
-                        int depth = resolvePullParser.getDepth();
-                        while (XmlUtils.nextElementWithin(resolvePullParser, depth)) {
-                            if ("timestamp".equals(resolvePullParser.getName())) {
-                                this.mStartupTimestampsNs.put(Integer.valueOf(resolvePullParser.getAttributeInt(null, "key")), Long.valueOf(resolvePullParser.getAttributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS)));
+                        TypedXmlPullParser typedXmlPullParserResolvePullParser = Xml.resolvePullParser(objectInputStream2);
+                        XmlUtils.beginDocument(typedXmlPullParserResolvePullParser, "timestamps");
+                        int depth = typedXmlPullParserResolvePullParser.getDepth();
+                        while (XmlUtils.nextElementWithin(typedXmlPullParserResolvePullParser, depth)) {
+                            if ("timestamp".equals(typedXmlPullParserResolvePullParser.getName())) {
+                                this.mStartupTimestampsNs.put(Integer.valueOf(typedXmlPullParserResolvePullParser.getAttributeInt(null, "key")), Long.valueOf(typedXmlPullParserResolvePullParser.getAttributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS)));
                             }
                         }
                     } catch (XmlPullParserException unused) {
@@ -433,9 +434,9 @@ public final class ApplicationStartInfo implements Parcelable {
                 case 10:
                     ObjectInputStream objectInputStream3 = new ObjectInputStream(new ByteArrayInputStream(protoInputStream.readBytes(ApplicationStartInfoProto.START_INTENT)));
                     try {
-                        TypedXmlPullParser resolvePullParser2 = Xml.resolvePullParser(objectInputStream3);
-                        XmlUtils.beginDocument(resolvePullParser2, "intent");
-                        this.mStartIntent = Intent.restoreFromXml(resolvePullParser2);
+                        TypedXmlPullParser typedXmlPullParserResolvePullParser2 = Xml.resolvePullParser(objectInputStream3);
+                        XmlUtils.beginDocument(typedXmlPullParserResolvePullParser2, "intent");
+                        this.mStartIntent = Intent.restoreFromXml(typedXmlPullParserResolvePullParser2);
                     } catch (XmlPullParserException unused2) {
                     }
                     objectInputStream3.close();
@@ -454,7 +455,7 @@ public final class ApplicationStartInfo implements Parcelable {
                     break;
             }
         }
-        protoInputStream.end(start);
+        protoInputStream.end(jStart);
     }
 
     public void dump(PrintWriter printWriter, String str, String str2, SimpleDateFormat simpleDateFormat) {
@@ -578,25 +579,30 @@ public final class ApplicationStartInfo implements Parcelable {
         return "";
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean equals(Object obj) {
-        boolean z;
+        boolean zFilterEquals;
         if (obj != null && (obj instanceof ApplicationStartInfo)) {
             ApplicationStartInfo applicationStartInfo = (ApplicationStartInfo) obj;
             if (com.android.internal.hidden_from_bootclasspath.android.content.flags.Flags.intentSaveToXmlPackage()) {
                 Intent intent = this.mStartIntent;
                 if (intent == null) {
                     if (applicationStartInfo.mStartIntent != null) {
-                        z = false;
+                        zFilterEquals = false;
                     }
                 } else {
-                    z = intent.filterEquals(applicationStartInfo.mStartIntent);
+                    zFilterEquals = intent.filterEquals(applicationStartInfo.mStartIntent);
                 }
-                if (this.mPid != applicationStartInfo.mPid && this.mRealUid == applicationStartInfo.mRealUid && this.mPackageUid == applicationStartInfo.mPackageUid && this.mDefiningUid == applicationStartInfo.mDefiningUid && this.mReason == applicationStartInfo.mReason && this.mStartupState == applicationStartInfo.mStartupState && this.mStartType == applicationStartInfo.mStartType && this.mLaunchMode == applicationStartInfo.mLaunchMode && TextUtils.equals(this.mPackageName, applicationStartInfo.mPackageName) && TextUtils.equals(this.mProcessName, applicationStartInfo.mProcessName) && timestampsEquals(applicationStartInfo) && this.mWasForceStopped == applicationStartInfo.mWasForceStopped && this.mMonotonicCreationTimeMs == applicationStartInfo.mMonotonicCreationTimeMs && this.mStartComponent == applicationStartInfo.mStartComponent && z) {
+                if (this.mPid != applicationStartInfo.mPid) {
+                }
+            } else {
+                zFilterEquals = true;
+                if (this.mPid != applicationStartInfo.mPid && this.mRealUid == applicationStartInfo.mRealUid && this.mPackageUid == applicationStartInfo.mPackageUid && this.mDefiningUid == applicationStartInfo.mDefiningUid && this.mReason == applicationStartInfo.mReason && this.mStartupState == applicationStartInfo.mStartupState && this.mStartType == applicationStartInfo.mStartType && this.mLaunchMode == applicationStartInfo.mLaunchMode && TextUtils.equals(this.mPackageName, applicationStartInfo.mPackageName) && TextUtils.equals(this.mProcessName, applicationStartInfo.mProcessName) && timestampsEquals(applicationStartInfo) && this.mWasForceStopped == applicationStartInfo.mWasForceStopped && this.mMonotonicCreationTimeMs == applicationStartInfo.mMonotonicCreationTimeMs && this.mStartComponent == applicationStartInfo.mStartComponent && zFilterEquals) {
                     return true;
                 }
-            }
-            z = true;
-            if (this.mPid != applicationStartInfo.mPid) {
             }
         }
         return false;

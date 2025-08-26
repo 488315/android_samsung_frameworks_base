@@ -25,7 +25,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WidgetInteractionHandler implements RemoteViews.InteractionHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public final class WidgetInteractionHandler implements RemoteViews.InteractionHa
     public final CoroutineContext uiBackgroundContext;
     public final WidgetTrampolineInteractor widgetTrampolineInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,10 +64,9 @@ public final class WidgetInteractionHandler implements RemoteViews.InteractionHa
                     standaloneCoroutine.cancel(null);
                 }
                 this.job = null;
-                final WidgetInteractionHandler widgetInteractionHandler = WidgetInteractionHandler.this;
+                final WidgetInteractionHandler widgetInteractionHandler = this.this$0;
                 widgetInteractionHandler.activityStarter.startPendingIntentMaybeDismissingKeyguard(pendingIntent, false, new Runnable() { // from class: com.android.systemui.communal.widgets.WidgetInteractionHandler$startActivityIntent$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.communal.widgets.WidgetInteractionHandler$startActivityIntent$1$1, reason: invalid class name */
                     final class AnonymousClass1 extends SuspendLambda implements Function2 {
                         int label;
@@ -112,7 +109,7 @@ public final class WidgetInteractionHandler implements RemoteViews.InteractionHa
 
                     @Override // java.lang.Runnable
                     public final void run() {
-                        WidgetInteractionHandler widgetInteractionHandler2 = WidgetInteractionHandler.this;
+                        WidgetInteractionHandler widgetInteractionHandler2 = widgetInteractionHandler;
                         CoroutineTracingKt.launchTraced$default(widgetInteractionHandler2.applicationScope, widgetInteractionHandler2.uiBackgroundContext, null, new AnonymousClass1(widgetInteractionHandler2, null), 4);
                     }
                 }, communalTransitionAnimatorController, intent, activityOptions.toBundle(), null);
@@ -125,7 +122,7 @@ public final class WidgetInteractionHandler implements RemoteViews.InteractionHa
                     standaloneCoroutine.cancel(null);
                 }
                 this.job = null;
-                WidgetInteractionHandler widgetInteractionHandler = WidgetInteractionHandler.this;
+                WidgetInteractionHandler widgetInteractionHandler = this.this$0;
                 this.job = CoroutineTracingKt.launchTraced$default(widgetInteractionHandler.applicationScope, null, null, new WidgetInteractionHandler$delegate$2$startPendingIntent$1(widgetInteractionHandler, null), 6);
                 return super.startPendingIntent(view, pendingIntent, intent, activityOptions);
             }

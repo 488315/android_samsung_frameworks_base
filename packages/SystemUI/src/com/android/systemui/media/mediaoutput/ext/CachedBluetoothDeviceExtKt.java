@@ -35,15 +35,14 @@ import kotlin.collections.EmptyList;
 import kotlin.collections.EmptySet;
 import kotlin.collections.SetsKt___SetsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class CachedBluetoothDeviceExtKt {
     public static final List getAllAddresses(CachedBluetoothDevice cachedBluetoothDevice) {
         Set set = ArraysKt___ArraysKt.toSet(new CachedBluetoothDevice[]{cachedBluetoothDevice, cachedBluetoothDevice.mSubDevice});
         Set set2 = cachedBluetoothDevice.mMemberDevices;
-        List filterNotNull = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(filterNotNull, 10));
-        Iterator it = filterNotNull.iterator();
+        List listFilterNotNull = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listFilterNotNull, 10));
+        Iterator it = listFilterNotNull.iterator();
         while (it.hasNext()) {
             arrayList.add(((CachedBluetoothDevice) it.next()).mDevice.getAddress());
         }
@@ -62,37 +61,37 @@ public abstract class CachedBluetoothDeviceExtKt {
             }
             Triple triple = cachedBluetoothDevice2 != null ? new Triple(Integer.valueOf(batteryByMetadata), Integer.valueOf(batteryByMetadata2), Integer.valueOf(batteryByMetadata3)) : null;
             if (triple != null) {
-                int intValue = ((Number) triple.component1()).intValue();
-                int intValue2 = ((Number) triple.component2()).intValue();
-                int intValue3 = ((Number) triple.component3()).intValue();
+                int iIntValue = ((Number) triple.component1()).intValue();
+                int iIntValue2 = ((Number) triple.component2()).intValue();
+                int iIntValue3 = ((Number) triple.component3()).intValue();
                 ArrayList arrayList = new ArrayList();
                 DeviceUtils.INSTANCE.getClass();
                 boolean z = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == 1;
-                arrayList.addAll(Collections.singletonList(intValue >= 0 ? (intValue2 < 0 || Math.abs(intValue2 - intValue) >= 15) ? intValue2 >= 0 ? z ? MutableVectorKt$$ExternalSyntheticOutline0.m(intValue2, intValue, "R ", "% • L ", "%") : MutableVectorKt$$ExternalSyntheticOutline0.m(intValue, intValue2, "L ", "% • R ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(intValue, "L ", "%") : z ? ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(Math.min(intValue2, intValue), "R • L ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(Math.min(intValue2, intValue), "L • R ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(intValue2, "R ", "%")));
-                if (1 <= intValue3 && intValue3 < 101) {
-                    arrayList.addAll(Arrays.asList(" | ", new ResourceString(R.string.battery_case, null, 2, null), intValue3 + "%"));
+                arrayList.addAll(Collections.singletonList(iIntValue >= 0 ? (iIntValue2 < 0 || Math.abs(iIntValue2 - iIntValue) >= 15) ? iIntValue2 >= 0 ? z ? MutableVectorKt$$ExternalSyntheticOutline0.m(iIntValue2, iIntValue, "R ", "% • L ", "%") : MutableVectorKt$$ExternalSyntheticOutline0.m(iIntValue, iIntValue2, "L ", "% • R ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iIntValue, "L ", "%") : z ? ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(Math.min(iIntValue2, iIntValue), "R • L ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(Math.min(iIntValue2, iIntValue), "L • R ", "%") : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iIntValue2, "R ", "%")));
+                if (1 <= iIntValue3 && iIntValue3 < 101) {
+                    arrayList.addAll(Arrays.asList(" | ", new ResourceString(R.string.battery_case, null, 2, null), iIntValue3 + "%"));
                 }
                 return new MultiSequenceString(arrayList, null, 2, null);
             }
         }
         int batteryLevel = cachedBluetoothDevice.mDevice.getBatteryLevel();
-        Integer valueOf = Integer.valueOf(batteryLevel);
+        Integer numValueOf = Integer.valueOf(batteryLevel);
         if (batteryLevel <= 0) {
-            valueOf = null;
+            numValueOf = null;
         }
-        if (valueOf == null) {
+        if (numValueOf == null) {
             return null;
         }
-        int intValue4 = valueOf.intValue();
+        int iIntValue4 = numValueOf.intValue();
         MultiSequenceString.Companion companion = MultiSequenceString.Companion;
-        CharSequence[] charSequenceArr = {new ResourceString(R.string.battery, null, 2, null), intValue4 + "%"};
+        CharSequence[] charSequenceArr = {new ResourceString(R.string.battery, null, 2, null), iIntValue4 + "%"};
         companion.getClass();
         return new MultiSequenceString(ArraysKt___ArraysKt.toList(charSequenceArr), null, 2, null);
     }
 
     public static final boolean isActiveDeviceWithMembers(CachedBluetoothDevice cachedBluetoothDevice, int i) {
         int i2;
-        List list;
+        List arrayList;
         if (i == 8) {
             i2 = 2;
         } else if (i == 23) {
@@ -106,27 +105,27 @@ public abstract class CachedBluetoothDeviceExtKt {
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         List activeDevices = defaultAdapter != null ? defaultAdapter.getActiveDevices(i2) : null;
         if (activeDevices != null) {
-            List filterNotNull = CollectionsKt___CollectionsKt.filterNotNull(activeDevices);
-            list = new ArrayList();
-            Iterator it = filterNotNull.iterator();
+            List listFilterNotNull = CollectionsKt___CollectionsKt.filterNotNull(activeDevices);
+            arrayList = new ArrayList();
+            Iterator it = listFilterNotNull.iterator();
             while (it.hasNext()) {
                 String address = ((BluetoothDevice) it.next()).getAddress();
                 if (address != null) {
-                    list.add(address);
+                    arrayList.add(address);
                 }
             }
         } else {
-            list = EmptyList.INSTANCE;
+            arrayList = EmptyList.INSTANCE;
         }
         Set set = ArraysKt___ArraysKt.toSet(new CachedBluetoothDevice[]{cachedBluetoothDevice, cachedBluetoothDevice.mSubDevice});
         Set set2 = cachedBluetoothDevice.mMemberDevices;
-        List filterNotNull2 = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
-        if (filterNotNull2.isEmpty()) {
+        List listFilterNotNull2 = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
+        if (listFilterNotNull2.isEmpty()) {
             return false;
         }
-        Iterator it2 = filterNotNull2.iterator();
+        Iterator it2 = listFilterNotNull2.iterator();
         while (it2.hasNext()) {
-            if (list.contains(((CachedBluetoothDevice) it2.next()).mDevice.getAddress())) {
+            if (arrayList.contains(((CachedBluetoothDevice) it2.next()).mDevice.getAddress())) {
                 return true;
             }
         }
@@ -170,11 +169,11 @@ public abstract class CachedBluetoothDeviceExtKt {
     public static final boolean isConnectedWithMembers(CachedBluetoothDevice cachedBluetoothDevice) {
         Set set = ArraysKt___ArraysKt.toSet(new CachedBluetoothDevice[]{cachedBluetoothDevice, cachedBluetoothDevice.mSubDevice});
         Set set2 = cachedBluetoothDevice.mMemberDevices;
-        List<CachedBluetoothDevice> filterNotNull = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
-        if (filterNotNull.isEmpty()) {
+        List<CachedBluetoothDevice> listFilterNotNull = CollectionsKt___CollectionsKt.filterNotNull(SetsKt___SetsKt.plus(set, set2 != null ? set2 : EmptySet.INSTANCE));
+        if (listFilterNotNull.isEmpty()) {
             return false;
         }
-        for (CachedBluetoothDevice cachedBluetoothDevice2 : filterNotNull) {
+        for (CachedBluetoothDevice cachedBluetoothDevice2 : listFilterNotNull) {
             if (cachedBluetoothDevice2 != null ? cachedBluetoothDevice2.isConnected() : false) {
                 return true;
             }

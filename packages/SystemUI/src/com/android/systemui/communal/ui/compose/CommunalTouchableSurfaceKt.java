@@ -1,6 +1,7 @@
 package com.android.systemui.communal.ui.compose;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.KeyEvent;
 import androidx.compose.animation.AnimatedContentKt$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.ClickableKt;
@@ -42,7 +43,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.reflect.KFunction;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class CommunalTouchableSurfaceKt {
     public static final void CommunalTouchableSurface(final CommunalViewModel communalViewModel, final Modifier modifier, final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i) {
@@ -68,23 +68,23 @@ public abstract class CommunalTouchableSurfaceKt {
             }
             final Context context = (Context) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalContext);
             composerImpl.startReplaceGroup(741036002);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Object obj = Composer.Companion.Empty;
-            if (rememberedValue == obj) {
-                rememberedValue = InteractionSourceKt.MutableInteractionSource();
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == obj) {
+                objRememberedValue = InteractionSourceKt.MutableInteractionSource();
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            MutableInteractionSource mutableInteractionSource = (MutableInteractionSource) rememberedValue;
+            MutableInteractionSource mutableInteractionSource = (MutableInteractionSource) objRememberedValue;
             composerImpl.end(false);
             composerImpl.startReplaceGroup(741040877);
-            boolean changedInstance = composerImpl.changedInstance(context) | composerImpl.changedInstance(communalViewModel);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue2 == obj) {
-                rememberedValue2 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda0
+            boolean zChangedInstance = composerImpl.changedInstance(context) | composerImpl.changedInstance(communalViewModel);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue2 == obj) {
+                objRememberedValue2 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         Context context2 = context;
                         SemanticsPropertyReceiver semanticsPropertyReceiver = (SemanticsPropertyReceiver) obj2;
                         SemanticsPropertiesKt.setContentDescription(semanticsPropertyReceiver, context2.getString(R.string.accessibility_content_description_for_communal_hub));
@@ -93,7 +93,7 @@ public abstract class CommunalTouchableSurfaceKt {
                         final int i3 = 0;
                         CustomAccessibilityAction customAccessibilityAction = new CustomAccessibilityAction(string, new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda3
                             @Override // kotlin.jvm.functions.Function0
-                            public final Object invoke() {
+                            public final Object invoke() throws Resources.NotFoundException {
                                 switch (i3) {
                                     case 0:
                                         BaseCommunalViewModel.changeScene$default(communalViewModel2, CommunalScenes.Blank, "closed by accessibility", null, 12);
@@ -108,7 +108,7 @@ public abstract class CommunalTouchableSurfaceKt {
                         final int i4 = 1;
                         SemanticsPropertiesKt.setCustomActions(semanticsPropertyReceiver, Arrays.asList(customAccessibilityAction, new CustomAccessibilityAction(context2.getString(R.string.accessibility_action_label_edit_widgets), new Function0() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda3
                             @Override // kotlin.jvm.functions.Function0
-                            public final Object invoke() {
+                            public final Object invoke() throws Resources.NotFoundException {
                                 switch (i4) {
                                     case 0:
                                         BaseCommunalViewModel.changeScene$default(communalViewModel2, CommunalScenes.Blank, "closed by accessibility", null, 12);
@@ -123,68 +123,68 @@ public abstract class CommunalTouchableSurfaceKt {
                         return Unit.INSTANCE;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue2);
+                composerImpl.updateRememberedValue(objRememberedValue2);
             }
             composerImpl.end(false);
-            Modifier semantics = SemanticsModifierKt.semantics(modifier, false, (Function1) rememberedValue2);
+            Modifier modifierSemantics = SemanticsModifierKt.semantics(modifier, false, (Function1) objRememberedValue2);
             composerImpl.startReplaceGroup(741079441);
-            boolean changedInstance2 = composerImpl.changedInstance(communalViewModel);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (changedInstance2 || rememberedValue3 == obj) {
-                rememberedValue3 = new CommunalTouchableSurfaceKt$CommunalTouchableSurface$2$1(communalViewModel);
-                composerImpl.updateRememberedValue(rememberedValue3);
+            boolean zChangedInstance2 = composerImpl.changedInstance(communalViewModel);
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (zChangedInstance2 || objRememberedValue3 == obj) {
+                objRememberedValue3 = new CommunalTouchableSurfaceKt$CommunalTouchableSurface$2$1(communalViewModel);
+                composerImpl.updateRememberedValue(objRememberedValue3);
             }
-            KFunction kFunction = (KFunction) rememberedValue3;
+            KFunction kFunction = (KFunction) objRememberedValue3;
             composerImpl.end(false);
             composerImpl.startReplaceGroup(741081165);
-            boolean changedInstance3 = composerImpl.changedInstance(communalViewModel);
-            Object rememberedValue4 = composerImpl.rememberedValue();
-            if (changedInstance3 || rememberedValue4 == obj) {
-                rememberedValue4 = new CommunalTouchableSurfaceKt$CommunalTouchableSurface$3$1(communalViewModel);
-                composerImpl.updateRememberedValue(rememberedValue4);
+            boolean zChangedInstance3 = composerImpl.changedInstance(communalViewModel);
+            Object objRememberedValue4 = composerImpl.rememberedValue();
+            if (zChangedInstance3 || objRememberedValue4 == obj) {
+                objRememberedValue4 = new CommunalTouchableSurfaceKt$CommunalTouchableSurface$3$1(communalViewModel);
+                composerImpl.updateRememberedValue(objRememberedValue4);
             }
             composerImpl.end(false);
-            Modifier m37combinedClickableauXiCPI$default = ClickableKt.m37combinedClickableauXiCPI$default(semantics, mutableInteractionSource, null, (Function0) kFunction, (Function0) ((KFunction) rememberedValue4), 444);
+            Modifier modifierM37combinedClickableauXiCPI$default = ClickableKt.m37combinedClickableauXiCPI$default(modifierSemantics, mutableInteractionSource, null, (Function0) kFunction, (Function0) ((KFunction) objRememberedValue4), 444);
             composerImpl.startReplaceGroup(741086718);
-            boolean changedInstance4 = composerImpl.changedInstance(communalViewModel);
-            Object rememberedValue5 = composerImpl.rememberedValue();
-            if (changedInstance4 || rememberedValue5 == obj) {
-                rememberedValue5 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$CommunalTouchableSurface$4$1
+            boolean zChangedInstance4 = composerImpl.changedInstance(communalViewModel);
+            Object objRememberedValue5 = composerImpl.rememberedValue();
+            if (zChangedInstance4 || objRememberedValue5 == obj) {
+                objRememberedValue5 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$CommunalTouchableSurface$4$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         KeyEvent keyEvent = ((androidx.compose.ui.input.key.KeyEvent) obj2).nativeKeyEvent;
-                        ((BaseCommunalViewModel) CommunalViewModel.this).communalInteractor._userActivity.tryEmit(Unit.INSTANCE);
+                        ((BaseCommunalViewModel) communalViewModel).communalInteractor._userActivity.tryEmit(Unit.INSTANCE);
                         return Boolean.FALSE;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue5);
+                composerImpl.updateRememberedValue(objRememberedValue5);
             }
             composerImpl.end(false);
-            Modifier onPreviewKeyEvent = KeyInputModifierKt.onPreviewKeyEvent(m37combinedClickableauXiCPI$default, (Function1) rememberedValue5);
+            Modifier modifierOnPreviewKeyEvent = KeyInputModifierKt.onPreviewKeyEvent(modifierM37combinedClickableauXiCPI$default, (Function1) objRememberedValue5);
             composerImpl.startReplaceGroup(741090880);
-            boolean changedInstance5 = composerImpl.changedInstance(communalViewModel);
-            Object rememberedValue6 = composerImpl.rememberedValue();
-            if (changedInstance5 || rememberedValue6 == obj) {
-                rememberedValue6 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda1
+            boolean zChangedInstance5 = composerImpl.changedInstance(communalViewModel);
+            Object objRememberedValue6 = composerImpl.rememberedValue();
+            if (zChangedInstance5 || objRememberedValue6 == obj) {
+                objRememberedValue6 = new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        SharedFlowImpl sharedFlowImpl = ((BaseCommunalViewModel) CommunalViewModel.this).communalInteractor._userActivity;
+                    public final Object mo781invoke(Object obj2) {
+                        SharedFlowImpl sharedFlowImpl = ((BaseCommunalViewModel) communalViewModel).communalInteractor._userActivity;
                         Unit unit = Unit.INSTANCE;
                         sharedFlowImpl.tryEmit(unit);
                         return unit;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue6);
+                composerImpl.updateRememberedValue(objRememberedValue6);
             }
             composerImpl.end(false);
-            Modifier motionEventSpy = PointerInteropFilter_androidKt.motionEventSpy(onPreviewKeyEvent, (Function1) rememberedValue6);
+            Modifier modifierMotionEventSpy = PointerInteropFilter_androidKt.motionEventSpy(modifierOnPreviewKeyEvent, (Function1) objRememberedValue6);
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, motionEventSpy);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierMotionEventSpy);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -197,28 +197,28 @@ public abstract class CommunalTouchableSurfaceKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             composableLambdaImpl.invoke(BoxScopeInstance.INSTANCE, composerImpl, Integer.valueOf(((i2 >> 3) & 112) | 6));
             composerImpl.end(true);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.CommunalTouchableSurfaceKt$$ExternalSyntheticLambda2
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
                     ((Integer) obj3).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     ComposableLambdaImpl composableLambdaImpl2 = composableLambdaImpl;
-                    CommunalTouchableSurfaceKt.CommunalTouchableSurface(CommunalViewModel.this, modifier, composableLambdaImpl2, (Composer) obj2, updateChangedFlags);
+                    CommunalTouchableSurfaceKt.CommunalTouchableSurface(communalViewModel, modifier, composableLambdaImpl2, (Composer) obj2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

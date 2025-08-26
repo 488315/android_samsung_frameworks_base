@@ -7,6 +7,7 @@ import android.app.AppOpsManager;
 import android.app.Application;
 import android.app.Flags;
 import android.app.GrammaticalInflectionManager;
+import android.content.AttributionSource;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -634,17 +635,17 @@ public final class Settings {
         }
 
         public boolean isGenerationChanged() {
-            int readCurrentGeneration = readCurrentGeneration();
-            if (readCurrentGeneration >= 0) {
-                if (readCurrentGeneration == this.mCurrentGeneration) {
+            int currentGeneration = readCurrentGeneration();
+            if (currentGeneration >= 0) {
+                if (currentGeneration == this.mCurrentGeneration) {
                     return false;
                 }
-                this.mCurrentGeneration = readCurrentGeneration;
+                this.mCurrentGeneration = currentGeneration;
             }
             if (!SEC_PROVIDER_DEBUG) {
                 return true;
             }
-            Log.d(Settings.TAG, "isGenerationChanged() for " + this.mName + " is true. " + readCurrentGeneration + ":" + this.mCurrentGeneration);
+            Log.d(Settings.TAG, "isGenerationChanged() for " + this.mName + " is true. " + currentGeneration + ":" + this.mCurrentGeneration);
             return true;
         }
 
@@ -764,14 +765,14 @@ public final class Settings {
             this(uri, str, str2, str3, null, null, contentProviderHolder, cls);
         }
 
-        private <T extends NameValueTable> NameValueCache(Uri uri, String str, String str2, String str3, String str4, String str5, ContentProviderHolder contentProviderHolder, Class<T> cls) {
+        private <T extends NameValueTable> NameValueCache(Uri uri, String str, String str2, String str3, String str4, String str5, ContentProviderHolder contentProviderHolder, Class<T> cls) throws IllegalAccessException, IllegalArgumentException {
             this.mValues = new ArrayMap<>();
             this.mPrefixToValues = new ArrayMap<>();
             this.mGenerationTrackers = new ArrayMap<>();
             this.mGenerationTrackerErrorHandler = new Consumer() { // from class: android.provider.Settings$NameValueCache$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Settings.NameValueCache.this.lambda$new$0((String) obj);
+                    this.f$0.lambda$new$0((String) obj);
                 }
             };
             this.mUri = uri;
@@ -793,9 +794,8 @@ public final class Settings {
         public boolean putStringForUser(ContentResolver contentResolver, String str, String str2, String str3, boolean z, int i, boolean z2) {
             String str4;
             RemoteException remoteException;
-            Bundle bundle;
             try {
-                bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("value", str2);
                 bundle.putInt(Settings.CALL_METHOD_USER_KEY, i);
                 if (str3 != null) {
@@ -815,45 +815,45 @@ public final class Settings {
                     bundle.putBoolean(Settings.CALL_METHOD_OVERRIDEABLE_BY_RESTORE_KEY, true);
                 }
                 str4 = str;
-            } catch (RemoteException e2) {
-                e = e2;
-                str4 = str;
-            }
-            try {
-                this.mProviderHolder.getProvider(contentResolver).call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallSetCommand, str4, bundle);
-                semDumpCallStackIfNeeded(str4, str2, contentResolver.getPackageName(), i);
-                return true;
+                try {
+                    this.mProviderHolder.getProvider(contentResolver).call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallSetCommand, str4, bundle);
+                    semDumpCallStackIfNeeded(str4, str2, contentResolver.getPackageName(), i);
+                    return true;
+                } catch (RemoteException e2) {
+                    e = e2;
+                    remoteException = e;
+                    Log.w(Settings.TAG, "Can't set key " + str4 + " in " + this.mUri, remoteException);
+                    return false;
+                }
             } catch (RemoteException e3) {
                 e = e3;
-                remoteException = e;
-                Log.w(Settings.TAG, "Can't set key " + str4 + " in " + this.mUri, remoteException);
-                return false;
+                str4 = str;
             }
         }
 
         private void semDumpCallStackIfNeeded(String str, String str2, String str3, int i) {
             if (Settings.CALL_METHOD_PUT_SECURE.equals(this.mCallSetCommand) && Secure.ENABLED_ACCESSIBILITY_SERVICES.equals(str)) {
-                Application currentApplication = ActivityThread.currentApplication();
-                if (currentApplication == null) {
+                Application applicationCurrentApplication = ActivityThread.currentApplication();
+                if (applicationCurrentApplication == null) {
                     Log.d(Settings.TAG, "can't get context for a11y callstack");
                     return;
                 }
                 String str4 = new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()) + "\nvalue : " + str2 + "\npackage : " + str3 + "\nuser id : " + i + ShaderAssembler.NEWLINE + Log.getStackTraceString(new Exception("a11y service changed"));
-                AccessibilityManager accessibilityManager = (AccessibilityManager) currentApplication.getSystemService(Context.ACCESSIBILITY_SERVICE);
+                AccessibilityManager accessibilityManager = (AccessibilityManager) applicationCurrentApplication.getSystemService(Context.ACCESSIBILITY_SERVICE);
                 if (accessibilityManager != null) {
                     accessibilityManager.semDumpCallStack(str4);
                 }
             }
         }
 
-        public int setStringsForPrefix(ContentResolver contentResolver, String str, HashMap<String, String> hashMap) {
+        public int setStringsForPrefix(ContentResolver contentResolver, String str, HashMap<String, String> map) {
             if (this.mCallSetAllCommand == null) {
                 return 0;
             }
             try {
                 Bundle bundle = new Bundle();
                 bundle.putString(Settings.CALL_METHOD_PREFIX_KEY, str);
-                bundle.putSerializable(Settings.CALL_METHOD_FLAGS_KEY, hashMap);
+                bundle.putSerializable(Settings.CALL_METHOD_FLAGS_KEY, map);
                 return this.mProviderHolder.getProvider(contentResolver).call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallSetAllCommand, null, bundle).getInt(Settings.KEY_CONFIG_SET_ALL_RETURN);
             } catch (RemoteException unused) {
                 return 0;
@@ -862,31 +862,32 @@ public final class Settings {
 
         public boolean deleteStringForUser(ContentResolver contentResolver, String str, int i) {
             String str2;
+            Bundle bundle;
             try {
-                Bundle bundle = new Bundle();
+                bundle = new Bundle();
                 bundle.putInt(Settings.CALL_METHOD_USER_KEY, i);
                 str2 = str;
-                try {
-                    this.mProviderHolder.getProvider(contentResolver).call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallDeleteCommand, str2, bundle);
-                    return true;
-                } catch (RemoteException e) {
-                    e = e;
-                    Log.w(Settings.TAG, "Can't delete key " + str2 + " in " + this.mUri, e);
-                    return false;
-                }
+            } catch (RemoteException e) {
+                e = e;
+                str2 = str;
+            }
+            try {
+                this.mProviderHolder.getProvider(contentResolver).call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallDeleteCommand, str2, bundle);
+                return true;
             } catch (RemoteException e2) {
                 e = e2;
-                str2 = str;
+                Log.w(Settings.TAG, "Can't delete key " + str2 + " in " + this.mUri, e);
+                return false;
             }
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:45:0x017d, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:50:0x017d, code lost:
         
             if (r4 <= r2) goto L56;
          */
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:185:0x04d4  */
-        /* JADX WARN: Removed duplicated region for block: B:68:0x0267 A[Catch: RemoteException -> 0x038a, TRY_ENTER, TryCatch #6 {RemoteException -> 0x038a, blocks: (B:53:0x01c2, B:55:0x01c9, B:57:0x01d0, B:59:0x01dd, B:60:0x0210, B:68:0x0267, B:70:0x0270, B:99:0x0338, B:105:0x0334), top: B:52:0x01c2 }] */
+        /* JADX WARN: Removed duplicated region for block: B:179:0x04d4  */
+        /* JADX WARN: Removed duplicated region for block: B:80:0x024b A[Catch: RemoteException -> 0x0388, TRY_LEAVE, TryCatch #5 {RemoteException -> 0x0388, blocks: (B:67:0x0216, B:69:0x0220, B:74:0x023c, B:78:0x0247, B:79:0x024a, B:80:0x024b), top: B:188:0x0216 }] */
         /* JADX WARN: Type inference failed for: r17v0, types: [android.content.IContentProvider] */
         /* JADX WARN: Type inference failed for: r17v1, types: [android.content.IContentProvider] */
         /* JADX WARN: Type inference failed for: r17v3 */
@@ -908,37 +909,272 @@ public final class Settings {
         /* JADX WARN: Type inference failed for: r4v9 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public java.lang.String getStringForUser(android.content.ContentResolver r25, java.lang.String r26, int r27) {
-            /*
-                Method dump skipped, instructions count: 1240
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.provider.Settings.NameValueCache.getStringForUser(android.content.ContentResolver, java.lang.String, int):java.lang.String");
+        public String getStringForUser(ContentResolver contentResolver, String str, int i) throws Throwable {
+            boolean z;
+            String str2;
+            Cursor cursorQuery;
+            Bundle bundleCall;
+            String str3;
+            String str4 = str;
+            String str5 = "Generation changed for setting:";
+            boolean z2 = i == UserHandle.myUserId();
+            boolean z3 = z2 && !Settings.isInSystemServer();
+            boolean z4 = SEC_PROVIDER_DEBUG;
+            if (z4) {
+                Log.d(Settings.TAG, "GET_req(" + this.mUri.getPath() + "/" + str4 + ") userHandle:" + i + ", myUserId:" + UserHandle.myUserId() + ", isInSystemServer:" + Settings.isInSystemServer() + ", isSelf:" + z2 + ", useCache:" + z3 + ", callingPackage:" + contentResolver.getPackageName());
+            }
+            if (z3) {
+                synchronized (this) {
+                    GenerationTracker generationTracker = this.mGenerationTrackers.get(str4);
+                    String str6 = str5;
+                    if (generationTracker != null) {
+                        if (generationTracker.isGenerationChanged()) {
+                            String str7 = str5;
+                            if (SEC_GENERATION_TRACKER_DEBUG.contains(str4)) {
+                                String str8 = "Generation changed for setting:" + str4 + " type:" + this.mUri.getPath() + " in package:" + contentResolver.getPackageName() + " and user:" + i;
+                                Log.i(Settings.TAG, str8);
+                                str7 = str8;
+                            }
+                            this.mValues.remove(str4);
+                            generationTracker.destroy();
+                            this.mGenerationTrackers.remove(str4);
+                            str6 = str7;
+                        } else {
+                            ?? ContainsKey = this.mValues.containsKey(str4);
+                            str6 = ContainsKey;
+                            if (ContainsKey != 0) {
+                                String str9 = this.mValues.get(str4);
+                                if (z4) {
+                                    Log.d(Settings.TAG, "GET_ret(" + this.mUri.getPath() + "/" + str4 + ") value:" + str9 + ", user:" + i + ", callingPackage:" + contentResolver.getPackageName() + " (Cached)");
+                                }
+                                return str9;
+                            }
+                        }
+                    }
+                    z = true;
+                    str2 = str6;
+                }
+            } else {
+                z = false;
+                str2 = str5;
+            }
+            ?? authority = str2;
+            if (!isCallerExemptFromReadableRestriction()) {
+                authority = str2;
+                if (this.mAllFields.contains(str4)) {
+                    if (!this.mReadableFields.contains(str4)) {
+                        throw new SecurityException("Settings key: <" + str4 + "> is not readable. From S+, settings keys annotated with @hide are restricted to system_server and system apps only, unless they are annotated with @Readable.");
+                    }
+                    authority = str2;
+                    if (this.mReadableFieldsWithMaxTargetSdk.containsKey(str4)) {
+                        int iIntValue = this.mReadableFieldsWithMaxTargetSdk.get(str4).intValue();
+                        Application applicationCurrentApplication = ActivityThread.currentApplication();
+                        if (applicationCurrentApplication != null && applicationCurrentApplication.getApplicationInfo() != null) {
+                            int i2 = applicationCurrentApplication.getApplicationInfo().targetSdkVersion;
+                            authority = i2;
+                        }
+                        throw new SecurityException("Settings key: <" + str4 + "> is only readable to apps with targetSdkVersion lower than or equal to: " + iIntValue);
+                    }
+                }
+            }
+            ?? provider = this.mProviderHolder.getProvider(contentResolver);
+            AutoCloseable autoCloseable = null;
+            if (this.mCallGetCommand != null) {
+                try {
+                    Bundle bundle = new Bundle();
+                    if (!z2) {
+                        bundle.putInt(Settings.CALL_METHOD_USER_KEY, i);
+                    }
+                    if (z) {
+                        bundle.putString(Settings.CALL_METHOD_TRACK_GENERATION_KEY, null);
+                        if (SEC_GENERATION_TRACKER_DEBUG.contains(str4)) {
+                            authority = new StringBuilder("Requested generation tracker for setting:");
+                            authority.append(str4);
+                            authority.append(" type:");
+                            authority.append(this.mUri.getPath());
+                            authority.append(" in package:");
+                            authority.append(contentResolver.getPackageName());
+                            authority.append(" and user:");
+                            authority.append(i);
+                            Log.i(Settings.TAG, authority.toString());
+                        }
+                    }
+                    if (Settings.isInSystemServer()) {
+                        try {
+                            if (Binder.getCallingUid() != Process.myUid()) {
+                                long jClearCallingIdentity = Binder.clearCallingIdentity();
+                                try {
+                                    AttributionSource attributionSource = contentResolver.getAttributionSource();
+                                    String authority2 = this.mProviderHolder.mUri.getAuthority();
+                                    try {
+                                        bundleCall = provider.call(attributionSource, authority2, this.mCallGetCommand, str4, bundle);
+                                        provider = provider;
+                                        Binder.restoreCallingIdentity(jClearCallingIdentity);
+                                        str4 = str;
+                                        authority = authority2;
+                                    } catch (Throwable th) {
+                                        th = th;
+                                        throw th;
+                                    }
+                                } catch (Throwable th2) {
+                                    th = th2;
+                                }
+                            } else {
+                                AttributionSource attributionSource2 = contentResolver.getAttributionSource();
+                                authority = this.mProviderHolder.mUri.getAuthority();
+                                str4 = str;
+                                try {
+                                    bundleCall = provider.call(attributionSource2, authority, this.mCallGetCommand, str4, bundle);
+                                    provider = provider;
+                                    authority = authority;
+                                } catch (RemoteException unused) {
+                                    provider = provider;
+                                }
+                            }
+                            if (bundleCall != null) {
+                                String string = bundleCall.getString("value");
+                                if (z2) {
+                                    synchronized (this) {
+                                        try {
+                                            if (z) {
+                                                MemoryIntArray memoryIntArray = (MemoryIntArray) bundleCall.getParcelable(Settings.CALL_METHOD_TRACK_GENERATION_KEY, MemoryIntArray.class);
+                                                int i3 = bundleCall.getInt(Settings.CALL_METHOD_GENERATION_INDEX_KEY, -1);
+                                                if (memoryIntArray != null && i3 >= 0) {
+                                                    int i4 = bundleCall.getInt(Settings.CALL_METHOD_GENERATION_KEY, 0);
+                                                    if (SEC_GENERATION_TRACKER_DEBUG.contains(str4)) {
+                                                        Log.i(Settings.TAG, "Received generation tracker for setting:" + str4 + " type:" + this.mUri.getPath() + " in package:" + contentResolver.getPackageName() + " and user:" + i + " with index:" + i3);
+                                                    }
+                                                    GenerationTracker generationTracker2 = this.mGenerationTrackers.get(str4);
+                                                    if (generationTracker2 != null) {
+                                                        generationTracker2.destroy();
+                                                    }
+                                                    str3 = string;
+                                                    String str10 = str4;
+                                                    try {
+                                                        str4 = str10;
+                                                        this.mGenerationTrackers.put(str4, new GenerationTracker(str10, memoryIntArray, i3, i4, this.mGenerationTrackerErrorHandler));
+                                                    } catch (Throwable th3) {
+                                                        th = th3;
+                                                        throw th;
+                                                    }
+                                                } else {
+                                                    str3 = string;
+                                                    Settings.maybeCloseGenerationArray(memoryIntArray);
+                                                }
+                                            } else {
+                                                str3 = string;
+                                            }
+                                            if (this.mGenerationTrackers.get(str4) != null && !this.mGenerationTrackers.get(str4).isGenerationChanged()) {
+                                                if (SEC_GENERATION_TRACKER_DEBUG.contains(str4)) {
+                                                    Log.i(Settings.TAG, "Updating cache for setting:" + str4);
+                                                }
+                                                this.mValues.put(str4, str3);
+                                            }
+                                        } catch (Throwable th4) {
+                                            th = th4;
+                                        }
+                                    }
+                                } else {
+                                    str3 = string;
+                                }
+                                if (z4) {
+                                    Log.d(Settings.TAG, "GET_ret(" + this.mUri.getPath() + "/" + str4 + ") value:" + str3 + ", user:" + i + ", by user:" + UserHandle.myUserId() + ", callingPackage:" + contentResolver.getPackageName() + " (ProviderCall)");
+                                }
+                                return str3;
+                            }
+                        } catch (RemoteException unused2) {
+                            str4 = str;
+                        }
+                    }
+                } catch (RemoteException unused3) {
+                }
+            }
+            try {
+                try {
+                    Bundle bundleCreateSqlQueryBundle = ContentResolver.createSqlQueryBundle(NAME_EQ_PLACEHOLDER, new String[]{str4}, null);
+                    if (Settings.isInSystemServer() && Binder.getCallingUid() != Process.myUid()) {
+                        long jClearCallingIdentity2 = Binder.clearCallingIdentity();
+                        try {
+                            cursorQuery = provider.query(contentResolver.getAttributionSource(), this.mUri, SELECT_VALUE_PROJECTION, bundleCreateSqlQueryBundle, null);
+                            try {
+                            } catch (RemoteException e) {
+                                e = e;
+                                Log.w(Settings.TAG, "Can't get key " + str4 + " from " + this.mUri, e);
+                                if (cursorQuery != null) {
+                                    cursorQuery.close();
+                                }
+                                return null;
+                            }
+                        } finally {
+                            Binder.restoreCallingIdentity(jClearCallingIdentity2);
+                        }
+                    } else {
+                        cursorQuery = provider.query(contentResolver.getAttributionSource(), this.mUri, SELECT_VALUE_PROJECTION, bundleCreateSqlQueryBundle, null);
+                    }
+                    if (cursorQuery == null) {
+                        Log.w(Settings.TAG, "Can't get key " + str4 + " from " + this.mUri);
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
+                        }
+                        return null;
+                    }
+                    String string2 = cursorQuery.moveToNext() ? cursorQuery.getString(0) : null;
+                    synchronized (this) {
+                        if (this.mGenerationTrackers.get(str4) != null && !this.mGenerationTrackers.get(str4).isGenerationChanged()) {
+                            if (SEC_GENERATION_TRACKER_DEBUG.contains(str4)) {
+                                Log.i(Settings.TAG, "Updating cache for setting:" + str4 + " using query");
+                            }
+                            this.mValues.put(str4, string2);
+                        }
+                    }
+                    if (SEC_PROVIDER_DEBUG) {
+                        Log.d(Settings.TAG, "GET_ret(" + this.mUri.getPath() + "/" + str4 + ") value: " + string2 + ", user: " + i + ", by user: " + UserHandle.myUserId() + ", callingPackage: " + contentResolver.getPackageName() + " (Query)");
+                    }
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
+                    }
+                    return string2;
+                } catch (Throwable th5) {
+                    th = th5;
+                    autoCloseable = authority;
+                    if (autoCloseable != null) {
+                        autoCloseable.close();
+                    }
+                    throw th;
+                }
+            } catch (RemoteException e2) {
+                e = e2;
+                cursorQuery = null;
+            } catch (Throwable th6) {
+                th = th6;
+                if (autoCloseable != null) {
+                }
+                throw th;
+            }
         }
 
         private static boolean isCallerExemptFromReadableRestriction() {
             if (Settings.isInSystemServer() || UserHandle.getAppId(Binder.getCallingUid()) < 10000) {
                 return true;
             }
-            Application currentApplication = ActivityThread.currentApplication();
-            if (currentApplication == null || currentApplication.getApplicationInfo() == null) {
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            if (applicationCurrentApplication == null || applicationCurrentApplication.getApplicationInfo() == null) {
                 return false;
             }
-            ApplicationInfo applicationInfo = currentApplication.getApplicationInfo();
+            ApplicationInfo applicationInfo = applicationCurrentApplication.getApplicationInfo();
             return (applicationInfo.flags & 256) != 0 || applicationInfo.isSystemApp() || applicationInfo.isPrivilegedApp() || applicationInfo.isSignedWithPlatformKey();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public Map<String, String> getStringsForPrefixStripPrefix(ContentResolver contentResolver, String str, List<String> list) {
-            int i;
+            int currentGeneration;
             boolean z;
             String str2;
-            Bundle call;
-            HashMap hashMap;
+            Bundle bundleCall;
+            HashMap map;
             String str3;
-            String substring = str.substring(0, str.length() - 1);
+            String strSubstring = str.substring(0, str.length() - 1);
             ArrayMap arrayMap = new ArrayMap();
             int length = str.length();
             synchronized (this) {
@@ -966,9 +1202,9 @@ public final class Settings {
                         }
                         z = false;
                     }
-                    i = generationTracker.getCurrentGeneration();
+                    currentGeneration = generationTracker.getCurrentGeneration();
                 } else {
-                    i = -1;
+                    currentGeneration = -1;
                     z = true;
                 }
                 if (this.mCallListCommand != null) {
@@ -980,45 +1216,45 @@ public final class Settings {
                             bundle.putString(Settings.CALL_METHOD_TRACK_GENERATION_KEY, null);
                         }
                         if (Settings.isInSystemServer() && Binder.getCallingUid() != Process.myUid()) {
-                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                            long jClearCallingIdentity = Binder.clearCallingIdentity();
                             try {
                                 str2 = null;
-                                call = provider.call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallListCommand, null, bundle);
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                bundleCall = provider.call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallListCommand, null, bundle);
+                                Binder.restoreCallingIdentity(jClearCallingIdentity);
                             } catch (Throwable th) {
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                Binder.restoreCallingIdentity(jClearCallingIdentity);
                                 throw th;
                             }
                         } else {
                             str2 = null;
-                            call = provider.call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallListCommand, null, bundle);
+                            bundleCall = provider.call(contentResolver.getAttributionSource(), this.mProviderHolder.mUri.getAuthority(), this.mCallListCommand, null, bundle);
                         }
-                        if (call != null && (hashMap = (HashMap) call.getSerializable("value", HashMap.class)) != null) {
+                        if (bundleCall != null && (map = (HashMap) bundleCall.getSerializable("value", HashMap.class)) != null) {
                             if (!list.isEmpty()) {
                                 for (String str5 : list) {
-                                    String createCompositeName = Config.createCompositeName(substring, str5);
-                                    if (hashMap.containsKey(createCompositeName)) {
-                                        arrayMap.put(str5, (String) hashMap.get(createCompositeName));
+                                    String strCreateCompositeName = Config.createCompositeName(strSubstring, str5);
+                                    if (map.containsKey(strCreateCompositeName)) {
+                                        arrayMap.put(str5, (String) map.get(strCreateCompositeName));
                                     }
                                 }
                             } else {
-                                for (Map.Entry entry : hashMap.entrySet()) {
+                                for (Map.Entry entry : map.entrySet()) {
                                     arrayMap.put(((String) entry.getKey()).substring(length), (String) entry.getValue());
                                 }
                             }
                             synchronized (this) {
                                 if (z) {
-                                    MemoryIntArray memoryIntArray = (MemoryIntArray) call.getParcelable(Settings.CALL_METHOD_TRACK_GENERATION_KEY, MemoryIntArray.class);
-                                    int i2 = call.getInt(Settings.CALL_METHOD_GENERATION_INDEX_KEY, -1);
-                                    if (memoryIntArray != null && i2 >= 0) {
-                                        int i3 = call.getInt(Settings.CALL_METHOD_GENERATION_KEY, 0);
+                                    MemoryIntArray memoryIntArray = (MemoryIntArray) bundleCall.getParcelable(Settings.CALL_METHOD_TRACK_GENERATION_KEY, MemoryIntArray.class);
+                                    int i = bundleCall.getInt(Settings.CALL_METHOD_GENERATION_INDEX_KEY, -1);
+                                    if (memoryIntArray != null && i >= 0) {
+                                        int i2 = bundleCall.getInt(Settings.CALL_METHOD_GENERATION_KEY, 0);
                                         GenerationTracker generationTracker2 = this.mGenerationTrackers.get(str);
                                         if (generationTracker2 != null) {
                                             generationTracker2.destroy();
                                         }
                                         str3 = str2;
-                                        this.mGenerationTrackers.put(str, new GenerationTracker(str, memoryIntArray, i2, i3, this.mGenerationTrackerErrorHandler));
-                                        i = i3;
+                                        this.mGenerationTrackers.put(str, new GenerationTracker(str, memoryIntArray, i, i2, this.mGenerationTrackerErrorHandler));
+                                        currentGeneration = i2;
                                     } else {
                                         str3 = str2;
                                         Settings.maybeCloseGenerationArray(memoryIntArray);
@@ -1026,9 +1262,9 @@ public final class Settings {
                                 } else {
                                     str3 = str2;
                                 }
-                                if (this.mGenerationTrackers.get(str) != null && i == this.mGenerationTrackers.get(str).getCurrentGeneration()) {
-                                    ArrayMap<String, String> arrayMap3 = new ArrayMap<>(hashMap.size() + 1);
-                                    for (Map.Entry entry2 : hashMap.entrySet()) {
+                                if (this.mGenerationTrackers.get(str) != null && currentGeneration == this.mGenerationTrackers.get(str).getCurrentGeneration()) {
+                                    ArrayMap<String, String> arrayMap3 = new ArrayMap<>(map.size() + 1);
+                                    for (Map.Entry entry2 : map.entrySet()) {
                                         arrayMap3.put(((String) entry2.getKey()).substring(length), (String) entry2.getValue());
                                     }
                                     arrayMap3.put("", str3);
@@ -1060,7 +1296,7 @@ public final class Settings {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static <T extends NameValueTable> void getPublicSettingsForClass(Class<T> cls, Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) {
+    public static <T extends NameValueTable> void getPublicSettingsForClass(Class<T> cls, Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) throws IllegalAccessException, IllegalArgumentException {
         for (Field field : cls.getDeclaredFields()) {
             try {
                 if (field.getType().equals(String.class)) {
@@ -1070,10 +1306,10 @@ public final class Settings {
                         Readable readable = (Readable) field.getAnnotation(Readable.class);
                         if (readable != null) {
                             String str = (String) obj;
-                            int maxTargetSdk = readable.maxTargetSdk();
+                            int iMaxTargetSdk = readable.maxTargetSdk();
                             set2.add(str);
-                            if (maxTargetSdk != 0) {
-                                arrayMap.put(str, Integer.valueOf(maxTargetSdk));
+                            if (iMaxTargetSdk != 0) {
+                                arrayMap.put(str, Integer.valueOf(iMaxTargetSdk));
                             }
                         }
                     }
@@ -1683,6 +1919,9 @@ public final class Settings {
         public static final String MULTI_AUDIO_FOCUS_ENABLED = "multi_audio_focus_enabled";
 
         @Readable
+        public static final String MULTI_FOLD_CONTINUITY_DISPLAY_SCALING = "multi_fold_continuity_display_scaling";
+
+        @Readable
         public static final String MUTE_STREAMS_AFFECTED = "mute_streams_affected";
 
         @Readable
@@ -1963,6 +2202,9 @@ public final class Settings {
 
         @Readable
         public static final String SEM_DEFAULT_VIBRATION_PATTERN = "default_vibration_pattern";
+
+        @Readable
+        public static final String SEM_DEX_FLOW_POINTER = "dex_flow_pointer";
 
         @Readable
         public static final String SEM_DISPLAY_BATTERY_PERCENTAGE = "display_battery_percentage";
@@ -2564,11 +2806,11 @@ public final class Settings {
         }
 
         static {
-            Uri parse = Uri.parse("content://settings/system");
-            CONTENT_URI = parse;
-            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(parse);
+            Uri uri = Uri.parse("content://settings/system");
+            CONTENT_URI = uri;
+            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(uri);
             sProviderHolder = contentProviderHolder;
-            sNameValueCache = new NameValueCache(parse, Settings.CALL_METHOD_GET_SYSTEM, Settings.CALL_METHOD_PUT_SYSTEM, Settings.CALL_METHOD_DELETE_SYSTEM, contentProviderHolder, System.class);
+            sNameValueCache = new NameValueCache(uri, Settings.CALL_METHOD_GET_SYSTEM, Settings.CALL_METHOD_PUT_SYSTEM, Settings.CALL_METHOD_DELETE_SYSTEM, contentProviderHolder, System.class);
             HashSet<String> hashSet = new HashSet<>(30);
             MOVED_TO_SECURE = hashSet;
             hashSet.add("adaptive_sleep");
@@ -2790,6 +3032,7 @@ public final class Settings {
             arraySet2.add("call_transcript");
             arraySet2.add("call_transcript_language");
             arraySet2.add(IMS_SETTINGS_SIDELOADING_ENABLED);
+            arraySet2.add("samsung_errorlog_agree");
             ArraySet arraySet3 = new ArraySet();
             PRIVATE_SETTINGS = arraySet3;
             arraySet3.add(WIFI_USE_STATIC_IP);
@@ -2931,7 +3174,7 @@ public final class Settings {
             sNameValueCache.clearGenerationTrackerForTest();
         }
 
-        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) {
+        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) throws IllegalAccessException, IllegalArgumentException {
             Settings.getPublicSettingsForClass(System.class, set, set2, arrayMap);
         }
 
@@ -4906,6 +5149,9 @@ public final class Settings {
         public static final String TV_USER_SETUP_COMPLETE = "tv_user_setup_complete";
 
         @Readable
+        public static final String UCM_KEYGUARD_ENFORCE_CASE = "ucm_keyguard_enforce_case";
+
+        @Readable
         public static final String UI_NIGHT_MODE = "ui_night_mode";
 
         @Readable
@@ -5300,11 +5546,11 @@ public final class Settings {
         }
 
         static {
-            Uri parse = Uri.parse("content://settings/secure");
-            CONTENT_URI = parse;
-            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(parse);
+            Uri uri = Uri.parse("content://settings/secure");
+            CONTENT_URI = uri;
+            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(uri);
             sProviderHolder = contentProviderHolder;
-            sNameValueCache = new NameValueCache(parse, Settings.CALL_METHOD_GET_SECURE, Settings.CALL_METHOD_PUT_SECURE, Settings.CALL_METHOD_DELETE_SECURE, contentProviderHolder, Secure.class);
+            sNameValueCache = new NameValueCache(uri, Settings.CALL_METHOD_GET_SECURE, Settings.CALL_METHOD_PUT_SECURE, Settings.CALL_METHOD_DELETE_SECURE, contentProviderHolder, Secure.class);
             HashSet<String> hashSet = new HashSet<>(3);
             MOVED_TO_LOCK_SETTINGS = hashSet;
             hashSet.add("lock_pattern_autolock");
@@ -5478,7 +5724,7 @@ public final class Settings {
             sNameValueCache.clearGenerationTrackerForTest();
         }
 
-        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) {
+        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) throws IllegalAccessException, IllegalArgumentException {
             Settings.getPublicSettingsForClass(Secure.class, set, set2, arrayMap);
         }
 
@@ -5492,8 +5738,8 @@ public final class Settings {
                 return Global.getStringForUser(contentResolver, str, i);
             }
             if (MOVED_TO_LOCK_SETTINGS.contains(str) && Process.myUid() != 1000) {
-                Application currentApplication = ActivityThread.currentApplication();
-                if (currentApplication != null && currentApplication.getApplicationInfo() != null && currentApplication.getApplicationInfo().targetSdkVersion <= 22) {
+                Application applicationCurrentApplication = ActivityThread.currentApplication();
+                if (applicationCurrentApplication != null && applicationCurrentApplication.getApplicationInfo() != null && applicationCurrentApplication.getApplicationInfo().targetSdkVersion <= 22) {
                     return "0";
                 }
                 throw new SecurityException("Settings.Secure." + str + " is deprecated and no longer accessible. See API documentation for potential replacements.");
@@ -7115,6 +7361,8 @@ public final class Settings {
 
         @Readable
         public static final String POWER_SOUNDS_ENABLED = "power_sounds_enabled";
+
+        @Readable
         public static final String PREDICTIVE_BACK_SYSTEM_ANIMATION = "predictive_back_system_animation";
 
         @Readable
@@ -7341,6 +7589,9 @@ public final class Settings {
 
         @Readable
         public static final String SEM_WIFI_DEVELOPER_OPTION_VISIBLE = "sem_wifi_developer_option_visible";
+
+        @Readable
+        public static final String SEM_WIFI_DISABLE_SCAN_FOR_D2D = "sem_wifi_disable_scan_for_d2d";
         public static final String SEM_WIFI_DISPLAY_ON = "wifi_display_on";
 
         @Readable
@@ -7386,7 +7637,13 @@ public final class Settings {
         public static final String SEND_ACTION_APP_ERROR = "send_action_app_error";
 
         @Readable
+        public static final String SETTINGS_KEY_LAST_WIRELESS_CONNECTION_TYPE = "wireless_dex_last_wireless_connection_type";
+
+        @Readable
         public static final String SETTINGS_KEY_WIRELESS_DEX_BLE_TV_MAC_ADDRESS_LIST = "ble_tv_mac_address_list";
+
+        @Readable
+        public static final String SETTINGS_KEY_WIRELESS_DEX_REMEMBERED_DEVICE_ADDRESS_LIST = "wireless_dex_remembered_device_address_list";
 
         @Readable
         public static final String SETTINGS_KEY_WIRELESS_DEX_UUID = "wireless_dex_uuid_tv";
@@ -8286,13 +8543,13 @@ public final class Settings {
         }
 
         static {
-            Uri parse = Uri.parse("content://settings/global");
-            CONTENT_URI = parse;
+            Uri uri = Uri.parse("content://settings/global");
+            CONTENT_URI = uri;
             TRANSIENT_SETTINGS = new String[]{CLOCKWORK_HOME_READY};
             LEGACY_RESTORE_SETTINGS = new String[0];
-            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(parse);
+            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(uri);
             sProviderHolder = contentProviderHolder;
-            sNameValueCache = new NameValueCache(parse, Settings.CALL_METHOD_GET_GLOBAL, Settings.CALL_METHOD_PUT_GLOBAL, Settings.CALL_METHOD_DELETE_GLOBAL, contentProviderHolder, Global.class);
+            sNameValueCache = new NameValueCache(uri, Settings.CALL_METHOD_GET_GLOBAL, Settings.CALL_METHOD_PUT_GLOBAL, Settings.CALL_METHOD_DELETE_GLOBAL, contentProviderHolder, Global.class);
             HashSet<String> hashSet = new HashSet<>(8);
             MOVED_TO_SECURE = hashSet;
             hashSet.add("install_non_market_apps");
@@ -8352,7 +8609,7 @@ public final class Settings {
             sNameValueCache.clearGenerationTrackerForTest();
         }
 
-        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) {
+        public static void getPublicSettings(Set<String> set, Set<String> set2, ArrayMap<String, Integer> arrayMap) throws IllegalAccessException, IllegalArgumentException {
             Settings.getPublicSettingsForClass(Global.class, set, set2, arrayMap);
             if (ActivityThread.currentApplication().getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
                 Settings.getPublicSettingsForClass(Wearable.class, set, set2, arrayMap);
@@ -8486,11 +8743,11 @@ public final class Settings {
         }
 
         static {
-            Uri parse = Uri.parse("content://settings/config");
-            CONTENT_URI = parse;
-            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(parse);
+            Uri uri = Uri.parse("content://settings/config");
+            CONTENT_URI = uri;
+            ContentProviderHolder contentProviderHolder = new ContentProviderHolder(uri);
             sProviderHolder = contentProviderHolder;
-            sNameValueCache = new NameValueCache(parse, Settings.CALL_METHOD_GET_CONFIG, Settings.CALL_METHOD_PUT_CONFIG, Settings.CALL_METHOD_DELETE_CONFIG, Settings.CALL_METHOD_LIST_CONFIG, Settings.CALL_METHOD_SET_ALL_CONFIG, contentProviderHolder, Config.class);
+            sNameValueCache = new NameValueCache(uri, Settings.CALL_METHOD_GET_CONFIG, Settings.CALL_METHOD_PUT_CONFIG, Settings.CALL_METHOD_DELETE_CONFIG, Settings.CALL_METHOD_LIST_CONFIG, Settings.CALL_METHOD_SET_ALL_CONFIG, contentProviderHolder, Config.class);
         }
 
         private Config() {
@@ -8509,7 +8766,7 @@ public final class Settings {
 
         @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
         public static Map<String, String> getAllStrings() {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             try {
                 ContentResolver contentResolver = getContentResolver();
                 Bundle bundle = new Bundle();
@@ -8517,28 +8774,28 @@ public final class Settings {
                 ContentProviderHolder contentProviderHolder = sProviderHolder;
                 IContentProvider provider = contentProviderHolder.getProvider(contentResolver);
                 if (com.android.internal.hidden_from_bootclasspath.android.provider.Flags.reduceBinderTransactionSizeForGetAllProperties()) {
-                    Bundle call = provider.call(contentResolver.getAttributionSource(), contentProviderHolder.mUri.getAuthority(), Settings.CALL_METHOD_LIST_NAMESPACES_CONFIG, null, bundle);
-                    if (call != null) {
-                        Iterator it = ((HashSet) call.getSerializable("value", HashSet.class)).iterator();
+                    Bundle bundleCall = provider.call(contentResolver.getAttributionSource(), contentProviderHolder.mUri.getAuthority(), Settings.CALL_METHOD_LIST_NAMESPACES_CONFIG, null, bundle);
+                    if (bundleCall != null) {
+                        Iterator it = ((HashSet) bundleCall.getSerializable("value", HashSet.class)).iterator();
                         while (it.hasNext()) {
                             String str = (String) it.next();
                             Map<String, String> strings = getStrings(str, new ArrayList());
                             for (String str2 : strings.keySet()) {
-                                hashMap.put(str + "/" + str2, strings.get(str2));
+                                map.put(str + "/" + str2, strings.get(str2));
                             }
                         }
                     }
                 } else {
-                    Bundle call2 = provider.call(contentResolver.getAttributionSource(), contentProviderHolder.mUri.getAuthority(), Settings.CALL_METHOD_LIST_CONFIG, null, bundle);
-                    if (call2 != null) {
-                        hashMap.putAll((HashMap) call2.getSerializable("value", HashMap.class));
-                        return hashMap;
+                    Bundle bundleCall2 = provider.call(contentResolver.getAttributionSource(), contentProviderHolder.mUri.getAuthority(), Settings.CALL_METHOD_LIST_CONFIG, null, bundle);
+                    if (bundleCall2 != null) {
+                        map.putAll((HashMap) bundleCall2.getSerializable("value", HashMap.class));
+                        return map;
                     }
                 }
             } catch (RemoteException e) {
                 Log.w(Settings.TAG, "Can't query configuration table for " + CONTENT_URI, e);
             }
-            return hashMap;
+            return map;
         }
 
         public static Map<String, String> getStrings(ContentResolver contentResolver, String str, List<String> list) {
@@ -8556,12 +8813,13 @@ public final class Settings {
             return setStrings(getContentResolver(), str, map);
         }
 
+        /* JADX INFO: Thrown type has an unknown type hierarchy: android.provider.DeviceConfig$BadConfigException */
         public static boolean setStrings(ContentResolver contentResolver, String str, Map<String, String> map) throws DeviceConfig.BadConfigException {
-            HashMap<String, String> hashMap = new HashMap<>(map.keySet().size());
+            HashMap<String, String> map2 = new HashMap<>(map.keySet().size());
             for (Map.Entry<String, String> entry : map.entrySet()) {
-                hashMap.put(createCompositeName(str, entry.getKey()), entry.getValue());
+                map2.put(createCompositeName(str, entry.getKey()), entry.getValue());
             }
-            int stringsForPrefix = sNameValueCache.setStringsForPrefix(contentResolver, createPrefix(str), hashMap);
+            int stringsForPrefix = sNameValueCache.setStringsForPrefix(contentResolver, createPrefix(str), map2);
             if (stringsForPrefix == 1) {
                 return true;
             }
@@ -8750,15 +9008,15 @@ public final class Settings {
         }
 
         public static Intent getIntentForShortcut(ContentResolver contentResolver, char c) {
-            Cursor query = contentResolver.query(CONTENT_URI, sIntentProjection, sShortcutSelection, new String[]{String.valueOf((int) c)}, ORDERING);
-            Intent intent = null;
-            while (intent == null) {
+            Cursor cursorQuery = contentResolver.query(CONTENT_URI, sIntentProjection, sShortcutSelection, new String[]{String.valueOf((int) c)}, ORDERING);
+            Intent uri = null;
+            while (uri == null) {
                 try {
-                    if (!query.moveToNext()) {
+                    if (!cursorQuery.moveToNext()) {
                         break;
                     }
                     try {
-                        intent = Intent.parseUri(query.getString(query.getColumnIndexOrThrow("intent")), 0);
+                        uri = Intent.parseUri(cursorQuery.getString(cursorQuery.getColumnIndexOrThrow("intent")), 0);
                     } catch (IllegalArgumentException e) {
                         Log.w("Bookmarks", "Intent column not found", e);
                     } catch (URISyntaxException unused) {
@@ -8766,10 +9024,10 @@ public final class Settings {
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
-            return intent;
+            return uri;
         }
 
         public static Uri add(ContentResolver contentResolver, Intent intent, String str, String str2, char c, int i) {
@@ -8806,11 +9064,11 @@ public final class Settings {
                 return "";
             }
             try {
-                Intent parseUri = Intent.parseUri(string2, 0);
+                Intent uri = Intent.parseUri(string2, 0);
                 PackageManager packageManager = context.getPackageManager();
-                ResolveInfo resolveActivity = packageManager.resolveActivity(parseUri, 0);
-                if (resolveActivity != null) {
-                    return resolveActivity.loadLabel(packageManager);
+                ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(uri, 0);
+                if (resolveInfoResolveActivity != null) {
+                    return resolveInfoResolveActivity.loadLabel(packageManager);
                 }
             } catch (URISyntaxException unused) {
             }
@@ -8858,7 +9116,7 @@ public final class Settings {
 
     public static boolean isCallingPackageAllowedToPerformAppOpsProtectedOperation(Context context, int i, String str, String str2, boolean z, int i2, String[] strArr, boolean z2) {
         String str3;
-        int checkOpNoThrow;
+        int iCheckOpNoThrow;
         int i3 = 0;
         if (str == null) {
             return false;
@@ -8866,15 +9124,15 @@ public final class Settings {
         AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         if (z2) {
             str3 = str;
-            checkOpNoThrow = appOpsManager.noteOpNoThrow(i2, i, str3, str2, (String) null);
+            iCheckOpNoThrow = appOpsManager.noteOpNoThrow(i2, i, str3, str2, (String) null);
         } else {
             str3 = str;
-            checkOpNoThrow = appOpsManager.checkOpNoThrow(i2, i, str3);
+            iCheckOpNoThrow = appOpsManager.checkOpNoThrow(i2, i, str3);
         }
-        if (checkOpNoThrow == 0) {
+        if (iCheckOpNoThrow == 0) {
             return true;
         }
-        if (checkOpNoThrow == 3) {
+        if (iCheckOpNoThrow == 3) {
             for (String str4 : strArr) {
                 if (context.checkCallingOrSelfPermission(str4) == 0) {
                     return true;

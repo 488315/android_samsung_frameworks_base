@@ -37,9 +37,9 @@ public final class DependencyInstallerCallback implements Parcelable {
     }
 
     private DependencyInstallerCallback(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        this.mBinder = readStrongBinder;
-        this.mCallback = IDependencyInstallerCallback.Stub.asInterface(readStrongBinder);
+        IBinder strongBinder = parcel.readStrongBinder();
+        this.mBinder = strongBinder;
+        this.mCallback = IDependencyInstallerCallback.Stub.asInterface(strongBinder);
     }
 
     public void onAllDependenciesResolved(int[] iArr) {

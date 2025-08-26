@@ -18,7 +18,6 @@ import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TextInputEditText extends AppCompatEditText {
     public final Rect parentRect;
@@ -87,8 +86,8 @@ public class TextInputEditText extends AppCompatEditText {
 
     @Override // androidx.appcompat.widget.AppCompatEditText, android.widget.TextView, android.view.View
     public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
-        if (onCreateInputConnection != null && editorInfo.hintText == null) {
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        if (inputConnectionOnCreateInputConnection != null && editorInfo.hintText == null) {
             TextInputLayout textInputLayout = getTextInputLayout();
             CharSequence charSequence = null;
             if (textInputLayout != null && textInputLayout.hintEnabled) {
@@ -96,7 +95,7 @@ public class TextInputEditText extends AppCompatEditText {
             }
             editorInfo.hintText = charSequence;
         }
-        return onCreateInputConnection;
+        return inputConnectionOnCreateInputConnection;
     }
 
     @Override // android.view.View
@@ -125,8 +124,8 @@ public class TextInputEditText extends AppCompatEditText {
         int[] iArr = R$styleable.TextInputEditText;
         ThemeEnforcement.checkCompatibleTheme(context, attributeSet, i, R.style.Widget_Design_TextInputEditText);
         ThemeEnforcement.checkTextAppearance(context, attributeSet, iArr, i, R.style.Widget_Design_TextInputEditText, new int[0]);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, R.style.Widget_Design_TextInputEditText);
-        this.textInputLayoutFocusedRectEnabled = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, R.style.Widget_Design_TextInputEditText);
+        this.textInputLayoutFocusedRectEnabled = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

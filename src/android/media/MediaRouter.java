@@ -18,7 +18,6 @@ import android.media.IAudioService;
 import android.media.IMediaRouterClient;
 import android.media.IMediaRouterService;
 import android.media.IRemoteVolumeObserver;
-import android.media.MediaRouter;
 import android.media.MediaRouterClientState;
 import android.media.session.MediaSession;
 import android.os.Handler;
@@ -179,7 +178,7 @@ public class MediaRouter {
         }
 
         void startMonitoringRoutes(Context context) {
-            AudioRoutesInfo audioRoutesInfo;
+            AudioRoutesInfo audioRoutesInfoStartWatchingRoutes;
             RouteInfo routeInfo = new RouteInfo(this.mSystemCategory);
             this.mDefaultAudioVideo = routeInfo;
             routeInfo.mNameResId = R.string.default_audio_route_name;
@@ -200,12 +199,12 @@ public class MediaRouter {
             }
             try {
                 this.mIsBluetoothA2dpOn = this.mAudioService.isBluetoothA2dpOn();
-                audioRoutesInfo = this.mAudioService.startWatchingRoutes(this.mAudioRoutesObserver);
+                audioRoutesInfoStartWatchingRoutes = this.mAudioService.startWatchingRoutes(this.mAudioRoutesObserver);
             } catch (RemoteException unused) {
-                audioRoutesInfo = null;
+                audioRoutesInfoStartWatchingRoutes = null;
             }
-            if (audioRoutesInfo != null) {
-                updateAudioRoutes(audioRoutesInfo);
+            if (audioRoutesInfoStartWatchingRoutes != null) {
+                updateAudioRoutes(audioRoutesInfoStartWatchingRoutes);
             }
             rebindAsUser(UserHandle.myUserId());
             if (this.mSelectedRoute == null) {
@@ -281,127 +280,83 @@ public class MediaRouter {
         }
 
         int getStreamVolume(int i) {
-            int indexOfKey = this.mStreamVolume.indexOfKey(i);
-            if (indexOfKey < 0) {
-                int i2 = 0;
+            int iIndexOfKey = this.mStreamVolume.indexOfKey(i);
+            if (iIndexOfKey < 0) {
+                int streamVolume = 0;
                 try {
                     try {
-                        i2 = this.mAudioService.getStreamVolume(i);
-                        this.mStreamVolume.put(i, i2);
-                        return i2;
+                        streamVolume = this.mAudioService.getStreamVolume(i);
+                        this.mStreamVolume.put(i, streamVolume);
+                        return streamVolume;
                     } catch (RemoteException e) {
                         Log.e(MediaRouter.TAG, "Error getting local stream volume", e);
-                        return i2;
+                        return streamVolume;
                     }
                 } catch (Throwable unused) {
-                    return i2;
+                    return streamVolume;
                 }
             }
-            return this.mStreamVolume.valueAt(indexOfKey);
+            return this.mStreamVolume.valueAt(iIndexOfKey);
         }
 
         boolean isBluetoothA2dpOn() {
             return this.mBluetoothA2dpRoute != null && this.mIsBluetoothA2dpOn;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:10:0x0034  */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x003d A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
+        /* JADX WARN: Removed duplicated region for block: B:47:0x003d A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         void updateDiscoveryRequest() {
-            /*
-                r11 = this;
-                java.util.concurrent.CopyOnWriteArrayList<android.media.MediaRouter$CallbackInfo> r0 = r11.mCallbacks
-                int r0 = r0.size()
-                r1 = 0
-                r2 = r1
-                r3 = r2
-                r4 = r3
-                r5 = r4
-                r6 = r5
-            Lc:
-                r7 = 4
-                r8 = 1
-                if (r2 >= r0) goto L40
-                java.util.concurrent.CopyOnWriteArrayList<android.media.MediaRouter$CallbackInfo> r9 = r11.mCallbacks
-                java.lang.Object r9 = r9.get(r2)
-                android.media.MediaRouter$CallbackInfo r9 = (android.media.MediaRouter.CallbackInfo) r9
-                int r10 = r9.flags
-                r10 = r10 & 5
-                if (r10 == 0) goto L22
-                int r10 = r9.type
-            L20:
-                r3 = r3 | r10
-                goto L2f
-            L22:
-                int r10 = r9.flags
-                r10 = r10 & 8
-                if (r10 == 0) goto L2c
-                int r10 = r9.type
-                r5 = r5 | r10
-                goto L2f
-            L2c:
-                int r10 = r9.type
-                goto L20
-            L2f:
-                int r10 = r9.flags
-                r10 = r10 & r8
-                if (r10 == 0) goto L3d
-                int r4 = r9.type
-                r4 = r4 & r7
-                if (r4 == 0) goto L3c
-                r4 = r8
-                r6 = r4
-                goto L3d
-            L3c:
-                r4 = r8
-            L3d:
-                int r2 = r2 + 1
-                goto Lc
-            L40:
-                if (r3 != 0) goto L44
-                if (r4 == 0) goto L45
-            L44:
-                r3 = r3 | r5
-            L45:
-                boolean r0 = r11.mCanConfigureWifiDisplays
-                if (r0 == 0) goto L6d
-                android.media.MediaRouter$RouteInfo r0 = r11.mSelectedRoute
-                if (r0 == 0) goto L54
-                boolean r0 = r0.matchesTypes(r7)
-                if (r0 == 0) goto L54
-                r6 = r1
-            L54:
-                if (r6 == 0) goto L62
-                boolean r0 = r11.mActivelyScanningWifiDisplays
-                if (r0 != 0) goto L6d
-                r11.mActivelyScanningWifiDisplays = r8
-                android.hardware.display.DisplayManager r0 = r11.mDisplayService
-                r0.startWifiDisplayScan()
-                goto L6d
-            L62:
-                boolean r0 = r11.mActivelyScanningWifiDisplays
-                if (r0 == 0) goto L6d
-                r11.mActivelyScanningWifiDisplays = r1
-                android.hardware.display.DisplayManager r0 = r11.mDisplayService
-                r0.stopWifiDisplayScan()
-            L6d:
-                int r0 = r11.mDiscoveryRequestRouteTypes
-                if (r3 != r0) goto L77
-                boolean r0 = r11.mDiscoverRequestActiveScan
-                if (r4 == r0) goto L76
-                goto L77
-            L76:
-                return
-            L77:
-                r11.mDiscoveryRequestRouteTypes = r3
-                r11.mDiscoverRequestActiveScan = r4
-                r11.publishClientDiscoveryRequest()
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.MediaRouter.Static.updateDiscoveryRequest():void");
+            int size = this.mCallbacks.size();
+            int i = 0;
+            boolean z = false;
+            int i2 = 0;
+            boolean z2 = false;
+            for (int i3 = 0; i3 < size; i3++) {
+                CallbackInfo callbackInfo = this.mCallbacks.get(i3);
+                if ((callbackInfo.flags & 5) == 0 && (callbackInfo.flags & 8) != 0) {
+                    i2 |= callbackInfo.type;
+                    if ((callbackInfo.flags & 1) != 0) {
+                        if ((callbackInfo.type & 4) != 0) {
+                            z = true;
+                            z2 = true;
+                        } else {
+                            z = true;
+                        }
+                    }
+                } else {
+                    int i4 = callbackInfo.type;
+                    i |= i4;
+                    if ((callbackInfo.flags & 1) != 0) {
+                    }
+                }
+            }
+            if (i != 0 || z) {
+                i |= i2;
+            }
+            if (this.mCanConfigureWifiDisplays) {
+                RouteInfo routeInfo = this.mSelectedRoute;
+                if (routeInfo != null && routeInfo.matchesTypes(4)) {
+                    z2 = false;
+                }
+                if (z2) {
+                    if (!this.mActivelyScanningWifiDisplays) {
+                        this.mActivelyScanningWifiDisplays = true;
+                        this.mDisplayService.startWifiDisplayScan();
+                    }
+                } else if (this.mActivelyScanningWifiDisplays) {
+                    this.mActivelyScanningWifiDisplays = false;
+                    this.mDisplayService.stopWifiDisplayScan();
+                }
+            }
+            if (i == this.mDiscoveryRequestRouteTypes && z == this.mDiscoverRequestActiveScan) {
+                return;
+            }
+            this.mDiscoveryRequestRouteTypes = i;
+            this.mDiscoverRequestActiveScan = z;
+            publishClientDiscoveryRequest();
         }
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
@@ -532,11 +487,11 @@ public class MediaRouter {
             int size = arrayList != null ? arrayList.size() : 0;
             for (int i = 0; i < size; i++) {
                 MediaRouterClientState.RouteInfo routeInfo = arrayList.get(i);
-                RouteInfo findGlobalRoute = findGlobalRoute(routeInfo.id);
-                if (findGlobalRoute == null) {
+                RouteInfo routeInfoFindGlobalRoute = findGlobalRoute(routeInfo.id);
+                if (routeInfoFindGlobalRoute == null) {
                     MediaRouter.addRouteStatic(makeGlobalRoute(routeInfo));
                 } else {
-                    updateGlobalRoute(findGlobalRoute, routeInfo);
+                    updateGlobalRoute(routeInfoFindGlobalRoute, routeInfo);
                 }
             }
             int size2 = this.mRoutes.size();
@@ -726,7 +681,7 @@ public class MediaRouter {
                 Static.this.mHandler.post(new Runnable() { // from class: android.media.MediaRouter$Static$Client$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MediaRouter.Static.Client.this.lambda$onRestoreRoute$0();
+                        this.f$0.lambda$onRestoreRoute$0();
                     }
                 });
             }
@@ -751,7 +706,7 @@ public class MediaRouter {
                 Static.this.mHandler.post(new Runnable() { // from class: android.media.MediaRouter$Static$Client$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MediaRouter.Static.Client.this.lambda$onGroupRouteSelected$1(str);
+                        this.f$0.lambda$onGroupRouteSelected$1(str);
                     }
                 });
             }
@@ -839,9 +794,9 @@ public class MediaRouter {
     }
 
     public void addCallback(int i, Callback callback, int i2) {
-        int findCallbackInfo = findCallbackInfo(callback);
-        if (findCallbackInfo >= 0) {
-            CallbackInfo callbackInfo = sStatic.mCallbacks.get(findCallbackInfo);
+        int iFindCallbackInfo = findCallbackInfo(callback);
+        if (iFindCallbackInfo >= 0) {
+            CallbackInfo callbackInfo = sStatic.mCallbacks.get(iFindCallbackInfo);
             callbackInfo.type = i | callbackInfo.type;
             callbackInfo.flags |= i2;
         } else {
@@ -851,9 +806,9 @@ public class MediaRouter {
     }
 
     public void removeCallback(Callback callback) {
-        int findCallbackInfo = findCallbackInfo(callback);
-        if (findCallbackInfo >= 0) {
-            sStatic.mCallbacks.remove(findCallbackInfo);
+        int iFindCallbackInfo = findCallbackInfo(callback);
+        if (iFindCallbackInfo >= 0) {
+            sStatic.mCallbacks.remove(iFindCallbackInfo);
             sStatic.updateDiscoveryRequest();
         } else {
             Log.w(TAG, "removeCallback(" + callback + "): callback not registered");
@@ -1103,18 +1058,18 @@ public class MediaRouter {
         Iterator<CallbackInfo> it = sStatic.mCallbacks.iterator();
         while (it.hasNext()) {
             CallbackInfo next = it.next();
-            boolean filterRouteEvent = next.filterRouteEvent(i);
-            boolean filterRouteEvent2 = next.filterRouteEvent(i2);
-            if (!filterRouteEvent && filterRouteEvent2) {
+            boolean zFilterRouteEvent = next.filterRouteEvent(i);
+            boolean zFilterRouteEvent2 = next.filterRouteEvent(i2);
+            if (!zFilterRouteEvent && zFilterRouteEvent2) {
                 next.cb.onRouteAdded(next.router, routeInfo);
                 if (routeInfo.isSelected()) {
                     next.cb.onRouteSelected(next.router, i2, routeInfo);
                 }
             }
-            if (filterRouteEvent || filterRouteEvent2) {
+            if (zFilterRouteEvent || zFilterRouteEvent2) {
                 next.cb.onRouteChanged(next.router, routeInfo);
             }
-            if (filterRouteEvent && !filterRouteEvent2) {
+            if (zFilterRouteEvent && !zFilterRouteEvent2) {
                 if (routeInfo.isSelected()) {
                     next.cb.onRouteUnselected(next.router, i, routeInfo);
                 }
@@ -1198,36 +1153,36 @@ public class MediaRouter {
     }
 
     static void updateWifiDisplayStatus(WifiDisplayStatus wifiDisplayStatus) {
-        WifiDisplay[] wifiDisplayArr;
-        WifiDisplay wifiDisplay;
-        WifiDisplay findWifiDisplay;
+        WifiDisplay[] displays;
+        WifiDisplay activeDisplay;
+        WifiDisplay wifiDisplayFindWifiDisplay;
         if (wifiDisplayStatus.getFeatureState() == 3 && wifiDisplayStatus.getConnectedState() != 3) {
-            wifiDisplayArr = wifiDisplayStatus.getDisplays();
-            wifiDisplay = wifiDisplayStatus.getActiveDisplay();
+            displays = wifiDisplayStatus.getDisplays();
+            activeDisplay = wifiDisplayStatus.getActiveDisplay();
             if (!sStatic.mCanConfigureWifiDisplays) {
-                if (wifiDisplay != null) {
-                    wifiDisplayArr = new WifiDisplay[]{wifiDisplay};
+                if (activeDisplay != null) {
+                    displays = new WifiDisplay[]{activeDisplay};
                 } else {
-                    wifiDisplayArr = WifiDisplay.EMPTY_ARRAY;
+                    displays = WifiDisplay.EMPTY_ARRAY;
                 }
             }
         } else {
-            wifiDisplayArr = WifiDisplay.EMPTY_ARRAY;
-            wifiDisplay = null;
+            displays = WifiDisplay.EMPTY_ARRAY;
+            activeDisplay = null;
         }
-        String deviceAddress = wifiDisplay != null ? wifiDisplay.getDeviceAddress() : null;
-        for (WifiDisplay wifiDisplay2 : wifiDisplayArr) {
-            if (shouldShowWifiDisplay(wifiDisplay2, wifiDisplay)) {
-                RouteInfo findWifiDisplayRoute = findWifiDisplayRoute(wifiDisplay2);
-                if (findWifiDisplayRoute == null) {
-                    findWifiDisplayRoute = makeWifiDisplayRoute(wifiDisplay2, wifiDisplayStatus);
-                    addRouteStatic(findWifiDisplayRoute);
+        String deviceAddress = activeDisplay != null ? activeDisplay.getDeviceAddress() : null;
+        for (WifiDisplay wifiDisplay : displays) {
+            if (shouldShowWifiDisplay(wifiDisplay, activeDisplay)) {
+                RouteInfo routeInfoFindWifiDisplayRoute = findWifiDisplayRoute(wifiDisplay);
+                if (routeInfoFindWifiDisplayRoute == null) {
+                    routeInfoFindWifiDisplayRoute = makeWifiDisplayRoute(wifiDisplay, wifiDisplayStatus);
+                    addRouteStatic(routeInfoFindWifiDisplayRoute);
                 } else {
-                    String deviceAddress2 = wifiDisplay2.getDeviceAddress();
-                    updateWifiDisplayRoute(findWifiDisplayRoute, wifiDisplay2, wifiDisplayStatus, !deviceAddress2.equals(deviceAddress) && deviceAddress2.equals(sStatic.mPreviousActiveWifiDisplayAddress));
+                    String deviceAddress2 = wifiDisplay.getDeviceAddress();
+                    updateWifiDisplayRoute(routeInfoFindWifiDisplayRoute, wifiDisplay, wifiDisplayStatus, !deviceAddress2.equals(deviceAddress) && deviceAddress2.equals(sStatic.mPreviousActiveWifiDisplayAddress));
                 }
-                if (wifiDisplay2.equals(wifiDisplay)) {
-                    selectRouteStatic(findWifiDisplayRoute.getSupportedTypes(), findWifiDisplayRoute, false);
+                if (wifiDisplay.equals(activeDisplay)) {
+                    selectRouteStatic(routeInfoFindWifiDisplayRoute.getSupportedTypes(), routeInfoFindWifiDisplayRoute, false);
                 }
             }
         }
@@ -1236,7 +1191,7 @@ public class MediaRouter {
             int i = size - 1;
             if (size > 0) {
                 RouteInfo routeInfo = sStatic.mRoutes.get(i);
-                if (routeInfo.mDeviceAddress != null && ((findWifiDisplay = findWifiDisplay(wifiDisplayArr, routeInfo.mDeviceAddress)) == null || !shouldShowWifiDisplay(findWifiDisplay, wifiDisplay))) {
+                if (routeInfo.mDeviceAddress != null && ((wifiDisplayFindWifiDisplay = findWifiDisplay(displays, routeInfo.mDeviceAddress)) == null || !shouldShowWifiDisplay(wifiDisplayFindWifiDisplay, activeDisplay))) {
                     removeRouteStatic(routeInfo);
                 }
                 size = i;
@@ -1307,13 +1262,13 @@ public class MediaRouter {
             routeInfo.mName = friendlyDisplayName;
             z2 = true;
         }
-        boolean isWifiDisplayEnabled = isWifiDisplayEnabled(wifiDisplay, wifiDisplayStatus);
-        boolean z3 = routeInfo.mEnabled != isWifiDisplayEnabled;
-        routeInfo.mEnabled = isWifiDisplayEnabled;
+        boolean zIsWifiDisplayEnabled = isWifiDisplayEnabled(wifiDisplay, wifiDisplayStatus);
+        boolean z3 = routeInfo.mEnabled != zIsWifiDisplayEnabled;
+        routeInfo.mEnabled = zIsWifiDisplayEnabled;
         if (routeInfo.setRealStatusCode(getWifiDisplayStatusCode(wifiDisplay, wifiDisplayStatus)) | z2 | z3) {
             dispatchRouteChanged(routeInfo);
         }
-        if ((!isWifiDisplayEnabled || z) && routeInfo.isSelected()) {
+        if ((!zIsWifiDisplayEnabled || z) && routeInfo.isSelected()) {
             selectDefaultRouteStatic();
         }
     }
@@ -1570,11 +1525,11 @@ public class MediaRouter {
         }
 
         public boolean updatePresentationDisplay() {
-            Display choosePresentationDisplay = choosePresentationDisplay();
-            if (this.mPresentationDisplay == choosePresentationDisplay) {
+            Display displayChoosePresentationDisplay = choosePresentationDisplay();
+            if (this.mPresentationDisplay == displayChoosePresentationDisplay) {
                 return false;
             }
-            this.mPresentationDisplay = choosePresentationDisplay;
+            this.mPresentationDisplay = displayChoosePresentationDisplay;
             return true;
         }
 
@@ -1758,9 +1713,9 @@ public class MediaRouter {
         }
 
         public void setVolume(int i) {
-            int max = Math.max(0, Math.min(i, getVolumeMax()));
-            if (this.mVolume != max) {
-                this.mVolume = max;
+            int iMax = Math.max(0, Math.min(i, getVolumeMax()));
+            if (this.mVolume != iMax) {
+                this.mVolume = iMax;
                 SessionVolumeProvider sessionVolumeProvider = this.mSvp;
                 if (sessionVolumeProvider != null) {
                     sessionVolumeProvider.setCurrentVolume(this.mVolume);
@@ -1940,11 +1895,11 @@ public class MediaRouter {
         }
 
         public void removeRoute(int i) {
-            RouteInfo remove = this.mRoutes.remove(i);
-            remove.mGroup = null;
+            RouteInfo routeInfoRemove = this.mRoutes.remove(i);
+            routeInfoRemove.mGroup = null;
             this.mUpdateName = true;
             updateVolume();
-            MediaRouter.dispatchRouteUngrouped(remove, this);
+            MediaRouter.dispatchRouteUngrouped(routeInfoRemove, this);
             routeUpdated();
         }
 
@@ -2223,15 +2178,15 @@ public class MediaRouter {
     }
 
     static boolean isAudioPathA2DPStatic() {
-        int i;
+        int playbackStream;
         int devicesForStream;
-        if (sStatic.mSelectedRoute == null || (i = sStatic.mSelectedRoute.getPlaybackStream()) < 0 || i > AudioSystem.getNumStreamTypes()) {
-            i = 3;
+        if (sStatic.mSelectedRoute == null || (playbackStream = sStatic.mSelectedRoute.getPlaybackStream()) < 0 || playbackStream > AudioSystem.getNumStreamTypes()) {
+            playbackStream = 3;
         }
         try {
-            devicesForStream = sStatic.mAudioService.getDeviceMaskForStream(i);
+            devicesForStream = sStatic.mAudioService.getDeviceMaskForStream(playbackStream);
         } catch (RemoteException unused) {
-            devicesForStream = AudioSystem.getDevicesForStream(i);
+            devicesForStream = AudioSystem.getDevicesForStream(playbackStream);
         }
         if (((devicesForStream - 1) & devicesForStream) != 0) {
             if ((devicesForStream & 2) != 0) {

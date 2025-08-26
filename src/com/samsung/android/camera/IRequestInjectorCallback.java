@@ -45,9 +45,9 @@ public interface IRequestInjectorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRequestInjectorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRequestInjectorCallback)) {
-                return (IRequestInjectorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRequestInjectorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRequestInjectorCallback)) {
+                return (IRequestInjectorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,12 +75,12 @@ public interface IRequestInjectorCallback extends IInterface {
             }
             if (i == 1) {
                 CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
-                long readLong = parcel.readLong();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onCaptureResult(cameraMetadataNative, readString, readString2, readInt, readLong);
+                onCaptureResult(cameraMetadataNative, string, string2, i3, j);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,17 +104,17 @@ public interface IRequestInjectorCallback extends IInterface {
 
             @Override // com.samsung.android.camera.IRequestInjectorCallback
             public void onCaptureResult(CameraMetadataNative cameraMetadataNative, String str, String str2, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRequestInjectorCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRequestInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

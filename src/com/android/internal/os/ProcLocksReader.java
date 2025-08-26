@@ -37,15 +37,15 @@ public class ProcLocksReader {
         this.mPids.clear();
         long j = -1;
         while (this.mReader.hasMoreData()) {
-            long nextLong = this.mReader.nextLong(true);
-            if (nextLong == j) {
+            long jNextLong = this.mReader.nextLong(true);
+            if (jNextLong == j) {
                 this.mReader.nextIgnored();
                 this.mReader.nextIgnored();
                 this.mReader.nextIgnored();
                 this.mReader.nextIgnored();
-                int nextInt = this.mReader.nextInt();
-                if (nextInt > 0) {
-                    this.mPids.add(nextInt);
+                int iNextInt = this.mReader.nextInt();
+                if (iNextInt > 0) {
+                    this.mPids.add(iNextInt);
                 }
                 this.mReader.finishLine();
             } else {
@@ -56,16 +56,16 @@ public class ProcLocksReader {
                 this.mReader.nextIgnored();
                 this.mReader.nextIgnored();
                 this.mReader.nextIgnored();
-                int nextInt2 = this.mReader.nextInt();
-                if (nextInt2 > 0) {
+                int iNextInt2 = this.mReader.nextInt();
+                if (iNextInt2 > 0) {
                     if (this.mPids.size() == 0) {
-                        this.mPids.add(nextInt2);
+                        this.mPids.add(iNextInt2);
                     } else {
-                        this.mPids.set(0, nextInt2);
+                        this.mPids.set(0, iNextInt2);
                     }
                 }
                 this.mReader.finishLine();
-                j = nextLong;
+                j = jNextLong;
             }
         }
         if (this.mPids.size() > 1) {

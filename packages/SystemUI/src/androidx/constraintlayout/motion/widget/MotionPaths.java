@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import com.android.systemui.util.SystemUIAnalytics;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MotionPaths implements Comparable {
     public static final String[] sNames = {SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION, "x", "y", "width", "height", "pathRotate"};
@@ -96,36 +95,36 @@ public class MotionPaths implements Comparable {
 
     public final void getCenter(double d, int[] iArr, double[] dArr, float[] fArr, int i) {
         float f = this.mX;
-        float f2 = this.mY;
-        float f3 = this.mWidth;
-        float f4 = this.mHeight;
+        float fCos = this.mY;
+        float f2 = this.mWidth;
+        float f3 = this.mHeight;
         for (int i2 = 0; i2 < iArr.length; i2++) {
-            float f5 = (float) dArr[i2];
+            float f4 = (float) dArr[i2];
             int i3 = iArr[i2];
             if (i3 == 1) {
-                f = f5;
+                f = f4;
             } else if (i3 == 2) {
-                f2 = f5;
+                fCos = f4;
             } else if (i3 == 3) {
-                f3 = f5;
+                f2 = f4;
             } else if (i3 == 4) {
-                f4 = f5;
+                f3 = f4;
             }
         }
         MotionController motionController = this.mRelativeToController;
         if (motionController != null) {
             float[] fArr2 = new float[2];
             motionController.getCenter(d, fArr2, new float[2]);
-            float f6 = fArr2[0];
-            float f7 = fArr2[1];
+            float f5 = fArr2[0];
+            float f6 = fArr2[1];
             double d2 = f;
-            double d3 = f2;
-            double sin = Math.sin(d3) * d2;
-            f2 = (float) ((f7 - (Math.cos(d3) * d2)) - (f4 / 2.0f));
-            f = (float) ((sin + f6) - (f3 / 2.0f));
+            double d3 = fCos;
+            double dSin = Math.sin(d3) * d2;
+            fCos = (float) ((f6 - (Math.cos(d3) * d2)) - (f3 / 2.0f));
+            f = (float) ((dSin + f5) - (f2 / 2.0f));
         }
-        fArr[i] = (f3 / 2.0f) + f + 0.0f;
-        fArr[i + 1] = (f4 / 2.0f) + f2 + 0.0f;
+        fArr[i] = (f2 / 2.0f) + f + 0.0f;
+        fArr[i + 1] = (f3 / 2.0f) + fCos + 0.0f;
     }
 
     public final void setBounds(float f, float f2, float f3, float f4) {
@@ -148,8 +147,8 @@ public class MotionPaths implements Comparable {
     }
 
     public MotionPaths(int i, int i2, KeyPosition keyPosition, MotionPaths motionPaths, MotionPaths motionPaths2) {
-        float min;
-        float f;
+        float fMin;
+        float fM$1;
         this.mDrawPath = 0;
         this.mPathRotate = Float.NaN;
         this.mPathMotionArc = -1;
@@ -161,45 +160,45 @@ public class MotionPaths implements Comparable {
         this.mTempValue = new double[18];
         this.mTempDelta = new double[18];
         if (motionPaths.mAnimateRelativeTo != -1) {
-            float f2 = keyPosition.mFramePosition / 100.0f;
-            this.mTime = f2;
+            float f = keyPosition.mFramePosition / 100.0f;
+            this.mTime = f;
             this.mDrawPath = keyPosition.mDrawPath;
             this.mMode = keyPosition.mPositionType;
-            float f3 = Float.isNaN(keyPosition.mPercentWidth) ? f2 : keyPosition.mPercentWidth;
-            float f4 = Float.isNaN(keyPosition.mPercentHeight) ? f2 : keyPosition.mPercentHeight;
-            float f5 = motionPaths2.mWidth;
-            float f6 = motionPaths.mWidth;
-            float f7 = motionPaths2.mHeight;
-            float f8 = motionPaths.mHeight;
+            float f2 = Float.isNaN(keyPosition.mPercentWidth) ? f : keyPosition.mPercentWidth;
+            float f3 = Float.isNaN(keyPosition.mPercentHeight) ? f : keyPosition.mPercentHeight;
+            float f4 = motionPaths2.mWidth;
+            float f5 = motionPaths.mWidth;
+            float f6 = motionPaths2.mHeight;
+            float f7 = motionPaths.mHeight;
             this.mPosition = this.mTime;
-            this.mWidth = (int) (((f5 - f6) * f3) + f6);
-            this.mHeight = (int) (((f7 - f8) * f4) + f8);
+            this.mWidth = (int) (((f4 - f5) * f2) + f5);
+            this.mHeight = (int) (((f6 - f7) * f3) + f7);
             if (keyPosition.mPositionType != 2) {
-                float f9 = Float.isNaN(keyPosition.mPercentX) ? f2 : keyPosition.mPercentX;
-                float f10 = motionPaths2.mX;
-                float f11 = motionPaths.mX;
-                this.mX = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f10, f11, f9, f11);
-                f2 = Float.isNaN(keyPosition.mPercentY) ? f2 : keyPosition.mPercentY;
-                float f12 = motionPaths2.mY;
-                float f13 = motionPaths.mY;
-                this.mY = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f12, f13, f2, f13);
+                float f8 = Float.isNaN(keyPosition.mPercentX) ? f : keyPosition.mPercentX;
+                float f9 = motionPaths2.mX;
+                float f10 = motionPaths.mX;
+                this.mX = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f9, f10, f8, f10);
+                f = Float.isNaN(keyPosition.mPercentY) ? f : keyPosition.mPercentY;
+                float f11 = motionPaths2.mY;
+                float f12 = motionPaths.mY;
+                this.mY = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f11, f12, f, f12);
             } else {
                 if (Float.isNaN(keyPosition.mPercentX)) {
-                    float f14 = motionPaths2.mX;
-                    float f15 = motionPaths.mX;
-                    min = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f14, f15, f2, f15);
+                    float f13 = motionPaths2.mX;
+                    float f14 = motionPaths.mX;
+                    fMin = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f13, f14, f, f14);
                 } else {
-                    min = Math.min(f4, f3) * keyPosition.mPercentX;
+                    fMin = Math.min(f3, f2) * keyPosition.mPercentX;
                 }
-                this.mX = min;
+                this.mX = fMin;
                 if (Float.isNaN(keyPosition.mPercentY)) {
-                    float f16 = motionPaths2.mY;
-                    float f17 = motionPaths.mY;
-                    f = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f16, f17, f2, f17);
+                    float f15 = motionPaths2.mY;
+                    float f16 = motionPaths.mY;
+                    fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f15, f16, f, f16);
                 } else {
-                    f = keyPosition.mPercentY;
+                    fM$1 = keyPosition.mPercentY;
                 }
-                this.mY = f;
+                this.mY = fM$1;
             }
             this.mAnimateRelativeTo = motionPaths.mAnimateRelativeTo;
             this.mKeyFrameEasing = Easing.getInterpolator(keyPosition.mTransitionEasing);
@@ -208,62 +207,62 @@ public class MotionPaths implements Comparable {
         }
         int i3 = keyPosition.mPositionType;
         if (i3 == 1) {
-            float f18 = keyPosition.mFramePosition / 100.0f;
-            this.mTime = f18;
+            float f17 = keyPosition.mFramePosition / 100.0f;
+            this.mTime = f17;
             this.mDrawPath = keyPosition.mDrawPath;
-            float f19 = Float.isNaN(keyPosition.mPercentWidth) ? f18 : keyPosition.mPercentWidth;
-            float f20 = Float.isNaN(keyPosition.mPercentHeight) ? f18 : keyPosition.mPercentHeight;
-            float f21 = motionPaths2.mWidth - motionPaths.mWidth;
-            float f22 = motionPaths2.mHeight - motionPaths.mHeight;
+            float f18 = Float.isNaN(keyPosition.mPercentWidth) ? f17 : keyPosition.mPercentWidth;
+            float f19 = Float.isNaN(keyPosition.mPercentHeight) ? f17 : keyPosition.mPercentHeight;
+            float f20 = motionPaths2.mWidth - motionPaths.mWidth;
+            float f21 = motionPaths2.mHeight - motionPaths.mHeight;
             this.mPosition = this.mTime;
-            f18 = Float.isNaN(keyPosition.mPercentX) ? f18 : keyPosition.mPercentX;
-            float f23 = motionPaths.mX;
-            float f24 = motionPaths.mWidth;
-            float f25 = motionPaths.mY;
-            float f26 = motionPaths.mHeight;
-            float f27 = f18;
-            float f28 = ((motionPaths2.mWidth / 2.0f) + motionPaths2.mX) - ((f24 / 2.0f) + f23);
-            float f29 = ((motionPaths2.mHeight / 2.0f) + motionPaths2.mY) - ((f26 / 2.0f) + f25);
-            float f30 = f28 * f27;
-            float f31 = (f21 * f19) / 2.0f;
-            this.mX = (int) ((f23 + f30) - f31);
-            float f32 = f29 * f27;
-            float f33 = (f22 * f20) / 2.0f;
-            this.mY = (int) ((f25 + f32) - f33);
-            this.mWidth = (int) (f24 + r8);
-            this.mHeight = (int) (f26 + r9);
-            float f34 = Float.isNaN(keyPosition.mPercentY) ? 0.0f : keyPosition.mPercentY;
+            f17 = Float.isNaN(keyPosition.mPercentX) ? f17 : keyPosition.mPercentX;
+            float f22 = motionPaths.mX;
+            float f23 = motionPaths.mWidth;
+            float f24 = motionPaths.mY;
+            float f25 = motionPaths.mHeight;
+            float f26 = f17;
+            float f27 = ((motionPaths2.mWidth / 2.0f) + motionPaths2.mX) - ((f23 / 2.0f) + f22);
+            float f28 = ((motionPaths2.mHeight / 2.0f) + motionPaths2.mY) - ((f25 / 2.0f) + f24);
+            float f29 = f27 * f26;
+            float f30 = (f20 * f18) / 2.0f;
+            this.mX = (int) ((f22 + f29) - f30);
+            float f31 = f28 * f26;
+            float f32 = (f21 * f19) / 2.0f;
+            this.mY = (int) ((f24 + f31) - f32);
+            this.mWidth = (int) (f23 + r8);
+            this.mHeight = (int) (f25 + r9);
+            float f33 = Float.isNaN(keyPosition.mPercentY) ? 0.0f : keyPosition.mPercentY;
             this.mMode = 1;
-            float f35 = (int) ((motionPaths.mX + f30) - f31);
-            float f36 = (int) ((motionPaths.mY + f32) - f33);
-            this.mX = f35 + ((-f29) * f34);
-            this.mY = f36 + (f28 * f34);
+            float f34 = (int) ((motionPaths.mX + f29) - f30);
+            float f35 = (int) ((motionPaths.mY + f31) - f32);
+            this.mX = f34 + ((-f28) * f33);
+            this.mY = f35 + (f27 * f33);
             this.mAnimateRelativeTo = this.mAnimateRelativeTo;
             this.mKeyFrameEasing = Easing.getInterpolator(keyPosition.mTransitionEasing);
             this.mPathMotionArc = keyPosition.mPathMotionArc;
             return;
         }
         if (i3 == 2) {
-            float f37 = keyPosition.mFramePosition / 100.0f;
-            this.mTime = f37;
+            float f36 = keyPosition.mFramePosition / 100.0f;
+            this.mTime = f36;
             this.mDrawPath = keyPosition.mDrawPath;
-            float f38 = Float.isNaN(keyPosition.mPercentWidth) ? f37 : keyPosition.mPercentWidth;
-            float f39 = Float.isNaN(keyPosition.mPercentHeight) ? f37 : keyPosition.mPercentHeight;
-            float f40 = motionPaths2.mWidth;
-            float f41 = f40 - motionPaths.mWidth;
-            float f42 = motionPaths2.mHeight;
-            float f43 = f42 - motionPaths.mHeight;
+            float f37 = Float.isNaN(keyPosition.mPercentWidth) ? f36 : keyPosition.mPercentWidth;
+            float f38 = Float.isNaN(keyPosition.mPercentHeight) ? f36 : keyPosition.mPercentHeight;
+            float f39 = motionPaths2.mWidth;
+            float f40 = f39 - motionPaths.mWidth;
+            float f41 = motionPaths2.mHeight;
+            float f42 = f41 - motionPaths.mHeight;
             this.mPosition = this.mTime;
-            float f44 = motionPaths.mX;
-            float f45 = motionPaths.mY;
-            float f46 = (f40 / 2.0f) + motionPaths2.mX;
-            float f47 = (f42 / 2.0f) + motionPaths2.mY;
-            float f48 = f41 * f38;
-            this.mX = (int) ((((f46 - ((r9 / 2.0f) + f44)) * f37) + f44) - (f48 / 2.0f));
-            float f49 = f43 * f39;
-            this.mY = (int) ((((f47 - ((r12 / 2.0f) + f45)) * f37) + f45) - (f49 / 2.0f));
-            this.mWidth = (int) (r9 + f48);
-            this.mHeight = (int) (r12 + f49);
+            float f43 = motionPaths.mX;
+            float f44 = motionPaths.mY;
+            float f45 = (f39 / 2.0f) + motionPaths2.mX;
+            float f46 = (f41 / 2.0f) + motionPaths2.mY;
+            float f47 = f40 * f37;
+            this.mX = (int) ((((f45 - ((r9 / 2.0f) + f43)) * f36) + f43) - (f47 / 2.0f));
+            float f48 = f42 * f38;
+            this.mY = (int) ((((f46 - ((r12 / 2.0f) + f44)) * f36) + f44) - (f48 / 2.0f));
+            this.mWidth = (int) (r9 + f47);
+            this.mHeight = (int) (r12 + f48);
             this.mMode = 2;
             if (!Float.isNaN(keyPosition.mPercentX)) {
                 this.mX = (int) (keyPosition.mPercentX * (i - ((int) this.mWidth)));
@@ -277,78 +276,78 @@ public class MotionPaths implements Comparable {
             return;
         }
         if (i3 != 3) {
-            float f50 = keyPosition.mFramePosition / 100.0f;
-            this.mTime = f50;
+            float f49 = keyPosition.mFramePosition / 100.0f;
+            this.mTime = f49;
             this.mDrawPath = keyPosition.mDrawPath;
-            float f51 = Float.isNaN(keyPosition.mPercentWidth) ? f50 : keyPosition.mPercentWidth;
-            float f52 = Float.isNaN(keyPosition.mPercentHeight) ? f50 : keyPosition.mPercentHeight;
-            float f53 = motionPaths2.mWidth;
-            float f54 = motionPaths.mWidth;
-            float f55 = f53 - f54;
-            float f56 = motionPaths2.mHeight;
-            float f57 = motionPaths.mHeight;
-            float f58 = f56 - f57;
+            float f50 = Float.isNaN(keyPosition.mPercentWidth) ? f49 : keyPosition.mPercentWidth;
+            float f51 = Float.isNaN(keyPosition.mPercentHeight) ? f49 : keyPosition.mPercentHeight;
+            float f52 = motionPaths2.mWidth;
+            float f53 = motionPaths.mWidth;
+            float f54 = f52 - f53;
+            float f55 = motionPaths2.mHeight;
+            float f56 = motionPaths.mHeight;
+            float f57 = f55 - f56;
             this.mPosition = this.mTime;
-            float f59 = motionPaths.mX;
-            float f60 = motionPaths.mY;
-            float f61 = ((f53 / 2.0f) + motionPaths2.mX) - ((f54 / 2.0f) + f59);
-            float f62 = ((f56 / 2.0f) + motionPaths2.mY) - ((f57 / 2.0f) + f60);
-            float f63 = (f55 * f51) / 2.0f;
-            this.mX = (int) (((f61 * f50) + f59) - f63);
-            float f64 = (f58 * f52) / 2.0f;
-            this.mY = (int) (((f62 * f50) + f60) - f64);
-            this.mWidth = (int) (f54 + r12);
-            this.mHeight = (int) (f57 + r15);
-            float f65 = Float.isNaN(keyPosition.mPercentX) ? f50 : keyPosition.mPercentX;
-            float f66 = Float.isNaN(keyPosition.mAltPercentY) ? 0.0f : keyPosition.mAltPercentY;
-            f50 = Float.isNaN(keyPosition.mPercentY) ? f50 : keyPosition.mPercentY;
-            float f67 = Float.isNaN(keyPosition.mAltPercentX) ? 0.0f : keyPosition.mAltPercentX;
+            float f58 = motionPaths.mX;
+            float f59 = motionPaths.mY;
+            float f60 = ((f52 / 2.0f) + motionPaths2.mX) - ((f53 / 2.0f) + f58);
+            float f61 = ((f55 / 2.0f) + motionPaths2.mY) - ((f56 / 2.0f) + f59);
+            float f62 = (f54 * f50) / 2.0f;
+            this.mX = (int) (((f60 * f49) + f58) - f62);
+            float f63 = (f57 * f51) / 2.0f;
+            this.mY = (int) (((f61 * f49) + f59) - f63);
+            this.mWidth = (int) (f53 + r12);
+            this.mHeight = (int) (f56 + r15);
+            float f64 = Float.isNaN(keyPosition.mPercentX) ? f49 : keyPosition.mPercentX;
+            float f65 = Float.isNaN(keyPosition.mAltPercentY) ? 0.0f : keyPosition.mAltPercentY;
+            f49 = Float.isNaN(keyPosition.mPercentY) ? f49 : keyPosition.mPercentY;
+            float f66 = Float.isNaN(keyPosition.mAltPercentX) ? 0.0f : keyPosition.mAltPercentX;
             this.mMode = 0;
-            this.mX = (int) (((f67 * f62) + ((f65 * f61) + motionPaths.mX)) - f63);
-            this.mY = (int) (((f62 * f50) + ((f61 * f66) + motionPaths.mY)) - f64);
+            this.mX = (int) (((f66 * f61) + ((f64 * f60) + motionPaths.mX)) - f62);
+            this.mY = (int) (((f61 * f49) + ((f60 * f65) + motionPaths.mY)) - f63);
             this.mKeyFrameEasing = Easing.getInterpolator(keyPosition.mTransitionEasing);
             this.mPathMotionArc = keyPosition.mPathMotionArc;
             return;
         }
-        float f68 = keyPosition.mFramePosition / 100.0f;
-        this.mTime = f68;
+        float f67 = keyPosition.mFramePosition / 100.0f;
+        this.mTime = f67;
         this.mDrawPath = keyPosition.mDrawPath;
-        float f69 = Float.isNaN(keyPosition.mPercentWidth) ? f68 : keyPosition.mPercentWidth;
-        float f70 = Float.isNaN(keyPosition.mPercentHeight) ? f68 : keyPosition.mPercentHeight;
-        float f71 = motionPaths2.mWidth;
-        float f72 = motionPaths.mWidth;
-        float f73 = f71 - f72;
-        float f74 = motionPaths2.mHeight;
-        float f75 = motionPaths.mHeight;
-        float f76 = f74 - f75;
+        float f68 = Float.isNaN(keyPosition.mPercentWidth) ? f67 : keyPosition.mPercentWidth;
+        float f69 = Float.isNaN(keyPosition.mPercentHeight) ? f67 : keyPosition.mPercentHeight;
+        float f70 = motionPaths2.mWidth;
+        float f71 = motionPaths.mWidth;
+        float f72 = f70 - f71;
+        float f73 = motionPaths2.mHeight;
+        float f74 = motionPaths.mHeight;
+        float f75 = f73 - f74;
         this.mPosition = this.mTime;
-        float f77 = (f72 / 2.0f) + motionPaths.mX;
-        float f78 = (f75 / 2.0f) + motionPaths.mY;
-        float f79 = (f71 / 2.0f) + motionPaths2.mX;
-        float f80 = (f74 / 2.0f) + motionPaths2.mY;
-        if (f77 > f79) {
+        float f76 = (f71 / 2.0f) + motionPaths.mX;
+        float f77 = (f74 / 2.0f) + motionPaths.mY;
+        float f78 = (f70 / 2.0f) + motionPaths2.mX;
+        float f79 = (f73 / 2.0f) + motionPaths2.mY;
+        if (f76 > f78) {
+            f76 = f78;
+            f78 = f76;
+        }
+        if (f77 <= f79) {
             f77 = f79;
             f79 = f77;
         }
-        if (f78 <= f80) {
-            f78 = f80;
-            f80 = f78;
-        }
-        float f81 = f79 - f77;
-        float f82 = f78 - f80;
-        float f83 = (f73 * f69) / 2.0f;
-        this.mX = (int) (((f81 * f68) + r13) - f83);
-        float f84 = (f76 * f70) / 2.0f;
-        this.mY = (int) (((f82 * f68) + r15) - f84);
-        this.mWidth = (int) (f72 + r9);
-        this.mHeight = (int) (f75 + r12);
-        float f85 = Float.isNaN(keyPosition.mPercentX) ? f68 : keyPosition.mPercentX;
-        float f86 = Float.isNaN(keyPosition.mAltPercentY) ? 0.0f : keyPosition.mAltPercentY;
-        float f87 = Float.isNaN(keyPosition.mPercentY) ? f68 : keyPosition.mPercentY;
-        float f88 = Float.isNaN(keyPosition.mAltPercentX) ? 0.0f : keyPosition.mAltPercentX;
+        float f80 = f78 - f76;
+        float f81 = f77 - f79;
+        float f82 = (f72 * f68) / 2.0f;
+        this.mX = (int) (((f80 * f67) + r13) - f82);
+        float f83 = (f75 * f69) / 2.0f;
+        this.mY = (int) (((f81 * f67) + r15) - f83);
+        this.mWidth = (int) (f71 + r9);
+        this.mHeight = (int) (f74 + r12);
+        float f84 = Float.isNaN(keyPosition.mPercentX) ? f67 : keyPosition.mPercentX;
+        float f85 = Float.isNaN(keyPosition.mAltPercentY) ? 0.0f : keyPosition.mAltPercentY;
+        float f86 = Float.isNaN(keyPosition.mPercentY) ? f67 : keyPosition.mPercentY;
+        float f87 = Float.isNaN(keyPosition.mAltPercentX) ? 0.0f : keyPosition.mAltPercentX;
         this.mMode = 0;
-        this.mX = (int) (((f88 * f82) + ((f85 * f81) + motionPaths.mX)) - f83);
-        this.mY = (int) (((f82 * f87) + ((f81 * f86) + motionPaths.mY)) - f84);
+        this.mX = (int) (((f87 * f81) + ((f84 * f80) + motionPaths.mX)) - f82);
+        this.mY = (int) (((f81 * f86) + ((f80 * f85) + motionPaths.mY)) - f83);
         this.mKeyFrameEasing = Easing.getInterpolator(keyPosition.mTransitionEasing);
         this.mPathMotionArc = keyPosition.mPathMotionArc;
     }

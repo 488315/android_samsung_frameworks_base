@@ -87,9 +87,9 @@ public interface IKeyMintOperation extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyMintOperation)) {
-                return (IKeyMintOperation) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyMintOperation)) {
+                return (IKeyMintOperation) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -143,30 +143,30 @@ public interface IKeyMintOperation extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 HardwareAuthToken hardwareAuthToken = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
                 TimeStampToken timeStampToken = (TimeStampToken) parcel.readTypedObject(TimeStampToken.CREATOR);
                 parcel.enforceNoDataAvail();
-                updateAad(createByteArray, hardwareAuthToken, timeStampToken);
+                updateAad(bArrCreateByteArray, hardwareAuthToken, timeStampToken);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 HardwareAuthToken hardwareAuthToken2 = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
                 TimeStampToken timeStampToken2 = (TimeStampToken) parcel.readTypedObject(TimeStampToken.CREATOR);
                 parcel.enforceNoDataAvail();
-                byte[] update = update(createByteArray2, hardwareAuthToken2, timeStampToken2);
+                byte[] bArrUpdate = update(bArrCreateByteArray2, hardwareAuthToken2, timeStampToken2);
                 parcel2.writeNoException();
-                parcel2.writeByteArray(update);
+                parcel2.writeByteArray(bArrUpdate);
             } else if (i == 3) {
-                byte[] createByteArray3 = parcel.createByteArray();
-                byte[] createByteArray4 = parcel.createByteArray();
+                byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                byte[] bArrCreateByteArray4 = parcel.createByteArray();
                 HardwareAuthToken hardwareAuthToken3 = (HardwareAuthToken) parcel.readTypedObject(HardwareAuthToken.CREATOR);
                 TimeStampToken timeStampToken3 = (TimeStampToken) parcel.readTypedObject(TimeStampToken.CREATOR);
-                byte[] createByteArray5 = parcel.createByteArray();
+                byte[] bArrCreateByteArray5 = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                byte[] finish = finish(createByteArray3, createByteArray4, hardwareAuthToken3, timeStampToken3, createByteArray5);
+                byte[] bArrFinish = finish(bArrCreateByteArray3, bArrCreateByteArray4, hardwareAuthToken3, timeStampToken3, bArrCreateByteArray5);
                 parcel2.writeNoException();
-                parcel2.writeByteArray(finish);
+                parcel2.writeByteArray(bArrFinish);
             } else if (i == 4) {
                 abort();
                 parcel2.writeNoException();
@@ -196,98 +196,98 @@ public interface IKeyMintOperation extends IInterface {
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public void updateAad(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeTypedObject(timeStampToken, 0);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeTypedObject(timeStampToken, 0);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method updateAad is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public byte[] update(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeTypedObject(timeStampToken, 0);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeTypedObject(timeStampToken, 0);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method update is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public byte[] finish(byte[] bArr, byte[] bArr2, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken, byte[] bArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeTypedObject(hardwareAuthToken, 0);
-                    obtain.writeTypedObject(timeStampToken, 0);
-                    obtain.writeByteArray(bArr3);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeTypedObject(hardwareAuthToken, 0);
+                    parcelObtain.writeTypedObject(timeStampToken, 0);
+                    parcelObtain.writeByteArray(bArr3);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method finish is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public void abort() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method abort is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -296,18 +296,18 @@ public interface IKeyMintOperation extends IInterface {
             @Override // android.hardware.security.keymint.IKeyMintOperation
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

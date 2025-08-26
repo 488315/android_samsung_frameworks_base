@@ -16,13 +16,13 @@ public class TelephonyCommonStatsLog {
     public static final int DEVICE_IDENTIFIER_ACCESS_DENIED = 172;
 
     public static void write(int i, String str, String str2, boolean z, boolean z2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeString(str);
-        newBuilder.writeString(str2);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeBoolean(z2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeString(str2);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeBoolean(z2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 }

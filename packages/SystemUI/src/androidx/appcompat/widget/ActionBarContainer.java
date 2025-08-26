@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import androidx.appcompat.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActionBarContainer extends FrameLayout {
     public View mActionBarView;
@@ -164,18 +163,18 @@ public class ActionBarContainer extends FrameLayout {
     public ActionBarContainer(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         setBackground(new ActionBarBackgroundDrawable(this));
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionBar);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionBar);
         boolean z = false;
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         this.mBackground = drawable;
-        Drawable drawable2 = obtainStyledAttributes.getDrawable(2);
+        Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(2);
         this.mStackedBackground = drawable2;
-        this.mHeight = obtainStyledAttributes.getDimensionPixelSize(13, -1);
+        this.mHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(13, -1);
         if (getId() == R.id.split_action_bar) {
             this.mIsSplit = true;
-            this.mSplitBackground = obtainStyledAttributes.getDrawable(1);
+            this.mSplitBackground = typedArrayObtainStyledAttributes.getDrawable(1);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         if (!this.mIsSplit ? !(drawable != null || drawable2 != null) : this.mSplitBackground == null) {
             z = true;
         }

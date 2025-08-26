@@ -58,59 +58,59 @@ public class SecP256K1FieldElement extends ECFieldElement.AbstractFp {
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement add(ECFieldElement eCFieldElement) {
-        int[] create = Nat256.create();
-        SecP256K1Field.add(this.x, ((SecP256K1FieldElement) eCFieldElement).x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.add(this.x, ((SecP256K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement addOne() {
-        int[] create = Nat256.create();
-        SecP256K1Field.addOne(this.x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.addOne(this.x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement subtract(ECFieldElement eCFieldElement) {
-        int[] create = Nat256.create();
-        SecP256K1Field.subtract(this.x, ((SecP256K1FieldElement) eCFieldElement).x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.subtract(this.x, ((SecP256K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement multiply(ECFieldElement eCFieldElement) {
-        int[] create = Nat256.create();
-        SecP256K1Field.multiply(this.x, ((SecP256K1FieldElement) eCFieldElement).x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.multiply(this.x, ((SecP256K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement divide(ECFieldElement eCFieldElement) {
-        int[] create = Nat256.create();
-        SecP256K1Field.inv(((SecP256K1FieldElement) eCFieldElement).x, create);
-        SecP256K1Field.multiply(create, this.x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.inv(((SecP256K1FieldElement) eCFieldElement).x, iArrCreate);
+        SecP256K1Field.multiply(iArrCreate, this.x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement negate() {
-        int[] create = Nat256.create();
-        SecP256K1Field.negate(this.x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.negate(this.x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement square() {
-        int[] create = Nat256.create();
-        SecP256K1Field.square(this.x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.square(this.x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement invert() {
-        int[] create = Nat256.create();
-        SecP256K1Field.inv(this.x, create);
-        return new SecP256K1FieldElement(create);
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.inv(this.x, iArrCreate);
+        return new SecP256K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
@@ -119,43 +119,43 @@ public class SecP256K1FieldElement extends ECFieldElement.AbstractFp {
         if (Nat256.isZero(iArr) || Nat256.isOne(iArr)) {
             return this;
         }
-        int[] createExt = Nat256.createExt();
-        int[] create = Nat256.create();
-        SecP256K1Field.square(iArr, create, createExt);
-        SecP256K1Field.multiply(create, iArr, create, createExt);
-        int[] create2 = Nat256.create();
-        SecP256K1Field.square(create, create2, createExt);
-        SecP256K1Field.multiply(create2, iArr, create2, createExt);
-        int[] create3 = Nat256.create();
-        SecP256K1Field.squareN(create2, 3, create3, createExt);
-        SecP256K1Field.multiply(create3, create2, create3, createExt);
-        SecP256K1Field.squareN(create3, 3, create3, createExt);
-        SecP256K1Field.multiply(create3, create2, create3, createExt);
-        SecP256K1Field.squareN(create3, 2, create3, createExt);
-        SecP256K1Field.multiply(create3, create, create3, createExt);
-        int[] create4 = Nat256.create();
-        SecP256K1Field.squareN(create3, 11, create4, createExt);
-        SecP256K1Field.multiply(create4, create3, create4, createExt);
-        SecP256K1Field.squareN(create4, 22, create3, createExt);
-        SecP256K1Field.multiply(create3, create4, create3, createExt);
-        int[] create5 = Nat256.create();
-        SecP256K1Field.squareN(create3, 44, create5, createExt);
-        SecP256K1Field.multiply(create5, create3, create5, createExt);
-        int[] create6 = Nat256.create();
-        SecP256K1Field.squareN(create5, 88, create6, createExt);
-        SecP256K1Field.multiply(create6, create5, create6, createExt);
-        SecP256K1Field.squareN(create6, 44, create5, createExt);
-        SecP256K1Field.multiply(create5, create3, create5, createExt);
-        SecP256K1Field.squareN(create5, 3, create3, createExt);
-        SecP256K1Field.multiply(create3, create2, create3, createExt);
-        SecP256K1Field.squareN(create3, 23, create3, createExt);
-        SecP256K1Field.multiply(create3, create4, create3, createExt);
-        SecP256K1Field.squareN(create3, 6, create3, createExt);
-        SecP256K1Field.multiply(create3, create, create3, createExt);
-        SecP256K1Field.squareN(create3, 2, create3, createExt);
-        SecP256K1Field.square(create3, create, createExt);
-        if (Nat256.eq(iArr, create)) {
-            return new SecP256K1FieldElement(create3);
+        int[] iArrCreateExt = Nat256.createExt();
+        int[] iArrCreate = Nat256.create();
+        SecP256K1Field.square(iArr, iArrCreate, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate, iArr, iArrCreate, iArrCreateExt);
+        int[] iArrCreate2 = Nat256.create();
+        SecP256K1Field.square(iArrCreate, iArrCreate2, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate2, iArr, iArrCreate2, iArrCreateExt);
+        int[] iArrCreate3 = Nat256.create();
+        SecP256K1Field.squareN(iArrCreate2, 3, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate3, 3, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate3, 2, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate, iArrCreate3, iArrCreateExt);
+        int[] iArrCreate4 = Nat256.create();
+        SecP256K1Field.squareN(iArrCreate3, 11, iArrCreate4, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate4, iArrCreate3, iArrCreate4, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate4, 22, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate4, iArrCreate3, iArrCreateExt);
+        int[] iArrCreate5 = Nat256.create();
+        SecP256K1Field.squareN(iArrCreate3, 44, iArrCreate5, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate5, iArrCreate3, iArrCreate5, iArrCreateExt);
+        int[] iArrCreate6 = Nat256.create();
+        SecP256K1Field.squareN(iArrCreate5, 88, iArrCreate6, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate6, iArrCreate5, iArrCreate6, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate6, 44, iArrCreate5, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate5, iArrCreate3, iArrCreate5, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate5, 3, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate3, 23, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate4, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate3, 6, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.multiply(iArrCreate3, iArrCreate, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.squareN(iArrCreate3, 2, iArrCreate3, iArrCreateExt);
+        SecP256K1Field.square(iArrCreate3, iArrCreate, iArrCreateExt);
+        if (Nat256.eq(iArr, iArrCreate)) {
+            return new SecP256K1FieldElement(iArrCreate3);
         }
         return null;
     }

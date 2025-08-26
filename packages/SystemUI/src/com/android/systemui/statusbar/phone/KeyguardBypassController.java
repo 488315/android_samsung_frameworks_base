@@ -32,7 +32,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.PropertyReference0Impl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardBypassController implements Dumpable, StackScrollAlgorithm.BypassController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -57,13 +56,12 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
         public final void onFaceEnrolledChanged() {
             int i = KeyguardBypassController.$r8$clinit;
-            KeyguardBypassController.this.notifyListeners$1();
+            this.this$0.notifyListeners$1();
         }
     };
     public final boolean lockStayEnabled = true;
     public final boolean fpLockStayEnabled = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,12 +71,10 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnBypassStateChangedListener {
         void onBypassStateChanged(boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PendingUnlock {
         public final boolean isStrongBiometric;
         public final BiometricSourceType pendingUnlockType;
@@ -113,7 +109,7 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
     }
 
     /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.statusbar.phone.KeyguardBypassController$faceAuthEnabledChangedCallback$1] */
-    public KeyguardBypassController(Resources resources, PackageManager packageManager, CoroutineScope coroutineScope, TunerService tunerService, StatusBarStateController statusBarStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardStateController keyguardStateController, Lazy lazy, DevicePostureController devicePostureController, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, SettingsHelper settingsHelper) {
+    public KeyguardBypassController(Resources resources, PackageManager packageManager, CoroutineScope coroutineScope, TunerService tunerService, StatusBarStateController statusBarStateController, NotificationLockscreenUserManager notificationLockscreenUserManager, KeyguardStateController keyguardStateController, Lazy lazy, DevicePostureController devicePostureController, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, SettingsHelper settingsHelper) throws Resources.NotFoundException {
         this.applicationScope = coroutineScope;
         this.statusBarStateController = statusBarStateController;
         this.keyguardStateController = keyguardStateController;
@@ -123,9 +119,9 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         this.bypassOverride = resources.getInteger(R.integer.config_face_unlock_bypass_override);
         int integer = resources.getInteger(R.integer.config_face_auth_supported_posture);
         this.configFaceAuthSupportedPosture = integer;
-        boolean hasSystemFeature = packageManager.hasSystemFeature("android.hardware.biometrics.face");
-        this.hasFaceFeature = hasSystemFeature;
-        if (hasSystemFeature) {
+        boolean zHasSystemFeature = packageManager.hasSystemFeature("android.hardware.biometrics.face");
+        this.hasFaceFeature = zHasSystemFeature;
+        if (zHasSystemFeature) {
             if (integer != 0) {
                 ((DevicePostureControllerImpl) devicePostureController).addCallback(new DevicePostureController.Callback() { // from class: com.android.systemui.statusbar.phone.KeyguardBypassController.1
                     @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
@@ -228,8 +224,8 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
     public final void notifyListeners$1() {
         ListenersTracing listenersTracing = ListenersTracing.INSTANCE;
         for (final Object obj : this.listeners) {
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("KeyguardBypassController#".concat(((Class) new PropertyReference0Impl(obj) { // from class: com.android.systemui.statusbar.phone.KeyguardBypassController$notifyListeners$$inlined$forEachTraced$1
                     @Override // kotlin.jvm.internal.PropertyReference0Impl, kotlin.reflect.KProperty0
                     public final Object get() {
@@ -239,11 +235,11 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
             }
             try {
                 ((OnBypassStateChangedListener) obj).onBypassStateChanged(getBypassEnabled());
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             } catch (Throwable th) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 throw th;
@@ -255,17 +251,17 @@ public final class KeyguardBypassController implements Dumpable, StackScrollAlgo
         if (biometricSourceType != BiometricSourceType.FACE || !getBypassEnabled()) {
             return true;
         }
-        boolean canBypass = canBypass();
-        if (!canBypass && (this.isPulseExpanding || this.qsExpanded)) {
+        boolean zCanBypass = canBypass();
+        if (!zCanBypass && (this.isPulseExpanding || this.qsExpanded)) {
             this.pendingUnlock = new PendingUnlock(biometricSourceType, z);
         }
-        return canBypass;
+        return zCanBypass;
     }
 
     public final void registerOnBypassStateChangedListener(OnBypassStateChangedListener onBypassStateChangedListener) {
-        boolean isEmpty = this.listeners.isEmpty();
+        boolean zIsEmpty = this.listeners.isEmpty();
         this.listeners.add(onBypassStateChangedListener);
-        if (isEmpty) {
+        if (zIsEmpty) {
             ((KeyguardStateControllerImpl) this.keyguardStateController).addCallback(this.faceAuthEnabledChangedCallback);
         }
     }

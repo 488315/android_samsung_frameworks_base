@@ -62,9 +62,9 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
         }
         long j = this.mRemainderRemoved[i2];
         int i3 = (i2 + 1) * 64;
-        int min = Math.min(this.mCallbacks.size(), i3 + 64);
+        int iMin = Math.min(this.mCallbacks.size(), i3 + 64);
         notifyRemainderLocked(t, i, a, i2 - 1);
-        notifyCallbacksLocked(t, i, a, i3, min, j);
+        notifyCallbacksLocked(t, i, a, i3, iMin, j);
     }
 
     private void notifyCallbacksLocked(T t, int i, A a, int i2, int i3, long j) {
@@ -79,8 +79,8 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
     }
 
     public synchronized void add(C c) {
-        int lastIndexOf = this.mCallbacks.lastIndexOf(c);
-        if (lastIndexOf < 0 || isRemovedLocked(lastIndexOf)) {
+        int iLastIndexOf = this.mCallbacks.lastIndexOf(c);
+        if (iLastIndexOf < 0 || isRemovedLocked(iLastIndexOf)) {
             this.mCallbacks.add(c);
         }
     }
@@ -111,9 +111,9 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
         if (this.mNotificationLevel == 0) {
             this.mCallbacks.remove(c);
         } else {
-            int lastIndexOf = this.mCallbacks.lastIndexOf(c);
-            if (lastIndexOf >= 0) {
-                setRemovalBitLocked(lastIndexOf);
+            int iLastIndexOf = this.mCallbacks.lastIndexOf(c);
+            if (iLastIndexOf >= 0) {
+                setRemovalBitLocked(iLastIndexOf);
             }
         }
     }
@@ -176,30 +176,30 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public synchronized CallbackRegistry<C, T, A> m8325clone() {
+    public synchronized CallbackRegistry<C, T, A> m8336clone() {
         CallbackRegistry<C, T, A> callbackRegistry;
         CloneNotSupportedException e;
         try {
             callbackRegistry = (CallbackRegistry) super.clone();
-        } catch (CloneNotSupportedException e2) {
-            callbackRegistry = null;
-            e = e2;
-        }
-        try {
-            callbackRegistry.mFirst64Removed = 0L;
-            callbackRegistry.mRemainderRemoved = null;
-            callbackRegistry.mNotificationLevel = 0;
-            callbackRegistry.mCallbacks = new ArrayList();
-            int size = this.mCallbacks.size();
-            for (int i = 0; i < size; i++) {
-                if (!isRemovedLocked(i)) {
-                    callbackRegistry.mCallbacks.add(this.mCallbacks.get(i));
+            try {
+                callbackRegistry.mFirst64Removed = 0L;
+                callbackRegistry.mRemainderRemoved = null;
+                callbackRegistry.mNotificationLevel = 0;
+                callbackRegistry.mCallbacks = new ArrayList();
+                int size = this.mCallbacks.size();
+                for (int i = 0; i < size; i++) {
+                    if (!isRemovedLocked(i)) {
+                        callbackRegistry.mCallbacks.add(this.mCallbacks.get(i));
+                    }
                 }
+            } catch (CloneNotSupportedException e2) {
+                e = e2;
+                e.printStackTrace();
+                return callbackRegistry;
             }
         } catch (CloneNotSupportedException e3) {
+            callbackRegistry = null;
             e = e3;
-            e.printStackTrace();
-            return callbackRegistry;
         }
         return callbackRegistry;
     }

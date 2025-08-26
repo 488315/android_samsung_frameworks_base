@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FaceScanningProviderFactoryImpl implements FaceScanningProviderFactory {
     public final AuthController authController;
@@ -68,9 +67,9 @@ public final class FaceScanningProviderFactoryImpl implements FaceScanningProvid
             while (i < size) {
                 Object obj = arrayList2.get(i);
                 i++;
-                int baseOnRotation0 = FaceScanningProviderFactoryKt.baseOnRotation0(((Number) obj).intValue(), this.displayInfo.rotation);
+                int iBaseOnRotation0 = FaceScanningProviderFactoryKt.baseOnRotation0(((Number) obj).intValue(), this.displayInfo.rotation);
                 Executor executor = this.mainExecutor;
-                arrayList.add(new FaceScanningOverlayProviderImpl(baseOnRotation0, this.authController, this.statusBarStateController, this.keyguardUpdateMonitor, executor, this.logger, this.facePropertyRepository));
+                arrayList.add(new FaceScanningOverlayProviderImpl(iBaseOnRotation0, this.authController, this.statusBarStateController, this.keyguardUpdateMonitor, executor, this.logger, this.facePropertyRepository));
             }
         }
         return arrayList;

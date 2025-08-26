@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.stack.AnimationFilter;
 import com.android.systemui.statusbar.notification.stack.AnimationProperties;
 import com.android.systemui.statusbar.notification.stack.ViewState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PropertyAnimator {
     public static void cancelAnimation(View view, AnimatableProperty animatableProperty) {
@@ -54,9 +53,9 @@ public class PropertyAnimator {
                     return;
                 }
                 PropertyValuesHolder[] values = valueAnimator.getValues();
-                float floatValue = f2.floatValue() + (f - f3.floatValue());
-                values[0].setFloatValues(floatValue, f);
-                view.setTag(animationStartTag, Float.valueOf(floatValue));
+                float fFloatValue = f2.floatValue() + (f - f3.floatValue());
+                values[0].setFloatValues(fFloatValue, f);
+                view.setTag(animationStartTag, Float.valueOf(fFloatValue));
                 view.setTag(animationEndTag, Float.valueOf(f));
                 valueAnimator.setCurrentPlayTime(valueAnimator.getCurrentPlayTime());
                 return;
@@ -73,8 +72,8 @@ public class PropertyAnimator {
                 }
                 return;
             }
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(f4.floatValue(), f);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.PropertyAnimator$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f4.floatValue(), f);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.PropertyAnimator$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                     property.set(view, (Float) valueAnimator2.getAnimatedValue());
@@ -85,12 +84,12 @@ public class PropertyAnimator {
             if (interpolator == null) {
                 interpolator = Interpolators.FAST_OUT_SLOW_IN;
             }
-            ofFloat.setInterpolator(interpolator);
-            ofFloat.setDuration(ViewState.cancelAnimatorAndGetNewDuration(animationProperties.duration, valueAnimator));
+            valueAnimatorOfFloat.setInterpolator(interpolator);
+            valueAnimatorOfFloat.setDuration(ViewState.cancelAnimatorAndGetNewDuration(animationProperties.duration, valueAnimator));
             if (animationProperties.delay > 0 && (valueAnimator == null || valueAnimator.getAnimatedFraction() == 0.0f)) {
-                ofFloat.setStartDelay(animationProperties.delay);
+                valueAnimatorOfFloat.setStartDelay(animationProperties.delay);
             }
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.PropertyAnimator.1
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.PropertyAnimator.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     if (((Animator) view.getTag(animatorTag)) != animator) {
@@ -103,10 +102,10 @@ public class PropertyAnimator {
                 }
             });
             if (animationFinishListener != null) {
-                ofFloat.addListener(animationFinishListener);
+                valueAnimatorOfFloat.addListener(animationFinishListener);
             }
-            ViewState.startAnimator(ofFloat, animationFinishListener);
-            view.setTag(animatorTag, ofFloat);
+            ViewState.startAnimator(valueAnimatorOfFloat, animationFinishListener);
+            view.setTag(animatorTag, valueAnimatorOfFloat);
             view.setTag(animationStartTag, f4);
             view.setTag(animationEndTag, Float.valueOf(f));
         }

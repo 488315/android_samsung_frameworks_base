@@ -1,9 +1,9 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
+import com.android.systemui.statusbar.notification.collection.coordinator.OriginalUnseenKeyguardCoordinator;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackSeenDurationThreshold$1 extends ContinuationImpl {
     Object L$0;
@@ -19,10 +19,8 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedA
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object invokeSuspend$trackSeenDurationThreshold;
         this.result = obj;
         this.label |= Integer.MIN_VALUE;
-        invokeSuspend$trackSeenDurationThreshold = OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2.invokeSuspend$trackSeenDurationThreshold(null, null, null, null, this);
-        return invokeSuspend$trackSeenDurationThreshold;
+        return OriginalUnseenKeyguardCoordinator.C10752.invokeSuspend$trackSeenDurationThreshold(null, null, null, null, this);
     }
 }

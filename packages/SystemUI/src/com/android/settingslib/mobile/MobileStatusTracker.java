@@ -19,7 +19,6 @@ import com.android.settingslib.mobile.MobileStatusTracker;
 import com.android.systemui.statusbar.connectivity.MobileSignalController;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MobileStatusTracker {
     public final Callback mCallback;
@@ -31,11 +30,9 @@ public class MobileStatusTracker {
     public final SubscriptionInfo mSubscriptionInfo;
     public final MobileTelephonyCallback mTelephonyCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MobileTelephonyCallback extends TelephonyCallback implements TelephonyCallback.ServiceStateListener, TelephonyCallback.SignalStrengthsListener, TelephonyCallback.DataConnectionStateListener, TelephonyCallback.DataActivityListener, TelephonyCallback.CarrierNetworkListener, TelephonyCallback.ActiveDataSubscriptionIdListener, TelephonyCallback.DisplayInfoListener {
         public MobileTelephonyCallback() {
         }
@@ -137,7 +134,6 @@ public class MobileStatusTracker {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscriptionDefaults {
     }
 
@@ -154,7 +150,7 @@ public class MobileStatusTracker {
         handler.post(new Runnable() { // from class: com.android.settingslib.mobile.MobileStatusTracker$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                MobileStatusTracker mobileStatusTracker = MobileStatusTracker.this;
+                MobileStatusTracker mobileStatusTracker = this.f$0;
                 ((MobileSignalController.AnonymousClass1) mobileStatusTracker.mCallback).onMobileStatusChanged(false, new MobileStatusTracker.MobileStatus(mobileStatusTracker.mMobileStatus));
             }
         });
@@ -178,16 +174,15 @@ public class MobileStatusTracker {
     public final void updateDataSim() {
         this.mDefaults.getClass();
         int activeDataSubscriptionId = SubscriptionManager.getActiveDataSubscriptionId();
-        boolean isValidSubscriptionId = SubscriptionManager.isValidSubscriptionId(activeDataSubscriptionId);
+        boolean zIsValidSubscriptionId = SubscriptionManager.isValidSubscriptionId(activeDataSubscriptionId);
         MobileStatus mobileStatus = this.mMobileStatus;
-        if (isValidSubscriptionId) {
+        if (zIsValidSubscriptionId) {
             mobileStatus.dataSim = activeDataSubscriptionId == this.mSubscriptionInfo.getSubscriptionId();
         } else {
             mobileStatus.dataSim = true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MobileStatus {
         public boolean activityIn;
         public boolean activityOut;

@@ -2,7 +2,6 @@ package com.samsung.android.sume.core.message;
 
 import android.util.Pair;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer$$ExternalSyntheticLambda3;
-import com.samsung.android.sume.core.message.MessagePublisher;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -65,9 +64,7 @@ public class MessagePublisher {
             return (Message) Optional.ofNullable(this.weakProducer.get()).map(new Function() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Message message;
-                    message = ((MessagePublisher) obj).getMessage(i);
-                    return message;
+                    return ((MessagePublisher) obj).getMessage(i);
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
@@ -77,9 +74,7 @@ public class MessagePublisher {
             return (Message) Optional.ofNullable(this.weakProducer.get()).map(new Function() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$$ExternalSyntheticLambda1
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Message message;
-                    message = ((MessagePublisher) obj).getMessage(i, map);
-                    return message;
+                    return ((MessagePublisher) obj).getMessage(i, map);
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
@@ -89,13 +84,13 @@ public class MessagePublisher {
             return (Message) Optional.ofNullable(this.weakProducer.get()).map(new Function() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$$ExternalSyntheticLambda3
                 @Override // java.util.function.Function
                 public final Object apply(Object obj2) {
-                    return MessagePublisher.MessageProducerImpl.this.m9592x1dd59b1a(i, obj, (MessagePublisher) obj2);
+                    return this.f$0.m9605x1dd59b1a(i, obj, (MessagePublisher) obj2);
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
 
         /* renamed from: lambda$newMessage$2$com-samsung-android-sume-core-message-MessagePublisher$MessageProducerImpl, reason: not valid java name */
-        /* synthetic */ Message m9592x1dd59b1a(int i, Object obj, MessagePublisher messagePublisher) {
+        /* synthetic */ Message m9605x1dd59b1a(int i, Object obj, MessagePublisher messagePublisher) {
             return messagePublisher.getMessage(i, new HashMap<String, Object>(obj) { // from class: com.samsung.android.sume.core.message.MessagePublisher.MessageProducerImpl.1
                 final /* synthetic */ Object val$data;
 
@@ -111,13 +106,13 @@ public class MessagePublisher {
             return (Message) Optional.ofNullable(this.weakProducer.get()).map(new Function() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$$ExternalSyntheticLambda4
                 @Override // java.util.function.Function
                 public final Object apply(Object obj2) {
-                    return MessagePublisher.MessageProducerImpl.this.m9593x5fecc879(i, str, obj, (MessagePublisher) obj2);
+                    return this.f$0.m9606x5fecc879(i, str, obj, (MessagePublisher) obj2);
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
 
         /* renamed from: lambda$newMessage$3$com-samsung-android-sume-core-message-MessagePublisher$MessageProducerImpl, reason: not valid java name */
-        /* synthetic */ Message m9593x5fecc879(int i, String str, Object obj, MessagePublisher messagePublisher) {
+        /* synthetic */ Message m9606x5fecc879(int i, String str, Object obj, MessagePublisher messagePublisher) {
             return messagePublisher.getMessage(i, new HashMap<String, Object>(str, obj) { // from class: com.samsung.android.sume.core.message.MessagePublisher.MessageProducerImpl.2
                 final /* synthetic */ Object val$data;
                 final /* synthetic */ String val$key;
@@ -139,14 +134,14 @@ public class MessagePublisher {
                 Arrays.asList(pairArr).forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$3$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        MessagePublisher.MessageProducerImpl.AnonymousClass3.this.m9595x9f89700c((Pair) obj);
+                        this.f$0.m9608x9f89700c((Pair) obj);
                     }
                 });
             }
 
             /* JADX WARN: Multi-variable type inference failed */
             /* renamed from: lambda$new$0$com-samsung-android-sume-core-message-MessagePublisher$MessageProducerImpl$3, reason: not valid java name */
-            /* synthetic */ void m9595x9f89700c(Pair pair) {
+            /* synthetic */ void m9608x9f89700c(Pair pair) {
                 put((String) pair.first, pair.second);
             }
         }
@@ -156,13 +151,13 @@ public class MessagePublisher {
             return (Message) Optional.ofNullable(this.weakProducer.get()).map(new Function() { // from class: com.samsung.android.sume.core.message.MessagePublisher$MessageProducerImpl$$ExternalSyntheticLambda2
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return MessagePublisher.MessageProducerImpl.this.m9594xa203f5d8(i, pairArr, (MessagePublisher) obj);
+                    return this.f$0.m9607xa203f5d8(i, pairArr, (MessagePublisher) obj);
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
 
         /* renamed from: lambda$newMessage$4$com-samsung-android-sume-core-message-MessagePublisher$MessageProducerImpl, reason: not valid java name */
-        /* synthetic */ Message m9594xa203f5d8(int i, Pair[] pairArr, MessagePublisher messagePublisher) {
+        /* synthetic */ Message m9607xa203f5d8(int i, Pair[] pairArr, MessagePublisher messagePublisher) {
             return messagePublisher.getMessage(i, new AnonymousClass3(pairArr));
         }
     }

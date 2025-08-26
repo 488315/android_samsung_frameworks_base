@@ -44,9 +44,9 @@ public interface ITunerFrontendSignalInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.ITunerFrontendSignalInfoListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITunerFrontendSignalInfoListener)) {
-                return (ITunerFrontendSignalInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.ITunerFrontendSignalInfoListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITunerFrontendSignalInfoListener)) {
+                return (ITunerFrontendSignalInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ITunerFrontendSignalInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onFrontendStatusChanged(readInt);
+                onFrontendStatusChanged(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ITunerFrontendSignalInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.signal.ITunerFrontendSignalInfoListener
             public void onFrontendStatusChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.ITunerFrontendSignalInfoListener");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.ITunerFrontendSignalInfoListener");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

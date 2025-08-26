@@ -222,9 +222,9 @@ public interface IRadioMessaging extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioMessaging)) {
-                return (IRadioMessaging) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRadioMessaging)) {
+                return (IRadioMessaging) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -251,138 +251,138 @@ public interface IRadioMessaging extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    acknowledgeIncomingGsmSmsWithPdu(readInt, readBoolean, readString);
+                    acknowledgeIncomingGsmSmsWithPdu(i3, z, string);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     CdmaSmsAck cdmaSmsAck = (CdmaSmsAck) parcel.readTypedObject(CdmaSmsAck.CREATOR);
                     parcel.enforceNoDataAvail();
-                    acknowledgeLastIncomingCdmaSms(readInt2, cdmaSmsAck);
+                    acknowledgeLastIncomingCdmaSms(i4, cdmaSmsAck);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acknowledgeLastIncomingGsmSms(readInt3, readBoolean2, readInt4);
+                    acknowledgeLastIncomingGsmSms(i5, z2, i6);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteSmsOnRuim(readInt5, readInt6);
+                    deleteSmsOnRuim(i7, i8);
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteSmsOnSim(readInt7, readInt8);
+                    deleteSmsOnSim(i9, i10);
                     return true;
                 case 6:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCdmaBroadcastConfig(readInt9);
+                    getCdmaBroadcastConfig(i11);
                     return true;
                 case 7:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getGsmBroadcastConfig(readInt10);
+                    getGsmBroadcastConfig(i12);
                     return true;
                 case 8:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getSmscAddress(readInt11);
+                    getSmscAddress(i13);
                     return true;
                 case 9:
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reportSmsMemoryStatus(readInt12, readBoolean3);
+                    reportSmsMemoryStatus(i14, z3);
                     return true;
                 case 10:
                     responseAcknowledgement();
                     return true;
                 case 11:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     CdmaSmsMessage cdmaSmsMessage = (CdmaSmsMessage) parcel.readTypedObject(CdmaSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCdmaSms(readInt13, cdmaSmsMessage);
+                    sendCdmaSms(i15, cdmaSmsMessage);
                     return true;
                 case 12:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     CdmaSmsMessage cdmaSmsMessage2 = (CdmaSmsMessage) parcel.readTypedObject(CdmaSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCdmaSmsExpectMore(readInt14, cdmaSmsMessage2);
+                    sendCdmaSmsExpectMore(i16, cdmaSmsMessage2);
                     return true;
                 case 13:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     ImsSmsMessage imsSmsMessage = (ImsSmsMessage) parcel.readTypedObject(ImsSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendImsSms(readInt15, imsSmsMessage);
+                    sendImsSms(i17, imsSmsMessage);
                     return true;
                 case 14:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     GsmSmsMessage gsmSmsMessage = (GsmSmsMessage) parcel.readTypedObject(GsmSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendSms(readInt16, gsmSmsMessage);
+                    sendSms(i18, gsmSmsMessage);
                     return true;
                 case 15:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     GsmSmsMessage gsmSmsMessage2 = (GsmSmsMessage) parcel.readTypedObject(GsmSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendSmsExpectMore(readInt17, gsmSmsMessage2);
+                    sendSmsExpectMore(i19, gsmSmsMessage2);
                     return true;
                 case 16:
-                    int readInt18 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i20 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCdmaBroadcastActivation(readInt18, readBoolean4);
+                    setCdmaBroadcastActivation(i20, z4);
                     return true;
                 case 17:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     CdmaBroadcastSmsConfigInfo[] cdmaBroadcastSmsConfigInfoArr = (CdmaBroadcastSmsConfigInfo[]) parcel.createTypedArray(CdmaBroadcastSmsConfigInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setCdmaBroadcastConfig(readInt19, cdmaBroadcastSmsConfigInfoArr);
+                    setCdmaBroadcastConfig(i21, cdmaBroadcastSmsConfigInfoArr);
                     return true;
                 case 18:
-                    int readInt20 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i22 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setGsmBroadcastActivation(readInt20, readBoolean5);
+                    setGsmBroadcastActivation(i22, z5);
                     return true;
                 case 19:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     GsmBroadcastSmsConfigInfo[] gsmBroadcastSmsConfigInfoArr = (GsmBroadcastSmsConfigInfo[]) parcel.createTypedArray(GsmBroadcastSmsConfigInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setGsmBroadcastConfig(readInt21, gsmBroadcastSmsConfigInfoArr);
+                    setGsmBroadcastConfig(i23, gsmBroadcastSmsConfigInfoArr);
                     return true;
                 case 20:
-                    IRadioMessagingResponse asInterface = IRadioMessagingResponse.Stub.asInterface(parcel.readStrongBinder());
-                    IRadioMessagingIndication asInterface2 = IRadioMessagingIndication.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioMessagingResponse iRadioMessagingResponseAsInterface = IRadioMessagingResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioMessagingIndication iRadioMessagingIndicationAsInterface = IRadioMessagingIndication.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setResponseFunctions(asInterface, asInterface2);
+                    setResponseFunctions(iRadioMessagingResponseAsInterface, iRadioMessagingIndicationAsInterface);
                     return true;
                 case 21:
-                    int readInt22 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setSmscAddress(readInt22, readString2);
+                    setSmscAddress(i24, string2);
                     return true;
                 case 22:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     CdmaSmsWriteArgs cdmaSmsWriteArgs = (CdmaSmsWriteArgs) parcel.readTypedObject(CdmaSmsWriteArgs.CREATOR);
                     parcel.enforceNoDataAvail();
-                    writeSmsToRuim(readInt23, cdmaSmsWriteArgs);
+                    writeSmsToRuim(i25, cdmaSmsWriteArgs);
                     return true;
                 case 23:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     SmsWriteArgs smsWriteArgs = (SmsWriteArgs) parcel.readTypedObject(SmsWriteArgs.CREATOR);
                     parcel.enforceNoDataAvail();
-                    writeSmsToSim(readInt24, smsWriteArgs);
+                    writeSmsToSim(i26, smsWriteArgs);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -409,382 +409,382 @@ public interface IRadioMessaging extends IInterface {
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void acknowledgeIncomingGsmSmsWithPdu(int i, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method acknowledgeIncomingGsmSmsWithPdu is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void acknowledgeLastIncomingCdmaSms(int i, CdmaSmsAck cdmaSmsAck) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cdmaSmsAck, 0);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cdmaSmsAck, 0);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method acknowledgeLastIncomingCdmaSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void acknowledgeLastIncomingGsmSms(int i, boolean z, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method acknowledgeLastIncomingGsmSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void deleteSmsOnRuim(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method deleteSmsOnRuim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void deleteSmsOnSim(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method deleteSmsOnSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void getCdmaBroadcastConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCdmaBroadcastConfig is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void getGsmBroadcastConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getGsmBroadcastConfig is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void getSmscAddress(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getSmscAddress is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void reportSmsMemoryStatus(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method reportSmsMemoryStatus is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void responseAcknowledgement() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void sendCdmaSms(int i, CdmaSmsMessage cdmaSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cdmaSmsMessage, 0);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cdmaSmsMessage, 0);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCdmaSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void sendCdmaSmsExpectMore(int i, CdmaSmsMessage cdmaSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cdmaSmsMessage, 0);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cdmaSmsMessage, 0);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCdmaSmsExpectMore is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void sendImsSms(int i, ImsSmsMessage imsSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsSmsMessage, 0);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsSmsMessage, 0);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendImsSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void sendSms(int i, GsmSmsMessage gsmSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(gsmSmsMessage, 0);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(gsmSmsMessage, 0);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void sendSmsExpectMore(int i, GsmSmsMessage gsmSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(gsmSmsMessage, 0);
-                    if (this.mRemote.transact(15, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(gsmSmsMessage, 0);
+                    if (this.mRemote.transact(15, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendSmsExpectMore is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setCdmaBroadcastActivation(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(16, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(16, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCdmaBroadcastActivation is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setCdmaBroadcastConfig(int i, CdmaBroadcastSmsConfigInfo[] cdmaBroadcastSmsConfigInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(cdmaBroadcastSmsConfigInfoArr, 0);
-                    if (this.mRemote.transact(17, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(cdmaBroadcastSmsConfigInfoArr, 0);
+                    if (this.mRemote.transact(17, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCdmaBroadcastConfig is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setGsmBroadcastActivation(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(18, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(18, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setGsmBroadcastActivation is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setGsmBroadcastConfig(int i, GsmBroadcastSmsConfigInfo[] gsmBroadcastSmsConfigInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(gsmBroadcastSmsConfigInfoArr, 0);
-                    if (this.mRemote.transact(19, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(gsmBroadcastSmsConfigInfoArr, 0);
+                    if (this.mRemote.transact(19, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setGsmBroadcastConfig is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setResponseFunctions(IRadioMessagingResponse iRadioMessagingResponse, IRadioMessagingIndication iRadioMessagingIndication) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iRadioMessagingResponse);
-                    obtain.writeStrongInterface(iRadioMessagingIndication);
-                    if (this.mRemote.transact(20, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRadioMessagingResponse);
+                    parcelObtain.writeStrongInterface(iRadioMessagingIndication);
+                    if (this.mRemote.transact(20, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setResponseFunctions is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void setSmscAddress(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(21, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(21, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSmscAddress is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void writeSmsToRuim(int i, CdmaSmsWriteArgs cdmaSmsWriteArgs) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cdmaSmsWriteArgs, 0);
-                    if (this.mRemote.transact(22, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cdmaSmsWriteArgs, 0);
+                    if (this.mRemote.transact(22, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method writeSmsToRuim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public void writeSmsToSim(int i, SmsWriteArgs smsWriteArgs) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(smsWriteArgs, 0);
-                    if (this.mRemote.transact(23, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(smsWriteArgs, 0);
+                    if (this.mRemote.transact(23, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method writeSmsToSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -793,18 +793,18 @@ public interface IRadioMessaging extends IInterface {
             @Override // android.hardware.radio.messaging.IRadioMessaging
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

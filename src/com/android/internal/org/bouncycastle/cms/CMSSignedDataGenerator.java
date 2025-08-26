@@ -1,7 +1,22 @@
 package com.android.internal.org.bouncycastle.cms;
 
+import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
+import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
+import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import com.android.internal.org.bouncycastle.asn1.ASN1Set;
+import com.android.internal.org.bouncycastle.asn1.BEROctetString;
+import com.android.internal.org.bouncycastle.asn1.DEROctetString;
+import com.android.internal.org.bouncycastle.asn1.DERSet;
+import com.android.internal.org.bouncycastle.asn1.cms.CMSObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.cms.ContentInfo;
+import com.android.internal.org.bouncycastle.asn1.cms.SignedData;
+import com.android.internal.org.bouncycastle.asn1.cms.SignerInfo;
 import com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierFinder;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -28,20 +43,72 @@ public class CMSSignedDataGenerator extends CMSSignedGenerator {
         return generate(cMSTypedData, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00eb  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00e2  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x008e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.android.internal.org.bouncycastle.cms.CMSSignedData generate(com.android.internal.org.bouncycastle.cms.CMSTypedData r12, boolean r13) throws com.android.internal.org.bouncycastle.cms.CMSException {
-        /*
-            Method dump skipped, instructions count: 294
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.cms.CMSSignedDataGenerator.generate(com.android.internal.org.bouncycastle.cms.CMSTypedData, boolean):com.android.internal.org.bouncycastle.cms.CMSSignedData");
+    public CMSSignedData generate(CMSTypedData cMSTypedData, boolean z) throws IOException, CMSException {
+        ASN1Encodable bEROctetString;
+        ASN1Set aSN1Set;
+        ASN1Set aSN1SetCreateBerSetFromList;
+        if (!this.signerInfs.isEmpty()) {
+            throw new IllegalStateException("this method can only be used with SignerInfoGenerator");
+        }
+        LinkedHashSet linkedHashSet = new LinkedHashSet();
+        ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
+        this.digests.clear();
+        for (SignerInformation signerInformation : this._signers) {
+            CMSUtils.addDigestAlgs(linkedHashSet, signerInformation, this.digestAlgIdFinder);
+            aSN1EncodableVector.add(signerInformation.toASN1Structure());
+        }
+        ASN1ObjectIdentifier contentType = cMSTypedData.getContentType();
+        ASN1Set aSN1SetCreateBerSetFromList2 = null;
+        if (cMSTypedData.getContent() == null) {
+            bEROctetString = null;
+        } else {
+            ByteArrayOutputStream byteArrayOutputStream = z ? new ByteArrayOutputStream() : null;
+            OutputStream safeOutputStream = CMSUtils.getSafeOutputStream(CMSUtils.attachSignersToOutputStream(this.signerGens, byteArrayOutputStream));
+            try {
+                cMSTypedData.write(safeOutputStream);
+                safeOutputStream.close();
+                if (z) {
+                    if (this.isDefiniteLength) {
+                        bEROctetString = new DEROctetString(byteArrayOutputStream.toByteArray());
+                    } else {
+                        bEROctetString = new BEROctetString(byteArrayOutputStream.toByteArray());
+                    }
+                }
+            } catch (IOException e) {
+                throw new CMSException("data processing exception: " + e.getMessage(), e);
+            }
+        }
+        for (SignerInfoGenerator signerInfoGenerator : this.signerGens) {
+            SignerInfo signerInfoGenerate = signerInfoGenerator.generate(contentType);
+            linkedHashSet.add(signerInfoGenerate.getDigestAlgorithm());
+            aSN1EncodableVector.add(signerInfoGenerate);
+            byte[] calculatedDigest = signerInfoGenerator.getCalculatedDigest();
+            if (calculatedDigest != null) {
+                this.digests.put(signerInfoGenerate.getDigestAlgorithm().getAlgorithm().getId(), calculatedDigest);
+            }
+        }
+        if (this.certs.size() != 0) {
+            if (this.isDefiniteLength) {
+                aSN1SetCreateBerSetFromList = CMSUtils.createDlSetFromList(this.certs);
+            } else {
+                aSN1SetCreateBerSetFromList = CMSUtils.createBerSetFromList(this.certs);
+            }
+            aSN1Set = aSN1SetCreateBerSetFromList;
+        } else {
+            aSN1Set = null;
+        }
+        if (this.crls.size() != 0) {
+            if (this.isDefiniteLength) {
+                aSN1SetCreateBerSetFromList2 = CMSUtils.createDlSetFromList(this.crls);
+            } else {
+                aSN1SetCreateBerSetFromList2 = CMSUtils.createBerSetFromList(this.crls);
+            }
+        }
+        return new CMSSignedData(cMSTypedData, new ContentInfo(CMSObjectIdentifiers.signedData, new SignedData(CMSUtils.convertToDlSet(linkedHashSet), new ContentInfo(contentType, bEROctetString), aSN1Set, aSN1SetCreateBerSetFromList2, new DERSet(aSN1EncodableVector))));
     }
 
     public SignerInformationStore generateCounterSigners(SignerInformation signerInformation) throws CMSException {

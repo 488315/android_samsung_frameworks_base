@@ -3,7 +3,6 @@ package com.samsung.android.sdk.scs.ai.visual.c2pa;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Parameters {
     private final List<Author> author;
@@ -98,15 +97,15 @@ public final class Parameters {
 
     public int hashCode() {
         Ingredient ingredient = this.ingredient;
-        int hashCode = (ingredient == null ? 0 : ingredient.hashCode()) * 31;
+        int iHashCode = (ingredient == null ? 0 : ingredient.hashCode()) * 31;
         String str = this.type;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.version;
-        int hashCode3 = (hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.value;
-        int hashCode4 = (hashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
         List<Author> list = this.author;
-        return hashCode4 + (list != null ? list.hashCode() : 0);
+        return iHashCode4 + (list != null ? list.hashCode() : 0);
     }
 
     public String toString() {

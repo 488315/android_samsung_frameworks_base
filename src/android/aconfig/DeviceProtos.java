@@ -38,11 +38,11 @@ public class DeviceProtos {
     }
 
     public static List<String> parsedFlagsProtoPaths() {
-        File[] listFiles;
+        File[] fileArrListFiles;
         ArrayList arrayList = new ArrayList(Arrays.asList(PATHS));
         File file = new File(APEX_DIR);
-        if (file.isDirectory() && (listFiles = file.listFiles()) != null) {
-            for (File file2 : listFiles) {
+        if (file.isDirectory() && (fileArrListFiles = file.listFiles()) != null) {
+            for (File file2 : fileArrListFiles) {
                 if (!file2.getAbsolutePath().contains("@")) {
                     File file3 = new File(file2 + APEX_ACONFIG_PATH_SUFFIX);
                     if (file3.exists()) {

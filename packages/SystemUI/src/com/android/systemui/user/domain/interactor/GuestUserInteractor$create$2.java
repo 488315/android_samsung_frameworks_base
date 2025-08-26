@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class GuestUserInteractor$create$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $dismissDialog;
@@ -42,12 +41,12 @@ final class GuestUserInteractor$create$2 extends SuspendLambda implements Functi
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            this.$showDialog.mo779invoke(new ShowDialogRequestModel.ShowUserCreationDialog(true));
+            this.$showDialog.mo781invoke(new ShowDialogRequestModel.ShowUserCreationDialog(true));
             GuestUserInteractor guestUserInteractor = this.this$0;
             this.label = 1;
             int i2 = GuestUserInteractor.$r8$clinit;
@@ -62,13 +61,13 @@ final class GuestUserInteractor$create$2 extends SuspendLambda implements Functi
             }
             ResultKt.throwOnFailure(obj);
         }
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         this.$dismissDialog.invoke();
-        if (intValue != -10000) {
+        if (iIntValue != -10000) {
             this.this$0.uiEventLogger.log(QSUserSwitcherEvent.QS_USER_GUEST_ADD);
         } else {
             Toast.makeText(this.this$0.applicationContext, R.string.add_guest_failed, 0).show();
         }
-        return new Integer(intValue);
+        return new Integer(iIntValue);
     }
 }

@@ -18,43 +18,43 @@ public class SemQrBitmapFactory {
     private static final String TAG = "SemQrBitmapFactory";
 
     public static Bitmap decodeByteArray(byte[] bArr, int i, int i2, Options options) {
-        Bitmap decodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, i, i2, options);
-        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || decodeByteArray != null) {
-            return decodeByteArray;
+        Bitmap bitmapDecodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, i, i2, options);
+        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || bitmapDecodeByteArray != null) {
+            return bitmapDecodeByteArray;
         }
-        Bitmap decodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, i, i2, options);
+        Bitmap bitmapDecodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, i, i2, options);
         if (options.outWidth <= 0 && options.outHeight <= 0) {
-            return decodeByteArray2;
+            return bitmapDecodeByteArray2;
         }
         options.outMimeType = "image/dng";
-        return decodeByteArray2;
+        return bitmapDecodeByteArray2;
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, Rect rect, Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, Rect rect, Options options) throws IOException {
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return null;
         }
         try {
-            int available = inputStream.available();
-            if (available <= 0) {
+            int iAvailable = inputStream.available();
+            if (iAvailable <= 0) {
                 Log.e(TAG, "inpustream open fail");
                 return null;
             }
-            byte[] bArr = new byte[available];
+            byte[] bArr = new byte[iAvailable];
             if (inputStream.read(bArr) == -1) {
                 return null;
             }
-            Bitmap decodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, available, options);
-            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && decodeByteArray == null) {
-                Bitmap decodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, 0, available, options);
+            Bitmap bitmapDecodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, iAvailable, options);
+            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && bitmapDecodeByteArray == null) {
+                Bitmap bitmapDecodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, 0, iAvailable, options);
                 if (options.outWidth <= 0 && options.outHeight <= 0) {
-                    return decodeByteArray2;
+                    return bitmapDecodeByteArray2;
                 }
                 options.outMimeType = "image/dng";
-                return decodeByteArray2;
+                return bitmapDecodeByteArray2;
             }
-            return decodeByteArray;
+            return bitmapDecodeByteArray;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -64,31 +64,31 @@ public class SemQrBitmapFactory {
         }
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, Options options) throws IOException {
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return null;
         }
         try {
-            int available = inputStream.available();
-            if (available <= 0) {
+            int iAvailable = inputStream.available();
+            if (iAvailable <= 0) {
                 Log.e(TAG, "inpustream open fail");
                 return null;
             }
-            byte[] bArr = new byte[available];
+            byte[] bArr = new byte[iAvailable];
             if (inputStream.read(bArr) == -1) {
                 return null;
             }
-            Bitmap decodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, available, options);
-            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && decodeByteArray == null) {
-                Bitmap decodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, 0, available, options);
+            Bitmap bitmapDecodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, iAvailable, options);
+            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && bitmapDecodeByteArray == null) {
+                Bitmap bitmapDecodeByteArray2 = SemQuramDngBitmap.decodeByteArray(bArr, 0, iAvailable, options);
                 if (options.outWidth <= 0 && options.outHeight <= 0) {
-                    return decodeByteArray2;
+                    return bitmapDecodeByteArray2;
                 }
                 options.outMimeType = "image/dng";
-                return decodeByteArray2;
+                return bitmapDecodeByteArray2;
             }
-            return decodeByteArray;
+            return bitmapDecodeByteArray;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -98,30 +98,30 @@ public class SemQrBitmapFactory {
         }
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, Options options) throws IOException {
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return null;
         }
         try {
-            int available = inputStream.available();
-            if (available <= 0) {
+            int iAvailable = inputStream.available();
+            if (iAvailable <= 0) {
                 Log.e(TAG, "inpustream open fail");
                 return null;
             }
-            byte[] bArr = new byte[available];
+            byte[] bArr = new byte[iAvailable];
             if (inputStream.read(bArr) == -1) {
                 return null;
             }
-            Bitmap decodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, available, i, i2, options);
-            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && decodeByteArray == null) {
-                decodeByteArray = SemQuramDngBitmap.decodeByteArray(bArr, 0, available, i, i2, options);
+            Bitmap bitmapDecodeByteArray = SemQuramBitmapFactory.decodeByteArray(bArr, 0, iAvailable, i, i2, options);
+            if ((!options.inJustDecodeBounds || (options.outWidth <= 0 && options.outHeight <= 0)) && bitmapDecodeByteArray == null) {
+                bitmapDecodeByteArray = SemQuramDngBitmap.decodeByteArray(bArr, 0, iAvailable, i, i2, options);
                 if (options.outWidth <= 0 && options.outHeight <= 0) {
-                    return decodeByteArray;
+                    return bitmapDecodeByteArray;
                 }
                 options.outMimeType = "image/dng";
             }
-            return decodeByteArray;
+            return bitmapDecodeByteArray;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -132,17 +132,17 @@ public class SemQrBitmapFactory {
     }
 
     public static Bitmap decodeFile(String str, Options options) {
-        Bitmap decodeFile = SemQuramBitmapFactory.decodeFile(str, options);
-        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || decodeFile != null) {
-            return decodeFile;
+        Bitmap bitmapDecodeFile = SemQuramBitmapFactory.decodeFile(str, options);
+        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || bitmapDecodeFile != null) {
+            return bitmapDecodeFile;
         }
         try {
-            Bitmap decodeFile2 = SemQuramDngBitmap.decodeFile(str, options);
+            Bitmap bitmapDecodeFile2 = SemQuramDngBitmap.decodeFile(str, options);
             if (options.outWidth <= 0 && options.outHeight <= 0) {
-                return decodeFile2;
+                return bitmapDecodeFile2;
             }
             options.outMimeType = "image/dng";
-            return decodeFile2;
+            return bitmapDecodeFile2;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -150,9 +150,9 @@ public class SemQrBitmapFactory {
     }
 
     public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor) {
-        Bitmap decodeFileDescriptor = SemQuramBitmapFactory.decodeFileDescriptor(fileDescriptor);
-        if (decodeFileDescriptor != null) {
-            return decodeFileDescriptor;
+        Bitmap bitmapDecodeFileDescriptor = SemQuramBitmapFactory.decodeFileDescriptor(fileDescriptor);
+        if (bitmapDecodeFileDescriptor != null) {
+            return bitmapDecodeFileDescriptor;
         }
         try {
             return SemQuramDngBitmap.decodeFileDescriptor(fileDescriptor);
@@ -163,9 +163,9 @@ public class SemQrBitmapFactory {
     }
 
     public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, Rect rect, Options options) {
-        Bitmap decodeFileDescriptor = SemQuramBitmapFactory.decodeFileDescriptor(fileDescriptor, rect, options);
-        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || decodeFileDescriptor != null) {
-            return decodeFileDescriptor;
+        Bitmap bitmapDecodeFileDescriptor = SemQuramBitmapFactory.decodeFileDescriptor(fileDescriptor, rect, options);
+        if ((options.inJustDecodeBounds && (options.outWidth > 0 || options.outHeight > 0)) || bitmapDecodeFileDescriptor != null) {
+            return bitmapDecodeFileDescriptor;
         }
         try {
             return SemQuramDngBitmap.decodeFileDescriptor(fileDescriptor, rect, options);

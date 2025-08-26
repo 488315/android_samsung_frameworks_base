@@ -590,6 +590,7 @@
     <string name="call_notification_screening_text">着信をスクリーニング中</string>
     <string name="camera_restrict">カメラの使用は、セキュリティポリシーによって制限されています。</string>
     <string name="can_not_install_app">アプリをインストールできません。アプリは%s用に最適化されていません。</string>
+    <string name="can_not_open_searcle_on_the_external_display">接続した画面で[かこって検索]を起動できません。</string>
     <string name="can_not_open_searcle_on_the_lockscreen">[かこって検索]をロック画面で起動することはできません。</string>
     <string name="cannot_open_app_concentration_mode">アプリの起動不可</string>
     <string name="capability_desc_canCaptureFingerprintGestures">デバイスの指紋認証センサーで行われた操作をキャプチャできます。</string>
@@ -671,6 +672,7 @@
     <string name="common_secure_boot_nwlock_notification_text">このSIMカードには対応していません。</string>
     <string name="common_secure_boot_nwlock_notification_title">無効なSIMカードを挿入</string>
     <string name="compat_restart_education_text">このアプリが正しく表示されない場合は、一度終了してから再度起動してください。</string>
+    <string name="compat_restart_menu_education_text">このアプリが正しく表示されない場合は、[その他]メニューからアプリを再起動してください。</string>
     <string name="concurrent_display_notification_active_content">%1$sは 2 画面でコンテンツを表示しています</string>
     <string name="concurrent_display_notification_active_title">デュアル スクリーン: ON</string>
     <string name="concurrent_display_notification_name">デュアル スクリーン</string>
@@ -2917,7 +2919,7 @@
     <string name="satellite_notification_manual_title">衛星通信メッセージを使用しますか？</string>
     <string name="satellite_notification_open_message">メッセージ アプリを開く</string>
     <string name="satellite_notification_summary">モバイル ネットワークや Wi-Fi ネットワークを使わずにメッセージを送受信できます</string>
-    <string name="satellite_notification_summary_with_data">衛星経由でのメッセージの送受信とデータの使用（上限あり）が可能です</string>
+    <string name="satellite_notification_summary_with_data">衛星経由でメッセージを送受信したり、一部のアプリを使用したりできます</string>
     <string name="satellite_notification_title">衛星に自動接続しました</string>
     <string name="satellite_sos_available_notification_summary">モバイル ネットワークや Wi-Fi ネットワークがなくても、緊急サービスにメッセージを送信できます。Google メッセージがデフォルトのメッセージ アプリに設定されている必要があります。</string>
     <string name="satellite_sos_available_notification_title">衛星 SOS を利用できるようになりました</string>

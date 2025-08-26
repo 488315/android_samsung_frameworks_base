@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Parcelable;
@@ -43,7 +44,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExpandableNotificationRowDragController {
     public final Context mContext;
@@ -51,7 +51,7 @@ public class ExpandableNotificationRowDragController {
     public final NotificationPanelLogger mNotificationPanelLogger;
     public final ShadeController mShadeController;
 
-    public ExpandableNotificationRowDragController(Context context, HeadsUpManager headsUpManager, ShadeController shadeController, NotificationPanelLogger notificationPanelLogger) {
+    public ExpandableNotificationRowDragController(Context context, HeadsUpManager headsUpManager, ShadeController shadeController, NotificationPanelLogger notificationPanelLogger) throws Resources.NotFoundException {
         this.mContext = context;
         this.mHeadsUpManager = headsUpManager;
         this.mShadeController = shadeController;
@@ -69,7 +69,7 @@ public class ExpandableNotificationRowDragController {
     /* JADX WARN: Type inference failed for: r3v6, types: [android.graphics.drawable.Drawable] */
     /* JADX WARN: Type inference failed for: r3v7, types: [android.graphics.drawable.Drawable] */
     /* JADX WARN: Type inference failed for: r9v1, types: [android.content.pm.PackageManager] */
-    public void startDragAndDrop(View view) {
+    public void startDragAndDrop(View view) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ExpandableNotificationRow expandableNotificationRow = view instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) view : null;
         int i = NotificationBundleUi.$r8$clinit;
         StatusBarNotification statusBarNotification = expandableNotificationRow.getEntryLegacy().mSbn;
@@ -100,12 +100,12 @@ public class ExpandableNotificationRowDragController {
             Log.d("ExpandableNotificationRowDragController", "can not find package with : " + packageName);
             packageName = packageManager.getDefaultActivityIcon();
         }
-        Bitmap createBitmap = Bitmap.createBitmap(packageName.getIntrinsicWidth(), packageName.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(packageName.getIntrinsicWidth(), packageName.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         packageName.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         packageName.draw(canvas);
         ImageView imageView = new ImageView(this.mContext);
-        imageView.setImageBitmap(createBitmap);
+        imageView.setImageBitmap(bitmapCreateBitmap);
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.drag_and_drop_icon_size);
         imageView.layout(0, 0, dimensionPixelSize, dimensionPixelSize);
         ClipDescription clipDescription = new ClipDescription("Drag And Drop", new String[]{"application/vnd.android.activity"});
@@ -121,7 +121,7 @@ public class ExpandableNotificationRowDragController {
             public final boolean onDrag(View view2, DragEvent dragEvent) {
                 ExpandableNotificationRow expandableNotificationRow2;
                 NotificationClicker.AnonymousClass1 anonymousClass1;
-                ExpandableNotificationRowDragController expandableNotificationRowDragController = ExpandableNotificationRowDragController.this;
+                ExpandableNotificationRowDragController expandableNotificationRowDragController = this.f$0;
                 int action = dragEvent.getAction();
                 if (action != 1) {
                     if (action != 4) {
@@ -130,10 +130,10 @@ public class ExpandableNotificationRowDragController {
                     if (!dragEvent.getResult()) {
                         final SurfaceControl dragSurface = dragEvent.getDragSurface();
                         final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-                        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                        ofFloat.setDuration(200L);
-                        ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-                        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowDragController$$ExternalSyntheticLambda1
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                        valueAnimatorOfFloat.setDuration(200L);
+                        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+                        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowDragController$$ExternalSyntheticLambda1
                             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                                 SurfaceControl surfaceControl = dragSurface;
@@ -144,7 +144,7 @@ public class ExpandableNotificationRowDragController {
                                 }
                             }
                         });
-                        ofFloat.addListener(new AnimatorListenerAdapter(expandableNotificationRowDragController, dragSurface, transaction) { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowDragController.1
+                        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter(expandableNotificationRowDragController, dragSurface, transaction) { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowDragController.1
                             public boolean mCanceled = false;
                             public final /* synthetic */ SurfaceControl val$dragSurface;
                             public final /* synthetic */ SurfaceControl.Transaction val$tx;
@@ -173,7 +173,7 @@ public class ExpandableNotificationRowDragController {
                                 }
                             }
                         });
-                        ofFloat.start();
+                        valueAnimatorOfFloat.start();
                     } else if ((view2 instanceof ExpandableNotificationRow) && (anonymousClass1 = (expandableNotificationRow2 = (ExpandableNotificationRow) view2).mOnDragSuccessListener) != null) {
                         int i2 = NotificationBundleUi.$r8$clinit;
                         NotificationEntry entryLegacy = expandableNotificationRow2.getEntryLegacy();
@@ -189,12 +189,12 @@ public class ExpandableNotificationRowDragController {
             int i2 = NotificationBundleUi.$r8$clinit;
             NotificationEntry entryLegacy = expandableNotificationRow.getEntryLegacy();
             ((NotificationPanelLoggerImpl) this.mNotificationPanelLogger).getClass();
-            List<NotificationEntry> singletonList = Collections.singletonList(entryLegacy);
+            List<NotificationEntry> listSingletonList = Collections.singletonList(entryLegacy);
             Notifications$NotificationList notifications$NotificationList = new Notifications$NotificationList();
-            if (singletonList != null) {
-                Notifications$Notification[] notifications$NotificationArr = new Notifications$Notification[singletonList.size()];
+            if (listSingletonList != null) {
+                Notifications$Notification[] notifications$NotificationArr = new Notifications$Notification[listSingletonList.size()];
                 int i3 = 0;
-                for (NotificationEntry notificationEntry : singletonList) {
+                for (NotificationEntry notificationEntry : listSingletonList) {
                     StatusBarNotification statusBarNotification2 = notificationEntry.mSbn;
                     if (statusBarNotification2 != null) {
                         Notifications$Notification notifications$Notification = new Notifications$Notification();

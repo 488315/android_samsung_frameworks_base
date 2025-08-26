@@ -34,12 +34,12 @@ public class SemFragmentedBackgroundMusic extends SemBackgroundMusic {
     @Override // com.samsung.android.media.SemBackgroundMusic
     public Parcel writeToParcel(String str) {
         addSections();
-        Parcel writeToParcel = super.writeToParcel(str);
-        writeToParcel.writeInt(1);
-        writeToParcel.writeInt(this.mBodyCycle);
-        writeToParcel.writeInt(this.mLastIndex);
-        writeToParcel.writeInt(this.mEndOutro ? 1 : 0);
-        return writeToParcel;
+        Parcel parcelWriteToParcel = super.writeToParcel(str);
+        parcelWriteToParcel.writeInt(1);
+        parcelWriteToParcel.writeInt(this.mBodyCycle);
+        parcelWriteToParcel.writeInt(this.mLastIndex);
+        parcelWriteToParcel.writeInt(this.mEndOutro ? 1 : 0);
+        return parcelWriteToParcel;
     }
 
     public void setIntro(FileDescriptor fileDescriptor, int i, int i2) {

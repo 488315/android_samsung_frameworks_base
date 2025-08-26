@@ -3,7 +3,6 @@ package gov.nist.core;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringTokenizer {
     public final String buffer;
@@ -37,7 +36,7 @@ public class StringTokenizer {
         this.ptr += i;
     }
 
-    public final char getNextChar() {
+    public final char getNextChar() throws ParseException {
         int i = this.ptr;
         int i2 = this.bufferLen;
         String str = this.buffer;
@@ -48,14 +47,14 @@ public class StringTokenizer {
         return str.charAt(i);
     }
 
-    public final String getNextToken(char c) {
+    public final String getNextToken(char c) throws ParseException {
         int i = this.ptr;
         while (true) {
-            char lookAhead = lookAhead(0);
-            if (lookAhead == c) {
+            char cLookAhead = lookAhead(0);
+            if (cLookAhead == c) {
                 return this.buffer.substring(i, this.ptr);
             }
-            if (lookAhead == 0) {
+            if (cLookAhead == 0) {
                 throw new ParseException("EOL reached", 0);
             }
             consume(1);

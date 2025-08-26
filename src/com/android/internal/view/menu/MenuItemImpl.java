@@ -583,9 +583,9 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
         if (actionProvider == null) {
             return null;
         }
-        View onCreateActionView = actionProvider.onCreateActionView(this);
-        this.mActionView = onCreateActionView;
-        return onCreateActionView;
+        View viewOnCreateActionView = actionProvider.onCreateActionView(this);
+        this.mActionView = viewOnCreateActionView;
+        return viewOnCreateActionView;
     }
 
     @Override // android.view.MenuItem

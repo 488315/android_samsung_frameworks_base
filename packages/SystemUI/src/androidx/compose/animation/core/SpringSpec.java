@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SpringSpec<T> implements FiniteAnimationSpec<T> {
     public final float dampingRatio;
@@ -33,7 +32,7 @@ public final class SpringSpec<T> implements FiniteAnimationSpec<T> {
     @Override // androidx.compose.animation.core.AnimationSpec
     public final VectorizedAnimationSpec vectorize(TwoWayConverter twoWayConverter) {
         Object obj = this.visibilityThreshold;
-        return new VectorizedSpringSpec(this.dampingRatio, this.stiffness, obj == null ? null : (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(obj));
+        return new VectorizedSpringSpec(this.dampingRatio, this.stiffness, obj == null ? null : (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(obj));
     }
 
     public SpringSpec(float f, float f2, T t) {
@@ -49,6 +48,6 @@ public final class SpringSpec<T> implements FiniteAnimationSpec<T> {
     @Override // androidx.compose.animation.core.FiniteAnimationSpec, androidx.compose.animation.core.AnimationSpec
     public final VectorizedFiniteAnimationSpec vectorize(TwoWayConverter twoWayConverter) {
         Object obj = this.visibilityThreshold;
-        return new VectorizedSpringSpec(this.dampingRatio, this.stiffness, obj == null ? null : (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(obj));
+        return new VectorizedSpringSpec(this.dampingRatio, this.stiffness, obj == null ? null : (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(obj));
     }
 }

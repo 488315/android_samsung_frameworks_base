@@ -16,13 +16,11 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromDreamingTransitionInteractor$listenForDreamingToPrimaryBouncer$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ FromDreamingTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$listenForDreamingToPrimaryBouncer$1$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -62,23 +60,23 @@ final class FromDreamingTransitionInteractor$listenForDreamingToPrimaryBouncer$1
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FromDreamingTransitionInteractor fromDreamingTransitionInteractor = this.this$0;
-            Flow sample = FlowKt.sample(fromDreamingTransitionInteractor.keyguardInteractor.primaryBouncerShowing, fromDreamingTransitionInteractor.transitionInteractor.startedKeyguardTransitionStep, AnonymousClass3.INSTANCE);
+            Flow flowSample = FlowKt.sample(fromDreamingTransitionInteractor.keyguardInteractor.primaryBouncerShowing, fromDreamingTransitionInteractor.transitionInteractor.startedKeyguardTransitionStep, AnonymousClass3.INSTANCE);
             final FromDreamingTransitionInteractor fromDreamingTransitionInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$listenForDreamingToPrimaryBouncer$1.4
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Pair pair = (Pair) obj2;
-                    boolean booleanValue = ((Boolean) pair.component1()).booleanValue();
+                    boolean zBooleanValue = ((Boolean) pair.component1()).booleanValue();
                     TransitionStep transitionStep = (TransitionStep) pair.component2();
-                    if (!booleanValue || transitionStep.to != KeyguardState.DREAMING) {
+                    if (!zBooleanValue || transitionStep.to != KeyguardState.DREAMING) {
                         return Unit.INSTANCE;
                     }
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromDreamingTransitionInteractor.this, KeyguardState.PRIMARY_BOUNCER, null, null, null, continuation, 14);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromDreamingTransitionInteractor2, KeyguardState.PRIMARY_BOUNCER, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (sample.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -80,9 +80,9 @@ public interface IUdfpsOverlayController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUdfpsOverlayController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUdfpsOverlayController)) {
-                return (IUdfpsOverlayController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUdfpsOverlayController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUdfpsOverlayController)) {
+                return (IUdfpsOverlayController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -122,40 +122,40 @@ public interface IUdfpsOverlayController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IUdfpsOverlayControllerCallback asInterface = IUdfpsOverlayControllerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallbackAsInterface = IUdfpsOverlayControllerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    showUdfpsOverlay(readLong, readInt, readInt2, asInterface);
+                    showUdfpsOverlay(j, i3, i4, iUdfpsOverlayControllerCallbackAsInterface);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hideUdfpsOverlay(readInt3);
+                    hideUdfpsOverlay(i5);
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAcquired(readInt4, readInt5);
+                    onAcquired(i6, i7);
                     return true;
                 case 4:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEnrollmentProgress(readInt6, readInt7);
+                    onEnrollmentProgress(i8, i9);
                     return true;
                 case 5:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEnrollmentHelp(readInt8);
+                    onEnrollmentHelp(i10);
                     return true;
                 case 6:
-                    int readInt9 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setDebugMessage(readInt9, readString);
+                    setDebugMessage(i11, string);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -180,79 +180,79 @@ public interface IUdfpsOverlayController extends IInterface {
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void showUdfpsOverlay(long j, int i, int i2, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iUdfpsOverlayControllerCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iUdfpsOverlayControllerCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void hideUdfpsOverlay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void onAcquired(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void onEnrollmentProgress(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void onEnrollmentHelp(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
             public void setDebugMessage(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

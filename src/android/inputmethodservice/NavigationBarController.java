@@ -1,10 +1,11 @@
 package android.inputmethodservice;
 
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
+import android.graphics.Region;
 import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.NavigationBarController;
 import android.inputmethodservice.navigationbar.NavigationBarFrame;
 import android.inputmethodservice.navigationbar.NavigationBarView;
 import android.view.LayoutInflater;
@@ -170,9 +171,7 @@ final class NavigationBarController {
                     this.mNavigationBarFrame.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: android.inputmethodservice.NavigationBarController$Impl$$ExternalSyntheticLambda2
                         @Override // android.view.View.OnApplyWindowInsetsListener
                         public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                            WindowInsets lambda$installNavigationBarFrameIfNecessary$0;
-                            lambda$installNavigationBarFrameIfNecessary$0 = NavigationBarController.Impl.this.lambda$installNavigationBarFrameIfNecessary$0(view, windowInsets);
-                            return lambda$installNavigationBarFrameIfNecessary$0;
+                            return this.f$0.lambda$installNavigationBarFrameIfNecessary$0(view, windowInsets);
                         }
                     });
                 }
@@ -180,11 +179,11 @@ final class NavigationBarController {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ WindowInsets lambda$installNavigationBarFrameIfNecessary$0(View view, WindowInsets windowInsets) {
+        public /* synthetic */ WindowInsets lambda$installNavigationBarFrameIfNecessary$0(View view, WindowInsets windowInsets) throws Resources.NotFoundException {
             if (this.mNavigationBarFrame != null) {
-                boolean isVisible = windowInsets.isVisible(WindowInsets.Type.captionBar());
-                this.mNavigationBarFrame.setVisibility(isVisible ? 0 : 8);
-                checkCustomImeSwitcherButtonRequestedVisible(this.mShouldShowImeSwitcherWhenImeIsShown, this.mImeDrawsImeNavBar, !isVisible);
+                boolean zIsVisible = windowInsets.isVisible(WindowInsets.Type.captionBar());
+                this.mNavigationBarFrame.setVisibility(zIsVisible ? 0 : 8);
+                checkCustomImeSwitcherButtonRequestedVisible(this.mShouldShowImeSwitcherWhenImeIsShown, this.mImeDrawsImeNavBar, !zIsVisible);
             }
             return view.onApplyWindowInsets(windowInsets);
         }
@@ -222,19 +221,87 @@ final class NavigationBarController {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:18:0x00eb  */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x00f3  */
+        /* JADX WARN: Removed duplicated region for block: B:28:0x00d0  */
+        /* JADX WARN: Removed duplicated region for block: B:31:0x00eb  */
+        /* JADX WARN: Removed duplicated region for block: B:32:0x00f3  */
         @Override // android.inputmethodservice.NavigationBarController.Callback
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void updateTouchableInsets(android.inputmethodservice.InputMethodService.Insets r12, android.view.ViewTreeObserver.InternalInsetsInfo r13) {
-            /*
-                Method dump skipped, instructions count: 297
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.inputmethodservice.NavigationBarController.Impl.updateTouchableInsets(android.inputmethodservice.InputMethodService$Insets, android.view.ViewTreeObserver$InternalInsetsInfo):void");
+        public void updateTouchableInsets(InputMethodService.Insets insets, ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
+            Insets systemInsets;
+            Region region;
+            if (!this.mImeDrawsImeNavBar || this.mNavigationBarFrame == null || (systemInsets = getSystemInsets()) == null) {
+                return;
+            }
+            Window window = this.mService.mWindow.getWindow();
+            View decorView = window.getDecorView();
+            boolean z = false;
+            if (!this.mService.isExtractViewShown()) {
+                FrameLayout frameLayout = this.mService.mInputFrame;
+                int i = insets.touchableInsets;
+                if (i == 0) {
+                    if (frameLayout.getVisibility() == 0) {
+                        frameLayout.getLocationInWindow(this.mTempPos);
+                        Rect rect = this.mTempRect;
+                        int[] iArr = this.mTempPos;
+                        int i2 = iArr[0];
+                        rect.set(i2, iArr[1], frameLayout.getWidth() + i2, this.mTempPos[1] + frameLayout.getHeight());
+                        region = new Region(this.mTempRect);
+                    }
+                    this.mTempRect.set(decorView.getLeft(), decorView.getBottom() - systemInsets.bottom, decorView.getRight(), decorView.getBottom());
+                    if (region != null) {
+                    }
+                    internalInsetsInfo.touchableRegion.set(region);
+                    internalInsetsInfo.setTouchableInsets(3);
+                } else if (i == 1) {
+                    if (frameLayout.getVisibility() == 0) {
+                        frameLayout.getLocationInWindow(this.mTempPos);
+                        this.mTempRect.set(this.mTempPos[0], insets.contentTopInsets, this.mTempPos[0] + frameLayout.getWidth(), this.mTempPos[1] + frameLayout.getHeight());
+                        region = new Region(this.mTempRect);
+                    }
+                    this.mTempRect.set(decorView.getLeft(), decorView.getBottom() - systemInsets.bottom, decorView.getRight(), decorView.getBottom());
+                    if (region != null) {
+                    }
+                    internalInsetsInfo.touchableRegion.set(region);
+                    internalInsetsInfo.setTouchableInsets(3);
+                } else if (i == 2) {
+                    if (frameLayout.getVisibility() == 0) {
+                        frameLayout.getLocationInWindow(this.mTempPos);
+                        this.mTempRect.set(this.mTempPos[0], insets.visibleTopInsets, this.mTempPos[0] + frameLayout.getWidth(), this.mTempPos[1] + frameLayout.getHeight());
+                        region = new Region(this.mTempRect);
+                    }
+                    this.mTempRect.set(decorView.getLeft(), decorView.getBottom() - systemInsets.bottom, decorView.getRight(), decorView.getBottom());
+                    if (region != null) {
+                    }
+                    internalInsetsInfo.touchableRegion.set(region);
+                    internalInsetsInfo.setTouchableInsets(3);
+                } else {
+                    if (i != 3) {
+                        region = null;
+                    } else {
+                        region = new Region();
+                        region.set(insets.touchableRegion);
+                    }
+                    this.mTempRect.set(decorView.getLeft(), decorView.getBottom() - systemInsets.bottom, decorView.getRight(), decorView.getBottom());
+                    if (region != null) {
+                        region = new Region(this.mTempRect);
+                    } else {
+                        region.union(this.mTempRect);
+                    }
+                    internalInsetsInfo.touchableRegion.set(region);
+                    internalInsetsInfo.setTouchableInsets(3);
+                }
+            }
+            if (decorView instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup) decorView;
+                View navigationBarBackgroundView = window.getNavigationBarBackgroundView();
+                z = navigationBarBackgroundView != null && viewGroup.indexOfChild(navigationBarBackgroundView) > viewGroup.indexOfChild(this.mNavigationBarFrame);
+            }
+            boolean zEquals = Objects.equals(systemInsets, this.mLastInsets);
+            if (z || !zEquals) {
+                scheduleRelayout();
+            }
         }
 
         private void scheduleRelayout() {
@@ -242,7 +309,7 @@ final class NavigationBarController {
             navigationBarFrame.post(new Runnable() { // from class: android.inputmethodservice.NavigationBarController$Impl$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NavigationBarController.Impl.this.lambda$scheduleRelayout$1(navigationBarFrame);
+                    this.f$0.lambda$scheduleRelayout$1(navigationBarFrame);
                 }
             });
         }
@@ -250,11 +317,11 @@ final class NavigationBarController {
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$scheduleRelayout$1(NavigationBarFrame navigationBarFrame) {
             Window window;
-            View peekDecorView;
-            if (this.mDestroyed || !navigationBarFrame.isAttachedToWindow() || (window = this.mService.mWindow.getWindow()) == null || (peekDecorView = window.peekDecorView()) == null || !(peekDecorView instanceof ViewGroup)) {
+            View viewPeekDecorView;
+            if (this.mDestroyed || !navigationBarFrame.isAttachedToWindow() || (window = this.mService.mWindow.getWindow()) == null || (viewPeekDecorView = window.peekDecorView()) == null || !(viewPeekDecorView instanceof ViewGroup)) {
                 return;
             }
-            ViewGroup viewGroup = (ViewGroup) peekDecorView;
+            ViewGroup viewGroup = (ViewGroup) viewPeekDecorView;
             Insets systemInsets = getSystemInsets();
             if (!Objects.equals(systemInsets, this.mLastInsets)) {
                 navigationBarFrame.setLayoutParams(new FrameLayout.LayoutParams(-1, systemInsets.bottom, 80));
@@ -318,7 +385,7 @@ final class NavigationBarController {
         }
 
         @Override // android.inputmethodservice.NavigationBarController.Callback
-        public void onNavButtonFlagsChanged(int i) {
+        public void onNavButtonFlagsChanged(int i) throws Resources.NotFoundException {
             NavigationBarView navigationBarView;
             if (this.mDestroyed) {
                 return;
@@ -350,17 +417,17 @@ final class NavigationBarController {
             if (this.mNavigationBarFrame == null) {
                 return;
             }
-            float calculateTargetDarkIntensity = calculateTargetDarkIntensity(i, this.mDrawLegacyNavigationBarBackground);
+            float fCalculateTargetDarkIntensity = calculateTargetDarkIntensity(i, this.mDrawLegacyNavigationBarBackground);
             ValueAnimator valueAnimator = this.mTintAnimator;
             if (valueAnimator != null) {
                 valueAnimator.cancel();
             }
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mDarkIntensity, calculateTargetDarkIntensity);
-            this.mTintAnimator = ofFloat;
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.inputmethodservice.NavigationBarController$Impl$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mDarkIntensity, fCalculateTargetDarkIntensity);
+            this.mTintAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.inputmethodservice.NavigationBarController$Impl$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    NavigationBarController.Impl.this.lambda$onSystemBarAppearanceChanged$2(valueAnimator2);
+                    this.f$0.lambda$onSystemBarAppearanceChanged$2(valueAnimator2);
                 }
             });
             this.mTintAnimator.setDuration(1700L);
@@ -429,7 +496,7 @@ final class NavigationBarController {
             return navigationBarFrame != null && navigationBarFrame.getVisibility() == 0;
         }
 
-        private void checkCustomImeSwitcherButtonRequestedVisible(boolean z, boolean z2, boolean z3) {
+        private void checkCustomImeSwitcherButtonRequestedVisible(boolean z, boolean z2, boolean z3) throws Resources.NotFoundException {
             if (Flags.imeSwitcherRevampApi()) {
                 if (!z2) {
                     z3 = this.mService.getResources().getBoolean(R.bool.config_hideNavBarForKeyboard);

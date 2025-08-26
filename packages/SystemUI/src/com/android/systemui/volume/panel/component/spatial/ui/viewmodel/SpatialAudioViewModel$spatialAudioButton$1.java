@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SpatialAudioViewModel$spatialAudioButton$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -41,7 +40,7 @@ final class SpatialAudioViewModel$spatialAudioButton$1 extends SuspendLambda imp
         }
         ResultKt.throwOnFailure(obj);
         SpatialAudioEnabledModel spatialAudioEnabledModel = (SpatialAudioEnabledModel) this.L$0;
-        ButtonViewModel access$toViewModel = SpatialAudioViewModel.access$toViewModel(this.this$0, spatialAudioEnabledModel, spatialAudioEnabledModel instanceof SpatialAudioEnabledModel.SpatialAudioEnabled, ((SpatialAudioAvailabilityModel) this.L$1) instanceof SpatialAudioAvailabilityModel.HeadTracking);
-        return new ButtonViewModel(access$toViewModel.icon, this.this$0.context.getString(R.string.volume_panel_spatial_audio_title), access$toViewModel.isActive);
+        ButtonViewModel buttonViewModelAccess$toViewModel = SpatialAudioViewModel.access$toViewModel(this.this$0, spatialAudioEnabledModel, spatialAudioEnabledModel instanceof SpatialAudioEnabledModel.SpatialAudioEnabled, ((SpatialAudioAvailabilityModel) this.L$1) instanceof SpatialAudioAvailabilityModel.HeadTracking);
+        return new ButtonViewModel(buttonViewModelAccess$toViewModel.icon, this.this$0.context.getString(R.string.volume_panel_spatial_audio_title), buttonViewModelAccess$toViewModel.isActive);
     }
 }

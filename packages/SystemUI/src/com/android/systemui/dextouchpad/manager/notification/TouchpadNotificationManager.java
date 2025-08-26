@@ -17,7 +17,6 @@ import com.android.systemui.dextouchpad.util.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TouchpadNotificationManager {
     public static TouchpadNotificationManager sInstance;
@@ -27,7 +26,6 @@ public class TouchpadNotificationManager {
     public final Map mActiveNotifications = new HashMap();
     public boolean mDMReceiverRegistered = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dextouchpad.manager.notification.TouchpadNotificationManager$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$dextouchpad$manager$notification$NotificationType;
@@ -79,11 +77,11 @@ public class TouchpadNotificationManager {
     }
 
     public final void remove(NotificationType notificationType) {
-        boolean containsKey = ((HashMap) this.mActiveNotifications).containsKey(notificationType);
+        boolean zContainsKey = ((HashMap) this.mActiveNotifications).containsKey(notificationType);
         if (Features.DEBUG) {
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("remove, hasNotification=", "DexTouchpadNotificationManager", containsKey);
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("remove, hasNotification=", "DexTouchpadNotificationManager", zContainsKey);
         }
-        if (containsKey) {
+        if (zContainsKey) {
             this.mNotificationManager.cancel(((Integer) ((HashMap) this.mActiveNotifications).get(notificationType)).intValue());
             ((HashMap) this.mActiveNotifications).remove(notificationType);
         }
@@ -95,11 +93,11 @@ public class TouchpadNotificationManager {
             Log.d("DexTouchpadNotificationManager", "show, Not Desktop mode");
             return;
         }
-        boolean containsKey = ((HashMap) this.mActiveNotifications).containsKey(notificationType);
+        boolean zContainsKey = ((HashMap) this.mActiveNotifications).containsKey(notificationType);
         if (Features.DEBUG) {
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("show, hasNotification=", "DexTouchpadNotificationManager", containsKey);
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("show, hasNotification=", "DexTouchpadNotificationManager", zContainsKey);
         }
-        if (containsKey) {
+        if (zContainsKey) {
             remove(notificationType);
         }
         int i = AnonymousClass1.$SwitchMap$com$android$systemui$dextouchpad$manager$notification$NotificationType[notificationType.ordinal()];
@@ -118,19 +116,19 @@ public class TouchpadNotificationManager {
         int i4 = Settings.Global.getInt(this.mContext.getContentResolver(), "SPEN_INPUT_MODE_DEX", 0);
         PendingIntent pendingIntent = Utils.getPendingIntent(this.mContext, "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED");
         PendingIntent pendingIntent2 = Utils.getPendingIntent(this.mContext, "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED");
-        Notification.Action build = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.dex_spen_tips), pendingIntent).build();
-        Notification.Action build2 = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.dex_spen_change_mode), pendingIntent2).build();
+        Notification.Action actionBuild = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.dex_spen_tips), pendingIntent).build();
+        Notification.Action actionBuild2 = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.dex_spen_change_mode), pendingIntent2).build();
         Notification.Builder defaultBuilder = getDefaultBuilder();
         if (i4 == 0) {
             string = this.mContext.getString(R.string.dex_spen_pen_mode);
-            defaultBuilder.addAction(build);
-            defaultBuilder.addAction(build2);
+            defaultBuilder.addAction(actionBuild);
+            defaultBuilder.addAction(actionBuild2);
         } else if (1 != i4) {
             ClockEventController$$ExternalSyntheticOutline0.m(i4, "Invalid SPen mode,", "DexTouchpadNotificationManager");
             return;
         } else {
             string = this.mContext.getString(R.string.dex_spen_mouse_mode);
-            defaultBuilder.addAction(build2);
+            defaultBuilder.addAction(actionBuild2);
         }
         String string4 = this.mContext.getString(R.string.dex_spen_title, string);
         defaultBuilder.setContentTitle(string4).setTicker(string4);

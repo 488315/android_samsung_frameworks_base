@@ -27,7 +27,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate {
     public static boolean fontSizeHasBeenChangedFromTile;
@@ -49,7 +48,6 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
     public TextView title;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -93,7 +91,7 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
                 delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$changeFontSize$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FontScalingDialogDelegate fontScalingDialogDelegate2 = FontScalingDialogDelegate.this;
+                        FontScalingDialogDelegate fontScalingDialogDelegate2 = this.this$0;
                         UserTrackerImpl userTrackerImpl = (UserTrackerImpl) fontScalingDialogDelegate2.userTracker;
                         int userId = userTrackerImpl.getUserId();
                         SecureSettings secureSettings = fontScalingDialogDelegate2.secureSettings;
@@ -120,7 +118,7 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
             fontScalingDialogDelegate.cancelUpdateFontScaleRunnable = delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$updateFontScaleDelayed$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final FontScalingDialogDelegate fontScalingDialogDelegate2 = FontScalingDialogDelegate.this;
+                    final FontScalingDialogDelegate fontScalingDialogDelegate2 = this.this$0;
                     if (fontScalingDialogDelegate2.systemSettings.putStringForUser("font_scale", fontScalingDialogDelegate2.strEntryValues[fontScalingDialogDelegate2.lastProgress.get()], ((UserTrackerImpl) fontScalingDialogDelegate2.userTracker).getUserId())) {
                         return;
                     }
@@ -131,7 +129,7 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
                     textView.post(new Runnable() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$updateFontScale$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Button button2 = FontScalingDialogDelegate.this.doneButton;
+                            Button button2 = fontScalingDialogDelegate2.doneButton;
                             if (button2 == null) {
                                 button2 = null;
                             }
@@ -159,14 +157,14 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
 
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
     public final void onConfigurationChanged(Dialog dialog, Configuration configuration) {
-        int diff = configuration.diff(this.configuration);
+        int iDiff = configuration.diff(this.configuration);
         this.configuration.setTo(configuration);
-        if ((diff & 1073741824) != 0) {
+        if ((iDiff & 1073741824) != 0) {
             TextView textView = this.title;
             if (textView == null) {
                 textView = null;
             }
-            textView.post(new Runnable() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$onConfigurationChanged$1
+            textView.post(new Runnable() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate.onConfigurationChanged.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     TextView textView2 = FontScalingDialogDelegate.this.title;
@@ -187,7 +185,7 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
     }
 
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
-    public final void onCreate(Dialog dialog, Bundle bundle) {
+    public final void onCreate(Dialog dialog, Bundle bundle) throws NumberFormatException {
         int length;
         final SystemUIDialog systemUIDialog = (SystemUIDialog) dialog;
         this.title = (TextView) systemUIDialog.requireViewById(android.R.id.autofill_dataset_header);
@@ -217,7 +215,7 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
         SystemSettings systemSettings = this.systemSettings;
         float floatForUser = systemSettings.getFloatForUser("font_scale", 1.0f, userId);
         AtomicInteger atomicInteger = this.lastProgress;
-        float parseFloat = Float.parseFloat(strArr[0]);
+        float f = Float.parseFloat(strArr[0]);
         int length3 = strArr.length;
         int i2 = 1;
         while (true) {
@@ -225,13 +223,13 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
                 length = strArr.length - 1;
                 break;
             }
-            float parseFloat2 = Float.parseFloat(strArr[i2]);
-            if (floatForUser < DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(parseFloat2, parseFloat, 0.5f, parseFloat)) {
+            float f2 = Float.parseFloat(strArr[i2]);
+            if (floatForUser < DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f, 0.5f, f)) {
                 length = i2 - 1;
                 break;
             } else {
                 i2++;
-                parseFloat = parseFloat2;
+                f = f2;
             }
         }
         atomicInteger.set(length);
@@ -245,12 +243,12 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
         if (seekBarWithIconButtonsView4 == null) {
             seekBarWithIconButtonsView4 = null;
         }
-        seekBarWithIconButtonsView4.mSeekBarListener.mOnSeekBarChangeListener = new FontScalingDialogDelegate$onCreate$1(this);
+        seekBarWithIconButtonsView4.mSeekBarListener.mOnSeekBarChangeListener = new C07851();
         Button button = this.doneButton;
-        (button != null ? button : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$onCreate$2
+        (button != null ? button : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate.onCreate.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SystemUIDialog.this.dismiss();
+                systemUIDialog.dismiss();
             }
         });
         systemSettings.registerContentObserverSync("font_scale", this.fontSizeObserver);
@@ -264,5 +262,48 @@ public final class FontScalingDialogDelegate implements SystemUIDialog.Delegate 
         }
         this.cancelUpdateFontScaleRunnable = null;
         this.systemSettings.unregisterContentObserverSync(this.fontSizeObserver);
+    }
+
+    /* renamed from: com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$onCreate$1, reason: invalid class name and case insensitive filesystem */
+    public final class C07851 implements SeekBarWithIconButtonsView.OnSeekBarWithIconButtonsChangeListener {
+        public C07851() {
+        }
+
+        @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        public final void onProgressChanged(SeekBar seekBar, int i, boolean z) {
+            FontScalingDialogDelegate fontScalingDialogDelegate = FontScalingDialogDelegate.this;
+            fontScalingDialogDelegate.getClass();
+            Configuration configuration = new Configuration(fontScalingDialogDelegate.configuration);
+            configuration.fontScale = Float.parseFloat(fontScalingDialogDelegate.strEntryValues[i]);
+            Context contextCreateConfigurationContext = fontScalingDialogDelegate.context.createConfigurationContext(configuration);
+            contextCreateConfigurationContext.getTheme().setTo(fontScalingDialogDelegate.context.getTheme());
+            TextView textView = fontScalingDialogDelegate.title;
+            if (textView == null) {
+                textView = null;
+            }
+            textView.setTextSize(0, contextCreateConfigurationContext.getResources().getDimension(R.dimen.dialog_title_text_size));
+        }
+
+        public final void onUserInteractionFinalized(SeekBar seekBar, int i) {
+            if (i == 1) {
+                FontScalingDialogDelegate fontScalingDialogDelegate = FontScalingDialogDelegate.this;
+                int progress = seekBar.getProgress();
+                FontScalingDialogDelegate.this.getClass();
+                FontScalingDialogDelegate.access$changeFontSize(fontScalingDialogDelegate, progress, 300L);
+                return;
+            }
+            FontScalingDialogDelegate fontScalingDialogDelegate2 = FontScalingDialogDelegate.this;
+            int progress2 = seekBar.getProgress();
+            FontScalingDialogDelegate.this.getClass();
+            FontScalingDialogDelegate.access$changeFontSize(fontScalingDialogDelegate2, progress2, 100L);
+        }
+
+        @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        public final void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        public final void onStopTrackingTouch(SeekBar seekBar) {
+        }
     }
 }

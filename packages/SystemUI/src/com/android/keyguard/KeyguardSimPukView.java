@@ -1,11 +1,11 @@
 package com.android.keyguard;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import com.android.systemui.R;
 import com.android.systemui.util.PluralMessageFormaterKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSimPukView extends KeyguardSimInputView {
     public KeyguardSimPukView(Context context) {
@@ -22,7 +22,7 @@ public class KeyguardSimPukView extends KeyguardSimInputView {
         return 0;
     }
 
-    public final String getPukPasswordErrorMessage(int i, boolean z, boolean z2) {
+    public final String getPukPasswordErrorMessage(int i, boolean z, boolean z2) throws Resources.NotFoundException {
         String string;
         if (i == 0) {
             string = getContext().getString(R.string.kg_password_wrong_puk_code_dead);

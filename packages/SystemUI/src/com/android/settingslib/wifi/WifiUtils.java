@@ -19,7 +19,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WifiUtils {
     public static final Companion Companion = new Companion(null);
@@ -29,14 +28,13 @@ public class WifiUtils {
     public static final int[] WIFI_PIE = {R.drawable.list_selector_background_disabled, R.drawable.list_selector_background_disabled_light, R.drawable.list_selector_background_focus, R.drawable.list_selector_background_focused, R.drawable.list_selector_background_focused_light};
     public static final int[] NO_INTERNET_WIFI_PIE = {com.android.systemui.R.drawable.ic_no_internet_wifi_signal_0, com.android.systemui.R.drawable.ic_no_internet_wifi_signal_1, com.android.systemui.R.drawable.ic_no_internet_wifi_signal_2, com.android.systemui.R.drawable.ic_no_internet_wifi_signal_3, com.android.systemui.R.drawable.ic_no_internet_wifi_signal_4};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public final String getVisibilityStatus(AccessPoint accessPoint) {
-            String str;
+            String bssid;
             int i;
             StringBuilder sb;
             int i2;
@@ -48,12 +46,12 @@ public class WifiUtils {
             StringBuilder sb4 = new StringBuilder();
             StringBuilder sb5 = new StringBuilder();
             if (!accessPoint.isActive() || wifiInfo == null) {
-                str = null;
+                bssid = null;
             } else {
-                str = wifiInfo.getBSSID();
-                if (str != null) {
+                bssid = wifiInfo.getBSSID();
+                if (bssid != null) {
                     sb2.append(" ");
-                    sb2.append(str);
+                    sb2.append(bssid);
                 }
                 sb2.append(" standard = ");
                 sb2.append(wifiInfo.getWifiStandard());
@@ -71,8 +69,8 @@ public class WifiUtils {
                 sb2.append(String.format("%.1f ", Arrays.copyOf(new Object[]{Double.valueOf(wifiInfo.getLostTxPacketsPerSecond())}, 1)));
                 sb2.append(String.format("rx=%.1f", Arrays.copyOf(new Object[]{Double.valueOf(wifiInfo.getSuccessfulRxPacketsPerSecond())}, 1)));
             }
-            String str2 = str;
-            long elapsedRealtime = SystemClock.elapsedRealtime();
+            String str = bssid;
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
             ArraySet arraySet = new ArraySet();
             synchronized (accessPoint.mLock) {
                 arraySet.addAll((Collection) accessPoint.mScanResults);
@@ -111,7 +109,7 @@ public class WifiUtils {
                                     i = i14;
                                 }
                                 if (i8 <= 4) {
-                                    sb5.append(verboseScanResultSummary(accessPoint, scanResult, str2, elapsedRealtime));
+                                    sb5.append(verboseScanResultSummary(accessPoint, scanResult, str, jElapsedRealtime));
                                 }
                             }
                         } else {
@@ -123,7 +121,7 @@ public class WifiUtils {
                             if (i6 <= 4) {
                                 sb = sb4;
                                 i2 = i13;
-                                sb3.append(verboseScanResultSummary(accessPoint, scanResult, str2, elapsedRealtime));
+                                sb3.append(verboseScanResultSummary(accessPoint, scanResult, str, jElapsedRealtime));
                             } else {
                                 sb = sb4;
                                 i2 = i13;
@@ -135,7 +133,7 @@ public class WifiUtils {
                         int i17 = i16 > i9 ? i16 : i9;
                         if (i7 <= 4) {
                             i3 = i12;
-                            sb4.append(verboseScanResultSummary(accessPoint, scanResult, str2, elapsedRealtime));
+                            sb4.append(verboseScanResultSummary(accessPoint, scanResult, str, jElapsedRealtime));
                         } else {
                             i3 = i12;
                         }
@@ -203,10 +201,10 @@ public class WifiUtils {
             sb.append(",");
             sb.append(scanResult.level);
             TimestampedScoredNetwork timestampedScoredNetwork = (TimestampedScoredNetwork) accessPoint.mScoredNetworkCache.get(scanResult.BSSID);
-            int calculateBadge = timestampedScoredNetwork == null ? 0 : timestampedScoredNetwork.mScore.calculateBadge(scanResult.level);
-            if (calculateBadge != 0) {
+            int iCalculateBadge = timestampedScoredNetwork == null ? 0 : timestampedScoredNetwork.mScore.calculateBadge(scanResult.level);
+            if (iCalculateBadge != 0) {
                 sb.append(",");
-                sb.append(AccessPoint.getSpeedLabel(calculateBadge, accessPoint.mContext));
+                sb.append(AccessPoint.getSpeedLabel(iCalculateBadge, accessPoint.mContext));
             }
             int i = ((int) (j - (scanResult.timestamp / 1000))) / 1000;
             sb.append(",");
@@ -228,7 +226,6 @@ public class WifiUtils {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InternetIconInjector {
         public final Context context;
 

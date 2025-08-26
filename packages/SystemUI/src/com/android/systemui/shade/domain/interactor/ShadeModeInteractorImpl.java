@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeModeInteractorImpl implements ShadeModeInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -24,7 +23,6 @@ public final class ShadeModeInteractorImpl implements ShadeModeInteractor {
     public final ShadeRepository repository;
     public final ReadonlyStateFlow shadeMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,8 +42,8 @@ public final class ShadeModeInteractorImpl implements ShadeModeInteractor {
         this.isDualShadeEnabled = flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         ReadonlyStateFlow readonlyStateFlow = ((ShadeRepositoryImpl) shadeRepository).isShadeLayoutWide;
         this.isShadeLayoutWide = readonlyStateFlow;
-        Flow logDiffsForTable = DiffableKt.logDiffsForTable(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, readonlyStateFlow, new ShadeModeInteractorImpl$shadeMode$1(this)), tableLogBuffer, "", ((Boolean) ((ShadeRepositoryImpl) shadeRepository).isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? ShadeMode.Split.INSTANCE : ShadeMode.Single.INSTANCE);
+        Flow flowLogDiffsForTable = DiffableKt.logDiffsForTable(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, readonlyStateFlow, new ShadeModeInteractorImpl$shadeMode$1(this)), tableLogBuffer, "", ((Boolean) ((ShadeRepositoryImpl) shadeRepository).isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? ShadeMode.Split.INSTANCE : ShadeMode.Single.INSTANCE);
         SharingStarted.Companion.getClass();
-        this.shadeMode = FlowKt.stateIn(logDiffsForTable, coroutineScope, SharingStarted.Companion.Eagerly, ((Boolean) ((ShadeRepositoryImpl) shadeRepository).isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? ShadeMode.Split.INSTANCE : ShadeMode.Single.INSTANCE);
+        this.shadeMode = FlowKt.stateIn(flowLogDiffsForTable, coroutineScope, SharingStarted.Companion.Eagerly, ((Boolean) ((ShadeRepositoryImpl) shadeRepository).isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? ShadeMode.Split.INSTANCE : ShadeMode.Single.INSTANCE);
     }
 }

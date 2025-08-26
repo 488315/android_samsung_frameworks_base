@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.util.Log;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BBCConfigurationType extends KnoxConfigurationType {
     public static final Parcelable.Creator<BBCConfigurationType> CREATOR = new Parcelable.Creator<BBCConfigurationType>() { // from class: com.samsung.android.knox.container.BBCConfigurationType.1

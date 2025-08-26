@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalViewModel$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -37,22 +36,22 @@ public final class CommunalViewModel$special$$inlined$flatMapLatest$2 extends Su
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             if (((Boolean) this.L$1).booleanValue()) {
-                combine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.this$0.communalInteractor.tutorialContent);
+                flowCombine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.this$0.communalInteractor.tutorialContent);
             } else {
                 CommunalViewModel communalViewModel = this.this$0;
                 ChannelFlowTransformLatest channelFlowTransformLatest = communalViewModel.ongoingContent;
                 CommunalInteractor communalInteractor = communalViewModel.communalInteractor;
-                combine = FlowKt.combine(channelFlowTransformLatest, communalInteractor.widgetContent, (Flow) communalInteractor.ctaTileContent$delegate.getValue(), new CommunalViewModel$latestCommunalContent$1$1(null));
+                flowCombine = FlowKt.combine(channelFlowTransformLatest, communalInteractor.widgetContent, (Flow) communalInteractor.ctaTileContent$delegate.getValue(), new CommunalViewModel$latestCommunalContent$1$1(null));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

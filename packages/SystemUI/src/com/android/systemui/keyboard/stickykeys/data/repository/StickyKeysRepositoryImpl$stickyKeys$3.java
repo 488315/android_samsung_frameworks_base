@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class StickyKeysRepositoryImpl$stickyKeys$3 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -52,9 +51,9 @@ final class StickyKeysRepositoryImpl$stickyKeys$3 extends SuspendLambda implemen
         LogLevel logLevel = LogLevel.VERBOSE;
         StickyKeysLogger$$ExternalSyntheticLambda0 stickyKeysLogger$$ExternalSyntheticLambda0 = new StickyKeysLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = stickyKeysLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("stickyKeys", logLevel, stickyKeysLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = linkedHashMap.toString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("stickyKeys", logLevel, stickyKeysLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = linkedHashMap.toString();
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

@@ -7,6 +7,7 @@ import android.app.IUiAutomationConnection;
 import android.companion.virtual.VirtualDeviceManager;
 import android.content.Context;
 import android.graphics.Rect;
+import android.hardware.input.InputManagerGlobal;
 import android.media.MediaMetrics;
 import android.os.Binder;
 import android.os.IBinder;
@@ -19,6 +20,8 @@ import android.permission.IPermissionManager;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.InputEvent;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.SurfaceControl;
 import android.view.WindowAnimationFrameStats;
 import android.view.WindowContentFrameStats;
@@ -82,173 +85,48 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0023, code lost:
-    
-        if (r0.getAction() == 1) goto L25;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0026, code lost:
-    
-        r2 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0043, code lost:
-    
-        r4 = android.os.Binder.clearCallingIdentity();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0047, code lost:
-    
-        if (r3 == false) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x004e, code lost:
-    
-        r0 = android.hardware.input.InputManagerGlobal.getInstance();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0052, code lost:
-    
-        if (r8 == false) goto L31;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0054, code lost:
-    
-        r8 = 2;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0057, code lost:
-    
-        r7 = r0.injectInputEvent(r7, r8);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x005b, code lost:
-    
-        if (r2 == false) goto L35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x005d, code lost:
-    
-        r6.mWindowManager.syncInputTransactions(r9);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0068, code lost:
-    
-        r6 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0069, code lost:
-    
-        r6.rethrowFromSystemServer();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x006f, code lost:
-    
-        return false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0065, code lost:
-    
-        return r7;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0056, code lost:
-    
-        r8 = 0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0049, code lost:
-    
-        r6.mWindowManager.syncInputTransactions(r9);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0066, code lost:
-    
-        r6 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0070, code lost:
-    
-        android.os.Binder.restoreCallingIdentity(r4);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0073, code lost:
-    
-        throw r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x0041, code lost:
-    
-        if (r0.getAction() == 1) goto L25;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0026 A[PHI: r3
+      0x0026: PHI (r3v7 boolean) = (r3v2 boolean), (r3v10 boolean) binds: [B:24:0x0041, B:13:0x0023] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.app.IUiAutomationConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean injectInputEvent(android.view.InputEvent r7, boolean r8, boolean r9) {
-        /*
-            r6 = this;
-            java.lang.Object r0 = r6.mLock
-            monitor-enter(r0)
-            r6.throwIfCalledByNotTrustedUidLocked()     // Catch: java.lang.Throwable -> L74
-            r6.throwIfShutdownLocked()     // Catch: java.lang.Throwable -> L74
-            r6.throwIfNotConnectedLocked()     // Catch: java.lang.Throwable -> L74
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L74
-            boolean r0 = r7 instanceof android.view.KeyEvent
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L28
-            r0 = r7
-            android.view.KeyEvent r0 = (android.view.KeyEvent) r0
-            int r3 = r0.getAction()
-            if (r3 != 0) goto L1e
-            r3 = r2
-            goto L1f
-        L1e:
-            r3 = r1
-        L1f:
-            int r0 = r0.getAction()
-            if (r0 != r2) goto L26
-            goto L43
-        L26:
-            r2 = r1
-            goto L43
-        L28:
-            r0 = r7
-            android.view.MotionEvent r0 = (android.view.MotionEvent) r0
-            int r3 = r0.getAction()
-            if (r3 == 0) goto L3c
-            r3 = 8194(0x2002, float:1.1482E-41)
-            boolean r3 = r0.isFromSource(r3)
-            if (r3 == 0) goto L3a
-            goto L3c
-        L3a:
-            r3 = r1
-            goto L3d
-        L3c:
-            r3 = r2
-        L3d:
-            int r0 = r0.getAction()
-            if (r0 != r2) goto L26
-        L43:
-            long r4 = android.os.Binder.clearCallingIdentity()
-            if (r3 == 0) goto L4e
-            android.view.IWindowManager r0 = r6.mWindowManager     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-            r0.syncInputTransactions(r9)     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-        L4e:
-            android.hardware.input.InputManagerGlobal r0 = android.hardware.input.InputManagerGlobal.getInstance()     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-            if (r8 == 0) goto L56
-            r8 = 2
-            goto L57
-        L56:
-            r8 = r1
-        L57:
-            boolean r7 = r0.injectInputEvent(r7, r8)     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-            if (r2 == 0) goto L62
-            android.view.IWindowManager r6 = r6.mWindowManager     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-            r6.syncInputTransactions(r9)     // Catch: java.lang.Throwable -> L66 android.os.RemoteException -> L68
-        L62:
-            android.os.Binder.restoreCallingIdentity(r4)
-            return r7
-        L66:
-            r6 = move-exception
-            goto L70
-        L68:
-            r6 = move-exception
-            r6.rethrowFromSystemServer()     // Catch: java.lang.Throwable -> L66
-            android.os.Binder.restoreCallingIdentity(r4)
-            return r1
-        L70:
-            android.os.Binder.restoreCallingIdentity(r4)
-            throw r6
-        L74:
-            r6 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L74
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.UiAutomationConnection.injectInputEvent(android.view.InputEvent, boolean, boolean):boolean");
+    public boolean injectInputEvent(InputEvent inputEvent, boolean z, boolean z2) {
+        boolean z3;
+        synchronized (this.mLock) {
+            throwIfCalledByNotTrustedUidLocked();
+            throwIfShutdownLocked();
+            throwIfNotConnectedLocked();
+        }
+        boolean z4 = true;
+        if (inputEvent instanceof KeyEvent) {
+            KeyEvent keyEvent = (KeyEvent) inputEvent;
+            z3 = keyEvent.getAction() == 0;
+            if (keyEvent.getAction() != 1) {
+                z4 = false;
+            }
+        } else {
+            MotionEvent motionEvent = (MotionEvent) inputEvent;
+            z3 = motionEvent.getAction() == 0 || motionEvent.isFromSource(8194);
+            if (motionEvent.getAction() != 1) {
+            }
+        }
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
+        try {
+            if (z3) {
+                this.mWindowManager.syncInputTransactions(z2);
+            }
+            boolean zInjectInputEvent = InputManagerGlobal.getInstance().injectInputEvent(inputEvent, z ? 2 : 0);
+            if (z4) {
+                this.mWindowManager.syncInputTransactions(z2);
+            }
+            return zInjectInputEvent;
+        } catch (RemoteException e) {
+            e.rethrowFromSystemServer();
+            return false;
+        } finally {
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
+        }
     }
 
     @Override // android.app.IUiAutomationConnection
@@ -281,20 +159,20 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (i == -2) {
                 this.mWindowManager.thawRotation("UiAutomationConnection#setRotation");
             } else {
                 this.mWindowManager.freezeRotation(i, "UiAutomationConnection#setRotation");
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return true;
         } catch (RemoteException unused) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return false;
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -306,17 +184,17 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 this.mWindowManager.captureDisplay(i, new ScreenCapture.CaptureArgs.Builder().setSourceCrop(rect).build(), screenCaptureListener);
             } catch (RemoteException e) {
                 e.rethrowAsRuntimeException();
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return true;
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -328,15 +206,15 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (ScreenCapture.captureLayers(new ScreenCapture.LayerCaptureArgs.Builder(surfaceControl).setChildrenOnly(false).build(), screenCaptureListener) != 0) {
                 return false;
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return true;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -348,16 +226,16 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUserId = UserHandle.getCallingUserId();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             IBinder windowToken = this.mAccessibilityManager.getWindowToken(i, callingUserId);
             if (windowToken != null) {
                 return this.mWindowManager.clearWindowContentFrameStats(windowToken);
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return false;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -369,16 +247,16 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUserId = UserHandle.getCallingUserId();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             IBinder windowToken = this.mAccessibilityManager.getWindowToken(i, callingUserId);
             if (windowToken != null) {
                 return this.mWindowManager.getWindowContentFrameStats(windowToken);
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -389,11 +267,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SurfaceControl.clearAnimationFrameStats();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -404,13 +282,13 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowAnimationFrameStats windowAnimationFrameStats = new WindowAnimationFrameStats();
             SurfaceControl.getAnimationFrameStats(windowAnimationFrameStats);
             return windowAnimationFrameStats;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -421,11 +299,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mPermissionManager.grantRuntimePermission(str, str2, VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT, i);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -436,11 +314,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mPermissionManager.revokeRuntimePermission(str, str2, VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT, i, null);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -451,11 +329,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.startDelegateShellPermissionIdentity(i, strArr);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -466,11 +344,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.stopDelegateShellPermissionIdentity();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -481,11 +359,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfShutdownLocked();
             throwIfNotConnectedLocked();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return this.mActivityManager.getDelegatedShellPermissions();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -497,11 +375,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUid = Binder.getCallingUid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.addOverridePermissionState(callingUid, i, str, i2);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -513,11 +391,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUid = Binder.getCallingUid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.removeOverridePermissionState(callingUid, i, str);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -529,11 +407,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUid = Binder.getCallingUid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.clearOverridePermissionStates(callingUid, i);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -545,11 +423,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             throwIfNotConnectedLocked();
         }
         int callingUid = Binder.getCallingUid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mActivityManager.clearAllOverridePermissionStates(callingUid);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -567,11 +445,11 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
             try {
                 byte[] bArr = new byte[8192];
                 while (true) {
-                    int read = this.readFrom.read(bArr);
-                    if (read < 0) {
+                    int i = this.readFrom.read(bArr);
+                    if (i < 0) {
                         return;
                     }
-                    this.writeTo.write(bArr, 0, read);
+                    this.writeTo.write(bArr, 0, i);
                     this.writeTo.flush();
                 }
             } catch (IOException unused) {
@@ -636,7 +514,7 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
         }
         new Thread(new Runnable(this) { // from class: android.app.UiAutomationConnection.1
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws InterruptedException {
                 try {
                     Thread thread7 = thread2;
                     if (thread7 != null) {
@@ -691,7 +569,7 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
 
     private void registerUiTestAutomationServiceLocked(IAccessibilityServiceClient iAccessibilityServiceClient, int i, int i2) {
         int i3;
-        IAccessibilityManager asInterface = IAccessibilityManager.Stub.asInterface(ServiceManager.getService(Context.ACCESSIBILITY_SERVICE));
+        IAccessibilityManager iAccessibilityManagerAsInterface = IAccessibilityManager.Stub.asInterface(ServiceManager.getService(Context.ACCESSIBILITY_SERVICE));
         AccessibilityServiceInfo accessibilityServiceInfo = new AccessibilityServiceInfo();
         accessibilityServiceInfo.eventTypes = -1;
         accessibilityServiceInfo.feedbackType = 16;
@@ -702,16 +580,16 @@ public final class UiAutomationConnection extends IUiAutomationConnection.Stub {
         }
         try {
             i3 = i;
-            try {
-                asInterface.registerUiTestAutomationService(this.mToken, iAccessibilityServiceClient, accessibilityServiceInfo, i3, i2);
-                this.mClient = iAccessibilityServiceClient;
-            } catch (RemoteException e) {
-                e = e;
-                throw new IllegalStateException("Error while registering UiTestAutomationService for user " + i3 + MediaMetrics.SEPARATOR, e);
-            }
+        } catch (RemoteException e) {
+            e = e;
+            i3 = i;
+        }
+        try {
+            iAccessibilityManagerAsInterface.registerUiTestAutomationService(this.mToken, iAccessibilityServiceClient, accessibilityServiceInfo, i3, i2);
+            this.mClient = iAccessibilityServiceClient;
         } catch (RemoteException e2) {
             e = e2;
-            i3 = i;
+            throw new IllegalStateException("Error while registering UiTestAutomationService for user " + i3 + MediaMetrics.SEPARATOR, e);
         }
     }
 

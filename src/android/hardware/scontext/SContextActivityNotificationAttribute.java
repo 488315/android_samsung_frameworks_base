@@ -21,7 +21,18 @@ public class SContextActivityNotificationAttribute extends SContextAttribute {
         setAttribute();
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x003b, code lost:
+    
+        android.util.Log.e(android.hardware.scontext.SContextActivityNotificationAttribute.TAG, "The activity status is wrong.");
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0040, code lost:
+    
+        return false;
+     */
     @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean checkAttribute() {
         if (this.mActivityFilter == null) {
             return false;
@@ -46,8 +57,6 @@ public class SContextActivityNotificationAttribute extends SContextAttribute {
             }
             i++;
         }
-        Log.e(TAG, "The activity status is wrong.");
-        return false;
     }
 
     private void setAttribute() {

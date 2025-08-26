@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.coreshims.AutofillIdCompat;
 import androidx.compose.ui.semantics.SemanticsOwner;
 import androidx.compose.ui.spatial.RectManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidAutofillManager extends AutofillManager {
     public final PlatformAutofillManager platformAutofillManager;

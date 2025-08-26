@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class WrapContentNode extends Modifier.Node implements LayoutModifierNode {
     public Function2 alignmentCallback;
@@ -32,16 +31,15 @@ final class WrapContentNode extends Modifier.Node implements LayoutModifierNode 
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo4measure3p2s80s(final MeasureScope measureScope, Measurable measurable, long j) {
-        MeasureResult layout$1;
         Direction direction = this.direction;
         Direction direction2 = Direction.Vertical;
-        int m823getMinWidthimpl = direction != direction2 ? 0 : Constraints.m823getMinWidthimpl(j);
+        int iM825getMinWidthimpl = direction != direction2 ? 0 : Constraints.m825getMinWidthimpl(j);
         Direction direction3 = this.direction;
         Direction direction4 = Direction.Horizontal;
-        final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(ConstraintsKt.Constraints(m823getMinWidthimpl, (this.direction == direction2 || !this.unbounded) ? Constraints.m821getMaxWidthimpl(j) : Integer.MAX_VALUE, direction3 == direction4 ? Constraints.m822getMinHeightimpl(j) : 0, (this.direction == direction4 || !this.unbounded) ? Constraints.m820getMaxHeightimpl(j) : Integer.MAX_VALUE));
-        final int coerceIn = RangesKt___RangesKt.coerceIn(mo608measureBRTryo0.width, Constraints.m823getMinWidthimpl(j), Constraints.m821getMaxWidthimpl(j));
-        final int coerceIn2 = RangesKt___RangesKt.coerceIn(mo608measureBRTryo0.height, Constraints.m822getMinHeightimpl(j), Constraints.m820getMaxHeightimpl(j));
-        layout$1 = measureScope.layout$1(coerceIn, coerceIn2, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.WrapContentNode$measure$1
+        final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(ConstraintsKt.Constraints(iM825getMinWidthimpl, (this.direction == direction2 || !this.unbounded) ? Constraints.m823getMaxWidthimpl(j) : Integer.MAX_VALUE, direction3 == direction4 ? Constraints.m824getMinHeightimpl(j) : 0, (this.direction == direction4 || !this.unbounded) ? Constraints.m822getMaxHeightimpl(j) : Integer.MAX_VALUE));
+        final int iCoerceIn = RangesKt___RangesKt.coerceIn(placeableMo610measureBRTryo0.width, Constraints.m825getMinWidthimpl(j), Constraints.m823getMaxWidthimpl(j));
+        final int iCoerceIn2 = RangesKt___RangesKt.coerceIn(placeableMo610measureBRTryo0.height, Constraints.m824getMinHeightimpl(j), Constraints.m822getMaxHeightimpl(j));
+        return measureScope.layout$1(iCoerceIn, iCoerceIn2, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.WrapContentNode$measure$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -49,14 +47,13 @@ final class WrapContentNode extends Modifier.Node implements LayoutModifierNode 
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Function2 function2 = WrapContentNode.this.alignmentCallback;
-                int i = coerceIn;
-                Placeable placeable = mo608measureBRTryo0;
-                Placeable.PlacementScope.m626place70tqf50$default((Placeable.PlacementScope) obj, mo608measureBRTryo0, ((IntOffset) function2.invoke(IntSize.m859boximpl(((i - placeable.width) << 32) | ((coerceIn2 - placeable.height) & 4294967295L)), measureScope.getLayoutDirection())).packedValue);
+            public final Object mo781invoke(Object obj) {
+                Function2 function2 = this.this$0.alignmentCallback;
+                int i = iCoerceIn;
+                Placeable placeable = placeableMo610measureBRTryo0;
+                Placeable.PlacementScope.m628place70tqf50$default((Placeable.PlacementScope) obj, placeableMo610measureBRTryo0, ((IntOffset) function2.invoke(IntSize.m861boximpl(((i - placeable.width) << 32) | ((iCoerceIn2 - placeable.height) & 4294967295L)), measureScope.getLayoutDirection())).packedValue);
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 }

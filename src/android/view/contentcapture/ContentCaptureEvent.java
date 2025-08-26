@@ -26,35 +26,35 @@ public final class ContentCaptureEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ContentCaptureEvent createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            ContentCaptureEvent contentCaptureEvent = new ContentCaptureEvent(readInt, readInt2, parcel.readLong());
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            ContentCaptureEvent contentCaptureEvent = new ContentCaptureEvent(i, i2, parcel.readLong());
             AutofillId autofillId = (AutofillId) parcel.readParcelable(null, AutofillId.class);
             if (autofillId != null) {
                 contentCaptureEvent.setAutofillId(autofillId);
             }
-            ArrayList<AutofillId> createTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
-            if (createTypedArrayList != null) {
-                contentCaptureEvent.setAutofillIds(createTypedArrayList);
+            ArrayList<AutofillId> arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
+            if (arrayListCreateTypedArrayList != null) {
+                contentCaptureEvent.setAutofillIds(arrayListCreateTypedArrayList);
             }
-            ViewNode readFromParcel = ViewNode.readFromParcel(parcel);
-            if (readFromParcel != null) {
-                contentCaptureEvent.setViewNode(readFromParcel);
+            ViewNode fromParcel = ViewNode.readFromParcel(parcel);
+            if (fromParcel != null) {
+                contentCaptureEvent.setViewNode(fromParcel);
             }
             contentCaptureEvent.setText(parcel.readCharSequence());
-            if (readInt2 == -1 || readInt2 == -2) {
+            if (i2 == -1 || i2 == -2) {
                 contentCaptureEvent.setParentSessionId(parcel.readInt());
             }
-            if (readInt2 == -1 || readInt2 == 6) {
+            if (i2 == -1 || i2 == 6) {
                 contentCaptureEvent.setClientContext((ContentCaptureContext) parcel.readParcelable(null, ContentCaptureContext.class));
             }
-            if (readInt2 == 9) {
+            if (i2 == 9) {
                 contentCaptureEvent.setInsets((Insets) parcel.readParcelable(null, Insets.class));
             }
-            if (readInt2 == 10) {
+            if (i2 == 10) {
                 contentCaptureEvent.setBounds((Rect) parcel.readParcelable(null, Rect.class));
             }
-            if (readInt2 == 3) {
+            if (i2 == 3) {
                 contentCaptureEvent.setComposingIndex(parcel.readInt(), parcel.readInt());
                 contentCaptureEvent.restoreComposingSpan();
                 contentCaptureEvent.setSelectionIndex(parcel.readInt(), parcel.readInt());

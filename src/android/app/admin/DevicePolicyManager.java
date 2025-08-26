@@ -4,7 +4,6 @@ import android.Manifest;
 import android.accounts.Account;
 import android.annotation.SystemApi;
 import android.app.IServiceConnection;
-import android.app.admin.DevicePolicyManager;
 import android.app.admin.IAuditLogEventsCallback;
 import android.app.admin.PreferentialNetworkServiceConfig;
 import android.app.admin.SecurityLog;
@@ -813,57 +812,43 @@ public class DevicePolicyManager {
         this.mGetKeyGuardDisabledFeaturesCache = new IpcDataCache<>(config.child("getKeyguardDisabledFeatures"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda2
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Integer lambda$new$2;
-                lambda$new$2 = DevicePolicyManager.this.lambda$new$2((Pair) obj);
-                return lambda$new$2;
+                return this.f$0.lambda$new$2((Pair) obj);
             }
         });
         this.mHasDeviceOwnerCache = new IpcDataCache<>(config.child("hasDeviceOwner"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda3
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Boolean lambda$new$3;
-                lambda$new$3 = DevicePolicyManager.this.lambda$new$3((Void) obj);
-                return lambda$new$3;
+                return this.f$0.lambda$new$3((Void) obj);
             }
         });
         this.mGetProfileOwnerOrDeviceOwnerSupervisionComponentCache = new IpcDataCache<>(config.child("getProfileOwnerOrDeviceOwnerSupervisionComponent"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda4
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                ComponentName lambda$new$4;
-                lambda$new$4 = DevicePolicyManager.this.lambda$new$4((UserHandle) obj);
-                return lambda$new$4;
+                return this.f$0.lambda$new$4((UserHandle) obj);
             }
         });
         this.mIsOrganizationOwnedDeviceWithManagedProfileCache = new IpcDataCache<>(config.child("isOrganizationOwnedDeviceWithManagedProfile"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda5
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Object lambda$new$5;
-                lambda$new$5 = DevicePolicyManager.this.lambda$new$5(obj);
-                return lambda$new$5;
+                return this.f$0.lambda$new$5(obj);
             }
         });
         this.mGetDeviceOwnerOrganizationNameCache = new IpcDataCache<>(config.child("getDeviceOwnerOrganizationName"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda6
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Object lambda$new$8;
-                lambda$new$8 = DevicePolicyManager.this.lambda$new$8(obj);
-                return lambda$new$8;
+                return this.f$0.lambda$new$8(obj);
             }
         });
         this.mGetOrganizationNameForUserCache = new IpcDataCache<>(config.child("getOrganizationNameForUser"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda7
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                CharSequence lambda$new$9;
-                lambda$new$9 = DevicePolicyManager.this.lambda$new$9((Integer) obj);
-                return lambda$new$9;
+                return this.f$0.lambda$new$9((Integer) obj);
             }
         });
         this.mIsNetworkLoggingEnabledCache = new IpcDataCache<>(config.child("isNetworkLoggingEnabled"), new IpcDataCache.RemoteCall() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda8
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Boolean lambda$new$10;
-                lambda$new$10 = DevicePolicyManager.this.lambda$new$10((ComponentName) obj);
-                return lambda$new$10;
+                return this.f$0.lambda$new$10((ComponentName) obj);
             }
         });
         this.mContext = context;
@@ -1830,7 +1815,7 @@ public class DevicePolicyManager {
                 executor.execute(new Runnable() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DevicePolicyManager.lambda$executeCallback$0(r1, r2, r3);
+                        DevicePolicyManager.lambda$executeCallback$0(th, consumer, bool);
                     }
                 });
             }
@@ -1838,7 +1823,7 @@ public class DevicePolicyManager {
     }
 
     static /* synthetic */ void lambda$executeCallback$0(Throwable th, Consumer consumer, Boolean bool) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 consumer.accept(false);
@@ -1846,7 +1831,7 @@ public class DevicePolicyManager {
                 consumer.accept(bool);
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -1890,8 +1875,8 @@ public class DevicePolicyManager {
             }
             list2 = arrayList;
         }
-        ProxyInfo buildDirectProxy = ProxyInfo.buildDirectProxy(hostName, port, list2);
-        if (port == 0 || TextUtils.isEmpty(hostName) || !buildDirectProxy.isValid()) {
+        ProxyInfo proxyInfoBuildDirectProxy = ProxyInfo.buildDirectProxy(hostName, port, list2);
+        if (port == 0 || TextUtils.isEmpty(hostName) || !proxyInfoBuildDirectProxy.isValid()) {
             throw new IllegalArgumentException();
         }
         return new Pair<>(hostName + ":" + port, TextUtils.join(",", list2));
@@ -2996,9 +2981,9 @@ public class DevicePolicyManager {
             return false;
         }
         try {
-            int myUserId = myUserId();
-            this.mService.setActiveAdmin(componentName, false, myUserId, null);
-            return this.mService.setProfileOwner(componentName, myUserId);
+            int iMyUserId = myUserId();
+            this.mService.setActiveAdmin(componentName, false, iMyUserId, null);
+            return this.mService.setProfileOwner(componentName, iMyUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4067,11 +4052,11 @@ public class DevicePolicyManager {
             return null;
         }
         try {
-            Intent createAdminSupportIntent = iDevicePolicyManager.createAdminSupportIntent(str);
-            if (createAdminSupportIntent != null) {
-                createAdminSupportIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+            Intent intentCreateAdminSupportIntent = iDevicePolicyManager.createAdminSupportIntent(str);
+            if (intentCreateAdminSupportIntent != null) {
+                intentCreateAdminSupportIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
             }
-            return createAdminSupportIntent;
+            return intentCreateAdminSupportIntent;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4324,9 +4309,7 @@ public class DevicePolicyManager {
         return getPreferentialNetworkServiceConfigs().stream().anyMatch(new Predicate() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda9
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isEnabled;
-                isEnabled = ((PreferentialNetworkServiceConfig) obj).isEnabled();
-                return isEnabled;
+                return ((PreferentialNetworkServiceConfig) obj).isEnabled();
             }
         });
     }
@@ -4697,7 +4680,7 @@ public class DevicePolicyManager {
             this.mService.setPermissionGrantState(componentName, this.mContext.getPackageName(), str, str2, i, new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda10
                 @Override // android.os.RemoteCallback.OnResultListener
                 public final void onResult(Bundle bundle) {
-                    completableFuture.complete(Boolean.valueOf(r1 != null));
+                    completableFuture.complete(Boolean.valueOf(bundle != null));
                 }
             }));
             BackgroundThread.getHandler().sendMessageDelayed(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda11
@@ -4934,9 +4917,9 @@ public class DevicePolicyManager {
     public List<SecurityLog.SecurityEvent> retrieveSecurityLogs(ComponentName componentName) {
         throwIfParentInstance("retrieveSecurityLogs");
         try {
-            ParceledListSlice retrieveSecurityLogs = this.mService.retrieveSecurityLogs(componentName, this.mContext.getPackageName());
-            if (retrieveSecurityLogs != null) {
-                return retrieveSecurityLogs.getList();
+            ParceledListSlice parceledListSliceRetrieveSecurityLogs = this.mService.retrieveSecurityLogs(componentName, this.mContext.getPackageName());
+            if (parceledListSliceRetrieveSecurityLogs != null) {
+                return parceledListSliceRetrieveSecurityLogs.getList();
             }
             return null;
         } catch (RemoteException e) {
@@ -5018,9 +5001,9 @@ public class DevicePolicyManager {
     public List<SecurityLog.SecurityEvent> retrievePreRebootSecurityLogs(ComponentName componentName) {
         throwIfParentInstance("retrievePreRebootSecurityLogs");
         try {
-            ParceledListSlice retrievePreRebootSecurityLogs = this.mService.retrievePreRebootSecurityLogs(componentName, this.mContext.getPackageName());
-            if (retrievePreRebootSecurityLogs != null) {
-                return retrievePreRebootSecurityLogs.getList();
+            ParceledListSlice parceledListSliceRetrievePreRebootSecurityLogs = this.mService.retrievePreRebootSecurityLogs(componentName, this.mContext.getPackageName());
+            if (parceledListSliceRetrievePreRebootSecurityLogs != null) {
+                return parceledListSliceRetrievePreRebootSecurityLogs.getList();
             }
             return null;
         } catch (RemoteException e) {
@@ -5391,7 +5374,7 @@ public class DevicePolicyManager {
             executor.execute(new Runnable() { // from class: android.app.admin.DevicePolicyManager$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DevicePolicyManager.OnClearApplicationUserDataListener.this.onApplicationUserDataCleared(str, z);
+                    onClearApplicationUserDataListener.onApplicationUserDataCleared(str, z);
                 }
             });
         }
@@ -5589,21 +5572,21 @@ public class DevicePolicyManager {
             return;
         }
         try {
-            ParcelFileDescriptor openFileDescriptor = this.mContext.getContentResolver().openFileDescriptor(uri, "r");
+            ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor = this.mContext.getContentResolver().openFileDescriptor(uri, "r");
             try {
-                this.mService.installUpdateFromFile(componentName, this.mContext.getPackageName(), openFileDescriptor, new StartInstallingUpdateCallback.Stub() { // from class: android.app.admin.DevicePolicyManager.3
+                this.mService.installUpdateFromFile(componentName, this.mContext.getPackageName(), parcelFileDescriptorOpenFileDescriptor, new StartInstallingUpdateCallback.Stub() { // from class: android.app.admin.DevicePolicyManager.3
                     @Override // android.app.admin.StartInstallingUpdateCallback
                     public void onStartInstallingUpdateError(int i, String str) {
                         DevicePolicyManager.this.executeCallback(i, str, executor, installSystemUpdateCallback);
                     }
                 });
-                if (openFileDescriptor != null) {
-                    openFileDescriptor.close();
+                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                    parcelFileDescriptorOpenFileDescriptor.close();
                 }
             } catch (Throwable th) {
-                if (openFileDescriptor != null) {
+                if (parcelFileDescriptorOpenFileDescriptor != null) {
                     try {
-                        openFileDescriptor.close();
+                        parcelFileDescriptorOpenFileDescriptor.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -5626,7 +5609,7 @@ public class DevicePolicyManager {
         executor.execute(new Runnable() { // from class: android.app.admin.DevicePolicyManager$$ExternalSyntheticLambda12
             @Override // java.lang.Runnable
             public final void run() {
-                DevicePolicyManager.InstallSystemUpdateCallback.this.onInstallUpdateError(i, str);
+                installSystemUpdateCallback.onInstallUpdateError(i, str);
             }
         });
     }

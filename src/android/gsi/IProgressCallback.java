@@ -44,9 +44,9 @@ public interface IProgressCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProgressCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProgressCallback)) {
-                return (IProgressCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProgressCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProgressCallback)) {
+                return (IProgressCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IProgressCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onProgress(readLong, readLong2);
+                onProgress(j, j2);
                 parcel2.writeNoException();
                 return true;
             }
@@ -101,17 +101,17 @@ public interface IProgressCallback extends IInterface {
 
             @Override // android.gsi.IProgressCallback
             public void onProgress(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProgressCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProgressCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

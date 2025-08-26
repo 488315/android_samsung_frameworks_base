@@ -78,9 +78,9 @@ public interface IMbmsGroupCallService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMbmsGroupCallService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsGroupCallService)) {
-                return (IMbmsGroupCallService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMbmsGroupCallService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMbmsGroupCallService)) {
+                return (IMbmsGroupCallService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,42 +119,42 @@ public interface IMbmsGroupCallService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IMbmsGroupCallSessionCallback asInterface = IMbmsGroupCallSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                int readInt = parcel.readInt();
+                IMbmsGroupCallSessionCallback iMbmsGroupCallSessionCallbackAsInterface = IMbmsGroupCallSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int initialize = initialize(asInterface, readInt);
+                int iInitialize = initialize(iMbmsGroupCallSessionCallbackAsInterface, i3);
                 parcel2.writeNoException();
-                parcel2.writeInt(initialize);
+                parcel2.writeInt(iInitialize);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                long readLong = parcel.readLong();
+                int i4 = parcel.readInt();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                stopGroupCall(readInt2, readLong);
+                stopGroupCall(i4, j);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                long readLong2 = parcel.readLong();
+                int i5 = parcel.readInt();
+                long j2 = parcel.readLong();
                 ClassLoader classLoader = getClass().getClassLoader();
-                ArrayList readArrayList = parcel.readArrayList(classLoader);
-                ArrayList readArrayList2 = parcel.readArrayList(classLoader);
+                ArrayList arrayList = parcel.readArrayList(classLoader);
+                ArrayList arrayList2 = parcel.readArrayList(classLoader);
                 parcel.enforceNoDataAvail();
-                updateGroupCall(readInt3, readLong2, readArrayList, readArrayList2);
+                updateGroupCall(i5, j2, arrayList, arrayList2);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt4 = parcel.readInt();
-                long readLong3 = parcel.readLong();
+                int i6 = parcel.readInt();
+                long j3 = parcel.readLong();
                 ClassLoader classLoader2 = getClass().getClassLoader();
-                ArrayList readArrayList3 = parcel.readArrayList(classLoader2);
-                ArrayList readArrayList4 = parcel.readArrayList(classLoader2);
-                IGroupCallCallback asInterface2 = IGroupCallCallback.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList arrayList3 = parcel.readArrayList(classLoader2);
+                ArrayList arrayList4 = parcel.readArrayList(classLoader2);
+                IGroupCallCallback iGroupCallCallbackAsInterface = IGroupCallCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int startGroupCall = startGroupCall(readInt4, readLong3, readArrayList3, readArrayList4, asInterface2);
+                int iStartGroupCall = startGroupCall(i6, j3, arrayList3, arrayList4, iGroupCallCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeInt(startGroupCall);
+                parcel2.writeInt(iStartGroupCall);
             } else if (i == 5) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                dispose(readInt5);
+                dispose(i7);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -180,87 +180,87 @@ public interface IMbmsGroupCallService extends IInterface {
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
             public int initialize(IMbmsGroupCallSessionCallback iMbmsGroupCallSessionCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMbmsGroupCallSessionCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMbmsGroupCallSessionCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
             public void stopGroupCall(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
             public void updateGroupCall(int i, long j, List list, List list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeList(list);
-                    obtain.writeList(list2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeList(list);
+                    parcelObtain.writeList(list2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
             public int startGroupCall(int i, long j, List list, List list2, IGroupCallCallback iGroupCallCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeList(list);
-                    obtain.writeList(list2);
-                    obtain.writeStrongInterface(iGroupCallCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeList(list);
+                    parcelObtain.writeList(list2);
+                    parcelObtain.writeStrongInterface(iGroupCallCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
             public void dispose(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMbmsGroupCallService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

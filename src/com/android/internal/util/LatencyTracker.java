@@ -14,7 +14,7 @@ import android.util.EventLog;
 import android.util.Log;
 import android.util.SparseArray;
 import com.android.internal.os.BackgroundThread;
-import com.android.internal.util.LatencyTracker;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -70,7 +70,7 @@ public class LatencyTracker {
     private final SparseArray<ActionProperties> mActionPropertiesMap = new SparseArray<>();
     private final DeviceConfig.OnPropertiesChangedListener mOnPropertiesChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda2
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-            LatencyTracker.this.updateProperties(properties);
+            this.f$0.updateProperties(properties);
         }
     };
     private boolean mEnabled = DEFAULT_ENABLED;
@@ -121,17 +121,17 @@ public class LatencyTracker {
     }
 
     public void startListeningForLatencyTrackerConfigChanges() {
-        final Application currentApplication = ActivityThread.currentApplication();
-        if (currentApplication == null) {
+        final Application applicationCurrentApplication = ActivityThread.currentApplication();
+        if (applicationCurrentApplication == null) {
             Log.e(TAG, String.format("No application for package: %s. Latency Tracker Disabled", ActivityThread.currentPackageName()));
         } else {
-            if (currentApplication.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) != 0) {
+            if (applicationCurrentApplication.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) != 0) {
                 return;
             }
             BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    LatencyTracker.this.lambda$startListeningForLatencyTrackerConfigChanges$0(currentApplication);
+                    this.f$0.lambda$startListeningForLatencyTrackerConfigChanges$0(applicationCurrentApplication);
                 }
             });
         }
@@ -283,7 +283,7 @@ public class LatencyTracker {
                 session.begin(new Runnable() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        LatencyTracker.this.lambda$onActionStart$1(i);
+                        this.f$0.lambda$onActionStart$1(i);
                     }
                 });
                 this.mSessions.put(i, session);
@@ -326,7 +326,7 @@ public class LatencyTracker {
         }
     }
 
-    public void logAction(int i, int i2) {
+    public void logAction(int i, int i2) throws IOException {
         synchronized (this.mLock) {
             if (isEnabled(i)) {
                 ActionProperties actionProperties = this.mActionPropertiesMap.get(i);
@@ -356,15 +356,15 @@ public class LatencyTracker {
         private long mEndRtc = -1;
 
         Session(int i, String str) {
-            String str2;
+            String nameOfAction;
             this.mAction = i;
             this.mTag = str;
             if (TextUtils.isEmpty(str)) {
-                str2 = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[i]);
+                nameOfAction = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[i]);
             } else {
-                str2 = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[i]) + "::" + str;
+                nameOfAction = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[i]) + "::" + str;
             }
-            this.mName = str2;
+            this.mName = nameOfAction;
         }
 
         String name() {
@@ -381,7 +381,7 @@ public class LatencyTracker {
             this.mTimeoutRunnable = new Runnable() { // from class: com.android.internal.util.LatencyTracker$Session$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    LatencyTracker.Session.this.lambda$begin$0(runnable);
+                    this.f$0.lambda$begin$0(runnable);
                 }
             };
             BackgroundThread.getHandler().postDelayed(this.mTimeoutRunnable, TimeUnit.SECONDS.toMillis(15L));
@@ -466,7 +466,7 @@ public class LatencyTracker {
         }
     }
 
-    public void onTriggerPerfetto(String str) {
+    public void onTriggerPerfetto(String str) throws IOException {
         PerfettoTrigger.trigger(str);
     }
 

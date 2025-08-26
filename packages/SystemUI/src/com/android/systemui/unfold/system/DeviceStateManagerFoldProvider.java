@@ -7,21 +7,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceStateManagerFoldProvider implements FoldProvider {
     public final ConcurrentHashMap callbacks = new ConcurrentHashMap();
     public final Context context;
     public final DeviceStateManager deviceStateManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldStateListener extends DeviceStateManager.FoldStateListener {
         public FoldStateListener(DeviceStateManagerFoldProvider deviceStateManagerFoldProvider, Context context, final FoldProvider.FoldCallback foldCallback) {
             super(context, new Consumer() { // from class: com.android.systemui.unfold.system.DeviceStateManagerFoldProvider.FoldStateListener.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     Boolean bool = (Boolean) obj;
-                    FoldProvider.FoldCallback foldCallback2 = FoldProvider.FoldCallback.this;
+                    FoldProvider.FoldCallback foldCallback2 = foldCallback;
                     bool.getClass();
                     foldCallback2.onFoldUpdated(bool.booleanValue());
                 }

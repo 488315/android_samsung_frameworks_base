@@ -15,7 +15,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalSceneInteractor$transitionState$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -53,19 +52,19 @@ final class CommunalSceneInteractor$transitionState$1 extends SuspendLambda impl
         boolean z = observableTransitionState instanceof ObservableTransitionState.Transition;
         LogBuffer logBuffer = communalSceneLogger.logBuffer;
         if (z) {
-            LogMessage obtain = logBuffer.obtain("CommunalSceneLogger", LogLevel.INFO, new CommunalSceneLogger$$ExternalSyntheticLambda0(1), null);
+            LogMessage logMessageObtain = logBuffer.obtain("CommunalSceneLogger", LogLevel.INFO, new CommunalSceneLogger$$ExternalSyntheticLambda0(1), null);
             ObservableTransitionState.Transition transition = (ObservableTransitionState.Transition) observableTransitionState;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = transition.fromContent.toString();
             logMessageImpl.str2 = transition.toContent.toString();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         } else {
             if (!(observableTransitionState instanceof ObservableTransitionState.Idle)) {
                 throw new NoWhenBranchMatchedException();
             }
-            LogMessage obtain2 = logBuffer.obtain("CommunalSceneLogger", LogLevel.INFO, new CommunalSceneLogger$$ExternalSyntheticLambda0(2), null);
-            ((LogMessageImpl) obtain2).str1 = ((ObservableTransitionState.Idle) observableTransitionState).currentScene.toString();
-            logBuffer.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer.obtain("CommunalSceneLogger", LogLevel.INFO, new CommunalSceneLogger$$ExternalSyntheticLambda0(2), null);
+            ((LogMessageImpl) logMessageObtain2).str1 = ((ObservableTransitionState.Idle) observableTransitionState).currentScene.toString();
+            logBuffer.commit(logMessageObtain2);
         }
         return Unit.INSTANCE;
     }

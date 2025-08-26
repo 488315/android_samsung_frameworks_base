@@ -20,12 +20,10 @@ import kotlinx.coroutines.internal.Segment;
 import kotlinx.coroutines.internal.Symbol;
 import kotlinx.coroutines.sync.MutexImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MutexImpl extends SemaphoreAndMutexImpl implements Mutex {
     public final AtomicRef owner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CancellableContinuationWithOwner implements CancellableContinuation, Waiter {
         public final CancellableContinuationImpl cont;
         public final Object owner;
@@ -91,7 +89,7 @@ public class MutexImpl extends SemaphoreAndMutexImpl implements Mutex {
             Function3 function32 = new Function3() { // from class: kotlinx.coroutines.sync.MutexImpl$CancellableContinuationWithOwner$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj2, Object obj3, Object obj4) {
-                    MutexImpl mutexImpl2 = MutexImpl.this;
+                    MutexImpl mutexImpl2 = mutexImpl;
                     AtomicRef atomicRef = mutexImpl2.owner;
                     MutexImpl.CancellableContinuationWithOwner cancellableContinuationWithOwner = this;
                     atomicRef.setValue(cancellableContinuationWithOwner.owner);
@@ -99,11 +97,11 @@ public class MutexImpl extends SemaphoreAndMutexImpl implements Mutex {
                     return Unit.INSTANCE;
                 }
             };
-            Symbol tryResumeImpl = this.cont.tryResumeImpl((Unit) obj, function32);
-            if (tryResumeImpl != null) {
+            Symbol symbolTryResumeImpl = this.cont.tryResumeImpl((Unit) obj, function32);
+            if (symbolTryResumeImpl != null) {
                 mutexImpl.owner.setValue(this.owner);
             }
-            return tryResumeImpl;
+            return symbolTryResumeImpl;
         }
 
         @Override // kotlinx.coroutines.CancellableContinuation
@@ -123,8 +121,8 @@ public class MutexImpl extends SemaphoreAndMutexImpl implements Mutex {
             Function1 function1 = new Function1() { // from class: kotlinx.coroutines.sync.MutexImpl$CancellableContinuationWithOwner$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    MutexImpl.this.unlock(this.owner);
+                public final Object mo781invoke(Object obj2) {
+                    mutexImpl.unlock(this.owner);
                     return Unit.INSTANCE;
                 }
             };
@@ -163,12 +161,12 @@ public class MutexImpl extends SemaphoreAndMutexImpl implements Mutex {
 
     public final String toString() {
         String hexAddress = DebugStringsKt.getHexAddress(this);
-        boolean isLocked = isLocked();
+        boolean zIsLocked = isLocked();
         Object obj = this.owner.value;
-        StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Mutex@", hexAddress, "[isLocked=", ",owner=", isLocked);
-        m.append(obj);
-        m.append("]");
-        return m.toString();
+        StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Mutex@", hexAddress, "[isLocked=", ",owner=", zIsLocked);
+        sbM.append(obj);
+        sbM.append("]");
+        return sbM.toString();
     }
 
     public final boolean tryLock() {

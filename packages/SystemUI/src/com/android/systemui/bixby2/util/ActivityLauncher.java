@@ -19,8 +19,8 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.util.DesktopManager;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
+import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActivityLauncher {
     private static final String BIXBYCLIENT_TISKID = "bixbyClient_taskId";
@@ -44,59 +44,59 @@ public class ActivityLauncher {
         return !this.mDisplayLifecycle.mIsFolderOpened;
     }
 
-    public boolean startActivityInBixby(Context context, String str, String str2, int i) {
+    public boolean startActivityInBixby(Context context, String str, String str2, int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         boolean z;
-        int i2;
-        boolean z2;
+        int topFocusedDisplayId;
+        boolean zIsPackageEnabledForCoverLauncher;
         Intent intent = new Intent();
         intent.setComponent(new ComponentName(str, str2));
         intent.putExtra("from-bixby", true);
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
         int currentUser = ActivityManager.getCurrentUser();
-        boolean isFolderClosed = isFolderClosed();
+        boolean zIsFolderClosed = isFolderClosed();
         DesktopStateImpl.Companion.getClass();
         DesktopStateImpl.DWExternalDisplayMode desktopExternalDisplayMode = DesktopStateImpl.Companion.getDesktopExternalDisplayMode();
         if (desktopExternalDisplayMode != DesktopStateImpl.DWExternalDisplayMode.DW_EXTERNAL_DISPLAY_UNDEFINED) {
             try {
-                i2 = WindowManagerGlobal.getWindowManagerService().getTopFocusedDisplayId();
+                topFocusedDisplayId = WindowManagerGlobal.getWindowManagerService().getTopFocusedDisplayId();
                 z = true;
             } catch (RemoteException unused) {
                 Log.w(TAG, "Unable to get focusedDisplayId");
                 z = true;
-                i2 = 0;
+                topFocusedDisplayId = 0;
             }
         } else {
-            i2 = 0;
+            topFocusedDisplayId = 0;
             z = false;
         }
-        Log.d(TAG, "startActivityInBixby() Focused targetDisplayId = " + i2 + ", getDesktopExternalDisplayMode() = " + desktopExternalDisplayMode);
+        Log.d(TAG, "startActivityInBixby() Focused targetDisplayId = " + topFocusedDisplayId + ", getDesktopExternalDisplayMode() = " + desktopExternalDisplayMode);
         try {
-            Intent.class.getDeclaredMethod("semSetLaunchOverTargetTask", Integer.TYPE, Boolean.TYPE).invoke(intent, Integer.valueOf(i == 0 ? i2 == 2 ? -1 : SEM_LAUNCH_ON_FOCUSED_STACK : i), Boolean.FALSE);
+            Intent.class.getDeclaredMethod("semSetLaunchOverTargetTask", Integer.TYPE, Boolean.TYPE).invoke(intent, Integer.valueOf(i == 0 ? topFocusedDisplayId == 2 ? -1 : SEM_LAUNCH_ON_FOCUSED_STACK : i), Boolean.FALSE);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
         if (str == null || !str.equals(PACKAGENAME_CAMERA)) {
             intent.setFlags(270532608);
             try {
-                z2 = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(str, currentUser);
+                zIsPackageEnabledForCoverLauncher = ActivityTaskManager.getService().isPackageEnabledForCoverLauncher(str, currentUser);
             } catch (RemoteException e2) {
                 Log.e(TAG, e2.getMessage());
-                z2 = false;
+                zIsPackageEnabledForCoverLauncher = false;
             }
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("isPackageEnabledForCoverLauncher = ", TAG, z2);
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("isPackageEnabledForCoverLauncher = ", TAG, zIsPackageEnabledForCoverLauncher);
             if (!z) {
-                if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && isFolderClosed && z2) {
+                if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && zIsFolderClosed && zIsPackageEnabledForCoverLauncher) {
                     if (Settings.Secure.getInt(context.getContentResolver(), "show_navigation_for_subscreen", 0) == 0) {
                         Settings.Secure.putInt(context.getContentResolver(), "show_navigation_for_subscreen", 1);
                     }
-                    i2 = 1;
+                    topFocusedDisplayId = 1;
                 } else {
-                    i2 = 0;
+                    topFocusedDisplayId = 0;
                 }
             }
         } else {
-            if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && isFolderClosed) {
-                i2 = 1;
+            if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && zIsFolderClosed) {
+                topFocusedDisplayId = 1;
             }
             if (this.mKeyguardManager == null) {
                 this.mKeyguardManager = (KeyguardManager) context.getSystemService("keyguard");
@@ -115,10 +115,10 @@ public class ActivityLauncher {
             intent.setAction("android.intent.action.MAIN");
             intent.addCategory("android.intent.category.LAUNCHER");
         }
-        makeBasic.setLaunchDisplayId(i2);
-        Log.d(TAG, "startActivityInBixby() setLaunchDisplayId targetDisplayId = " + i2);
+        activityOptionsMakeBasic.setLaunchDisplayId(topFocusedDisplayId);
+        Log.d(TAG, "startActivityInBixby() setLaunchDisplayId targetDisplayId = " + topFocusedDisplayId);
         try {
-            if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && isFolderClosed && i2 == 0) {
+            if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && zIsFolderClosed && topFocusedDisplayId == 0) {
                 Intent intent2 = new Intent();
                 intent2.putExtra("showCoverToast", true);
                 intent2.putExtra("ignoreKeyguardState", true);
@@ -128,7 +128,7 @@ public class ActivityLauncher {
                     keyguardManager2.semSetPendingIntentAfterUnlock(activityAsUser, intent2);
                 }
             } else {
-                context.startActivity(intent, makeBasic.toBundle());
+                context.startActivity(intent, activityOptionsMakeBasic.toBundle());
             }
             return true;
         } catch (ActivityNotFoundException unused2) {

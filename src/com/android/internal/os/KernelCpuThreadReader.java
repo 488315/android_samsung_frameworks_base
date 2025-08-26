@@ -58,21 +58,21 @@ public class KernelCpuThreadReader {
         }
     }
 
-    public ArrayList<ProcessCpuUsage> getProcessCpuUsage() {
+    public ArrayList<ProcessCpuUsage> getProcessCpuUsage() throws IOException {
         ProcessCpuUsage processCpuUsage;
         ArrayList<ProcessCpuUsage> arrayList = new ArrayList<>();
         try {
-            DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(this.mProcPath, PROCESS_DIRECTORY_FILTER);
+            DirectoryStream<Path> directoryStreamNewDirectoryStream = Files.newDirectoryStream(this.mProcPath, PROCESS_DIRECTORY_FILTER);
             try {
-                for (Path path : newDirectoryStream) {
+                for (Path path : directoryStreamNewDirectoryStream) {
                     int processId = getProcessId(path);
                     int uidForPid = this.mInjector.getUidForPid(processId);
                     if (uidForPid != -1 && processId != -1 && this.mUidPredicate.test(Integer.valueOf(uidForPid)) && (processCpuUsage = getProcessCpuUsage(path, processId, uidForPid)) != null) {
                         arrayList.add(processCpuUsage);
                     }
                 }
-                if (newDirectoryStream != null) {
-                    newDirectoryStream.close();
+                if (directoryStreamNewDirectoryStream != null) {
+                    directoryStreamNewDirectoryStream.close();
                 }
                 if (!arrayList.isEmpty()) {
                     return arrayList;
@@ -113,30 +113,30 @@ public class KernelCpuThreadReader {
         this.mUidPredicate = predicate;
     }
 
-    private ProcessCpuUsage getProcessCpuUsage(Path path, int i, int i2) {
-        Path resolve = path.resolve("task");
+    private ProcessCpuUsage getProcessCpuUsage(Path path, int i, int i2) throws IOException {
+        Path pathResolve = path.resolve("task");
         ArrayList arrayList = new ArrayList();
         try {
-            DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(resolve);
+            DirectoryStream<Path> directoryStreamNewDirectoryStream = Files.newDirectoryStream(pathResolve);
             try {
-                Iterator<Path> it = newDirectoryStream.iterator();
+                Iterator<Path> it = directoryStreamNewDirectoryStream.iterator();
                 while (it.hasNext()) {
                     ThreadCpuUsage threadCpuUsage = getThreadCpuUsage(it.next());
                     if (threadCpuUsage != null) {
                         arrayList.add(threadCpuUsage);
                     }
                 }
-                if (newDirectoryStream != null) {
-                    newDirectoryStream.close();
+                if (directoryStreamNewDirectoryStream != null) {
+                    directoryStreamNewDirectoryStream.close();
                 }
                 if (arrayList.isEmpty()) {
                     return null;
                 }
                 return new ProcessCpuUsage(i, getProcessName(path), i2, arrayList);
             } catch (Throwable th) {
-                if (newDirectoryStream != null) {
+                if (directoryStreamNewDirectoryStream != null) {
                     try {
-                        newDirectoryStream.close();
+                        directoryStreamNewDirectoryStream.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -148,10 +148,10 @@ public class KernelCpuThreadReader {
         }
     }
 
-    private ThreadCpuUsage getThreadCpuUsage(Path path) {
-        int[] iArr;
+    private ThreadCpuUsage getThreadCpuUsage(Path path) throws NumberFormatException {
+        int[] iArrBucketValues;
         try {
-            int parseInt = Integer.parseInt(path.getFileName().toString());
+            int i = Integer.parseInt(path.getFileName().toString());
             String threadName = getThreadName(path);
             long[] usageTimesMillis = this.mProcTimeInStateReader.getUsageTimesMillis(path.resolve(CPU_STATISTICS_FILENAME));
             if (usageTimesMillis == null) {
@@ -159,14 +159,14 @@ public class KernelCpuThreadReader {
             }
             FrequencyBucketCreator frequencyBucketCreator = this.mFrequencyBucketCreator;
             if (frequencyBucketCreator != null) {
-                iArr = frequencyBucketCreator.bucketValues(usageTimesMillis);
+                iArrBucketValues = frequencyBucketCreator.bucketValues(usageTimesMillis);
             } else {
-                iArr = new int[usageTimesMillis.length];
-                for (int i = 0; i < usageTimesMillis.length; i++) {
-                    iArr[i] = (int) usageTimesMillis[i];
+                iArrBucketValues = new int[usageTimesMillis.length];
+                for (int i2 = 0; i2 < usageTimesMillis.length; i2++) {
+                    iArrBucketValues[i2] = (int) usageTimesMillis[i2];
                 }
             }
-            return new ThreadCpuUsage(parseInt, threadName, iArr);
+            return new ThreadCpuUsage(i, threadName, iArrBucketValues);
         } catch (NumberFormatException e) {
             Slog.w(TAG, "Failed to parse thread ID when iterating over /proc/*/task", e);
             return null;
@@ -174,21 +174,21 @@ public class KernelCpuThreadReader {
     }
 
     private String getProcessName(Path path) {
-        String readSingleLineProcFile = ProcStatsUtil.readSingleLineProcFile(path.resolve(PROCESS_NAME_FILENAME).toString());
-        return readSingleLineProcFile != null ? readSingleLineProcFile : DEFAULT_PROCESS_NAME;
+        String singleLineProcFile = ProcStatsUtil.readSingleLineProcFile(path.resolve(PROCESS_NAME_FILENAME).toString());
+        return singleLineProcFile != null ? singleLineProcFile : DEFAULT_PROCESS_NAME;
     }
 
     private String getThreadName(Path path) {
-        String readNullSeparatedFile = ProcStatsUtil.readNullSeparatedFile(path.resolve(THREAD_NAME_FILENAME).toString());
-        return readNullSeparatedFile == null ? DEFAULT_THREAD_NAME : readNullSeparatedFile;
+        String nullSeparatedFile = ProcStatsUtil.readNullSeparatedFile(path.resolve(THREAD_NAME_FILENAME).toString());
+        return nullSeparatedFile == null ? DEFAULT_THREAD_NAME : nullSeparatedFile;
     }
 
     private int getProcessId(Path path) {
-        String path2 = path.getFileName().toString();
+        String string = path.getFileName().toString();
         try {
-            return Integer.parseInt(path2);
+            return Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            Slog.w(TAG, "Failed to parse " + path2 + " as process ID", e);
+            Slog.w(TAG, "Failed to parse " + string + " as process ID", e);
             return -1;
         }
     }
@@ -258,9 +258,9 @@ public class KernelCpuThreadReader {
                 } else {
                     i3 = i - ((i / length) * i5);
                 }
-                int max = Math.max(1, (upperBound - lowerBound) / i3);
+                int iMax = Math.max(1, (upperBound - lowerBound) / i3);
                 for (int i6 = 0; i6 < i3; i6++) {
-                    int i7 = (i6 * max) + lowerBound;
+                    int i7 = (i6 * iMax) + lowerBound;
                     if (i7 >= upperBound) {
                         break;
                     }

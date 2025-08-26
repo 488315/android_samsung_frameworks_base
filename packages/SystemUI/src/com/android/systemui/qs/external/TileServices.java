@@ -52,7 +52,6 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileServices extends IQSService.Stub {
     public static final boolean DEBUG = !DeviceType.isShipBuild();
@@ -82,7 +81,6 @@ public class TileServices extends IQSService.Stub {
     public final ArrayMap mTokenMap = new ArrayMap();
     public final int mMaxBound = 5;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.external.TileServices$3, reason: invalid class name */
     public class AnonymousClass3 implements CommandQueue.Callbacks {
         public AnonymousClass3() {
@@ -140,24 +138,24 @@ public class TileServices extends IQSService.Stub {
         this.mUninstallReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.external.TileServices.5
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                List<ResolveInfo> list;
+                List<ResolveInfo> listQueryIntentServicesAsUser;
                 Log.d("TileServices", "mUninstallReceiver onReceive = " + intent);
                 String encodedSchemeSpecificPart = intent.getData().getEncodedSchemeSpecificPart();
                 boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
                 if (booleanExtra) {
                     Intent intent2 = new Intent("android.service.quicksettings.action.QS_TILE");
                     intent2.setPackage(encodedSchemeSpecificPart);
-                    list = context.getPackageManager().queryIntentServicesAsUser(intent2, 0, ((UserTrackerImpl) TileServices.this.mUserTracker).getUserId());
+                    listQueryIntentServicesAsUser = context.getPackageManager().queryIntentServicesAsUser(intent2, 0, ((UserTrackerImpl) TileServices.this.mUserTracker).getUserId());
                 } else {
-                    list = null;
+                    listQueryIntentServicesAsUser = null;
                 }
                 Iterator it = TileServices.this.mServices.values().iterator();
                 while (it.hasNext()) {
                     ComponentName component = ((TileServiceManager) it.next()).mStateManager.mIntent.getComponent();
                     if (Objects.equals(encodedSchemeSpecificPart, component.getPackageName())) {
-                        Log.d("TileServices", "component = " + component + ", pkgTileServices = " + list);
+                        Log.d("TileServices", "component = " + component + ", pkgTileServices = " + listQueryIntentServicesAsUser);
                         if (booleanExtra) {
-                            for (ResolveInfo resolveInfo : list) {
+                            for (ResolveInfo resolveInfo : listQueryIntentServicesAsUser) {
                                 if (Objects.equals(resolveInfo.serviceInfo.packageName, component.getPackageName()) && Objects.equals(resolveInfo.serviceInfo.name, component.getClassName())) {
                                     NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("mUninstallReceiver shouldBeContinue = ", component, "TileServices");
                                     CustomTileInterface tileForUserAndComponent = TileServices.this.getTileForUserAndComponent(((UserTrackerImpl) TileServices.this.mUserTracker).getUserId(), component);
@@ -210,9 +208,9 @@ public class TileServices extends IQSService.Stub {
         this.mCustomTileAddedRepository = customTileAddedRepository;
         this.mBackgroundExecutor = delayableExecutor;
         broadcastDispatcher.registerReceiver(new IntentFilter("android.intent.action.LOCALE_CHANGED"), r1);
-        boolean equals = "1".equals(SystemProperties.get("sys.boot_completed"));
-        this.mIsBootCompleted = equals;
-        if (!equals) {
+        boolean zEquals = "1".equals(SystemProperties.get("sys.boot_completed"));
+        this.mIsBootCompleted = zEquals;
+        if (!zEquals) {
             broadcastDispatcher.registerReceiver(new IntentFilter("com.samsung.intent.action.LAZY_BOOT_COMPLETE"), r2);
         }
         this.mIsDexStandAloneMode = ((DesktopManager) Dependency.sDependency.getDependencyInner(DesktopManager.class)).isStandalone();
@@ -451,7 +449,7 @@ public class TileServices extends IQSService.Stub {
         }
         int size2 = arrayList2.size();
         if (size2 > this.mMaxBound) {
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             for (int i2 = 0; i2 < size2; i2++) {
                 TileServiceManager tileServiceManager = (TileServiceManager) arrayList2.get(i2);
                 if (tileServiceManager.mStateManager.hasPendingClick()) {
@@ -464,7 +462,7 @@ public class TileServices extends IQSService.Stub {
                 } else if (tileServiceManager.mJustBound) {
                     tileServiceManager.mPriority = 2147483645;
                 } else if (tileServiceManager.mBindRequested) {
-                    long j = currentTimeMillis - tileServiceManager.mLastUpdate;
+                    long j = jCurrentTimeMillis - tileServiceManager.mLastUpdate;
                     if (j > 2147483644) {
                         tileServiceManager.mPriority = 2147483644;
                     } else {
@@ -564,7 +562,7 @@ public class TileServices extends IQSService.Stub {
     public final void updateQsTile(Tile tile, IBinder iBinder) {
         CustomTileInterface tileForToken = getTileForToken(iBinder);
         if (tileForToken != null) {
-            int verifyCaller = verifyCaller(tileForToken);
+            int iVerifyCaller = verifyCaller(tileForToken);
             synchronized (this.mServices) {
                 TileServiceManager tileServiceManager = (TileServiceManager) this.mServices.get(tileForToken);
                 if (tileServiceManager != null && tileServiceManager.mStarted) {
@@ -578,7 +576,7 @@ public class TileServices extends IQSService.Stub {
                         }
                     }
                     tileServiceManager.mServices.recalculateBindAllowance();
-                    tileForToken.updateTileState(tile, verifyCaller);
+                    tileForToken.updateTileState(tile, iVerifyCaller);
                     tileForToken.refreshState();
                     return;
                 }

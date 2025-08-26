@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TaskBarButtonDispatcherProxy implements ButtonDispatcherProxyBase {
     public final Context context;
@@ -23,7 +22,6 @@ public final class TaskBarButtonDispatcherProxy implements ButtonDispatcherProxy
     public final int pinID = R.id.navbar_pin;
     public final List extraKeyIDList = Arrays.asList(Integer.valueOf(R.id.nav_custom_key_1), Integer.valueOf(R.id.nav_custom_key_2), Integer.valueOf(R.id.nav_custom_key_3), Integer.valueOf(R.id.nav_custom_key_4), Integer.valueOf(R.id.nav_custom_key_5));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TaskbarButtonDispatcher {
         public int id;
         public final View view;
@@ -62,9 +60,9 @@ public final class TaskBarButtonDispatcherProxy implements ButtonDispatcherProxy
         int i2 = 1;
         while (it.hasNext()) {
             if (i == ((Number) it.next()).intValue()) {
-                String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "extra");
-                this.pluginBundle.putParcelable(m + "_LIGHT", bitmap);
-                this.pluginBundle.putParcelable(m + "_DARK", bitmap2);
+                String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "extra");
+                this.pluginBundle.putParcelable(strM + "_LIGHT", bitmap);
+                this.pluginBundle.putParcelable(strM + "_DARK", bitmap2);
             }
             i2++;
         }

@@ -1,11 +1,9 @@
 package com.android.systemui.statusbar.phone;
 
-import android.view.View;
 import com.android.systemui.statusbar.KeyguardSecAffordanceView;
 import com.android.systemui.statusbar.KeyguardShortcutManager;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardSecBottomAreaViewController$shortcutManagerCallback$1 {
     public final /* synthetic */ KeyguardSecBottomAreaViewController this$0;
@@ -15,11 +13,8 @@ public final class KeyguardSecBottomAreaViewController$shortcutManagerCallback$1
     }
 
     public final void updateShortcutView(final int i) {
-        View view;
-        View view2;
         final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
-        view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-        ((KeyguardSecBottomAreaView) view).post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutManagerCallback$1$updateShortcutView$1
+        ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutManagerCallback$1$updateShortcutView$1
             @Override // java.lang.Runnable
             public final void run() {
                 if (i == 0) {
@@ -55,8 +50,7 @@ public final class KeyguardSecBottomAreaViewController$shortcutManagerCallback$1
         }
         keyguardSecBottomAreaViewController.isAllShortcutDisabled = z2;
         if (z != keyguardSecBottomAreaViewController.isAllShortcutDisabled) {
-            view2 = ((ViewController) keyguardSecBottomAreaViewController).mView;
-            ((KeyguardSecBottomAreaView) view2).updateLayout();
+            ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).updateLayout();
         }
     }
 }

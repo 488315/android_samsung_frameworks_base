@@ -25,7 +25,7 @@ public class AudioRegion {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public AudioRegion m9803clone() {
+    public AudioRegion m9816clone() {
         return new AudioRegion(this.startTime, this.endTime, this.volume, this.fadeInDuration, this.fadeOutDuration);
     }
 

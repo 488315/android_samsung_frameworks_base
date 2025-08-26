@@ -16,14 +16,13 @@ import java.util.regex.Pattern;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class PeopleViewModelKt {
     public static final List PeopleViewModel$priorityTiles(PeopleTileRepository peopleTileRepository, Context context) {
         try {
-            List priorityTiles = ((PeopleTileRepositoryImpl) peopleTileRepository).priorityTiles();
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(priorityTiles, 10));
-            ArrayList arrayList2 = (ArrayList) priorityTiles;
+            List listPriorityTiles = ((PeopleTileRepositoryImpl) peopleTileRepository).priorityTiles();
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listPriorityTiles, 10));
+            ArrayList arrayList2 = (ArrayList) listPriorityTiles;
             int size = arrayList2.size();
             int i = 0;
             while (i < size) {
@@ -40,9 +39,9 @@ public abstract class PeopleViewModelKt {
 
     public static final List PeopleViewModel$recentTiles(PeopleTileRepository peopleTileRepository, Context context) {
         try {
-            List recentTiles = ((PeopleTileRepositoryImpl) peopleTileRepository).recentTiles();
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(recentTiles, 10));
-            ArrayList arrayList2 = (ArrayList) recentTiles;
+            List listRecentTiles = ((PeopleTileRepositoryImpl) peopleTileRepository).recentTiles();
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listRecentTiles, 10));
+            ArrayList arrayList2 = (ArrayList) listRecentTiles;
             int size = arrayList2.size();
             int i = 0;
             while (i < size) {

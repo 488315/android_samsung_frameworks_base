@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.IndentingPrintWriter;
@@ -53,6 +54,8 @@ import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.shade.ShadeHeaderController;
+import com.android.systemui.shade.data.repository.ShadeRepository;
+import com.android.systemui.shade.data.repository.ShadeRepositoryImpl;
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl;
 import com.android.systemui.shade.transition.LargeScreenShadeInterpolator;
 import com.android.systemui.statusbar.CommandQueue;
@@ -70,13 +73,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
+import kotlin.Lazy;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateController.StateListener, Dumpable {
     public final KeyguardBypassController mBypassController;
@@ -126,7 +129,6 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     public final int[] mTmpLocation = new int[2];
     public final ListeningAndVisibilityLifecycleOwner mListeningAndVisibilityLifecycleOwner = new ListeningAndVisibilityLifecycleOwner();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ListeningAndVisibilityLifecycleOwner implements LifecycleOwner {
         public final LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
         public boolean mDestroyed = false;
@@ -172,7 +174,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         this.mSecQSImpl = new SecQSImpl(new Function0() { // from class: com.android.systemui.qs.QSImpl$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(QSImpl.this.mQsExpanded);
+                return Boolean.valueOf(this.f$0.mQsExpanded);
             }
         }, secPanelSplitHelper, new QSImpl$$ExternalSyntheticLambda2(this, 2), lockscreenShadeTransitionController);
     }
@@ -185,7 +187,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         this.mHeaderAnimating = true;
         this.mRootView.animate().y(-this.mHeader.getHeight()).setStartDelay(0L).setDuration(360L).setInterpolator(Interpolators.FAST_OUT_SLOW_IN).setListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.qs.QSImpl.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationEnd(Animator animator) {
+            public final void onAnimationEnd(Animator animator) throws Resources.NotFoundException {
                 View view = QSImpl.this.mRootView;
                 if (view != null) {
                     view.animate().setListener(null);
@@ -203,7 +205,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void closeDetail() {
+    public final void closeDetail() throws Resources.NotFoundException {
         SecQSImpl secQSImpl = this.mSecQSImpl;
         ((SecQSDetailController) secQSImpl.detailController$delegate.getValue()).closeDetail();
         QSCMainViewController qSCMainViewController = secQSImpl.qscMainViewController;
@@ -213,7 +215,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
-    public final void disable(int i, int i2, int i3, boolean z) {
+    public final void disable(int i, int i2, int i3, boolean z) throws Resources.NotFoundException {
         if (i != this.mRootView.getContext().getDisplayId()) {
             return;
         }
@@ -226,21 +228,21 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.QSDisableFlagsLogger$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
-                return QSDisableFlagsLogger.this.disableFlagsLogger.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), new DisableFlagsLogger.DisableState((int) logMessage.getLong1(), (int) logMessage.getLong2()));
+                return qSDisableFlagsLogger.disableFlagsLogger.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), new DisableFlagsLogger.DisableState((int) logMessage.getLong1(), (int) logMessage.getLong2()));
             }
         };
         LogBuffer logBuffer = qSDisableFlagsLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSDisableFlagsLog", logLevel, function1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSDisableFlagsLog", logLevel, function1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = disableState.disable1;
         logMessageImpl.int2 = disableState.disable2;
         logMessageImpl.long1 = disableState2.disable1;
         logMessageImpl.long2 = disableState2.disable2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         int i4 = i3 & 1;
-        int i5 = 0;
+        int measuredHeight = 0;
         boolean z2 = i4 != 0;
         if (z2 == this.mQsDisabled) {
             return;
@@ -265,11 +267,11 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
             secQuickStatusBarHeader.mDateButtonContainer.setVisibility(secQuickStatusBarHeader.mQsDisabled ? 8 : 0);
             ViewGroup.LayoutParams layoutParams = secQuickStatusBarHeader.getLayoutParams();
             if (!secQuickStatusBarHeader.mQsDisabled) {
-                i5 = -2;
+                measuredHeight = -2;
             } else if (QpRune.QUICK_TABLET || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
-                i5 = ((ShadeHeaderController) secQuickStatusBarHeader.mResourcePicker.resourcePickHelper.getTargetPicker().common.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight();
+                measuredHeight = ((ShadeHeaderController) secQuickStatusBarHeader.mResourcePicker.resourcePickHelper.getTargetPicker().common.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight();
             }
-            layoutParams.height = i5;
+            layoutParams.height = measuredHeight;
             secQuickStatusBarHeader.setLayoutParams(layoutParams);
         }
         updateQsState$1();
@@ -463,7 +465,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         }
     }
 
-    public final void onComponentCreated(QSComponent qSComponent, Bundle bundle) {
+    public final void onComponentCreated(QSComponent qSComponent, Bundle bundle) throws Resources.NotFoundException {
         final int i = 0;
         final int i2 = 1;
         this.mRootView = qSComponent.getRootView();
@@ -481,7 +483,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
             listeningAndVisibilityLifecycleOwner.getLifecycle().addObserver(new DefaultLifecycleObserver() { // from class: com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel$Factory$create$1
                 @Override // androidx.lifecycle.DefaultLifecycleObserver
                 public final void onDestroy$1() {
-                    GlobalActionsDialogLite.this.destroy();
+                    globalActionsDialogLite.destroy();
                 }
             });
         }
@@ -521,7 +523,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         this.mQSPanelScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: com.android.systemui.qs.QSImpl$$ExternalSyntheticLambda1
             @Override // android.view.View.OnScrollChangeListener
             public final void onScrollChange(View view, int i4, int i5, int i6, int i7) {
-                QS.ScrollListener scrollListener = QSImpl.this.mScrollListener;
+                QS.ScrollListener scrollListener = this.f$0.mScrollListener;
                 if (scrollListener != null) {
                     scrollListener.onQsPanelScrollChanged(i5);
                 }
@@ -586,18 +588,18 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final boolean isValidDB() {
                     int i4 = BarBackUpRestoreHelper.$r8$clinit;
-                    BarBackUpRestoreHelper.this.getClass();
+                    barBackUpRestoreHelper.getClass();
                     return true;
                 }
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final String onBackup(boolean z) {
-                    return BarBackUpRestoreHelper.access$getBackupData(BarBackUpRestoreHelper.this, z);
+                    return BarBackUpRestoreHelper.access$getBackupData(barBackUpRestoreHelper, z);
                 }
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final void onRestore(String str) {
-                    BarBackUpRestoreHelper.access$setRestoreData(BarBackUpRestoreHelper.this, str);
+                    BarBackUpRestoreHelper.access$setRestoreData(barBackUpRestoreHelper, str);
                 }
             });
             ((SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class)).addListener(barController);
@@ -650,7 +652,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         this.mCommandQueue.addCallback((CommandQueue.Callbacks) this);
     }
 
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         BarController barController;
         SecQSImplAnimatorManager secQSImplAnimatorManager;
         int layoutDirection = configuration.getLayoutDirection();
@@ -746,7 +748,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
-    public final void onStateChanged(int i) {
+    public final void onStateChanged(int i) throws Resources.NotFoundException {
         int i2 = SceneContainerFlag.$r8$clinit;
         if (i == this.mStatusBarState) {
             return;
@@ -773,7 +775,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
-    public final void onUpcomingStateChanged(int i) {
+    public final void onUpcomingStateChanged(int i) throws Resources.NotFoundException {
         if (i == 1) {
             onStateChanged(i);
         }
@@ -791,7 +793,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setExpanded(boolean z) {
+    public final void setExpanded(boolean z) throws Resources.NotFoundException {
         this.mQsExpanded = z;
         if (this.mInSplitShade && z) {
             setListening(true);
@@ -882,7 +884,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setInSplitShade(boolean z) {
+    public final void setInSplitShade(boolean z) throws Resources.NotFoundException {
         this.mInSplitShade = z;
         updateShowCollapsedOnKeyguard();
         updateQsState$1();
@@ -929,7 +931,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setOverscrolling(boolean z) {
+    public final void setOverscrolling(boolean z) throws Resources.NotFoundException {
         this.mStackScrollerOverscrolling = z;
         SecQSImpl secQSImpl = this.mSecQSImpl;
         if (secQSImpl != null) {
@@ -947,22 +949,20 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         this.mPanelView = heightListener;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0023  */
     @Override // com.android.systemui.plugins.qs.QS
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setQsExpansion(float f, float f2, float f3, float f4) {
         float f5;
         SecQSImplAnimatorManager secQSImplAnimatorManager;
         if (this.mIsSmallScreen) {
             f5 = 1.0f;
         } else if (this.mInSplitShade) {
-            if (this.mTransitioningToFullShade || ((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState == 1) {
-                f5 = this.mLockscreenToShadeProgress;
-            }
-            f5 = f2;
-        } else {
-            if (this.mTransitioningToFullShade) {
-                f5 = this.mLockscreenToShadeProgress;
-            }
-            f5 = f2;
+            f5 = (this.mTransitioningToFullShade || ((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState == 1) ? this.mLockscreenToShadeProgress : f2;
+        } else if (this.mTransitioningToFullShade) {
+            f5 = this.mLockscreenToShadeProgress;
         }
         QSContainerImpl qSContainerImpl = this.mContainer;
         qSContainerImpl.mQsExpansion = f;
@@ -1050,7 +1050,7 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setTransitionToFullShadeProgress(boolean z, float f, float f2) {
+    public final void setTransitionToFullShadeProgress(boolean z, float f, float f2) throws Resources.NotFoundException {
         if (z != this.mTransitioningToFullShade) {
             this.mTransitioningToFullShade = z;
             updateShowCollapsedOnKeyguard();
@@ -1091,23 +1091,52 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         secQSPanelController.setListening(z);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0053, code lost:
-    
-        if (r3.panelSplitHelper.isQSState() == false) goto L32;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0055  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x006b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateQsState$1() {
-        /*
-            Method dump skipped, instructions count: 226
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.QSImpl.updateQsState$1():void");
+    public final void updateQsState$1() throws Resources.NotFoundException {
+        SecQSImplAnimatorManager secQSImplAnimatorManager;
+        boolean z = true;
+        boolean z2 = this.mQsExpanded || this.mStackScrollerOverscrolling || this.mHeaderAnimating;
+        SecQSImpl secQSImpl = this.mSecQSImpl;
+        if (secQSImpl != null) {
+            if (!z2) {
+                Lazy lazy = secQSImpl.shadeRepository$delegate;
+                if (((Number) ((ShadeRepositoryImpl) ((ShadeRepository) lazy.getValue())).lockscreenShadeExpansion.$$delegate_0.getValue()).floatValue() > 0.0f || ((Boolean) ((ShadeRepositoryImpl) ((ShadeRepository) lazy.getValue())).legacyExpandImmediate.$$delegate_0.getValue()).booleanValue() || secQSImpl.panelSplitHelper.isQSState()) {
+                    z2 = !secQSImpl.stackScrollerOverscrolling && ((secQSImplAnimatorManager = secQSImpl.secQSImplAnimatorManager) == null || !QsAnimatorState.isDetailShowing) && (secQSImplAnimatorManager == null || !QsAnimatorState.isCustomizerShowing);
+                }
+            }
+        }
+        this.mQSPanelController.setExpanded(this.mQsExpanded);
+        boolean zIsKeyguardState = isKeyguardState();
+        this.mHeader.setVisibility((this.mQsExpanded || !zIsKeyguardState || this.mHeaderAnimating || this.mShowCollapsedOnKeyguard) ? 0 : 4);
+        SecQuickStatusBarHeader secQuickStatusBarHeader = this.mHeader;
+        boolean z3 = !(!zIsKeyguardState || this.mHeaderAnimating || this.mShowCollapsedOnKeyguard) || (this.mQsExpanded && !this.mStackScrollerOverscrolling);
+        SecQuickQSPanelController secQuickQSPanelController = this.mQuickQSPanelController;
+        if (secQuickStatusBarHeader.mExpanded != z3) {
+            secQuickStatusBarHeader.mExpanded = z3;
+            secQuickQSPanelController.setExpanded(z3);
+        }
+        if (!QsAnimatorState.isDetailPopupShowing && (this.mQsDisabled || !z2)) {
+            z = false;
+        }
+        this.mQSPanelController.setVisibility(z ? 0 : 4);
+        if (secQSImpl != null) {
+            boolean z4 = this.mQsExpanded;
+            SecQSImplAnimatorManager secQSImplAnimatorManager2 = secQSImpl.secQSImplAnimatorManager;
+            if (secQSImplAnimatorManager2 != null) {
+                secQSImplAnimatorManager2.setQsExpanded(z4);
+            }
+            BarController barController = secQSImpl.barController;
+            if (barController != null) {
+                barController.mAllBarItems.forEach(new BarController$$ExternalSyntheticLambda1(z4, 1));
+            }
+        }
     }
 
-    public final void updateShowCollapsedOnKeyguard() {
+    public final void updateShowCollapsedOnKeyguard() throws Resources.NotFoundException {
         boolean z = this.mBypassController.getBypassEnabled() || (this.mTransitioningToFullShade && !this.mInSplitShade);
         if (z != this.mShowCollapsedOnKeyguard) {
             this.mShowCollapsedOnKeyguard = z;

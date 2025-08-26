@@ -9,7 +9,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Swipe extends UserAction {
     public static final Companion Companion = new Companion(null);
@@ -21,14 +20,13 @@ public final class Swipe extends UserAction {
     public final int pointerCount;
     public final PointerType pointerType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         /* renamed from: Down-loWS4t8$default, reason: not valid java name */
-        public static Swipe m926DownloWS4t8$default(Companion companion, int i, SwipeSource swipeSource, int i2) {
+        public static Swipe m928DownloWS4t8$default(Companion companion, int i, SwipeSource swipeSource, int i2) {
             if ((i2 & 1) != 0) {
                 i = 1;
             }
@@ -44,7 +42,6 @@ public final class Swipe extends UserAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resolved extends UserAction.Resolved {
         public final SwipeDirection.Resolved direction;
         public final SwipeSource.Resolved fromSource;
@@ -67,11 +64,11 @@ public final class Swipe extends UserAction {
         }
 
         public final int hashCode() {
-            int m = ReorderTile$$ExternalSyntheticOutline0.m(this.pointerCount, this.direction.hashCode() * 31, 31);
+            int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.pointerCount, this.direction.hashCode() * 31, 31);
             SwipeSource.Resolved resolved = this.fromSource;
-            int hashCode = (m + (resolved == null ? 0 : resolved.hashCode())) * 31;
+            int iHashCode = (iM + (resolved == null ? 0 : resolved.hashCode())) * 31;
             PointerType pointerType = this.pointerType;
-            return hashCode + (pointerType != null ? Integer.hashCode(pointerType.value) : 0);
+            return iHashCode + (pointerType != null ? Integer.hashCode(pointerType.value) : 0);
         }
 
         public final String toString() {
@@ -87,6 +84,7 @@ public final class Swipe extends UserAction {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
         new Swipe(SwipeDirection.Left, 0, null, null, 14, null);
         Up = new Swipe(SwipeDirection.Up, 0, null, null, 14, null);
@@ -120,16 +118,16 @@ public final class Swipe extends UserAction {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.pointerCount, this.direction.hashCode() * 31, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.pointerCount, this.direction.hashCode() * 31, 31);
         PointerType pointerType = this.pointerType;
-        int hashCode = (m + (pointerType == null ? 0 : Integer.hashCode(pointerType.value))) * 31;
+        int iHashCode = (iM + (pointerType == null ? 0 : Integer.hashCode(pointerType.value))) * 31;
         SwipeSource swipeSource = this.fromSource;
-        return hashCode + (swipeSource != null ? swipeSource.hashCode() : 0);
+        return iHashCode + (swipeSource != null ? swipeSource.hashCode() : 0);
     }
 
     @Override // com.android.compose.animation.scene.UserAction
     public final UserAction.Resolved resolve$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(LayoutDirection layoutDirection) {
-        SwipeDirection.Resolved resolved = (SwipeDirection.Resolved) this.direction.getResolve$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout().mo779invoke(layoutDirection);
+        SwipeDirection.Resolved resolved = (SwipeDirection.Resolved) this.direction.getResolve$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout().mo781invoke(layoutDirection);
         SwipeSource swipeSource = this.fromSource;
         return new Resolved(resolved, this.pointerCount, swipeSource != null ? swipeSource.resolve(layoutDirection) : null, this.pointerType, null);
     }

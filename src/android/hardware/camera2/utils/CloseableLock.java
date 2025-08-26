@@ -81,8 +81,8 @@ public class CloseableLock implements AutoCloseable {
         try {
             this.mLock.lock();
             if (!this.mClosed) {
-                int intValue = this.mLockCount.get().intValue();
-                if (this.mExclusive && intValue > 0) {
+                int iIntValue = this.mLockCount.get().intValue();
+                if (this.mExclusive && iIntValue > 0) {
                     throw new IllegalStateException("Cannot acquire shared lock while holding exclusive lock");
                 }
                 while (this.mExclusive) {
@@ -105,11 +105,11 @@ public class CloseableLock implements AutoCloseable {
         try {
             this.mLock.lock();
             if (!this.mClosed) {
-                int intValue = this.mLockCount.get().intValue();
-                if (!this.mExclusive && intValue > 0) {
+                int iIntValue = this.mLockCount.get().intValue();
+                if (!this.mExclusive && iIntValue > 0) {
                     throw new IllegalStateException("Cannot acquire exclusive lock while holding shared lock");
                 }
-                while (intValue == 0 && (this.mExclusive || this.mSharedLocks > 0)) {
+                while (iIntValue == 0 && (this.mExclusive || this.mSharedLocks > 0)) {
                     this.mCondition.awaitUninterruptibly();
                     if (this.mClosed) {
                     }
@@ -139,12 +139,12 @@ public class CloseableLock implements AutoCloseable {
             } else if (this.mSharedLocks != 0) {
                 throw new AssertionError("Too many shared locks " + this.mSharedLocks);
             }
-            int intValue = this.mLockCount.get().intValue() - 1;
-            this.mLockCount.set(Integer.valueOf(intValue));
-            if (intValue == 0 && this.mExclusive) {
+            int iIntValue = this.mLockCount.get().intValue() - 1;
+            this.mLockCount.set(Integer.valueOf(iIntValue));
+            if (iIntValue == 0 && this.mExclusive) {
                 this.mExclusive = false;
                 this.mCondition.signalAll();
-            } else if (intValue == 0 && this.mSharedLocks == 0) {
+            } else if (iIntValue == 0 && this.mSharedLocks == 0) {
                 this.mCondition.signalAll();
             }
         } finally {

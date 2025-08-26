@@ -30,7 +30,6 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
 import com.android.systemui.lockstar.PluginLockStarManager;
 import com.android.systemui.pluginlock.PluginLockData;
 import com.android.systemui.statusbar.KeyguardSecAffordanceView;
@@ -49,7 +48,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardSecBottomAreaView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -59,7 +57,7 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
     public int currentSimState;
     public final Lazy disclosureIndicationText$delegate;
     public final Lazy displayMetrics$delegate;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 disposableHandle;
+    public RepeatWhenAttachedKt.C09181 disposableHandle;
     public EmergencyButton emergencyButton;
     public final Lazy indicationArea$delegate;
     public final Lazy indicationText$delegate;
@@ -85,7 +83,6 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
     public KeyguardUsimTextView usimCarrierText;
     public LinearLayout usimTextArea;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -162,9 +159,9 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.disposableHandle;
-        if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-            repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+        RepeatWhenAttachedKt.C09181 c09181 = this.disposableHandle;
+        if (c09181 != null) {
+            c09181.dispose();
         }
     }
 
@@ -211,7 +208,7 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
         }
     }
 
-    public final void updateIndicationDimensions(ConfigurationBasedDimensions configurationBasedDimensions) {
+    public final void updateIndicationDimensions(ConfigurationBasedDimensions configurationBasedDimensions) throws Resources.NotFoundException {
         boolean z;
         int paddingBottom;
         PluginLockData pluginLockData;
@@ -255,7 +252,7 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
             int i3 = configurationBasedDimensions.shortcutSideMargin;
             configurationBasedDimensions.indicationAreaSideMargin = i3;
             if (i == 2) {
-                configurationBasedDimensions.indicationAreaSideMargin = resources.getDimensionPixelSize(R.dimen.keyguard_indication_area_side_padding) + configurationBasedDimensions.buttonSizePx.getWidth() + i3;
+                configurationBasedDimensions.indicationAreaSideMargin = resources.getDimensionPixelSize(DeviceState.isMultiFoldMain() ? R.dimen.keyguard_indication_area_side_padding_multi_main : R.dimen.keyguard_indication_area_side_padding) + configurationBasedDimensions.buttonSizePx.getWidth() + i3;
             }
             if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && !DeviceState.isInDisplayFpSensorPositionHigh() && ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isFingerprintOptionEnabled() && (((Display) this.mDisplay$delegate.getValue()).getRotation() == 0 || ((Display) this.mDisplay$delegate.getValue()).getRotation() == 2)) {
                 configurationBasedDimensions.indicationAreaBottomMargin = DeviceState.isTablet() ? resources.getDimensionPixelSize(R.dimen.keyguard_indication_text_bottom_margin_tab) + DeviceState.getInDisplayFingerprintHeight() : DeviceState.getInDisplayFingerprintHeight();
@@ -295,7 +292,7 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
                     }
                 }
             } else {
-                dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.keyguard_usim_text_margin_bottom_land);
+                dimensionPixelSize = DeviceState.isTablet() ? resources.getDimensionPixelSize(R.dimen.keyguard_usim_text_margin_bottom) : resources.getDimensionPixelSize(R.dimen.keyguard_usim_text_margin_bottom_land);
             }
             configurationBasedDimensions.usimTextAreaBottomMargin = dimensionPixelSize;
             configurationBasedDimensions.isOverlayView = this.isPluginLockOverlayView;
@@ -304,19 +301,19 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
 
     public final void updateIndicationPosition() {
         StateFlowImpl stateFlowImpl = this.configurationBasedDimensions;
-        ConfigurationBasedDimensions copy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
-        updateIndicationDimensions(copy$default);
-        stateFlowImpl.updateState(null, copy$default);
+        ConfigurationBasedDimensions configurationBasedDimensionsCopy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
+        updateIndicationDimensions(configurationBasedDimensionsCopy$default);
+        stateFlowImpl.updateState(null, configurationBasedDimensionsCopy$default);
     }
 
     public final void updateLayout() {
         try {
             ((Display) this.mDisplay$delegate.getValue()).getRealMetrics((DisplayMetrics) this.displayMetrics$delegate.getValue());
             StateFlowImpl stateFlowImpl = this.configurationBasedDimensions;
-            ConfigurationBasedDimensions copy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
-            updateShortcutDimensions(copy$default);
-            updateIndicationDimensions(copy$default);
-            stateFlowImpl.updateState(null, copy$default);
+            ConfigurationBasedDimensions configurationBasedDimensionsCopy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
+            updateShortcutDimensions(configurationBasedDimensionsCopy$default);
+            updateIndicationDimensions(configurationBasedDimensionsCopy$default);
+            stateFlowImpl.updateState(null, configurationBasedDimensionsCopy$default);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -337,9 +334,9 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
 
     public final void updateShortcutPosition() {
         StateFlowImpl stateFlowImpl = this.configurationBasedDimensions;
-        ConfigurationBasedDimensions copy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
-        updateShortcutDimensions(copy$default);
-        stateFlowImpl.updateState(null, copy$default);
+        ConfigurationBasedDimensions configurationBasedDimensionsCopy$default = ConfigurationBasedDimensions.copy$default((ConfigurationBasedDimensions) stateFlowImpl.getValue());
+        updateShortcutDimensions(configurationBasedDimensionsCopy$default);
+        stateFlowImpl.updateState(null, configurationBasedDimensionsCopy$default);
     }
 
     public KeyguardSecBottomAreaView(Context context, AttributeSet attributeSet) {
@@ -354,7 +351,7 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
         this(context, (i3 & 2) != 0 ? null : attributeSet, (i3 & 4) != 0 ? 0 : i, (i3 & 8) != 0 ? 0 : i2);
     }
 
-    public KeyguardSecBottomAreaView(final Context context, AttributeSet attributeSet, int i, int i2) {
+    public KeyguardSecBottomAreaView(final Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         final int i3 = 0;
         this.leftView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView$$ExternalSyntheticLambda0
@@ -932,7 +929,6 @@ public final class KeyguardSecBottomAreaView extends FrameLayout {
         this.isLastVisibility = 8;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConfigurationBasedDimensions {
         public Size buttonSizePx;
         public final int defaultBurnInPreventionYOffsetPx;

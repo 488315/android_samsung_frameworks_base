@@ -7,7 +7,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OneOffSceneTransition extends TransitionState.Transition.ChangeScene {
     public final SceneKey currentScene;
@@ -72,11 +71,11 @@ public final class OneOffSceneTransition extends TransitionState.Transition.Chan
         if (function1 == null) {
             function1 = null;
         }
-        Object mo779invoke = ((AnimateContentKt$animateContent$1) function1).mo779invoke(continuation);
+        Object objMo781invoke = ((AnimateContentKt$animateContent$1) function1).mo781invoke(continuation);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (mo779invoke != coroutineSingletons) {
-            mo779invoke = Unit.INSTANCE;
+        if (objMo781invoke != coroutineSingletons) {
+            objMo781invoke = Unit.INSTANCE;
         }
-        return mo779invoke == coroutineSingletons ? mo779invoke : Unit.INSTANCE;
+        return objMo781invoke == coroutineSingletons ? objMo781invoke : Unit.INSTANCE;
     }
 }

@@ -17,7 +17,6 @@ import java.util.concurrent.Executor;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaMuteAwaitConnectionManager {
     public final AudioManager audioManager;
@@ -28,28 +27,28 @@ public final class MediaMuteAwaitConnectionManager {
     public final Executor mainExecutor;
     public final MediaMuteAwaitConnectionManager$muteAwaitConnectionChangeListener$1 muteAwaitConnectionChangeListener = new AudioManager.MuteAwaitConnectionCallback() { // from class: com.android.systemui.media.muteawait.MediaMuteAwaitConnectionManager$muteAwaitConnectionChangeListener$1
         public final void onMutedUntilConnection(AudioDeviceAttributes audioDeviceAttributes, int[] iArr) {
-            MediaMuteAwaitLogger mediaMuteAwaitLogger = MediaMuteAwaitConnectionManager.this.logger;
+            MediaMuteAwaitLogger mediaMuteAwaitLogger = this.this$0.logger;
             String address = audioDeviceAttributes.getAddress();
             String name = audioDeviceAttributes.getName();
-            MediaMuteAwaitConnectionManager.this.getClass();
-            boolean contains = ArraysKt___ArraysKt.contains(1, iArr);
+            this.this$0.getClass();
+            boolean zContains = ArraysKt___ArraysKt.contains(1, iArr);
             mediaMuteAwaitLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             MediaMuteAwaitLogger$$ExternalSyntheticLambda0 mediaMuteAwaitLogger$$ExternalSyntheticLambda0 = new MediaMuteAwaitLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = mediaMuteAwaitLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaMuteAwait", logLevel, mediaMuteAwaitLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaMuteAwait", logLevel, mediaMuteAwaitLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = address;
             logMessageImpl.str2 = name;
-            logMessageImpl.bool1 = contains;
-            logBuffer.commit(obtain);
-            MediaMuteAwaitConnectionManager.this.getClass();
+            logMessageImpl.bool1 = zContains;
+            logBuffer.commit(logMessageObtain);
+            this.this$0.getClass();
             if (ArraysKt___ArraysKt.contains(1, iArr)) {
-                MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = MediaMuteAwaitConnectionManager.this;
+                MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = this.this$0;
                 mediaMuteAwaitConnectionManager.currentMutedDevice = audioDeviceAttributes;
                 String address2 = audioDeviceAttributes.getAddress();
                 String name2 = audioDeviceAttributes.getName();
-                MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager2 = MediaMuteAwaitConnectionManager.this;
+                MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager2 = this.this$0;
                 mediaMuteAwaitConnectionManager2.getClass();
                 int type = audioDeviceAttributes.getType();
                 DeviceIconUtil deviceIconUtil = mediaMuteAwaitConnectionManager2.deviceIconUtil;
@@ -62,27 +61,27 @@ public final class MediaMuteAwaitConnectionManager {
         }
 
         public final void onUnmutedEvent(int i, AudioDeviceAttributes audioDeviceAttributes, int[] iArr) {
-            boolean areEqual = Intrinsics.areEqual(MediaMuteAwaitConnectionManager.this.currentMutedDevice, audioDeviceAttributes);
-            MediaMuteAwaitLogger mediaMuteAwaitLogger = MediaMuteAwaitConnectionManager.this.logger;
+            boolean zAreEqual = Intrinsics.areEqual(this.this$0.currentMutedDevice, audioDeviceAttributes);
+            MediaMuteAwaitLogger mediaMuteAwaitLogger = this.this$0.logger;
             String address = audioDeviceAttributes.getAddress();
             String name = audioDeviceAttributes.getName();
-            MediaMuteAwaitConnectionManager.this.getClass();
-            boolean contains = ArraysKt___ArraysKt.contains(1, iArr);
+            this.this$0.getClass();
+            boolean zContains = ArraysKt___ArraysKt.contains(1, iArr);
             mediaMuteAwaitLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             MediaMuteAwaitLogger$$ExternalSyntheticLambda0 mediaMuteAwaitLogger$$ExternalSyntheticLambda0 = new MediaMuteAwaitLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = mediaMuteAwaitLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaMuteAwait", logLevel, mediaMuteAwaitLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaMuteAwait", logLevel, mediaMuteAwaitLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = address;
             logMessageImpl.str2 = name;
-            logMessageImpl.bool1 = contains;
-            logMessageImpl.bool2 = areEqual;
-            logBuffer.commit(obtain);
-            if (areEqual) {
-                MediaMuteAwaitConnectionManager.this.getClass();
+            logMessageImpl.bool1 = zContains;
+            logMessageImpl.bool2 = zAreEqual;
+            logBuffer.commit(logMessageObtain);
+            if (zAreEqual) {
+                this.this$0.getClass();
                 if (ArraysKt___ArraysKt.contains(1, iArr)) {
-                    MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = MediaMuteAwaitConnectionManager.this;
+                    MediaMuteAwaitConnectionManager mediaMuteAwaitConnectionManager = this.this$0;
                     mediaMuteAwaitConnectionManager.currentMutedDevice = null;
                     Iterator it = ((CopyOnWriteArrayList) mediaMuteAwaitConnectionManager.localMediaManager.getCallbacks()).iterator();
                     while (it.hasNext()) {

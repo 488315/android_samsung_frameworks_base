@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
 import com.android.wm.shell.shared.bubbles.DismissView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda7 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -19,7 +18,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda7 imp
     }
 
     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+    public final void onAnimationUpdate(ValueAnimator valueAnimator) throws Resources.NotFoundException {
         float f;
         int i = this.$r8$classId;
         BubbleStackView bubbleStackView = this.f$0;
@@ -28,20 +27,20 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda7 imp
                 PhysicsAnimator.SpringConfig springConfig = BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG;
                 BubbleExpandedView expandedView = bubbleStackView.getExpandedView();
                 if (expandedView != null) {
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    expandedView.setContentAlpha(floatValue);
-                    expandedView.mPointerView.setAlpha(floatValue);
-                    expandedView.setAlpha(floatValue);
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    expandedView.setContentAlpha(fFloatValue);
+                    expandedView.mPointerView.setAlpha(fFloatValue);
+                    expandedView.setAlpha(fFloatValue);
                     break;
                 }
                 break;
             case 1:
                 PhysicsAnimator.SpringConfig springConfig2 = BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG;
                 bubbleStackView.getClass();
-                float floatValue2 = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue2 = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 DismissView dismissView = bubbleStackView.mDismissView;
                 if (dismissView != null) {
-                    if (floatValue2 <= 0.2d) {
+                    if (fFloatValue2 <= 0.2d) {
                         dismissView.circle.setup(R.drawable.dismiss_circle_background, R.drawable.bubble_delete_ic_drop, R.dimen.sec_noti_bubble_dismiss_button_width);
                         f = 1.15f;
                     } else {
@@ -54,7 +53,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda7 imp
                 }
                 View view = bubbleStackView.mViewBeingDismissed;
                 if (view != null) {
-                    view.setAlpha(Math.max(floatValue2, 0.7f));
+                    view.setAlpha(Math.max(fFloatValue2, 0.7f));
                     break;
                 }
                 break;

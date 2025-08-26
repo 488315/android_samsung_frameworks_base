@@ -17,7 +17,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiInstanceHelper implements ShellCommandHandler.ShellCommandActionHandler {
     public static final Companion Companion = new Companion(null);
@@ -27,7 +26,6 @@ public final class MultiInstanceHelper implements ShellCommandHandler.ShellComma
     public final String[] staticAppsSupportingMultiInstance;
     public final boolean supportsMultiInstanceProperty;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,7 +53,7 @@ public final class MultiInstanceHelper implements ShellCommandHandler.ShellComma
         for (String str : this.staticAppsSupportingMultiInstance) {
             printWriter.println("  " + str);
         }
-        List<PackageManager.Property> sortedWith = CollectionsKt___CollectionsKt.sortedWith(CollectionsKt___CollectionsKt.plus((Iterable) this.packageManager.queryActivityProperty("android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"), (Collection) this.packageManager.queryApplicationProperty("android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI")), new Comparator() { // from class: com.android.wm.shell.common.MultiInstanceHelper$dumpSupportedApps$appsWithProperty$1
+        List<PackageManager.Property> listSortedWith = CollectionsKt___CollectionsKt.sortedWith(CollectionsKt___CollectionsKt.plus((Iterable) this.packageManager.queryActivityProperty("android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"), (Collection) this.packageManager.queryApplicationProperty("android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI")), new Comparator() { // from class: com.android.wm.shell.common.MultiInstanceHelper$dumpSupportedApps$appsWithProperty$1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
                 String className;
@@ -85,11 +83,11 @@ public final class MultiInstanceHelper implements ShellCommandHandler.ShellComma
                 return -className3.compareTo(className);
             }
         });
-        if (sortedWith.isEmpty()) {
+        if (listSortedWith.isEmpty()) {
             return true;
         }
         printWriter.println("Apps (User " + this.context.getUserId() + "):");
-        for (PackageManager.Property property : sortedWith) {
+        for (PackageManager.Property property : listSortedWith) {
             if (property.isBoolean() && property.getBoolean()) {
                 if (property.getClassName() != null) {
                     printWriter.println("  " + property.getPackageName() + "/" + property.getClassName());

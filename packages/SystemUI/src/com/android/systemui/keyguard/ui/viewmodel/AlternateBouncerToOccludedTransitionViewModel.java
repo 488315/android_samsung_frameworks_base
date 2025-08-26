@@ -9,7 +9,6 @@ import com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuil
 import com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlternateBouncerToOccludedTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryParentViewAlpha;
@@ -17,9 +16,9 @@ public final class AlternateBouncerToOccludedTransitionViewModel implements Devi
 
     public AlternateBouncerToOccludedTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromAlternateBouncerTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m2598setupVtjQ1oo = keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(FromAlternateBouncerTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.ALTERNATE_BOUNCER, KeyguardState.OCCLUDED));
-        this.lockscreenAlpha = m2598setupVtjQ1oo.immediatelyTransitionTo(0.0f);
-        this.deviceEntryParentViewAlpha = m2598setupVtjQ1oo.immediatelyTransitionTo(0.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromAlternateBouncerTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.ALTERNATE_BOUNCER, KeyguardState.OCCLUDED));
+        this.lockscreenAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f);
+        this.deviceEntryParentViewAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

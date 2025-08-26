@@ -63,15 +63,15 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
             setImportantForAutofill(1);
         }
         initAbsSpinner();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsSpinner, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AbsSpinner, attributeSet, obtainStyledAttributes, i, i2);
-        CharSequence[] textArray = obtainStyledAttributes.getTextArray(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsSpinner, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.AbsSpinner, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        CharSequence[] textArray = typedArrayObtainStyledAttributes.getTextArray(0);
         if (textArray != null) {
             ArrayAdapter arrayAdapter = new ArrayAdapter(context, 17367048, textArray);
             arrayAdapter.setDropDownViewResource(17367049);
             setAdapter((SpinnerAdapter) arrayAdapter);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private void initAbsSpinner() {
@@ -121,123 +121,82 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
         invalidate();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00a3  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x009f  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r7, int r8) {
-        /*
-            r6 = this;
-            int r0 = android.view.View.MeasureSpec.getMode(r7)
-            android.graphics.Rect r1 = r6.mSpinnerPadding
-            int r2 = r6.mPaddingLeft
-            int r3 = r6.mSelectionLeftPadding
-            if (r2 <= r3) goto Le
-            int r3 = r6.mPaddingLeft
-        Le:
-            r1.left = r3
-            android.graphics.Rect r1 = r6.mSpinnerPadding
-            int r2 = r6.mPaddingTop
-            int r3 = r6.mSelectionTopPadding
-            if (r2 <= r3) goto L1a
-            int r3 = r6.mPaddingTop
-        L1a:
-            r1.top = r3
-            android.graphics.Rect r1 = r6.mSpinnerPadding
-            int r2 = r6.mPaddingRight
-            int r3 = r6.mSelectionRightPadding
-            if (r2 <= r3) goto L26
-            int r3 = r6.mPaddingRight
-        L26:
-            r1.right = r3
-            android.graphics.Rect r1 = r6.mSpinnerPadding
-            int r2 = r6.mPaddingBottom
-            int r3 = r6.mSelectionBottomPadding
-            if (r2 <= r3) goto L32
-            int r3 = r6.mPaddingBottom
-        L32:
-            r1.bottom = r3
-            boolean r1 = r6.mDataChanged
-            if (r1 == 0) goto L3b
-            r6.handleDataChanged()
-        L3b:
-            int r1 = r6.getSelectedItemPosition()
-            r2 = 1
-            r3 = 0
-            if (r1 < 0) goto L9f
-            android.widget.SpinnerAdapter r4 = r6.mAdapter
-            if (r4 == 0) goto L9f
-            int r4 = r4.getCount()
-            if (r1 >= r4) goto L9f
-            android.widget.AbsSpinner$RecycleBin r4 = r6.mRecycler
-            android.view.View r4 = r4.get(r1)
-            if (r4 != 0) goto L65
-            android.widget.SpinnerAdapter r4 = r6.mAdapter
-            r5 = 0
-            android.view.View r4 = r4.getView(r1, r5, r6)
-            int r5 = r4.getImportantForAccessibility()
-            if (r5 != 0) goto L65
-            r4.setImportantForAccessibility(r2)
-        L65:
-            if (r4 == 0) goto L9f
-            android.widget.AbsSpinner$RecycleBin r5 = r6.mRecycler
-            r5.put(r1, r4)
-            android.view.ViewGroup$LayoutParams r1 = r4.getLayoutParams()
-            if (r1 != 0) goto L7d
-            r6.mBlockLayoutRequests = r2
-            android.view.ViewGroup$LayoutParams r1 = r6.generateDefaultLayoutParams()
-            r4.setLayoutParams(r1)
-            r6.mBlockLayoutRequests = r3
-        L7d:
-            r6.measureChild(r4, r7, r8)
-            int r1 = r6.getChildHeight(r4)
-            android.graphics.Rect r2 = r6.mSpinnerPadding
-            int r2 = r2.top
-            int r1 = r1 + r2
-            android.graphics.Rect r2 = r6.mSpinnerPadding
-            int r2 = r2.bottom
-            int r1 = r1 + r2
-            int r2 = r6.getChildWidth(r4)
-            android.graphics.Rect r4 = r6.mSpinnerPadding
-            int r4 = r4.left
-            int r2 = r2 + r4
-            android.graphics.Rect r4 = r6.mSpinnerPadding
-            int r4 = r4.right
-            int r2 = r2 + r4
-            r4 = r2
-            r2 = r3
-            goto La1
-        L9f:
-            r1 = r3
-            r4 = r1
-        La1:
-            if (r2 == 0) goto Lb8
-            android.graphics.Rect r1 = r6.mSpinnerPadding
-            int r1 = r1.top
-            android.graphics.Rect r2 = r6.mSpinnerPadding
-            int r2 = r2.bottom
-            int r1 = r1 + r2
-            if (r0 != 0) goto Lb8
-            android.graphics.Rect r0 = r6.mSpinnerPadding
-            int r0 = r0.left
-            android.graphics.Rect r2 = r6.mSpinnerPadding
-            int r2 = r2.right
-            int r4 = r0 + r2
-        Lb8:
-            int r0 = r6.getSuggestedMinimumHeight()
-            int r0 = java.lang.Math.max(r1, r0)
-            int r1 = r6.getSuggestedMinimumWidth()
-            int r1 = java.lang.Math.max(r4, r1)
-            int r0 = resolveSizeAndState(r0, r8, r3)
-            int r1 = resolveSizeAndState(r1, r7, r3)
-            r6.setMeasuredDimension(r1, r0)
-            r6.mHeightMeasureSpec = r8
-            r6.mWidthMeasureSpec = r7
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.AbsSpinner.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int childHeight;
+        int childWidth;
+        SpinnerAdapter spinnerAdapter;
+        int mode = View.MeasureSpec.getMode(i);
+        Rect rect = this.mSpinnerPadding;
+        int i3 = this.mPaddingLeft;
+        int i4 = this.mSelectionLeftPadding;
+        if (i3 > i4) {
+            i4 = this.mPaddingLeft;
+        }
+        rect.left = i4;
+        Rect rect2 = this.mSpinnerPadding;
+        int i5 = this.mPaddingTop;
+        int i6 = this.mSelectionTopPadding;
+        if (i5 > i6) {
+            i6 = this.mPaddingTop;
+        }
+        rect2.top = i6;
+        Rect rect3 = this.mSpinnerPadding;
+        int i7 = this.mPaddingRight;
+        int i8 = this.mSelectionRightPadding;
+        if (i7 > i8) {
+            i8 = this.mPaddingRight;
+        }
+        rect3.right = i8;
+        Rect rect4 = this.mSpinnerPadding;
+        int i9 = this.mPaddingBottom;
+        int i10 = this.mSelectionBottomPadding;
+        if (i9 > i10) {
+            i10 = this.mPaddingBottom;
+        }
+        rect4.bottom = i10;
+        if (this.mDataChanged) {
+            handleDataChanged();
+        }
+        int selectedItemPosition = getSelectedItemPosition();
+        boolean z = true;
+        if (selectedItemPosition < 0 || (spinnerAdapter = this.mAdapter) == null || selectedItemPosition >= spinnerAdapter.getCount()) {
+            childHeight = 0;
+            childWidth = 0;
+        } else {
+            View view = this.mRecycler.get(selectedItemPosition);
+            if (view == null) {
+                view = this.mAdapter.getView(selectedItemPosition, null, this);
+                if (view.getImportantForAccessibility() == 0) {
+                    view.setImportantForAccessibility(1);
+                }
+            }
+            if (view != null) {
+                this.mRecycler.put(selectedItemPosition, view);
+                if (view.getLayoutParams() == null) {
+                    this.mBlockLayoutRequests = true;
+                    view.setLayoutParams(generateDefaultLayoutParams());
+                    this.mBlockLayoutRequests = false;
+                }
+                measureChild(view, i, i2);
+                childHeight = getChildHeight(view) + this.mSpinnerPadding.top + this.mSpinnerPadding.bottom;
+                childWidth = getChildWidth(view) + this.mSpinnerPadding.left + this.mSpinnerPadding.right;
+                z = false;
+            }
+        }
+        if (z) {
+            childHeight = this.mSpinnerPadding.top + this.mSpinnerPadding.bottom;
+            if (mode == 0) {
+                childWidth = this.mSpinnerPadding.left + this.mSpinnerPadding.right;
+            }
+        }
+        setMeasuredDimension(resolveSizeAndState(Math.max(childWidth, getSuggestedMinimumWidth()), i, 0), resolveSizeAndState(Math.max(childHeight, getSuggestedMinimumHeight()), i2, 0));
+        this.mHeightMeasureSpec = i2;
+        this.mWidthMeasureSpec = i;
     }
 
     int getChildHeight(View view) {
@@ -262,34 +221,20 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x000f, code lost:
-    
-        if (r2 <= ((r1.mFirstPosition + getChildCount()) - 1)) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setSelection(int r2, boolean r3) {
-        /*
-            r1 = this;
-            if (r3 == 0) goto L12
-            int r3 = r1.mFirstPosition
-            if (r3 > r2) goto L12
-            int r3 = r1.mFirstPosition
-            int r0 = r1.getChildCount()
-            int r3 = r3 + r0
-            r0 = 1
-            int r3 = r3 - r0
-            if (r2 > r3) goto L12
-            goto L13
-        L12:
-            r0 = 0
-        L13:
-            r1.setSelectionInt(r2, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.AbsSpinner.setSelection(int, boolean):void");
+    public void setSelection(int i, boolean z) {
+        boolean z2;
+        if (!z || this.mFirstPosition > i) {
+            z2 = false;
+        } else {
+            z2 = true;
+            if (i > (this.mFirstPosition + getChildCount()) - 1) {
+            }
+        }
+        setSelectionInt(i, z2);
     }
 
     @Override // android.widget.AdapterView
@@ -446,9 +391,9 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
             SparseArray<View> sparseArray = this.mScrapHeap;
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                View valueAt = sparseArray.valueAt(i);
-                if (valueAt != null) {
-                    AbsSpinner.this.removeDetachedView(valueAt, true);
+                View viewValueAt = sparseArray.valueAt(i);
+                if (viewValueAt != null) {
+                    AbsSpinner.this.removeDetachedView(viewValueAt, true);
                 }
             }
             sparseArray.clear();

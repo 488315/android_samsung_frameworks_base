@@ -38,13 +38,13 @@ public final class ContextHubMsg {
 
     public static final ArrayList<ContextHubMsg> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ContextHubMsg> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ContextHubMsg contextHubMsg = new ContextHubMsg();
-            contextHubMsg.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            contextHubMsg.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(contextHubMsg);
         }
         return arrayList;
@@ -56,10 +56,10 @@ public final class ContextHubMsg {
         this.msgType = hwBlob.getInt32(12 + j);
         long j2 = j + 16;
         int int32 = hwBlob.getInt32(j + 24);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
         this.msg.clear();
         for (int i = 0; i < int32; i++) {
-            this.msg.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.msg.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

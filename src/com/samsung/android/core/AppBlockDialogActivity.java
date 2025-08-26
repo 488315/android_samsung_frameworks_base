@@ -62,9 +62,9 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
         this.requestCode = extras.getInt("requestCode", -1);
         this.options = (Bundle) extras.getParcelable("options");
         this.sourceAppInfo = (AppJumpBlockTool.AppInfo) extras.getParcelable("sourceAppInfo");
-        List<AppJumpBlockTool.AppInfo> asList = Arrays.asList((AppJumpBlockTool.AppInfo[]) extras.getParcelableArray("blockedAppList", AppJumpBlockTool.AppInfo.class));
-        this.blockedAppList = asList;
-        if (asList.isEmpty()) {
+        List<AppJumpBlockTool.AppInfo> listAsList = Arrays.asList((AppJumpBlockTool.AppInfo[]) extras.getParcelableArray("blockedAppList", AppJumpBlockTool.AppInfo.class));
+        this.blockedAppList = listAsList;
+        if (listAsList.isEmpty()) {
             Log.i("AppJumpBlockTool", "blockedAppList:isEmpty");
             this.isClickAllow = true;
             sendAllowResult();
@@ -139,9 +139,9 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
                 AppBlockDialogActivity.this.finish();
             }
         }).setNegativeButton(17039360, (DialogInterface.OnClickListener) null).setMessage(getString(R.string.app_block_content, this.sourceAppInfo.appName, sb.toString())).setView(checkBox).show().getWindow().findViewById(16908299)).getCurrentTextColor());
-        int applyDimension = (int) TypedValue.applyDimension(1, 17.0f, getResources().getDisplayMetrics());
+        int iApplyDimension = (int) TypedValue.applyDimension(1, 17.0f, getResources().getDisplayMetrics());
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) checkBox.getLayoutParams();
-        layoutParams.setMargins(applyDimension, 0, 0, 0);
+        layoutParams.setMargins(iApplyDimension, 0, 0, 0);
         checkBox.setLayoutParams(layoutParams);
     }
 

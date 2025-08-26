@@ -21,7 +21,6 @@ import kotlin.ranges.ClosedFloatRange;
 import kotlin.ranges.IntRange;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $disabledMessage;
@@ -61,9 +60,9 @@ final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implement
         SliderHapticFeedbackFilter sliderHapticFeedbackFilter;
         int i;
         int i2;
-        String str;
-        String str2;
         String string2;
+        String str;
+        String string3;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -71,7 +70,7 @@ final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implement
         ResultKt.throwOnFailure(obj);
         AudioStreamSliderViewModel audioStreamSliderViewModel = this.this$0;
         AudioStreamModel audioStreamModel = this.$this_toState;
-        Integer num = (Integer) audioStreamSliderViewModel.labelsByStream.get(AudioStream.m988boximpl(audioStreamModel.audioStream));
+        Integer num = (Integer) audioStreamSliderViewModel.labelsByStream.get(AudioStream.m990boximpl(audioStreamModel.audioStream));
         if (num == null || (string = audioStreamSliderViewModel.context.getString(num.intValue())) == null) {
             throw new IllegalStateException(("No label for the stream: " + AudioSystem.streamToString(audioStreamModel.audioStream)).toString());
         }
@@ -88,7 +87,7 @@ final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implement
         int i3 = this.$ringerMode;
         audioStreamSliderViewModel3.getClass();
         int i4 = audioStreamModel4.audioStream;
-        String str3 = null;
+        String string4 = null;
         if (i4 == 2) {
             sliderHapticFeedbackFilter = new SliderHapticFeedbackFilter(false, false, 1, null);
         } else if (i4 != 5) {
@@ -133,12 +132,12 @@ final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implement
         AudioStreamModel audioStreamModel6 = this.$this_toState;
         audioStreamSliderViewModel5.getClass();
         float f3 = new IntRange(audioStreamModel6.minVolume, audioStreamModel6.maxVolume).step;
-        String str4 = (this.$isEnabled || (str2 = this.$disabledMessage) == null || (string2 = this.this$0.context.getString(R.string.volume_slider_disabled_message_template, string, str2)) == null) ? string : string2;
+        String str2 = (this.$isEnabled || (str = this.$disabledMessage) == null || (string3 = this.this$0.context.getString(R.string.volume_slider_disabled_message_template, string, str)) == null) ? string : string3;
         AudioStreamModel audioStreamModel7 = this.$this_toState;
         if (audioStreamModel7.isAffectedByMute) {
-            str = this.this$0.context.getString(audioStreamModel7.isMuted ? R.string.volume_panel_hint_unmute : R.string.volume_panel_hint_mute, string);
+            string2 = this.this$0.context.getString(audioStreamModel7.isMuted ? R.string.volume_panel_hint_unmute : R.string.volume_panel_hint_mute, string);
         } else {
-            str = null;
+            string2 = null;
         }
         AudioStreamModel audioStreamModel8 = this.$this_toState;
         if (audioStreamModel8.isMuted) {
@@ -148,9 +147,9 @@ final class AudioStreamSliderViewModel$toState$2 extends SuspendLambda implement
             if (z2 && this.$ringerMode == 1) {
                 i7 = R.string.volume_panel_hint_vibrate;
             }
-            str3 = context.getString(i7);
+            string4 = context.getString(i7);
         }
         AudioStreamModel audioStreamModel9 = this.$this_toState;
-        return new AudioStreamSliderViewModel.State(f, closedFloatRange, f3, sliderHapticFeedbackFilter, loaded, string, this.$disabledMessage, this.$isEnabled, str, str3, str4, audioStreamModel9.isAffectedByMute, audioStreamModel9);
+        return new AudioStreamSliderViewModel.State(f, closedFloatRange, f3, sliderHapticFeedbackFilter, loaded, string, this.$disabledMessage, this.$isEnabled, string2, string4, str2, audioStreamModel9.isAffectedByMute, audioStreamModel9);
     }
 }

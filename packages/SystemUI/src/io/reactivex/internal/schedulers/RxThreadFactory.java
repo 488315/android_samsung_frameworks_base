@@ -4,7 +4,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RxThreadFactory extends AtomicLong implements ThreadFactory {
     private static final long serialVersionUID = -7789753024099756196L;
@@ -12,7 +11,6 @@ public final class RxThreadFactory extends AtomicLong implements ThreadFactory {
     final String prefix;
     final int priority;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RxCustomThread extends Thread {
         public RxCustomThread(Runnable runnable, String str) {
             super(runnable, str);

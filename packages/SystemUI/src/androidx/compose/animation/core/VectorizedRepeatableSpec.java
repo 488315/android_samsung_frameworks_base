@@ -3,7 +3,6 @@ package androidx.compose.animation.core;
 import androidx.compose.animation.core.AnimationVector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedRepeatableSpec<V extends AnimationVector> implements VectorizedFiniteAnimationSpec<V> {
     public final VectorizedDurationBasedAnimationSpec animation;
@@ -38,8 +37,8 @@ public final class VectorizedRepeatableSpec<V extends AnimationVector> implement
         }
         long j3 = j + j2;
         long j4 = this.durationNanos;
-        long min = Math.min(j3 / j4, this.iterations - 1);
-        return (this.repeatMode == RepeatMode.Restart || min % ((long) 2) == 0) ? j3 - (min * j4) : ((min + 1) * j4) - j3;
+        long jMin = Math.min(j3 / j4, this.iterations - 1);
+        return (this.repeatMode == RepeatMode.Restart || jMin % ((long) 2) == 0) ? j3 - (jMin * j4) : ((jMin + 1) * j4) - j3;
     }
 
     public final AnimationVector repetitionStartVelocity(long j, AnimationVector animationVector, AnimationVector animationVector2, AnimationVector animationVector3) {

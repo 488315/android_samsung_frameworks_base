@@ -11,7 +11,6 @@ import com.android.systemui.util.SettingsHelper;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClickableLottieAnimView extends LottieAnimationView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class ClickableLottieAnimView extends LottieAnimationView {
         this.animType = AnimType.SEPARATE;
         setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.qs.customize.view.ClickableLottieAnimView$getButtonAccessibilityDelegate$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -48,7 +46,7 @@ public final class ClickableLottieAnimView extends LottieAnimationView {
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                 int i;
                 super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                int i2 = WhenMappings.$EnumSwitchMapping$0[ClickableLottieAnimView.this.animType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.animType.ordinal()];
                 if (i2 == 1) {
                     i = R.string.qs_edit_separate_anim_name;
                 } else {
@@ -57,7 +55,7 @@ public final class ClickableLottieAnimView extends LottieAnimationView {
                     }
                     i = R.string.qs_edit_together_anim_name;
                 }
-                accessibilityNodeInfo.setText(ClickableLottieAnimView.this.getContext().getText(i));
+                accessibilityNodeInfo.setText(this.this$0.getContext().getText(i));
             }
         });
         if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isRemoveAnimation()) {
@@ -67,28 +65,28 @@ public final class ClickableLottieAnimView extends LottieAnimationView {
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     int i;
-                    ClickableLottieAnimView clickableLottieAnimView = ClickableLottieAnimView.this;
+                    ClickableLottieAnimView clickableLottieAnimView = this.this$0;
                     int i2 = ClickableLottieAnimView.$r8$clinit;
                     clickableLottieAnimView.getClass();
                     if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isRemoveAnimation()) {
                         return;
                     }
-                    if (ClickableLottieAnimView.this.isAnimating()) {
-                        ClickableLottieAnimView.this.pauseAnimation();
+                    if (this.this$0.isAnimating()) {
+                        this.this$0.pauseAnimation();
                     } else {
-                        ClickableLottieAnimView.this.resumeAnimation();
+                        this.this$0.resumeAnimation();
                     }
-                    ClickableLottieAnimView clickableLottieAnimView2 = ClickableLottieAnimView.this;
-                    boolean isAnimating = clickableLottieAnimView2.isAnimating();
-                    if (isAnimating) {
+                    ClickableLottieAnimView clickableLottieAnimView2 = this.this$0;
+                    boolean zIsAnimating = clickableLottieAnimView2.isAnimating();
+                    if (zIsAnimating) {
                         i = R.string.qs_edit_anim_play;
                     } else {
-                        if (isAnimating) {
+                        if (zIsAnimating) {
                             throw new NoWhenBranchMatchedException();
                         }
                         i = R.string.qs_edit_anim_stop;
                     }
-                    clickableLottieAnimView2.announceForAccessibility(ClickableLottieAnimView.this.getContext().getText(i));
+                    clickableLottieAnimView2.announceForAccessibility(this.this$0.getContext().getText(i));
                 }
             });
         }

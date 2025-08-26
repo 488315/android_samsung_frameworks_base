@@ -4,8 +4,8 @@ import android.app.PendingIntent;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.versionedparcelable.VersionedParcel;
 import androidx.versionedparcelable.VersionedParcelable;
+import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RemoteActionCompatParcelizer {
     public static RemoteActionCompat read(VersionedParcel versionedParcel) {
@@ -39,7 +39,7 @@ public class RemoteActionCompatParcelizer {
         return remoteActionCompat;
     }
 
-    public static void write(RemoteActionCompat remoteActionCompat, VersionedParcel versionedParcel) {
+    public static void write(RemoteActionCompat remoteActionCompat, VersionedParcel versionedParcel) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         versionedParcel.getClass();
         IconCompat iconCompat = remoteActionCompat.mIcon;
         versionedParcel.setOutputField(1);

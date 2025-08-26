@@ -44,9 +44,9 @@ public interface IForegroundServiceObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IForegroundServiceObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IForegroundServiceObserver)) {
-                return (IForegroundServiceObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IForegroundServiceObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IForegroundServiceObserver)) {
+                return (IForegroundServiceObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface IForegroundServiceObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onForegroundStateChanged(readStrongBinder, readString, readInt, readBoolean);
+                onForegroundStateChanged(strongBinder, string, i3, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,16 +102,16 @@ public interface IForegroundServiceObserver extends IInterface {
 
             @Override // android.app.IForegroundServiceObserver
             public void onForegroundStateChanged(IBinder iBinder, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IForegroundServiceObserver.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IForegroundServiceObserver.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

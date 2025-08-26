@@ -45,7 +45,7 @@ public final class AsyncNotedAppOp implements Parcelable {
     }
 
     private void onConstructed() {
-        Preconditions.checkArgumentInRange(this.mOpCode, 0, 162, "opCode");
+        Preconditions.checkArgumentInRange(this.mOpCode, 0, 164, "opCode");
     }
 
     private String opCodeToString() {
@@ -116,21 +116,21 @@ public final class AsyncNotedAppOp implements Parcelable {
     }
 
     AsyncNotedAppOp(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        String readString = (readByte & 4) == 0 ? null : parcel.readString();
-        String readString2 = parcel.readString();
-        long readLong = parcel.readLong();
-        this.mOpCode = readInt;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt, "from", 0L);
-        this.mNotingUid = readInt2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt2, "from", 0L);
-        this.mAttributionTag = readString;
-        this.mMessage = readString2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString2);
-        this.mTime = readLong;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, readLong);
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        String string = (b & 4) == 0 ? null : parcel.readString();
+        String string2 = parcel.readString();
+        long j = parcel.readLong();
+        this.mOpCode = i;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", 0L);
+        this.mNotingUid = i2;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L);
+        this.mAttributionTag = string;
+        this.mMessage = string2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string2);
+        this.mTime = j;
+        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, j);
         onConstructed();
     }
 }

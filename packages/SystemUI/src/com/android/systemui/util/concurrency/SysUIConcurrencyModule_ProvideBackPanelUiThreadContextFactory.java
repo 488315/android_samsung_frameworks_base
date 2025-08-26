@@ -6,7 +6,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideBackPanelUiThreadContextFactory implements Provider {
     private final Provider mainExecutorProvider;
@@ -24,9 +23,9 @@ public final class SysUIConcurrencyModule_ProvideBackPanelUiThreadContextFactory
     }
 
     public static UiThreadContext provideBackPanelUiThreadContext(Looper looper, Handler handler, Executor executor) {
-        UiThreadContext provideBackPanelUiThreadContext = SysUIConcurrencyModule.INSTANCE.provideBackPanelUiThreadContext(looper, handler, executor);
-        provideBackPanelUiThreadContext.getClass();
-        return provideBackPanelUiThreadContext;
+        UiThreadContext uiThreadContextProvideBackPanelUiThreadContext = SysUIConcurrencyModule.INSTANCE.provideBackPanelUiThreadContext(looper, handler, executor);
+        uiThreadContextProvideBackPanelUiThreadContext.getClass();
+        return uiThreadContextProvideBackPanelUiThreadContext;
     }
 
     public static SysUIConcurrencyModule_ProvideBackPanelUiThreadContextFactory create(Provider provider, Provider provider2, Provider provider3) {

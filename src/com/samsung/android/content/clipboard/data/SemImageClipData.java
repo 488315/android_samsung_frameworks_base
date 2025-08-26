@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -195,7 +196,7 @@ public class SemImageClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "Bitmap write to parcel");
         parcel.writeInt(2);
         super.writeToParcel(parcel, i);
@@ -216,11 +217,11 @@ public class SemImageClipData extends SemClipData {
     protected void readFromSource(Parcel parcel) {
         try {
             this.mImagePath = parcel.readString();
-            String readString = parcel.readString();
-            if (TextUtils.isEmpty(readString)) {
+            String string = parcel.readString();
+            if (TextUtils.isEmpty(string)) {
                 this.mContentUri = null;
             } else {
-                this.mContentUri = Uri.parse(readString);
+                this.mContentUri = Uri.parse(string);
             }
             this.mInitBaseValue = parcel.readString();
             this.mInitBaseValueCheck = parcel.readByte() != 0;
@@ -252,11 +253,11 @@ public class SemImageClipData extends SemClipData {
         StringBuilder sb = new StringBuilder("SemImageClipData class. Value is ");
         int length = this.mImagePath.length();
         String str = this.mImagePath;
-        CharSequence charSequence = str;
+        CharSequence charSequenceSubSequence = str;
         if (length > 20) {
-            charSequence = str.subSequence(0, 20);
+            charSequenceSubSequence = str.subSequence(0, 20);
         }
-        sb.append((Object) charSequence);
+        sb.append((Object) charSequenceSubSequence);
         return sb.toString();
     }
 
@@ -327,168 +328,162 @@ public class SemImageClipData extends SemClipData {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x004b A[Catch: Exception -> 0x0047, TRY_LEAVE, TryCatch #4 {Exception -> 0x0047, blocks: (B:42:0x0043, B:35:0x004b), top: B:41:0x0043 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0043 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x004b A[Catch: Exception -> 0x0047, TRY_LEAVE, TryCatch #4 {Exception -> 0x0047, blocks: (B:36:0x0043, B:40:0x004b), top: B:48:0x0043 }] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0043 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean compareFile(java.lang.String r3, java.io.FileDescriptor r4) {
-        /*
-            r2 = this;
-            r0 = 0
-            java.io.FileInputStream r1 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L27 java.io.FileNotFoundException -> L2a
-            r1.<init>(r3)     // Catch: java.lang.Throwable -> L27 java.io.FileNotFoundException -> L2a
-            java.io.FileInputStream r3 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L1f java.io.FileNotFoundException -> L23
-            r3.<init>(r4)     // Catch: java.lang.Throwable -> L1f java.io.FileNotFoundException -> L23
-            boolean r2 = r2.compareFile(r1, r3)     // Catch: java.lang.Throwable -> L1b java.io.FileNotFoundException -> L1d
-            r1.close()     // Catch: java.lang.Exception -> L16
-            r3.close()     // Catch: java.lang.Exception -> L16
-            goto L3f
-        L16:
-            r3 = move-exception
-            r3.printStackTrace()
-            goto L3f
-        L1b:
-            r2 = move-exception
-            goto L21
-        L1d:
-            r2 = move-exception
-            goto L25
-        L1f:
-            r2 = move-exception
-            r3 = r0
-        L21:
-            r0 = r1
-            goto L41
-        L23:
-            r2 = move-exception
-            r3 = r0
-        L25:
-            r0 = r1
-            goto L2c
-        L27:
-            r2 = move-exception
-            r3 = r0
-            goto L41
-        L2a:
-            r2 = move-exception
-            r3 = r0
-        L2c:
-            r2.printStackTrace()     // Catch: java.lang.Throwable -> L40
-            if (r0 == 0) goto L34
-            r0.close()     // Catch: java.lang.Exception -> L3a
-        L34:
-            if (r3 == 0) goto L3e
-            r3.close()     // Catch: java.lang.Exception -> L3a
-            goto L3e
-        L3a:
-            r2 = move-exception
-            r2.printStackTrace()
-        L3e:
-            r2 = 0
-        L3f:
-            return r2
-        L40:
-            r2 = move-exception
-        L41:
-            if (r0 == 0) goto L49
-            r0.close()     // Catch: java.lang.Exception -> L47
-            goto L49
-        L47:
-            r3 = move-exception
-            goto L4f
-        L49:
-            if (r3 == 0) goto L52
-            r3.close()     // Catch: java.lang.Exception -> L47
-            goto L52
-        L4f:
-            r3.printStackTrace()
-        L52:
-            throw r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.clipboard.data.SemImageClipData.compareFile(java.lang.String, java.io.FileDescriptor):boolean");
+    private boolean compareFile(String str, FileDescriptor fileDescriptor) throws Throwable {
+        FileInputStream fileInputStream;
+        FileInputStream fileInputStream2;
+        FileInputStream fileInputStream3 = null;
+        try {
+            fileInputStream2 = new FileInputStream(str);
+            try {
+                fileInputStream = new FileInputStream(fileDescriptor);
+            } catch (FileNotFoundException e) {
+                e = e;
+                fileInputStream = null;
+            } catch (Throwable th) {
+                th = th;
+                fileInputStream = null;
+            }
+        } catch (FileNotFoundException e2) {
+            e = e2;
+            fileInputStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+            fileInputStream = null;
+        }
+        try {
+            boolean zCompareFile = compareFile(fileInputStream2, fileInputStream);
+            try {
+                fileInputStream2.close();
+                fileInputStream.close();
+                return zCompareFile;
+            } catch (Exception e3) {
+                e3.printStackTrace();
+                return zCompareFile;
+            }
+        } catch (FileNotFoundException e4) {
+            e = e4;
+            fileInputStream3 = fileInputStream2;
+            try {
+                e.printStackTrace();
+                if (fileInputStream3 != null) {
+                    try {
+                        fileInputStream3.close();
+                    } catch (Exception e5) {
+                        e5.printStackTrace();
+                        return false;
+                    }
+                }
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                return false;
+            } catch (Throwable th3) {
+                th = th3;
+                if (fileInputStream3 != null) {
+                    try {
+                        fileInputStream3.close();
+                    } catch (Exception e6) {
+                        e6.printStackTrace();
+                        throw th;
+                    }
+                }
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                throw th;
+            }
+        } catch (Throwable th4) {
+            th = th4;
+            fileInputStream3 = fileInputStream2;
+            if (fileInputStream3 != null) {
+            }
+            if (fileInputStream != null) {
+            }
+            throw th;
+        }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0049 A[Catch: Exception -> 0x0045, TRY_LEAVE, TryCatch #3 {Exception -> 0x0045, blocks: (B:32:0x0041, B:25:0x0049), top: B:31:0x0041 }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0041 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0049 A[Catch: Exception -> 0x0045, TRY_LEAVE, TryCatch #3 {Exception -> 0x0045, blocks: (B:32:0x0041, B:36:0x0049), top: B:41:0x0041 }] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x0041 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r3v14, types: [boolean] */
     /* JADX WARN: Type inference failed for: r3v6, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean compareFile(java.lang.String r4, java.lang.String r5) {
-        /*
-            r3 = this;
-            r0 = 0
-            java.io.FileInputStream r1 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L27 java.io.FileNotFoundException -> L2a
-            r1.<init>(r4)     // Catch: java.lang.Throwable -> L27 java.io.FileNotFoundException -> L2a
-            java.io.FileInputStream r2 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L1f java.io.FileNotFoundException -> L23
-            r2.<init>(r5)     // Catch: java.lang.Throwable -> L1f java.io.FileNotFoundException -> L23
-            boolean r3 = r3.compareFile(r1, r2)     // Catch: java.lang.Throwable -> L1b java.io.FileNotFoundException -> L1d
-            r1.close()     // Catch: java.lang.Exception -> L16
-            r2.close()     // Catch: java.lang.Exception -> L16
-            goto L3d
-        L16:
-            r4 = move-exception
-            r4.printStackTrace()
-            goto L3d
-        L1b:
-            r3 = move-exception
-            goto L21
-        L1d:
-            r3 = move-exception
-            goto L25
-        L1f:
-            r3 = move-exception
-            r2 = r0
-        L21:
-            r0 = r1
-            goto L3f
-        L23:
-            r3 = move-exception
-            r2 = r0
-        L25:
-            r0 = r1
-            goto L2c
-        L27:
-            r3 = move-exception
-            r2 = r0
-            goto L3f
-        L2a:
-            r3 = move-exception
-            r2 = r0
-        L2c:
-            r3.printStackTrace()     // Catch: java.lang.Throwable -> L3e
-            boolean r3 = r4.equals(r5)     // Catch: java.lang.Throwable -> L3e
-            if (r0 == 0) goto L38
-            r0.close()     // Catch: java.lang.Exception -> L16
-        L38:
-            if (r2 == 0) goto L3d
-            r2.close()     // Catch: java.lang.Exception -> L16
-        L3d:
-            return r3
-        L3e:
-            r3 = move-exception
-        L3f:
-            if (r0 == 0) goto L47
-            r0.close()     // Catch: java.lang.Exception -> L45
-            goto L47
-        L45:
-            r4 = move-exception
-            goto L4d
-        L47:
-            if (r2 == 0) goto L50
-            r2.close()     // Catch: java.lang.Exception -> L45
-            goto L50
-        L4d:
-            r4.printStackTrace()
-        L50:
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.clipboard.data.SemImageClipData.compareFile(java.lang.String, java.lang.String):boolean");
+    private boolean compareFile(String str, String str2) throws Throwable {
+        FileInputStream fileInputStream;
+        FileInputStream fileInputStream2;
+        FileInputStream fileInputStream3 = null;
+        try {
+            try {
+                fileInputStream2 = new FileInputStream(str);
+                try {
+                    fileInputStream = new FileInputStream(str2);
+                } catch (FileNotFoundException e) {
+                    e = e;
+                    fileInputStream = null;
+                } catch (Throwable th) {
+                    th = th;
+                    fileInputStream = null;
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        } catch (FileNotFoundException e3) {
+            e = e3;
+            fileInputStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+            fileInputStream = null;
+        }
+        try {
+            this = compareFile(fileInputStream2, fileInputStream);
+            fileInputStream2.close();
+            fileInputStream.close();
+        } catch (FileNotFoundException e4) {
+            e = e4;
+            fileInputStream3 = fileInputStream2;
+            try {
+                e.printStackTrace();
+                this = str.equals(str2);
+                if (fileInputStream3 != null) {
+                    fileInputStream3.close();
+                }
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                return this;
+            } catch (Throwable th3) {
+                th = th3;
+                if (fileInputStream3 != null) {
+                    try {
+                        fileInputStream3.close();
+                    } catch (Exception e5) {
+                        e5.printStackTrace();
+                        throw th;
+                    }
+                }
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                throw th;
+            }
+        } catch (Throwable th4) {
+            th = th4;
+            fileInputStream3 = fileInputStream2;
+            if (fileInputStream3 != null) {
+            }
+            if (fileInputStream != null) {
+            }
+            throw th;
+        }
+        return this;
     }
 
     public String getBitmapPath() {
@@ -541,7 +536,7 @@ public class SemImageClipData extends SemClipData {
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void insertContentUri(Context context, String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("_data", str);
@@ -549,7 +544,7 @@ public class SemImageClipData extends SemClipData {
         } catch (Exception e) {
             Log.e(TAG, "Exception occurs in insertContentUri because " + e.getMessage());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

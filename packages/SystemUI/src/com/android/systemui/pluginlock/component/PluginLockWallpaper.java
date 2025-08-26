@@ -3,6 +3,7 @@ package com.android.systemui.pluginlock.component;
 import android.app.SemWallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,12 +27,15 @@ import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0;
+import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.android.systemui.pluginlock.PluginLockInstanceState;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.wallpaper.PluginWallpaperController;
 import com.samsung.android.feature.SemCscFeature;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +45,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockWallpaper extends AbstractPluginLockItem {
     private static final String CUSTOM_PACK = "com.samsung.custompack";
@@ -68,7 +71,6 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
     private PluginWallpaperCallback mWallpaperUpdateCallback;
     private boolean mWholeRecoverRequired;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PluginLockWallpaperData {
         private Bitmap mBitmap;
         private SemWallpaperColors mHints;
@@ -218,7 +220,7 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         backupWallpaperSource(1);
     }
 
-    private Bitmap getBitmap(Resources resources, int i) {
+    private Bitmap getBitmap(Resources resources, int i) throws Resources.NotFoundException {
         Drawable drawable = resources.getDrawable(i, null);
         if (drawable == null) {
             return null;
@@ -234,11 +236,11 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         int i2 = displayMetrics.widthPixels;
         int i3 = displayMetrics.heightPixels;
         Canvas canvas = new Canvas();
-        Bitmap createBitmap = Bitmap.createBitmap(i2, i3, Bitmap.Config.ARGB_8888);
-        canvas.setBitmap(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i3, Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmapCreateBitmap);
         drawable.setBounds(0, 0, i2, i3);
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     private String getMultiPackPkgName(String str) {
@@ -332,19 +334,19 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         }
     }
 
-    public void fillData(Context context, int i, int i2, int i3, String str) {
+    public void fillData(Context context, int i, int i2, int i3, String str) throws NumberFormatException {
         if (i == 1 && isCloneDisplayRequired()) {
             return;
         }
         PluginLockWallpaperData pluginLockWallpaperData = this.mWallpaperDataList.get(i);
-        boolean hasData = pluginLockWallpaperData.hasData();
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "fillData() screen:", ", wallpaperType:", ", sourceType:");
-        m.append(i3);
-        m.append(",source:");
-        m.append(str);
-        m.append(", hasData:");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(m, hasData, TAG);
-        if (hasData) {
+        boolean zHasData = pluginLockWallpaperData.hasData();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "fillData() screen:", ", wallpaperType:", ", sourceType:");
+        sbM.append(i3);
+        sbM.append(",source:");
+        sbM.append(str);
+        sbM.append(", hasData:");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, zHasData, TAG);
+        if (zHasData) {
             return;
         }
         pluginLockWallpaperData.setType(i2);
@@ -359,11 +361,11 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         }
         try {
             pluginLockWallpaperData.setPath(null);
-            int parseInt = Integer.parseInt(str);
-            if (pluginLockWallpaperData.getResourceId() == parseInt && pluginLockWallpaperData.getBitmap() != null) {
+            int i4 = Integer.parseInt(str);
+            if (pluginLockWallpaperData.getResourceId() == i4 && pluginLockWallpaperData.getBitmap() != null) {
                 return;
             }
-            pluginLockWallpaperData.setBitmap(getBitmap(context.getResources(), parseInt), parseInt);
+            pluginLockWallpaperData.setBitmap(getBitmap(context.getResources(), i4), i4);
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("couldn't load bitmap:"), TAG);
         }
@@ -424,10 +426,10 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         if (wallpaperPath != null) {
             String multiPackPkgName = getMultiPackPkgName(defaultMultipackStyle);
             String multiPackPkgName2 = getMultiPackPkgName(defaultMultipackStyle2);
-            r3 = wallpaperPath.contains(multiPackPkgName) || wallpaperPath.contains(multiPackPkgName2);
-            ActionBarContextView$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("isPreloadedMultiPack, main:", multiPackPkgName, ", sub:", multiPackPkgName2, ", isPreload"), r3, TAG);
+            z = wallpaperPath.contains(multiPackPkgName) || wallpaperPath.contains(multiPackPkgName2);
+            ActionBarContextView$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("isPreloadedMultiPack, main:", multiPackPkgName, ", sub:", multiPackPkgName2, ", isPreload"), z, TAG);
         }
-        return r3;
+        return z;
     }
 
     public boolean isRecoverRequiredWallpaper() {
@@ -443,8 +445,8 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
     public boolean isSpecialEditionMultiPack() {
         String wallpaperPath = getWallpaperPath();
         String string = SemCscFeature.getInstance().getString("CscFeature_LockScreen_ConfigDefaultWallpaperStyle", "");
-        String nextToken = (string == null || string.isEmpty()) ? null : new StringTokenizer(string, ";").nextToken();
-        boolean z = (wallpaperPath == null || nextToken == null || !wallpaperPath.contains(nextToken)) ? false : true;
+        String strNextToken = (string == null || string.isEmpty()) ? null : new StringTokenizer(string, ";").nextToken();
+        boolean z = (wallpaperPath == null || strNextToken == null || !wallpaperPath.contains(strNextToken)) ? false : true;
         EmergencyButtonController$$ExternalSyntheticOutline0.m("isSpecialEditionMultiPack, ret:", TAG, z);
         return z;
     }
@@ -527,9 +529,9 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
     }
 
     public void resetWallpaperData(int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "resetWallpaperData: screen = ", ", isCloneDisplayRequired = ");
-        m.append(isCloneDisplayRequired());
-        Log.d(TAG, m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "resetWallpaperData: screen = ", ", isCloneDisplayRequired = ");
+        sbM.append(isCloneDisplayRequired());
+        Log.d(TAG, sbM.toString());
         if (isCloneDisplayRequired()) {
             Iterator<PluginLockWallpaperData> it = this.mWallpaperDataList.iterator();
             while (it.hasNext()) {
@@ -714,31 +716,167 @@ public class PluginLockWallpaper extends AbstractPluginLockItem {
         update(context, i, i2, str, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:94:0x008f, code lost:
-    
-        if (r2.getBitmap() == null) goto L110;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0177  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01b9  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x017a  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:105:0x01b9  */
+    /* JADX WARN: Removed duplicated region for block: B:107:0x01bd  */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x01c0  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00e4  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00ea  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00fa  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x014c  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x014f  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x0167  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x0172  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x0177  */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x017a  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0192  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x0197  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void update(android.content.Context r6, int r7, int r8, java.lang.String r9, java.lang.String r10) {
-        /*
-            Method dump skipped, instructions count: 451
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.component.PluginLockWallpaper.update(android.content.Context, int, int, java.lang.String, java.lang.String):void");
+    public void update(Context context, int i, int i2, String str, String str2) {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "update() wallpaperType:", ", sourceType:", ", source:");
+        sbM.append(str);
+        sbM.append(", screenType:");
+        sbM.append(sScreenType);
+        sbM.append(", iCrops = ");
+        sbM.append(str2);
+        Log.d(TAG, sbM.toString());
+        this.mRecoverRequestedScreen = -1;
+        PluginLockWallpaperData pluginLockWallpaperData = this.mWallpaperDataList.get(getScreenType());
+        this.mHasData = pluginLockWallpaperData.hasData();
+        pluginLockWallpaperData.setType(i);
+        setPluginWallpaperType(i);
+        pluginLockWallpaperData.setIntelligentCrop(str2);
+        if (i2 == 0) {
+            String path = pluginLockWallpaperData.getPath();
+            z = path == null || !path.equals(str);
+            pluginLockWallpaperData.setPath(str);
+        } else if (i2 == 1) {
+            try {
+                pluginLockWallpaperData.setPath(null);
+                int i3 = Integer.parseInt(str);
+                if (pluginLockWallpaperData.getResourceId() == i3) {
+                    if (pluginLockWallpaperData.getBitmap() != null) {
+                        z = false;
+                    }
+                }
+                try {
+                    pluginLockWallpaperData.setBitmap(getBitmap(context.getResources(), i3), i3);
+                    z = true;
+                } catch (Exception e) {
+                    e = e;
+                    z3 = true;
+                    KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("couldn't load bitmap:"), TAG);
+                    z = z3;
+                    if (!isCloneDisplayRequired()) {
+                    }
+                    if (pluginLockWallpaperData.getBitmap() == null) {
+                        if (!isServiceWallpaper()) {
+                        }
+                    }
+                    StringBuilder sb = new StringBuilder("update: sScreenTypeChanged = ");
+                    sb.append(sScreenTypeChanged);
+                    sb.append(", mHasData = ");
+                    KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mHasData, ", wallpaperChanged = ", z, ", mWallpaperUpdateCallback = ");
+                    sb.append(this.mWallpaperUpdateCallback);
+                    Log.d(TAG, sb.toString());
+                    PluginWallpaperCallback pluginWallpaperCallback = this.mWallpaperUpdateCallback;
+                    if (pluginWallpaperCallback == null) {
+                    }
+                    if (z2) {
+                    }
+                    PackageManager packageManager = this.mContext.getPackageManager();
+                    if (packageManager == null) {
+                    }
+                    if (!LsRune.LOCKUI_SUB_DISPLAY_LOCK) {
+                    }
+                    if (sScreenType != 1) {
+                    }
+                    if (packageManager == null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet")) {
+                    }
+                    if (this.mNoSensorConsumer != null) {
+                    }
+                    if (sScreenTypeChanged) {
+                    }
+                    if (!z2) {
+                    }
+                }
+            } catch (Exception e2) {
+                e = e2;
+                z3 = false;
+            }
+        } else if (i2 != 2) {
+            pluginLockWallpaperData.resetAll();
+            if (isCloneDisplayRequired()) {
+                setWallpaperBackup(-1, -1);
+            } else {
+                setWallpaperBackup(sScreenType, -1, -1);
+            }
+            z = false;
+        } else {
+            Uri uri = pluginLockWallpaperData.getUri();
+            Uri uri2 = Uri.parse(str);
+            z = uri == null || !uri.equals(uri2);
+            pluginLockWallpaperData.setUri(uri2);
+        }
+        if (!isCloneDisplayRequired()) {
+            setWallpaperDynamicBackupValue(i);
+        } else {
+            setWallpaperDynamicBackupValue(sScreenType, i);
+        }
+        if (pluginLockWallpaperData.getBitmap() == null || pluginLockWallpaperData.getPath() != null || pluginLockWallpaperData.getUri() != null) {
+            if (!isServiceWallpaper()) {
+                if (isCloneDisplayRequired()) {
+                    backupWallpaperSource();
+                } else {
+                    backupWallpaperSource(sScreenType);
+                }
+            } else if (isCustomPack() || isMultiPack()) {
+                if (isCloneDisplayRequired()) {
+                    setMultiPackWallpaperSource();
+                } else {
+                    setMultiPackWallpaperSource(sScreenType);
+                }
+            }
+        }
+        StringBuilder sb2 = new StringBuilder("update: sScreenTypeChanged = ");
+        sb2.append(sScreenTypeChanged);
+        sb2.append(", mHasData = ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, this.mHasData, ", wallpaperChanged = ", z, ", mWallpaperUpdateCallback = ");
+        sb2.append(this.mWallpaperUpdateCallback);
+        Log.d(TAG, sb2.toString());
+        PluginWallpaperCallback pluginWallpaperCallback2 = this.mWallpaperUpdateCallback;
+        z2 = pluginWallpaperCallback2 == null && !(sScreenTypeChanged && this.mHasData && !z);
+        if (z2) {
+            pluginWallpaperCallback2.onWallpaperUpdate(!this.mHasData);
+        }
+        PackageManager packageManager2 = this.mContext.getPackageManager();
+        final boolean z4 = (packageManager2 == null && packageManager2.hasSystemFeature("com.samsung.feature.device_category_tablet")) && !(!LsRune.LOCKUI_SUB_DISPLAY_LOCK && sScreenType == 0) && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).containsVideo((sScreenType != 1 ? 16 : 4) | 2);
+        if (this.mNoSensorConsumer != null) {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                this.mNoSensorConsumer.accept(Boolean.valueOf(z4));
+            } else {
+                this.mHandler.post(new Runnable() { // from class: com.android.systemui.pluginlock.component.PluginLockWallpaper$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        this.f$0.lambda$update$0(z4);
+                    }
+                });
+            }
+        }
+        if (sScreenTypeChanged) {
+            sScreenTypeChanged = false;
+        }
+        if (!z2) {
+            this.mHintUpdatedSkip = false;
+        } else {
+            this.mHintUpdatedSkip = true;
+        }
     }
 
     public boolean isDynamicWallpaper(int i) {

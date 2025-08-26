@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /* loaded from: classes6.dex */
@@ -33,15 +34,15 @@ public class SmLib_IafdSmAPIManager {
         if (this.mContentObserver == null) {
             this.mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.sec.android.iaft.SmLib_IafdSmAPIManager.1
                 @Override // android.database.ContentObserver
-                public void onChange(boolean z, Uri uri) {
+                public void onChange(boolean z, Uri uri) throws UnsupportedEncodingException {
                     Log.i(SmLib_IafdSmAPIManager.TAG, "update check done, content uri " + uri.toString());
                     String queryParameter = uri.getQueryParameter(SmLib_IafdConstant.KEY_PACKAGE_NAME);
-                    long longValue = Long.valueOf(uri.getQueryParameter(SmLib_IafdConstant.KEY_VERSION_CODE)).longValue();
-                    int intValue = Integer.valueOf(uri.getQueryParameter("resultCode")).intValue();
+                    long jLongValue = Long.valueOf(uri.getQueryParameter(SmLib_IafdConstant.KEY_VERSION_CODE)).longValue();
+                    int iIntValue = Integer.valueOf(uri.getQueryParameter("resultCode")).intValue();
                     String queryParameter2 = uri.getQueryParameter("versionName");
                     Result result = new Result();
-                    result.resultCode = intValue;
-                    result.versionCode = longValue;
+                    result.resultCode = iIntValue;
+                    result.versionCode = jLongValue;
                     result.versionName = queryParameter2;
                     result.pkgName = queryParameter;
                     SmLib_IafdSmAPIManager.this.mCache.put(queryParameter, result);
@@ -50,7 +51,7 @@ public class SmLib_IafdSmAPIManager {
                     sb.append(smLib_CheckUpdateCallback2 == null);
                     Log.i(SmLib_IafdSmAPIManager.TAG, sb.toString());
                     if (smLib_CheckUpdateCallback2 != null) {
-                        smLib_CheckUpdateCallback2.onResult(intValue, longValue, queryParameter2, queryParameter);
+                        smLib_CheckUpdateCallback2.onResult(iIntValue, jLongValue, queryParameter2, queryParameter);
                         SmLib_IafdSmAPIManager.this.mUpdateCallbackMap.remove(queryParameter);
                     }
                 }

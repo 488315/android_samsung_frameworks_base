@@ -1,5 +1,8 @@
 package com.android.systemui.volume.dialog.sliders.ui.viewmodel;
 
+import android.view.animation.PathInterpolator;
+import com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent;
+import com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -11,7 +14,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ float $direction$inlined;
@@ -21,7 +23,6 @@ public final class VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$tra
     int label;
     final /* synthetic */ VolumeDialogOverscrollViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1$1, reason: invalid class name */
     public final class AnonymousClass1 implements FlowCollector {
         public final /* synthetic */ FlowCollector $$this$flow;
@@ -30,11 +31,11 @@ public final class VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$tra
         public final /* synthetic */ VolumeDialogOverscrollViewModel this$0;
 
         /* renamed from: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1$1$1, reason: invalid class name and collision with other inner class name */
-        public final class C04231 extends ContinuationImpl {
+        public final class C06511 extends ContinuationImpl {
             int label;
             /* synthetic */ Object result;
 
-            public C04231(Continuation continuation) {
+            public C06511(Continuation continuation) {
                 super(continuation);
             }
 
@@ -57,127 +58,75 @@ public final class VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$tra
         
             if (r6.emit(r7, r0) == r1) goto L39;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:20:0x00ab, code lost:
-        
-            return r1;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:29:0x00a9, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:38:0x00a9, code lost:
         
             if (r6.emit(r7, r0) == r1) goto L39;
          */
+        /* JADX WARN: Code restructure failed: missing block: B:39:0x00ab, code lost:
+        
+            return r1;
+         */
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0034  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
         /* JADX WARN: Type inference failed for: r7v9, types: [T, java.lang.Float] */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object emit(java.lang.Object r8, kotlin.coroutines.Continuation r9) {
-            /*
-                r7 = this;
-                boolean r0 = r9 instanceof com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1.AnonymousClass1.C04231
-                if (r0 == 0) goto L13
-                r0 = r9
-                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1$1$1 r0 = (com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1.AnonymousClass1.C04231) r0
-                int r1 = r0.label
-                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                r3 = r1 & r2
-                if (r3 == 0) goto L13
-                int r1 = r1 - r2
-                r0.label = r1
-                goto L18
-            L13:
-                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1$1$1 r0 = new com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1$1$1
-                r0.<init>(r9)
-            L18:
-                java.lang.Object r9 = r0.result
-                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r2 = r0.label
-                r3 = 2
-                r4 = 1
-                if (r2 == 0) goto L34
-                if (r2 == r4) goto L2f
-                if (r2 != r3) goto L27
-                goto L2f
-            L27:
-                java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-                java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-                r7.<init>(r8)
-                throw r7
-            L2f:
-                kotlin.ResultKt.throwOnFailure(r9)
-                goto Lac
-            L34:
-                kotlin.ResultKt.throwOnFailure(r9)
-                com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent$Touch r8 = (com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent.Touch) r8
-                boolean r9 = r8 instanceof com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent.Touch.End
-                r2 = 0
-                kotlin.jvm.internal.Ref$ObjectRef r5 = r7.$startPosition$inlined
-                kotlinx.coroutines.flow.FlowCollector r6 = r7.$$this$flow
-                if (r9 == 0) goto L53
-                r7 = 0
-                r5.element = r7
-                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$OverscrollEventModel$Animate r7 = new com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$OverscrollEventModel$Animate
-                r7.<init>(r2)
-                r0.label = r4
-                java.lang.Object r7 = r6.emit(r7, r0)
-                if (r7 != r1) goto Lac
-                goto Lab
-            L53:
-                T r9 = r5.element
-                java.lang.Float r9 = (java.lang.Float) r9
-                float r8 = r8.getY()
-                if (r9 != 0) goto L65
-                java.lang.Float r7 = new java.lang.Float
-                r7.<init>(r8)
-                r5.element = r7
-                goto Lac
-            L65:
-                float r9 = r9.floatValue()
-                float r8 = r8 - r9
-                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel r9 = r7.this$0
-                r9.getClass()
-                r4 = 1077936128(0x40400000, float:3.0)
-                float r8 = r8 / r4
-                float r7 = r7.$direction$inlined
-                int r4 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-                if (r4 >= 0) goto L7d
-                int r7 = (r8 > r2 ? 1 : (r8 == r2 ? 0 : -1))
-                if (r7 >= 0) goto L9e
-                goto L8a
-            L7d:
-                int r7 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-                if (r7 <= 0) goto L86
-                int r7 = (r8 > r2 ? 1 : (r8 == r2 ? 0 : -1))
-                if (r7 <= 0) goto L9e
-                goto L8a
-            L86:
-                int r7 = (r8 > r2 ? 1 : (r8 == r2 ? 0 : -1))
-                if (r7 != 0) goto L9e
-            L8a:
-                float r7 = java.lang.Math.signum(r8)
-                android.view.animation.PathInterpolator r2 = r9.offsetInterpolator
-                float r8 = java.lang.Math.abs(r8)
-                float r9 = r9.maxDeviation
-                float r8 = r8 / r9
-                float r8 = r2.getInterpolation(r8)
-                float r8 = r8 * r9
-                float r2 = r8 * r7
-            L9e:
-                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$OverscrollEventModel$Move r7 = new com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$OverscrollEventModel$Move
-                r7.<init>(r2)
-                r0.label = r3
-                java.lang.Object r7 = r6.emit(r7, r0)
-                if (r7 != r1) goto Lac
-            Lab:
-                return r1
-            Lac:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                return r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1.AnonymousClass1.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+        public final Object emit(Object obj, Continuation continuation) {
+            C06511 c06511;
+            if (continuation instanceof C06511) {
+                c06511 = (C06511) continuation;
+                int i = c06511.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    c06511.label = i - Integer.MIN_VALUE;
+                } else {
+                    c06511 = new C06511(continuation);
+                }
+            }
+            Object obj2 = c06511.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = c06511.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj2);
+                SliderInputEvent.Touch touch = (SliderInputEvent.Touch) obj;
+                boolean z = touch instanceof SliderInputEvent.Touch.End;
+                float interpolation = 0.0f;
+                Ref$ObjectRef ref$ObjectRef = this.$startPosition$inlined;
+                FlowCollector flowCollector = this.$$this$flow;
+                if (z) {
+                    ref$ObjectRef.element = null;
+                    VolumeDialogOverscrollViewModel.OverscrollEventModel.Animate animate = new VolumeDialogOverscrollViewModel.OverscrollEventModel.Animate(0.0f);
+                    c06511.label = 1;
+                } else {
+                    Float f = (Float) ref$ObjectRef.element;
+                    float y = touch.getY();
+                    if (f == null) {
+                        ref$ObjectRef.element = new Float(y);
+                    } else {
+                        float fFloatValue = y - f.floatValue();
+                        VolumeDialogOverscrollViewModel volumeDialogOverscrollViewModel = this.this$0;
+                        volumeDialogOverscrollViewModel.getClass();
+                        float f2 = fFloatValue / 3.0f;
+                        float f3 = this.$direction$inlined;
+                        if (f3 >= 0.0f ? !(f3 <= 0.0f ? f2 != 0.0f : f2 <= 0.0f) : f2 < 0.0f) {
+                            float fSignum = Math.signum(f2);
+                            PathInterpolator pathInterpolator = volumeDialogOverscrollViewModel.offsetInterpolator;
+                            float fAbs = Math.abs(f2);
+                            float f4 = volumeDialogOverscrollViewModel.maxDeviation;
+                            interpolation = pathInterpolator.getInterpolation(fAbs / f4) * f4 * fSignum;
+                        }
+                        VolumeDialogOverscrollViewModel.OverscrollEventModel.Move move = new VolumeDialogOverscrollViewModel.OverscrollEventModel.Move(interpolation);
+                        c06511.label = 2;
+                    }
+                }
+            } else {
+                if (i2 != 1 && i2 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj2);
+            }
+            return Unit.INSTANCE;
         }
     }
 

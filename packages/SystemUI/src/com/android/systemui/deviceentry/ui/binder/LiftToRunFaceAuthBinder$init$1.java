@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LiftToRunFaceAuthBinder$init$1 extends SuspendLambda implements Function2 {
     int label;
@@ -46,15 +45,15 @@ final class LiftToRunFaceAuthBinder$init$1 extends SuspendLambda implements Func
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Boolean bool = (Boolean) obj2;
-                    boolean booleanValue = bool.booleanValue();
-                    LiftToRunFaceAuthBinder liftToRunFaceAuthBinder2 = LiftToRunFaceAuthBinder.this;
+                    boolean zBooleanValue = bool.booleanValue();
+                    LiftToRunFaceAuthBinder liftToRunFaceAuthBinder2 = liftToRunFaceAuthBinder;
                     if (liftToRunFaceAuthBinder2.pickupSensor != null) {
                         StateFlowImpl stateFlowImpl = liftToRunFaceAuthBinder2.isListening;
-                        if (booleanValue != ((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                        if (zBooleanValue != ((Boolean) stateFlowImpl.getValue()).booleanValue()) {
                             stateFlowImpl.updateState(null, bool);
                             LiftToRunFaceAuthBinder$listener$1 liftToRunFaceAuthBinder$listener$1 = liftToRunFaceAuthBinder2.listener;
                             AsyncSensorManager asyncSensorManager = liftToRunFaceAuthBinder2.asyncSensorManager;
-                            if (booleanValue) {
+                            if (zBooleanValue) {
                                 asyncSensorManager.requestTriggerSensor(liftToRunFaceAuthBinder$listener$1, liftToRunFaceAuthBinder2.pickupSensor);
                             } else {
                                 asyncSensorManager.cancelTriggerSensor(liftToRunFaceAuthBinder$listener$1, liftToRunFaceAuthBinder2.pickupSensor);

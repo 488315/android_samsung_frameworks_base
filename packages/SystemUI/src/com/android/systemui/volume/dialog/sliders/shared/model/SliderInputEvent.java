@@ -2,11 +2,9 @@ package com.android.systemui.volume.dialog.sliders.shared.model;
 
 import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SliderInputEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Button implements SliderInputEvent {
         public static final Button INSTANCE = new Button();
 
@@ -26,10 +24,8 @@ public interface SliderInputEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Touch extends SliderInputEvent {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class End implements Touch {
             public final float x;
             public final float y;
@@ -67,7 +63,6 @@ public interface SliderInputEvent {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Move implements Touch {
             public final float x;
             public final float y;
@@ -105,7 +100,6 @@ public interface SliderInputEvent {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Start implements Touch {
             public final float x;
             public final float y;

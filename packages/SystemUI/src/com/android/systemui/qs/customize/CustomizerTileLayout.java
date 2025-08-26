@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -34,7 +35,6 @@ import com.android.systemui.util.ShadowDelegateUtil;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CustomizerTileLayout extends ViewGroup {
     public static final boolean DEBUG = Log.isLoggable("CustomizerTileLayout", 3);
@@ -56,7 +56,6 @@ public class CustomizerTileLayout extends ViewGroup {
     public int mTileHorizontalMargin;
     public int mTileVerticalMargin;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QSCustomIconView extends QSIconViewImpl {
         public View mIconRemove;
         public final GradientDrawable mIconStroke;
@@ -104,15 +103,15 @@ public class CustomizerTileLayout extends ViewGroup {
         @Override // com.android.systemui.qs.tileimpl.QSIconViewImpl, android.view.View
         public final void onMeasure(int i, int i2) {
             int size = View.MeasureSpec.getSize(i);
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mIconSizePx, 1073741824);
-            int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mRemoveButtonSizePx, 1073741824);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mIconSizePx, 1073741824);
+            int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mRemoveButtonSizePx, 1073741824);
             int i3 = this.mRemoveIconSizePx;
             int i4 = i3 / (this.mIsTopEdit ? 4 : 3);
-            this.mIcon.measure(makeMeasureSpec, makeMeasureSpec);
+            this.mIcon.measure(iMakeMeasureSpec, iMakeMeasureSpec);
             setMeasuredDimension((i4 * 2) + size, this.mIcon.getMeasuredHeight() + (i3 / 3));
             View view = this.mIconRemove;
             if (view != null) {
-                view.measure(makeMeasureSpec2, makeMeasureSpec2);
+                view.measure(iMakeMeasureSpec2, iMakeMeasureSpec2);
             }
         }
 
@@ -132,7 +131,7 @@ public class CustomizerTileLayout extends ViewGroup {
             imageView.setBackground(this.mIconStroke);
         }
 
-        public QSCustomIconView(Context context, boolean z, boolean z2) {
+        public QSCustomIconView(Context context, boolean z, boolean z2) throws Resources.NotFoundException {
             super(context);
             this.mIsTopEdit = z2;
             this.mIconSizePx = ((ViewGroup) this).mContext.getResources().getDimensionPixelSize(R.dimen.qs_edit_tile_icon_size);
@@ -161,8 +160,8 @@ public class CustomizerTileLayout extends ViewGroup {
             addView(frameLayout);
             this.mBoundaryBox.add(frameLayout);
         }
-        int withDefaultDensity = withDefaultDensity(R.dimen.qs_edit_tile_icon_size);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(withDefaultDensity, withDefaultDensity, 1);
+        int iWithDefaultDensity = withDefaultDensity(R.dimen.qs_edit_tile_icon_size);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(iWithDefaultDensity, iWithDefaultDensity, 1);
         FrameLayout frameLayout2 = (FrameLayout) LayoutInflater.from(this.mContext).inflate(R.layout.qs_customize_circle_panel, (ViewGroup) this, false);
         this.mCircle = frameLayout2;
         frameLayout2.findViewById(R.id.qs_edit_panel_circle).setLayoutParams(layoutParams);
@@ -185,11 +184,11 @@ public class CustomizerTileLayout extends ViewGroup {
         customTileInfo2.isActive = customTileInfo.isActive;
         customTileInfo2.longClickListener = customTileInfo.longClickListener;
         customTileInfo2.customizeTileContentDes = customTileInfo.customizeTileContentDes;
-        SecCustomizeTileView createCustomizeTileView = createCustomizeTileView(customTileInfo2);
-        customTileInfo2.customTileView = createCustomizeTileView;
-        createCustomizeTileView.setTag(customTileInfo2);
+        SecCustomizeTileView secCustomizeTileViewCreateCustomizeTileView = createCustomizeTileView(customTileInfo2);
+        customTileInfo2.customTileView = secCustomizeTileViewCreateCustomizeTileView;
+        secCustomizeTileViewCreateCustomizeTileView.setTag(customTileInfo2);
         this.mCustomTilesInfo.add(customTileInfo2);
-        addView(createCustomizeTileView);
+        addView(secCustomizeTileViewCreateCustomizeTileView);
     }
 
     public final SecCustomizeTileView createCustomizeTileView(CustomTileInfo customTileInfo) {
@@ -219,11 +218,11 @@ public class CustomizerTileLayout extends ViewGroup {
 
     public final void dropTile(CustomTileInfo customTileInfo, Boolean bool) {
         Log.d("CustomizerTileLayout", "dropTile tileInfo =  " + customTileInfo.spec);
-        int indexOf = indexOf(customTileInfo);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(customTileInfo);
+        if (iIndexOf < 0) {
             return;
         }
-        SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(indexOf)).customTileView;
+        SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(iIndexOf)).customTileView;
         Log.d("CustomizerTileLayout", "dropTile tileView =  " + secCustomizeTileView);
         secCustomizeTileView.mLabelContainer.setVisibility(this.mShowLabel ? 0 : 8);
         secCustomizeTileView.setAlpha(1.0f);
@@ -273,11 +272,11 @@ public class CustomizerTileLayout extends ViewGroup {
         int i5;
         int width = getWidth();
         boolean z2 = getLayoutDirection() == 1;
-        int min = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
+        int iMin = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
         int i6 = 0;
         int i7 = 0;
         int i8 = 0;
-        while (i6 < min) {
+        while (i6 < iMin) {
             int i9 = this.mColumns;
             if (i7 == i9) {
                 i8++;
@@ -347,8 +346,8 @@ public class CustomizerTileLayout extends ViewGroup {
             this.mTileVerticalMargin = 0;
         }
         this.mSidePadding = panelWidth + i5;
-        int min = Math.min(i4 * i7, this.mCustomTilesInfo.size());
-        for (int i9 = 0; i9 < min; i9++) {
+        int iMin = Math.min(i4 * i7, this.mCustomTilesInfo.size());
+        for (int i9 = 0; i9 < iMin; i9++) {
             SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(i9)).customTileView;
             if (secCustomizeTileView != null && secCustomizeTileView.getVisibility() != 8) {
                 secCustomizeTileView.measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824));
@@ -372,23 +371,23 @@ public class CustomizerTileLayout extends ViewGroup {
     }
 
     public final void removeTile(final CustomTileInfo customTileInfo, boolean z) {
-        final int indexOf = indexOf(customTileInfo);
-        if (indexOf < 0) {
+        final int iIndexOf = indexOf(customTileInfo);
+        if (iIndexOf < 0) {
             return;
         }
-        int min = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
+        int iMin = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
         if (DEBUG) {
-            ExifInterface$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(indexOf, "removeTile index = ", "tile = "), customTileInfo.spec, "CustomizerTileLayout");
+            ExifInterface$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIndexOf, "removeTile index = ", "tile = "), customTileInfo.spec, "CustomizerTileLayout");
         }
-        final SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(indexOf)).customTileView;
+        final SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(iIndexOf)).customTileView;
         if (!z) {
-            this.mCustomTilesInfo.remove(indexOf);
+            this.mCustomTilesInfo.remove(iIndexOf);
             removeView(secCustomizeTileView);
             return;
         }
         AnimatorSet animatorSet = new AnimatorSet();
-        int i = indexOf;
-        while (i < min - 1) {
+        int i = iIndexOf;
+        while (i < iMin - 1) {
             int i2 = i + 1;
             SecCustomizeTileView secCustomizeTileView2 = ((CustomTileInfo) this.mCustomTilesInfo.get(i2)).customTileView;
             animatorSet.playTogether(ObjectAnimator.ofFloat(secCustomizeTileView2, "x", ((FrameLayout) this.mBoundaryBox.get(i2)).getLeft(), ((FrameLayout) this.mBoundaryBox.get(i)).getLeft()));
@@ -398,22 +397,22 @@ public class CustomizerTileLayout extends ViewGroup {
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.qs.customize.CustomizerTileLayout.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
-                CustomizerTileLayout.this.mCustomTilesInfo.remove(indexOf);
+                CustomizerTileLayout.this.mCustomTilesInfo.remove(iIndexOf);
                 CustomizerTileLayout.this.removeView(secCustomizeTileView);
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                CustomizerTileLayout.this.mCustomTilesInfo.remove(indexOf);
+                CustomizerTileLayout.this.mCustomTilesInfo.remove(iIndexOf);
                 CustomizerTileLayout.this.removeView(secCustomizeTileView);
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationStart(Animator animator) {
+            public final void onAnimationStart(Animator animator) throws Resources.NotFoundException {
                 if (CustomizerTileLayout.DEBUG) {
                     Log.d("CustomizerTileLayout", "moveTile onAnimationStart");
                 }
-                CustomizerTileLayout.this.setCircleTranslation(indexOf, customTileInfo.isActive);
+                CustomizerTileLayout.this.setCircleTranslation(iIndexOf, customTileInfo.isActive);
                 CustomizerTileLayout.this.mCircle.setAlpha(0.0f);
             }
         });
@@ -421,28 +420,28 @@ public class CustomizerTileLayout extends ViewGroup {
         animatorSet.start();
     }
 
-    public final void selectTile(CustomTileInfo customTileInfo, boolean z) {
-        int indexOf = indexOf(customTileInfo);
-        if (indexOf < 0) {
+    public final void selectTile(CustomTileInfo customTileInfo, boolean z) throws Resources.NotFoundException {
+        int iIndexOf = indexOf(customTileInfo);
+        if (iIndexOf < 0) {
             return;
         }
-        if (indexOf >= this.mCustomTilesInfo.size()) {
-            indexOf = this.mCustomTilesInfo.size() - 1;
+        if (iIndexOf >= this.mCustomTilesInfo.size()) {
+            iIndexOf = this.mCustomTilesInfo.size() - 1;
         }
-        SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(indexOf)).customTileView;
+        SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(iIndexOf)).customTileView;
         if (z) {
             secCustomizeTileView.setAlpha(0.0f);
         }
         if (DEBUG) {
-            ListPopupWindow$$ExternalSyntheticOutline0.m(indexOf, "selectTile position = ", "CustomizerTileLayout");
+            ListPopupWindow$$ExternalSyntheticOutline0.m(iIndexOf, "selectTile position = ", "CustomizerTileLayout");
         }
         if (this.mCircle != null) {
-            setCircleTranslation(indexOf, customTileInfo.isActive);
+            setCircleTranslation(iIndexOf, customTileInfo.isActive);
             this.mCircle.setAlpha(1.0f);
         }
     }
 
-    public final void setCircleTranslation(int i, boolean z) {
+    public final void setCircleTranslation(int i, boolean z) throws Resources.NotFoundException {
         ImageView imageView = (ImageView) this.mCircle.findViewById(R.id.qs_edit_panel_circle);
         int color = getResources().getColor((z || (getResources().getConfiguration().uiMode & 48) != 32) ? R.color.qs_edit_button_icon_color : R.color.qs_edit_panel_button_divider_color, null);
         if (imageView.getTag() == null || color != ((Integer) imageView.getTag()).intValue()) {
@@ -460,11 +459,11 @@ public class CustomizerTileLayout extends ViewGroup {
 
     public final void showRemoveIcon(CustomTileInfo customTileInfo, boolean z) {
         View view;
-        int indexOf = indexOf(customTileInfo);
-        if (indexOf >= this.mCustomTilesInfo.size()) {
-            indexOf = this.mCustomTilesInfo.size() - 1;
+        int iIndexOf = indexOf(customTileInfo);
+        if (iIndexOf >= this.mCustomTilesInfo.size()) {
+            iIndexOf = this.mCustomTilesInfo.size() - 1;
         }
-        QSCustomIconView qSCustomIconView = (QSCustomIconView) ((CustomTileInfo) this.mCustomTilesInfo.get(indexOf)).customTileView.mCustomizeIcon;
+        QSCustomIconView qSCustomIconView = (QSCustomIconView) ((CustomTileInfo) this.mCustomTilesInfo.get(iIndexOf)).customTileView.mCustomizeIcon;
         if (qSCustomIconView == null || (view = qSCustomIconView.mIconRemove) == null) {
             return;
         }
@@ -487,19 +486,19 @@ public class CustomizerTileLayout extends ViewGroup {
 
     public final void addTile(final CustomTileInfo customTileInfo, int i, boolean z) {
         boolean z2 = false;
-        int min = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
+        int iMin = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
         int i2 = i;
-        if (i2 > min) {
-            i2 = min;
+        if (i2 > iMin) {
+            i2 = iMin;
         }
         if (DEBUG) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i2, min, "addTile position = ", "total = ", "idx = ");
-            m.append(i2);
-            m.append(" spec = ");
-            m.append(customTileInfo.spec);
-            m.append("withAnimation");
-            m.append(z);
-            Log.d("CustomizerTileLayout", m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, iMin, "addTile position = ", "total = ", "idx = ");
+            sbM.append(i2);
+            sbM.append(" spec = ");
+            sbM.append(customTileInfo.spec);
+            sbM.append("withAnimation");
+            sbM.append(z);
+            Log.d("CustomizerTileLayout", sbM.toString());
         }
         final CustomTileInfo customTileInfo2 = new CustomTileInfo();
         QSTile.State state = customTileInfo.state;
@@ -509,13 +508,13 @@ public class CustomizerTileLayout extends ViewGroup {
         customTileInfo2.spec = customTileInfo.spec;
         customTileInfo2.longClickListener = customTileInfo.longClickListener;
         customTileInfo2.customizeTileContentDes = customTileInfo.customizeTileContentDes;
-        final SecCustomizeTileView createCustomizeTileView = createCustomizeTileView(customTileInfo2);
-        customTileInfo2.customTileView = createCustomizeTileView;
-        createCustomizeTileView.setTag(customTileInfo2);
+        final SecCustomizeTileView secCustomizeTileViewCreateCustomizeTileView = createCustomizeTileView(customTileInfo2);
+        customTileInfo2.customTileView = secCustomizeTileViewCreateCustomizeTileView;
+        secCustomizeTileViewCreateCustomizeTileView.setTag(customTileInfo2);
         if (z) {
             AnimatorSet animatorSet = new AnimatorSet();
             int i3 = i2;
-            while (i3 < min) {
+            while (i3 < iMin) {
                 SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(i3)).customTileView;
                 Animator[] animatorArr = new Animator[1];
                 float left = ((FrameLayout) this.mBoundaryBox.get(i3)).getLeft();
@@ -542,20 +541,20 @@ public class CustomizerTileLayout extends ViewGroup {
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.qs.customize.CustomizerTileLayout.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator) {
-                    CustomizerTileLayout.this.addView(createCustomizeTileView);
+                    CustomizerTileLayout.this.addView(secCustomizeTileViewCreateCustomizeTileView);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    CustomizerTileLayout.this.addView(createCustomizeTileView);
+                    CustomizerTileLayout.this.addView(secCustomizeTileViewCreateCustomizeTileView);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationStart(Animator animator) {
+                public final void onAnimationStart(Animator animator) throws Resources.NotFoundException {
                     if (CustomizerTileLayout.DEBUG) {
                         Log.d("CustomizerTileLayout", "moveTile onAnimationStart");
                     }
-                    createCustomizeTileView.setAlpha(0.0f);
+                    secCustomizeTileViewCreateCustomizeTileView.setAlpha(0.0f);
                     CustomizerTileLayout.this.mCustomTilesInfo.add(i5, customTileInfo2);
                     CustomizerTileLayout.this.setCircleTranslation(i5, customTileInfo.isActive);
                     CustomizerTileLayout.this.mCircle.setAlpha(1.0f);
@@ -566,6 +565,6 @@ public class CustomizerTileLayout extends ViewGroup {
             return;
         }
         this.mCustomTilesInfo.add(i2, customTileInfo2);
-        addView(createCustomizeTileView);
+        addView(secCustomizeTileViewCreateCustomizeTileView);
     }
 }

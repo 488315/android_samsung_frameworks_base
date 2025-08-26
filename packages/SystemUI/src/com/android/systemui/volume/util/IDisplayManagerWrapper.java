@@ -13,7 +13,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IDisplayManagerWrapper {
     public final Context context;
@@ -24,27 +23,27 @@ public final class IDisplayManagerWrapper {
     public final IDisplayManagerWrapper$refreshRateLimitOnRunnable$1 refreshRateLimitOnRunnable = new Runnable() { // from class: com.android.systemui.volume.util.IDisplayManagerWrapper$refreshRateLimitOnRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            IRefreshRateToken acquireRefreshRateMinLimitToken;
-            IDisplayManagerWrapper iDisplayManagerWrapper = IDisplayManagerWrapper.this;
+            IRefreshRateToken iRefreshRateTokenAcquireRefreshRateMinLimitToken;
+            IDisplayManagerWrapper iDisplayManagerWrapper = this.this$0;
             synchronized (iDisplayManagerWrapper.lock) {
                 try {
                     int intForUser = Settings.Secure.getIntForUser(iDisplayManagerWrapper.context.getContentResolver(), SettingsHelper.INDEX_REFRESH_RATE_MODE, 1, -2);
                     if ((intForUser == 1 || intForUser == 2) && iDisplayManagerWrapper.iRefreshRateMinLimitToken == null) {
-                        IDisplayManager iDisplayManager = iDisplayManagerWrapper.iDisplayManager;
-                        if (iDisplayManager == null) {
-                            iDisplayManager = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
+                        IDisplayManager iDisplayManagerAsInterface = iDisplayManagerWrapper.iDisplayManager;
+                        if (iDisplayManagerAsInterface == null) {
+                            iDisplayManagerAsInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
                         }
-                        iDisplayManagerWrapper.iDisplayManager = iDisplayManager;
-                        if (iDisplayManager != null) {
+                        iDisplayManagerWrapper.iDisplayManager = iDisplayManagerAsInterface;
+                        if (iDisplayManagerAsInterface != null) {
                             try {
-                                acquireRefreshRateMinLimitToken = iDisplayManager.acquireRefreshRateMinLimitToken(iDisplayManagerWrapper.refreshRateToken, 60, "VolumePanelView");
+                                iRefreshRateTokenAcquireRefreshRateMinLimitToken = iDisplayManagerAsInterface.acquireRefreshRateMinLimitToken(iDisplayManagerWrapper.refreshRateToken, 60, "VolumePanelView");
                             } catch (RemoteException e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            acquireRefreshRateMinLimitToken = null;
+                            iRefreshRateTokenAcquireRefreshRateMinLimitToken = null;
                         }
-                        iDisplayManagerWrapper.iRefreshRateMinLimitToken = acquireRefreshRateMinLimitToken;
+                        iDisplayManagerWrapper.iRefreshRateMinLimitToken = iRefreshRateTokenAcquireRefreshRateMinLimitToken;
                         Log.d("VolumePanelView", "enableRefreshRateMinLimit");
                         if (iDisplayManagerWrapper.iRefreshRateMinLimitToken == null) {
                             Log.w("VolumePanelView", "enableRefreshRateMinLimit failed");
@@ -60,7 +59,7 @@ public final class IDisplayManagerWrapper {
     public final IDisplayManagerWrapper$refreshRateLimitOffRunnable$1 refreshRateLimitOffRunnable = new Runnable() { // from class: com.android.systemui.volume.util.IDisplayManagerWrapper$refreshRateLimitOffRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            IDisplayManagerWrapper iDisplayManagerWrapper = IDisplayManagerWrapper.this;
+            IDisplayManagerWrapper iDisplayManagerWrapper = this.this$0;
             synchronized (iDisplayManagerWrapper.lock) {
                 IRefreshRateToken iRefreshRateToken = iDisplayManagerWrapper.iRefreshRateMinLimitToken;
                 if (iRefreshRateToken != null) {
@@ -77,7 +76,6 @@ public final class IDisplayManagerWrapper {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

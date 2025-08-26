@@ -29,6 +29,7 @@ import java.security.KeyStore;
 import java.security.KeyStoreSpi;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.ProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
@@ -60,7 +61,7 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     private int mNamespace = -1;
 
     @Override // java.security.KeyStoreSpi
-    public Key engineGetKey(String str, char[] cArr) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+    public Key engineGetKey(String str, char[] cArr) throws UnrecoverableKeyException, NoSuchAlgorithmException {
         try {
             return AndroidKeyStoreProvider.loadAndroidKeyStoreKeyFromKeystore(this.mKeyStore, str, this.mNamespace);
         } catch (KeyPermanentlyInvalidatedException e) {
@@ -91,10 +92,10 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
         if (str == null) {
             throw new NullPointerException("alias == null");
         }
-        KeyDescriptor makeKeyDescriptor = makeKeyDescriptor(str);
+        KeyDescriptor keyDescriptorMakeKeyDescriptor = makeKeyDescriptor(str);
         try {
             StrictMode.noteDiskRead();
-            return this.mKeyStore.getKeyEntry(makeKeyDescriptor);
+            return this.mKeyStore.getKeyEntry(keyDescriptorMakeKeyDescriptor);
         } catch (KeyStoreException e) {
             if (e.getErrorCode() == 7) {
                 return null;
@@ -183,7 +184,7 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetKeyEntry(String str, Key key, char[] cArr, Certificate[] certificateArr) throws java.security.KeyStoreException {
+    public void engineSetKeyEntry(String str, Key key, char[] cArr, Certificate[] certificateArr) throws InterruptedException, java.security.KeyStoreException {
         if (cArr != null && cArr.length > 0) {
             throw new java.security.KeyStoreException("entries cannot be protected with passwords");
         }
@@ -224,8 +225,8 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     /* JADX WARN: Type inference failed for: r12v6 */
     /* JADX WARN: Type inference failed for: r23v0, types: [java.security.PrivateKey] */
     /* JADX WARN: Type inference failed for: r8v7, types: [android.security.KeyStoreSecurityLevel] */
-    private void setPrivateKeyEntry(String str, PrivateKey privateKey, Certificate[] certificateArr, KeyStore.ProtectionParameter protectionParameter) throws java.security.KeyStoreException {
-        KeyProtection keyProtection;
+    private void setPrivateKeyEntry(String str, PrivateKey privateKey, Certificate[] certificateArr, KeyStore.ProtectionParameter protectionParameter) throws InterruptedException, java.security.KeyStoreException {
+        KeyProtection legacyKeyProtectionParameter;
         int i;
         boolean z;
         ?? r12;
@@ -237,20 +238,20 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
         boolean z2 = true;
         int i4 = 0;
         if (protectionParameter == null) {
-            keyProtection = getLegacyKeyProtectionParameter(privateKey);
+            legacyKeyProtectionParameter = getLegacyKeyProtectionParameter(privateKey);
             i = 1;
             r12 = 0;
         } else {
             if (protectionParameter instanceof KeyStoreParameter) {
                 z = false;
-                keyProtection = getLegacyKeyProtectionParameter(privateKey);
+                legacyKeyProtectionParameter = getLegacyKeyProtectionParameter(privateKey);
             } else if (protectionParameter instanceof KeyProtection) {
-                keyProtection = (KeyProtection) protectionParameter;
-                boolean isCriticalToDeviceEncryption = keyProtection.isCriticalToDeviceEncryption();
-                z = isCriticalToDeviceEncryption;
-                if (keyProtection.isStrongBoxBacked()) {
+                legacyKeyProtectionParameter = (KeyProtection) protectionParameter;
+                boolean zIsCriticalToDeviceEncryption = legacyKeyProtectionParameter.isCriticalToDeviceEncryption();
+                z = zIsCriticalToDeviceEncryption;
+                if (legacyKeyProtectionParameter.isStrongBoxBacked()) {
                     i = 2;
-                    r12 = isCriticalToDeviceEncryption;
+                    r12 = zIsCriticalToDeviceEncryption;
                 }
             } else {
                 throw new java.security.KeyStoreException("Unsupported protection parameter class:" + protectionParameter.getClass().getName() + ". Supported: " + KeyProtection.class.getName() + ", " + KeyStoreParameter.class.getName());
@@ -279,28 +280,28 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
                 int i6 = length - 1;
                 byte[][] bArr2 = new byte[i6][];
                 int i7 = 0;
-                int i8 = 0;
+                int length2 = 0;
                 while (i7 < i6) {
-                    int i9 = i7 + 1;
+                    int i8 = i7 + 1;
                     try {
                         boolean z3 = z2;
-                        byte[] encoded2 = x509CertificateArr[i9].getEncoded();
+                        byte[] encoded2 = x509CertificateArr[i8].getEncoded();
                         bArr2[i7] = encoded2;
-                        i8 += encoded2.length;
-                        i7 = i9;
+                        length2 += encoded2.length;
+                        i7 = i8;
                         z2 = z3;
                     } catch (CertificateEncodingException e) {
                         throw new java.security.KeyStoreException("Failed to encode certificate #" + i7, e);
                     }
                 }
-                bArr = new byte[i8];
-                int i10 = 0;
-                for (int i11 = 0; i11 < i6; i11++) {
-                    byte[] bArr3 = bArr2[i11];
-                    int length2 = bArr3.length;
-                    System.arraycopy(bArr3, 0, bArr, i10, length2);
-                    i10 += length2;
-                    bArr2[i11] = null;
+                bArr = new byte[length2];
+                int i9 = 0;
+                for (int i10 = 0; i10 < i6; i10++) {
+                    byte[] bArr3 = bArr2[i10];
+                    int length3 = bArr3.length;
+                    System.arraycopy(bArr3, 0, bArr, i9, length3);
+                    i9 += length3;
+                    bArr2[i10] = null;
                 }
             } else {
                 bArr = null;
@@ -327,110 +328,109 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
             final ArrayList arrayList = new ArrayList();
             try {
                 arrayList.add(KeyStore2ParameterUtils.makeEnum(268435458, KeyProperties.KeyAlgorithm.toKeymasterAsymmetricKeyAlgorithm(privateKey.getAlgorithm())));
-                KeyStore2ParameterUtils.forEachSetFlag(keyProtection.getPurposes(), new Consumer() { // from class: android.security.keystore2.AndroidKeyStoreSpi$$ExternalSyntheticLambda0
+                KeyStore2ParameterUtils.forEachSetFlag(legacyKeyProtectionParameter.getPurposes(), new Consumer() { // from class: android.security.keystore2.AndroidKeyStoreSpi$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         arrayList.add(KeyStore2ParameterUtils.makeEnum(536870913, KeyProperties.Purpose.toKeymaster(((Integer) obj).intValue())));
                     }
                 });
-                if (keyProtection.isDigestsSpecified()) {
-                    String[] digests = keyProtection.getDigests();
-                    int length3 = digests.length;
-                    while (i4 < length3) {
+                if (legacyKeyProtectionParameter.isDigestsSpecified()) {
+                    String[] digests = legacyKeyProtectionParameter.getDigests();
+                    int length4 = digests.length;
+                    while (i4 < length4) {
                         arrayList.add(KeyStore2ParameterUtils.makeEnum(536870917, KeyProperties.Digest.toKeymaster(digests[i4])));
                         i4++;
                         digests = digests;
                     }
                 }
-                String[] blockModes = keyProtection.getBlockModes();
-                int length4 = blockModes.length;
-                int i12 = 0;
-                while (i12 < length4) {
-                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870916, KeyProperties.BlockMode.toKeymaster(blockModes[i12])));
-                    i12++;
+                String[] blockModes = legacyKeyProtectionParameter.getBlockModes();
+                int length5 = blockModes.length;
+                int i11 = 0;
+                while (i11 < length5) {
+                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870916, KeyProperties.BlockMode.toKeymaster(blockModes[i11])));
+                    i11++;
                     blockModes = blockModes;
                 }
-                int[] allToKeymaster = KeyProperties.EncryptionPadding.allToKeymaster(keyProtection.getEncryptionPaddings());
-                if ((keyProtection.getPurposes() & 1) != 0 && keyProtection.isRandomizedEncryptionRequired()) {
-                    for (int i13 : allToKeymaster) {
-                        if (!KeymasterUtils.isKeymasterPaddingSchemeIndCpaCompatibleWithAsymmetricCrypto(i13)) {
-                            throw new java.security.KeyStoreException("Randomized encryption (IND-CPA) required but is violated by encryption padding mode: " + KeyProperties.EncryptionPadding.fromKeymaster(i13) + ". See KeyProtection documentation.");
+                int[] iArrAllToKeymaster = KeyProperties.EncryptionPadding.allToKeymaster(legacyKeyProtectionParameter.getEncryptionPaddings());
+                if ((legacyKeyProtectionParameter.getPurposes() & 1) != 0 && legacyKeyProtectionParameter.isRandomizedEncryptionRequired()) {
+                    for (int i12 : iArrAllToKeymaster) {
+                        if (!KeymasterUtils.isKeymasterPaddingSchemeIndCpaCompatibleWithAsymmetricCrypto(i12)) {
+                            throw new java.security.KeyStoreException("Randomized encryption (IND-CPA) required but is violated by encryption padding mode: " + KeyProperties.EncryptionPadding.fromKeymaster(i12) + ". See KeyProtection documentation.");
                         }
                     }
                 }
-                int length5 = allToKeymaster.length;
-                int i14 = 0;
-                while (i14 < length5) {
-                    int[] iArr = allToKeymaster;
-                    int i15 = iArr[i14];
-                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870918, i15));
-                    if (i15 == 2 && KeymasterUtils.isKeyMintDevice(i)) {
-                        if (keyProtection.isMgf1DigestsSpecified()) {
-                            for (Iterator<String> it = keyProtection.getMgf1Digests().iterator(); it.hasNext(); it = it) {
+                int length6 = iArrAllToKeymaster.length;
+                int i13 = 0;
+                while (i13 < length6) {
+                    int[] iArr = iArrAllToKeymaster;
+                    int i14 = iArr[i13];
+                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870918, i14));
+                    if (i14 == 2 && KeymasterUtils.isKeyMintDevice(i)) {
+                        if (legacyKeyProtectionParameter.isMgf1DigestsSpecified()) {
+                            for (Iterator<String> it = legacyKeyProtectionParameter.getMgf1Digests().iterator(); it.hasNext(); it = it) {
                                 arrayList.add(KeyStore2ParameterUtils.makeEnum(536871115, KeyProperties.Digest.toKeymaster(it.next())));
                             }
                         } else {
                             arrayList.add(KeyStore2ParameterUtils.makeEnum(536871115, KeyProperties.Digest.toKeymaster(str3)));
                             if (!getMgf1DigestSetterFlag()) {
                                 int keymaster = KeyProperties.Digest.toKeymaster(str3);
-                                String[] digests2 = keyProtection.getDigests();
+                                String[] digests2 = legacyKeyProtectionParameter.getDigests();
                                 str2 = str3;
-                                int length6 = digests2.length;
-                                i2 = length5;
-                                int i16 = 0;
-                                while (i16 < length6) {
-                                    int i17 = length6;
-                                    int keymaster2 = KeyProperties.Digest.toKeymaster(digests2[i16]);
+                                int length7 = digests2.length;
+                                i2 = length6;
+                                int i15 = 0;
+                                while (i15 < length7) {
+                                    int i16 = length7;
+                                    int keymaster2 = KeyProperties.Digest.toKeymaster(digests2[i15]);
                                     if (keymaster2 != keymaster) {
                                         i3 = keymaster;
                                         arrayList.add(KeyStore2ParameterUtils.makeEnum(536871115, keymaster2));
                                     } else {
                                         i3 = keymaster;
                                     }
-                                    i16++;
+                                    i15++;
                                     keymaster = i3;
-                                    length6 = i17;
+                                    length7 = i16;
                                 }
-                                i14++;
-                                allToKeymaster = iArr;
-                                str3 = str2;
-                                length5 = i2;
                             }
                         }
+                        str2 = str3;
+                        i2 = length6;
+                    } else {
+                        str2 = str3;
+                        i2 = length6;
                     }
-                    str2 = str3;
-                    i2 = length5;
-                    i14++;
-                    allToKeymaster = iArr;
+                    i13++;
+                    iArrAllToKeymaster = iArr;
                     str3 = str2;
-                    length5 = i2;
+                    length6 = i2;
                 }
-                for (String str4 : keyProtection.getSignaturePaddings()) {
+                for (String str4 : legacyKeyProtectionParameter.getSignaturePaddings()) {
                     arrayList.add(KeyStore2ParameterUtils.makeEnum(536870918, KeyProperties.SignaturePadding.toKeymaster(str4)));
                 }
-                KeyStore2ParameterUtils.addUserAuthArgs(arrayList, keyProtection);
-                if (keyProtection.getKeyValidityStart() != null) {
-                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613136, keyProtection.getKeyValidityStart()));
+                KeyStore2ParameterUtils.addUserAuthArgs(arrayList, legacyKeyProtectionParameter);
+                if (legacyKeyProtectionParameter.getKeyValidityStart() != null) {
+                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613136, legacyKeyProtectionParameter.getKeyValidityStart()));
                 }
-                if (keyProtection.getKeyValidityForOriginationEnd() != null) {
-                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613137, keyProtection.getKeyValidityForOriginationEnd()));
+                if (legacyKeyProtectionParameter.getKeyValidityForOriginationEnd() != null) {
+                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613137, legacyKeyProtectionParameter.getKeyValidityForOriginationEnd()));
                 }
-                if (keyProtection.getKeyValidityForConsumptionEnd() != null) {
-                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613138, keyProtection.getKeyValidityForConsumptionEnd()));
+                if (legacyKeyProtectionParameter.getKeyValidityForConsumptionEnd() != null) {
+                    arrayList.add(KeyStore2ParameterUtils.makeDate(1610613138, legacyKeyProtectionParameter.getKeyValidityForConsumptionEnd()));
                 }
-                if (keyProtection.getMaxUsageCount() != -1) {
-                    arrayList.add(KeyStore2ParameterUtils.makeInt(805306773, keyProtection.getMaxUsageCount()));
+                if (legacyKeyProtectionParameter.getMaxUsageCount() != -1) {
+                    arrayList.add(KeyStore2ParameterUtils.makeInt(805306773, legacyKeyProtectionParameter.getMaxUsageCount()));
                 }
                 if (3 == KeyProperties.KeyAlgorithm.toKeymasterAsymmetricKeyAlgorithm(privateKey.getAlgorithm())) {
                     arrayList.add(KeyStore2ParameterUtils.makeEnum(268435466, getKeymasterEcCurve(privateKey)));
                 }
                 try {
-                    KeyMetadata importKey = this.mKeyStore.getSecurityLevel(i).importKey(makeKeyDescriptor(str), null, arrayList, r12, encoded3);
+                    KeyMetadata keyMetadataImportKey = this.mKeyStore.getSecurityLevel(i).importKey(makeKeyDescriptor(str), null, arrayList, r12, encoded3);
                     try {
                         StrictMode.noteDiskWrite();
-                        this.mKeyStore.updateSubcomponents(importKey.key, encoded, bArr);
+                        this.mKeyStore.updateSubcomponents(keyMetadataImportKey.key, encoded, bArr);
                     } catch (KeyStoreException e3) {
-                        this.mKeyStore.deleteKey(importKey.key);
+                        this.mKeyStore.deleteKey(keyMetadataImportKey.key);
                         throw new java.security.KeyStoreException("Failed to store certificate and certificate chain", e3);
                     }
                 } catch (KeyStoreException e4) {
@@ -487,19 +487,117 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0188 A[Catch: IllegalArgumentException | IllegalStateException -> 0x0288, TryCatch #1 {IllegalArgumentException | IllegalStateException -> 0x0288, blocks: (B:25:0x0083, B:27:0x00a0, B:29:0x00aa, B:31:0x00b0, B:33:0x00bb, B:36:0x00c0, B:37:0x00f1, B:38:0x00f2, B:40:0x00f8, B:41:0x0155, B:43:0x0168, B:46:0x017f, B:48:0x0188, B:50:0x0190, B:54:0x0197, B:55:0x01b2, B:59:0x01b9, B:61:0x01c9, B:65:0x01d6, B:67:0x01dd, B:69:0x01e6, B:71:0x01f9, B:73:0x0202, B:74:0x0210, B:76:0x0216, B:77:0x0224, B:79:0x022a, B:80:0x0238, B:82:0x023e, B:83:0x024c, B:85:0x0252, B:96:0x0280, B:96:0x0280, B:97:0x0287, B:97:0x0287, B:98:0x0173, B:100:0x010a, B:101:0x011f, B:102:0x0120, B:103:0x0135, B:104:0x0136, B:106:0x013c, B:108:0x0145), top: B:24:0x0083 }] */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x01dd A[Catch: IllegalArgumentException | IllegalStateException -> 0x0288, TryCatch #1 {IllegalArgumentException | IllegalStateException -> 0x0288, blocks: (B:25:0x0083, B:27:0x00a0, B:29:0x00aa, B:31:0x00b0, B:33:0x00bb, B:36:0x00c0, B:37:0x00f1, B:38:0x00f2, B:40:0x00f8, B:41:0x0155, B:43:0x0168, B:46:0x017f, B:48:0x0188, B:50:0x0190, B:54:0x0197, B:55:0x01b2, B:59:0x01b9, B:61:0x01c9, B:65:0x01d6, B:67:0x01dd, B:69:0x01e6, B:71:0x01f9, B:73:0x0202, B:74:0x0210, B:76:0x0216, B:77:0x0224, B:79:0x022a, B:80:0x0238, B:82:0x023e, B:83:0x024c, B:85:0x0252, B:96:0x0280, B:96:0x0280, B:97:0x0287, B:97:0x0287, B:98:0x0173, B:100:0x010a, B:101:0x011f, B:102:0x0120, B:103:0x0135, B:104:0x0136, B:106:0x013c, B:108:0x0145), top: B:24:0x0083 }] */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x0280 A[Catch: IllegalArgumentException | IllegalStateException -> 0x0288, IllegalArgumentException | IllegalStateException -> 0x0288, TRY_ENTER, TryCatch #1 {IllegalArgumentException | IllegalStateException -> 0x0288, blocks: (B:25:0x0083, B:27:0x00a0, B:29:0x00aa, B:31:0x00b0, B:33:0x00bb, B:36:0x00c0, B:37:0x00f1, B:38:0x00f2, B:40:0x00f8, B:41:0x0155, B:43:0x0168, B:46:0x017f, B:48:0x0188, B:50:0x0190, B:54:0x0197, B:55:0x01b2, B:59:0x01b9, B:61:0x01c9, B:65:0x01d6, B:67:0x01dd, B:69:0x01e6, B:71:0x01f9, B:73:0x0202, B:74:0x0210, B:76:0x0216, B:77:0x0224, B:79:0x022a, B:80:0x0238, B:82:0x023e, B:83:0x024c, B:85:0x0252, B:96:0x0280, B:96:0x0280, B:97:0x0287, B:97:0x0287, B:98:0x0173, B:100:0x010a, B:101:0x011f, B:102:0x0120, B:103:0x0135, B:104:0x0136, B:106:0x013c, B:108:0x0145), top: B:24:0x0083 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void setSecretKeyEntry(java.lang.String r18, javax.crypto.SecretKey r19, java.security.KeyStore.ProtectionParameter r20) throws java.security.KeyStoreException {
-        /*
-            Method dump skipped, instructions count: 699
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.security.keystore2.AndroidKeyStoreSpi.setSecretKeyEntry(java.lang.String, javax.crypto.SecretKey, java.security.KeyStore$ProtectionParameter):void");
+    private void setSecretKeyEntry(String str, SecretKey secretKey, KeyStore.ProtectionParameter protectionParameter) throws java.security.KeyStoreException {
+        Object[] objArr;
+        if (protectionParameter != null && !(protectionParameter instanceof KeyProtection)) {
+            throw new java.security.KeyStoreException("Unsupported protection parameter class: " + protectionParameter.getClass().getName() + ". Supported: " + KeyProtection.class.getName());
+        }
+        KeyProtection keyProtection = (KeyProtection) protectionParameter;
+        int targetDomain = getTargetDomain();
+        if (secretKey instanceof AndroidKeyStoreSecretKey) {
+            AndroidKeyStoreSecretKey androidKeyStoreSecretKey = (AndroidKeyStoreSecretKey) secretKey;
+            String str2 = androidKeyStoreSecretKey.getUserKeyDescriptor().alias;
+            assertCanReplace(str, targetDomain, this.mNamespace, androidKeyStoreSecretKey.getUserKeyDescriptor());
+            if (keyProtection != null) {
+                throw new java.security.KeyStoreException("Modifying KeyStore-backed key using protection parameters not supported");
+            }
+            return;
+        }
+        if (keyProtection == null) {
+            throw new java.security.KeyStoreException("Protection parameters must be specified when importing a symmetric key");
+        }
+        String format = secretKey.getFormat();
+        if (format == null) {
+            throw new java.security.KeyStoreException("Only secret keys that export their key material are supported");
+        }
+        if (!"RAW".equals(format)) {
+            throw new java.security.KeyStoreException("Unsupported secret key material export format: " + format);
+        }
+        byte[] encoded = secretKey.getEncoded();
+        if (encoded == null) {
+            throw new java.security.KeyStoreException("Key did not export its key material despite supporting RAW format export");
+        }
+        final ArrayList arrayList = new ArrayList();
+        try {
+            int keymasterSecretKeyAlgorithm = KeyProperties.KeyAlgorithm.toKeymasterSecretKeyAlgorithm(secretKey.getAlgorithm());
+            arrayList.add(KeyStore2ParameterUtils.makeEnum(268435458, keymasterSecretKeyAlgorithm));
+            if (keymasterSecretKeyAlgorithm == 128) {
+                int keymasterDigest = KeyProperties.KeyAlgorithm.toKeymasterDigest(secretKey.getAlgorithm());
+                if (keymasterDigest == -1) {
+                    throw new ProviderException("HMAC key algorithm digest unknown for key algorithm " + secretKey.getAlgorithm());
+                }
+                if (keyProtection.isDigestsSpecified()) {
+                    int[] iArrAllToKeymaster = KeyProperties.Digest.allToKeymaster(keyProtection.getDigests());
+                    if (iArrAllToKeymaster.length != 1 || iArrAllToKeymaster[0] != keymasterDigest) {
+                        throw new java.security.KeyStoreException("Unsupported digests specification: " + Arrays.asList(keyProtection.getDigests()) + ". Only " + KeyProperties.Digest.fromKeymaster(keymasterDigest) + " supported for HMAC key algorithm " + secretKey.getAlgorithm());
+                    }
+                }
+                int digestOutputSizeBits = KeymasterUtils.getDigestOutputSizeBits(keymasterDigest);
+                if (digestOutputSizeBits == -1) {
+                    throw new ProviderException("HMAC key authorized for unsupported digest: " + KeyProperties.Digest.fromKeymaster(keymasterDigest));
+                }
+                arrayList.add(KeyStore2ParameterUtils.makeEnum(536870917, keymasterDigest));
+                arrayList.add(KeyStore2ParameterUtils.makeInt(805306376, digestOutputSizeBits));
+            } else if (keyProtection.isDigestsSpecified()) {
+                for (String str3 : keyProtection.getDigests()) {
+                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870917, KeyProperties.Digest.toKeymaster(str3)));
+                }
+            }
+            KeyStore2ParameterUtils.forEachSetFlag(keyProtection.getPurposes(), new Consumer() { // from class: android.security.keystore2.AndroidKeyStoreSpi$$ExternalSyntheticLambda1
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) {
+                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536870913, KeyProperties.Purpose.toKeymaster(((Integer) obj).intValue())));
+                }
+            });
+            if ((keyProtection.getPurposes() & 1) == 0) {
+                objArr = false;
+            } else if (((KeyProtection) protectionParameter).isRandomizedEncryptionRequired()) {
+                objArr = true;
+            } else {
+                arrayList.add(KeyStore2ParameterUtils.makeBool(1879048199));
+                objArr = false;
+            }
+            for (String str4 : keyProtection.getBlockModes()) {
+                int keymaster = KeyProperties.BlockMode.toKeymaster(str4);
+                if (objArr != false && !KeymasterUtils.isKeymasterBlockModeIndCpaCompatibleWithSymmetricCrypto(keymaster)) {
+                    throw new java.security.KeyStoreException("Randomized encryption (IND-CPA) required but may be violated by block mode: " + str4 + ". See KeyProtection documentation.");
+                }
+                if (keymasterSecretKeyAlgorithm == 32 && keymaster == 32) {
+                    arrayList.add(KeyStore2ParameterUtils.makeInt(805306376, 96));
+                }
+                arrayList.add(KeyStore2ParameterUtils.makeEnum(536870916, keymaster));
+            }
+            if (keyProtection.getSignaturePaddings().length > 0) {
+                throw new java.security.KeyStoreException("Signature paddings not supported for symmetric keys");
+            }
+            for (String str5 : keyProtection.getEncryptionPaddings()) {
+                arrayList.add(KeyStore2ParameterUtils.makeEnum(536870918, KeyProperties.EncryptionPadding.toKeymaster(str5)));
+            }
+            KeyStore2ParameterUtils.addUserAuthArgs(arrayList, keyProtection);
+            if (keyProtection.getKeyValidityStart() != null) {
+                arrayList.add(KeyStore2ParameterUtils.makeDate(1610613136, keyProtection.getKeyValidityStart()));
+            }
+            if (keyProtection.getKeyValidityForOriginationEnd() != null) {
+                arrayList.add(KeyStore2ParameterUtils.makeDate(1610613137, keyProtection.getKeyValidityForOriginationEnd()));
+            }
+            if (keyProtection.getKeyValidityForConsumptionEnd() != null) {
+                arrayList.add(KeyStore2ParameterUtils.makeDate(1610613138, keyProtection.getKeyValidityForConsumptionEnd()));
+            }
+            if (keyProtection.getMaxUsageCount() != -1) {
+                arrayList.add(KeyStore2ParameterUtils.makeInt(805306773, keyProtection.getMaxUsageCount()));
+            }
+            if (keyProtection.isRollbackResistant()) {
+                arrayList.add(KeyStore2ParameterUtils.makeBool(1879048495));
+            }
+            boolean zIsCriticalToDeviceEncryption = keyProtection.isCriticalToDeviceEncryption();
+            try {
+                this.mKeyStore.getSecurityLevel(keyProtection.isStrongBoxBacked() ? 2 : 1).importKey(makeKeyDescriptor(str), null, arrayList, zIsCriticalToDeviceEncryption ? 1 : 0, encoded);
+            } catch (KeyStoreException e) {
+                throw new java.security.KeyStoreException("Failed to import secret key.", e);
+            }
+        } catch (IllegalArgumentException | IllegalStateException e2) {
+            throw new java.security.KeyStoreException(e2);
+        }
     }
 
     private void setWrappedKeyEntry(String str, WrappedKeyEntry wrappedKeyEntry, KeyStore.ProtectionParameter protectionParameter) throws java.security.KeyStoreException {
@@ -508,26 +606,26 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
         if (protectionParameter != null) {
             throw new java.security.KeyStoreException("Protection parameters are specified inside wrapped keys");
         }
-        String[] split = wrappedKeyEntry.getTransformation().split("/");
+        String[] strArrSplit = wrappedKeyEntry.getTransformation().split("/");
         ArrayList arrayList = new ArrayList();
-        String str2 = split[0];
+        String str2 = strArrSplit[0];
         if ("RSA".equalsIgnoreCase(str2)) {
             arrayList.add(KeyStore2ParameterUtils.makeEnum(268435458, 1));
-            if (split.length > 1) {
-                arrayList.add(KeyStore2ParameterUtils.makeEnum(536870916, KeyProperties.BlockMode.toKeymaster(split[1])));
+            if (strArrSplit.length > 1) {
+                arrayList.add(KeyStore2ParameterUtils.makeEnum(536870916, KeyProperties.BlockMode.toKeymaster(strArrSplit[1])));
             }
-            if (split.length > 2 && (keymaster2 = KeyProperties.EncryptionPadding.toKeymaster(split[2])) != 1) {
+            if (strArrSplit.length > 2 && (keymaster2 = KeyProperties.EncryptionPadding.toKeymaster(strArrSplit[2])) != 1) {
                 arrayList.add(KeyStore2ParameterUtils.makeEnum(536870918, keymaster2));
             }
             KeyGenParameterSpec keyGenParameterSpec = (KeyGenParameterSpec) wrappedKeyEntry.getAlgorithmParameterSpec();
             if (keyGenParameterSpec.isDigestsSpecified() && (keymaster = KeyProperties.Digest.toKeymaster(keyGenParameterSpec.getDigests()[0])) != 0) {
                 arrayList.add(KeyStore2ParameterUtils.makeEnum(536870917, keymaster));
             }
-            KeyDescriptor makeKeyDescriptor = makeKeyDescriptor(wrappedKeyEntry.getWrappingKeyAlias());
+            KeyDescriptor keyDescriptorMakeKeyDescriptor = makeKeyDescriptor(wrappedKeyEntry.getWrappingKeyAlias());
             try {
                 StrictMode.noteDiskRead();
-                KeyEntryResponse keyEntry = this.mKeyStore.getKeyEntry(makeKeyDescriptor);
-                KeyDescriptor makeKeyDescriptor2 = makeKeyDescriptor(str);
+                KeyEntryResponse keyEntry = this.mKeyStore.getKeyEntry(keyDescriptorMakeKeyDescriptor);
+                KeyDescriptor keyDescriptorMakeKeyDescriptor2 = makeKeyDescriptor(str);
                 KeyStoreSecurityLevel keyStoreSecurityLevel = new KeyStoreSecurityLevel(keyEntry.iSecurityLevel);
                 long[] authenticatorIds = ((BiometricManager) AppGlobals.getInitialApplication().getSystemService(BiometricManager.class)).getAuthenticatorIds();
                 ArrayList arrayList2 = new ArrayList();
@@ -541,21 +639,27 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
                     authenticatorSpec2.authenticatorId = j;
                     arrayList2.add(authenticatorSpec2);
                 }
-                if (split.length > 2) {
+                if (strArrSplit.length > 2) {
                     boolean z = keyEntry.metadata.keySecurityLevel == 2;
                     Log.w(TAG, "isStrongBoxBacked : " + z + ", isQcom : " + KeymasterUtils.isQCDevice());
-                    if (KeyProperties.EncryptionPadding.toKeymaster(split[2]) == 2 && ((!z || !KeymasterUtils.isQCDevice()) && keyEntry.metadata != null && keyEntry.metadata.authorizations != null)) {
-                        for (Authorization authorization : keyEntry.metadata.authorizations) {
-                            if (authorization.keyParameter.tag == 536871115) {
-                                arrayList.add(KeyStore2ParameterUtils.makeEnum(536871115, KeyProperties.Digest.toKeymaster("SHA-1")));
-                                break;
+                    if (KeyProperties.EncryptionPadding.toKeymaster(strArrSplit[2]) == 2 && ((!z || !KeymasterUtils.isQCDevice()) && keyEntry.metadata != null && keyEntry.metadata.authorizations != null)) {
+                        Authorization[] authorizationArr = keyEntry.metadata.authorizations;
+                        int length = authorizationArr.length;
+                        int i = 0;
+                        while (true) {
+                            if (i < length) {
+                                if (authorizationArr[i].keyParameter.tag == 536871115) {
+                                    arrayList.add(KeyStore2ParameterUtils.makeEnum(536871115, KeyProperties.Digest.toKeymaster("SHA-1")));
+                                    break;
+                                }
+                                i++;
                             }
                         }
                     }
                 }
                 try {
                     StrictMode.noteDiskWrite();
-                    keyStoreSecurityLevel.importWrappedKey(makeKeyDescriptor2, makeKeyDescriptor, wrappedKeyEntry.getWrappedKeyBytes(), null, arrayList, (AuthenticatorSpec[]) arrayList2.toArray(new AuthenticatorSpec[0]));
+                    keyStoreSecurityLevel.importWrappedKey(keyDescriptorMakeKeyDescriptor2, keyDescriptorMakeKeyDescriptor, wrappedKeyEntry.getWrappedKeyBytes(), null, arrayList, (AuthenticatorSpec[]) arrayList2.toArray(new AuthenticatorSpec[0]));
                     return;
                 } catch (KeyStoreException e) {
                     if (e.getErrorCode() != -100) {
@@ -576,7 +680,7 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetCertificateEntry(String str, Certificate certificate) throws java.security.KeyStoreException {
+    public void engineSetCertificateEntry(String str, Certificate certificate) throws InterruptedException, java.security.KeyStoreException, CertificateEncodingException {
         if (isKeyEntry(str)) {
             throw new java.security.KeyStoreException("Entry exists and is not a trusted certificate");
         }
@@ -597,11 +701,11 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineDeleteEntry(String str) throws java.security.KeyStoreException {
-        KeyDescriptor makeKeyDescriptor = makeKeyDescriptor(str);
+    public void engineDeleteEntry(String str) throws InterruptedException, java.security.KeyStoreException {
+        KeyDescriptor keyDescriptorMakeKeyDescriptor = makeKeyDescriptor(str);
         try {
             StrictMode.noteDiskWrite();
-            this.mKeyStore.deleteKey(makeKeyDescriptor);
+            this.mKeyStore.deleteKey(keyDescriptorMakeKeyDescriptor);
         } catch (KeyStoreException e) {
             if (e.getErrorCode() == 7) {
                 return;
@@ -668,8 +772,8 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public String engineGetCertificateAlias(Certificate certificate) {
-        KeyDescriptor[] keyDescriptorArr;
+    public String engineGetCertificateAlias(Certificate certificate) throws CertificateEncodingException {
+        KeyDescriptor[] list;
         String str = null;
         if (certificate == null) {
             return null;
@@ -685,15 +789,15 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
             }
             try {
                 StrictMode.noteDiskRead();
-                keyDescriptorArr = this.mKeyStore.list(getTargetDomain(), this.mNamespace);
+                list = this.mKeyStore.list(getTargetDomain(), this.mNamespace);
             } catch (KeyStoreException e) {
                 Log.w(TAG, "Failed to get list of keystore entries.", e);
-                keyDescriptorArr = null;
+                list = null;
             }
-            if (keyDescriptorArr == null) {
+            if (list == null) {
                 return null;
             }
-            for (KeyDescriptor keyDescriptor : keyDescriptorArr) {
+            for (KeyDescriptor keyDescriptor : list) {
                 KeyEntryResponse keyMetadata = getKeyMetadata(keyDescriptor.alias);
                 if (keyMetadata != null) {
                     if (keyMetadata.metadata.certificate != null) {
@@ -718,12 +822,12 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(OutputStream outputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         throw new UnsupportedOperationException("Can not serialize AndroidKeyStore to OutputStream");
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineLoad(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         if (inputStream != null) {
             throw new IllegalArgumentException("InputStream not supported");
         }
@@ -735,21 +839,21 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException {
-        int i;
+    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException {
+        int namespace;
         if (loadStoreParameter == null) {
-            i = -1;
+            namespace = -1;
         } else if (loadStoreParameter instanceof AndroidKeyStoreLoadStoreParameter) {
-            i = ((AndroidKeyStoreLoadStoreParameter) loadStoreParameter).getNamespace();
+            namespace = ((AndroidKeyStoreLoadStoreParameter) loadStoreParameter).getNamespace();
         } else {
             throw new IllegalArgumentException("Unsupported param type: " + loadStoreParameter.getClass());
         }
         this.mKeyStore = KeyStore2.getInstance();
-        this.mNamespace = i;
+        this.mNamespace = namespace;
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetEntry(String str, KeyStore.Entry entry, KeyStore.ProtectionParameter protectionParameter) throws java.security.KeyStoreException {
+    public void engineSetEntry(String str, KeyStore.Entry entry, KeyStore.ProtectionParameter protectionParameter) throws InterruptedException, java.security.KeyStoreException, CertificateEncodingException {
         if (entry == null) {
             throw new java.security.KeyStoreException("entry == null");
         }

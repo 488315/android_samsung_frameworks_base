@@ -22,9 +22,9 @@ public class Pair<F, S> {
 
     public int hashCode() {
         F f = this.first;
-        int hashCode = f == null ? 0 : f.hashCode();
+        int iHashCode = f == null ? 0 : f.hashCode();
         S s = this.second;
-        return hashCode ^ (s != null ? s.hashCode() : 0);
+        return iHashCode ^ (s != null ? s.hashCode() : 0);
     }
 
     public String toString() {

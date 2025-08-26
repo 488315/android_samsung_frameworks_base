@@ -12,7 +12,6 @@ import com.android.systemui.slimindicator.SlimIndicatorViewSubscriber;
 import com.android.systemui.statusbar.policy.QSClockIndicatorView;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhoneStatusBarClockManager implements SlimIndicatorViewSubscriber {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
@@ -28,7 +27,6 @@ public class PhoneStatusBarClockManager implements SlimIndicatorViewSubscriber {
     public boolean mClockBlocked = false;
     public boolean mIsChangedClockPosition = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum POSITION {
         NONE,
         LEFT,
@@ -55,34 +53,34 @@ public class PhoneStatusBarClockManager implements SlimIndicatorViewSubscriber {
 
     public final int getClockWidth() {
         QSClockIndicatorView qSClockIndicatorView = this.mClockView;
-        int i = 0;
+        int iMeasureText = 0;
         if (qSClockIndicatorView == null) {
             return 0;
         }
         TextPaint paint = qSClockIndicatorView.getPaint();
         if (paint != null && qSClockIndicatorView.getText() != null) {
-            i = (int) paint.measureText(qSClockIndicatorView.getText().toString());
+            iMeasureText = (int) paint.measureText(qSClockIndicatorView.getText().toString());
         }
-        return Math.max(qSClockIndicatorView.getMeasuredWidth(), qSClockIndicatorView.getPaddingEnd() + qSClockIndicatorView.getPaddingStart() + i);
+        return Math.max(qSClockIndicatorView.getMeasuredWidth(), qSClockIndicatorView.getPaddingEnd() + qSClockIndicatorView.getPaddingStart() + iMeasureText);
     }
 
     @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
     public final void updateQuickStarStyle() {
         SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl = (SlimIndicatorViewMediatorImpl) this.mSlimIndicatorViewMediator;
-        boolean isLeftClockPosition = slimIndicatorViewMediatorImpl.isLeftClockPosition();
-        boolean isMiddleClockPosition = slimIndicatorViewMediatorImpl.isMiddleClockPosition();
-        boolean isRightClockPosition = slimIndicatorViewMediatorImpl.isRightClockPosition();
+        boolean zIsLeftClockPosition = slimIndicatorViewMediatorImpl.isLeftClockPosition();
+        boolean zIsMiddleClockPosition = slimIndicatorViewMediatorImpl.isMiddleClockPosition();
+        boolean zIsRightClockPosition = slimIndicatorViewMediatorImpl.isRightClockPosition();
         this.mClockBlocked = slimIndicatorViewMediatorImpl.isBlocked(SubRoom.EXTRA_VALUE_CLOCK);
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateQuickStarStyle() left:", ", middle:", ", right:", isLeftClockPosition, isMiddleClockPosition);
-        m.append(isRightClockPosition);
-        m.append(", mClockBlocked:");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(m, this.mClockBlocked, "[QuickStar]PhoneStatusBarClockManager");
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateQuickStarStyle() left:", ", middle:", ", right:", zIsLeftClockPosition, zIsMiddleClockPosition);
+        sbM.append(zIsRightClockPosition);
+        sbM.append(", mClockBlocked:");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mClockBlocked, "[QuickStar]PhoneStatusBarClockManager");
         POSITION position = this.mClockPosition;
-        if (isLeftClockPosition) {
+        if (zIsLeftClockPosition) {
             this.mClockPosition = POSITION.LEFT;
-        } else if (isRightClockPosition) {
+        } else if (zIsRightClockPosition) {
             this.mClockPosition = POSITION.RIGHT;
-        } else if (isMiddleClockPosition) {
+        } else if (zIsMiddleClockPosition) {
             this.mClockPosition = POSITION.MIDDLE;
         } else {
             this.mClockPosition = POSITION.NONE;
@@ -122,10 +120,10 @@ public class PhoneStatusBarClockManager implements SlimIndicatorViewSubscriber {
             viewGroup3.removeView(this.mClockView);
             viewGroup3.setVisibility(8);
         }
-        int ordinal = this.mClockPosition.ordinal();
-        if (ordinal == 2) {
+        int iOrdinal = this.mClockPosition.ordinal();
+        if (iOrdinal == 2) {
             addClockView(this.mMiddleContainer);
-        } else if (ordinal != 3) {
+        } else if (iOrdinal != 3) {
             addClockView(this.mLeftContainer);
         } else {
             addClockView(this.mRightContainer);

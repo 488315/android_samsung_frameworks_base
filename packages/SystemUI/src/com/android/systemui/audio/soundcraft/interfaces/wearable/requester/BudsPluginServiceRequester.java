@@ -15,7 +15,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BudsPluginServiceRequester {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -27,7 +26,7 @@ public abstract class BudsPluginServiceRequester {
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
             int i = BudsPluginServiceRequester.$r8$clinit;
-            BudsPluginServiceRequester budsPluginServiceRequester = BudsPluginServiceRequester.this;
+            BudsPluginServiceRequester budsPluginServiceRequester = this.f$0;
             try {
                 int i2 = Result.$r8$clinit;
                 if (budsPluginServiceRequester.messenger != null) {
@@ -47,20 +46,20 @@ public abstract class BudsPluginServiceRequester {
         public final void onBindingDied(ComponentName componentName) {
             super.onBindingDied(componentName);
             Log.d("SoundCraft.wearable.BudsPluginServiceRequester", "onBindingDied");
-            BudsPluginServiceRequester.this.messenger = null;
+            this.this$0.messenger = null;
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             Log.d("SoundCraft.wearable.BudsPluginServiceRequester", "onServiceConnected");
-            BudsPluginServiceRequester.this.messenger = new Messenger(iBinder);
-            BudsPluginServiceRequester.this.execute();
-            Handler handler = (Handler) BudsPluginServiceRequester.this.mainThreadHandler$delegate.getValue();
-            final BudsPluginServiceRequester$$ExternalSyntheticLambda1 budsPluginServiceRequester$$ExternalSyntheticLambda1 = BudsPluginServiceRequester.this.unbindServiceRunnable;
+            this.this$0.messenger = new Messenger(iBinder);
+            this.this$0.execute();
+            Handler handler = (Handler) this.this$0.mainThreadHandler$delegate.getValue();
+            final BudsPluginServiceRequester$$ExternalSyntheticLambda1 budsPluginServiceRequester$$ExternalSyntheticLambda1 = this.this$0.unbindServiceRunnable;
             handler.postDelayed(new Runnable() { // from class: com.android.systemui.audio.soundcraft.interfaces.wearable.requester.BudsPluginServiceRequester$sam$java_lang_Runnable$0
                 @Override // java.lang.Runnable
                 public final /* synthetic */ void run() {
-                    Function0.this.invoke();
+                    budsPluginServiceRequester$$ExternalSyntheticLambda1.invoke();
                 }
             }, 500L);
         }
@@ -68,11 +67,10 @@ public abstract class BudsPluginServiceRequester {
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
             Log.d("SoundCraft.wearable.BudsPluginServiceRequester", "onServiceDisconnected");
-            BudsPluginServiceRequester.this.messenger = null;
+            this.this$0.messenger = null;
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -111,9 +109,9 @@ public abstract class BudsPluginServiceRequester {
         if (failure instanceof Result.Failure) {
             failure = obj;
         }
-        boolean booleanValue = ((Boolean) failure).booleanValue();
-        Log.d("SoundCraft.wearable.BudsPluginServiceRequester", "budsPluginPackageName=" + str + ", isSuccess=" + booleanValue);
-        return booleanValue;
+        boolean zBooleanValue = ((Boolean) failure).booleanValue();
+        Log.d("SoundCraft.wearable.BudsPluginServiceRequester", "budsPluginPackageName=" + str + ", isSuccess=" + zBooleanValue);
+        return zBooleanValue;
     }
 
     public abstract void execute();

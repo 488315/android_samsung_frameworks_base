@@ -4,7 +4,6 @@ import com.samsung.android.nexus.base.utils.range.FloatRangeable;
 import com.samsung.android.nexus.particle.emitter.FactorType;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FactorRangeableList {
     public final FloatRangeable[] rangeables;
@@ -54,11 +53,11 @@ public class FactorRangeableList {
         for (int i = 0; i < length; i++) {
             FactorType factorType2 = factorTypeArr[i];
             Locale locale = Locale.ENGLISH;
-            Integer valueOf = Integer.valueOf(i);
-            String name = factorType2.name();
+            Integer numValueOf = Integer.valueOf(i);
+            String strName = factorType2.name();
             int i2 = factorType2.valueIdx;
             FloatRangeable[] floatRangeableArr = this.rangeables;
-            sb.append(String.format(locale, "\n#%d: %s: val = %f / spd = %f / acc = %f", valueOf, name, floatRangeableArr[i2], floatRangeableArr[factorType2.speedIdx], floatRangeableArr[factorType2.accelerationIdx]));
+            sb.append(String.format(locale, "\n#%d: %s: val = %f / spd = %f / acc = %f", numValueOf, strName, floatRangeableArr[i2], floatRangeableArr[factorType2.speedIdx], floatRangeableArr[factorType2.accelerationIdx]));
             sb.append("}");
         }
         return sb.toString();

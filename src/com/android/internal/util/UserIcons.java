@@ -15,7 +15,7 @@ public class UserIcons {
         return convertToBitmapAtSize(drawable, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
     }
 
-    public static Bitmap convertToBitmapAtUserIconSize(Resources resources, Drawable drawable) {
+    public static Bitmap convertToBitmapAtUserIconSize(Resources resources, Drawable drawable) throws Resources.NotFoundException {
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.user_icon_size);
         return convertToBitmapAtSize(drawable, dimensionPixelSize, dimensionPixelSize);
     }
@@ -24,11 +24,11 @@ public class UserIcons {
         if (drawable == null) {
             return null;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, i, i2);
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static Drawable getDefaultUserIcon(Resources resources, int i, boolean z) {
@@ -41,10 +41,10 @@ public class UserIcons {
     }
 
     public static Drawable getDefaultUserIconInColor(Resources resources, int i) {
-        Drawable mutate = resources.getDrawable(R.drawable.mum_default, null).mutate();
-        mutate.setColorFilter(i, PorterDuff.Mode.SRC_IN);
-        mutate.setBounds(0, 0, mutate.getIntrinsicWidth(), mutate.getIntrinsicHeight());
-        return mutate;
+        Drawable drawableMutate = resources.getDrawable(R.drawable.mum_default, null).mutate();
+        drawableMutate.setColorFilter(i, PorterDuff.Mode.SRC_IN);
+        drawableMutate.setBounds(0, 0, drawableMutate.getIntrinsicWidth(), drawableMutate.getIntrinsicHeight());
+        return drawableMutate;
     }
 
     public static int[] getUserIconColors(Resources resources) {

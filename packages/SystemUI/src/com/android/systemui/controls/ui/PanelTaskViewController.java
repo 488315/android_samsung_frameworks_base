@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Trace;
@@ -16,7 +17,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PanelTaskViewController {
     public final Context activityContext;
@@ -42,31 +42,31 @@ public final class PanelTaskViewController {
         this.stateCallback = new TaskView.Listener() { // from class: com.android.systemui.controls.ui.PanelTaskViewController$stateCallback$1
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onBackPressedOnTaskRoot(int i) {
-                PanelTaskViewController.this.hide.invoke();
+                this.this$0.hide.invoke();
             }
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onInitialized() {
-                final PanelTaskViewController panelTaskViewController = PanelTaskViewController.this;
-                final ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(panelTaskViewController.activityContext, 0, 0);
-                makeCustomAnimation.setTaskAlwaysOnTop(true);
+                final PanelTaskViewController panelTaskViewController = this.this$0;
+                final ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(panelTaskViewController.activityContext, 0, 0);
+                activityOptionsMakeCustomAnimation.setTaskAlwaysOnTop(true);
                 panelTaskViewController.taskView.post(new Runnable() { // from class: com.android.systemui.controls.ui.PanelTaskViewController$stateCallback$1$onInitialized$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        int dimensionPixelSize = PanelTaskViewController.this.activityContext.getResources().getDimensionPixelSize(R.dimen.controls_panel_corner_radius);
+                    public final void run() throws Resources.NotFoundException {
+                        int dimensionPixelSize = panelTaskViewController.activityContext.getResources().getDimensionPixelSize(R.dimen.controls_panel_corner_radius);
                         float[] fArr = new float[8];
                         for (int i = 0; i < 8; i++) {
                             fArr[i] = dimensionPixelSize;
                         }
-                        TaskView taskView2 = PanelTaskViewController.this.taskView;
+                        TaskView taskView2 = panelTaskViewController.taskView;
                         ShapeDrawable shapeDrawable = new ShapeDrawable(new RoundRectShape(fArr, null, null));
                         shapeDrawable.setTint(0);
                         taskView2.setBackground(shapeDrawable);
-                        PanelTaskViewController.this.taskView.setZOrderedOnTop(true, true);
-                        PanelTaskViewController.this.taskView.setClipToOutline(true);
-                        PanelTaskViewController panelTaskViewController2 = PanelTaskViewController.this;
+                        panelTaskViewController.taskView.setZOrderedOnTop(true, true);
+                        panelTaskViewController.taskView.setClipToOutline(true);
+                        PanelTaskViewController panelTaskViewController2 = panelTaskViewController;
                         TaskView taskView3 = panelTaskViewController2.taskView;
-                        taskView3.startActivity(panelTaskViewController2.pendingIntent, panelTaskViewController2.fillInIntent, makeCustomAnimation, ConvenienceExtensionsKt.getBoundsOnScreen(taskView3));
+                        taskView3.startActivity(panelTaskViewController2.pendingIntent, panelTaskViewController2.fillInIntent, activityOptionsMakeCustomAnimation, ConvenienceExtensionsKt.getBoundsOnScreen(taskView3));
                         Log.d("PanelTaskViewController", "onInitialized - taskView.startActivity");
                         Trace.instant(4096L, "PanelTaskViewController - startActivity");
                     }
@@ -75,12 +75,12 @@ public final class PanelTaskViewController {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskCreated(int i, ComponentName componentName) {
-                PanelTaskViewController.this.taskView.setAlpha(1.0f);
+                this.this$0.taskView.setAlpha(1.0f);
             }
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskRemovalStarted(int i) {
-                PanelTaskViewController.this.release();
+                this.this$0.release();
             }
         };
     }

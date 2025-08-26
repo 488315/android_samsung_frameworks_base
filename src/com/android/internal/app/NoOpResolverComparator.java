@@ -41,9 +41,7 @@ public class NoOpResolverComparator extends AbstractResolverComparator {
         return Comparator.comparingDouble(new ToDoubleFunction() { // from class: com.android.internal.app.NoOpResolverComparator$$ExternalSyntheticLambda0
             @Override // java.util.function.ToDoubleFunction
             public final double applyAsDouble(Object obj) {
-                double lambda$compare$0;
-                lambda$compare$0 = NoOpResolverComparator.this.lambda$compare$0((ResolveInfo) obj);
-                return lambda$compare$0;
+                return this.f$0.lambda$compare$0((ResolveInfo) obj);
             }
         }).reversed().compare(resolveInfo, resolveInfo2);
     }

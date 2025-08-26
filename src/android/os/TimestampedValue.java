@@ -1,6 +1,7 @@
 package android.os;
 
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -69,7 +70,7 @@ public final class TimestampedValue<T> implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeLong(this.mReferenceTimeMillis);
         parcel.writeValue(this.mValue);
     }

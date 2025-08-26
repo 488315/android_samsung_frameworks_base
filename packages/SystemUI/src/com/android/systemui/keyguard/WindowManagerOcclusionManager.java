@@ -19,7 +19,6 @@ import dagger.Lazy;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WindowManagerOcclusionManager {
     public static final Companion Companion = new Companion(null);
@@ -44,8 +43,8 @@ public final class WindowManagerOcclusionManager {
         public final void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
             WindowManagerOcclusionManager.Companion.getClass();
             android.util.Log.d(WindowManagerOcclusionManager.TAG, "occludeAnimationRunner#onAnimationStart");
-            WindowManagerOcclusionManager windowManagerOcclusionManager = WindowManagerOcclusionManager.this;
-            final WindowManagerOcclusionManager windowManagerOcclusionManager2 = WindowManagerOcclusionManager.this;
+            WindowManagerOcclusionManager windowManagerOcclusionManager = this.this$0;
+            final WindowManagerOcclusionManager windowManagerOcclusionManager2 = this.this$0;
             windowManagerOcclusionManager.occludeAnimationFinishedCallback = new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$occludeAnimationRunner$1$onAnimationStart$1
                 public final void onAnimationFinished() {
                     IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback2 = iRemoteAnimationFinishedCallback;
@@ -55,11 +54,11 @@ public final class WindowManagerOcclusionManager {
                     windowManagerOcclusionManager2.occludeAnimationFinishedCallback = null;
                 }
             };
-            KeyguardOcclusionInteractor keyguardOcclusionInteractor = WindowManagerOcclusionManager.this.keyguardOcclusionInteractor;
+            KeyguardOcclusionInteractor keyguardOcclusionInteractor = this.this$0.keyguardOcclusionInteractor;
             RemoteAnimationTarget remoteAnimationTarget = remoteAnimationTargetArr.length == 0 ? null : remoteAnimationTargetArr[0];
             keyguardOcclusionInteractor.repository.showWhenLockedActivityInfo.updateState(null, new ShowWhenLockedActivityInfo(true, remoteAnimationTarget != null ? remoteAnimationTarget.taskInfo : null));
-            WindowManagerOcclusionManager windowManagerOcclusionManager3 = WindowManagerOcclusionManager.this;
-            windowManagerOcclusionManager3.activityTransitionAnimator.createEphemeralRunner(windowManagerOcclusionManager3.occludeAnimationController).onAnimationStart(i, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, WindowManagerOcclusionManager.this.occludeAnimationFinishedCallback);
+            WindowManagerOcclusionManager windowManagerOcclusionManager3 = this.this$0;
+            windowManagerOcclusionManager3.activityTransitionAnimator.createEphemeralRunner(windowManagerOcclusionManager3.occludeAnimationController).onAnimationStart(i, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, this.this$0.occludeAnimationFinishedCallback);
         }
     };
     public final WindowManagerOcclusionManager$occludeAnimationController$1 occludeAnimationController = new ActivityTransitionAnimator.Controller() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$occludeAnimationController$1
@@ -67,7 +66,7 @@ public final class WindowManagerOcclusionManager {
         public final TransitionAnimator.State createAnimatorState() {
             int width = getTransitionContainer().getWidth();
             int height = getTransitionContainer().getHeight();
-            WindowManagerOcclusionManager windowManagerOcclusionManager = WindowManagerOcclusionManager.this;
+            WindowManagerOcclusionManager windowManagerOcclusionManager = this.this$0;
             if (((Boolean) windowManagerOcclusionManager.keyguardOcclusionInteractor.showWhenLockedActivityLaunchedFromPowerGesture.$$delegate_0.getValue()).booleanValue()) {
                 float f = width;
                 float f2 = windowManagerOcclusionManager.powerButtonY;
@@ -88,7 +87,7 @@ public final class WindowManagerOcclusionManager {
 
         @Override // com.android.systemui.animation.TransitionAnimator.Controller
         public final ViewGroup getTransitionContainer() {
-            return (ViewGroup) ((KeyguardViewController) WindowManagerOcclusionManager.this.keyguardViewController.get()).getViewRootImpl().getView();
+            return (ViewGroup) ((KeyguardViewController) this.this$0.keyguardViewController.get()).getViewRootImpl().getView();
         }
 
         @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -101,7 +100,6 @@ public final class WindowManagerOcclusionManager {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

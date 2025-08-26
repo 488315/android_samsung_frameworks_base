@@ -5,7 +5,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CacheKey {
     public float expansion;
@@ -37,12 +36,12 @@ public final class CacheKey {
         int i2 = this.heightMeasureSpec;
         float f = this.expansion;
         boolean z = this.gutsVisible;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "CacheKey(widthMeasureSpec=", ", heightMeasureSpec=", ", expansion=");
-        m.append(f);
-        m.append(", gutsVisible=");
-        m.append(z);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "CacheKey(widthMeasureSpec=", ", heightMeasureSpec=", ", expansion=");
+        sbM.append(f);
+        sbM.append(", gutsVisible=");
+        sbM.append(z);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public CacheKey(int i, int i2, float f, boolean z) {

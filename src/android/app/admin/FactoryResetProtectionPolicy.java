@@ -20,8 +20,8 @@ public final class FactoryResetProtectionPolicy implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public FactoryResetProtectionPolicy createFromParcel(Parcel parcel) {
             ArrayList arrayList = new ArrayList();
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
                 arrayList.add(parcel.readString());
             }
             return new FactoryResetProtectionPolicy(arrayList, parcel.readBoolean());

@@ -59,8 +59,8 @@ public class StatLogger {
                 if (jArr2[i] < time) {
                     jArr2[i] = time;
                 }
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                if (elapsedRealtime > this.mNextTickTime) {
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                if (jElapsedRealtime > this.mNextTickTime) {
                     int[] iArr2 = this.mMaxCallsPerSecond;
                     int i2 = iArr2[i];
                     int[] iArr3 = this.mCallsPerSecond;
@@ -77,7 +77,7 @@ public class StatLogger {
                     }
                     iArr3[i] = 0;
                     jArr4[i] = 0;
-                    this.mNextTickTime = elapsedRealtime + 1000;
+                    this.mNextTickTime = jElapsedRealtime + 1000;
                 }
                 int[] iArr4 = this.mCallsPerSecond;
                 iArr4[i] = iArr4[i] + 1;
@@ -113,9 +113,9 @@ public class StatLogger {
 
     public void dumpProto(ProtoOutputStream protoOutputStream, long j) {
         synchronized (this.mLock) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             for (int i = 0; i < this.mLabels.length; i++) {
-                long start2 = protoOutputStream.start(2246267895809L);
+                long jStart2 = protoOutputStream.start(2246267895809L);
                 protoOutputStream.write(1120986464257L, i);
                 protoOutputStream.write(1138166333442L, this.mLabels[i]);
                 protoOutputStream.write(1120986464259L, this.mCountStats[i]);
@@ -123,9 +123,9 @@ public class StatLogger {
                 protoOutputStream.write(1120986464261L, this.mMaxCallsPerSecond[i]);
                 protoOutputStream.write(1112396529670L, this.mMaxDurationPerSecond[i]);
                 protoOutputStream.write(1112396529671L, this.mMaxDurationStats[i]);
-                protoOutputStream.end(start2);
+                protoOutputStream.end(jStart2);
             }
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
     }
 }

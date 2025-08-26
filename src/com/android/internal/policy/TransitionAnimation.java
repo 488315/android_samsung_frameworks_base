@@ -77,17 +77,13 @@ public class TransitionAnimation {
     private final Interpolator mThumbnailFadeInInterpolator = new Interpolator() { // from class: com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda0
         @Override // android.animation.TimeInterpolator
         public final float getInterpolation(float f) {
-            float lambda$new$0;
-            lambda$new$0 = TransitionAnimation.this.lambda$new$0(f);
-            return lambda$new$0;
+            return this.f$0.lambda$new$0(f);
         }
     };
     private final Interpolator mThumbnailFadeOutInterpolator = new Interpolator() { // from class: com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda1
         @Override // android.animation.TimeInterpolator
         public final float getInterpolation(float f) {
-            float lambda$new$1;
-            lambda$new$1 = TransitionAnimation.this.lambda$new$1(f);
-            return lambda$new$1;
+            return this.f$0.lambda$new$1(f);
         }
     };
     private final boolean mLowRamRecentsEnabled = ActivityManager.isLowRamDeviceStatic();
@@ -169,9 +165,9 @@ public class TransitionAnimation {
         this.mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, 17563662);
         this.mClipRevealTranslationY = (int) (context.getResources().getDisplayMetrics().density * 8.0f);
         this.mConfigShortAnimTime = context.getResources().getInteger(17694720);
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(R.styleable.Window);
-        this.mDefaultWindowAnimationStyleResId = obtainStyledAttributes.getResourceId(8, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(R.styleable.Window);
+        this.mDefaultWindowAnimationStyleResId = typedArrayObtainStyledAttributes.getResourceId(8, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -262,134 +258,103 @@ public class TransitionAnimation {
     }
 
     public Animation loadAnimationAttr(WindowManager.LayoutParams layoutParams, int i, int i2) {
-        int i3;
+        int resourceId;
         AttributeCache.Entry cachedAnimations;
         Context context = this.mContext;
         boolean z = false;
         if (i < 0 || (cachedAnimations = getCachedAnimations(layoutParams)) == null) {
-            i3 = 0;
+            resourceId = 0;
         } else {
             context = cachedAnimations.context;
-            i3 = cachedAnimations.array.getResourceId(i, 0);
+            resourceId = cachedAnimations.array.getResourceId(i, 0);
         }
-        int updateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(i3, i2);
+        int iUpdateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(resourceId, i2);
         if (CoreRune.FW_CUSTOM_BASIC_ANIM) {
-            int updateToCustomAnimIfNeeded = updateToCustomAnimIfNeeded(updateToTranslucentAnimIfNeeded, CoreRune.FW_LARGE_FLIP_TRANSITION && this.mDisplayId == 1);
-            if (updateToCustomAnimIfNeeded != updateToTranslucentAnimIfNeeded) {
-                updateToTranslucentAnimIfNeeded = updateToCustomAnimIfNeeded;
+            int iUpdateToCustomAnimIfNeeded = updateToCustomAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded, CoreRune.FW_LARGE_FLIP_TRANSITION && this.mDisplayId == 1);
+            if (iUpdateToCustomAnimIfNeeded != iUpdateToTranslucentAnimIfNeeded) {
+                iUpdateToTranslucentAnimIfNeeded = iUpdateToCustomAnimIfNeeded;
                 z = true;
             }
         }
-        if (!ResourceId.isValid(updateToTranslucentAnimIfNeeded)) {
+        if (!ResourceId.isValid(iUpdateToTranslucentAnimIfNeeded)) {
             return null;
         }
         if (CoreRune.FW_CUSTOM_BASIC_ANIM && z) {
-            Animation loadAnimationSafely = loadAnimationSafely(context, updateToTranslucentAnimIfNeeded, this.mTag);
-            if (loadAnimationSafely != null) {
-                loadAnimationSafely.setIsSystemAnimation(true);
+            Animation animationLoadAnimationSafely = loadAnimationSafely(context, iUpdateToTranslucentAnimIfNeeded, this.mTag);
+            if (animationLoadAnimationSafely != null) {
+                animationLoadAnimationSafely.setIsSystemAnimation(true);
             }
-            return loadAnimationSafely;
+            return animationLoadAnimationSafely;
         }
-        return loadAnimationSafely(context, updateToTranslucentAnimIfNeeded, this.mTag);
+        return loadAnimationSafely(context, iUpdateToTranslucentAnimIfNeeded, this.mTag);
     }
 
     public int getAnimationResId(WindowManager.LayoutParams layoutParams, int i, int i2) {
         AttributeCache.Entry cachedAnimations;
-        int i3 = 0;
+        int resourceId = 0;
         if (i >= 0 && (cachedAnimations = getCachedAnimations(layoutParams)) != null) {
-            i3 = cachedAnimations.array.getResourceId(i, 0);
+            resourceId = cachedAnimations.array.getResourceId(i, 0);
         }
-        int updateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(i3, i2);
-        return CoreRune.FW_CUSTOM_BASIC_ANIM ? updateToCustomAnimIfNeeded(updateToTranslucentAnimIfNeeded) : updateToTranslucentAnimIfNeeded;
+        int iUpdateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(resourceId, i2);
+        return CoreRune.FW_CUSTOM_BASIC_ANIM ? updateToCustomAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded) : iUpdateToTranslucentAnimIfNeeded;
     }
 
     public int getDefaultAnimationResId(int i, int i2) {
         AttributeCache.Entry cachedAnimations;
-        int i3 = 0;
+        int resourceId = 0;
         if (i >= 0 && (cachedAnimations = getCachedAnimations("android", this.mDefaultWindowAnimationStyleResId)) != null) {
-            i3 = cachedAnimations.array.getResourceId(i, 0);
+            resourceId = cachedAnimations.array.getResourceId(i, 0);
         }
-        int updateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(i3, i2);
-        return CoreRune.FW_CUSTOM_BASIC_ANIM ? updateToCustomAnimIfNeeded(updateToTranslucentAnimIfNeeded) : updateToTranslucentAnimIfNeeded;
+        int iUpdateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(resourceId, i2);
+        return CoreRune.FW_CUSTOM_BASIC_ANIM ? updateToCustomAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded) : iUpdateToTranslucentAnimIfNeeded;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0020  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0063 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.view.animation.Animation loadAnimationAttr(java.lang.String r4, int r5, int r6, boolean r7, int r8) {
-        /*
-            r3 = this;
-            r0 = 0
-            if (r5 != 0) goto L4
-            return r0
-        L4:
-            android.content.Context r1 = r3.mContext
-            r2 = 0
-            if (r6 < 0) goto L1d
-            if (r4 == 0) goto Lc
-            goto Le
-        Lc:
-            java.lang.String r4 = "android"
-        Le:
-            com.android.internal.policy.AttributeCache$Entry r4 = r3.getCachedAnimations(r4, r5)
-            if (r4 == 0) goto L1d
-            android.content.Context r1 = r4.context
-            android.content.res.TypedArray r4 = r4.array
-            int r4 = r4.getResourceId(r6, r2)
-            goto L1e
-        L1d:
-            r4 = r2
-        L1e:
-            if (r7 == 0) goto L25
-            int r4 = updateToTranslucentAnimIfNeeded(r4)
-            goto L2c
-        L25:
-            r5 = -1
-            if (r8 == r5) goto L2c
-            int r4 = updateToTranslucentAnimIfNeeded(r4, r8)
-        L2c:
-            boolean r5 = com.samsung.android.rune.CoreRune.FW_CUSTOM_BASIC_ANIM
-            r6 = 1
-            if (r5 == 0) goto L44
-            boolean r5 = com.samsung.android.rune.CoreRune.FW_LARGE_FLIP_TRANSITION
-            if (r5 == 0) goto L3b
-            int r5 = r3.mDisplayId
-            if (r5 != r6) goto L3b
-            r5 = r6
-            goto L3c
-        L3b:
-            r5 = r2
-        L3c:
-            int r5 = r3.updateToCustomAnimIfNeeded(r4, r5)
-            if (r5 == r4) goto L44
-            r4 = r5
-            r2 = r6
-        L44:
-            boolean r5 = android.content.res.ResourceId.isValid(r4)
-            if (r5 == 0) goto L63
-            boolean r5 = com.samsung.android.rune.CoreRune.FW_CUSTOM_BASIC_ANIM
-            if (r5 == 0) goto L5c
-            if (r2 == 0) goto L5c
-            java.lang.String r3 = r3.mTag
-            android.view.animation.Animation r3 = loadAnimationSafely(r1, r4, r3)
-            if (r3 == 0) goto L5b
-            r3.setIsSystemAnimation(r6)
-        L5b:
-            return r3
-        L5c:
-            java.lang.String r3 = r3.mTag
-            android.view.animation.Animation r3 = loadAnimationSafely(r1, r4, r3)
-            return r3
-        L63:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.TransitionAnimation.loadAnimationAttr(java.lang.String, int, int, boolean, int):android.view.animation.Animation");
+    private Animation loadAnimationAttr(String str, int i, int i2, boolean z, int i3) {
+        int iUpdateToTranslucentAnimIfNeeded;
+        if (i == 0) {
+            return null;
+        }
+        Context context = this.mContext;
+        boolean z2 = false;
+        if (i2 < 0) {
+            iUpdateToTranslucentAnimIfNeeded = 0;
+        } else {
+            if (str == null) {
+                str = "android";
+            }
+            AttributeCache.Entry cachedAnimations = getCachedAnimations(str, i);
+            if (cachedAnimations != null) {
+                context = cachedAnimations.context;
+                iUpdateToTranslucentAnimIfNeeded = cachedAnimations.array.getResourceId(i2, 0);
+            }
+        }
+        if (z) {
+            iUpdateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded);
+        } else if (i3 != -1) {
+            iUpdateToTranslucentAnimIfNeeded = updateToTranslucentAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded, i3);
+        }
+        if (CoreRune.FW_CUSTOM_BASIC_ANIM) {
+            int iUpdateToCustomAnimIfNeeded = updateToCustomAnimIfNeeded(iUpdateToTranslucentAnimIfNeeded, CoreRune.FW_LARGE_FLIP_TRANSITION && this.mDisplayId == 1);
+            if (iUpdateToCustomAnimIfNeeded != iUpdateToTranslucentAnimIfNeeded) {
+                iUpdateToTranslucentAnimIfNeeded = iUpdateToCustomAnimIfNeeded;
+                z2 = true;
+            }
+        }
+        if (!ResourceId.isValid(iUpdateToTranslucentAnimIfNeeded)) {
+            return null;
+        }
+        if (CoreRune.FW_CUSTOM_BASIC_ANIM && z2) {
+            Animation animationLoadAnimationSafely = loadAnimationSafely(context, iUpdateToTranslucentAnimIfNeeded, this.mTag);
+            if (animationLoadAnimationSafely != null) {
+                animationLoadAnimationSafely.setIsSystemAnimation(true);
+            }
+            return animationLoadAnimationSafely;
+        }
+        return loadAnimationSafely(context, iUpdateToTranslucentAnimIfNeeded, this.mTag);
     }
 
     public Animation loadAnimationAttr(String str, int i, int i2, boolean z) {
@@ -457,15 +422,15 @@ public class TransitionAnimation {
         int i = 0;
         this.mTmpToClipRect.set(0, 0, rect.width(), rect.height());
         AnimationSet animationSet = new AnimationSet(true);
-        float width = this.mTmpFromClipRect.width();
-        float width2 = this.mTmpToClipRect.width();
-        float height = this.mTmpFromClipRect.height();
-        float height2 = (this.mTmpToClipRect.height() - rect2.top) - rect2.bottom;
-        if (width <= width2 && height <= height2) {
+        float fWidth = this.mTmpFromClipRect.width();
+        float fWidth2 = this.mTmpToClipRect.width();
+        float fHeight = this.mTmpFromClipRect.height();
+        float fHeight2 = (this.mTmpToClipRect.height() - rect2.top) - rect2.bottom;
+        if (fWidth <= fWidth2 && fHeight <= fHeight2) {
             animationSet.addAnimation(new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect));
         } else {
-            animationSet.addAnimation(new ScaleAnimation(width / width2, 1.0f, height / height2, 1.0f));
-            i = (int) ((rect2.top * height) / height2);
+            animationSet.addAnimation(new ScaleAnimation(fWidth / fWidth2, 1.0f, fHeight / fHeight2, 1.0f));
+            i = (int) ((rect2.top * fHeight) / fHeight2);
         }
         animationSet.addAnimation(new TranslateAnimation(r12 - rect.left, 0.0f, (r0 - rect.top) - i, 0.0f));
         animationSet.setDuration(336L);
@@ -495,47 +460,47 @@ public class TransitionAnimation {
         int i4;
         Interpolator interpolator;
         if (z) {
-            int width = rect.width();
-            int height = rect.height();
+            int iWidth = rect.width();
+            int iHeight = rect.height();
             setupDefaultNextAppTransitionStartRect(rect3, this.mTmpRect);
-            int height2 = this.mClipRevealTranslationY + ((int) ((rect2.height() / 7.0f) * (height > 0 ? this.mTmpRect.top / rect2.height() : 0.0f)));
-            int centerX = this.mTmpRect.centerX();
-            int centerY = this.mTmpRect.centerY();
-            int width2 = this.mTmpRect.width() / 2;
-            int height3 = this.mTmpRect.height() / 2;
-            int i5 = centerX - width2;
-            int i6 = i5 - rect.left;
-            int i7 = centerY - height3;
-            int i8 = i7 - rect.top;
-            if (rect.top > i7) {
-                height2 = i7 - rect.top;
+            int iHeight2 = this.mClipRevealTranslationY + ((int) ((rect2.height() / 7.0f) * (iHeight > 0 ? this.mTmpRect.top / rect2.height() : 0.0f)));
+            int iCenterX = this.mTmpRect.centerX();
+            int iCenterY = this.mTmpRect.centerY();
+            int iWidth2 = this.mTmpRect.width() / 2;
+            int iHeight3 = this.mTmpRect.height() / 2;
+            int i5 = iCenterX - iWidth2;
+            int iWidth3 = i5 - rect.left;
+            int i6 = iCenterY - iHeight3;
+            int i7 = i6 - rect.top;
+            if (rect.top > i6) {
+                iHeight2 = i6 - rect.top;
                 i2 = 0;
                 i3 = 0;
                 z3 = true;
             } else {
-                i2 = i8;
+                i2 = i7;
                 z3 = false;
-                i3 = height2;
+                i3 = iHeight2;
             }
             if (rect.left > i5) {
                 i4 = i5 - rect.left;
-                i6 = 0;
+                iWidth3 = 0;
                 z3 = true;
             } else {
                 i4 = 0;
             }
-            int i9 = centerX + width2;
-            if (rect.right < i9) {
-                i4 = i9 - rect.right;
-                i6 = width - this.mTmpRect.width();
+            int i8 = iCenterX + iWidth2;
+            if (rect.right < i8) {
+                i4 = i8 - rect.right;
+                iWidth3 = iWidth - this.mTmpRect.width();
                 z3 = true;
             }
             float f = i4;
-            float f2 = height2;
-            long calculateClipRevealTransitionDuration = calculateClipRevealTransitionDuration(z3, f, f2, rect2);
-            ClipRectLRAnimation clipRectLRAnimation = new ClipRectLRAnimation(i6, this.mTmpRect.width() + i6, 0, width);
+            float f2 = iHeight2;
+            long jCalculateClipRevealTransitionDuration = calculateClipRevealTransitionDuration(z3, f, f2, rect2);
+            ClipRectLRAnimation clipRectLRAnimation = new ClipRectLRAnimation(iWidth3, this.mTmpRect.width() + iWidth3, 0, iWidth);
             clipRectLRAnimation.setInterpolator(this.mClipHorizontalInterpolator);
-            clipRectLRAnimation.setDuration((long) (calculateClipRevealTransitionDuration / 2.5f));
+            clipRectLRAnimation.setDuration((long) (jCalculateClipRevealTransitionDuration / 2.5f));
             TranslateAnimation translateAnimation = new TranslateAnimation(f, 0.0f, f2, 0.0f);
             if (z3) {
                 interpolator = this.mTouchResponseInterpolator;
@@ -543,12 +508,12 @@ public class TransitionAnimation {
                 interpolator = this.mLinearOutSlowInInterpolator;
             }
             translateAnimation.setInterpolator(interpolator);
-            translateAnimation.setDuration(calculateClipRevealTransitionDuration);
-            ClipRectTBAnimation clipRectTBAnimation = new ClipRectTBAnimation(i2, this.mTmpRect.height() + i2, 0, height, i3, 0, this.mLinearOutSlowInInterpolator);
+            translateAnimation.setDuration(jCalculateClipRevealTransitionDuration);
+            ClipRectTBAnimation clipRectTBAnimation = new ClipRectTBAnimation(i2, this.mTmpRect.height() + i2, 0, iHeight, i3, 0, this.mLinearOutSlowInInterpolator);
             clipRectTBAnimation.setInterpolator(this.mTouchResponseInterpolator);
-            clipRectTBAnimation.setDuration(calculateClipRevealTransitionDuration);
+            clipRectTBAnimation.setDuration(jCalculateClipRevealTransitionDuration);
             AlphaAnimation alphaAnimation2 = new AlphaAnimation(0.5f, 1.0f);
-            alphaAnimation2.setDuration(calculateClipRevealTransitionDuration / 4);
+            alphaAnimation2.setDuration(jCalculateClipRevealTransitionDuration / 4);
             alphaAnimation2.setInterpolator(this.mLinearOutSlowInInterpolator);
             AnimationSet animationSet = new AnimationSet(false);
             animationSet.addAnimation(clipRectLRAnimation);
@@ -556,7 +521,7 @@ public class TransitionAnimation {
             animationSet.addAnimation(translateAnimation);
             animationSet.addAnimation(alphaAnimation2);
             animationSet.setZAdjustment(1);
-            animationSet.initialize(width, height, width, height);
+            animationSet.initialize(iWidth, iHeight, iWidth, iHeight);
             return animationSet;
         }
         long j = (i == 6 || i == 7) ? this.mConfigShortAnimTime : 336L;
@@ -582,12 +547,12 @@ public class TransitionAnimation {
     public Animation createScaleUpAnimationLockedCompat(int i, boolean z, Rect rect, Rect rect2) {
         AlphaAnimation alphaAnimation;
         setupDefaultNextAppTransitionStartRect(rect2, this.mTmpRect);
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         if (z) {
-            float width2 = this.mTmpRect.width() / width;
-            float height2 = this.mTmpRect.height() / height;
-            ScaleAnimation scaleAnimation = new ScaleAnimation(width2, 1.0f, height2, 1.0f, computePivot(this.mTmpRect.left, width2), computePivot(this.mTmpRect.top, height2));
+            float fWidth = this.mTmpRect.width() / iWidth;
+            float fHeight = this.mTmpRect.height() / iHeight;
+            ScaleAnimation scaleAnimation = new ScaleAnimation(fWidth, 1.0f, fHeight, 1.0f, computePivot(this.mTmpRect.left, fWidth), computePivot(this.mTmpRect.top, fHeight));
             scaleAnimation.setInterpolator(this.mDecelerateInterpolator);
             AlphaAnimation alphaAnimation2 = new AlphaAnimation(0.0f, 1.0f);
             alphaAnimation2.setInterpolator(this.mThumbnailFadeOutInterpolator);
@@ -606,7 +571,7 @@ public class TransitionAnimation {
         alphaAnimation.setDuration((i == 6 || i == 7) ? this.mConfigShortAnimTime : 336L);
         alphaAnimation.setFillAfter(true);
         alphaAnimation.setInterpolator(this.mDecelerateInterpolator);
-        alphaAnimation.initialize(width, height, width, height);
+        alphaAnimation.initialize(iWidth, iHeight, iWidth, iHeight);
         return alphaAnimation;
     }
 
@@ -617,21 +582,21 @@ public class TransitionAnimation {
     public Animation createThumbnailEnterExitAnimationLockedCompat(boolean z, boolean z2, Rect rect, int i, HardwareBuffer hardwareBuffer, Rect rect2) {
         Animation scaleAnimation;
         AlphaAnimation alphaAnimation;
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         setupDefaultNextAppTransitionStartRect(rect2, this.mTmpRect);
-        int width2 = hardwareBuffer != null ? hardwareBuffer.getWidth() : width;
-        float f = width2 > 0 ? width2 : 1.0f;
-        int height2 = hardwareBuffer != null ? hardwareBuffer.getHeight() : height;
-        float f2 = height2 > 0 ? height2 : 1.0f;
+        int width = hardwareBuffer != null ? hardwareBuffer.getWidth() : iWidth;
+        float f = width > 0 ? width : 1.0f;
+        int height = hardwareBuffer != null ? hardwareBuffer.getHeight() : iHeight;
+        float f2 = height > 0 ? height : 1.0f;
         int thumbnailTransitionState = getThumbnailTransitionState(z, z2);
         if (thumbnailTransitionState != 0) {
             if (thumbnailTransitionState != 1) {
                 if (thumbnailTransitionState == 2) {
                     alphaAnimation = new AlphaAnimation(1.0f, 1.0f);
                 } else if (thumbnailTransitionState == 3) {
-                    float f3 = f / width;
-                    float f4 = f2 / height;
+                    float f3 = f / iWidth;
+                    float f4 = f2 / iHeight;
                     ScaleAnimation scaleAnimation2 = new ScaleAnimation(1.0f, f3, 1.0f, f4, computePivot(this.mTmpRect.left, f3), computePivot(this.mTmpRect.top, f4));
                     AlphaAnimation alphaAnimation2 = new AlphaAnimation(1.0f, 0.0f);
                     AnimationSet animationSet = new AnimationSet(true);
@@ -649,160 +614,168 @@ public class TransitionAnimation {
             }
             scaleAnimation = alphaAnimation;
         } else {
-            float f5 = f / width;
-            float f6 = f2 / height;
+            float f5 = f / iWidth;
+            float f6 = f2 / iHeight;
             scaleAnimation = new ScaleAnimation(f5, 1.0f, f6, 1.0f, computePivot(this.mTmpRect.left, f5), computePivot(this.mTmpRect.top, f6));
         }
-        return prepareThumbnailAnimation(scaleAnimation, width, height, i);
+        return prepareThumbnailAnimation(scaleAnimation, iWidth, iHeight, i);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:32:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x009c  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00a2  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public Animation createAspectScaledThumbnailEnterExitAnimationLocked(boolean z, boolean z2, int i, int i2, Rect rect, Rect rect2, Rect rect3, Rect rect4, boolean z3, Rect rect5, Rect rect6) {
         ClipRectAnimation clipRectAnimation;
-        Animation createCurvedMotion;
+        Animation animationCreateCurvedMotion;
         ClipRectAnimation clipRectAnimation2;
-        Animation createCurvedMotion2;
-        Animation animation;
-        int width = rect.width();
-        int height = rect.height();
+        Animation animationCreateCurvedMotion2;
+        Animation animationCreateAspectScaledThumbnailExitFreeformAnimationLocked;
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         setupDefaultNextAppTransitionStartRect(rect6, this.mTmpRect);
-        int width2 = this.mTmpRect.width();
-        float f = width2 > 0 ? width2 : 1.0f;
-        int height2 = this.mTmpRect.height();
-        float f2 = height2 > 0 ? height2 : 1.0f;
+        int iWidth2 = this.mTmpRect.width();
+        float f = iWidth2 > 0 ? iWidth2 : 1.0f;
+        int iHeight2 = this.mTmpRect.height();
+        float f2 = iHeight2 > 0 ? iHeight2 : 1.0f;
         int i3 = (this.mTmpRect.left - rect.left) - rect2.left;
         int i4 = this.mTmpRect.top - rect.top;
         int thumbnailTransitionState = getThumbnailTransitionState(z, z2);
-        if (thumbnailTransitionState != 0) {
-            if (thumbnailTransitionState != 1) {
-                if (thumbnailTransitionState != 2) {
-                    if (thumbnailTransitionState != 3) {
-                        throw new RuntimeException("Invalid thumbnail transition state");
+        if (thumbnailTransitionState == 0) {
+            if (!z3 && z2) {
+                animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = createAspectScaledThumbnailEnterFreeformAnimationLocked(rect, rect3, rect5, rect6);
+            } else if (!z3) {
+                animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = createAspectScaledThumbnailExitFreeformAnimationLocked(rect, rect3, rect5, rect6);
+            } else {
+                AnimationSet animationSet = new AnimationSet(true);
+                this.mTmpFromClipRect.set(rect);
+                this.mTmpToClipRect.set(rect);
+                this.mTmpFromClipRect.offsetTo(0, 0);
+                this.mTmpToClipRect.offsetTo(0, 0);
+                this.mTmpFromClipRect.inset(rect2);
+                if (shouldScaleDownThumbnailTransition(i)) {
+                    float f3 = f / ((iWidth - rect2.left) - rect2.right);
+                    Rect rect7 = this.mTmpFromClipRect;
+                    rect7.bottom = rect7.top + ((int) (f2 / f3));
+                    ScaleAnimation scaleAnimation = new ScaleAnimation(z2 ? f3 : 1.0f, z2 ? 1.0f : f3, z2 ? f3 : 1.0f, z2 ? 1.0f : f3, rect.width() / 2.0f, (rect.height() / 2.0f) + rect2.top);
+                    float f4 = this.mTmpRect.left - rect.left;
+                    float fWidth = (rect.width() / 2.0f) - ((rect.width() / 2.0f) * f3);
+                    float f5 = this.mTmpRect.top - rect.top;
+                    float fHeight = (rect.height() / 2.0f) - ((rect.height() / 2.0f) * f3);
+                    if (this.mLowRamRecentsEnabled && rect2.top == 0 && z2) {
+                        this.mTmpFromClipRect.top += rect4.top;
+                        fHeight += rect4.top;
                     }
-                } else if (i2 == 14) {
-                    animation = new AlphaAnimation(0.0f, 1.0f);
+                    float f6 = f4 - fWidth;
+                    float f7 = f5 - fHeight;
+                    if (z2) {
+                        clipRectAnimation2 = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
+                    } else {
+                        clipRectAnimation2 = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
+                    }
+                    if (z2) {
+                        animationCreateCurvedMotion2 = createCurvedMotion(f6, 0.0f, f7 - rect2.top, 0.0f);
+                    } else {
+                        animationCreateCurvedMotion2 = createCurvedMotion(0.0f, f6, 0.0f, f7 - rect2.top);
+                    }
+                    animationSet.addAnimation(clipRectAnimation2);
+                    animationSet.addAnimation(scaleAnimation);
+                    animationSet.addAnimation(animationCreateCurvedMotion2);
                 } else {
-                    animation = new AlphaAnimation(1.0f, 1.0f);
+                    Rect rect8 = this.mTmpFromClipRect;
+                    rect8.bottom = rect8.top + iHeight2;
+                    Rect rect9 = this.mTmpFromClipRect;
+                    rect9.right = rect9.left + iWidth2;
+                    if (z2) {
+                        clipRectAnimation = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
+                    } else {
+                        clipRectAnimation = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
+                    }
+                    if (z2) {
+                        animationCreateCurvedMotion = createCurvedMotion(i3, 0.0f, i4 - rect2.top, 0.0f);
+                    } else {
+                        animationCreateCurvedMotion = createCurvedMotion(0.0f, i3, 0.0f, i4 - rect2.top);
+                    }
+                    animationSet.addAnimation(clipRectAnimation);
+                    animationSet.addAnimation(animationCreateCurvedMotion);
+                }
+                animationSet.setZAdjustment(1);
+                animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = animationSet;
+            }
+        } else if (thumbnailTransitionState != 1) {
+            if (thumbnailTransitionState != 2) {
+                if (thumbnailTransitionState != 3) {
+                    throw new RuntimeException("Invalid thumbnail transition state");
+                }
+                if (!z3) {
+                    if (!z3) {
+                    }
                 }
             } else if (i2 == 14) {
-                animation = new AlphaAnimation(1.0f, 0.0f);
+                animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = new AlphaAnimation(0.0f, 1.0f);
             } else {
-                animation = new AlphaAnimation(1.0f, 1.0f);
+                animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = new AlphaAnimation(1.0f, 1.0f);
             }
-            return prepareThumbnailAnimationWithDuration(animation, width, height, 336L, this.mTouchResponseInterpolator);
-        }
-        if (z3 && z2) {
-            animation = createAspectScaledThumbnailEnterFreeformAnimationLocked(rect, rect3, rect5, rect6);
-        } else if (z3) {
-            animation = createAspectScaledThumbnailExitFreeformAnimationLocked(rect, rect3, rect5, rect6);
+        } else if (i2 == 14) {
+            animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = new AlphaAnimation(1.0f, 0.0f);
         } else {
-            AnimationSet animationSet = new AnimationSet(true);
-            this.mTmpFromClipRect.set(rect);
-            this.mTmpToClipRect.set(rect);
-            this.mTmpFromClipRect.offsetTo(0, 0);
-            this.mTmpToClipRect.offsetTo(0, 0);
-            this.mTmpFromClipRect.inset(rect2);
-            if (shouldScaleDownThumbnailTransition(i)) {
-                float f3 = f / ((width - rect2.left) - rect2.right);
-                Rect rect7 = this.mTmpFromClipRect;
-                rect7.bottom = rect7.top + ((int) (f2 / f3));
-                ScaleAnimation scaleAnimation = new ScaleAnimation(z2 ? f3 : 1.0f, z2 ? 1.0f : f3, z2 ? f3 : 1.0f, z2 ? 1.0f : f3, rect.width() / 2.0f, (rect.height() / 2.0f) + rect2.top);
-                float f4 = this.mTmpRect.left - rect.left;
-                float width3 = (rect.width() / 2.0f) - ((rect.width() / 2.0f) * f3);
-                float f5 = this.mTmpRect.top - rect.top;
-                float height3 = (rect.height() / 2.0f) - ((rect.height() / 2.0f) * f3);
-                if (this.mLowRamRecentsEnabled && rect2.top == 0 && z2) {
-                    this.mTmpFromClipRect.top += rect4.top;
-                    height3 += rect4.top;
-                }
-                float f6 = f4 - width3;
-                float f7 = f5 - height3;
-                if (z2) {
-                    clipRectAnimation2 = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
-                } else {
-                    clipRectAnimation2 = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
-                }
-                if (z2) {
-                    createCurvedMotion2 = createCurvedMotion(f6, 0.0f, f7 - rect2.top, 0.0f);
-                } else {
-                    createCurvedMotion2 = createCurvedMotion(0.0f, f6, 0.0f, f7 - rect2.top);
-                }
-                animationSet.addAnimation(clipRectAnimation2);
-                animationSet.addAnimation(scaleAnimation);
-                animationSet.addAnimation(createCurvedMotion2);
-            } else {
-                Rect rect8 = this.mTmpFromClipRect;
-                rect8.bottom = rect8.top + height2;
-                Rect rect9 = this.mTmpFromClipRect;
-                rect9.right = rect9.left + width2;
-                if (z2) {
-                    clipRectAnimation = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
-                } else {
-                    clipRectAnimation = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
-                }
-                if (z2) {
-                    createCurvedMotion = createCurvedMotion(i3, 0.0f, i4 - rect2.top, 0.0f);
-                } else {
-                    createCurvedMotion = createCurvedMotion(0.0f, i3, 0.0f, i4 - rect2.top);
-                }
-                animationSet.addAnimation(clipRectAnimation);
-                animationSet.addAnimation(createCurvedMotion);
-            }
-            animationSet.setZAdjustment(1);
-            animation = animationSet;
+            animationCreateAspectScaledThumbnailExitFreeformAnimationLocked = new AlphaAnimation(1.0f, 1.0f);
         }
-        return prepareThumbnailAnimationWithDuration(animation, width, height, 336L, this.mTouchResponseInterpolator);
+        return prepareThumbnailAnimationWithDuration(animationCreateAspectScaledThumbnailExitFreeformAnimationLocked, iWidth, iHeight, 336L, this.mTouchResponseInterpolator);
     }
 
     public Animation createThumbnailAspectScaleAnimationLocked(Rect rect, Rect rect2, HardwareBuffer hardwareBuffer, int i, Rect rect3, Rect rect4, boolean z) {
         float f;
         float f2;
-        float f3;
-        float f4;
-        float f5;
-        float f6;
+        float fWidth;
+        float fHeight;
+        float fWidth2;
+        float fHeight2;
         AnimationSet animationSet;
         int width = hardwareBuffer.getWidth();
-        float f7 = width > 0 ? width : 1.0f;
+        float f3 = width > 0 ? width : 1.0f;
         int height = hardwareBuffer.getHeight();
-        int width2 = rect.width();
-        float f8 = width2 / f7;
+        int iWidth = rect.width();
+        float f4 = iWidth / f3;
         getNextAppTransitionStartRect(rect3, rect4, this.mTmpRect);
         if (shouldScaleDownThumbnailTransition(i)) {
             f = this.mTmpRect.left;
             f2 = this.mTmpRect.top;
-            f3 = ((this.mTmpRect.width() / 2) * (f8 - 1.0f)) + rect.left;
-            f4 = ((rect.height() / 2) * (1.0f - (1.0f / f8))) + rect.top;
-            f6 = (rect.height() / 2) / f8;
-            f5 = this.mTmpRect.width() / 2;
+            fWidth = ((this.mTmpRect.width() / 2) * (f4 - 1.0f)) + rect.left;
+            fHeight = ((rect.height() / 2) * (1.0f - (1.0f / f4))) + rect.top;
+            fHeight2 = (rect.height() / 2) / f4;
+            fWidth2 = this.mTmpRect.width() / 2;
         } else {
             f = this.mTmpRect.left;
             f2 = this.mTmpRect.top;
-            f3 = rect.left;
-            f4 = rect.top;
-            f5 = 0.0f;
-            f6 = 0.0f;
+            fWidth = rect.left;
+            fHeight = rect.top;
+            fWidth2 = 0.0f;
+            fHeight2 = 0.0f;
         }
-        float f9 = f;
+        float f5 = f;
         if (z) {
-            float f10 = f2;
-            float f11 = f4;
-            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, f8, 1.0f, f8, f5, f6);
+            float f6 = f2;
+            float f7 = fHeight;
+            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, f4, 1.0f, f4, fWidth2, fHeight2);
             Interpolator interpolator = TOUCH_RESPONSE_INTERPOLATOR;
             scaleAnimation.setInterpolator(interpolator);
             scaleAnimation.setDuration(336L);
             AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
             alphaAnimation.setInterpolator(this.mThumbnailFadeOutInterpolator);
             alphaAnimation.setDuration(336L);
-            Animation createCurvedMotion = createCurvedMotion(f9, f3, f10, f11);
-            createCurvedMotion.setInterpolator(interpolator);
-            createCurvedMotion.setDuration(336L);
+            Animation animationCreateCurvedMotion = createCurvedMotion(f5, fWidth, f6, f7);
+            animationCreateCurvedMotion.setInterpolator(interpolator);
+            animationCreateCurvedMotion.setDuration(336L);
             this.mTmpFromClipRect.set(0, 0, width, height);
             this.mTmpToClipRect.set(rect);
             this.mTmpToClipRect.offsetTo(0, 0);
-            this.mTmpToClipRect.right = (int) (r3.right / f8);
-            this.mTmpToClipRect.bottom = (int) (r3.bottom / f8);
+            this.mTmpToClipRect.right = (int) (r3.right / f4);
+            this.mTmpToClipRect.bottom = (int) (r3.bottom / f4);
             if (rect2 != null) {
-                this.mTmpToClipRect.inset((int) ((-rect2.left) * f8), (int) ((-rect2.top) * f8), (int) ((-rect2.right) * f8), (int) ((-rect2.bottom) * f8));
+                this.mTmpToClipRect.inset((int) ((-rect2.left) * f4), (int) ((-rect2.top) * f4), (int) ((-rect2.right) * f4), (int) ((-rect2.bottom) * f4));
             }
             ClipRectAnimation clipRectAnimation = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
             clipRectAnimation.setInterpolator(interpolator);
@@ -810,40 +783,40 @@ public class TransitionAnimation {
             animationSet = new AnimationSet(false);
             animationSet.addAnimation(scaleAnimation);
             animationSet.addAnimation(alphaAnimation);
-            animationSet.addAnimation(createCurvedMotion);
+            animationSet.addAnimation(animationCreateCurvedMotion);
             animationSet.addAnimation(clipRectAnimation);
         } else {
-            float f12 = f2;
-            float f13 = f3;
-            ScaleAnimation scaleAnimation2 = new ScaleAnimation(f8, 1.0f, f8, 1.0f, f5, f6);
+            float f8 = f2;
+            float f9 = fWidth;
+            ScaleAnimation scaleAnimation2 = new ScaleAnimation(f4, 1.0f, f4, 1.0f, fWidth2, fHeight2);
             Interpolator interpolator2 = TOUCH_RESPONSE_INTERPOLATOR;
             scaleAnimation2.setInterpolator(interpolator2);
             scaleAnimation2.setDuration(336L);
             AlphaAnimation alphaAnimation2 = new AlphaAnimation(0.0f, 1.0f);
             alphaAnimation2.setInterpolator(this.mThumbnailFadeInInterpolator);
             alphaAnimation2.setDuration(336L);
-            Animation createCurvedMotion2 = createCurvedMotion(f13, f9, f4, f12);
-            createCurvedMotion2.setInterpolator(interpolator2);
-            createCurvedMotion2.setDuration(336L);
+            Animation animationCreateCurvedMotion2 = createCurvedMotion(f9, f5, fHeight, f8);
+            animationCreateCurvedMotion2.setInterpolator(interpolator2);
+            animationCreateCurvedMotion2.setDuration(336L);
             AnimationSet animationSet2 = new AnimationSet(false);
             animationSet2.addAnimation(scaleAnimation2);
             animationSet2.addAnimation(alphaAnimation2);
-            animationSet2.addAnimation(createCurvedMotion2);
+            animationSet2.addAnimation(animationCreateCurvedMotion2);
             animationSet = animationSet2;
         }
-        return prepareThumbnailAnimationWithDuration(animationSet, width2, rect.height(), 0L, null);
+        return prepareThumbnailAnimationWithDuration(animationSet, iWidth, rect.height(), 0L, null);
     }
 
-    public HardwareBuffer createCrossProfileAppsThumbnail(Drawable drawable, Rect rect) {
-        int width = rect.width();
-        int height = rect.height();
+    public HardwareBuffer createCrossProfileAppsThumbnail(Drawable drawable, Rect rect) throws Resources.NotFoundException {
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         Picture picture = new Picture();
-        Canvas beginRecording = picture.beginRecording(width, height);
-        beginRecording.drawColor(Color.argb(0.6f, 0.0f, 0.0f, 0.0f));
+        Canvas canvasBeginRecording = picture.beginRecording(iWidth, iHeight);
+        canvasBeginRecording.drawColor(Color.argb(0.6f, 0.0f, 0.0f, 0.0f));
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.cross_profile_apps_thumbnail_size);
-        drawable.setBounds((width - dimensionPixelSize) / 2, (height - dimensionPixelSize) / 2, (width + dimensionPixelSize) / 2, (height + dimensionPixelSize) / 2);
+        drawable.setBounds((iWidth - dimensionPixelSize) / 2, (iHeight - dimensionPixelSize) / 2, (iWidth + dimensionPixelSize) / 2, (iHeight + dimensionPixelSize) / 2);
         drawable.setTint(this.mContext.getColor(17170443));
-        drawable.draw(beginRecording);
+        drawable.draw(canvasBeginRecording);
         picture.endRecording();
         return Bitmap.createBitmap(picture).getHardwareBuffer();
     }
@@ -877,34 +850,34 @@ public class TransitionAnimation {
     private AnimationSet createAspectScaledThumbnailFreeformAnimationLocked(Rect rect, Rect rect2, Rect rect3, boolean z) {
         ScaleAnimation scaleAnimation;
         TranslateAnimation translateAnimation;
-        float width = rect.width();
-        float height = rect.height();
-        float width2 = rect2.width();
-        float height2 = rect2.height();
-        float f = z ? width / width2 : width2 / width;
-        float f2 = z ? height / height2 : height2 / height;
+        float fWidth = rect.width();
+        float fHeight = rect.height();
+        float fWidth2 = rect2.width();
+        float fHeight2 = rect2.height();
+        float f = z ? fWidth / fWidth2 : fWidth2 / fWidth;
+        float f2 = z ? fHeight / fHeight2 : fHeight2 / fHeight;
         AnimationSet animationSet = new AnimationSet(true);
         int i = rect3 == null ? 0 : rect3.left + rect3.right;
         int i2 = rect3 != null ? rect3.top + rect3.bottom : 0;
         if (z) {
-            width = width2;
+            fWidth = fWidth2;
         }
-        float f3 = (width + i) / 2.0f;
+        float f3 = (fWidth + i) / 2.0f;
         if (z) {
-            height = height2;
+            fHeight = fHeight2;
         }
-        float f4 = (height + i2) / 2.0f;
+        float f4 = (fHeight + i2) / 2.0f;
         if (z) {
             scaleAnimation = new ScaleAnimation(f, 1.0f, f2, 1.0f, f3, f4);
         } else {
             scaleAnimation = new ScaleAnimation(1.0f, f, 1.0f, f2, f3, f4);
         }
-        int width3 = rect.left + (rect.width() / 2);
-        int height3 = rect.top + (rect.height() / 2);
-        int width4 = rect2.left + (rect2.width() / 2);
-        int height4 = rect2.top + (rect2.height() / 2);
-        int i3 = z ? width3 - width4 : width4 - width3;
-        int i4 = z ? height3 - height4 : height4 - height3;
+        int iWidth = rect.left + (rect.width() / 2);
+        int iHeight = rect.top + (rect.height() / 2);
+        int iWidth2 = rect2.left + (rect2.width() / 2);
+        int iHeight2 = rect2.top + (rect2.height() / 2);
+        int i3 = z ? iWidth - iWidth2 : iWidth2 - iWidth;
+        int i4 = z ? iHeight - iHeight2 : iHeight2 - iHeight;
         if (z) {
             translateAnimation = new TranslateAnimation(i3, 0.0f, i4, 0.0f);
         } else {
@@ -987,12 +960,12 @@ public class TransitionAnimation {
     }
 
     public static float getBorderLuma(SurfaceControl surfaceControl, int i, int i2) {
-        ScreenCapture.ScreenshotHardwareBuffer captureLayers = ScreenCapture.captureLayers(surfaceControl, new Rect(0, 0, i, i2), 1.0f);
-        if (captureLayers == null) {
+        ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBufferCaptureLayers = ScreenCapture.captureLayers(surfaceControl, new Rect(0, 0, i, i2), 1.0f);
+        if (screenshotHardwareBufferCaptureLayers == null) {
             return 0.0f;
         }
-        HardwareBuffer hardwareBuffer = captureLayers.getHardwareBuffer();
-        float borderLuma = getBorderLuma(hardwareBuffer, captureLayers.getColorSpace());
+        HardwareBuffer hardwareBuffer = screenshotHardwareBufferCaptureLayers.getHardwareBuffer();
+        float borderLuma = getBorderLuma(hardwareBuffer, screenshotHardwareBufferCaptureLayers.getColorSpace());
         if (hardwareBuffer != null) {
             hardwareBuffer.close();
         }
@@ -1002,15 +975,15 @@ public class TransitionAnimation {
     public static float getBorderLuma(HardwareBuffer hardwareBuffer, ColorSpace colorSpace) {
         int format;
         if (hardwareBuffer != null && (format = hardwareBuffer.getFormat()) == 1 && !hasProtectedContent(hardwareBuffer)) {
-            ImageReader newInstance = ImageReader.newInstance(hardwareBuffer.getWidth(), hardwareBuffer.getHeight(), format, 1);
-            newInstance.getSurface().attachAndQueueBufferWithColorSpace(hardwareBuffer, colorSpace);
-            Image acquireLatestImage = newInstance.acquireLatestImage();
-            if (acquireLatestImage != null && acquireLatestImage.getPlaneCount() >= 1) {
+            ImageReader imageReaderNewInstance = ImageReader.newInstance(hardwareBuffer.getWidth(), hardwareBuffer.getHeight(), format, 1);
+            imageReaderNewInstance.getSurface().attachAndQueueBufferWithColorSpace(hardwareBuffer, colorSpace);
+            Image imageAcquireLatestImage = imageReaderNewInstance.acquireLatestImage();
+            if (imageAcquireLatestImage != null && imageAcquireLatestImage.getPlaneCount() >= 1) {
                 int i = 0;
-                Image.Plane plane = acquireLatestImage.getPlanes()[0];
+                Image.Plane plane = imageAcquireLatestImage.getPlanes()[0];
                 ByteBuffer buffer = plane.getBuffer();
-                int width = acquireLatestImage.getWidth();
-                int height = acquireLatestImage.getHeight();
+                int width = imageAcquireLatestImage.getWidth();
+                int height = imageAcquireLatestImage.getHeight();
                 int pixelStride = plane.getPixelStride();
                 int rowStride = plane.getRowStride();
                 int[] iArr = new int[256];
@@ -1028,7 +1001,7 @@ public class TransitionAnimation {
                     iArr[pixelLuminance3] = iArr[pixelLuminance3] + 1;
                     iArr[pixelLuminance4] = iArr[pixelLuminance4] + 1;
                 }
-                newInstance.close();
+                imageReaderNewInstance.close();
                 int i6 = (width + height) / 10;
                 int i7 = 0;
                 int i8 = 0;

@@ -16,14 +16,12 @@ import com.airbnb.lottie.LottieListener;
 import com.airbnb.lottie.LottieTask;
 import com.android.systemui.R;
 import com.android.wm.shell.common.DisplayController;
-import com.android.wm.shell.windowdecor.HandleMenu$$ExternalSyntheticLambda0;
 import com.android.wm.shell.windowdecor.MenuPopupAnimator;
 import com.android.wm.shell.windowdecor.widget.CaptionAnimationButton;
 import com.android.wm.shell.windowdecor.widget.CaptionButton;
 import com.android.wm.shell.windowdecor.widget.CaptionButtonDivider;
 import java.lang.reflect.Field;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PopupButtonPolicy extends CaptionButtonStateManager implements WindowDecorButtonPolicy {
     public CaptionAnimationButton mAnimButton;
@@ -44,12 +42,12 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
         }
     }
 
-    public void animateOpenMenu(HandleMenu$$ExternalSyntheticLambda0 handleMenu$$ExternalSyntheticLambda0) {
+    public void animateOpenMenu() {
         MenuPopupAnimator menuPopupAnimator = this.mMenuPopupAnimator;
         if (menuPopupAnimator == null) {
             return;
         }
-        menuPopupAnimator.animateOpen(this.mAnimButton, handleMenu$$ExternalSyntheticLambda0);
+        menuPopupAnimator.animateOpen(this.mAnimButton);
     }
 
     public int calculatePopupHeight() {
@@ -92,18 +90,18 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
             animationButton.mColorStateList = buttonColor;
             if (z) {
                 final String str = "mw_popup_option_btn_header_handle.json";
-                final LottieTask fromAsset = LottieCompositionFactory.fromAsset(animationButton.mContext, "mw_popup_option_btn_header_handle.json");
-                fromAsset.addListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda0
+                final LottieTask lottieTaskFromAsset = LottieCompositionFactory.fromAsset(animationButton.mContext, "mw_popup_option_btn_header_handle.json");
+                lottieTaskFromAsset.addListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda0
                     @Override // com.airbnb.lottie.LottieListener
                     public final void onResult(Object obj) {
                         final LottieComposition lottieComposition = (LottieComposition) obj;
-                        final CaptionAnimationButton captionAnimationButton = CaptionAnimationButton.this;
+                        final CaptionAnimationButton captionAnimationButton = animationButton;
                         Handler handler = captionAnimationButton.mHandler;
-                        final LottieTask lottieTask = fromAsset;
+                        final LottieTask lottieTask = lottieTaskFromAsset;
                         handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda2
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                CaptionAnimationButton captionAnimationButton2 = CaptionAnimationButton.this;
+                            public final void run() throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
+                                CaptionAnimationButton captionAnimationButton2 = captionAnimationButton;
                                 LottieTask lottieTask2 = lottieTask;
                                 LottieComposition lottieComposition2 = lottieComposition;
                                 int i = CaptionAnimationButton.$r8$clinit;
@@ -120,7 +118,7 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
                         });
                     }
                 });
-                fromAsset.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda1
+                lottieTaskFromAsset.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda1
                     @Override // com.airbnb.lottie.LottieListener
                     public final void onResult(Object obj) {
                         int i = CaptionAnimationButton.$r8$clinit;
@@ -129,18 +127,18 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
                 });
             } else {
                 final String str2 = "mw_popup_option_btn_handle_header.json";
-                final LottieTask fromAsset2 = LottieCompositionFactory.fromAsset(animationButton.mContext, "mw_popup_option_btn_handle_header.json");
-                fromAsset2.addListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda0
+                final LottieTask lottieTaskFromAsset2 = LottieCompositionFactory.fromAsset(animationButton.mContext, "mw_popup_option_btn_handle_header.json");
+                lottieTaskFromAsset2.addListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda0
                     @Override // com.airbnb.lottie.LottieListener
                     public final void onResult(Object obj) {
                         final LottieComposition lottieComposition = (LottieComposition) obj;
-                        final CaptionAnimationButton captionAnimationButton = CaptionAnimationButton.this;
+                        final CaptionAnimationButton captionAnimationButton = animationButton;
                         Handler handler = captionAnimationButton.mHandler;
-                        final LottieTask lottieTask = fromAsset2;
+                        final LottieTask lottieTask = lottieTaskFromAsset2;
                         handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda2
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                CaptionAnimationButton captionAnimationButton2 = CaptionAnimationButton.this;
+                            public final void run() throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
+                                CaptionAnimationButton captionAnimationButton2 = captionAnimationButton;
                                 LottieTask lottieTask2 = lottieTask;
                                 LottieComposition lottieComposition2 = lottieComposition;
                                 int i = CaptionAnimationButton.$r8$clinit;
@@ -157,7 +155,7 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
                         });
                     }
                 });
-                fromAsset2.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda1
+                lottieTaskFromAsset2.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.windowdecor.widget.CaptionAnimationButton$$ExternalSyntheticLambda1
                     @Override // com.airbnb.lottie.LottieListener
                     public final void onResult(Object obj) {
                         int i = CaptionAnimationButton.$r8$clinit;
@@ -185,7 +183,7 @@ public class PopupButtonPolicy extends CaptionButtonStateManager implements Wind
         }
     }
 
-    public void setupRootView(Context context, View view, View.OnTouchListener onTouchListener, View.OnClickListener onClickListener) {
+    public void setupRootView(Context context, View view, View.OnTouchListener onTouchListener, View.OnClickListener onClickListener) throws Resources.NotFoundException {
         ViewGroup viewGroup = (ViewGroup) view;
         this.mRootView = viewGroup;
         viewGroup.setElevation(WindowDecorButtonPolicy.loadDimensionPixelSize(this.mContext.getResources(), R.dimen.mw_handle_menu_shadow));

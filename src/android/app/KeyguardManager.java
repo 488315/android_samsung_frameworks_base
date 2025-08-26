@@ -3,7 +3,6 @@ package android.app;
 import android.Manifest;
 import android.annotation.SystemApi;
 import android.app.INotificationManager;
-import android.app.KeyguardManager;
 import android.app.admin.PasswordMetrics;
 import android.app.trust.ITrustManager;
 import android.content.ComponentName;
@@ -138,7 +137,7 @@ public class KeyguardManager {
                     executor.execute(new Runnable() { // from class: android.app.KeyguardManager$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            KeyguardManager.KeyguardLockedStateListener.this.onKeyguardLockedStateChanged(r2);
+                            keyguardLockedStateListener.onKeyguardLockedStateChanged(z);
                         }
                     });
                 }
@@ -162,7 +161,7 @@ public class KeyguardManager {
                             executor.execute(new Runnable() { // from class: android.app.KeyguardManager$2$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    KeyguardManager.DeviceLockedStateListener.this.onDeviceLockedStateChanged(r2);
+                                    deviceLockedStateListener.onDeviceLockedStateChanged(z);
                                 }
                             });
                         }
@@ -188,7 +187,7 @@ public class KeyguardManager {
         if (!isDeviceSecure(i) && !SemPersonaManager.appliedPasswordPolicy(i)) {
             return null;
         }
-        Intent intent = new Intent(ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER);
+        Intent intent = new Intent("android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER");
         intent.putExtra(EXTRA_TITLE, charSequence);
         intent.putExtra(EXTRA_DESCRIPTION, charSequence2);
         intent.putExtra("android.intent.extra.USER_ID", i);
@@ -197,11 +196,11 @@ public class KeyguardManager {
     }
 
     public Intent createConfirmDeviceCredentialIntent(CharSequence charSequence, CharSequence charSequence2, int i, boolean z) {
-        Intent createConfirmDeviceCredentialIntent = createConfirmDeviceCredentialIntent(charSequence, charSequence2, i);
-        if (createConfirmDeviceCredentialIntent != null) {
-            createConfirmDeviceCredentialIntent.putExtra(EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, z);
+        Intent intentCreateConfirmDeviceCredentialIntent = createConfirmDeviceCredentialIntent(charSequence, charSequence2, i);
+        if (intentCreateConfirmDeviceCredentialIntent != null) {
+            intentCreateConfirmDeviceCredentialIntent.putExtra(EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, z);
         }
-        return createConfirmDeviceCredentialIntent;
+        return intentCreateConfirmDeviceCredentialIntent;
     }
 
     @SystemApi
@@ -215,12 +214,12 @@ public class KeyguardManager {
             throw new IllegalStateException("must not be provisioned yet");
         }
         try {
-            IPersistentDataBlockService asInterface = IPersistentDataBlockService.Stub.asInterface(ServiceManager.getService(Context.PERSISTENT_DATA_BLOCK_SERVICE));
-            if (asInterface == null) {
+            IPersistentDataBlockService iPersistentDataBlockServiceAsInterface = IPersistentDataBlockService.Stub.asInterface(ServiceManager.getService(Context.PERSISTENT_DATA_BLOCK_SERVICE));
+            if (iPersistentDataBlockServiceAsInterface == null) {
                 Log.e(TAG, "No persistent data block service");
                 throw new UnsupportedOperationException("not supported on this device");
             }
-            if (!asInterface.hasFrpCredentialHandle()) {
+            if (!iPersistentDataBlockServiceAsInterface.hasFrpCredentialHandle()) {
                 Log.i(TAG, "The persistent data block does not have a factory reset credential.");
                 return null;
             }
@@ -237,9 +236,9 @@ public class KeyguardManager {
 
     @SystemApi
     public Intent createConfirmDeviceCredentialForRemoteValidationIntent(RemoteLockscreenValidationSession remoteLockscreenValidationSession, ComponentName componentName, CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, CharSequence charSequence4) {
-        Intent putExtra = new Intent(ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL).putExtra(EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION, remoteLockscreenValidationSession).putExtra(Intent.EXTRA_COMPONENT_NAME, componentName).putExtra(EXTRA_TITLE, charSequence).putExtra(EXTRA_DESCRIPTION, charSequence2).putExtra(EXTRA_CHECKBOX_LABEL, charSequence3).putExtra(EXTRA_ALTERNATE_BUTTON_LABEL, charSequence4);
-        putExtra.setPackage(getSettingsPackageForIntent(putExtra));
-        return putExtra;
+        Intent intentPutExtra = new Intent(ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL).putExtra(EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION, remoteLockscreenValidationSession).putExtra(Intent.EXTRA_COMPONENT_NAME, componentName).putExtra(EXTRA_TITLE, charSequence).putExtra(EXTRA_DESCRIPTION, charSequence2).putExtra(EXTRA_CHECKBOX_LABEL, charSequence3).putExtra(EXTRA_ALTERNATE_BUTTON_LABEL, charSequence4);
+        intentPutExtra.setPackage(getSettingsPackageForIntent(intentPutExtra));
+        return intentPutExtra;
     }
 
     @SystemApi
@@ -261,9 +260,9 @@ public class KeyguardManager {
     }
 
     private String getSettingsPackageForIntent(Intent intent) {
-        List<ResolveInfo> queryIntentActivities = this.mContext.getPackageManager().queryIntentActivities(intent, 1048576);
-        if (queryIntentActivities.size() > 0) {
-            return queryIntentActivities.get(0).activityInfo.packageName;
+        List<ResolveInfo> listQueryIntentActivities = this.mContext.getPackageManager().queryIntentActivities(intent, 1048576);
+        if (listQueryIntentActivities.size() > 0) {
+            return listQueryIntentActivities.get(0).activityInfo.packageName;
         }
         return "com.android.settings";
     }
@@ -379,7 +378,7 @@ public class KeyguardManager {
                 handler.post(new Runnable() { // from class: android.app.KeyguardManager$3$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardManager.KeyguardDismissCallback.this.onDismissError();
+                        keyguardDismissCallback2.onDismissError();
                     }
                 });
             }
@@ -395,7 +394,7 @@ public class KeyguardManager {
                 handler.post(new Runnable() { // from class: android.app.KeyguardManager$3$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardManager.KeyguardDismissCallback.this.onDismissSucceeded();
+                        keyguardDismissCallback2.onDismissSucceeded();
                     }
                 });
             }
@@ -411,7 +410,7 @@ public class KeyguardManager {
                 handler.post(new Runnable() { // from class: android.app.KeyguardManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardManager.KeyguardDismissCallback.this.onDismissCancelled();
+                        keyguardDismissCallback2.onDismissCancelled();
                     }
                 });
             }
@@ -451,19 +450,19 @@ public class KeyguardManager {
             return false;
         }
         Objects.requireNonNull(bArr, "Password cannot be null.");
-        int sanitizeComplexityLevel = PasswordMetrics.sanitizeComplexityLevel(i2);
+        int iSanitizeComplexityLevel = PasswordMetrics.sanitizeComplexityLevel(i2);
         PasswordMetrics requestedPasswordMetrics = this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
-        LockscreenCredential createLockscreenCredential = createLockscreenCredential(i, bArr);
+        LockscreenCredential lockscreenCredentialCreateLockscreenCredential = createLockscreenCredential(i, bArr);
         try {
-            boolean z = PasswordMetrics.validateCredential(requestedPasswordMetrics, sanitizeComplexityLevel, createLockscreenCredential).size() == 0;
-            if (createLockscreenCredential != null) {
-                createLockscreenCredential.close();
+            boolean z = PasswordMetrics.validateCredential(requestedPasswordMetrics, iSanitizeComplexityLevel, lockscreenCredentialCreateLockscreenCredential).size() == 0;
+            if (lockscreenCredentialCreateLockscreenCredential != null) {
+                lockscreenCredentialCreateLockscreenCredential.close();
             }
             return z;
         } catch (Throwable th) {
-            if (createLockscreenCredential != null) {
+            if (lockscreenCredentialCreateLockscreenCredential != null) {
                 try {
-                    createLockscreenCredential.close();
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -495,17 +494,17 @@ public class KeyguardManager {
                 Log.e(TAG, "Password is not valid, rejecting call to setLock");
                 return false;
             }
-            LockscreenCredential createLockscreenCredential = createLockscreenCredential(i, bArr);
+            LockscreenCredential lockscreenCredentialCreateLockscreenCredential = createLockscreenCredential(i, bArr);
             try {
-                boolean lockCredential = this.mLockPatternUtils.setLockCredential(createLockscreenCredential, LockscreenCredential.createNone(), userId);
-                if (createLockscreenCredential != null) {
-                    createLockscreenCredential.close();
+                boolean lockCredential = this.mLockPatternUtils.setLockCredential(lockscreenCredentialCreateLockscreenCredential, LockscreenCredential.createNone(), userId);
+                if (lockscreenCredentialCreateLockscreenCredential != null) {
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 }
                 return lockCredential;
             } catch (Throwable th) {
-                if (createLockscreenCredential != null) {
+                if (lockscreenCredentialCreateLockscreenCredential != null) {
                     try {
-                        createLockscreenCredential.close();
+                        lockscreenCredentialCreateLockscreenCredential.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -541,21 +540,21 @@ public class KeyguardManager {
 
         @Override // com.android.internal.widget.IWeakEscrowTokenActivatedListener
         public void onWeakEscrowTokenActivated(final long j, int i) {
-            final UserHandle of = UserHandle.of(i);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            final UserHandle userHandleOf = UserHandle.of(i);
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final WeakEscrowTokenActivatedListener weakEscrowTokenActivatedListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.app.KeyguardManager$5$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardManager.WeakEscrowTokenActivatedListener.this.onWeakEscrowTokenActivated(j, of);
+                        weakEscrowTokenActivatedListener.onWeakEscrowTokenActivated(j, userHandleOf);
                     }
                 });
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 Log.i(KeyguardManager.TAG, "Weak escrow token activated.");
             } catch (Throwable th) {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 throw th;
             }
         }
@@ -606,19 +605,19 @@ public class KeyguardManager {
 
         @Override // com.android.internal.widget.IWeakEscrowTokenRemovedListener
         public void onWeakEscrowTokenRemoved(final long j, int i) {
-            final UserHandle of = UserHandle.of(i);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            final UserHandle userHandleOf = UserHandle.of(i);
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final WeakEscrowTokenRemovedListener weakEscrowTokenRemovedListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.app.KeyguardManager$6$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardManager.WeakEscrowTokenRemovedListener.this.onWeakEscrowTokenRemoved(j, of);
+                        weakEscrowTokenRemovedListener.onWeakEscrowTokenRemoved(j, userHandleOf);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -638,35 +637,35 @@ public class KeyguardManager {
 
     public boolean setLock(int i, byte[] bArr, int i2, byte[] bArr2) {
         int userId = this.mContext.getUserId();
-        LockscreenCredential createLockscreenCredential = createLockscreenCredential(i2, bArr2);
+        LockscreenCredential lockscreenCredentialCreateLockscreenCredential = createLockscreenCredential(i2, bArr2);
         try {
-            LockscreenCredential createLockscreenCredential2 = createLockscreenCredential(i, bArr);
+            LockscreenCredential lockscreenCredentialCreateLockscreenCredential2 = createLockscreenCredential(i, bArr);
             try {
-                List<PasswordValidationError> validateCredential = PasswordMetrics.validateCredential(this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId()), 0, createLockscreenCredential2);
-                if (!validateCredential.isEmpty()) {
-                    Log.e(TAG, "New credential is not valid: " + validateCredential.get(0));
-                    if (createLockscreenCredential2 != null) {
-                        createLockscreenCredential2.close();
+                List<PasswordValidationError> listValidateCredential = PasswordMetrics.validateCredential(this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId()), 0, lockscreenCredentialCreateLockscreenCredential2);
+                if (!listValidateCredential.isEmpty()) {
+                    Log.e(TAG, "New credential is not valid: " + listValidateCredential.get(0));
+                    if (lockscreenCredentialCreateLockscreenCredential2 != null) {
+                        lockscreenCredentialCreateLockscreenCredential2.close();
                     }
-                    if (createLockscreenCredential != null) {
-                        createLockscreenCredential.close();
+                    if (lockscreenCredentialCreateLockscreenCredential != null) {
+                        lockscreenCredentialCreateLockscreenCredential.close();
                     }
                     return false;
                 }
-                boolean lockCredential = this.mLockPatternUtils.setLockCredential(createLockscreenCredential2, createLockscreenCredential, userId);
-                if (createLockscreenCredential2 != null) {
-                    createLockscreenCredential2.close();
+                boolean lockCredential = this.mLockPatternUtils.setLockCredential(lockscreenCredentialCreateLockscreenCredential2, lockscreenCredentialCreateLockscreenCredential, userId);
+                if (lockscreenCredentialCreateLockscreenCredential2 != null) {
+                    lockscreenCredentialCreateLockscreenCredential2.close();
                 }
-                if (createLockscreenCredential != null) {
-                    createLockscreenCredential.close();
+                if (lockscreenCredentialCreateLockscreenCredential != null) {
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 }
                 return lockCredential;
             } finally {
             }
         } catch (Throwable th) {
-            if (createLockscreenCredential != null) {
+            if (lockscreenCredentialCreateLockscreenCredential != null) {
                 try {
-                    createLockscreenCredential.close();
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -676,24 +675,24 @@ public class KeyguardManager {
     }
 
     public boolean checkLock(int i, byte[] bArr) {
-        LockscreenCredential createLockscreenCredential = createLockscreenCredential(i, bArr);
+        LockscreenCredential lockscreenCredentialCreateLockscreenCredential = createLockscreenCredential(i, bArr);
         try {
-            VerifyCredentialResponse verifyCredential = this.mLockPatternUtils.verifyCredential(createLockscreenCredential, this.mContext.getUserId(), 0);
-            if (verifyCredential == null) {
-                if (createLockscreenCredential != null) {
-                    createLockscreenCredential.close();
+            VerifyCredentialResponse verifyCredentialResponseVerifyCredential = this.mLockPatternUtils.verifyCredential(lockscreenCredentialCreateLockscreenCredential, this.mContext.getUserId(), 0);
+            if (verifyCredentialResponseVerifyCredential == null) {
+                if (lockscreenCredentialCreateLockscreenCredential != null) {
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 }
                 return false;
             }
-            boolean z = verifyCredential.getResponseCode() == 0;
-            if (createLockscreenCredential != null) {
-                createLockscreenCredential.close();
+            boolean z = verifyCredentialResponseVerifyCredential.getResponseCode() == 0;
+            if (lockscreenCredentialCreateLockscreenCredential != null) {
+                lockscreenCredentialCreateLockscreenCredential.close();
             }
             return z;
         } catch (Throwable th) {
-            if (createLockscreenCredential != null) {
+            if (lockscreenCredentialCreateLockscreenCredential != null) {
                 try {
-                    createLockscreenCredential.close();
+                    lockscreenCredentialCreateLockscreenCredential.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }

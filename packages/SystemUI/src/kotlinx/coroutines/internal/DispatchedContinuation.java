@@ -14,7 +14,6 @@ import kotlinx.coroutines.DispatchedTask;
 import kotlinx.coroutines.EventLoop;
 import kotlinx.coroutines.ThreadLocalEventLoop;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DispatchedContinuation extends DispatchedTask implements CoroutineStackFrame, Continuation {
     public final AtomicRef _reusableCancellableContinuation;
@@ -48,10 +47,8 @@ public final class DispatchedContinuation extends DispatchedTask implements Coro
 
     @Override // kotlin.coroutines.Continuation
     public final void resumeWith(Object obj) {
-        CoroutineContext context;
-        Object updateThreadContext;
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(obj);
-        Object completedExceptionally = m3422exceptionOrNullimpl == null ? obj : new CompletedExceptionally(m3422exceptionOrNullimpl, false, 2, null);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
+        Object completedExceptionally = thM3442exceptionOrNullimpl == null ? obj : new CompletedExceptionally(thM3442exceptionOrNullimpl, false, 2, null);
         if (DispatchedContinuationKt.safeIsDispatchNeeded(this.dispatcher, this.continuation.getContext())) {
             this._state = completedExceptionally;
             this.resumeMode = 0;
@@ -68,20 +65,20 @@ public final class DispatchedContinuation extends DispatchedTask implements Coro
         }
         eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.incrementUseCount(true);
         try {
-            context = this.continuation.getContext();
-            updateThreadContext = ThreadContextKt.updateThreadContext(context, this.countOrElement);
+            CoroutineContext context = this.continuation.getContext();
+            Object objUpdateThreadContext = ThreadContextKt.updateThreadContext(context, this.countOrElement);
+            try {
+                this.continuation.resumeWith(obj);
+                Unit unit = Unit.INSTANCE;
+                while (eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.processUnconfinedEvent()) {
+                }
+            } finally {
+                ThreadContextKt.restoreThreadContext(context, objUpdateThreadContext);
+            }
         } finally {
             try {
             } finally {
             }
-        }
-        try {
-            this.continuation.resumeWith(obj);
-            Unit unit = Unit.INSTANCE;
-            while (eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.processUnconfinedEvent()) {
-            }
-        } finally {
-            ThreadContextKt.restoreThreadContext(context, updateThreadContext);
         }
     }
 

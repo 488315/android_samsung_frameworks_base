@@ -45,7 +45,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$LongRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PopupLayout extends AbstractComposeView {
     public static final Function1 onCommitAffectingPopupPosition;
@@ -68,7 +67,6 @@ public final class PopupLayout extends AbstractComposeView {
     public final SnapshotStateObserver snapshotStateObserver;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,7 +76,6 @@ public final class PopupLayout extends AbstractComposeView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -101,7 +98,7 @@ public final class PopupLayout extends AbstractComposeView {
         onCommitAffectingPopupPosition = new Function1() { // from class: androidx.compose.ui.window.PopupLayout$Companion$onCommitAffectingPopupPosition$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 PopupLayout popupLayout = (PopupLayout) obj;
                 if (popupLayout.isAttachedToWindow()) {
                     popupLayout.updatePosition();
@@ -197,7 +194,7 @@ public final class PopupLayout extends AbstractComposeView {
     /* JADX WARN: Type inference failed for: r1v5, types: [androidx.compose.ui.window.Api33Impl$$ExternalSyntheticLambda0] */
     @Override // androidx.compose.ui.platform.AbstractComposeView, android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
         super.onAttachedToWindow();
         SnapshotStateObserver snapshotStateObserver = this.snapshotStateObserver;
         snapshotStateObserver.getClass();
@@ -212,7 +209,7 @@ public final class PopupLayout extends AbstractComposeView {
                 this.backCallback = new OnBackInvokedCallback() { // from class: androidx.compose.ui.window.Api33Impl$$ExternalSyntheticLambda0
                     @Override // android.window.OnBackInvokedCallback
                     public final void onBackInvoked() {
-                        Function0 function02 = Function0.this;
+                        Function0 function02 = function0;
                         int i2 = Api33Impl.$r8$clinit;
                         if (function02 != null) {
                             function02.invoke();
@@ -222,16 +219,16 @@ public final class PopupLayout extends AbstractComposeView {
             }
             Api33Impl$$ExternalSyntheticLambda0 api33Impl$$ExternalSyntheticLambda0 = this.backCallback;
             int i2 = Api33Impl.$r8$clinit;
-            if (api33Impl$$ExternalSyntheticLambda0 == null || (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
+            if (api33Impl$$ExternalSyntheticLambda0 == null || (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
                 return;
             }
-            findOnBackInvokedDispatcher.registerOnBackInvokedCallback(1000000, api33Impl$$ExternalSyntheticLambda0);
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.registerOnBackInvokedCallback(1000000, api33Impl$$ExternalSyntheticLambda0);
         }
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
         super.onDetachedFromWindow();
         Snapshot$Companion$$ExternalSyntheticLambda0 snapshot$Companion$$ExternalSyntheticLambda0 = this.snapshotStateObserver.applyUnsubscribe;
         if (snapshot$Companion$$ExternalSyntheticLambda0 != null) {
@@ -240,8 +237,8 @@ public final class PopupLayout extends AbstractComposeView {
         this.snapshotStateObserver.clear();
         Api33Impl$$ExternalSyntheticLambda0 api33Impl$$ExternalSyntheticLambda0 = this.backCallback;
         int i = Api33Impl.$r8$clinit;
-        if (api33Impl$$ExternalSyntheticLambda0 != null && (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
-            findOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(api33Impl$$ExternalSyntheticLambda0);
+        if (api33Impl$$ExternalSyntheticLambda0 != null && (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(api33Impl$$ExternalSyntheticLambda0);
         }
         this.backCallback = null;
     }
@@ -278,12 +275,12 @@ public final class PopupLayout extends AbstractComposeView {
             }
             this.properties = popupProperties;
             WindowManager.LayoutParams layoutParams2 = this.params;
-            boolean isFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(this.composeView);
+            boolean zIsFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(this.composeView);
             boolean z = popupProperties.inheritSecurePolicy;
             int i = popupProperties.flags;
-            if (z && isFlagSecureEnabled) {
+            if (z && zIsFlagSecureEnabled) {
                 i |= 8192;
-            } else if (z && !isFlagSecureEnabled) {
+            } else if (z && !zIsFlagSecureEnabled) {
                 i &= -8193;
             }
             layoutParams2.flags = i;
@@ -312,14 +309,14 @@ public final class PopupLayout extends AbstractComposeView {
             if (layoutCoordinates == null) {
                 return;
             }
-            long mo610getSizeYbymL2g = layoutCoordinates.mo610getSizeYbymL2g();
-            long positionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
+            long jMo612getSizeYbymL2g = layoutCoordinates.mo612getSizeYbymL2g();
+            long jPositionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
             IntOffset.Companion companion = IntOffset.Companion;
-            IntRect m858IntRectVbeCjmY = IntRectKt.m858IntRectVbeCjmY((Math.round(Float.intBitsToFloat((int) (positionInWindow >> 32))) << 32) | (4294967295L & Math.round(Float.intBitsToFloat((int) (positionInWindow & 4294967295L)))), mo610getSizeYbymL2g);
-            if (m858IntRectVbeCjmY.equals(this.parentBounds)) {
+            IntRect intRectM860IntRectVbeCjmY = IntRectKt.m860IntRectVbeCjmY((Math.round(Float.intBitsToFloat((int) (jPositionInWindow >> 32))) << 32) | (4294967295L & Math.round(Float.intBitsToFloat((int) (jPositionInWindow & 4294967295L)))), jMo612getSizeYbymL2g);
+            if (intRectM860IntRectVbeCjmY.equals(this.parentBounds)) {
                 return;
             }
-            this.parentBounds = m858IntRectVbeCjmY;
+            this.parentBounds = intRectM860IntRectVbeCjmY;
             updatePosition();
         }
     }
@@ -338,7 +335,7 @@ public final class PopupLayout extends AbstractComposeView {
         SnapshotStateObserver snapshotStateObserver = this.snapshotStateObserver;
         Function1 function1 = onCommitAffectingPopupPosition;
         final long j = intSize.packedValue;
-        snapshotStateObserver.observeReads(this, function1, new Function0() { // from class: androidx.compose.ui.window.PopupLayout$updatePosition$1
+        snapshotStateObserver.observeReads(this, function1, new Function0() { // from class: androidx.compose.ui.window.PopupLayout.updatePosition.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
@@ -346,9 +343,9 @@ public final class PopupLayout extends AbstractComposeView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Ref$LongRef ref$LongRef2 = Ref$LongRef.this;
+                Ref$LongRef ref$LongRef2 = ref$LongRef;
                 PopupLayout popupLayout = this;
-                ref$LongRef2.element = popupLayout.positionProvider.mo48calculatePositionllwVHH4(intRect, width, popupLayout.parentLayoutDirection, j);
+                ref$LongRef2.element = popupLayout.positionProvider.mo49calculatePositionllwVHH4(intRect, width, popupLayout.parentLayoutDirection, j);
                 return Unit.INSTANCE;
             }
         });
@@ -376,12 +373,12 @@ public final class PopupLayout extends AbstractComposeView {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.gravity = 8388659;
         PopupProperties popupProperties2 = this.properties;
-        boolean isFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(view);
+        boolean zIsFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(view);
         boolean z = popupProperties2.inheritSecurePolicy;
         int i = popupProperties2.flags;
-        if (z && isFlagSecureEnabled) {
+        if (z && zIsFlagSecureEnabled) {
             i |= 8192;
-        } else if (z && !isFlagSecureEnabled) {
+        } else if (z && !zIsFlagSecureEnabled) {
             i &= -8193;
         }
         layoutParams.flags = i;
@@ -403,13 +400,13 @@ public final class PopupLayout extends AbstractComposeView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                PopupLayout popupLayout = PopupLayout.this;
+                PopupLayout popupLayout = this.this$0;
                 Function1 function1 = PopupLayout.onCommitAffectingPopupPosition;
                 LayoutCoordinates layoutCoordinates = (LayoutCoordinates) ((SnapshotMutableStateImpl) popupLayout.parentLayoutCoordinates$delegate).getValue();
                 if (layoutCoordinates == null || !layoutCoordinates.isAttached()) {
                     layoutCoordinates = null;
                 }
-                return Boolean.valueOf((layoutCoordinates == null || ((IntSize) ((SnapshotMutableStateImpl) PopupLayout.this.popupContentSize$delegate).getValue()) == null) ? false : true);
+                return Boolean.valueOf((layoutCoordinates == null || ((IntSize) ((SnapshotMutableStateImpl) this.this$0.popupContentSize$delegate).getValue()) == null) ? false : true);
             }
         });
         Dp.Companion companion = Dp.Companion;
@@ -421,18 +418,18 @@ public final class PopupLayout extends AbstractComposeView {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final Function0 function02 = (Function0) obj;
-                Handler handler = PopupLayout.this.getHandler();
+                Handler handler = this.this$0.getHandler();
                 if ((handler != null ? handler.getLooper() : null) == Looper.myLooper()) {
                     function02.invoke();
                 } else {
-                    Handler handler2 = PopupLayout.this.getHandler();
+                    Handler handler2 = this.this$0.getHandler();
                     if (handler2 != null) {
                         handler2.post(new Runnable() { // from class: androidx.compose.ui.window.PopupLayout$snapshotStateObserver$1$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
-                                Function0.this.invoke();
+                                function02.invoke();
                             }
                         });
                     }
@@ -446,7 +443,7 @@ public final class PopupLayout extends AbstractComposeView {
         setTag(R.id.view_tree_saved_state_registry_owner, ViewTreeSavedStateRegistryOwner.get(view));
         setTag(R.id.compose_view_saveable_id_tag, "Popup:" + uuid);
         setClipChildren(false);
-        setElevation(density.mo57toPx0680j_4((float) 8));
+        setElevation(density.mo58toPx0680j_4((float) 8));
         setOutlineProvider(new ViewOutlineProvider() { // from class: androidx.compose.ui.window.PopupLayout.2
             @Override // android.view.ViewOutlineProvider
             public final void getOutline(View view2, Outline outline) {

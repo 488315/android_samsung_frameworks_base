@@ -1,5 +1,6 @@
 package com.samsung.android.game;
 
+import android.app.PendingIntent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -81,6 +82,10 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.game.IGameManagerService
+        public void registerGameEventListener(PendingIntent pendingIntent, int[] iArr, boolean z, List<String> list) throws RemoteException {
+        }
+
+        @Override // com.samsung.android.game.IGameManagerService
         public String requestWithJson(String str, String str2) throws RemoteException {
             return null;
         }
@@ -108,6 +113,10 @@ public interface IGameManagerService extends IInterface {
         public boolean unregisterCallback(IGameManagerCallback iGameManagerCallback) throws RemoteException {
             return false;
         }
+
+        @Override // com.samsung.android.game.IGameManagerService
+        public void unregisterGameEventListener(PendingIntent pendingIntent) throws RemoteException {
+        }
     }
 
     boolean disableVrrControl(String str) throws RemoteException;
@@ -134,6 +143,8 @@ public interface IGameManagerService extends IInterface {
 
     boolean registerCallback(IGameManagerCallback iGameManagerCallback) throws RemoteException;
 
+    void registerGameEventListener(PendingIntent pendingIntent, int[] iArr, boolean z, List<String> list) throws RemoteException;
+
     String requestWithJson(String str, String str2) throws RemoteException;
 
     boolean setPackageConfigurations(List<SemPackageConfiguration> list) throws RemoteException;
@@ -145,6 +156,8 @@ public interface IGameManagerService extends IInterface {
     void syncGameList(Map map) throws RemoteException;
 
     boolean unregisterCallback(IGameManagerCallback iGameManagerCallback) throws RemoteException;
+
+    void unregisterGameEventListener(PendingIntent pendingIntent) throws RemoteException;
 
     public static abstract class Stub extends Binder implements IGameManagerService {
         static final int TRANSACTION_disableVrrControl = 13;
@@ -159,12 +172,14 @@ public interface IGameManagerService extends IInterface {
         static final int TRANSACTION_identifyGamePackage = 1;
         static final int TRANSACTION_notifyAppCreated = 18;
         static final int TRANSACTION_registerCallback = 5;
+        static final int TRANSACTION_registerGameEventListener = 19;
         static final int TRANSACTION_requestWithJson = 8;
         static final int TRANSACTION_setPackageConfigurations = 10;
         static final int TRANSACTION_setPerformanceMode = 11;
         static final int TRANSACTION_setTargetFrameRate = 12;
         static final int TRANSACTION_syncGameList = 15;
         static final int TRANSACTION_unregisterCallback = 6;
+        static final int TRANSACTION_unregisterGameEventListener = 20;
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -173,7 +188,7 @@ public interface IGameManagerService extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 17;
+            return 19;
         }
 
         public Stub() {
@@ -184,9 +199,9 @@ public interface IGameManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameManagerService)) {
-                return (IGameManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGameManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGameManagerService)) {
+                return (IGameManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -229,6 +244,10 @@ public interface IGameManagerService extends IInterface {
                     return "getPackageConfigurations";
                 case 18:
                     return "notifyAppCreated";
+                case 19:
+                    return "registerGameEventListener";
+                case 20:
+                    return "unregisterGameEventListener";
                 default:
                     return null;
             }
@@ -250,16 +269,16 @@ public interface IGameManagerService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int identifyGamePackage = identifyGamePackage(readString);
+                    int iIdentifyGamePackage = identifyGamePackage(string);
                     parcel2.writeNoException();
-                    parcel2.writeInt(identifyGamePackage);
+                    parcel2.writeInt(iIdentifyGamePackage);
                     return true;
                 case 2:
-                    int identifyForegroundApp = identifyForegroundApp();
+                    int iIdentifyForegroundApp = identifyForegroundApp();
                     parcel2.writeNoException();
-                    parcel2.writeInt(identifyForegroundApp);
+                    parcel2.writeInt(iIdentifyForegroundApp);
                     return true;
                 case 3:
                     String foregroundApp = getForegroundApp();
@@ -272,18 +291,18 @@ public interface IGameManagerService extends IInterface {
                     parcel2.writeStringList(gameList);
                     return true;
                 case 5:
-                    IGameManagerCallback asInterface = IGameManagerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGameManagerCallback iGameManagerCallbackAsInterface = IGameManagerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerCallback = registerCallback(asInterface);
+                    boolean zRegisterCallback = registerCallback(iGameManagerCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerCallback);
+                    parcel2.writeBoolean(zRegisterCallback);
                     return true;
                 case 6:
-                    IGameManagerCallback asInterface2 = IGameManagerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGameManagerCallback iGameManagerCallbackAsInterface2 = IGameManagerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterCallback = unregisterCallback(asInterface2);
+                    boolean zUnregisterCallback = unregisterCallback(iGameManagerCallbackAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterCallback);
+                    parcel2.writeBoolean(zUnregisterCallback);
                     return true;
                 case 7:
                     String version = getVersion();
@@ -291,12 +310,12 @@ public interface IGameManagerService extends IInterface {
                     parcel2.writeString(version);
                     return true;
                 case 8:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String requestWithJson = requestWithJson(readString2, readString3);
+                    String strRequestWithJson = requestWithJson(string2, string3);
                     parcel2.writeNoException();
-                    parcel2.writeString(requestWithJson);
+                    parcel2.writeString(strRequestWithJson);
                     return true;
                 case 9:
                     String topActivityName = getTopActivityName();
@@ -304,52 +323,52 @@ public interface IGameManagerService extends IInterface {
                     parcel2.writeString(topActivityName);
                     return true;
                 case 10:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(SemPackageConfiguration.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemPackageConfiguration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean packageConfigurations = setPackageConfigurations(createTypedArrayList);
+                    boolean packageConfigurations = setPackageConfigurations(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(packageConfigurations);
                     return true;
                 case 11:
-                    int readInt = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean performanceMode = setPerformanceMode(readInt, readString4);
+                    boolean performanceMode = setPerformanceMode(i3, string4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(performanceMode);
                     return true;
                 case 12:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean targetFrameRate = setTargetFrameRate(readStrongBinder, readInt2);
+                    boolean targetFrameRate = setTargetFrameRate(strongBinder, i4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(targetFrameRate);
                     return true;
                 case 13:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean disableVrrControl = disableVrrControl(readString5);
+                    boolean zDisableVrrControl = disableVrrControl(string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableVrrControl);
+                    parcel2.writeBoolean(zDisableVrrControl);
                     return true;
                 case 14:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean enableVrrControl = enableVrrControl(readString6);
+                    boolean zEnableVrrControl = enableVrrControl(string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableVrrControl);
+                    parcel2.writeBoolean(zEnableVrrControl);
                     return true;
                 case 15:
-                    HashMap readHashMap = parcel.readHashMap(getClass().getClassLoader());
+                    HashMap hashMap = parcel.readHashMap(getClass().getClassLoader());
                     parcel.enforceNoDataAvail();
-                    syncGameList(readHashMap);
+                    syncGameList(hashMap);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SemPackageConfiguration packageConfiguration = getPackageConfiguration(readString7);
+                    SemPackageConfiguration packageConfiguration = getPackageConfiguration(string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(packageConfiguration, 1);
                     return true;
@@ -359,10 +378,25 @@ public interface IGameManagerService extends IInterface {
                     parcel2.writeTypedList(packageConfigurations2, 1);
                     return true;
                 case 18:
-                    String readString8 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyAppCreated(readString8, readInt3);
+                    notifyAppCreated(string8, i5);
+                    parcel2.writeNoException();
+                    return true;
+                case 19:
+                    PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    boolean z = parcel.readBoolean();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    parcel.enforceNoDataAvail();
+                    registerGameEventListener(pendingIntent, iArrCreateIntArray, z, arrayListCreateStringArrayList);
+                    parcel2.writeNoException();
+                    return true;
+                case 20:
+                    PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
+                    parcel.enforceNoDataAvail();
+                    unregisterGameEventListener(pendingIntent2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -388,285 +422,318 @@ public interface IGameManagerService extends IInterface {
 
             @Override // com.samsung.android.game.IGameManagerService
             public int identifyGamePackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public int identifyForegroundApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public String getForegroundApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public List<String> getGameList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean registerCallback(IGameManagerCallback iGameManagerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iGameManagerCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGameManagerCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean unregisterCallback(IGameManagerCallback iGameManagerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iGameManagerCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGameManagerCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public String getVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public String requestWithJson(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public String getTopActivityName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean setPackageConfigurations(List<SemPackageConfiguration> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean setPerformanceMode(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean setTargetFrameRate(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean disableVrrControl(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public boolean enableVrrControl(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public void syncGameList(Map map) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeMap(map);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeMap(map);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public SemPackageConfiguration getPackageConfiguration(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemPackageConfiguration) obtain2.readTypedObject(SemPackageConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemPackageConfiguration) parcelObtain2.readTypedObject(SemPackageConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public List<SemPackageConfiguration> getPackageConfigurations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemPackageConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemPackageConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.game.IGameManagerService
             public void notifyAppCreated(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // com.samsung.android.game.IGameManagerService
+            public void registerGameEventListener(PendingIntent pendingIntent, int[] iArr, boolean z, List<String> list) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // com.samsung.android.game.IGameManagerService
+            public void unregisterGameEventListener(PendingIntent pendingIntent) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

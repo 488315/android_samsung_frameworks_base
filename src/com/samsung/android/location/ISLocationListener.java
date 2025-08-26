@@ -45,9 +45,9 @@ public interface ISLocationListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISLocationListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISLocationListener)) {
-                return (ISLocationListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISLocationListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISLocationListener)) {
+                return (ISLocationListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface ISLocationListener extends IInterface {
 
             @Override // com.samsung.android.location.ISLocationListener
             public void onLocationChanged(Location location) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISLocationListener.DESCRIPTOR);
-                    obtain.writeTypedObject(location, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISLocationListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(location, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

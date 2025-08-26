@@ -20,7 +20,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OngoingPrivacyChip extends FrameLayout implements BackgroundAnimatableView {
     public final Configuration configuration;
@@ -38,9 +37,9 @@ public final class OngoingPrivacyChip extends FrameLayout implements BackgroundA
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
         if (configuration != null) {
-            int diff = configuration.diff(this.configuration);
+            int iDiff = configuration.diff(this.configuration);
             this.configuration.setTo(configuration);
-            if ((1073745920 & diff) != 0) {
+            if ((1073745920 & iDiff) != 0) {
                 updateResources$6();
             }
         }
@@ -122,10 +121,10 @@ public final class OngoingPrivacyChip extends FrameLayout implements BackgroundA
     public OngoingPrivacyChip(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.privacyList = EmptyList.INSTANCE;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.OngoingPrivacyChip, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.OngoingPrivacyChip, i, i2);
         try {
-            int resourceId = obtainStyledAttributes.getResourceId(0, R.layout.ongoing_privacy_chip);
-            obtainStyledAttributes.recycle();
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, R.layout.ongoing_privacy_chip);
+            typedArrayObtainStyledAttributes.recycle();
             FrameLayout.inflate(context, resourceId, this);
             setId(R.id.privacy_chip);
             setLayoutParams(new FrameLayout.LayoutParams(-2, -1, 8388629));
@@ -135,7 +134,7 @@ public final class OngoingPrivacyChip extends FrameLayout implements BackgroundA
             this.configuration = new Configuration(context.getResources().getConfiguration());
             updateResources$6();
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

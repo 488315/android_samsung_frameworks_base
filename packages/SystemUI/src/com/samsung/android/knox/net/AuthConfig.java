@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AuthConfig implements Parcelable {
     public static String ANY_HOST = "*";
@@ -92,11 +91,11 @@ public class AuthConfig implements Parcelable {
 
     public int hashCode() {
         String str = this.mHost;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         String str2 = this.mPassword;
-        int hashCode2 = (((hashCode + (str2 == null ? 0 : str2.hashCode())) * 31) + this.mPort) * 31;
+        int iHashCode2 = (((iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31) + this.mPort) * 31;
         String str3 = this.mUsername;
-        return hashCode2 + (str3 != null ? str3.hashCode() : 0);
+        return iHashCode2 + (str3 != null ? str3.hashCode() : 0);
     }
 
     public boolean isValid() {

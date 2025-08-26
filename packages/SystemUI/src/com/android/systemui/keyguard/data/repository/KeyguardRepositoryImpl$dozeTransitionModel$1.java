@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRepositoryImpl$dozeTransitionModel$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,9 +51,9 @@ final class KeyguardRepositoryImpl$dozeTransitionModel$1 extends SuspendLambda i
             }
             ChannelExt channelExt = ChannelExt.INSTANCE;
             KeyguardRepositoryImpl keyguardRepositoryImpl = this.this$0;
-            DozeStateModel access$dozeMachineStateToModel = KeyguardRepositoryImpl.access$dozeMachineStateToModel(keyguardRepositoryImpl, keyguardRepositoryImpl.dozeTransitionListener.oldState);
+            DozeStateModel dozeStateModelAccess$dozeMachineStateToModel = KeyguardRepositoryImpl.access$dozeMachineStateToModel(keyguardRepositoryImpl, keyguardRepositoryImpl.dozeTransitionListener.oldState);
             KeyguardRepositoryImpl keyguardRepositoryImpl2 = this.this$0;
-            DozeTransitionModel dozeTransitionModel = new DozeTransitionModel(access$dozeMachineStateToModel, KeyguardRepositoryImpl.access$dozeMachineStateToModel(keyguardRepositoryImpl2, keyguardRepositoryImpl2.dozeTransitionListener.newState));
+            DozeTransitionModel dozeTransitionModel = new DozeTransitionModel(dozeStateModelAccess$dozeMachineStateToModel, KeyguardRepositoryImpl.access$dozeMachineStateToModel(keyguardRepositoryImpl2, keyguardRepositoryImpl2.dozeTransitionListener.newState));
             channelExt.getClass();
             ChannelExt.trySendWithFailureLogging(producerScope, dozeTransitionModel, "KeyguardRepositoryImpl", "initial doze transition model");
             KeyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0 keyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0 = new KeyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0(2, this.this$0, keyguardRepositoryImpl$dozeTransitionModel$1$callback$1);

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodBurnInViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -43,9 +42,9 @@ public final class AodBurnInViewModel$special$$inlined$flatMapLatest$1 extends S
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             BurnInParameters burnInParameters = (BurnInParameters) this.L$1;
-            ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) this.this$0.configurationInteractor).dimensionPixelSize(ArraysKt___ArraysKt.toSet(new Integer[]{new Integer(R.dimen.keyguard_enter_from_top_translation_y), new Integer(R.dimen.keyguard_enter_from_side_translation_x)})), new AodBurnInViewModel$movement$lambda$2$$inlined$flatMapLatest$1(null, this.this$0, burnInParameters));
+            ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) this.this$0.configurationInteractor).dimensionPixelSize(ArraysKt___ArraysKt.toSet(new Integer[]{new Integer(R.dimen.keyguard_enter_from_top_translation_y), new Integer(R.dimen.keyguard_enter_from_side_translation_x)})), new AodBurnInViewModel$movement$lambda$2$$inlined$flatMapLatest$1(null, this.this$0, burnInParameters));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, transformLatest, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, channelFlowTransformLatestTransformLatest, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

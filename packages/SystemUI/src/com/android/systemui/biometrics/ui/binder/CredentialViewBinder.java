@@ -13,14 +13,12 @@ import com.android.systemui.biometrics.AuthContainerView;
 import com.android.systemui.biometrics.AuthPanelController;
 import com.android.systemui.biometrics.ui.CredentialPasswordView;
 import com.android.systemui.biometrics.ui.CredentialPatternView;
-import com.android.systemui.biometrics.ui.CredentialView;
 import com.android.systemui.biometrics.ui.binder.Spaghetti;
 import com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import kotlin.coroutines.EmptyCoroutineContext;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CredentialViewBinder {
     static {
@@ -43,7 +41,7 @@ public final class CredentialViewBinder {
             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$2
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    AuthContainerView authContainerView2 = (AuthContainerView) CredentialView.Host.this;
+                    AuthContainerView authContainerView2 = (AuthContainerView) authContainerView;
                     authContainerView2.sendEarlyUserCanceled();
                     authContainerView2.animateAway(3, true);
                 }
@@ -65,7 +63,7 @@ public final class CredentialViewBinder {
         RepeatWhenAttachedKt.repeatWhenAttached(credentialPasswordView, EmptyCoroutineContext.INSTANCE, new CredentialPasswordViewBinder$bind$1(credentialViewModel, credentialPasswordView.requireViewById(R.id.lockPassword), true, new OnBackInvokedCallback() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$onBackInvokedCallback$1
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                AuthContainerView authContainerView2 = (AuthContainerView) CredentialView.Host.this;
+                AuthContainerView authContainerView2 = (AuthContainerView) authContainerView;
                 authContainerView2.sendEarlyUserCanceled();
                 authContainerView2.animateAway(3, true);
             }

@@ -146,9 +146,9 @@ public class SemExecutableManager {
     private String getDefaultLauncherPackage() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        ResolveInfo resolveActivity = this.mContext.getPackageManager().resolveActivity(intent, 65536);
-        if (resolveActivity != null) {
-            return resolveActivity.activityInfo.packageName;
+        ResolveInfo resolveInfoResolveActivity = this.mContext.getPackageManager().resolveActivity(intent, 65536);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.activityInfo.packageName;
         }
         return null;
     }
@@ -160,15 +160,15 @@ public class SemExecutableManager {
                 return null;
             }
             try {
-                Bitmap decodeFileDescriptor = BitmapFactory.decodeFileDescriptor(shortcutIconFd.getFileDescriptor());
-                if (decodeFileDescriptor == null) {
+                Bitmap bitmapDecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(shortcutIconFd.getFileDescriptor());
+                if (bitmapDecodeFileDescriptor == null) {
                     try {
                         shortcutIconFd.close();
                     } catch (IOException unused) {
                     }
                     return null;
                 }
-                BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), decodeFileDescriptor);
+                BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapDecodeFileDescriptor);
                 if (shortcutInfo.hasAdaptiveBitmap()) {
                     return new AdaptiveIconDrawable((Drawable) null, bitmapDrawable);
                 }

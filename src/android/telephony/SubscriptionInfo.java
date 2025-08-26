@@ -215,8 +215,8 @@ public class SubscriptionInfo implements Parcelable {
         int width = this.mIconBitmap.getWidth();
         int height = this.mIconBitmap.getHeight();
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        Bitmap createBitmap = Bitmap.createBitmap(displayMetrics, width, height, this.mIconBitmap.getConfig());
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(displayMetrics, width, height, this.mIconBitmap.getConfig());
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint();
         paint.setColorFilter(new PorterDuffColorFilter(this.mIconTint, PorterDuff.Mode.SRC_ATOP));
         canvas.drawBitmap(this.mIconBitmap, 0.0f, 0.0f, paint);
@@ -225,10 +225,10 @@ public class SubscriptionInfo implements Parcelable {
         paint.setTypeface(Typeface.create(Typeface.DEFAULT_FAMILY, 0));
         paint.setColor(-1);
         paint.setTextSize(displayMetrics.density * 16.0f);
-        String formatSimple = TextUtils.formatSimple("%d", Integer.valueOf(this.mSimSlotIndex + 1));
-        paint.getTextBounds(formatSimple, 0, 1, new Rect());
-        canvas.drawText(formatSimple, (width / 2.0f) - r9.centerX(), (height / 2.0f) - r9.centerY(), paint);
-        return createBitmap;
+        String simple = TextUtils.formatSimple("%d", Integer.valueOf(this.mSimSlotIndex + 1));
+        paint.getTextBounds(simple, 0, 1, new Rect());
+        canvas.drawText(simple, (width / 2.0f) - r9.centerX(), (height / 2.0f) - r9.centerY(), paint);
+        return bitmapCreateBitmap;
     }
 
     public int getIconTint() {
@@ -797,15 +797,15 @@ public class SubscriptionInfo implements Parcelable {
 
         public Builder setServiceCapabilities(Set<Integer> set) {
             Iterator<Integer> it = set.iterator();
-            int i = 0;
+            int iServiceCapabilityToBitmask = 0;
             while (it.hasNext()) {
-                int intValue = it.next().intValue();
-                if (intValue < 1 || intValue > 3) {
-                    throw new IllegalArgumentException("Invalid service capability value: " + intValue);
+                int iIntValue = it.next().intValue();
+                if (iIntValue < 1 || iIntValue > 3) {
+                    throw new IllegalArgumentException("Invalid service capability value: " + iIntValue);
                 }
-                i |= SubscriptionManager.serviceCapabilityToBitmask(intValue);
+                iServiceCapabilityToBitmask |= SubscriptionManager.serviceCapabilityToBitmask(iIntValue);
             }
-            this.mServiceCapabilities = i;
+            this.mServiceCapabilities = iServiceCapabilityToBitmask;
             return this;
         }
 

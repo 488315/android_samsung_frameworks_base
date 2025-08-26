@@ -3,7 +3,6 @@ package androidx.compose.ui.input.pointer;
 import androidx.compose.ui.geometry.Offset;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HistoricalChange {
     public final long originalEventPosition;
@@ -15,7 +14,7 @@ public final class HistoricalChange {
     }
 
     public final String toString() {
-        return "HistoricalChange(uptimeMillis=" + this.uptimeMillis + ", position=" + ((Object) Offset.m403toStringimpl(this.position)) + ')';
+        return "HistoricalChange(uptimeMillis=" + this.uptimeMillis + ", position=" + ((Object) Offset.m405toStringimpl(this.position)) + ')';
     }
 
     public /* synthetic */ HistoricalChange(long j, long j2, DefaultConstructorMarker defaultConstructorMarker) {

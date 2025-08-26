@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.model
 import java.util.Map;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -26,7 +25,7 @@ public final /* synthetic */ class DemoMobileConnectionRepositoryKairos$$Externa
         TransactionScope transactionScope = (TransactionScope) obj;
         switch (this.$r8$classId) {
             case 0:
-                return Either.First.m2571boximpl(transactionScope.sample(demoMobileConnectionRepositoryKairos.lastMobileEvent));
+                return Either.First.m2588boximpl(transactionScope.sample(demoMobileConnectionRepositoryKairos.lastMobileEvent));
             default:
                 Either either = (Either) obj2;
                 int i = DemoMobileConnectionRepositoryKairos.$r8$clinit;

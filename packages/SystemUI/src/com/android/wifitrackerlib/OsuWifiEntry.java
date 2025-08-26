@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OsuWifiEntry extends WifiEntry {
     public final List mCurrentScanResults;
@@ -41,7 +40,6 @@ public class OsuWifiEntry extends WifiEntry {
     public String mSsid;
     public final List mTargetScanResults;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OsuWifiEntryProvisioningCallback extends ProvisioningCallback {
         public OsuWifiEntryProvisioningCallback() {
         }
@@ -122,7 +120,7 @@ public class OsuWifiEntry extends WifiEntry {
         }
 
         public final void onProvisioningStatus(int i) {
-            String format;
+            String string;
             switch (i) {
                 case 1:
                 case 2:
@@ -131,24 +129,24 @@ public class OsuWifiEntry extends WifiEntry {
                 case 5:
                 case 6:
                 case 7:
-                    format = String.format(OsuWifiEntry.this.mContext.getString(R.string.wifitrackerlib_osu_opening_provider), OsuWifiEntry.this.getTitle());
+                    string = String.format(OsuWifiEntry.this.mContext.getString(R.string.wifitrackerlib_osu_opening_provider), OsuWifiEntry.this.getTitle());
                     break;
                 case 8:
                 case 9:
                 case 10:
                 case 11:
-                    format = OsuWifiEntry.this.mContext.getString(R.string.wifitrackerlib_osu_completing_sign_up);
+                    string = OsuWifiEntry.this.mContext.getString(R.string.wifitrackerlib_osu_completing_sign_up);
                     break;
                 default:
-                    format = null;
+                    string = null;
                     break;
             }
             synchronized (OsuWifiEntry.this) {
                 try {
-                    boolean equals = TextUtils.equals(OsuWifiEntry.this.mOsuStatusString, format);
+                    boolean zEquals = TextUtils.equals(OsuWifiEntry.this.mOsuStatusString, string);
                     OsuWifiEntry osuWifiEntry = OsuWifiEntry.this;
-                    osuWifiEntry.mOsuStatusString = format;
-                    if (!equals) {
+                    osuWifiEntry.mOsuStatusString = string;
+                    if (!zEquals) {
                         osuWifiEntry.notifyOnUpdated();
                     }
                 } catch (Throwable th) {

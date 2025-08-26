@@ -3,8 +3,10 @@ package android.app;
 import android.animation.LayoutTransition;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,14 +76,14 @@ public class FragmentBreadCrumbs extends ViewGroup implements FragmentManager.On
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.FragmentBreadCrumbs, i, i2);
-        this.mGravity = obtainStyledAttributes.getInt(0, DEFAULT_GRAVITY);
-        this.mLayoutResId = obtainStyledAttributes.getResourceId(2, R.layout.fragment_bread_crumb_item);
-        this.mTextColor = obtainStyledAttributes.getColor(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.FragmentBreadCrumbs, i, i2);
+        this.mGravity = typedArrayObtainStyledAttributes.getInt(0, DEFAULT_GRAVITY);
+        this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(2, R.layout.fragment_bread_crumb_item);
+        this.mTextColor = typedArrayObtainStyledAttributes.getColor(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(Activity activity) throws Resources.NotFoundException {
         this.mActivity = activity;
         LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mInflater = layoutInflater;
@@ -100,7 +102,7 @@ public class FragmentBreadCrumbs extends ViewGroup implements FragmentManager.On
         this.mMaxVisible = i;
     }
 
-    public void setParentTitle(CharSequence charSequence, CharSequence charSequence2, View.OnClickListener onClickListener) {
+    public void setParentTitle(CharSequence charSequence, CharSequence charSequence2, View.OnClickListener onClickListener) throws Resources.NotFoundException {
         this.mParentEntry = createBackStackEntry(charSequence, charSequence2);
         this.mParentClickListener = onClickListener;
         updateCrumbs();
@@ -120,109 +122,74 @@ public class FragmentBreadCrumbs extends ViewGroup implements FragmentManager.On
         return backStackRecord;
     }
 
-    public void setTitle(CharSequence charSequence, CharSequence charSequence2) {
+    public void setTitle(CharSequence charSequence, CharSequence charSequence2) throws Resources.NotFoundException {
         this.mTopEntry = createBackStackEntry(charSequence, charSequence2);
         updateCrumbs();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x005b  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0067  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onLayout(boolean r3, int r4, int r5, int r6, int r7) {
-        /*
-            r2 = this;
-            int r3 = r2.getChildCount()
-            if (r3 != 0) goto L7
-            return
-        L7:
-            r3 = 0
-            android.view.View r3 = r2.getChildAt(r3)
-            int r4 = r2.mPaddingTop
-            int r5 = r2.mPaddingTop
-            int r6 = r3.getMeasuredHeight()
-            int r5 = r5 + r6
-            int r6 = r2.mPaddingBottom
-            int r5 = r5 - r6
-            int r6 = r2.getLayoutDirection()
-            int r7 = r2.mGravity
-            r0 = 8388615(0x800007, float:1.1754953E-38)
-            r7 = r7 & r0
-            int r6 = android.view.Gravity.getAbsoluteGravity(r7, r6)
-            r7 = 1
-            if (r6 == r7) goto L43
-            r7 = 5
-            if (r6 == r7) goto L33
-            int r6 = r2.mPaddingLeft
-            int r7 = r3.getMeasuredWidth()
-            goto L56
-        L33:
-            int r6 = r2.mRight
-            int r7 = r2.mLeft
-            int r6 = r6 - r7
-            int r7 = r2.mPaddingRight
-            int r7 = r6 - r7
-            int r6 = r3.getMeasuredWidth()
-            int r6 = r7 - r6
-            goto L57
-        L43:
-            int r6 = r2.mPaddingLeft
-            int r7 = r2.mRight
-            int r0 = r2.mLeft
-            int r7 = r7 - r0
-            int r0 = r3.getMeasuredWidth()
-            int r7 = r7 - r0
-            int r7 = r7 / 2
-            int r6 = r6 + r7
-            int r7 = r3.getMeasuredWidth()
-        L56:
-            int r7 = r7 + r6
-        L57:
-            int r0 = r2.mPaddingLeft
-            if (r6 >= r0) goto L5d
-            int r6 = r2.mPaddingLeft
-        L5d:
-            int r0 = r2.mRight
-            int r1 = r2.mLeft
-            int r0 = r0 - r1
-            int r1 = r2.mPaddingRight
-            int r0 = r0 - r1
-            if (r7 <= r0) goto L6f
-            int r7 = r2.mRight
-            int r0 = r2.mLeft
-            int r7 = r7 - r0
-            int r2 = r2.mPaddingRight
-            int r7 = r7 - r2
-        L6f:
-            r3.layout(r6, r4, r7, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.FragmentBreadCrumbs.onLayout(boolean, int, int, int, int):void");
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        int measuredWidth;
+        int measuredWidth2;
+        int i5;
+        if (getChildCount() == 0) {
+            return;
+        }
+        View childAt = getChildAt(0);
+        int i6 = this.mPaddingTop;
+        int measuredHeight = (this.mPaddingTop + childAt.getMeasuredHeight()) - this.mPaddingBottom;
+        int absoluteGravity = Gravity.getAbsoluteGravity(this.mGravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK, getLayoutDirection());
+        if (absoluteGravity == 1) {
+            measuredWidth = this.mPaddingLeft + (((this.mRight - this.mLeft) - childAt.getMeasuredWidth()) / 2);
+            measuredWidth2 = childAt.getMeasuredWidth();
+        } else {
+            if (absoluteGravity == 5) {
+                i5 = (this.mRight - this.mLeft) - this.mPaddingRight;
+                measuredWidth = i5 - childAt.getMeasuredWidth();
+                if (measuredWidth < this.mPaddingLeft) {
+                    measuredWidth = this.mPaddingLeft;
+                }
+                if (i5 > (this.mRight - this.mLeft) - this.mPaddingRight) {
+                    i5 = (this.mRight - this.mLeft) - this.mPaddingRight;
+                }
+                childAt.layout(measuredWidth, i6, i5, measuredHeight);
+            }
+            measuredWidth = this.mPaddingLeft;
+            measuredWidth2 = childAt.getMeasuredWidth();
+        }
+        i5 = measuredWidth2 + measuredWidth;
+        if (measuredWidth < this.mPaddingLeft) {
+        }
+        if (i5 > (this.mRight - this.mLeft) - this.mPaddingRight) {
+        }
+        childAt.layout(measuredWidth, i6, i5, measuredHeight);
     }
 
     @Override // android.view.View
     protected void onMeasure(int i, int i2) {
         int childCount = getChildCount();
-        int i3 = 0;
-        int i4 = 0;
-        int i5 = 0;
-        for (int i6 = 0; i6 < childCount; i6++) {
-            View childAt = getChildAt(i6);
+        int iMax = 0;
+        int iMax2 = 0;
+        int iCombineMeasuredStates = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 measureChild(childAt, i, i2);
-                i3 = Math.max(i3, childAt.getMeasuredWidth());
-                i4 = Math.max(i4, childAt.getMeasuredHeight());
-                i5 = combineMeasuredStates(i5, childAt.getMeasuredState());
+                iMax = Math.max(iMax, childAt.getMeasuredWidth());
+                iMax2 = Math.max(iMax2, childAt.getMeasuredHeight());
+                iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, childAt.getMeasuredState());
             }
         }
-        setMeasuredDimension(resolveSizeAndState(Math.max(i3 + this.mPaddingLeft + this.mPaddingRight, getSuggestedMinimumWidth()), i, i5), resolveSizeAndState(Math.max(i4 + this.mPaddingTop + this.mPaddingBottom, getSuggestedMinimumHeight()), i2, i5 << 16));
+        setMeasuredDimension(resolveSizeAndState(Math.max(iMax + this.mPaddingLeft + this.mPaddingRight, getSuggestedMinimumWidth()), i, iCombineMeasuredStates), resolveSizeAndState(Math.max(iMax2 + this.mPaddingTop + this.mPaddingBottom, getSuggestedMinimumHeight()), i2, iCombineMeasuredStates << 16));
     }
 
     @Override // android.app.FragmentManager.OnBackStackChangedListener
-    public void onBackStackChanged() {
+    public void onBackStackChanged() throws Resources.NotFoundException {
         updateCrumbs();
     }
 
@@ -238,7 +205,7 @@ public class FragmentBreadCrumbs extends ViewGroup implements FragmentManager.On
         return this.mTopEntry;
     }
 
-    void updateCrumbs() {
+    void updateCrumbs() throws Resources.NotFoundException {
         int i;
         FragmentManager.BackStackEntry backStackEntryAt;
         FragmentManager fragmentManager = this.mActivity.getFragmentManager();
@@ -263,15 +230,15 @@ public class FragmentBreadCrumbs extends ViewGroup implements FragmentManager.On
                 childCount = i2;
             }
             if (i2 >= childCount) {
-                View inflate = this.mInflater.inflate(this.mLayoutResId, (ViewGroup) this, false);
-                TextView textView = (TextView) inflate.findViewById(16908310);
+                View viewInflate = this.mInflater.inflate(this.mLayoutResId, (ViewGroup) this, false);
+                TextView textView = (TextView) viewInflate.findViewById(16908310);
                 textView.lambda$setTextAsync$0(backStackEntryAt.getBreadCrumbTitle());
                 textView.setTag(backStackEntryAt);
                 textView.setTextColor(this.mTextColor);
                 if (i2 == 0) {
-                    inflate.findViewById(R.id.left_icon).setVisibility(8);
+                    viewInflate.findViewById(R.id.left_icon).setVisibility(8);
                 }
-                this.mContainer.addView(inflate);
+                this.mContainer.addView(viewInflate);
                 textView.setOnClickListener(this.mOnClickListener);
             }
             i2++;

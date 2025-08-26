@@ -124,8 +124,8 @@ public class StrictJarManifest implements Cloneable {
     }
 
     static void write(StrictJarManifest strictJarManifest, OutputStream outputStream) throws IOException {
-        CharsetEncoder newEncoder = StandardCharsets.UTF_8.newEncoder();
-        ByteBuffer allocate = ByteBuffer.allocate(72);
+        CharsetEncoder charsetEncoderNewEncoder = StandardCharsets.UTF_8.newEncoder();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(72);
         Attributes.Name name = Attributes.Name.MANIFEST_VERSION;
         String value = strictJarManifest.mainAttributes.getValue(name);
         if (value == null) {
@@ -133,43 +133,43 @@ public class StrictJarManifest implements Cloneable {
             value = strictJarManifest.mainAttributes.getValue(name);
         }
         if (value != null) {
-            writeEntry(outputStream, name, value, newEncoder, allocate);
+            writeEntry(outputStream, name, value, charsetEncoderNewEncoder, byteBufferAllocate);
             Iterator<Object> it = strictJarManifest.mainAttributes.keySet().iterator();
             while (it.hasNext()) {
                 Attributes.Name name2 = (Attributes.Name) it.next();
                 if (!name2.equals(name)) {
-                    writeEntry(outputStream, name2, strictJarManifest.mainAttributes.getValue(name2), newEncoder, allocate);
+                    writeEntry(outputStream, name2, strictJarManifest.mainAttributes.getValue(name2), charsetEncoderNewEncoder, byteBufferAllocate);
                 }
             }
         }
         outputStream.write(LINE_SEPARATOR);
         for (String str : strictJarManifest.getEntries().keySet()) {
-            writeEntry(outputStream, ATTRIBUTE_NAME_NAME, str, newEncoder, allocate);
+            writeEntry(outputStream, ATTRIBUTE_NAME_NAME, str, charsetEncoderNewEncoder, byteBufferAllocate);
             Attributes attributes = strictJarManifest.entries.get(str);
             Iterator<Object> it2 = attributes.keySet().iterator();
             while (it2.hasNext()) {
                 Attributes.Name name3 = (Attributes.Name) it2.next();
-                writeEntry(outputStream, name3, attributes.getValue(name3), newEncoder, allocate);
+                writeEntry(outputStream, name3, attributes.getValue(name3), charsetEncoderNewEncoder, byteBufferAllocate);
             }
             outputStream.write(LINE_SEPARATOR);
         }
     }
 
     private static void writeEntry(OutputStream outputStream, Attributes.Name name, String str, CharsetEncoder charsetEncoder, ByteBuffer byteBuffer) throws IOException {
-        String name2 = name.toString();
-        outputStream.write(name2.getBytes(StandardCharsets.US_ASCII));
+        String string = name.toString();
+        outputStream.write(string.getBytes(StandardCharsets.US_ASCII));
         outputStream.write(VALUE_SEPARATOR);
         charsetEncoder.reset();
-        byteBuffer.clear().limit(70 - name2.length());
-        CharBuffer wrap = CharBuffer.wrap(str);
+        byteBuffer.clear().limit(70 - string.length());
+        CharBuffer charBufferWrap = CharBuffer.wrap(str);
         while (true) {
-            CoderResult encode = charsetEncoder.encode(wrap, byteBuffer, true);
-            if (CoderResult.UNDERFLOW == encode) {
-                encode = charsetEncoder.flush(byteBuffer);
+            CoderResult coderResultEncode = charsetEncoder.encode(charBufferWrap, byteBuffer, true);
+            if (CoderResult.UNDERFLOW == coderResultEncode) {
+                coderResultEncode = charsetEncoder.flush(byteBuffer);
             }
             outputStream.write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.position());
             outputStream.write(LINE_SEPARATOR);
-            if (CoderResult.UNDERFLOW == encode) {
+            if (CoderResult.UNDERFLOW == coderResultEncode) {
                 return;
             }
             outputStream.write(32);

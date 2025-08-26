@@ -140,9 +140,9 @@ public interface IBlobStoreManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBlobStoreManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBlobStoreManager)) {
-                return (IBlobStoreManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBlobStoreManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBlobStoreManager)) {
+                return (IBlobStoreManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -197,62 +197,62 @@ public interface IBlobStoreManager extends IInterface {
             switch (i) {
                 case 1:
                     BlobHandle blobHandle = (BlobHandle) parcel.readTypedObject(BlobHandle.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long createSession = createSession(blobHandle, readString);
+                    long jCreateSession = createSession(blobHandle, string);
                     parcel2.writeNoException();
-                    parcel2.writeLong(createSession);
+                    parcel2.writeLong(jCreateSession);
                     return true;
                 case 2:
-                    long readLong = parcel.readLong();
-                    String readString2 = parcel.readString();
+                    long j = parcel.readLong();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IBlobStoreSession openSession = openSession(readLong, readString2);
+                    IBlobStoreSession iBlobStoreSessionOpenSession = openSession(j, string2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openSession);
+                    parcel2.writeStrongInterface(iBlobStoreSessionOpenSession);
                     return true;
                 case 3:
                     BlobHandle blobHandle2 = (BlobHandle) parcel.readTypedObject(BlobHandle.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor openBlob = openBlob(blobHandle2, readString3);
+                    ParcelFileDescriptor parcelFileDescriptorOpenBlob = openBlob(blobHandle2, string3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(openBlob, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorOpenBlob, 1);
                     return true;
                 case 4:
-                    long readLong2 = parcel.readLong();
-                    String readString4 = parcel.readString();
+                    long j2 = parcel.readLong();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    abandonSession(readLong2, readString4);
+                    abandonSession(j2, string4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     BlobHandle blobHandle3 = (BlobHandle) parcel.readTypedObject(BlobHandle.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    long readLong3 = parcel.readLong();
-                    String readString5 = parcel.readString();
+                    long j3 = parcel.readLong();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    acquireLease(blobHandle3, readInt, charSequence, readLong3, readString5);
+                    acquireLease(blobHandle3, i3, charSequence, j3, string5);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     BlobHandle blobHandle4 = (BlobHandle) parcel.readTypedObject(BlobHandle.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    releaseLease(blobHandle4, readString6);
+                    releaseLease(blobHandle4, string6);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    releaseAllLeases(readString7);
+                    releaseAllLeases(string7);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long remainingLeaseQuotaBytes = getRemainingLeaseQuotaBytes(readString8);
+                    long remainingLeaseQuotaBytes = getRemainingLeaseQuotaBytes(string8);
                     parcel2.writeNoException();
                     parcel2.writeLong(remainingLeaseQuotaBytes);
                     return true;
@@ -263,30 +263,30 @@ public interface IBlobStoreManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<BlobInfo> queryBlobsForUser = queryBlobsForUser(readInt2);
+                    List<BlobInfo> listQueryBlobsForUser = queryBlobsForUser(i4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(queryBlobsForUser, 1);
+                    parcel2.writeTypedList(listQueryBlobsForUser, 1);
                     return true;
                 case 11:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    deleteBlob(readLong4);
+                    deleteBlob(j4);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<BlobHandle> leasedBlobs = getLeasedBlobs(readString9);
+                    List<BlobHandle> leasedBlobs = getLeasedBlobs(string9);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(leasedBlobs, 1);
                     return true;
                 case 13:
                     BlobHandle blobHandle5 = (BlobHandle) parcel.readTypedObject(BlobHandle.CREATOR);
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    LeaseInfo leaseInfo = getLeaseInfo(blobHandle5, readString10);
+                    LeaseInfo leaseInfo = getLeaseInfo(blobHandle5, string10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(leaseInfo, 1);
                     return true;
@@ -313,218 +313,218 @@ public interface IBlobStoreManager extends IInterface {
 
             @Override // android.app.blob.IBlobStoreManager
             public long createSession(BlobHandle blobHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blobHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blobHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public IBlobStoreSession openSession(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IBlobStoreSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IBlobStoreSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public ParcelFileDescriptor openBlob(BlobHandle blobHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blobHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blobHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void abandonSession(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void acquireLease(BlobHandle blobHandle, int i, CharSequence charSequence, long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blobHandle, 0);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blobHandle, 0);
+                    parcelObtain.writeInt(i);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void releaseLease(BlobHandle blobHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blobHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blobHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void releaseAllLeases(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public long getRemainingLeaseQuotaBytes(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void waitForIdle(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public List<BlobInfo> queryBlobsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(BlobInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(BlobInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public void deleteBlob(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public List<BlobHandle> getLeasedBlobs(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(BlobHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(BlobHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.blob.IBlobStoreManager
             public LeaseInfo getLeaseInfo(BlobHandle blobHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blobHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LeaseInfo) obtain2.readTypedObject(LeaseInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBlobStoreManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blobHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LeaseInfo) parcelObtain2.readTypedObject(LeaseInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

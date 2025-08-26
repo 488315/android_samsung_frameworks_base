@@ -9,6 +9,9 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Animatable2;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +20,12 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSIconView;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.statusbar.ScalingDrawableWrapper;
+import java.util.Objects;
+import java.util.function.Supplier;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSIconViewImpl extends QSIconView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +42,6 @@ public class QSIconViewImpl extends QSIconView {
     public int mState;
     public int mTint;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EndRunnableAnimatorListener extends AnimatorListenerAdapter {
         public final Runnable mRunnable;
 
@@ -138,20 +144,10 @@ public class QSIconViewImpl extends QSIconView {
         return sb.toString();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0075, code lost:
-    
-        if (r12 != false) goto L40;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00d5  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00e7  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x008e  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0078  */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00c6  */
     /* JADX WARN: Type inference failed for: r10v0, types: [android.widget.ImageView] */
     /* JADX WARN: Type inference failed for: r4v0 */
     /* JADX WARN: Type inference failed for: r4v1, types: [android.graphics.drawable.Drawable] */
@@ -163,14 +159,101 @@ public class QSIconViewImpl extends QSIconView {
     /* JADX WARN: Type inference failed for: r4v5, types: [android.graphics.drawable.Drawable] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateIcon(android.widget.ImageView r10, com.android.systemui.plugins.qs.QSTile.State r11, boolean r12) {
-        /*
-            Method dump skipped, instructions count: 287
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tileimpl.QSIconViewImpl.updateIcon(android.widget.ImageView, com.android.systemui.plugins.qs.QSTile$State, boolean):void");
+    public final void updateIcon(ImageView imageView, QSTile.State state, boolean z) {
+        boolean z2;
+        String string;
+        boolean zContains;
+        this.mScheduledIconChangeTransactionId = -1L;
+        Supplier<QSTile.Icon> supplier = state.iconSupplier;
+        QSTile.Icon icon = supplier != null ? supplier.get() : state.icon;
+        if (Objects.equals(icon, imageView.getTag(R.id.qs_icon_tag))) {
+            return;
+        }
+        if (z && this.mAnimationEnabled && imageView.isShown() && imageView.getDrawable() != null) {
+            SecQSIconViewImpl secQSIconViewImpl = this.mSecQSIconViewImpl;
+            z2 = true;
+            if (secQSIconViewImpl != null) {
+                QuickCustomTileIconResize quickCustomTileIconResize = secQSIconViewImpl.quickCustomTileIconResize;
+                if (quickCustomTileIconResize != null) {
+                    Supplier<QSTile.Icon> supplier2 = state.iconSupplier;
+                    if (supplier2 == null || (string = supplier2.toString()) == null) {
+                        string = "";
+                    }
+                    if (StringsKt__StringsKt.contains(string, "CustomTile", false)) {
+                        String str = state.tileClassName;
+                        if (Intrinsics.areEqual(str, "NearbyShare")) {
+                            zContains = false;
+                        } else {
+                            zContains = StringsKt__StringsKt.contains(quickCustomTileIconResize.context.getResources().getString(R.string.quick_settings_custom_tile_component_names), str != null ? str : "", false);
+                        }
+                        boolean z3 = !zContains;
+                        if (z3) {
+                        }
+                    }
+                }
+            }
+        } else {
+            z2 = false;
+        }
+        this.mLastIcon = icon;
+        ?? drawable = icon != null ? z2 ? icon.getDrawable(((ViewGroup) this).mContext) : icon.getInvisibleDrawable(((ViewGroup) this).mContext) : 0;
+        int padding = icon != null ? icon.getPadding() : 0;
+        if (drawable != 0) {
+            Drawable.ConstantState constantState = drawable.getConstantState();
+            drawable = drawable;
+            if (constantState != null) {
+                drawable = drawable.getConstantState().newDrawable();
+            }
+            drawable.setAutoMirrored(false);
+            drawable.setLayoutDirection(getLayoutDirection());
+        }
+        SecQSIconViewImpl secQSIconViewImpl2 = this.mSecQSIconViewImpl;
+        if (secQSIconViewImpl2 != null) {
+            QuickCustomTileIconResize quickCustomTileIconResize2 = secQSIconViewImpl2.quickCustomTileIconResize;
+            if (quickCustomTileIconResize2 != null) {
+                if ((drawable instanceof ScalingDrawableWrapper ? quickCustomTileIconResize2 : null) != null) {
+                    imageView.setScaleType(ImageView.ScaleType.CENTER);
+                }
+            } else if (secQSIconViewImpl2.isNoBgLargeTile) {
+                setFocusable(false);
+            }
+        }
+        Object drawable2 = imageView.getDrawable();
+        if (drawable2 instanceof Animatable2) {
+            ((Animatable2) drawable2).clearAnimationCallbacks();
+        }
+        imageView.setImageDrawable(drawable);
+        imageView.setTag(R.id.qs_icon_tag, icon);
+        imageView.setPadding(0, padding, 0, padding);
+        if (drawable instanceof Animatable2) {
+            final Animatable2 animatable2 = (Animatable2) drawable;
+            animatable2.start();
+            if (!z2) {
+                animatable2.stop();
+                return;
+            } else {
+                if (state.isTransient) {
+                    animatable2.registerAnimationCallback(new Animatable2.AnimationCallback(this) { // from class: com.android.systemui.qs.tileimpl.QSIconViewImpl.1
+                        @Override // android.graphics.drawable.Animatable2.AnimationCallback
+                        public final void onAnimationEnd(Drawable drawable3) {
+                            animatable2.start();
+                        }
+                    });
+                    return;
+                }
+                return;
+            }
+        }
+        if (this.mSecQSIconViewImpl == null || drawable == 0 || !(drawable instanceof AnimationDrawable) || !imageView.isShown()) {
+            return;
+        }
+        AnimationDrawable animationDrawable = (AnimationDrawable) drawable;
+        animationDrawable.start();
+        if (imageView.isShown()) {
+            return;
+        }
+        animationDrawable.stop();
     }
 
     public QSIconViewImpl(Context context, boolean z) {
@@ -197,19 +280,19 @@ public class QSIconViewImpl extends QSIconView {
 
     public void setIcon(final ImageView imageView, final QSTile.State state, final boolean z) {
         if (this.mSecQSIconViewImpl != null) {
-            QSTile.State copy = state.copy();
-            boolean z2 = copy.disabledByPolicy;
+            QSTile.State stateCopy = state.copy();
+            boolean z2 = stateCopy.disabledByPolicy;
             if (z2) {
-                imageView.setColorFilter(getColor(copy), PorterDuff.Mode.SRC_IN);
-                if (copy.state != this.mState) {
-                    setTint(imageView, getColor(copy));
+                imageView.setColorFilter(getColor(stateCopy), PorterDuff.Mode.SRC_IN);
+                if (stateCopy.state != this.mState) {
+                    setTint(imageView, getColor(stateCopy));
                 }
-            } else if (this.mState != copy.state || this.mDisabledByPolicy != z2) {
-                imageView.setColorFilter(getColor(copy), PorterDuff.Mode.SRC_IN);
+            } else if (this.mState != stateCopy.state || this.mDisabledByPolicy != z2) {
+                imageView.setColorFilter(getColor(stateCopy), PorterDuff.Mode.SRC_IN);
             }
-            this.mState = copy.state;
-            this.mDisabledByPolicy = copy.disabledByPolicy;
-            updateIcon(imageView, copy, z);
+            this.mState = stateCopy.state;
+            this.mDisabledByPolicy = stateCopy.disabledByPolicy;
+            updateIcon(imageView, stateCopy, z);
             return;
         }
         if (state.state == this.mState && state.disabledByPolicy == this.mDisabledByPolicy) {
@@ -231,7 +314,7 @@ public class QSIconViewImpl extends QSIconView {
         Runnable runnable = new Runnable() { // from class: com.android.systemui.qs.tileimpl.QSIconViewImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                QSIconViewImpl qSIconViewImpl = QSIconViewImpl.this;
+                QSIconViewImpl qSIconViewImpl = this.f$0;
                 long j2 = j;
                 ImageView imageView2 = imageView;
                 QSTile.State state2 = state;
@@ -247,15 +330,15 @@ public class QSIconViewImpl extends QSIconView {
             runnable.run();
             return;
         }
-        PropertyValuesHolder ofInt = PropertyValuesHolder.ofInt("color", i, color);
-        ofInt.setEvaluator(ArgbEvaluator.getInstance());
-        this.mColorAnimator.setValues(ofInt);
+        PropertyValuesHolder propertyValuesHolderOfInt = PropertyValuesHolder.ofInt("color", i, color);
+        propertyValuesHolderOfInt.setEvaluator(ArgbEvaluator.getInstance());
+        this.mColorAnimator.setValues(propertyValuesHolderOfInt);
         this.mColorAnimator.removeAllListeners();
         this.mColorAnimator.removeAllUpdateListeners();
         this.mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.tileimpl.QSIconViewImpl$$ExternalSyntheticLambda1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                QSIconViewImpl qSIconViewImpl = QSIconViewImpl.this;
+                QSIconViewImpl qSIconViewImpl = this.f$0;
                 ImageView imageView2 = imageView;
                 int i2 = QSIconViewImpl.$r8$clinit;
                 qSIconViewImpl.getClass();

@@ -49,7 +49,7 @@ final class IAccessibilityInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IAccessibilityInputMethodSessionInvoker$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IAccessibilityInputMethodSessionInvoker.this.finishInputInternal();
+                    this.f$0.finishInputInternal();
                 }
             });
         }
@@ -72,7 +72,7 @@ final class IAccessibilityInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IAccessibilityInputMethodSessionInvoker$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IAccessibilityInputMethodSessionInvoker.this.lambda$updateSelection$0(i, i2, i3, i4, i5, i6);
+                    this.f$0.lambda$updateSelection$0(i, i2, i3, i4, i5, i6);
                 }
             });
         }
@@ -97,7 +97,7 @@ final class IAccessibilityInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IAccessibilityInputMethodSessionInvoker$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IAccessibilityInputMethodSessionInvoker.this.lambda$invalidateInput$1(editorInfo, iRemoteAccessibilityInputConnection, i);
+                    this.f$0.lambda$invalidateInput$1(editorInfo, iRemoteAccessibilityInputConnection, i);
                 }
             });
         }

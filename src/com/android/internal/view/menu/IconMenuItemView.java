@@ -56,11 +56,11 @@ public final class IconMenuItemView extends TextView implements MenuView.ItemVie
         if (sPrependShortcutLabel == null) {
             sPrependShortcutLabel = getResources().getString(R.string.prepend_shortcut_label);
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, i, i2);
-        this.mDisabledAlpha = obtainStyledAttributes.getFloat(6, 0.8f);
-        this.mTextAppearance = obtainStyledAttributes.getResourceId(1, -1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, i, i2);
+        this.mDisabledAlpha = typedArrayObtainStyledAttributes.getFloat(6, 0.8f);
+        this.mTextAppearance = typedArrayObtainStyledAttributes.getResourceId(1, -1);
         this.mTextAppearanceContext = context;
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public IconMenuItemView(Context context, AttributeSet attributeSet, int i) {

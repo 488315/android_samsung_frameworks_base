@@ -433,13 +433,13 @@ public final class OutputConfiguration implements Parcelable {
         if (getSurface() == surface) {
             throw new IllegalArgumentException("Cannot remove surface associated with this output configuration");
         }
-        int indexOf = this.mSurfaces.indexOf(surface);
-        if (indexOf == -1) {
+        int iIndexOf = this.mSurfaces.indexOf(surface);
+        if (iIndexOf == -1) {
             throw new IllegalArgumentException("Surface is not part of this output configuration");
         }
-        this.mSurfaces.remove(indexOf);
+        this.mSurfaces.remove(iIndexOf);
         if (Flags.mirrorModeSharedSurfaces()) {
-            this.mMirrorModeForSurfaces.remove(indexOf);
+            this.mMirrorModeForSurfaces.remove(iIndexOf);
         }
     }
 
@@ -494,20 +494,20 @@ public final class OutputConfiguration implements Parcelable {
         if (i < 0 || i > 3) {
             throw new IllegalArgumentException("Not a valid mirror mode " + i);
         }
-        int indexOf = this.mSurfaces.indexOf(surface);
-        if (indexOf == -1) {
+        int iIndexOf = this.mSurfaces.indexOf(surface);
+        if (iIndexOf == -1) {
             throw new IllegalArgumentException("Surface not part of the OutputConfiguration");
         }
-        this.mMirrorModeForSurfaces.set(indexOf, i);
+        this.mMirrorModeForSurfaces.set(iIndexOf, i);
     }
 
     public int getMirrorMode(Surface surface) {
         Preconditions.checkNotNull(surface, "Surface must not be null");
-        int indexOf = this.mSurfaces.indexOf(surface);
-        if (indexOf == -1) {
+        int iIndexOf = this.mSurfaces.indexOf(surface);
+        if (iIndexOf == -1) {
             throw new IllegalArgumentException("Surface not part of the OutputConfiguration");
         }
-        return this.mMirrorModeForSurfaces.get(indexOf);
+        return this.mMirrorModeForSurfaces.get(iIndexOf);
     }
 
     public void setReadoutTimestampEnabled(boolean z) {
@@ -543,7 +543,7 @@ public final class OutputConfiguration implements Parcelable {
         this.mStreamUseCase = outputConfiguration.mStreamUseCase;
         this.mTimestampBase = outputConfiguration.mTimestampBase;
         this.mMirrorMode = outputConfiguration.mMirrorMode;
-        this.mMirrorModeForSurfaces = outputConfiguration.mMirrorModeForSurfaces.m5502clone();
+        this.mMirrorModeForSurfaces = outputConfiguration.mMirrorModeForSurfaces.m5509clone();
         this.mReadoutTimestampEnabled = outputConfiguration.mReadoutTimestampEnabled;
         this.mUsage = outputConfiguration.mUsage;
     }
@@ -552,35 +552,35 @@ public final class OutputConfiguration implements Parcelable {
         this.SURFACE_TYPE_UNKNOWN = -1;
         this.SURFACE_TYPE_SURFACE_VIEW = 0;
         this.SURFACE_TYPE_SURFACE_TEXTURE = 1;
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        int readInt5 = parcel.readInt();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        int i5 = parcel.readInt();
         boolean z = parcel.readInt() == 1;
         boolean z2 = parcel.readInt() == 1;
         ArrayList<Surface> arrayList = new ArrayList<>();
         parcel.readTypedList(arrayList, Surface.CREATOR);
-        String readString = parcel.readString();
+        String string = parcel.readString();
         boolean z3 = parcel.readInt() == 1;
-        int[] createIntArray = parcel.createIntArray();
-        Preconditions.checkArgumentInRange(readInt, 0, 3, "Rotation constant");
-        long readLong = parcel.readLong();
-        DynamicRangeProfiles.checkProfileValue(readLong);
-        int readInt6 = parcel.readInt();
-        long readLong2 = parcel.readLong();
-        int readInt7 = parcel.readInt();
-        int readInt8 = parcel.readInt();
-        int[] createIntArray2 = parcel.createIntArray();
+        int[] iArrCreateIntArray = parcel.createIntArray();
+        Preconditions.checkArgumentInRange(i, 0, 3, "Rotation constant");
+        long j = parcel.readLong();
+        DynamicRangeProfiles.checkProfileValue(j);
+        int i6 = parcel.readInt();
+        long j2 = parcel.readLong();
+        int i7 = parcel.readInt();
+        int i8 = parcel.readInt();
+        int[] iArrCreateIntArray2 = parcel.createIntArray();
         boolean z4 = parcel.readInt() == 1;
-        int readInt9 = parcel.readInt();
+        int i9 = parcel.readInt();
         boolean z5 = z4;
-        int readInt10 = parcel.readInt();
-        long readLong3 = parcel.readLong();
-        this.mSurfaceGroupId = readInt2;
-        this.mRotation = readInt;
+        int i10 = parcel.readInt();
+        long j3 = parcel.readLong();
+        this.mSurfaceGroupId = i2;
+        this.mRotation = i;
         this.mSurfaces = arrayList;
-        this.mConfiguredSize = new Size(readInt4, readInt5);
+        this.mConfiguredSize = new Size(i4, i5);
         this.mIsDeferredConfig = z;
         this.mIsShared = z2;
         this.mUsage = 0L;
@@ -590,26 +590,26 @@ public final class OutputConfiguration implements Parcelable {
             this.mConfiguredDataspace = SurfaceUtils.getSurfaceDataspace(this.mSurfaces.get(0));
             this.mConfiguredGenerationId = this.mSurfaces.get(0).getGenerationId();
         } else {
-            this.mSurfaceType = readInt3;
-            if (readInt3 != 4) {
+            this.mSurfaceType = i3;
+            if (i3 != 4) {
                 this.mConfiguredFormat = StreamConfigurationMap.imageFormatToInternal(34);
                 this.mConfiguredDataspace = StreamConfigurationMap.imageFormatToDataspace(34);
             } else {
-                this.mConfiguredFormat = readInt9;
-                this.mConfiguredDataspace = readInt10;
-                this.mUsage = readLong3;
+                this.mConfiguredFormat = i9;
+                this.mConfiguredDataspace = i10;
+                this.mUsage = j3;
             }
             this.mConfiguredGenerationId = 0;
         }
-        this.mPhysicalCameraId = readString;
+        this.mPhysicalCameraId = string;
         this.mIsMultiResolution = z3;
-        this.mSensorPixelModesUsed = convertIntArrayToIntegerList(createIntArray);
-        this.mDynamicRangeProfile = readLong;
-        this.mColorSpace = readInt6;
-        this.mStreamUseCase = readLong2;
-        this.mTimestampBase = readInt7;
-        this.mMirrorMode = readInt8;
-        this.mMirrorModeForSurfaces = IntArray.wrap(createIntArray2);
+        this.mSensorPixelModesUsed = convertIntArrayToIntegerList(iArrCreateIntArray);
+        this.mDynamicRangeProfile = j;
+        this.mColorSpace = i6;
+        this.mStreamUseCase = j2;
+        this.mTimestampBase = i7;
+        this.mMirrorMode = i8;
+        this.mMirrorModeForSurfaces = IntArray.wrap(iArrCreateIntArray2);
         this.mReadoutTimestampEnabled = z5;
     }
 
@@ -746,8 +746,8 @@ public final class OutputConfiguration implements Parcelable {
                     }
                 }
             }
-            int min = Math.min(this.mSurfaces.size(), outputConfiguration.mSurfaces.size());
-            for (int i3 = 0; i3 < min; i3++) {
+            int iMin = Math.min(this.mSurfaces.size(), outputConfiguration.mSurfaces.size());
+            for (int i3 = 0; i3 < iMin; i3++) {
                 if (this.mSurfaces.get(i3) != outputConfiguration.mSurfaces.get(i3)) {
                     return false;
                 }

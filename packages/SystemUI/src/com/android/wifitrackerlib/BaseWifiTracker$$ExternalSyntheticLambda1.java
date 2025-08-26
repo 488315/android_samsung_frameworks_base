@@ -17,7 +17,6 @@ import com.samsung.android.wifitrackerlib.SemWifiUtils;
 import com.samsung.android.wifitrackerlib.WifiQoSScoredCache;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -31,7 +30,7 @@ public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda1 imp
     @Override // java.lang.Runnable
     public final void run() {
         BaseWifiTracker.AnonymousClass7 anonymousClass7;
-        boolean isSupportedQoSProvider;
+        boolean zIsSupportedQoSProvider;
         BaseWifiTracker.AnonymousClass7 anonymousClass72;
         boolean z = false;
         int i = this.$r8$classId;
@@ -71,7 +70,7 @@ public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda1 imp
                         baseWifiTracker.mWifiManager.addWifiStateChangedListener(new Executor() { // from class: com.android.wifitrackerlib.BaseWifiTracker$$ExternalSyntheticLambda3
                             @Override // java.util.concurrent.Executor
                             public final void execute(Runnable runnable) {
-                                BaseWifiTracker.this.mWorkerHandler.post(runnable);
+                                baseWifiTracker.mWorkerHandler.post(runnable);
                             }
                         }, anonymousClass82);
                         anonymousClass82.onWifiStateChanged();
@@ -105,11 +104,11 @@ public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda1 imp
                     SemWifiManager semWifiManager = wifiQoSScoredCache.mSemWifiManager;
                     if (semWifiManager == null) {
                         Log.i("WifiTracker.WifiWifiQoSScoreCache", "SemWifiManager: null");
-                        isSupportedQoSProvider = false;
+                        zIsSupportedQoSProvider = false;
                     } else {
-                        isSupportedQoSProvider = semWifiManager.isSupportedQoSProvider();
+                        zIsSupportedQoSProvider = semWifiManager.isSupportedQoSProvider();
                     }
-                    if (isSupportedQoSProvider) {
+                    if (zIsSupportedQoSProvider) {
                         Context context2 = wifiQoSScoredCache.mContext;
                         int i4 = SemWifiUtils.$r8$clinit;
                         if (!((SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING")) ? SemEmergencyManager.isEmergencyMode(context2) : false) && z2) {

@@ -51,8 +51,8 @@ public class ClipPath extends PaintOperation implements Serializable {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        list.add(new ClipPath(1048575 & readInt, readInt >> 24));
+        int i = wireBuffer.readInt();
+        list.add(new ClipPath(1048575 & i, i >> 24));
     }
 
     public static String name() {

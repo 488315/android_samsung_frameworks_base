@@ -10,7 +10,6 @@ import com.google.protobuf.WireFormat$FieldType;
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopRepositoryState extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final DesktopRepositoryState DEFAULT_INSTANCE;
@@ -18,7 +17,6 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
     private static volatile Parser PARSER;
     private MapFieldLite<Integer, Desktop> desktop_ = MapFieldLite.EMPTY_MAP_FIELD;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -57,7 +55,6 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(int i) {
             this();
@@ -68,7 +65,6 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DesktopDefaultEntryHolder {
         public static final MapEntryLite defaultEntry = MapEntryLite.newDefaultInstance(WireFormat$FieldType.INT32, 0, WireFormat$FieldType.MESSAGE, Desktop.getDefaultInstance());
 
@@ -77,7 +73,7 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
     }
 
     /* renamed from: -$$Nest$mgetMutableDesktopMap, reason: not valid java name */
-    public static MapFieldLite m3242$$Nest$mgetMutableDesktopMap(DesktopRepositoryState desktopRepositoryState) {
+    public static MapFieldLite m3259$$Nest$mgetMutableDesktopMap(DesktopRepositoryState desktopRepositoryState) {
         if (!desktopRepositoryState.desktop_.isMutable()) {
             desktopRepositoryState.desktop_ = desktopRepositoryState.desktop_.mutableCopy();
         }
@@ -99,7 +95,7 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
             case 1:
                 return new DesktopRepositoryState();
@@ -110,22 +106,22 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (DesktopRepositoryState.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

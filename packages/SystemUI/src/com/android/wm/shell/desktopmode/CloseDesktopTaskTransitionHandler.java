@@ -32,7 +32,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CloseDesktopTaskTransitionHandler implements Transitions.TransitionHandler {
     public final ShellExecutor animExecutor;
@@ -43,7 +42,6 @@ public final class CloseDesktopTaskTransitionHandler implements Transitions.Tran
     public final Map runningAnimations;
     public final Supplier transactionSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,11 +77,11 @@ public final class CloseDesktopTaskTransitionHandler implements Transitions.Tran
         final Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final List list = arrayList;
                 final IBinder iBinder2 = iBinder;
                 final Animator animator = (Animator) obj;
-                final CloseDesktopTaskTransitionHandler closeDesktopTaskTransitionHandler = CloseDesktopTaskTransitionHandler.this;
+                final CloseDesktopTaskTransitionHandler closeDesktopTaskTransitionHandler = this.f$0;
                 ShellExecutor shellExecutor = closeDesktopTaskTransitionHandler.mainExecutor;
                 final Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                 shellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$startAnimation$onAnimFinish$1$1
@@ -124,33 +122,33 @@ public final class CloseDesktopTaskTransitionHandler implements Transitions.Tran
             float f = i2;
             rect.inset((int) ((startAbsBounds.width() * 0.050000012f) / f), (int) ((startAbsBounds.height() * 0.050000012f) / f));
             rect.offset(0, (int) ActionRow$$ExternalSyntheticOutline0.m(this.context, 1, 36.0f));
-            ValueAnimator ofObject = ValueAnimator.ofObject(new RectEvaluator(), startAbsBounds, rect);
-            ofObject.setDuration(200L);
-            ofObject.setInterpolator(Interpolators.STANDARD_ACCELERATE);
-            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$createBoundsCloseAnimation$1$1
+            ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new RectEvaluator(), startAbsBounds, rect);
+            valueAnimatorOfObject.setDuration(200L);
+            valueAnimatorOfObject.setInterpolator(Interpolators.STANDARD_ACCELERATE);
+            valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$createBoundsCloseAnimation$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     Rect rect2 = (Rect) valueAnimator.getAnimatedValue();
                     float animatedFraction = 1 - (valueAnimator.getAnimatedFraction() * 0.050000012f);
-                    ((SurfaceControl.Transaction) CloseDesktopTaskTransitionHandler.this.transactionSupplier.get()).setPosition(change2.getLeash(), rect2.left, rect2.top).setScale(change2.getLeash(), animatedFraction, animatedFraction).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
+                    ((SurfaceControl.Transaction) this.this$0.transactionSupplier.get()).setPosition(change2.getLeash(), rect2.left, rect2.top).setScale(change2.getLeash(), animatedFraction, animatedFraction).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
                 }
             });
-            animatorArr[0] = ofObject;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat.setDuration(100L);
-            ofFloat.setInterpolator(Interpolators.LINEAR);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$createAlphaCloseAnimation$1$1
+            animatorArr[0] = valueAnimatorOfObject;
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat.setDuration(100L);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$createAlphaCloseAnimation$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ((SurfaceControl.Transaction) CloseDesktopTaskTransitionHandler.this.transactionSupplier.get()).setAlpha(change2.getLeash(), ((Float) valueAnimator.getAnimatedValue()).floatValue()).apply();
+                    ((SurfaceControl.Transaction) this.this$0.transactionSupplier.get()).setAlpha(change2.getLeash(), ((Float) valueAnimator.getAnimatedValue()).floatValue()).apply();
                 }
             });
-            animatorArr[1] = ofFloat;
+            animatorArr[1] = valueAnimatorOfFloat;
             animatorSet.playTogether(animatorArr);
             animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$createCloseAnimation$lambda$4$$inlined$addListener$default$1
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    Function1.this.mo779invoke(animator);
+                    function1.mo781invoke(animator);
                 }
 
                 @Override // android.animation.Animator.AnimatorListener
@@ -183,7 +181,7 @@ public final class CloseDesktopTaskTransitionHandler implements Transitions.Tran
             this.interactionJankMonitor.begin(leash, this.context, this.animHandler, 122);
         }
         transaction.apply();
-        this.animExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler$startAnimation$3
+        this.animExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.CloseDesktopTaskTransitionHandler.startAnimation.3
             @Override // java.lang.Runnable
             public final void run() {
                 Iterator it = arrayList4.iterator();

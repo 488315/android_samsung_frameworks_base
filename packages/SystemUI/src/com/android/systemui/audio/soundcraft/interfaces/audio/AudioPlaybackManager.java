@@ -17,12 +17,10 @@ import kotlin.Result;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioPlaybackManager {
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,10 +38,13 @@ public final class AudioPlaybackManager {
         this.context = context;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0047  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean isValidPlayback(AudioPlaybackConfiguration audioPlaybackConfiguration, String str) {
-        boolean z;
+        boolean zBooleanValue;
         ConcurrentHashMap concurrentHashMap;
-        boolean z2;
         if (AudioAttributes.toLegacyStreamType(audioPlaybackConfiguration.getAudioAttributes()) != 3 || audioPlaybackConfiguration.semGetPlayerState() != 2) {
             return false;
         }
@@ -60,46 +61,34 @@ public final class AudioPlaybackManager {
             concurrentHashMap = PlaybackPackageUtils.gamePackageHashMap;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(new Result.Failure(th));
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
         }
         if (concurrentHashMap.containsKey(str)) {
             Boolean bool = (Boolean) concurrentHashMap.get(str);
-            if (bool != null) {
-                z = bool.booleanValue();
-            }
-            z = false;
-        } else {
-            if (SemGameManager.isAvailable()) {
-                if (!SemGameManager.isGamePackage(str) && !StringsKt__StringsKt.contains(str, "dolbygametest", false)) {
-                    z2 = false;
-                    concurrentHashMap.put(str, Boolean.valueOf(z2));
-                    Log.d("SoundCraft.PlaybackPackageUtils", str + " set to game package " + z2);
-                    z = z2;
-                }
-                z2 = true;
-                concurrentHashMap.put(str, Boolean.valueOf(z2));
-                Log.d("SoundCraft.PlaybackPackageUtils", str + " set to game package " + z2);
-                z = z2;
-            }
-            z = false;
+            zBooleanValue = bool != null ? bool.booleanValue() : false;
+        } else if (SemGameManager.isAvailable()) {
+            boolean z = SemGameManager.isGamePackage(str) || StringsKt__StringsKt.contains(str, "dolbygametest", false);
+            concurrentHashMap.put(str, Boolean.valueOf(z));
+            Log.d("SoundCraft.PlaybackPackageUtils", str + " set to game package " + z);
+            zBooleanValue = z;
         }
-        return !z;
+        return !zBooleanValue;
     }
 
     public final int findValidPlaybackUid(List list) {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
-            int semGetClientUid = audioPlaybackConfiguration.semGetClientUid();
-            if (semGetClientUid > 1000 && semGetClientUid != 1002) {
+            int iSemGetClientUid = audioPlaybackConfiguration.semGetClientUid();
+            if (iSemGetClientUid > 1000 && iSemGetClientUid != 1002) {
                 PackageExt packageExt = PackageExt.INSTANCE;
                 Context context = this.context;
-                int semGetClientUid2 = audioPlaybackConfiguration.semGetClientUid();
+                int iSemGetClientUid2 = audioPlaybackConfiguration.semGetClientUid();
                 packageExt.getClass();
-                String packageNameForUid = PackageExt.getPackageNameForUid(semGetClientUid2, context);
+                String packageNameForUid = PackageExt.getPackageNameForUid(iSemGetClientUid2, context);
                 if (packageNameForUid != null && isValidPlayback(audioPlaybackConfiguration, packageNameForUid)) {
                     return audioPlaybackConfiguration.semGetClientUid();
                 }
@@ -115,13 +104,13 @@ public final class AudioPlaybackManager {
         Object systemService = context.getSystemService((Class<Object>) AudioManager.class);
         systemService.getClass();
         for (AudioPlaybackConfiguration audioPlaybackConfiguration : ((AudioManager) systemService).getActivePlaybackConfigurations()) {
-            int semGetClientUid = audioPlaybackConfiguration.semGetClientUid();
-            if (semGetClientUid > 1000 && semGetClientUid != 1002) {
+            int iSemGetClientUid = audioPlaybackConfiguration.semGetClientUid();
+            if (iSemGetClientUid > 1000 && iSemGetClientUid != 1002) {
                 PackageExt packageExt = PackageExt.INSTANCE;
                 Context context2 = this.context;
-                int semGetClientUid2 = audioPlaybackConfiguration.semGetClientUid();
+                int iSemGetClientUid2 = audioPlaybackConfiguration.semGetClientUid();
                 packageExt.getClass();
-                String packageNameForUid = PackageExt.getPackageNameForUid(semGetClientUid2, context2);
+                String packageNameForUid = PackageExt.getPackageNameForUid(iSemGetClientUid2, context2);
                 if (packageNameForUid != null && isValidPlayback(audioPlaybackConfiguration, packageNameForUid)) {
                     KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(audioPlaybackConfiguration.semGetClientUid(), "uid=", ", packageName=", packageNameForUid, "SoundCraft.AudioPlaybackManager");
                     return packageNameForUid;

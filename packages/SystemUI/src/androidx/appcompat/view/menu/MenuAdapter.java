@@ -1,5 +1,6 @@
 package androidx.appcompat.view.menu;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import androidx.appcompat.view.menu.MenuView;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuAdapter extends BaseAdapter {
     public final MenuBuilder mAdapterMenu;
@@ -65,7 +65,7 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     @Override // android.widget.Adapter
-    public final View getView(int i, View view, ViewGroup viewGroup) {
+    public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (view == null) {
             view = this.mInflater.inflate(this.mItemLayoutRes, viewGroup, false);
             this.mInitPaddingTop = view.getPaddingTop();

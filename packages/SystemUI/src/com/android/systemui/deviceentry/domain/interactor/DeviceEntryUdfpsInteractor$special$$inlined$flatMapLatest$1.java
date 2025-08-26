@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryUdfpsInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ DeviceEntryFingerprintAuthRepository $fingerprintAuthRepository$inlined;
@@ -42,9 +41,9 @@ public final class DeviceEntryUdfpsInteractor$special$$inlined$flatMapLatest$1 e
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Flow isRunning = ((Boolean) this.L$1).booleanValue() ? ((DeviceEntryFingerprintAuthRepositoryImpl) this.$fingerprintAuthRepository$inlined).isRunning() : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+            Flow flowIsRunning = ((Boolean) this.L$1).booleanValue() ? ((DeviceEntryFingerprintAuthRepositoryImpl) this.$fingerprintAuthRepository$inlined).isRunning() : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, isRunning, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowIsRunning, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

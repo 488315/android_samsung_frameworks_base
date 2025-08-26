@@ -25,29 +25,29 @@ public class StoragedUidIoStatsReader {
     }
 
     public void readAbsolute(Callback callback) {
-        int allowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
+        int iAllowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
         try {
             readAbsoluteInternal(callback);
         } finally {
-            StrictMode.setThreadPolicyMask(allowThreadDiskReadsMask);
+            StrictMode.setThreadPolicyMask(iAllowThreadDiskReadsMask);
         }
     }
 
-    private void readAbsoluteInternal(Callback callback) {
+    private void readAbsoluteInternal(Callback callback) throws IOException {
         try {
-            BufferedReader newBufferedReader = Files.newBufferedReader(new File(sUidIoFile).toPath());
+            BufferedReader bufferedReaderNewBufferedReader = Files.newBufferedReader(new File(sUidIoFile).toPath());
             while (true) {
                 try {
-                    String readLine = newBufferedReader.readLine();
-                    if (readLine == null) {
+                    String line = bufferedReaderNewBufferedReader.readLine();
+                    if (line == null) {
                         break;
                     }
-                    String[] split = TextUtils.split(readLine, " ");
-                    if (split.length != 11) {
-                        Slog.e(TAG, "Malformed entry in " + sUidIoFile + ": " + readLine);
+                    String[] strArrSplit = TextUtils.split(line, " ");
+                    if (strArrSplit.length != 11) {
+                        Slog.e(TAG, "Malformed entry in " + sUidIoFile + ": " + line);
                     } else {
                         try {
-                            callback.onUidStorageStats(Integer.parseInt(split[0], 10), Long.parseLong(split[1], 10), Long.parseLong(split[2], 10), Long.parseLong(split[3], 10), Long.parseLong(split[4], 10), Long.parseLong(split[5], 10), Long.parseLong(split[6], 10), Long.parseLong(split[7], 10), Long.parseLong(split[8], 10), Long.parseLong(split[9], 10), Long.parseLong(split[10], 10));
+                            callback.onUidStorageStats(Integer.parseInt(strArrSplit[0], 10), Long.parseLong(strArrSplit[1], 10), Long.parseLong(strArrSplit[2], 10), Long.parseLong(strArrSplit[3], 10), Long.parseLong(strArrSplit[4], 10), Long.parseLong(strArrSplit[5], 10), Long.parseLong(strArrSplit[6], 10), Long.parseLong(strArrSplit[7], 10), Long.parseLong(strArrSplit[8], 10), Long.parseLong(strArrSplit[9], 10), Long.parseLong(strArrSplit[10], 10));
                         } catch (NumberFormatException e) {
                             Slog.e(TAG, "Could not parse entry in " + sUidIoFile + ": " + e.getMessage());
                         }
@@ -55,8 +55,8 @@ public class StoragedUidIoStatsReader {
                 } finally {
                 }
             }
-            if (newBufferedReader != null) {
-                newBufferedReader.close();
+            if (bufferedReaderNewBufferedReader != null) {
+                bufferedReaderNewBufferedReader.close();
             }
         } catch (IOException e2) {
             Slog.e(TAG, "Failed to read " + sUidIoFile + ": " + e2.getMessage());

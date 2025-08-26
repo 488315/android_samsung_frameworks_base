@@ -13,7 +13,6 @@ import java.util.Arrays;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DataBuffer implements Parcelable {
     public static final Parcelable.Creator<DataBuffer> CREATOR = new Parcelable.Creator<DataBuffer>() { // from class: com.samsung.android.knox.ex.knoxAI.DataBuffer.1
@@ -59,12 +58,12 @@ public class DataBuffer implements Parcelable {
         }
         byte[] bArr = new byte[fArr.length * 4];
         for (int i = 0; i < fArr.length; i++) {
-            int floatToIntBits = Float.floatToIntBits(fArr[i]);
+            int iFloatToIntBits = Float.floatToIntBits(fArr[i]);
             int i2 = i * 4;
-            bArr[i2 + 3] = (byte) (floatToIntBits >> 24);
-            bArr[i2 + 2] = (byte) (floatToIntBits >> 16);
-            bArr[i2 + 1] = (byte) (floatToIntBits >> 8);
-            bArr[i2] = (byte) floatToIntBits;
+            bArr[i2 + 3] = (byte) (iFloatToIntBits >> 24);
+            bArr[i2 + 2] = (byte) (iFloatToIntBits >> 16);
+            bArr[i2 + 1] = (byte) (iFloatToIntBits >> 8);
+            bArr[i2] = (byte) iFloatToIntBits;
         }
         return bArr;
     }
@@ -120,15 +119,15 @@ public class DataBuffer implements Parcelable {
         for (String str : strArr) {
             length += str.length();
         }
-        ByteBuffer allocate = ByteBuffer.allocate(length);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(length);
         for (String str2 : strArr) {
-            allocate.put(str2.getBytes(StandardCharsets.UTF_8));
-            allocate.put((byte) 0);
+            byteBufferAllocate.put(str2.getBytes(StandardCharsets.UTF_8));
+            byteBufferAllocate.put((byte) 0);
         }
-        return allocate.array();
+        return byteBufferAllocate.array();
     }
 
-    public void closeQuietly(Closeable closeable) {
+    public void closeQuietly(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();
@@ -239,27 +238,27 @@ public class DataBuffer implements Parcelable {
     public DataBuffer(Parcel parcel) {
         this.dataType = parcel.readByte();
         this.dataFormat = parcel.readByte();
-        int readInt = parcel.readInt();
-        if (readInt != 0) {
-            int[] iArr = new int[readInt];
+        int i = parcel.readInt();
+        if (i != 0) {
+            int[] iArr = new int[i];
             this.shape = iArr;
             parcel.readIntArray(iArr);
         }
-        byte readByte = parcel.readByte();
-        this.dataSource = readByte;
-        if (readByte == 0) {
-            int readInt2 = parcel.readInt();
-            if (readInt2 != 0) {
-                float[] fArr = new float[readInt2];
+        byte b = parcel.readByte();
+        this.dataSource = b;
+        if (b == 0) {
+            int i2 = parcel.readInt();
+            if (i2 != 0) {
+                float[] fArr = new float[i2];
                 this.dataOriginal = fArr;
                 parcel.readFloatArray(fArr);
                 return;
             }
             return;
         }
-        if (readByte == 1) {
+        if (b == 1) {
             this.filedesc = parcel.readFileDescriptor().getFileDescriptor();
-        } else if (readByte == 2) {
+        } else if (b == 2) {
             this.dataShared = (SharedMemory) parcel.readParcelable(SharedMemory.class.getClassLoader());
         }
     }

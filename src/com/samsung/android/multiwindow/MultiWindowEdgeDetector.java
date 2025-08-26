@@ -139,14 +139,14 @@ public class MultiWindowEdgeDetector {
         if (!MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED) {
             return false;
         }
-        boolean isEdge = isEdge();
+        boolean zIsEdge = isEdge();
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked != 0) {
             if (actionMasked != 1 && actionMasked != 3) {
-                return isEdge;
+                return zIsEdge;
             }
             reset();
-            return isEdge;
+            return zIsEdge;
         }
         ensureScreenInfo();
         this.mEdgeFlags = getEdgeFlags(motionEvent);
@@ -226,9 +226,9 @@ public class MultiWindowEdgeDetector {
     }
 
     private boolean isExceedThreshold(int i, int i2) {
-        int abs = Math.abs(i) + Math.abs(i2);
-        boolean z = abs >= this.mGestureThreshold;
-        Log.i(TAG, this.mPrefixLog + "isExceedThreshold: " + z + ", dx=" + Math.abs(i) + ", dy=" + Math.abs(i2) + ", distance=" + abs + ", threshold=" + this.mGestureThreshold);
+        int iAbs = Math.abs(i) + Math.abs(i2);
+        boolean z = iAbs >= this.mGestureThreshold;
+        Log.i(TAG, this.mPrefixLog + "isExceedThreshold: " + z + ", dx=" + Math.abs(i) + ", dy=" + Math.abs(i2) + ", distance=" + iAbs + ", threshold=" + this.mGestureThreshold);
         return z;
     }
 

@@ -10,7 +10,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardMessageArea extends SystemUITextView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,10 +28,10 @@ public abstract class KeyguardMessageArea extends SystemUITextView {
         this.mClearMessageRunnable = new Runnable() { // from class: com.android.keyguard.KeyguardMessageArea$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardMessageArea keyguardMessageArea = KeyguardMessageArea.this;
+                KeyguardMessageArea keyguardMessageArea = this.f$0;
                 int i = KeyguardMessageArea.$r8$clinit;
                 keyguardMessageArea.mMessage = null;
-                keyguardMessageArea.update$8();
+                keyguardMessageArea.update$1$1();
             }
         };
         setLayerType(2, null);
@@ -51,17 +50,17 @@ public abstract class KeyguardMessageArea extends SystemUITextView {
     }
 
     public void onThemeChanged() {
-        update$8();
+        update$1$1();
     }
 
     public void setMessage(CharSequence charSequence, boolean z) {
         if (TextUtils.isEmpty(charSequence)) {
             this.mMessage = null;
-            update$8();
+            update$1$1();
             return;
         }
         this.mMessage = charSequence;
-        update$8();
+        update$1$1();
         KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
         if (!keyguardUpdateMonitor.is2StepVerification() || keyguardUpdateMonitor.getFingerprintAuthenticated()) {
             this.mHandler.removeCallbacks(this.mClearMessageRunnable);
@@ -72,7 +71,7 @@ public abstract class KeyguardMessageArea extends SystemUITextView {
         }
     }
 
-    public final void update$8() {
+    public final void update$1$1() {
         if (this.mHandler == null) {
             this.mHandler = new Handler(Looper.getMainLooper());
         }
@@ -81,7 +80,7 @@ public abstract class KeyguardMessageArea extends SystemUITextView {
             @Override // java.lang.Runnable
             public final void run() {
                 int i;
-                KeyguardMessageArea keyguardMessageArea = KeyguardMessageArea.this;
+                KeyguardMessageArea keyguardMessageArea = this.f$0;
                 CharSequence charSequence2 = charSequence;
                 int i2 = KeyguardMessageArea.$r8$clinit;
                 keyguardMessageArea.getClass();

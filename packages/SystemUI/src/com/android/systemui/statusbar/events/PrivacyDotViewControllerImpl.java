@@ -21,7 +21,7 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.privacy.logging.PrivacyLogger;
 import com.android.systemui.privacy.logging.PrivacyLogger$$ExternalSyntheticLambda0;
-import com.android.systemui.qs.SecQSDetailController$$ExternalSyntheticOutline0;
+import com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateChangeEvent;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener;
@@ -46,7 +46,6 @@ import kotlin.math.MathKt__MathJVMKt;
 import kotlin.sequences.Sequence;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
     public final SystemStatusAnimationScheduler animationScheduler;
@@ -70,7 +69,6 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
     public final DelayableExecutor uiExecutor;
     public final PrivacyDotViewControllerImpl$wakefulnessObserver$1 wakefulnessObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         PrivacyDotViewControllerImpl create(CoroutineScope coroutineScope, ConfigurationController configurationController, StatusBarContentInsetsProvider statusBarContentInsetsProvider);
     }
@@ -94,11 +92,11 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         StatusBarContentInsetsChangedListener statusBarContentInsetsChangedListener = new StatusBarContentInsetsChangedListener() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$insetsChangedListener$1
             @Override // com.android.systemui.statusbar.layout.StatusBarContentInsetsChangedListener
             public final void onStatusBarContentInsetsChanged() {
-                PrivacyDotViewControllerImpl privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this;
+                PrivacyDotViewControllerImpl privacyDotViewControllerImpl = this.this$0;
                 StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) privacyDotViewControllerImpl.contentInsetsProvider;
-                List asList = Arrays.asList(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(3), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(0), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(1), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(2));
+                List listAsList = Arrays.asList(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(3), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(0), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(1), statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(2));
                 synchronized (privacyDotViewControllerImpl.lock) {
-                    privacyDotViewControllerImpl.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, (Rect) asList.get(1), (Rect) asList.get(2), (Rect) asList.get(3), (Rect) asList.get(0), false, 0, 0, null, null, null, 0, 0, 0, 0, null, 1048335));
+                    privacyDotViewControllerImpl.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, (Rect) listAsList.get(1), (Rect) listAsList.get(2), (Rect) listAsList.get(3), (Rect) listAsList.get(0), false, 0, 0, null, null, null, 0, 0, 0, 0, null, 1048335));
                     Unit unit = Unit.INSTANCE;
                 }
             }
@@ -106,13 +104,13 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         ?? r5 = new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$wakefulnessObserver$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedWakingUp() {
-                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this;
+                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = this.this$0;
                 privacyDotViewControllerImpl.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$wakefulnessObserver$1$onStartedWakingUp$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = PrivacyDotViewControllerImpl.this;
+                        PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = privacyDotViewControllerImpl;
                         if (privacyDotViewControllerImpl2.shouldShowDot(privacyDotViewControllerImpl2.currentViewState)) {
-                            PrivacyDotViewControllerImpl privacyDotViewControllerImpl3 = PrivacyDotViewControllerImpl.this;
+                            PrivacyDotViewControllerImpl privacyDotViewControllerImpl3 = privacyDotViewControllerImpl;
                             View view = privacyDotViewControllerImpl3.currentViewState.designatedCorner;
                             if (view != null) {
                                 privacyDotViewControllerImpl3.showDotView(view);
@@ -126,13 +124,13 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onLayoutDirectionChanged(final boolean z) {
-                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this;
+                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = this.this$0;
                 privacyDotViewControllerImpl.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$configurationListener$1$onLayoutDirectionChanged$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PrivacyDotViewControllerImpl.this.setCornerVisibilities();
+                        privacyDotViewControllerImpl.setCornerVisibilities();
                         PrivacyDotViewControllerImpl$configurationListener$1 privacyDotViewControllerImpl$configurationListener$1 = this;
-                        PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = PrivacyDotViewControllerImpl.this;
+                        PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = privacyDotViewControllerImpl;
                         boolean z2 = z;
                         synchronized (privacyDotViewControllerImpl$configurationListener$1) {
                             privacyDotViewControllerImpl2.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl2.nextViewState, false, false, false, null, null, null, null, z2, 0, 0, null, privacyDotViewControllerImpl2.selectDesignatedCorner(privacyDotViewControllerImpl2.nextViewState.rotation, z2), null, 0, 0, 0, 0, null, 1044223));
@@ -145,12 +143,12 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         StatusBarStateController.StateListener stateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$statusBarStateListener$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onExpandedChanged(boolean z) {
-                PrivacyDotViewControllerImpl.access$updateStatusBarState(PrivacyDotViewControllerImpl.this);
+                PrivacyDotViewControllerImpl.access$updateStatusBarState(this.this$0);
             }
 
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onStateChanged(int i) {
-                PrivacyDotViewControllerImpl.access$updateStatusBarState(PrivacyDotViewControllerImpl.this);
+                PrivacyDotViewControllerImpl.access$updateStatusBarState(this.this$0);
             }
         };
         if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
@@ -175,18 +173,18 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             public final void onHidePersistentDot(boolean z) {
                 final PrivacyDotViewControllerImpl privacyDotViewControllerImpl;
                 DelayableExecutor delayableExecutor2;
-                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = PrivacyDotViewControllerImpl.this;
+                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = this.this$0;
                 synchronized (privacyDotViewControllerImpl2.lock) {
                     privacyDotViewControllerImpl2.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl2.nextViewState, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, null, 1048573));
                     Unit unit = Unit.INSTANCE;
                 }
-                if (!z || (delayableExecutor2 = (privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this).uiExecutor) == null) {
+                if (!z || (delayableExecutor2 = (privacyDotViewControllerImpl = this.this$0).uiExecutor) == null) {
                     return;
                 }
                 delayableExecutor2.execute(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$systemStatusAnimationCallback$1$onHidePersistentDot$2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PrivacyDotViewController.CreateListener createListener = PrivacyDotViewControllerImpl.this.createListener;
+                        PrivacyDotViewController.CreateListener createListener = privacyDotViewControllerImpl.createListener;
                         if (createListener != null) {
                             ScreenDecorations screenDecorations = ScreenDecorations.this;
                             screenDecorations.mIsDotViewVisible = false;
@@ -201,13 +199,13 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
 
             @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
             public final void onSystemStatusAnimationTransitionToPersistentDot(String str) {
-                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this;
+                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = this.this$0;
                 DelayableExecutor delayableExecutor2 = privacyDotViewControllerImpl.uiExecutor;
                 if (delayableExecutor2 != null) {
                     delayableExecutor2.execute(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$systemStatusAnimationCallback$1$onSystemStatusAnimationTransitionToPersistentDot$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            PrivacyDotViewController.CreateListener createListener = PrivacyDotViewControllerImpl.this.createListener;
+                            PrivacyDotViewController.CreateListener createListener = privacyDotViewControllerImpl.createListener;
                             if (createListener != null) {
                                 ScreenDecorations screenDecorations = ScreenDecorations.this;
                                 ScreenDecorationsLogger screenDecorationsLogger = screenDecorations.mLogger;
@@ -220,7 +218,7 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
                         }
                     });
                 }
-                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = PrivacyDotViewControllerImpl.this;
+                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = this.this$0;
                 synchronized (privacyDotViewControllerImpl2.lock) {
                     privacyDotViewControllerImpl2.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl2.nextViewState, true, false, false, null, null, null, null, false, 0, 0, null, null, str, 0, 0, 0, 0, null, 1040381));
                     Unit unit = Unit.INSTANCE;
@@ -339,13 +337,13 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         this.tr = view2;
         this.bl = view3;
         this.br = view4;
-        boolean isLayoutRtl = ((ConfigurationControllerImpl) this.configurationController).isLayoutRtl();
+        boolean zIsLayoutRtl = ((ConfigurationControllerImpl) this.configurationController).isLayoutRtl();
         View view9 = this.tl;
         if (view9 == null) {
             view9 = null;
         }
-        View selectDesignatedCorner = selectDesignatedCorner(RotationUtils.getExactRotation(view9.getContext()), isLayoutRtl);
-        PrivacyDotCorner cornerForView = selectDesignatedCorner != null ? cornerForView(selectDesignatedCorner) : null;
+        View viewSelectDesignatedCorner = selectDesignatedCorner(RotationUtils.getExactRotation(view9.getContext()), zIsLayoutRtl);
+        PrivacyDotCorner privacyDotCornerCornerForView = viewSelectDesignatedCorner != null ? cornerForView(viewSelectDesignatedCorner) : null;
         Rect statusBarContentAreaForRotation = ((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarContentAreaForRotation(3);
         Rect statusBarContentAreaForRotation2 = ((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarContentAreaForRotation(0);
         Rect statusBarContentAreaForRotation3 = ((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarContentAreaForRotation(1);
@@ -353,7 +351,7 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         int statusBarPaddingTop = ((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarPaddingTop();
         this.currentViewState = new ViewState(false, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, false, null, 1048575, null);
         synchronized (this.lock) {
-            setNextViewState(ViewState.copy$default(this.nextViewState, false, false, false, statusBarContentAreaForRotation2, statusBarContentAreaForRotation3, statusBarContentAreaForRotation4, statusBarContentAreaForRotation, isLayoutRtl, 0, statusBarPaddingTop, cornerForView, selectDesignatedCorner, null, 0, 0, 0, 0, null, 1040910));
+            setNextViewState(ViewState.copy$default(this.nextViewState, false, false, false, statusBarContentAreaForRotation2, statusBarContentAreaForRotation3, statusBarContentAreaForRotation4, statusBarContentAreaForRotation, zIsLayoutRtl, 0, statusBarPaddingTop, privacyDotCornerCornerForView, viewSelectDesignatedCorner, null, 0, 0, 0, 0, null, 1040910));
             Unit unit = Unit.INSTANCE;
         }
     }
@@ -449,18 +447,18 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         if (view4 == null) {
             view4 = null;
         }
-        int roundToInt = MathKt__MathJVMKt.roundToInt(SecQSDetailController$$ExternalSyntheticOutline0.m(view4, R.dimen.privacy_dot_margin_start) * f);
+        int iRoundToInt = MathKt__MathJVMKt.roundToInt(QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view4, R.dimen.privacy_dot_margin_start) * f);
         View view5 = this.tl;
         if (view5 == null) {
             view5 = null;
         }
-        int roundToInt2 = MathKt__MathJVMKt.roundToInt(SecQSDetailController$$ExternalSyntheticOutline0.m(view5, R.dimen.ongoing_appops_dot_diameter) * f);
+        int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view5, R.dimen.ongoing_appops_dot_diameter) * f);
         Iterator it = getViews().iterator();
         while (it.hasNext()) {
-            View findViewById = ((View) it.next()).findViewById(R.id.privacy_dot);
-            if (findViewById != null && (layoutParams = findViewById.getLayoutParams()) != null) {
-                layoutParams.width = roundToInt2;
-                layoutParams.height = roundToInt2;
+            View viewFindViewById = ((View) it.next()).findViewById(R.id.privacy_dot);
+            if (viewFindViewById != null && (layoutParams = viewFindViewById.getLayoutParams()) != null) {
+                layoutParams.width = iRoundToInt2;
+                layoutParams.height = iRoundToInt2;
             }
         }
         View view6 = this.tl;
@@ -468,7 +466,7 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             view6 = null;
         }
         boolean z = viewState.layoutRtl;
-        Rect contentRectForRotation = viewState.contentRectForRotation(activeRotationForCorner(view6, z));
+        Rect rectContentRectForRotation = viewState.contentRectForRotation(activeRotationForCorner(view6, z));
         View view7 = this.tl;
         if (view7 == null) {
             view7 = null;
@@ -480,20 +478,20 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             view8 = null;
         }
         FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) view8.getLayoutParams();
-        layoutParams2.topMargin = contentRectForRotation.top;
-        layoutParams2.height = contentRectForRotation.height();
+        layoutParams2.topMargin = rectContentRectForRotation.top;
+        layoutParams2.height = rectContentRectForRotation.height();
         int i2 = viewState.statusBarPaddingRight;
         int i3 = viewState.statusBarPaddingLeft;
         if (z) {
-            layoutParams2.width = i3 - roundToInt;
+            layoutParams2.width = i3 - iRoundToInt;
         } else {
-            layoutParams2.width = i2 - roundToInt;
+            layoutParams2.width = i2 - iRoundToInt;
         }
         View view9 = this.tr;
         if (view9 == null) {
             view9 = null;
         }
-        Rect contentRectForRotation2 = viewState.contentRectForRotation(activeRotationForCorner(view9, z));
+        Rect rectContentRectForRotation2 = viewState.contentRectForRotation(activeRotationForCorner(view9, z));
         View view10 = this.tr;
         if (view10 == null) {
             view10 = null;
@@ -504,18 +502,18 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             view11 = null;
         }
         FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) view11.getLayoutParams();
-        layoutParams3.topMargin = contentRectForRotation2.top;
-        layoutParams3.height = contentRectForRotation2.height();
+        layoutParams3.topMargin = rectContentRectForRotation2.top;
+        layoutParams3.height = rectContentRectForRotation2.height();
         if (z) {
-            layoutParams3.width = i3 - roundToInt;
+            layoutParams3.width = i3 - iRoundToInt;
         } else {
-            layoutParams3.width = i2 - roundToInt;
+            layoutParams3.width = i2 - iRoundToInt;
         }
         View view12 = this.br;
         if (view12 == null) {
             view12 = null;
         }
-        Rect contentRectForRotation3 = viewState.contentRectForRotation(activeRotationForCorner(view12, z));
+        Rect rectContentRectForRotation3 = viewState.contentRectForRotation(activeRotationForCorner(view12, z));
         View view13 = this.br;
         if (view13 == null) {
             view13 = null;
@@ -526,18 +524,18 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             view14 = null;
         }
         FrameLayout.LayoutParams layoutParams4 = (FrameLayout.LayoutParams) view14.getLayoutParams();
-        layoutParams4.topMargin = contentRectForRotation3.top;
-        layoutParams4.height = contentRectForRotation3.height();
+        layoutParams4.topMargin = rectContentRectForRotation3.top;
+        layoutParams4.height = rectContentRectForRotation3.height();
         if (z) {
-            layoutParams4.width = i3 - roundToInt;
+            layoutParams4.width = i3 - iRoundToInt;
         } else {
-            layoutParams4.width = (viewState.stableInsetRight + i2) - roundToInt;
+            layoutParams4.width = (viewState.stableInsetRight + i2) - iRoundToInt;
         }
         View view15 = this.bl;
         if (view15 == null) {
             view15 = null;
         }
-        Rect contentRectForRotation4 = viewState.contentRectForRotation(activeRotationForCorner(view15, z));
+        Rect rectContentRectForRotation4 = viewState.contentRectForRotation(activeRotationForCorner(view15, z));
         View view16 = this.bl;
         if (view16 == null) {
             view16 = null;
@@ -545,12 +543,12 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         view16.setPadding(0, i, 0, 0);
         View view17 = this.bl;
         FrameLayout.LayoutParams layoutParams5 = (FrameLayout.LayoutParams) (view17 != null ? view17 : null).getLayoutParams();
-        layoutParams5.topMargin = contentRectForRotation4.top;
-        layoutParams5.height = contentRectForRotation4.height();
+        layoutParams5.topMargin = rectContentRectForRotation4.top;
+        layoutParams5.height = rectContentRectForRotation4.height();
         if (z) {
-            layoutParams5.width = (i3 + viewState.stableInsetLeft) - roundToInt;
+            layoutParams5.width = (i3 + viewState.stableInsetLeft) - iRoundToInt;
         } else {
-            layoutParams5.width = i2 - roundToInt;
+            layoutParams5.width = i2 - iRoundToInt;
         }
     }
 
@@ -570,11 +568,11 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
             boolean z = viewState.layoutRtl;
             Unit unit = Unit.INSTANCE;
             setCornerVisibilities();
-            View selectDesignatedCorner = selectDesignatedCorner(i, z);
-            PrivacyDotCorner cornerForView = selectDesignatedCorner != null ? cornerForView(selectDesignatedCorner) : null;
+            View viewSelectDesignatedCorner = selectDesignatedCorner(i, z);
+            PrivacyDotCorner privacyDotCornerCornerForView = viewSelectDesignatedCorner != null ? cornerForView(viewSelectDesignatedCorner) : null;
             int statusBarPaddingTop = ((StatusBarContentInsetsProviderImpl) this.contentInsetsProvider).getStatusBarPaddingTop();
             synchronized (this.lock) {
-                setNextViewState(ViewState.copy$default(this.nextViewState, false, false, false, null, null, null, null, false, i, statusBarPaddingTop, cornerForView, selectDesignatedCorner, null, 0, 0, 0, 0, null, 1040895));
+                setNextViewState(ViewState.copy$default(this.nextViewState, false, false, false, null, null, null, null, false, i, statusBarPaddingTop, privacyDotCornerCornerForView, viewSelectDesignatedCorner, null, 0, 0, 0, 0, null, 1040895));
             }
         }
     }
@@ -592,58 +590,58 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
         this.cancelRunnable = this.uiExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$scheduleUpdate$1
             @Override // java.lang.Runnable
             public final void run() {
-                ViewState copy$default;
+                ViewState viewStateCopy$default;
                 View view;
                 final View view2;
                 View view3;
-                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = PrivacyDotViewControllerImpl.this;
+                final PrivacyDotViewControllerImpl privacyDotViewControllerImpl = this.this$0;
                 if (privacyDotViewControllerImpl.applyDelayNextViewState) {
                     privacyDotViewControllerImpl.applyDelayNextViewState = false;
                 }
                 synchronized (privacyDotViewControllerImpl.lock) {
-                    copy$default = ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, null, 1048575);
+                    viewStateCopy$default = ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, null, 1048575);
                     Unit unit = Unit.INSTANCE;
                 }
-                if (copy$default.viewInitialized || (privacyDotViewControllerImpl instanceof CoverPrivacyDotViewController)) {
-                    if (!copy$default.equals(privacyDotViewControllerImpl.currentViewState) || (privacyDotViewControllerImpl instanceof CoverPrivacyDotViewController)) {
-                        boolean z = (Intrinsics.areEqual(copy$default.designatedCorner, privacyDotViewControllerImpl.currentViewState.designatedCorner) && Intrinsics.areEqual(copy$default.displaySize, privacyDotViewControllerImpl.currentViewState.displaySize)) ? false : true;
+                if (viewStateCopy$default.viewInitialized || (privacyDotViewControllerImpl instanceof CoverPrivacyDotViewController)) {
+                    if (!viewStateCopy$default.equals(privacyDotViewControllerImpl.currentViewState) || (privacyDotViewControllerImpl instanceof CoverPrivacyDotViewController)) {
+                        boolean z = (Intrinsics.areEqual(viewStateCopy$default.designatedCorner, privacyDotViewControllerImpl.currentViewState.designatedCorner) && Intrinsics.areEqual(viewStateCopy$default.displaySize, privacyDotViewControllerImpl.currentViewState.displaySize)) ? false : true;
                         int i = privacyDotViewControllerImpl.currentViewState.rotation;
-                        int i2 = copy$default.rotation;
+                        int i2 = viewStateCopy$default.rotation;
                         if (i2 != i || z) {
-                            privacyDotViewControllerImpl.updateRotations(i2, copy$default.paddingTop);
+                            privacyDotViewControllerImpl.updateRotations(i2, viewStateCopy$default.paddingTop);
                         }
-                        if (privacyDotViewControllerImpl.needsLayout(copy$default, privacyDotViewControllerImpl.currentViewState)) {
-                            privacyDotViewControllerImpl.setCornerSizes(copy$default);
+                        if (privacyDotViewControllerImpl.needsLayout(viewStateCopy$default, privacyDotViewControllerImpl.currentViewState)) {
+                            privacyDotViewControllerImpl.setCornerSizes(viewStateCopy$default);
                             Iterator it = privacyDotViewControllerImpl.getViews().iterator();
                             while (it.hasNext()) {
                                 ((View) it.next()).requestLayout();
                             }
                         }
-                        String str = copy$default.contentDescription;
+                        String str = viewStateCopy$default.contentDescription;
                         if (z) {
                             View view4 = privacyDotViewControllerImpl.currentViewState.designatedCorner;
                             if (view4 != null) {
                                 view4.setContentDescription(null);
                             }
-                            View view5 = copy$default.designatedCorner;
+                            View view5 = viewStateCopy$default.designatedCorner;
                             if (view5 != null) {
                                 view5.setContentDescription(str);
                             }
-                            View view6 = copy$default.designatedCorner;
-                            if (privacyDotViewControllerImpl.shouldShowDot(copy$default) && view6 != null) {
+                            View view6 = viewStateCopy$default.designatedCorner;
+                            if (privacyDotViewControllerImpl.shouldShowDot(viewStateCopy$default) && view6 != null) {
                                 view6.clearAnimation();
                                 view6.setVisibility(0);
                                 view6.setAlpha(0.0f);
                                 view6.animate().alpha(1.0f).setDuration(300L).start();
                             }
-                        } else if (!Intrinsics.areEqual(str, privacyDotViewControllerImpl.currentViewState.contentDescription) && (view = copy$default.designatedCorner) != null) {
+                        } else if (!Intrinsics.areEqual(str, privacyDotViewControllerImpl.currentViewState.contentDescription) && (view = viewStateCopy$default.designatedCorner) != null) {
                             view.setContentDescription(str);
                         }
-                        boolean shouldShowDot = privacyDotViewControllerImpl.shouldShowDot(copy$default);
-                        if (shouldShowDot != privacyDotViewControllerImpl.shouldShowDot(privacyDotViewControllerImpl.currentViewState)) {
-                            if (shouldShowDot && (view3 = copy$default.designatedCorner) != null) {
+                        boolean zShouldShowDot = privacyDotViewControllerImpl.shouldShowDot(viewStateCopy$default);
+                        if (zShouldShowDot != privacyDotViewControllerImpl.shouldShowDot(privacyDotViewControllerImpl.currentViewState)) {
+                            if (zShouldShowDot && (view3 = viewStateCopy$default.designatedCorner) != null) {
                                 privacyDotViewControllerImpl.showDotView(view3);
-                            } else if (!shouldShowDot && (view2 = copy$default.designatedCorner) != null) {
+                            } else if (!zShouldShowDot && (view2 = viewStateCopy$default.designatedCorner) != null) {
                                 view2.clearAnimation();
                                 view2.animate().setDuration(160L).setInterpolator(Interpolators.ALPHA_OUT).alpha(0.0f).withEndAction(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$hideDotView$1
                                     @Override // java.lang.Runnable
@@ -654,18 +652,18 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
                                 }).start();
                             }
                         }
-                        if (shouldShowDot) {
-                            String viewState3 = copy$default.toString();
+                        if (zShouldShowDot) {
+                            String string = viewStateCopy$default.toString();
                             PrivacyLogger privacyLogger = privacyDotViewControllerImpl.privacyLogger;
                             privacyLogger.getClass();
                             LogLevel logLevel = LogLevel.INFO;
                             PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(0);
                             LogBuffer logBuffer = privacyLogger.buffer;
-                            LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-                            ((LogMessageImpl) obtain).str1 = viewState3;
-                            logBuffer.commit(obtain);
+                            LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+                            ((LogMessageImpl) logMessageObtain).str1 = string;
+                            logBuffer.commit(logMessageObtain);
                         }
-                        privacyDotViewControllerImpl.currentViewState = copy$default;
+                        privacyDotViewControllerImpl.currentViewState = viewStateCopy$default;
                     }
                 }
             }
@@ -693,9 +691,9 @@ public class PrivacyDotViewControllerImpl implements PrivacyDotViewController {
     public void updateRotations(int i, int i2) {
         for (View view : getViews()) {
             view.setPadding(0, i2, 0, 0);
-            PrivacyDotCorner rotatedCorner = PrivacyDotCornerKt.rotatedCorner(cornerForView(view), i);
-            ((FrameLayout.LayoutParams) view.getLayoutParams()).gravity = rotatedCorner.getGravity();
-            ((FrameLayout.LayoutParams) view.requireViewById(R.id.privacy_dot).getLayoutParams()).gravity = rotatedCorner.getInnerGravity();
+            PrivacyDotCorner privacyDotCornerRotatedCorner = PrivacyDotCornerKt.rotatedCorner(cornerForView(view), i);
+            ((FrameLayout.LayoutParams) view.getLayoutParams()).gravity = privacyDotCornerRotatedCorner.getGravity();
+            ((FrameLayout.LayoutParams) view.requireViewById(R.id.privacy_dot).getLayoutParams()).gravity = privacyDotCornerRotatedCorner.getInnerGravity();
         }
     }
 }

@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MagnificationGestureDetector {
     public final MagnificationGestureDetector$$ExternalSyntheticLambda0 mCancelTapGestureRunnable;
@@ -22,7 +21,6 @@ public class MagnificationGestureDetector {
     public boolean mDetectSingleTap = true;
     public boolean mDraggingDetected = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LongTouchRunnable implements Runnable {
         public final View mView;
 
@@ -39,7 +37,6 @@ public class MagnificationGestureDetector {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnGestureListener {
         boolean onDrag(View view, float f, float f2);
 
@@ -62,7 +59,7 @@ public class MagnificationGestureDetector {
         this.mCancelTapGestureRunnable = new Runnable() { // from class: com.android.systemui.accessibility.MagnificationGestureDetector$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                MagnificationGestureDetector.this.mDetectSingleTap = false;
+                this.f$0.mDetectSingleTap = false;
             }
         };
     }
@@ -88,63 +85,63 @@ public class MagnificationGestureDetector {
             onGestureListener.onStart();
             return true;
         }
-        if (actionMasked != 1) {
-            if (actionMasked == 2) {
-                stopSingleTapDetectionIfNeeded(rawX, rawY);
-                if (this.mDraggingDetected) {
-                    if (!this.mVibratorNoti) {
-                        view.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
-                        this.mVibratorNoti = true;
-                    }
-                    PointF pointF = this.mPointerLocation;
-                    if (Float.isNaN(pointF.x) || Float.isNaN(pointF.y)) {
-                        this.mPointerLocation.set(this.mPointerDown);
-                    }
-                    PointF pointF2 = this.mPointerLocation;
-                    float f = rawX - pointF2.x;
-                    float f2 = rawY - pointF2.y;
-                    pointF2.set(rawX, rawY);
-                    return onGestureListener.onDrag(view, f, f2);
-                }
-            } else if (actionMasked != 3) {
-                if (actionMasked == 5) {
-                    handler.removeCallbacks(magnificationGestureDetector$$ExternalSyntheticLambda0);
-                    this.mDetectSingleTap = false;
-                    return false;
-                }
+        if (actionMasked == 1) {
+            handler.removeCallbacks(this.mLongTapGestureRunnable);
+            this.mLongTapGestureRunnable = null;
+            stopSingleTapDetectionIfNeeded(rawX, rawY);
+            if (this.mDetectSingleTap) {
+                onGestureListener.onSingleTap(view);
+                z = true;
             }
-            return false;
-        }
-        handler.removeCallbacks(this.mLongTapGestureRunnable);
-        this.mLongTapGestureRunnable = null;
-        stopSingleTapDetectionIfNeeded(rawX, rawY);
-        if (this.mDetectSingleTap) {
-            onGestureListener.onSingleTap(view);
-            z = true;
-            boolean onFinish = z | onGestureListener.onFinish();
-            PointF pointF3 = this.mPointerDown;
-            pointF3.x = Float.NaN;
-            pointF3.y = Float.NaN;
-            PointF pointF4 = this.mPointerLocation;
-            pointF4.x = Float.NaN;
-            pointF4.y = Float.NaN;
+            boolean zOnFinish = z | onGestureListener.onFinish();
+            PointF pointF = this.mPointerDown;
+            pointF.x = Float.NaN;
+            pointF.y = Float.NaN;
+            PointF pointF2 = this.mPointerLocation;
+            pointF2.x = Float.NaN;
+            pointF2.y = Float.NaN;
             handler.removeCallbacks(magnificationGestureDetector$$ExternalSyntheticLambda0);
             this.mDetectSingleTap = true;
             this.mDraggingDetected = false;
-            return onFinish;
+            return zOnFinish;
         }
+        if (actionMasked == 2) {
+            stopSingleTapDetectionIfNeeded(rawX, rawY);
+            if (this.mDraggingDetected) {
+                if (!this.mVibratorNoti) {
+                    view.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
+                    this.mVibratorNoti = true;
+                }
+                PointF pointF3 = this.mPointerLocation;
+                if (Float.isNaN(pointF3.x) || Float.isNaN(pointF3.y)) {
+                    this.mPointerLocation.set(this.mPointerDown);
+                }
+                PointF pointF4 = this.mPointerLocation;
+                float f = rawX - pointF4.x;
+                float f2 = rawY - pointF4.y;
+                pointF4.set(rawX, rawY);
+                return onGestureListener.onDrag(view, f, f2);
+            }
+        } else if (actionMasked != 3) {
+            if (actionMasked == 5) {
+                handler.removeCallbacks(magnificationGestureDetector$$ExternalSyntheticLambda0);
+                this.mDetectSingleTap = false;
+                return false;
+            }
+        }
+        return false;
         z = false;
-        boolean onFinish2 = z | onGestureListener.onFinish();
-        PointF pointF32 = this.mPointerDown;
-        pointF32.x = Float.NaN;
-        pointF32.y = Float.NaN;
-        PointF pointF42 = this.mPointerLocation;
-        pointF42.x = Float.NaN;
-        pointF42.y = Float.NaN;
+        boolean zOnFinish2 = z | onGestureListener.onFinish();
+        PointF pointF5 = this.mPointerDown;
+        pointF5.x = Float.NaN;
+        pointF5.y = Float.NaN;
+        PointF pointF22 = this.mPointerLocation;
+        pointF22.x = Float.NaN;
+        pointF22.y = Float.NaN;
         handler.removeCallbacks(magnificationGestureDetector$$ExternalSyntheticLambda0);
         this.mDetectSingleTap = true;
         this.mDraggingDetected = false;
-        return onFinish2;
+        return zOnFinish2;
     }
 
     public final void stopSingleTapDetectionIfNeeded(float f, float f2) {

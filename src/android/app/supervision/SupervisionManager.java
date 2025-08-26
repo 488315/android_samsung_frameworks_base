@@ -25,11 +25,11 @@ public class SupervisionManager {
             return null;
         }
         try {
-            Intent createConfirmSupervisionCredentialsIntent = iSupervisionManager.createConfirmSupervisionCredentialsIntent();
-            if (createConfirmSupervisionCredentialsIntent != null) {
-                createConfirmSupervisionCredentialsIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+            Intent intentCreateConfirmSupervisionCredentialsIntent = iSupervisionManager.createConfirmSupervisionCredentialsIntent();
+            if (intentCreateConfirmSupervisionCredentialsIntent != null) {
+                intentCreateConfirmSupervisionCredentialsIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
             }
-            return createConfirmSupervisionCredentialsIntent;
+            return intentCreateConfirmSupervisionCredentialsIntent;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

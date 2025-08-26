@@ -2,11 +2,10 @@ package androidx.compose.ui.node;
 
 import androidx.compose.ui.Modifier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NodeCoordinatorKt {
     /* renamed from: access$nextUntil-hw7D004, reason: not valid java name */
-    public static final Modifier.Node m680access$nextUntilhw7D004(DelegatableNode delegatableNode, int i) {
+    public static final Modifier.Node m682access$nextUntilhw7D004(DelegatableNode delegatableNode, int i) {
         Modifier.Node node = ((Modifier.Node) delegatableNode).node.child;
         if (node == null || (node.aggregateChildKindSet & i) == 0) {
             return null;

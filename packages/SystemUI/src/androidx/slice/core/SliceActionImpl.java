@@ -8,7 +8,6 @@ import androidx.slice.SliceItem;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceActionImpl implements SliceAction {
     public final PendingIntent mAction;
@@ -25,7 +24,6 @@ public class SliceActionImpl implements SliceAction {
     public final SliceItem mSliceItem;
     public final CharSequence mTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.slice.core.SliceActionImpl$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$slice$core$SliceActionImpl$ActionType;
@@ -48,7 +46,6 @@ public class SliceActionImpl implements SliceAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ActionType {
         DEFAULT,
         TOGGLE,
@@ -174,81 +171,58 @@ public class SliceActionImpl implements SliceAction {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0078  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public SliceActionImpl(SliceItem sliceItem) {
-        char c;
         this.mImageMode = 5;
         ActionType actionType = ActionType.DEFAULT;
         this.mActionType = actionType;
         this.mPriority = -1;
         this.mDateTimeMillis = -1L;
         this.mSliceItem = sliceItem;
-        SliceItem find = SliceQuery.find(sliceItem, "action", (String[]) null, (String[]) null);
-        if (find == null) {
+        SliceItem sliceItemFind = SliceQuery.find(sliceItem, "action", (String[]) null, (String[]) null);
+        if (sliceItemFind == null) {
             return;
         }
-        this.mActionItem = find;
-        this.mAction = find.getAction();
-        SliceItem find2 = SliceQuery.find(find.getSlice(), "image", (String[]) null, (String[]) null);
-        if (find2 != null) {
-            this.mIcon = (IconCompat) find2.mObj;
-            this.mImageMode = parseImageMode(find2);
+        this.mActionItem = sliceItemFind;
+        this.mAction = sliceItemFind.getAction();
+        SliceItem sliceItemFind2 = SliceQuery.find(sliceItemFind.getSlice(), "image", (String[]) null, (String[]) null);
+        if (sliceItemFind2 != null) {
+            this.mIcon = (IconCompat) sliceItemFind2.mObj;
+            this.mImageMode = parseImageMode(sliceItemFind2);
         }
-        SliceItem find3 = SliceQuery.find(find.getSlice(), "text", UniversalCredentialUtil.AGENT_TITLE);
-        if (find3 != null) {
-            this.mTitle = find3.getSanitizedText();
+        SliceItem sliceItemFind3 = SliceQuery.find(sliceItemFind.getSlice(), "text", UniversalCredentialUtil.AGENT_TITLE);
+        if (sliceItemFind3 != null) {
+            this.mTitle = sliceItemFind3.getSanitizedText();
         }
-        SliceItem findSubtype = SliceQuery.findSubtype(find.getSlice(), "text", "content_description");
-        if (findSubtype != null) {
-            this.mContentDescription = (CharSequence) findSubtype.mObj;
+        SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(sliceItemFind.getSlice(), "text", "content_description");
+        if (sliceItemFindSubtype != null) {
+            this.mContentDescription = (CharSequence) sliceItemFindSubtype.mObj;
         }
-        String str = find.mSubType;
+        String str = sliceItemFind.mSubType;
         if (str == null) {
             this.mActionType = actionType;
         } else {
-            switch (str.hashCode()) {
-                case -868304044:
-                    if (str.equals("toggle")) {
-                        c = 0;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 759128640:
-                    if (str.equals("time_picker")) {
-                        c = 1;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 1250407999:
-                    if (str.equals("date_picker")) {
-                        c = 2;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                default:
-                    c = 65535;
-                    break;
-            }
-            switch (c) {
-                case 0:
+            switch (str) {
+                case "toggle":
                     this.mActionType = ActionType.TOGGLE;
-                    this.mIsChecked = ArrayUtils.contains(find.mHints, "selected");
+                    this.mIsChecked = ArrayUtils.contains(sliceItemFind.mHints, "selected");
                     break;
-                case 1:
+                case "time_picker":
                     this.mActionType = ActionType.TIME_PICKER;
-                    SliceItem findSubtype2 = SliceQuery.findSubtype(find, "long", "millis");
-                    if (findSubtype2 != null) {
-                        this.mDateTimeMillis = findSubtype2.getLong();
+                    SliceItem sliceItemFindSubtype2 = SliceQuery.findSubtype(sliceItemFind, "long", "millis");
+                    if (sliceItemFindSubtype2 != null) {
+                        this.mDateTimeMillis = sliceItemFindSubtype2.getLong();
                         break;
                     }
                     break;
-                case 2:
+                case "date_picker":
                     this.mActionType = ActionType.DATE_PICKER;
-                    SliceItem findSubtype3 = SliceQuery.findSubtype(find, "long", "millis");
-                    if (findSubtype3 != null) {
-                        this.mDateTimeMillis = findSubtype3.getLong();
+                    SliceItem sliceItemFindSubtype3 = SliceQuery.findSubtype(sliceItemFind, "long", "millis");
+                    if (sliceItemFindSubtype3 != null) {
+                        this.mDateTimeMillis = sliceItemFindSubtype3.getLong();
                         break;
                     }
                     break;
@@ -258,11 +232,11 @@ public class SliceActionImpl implements SliceAction {
             }
         }
         this.mIsActivity = ArrayUtils.contains(sliceItem.mHints, "activity");
-        SliceItem findSubtype4 = SliceQuery.findSubtype(find.getSlice(), "int", SystemUIAnalytics.QPNE_VID_PRIORITY);
-        this.mPriority = findSubtype4 != null ? findSubtype4.getInt() : -1;
-        SliceItem findSubtype5 = SliceQuery.findSubtype(find.getSlice(), "text", "action_key");
-        if (findSubtype5 != null) {
-            this.mActionKey = ((CharSequence) findSubtype5.mObj).toString();
+        SliceItem sliceItemFindSubtype4 = SliceQuery.findSubtype(sliceItemFind.getSlice(), "int", SystemUIAnalytics.QPNE_VID_PRIORITY);
+        this.mPriority = sliceItemFindSubtype4 != null ? sliceItemFindSubtype4.getInt() : -1;
+        SliceItem sliceItemFindSubtype5 = SliceQuery.findSubtype(sliceItemFind.getSlice(), "text", "action_key");
+        if (sliceItemFindSubtype5 != null) {
+            this.mActionKey = ((CharSequence) sliceItemFindSubtype5.mObj).toString();
         }
     }
 }

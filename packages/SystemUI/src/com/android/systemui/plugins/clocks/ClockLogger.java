@@ -16,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockLogger extends Logger {
     private float loggedAlpha;
@@ -27,7 +26,6 @@ public final class ClockLogger extends Logger {
     private static final LogcatOnlyMessageBuffer DEBUG_MESSAGE_BUFFER = new LogcatOnlyMessageBuffer(LogLevel.DEBUG);
     private static final ClockLogger INIT_LOGGER = new ClockLogger(null, new LogcatOnlyMessageBuffer(LogLevel.ERROR), "CLOCK_INIT");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,7 +77,7 @@ public final class ClockLogger extends Logger {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final String animateFidget$lambda$18(LogMessage logMessage) {
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("animateFidget(", VPointF.m2764toStringimpl(VPointF.Companion.m2769fromLongAsyRdg(logMessage.getLong1())), ")");
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("animateFidget(", VPointF.m2782toStringimpl(VPointF.Companion.m2787fromLongAsyRdg(logMessage.getLong1())), ")");
     }
 
     public static final String escapeTime(String str) {
@@ -112,7 +110,7 @@ public final class ClockLogger extends Logger {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final String onLayout$lambda$2(LogMessage logMessage) {
-        return "onLayout(" + logMessage.getBool1() + ", " + VRect.m2802toStringimpl(VRect.Companion.m2806fromLongqYjogQA(logMessage.getLong1())) + ")";
+        return "onLayout(" + logMessage.getBool1() + ", " + VRect.m2820toStringimpl(VRect.Companion.m2824fromLongqYjogQA(logMessage.getLong1())) + ")";
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -149,17 +147,17 @@ public final class ClockLogger extends Logger {
 
     public final void animateDoze(boolean z, boolean z2) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(0);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setBool1(z);
-        obtain.setBool2(z2);
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setBool1(z);
+        logMessageObtain.setBool2(z2);
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void animateFidget(float f, float f2) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(8);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setLong1(VPointF.m2762toLongimpl(VPointF.m2731constructorimpl(f, f2)));
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setLong1(VPointF.m2780toLongimpl(VPointF.m2749constructorimpl(f, f2)));
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void invalidate() {
@@ -175,28 +173,28 @@ public final class ClockLogger extends Logger {
 
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(4);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setBool1(z);
-        obtain.setLong1(VRect.m2800toLongimpl(VRect.m2785constructorimpl(i, i2, i3, i4)));
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setBool1(z);
+        logMessageObtain.setLong1(VRect.m2818toLongimpl(VRect.m2803constructorimpl(i, i2, i3, i4)));
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void onMeasure(int i, int i2) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(2);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setInt1(i);
-        obtain.setInt2(i2);
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setInt1(i);
+        logMessageObtain.setInt2(i2);
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void onViewAdded(View view) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(3);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
         String simpleName = Reflection.getOrCreateKotlinClass(view.getClass()).getSimpleName();
         simpleName.getClass();
-        obtain.setStr1(simpleName);
-        obtain.setInt1(view.getId());
-        getBuffer().commit(obtain);
+        logMessageObtain.setStr1(simpleName);
+        logMessageObtain.setInt1(view.getId());
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void refreshTime() {
@@ -214,9 +212,9 @@ public final class ClockLogger extends Logger {
     public final void setAlpha(float f) {
         if (Math.abs(this.loggedAlpha - f) >= ((f <= 0.0f || f >= 1.0f) ? 0.001f : 0.5f)) {
             this.loggedAlpha = f;
-            LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, new ClockLogger$$ExternalSyntheticLambda0(7), null);
-            obtain.setDouble1(f);
-            getBuffer().commit(obtain);
+            LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, new ClockLogger$$ExternalSyntheticLambda0(7), null);
+            logMessageObtain.setDouble1(f);
+            getBuffer().commit(logMessageObtain);
         }
     }
 
@@ -224,36 +222,36 @@ public final class ClockLogger extends Logger {
         View view = this.view;
         if (view == null || i != view.getVisibility()) {
             ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(6);
-            LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-            obtain.setInt1(i);
-            getBuffer().commit(obtain);
+            LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setInt1(i);
+            getBuffer().commit(logMessageObtain);
         }
     }
 
     public final void updateAxes(String str, String str2, boolean z) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(5);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.INFO, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setStr1(str);
-        obtain.setStr2(str2);
-        obtain.setBool1(z);
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.INFO, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setStr1(str);
+        logMessageObtain.setStr2(str2);
+        logMessageObtain.setBool1(z);
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void onDraw(String str) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(9);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
         if (str == null) {
             str = "";
         }
-        obtain.setStr1(str);
-        getBuffer().commit(obtain);
+        logMessageObtain.setStr1(str);
+        getBuffer().commit(logMessageObtain);
     }
 
     public final void onDraw(String str, String str2) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(1);
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        obtain.setStr1(str);
-        obtain.setStr2(str2);
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setStr1(str);
+        logMessageObtain.setStr2(str2);
+        getBuffer().commit(logMessageObtain);
     }
 }

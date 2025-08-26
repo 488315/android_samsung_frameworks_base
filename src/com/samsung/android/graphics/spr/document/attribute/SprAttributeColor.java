@@ -60,19 +60,19 @@ public abstract class SprAttributeColor extends SprAttributeBase {
 
     @Override // com.samsung.android.graphics.spr.document.attribute.SprAttributeBase
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
-        byte readByte = sprInputStream.readByte();
-        this.colorType = readByte;
-        if (readByte == 0) {
+        byte b = sprInputStream.readByte();
+        this.colorType = b;
+        if (b == 0) {
             sprInputStream.readInt();
             return;
         }
-        if (readByte == 1 || readByte == 2) {
+        if (b == 1 || b == 2) {
             this.color = sprInputStream.readInt();
             return;
         }
-        if (readByte == 3) {
+        if (b == 3) {
             this.gradient = new SprLinearGradient(sprInputStream);
-        } else if (readByte == 4) {
+        } else if (b == 4) {
             this.gradient = new SprRadialGradient(sprInputStream);
         } else {
             throw new RuntimeException("unknown fill type:" + ((int) this.colorType));
@@ -113,11 +113,11 @@ public abstract class SprAttributeColor extends SprAttributeBase {
 
     @Override // com.samsung.android.graphics.spr.document.attribute.SprAttributeBase
     /* renamed from: clone */
-    public SprAttributeColor mo9221clone() throws CloneNotSupportedException {
-        SprAttributeColor sprAttributeColor = (SprAttributeColor) super.mo9221clone();
+    public SprAttributeColor mo9233clone() throws CloneNotSupportedException {
+        SprAttributeColor sprAttributeColor = (SprAttributeColor) super.mo9233clone();
         SprGradientBase sprGradientBase = this.gradient;
         if (sprGradientBase != null) {
-            sprAttributeColor.gradient = sprGradientBase.m9222clone();
+            sprAttributeColor.gradient = sprGradientBase.m9234clone();
         }
         return sprAttributeColor;
     }

@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDialogEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.IDialogEventListener";
 
     void onDialogEvent(DialogEvent dialogEvent) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDialogEventListener {
         static final int TRANSACTION_onDialogEvent = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IDialogEventListener {
             private IBinder mRemote;
 
@@ -36,16 +33,16 @@ public interface IDialogEventListener extends IInterface {
 
             @Override // com.sec.ims.IDialogEventListener
             public void onDialogEvent(DialogEvent dialogEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDialogEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(dialogEvent, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDialogEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dialogEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -58,8 +55,8 @@ public interface IDialogEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDialogEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IDialogEventListener)) ? new Proxy(iBinder) : (IDialogEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDialogEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDialogEventListener)) ? new Proxy(iBinder) : (IDialogEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -87,7 +84,6 @@ public interface IDialogEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IDialogEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -14,13 +14,11 @@ import com.android.systemui.statusbar.pipeline.wifi.ui.WifiUiAdapter;
 import dagger.Lazy;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DarkIconManager extends IconManager {
     public final DarkIconDispatcher mDarkIconDispatcher;
     public final int mIconHorizontalMargin;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         DarkIconManager create(LinearLayout linearLayout, StatusBarLocation statusBarLocation, DarkIconDispatcher darkIconDispatcher);
     }
@@ -47,10 +45,10 @@ public class DarkIconManager extends IconManager {
 
     @Override // com.android.systemui.statusbar.phone.ui.IconManager
     public final LinearLayout.LayoutParams onCreateLayoutParams(StatusBarIcon.Shape shape) {
-        LinearLayout.LayoutParams onCreateLayoutParams = super.onCreateLayoutParams(shape);
+        LinearLayout.LayoutParams layoutParamsOnCreateLayoutParams = super.onCreateLayoutParams(shape);
         int i = this.mIconHorizontalMargin;
-        onCreateLayoutParams.setMargins(i, 0, i, 0);
-        return onCreateLayoutParams;
+        layoutParamsOnCreateLayoutParams.setMargins(i, 0, i, 0);
+        return layoutParamsOnCreateLayoutParams;
     }
 
     @Override // com.android.systemui.statusbar.phone.ui.IconManager

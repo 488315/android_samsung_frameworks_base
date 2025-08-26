@@ -457,7 +457,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
 
     @Override // android.content.pm.PackageItemInfo
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, int i) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         super.dumpDebug(protoOutputStream, 1146756268033L, i);
         protoOutputStream.write(1138166333442L, this.permission);
         protoOutputStream.write(1138166333443L, this.processName);
@@ -498,15 +498,15 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
                 protoOutputStream.write(ApplicationInfoProto.SPLIT_CLASS_LOADER_NAMES, str5);
             }
         }
-        long start2 = protoOutputStream.start(1146756268048L);
+        long jStart2 = protoOutputStream.start(1146756268048L);
         protoOutputStream.write(1133871366145L, this.enabled);
         protoOutputStream.write(1120986464258L, this.minSdkVersion);
         protoOutputStream.write(1120986464259L, this.targetSdkVersion);
         protoOutputStream.write(1120986464260L, this.longVersionCode);
         protoOutputStream.write(1120986464261L, this.targetSandboxVersion);
-        protoOutputStream.end(start2);
+        protoOutputStream.end(jStart2);
         if ((i & 1) != 0) {
-            long start3 = protoOutputStream.start(1146756268049L);
+            long jStart3 = protoOutputStream.start(1146756268049L);
             String str6 = this.className;
             if (str6 != null) {
                 protoOutputStream.write(1138166333441L, str6);
@@ -569,7 +569,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
             }
             protoOutputStream.write(1133871366166L, this.allowCrossUidActivitySwitchFromBelow);
             protoOutputStream.write(1120986464279L, this.mPageSizeAppCompatFlags);
-            protoOutputStream.end(start3);
+            protoOutputStream.end(jStart3);
         }
         if (!ArrayUtils.isEmpty(this.mKnownActivityEmbeddingCerts)) {
             Iterator<String> it = this.mKnownActivityEmbeddingCerts.iterator();
@@ -577,7 +577,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
                 protoOutputStream.write(ApplicationInfoProto.KNOWN_ACTIVITY_EMBEDDING_CERTS, it.next());
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public boolean hasRtlSupport() {
@@ -829,7 +829,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     /* renamed from: android.content.pm.ApplicationInfo$1, reason: invalid class name */
     class AnonymousClass1 implements Parcelable.Creator<ApplicationInfo> {
         /* renamed from: $r8$lambda$1E1P6HJEl7Ns7qcxzJ0zM-xcHGA, reason: not valid java name */
-        public static /* synthetic */ ApplicationInfo m1018$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(Parcel parcel) {
+        public static /* synthetic */ ApplicationInfo m1022$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(Parcel parcel) {
             return new ApplicationInfo(parcel);
         }
 
@@ -842,7 +842,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
             return (ApplicationInfo) parcel.readSquashed(new Parcel.SquashReadHelper() { // from class: android.content.pm.ApplicationInfo$1$$ExternalSyntheticLambda0
                 @Override // android.os.Parcel.SquashReadHelper
                 public final Object readRawParceled(Parcel parcel2) {
-                    return ApplicationInfo.AnonymousClass1.m1018$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(parcel2);
+                    return ApplicationInfo.AnonymousClass1.m1022$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(parcel2);
                 }
             });
         }
@@ -945,19 +945,19 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
         this.nativeHeapZeroInitialized = parcel.readInt();
         this.requestRawExternalStorageAccess = sForBoolean.unparcel(parcel);
         this.createTimestamp = parcel.readLong();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            this.mAppClassNamesByProcess = new ArrayMap<>(readInt);
-            for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        if (i > 0) {
+            this.mAppClassNamesByProcess = new ArrayMap<>(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mAppClassNamesByProcess.put(parcel.readString(), parcel.readString());
             }
         }
         this.localeConfigRes = parcel.readInt();
         this.allowCrossUidActivitySwitchFromBelow = parcel.readInt() != 0;
         this.mPageSizeAppCompatFlags = parcel.readInt();
-        Set<String> unparcel = sForStringSet.unparcel(parcel);
-        this.mKnownActivityEmbeddingCerts = unparcel;
-        if (unparcel.isEmpty()) {
+        Set<String> setUnparcel = sForStringSet.unparcel(parcel);
+        this.mKnownActivityEmbeddingCerts = setUnparcel;
+        if (setUnparcel.isEmpty()) {
             this.mKnownActivityEmbeddingCerts = null;
         }
     }

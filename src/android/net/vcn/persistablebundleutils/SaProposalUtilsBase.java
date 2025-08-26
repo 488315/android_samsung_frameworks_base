@@ -58,17 +58,13 @@ abstract class SaProposalUtilsBase {
         persistableBundle.putIntArray(INTEGRITY_ALGO_KEY, saProposal.getIntegrityAlgorithms().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda1
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray());
         persistableBundle.putIntArray(DH_GROUP_KEY, saProposal.getDhGroups().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda2
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray());
         return persistableBundle;

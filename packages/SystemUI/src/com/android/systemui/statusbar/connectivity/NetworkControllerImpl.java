@@ -30,6 +30,8 @@ import android.telephony.TelephonyManager;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.SparseArray;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.keyguard.CarrierTextController$$ExternalSyntheticOutline0;
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
@@ -84,7 +86,6 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NetworkControllerImpl extends BroadcastReceiver implements NetworkController, DemoMode, Dumpable {
     public final AccessPointControllerImpl mAccessPoints;
@@ -145,7 +146,6 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     public static final boolean CHATTY = Log.isLoggable("NetworkControllerChat", 3);
     public static final SimpleDateFormat SSDF = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.connectivity.NetworkControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 implements ConfigurationController.ConfigurationListener {
         public AnonymousClass1() {
@@ -159,7 +159,6 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.connectivity.NetworkControllerImpl$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
@@ -169,14 +168,13 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
             NetworkControllerImpl networkControllerImpl = NetworkControllerImpl.this;
             networkControllerImpl.mCallbackHandler.setMobileDataEnabled(z);
             for (int i = 0; i < networkControllerImpl.mMobileSignalControllers.size(); i++) {
-                MobileSignalController valueAt = networkControllerImpl.mMobileSignalControllers.valueAt(i);
-                valueAt.checkDefaultData();
-                valueAt.notifyListenersIfNecessary();
+                MobileSignalController mobileSignalControllerValueAt = networkControllerImpl.mMobileSignalControllers.valueAt(i);
+                mobileSignalControllerValueAt.checkDefaultData();
+                mobileSignalControllerValueAt.notifyListenersIfNecessary();
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.connectivity.NetworkControllerImpl$7, reason: invalid class name */
     public class AnonymousClass7 extends AsyncTask {
         public final /* synthetic */ boolean val$enabled;
@@ -229,7 +227,6 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubListener extends SubscriptionManager.OnSubscriptionsChangedListener {
         public SubListener(Looper looper) {
             super(looper);
@@ -244,7 +241,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     }
 
     /* renamed from: -$$Nest$mgetProcessedTransportTypes, reason: not valid java name */
-    public static int[] m2948$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl networkControllerImpl, NetworkCapabilities networkCapabilities) {
+    public static int[] m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl networkControllerImpl, NetworkCapabilities networkCapabilities) {
         networkControllerImpl.getClass();
         int[] transportTypes = networkCapabilities.getTransportTypes();
         for (int i = 0; i < transportTypes.length; i++) {
@@ -329,16 +326,16 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     public final void dump(PrintWriter printWriter, String[] strArr) {
         String str;
         String[] strArr2;
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NetworkController state:", "  mUserSetup=");
-        m.append(this.mUserSetup);
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NetworkController state:", "  mUserSetup=");
+        sbM.append(this.mUserSetup);
+        printWriter.println(sbM.toString());
         printWriter.println("  - telephony ------");
         printWriter.print("  hasVoiceCallingFeature()=");
         int i = 0;
         printWriter.println(this.mPhone.getPhoneType() != 0);
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mListening="), this.mListening, printWriter, "  mActiveMobileDataSubscription=");
-        m2.append(this.mActiveMobileDataSubscription);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mListening="), this.mListening, printWriter, "  mActiveMobileDataSubscription=");
+        sbM2.append(this.mActiveMobileDataSubscription);
+        printWriter.println(sbM2.toString());
         printWriter.println("  - connectivity ------");
         printWriter.print("  mConnectedTransports=");
         printWriter.println(this.mConnectedTransports);
@@ -444,19 +441,19 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     public void handleConfigurationChanged() {
         updateMobileControllers();
         for (int i = 0; i < this.mMobileSignalControllers.size(); i++) {
-            MobileSignalController valueAt = this.mMobileSignalControllers.valueAt(i);
-            valueAt.mConfig = this.mConfig;
-            Context context = valueAt.mContext;
-            int subscriptionId = valueAt.mSubscriptionInfo.getSubscriptionId();
+            MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
+            mobileSignalControllerValueAt.mConfig = this.mConfig;
+            Context context = mobileSignalControllerValueAt.mContext;
+            int subscriptionId = mobileSignalControllerValueAt.mSubscriptionInfo.getSubscriptionId();
             CarrierConfigManager carrierConfigManager = (CarrierConfigManager) context.getSystemService(CarrierConfigManager.class);
             PersistableBundle configForSubId = carrierConfigManager != null ? carrierConfigManager.getConfigForSubId(subscriptionId) : null;
-            valueAt.mInflateSignalStrengths = configForSubId != null && configForSubId.getBoolean("inflate_signal_strength_bool", false);
-            MobileMappings.Config config = valueAt.mConfig;
-            MobileMappingsProxyImpl mobileMappingsProxyImpl = (MobileMappingsProxyImpl) valueAt.mMobileMappingsProxy;
+            mobileSignalControllerValueAt.mInflateSignalStrengths = configForSubId != null && configForSubId.getBoolean("inflate_signal_strength_bool", false);
+            MobileMappings.Config config = mobileSignalControllerValueAt.mConfig;
+            MobileMappingsProxyImpl mobileMappingsProxyImpl = (MobileMappingsProxyImpl) mobileSignalControllerValueAt.mMobileMappingsProxy;
             mobileMappingsProxyImpl.getClass();
-            valueAt.mNetworkToIconLookup = MobileMappings.mapIconSets(config);
-            valueAt.mDefaultIcons = mobileMappingsProxyImpl.getDefaultIcons(valueAt.mConfig);
-            valueAt.updateTelephony();
+            mobileSignalControllerValueAt.mNetworkToIconLookup = MobileMappings.mapIconSets(config);
+            mobileSignalControllerValueAt.mDefaultIcons = mobileMappingsProxyImpl.getDefaultIcons(mobileSignalControllerValueAt.mConfig);
+            mobileSignalControllerValueAt.updateTelephony();
         }
         refreshLocale();
     }
@@ -480,21 +477,22 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
             if (i >= this.mMobileSignalControllers.size()) {
                 return true;
             }
-            MobileSignalController valueAt = this.mMobileSignalControllers.valueAt(i);
-            MobileState mobileState = (MobileState) valueAt.mCurrentState;
+            MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
+            MobileState mobileState = (MobileState) mobileSignalControllerValueAt.mCurrentState;
             ServiceState serviceState = mobileState.serviceState;
             int state = serviceState != null ? serviceState.getState() : -1;
             ServiceState serviceState2 = mobileState.serviceState;
-            boolean canCellularVoiceService = serviceState2 != null ? serviceState2.canCellularVoiceService() : false;
+            boolean zCanCellularVoiceService = serviceState2 != null ? serviceState2.canCellularVoiceService() : false;
             ServiceState serviceState3 = mobileState.serviceState;
             boolean z = (serviceState3 != null ? serviceState3.getMobileDataRegState() : -1) == 0;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(state, "isPowerOffServiceState,mCurrentState.getVoiceServiceState() = ", ",mCurrentState.airplaneMode = ");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, mobileState.airplaneMode, ",mCurrentState.canCellularVoiceService() = ", canCellularVoiceService, ",mCurrentState.getMobileDataRegState() = ");
-            m.append(z);
-            Log.d(valueAt.mTag, m.toString());
-            if (state == 3 || (mobileState.airplaneMode && state == 0 && (!canCellularVoiceService || !z))) {
-                i++;
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(state, "isPowerOffServiceState,mCurrentState.getVoiceServiceState() = ", ",mCurrentState.airplaneMode = ");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, mobileState.airplaneMode, ",mCurrentState.canCellularVoiceService() = ", zCanCellularVoiceService, ",mCurrentState.getMobileDataRegState() = ");
+            sbM.append(z);
+            Log.d(mobileSignalControllerValueAt.mTag, sbM.toString());
+            if (state != 3 && (!mobileState.airplaneMode || state != 0 || (zCanCellularVoiceService && z))) {
+                break;
             }
+            i++;
         }
         return false;
     }
@@ -527,8 +525,8 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         }
         updateMobileControllers();
         for (int i = 0; i < this.mMobileSignalControllers.size(); i++) {
-            MobileSignalController valueAt = this.mMobileSignalControllers.valueAt(i);
-            valueAt.mCurrentState.copyFrom(valueAt.mLastState);
+            MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
+            mobileSignalControllerValueAt.mCurrentState.copyFrom(mobileSignalControllerValueAt.mLastState);
         }
         WifiSignalController wifiSignalController = this.mWifiSignalController;
         wifiSignalController.mCurrentState.copyFrom(wifiSignalController.mLastState);
@@ -537,127 +535,64 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0042  */
     @Override // android.content.BroadcastReceiver
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onReceive(Context context, final Intent intent) {
-        char c;
-        int i = 2;
-        int i2 = 6;
+        int i;
+        int i2;
+        i = 2;
+        i2 = 6;
         if (CHATTY) {
             Log.d("NetworkController", "onReceive: intent=" + intent);
         }
         String action = intent.getAction();
         LogBuffer logBuffer = this.mLogBuffer;
-        LogMessage obtain = logBuffer.obtain("NetworkController", LogLevel.INFO, new NetworkControllerImpl$$ExternalSyntheticLambda8(), null);
-        ((LogMessageImpl) obtain).str1 = action;
+        LogMessage logMessageObtain = logBuffer.obtain("NetworkController", LogLevel.INFO, new NetworkControllerImpl$$ExternalSyntheticLambda8(), null);
+        ((LogMessageImpl) logMessageObtain).str1 = action;
         Unit unit = Unit.INSTANCE;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         action.getClass();
-        switch (action.hashCode()) {
-            case -2104353374:
-                if (action.equals("android.intent.action.SERVICE_STATE")) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1465084191:
-                if (action.equals("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED")) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1172645946:
-                if (action.equals("android.net.conn.CONNECTIVITY_CHANGE")) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1138588223:
-                if (action.equals("android.telephony.action.CARRIER_CONFIG_CHANGED")) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1076576821:
-                if (action.equals("android.intent.action.AIRPLANE_MODE")) {
-                    c = 4;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -372321735:
-                if (action.equals("android.telephony.action.SUBSCRIPTION_CARRIER_IDENTITY_CHANGED")) {
-                    c = 5;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -229777127:
-                if (action.equals("android.intent.action.SIM_STATE_CHANGED")) {
-                    c = 6;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -25388475:
-                if (action.equals("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED")) {
-                    c = 7;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 464243859:
-                if (action.equals("android.settings.panel.action.INTERNET_CONNECTIVITY")) {
-                    c = '\b';
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
+        switch (action) {
+            case "android.intent.action.SERVICE_STATE":
                 this.mLastServiceState = ServiceState.newFromBundle(intent.getExtras());
                 if (this.mMobileSignalControllers.size() == 0) {
                     recalculateEmergency();
                     return;
                 }
                 return;
-            case 1:
+            case "android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED":
                 recalculateEmergency();
                 return;
-            case 2:
+            case "android.net.conn.CONNECTIVITY_CHANGE":
                 updateConnectivity();
                 return;
-            case 3:
+            case "android.telephony.action.CARRIER_CONFIG_CHANGED":
                 this.mConfig = MobileMappings.Config.readConfig(this.mContext);
                 this.mReceiverHandler.post(new NetworkControllerImpl$$ExternalSyntheticLambda2(this, i2));
                 return;
-            case 4:
+            case "android.intent.action.AIRPLANE_MODE":
                 refreshLocale();
                 updateAirplaneMode(false);
                 return;
-            case 5:
+            case "android.telephony.action.SUBSCRIPTION_CARRIER_IDENTITY_CHANGED":
                 int intExtra = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_ID", -1);
                 if (!SubscriptionManager.isValidSubscriptionId(intExtra) || this.mMobileSignalControllers.indexOfKey(intExtra) < 0) {
                     return;
                 }
                 this.mMobileSignalControllers.get(intExtra).handleBroadcast(intent);
                 return;
-            case 6:
+            case "android.intent.action.SIM_STATE_CHANGED":
                 if (intent.getBooleanExtra("rebroadcastOnUnlock", false)) {
                     return;
                 }
                 updateMobileControllers();
                 return;
-            case 7:
+            case "android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED":
                 break;
-            case '\b':
+            case "android.settings.panel.action.INTERNET_CONNECTIVITY":
                 this.mMainHandler.post(new NetworkControllerImpl$$ExternalSyntheticLambda2(this, i));
                 return;
             default:
@@ -668,7 +603,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
                     wifiSignalController.doInBackground(new Runnable() { // from class: com.android.systemui.statusbar.connectivity.WifiSignalController$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            WifiSignalController wifiSignalController2 = WifiSignalController.this;
+                            WifiSignalController wifiSignalController2 = wifiSignalController;
                             Intent intent2 = intent;
                             WifiStatusTracker wifiStatusTracker = wifiSignalController2.mWifiTracker;
                             if (wifiStatusTracker.mWifiManager != null && intent2.getAction().equals("android.net.wifi.WIFI_STATE_CHANGED")) {
@@ -696,16 +631,16 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
 
     public final void pushConnectivityToSignals() {
         for (int i = 0; i < this.mMobileSignalControllers.size(); i++) {
-            MobileSignalController valueAt = this.mMobileSignalControllers.valueAt(i);
+            MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
             BitSet bitSet = this.mConnectedTransports;
             BitSet bitSet2 = this.mValidatedTransports;
-            int i2 = valueAt.mTransportType;
+            int i2 = mobileSignalControllerValueAt.mTransportType;
             boolean z = bitSet2.get(i2);
-            MobileState mobileState = (MobileState) valueAt.mCurrentState;
+            MobileState mobileState = (MobileState) mobileSignalControllerValueAt.mCurrentState;
             boolean z2 = bitSet.get(i2);
             mobileState.isDefault = z2;
             mobileState.inetCondition = (z || !z2) ? 1 : 0;
-            valueAt.notifyListenersIfNecessary();
+            mobileSignalControllerValueAt.notifyListenersIfNecessary();
         }
         WifiSignalController wifiSignalController = this.mWifiSignalController;
         BitSet bitSet3 = this.mValidatedTransports;
@@ -724,10 +659,6 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         ethernetSignalController.notifyListenersIfNecessary();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x0014, code lost:
-    
-        if (r0.isEmergencyOnly() != false) goto L37;
-     */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v0 */
     /* JADX WARN: Type inference failed for: r2v12 */
@@ -735,121 +666,51 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     /* JADX WARN: Type inference failed for: r2v14 */
     /* JADX WARN: Type inference failed for: r2v15 */
     /* JADX WARN: Type inference failed for: r2v16 */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final void recalculateEmergency() {
-        /*
-            r7 = this;
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r0 = r7.mMobileSignalControllers
-            int r0 = r0.size()
-            r1 = 0
-            r2 = 1
-            if (r0 != 0) goto L1b
-            r7.mEmergencySource = r1
-            android.telephony.ServiceState r0 = r7.mLastServiceState
-            if (r0 == 0) goto L18
-            boolean r0 = r0.isEmergencyOnly()
-            if (r0 == 0) goto L18
-            goto Ld0
-        L18:
-            r2 = r1
-            goto Ld0
-        L1b:
-            com.android.settingslib.mobile.MobileStatusTracker$SubscriptionDefaults r0 = r7.mSubDefaults
-            r0.getClass()
-            int r0 = android.telephony.SubscriptionManager.getDefaultVoiceSubscriptionId()
-            boolean r3 = android.telephony.SubscriptionManager.isValidSubscriptionId(r0)
-            java.lang.String r4 = "NetworkController"
-            if (r3 != 0) goto L63
-            r3 = r1
-        L2d:
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r5 = r7.mMobileSignalControllers
-            int r5 = r5.size()
-            if (r3 >= r5) goto L63
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r5 = r7.mMobileSignalControllers
-            java.lang.Object r5 = r5.valueAt(r3)
-            com.android.systemui.statusbar.connectivity.MobileSignalController r5 = (com.android.systemui.statusbar.connectivity.MobileSignalController) r5
-            com.android.systemui.statusbar.connectivity.ConnectivityState r6 = r5.mCurrentState
-            com.android.systemui.statusbar.connectivity.MobileState r6 = (com.android.systemui.statusbar.connectivity.MobileState) r6
-            boolean r6 = r6.isEmergency
-            if (r6 != 0) goto L60
-            android.telephony.SubscriptionInfo r0 = r5.mSubscriptionInfo
-            int r0 = r0.getSubscriptionId()
-            int r0 = r0 + 100
-            r7.mEmergencySource = r0
-            boolean r0 = com.android.systemui.statusbar.connectivity.NetworkControllerImpl.DEBUG
-            if (r0 == 0) goto L18
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "Found emergency "
-            r0.<init>(r2)
-            java.lang.String r2 = r5.mTag
-            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r0, r2, r4)
-            goto L18
-        L60:
-            int r3 = r3 + 1
-            goto L2d
-        L63:
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r3 = r7.mMobileSignalControllers
-            int r3 = r3.indexOfKey(r0)
-            if (r3 < 0) goto L87
-            int r2 = r0 + 200
-            r7.mEmergencySource = r2
-            boolean r2 = com.android.systemui.statusbar.connectivity.NetworkControllerImpl.DEBUG
-            if (r2 == 0) goto L78
-            java.lang.String r2 = "Getting emergency from "
-            androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0.m(r0, r2, r4)
-        L78:
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r2 = r7.mMobileSignalControllers
-            java.lang.Object r0 = r2.get(r0)
-            com.android.systemui.statusbar.connectivity.MobileSignalController r0 = (com.android.systemui.statusbar.connectivity.MobileSignalController) r0
-            com.android.systemui.statusbar.connectivity.ConnectivityState r0 = r0.mCurrentState
-            com.android.systemui.statusbar.connectivity.MobileState r0 = (com.android.systemui.statusbar.connectivity.MobileState) r0
-            boolean r2 = r0.isEmergency
-            goto Ld0
-        L87:
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r3 = r7.mMobileSignalControllers
-            int r3 = r3.size()
-            if (r3 != r2) goto Lc3
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r0 = r7.mMobileSignalControllers
-            int r0 = r0.keyAt(r1)
-            int r0 = r0 + 400
-            r7.mEmergencySource = r0
-            boolean r0 = com.android.systemui.statusbar.connectivity.NetworkControllerImpl.DEBUG
-            if (r0 == 0) goto Lb4
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "Getting assumed emergency from "
-            r0.<init>(r2)
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r2 = r7.mMobileSignalControllers
-            int r2 = r2.keyAt(r1)
-            r0.append(r2)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.d(r4, r0)
-        Lb4:
-            android.util.SparseArray<com.android.systemui.statusbar.connectivity.MobileSignalController> r0 = r7.mMobileSignalControllers
-            java.lang.Object r0 = r0.valueAt(r1)
-            com.android.systemui.statusbar.connectivity.MobileSignalController r0 = (com.android.systemui.statusbar.connectivity.MobileSignalController) r0
-            com.android.systemui.statusbar.connectivity.ConnectivityState r0 = r0.mCurrentState
-            com.android.systemui.statusbar.connectivity.MobileState r0 = (com.android.systemui.statusbar.connectivity.MobileState) r0
-            boolean r2 = r0.isEmergency
-            goto Ld0
-        Lc3:
-            boolean r3 = com.android.systemui.statusbar.connectivity.NetworkControllerImpl.DEBUG
-            if (r3 == 0) goto Lcc
-            java.lang.String r3 = "Cannot find controller for voice sub: "
-            com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0.m(r0, r3, r4)
-        Lcc:
-            int r0 = r0 + 300
-            r7.mEmergencySource = r0
-        Ld0:
-            r7.mIsEmergency = r2
-            com.android.systemui.statusbar.connectivity.CallbackHandler r7 = r7.mCallbackHandler
-            android.os.Message r7 = r7.obtainMessage(r1, r2, r1)
-            r7.sendToTarget()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.connectivity.NetworkControllerImpl.recalculateEmergency():void");
+        ?? r2 = 1;
+        r2 = 1;
+        if (this.mMobileSignalControllers.size() == 0) {
+            this.mEmergencySource = 0;
+            ServiceState serviceState = this.mLastServiceState;
+            if (serviceState == null || !serviceState.isEmergencyOnly()) {
+                r2 = 0;
+            }
+        } else {
+            this.mSubDefaults.getClass();
+            int defaultVoiceSubscriptionId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+            if (!SubscriptionManager.isValidSubscriptionId(defaultVoiceSubscriptionId)) {
+                for (int i = 0; i < this.mMobileSignalControllers.size(); i++) {
+                    MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
+                    if (!((MobileState) mobileSignalControllerValueAt.mCurrentState).isEmergency) {
+                        this.mEmergencySource = mobileSignalControllerValueAt.mSubscriptionInfo.getSubscriptionId() + 100;
+                        if (DEBUG) {
+                            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("Found emergency "), mobileSignalControllerValueAt.mTag, "NetworkController");
+                        }
+                        r2 = 0;
+                    }
+                }
+            }
+            if (this.mMobileSignalControllers.indexOfKey(defaultVoiceSubscriptionId) >= 0) {
+                this.mEmergencySource = defaultVoiceSubscriptionId + 200;
+                if (DEBUG) {
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(defaultVoiceSubscriptionId, "Getting emergency from ", "NetworkController");
+                }
+                r2 = ((MobileState) this.mMobileSignalControllers.get(defaultVoiceSubscriptionId).mCurrentState).isEmergency;
+            } else if (this.mMobileSignalControllers.size() == 1) {
+                this.mEmergencySource = this.mMobileSignalControllers.keyAt(0) + 400;
+                if (DEBUG) {
+                    Log.d("NetworkController", "Getting assumed emergency from " + this.mMobileSignalControllers.keyAt(0));
+                }
+                r2 = ((MobileState) this.mMobileSignalControllers.valueAt(0).mCurrentState).isEmergency;
+            } else {
+                if (DEBUG) {
+                    ClockEventController$$ExternalSyntheticOutline0.m(defaultVoiceSubscriptionId, "Cannot find controller for voice sub: ", "NetworkController");
+                }
+                this.mEmergencySource = defaultVoiceSubscriptionId + 300;
+            }
+        }
+        this.mIsEmergency = r2;
+        this.mCallbackHandler.obtainMessage(0, r2, 0).sendToTarget();
     }
 
     public final void refreshLocale() {
@@ -941,7 +802,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
                 MobileSignalControllerFactory mobileSignalControllerFactory = this.mMobileFactory;
                 MobileMappings.Config config = this.mConfig;
                 boolean z2 = this.mHasMobileDataFeature;
-                TelephonyManager createForSubscriptionId = this.mPhone.createForSubscriptionId(subscriptionId);
+                TelephonyManager telephonyManagerCreateForSubscriptionId = this.mPhone.createForSubscriptionId(subscriptionId);
                 SubscriptionInfo subscriptionInfo = list.get(i4);
                 MobileStatusTracker.SubscriptionDefaults subscriptionDefaults = this.mSubDefaults;
                 Looper looper = this.mReceiverHandler.getLooper();
@@ -949,7 +810,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
                 i = size;
                 i2 = i4;
                 sparseArray = sparseArray2;
-                MobileSignalController mobileSignalController = new MobileSignalController(mobileSignalControllerFactory.context, config, z2, createForSubscriptionId, mobileSignalControllerFactory.callbackHandler, this, mobileSignalControllerFactory.mobileMappings, subscriptionInfo, subscriptionDefaults, looper, mobileSignalControllerFactory.carrierConfigTracker, new MobileStatusTrackerFactory(createForSubscriptionId, looper, subscriptionInfo, subscriptionDefaults));
+                MobileSignalController mobileSignalController = new MobileSignalController(mobileSignalControllerFactory.context, config, z2, telephonyManagerCreateForSubscriptionId, mobileSignalControllerFactory.callbackHandler, this, mobileSignalControllerFactory.mobileMappings, subscriptionInfo, subscriptionDefaults, looper, mobileSignalControllerFactory.carrierConfigTracker, new MobileStatusTrackerFactory(telephonyManagerCreateForSubscriptionId, looper, subscriptionInfo, subscriptionDefaults));
                 ((MobileState) mobileSignalController.mCurrentState).userSetup = this.mUserSetup;
                 mobileSignalController.notifyListenersIfNecessary();
                 this.mMobileSignalControllers.put(subscriptionId, mobileSignalController);
@@ -970,11 +831,11 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
             int i5 = 0;
             while (i5 < sparseArray3.size()) {
                 SparseArray sparseArray4 = sparseArray3;
-                int keyAt = sparseArray4.keyAt(i5);
-                if (sparseArray4.get(keyAt) == this.mDefaultSignalController) {
+                int iKeyAt = sparseArray4.keyAt(i5);
+                if (sparseArray4.get(iKeyAt) == this.mDefaultSignalController) {
                     this.mDefaultSignalController = null;
                 }
-                MobileSignalController mobileSignalController2 = (MobileSignalController) sparseArray4.get(keyAt);
+                MobileSignalController mobileSignalController2 = (MobileSignalController) sparseArray4.get(iKeyAt);
                 mobileSignalController2.mMobileStatusTracker.setListening(false);
                 mobileSignalController2.mContext.getContentResolver().unregisterContentObserver(mobileSignalController2.mObserver);
                 i5++;
@@ -996,9 +857,9 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         if (z2 != this.mAirplaneMode || z) {
             this.mAirplaneMode = z2;
             for (int i = 0; i < this.mMobileSignalControllers.size(); i++) {
-                MobileSignalController valueAt = this.mMobileSignalControllers.valueAt(i);
-                ((MobileState) valueAt.mCurrentState).airplaneMode = this.mAirplaneMode;
-                valueAt.notifyListenersIfNecessary();
+                MobileSignalController mobileSignalControllerValueAt = this.mMobileSignalControllers.valueAt(i);
+                ((MobileState) mobileSignalControllerValueAt.mCurrentState).airplaneMode = this.mAirplaneMode;
+                mobileSignalControllerValueAt.notifyListenersIfNecessary();
             }
             notifyListeners();
         }
@@ -1114,8 +975,8 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         this.mSubscriptionManager = subscriptionManager;
         this.mSubDefaults = subscriptionDefaults;
         this.mConnectivityManager = connectivityManager;
-        boolean isDataCapable = telephonyManager.isDataCapable();
-        this.mHasMobileDataFeature = isDataCapable;
+        boolean zIsDataCapable = telephonyManager.isDataCapable();
+        this.mHasMobileDataFeature = zIsDataCapable;
         this.mDemoModeController = demoModeController;
         this.mLogBuffer = logBuffer;
         this.mPhone = telephonyManager;
@@ -1125,7 +986,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         this.mDataUsageController = dataUsageController;
         dataUsageController.getClass();
         dataUsageController.mCallback = new AnonymousClass3();
-        this.mWifiSignalController = new WifiSignalController(context, isDataCapable, callbackHandler, this, wifiManager, wifiStatusTrackerFactory, handler2);
+        this.mWifiSignalController = new WifiSignalController(context, zIsDataCapable, callbackHandler, this, wifiManager, wifiStatusTrackerFactory, handler2);
         this.mEthernetSignalController = new EthernetSignalController(context, callbackHandler, this);
         updateAirplaneMode(true);
         ((UserTrackerImpl) userTracker).addCallback(callback, new HandlerExecutor(handler));
@@ -1133,10 +994,10 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         deviceProvisionedControllerImpl.addCallback(new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.statusbar.connectivity.NetworkControllerImpl.4
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onUserSetupChanged() {
-                boolean isCurrentUserSetup = ((DeviceProvisionedControllerImpl) deviceProvisionedController).isCurrentUserSetup();
+                boolean zIsCurrentUserSetup = ((DeviceProvisionedControllerImpl) deviceProvisionedController).isCurrentUserSetup();
                 boolean z = NetworkControllerImpl.DEBUG;
                 NetworkControllerImpl networkControllerImpl = NetworkControllerImpl.this;
-                networkControllerImpl.mReceiverHandler.post(new NetworkControllerImpl$$ExternalSyntheticLambda12(networkControllerImpl, isCurrentUserSetup));
+                networkControllerImpl.mReceiverHandler.post(new NetworkControllerImpl$$ExternalSyntheticLambda12(networkControllerImpl, zIsCurrentUserSetup));
             }
         });
         handler2.post(new NetworkControllerImpl$$ExternalSyntheticLambda12(this, deviceProvisionedControllerImpl.isCurrentUserSetup()));
@@ -1172,16 +1033,16 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
             public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
                 NetworkCapabilities networkCapabilities2 = this.mLastNetworkCapabilities;
                 boolean z = networkCapabilities2 != null && networkCapabilities2.hasCapability(16);
-                boolean hasCapability = networkCapabilities.hasCapability(16);
-                if (network.equals(this.mLastNetwork) && hasCapability == z) {
-                    int[] m2948$$Nest$mgetProcessedTransportTypes = NetworkControllerImpl.m2948$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities);
-                    Arrays.sort(m2948$$Nest$mgetProcessedTransportTypes);
+                boolean zHasCapability = networkCapabilities.hasCapability(16);
+                if (network.equals(this.mLastNetwork) && zHasCapability == z) {
+                    int[] iArrM2965$$Nest$mgetProcessedTransportTypes = NetworkControllerImpl.m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities);
+                    Arrays.sort(iArrM2965$$Nest$mgetProcessedTransportTypes);
                     NetworkCapabilities networkCapabilities3 = this.mLastNetworkCapabilities;
-                    int[] m2948$$Nest$mgetProcessedTransportTypes2 = networkCapabilities3 != null ? NetworkControllerImpl.m2948$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities3) : null;
-                    if (m2948$$Nest$mgetProcessedTransportTypes2 != null) {
-                        Arrays.sort(m2948$$Nest$mgetProcessedTransportTypes2);
+                    int[] iArrM2965$$Nest$mgetProcessedTransportTypes2 = networkCapabilities3 != null ? NetworkControllerImpl.m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities3) : null;
+                    if (iArrM2965$$Nest$mgetProcessedTransportTypes2 != null) {
+                        Arrays.sort(iArrM2965$$Nest$mgetProcessedTransportTypes2);
                     }
-                    if (Arrays.equals(m2948$$Nest$mgetProcessedTransportTypes, m2948$$Nest$mgetProcessedTransportTypes2)) {
+                    if (Arrays.equals(iArrM2965$$Nest$mgetProcessedTransportTypes, iArrM2965$$Nest$mgetProcessedTransportTypes2)) {
                         return;
                     }
                 }
@@ -1214,11 +1075,11 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
         this.mPhoneStateListener = new TelephonyCallback.ActiveDataSubscriptionIdListener() { // from class: com.android.systemui.statusbar.connectivity.NetworkControllerImpl$$ExternalSyntheticLambda6
             @Override // android.telephony.TelephonyCallback.ActiveDataSubscriptionIdListener
             public final void onActiveDataSubscriptionIdChanged(final int i2) {
-                final NetworkControllerImpl networkControllerImpl = NetworkControllerImpl.this;
+                final NetworkControllerImpl networkControllerImpl = this.f$0;
                 networkControllerImpl.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.connectivity.NetworkControllerImpl$$ExternalSyntheticLambda11
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NetworkControllerImpl networkControllerImpl2 = NetworkControllerImpl.this;
+                        NetworkControllerImpl networkControllerImpl2 = networkControllerImpl;
                         int i3 = i2;
                         int i4 = networkControllerImpl2.mActiveMobileDataSubscription;
                         if (networkControllerImpl2.mValidatedTransports.get(0)) {

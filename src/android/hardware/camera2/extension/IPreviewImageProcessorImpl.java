@@ -68,9 +68,9 @@ public interface IPreviewImageProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPreviewImageProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPreviewImageProcessorImpl)) {
-                return (IPreviewImageProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPreviewImageProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPreviewImageProcessorImpl)) {
+                return (IPreviewImageProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,9 +107,9 @@ public interface IPreviewImageProcessorImpl extends IInterface {
             }
             if (i == 1) {
                 Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onOutputSurface(surface, readInt);
+                onOutputSurface(surface, i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 Size size = (Size) parcel.readTypedObject(Size.CREATOR);
@@ -117,17 +117,17 @@ public interface IPreviewImageProcessorImpl extends IInterface {
                 onResolutionUpdate(size);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onImageFormatUpdate(readInt2);
+                onImageFormatUpdate(i4);
                 parcel2.writeNoException();
             } else if (i == 4) {
                 ParcelImage parcelImage = (ParcelImage) parcel.readTypedObject(ParcelImage.CREATOR);
                 CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
-                int readInt3 = parcel.readInt();
-                IProcessResultImpl asInterface = IProcessResultImpl.Stub.asInterface(parcel.readStrongBinder());
+                int i5 = parcel.readInt();
+                IProcessResultImpl iProcessResultImplAsInterface = IProcessResultImpl.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                process(parcelImage, cameraMetadataNative, readInt3, asInterface);
+                process(parcelImage, cameraMetadataNative, i5, iProcessResultImplAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -153,65 +153,65 @@ public interface IPreviewImageProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
             public void onOutputSurface(Surface surface, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
             public void onResolutionUpdate(Size size) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(size, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(size, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
             public void onImageFormatUpdate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
             public void process(ParcelImage parcelImage, CameraMetadataNative cameraMetadataNative, int i, IProcessResultImpl iProcessResultImpl) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelImage, 0);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iProcessResultImpl);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPreviewImageProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelImage, 0);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iProcessResultImpl);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

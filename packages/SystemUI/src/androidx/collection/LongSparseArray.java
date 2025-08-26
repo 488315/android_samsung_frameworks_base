@@ -6,7 +6,6 @@ import java.util.Arrays;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LongSparseArray implements Cloneable {
     public /* synthetic */ boolean garbage;
@@ -37,8 +36,8 @@ public class LongSparseArray implements Cloneable {
 
     public final Object get(long j) {
         Object obj;
-        int binarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
-        if (binarySearch < 0 || (obj = this.values[binarySearch]) == LongSparseArrayKt.DELETED) {
+        int iBinarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
+        if (iBinarySearch < 0 || (obj = this.values[iBinarySearch]) == LongSparseArrayKt.DELETED) {
             return null;
         }
         return obj;
@@ -95,12 +94,12 @@ public class LongSparseArray implements Cloneable {
     }
 
     public final void put(long j, Object obj) {
-        int binarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
-        if (binarySearch >= 0) {
-            this.values[binarySearch] = obj;
+        int iBinarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
+        if (iBinarySearch >= 0) {
+            this.values[iBinarySearch] = obj;
             return;
         }
-        int i = ~binarySearch;
+        int i = ~iBinarySearch;
         int i2 = this.size;
         Object obj2 = LongSparseArrayKt.DELETED;
         if (i < i2) {
@@ -165,13 +164,13 @@ public class LongSparseArray implements Cloneable {
     }
 
     public final void remove(long j) {
-        int binarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
-        if (binarySearch >= 0) {
+        int iBinarySearch = ContainerHelpersKt.binarySearch(this.keys, this.size, j);
+        if (iBinarySearch >= 0) {
             Object[] objArr = this.values;
-            Object obj = objArr[binarySearch];
+            Object obj = objArr[iBinarySearch];
             Object obj2 = LongSparseArrayKt.DELETED;
             if (obj != obj2) {
-                objArr[binarySearch] = obj2;
+                objArr[iBinarySearch] = obj2;
                 this.garbage = true;
             }
         }
@@ -213,9 +212,9 @@ public class LongSparseArray implements Cloneable {
             }
             sb.append(keyAt(i2));
             sb.append('=');
-            Object valueAt = valueAt(i2);
-            if (valueAt != sb) {
-                sb.append(valueAt);
+            Object objValueAt = valueAt(i2);
+            if (objValueAt != sb) {
+                sb.append(objValueAt);
             } else {
                 sb.append("(this Map)");
             }

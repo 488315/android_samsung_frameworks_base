@@ -147,9 +147,9 @@ public class SemBlurInfo implements Parcelable {
         this.mClipRectTop = parcel.readInt();
         this.mClipRectRight = parcel.readInt();
         this.mClipRectBottom = parcel.readInt();
-        boolean readBoolean = parcel.readBoolean();
-        this.mHasCapturedBitmap = readBoolean;
-        if (readBoolean) {
+        boolean z = parcel.readBoolean();
+        this.mHasCapturedBitmap = z;
+        if (z) {
             this.mCapturedBitmap = Bitmap.CREATOR.createFromParcel(parcel);
         } else {
             this.mCapturedBitmap = null;

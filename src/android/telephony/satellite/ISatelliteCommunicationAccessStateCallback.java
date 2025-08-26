@@ -51,9 +51,9 @@ public interface ISatelliteCommunicationAccessStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteCommunicationAccessStateCallback)) {
-                return (ISatelliteCommunicationAccessStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteCommunicationAccessStateCallback)) {
+                return (ISatelliteCommunicationAccessStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,9 +83,9 @@ public interface ISatelliteCommunicationAccessStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onAccessAllowedStateChanged(readBoolean);
+                onAccessAllowedStateChanged(z);
             } else if (i == 2) {
                 SatelliteAccessConfiguration satelliteAccessConfiguration = (SatelliteAccessConfiguration) parcel.readTypedObject(SatelliteAccessConfiguration.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -114,25 +114,25 @@ public interface ISatelliteCommunicationAccessStateCallback extends IInterface {
 
             @Override // android.telephony.satellite.ISatelliteCommunicationAccessStateCallback
             public void onAccessAllowedStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.ISatelliteCommunicationAccessStateCallback
             public void onAccessConfigurationChanged(SatelliteAccessConfiguration satelliteAccessConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteAccessConfiguration, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteCommunicationAccessStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteAccessConfiguration, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

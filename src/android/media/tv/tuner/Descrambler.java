@@ -33,21 +33,21 @@ public class Descrambler implements AutoCloseable {
     }
 
     public int addPid(int i, int i2, Filter filter) {
-        int nativeAddPid;
+        int iNativeAddPid;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeAddPid = nativeAddPid(i, i2, filter);
+            iNativeAddPid = nativeAddPid(i, i2, filter);
         }
-        return nativeAddPid;
+        return iNativeAddPid;
     }
 
     public int removePid(int i, int i2, Filter filter) {
-        int nativeRemovePid;
+        int iNativeRemovePid;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeRemovePid = nativeRemovePid(i, i2, filter);
+            iNativeRemovePid = nativeRemovePid(i, i2, filter);
         }
-        return nativeRemovePid;
+        return iNativeRemovePid;
     }
 
     public int setKeyToken(byte[] bArr) {
@@ -75,9 +75,9 @@ public class Descrambler implements AutoCloseable {
             if (this.mIsClosed) {
                 return;
             }
-            int nativeClose = nativeClose();
-            if (nativeClose != 0) {
-                TunerUtils.throwExceptionForResult(nativeClose, "Failed to close descrambler");
+            int iNativeClose = nativeClose();
+            if (iNativeClose != 0) {
+                TunerUtils.throwExceptionForResult(iNativeClose, "Failed to close descrambler");
             } else {
                 this.mIsClosed = true;
             }

@@ -11,11 +11,11 @@ public abstract class VopsSupportInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public VopsSupportInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 3) {
+            int i = parcel.readInt();
+            if (i == 3) {
                 return LteVopsSupportInfo.createFromParcelBody(parcel);
             }
-            if (readInt == 6) {
+            if (i == 6) {
                 return NrVopsSupportInfo.createFromParcelBody(parcel);
             }
             throw new RuntimeException("Bad VopsSupportInfo Parcel");

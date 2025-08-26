@@ -9,12 +9,10 @@ import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.samsung.android.wallpaper.live.sdk.provider.ProviderCallParams;
 import com.samsung.android.wallpaper.live.sdk.provider.ProviderCallResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GetThumbnail {
     public static final boolean DEBUG = !SemSystemProperties.getBoolean("ro.product_ship", true);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Result extends ProviderCallResult {
         public final ParcelFileDescriptor mThumbnailFileDescriptor;
 
@@ -30,7 +28,6 @@ public class GetThumbnail {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Params extends ProviderCallParams {
         public final int rotation;
         public final int sourceWhich;
@@ -38,7 +35,6 @@ public class GetThumbnail {
         public final int wallpaperId;
         public final int which;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum ClockType {
             /* JADX INFO: Fake field, exist only in values array */
             DEFAULT,

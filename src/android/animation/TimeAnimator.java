@@ -40,10 +40,10 @@ public class TimeAnimator extends ValueAnimator {
 
     @Override // android.animation.ValueAnimator
     public void setCurrentPlayTime(long j) {
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-        this.mStartTime = Math.max(this.mStartTime, currentAnimationTimeMillis - j);
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        this.mStartTime = Math.max(this.mStartTime, jCurrentAnimationTimeMillis - j);
         this.mStartTimeCommitted = true;
-        animateBasedOnTime(currentAnimationTimeMillis);
+        animateBasedOnTime(jCurrentAnimationTimeMillis);
     }
 
     public void setTimeListener(TimeListener timeListener) {

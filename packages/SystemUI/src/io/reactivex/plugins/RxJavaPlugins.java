@@ -9,7 +9,6 @@ import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.internal.util.ExceptionHelper;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RxJavaPlugins {
     private RxJavaPlugins() {
@@ -18,9 +17,9 @@ public final class RxJavaPlugins {
 
     public static Scheduler callRequireNonNull(Callable callable) {
         try {
-            Object call = callable.call();
-            ObjectHelper.requireNonNull(call, "Scheduler Callable result can't be null");
-            return (Scheduler) call;
+            Object objCall = callable.call();
+            ObjectHelper.requireNonNull(objCall, "Scheduler Callable result can't be null");
+            return (Scheduler) objCall;
         } catch (Throwable th) {
             throw ExceptionHelper.wrapOrThrow(th);
         }
@@ -33,7 +32,7 @@ public final class RxJavaPlugins {
             th = new UndeliverableException(th);
         }
         th.printStackTrace();
-        Thread currentThread = Thread.currentThread();
-        currentThread.getUncaughtExceptionHandler().uncaughtException(currentThread, th);
+        Thread threadCurrentThread = Thread.currentThread();
+        threadCurrentThread.getUncaughtExceptionHandler().uncaughtException(threadCurrentThread, th);
     }
 }

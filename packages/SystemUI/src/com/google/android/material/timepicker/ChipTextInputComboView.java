@@ -21,14 +21,12 @@ import com.google.android.material.internal.TextWatcherAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class ChipTextInputComboView extends FrameLayout implements Checkable {
     public final Chip chip;
     public final EditText editText;
     public final TextFormatter watcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextFormatter extends TextWatcherAdapter {
         private TextFormatter() {
         }
@@ -40,12 +38,12 @@ class ChipTextInputComboView extends FrameLayout implements Checkable {
                 chipTextInputComboView.chip.setText(ChipTextInputComboView.access$100(chipTextInputComboView, "00"));
                 return;
             }
-            String access$100 = ChipTextInputComboView.access$100(ChipTextInputComboView.this, editable);
+            String strAccess$100 = ChipTextInputComboView.access$100(ChipTextInputComboView.this, editable);
             Chip chip = ChipTextInputComboView.this.chip;
-            if (TextUtils.isEmpty(access$100)) {
-                access$100 = ChipTextInputComboView.access$100(ChipTextInputComboView.this, "00");
+            if (TextUtils.isEmpty(strAccess$100)) {
+                strAccess$100 = ChipTextInputComboView.access$100(ChipTextInputComboView.this, "00");
             }
-            chip.setText(access$100);
+            chip.setText(strAccess$100);
         }
     }
 
@@ -116,11 +114,11 @@ class ChipTextInputComboView extends FrameLayout implements Checkable {
 
     public ChipTextInputComboView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
-        LayoutInflater from = LayoutInflater.from(context);
-        Chip chip = (Chip) from.inflate(R.layout.material_time_chip, (ViewGroup) this, false);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+        Chip chip = (Chip) layoutInflaterFrom.inflate(R.layout.material_time_chip, (ViewGroup) this, false);
         this.chip = chip;
         chip.accessibilityClassName = "android.view.View";
-        TextInputLayout textInputLayout = (TextInputLayout) from.inflate(R.layout.material_time_input, (ViewGroup) this, false);
+        TextInputLayout textInputLayout = (TextInputLayout) layoutInflaterFrom.inflate(R.layout.material_time_input, (ViewGroup) this, false);
         EditText editText = textInputLayout.editText;
         this.editText = editText;
         editText.setVisibility(4);

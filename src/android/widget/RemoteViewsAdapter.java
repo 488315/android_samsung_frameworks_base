@@ -26,7 +26,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RemoteViews;
-import android.widget.RemoteViewsAdapter;
 import com.android.internal.R;
 import com.android.internal.widget.IRemoteViewsFactory;
 import com.samsung.android.cocktailbar.CocktailBarManager;
@@ -135,9 +134,9 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             }
             if (this.mNotifyDataSetChangedPending) {
                 this.mNotifyDataSetChangedPending = false;
-                Message obtain = Message.obtain(this, 2);
-                handleMessage(obtain);
-                obtain.recycle();
+                Message messageObtain = Message.obtain(this, 2);
+                handleMessage(messageObtain);
+                messageObtain.recycle();
                 return;
             }
             if (sendNotifyDataSetChange(false)) {
@@ -222,8 +221,8 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             if (remoteViewsAdapter == null) {
                 return;
             }
-            boolean isCoverDisplay = isCoverDisplay();
-            if (!isCoverDisplay) {
+            boolean zIsCoverDisplay = isCoverDisplay();
+            if (!zIsCoverDisplay) {
                 synchronized (remoteViewsAdapter.mCache) {
                     remoteViewsAdapter.mCache.reset();
                 }
@@ -234,7 +233,7 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
                 return;
             }
             if (sendNotifyDataSetChange(true)) {
-                if (isCoverDisplay) {
+                if (zIsCoverDisplay) {
                     synchronized (remoteViewsAdapter.mCache) {
                         remoteViewsAdapter.mCache.reset();
                     }
@@ -346,11 +345,11 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
 
         public void notifyOnRemoteViewsLoaded(int i, RemoteViews remoteViews) {
-            ArrayList<RemoteViewsFrameLayout> removeReturnOld;
-            if (remoteViews == null || (removeReturnOld = removeReturnOld(i)) == null) {
+            ArrayList<RemoteViewsFrameLayout> arrayListRemoveReturnOld;
+            if (remoteViews == null || (arrayListRemoveReturnOld = removeReturnOld(i)) == null) {
                 return;
             }
-            Iterator<RemoteViewsFrameLayout> it = removeReturnOld.iterator();
+            Iterator<RemoteViewsFrameLayout> it = arrayListRemoveReturnOld.iterator();
             while (it.hasNext()) {
                 it.next().onRemoteViewsLoaded(remoteViews, RemoteViewsAdapter.this.mRemoteViewsInteractionHandler, true);
             }
@@ -504,14 +503,14 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
 
         private int getRemoteViewsBitmapMemoryUsage() {
-            int i = 0;
+            int iEstimateMemoryUsage = 0;
             for (int size = this.mIndexRemoteViews.size() - 1; size >= 0; size--) {
-                RemoteViews valueAt = this.mIndexRemoteViews.valueAt(size);
-                if (valueAt != null) {
-                    i = (int) (i + valueAt.estimateMemoryUsage());
+                RemoteViews remoteViewsValueAt = this.mIndexRemoteViews.valueAt(size);
+                if (remoteViewsValueAt != null) {
+                    iEstimateMemoryUsage = (int) (iEstimateMemoryUsage + remoteViewsValueAt.estimateMemoryUsage());
                 }
             }
-            return i;
+            return iEstimateMemoryUsage;
         }
 
         private int getFarthestPositionFrom(int i, int[] iArr) {
@@ -520,15 +519,15 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             int i4 = -1;
             int i5 = -1;
             for (int size = this.mIndexRemoteViews.size() - 1; size >= 0; size--) {
-                int keyAt = this.mIndexRemoteViews.keyAt(size);
-                int abs = Math.abs(keyAt - i);
-                if (abs > i2 && Arrays.binarySearch(iArr, keyAt) < 0) {
-                    i4 = keyAt;
-                    i2 = abs;
+                int iKeyAt = this.mIndexRemoteViews.keyAt(size);
+                int iAbs = Math.abs(iKeyAt - i);
+                if (iAbs > i2 && Arrays.binarySearch(iArr, iKeyAt) < 0) {
+                    i4 = iKeyAt;
+                    i2 = iAbs;
                 }
-                if (abs >= i3) {
-                    i5 = keyAt;
-                    i3 = abs;
+                if (iAbs >= i3) {
+                    i5 = iKeyAt;
+                    i3 = iAbs;
                 }
             }
             return i4 > -1 ? i4 : i5;
@@ -561,10 +560,10 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
                 int i6 = i - i5;
                 this.mPreloadLowerBound = i6;
                 this.mPreloadUpperBound = i + i5;
-                int min = Math.min(this.mPreloadUpperBound, i2 - 1);
-                for (int max = Math.max(0, i6); max <= min; max++) {
-                    if (this.mIndexRemoteViews.indexOfKey(max) < 0 && !this.mIndicesToLoad.get(max)) {
-                        this.mIndicesToLoad.put(max, false);
+                int iMin = Math.min(this.mPreloadUpperBound, i2 - 1);
+                for (int iMax = Math.max(0, i6); iMax <= iMin; iMax++) {
+                    if (this.mIndexRemoteViews.indexOfKey(iMax) < 0 && !this.mIndicesToLoad.get(iMax)) {
+                        this.mIndicesToLoad.put(iMax, false);
                     }
                 }
             }
@@ -573,16 +572,16 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
 
         public int getNextIndexToLoad() {
             synchronized (this.mIndicesToLoad) {
-                int indexOfValue = this.mIndicesToLoad.indexOfValue(true);
-                if (indexOfValue < 0) {
-                    indexOfValue = this.mIndicesToLoad.indexOfValue(false);
+                int iIndexOfValue = this.mIndicesToLoad.indexOfValue(true);
+                if (iIndexOfValue < 0) {
+                    iIndexOfValue = this.mIndicesToLoad.indexOfValue(false);
                 }
-                if (indexOfValue < 0) {
+                if (iIndexOfValue < 0) {
                     return -1;
                 }
-                int keyAt = this.mIndicesToLoad.keyAt(indexOfValue);
-                this.mIndicesToLoad.removeAt(indexOfValue);
-                return keyAt;
+                int iKeyAt = this.mIndicesToLoad.keyAt(iIndexOfValue);
+                this.mIndicesToLoad.removeAt(iIndexOfValue);
+                return iKeyAt;
             }
         }
 
@@ -629,17 +628,53 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00d9 A[Catch: all -> 0x00de, TryCatch #1 {, blocks: (B:12:0x0091, B:14:0x00a1, B:17:0x00b0, B:18:0x00bc, B:25:0x00d5, B:27:0x00d9, B:28:0x00dc, B:34:0x00cb, B:35:0x00cc, B:20:0x00bd, B:22:0x00c5, B:23:0x00c7), top: B:11:0x0091, inners: #0 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public RemoteViewsAdapter(android.content.Context r8, android.content.Intent r9, android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback r10, boolean r11) {
-        /*
-            Method dump skipped, instructions count: 233
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.RemoteViewsAdapter.<init>(android.content.Context, android.content.Intent, android.widget.RemoteViewsAdapter$RemoteAdapterConnectionCallback, boolean):void");
+    /* JADX WARN: Multi-variable type inference failed */
+    public RemoteViewsAdapter(Context context, Intent intent, RemoteAdapterConnectionCallback remoteAdapterConnectionCallback, boolean z) {
+        this.mDataReady = false;
+        this.mContext = context;
+        this.mIntent = intent;
+        if (intent == null) {
+            throw new IllegalArgumentException("Non-null Intent must be specified.");
+        }
+        int intExtra = intent.getIntExtra("remoteAdapterAppWidgetId", -1);
+        this.mAppWidgetId = intExtra;
+        this.mRequestedViews = new RemoteViewsFrameLayoutRefSet();
+        this.mOnLightBackground = intent.getBooleanExtra("remoteAdapterOnLightBackground", false);
+        intent.removeExtra("remoteAdapterAppWidgetId");
+        intent.removeExtra("remoteAdapterOnLightBackground");
+        HandlerThread handlerThread = new HandlerThread("RemoteViewsCache-loader");
+        this.mWorkerThread = handlerThread;
+        handlerThread.start();
+        this.mMainHandler = new Handler(Looper.myLooper(), this);
+        this.mServiceHandler = new RemoteServiceHandler(handlerThread.getLooper(), this, context.getApplicationContext());
+        this.mAsyncViewLoadExecutor = z ? new HandlerThreadExecutor(handlerThread) : null;
+        this.mCallback = remoteAdapterConnectionCallback;
+        if (sCacheRemovalThread == null) {
+            HandlerThread handlerThread2 = new HandlerThread("RemoteViewsAdapter-cachePruner");
+            sCacheRemovalThread = handlerThread2;
+            handlerThread2.start();
+            sCacheRemovalQueue = new Handler(sCacheRemovalThread.getLooper());
+        }
+        RemoteViewsCacheKey remoteViewsCacheKey = new RemoteViewsCacheKey(new Intent.FilterComparison(intent), intExtra);
+        HashMap<RemoteViewsCacheKey, FixedSizeRemoteViewsCache> map = sCachedRemoteViewsCaches;
+        synchronized (map) {
+            FixedSizeRemoteViewsCache fixedSizeRemoteViewsCache = map.get(remoteViewsCacheKey);
+            Configuration configuration = context.getResources().getConfiguration();
+            if (fixedSizeRemoteViewsCache == null || (fixedSizeRemoteViewsCache.mConfiguration.diff(configuration) & CACHE_RESET_CONFIG_FLAGS) != 0) {
+                this.mCache = new FixedSizeRemoteViewsCache(40, configuration);
+            } else {
+                FixedSizeRemoteViewsCache fixedSizeRemoteViewsCache2 = map.get(remoteViewsCacheKey);
+                this.mCache = fixedSizeRemoteViewsCache2;
+                synchronized (fixedSizeRemoteViewsCache2.mMetaData) {
+                    if (fixedSizeRemoteViewsCache2.mMetaData.count > 0) {
+                        this.mDataReady = true;
+                    }
+                }
+            }
+            if (!this.mDataReady) {
+                requestBindService();
+            }
+        }
     }
 
     protected void finalize() throws Throwable {
@@ -663,12 +698,12 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         int i;
         int size;
         final RemoteViewsCacheKey remoteViewsCacheKey = new RemoteViewsCacheKey(new Intent.FilterComparison(this.mIntent), this.mAppWidgetId);
-        HashMap<RemoteViewsCacheKey, FixedSizeRemoteViewsCache> hashMap = sCachedRemoteViewsCaches;
-        synchronized (hashMap) {
-            HashMap<RemoteViewsCacheKey, Runnable> hashMap2 = sRemoteViewsCacheRemoveRunnables;
-            if (hashMap2.containsKey(remoteViewsCacheKey)) {
-                sCacheRemovalQueue.removeCallbacks(hashMap2.get(remoteViewsCacheKey));
-                hashMap2.remove(remoteViewsCacheKey);
+        HashMap<RemoteViewsCacheKey, FixedSizeRemoteViewsCache> map = sCachedRemoteViewsCaches;
+        synchronized (map) {
+            HashMap<RemoteViewsCacheKey, Runnable> map2 = sRemoteViewsCacheRemoveRunnables;
+            if (map2.containsKey(remoteViewsCacheKey)) {
+                sCacheRemovalQueue.removeCallbacks(map2.get(remoteViewsCacheKey));
+                map2.remove(remoteViewsCacheKey);
             }
             synchronized (this.mCache.mMetaData) {
                 i = this.mCache.mMetaData.count;
@@ -677,23 +712,23 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
                 size = this.mCache.mIndexRemoteViews.size();
             }
             if (i > 0 && size > 0) {
-                hashMap.put(remoteViewsCacheKey, this.mCache);
+                map.put(remoteViewsCacheKey, this.mCache);
             }
             Runnable runnable = new Runnable() { // from class: android.widget.RemoteViewsAdapter$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteViewsAdapter.lambda$saveRemoteViewsCache$0(RemoteViewsAdapter.RemoteViewsCacheKey.this);
+                    RemoteViewsAdapter.lambda$saveRemoteViewsCache$0(remoteViewsCacheKey);
                 }
             };
-            hashMap2.put(remoteViewsCacheKey, runnable);
+            map2.put(remoteViewsCacheKey, runnable);
             sCacheRemovalQueue.postDelayed(runnable, 5000L);
         }
     }
 
     static /* synthetic */ void lambda$saveRemoteViewsCache$0(RemoteViewsCacheKey remoteViewsCacheKey) {
-        HashMap<RemoteViewsCacheKey, FixedSizeRemoteViewsCache> hashMap = sCachedRemoteViewsCaches;
-        synchronized (hashMap) {
-            hashMap.remove(remoteViewsCacheKey);
+        HashMap<RemoteViewsCacheKey, FixedSizeRemoteViewsCache> map = sCachedRemoteViewsCaches;
+        synchronized (map) {
+            map.remove(remoteViewsCacheKey);
             sRemoteViewsCacheRemoveRunnables.remove(remoteViewsCacheKey);
         }
     }
@@ -702,7 +737,7 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
     public void updateTemporaryMetaData(IRemoteViewsFactory iRemoteViewsFactory) {
         RemoteViews viewAt;
         try {
-            boolean hasStableIds = iRemoteViewsFactory.hasStableIds();
+            boolean zHasStableIds = iRemoteViewsFactory.hasStableIds();
             int viewTypeCount = iRemoteViewsFactory.getViewTypeCount();
             int count = iRemoteViewsFactory.getCount();
             LoadingViewTemplate loadingViewTemplate = new LoadingViewTemplate(iRemoteViewsFactory.getLoadingView(), this.mContext);
@@ -711,7 +746,7 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             }
             RemoteViewsMetaData temporaryMetaData = this.mCache.getTemporaryMetaData();
             synchronized (temporaryMetaData) {
-                temporaryMetaData.hasStableIds = hasStableIds;
+                temporaryMetaData.hasStableIds = zHasStableIds;
                 temporaryMetaData.viewTypeCount = viewTypeCount + 1;
                 temporaryMetaData.count = count;
                 temporaryMetaData.loadingTemplate = loadingViewTemplate;
@@ -731,7 +766,7 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
     /* JADX INFO: Access modifiers changed from: private */
     public void updateRemoteViews(IRemoteViewsFactory iRemoteViewsFactory, int i, boolean z) {
         int i2;
-        boolean isViewTypeInRange;
+        boolean zIsViewTypeInRange;
         int i3;
         try {
             RemoteViews viewAt = iRemoteViewsFactory.getViewAt(i);
@@ -757,11 +792,11 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             int layoutId = viewAt.getLayoutId();
             RemoteViewsMetaData metaData = this.mCache.getMetaData();
             synchronized (metaData) {
-                isViewTypeInRange = metaData.isViewTypeInRange(layoutId);
+                zIsViewTypeInRange = metaData.isViewTypeInRange(layoutId);
                 i3 = this.mCache.mMetaData.count;
             }
             synchronized (this.mCache) {
-                if (isViewTypeInRange) {
+                if (zIsViewTypeInRange) {
                     this.mCache.insert(i, viewAt, itemId, getVisibleWindow(i3));
                     if (z) {
                         Message.obtain(this.mMainHandler, 5, i, 0, viewAt).sendToTarget();
@@ -821,99 +856,55 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
         this.mVisibleWindowUpperBound = i2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003b A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:8:0x0011, B:10:0x0015, B:12:0x001f, B:14:0x0037, B:16:0x003b, B:19:0x0056, B:21:0x005d, B:22:0x0085, B:26:0x0063, B:27:0x003e, B:28:0x0024, B:30:0x0028, B:31:0x002f), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056 A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:8:0x0011, B:10:0x0015, B:12:0x001f, B:14:0x0037, B:16:0x003b, B:19:0x0056, B:21:0x005d, B:22:0x0085, B:26:0x0063, B:27:0x003e, B:28:0x0024, B:30:0x0028, B:31:0x002f), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0063 A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:8:0x0011, B:10:0x0015, B:12:0x001f, B:14:0x0037, B:16:0x003b, B:19:0x0056, B:21:0x005d, B:22:0x0085, B:26:0x0063, B:27:0x003e, B:28:0x0024, B:30:0x0028, B:31:0x002f), top: B:3:0x0003 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x003e A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:8:0x0011, B:10:0x0015, B:12:0x001f, B:14:0x0037, B:16:0x003b, B:19:0x0056, B:21:0x005d, B:22:0x0085, B:26:0x0063, B:27:0x003e, B:28:0x0024, B:30:0x0028, B:31:0x002f), top: B:3:0x0003 }] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x003b A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:9:0x0011, B:11:0x0015, B:13:0x001f, B:19:0x0037, B:21:0x003b, B:25:0x0056, B:27:0x005d, B:29:0x0085, B:28:0x0063, B:22:0x003e, B:15:0x0024, B:17:0x0028, B:18:0x002f), top: B:34:0x0003 }] */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x003e A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:9:0x0011, B:11:0x0015, B:13:0x001f, B:19:0x0037, B:21:0x003b, B:25:0x0056, B:27:0x005d, B:29:0x0085, B:28:0x0063, B:22:0x003e, B:15:0x0024, B:17:0x0028, B:18:0x002f), top: B:34:0x0003 }] */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0056 A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:9:0x0011, B:11:0x0015, B:13:0x001f, B:19:0x0037, B:21:0x003b, B:25:0x0056, B:27:0x005d, B:29:0x0085, B:28:0x0063, B:22:0x003e, B:15:0x0024, B:17:0x0028, B:18:0x002f), top: B:34:0x0003 }] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0063 A[Catch: all -> 0x0087, TryCatch #0 {, blocks: (B:4:0x0003, B:9:0x0011, B:11:0x0015, B:13:0x001f, B:19:0x0037, B:21:0x003b, B:25:0x0056, B:27:0x005d, B:29:0x0085, B:28:0x0063, B:22:0x003e, B:15:0x0024, B:17:0x0028, B:18:0x002f), top: B:34:0x0003 }] */
     @Override // android.widget.Adapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.view.View getView(int r7, android.view.View r8, android.view.ViewGroup r9) {
-        /*
-            r6 = this;
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r0 = r6.mCache
-            monitor-enter(r0)
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r1 = r6.mCache     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViews r1 = r1.getRemoteViewsAt(r7)     // Catch: java.lang.Throwable -> L87
-            r2 = 0
-            if (r1 == 0) goto Le
-            r3 = 1
-            goto Lf
-        Le:
-            r3 = r2
-        Lf:
-            if (r8 == 0) goto L1d
-            boolean r4 = r8 instanceof android.widget.RemoteViewsAdapter.RemoteViewsFrameLayout     // Catch: java.lang.Throwable -> L87
-            if (r4 == 0) goto L1d
-            android.widget.RemoteViewsAdapter$RemoteViewsFrameLayoutRefSet r4 = r6.mRequestedViews     // Catch: java.lang.Throwable -> L87
-            r5 = r8
-            android.widget.RemoteViewsAdapter$RemoteViewsFrameLayout r5 = (android.widget.RemoteViewsAdapter.RemoteViewsFrameLayout) r5     // Catch: java.lang.Throwable -> L87
-            r4.removeView(r5)     // Catch: java.lang.Throwable -> L87
-        L1d:
-            if (r3 != 0) goto L24
-            r6.requestBindService()     // Catch: java.lang.Throwable -> L87
-        L22:
-            r4 = r2
-            goto L37
-        L24:
-            boolean r4 = r6.mUsePreloadPositionIndices     // Catch: java.lang.Throwable -> L87
-            if (r4 == 0) goto L2f
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r4 = r6.mCache     // Catch: java.lang.Throwable -> L87
-            boolean r4 = r4.queuePositionsToBePreloadedFromRequestedPosition(r7)     // Catch: java.lang.Throwable -> L87
-            goto L37
-        L2f:
-            java.lang.String r4 = "RemoteViewsAdapter"
-            java.lang.String r5 = "disable queue position preload"
-            android.util.Log.i(r4, r5)     // Catch: java.lang.Throwable -> L87
-            goto L22
-        L37:
-            boolean r5 = r8 instanceof android.widget.RemoteViewsAdapter.RemoteViewsFrameLayout     // Catch: java.lang.Throwable -> L87
-            if (r5 == 0) goto L3e
-            android.widget.RemoteViewsAdapter$RemoteViewsFrameLayout r8 = (android.widget.RemoteViewsAdapter.RemoteViewsFrameLayout) r8     // Catch: java.lang.Throwable -> L87
-            goto L53
-        L3e:
-            android.widget.RemoteViewsAdapter$RemoteViewsFrameLayout r8 = new android.widget.RemoteViewsAdapter$RemoteViewsFrameLayout     // Catch: java.lang.Throwable -> L87
-            android.content.Context r9 = r9.getContext()     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r5 = r6.mCache     // Catch: java.lang.Throwable -> L87
-            r8.<init>(r9, r5)     // Catch: java.lang.Throwable -> L87
-            java.util.concurrent.Executor r9 = r6.mAsyncViewLoadExecutor     // Catch: java.lang.Throwable -> L87
-            r8.setExecutor(r9)     // Catch: java.lang.Throwable -> L87
-            boolean r9 = r6.mOnLightBackground     // Catch: java.lang.Throwable -> L87
-            r8.setOnLightBackground(r9)     // Catch: java.lang.Throwable -> L87
-        L53:
-            r9 = 3
-            if (r3 == 0) goto L63
-            android.widget.RemoteViews$InteractionHandler r7 = r6.mRemoteViewsInteractionHandler     // Catch: java.lang.Throwable -> L87
-            r8.onRemoteViewsLoaded(r1, r7, r2)     // Catch: java.lang.Throwable -> L87
-            if (r4 == 0) goto L85
-            android.widget.RemoteViewsAdapter$RemoteServiceHandler r6 = r6.mServiceHandler     // Catch: java.lang.Throwable -> L87
-            r6.sendEmptyMessage(r9)     // Catch: java.lang.Throwable -> L87
-            goto L85
-        L63:
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r1 = r6.mCache     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$RemoteViewsMetaData r1 = r1.getMetaData()     // Catch: java.lang.Throwable -> L87
-            android.content.Context r3 = r6.mContext     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$LoadingViewTemplate r1 = r1.getLoadingTemplate(r3)     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViews r1 = r1.remoteViews     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViews$InteractionHandler r3 = r6.mRemoteViewsInteractionHandler     // Catch: java.lang.Throwable -> L87
-            r8.onRemoteViewsLoaded(r1, r3, r2)     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$RemoteViewsFrameLayoutRefSet r1 = r6.mRequestedViews     // Catch: java.lang.Throwable -> L87
-            r1.add(r7, r8)     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$FixedSizeRemoteViewsCache r1 = r6.mCache     // Catch: java.lang.Throwable -> L87
-            r1.queueRequestedPositionToLoad(r7)     // Catch: java.lang.Throwable -> L87
-            android.widget.RemoteViewsAdapter$RemoteServiceHandler r6 = r6.mServiceHandler     // Catch: java.lang.Throwable -> L87
-            r6.sendEmptyMessage(r9)     // Catch: java.lang.Throwable -> L87
-        L85:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L87
-            return r8
-        L87:
-            r6 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L87
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.RemoteViewsAdapter.getView(int, android.view.View, android.view.ViewGroup):android.view.View");
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        boolean zQueuePositionsToBePreloadedFromRequestedPosition;
+        RemoteViewsFrameLayout remoteViewsFrameLayout;
+        synchronized (this.mCache) {
+            RemoteViews remoteViewsAt = this.mCache.getRemoteViewsAt(i);
+            boolean z = remoteViewsAt != null;
+            if (view != null && (view instanceof RemoteViewsFrameLayout)) {
+                this.mRequestedViews.removeView((RemoteViewsFrameLayout) view);
+            }
+            if (!z) {
+                requestBindService();
+            } else if (this.mUsePreloadPositionIndices) {
+                zQueuePositionsToBePreloadedFromRequestedPosition = this.mCache.queuePositionsToBePreloadedFromRequestedPosition(i);
+                if (!(view instanceof RemoteViewsFrameLayout)) {
+                    remoteViewsFrameLayout = (RemoteViewsFrameLayout) view;
+                } else {
+                    remoteViewsFrameLayout = new RemoteViewsFrameLayout(viewGroup.getContext(), this.mCache);
+                    remoteViewsFrameLayout.setExecutor(this.mAsyncViewLoadExecutor);
+                    remoteViewsFrameLayout.setOnLightBackground(this.mOnLightBackground);
+                }
+                if (!z) {
+                    remoteViewsFrameLayout.onRemoteViewsLoaded(remoteViewsAt, this.mRemoteViewsInteractionHandler, false);
+                    if (zQueuePositionsToBePreloadedFromRequestedPosition) {
+                        this.mServiceHandler.sendEmptyMessage(3);
+                    }
+                } else {
+                    remoteViewsFrameLayout.onRemoteViewsLoaded(this.mCache.getMetaData().getLoadingTemplate(this.mContext).remoteViews, this.mRemoteViewsInteractionHandler, false);
+                    this.mRequestedViews.add(i, remoteViewsFrameLayout);
+                    this.mCache.queueRequestedPositionToLoad(i);
+                    this.mServiceHandler.sendEmptyMessage(3);
+                }
+            } else {
+                Log.i(TAG, "disable queue position preload");
+            }
+            zQueuePositionsToBePreloadedFromRequestedPosition = false;
+            if (!(view instanceof RemoteViewsFrameLayout)) {
+            }
+            if (!z) {
+            }
+        }
+        return remoteViewsFrameLayout;
     }
 
     @Override // android.widget.BaseAdapter, android.widget.Adapter
@@ -958,15 +949,15 @@ public class RemoteViewsAdapter extends BaseAdapter implements Handler.Callback 
             }
             return iArr;
         }
-        int max = Math.max(i, i2);
-        int[] iArr2 = new int[(max - i2) + i3 + 1];
+        int iMax = Math.max(i, i2);
+        int[] iArr2 = new int[(iMax - i2) + i3 + 1];
         int i5 = 0;
         while (i4 <= i3) {
             iArr2[i5] = i4;
             i4++;
             i5++;
         }
-        while (i2 < max) {
+        while (i2 < iMax) {
             iArr2[i5] = i2;
             i2++;
             i5++;

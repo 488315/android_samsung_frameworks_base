@@ -11,7 +11,6 @@ import com.google.android.setupcompat.util.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ButtonBarLayout extends LinearLayout {
     public static final Logger LOG = new Logger((Class<?>) ButtonBarLayout.class);
@@ -27,30 +26,30 @@ public class ButtonBarLayout extends LinearLayout {
 
     @Override // android.widget.LinearLayout, android.view.View
     public final void onMeasure(int i, int i2) {
-        int i3;
+        int iMakeMeasureSpec;
         boolean z;
         int size = View.MeasureSpec.getSize(i);
         setStacked(false);
         boolean z2 = true;
         if (View.MeasureSpec.getMode(i) == 1073741824) {
-            i3 = View.MeasureSpec.makeMeasureSpec(0, 0);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
             z = true;
         } else {
-            i3 = i;
+            iMakeMeasureSpec = i;
             z = false;
         }
-        super.onMeasure(i3, i2);
+        super.onMeasure(iMakeMeasureSpec, i2);
         boolean z3 = (size > 0 && getMeasuredWidth() > size) || this.stackedButtonForExpressiveStyle;
         Context context = getContext();
         int childCount = getChildCount();
-        int i4 = 0;
-        for (int i5 = 0; i5 < childCount; i5++) {
-            View childAt = getChildAt(i5);
+        int i3 = 0;
+        for (int i4 = 0; i4 < childCount; i4++) {
+            View childAt = getChildAt(i4);
             if ((childAt instanceof FooterActionButton) && ((FooterActionButton) childAt).isPrimaryButtonStyle) {
-                i4++;
+                i3++;
             }
         }
-        if ((i4 == 2 && context.getResources().getConfiguration().smallestScreenWidthDp >= 600 && PartnerConfigHelper.shouldApplyExtendedPartnerConfig(context)) || !z3) {
+        if ((i3 == 2 && context.getResources().getConfiguration().smallestScreenWidthDp >= 600 && PartnerConfigHelper.shouldApplyExtendedPartnerConfig(context)) || !z3) {
             z2 = z;
         } else {
             setStacked(true);
@@ -140,8 +139,8 @@ public class ButtonBarLayout extends LinearLayout {
         this.originalPaddingLeft = getPaddingLeft();
         int paddingRight = getPaddingRight();
         this.originalPaddingRight = paddingRight;
-        int max = Math.max(this.originalPaddingLeft, paddingRight);
-        setPadding(max, getPaddingTop(), max, getPaddingBottom());
+        int iMax = Math.max(this.originalPaddingLeft, paddingRight);
+        setPadding(iMax, getPaddingTop(), iMax, getPaddingBottom());
     }
 
     public ButtonBarLayout(Context context, AttributeSet attributeSet) {

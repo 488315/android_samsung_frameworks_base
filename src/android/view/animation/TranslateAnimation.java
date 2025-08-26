@@ -33,20 +33,20 @@ public class TranslateAnimation extends Animation {
         this.mToXValue = 0.0f;
         this.mFromYValue = 0.0f;
         this.mToYValue = 0.0f;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TranslateAnimation);
-        Animation.Description parseValue = Animation.Description.parseValue(obtainStyledAttributes.peekValue(0), context);
-        this.mFromXType = parseValue.type;
-        this.mFromXValue = parseValue.value;
-        Animation.Description parseValue2 = Animation.Description.parseValue(obtainStyledAttributes.peekValue(1), context);
-        this.mToXType = parseValue2.type;
-        this.mToXValue = parseValue2.value;
-        Animation.Description parseValue3 = Animation.Description.parseValue(obtainStyledAttributes.peekValue(2), context);
-        this.mFromYType = parseValue3.type;
-        this.mFromYValue = parseValue3.value;
-        Animation.Description parseValue4 = Animation.Description.parseValue(obtainStyledAttributes.peekValue(3), context);
-        this.mToYType = parseValue4.type;
-        this.mToYValue = parseValue4.value;
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TranslateAnimation);
+        Animation.Description value = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(0), context);
+        this.mFromXType = value.type;
+        this.mFromXValue = value.value;
+        Animation.Description value2 = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(1), context);
+        this.mToXType = value2.type;
+        this.mToXValue = value2.value;
+        Animation.Description value3 = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(2), context);
+        this.mFromYType = value3.type;
+        this.mFromYValue = value3.value;
+        Animation.Description value4 = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(3), context);
+        this.mToYType = value4.type;
+        this.mToYValue = value4.value;
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public TranslateAnimation(float f, float f2, float f3, float f4) {

@@ -65,11 +65,11 @@ public final class AmbientContextDetectionResult implements Parcelable {
         parcel.readByte();
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, AmbientContextEvent.class.getClassLoader(), AmbientContextEvent.class);
-        String readString = parcel.readString();
+        String string = parcel.readString();
         this.mEvents = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
     }
 
     public static final class Builder {

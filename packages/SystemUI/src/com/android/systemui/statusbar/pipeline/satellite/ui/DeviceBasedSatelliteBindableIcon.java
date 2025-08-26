@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.pipeline.shared.ui.view.ModernStatusBarVie
 import com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteBindableIcon implements BindableIcon {
     public final DeviceBasedSatelliteBindableIcon$initializer$1 initializer;
@@ -21,19 +20,19 @@ public final class DeviceBasedSatelliteBindableIcon implements BindableIcon {
 
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon$initializer$1] */
     public DeviceBasedSatelliteBindableIcon(Context context, final DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel) {
-        this.slot = context.getString(17043289);
+        this.slot = context.getString(17043293);
         this.initializer = new ModernStatusBarViewCreator() { // from class: com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon$initializer$1
             @Override // com.android.systemui.statusbar.pipeline.icons.shared.model.ModernStatusBarViewCreator
             public final ModernStatusBarView createAndBind(Context context2) {
                 SingleBindableStatusBarIconView.Companion.getClass();
                 final SingleBindableStatusBarIconView singleBindableStatusBarIconView = (SingleBindableStatusBarIconView) LayoutInflater.from(context2).inflate(R.layout.bindable_status_bar_icon, (ViewGroup) null);
-                String str = DeviceBasedSatelliteBindableIcon.this.slot;
+                String str = this.this$0.slot;
                 final DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel2 = deviceBasedSatelliteViewModel;
                 singleBindableStatusBarIconView.initView(str, new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon$initializer$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         DeviceBasedSatelliteIconBinder.INSTANCE.getClass();
-                        return DeviceBasedSatelliteIconBinder.bind(SingleBindableStatusBarIconView.this, deviceBasedSatelliteViewModel2);
+                        return DeviceBasedSatelliteIconBinder.bind(singleBindableStatusBarIconView, deviceBasedSatelliteViewModel2);
                     }
                 });
                 return singleBindableStatusBarIconView;

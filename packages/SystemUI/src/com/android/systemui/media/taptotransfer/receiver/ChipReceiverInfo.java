@@ -9,7 +9,6 @@ import com.android.systemui.temporarydisplay.ViewPriority;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChipReceiverInfo extends TemporaryViewInfo {
     public final Drawable appIconDrawableOverride;
@@ -62,11 +61,11 @@ public final class ChipReceiverInfo extends TemporaryViewInfo {
     }
 
     public final int hashCode() {
-        int hashCode = this.routeInfo.hashCode() * 31;
+        int iHashCode = this.routeInfo.hashCode() * 31;
         Drawable drawable = this.appIconDrawableOverride;
-        int hashCode2 = (hashCode + (drawable == null ? 0 : drawable.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (drawable == null ? 0 : drawable.hashCode())) * 31;
         CharSequence charSequence = this.appNameOverride;
-        return this.instanceId.hashCode() + ((this.priority.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((hashCode2 + (charSequence != null ? charSequence.hashCode() : 0)) * 31, 31, this.windowTitle), 31, this.wakeReason), 31, this.id)) * 31);
+        return this.instanceId.hashCode() + ((this.priority.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iHashCode2 + (charSequence != null ? charSequence.hashCode() : 0)) * 31, 31, this.windowTitle), 31, this.wakeReason), 31, this.id)) * 31);
     }
 
     public final String toString() {

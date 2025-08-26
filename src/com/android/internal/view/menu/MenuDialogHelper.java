@@ -36,9 +36,9 @@ public class MenuDialogHelper implements MenuHelper, DialogInterface.OnKeyListen
             builder.setIcon(menuBuilder.getHeaderIcon()).setTitle(menuBuilder.getHeaderTitle());
         }
         builder.setOnKeyListener(this);
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.setOnDismissListener(this);
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.setOnDismissListener(this);
         WindowManager.LayoutParams attributes = this.mDialog.getWindow().getAttributes();
         attributes.type = 1003;
         if (iBinder != null) {

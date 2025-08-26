@@ -3,7 +3,6 @@ package com.samsung.android.knox.ddar;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Secret implements Parcelable {
     public static final Parcelable.Creator<Secret> CREATOR = new Parcelable.Creator<Secret>() { // from class: com.samsung.android.knox.ddar.Secret.1
@@ -34,9 +33,9 @@ public class Secret implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt != -1) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i != -1) {
+            byte[] bArr = new byte[i];
             this.data = bArr;
             parcel.readByteArray(bArr);
         } else {

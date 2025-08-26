@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class KeyguardStatusBarViewModel$isBatteryCharging$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BatteryController $batteryController;
@@ -50,7 +49,7 @@ final class KeyguardStatusBarViewModel$isBatteryCharging$1 extends SuspendLambda
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.statusbar.ui.viewmodel.KeyguardStatusBarViewModel$isBatteryCharging$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z2));
                 }
             };
             ((BatteryControllerImpl) this.$batteryController).addCallback(r1);
@@ -58,7 +57,7 @@ final class KeyguardStatusBarViewModel$isBatteryCharging$1 extends SuspendLambda
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.ui.viewmodel.KeyguardStatusBarViewModel$isBatteryCharging$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((BatteryControllerImpl) BatteryController.this).removeCallback(r1);
+                    ((BatteryControllerImpl) batteryController).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

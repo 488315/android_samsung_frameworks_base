@@ -41,10 +41,10 @@ public class Registrant {
             clear();
             return;
         }
-        Message obtain = Message.obtain();
-        obtain.what = this.what;
-        obtain.obj = new AsyncResult(this.userObj, obj, th);
-        handler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = this.what;
+        messageObtain.obj = new AsyncResult(this.userObj, obj, th);
+        handler.sendMessage(messageObtain);
     }
 
     public Message messageForRegistrant() {
@@ -53,10 +53,10 @@ public class Registrant {
             clear();
             return null;
         }
-        Message obtainMessage = handler.obtainMessage();
-        obtainMessage.what = this.what;
-        obtainMessage.obj = this.userObj;
-        return obtainMessage;
+        Message messageObtainMessage = handler.obtainMessage();
+        messageObtainMessage.what = this.what;
+        messageObtainMessage.obj = this.userObj;
+        return messageObtainMessage;
     }
 
     public Handler getHandler() {

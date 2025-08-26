@@ -68,9 +68,9 @@ public interface ICamHostControlService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamHostControlService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamHostControlService)) {
-                return (ICamHostControlService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamHostControlService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamHostControlService)) {
+                return (ICamHostControlService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,27 +106,27 @@ public interface ICamHostControlService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICamHostControlInfoListener asInterface = ICamHostControlInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamHostControlInfoListener iCamHostControlInfoListenerAsInterface = ICamHostControlInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addCamHostcontrolInfoListener(asInterface);
+                addCamHostcontrolInfoListener(iCamHostControlInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ICamHostControlInfoListener asInterface2 = ICamHostControlInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamHostControlInfoListener iCamHostControlInfoListenerAsInterface2 = ICamHostControlInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeCamHostcontrolInfoListener(asInterface2);
+                removeCamHostcontrolInfoListener(iCamHostControlInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString = parcel.readString();
-                ICamHostControlAskReleaseReplyCallback asInterface3 = ICamHostControlAskReleaseReplyCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                ICamHostControlAskReleaseReplyCallback iCamHostControlAskReleaseReplyCallbackAsInterface = ICamHostControlAskReleaseReplyCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int sendCamHostControlAskRelease = sendCamHostControlAskRelease(readString, asInterface3);
+                int iSendCamHostControlAskRelease = sendCamHostControlAskRelease(string, iCamHostControlAskReleaseReplyCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeInt(sendCamHostControlAskRelease);
+                parcel2.writeInt(iSendCamHostControlAskRelease);
             } else if (i == 4) {
-                String readString2 = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                String string2 = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setHostControlMode(readString2, readBoolean);
+                setHostControlMode(string2, z);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -152,64 +152,64 @@ public interface ICamHostControlService extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamHostControlService
             public void addCamHostcontrolInfoListener(ICamHostControlInfoListener iCamHostControlInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
-                    obtain.writeStrongInterface(iCamHostControlInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
+                    parcelObtain.writeStrongInterface(iCamHostControlInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamHostControlService
             public void removeCamHostcontrolInfoListener(ICamHostControlInfoListener iCamHostControlInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
-                    obtain.writeStrongInterface(iCamHostControlInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
+                    parcelObtain.writeStrongInterface(iCamHostControlInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamHostControlService
             public int sendCamHostControlAskRelease(String str, ICamHostControlAskReleaseReplyCallback iCamHostControlAskReleaseReplyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iCamHostControlAskReleaseReplyCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iCamHostControlAskReleaseReplyCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamHostControlService
             public void setHostControlMode(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

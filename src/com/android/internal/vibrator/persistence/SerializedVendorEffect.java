@@ -50,17 +50,17 @@ final class SerializedVendorEffect implements XmlSerializedVibration<VibrationEf
         Parser() {
         }
 
-        static SerializedVendorEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws XmlParserException, IOException {
+        static SerializedVendorEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_VENDOR_EFFECT);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, new String[0]);
             XmlReader.readNextText(typedXmlPullParser, XmlConstants.TAG_VENDOR_EFFECT);
             try {
-                String trim = typedXmlPullParser.getText().trim();
-                XmlValidator.checkParserCondition(!trim.isEmpty(), "Expected tag %s to have base64 representation of vendor data, got empty", XmlConstants.TAG_VENDOR_EFFECT);
-                PersistableBundle readFromStream = PersistableBundle.readFromStream(new ByteArrayInputStream(Base64.decode(trim, 0)));
-                XmlValidator.checkParserCondition(!readFromStream.isEmpty(), "Expected tag %s to have non-empty vendor data, got empty bundle", XmlConstants.TAG_VENDOR_EFFECT);
+                String strTrim = typedXmlPullParser.getText().trim();
+                XmlValidator.checkParserCondition(!strTrim.isEmpty(), "Expected tag %s to have base64 representation of vendor data, got empty", XmlConstants.TAG_VENDOR_EFFECT);
+                PersistableBundle fromStream = PersistableBundle.readFromStream(new ByteArrayInputStream(Base64.decode(strTrim, 0)));
+                XmlValidator.checkParserCondition(!fromStream.isEmpty(), "Expected tag %s to have non-empty vendor data, got empty bundle", XmlConstants.TAG_VENDOR_EFFECT);
                 XmlReader.readEndTag(typedXmlPullParser);
-                return new SerializedVendorEffect(readFromStream);
+                return new SerializedVendorEffect(fromStream);
             } catch (IOException e) {
                 throw new XmlParserException("Error reading vendor data from decoded bytes", e);
             } catch (IllegalArgumentException | NullPointerException e2) {

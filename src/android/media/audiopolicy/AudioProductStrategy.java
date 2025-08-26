@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public final class AudioProductStrategy implements Parcelable {
     private static final int AUDIO_FLAGS_AFFECT_STRATEGY_SELECTION = 13;
     public static final int DEFAULT_GROUP = -1;
@@ -29,14 +29,14 @@ public final class AudioProductStrategy implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AudioProductStrategy createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            AudioAttributesGroup[] audioAttributesGroupArr = new AudioAttributesGroup[readInt2];
-            for (int i = 0; i < readInt2; i++) {
-                audioAttributesGroupArr[i] = AudioAttributesGroup.CREATOR.createFromParcel(parcel);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            AudioAttributesGroup[] audioAttributesGroupArr = new AudioAttributesGroup[i2];
+            for (int i3 = 0; i3 < i2; i3++) {
+                audioAttributesGroupArr[i3] = AudioAttributesGroup.CREATOR.createFromParcel(parcel);
             }
-            return new AudioProductStrategy(readString, readInt, audioAttributesGroupArr);
+            return new AudioProductStrategy(string, i, audioAttributesGroupArr);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -263,12 +263,12 @@ public final class AudioProductStrategy implements Parcelable {
     public static boolean attributesMatches(AudioAttributes audioAttributes, AudioAttributes audioAttributes2) {
         Objects.requireNonNull(audioAttributes, "reference AudioAttributes must not be null");
         Objects.requireNonNull(audioAttributes2, "requester's AudioAttributes must not be null");
-        String join = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, audioAttributes.getTags());
-        String join2 = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, audioAttributes2.getTags());
+        String strJoin = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, audioAttributes.getTags());
+        String strJoin2 = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, audioAttributes2.getTags());
         if (audioAttributes.equals(DEFAULT_ATTRIBUTES)) {
             return false;
         }
-        return (audioAttributes.getSystemUsage() == 0 || audioAttributes2.getSystemUsage() == audioAttributes.getSystemUsage()) && (audioAttributes.getContentType() == 0 || audioAttributes2.getContentType() == audioAttributes.getContentType()) && (((audioAttributes.getAllFlags() & 13) == 0 || ((audioAttributes2.getAllFlags() & 13) != 0 && (audioAttributes2.getAllFlags() & audioAttributes.getAllFlags()) == audioAttributes.getAllFlags())) && (join.length() == 0 || join.equals(join2)));
+        return (audioAttributes.getSystemUsage() == 0 || audioAttributes2.getSystemUsage() == audioAttributes.getSystemUsage()) && (audioAttributes.getContentType() == 0 || audioAttributes2.getContentType() == audioAttributes.getContentType()) && (((audioAttributes.getAllFlags() & 13) == 0 || ((audioAttributes2.getAllFlags() & 13) != 0 && (audioAttributes2.getAllFlags() & audioAttributes.getAllFlags()) == audioAttributes.getAllFlags())) && (strJoin.length() == 0 || strJoin.equals(strJoin2)));
     }
 
     private static final class AudioAttributesGroup implements Parcelable {
@@ -276,14 +276,14 @@ public final class AudioProductStrategy implements Parcelable {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public AudioAttributesGroup createFromParcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                AudioAttributes[] audioAttributesArr = new AudioAttributes[readInt3];
-                for (int i = 0; i < readInt3; i++) {
-                    audioAttributesArr[i] = AudioAttributes.CREATOR.createFromParcel(parcel);
+                int i = parcel.readInt();
+                int i2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                AudioAttributes[] audioAttributesArr = new AudioAttributes[i3];
+                for (int i4 = 0; i4 < i3; i4++) {
+                    audioAttributesArr[i4] = AudioAttributes.CREATOR.createFromParcel(parcel);
                 }
-                return new AudioAttributesGroup(readInt, readInt2, audioAttributesArr);
+                return new AudioAttributesGroup(i, i2, audioAttributesArr);
             }
 
             /* JADX WARN: Can't rename method to resolve collision */

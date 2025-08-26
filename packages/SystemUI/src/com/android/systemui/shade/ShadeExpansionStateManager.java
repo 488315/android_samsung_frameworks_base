@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeExpansionStateManager implements Dumpable {
     public boolean expanded;
@@ -22,7 +21,6 @@ public final class ShadeExpansionStateManager implements Dumpable {
     public final CopyOnWriteArrayList stateListeners = new CopyOnWriteArrayList();
     public final TraceStateLogger stateLogger = new TraceStateLogger(TrackGroupUtils.trackGroup("shade", "ShadeExpansionState"), false, false, false, 14, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,7 +72,7 @@ public final class ShadeExpansionStateManager implements Dumpable {
         this.state = i;
         Iterator it = this.stateListeners.iterator();
         while (it.hasNext()) {
-            ((ShadeStateListener) it.next()).onPanelStateChanged$1(i);
+            ((ShadeStateListener) it.next()).onPanelStateChanged$2(i);
         }
     }
 }

@@ -41,8 +41,8 @@ public final class StreamEventRequest extends BroadcastInfoRequest implements Pa
 
     StreamEventRequest(Parcel parcel) {
         super(5, parcel);
-        String readString = parcel.readString();
-        this.mTargetUri = readString == null ? null : Uri.parse(readString);
+        String string = parcel.readString();
+        this.mTargetUri = string == null ? null : Uri.parse(string);
         this.mEventName = parcel.readString();
     }
 

@@ -30,22 +30,22 @@ public final class SemGateConfig {
     }
 
     public static boolean isGateEnabled() {
-        String valueOf = String.valueOf(SystemProperties.get("ro.debug_level"));
+        String strValueOf = String.valueOf(SystemProperties.get("ro.debug_level"));
         if (!"user".equals(Build.TYPE)) {
             return sGateEnabled || SystemProperties.get(GATE_SYS_PROP_GATE_ENABLED).equals("1");
         }
-        if (valueOf.equals(DEBUG_LEVEL_LOW)) {
+        if (strValueOf.equals(DEBUG_LEVEL_LOW)) {
             return false;
         }
         return SystemProperties.get(GATE_SYS_PROP_GATE_ENABLED).equals("1");
     }
 
     public static boolean isGateLcdtextEnabled() {
-        String valueOf = String.valueOf(SystemProperties.get("ro.debug_level"));
+        String strValueOf = String.valueOf(SystemProperties.get("ro.debug_level"));
         if (!"user".equals(Build.TYPE)) {
             return sGateLcdtextEnabled || SystemProperties.get(GATE_SYS_PROP_LCDTEXT_ENABLED).equals("1");
         }
-        if (valueOf.equals(DEBUG_LEVEL_LOW)) {
+        if (strValueOf.equals(DEBUG_LEVEL_LOW)) {
             return false;
         }
         return SystemProperties.get(GATE_SYS_PROP_LCDTEXT_ENABLED).equals("1");

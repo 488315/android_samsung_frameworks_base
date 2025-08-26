@@ -8,7 +8,6 @@ import kotlin.Pair;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MoSaLogging {
     public static final MoSaLogging INSTANCE = new MoSaLogging();
@@ -56,11 +55,11 @@ public final class MoSaLogging {
             return;
         }
         String str2 = saEvent.id;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(saCustomArr.length);
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(saCustomArr.length);
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
         for (SaCustom saCustom : saCustomArr) {
             Pair pair = new Pair(saCustom.key, saCustom.value);
             linkedHashMap.put(pair.getFirst(), pair.getSecond());

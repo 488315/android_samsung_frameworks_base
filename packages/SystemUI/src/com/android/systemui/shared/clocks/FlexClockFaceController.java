@@ -28,7 +28,6 @@ import java.util.TimeZone;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FlexClockFaceController implements ClockFaceController {
     public static final Companion Companion = new Companion(null);
@@ -44,7 +43,6 @@ public final class FlexClockFaceController implements ClockFaceController {
     public final ClockFaceConfig config = new ClockFaceConfig(null, false, true, false, 11, null);
     public final DigitalTimespecHandler timespecHandler = new DigitalTimespecHandler(DigitalTimespec.TIME_FULL_FORMAT, "hh:mm", null, 4, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,7 +99,6 @@ public final class FlexClockFaceController implements ClockFaceController {
         return this.layerController.getView();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlexClockFaceEvents implements ClockEvents, ClockFaceEvents {
         public boolean isReactiveTouchInteractionEnabled;
 
@@ -130,28 +127,32 @@ public final class FlexClockFaceController implements ClockFaceController {
             FlexClockFaceController flexClockFaceController = FlexClockFaceController.this;
             DigitalTimespecHandler digitalTimespecHandler = flexClockFaceController.timespecHandler;
             digitalTimespecHandler.getClass();
-            boolean equals = locale.getLanguage().equals(Locale.ENGLISH.getLanguage());
+            boolean zEquals = locale.getLanguage().equals(Locale.ENGLISH.getLanguage());
             String str = digitalTimespecHandler.timeFormat;
-            digitalTimespecHandler.dateFormat = equals ? new SimpleDateFormat(str, str, ULocale.forLocale(locale)) : SimpleDateFormat.getInstanceForSkeleton(str, locale);
+            digitalTimespecHandler.dateFormat = zEquals ? new SimpleDateFormat(str, str, ULocale.forLocale(locale)) : SimpleDateFormat.getInstanceForSkeleton(str, locale);
             digitalTimespecHandler.contentDescriptionFormat = DigitalTimespecHandler.WhenMappings.$EnumSwitchMapping$0[digitalTimespecHandler.timespec.ordinal()] == 1 ? SimpleDateFormat.getInstanceForSkeleton("hh:mm", locale) : null;
             digitalTimespecHandler.onTimeZoneChanged();
             flexClockFaceController.layerController.getEvents().onLocaleChanged(locale);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:23:0x00b2  */
         @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onTargetRegionChanged(Rect rect) {
             FrameLayout.LayoutParams layoutParams;
-            long m2772getZEROJv7bpU8;
+            long jM2717minusb2IjXjg;
             FlexClockFaceController flexClockFaceController = FlexClockFaceController.this;
             flexClockFaceController.layerController.getFaceEvents().onTargetRegionChanged(rect);
             SimpleClockLayerController simpleClockLayerController = flexClockFaceController.layerController;
-            float max = Math.max(0.0f, simpleClockLayerController.getView().getLayoutParams().width);
-            float max2 = Math.max(0.0f, simpleClockLayerController.getView().getLayoutParams().height);
-            if (max2 <= 0.0f || max <= 0.0f || rect == null) {
+            float fMax = Math.max(0.0f, simpleClockLayerController.getView().getLayoutParams().width);
+            float fMax2 = Math.max(0.0f, simpleClockLayerController.getView().getLayoutParams().height);
+            if (fMax2 <= 0.0f || fMax <= 0.0f || rect == null) {
                 layoutParams = new FrameLayout.LayoutParams(-1, -1);
             } else {
-                float width = max / max2 > ((float) rect.width()) / ((float) rect.height()) ? rect.width() / max : rect.height() / max2;
-                layoutParams = new FrameLayout.LayoutParams(MathKt__MathJVMKt.roundToInt(max * width), MathKt__MathJVMKt.roundToInt(max2 * width));
+                float fWidth = fMax / fMax2 > ((float) rect.width()) / ((float) rect.height()) ? rect.width() / fMax : rect.height() / fMax2;
+                layoutParams = new FrameLayout.LayoutParams(MathKt__MathJVMKt.roundToInt(fMax * fWidth), MathKt__MathJVMKt.roundToInt(fMax2 * fWidth));
             }
             layoutParams.gravity = 17;
             simpleClockLayerController.getView().setLayoutParams(layoutParams);
@@ -162,15 +163,10 @@ public final class FlexClockFaceController implements ClockFaceController {
                 Object parent = view.getParent();
                 if (parent instanceof View) {
                     View view2 = (View) parent;
-                    if (view2.isLaidOut() && flexClockFaceController.isLargeClock) {
-                        m2772getZEROJv7bpU8 = VPoint.m2699minusb2IjXjg(VPoint.Companion.m2716getCenterDO4cnVw(rect), VPointF.m2737divAsyRdg(VPointF.m2734constructorimpl(view2.getWidth(), view2.getHeight()), 2.0f));
-                        simpleClockLayerController.getView().setTranslationX(VPointF.m2744getXimpl(m2772getZEROJv7bpU8));
-                        simpleClockLayerController.getView().setTranslationY(VPointF.m2745getYimpl(m2772getZEROJv7bpU8));
-                    }
+                    jM2717minusb2IjXjg = (view2.isLaidOut() && flexClockFaceController.isLargeClock) ? VPoint.m2717minusb2IjXjg(VPoint.Companion.m2734getCenterDO4cnVw(rect), VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(view2.getWidth(), view2.getHeight()), 2.0f)) : VPointF.Companion.m2790getZEROJv7bpU8();
                 }
-                m2772getZEROJv7bpU8 = VPointF.Companion.m2772getZEROJv7bpU8();
-                simpleClockLayerController.getView().setTranslationX(VPointF.m2744getXimpl(m2772getZEROJv7bpU8));
-                simpleClockLayerController.getView().setTranslationY(VPointF.m2745getYimpl(m2772getZEROJv7bpU8));
+                simpleClockLayerController.getView().setTranslationX(VPointF.m2762getXimpl(jM2717minusb2IjXjg));
+                simpleClockLayerController.getView().setTranslationY(VPointF.m2763getYimpl(jM2717minusb2IjXjg));
             }
         }
 

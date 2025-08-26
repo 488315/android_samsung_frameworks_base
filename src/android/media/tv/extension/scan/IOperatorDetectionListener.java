@@ -45,9 +45,9 @@ public interface IOperatorDetectionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IOperatorDetectionListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOperatorDetectionListener)) {
-                return (IOperatorDetectionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IOperatorDetectionListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOperatorDetectionListener)) {
+                return (IOperatorDetectionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IOperatorDetectionListener extends IInterface {
 
             @Override // android.media.tv.extension.scan.IOperatorDetectionListener
             public void onDetectOperatorDetectionList(Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetectionListener");
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetectionListener");
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

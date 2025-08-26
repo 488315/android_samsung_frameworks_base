@@ -91,22 +91,26 @@ public final class PwleSegment extends VibrationEffectSegment {
         return Float.compare(this.mStartAmplitude, pwleSegment.mStartAmplitude) == 0 && Float.compare(this.mEndAmplitude, pwleSegment.mEndAmplitude) == 0 && Float.compare(this.mStartFrequencyHz, pwleSegment.mStartFrequencyHz) == 0 && Float.compare(this.mEndFrequencyHz, pwleSegment.mEndFrequencyHz) == 0 && this.mDuration == pwleSegment.mDuration;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002a  */
     @Override // android.os.vibrator.VibrationEffectSegment
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean areVibrationFeaturesSupported(VibratorInfo vibratorInfo) {
         boolean z;
-        boolean areEnvelopeEffectsSupported = vibratorInfo.areEnvelopeEffectsSupported();
+        boolean zAreEnvelopeEffectsSupported = vibratorInfo.areEnvelopeEffectsSupported();
         float minFrequencyHz = vibratorInfo.getFrequencyProfile().getMinFrequencyHz();
         float maxFrequencyHz = vibratorInfo.getFrequencyProfile().getMaxFrequencyHz();
         float f = this.mStartFrequencyHz;
-        if (f >= minFrequencyHz && f <= maxFrequencyHz) {
+        if (f < minFrequencyHz || f > maxFrequencyHz) {
+            z = false;
+        } else {
             float f2 = this.mEndFrequencyHz;
             if (f2 >= minFrequencyHz && f2 <= maxFrequencyHz) {
                 z = true;
-                return z & areEnvelopeEffectsSupported;
             }
         }
-        z = false;
-        return z & areEnvelopeEffectsSupported;
+        return z & zAreEnvelopeEffectsSupported;
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
@@ -120,16 +124,16 @@ public final class PwleSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public PwleSegment scale(float f) {
-        float scale = VibrationEffect.scale(this.mStartAmplitude, f);
-        float scale2 = VibrationEffect.scale(this.mEndAmplitude, f);
-        return (Float.compare(this.mStartAmplitude, scale) == 0 && Float.compare(this.mEndAmplitude, scale2) == 0) ? this : new PwleSegment(scale, scale2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        float fScale = VibrationEffect.scale(this.mStartAmplitude, f);
+        float fScale2 = VibrationEffect.scale(this.mEndAmplitude, f);
+        return (Float.compare(this.mStartAmplitude, fScale) == 0 && Float.compare(this.mEndAmplitude, fScale2) == 0) ? this : new PwleSegment(fScale, fScale2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public PwleSegment scaleLinearly(float f) {
-        float scaleLinearly = VibrationEffect.scaleLinearly(this.mStartAmplitude, f);
-        float scaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndAmplitude, f);
-        return (Float.compare(this.mStartAmplitude, scaleLinearly) == 0 && Float.compare(this.mEndAmplitude, scaleLinearly2) == 0) ? this : new PwleSegment(scaleLinearly, scaleLinearly2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        float fScaleLinearly = VibrationEffect.scaleLinearly(this.mStartAmplitude, f);
+        float fScaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndAmplitude, f);
+        return (Float.compare(this.mStartAmplitude, fScaleLinearly) == 0 && Float.compare(this.mEndAmplitude, fScaleLinearly2) == 0) ? this : new PwleSegment(fScaleLinearly, fScaleLinearly2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
     }
 
     public int hashCode() {

@@ -3,14 +3,18 @@ package androidx.compose.animation.core;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
 import androidx.collection.IntList;
 import androidx.collection.IntObjectMap;
+import androidx.collection.MutableIntList;
+import androidx.collection.MutableIntObjectMap;
 import androidx.collection.internal.RuntimeHelpersKt;
 import androidx.compose.animation.core.AnimationVector;
 import androidx.compose.animation.core.ArcSpline;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
+import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedKeyframesSpec<V extends AnimationVector> implements VectorizedDurationBasedAnimationSpec<V> {
     public ArcSpline arcSpline;
@@ -90,8 +94,8 @@ public final class VectorizedKeyframesSpec<V extends AnimationVector> implements
                     easing = this.defaultEasing;
                 }
                 float f2 = i5;
-                float transform = easing.transform((i2 - i3) / f2);
-                return z ? transform : ((f2 * transform) + i3) / 1000;
+                float fTransform = easing.transform((i2 - i3) / f2);
+                return z ? fTransform : ((f2 * fTransform) + i3) / 1000;
             }
             f = i3;
         }
@@ -219,14 +223,14 @@ public final class VectorizedKeyframesSpec<V extends AnimationVector> implements
                 animationVector7.set$animation_core(fArr[i9], i9);
             }
         } else {
-            int findEntryForTimeMillis = findEntryForTimeMillis(i2);
-            float easedTimeFromIndex2 = getEasedTimeFromIndex(findEntryForTimeMillis, i2, true);
+            int iFindEntryForTimeMillis = findEntryForTimeMillis(i2);
+            float easedTimeFromIndex2 = getEasedTimeFromIndex(iFindEntryForTimeMillis, i2, true);
             IntList intList = this.timestamps;
-            VectorizedKeyframeSpecElementInfo vectorizedKeyframeSpecElementInfo2 = (VectorizedKeyframeSpecElementInfo) intObjectMap.get(intList.get(findEntryForTimeMillis));
+            VectorizedKeyframeSpecElementInfo vectorizedKeyframeSpecElementInfo2 = (VectorizedKeyframeSpecElementInfo) intObjectMap.get(intList.get(iFindEntryForTimeMillis));
             if (vectorizedKeyframeSpecElementInfo2 != null && (animationVector5 = vectorizedKeyframeSpecElementInfo2.vectorValue) != null) {
                 animationVector6 = animationVector5;
             }
-            VectorizedKeyframeSpecElementInfo vectorizedKeyframeSpecElementInfo3 = (VectorizedKeyframeSpecElementInfo) intObjectMap.get(intList.get(findEntryForTimeMillis + 1));
+            VectorizedKeyframeSpecElementInfo vectorizedKeyframeSpecElementInfo3 = (VectorizedKeyframeSpecElementInfo) intObjectMap.get(intList.get(iFindEntryForTimeMillis + 1));
             if (vectorizedKeyframeSpecElementInfo3 == null || (animationVector4 = vectorizedKeyframeSpecElementInfo3.vectorValue) == null) {
                 animationVector4 = animationVector2;
             }
@@ -393,87 +397,33 @@ public final class VectorizedKeyframesSpec<V extends AnimationVector> implements
         this(map, i, (i3 & 4) != 0 ? 0 : i2);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public VectorizedKeyframesSpec(java.util.Map<java.lang.Integer, ? extends kotlin.Pair<? extends V, ? extends androidx.compose.animation.core.Easing>> r10, int r11, int r12) {
-        /*
-            r9 = this;
-            androidx.collection.MutableIntList r1 = new androidx.collection.MutableIntList
-            int r0 = r10.size()
-            int r0 = r0 + 2
-            r1.<init>(r0)
-            java.util.Set r0 = r10.entrySet()
-            java.util.Iterator r0 = r0.iterator()
-        L13:
-            boolean r2 = r0.hasNext()
-            if (r2 == 0) goto L2d
-            java.lang.Object r2 = r0.next()
-            java.util.Map$Entry r2 = (java.util.Map.Entry) r2
-            java.lang.Object r2 = r2.getKey()
-            java.lang.Number r2 = (java.lang.Number) r2
-            int r2 = r2.intValue()
-            r1.add(r2)
-            goto L13
-        L2d:
-            r0 = 0
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r0)
-            boolean r2 = r10.containsKey(r2)
-            if (r2 != 0) goto L3b
-            r1.add()
-        L3b:
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r11)
-            boolean r2 = r10.containsKey(r2)
-            if (r2 != 0) goto L48
-            r1.add(r11)
-        L48:
-            int r2 = r1._size
-            if (r2 != 0) goto L4d
-            goto L52
-        L4d:
-            int[] r3 = r1.content
-            java.util.Arrays.sort(r3, r0, r2)
-        L52:
-            androidx.collection.MutableIntObjectMap r2 = new androidx.collection.MutableIntObjectMap
-            r3 = 1
-            r4 = 0
-            r2.<init>(r0, r3, r4)
-            java.util.Set r10 = r10.entrySet()
-            java.util.Iterator r10 = r10.iterator()
-        L61:
-            boolean r3 = r10.hasNext()
-            if (r3 == 0) goto L97
-            java.lang.Object r3 = r10.next()
-            java.util.Map$Entry r3 = (java.util.Map.Entry) r3
-            java.lang.Object r5 = r3.getKey()
-            java.lang.Number r5 = (java.lang.Number) r5
-            int r5 = r5.intValue()
-            java.lang.Object r3 = r3.getValue()
-            kotlin.Pair r3 = (kotlin.Pair) r3
-            androidx.compose.animation.core.VectorizedKeyframeSpecElementInfo r6 = new androidx.compose.animation.core.VectorizedKeyframeSpecElementInfo
-            java.lang.Object r7 = r3.getFirst()
-            androidx.compose.animation.core.AnimationVector r7 = (androidx.compose.animation.core.AnimationVector) r7
-            java.lang.Object r3 = r3.getSecond()
-            androidx.compose.animation.core.Easing r3 = (androidx.compose.animation.core.Easing) r3
-            androidx.compose.animation.core.ArcMode$Companion r8 = androidx.compose.animation.core.ArcMode.Companion
-            r8.getClass()
-            r6.<init>(r7, r3, r0, r4)
-            r2.set(r5, r6)
-            goto L61
-        L97:
-            androidx.compose.animation.core.EasingKt$$ExternalSyntheticLambda0 r5 = androidx.compose.animation.core.EasingKt.LinearEasing
-            androidx.compose.animation.core.ArcMode$Companion r10 = androidx.compose.animation.core.ArcMode.Companion
-            r10.getClass()
-            r6 = 0
-            r7 = 0
-            r0 = r9
-            r3 = r11
-            r4 = r12
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.animation.core.VectorizedKeyframesSpec.<init>(java.util.Map, int, int):void");
+    public VectorizedKeyframesSpec(Map<Integer, ? extends Pair<? extends V, ? extends Easing>> map, int i, int i2) {
+        MutableIntList mutableIntList = new MutableIntList(map.size() + 2);
+        Iterator<Map.Entry<Integer, ? extends Pair<? extends V, ? extends Easing>>> it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            mutableIntList.add(it.next().getKey().intValue());
+        }
+        if (!map.containsKey(0)) {
+            mutableIntList.add();
+        }
+        if (!map.containsKey(Integer.valueOf(i))) {
+            mutableIntList.add(i);
+        }
+        int i3 = mutableIntList._size;
+        if (i3 != 0) {
+            Arrays.sort(mutableIntList.content, 0, i3);
+        }
+        MutableIntObjectMap mutableIntObjectMap = new MutableIntObjectMap(0, 1, null);
+        for (Map.Entry<Integer, ? extends Pair<? extends V, ? extends Easing>> entry : map.entrySet()) {
+            int iIntValue = entry.getKey().intValue();
+            Pair<? extends V, ? extends Easing> value = entry.getValue();
+            AnimationVector animationVector = (AnimationVector) value.getFirst();
+            Easing easing = (Easing) value.getSecond();
+            ArcMode.Companion.getClass();
+            mutableIntObjectMap.set(iIntValue, new VectorizedKeyframeSpecElementInfo(animationVector, easing, 0, null));
+        }
+        EasingKt$$ExternalSyntheticLambda0 easingKt$$ExternalSyntheticLambda0 = EasingKt.LinearEasing;
+        ArcMode.Companion.getClass();
+        this(mutableIntList, mutableIntObjectMap, i, i2, easingKt$$ExternalSyntheticLambda0, 0, null);
     }
 }

@@ -22,9 +22,12 @@ import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenshotUtils {
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0033  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static Display getDisplay(int i, Context context) {
         Display display;
         if (BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY", "LARGESCREEN") && i == 1) {
@@ -37,11 +40,15 @@ public class ScreenshotUtils {
                         break;
                     }
                 }
-            }
-            display = null;
-            if (display != null) {
-                Log.i("Screenshot", "getDisplay: subDisplay's rotation=" + display.getRotation());
-                return display;
+                display = null;
+                if (display != null) {
+                    Log.i("Screenshot", "getDisplay: subDisplay's rotation=" + display.getRotation());
+                    return display;
+                }
+            } else {
+                display = null;
+                if (display != null) {
+                }
             }
         }
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");

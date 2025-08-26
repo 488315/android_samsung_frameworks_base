@@ -21,7 +21,6 @@ import kotlin.collections.SetsKt___SetsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda4 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -40,13 +39,13 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
             case 0:
                 int i2 = DemoMobileConnectionsRepositoryKairos.$r8$clinit;
                 demoMobileConnectionsRepositoryKairos.getClass();
-                Set<Map.Entry> entrySet = ((Map) obj2).entrySet();
-                int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-                if (mapCapacity < 16) {
-                    mapCapacity = 16;
+                Set<Map.Entry> setEntrySet = ((Map) obj2).entrySet();
+                int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+                if (iMapCapacity < 16) {
+                    iMapCapacity = 16;
                 }
-                LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-                for (Map.Entry entry : entrySet) {
+                LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+                for (Map.Entry entry : setEntrySet) {
                     Pair pair = new Pair(entry.getValue(), entry.getKey());
                     linkedHashMap.put(pair.getFirst(), pair.getSecond());
                 }
@@ -63,13 +62,13 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
                     if (num == null) {
                         return null;
                     }
-                    final int intValue = num.intValue();
+                    final int iIntValue = num.intValue();
                     final int i4 = 0;
                     return new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda22
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj3) {
-                            int i5 = intValue;
+                        public final Object mo781invoke(Object obj3) {
+                            int i5 = iIntValue;
                             Set set = (Set) obj3;
                             switch (i4) {
                                 case 0:
@@ -98,12 +97,12 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
                 if (num2 == null) {
                     return null;
                 }
-                final int intValue2 = num2.intValue();
+                final int iIntValue2 = num2.intValue();
                 return new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda22
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj3) {
-                        int i5 = intValue2;
+                    public final Object mo781invoke(Object obj3) {
+                        int i5 = iIntValue2;
                         Set set2 = (Set) obj3;
                         switch (i) {
                             case 0:
@@ -117,13 +116,13 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
                 };
             case 2:
                 int i5 = DemoMobileConnectionsRepositoryKairos.$r8$clinit;
-                final int intValue3 = ((Number) ((Map.Entry) obj2).getKey()).intValue();
+                final int iIntValue3 = ((Number) ((Map.Entry) obj2).getKey()).intValue();
                 return new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda24
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj3) {
+                    public final Object mo781invoke(Object obj3) {
                         int i6 = DemoMobileConnectionsRepositoryKairos.$r8$clinit;
-                        DemoMobileConnectionsRepositoryKairos$newRepo$1 demoMobileConnectionsRepositoryKairos$newRepo$1 = new DemoMobileConnectionsRepositoryKairos$newRepo$1(intValue3, demoMobileConnectionsRepositoryKairos);
+                        DemoMobileConnectionsRepositoryKairos$newRepo$1 demoMobileConnectionsRepositoryKairos$newRepo$1 = new DemoMobileConnectionsRepositoryKairos$newRepo$1(iIntValue3, demoMobileConnectionsRepositoryKairos);
                         DemoMobileConnectionsRepositoryKairos demoMobileConnectionsRepositoryKairos2 = demoMobileConnectionsRepositoryKairos$newRepo$1.this$0;
                         TableLogBufferFactory tableLogBufferFactory = demoMobileConnectionsRepositoryKairos2.logFactory;
                         StringBuilder sb = new StringBuilder("DemoMobileConnectionLog[");

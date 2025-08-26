@@ -11,8 +11,8 @@ public class IValue extends ASN1Object {
     private final BigInteger value;
 
     private IValue(ASN1Integer aSN1Integer) {
-        int intValueExact = BigIntegers.intValueExact(aSN1Integer.getValue());
-        if (intValueExact < 0 || intValueExact > 65535) {
+        int iIntValueExact = BigIntegers.intValueExact(aSN1Integer.getValue());
+        if (iIntValueExact < 0 || iIntValueExact > 65535) {
             throw new IllegalArgumentException("value out of range");
         }
         this.value = aSN1Integer.getValue();

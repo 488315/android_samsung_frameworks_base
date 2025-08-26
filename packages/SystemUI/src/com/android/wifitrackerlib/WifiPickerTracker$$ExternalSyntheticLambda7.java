@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WifiPickerTracker$$ExternalSyntheticLambda7 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -36,9 +35,9 @@ public final /* synthetic */ class WifiPickerTracker$$ExternalSyntheticLambda7 i
                 Set set2 = this.f$0;
                 Map map2 = this.f$1;
                 HotspotNetworkEntry hotspotNetworkEntry = (HotspotNetworkEntry) obj;
-                Long valueOf = Long.valueOf(hotspotNetworkEntry.mKey.mDeviceId);
-                set2.remove(valueOf);
-                HotspotNetwork hotspotNetwork = (HotspotNetwork) map2.get(valueOf);
+                Long lValueOf = Long.valueOf(hotspotNetworkEntry.mKey.mDeviceId);
+                set2.remove(lValueOf);
+                HotspotNetwork hotspotNetwork = (HotspotNetwork) map2.get(lValueOf);
                 synchronized (hotspotNetworkEntry) {
                     hotspotNetworkEntry.mHotspotNetworkData = hotspotNetwork;
                     hotspotNetworkEntry.mKey = new HotspotNetworkEntry.HotspotNetworkEntryKey(hotspotNetwork);

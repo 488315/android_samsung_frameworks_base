@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CompletableDeferredImpl;
 import kotlinx.coroutines.CompletableDeferredKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LottieCompositionResultImpl implements State {
     public final State isComplete$delegate;
@@ -26,7 +25,7 @@ public final class LottieCompositionResultImpl implements State {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(((LottieComposition) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.value$delegate).getValue()) == null && ((Throwable) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.error$delegate).getValue()) == null);
+                return Boolean.valueOf(((LottieComposition) ((SnapshotMutableStateImpl) this.this$0.value$delegate).getValue()) == null && ((Throwable) ((SnapshotMutableStateImpl) this.this$0.error$delegate).getValue()) == null);
             }
         });
         this.isComplete$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.airbnb.lottie.compose.LottieCompositionResultImpl$isComplete$2
@@ -36,7 +35,7 @@ public final class LottieCompositionResultImpl implements State {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf((((LottieComposition) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.value$delegate).getValue()) == null && ((Throwable) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.error$delegate).getValue()) == null) ? false : true);
+                return Boolean.valueOf((((LottieComposition) ((SnapshotMutableStateImpl) this.this$0.value$delegate).getValue()) == null && ((Throwable) ((SnapshotMutableStateImpl) this.this$0.error$delegate).getValue()) == null) ? false : true);
             }
         });
         SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.airbnb.lottie.compose.LottieCompositionResultImpl$isFailure$2
@@ -46,7 +45,7 @@ public final class LottieCompositionResultImpl implements State {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(((Throwable) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.error$delegate).getValue()) != null);
+                return Boolean.valueOf(((Throwable) ((SnapshotMutableStateImpl) this.this$0.error$delegate).getValue()) != null);
             }
         });
         this.isSuccess$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.airbnb.lottie.compose.LottieCompositionResultImpl$isSuccess$2
@@ -56,7 +55,7 @@ public final class LottieCompositionResultImpl implements State {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(((LottieComposition) ((SnapshotMutableStateImpl) LottieCompositionResultImpl.this.value$delegate).getValue()) != null);
+                return Boolean.valueOf(((LottieComposition) ((SnapshotMutableStateImpl) this.this$0.value$delegate).getValue()) != null);
             }
         });
     }

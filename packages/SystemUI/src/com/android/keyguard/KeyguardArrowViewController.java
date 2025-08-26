@@ -34,7 +34,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIImageView;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardArrowViewController extends ViewController implements SystemUIWidgetCallback {
     public final ConfigurationController mConfigurationController;
@@ -57,7 +56,6 @@ public class KeyguardArrowViewController extends ViewController implements Syste
     public final KeyguardUpdateMonitorCallback mUpdateCallback;
     public final ViewMediatorCallback mViewMediatorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final ConfigurationController mConfigurationController;
         public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -73,9 +71,9 @@ public class KeyguardArrowViewController extends ViewController implements Syste
     }
 
     /* renamed from: -$$Nest$mannounceForArrowAccessibility, reason: not valid java name */
-    public static void m950$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController keyguardArrowViewController, boolean z) {
-        boolean isPatternView = keyguardArrowViewController.isPatternView();
-        ((KeyguardArrowView) keyguardArrowViewController.mView).announceForAccessibility(keyguardArrowViewController.getContext().getString(z ? isPatternView ? R.string.kg_arrow_move_pattern_area_left : R.string.kg_arrow_move_pin_area_left : isPatternView ? R.string.kg_arrow_move_pattern_area_right : R.string.kg_arrow_move_pin_area_right));
+    public static void m952$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController keyguardArrowViewController, boolean z) {
+        boolean zIsPatternView = keyguardArrowViewController.isPatternView();
+        ((KeyguardArrowView) keyguardArrowViewController.mView).announceForAccessibility(keyguardArrowViewController.getContext().getString(z ? zIsPatternView ? R.string.kg_arrow_move_pattern_area_left : R.string.kg_arrow_move_pin_area_left : zIsPatternView ? R.string.kg_arrow_move_pattern_area_right : R.string.kg_arrow_move_pin_area_right));
     }
 
     /* JADX WARN: Type inference failed for: r5v3, types: [com.android.keyguard.KeyguardArrowViewController$1] */
@@ -100,7 +98,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardArrowViewController.2
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 boolean z = LsRune.SECURITY_SUB_DISPLAY_LOCK;
                 KeyguardArrowViewController keyguardArrowViewController = KeyguardArrowViewController.this;
                 if (z) {
@@ -135,7 +133,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onKeyguardBouncerFullyShowingChanged(boolean z) {
+            public final void onKeyguardBouncerFullyShowingChanged(boolean z) throws Resources.NotFoundException {
                 if (z) {
                     KeyguardArrowViewController.this.updateArrowMargin();
                 }
@@ -143,7 +141,6 @@ public class KeyguardArrowViewController extends ViewController implements Syste
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onLockModeChanged() {
-                View view;
                 KeyguardArrowViewController keyguardArrowViewController = KeyguardArrowViewController.this;
                 long lockoutAttemptDeadline = keyguardArrowViewController.mKeyguardUpdateMonitor.getLockoutAttemptDeadline();
                 Log.d("KeyguardArrowViewController", "onLockModeChanged - deadline " + lockoutAttemptDeadline);
@@ -159,8 +156,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 keyguardArrowViewController.updateArrowVisibility(false);
                 KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = KeyguardSecSecurityContainerController.this;
                 if (keyguardSecSecurityContainerController.mCurrentSecurityMode != KeyguardSecurityModel.SecurityMode.None) {
-                    view = ((ViewController) keyguardSecSecurityContainerController).mView;
-                    KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) view;
+                    KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) ((ViewController) keyguardSecSecurityContainerController).mView;
                     if (keyguardSecSecurityContainer.mCurrentMode == 3) {
                         ((KeyguardSecSecurityContainer.SecViewMode) keyguardSecSecurityContainer.mViewMode).updateSecurityViewPosition(1, false);
                     }
@@ -170,7 +166,6 @@ public class KeyguardArrowViewController extends ViewController implements Syste
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSecurityViewChanged(KeyguardSecurityModel.SecurityMode securityMode) {
                 SystemUIImageView systemUIImageView;
-                View view;
                 KeyguardArrowViewController keyguardArrowViewController = KeyguardArrowViewController.this;
                 if (keyguardArrowViewController.mLeftArrow == null || (systemUIImageView = keyguardArrowViewController.mRightArrow) == null) {
                     return;
@@ -183,8 +178,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 systemUIImageView.setVisibility(8);
                 KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = KeyguardSecSecurityContainerController.this;
                 if (keyguardSecSecurityContainerController.mCurrentSecurityMode != KeyguardSecurityModel.SecurityMode.None) {
-                    view = ((ViewController) keyguardSecSecurityContainerController).mView;
-                    KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) view;
+                    KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) ((ViewController) keyguardSecSecurityContainerController).mView;
                     if (keyguardSecSecurityContainer.mCurrentMode == 3) {
                         ((KeyguardSecSecurityContainer.SecViewMode) keyguardSecSecurityContainer.mViewMode).updateSecurityViewPosition(1, false);
                     }
@@ -192,7 +186,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onTableModeChanged(boolean z) {
+            public final void onTableModeChanged(boolean z) throws Resources.NotFoundException {
                 KeyguardArrowViewController keyguardArrowViewController = KeyguardArrowViewController.this;
                 if (keyguardArrowViewController.mLastOrientation == 1) {
                     return;
@@ -218,10 +212,10 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         if (view == null || view.getVisibility() != 0) {
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f, 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f, 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(Interpolators.LINEAR);
-        animatorSet.play(ofFloat);
+        animatorSet.play(objectAnimatorOfFloat);
         animatorSet.setDuration(100L);
         animatorSet.start();
         view.setVisibility(8);
@@ -231,10 +225,10 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         if (view == null || view.getVisibility() != 0) {
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 1.0f, 0.8f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 1.0f, 0.8f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 1.0f, 0.8f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 1.0f, 0.8f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         animatorSet.setInterpolator(this.mInterpolator);
         animatorSet.setDuration(300L);
         animatorSet.start();
@@ -244,10 +238,10 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         if (view == null || view.getVisibility() != 0) {
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 0.8f, 1.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 0.8f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 0.8f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 0.8f, 1.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         animatorSet.setInterpolator(this.mInterpolator);
         animatorSet.setDuration(300L);
         animatorSet.start();
@@ -305,7 +299,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 keyguardArrowViewController2.mIsTableArrowState = false;
                 keyguardArrowViewController2.updateArrowVisibility(true);
                 KeyguardArrowViewController.this.updateSecurityViewPosition(true, false);
-                KeyguardArrowViewController.m950$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, true);
+                KeyguardArrowViewController.m952$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, true);
                 return false;
             }
 
@@ -324,7 +318,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 keyguardArrowViewController2.mIsTableArrowState = false;
                 keyguardArrowViewController2.updateArrowVisibility(true);
                 KeyguardArrowViewController.this.updateSecurityViewPosition(true, false);
-                KeyguardArrowViewController.m950$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, true);
+                KeyguardArrowViewController.m952$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, true);
                 return false;
             }
 
@@ -386,7 +380,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 keyguardArrowViewController2.mIsTableArrowState = false;
                 keyguardArrowViewController2.updateArrowVisibility(true);
                 KeyguardArrowViewController.this.updateSecurityViewPosition(true, false);
-                KeyguardArrowViewController.m950$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, false);
+                KeyguardArrowViewController.m952$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, false);
                 return false;
             }
 
@@ -405,7 +399,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
                 keyguardArrowViewController2.mIsTableArrowState = false;
                 keyguardArrowViewController2.updateArrowVisibility(true);
                 KeyguardArrowViewController.this.updateSecurityViewPosition(true, false);
-                KeyguardArrowViewController.m950$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, false);
+                KeyguardArrowViewController.m952$$Nest$mannounceForArrowAccessibility(KeyguardArrowViewController.this, false);
                 return false;
             }
 
@@ -470,22 +464,21 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         if (view == null || view.getVisibility() != 0) {
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 0.7f, 1.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 0.7f, 1.0f);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f, 1.0f);
-        ofFloat3.setInterpolator(new LinearInterpolator());
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, 0.7f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, 0.7f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f, 1.0f);
+        objectAnimatorOfFloat3.setInterpolator(new LinearInterpolator());
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3);
         animatorSet.setInterpolator(this.mInterpolator);
         animatorSet.setDuration(300L);
         animatorSet.setStartDelay(0L);
         animatorSet.start();
     }
 
-    public final void updateArrowMargin() {
+    public final void updateArrowMargin() throws Resources.NotFoundException {
+        float displayWidth;
         float f;
-        float f2;
-        View view;
         int dimensionPixelSize;
         int dimensionPixelSize2;
         if (isInvalidArrowView()) {
@@ -502,59 +495,58 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         } else {
             isPatternView();
             if (DeviceType.isTablet()) {
-                f = DeviceState.getDisplayWidth(getContext());
-                f2 = getResources().getFloat(R.dimen.kg_arrow_view_side_margin_tablet_ratio);
+                displayWidth = DeviceState.getDisplayWidth(getContext());
+                f = getResources().getFloat(R.dimen.kg_arrow_view_side_margin_tablet_ratio);
             } else {
                 Context context = getContext();
                 int i = SecurityUtils.sPINContainerBottomMargin;
                 int rotation = DeviceState.getRotation(context.getResources().getConfiguration().windowConfiguration.getRotation());
-                f = (rotation == 1 || rotation == 3) ? SecurityUtils.sMainDisplayHeight : SecurityUtils.sMainDisplayWidth;
-                f2 = getResources().getFloat(R.dimen.kg_arrow_view_side_margin_ratio);
+                displayWidth = (rotation == 1 || rotation == 3) ? SecurityUtils.sMainDisplayHeight : SecurityUtils.sMainDisplayWidth;
+                f = getResources().getFloat(R.dimen.kg_arrow_view_side_margin_ratio);
             }
-            int i2 = (int) (f2 * f);
+            int i2 = (int) (f * displayWidth);
             Resources resources2 = getResources();
-            boolean isTablet = DeviceType.isTablet();
-            boolean isPatternView = isPatternView();
-            view = KeyguardSecSecurityContainerController.this.mView;
-            EmergencyButton emergencyButton = (EmergencyButton) ((KeyguardSecSecurityContainer) view).findViewById(R.id.emergency_call_button);
+            boolean zIsTablet = DeviceType.isTablet();
+            boolean zIsPatternView = isPatternView();
+            EmergencyButton emergencyButton = (EmergencyButton) ((KeyguardSecSecurityContainer) KeyguardSecSecurityContainerController.this.mView).findViewById(R.id.emergency_call_button);
             boolean z = emergencyButton != null && emergencyButton.getVisibility() == 0;
             int dimensionPixelSize3 = LsRune.SECURITY_NAVBAR_ENABLED ? resources2.getDimensionPixelSize(R.dimen.navigation_bar_frame_height) : 0;
             int i3 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height;
-            if (isTablet) {
-                if (isPatternView) {
+            if (zIsTablet) {
+                if (zIsPatternView) {
                     dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet) + resources2.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom_tablet);
                     dimensionPixelSize2 = resources2.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom_tablet);
                 } else {
                     dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet) + resources2.getDimensionPixelSize(R.dimen.kg_pin_container_margin_bottom_tablet);
                     dimensionPixelSize2 = resources2.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom_tablet);
                 }
-            } else if (isPatternView) {
+            } else if (zIsPatternView) {
                 dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height) + resources2.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom);
                 dimensionPixelSize2 = resources2.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom);
             } else {
                 dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height) + SecurityUtils.sPINContainerBottomMargin;
                 dimensionPixelSize2 = resources2.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom);
             }
-            int i4 = dimensionPixelSize2 + dimensionPixelSize + dimensionPixelSize3;
+            int dimensionPixelSize4 = dimensionPixelSize2 + dimensionPixelSize + dimensionPixelSize3;
             if (!z) {
-                if (isTablet) {
+                if (zIsTablet) {
                     i3 = R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet;
                 }
-                i4 -= resources2.getDimensionPixelSize(i3);
+                dimensionPixelSize4 -= resources2.getDimensionPixelSize(i3);
             }
             if (this.mKeyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted() && resources2.getConfiguration().windowConfiguration.getRotation() == 0) {
-                i4 += (resources2.getDimensionPixelSize(R.dimen.kg_emergency_button_margin_bottom_for_tablet_fingerprint) + DeviceState.getInDisplayFingerprintHeight()) - dimensionPixelSize3;
+                dimensionPixelSize4 += (resources2.getDimensionPixelSize(R.dimen.kg_emergency_button_margin_bottom_for_tablet_fingerprint) + DeviceState.getInDisplayFingerprintHeight()) - dimensionPixelSize3;
             }
             Resources resources3 = getResources();
-            boolean isPatternView2 = isPatternView();
-            int dimensionPixelSize4 = DeviceType.isTablet() ? isPatternView2 ? resources3.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_height_tablet) : SecurityUtils.getTabletPINContainerHeight(getContext()) : isPatternView2 ? resources3.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_height) : SecurityUtils.getFoldPINContainerHeight(getContext());
+            boolean zIsPatternView2 = isPatternView();
+            int dimensionPixelSize5 = DeviceType.isTablet() ? zIsPatternView2 ? resources3.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_height_tablet) : SecurityUtils.getTabletPINContainerHeight(getContext()) : zIsPatternView2 ? resources3.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_height) : SecurityUtils.getFoldPINContainerHeight(getContext());
             resources.getDimensionPixelSize(R.dimen.navigation_bar_frame_height);
-            layoutParams.height = dimensionPixelSize4;
-            layoutParams2.height = dimensionPixelSize4;
+            layoutParams.height = dimensionPixelSize5;
+            layoutParams2.height = dimensionPixelSize5;
             layoutParams.leftMargin = i2;
             layoutParams2.rightMargin = i2;
-            layoutParams.bottomMargin = i4;
-            layoutParams2.bottomMargin = i4;
+            layoutParams.bottomMargin = dimensionPixelSize4;
+            layoutParams2.bottomMargin = dimensionPixelSize4;
         }
         this.mLeftArrowContainer.setLayoutParams(layoutParams);
         this.mRightArrowContainer.setLayoutParams(layoutParams2);
@@ -582,10 +574,10 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         if (isInvalidArrowView()) {
             return;
         }
-        boolean checkArrowVisibility = checkArrowVisibility();
+        boolean zCheckArrowVisibility = checkArrowVisibility();
         SystemUIImageView systemUIImageView = this.mRightArrow;
         SystemUIImageView systemUIImageView2 = this.mLeftArrow;
-        if (!checkArrowVisibility || !z) {
+        if (!zCheckArrowVisibility || !z) {
             systemUIImageView2.setVisibility(8);
             systemUIImageView.setVisibility(8);
             return;
@@ -618,15 +610,12 @@ public class KeyguardArrowViewController extends ViewController implements Syste
     }
 
     public final void updateSecurityViewPosition(boolean z, boolean z2) {
-        View view;
-        View view2;
         boolean z3 = this.mIsTimerRunning;
         KeyguardArrowViewCallback keyguardArrowViewCallback = this.mKeyguardArrowViewCallback;
         if (z3 || !checkArrowVisibility() || !SecurityUtils.isArrowViewSupported(this.mKeyguardUpdateMonitor.getCurrentSecurityMode())) {
             KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = KeyguardSecSecurityContainerController.this;
             if (keyguardSecSecurityContainerController.mCurrentSecurityMode != KeyguardSecurityModel.SecurityMode.None) {
-                view = keyguardSecSecurityContainerController.mView;
-                KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) view;
+                KeyguardSecSecurityContainer keyguardSecSecurityContainer = (KeyguardSecSecurityContainer) keyguardSecSecurityContainerController.mView;
                 if (keyguardSecSecurityContainer.mCurrentMode == 3) {
                     ((KeyguardSecSecurityContainer.SecViewMode) keyguardSecSecurityContainer.mViewMode).updateSecurityViewPosition(1, false);
                     return;
@@ -638,8 +627,7 @@ public class KeyguardArrowViewController extends ViewController implements Syste
         int i = this.mCurrentPosition;
         KeyguardSecSecurityContainerController keyguardSecSecurityContainerController2 = KeyguardSecSecurityContainerController.this;
         if (keyguardSecSecurityContainerController2.mCurrentSecurityMode != KeyguardSecurityModel.SecurityMode.None) {
-            view2 = keyguardSecSecurityContainerController2.mView;
-            KeyguardSecSecurityContainer keyguardSecSecurityContainer2 = (KeyguardSecSecurityContainer) view2;
+            KeyguardSecSecurityContainer keyguardSecSecurityContainer2 = (KeyguardSecSecurityContainer) keyguardSecSecurityContainerController2.mView;
             if (keyguardSecSecurityContainer2.mCurrentMode == 3) {
                 ((KeyguardSecSecurityContainer.SecViewMode) keyguardSecSecurityContainer2.mViewMode).updateSecurityViewPosition(i, z);
             }

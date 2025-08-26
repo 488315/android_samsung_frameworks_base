@@ -30,7 +30,7 @@ public abstract class IdentityCredential {
     public abstract long getCredstoreOperationHandle();
 
     @Deprecated
-    public abstract ResultData getEntries(byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3) throws SessionTranscriptMismatchException, NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException;
+    public abstract ResultData getEntries(byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3) throws InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, SessionTranscriptMismatchException, InvalidRequestMessageException, NoAuthenticationKeyAvailableException;
 
     @Deprecated
     public abstract void setAllowUsingExhaustedKeys(boolean z);

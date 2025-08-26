@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class EditTileKt$rememberTileState$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $canShowRemovalBadge;
@@ -56,11 +55,11 @@ final class EditTileKt$rememberTileState$1$1 extends SuspendLambda implements Fu
             boolean z = this.$canShowRemovalBadge;
             this.L$0 = mutableState2;
             this.label = 1;
-            Object tileStateFor = mutableSelectionState.tileStateFor(tileSpec, tileState, z, this);
-            if (tileStateFor == coroutineSingletons) {
+            Object objTileStateFor = mutableSelectionState.tileStateFor(tileSpec, tileState, z, this);
+            if (objTileStateFor == coroutineSingletons) {
                 return coroutineSingletons;
             }
-            obj = tileStateFor;
+            obj = objTileStateFor;
             mutableState = mutableState2;
         } else {
             if (i != 1) {

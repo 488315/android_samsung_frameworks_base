@@ -88,57 +88,57 @@ public class TypedProperties extends HashMap<String, Object> {
         return -1;
     }
 
-    static void parse(Reader reader, Map<String, Object> map) throws ParseException, IOException {
-        StreamTokenizer initTokenizer = initTokenizer(reader);
-        Pattern compile = Pattern.compile("([a-zA-Z_$][0-9a-zA-Z_$]*\\.)*[a-zA-Z_$][0-9a-zA-Z_$]*");
+    static void parse(Reader reader, Map<String, Object> map) throws ParseException, IOException, NumberFormatException {
+        StreamTokenizer streamTokenizerInitTokenizer = initTokenizer(reader);
+        Pattern patternCompile = Pattern.compile("([a-zA-Z_$][0-9a-zA-Z_$]*\\.)*[a-zA-Z_$][0-9a-zA-Z_$]*");
         do {
-            int nextToken = initTokenizer.nextToken();
-            if (nextToken == -1) {
+            int iNextToken = streamTokenizerInitTokenizer.nextToken();
+            if (iNextToken == -1) {
                 return;
             }
-            if (nextToken != -3) {
-                throw new ParseException(initTokenizer, "type name");
+            if (iNextToken != -3) {
+                throw new ParseException(streamTokenizerInitTokenizer, "type name");
             }
-            int interpretType = interpretType(initTokenizer.sval);
-            if (interpretType == -1) {
-                throw new ParseException(initTokenizer, "valid type name");
+            int iInterpretType = interpretType(streamTokenizerInitTokenizer.sval);
+            if (iInterpretType == -1) {
+                throw new ParseException(streamTokenizerInitTokenizer, "valid type name");
             }
-            initTokenizer.sval = null;
-            if (interpretType == 120 && initTokenizer.nextToken() != 40) {
-                throw new ParseException(initTokenizer, "'('");
+            streamTokenizerInitTokenizer.sval = null;
+            if (iInterpretType == 120 && streamTokenizerInitTokenizer.nextToken() != 40) {
+                throw new ParseException(streamTokenizerInitTokenizer, "'('");
             }
-            if (initTokenizer.nextToken() != -3) {
-                throw new ParseException(initTokenizer, "property name");
+            if (streamTokenizerInitTokenizer.nextToken() != -3) {
+                throw new ParseException(streamTokenizerInitTokenizer, "property name");
             }
-            String str = initTokenizer.sval;
-            if (!compile.matcher(str).matches()) {
-                throw new ParseException(initTokenizer, "valid property name");
+            String str = streamTokenizerInitTokenizer.sval;
+            if (!patternCompile.matcher(str).matches()) {
+                throw new ParseException(streamTokenizerInitTokenizer, "valid property name");
             }
-            initTokenizer.sval = null;
-            if (interpretType == 120) {
-                if (initTokenizer.nextToken() != 41) {
-                    throw new ParseException(initTokenizer, "')'");
+            streamTokenizerInitTokenizer.sval = null;
+            if (iInterpretType == 120) {
+                if (streamTokenizerInitTokenizer.nextToken() != 41) {
+                    throw new ParseException(streamTokenizerInitTokenizer, "')'");
                 }
                 map.remove(str);
             } else {
-                if (initTokenizer.nextToken() != 61) {
-                    throw new ParseException(initTokenizer, "'='");
+                if (streamTokenizerInitTokenizer.nextToken() != 61) {
+                    throw new ParseException(streamTokenizerInitTokenizer, "'='");
                 }
-                Object parseValue = parseValue(initTokenizer, interpretType);
-                Object remove = map.remove(str);
-                if (remove != null && parseValue.getClass() != remove.getClass()) {
-                    throw new ParseException(initTokenizer, "(property previously declared as a different type)");
+                Object value = parseValue(streamTokenizerInitTokenizer, iInterpretType);
+                Object objRemove = map.remove(str);
+                if (objRemove != null && value.getClass() != objRemove.getClass()) {
+                    throw new ParseException(streamTokenizerInitTokenizer, "(property previously declared as a different type)");
                 }
-                map.put(str, parseValue);
+                map.put(str, value);
             }
-        } while (initTokenizer.nextToken() == 59);
-        throw new ParseException(initTokenizer, "';'");
+        } while (streamTokenizerInitTokenizer.nextToken() == 59);
+        throw new ParseException(streamTokenizerInitTokenizer, "';'");
     }
 
-    static Object parseValue(StreamTokenizer streamTokenizer, int i) throws IOException {
-        int nextToken = streamTokenizer.nextToken();
+    static Object parseValue(StreamTokenizer streamTokenizer, int i) throws IOException, NumberFormatException {
+        int iNextToken = streamTokenizer.nextToken();
         if (i == 90) {
-            if (nextToken != -3) {
+            if (iNextToken != -3) {
                 throw new ParseException(streamTokenizer, "boolean constant");
             }
             if ("true".equals(streamTokenizer.sval)) {
@@ -155,69 +155,69 @@ public class TypedProperties extends HashMap<String, Object> {
                 if (i != TYPE_STRING) {
                     throw new IllegalStateException("Internal error; unknown type " + i);
                 }
-                if (nextToken == 34) {
+                if (iNextToken == 34) {
                     return streamTokenizer.sval;
                 }
-                if (nextToken == -3 && PerfettoProtoLogImpl.NULL_STRING.equals(streamTokenizer.sval)) {
+                if (iNextToken == -3 && PerfettoProtoLogImpl.NULL_STRING.equals(streamTokenizer.sval)) {
                     return NULL_STRING;
                 }
                 throw new ParseException(streamTokenizer, "double-quoted string or 'null'");
             }
-            if (nextToken != -3) {
+            if (iNextToken != -3) {
                 throw new ParseException(streamTokenizer, "float constant");
             }
             try {
-                double parseDouble = Double.parseDouble(streamTokenizer.sval);
+                double d = Double.parseDouble(streamTokenizer.sval);
                 if (((i >> 8) & 255) == 4) {
-                    double abs = Math.abs(parseDouble);
-                    if (abs != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && !Double.isInfinite(parseDouble) && !Double.isNaN(parseDouble) && (abs < 1.401298464324817E-45d || abs > 3.4028234663852886E38d)) {
+                    double dAbs = Math.abs(d);
+                    if (dAbs != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && !Double.isInfinite(d) && !Double.isNaN(d) && (dAbs < 1.401298464324817E-45d || dAbs > 3.4028234663852886E38d)) {
                         throw new ParseException(streamTokenizer, "32-bit float constant");
                     }
-                    return Float.valueOf((float) parseDouble);
+                    return Float.valueOf((float) d);
                 }
-                return Double.valueOf(parseDouble);
+                return Double.valueOf(d);
             } catch (NumberFormatException unused) {
                 throw new ParseException(streamTokenizer, "float constant");
             }
         }
-        if (nextToken != -3) {
+        if (iNextToken != -3) {
             throw new ParseException(streamTokenizer, "integer constant");
         }
         try {
-            Long decode = Long.decode(streamTokenizer.sval);
-            long longValue = decode.longValue();
+            Long lDecode = Long.decode(streamTokenizer.sval);
+            long jLongValue = lDecode.longValue();
             int i3 = (i >> 8) & 255;
             if (i3 == 1) {
-                if (longValue < -128 || longValue > 127) {
+                if (jLongValue < -128 || jLongValue > 127) {
                     throw new ParseException(streamTokenizer, "8-bit integer constant");
                 }
-                return Byte.valueOf((byte) longValue);
+                return Byte.valueOf((byte) jLongValue);
             }
             if (i3 == 2) {
-                if (longValue < -32768 || longValue > 32767) {
+                if (jLongValue < -32768 || jLongValue > 32767) {
                     throw new ParseException(streamTokenizer, "16-bit integer constant");
                 }
-                return Short.valueOf((short) longValue);
+                return Short.valueOf((short) jLongValue);
             }
             if (i3 == 4) {
-                if (longValue < -2147483648L || longValue > 2147483647L) {
+                if (jLongValue < -2147483648L || jLongValue > 2147483647L) {
                     throw new ParseException(streamTokenizer, "32-bit integer constant");
                 }
-                return Integer.valueOf((int) longValue);
+                return Integer.valueOf((int) jLongValue);
             }
             if (i3 != 8) {
                 throw new IllegalStateException("Internal error; unexpected integer type width " + i3);
             }
-            if (longValue < Long.MIN_VALUE || longValue > Long.MAX_VALUE) {
+            if (jLongValue < Long.MIN_VALUE || jLongValue > Long.MAX_VALUE) {
                 throw new ParseException(streamTokenizer, "64-bit integer constant");
             }
-            return decode;
+            return lDecode;
         } catch (NumberFormatException unused2) {
             throw new ParseException(streamTokenizer, "integer constant");
         }
     }
 
-    public void load(Reader reader) throws IOException {
+    public void load(Reader reader) throws ParseException, IOException, NumberFormatException {
         parse(reader, this);
     }
 

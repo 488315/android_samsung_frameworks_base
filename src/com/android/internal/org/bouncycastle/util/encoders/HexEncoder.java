@@ -82,11 +82,11 @@ public class HexEncoder implements Encoder {
         int i3 = i;
         int i4 = i2;
         while (i4 > 0) {
-            int min = Math.min(36, i4);
+            int iMin = Math.min(36, i4);
             HexEncoder hexEncoder = this;
-            outputStream.write(bArr2, 0, hexEncoder.encode(bArr, i3, min, bArr2, 0));
-            i3 += min;
-            i4 -= min;
+            outputStream.write(bArr2, 0, hexEncoder.encode(bArr, i3, iMin, bArr2, 0));
+            i3 += iMin;
+            i4 -= iMin;
             this = hexEncoder;
         }
         return i2 * 2;

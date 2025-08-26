@@ -31,7 +31,6 @@ import com.android.systemui.wallet.controller.QuickAccessWalletController$$Exter
 import com.android.systemui.wallet.util.WalletCardUtilsKt;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QuickAccessWalletTile extends QSTileImpl {
     public final WalletCardRetriever mCardRetriever;
@@ -44,7 +43,6 @@ public class QuickAccessWalletTile extends QSTileImpl {
     public final SecureSettings mSecureSettings;
     public WalletCard mSelectedCard;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WalletCardRetriever implements QuickAccessWalletClient.OnWalletCardsRetrievedCallback {
         public /* synthetic */ WalletCardRetriever(QuickAccessWalletTile quickAccessWalletTile, int i) {
             this();
@@ -132,12 +130,12 @@ public class QuickAccessWalletTile extends QSTileImpl {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleClick(Expandable expandable) {
-        final ActivityTransitionAnimator.Controller activityTransitionController = expandable == null ? null : expandable.activityTransitionController(32);
+        final ActivityTransitionAnimator.Controller controllerActivityTransitionController = expandable == null ? null : expandable.activityTransitionController(32);
         this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.QuickAccessWalletTile$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletTile quickAccessWalletTile = QuickAccessWalletTile.this;
-                ActivityTransitionAnimator.Controller controller = activityTransitionController;
+                QuickAccessWalletTile quickAccessWalletTile = this.f$0;
+                ActivityTransitionAnimator.Controller controller = controllerActivityTransitionController;
                 WalletCard walletCard = quickAccessWalletTile.mSelectedCard;
                 ActivityStarter activityStarter = quickAccessWalletTile.mActivityStarter;
                 QuickAccessWalletController quickAccessWalletController = quickAccessWalletTile.mController;
@@ -191,11 +189,11 @@ public class QuickAccessWalletTile extends QSTileImpl {
             drawableIcon = new QSTileImpl.DrawableIcon(tileIcon);
         }
         state.icon = drawableIcon;
-        boolean isUnlocked = this.mKeyguardStateController.isUnlocked();
+        boolean zIsUnlocked = this.mKeyguardStateController.isUnlocked();
         if (quickAccessWalletController.mQuickAccessWalletClient.isWalletServiceAvailable() && quickAccessWalletController.mQuickAccessWalletClient.isWalletFeatureAvailable()) {
             WalletCard walletCard = this.mSelectedCard;
             if (walletCard != null) {
-                state.state = isUnlocked ? 2 : 1;
+                state.state = zIsUnlocked ? 2 : 1;
                 state.secondaryLabel = walletCard.getContentDescription();
                 state.sideViewCustomDrawable = this.mCardViewDrawable;
             } else {

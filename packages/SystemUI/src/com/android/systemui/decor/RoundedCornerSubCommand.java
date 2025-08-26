@@ -21,7 +21,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RoundedCornerSubCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -56,24 +55,24 @@ public final class RoundedCornerSubCommand extends ParseableCommand {
         this.pathData$delegate = required(param("path-data", "d", "PathParser-compatible path string to be rendered as the corner drawable. This path should be a closed arc oriented as the top-left corner of the device", new ValueParser() { // from class: com.android.systemui.decor.RoundedCornerSubCommand$special$$inlined$map$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A, reason: not valid java name */
-            public final Object mo2548parseValueIoAF18A(String str2) {
-                Path path;
-                Object mo2548parseValueIoAF18A = ValueParser.this.mo2548parseValueIoAF18A(str2);
+            public final Object mo2565parseValueIoAF18A(String str2) {
+                Path pathCreatePathFromPathData;
+                Object objMo2565parseValueIoAF18A = valueParserKt$parseString$1.mo2565parseValueIoAF18A(str2);
                 int i = Result.$r8$clinit;
-                if (mo2548parseValueIoAF18A instanceof Result.Failure) {
-                    Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(mo2548parseValueIoAF18A);
-                    m3422exceptionOrNullimpl.getClass();
-                    return new Result.Failure(m3422exceptionOrNullimpl);
+                if (objMo2565parseValueIoAF18A instanceof Result.Failure) {
+                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
+                    thM3442exceptionOrNullimpl.getClass();
+                    return new Result.Failure(thM3442exceptionOrNullimpl);
                 }
-                ResultKt.throwOnFailure(mo2548parseValueIoAF18A);
+                ResultKt.throwOnFailure(objMo2565parseValueIoAF18A);
                 try {
-                    path = PathParser.createPathFromPathData((String) mo2548parseValueIoAF18A);
+                    pathCreatePathFromPathData = PathParser.createPathFromPathData((String) objMo2565parseValueIoAF18A);
                 } catch (Exception unused) {
-                    path = null;
+                    pathCreatePathFromPathData = null;
                 }
-                if (path != null) {
+                if (pathCreatePathFromPathData != null) {
                     int i2 = Result.$r8$clinit;
-                    return path;
+                    return pathCreatePathFromPathData;
                 }
                 int i3 = Result.$r8$clinit;
                 return new Result.Failure(new ArgParseError(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Failed to transform value ", str2)));
@@ -85,42 +84,42 @@ public final class RoundedCornerSubCommand extends ParseableCommand {
     }
 
     public final DebugRoundedCornerModel toRoundedCornerDebugModel() {
-        float f;
+        float fIntValue;
         KProperty[] kPropertyArr = $$delegatedProperties;
         Path path = (Path) this.pathData$delegate.getValue(this, kPropertyArr[2]);
         KProperty kProperty = kPropertyArr[1];
-        int intValue = ((Number) this.width$delegate.getValue(this, kProperty)).intValue();
+        int iIntValue = ((Number) this.width$delegate.getValue(this, kProperty)).intValue();
         KProperty kProperty2 = kPropertyArr[0];
-        int intValue2 = ((Number) this.height$delegate.getValue(this, kProperty2)).intValue();
-        Float f2 = (Float) this.viewportWidth$delegate.getValue(this, kPropertyArr[4]);
-        float f3 = 1.0f;
-        if (f2 != null) {
-            f = ((Number) r5.getValue(this, kPropertyArr[1])).intValue() / f2.floatValue();
+        int iIntValue2 = ((Number) this.height$delegate.getValue(this, kProperty2)).intValue();
+        Float f = (Float) this.viewportWidth$delegate.getValue(this, kPropertyArr[4]);
+        float fIntValue2 = 1.0f;
+        if (f != null) {
+            fIntValue = ((Number) r5.getValue(this, kPropertyArr[1])).intValue() / f.floatValue();
         } else {
-            f = 1.0f;
+            fIntValue = 1.0f;
         }
-        Float f4 = (Float) this.viewportHeight$delegate.getValue(this, kPropertyArr[3]);
-        if (f4 != null) {
-            f3 = ((Number) r8.getValue(this, kPropertyArr[0])).intValue() / f4.floatValue();
+        Float f2 = (Float) this.viewportHeight$delegate.getValue(this, kPropertyArr[3]);
+        if (f2 != null) {
+            fIntValue2 = ((Number) r8.getValue(this, kPropertyArr[0])).intValue() / f2.floatValue();
         }
-        return new DebugRoundedCornerModel(path, intValue, intValue2, f, f3);
+        return new DebugRoundedCornerModel(path, iIntValue, iIntValue2, fIntValue, fIntValue2);
     }
 
     public final String toString() {
         KProperty[] kPropertyArr = $$delegatedProperties;
-        int intValue = ((Number) this.height$delegate.getValue(this, kPropertyArr[0])).intValue();
-        int intValue2 = ((Number) this.width$delegate.getValue(this, kPropertyArr[1])).intValue();
+        int iIntValue = ((Number) this.height$delegate.getValue(this, kPropertyArr[0])).intValue();
+        int iIntValue2 = ((Number) this.width$delegate.getValue(this, kPropertyArr[1])).intValue();
         Path path = (Path) this.pathData$delegate.getValue(this, kPropertyArr[2]);
         Float f = (Float) this.viewportHeight$delegate.getValue(this, kPropertyArr[3]);
         Float f2 = (Float) this.viewportWidth$delegate.getValue(this, kPropertyArr[4]);
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(intValue, intValue2, "RoundedCornerSubCommand(height=", ", width=", ", pathData='");
-        m.append(path);
-        m.append("', viewportHeight=");
-        m.append(f);
-        m.append(", viewportWidth=");
-        m.append(f2);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iIntValue, iIntValue2, "RoundedCornerSubCommand(height=", ", width=", ", pathData='");
+        sbM.append(path);
+        sbM.append("', viewportHeight=");
+        sbM.append(f);
+        sbM.append(", viewportWidth=");
+        sbM.append(f2);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     @Override // com.android.systemui.statusbar.commandline.ParseableCommand

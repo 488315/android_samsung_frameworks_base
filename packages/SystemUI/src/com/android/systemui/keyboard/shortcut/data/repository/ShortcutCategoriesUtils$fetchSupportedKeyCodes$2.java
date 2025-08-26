@@ -17,7 +17,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutCategoriesUtils$fetchSupportedKeyCodes$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $deviceId;
@@ -72,17 +71,17 @@ final class ShortcutCategoriesUtils$fetchSupportedKeyCodes$2 extends SuspendLamb
             i2++;
             arrayList3.add(new Integer(((InternalKeyboardShortcutInfo) obj2).keycode));
         }
-        List distinct = CollectionsKt___CollectionsKt.distinct(arrayList3);
-        boolean[] deviceHasKeys = this.this$0.inputManager.deviceHasKeys(this.$deviceId, CollectionsKt___CollectionsKt.toIntArray(distinct));
+        List listDistinct = CollectionsKt___CollectionsKt.distinct(arrayList3);
+        boolean[] zArrDeviceHasKeys = this.this$0.inputManager.deviceHasKeys(this.$deviceId, CollectionsKt___CollectionsKt.toIntArray(listDistinct));
         ArrayList arrayList4 = new ArrayList();
-        for (Object obj3 : distinct) {
+        for (Object obj3 : listDistinct) {
             int i3 = i + 1;
             if (i < 0) {
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
             ((Number) obj3).intValue();
-            if (deviceHasKeys[i]) {
+            if (zArrDeviceHasKeys[i]) {
                 arrayList4.add(obj3);
             }
             i = i3;

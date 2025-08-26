@@ -3,6 +3,7 @@ package android.telephony;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.PersistableBundle;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -56,9 +57,9 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
     }
 
     public CellSignalStrengthLte(int i, int i2, int i3, int i4, int i5, int i6, int i7) {
-        int inRangeOrUnavailable = inRangeOrUnavailable(i, -113, -51);
-        this.mRssi = inRangeOrUnavailable;
-        this.mSignalStrength = inRangeOrUnavailable;
+        int iInRangeOrUnavailable = inRangeOrUnavailable(i, -113, -51);
+        this.mRssi = iInRangeOrUnavailable;
+        this.mSignalStrength = iInRangeOrUnavailable;
         this.mRsrp = inRangeOrUnavailable(i2, -140, -43);
         this.mRsrq = inRangeOrUnavailable(i3, -34, 3);
         this.mRssnr = inRangeOrUnavailable(i4, -20, 30);
@@ -117,21 +118,71 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
         return (this.mParametersUseForLevel & i) == i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00d9, code lost:
-    
-        if (r8 >= (-113)) goto L54;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00c3  */
     @Override // android.telephony.CellSignalStrength
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void updateLevel(android.os.PersistableBundle r8, android.telephony.ServiceState r9) {
-        /*
-            Method dump skipped, instructions count: 222
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.CellSignalStrengthLte.updateLevel(android.os.PersistableBundle, android.telephony.ServiceState):void");
+    public void updateLevel(PersistableBundle persistableBundle, ServiceState serviceState) {
+        int[] intArray;
+        int[] intArray2;
+        int[] intArray3;
+        boolean z;
+        int iUpdateLevelWithMeasure;
+        int i = 1;
+        if (persistableBundle == null) {
+            this.mParametersUseForLevel = 1;
+            int[] iArr = sRsrpThresholds;
+            int[] iArr2 = sRsrqThresholds;
+            intArray3 = sRssnrThresholds;
+            intArray2 = iArr2;
+            intArray = iArr;
+            z = false;
+        } else {
+            if (serviceState != null && serviceState.isUsingNonTerrestrialNetwork()) {
+                this.mParametersUseForLevel = persistableBundle.getInt(CarrierConfigManager.KEY_PARAMETERS_USED_FOR_NTN_LTE_SIGNAL_BAR_INT);
+                intArray = persistableBundle.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRP_THRESHOLDS_INT_ARRAY);
+                intArray2 = persistableBundle.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
+                intArray3 = persistableBundle.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
+            } else {
+                this.mParametersUseForLevel = persistableBundle.getInt(CarrierConfigManager.KEY_PARAMETERS_USED_FOR_LTE_SIGNAL_BAR_INT);
+                intArray = persistableBundle.getIntArray(CarrierConfigManager.KEY_LTE_RSRP_THRESHOLDS_INT_ARRAY);
+                intArray2 = persistableBundle.getIntArray(CarrierConfigManager.KEY_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
+                intArray3 = persistableBundle.getIntArray(CarrierConfigManager.KEY_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
+            }
+            if (intArray == null) {
+                intArray = sRsrpThresholds;
+            }
+            if (intArray2 == null) {
+                intArray2 = sRsrqThresholds;
+            }
+            if (intArray3 == null) {
+                intArray3 = sRssnrThresholds;
+            }
+            z = persistableBundle.getBoolean(CarrierConfigManager.KEY_USE_ONLY_RSRP_FOR_LTE_SIGNAL_BAR_BOOL, false);
+        }
+        int iInRangeOrUnavailable = inRangeOrUnavailable(this.mRsrp + (serviceState != null ? serviceState.getArfcnRsrpBoost() : 0), -140, -44);
+        if (z && (iUpdateLevelWithMeasure = updateLevelWithMeasure(iInRangeOrUnavailable, intArray)) != Integer.MAX_VALUE) {
+            this.mLevel = iUpdateLevelWithMeasure;
+            return;
+        }
+        int iMin = Math.min(Math.min(isLevelForParameter(1) ? updateLevelWithMeasure(iInRangeOrUnavailable, intArray) : Integer.MAX_VALUE, isLevelForParameter(2) ? updateLevelWithMeasure(this.mRsrq, intArray2) : Integer.MAX_VALUE), isLevelForParameter(4) ? updateLevelWithMeasure(this.mRssnr, intArray3) : Integer.MAX_VALUE);
+        this.mLevel = iMin;
+        if (iMin == Integer.MAX_VALUE) {
+            int i2 = this.mRssi;
+            if (i2 <= -51) {
+                if (i2 >= -89) {
+                    i = 4;
+                } else if (i2 >= -97) {
+                    i = 3;
+                } else if (i2 >= -103) {
+                    i = 2;
+                } else if (i2 < -113) {
+                    i = 0;
+                }
+            }
+            this.mLevel = i;
+        }
     }
 
     private int updateLevelWithMeasure(int i, int[] iArr) {
@@ -234,9 +285,9 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
     }
 
     private CellSignalStrengthLte(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mRssi = readInt;
-        this.mSignalStrength = readInt;
+        int i = parcel.readInt();
+        this.mRssi = i;
+        this.mSignalStrength = i;
         this.mRsrp = parcel.readInt();
         this.mRsrq = parcel.readInt();
         this.mRssnr = parcel.readInt();

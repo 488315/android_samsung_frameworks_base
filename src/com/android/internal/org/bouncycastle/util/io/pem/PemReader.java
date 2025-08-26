@@ -16,39 +16,39 @@ public class PemReader extends BufferedReader {
     }
 
     public PemObject readPemObject() throws IOException {
-        String substring;
-        int indexOf;
-        String readLine = readLine();
-        while (readLine != null && !readLine.startsWith(BEGIN)) {
-            readLine = readLine();
+        String strSubstring;
+        int iIndexOf;
+        String line = readLine();
+        while (line != null && !line.startsWith(BEGIN)) {
+            line = readLine();
         }
-        if (readLine == null || (indexOf = (substring = readLine.substring(11)).indexOf(45)) <= 0 || !substring.endsWith("-----") || substring.length() - indexOf != 5) {
+        if (line == null || (iIndexOf = (strSubstring = line.substring(11)).indexOf(45)) <= 0 || !strSubstring.endsWith("-----") || strSubstring.length() - iIndexOf != 5) {
             return null;
         }
-        return loadObject(substring.substring(0, indexOf));
+        return loadObject(strSubstring.substring(0, iIndexOf));
     }
 
     private PemObject loadObject(String str) throws IOException {
-        String readLine;
+        String line;
         String str2 = END + str;
         StringBuffer stringBuffer = new StringBuffer();
         ArrayList arrayList = new ArrayList();
         while (true) {
-            readLine = readLine();
-            if (readLine == null) {
+            line = readLine();
+            if (line == null) {
                 break;
             }
-            int indexOf = readLine.indexOf(58);
-            if (indexOf >= 0) {
-                arrayList.add(new PemHeader(readLine.substring(0, indexOf), readLine.substring(indexOf + 1).trim()));
+            int iIndexOf = line.indexOf(58);
+            if (iIndexOf >= 0) {
+                arrayList.add(new PemHeader(line.substring(0, iIndexOf), line.substring(iIndexOf + 1).trim()));
             } else {
-                if (readLine.indexOf(str2) != -1) {
+                if (line.indexOf(str2) != -1) {
                     break;
                 }
-                stringBuffer.append(readLine.trim());
+                stringBuffer.append(line.trim());
             }
         }
-        if (readLine == null) {
+        if (line == null) {
             throw new IOException(str2 + " not found");
         }
         return new PemObject(str, arrayList, Base64.decode(stringBuffer.toString()));

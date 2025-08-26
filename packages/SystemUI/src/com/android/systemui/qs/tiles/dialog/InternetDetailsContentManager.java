@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetDetailsContentManager {
     public static final boolean DEBUG;
@@ -34,7 +33,6 @@ public final class InternetDetailsContentManager {
     public final MutableState title$delegate;
     public final UiEventLogger uiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,12 +42,10 @@ public final class InternetDetailsContentManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         InternetDetailsContentManager create(boolean z, boolean z2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InternetContent {
         public final int activeAutoSwitchNonDdsSubId;
         public final boolean activeNetworkIsCellular;
@@ -148,71 +144,71 @@ public final class InternetDetailsContentManager {
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onAccessPointsChanged(List list, WifiEntry wifiEntry, boolean z3) {
-                InternetDetailsContentManager.this.getClass();
+                this.this$0.getClass();
                 throw null;
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onCapabilitiesChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onCarrierNetworkChange() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onDataConnectionStateChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onDisplayInfoChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onLost() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onRefreshCarrierInfo() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onServiceStateChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onSignalStrengthsChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onSimStateChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onSubscriptionsChanged(int i) {
-                InternetDetailsContentManager internetDetailsContentManager = InternetDetailsContentManager.this;
+                InternetDetailsContentManager internetDetailsContentManager = this.this$0;
                 internetDetailsContentManager.getClass();
                 internetDetailsContentManager.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onUserMobileDataStateChanged() {
-                InternetDetailsContentManager.this.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.updateContent$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
 
             @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
             public final void onWifiScan(boolean z3) {
                 boolean z4 = InternetDetailsContentManager.DEBUG;
-                InternetDetailsContentManager.this.setProgressBarVisible(z3);
+                this.this$0.setProgressBarVisible(z3);
             }
         };
     }
@@ -239,22 +235,22 @@ public final class InternetDetailsContentManager {
             @Override // java.lang.Runnable
             public final void run() {
                 WifiManager wifiManager;
-                InternetDetailsContentManager internetDetailsContentManager = InternetDetailsContentManager.this;
+                InternetDetailsContentManager internetDetailsContentManager = this.this$0;
                 MutableLiveData mutableLiveData = internetDetailsContentManager.internetContentData;
                 boolean z2 = z;
                 boolean z3 = false;
                 InternetDetailsContentController internetDetailsContentController = internetDetailsContentManager.internetDetailsContentController;
-                boolean activeNetworkIsCellular = z2 ? internetDetailsContentController.activeNetworkIsCellular() : false;
-                boolean isCarrierNetworkActive = z2 ? internetDetailsContentController.isCarrierNetworkActive() : false;
-                boolean isAirplaneModeEnabled = internetDetailsContentController.isAirplaneModeEnabled();
+                boolean zActiveNetworkIsCellular = z2 ? internetDetailsContentController.activeNetworkIsCellular() : false;
+                boolean zIsCarrierNetworkActive = z2 ? internetDetailsContentController.isCarrierNetworkActive() : false;
+                boolean zIsAirplaneModeEnabled = internetDetailsContentController.isAirplaneModeEnabled();
                 boolean z4 = internetDetailsContentController.mHasEthernet;
-                boolean isWifiEnabled = internetDetailsContentController.mWifiStateWorker.isWifiEnabled();
+                boolean zIsWifiEnabled = internetDetailsContentController.mWifiStateWorker.isWifiEnabled();
                 boolean z5 = (internetDetailsContentController.isAirplaneModeEnabled() || internetDetailsContentController.mTelephonyManager == null) ? false : internetDetailsContentController.mHasActiveSubIdOnDds;
-                boolean isDeviceLocked = internetDetailsContentController.isDeviceLocked();
+                boolean zIsDeviceLocked = internetDetailsContentController.isDeviceLocked();
                 if (((LocationControllerImpl) internetDetailsContentController.mLocationController).isLocationEnabled$1() && (wifiManager = internetDetailsContentController.mWifiManager) != null && wifiManager.isScanAlwaysAvailable()) {
                     z3 = true;
                 }
-                mutableLiveData.postValue(new InternetDetailsContentManager.InternetContent(isAirplaneModeEnabled, z4, z2, activeNetworkIsCellular, isCarrierNetworkActive, isWifiEnabled, z5, isDeviceLocked, z3, internetDetailsContentController.getActiveAutoSwitchNonDdsSubId()));
+                mutableLiveData.postValue(new InternetDetailsContentManager.InternetContent(zIsAirplaneModeEnabled, z4, z2, zActiveNetworkIsCellular, zIsCarrierNetworkActive, zIsWifiEnabled, z5, zIsDeviceLocked, z3, internetDetailsContentController.getActiveAutoSwitchNonDdsSubId()));
             }
         });
     }

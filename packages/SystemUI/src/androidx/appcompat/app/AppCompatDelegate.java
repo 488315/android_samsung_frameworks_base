@@ -15,7 +15,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AppCompatDelegate {
     public static final Object sAppLocalesStorageSyncLock = null;
@@ -26,7 +25,6 @@ public abstract class AppCompatDelegate {
     public static final ArraySet sActivityDelegates = new ArraySet();
     public static final Object sActivityDelegatesLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SerialExecutor implements Executor {
         public Runnable mActive;
         public final Executor mExecutor;
@@ -44,7 +42,7 @@ public abstract class AppCompatDelegate {
                     ((ArrayDeque) this.mTasks).add(new Runnable() { // from class: androidx.appcompat.app.AppCompatDelegate$SerialExecutor$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AppCompatDelegate.SerialExecutor serialExecutor = AppCompatDelegate.SerialExecutor.this;
+                            AppCompatDelegate.SerialExecutor serialExecutor = this.f$0;
                             Runnable runnable2 = runnable;
                             serialExecutor.getClass();
                             try {
@@ -78,7 +76,6 @@ public abstract class AppCompatDelegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ThreadPerTaskExecutor implements Executor {
         @Override // java.util.concurrent.Executor
         public final void execute(Runnable runnable) {

@@ -39,26 +39,26 @@ public class AnticipateOvershootInterpolator extends BaseInterpolator implements
     }
 
     public AnticipateOvershootInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.AnticipateOvershootInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.AnticipateOvershootInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.AnticipateOvershootInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.AnticipateOvershootInterpolator);
         }
-        this.mTension = obtainAttributes.getFloat(0, 2.0f) * obtainAttributes.getFloat(1, 1.5f);
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        this.mTension = typedArrayObtainAttributes.getFloat(0, 2.0f) * typedArrayObtainAttributes.getFloat(1, 1.5f);
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float f) {
-        float o;
+        float fO;
         if (f < 0.5f) {
-            o = a(f * 2.0f, this.mTension);
+            fO = a(f * 2.0f, this.mTension);
         } else {
-            o = o((f * 2.0f) - 2.0f, this.mTension) + 2.0f;
+            fO = o((f * 2.0f) - 2.0f, this.mTension) + 2.0f;
         }
-        return o * 0.5f;
+        return fO * 0.5f;
     }
 
     @Override // android.graphics.animation.NativeInterpolator

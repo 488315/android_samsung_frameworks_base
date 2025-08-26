@@ -21,13 +21,13 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.collections.IndexedValue;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.IndexingSequence;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
-import kotlin.sequences.TransformingSequence$iterator$1;
+import kotlin.sequences.TransformingSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -43,7 +43,6 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
     public int rows;
     public int sidePadding;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Cell {
         public int height;
         public int heightCollapsed;
@@ -77,16 +76,15 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
             int i2 = this.height;
             int i3 = this.heightCollapsed;
             int i4 = this.heightExpanded;
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Cell(width=", ", height=", ", heightCollapsed=");
-            m.append(i3);
-            m.append(", heightExpanded=");
-            m.append(i4);
-            m.append(")");
-            return m.toString();
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Cell(width=", ", height=", ", heightCollapsed=");
+            sbM.append(i3);
+            sbM.append(", heightExpanded=");
+            sbM.append(i4);
+            sbM.append(")");
+            return sbM.toString();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CellMargin {
         public int horizontal;
         public int verticalCollapsed;
@@ -187,17 +185,17 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
             this.rows = i6 + 1;
         }
         this.cellMargin.horizontal = i5 == 1 ? 0 : (i3 - (i4 * i5)) / (i5 - 1);
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(cell.height, 1073741824);
-        TransformingSequence$iterator$1 transformingSequence$iterator$1 = new TransformingSequence$iterator$1(new TransformingSequence(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(0)), new SecTileChunkLayout$$ExternalSyntheticLambda0(1)));
-        View view = this;
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(cell.height, 1073741824);
+        TransformingSequence.AnonymousClass1 anonymousClass1 = new TransformingSequence(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(0)), new SecTileChunkLayout$$ExternalSyntheticLambda0(1)).new AnonymousClass1();
+        View viewUpdateAccessibilityOrder = this;
         int i7 = 0;
-        while (transformingSequence$iterator$1.iterator.hasNext()) {
-            QSTileView qSTileView = (QSTileView) transformingSequence$iterator$1.next();
+        while (anonymousClass1.iterator.hasNext()) {
+            QSTileView qSTileView = (QSTileView) anonymousClass1.next();
             if (i7 == this.columns) {
                 i7 = 0;
             }
-            qSTileView.measure(View.MeasureSpec.makeMeasureSpec(this.cell.width, 1073741824), makeMeasureSpec);
-            view = qSTileView.updateAccessibilityOrder(view);
+            qSTileView.measure(View.MeasureSpec.makeMeasureSpec(this.cell.width, 1073741824), iMakeMeasureSpec);
+            viewUpdateAccessibilityOrder = qSTileView.updateAccessibilityOrder(viewUpdateAccessibilityOrder);
             this.cell.height = qSTileView.getMeasuredHeight();
             i7++;
         }
@@ -213,9 +211,9 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
     }
 
     public final void setLabelVisibility(boolean z) {
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(5)), new SecTileChunkLayout$$ExternalSyntheticLambda0(6)));
-        while (filteringSequence$iterator$1.hasNext()) {
-            LabelTileView labelTileView = (LabelTileView) filteringSequence$iterator$1.next();
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(5)), new SecTileChunkLayout$$ExternalSyntheticLambda0(6)).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            LabelTileView labelTileView = (LabelTileView) anonymousClass1.next();
             if (z) {
                 labelTileView.setBackground(labelTileView.getContext().getDrawable(R.drawable.sec_tile_view_ripple_background));
                 labelTileView.iconView.setBackground(null);
@@ -251,9 +249,9 @@ public final class SecTileChunkLayout extends ViewGroup implements SecQSPanel.QS
     }
 
     public final void updateFocusForTiles(int i, boolean z) {
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new IndexingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records)), new SecTileChunkLayout$$ExternalSyntheticLambda0(4)));
-        while (filteringSequence$iterator$1.hasNext()) {
-            IndexedValue indexedValue = (IndexedValue) filteringSequence$iterator$1.next();
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new IndexingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(this.records)), new SecTileChunkLayout$$ExternalSyntheticLambda0(4)).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            IndexedValue indexedValue = (IndexedValue) anonymousClass1.next();
             int i2 = indexedValue.index;
             QSTileView qSTileView = ((SecQSPanelControllerBase.TileRecord) indexedValue.value).tileView;
             LabelTileView labelTileView = qSTileView instanceof LabelTileView ? (LabelTileView) qSTileView : null;

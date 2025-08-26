@@ -26,9 +26,9 @@ public final class ImeInsetsSourceConsumer extends InsetsSourceConsumer {
         if (!z) {
             ImeTracing.getInstance().triggerClientDump("ImeInsetsSourceConsumer#onAnimationFinished", this.mController.getHost().getInputMethodManager(), null);
         }
-        boolean applyLocalVisibilityOverride = ((Flags.predictiveBackIme() && !z && isShowRequested() && this.mAnimationState == 2) ? applyLocalVisibilityOverride() : false) | super.onAnimationStateChanged(z);
+        boolean zApplyLocalVisibilityOverride = ((Flags.predictiveBackIme() && !z && isShowRequested() && this.mAnimationState == 2) ? applyLocalVisibilityOverride() : false) | super.onAnimationStateChanged(z);
         if (z && !isShowRequested() && this.mController.isPredictiveBackImeHideAnimInProgress()) {
-            applyLocalVisibilityOverride |= applyLocalVisibilityOverride();
+            zApplyLocalVisibilityOverride |= applyLocalVisibilityOverride();
         }
         if (!isShowRequested()) {
             this.mIsRequestedVisibleAwaitingLeash = false;
@@ -38,7 +38,7 @@ public final class ImeInsetsSourceConsumer extends InsetsSourceConsumer {
             }
         }
         this.mHasPendingRequest = false;
-        return applyLocalVisibilityOverride;
+        return zApplyLocalVisibilityOverride;
     }
 
     @Override // android.view.InsetsSourceConsumer
@@ -174,11 +174,11 @@ public final class ImeInsetsSourceConsumer extends InsetsSourceConsumer {
 
     @Override // android.view.InsetsSourceConsumer
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         super.dumpDebug(protoOutputStream, 1146756268033L);
         protoOutputStream.write(1133871366147L, this.mIsRequestedVisibleAwaitingLeash);
         protoOutputStream.write(1133871366150L, this.mHasPendingRequest);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void onShowRequested() {

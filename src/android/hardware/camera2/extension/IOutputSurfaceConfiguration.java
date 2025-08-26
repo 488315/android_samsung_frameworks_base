@@ -69,9 +69,9 @@ public interface IOutputSurfaceConfiguration extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOutputSurfaceConfiguration.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOutputSurfaceConfiguration)) {
-                return (IOutputSurfaceConfiguration) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOutputSurfaceConfiguration.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOutputSurfaceConfiguration)) {
+                return (IOutputSurfaceConfiguration) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -146,61 +146,61 @@ public interface IOutputSurfaceConfiguration extends IInterface {
 
             @Override // android.hardware.camera2.extension.IOutputSurfaceConfiguration
             public OutputSurface getPreviewOutputSurface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (OutputSurface) obtain2.readTypedObject(OutputSurface.CREATOR);
+                    parcelObtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (OutputSurface) parcelObtain2.readTypedObject(OutputSurface.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IOutputSurfaceConfiguration
             public OutputSurface getImageCaptureOutputSurface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (OutputSurface) obtain2.readTypedObject(OutputSurface.CREATOR);
+                    parcelObtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (OutputSurface) parcelObtain2.readTypedObject(OutputSurface.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IOutputSurfaceConfiguration
             public OutputSurface getImageAnalysisOutputSurface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (OutputSurface) obtain2.readTypedObject(OutputSurface.CREATOR);
+                    parcelObtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (OutputSurface) parcelObtain2.readTypedObject(OutputSurface.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IOutputSurfaceConfiguration
             public OutputSurface getPostviewOutputSurface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (OutputSurface) obtain2.readTypedObject(OutputSurface.CREATOR);
+                    parcelObtain.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (OutputSurface) parcelObtain2.readTypedObject(OutputSurface.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

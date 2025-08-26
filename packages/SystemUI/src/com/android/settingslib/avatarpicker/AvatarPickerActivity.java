@@ -1,5 +1,8 @@
 package com.android.settingslib.avatarpicker;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,26 +19,31 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable21;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
 import com.android.internal.util.UserIcons;
 import com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0;
 import com.android.settingslib.avatarpicker.AvatarPhotoController;
 import com.android.settingslib.avatarpicker.AvatarPickerActivity;
 import com.android.systemui.R;
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
+import com.google.android.setupcompat.util.Logger;
+import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AvatarPickerActivity extends AppCompatActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +52,6 @@ public class AvatarPickerActivity extends AppCompatActivity {
     public Button mSaveButton;
     public boolean mWaitingForActivityResult;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AutoFitGridLayoutManager extends GridLayoutManager {
         public final int mColumnWidth;
         public final int mSpanCount;
@@ -63,17 +70,16 @@ public class AvatarPickerActivity extends AppCompatActivity {
             if (this.mTotalSpace < paddingRight) {
                 this.mTotalSpace = paddingRight;
             }
-            int max = Math.max(1, this.mTotalSpace / this.mColumnWidth);
+            int iMax = Math.max(1, this.mTotalSpace / this.mColumnWidth);
             int i = this.mSpanCount;
-            if (max > i) {
-                max = i;
+            if (iMax > i) {
+                iMax = i;
             }
-            setSpanCount(max);
+            setSpanCount(iMax);
             super.onLayoutChildren(recycler, state);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AvatarAdapter extends RecyclerView.Adapter {
         public final List mImageDescriptions;
         public final List mImageDrawables;
@@ -141,7 +147,7 @@ public class AvatarPickerActivity extends AppCompatActivity {
             avatarViewHolder.mImageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$AvatarAdapter$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    AvatarPickerActivity.AvatarAdapter avatarAdapter = AvatarPickerActivity.AvatarAdapter.this;
+                    AvatarPickerActivity.AvatarAdapter avatarAdapter = this.f$0;
                     int i2 = i;
                     int i3 = avatarAdapter.mSelectedPosition;
                     AvatarPickerActivity avatarPickerActivity = AvatarPickerActivity.this;
@@ -170,7 +176,6 @@ public class AvatarPickerActivity extends AppCompatActivity {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AvatarViewHolder extends RecyclerView.ViewHolder {
         public final ImageView mImageView;
 
@@ -180,7 +185,6 @@ public class AvatarPickerActivity extends AppCompatActivity {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GridItemDecoration extends RecyclerView.ItemDecoration {
         public final boolean mIncludeEdge;
         public final boolean mRtl;
@@ -226,22 +230,6 @@ public class AvatarPickerActivity extends AppCompatActivity {
         finish();
     }
 
-    public final void initButtons() {
-        float f;
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.bottom_button_container);
-        Context applicationContext = getApplicationContext();
-        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(WindowManager.class);
-        if (windowManager != null) {
-            Rect rect = new Rect(windowManager.getCurrentWindowMetrics().getBounds());
-            float width = rect.width() / applicationContext.getResources().getDisplayMetrics().density;
-            f = (width < 589.0f || width > 959.0f || ((float) rect.height()) / applicationContext.getResources().getDisplayMetrics().density < 411.0f) ? width >= 960.0f ? (width - 840.0f) / 2.0f : 10.0f : width * 0.07f;
-        } else {
-            f = 0.0f;
-        }
-        int m = ((int) ActionRow$$ExternalSyntheticOutline0.m(applicationContext, 1, f)) - ((int) getApplicationContext().getResources().getDimension(R.dimen.sec_avatar_picker_button_side_padding));
-        linearLayout.setPaddingRelative(m, linearLayout.getPaddingTop(), m, linearLayout.getPaddingBottom());
-    }
-
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, android.app.Activity
     public final void onActivityResult(int i, int i2, Intent intent) {
         super.onActivityResult(i, i2, intent);
@@ -285,7 +273,7 @@ public class AvatarPickerActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AvatarPickerActivity avatarPickerActivity = AvatarPickerActivity.this;
+                AvatarPickerActivity avatarPickerActivity = this.f$0;
                 int i = AvatarPickerActivity.$r8$clinit;
                 RecyclerView recyclerView = (RecyclerView) avatarPickerActivity.findViewById(R.id.avatar_grid);
                 int size = recyclerView.mItemDecorations.size();
@@ -299,25 +287,364 @@ public class AvatarPickerActivity extends AppCompatActivity {
                 recyclerView.removeItemDecoration((RecyclerView.ItemDecoration) recyclerView.mItemDecorations.get(0));
                 recyclerView.setLayoutManager(new AvatarPickerActivity.AutoFitGridLayoutManager(avatarPickerActivity, avatarPickerActivity, avatarPickerActivity.getResources().getInteger(R.integer.avatar_picker_columns)));
                 recyclerView.addItemDecoration(new AvatarPickerActivity.GridItemDecoration(avatarPickerActivity, avatarPickerActivity, true));
-                avatarPickerActivity.initButtons();
             }
         }, 100L);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00cb  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x00c7  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00cb  */
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onCreate(android.os.Bundle r9) {
-        /*
-            Method dump skipped, instructions count: 560
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.avatarpicker.AvatarPickerActivity.onCreate(android.os.Bundle):void");
+    public final void onCreate(Bundle bundle) {
+        int i;
+        KeyguardManager keyguardManager;
+        char c = 1;
+        final int i2 = 0;
+        super.onCreate(bundle);
+        setTheme(R.style.Theme_SecSettings);
+        Logger logger = ThemeHelper.LOG;
+        boolean zIsGlifExpressiveEnabled = PartnerConfigHelper.isGlifExpressiveEnabled(this);
+        Logger logger2 = ThemeHelper.LOG;
+        if (zIsGlifExpressiveEnabled) {
+            logger2.w("Dynamic color theme isn't needed to set in glif expressive theme.");
+        } else if (PartnerConfigHelper.isSetupWizardDynamicColorEnabled(this)) {
+            try {
+                Logger logger3 = PartnerCustomizationLayout.LOG;
+                Activity activityLookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(this);
+                if (PartnerConfigHelper.isGlifExpressiveEnabled(this)) {
+                    i = 0;
+                    if (i == 0) {
+                        activityLookupActivityFromContext.setTheme(i);
+                    } else {
+                        logger2.w("Error occurred on getting dynamic color theme.");
+                    }
+                } else {
+                    try {
+                        boolean zIsAnySetupWizard = WizardManagerHelper.isAnySetupWizard(PartnerConfigHelper.lookupActivityFromContext(this).getIntent());
+                        boolean zIsSetupWizardDayNightEnabled = PartnerConfigHelper.isSetupWizardDayNightEnabled(this);
+                        boolean zIsSetupWizardFullDynamicColorEnabled = PartnerConfigHelper.isSetupWizardFullDynamicColorEnabled(this);
+                        if (!zIsAnySetupWizard || zIsSetupWizardFullDynamicColorEnabled) {
+                            i = zIsSetupWizardDayNightEnabled ? R.style.SudFullDynamicColorTheme_DayNight : R.style.SudFullDynamicColorTheme_Light;
+                            logger2.atInfo("Return ".concat(zIsSetupWizardDayNightEnabled ? "SudFullDynamicColorTheme_DayNight" : "SudFullDynamicColorTheme_Light"));
+                        } else {
+                            i = zIsSetupWizardDayNightEnabled ? R.style.SudDynamicColorTheme_DayNight : R.style.SudDynamicColorTheme_Light;
+                        }
+                        logger2.atDebug("Gets the dynamic accentColor: [Light] " + ThemeHelper.colorIntToHex(this, R.color.sud_dynamic_color_accent_glif_v3_light) + ", " + ThemeHelper.colorIntToHex(this, android.R.color.system_accent1_600) + ", [Dark] " + ThemeHelper.colorIntToHex(this, R.color.sud_dynamic_color_accent_glif_v3_dark) + ", " + ThemeHelper.colorIntToHex(this, android.R.color.system_accent1_100));
+                    } catch (IllegalArgumentException e) {
+                        String message = e.getMessage();
+                        Objects.requireNonNull(message);
+                        logger2.e(message);
+                    }
+                    if (i == 0) {
+                    }
+                }
+            } catch (IllegalArgumentException e2) {
+                String message2 = e2.getMessage();
+                Objects.requireNonNull(message2);
+                logger2.e(message2);
+            }
+        } else {
+            logger2.w("SetupWizard does not support the dynamic color or supporting status unknown.");
+        }
+        setContentView(R.layout.sec_avatar_picker);
+        Button button = (Button) findViewById(R.id.save_button);
+        this.mSaveButton = button;
+        if (button != null) {
+            saveButtonSetEnabled(false);
+            final int i3 = 2;
+            this.mSaveButton.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$$ExternalSyntheticLambda1
+                public final /* synthetic */ AvatarPickerActivity f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    int i4 = i3;
+                    AvatarPickerActivity avatarPickerActivity = this.f$0;
+                    switch (i4) {
+                        case 0:
+                            AvatarPhotoController avatarPhotoController = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController.getClass();
+                            Intent intent = new Intent("android.intent.action.GET_CONTENT", (Uri) null);
+                            intent.setPackage("com.sec.android.gallery3d");
+                            intent.setType("image/*");
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController.mAvatarUi).mActivity.startActivityForResult(intent, 1001);
+                            return;
+                        case 1:
+                            AvatarPhotoController avatarPhotoController2 = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController2.getClass();
+                            Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE_SECURE");
+                            Uri uri = avatarPhotoController2.mTakePictureUri;
+                            intent2.putExtra("output", uri);
+                            intent2.addFlags(3);
+                            intent2.setClipData(ClipData.newRawUri("output", uri));
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController2.mAvatarUi).mActivity.startActivityForResult(intent2, 1002);
+                            return;
+                        case 2:
+                            AvatarPickerActivity.AvatarAdapter avatarAdapter = avatarPickerActivity.mAdapter;
+                            int i5 = avatarAdapter.mSelectedPosition;
+                            int length = avatarAdapter.mPreselectedImages.length();
+                            AvatarPickerActivity avatarPickerActivity2 = AvatarPickerActivity.this;
+                            if (length <= 0) {
+                                int i6 = avatarAdapter.mUserIconColors[i5];
+                                avatarPickerActivity2.getClass();
+                                Intent intent3 = new Intent();
+                                intent3.putExtra("default_icon_tint_color", i6);
+                                avatarPickerActivity2.setResult(-1, intent3);
+                                avatarPickerActivity2.finish();
+                                return;
+                            }
+                            int resourceId = avatarAdapter.mPreselectedImages.getResourceId(i5, -1);
+                            if (resourceId == -1) {
+                                throw new IllegalStateException("Preselected avatar images must be resources.");
+                            }
+                            Uri uriBuild = new Uri.Builder().scheme("android.resource").authority(avatarPickerActivity2.getResources().getResourcePackageName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceTypeName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceEntryName(resourceId)).build();
+                            Intent intent4 = new Intent();
+                            intent4.setData(uriBuild);
+                            avatarPickerActivity2.setResult(-1, intent4);
+                            avatarPickerActivity2.finish();
+                            return;
+                        default:
+                            int i7 = AvatarPickerActivity.$r8$clinit;
+                            avatarPickerActivity.cancel$1$1();
+                            return;
+                    }
+                }
+            });
+        }
+        Button button2 = (Button) findViewById(R.id.cancel_button);
+        if (button2 != null) {
+            final int i4 = 3;
+            button2.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$$ExternalSyntheticLambda1
+                public final /* synthetic */ AvatarPickerActivity f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    int i42 = i4;
+                    AvatarPickerActivity avatarPickerActivity = this.f$0;
+                    switch (i42) {
+                        case 0:
+                            AvatarPhotoController avatarPhotoController = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController.getClass();
+                            Intent intent = new Intent("android.intent.action.GET_CONTENT", (Uri) null);
+                            intent.setPackage("com.sec.android.gallery3d");
+                            intent.setType("image/*");
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController.mAvatarUi).mActivity.startActivityForResult(intent, 1001);
+                            return;
+                        case 1:
+                            AvatarPhotoController avatarPhotoController2 = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController2.getClass();
+                            Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE_SECURE");
+                            Uri uri = avatarPhotoController2.mTakePictureUri;
+                            intent2.putExtra("output", uri);
+                            intent2.addFlags(3);
+                            intent2.setClipData(ClipData.newRawUri("output", uri));
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController2.mAvatarUi).mActivity.startActivityForResult(intent2, 1002);
+                            return;
+                        case 2:
+                            AvatarPickerActivity.AvatarAdapter avatarAdapter = avatarPickerActivity.mAdapter;
+                            int i5 = avatarAdapter.mSelectedPosition;
+                            int length = avatarAdapter.mPreselectedImages.length();
+                            AvatarPickerActivity avatarPickerActivity2 = AvatarPickerActivity.this;
+                            if (length <= 0) {
+                                int i6 = avatarAdapter.mUserIconColors[i5];
+                                avatarPickerActivity2.getClass();
+                                Intent intent3 = new Intent();
+                                intent3.putExtra("default_icon_tint_color", i6);
+                                avatarPickerActivity2.setResult(-1, intent3);
+                                avatarPickerActivity2.finish();
+                                return;
+                            }
+                            int resourceId = avatarAdapter.mPreselectedImages.getResourceId(i5, -1);
+                            if (resourceId == -1) {
+                                throw new IllegalStateException("Preselected avatar images must be resources.");
+                            }
+                            Uri uriBuild = new Uri.Builder().scheme("android.resource").authority(avatarPickerActivity2.getResources().getResourcePackageName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceTypeName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceEntryName(resourceId)).build();
+                            Intent intent4 = new Intent();
+                            intent4.setData(uriBuild);
+                            avatarPickerActivity2.setResult(-1, intent4);
+                            avatarPickerActivity2.finish();
+                            return;
+                        default:
+                            int i7 = AvatarPickerActivity.$r8$clinit;
+                            avatarPickerActivity.cancel$1$1();
+                            return;
+                    }
+                }
+            });
+        }
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.avatar_grid);
+        AvatarAdapter avatarAdapter = new AvatarAdapter();
+        this.mAdapter = avatarAdapter;
+        recyclerView.setAdapter(avatarAdapter);
+        recyclerView.setLayoutManager(new AutoFitGridLayoutManager(this, this, getResources().getInteger(R.integer.avatar_picker_columns)));
+        recyclerView.addItemDecoration(new GridItemDecoration(this, this, true));
+        recyclerView.mHasFixedSize = true;
+        setSupportActionBar((Toolbar) findViewById(R.id.action_bar));
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            supportActionBar.setHomeButtonEnabled();
+            supportActionBar.setDisplayShowTitleEnabled(true);
+            supportActionBar.setTitle();
+        }
+        Object[] objArr = getPackageManager().queryIntentActivities(new Intent("android.media.action.IMAGE_CAPTURE"), 65536).size() > 0;
+        Intent intent = new Intent("android.intent.action.GET_CONTENT", (Uri) null);
+        intent.setPackage("com.sec.android.gallery3d");
+        intent.setType("image/*");
+        Object[] objArr2 = (getPackageManager().queryIntentActivities(intent, 0).size() <= 0 || (keyguardManager = (KeyguardManager) getSystemService(KeyguardManager.class)) == null || keyguardManager.isDeviceLocked()) ? false : true;
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.gallery_btn);
+        if (linearLayout != null && objArr2 != false) {
+            linearLayout.setVisibility(0);
+            linearLayout.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$$ExternalSyntheticLambda1
+                public final /* synthetic */ AvatarPickerActivity f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    int i42 = i2;
+                    AvatarPickerActivity avatarPickerActivity = this.f$0;
+                    switch (i42) {
+                        case 0:
+                            AvatarPhotoController avatarPhotoController = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController.getClass();
+                            Intent intent2 = new Intent("android.intent.action.GET_CONTENT", (Uri) null);
+                            intent2.setPackage("com.sec.android.gallery3d");
+                            intent2.setType("image/*");
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController.mAvatarUi).mActivity.startActivityForResult(intent2, 1001);
+                            return;
+                        case 1:
+                            AvatarPhotoController avatarPhotoController2 = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController2.getClass();
+                            Intent intent22 = new Intent("android.media.action.IMAGE_CAPTURE_SECURE");
+                            Uri uri = avatarPhotoController2.mTakePictureUri;
+                            intent22.putExtra("output", uri);
+                            intent22.addFlags(3);
+                            intent22.setClipData(ClipData.newRawUri("output", uri));
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController2.mAvatarUi).mActivity.startActivityForResult(intent22, 1002);
+                            return;
+                        case 2:
+                            AvatarPickerActivity.AvatarAdapter avatarAdapter2 = avatarPickerActivity.mAdapter;
+                            int i5 = avatarAdapter2.mSelectedPosition;
+                            int length = avatarAdapter2.mPreselectedImages.length();
+                            AvatarPickerActivity avatarPickerActivity2 = AvatarPickerActivity.this;
+                            if (length <= 0) {
+                                int i6 = avatarAdapter2.mUserIconColors[i5];
+                                avatarPickerActivity2.getClass();
+                                Intent intent3 = new Intent();
+                                intent3.putExtra("default_icon_tint_color", i6);
+                                avatarPickerActivity2.setResult(-1, intent3);
+                                avatarPickerActivity2.finish();
+                                return;
+                            }
+                            int resourceId = avatarAdapter2.mPreselectedImages.getResourceId(i5, -1);
+                            if (resourceId == -1) {
+                                throw new IllegalStateException("Preselected avatar images must be resources.");
+                            }
+                            Uri uriBuild = new Uri.Builder().scheme("android.resource").authority(avatarPickerActivity2.getResources().getResourcePackageName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceTypeName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceEntryName(resourceId)).build();
+                            Intent intent4 = new Intent();
+                            intent4.setData(uriBuild);
+                            avatarPickerActivity2.setResult(-1, intent4);
+                            avatarPickerActivity2.finish();
+                            return;
+                        default:
+                            int i7 = AvatarPickerActivity.$r8$clinit;
+                            avatarPickerActivity.cancel$1$1();
+                            return;
+                    }
+                }
+            });
+        }
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.camera_btn);
+        if (linearLayout2 != null && objArr != false) {
+            linearLayout2.setVisibility(0);
+            final char c2 = c == true ? 1 : 0;
+            linearLayout2.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.settingslib.avatarpicker.AvatarPickerActivity$$ExternalSyntheticLambda1
+                public final /* synthetic */ AvatarPickerActivity f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    int i42 = c2;
+                    AvatarPickerActivity avatarPickerActivity = this.f$0;
+                    switch (i42) {
+                        case 0:
+                            AvatarPhotoController avatarPhotoController = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController.getClass();
+                            Intent intent2 = new Intent("android.intent.action.GET_CONTENT", (Uri) null);
+                            intent2.setPackage("com.sec.android.gallery3d");
+                            intent2.setType("image/*");
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController.mAvatarUi).mActivity.startActivityForResult(intent2, 1001);
+                            return;
+                        case 1:
+                            AvatarPhotoController avatarPhotoController2 = avatarPickerActivity.mAvatarPhotoController;
+                            avatarPhotoController2.getClass();
+                            Intent intent22 = new Intent("android.media.action.IMAGE_CAPTURE_SECURE");
+                            Uri uri = avatarPhotoController2.mTakePictureUri;
+                            intent22.putExtra("output", uri);
+                            intent22.addFlags(3);
+                            intent22.setClipData(ClipData.newRawUri("output", uri));
+                            ((AvatarPhotoController.AvatarUiImpl) avatarPhotoController2.mAvatarUi).mActivity.startActivityForResult(intent22, 1002);
+                            return;
+                        case 2:
+                            AvatarPickerActivity.AvatarAdapter avatarAdapter2 = avatarPickerActivity.mAdapter;
+                            int i5 = avatarAdapter2.mSelectedPosition;
+                            int length = avatarAdapter2.mPreselectedImages.length();
+                            AvatarPickerActivity avatarPickerActivity2 = AvatarPickerActivity.this;
+                            if (length <= 0) {
+                                int i6 = avatarAdapter2.mUserIconColors[i5];
+                                avatarPickerActivity2.getClass();
+                                Intent intent3 = new Intent();
+                                intent3.putExtra("default_icon_tint_color", i6);
+                                avatarPickerActivity2.setResult(-1, intent3);
+                                avatarPickerActivity2.finish();
+                                return;
+                            }
+                            int resourceId = avatarAdapter2.mPreselectedImages.getResourceId(i5, -1);
+                            if (resourceId == -1) {
+                                throw new IllegalStateException("Preselected avatar images must be resources.");
+                            }
+                            Uri uriBuild = new Uri.Builder().scheme("android.resource").authority(avatarPickerActivity2.getResources().getResourcePackageName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceTypeName(resourceId)).appendPath(avatarPickerActivity2.getResources().getResourceEntryName(resourceId)).build();
+                            Intent intent4 = new Intent();
+                            intent4.setData(uriBuild);
+                            avatarPickerActivity2.setResult(-1, intent4);
+                            avatarPickerActivity2.finish();
+                            return;
+                        default:
+                            int i7 = AvatarPickerActivity.$r8$clinit;
+                            avatarPickerActivity.cancel$1$1();
+                            return;
+                    }
+                }
+            });
+        }
+        if (bundle != null) {
+            this.mWaitingForActivityResult = bundle.getBoolean("awaiting_result", false);
+            this.mAdapter.mSelectedPosition = bundle.getInt("selected_position", -1);
+            saveButtonSetEnabled(this.mAdapter.mSelectedPosition != -1);
+        }
+        AvatarPhotoController.AvatarUiImpl avatarUiImpl = new AvatarPhotoController.AvatarUiImpl(this);
+        String stringExtra = getIntent().getStringExtra("file_authority");
+        if (stringExtra == null) {
+            Log.e(getClass().getName(), "File authority must be provided");
+            finish();
+        }
+        this.mAvatarPhotoController = new AvatarPhotoController(avatarUiImpl, new AvatarPhotoController.ContextInjectorImpl(this, stringExtra), this.mWaitingForActivityResult);
     }
 
     @Override // android.app.Activity

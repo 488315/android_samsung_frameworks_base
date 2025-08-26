@@ -53,14 +53,14 @@ public class CollapsibleColumnLayout extends ColumnLayout {
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.ColumnLayout, com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager, com.android.internal.widget.remotecompose.core.operations.layout.Component
     public float minIntrinsicHeight(RemoteContext remoteContext) {
-        float computeModifierDefinedHeight = computeModifierDefinedHeight(remoteContext);
-        return !this.mChildrenComponents.isEmpty() ? computeModifierDefinedHeight + this.mChildrenComponents.get(0).minIntrinsicHeight(remoteContext) : computeModifierDefinedHeight;
+        float fComputeModifierDefinedHeight = computeModifierDefinedHeight(remoteContext);
+        return !this.mChildrenComponents.isEmpty() ? fComputeModifierDefinedHeight + this.mChildrenComponents.get(0).minIntrinsicHeight(remoteContext) : fComputeModifierDefinedHeight;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager, com.android.internal.widget.remotecompose.core.operations.layout.Component
     public float minIntrinsicWidth(RemoteContext remoteContext) {
-        float computeModifierDefinedWidth = computeModifierDefinedWidth(remoteContext);
-        return !this.mChildrenComponents.isEmpty() ? computeModifierDefinedWidth + this.mChildrenComponents.get(0).minIntrinsicWidth(remoteContext) : computeModifierDefinedWidth;
+        float fComputeModifierDefinedWidth = computeModifierDefinedWidth(remoteContext);
+        return !this.mChildrenComponents.isEmpty() ? fComputeModifierDefinedWidth + this.mChildrenComponents.get(0).minIntrinsicWidth(remoteContext) : fComputeModifierDefinedWidth;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.ColumnLayout, com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager
@@ -87,32 +87,32 @@ public class CollapsibleColumnLayout extends ColumnLayout {
         componentMeasure.addVisibilityOverride(32);
         Iterator<Component> it = this.mChildrenComponents.iterator();
         boolean z3 = false;
-        float f4 = f2;
+        float h = f2;
         int i = 0;
         boolean z4 = false;
         while (it.hasNext()) {
             Component next = it.next();
             if (measurePass2.contains(next.getComponentId())) {
-                f3 = f4;
+                f3 = h;
             } else if (next instanceof CollapsibleColumnLayout) {
-                next.measure(paintContext, 0.0f, f, 0.0f, f4, measurePass2);
-                f3 = f4;
+                next.measure(paintContext, 0.0f, f, 0.0f, h, measurePass2);
+                f3 = h;
                 measurePass2 = measurePass;
             } else {
-                f3 = f4;
+                f3 = h;
                 measurePass2 = measurePass;
                 next.measure(paintContext, 0.0f, f, 0.0f, Float.MAX_VALUE, measurePass2);
             }
             ComponentMeasure componentMeasure2 = measurePass2.get(next);
             if (componentMeasure2.isGone()) {
-                f4 = f3;
+                h = f3;
             } else {
                 if (size != null) {
                     size.setWidth(Math.max(size.getWidth(), componentMeasure2.getW()));
                     size.setHeight(size.getHeight() + componentMeasure2.getH());
                 }
                 i++;
-                f4 = f3 - componentMeasure2.getH();
+                h = f3 - componentMeasure2.getH();
             }
             if ((next instanceof LayoutComponent) && ((CollapsiblePriorityModifierOperation) ((LayoutComponent) next).selfOrModifier(CollapsiblePriorityModifierOperation.class)) != null) {
                 z4 = true;
@@ -121,31 +121,31 @@ public class CollapsibleColumnLayout extends ColumnLayout {
         if (!this.mChildrenComponents.isEmpty() && size != null) {
             size.setHeight(size.getHeight() + (this.mSpacedBy * (i - 1)));
         }
-        ArrayList<Component> arrayList = this.mChildrenComponents;
+        ArrayList<Component> arrayListSortWithPriorities = this.mChildrenComponents;
         if (z4) {
-            arrayList = CollapsiblePriority.sortWithPriorities(this.mChildrenComponents, 1);
+            arrayListSortWithPriorities = CollapsiblePriority.sortWithPriorities(this.mChildrenComponents, 1);
         }
-        Iterator<Component> it2 = arrayList.iterator();
-        float f5 = 0.0f;
-        float f6 = 0.0f;
+        Iterator<Component> it2 = arrayListSortWithPriorities.iterator();
+        float f4 = 0.0f;
+        float fMax = 0.0f;
         while (it2.hasNext()) {
             ComponentMeasure componentMeasure3 = measurePass2.get(it2.next());
             if (z3 || componentMeasure3.isGone()) {
                 componentMeasure3.addVisibilityOverride(16);
             } else {
-                float h = componentMeasure3.getH() + f5;
-                if (h > f2) {
+                float h2 = componentMeasure3.getH() + f4;
+                if (h2 > f2) {
                     componentMeasure3.addVisibilityOverride(16);
                     z3 = true;
                 } else {
-                    f6 = Math.max(f6, componentMeasure3.getW());
+                    fMax = Math.max(fMax, componentMeasure3.getW());
                     i++;
-                    f5 = h;
+                    f4 = h2;
                 }
             }
         }
         if (z2 && size != null) {
-            size.setHeight(Math.min(f2, f5));
+            size.setHeight(Math.min(f2, f4));
         }
         if (i == 0 || (size != null && size.getHeight() <= 0.0f)) {
             componentMeasure.addVisibilityOverride(16);

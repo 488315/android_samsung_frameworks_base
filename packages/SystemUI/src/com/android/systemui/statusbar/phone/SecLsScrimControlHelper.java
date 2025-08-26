@@ -30,7 +30,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 import dagger.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecLsScrimControlHelper implements KeyguardStateController.Callback, SystemUIWidgetCallback {
     public static final boolean DEBUG = Log.isLoggable("ScrimController", 3);
@@ -62,7 +61,6 @@ public class SecLsScrimControlHelper implements KeyguardStateController.Callback
     public ScrimState mState;
     public final WakefulnessLifecycle mWakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.SecLsScrimControlHelper$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$statusbar$phone$ScrimState;
@@ -113,7 +111,7 @@ public class SecLsScrimControlHelper implements KeyguardStateController.Callback
             ((KeyguardFoldControllerImpl) keyguardFoldController).addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.systemui.statusbar.phone.SecLsScrimControlHelper$$ExternalSyntheticLambda0
                 @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                 public final void onFoldStateChanged(boolean z) {
-                    SecLsScrimControlHelper secLsScrimControlHelper = SecLsScrimControlHelper.this;
+                    SecLsScrimControlHelper secLsScrimControlHelper = this.f$0;
                     secLsScrimControlHelper.mIsFoldOpened = z;
                     if (z && secLsScrimControlHelper.mState == ScrimState.BOUNCER_SCRIMMED && LsRune.SECURITY_SUB_DISPLAY_LOCK && ((KeyguardFoldControllerImpl) ((KeyguardFoldController) Dependency.sDependency.getDependencyInner(KeyguardFoldController.class))).isBouncerOnFoldOpened()) {
                         boolean whiteWallpaperState = SecLsScrimControlHelper.getWhiteWallpaperState(Boolean.valueOf(secLsScrimControlHelper.mIsFoldOpened));
@@ -159,14 +157,14 @@ public class SecLsScrimControlHelper implements KeyguardStateController.Callback
     }
 
     public final void setFrontScrimToBlack(boolean z) {
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("setFrontScrimToBlack direct=", " isAODShown=", z);
-        m.append(this.mSettingsHelper.isAODShown());
-        Log.i("ScrimController", m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("setFrontScrimToBlack direct=", " isAODShown=", z);
+        sbM.append(this.mSettingsHelper.isAODShown());
+        Log.i("ScrimController", sbM.toString());
         if (!z) {
             this.mHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.SecLsScrimControlHelper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SecLsScrimControlHelper secLsScrimControlHelper = SecLsScrimControlHelper.this;
+                    SecLsScrimControlHelper secLsScrimControlHelper = this.f$0;
                     boolean z2 = SecLsScrimControlHelper.DEBUG;
                     secLsScrimControlHelper.getClass();
                     Log.i("ScrimController", "setFrontScrimToBlack in handler");
@@ -193,10 +191,10 @@ public class SecLsScrimControlHelper implements KeyguardStateController.Callback
     }
 
     public final void setScrimAlphaForKeyguard(boolean z) {
-        boolean isReduceTransparencyEnabled = this.mSettingsHelper.isReduceTransparencyEnabled();
-        if (z || this.mIsReduceTransparency != isReduceTransparencyEnabled) {
+        boolean zIsReduceTransparencyEnabled = this.mSettingsHelper.isReduceTransparencyEnabled();
+        if (z || this.mIsReduceTransparency != zIsReduceTransparencyEnabled) {
             boolean whiteWallpaperState = LsRune.SECURITY_SUB_DISPLAY_LOCK ? getWhiteWallpaperState(null) : WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
-            this.mIsReduceTransparency = isReduceTransparencyEnabled;
+            this.mIsReduceTransparency = zIsReduceTransparencyEnabled;
             boolean z2 = false;
             boolean z3 = LsRune.SECURITY_CAPTURED_BLUR && DeviceState.isCapturedBlurAllowed();
             boolean z4 = (LsRune.SECURITY_BLUR || z3) && !this.mIsReduceTransparency;

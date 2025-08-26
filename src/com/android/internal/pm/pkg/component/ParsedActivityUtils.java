@@ -10,9 +10,13 @@ import android.content.pm.parsing.result.ParseResult;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.media.TtmlUtils;
 import android.util.ArraySet;
+import android.util.AttributeSet;
+import android.util.Log;
 import com.android.internal.R;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
+import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 import com.android.internal.util.ArrayUtils;
 import java.io.IOException;
@@ -38,49 +42,49 @@ public class ParsedActivityUtils {
         arraySet.add(Intent.ACTION_BOOT_COMPLETED);
     }
 
-    public static ParseResult<ParsedActivity> parseActivityOrReceiver(String[] strArr, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, int i, boolean z, String str, ParseInput parseInput) throws XmlPullParserException, IOException {
+    public static ParseResult<ParsedActivity> parseActivityOrReceiver(String[] strArr, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, int i, boolean z, String str, ParseInput parseInput) throws Throwable {
         int i2;
         String packageName = parsingPackage.getPackageName();
         ParsedActivityImpl parsedActivityImpl = new ParsedActivityImpl();
-        boolean equals = "receiver".equals(xmlResourceParser.getName());
+        boolean zEquals = "receiver".equals(xmlResourceParser.getName());
         String str2 = "<" + xmlResourceParser.getName() + ">";
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
         try {
-            ParseResult<?> parseMainComponent = ParsedMainComponentUtils.parseMainComponent(parsedActivityImpl, str2, strArr, parsingPackage, obtainAttributes, i, z, str, parseInput, 30, 17, 42, 5, 2, 1, 23, 3, 7, 44, 48, 57, 66);
-            if (parseMainComponent.isError()) {
-                ParseResult<ParsedActivity> error = parseInput.error(parseMainComponent);
-                obtainAttributes.recycle();
-                return error;
+            ParseResult<?> mainComponent = ParsedMainComponentUtils.parseMainComponent(parsedActivityImpl, str2, strArr, parsingPackage, typedArrayObtainAttributes, i, z, str, parseInput, 30, 17, 42, 5, 2, 1, 23, 3, 7, 44, 48, 57, 66);
+            if (mainComponent.isError()) {
+                ParseResult<ParsedActivity> parseResultError = parseInput.error(mainComponent);
+                typedArrayObtainAttributes.recycle();
+                return parseResultError;
             }
-            if (equals && parsingPackage.isSaveStateDisallowed() && Objects.equals(parsedActivityImpl.getProcessName(), packageName)) {
-                ParseResult<ParsedActivity> error2 = parseInput.error("Heavy-weight applications can not have receivers in main process");
-                obtainAttributes.recycle();
-                return error2;
+            if (zEquals && parsingPackage.isSaveStateDisallowed() && Objects.equals(parsedActivityImpl.getProcessName(), packageName)) {
+                ParseResult<ParsedActivity> parseResultError2 = parseInput.error("Heavy-weight applications can not have receivers in main process");
+                typedArrayObtainAttributes.recycle();
+                return parseResultError2;
             }
-            parsedActivityImpl.setTheme(obtainAttributes.getResourceId(0, 0)).setUiOptions(obtainAttributes.getInt(26, parsingPackage.getUiOptions()));
-            parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(64, 19, parsingPackage.isTaskReparentingAllowed(), obtainAttributes) | ComponentParseUtils.flag(8, 18, obtainAttributes) | ComponentParseUtils.flag(4, 11, obtainAttributes) | ComponentParseUtils.flag(32, 13, obtainAttributes) | ComponentParseUtils.flag(256, 22, obtainAttributes) | ComponentParseUtils.flag(2, 10, obtainAttributes) | ComponentParseUtils.flag(2048, 24, obtainAttributes) | ComponentParseUtils.flag(1, 9, obtainAttributes) | ComponentParseUtils.flag(128, 21, obtainAttributes) | ComponentParseUtils.flag(1024, 39, obtainAttributes) | ComponentParseUtils.flag(1024, 29, obtainAttributes) | ComponentParseUtils.flag(16, 12, obtainAttributes) | ComponentParseUtils.flag(536870912, 64, obtainAttributes));
-            if (equals) {
-                parsedActivityImpl.setLaunchMode(0).setConfigChanges(0).setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(1073741824, 28, obtainAttributes));
+            parsedActivityImpl.setTheme(typedArrayObtainAttributes.getResourceId(0, 0)).setUiOptions(typedArrayObtainAttributes.getInt(26, parsingPackage.getUiOptions()));
+            parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(64, 19, parsingPackage.isTaskReparentingAllowed(), typedArrayObtainAttributes) | ComponentParseUtils.flag(8, 18, typedArrayObtainAttributes) | ComponentParseUtils.flag(4, 11, typedArrayObtainAttributes) | ComponentParseUtils.flag(32, 13, typedArrayObtainAttributes) | ComponentParseUtils.flag(256, 22, typedArrayObtainAttributes) | ComponentParseUtils.flag(2, 10, typedArrayObtainAttributes) | ComponentParseUtils.flag(2048, 24, typedArrayObtainAttributes) | ComponentParseUtils.flag(1, 9, typedArrayObtainAttributes) | ComponentParseUtils.flag(128, 21, typedArrayObtainAttributes) | ComponentParseUtils.flag(1024, 39, typedArrayObtainAttributes) | ComponentParseUtils.flag(1024, 29, typedArrayObtainAttributes) | ComponentParseUtils.flag(16, 12, typedArrayObtainAttributes) | ComponentParseUtils.flag(536870912, 64, typedArrayObtainAttributes));
+            if (zEquals) {
+                parsedActivityImpl.setLaunchMode(0).setConfigChanges(0).setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(1073741824, 28, typedArrayObtainAttributes));
             } else {
-                parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(512, 25, parsingPackage.isHardwareAccelerated(), obtainAttributes) | ComponentParseUtils.flag(Integer.MIN_VALUE, 31, obtainAttributes) | ComponentParseUtils.flag(262144, 67, obtainAttributes) | ComponentParseUtils.flag(8192, 35, obtainAttributes) | ComponentParseUtils.flag(4096, 36, obtainAttributes) | ComponentParseUtils.flag(16384, 37, obtainAttributes) | ComponentParseUtils.flag(8388608, 51, obtainAttributes) | ComponentParseUtils.flag(4194304, 41, obtainAttributes) | ComponentParseUtils.flag(16777216, 52, obtainAttributes) | ComponentParseUtils.flag(33554432, 56, obtainAttributes) | ComponentParseUtils.flag(268435456, 60, obtainAttributes));
-                parsedActivityImpl.setPrivateFlags(parsedActivityImpl.getPrivateFlags() | ComponentParseUtils.flag(1, 54, obtainAttributes) | ComponentParseUtils.flag(2, 58, true, obtainAttributes));
-                parsedActivityImpl.setColorMode(obtainAttributes.getInt(49, 0)).setDocumentLaunchMode(obtainAttributes.getInt(33, 0)).setLaunchMode(obtainAttributes.getInt(14, 0)).setLockTaskLaunchMode(obtainAttributes.getInt(38, 0)).setMaxRecents(obtainAttributes.getInt(34, ActivityTaskManager.getDefaultAppRecentsLimitStatic())).setPersistableMode(obtainAttributes.getInteger(32, 0)).setRequestedVrComponent(obtainAttributes.getString(43)).setRotationAnimation(obtainAttributes.getInt(46, -1)).setSoftInputMode(obtainAttributes.getInt(20, 0)).setConfigChanges(getActivityConfigChanges(obtainAttributes.getInt(16, 0), obtainAttributes.getInt(47, 0)));
-                int i3 = obtainAttributes.getInt(15, -1);
-                int activityResizeMode = getActivityResizeMode(parsingPackage, obtainAttributes, i3);
+                parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | ComponentParseUtils.flag(512, 25, parsingPackage.isHardwareAccelerated(), typedArrayObtainAttributes) | ComponentParseUtils.flag(Integer.MIN_VALUE, 31, typedArrayObtainAttributes) | ComponentParseUtils.flag(262144, 67, typedArrayObtainAttributes) | ComponentParseUtils.flag(8192, 35, typedArrayObtainAttributes) | ComponentParseUtils.flag(4096, 36, typedArrayObtainAttributes) | ComponentParseUtils.flag(16384, 37, typedArrayObtainAttributes) | ComponentParseUtils.flag(8388608, 51, typedArrayObtainAttributes) | ComponentParseUtils.flag(4194304, 41, typedArrayObtainAttributes) | ComponentParseUtils.flag(16777216, 52, typedArrayObtainAttributes) | ComponentParseUtils.flag(33554432, 56, typedArrayObtainAttributes) | ComponentParseUtils.flag(268435456, 60, typedArrayObtainAttributes));
+                parsedActivityImpl.setPrivateFlags(parsedActivityImpl.getPrivateFlags() | ComponentParseUtils.flag(1, 54, typedArrayObtainAttributes) | ComponentParseUtils.flag(2, 58, true, typedArrayObtainAttributes));
+                parsedActivityImpl.setColorMode(typedArrayObtainAttributes.getInt(49, 0)).setDocumentLaunchMode(typedArrayObtainAttributes.getInt(33, 0)).setLaunchMode(typedArrayObtainAttributes.getInt(14, 0)).setLockTaskLaunchMode(typedArrayObtainAttributes.getInt(38, 0)).setMaxRecents(typedArrayObtainAttributes.getInt(34, ActivityTaskManager.getDefaultAppRecentsLimitStatic())).setPersistableMode(typedArrayObtainAttributes.getInteger(32, 0)).setRequestedVrComponent(typedArrayObtainAttributes.getString(43)).setRotationAnimation(typedArrayObtainAttributes.getInt(46, -1)).setSoftInputMode(typedArrayObtainAttributes.getInt(20, 0)).setConfigChanges(getActivityConfigChanges(typedArrayObtainAttributes.getInt(16, 0), typedArrayObtainAttributes.getInt(47, 0)));
+                int i3 = typedArrayObtainAttributes.getInt(15, -1);
+                int activityResizeMode = getActivityResizeMode(parsingPackage, typedArrayObtainAttributes, i3);
                 parsedActivityImpl.setScreenOrientation(i3).setResizeMode(activityResizeMode);
-                if (obtainAttributes.hasValue(50) && obtainAttributes.getType(50) == 4) {
-                    parsedActivityImpl.setMaxAspectRatio(activityResizeMode, obtainAttributes.getFloat(50, 0.0f));
+                if (typedArrayObtainAttributes.hasValue(50) && typedArrayObtainAttributes.getType(50) == 4) {
+                    parsedActivityImpl.setMaxAspectRatio(activityResizeMode, typedArrayObtainAttributes.getFloat(50, 0.0f));
                 }
-                if (obtainAttributes.hasValue(53)) {
+                if (typedArrayObtainAttributes.hasValue(53)) {
                     i2 = 4;
-                    if (obtainAttributes.getType(53) == 4) {
-                        parsedActivityImpl.setMinAspectRatio(activityResizeMode, obtainAttributes.getFloat(53, 0.0f));
+                    if (typedArrayObtainAttributes.getType(53) == 4) {
+                        parsedActivityImpl.setMinAspectRatio(activityResizeMode, typedArrayObtainAttributes.getFloat(53, 0.0f));
                     }
                 } else {
                     i2 = 4;
                 }
-                if (obtainAttributes.hasValue(62)) {
-                    boolean z2 = obtainAttributes.getBoolean(62, false);
+                if (typedArrayObtainAttributes.hasValue(62)) {
+                    boolean z2 = typedArrayObtainAttributes.getBoolean(62, false);
                     int privateFlags = parsedActivityImpl.getPrivateFlags();
                     if (!z2) {
                         i2 = 8;
@@ -88,34 +92,34 @@ public class ParsedActivityUtils {
                     parsedActivityImpl.setPrivateFlags(privateFlags | i2);
                 }
             }
-            ParseResult<String> buildTaskAffinityName = ComponentParseUtils.buildTaskAffinityName(packageName, parsingPackage.getTaskAffinity(), obtainAttributes.getNonConfigurationString(8, 1024), parseInput);
-            if (buildTaskAffinityName.isError()) {
-                ParseResult<ParsedActivity> error3 = parseInput.error(buildTaskAffinityName);
-                obtainAttributes.recycle();
-                return error3;
+            ParseResult<String> parseResultBuildTaskAffinityName = ComponentParseUtils.buildTaskAffinityName(packageName, parsingPackage.getTaskAffinity(), typedArrayObtainAttributes.getNonConfigurationString(8, 1024), parseInput);
+            if (parseResultBuildTaskAffinityName.isError()) {
+                ParseResult<ParsedActivity> parseResultError3 = parseInput.error(parseResultBuildTaskAffinityName);
+                typedArrayObtainAttributes.recycle();
+                return parseResultError3;
             }
-            parsedActivityImpl.setTaskAffinity(buildTaskAffinityName.getResult());
-            boolean z3 = obtainAttributes.getBoolean(45, false);
+            parsedActivityImpl.setTaskAffinity(parseResultBuildTaskAffinityName.getResult());
+            boolean z3 = typedArrayObtainAttributes.getBoolean(45, false);
             if (z3) {
                 parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | 1048576);
                 parsingPackage.setVisibleToInstantApps(true);
             }
-            String nonConfigurationString = obtainAttributes.getNonConfigurationString(63, 0);
+            String nonConfigurationString = typedArrayObtainAttributes.getNonConfigurationString(63, 0);
             if (nonConfigurationString != null && FrameworkParsingPackageUtils.validateName(nonConfigurationString, false, false) != null) {
-                ParseResult<ParsedActivity> error4 = parseInput.error("requiredDisplayCategory attribute can only consist of alphanumeric characters, '_', and '.'");
-                obtainAttributes.recycle();
-                return error4;
+                ParseResult<ParsedActivity> parseResultError4 = parseInput.error("requiredDisplayCategory attribute can only consist of alphanumeric characters, '_', and '.'");
+                typedArrayObtainAttributes.recycle();
+                return parseResultError4;
             }
             parsedActivityImpl.setRequiredDisplayCategory(nonConfigurationString);
-            parsedActivityImpl.setRequireContentUriPermissionFromCaller(obtainAttributes.getInt(65, 0));
+            parsedActivityImpl.setRequireContentUriPermissionFromCaller(typedArrayObtainAttributes.getInt(65, 0));
             try {
-                ParseResult<ParsedActivity> parseActivityOrAlias = parseActivityOrAlias(parsedActivityImpl, parsingPackage, str2, xmlResourceParser, resources, obtainAttributes, equals, false, z3, parseInput, 27, 4, 6);
-                obtainAttributes.recycle();
-                return parseActivityOrAlias;
+                ParseResult<ParsedActivity> activityOrAlias = parseActivityOrAlias(parsedActivityImpl, parsingPackage, str2, xmlResourceParser, resources, typedArrayObtainAttributes, zEquals, false, z3, parseInput, 27, 4, 6);
+                typedArrayObtainAttributes.recycle();
+                return activityOrAlias;
             } catch (Throwable th) {
                 th = th;
-                obtainAttributes = obtainAttributes;
-                obtainAttributes.recycle();
+                typedArrayObtainAttributes = typedArrayObtainAttributes;
+                typedArrayObtainAttributes.recycle();
                 throw th;
             }
         } catch (Throwable th2) {
@@ -123,22 +127,22 @@ public class ParsedActivityUtils {
         }
     }
 
-    public static ParseResult<ParsedActivity> parseActivityAlias(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, String str, ParseInput parseInput) throws XmlPullParserException, IOException {
+    public static ParseResult<ParsedActivity> parseActivityAlias(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, String str, ParseInput parseInput) throws Throwable {
         ParsedActivity parsedActivity;
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivityAlias);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivityAlias);
         try {
-            String nonConfigurationString = obtainAttributes.getNonConfigurationString(7, 1024);
+            String nonConfigurationString = typedArrayObtainAttributes.getNonConfigurationString(7, 1024);
             if (nonConfigurationString == null) {
-                ParseResult<ParsedActivity> error = parseInput.error("<activity-alias> does not specify android:targetActivity");
-                obtainAttributes.recycle();
-                return error;
+                ParseResult<ParsedActivity> parseResultError = parseInput.error("<activity-alias> does not specify android:targetActivity");
+                typedArrayObtainAttributes.recycle();
+                return parseResultError;
             }
             String packageName = parsingPackage.getPackageName();
-            String buildClassName = ParsingUtils.buildClassName(packageName, nonConfigurationString);
-            if (buildClassName == null) {
-                ParseResult<ParsedActivity> error2 = parseInput.error("Empty class name in package " + packageName);
-                obtainAttributes.recycle();
-                return error2;
+            String strBuildClassName = ParsingUtils.buildClassName(packageName, nonConfigurationString);
+            if (strBuildClassName == null) {
+                ParseResult<ParsedActivity> parseResultError2 = parseInput.error("Empty class name in package " + packageName);
+                typedArrayObtainAttributes.recycle();
+                return parseResultError2;
             }
             List<ParsedActivity> activities = parsingPackage.getActivities();
             int size = ArrayUtils.size(activities);
@@ -149,32 +153,32 @@ public class ParsedActivityUtils {
                     break;
                 }
                 parsedActivity = activities.get(i);
-                if (buildClassName.equals(parsedActivity.getName())) {
+                if (strBuildClassName.equals(parsedActivity.getName())) {
                     break;
                 }
                 i++;
             }
             if (parsedActivity == null) {
-                ParseResult<ParsedActivity> error3 = parseInput.error("<activity-alias> target activity " + buildClassName + " not found in manifest with activities = " + parsingPackage.getActivities() + ", parsedActivities = " + activities);
-                obtainAttributes.recycle();
-                return error3;
+                ParseResult<ParsedActivity> parseResultError3 = parseInput.error("<activity-alias> target activity " + strBuildClassName + " not found in manifest with activities = " + parsingPackage.getActivities() + ", parsedActivities = " + activities);
+                typedArrayObtainAttributes.recycle();
+                return parseResultError3;
             }
-            ParsedActivityImpl makeAlias = ParsedActivityImpl.makeAlias(buildClassName, parsedActivity);
+            ParsedActivityImpl parsedActivityImplMakeAlias = ParsedActivityImpl.makeAlias(strBuildClassName, parsedActivity);
             String str2 = "<" + xmlResourceParser.getName() + ">";
             try {
-                ParseResult<?> parseMainComponent = ParsedMainComponentUtils.parseMainComponent(makeAlias, str2, null, parsingPackage, obtainAttributes, 0, z, str, parseInput, 10, 6, -1, 4, 1, 0, 8, 2, -1, 11, -1, 12, 15);
-                if (parseMainComponent.isError()) {
-                    ParseResult<ParsedActivity> error4 = parseInput.error(parseMainComponent);
-                    obtainAttributes.recycle();
-                    return error4;
+                ParseResult<?> mainComponent = ParsedMainComponentUtils.parseMainComponent(parsedActivityImplMakeAlias, str2, null, parsingPackage, typedArrayObtainAttributes, 0, z, str, parseInput, 10, 6, -1, 4, 1, 0, 8, 2, -1, 11, -1, 12, 15);
+                if (mainComponent.isError()) {
+                    ParseResult<ParsedActivity> parseResultError4 = parseInput.error(mainComponent);
+                    typedArrayObtainAttributes.recycle();
+                    return parseResultError4;
                 }
-                ParseResult<ParsedActivity> parseActivityOrAlias = parseActivityOrAlias(makeAlias, parsingPackage, str2, xmlResourceParser, resources, obtainAttributes, false, true, (makeAlias.getFlags() & 1048576) != 0, parseInput, 9, 3, 5);
-                obtainAttributes.recycle();
-                return parseActivityOrAlias;
+                ParseResult<ParsedActivity> activityOrAlias = parseActivityOrAlias(parsedActivityImplMakeAlias, parsingPackage, str2, xmlResourceParser, resources, typedArrayObtainAttributes, false, true, (parsedActivityImplMakeAlias.getFlags() & 1048576) != 0, parseInput, 9, 3, 5);
+                typedArrayObtainAttributes.recycle();
+                return activityOrAlias;
             } catch (Throwable th) {
                 th = th;
-                obtainAttributes = obtainAttributes;
-                obtainAttributes.recycle();
+                typedArrayObtainAttributes = typedArrayObtainAttributes;
+                typedArrayObtainAttributes.recycle();
                 throw th;
             }
         } catch (Throwable th2) {
@@ -182,134 +186,118 @@ public class ParsedActivityUtils {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x016b, code lost:
-    
-        if (r20 != false) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0172, code lost:
-    
-        if (r13.getLaunchMode() == 4) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x017e, code lost:
-    
-        if (r13.getMetaData().containsKey(com.android.internal.pm.pkg.parsing.ParsingPackageUtils.METADATA_ACTIVITY_LAUNCH_MODE) == false) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0180, code lost:
-    
-        r14 = r13.getMetaData().getString(com.android.internal.pm.pkg.parsing.ParsingPackageUtils.METADATA_ACTIVITY_LAUNCH_MODE);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x0188, code lost:
-    
-        if (r14 == null) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x0191, code lost:
-    
-        if (r14.equals("singleInstancePerTask") == false) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x0193, code lost:
-    
-        r13.setLaunchMode(4);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x0196, code lost:
-    
-        if (r20 != false) goto L91;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x0198, code lost:
-    
-        r14 = r18.getBoolean(59, true);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x01a8, code lost:
-    
-        if (r13.getMetaData().getBoolean(com.android.internal.pm.pkg.parsing.ParsingPackageUtils.METADATA_CAN_DISPLAY_ON_REMOTE_DEVICES, true) != false) goto L89;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x01aa, code lost:
-    
-        r14 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x01ab, code lost:
-    
-        if (r14 == false) goto L91;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x01ad, code lost:
-    
-        r13.setFlags(r13.getFlags() | 65536);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x01b7, code lost:
-    
-        r14 = resolveActivityWindowLayout(r13, r22);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x01bf, code lost:
-    
-        if (r14.isError() == false) goto L95;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x01c5, code lost:
-    
-        return r22.error(r14);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x01c6, code lost:
-    
-        r13.setWindowLayout(r14.getResult());
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x01cf, code lost:
-    
-        if (r9 != false) goto L106;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x01d9, code lost:
-    
-        if (r13.getIntents().size() <= 0) goto L100;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x01db, code lost:
-    
-        r8 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:56:0x01dc, code lost:
-    
-        if (r8 == false) goto L105;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x01de, code lost:
-    
-        r14 = r22.deferError(r13.getName() + ": Targeting S+ (version 31 and above) requires that an explicit value for android:exported be defined when intent filters are present", android.content.pm.parsing.result.ParseInput.DeferredError.MISSING_EXPORTED_FLAG);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x01fe, code lost:
-    
-        if (r14.isError() == false) goto L105;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x0204, code lost:
-    
-        return r22.error(r14);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:61:0x0205, code lost:
-    
-        r13.setExported(r8);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x020c, code lost:
-    
-        return r22.success(r13);
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedActivity> parseActivityOrAlias(com.android.internal.pm.pkg.component.ParsedActivityImpl r13, com.android.internal.pm.pkg.parsing.ParsingPackage r14, java.lang.String r15, android.content.res.XmlResourceParser r16, android.content.res.Resources r17, android.content.res.TypedArray r18, boolean r19, boolean r20, boolean r21, android.content.pm.parsing.result.ParseInput r22, int r23, int r24, int r25) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
-        /*
-            Method dump skipped, instructions count: 525
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedActivityUtils.parseActivityOrAlias(com.android.internal.pm.pkg.component.ParsedActivityImpl, com.android.internal.pm.pkg.parsing.ParsingPackage, java.lang.String, android.content.res.XmlResourceParser, android.content.res.Resources, android.content.res.TypedArray, boolean, boolean, boolean, android.content.pm.parsing.result.ParseInput, int, int, int):android.content.pm.parsing.result.ParseResult");
+    private static ParseResult<ParsedActivity> parseActivityOrAlias(ParsedActivityImpl parsedActivityImpl, ParsingPackage parsingPackage, String str, XmlResourceParser xmlResourceParser, Resources resources, TypedArray typedArray, boolean z, boolean z2, boolean z3, ParseInput parseInput, int i, int i2, int i3) throws XmlPullParserException, Resources.NotFoundException, IOException {
+        String string;
+        ParseResult<?> parseResultUnknownTag;
+        ParsedIntentInfoImpl parsedIntentInfoImpl;
+        ParsedIntentInfoImpl parsedIntentInfoImpl2;
+        String nonConfigurationString = typedArray.getNonConfigurationString(i, 1024);
+        if (nonConfigurationString != null) {
+            String strBuildClassName = ParsingUtils.buildClassName(parsingPackage.getPackageName(), nonConfigurationString);
+            if (strBuildClassName == null) {
+                Log.e("PackageParsing", "Activity " + parsedActivityImpl.getName() + " specified invalid parentActivityName " + nonConfigurationString);
+            } else {
+                parsedActivityImpl.setParentActivityName(strBuildClassName);
+            }
+        }
+        String nonConfigurationString2 = typedArray.getNonConfigurationString(i2, 0);
+        if (z2) {
+            parsedActivityImpl.setPermission(nonConfigurationString2);
+        } else {
+            if (nonConfigurationString2 == null) {
+                nonConfigurationString2 = parsingPackage.getPermission();
+            }
+            parsedActivityImpl.setPermission(nonConfigurationString2);
+        }
+        ParseResult<Set<String>> knownActivityEmbeddingCerts = ParsingUtils.parseKnownActivityEmbeddingCerts(typedArray, resources, z2 ? 14 : 61, parseInput);
+        if (knownActivityEmbeddingCerts.isError()) {
+            return parseInput.error(knownActivityEmbeddingCerts);
+        }
+        Set<String> result = knownActivityEmbeddingCerts.getResult();
+        if (result != null) {
+            parsedActivityImpl.setKnownActivityEmbeddingCerts(result);
+        }
+        boolean zHasValue = typedArray.hasValue(i3);
+        if (zHasValue) {
+            parsedActivityImpl.setExported(typedArray.getBoolean(i3, false));
+        }
+        int depth = xmlResourceParser.getDepth();
+        while (true) {
+            int next = xmlResourceParser.next();
+            if (next == 1 || (next == 3 && xmlResourceParser.getDepth() <= depth)) {
+                break;
+            }
+            if (next == 2 && !ParsingPackageUtils.getAconfigFlags().skipCurrentElement(parsingPackage, xmlResourceParser)) {
+                if (xmlResourceParser.getName().equals("intent-filter")) {
+                    parseResultUnknownTag = parseIntentFilter(parsingPackage, parsedActivityImpl, !z, z3, resources, xmlResourceParser, parseInput);
+                    if (parseResultUnknownTag.isSuccess() && (parsedIntentInfoImpl2 = (ParsedIntentInfoImpl) parseResultUnknownTag.getResult()) != null) {
+                        parsedActivityImpl.setOrder(Math.max(parsedIntentInfoImpl2.getIntentFilter().getOrder(), parsedActivityImpl.getOrder()));
+                        parsedActivityImpl.addIntent(parsedIntentInfoImpl2);
+                    }
+                } else if (xmlResourceParser.getName().equals("meta-data")) {
+                    parseResultUnknownTag = ParsedComponentUtils.addMetaData(parsedActivityImpl, parsingPackage, resources, xmlResourceParser, parseInput);
+                } else if (xmlResourceParser.getName().equals("property")) {
+                    parseResultUnknownTag = ParsedComponentUtils.addProperty(parsedActivityImpl, parsingPackage, resources, xmlResourceParser, parseInput);
+                } else if (!z && !z2 && xmlResourceParser.getName().equals("preferred")) {
+                    parseResultUnknownTag = parseIntentFilter(parsingPackage, parsedActivityImpl, true, z3, resources, xmlResourceParser, parseInput);
+                    if (parseResultUnknownTag.isSuccess() && (parsedIntentInfoImpl = (ParsedIntentInfoImpl) parseResultUnknownTag.getResult()) != null) {
+                        parsingPackage.addPreferredActivityFilter(parsedActivityImpl.getClassName(), parsedIntentInfoImpl);
+                    }
+                } else if (!z && !z2 && xmlResourceParser.getName().equals(TtmlUtils.TAG_LAYOUT)) {
+                    parseResultUnknownTag = parseActivityWindowLayout(resources, xmlResourceParser, parseInput);
+                    if (parseResultUnknownTag.isSuccess()) {
+                        parsedActivityImpl.setWindowLayout((ActivityInfo.WindowLayout) parseResultUnknownTag.getResult());
+                    }
+                } else {
+                    parseResultUnknownTag = ParsingUtils.unknownTag(str, parsingPackage, xmlResourceParser, parseInput);
+                }
+                if (parseResultUnknownTag.isError()) {
+                    return parseInput.error(parseResultUnknownTag);
+                }
+            }
+        }
+        if (!z2 && parsedActivityImpl.getLaunchMode() != 4 && parsedActivityImpl.getMetaData().containsKey(ParsingPackageUtils.METADATA_ACTIVITY_LAUNCH_MODE) && (string = parsedActivityImpl.getMetaData().getString(ParsingPackageUtils.METADATA_ACTIVITY_LAUNCH_MODE)) != null && string.equals("singleInstancePerTask")) {
+            parsedActivityImpl.setLaunchMode(4);
+        }
+        if (!z2) {
+            boolean z4 = typedArray.getBoolean(59, true);
+            if (!parsedActivityImpl.getMetaData().getBoolean(ParsingPackageUtils.METADATA_CAN_DISPLAY_ON_REMOTE_DEVICES, true)) {
+                z4 = false;
+            }
+            if (z4) {
+                parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | 65536);
+            }
+        }
+        ParseResult<ActivityInfo.WindowLayout> parseResultResolveActivityWindowLayout = resolveActivityWindowLayout(parsedActivityImpl, parseInput);
+        if (parseResultResolveActivityWindowLayout.isError()) {
+            return parseInput.error(parseResultResolveActivityWindowLayout);
+        }
+        parsedActivityImpl.setWindowLayout(parseResultResolveActivityWindowLayout.getResult());
+        if (!zHasValue) {
+            boolean z5 = parsedActivityImpl.getIntents().size() > 0;
+            if (z5) {
+                ParseResult<?> parseResultDeferError = parseInput.deferError(parsedActivityImpl.getName() + ": Targeting S+ (version 31 and above) requires that an explicit value for android:exported be defined when intent filters are present", ParseInput.DeferredError.MISSING_EXPORTED_FLAG);
+                if (parseResultDeferError.isError()) {
+                    return parseInput.error(parseResultDeferError);
+                }
+            }
+            parsedActivityImpl.setExported(z5);
+        }
+        return parseInput.success(parsedActivityImpl);
     }
 
-    private static ParseResult<ParsedIntentInfoImpl> parseIntentFilter(ParsingPackage parsingPackage, ParsedActivityImpl parsedActivityImpl, boolean z, boolean z2, Resources resources, XmlResourceParser xmlResourceParser, ParseInput parseInput) throws IOException, XmlPullParserException {
-        ParseResult<ParsedIntentInfoImpl> parseIntentFilter = ParsedMainComponentUtils.parseIntentFilter(parsedActivityImpl, parsingPackage, resources, xmlResourceParser, z2, true, true, z, true, parseInput);
-        if (parseIntentFilter.isError()) {
-            return parseInput.error(parseIntentFilter);
+    private static ParseResult<ParsedIntentInfoImpl> parseIntentFilter(ParsingPackage parsingPackage, ParsedActivityImpl parsedActivityImpl, boolean z, boolean z2, Resources resources, XmlResourceParser xmlResourceParser, ParseInput parseInput) throws XmlPullParserException, IOException {
+        ParseResult<ParsedIntentInfoImpl> intentFilter = ParsedMainComponentUtils.parseIntentFilter(parsedActivityImpl, parsingPackage, resources, xmlResourceParser, z2, true, true, z, true, parseInput);
+        if (intentFilter.isError()) {
+            return parseInput.error(intentFilter);
         }
-        ParsedIntentInfoImpl result = parseIntentFilter.getResult();
+        ParsedIntentInfoImpl result = intentFilter.getResult();
         if (result != null) {
-            IntentFilter intentFilter = result.getIntentFilter();
-            if (intentFilter.isVisibleToInstantApp()) {
+            IntentFilter intentFilter2 = result.getIntentFilter();
+            if (intentFilter2.isVisibleToInstantApp()) {
                 parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | 1048576);
             }
-            if (intentFilter.isImplicitlyVisibleToInstantApp()) {
+            if (intentFilter2.isImplicitlyVisibleToInstantApp()) {
                 parsedActivityImpl.setFlags(parsedActivityImpl.getFlags() | 2097152);
             }
         }
@@ -333,81 +321,61 @@ public class ParsedActivityUtils {
         return i == 14 ? 7 : 4;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x002d A[Catch: all -> 0x0065, TryCatch #0 {all -> 0x0065, blocks: (B:3:0x0007, B:5:0x0013, B:7:0x0026, B:9:0x002d, B:11:0x0040, B:17:0x0034, B:19:0x001c), top: B:2:0x0007 }] */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x002d A[Catch: all -> 0x0065, TryCatch #0 {all -> 0x0065, blocks: (B:3:0x0007, B:5:0x0013, B:10:0x0026, B:12:0x002d, B:16:0x0040, B:14:0x0034, B:7:0x001c), top: B:22:0x0007 }] */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<android.content.pm.ActivityInfo.WindowLayout> parseActivityWindowLayout(android.content.res.Resources r10, android.util.AttributeSet r11, android.content.pm.parsing.result.ParseInput r12) {
-        /*
-            int[] r0 = com.android.internal.R.styleable.AndroidManifestLayout
-            android.content.res.TypedArray r10 = r10.obtainAttributes(r11, r0)
-            r11 = 3
-            int r0 = r10.getType(r11)     // Catch: java.lang.Throwable -> L65
-            r1 = 6
-            r2 = 5
-            r3 = -1082130432(0xffffffffbf800000, float:-1.0)
-            r4 = 1
-            r5 = -1
-            if (r0 != r1) goto L1a
-            float r11 = r10.getFraction(r11, r4, r4, r3)     // Catch: java.lang.Throwable -> L65
-            r0 = r2
-            r2 = r11
-            goto L25
-        L1a:
-            if (r0 != r2) goto L23
-            int r11 = r10.getDimensionPixelSize(r11, r5)     // Catch: java.lang.Throwable -> L65
-            r0 = r2
-            r2 = r3
-            goto L26
-        L23:
-            r0 = r2
-            r2 = r3
-        L25:
-            r11 = r5
-        L26:
-            r6 = 4
-            int r7 = r10.getType(r6)     // Catch: java.lang.Throwable -> L65
-            if (r7 != r1) goto L32
-            float r3 = r10.getFraction(r6, r4, r4, r3)     // Catch: java.lang.Throwable -> L65
-            goto L3d
-        L32:
-            if (r7 != r0) goto L3d
-            int r1 = r10.getDimensionPixelSize(r6, r5)     // Catch: java.lang.Throwable -> L65
-            r9 = r3
-            r3 = r1
-            r1 = r4
-            r4 = r9
-            goto L40
-        L3d:
-            r1 = r4
-            r4 = r3
-            r3 = r5
-        L40:
-            r6 = 17
-            r7 = 0
-            int r6 = r10.getInt(r7, r6)     // Catch: java.lang.Throwable -> L65
-            int r1 = r10.getDimensionPixelSize(r1, r5)     // Catch: java.lang.Throwable -> L65
-            r8 = 2
-            int r5 = r10.getDimensionPixelSize(r8, r5)     // Catch: java.lang.Throwable -> L65
-            java.lang.String r8 = r10.getNonConfigurationString(r0, r7)     // Catch: java.lang.Throwable -> L65
-            android.content.pm.ActivityInfo$WindowLayout r0 = new android.content.pm.ActivityInfo$WindowLayout     // Catch: java.lang.Throwable -> L65
-            r7 = r5
-            r5 = r6
-            r6 = r1
-            r1 = r11
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8)     // Catch: java.lang.Throwable -> L65
-            android.content.pm.parsing.result.ParseResult r11 = r12.success(r0)     // Catch: java.lang.Throwable -> L65
-            r10.recycle()
-            return r11
-        L65:
-            r0 = move-exception
-            r11 = r0
-            r10.recycle()
-            throw r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedActivityUtils.parseActivityWindowLayout(android.content.res.Resources, android.util.AttributeSet, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+    private static ParseResult<ActivityInfo.WindowLayout> parseActivityWindowLayout(Resources resources, AttributeSet attributeSet, ParseInput parseInput) {
+        int i;
+        float fraction;
+        int dimensionPixelSize;
+        int type;
+        int dimensionPixelSize2;
+        int i2;
+        float f;
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.AndroidManifestLayout);
+        try {
+            int type2 = typedArrayObtainAttributes.getType(3);
+            float fraction2 = -1.0f;
+            if (type2 == 6) {
+                i = 5;
+                fraction = typedArrayObtainAttributes.getFraction(3, 1, 1, -1.0f);
+            } else {
+                if (type2 == 5) {
+                    dimensionPixelSize = typedArrayObtainAttributes.getDimensionPixelSize(3, -1);
+                    i = 5;
+                    fraction = -1.0f;
+                    type = typedArrayObtainAttributes.getType(4);
+                    if (type != 6) {
+                        fraction2 = typedArrayObtainAttributes.getFraction(4, 1, 1, -1.0f);
+                    } else {
+                        if (type == i) {
+                            dimensionPixelSize2 = typedArrayObtainAttributes.getDimensionPixelSize(4, -1);
+                            i2 = 1;
+                            f = -1.0f;
+                        }
+                        return parseInput.success(new ActivityInfo.WindowLayout(dimensionPixelSize, fraction, dimensionPixelSize2, f, typedArrayObtainAttributes.getInt(0, 17), typedArrayObtainAttributes.getDimensionPixelSize(i2, -1), typedArrayObtainAttributes.getDimensionPixelSize(2, -1), typedArrayObtainAttributes.getNonConfigurationString(i, 0)));
+                    }
+                    i2 = 1;
+                    f = fraction2;
+                    dimensionPixelSize2 = -1;
+                    return parseInput.success(new ActivityInfo.WindowLayout(dimensionPixelSize, fraction, dimensionPixelSize2, f, typedArrayObtainAttributes.getInt(0, 17), typedArrayObtainAttributes.getDimensionPixelSize(i2, -1), typedArrayObtainAttributes.getDimensionPixelSize(2, -1), typedArrayObtainAttributes.getNonConfigurationString(i, 0)));
+                }
+                i = 5;
+                fraction = -1.0f;
+            }
+            dimensionPixelSize = -1;
+            type = typedArrayObtainAttributes.getType(4);
+            if (type != 6) {
+            }
+            i2 = 1;
+            f = fraction2;
+            dimensionPixelSize2 = -1;
+            return parseInput.success(new ActivityInfo.WindowLayout(dimensionPixelSize, fraction, dimensionPixelSize2, f, typedArrayObtainAttributes.getInt(0, 17), typedArrayObtainAttributes.getDimensionPixelSize(i2, -1), typedArrayObtainAttributes.getDimensionPixelSize(2, -1), typedArrayObtainAttributes.getNonConfigurationString(i, 0)));
+        } finally {
+            typedArrayObtainAttributes.recycle();
+        }
     }
 
     private static ParseResult<ActivityInfo.WindowLayout> resolveActivityWindowLayout(ParsedActivity parsedActivity, ParseInput parseInput) {

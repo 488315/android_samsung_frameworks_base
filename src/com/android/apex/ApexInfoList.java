@@ -19,7 +19,7 @@ public class ApexInfoList {
         return this.apexInfo;
     }
 
-    static ApexInfoList read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static ApexInfoList read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         ApexInfoList apexInfoList = new ApexInfoList();
         xmlPullParser.getDepth();

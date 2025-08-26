@@ -1,13 +1,21 @@
 package com.android.systemui.statusbar.pipeline.satellite.data.prod;
 
 import android.telephony.satellite.SatelliteManager;
+import android.telephony.satellite.SatelliteProvisionStateCallback;
+import com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Ref$BooleanRef;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.ExecutorsKt;
+import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -35,113 +43,78 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends Su
         return ((DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(7:0|1|(1:(1:(3:5|6|7)(2:9|10))(1:11))(3:21|(1:23)|17)|12|13|14|15) */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0099, code lost:
-    
-        if (kotlinx.coroutines.channels.ProduceKt.awaitClose(r5, r6, r10) == r1) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x007c, code lost:
+    /* JADX WARN: Can't wrap try/catch for region: R(7:0|2|(1:(1:(3:6|22|23)(2:7|8))(1:9))(3:10|(1:13)|21)|14|24|15|19) */
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x007c, code lost:
     
         r4 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x007d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x007d, code lost:
     
         com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion.access$e(com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion, r10.this$0.logBuffer, "error registering for provisioning state callback", r4);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0099, code lost:
+    
+        if (kotlinx.coroutines.channels.ProduceKt.awaitClose(r5, r6, r10) == r1) goto L21;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r11) {
-        /*
-            r10 = this;
-            r0 = 2
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r10.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L26
-            if (r2 == r4) goto L1a
-            if (r2 != r0) goto L12
-            kotlin.ResultKt.throwOnFailure(r11)
-            goto L9c
-        L12:
-            java.lang.IllegalStateException r10 = new java.lang.IllegalStateException
-            java.lang.String r11 = "call to 'resume' before 'invoke' with coroutine"
-            r10.<init>(r11)
-            throw r10
-        L1a:
-            java.lang.Object r2 = r10.L$1
-            kotlinx.coroutines.channels.ProducerScope r2 = (kotlinx.coroutines.channels.ProducerScope) r2
-            java.lang.Object r5 = r10.L$0
-            kotlinx.coroutines.channels.ProducerScope r5 = (kotlinx.coroutines.channels.ProducerScope) r5
-            kotlin.ResultKt.throwOnFailure(r11)
-            goto L4c
-        L26:
-            kotlin.ResultKt.throwOnFailure(r11)
-            java.lang.Object r11 = r10.L$0
-            r2 = r11
-            kotlinx.coroutines.channels.ProducerScope r2 = (kotlinx.coroutines.channels.ProducerScope) r2
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl r11 = r10.this$0
-            android.telephony.satellite.SatelliteManager r5 = r10.$sm
-            r10.L$0 = r2
-            r10.L$1 = r2
-            r10.label = r4
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$Companion r6 = com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion
-            r11.getClass()
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2 r6 = new com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2
-            r6.<init>(r11, r5, r3)
-            kotlinx.coroutines.CoroutineDispatcher r11 = r11.bgDispatcher
-            java.lang.Object r11 = kotlinx.coroutines.BuildersKt.withContext(r11, r6, r10)
-            if (r11 != r1) goto L4b
-            goto L9b
-        L4b:
-            r5 = r2
-        L4c:
-            kotlinx.coroutines.channels.ChannelCoroutine r2 = (kotlinx.coroutines.channels.ChannelCoroutine) r2
-            r2.mo3456trySendJP2dKIU(r11)
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1$callback$1 r11 = new com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1$callback$1
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl r2 = r10.this$0
-            r11.<init>()
-            kotlin.jvm.internal.Ref$BooleanRef r2 = new kotlin.jvm.internal.Ref$BooleanRef
-            r2.<init>()
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$Companion r6 = com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion     // Catch: java.lang.Exception -> L7c
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl r7 = r10.this$0     // Catch: java.lang.Exception -> L7c
-            com.android.systemui.log.LogBuffer r7 = r7.logBuffer     // Catch: java.lang.Exception -> L7c
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 r8 = new com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0     // Catch: java.lang.Exception -> L7c
-            r9 = 7
-            r8.<init>(r9)     // Catch: java.lang.Exception -> L7c
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion.i$default(r6, r7, r8)     // Catch: java.lang.Exception -> L7c
-            android.telephony.satellite.SatelliteManager r6 = r10.$sm     // Catch: java.lang.Exception -> L7c
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl r7 = r10.this$0     // Catch: java.lang.Exception -> L7c
-            kotlinx.coroutines.CoroutineDispatcher r7 = r7.bgDispatcher     // Catch: java.lang.Exception -> L7c
-            java.util.concurrent.Executor r7 = kotlinx.coroutines.ExecutorsKt.asExecutor(r7)     // Catch: java.lang.Exception -> L7c
-            r6.registerForProvisionStateChanged(r7, r11)     // Catch: java.lang.Exception -> L7c
-            r2.element = r4     // Catch: java.lang.Exception -> L7c
-            goto L88
-        L7c:
-            r4 = move-exception
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$Companion r6 = com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl r7 = r10.this$0
-            com.android.systemui.log.LogBuffer r7 = r7.logBuffer
-            java.lang.String r8 = "error registering for provisioning state callback"
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl.Companion.access$e(r6, r7, r8, r4)
-        L88:
-            android.telephony.satellite.SatelliteManager r4 = r10.$sm
-            com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$$ExternalSyntheticLambda0 r6 = new com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$$ExternalSyntheticLambda0
-            r6.<init>(r2, r4, r11, r0)
-            r10.L$0 = r3
-            r10.L$1 = r3
-            r10.label = r0
-            java.lang.Object r10 = kotlinx.coroutines.channels.ProduceKt.awaitClose(r5, r6, r10)
-            if (r10 != r1) goto L9c
-        L9b:
-            return r1
-        L9c:
-            kotlin.Unit r10 = kotlin.Unit.INSTANCE
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        final ProducerScope producerScope;
+        Object obj2;
+        int i = 2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = this.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ProducerScope producerScope2 = (ProducerScope) this.L$0;
+            DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl = this.this$0;
+            SatelliteManager satelliteManager = this.$sm;
+            this.L$0 = producerScope2;
+            this.L$1 = producerScope2;
+            this.label = 1;
+            DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
+            deviceBasedSatelliteRepositoryImpl.getClass();
+            obj = BuildersKt.withContext(deviceBasedSatelliteRepositoryImpl.bgDispatcher, new DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2(deviceBasedSatelliteRepositoryImpl, satelliteManager, null), this);
+            if (obj != coroutineSingletons) {
+                producerScope = producerScope2;
+                obj2 = producerScope2;
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        ProducerScope producerScope3 = (ProducerScope) this.L$1;
+        producerScope = (ProducerScope) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        obj2 = producerScope3;
+        ((ChannelCoroutine) obj2).mo3476trySendJP2dKIU(obj);
+        final DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl2 = this.this$0;
+        SatelliteProvisionStateCallback satelliteProvisionStateCallback = new SatelliteProvisionStateCallback() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1$callback$1
+            public final void onSatelliteProvisionStateChanged(final boolean z) {
+                DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, deviceBasedSatelliteRepositoryImpl2.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1$callback$1$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj3) {
+                        return "onSatelliteProvisionStateChanged: ".concat(z ? "provisioned" : "not provisioned");
+                    }
+                });
+                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+            }
+        };
+        Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
+        DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, this.this$0.logBuffer, new DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0(7));
+        this.$sm.registerForProvisionStateChanged(ExecutorsKt.asExecutor(this.this$0.bgDispatcher), satelliteProvisionStateCallback);
+        ref$BooleanRef.element = true;
+        DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$$ExternalSyntheticLambda0 deviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$$ExternalSyntheticLambda0 = new DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1$$ExternalSyntheticLambda0(ref$BooleanRef, this.$sm, satelliteProvisionStateCallback, i);
+        this.L$0 = null;
+        this.L$1 = null;
+        this.label = 2;
     }
 }

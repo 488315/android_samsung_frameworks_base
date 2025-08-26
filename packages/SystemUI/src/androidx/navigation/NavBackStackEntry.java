@@ -32,7 +32,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory, SavedStateRegistryOwner {
     public static final Companion Companion = new Companion(null);
@@ -49,23 +48,21 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
     public final SavedStateRegistryController savedStateRegistryController;
     public final NavViewModelStoreProvider viewModelStoreProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static NavBackStackEntry create$default(Companion companion, Context context, NavDestination navDestination, Bundle bundle, Lifecycle.State state, NavViewModelStoreProvider navViewModelStoreProvider) {
-            String uuid = UUID.randomUUID().toString();
+            String string = UUID.randomUUID().toString();
             companion.getClass();
-            return new NavBackStackEntry(context, navDestination, bundle, state, navViewModelStoreProvider, uuid, null, null);
+            return new NavBackStackEntry(context, navDestination, bundle, state, navViewModelStoreProvider, string, null, null);
         }
 
         private Companion() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NavResultSavedStateFactory extends AbstractSavedStateViewModelFactory {
         public NavResultSavedStateFactory(SavedStateRegistryOwner savedStateRegistryOwner) {
             super(savedStateRegistryOwner, null);
@@ -77,7 +74,6 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SavedStateViewModel extends ViewModel {
         public final SavedStateHandle handle;
 
@@ -91,7 +87,7 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
     }
 
     public final boolean equals(Object obj) {
-        Set<String> keySet;
+        Set<String> setKeySet;
         if (obj != null && (obj instanceof NavBackStackEntry)) {
             NavBackStackEntry navBackStackEntry = (NavBackStackEntry) obj;
             if (Intrinsics.areEqual(this.id, navBackStackEntry.id) && Intrinsics.areEqual(this.destination, navBackStackEntry.destination) && Intrinsics.areEqual(this._lifecycle, navBackStackEntry._lifecycle) && Intrinsics.areEqual(this.savedStateRegistryController.savedStateRegistry, navBackStackEntry.savedStateRegistryController.savedStateRegistry)) {
@@ -99,8 +95,8 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
                     return true;
                 }
                 Bundle bundle = this.immutableArgs;
-                if (bundle != null && (keySet = bundle.keySet()) != null) {
-                    Set<String> set = keySet;
+                if (bundle != null && (setKeySet = bundle.keySet()) != null) {
+                    Set<String> set = setKeySet;
                     if ((set instanceof Collection) && set.isEmpty()) {
                         return true;
                     }
@@ -182,18 +178,18 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
     }
 
     public final int hashCode() {
-        Set<String> keySet;
-        int hashCode = this.destination.hashCode() + (this.id.hashCode() * 31);
+        Set<String> setKeySet;
+        int iHashCode = this.destination.hashCode() + (this.id.hashCode() * 31);
         Bundle bundle = this.immutableArgs;
-        if (bundle != null && (keySet = bundle.keySet()) != null) {
-            Iterator<T> it = keySet.iterator();
+        if (bundle != null && (setKeySet = bundle.keySet()) != null) {
+            Iterator<T> it = setKeySet.iterator();
             while (it.hasNext()) {
-                int i = hashCode * 31;
+                int i = iHashCode * 31;
                 Object obj = this.immutableArgs.get((String) it.next());
-                hashCode = i + (obj != null ? obj.hashCode() : 0);
+                iHashCode = i + (obj != null ? obj.hashCode() : 0);
             }
         }
-        return this.savedStateRegistryController.savedStateRegistry.hashCode() + ((this._lifecycle.hashCode() + (hashCode * 31)) * 31);
+        return this.savedStateRegistryController.savedStateRegistry.hashCode() + ((this._lifecycle.hashCode() + (iHashCode * 31)) * 31);
     }
 
     public final void setMaxLifecycle(Lifecycle.State state) {
@@ -219,10 +215,10 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
             }
             savedStateRegistryController.performRestore(this.savedState);
         }
-        int ordinal = this.hostLifecycleState.ordinal();
-        int ordinal2 = this.maxLifecycle.ordinal();
+        int iOrdinal = this.hostLifecycleState.ordinal();
+        int iOrdinal2 = this.maxLifecycle.ordinal();
         LifecycleRegistry lifecycleRegistry = this._lifecycle;
-        if (ordinal < ordinal2) {
+        if (iOrdinal < iOrdinal2) {
             lifecycleRegistry.setCurrentState(this.hostLifecycleState);
         } else {
             lifecycleRegistry.setCurrentState(this.maxLifecycle);
@@ -247,10 +243,10 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Context context2 = NavBackStackEntry.this.context;
+                Context context2 = this.this$0.context;
                 Context applicationContext = context2 != null ? context2.getApplicationContext() : null;
                 Application application = applicationContext instanceof Application ? (Application) applicationContext : null;
-                NavBackStackEntry navBackStackEntry = NavBackStackEntry.this;
+                NavBackStackEntry navBackStackEntry = this.this$0;
                 return new SavedStateViewModelFactory(application, navBackStackEntry, navBackStackEntry.getArguments());
             }
         });
@@ -261,12 +257,12 @@ public final class NavBackStackEntry implements LifecycleOwner, ViewModelStoreOw
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                NavBackStackEntry navBackStackEntry = NavBackStackEntry.this;
+                NavBackStackEntry navBackStackEntry = this.this$0;
                 if (!navBackStackEntry.savedStateRegistryAttached) {
                     throw new IllegalStateException("You cannot access the NavBackStackEntry's SavedStateHandle until it is added to the NavController's back stack (i.e., the Lifecycle of the NavBackStackEntry reaches the CREATED state).");
                 }
                 if (navBackStackEntry._lifecycle.state != Lifecycle.State.DESTROYED) {
-                    return ((NavBackStackEntry.SavedStateViewModel) new ViewModelProvider(NavBackStackEntry.this, new NavBackStackEntry.NavResultSavedStateFactory(NavBackStackEntry.this)).get(NavBackStackEntry.SavedStateViewModel.class)).handle;
+                    return ((NavBackStackEntry.SavedStateViewModel) new ViewModelProvider(this.this$0, new NavBackStackEntry.NavResultSavedStateFactory(this.this$0)).get(NavBackStackEntry.SavedStateViewModel.class)).handle;
                 }
                 throw new IllegalStateException("You cannot access the NavBackStackEntry's SavedStateHandle after the NavBackStackEntry is destroyed.");
             }

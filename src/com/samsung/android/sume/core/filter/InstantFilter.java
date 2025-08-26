@@ -20,8 +20,8 @@ public class InstantFilter extends DecorateFilter {
     @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
         super.prepare();
-        MutableMediaBuffer run = super.run(mediaBuffer, mutableMediaBuffer);
+        MutableMediaBuffer mutableMediaBufferRun = super.run(mediaBuffer, mutableMediaBuffer);
         super.release();
-        return run;
+        return mutableMediaBufferRun;
     }
 }

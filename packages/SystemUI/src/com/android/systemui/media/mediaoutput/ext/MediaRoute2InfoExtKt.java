@@ -40,35 +40,35 @@ import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaRoute2InfoExtKt {
+    /* JADX WARN: Removed duplicated region for block: B:15:0x002a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final CharSequence getDisplayName(MediaRoute2Info mediaRoute2Info) {
-        Integer valueOf;
+        Integer numValueOf;
         int type = mediaRoute2Info.getType();
         if (type == 1 || type == 2) {
-            valueOf = Integer.valueOf(R.string.phone_speaker);
-        } else {
-            if (type != 3) {
-                if (type == 4) {
-                    valueOf = Integer.valueOf(R.string.headphones);
-                } else if (type != 22) {
-                    switch (type) {
-                        case 9:
-                        case 10:
-                            valueOf = Integer.valueOf(R.string.hdmi_mhl_device);
-                            break;
-                        case 11:
-                            break;
-                        default:
-                            valueOf = null;
-                            break;
-                    }
-                }
+            numValueOf = Integer.valueOf(R.string.phone_speaker);
+        } else if (type == 3) {
+            numValueOf = Integer.valueOf(R.string.headset);
+        } else if (type == 4) {
+            numValueOf = Integer.valueOf(R.string.headphones);
+        } else if (type != 22) {
+            switch (type) {
+                case 9:
+                case 10:
+                    numValueOf = Integer.valueOf(R.string.hdmi_mhl_device);
+                    break;
+                case 11:
+                    break;
+                default:
+                    numValueOf = null;
+                    break;
             }
-            valueOf = Integer.valueOf(R.string.headset);
         }
-        return valueOf != null ? new ResourceString(valueOf.intValue(), null, 2, null) : mediaRoute2Info.getName().toString();
+        return numValueOf != null ? new ResourceString(numValueOf.intValue(), null, 2, null) : mediaRoute2Info.getName().toString();
     }
 
     public static final ImageVector getSimpleIcon(MediaRoute2Info mediaRoute2Info) {
@@ -161,11 +161,11 @@ public abstract class MediaRoute2InfoExtKt {
 
     public static final List sortedByIds(List list, List list2) {
         IndexingIterable indexingIterable = new IndexingIterable(new CollectionsKt___CollectionsKt$$ExternalSyntheticLambda0(list2));
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(indexingIterable, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(indexingIterable, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        final LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+        final LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
         Iterator it = indexingIterable.iterator();
         while (true) {
             IndexingIterator indexingIterator = (IndexingIterator) it;
@@ -176,15 +176,15 @@ public abstract class MediaRoute2InfoExtKt {
                         Map map = linkedHashMap;
                         MediaRoute2Info mediaRoute2Info = (MediaRoute2Info) obj2;
                         Integer num = (Integer) map.get(((MediaRoute2Info) obj).getId());
-                        int intValue = num != null ? num.intValue() : Integer.MAX_VALUE;
+                        int iIntValue = num != null ? num.intValue() : Integer.MAX_VALUE;
                         Integer num2 = (Integer) map.get(mediaRoute2Info.getId());
-                        return Integer.valueOf(Intrinsics.compare(intValue, num2 != null ? num2.intValue() : Integer.MAX_VALUE));
+                        return Integer.valueOf(Intrinsics.compare(iIntValue, num2 != null ? num2.intValue() : Integer.MAX_VALUE));
                     }
                 };
                 return CollectionsKt___CollectionsKt.sortedWith(list, new Comparator() { // from class: com.android.systemui.media.mediaoutput.ext.MediaRoute2InfoExtKt$sam$java_util_Comparator$0
                     @Override // java.util.Comparator
                     public final /* synthetic */ int compare(Object obj, Object obj2) {
-                        return ((Number) Function2.this.invoke(obj, obj2)).intValue();
+                        return ((Number) function2.invoke(obj, obj2)).intValue();
                     }
                 });
             }

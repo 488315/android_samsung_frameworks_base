@@ -45,7 +45,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SettingsHelper implements Dumpable {
     public static final String BINDER_CALL_MONITOR = "binder_call_monitor";
@@ -278,19 +277,18 @@ public class SettingsHelper implements Dumpable {
     private ItemMap mItemLists = new ItemMap(this, 0);
     private ContentObserver mSettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.android.systemui.util.SettingsHelper.1
         @Override // android.database.ContentObserver
-        public void onChange(boolean z, Uri uri) {
+        public void onChange(boolean z, Uri uri) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             super.onChange(z);
             if (uri == null) {
                 return;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             SettingsHelper.this.mItemLists.updateMapForUri(SettingsHelper.this.mResolver, uri);
-            Log.d(SettingsHelper.TAG, "onChange() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - uptimeMillis));
+            Log.d(SettingsHelper.TAG, "onChange() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - jUptimeMillis));
             SettingsHelper.this.broadcastChange(uri);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Item {
         boolean mCachedIntegrity;
         String mDataType;
@@ -313,7 +311,7 @@ public class SettingsHelper implements Dumpable {
             return this.mKey;
         }
 
-        private Uri getUri(String str) {
+        private Uri getUri(String str) throws ClassNotFoundException {
             Uri uri = this.mUri;
             if (uri != null) {
                 return uri;
@@ -348,21 +346,21 @@ public class SettingsHelper implements Dumpable {
             return uri.equals(this.mUri);
         }
 
-        public float getFloatValue() {
+        public float getFloatValue() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             if (!this.mCachedIntegrity && SettingsHelper.this.mResolver != null) {
                 read(SettingsHelper.this.mResolver);
             }
             return this.mFloatValue;
         }
 
-        public int getIntValue() {
+        public int getIntValue() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             if (!this.mCachedIntegrity && SettingsHelper.this.mResolver != null) {
                 read(SettingsHelper.this.mResolver);
             }
             return this.mIntValue;
         }
 
-        public String getStringValue() {
+        public String getStringValue() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             if (!this.mCachedIntegrity && SettingsHelper.this.mResolver != null) {
                 read(SettingsHelper.this.mResolver);
             }
@@ -373,12 +371,21 @@ public class SettingsHelper implements Dumpable {
             return this.mCachedIntegrity;
         }
 
-        public void read(ContentResolver contentResolver) {
+        public void read(ContentResolver contentResolver) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             try {
                 Class<?> cls = Class.forName("android.provider.Settings$" + this.mSettingType);
                 Class<String> cls2 = String.class;
                 if ("ForUser".equals(this.mForUser)) {
-                    if (this.mDef != null && !SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
+                    if (this.mDef == null || SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
+                        Method declaredMethod = cls.getDeclaredMethod("get" + this.mDataType + this.mForUser, ContentResolver.class, cls2, Integer.TYPE);
+                        if (SettingsHelper.DATA_TYPE_INT.equals(this.mDataType)) {
+                            this.mIntValue = ((Integer) declaredMethod.invoke(cls, contentResolver, this.mKey, -2)).intValue();
+                        } else if (SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
+                            this.mStringValue = (String) declaredMethod.invoke(cls, contentResolver, this.mKey, -2);
+                        } else if (SettingsHelper.DATA_TYPE_FLOAT.equals(this.mDataType)) {
+                            this.mFloatValue = ((Float) declaredMethod.invoke(cls, contentResolver, this.mKey, -2)).floatValue();
+                        }
+                    } else {
                         String str = "get" + this.mDataType + this.mForUser;
                         Class<?>[] clsArr = new Class[4];
                         clsArr[0] = ContentResolver.class;
@@ -390,47 +397,38 @@ public class SettingsHelper implements Dumpable {
                         }
                         clsArr[2] = cls2;
                         clsArr[3] = Integer.TYPE;
-                        Method declaredMethod = cls.getDeclaredMethod(str, clsArr);
+                        Method declaredMethod2 = cls.getDeclaredMethod(str, clsArr);
                         if (SettingsHelper.DATA_TYPE_INT.equals(this.mDataType)) {
-                            this.mIntValue = ((Integer) declaredMethod.invoke(cls, contentResolver, this.mKey, this.mDef, -2)).intValue();
+                            this.mIntValue = ((Integer) declaredMethod2.invoke(cls, contentResolver, this.mKey, this.mDef, -2)).intValue();
                         } else if (SettingsHelper.DATA_TYPE_FLOAT.equals(this.mDataType)) {
-                            this.mFloatValue = ((Float) declaredMethod.invoke(cls, contentResolver, this.mKey, this.mDef, -2)).floatValue();
+                            this.mFloatValue = ((Float) declaredMethod2.invoke(cls, contentResolver, this.mKey, this.mDef, -2)).floatValue();
                         }
                     }
-                    Method declaredMethod2 = cls.getDeclaredMethod("get" + this.mDataType + this.mForUser, ContentResolver.class, cls2, Integer.TYPE);
+                } else if (this.mDef == null || SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
+                    Method declaredMethod3 = cls.getDeclaredMethod("get" + this.mDataType, ContentResolver.class, cls2);
                     if (SettingsHelper.DATA_TYPE_INT.equals(this.mDataType)) {
-                        this.mIntValue = ((Integer) declaredMethod2.invoke(cls, contentResolver, this.mKey, -2)).intValue();
+                        this.mIntValue = ((Integer) declaredMethod3.invoke(cls, contentResolver, this.mKey)).intValue();
                     } else if (SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
-                        this.mStringValue = (String) declaredMethod2.invoke(cls, contentResolver, this.mKey, -2);
+                        this.mStringValue = (String) declaredMethod3.invoke(cls, contentResolver, this.mKey);
                     } else if (SettingsHelper.DATA_TYPE_FLOAT.equals(this.mDataType)) {
-                        this.mFloatValue = ((Float) declaredMethod2.invoke(cls, contentResolver, this.mKey, -2)).floatValue();
+                        this.mFloatValue = ((Float) declaredMethod3.invoke(cls, contentResolver, this.mKey)).floatValue();
                     }
                 } else {
-                    if (this.mDef != null && !SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
-                        String str2 = "get" + this.mDataType;
-                        Class<?>[] clsArr2 = new Class[3];
-                        clsArr2[0] = ContentResolver.class;
-                        clsArr2[1] = cls2;
-                        if (this.mDataType.equals(SettingsHelper.DATA_TYPE_INT)) {
-                            cls2 = Integer.TYPE;
-                        } else if (this.mDataType.equals(SettingsHelper.DATA_TYPE_FLOAT)) {
-                            cls2 = Float.TYPE;
-                        }
-                        clsArr2[2] = cls2;
-                        Method declaredMethod3 = cls.getDeclaredMethod(str2, clsArr2);
-                        if (SettingsHelper.DATA_TYPE_INT.equals(this.mDataType)) {
-                            this.mIntValue = ((Integer) declaredMethod3.invoke(cls, contentResolver, this.mKey, this.mDef)).intValue();
-                        } else if (SettingsHelper.DATA_TYPE_FLOAT.equals(this.mDataType)) {
-                            this.mFloatValue = ((Float) declaredMethod3.invoke(cls, contentResolver, this.mKey, this.mDef)).floatValue();
-                        }
+                    String str2 = "get" + this.mDataType;
+                    Class<?>[] clsArr2 = new Class[3];
+                    clsArr2[0] = ContentResolver.class;
+                    clsArr2[1] = cls2;
+                    if (this.mDataType.equals(SettingsHelper.DATA_TYPE_INT)) {
+                        cls2 = Integer.TYPE;
+                    } else if (this.mDataType.equals(SettingsHelper.DATA_TYPE_FLOAT)) {
+                        cls2 = Float.TYPE;
                     }
-                    Method declaredMethod4 = cls.getDeclaredMethod("get" + this.mDataType, ContentResolver.class, cls2);
+                    clsArr2[2] = cls2;
+                    Method declaredMethod4 = cls.getDeclaredMethod(str2, clsArr2);
                     if (SettingsHelper.DATA_TYPE_INT.equals(this.mDataType)) {
-                        this.mIntValue = ((Integer) declaredMethod4.invoke(cls, contentResolver, this.mKey)).intValue();
-                    } else if (SettingsHelper.DATA_TYPE_STRING.equals(this.mDataType)) {
-                        this.mStringValue = (String) declaredMethod4.invoke(cls, contentResolver, this.mKey);
+                        this.mIntValue = ((Integer) declaredMethod4.invoke(cls, contentResolver, this.mKey, this.mDef)).intValue();
                     } else if (SettingsHelper.DATA_TYPE_FLOAT.equals(this.mDataType)) {
-                        this.mFloatValue = ((Float) declaredMethod4.invoke(cls, contentResolver, this.mKey)).floatValue();
+                        this.mFloatValue = ((Float) declaredMethod4.invoke(cls, contentResolver, this.mKey, this.mDef)).floatValue();
                     }
                 }
                 this.mCachedIntegrity = true;
@@ -478,7 +476,6 @@ public class SettingsHelper implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ItemMap {
         private ConcurrentHashMap<String, Item> mMap;
 
@@ -492,9 +489,9 @@ public class SettingsHelper implements Dumpable {
                 this.mMap.put(key, item);
                 return;
             }
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("HashMap CollisionException!! Please don't add same setting uri!!! NewKey:", key, ", OriKey:");
-            m.append(this.mMap.get(key).getKey());
-            Log.e(SettingsHelper.TAG, m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("HashMap CollisionException!! Please don't add same setting uri!!! NewKey:", key, ", OriKey:");
+            sbM.append(this.mMap.get(key).getKey());
+            Log.e(SettingsHelper.TAG, sbM.toString());
         }
 
         public boolean containsKey(String str) {
@@ -519,7 +516,7 @@ public class SettingsHelper implements Dumpable {
             }
         }
 
-        public void updateMapAll(ContentResolver contentResolver) {
+        public void updateMapAll(ContentResolver contentResolver) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             Iterator<String> it = this.mMap.keySet().iterator();
             while (it.hasNext()) {
                 this.mMap.get(it.next()).resetCachedIntegrity();
@@ -531,7 +528,7 @@ public class SettingsHelper implements Dumpable {
             }
         }
 
-        public void updateMapForUri(ContentResolver contentResolver, Uri uri) {
+        public void updateMapForUri(ContentResolver contentResolver, Uri uri) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
             for (String str : this.mMap.keySet()) {
                 if (this.mMap.get(str).equals(uri)) {
                     this.mMap.get(str).resetCachedIntegrity();
@@ -545,7 +542,6 @@ public class SettingsHelper implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnChangedCallback {
         void onChanged(Uri uri);
     }
@@ -578,9 +574,9 @@ public class SettingsHelper implements Dumpable {
     }
 
     private int getDefaultScreenTransitionEffect() {
-        int semGetTransitionEffectValue = FingerprintManager.semGetTransitionEffectValue();
-        if (semGetTransitionEffectValue != -1) {
-            return semGetTransitionEffectValue;
+        int iSemGetTransitionEffectValue = FingerprintManager.semGetTransitionEffectValue();
+        if (iSemGetTransitionEffectValue != -1) {
+            return iSemGetTransitionEffectValue;
         }
         return 1;
     }
@@ -589,7 +585,7 @@ public class SettingsHelper implements Dumpable {
         return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("1;", DeviceType.isTablet() ? (DeviceType.isSupportPenDetachmentOption(this.mContext) && hasPackage(this.mContext, "com.samsung.android.app.notes") && isInstalledPackageAsUser("com.samsung.android.app.notes", i)) ? "com.samsung.android.app.notes/com.samsung.android.app.notes.memolist.MemoListActivity" : (hasPackage(this.mContext, "com.sec.android.app.sbrowser") && isInstalledPackageAsUser("com.sec.android.app.sbrowser", i)) ? "com.sec.android.app.sbrowser/com.sec.android.app.sbrowser.SBrowserMainActivity" : "com.android.chrome/com.google.android.apps.chrome.Main" : "com.samsung.android.dialer/com.samsung.android.dialer.DialtactsActivity", ";1;com.sec.android.app.camera/com.sec.android.app.camera.Camera;");
     }
 
-    private boolean hasPackage(Context context, String str) {
+    private boolean hasPackage(Context context, String str) throws PackageManager.NameNotFoundException {
         try {
             context.getPackageManager().getApplicationInfo(str, 128);
             return true;
@@ -610,7 +606,7 @@ public class SettingsHelper implements Dumpable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0() {
+    public /* synthetic */ void lambda$new$0() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         readSettingsDB();
         lambda$onUserSwitched$1();
     }
@@ -618,9 +614,9 @@ public class SettingsHelper implements Dumpable {
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: registerSettingsObserver, reason: merged with bridge method [inline-methods] */
     public void lambda$onUserSwitched$1() {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         this.mItemLists.registerAllObserver();
-        Log.d(TAG, "registerSettingsObserver() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - uptimeMillis));
+        Log.d(TAG, "registerSettingsObserver() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - jUptimeMillis));
     }
 
     private void setUpSettingsItem() {
@@ -1202,7 +1198,7 @@ public class SettingsHelper implements Dumpable {
         return this.mItemLists.get(INDEX_SUBSCREEN_BRIGHTNESS_MODE).getIntValue();
     }
 
-    public float getTransitionAnimationScale() {
+    public float getTransitionAnimationScale() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         String stringValue = this.mItemLists.get(INDEX_TRANSITION_ANIMATION_SCALE).getStringValue();
         if (stringValue != null) {
             return MathUtils.clamp(Float.parseFloat(stringValue), 0.0f, 10.0f);
@@ -1804,7 +1800,7 @@ public class SettingsHelper implements Dumpable {
         return Rune.SYSUI_MULTI_USER && this.mItemLists.get(INDEX_USER_SWITCHER_ENABLED).getIntValue() == 1;
     }
 
-    public boolean isVoiceAssistantEnabled() {
+    public boolean isVoiceAssistantEnabled() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         String stringValue = this.mItemLists.get(INDEX_ENABLED_ACCESSIBILITY_SERVICES).getStringValue();
         if (TextUtils.isEmpty(stringValue)) {
             return false;
@@ -1828,7 +1824,7 @@ public class SettingsHelper implements Dumpable {
         return this.mItemLists.get(INDEX_WHITE_LOCKSCREEN_WALLPAPER).getIntValue() == 1;
     }
 
-    public void onUserSwitched() {
+    public void onUserSwitched() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         this.mResolver.unregisterContentObserver(this.mSettingsObserver);
         readSettingsDB();
         Thread thread = new Thread(new SettingsHelper$$ExternalSyntheticLambda0(this, 0), "onUserSwitched");
@@ -1836,10 +1832,10 @@ public class SettingsHelper implements Dumpable {
         thread.start();
     }
 
-    public void readSettingsDB() {
-        long uptimeMillis = SystemClock.uptimeMillis();
+    public void readSettingsDB() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
+        long jUptimeMillis = SystemClock.uptimeMillis();
         this.mItemLists.updateMapAll(this.mResolver);
-        Log.d(TAG, "readSettingsDB() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - uptimeMillis));
+        Log.d(TAG, "readSettingsDB() COMPLETED elapsed= " + (SystemClock.uptimeMillis() - jUptimeMillis));
     }
 
     public void registerCallback(OnChangedCallback onChangedCallback, Uri... uriArr) {

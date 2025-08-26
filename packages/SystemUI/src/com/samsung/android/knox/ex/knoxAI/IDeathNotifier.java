@@ -6,12 +6,10 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDeathNotifier extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.ex.knoxAI.IDeathNotifier";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IDeathNotifier {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -19,10 +17,8 @@ public interface IDeathNotifier extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDeathNotifier {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IDeathNotifier {
             public IBinder mRemote;
 
@@ -48,8 +44,8 @@ public interface IDeathNotifier extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeathNotifier.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IDeathNotifier)) ? new Proxy(iBinder) : (IDeathNotifier) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeathNotifier.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDeathNotifier)) ? new Proxy(iBinder) : (IDeathNotifier) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder

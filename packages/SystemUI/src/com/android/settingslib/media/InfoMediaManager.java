@@ -1,5 +1,6 @@
 package com.android.settingslib.media;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -13,9 +14,13 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
+import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
 import androidx.preference.PreferenceGroupAdapter$$ExternalSyntheticOutline0;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.LocalMediaManager;
+import com.samsung.android.knox.EnterpriseContainerCallback;
+import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +37,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class InfoMediaManager {
     public final LocalBluetoothManager mBluetoothManager;
@@ -47,19 +51,18 @@ public abstract class InfoMediaManager {
     public final Map mPreferenceItemMap = new ConcurrentHashMap();
     public final MediaControllerCallback mMediaControllerCallback = new MediaControllerCallback(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api34Impl {
         public static List<MediaRoute2Info> arrangeRouteListByPreference(List<MediaRoute2Info> list, List<MediaRoute2Info> list2, RouteListingPreference routeListingPreference) {
-            List<RouteListingPreference.Item> composePreferenceRouteListing = composePreferenceRouteListing(routeListingPreference);
+            List<RouteListingPreference.Item> listComposePreferenceRouteListing = composePreferenceRouteListing(routeListingPreference);
             LinkedHashSet linkedHashSet = new LinkedHashSet();
-            boolean preferRouteListingOrdering = preferRouteListingOrdering(routeListingPreference);
+            boolean zPreferRouteListingOrdering = preferRouteListingOrdering(routeListingPreference);
             HashSet hashSet = new HashSet();
-            if (preferRouteListingOrdering) {
+            if (zPreferRouteListingOrdering) {
                 Iterator<MediaRoute2Info> it = list.iterator();
                 while (it.hasNext()) {
                     hashSet.add(it.next().getId());
                 }
-                for (RouteListingPreference.Item item : composePreferenceRouteListing) {
+                for (RouteListingPreference.Item item : listComposePreferenceRouteListing) {
                     if (hashSet.contains(item.getRouteId())) {
                         linkedHashSet.add(item.getRouteId());
                     }
@@ -77,7 +80,7 @@ public abstract class InfoMediaManager {
                 }
             }
             final Map map = (Map) Stream.concat(list.stream(), list2.stream()).collect(Collectors.toMap(new InfoMediaManager$Api34Impl$$ExternalSyntheticLambda1(), Function.identity(), new InfoMediaManager$Api34Impl$$ExternalSyntheticLambda2()));
-            Iterator<RouteListingPreference.Item> it3 = composePreferenceRouteListing.iterator();
+            Iterator<RouteListingPreference.Item> it3 = listComposePreferenceRouteListing.iterator();
             while (it3.hasNext()) {
                 MediaRoute2Info mediaRoute2Info2 = (MediaRoute2Info) map.get(it3.next().getRouteId());
                 if (mediaRoute2Info2 != null) {
@@ -95,10 +98,10 @@ public abstract class InfoMediaManager {
         }
 
         public static List<RouteListingPreference.Item> composePreferenceRouteListing(RouteListingPreference routeListingPreference) {
-            boolean preferRouteListingOrdering = preferRouteListingOrdering(routeListingPreference);
+            boolean zPreferRouteListingOrdering = preferRouteListingOrdering(routeListingPreference);
             ArrayList arrayList = new ArrayList();
             for (RouteListingPreference.Item item : routeListingPreference.getItems()) {
-                if (preferRouteListingOrdering || (item.getFlags() & 4) == 0) {
+                if (zPreferRouteListingOrdering || (item.getFlags() & 4) == 0) {
                     arrayList.add(item);
                 } else {
                     arrayList.add(0, item);
@@ -109,14 +112,12 @@ public abstract class InfoMediaManager {
 
         public static synchronized List<MediaRoute2Info> filterDuplicatedIds(List<MediaRoute2Info> list) {
             ArrayList arrayList;
-            synchronized (Api34Impl.class) {
-                arrayList = new ArrayList();
-                HashSet hashSet = new HashSet();
-                for (MediaRoute2Info mediaRoute2Info : list) {
-                    if (Collections.disjoint(mediaRoute2Info.getDeduplicationIds(), hashSet)) {
-                        arrayList.add(mediaRoute2Info);
-                        hashSet.addAll(mediaRoute2Info.getDeduplicationIds());
-                    }
+            arrayList = new ArrayList();
+            HashSet hashSet = new HashSet();
+            for (MediaRoute2Info mediaRoute2Info : list) {
+                if (Collections.disjoint(mediaRoute2Info.getDeduplicationIds(), hashSet)) {
+                    arrayList.add(mediaRoute2Info);
+                    hashSet.addAll(mediaRoute2Info.getDeduplicationIds());
                 }
             }
             return arrayList;
@@ -147,7 +148,6 @@ public abstract class InfoMediaManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaControllerCallback extends MediaController.Callback {
         public /* synthetic */ MediaControllerCallback(InfoMediaManager infoMediaManager, int i) {
             this();
@@ -172,7 +172,6 @@ public abstract class InfoMediaManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PackageNotAvailableException extends Exception {
         public PackageNotAvailableException(String str) {
             super(str);
@@ -206,149 +205,81 @@ public abstract class InfoMediaManager {
         try {
             context2 = context;
             localBluetoothManager2 = localBluetoothManager;
-            try {
-                return new RouterInfoMediaManager(context2, str2, userHandle2, localBluetoothManager2, mediaController);
-            } catch (PackageNotAvailableException unused) {
-                Log.w("InfoMediaManager", "Returning a no-op InfoMediaManager for package " + str2);
-                return new NoOpInfoMediaManager(context2, str2, userHandle2, localBluetoothManager2, mediaController);
-            }
-        } catch (PackageNotAvailableException unused2) {
+        } catch (PackageNotAvailableException unused) {
             context2 = context;
             localBluetoothManager2 = localBluetoothManager;
         }
+        try {
+            return new RouterInfoMediaManager(context2, str2, userHandle2, localBluetoothManager2, mediaController);
+        } catch (PackageNotAvailableException unused2) {
+            Log.w("InfoMediaManager", "Returning a no-op InfoMediaManager for package " + str2);
+            return new NoOpInfoMediaManager(context2, str2, userHandle2, localBluetoothManager2, mediaController);
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:34:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0058  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00b4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void addMediaDevice(android.media.MediaRoute2Info r6, android.media.RoutingSessionInfo r7) {
-        /*
-            r5 = this;
-            int r7 = r6.getType()
-            if (r7 == 0) goto Lb4
-            r0 = 19
-            r1 = 0
-            if (r7 == r0) goto L9d
-            r0 = 29
-            if (r7 == r0) goto L9d
-            r0 = 2000(0x7d0, float:2.803E-42)
-            if (r7 == r0) goto Lb4
-            r0 = 2
-            if (r7 == r0) goto L9d
-            r0 = 3
-            if (r7 == r0) goto L9d
-            r0 = 4
-            if (r7 == r0) goto L9d
-            r0 = 5
-            if (r7 == r0) goto L9d
-            r0 = 6
-            if (r7 == r0) goto L9d
-            r0 = 22
-            if (r7 == r0) goto L9d
-            r0 = 23
-            java.lang.String r2 = "InfoMediaManager"
-            if (r7 == r0) goto L58
-            r0 = 25
-            if (r7 == r0) goto L9d
-            r0 = 26
-            if (r7 == r0) goto L58
-            switch(r7) {
-                case 8: goto L58;
-                case 9: goto L9d;
-                case 10: goto L9d;
-                case 11: goto L9d;
-                case 12: goto L9d;
-                case 13: goto L9d;
-                default: goto L37;
+    public void addMediaDevice(MediaRoute2Info mediaRoute2Info, RoutingSessionInfo routingSessionInfo) {
+        MediaDevice infoMediaDevice;
+        int type = mediaRoute2Info.getType();
+        if (type != 0) {
+            infoMediaDevice = null;
+            if (type == 19 || type == 29) {
+                infoMediaDevice = new PhoneMediaDevice(this.mContext, mediaRoute2Info, (RouteListingPreference.Item) ((ConcurrentHashMap) this.mPreferenceItemMap).getOrDefault(mediaRoute2Info.getId(), null));
+            } else if (type == 2000) {
+                infoMediaDevice = new InfoMediaDevice(this.mContext, mediaRoute2Info, (RouteListingPreference.Item) ((ConcurrentHashMap) this.mPreferenceItemMap).get(mediaRoute2Info.getId()));
+            } else if (type != 2 && type != 3 && type != 4 && type != 5 && type != 6 && type != 22) {
+                if (type == 23) {
+                    if (mediaRoute2Info.getAddress() == null) {
+                        Log.e("InfoMediaManager", "Ignoring bluetooth route with no set address: " + mediaRoute2Info);
+                    } else {
+                        CachedBluetoothDevice cachedBluetoothDeviceFindDevice = this.mBluetoothManager.mCachedDeviceManager.findDevice(BluetoothAdapter.getDefaultAdapter().getRemoteDevice(mediaRoute2Info.getAddress()));
+                        if (cachedBluetoothDeviceFindDevice != null) {
+                            infoMediaDevice = new BluetoothMediaDevice(this.mContext, cachedBluetoothDeviceFindDevice, mediaRoute2Info, (RouteListingPreference.Item) ((ConcurrentHashMap) this.mPreferenceItemMap).getOrDefault(mediaRoute2Info.getId(), null));
+                        }
+                    }
+                } else if (type != 25) {
+                    if (type != 26) {
+                        switch (type) {
+                            case 8:
+                                break;
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                                break;
+                            default:
+                                switch (type) {
+                                    case 1001:
+                                    case 1002:
+                                    case VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI /* 1004 */:
+                                    case 1005:
+                                    case 1006:
+                                    case 1007:
+                                    case EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_SUCCESS /* 1008 */:
+                                    case EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_FAILURE /* 1009 */:
+                                    case EnterpriseContainerCallback.CONTAINER_MOUNT_STATUS /* 1010 */:
+                                        break;
+                                    case 1003:
+                                        infoMediaDevice = new ComplexMediaDevice(this.mContext, mediaRoute2Info, (RouteListingPreference.Item) ((ConcurrentHashMap) this.mPreferenceItemMap).get(mediaRoute2Info.getId()));
+                                        break;
+                                    default:
+                                        RecordingInputConnection$$ExternalSyntheticOutline0.m(type, "addMediaDevice() unknown device type : ", "InfoMediaManager");
+                                        break;
+                                }
+                        }
+                    }
+                }
             }
-        L37:
-            switch(r7) {
-                case 1001: goto Lb4;
-                case 1002: goto Lb4;
-                case 1003: goto L41;
-                case 1004: goto Lb4;
-                case 1005: goto Lb4;
-                case 1006: goto Lb4;
-                case 1007: goto Lb4;
-                case 1008: goto Lb4;
-                case 1009: goto Lb4;
-                case 1010: goto Lb4;
-                default: goto L3a;
-            }
-        L3a:
-            java.lang.String r6 = "addMediaDevice() unknown device type : "
-            androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0.m(r7, r6, r2)
-            goto Lc9
-        L41:
-            com.android.settingslib.media.ComplexMediaDevice r1 = new com.android.settingslib.media.ComplexMediaDevice
-            android.content.Context r7 = r5.mContext
-            java.util.Map r0 = r5.mPreferenceItemMap
-            java.lang.String r2 = r6.getId()
-            java.util.concurrent.ConcurrentHashMap r0 = (java.util.concurrent.ConcurrentHashMap) r0
-            java.lang.Object r0 = r0.get(r2)
-            android.media.RouteListingPreference$Item r0 = (android.media.RouteListingPreference.Item) r0
-            r1.<init>(r7, r6, r0)
-            goto Lc9
-        L58:
-            java.lang.String r7 = r6.getAddress()
-            if (r7 != 0) goto L70
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r0 = "Ignoring bluetooth route with no set address: "
-            r7.<init>(r0)
-            r7.append(r6)
-            java.lang.String r6 = r7.toString()
-            android.util.Log.e(r2, r6)
-            goto Lc9
-        L70:
-            android.bluetooth.BluetoothAdapter r7 = android.bluetooth.BluetoothAdapter.getDefaultAdapter()
-            java.lang.String r0 = r6.getAddress()
-            android.bluetooth.BluetoothDevice r7 = r7.getRemoteDevice(r0)
-            com.android.settingslib.bluetooth.LocalBluetoothManager r0 = r5.mBluetoothManager
-            com.android.settingslib.bluetooth.CachedBluetoothDeviceManager r0 = r0.mCachedDeviceManager
-            com.android.settingslib.bluetooth.CachedBluetoothDevice r7 = r0.findDevice(r7)
-            if (r7 == 0) goto Lc9
-            com.android.settingslib.media.BluetoothMediaDevice r0 = new com.android.settingslib.media.BluetoothMediaDevice
-            android.content.Context r2 = r5.mContext
-            java.util.Map r3 = r5.mPreferenceItemMap
-            java.lang.String r4 = r6.getId()
-            java.util.concurrent.ConcurrentHashMap r3 = (java.util.concurrent.ConcurrentHashMap) r3
-            java.lang.Object r1 = r3.getOrDefault(r4, r1)
-            android.media.RouteListingPreference$Item r1 = (android.media.RouteListingPreference.Item) r1
-            r0.<init>(r2, r7, r6, r1)
-            r1 = r0
-            goto Lc9
-        L9d:
-            com.android.settingslib.media.PhoneMediaDevice r7 = new com.android.settingslib.media.PhoneMediaDevice
-            android.content.Context r0 = r5.mContext
-            java.util.Map r2 = r5.mPreferenceItemMap
-            java.lang.String r3 = r6.getId()
-            java.util.concurrent.ConcurrentHashMap r2 = (java.util.concurrent.ConcurrentHashMap) r2
-            java.lang.Object r1 = r2.getOrDefault(r3, r1)
-            android.media.RouteListingPreference$Item r1 = (android.media.RouteListingPreference.Item) r1
-            r7.<init>(r0, r6, r1)
-            r1 = r7
-            goto Lc9
-        Lb4:
-            com.android.settingslib.media.InfoMediaDevice r1 = new com.android.settingslib.media.InfoMediaDevice
-            android.content.Context r7 = r5.mContext
-            java.util.Map r0 = r5.mPreferenceItemMap
-            java.lang.String r2 = r6.getId()
-            java.util.concurrent.ConcurrentHashMap r0 = (java.util.concurrent.ConcurrentHashMap) r0
-            java.lang.Object r0 = r0.get(r2)
-            android.media.RouteListingPreference$Item r0 = (android.media.RouteListingPreference.Item) r0
-            r1.<init>(r7, r6, r0)
-        Lc9:
-            if (r1 == 0) goto Ld2
-            java.util.List r5 = r5.mMediaDevices
-            java.util.concurrent.CopyOnWriteArrayList r5 = (java.util.concurrent.CopyOnWriteArrayList) r5
-            r5.add(r1)
-        Ld2:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.media.InfoMediaManager.addMediaDevice(android.media.MediaRoute2Info, android.media.RoutingSessionInfo):void");
+        }
+        if (infoMediaDevice != null) {
+            ((CopyOnWriteArrayList) this.mMediaDevices).add(infoMediaDevice);
+        }
     }
 
     public abstract void deselectRoute(MediaRoute2Info mediaRoute2Info, RoutingSessionInfo routingSessionInfo);
@@ -370,13 +301,14 @@ public abstract class InfoMediaManager {
                         int i2 = ((MediaDevice) obj).mType;
                         if (i2 == 2 || i2 == 3 || i2 == 1) {
                             PackageManager packageManager = LocalMediaManager.this.mContext.getPackageManager();
-                            if (!packageManager.hasSystemFeature("android.hardware.type.television") && !packageManager.hasSystemFeature("android.software.leanback")) {
+                            if (packageManager.hasSystemFeature("android.hardware.type.television") || packageManager.hasSystemFeature("android.software.leanback")) {
+                                LocalMediaManager.this.mMediaDevices.addAll(mediaDeviceCallback.buildDisconnectedBluetoothDevice());
+                            } else {
                                 BluetoothMediaDevice mutingExpectedDevice = mediaDeviceCallback.getMutingExpectedDevice();
                                 if (mutingExpectedDevice != null) {
                                     LocalMediaManager.this.mMediaDevices.add(mutingExpectedDevice);
                                 }
                             }
-                            LocalMediaManager.this.mMediaDevices.addAll(mediaDeviceCallback.buildDisconnectedBluetoothDevice());
                         }
                     }
                 } catch (Throwable th) {

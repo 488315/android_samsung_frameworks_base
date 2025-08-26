@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1 extends SuspendLambda implements Function4 {
     /* synthetic */ float F$0;
@@ -22,13 +21,13 @@ final class DeviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1 extends
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        float floatValue = ((Number) obj2).floatValue();
-        float floatValue2 = ((Number) obj3).floatValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        float fFloatValue = ((Number) obj2).floatValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
         DeviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1 deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1 = new DeviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1((Continuation) obj4);
-        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.Z$0 = booleanValue;
-        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.F$0 = floatValue;
-        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.F$1 = floatValue2;
+        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.Z$0 = zBooleanValue;
+        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.F$0 = fFloatValue;
+        deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.F$1 = fFloatValue2;
         return deviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -42,9 +41,9 @@ final class DeviceEntryIconViewModel$alphaMultiplierFromShadeExpansion$1 extends
         boolean z = this.Z$0;
         float f = this.F$0;
         float f2 = 1.0f;
-        float coerceIn = RangesKt___RangesKt.coerceIn(this.F$1 * 2, 0.0f, 1.0f);
+        float fCoerceIn = RangesKt___RangesKt.coerceIn(this.F$1 * 2, 0.0f, 1.0f);
         if (!z) {
-            f2 = (1.0f - coerceIn) * (1.0f - f);
+            f2 = (1.0f - fCoerceIn) * (1.0f - f);
         }
         return new Float(f2);
     }

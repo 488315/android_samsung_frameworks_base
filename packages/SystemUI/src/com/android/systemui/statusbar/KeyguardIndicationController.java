@@ -15,12 +15,15 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.Pair;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.keyguard.CarrierTextController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.TrustGrantFlags;
@@ -58,7 +61,7 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
-import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda36;
+import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda43;
 import com.android.systemui.statusbar.phone.KeyguardBypassController;
 import com.android.systemui.statusbar.phone.KeyguardIndicationTextView;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
@@ -70,10 +73,11 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.kotlin.JavaAdapterKt;
 import com.android.systemui.util.wakelock.SettableWakeLock;
 import com.android.systemui.util.wakelock.WakeLock;
+import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardIndicationController {
     public final AccessibilityManager mAccessibilityManager;
@@ -144,7 +148,7 @@ public class KeyguardIndicationController {
     public CharSequence mTrustAgentErrorMessage;
     public CharSequence mTrustGrantedIndication;
     public KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
-    public NotificationPanelViewController$$ExternalSyntheticLambda36 mUpdatePosition;
+    public NotificationPanelViewController$$ExternalSyntheticLambda43 mUpdatePosition;
     public final UserLogoutInteractor mUserLogoutInteractor;
     public final UserManager mUserManager;
     public final UserTracker mUserTracker;
@@ -156,7 +160,6 @@ public class KeyguardIndicationController {
     public String mSleepChargingEvent = null;
     public String mSleepChargingEventFinishTime = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.KeyguardIndicationController$4, reason: invalid class name */
     public class AnonymousClass4 implements StatusBarStateController.StateListener {
         public AnonymousClass4() {
@@ -182,7 +185,6 @@ public class KeyguardIndicationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseKeyguardCallback extends KeyguardUpdateMonitorCallback {
         public BaseKeyguardCallback() {
         }
@@ -239,9 +241,9 @@ public class KeyguardIndicationController {
             }
             CharSequence deferredMessage = keyguardIndicationController.mFaceAcquiredMessageDeferral.getDeferredMessage();
             keyguardIndicationController.mFaceAcquiredMessageDeferral.reset$1();
-            boolean shouldSuppressErrorMsg = keyguardIndicationController.mIndicationHelper.shouldSuppressErrorMsg(biometricSourceType2, i);
+            boolean zShouldSuppressErrorMsg = keyguardIndicationController.mIndicationHelper.shouldSuppressErrorMsg(biometricSourceType2, i);
             KeyguardLogger keyguardLogger = keyguardIndicationController.mKeyguardLogger;
-            if (shouldSuppressErrorMsg) {
+            if (zShouldSuppressErrorMsg) {
                 keyguardLogger.logBiometricMessage("KIC suppressingFaceError", Integer.valueOf(i), str);
                 return;
             }
@@ -307,8 +309,8 @@ public class KeyguardIndicationController {
                 }
                 BiometricSourceType biometricSourceType3 = BiometricSourceType.FINGERPRINT;
                 boolean z4 = biometricSourceType == biometricSourceType3 && i == -1;
-                boolean canUnlockWithFingerprint = keyguardIndicationController.canUnlockWithFingerprint();
-                boolean z5 = z2 && canUnlockWithFingerprint;
+                boolean zCanUnlockWithFingerprint = keyguardIndicationController.canUnlockWithFingerprint();
+                boolean z5 = z2 && zCanUnlockWithFingerprint;
                 if (z5 && !keyguardIndicationController.mCoExFaceAcquisitionMsgIdsToShow.contains(Integer.valueOf(i))) {
                     keyguardLogger.logBiometricMessage("skipped showing help message due to co-ex logic", Integer.valueOf(i), str);
                     return;
@@ -316,9 +318,9 @@ public class KeyguardIndicationController {
                 if (keyguardIndicationController.mStatusBarKeyguardViewManager.isBouncerShowing()) {
                     BouncerMessageInteractor bouncerMessageInteractor = keyguardIndicationController.mBouncerMessageInteractor;
                     if (biometricSourceType == biometricSourceType3 && !z4) {
-                        BouncerMessageModel access$defaultMessage = BouncerMessageInteractorKt.access$defaultMessage(bouncerMessageInteractor.getCurrentSecurityMode(), str, ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue());
+                        BouncerMessageModel bouncerMessageModelAccess$defaultMessage = BouncerMessageInteractorKt.access$defaultMessage(bouncerMessageInteractor.getCurrentSecurityMode(), str, ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue());
                         BouncerMessageRepositoryImpl bouncerMessageRepositoryImpl = (BouncerMessageRepositoryImpl) bouncerMessageInteractor.repository;
-                        bouncerMessageRepositoryImpl._bouncerMessage.setValue(access$defaultMessage);
+                        bouncerMessageRepositoryImpl._bouncerMessage.setValue(bouncerMessageModelAccess$defaultMessage);
                         bouncerMessageRepositoryImpl.messageSource = biometricSourceType3;
                     } else if (z2) {
                         bouncerMessageInteractor.setFaceAcquisitionMessage(str);
@@ -341,7 +343,7 @@ public class KeyguardIndicationController {
                     keyguardIndicationController.showBiometricMessage(str, keyguardIndicationController.mContext.getString(R.string.keyguard_suggest_fingerprint), biometricSourceType, false);
                     return;
                 }
-                if (z3 && canUnlockWithFingerprint) {
+                if (z3 && zCanUnlockWithFingerprint) {
                     keyguardIndicationController.showBiometricMessage(keyguardIndicationController.mContext.getString(R.string.keyguard_face_failed), keyguardIndicationController.mContext.getString(R.string.keyguard_suggest_fingerprint), biometricSourceType, false);
                     return;
                 }
@@ -355,7 +357,7 @@ public class KeyguardIndicationController {
                 if (z4 && keyguardUpdateMonitor.getUserHasTrust(keyguardIndicationController.getCurrentUser$1())) {
                     keyguardIndicationController.showBiometricMessage(keyguardIndicationController.getTrustGrantedIndication(), keyguardIndicationController.mContext.getString(R.string.keyguard_unlock), null, true);
                 } else if (z) {
-                    keyguardIndicationController.showBiometricMessage(str, canUnlockWithFingerprint ? keyguardIndicationController.mContext.getString(R.string.keyguard_suggest_fingerprint) : keyguardIndicationController.mContext.getString(R.string.keyguard_unlock), biometricSourceType, false);
+                    keyguardIndicationController.showBiometricMessage(str, zCanUnlockWithFingerprint ? keyguardIndicationController.mContext.getString(R.string.keyguard_suggest_fingerprint) : keyguardIndicationController.mContext.getString(R.string.keyguard_unlock), biometricSourceType, false);
                 } else {
                     keyguardIndicationController.showBiometricMessage(str, null, biometricSourceType, false);
                 }
@@ -424,9 +426,9 @@ public class KeyguardIndicationController {
                 LogLevel logLevel = LogLevel.ERROR;
                 LogBuffer$$ExternalSyntheticLambda0 logBuffer$$ExternalSyntheticLambda0 = new LogBuffer$$ExternalSyntheticLambda0(0);
                 LogBuffer logBuffer = keyguardLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardIndication", logLevel, logBuffer$$ExternalSyntheticLambda0, e);
-                ((LogMessageImpl) obtain).str1 = "Error calling IBatteryStats";
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardIndication", logLevel, logBuffer$$ExternalSyntheticLambda0, e);
+                ((LogMessageImpl) logMessageObtain).str1 = "Error calling IBatteryStats";
+                logBuffer.commit(logMessageObtain);
                 keyguardIndicationController.mChargingTimeRemaining = -1L;
             }
             boolean z3 = keyguardIndicationController.mPowerPluggedIn;
@@ -436,13 +438,13 @@ public class KeyguardIndicationController {
             LogLevel logLevel2 = LogLevel.DEBUG;
             KeyguardLogger$$ExternalSyntheticLambda0 keyguardLogger$$ExternalSyntheticLambda0 = new KeyguardLogger$$ExternalSyntheticLambda0(6);
             LogBuffer logBuffer2 = keyguardLogger.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("KeyguardIndication", logLevel2, keyguardLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardIndication", logLevel2, keyguardLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
             logMessageImpl.bool1 = z;
             logMessageImpl.bool2 = z3;
             logMessageImpl.bool3 = z4;
             logMessageImpl.int1 = i4;
-            logBuffer2.commit(obtain2);
+            logBuffer2.commit(logMessageObtain2);
             AnonymousClass2 anonymousClass2 = keyguardIndicationController.mHandler;
             if (!z2 && keyguardIndicationController.mPowerPluggedIn) {
                 keyguardIndicationController.mIsNeededShowChargingType = true;
@@ -602,17 +604,17 @@ public class KeyguardIndicationController {
         ?? r2 = new ScreenLifecycle.Observer() { // from class: com.android.systemui.statusbar.KeyguardIndicationController.1
             @Override // com.android.systemui.keyguard.ScreenLifecycle.Observer
             public final void onScreenTurnedOn() {
-                String str;
+                String string;
                 KeyguardIndicationController keyguardIndicationController = KeyguardIndicationController.this;
                 keyguardIndicationController.mHandler.removeMessages(2);
                 if (keyguardIndicationController.mBiometricErrorMessageToShowOnScreenOn != null) {
                     if (keyguardIndicationController.mFaceLockedOutThisAuthSession) {
-                        str = keyguardIndicationController.mContext.getString(keyguardIndicationController.canUnlockWithFingerprint() ? R.string.keyguard_suggest_fingerprint : R.string.keyguard_unlock);
+                        string = keyguardIndicationController.mContext.getString(keyguardIndicationController.canUnlockWithFingerprint() ? R.string.keyguard_suggest_fingerprint : R.string.keyguard_unlock);
                     } else {
-                        str = null;
+                        string = null;
                     }
                     Pair pair = keyguardIndicationController.mBiometricErrorMessageToShowOnScreenOn;
-                    keyguardIndicationController.showBiometricMessage((CharSequence) pair.first, str, (BiometricSourceType) pair.second, false);
+                    keyguardIndicationController.showBiometricMessage((CharSequence) pair.first, string, (BiometricSourceType) pair.second, false);
                     keyguardIndicationController.mHideBiometricMessageHandler.schedule(4100L, 2);
                     keyguardIndicationController.mBiometricErrorMessageToShowOnScreenOn = null;
                 }
@@ -630,9 +632,9 @@ public class KeyguardIndicationController {
                 LogLevel logLevel = LogLevel.DEBUG;
                 LogBuffer$$ExternalSyntheticLambda0 logBuffer$$ExternalSyntheticLambda0 = new LogBuffer$$ExternalSyntheticLambda0(0);
                 LogBuffer logBuffer = keyguardIndicationController.mKeyguardLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardIndication", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = "clear messages";
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardIndication", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = "clear messages";
+                logBuffer.commit(logMessageObtain);
                 KeyguardIndicationTextView keyguardIndicationTextView = keyguardIndicationController.mTopIndicationView;
                 if (keyguardIndicationTextView != null) {
                     keyguardIndicationTextView.clearMessages();
@@ -755,30 +757,84 @@ public class KeyguardIndicationController {
         return keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(BiometricSourceType.FINGERPRINT);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0147, code lost:
-    
-        if (r1 != false) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0149, code lost:
-    
-        r4 = com.android.systemui.R.string.keyguard_indication_charging_time;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x017c, code lost:
-    
-        if (r1 != false) goto L28;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01a5  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0149  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x018e  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x01a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void dump(java.io.PrintWriter r8, java.lang.String[] r9) {
-        /*
-            Method dump skipped, instructions count: 493
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardIndicationController.dump(java.io.PrintWriter, java.lang.String[]):void");
+    public void dump(PrintWriter printWriter, String[] strArr) {
+        int i;
+        String string;
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardIndicationController:", "  mInitialTextColorState: ");
+        sbM.append(this.mInitialTextColorState);
+        printWriter.println(sbM.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mPowerPluggedInWired: "), this.mPowerPluggedInWired, printWriter, "  mPowerPluggedIn: "), this.mPowerPluggedIn, printWriter, "  mPowerCharged: "), this.mPowerCharged, printWriter, "  mChargingSpeed: "), this.mChargingSpeed, printWriter, "  mChargingWattage: "), this.mChargingWattage, printWriter, "  mChargingStatus: "), this.mChargingStatus, printWriter, "  mMessageToShowOnScreenOn: ");
+        sbM2.append(this.mBiometricErrorMessageToShowOnScreenOn);
+        printWriter.println(sbM2.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mDozing: "), this.mDozing, printWriter, "  mTransientIndication: ");
+        sbM3.append((Object) this.mTransientIndication);
+        printWriter.println(sbM3.toString());
+        printWriter.println("  mBiometricMessage: " + ((Object) this.mBiometricMessage));
+        printWriter.println("  mBiometricMessageFollowUp: " + ((Object) this.mBiometricMessageFollowUp));
+        StringBuilder sbM4 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mBatteryLevel: "), this.mBatteryLevel, printWriter, "  mBatteryPresent: "), this.mBatteryPresent, printWriter, "  AOD text: ");
+        KeyguardIndicationTextView keyguardIndicationTextView = this.mTopIndicationView;
+        sbM4.append((Object) (keyguardIndicationTextView == null ? null : keyguardIndicationTextView.getText()));
+        printWriter.println(sbM4.toString());
+        StringBuilder sb = new StringBuilder("  computePowerIndication(): ");
+        if (this.mBatteryDefender) {
+            string = this.mContext.getResources().getString(R.string.keyguard_plugged_in_charging_limited, NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f));
+        } else if (this.mPowerPluggedIn && this.mIncompatibleCharger) {
+            string = this.mContext.getResources().getString(R.string.keyguard_plugged_in_incompatible_charger, NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f));
+        } else if (this.mPowerCharged) {
+            string = this.mContext.getResources().getString(R.string.keyguard_charged);
+        } else {
+            boolean z = this.mChargingTimeRemaining > 0;
+            boolean z2 = this.mPowerPluggedInWired;
+            int i2 = R.string.keyguard_plugged_in;
+            if (z2) {
+                int i3 = this.mChargingSpeed;
+                if (i3 == 0) {
+                    i = z ? R.string.keyguard_indication_charging_time_slowly : R.string.keyguard_plugged_in_charging_slowly;
+                } else if (i3 != 2) {
+                    if (z) {
+                        i2 = R.string.keyguard_indication_charging_time;
+                    }
+                    String str = NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f);
+                    string = !z ? this.mContext.getResources().getString(i2, Formatter.formatShortElapsedTimeRoundingUpToMinutes(this.mContext, this.mChargingTimeRemaining), str) : this.mContext.getResources().getString(i2, str);
+                } else {
+                    i = z ? R.string.keyguard_indication_charging_time_fast : R.string.keyguard_plugged_in_charging_fast;
+                }
+                i2 = i;
+                String str2 = NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f);
+                if (!z) {
+                }
+            } else {
+                if (this.mPowerPluggedInWireless) {
+                    i = z ? R.string.keyguard_indication_charging_time_wireless : R.string.keyguard_plugged_in_wireless;
+                } else if (this.mPowerPluggedInDock) {
+                    i = z ? R.string.keyguard_indication_charging_time_dock : R.string.keyguard_plugged_in_dock;
+                } else {
+                    if (z) {
+                    }
+                    String str22 = NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f);
+                    if (!z) {
+                    }
+                }
+                i2 = i;
+                String str222 = NumberFormat.getPercentInstance().format(this.mBatteryLevel / 100.0f);
+                if (!z) {
+                }
+            }
+        }
+        sb.append(string);
+        printWriter.println(sb.toString());
+        printWriter.println("  trustGrantedIndication: " + getTrustGrantedIndication());
+        printWriter.println("    mCoExFaceHelpMsgIdsToShow=" + this.mCoExFaceAcquisitionMsgIdsToShow);
+        KeyguardIndicationRotateTextViewController keyguardIndicationRotateTextViewController = this.mRotateTextViewController;
+        if (keyguardIndicationRotateTextViewController != null) {
+            keyguardIndicationRotateTextViewController.dump(printWriter, strArr);
+        }
     }
 
     public final int getCurrentUser$1() {
@@ -844,9 +900,9 @@ public class KeyguardIndicationController {
         if (this.mRotateTextViewController == null) {
             this.mRotateTextViewController = new KeyguardIndicationRotateTextViewController(this.mLockScreenIndicationView, this.mExecutor, this.mStatusBarStateController, this.mKeyguardLogger, this.mFeatureFlags);
         }
-        boolean booleanValue = ((Boolean) DejankUtils.whitelistIpcs(new KeyguardIndicationController$$ExternalSyntheticLambda5(this, 0))).booleanValue();
-        this.mOrganizationOwnedDevice = booleanValue;
-        if (booleanValue) {
+        boolean zBooleanValue = ((Boolean) DejankUtils.whitelistIpcs(new KeyguardIndicationController$$ExternalSyntheticLambda5(this, 0))).booleanValue();
+        this.mOrganizationOwnedDevice = zBooleanValue;
+        if (zBooleanValue) {
             this.mBackgroundExecutor.execute(new KeyguardIndicationController$$ExternalSyntheticLambda6(this));
         } else {
             this.mRotateTextViewController.hideIndication(1);
@@ -864,9 +920,9 @@ public class KeyguardIndicationController {
                     if (!"com.samsung.server.BatteryService.action.ACTION_SLEEP_CHARGING".equals(action)) {
                         KeyguardIndicationController keyguardIndicationController = KeyguardIndicationController.this;
                         keyguardIndicationController.getClass();
-                        boolean booleanValue2 = ((Boolean) DejankUtils.whitelistIpcs(new KeyguardIndicationController$$ExternalSyntheticLambda5(keyguardIndicationController, 0))).booleanValue();
-                        keyguardIndicationController.mOrganizationOwnedDevice = booleanValue2;
-                        if (!booleanValue2) {
+                        boolean zBooleanValue2 = ((Boolean) DejankUtils.whitelistIpcs(new KeyguardIndicationController$$ExternalSyntheticLambda5(keyguardIndicationController, 0))).booleanValue();
+                        keyguardIndicationController.mOrganizationOwnedDevice = zBooleanValue2;
+                        if (!zBooleanValue2) {
                             keyguardIndicationController.mRotateTextViewController.hideIndication(1);
                             return;
                         } else {
@@ -953,9 +1009,9 @@ public class KeyguardIndicationController {
                 return;
             }
             boolean isFaceAuthenticated = keyguardUpdateMonitor.getIsFaceAuthenticated();
-            boolean isUdfpsSupported = keyguardUpdateMonitor.isUdfpsSupported();
+            boolean zIsUdfpsSupported = keyguardUpdateMonitor.isUdfpsSupported();
             boolean z2 = this.mAccessibilityManager.isEnabled() || this.mAccessibilityManager.isTouchExplorationEnabled();
-            if (isUdfpsSupported && isFaceAuthenticated) {
+            if (zIsUdfpsSupported && isFaceAuthenticated) {
                 if (z2) {
                     showBiometricMessage(this.mContext.getString(R.string.keyguard_face_successful_unlock), this.mContext.getString(R.string.keyguard_unlock), BiometricSourceType.FACE, true);
                     return;
@@ -968,7 +1024,7 @@ public class KeyguardIndicationController {
                 showBiometricMessage(this.mContext.getString(R.string.keyguard_face_successful_unlock), this.mContext.getString(R.string.keyguard_unlock), BiometricSourceType.FACE, true);
                 return;
             }
-            if (!isUdfpsSupported) {
+            if (!zIsUdfpsSupported) {
                 showBiometricMessage(this.mContext.getString(R.string.keyguard_unlock), null, null, true);
             } else if (z2) {
                 showBiometricMessage(this.mContext.getString(R.string.keyguard_unlock), null, null, true);
@@ -1000,11 +1056,11 @@ public class KeyguardIndicationController {
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardLogger$$ExternalSyntheticLambda0 keyguardLogger$$ExternalSyntheticLambda0 = new KeyguardLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = keyguardLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardIndication", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardIndication", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = charSequence.toString();
         logMessageImpl.str2 = charSequence2 != null ? charSequence2.toString() : null;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void showErrorMessageNowOrLater(String str, String str2, BiometricSourceType biometricSourceType) {
@@ -1026,9 +1082,9 @@ public class KeyguardIndicationController {
             this.mTrustAgentErrorMessage = null;
             return;
         }
-        boolean booleanValue = ((Boolean) this.mDeviceEntryFingerprintAuthInteractor.isEngaged.$$delegate_0.getValue()).booleanValue();
-        boolean isRunning = this.mDeviceEntryFaceAuthInteractor.isRunning();
-        if (!booleanValue && !isRunning) {
+        boolean zBooleanValue = ((Boolean) this.mDeviceEntryFingerprintAuthInteractor.isEngaged.$$delegate_0.getValue()).booleanValue();
+        boolean zIsRunning = this.mDeviceEntryFaceAuthInteractor.isRunning();
+        if (!zBooleanValue && !zIsRunning) {
             this.mTrustAgentErrorMessage = null;
             showBiometricMessage(charSequence, null, null, false);
             return;
@@ -1038,12 +1094,12 @@ public class KeyguardIndicationController {
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardLogger$$ExternalSyntheticLambda0 keyguardLogger$$ExternalSyntheticLambda0 = new KeyguardLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = keyguardLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardLog", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardLog", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = charSequence.toString();
-        logMessageImpl.bool1 = booleanValue;
-        logMessageImpl.bool2 = isRunning;
-        logBuffer.commit(obtain);
+        logMessageImpl.bool1 = zBooleanValue;
+        logMessageImpl.bool2 = zIsRunning;
+        logBuffer.commit(logMessageObtain);
         this.mTrustAgentErrorMessage = charSequence;
     }
 

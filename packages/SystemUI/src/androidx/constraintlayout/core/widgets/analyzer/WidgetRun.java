@@ -4,7 +4,6 @@ import androidx.constraintlayout.core.widgets.ConstraintAnchor;
 import androidx.constraintlayout.core.widgets.ConstraintWidget;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class WidgetRun implements Dependency {
     public ConstraintWidget.DimensionBehaviour mDimensionBehavior;
@@ -18,7 +17,6 @@ public abstract class WidgetRun implements Dependency {
     public final DependencyNode end = new DependencyNode(this);
     public RunType mRunType = RunType.NONE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.core.widgets.analyzer.WidgetRun$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$core$widgets$ConstraintAnchor$Type;
@@ -49,7 +47,6 @@ public abstract class WidgetRun implements Dependency {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum RunType {
         NONE,
         START,
@@ -102,22 +99,22 @@ public abstract class WidgetRun implements Dependency {
         if (i2 == 0) {
             ConstraintWidget constraintWidget = this.mWidget;
             int i3 = constraintWidget.mMatchConstraintMaxWidth;
-            int max = Math.max(constraintWidget.mMatchConstraintMinWidth, i);
+            int iMax = Math.max(constraintWidget.mMatchConstraintMinWidth, i);
             if (i3 > 0) {
-                max = Math.min(i3, i);
+                iMax = Math.min(i3, i);
             }
-            if (max != i) {
-                return max;
+            if (iMax != i) {
+                return iMax;
             }
         } else {
             ConstraintWidget constraintWidget2 = this.mWidget;
             int i4 = constraintWidget2.mMatchConstraintMaxHeight;
-            int max2 = Math.max(constraintWidget2.mMatchConstraintMinHeight, i);
+            int iMax2 = Math.max(constraintWidget2.mMatchConstraintMinHeight, i);
             if (i4 > 0) {
-                max2 = Math.min(i4, i);
+                iMax2 = Math.min(i4, i);
             }
-            if (max2 != i) {
-                return max2;
+            if (iMax2 != i) {
+                return iMax2;
             }
         }
         return i;
@@ -132,20 +129,73 @@ public abstract class WidgetRun implements Dependency {
 
     public abstract boolean supportsWrapComputation();
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0053, code lost:
-    
-        if (r10.matchConstraintsType == 3) goto L51;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateRunCenter(androidx.constraintlayout.core.widgets.ConstraintAnchor r13, androidx.constraintlayout.core.widgets.ConstraintAnchor r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 236
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.core.widgets.analyzer.WidgetRun.updateRunCenter(androidx.constraintlayout.core.widgets.ConstraintAnchor, androidx.constraintlayout.core.widgets.ConstraintAnchor, int):void");
+    public final void updateRunCenter(ConstraintAnchor constraintAnchor, ConstraintAnchor constraintAnchor2, int i) {
+        DependencyNode target = getTarget(constraintAnchor);
+        DependencyNode target2 = getTarget(constraintAnchor2);
+        if (target.resolved && target2.resolved) {
+            int margin = constraintAnchor.getMargin() + target.value;
+            int margin2 = target2.value - constraintAnchor2.getMargin();
+            int i2 = margin2 - margin;
+            DimensionDependency dimensionDependency = this.mDimension;
+            if (!dimensionDependency.resolved) {
+                ConstraintWidget.DimensionBehaviour dimensionBehaviour = this.mDimensionBehavior;
+                ConstraintWidget.DimensionBehaviour dimensionBehaviour2 = ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT;
+                if (dimensionBehaviour == dimensionBehaviour2) {
+                    int i3 = this.matchConstraintsType;
+                    if (i3 == 0) {
+                        dimensionDependency.resolve(getLimitedDimension(i2, i));
+                    } else if (i3 == 1) {
+                        dimensionDependency.resolve(Math.min(getLimitedDimension(dimensionDependency.wrapValue, i), i2));
+                    } else if (i3 == 2) {
+                        ConstraintWidget constraintWidget = this.mWidget;
+                        ConstraintWidget constraintWidget2 = constraintWidget.mParent;
+                        if (constraintWidget2 != null) {
+                            if ((i == 0 ? constraintWidget2.mHorizontalRun : constraintWidget2.mVerticalRun).mDimension.resolved) {
+                                dimensionDependency.resolve(getLimitedDimension((int) ((r6.value * (i == 0 ? constraintWidget.mMatchConstraintPercentWidth : constraintWidget.mMatchConstraintPercentHeight)) + 0.5f), i));
+                            }
+                        }
+                    } else if (i3 == 3) {
+                        ConstraintWidget constraintWidget3 = this.mWidget;
+                        WidgetRun widgetRun = constraintWidget3.mHorizontalRun;
+                        if (widgetRun.mDimensionBehavior == dimensionBehaviour2 && widgetRun.matchConstraintsType == 3) {
+                            VerticalWidgetRun verticalWidgetRun = constraintWidget3.mVerticalRun;
+                            if (verticalWidgetRun.mDimensionBehavior != dimensionBehaviour2 || verticalWidgetRun.matchConstraintsType != 3) {
+                            }
+                        } else {
+                            if (i == 0) {
+                                widgetRun = constraintWidget3.mVerticalRun;
+                            }
+                            if (widgetRun.mDimension.resolved) {
+                                float f = constraintWidget3.mDimensionRatio;
+                                dimensionDependency.resolve(i == 1 ? (int) ((r6.value / f) + 0.5f) : (int) ((f * r6.value) + 0.5f));
+                            }
+                        }
+                    }
+                }
+            }
+            if (dimensionDependency.resolved) {
+                int i4 = dimensionDependency.value;
+                DependencyNode dependencyNode = this.end;
+                DependencyNode dependencyNode2 = this.start;
+                if (i4 == i2) {
+                    dependencyNode2.resolve(margin);
+                    dependencyNode.resolve(margin2);
+                    return;
+                }
+                float f2 = i == 0 ? this.mWidget.mHorizontalBiasPercent : this.mWidget.mVerticalBiasPercent;
+                if (target == target2) {
+                    margin = target.value;
+                    margin2 = target2.value;
+                    f2 = 0.5f;
+                }
+                dependencyNode2.resolve((int) ((((margin2 - margin) - i4) * f2) + margin + 0.5f));
+                dependencyNode.resolve(dependencyNode2.value + dimensionDependency.value);
+            }
+        }
     }
 
     public final void addTarget(DependencyNode dependencyNode, DependencyNode dependencyNode2, int i, DimensionDependency dimensionDependency) {

@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ComposeScrollCaptureCallback$scrollTracker$1 extends SuspendLambda implements Function2 {
     /* synthetic */ float F$0;
@@ -60,10 +59,10 @@ final class ComposeScrollCaptureCallback$scrollTracker$1 extends SuspendLambda i
             if (z2) {
                 f = -f;
             }
-            Offset m393boximpl = Offset.m393boximpl((Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(f) & 4294967295L));
+            Offset offsetM395boximpl = Offset.m395boximpl((Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(f) & 4294967295L));
             this.Z$0 = z2;
             this.label = 1;
-            obj = function2.invoke(m393boximpl, this);
+            obj = function2.invoke(offsetM395boximpl, this);
             if (obj == coroutineSingletons) {
                 return coroutineSingletons;
             }

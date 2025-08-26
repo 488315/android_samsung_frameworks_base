@@ -74,15 +74,15 @@ public final class UserSelectionDialogResult extends BaseDialogResult implements
 
     private UserSelectionDialogResult(Parcel parcel) {
         super(parcel);
-        String readString8 = parcel.readString8();
-        String readString82 = parcel.readString8();
-        String readString83 = parcel.readString8();
-        this.mProviderId = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mEntryKey = readString82;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString82);
-        this.mEntrySubkey = readString83;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString83);
+        String string8 = parcel.readString8();
+        String string82 = parcel.readString8();
+        String string83 = parcel.readString8();
+        this.mProviderId = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mEntryKey = string82;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string82);
+        this.mEntrySubkey = string83;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string83);
         this.mProviderPendingIntentResponse = (ProviderPendingIntentResponse) parcel.readTypedObject(ProviderPendingIntentResponse.CREATOR);
     }
 

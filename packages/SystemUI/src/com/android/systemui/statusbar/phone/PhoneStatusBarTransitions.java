@@ -8,7 +8,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.shared.statusbar.phone.BarTransitions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhoneStatusBarTransitions extends BarTransitions {
     public final View mBattery;
@@ -38,35 +37,35 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         if (this.mStartSide == null) {
             return;
         }
-        float f = 0.0f;
-        float iconAlphaBasedOnOpacity = this.mIsHeadsUp ? getIconAlphaBasedOnOpacity(i) : (i == 3 || i == 6) ? 0.0f : getIconAlphaBasedOnOpacity(i);
+        float iconAlphaBasedOnOpacity = 0.0f;
+        float iconAlphaBasedOnOpacity2 = this.mIsHeadsUp ? getIconAlphaBasedOnOpacity(i) : (i == 3 || i == 6) ? 0.0f : getIconAlphaBasedOnOpacity(i);
         if (i != 3 && i != 6) {
-            f = getIconAlphaBasedOnOpacity(i);
+            iconAlphaBasedOnOpacity = getIconAlphaBasedOnOpacity(i);
         }
-        float iconAlphaBasedOnOpacity2 = (i == 3 || i == 6) ? 0.5f : getIconAlphaBasedOnOpacity(i);
+        float iconAlphaBasedOnOpacity3 = (i == 3 || i == 6) ? 0.5f : getIconAlphaBasedOnOpacity(i);
         Animator animator = this.mCurrentAnimation;
         if (animator != null) {
             animator.cancel();
         }
         if (!z) {
-            this.mStartSide.setAlpha(iconAlphaBasedOnOpacity);
-            this.mStatusIcons.setAlpha(f);
-            this.mBattery.setAlpha(iconAlphaBasedOnOpacity2);
+            this.mStartSide.setAlpha(iconAlphaBasedOnOpacity2);
+            this.mStatusIcons.setAlpha(iconAlphaBasedOnOpacity);
+            this.mBattery.setAlpha(iconAlphaBasedOnOpacity3);
             if (!BasicRune.STATUS_REAL_TIME_NETWORK_SPEED || (view = this.mNetspeedView) == null) {
                 return;
             }
-            view.setAlpha(iconAlphaBasedOnOpacity2);
+            view.setAlpha(iconAlphaBasedOnOpacity3);
             return;
         }
         AnimatorSet animatorSet = new AnimatorSet();
         View view3 = this.mStartSide;
-        float[] fArr = {view3.getAlpha(), iconAlphaBasedOnOpacity};
+        float[] fArr = {view3.getAlpha(), iconAlphaBasedOnOpacity2};
         View view4 = this.mStatusIcons;
-        float[] fArr2 = {view4.getAlpha(), f};
+        float[] fArr2 = {view4.getAlpha(), iconAlphaBasedOnOpacity};
         View view5 = this.mBattery;
-        animatorSet.playTogether(ObjectAnimator.ofFloat(view3, "alpha", fArr), ObjectAnimator.ofFloat(view4, "alpha", fArr2), ObjectAnimator.ofFloat(view5, "alpha", view5.getAlpha(), iconAlphaBasedOnOpacity2));
+        animatorSet.playTogether(ObjectAnimator.ofFloat(view3, "alpha", fArr), ObjectAnimator.ofFloat(view4, "alpha", fArr2), ObjectAnimator.ofFloat(view5, "alpha", view5.getAlpha(), iconAlphaBasedOnOpacity3));
         if (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED && (view2 = this.mNetspeedView) != null) {
-            animatorSet.playTogether(ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), iconAlphaBasedOnOpacity2));
+            animatorSet.playTogether(ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), iconAlphaBasedOnOpacity3));
         }
         if (i == 3 || i == 6) {
             animatorSet.setDuration(1500L);

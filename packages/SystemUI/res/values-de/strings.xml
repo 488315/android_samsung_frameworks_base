@@ -502,7 +502,7 @@ Wenn diese Berechtigung deaktiviert ist, funktionieren bereits gestellte Wecker 
     <string name="autofill">Automatisch ausfüllen</string>
     <string name="available_devices_header">Verfügbare Geräte</string>
     <string name="available_using_samsung_account">Mit Samsung Account verfügbar</string>
-    <string name="avatar_picker_title">Profilbild auswählen</string>
+    <string name="avatar_picker_title">Aktualisieren des Profilbilds</string>
     <string name="back">Zurück</string>
     <string name="back_button_text">Zurück</string>
     <string name="back_edu_notification_content">Wische mit drei Fingern nach links oder rechts. Tippe für mehr Infos zu Touch-Gesten.</string>
@@ -890,6 +890,7 @@ Auswahl"</string>
     <string name="call_notification_incoming_text">Eingehender Anruf</string>
     <string name="call_notification_ongoing_text">Aktueller Anruf</string>
     <string name="call_notification_screening_text">Filter für eingehenden Anruf</string>
+    <string name="camera">Kamera</string>
     <string name="camera_and_microphone_blocked_dream_overlay_content_description">Kamera und Mikrofon blockiert</string>
     <string name="camera_blocked_dream_overlay_content_description">Kamera blockiert</string>
     <string name="camera_compat_dismiss_button_description">Keine Probleme mit der Kamera? Zum Schließen tippen.</string>
@@ -900,6 +901,7 @@ Zum Anpassen tippen."</string>
     <string name="camera_hint">Zum Öffnen der Kamera vom Symbol wegwischen</string>
     <string name="can_not_use_in_dex">%s kann in Samsung DeX nicht verwendet werden.</string>
     <string name="cancel">Abbrechen</string>
+    <string name="cancel_button">Abbrechen</string>
     <string name="cancel_button_broadcast">Abbrechen</string>
     <string name="cant_screenshot_in_ps">Aufnehmen des Screenshots in %s nicht möglich.</string>
     <string name="card_crash">SIM-Kartenabsturz</string>
@@ -1266,6 +1268,7 @@ Wenn du weiterhin mobile Daten nutzt, können Gebühren anfallen."</string>
     <string name="delete_blob_text">Geteilte Daten löschen</string>
     <string name="demo_mode">Demomodus der System-UI</string>
     <string name="demote_explain_text">%1$s zeigt keine Livemeldungen mehr an. Du kannst dies jederzeit in den Einstellungen ändern.</string>
+    <string name="desktop_label">Desktop %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">Fenstergröße maximieren oder wiederherstellen</string>
     <string name="desktop_mode_a11y_action_snap_left">Größe des App-Fensters links anpassen</string>
     <string name="desktop_mode_a11y_action_snap_right">Größe des App-Fensters rechts anpassen</string>
@@ -1320,6 +1323,17 @@ Wenn du weiterhin mobile Daten nutzt, können Gebühren anfallen."</string>
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">Öffnen des Touchpads auf deinem Tablet</string>
     <string name="dex_touchpad_dialog_pinch">2 Finger zusammenziehen</string>
     <string name="dex_touchpad_dialog_pinch_desc">Zoome heran- oder heraus.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">Mit deinem S Pen kannst du in deinen bevorzugten Apps schreiben oder zeichnen. Wenn du den S Pen auf dem Telefon platzierst, springt der Cursor zu genau diesem Punkt auf dem Monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">Mit deinem S Pen kannst du in deinen bevorzugten Apps schreiben oder zeichnen. Wenn du den S Pen auf dem Tablet platzierst, springt der Cursor zu genau diesem Punkt auf dem Monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">Objekte auswählen, Apps öffnen, Schaltflächen aktivieren und mehr (links klicken).</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">In jede Richtung scrollen.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">Tippen und Ziehen</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">Tippen</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">S Pen-Cursor</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">Berühren und Halten</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">Objekte auf dem Bildschirm auswählen.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">Objekte auf dem Bildschirm verschieben oder Text auswählen.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">Berühren und Halten, dann Ziehen</string>
     <string name="dex_touchpad_dialog_swipe">Streichen mit 2 Fingern</string>
     <string name="dex_touchpad_dialog_swipe_desc">In jede Richtung scrollen.</string>
     <string name="dex_touchpad_dialog_swipe_left_right">Streichen mit 3 Fingern nach links oder rechts</string>
@@ -1361,6 +1375,7 @@ Wenn du weiterhin mobile Daten nutzt, können Gebühren anfallen."</string>
     <string name="disconnect_smart_view">Smart View trennen?</string>
     <string name="dismiss_dialog">Schließen</string>
     <string name="dismissible_keyguard_swipe">Zum Fortfahren nach oben wischen</string>
+    <string name="display_disconnected_to_change_user">Die Anzeige wurde getrennt, um Benutzer zu wechseln.</string>
     <string name="divider_panel_app_pair_to_edge">App-Paar in Seiten-Paneel hinzufügen</string>
     <string name="divider_panel_change_layout">Layout ändern</string>
     <string name="divider_panel_rotate_clockwise">Im Uhrzeigersinn drehen</string>
@@ -1418,6 +1433,7 @@ Wenn du weiterhin mobile Daten nutzt, können Gebühren anfallen."</string>
     <string name="drop_now_to_open_in_fullscreen_view">Jetzt ablegen, um in Vollbildansicht zu öffnen.</string>
     <string name="dropdown_menu">Drop-down-Menü</string>
     <string name="durationMinutes">%d Minuten</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Desktop-Arbeitsbereiche sind bei Verwendung von Smart View ausgeblendet.</string>
     <string name="edge_feeds_preview_not_selected_tts">%s nicht ausgewählt.</string>
     <string name="edge_feeds_preview_selected_tts">%s ausgewählt.</string>
     <string name="edge_lighting_action_description">Einmaliger Seitenlichteffekt</string>
@@ -1613,6 +1629,7 @@ Nachdem sie gelöscht wurden, musst du die Entsperrung per Fingerabdruck neu ein
     <string name="freeform_forced_resizable_samsung_dex">Einige Funktionen dieser App werden in Samsung DeX möglicherweise nicht unterstützt.</string>
     <string name="from_music_share">Von Music Share</string>
     <string name="fullscreen_text">Vollbild</string>
+    <string name="gallery">Galerie</string>
     <string name="game_status">Spielt</string>
     <string name="gesture_accessibility_guide_gesture_onboarding">Vom unteren Bildschirmrand mit 2 Fingern nach oben streichen, um die Eingabehilfe-Verknüpfung zu verwenden.</string>
     <string name="gesture_accessibility_guide_gesture_onboarding_voice_assistant_on">Streiche vom unteren Bildschirmrand mit 3 Fingern nach oben, um den Eingabehilfe-Shortcut zu verwenden.</string>
@@ -2630,6 +2647,7 @@ Bitte versuche es in %2$d Sekunden noch einmal."</string>
     <string name="ksh_group_system_notifications">Benachrichtigungen</string>
     <string name="ksh_group_system_popup_view">Pop-up-Ansicht</string>
     <string name="ksh_group_system_recents">Aktuell</string>
+    <string name="ksh_group_system_running_apps">Laufende Apps</string>
     <string name="ksh_group_system_screen_off">Bildschirm aus</string>
     <string name="ksh_group_system_show_emojis">Emojis anzeigen</string>
     <string name="ksh_group_system_show_hanja_input">Hanja-Eingabe anzeigen</string>
@@ -2853,6 +2871,7 @@ Wenn du dieser App keinen Zugriff auf alle Geräteprotokolle gewährst, kann sie
     <string name="material_timepicker_pm">PM</string>
     <string name="material_timepicker_select_time">Uhrzeit auswählen</string>
     <string name="material_timepicker_text_input_mode_description">In den Texteingabemodus wechseln, um die Uhrzeit einzugeben.</string>
+    <string name="max_byte_error">Maximale Anzahl von Zeichen erreicht.</string>
     <string name="max_long_trace_duration">Maximale Dauer langer Traces</string>
     <string name="max_long_trace_size">Maximale Größe langer Traces</string>
     <string name="maximize_button_text">%1$s maximieren</string>
@@ -3179,9 +3198,13 @@ Falls du Fragen hast, wende dich an %2$s."</string>
     <string name="music_share_description_second_line">Wenn du und ein Freund Galaxy Buds habt, könnt ihr gemeinsam Musik anhören.</string>
     <string name="mw_caption_button_text_open_in_browser">In Browser öffnen</string>
     <string name="mw_caption_button_text_remove_from_workspace">Aus Arbeitsbereich entfernen</string>
+    <string name="mw_caption_button_text_restart_app">App neu starten, um Layout zu optimieren</string>
     <string name="mw_caption_button_text_send_to_other_display">An andere Anzeige senden</string>
     <string name="mw_caption_button_text_snap_to_left">Links ausrichten</string>
     <string name="mw_caption_button_text_snap_to_right">Rechts ausrichten</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">Desktop-Arbeitsbereiche wurden ausgeblendet, da dein Telefon zu heiß ist. Sie sind wieder verfügbar, wenn es abgekühlt ist.</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">Mit dieser App kann nicht zu einem Desktop-Arbeitsbereich gewechselt werden, da der Bildschirm zu weit herangezoomt ist. Ändere die Einstellungen des Bildschirmzooms und versuche es erneut.</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Eine App kann bei Verwendung von Smart View nicht zur Desktop-Ansicht geändert werden.</string>
     <string name="nav_bar">Navigationsleiste</string>
     <string name="nav_bar_layout">Layout</string>
     <string name="navigation_menu">Navigationsmenü</string>
@@ -3528,6 +3551,7 @@ Es wird nun zum Abkühlen ausgeschaltet."</string>
     <string name="qs_custom_action_move_to_bottom">Ans Ende verschieben</string>
     <string name="qs_custom_action_move_to_top">An den Anfang verschieben</string>
     <string name="qs_custom_action_move_up">Nach oben</string>
+    <string name="qs_custom_action_radio_button">Optionsfeld</string>
     <string name="qs_custom_action_removed_done">Schaltfläche mit dem Name %s entfernt</string>
     <string name="qs_customizer_settings">Paneel-Einstellungen</string>
     <string name="qs_detail_flashlight_title">Taschenlampe</string>
@@ -3622,6 +3646,7 @@ Versuche es später erneut."</string>
     <string name="qs_record_issue_label">Problem aufzeichnen</string>
     <string name="qs_record_issue_start">Starten</string>
     <string name="qs_record_issue_stop">Aufnahme beenden</string>
+    <string name="qs_reset_complete">Zurücksetzen abgeschlossen.</string>
     <string name="qs_sensor_privacy_dialog_cancel">Abbrechen</string>
     <string name="qs_sensor_privacy_dialog_turn_on">Einschalten</string>
     <string name="qs_sensor_privacy_dialog_unblock">Entsperren</string>
@@ -3901,7 +3926,6 @@ Deaktiviere „Arbeitsprofil“, um dein Tablet ohne Unterbrechungen von der Arb
     <string name="retail_demo_reset_title">Passwort erforderlich</string>
     <string name="retry_face">Authentifizierung per Gesicht noch einmal versuchen</string>
     <string name="reverse_folding_alert_view_warning_text">Öffne das Telefon und schließe es von links.</string>
-    <string name="reverse_folding_order_guide_text">Schließe die linke Seite zuerst.</string>
     <string name="right_icon">Rechtes Symbol</string>
     <string name="right_keycode">Rechter Keycode</string>
     <string name="right_nav_bar_button_type">Zusätzlicher rechter Schaltflächentyp</string>
@@ -3928,6 +3952,7 @@ Deaktiviere „Arbeitsprofil“, um dein Tablet ohne Unterbrechungen von der Arb
     <string name="satellite_connected_carrier_text">Notruf über Satellit</string>
     <string name="satellite_emergency_only_carrier_text">Nur Notrufe oder SOS</string>
     <string name="save">Speichern</string>
+    <string name="save_button">Speichern</string>
     <string name="saved_network">Gespeichert durch %1$s</string>
     <string name="saving_heap_dump">Heap-Dump wird gespeichert</string>
     <string name="saving_stack_samples">Stackproben werden gespeichert</string>
@@ -4120,6 +4145,7 @@ Deaktiviere „Arbeitsprofil“, um dein Tablet ohne Unterbrechungen von der Arb
     <string name="sec_decor_button_text_caption_pin">Optionsmenü oben anheften</string>
     <string name="sec_decor_button_text_caption_unpin">Optionsmenü lösen</string>
     <string name="sec_decor_button_text_close">Schließen</string>
+    <string name="sec_decor_button_text_enter_full_screen">Vollbild</string>
     <string name="sec_decor_button_text_exit_full_screen">Vollbild beenden</string>
     <string name="sec_decor_button_text_freeform">In Pop-up-Ansicht öffnen</string>
     <string name="sec_decor_button_text_maximize">Maximieren</string>
@@ -4136,6 +4162,7 @@ Deaktiviere „Arbeitsprofil“, um dein Tablet ohne Unterbrechungen von der Arb
     <string name="sec_decor_button_text_window_unpin">Fenster lösen</string>
     <string name="sec_decor_handle_text">"Schnell-
 optionen"</string>
+    <string name="sec_decor_window_handle">Fensterpfeil</string>
     <string name="sec_devices_and_media_control">Schaltflächen für Gerätesteuerung und Medienausgabe</string>
     <string name="sec_dlg_turn_on">Einschalten</string>
     <string name="sec_dnd_detail_on_until_time_today">Eingeschaltet bis %s</string>
@@ -4977,9 +5004,9 @@ Durch Hinzufügen eines neuen Nutzers wird der Gastmodus beendet und alle Apps u
 Wenn du einen neuen Nutzer hinzufügst, muss dieser seinen Bereich einrichten.
 
 Jeder Nutzer kann Apps für alle anderen Nutzer aktualisieren. Einstel­lun­gen und Dienste für die Bedie­nungs­hil­fen werden mög­licher­weise nicht auf den neuen Nutzer übertragen."</string>
-    <string name="user_add_user_message_short">"Wenn du einen neuen Nutzer hinzufügst, muss dieser seinen Bereich einrichten.
+    <string name="user_add_user_message_short">"Nach dem Erstellen eines neuen Benutzers muss diese Person einen Einrichtungsvorgang durchführen.
 
-Jeder Nutzer kann Apps für alle anderen Nutzer aktualisieren."</string>
+Benutzer können aktualisierte App-Berechtigungen im Namen aller anderen Benutzer akzeptieren."</string>
     <string name="user_add_user_title">Neuen Nutzer hinzufügen?</string>
     <string name="user_add_user_type_title">Hinzufügen</string>
     <string name="user_aspect_ratio_settings_button_description">Seitenverhältnis ändern</string>
@@ -5368,6 +5395,7 @@ WLAN-Adresse (BSSID)
     <string name="zen_mode_and_condition">%1$s. %2$s</string>
     <string name="zen_mode_do_not_disturb_name">Bitte nicht stören</string>
     <string name="zen_mode_duration_always_prompt_title">Jedes Mal fragen</string>
+    <string name="zen_mode_duration_settings_summary">Mit „Nicht stören“ werden alle Anrufe, Benachrichtigungen und andere Hinweise außer denjenigen, die du zulassen möchtest, stummgeschaltet.</string>
     <string name="zen_mode_duration_settings_title">Dauer</string>
     <string name="zen_mode_enable_dialog_turn_on">Einschalten</string>
     <string name="zen_mode_forever">Bis zum Ausschalten</string>

@@ -10,7 +10,6 @@ import android.util.Log;
 import android.window.SplashScreenView;
 import java.util.function.LongConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashscreenIconDrawableFactory$AnimatableIconAnimateListener extends SplashscreenIconDrawableFactory$AdaptiveForegroundDrawable implements SplashScreenView.IconAnimateListener {
     public final Animatable mAnimatableIcon;
@@ -48,22 +47,22 @@ public class SplashscreenIconDrawableFactory$AnimatableIconAnimateListener exten
                 if (animatorListenerAdapter != null) {
                     animatorListenerAdapter.onAnimationStart(null);
                 }
-                long j = 0;
+                long totalDuration = 0;
                 try {
                     this.mAnimatableIcon.start();
                     Animatable animatable = this.mAnimatableIcon;
                     if (!(animatable instanceof AnimatedVectorDrawable) || ((AnimatedVectorDrawable) animatable).getTotalDuration() <= 0) {
                         Animatable animatable2 = this.mAnimatableIcon;
                         if ((animatable2 instanceof AnimationDrawable) && ((AnimationDrawable) animatable2).getTotalDuration() > 0) {
-                            j = ((AnimationDrawable) this.mAnimatableIcon).getTotalDuration();
+                            totalDuration = ((AnimationDrawable) this.mAnimatableIcon).getTotalDuration();
                         }
                     } else {
-                        j = ((AnimatedVectorDrawable) this.mAnimatableIcon).getTotalDuration();
+                        totalDuration = ((AnimatedVectorDrawable) this.mAnimatableIcon).getTotalDuration();
                     }
                     this.mRunning = true;
                     LongConsumer longConsumer = this.mStartListener;
                     if (longConsumer != null) {
-                        longConsumer.accept(j);
+                        longConsumer.accept(totalDuration);
                     }
                 } catch (Exception e) {
                     Log.e("ShellStartingWindow", "Error while running the splash screen animated icon", e);

@@ -51,9 +51,9 @@ public final class UserPackage {
             UserPackage userPackage = sparseArrayMap.get(i, str);
             if (userPackage == null) {
                 maybePurgeRandomEntriesLocked(i);
-                String intern = str.intern();
-                userPackage = new UserPackage(i, intern);
-                sparseArrayMap.add(i, intern, userPackage);
+                String strIntern = str.intern();
+                userPackage = new UserPackage(i, strIntern);
+                sparseArrayMap.add(i, strIntern, userPackage);
             }
             return userPackage;
         }
@@ -69,33 +69,33 @@ public final class UserPackage {
         int[] iArr2 = (int[]) iArr.clone();
         synchronized (sCacheLock) {
             sUserIds = iArr2;
-            for (int numMaps = sCache.numMaps() - 1; numMaps >= 0; numMaps--) {
+            for (int iNumMaps = sCache.numMaps() - 1; iNumMaps >= 0; iNumMaps--) {
                 SparseArrayMap<String, UserPackage> sparseArrayMap = sCache;
-                if (!ArrayUtils.contains(iArr2, sparseArrayMap.keyAt(numMaps))) {
-                    sparseArrayMap.deleteAt(numMaps);
+                if (!ArrayUtils.contains(iArr2, sparseArrayMap.keyAt(iNumMaps))) {
+                    sparseArrayMap.deleteAt(iNumMaps);
                 }
             }
         }
     }
 
     public static int numEntriesForUser(int i) {
-        int numElementsForKey;
+        int iNumElementsForKey;
         synchronized (sCacheLock) {
-            numElementsForKey = sCache.numElementsForKey(i);
+            iNumElementsForKey = sCache.numElementsForKey(i);
         }
-        return numElementsForKey;
+        return iNumElementsForKey;
     }
 
     private static void maybePurgeRandomEntriesLocked(int i) {
-        int numElementsForKeyAt;
+        int iNumElementsForKeyAt;
         SparseArrayMap<String, UserPackage> sparseArrayMap = sCache;
-        int indexOfKey = sparseArrayMap.indexOfKey(i);
-        if (indexOfKey >= 0 && (numElementsForKeyAt = sparseArrayMap.numElementsForKeyAt(indexOfKey)) >= 1000) {
+        int iIndexOfKey = sparseArrayMap.indexOfKey(i);
+        if (iIndexOfKey >= 0 && (iNumElementsForKeyAt = sparseArrayMap.numElementsForKeyAt(iIndexOfKey)) >= 1000) {
             Random random = new Random();
-            int max = Math.max(1, 10);
+            int iMax = Math.max(1, 10);
             int i2 = 0;
-            for (numElementsForKeyAt = sparseArrayMap.numElementsForKeyAt(indexOfKey); i2 < max && numElementsForKeyAt > 0; numElementsForKeyAt--) {
-                sCache.deleteAt(indexOfKey, random.nextInt(numElementsForKeyAt));
+            for (iNumElementsForKeyAt = sparseArrayMap.numElementsForKeyAt(iIndexOfKey); i2 < iMax && iNumElementsForKeyAt > 0; iNumElementsForKeyAt--) {
+                sCache.deleteAt(iIndexOfKey, random.nextInt(iNumElementsForKeyAt));
                 i2++;
             }
         }

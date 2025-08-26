@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CCMProfile implements Parcelable {
     public static final Parcelable.Creator<CCMProfile> CREATOR = new Parcelable.Creator<CCMProfile>() { // from class: com.samsung.android.knox.keystore.CCMProfile.1
@@ -28,7 +27,6 @@ public class CCMProfile implements Parcelable {
     public TUIProperty tuiProperty;
     public boolean whiteListAllPackages;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum AccessControlMethod {
         LOCK_STATE(0),
         PASSWORD(1),
@@ -60,9 +58,9 @@ public class CCMProfile implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         try {
-            AccessControlMethod valueOf = AccessControlMethod.valueOf(parcel.readString());
-            this.accessControlMethod = valueOf;
-            if (valueOf == null) {
+            AccessControlMethod accessControlMethodValueOf = AccessControlMethod.valueOf(parcel.readString());
+            this.accessControlMethod = accessControlMethodValueOf;
+            if (accessControlMethodValueOf == null) {
                 this.accessControlMethod = AccessControlMethod.LOCK_STATE;
             }
             this.accessControlPassword = parcel.readString();

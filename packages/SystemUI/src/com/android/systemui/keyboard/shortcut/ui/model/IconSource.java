@@ -5,12 +5,12 @@ import androidx.compose.ui.graphics.vector.ImageVector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class IconSource {
     public final ImageVector imageVector;
     public final Painter painter;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public IconSource() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }
@@ -28,9 +28,9 @@ public final class IconSource {
 
     public final int hashCode() {
         ImageVector imageVector = this.imageVector;
-        int hashCode = (imageVector == null ? 0 : imageVector.hashCode()) * 31;
+        int iHashCode = (imageVector == null ? 0 : imageVector.hashCode()) * 31;
         Painter painter = this.painter;
-        return hashCode + (painter != null ? painter.hashCode() : 0);
+        return iHashCode + (painter != null ? painter.hashCode() : 0);
     }
 
     public final String toString() {

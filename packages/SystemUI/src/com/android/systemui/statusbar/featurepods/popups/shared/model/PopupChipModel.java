@@ -3,16 +3,16 @@ package com.android.systemui.statusbar.featurepods.popups.shared.model;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 import com.android.systemui.common.shared.model.Icon;
+import com.android.systemui.statusbar.featurepods.popups.shared.model.HoverBehavior;
 import java.util.Objects;
+import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class PopupChipModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Hidden extends PopupChipModel {
         public final PopupChipId chipId;
         public final boolean shouldAnimate;
@@ -55,7 +55,6 @@ public abstract class PopupChipModel {
     private PopupChipModel() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Shown extends PopupChipModel {
         public final PopupChipId chipId;
         public final String chipText;
@@ -65,51 +64,32 @@ public abstract class PopupChipModel {
         public final boolean isPopupShown;
         public final Function0 showPopup;
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ Shown(com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipId r9, com.android.systemui.common.shared.model.Icon r10, java.lang.String r11, boolean r12, kotlin.jvm.functions.Function0 r13, kotlin.jvm.functions.Function0 r14, com.android.systemui.statusbar.featurepods.popups.shared.model.HoverBehavior r15, int r16, kotlin.jvm.internal.DefaultConstructorMarker r17) {
-            /*
-                r8 = this;
-                r0 = r16 & 8
-                if (r0 == 0) goto L5
-                r12 = 0
-            L5:
-                r4 = r12
-                r12 = r16 & 16
-                if (r12 == 0) goto L10
-                com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0 r13 = new com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0
-                r12 = 0
-                r13.<init>()
-            L10:
-                r5 = r13
-                r12 = r16 & 32
-                if (r12 == 0) goto L1b
-                com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0 r14 = new com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0
-                r12 = 1
-                r14.<init>()
-            L1b:
-                r6 = r14
-                r12 = r16 & 64
-                if (r12 == 0) goto L28
-                com.android.systemui.statusbar.featurepods.popups.shared.model.HoverBehavior$None r12 = com.android.systemui.statusbar.featurepods.popups.shared.model.HoverBehavior.None.INSTANCE
-                r7 = r12
-            L23:
-                r0 = r8
-                r1 = r9
-                r2 = r10
-                r3 = r11
-                goto L2a
-            L28:
-                r7 = r15
-                goto L23
-            L2a:
-                r0.<init>(r1, r2, r3, r4, r5, r6, r7)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel.Shown.<init>(com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipId, com.android.systemui.common.shared.model.Icon, java.lang.String, boolean, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function0, com.android.systemui.statusbar.featurepods.popups.shared.model.HoverBehavior, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ Shown(PopupChipId popupChipId, Icon icon, String str, boolean z, Function0 function0, Function0 function02, HoverBehavior hoverBehavior, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            boolean z2 = (i & 8) != 0 ? false : z;
+            if ((i & 16) != 0) {
+                final int i2 = 0;
+                function0 = new Function0() { // from class: com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        switch (i2) {
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+            }
+            Function0 function03 = function0;
+            if ((i & 32) != 0) {
+                final int i3 = 1;
+                function02 = new Function0() { // from class: com.android.systemui.statusbar.featurepods.popups.shared.model.PopupChipModel$Shown$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        switch (i3) {
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+            }
+            this(popupChipId, icon, str, z2, function03, function02, (i & 64) != 0 ? HoverBehavior.None.INSTANCE : hoverBehavior);
         }
 
         public final boolean equals(Object obj) {

@@ -1,6 +1,7 @@
 package com.android.systemui.edgelighting.effect.utils.vc;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Slog;
 import androidx.core.util.PatternsCompat;
@@ -9,7 +10,6 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class VerificationCodeParserBase implements VerificationCodeParser {
     public static final String[] OTP_PATTERN = {"^([\\d]{4,10})$", "^(?=.*[\\d])(?=.*[a-zA-Z])([\\da-zA-Z]{6,10})$", "^([A-Z]{1,3}-[\\d]{4,6})$", "^([\\d]{3,5}-[\\d]{3,5})$"};
@@ -25,7 +25,7 @@ public abstract class VerificationCodeParserBase implements VerificationCodePars
         return -1;
     }
 
-    public static String getVerificationCode(Context context, String str, String[] strArr, String[] strArr2) {
+    public static String getVerificationCode(Context context, String str, String[] strArr, String[] strArr2) throws Resources.NotFoundException {
         if (TextUtils.isEmpty(str)) {
             Slog.d("ORC/VerificationCodeParserBase", "getVerificationCode() - empty text");
             return null;
@@ -51,36 +51,36 @@ public abstract class VerificationCodeParserBase implements VerificationCodePars
             return null;
         }
         String lowerCase = str.toLowerCase();
-        int containKey = containKey(lowerCase, strArr);
-        if (containKey != -1) {
+        int iContainKey = containKey(lowerCase, strArr);
+        if (iContainKey != -1) {
             Slog.d("ORC/VerificationCodeParserBase", "getKeyOTPPosition: contain strong key");
         } else {
-            containKey = containKey(lowerCase, strArr2);
+            iContainKey = containKey(lowerCase, strArr2);
         }
-        if (containKey == -1) {
+        if (iContainKey == -1) {
             Slog.d("ORC/VerificationCodeParserBase", "getVerificationCode - not OTP message");
             return null;
         }
-        String[] split = str.split("[^\\da-zA-Z-]|" + PATTERN_EMAIL + "|(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])");
+        String[] strArrSplit = str.split("[^\\da-zA-Z-]|" + PATTERN_EMAIL + "|(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])");
         int length = str.length();
-        int i = 0;
-        int i2 = -1;
-        for (int i3 = 0; i3 < split.length; i3++) {
+        int length2 = 0;
+        int i = -1;
+        for (int i2 = 0; i2 < strArrSplit.length; i2++) {
             String[] strArr3 = OTP_PATTERN;
-            for (int i4 = 0; i4 < 4; i4++) {
-                if (split[i3].matches(strArr3[i4])) {
-                    int i5 = containKey - i;
-                    if (length >= Math.abs(i5)) {
-                        length = Math.abs(i5);
-                        i2 = i3;
+            for (int i3 = 0; i3 < 4; i3++) {
+                if (strArrSplit[i2].matches(strArr3[i3])) {
+                    int i4 = iContainKey - length2;
+                    if (length >= Math.abs(i4)) {
+                        length = Math.abs(i4);
+                        i = i2;
                     }
                 }
             }
-            i += split[i3].length() + 1;
+            length2 += strArrSplit[i2].length() + 1;
         }
-        if (i2 != -1) {
+        if (i != -1) {
             Slog.d("ORC/VerificationCodeParserBase", "getOTPCode = true");
-            return split[i2];
+            return strArrSplit[i];
         }
         Slog.d("ORC/VerificationCodeParserBase", "getOTPCode - Don't have any OTP code");
         return null;

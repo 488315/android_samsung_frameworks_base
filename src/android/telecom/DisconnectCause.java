@@ -252,10 +252,10 @@ public final class DisconnectCause implements Parcelable {
                 break;
         }
         CharSequence charSequence = this.mDisconnectLabel;
-        String charSequence2 = charSequence == null ? "" : charSequence.toString();
-        CharSequence charSequence3 = this.mDisconnectDescription;
-        String charSequence4 = charSequence3 == null ? "" : charSequence3.toString();
+        String string = charSequence == null ? "" : charSequence.toString();
+        CharSequence charSequence2 = this.mDisconnectDescription;
+        String string2 = charSequence2 == null ? "" : charSequence2.toString();
         String str2 = this.mDisconnectReason;
-        return "DisconnectCause [ Code: (" + str + ") Label: (" + charSequence2 + ") Description: (" + charSequence4 + ") Reason: (" + (str2 != null ? str2 : "") + ") Tone: (" + this.mToneToPlay + ")  TelephonyCause: " + this.mTelephonyDisconnectCause + "/" + this.mTelephonyPreciseDisconnectCause + " ImsReasonInfo: " + this.mImsReasonInfo + NavigationBarInflaterView.SIZE_MOD_END;
+        return "DisconnectCause [ Code: (" + str + ") Label: (" + string + ") Description: (" + string2 + ") Reason: (" + (str2 != null ? str2 : "") + ") Tone: (" + this.mToneToPlay + ")  TelephonyCause: " + this.mTelephonyDisconnectCause + "/" + this.mTelephonyPreciseDisconnectCause + " ImsReasonInfo: " + this.mImsReasonInfo + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

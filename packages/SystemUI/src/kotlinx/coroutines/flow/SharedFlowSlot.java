@@ -5,7 +5,6 @@ import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlowSlot;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SharedFlowSlot extends AbstractSharedFlowSlot {
     public CancellableContinuationImpl cont;

@@ -32,10 +32,10 @@ public final class ColorUtils {
     }
 
     public static int compositeColors(int i, int i2) {
-        int alpha = Color.alpha(i2);
-        int alpha2 = Color.alpha(i);
-        int compositeAlpha = compositeAlpha(alpha2, alpha);
-        return Color.argb(compositeAlpha, compositeComponent(Color.red(i), alpha2, Color.red(i2), alpha, compositeAlpha), compositeComponent(Color.green(i), alpha2, Color.green(i2), alpha, compositeAlpha), compositeComponent(Color.blue(i), alpha2, Color.blue(i2), alpha, compositeAlpha));
+        int iAlpha = Color.alpha(i2);
+        int iAlpha2 = Color.alpha(i);
+        int iCompositeAlpha = compositeAlpha(iAlpha2, iAlpha);
+        return Color.argb(iCompositeAlpha, compositeComponent(Color.red(i), iAlpha2, Color.red(i2), iAlpha, iCompositeAlpha), compositeComponent(Color.green(i), iAlpha2, Color.green(i2), iAlpha, iCompositeAlpha), compositeComponent(Color.blue(i), iAlpha2, Color.blue(i2), iAlpha, iCompositeAlpha));
     }
 
     public static int compositeAlpha(int i, int i2) {
@@ -62,9 +62,9 @@ public final class ColorUtils {
         if (Color.alpha(i) < 255) {
             i = compositeColors(i, i2);
         }
-        double calculateLuminance = calculateLuminance(i) + 0.05d;
-        double calculateLuminance2 = calculateLuminance(i2) + 0.05d;
-        return Math.max(calculateLuminance, calculateLuminance2) / Math.min(calculateLuminance, calculateLuminance2);
+        double dCalculateLuminance = calculateLuminance(i) + 0.05d;
+        double dCalculateLuminance2 = calculateLuminance(i2) + 0.05d;
+        return Math.max(dCalculateLuminance, dCalculateLuminance2) / Math.min(dCalculateLuminance, dCalculateLuminance2);
     }
 
     public static int calculateMinimumBackgroundAlpha(int i, int i2, float f) {
@@ -73,9 +73,7 @@ public final class ColorUtils {
         return binaryAlphaSearch(i, alphaComponent, f, new ContrastCalculator() { // from class: com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda1
             @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
             public final double calculateContrast(int i3, int i4, int i5) {
-                double calculateContrast;
-                calculateContrast = ColorUtils.calculateContrast(i3, ColorUtils.setAlphaComponent(ColorUtils.blendARGB(alphaComponent2, i4, i5 / 255.0f), 255));
-                return calculateContrast;
+                return ColorUtils.calculateContrast(i3, ColorUtils.setAlphaComponent(ColorUtils.blendARGB(alphaComponent2, i4, i5 / 255.0f), 255));
             }
         });
     }
@@ -87,9 +85,7 @@ public final class ColorUtils {
         ContrastCalculator contrastCalculator = new ContrastCalculator() { // from class: com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda0
             @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
             public final double calculateContrast(int i3, int i4, int i5) {
-                double calculateContrast;
-                calculateContrast = ColorUtils.calculateContrast(ColorUtils.setAlphaComponent(i3, i5), i4);
-                return calculateContrast;
+                return ColorUtils.calculateContrast(ColorUtils.setAlphaComponent(i3, i5), i4);
             }
         };
         if (contrastCalculator.calculateContrast(i, i2, 255) < f) {
@@ -114,27 +110,27 @@ public final class ColorUtils {
 
     public static void RGBToHSL(int i, int i2, int i3, float[] fArr) {
         float f;
-        float abs;
+        float fAbs;
         float f2 = i / 255.0f;
         float f3 = i2 / 255.0f;
         float f4 = i3 / 255.0f;
-        float max = Math.max(f2, Math.max(f3, f4));
-        float min = Math.min(f2, Math.min(f3, f4));
-        float f5 = max - min;
-        float f6 = (max + min) / 2.0f;
-        if (max == min) {
+        float fMax = Math.max(f2, Math.max(f3, f4));
+        float fMin = Math.min(f2, Math.min(f3, f4));
+        float f5 = fMax - fMin;
+        float f6 = (fMax + fMin) / 2.0f;
+        if (fMax == fMin) {
             f = 0.0f;
-            abs = 0.0f;
+            fAbs = 0.0f;
         } else {
-            f = max == f2 ? ((f3 - f4) / f5) % 6.0f : max == f3 ? ((f4 - f2) / f5) + 2.0f : 4.0f + ((f2 - f3) / f5);
-            abs = f5 / (1.0f - Math.abs((2.0f * f6) - 1.0f));
+            f = fMax == f2 ? ((f3 - f4) / f5) % 6.0f : fMax == f3 ? ((f4 - f2) / f5) + 2.0f : 4.0f + ((f2 - f3) / f5);
+            fAbs = f5 / (1.0f - Math.abs((2.0f * f6) - 1.0f));
         }
         float f7 = (f * 60.0f) % 360.0f;
         if (f7 < 0.0f) {
             f7 += 360.0f;
         }
         fArr[0] = constrain(f7, 0.0f, 360.0f);
-        fArr[1] = constrain(abs, 0.0f, 1.0f);
+        fArr[1] = constrain(fAbs, 0.0f, 1.0f);
         fArr[2] = constrain(f6, 0.0f, 1.0f);
     }
 
@@ -143,54 +139,54 @@ public final class ColorUtils {
     }
 
     public static int HSLToColor(float[] fArr) {
-        int round;
-        int round2;
-        int round3;
+        int iRound;
+        int iRound2;
+        int iRound3;
         float f = fArr[0];
         float f2 = fArr[1];
         float f3 = fArr[2];
-        float abs = (1.0f - Math.abs((f3 * 2.0f) - 1.0f)) * f2;
-        float f4 = f3 - (0.5f * abs);
-        float abs2 = (1.0f - Math.abs(((f / 60.0f) % 2.0f) - 1.0f)) * abs;
+        float fAbs = (1.0f - Math.abs((f3 * 2.0f) - 1.0f)) * f2;
+        float f4 = f3 - (0.5f * fAbs);
+        float fAbs2 = (1.0f - Math.abs(((f / 60.0f) % 2.0f) - 1.0f)) * fAbs;
         switch (((int) f) / 60) {
             case 0:
-                round = Math.round((abs + f4) * 255.0f);
-                round2 = Math.round((abs2 + f4) * 255.0f);
-                round3 = Math.round(f4 * 255.0f);
+                iRound = Math.round((fAbs + f4) * 255.0f);
+                iRound2 = Math.round((fAbs2 + f4) * 255.0f);
+                iRound3 = Math.round(f4 * 255.0f);
                 break;
             case 1:
-                round = Math.round((abs2 + f4) * 255.0f);
-                round2 = Math.round((abs + f4) * 255.0f);
-                round3 = Math.round(f4 * 255.0f);
+                iRound = Math.round((fAbs2 + f4) * 255.0f);
+                iRound2 = Math.round((fAbs + f4) * 255.0f);
+                iRound3 = Math.round(f4 * 255.0f);
                 break;
             case 2:
-                round = Math.round(f4 * 255.0f);
-                round2 = Math.round((abs + f4) * 255.0f);
-                round3 = Math.round((abs2 + f4) * 255.0f);
+                iRound = Math.round(f4 * 255.0f);
+                iRound2 = Math.round((fAbs + f4) * 255.0f);
+                iRound3 = Math.round((fAbs2 + f4) * 255.0f);
                 break;
             case 3:
-                round = Math.round(f4 * 255.0f);
-                round2 = Math.round((abs2 + f4) * 255.0f);
-                round3 = Math.round((abs + f4) * 255.0f);
+                iRound = Math.round(f4 * 255.0f);
+                iRound2 = Math.round((fAbs2 + f4) * 255.0f);
+                iRound3 = Math.round((fAbs + f4) * 255.0f);
                 break;
             case 4:
-                round = Math.round((abs2 + f4) * 255.0f);
-                round2 = Math.round(f4 * 255.0f);
-                round3 = Math.round((abs + f4) * 255.0f);
+                iRound = Math.round((fAbs2 + f4) * 255.0f);
+                iRound2 = Math.round(f4 * 255.0f);
+                iRound3 = Math.round((fAbs + f4) * 255.0f);
                 break;
             case 5:
             case 6:
-                round = Math.round((abs + f4) * 255.0f);
-                round2 = Math.round(f4 * 255.0f);
-                round3 = Math.round((abs2 + f4) * 255.0f);
+                iRound = Math.round((fAbs + f4) * 255.0f);
+                iRound2 = Math.round(f4 * 255.0f);
+                iRound3 = Math.round((fAbs2 + f4) * 255.0f);
                 break;
             default:
-                round3 = 0;
-                round = 0;
-                round2 = 0;
+                iRound3 = 0;
+                iRound = 0;
+                iRound2 = 0;
                 break;
         }
-        return Color.rgb(constrain(round, 0, 255), constrain(round2, 0, 255), constrain(round3, 0, 255));
+        return Color.rgb(constrain(iRound, 0, 255), constrain(iRound2, 0, 255), constrain(iRound3, 0, 255));
     }
 
     public static Cam colorToCAM(int i) {
@@ -226,44 +222,44 @@ public final class ColorUtils {
             throw new IllegalArgumentException("outXyz must have a length of 3.");
         }
         double d = i / 255.0d;
-        double pow = d < 0.04045d ? d / 12.92d : Math.pow((d + 0.055d) / 1.055d, 2.4d);
+        double dPow = d < 0.04045d ? d / 12.92d : Math.pow((d + 0.055d) / 1.055d, 2.4d);
         double d2 = i2 / 255.0d;
-        double pow2 = d2 < 0.04045d ? d2 / 12.92d : Math.pow((d2 + 0.055d) / 1.055d, 2.4d);
+        double dPow2 = d2 < 0.04045d ? d2 / 12.92d : Math.pow((d2 + 0.055d) / 1.055d, 2.4d);
         double d3 = i3 / 255.0d;
-        double pow3 = d3 < 0.04045d ? d3 / 12.92d : Math.pow((d3 + 0.055d) / 1.055d, 2.4d);
-        dArr[0] = ((0.4124d * pow) + (0.3576d * pow2) + (0.1805d * pow3)) * XYZ_WHITE_REFERENCE_Y;
-        dArr[1] = ((0.2126d * pow) + (0.7152d * pow2) + (0.0722d * pow3)) * XYZ_WHITE_REFERENCE_Y;
-        dArr[2] = ((pow * 0.0193d) + (pow2 * 0.1192d) + (pow3 * 0.9505d)) * XYZ_WHITE_REFERENCE_Y;
+        double dPow3 = d3 < 0.04045d ? d3 / 12.92d : Math.pow((d3 + 0.055d) / 1.055d, 2.4d);
+        dArr[0] = ((0.4124d * dPow) + (0.3576d * dPow2) + (0.1805d * dPow3)) * XYZ_WHITE_REFERENCE_Y;
+        dArr[1] = ((0.2126d * dPow) + (0.7152d * dPow2) + (0.0722d * dPow3)) * XYZ_WHITE_REFERENCE_Y;
+        dArr[2] = ((dPow * 0.0193d) + (dPow2 * 0.1192d) + (dPow3 * 0.9505d)) * XYZ_WHITE_REFERENCE_Y;
     }
 
     public static void XYZToLAB(double d, double d2, double d3, double[] dArr) {
         if (dArr.length != 3) {
             throw new IllegalArgumentException("outLab must have a length of 3.");
         }
-        double pivotXyzComponent = pivotXyzComponent(d / XYZ_WHITE_REFERENCE_X);
-        double pivotXyzComponent2 = pivotXyzComponent(d2 / XYZ_WHITE_REFERENCE_Y);
-        double pivotXyzComponent3 = pivotXyzComponent(d3 / XYZ_WHITE_REFERENCE_Z);
-        dArr[0] = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (116.0d * pivotXyzComponent2) - 16.0d);
-        dArr[1] = (pivotXyzComponent - pivotXyzComponent2) * 500.0d;
-        dArr[2] = (pivotXyzComponent2 - pivotXyzComponent3) * 200.0d;
+        double dPivotXyzComponent = pivotXyzComponent(d / XYZ_WHITE_REFERENCE_X);
+        double dPivotXyzComponent2 = pivotXyzComponent(d2 / XYZ_WHITE_REFERENCE_Y);
+        double dPivotXyzComponent3 = pivotXyzComponent(d3 / XYZ_WHITE_REFERENCE_Z);
+        dArr[0] = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (116.0d * dPivotXyzComponent2) - 16.0d);
+        dArr[1] = (dPivotXyzComponent - dPivotXyzComponent2) * 500.0d;
+        dArr[2] = (dPivotXyzComponent2 - dPivotXyzComponent3) * 200.0d;
     }
 
     public static void LABToXYZ(double d, double d2, double d3, double[] dArr) {
         double d4 = (d + 16.0d) / 116.0d;
         double d5 = (d2 / 500.0d) + d4;
         double d6 = d4 - (d3 / 200.0d);
-        double pow = Math.pow(d5, 3.0d);
-        if (pow <= XYZ_EPSILON) {
-            pow = ((d5 * 116.0d) - 16.0d) / XYZ_KAPPA;
+        double dPow = Math.pow(d5, 3.0d);
+        if (dPow <= XYZ_EPSILON) {
+            dPow = ((d5 * 116.0d) - 16.0d) / XYZ_KAPPA;
         }
-        double pow2 = d > 7.9996247999999985d ? Math.pow(d4, 3.0d) : d / XYZ_KAPPA;
-        double pow3 = Math.pow(d6, 3.0d);
-        if (pow3 <= XYZ_EPSILON) {
-            pow3 = ((d6 * 116.0d) - 16.0d) / XYZ_KAPPA;
+        double dPow2 = d > 7.9996247999999985d ? Math.pow(d4, 3.0d) : d / XYZ_KAPPA;
+        double dPow3 = Math.pow(d6, 3.0d);
+        if (dPow3 <= XYZ_EPSILON) {
+            dPow3 = ((d6 * 116.0d) - 16.0d) / XYZ_KAPPA;
         }
-        dArr[0] = pow * XYZ_WHITE_REFERENCE_X;
-        dArr[1] = pow2 * XYZ_WHITE_REFERENCE_Y;
-        dArr[2] = pow3 * XYZ_WHITE_REFERENCE_Z;
+        dArr[0] = dPow * XYZ_WHITE_REFERENCE_X;
+        dArr[1] = dPow2 * XYZ_WHITE_REFERENCE_Y;
+        dArr[2] = dPow3 * XYZ_WHITE_REFERENCE_Z;
     }
 
     public static int XYZToColor(double d, double d2, double d3) {

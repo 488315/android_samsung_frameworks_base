@@ -16,14 +16,10 @@ public class SemColorDisplayManager {
     }
 
     public static synchronized SemColorDisplayManager getInstance() {
-        SemColorDisplayManager semColorDisplayManager;
-        synchronized (SemColorDisplayManager.class) {
-            if (sInstance == null) {
-                sInstance = new SemColorDisplayManager();
-            }
-            semColorDisplayManager = sInstance;
+        if (sInstance == null) {
+            sInstance = new SemColorDisplayManager();
         }
-        return semColorDisplayManager;
+        return sInstance;
     }
 
     public boolean setSaturationLevel(int i) {

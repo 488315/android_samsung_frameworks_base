@@ -1,5 +1,6 @@
 package androidx.appcompat.view.menu;
 
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -18,13 +20,13 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewConfiguration;
 import androidx.core.internal.view.SupportMenu;
+import androidx.core.view.ActionProvider;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuBuilder implements SupportMenu {
     public static final int[] sCategoryToOrder = {1, 4, 5, 3, 2, 0};
@@ -54,14 +56,12 @@ public class MenuBuilder implements SupportMenu {
     public final CopyOnWriteArrayList mPresenters = new CopyOnWriteArrayList();
     public boolean mGroupDividerEnabled = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         boolean onMenuItemSelected(MenuBuilder menuBuilder, MenuItem menuItem);
 
         void onMenuModeChange(MenuBuilder menuBuilder);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ItemInvoker {
         boolean invokeItem(MenuItemImpl menuItemImpl);
     }
@@ -92,22 +92,22 @@ public class MenuBuilder implements SupportMenu {
     public final int addIntentOptions(int i, int i2, int i3, ComponentName componentName, Intent[] intentArr, Intent intent, int i4, MenuItem[] menuItemArr) {
         int i5;
         PackageManager packageManager = this.mContext.getPackageManager();
-        List<ResolveInfo> queryIntentActivityOptions = packageManager.queryIntentActivityOptions(componentName, intentArr, intent, 0);
-        int size = queryIntentActivityOptions != null ? queryIntentActivityOptions.size() : 0;
+        List<ResolveInfo> listQueryIntentActivityOptions = packageManager.queryIntentActivityOptions(componentName, intentArr, intent, 0);
+        int size = listQueryIntentActivityOptions != null ? listQueryIntentActivityOptions.size() : 0;
         if ((i4 & 1) == 0) {
             removeGroup(i);
         }
         for (int i6 = 0; i6 < size; i6++) {
-            ResolveInfo resolveInfo = queryIntentActivityOptions.get(i6);
+            ResolveInfo resolveInfo = listQueryIntentActivityOptions.get(i6);
             int i7 = resolveInfo.specificIndex;
             Intent intent2 = new Intent(i7 < 0 ? intent : intentArr[i7]);
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             intent2.setComponent(new ComponentName(activityInfo.applicationInfo.packageName, activityInfo.name));
-            MenuItemImpl addInternal = addInternal(i, i2, i3, resolveInfo.loadLabel(packageManager));
-            addInternal.setIcon(resolveInfo.loadIcon(packageManager));
-            addInternal.mIntent = intent2;
+            MenuItemImpl menuItemImplAddInternal = addInternal(i, i2, i3, resolveInfo.loadLabel(packageManager));
+            menuItemImplAddInternal.setIcon(resolveInfo.loadIcon(packageManager));
+            menuItemImplAddInternal.mIntent = intent2;
             if (menuItemArr != null && (i5 = resolveInfo.specificIndex) >= 0) {
-                menuItemArr[i5] = addInternal;
+                menuItemArr[i5] = menuItemImplAddInternal;
             }
         }
         return size;
@@ -186,7 +186,7 @@ public class MenuBuilder implements SupportMenu {
     }
 
     public boolean collapseItemActionView(MenuItemImpl menuItemImpl) {
-        boolean z = false;
+        boolean zCollapseItemActionView = false;
         if (!this.mPresenters.isEmpty() && this.mExpandedItem == menuItemImpl) {
             stopDispatchingItemsChanged();
             Iterator it = this.mPresenters.iterator();
@@ -196,18 +196,18 @@ public class MenuBuilder implements SupportMenu {
                 if (menuPresenter == null) {
                     this.mPresenters.remove(weakReference);
                 } else {
-                    z = menuPresenter.collapseItemActionView(menuItemImpl);
-                    if (z) {
+                    zCollapseItemActionView = menuPresenter.collapseItemActionView(menuItemImpl);
+                    if (zCollapseItemActionView) {
                         break;
                     }
                 }
             }
             startDispatchingItemsChanged();
-            if (z) {
+            if (zCollapseItemActionView) {
                 this.mExpandedItem = null;
             }
         }
-        return z;
+        return zCollapseItemActionView;
     }
 
     public boolean dispatchMenuItemSelected(MenuBuilder menuBuilder, MenuItem menuItem) {
@@ -216,7 +216,7 @@ public class MenuBuilder implements SupportMenu {
     }
 
     public boolean expandItemActionView(MenuItemImpl menuItemImpl) {
-        boolean z = false;
+        boolean zExpandItemActionView = false;
         if (this.mPresenters.isEmpty()) {
             return false;
         }
@@ -228,30 +228,30 @@ public class MenuBuilder implements SupportMenu {
             if (menuPresenter == null) {
                 this.mPresenters.remove(weakReference);
             } else {
-                z = menuPresenter.expandItemActionView(menuItemImpl);
-                if (z) {
+                zExpandItemActionView = menuPresenter.expandItemActionView(menuItemImpl);
+                if (zExpandItemActionView) {
                     break;
                 }
             }
         }
         startDispatchingItemsChanged();
-        if (z) {
+        if (zExpandItemActionView) {
             this.mExpandedItem = menuItemImpl;
         }
-        return z;
+        return zExpandItemActionView;
     }
 
     @Override // android.view.Menu
     public final MenuItem findItem(int i) {
-        MenuItem findItem;
+        MenuItem menuItemFindItem;
         int size = this.mItems.size();
         for (int i2 = 0; i2 < size; i2++) {
             MenuItemImpl menuItemImpl = (MenuItemImpl) this.mItems.get(i2);
             if (menuItemImpl.mId == i) {
                 return menuItemImpl;
             }
-            if (menuItemImpl.hasSubMenu() && (findItem = menuItemImpl.mSubMenu.findItem(i)) != null) {
-                return findItem;
+            if (menuItemImpl.hasSubMenu() && (menuItemFindItem = menuItemImpl.mSubMenu.findItem(i)) != null) {
+                return menuItemFindItem;
             }
         }
         return null;
@@ -271,12 +271,12 @@ public class MenuBuilder implements SupportMenu {
         if (size == 1) {
             return (MenuItemImpl) arrayList.get(0);
         }
-        boolean isQwertyMode = isQwertyMode();
+        boolean zIsQwertyMode = isQwertyMode();
         for (int i2 = 0; i2 < size; i2++) {
             MenuItemImpl menuItemImpl = (MenuItemImpl) arrayList.get(i2);
-            char c = isQwertyMode ? menuItemImpl.mShortcutAlphabeticChar : menuItemImpl.mShortcutNumericChar;
+            char c = zIsQwertyMode ? menuItemImpl.mShortcutAlphabeticChar : menuItemImpl.mShortcutNumericChar;
             char[] cArr = keyData.meta;
-            if ((c == cArr[0] && (metaState & 2) == 0) || ((c == cArr[2] && (metaState & 2) != 0) || (isQwertyMode && c == '\b' && i == 67))) {
+            if ((c == cArr[0] && (metaState & 2) == 0) || ((c == cArr[2] && (metaState & 2) != 0) || (zIsQwertyMode && c == '\b' && i == 67))) {
                 return menuItemImpl;
             }
         }
@@ -284,7 +284,7 @@ public class MenuBuilder implements SupportMenu {
     }
 
     public final void findItemsWithShortcutForKey(List list, int i, KeyEvent keyEvent) {
-        boolean isQwertyMode = isQwertyMode();
+        boolean zIsQwertyMode = isQwertyMode();
         int modifiers = keyEvent.getModifiers();
         KeyCharacterMap.KeyData keyData = new KeyCharacterMap.KeyData();
         if (keyEvent.getKeyData(keyData) || i == 67) {
@@ -294,10 +294,10 @@ public class MenuBuilder implements SupportMenu {
                 if (menuItemImpl.hasSubMenu()) {
                     menuItemImpl.mSubMenu.findItemsWithShortcutForKey(list, i, keyEvent);
                 }
-                char c = isQwertyMode ? menuItemImpl.mShortcutAlphabeticChar : menuItemImpl.mShortcutNumericChar;
-                if ((modifiers & 69647) == ((isQwertyMode ? menuItemImpl.mShortcutAlphabeticModifiers : menuItemImpl.mShortcutNumericModifiers) & 69647) && c != 0) {
+                char c = zIsQwertyMode ? menuItemImpl.mShortcutAlphabeticChar : menuItemImpl.mShortcutNumericChar;
+                if ((modifiers & 69647) == ((zIsQwertyMode ? menuItemImpl.mShortcutAlphabeticModifiers : menuItemImpl.mShortcutNumericModifiers) & 69647) && c != 0) {
                     char[] cArr = keyData.meta;
-                    if ((c == cArr[0] || c == cArr[2] || (isQwertyMode && c == '\b' && i == 67)) && menuItemImpl.isEnabled()) {
+                    if ((c == cArr[0] || c == cArr[2] || (zIsQwertyMode && c == '\b' && i == 67)) && menuItemImpl.isEnabled()) {
                         ((ArrayList) list).add(menuItemImpl);
                     }
                 }
@@ -309,17 +309,17 @@ public class MenuBuilder implements SupportMenu {
         ArrayList visibleItems = getVisibleItems();
         if (this.mIsActionItemsStale) {
             Iterator it = this.mPresenters.iterator();
-            boolean z = false;
+            boolean zFlagActionItems = false;
             while (it.hasNext()) {
                 WeakReference weakReference = (WeakReference) it.next();
                 MenuPresenter menuPresenter = (MenuPresenter) weakReference.get();
                 if (menuPresenter == null) {
                     this.mPresenters.remove(weakReference);
                 } else {
-                    z |= menuPresenter.flagActionItems();
+                    zFlagActionItems |= menuPresenter.flagActionItems();
                 }
             }
-            if (z) {
+            if (zFlagActionItems) {
                 this.mActionItems.clear();
                 this.mNonActionItems.clear();
                 int size = visibleItems.size();
@@ -432,145 +432,84 @@ public class MenuBuilder implements SupportMenu {
         return performItemAction(findItem(i), null, i2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0018  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean performItemAction(android.view.MenuItem r7, androidx.appcompat.view.menu.MenuPresenter r8, int r9) {
-        /*
-            r6 = this;
-            androidx.appcompat.view.menu.MenuItemImpl r7 = (androidx.appcompat.view.menu.MenuItemImpl) r7
-            r0 = 0
-            if (r7 == 0) goto Ld2
-            boolean r1 = r7.isEnabled()
-            if (r1 != 0) goto Ld
-            goto Ld2
-        Ld:
-            android.view.MenuItem$OnMenuItemClickListener r1 = r7.mClickListener
-            r2 = 1
-            if (r1 == 0) goto L1a
-            boolean r1 = r1.onMenuItemClick(r7)
-            if (r1 == 0) goto L1a
-        L18:
-            r1 = r2
-            goto L43
-        L1a:
-            androidx.appcompat.view.menu.MenuBuilder r1 = r7.mMenu
-            boolean r1 = r1.dispatchMenuItemSelected(r1, r7)
-            if (r1 == 0) goto L23
-            goto L18
-        L23:
-            android.content.Intent r1 = r7.mIntent
-            if (r1 == 0) goto L37
-            androidx.appcompat.view.menu.MenuBuilder r3 = r7.mMenu     // Catch: android.content.ActivityNotFoundException -> L2f
-            android.content.Context r3 = r3.mContext     // Catch: android.content.ActivityNotFoundException -> L2f
-            r3.startActivity(r1)     // Catch: android.content.ActivityNotFoundException -> L2f
-            goto L18
-        L2f:
-            r1 = move-exception
-            java.lang.String r3 = "MenuItemImpl"
-            java.lang.String r4 = "Can't find activity to handle intent; ignoring"
-            android.util.Log.e(r3, r4, r1)
-        L37:
-            androidx.core.view.ActionProvider r1 = r7.mActionProvider
-            if (r1 == 0) goto L42
-            boolean r1 = r1.onPerformDefaultAction()
-            if (r1 == 0) goto L42
-            goto L18
-        L42:
-            r1 = r0
-        L43:
-            androidx.core.view.ActionProvider r3 = r7.mActionProvider
-            if (r3 == 0) goto L4f
-            boolean r4 = r3.hasSubMenu()
-            if (r4 == 0) goto L4f
-            r4 = r2
-            goto L50
-        L4f:
-            r4 = r0
-        L50:
-            boolean r5 = r7.hasCollapsibleActionView()
-            if (r5 == 0) goto L62
-            boolean r7 = r7.expandActionView()
-            r1 = r1 | r7
-            if (r1 == 0) goto Ld1
-            r6.close(r2)
-            goto Ld1
-        L62:
-            boolean r5 = r7.hasSubMenu()
-            if (r5 != 0) goto L73
-            if (r4 == 0) goto L6b
-            goto L73
-        L6b:
-            r7 = r9 & 1
-            if (r7 != 0) goto Ld1
-            r6.close(r2)
-            goto Ld1
-        L73:
-            r9 = r9 & 4
-            if (r9 != 0) goto L7a
-            r6.close(r0)
-        L7a:
-            boolean r9 = r7.hasSubMenu()
-            if (r9 != 0) goto L8e
-            androidx.appcompat.view.menu.SubMenuBuilder r9 = new androidx.appcompat.view.menu.SubMenuBuilder
-            android.content.Context r5 = r6.mContext
-            r9.<init>(r5, r6, r7)
-            r7.mSubMenu = r9
-            java.lang.CharSequence r5 = r7.mTitle
-            r9.setHeaderTitle(r5)
-        L8e:
-            androidx.appcompat.view.menu.SubMenuBuilder r7 = r7.mSubMenu
-            if (r4 == 0) goto L95
-            r3.onPrepareSubMenu(r7)
-        L95:
-            java.util.concurrent.CopyOnWriteArrayList r9 = r6.mPresenters
-            boolean r9 = r9.isEmpty()
-            if (r9 == 0) goto L9e
-            goto Lcb
-        L9e:
-            if (r8 == 0) goto La4
-            boolean r0 = r8.onSubMenuSelected(r7)
-        La4:
-            java.util.concurrent.CopyOnWriteArrayList r8 = r6.mPresenters
-            java.util.Iterator r8 = r8.iterator()
-        Laa:
-            boolean r9 = r8.hasNext()
-            if (r9 == 0) goto Lcb
-            java.lang.Object r9 = r8.next()
-            java.lang.ref.WeakReference r9 = (java.lang.ref.WeakReference) r9
-            java.lang.Object r3 = r9.get()
-            androidx.appcompat.view.menu.MenuPresenter r3 = (androidx.appcompat.view.menu.MenuPresenter) r3
-            if (r3 != 0) goto Lc4
-            java.util.concurrent.CopyOnWriteArrayList r3 = r6.mPresenters
-            r3.remove(r9)
-            goto Laa
-        Lc4:
-            if (r0 != 0) goto Laa
-            boolean r0 = r3.onSubMenuSelected(r7)
-            goto Laa
-        Lcb:
-            r1 = r1 | r0
-            if (r1 != 0) goto Ld1
-            r6.close(r2)
-        Ld1:
-            return r1
-        Ld2:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.view.menu.MenuBuilder.performItemAction(android.view.MenuItem, androidx.appcompat.view.menu.MenuPresenter, int):boolean");
+    public final boolean performItemAction(MenuItem menuItem, MenuPresenter menuPresenter, int i) {
+        boolean zExpandActionView;
+        MenuItemImpl menuItemImpl = (MenuItemImpl) menuItem;
+        if (menuItemImpl == null || !menuItemImpl.isEnabled()) {
+            return false;
+        }
+        MenuItem.OnMenuItemClickListener onMenuItemClickListener = menuItemImpl.mClickListener;
+        if (onMenuItemClickListener == null || !onMenuItemClickListener.onMenuItemClick(menuItemImpl)) {
+            MenuBuilder menuBuilder = menuItemImpl.mMenu;
+            if (!menuBuilder.dispatchMenuItemSelected(menuBuilder, menuItemImpl)) {
+                Intent intent = menuItemImpl.mIntent;
+                if (intent != null) {
+                    try {
+                        menuItemImpl.mMenu.mContext.startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        Log.e("MenuItemImpl", "Can't find activity to handle intent; ignoring", e);
+                    }
+                } else {
+                    ActionProvider actionProvider = menuItemImpl.mActionProvider;
+                    zExpandActionView = actionProvider != null && actionProvider.onPerformDefaultAction();
+                }
+            }
+        }
+        ActionProvider actionProvider2 = menuItemImpl.mActionProvider;
+        boolean z = actionProvider2 != null && actionProvider2.hasSubMenu();
+        if (menuItemImpl.hasCollapsibleActionView()) {
+            zExpandActionView |= menuItemImpl.expandActionView();
+            if (zExpandActionView) {
+                close(true);
+            }
+        } else if (menuItemImpl.hasSubMenu() || z) {
+            if ((i & 4) == 0) {
+                close(false);
+            }
+            if (!menuItemImpl.hasSubMenu()) {
+                SubMenuBuilder subMenuBuilder = new SubMenuBuilder(this.mContext, this, menuItemImpl);
+                menuItemImpl.mSubMenu = subMenuBuilder;
+                subMenuBuilder.setHeaderTitle(menuItemImpl.mTitle);
+            }
+            SubMenuBuilder subMenuBuilder2 = menuItemImpl.mSubMenu;
+            if (z) {
+                actionProvider2.onPrepareSubMenu(subMenuBuilder2);
+            }
+            if (!this.mPresenters.isEmpty()) {
+                zOnSubMenuSelected = menuPresenter != null ? menuPresenter.onSubMenuSelected(subMenuBuilder2) : false;
+                Iterator it = this.mPresenters.iterator();
+                while (it.hasNext()) {
+                    WeakReference weakReference = (WeakReference) it.next();
+                    MenuPresenter menuPresenter2 = (MenuPresenter) weakReference.get();
+                    if (menuPresenter2 == null) {
+                        this.mPresenters.remove(weakReference);
+                    } else if (!zOnSubMenuSelected) {
+                        zOnSubMenuSelected = menuPresenter2.onSubMenuSelected(subMenuBuilder2);
+                    }
+                }
+            }
+            zExpandActionView |= zOnSubMenuSelected;
+            if (!zExpandActionView) {
+                close(true);
+            }
+        } else if ((i & 1) == 0) {
+            close(true);
+        }
+        return zExpandActionView;
     }
 
     @Override // android.view.Menu
     public final boolean performShortcut(int i, KeyEvent keyEvent, int i2) {
-        MenuItemImpl findItemWithShortcutForKey = findItemWithShortcutForKey(i, keyEvent);
-        boolean performItemAction = findItemWithShortcutForKey != null ? performItemAction(findItemWithShortcutForKey, null, i2) : false;
+        MenuItemImpl menuItemImplFindItemWithShortcutForKey = findItemWithShortcutForKey(i, keyEvent);
+        boolean zPerformItemAction = menuItemImplFindItemWithShortcutForKey != null ? performItemAction(menuItemImplFindItemWithShortcutForKey, null, i2) : false;
         if ((i2 & 2) != 0) {
             close(true);
         }
-        return performItemAction;
+        return zPerformItemAction;
     }
 
     @Override // android.view.Menu
@@ -637,7 +576,7 @@ public class MenuBuilder implements SupportMenu {
     }
 
     public final void restoreActionViewStates(Bundle bundle) {
-        MenuItem findItem;
+        MenuItem menuItemFindItem;
         if (bundle == null) {
             return;
         }
@@ -654,10 +593,10 @@ public class MenuBuilder implements SupportMenu {
             }
         }
         int i2 = bundle.getInt("android:menu:expandedactionview");
-        if (i2 <= 0 || (findItem = findItem(i2)) == null) {
+        if (i2 <= 0 || (menuItemFindItem = findItem(i2)) == null) {
             return;
         }
-        findItem.expandActionView();
+        menuItemFindItem.expandActionView();
     }
 
     public final void saveActionViewStates(Bundle bundle) {
@@ -803,10 +742,10 @@ public class MenuBuilder implements SupportMenu {
 
     @Override // android.view.Menu
     public final SubMenu addSubMenu(int i, int i2, int i3, CharSequence charSequence) {
-        MenuItemImpl addInternal = addInternal(i, i2, i3, charSequence);
-        SubMenuBuilder subMenuBuilder = new SubMenuBuilder(this.mContext, this, addInternal);
-        addInternal.mSubMenu = subMenuBuilder;
-        subMenuBuilder.setHeaderTitle(addInternal.mTitle);
+        MenuItemImpl menuItemImplAddInternal = addInternal(i, i2, i3, charSequence);
+        SubMenuBuilder subMenuBuilder = new SubMenuBuilder(this.mContext, this, menuItemImplAddInternal);
+        menuItemImplAddInternal.mSubMenu = subMenuBuilder;
+        subMenuBuilder.setHeaderTitle(menuItemImplAddInternal.mTitle);
         return subMenuBuilder;
     }
 

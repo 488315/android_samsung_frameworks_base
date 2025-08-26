@@ -4,7 +4,6 @@ import com.samsung.android.knox.container.EnterpriseContainerConstants;
 import gov.nist.core.NameValue;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AuthenticationHeader extends ParametersHeader {
     protected String scheme;
@@ -22,7 +21,7 @@ public abstract class AuthenticationHeader extends ParametersHeader {
     }
 
     @Override // gov.nist.javax.sip.header.ParametersHeader
-    public final void setParameter(String str, String str2) {
+    public final void setParameter(String str, String str2) throws ParseException {
         NameValue nameValue = this.parameters.getNameValue(str.toLowerCase());
         if (nameValue != null) {
             nameValue.setValueAsObject(str2);

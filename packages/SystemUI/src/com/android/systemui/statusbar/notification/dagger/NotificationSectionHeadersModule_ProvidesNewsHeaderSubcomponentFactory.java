@@ -4,7 +4,6 @@ import android.R;
 import com.android.systemui.dagger.DaggerReferenceGlobalRootComponent;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationSectionHeadersModule_ProvidesNewsHeaderSubcomponentFactory implements Provider {
     public final Provider builderProvider;
@@ -18,7 +17,7 @@ public final class NotificationSectionHeadersModule_ProvidesNewsHeaderSubcompone
         DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentBuilder sectionHeaderControllerSubcomponentBuilder = (DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentBuilder) provider.get();
         sectionHeaderControllerSubcomponentBuilder.getClass();
         sectionHeaderControllerSubcomponentBuilder.nodeLabel = "news header";
-        sectionHeaderControllerSubcomponentBuilder.headerText = Integer.valueOf(R.string.sim_removed_title);
+        sectionHeaderControllerSubcomponentBuilder.headerText = Integer.valueOf(R.string.sipAddressTypeCustom);
         sectionHeaderControllerSubcomponentBuilder.clickIntentAction = "android.settings.NOTIFICATION_SETTINGS";
         return (DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentImpl) sectionHeaderControllerSubcomponentBuilder.build();
     }

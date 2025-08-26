@@ -1,6 +1,7 @@
 package com.android.systemui.communal.data.db;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Process;
 import android.util.Log;
@@ -12,13 +13,13 @@ import com.android.systemui.R;
 import com.android.systemui.communal.shared.model.GlanceableHubMultiUserHelperImpl;
 import com.android.systemui.communal.shared.model.SpanValue;
 import com.android.systemui.communal.shared.model.SpanValueKt;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class CommunalDatabase extends RoomDatabase {
     public static final Companion Companion = new Companion(null);
@@ -45,30 +46,29 @@ public abstract class CommunalDatabase extends RoomDatabase {
     };
     public static final CommunalDatabase$Companion$MIGRATION_4_5$1 MIGRATION_4_5 = new Migration() { // from class: com.android.systemui.communal.data.db.CommunalDatabase$Companion$MIGRATION_4_5$1
         @Override // androidx.room.migration.Migration
-        public final void migrate(SupportSQLiteDatabase supportSQLiteDatabase) {
+        public final void migrate(SupportSQLiteDatabase supportSQLiteDatabase) throws IOException {
             Log.i("CommunalDatabase", "Migrating from version 4 to 5");
             supportSQLiteDatabase.execSQL("ALTER TABLE communal_widget_table ADD COLUMN span_y_new INTEGER NOT NULL DEFAULT 1");
-            Cursor query = supportSQLiteDatabase.query();
-            while (query.moveToNext()) {
+            Cursor cursorQuery = supportSQLiteDatabase.query();
+            while (cursorQuery.moveToNext()) {
                 try {
-                    int i = query.getInt(query.getColumnIndex("item_id"));
-                    supportSQLiteDatabase.execSQL("UPDATE communal_widget_table SET span_y_new = " + SpanValueKt.toResponsive(SpanValue.Fixed.m1075boximpl(query.getInt(query.getColumnIndex("span_y")))) + " WHERE item_id = " + i);
+                    int i = cursorQuery.getInt(cursorQuery.getColumnIndex("item_id"));
+                    supportSQLiteDatabase.execSQL("UPDATE communal_widget_table SET span_y_new = " + SpanValueKt.toResponsive(SpanValue.Fixed.m1077boximpl(cursorQuery.getInt(cursorQuery.getColumnIndex("span_y")))) + " WHERE item_id = " + i);
                 } finally {
                 }
             }
             Unit unit = Unit.INSTANCE;
-            query.close();
+            cursorQuery.close();
         }
     };
     public static CommunalDatabase instance;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
-        public static CommunalDatabase getInstance(Context context, DefaultWidgetPopulation defaultWidgetPopulation) {
+        public static CommunalDatabase getInstance(Context context, DefaultWidgetPopulation defaultWidgetPopulation) throws Resources.NotFoundException {
             new GlanceableHubMultiUserHelperImpl(Process.myUserHandle());
             if (CommunalDatabase.instance == null) {
                 String string = context.getResources().getString(R.string.config_communalDatabase);

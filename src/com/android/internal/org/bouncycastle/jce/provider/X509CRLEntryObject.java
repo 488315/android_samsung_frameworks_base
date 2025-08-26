@@ -85,9 +85,9 @@ public class X509CRLEntryObject extends X509CRLEntry {
             return null;
         }
         HashSet hashSet = new HashSet();
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (z == extensions.getExtension(aSN1ObjectIdentifier).isCritical()) {
                 hashSet.add(aSN1ObjectIdentifier.getId());
             }
@@ -173,36 +173,36 @@ public class X509CRLEntryObject extends X509CRLEntry {
     @Override // java.security.cert.X509CRLEntry
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("      userCertificate: ");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(getSerialNumber()).append(lineSeparator);
-        stringBuffer.append("       revocationDate: ").append(getRevocationDate()).append(lineSeparator);
-        stringBuffer.append("       certificateIssuer: ").append(getCertificateIssuer()).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(getSerialNumber()).append(strLineSeparator);
+        stringBuffer.append("       revocationDate: ").append(getRevocationDate()).append(strLineSeparator);
+        stringBuffer.append("       certificateIssuer: ").append(getCertificateIssuer()).append(strLineSeparator);
         Extensions extensions = this.c.getExtensions();
         if (extensions != null) {
-            Enumeration oids = extensions.oids();
-            if (oids.hasMoreElements()) {
-                stringBuffer.append("   crlEntryExtensions:").append(lineSeparator);
-                while (oids.hasMoreElements()) {
-                    ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+            Enumeration enumerationOids = extensions.oids();
+            if (enumerationOids.hasMoreElements()) {
+                stringBuffer.append("   crlEntryExtensions:").append(strLineSeparator);
+                while (enumerationOids.hasMoreElements()) {
+                    ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
                     Extension extension = extensions.getExtension(aSN1ObjectIdentifier);
                     if (extension.getExtnValue() != null) {
                         ASN1InputStream aSN1InputStream = new ASN1InputStream(extension.getExtnValue().getOctets());
                         stringBuffer.append("                       critical(").append(extension.isCritical()).append(") ");
                         try {
                             if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.reasonCode)) {
-                                stringBuffer.append(CRLReason.getInstance(ASN1Enumerated.getInstance(aSN1InputStream.readObject()))).append(lineSeparator);
+                                stringBuffer.append(CRLReason.getInstance(ASN1Enumerated.getInstance(aSN1InputStream.readObject()))).append(strLineSeparator);
                             } else if (aSN1ObjectIdentifier.equals((ASN1Primitive) Extension.certificateIssuer)) {
-                                stringBuffer.append("Certificate issuer: ").append(GeneralNames.getInstance(aSN1InputStream.readObject())).append(lineSeparator);
+                                stringBuffer.append("Certificate issuer: ").append(GeneralNames.getInstance(aSN1InputStream.readObject())).append(strLineSeparator);
                             } else {
                                 stringBuffer.append(aSN1ObjectIdentifier.getId());
-                                stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(lineSeparator);
+                                stringBuffer.append(" value = ").append(ASN1Dump.dumpAsString(aSN1InputStream.readObject())).append(strLineSeparator);
                             }
                         } catch (Exception unused) {
                             stringBuffer.append(aSN1ObjectIdentifier.getId());
-                            stringBuffer.append(" value = *****").append(lineSeparator);
+                            stringBuffer.append(" value = *****").append(strLineSeparator);
                         }
                     } else {
-                        stringBuffer.append(lineSeparator);
+                        stringBuffer.append(strLineSeparator);
                     }
                 }
             }

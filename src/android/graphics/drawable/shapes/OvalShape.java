@@ -14,13 +14,13 @@ public class OvalShape extends RectShape {
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     public void getOutline(Outline outline) {
-        RectF rect = rect();
-        outline.setOval((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom));
+        RectF rectFRect = rect();
+        outline.setOval((int) Math.ceil(rectFRect.left), (int) Math.ceil(rectFRect.top), (int) Math.floor(rectFRect.right), (int) Math.floor(rectFRect.bottom));
     }
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     /* renamed from: clone */
-    public OvalShape mo1487clone() throws CloneNotSupportedException {
-        return (OvalShape) super.mo1487clone();
+    public OvalShape mo1491clone() throws CloneNotSupportedException {
+        return (OvalShape) super.mo1491clone();
     }
 }

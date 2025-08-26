@@ -56,9 +56,9 @@ public interface ISendMgmtFrameEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISendMgmtFrameEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISendMgmtFrameEvent)) {
-                return (ISendMgmtFrameEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISendMgmtFrameEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISendMgmtFrameEvent)) {
+                return (ISendMgmtFrameEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,13 +88,13 @@ public interface ISendMgmtFrameEvent extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                OnAck(readInt);
+                OnAck(i3);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                OnFailure(readInt2);
+                OnFailure(i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -119,25 +119,25 @@ public interface ISendMgmtFrameEvent extends IInterface {
 
             @Override // android.net.wifi.nl80211.ISendMgmtFrameEvent
             public void OnAck(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISendMgmtFrameEvent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISendMgmtFrameEvent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.ISendMgmtFrameEvent
             public void OnFailure(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISendMgmtFrameEvent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISendMgmtFrameEvent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

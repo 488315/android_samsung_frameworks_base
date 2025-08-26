@@ -47,8 +47,8 @@ public final class CreateCredentialResponse implements Parcelable {
     }
 
     private CreateCredentialResponse(Parcel parcel) {
-        Bundle readBundle = parcel.readBundle();
-        this.mData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        Bundle bundle = parcel.readBundle();
+        this.mData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 }

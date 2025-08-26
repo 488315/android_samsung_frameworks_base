@@ -138,10 +138,10 @@ public class ShapeDrawable extends Drawable {
                 z = true;
             }
             if (shapeState.mShape != null) {
-                int save = canvas.save();
+                int iSave = canvas.save();
                 canvas.translate(bounds.left, bounds.top);
                 onDraw(shapeState.mShape, canvas, paint);
-                canvas.restoreToCount(save);
+                canvas.restoreToCount(iSave);
             } else {
                 canvas.drawRect(bounds, paint);
             }
@@ -250,18 +250,18 @@ public class ShapeDrawable extends Drawable {
         if (!"padding".equals(str)) {
             return false;
         }
-        TypedArray obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.ShapeDrawablePadding);
-        setPadding(obtainAttributes.getDimensionPixelOffset(0, 0), obtainAttributes.getDimensionPixelOffset(1, 0), obtainAttributes.getDimensionPixelOffset(2, 0), obtainAttributes.getDimensionPixelOffset(3, 0));
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.ShapeDrawablePadding);
+        setPadding(typedArrayObtainAttributes.getDimensionPixelOffset(0, 0), typedArrayObtainAttributes.getDimensionPixelOffset(1, 0), typedArrayObtainAttributes.getDimensionPixelOffset(2, 0), typedArrayObtainAttributes.getDimensionPixelOffset(3, 0));
+        typedArrayObtainAttributes.recycle();
         return true;
     }
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ShapeDrawable);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ShapeDrawable);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         int depth = xmlPullParser.getDepth();
         while (true) {
             int next = xmlPullParser.next();
@@ -286,9 +286,9 @@ public class ShapeDrawable extends Drawable {
             return;
         }
         if (shapeState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(shapeState.mThemeAttrs, R.styleable.ShapeDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(shapeState.mThemeAttrs, R.styleable.ShapeDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         if (shapeState.mTint != null && shapeState.mTint.canApplyTheme()) {
             shapeState.mTint = shapeState.mTint.obtainForTheme(theme);
@@ -318,11 +318,11 @@ public class ShapeDrawable extends Drawable {
     private void updateShape() {
         if (this.mShapeState.mShape != null) {
             Rect bounds = getBounds();
-            int width = bounds.width();
-            int height = bounds.height();
-            this.mShapeState.mShape.resize(width, height);
+            int iWidth = bounds.width();
+            int iHeight = bounds.height();
+            this.mShapeState.mShape.resize(iWidth, iHeight);
             if (this.mShapeState.mShaderFactory != null) {
-                this.mShapeState.mPaint.setShader(this.mShapeState.mShaderFactory.resize(width, height));
+                this.mShapeState.mPaint.setShader(this.mShapeState.mShaderFactory.resize(iWidth, iHeight));
             }
         }
         invalidateSelf();
@@ -386,7 +386,7 @@ public class ShapeDrawable extends Drawable {
             Shape shape = shapeState.mShape;
             if (shape != null) {
                 try {
-                    this.mShape = shape.mo1487clone();
+                    this.mShape = shape.mo1491clone();
                 } catch (CloneNotSupportedException unused) {
                     this.mShape = shapeState.mShape;
                 }
@@ -411,6 +411,7 @@ public class ShapeDrawable extends Drawable {
             return colorStateList != null && colorStateList.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new ShapeDrawable(new ShapeState(this), null);

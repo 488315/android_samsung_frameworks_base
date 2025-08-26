@@ -53,20 +53,18 @@ public class EvaluableMap<T> implements Evaluator {
         return (T) this.data.keySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.evaluate.EvaluableMap$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean evaluate;
-                evaluate = ((Evaluator) obj).evaluate(v);
-                return evaluate;
+                return ((Evaluator) obj).evaluate(v);
             }
         }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.evaluate.EvaluableMap$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return EvaluableMap.this.m9535lambda$get$1$comsamsungandroidsumecoreevaluateEvaluableMap((Evaluator) obj);
+                return this.f$0.m9548lambda$get$1$comsamsungandroidsumecoreevaluateEvaluableMap((Evaluator) obj);
             }
         }).orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
     }
 
     /* renamed from: lambda$get$1$com-samsung-android-sume-core-evaluate-EvaluableMap, reason: not valid java name */
-    /* synthetic */ Object m9535lambda$get$1$comsamsungandroidsumecoreevaluateEvaluableMap(Evaluator evaluator) {
+    /* synthetic */ Object m9548lambda$get$1$comsamsungandroidsumecoreevaluateEvaluableMap(Evaluator evaluator) {
         return this.data.get(evaluator);
     }
 
@@ -74,20 +72,18 @@ public class EvaluableMap<T> implements Evaluator {
         return (T) this.data.keySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.evaluate.EvaluableMap$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean evaluate;
-                evaluate = ((Evaluator) obj).evaluate(v);
-                return evaluate;
+                return ((Evaluator) obj).evaluate(v);
             }
         }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.evaluate.EvaluableMap$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return EvaluableMap.this.m9536xaea5c52c((Evaluator) obj);
+                return this.f$0.m9549xaea5c52c((Evaluator) obj);
             }
         }).orElse(t);
     }
 
     /* renamed from: lambda$getOr$3$com-samsung-android-sume-core-evaluate-EvaluableMap, reason: not valid java name */
-    /* synthetic */ Object m9536xaea5c52c(Evaluator evaluator) {
+    /* synthetic */ Object m9549xaea5c52c(Evaluator evaluator) {
         return this.data.get(evaluator);
     }
 }

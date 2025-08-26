@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SharedNotificationContainerViewModel$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,9 +40,9 @@ public final class SharedNotificationContainerViewModel$special$$inlined$flatMap
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            SafeFlow combineTransform = FlowKt.combineTransform(((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.getShadeExpansion(), ((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.getQsExpansion(), new SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1((SharedNotificationContainerInteractor.ConfigurationBasedDimensions) this.L$1, null));
+            SafeFlow safeFlowCombineTransform = FlowKt.combineTransform(((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.getShadeExpansion(), ((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.getQsExpansion(), new SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1((SharedNotificationContainerInteractor.ConfigurationBasedDimensions) this.L$1, null));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combineTransform, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, safeFlowCombineTransform, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

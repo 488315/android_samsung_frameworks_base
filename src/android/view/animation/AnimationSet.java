@@ -32,27 +32,27 @@ public class AnimationSet extends Animation {
         this.mFlags = 0;
         this.mAnimations = new ArrayList<>();
         this.mTempTransformation = new Transformation();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AnimationSet);
-        setFlag(16, obtainStyledAttributes.getBoolean(1, true));
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AnimationSet);
+        setFlag(16, typedArrayObtainStyledAttributes.getBoolean(1, true));
         init();
         if (context.getApplicationInfo().targetSdkVersion >= 14) {
-            if (obtainStyledAttributes.hasValue(0)) {
+            if (typedArrayObtainStyledAttributes.hasValue(0)) {
                 this.mFlags |= 32;
             }
-            if (obtainStyledAttributes.hasValue(2)) {
+            if (typedArrayObtainStyledAttributes.hasValue(2)) {
                 this.mFlags = 2 | this.mFlags;
             }
-            if (obtainStyledAttributes.hasValue(3)) {
+            if (typedArrayObtainStyledAttributes.hasValue(3)) {
                 this.mFlags |= 1;
             }
-            if (obtainStyledAttributes.hasValue(5)) {
+            if (typedArrayObtainStyledAttributes.hasValue(5)) {
                 this.mFlags |= 4;
             }
-            if (obtainStyledAttributes.hasValue(4)) {
+            if (typedArrayObtainStyledAttributes.hasValue(4)) {
                 this.mFlags |= 8;
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public AnimationSet(boolean z) {
@@ -66,14 +66,14 @@ public class AnimationSet extends Animation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.animation.Animation
     /* renamed from: clone */
-    public AnimationSet mo6219clone() throws CloneNotSupportedException {
-        AnimationSet animationSet = (AnimationSet) super.mo6219clone();
+    public AnimationSet mo6227clone() throws CloneNotSupportedException {
+        AnimationSet animationSet = (AnimationSet) super.mo6227clone();
         animationSet.mTempTransformation = new Transformation();
         animationSet.mAnimations = new ArrayList<>();
         int size = this.mAnimations.size();
         ArrayList<Animation> arrayList = this.mAnimations;
         for (int i = 0; i < size; i++) {
-            animationSet.mAnimations.add(arrayList.get(i).mo6219clone());
+            animationSet.mAnimations.add(arrayList.get(i).mo6227clone());
         }
         return animationSet;
     }
@@ -157,9 +157,9 @@ public class AnimationSet extends Animation {
             this.mDuration = animation.getStartOffset() + animation.getDuration();
             this.mLastEnd = this.mStartOffset + this.mDuration;
         } else {
-            long max = Math.max(this.mLastEnd, this.mStartOffset + animation.getStartOffset() + animation.getDuration());
-            this.mLastEnd = max;
-            this.mDuration = max - this.mStartOffset;
+            long jMax = Math.max(this.mLastEnd, this.mStartOffset + animation.getStartOffset() + animation.getDuration());
+            this.mLastEnd = jMax;
+            this.mDuration = jMax - this.mStartOffset;
         }
         this.mDirty = true;
     }
@@ -178,11 +178,11 @@ public class AnimationSet extends Animation {
     public long getStartTime() {
         int size = this.mAnimations.size();
         ArrayList<Animation> arrayList = this.mAnimations;
-        long j = Long.MAX_VALUE;
+        long jMin = Long.MAX_VALUE;
         for (int i = 0; i < size; i++) {
-            j = Math.min(j, arrayList.get(i).getStartTime());
+            jMin = Math.min(jMin, arrayList.get(i).getStartTime());
         }
-        return j;
+        return jMin;
     }
 
     @Override // android.view.animation.Animation
@@ -202,11 +202,11 @@ public class AnimationSet extends Animation {
         if ((this.mFlags & 32) == 32) {
             return this.mDuration;
         }
-        long j = 0;
+        long jMax = 0;
         for (int i = 0; i < size; i++) {
-            j = Math.max(j, arrayList.get(i).getDuration());
+            jMax = Math.max(jMax, arrayList.get(i).getDuration());
         }
-        return j;
+        return jMax;
     }
 
     @Override // android.view.animation.Animation
@@ -215,9 +215,9 @@ public class AnimationSet extends Animation {
         ArrayList<Animation> arrayList = this.mAnimations;
         long j = 0;
         for (int i = size - 1; i >= 0; i--) {
-            long computeDurationHint = arrayList.get(i).computeDurationHint();
-            if (computeDurationHint > j) {
-                j = computeDurationHint;
+            long jComputeDurationHint = arrayList.get(i).computeDurationHint();
+            if (jComputeDurationHint > j) {
+                j = jComputeDurationHint;
             }
         }
         return j;
@@ -418,10 +418,10 @@ public class AnimationSet extends Animation {
     @Override // android.view.animation.Animation
     public int getExtensionEdges() {
         Iterator<Animation> it = this.mAnimations.iterator();
-        int i = 0;
+        int extensionEdges = 0;
         while (it.hasNext()) {
-            i |= it.next().getExtensionEdges();
+            extensionEdges |= it.next().getExtensionEdges();
         }
-        return i;
+        return extensionEdges;
     }
 }

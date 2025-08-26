@@ -36,7 +36,7 @@ public abstract class SprAttributeBase implements Cloneable {
 
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SprAttributeBase mo9221clone() throws CloneNotSupportedException {
+    public SprAttributeBase mo9233clone() throws CloneNotSupportedException {
         return (SprAttributeBase) super.clone();
     }
 }

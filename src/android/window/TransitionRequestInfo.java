@@ -205,21 +205,21 @@ public final class TransitionRequestInfo implements Parcelable {
             this.mEndRotation = -1;
             this.mPhysicalDisplayChanged = false;
             this.mDisconnectReparentDisplay = -1;
-            byte readByte = parcel.readByte();
-            boolean z = (readByte & 32) != 0;
-            int readInt = parcel.readInt();
-            Rect rect = (readByte & 2) == 0 ? null : (Rect) parcel.readTypedObject(Rect.CREATOR);
-            Rect rect2 = (readByte & 4) != 0 ? (Rect) parcel.readTypedObject(Rect.CREATOR) : null;
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            this.mDisplayId = readInt;
+            byte b = parcel.readByte();
+            boolean z = (b & 32) != 0;
+            int i = parcel.readInt();
+            Rect rect = (b & 2) == 0 ? null : (Rect) parcel.readTypedObject(Rect.CREATOR);
+            Rect rect2 = (b & 4) != 0 ? (Rect) parcel.readTypedObject(Rect.CREATOR) : null;
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            this.mDisplayId = i;
             this.mStartAbsBounds = rect;
             this.mEndAbsBounds = rect2;
-            this.mStartRotation = readInt2;
-            this.mEndRotation = readInt3;
+            this.mStartRotation = i2;
+            this.mEndRotation = i3;
             this.mPhysicalDisplayChanged = z;
-            this.mDisconnectReparentDisplay = readInt4;
+            this.mDisconnectReparentDisplay = i4;
         }
     }
 
@@ -397,21 +397,21 @@ public final class TransitionRequestInfo implements Parcelable {
     }
 
     TransitionRequestInfo(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        ActivityManager.RunningTaskInfo runningTaskInfo = (readByte & 2) == 0 ? null : (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-        PipChange pipChange = (readByte & 4) == 0 ? null : (PipChange) parcel.readTypedObject(PipChange.CREATOR);
-        RemoteTransition remoteTransition = (readByte & 8) == 0 ? null : (RemoteTransition) parcel.readTypedObject(RemoteTransition.CREATOR);
-        DisplayChange displayChange = (readByte & 16) == 0 ? null : (DisplayChange) parcel.readTypedObject(DisplayChange.CREATOR);
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        this.mType = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) WindowManager.TransitionType.class, (Annotation) null, readInt);
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        ActivityManager.RunningTaskInfo runningTaskInfo = (b & 2) == 0 ? null : (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+        PipChange pipChange = (b & 4) == 0 ? null : (PipChange) parcel.readTypedObject(PipChange.CREATOR);
+        RemoteTransition remoteTransition = (b & 8) == 0 ? null : (RemoteTransition) parcel.readTypedObject(RemoteTransition.CREATOR);
+        DisplayChange displayChange = (b & 16) == 0 ? null : (DisplayChange) parcel.readTypedObject(DisplayChange.CREATOR);
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        this.mType = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) WindowManager.TransitionType.class, (Annotation) null, i);
         this.mTriggerTask = runningTaskInfo;
         this.mPipChange = pipChange;
         this.mRemoteTransition = remoteTransition;
         this.mDisplayChange = displayChange;
-        this.mFlags = readInt2;
-        this.mDebugId = readInt3;
+        this.mFlags = i2;
+        this.mDebugId = i3;
     }
 }

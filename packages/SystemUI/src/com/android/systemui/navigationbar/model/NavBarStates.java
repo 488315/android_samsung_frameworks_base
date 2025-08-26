@@ -10,7 +10,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarStates {
     public boolean backVisible;
@@ -115,11 +114,11 @@ public final class NavBarStates {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.displaySize.hashCode() * 31, 31, this.canMove), 31, this.supportPhoneLayoutProvider);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.displaySize.hashCode() * 31, 31, this.canMove), 31, this.supportPhoneLayoutProvider);
         LayoutProvider layoutProvider = this.layoutProvider;
-        int m2 = ReorderTile$$ExternalSyntheticOutline0.m(this.lastTaskUserId, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.transitionMode, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.gestureDisablePolicy, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.iconHint, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.rotation, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.disable2, ReorderTile$$ExternalSyntheticOutline0.m(this.disable1, ReorderTile$$ExternalSyntheticOutline0.m(this.navigationMode, (m + (layoutProvider == null ? 0 : layoutProvider.hashCode())) * 31, 31), 31), 31), 31, this.darkMode), 31), 31, this.deviceProvisioned), 31, this.userSetupCompleteForCurrentUser), 31), 31, this.sPayShowing), 31), 31, this.recentVisible), 31, this.homeVisible), 31, this.backVisible), 31, this.hardKeyIntentPolicy), 31, this.imeDownButtonForAllRotation), 31), 31, this.regionSamplingEnabled), 31, this.displayChanged), 31, this.layoutChangedBeforeAttached), 31, this.supportCoverScreen), 31, this.supportLargeCoverScreen), 31);
+        int iM2 = ReorderTile$$ExternalSyntheticOutline0.m(this.lastTaskUserId, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.transitionMode, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.gestureDisablePolicy, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.iconHint, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.rotation, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.disable2, ReorderTile$$ExternalSyntheticOutline0.m(this.disable1, ReorderTile$$ExternalSyntheticOutline0.m(this.navigationMode, (iM + (layoutProvider == null ? 0 : layoutProvider.hashCode())) * 31, 31), 31), 31), 31, this.darkMode), 31), 31, this.deviceProvisioned), 31, this.userSetupCompleteForCurrentUser), 31), 31, this.sPayShowing), 31), 31, this.recentVisible), 31, this.homeVisible), 31, this.backVisible), 31, this.hardKeyIntentPolicy), 31, this.imeDownButtonForAllRotation), 31), 31, this.regionSamplingEnabled), 31, this.displayChanged), 31, this.layoutChangedBeforeAttached), 31, this.supportCoverScreen), 31, this.supportLargeCoverScreen), 31);
         Boolean bool = this.multiModalForLargeCover;
-        return m2 + (bool != null ? bool.hashCode() : 0);
+        return iM2 + (bool != null ? bool.hashCode() : 0);
     }
 
     public final String toString() {

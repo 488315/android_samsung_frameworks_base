@@ -40,7 +40,6 @@ import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ComposedDigitalLayerController implements SimpleClockLayerController {
     public final ComposedDigitalLayerController$animations$1 animations;
@@ -76,12 +75,12 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
         this.events = new ClockEvents() { // from class: com.android.systemui.shared.clocks.ComposedDigitalLayerController$events$1
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final boolean isReactiveTouchInteractionEnabled() {
-                return ComposedDigitalLayerController.this.view.isReactiveTouchInteractionEnabled;
+                return this.this$0.view.isReactiveTouchInteractionEnabled;
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onLocaleChanged(Locale locale) {
-                ComposedDigitalLayerController composedDigitalLayerController = ComposedDigitalLayerController.this;
+                ComposedDigitalLayerController composedDigitalLayerController = this.this$0;
                 ArrayList arrayList = (ArrayList) composedDigitalLayerController.layerControllers;
                 int size = arrayList.size();
                 int i = 0;
@@ -99,7 +98,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onTimeFormatChanged(boolean z) {
-                ComposedDigitalLayerController composedDigitalLayerController = ComposedDigitalLayerController.this;
+                ComposedDigitalLayerController composedDigitalLayerController = this.this$0;
                 ArrayList arrayList = (ArrayList) composedDigitalLayerController.layerControllers;
                 int size = arrayList.size();
                 int i = 0;
@@ -113,7 +112,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onTimeZoneChanged(TimeZone timeZone) {
-                ComposedDigitalLayerController composedDigitalLayerController = ComposedDigitalLayerController.this;
+                ComposedDigitalLayerController composedDigitalLayerController = this.this$0;
                 ArrayList arrayList = (ArrayList) composedDigitalLayerController.layerControllers;
                 int size = arrayList.size();
                 int i = 0;
@@ -127,7 +126,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void setReactiveTouchInteractionEnabled(boolean z) {
-                ComposedDigitalLayerController.this.view.isReactiveTouchInteractionEnabled = z;
+                this.this$0.view.isReactiveTouchInteractionEnabled = z;
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
@@ -148,7 +147,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
             /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.shared.clocks.view.FlexClockView$animateCharge$2$1$1] */
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void charge() {
-                final FlexClockView flexClockView2 = ComposedDigitalLayerController.this.view;
+                final FlexClockView flexClockView2 = this.this$0.view;
                 Iterator it = flexClockView2.getChildViews().iterator();
                 while (it.hasNext()) {
                     ((SimpleDigitalClockTextView) it.next()).animateCharge();
@@ -162,34 +161,34 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
                         ?? r9 = new Runnable() { // from class: com.android.systemui.shared.clocks.view.FlexClockView$animateCharge$2$1$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                boolean z2 = FlexClockView.this.isAnimationEnabled;
+                                boolean z2 = flexClockView2.isAnimationEnabled;
                                 Interpolator interpolator2 = Interpolators.EMPHASIZED;
                                 FlexClockView.Companion.getClass();
                                 long j2 = FlexClockView.CHARGING_TRANSITION_DURATION;
                                 int id = simpleDigitalClockTextView.getId();
-                                FlexClockView flexClockView3 = FlexClockView.this;
-                                DigitTranslateAnimator.m2932animatePositionWofAHi4$default(digitTranslateAnimator, z2, j2, interpolator2, FlexClockView.Companion.m2933updateDirectionalTargetTranslateNvxBqkk(id, flexClockView3.dozeFraction == 1.0f ? flexClockView3.aodTranslate : flexClockView3.lockscreenTranslate), null, 34);
+                                FlexClockView flexClockView3 = flexClockView2;
+                                DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z2, j2, interpolator2, FlexClockView.Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id, flexClockView3.dozeFraction == 1.0f ? flexClockView3.aodTranslate : flexClockView3.lockscreenTranslate), null, 34);
                             }
                         };
                         FlexClockView.Companion companion = FlexClockView.Companion;
                         int id = simpleDigitalClockTextView.getId();
                         long j2 = flexClockView2.dozeFraction == 1.0f ? flexClockView2.lockscreenTranslate : flexClockView2.aodTranslate;
                         companion.getClass();
-                        DigitTranslateAnimator.m2932animatePositionWofAHi4$default(digitTranslateAnimator, z, j, interpolator, FlexClockView.Companion.m2933updateDirectionalTargetTranslateNvxBqkk(id, j2), r9, 2);
+                        DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z, j, interpolator, FlexClockView.Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id, j2), r9, 2);
                     }
                 }
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void doze(float f) {
-                ComposedDigitalLayerController composedDigitalLayerController = ComposedDigitalLayerController.this;
-                Pair update = composedDigitalLayerController.dozeState.update(f);
-                boolean booleanValue = ((Boolean) update.component1()).booleanValue();
-                boolean booleanValue2 = ((Boolean) update.component2()).booleanValue();
+                ComposedDigitalLayerController composedDigitalLayerController = this.this$0;
+                Pair pairUpdate = composedDigitalLayerController.dozeState.update(f);
+                boolean zBooleanValue = ((Boolean) pairUpdate.component1()).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) pairUpdate.component2()).booleanValue();
                 FlexClockView flexClockView2 = composedDigitalLayerController.view;
-                if (booleanValue) {
+                if (zBooleanValue) {
                     boolean z = composedDigitalLayerController.dozeState.isActive;
-                    boolean z2 = !booleanValue2;
+                    boolean z2 = !zBooleanValue2;
                     if (flexClockView2.isDozeReadyToAnimate) {
                         FlexClockView.animateDoze$executeDozeAnimation(flexClockView2, z, z2);
                     } else {
@@ -206,19 +205,19 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void enter() {
-                ComposedDigitalLayerController.access$refreshTime(ComposedDigitalLayerController.this);
+                ComposedDigitalLayerController.access$refreshTime(this.this$0);
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void fold(float f) {
-                ComposedDigitalLayerController.access$refreshTime(ComposedDigitalLayerController.this);
+                ComposedDigitalLayerController.access$refreshTime(this.this$0);
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void onFidgetTap(float f, float f2) {
-                FlexClockView flexClockView2 = ComposedDigitalLayerController.this.view;
+                FlexClockView flexClockView2 = this.this$0.view;
                 flexClockView2.getClass();
-                final long m2731constructorimpl = VPointF.m2731constructorimpl(f, f2);
+                final long jM2749constructorimpl = VPointF.m2749constructorimpl(f, f2);
                 int i = 0;
                 final int[] iArr = {0, 0};
                 for (Object obj : CollectionsKt___CollectionsKt.sortedWith(flexClockView2.getChildViews(), new Comparator() { // from class: com.android.systemui.shared.clocks.view.FlexClockView$animateFidget$$inlined$sortedBy$1
@@ -227,16 +226,16 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
                         SimpleDigitalClockTextView simpleDigitalClockTextView = (SimpleDigitalClockTextView) obj2;
                         simpleDigitalClockTextView.getLocationInWindow(iArr);
                         int[] iArr2 = iArr;
-                        long m2685constructorimpl = VPoint.m2685constructorimpl(iArr2[0], iArr2[1]);
+                        long jM2703constructorimpl = VPoint.m2703constructorimpl(iArr2[0], iArr2[1]);
                         ViewUtils viewUtils = ViewUtils.INSTANCE;
                         viewUtils.getClass();
-                        Float valueOf = Float.valueOf(VPointF.m2747lengthimpl(VPointF.m2751minusb2IjXjg(VPoint.m2703plusb2IjXjg(m2685constructorimpl, VPointF.m2737divAsyRdg(VPointF.m2734constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()), 2.0f)), m2731constructorimpl)));
+                        Float fValueOf = Float.valueOf(VPointF.m2765lengthimpl(VPointF.m2769minusb2IjXjg(VPoint.m2721plusb2IjXjg(jM2703constructorimpl, VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()), 2.0f)), jM2749constructorimpl)));
                         SimpleDigitalClockTextView simpleDigitalClockTextView2 = (SimpleDigitalClockTextView) obj3;
                         simpleDigitalClockTextView2.getLocationInWindow(iArr);
                         int[] iArr3 = iArr;
-                        long m2685constructorimpl2 = VPoint.m2685constructorimpl(iArr3[0], iArr3[1]);
+                        long jM2703constructorimpl2 = VPoint.m2703constructorimpl(iArr3[0], iArr3[1]);
                         viewUtils.getClass();
-                        return ComparisonsKt__ComparisonsKt.compareValues(valueOf, Float.valueOf(VPointF.m2747lengthimpl(VPointF.m2751minusb2IjXjg(VPoint.m2703plusb2IjXjg(m2685constructorimpl2, VPointF.m2737divAsyRdg(VPointF.m2734constructorimpl(simpleDigitalClockTextView2.getMeasuredWidth(), simpleDigitalClockTextView2.getMeasuredHeight()), 2.0f)), m2731constructorimpl))));
+                        return ComparisonsKt__ComparisonsKt.compareValues(fValueOf, Float.valueOf(VPointF.m2765lengthimpl(VPointF.m2769minusb2IjXjg(VPoint.m2721plusb2IjXjg(jM2703constructorimpl2, VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(simpleDigitalClockTextView2.getMeasuredWidth(), simpleDigitalClockTextView2.getMeasuredHeight()), 2.0f)), jM2749constructorimpl))));
                     }
                 })) {
                     int i2 = i + 1;
@@ -251,7 +250,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void onFontAxesChanged(ClockAxisStyle clockAxisStyle) {
-                FlexClockView flexClockView2 = ComposedDigitalLayerController.this.view;
+                FlexClockView flexClockView2 = this.this$0.view;
                 boolean z = this.hasFontAxes;
                 Iterator it = flexClockView2.getChildViews().iterator();
                 while (it.hasNext()) {
@@ -276,7 +275,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
         this.faceEvents = new ClockFaceEvents() { // from class: com.android.systemui.shared.clocks.ComposedDigitalLayerController$faceEvents$1
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onFontSettingChanged(float f) {
-                Iterator it = ComposedDigitalLayerController.this.view.getChildViews().iterator();
+                Iterator it = this.this$0.view.getChildViews().iterator();
                 while (it.hasNext()) {
                     SimpleDigitalClockTextView.applyTextSize$default((SimpleDigitalClockTextView) it.next(), Float.valueOf(f));
                 }
@@ -284,7 +283,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onThemeChanged(ThemeConfig themeConfig) {
-                ComposedDigitalLayerController composedDigitalLayerController = ComposedDigitalLayerController.this;
+                ComposedDigitalLayerController composedDigitalLayerController = this.this$0;
                 FlexClockView flexClockView2 = composedDigitalLayerController.view;
                 int defaultColor = themeConfig.getDefaultColor(composedDigitalLayerController.clockCtx.context);
                 Iterator it = flexClockView2.getChildViews().iterator();
@@ -296,7 +295,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
 
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onTimeTick() {
-                ComposedDigitalLayerController.access$refreshTime(ComposedDigitalLayerController.this);
+                ComposedDigitalLayerController.access$refreshTime(this.this$0);
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents

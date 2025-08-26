@@ -93,9 +93,9 @@ public final class RampSegment extends VibrationEffectSegment {
     @Override // android.os.vibrator.VibrationEffectSegment
     public boolean areVibrationFeaturesSupported(VibratorInfo vibratorInfo) {
         float f = this.mStartFrequencyHz;
-        boolean hasFrequencyControl = (f != this.mEndFrequencyHz || frequencyRequiresFrequencyControl(f)) ? vibratorInfo.hasFrequencyControl() : true;
+        boolean zHasFrequencyControl = (f != this.mEndFrequencyHz || frequencyRequiresFrequencyControl(f)) ? vibratorInfo.hasFrequencyControl() : true;
         float f2 = this.mStartAmplitude;
-        return (f2 != this.mEndAmplitude || amplitudeRequiresAmplitudeControl(f2)) ? vibratorInfo.hasAmplitudeControl() & hasFrequencyControl : hasFrequencyControl;
+        return (f2 != this.mEndAmplitude || amplitudeRequiresAmplitudeControl(f2)) ? vibratorInfo.hasAmplitudeControl() & zHasFrequencyControl : zHasFrequencyControl;
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
@@ -109,16 +109,16 @@ public final class RampSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public RampSegment scale(float f) {
-        float scale = VibrationEffect.scale(this.mStartAmplitude, f);
-        float scale2 = VibrationEffect.scale(this.mEndAmplitude, f);
-        return (Float.compare(this.mStartAmplitude, scale) == 0 && Float.compare(this.mEndAmplitude, scale2) == 0) ? this : new RampSegment(scale, scale2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        float fScale = VibrationEffect.scale(this.mStartAmplitude, f);
+        float fScale2 = VibrationEffect.scale(this.mEndAmplitude, f);
+        return (Float.compare(this.mStartAmplitude, fScale) == 0 && Float.compare(this.mEndAmplitude, fScale2) == 0) ? this : new RampSegment(fScale, fScale2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public RampSegment scaleLinearly(float f) {
-        float scaleLinearly = VibrationEffect.scaleLinearly(this.mStartAmplitude, f);
-        float scaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndAmplitude, f);
-        return (Float.compare(this.mStartAmplitude, scaleLinearly) == 0 && Float.compare(this.mEndAmplitude, scaleLinearly2) == 0) ? this : new RampSegment(scaleLinearly, scaleLinearly2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        float fScaleLinearly = VibrationEffect.scaleLinearly(this.mStartAmplitude, f);
+        float fScaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndAmplitude, f);
+        return (Float.compare(this.mStartAmplitude, fScaleLinearly) == 0 && Float.compare(this.mEndAmplitude, fScaleLinearly2) == 0) ? this : new RampSegment(fScaleLinearly, fScaleLinearly2, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
     }
 
     public int hashCode() {
@@ -132,19 +132,19 @@ public final class RampSegment extends VibrationEffectSegment {
     @Override // android.os.vibrator.VibrationEffectSegment
     public String toDebugString() {
         String str;
-        Integer valueOf = Integer.valueOf(this.mDuration);
-        Float valueOf2 = Float.valueOf(this.mStartAmplitude);
+        Integer numValueOf = Integer.valueOf(this.mDuration);
+        Float fValueOf = Float.valueOf(this.mStartAmplitude);
         String str2 = "";
         if (Float.compare(this.mStartFrequencyHz, 0.0f) == 0) {
             str = "";
         } else {
             str = " @ " + this.mStartFrequencyHz + "Hz";
         }
-        Float valueOf3 = Float.valueOf(this.mEndAmplitude);
+        Float fValueOf2 = Float.valueOf(this.mEndAmplitude);
         if (Float.compare(this.mEndFrequencyHz, 0.0f) != 0) {
             str2 = " @ " + this.mEndFrequencyHz + "Hz";
         }
-        return String.format("Ramp=%dms(amplitude=%.2f%s to %.2f%s)", valueOf, valueOf2, str, valueOf3, str2);
+        return String.format("Ramp=%dms(amplitude=%.2f%s to %.2f%s)", numValueOf, fValueOf, str, fValueOf2, str2);
     }
 
     @Override // android.os.Parcelable

@@ -46,7 +46,6 @@ import java.util.Map;
 import javax.inject.Provider;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockStarManager implements SPluginListener, PluginLockStar.PluginLockStarCallback, Dumpable, DisplayLifecycle.Observer, WakefulnessLifecycle.Observer, StatusBarStateController.StateListener, ConfigurationController.ConfigurationListener {
     public final Context mContext;
@@ -106,14 +105,12 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
     public final AnonymousClass2 mObserver = new AnonymousClass2();
     public final LockStarPresenter mLockStarPresenter = new LockStarPresenter();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.lockstar.PluginLockStarManager$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface LockStarCallback {
         void onChangedLockStarData(boolean z);
 
@@ -157,9 +154,9 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "   SYSUI VERSION = 4002", "  mIsGoodLockInstalled = "), this.mIsGoodLockInstalled, printWriter, "  mRootView = ");
-        m.append(this.mRootView);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "   SYSUI VERSION = 4002", "  mIsGoodLockInstalled = "), this.mIsGoodLockInstalled, printWriter, "  mRootView = ");
+        sbM.append(this.mRootView);
+        printWriter.println(sbM.toString());
         if (this.mPluginLockStar == null) {
             return;
         }
@@ -222,13 +219,13 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
     @Override // com.samsung.systemui.splugins.lockstar.PluginLockStar.PluginLockStarCallback
     public final boolean isRunningNoNeedUnlockService(String str) {
         KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController;
-        ComponentName unflattenFromString;
-        if (TextUtils.isEmpty(str) || (keyguardSecBottomAreaViewController = this.mShortcutController.bottomAreaCallback) == null || (unflattenFromString = ComponentName.unflattenFromString(str)) == null) {
+        ComponentName componentNameUnflattenFromString;
+        if (TextUtils.isEmpty(str) || (keyguardSecBottomAreaViewController = this.mShortcutController.bottomAreaCallback) == null || (componentNameUnflattenFromString = ComponentName.unflattenFromString(str)) == null) {
             return false;
         }
-        boolean isNoUnlockNeed = keyguardSecBottomAreaViewController.isNoUnlockNeed(unflattenFromString.getPackageName());
-        Log.i("LockStarShortcutController", "isRunningNoNeedUnlockService: ret=" + isNoUnlockNeed + ", " + str);
-        return isNoUnlockNeed;
+        boolean zIsNoUnlockNeed = keyguardSecBottomAreaViewController.isNoUnlockNeed(componentNameUnflattenFromString.getPackageName());
+        Log.i("LockStarShortcutController", "isRunningNoNeedUnlockService: ret=" + zIsNoUnlockNeed + ", " + str);
+        return zIsNoUnlockNeed;
     }
 
     public final boolean isTouchable(MotionEvent motionEvent) {
@@ -252,8 +249,8 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
         }
         LockStarShortcutController lockStarShortcutController = this.mShortcutController;
         lockStarShortcutController.getClass();
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-        if (unflattenFromString == null) {
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+        if (componentNameUnflattenFromString == null) {
             return;
         }
         ArrayList arrayList = lockStarShortcutController.taskList;
@@ -267,7 +264,7 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
             obj = arrayList.get(i);
             i++;
             LockStarShortcutTask lockStarShortcutTask = (LockStarShortcutTask) obj;
-            if ("NoUnlockNeeded".equals(unflattenFromString.getPackageName()) && Intrinsics.areEqual(lockStarShortcutTask.getName(), unflattenFromString.getClassName())) {
+            if ("NoUnlockNeeded".equals(componentNameUnflattenFromString.getPackageName()) && Intrinsics.areEqual(lockStarShortcutTask.getName(), componentNameUnflattenFromString.getClassName())) {
                 break;
             }
         }
@@ -280,7 +277,7 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
         KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("launchShortcutApp: ", str, "LockStarShortcutController");
         KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = lockStarShortcutController.bottomAreaCallback;
         if (keyguardSecBottomAreaViewController != null) {
-            keyguardSecBottomAreaViewController.launchApp(unflattenFromString);
+            keyguardSecBottomAreaViewController.launchApp(componentNameUnflattenFromString);
         }
     }
 
@@ -298,13 +295,13 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onConfigChanged(Configuration configuration) {
-        int hashCode;
-        int hashCode2;
+        int iHashCode;
+        int iHashCode2;
         Context context = this.mPluginContext;
-        if (context == null || (hashCode = context.getResources().getConfiguration().hashCode()) == (hashCode2 = this.mContext.getResources().getConfiguration().hashCode())) {
+        if (context == null || (iHashCode = context.getResources().getConfiguration().hashCode()) == (iHashCode2 = this.mContext.getResources().getConfiguration().hashCode())) {
             return;
         }
-        Log.w("LStar|PluginLockStarManager", MutableVectorKt$$ExternalSyntheticOutline0.m(hashCode, hashCode2, "onConfigChanged: changed [", " -> ", "]"));
+        Log.w("LStar|PluginLockStarManager", MutableVectorKt$$ExternalSyntheticOutline0.m(iHashCode, iHashCode2, "onConfigChanged: changed [", " -> ", "]"));
         if (((SettingsHelper) this.mSettingsHelperProvider.get()).isLockScreenRotationAllowed()) {
             Log.w("LStar|PluginLockStarManager", "onConfigChanged: try plugin connect again");
             Log.d("LStar|PluginLockStarManager", "reconnectPlugin: ");
@@ -319,13 +316,13 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
 
     @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
     public final void onDozeAmountChanged(float f, float f2) {
-        Float valueOf = Float.valueOf(f2);
+        Float fValueOf = Float.valueOf(f2);
         PluginLockStar pluginLockStar = this.mPluginLockStar;
         if (pluginLockStar == null) {
             return;
         }
         try {
-            pluginLockStar.setDarkAmount(valueOf);
+            pluginLockStar.setDarkAmount(fValueOf);
         } catch (Throwable unused) {
         }
     }
@@ -511,9 +508,9 @@ public class PluginLockStarManager implements SPluginListener, PluginLockStar.Pl
         String string = bundle.getString("type", "");
         for (Map.Entry entry : MapUtilsKt.filterValuesNotNull(lockStarPresenter.callbackMap).entrySet()) {
             String str = (String) entry.getKey();
-            Bundle request = ((LockStarCallback) entry.getValue()).request(bundle);
+            Bundle bundleRequest = ((LockStarCallback) entry.getValue()).request(bundle);
             if (Intrinsics.areEqual(str, string)) {
-                return request;
+                return bundleRequest;
             }
         }
         return new Bundle();

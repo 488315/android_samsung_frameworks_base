@@ -30,7 +30,6 @@ import com.android.systemui.util.leak.RotationUtils;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FullscreenMagnificationController implements ComponentCallbacks {
     public static final boolean DEBUG = Log.isLoggable("FullscreenMagController", 3);
@@ -62,7 +61,6 @@ public class FullscreenMagnificationController implements ComponentCallbacks {
     public final Rect mWindowBounds;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.FullscreenMagnificationController$3, reason: invalid class name */
     public class AnonymousClass3 extends AnimatorListenerAdapter {
         public AnonymousClass3() {
@@ -74,7 +72,6 @@ public class FullscreenMagnificationController implements ComponentCallbacks {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.FullscreenMagnificationController$4, reason: invalid class name */
     public class AnonymousClass4 extends AnimatorListenerAdapter {
         public AnonymousClass4() {
@@ -131,11 +128,11 @@ public class FullscreenMagnificationController implements ComponentCallbacks {
         if (valueAnimator != null) {
             valueAnimator.cancel();
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f, 0.0f);
-        ofFloat.setInterpolator(new DecelerateInterpolator());
-        ofFloat.setDuration(this.mLongAnimationTimeMs);
-        ofFloat.addListener(new AnonymousClass4());
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f, 0.0f);
+        objectAnimatorOfFloat.setInterpolator(new DecelerateInterpolator());
+        objectAnimatorOfFloat.setDuration(this.mLongAnimationTimeMs);
+        objectAnimatorOfFloat.addListener(new AnonymousClass4());
+        return objectAnimatorOfFloat;
     }
 
     public ValueAnimator createShowTargetAnimator(View view) {
@@ -143,11 +140,11 @@ public class FullscreenMagnificationController implements ComponentCallbacks {
         if (valueAnimator != null) {
             valueAnimator.cancel();
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f, 1.0f);
-        ofFloat.setInterpolator(new AccelerateInterpolator());
-        ofFloat.setDuration(this.mLongAnimationTimeMs);
-        ofFloat.addListener(new AnonymousClass3());
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f, 1.0f);
+        objectAnimatorOfFloat.setInterpolator(new AccelerateInterpolator());
+        objectAnimatorOfFloat.setDuration(this.mLongAnimationTimeMs);
+        objectAnimatorOfFloat.addListener(new AnonymousClass3());
+        return objectAnimatorOfFloat;
     }
 
     public int getState() {
@@ -166,9 +163,9 @@ public class FullscreenMagnificationController implements ComponentCallbacks {
 
     @Override // android.content.ComponentCallbacks
     public final void onConfigurationChanged(Configuration configuration) {
-        int diff = configuration.diff(this.mConfiguration);
+        int iDiff = configuration.diff(this.mConfiguration);
         this.mConfiguration.setTo(configuration);
-        onConfigurationChanged(diff);
+        onConfigurationChanged(iDiff);
     }
 
     public final void setState(int i) {

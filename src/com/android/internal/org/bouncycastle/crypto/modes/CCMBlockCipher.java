@@ -93,13 +93,13 @@ public class CCMBlockCipher implements CCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processByte(byte b, byte[] bArr, int i) throws DataLengthException, IllegalStateException {
+    public int processByte(byte b, byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         this.data.write(b);
         return 0;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         if (bArr.length < i + i2) {
             throw new DataLengthException("Input buffer too short");
         }
@@ -108,10 +108,10 @@ public class CCMBlockCipher implements CCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] bArr, int i) throws IllegalStateException, InvalidCipherTextException {
-        int processPacket = processPacket(this.data.getBuffer(), 0, this.data.size(), bArr, i);
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, IllegalArgumentException, InvalidCipherTextException {
+        int iProcessPacket = processPacket(this.data.getBuffer(), 0, this.data.size(), bArr, i);
         reset();
-        return processPacket;
+        return iProcessPacket;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
@@ -142,7 +142,7 @@ public class CCMBlockCipher implements CCMModeCipher {
         return size - i2;
     }
 
-    public byte[] processPacket(byte[] bArr, int i, int i2) throws IllegalStateException, InvalidCipherTextException {
+    public byte[] processPacket(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException, InvalidCipherTextException {
         byte[] bArr2;
         if (this.forEncryption) {
             bArr2 = new byte[this.macSize + i2];
@@ -158,7 +158,7 @@ public class CCMBlockCipher implements CCMModeCipher {
         return bArr3;
     }
 
-    public int processPacket(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, InvalidCipherTextException, DataLengthException {
+    public int processPacket(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException, IllegalArgumentException, InvalidCipherTextException {
         int i4;
         if (this.keyParam == null) {
             throw new IllegalStateException("CCM cipher unitialized.");
@@ -172,8 +172,8 @@ public class CCMBlockCipher implements CCMModeCipher {
         byte[] bArr4 = new byte[this.blockSize];
         bArr4[0] = (byte) ((14 - length) & 7);
         System.arraycopy(bArr3, 0, bArr4, 1, bArr3.length);
-        CTRModeCipher newInstance = SICBlockCipher.newInstance(this.cipher);
-        newInstance.init(this.forEncryption, new ParametersWithIV(this.keyParam, bArr4));
+        CTRModeCipher cTRModeCipherNewInstance = SICBlockCipher.newInstance(this.cipher);
+        cTRModeCipherNewInstance.init(this.forEncryption, new ParametersWithIV(this.keyParam, bArr4));
         if (this.forEncryption) {
             int i6 = this.macSize + i2;
             if (bArr2.length < i6 + i3) {
@@ -181,14 +181,14 @@ public class CCMBlockCipher implements CCMModeCipher {
             }
             calculateMac(bArr, i, i2, this.macBlock);
             byte[] bArr5 = new byte[this.blockSize];
-            newInstance.processBlock(this.macBlock, 0, bArr5, 0);
+            cTRModeCipherNewInstance.processBlock(this.macBlock, 0, bArr5, 0);
             int i7 = i;
             int i8 = i3;
             while (true) {
                 int i9 = i + i2;
                 int i10 = this.blockSize;
                 if (i7 < i9 - i10) {
-                    newInstance.processBlock(bArr, i7, bArr2, i8);
+                    cTRModeCipherNewInstance.processBlock(bArr, i7, bArr2, i8);
                     int i11 = this.blockSize;
                     i8 += i11;
                     i7 += i11;
@@ -196,7 +196,7 @@ public class CCMBlockCipher implements CCMModeCipher {
                     byte[] bArr6 = new byte[i10];
                     int i12 = i9 - i7;
                     System.arraycopy(bArr, i7, bArr6, 0, i12);
-                    newInstance.processBlock(bArr6, 0, bArr6, 0);
+                    cTRModeCipherNewInstance.processBlock(bArr6, 0, bArr6, 0);
                     System.arraycopy(bArr6, 0, bArr2, i8, i12);
                     System.arraycopy(bArr5, 0, bArr2, i3 + i2, this.macSize);
                     return i6;
@@ -214,7 +214,7 @@ public class CCMBlockCipher implements CCMModeCipher {
             int i15 = i + i14;
             System.arraycopy(bArr, i15, this.macBlock, 0, i13);
             byte[] bArr7 = this.macBlock;
-            newInstance.processBlock(bArr7, 0, bArr7, 0);
+            cTRModeCipherNewInstance.processBlock(bArr7, 0, bArr7, 0);
             int i16 = this.macSize;
             while (true) {
                 byte[] bArr8 = this.macBlock;
@@ -231,7 +231,7 @@ public class CCMBlockCipher implements CCMModeCipher {
                 if (i17 >= i15 - i4) {
                     break;
                 }
-                newInstance.processBlock(bArr, i17, bArr2, i18);
+                cTRModeCipherNewInstance.processBlock(bArr, i17, bArr2, i18);
                 int i19 = this.blockSize;
                 i18 += i19;
                 i17 += i19;
@@ -239,7 +239,7 @@ public class CCMBlockCipher implements CCMModeCipher {
             byte[] bArr9 = new byte[i4];
             int i20 = i14 - (i17 - i);
             System.arraycopy(bArr, i17, bArr9, 0, i20);
-            newInstance.processBlock(bArr9, 0, bArr9, 0);
+            cTRModeCipherNewInstance.processBlock(bArr9, 0, bArr9, 0);
             System.arraycopy(bArr9, 0, bArr2, i18, i20);
             byte[] bArr10 = new byte[this.blockSize];
             calculateMac(bArr2, i3, i14, bArr10);
@@ -250,7 +250,7 @@ public class CCMBlockCipher implements CCMModeCipher {
         }
     }
 
-    private int calculateMac(byte[] bArr, int i, int i2, byte[] bArr2) {
+    private int calculateMac(byte[] bArr, int i, int i2, byte[] bArr2) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         CBCBlockCipherMac cBCBlockCipherMac = new CBCBlockCipherMac(this.cipher, this.macSize * 8);
         cBCBlockCipherMac.init(this.keyParam);
         byte[] bArr3 = new byte[16];

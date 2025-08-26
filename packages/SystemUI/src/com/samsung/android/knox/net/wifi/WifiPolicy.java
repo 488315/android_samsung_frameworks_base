@@ -13,7 +13,6 @@ import com.samsung.android.knox.net.wifi.IWifiPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WifiPolicy {
     public static final String ENGINE_ID_SECPKCS11 = "secpkcs11";

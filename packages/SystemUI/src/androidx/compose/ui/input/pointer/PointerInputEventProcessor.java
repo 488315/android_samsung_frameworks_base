@@ -7,7 +7,6 @@ import androidx.compose.ui.node.HitTestResult;
 import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.platform.AndroidComposeView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PointerInputEventProcessor {
     public final HitPathTracker hitPathTracker;
@@ -23,8 +22,8 @@ public final class PointerInputEventProcessor {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: process-BIzXfog, reason: not valid java name */
-    public final int m593processBIzXfog(PointerInputEvent pointerInputEvent, AndroidComposeView androidComposeView, boolean z) {
-        byte b;
+    public final int m595processBIzXfog(PointerInputEvent pointerInputEvent, AndroidComposeView androidComposeView, boolean z) {
+        Object[] objArr;
         HitPathTracker hitPathTracker;
         int i;
         HitTestResult hitTestResult = this.hitResult;
@@ -33,17 +32,17 @@ public final class PointerInputEventProcessor {
         }
         try {
             this.isProcessing = true;
-            InternalPointerEvent produce = this.pointerInputChangeEventProducer.produce(pointerInputEvent, androidComposeView);
-            LongSparseArray longSparseArray = produce.changes;
+            InternalPointerEvent internalPointerEventProduce = this.pointerInputChangeEventProducer.produce(pointerInputEvent, androidComposeView);
+            LongSparseArray longSparseArray = internalPointerEventProduce.changes;
             int size = longSparseArray.size();
             for (int i2 = 0; i2 < size; i2++) {
                 PointerInputChange pointerInputChange = (PointerInputChange) longSparseArray.valueAt(i2);
                 if (!pointerInputChange.pressed && !pointerInputChange.previousPressed) {
                 }
-                b = false;
+                objArr = false;
                 break;
             }
-            b = true;
+            objArr = true;
             int size2 = longSparseArray.size();
             int i3 = 0;
             while (true) {
@@ -52,35 +51,37 @@ public final class PointerInputEventProcessor {
                     break;
                 }
                 PointerInputChange pointerInputChange2 = (PointerInputChange) longSparseArray.valueAt(i3);
-                if (b != false || PointerEventKt.changedToDownIgnoreConsumed(pointerInputChange2)) {
+                if (objArr != false || PointerEventKt.changedToDownIgnoreConsumed(pointerInputChange2)) {
                     LayoutNode layoutNode = this.root;
                     long j = pointerInputChange2.position;
                     HitTestResult hitTestResult2 = this.hitResult;
                     int i4 = pointerInputChange2.type;
                     LayoutNode.Companion companion = LayoutNode.Companion;
-                    layoutNode.m640hitTest6fMxITs$ui_release(j, hitTestResult2, i4, true);
+                    layoutNode.m642hitTest6fMxITs$ui_release(j, hitTestResult2, i4, true);
                     if (!hitTestResult.values.isEmpty()) {
-                        hitPathTracker.m586addHitPathQJqDSyo(pointerInputChange2.id, hitTestResult, PointerEventKt.changedToDownIgnoreConsumed(pointerInputChange2));
+                        hitPathTracker.m588addHitPathQJqDSyo(pointerInputChange2.id, hitTestResult, PointerEventKt.changedToDownIgnoreConsumed(pointerInputChange2));
                         hitTestResult.clear();
                     }
                 }
                 i3++;
             }
-            boolean dispatchChanges = hitPathTracker.dispatchChanges(produce, z);
-            if (!produce.suppressMovementConsumption) {
+            boolean zDispatchChanges = hitPathTracker.dispatchChanges(internalPointerEventProduce, z);
+            if (internalPointerEventProduce.suppressMovementConsumption) {
+                i = 0;
+            } else {
                 int size3 = longSparseArray.size();
                 for (int i5 = 0; i5 < size3; i5++) {
                     PointerInputChange pointerInputChange3 = (PointerInputChange) longSparseArray.valueAt(i5);
-                    long positionChangeInternal = PointerEventKt.positionChangeInternal(pointerInputChange3, true);
+                    long jPositionChangeInternal = PointerEventKt.positionChangeInternal(pointerInputChange3, true);
                     Offset.Companion.getClass();
-                    if (!Offset.m396equalsimpl0(positionChangeInternal, 0L) && pointerInputChange3.isConsumed()) {
+                    if (!Offset.m398equalsimpl0(jPositionChangeInternal, 0L) && pointerInputChange3.isConsumed()) {
                         i = 1;
                         break;
                     }
                 }
+                i = 0;
             }
-            i = 0;
-            int i6 = (i << 1) | (dispatchChanges ? 1 : 0);
+            int i6 = (i << 1) | (zDispatchChanges ? 1 : 0);
             this.isProcessing = false;
             return i6;
         } catch (Throwable th) {

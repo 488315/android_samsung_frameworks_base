@@ -27,7 +27,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopMinimizationTransitionHandler implements Transitions.TransitionHandler {
     public static final Companion Companion = new Companion(null);
@@ -36,7 +35,6 @@ public final class DesktopMinimizationTransitionHandler implements Transitions.T
     public final DisplayController displayController;
     public final ShellExecutor mainExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -60,15 +58,16 @@ public final class DesktopMinimizationTransitionHandler implements Transitions.T
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, final Transitions.TransitionFinishCallback transitionFinishCallback) {
+        ActivityManager.RunningTaskInfo taskInfo;
         if (TransitionUtil.isClosingType(transitionInfo.getType()) || transitionInfo.getType() == 1020) {
             final ArrayList arrayList = new ArrayList();
             Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopMinimizationTransitionHandler$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     final List list = arrayList;
                     final Animator animator = (Animator) obj;
-                    ShellExecutor shellExecutor = DesktopMinimizationTransitionHandler.this.mainExecutor;
+                    ShellExecutor shellExecutor = this.f$0.mainExecutor;
                     final Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     shellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopMinimizationTransitionHandler$startAnimation$onAnimFinish$1$1
                         @Override // java.lang.Runnable
@@ -88,8 +87,8 @@ public final class DesktopMinimizationTransitionHandler implements Transitions.T
                 TransitionInfo.Change change = (TransitionInfo.Change) obj;
                 change.getClass();
                 if (change.getMode() == transitionInfo.getType() || (transitionInfo.getType() == 1020 && change.getMode() == 4)) {
-                    ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
-                    if (taskInfo != null && taskInfo.getWindowingMode() == 5) {
+                    ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
+                    if ((taskInfo2 != null && taskInfo2.getWindowingMode() == 5) || ((taskInfo = change.getTaskInfo()) != null && taskInfo.getWindowingMode() == 1)) {
                         arrayList2.add(obj);
                     }
                 }
@@ -98,36 +97,36 @@ public final class DesktopMinimizationTransitionHandler implements Transitions.T
             int size = arrayList2.size();
             int i = 0;
             while (i < size) {
-                Object obj2 = arrayList2.get(i);
-                i++;
-                TransitionInfo.Change change2 = (TransitionInfo.Change) obj2;
+                int i2 = i + 1;
+                TransitionInfo.Change change2 = (TransitionInfo.Change) arrayList2.get(i);
                 change2.getClass();
                 SurfaceControl.Transaction transaction3 = new SurfaceControl.Transaction();
                 transaction2.hide(change2.getLeash());
-                ActivityManager.RunningTaskInfo taskInfo2 = change2.getTaskInfo();
-                Animator animator = null;
-                Context displayContext = taskInfo2 != null ? this.displayController.getDisplayContext(taskInfo2.displayId) : null;
+                ActivityManager.RunningTaskInfo taskInfo3 = change2.getTaskInfo();
+                Animator animatorCreate = null;
+                Context displayContext = taskInfo3 != null ? this.displayController.getDisplayContext(taskInfo3.displayId) : null;
                 if (displayContext == null) {
-                    ActivityManager.RunningTaskInfo taskInfo3 = change2.getTaskInfo();
-                    Integer valueOf = taskInfo3 != null ? Integer.valueOf(taskInfo3.taskId) : null;
                     ActivityManager.RunningTaskInfo taskInfo4 = change2.getTaskInfo();
-                    String str = "displayContext is null for taskId=" + valueOf + ", displayId=" + (taskInfo4 != null ? Integer.valueOf(taskInfo4.displayId) : null);
+                    Integer numValueOf = taskInfo4 != null ? Integer.valueOf(taskInfo4.taskId) : null;
+                    ActivityManager.RunningTaskInfo taskInfo5 = change2.getTaskInfo();
+                    String str = "displayContext is null for taskId=" + numValueOf + ", displayId=" + (taskInfo5 != null ? Integer.valueOf(taskInfo5.displayId) : null);
                     Companion.getClass();
                     ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-                    String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-                    SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMinimizationTransitionHandler", new Object[0]);
-                    ProtoLog.w(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+                    String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+                    SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMinimizationTransitionHandler", new Object[0]);
+                    ProtoLog.w(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
                 } else {
-                    animator = MinimizeAnimator.create(displayContext, change2, transaction3, function1, InteractionJankMonitor.getInstance(), this.animHandler);
+                    animatorCreate = MinimizeAnimator.create(displayContext, change2, transaction3, function1, InteractionJankMonitor.getInstance(), this.animHandler);
                 }
-                if (animator != null) {
-                    arrayList3.add(animator);
+                if (animatorCreate != null) {
+                    arrayList3.add(animatorCreate);
                 }
+                i = i2;
             }
             CollectionsKt__MutableCollectionsKt.addAll(arrayList3, arrayList);
             if (!arrayList.isEmpty()) {
                 transaction.apply();
-                this.animExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopMinimizationTransitionHandler$startAnimation$3
+                this.animExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopMinimizationTransitionHandler.startAnimation.3
                     @Override // java.lang.Runnable
                     public final void run() {
                         Iterator it = arrayList.iterator();

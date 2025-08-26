@@ -3,13 +3,11 @@ package kotlin;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.CharsKt__CharJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ULong implements Comparable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final long data;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,17 +26,17 @@ public final class ULong implements Comparable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ULong m3426boximpl(long j) {
+    public static final /* synthetic */ ULong m3446boximpl(long j) {
         return new ULong(j);
     }
 
     /* renamed from: equals-impl0, reason: not valid java name */
-    public static final boolean m3427equalsimpl0(long j, long j2) {
+    public static final boolean m3447equalsimpl0(long j, long j2) {
         return j == j2;
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m3428toStringimpl(long j) {
+    public static String m3448toStringimpl(long j) {
         if (j >= 0) {
             CharsKt__CharJVMKt.checkRadix(10);
             return Long.toString(j, 10);
@@ -78,6 +76,6 @@ public final class ULong implements Comparable {
     }
 
     public final String toString() {
-        return m3428toStringimpl(this.data);
+        return m3448toStringimpl(this.data);
     }
 }

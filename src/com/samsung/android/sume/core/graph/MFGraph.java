@@ -52,7 +52,7 @@ public class MFGraph extends GraphBase<MediaFilter> {
         list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MFGraph.this.m9584lambda$new$0$comsamsungandroidsumecoregraphMFGraph(bufferChannel, arrayList, bufferChannel2, arrayList2, option, (GraphNode) obj);
+                this.f$0.m9597lambda$new$0$comsamsungandroidsumecoregraphMFGraph(bufferChannel, arrayList, bufferChannel2, arrayList2, option, (GraphNode) obj);
             }
         });
         Def.check(arrayList.isEmpty() ^ true, "no input node given", new Object[0]);
@@ -61,7 +61,7 @@ public class MFGraph extends GraphBase<MediaFilter> {
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
-    /* synthetic */ void m9584lambda$new$0$comsamsungandroidsumecoregraphMFGraph(BufferChannel bufferChannel, List list, BufferChannel bufferChannel2, List list2, Graph.Option option, GraphNode graphNode) {
+    /* synthetic */ void m9597lambda$new$0$comsamsungandroidsumecoregraphMFGraph(BufferChannel bufferChannel, List list, BufferChannel bufferChannel2, List list2, Graph.Option option, GraphNode graphNode) {
         if (!graphNode.hasInputEdge()) {
             graphNode.addInputEdge(new GraphEdge(bufferChannel));
             list.add(graphNode);
@@ -86,7 +86,7 @@ public class MFGraph extends GraphBase<MediaFilter> {
             list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    MFGraph.this.m9585lambda$run$1$comsamsungandroidsumecoregraphMFGraph((MediaBuffer) obj);
+                    this.f$0.m9598lambda$run$1$comsamsungandroidsumecoregraphMFGraph((MediaBuffer) obj);
                 }
             });
         }
@@ -94,8 +94,8 @@ public class MFGraph extends GraphBase<MediaFilter> {
             final DiskCache diskCache = (DiskCache) this.option.get(1);
             list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    MFGraph.lambda$run$2(DiskCache.this, (MediaBuffer) obj);
+                public final void accept(Object obj) throws IllegalArgumentException {
+                    MFGraph.lambda$run$2(diskCache, (MediaBuffer) obj);
                 }
             });
             this.messagePublisher.sendMessage(Event.of(6, new HashMap<String, Object>(diskCache) { // from class: com.samsung.android.sume.core.graph.MFGraph.1
@@ -112,14 +112,14 @@ public class MFGraph extends GraphBase<MediaFilter> {
             List list3 = (List) IntStream.range(0, list2.size()).mapToObj(new IntFunction() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda2
                 @Override // java.util.function.IntFunction
                 public final Object apply(int i) {
-                    return MFGraph.this.m9586lambda$run$3$comsamsungandroidsumecoregraphMFGraph(list, list2, i);
+                    return this.f$0.m9599lambda$run$3$comsamsungandroidsumecoregraphMFGraph(list, list2, i);
                 }
             }).collect(Collectors.toList());
             list.clear();
             list2.clear();
             list.addAll(list3);
         } else if (list.size() == list2.size()) {
-            Stream<Integer> boxed = IntStream.range(0, list2.size()).boxed();
+            Stream<Integer> streamBoxed = IntStream.range(0, list2.size()).boxed();
             Function function = new Function() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda3
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
@@ -127,7 +127,7 @@ public class MFGraph extends GraphBase<MediaFilter> {
                 }
             };
             Objects.requireNonNull(list2);
-            Map<? extends Integer, ? extends MediaBuffer> map = (Map) boxed.collect(Collectors.toMap(function, new Function() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda4
+            Map<? extends Integer, ? extends MediaBuffer> map = (Map) streamBoxed.collect(Collectors.toMap(function, new Function() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda4
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     return (MediaBuffer) list2.get(((Integer) obj).intValue());
@@ -154,11 +154,11 @@ public class MFGraph extends GraphBase<MediaFilter> {
     }
 
     /* renamed from: lambda$run$1$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
-    /* synthetic */ void m9585lambda$run$1$comsamsungandroidsumecoregraphMFGraph(MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9598lambda$run$1$comsamsungandroidsumecoregraphMFGraph(MediaBuffer mediaBuffer) {
         mediaBuffer.setExtra(Message.KEY_END_TIME_US, Long.valueOf(this.option.getMaxDuration(TimeUnit.MICROSECONDS)));
     }
 
-    static /* synthetic */ void lambda$run$2(DiskCache diskCache, MediaBuffer mediaBuffer) {
+    static /* synthetic */ void lambda$run$2(DiskCache diskCache, MediaBuffer mediaBuffer) throws IllegalArgumentException {
         File file;
         try {
             if (mediaBuffer.containsExtra(Message.KEY_CACHE_ID) && (file = diskCache.get(KeyGenerator.getSimpleKey((String) mediaBuffer.getExtra(Message.KEY_CACHE_ID)))) != null && file.exists()) {
@@ -173,10 +173,10 @@ public class MFGraph extends GraphBase<MediaFilter> {
     }
 
     /* renamed from: lambda$run$3$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9586lambda$run$3$comsamsungandroidsumecoregraphMFGraph(List list, List list2, int i) {
+    /* synthetic */ MediaBuffer m9599lambda$run$3$comsamsungandroidsumecoregraphMFGraph(List list, List list2, int i) {
         MediaBuffer mediaBuffer = (MediaBuffer) list.get(i);
         MediaBuffer mediaBuffer2 = (MediaBuffer) list2.get(i);
-        MediaBuffer groupOf = MediaBuffer.groupOf(new ArrayList<MediaBuffer>(mediaBuffer, mediaBuffer2) { // from class: com.samsung.android.sume.core.graph.MFGraph.2
+        MediaBuffer mediaBufferGroupOf = MediaBuffer.groupOf(new ArrayList<MediaBuffer>(mediaBuffer, mediaBuffer2) { // from class: com.samsung.android.sume.core.graph.MFGraph.2
             final /* synthetic */ MediaBuffer val$inBuffer;
             final /* synthetic */ MediaBuffer val$outBuffer;
 
@@ -188,16 +188,16 @@ public class MFGraph extends GraphBase<MediaFilter> {
             }
         });
         if (mediaBuffer.containsExtra(Message.KEY_CONTENTS_ID)) {
-            groupOf.setExtra(Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
+            mediaBufferGroupOf.setExtra(Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
         }
         if (mediaBuffer.containsExtra(Message.KEY_IN_FILE)) {
-            groupOf.setExtra(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
+            mediaBufferGroupOf.setExtra(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
         }
         if (mediaBuffer2.containsExtra(Message.KEY_OUT_FILE)) {
-            groupOf.setExtra(Message.KEY_OUT_FILE, mediaBuffer2.getExtra(Message.KEY_OUT_FILE));
+            mediaBufferGroupOf.setExtra(Message.KEY_OUT_FILE, mediaBuffer2.getExtra(Message.KEY_OUT_FILE));
         }
-        groupOf.setFlags(1);
-        return groupOf;
+        mediaBufferGroupOf.setFlags(1);
+        return mediaBufferGroupOf;
     }
 
     static /* synthetic */ Integer lambda$run$4(List list, Integer num) {
@@ -281,25 +281,25 @@ public class MFGraph extends GraphBase<MediaFilter> {
 
         @Override // com.samsung.android.sume.core.graph.GraphBuilder
         public GraphBuilder<MediaFilter> addNode(GraphNode<? extends MediaFilter> graphNode, GraphNode<? extends MediaFilter> graphNode2, Evaluator evaluator, BufferChannelDescriptor bufferChannelDescriptor) {
-            BufferChannel bufferChannel;
+            BufferChannel bufferChannelOf;
             int type = bufferChannelDescriptor.getType();
             if (type == 0) {
-                bufferChannel = this.bufferChannelSupplier.get();
+                bufferChannelOf = this.bufferChannelSupplier.get();
             } else if (type == 1) {
                 BufferSupplyChannel bufferSupplyChannel = new BufferSupplyChannel(this.bufferChannelSupplier.get());
                 MediaFilter mediaFilter = graphNode2.get();
                 Def.require(mediaFilter instanceof BufferSupplier);
                 bufferSupplyChannel.configure(((BufferSupplier) mediaFilter).getBufferSupplier());
-                bufferChannel = bufferSupplyChannel;
+                bufferChannelOf = bufferSupplyChannel;
             } else if (type == 2 || type == 3 || type == 4) {
-                bufferChannel = SurfaceChannel.of(bufferChannelDescriptor.getType(), this.bufferChannelSupplier.get());
+                bufferChannelOf = SurfaceChannel.of(bufferChannelDescriptor.getType(), this.bufferChannelSupplier.get());
             } else {
                 throw new IllegalArgumentException("unknown BufferChannel.Type given: " + bufferChannelDescriptor);
             }
             if (bufferChannelDescriptor.getCapacity() != 0) {
-                bufferChannel.setCapacity(bufferChannelDescriptor.getCapacity());
+                bufferChannelOf.setCapacity(bufferChannelDescriptor.getCapacity());
             }
-            GraphEdge graphEdge = new GraphEdge(bufferChannel, evaluator);
+            GraphEdge graphEdge = new GraphEdge(bufferChannelOf, evaluator);
             graphEdge.setNode(graphNode.getNodeId(), graphNode2.getNodeId());
             graphNode.addOutputEdge(graphEdge);
             graphNode2.addInputEdge(graphEdge);

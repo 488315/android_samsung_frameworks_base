@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.Color;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColorScheme {
     public final long background;
@@ -60,7 +59,7 @@ public final class ColorScheme {
     }
 
     /* renamed from: copy-C-Xl9yA$default, reason: not valid java name */
-    public static ColorScheme m256copyCXl9yA$default(ColorScheme colorScheme, long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, long j11, int i) {
+    public static ColorScheme m257copyCXl9yA$default(ColorScheme colorScheme, long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, long j11, int i) {
         long j12 = (i & 1) != 0 ? colorScheme.primary : j;
         long j13 = colorScheme.onPrimary;
         long j14 = colorScheme.primaryContainer;
@@ -138,7 +137,7 @@ public final class ColorScheme {
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.surfaceContainerHigh, "surfaceContainerHighest=", sb);
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.surfaceContainerHighest, "surfaceContainerLow=", sb);
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.surfaceContainerLow, "surfaceContainerLowest=", sb);
-        sb.append((Object) Color.m462toStringimpl(this.surfaceContainerLowest));
+        sb.append((Object) Color.m464toStringimpl(this.surfaceContainerLowest));
         sb.append(')');
         return sb.toString();
     }
@@ -187,62 +186,16 @@ public final class ColorScheme {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private ColorScheme(long r76, long r78, long r80, long r82, long r84, long r86, long r88, long r90, long r92, long r94, long r96, long r98, long r100, long r102, long r104, long r106, long r108, long r110, long r112, long r114, long r116, long r118, long r120, long r122, long r124, long r126, long r128, long r130, long r132) {
-        /*
-            r75 = this;
-            androidx.compose.ui.graphics.Color$Companion r0 = androidx.compose.ui.graphics.Color.Companion
-            r0.getClass()
-            long r60 = androidx.compose.ui.graphics.Color.Unspecified
-            r0.getClass()
-            r0.getClass()
-            r0.getClass()
-            r0.getClass()
-            r0.getClass()
-            r0.getClass()
-            r74 = 0
-            r62 = r60
-            r64 = r60
-            r66 = r60
-            r68 = r60
-            r70 = r60
-            r72 = r60
-            r1 = r75
-            r2 = r76
-            r4 = r78
-            r6 = r80
-            r8 = r82
-            r10 = r84
-            r12 = r86
-            r14 = r88
-            r16 = r90
-            r18 = r92
-            r20 = r94
-            r22 = r96
-            r24 = r98
-            r26 = r100
-            r28 = r102
-            r30 = r104
-            r32 = r106
-            r34 = r108
-            r36 = r110
-            r38 = r112
-            r40 = r114
-            r42 = r116
-            r44 = r118
-            r46 = r120
-            r48 = r122
-            r50 = r124
-            r52 = r126
-            r54 = r128
-            r56 = r130
-            r58 = r132
-            r1.<init>(r2, r4, r6, r8, r10, r12, r14, r16, r18, r20, r22, r24, r26, r28, r30, r32, r34, r36, r38, r40, r42, r44, r46, r48, r50, r52, r54, r56, r58, r60, r62, r64, r66, r68, r70, r72, r74)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.ColorScheme.<init>(long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long):void");
+    private ColorScheme(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, long j11, long j12, long j13, long j14, long j15, long j16, long j17, long j18, long j19, long j20, long j21, long j22, long j23, long j24, long j25, long j26, long j27, long j28, long j29) {
+        Color.Companion companion = Color.Companion;
+        companion.getClass();
+        long j30 = Color.Unspecified;
+        companion.getClass();
+        companion.getClass();
+        companion.getClass();
+        companion.getClass();
+        companion.getClass();
+        companion.getClass();
+        this(j, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26, j27, j28, j29, j30, j30, j30, j30, j30, j30, j30, null);
     }
 }

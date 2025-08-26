@@ -32,10 +32,10 @@ public class Contrast {
     }
 
     public static float contrastYs(float f, float f2) {
-        float max = Math.max(f, f2);
-        if (max == f) {
+        float fMax = Math.max(f, f2);
+        if (fMax == f) {
             f = f2;
         }
-        return (max + 5.0f) / (f + 5.0f);
+        return (fMax + 5.0f) / (f + 5.0f);
     }
 }

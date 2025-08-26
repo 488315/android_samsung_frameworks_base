@@ -243,8 +243,8 @@ public final class JobWorkItem implements Parcelable {
         } else {
             this.mIntent = null;
         }
-        PersistableBundle readPersistableBundle = parcel.readPersistableBundle();
-        this.mExtras = readPersistableBundle == null ? PersistableBundle.EMPTY : readPersistableBundle;
+        PersistableBundle persistableBundle = parcel.readPersistableBundle();
+        this.mExtras = persistableBundle == null ? PersistableBundle.EMPTY : persistableBundle;
         this.mNetworkDownloadBytes = parcel.readLong();
         this.mNetworkUploadBytes = parcel.readLong();
         this.mMinimumChunkBytes = parcel.readLong();

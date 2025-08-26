@@ -14,17 +14,15 @@ public class BCJcaJceHelper extends ProviderJcaJceHelper {
     private static volatile Provider bcProvider;
 
     private static synchronized Provider getBouncyCastleProvider() {
-        synchronized (BCJcaJceHelper.class) {
-            Provider provider = Security.getProvider(BouncyCastleProvider.PROVIDER_NAME);
-            if (provider instanceof BouncyCastleProvider) {
-                return provider;
-            }
-            if (bcProvider != null) {
-                return bcProvider;
-            }
-            bcProvider = new BouncyCastleProvider();
+        Provider provider = Security.getProvider(BouncyCastleProvider.PROVIDER_NAME);
+        if (provider instanceof BouncyCastleProvider) {
+            return provider;
+        }
+        if (bcProvider != null) {
             return bcProvider;
         }
+        bcProvider = new BouncyCastleProvider();
+        return bcProvider;
     }
 
     public BCJcaJceHelper() {
@@ -32,7 +30,7 @@ public class BCJcaJceHelper extends ProviderJcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public Cipher createCipher(String str) throws NoSuchAlgorithmException, NoSuchPaddingException {
+    public Cipher createCipher(String str) throws NoSuchPaddingException, NoSuchAlgorithmException {
         try {
             return super.createCipher(str);
         } catch (NoSuchAlgorithmException e) {

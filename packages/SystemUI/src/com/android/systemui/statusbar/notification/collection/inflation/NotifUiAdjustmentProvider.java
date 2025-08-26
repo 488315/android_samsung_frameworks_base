@@ -17,7 +17,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifUiAdjustmentProvider {
     public final AppLockNotificationController appLockNotificationController;
@@ -49,7 +48,7 @@ public final class NotifUiAdjustmentProvider {
         ?? r2 = new UserTracker.Callback() { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context) {
-                NotifUiAdjustmentProvider.this.updateSnoozeEnabled();
+                this.this$0.updateSnoozeEnabled();
             }
         };
         this.userTrackerCallback = r2;
@@ -57,7 +56,7 @@ public final class NotifUiAdjustmentProvider {
         this.notifStateChangedListener = new NotificationLockscreenUserManager.NotificationStateChangedListener() { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$notifStateChangedListener$1
             @Override // com.android.systemui.statusbar.NotificationLockscreenUserManager.NotificationStateChangedListener
             public final void onNotificationStateChanged() {
-                Iterator<E> it = NotifUiAdjustmentProvider.this.dirtyListeners.iterator();
+                Iterator<E> it = this.this$0.dirtyListeners.iterator();
                 while (it.hasNext()) {
                     ((Runnable) it.next()).run();
                 }
@@ -66,7 +65,7 @@ public final class NotifUiAdjustmentProvider {
         this.onSensitiveStateChangedListener = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$onSensitiveStateChangedListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                Iterator<E> it = NotifUiAdjustmentProvider.this.dirtyListeners.iterator();
+                Iterator<E> it = this.this$0.dirtyListeners.iterator();
                 while (it.hasNext()) {
                     ((Runnable) it.next()).run();
                 }
@@ -75,8 +74,8 @@ public final class NotifUiAdjustmentProvider {
         this.settingsObserver = new ContentObserver(handler) { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$settingsObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                NotifUiAdjustmentProvider.this.updateSnoozeEnabled();
-                Iterator<E> it = NotifUiAdjustmentProvider.this.dirtyListeners.iterator();
+                this.this$0.updateSnoozeEnabled();
+                Iterator<E> it = this.this$0.dirtyListeners.iterator();
                 while (it.hasNext()) {
                     ((Runnable) it.next()).run();
                 }
@@ -85,7 +84,7 @@ public final class NotifUiAdjustmentProvider {
         this.onAppLockPackagesChangedListener = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotifUiAdjustmentProvider$onAppLockPackagesChangedListener$1
             @Override // java.lang.Runnable
             public final void run() {
-                Iterator<E> it = NotifUiAdjustmentProvider.this.dirtyListeners.iterator();
+                Iterator<E> it = this.this$0.dirtyListeners.iterator();
                 while (it.hasNext()) {
                     ((Runnable) it.next()).run();
                 }

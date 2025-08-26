@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KioskMode {
     public static final String ACTION_DISABLE_KIOSK_MODE_RESULT = "com.samsung.android.knox.intent.action.DISABLE_KIOSK_MODE_RESULT";
@@ -116,10 +115,10 @@ public class KioskMode {
                     for (int i = 0; i < size; i++) {
                         iArr[i] = list.get(i).intValue();
                     }
-                    int[] allowHardwareKeys = this.mKioskService.allowHardwareKeys(this.mContextInfo, iArr, z);
-                    if (allowHardwareKeys != null) {
+                    int[] iArrAllowHardwareKeys = this.mKioskService.allowHardwareKeys(this.mContextInfo, iArr, z);
+                    if (iArrAllowHardwareKeys != null) {
                         ArrayList arrayList = new ArrayList();
-                        for (int i2 : allowHardwareKeys) {
+                        for (int i2 : iArrAllowHardwareKeys) {
                             arrayList.add(Integer.valueOf(i2));
                         }
                         return arrayList;
@@ -481,7 +480,7 @@ public class KioskMode {
         return kioskMode;
     }
 
-    public void disableKioskMode(final KioskSetting kioskSetting) {
+    public void disableKioskMode(final KioskSetting kioskSetting) throws InterruptedException {
         EnterpriseLicenseManager.log(this.mContextInfo, "KioskMode.disableKioskMode(KioskSetting)");
         final IKioskMode service = getService();
         if (service != null) {

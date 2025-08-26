@@ -48,21 +48,21 @@ public class ThroughputFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("frame");
-        pushOutput("frame", pullInput);
+        Frame framePullInput = pullInput("frame");
+        pushOutput("frame", framePullInput);
         this.mTotalFrameCount++;
         this.mPeriodFrameCount++;
         if (this.mLastTime == 0) {
             this.mLastTime = SystemClock.elapsedRealtime();
         }
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (elapsedRealtime - this.mLastTime >= this.mPeriod * 1000) {
-            FrameFormat format = pullInput.getFormat();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (jElapsedRealtime - this.mLastTime >= this.mPeriod * 1000) {
+            FrameFormat format = framePullInput.getFormat();
             Throughput throughput = new Throughput(this.mTotalFrameCount, this.mPeriodFrameCount, this.mPeriod, format.getWidth() * format.getHeight());
-            Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-            newFrame.setObjectValue(throughput);
-            pushOutput("throughput", newFrame);
-            this.mLastTime = elapsedRealtime;
+            Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+            frameNewFrame.setObjectValue(throughput);
+            pushOutput("throughput", frameNewFrame);
+            this.mLastTime = jElapsedRealtime;
             this.mPeriodFrameCount = 0;
         }
     }

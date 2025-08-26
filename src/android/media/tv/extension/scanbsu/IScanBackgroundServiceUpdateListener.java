@@ -60,9 +60,9 @@ public interface IScanBackgroundServiceUpdateListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScanBackgroundServiceUpdateListener)) {
-                return (IScanBackgroundServiceUpdateListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScanBackgroundServiceUpdateListener)) {
+                return (IScanBackgroundServiceUpdateListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,36 +96,36 @@ public interface IScanBackgroundServiceUpdateListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                if (readInt > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt);
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                if (i3 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i3);
                 }
-                bundleArr = readInt >= 0 ? new Bundle[readInt] : null;
+                bundleArr = i3 >= 0 ? new Bundle[i3] : null;
                 parcel.enforceNoDataAvail();
-                onChannelListUpdate(readString, bundleArr);
+                onChannelListUpdate(string, bundleArr);
                 parcel2.writeNoException();
                 parcel2.writeTypedArray(bundleArr, 1);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
-                if (readInt2 > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt2);
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
+                if (i4 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i4);
                 }
-                bundleArr = readInt2 >= 0 ? new Bundle[readInt2] : null;
+                bundleArr = i4 >= 0 ? new Bundle[i4] : null;
                 parcel.enforceNoDataAvail();
-                onNetworkListUpdate(readString2, bundleArr);
+                onNetworkListUpdate(string2, bundleArr);
                 parcel2.writeNoException();
                 parcel2.writeTypedArray(bundleArr, 1);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
-                int readInt3 = parcel.readInt();
-                if (readInt3 > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt3);
+                String string3 = parcel.readString();
+                int i5 = parcel.readInt();
+                if (i5 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i5);
                 }
-                bundleArr = readInt3 >= 0 ? new Bundle[readInt3] : null;
+                bundleArr = i5 >= 0 ? new Bundle[i5] : null;
                 parcel.enforceNoDataAvail();
-                onTransportStreamingListUpdate(readString3, bundleArr);
+                onTransportStreamingListUpdate(string3, bundleArr);
                 parcel2.writeNoException();
                 parcel2.writeTypedArray(bundleArr, 1);
             } else {
@@ -152,52 +152,52 @@ public interface IScanBackgroundServiceUpdateListener extends IInterface {
 
             @Override // android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener
             public void onChannelListUpdate(String str, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
-                    obtain.writeString(str);
-                    obtain.writeInt(bundleArr.length);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readTypedArray(bundleArr, Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(bundleArr.length);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readTypedArray(bundleArr, Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener
             public void onNetworkListUpdate(String str, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
-                    obtain.writeString(str);
-                    obtain.writeInt(bundleArr.length);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readTypedArray(bundleArr, Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(bundleArr.length);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readTypedArray(bundleArr, Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener
             public void onTransportStreamingListUpdate(String str, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
-                    obtain.writeString(str);
-                    obtain.writeInt(bundleArr.length);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readTypedArray(bundleArr, Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdateListener");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(bundleArr.length);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readTypedArray(bundleArr, Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

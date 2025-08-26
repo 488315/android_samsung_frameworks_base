@@ -52,9 +52,9 @@ public interface ITimeZoneProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITimeZoneProvider.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITimeZoneProvider)) {
-                return (ITimeZoneProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITimeZoneProvider.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITimeZoneProvider)) {
+                return (ITimeZoneProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,11 +84,11 @@ public interface ITimeZoneProvider extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ITimeZoneProviderManager asInterface = ITimeZoneProviderManager.Stub.asInterface(parcel.readStrongBinder());
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                ITimeZoneProviderManager iTimeZoneProviderManagerAsInterface = ITimeZoneProviderManager.Stub.asInterface(parcel.readStrongBinder());
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                startUpdates(asInterface, readLong, readLong2);
+                startUpdates(iTimeZoneProviderManagerAsInterface, j, j2);
             } else if (i == 2) {
                 stopUpdates();
             } else {
@@ -115,26 +115,26 @@ public interface ITimeZoneProvider extends IInterface {
 
             @Override // android.service.timezone.ITimeZoneProvider
             public void startUpdates(ITimeZoneProviderManager iTimeZoneProviderManager, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTimeZoneProviderManager);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITimeZoneProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTimeZoneProviderManager);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.timezone.ITimeZoneProvider
             public void stopUpdates() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneProvider.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITimeZoneProvider.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

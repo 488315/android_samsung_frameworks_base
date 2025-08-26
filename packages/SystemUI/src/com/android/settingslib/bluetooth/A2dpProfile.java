@@ -13,7 +13,6 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class A2dpProfile implements LocalBluetoothProfile {
     public static final ParcelUuid[] SINK_UUIDS = {BluetoothUuid.A2DP_SINK, BluetoothUuid.ADV_AUDIO_DIST};
@@ -23,7 +22,6 @@ public class A2dpProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothA2dp mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class A2dpServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ A2dpServiceListener(A2dpProfile a2dpProfile, int i) {
             this();
@@ -36,16 +34,16 @@ public class A2dpProfile implements LocalBluetoothProfile {
             List<BluetoothDevice> connectedDevices = bluetoothA2dp.getConnectedDevices();
             if (!connectedDevices.isEmpty()) {
                 for (BluetoothDevice bluetoothDevice : connectedDevices) {
-                    CachedBluetoothDevice findDevice = A2dpProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                    if (findDevice == null) {
+                    CachedBluetoothDevice cachedBluetoothDeviceFindDevice = A2dpProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                    if (cachedBluetoothDeviceFindDevice == null) {
                         Log.w("A2dpProfile", "A2dpProfile found new device: " + bluetoothDevice);
                         A2dpProfile a2dpProfile = A2dpProfile.this;
-                        findDevice = a2dpProfile.mDeviceManager.addDevice(a2dpProfile.mProfileManager, bluetoothDevice);
+                        cachedBluetoothDeviceFindDevice = a2dpProfile.mDeviceManager.addDevice(a2dpProfile.mProfileManager, bluetoothDevice);
                     }
-                    if (findDevice != null) {
-                        Log.d("A2dpProfile", "Update cached device : " + findDevice.getNameForLog());
-                        findDevice.onProfileStateChanged(A2dpProfile.this, 2);
-                        findDevice.refresh();
+                    if (cachedBluetoothDeviceFindDevice != null) {
+                        Log.d("A2dpProfile", "Update cached device : " + cachedBluetoothDeviceFindDevice.getNameForLog());
+                        cachedBluetoothDeviceFindDevice.onProfileStateChanged(A2dpProfile.this, 2);
+                        cachedBluetoothDeviceFindDevice.refresh();
                     } else {
                         Log.d("A2dpProfile", "Bluetooth device is null");
                     }

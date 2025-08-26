@@ -16,9 +16,9 @@ public final class ExpandedMenuView extends ListView implements MenuBuilder.Item
 
     public ExpandedMenuView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, 0, 0);
-        this.mAnimations = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, 0, 0);
+        this.mAnimations = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         setOnItemClickListener(this);
     }
 

@@ -67,9 +67,9 @@ public class SemAsyncVideoFrameDecoder {
         void onVideoFrame(SemAsyncVideoFrameDecoder semAsyncVideoFrameDecoder, Bitmap bitmap, int i, int i2);
     }
 
-    private native void _init(IBinder iBinder, String str, String[] strArr, String[] strArr2, String str2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
+    private native void _init(IBinder iBinder, String str, String[] strArr, String[] strArr2, String str2) throws IllegalStateException, IOException, SecurityException, IllegalArgumentException;
 
-    private native void _init(FileDescriptor fileDescriptor, long j, long j2) throws IOException, IllegalArgumentException, IllegalStateException;
+    private native void _init(FileDescriptor fileDescriptor, long j, long j2) throws IllegalStateException, IOException, IllegalArgumentException;
 
     private native void _release();
 
@@ -103,9 +103,9 @@ public class SemAsyncVideoFrameDecoder {
     public SemAsyncVideoFrameDecoder() {
         this.mEventHandler = null;
         this.mSemMediaResourceHelper = null;
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -118,19 +118,19 @@ public class SemAsyncVideoFrameDecoder {
         native_setup(new WeakReference(this));
     }
 
-    public void init(FileDescriptor fileDescriptor) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void init(FileDescriptor fileDescriptor) throws IllegalStateException, IOException, IllegalArgumentException {
         init(fileDescriptor, 0L, 576460752303423487L);
     }
 
-    public void init(FileDescriptor fileDescriptor, long j, long j2) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void init(FileDescriptor fileDescriptor, long j, long j2) throws IllegalStateException, IOException, IllegalArgumentException {
         _init(fileDescriptor, j, j2);
     }
 
-    public void init(String str) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    public void init(String str) throws Throwable {
         init(str, null, null, null);
     }
 
-    private void init(String str, Map<String, String> map, List<HttpCookie> list, String str2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void init(String str, Map<String, String> map, List<HttpCookie> list, String str2) throws Throwable {
         String[] strArr;
         String[] strArr2;
         SemAsyncVideoFrameDecoder semAsyncVideoFrameDecoder;
@@ -163,37 +163,36 @@ public class SemAsyncVideoFrameDecoder {
         semAsyncVideoFrameDecoder.init(str3, strArr, strArr2, list2, str4);
     }
 
-    private void init(String str, String[] strArr, String[] strArr2, List<HttpCookie> list, String str2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void init(String str, String[] strArr, String[] strArr2, List<HttpCookie> list, String str2) throws Throwable {
         Throwable th;
-        FileInputStream fileInputStream;
-        Uri parse = Uri.parse(str);
-        if (!"file".equals(parse.getScheme())) {
+        Uri uri = Uri.parse(str);
+        if (!"file".equals(uri.getScheme())) {
             _init(null, str, strArr, strArr2, str2);
             return;
         }
-        File file = new File(parse.getPath());
+        File file = new File(uri.getPath());
         if (file.exists()) {
-            FileInputStream fileInputStream2 = null;
+            FileInputStream fileInputStream = null;
             try {
-                fileInputStream = new FileInputStream(file);
-            } catch (Throwable th2) {
-                th = th2;
-            }
-            try {
-                init(fileInputStream.getFD());
-                fileInputStream.close();
-                return;
-            } catch (Throwable th3) {
-                th = th3;
-                fileInputStream2 = fileInputStream;
-                if (fileInputStream2 != null) {
+                FileInputStream fileInputStream2 = new FileInputStream(file);
+                try {
+                    init(fileInputStream2.getFD());
                     fileInputStream2.close();
+                } catch (Throwable th2) {
+                    th = th2;
+                    fileInputStream = fileInputStream2;
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                        throw th;
+                    }
                     throw th;
                 }
-                throw th;
+            } catch (Throwable th3) {
+                th = th3;
             }
+        } else {
+            throw new IOException("init failed with file scheme");
         }
-        throw new IOException("init failed with file scheme");
     }
 
     public void setSeekOption(int i) throws IllegalStateException {
@@ -209,23 +208,23 @@ public class SemAsyncVideoFrameDecoder {
     }
 
     public void setTargetFrameTimeList(List<Integer> list) throws IllegalArgumentException {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
             int size = list.size();
             if (size <= 0) {
                 throw new IllegalArgumentException("there's no time request");
             }
-            obtain.writeInt(size);
+            parcelObtain.writeInt(size);
             for (int i = 0; i < size; i++) {
                 Integer num = list.get(i);
                 if (num.intValue() < 0) {
                     throw new IllegalArgumentException("abnormal frame time. timeMsList[" + i + "] = " + num);
                 }
-                obtain.writeInt(num.intValue());
+                parcelObtain.writeInt(num.intValue());
             }
-            _setFrameTime(obtain);
+            _setFrameTime(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -238,22 +237,22 @@ public class SemAsyncVideoFrameDecoder {
     }
 
     private int getCurrentVideoCodecUsage() {
-        int i = 0;
+        int videoWidth = 0;
         if (this.mSemMediaResourceHelper == null) {
             return 0;
         }
-        int myPid = Process.myPid();
-        if (myPid > 0) {
+        int iMyPid = Process.myPid();
+        if (iMyPid > 0) {
             Iterator<SemMediaResourceHelper.MediaResourceInfo> it = this.mSemMediaResourceHelper.getMediaResourceInfo(2).iterator();
             while (it.hasNext()) {
                 SemMediaResourceHelper.MediaResourceInfo next = it.next();
-                if (next.getPid() == myPid) {
+                if (next.getPid() == iMyPid) {
                     int videoFrameRate = next.getVideoFrameRate();
-                    i = (int) (i + (next.getVideoWidth() * next.getVideoHeight() * (videoFrameRate >= 120 ? 4.0f : videoFrameRate >= 60 ? 2.0f : videoFrameRate <= 15 ? 0.5f : 1.0f)));
+                    videoWidth = (int) (videoWidth + (next.getVideoWidth() * next.getVideoHeight() * (videoFrameRate >= 120 ? 4.0f : videoFrameRate >= 60 ? 2.0f : videoFrameRate <= 15 ? 0.5f : 1.0f)));
                 }
             }
         }
-        return i;
+        return videoWidth;
     }
 
     public void start() throws IllegalStateException {

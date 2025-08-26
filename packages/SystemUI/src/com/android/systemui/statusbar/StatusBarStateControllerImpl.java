@@ -39,7 +39,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarStateControllerImpl implements SysuiStatusBarStateController, CallbackController {
     public static final AnonymousClass1 SET_DARK_AMOUNT_PROPERTY;
@@ -69,7 +68,6 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
     public final HistoricalState[] mHistoricalRecords = new HistoricalState[32];
     public Interpolator mDozeInterpolator = Interpolators.FAST_OUT_SLOW_IN;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HistoricalState {
         public int mLastState;
         public int mNewState;
@@ -155,27 +153,27 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
     public ObjectAnimator createDarkAnimator() {
         int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, SET_DARK_AMOUNT_PROPERTY, this.mDozeAmountTarget);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
-        ofFloat.setDuration(500L);
-        ofFloat.start();
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, SET_DARK_AMOUNT_PROPERTY, this.mDozeAmountTarget);
+        objectAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+        objectAnimatorOfFloat.setDuration(500L);
+        objectAnimatorOfFloat.start();
+        return objectAnimatorOfFloat;
     }
 
     @Override // com.android.systemui.CoreStartable, com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         HistoricalState[] historicalStateArr;
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusBarStateController: ", " mState=");
-        m.append(this.mState);
-        m.append(" (");
-        m.append(StatusBarState.toString(this.mState));
-        m.append(")");
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusBarStateController: ", " mState=");
+        sbM.append(this.mState);
+        sbM.append(" (");
+        sbM.append(StatusBarState.toString(this.mState));
+        sbM.append(")");
+        printWriter.println(sbM.toString());
         printWriter.println(" mLastState=" + this.mLastState + " (" + StatusBarState.toString(this.mLastState) + ")");
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mLeaveOpenOnKeyguardHide="), this.mLeaveOpenOnKeyguardHide, printWriter, " mKeyguardRequested="), this.mKeyguardRequested, printWriter, " mIsDozing="), this.mIsDozing, printWriter, " mIsDreaming="), this.mIsDreaming, printWriter, " mListeners{");
-        m2.append(this.mListeners.size());
-        m2.append("}=");
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mLeaveOpenOnKeyguardHide="), this.mLeaveOpenOnKeyguardHide, printWriter, " mKeyguardRequested="), this.mKeyguardRequested, printWriter, " mIsDozing="), this.mIsDozing, printWriter, " mIsDreaming="), this.mIsDreaming, printWriter, " mListeners{");
+        sbM2.append(this.mListeners.size());
+        sbM2.append("}=");
+        printWriter.println(sbM2.toString());
         ArrayList arrayList = this.mListeners;
         int size = arrayList.size();
         int i = 0;
@@ -251,8 +249,8 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
         float interpolation = this.mDozeInterpolator.getInterpolation(f);
         synchronized (this.mListeners) {
             try {
-                String concat = getClass().getSimpleName().concat("#setDozeAmount");
-                DejankUtils.startDetectingBlockingIpcs(concat);
+                String strConcat = getClass().getSimpleName().concat("#setDozeAmount");
+                DejankUtils.startDetectingBlockingIpcs(strConcat);
                 ArrayList arrayList = new ArrayList(this.mListeners);
                 int size = arrayList.size();
                 int i = 0;
@@ -261,7 +259,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
                     i++;
                     ((SysuiStatusBarStateController.RankedListener) obj).mListener.onDozeAmountChanged(this.mDozeAmount, interpolation);
                 }
-                DejankUtils.stopDetectingBlockingIpcs(concat);
+                DejankUtils.stopDetectingBlockingIpcs(strConcat);
             } catch (Throwable th) {
                 throw th;
             }
@@ -339,7 +337,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
     public final void start() {
         KeyguardTransitionInteractor keyguardTransitionInteractor = (KeyguardTransitionInteractor) this.mKeyguardTransitionInteractorLazy.get();
         SceneKey sceneKey = Scenes.Communal;
-        Flow isFinishedIn = keyguardTransitionInteractor.isFinishedIn(KeyguardState.GONE);
+        Flow flowIsFinishedIn = keyguardTransitionInteractor.isFinishedIn(KeyguardState.GONE);
         final int i = 0;
         Consumer consumer = new Consumer(this) { // from class: com.android.systemui.statusbar.StatusBarStateControllerImpl$$ExternalSyntheticLambda3
             public final /* synthetic */ StatusBarStateControllerImpl f$0;
@@ -368,8 +366,8 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
                     default:
                         if (statusBarStateControllerImpl.mIsExpanded != bool.booleanValue()) {
                             statusBarStateControllerImpl.mIsExpanded = bool.booleanValue();
-                            String concat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsExpanded");
-                            DejankUtils.startDetectingBlockingIpcs(concat);
+                            String strConcat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsExpanded");
+                            DejankUtils.startDetectingBlockingIpcs(strConcat);
                             ArrayList arrayList = new ArrayList(statusBarStateControllerImpl.mListeners);
                             int size = arrayList.size();
                             while (i2 < size) {
@@ -377,7 +375,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
                                 i2++;
                                 ((SysuiStatusBarStateController.RankedListener) obj2).mListener.onExpandedChanged(statusBarStateControllerImpl.mIsExpanded);
                             }
-                            DejankUtils.stopDetectingBlockingIpcs(concat);
+                            DejankUtils.stopDetectingBlockingIpcs(strConcat);
                             break;
                         }
                         break;
@@ -385,7 +383,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
             }
         };
         JavaAdapter javaAdapter = this.mJavaAdapter;
-        javaAdapter.alwaysCollectFlow(isFinishedIn, consumer);
+        javaAdapter.alwaysCollectFlow(flowIsFinishedIn, consumer);
         final int i2 = 1;
         javaAdapter.alwaysCollectFlow(((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isAnyExpanded(), new Consumer(this) { // from class: com.android.systemui.statusbar.StatusBarStateControllerImpl$$ExternalSyntheticLambda3
             public final /* synthetic */ StatusBarStateControllerImpl f$0;
@@ -414,8 +412,8 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
                     default:
                         if (statusBarStateControllerImpl.mIsExpanded != bool.booleanValue()) {
                             statusBarStateControllerImpl.mIsExpanded = bool.booleanValue();
-                            String concat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsExpanded");
-                            DejankUtils.startDetectingBlockingIpcs(concat);
+                            String strConcat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsExpanded");
+                            DejankUtils.startDetectingBlockingIpcs(strConcat);
                             ArrayList arrayList = new ArrayList(statusBarStateControllerImpl.mListeners);
                             int size = arrayList.size();
                             while (i22 < size) {
@@ -423,7 +421,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
                                 i22++;
                                 ((SysuiStatusBarStateController.RankedListener) obj2).mListener.onExpandedChanged(statusBarStateControllerImpl.mIsExpanded);
                             }
-                            DejankUtils.stopDetectingBlockingIpcs(concat);
+                            DejankUtils.stopDetectingBlockingIpcs(strConcat);
                             break;
                         }
                         break;
@@ -460,7 +458,7 @@ public class StatusBarStateControllerImpl implements SysuiStatusBarStateControll
             this.mListeners.removeIf(new Predicate() { // from class: com.android.systemui.statusbar.StatusBarStateControllerImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    StatusBarStateController.StateListener stateListener2 = StatusBarStateController.StateListener.this;
+                    StatusBarStateController.StateListener stateListener2 = stateListener;
                     Comparator comparator = StatusBarStateControllerImpl.sComparator;
                     return ((SysuiStatusBarStateController.RankedListener) obj).mListener.equals(stateListener2);
                 }

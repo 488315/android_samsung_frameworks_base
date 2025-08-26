@@ -81,23 +81,19 @@ public final class SemMediaResourceHelper {
     private final native void native_setup(Object obj);
 
     public static synchronized SemMediaResourceHelper createInstance(int i, boolean z) {
-        SemMediaResourceHelper semMediaResourceHelper;
-        synchronized (SemMediaResourceHelper.class) {
-            if (mMediaResourceHelper == null) {
-                mMediaResourceHelper = new SemMediaResourceHelper(i, z);
-            } else {
-                Log.i(TAG, "SemMediaResourceHelper is already created");
-            }
-            semMediaResourceHelper = mMediaResourceHelper;
+        if (mMediaResourceHelper == null) {
+            mMediaResourceHelper = new SemMediaResourceHelper(i, z);
+        } else {
+            Log.i(TAG, "SemMediaResourceHelper is already created");
         }
-        return semMediaResourceHelper;
+        return mMediaResourceHelper;
     }
 
     private SemMediaResourceHelper(int i, boolean z) {
         this.mPid = 0;
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -163,37 +159,37 @@ public final class SemMediaResourceHelper {
     }
 
     public final ArrayList<MediaResourceInfo> getMediaResourceInfo(int i) throws IllegalStateException {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            native_getMediaResourceInfo(i, obtain);
-            return makeMediaResourceInfo(obtain);
+            native_getMediaResourceInfo(i, parcelObtain);
+            return makeMediaResourceInfo(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     private ArrayList<MediaResourceInfo> makeMediaResourceInfo(Parcel parcel) {
-        int readInt;
-        boolean z;
         int i;
+        boolean z;
+        int i2;
         ArrayList<MediaResourceInfo> arrayList = new ArrayList<>();
-        if (parcel != null && (readInt = parcel.readInt()) > 0) {
-            for (int i2 = 0; i2 < readInt; i2++) {
-                int readInt2 = parcel.readInt();
+        if (parcel != null && (i = parcel.readInt()) > 0) {
+            for (int i3 = 0; i3 < i; i3++) {
+                int i4 = parcel.readInt();
                 boolean z2 = parcel.readInt() == 1;
-                int readInt3 = parcel.readInt();
-                long readLong = parcel.readLong();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i5 = parcel.readInt();
+                long j = parcel.readLong();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 boolean z3 = parcel.readInt() == 1;
                 boolean z4 = parcel.readInt() == 1;
-                String readString8 = parcel.readString8();
-                int readInt8 = parcel.readInt();
-                int i3 = this.mResourceType;
-                if ((i3 == 0 || i3 == readInt2) && (!(z = this.mOwnResourceEventExcluded) || (z && (i = this.mPid) > 0 && i != readInt3))) {
-                    arrayList.add(new MediaResourceInfo(readInt2, z2, readInt3, readLong, readInt4, readInt5, readInt6, readInt7, z3, z4, readString8, readInt8));
+                String string8 = parcel.readString8();
+                int i10 = parcel.readInt();
+                int i11 = this.mResourceType;
+                if ((i11 == 0 || i11 == i4) && (!(z = this.mOwnResourceEventExcluded) || (z && (i2 = this.mPid) > 0 && i2 != i5))) {
+                    arrayList.add(new MediaResourceInfo(i4, z2, i5, j, i6, i7, i8, i9, z3, z4, string8, i10));
                 }
             }
         }
@@ -298,9 +294,9 @@ public final class SemMediaResourceHelper {
                     Log.i(TAG, "Skip event. mOwnResourceEventExcluded is enabled and owned resource");
                     return;
                 } else {
-                    ArrayList<MediaResourceInfo> makeMediaResourceInfo = semMediaResourceHelper.makeMediaResourceInfo(parcel);
+                    ArrayList<MediaResourceInfo> arrayListMakeMediaResourceInfo = semMediaResourceHelper.makeMediaResourceInfo(parcel);
                     parcel.recycle();
-                    obj2 = makeMediaResourceInfo;
+                    obj2 = arrayListMakeMediaResourceInfo;
                 }
             }
             semMediaResourceHelper.mEventHandler.sendMessage(semMediaResourceHelper.mEventHandler.obtainMessage(i, i2, i3, obj2));

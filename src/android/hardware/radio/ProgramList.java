@@ -1,7 +1,6 @@
 package android.hardware.radio;
 
 import android.annotation.SystemApi;
-import android.hardware.radio.ProgramList;
 import android.hardware.radio.ProgramSelector;
 import android.hardware.radio.RadioManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
@@ -65,7 +64,7 @@ public final class ProgramList implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ProgramList.ListCallback.this.onItemChanged(identifier);
+                    listCallback.onItemChanged(identifier);
                 }
             });
         }
@@ -77,7 +76,7 @@ public final class ProgramList implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ProgramList.ListCallback.this.onItemRemoved(identifier);
+                    listCallback.onItemRemoved(identifier);
                 }
             });
         }
@@ -110,7 +109,7 @@ public final class ProgramList implements AutoCloseable {
         executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ProgramList.OnCompleteListener.this.onComplete();
+                onCompleteListener.onComplete();
             }
         });
     }

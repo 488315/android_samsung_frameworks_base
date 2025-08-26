@@ -56,7 +56,7 @@ public class WrapFileClipData implements Serializable {
         this.mDir = file;
     }
 
-    public void save() {
+    public void save() throws Throwable {
         SemClipData semClipData = this.mClip;
         if (semClipData == null) {
             return;
@@ -66,12 +66,12 @@ public class WrapFileClipData implements Serializable {
     }
 
     public boolean load() {
-        Object loadData = loadData();
-        if (loadData == null) {
+        Object objLoadData = loadData();
+        if (objLoadData == null) {
             return false;
         }
-        if (loadData instanceof SemClipData) {
-            return loadSemClipData((SemClipData) loadData);
+        if (objLoadData instanceof SemClipData) {
+            return loadSemClipData((SemClipData) objLoadData);
         }
         Log.secD(TAG, "While loading data, no matching class found!");
         return false;

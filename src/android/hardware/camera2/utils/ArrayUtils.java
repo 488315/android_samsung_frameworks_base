@@ -40,11 +40,11 @@ public class ArrayUtils {
         if (list == null) {
             return null;
         }
-        List<Integer> convertStringListToIntList = convertStringListToIntList(list, strArr, iArr);
-        int size = convertStringListToIntList.size();
+        List<Integer> listConvertStringListToIntList = convertStringListToIntList(list, strArr, iArr);
+        int size = listConvertStringListToIntList.size();
         int[] iArr2 = new int[size];
         for (int i = 0; i < size; i++) {
-            iArr2[i] = convertStringListToIntList.get(i).intValue();
+            iArr2[i] = listConvertStringListToIntList.get(i).intValue();
         }
         return iArr2;
     }

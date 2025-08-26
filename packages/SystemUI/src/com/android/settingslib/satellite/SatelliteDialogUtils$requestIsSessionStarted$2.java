@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SatelliteDialogUtils$requestIsSessionStarted$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -39,7 +38,7 @@ final class SatelliteDialogUtils$requestIsSessionStarted$2 extends SuspendLambda
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flowOn;
+        Flow flowFlowOn;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i != 0) {
@@ -60,13 +59,13 @@ final class SatelliteDialogUtils$requestIsSessionStarted$2 extends SuspendLambda
         SatelliteManager satelliteManager = (SatelliteManager) context.getSystemService(SatelliteManager.class);
         if (satelliteManager == null) {
             Log.w("SatelliteDialogUtils", "SatelliteManager is null");
-            flowOn = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+            flowFlowOn = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
         } else {
-            flowOn = FlowKt.flowOn(FlowKt.callbackFlow(new SatelliteDialogUtils$getIsSessionStartedFlow$1(satelliteManager, null)), Dispatchers.Default);
+            flowFlowOn = FlowKt.flowOn(FlowKt.callbackFlow(new SatelliteDialogUtils$getIsSessionStartedFlow$1(satelliteManager, null)), Dispatchers.Default);
         }
-        Flow buffer$default = FlowKt.buffer$default(flowOn, -1, 2);
+        Flow flowBuffer$default = FlowKt.buffer$default(flowFlowOn, -1, 2);
         this.label = 1;
-        Object first = FlowKt.first(buffer$default, this);
-        return first == coroutineSingletons ? coroutineSingletons : first;
+        Object objFirst = FlowKt.first(flowBuffer$default, this);
+        return objFirst == coroutineSingletons ? coroutineSingletons : objFirst;
     }
 }

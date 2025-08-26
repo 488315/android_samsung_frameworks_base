@@ -1,13 +1,13 @@
 package androidx.compose.ui.util;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ListUtilsKt {
-    public static String fastJoinToString$default(List list, CharSequence charSequence, Function1 function1, int i) {
+    public static String fastJoinToString$default(List list, CharSequence charSequence, Function1 function1, int i) throws IOException {
         if ((i & 1) != 0) {
             charSequence = ", ";
         }
@@ -25,7 +25,7 @@ public abstract class ListUtilsKt {
                 sb.append(charSequence);
             }
             if (function1 != null) {
-                sb.append((CharSequence) function1.mo779invoke(obj));
+                sb.append((CharSequence) function1.mo781invoke(obj));
             } else if (obj != null ? obj instanceof CharSequence : true) {
                 sb.append((CharSequence) obj);
             } else if (obj instanceof Character) {

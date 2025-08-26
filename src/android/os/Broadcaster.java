@@ -132,10 +132,10 @@ public class Broadcaster {
                 int length = handlerArr.length;
                 for (int i2 = 0; i2 < length; i2++) {
                     Handler handler = handlerArr[i2];
-                    Message obtain = Message.obtain();
-                    obtain.copyFrom(message);
-                    obtain.what = iArr[i2];
-                    handler.sendMessage(obtain);
+                    Message messageObtain = Message.obtain();
+                    messageObtain.copyFrom(message);
+                    messageObtain.what = iArr[i2];
+                    handler.sendMessage(messageObtain);
                 }
             }
         }

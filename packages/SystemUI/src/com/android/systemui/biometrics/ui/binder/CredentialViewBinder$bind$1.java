@@ -48,7 +48,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CredentialViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ boolean $animatePanel;
@@ -71,7 +70,6 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ Button $cancelButton;
@@ -92,9 +90,8 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$2, reason: invalid class name and collision with other inner class name */
-        final class C00402 extends SuspendLambda implements Function2 {
+        final class C00902 extends SuspendLambda implements Function2 {
             final /* synthetic */ LinearLayout $customizedViewContainer;
             final /* synthetic */ TextView $descriptionView;
             final /* synthetic */ Button $emergencyButtonView;
@@ -107,7 +104,7 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00402(CredentialViewModel credentialViewModel, TextView textView, ViewGroup viewGroup, TextView textView2, TextView textView3, LinearLayout linearLayout, Spaghetti.Callback callback, ImageView imageView, Button button, Continuation continuation) {
+            public C00902(CredentialViewModel credentialViewModel, TextView textView, ViewGroup viewGroup, TextView textView2, TextView textView3, LinearLayout linearLayout, Spaghetti.Callback callback, ImageView imageView, Button button, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
                 this.$titleView = textView;
@@ -122,12 +119,12 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C00402(this.$viewModel, this.$titleView, this.$view, this.$subtitleView, this.$descriptionView, this.$customizedViewContainer, this.$legacyCallback, this.$iconView, this.$emergencyButtonView, continuation);
+                return new C00902(this.$viewModel, this.$titleView, this.$view, this.$subtitleView, this.$descriptionView, this.$customizedViewContainer, this.$legacyCallback, this.$iconView, this.$emergencyButtonView, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00402) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C00902) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -172,7 +169,7 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                                 button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.biometrics.ui.binder.CredentialViewBinder.bind.1.2.2.1.1
                                     @Override // android.view.View.OnClickListener
                                     public final void onClick(View view) {
-                                        CredentialViewModel credentialViewModel3 = CredentialViewModel.this;
+                                        CredentialViewModel credentialViewModel3 = credentialViewModel2;
                                         Context context = viewGroup2.getContext();
                                         credentialViewModel3.getClass();
                                         Object systemService = context.getSystemService((Class<Object>) TelecomManager.class);
@@ -209,7 +206,6 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ Button $cancelButton;
@@ -220,7 +216,6 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
             private /* synthetic */ Object L$0;
             int label;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$3$1, reason: invalid class name */
             final class AnonymousClass1 extends SuspendLambda implements Function2 {
                 final /* synthetic */ CoroutineScope $$this$launch;
@@ -230,15 +225,14 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                 /* synthetic */ Object L$0;
                 int label;
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$3$1$1, reason: invalid class name and collision with other inner class name */
-                final class C00421 extends SuspendLambda implements Function2 {
+                final class C00921 extends SuspendLambda implements Function2 {
                     final /* synthetic */ long $maxErrorDuration;
                     final /* synthetic */ CredentialViewModel $viewModel;
                     int label;
 
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                    public C00421(long j, CredentialViewModel credentialViewModel, Continuation continuation) {
+                    public C00921(long j, CredentialViewModel credentialViewModel, Continuation continuation) {
                         super(2, continuation);
                         this.$maxErrorDuration = j;
                         this.$viewModel = credentialViewModel;
@@ -246,12 +240,12 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
 
                     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                     public final Continuation create(Object obj, Continuation continuation) {
-                        return new C00421(this.$maxErrorDuration, this.$viewModel, continuation);
+                        return new C00921(this.$maxErrorDuration, this.$viewModel, continuation);
                     }
 
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj, Object obj2) {
-                        return ((C00421) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                        return ((C00921) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                     }
 
                     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -311,7 +305,7 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                         job.cancel(null);
                     }
                     if (!StringsKt__StringsKt.isBlank(str)) {
-                        this.$errorTimer.element = CoroutineTracingKt.launchTraced$default(this.$$this$launch, null, null, new C00421(this.$maxErrorDuration, this.$viewModel, null), 7);
+                        this.$errorTimer.element = CoroutineTracingKt.launchTraced$default(this.$$this$launch, null, null, new C00921(this.$maxErrorDuration, this.$viewModel, null), 7);
                     }
                     return Unit.INSTANCE;
                 }
@@ -378,7 +372,6 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ CredentialView.Host $host;
@@ -411,7 +404,6 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                     final ReadonlyStateFlow readonlyStateFlow = this.$viewModel.remainingAttempts;
                     Flow flow = new Flow() { // from class: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1
 
-                        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
                         public final class AnonymousClass2 implements FlowCollector {
                             public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -439,67 +431,47 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                                 this.$this_unsafeFlow = flowCollector;
                             }
 
-                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
-                                To view partially-correct code enable 'Show inconsistent code' option in preferences
                             */
-                            public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                                /*
-                                    r4 = this;
-                                    boolean r0 = r6 instanceof com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                                    if (r0 == 0) goto L13
-                                    r0 = r6
-                                    com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1$2$1 r0 = (com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                                    int r1 = r0.label
-                                    r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                    r3 = r1 & r2
-                                    if (r3 == 0) goto L13
-                                    int r1 = r1 - r2
-                                    r0.label = r1
-                                    goto L18
-                                L13:
-                                    com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1$2$1 r0 = new com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1$2$1
-                                    r0.<init>(r6)
-                                L18:
-                                    java.lang.Object r6 = r0.result
-                                    kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                    int r2 = r0.label
-                                    r3 = 1
-                                    if (r2 == 0) goto L2f
-                                    if (r2 != r3) goto L27
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    goto L44
-                                L27:
-                                    java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                    java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                    r4.<init>(r5)
-                                    throw r4
-                                L2f:
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    r6 = r5
-                                    com.android.systemui.biometrics.ui.viewmodel.RemainingAttempts r6 = (com.android.systemui.biometrics.ui.viewmodel.RemainingAttempts) r6
-                                    java.lang.Integer r6 = r6.remaining
-                                    if (r6 == 0) goto L44
-                                    r0.label = r3
-                                    kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                    java.lang.Object r4 = r4.emit(r5, r0)
-                                    if (r4 != r1) goto L44
-                                    return r1
-                                L44:
-                                    kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                    return r4
-                                */
-                                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.binder.CredentialViewBinder$bind$1$2$4$invokeSuspend$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    if (((RemainingAttempts) obj).remaining != null) {
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
                             }
                         }
 
                         @Override // kotlinx.coroutines.flow.Flow
                         public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                            Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                            return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                            Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                         }
                     };
                     final CredentialView.Host host = this.$host;
@@ -509,7 +481,7 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                             RemainingAttempts remainingAttempts = (RemainingAttempts) obj2;
                             Integer num = remainingAttempts.remaining;
                             num.getClass();
-                            ((AuthContainerView) CredentialView.Host.this).onCredentialAttemptsRemaining(num.intValue(), remainingAttempts.message);
+                            ((AuthContainerView) host).onCredentialAttemptsRemaining(num.intValue(), remainingAttempts.message);
                             return Unit.INSTANCE;
                         }
                     };
@@ -566,7 +538,7 @@ public final class CredentialViewBinder$bind$1 extends SuspendLambda implements 
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
                     CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C00402(this.$viewModel, this.$titleView, this.$view, this.$subtitleView, this.$descriptionView, this.$customizedViewContainer, this.$legacyCallback, this.$iconView, this.$emergencyButtonView, null), 7);
+                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C00902(this.$viewModel, this.$titleView, this.$view, this.$subtitleView, this.$descriptionView, this.$customizedViewContainer, this.$legacyCallback, this.$iconView, this.$emergencyButtonView, null), 7);
                     CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$errorTimer, this.$maxErrorDuration, this.$errorView, this.$cancelButton, null), 7);
                     CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(this.$viewModel, this.$host, null), 7);
                     this.label = 1;

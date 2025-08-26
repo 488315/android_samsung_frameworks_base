@@ -13,7 +13,6 @@ import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityFloatingMenu implements IAccessibilityFloatingMenu, MenuInfoRepository.OnContentsChanged {
     public final Context mContext;
@@ -35,7 +34,7 @@ public class AccessibilityFloatingMenu implements IAccessibilityFloatingMenu, Me
         this.mNavigationModeChangedListener = new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenu$$ExternalSyntheticLambda0
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
             public final void onNavigationModeChanged(int i) {
-                AccessibilityFloatingMenu.this.mMenuView.mAdapter.notifyDataSetChanged();
+                this.f$0.mMenuView.mAdapter.notifyDataSetChanged();
             }
         };
         this.mIsHideHandle = Settings.Secure.getInt(context.getContentResolver(), "accessibility_floating_menu_icon_type", 0) == 9;

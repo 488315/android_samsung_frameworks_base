@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SatelliteSupport$Companion$whenSupported$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Flow $orElse$inlined;
@@ -46,9 +45,9 @@ public final class SatelliteSupport$Companion$whenSupported$$inlined$flatMapLate
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             SatelliteSupport satelliteSupport = (SatelliteSupport) this.L$1;
-            Flow transformLatest = satelliteSupport instanceof SatelliteSupport.Supported ? FlowKt.transformLatest(this.$retrySignal$inlined, new SatelliteSupport$Companion$whenSupported$lambda$1$$inlined$flatMapLatest$1(null, this.$supported$inlined, satelliteSupport)) : this.$orElse$inlined;
+            Flow flowTransformLatest = satelliteSupport instanceof SatelliteSupport.Supported ? FlowKt.transformLatest(this.$retrySignal$inlined, new SatelliteSupport$Companion$whenSupported$lambda$1$$inlined$flatMapLatest$1(null, this.$supported$inlined, satelliteSupport)) : this.$orElse$inlined;
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, transformLatest, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowTransformLatest, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

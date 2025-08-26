@@ -1,46 +1,147 @@
 package androidx.emoji2.viewsintegration;
 
 import android.text.Editable;
+import android.text.Selection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 import android.widget.TextView;
 import androidx.emoji2.text.EmojiCompat;
+import androidx.emoji2.text.EmojiSpan;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiInputConnection extends InputConnectionWrapper {
     public final EmojiCompatDeleteHelper mEmojiCompatDeleteHelper;
     public final TextView mTextView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmojiCompatDeleteHelper {
-        /* JADX WARN: Code restructure failed: missing block: B:35:0x0045, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:31:0x0045, code lost:
         
             if (java.lang.Character.isHighSurrogate(r5) != false) goto L33;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:64:0x0082, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:56:0x0082, code lost:
         
             if (java.lang.Character.isLowSurrogate(r5) != false) goto L58;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:68:0x0075, code lost:
-        
-            if (r11 != false) goto L46;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:70:0x00a2, code lost:
-        
-            if (r10 != (-1)) goto L70;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:46:0x006c A[EDGE_INSN: B:92:0x006c->B:46:0x006c BREAK  A[LOOP:2: B:47:0x006e->B:58:0x0085], EDGE_INSN: B:93:0x006c->B:46:0x006c BREAK  A[LOOP:2: B:47:0x006e->B:58:0x0085, LOOP_LABEL: LOOP:2: B:47:0x006e->B:58:0x0085]] */
+        /* JADX WARN: Removed duplicated region for block: B:67:0x00a2 A[ADDED_TO_REGION] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static boolean handleDeleteSurroundingText(androidx.emoji2.viewsintegration.EmojiInputConnection r7, android.text.Editable r8, int r9, int r10, boolean r11) {
-            /*
-                Method dump skipped, instructions count: 240
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.emoji2.viewsintegration.EmojiInputConnection.EmojiCompatDeleteHelper.handleDeleteSurroundingText(androidx.emoji2.viewsintegration.EmojiInputConnection, android.text.Editable, int, int, boolean):boolean");
+        public static boolean handleDeleteSurroundingText(EmojiInputConnection emojiInputConnection, Editable editable, int i, int i2, boolean z) {
+            int iMin;
+            if (editable != null && i >= 0 && i2 >= 0) {
+                int selectionStart = Selection.getSelectionStart(editable);
+                int selectionEnd = Selection.getSelectionEnd(editable);
+                if (selectionStart != -1 && selectionEnd != -1 && selectionStart == selectionEnd) {
+                    if (z) {
+                        int iMax = Math.max(i, 0);
+                        int length = editable.length();
+                        if (selectionStart < 0 || length < selectionStart || iMax < 0) {
+                            selectionStart = -1;
+                            int iMax2 = Math.max(i2, 0);
+                            iMin = editable.length();
+                            if (selectionEnd >= 0 || iMin < selectionEnd || iMax2 < 0) {
+                                iMin = -1;
+                                if (selectionStart != -1 && iMin != -1) {
+                                }
+                            } else {
+                                loop2: while (true) {
+                                    boolean z2 = false;
+                                    while (true) {
+                                        if (iMax2 == 0) {
+                                            iMin = selectionEnd;
+                                            break loop2;
+                                        }
+                                        if (selectionEnd >= iMin) {
+                                            if (z2) {
+                                                break;
+                                            }
+                                        } else {
+                                            char cCharAt = editable.charAt(selectionEnd);
+                                            if (z2) {
+                                                break;
+                                            }
+                                            if (!Character.isSurrogate(cCharAt)) {
+                                                iMax2--;
+                                                selectionEnd++;
+                                            } else {
+                                                if (Character.isLowSurrogate(cCharAt)) {
+                                                    break loop2;
+                                                }
+                                                selectionEnd++;
+                                                z2 = true;
+                                            }
+                                        }
+                                    }
+                                    iMax2--;
+                                    selectionEnd++;
+                                }
+                                iMin = -1;
+                                if (selectionStart != -1) {
+                                }
+                            }
+                        } else {
+                            loop0: while (true) {
+                                boolean z3 = false;
+                                while (true) {
+                                    if (iMax == 0) {
+                                        break loop0;
+                                    }
+                                    selectionStart--;
+                                    if (selectionStart >= 0) {
+                                        char cCharAt2 = editable.charAt(selectionStart);
+                                        if (z3) {
+                                            break;
+                                        }
+                                        if (!Character.isSurrogate(cCharAt2)) {
+                                            iMax--;
+                                        } else {
+                                            if (Character.isHighSurrogate(cCharAt2)) {
+                                                break loop0;
+                                            }
+                                            z3 = true;
+                                        }
+                                    } else {
+                                        if (z3) {
+                                            break loop0;
+                                        }
+                                        selectionStart = 0;
+                                    }
+                                }
+                                iMax--;
+                            }
+                            selectionStart = -1;
+                            int iMax22 = Math.max(i2, 0);
+                            iMin = editable.length();
+                            if (selectionEnd >= 0) {
+                                iMin = -1;
+                                if (selectionStart != -1) {
+                                }
+                            }
+                        }
+                    } else {
+                        selectionStart = Math.max(selectionStart - i, 0);
+                        iMin = Math.min(selectionEnd + i2, editable.length());
+                    }
+                    EmojiSpan[] emojiSpanArr = (EmojiSpan[]) editable.getSpans(selectionStart, iMin, EmojiSpan.class);
+                    if (emojiSpanArr != null && emojiSpanArr.length > 0) {
+                        for (EmojiSpan emojiSpan : emojiSpanArr) {
+                            int spanStart = editable.getSpanStart(emojiSpan);
+                            int spanEnd = editable.getSpanEnd(emojiSpan);
+                            selectionStart = Math.min(spanStart, selectionStart);
+                            iMin = Math.max(spanEnd, iMin);
+                        }
+                        int iMax3 = Math.max(selectionStart, 0);
+                        int iMin2 = Math.min(iMin, editable.length());
+                        emojiInputConnection.beginBatchEdit();
+                        editable.delete(iMax3, iMin2);
+                        emojiInputConnection.endBatchEdit();
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 

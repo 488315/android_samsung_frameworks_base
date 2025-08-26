@@ -17,7 +17,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SatelliteDialogUtils$getIsSessionStartedFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $satelliteManager;
@@ -46,29 +45,29 @@ final class SatelliteDialogUtils$getIsSessionStartedFlow$1 extends SuspendLambda
     /* JADX WARN: Type inference failed for: r2v1, types: [android.telephony.satellite.SatelliteModemStateCallback, com.android.settingslib.satellite.SatelliteDialogUtils$getIsSessionStartedFlow$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        int i;
+        int iRegisterForModemStateChanged;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        int i2 = this.label;
-        if (i2 == 0) {
+        int i = this.label;
+        if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final ProducerScope producerScope = (ProducerScope) this.L$0;
             final ?? r2 = new SatelliteModemStateCallback() { // from class: com.android.settingslib.satellite.SatelliteDialogUtils$getIsSessionStartedFlow$1$callback$1
-                public final void onSatelliteModemStateChanged(int i3) {
+                public final void onSatelliteModemStateChanged(int i2) {
                     SatelliteDialogUtils.INSTANCE.getClass();
-                    boolean z = (i3 == -1 || i3 == 4 || i3 == 5) ? false : true;
-                    Log.i("SatelliteDialogUtils", "Satellite modem state changed: state=" + i3 + ", isSessionStarted=" + z);
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    boolean z = (i2 == -1 || i2 == 4 || i2 == 5) ? false : true;
+                    Log.i("SatelliteDialogUtils", "Satellite modem state changed: state=" + i2 + ", isSessionStarted=" + z);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             try {
-                i = this.$satelliteManager.registerForModemStateChanged(ExecutorsKt.asExecutor(Dispatchers.Default), (SatelliteModemStateCallback) r2);
+                iRegisterForModemStateChanged = this.$satelliteManager.registerForModemStateChanged(ExecutorsKt.asExecutor(Dispatchers.Default), (SatelliteModemStateCallback) r2);
             } catch (IllegalStateException e) {
                 Log.w("SatelliteDialogUtils", "IllegalStateException: " + e);
-                i = -1;
+                iRegisterForModemStateChanged = -1;
             }
-            if (i != 0) {
-                RecordingInputConnection$$ExternalSyntheticOutline0.m(i, "Failed to register for satellite modem state change: ", "SatelliteDialogUtils");
-                ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.FALSE);
+            if (iRegisterForModemStateChanged != 0) {
+                RecordingInputConnection$$ExternalSyntheticOutline0.m(iRegisterForModemStateChanged, "Failed to register for satellite modem state change: ", "SatelliteDialogUtils");
+                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
             }
             final SatelliteManager satelliteManager = this.$satelliteManager;
             Function0 function0 = new Function0() { // from class: com.android.settingslib.satellite.SatelliteDialogUtils$getIsSessionStartedFlow$1$$ExternalSyntheticLambda0
@@ -87,7 +86,7 @@ final class SatelliteDialogUtils$getIsSessionStartedFlow$1 extends SuspendLambda
                 return coroutineSingletons;
             }
         } else {
-            if (i2 != 1) {
+            if (i != 1) {
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);

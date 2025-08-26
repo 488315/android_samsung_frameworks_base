@@ -46,7 +46,6 @@ import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneContainerStartable implements CoreStartable {
     public final AlternateBouncerInteractor alternateBouncerInteractor;
@@ -81,7 +80,6 @@ public final class SceneContainerStartable implements CoreStartable {
     public final VibratorHelper vibratorHelper;
     public final NotificationShadeWindowController windowController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -132,34 +130,34 @@ public final class SceneContainerStartable implements CoreStartable {
 
     @Override // com.android.systemui.CoreStartable, com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.append("SceneContainerFlag").println(":");
-        asIndenting.increaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.append("SceneContainerFlag").println(":");
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
-            asIndenting.append("Framework availability").println(":");
-            asIndenting.increaseIndent();
-            DumpUtilsKt.println(asIndenting, "isEnabled", Boolean.FALSE);
-            asIndenting.println(SceneContainerFlag.requirementDescription());
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.append("Framework availability").println(":");
+            indentingPrintWriterAsIndenting.increaseIndent();
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isEnabled", Boolean.FALSE);
+            indentingPrintWriterAsIndenting.println(SceneContainerFlag.requirementDescription());
+            indentingPrintWriterAsIndenting.decreaseIndent();
         } catch (Throwable th) {
             throw th;
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 
     @Override // com.android.systemui.CoreStartable
     public final void start() {
-        String requirementDescription = SceneContainerFlag.requirementDescription();
+        String strRequirementDescription = SceneContainerFlag.requirementDescription();
         SceneLogger sceneLogger = this.sceneLogger;
         sceneLogger.getClass();
         LogLevel logLevel = LogLevel.WARNING;
         SceneLogger$$ExternalSyntheticLambda0 sceneLogger$$ExternalSyntheticLambda0 = new SceneLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = sceneLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = false;
-        logMessageImpl.str1 = requirementDescription;
-        logBuffer.commit(obtain);
+        logMessageImpl.str1 = strRequirementDescription;
+        logBuffer.commit(logMessageObtain);
     }
 }

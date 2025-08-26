@@ -5,14 +5,12 @@ import java.util.List;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimatorSet extends Animator {
     public final List animators;
     public final Ordering ordering;
     public final int totalDuration;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -31,6 +29,7 @@ public final class AnimatorSet extends Animator {
     }
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    /* JADX WARN: Multi-variable type inference failed */
     public AnimatorSet(List<? extends Animator> list, Ordering ordering) {
         super(0 == true ? 1 : 0);
         Animator animator = null;
@@ -38,19 +37,19 @@ public final class AnimatorSet extends Animator {
         this.ordering = ordering;
         int i = WhenMappings.$EnumSwitchMapping$0[ordering.ordinal()];
         int i2 = 1;
-        int i3 = 0;
+        int totalDuration = 0;
         if (i == 1) {
             if (!list.isEmpty()) {
                 Animator animator2 = list.get(0);
-                int totalDuration = animator2.getTotalDuration();
+                int totalDuration2 = animator2.getTotalDuration();
                 int size = list.size() - 1;
                 if (1 <= size) {
                     while (true) {
                         Animator animator3 = list.get(i2);
-                        int totalDuration2 = animator3.getTotalDuration();
-                        if (totalDuration < totalDuration2) {
+                        int totalDuration3 = animator3.getTotalDuration();
+                        if (totalDuration2 < totalDuration3) {
                             animator2 = animator3;
-                            totalDuration = totalDuration2;
+                            totalDuration2 = totalDuration3;
                         }
                         if (i2 == size) {
                             break;
@@ -63,21 +62,21 @@ public final class AnimatorSet extends Animator {
             }
             Animator animator4 = animator;
             if (animator4 != null) {
-                i3 = animator4.getTotalDuration();
+                totalDuration = animator4.getTotalDuration();
             }
         } else {
             if (i != 2) {
                 throw new NoWhenBranchMatchedException();
             }
             int size2 = list.size();
-            int i4 = 0;
-            while (i3 < size2) {
-                i4 += list.get(i3).getTotalDuration();
-                i3++;
+            int totalDuration4 = 0;
+            while (totalDuration < size2) {
+                totalDuration4 += list.get(totalDuration).getTotalDuration();
+                totalDuration++;
             }
-            i3 = i4;
+            totalDuration = totalDuration4;
         }
-        this.totalDuration = i3;
+        this.totalDuration = totalDuration;
     }
 
     @Override // androidx.compose.animation.graphics.vector.Animator

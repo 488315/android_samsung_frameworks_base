@@ -56,7 +56,6 @@ import java.util.ListIterator;
 import java.util.function.Consumer;
 import kotlin.collections.builders.ListBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSTileCustomizerController extends ViewControllerBase {
     public final CustomizerTileViewPager mActiveTileLayout;
@@ -64,6 +63,7 @@ public class QSTileCustomizerController extends ViewControllerBase {
     public final Context mContext;
     public CustomActionManager mCustomActionManager;
     public CustomActionMoveItem mCustomActionMoveItem;
+    public int mCutoutBottomMargin;
     public int mCutoutTopMargin;
     public final View mDoneButton;
     public QSCMainViewController$showView$1$1 mDoneCallBack;
@@ -98,7 +98,7 @@ public class QSTileCustomizerController extends ViewControllerBase {
     }
 
     /* renamed from: -$$Nest$mshowResetDialog, reason: not valid java name */
-    public static void m2885$$Nest$mshowResetDialog(QSTileCustomizerController qSTileCustomizerController) {
+    public static void m2902$$Nest$mshowResetDialog(QSTileCustomizerController qSTileCustomizerController) {
         if (qSTileCustomizerController.mResetDialog == null) {
             SystemUIDialog systemUIDialog = new SystemUIDialog(((QSTileCustomizerBase) qSTileCustomizerController.mView).getContext(), R.style.Theme_SystemUI_Dialog_Alert);
             qSTileCustomizerController.mResetDialog = systemUIDialog;
@@ -191,16 +191,20 @@ public class QSTileCustomizerController extends ViewControllerBase {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r12v5, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r12v6, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$1] */
-    public QSTileCustomizerController(Context context, SecQSSettingEditResources secQSSettingEditResources, boolean z, int i) {
-        super((QpRune.QUICK_POP_OVER_CUSTOMIZER && z) ? secQSSettingEditResources.isCurrentTopEdit ? new QSPopOverTopTileCustomizer(context, i) : new QSPopOverFullTileCustomizer(context, i) : secQSSettingEditResources.isCurrentTopEdit ? new QSTopTileCustomizer(context, i) : new QSFullTileCustomizer(context, i));
+    /* JADX WARN: Removed duplicated region for block: B:61:0x01a5  */
+    /* JADX WARN: Type inference failed for: r7v5, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$$ExternalSyntheticLambda0] */
+    /* JADX WARN: Type inference failed for: r7v6, types: [com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$1] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public QSTileCustomizerController(Context context, SecQSSettingEditResources secQSSettingEditResources, boolean z, int i, int i2) throws Resources.NotFoundException {
         boolean z2;
-        View requireViewById;
+        View viewRequireViewById;
+        super((QpRune.QUICK_POP_OVER_CUSTOMIZER && z) ? secQSSettingEditResources.isCurrentTopEdit ? new QSPopOverTopTileCustomizer(context, i, i2) : new QSPopOverFullTileCustomizer(context, i, i2) : secQSSettingEditResources.isCurrentTopEdit ? new QSTopTileCustomizer(context, i, i2) : new QSFullTileCustomizer(context, i, i2));
         this.mDoneOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSTileCustomizerController.$r8$lambda$j3XH0BZWhIZQf09t7hUyJd4ZIW4(QSTileCustomizerController.this);
+                QSTileCustomizerController.$r8$lambda$j3XH0BZWhIZQf09t7hUyJd4ZIW4(this.f$0);
             }
         };
         this.mResetOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController.1
@@ -208,18 +212,21 @@ public class QSTileCustomizerController extends ViewControllerBase {
             public final void onClick(View view) {
                 SystemUIDialog systemUIDialog = QSTileCustomizerController.this.mResetDialog;
                 if (systemUIDialog == null || !systemUIDialog.isShowing()) {
-                    QSTileCustomizerController.m2885$$Nest$mshowResetDialog(QSTileCustomizerController.this);
+                    QSTileCustomizerController.m2902$$Nest$mshowResetDialog(QSTileCustomizerController.this);
                 }
             }
         };
-        int i2 = 0;
+        int i3 = 0;
         this.mCutoutTopMargin = 0;
+        this.mCutoutBottomMargin = 0;
         QSTileCustomizerBase qSTileCustomizerBase = (QSTileCustomizerBase) this.mView;
         qSTileCustomizerBase.mEditResources = secQSSettingEditResources;
         this.mIsTopEdit = secQSSettingEditResources.isCurrentTopEdit;
         this.mContext = context;
         this.mResetButton = qSTileCustomizerBase.findViewById(R.id.left_button);
         this.mDoneButton = ((QSTileCustomizerBase) this.mView).findViewById(R.id.right_button);
+        this.mCutoutTopMargin = i;
+        this.mCutoutBottomMargin = i2;
         SecQSCustomizerAnimator.Companion companion = SecQSCustomizerAnimator.Companion;
         T t = this.mView;
         companion.getClass();
@@ -245,18 +252,20 @@ public class QSTileCustomizerController extends ViewControllerBase {
             }
             View view2 = (View) itr2.next();
             if (view2 != null) {
-                view2.setTranslationY(displayHeight);
+                if (!((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
+                    view2.setTranslationY(displayHeight);
+                }
                 view2.setAlpha(0.0f);
             }
         }
         View view3 = SecQSCustomizerAnimator.mainView;
-        if (view3 != null && (requireViewById = view3.requireViewById(R.id.navigation_bar_view)) != null) {
-            requireViewById.setAlpha(0.0f);
+        if (view3 != null && (viewRequireViewById = view3.requireViewById(R.id.navigation_bar_view)) != null) {
+            viewRequireViewById.setAlpha(0.0f);
         }
-        View findViewById = t.findViewById(R.id.qs_customize_top_summary_buttons);
-        if (findViewById != null) {
-            findViewById.setScaleY(0.95f);
-            findViewById.setScaleX(0.95f);
+        View viewFindViewById = t.findViewById(R.id.qs_customize_top_summary_buttons);
+        if (viewFindViewById != null) {
+            viewFindViewById.setScaleY(0.95f);
+            viewFindViewById.setScaleX(0.95f);
         }
         this.mEditResources = secQSSettingEditResources;
         CustomizerTileViewPager customizerTileViewPager = (CustomizerTileViewPager) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customizer_active_pager);
@@ -283,49 +292,29 @@ public class QSTileCustomizerController extends ViewControllerBase {
         }
         customizerTileViewPager.mInitialPagenum = secQSCustomizerTileAdapter.mActiveCurrentPage;
         customizerTileViewPager2.mInitialPagenum = secQSCustomizerTileAdapter.mAvailableCurrentPage;
-        boolean z3 = Settings.System.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY, 0) != 0;
-        LinearLayout linearLayout = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_available_area);
-        LinearLayout linearLayout2 = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_active_page_parent);
-        if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
-            linearLayout.setBackgroundResource(R.drawable.qs_customizer_bg_available_area_tablet);
-        }
-        if (!z3) {
-            int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.qs_edit_available_area_corner_radius);
-            boolean isBarPhone = SecQSSettingEditResources.isBarPhone();
-            float f = dimensionPixelSize;
-            linearLayout.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset(14).setBackgroundCornerRadius(f, f, !isBarPhone ? f : 0.0f, isBarPhone ? 0.0f : f).setRadius(200).build());
-            if (this.mIsTopEdit) {
-                linearLayout2.semSetBlurInfo(null);
-            } else {
-                linearLayout2.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset(14).setBackgroundCornerRadius(f).build());
-            }
-        }
+        updateBlur();
         ((QSTileCustomizerBase) this.mView).updateResources();
         ArrayList arrayList = secQSCustomizerTileAdapter.mActiveTiles;
         if (arrayList != null) {
             customizerTileViewPager.addTiles(arrayList);
             ArrayList arrayList2 = secQSCustomizerTileAdapter.mActiveTiles;
             int size2 = arrayList2.size();
-            int i3 = 0;
-            while (i3 < size2) {
-                Object obj = arrayList2.get(i3);
-                i3++;
+            int i4 = 0;
+            while (i4 < size2) {
+                Object obj = arrayList2.get(i4);
+                i4++;
                 ((CustomTileInfo) obj).longClickListener = qSTileCustomizerInteractionManager.longClickListener;
             }
         }
         SecQSSettingEditResources secQSSettingEditResources2 = this.mEditResources;
         if (this.mIsTopEdit) {
             SecQSCustomizerTileAdapter secQSCustomizerTileAdapter2 = secQSSettingEditResources2.tileTopAdapter;
-            if (secQSCustomizerTileAdapter2 != null) {
-                z2 = secQSCustomizerTileAdapter2.mIsLoadedAllTiles;
-            }
-            z2 = false;
+            z2 = secQSCustomizerTileAdapter2 != null ? secQSCustomizerTileAdapter2.mIsLoadedAllTiles : false;
         } else {
             SecQSCustomizerTileAdapter secQSCustomizerTileAdapter3 = secQSSettingEditResources2.tileFullAdapter;
             if (secQSCustomizerTileAdapter3 != null) {
                 z2 = secQSCustomizerTileAdapter3.mIsLoadedAllTiles;
             }
-            z2 = false;
         }
         if (z2) {
             ArrayList arrayList3 = secQSCustomizerTileAdapter.mAvailableTiles;
@@ -334,9 +323,9 @@ public class QSTileCustomizerController extends ViewControllerBase {
                 this.mAvailableTileLayout.addTiles(arrayList3);
                 ArrayList arrayList4 = secQSCustomizerTileAdapter.mAvailableTiles;
                 int size3 = arrayList4.size();
-                while (i2 < size3) {
-                    Object obj2 = arrayList4.get(i2);
-                    i2++;
+                while (i3 < size3) {
+                    Object obj2 = arrayList4.get(i3);
+                    i3++;
                     ((CustomTileInfo) obj2).longClickListener = qSTileCustomizerInteractionManager.longClickListener;
                 }
             }
@@ -344,6 +333,10 @@ public class QSTileCustomizerController extends ViewControllerBase {
             secQSCustomizerTileAdapter.mOnTileChangedCallback = new QSTileCustomizerController$$ExternalSyntheticLambda3(this);
         }
         this.message = 100;
+    }
+
+    public static boolean isLargeScreen$10() {
+        return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
@@ -367,18 +360,18 @@ public class QSTileCustomizerController extends ViewControllerBase {
             while (i < size) {
                 Object obj = arrayList2.get(i);
                 i++;
-                ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder((View) obj, PropertyValuesHolder.ofFloat((Property<?, Float>) View.ALPHA, 0.0f), PropertyValuesHolder.ofFloat((Property<?, Float>) View.TRANSLATION_Y, displayHeight));
-                ofPropertyValuesHolder.setDuration(200L);
-                arrayList.add(ofPropertyValuesHolder);
+                ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder((View) obj, PropertyValuesHolder.ofFloat((Property<?, Float>) View.ALPHA, 0.0f), PropertyValuesHolder.ofFloat((Property<?, Float>) View.TRANSLATION_Y, displayHeight));
+                objectAnimatorOfPropertyValuesHolder.setDuration(200L);
+                arrayList.add(objectAnimatorOfPropertyValuesHolder);
             }
-            ObjectAnimator ofPropertyValuesHolder2 = ObjectAnimator.ofPropertyValuesHolder(t.findViewById(R.id.qs_customize_top_summary_buttons), PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_X, 0.0f), PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_Y, 0.0f));
-            ofPropertyValuesHolder2.setDuration(200L);
-            arrayList.add(ofPropertyValuesHolder2);
+            ObjectAnimator objectAnimatorOfPropertyValuesHolder2 = ObjectAnimator.ofPropertyValuesHolder(t.findViewById(R.id.qs_customize_top_summary_buttons), PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_X, 0.0f), PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_Y, 0.0f));
+            objectAnimatorOfPropertyValuesHolder2.setDuration(200L);
+            arrayList.add(objectAnimatorOfPropertyValuesHolder2);
             View view = SecQSCustomizerAnimator.mainView;
             if (view != null) {
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view.requireViewById(R.id.navigation_bar_view), (Property<View, Float>) View.ALPHA, 0.0f);
-                ofFloat.setDuration(200L);
-                arrayList.add(ofFloat);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view.requireViewById(R.id.navigation_bar_view), (Property<View, Float>) View.ALPHA, 0.0f);
+                objectAnimatorOfFloat.setDuration(200L);
+                arrayList.add(objectAnimatorOfFloat);
             }
             AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.playTogether(arrayList);
@@ -411,21 +404,21 @@ public class QSTileCustomizerController extends ViewControllerBase {
     }
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase, com.android.systemui.util.ViewController
-    public final void onViewAttached() {
-        ViewPropertyAnimator animate;
-        ViewPropertyAnimator scaleY;
-        ViewPropertyAnimator scaleX;
+    public final void onViewAttached() throws Resources.NotFoundException {
+        ViewPropertyAnimator viewPropertyAnimatorAnimate;
+        ViewPropertyAnimator viewPropertyAnimatorScaleY;
+        ViewPropertyAnimator viewPropertyAnimatorScaleX;
         ViewPropertyAnimator duration;
-        View requireViewById;
-        ViewPropertyAnimator animate2;
-        ViewPropertyAnimator alpha;
+        View viewRequireViewById;
+        ViewPropertyAnimator viewPropertyAnimatorAnimate2;
+        ViewPropertyAnimator viewPropertyAnimatorAlpha;
         ViewPropertyAnimator duration2;
-        ViewPropertyAnimator animate3;
-        ViewPropertyAnimator translationY;
-        ViewPropertyAnimator alpha2;
+        ViewPropertyAnimator viewPropertyAnimatorAnimate3;
+        ViewPropertyAnimator viewPropertyAnimatorTranslationY;
+        ViewPropertyAnimator viewPropertyAnimatorAlpha2;
         ViewPropertyAnimator duration3;
-        ViewPropertyAnimator animate4;
-        ViewPropertyAnimator alpha3;
+        ViewPropertyAnimator viewPropertyAnimatorAnimate4;
+        ViewPropertyAnimator viewPropertyAnimatorAlpha3;
         ViewPropertyAnimator duration4;
         this.mResetButton.setOnClickListener(this.mResetOnClickListener);
         this.mDoneButton.setOnClickListener(this.mDoneOnClickListener);
@@ -434,12 +427,12 @@ public class QSTileCustomizerController extends ViewControllerBase {
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
         int panelSidePadding = secQSPanelResourcePicker.getPanelSidePadding(context);
         boolean z = QpRune.QUICK_POP_OVER_CUSTOMIZER;
-        if (z && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
-            panelSidePadding = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverMargin(this.mContext);
+        if (z && isLargeScreen$10()) {
+            panelSidePadding = secQSPanelResourcePicker.getPopOverMargin(this.mContext);
         }
-        View findViewById = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customize_top_summary_buttons);
-        findViewById.setPadding(panelSidePadding, findViewById.getPaddingTop(), panelSidePadding, findViewById.getPaddingBottom());
-        if (z && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
+        View viewFindViewById = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customize_top_summary_buttons);
+        viewFindViewById.setPadding(panelSidePadding, viewFindViewById.getPaddingTop(), panelSidePadding, viewFindViewById.getPaddingBottom());
+        if (z && isLargeScreen$10()) {
             FrameLayout frameLayout = (FrameLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customize_top_summary_buttons_button_area);
             int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.qs_pop_over_layout_edit_buttons_top_margin);
             if (frameLayout != null) {
@@ -469,23 +462,23 @@ public class QSTileCustomizerController extends ViewControllerBase {
         CustomizerTileViewPager customizerTileViewPager = this.mActiveTileLayout;
         customizerTileViewPager.mDragListener = qSTileCustomizerInteractionManager$initializeListeners$2;
         customizerTileViewPager.mClickListener = qSTileCustomizerInteractionManager.clickListener;
-        View findViewById2 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_edit_available_text);
-        View findViewById3 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customize_top_summary_buttons);
-        View findViewById4 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.scroll_top_area);
-        View findViewById5 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.scroll_bottom_area);
-        findViewById2.setTag(9999);
-        findViewById3.setTag(9999);
-        findViewById4.setTag(9999);
-        findViewById5.setTag(9999);
-        findViewById2.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
-        findViewById3.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
-        findViewById4.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
-        findViewById5.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
+        View viewFindViewById2 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_edit_available_text);
+        View viewFindViewById3 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_customize_top_summary_buttons);
+        View viewFindViewById4 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.scroll_top_area);
+        View viewFindViewById5 = ((QSTileCustomizerBase) this.mView).findViewById(R.id.scroll_bottom_area);
+        viewFindViewById2.setTag(9999);
+        viewFindViewById3.setTag(9999);
+        viewFindViewById4.setTag(9999);
+        viewFindViewById5.setTag(9999);
+        viewFindViewById2.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
+        viewFindViewById3.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
+        viewFindViewById4.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
+        viewFindViewById5.setOnDragListener(qSTileCustomizerInteractionManager.dragListener);
         customizerTileViewPager.mCustomActionManager = this.mCustomActionManager;
         SecPageIndicator secPageIndicator = (SecPageIndicator) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_available_paged_indicator);
-        View requireViewById2 = ((QSTileCustomizerBase) this.mView).requireViewById(R.id.customize_container);
+        View viewRequireViewById2 = ((QSTileCustomizerBase) this.mView).requireViewById(R.id.customize_container);
         CustomizerTileViewPager customizerTileViewPager2 = this.mAvailableTileLayout;
-        customizerTileViewPager2.mParentContainer = requireViewById2;
+        customizerTileViewPager2.mParentContainer = viewRequireViewById2;
         customizerTileViewPager2.mPageIndicator = secPageIndicator;
         secPageIndicator.setLocation(customizerTileViewPager2.mPageIndicatorPosition);
         SecPageIndicator secPageIndicator2 = customizerTileViewPager2.mPageIndicator;
@@ -576,7 +569,7 @@ public class QSTileCustomizerController extends ViewControllerBase {
                 break;
             }
             View view = (View) itr.next();
-            if (view != null && (animate4 = view.animate()) != null && (alpha3 = animate4.alpha(1.0f)) != null && (duration4 = alpha3.setDuration(100L)) != null) {
+            if (view != null && (viewPropertyAnimatorAnimate4 = view.animate()) != null && (viewPropertyAnimatorAlpha3 = viewPropertyAnimatorAnimate4.alpha(1.0f)) != null && (duration4 = viewPropertyAnimatorAlpha3.setDuration(100L)) != null) {
                 duration4.start();
             }
         }
@@ -587,46 +580,57 @@ public class QSTileCustomizerController extends ViewControllerBase {
                 break;
             }
             View view2 = (View) itr2.next();
-            if (view2 != null && (animate3 = view2.animate()) != null && (translationY = animate3.translationY(0.0f)) != null && (alpha2 = translationY.alpha(1.0f)) != null && (duration3 = alpha2.setDuration(200L)) != null) {
+            if (view2 != null && (viewPropertyAnimatorAnimate3 = view2.animate()) != null && (viewPropertyAnimatorTranslationY = viewPropertyAnimatorAnimate3.translationY(0.0f)) != null && (viewPropertyAnimatorAlpha2 = viewPropertyAnimatorTranslationY.alpha(1.0f)) != null && (duration3 = viewPropertyAnimatorAlpha2.setDuration(200L)) != null) {
                 duration3.start();
             }
         }
         View view3 = SecQSCustomizerAnimator.mainView;
-        if (view3 != null && (requireViewById = view3.requireViewById(R.id.navigation_bar_view)) != null && (animate2 = requireViewById.animate()) != null && (alpha = animate2.alpha(1.0f)) != null && (duration2 = alpha.setDuration(200L)) != null) {
+        if (view3 != null && (viewRequireViewById = view3.requireViewById(R.id.navigation_bar_view)) != null && (viewPropertyAnimatorAnimate2 = viewRequireViewById.animate()) != null && (viewPropertyAnimatorAlpha = viewPropertyAnimatorAnimate2.alpha(1.0f)) != null && (duration2 = viewPropertyAnimatorAlpha.setDuration(200L)) != null) {
             duration2.start();
         }
-        View findViewById6 = qSTileCustomizerBase.findViewById(R.id.qs_customize_top_summary_buttons);
-        if (findViewById6 == null || (animate = findViewById6.animate()) == null || (scaleY = animate.scaleY(1.0f)) == null || (scaleX = scaleY.scaleX(1.0f)) == null || (duration = scaleX.setDuration(200L)) == null) {
+        View viewFindViewById6 = qSTileCustomizerBase.findViewById(R.id.qs_customize_top_summary_buttons);
+        if (viewFindViewById6 == null || (viewPropertyAnimatorAnimate = viewFindViewById6.animate()) == null || (viewPropertyAnimatorScaleY = viewPropertyAnimatorAnimate.scaleY(1.0f)) == null || (viewPropertyAnimatorScaleX = viewPropertyAnimatorScaleY.scaleX(1.0f)) == null || (duration = viewPropertyAnimatorScaleX.setDuration(200L)) == null) {
             return;
         }
         duration.start();
     }
 
+    public final void removeBlurs() {
+        LinearLayout linearLayout = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_available_area);
+        LinearLayout linearLayout2 = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_active_page_parent);
+        if (linearLayout != null) {
+            linearLayout.semSetBlurInfo(null);
+        }
+        if (linearLayout2 != null) {
+            linearLayout2.semSetBlurInfo(null);
+        }
+    }
+
     public final void save$1() {
+        String tileLoggingName;
         String str;
-        String str2;
         SecQSCustomizerTileAdapter secQSCustomizerTileAdapter = this.mTileAdapter;
         if (secQSCustomizerTileAdapter.mTileQueryHelper.mFinished) {
             Log.d("SecQSCustomizerTileAdapter", "mCurrentSpecs =  " + secQSCustomizerTileAdapter.mCurrentSpecs);
             CustomizerTileViewPager customizerTileViewPager = this.mActiveTileLayout;
             List spec = customizerTileViewPager.getSpec();
-            boolean equals = ((ArrayList) secQSCustomizerTileAdapter.mCurrentSpecs).equals(spec);
+            boolean zEquals = ((ArrayList) secQSCustomizerTileAdapter.mCurrentSpecs).equals(spec);
             boolean z = secQSCustomizerTileAdapter.mIsTopEdit;
-            String str3 = SystemUIAnalytics.EID_EDIT_DONE;
-            if (equals) {
+            String str2 = SystemUIAnalytics.EID_EDIT_DONE;
+            if (zEquals) {
                 Log.d("SecQSCustomizerTileAdapter", "save none : same list");
                 String currentScreenID = SystemUIAnalytics.getCurrentScreenID();
                 if (z) {
-                    str3 = SystemUIAnalytics.EID_EDIT_TOP_DONE;
+                    str2 = SystemUIAnalytics.EID_EDIT_TOP_DONE;
                 }
-                SystemUIAnalytics.sendRunestoneEventCDLog(currentScreenID, str3, "isChanged", "false", SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
+                SystemUIAnalytics.sendRunestoneEventCDLog(currentScreenID, str2, "isChanged", "false", SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
                 return;
             }
             String currentScreenID2 = SystemUIAnalytics.getCurrentScreenID();
             if (z) {
-                str3 = SystemUIAnalytics.EID_EDIT_TOP_DONE;
+                str2 = SystemUIAnalytics.EID_EDIT_TOP_DONE;
             }
-            SystemUIAnalytics.sendRunestoneEventCDLog(currentScreenID2, str3, "isChanged", "true", SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
+            SystemUIAnalytics.sendRunestoneEventCDLog(currentScreenID2, str2, "isChanged", "true", SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
             if (z) {
                 Prefs.putBoolean(secQSCustomizerTileAdapter.mContext, "QQsHasEditedQuickTileList", true);
             } else {
@@ -646,23 +650,23 @@ public class QSTileCustomizerController extends ViewControllerBase {
             while (i2 < size) {
                 Object obj = arrayList.get(i2);
                 i2++;
-                String str4 = (String) obj;
-                if (!((ArrayList) secQSCustomizerTileAdapter.mCurrentSpecs).contains(str4)) {
-                    if (str4.startsWith("custom(")) {
+                String str3 = (String) obj;
+                if (!((ArrayList) secQSCustomizerTileAdapter.mCurrentSpecs).contains(str3)) {
+                    if (str3.startsWith("custom(")) {
                         TileNameConverter tileNameConverter = TileNameConverter.INSTANCE;
                         Resources resources = secQSCustomizerTileAdapter.mContext.getResources();
                         tileNameConverter.getClass();
-                        String tileLoggingName = TileNameConverter.toTileLoggingName(resources, str4);
-                        if (tileLoggingName == null) {
-                            tileLoggingName = CustomTile.getComponentFromSpec(str4).toShortString();
+                        String tileLoggingName2 = TileNameConverter.toTileLoggingName(resources, str3);
+                        if (tileLoggingName2 == null) {
+                            tileLoggingName2 = CustomTile.getComponentFromSpec(str3).toShortString();
                         }
-                        str2 = tileLoggingName;
+                        str = tileLoggingName2;
                     } else {
-                        str2 = str4;
+                        str = str3;
                     }
-                    String valueOf = String.valueOf(arrayList.indexOf(str4) + 1);
-                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), z ? SystemUIAnalytics.EID_EDIT_TOP_MOVE_TO_ACTIVE : SystemUIAnalytics.EID_EDIT_MOVE_TO_ACTIVE, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_NAME, str2, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION, valueOf);
-                    MediaSessions$H$$ExternalSyntheticOutline0.m("save add : ", str2, " ", valueOf, "SecQSCustomizerTileAdapter");
+                    String strValueOf = String.valueOf(arrayList.indexOf(str3) + 1);
+                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), z ? SystemUIAnalytics.EID_EDIT_TOP_MOVE_TO_ACTIVE : SystemUIAnalytics.EID_EDIT_MOVE_TO_ACTIVE, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_NAME, str, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_POSITION, strValueOf);
+                    MediaSessions$H$$ExternalSyntheticOutline0.m("save add : ", str, " ", strValueOf, "SecQSCustomizerTileAdapter");
                 }
             }
             ArrayList arrayList2 = (ArrayList) secQSCustomizerTileAdapter.mCurrentSpecs;
@@ -670,21 +674,21 @@ public class QSTileCustomizerController extends ViewControllerBase {
             while (i < size2) {
                 Object obj2 = arrayList2.get(i);
                 i++;
-                String str5 = (String) obj2;
-                if (str5.startsWith("custom(")) {
+                String str4 = (String) obj2;
+                if (str4.startsWith("custom(")) {
                     TileNameConverter tileNameConverter2 = TileNameConverter.INSTANCE;
                     Resources resources2 = secQSCustomizerTileAdapter.mContext.getResources();
                     tileNameConverter2.getClass();
-                    str = TileNameConverter.toTileLoggingName(resources2, str5);
-                    if (str == null) {
-                        str = CustomTile.getComponentFromSpec(str5).toShortString();
+                    tileLoggingName = TileNameConverter.toTileLoggingName(resources2, str4);
+                    if (tileLoggingName == null) {
+                        tileLoggingName = CustomTile.getComponentFromSpec(str4).toShortString();
                     }
                 } else {
-                    str = str5;
+                    tileLoggingName = str4;
                 }
-                if (!arrayList.contains(str5)) {
-                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), z ? SystemUIAnalytics.EID_EDIT_TOP_MOVE_TO_AVAILABLE : SystemUIAnalytics.EID_EDIT_MOVE_TO_AVAILABLE, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_NAME, str);
-                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("save remove : "), str, "SecQSCustomizerTileAdapter");
+                if (!arrayList.contains(str4)) {
+                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), z ? SystemUIAnalytics.EID_EDIT_TOP_MOVE_TO_AVAILABLE : SystemUIAnalytics.EID_EDIT_MOVE_TO_AVAILABLE, SystemUIAnalytics.QPPE_KEY_EDITED_BUTTON_NAME, tileLoggingName);
+                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("save remove : "), tileLoggingName, "SecQSCustomizerTileAdapter");
                 }
             }
             secQSCustomizerTileAdapter.mCurrentSpecs = spec;
@@ -703,17 +707,52 @@ public class QSTileCustomizerController extends ViewControllerBase {
         this.mDoneCallBack = (QSCMainViewController$showView$1$1) runnable;
     }
 
+    public final void updateBlur() throws Resources.NotFoundException {
+        boolean z = Settings.System.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY, 0) != 0;
+        LinearLayout linearLayout = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_available_area);
+        LinearLayout linearLayout2 = (LinearLayout) ((QSTileCustomizerBase) this.mView).findViewById(R.id.qs_active_page_parent);
+        if (isLargeScreen$10()) {
+            linearLayout.setTranslationZ(1.0f);
+            linearLayout2.setTranslationZ(1.0f);
+        } else {
+            linearLayout.setTranslationZ(0.0f);
+            linearLayout2.setTranslationZ(0.0f);
+        }
+        if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
+            linearLayout.setBackgroundResource(R.drawable.qs_customizer_bg_available_area_tablet);
+        }
+        if (z) {
+            return;
+        }
+        int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.qs_edit_available_area_corner_radius);
+        this.mEditResources.getClass();
+        boolean zIsBarPhone = SecQSSettingEditResources.isBarPhone();
+        float f = dimensionPixelSize;
+        linearLayout.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset(14).setBackgroundCornerRadius(f, f, !zIsBarPhone ? f : 0.0f, zIsBarPhone ? 0.0f : f).setRadius(200).build());
+        if (this.mIsTopEdit) {
+            linearLayout2.semSetBlurInfo(null);
+        } else {
+            linearLayout2.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset(14).setBackgroundCornerRadius(f).build());
+        }
+    }
+
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
-    public final void windowInsetChanged(int i) {
+    public final void windowInsetChanged(int i, int i2) throws Resources.NotFoundException {
         boolean z = QpRune.QUICK_POP_OVER_CUSTOMIZER;
-        if (z && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && this.mCutoutTopMargin != i) {
+        if (z && isLargeScreen$10()) {
+            if (this.mCutoutTopMargin == i && this.mCutoutBottomMargin == i2) {
+                return;
+            }
             this.mCutoutTopMargin = i;
+            this.mCutoutBottomMargin = i2;
             QSTileCustomizerBase qSTileCustomizerBase = (QSTileCustomizerBase) this.mView;
             qSTileCustomizerBase.getClass();
-            if (z && QSTileCustomizerBase.isLargeScreen() && qSTileCustomizerBase.mCutoutTopMargin != i) {
+            if (z && QSTileCustomizerBase.isLargeScreen() && (qSTileCustomizerBase.mCutoutTopMargin != i || qSTileCustomizerBase.mCutoutBottomMargin != i2)) {
                 qSTileCustomizerBase.mCutoutTopMargin = i;
+                qSTileCustomizerBase.mCutoutBottomMargin = i2;
                 qSTileCustomizerBase.calculateAvailableArea();
             }
+            updateBlur();
         }
     }
 }

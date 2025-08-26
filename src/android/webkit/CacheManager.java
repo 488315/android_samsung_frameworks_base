@@ -120,11 +120,11 @@ public final class CacheManager {
     }
 
     @Deprecated
-    public static void saveCacheFile(String str, CacheResult cacheResult) {
+    public static void saveCacheFile(String str, CacheResult cacheResult) throws IOException {
         saveCacheFile(str, 0L, cacheResult);
     }
 
-    static void saveCacheFile(String str, long j, CacheResult cacheResult) {
+    static void saveCacheFile(String str, long j, CacheResult cacheResult) throws IOException {
         try {
             cacheResult.outStream.close();
         } catch (IOException unused) {

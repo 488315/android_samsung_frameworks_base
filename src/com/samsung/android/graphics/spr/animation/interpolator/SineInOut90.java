@@ -19,15 +19,15 @@ public class SineInOut90 implements Interpolator {
         float f2 = f / 1.0f;
         float[][] fArr = segments;
         float length = fArr.length;
-        int floor = (int) Math.floor(length * f2);
-        if (floor >= fArr.length) {
-            floor = fArr.length - 1;
+        int iFloor = (int) Math.floor(length * f2);
+        if (iFloor >= fArr.length) {
+            iFloor = fArr.length - 1;
         }
-        if (floor < 0) {
-            floor = 0;
+        if (iFloor < 0) {
+            iFloor = 0;
         }
-        float f3 = (f2 - (floor * (1.0f / length))) * length;
-        float[] fArr2 = fArr[floor];
+        float f3 = (f2 - (iFloor * (1.0f / length))) * length;
+        float[] fArr2 = fArr[iFloor];
         float f4 = fArr2[0];
         return ((f4 + (f3 * (((1.0f - f3) * 2.0f * (fArr2[1] - f4)) + ((fArr2[2] - f4) * f3)))) * 1.0f) + 0.0f;
     }

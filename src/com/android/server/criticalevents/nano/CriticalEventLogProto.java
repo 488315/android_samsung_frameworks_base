@@ -74,18 +74,18 @@ public final class CriticalEventLogProto extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         long j = this.timestampMs;
         if (j != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
         }
         int i = this.windowMs;
         if (i != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
         }
         int i2 = this.capacity;
         if (i2 != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i2);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i2);
         }
         CriticalEventProto[] criticalEventProtoArr = this.events;
         if (criticalEventProtoArr != null && criticalEventProtoArr.length > 0) {
@@ -97,29 +97,29 @@ public final class CriticalEventLogProto extends MessageNano {
                 }
                 CriticalEventProto criticalEventProto = criticalEventProtoArr2[i3];
                 if (criticalEventProto != null) {
-                    computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(4, criticalEventProto);
+                    iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(4, criticalEventProto);
                 }
                 i3++;
             }
         }
-        return computeSerializedSize;
+        return iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public CriticalEventLogProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 8) {
+            if (tag == 8) {
                 this.timestampMs = codedInputByteBufferNano.readInt64();
-            } else if (readTag == 16) {
+            } else if (tag == 16) {
                 this.windowMs = codedInputByteBufferNano.readInt32();
-            } else if (readTag == 24) {
+            } else if (tag == 24) {
                 this.capacity = codedInputByteBufferNano.readInt32();
-            } else if (readTag != 34) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 34) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

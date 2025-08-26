@@ -19,8 +19,8 @@ import androidx.window.embedding.EmbeddingInterfaceCompat;
 import androidx.window.embedding.ExtensionEmbeddingBackend;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import java.util.EnumMap;
+import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PartnerConfigHelper {
     public static final String EMBEDDED_ACTIVITY_RESOURCE_SUFFIX = "_embedded_activity";
@@ -69,10 +69,10 @@ public class PartnerConfigHelper {
     Bundle resultBundle;
 
     /* JADX WARN: Type inference failed for: r1v5, types: [com.google.android.setupcompat.partnerconfig.PartnerConfigHelper$1] */
-    private PartnerConfigHelper(Context context) {
+    private PartnerConfigHelper(Context context) throws PackageManager.NameNotFoundException {
         Handler handler = null;
         this.resultBundle = null;
-        EnumMap<PartnerConfig, Object> enumMap = new EnumMap<>((Class<PartnerConfig>) PartnerConfig.class);
+        EnumMap<PartnerConfig, Object> enumMap = new EnumMap<>(PartnerConfig.class);
         this.partnerResourceCache = enumMap;
         Bundle bundle = this.resultBundle;
         if (bundle == null || bundle.isEmpty()) {
@@ -113,21 +113,17 @@ public class PartnerConfigHelper {
     }
 
     public static synchronized PartnerConfigHelper get(Context context) {
-        PartnerConfigHelper partnerConfigHelper;
-        synchronized (PartnerConfigHelper.class) {
-            try {
-                if (!isValidInstance(context)) {
-                    instance = new PartnerConfigHelper(context);
-                }
-                partnerConfigHelper = instance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (!isValidInstance(context)) {
+                instance = new PartnerConfigHelper(context);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return partnerConfigHelper;
+        return instance;
     }
 
-    public static Uri getContentUri(Context context) {
+    public static Uri getContentUri(Context context) throws PackageManager.NameNotFoundException {
         String str;
         if (mAuthority == null) {
             try {
@@ -142,7 +138,7 @@ public class PartnerConfigHelper {
         return new Uri.Builder().scheme("content").authority(mAuthority).build();
     }
 
-    public static TypedValue getTypedValueFromResource(Resources resources, int i) {
+    public static TypedValue getTypedValueFromResource(Resources resources, int i) throws Resources.NotFoundException {
         TypedValue typedValue = new TypedValue();
         resources.getValue(i, typedValue, true);
         if (typedValue.type == 5) {
@@ -286,8 +282,8 @@ public class PartnerConfigHelper {
             return false;
         }
         boolean z = isSetupWizardDayNightEnabled(context) && (configuration.uiMode & 48) != savedConfigUiMode;
-        boolean isEmbeddedActivityOnePaneEnabled = isEmbeddedActivityOnePaneEnabled(context);
-        if (!z && isEmbeddedActivityOnePaneEnabled == savedConfigEmbeddedActivityMode && configuration.orientation == savedOrientation && configuration.screenWidthDp == savedScreenWidth && configuration.screenHeightDp == savedScreenHeight) {
+        boolean zIsEmbeddedActivityOnePaneEnabled = isEmbeddedActivityOnePaneEnabled(context);
+        if (!z && zIsEmbeddedActivityOnePaneEnabled == savedConfigEmbeddedActivityMode && configuration.orientation == savedOrientation && configuration.screenWidthDp == savedScreenWidth && configuration.screenHeightDp == savedScreenHeight) {
             return true;
         }
         savedConfigUiMode = configuration.uiMode & 48;
@@ -309,22 +305,20 @@ public class PartnerConfigHelper {
     }
 
     public static synchronized void resetInstance() {
-        synchronized (PartnerConfigHelper.class) {
-            instance = null;
-            suwDayNightEnabledBundle = null;
-            applyExtendedPartnerConfigBundle = null;
-            applyMaterialYouConfigBundle = null;
-            applyDynamicColorBundle = null;
-            applyFullDynamicColorBundle = null;
-            applyNeutralButtonStyleBundle = null;
-            applyEmbeddedActivityOnePaneBundle = null;
-            suwDefaultThemeBundle = null;
-            applyTransitionBundle = null;
-            applyForceTwoPaneBundle = null;
-            applyGlifExpressiveBundle = null;
-            keyboardFocusEnhancementBundle = null;
-            enableMetricsLoggingBundle = null;
-        }
+        instance = null;
+        suwDayNightEnabledBundle = null;
+        applyExtendedPartnerConfigBundle = null;
+        applyMaterialYouConfigBundle = null;
+        applyDynamicColorBundle = null;
+        applyFullDynamicColorBundle = null;
+        applyNeutralButtonStyleBundle = null;
+        applyEmbeddedActivityOnePaneBundle = null;
+        suwDefaultThemeBundle = null;
+        applyTransitionBundle = null;
+        applyForceTwoPaneBundle = null;
+        applyGlifExpressiveBundle = null;
+        keyboardFocusEnhancementBundle = null;
+        enableMetricsLoggingBundle = null;
     }
 
     public static boolean shouldApplyExtendedPartnerConfig(Context context) {
@@ -341,7 +335,7 @@ public class PartnerConfigHelper {
         return bundle != null && bundle.getBoolean(IS_EXTENDED_PARTNER_CONFIG_ENABLED_METHOD, false);
     }
 
-    public final boolean getBoolean(Context context, PartnerConfig partnerConfig, boolean z) {
+    public final boolean getBoolean(Context context, PartnerConfig partnerConfig, boolean z) throws Resources.NotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.BOOL) {
             throw new IllegalArgumentException("Not a bool resource");
         }
@@ -358,32 +352,32 @@ public class PartnerConfigHelper {
         }
     }
 
-    public final int getColor(Context context, PartnerConfig partnerConfig) {
+    public final int getColor(Context context, PartnerConfig partnerConfig) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.COLOR) {
             throw new IllegalArgumentException("Not a color resource");
         }
         if (this.partnerResourceCache.containsKey(partnerConfig)) {
             return ((Integer) this.partnerResourceCache.get(partnerConfig)).intValue();
         }
-        int i = 0;
+        int color = 0;
         try {
             ResourceEntry resourceEntryFromKey = getResourceEntryFromKey(context, partnerConfig.getResourceName());
             Resources resources = resourceEntryFromKey.resources;
-            int i2 = resourceEntryFromKey.resourceId;
+            int i = resourceEntryFromKey.resourceId;
             TypedValue typedValue = new TypedValue();
-            resources.getValue(i2, typedValue, true);
+            resources.getValue(i, typedValue, true);
             if (typedValue.type == 1 && typedValue.data == 0) {
                 return 0;
             }
-            i = resources.getColor(i2, null);
-            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) Integer.valueOf(i));
-            return i;
+            color = resources.getColor(i, null);
+            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) Integer.valueOf(color));
+            return color;
         } catch (NullPointerException unused) {
-            return i;
+            return color;
         }
     }
 
-    public final float getDimension(Context context, PartnerConfig partnerConfig, float f) {
+    public final float getDimension(Context context, PartnerConfig partnerConfig, float f) throws Resources.NotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.DIMENSION) {
             throw new IllegalArgumentException("Not a dimension resource");
         }
@@ -402,7 +396,7 @@ public class PartnerConfigHelper {
         }
     }
 
-    public final Drawable getDrawable(Context context, PartnerConfig partnerConfig) {
+    public final Drawable getDrawable(Context context, PartnerConfig partnerConfig) throws Resources.NotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.DRAWABLE) {
             throw new IllegalArgumentException("Not a drawable resource");
         }
@@ -434,18 +428,18 @@ public class PartnerConfigHelper {
         if (this.partnerResourceCache.containsKey(partnerConfig)) {
             return ((Float) this.partnerResourceCache.get(partnerConfig)).floatValue();
         }
-        float f = 0.0f;
+        float fraction = 0.0f;
         try {
             ResourceEntry resourceEntryFromKey = getResourceEntryFromKey(context, partnerConfig.getResourceName());
-            f = resourceEntryFromKey.resources.getFraction(resourceEntryFromKey.resourceId, 1, 1);
-            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) Float.valueOf(f));
-            return f;
+            fraction = resourceEntryFromKey.resources.getFraction(resourceEntryFromKey.resourceId, 1, 1);
+            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) Float.valueOf(fraction));
+            return fraction;
         } catch (Resources.NotFoundException | NullPointerException unused) {
-            return f;
+            return fraction;
         }
     }
 
-    public final int getInteger(Context context, PartnerConfig partnerConfig, int i) {
+    public final int getInteger(Context context, PartnerConfig partnerConfig, int i) throws Resources.NotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.INTEGER) {
             throw new IllegalArgumentException("Not a integer resource");
         }
@@ -462,45 +456,150 @@ public class PartnerConfigHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0180  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x013d A[Catch: NameNotFoundException | NotFoundException -> 0x0174, TryCatch #1 {NameNotFoundException | NotFoundException -> 0x0174, blocks: (B:8:0x0027, B:10:0x002b, B:10:0x002b, B:12:0x0041, B:12:0x0041, B:14:0x005a, B:14:0x005a, B:16:0x0068, B:16:0x0068, B:21:0x0078, B:23:0x0080, B:25:0x0098, B:32:0x00bb, B:32:0x00bb, B:34:0x00bf, B:34:0x00bf, B:36:0x00d5, B:36:0x00d5, B:37:0x00ed, B:37:0x00ed, B:39:0x00fb, B:39:0x00fb, B:56:0x0135, B:58:0x013d, B:60:0x0155), top: B:72:0x0023 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.google.android.setupcompat.partnerconfig.ResourceEntry getResourceEntryFromKey(android.content.Context r7, java.lang.String r8) {
-        /*
-            Method dump skipped, instructions count: 406
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.getResourceEntryFromKey(android.content.Context, java.lang.String):com.google.android.setupcompat.partnerconfig.ResourceEntry");
+    public ResourceEntry getResourceEntryFromKey(Context context, String str) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        Bundle bundle;
+        String str2;
+        ResourceEntry resourceEntry;
+        ResourceEntry resourceEntry2;
+        Bundle bundle2 = this.resultBundle.getBundle(str);
+        Bundle bundle3 = this.resultBundle.getBundle(KEY_FALLBACK_CONFIG);
+        if (bundle3 != null) {
+            bundle2.putBundle(KEY_FALLBACK_CONFIG, bundle3.getBundle(str));
+        }
+        ResourceEntry resourceEntryFromBundle = ResourceEntry.fromBundle(context, bundle2);
+        try {
+            if (isActivityEmbedded(context)) {
+                Resources resources = resourceEntryFromBundle.resources;
+                String str3 = resourceEntryFromBundle.packageName;
+                String resourceTypeName = resources.getResourceTypeName(resourceEntryFromBundle.resourceId);
+                String strConcat = resourceEntryFromBundle.resourceName.concat(EMBEDDED_ACTIVITY_RESOURCE_SUFFIX);
+                int identifier = resourceEntryFromBundle.resources.getIdentifier(strConcat, resourceTypeName, str3);
+                if (identifier != 0) {
+                    Log.i("PartnerConfigHelper", "use embedded activity resource:" + strConcat);
+                    resourceEntry = new ResourceEntry(str3, strConcat, identifier, resourceEntryFromBundle.resources);
+                    resourceEntryFromBundle = resourceEntry;
+                } else {
+                    Resources resourcesForApplication = context.getPackageManager().getResourcesForApplication(SUW_PACKAGE_NAME);
+                    int identifier2 = resourcesForApplication.getIdentifier(strConcat, resourceTypeName, SUW_PACKAGE_NAME);
+                    if (identifier2 != 0) {
+                        resourceEntry2 = new ResourceEntry(SUW_PACKAGE_NAME, strConcat, identifier2, resourcesForApplication);
+                        resourceEntryFromBundle = resourceEntry2;
+                    }
+                }
+            } else if (isGlifExpressiveEnabled(context)) {
+                String str4 = resourceEntryFromBundle.packageName;
+                if (Objects.equals(str4, SUW_PACKAGE_NAME)) {
+                    String resourceTypeName2 = resourceEntryFromBundle.resources.getResourceTypeName(resourceEntryFromBundle.resourceId);
+                    String strConcat2 = resourceEntryFromBundle.resourceName.concat(GLIF_EXPRESSIVE_RESOURCE_SUFFIX);
+                    int identifier3 = resourceEntryFromBundle.resources.getIdentifier(strConcat2, resourceTypeName2, str4);
+                    if (identifier3 != 0) {
+                        Log.i("PartnerConfigHelper", "use expressive resource:" + strConcat2);
+                        resourceEntry = new ResourceEntry(str4, strConcat2, identifier3, resourceEntryFromBundle.resources);
+                        resourceEntryFromBundle = resourceEntry;
+                    }
+                }
+            } else if (!isForceTwoPaneEnabled(context)) {
+                Bundle bundle4 = applyMaterialYouConfigBundle;
+                if (bundle4 == null || bundle4.isEmpty()) {
+                    try {
+                        Bundle bundleCall = context.getContentResolver().call(getContentUri(context), IS_MATERIAL_YOU_STYLE_ENABLED_METHOD, (String) null, (Bundle) null);
+                        applyMaterialYouConfigBundle = bundleCall;
+                        if (bundleCall != null) {
+                            bundleCall.isEmpty();
+                        }
+                        bundle = applyMaterialYouConfigBundle;
+                        if ((bundle == null && bundle.getBoolean(IS_MATERIAL_YOU_STYLE_ENABLED_METHOD, false)) || isGlifExpressiveEnabled(context)) {
+                            str2 = resourceEntryFromBundle.packageName;
+                            if (Objects.equals(str2, SUW_PACKAGE_NAME)) {
+                                String resourceTypeName3 = resourceEntryFromBundle.resources.getResourceTypeName(resourceEntryFromBundle.resourceId);
+                                String strConcat3 = resourceEntryFromBundle.resourceName.concat(MATERIAL_YOU_RESOURCE_SUFFIX);
+                                int identifier4 = resourceEntryFromBundle.resources.getIdentifier(strConcat3, resourceTypeName3, str2);
+                                if (identifier4 != 0) {
+                                    Log.i("PartnerConfigHelper", "use material you resource:" + strConcat3);
+                                    resourceEntry = new ResourceEntry(str2, strConcat3, identifier4, resourceEntryFromBundle.resources);
+                                    resourceEntryFromBundle = resourceEntry;
+                                }
+                            }
+                        }
+                    } catch (IllegalArgumentException | SecurityException unused) {
+                        Log.w("PartnerConfigHelper", "SetupWizard Material You configs supporting status unknown; return as false.");
+                        applyMaterialYouConfigBundle = null;
+                    }
+                } else {
+                    bundle = applyMaterialYouConfigBundle;
+                    if (bundle == null) {
+                        str2 = resourceEntryFromBundle.packageName;
+                        if (Objects.equals(str2, SUW_PACKAGE_NAME)) {
+                        }
+                    } else {
+                        str2 = resourceEntryFromBundle.packageName;
+                        if (Objects.equals(str2, SUW_PACKAGE_NAME)) {
+                        }
+                    }
+                }
+            } else if (context != null) {
+                Resources resources2 = resourceEntryFromBundle.resources;
+                String str5 = resourceEntryFromBundle.packageName;
+                String resourceTypeName4 = resources2.getResourceTypeName(resourceEntryFromBundle.resourceId);
+                String strConcat4 = resourceEntryFromBundle.resourceName.concat(FORCE_TWO_PANE_SUFFIX);
+                int identifier5 = resourceEntryFromBundle.resources.getIdentifier(strConcat4, resourceTypeName4, str5);
+                if (identifier5 != 0) {
+                    Log.i("PartnerConfigHelper", "two pane resource=" + strConcat4);
+                    resourceEntry = new ResourceEntry(str5, strConcat4, identifier5, resourceEntryFromBundle.resources);
+                    resourceEntryFromBundle = resourceEntry;
+                } else {
+                    Resources resourcesForApplication2 = context.getPackageManager().getResourcesForApplication(SUW_PACKAGE_NAME);
+                    int identifier6 = resourcesForApplication2.getIdentifier(strConcat4, resourceTypeName4, SUW_PACKAGE_NAME);
+                    if (identifier6 != 0) {
+                        resourceEntry2 = new ResourceEntry(SUW_PACKAGE_NAME, strConcat4, identifier6, resourcesForApplication2);
+                        resourceEntryFromBundle = resourceEntry2;
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException unused2) {
+        }
+        Resources resources3 = resourceEntryFromBundle.resources;
+        Configuration configuration = resources3.getConfiguration();
+        if (!isSetupWizardDayNightEnabled(context)) {
+            int i = configuration.uiMode;
+            if ((i & 48) == 32) {
+                configuration.uiMode = (i & (-49)) | 16;
+                resources3.updateConfiguration(configuration, resources3.getDisplayMetrics());
+            }
+        }
+        return resourceEntryFromBundle;
     }
 
-    public final String getString(Context context, PartnerConfig partnerConfig) {
+    public final String getString(Context context, PartnerConfig partnerConfig) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         if (partnerConfig.getResourceType() != PartnerConfig.ResourceType.STRING) {
             throw new IllegalArgumentException("Not a string resource");
         }
         if (this.partnerResourceCache.containsKey(partnerConfig)) {
             return (String) this.partnerResourceCache.get(partnerConfig);
         }
-        String str = null;
+        String string = null;
         try {
             ResourceEntry resourceEntryFromKey = getResourceEntryFromKey(context, partnerConfig.getResourceName());
-            str = resourceEntryFromKey.resources.getString(resourceEntryFromKey.resourceId);
-            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) str);
-            return str;
+            string = resourceEntryFromKey.resources.getString(resourceEntryFromKey.resourceId);
+            this.partnerResourceCache.put((EnumMap<PartnerConfig, Object>) partnerConfig, (PartnerConfig) string);
+            return string;
         } catch (NullPointerException unused) {
-            return str;
+            return string;
         }
     }
 
     public boolean isActivityEmbedded(Context context) {
         try {
-            Activity lookupActivityFromContext = lookupActivityFromContext(context);
+            Activity activityLookupActivityFromContext = lookupActivityFromContext(context);
             if (!isEmbeddedActivityOnePaneEnabled(context)) {
                 return false;
             }
-            EmbeddingInterfaceCompat embeddingInterfaceCompat = ((ExtensionEmbeddingBackend) ActivityEmbeddingController.getInstance(lookupActivityFromContext).backend).embeddingExtension;
-            return embeddingInterfaceCompat != null ? ((EmbeddingCompat) embeddingInterfaceCompat).embeddingExtension.isActivityEmbedded(lookupActivityFromContext) : false;
+            EmbeddingInterfaceCompat embeddingInterfaceCompat = ((ExtensionEmbeddingBackend) ActivityEmbeddingController.getInstance(activityLookupActivityFromContext).backend).embeddingExtension;
+            return embeddingInterfaceCompat != null ? ((EmbeddingCompat) embeddingInterfaceCompat).embeddingExtension.isActivityEmbedded(activityLookupActivityFromContext) : false;
         } catch (IllegalArgumentException unused) {
             Log.w("PartnerConfigHelper", "Not a Activity instance in parent tree");
             return false;

@@ -61,8 +61,8 @@ public class SemWallpaperResourcesUtils {
         File file = null;
         if (list != null && list.length > 0) {
             for (int i = 0; i < list.length; i++) {
-                String substring = list[i].substring(0, r4.length() - 4);
-                if (!TextUtils.isEmpty(substring) && substring.equals(str2)) {
+                String strSubstring = list[i].substring(0, r4.length() - 4);
+                if (!TextUtils.isEmpty(strSubstring) && strSubstring.equals(str2)) {
                     file = getFile(str + list[i]);
                     if (file != null) {
                         return file;
@@ -154,9 +154,9 @@ public class SemWallpaperResourcesUtils {
                                         if (i2 >= attributes.getLength()) {
                                             break;
                                         }
-                                        String trim = attributes.item(i2).getNodeName().trim();
-                                        String trim2 = attributes.item(i2).getNodeValue().trim();
-                                        if ("usedWithLockScreen".equalsIgnoreCase(trim) && "true".equals(trim2)) {
+                                        String strTrim = attributes.item(i2).getNodeName().trim();
+                                        String strTrim2 = attributes.item(i2).getNodeValue().trim();
+                                        if ("usedWithLockScreen".equalsIgnoreCase(strTrim) && "true".equals(strTrim2)) {
                                             z2 = true;
                                             break;
                                         }

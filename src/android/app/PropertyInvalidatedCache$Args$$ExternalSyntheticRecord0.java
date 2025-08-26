@@ -51,15 +51,15 @@ public final /* synthetic */ class PropertyInvalidatedCache$Args$$ExternalSynthe
     }
 
     public static /* synthetic */ String m(Object[] objArr, Class cls, String str) {
-        String[] split = str.length() == 0 ? new String[0] : str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+        String[] strArrSplit = str.length() == 0 ? new String[0] : str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
         StringBuilder sb = new StringBuilder();
         sb.append(cls.getSimpleName());
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
-        for (int i = 0; i < split.length; i++) {
-            sb.append(split[i]);
+        for (int i = 0; i < strArrSplit.length; i++) {
+            sb.append(strArrSplit[i]);
             sb.append("=");
             sb.append(objArr[i]);
-            if (i != split.length - 1) {
+            if (i != strArrSplit.length - 1) {
                 sb.append(", ");
             }
         }

@@ -16,7 +16,6 @@ import android.telephony.ims.aidl.RcsOptionsResponseAidlWrapper;
 import android.telephony.ims.aidl.RcsPublishResponseAidlWrapper;
 import android.telephony.ims.aidl.RcsSubscribeResponseAidlWrapper;
 import android.telephony.ims.feature.ImsFeature;
-import android.telephony.ims.feature.RcsFeature;
 import android.telephony.ims.stub.CapabilityExchangeEventListener;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 import android.util.Log;
@@ -78,9 +77,7 @@ public class RcsFeature extends ImsFeature {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda2
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCapabilityStatus$0;
-                    lambda$queryCapabilityStatus$0 = RcsFeature.RcsFeatureBinder.this.lambda$queryCapabilityStatus$0();
-                    return lambda$queryCapabilityStatus$0;
+                    return this.f$0.lambda$queryCapabilityStatus$0();
                 }
             }, "queryCapabilityStatus")).intValue();
         }
@@ -100,7 +97,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$addCapabilityCallback$1(iImsCapabilityCallback);
+                    this.f$0.lambda$addCapabilityCallback$1(iImsCapabilityCallback);
                 }
             }, "addCapabilityCallback");
         }
@@ -115,7 +112,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$removeCapabilityCallback$2(iImsCapabilityCallback);
+                    this.f$0.lambda$removeCapabilityCallback$2(iImsCapabilityCallback);
                 }
             }, "removeCapabilityCallback");
         }
@@ -130,7 +127,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$changeCapabilitiesConfiguration$3(capabilityChangeRequest, iImsCapabilityCallback);
+                    this.f$0.lambda$changeCapabilitiesConfiguration$3(capabilityChangeRequest, iImsCapabilityCallback);
                 }
             }, "changeCapabilitiesConfiguration");
         }
@@ -145,7 +142,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$queryCapabilityConfiguration$4(i, i2, iImsCapabilityCallback);
+                    this.f$0.lambda$queryCapabilityConfiguration$4(i, i2, iImsCapabilityCallback);
                 }
             }, "queryCapabilityConfiguration");
         }
@@ -157,7 +154,7 @@ public class RcsFeature extends ImsFeature {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda6
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    return Integer.valueOf(RcsFeature.this.getFeatureState());
+                    return Integer.valueOf(rcsFeature.getFeatureState());
                 }
             }, "getFeatureState")).intValue();
         }
@@ -168,7 +165,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$setCapabilityExchangeEventListener$5(capabilityExchangeAidlWrapper);
+                    this.f$0.lambda$setCapabilityExchangeEventListener$5(capabilityExchangeAidlWrapper);
                 }
             }, "setCapabilityExchangeEventListener");
         }
@@ -184,7 +181,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$publishCapabilities$6(str, rcsPublishResponseAidlWrapper);
+                    this.f$0.lambda$publishCapabilities$6(str, rcsPublishResponseAidlWrapper);
                 }
             }, "publishCapabilities");
         }
@@ -200,7 +197,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$subscribeForCapabilities$7(list, rcsSubscribeResponseAidlWrapper);
+                    this.f$0.lambda$subscribeForCapabilities$7(list, rcsSubscribeResponseAidlWrapper);
                 }
             }, "subscribeForCapabilities");
         }
@@ -216,7 +213,7 @@ public class RcsFeature extends ImsFeature {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$sendOptionsCapabilityRequest$8(uri, list, rcsOptionsResponseAidlWrapper);
+                    this.f$0.lambda$sendOptionsCapabilityRequest$8(uri, list, rcsOptionsResponseAidlWrapper);
                 }
             }, "sendOptionsCapabilityRequest");
         }
@@ -245,9 +242,7 @@ public class RcsFeature extends ImsFeature {
                 return (T) CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda10
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Object runWithCleanCallingIdentity;
-                        runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) supplier);
-                        return runWithCleanCallingIdentity;
+                        return TelephonyUtils.runWithCleanCallingIdentity(supplier);
                     }
                 }, this.mExecutor).get();
             } catch (InterruptedException | ExecutionException e) {
@@ -316,7 +311,7 @@ public class RcsFeature extends ImsFeature {
         getExecutor().execute(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                RcsFeature.this.lambda$initialize$0();
+                this.f$0.lambda$initialize$0();
             }
         });
     }

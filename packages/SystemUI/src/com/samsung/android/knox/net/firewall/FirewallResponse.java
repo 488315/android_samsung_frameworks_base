@@ -3,7 +3,6 @@ package com.samsung.android.knox.net.firewall;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FirewallResponse implements Parcelable {
     public static final Parcelable.Creator<FirewallResponse> CREATOR = new Parcelable.Creator<FirewallResponse>() { // from class: com.samsung.android.knox.net.firewall.FirewallResponse.1
@@ -23,7 +22,6 @@ public class FirewallResponse implements Parcelable {
     public String mMessage;
     public Result mResult;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ErrorCode {
         NO_ERROR,
         DATABASE_ERROR,
@@ -35,7 +33,6 @@ public class FirewallResponse implements Parcelable {
         INPUT_CHAIN_NOT_SUPPORTED_ERROR
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Result {
         SUCCESS,
         NO_CHANGES,

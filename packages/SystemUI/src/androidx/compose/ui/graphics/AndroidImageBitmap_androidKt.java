@@ -3,7 +3,6 @@ package androidx.compose.ui.graphics;
 import android.graphics.Bitmap;
 import androidx.compose.ui.graphics.ImageBitmapConfig;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidImageBitmap_androidKt {
     public static final Bitmap asAndroidBitmap(ImageBitmap imageBitmap) {
@@ -14,7 +13,7 @@ public abstract class AndroidImageBitmap_androidKt {
     }
 
     /* renamed from: toBitmapConfig-1JJdX4A, reason: not valid java name */
-    public static final Bitmap.Config m431toBitmapConfig1JJdX4A(int i) {
+    public static final Bitmap.Config m433toBitmapConfig1JJdX4A(int i) {
         ImageBitmapConfig.Companion companion = ImageBitmapConfig.Companion;
         companion.getClass();
         if (i == 0) {

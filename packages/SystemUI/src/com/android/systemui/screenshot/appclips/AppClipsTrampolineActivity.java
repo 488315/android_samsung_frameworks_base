@@ -29,7 +29,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AppClipsTrampolineActivity extends Activity {
     public final ServiceConnector mAppClipsServiceConnector;
@@ -50,7 +49,6 @@ public class AppClipsTrampolineActivity extends Activity {
     public static final String EXTRA_CALLING_PACKAGE_TASK_ID = AbstractResolvableFuture$$ExternalSyntheticOutline0.m("AppClipsTrampolineActivity", "CALLING_PACKAGE_TASK_ID");
     public static final PackageManager.ApplicationInfoFlags APPLICATION_INFO_FLAGS = PackageManager.ApplicationInfoFlags.of(0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AppClipsResultReceiver extends ResultReceiver {
         public AppClipsResultReceiver(Handler handler) {
             super(handler);
@@ -90,11 +88,11 @@ public class AppClipsTrampolineActivity extends Activity {
         this.mBgExecutor = executor;
         this.mMainExecutor = executor2;
         AppClipsResultReceiver appClipsResultReceiver = new AppClipsResultReceiver(handler);
-        Parcel obtain = Parcel.obtain();
-        appClipsResultReceiver.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        ResultReceiver resultReceiver = (ResultReceiver) ResultReceiver.CREATOR.createFromParcel(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        appClipsResultReceiver.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        ResultReceiver resultReceiver = (ResultReceiver) ResultReceiver.CREATOR.createFromParcel(parcelObtain);
+        parcelObtain.recycle();
         this.mResultReceiver = resultReceiver;
         this.mAppClipsServiceConnector = new ServiceConnector.Impl(context, new Intent(context, (Class<?>) AppClipsService.class), 1073741857, 0, new AppClipsTrampolineActivity$$ExternalSyntheticLambda1());
     }
@@ -124,18 +122,18 @@ public class AppClipsTrampolineActivity extends Activity {
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.screenshot.appclips.AppClipsTrampolineActivity$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final AppClipsTrampolineActivity appClipsTrampolineActivity = AppClipsTrampolineActivity.this;
+                final AppClipsTrampolineActivity appClipsTrampolineActivity = this.f$0;
                 appClipsTrampolineActivity.mAppClipsServiceConnector.postForResult(new ServiceConnector.Job() { // from class: com.android.systemui.screenshot.appclips.AppClipsTrampolineActivity$$ExternalSyntheticLambda2
                     public final Object run(Object obj) {
-                        AppClipsTrampolineActivity appClipsTrampolineActivity2 = AppClipsTrampolineActivity.this;
+                        AppClipsTrampolineActivity appClipsTrampolineActivity2 = appClipsTrampolineActivity;
                         String str = AppClipsTrampolineActivity.EXTRA_SCREENSHOT_URI;
                         return Integer.valueOf(((IAppClipsService) obj).canLaunchCaptureContentActivityForNoteInternal(appClipsTrampolineActivity2.getTaskId()));
                     }
                 }).whenCompleteAsync(new BiConsumer() { // from class: com.android.systemui.screenshot.appclips.AppClipsTrampolineActivity$$ExternalSyntheticLambda3
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        AppClipsTrampolineActivity appClipsTrampolineActivity2 = AppClipsTrampolineActivity.this;
-                        int intValue = ((Integer) obj).intValue();
+                        AppClipsTrampolineActivity appClipsTrampolineActivity2 = appClipsTrampolineActivity;
+                        int iIntValue = ((Integer) obj).intValue();
                         Throwable th = (Throwable) obj2;
                         String str = AppClipsTrampolineActivity.EXTRA_SCREENSHOT_URI;
                         if (appClipsTrampolineActivity2.isFinishing()) {
@@ -143,18 +141,18 @@ public class AppClipsTrampolineActivity extends Activity {
                         }
                         if (th != null) {
                             Log.d("AppClipsTrampolineActivity", "Error querying app clips service", th);
-                            appClipsTrampolineActivity2.setErrorResultAndFinish(intValue);
+                            appClipsTrampolineActivity2.setErrorResultAndFinish(iIntValue);
                             return;
                         }
-                        if (intValue != 0) {
-                            appClipsTrampolineActivity2.setErrorResultAndFinish(intValue);
+                        if (iIntValue != 0) {
+                            appClipsTrampolineActivity2.setErrorResultAndFinish(iIntValue);
                             return;
                         }
-                        ComponentName unflattenFromString = ComponentName.unflattenFromString(appClipsTrampolineActivity2.getString(R.string.config_screenshotAppClipsActivityComponent));
+                        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(appClipsTrampolineActivity2.getString(R.string.config_screenshotAppClipsActivityComponent));
                         String callingPackage = appClipsTrampolineActivity2.getCallingPackage();
                         try {
-                            appClipsTrampolineActivity2.startActivity(new Intent().setComponent(unflattenFromString).addFlags(268435456).putExtra(AppClipsTrampolineActivity.EXTRA_RESULT_RECEIVER, appClipsTrampolineActivity2.mResultReceiver).putExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_NAME, callingPackage).putExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_TASK_ID, appClipsTrampolineActivity2.getTaskId()));
-                            appClipsTrampolineActivity2.mKillAppClipsBroadcastIntent = new Intent(AppClipsTrampolineActivity.ACTION_FINISH_FROM_TRAMPOLINE).setComponent(unflattenFromString).setPackage(unflattenFromString.getPackageName());
+                            appClipsTrampolineActivity2.startActivity(new Intent().setComponent(componentNameUnflattenFromString).addFlags(268435456).putExtra(AppClipsTrampolineActivity.EXTRA_RESULT_RECEIVER, appClipsTrampolineActivity2.mResultReceiver).putExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_NAME, callingPackage).putExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_TASK_ID, appClipsTrampolineActivity2.getTaskId()));
+                            appClipsTrampolineActivity2.mKillAppClipsBroadcastIntent = new Intent(AppClipsTrampolineActivity.ACTION_FINISH_FROM_TRAMPOLINE).setComponent(componentNameUnflattenFromString).setPackage(componentNameUnflattenFromString.getPackageName());
                             appClipsTrampolineActivity2.logScreenshotTriggeredUiEvent(callingPackage);
                         } catch (ActivityNotFoundException unused) {
                             appClipsTrampolineActivity2.setErrorResultAndFinish(1);
@@ -190,11 +188,11 @@ public class AppClipsTrampolineActivity extends Activity {
         this.mBgExecutor = executor;
         this.mMainExecutor = executor2;
         AppClipsResultReceiver appClipsResultReceiver = new AppClipsResultReceiver(handler);
-        Parcel obtain = Parcel.obtain();
-        appClipsResultReceiver.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        ResultReceiver resultReceiver = (ResultReceiver) ResultReceiver.CREATOR.createFromParcel(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        appClipsResultReceiver.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        ResultReceiver resultReceiver = (ResultReceiver) ResultReceiver.CREATOR.createFromParcel(parcelObtain);
+        parcelObtain.recycle();
         this.mResultReceiver = resultReceiver;
     }
 }

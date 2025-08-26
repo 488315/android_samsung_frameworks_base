@@ -39,14 +39,14 @@ public class AutoBlockATCmd implements IWorkOnAt {
     public String processCmd(String str) {
         String str2;
         String str3;
-        String[] parsingParam = parsingParam(str);
+        String[] strArrParsingParam = parsingParam(str);
         String[] strArr = {"0,0", "1,0"};
-        if (parsingParam == null) {
+        if (strArrParsingParam == null) {
             Slog.i(TAG, "processCmd: params is null");
             return AT_RESPONSE_INVALID_PARAM;
         }
         try {
-            String str4 = parsingParam[0] + ",";
+            String str4 = strArrParsingParam[0] + ",";
             String str5 = strArr[0];
             if (str5.equals(str.substring(0, str5.length()))) {
                 Slog.i(TAG, "AT+ABSTACHK=0,0");

@@ -10,7 +10,6 @@ import android.view.Gravity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import com.google.android.material.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ForegroundLinearLayout extends LinearLayoutCompat {
     public Drawable foreground;
@@ -157,13 +156,13 @@ public class ForegroundLinearLayout extends LinearLayoutCompat {
         this.foregroundGravity = 119;
         this.mForegroundInPadding = true;
         this.foregroundBoundsChanged = false;
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context, attributeSet, R$styleable.ForegroundLinearLayout, i, 0, new int[0]);
-        this.foregroundGravity = obtainStyledAttributes.getInt(1, this.foregroundGravity);
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context, attributeSet, R$styleable.ForegroundLinearLayout, i, 0, new int[0]);
+        this.foregroundGravity = typedArrayObtainStyledAttributes.getInt(1, this.foregroundGravity);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         if (drawable != null) {
             setForeground(drawable);
         }
-        this.mForegroundInPadding = obtainStyledAttributes.getBoolean(2, true);
-        obtainStyledAttributes.recycle();
+        this.mForegroundInPadding = typedArrayObtainStyledAttributes.getBoolean(2, true);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

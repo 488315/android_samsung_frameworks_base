@@ -1,76 +1,124 @@
 package com.android.systemui.scene.ui.viewmodel;
 
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractor;
+import com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl;
+import com.android.systemui.shade.shared.model.ShadeMode;
+import com.android.systemui.shade.ui.viewmodel.ShadeUserActionsKt;
+import java.util.LinkedHashMap;
+import java.util.ListIterator;
+import kotlin.KotlinNothingValueException;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.Pair;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsJVMKt;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__MutableCollectionsKt;
+import kotlin.collections.MapsKt__MapsJVMKt;
+import kotlin.collections.builders.ListBuilder;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GoneUserActionsViewModel extends UserActionsViewModel {
     public final ShadeModeInteractor shadeModeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         GoneUserActionsViewModel create();
+    }
+
+    /* renamed from: com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return GoneUserActionsViewModel.this.hydrateActions(null, this);
+        }
     }
 
     public GoneUserActionsViewModel(ShadeModeInteractor shadeModeInteractor) {
         this.shadeModeInteractor = shadeModeInteractor;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.scene.ui.viewmodel.UserActionsViewModel
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object hydrateActions(final com.android.systemui.scene.ui.viewmodel.UserActionsViewModel$$ExternalSyntheticLambda0 r5, kotlin.coroutines.Continuation r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1 r0 = (com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1 r0 = new com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L48
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.shade.domain.interactor.ShadeModeInteractor r4 = r4.shadeModeInteractor
-            com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl r4 = (com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl) r4
-            kotlinx.coroutines.flow.ReadonlyStateFlow r4 = r4.shadeMode
-            com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$2 r6 = new com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel$hydrateActions$2
-            r6.<init>()
-            r0.label = r3
-            kotlinx.coroutines.flow.StateFlow r4 = r4.$$delegate_0
-            java.lang.Object r4 = r4.collect(r6, r0)
-            if (r4 != r1) goto L48
-            return r1
-        L48:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel.hydrateActions(com.android.systemui.scene.ui.viewmodel.UserActionsViewModel$$ExternalSyntheticLambda0, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object hydrateActions(final UserActionsViewModel$$ExternalSyntheticLambda0 userActionsViewModel$$ExternalSyntheticLambda0, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ReadonlyStateFlow readonlyStateFlow = ((ShadeModeInteractorImpl) this.shadeModeInteractor).shadeMode;
+            FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.scene.ui.viewmodel.GoneUserActionsViewModel.hydrateActions.2
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj2, Continuation continuation2) {
+                    Pair[] pairArrDualShadeActions;
+                    ShadeMode shadeMode = (ShadeMode) obj2;
+                    ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                    if (Intrinsics.areEqual(shadeMode, ShadeMode.Single.INSTANCE)) {
+                        pairArrDualShadeActions = ShadeUserActionsKt.singleShadeActions$default(1, false);
+                    } else if (Intrinsics.areEqual(shadeMode, ShadeMode.Split.INSTANCE)) {
+                        pairArrDualShadeActions = ShadeUserActionsKt.splitShadeActions();
+                    } else {
+                        if (!Intrinsics.areEqual(shadeMode, ShadeMode.Dual.INSTANCE)) {
+                            throw new NoWhenBranchMatchedException();
+                        }
+                        pairArrDualShadeActions = ShadeUserActionsKt.dualShadeActions();
+                    }
+                    CollectionsKt__MutableCollectionsKt.addAll(listBuilderCreateListBuilder, pairArrDualShadeActions);
+                    ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
+                    int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(listBuilderBuild, 10));
+                    if (iMapCapacity < 16) {
+                        iMapCapacity = 16;
+                    }
+                    LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+                    ListIterator listIterator = listBuilderBuild.listIterator(0);
+                    while (true) {
+                        ListBuilder.Itr itr = (ListBuilder.Itr) listIterator;
+                        if (!itr.hasNext()) {
+                            userActionsViewModel$$ExternalSyntheticLambda0.mo781invoke(linkedHashMap);
+                            return Unit.INSTANCE;
+                        }
+                        Pair pair = (Pair) itr.next();
+                        linkedHashMap.put(pair.getFirst(), pair.getSecond());
+                    }
+                }
+            };
+            anonymousClass1.label = 1;
+            if (readonlyStateFlow.$$delegate_0.collect(flowCollector, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 }

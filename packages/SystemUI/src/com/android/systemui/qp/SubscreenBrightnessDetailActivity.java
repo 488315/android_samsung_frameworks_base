@@ -3,6 +3,7 @@ package com.android.systemui.qp;
 import android.R;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.devicestate.DeviceState;
@@ -45,7 +46,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenBrightnessDetailActivity extends Activity implements WakefulnessLifecycle.Observer {
     public static final Uri BRIGHTNESS_MODE_URI = Settings.System.getUriFor(SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS_MODE);
@@ -55,6 +55,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
     public BrightnessModeObserver mBrightnessObserver;
     public SubroomBrightnessSettingsView mBrightnessView;
     public SubscreenBrightnessDetailActivity mContext;
+    public DeviceStateManager mDeviceStateManager;
     private SettingsHelper mSettingsHelper;
     public LinearLayout mSubBrightnessDetail;
     public SubscreenBrightnessController mSubscreenBrightnessController;
@@ -70,7 +71,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
             }
             ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("updateRoundedCorners ,flexmode:"), subscreenBrightnessDetailActivity.mIsFlexMode, "SubscreenBrightnessDetailActivity");
             if (subscreenBrightnessDetailActivity.mIsFlexMode) {
-                subscreenBrightnessDetailActivity.mSubBrightnessDetail.semSetRoundedCorners(3, subscreenBrightnessDetailActivity.mContext.getResources().getDimensionPixelSize(17105923));
+                subscreenBrightnessDetailActivity.mSubBrightnessDetail.semSetRoundedCorners(3, subscreenBrightnessDetailActivity.mContext.getResources().getDimensionPixelSize(17105924));
                 subscreenBrightnessDetailActivity.mSubBrightnessDetail.semSetRoundedCornerColor(3, subscreenBrightnessDetailActivity.mContext.getColor(R.color.black));
             } else {
                 subscreenBrightnessDetailActivity.mSubBrightnessDetail.semSetRoundedCorners(0);
@@ -81,7 +82,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
     public final SubscreenBrightnessDetailActivity$$ExternalSyntheticLambda2 mOnBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity$$ExternalSyntheticLambda2
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity = SubscreenBrightnessDetailActivity.this;
+            SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity = this.f$0;
             Uri uri = SubscreenBrightnessDetailActivity.BRIGHTNESS_MODE_URI;
             subscreenBrightnessDetailActivity.onBackPressed();
         }
@@ -96,7 +97,6 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BrightnessModeObserver extends ContentObserver {
         public final ContentResolver mCr;
 
@@ -114,7 +114,6 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SwitchDelegate extends AccessibilityDelegateCompat {
         public final SwitchCompat mSwitch;
 
@@ -127,9 +126,9 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
             this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
             accessibilityNodeInfoCompat.setClassName(Switch.class.getName());
             accessibilityNodeInfoCompat.setCheckable(false);
-            boolean isChecked = this.mSwitch.isChecked();
+            boolean zIsChecked = this.mSwitch.isChecked();
             SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity = SubscreenBrightnessDetailActivity.this;
-            accessibilityNodeInfoCompat.setText(subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.sec_brightness_auto_brightness_title) + "," + (isChecked ? subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.switch_bar_on) : subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.switch_bar_off)));
+            accessibilityNodeInfoCompat.setText(subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.sec_brightness_auto_brightness_title) + "," + (zIsChecked ? subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.switch_bar_on) : subscreenBrightnessDetailActivity.mContext.getString(com.android.systemui.R.string.switch_bar_off)));
         }
 
         private SwitchDelegate(SwitchCompat switchCompat) {
@@ -138,23 +137,23 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
     }
 
     /* renamed from: -$$Nest$msetBrightness, reason: not valid java name */
-    public static void m2880$$Nest$msetBrightness(SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity, Boolean bool, Boolean bool2) {
+    public static void m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity, Boolean bool, Boolean bool2) {
         subscreenBrightnessDetailActivity.getClass();
         if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBrightnessBlocked()) {
             Log.d("SubscreenBrightnessDetailActivity", "Auto brightness options are not available by KnoxStateMonitor.");
         } else {
             bool = bool2;
         }
-        boolean booleanValue = bool.booleanValue();
+        boolean zBooleanValue = bool.booleanValue();
         if (QpRune.QUICK_BAR_BRIGHTNESS_PERSONAL_CONTROL) {
-            Settings.Secure.putIntForUser(subscreenBrightnessDetailActivity.mContext.getContentResolver(), booleanValue ? "brightness_pms_marker_screen" : SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS, Settings.System.getIntForUser(subscreenBrightnessDetailActivity.mContext.getContentResolver(), booleanValue ? SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS : "brightness_pms_marker_screen", 100, -2), -2);
+            Settings.Secure.putIntForUser(subscreenBrightnessDetailActivity.mContext.getContentResolver(), zBooleanValue ? "brightness_pms_marker_screen" : SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS, Settings.System.getIntForUser(subscreenBrightnessDetailActivity.mContext.getContentResolver(), zBooleanValue ? SettingsHelper.INDEX_SUBSCREEN_BRIGHTNESS : "brightness_pms_marker_screen", 100, -2), -2);
         }
-        subscreenBrightnessDetailActivity.mSettingsHelper.setSubscreenBrightnessMode((!booleanValue || "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", C2paManifestList.UNKNOWN_VALUE))) ? 0 : 1);
+        subscreenBrightnessDetailActivity.mSettingsHelper.setSubscreenBrightnessMode((!zBooleanValue || "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", C2paManifestList.UNKNOWN_VALUE))) ? 0 : 1);
         subscreenBrightnessDetailActivity.mAutoBrightnessSwitch.setChecked(bool.booleanValue());
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         setContentView(com.android.systemui.R.layout.subscreen_brightness_detail);
         this.mContext = this;
@@ -162,7 +161,9 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).addObserver(this.mDisplayListener);
         this.mSettingsHelper = (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
         this.mSubBrightnessDetail = (LinearLayout) findViewById(com.android.systemui.R.id.sub_brightness_detail);
-        ((DeviceStateManager) this.mContext.getSystemService(DeviceStateManager.class)).registerCallback(this.mContext.getMainExecutor(), this.mDeviceStateCallback);
+        DeviceStateManager deviceStateManager = (DeviceStateManager) this.mContext.getSystemService(DeviceStateManager.class);
+        this.mDeviceStateManager = deviceStateManager;
+        deviceStateManager.registerCallback(this.mContext.getMainExecutor(), this.mDeviceStateCallback);
         View decorView = getWindow().getDecorView();
         if (decorView != null) {
             SecQSPanelResourcePicker secQSPanelResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
@@ -183,15 +184,15 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         this.mBackButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity2 = SubscreenBrightnessDetailActivity.this;
+                SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity2 = this.f$0;
                 Uri uri = SubscreenBrightnessDetailActivity.BRIGHTNESS_MODE_URI;
                 subscreenBrightnessDetailActivity2.finish();
             }
         });
         this.mBackButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                SubscreenToolTipWindow subscreenToolTipWindow2 = SubscreenToolTipWindow.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                SubscreenToolTipWindow subscreenToolTipWindow2 = subscreenToolTipWindow;
                 Uri uri = SubscreenBrightnessDetailActivity.BRIGHTNESS_MODE_URI;
                 PopupWindow popupWindow = subscreenToolTipWindow2.mTipWindow;
                 if (popupWindow != null && popupWindow.isShowing()) {
@@ -223,8 +224,8 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
                 public final void onClick(View view) {
                     SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity3;
                     int i2;
-                    boolean isChecked = SubscreenBrightnessDetailActivity.this.mAutoBrightnessSwitch.isChecked();
-                    SubscreenBrightnessDetailActivity.m2880$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(isChecked), Boolean.valueOf(!isChecked));
+                    boolean zIsChecked = SubscreenBrightnessDetailActivity.this.mAutoBrightnessSwitch.isChecked();
+                    SubscreenBrightnessDetailActivity.m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(zIsChecked), Boolean.valueOf(!zIsChecked));
                     if (SubscreenBrightnessDetailActivity.this.mAutoBrightnessSwitch.isChecked()) {
                         subscreenBrightnessDetailActivity3 = SubscreenBrightnessDetailActivity.this.mContext;
                         i2 = com.android.systemui.R.string.switch_bar_on;
@@ -245,7 +246,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
             this.mAutoBrightnessSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity.5
                 @Override // android.widget.CompoundButton.OnCheckedChangeListener
                 public final void onCheckedChanged(CompoundButton compoundButton, boolean z2) {
-                    SubscreenBrightnessDetailActivity.m2880$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(!z2), Boolean.valueOf(z2));
+                    SubscreenBrightnessDetailActivity.m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(!z2), Boolean.valueOf(z2));
                     if (QpRune.QUICK_SUBSCREEN_PANEL) {
                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.STID_ADAPTIVE_BRIGHTNESS, z2 ? 1L : 0L);
                     }
@@ -256,7 +257,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         }
         SubscreenUtil.applyRotation(this.mContext, this.mBackButton);
         SubscreenUtil.applyRotation(this.mContext, linearLayout);
-        ViewCompat.setAccessibilityDelegate(this.mAutoBrightnessContainer, new SwitchDelegate(this, this.mAutoBrightnessSwitch, r4));
+        ViewCompat.setAccessibilityDelegate(this.mAutoBrightnessContainer, new SwitchDelegate(this, this.mAutoBrightnessSwitch, i));
         this.mSubBrightnessDetail.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity.2
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
@@ -308,6 +309,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
         SubscreenBrightnessController subscreenBrightnessController = this.mSubscreenBrightnessController;
         subscreenBrightnessController.getClass();
         subscreenBrightnessController.mDetailActivity = false;
+        this.mDeviceStateManager.unregisterCallback(this.mDeviceStateCallback);
         super.onDestroy();
     }
 

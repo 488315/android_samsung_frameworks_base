@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import java.util.Locale;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContentLanguage extends SIPHeader implements Header {
     private static final long serialVersionUID = -5195728427134181070L;
@@ -33,9 +32,9 @@ public class ContentLanguage extends SIPHeader implements Header {
 
     public ContentLanguage(String str) {
         super("Content-Language");
-        int indexOf = str.indexOf(45);
-        if (indexOf >= 0) {
-            this.locale = new Locale(str.substring(0, indexOf), str.substring(indexOf + 1));
+        int iIndexOf = str.indexOf(45);
+        if (iIndexOf >= 0) {
+            this.locale = new Locale(str.substring(0, iIndexOf), str.substring(iIndexOf + 1));
         } else {
             this.locale = new Locale(str);
         }

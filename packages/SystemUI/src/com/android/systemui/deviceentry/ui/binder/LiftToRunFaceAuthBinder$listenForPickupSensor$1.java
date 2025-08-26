@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LiftToRunFaceAuthBinder$listenForPickupSensor$1 extends SuspendLambda implements Function4 {
     /* synthetic */ boolean Z$0;
@@ -23,11 +22,11 @@ final class LiftToRunFaceAuthBinder$listenForPickupSensor$1 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
         LiftToRunFaceAuthBinder$listenForPickupSensor$1 liftToRunFaceAuthBinder$listenForPickupSensor$1 = new LiftToRunFaceAuthBinder$listenForPickupSensor$1(this.this$0, (Continuation) obj4);
-        liftToRunFaceAuthBinder$listenForPickupSensor$1.Z$0 = booleanValue;
-        liftToRunFaceAuthBinder$listenForPickupSensor$1.Z$1 = booleanValue2;
+        liftToRunFaceAuthBinder$listenForPickupSensor$1.Z$0 = zBooleanValue;
+        liftToRunFaceAuthBinder$listenForPickupSensor$1.Z$1 = zBooleanValue2;
         return liftToRunFaceAuthBinder$listenForPickupSensor$1.invokeSuspend(Unit.INSTANCE);
     }
 

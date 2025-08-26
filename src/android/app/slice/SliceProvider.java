@@ -100,7 +100,7 @@ public abstract class SliceProvider extends ContentProvider {
         this.mAnr = new Runnable() { // from class: android.app.slice.SliceProvider$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SliceProvider.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
         this.mAutoGrantPermissions = strArr;
@@ -110,7 +110,7 @@ public abstract class SliceProvider extends ContentProvider {
         this.mAnr = new Runnable() { // from class: android.app.slice.SliceProvider$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SliceProvider.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
         this.mAutoGrantPermissions = new String[0];
@@ -142,9 +142,9 @@ public abstract class SliceProvider extends ContentProvider {
     @Override // android.content.ContentProvider
     public Bundle call(String str, String str2, Bundle bundle) {
         if (str.equals(METHOD_SLICE)) {
-            Slice handleBindSlice = handleBindSlice(getUriWithoutUserId(validateIncomingUriOrNull((Uri) bundle.getParcelable("slice_uri", Uri.class))), bundle.getParcelableArrayList(EXTRA_SUPPORTED_SPECS, SliceSpec.class), getCallingPackage(), Binder.getCallingUid(), Binder.getCallingPid());
+            Slice sliceHandleBindSlice = handleBindSlice(getUriWithoutUserId(validateIncomingUriOrNull((Uri) bundle.getParcelable("slice_uri", Uri.class))), bundle.getParcelableArrayList(EXTRA_SUPPORTED_SPECS, SliceSpec.class), getCallingPackage(), Binder.getCallingUid(), Binder.getCallingPid());
             Bundle bundle2 = new Bundle();
-            bundle2.putParcelable("slice", handleBindSlice);
+            bundle2.putParcelable("slice", sliceHandleBindSlice);
             return bundle2;
         }
         if (str.equals(METHOD_MAP_INTENT)) {
@@ -152,11 +152,11 @@ public abstract class SliceProvider extends ContentProvider {
             if (intent == null) {
                 return null;
             }
-            Uri validateIncomingUriOrNull = validateIncomingUriOrNull(onMapIntentToUri(intent));
+            Uri uriValidateIncomingUriOrNull = validateIncomingUriOrNull(onMapIntentToUri(intent));
             ArrayList parcelableArrayList = bundle.getParcelableArrayList(EXTRA_SUPPORTED_SPECS, SliceSpec.class);
             Bundle bundle3 = new Bundle();
-            if (validateIncomingUriOrNull != null) {
-                bundle3.putParcelable("slice", handleBindSlice(validateIncomingUriOrNull, parcelableArrayList, getCallingPackage(), Binder.getCallingUid(), Binder.getCallingPid()));
+            if (uriValidateIncomingUriOrNull != null) {
+                bundle3.putParcelable("slice", handleBindSlice(uriValidateIncomingUriOrNull, parcelableArrayList, getCallingPackage(), Binder.getCallingUid(), Binder.getCallingPid()));
                 return bundle3;
             }
             bundle3.putParcelable("slice", null);
@@ -167,9 +167,9 @@ public abstract class SliceProvider extends ContentProvider {
             if (intent2 == null) {
                 return null;
             }
-            Uri validateIncomingUriOrNull2 = validateIncomingUriOrNull(onMapIntentToUri(intent2));
+            Uri uriValidateIncomingUriOrNull2 = validateIncomingUriOrNull(onMapIntentToUri(intent2));
             Bundle bundle4 = new Bundle();
-            bundle4.putParcelable("slice", validateIncomingUriOrNull2);
+            bundle4.putParcelable("slice", uriValidateIncomingUriOrNull2);
             return bundle4;
         }
         if (str.equals(METHOD_PIN)) {
@@ -257,13 +257,13 @@ public abstract class SliceProvider extends ContentProvider {
         this.mCallback = "onCreatePermissionRequest";
         Handler.getMain().postDelayed(this.mAnr, SLICE_BIND_ANR);
         try {
-            PendingIntent onCreatePermissionRequest = onCreatePermissionRequest(uri);
+            PendingIntent pendingIntentOnCreatePermissionRequest = onCreatePermissionRequest(uri);
             Handler.getMain().removeCallbacks(this.mAnr);
             Slice.Builder builder = new Slice.Builder(uri, null);
-            Slice.Builder addAction = new Slice.Builder(builder).addIcon(Icon.createWithResource(context, R.drawable.ic_permission), null, Collections.EMPTY_LIST).addHints(Arrays.asList("title", "shortcut")).addAction(onCreatePermissionRequest, new Slice.Builder(builder).build(), null);
+            Slice.Builder builderAddAction = new Slice.Builder(builder).addIcon(Icon.createWithResource(context, R.drawable.ic_permission), null, Collections.EMPTY_LIST).addHints(Arrays.asList("title", "shortcut")).addAction(pendingIntentOnCreatePermissionRequest, new Slice.Builder(builder).build(), null);
             TypedValue typedValue = new TypedValue();
             new ContextThemeWrapper(context, 16974123).getTheme().resolveAttribute(16843829, typedValue, true);
-            builder.addSubSlice(new Slice.Builder(uri.buildUpon().appendPath("permission").build(), null).addIcon(Icon.createWithResource(context, R.drawable.ic_arrow_forward), null, Collections.EMPTY_LIST).addText(getPermissionString(context, str), null, Collections.EMPTY_LIST).addInt(typedValue.data, "color", Collections.EMPTY_LIST).addSubSlice(addAction.build(), null).build(), null);
+            builder.addSubSlice(new Slice.Builder(uri.buildUpon().appendPath("permission").build(), null).addIcon(Icon.createWithResource(context, R.drawable.ic_arrow_forward), null, Collections.EMPTY_LIST).addText(getPermissionString(context, str), null, Collections.EMPTY_LIST).addInt(typedValue.data, "color", Collections.EMPTY_LIST).addSubSlice(builderAddAction.build(), null).build(), null);
             return builder.addHints(Arrays.asList(Slice.HINT_PERMISSION_REQUEST)).build();
         } catch (Throwable th) {
             Handler.getMain().removeCallbacks(this.mAnr);

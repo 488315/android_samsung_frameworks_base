@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromDreamingTransitionInteractor$listenForDreamingToGlanceableHubFromPowerButton$1 extends SuspendLambda implements Function2 {
     int label;
@@ -43,13 +42,13 @@ final class FromDreamingTransitionInteractor$listenForDreamingToGlanceableHubFro
             ResultKt.throwOnFailure(obj);
             this.this$0.communalSettingsInteractor.isV2FlagEnabled();
             FromDreamingTransitionInteractor fromDreamingTransitionInteractor = this.this$0;
-            Flow sample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(kotlinx.coroutines.flow.FlowKt.debounce(fromDreamingTransitionInteractor.powerInteractor.isAwake, 50L), fromDreamingTransitionInteractor, new FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToPrimaryBouncer$1$$ExternalSyntheticLambda0(0)), this.this$0.communalInteractor.isCommunalAvailable());
+            Flow flowSample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(kotlinx.coroutines.flow.FlowKt.debounce(fromDreamingTransitionInteractor.powerInteractor.isAwake, 50L), fromDreamingTransitionInteractor, new FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToPrimaryBouncer$1$$ExternalSyntheticLambda0(0)), this.this$0.communalInteractor.isCommunalAvailable());
             final FromDreamingTransitionInteractor fromDreamingTransitionInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$listenForDreamingToGlanceableHubFromPowerButton$1.4
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     if (((Boolean) obj2).booleanValue()) {
-                        FromDreamingTransitionInteractor fromDreamingTransitionInteractor3 = FromDreamingTransitionInteractor.this;
+                        FromDreamingTransitionInteractor fromDreamingTransitionInteractor3 = fromDreamingTransitionInteractor2;
                         if (fromDreamingTransitionInteractor3.dreamManager.canStartDreaming(false)) {
                             CommunalSceneInteractor.snapToScene$default(fromDreamingTransitionInteractor3.communalSceneInteractor, CommunalScenes.Communal, "from dreaming to hub", 0L, 12);
                         }
@@ -58,7 +57,7 @@ final class FromDreamingTransitionInteractor$listenForDreamingToGlanceableHubFro
                 }
             };
             this.label = 2;
-            if (sample.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

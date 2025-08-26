@@ -99,9 +99,9 @@ public interface IEventMonitor extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.event.IEventMonitor");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEventMonitor)) {
-                return (IEventMonitor) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.event.IEventMonitor");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEventMonitor)) {
+                return (IEventMonitor) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -145,47 +145,47 @@ public interface IEventMonitor extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    Bundle presentEventInfo = getPresentEventInfo(readLong);
+                    Bundle presentEventInfo = getPresentEventInfo(j);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(presentEventInfo, 1);
                     return true;
                 case 2:
-                    IEventMonitorListener asInterface = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventMonitorListener iEventMonitorListenerAsInterface = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addPresentEventInfoListener(asInterface);
+                    addPresentEventInfoListener(iEventMonitorListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IEventMonitorListener asInterface2 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventMonitorListener iEventMonitorListenerAsInterface2 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removePresentEventInfoListener(asInterface2);
+                    removePresentEventInfoListener(iEventMonitorListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    Bundle followingEventInfo = getFollowingEventInfo(readLong2);
+                    Bundle followingEventInfo = getFollowingEventInfo(j2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(followingEventInfo, 1);
                     return true;
                 case 5:
-                    IEventMonitorListener asInterface3 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventMonitorListener iEventMonitorListenerAsInterface3 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addFollowingEventInfoListener(asInterface3);
+                    addFollowingEventInfoListener(iEventMonitorListenerAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IEventMonitorListener asInterface4 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventMonitorListener iEventMonitorListenerAsInterface4 = IEventMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeFollowingEventInfoListener(asInterface4);
+                    removeFollowingEventInfoListener(iEventMonitorListenerAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    Bundle sdtGuidanceInfo = getSdtGuidanceInfo(readLong3);
+                    Bundle sdtGuidanceInfo = getSdtGuidanceInfo(j3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sdtGuidanceInfo, 1);
                     return true;
@@ -218,124 +218,124 @@ public interface IEventMonitor extends IInterface {
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public Bundle getPresentEventInfo(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public void addPresentEventInfoListener(IEventMonitorListener iEventMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeStrongInterface(iEventMonitorListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeStrongInterface(iEventMonitorListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public void removePresentEventInfoListener(IEventMonitorListener iEventMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeStrongInterface(iEventMonitorListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeStrongInterface(iEventMonitorListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public Bundle getFollowingEventInfo(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public void addFollowingEventInfoListener(IEventMonitorListener iEventMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeStrongInterface(iEventMonitorListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeStrongInterface(iEventMonitorListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public void removeFollowingEventInfoListener(IEventMonitorListener iEventMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeStrongInterface(iEventMonitorListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeStrongInterface(iEventMonitorListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public Bundle getSdtGuidanceInfo(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeLong(j);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.event.IEventMonitor
             public void setBgmTuneChannelInfo(Uri[] uriArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
-                    obtain.writeTypedArray(uriArr, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventMonitor");
+                    parcelObtain.writeTypedArray(uriArr, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

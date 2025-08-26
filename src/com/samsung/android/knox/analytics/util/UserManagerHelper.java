@@ -40,12 +40,11 @@ public class UserManagerHelper {
             for (UserInfo userInfo : userManager.getUsers(true)) {
                 try {
                     if (userInfo.id != 0) {
-                        if (!userInfo.isSecureFolder() && !userInfo.isPrivateProfile()) {
-                            if (devicePolicyManagerService.getProfileOwnerAsUser(userInfo.id) != null) {
-                                z = true;
-                            }
+                        if (userInfo.isSecureFolder() || userInfo.isPrivateProfile()) {
+                            Log.d(TAG, "isAnyPOActive(): Skipping Secure Folder or Private Profile");
+                        } else if (devicePolicyManagerService.getProfileOwnerAsUser(userInfo.id) != null) {
+                            z = true;
                         }
-                        Log.d(TAG, "isAnyPOActive(): Skipping Secure Folder or Private Profile");
                     }
                 } catch (RemoteException e) {
                     Log.e(TAG, "isAnyPOActive() - Remote exception: ", e);
@@ -64,17 +63,17 @@ public class UserManagerHelper {
         if (devicePolicyManagerService == null) {
             return null;
         }
-        String str = "";
+        String packageName = "";
         try {
             ComponentName profileOwnerAsUser = devicePolicyManagerService.getProfileOwnerAsUser(i);
             if (profileOwnerAsUser != null) {
-                str = profileOwnerAsUser.getPackageName();
+                packageName = profileOwnerAsUser.getPackageName();
             }
         } catch (RemoteException e) {
             Log.e(TAG, "getPoPackageName() - Remote exception: ", e);
         }
-        Log.d(TAG, "getPoPackageName(int userId): " + i + " - " + str);
-        return str;
+        Log.d(TAG, "getPoPackageName(int userId): " + i + " - " + packageName);
+        return packageName;
     }
 
     public String getPoPackageName() {
@@ -83,22 +82,22 @@ public class UserManagerHelper {
         if (devicePolicyManagerService != null && userManager != null) {
             try {
                 List<UserInfo> users = userManager.getUsers(true);
-                String str = "";
+                String packageName = "";
                 if (users != null) {
                     Iterator<UserInfo> it = users.iterator();
                     while (it.hasNext()) {
                         try {
                             ComponentName profileOwnerAsUser = devicePolicyManagerService.getProfileOwnerAsUser(it.next().id);
                             if (profileOwnerAsUser != null) {
-                                str = profileOwnerAsUser.getPackageName();
+                                packageName = profileOwnerAsUser.getPackageName();
                             }
                         } catch (RemoteException e) {
                             Log.e(TAG, "getPoPackageName() - Remote exception: ", e);
                         }
                     }
                 }
-                Log.d(TAG, "getPoPackageName(): " + str);
-                return str;
+                Log.d(TAG, "getPoPackageName(): " + packageName);
+                return packageName;
             } catch (RuntimeException e2) {
                 Log.e(TAG, "getPoPackageName() - Runtime exception: ", e2);
             }
@@ -111,32 +110,32 @@ public class UserManagerHelper {
         if (devicePolicyManagerService == null) {
             return null;
         }
-        String str = "";
+        String packageName = "";
         try {
             ComponentName deviceOwnerComponent = devicePolicyManagerService.getDeviceOwnerComponent(true);
             if (deviceOwnerComponent != null) {
-                str = deviceOwnerComponent.getPackageName();
+                packageName = deviceOwnerComponent.getPackageName();
             }
         } catch (RemoteException e) {
             Log.e(TAG, "isDoActive(): Exception in DPMS.getDeviceOwnerComponent - ", e);
         }
-        Log.d(TAG, "getDoPackageName(): " + str);
-        return str;
+        Log.d(TAG, "getDoPackageName(): " + packageName);
+        return packageName;
     }
 
     public boolean isDoActive() {
         IDevicePolicyManager devicePolicyManagerService = getDevicePolicyManagerService();
-        boolean z = false;
+        boolean zHasDeviceOwner = false;
         if (devicePolicyManagerService == null) {
             return false;
         }
         try {
-            z = devicePolicyManagerService.hasDeviceOwner();
+            zHasDeviceOwner = devicePolicyManagerService.hasDeviceOwner();
         } catch (RemoteException e) {
             Log.e(TAG, "isDoActive(): Exception in DPMS.hasDeviceOwner - ", e);
         }
-        Log.d(TAG, "isDoActive(): " + String.valueOf(z));
-        return z;
+        Log.d(TAG, "isDoActive(): " + String.valueOf(zHasDeviceOwner));
+        return zHasDeviceOwner;
     }
 
     public int getUserType(int i) {

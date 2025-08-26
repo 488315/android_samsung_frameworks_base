@@ -72,21 +72,21 @@ public final class FontFamily {
 
         public Builder addFont(Font font) {
             Preconditions.checkNotNull(font, "font can not be null");
-            int makeStyleIdentifier = makeStyleIdentifier(font);
-            if (this.mStyles.indexOfKey(makeStyleIdentifier) >= 0) {
+            int iMakeStyleIdentifier = makeStyleIdentifier(font);
+            if (this.mStyles.indexOfKey(iMakeStyleIdentifier) >= 0) {
                 throw new IllegalArgumentException(font + " has already been added");
             }
-            this.mStyles.append(makeStyleIdentifier, 0);
+            this.mStyles.append(iMakeStyleIdentifier, 0);
             this.mFonts.add(font);
             return this;
         }
 
         public FontFamily buildVariableFamily() {
-            int analyzeAndResolveVariableType = analyzeAndResolveVariableType(this.mFonts);
-            if (analyzeAndResolveVariableType == -1) {
+            int iAnalyzeAndResolveVariableType = analyzeAndResolveVariableType(this.mFonts);
+            if (iAnalyzeAndResolveVariableType == -1) {
                 return null;
             }
-            return build("", 0, true, false, analyzeAndResolveVariableType);
+            return build("", 0, true, false, iAnalyzeAndResolveVariableType);
         }
 
         public FontFamily build() {
@@ -94,13 +94,13 @@ public final class FontFamily {
         }
 
         public FontFamily build(String str, int i, boolean z, boolean z2, int i2) {
-            long nInitBuilder = nInitBuilder();
+            long jNInitBuilder = nInitBuilder();
             for (int i3 = 0; i3 < this.mFonts.size(); i3++) {
-                nAddFont(nInitBuilder, this.mFonts.get(i3).getNativePtr());
+                nAddFont(jNInitBuilder, this.mFonts.get(i3).getNativePtr());
             }
-            long nBuild = nBuild(nInitBuilder, str, i, z, z2, i2);
-            FontFamily fontFamily = new FontFamily(nBuild);
-            NoImagePreloadHolder.sFamilyRegistry.registerNativeAllocation(fontFamily, nBuild);
+            long jNBuild = nBuild(jNInitBuilder, str, i, z, z2, i2);
+            FontFamily fontFamily = new FontFamily(jNBuild);
+            NoImagePreloadHolder.sFamilyRegistry.registerNativeAllocation(fontFamily, jNBuild);
             return fontFamily;
         }
 

@@ -55,41 +55,41 @@ public final class TranslationServiceInfo {
         this(context, getServiceInfoOrThrow(componentName, z, i));
     }
 
-    private TranslationServiceInfo(Context context, ServiceInfo serviceInfo) {
-        TypedArray typedArray;
+    private TranslationServiceInfo(Context context, ServiceInfo serviceInfo) throws Throwable {
+        TypedArray typedArrayObtainAttributes;
         if (!Manifest.permission.BIND_TRANSLATION_SERVICE.equals(serviceInfo.permission)) {
             Slog.w(TAG, "TranslationServiceInfo from '" + serviceInfo.packageName + "' does not require permission android.permission.BIND_TRANSLATION_SERVICE");
             throw new SecurityException("Service does not require permission android.permission.BIND_TRANSLATION_SERVICE");
         }
         this.mServiceInfo = serviceInfo;
-        XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(context.getPackageManager(), TranslationService.SERVICE_META_DATA);
-        String str = null;
-        if (loadXmlMetaData == null) {
+        XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(context.getPackageManager(), TranslationService.SERVICE_META_DATA);
+        String string = null;
+        if (xmlResourceParserLoadXmlMetaData == null) {
             this.mSettingsActivity = null;
             return;
         }
         try {
             Resources resourcesForApplication = context.getPackageManager().getResourcesForApplication(serviceInfo.applicationInfo);
-            for (int i = 0; i != 1 && i != 2; i = loadXmlMetaData.next()) {
+            for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
             }
-            if (XML_TAG_SERVICE.equals(loadXmlMetaData.getName())) {
+            if (XML_TAG_SERVICE.equals(xmlResourceParserLoadXmlMetaData.getName())) {
                 try {
-                    typedArray = resourcesForApplication.obtainAttributes(Xml.asAttributeSet(loadXmlMetaData), R.styleable.TranslationService);
-                } catch (Throwable th) {
-                    th = th;
-                    typedArray = null;
-                }
-                try {
-                    str = typedArray.getString(0);
-                    if (typedArray != null) {
-                        typedArray.recycle();
+                    typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.TranslationService);
+                    try {
+                        string = typedArrayObtainAttributes.getString(0);
+                        if (typedArrayObtainAttributes != null) {
+                            typedArrayObtainAttributes.recycle();
+                        }
+                    } catch (Throwable th) {
+                        th = th;
+                        if (typedArrayObtainAttributes != null) {
+                            typedArrayObtainAttributes.recycle();
+                        }
+                        throw th;
                     }
                 } catch (Throwable th2) {
                     th = th2;
-                    if (typedArray != null) {
-                        typedArray.recycle();
-                    }
-                    throw th;
+                    typedArrayObtainAttributes = null;
                 }
             } else {
                 Log.e(TAG, "Meta-data does not start with translation-service tag");
@@ -97,7 +97,7 @@ public final class TranslationServiceInfo {
         } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
             Log.e(TAG, "Error parsing auto fill service meta-data", e);
         }
-        this.mSettingsActivity = str;
+        this.mSettingsActivity = string;
     }
 
     public String toString() {

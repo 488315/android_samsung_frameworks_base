@@ -11,7 +11,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.aibrief.AiBriefManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AiBriefContentProvider extends ContentProvider {
     public static final int $stable = 0;
@@ -23,7 +22,6 @@ public final class AiBriefContentProvider extends ContentProvider {
     public static final String GET_SUGGESTION_REMOTE_SPORTS_SCORE = "GET_SUGGESTION_REMOTE_SPORTS_SCORE";
     public static final String UPDATE_SUGGESTION_NOW_BAR_NEED_TO_UNLOCK = "UPDATE_SUGGESTION_NOW_BAR_NEED_TO_UNLOCK";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,10 +37,10 @@ public final class AiBriefContentProvider extends ContentProvider {
         AiBriefManager aiBriefManager;
         AiBriefManager aiBriefManager2;
         String string = bundle != null ? bundle.getString("data") : null;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("call( method:", str, ", arg:", str2, ", extrasBundle:");
-        m.append(string);
-        m.append(" )");
-        Log.d("AiBriefContentProvider", m.toString());
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("call( method:", str, ", arg:", str2, ", extrasBundle:");
+        sbM.append(string);
+        sbM.append(" )");
+        Log.d("AiBriefContentProvider", sbM.toString());
         switch (str.hashCode()) {
             case -1538361350:
                 if (str.equals(CLEAR_SUGGESTION_REMOTE_NOW_BAR) && (aiBriefManager = (AiBriefManager) Dependency.sDependency.getDependencyInner(AiBriefManager.class)) != null) {

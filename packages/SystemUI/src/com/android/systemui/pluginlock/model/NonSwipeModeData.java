@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NonSwipeModeData {
 
@@ -46,7 +45,7 @@ public class NonSwipeModeData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NonSwipeModeData m2660clone() throws CloneNotSupportedException {
+    public NonSwipeModeData m2678clone() throws CloneNotSupportedException {
         return (NonSwipeModeData) super.clone();
     }
 }

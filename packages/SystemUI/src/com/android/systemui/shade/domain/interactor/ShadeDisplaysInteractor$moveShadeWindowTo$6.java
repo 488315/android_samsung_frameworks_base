@@ -21,14 +21,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ShadeDisplaysInteractor$moveShadeWindowTo$6 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $destinationId;
     int label;
     final /* synthetic */ ShadeDisplaysInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.ShadeDisplaysInteractor$moveShadeWindowTo$6$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function1 {
         final /* synthetic */ int $destinationId;
@@ -49,7 +47,7 @@ final class ShadeDisplaysInteractor$moveShadeWindowTo$6 extends SuspendLambda im
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return ((AnonymousClass1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
         }
 
@@ -65,7 +63,7 @@ final class ShadeDisplaysInteractor$moveShadeWindowTo$6 extends SuspendLambda im
                 ?? r3 = new Function0() { // from class: com.android.systemui.shade.domain.interactor.ShadeDisplaysInteractor$moveShadeWindowTo$6$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        ShadeDisplaysInteractor shadeDisplaysInteractor2 = ShadeDisplaysInteractor.this;
+                        ShadeDisplaysInteractor shadeDisplaysInteractor2 = shadeDisplaysInteractor;
                         ShadeDisplayChangeLatencyTracker shadeDisplayChangeLatencyTracker = shadeDisplaysInteractor2.shadeDisplayChangeLatencyTracker;
                         int i3 = i2;
                         shadeDisplayChangeLatencyTracker.onShadeDisplayChanging(i3);
@@ -74,24 +72,24 @@ final class ShadeDisplaysInteractor$moveShadeWindowTo$6 extends SuspendLambda im
                         trackTracer.getClass();
                         if (Trace.isEnabled()) {
                             ShadeDisplaysInteractor.Companion companion = ShadeDisplaysInteractor.Companion;
-                            String m = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i3, "reparentToDisplayId(id=", ")");
-                            boolean isEnabled = Trace.isEnabled();
-                            if (isEnabled) {
-                                TraceUtilsKt.beginSlice(m);
+                            String strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i3, "reparentToDisplayId(id=", ")");
+                            boolean zIsEnabled = Trace.isEnabled();
+                            if (zIsEnabled) {
+                                TraceUtilsKt.beginSlice(strM);
                             }
                             try {
                                 long j = trackTracer.traceTag;
                                 String str = trackTracer.trackName;
-                                int nextInt = ThreadLocalRandom.current().nextInt();
-                                Trace.asyncTraceForTrackBegin(j, str, m, nextInt);
+                                int iNextInt = ThreadLocalRandom.current().nextInt();
+                                Trace.asyncTraceForTrackBegin(j, str, strM, iNextInt);
                                 try {
                                     shadeDisplaysInteractor2.shadeContext.reparentToDisplay(i3);
                                     Unit unit = Unit.INSTANCE;
                                 } finally {
-                                    Trace.asyncTraceForTrackEnd(j, str, nextInt);
+                                    Trace.asyncTraceForTrackEnd(j, str, iNextInt);
                                 }
                             } finally {
-                                if (isEnabled) {
+                                if (zIsEnabled) {
                                     TraceUtilsKt.endSlice();
                                 }
                             }

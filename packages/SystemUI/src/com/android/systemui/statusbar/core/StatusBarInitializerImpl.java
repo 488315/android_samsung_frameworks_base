@@ -7,7 +7,7 @@ import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.statusbar.core.StatusBarInitializer;
 import com.android.systemui.statusbar.data.repository.StatusBarConfigurationController;
 import com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepository;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda23;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda24;
 import com.android.systemui.statusbar.phone.PhoneStatusBarViewController;
 import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.fragment.dagger.HomeStatusBarComponent;
@@ -17,7 +17,6 @@ import com.android.systemui.statusbar.window.StatusBarWindowControllerImpl;
 import java.util.Set;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarInitializerImpl implements StatusBarInitializer {
     public final Provider collapsedStatusBarFragmentProvider;
@@ -25,7 +24,7 @@ public final class StatusBarInitializerImpl implements StatusBarInitializer {
     public final Set creationListeners;
     public final DarkIconDispatcher darkIconDispatcher;
     public boolean initialized;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda23 statusBarViewUpdatedListener;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda24 statusBarViewUpdatedListener;
     public final StatusBarWindowController statusBarWindowController;
 
     public StatusBarInitializerImpl(StatusBarWindowController statusBarWindowController, StatusBarModePerDisplayRepository statusBarModePerDisplayRepository, StatusBarConfigurationController statusBarConfigurationController, DarkIconDispatcher darkIconDispatcher, Provider provider, StatusBarRootFactory statusBarRootFactory, HomeStatusBarComponent.Factory factory, Set<StatusBarInitializer.OnStatusBarViewInitializedListener> set) {
@@ -46,14 +45,14 @@ public final class StatusBarInitializerImpl implements StatusBarInitializer {
                 if (homeStatusBarComponent == null) {
                     return;
                 }
-                StatusBarInitializerImpl statusBarInitializerImpl = StatusBarInitializerImpl.this;
+                StatusBarInitializerImpl statusBarInitializerImpl = this.this$0;
                 statusBarInitializerImpl.component = homeStatusBarComponent;
-                CentralSurfacesImpl$$ExternalSyntheticLambda23 centralSurfacesImpl$$ExternalSyntheticLambda23 = statusBarInitializerImpl.statusBarViewUpdatedListener;
-                if (centralSurfacesImpl$$ExternalSyntheticLambda23 != null) {
+                CentralSurfacesImpl$$ExternalSyntheticLambda24 centralSurfacesImpl$$ExternalSyntheticLambda24 = statusBarInitializerImpl.statusBarViewUpdatedListener;
+                if (centralSurfacesImpl$$ExternalSyntheticLambda24 != null) {
                     PhoneStatusBarViewController phoneStatusBarViewController = homeStatusBarComponent.getPhoneStatusBarViewController();
                     HomeStatusBarComponent homeStatusBarComponent2 = statusBarInitializerImpl.component;
                     homeStatusBarComponent2.getClass();
-                    centralSurfacesImpl$$ExternalSyntheticLambda23.onStatusBarViewUpdated(phoneStatusBarViewController, homeStatusBarComponent2.getPhoneStatusBarTransitions());
+                    centralSurfacesImpl$$ExternalSyntheticLambda24.onStatusBarViewUpdated(phoneStatusBarViewController, homeStatusBarComponent2.getPhoneStatusBarTransitions());
                 }
                 for (StatusBarInitializer.OnStatusBarViewInitializedListener onStatusBarViewInitializedListener : statusBarInitializerImpl.creationListeners) {
                     HomeStatusBarComponent homeStatusBarComponent3 = statusBarInitializerImpl.component;

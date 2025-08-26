@@ -6,7 +6,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.window.ScreenCapture;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenshotHardwareBufferInternal implements Parcelable {
     public static final Parcelable.Creator<ScreenshotHardwareBufferInternal> CREATOR = new Parcelable.Creator() { // from class: com.android.systemui.screenshot.appclips.ScreenshotHardwareBufferInternal.1

@@ -19,7 +19,6 @@ import com.samsung.android.systemui.multistar.MultiStarManager;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Recents implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public final CommandQueue mCommandQueue;
@@ -129,7 +128,7 @@ public class Recents implements CoreStartable, ConfigurationController.Configura
                 Runnable runnable = new Runnable() { // from class: com.android.systemui.recents.OverviewProxyRecentsImpl$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        LauncherProxyService launcherProxyService = OverviewProxyRecentsImpl.this.mLauncherProxyService;
+                        LauncherProxyService launcherProxyService = overviewProxyRecentsImpl.mLauncherProxyService;
                         try {
                             ILauncherProxy iLauncherProxy = launcherProxyService.mLauncherProxy;
                             if (iLauncherProxy != null) {

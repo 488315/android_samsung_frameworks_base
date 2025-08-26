@@ -11,7 +11,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImStickerData implements Parcelable {
     public static final Parcelable.Creator<ImStickerData> CREATOR = new Parcelable.Creator<ImStickerData>() { // from class: com.sec.ims.im.ImStickerData.1
@@ -60,33 +59,33 @@ public class ImStickerData implements Parcelable {
     }
 
     private String urlToUriParser(String str) {
-        String[] split;
+        String[] strArrSplit;
         String str2 = "";
-        if (str == null || (split = str.split("[?&=]")) == null || split.length != 7) {
+        if (str == null || (strArrSplit = str.split("[?&=]")) == null || strArrSplit.length != 7) {
             return "";
         }
         String str3 = "";
         String str4 = str3;
-        for (int i = 1; i < split.length; i += 2) {
-            String str5 = split[i];
+        for (int i = 1; i < strArrSplit.length; i += 2) {
+            String str5 = strArrSplit[i];
             str5.getClass();
             switch (str5) {
                 case "folder":
-                    str2 = split[i + 1];
+                    str2 = strArrSplit[i + 1];
                     break;
                 case "file":
-                    str3 = split[i + 1];
+                    str3 = strArrSplit[i + 1];
                     break;
                 case "type":
-                    str4 = "." + split[i + 1];
+                    str4 = "." + strArrSplit[i + 1];
                     break;
             }
         }
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str2);
-        m.append(File.separatorChar);
-        m.append(str3);
-        m.append(str4);
-        return m.toString();
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str2);
+        sbM.append(File.separatorChar);
+        sbM.append(str3);
+        sbM.append(str4);
+        return sbM.toString();
     }
 
     @Override // android.os.Parcelable
@@ -231,29 +230,29 @@ public class ImStickerData implements Parcelable {
         parcel.writeByte(this.isSticker ? (byte) 1 : (byte) 0);
     }
 
-    public ImStickerData(String str) {
+    public ImStickerData(String str) throws XmlPullParserException, IOException {
         this.isSticker = false;
         try {
-            XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-            newPullParser.setInput(new StringReader(str));
+            XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+            xmlPullParserNewPullParser.setInput(new StringReader(str));
             String str2 = "";
-            for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.next()) {
+            for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.next()) {
                 if (eventType == 2) {
-                    String name = newPullParser.getName();
+                    String name = xmlPullParserNewPullParser.getName();
                     if ("set".equals(name)) {
-                        this.mStickerId = newPullParser.getAttributeValue(null, "id");
-                        this.mStickerUntil = newPullParser.getAttributeValue(null, "until");
+                        this.mStickerId = xmlPullParserNewPullParser.getAttributeValue(null, "id");
+                        this.mStickerUntil = xmlPullParserNewPullParser.getAttributeValue(null, "until");
                     } else if ("item".equals(name)) {
-                        this.mStickerItemId = newPullParser.getAttributeValue(null, "id");
-                        this.mStickerItemName = newPullParser.getAttributeValue(null, "name");
-                        this.mStickerItemUrl = newPullParser.getAttributeValue(null, "url");
-                        this.mStickerItemThumbnailUrl = newPullParser.getAttributeValue(null, "thumbnail");
+                        this.mStickerItemId = xmlPullParserNewPullParser.getAttributeValue(null, "id");
+                        this.mStickerItemName = xmlPullParserNewPullParser.getAttributeValue(null, "name");
+                        this.mStickerItemUrl = xmlPullParserNewPullParser.getAttributeValue(null, "url");
+                        this.mStickerItemThumbnailUrl = xmlPullParserNewPullParser.getAttributeValue(null, "thumbnail");
                     }
                     str2 = name;
                 } else if (eventType == 3) {
                     str2 = null;
                 } else if (eventType == 4 && str2 != null) {
-                    String text = newPullParser.getText();
+                    String text = xmlPullParserNewPullParser.getText();
                     if ("name".equals(str2)) {
                         this.mStickerName = text;
                     } else if ("thumbnail".equals(str2)) {

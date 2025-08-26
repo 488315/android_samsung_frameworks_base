@@ -3,11 +3,9 @@ package com.android.systemui.util.ui;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface AnimatedValue<T> {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Animating<T> implements AnimatedValue<T> {
         public static final int $stable = 0;
         private final Function0 onStopAnimating;
@@ -70,7 +68,6 @@ public interface AnimatedValue<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotAnimating<T> implements AnimatedValue<T> {
         public static final int $stable = 0;
         private final T value;

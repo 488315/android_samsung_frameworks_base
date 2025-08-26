@@ -3,7 +3,6 @@ package androidx.slice.widget;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import androidx.slice.widget.SliceView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EventInfo {
     public final int actionType;
@@ -23,81 +22,81 @@ public class EventInfo {
     }
 
     public final String toString() {
-        String str;
+        String strM;
         StringBuilder sb = new StringBuilder("mode=");
         SliceView.AnonymousClass3 anonymousClass3 = SliceView.SLICE_ACTION_PRIORITY_COMPARATOR;
         int i = this.sliceMode;
         sb.append(i != 1 ? i != 2 ? i != 3 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "unknown mode: ") : "MODE SHORTCUT" : "MODE LARGE" : "MODE SMALL");
         sb.append(", actionType=");
-        String str2 = "TOGGLE";
+        String strM2 = "TOGGLE";
         int i2 = this.actionType;
         switch (i2) {
             case 0:
-                str = "TOGGLE";
+                strM = "TOGGLE";
                 break;
             case 1:
-                str = "BUTTON";
+                strM = "BUTTON";
                 break;
             case 2:
-                str = "SLIDER";
+                strM = "SLIDER";
                 break;
             case 3:
-                str = "CONTENT";
+                strM = "CONTENT";
                 break;
             case 4:
-                str = "SEE MORE";
+                strM = "SEE MORE";
                 break;
             case 5:
-                str = "SELECTION";
+                strM = "SELECTION";
                 break;
             case 6:
-                str = "DATE_PICK";
+                strM = "DATE_PICK";
                 break;
             case 7:
-                str = "TIME_PICK";
+                strM = "TIME_PICK";
                 break;
             default:
-                str = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "unknown action: ");
+                strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "unknown action: ");
                 break;
         }
-        sb.append(str);
+        sb.append(strM);
         sb.append(", rowTemplateType=");
         int i3 = this.rowTemplateType;
         switch (i3) {
             case -1:
-                str2 = "SHORTCUT";
+                strM2 = "SHORTCUT";
                 break;
             case 0:
-                str2 = "LIST";
+                strM2 = "LIST";
                 break;
             case 1:
-                str2 = "GRID";
+                strM2 = "GRID";
                 break;
             case 2:
-                str2 = "MESSAGING";
+                strM2 = "MESSAGING";
                 break;
             case 3:
                 break;
             case 4:
-                str2 = "SLIDER";
+                strM2 = "SLIDER";
                 break;
             case 5:
-                str2 = "PROGRESS";
+                strM2 = "PROGRESS";
                 break;
             case 6:
-                str2 = "SELECTION";
+                strM2 = "SELECTION";
                 break;
             case 7:
-                str2 = "DATE_PICK";
+                strM2 = "DATE_PICK";
                 break;
             case 8:
-                str2 = "TIME_PICK";
+                strM2 = "TIME_PICK";
                 break;
             default:
-                str2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "unknown row type: ");
+                strM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "unknown row type: ");
                 break;
         }
-        sb.append(str2);
+        sb.append(strM2);
         sb.append(", rowIndex=");
         sb.append(this.rowIndex);
         sb.append(", actionPosition=");

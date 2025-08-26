@@ -11,13 +11,11 @@ import kotlinx.atomicfu.AtomicInt;
 import kotlinx.atomicfu.AtomicRef;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AwaitAll {
     public final Deferred[] deferreds;
     public final AtomicInt notCompletedCount;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AwaitAllNode extends JobNode {
         public final AtomicRef _disposer = AtomicFU.atomic((Object) null);
         public final CancellableContinuation continuation;
@@ -35,9 +33,9 @@ public final class AwaitAll {
         @Override // kotlinx.coroutines.JobNode
         public final void invoke(Throwable th) {
             if (th != null) {
-                Symbol tryResumeWithException = this.continuation.tryResumeWithException(th);
-                if (tryResumeWithException != null) {
-                    this.continuation.completeResume(tryResumeWithException);
+                Symbol symbolTryResumeWithException = this.continuation.tryResumeWithException(th);
+                if (symbolTryResumeWithException != null) {
+                    this.continuation.completeResume(symbolTryResumeWithException);
                     DisposeHandlersOnCancel disposeHandlersOnCancel = (DisposeHandlersOnCancel) this._disposer.value;
                     if (disposeHandlersOnCancel != null) {
                         disposeHandlersOnCancel.disposeAll();
@@ -60,7 +58,6 @@ public final class AwaitAll {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisposeHandlersOnCancel implements CancelHandler {
         public final AwaitAllNode[] nodes;
 

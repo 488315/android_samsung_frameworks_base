@@ -44,9 +44,9 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHdmiControlStatusChangeListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiControlStatusChangeListener)) {
-                return (IHdmiControlStatusChangeListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHdmiControlStatusChangeListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHdmiControlStatusChangeListener)) {
+                return (IHdmiControlStatusChangeListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onStatusChange(readInt, readBoolean);
+                onStatusChange(i3, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
 
             @Override // android.hardware.hdmi.IHdmiControlStatusChangeListener
             public void onStatusChange(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHdmiControlStatusChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHdmiControlStatusChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

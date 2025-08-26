@@ -5,7 +5,6 @@ import dagger.internal.Providers;
 import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GlobalCoroutinesModule_ApplicationScopeFactory implements Provider {
     private final Provider dispatcherContextProvider;
@@ -17,9 +16,9 @@ public final class GlobalCoroutinesModule_ApplicationScopeFactory implements Pro
     }
 
     public static CoroutineScope applicationScope(GlobalCoroutinesModule globalCoroutinesModule, CoroutineContext coroutineContext) {
-        CoroutineScope applicationScope = globalCoroutinesModule.applicationScope(coroutineContext);
-        applicationScope.getClass();
-        return applicationScope;
+        CoroutineScope coroutineScopeApplicationScope = globalCoroutinesModule.applicationScope(coroutineContext);
+        coroutineScopeApplicationScope.getClass();
+        return coroutineScopeApplicationScope;
     }
 
     public static GlobalCoroutinesModule_ApplicationScopeFactory create(GlobalCoroutinesModule globalCoroutinesModule, javax.inject.Provider provider) {

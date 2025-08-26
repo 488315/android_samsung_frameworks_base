@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PaintFlagsDrawFilter;
@@ -122,7 +123,7 @@ public abstract class LauncherActivity extends ListActivity {
         }
 
         @Override // android.widget.Adapter
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             if (view == null) {
                 view = this.mInflater.inflate(R.layout.activity_list_item_2, viewGroup, false);
             }
@@ -175,14 +176,14 @@ public abstract class LauncherActivity extends ListActivity {
                 ArrayList arrayList3 = new ArrayList(size);
                 for (int i = 0; i < size; i++) {
                     ListItem listItem = (ListItem) arrayList2.get(i);
-                    String[] split = listItem.label.toString().toLowerCase().split(" ");
-                    int length = split.length;
+                    String[] strArrSplit = listItem.label.toString().toLowerCase().split(" ");
+                    int length = strArrSplit.length;
                     int i2 = 0;
                     while (true) {
                         if (i2 >= length) {
                             break;
                         }
-                        if (split[i2].startsWith(lowerCase)) {
+                        if (strArrSplit[i2].startsWith(lowerCase)) {
                             arrayList3.add(listItem);
                             break;
                         }
@@ -240,16 +241,16 @@ public abstract class LauncherActivity extends ListActivity {
                 if (intrinsicWidth >= i || intrinsicHeight >= i2) {
                     return drawable;
                 }
-                Bitmap createBitmap = Bitmap.createBitmap(this.mIconWidth, this.mIconHeight, Bitmap.Config.ARGB_8888);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(this.mIconWidth, this.mIconHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = this.mCanvas;
-                canvas.setBitmap(createBitmap);
+                canvas.setBitmap(bitmapCreateBitmap);
                 this.mOldBounds.set(drawable.getBounds());
                 int i3 = (i - intrinsicWidth) / 2;
                 int i4 = (i2 - intrinsicHeight) / 2;
                 drawable.setBounds(i3, i4, intrinsicWidth + i3, intrinsicHeight + i4);
                 drawable.draw(canvas);
                 drawable.setBounds(this.mOldBounds);
-                BitmapDrawable bitmapDrawable = new BitmapDrawable(LauncherActivity.this.getResources(), createBitmap);
+                BitmapDrawable bitmapDrawable = new BitmapDrawable(LauncherActivity.this.getResources(), bitmapCreateBitmap);
                 canvas.setBitmap(null);
                 return bitmapDrawable;
             }
@@ -259,16 +260,16 @@ public abstract class LauncherActivity extends ListActivity {
             } else if (intrinsicHeight > intrinsicWidth) {
                 i = (int) (i2 * f);
             }
-            Bitmap createBitmap2 = Bitmap.createBitmap(this.mIconWidth, this.mIconHeight, drawable.getOpacity() != -1 ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+            Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(this.mIconWidth, this.mIconHeight, drawable.getOpacity() != -1 ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
             Canvas canvas2 = this.mCanvas;
-            canvas2.setBitmap(createBitmap2);
+            canvas2.setBitmap(bitmapCreateBitmap2);
             this.mOldBounds.set(drawable.getBounds());
             int i5 = (this.mIconWidth - i) / 2;
             int i6 = (this.mIconHeight - i2) / 2;
             drawable.setBounds(i5, i6, i + i5, i2 + i6);
             drawable.draw(canvas2);
             drawable.setBounds(this.mOldBounds);
-            BitmapDrawable bitmapDrawable2 = new BitmapDrawable(LauncherActivity.this.getResources(), createBitmap2);
+            BitmapDrawable bitmapDrawable2 = new BitmapDrawable(LauncherActivity.this.getResources(), bitmapCreateBitmap2);
             canvas2.setBitmap(null);
             return bitmapDrawable2;
         }
@@ -360,12 +361,12 @@ public abstract class LauncherActivity extends ListActivity {
     }
 
     public List<ListItem> makeListItems() {
-        List<ResolveInfo> onQueryPackageManager = onQueryPackageManager(this.mIntent);
-        onSortResultList(onQueryPackageManager);
-        ArrayList arrayList = new ArrayList(onQueryPackageManager.size());
-        int size = onQueryPackageManager.size();
+        List<ResolveInfo> listOnQueryPackageManager = onQueryPackageManager(this.mIntent);
+        onSortResultList(listOnQueryPackageManager);
+        ArrayList arrayList = new ArrayList(listOnQueryPackageManager.size());
+        int size = listOnQueryPackageManager.size();
         for (int i = 0; i < size; i++) {
-            arrayList.add(new ListItem(this.mPackageManager, onQueryPackageManager.get(i), null));
+            arrayList.add(new ListItem(this.mPackageManager, listOnQueryPackageManager.get(i), null));
         }
         return arrayList;
     }

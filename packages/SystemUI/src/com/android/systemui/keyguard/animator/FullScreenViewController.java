@@ -17,7 +17,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FullScreenViewController extends ViewAnimationController {
     public AnimatorSet fullScreenAnimatorSet;
@@ -26,7 +25,6 @@ public final class FullScreenViewController extends ViewAnimationController {
     public boolean isFullscreenModeEnabled;
     public final FullScreenViewController$longPressCallback$1 longPressCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,7 +34,6 @@ public final class FullScreenViewController extends ViewAnimationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CustomAnimatorListenerAdapter extends AnimatorListenerAdapter {
         public boolean isCancelled;
 
@@ -62,7 +59,7 @@ public final class FullScreenViewController extends ViewAnimationController {
         this.longPressCallback = new Runnable() { // from class: com.android.systemui.keyguard.animator.FullScreenViewController$longPressCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                FullScreenViewController.this.setFullScreenMode$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
+                this.this$0.setFullScreenMode$frameworks__base__packages__SystemUI__android_common__SystemUI_core(true);
             }
         };
         this.fullScreenAnimatorSet = new AnimatorSet();

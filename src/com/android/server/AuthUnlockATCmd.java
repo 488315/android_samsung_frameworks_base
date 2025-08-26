@@ -58,11 +58,11 @@ public class AuthUnlockATCmd implements IWorkOnAt {
         String str2;
         String str3;
         String str4;
-        byte[] bArr;
+        byte[] bArrNativeSessionAccept;
         String str5 = "";
-        String[] parsingParam = parsingParam(str);
+        String[] strArrParsingParam = parsingParam(str);
         String[] strArr = {"1,0,", "1,1,", "3,0,0", "3,0,1"};
-        if (parsingParam == null) {
+        if (strArrParsingParam == null) {
             return AT_RESPONSE_INVALID_PARAM;
         }
         PersistentDataBlockManager persistentDataBlockManager = (PersistentDataBlockManager) this.mContext.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
@@ -71,33 +71,33 @@ public class AuthUnlockATCmd implements IWorkOnAt {
             return AT_RESPONSE_CONN_FAILED;
         }
         try {
-            str5 = parsingParam[0] + ",";
+            str5 = strArrParsingParam[0] + ",";
             String str6 = strArr[0];
             if (str6.equals(str.substring(0, str6.length()))) {
-                byte[] bytes = parsingParam[2].trim().getBytes(StandardCharsets.UTF_8);
+                byte[] bytes = strArrParsingParam[2].trim().getBytes(StandardCharsets.UTF_8);
                 synchronized (mLock) {
                     try {
-                        bArr = nativeSessionAccept(bytes);
+                        bArrNativeSessionAccept = nativeSessionAccept(bytes);
                     } catch (Exception unused) {
-                        bArr = null;
+                        bArrNativeSessionAccept = null;
                     }
                 }
-                if (bArr != null) {
-                    return str5 + new String(bArr, StandardCharsets.UTF_8);
+                if (bArrNativeSessionAccept != null) {
+                    return str5 + new String(bArrNativeSessionAccept, StandardCharsets.UTF_8);
                 }
                 return str5 + "NG(1)";
             }
-            int i = 1;
+            int iNativeSessionComplete = 1;
             String str7 = strArr[1];
             if (str7.equals(str.substring(0, str7.length()))) {
-                byte[] bytes2 = parsingParam[2].trim().getBytes(StandardCharsets.UTF_8);
+                byte[] bytes2 = strArrParsingParam[2].trim().getBytes(StandardCharsets.UTF_8);
                 synchronized (mLock) {
                     try {
-                        i = nativeSessionComplete(bytes2);
+                        iNativeSessionComplete = nativeSessionComplete(bytes2);
                     } catch (Exception unused2) {
                     }
                 }
-                if (i == 0) {
+                if (iNativeSessionComplete == 0) {
                     if (nativeWipe(this.mDataBlockFile) == 0) {
                         if (this.mPDB.deactivateFactoryResetProtection(new byte[32])) {
                             Slog.i(TAG, "FRP is deactivated!");
@@ -110,7 +110,7 @@ public class AuthUnlockATCmd implements IWorkOnAt {
                     Slog.i(TAG, "FRP deactivating FAILED!");
                     return str5 + "NG(1)";
                 }
-                str3 = str5 + "NG(" + i + NavigationBarInflaterView.KEY_CODE_END;
+                str3 = str5 + "NG(" + iNativeSessionComplete + NavigationBarInflaterView.KEY_CODE_END;
                 Slog.i(TAG, "FRP Unlocking process FAILED.");
             } else {
                 String str8 = strArr[2];

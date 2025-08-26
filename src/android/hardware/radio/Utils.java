@@ -32,15 +32,15 @@ final class Utils {
     }
 
     static Map<String, String> readStringMap(Parcel parcel) {
-        int readInt = parcel.readInt();
-        HashMap hashMap = new HashMap(readInt);
+        int i = parcel.readInt();
+        HashMap map = new HashMap(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
-                return hashMap;
+            int i2 = i - 1;
+            if (i <= 0) {
+                return map;
             }
-            hashMap.put(parcel.readString(), parcel.readString());
-            readInt = i;
+            map.put(parcel.readString(), parcel.readString());
+            i = i2;
         }
     }
 
@@ -57,15 +57,15 @@ final class Utils {
     }
 
     static Map<String, Integer> readStringIntMap(Parcel parcel) {
-        int readInt = parcel.readInt();
-        HashMap hashMap = new HashMap(readInt);
+        int i = parcel.readInt();
+        HashMap map = new HashMap(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
-                return hashMap;
+            int i2 = i - 1;
+            if (i <= 0) {
+                return map;
             }
-            hashMap.put(parcel.readString(), Integer.valueOf(parcel.readInt()));
-            readInt = i;
+            map.put(parcel.readString(), Integer.valueOf(parcel.readInt()));
+            i = i2;
         }
     }
 
@@ -77,22 +77,22 @@ final class Utils {
             set.stream().forEach(new Consumer() { // from class: android.hardware.radio.Utils$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Parcel.this.writeTypedObject((Parcelable) obj, 0);
+                    parcel.writeTypedObject((Parcelable) obj, 0);
                 }
             });
         }
     }
 
     static <T> Set<T> createSet(Parcel parcel, Parcelable.Creator<T> creator) {
-        int readInt = parcel.readInt();
-        HashSet hashSet = new HashSet(readInt);
+        int i = parcel.readInt();
+        HashSet hashSet = new HashSet(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
+            int i2 = i - 1;
+            if (i <= 0) {
                 return hashSet;
             }
             hashSet.add(parcel.readTypedObject(creator));
-            readInt = i;
+            i = i2;
         }
     }
 
@@ -104,22 +104,22 @@ final class Utils {
             set.stream().forEach(new Consumer() { // from class: android.hardware.radio.Utils$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Parcel.this.writeInt(((Integer) Objects.requireNonNull((Integer) obj)).intValue());
+                    parcel.writeInt(((Integer) Objects.requireNonNull((Integer) obj)).intValue());
                 }
             });
         }
     }
 
     static Set<Integer> createIntSet(Parcel parcel) {
-        int readInt = parcel.readInt();
-        HashSet hashSet = new HashSet(readInt);
+        int i = parcel.readInt();
+        HashSet hashSet = new HashSet(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
+            int i2 = i - 1;
+            if (i <= 0) {
                 return hashSet;
             }
             hashSet.add(Integer.valueOf(parcel.readInt()));
-            readInt = i;
+            i = i2;
         }
     }
 

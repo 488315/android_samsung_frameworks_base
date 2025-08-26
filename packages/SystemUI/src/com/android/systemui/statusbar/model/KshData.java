@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KshData {
     public KeyCharacterMap mBackupKeyCharacterMap;
@@ -157,13 +156,13 @@ public class KshData {
     }
 
     public final KeyboardShortcutGroup getSamsungSystemShortcuts() {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             List list = (List) Arrays.stream((SamsungSystemShortcutsEnum[]) SamsungSystemShortcutsEnum.class.getEnumConstants()).map(new KshData$$ExternalSyntheticLambda0(this, 1)).filter(new KshData$$ExternalSyntheticLambda1(1)).map(new KshData$$ExternalSyntheticLambda4()).collect(Collectors.toList());
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return new KeyboardShortcutGroup(this.mContext.getString(R.string.ksh_group_system), list);
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }

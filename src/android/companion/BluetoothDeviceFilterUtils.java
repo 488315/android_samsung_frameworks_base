@@ -53,11 +53,11 @@ public class BluetoothDeviceFilterUtils {
     }
 
     static boolean matchesServiceUuid(ParcelUuid parcelUuid, ParcelUuid parcelUuid2, BluetoothDevice bluetoothDevice) {
-        List asList = bluetoothDevice.getUuids() == null ? Collections.EMPTY_LIST : Arrays.asList(bluetoothDevice.getUuids());
+        List listAsList = bluetoothDevice.getUuids() == null ? Collections.EMPTY_LIST : Arrays.asList(bluetoothDevice.getUuids());
         if (parcelUuid == null) {
             return true;
         }
-        Iterator it = asList.iterator();
+        Iterator it = listAsList.iterator();
         boolean z = false;
         while (it.hasNext()) {
             if (uuidsMaskedEquals(((ParcelUuid) it.next()).getUuid(), parcelUuid.getUuid(), parcelUuid2 == null ? null : parcelUuid2.getUuid())) {

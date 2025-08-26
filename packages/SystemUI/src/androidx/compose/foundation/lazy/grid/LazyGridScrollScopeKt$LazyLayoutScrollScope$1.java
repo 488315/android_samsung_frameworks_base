@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.IntOffset;
 import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridScrollScopeKt$LazyLayoutScrollScope$1 implements LazyLayoutScrollScope, ScrollScope {
     public final /* synthetic */ ScrollScope $$delegate_0;
@@ -21,7 +20,7 @@ public final class LazyGridScrollScopeKt$LazyLayoutScrollScope$1 implements Lazy
 
     @Override // androidx.compose.foundation.lazy.layout.LazyLayoutScrollScope
     public final int calculateDistanceTo(int i) {
-        Integer num;
+        Integer numValueOf;
         Object obj;
         LazyGridState lazyGridState = this.$state;
         LazyGridLayoutInfo layoutInfo = lazyGridState.getLayoutInfo();
@@ -36,7 +35,7 @@ public final class LazyGridScrollScopeKt$LazyLayoutScrollScope$1 implements Lazy
             int size = list.size();
             int i3 = 0;
             while (true) {
-                num = null;
+                numValueOf = null;
                 if (i3 >= size) {
                     obj = null;
                     break;
@@ -52,15 +51,15 @@ public final class LazyGridScrollScopeKt$LazyLayoutScrollScope$1 implements Lazy
                 if (lazyGridItemInfo != null) {
                     long j = ((LazyGridMeasuredItem) lazyGridItemInfo).offset;
                     IntOffset.Companion companion = IntOffset.Companion;
-                    num = Integer.valueOf((int) (j & 4294967295L));
+                    numValueOf = Integer.valueOf((int) (j & 4294967295L));
                 }
             } else if (lazyGridItemInfo != null) {
                 long j2 = ((LazyGridMeasuredItem) lazyGridItemInfo).offset;
                 IntOffset.Companion companion2 = IntOffset.Companion;
-                num = Integer.valueOf((int) (j2 >> 32));
+                numValueOf = Integer.valueOf((int) (j2 >> 32));
             }
-            if (num != null) {
-                return num.intValue();
+            if (numValueOf != null) {
+                return numValueOf.intValue();
             }
         }
         return 0;

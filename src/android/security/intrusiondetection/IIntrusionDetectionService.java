@@ -81,9 +81,9 @@ public interface IIntrusionDetectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIntrusionDetectionService)) {
-                return (IIntrusionDetectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIntrusionDetectionService)) {
+                return (IIntrusionDetectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,24 +119,24 @@ public interface IIntrusionDetectionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IIntrusionDetectionServiceStateCallback asInterface = IIntrusionDetectionServiceStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                IIntrusionDetectionServiceStateCallback iIntrusionDetectionServiceStateCallbackAsInterface = IIntrusionDetectionServiceStateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addStateCallback(asInterface);
+                addStateCallback(iIntrusionDetectionServiceStateCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IIntrusionDetectionServiceStateCallback asInterface2 = IIntrusionDetectionServiceStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                IIntrusionDetectionServiceStateCallback iIntrusionDetectionServiceStateCallbackAsInterface2 = IIntrusionDetectionServiceStateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeStateCallback(asInterface2);
+                removeStateCallback(iIntrusionDetectionServiceStateCallbackAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IIntrusionDetectionServiceCommandCallback asInterface3 = IIntrusionDetectionServiceCommandCallback.Stub.asInterface(parcel.readStrongBinder());
+                IIntrusionDetectionServiceCommandCallback iIntrusionDetectionServiceCommandCallbackAsInterface = IIntrusionDetectionServiceCommandCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                enable(asInterface3);
+                enable(iIntrusionDetectionServiceCommandCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                IIntrusionDetectionServiceCommandCallback asInterface4 = IIntrusionDetectionServiceCommandCallback.Stub.asInterface(parcel.readStrongBinder());
+                IIntrusionDetectionServiceCommandCallback iIntrusionDetectionServiceCommandCallbackAsInterface2 = IIntrusionDetectionServiceCommandCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                disable(asInterface4);
+                disable(iIntrusionDetectionServiceCommandCallbackAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -162,61 +162,61 @@ public interface IIntrusionDetectionService extends IInterface {
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionService
             public void addStateCallback(IIntrusionDetectionServiceStateCallback iIntrusionDetectionServiceStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntrusionDetectionServiceStateCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntrusionDetectionServiceStateCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionService
             public void removeStateCallback(IIntrusionDetectionServiceStateCallback iIntrusionDetectionServiceStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntrusionDetectionServiceStateCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntrusionDetectionServiceStateCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionService
             public void enable(IIntrusionDetectionServiceCommandCallback iIntrusionDetectionServiceCommandCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntrusionDetectionServiceCommandCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntrusionDetectionServiceCommandCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionService
             public void disable(IIntrusionDetectionServiceCommandCallback iIntrusionDetectionServiceCommandCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntrusionDetectionServiceCommandCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntrusionDetectionServiceCommandCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -55,7 +55,7 @@ public class GlobalConfiguration {
         this.engine_library = engineSuffix;
     }
 
-    static GlobalConfiguration read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static GlobalConfiguration read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         GlobalConfiguration globalConfiguration = new GlobalConfiguration();
         String attributeValue = xmlPullParser.getAttributeValue(null, "speaker_drc_enabled");
         if (attributeValue != null) {

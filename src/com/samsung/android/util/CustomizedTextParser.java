@@ -61,32 +61,32 @@ public class CustomizedTextParser {
     private void initialize() {
         Log.d(TAG, "Initialzed");
         this.mRuleMap = new HashMap<>();
-        Node search = search();
-        if (search == null) {
+        Node nodeSearch = search();
+        if (nodeSearch == null) {
             return;
         }
-        NodeList searchList = searchList(search);
-        if (searchList == null) {
+        NodeList nodeListSearchList = searchList(nodeSearch);
+        if (nodeListSearchList == null) {
             Log.i(TAG, "createCscRuleMap:No Rule info");
             return;
         }
-        int length = searchList.getLength();
+        int length = nodeListSearchList.getLength();
         for (int i = 0; i < length; i++) {
-            Node item = searchList.item(i);
-            Node search2 = search(item, "source");
-            Node search3 = search(item, TAG_TARGET_STRING);
-            if (search2 == null || search3 == null) {
-                Log.e(TAG, "createCscRuleMap:src or target is null. srcTemp =" + search2 + ",target=" + search3);
+            Node nodeItem = nodeListSearchList.item(i);
+            Node nodeSearch2 = search(nodeItem, "source");
+            Node nodeSearch3 = search(nodeItem, TAG_TARGET_STRING);
+            if (nodeSearch2 == null || nodeSearch3 == null) {
+                Log.e(TAG, "createCscRuleMap:src or target is null. srcTemp =" + nodeSearch2 + ",target=" + nodeSearch3);
             } else {
-                this.mRuleMap.put(getValue(search2), getValue(search3));
+                this.mRuleMap.put(getValue(nodeSearch2), getValue(nodeSearch3));
             }
         }
         Log.d(TAG, "Initialzed: Finished. size=" + sInstance.mRuleMap.size());
     }
 
     public String getCustomizedText(String str) {
-        HashMap<String, String> hashMap = this.mRuleMap;
-        if (hashMap == null || hashMap.size() <= 0) {
+        HashMap<String, String> map = this.mRuleMap;
+        if (map == null || map.size() <= 0) {
             Log.e(TAG, "getCustomizedText Rule is empty. mRuleMap=" + this.mRuleMap);
             return str;
         }
@@ -94,22 +94,22 @@ public class CustomizedTextParser {
         if (str2 != null) {
             return str2;
         }
-        String trim = str.trim();
-        String str3 = this.mRuleMap.get(trim);
+        String strTrim = str.trim();
+        String str3 = this.mRuleMap.get(strTrim);
         if (str3 == null) {
             Log.e(TAG, "convertString replaceText is null. preString= " + str);
             return str;
         }
-        return str.replace(trim, str3);
+        return str.replace(strTrim, str3);
     }
 
     private void update(String str) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilder newDocumentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilder documentBuilderNewDocumentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         File file = new File(str);
         if (file.exists()) {
-            Document parse = newDocumentBuilder.parse(file);
-            this.mDoc = parse;
-            this.mRoot = parse.getDocumentElement();
+            Document document = documentBuilderNewDocumentBuilder.parse(file);
+            this.mDoc = document;
+            this.mRoot = document.getDocumentElement();
             return;
         }
         Log.secE(TAG, "update : XML file doesn't exist");
@@ -134,16 +134,16 @@ public class CustomizedTextParser {
     }
 
     private Node search() {
-        Node node = this.mRoot;
+        Node nodeSearch = this.mRoot;
         StringTokenizer stringTokenizer = new StringTokenizer(PATH_CUSTOM_INFO, MediaMetrics.SEPARATOR);
         while (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (node == null) {
+            String strNextToken = stringTokenizer.nextToken();
+            if (nodeSearch == null) {
                 return null;
             }
-            node = search(node, nextToken);
+            nodeSearch = search(nodeSearch, strNextToken);
         }
-        return node;
+        return nodeSearch;
     }
 
     private Node search(Node node, String str) {
@@ -151,9 +151,9 @@ public class CustomizedTextParser {
         if (node != null && (childNodes = node.getChildNodes()) != null) {
             int length = childNodes.getLength();
             for (int i = 0; i < length; i++) {
-                Node item = childNodes.item(i);
-                if (item.getNodeName().equals(str)) {
-                    return item;
+                Node nodeItem = childNodes.item(i);
+                if (nodeItem.getNodeName().equals(str)) {
+                    return nodeItem;
                 }
             }
         }
@@ -170,10 +170,10 @@ public class CustomizedTextParser {
             if (childNodes != null) {
                 int length = childNodes.getLength();
                 for (int i = 0; i < length; i++) {
-                    Node item = childNodes.item(i);
-                    if (item.getNodeName().equals(TAG_RULE_INFO)) {
+                    Node nodeItem = childNodes.item(i);
+                    if (nodeItem.getNodeName().equals(TAG_RULE_INFO)) {
                         try {
-                            cscNodeList.appendChild(item);
+                            cscNodeList.appendChild(nodeItem);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

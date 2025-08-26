@@ -761,8 +761,8 @@ public class AccessNetworkUtils {
         if (i == Integer.MAX_VALUE) {
             return -1;
         }
-        AccessNetworkConstants.NgranArfcnFrequency[] values = AccessNetworkConstants.NgranArfcnFrequency.values();
-        int length = values.length;
+        AccessNetworkConstants.NgranArfcnFrequency[] ngranArfcnFrequencyArrValues = AccessNetworkConstants.NgranArfcnFrequency.values();
+        int length = ngranArfcnFrequencyArrValues.length;
         int i4 = 0;
         int i5 = 0;
         while (true) {
@@ -771,7 +771,7 @@ public class AccessNetworkUtils {
                 i3 = 0;
                 break;
             }
-            AccessNetworkConstants.NgranArfcnFrequency ngranArfcnFrequency = values[i5];
+            AccessNetworkConstants.NgranArfcnFrequency ngranArfcnFrequency = ngranArfcnFrequencyArrValues[i5];
             if (i >= ngranArfcnFrequency.rangeFirst && i <= ngranArfcnFrequency.rangeLast) {
                 int i6 = ngranArfcnFrequency.globalKhz;
                 int i7 = ngranArfcnFrequency.rangeOffset;
@@ -785,66 +785,39 @@ public class AccessNetworkUtils {
         return i4 + (i2 * (i - i3));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0052, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0052, code lost:
     
         return convertEarfcnToFrequency(r2, r7, r6);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int getFrequencyFromEarfcn(int r6, int r7, boolean r8) {
-        /*
-            android.telephony.AccessNetworkConstants$EutranBandArfcnFrequency[] r0 = android.telephony.AccessNetworkConstants.EutranBandArfcnFrequency.values()
-            int r1 = r0.length
-            r2 = 0
-            r3 = r2
-        L7:
-            if (r3 >= r1) goto L4d
-            r4 = r0[r3]
-            int r5 = r4.band
-            if (r6 != r5) goto L4a
-            boolean r0 = isInEarfcnRange(r7, r4, r8)
-            if (r0 == 0) goto L25
-            if (r8 == 0) goto L1a
-            int r6 = r4.uplinkLowKhz
-            goto L1c
-        L1a:
-            int r6 = r4.downlinkLowKhz
-        L1c:
-            r2 = r6
-            if (r8 == 0) goto L22
-            int r6 = r4.uplinkOffset
-            goto L4e
-        L22:
-            int r6 = r4.downlinkOffset
-            goto L4e
-        L25:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "Band and the range of EARFCN are not consistent: band = "
-            r0.<init>(r1)
-            r0.append(r6)
-            java.lang.String r6 = " ,earfcn = "
-            r0.append(r6)
-            r0.append(r7)
-            java.lang.String r6 = " ,isUplink = "
-            r0.append(r6)
-            r0.append(r8)
-            java.lang.String r6 = r0.toString()
-            java.lang.String r7 = "AccessNetworkUtils"
-            android.telephony.Rlog.w(r7, r6)
-            r6 = -1
-            return r6
-        L4a:
-            int r3 = r3 + 1
-            goto L7
-        L4d:
-            r6 = r2
-        L4e:
-            int r6 = convertEarfcnToFrequency(r2, r7, r6)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.AccessNetworkUtils.getFrequencyFromEarfcn(int, int, boolean):int");
+    public static int getFrequencyFromEarfcn(int i, int i2, boolean z) {
+        int i3;
+        AccessNetworkConstants.EutranBandArfcnFrequency[] eutranBandArfcnFrequencyArrValues = AccessNetworkConstants.EutranBandArfcnFrequency.values();
+        int length = eutranBandArfcnFrequencyArrValues.length;
+        int i4 = 0;
+        int i5 = 0;
+        while (true) {
+            if (i5 >= length) {
+                i3 = 0;
+                break;
+            }
+            AccessNetworkConstants.EutranBandArfcnFrequency eutranBandArfcnFrequency = eutranBandArfcnFrequencyArrValues[i5];
+            if (i != eutranBandArfcnFrequency.band) {
+                i5++;
+            } else if (isInEarfcnRange(i2, eutranBandArfcnFrequency, z)) {
+                i4 = z ? eutranBandArfcnFrequency.uplinkLowKhz : eutranBandArfcnFrequency.downlinkLowKhz;
+                if (z) {
+                    i3 = eutranBandArfcnFrequency.uplinkOffset;
+                } else {
+                    i3 = eutranBandArfcnFrequency.downlinkOffset;
+                }
+            } else {
+                Rlog.w(TAG, "Band and the range of EARFCN are not consistent: band = " + i + " ,earfcn = " + i2 + " ,isUplink = " + z);
+                return -1;
+            }
+        }
     }
 
     private static boolean isInEarfcnRange(int i, AccessNetworkConstants.EutranBandArfcnFrequency eutranBandArfcnFrequency, boolean z) {
@@ -856,15 +829,15 @@ public class AccessNetworkUtils {
         if (i2 == Integer.MAX_VALUE) {
             return -1;
         }
-        AccessNetworkConstants.UtranBandArfcnFrequency[] values = AccessNetworkConstants.UtranBandArfcnFrequency.values();
-        int length = values.length;
+        AccessNetworkConstants.UtranBandArfcnFrequency[] utranBandArfcnFrequencyArrValues = AccessNetworkConstants.UtranBandArfcnFrequency.values();
+        int length = utranBandArfcnFrequencyArrValues.length;
         int i4 = 0;
         int i5 = 0;
         while (true) {
             if (i5 >= length) {
                 break;
             }
-            AccessNetworkConstants.UtranBandArfcnFrequency utranBandArfcnFrequency = values[i5];
+            AccessNetworkConstants.UtranBandArfcnFrequency utranBandArfcnFrequency = utranBandArfcnFrequencyArrValues[i5];
             if (i != utranBandArfcnFrequency.band) {
                 i5++;
             } else {
@@ -901,28 +874,28 @@ public class AccessNetworkUtils {
         if (i2 == Integer.MAX_VALUE) {
             return -1;
         }
-        AccessNetworkConstants.GeranBandArfcnFrequency[] values = AccessNetworkConstants.GeranBandArfcnFrequency.values();
-        int length = values.length;
+        AccessNetworkConstants.GeranBandArfcnFrequency[] geranBandArfcnFrequencyArrValues = AccessNetworkConstants.GeranBandArfcnFrequency.values();
+        int length = geranBandArfcnFrequencyArrValues.length;
+        int iConvertArfcnToFrequency = 0;
         int i4 = 0;
-        int i5 = 0;
         while (true) {
-            if (i5 >= length) {
+            if (i4 >= length) {
                 i3 = 0;
                 break;
             }
-            AccessNetworkConstants.GeranBandArfcnFrequency geranBandArfcnFrequency = values[i5];
+            AccessNetworkConstants.GeranBandArfcnFrequency geranBandArfcnFrequency = geranBandArfcnFrequencyArrValues[i4];
             if (i != geranBandArfcnFrequency.band) {
-                i5++;
+                i4++;
             } else if (i2 >= geranBandArfcnFrequency.arfcnRangeFirst && i2 <= geranBandArfcnFrequency.arfcnRangeLast) {
-                int i6 = geranBandArfcnFrequency.uplinkFrequencyFirst;
-                int i7 = geranBandArfcnFrequency.downlinkOffset;
-                i4 = convertArfcnToFrequency(i2, i6, geranBandArfcnFrequency.arfcnOffset);
-                i3 = i7;
+                int i5 = geranBandArfcnFrequency.uplinkFrequencyFirst;
+                int i6 = geranBandArfcnFrequency.downlinkOffset;
+                iConvertArfcnToFrequency = convertArfcnToFrequency(i2, i5, geranBandArfcnFrequency.arfcnOffset);
+                i3 = i6;
             } else {
                 Rlog.w(TAG, "Band and the range of ARFCN are not consistent: band = " + i + " ,arfcn = " + i2 + " ,isUplink = " + z);
                 return -1;
             }
         }
-        return z ? i4 : i4 + i3;
+        return z ? iConvertArfcnToFrequency : iConvertArfcnToFrequency + i3;
     }
 }

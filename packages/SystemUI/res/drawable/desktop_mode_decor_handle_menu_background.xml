@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <corners android:radius="@dimen/desktop_mode_handle_menu_corner_radius" />
-    <solid android:color="@android:color/secondary_text_nofocus" />
+    <solid android:color="@android:color/notification_secondary_text_color_current" />
 </shape>

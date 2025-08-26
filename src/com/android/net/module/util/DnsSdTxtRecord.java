@@ -46,31 +46,31 @@ public class DnsSdTxtRecord implements Parcelable {
         this.mData = (byte[]) bArr.clone();
     }
 
-    public void set(String str, String str2) {
-        byte[] bArr;
-        int i;
+    public void set(String str, String str2) throws UnsupportedEncodingException {
+        byte[] bytes;
+        int length;
         if (str2 != null) {
-            bArr = str2.getBytes();
-            i = bArr.length;
+            bytes = str2.getBytes();
+            length = bytes.length;
         } else {
-            bArr = null;
-            i = 0;
+            bytes = null;
+            length = 0;
         }
         try {
-            byte[] bytes = str.getBytes("US-ASCII");
-            for (byte b : bytes) {
+            byte[] bytes2 = str.getBytes("US-ASCII");
+            for (byte b : bytes2) {
                 if (b == 61) {
                     throw new IllegalArgumentException("= is not a valid character in key");
                 }
             }
-            if (bytes.length + i >= 255) {
+            if (bytes2.length + length >= 255) {
                 throw new IllegalArgumentException("Key and Value length cannot exceed 255 bytes");
             }
-            int remove = remove(str);
-            if (remove == -1) {
-                remove = keyCount();
+            int iRemove = remove(str);
+            if (iRemove == -1) {
+                iRemove = keyCount();
             }
-            insert(bytes, bArr, remove);
+            insert(bytes2, bytes, iRemove);
         } catch (UnsupportedEncodingException unused) {
             throw new IllegalArgumentException("key should be US-ASCII");
         }

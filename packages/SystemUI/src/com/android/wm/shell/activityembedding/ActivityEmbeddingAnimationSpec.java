@@ -12,7 +12,6 @@ import androidx.compose.foundation.text.input.internal.RecordingInputConnection$
 import com.android.internal.policy.TransitionAnimation;
 import com.android.wm.shell.shared.TransitionUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ActivityEmbeddingAnimationSpec {
     public final Interpolator mFastOutExtraSlowInInterpolator;
@@ -26,24 +25,24 @@ public class ActivityEmbeddingAnimationSpec {
     }
 
     public final Animation loadCustomAnimation(TransitionInfo.AnimationOptions animationOptions, int i) {
-        int i2;
+        int changeResId;
         if (animationOptions == null || animationOptions.getType() != 1) {
             return null;
         }
         if (TransitionUtil.isOpeningType(i)) {
-            i2 = animationOptions.getEnterResId();
+            changeResId = animationOptions.getEnterResId();
         } else if (TransitionUtil.isClosingType(i)) {
-            i2 = animationOptions.getExitResId();
+            changeResId = animationOptions.getExitResId();
         } else if (i == 6) {
-            i2 = animationOptions.getChangeResId();
+            changeResId = animationOptions.getChangeResId();
         } else {
             RecordingInputConnection$$ExternalSyntheticOutline0.m(i, "Unknown transit type:", "ActivityEmbeddingAnimSpec");
-            i2 = -1;
+            changeResId = -1;
         }
-        if (i2 == -1) {
+        if (changeResId == -1) {
             return null;
         }
-        Animation loadDefaultAnimationRes = this.mTransitionAnimation.loadDefaultAnimationRes(i2);
-        return loadDefaultAnimationRes != null ? loadDefaultAnimationRes : new AlphaAnimation(1.0f, 1.0f);
+        Animation animationLoadDefaultAnimationRes = this.mTransitionAnimation.loadDefaultAnimationRes(changeResId);
+        return animationLoadDefaultAnimationRes != null ? animationLoadDefaultAnimationRes : new AlphaAnimation(1.0f, 1.0f);
     }
 }

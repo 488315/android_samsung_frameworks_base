@@ -14,7 +14,6 @@ import com.google.android.setupcompat.template.Mixin;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TemplateLayout extends FrameLayout {
     public ViewGroup container;
@@ -60,22 +59,22 @@ public class TemplateLayout extends FrameLayout {
     }
 
     public final void init(int i, int i2, AttributeSet attributeSet, int i3) {
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucTemplateLayout, i3, 0);
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucTemplateLayout, i3, 0);
         if (i == 0) {
-            i = obtainStyledAttributes.getResourceId(0, 0);
+            i = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         }
         if (i2 == 0) {
-            i2 = obtainStyledAttributes.getResourceId(1, 0);
+            i2 = typedArrayObtainStyledAttributes.getResourceId(1, 0);
         }
         onBeforeTemplateInflated(attributeSet, i3);
         super.addView(onInflateTemplate(LayoutInflater.from(getContext()), i), -1, generateDefaultLayoutParams());
-        ViewGroup findContainer = findContainer(i2);
-        this.container = findContainer;
-        if (findContainer == null) {
+        ViewGroup viewGroupFindContainer = findContainer(i2);
+        this.container = viewGroupFindContainer;
+        if (viewGroupFindContainer == null) {
             throw new IllegalArgumentException("Container cannot be null in TemplateLayout");
         }
         onTemplateInflated();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public View onInflateTemplate(LayoutInflater layoutInflater, int i) {

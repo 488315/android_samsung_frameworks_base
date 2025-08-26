@@ -9,13 +9,11 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.plugins.clocks.ClockController;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultClockSteppingTransition extends Transition {
     public static final String[] TRANSITION_PROPERTIES;
     public final ClockController clock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,16 +57,16 @@ public final class DefaultClockSteppingTransition extends Transition {
         if (transitionValues == null || transitionValues2 == null) {
             return null;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        final int intValue = ((Integer) transitionValues.values.get("DefaultClockSteppingTransition:boundsLeft")).intValue();
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        final int iIntValue = ((Integer) transitionValues.values.get("DefaultClockSteppingTransition:boundsLeft")).intValue();
         final int i = ((Integer) transitionValues2.values.get("DefaultClockSteppingTransition:xInWindow")).intValue() - ((Integer) transitionValues.values.get("DefaultClockSteppingTransition:xInWindow")).intValue() > 0 ? 1 : -1;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.DefaultClockSteppingTransition$createAnimator$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.DefaultClockSteppingTransition.createAnimator.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DefaultClockSteppingTransition.this.clock.getLargeClock().getAnimations().onPositionUpdated(intValue, i, valueAnimator.getAnimatedFraction());
+                DefaultClockSteppingTransition.this.clock.getLargeClock().getAnimations().onPositionUpdated(iIntValue, i, valueAnimator.getAnimatedFraction());
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     @Override // android.transition.Transition

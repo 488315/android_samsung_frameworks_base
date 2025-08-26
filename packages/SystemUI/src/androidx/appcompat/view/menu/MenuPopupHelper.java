@@ -1,6 +1,7 @@
 package androidx.appcompat.view.menu;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.Display;
@@ -13,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuPopupHelper {
     public final boolean mAllowScrollingAnchorParent;
@@ -31,7 +31,6 @@ public class MenuPopupHelper {
     public MenuPresenter.Callback mPresenterCallback;
     public final int mSeslPopupHeight;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.view.menu.MenuPopupHelper$1, reason: invalid class name */
     public class AnonymousClass1 implements PopupWindow.OnDismissListener {
         public AnonymousClass1() {
@@ -47,7 +46,7 @@ public class MenuPopupHelper {
         this(context, menuBuilder, null, false, R.attr.popupMenuStyle, 0);
     }
 
-    public final MenuPopup getPopup() {
+    public final MenuPopup getPopup() throws Resources.NotFoundException {
         MenuPopupWindow menuPopupWindow;
         if (this.mPopup == null) {
             Display defaultDisplay = ((WindowManager) this.mContext.getSystemService("window")).getDefaultDisplay();
@@ -89,7 +88,7 @@ public class MenuPopupHelper {
         }
     }
 
-    public final void showPopup(boolean z, boolean z2) {
+    public final void showPopup(boolean z, boolean z2) throws Resources.NotFoundException {
         MenuPopup popup = getPopup();
         ((StandardMenuPopup) popup).mShowTitle = z2;
         if (z) {

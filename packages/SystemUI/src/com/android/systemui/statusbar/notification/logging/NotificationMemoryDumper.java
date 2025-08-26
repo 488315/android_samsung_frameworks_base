@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationMemoryDumper implements Dumpable {
     public final DumpManager dumpManager;
@@ -40,18 +39,18 @@ public final class NotificationMemoryDumper implements Dumpable {
     @Override // com.android.systemui.Dumpable
     @NeverCompile
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        Object obj;
+        Object next;
         String str;
         NotificationMemoryMeter notificationMemoryMeter = NotificationMemoryMeter.INSTANCE;
         Collection allNotifs = this.notificationPipeline.getAllNotifs();
         notificationMemoryMeter.getClass();
         final int i = 0;
         final int i2 = 1;
-        List sortedWith = CollectionsKt___CollectionsKt.sortedWith(SequencesKt___SequencesKt.toList(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(allNotifs), new NotificationMemoryMeter$$ExternalSyntheticLambda0())), ComparisonsKt__ComparisonsKt.compareBy(new Function1() { // from class: com.android.systemui.statusbar.notification.logging.NotificationMemoryDumper$$ExternalSyntheticLambda0
+        List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(SequencesKt___SequencesKt.toList(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(allNotifs), new NotificationMemoryMeter$$ExternalSyntheticLambda0())), ComparisonsKt__ComparisonsKt.compareBy(new Function1() { // from class: com.android.systemui.statusbar.notification.logging.NotificationMemoryDumper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj2;
+            public final Object mo781invoke(Object obj) {
+                NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj;
                 switch (i) {
                     case 0:
                         return notificationMemoryUsage.packageName;
@@ -62,8 +61,8 @@ public final class NotificationMemoryDumper implements Dumpable {
         }, new Function1() { // from class: com.android.systemui.statusbar.notification.logging.NotificationMemoryDumper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj2;
+            public final Object mo781invoke(Object obj) {
+                NotificationMemoryUsage notificationMemoryUsage = (NotificationMemoryUsage) obj;
                 switch (i2) {
                     case 0:
                         return notificationMemoryUsage.packageName;
@@ -72,8 +71,8 @@ public final class NotificationMemoryDumper implements Dumpable {
                 }
             }
         }));
-        List asList = Arrays.asList("Package", "Small Icon", "Large Icon", "Style", "Style Icon", "Big Picture", "Extender", "Extras", "Custom View", "Key");
-        List<NotificationMemoryUsage> list = sortedWith;
+        List listAsList = Arrays.asList("Package", "Small Icon", "Large Icon", "Style", "Style Icon", "Big Picture", "Extender", "Extras", "Custom View", "Key");
+        List<NotificationMemoryUsage> list = listSortedWith;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
         for (NotificationMemoryUsage notificationMemoryUsage : list) {
             String str2 = notificationMemoryUsage.packageName;
@@ -130,12 +129,12 @@ public final class NotificationMemoryDumper implements Dumpable {
             notificationMemoryDumper$dumpNotificationObjects$Totals.extender += notificationObjectUsage2.extender;
             notificationMemoryDumper$dumpNotificationObjects$Totals.extras += notificationObjectUsage2.extras;
         }
-        new DumpsysTableLogger("Notification Object Usage", asList, CollectionsKt___CollectionsKt.plus((Iterable) Collections.singletonList(Arrays.asList("TOTALS", toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.smallIcon), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.largeIcon), "", toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.styleIcon), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.bigPicture), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.extender), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.extras), "", "")), (Collection) arrayList)).printTableData(printWriter);
-        List asList2 = Arrays.asList("Package", "View Type", "Small Icon", "Large Icon", "Style Use", "Custom View", "Software Bitmaps", "Key");
+        new DumpsysTableLogger("Notification Object Usage", listAsList, CollectionsKt___CollectionsKt.plus((Iterable) Collections.singletonList(Arrays.asList("TOTALS", toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.smallIcon), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.largeIcon), "", toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.styleIcon), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.bigPicture), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.extender), toKb(notificationMemoryDumper$dumpNotificationObjects$Totals.extras), "", "")), (Collection) arrayList)).printTableData(printWriter);
+        List listAsList2 = Arrays.asList("Package", "View Type", "Small Icon", "Large Icon", "Style Use", "Custom View", "Software Bitmaps", "Key");
         ArrayList arrayList2 = new ArrayList();
-        for (Object obj2 : list) {
-            if (!((NotificationMemoryUsage) obj2).viewUsage.isEmpty()) {
-                arrayList2.add(obj2);
+        for (Object obj : list) {
+            if (!((NotificationMemoryUsage) obj).viewUsage.isEmpty()) {
+                arrayList2.add(obj);
             }
         }
         ArrayList arrayList3 = new ArrayList();
@@ -143,9 +142,9 @@ public final class NotificationMemoryDumper implements Dumpable {
         int i5 = 0;
         int i6 = 0;
         while (i6 < size) {
-            Object obj3 = arrayList2.get(i6);
+            Object obj2 = arrayList2.get(i6);
             i6++;
-            NotificationMemoryUsage notificationMemoryUsage3 = (NotificationMemoryUsage) obj3;
+            NotificationMemoryUsage notificationMemoryUsage3 = (NotificationMemoryUsage) obj2;
             List<NotificationViewUsage> list2 = notificationMemoryUsage3.viewUsage;
             ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
             for (NotificationViewUsage notificationViewUsage : list2) {
@@ -155,42 +154,42 @@ public final class NotificationMemoryDumper implements Dumpable {
         }
         NotificationMemoryDumper$dumpNotificationViewUsage$Totals notificationMemoryDumper$dumpNotificationViewUsage$Totals = new NotificationMemoryDumper$dumpNotificationViewUsage$Totals(0, 0, 0, 0, 0, 31, null);
         ArrayList arrayList5 = new ArrayList();
-        for (Object obj4 : list) {
-            if (!((NotificationMemoryUsage) obj4).viewUsage.isEmpty()) {
-                arrayList5.add(obj4);
+        for (Object obj3 : list) {
+            if (!((NotificationMemoryUsage) obj3).viewUsage.isEmpty()) {
+                arrayList5.add(obj3);
             }
         }
         ArrayList arrayList6 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList5, 10));
         int size2 = arrayList5.size();
         int i7 = 0;
         while (i7 < size2) {
-            Object obj5 = arrayList5.get(i7);
+            Object obj4 = arrayList5.get(i7);
             i7++;
-            Iterator it = ((NotificationMemoryUsage) obj5).viewUsage.iterator();
+            Iterator it = ((NotificationMemoryUsage) obj4).viewUsage.iterator();
             while (true) {
                 if (it.hasNext()) {
-                    obj = it.next();
-                    if (((NotificationViewUsage) obj).viewType == ViewType.TOTAL) {
+                    next = it.next();
+                    if (((NotificationViewUsage) next).viewType == ViewType.TOTAL) {
                         break;
                     }
                 } else {
-                    obj = null;
+                    next = null;
                 }
             }
-            arrayList6.add((NotificationViewUsage) obj);
+            arrayList6.add((NotificationViewUsage) next);
         }
         ArrayList arrayList7 = (ArrayList) CollectionsKt___CollectionsKt.filterNotNull(arrayList6);
         int size3 = arrayList7.size();
         while (i5 < size3) {
-            Object obj6 = arrayList7.get(i5);
+            Object obj5 = arrayList7.get(i5);
             i5++;
-            NotificationViewUsage notificationViewUsage2 = (NotificationViewUsage) obj6;
+            NotificationViewUsage notificationViewUsage2 = (NotificationViewUsage) obj5;
             notificationMemoryDumper$dumpNotificationViewUsage$Totals.smallIcon += notificationViewUsage2.smallIcon;
             notificationMemoryDumper$dumpNotificationViewUsage$Totals.largeIcon += notificationViewUsage2.largeIcon;
             notificationMemoryDumper$dumpNotificationViewUsage$Totals.style += notificationViewUsage2.style;
             notificationMemoryDumper$dumpNotificationViewUsage$Totals.customViews += notificationViewUsage2.customViews;
             notificationMemoryDumper$dumpNotificationViewUsage$Totals.softwareBitmapsPenalty += notificationViewUsage2.softwareBitmapsPenalty;
         }
-        new DumpsysTableLogger("Notification View Usage", asList2, CollectionsKt___CollectionsKt.plus((Iterable) Collections.singletonList(Arrays.asList("TOTALS", "", toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.smallIcon), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.largeIcon), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.style), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.customViews), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.softwareBitmapsPenalty), "")), (Collection) arrayList3)).printTableData(printWriter);
+        new DumpsysTableLogger("Notification View Usage", listAsList2, CollectionsKt___CollectionsKt.plus((Iterable) Collections.singletonList(Arrays.asList("TOTALS", "", toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.smallIcon), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.largeIcon), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.style), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.customViews), toKb(notificationMemoryDumper$dumpNotificationViewUsage$Totals.softwareBitmapsPenalty), "")), (Collection) arrayList3)).printTableData(printWriter);
     }
 }

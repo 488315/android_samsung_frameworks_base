@@ -60,12 +60,12 @@ public final class AudioCapture {
     }
 
     public int read(byte[] bArr, int i, int i2, int i3) {
-        int read;
+        int i4;
         synchronized (this.mLock) {
             AudioRecord audioRecord = this.mAudioRecord;
-            read = audioRecord != null ? audioRecord.read(bArr, i, i2, i3) : 0;
+            i4 = audioRecord != null ? audioRecord.read(bArr, i, i2, i3) : 0;
         }
-        return read;
+        return i4;
     }
 
     public int read(ByteBuffer byteBuffer, int i) {
@@ -73,21 +73,21 @@ public final class AudioCapture {
     }
 
     public int read(ByteBuffer byteBuffer, int i, int i2) {
-        int read;
+        int i3;
         synchronized (this.mLock) {
             AudioRecord audioRecord = this.mAudioRecord;
-            read = audioRecord != null ? audioRecord.read(byteBuffer, i, i2) : 0;
+            i3 = audioRecord != null ? audioRecord.read(byteBuffer, i, i2) : 0;
         }
-        return read;
+        return i3;
     }
 
     public int read(float[] fArr, int i, int i2, int i3) {
-        int read;
+        int i4;
         synchronized (this.mLock) {
             AudioRecord audioRecord = this.mAudioRecord;
-            read = audioRecord != null ? audioRecord.read(fArr, i, i2, i3) : 0;
+            i4 = audioRecord != null ? audioRecord.read(fArr, i, i2, i3) : 0;
         }
-        return read;
+        return i4;
     }
 
     public int read(short[] sArr, int i, int i2) {
@@ -95,12 +95,12 @@ public final class AudioCapture {
     }
 
     public int read(short[] sArr, int i, int i2, int i3) {
-        int read;
+        int i4;
         synchronized (this.mLock) {
             AudioRecord audioRecord = this.mAudioRecord;
-            read = audioRecord != null ? audioRecord.read(sArr, i, i2, i3) : 0;
+            i4 = audioRecord != null ? audioRecord.read(sArr, i, i2, i3) : 0;
         }
-        return read;
+        return i4;
     }
 
     public void startRecording() {

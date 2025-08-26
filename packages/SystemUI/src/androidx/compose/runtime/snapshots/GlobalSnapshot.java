@@ -4,19 +4,18 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GlobalSnapshot extends MutableSnapshot {
     public GlobalSnapshot(long j, SnapshotIdSet snapshotIdSet) {
         super(j, snapshotIdSet, null, new Function1() { // from class: androidx.compose.runtime.snapshots.GlobalSnapshot.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 synchronized (SnapshotKt.lock) {
                     List list = SnapshotKt.globalWriteObservers;
                     int size = list.size();
                     for (int i = 0; i < size; i++) {
-                        ((Function1) list.get(i)).mo779invoke(obj);
+                        ((Function1) list.get(i)).mo781invoke(obj);
                     }
                 }
                 return Unit.INSTANCE;
@@ -64,14 +63,14 @@ public final class GlobalSnapshot extends MutableSnapshot {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j;
                 SnapshotIdSet snapshotIdSet = (SnapshotIdSet) obj;
                 synchronized (SnapshotKt.lock) {
                     j = SnapshotKt.nextSnapshotId;
                     SnapshotKt.nextSnapshotId = 1 + j;
                 }
-                return new MutableSnapshot(j, snapshotIdSet, Function1.this, function12);
+                return new MutableSnapshot(j, snapshotIdSet, function1, function12);
             }
         };
         Function1 function14 = SnapshotKt.emptyLambda;
@@ -87,14 +86,14 @@ public final class GlobalSnapshot extends MutableSnapshot {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j;
                 SnapshotIdSet snapshotIdSet = (SnapshotIdSet) obj;
                 synchronized (SnapshotKt.lock) {
                     j = SnapshotKt.nextSnapshotId;
                     SnapshotKt.nextSnapshotId = 1 + j;
                 }
-                return new ReadonlySnapshot(j, snapshotIdSet, Function1.this);
+                return new ReadonlySnapshot(j, snapshotIdSet, function1);
             }
         };
         Function1 function13 = SnapshotKt.emptyLambda;

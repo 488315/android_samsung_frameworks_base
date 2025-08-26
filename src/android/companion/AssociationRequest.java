@@ -38,6 +38,7 @@ public final class AssociationRequest implements Parcelable {
     public static final String DEVICE_PROFILE_VIRTUAL_DEVICE = "android.app.role.COMPANION_DEVICE_VIRTUAL_DEVICE";
     public static final String DEVICE_PROFILE_WATCH = "android.app.role.COMPANION_DEVICE_WATCH";
     public static final String DEVICE_PROFILE_WEARABLE_SENSING = "android.companion.COMPANION_DEVICE_WEARABLE_SENSING";
+    private static final int DISPLAY_NAME_LENGTH_LIMIT = 1024;
     private AssociatedDevice mAssociatedDevice;
     private final long mCreationTime;
     private final List<DeviceFilter<?>> mDeviceFilters;
@@ -167,7 +168,10 @@ public final class AssociationRequest implements Parcelable {
         public Builder setDisplayName(CharSequence charSequence) {
             checkNotUsed();
             this.mDisplayName = (CharSequence) Objects.requireNonNull(charSequence);
-            return this;
+            if (charSequence.length() <= 1024) {
+                return this;
+            }
+            throw new IllegalArgumentException("Length of the display name must be at most 1024 characters");
         }
 
         public Builder setSelfManaged(boolean z) {
@@ -324,35 +328,35 @@ public final class AssociationRequest implements Parcelable {
     }
 
     AssociationRequest(Parcel parcel) {
-        int readInt = parcel.readInt();
-        boolean z = (readInt & 1) != 0;
-        boolean z2 = (readInt & 2) != 0;
-        boolean z3 = (readInt & 4) != 0;
-        boolean z4 = (readInt & 8) != 0;
-        boolean z5 = (readInt & 512) != 0;
+        int i = parcel.readInt();
+        boolean z = (i & 1) != 0;
+        boolean z2 = (i & 2) != 0;
+        boolean z3 = (i & 4) != 0;
+        boolean z4 = (i & 8) != 0;
+        boolean z5 = (i & 512) != 0;
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, DeviceFilter.class.getClassLoader(), DeviceFilter.class);
-        String readString = (readInt & 16) == 0 ? null : parcel.readString();
-        CharSequence readCharSequence = (readInt & 32) == 0 ? null : parcel.readCharSequence();
-        AssociatedDevice associatedDevice = (readInt & 64) == 0 ? null : (AssociatedDevice) parcel.readTypedObject(AssociatedDevice.CREATOR);
-        String readString2 = (readInt & 128) == 0 ? null : parcel.readString();
-        int readInt2 = parcel.readInt();
-        String readString8 = (readInt & 256) == 0 ? null : parcel.readString8();
-        long readLong = parcel.readLong();
+        String string = (i & 16) == 0 ? null : parcel.readString();
+        CharSequence charSequence = (i & 32) == 0 ? null : parcel.readCharSequence();
+        AssociatedDevice associatedDevice = (i & 64) == 0 ? null : (AssociatedDevice) parcel.readTypedObject(AssociatedDevice.CREATOR);
+        String string2 = (i & 128) == 0 ? null : parcel.readString();
+        int i2 = parcel.readInt();
+        String string8 = (i & 256) == 0 ? null : parcel.readString8();
+        long j = parcel.readLong();
         this.mSingleDevice = z;
         this.mDeviceFilters = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        this.mDeviceProfile = readString;
-        this.mDisplayName = readCharSequence;
+        this.mDeviceProfile = string;
+        this.mDisplayName = charSequence;
         this.mAssociatedDevice = associatedDevice;
         this.mSelfManaged = z2;
         this.mForceConfirmation = z3;
         this.mSkipRoleGrant = z5;
-        this.mPackageName = readString2;
-        this.mUserId = readInt2;
-        AnnotationValidations.validate((Class<UserIdInt>) UserIdInt.class, (UserIdInt) null, readInt2);
-        this.mDeviceProfilePrivilegesDescription = readString8;
-        this.mCreationTime = readLong;
+        this.mPackageName = string2;
+        this.mUserId = i2;
+        AnnotationValidations.validate((Class<UserIdInt>) UserIdInt.class, (UserIdInt) null, i2);
+        this.mDeviceProfilePrivilegesDescription = string8;
+        this.mCreationTime = j;
         this.mSkipPrompt = z4;
         if (parcel.readInt() == 1) {
             this.mDeviceIcon = Icon.CREATOR.createFromParcel(parcel);

@@ -3,12 +3,14 @@ package com.android.systemui.settings.brightness;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Message;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.Log;
+import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecBrightnessController {
     public final BrightnessControllerObserver brightnessControllerObserver;
@@ -27,7 +29,6 @@ public final class SecBrightnessController {
     public static final Uri SCREEN_DISPLAY_OUTDOOR_MODE_URI = Settings.System.getUriFor("display_outdoor_mode");
     public static final Uri SEC_AUTO_BRIGHTNESS_TRANSITION_TIME_URI = Settings.System.getUriFor(SettingsHelper.INDEX_AUTO_BRIGHTNESS_TRANSITION_TIME);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,19 +53,88 @@ public final class SecBrightnessController {
         this.brightnessControllerObserver = new BrightnessControllerObserver(handler, handler2, context);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x0089, code lost:
-    
-        if (r2 != false) goto L76;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x008c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean handleMessage(android.os.Message r6) {
-        /*
-            Method dump skipped, instructions count: 218
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.settings.brightness.SecBrightnessController.handleMessage(android.os.Message):boolean");
+    public final boolean handleMessage(Message message) {
+        BrightnessSliderController brightnessSliderController;
+        SecBrightnessSliderController secBrightnessSliderController;
+        SecBrightnessSliderController secBrightnessSliderController2;
+        boolean z;
+        ToggleSeekBar slider;
+        SecBrightnessSliderController secBrightnessSliderController3;
+        SecBrightnessSliderController secBrightnessSliderController4;
+        SecBrightnessSliderController secBrightnessSliderController5;
+        int i = message.what;
+        ToggleSlider toggleSlider = this.control;
+        switch (i) {
+            case 6:
+                brightnessSliderController = toggleSlider instanceof BrightnessSliderController ? (BrightnessSliderController) toggleSlider : null;
+                if (brightnessSliderController != null && (secBrightnessSliderController = brightnessSliderController.mSecBrightnessSliderController) != null) {
+                    secBrightnessSliderController.highBrightnessDialogEnabled = message.arg1 == 0;
+                }
+                return true;
+            case 7:
+            default:
+                return false;
+            case 8:
+                BrightnessSliderController brightnessSliderController2 = toggleSlider instanceof BrightnessSliderController ? (BrightnessSliderController) toggleSlider : null;
+                if (brightnessSliderController2 != null && (secBrightnessSliderController2 = brightnessSliderController2.mSecBrightnessSliderController) != null) {
+                    z = message.arg1 != 0;
+                    secBrightnessSliderController2.outdoormode = z;
+                    boolean z2 = !z;
+                    boolean z3 = secBrightnessSliderController2.tracking;
+                    String str = SecBrightnessSliderController.TAG;
+                    if (z3) {
+                        Log.d(str, "Can't using updateSystemBrightnessEnabled() now.");
+                        if (!z) {
+                            if (secBrightnessSliderController2.sliderEnabled != z2) {
+                                Log.d(str, "updateSystemBrightnessEnabled: ");
+                                secBrightnessSliderController2.sliderEnabled = z2;
+                                SecBrightnessSliderView secBrightnessSliderView = secBrightnessSliderController2.view.mSecBrightnessSliderView;
+                                if (secBrightnessSliderView != null && (slider = secBrightnessSliderView.getSlider()) != null) {
+                                    if (secBrightnessSliderController2.sliderEnabled) {
+                                        slider.setOnSeekBarChangeListener(secBrightnessSliderController2.seekListener);
+                                        return true;
+                                    }
+                                    slider.setOnSeekBarChangeListener(null);
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                return true;
+            case 9:
+                brightnessSliderController = toggleSlider instanceof BrightnessSliderController ? (BrightnessSliderController) toggleSlider : null;
+                if (brightnessSliderController != null && (secBrightnessSliderController3 = brightnessSliderController.mSecBrightnessSliderController) != null) {
+                    ((BrightnessAnimationIcon) secBrightnessSliderController3.brightnessIcon$delegate.getValue()).init(this.context);
+                    return true;
+                }
+                return true;
+            case 10:
+                brightnessSliderController = toggleSlider instanceof BrightnessSliderController ? (BrightnessSliderController) toggleSlider : null;
+                if (brightnessSliderController != null && (secBrightnessSliderController4 = brightnessSliderController.mSecBrightnessSliderController) != null) {
+                    z = message.arg1 != 0;
+                    Log.d(SecBrightnessSliderController.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("updateHighBrightnessModeEnter : ", z));
+                    SecBrightnessSliderView secBrightnessSliderView2 = secBrightnessSliderController4.view.mSecBrightnessSliderView;
+                    if (secBrightnessSliderView2 != null) {
+                        secBrightnessSliderView2.highBrightnessModeEnter = z;
+                        return true;
+                    }
+                }
+                return true;
+            case 11:
+                this.transitionTime = message.arg1;
+                return true;
+            case 12:
+                brightnessSliderController = toggleSlider instanceof BrightnessSliderController ? (BrightnessSliderController) toggleSlider : null;
+                if (brightnessSliderController != null && (secBrightnessSliderController5 = brightnessSliderController.mSecBrightnessSliderController) != null) {
+                    secBrightnessSliderController5.isAdaptiveBrightness = message.arg1 == 1;
+                    return true;
+                }
+                return true;
+        }
     }
 }

@@ -21,7 +21,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenDecorCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -34,11 +33,9 @@ public final class ScreenDecorCommand extends ParseableCommand {
     public final OptionalSubCommand roundedBottom$delegate;
     public final OptionalSubCommand roundedTop$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,24 +75,24 @@ public final class ScreenDecorCommand extends ParseableCommand {
         this.color$delegate = param("color", "c", "Set a specific color for the debug assets. See Color#parseString() for accepted inputs.", new ValueParser() { // from class: com.android.systemui.decor.ScreenDecorCommand$special$$inlined$map$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A */
-            public final Object mo2548parseValueIoAF18A(String str) {
-                Integer num;
-                Object mo2548parseValueIoAF18A = ValueParser.this.mo2548parseValueIoAF18A(str);
+            public final Object mo2565parseValueIoAF18A(String str) {
+                Integer numValueOf;
+                Object objMo2565parseValueIoAF18A = valueParserKt$parseString$1.mo2565parseValueIoAF18A(str);
                 int i = Result.$r8$clinit;
-                if (mo2548parseValueIoAF18A instanceof Result.Failure) {
-                    Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(mo2548parseValueIoAF18A);
-                    m3422exceptionOrNullimpl.getClass();
-                    return new Result.Failure(m3422exceptionOrNullimpl);
+                if (objMo2565parseValueIoAF18A instanceof Result.Failure) {
+                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
+                    thM3442exceptionOrNullimpl.getClass();
+                    return new Result.Failure(thM3442exceptionOrNullimpl);
                 }
-                ResultKt.throwOnFailure(mo2548parseValueIoAF18A);
+                ResultKt.throwOnFailure(objMo2565parseValueIoAF18A);
                 try {
-                    num = Integer.valueOf(Color.parseColor((String) mo2548parseValueIoAF18A));
+                    numValueOf = Integer.valueOf(Color.parseColor((String) objMo2565parseValueIoAF18A));
                 } catch (Exception unused) {
-                    num = null;
+                    numValueOf = null;
                 }
-                if (num != null) {
+                if (numValueOf != null) {
                     int i2 = Result.$r8$clinit;
-                    return num;
+                    return numValueOf;
                 }
                 int i3 = Result.$r8$clinit;
                 return new Result.Failure(new ArgParseError(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Failed to transform value ", str)));

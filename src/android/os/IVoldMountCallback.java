@@ -41,9 +41,9 @@ public interface IVoldMountCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVoldMountCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoldMountCallback)) {
-                return (IVoldMountCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVoldMountCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoldMountCallback)) {
+                return (IVoldMountCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -70,13 +70,13 @@ public interface IVoldMountCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                FileDescriptor readRawFileDescriptor = parcel.readRawFileDescriptor();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                FileDescriptor rawFileDescriptor = parcel.readRawFileDescriptor();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean onVolumeChecking = onVolumeChecking(readRawFileDescriptor, readString, readString2);
+                boolean zOnVolumeChecking = onVolumeChecking(rawFileDescriptor, string, string2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(onVolumeChecking);
+                parcel2.writeBoolean(zOnVolumeChecking);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,19 +100,19 @@ public interface IVoldMountCallback extends IInterface {
 
             @Override // android.os.IVoldMountCallback
             public boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVoldMountCallback.DESCRIPTOR);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVoldMountCallback.DESCRIPTOR);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

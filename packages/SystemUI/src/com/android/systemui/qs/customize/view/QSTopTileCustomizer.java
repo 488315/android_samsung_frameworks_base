@@ -9,11 +9,10 @@ import com.android.systemui.R;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSTopTileCustomizer extends QSTileCustomizerBase {
-    public QSTopTileCustomizer(Context context, int i) {
-        super(context, i);
+    public QSTopTileCustomizer(Context context, int i, int i2) {
+        super(context, i, i2);
         int qsTileMinNum = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getQsTileMinNum(getContext());
         this.mIsTopEdit = true;
         this.mActiveRows = 1;

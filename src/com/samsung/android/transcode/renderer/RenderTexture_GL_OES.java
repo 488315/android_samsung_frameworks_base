@@ -53,9 +53,9 @@ public class RenderTexture_GL_OES {
     public RenderTexture_GL_OES() {
         float[] fArr = {-1.0f, -1.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
         this.mVerticesData = fArr;
-        FloatBuffer put = ByteBuffer.allocateDirect(fArr.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer().put(fArr);
-        this.mVerticesFloatBuffer = put;
-        put.position(0);
+        FloatBuffer floatBufferPut = ByteBuffer.allocateDirect(fArr.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer().put(fArr);
+        this.mVerticesFloatBuffer = floatBufferPut;
+        floatBufferPut.position(0);
     }
 
     public int createProgram(boolean z) {
@@ -139,9 +139,9 @@ public class RenderTexture_GL_OES {
         if (this.mTextureId != 0) {
             deleteTexture();
         }
-        int loadTextureOES = OpenGlHelper.loadTextureOES();
-        this.mTextureId = loadTextureOES;
-        if (loadTextureOES == 0) {
+        int iLoadTextureOES = OpenGlHelper.loadTextureOES();
+        this.mTextureId = iLoadTextureOES;
+        if (iLoadTextureOES == 0) {
             LogS.d("TranscodeLib", "not able to load new texture");
         }
         Matrix.setIdentityM(this.mMVPMatrix, 0);

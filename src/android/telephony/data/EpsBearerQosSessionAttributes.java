@@ -92,13 +92,13 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
         this.mMaxUplinkBitRate = parcel.readLong();
         this.mGuaranteedDownlinkBitRate = parcel.readLong();
         this.mGuaranteedUplinkBitRate = parcel.readLong();
-        int readInt = parcel.readInt();
-        ArrayList arrayList = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        ArrayList arrayList = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             try {
                 arrayList.add(new InetSocketAddress(InetAddress.getByAddress(parcel.createByteArray()), parcel.readInt()));
             } catch (UnknownHostException e) {
-                Log.e(TAG, "unable to unparcel remote address at index: " + i, e);
+                Log.e(TAG, "unable to unparcel remote address at index: " + i2, e);
             }
         }
         this.mRemoteAddresses = Collections.unmodifiableList(arrayList);

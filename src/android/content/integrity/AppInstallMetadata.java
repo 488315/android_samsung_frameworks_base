@@ -103,27 +103,27 @@ public final class AppInstallMetadata {
         if (obj2 == null) {
             obj2 = PerfettoProtoLogImpl.NULL_STRING;
         }
-        Long valueOf = Long.valueOf(this.mVersionCode);
-        Boolean valueOf2 = Boolean.valueOf(this.mIsPreInstalled);
-        Boolean valueOf3 = Boolean.valueOf(this.mIsStampPresent);
-        Boolean valueOf4 = Boolean.valueOf(this.mIsStampVerified);
-        Boolean valueOf5 = Boolean.valueOf(this.mIsStampTrusted);
+        Long lValueOf = Long.valueOf(this.mVersionCode);
+        Boolean boolValueOf = Boolean.valueOf(this.mIsPreInstalled);
+        Boolean boolValueOf2 = Boolean.valueOf(this.mIsStampPresent);
+        Boolean boolValueOf3 = Boolean.valueOf(this.mIsStampVerified);
+        Boolean boolValueOf4 = Boolean.valueOf(this.mIsStampTrusted);
         String str4 = this.mStampCertificateHash;
         if (str4 == null) {
             str = PerfettoProtoLogImpl.NULL_STRING;
             obj = obj2;
-            l = valueOf;
-            bool = valueOf2;
-            bool2 = valueOf3;
-            bool3 = valueOf4;
-            bool4 = valueOf5;
+            l = lValueOf;
+            bool = boolValueOf;
+            bool2 = boolValueOf2;
+            bool3 = boolValueOf3;
+            bool4 = boolValueOf4;
         } else {
             obj = obj2;
-            l = valueOf;
-            bool = valueOf2;
-            bool2 = valueOf3;
-            bool3 = valueOf4;
-            bool4 = valueOf5;
+            l = lValueOf;
+            bool = boolValueOf;
+            bool2 = boolValueOf2;
+            bool3 = boolValueOf3;
+            bool4 = boolValueOf4;
             str = str4;
         }
         return String.format("AppInstallMetadata { PackageName = %s, AppCerts = %s, AppCertsLineage = %s, InstallerName = %s, InstallerCerts = %s, VersionCode = %d, PreInstalled = %b, StampPresent = %b, StampVerified = %b, StampTrusted = %b, StampCert = %s }", str2, list, list2, str3, obj, l, bool, bool2, bool3, bool4, str);

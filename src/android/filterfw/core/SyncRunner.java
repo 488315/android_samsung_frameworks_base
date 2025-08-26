@@ -29,9 +29,9 @@ public class SyncRunner extends GraphRunner {
         this.mWakeExecutor = new ScheduledThreadPoolExecutor(1);
         this.mWakeCondition = new ConditionVariable();
         this.mTimer = null;
-        boolean isLoggable = Log.isLoggable(TAG, 2);
-        this.mLogVerbose = isLoggable;
-        if (isLoggable) {
+        boolean zIsLoggable = Log.isLoggable(TAG, 2);
+        this.mLogVerbose = zIsLoggable;
+        if (zIsLoggable) {
             Log.v(TAG, "Initializing SyncRunner");
         }
         if (Scheduler.class.isAssignableFrom(cls)) {
@@ -40,7 +40,7 @@ public class SyncRunner extends GraphRunner {
                 this.mFilterContext = filterContext;
                 this.mFilterContext.addGraph(filterGraph);
                 this.mTimer = new StopWatchMap();
-                if (isLoggable) {
+                if (zIsLoggable) {
                     Log.v(TAG, "Setting up filters");
                 }
                 filterGraph.setupFilters();
@@ -101,12 +101,12 @@ public class SyncRunner extends GraphRunner {
         }
         assertReadyToStep();
         beginProcessing();
-        boolean activateGlContext = activateGlContext();
-        boolean z = true;
-        while (z) {
-            z = performStep();
+        boolean zActivateGlContext = activateGlContext();
+        boolean zPerformStep = true;
+        while (zPerformStep) {
+            zPerformStep = performStep();
         }
-        if (activateGlContext) {
+        if (zActivateGlContext) {
             deactivateGlContext();
         }
         if (this.mDoneListener != null) {
@@ -180,13 +180,13 @@ public class SyncRunner extends GraphRunner {
         if (this.mLogVerbose) {
             Log.v(TAG, "Performing one step.");
         }
-        Filter scheduleNextNode = this.mScheduler.scheduleNextNode();
-        if (scheduleNextNode == null) {
+        Filter filterScheduleNextNode = this.mScheduler.scheduleNextNode();
+        if (filterScheduleNextNode == null) {
             return false;
         }
-        this.mTimer.start(scheduleNextNode.getName());
-        processFilterNode(scheduleNextNode);
-        this.mTimer.stop(scheduleNextNode.getName());
+        this.mTimer.start(filterScheduleNextNode.getName());
+        processFilterNode(filterScheduleNextNode);
+        this.mTimer.stop(filterScheduleNextNode.getName());
         return true;
     }
 

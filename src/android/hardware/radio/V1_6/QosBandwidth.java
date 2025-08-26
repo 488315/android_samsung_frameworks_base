@@ -36,13 +36,13 @@ public final class QosBandwidth {
 
     public static final ArrayList<QosBandwidth> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<QosBandwidth> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             QosBandwidth qosBandwidth = new QosBandwidth();
-            qosBandwidth.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 8);
+            qosBandwidth.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 8);
             arrayList.add(qosBandwidth);
         }
         return arrayList;

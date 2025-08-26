@@ -3,11 +3,9 @@ package com.android.systemui.kairos.util;
 import com.android.systemui.statusbar.pipeline.wifi.data.repository.demo.model.FakeWifiEventModel;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface Either {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class First implements Either {
         public final Object value;
 
@@ -16,7 +14,7 @@ public interface Either {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ First m2571boximpl(Object obj) {
+        public static final /* synthetic */ First m2588boximpl(Object obj) {
             return new First(obj);
         }
 
@@ -40,7 +38,6 @@ public interface Either {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Second implements Either {
         public final Object value;
 
@@ -49,7 +46,7 @@ public interface Either {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Second m2572boximpl(FakeWifiEventModel.CarrierMerged carrierMerged) {
+        public static final /* synthetic */ Second m2589boximpl(FakeWifiEventModel.CarrierMerged carrierMerged) {
             return new Second(carrierMerged);
         }
 

@@ -93,8 +93,8 @@ public class AccessibilityDirectAccessController {
         if (intForUser == 0) {
             this.mHandler.postDelayed(new Runnable() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityDirectAccessController.this.lambda$performAccessibilityDirectAccess$0(currentUser, contentResolver);
+                public final void run() throws IllegalArgumentException {
+                    this.f$0.lambda$performAccessibilityDirectAccess$0(currentUser, contentResolver);
                 }
             }, 0L);
             return;
@@ -118,13 +118,13 @@ public class AccessibilityDirectAccessController {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$performAccessibilityDirectAccess$0(int i, ContentResolver contentResolver) {
-        AlertDialog createShortcutWarningDialog = createShortcutWarningDialog(i);
-        this.mAlertDialog = createShortcutWarningDialog;
-        if (createShortcutWarningDialog == null) {
+    public /* synthetic */ void lambda$performAccessibilityDirectAccess$0(int i, ContentResolver contentResolver) throws IllegalArgumentException {
+        AlertDialog alertDialogCreateShortcutWarningDialog = createShortcutWarningDialog(i);
+        this.mAlertDialog = alertDialogCreateShortcutWarningDialog;
+        if (alertDialogCreateShortcutWarningDialog == null) {
             return;
         }
-        if (!performTtsPrompt(createShortcutWarningDialog)) {
+        if (!performTtsPrompt(alertDialogCreateShortcutWarningDialog)) {
             playNotificationTone();
         }
         Window window = this.mAlertDialog.getWindow();
@@ -150,12 +150,12 @@ public class AccessibilityDirectAccessController {
         return frameworkObjectProvider.getAlertDialogBuilder(systemUiContext).setTitle(getShortcutWarningTitle(targets)).setMessage(getShortcutWarningMessage(targets)).setCancelable(false).setPositiveButton(R.string.accessibility_shortcut_use, (DialogInterface.OnClickListener) null).setNegativeButton(R.string.accessibility_shortcut_dont_use, new DialogInterface.OnClickListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda1
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i2) {
-                AccessibilityDirectAccessController.this.lambda$createShortcutWarningDialog$1(i, dialogInterface, i2);
+                this.f$0.lambda$createShortcutWarningDialog$1(i, dialogInterface, i2);
             }
         }).setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda2
             @Override // android.content.DialogInterface.OnCancelListener
             public final void onCancel(DialogInterface dialogInterface) {
-                AccessibilityDirectAccessController.this.lambda$createShortcutWarningDialog$2(i, dialogInterface);
+                this.f$0.lambda$createShortcutWarningDialog$2(i, dialogInterface);
             }
         }).create();
     }
@@ -224,9 +224,9 @@ public class AccessibilityDirectAccessController {
             return null;
         }
         PackageManager packageManager = this.mContext.getPackageManager();
-        String charSequence = installedServiceInfoWithComponentName.getResolveInfo().loadLabel(packageManager).toString();
-        CharSequence loadSummary = installedServiceInfoWithComponentName.loadSummary(packageManager);
-        return TextUtils.isEmpty(loadSummary) ? charSequence : String.format("%s\n%s", charSequence, loadSummary);
+        String string = installedServiceInfoWithComponentName.getResolveInfo().loadLabel(packageManager).toString();
+        CharSequence charSequenceLoadSummary = installedServiceInfoWithComponentName.loadSummary(packageManager);
+        return TextUtils.isEmpty(charSequenceLoadSummary) ? string : String.format("%s\n%s", string, charSequenceLoadSummary);
     }
 
     private boolean hasFeatureLeanback() {
@@ -234,7 +234,7 @@ public class AccessibilityDirectAccessController {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void playNotificationTone() {
+    public void playNotificationTone() throws IllegalArgumentException {
         int i = hasFeatureLeanback() ? 11 : 10;
         Ringtone ringtone = this.mFrameworkObjectProvider.getRingtone(this.mContext, Settings.System.DEFAULT_NOTIFICATION_URI);
         if (ringtone != null) {
@@ -253,7 +253,7 @@ public class AccessibilityDirectAccessController {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda3
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                AccessibilityDirectAccessController.TtsPrompt.this.dismiss();
+                ttsPrompt.dismiss();
             }
         });
         return true;
@@ -292,7 +292,7 @@ public class AccessibilityDirectAccessController {
         }
 
         @Override // android.speech.tts.TextToSpeech.OnInitListener
-        public void onInit(int i) {
+        public void onInit(int i) throws IllegalArgumentException {
             if (i != 0) {
                 Slog.d(AccessibilityDirectAccessController.TAG, "Tts init fail, status=" + Integer.toString(i));
                 AccessibilityDirectAccessController.this.playNotificationTone();
@@ -302,7 +302,7 @@ public class AccessibilityDirectAccessController {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void play() {
+        public void play() throws IllegalArgumentException {
             if (this.mDismiss || this.mTts.speak(this.mText, 0, null, null) == 0) {
                 return;
             }
@@ -311,7 +311,7 @@ public class AccessibilityDirectAccessController {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void waitForTtsReady() {
+        public void waitForTtsReady() throws IllegalArgumentException {
             Voice voice;
             if (this.mDismiss) {
                 return;
@@ -323,7 +323,7 @@ public class AccessibilityDirectAccessController {
             if (this.mLanguageReady && (voice = this.mTts.getVoice()) != null && voice.getFeatures() != null && !voice.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED)) {
                 AccessibilityDirectAccessController.this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
+                    public final void accept(Object obj) throws IllegalArgumentException {
                         ((AccessibilityDirectAccessController.TtsPrompt) obj).play();
                     }
                 }, this));

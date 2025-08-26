@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.notification.row;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.LinearGradient;
@@ -15,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import com.android.systemui.R;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BaseBackgroundDrawable extends Drawable {
     public final Paint bgPaint;
@@ -31,7 +31,7 @@ public final class BaseBackgroundDrawable extends Drawable {
     public float rotationAngle;
     public int solidAlpha;
 
-    public BaseBackgroundDrawable(Context context) {
+    public BaseBackgroundDrawable(Context context) throws Resources.NotFoundException {
         this.cornerRadius = context.getResources().getDimension(R.dimen.animated_action_button_corner_radius);
         float dimension = context.getResources().getDimension(R.dimen.animated_action_button_outline_stroke_width);
         this.insetVertical = 8 * context.getResources().getDisplayMetrics().density;
@@ -57,35 +57,35 @@ public final class BaseBackgroundDrawable extends Drawable {
         this.outlineEndColor = context.getColor(android.R.color.secondary_text_inverse_when_activated_material);
         this.rotationAngle = 20.0f;
         this.gradientAlpha = 255;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(1500L);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
-        ofFloat.setRepeatCount(0);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.BaseBackgroundDrawable$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(1500L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+        valueAnimatorOfFloat.setRepeatCount(0);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.BaseBackgroundDrawable$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                BaseBackgroundDrawable baseBackgroundDrawable = BaseBackgroundDrawable.this;
-                baseBackgroundDrawable.rotationAngle = (floatValue * 360.0f) + 20.0f;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                BaseBackgroundDrawable baseBackgroundDrawable = this.this$0;
+                baseBackgroundDrawable.rotationAngle = (fFloatValue * 360.0f) + 20.0f;
                 baseBackgroundDrawable.invalidateSelf();
             }
         });
-        ofFloat.start();
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat2.setDuration(500L);
-        ofFloat2.setStartDelay(1000L);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.BaseBackgroundDrawable$2$1
+        valueAnimatorOfFloat.start();
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat2.setDuration(500L);
+        valueAnimatorOfFloat2.setStartDelay(1000L);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.BaseBackgroundDrawable$2$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                BaseBackgroundDrawable baseBackgroundDrawable = BaseBackgroundDrawable.this;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                BaseBackgroundDrawable baseBackgroundDrawable = this.this$0;
                 float f = 255;
-                baseBackgroundDrawable.gradientAlpha = (int) ((1 - floatValue) * f);
-                baseBackgroundDrawable.solidAlpha = (int) (floatValue * f);
+                baseBackgroundDrawable.gradientAlpha = (int) ((1 - fFloatValue) * f);
+                baseBackgroundDrawable.solidAlpha = (int) (fFloatValue * f);
                 baseBackgroundDrawable.invalidateSelf();
             }
         });
-        ofFloat2.start();
+        valueAnimatorOfFloat2.start();
     }
 
     @Override // android.graphics.drawable.Drawable

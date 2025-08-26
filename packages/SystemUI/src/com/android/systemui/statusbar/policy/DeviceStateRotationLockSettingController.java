@@ -14,7 +14,6 @@ import com.android.systemui.util.wrapper.RotationPolicyWrapper;
 import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceStateRotationLockSettingController implements RotationLockController.RotationLockControllerCallback, Dumpable {
     public int mDeviceState = -1;
@@ -49,27 +48,27 @@ public final class DeviceStateRotationLockSettingController implements RotationL
     public final void onRotationLockStateChanged(boolean z, boolean z2) {
         int i = this.mDeviceState;
         DeviceStateAutoRotateSettingManager deviceStateAutoRotateSettingManager = this.mDeviceStateAutoRotateSettingManager;
-        boolean isRotationLocked = deviceStateAutoRotateSettingManager.isRotationLocked(i);
+        boolean zIsRotationLocked = deviceStateAutoRotateSettingManager.isRotationLocked(i);
         DeviceStateRotationLockSettingControllerLogger deviceStateRotationLockSettingControllerLogger = this.mLogger;
         deviceStateRotationLockSettingControllerLogger.getClass();
         LogLevel logLevel = LogLevel.VERBOSE;
         DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 = new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0(deviceStateRotationLockSettingControllerLogger, 0);
         LogBuffer logBuffer = deviceStateRotationLockSettingControllerLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logMessageImpl.bool2 = isRotationLocked;
-        logBuffer.commit(obtain);
-        if (i == -1 || z == isRotationLocked) {
+        logMessageImpl.bool2 = zIsRotationLocked;
+        logBuffer.commit(logMessageObtain);
+        if (i == -1 || z == zIsRotationLocked) {
             return;
         }
         int i2 = this.mDeviceState;
-        LogMessage obtain2 = logBuffer.obtain("DSRotateLockSettingCon", logLevel, new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1(0), null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer.obtain("DSRotateLockSettingCon", logLevel, new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1(0), null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.bool1 = z;
         logMessageImpl2.int1 = i2;
-        logBuffer.commit(obtain2);
+        logBuffer.commit(logMessageObtain2);
         deviceStateAutoRotateSettingManager.updateSetting(i2, z);
     }
 
@@ -77,25 +76,25 @@ public final class DeviceStateRotationLockSettingController implements RotationL
         int rotationLockSetting = this.mDeviceStateAutoRotateSettingManager.getRotationLockSetting(i);
         boolean z = rotationLockSetting == 1;
         RotationPolicyWrapper rotationPolicyWrapper = this.mRotationPolicyWrapper;
-        boolean isRotationLocked = rotationPolicyWrapper.isRotationLocked();
+        boolean zIsRotationLocked = rotationPolicyWrapper.isRotationLocked();
         DeviceStateRotationLockSettingControllerLogger deviceStateRotationLockSettingControllerLogger = this.mLogger;
         deviceStateRotationLockSettingControllerLogger.getClass();
         LogLevel logLevel = LogLevel.VERBOSE;
         DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 = new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0(deviceStateRotationLockSettingControllerLogger, 1);
         LogBuffer logBuffer = deviceStateRotationLockSettingControllerLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
         logMessageImpl.int2 = rotationLockSetting;
         logMessageImpl.bool1 = z;
-        logMessageImpl.bool2 = isRotationLocked;
-        logBuffer.commit(obtain);
+        logMessageImpl.bool2 = zIsRotationLocked;
+        logBuffer.commit(logMessageObtain);
         if (rotationLockSetting == 0) {
             return;
         }
         this.mDeviceState = i;
-        if (z != isRotationLocked) {
+        if (z != zIsRotationLocked) {
             rotationPolicyWrapper.setRotationLock(z, "DeviceStateRotationLockSettingController#readPersistedSetting");
         }
     }

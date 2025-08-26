@@ -3,7 +3,6 @@ package androidx.compose.animation;
 import androidx.compose.animation.core.Transition;
 import androidx.compose.ui.Modifier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AnimatedContentScopeImpl implements AnimatedContentScope, AnimatedVisibilityScope {
     public final /* synthetic */ AnimatedVisibilityScope $$delegate_0;

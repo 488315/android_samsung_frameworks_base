@@ -2,6 +2,7 @@ package com.android.settingslib.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimationDrawable;
@@ -20,14 +21,16 @@ import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieListener;
 import com.airbnb.lottie.LottieProperty;
+import com.airbnb.lottie.R$styleable;
 import com.airbnb.lottie.model.KeyPath;
 import com.airbnb.lottie.value.SimpleLottieValueCallback;
 import com.android.settingslib.widget.IllustrationPreference.AnonymousClass3;
 import com.android.systemui.R;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class IllustrationPreference extends Preference {
     public final AnonymousClass1 mAnimationCallback;
@@ -40,7 +43,6 @@ public class IllustrationPreference extends Preference {
     public boolean mLottieDynamicColor;
     public int mMaxHeight;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.widget.IllustrationPreference$3, reason: invalid class name */
     public class AnonymousClass3 extends View.AccessibilityDelegate {
         public AnonymousClass3() {
@@ -56,7 +58,7 @@ public class IllustrationPreference extends Preference {
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.settingslib.widget.IllustrationPreference$1] */
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.settingslib.widget.IllustrationPreference$2] */
-    public IllustrationPreference(Context context) {
+    public IllustrationPreference(Context context) throws ClassNotFoundException {
         super(context);
         this.mMaxHeight = -1;
         this.mCacheComposition = true;
@@ -77,91 +79,45 @@ public class IllustrationPreference extends Preference {
         init$1(context, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0077, code lost:
-    
-        if (kotlin.text.StringsKt__StringsKt.split$default(r3, new char[]{','}, 6).contains("tablet") != false) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void init$1(android.content.Context r8, android.util.AttributeSet r9) {
-        /*
-            r7 = this;
-            r0 = 1
-            r1 = 0
-            r2 = 2131558736(0x7f0d0150, float:1.8742796E38)
-            r7.mLayoutResId = r2
-            r2 = 2
-            if (r9 == 0) goto L2d
-            int[] r3 = com.airbnb.lottie.R$styleable.LottieAnimationView
-            android.content.res.TypedArray r3 = r8.obtainStyledAttributes(r9, r3, r1, r1)
-            r4 = 13
-            int r4 = r3.getResourceId(r4, r1)
-            r7.mImageResId = r4
-            boolean r3 = r3.getBoolean(r2, r0)
-            r7.mCacheComposition = r3
-            int[] r3 = com.android.settingslib.widget.preference.illustration.R$styleable.IllustrationPreference
-            android.content.res.TypedArray r9 = r8.obtainStyledAttributes(r9, r3, r1, r1)
-            boolean r3 = r9.getBoolean(r1, r1)
-            r7.mLottieDynamicColor = r3
-            r9.recycle()
-        L2d:
-            boolean r9 = com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme(r8)
-            if (r9 == 0) goto L7c
-            java.lang.String r9 = "ro.build.characteristics"
-            java.lang.String r3 = ""
-            com.android.settingslib.widget.SettingsThemeHelper r4 = com.android.settingslib.widget.SettingsThemeHelper.INSTANCE
-            r4.getClass()
-            java.lang.Class<java.lang.String> r4 = java.lang.String.class
-            java.lang.ClassLoader r5 = r8.getClassLoader()     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.String r6 = "android.os.SystemProperties"
-            java.lang.Class r5 = r5.loadClass(r6)     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.Class[] r6 = new java.lang.Class[r2]     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            r6[r1] = r4     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            r6[r0] = r4     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.String r4 = "get"
-            java.lang.Object[] r2 = java.util.Arrays.copyOf(r6, r2)     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.Class[] r2 = (java.lang.Class[]) r2     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.reflect.Method r2 = r5.getMethod(r4, r2)     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.Object[] r9 = new java.lang.Object[]{r9, r3}     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.Object r9 = r2.invoke(r5, r9)     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            java.lang.String r9 = (java.lang.String) r9     // Catch: java.lang.Exception -> L65 java.lang.IllegalArgumentException -> L7a
-            r3 = r9
-        L65:
-            char[] r9 = new char[r0]
-            r2 = 44
-            r9[r1] = r2
-            r2 = 6
-            java.util.List r9 = kotlin.text.StringsKt__StringsKt.split$default(r3, r9, r2)
-            java.lang.String r2 = "tablet"
-            boolean r9 = r9.contains(r2)
-            if (r9 == 0) goto L7c
-            goto L7d
-        L7a:
-            r7 = move-exception
-            throw r7
-        L7c:
-            r0 = r1
-        L7d:
-            r7.mIsTablet = r0
-            if (r0 == 0) goto L95
-            android.content.res.Resources r8 = r8.getResources()
-            r9 = 2131170556(0x7f0714fc, float:1.7955474E38)
-            int r8 = r8.getDimensionPixelSize(r9)
-            int r9 = r7.mMaxHeight
-            if (r8 == r9) goto L95
-            r7.mMaxHeight = r8
-            r7.notifyChanged()
-        L95:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.widget.IllustrationPreference.init$1(android.content.Context, android.util.AttributeSet):void");
+    public final void init$1(Context context, AttributeSet attributeSet) throws ClassNotFoundException {
+        boolean z;
+        int dimensionPixelSize;
+        this.mLayoutResId = R.layout.illustration_preference;
+        if (attributeSet != null) {
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.LottieAnimationView, 0, 0);
+            this.mImageResId = typedArrayObtainStyledAttributes.getResourceId(13, 0);
+            this.mCacheComposition = typedArrayObtainStyledAttributes.getBoolean(2, true);
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, com.android.settingslib.widget.preference.illustration.R$styleable.IllustrationPreference, 0, 0);
+            this.mLottieDynamicColor = typedArrayObtainStyledAttributes2.getBoolean(0, false);
+            typedArrayObtainStyledAttributes2.recycle();
+        }
+        if (SettingsThemeHelper.isExpressiveTheme(context)) {
+            String str = "";
+            SettingsThemeHelper.INSTANCE.getClass();
+            try {
+                Class<?> clsLoadClass = context.getClassLoader().loadClass("android.os.SystemProperties");
+                str = (String) clsLoadClass.getMethod("get", (Class[]) Arrays.copyOf(new Class[]{String.class, String.class}, 2)).invoke(clsLoadClass, "ro.build.characteristics", "");
+            } catch (IllegalArgumentException e) {
+                throw e;
+            } catch (Exception unused) {
+            }
+            z = StringsKt__StringsKt.split$default(str, new char[]{','}, 6).contains("tablet");
+        }
+        this.mIsTablet = z;
+        if (!z || (dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.settingslib_illustration_height_tablet)) == this.mMaxHeight) {
+            return;
+        }
+        this.mMaxHeight = dimensionPixelSize;
+        notifyChanged();
     }
 
     @Override // androidx.preference.Preference
-    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
-        InputStream openRawResource;
+    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) throws Resources.NotFoundException, IOException {
+        InputStream inputStreamOpenRawResource;
         super.onBindViewHolder(preferenceViewHolder);
         final FrameLayout frameLayout = (FrameLayout) preferenceViewHolder.findViewById(R.id.illustration_frame);
         ImageView imageView = (ImageView) preferenceViewHolder.findViewById(R.id.background_view);
@@ -193,19 +149,19 @@ public class IllustrationPreference extends Preference {
         lottieAnimationView.setCacheComposition(this.mCacheComposition);
         if (this.mImageResId > 0) {
             try {
-                openRawResource = lottieAnimationView.getResources().openRawResource(this.mImageResId);
+                inputStreamOpenRawResource = lottieAnimationView.getResources().openRawResource(this.mImageResId);
                 try {
                 } finally {
                 }
             } catch (IOException e) {
                 Log.w("IllustrationPreference", "Unable to open Lottie raw resource", e);
             }
-            if (openRawResource.read() == -1) {
+            if (inputStreamOpenRawResource.read() == -1) {
                 lottieAnimationView.setVisibility(8);
                 frameLayout.setVisibility(8);
-                openRawResource.close();
+                inputStreamOpenRawResource.close();
             } else {
-                openRawResource.close();
+                inputStreamOpenRawResource.close();
                 lottieAnimationView.setVisibility(0);
                 frameLayout.setVisibility(0);
                 Object drawable = lottieAnimationView.getDrawable();
@@ -255,7 +211,7 @@ public class IllustrationPreference extends Preference {
             frameLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.IllustrationPreference$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    IllustrationPreference illustrationPreference = IllustrationPreference.this;
+                    IllustrationPreference illustrationPreference = this.f$0;
                     LottieAnimationView lottieAnimationView2 = lottieAnimationView;
                     ViewGroup viewGroup = frameLayout;
                     boolean z = illustrationPreference.mIsAnimationPaused;
@@ -294,7 +250,7 @@ public class IllustrationPreference extends Preference {
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.settingslib.widget.IllustrationPreference$1] */
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.settingslib.widget.IllustrationPreference$2] */
-    public IllustrationPreference(Context context, AttributeSet attributeSet) {
+    public IllustrationPreference(Context context, AttributeSet attributeSet) throws ClassNotFoundException {
         super(context, attributeSet);
         this.mMaxHeight = -1;
         this.mCacheComposition = true;
@@ -317,7 +273,7 @@ public class IllustrationPreference extends Preference {
 
     /* JADX WARN: Type inference failed for: r3v3, types: [com.android.settingslib.widget.IllustrationPreference$1] */
     /* JADX WARN: Type inference failed for: r3v4, types: [com.android.settingslib.widget.IllustrationPreference$2] */
-    public IllustrationPreference(Context context, AttributeSet attributeSet, int i) {
+    public IllustrationPreference(Context context, AttributeSet attributeSet, int i) throws ClassNotFoundException {
         super(context, attributeSet, i);
         this.mMaxHeight = -1;
         this.mCacheComposition = true;
@@ -340,7 +296,7 @@ public class IllustrationPreference extends Preference {
 
     /* JADX WARN: Type inference failed for: r3v3, types: [com.android.settingslib.widget.IllustrationPreference$1] */
     /* JADX WARN: Type inference failed for: r3v4, types: [com.android.settingslib.widget.IllustrationPreference$2] */
-    public IllustrationPreference(Context context, AttributeSet attributeSet, int i, int i2) {
+    public IllustrationPreference(Context context, AttributeSet attributeSet, int i, int i2) throws ClassNotFoundException {
         super(context, attributeSet, i, i2);
         this.mMaxHeight = -1;
         this.mCacheComposition = true;

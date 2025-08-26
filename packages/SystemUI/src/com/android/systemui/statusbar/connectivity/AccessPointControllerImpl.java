@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AccessPointControllerImpl implements AccessPointController, WifiPickerTracker.WifiPickerTrackerCallback, LifecycleOwner {
     public static final boolean DEBUG = Log.isLoggable("AccessPointController", 3);
@@ -139,7 +138,7 @@ public class AccessPointControllerImpl implements AccessPointController, WifiPic
         return false;
     }
 
-    public final void finalize() {
+    public final void finalize() throws Throwable {
         this.mMainExecutor.execute(new AccessPointControllerImpl$$ExternalSyntheticLambda0(this, 3));
         super.finalize();
     }
@@ -158,7 +157,7 @@ public class AccessPointControllerImpl implements AccessPointController, WifiPic
     public final int getInstantHotspotIcon(HotspotNetworkEntry hotspotNetworkEntry) {
         char c;
         int connectionStrength;
-        int intValue;
+        int iIntValue;
         synchronized (hotspotNetworkEntry) {
             HotspotNetwork hotspotNetwork = hotspotNetworkEntry.mHotspotNetworkData;
             c = 0;
@@ -168,7 +167,7 @@ public class AccessPointControllerImpl implements AccessPointController, WifiPic
         if (hotspotNetworkEntry.mHotspotNetworkData != null) {
             arrayList = new ArrayList(hotspotNetworkEntry.mHotspotNetworkData.getHotspotSecurityTypes());
         }
-        if (arrayList.size() != 0 && (arrayList.size() != 1 ? arrayList.size() != 2 || !arrayList.contains(0) || !arrayList.contains(6) : (intValue = ((Integer) arrayList.get(0)).intValue()) != 0 && intValue != 6)) {
+        if (arrayList.size() != 0 && (arrayList.size() != 1 ? arrayList.size() != 2 || !arrayList.contains(0) || !arrayList.contains(6) : (iIntValue = ((Integer) arrayList.get(0)).intValue()) != 0 && iIntValue != 6)) {
             c = 1;
         }
         return ICONS_WIFI[connectionStrength][c];

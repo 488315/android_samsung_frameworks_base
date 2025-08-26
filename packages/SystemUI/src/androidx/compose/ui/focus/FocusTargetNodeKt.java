@@ -6,7 +6,6 @@ import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.NodeCoordinator;
 import androidx.compose.ui.platform.AndroidComposeView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FocusTargetNodeKt {
     public static final FocusTransactionManager getFocusTransactionManager(FocusTargetNode focusTargetNode) {
@@ -29,7 +28,7 @@ public abstract class FocusTargetNodeKt {
             if (!focusInvalidationManager.focusTargetNodes.add(focusTargetNode) || focusInvalidationManager.isInvalidationScheduled) {
                 return;
             }
-            focusInvalidationManager.onRequestApplyChangesListener.mo779invoke(new FocusInvalidationManager$setUpOnRequestApplyChangesListener$1(focusInvalidationManager));
+            focusInvalidationManager.onRequestApplyChangesListener.mo781invoke(new FocusInvalidationManager$setUpOnRequestApplyChangesListener$1(focusInvalidationManager));
             focusInvalidationManager.isInvalidationScheduled = true;
         }
     }

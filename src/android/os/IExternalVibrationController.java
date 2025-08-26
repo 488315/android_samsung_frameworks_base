@@ -49,9 +49,9 @@ public interface IExternalVibrationController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IExternalVibrationController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IExternalVibrationController)) {
-                return (IExternalVibrationController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IExternalVibrationController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IExternalVibrationController)) {
+                return (IExternalVibrationController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -81,13 +81,13 @@ public interface IExternalVibrationController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean mute = mute();
+                boolean zMute = mute();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(mute);
+                parcel2.writeBoolean(zMute);
             } else if (i == 2) {
-                boolean unmute = unmute();
+                boolean zUnmute = unmute();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(unmute);
+                parcel2.writeBoolean(zUnmute);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -112,31 +112,31 @@ public interface IExternalVibrationController extends IInterface {
 
             @Override // android.os.IExternalVibrationController
             public boolean mute() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExternalVibrationController.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExternalVibrationController.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IExternalVibrationController
             public boolean unmute() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExternalVibrationController.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExternalVibrationController.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

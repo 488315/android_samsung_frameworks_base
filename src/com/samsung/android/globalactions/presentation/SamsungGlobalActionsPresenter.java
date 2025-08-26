@@ -106,9 +106,9 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mLogWrapper.i(TAG, "createDefaultActions()");
         addAction(this.mViewModelFactory.createActionViewModel(this, "power"));
         addAction(this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_RESTART));
-        List<DefaultActionsCreationStrategy> createDefaultActionsCreationStrategy = this.mFactory.createDefaultActionsCreationStrategy(this, "bug_report");
+        List<DefaultActionsCreationStrategy> listCreateDefaultActionsCreationStrategy = this.mFactory.createDefaultActionsCreationStrategy(this, "bug_report");
         if (this.mSystemCondition.isEnabled(SystemConditions.IS_BUG_REPORT_MODE)) {
-            Iterator<DefaultActionsCreationStrategy> it = createDefaultActionsCreationStrategy.iterator();
+            Iterator<DefaultActionsCreationStrategy> it = listCreateDefaultActionsCreationStrategy.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     addAction(this.mViewModelFactory.createActionViewModel(this, "bug_report"));
@@ -266,9 +266,7 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mActions.removeIf(new Predicate() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((ActionViewModel) obj).getActionInfo().getName().equals(str);
-                return equals;
+                return ((ActionViewModel) obj).getActionInfo().getName().equals(str);
             }
         });
     }
@@ -293,12 +291,12 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mBroadcastManager.registerDismissActions(new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                SamsungGlobalActionsPresenter.this.lambda$onShowDialog$1();
+                this.f$0.lambda$onShowDialog$1();
             }
         }, new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                SamsungGlobalActionsPresenter.this.lambda$onShowDialog$2();
+                this.f$0.lambda$onShowDialog$2();
             }
         });
         hideQuickPanel();
@@ -323,7 +321,7 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mBroadcastManager.registerSecureConfirmAction(new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                ActionViewModel.this.onPressSecureConfirm();
+                actionViewModel.onPressSecureConfirm();
             }
         });
     }
@@ -361,10 +359,10 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
 
     @Override // com.samsung.android.globalactions.presentation.SamsungGlobalActions
     public void confirmSafeMode(int i) {
-        ActionViewModel createActionViewModel = this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_SAFE_MODE);
-        if (createActionViewModel != null) {
-            createActionViewModel.getActionInfo().setViewIndex(i);
-            confirmAction(createActionViewModel);
+        ActionViewModel actionViewModelCreateActionViewModel = this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_SAFE_MODE);
+        if (actionViewModelCreateActionViewModel != null) {
+            actionViewModelCreateActionViewModel.getActionInfo().setViewIndex(i);
+            confirmAction(actionViewModelCreateActionViewModel);
         }
     }
 

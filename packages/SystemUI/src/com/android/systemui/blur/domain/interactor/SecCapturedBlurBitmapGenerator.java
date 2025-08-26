@@ -21,7 +21,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecCapturedBlurBitmapGenerator {
     public static final String TAG;
@@ -32,7 +31,6 @@ public final class SecCapturedBlurBitmapGenerator {
     public final ScreenShotBitmapFactory screenShotBitmapFactory;
     public final SecBlurCustomColorInteractor secBlurCustomColorInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +40,6 @@ public final class SecCapturedBlurBitmapGenerator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -88,11 +85,11 @@ public final class SecCapturedBlurBitmapGenerator {
     public final BitmapDrawable getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType blurType) {
         ScreenShotBitmapProvider screenShotBitmapProvider;
         Bitmap screenShot;
-        boolean isWhiteKeyguardWallpaper;
+        boolean zIsWhiteKeyguardWallpaper;
         ScreenShotBitmapProvider screenShotBitmapProvider2;
-        int intValue = ((Number) this.notificationShadeWindowStateInteractor.statusBarState.$$delegate_0.getValue()).intValue();
+        int iIntValue = ((Number) this.notificationShadeWindowStateInteractor.statusBarState.$$delegate_0.getValue()).intValue();
         ScreenShotBitmapFactory screenShotBitmapFactory = this.screenShotBitmapFactory;
-        if ((intValue == 0 && blurType == SecPanelBlurBinding.BlurType.QUICK_PANEL) || WallpaperUtils.sWallpaperType == 7) {
+        if ((iIntValue == 0 && blurType == SecPanelBlurBinding.BlurType.QUICK_PANEL) || WallpaperUtils.sWallpaperType == 7) {
             ScreenShotBitmapProvider.Type type = ScreenShotBitmapProvider.Type.WINDOW_MANAGER;
             screenShotBitmapFactory.getClass();
             int i = ScreenShotBitmapFactory.WhenMappings.$EnumSwitchMapping$0[type.ordinal()];
@@ -129,22 +126,22 @@ public final class SecCapturedBlurBitmapGenerator {
             QSColorCurve qSColorCurve = new QSColorCurve(this.context);
             qSColorCurve.setFraction(1.0f);
             this.blurFilter.setBlurRadius(qSColorCurve.radius);
-            boolean booleanValue = ((Boolean) this.secBlurCustomColorInteractor.hasCustomColorApplied.$$delegate_0.getValue()).booleanValue();
-            this.blurFilter.setProportionalSaturation(booleanValue ? qSColorCurve.saturation : 0.0f);
-            this.blurFilter.setCurveLevel(booleanValue ? 0.0f : qSColorCurve.curve);
-            this.blurFilter.setCurveMinX(booleanValue ? 0.0f : qSColorCurve.minX);
-            this.blurFilter.setCurveMaxX(booleanValue ? 255.0f : qSColorCurve.maxX);
-            this.blurFilter.setCurveMinY(booleanValue ? 0.0f : qSColorCurve.minY);
-            this.blurFilter.setCurveMaxY(booleanValue ? 255.0f : qSColorCurve.maxY);
+            boolean zBooleanValue = ((Boolean) this.secBlurCustomColorInteractor.hasCustomColorApplied.$$delegate_0.getValue()).booleanValue();
+            this.blurFilter.setProportionalSaturation(zBooleanValue ? qSColorCurve.saturation : 0.0f);
+            this.blurFilter.setCurveLevel(zBooleanValue ? 0.0f : qSColorCurve.curve);
+            this.blurFilter.setCurveMinX(zBooleanValue ? 0.0f : qSColorCurve.minX);
+            this.blurFilter.setCurveMaxX(zBooleanValue ? 255.0f : qSColorCurve.maxX);
+            this.blurFilter.setCurveMinY(zBooleanValue ? 0.0f : qSColorCurve.minY);
+            this.blurFilter.setCurveMaxY(zBooleanValue ? 255.0f : qSColorCurve.maxY);
         } else if (i3 == 2 || i3 == 3 || i3 == 4) {
             BouncerColorCurve bouncerColorCurve = new BouncerColorCurve();
             if (LsRune.SECURITY_SUB_DISPLAY_LOCK) {
                 ((KeyguardFoldControllerImpl) this.keyguardFoldController).isFoldOpened();
-                isWhiteKeyguardWallpaper = false;
+                zIsWhiteKeyguardWallpaper = false;
             } else {
-                isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
+                zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
             }
-            bouncerColorCurve.setFraction(1.0f, isWhiteKeyguardWallpaper);
+            bouncerColorCurve.setFraction(1.0f, zIsWhiteKeyguardWallpaper);
             this.blurFilter.setBlurRadius(bouncerColorCurve.mRadius);
             this.blurFilter.setProportionalSaturation(0.0f);
             this.blurFilter.setCurveLevel(bouncerColorCurve.mCurve);

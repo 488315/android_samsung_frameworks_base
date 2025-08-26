@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ValueAnimatorUtil {
     public static final float RELEASE_SCALE = 1.0f;
@@ -17,24 +16,24 @@ public final class ValueAnimatorUtil {
     }
 
     public final ValueAnimator createScaleAnimator(final View view, float f, float f2, Interpolator interpolator, long j) {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
         if (view == null) {
-            ofFloat.getClass();
-            return ofFloat;
+            valueAnimatorOfFloat.getClass();
+            return valueAnimatorOfFloat;
         }
-        ofFloat.setDuration(j);
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.ValueAnimatorUtil$createScaleAnimator$1$1
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setInterpolator(interpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.ValueAnimatorUtil$createScaleAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 Float f3 = (Float) valueAnimator.getAnimatedValue();
                 View view2 = view;
-                float floatValue = f3.floatValue();
-                view2.setScaleX(floatValue);
-                view2.setScaleY(floatValue);
+                float fFloatValue = f3.floatValue();
+                view2.setScaleX(fFloatValue);
+                view2.setScaleY(fFloatValue);
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     public final Interpolator getRELEASE_INTERPOLATOR() {

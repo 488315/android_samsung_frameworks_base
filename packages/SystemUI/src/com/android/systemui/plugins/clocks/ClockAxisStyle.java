@@ -12,9 +12,9 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockAxisStyle {
     private final Map<String, Float> settings;
@@ -23,13 +23,13 @@ public final class ClockAxisStyle {
     private static final String KEY_AXIS_KEY = "key";
     private static final String KEY_AXIS_VALUE = "value";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
-        public final ClockAxisStyle fromJson(JSONArray jSONArray) {
+        /* JADX WARN: Multi-variable type inference failed */
+        public final ClockAxisStyle fromJson(JSONArray jSONArray) throws JSONException {
             ClockAxisStyle clockAxisStyle = new ClockAxisStyle(null, 1, 0 == true ? 1 : 0);
             int length = jSONArray.length() - 1;
             if (length >= 0) {
@@ -48,14 +48,14 @@ public final class ClockAxisStyle {
             return clockAxisStyle;
         }
 
-        public final JSONArray toJson(ClockAxisStyle clockAxisStyle) {
+        public final JSONArray toJson(ClockAxisStyle clockAxisStyle) throws JSONException {
             JSONArray jSONArray = new JSONArray();
             for (Map.Entry entry : clockAxisStyle.settings.entrySet()) {
                 String str = (String) entry.getKey();
-                float floatValue = ((Number) entry.getValue()).floatValue();
+                float fFloatValue = ((Number) entry.getValue()).floatValue();
                 JSONObject jSONObject = new JSONObject();
                 jSONObject.put(ClockAxisStyle.KEY_AXIS_KEY, str);
-                jSONObject.put(ClockAxisStyle.KEY_AXIS_VALUE, Float.valueOf(floatValue));
+                jSONObject.put(ClockAxisStyle.KEY_AXIS_VALUE, Float.valueOf(fFloatValue));
                 jSONArray.put(jSONObject);
             }
             return jSONArray;
@@ -67,7 +67,7 @@ public final class ClockAxisStyle {
 
     public ClockAxisStyle(Function1 function1) {
         this.settings = new LinkedHashMap();
-        function1.mo779invoke(this);
+        function1.mo781invoke(this);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -77,7 +77,7 @@ public final class ClockAxisStyle {
 
     public final ClockAxisStyle copy(Function1 function1) {
         ClockAxisStyle clockAxisStyle = new ClockAxisStyle(this);
-        function1.mo779invoke(clockAxisStyle);
+        function1.mo781invoke(clockAxisStyle);
         return clockAxisStyle;
     }
 
@@ -149,8 +149,8 @@ public final class ClockAxisStyle {
 
     public ClockAxisStyle(List<ClockFontAxis> list) {
         List<ClockFontAxis> list2 = list;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity < 16 ? 16 : mapCapacity);
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity < 16 ? 16 : iMapCapacity);
         for (ClockFontAxis clockFontAxis : list2) {
             Pair pair = new Pair(clockFontAxis.getKey(), Float.valueOf(clockFontAxis.getCurrentValue()));
             linkedHashMap.put(pair.getFirst(), pair.getSecond());

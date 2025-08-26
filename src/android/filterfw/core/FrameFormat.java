@@ -368,7 +368,7 @@ public class FrameFormat {
         String str;
         int valuesPerSample = getValuesPerSample();
         String str2 = "";
-        String valueOf = valuesPerSample == 1 ? "" : String.valueOf(valuesPerSample);
+        String strValueOf = valuesPerSample == 1 ? "" : String.valueOf(valuesPerSample);
         if (this.mTarget == 0) {
             str = "";
         } else {
@@ -377,7 +377,7 @@ public class FrameFormat {
         if (this.mObjectClass != null) {
             str2 = " class(" + this.mObjectClass.getSimpleName() + ") ";
         }
-        return str + baseTypeToString(this.mBaseType) + valueOf + dimensionsToString(this.mDimensions) + str2 + metaDataToString(this.mMetaData);
+        return str + baseTypeToString(this.mBaseType) + strValueOf + dimensionsToString(this.mDimensions) + str2 + metaDataToString(this.mMetaData);
     }
 
     private void initDefaults() {

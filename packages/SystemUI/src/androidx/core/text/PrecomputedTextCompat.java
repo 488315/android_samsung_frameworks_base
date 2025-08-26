@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.style.MetricAffectingSpan;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PrecomputedTextCompat implements Spannable {
     public final Spannable mText;
@@ -86,7 +85,6 @@ public class PrecomputedTextCompat implements Spannable {
         this.mWrapped = precomputedText;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Params {
         public final int mBreakStrategy;
         public final int mHyphenationFrequency;

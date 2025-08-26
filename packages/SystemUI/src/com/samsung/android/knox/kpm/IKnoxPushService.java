@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.samsung.android.knox.kpm.IKnoxPushServiceCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKnoxPushService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.kpm.IKnoxPushService";
@@ -18,13 +17,11 @@ public interface IKnoxPushService extends IInterface {
 
     void unRegisterDevice(IKnoxPushServiceCallback iKnoxPushServiceCallback) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKnoxPushService {
         public static final int TRANSACTION_isRegistered = 3;
         public static final int TRANSACTION_registerDevice = 1;
         public static final int TRANSACTION_unRegisterDevice = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKnoxPushService {
             public IBinder mRemote;
 
@@ -43,47 +40,47 @@ public interface IKnoxPushService extends IInterface {
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushService
             public void isRegistered(IKnoxPushServiceCallback iKnoxPushServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKnoxPushServiceCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKnoxPushServiceCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushService
             public void registerDevice(boolean z, IKnoxPushServiceCallback iKnoxPushServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iKnoxPushServiceCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iKnoxPushServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushService
             public void unRegisterDevice(IKnoxPushServiceCallback iKnoxPushServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKnoxPushServiceCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKnoxPushServiceCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -96,8 +93,8 @@ public interface IKnoxPushService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxPushService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKnoxPushService)) ? new Proxy(iBinder) : (IKnoxPushService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxPushService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKnoxPushService)) ? new Proxy(iBinder) : (IKnoxPushService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -110,23 +107,23 @@ public interface IKnoxPushService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                IKnoxPushServiceCallback asInterface = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
+                IKnoxPushServiceCallback iKnoxPushServiceCallbackAsInterface = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerDevice(readBoolean, asInterface);
+                registerDevice(z, iKnoxPushServiceCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IKnoxPushServiceCallback asInterface2 = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                IKnoxPushServiceCallback iKnoxPushServiceCallbackAsInterface2 = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unRegisterDevice(asInterface2);
+                unRegisterDevice(iKnoxPushServiceCallbackAsInterface2);
                 parcel2.writeNoException();
             } else {
                 if (i != 3) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                IKnoxPushServiceCallback asInterface3 = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                IKnoxPushServiceCallback iKnoxPushServiceCallbackAsInterface3 = IKnoxPushServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                isRegistered(asInterface3);
+                isRegistered(iKnoxPushServiceCallbackAsInterface3);
                 parcel2.writeNoException();
             }
             return true;
@@ -138,7 +135,6 @@ public interface IKnoxPushService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKnoxPushService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

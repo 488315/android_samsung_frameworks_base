@@ -2,7 +2,6 @@ package android.app.admin;
 
 import android.annotation.SystemApi;
 import android.app.Service;
-import android.app.admin.DevicePolicyKeyguardService;
 import android.app.admin.IKeyguardClient;
 import android.content.Intent;
 import android.os.Handler;
@@ -35,7 +34,7 @@ public class DevicePolicyKeyguardService extends Service {
             DevicePolicyKeyguardService.this.mHandler.post(new Runnable() { // from class: android.app.admin.DevicePolicyKeyguardService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DevicePolicyKeyguardService.AnonymousClass1.this.lambda$onCreateKeyguardSurface$0(iBinder);
+                    this.f$0.lambda$onCreateKeyguardSurface$0(iBinder);
                 }
             });
         }

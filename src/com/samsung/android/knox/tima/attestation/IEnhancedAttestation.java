@@ -45,9 +45,9 @@ public interface IEnhancedAttestation extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestation.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEnhancedAttestation)) {
-                return (IEnhancedAttestation) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestation.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEnhancedAttestation)) {
+                return (IEnhancedAttestation) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,12 +74,12 @@ public interface IEnhancedAttestation extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                IEnhancedAttestationPolicyCallback asInterface = IEnhancedAttestationPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-                boolean readBoolean = parcel.readBoolean();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                IEnhancedAttestationPolicyCallback iEnhancedAttestationPolicyCallbackAsInterface = IEnhancedAttestationPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                enhancedAttestation(readString, readString2, asInterface, readBoolean);
+                enhancedAttestation(string, string2, iEnhancedAttestationPolicyCallbackAsInterface, z);
                 parcel2.writeNoException();
                 return true;
             }
@@ -104,19 +104,19 @@ public interface IEnhancedAttestation extends IInterface {
 
             @Override // com.samsung.android.knox.tima.attestation.IEnhancedAttestation
             public void enhancedAttestation(String str, String str2, IEnhancedAttestationPolicyCallback iEnhancedAttestationPolicyCallback, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnhancedAttestation.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iEnhancedAttestationPolicyCallback);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnhancedAttestation.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iEnhancedAttestationPolicyCallback);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

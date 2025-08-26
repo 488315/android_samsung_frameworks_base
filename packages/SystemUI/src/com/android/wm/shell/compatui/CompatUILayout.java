@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 class CompatUILayout extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,9 +43,9 @@ class CompatUILayout extends LinearLayout {
                         break;
                     default:
                         int i3 = CompatUILayout.$r8$clinit;
-                        View findViewById = compatUILayout.findViewById(R.id.size_compat_hint);
-                        if (findViewById.getVisibility() != 8) {
-                            findViewById.setVisibility(8);
+                        View viewFindViewById = compatUILayout.findViewById(R.id.size_compat_hint);
+                        if (viewFindViewById.getVisibility() != 8) {
+                            viewFindViewById.setVisibility(8);
                             break;
                         }
                         break;
@@ -56,11 +55,11 @@ class CompatUILayout extends LinearLayout {
         imageButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.wm.shell.compatui.CompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                CompatUILayout compatUILayout = CompatUILayout.this.mWindowManager.mLayout;
+                CompatUILayout compatUILayout = this.f$0.mWindowManager.mLayout;
                 if (compatUILayout != null) {
-                    View findViewById = compatUILayout.findViewById(R.id.size_compat_hint);
-                    if (findViewById.getVisibility() != 0) {
-                        findViewById.setVisibility(0);
+                    View viewFindViewById = compatUILayout.findViewById(R.id.size_compat_hint);
+                    if (viewFindViewById.getVisibility() != 0) {
+                        viewFindViewById.setVisibility(0);
                         return true;
                     }
                 }
@@ -88,9 +87,9 @@ class CompatUILayout extends LinearLayout {
                         break;
                     default:
                         int i3 = CompatUILayout.$r8$clinit;
-                        View findViewById = compatUILayout.findViewById(R.id.size_compat_hint);
-                        if (findViewById.getVisibility() != 8) {
-                            findViewById.setVisibility(8);
+                        View viewFindViewById = compatUILayout.findViewById(R.id.size_compat_hint);
+                        if (viewFindViewById.getVisibility() != 8) {
+                            viewFindViewById.setVisibility(8);
                             break;
                         }
                         break;

@@ -4,7 +4,6 @@ import kotlin.Triple;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class NotificationListViewBinder$bindEmptyShadeLegacy$4 extends AdaptedFunctionReference implements Function4 {
     public static final NotificationListViewBinder$bindEmptyShadeLegacy$4 INSTANCE = new NotificationListViewBinder$bindEmptyShadeLegacy$4();

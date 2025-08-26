@@ -64,7 +64,7 @@ import com.android.systemui.statusbar.connectivity.NetworkControllerImpl;
 import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
+import com.android.systemui.statusbar.policy.SatelliteEnabledListener;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
 import com.android.systemui.telephony.TelephonyListenerManager;
 import com.android.systemui.util.DeviceType;
@@ -76,7 +76,6 @@ import com.sec.ims.settings.ImsProfile;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MobileDataTile extends SQSTileImpl implements SignalCallback {
     public static final Intent DATA_SETTINGS = new Intent().setAction("android.settings.DATA_USAGE_SETTINGS");
@@ -109,7 +108,6 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
     public TelephonyManager mTelephonyManager;
     public UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallAttributesListener extends TelephonyCallback implements TelephonyCallback.CallAttributesListener, TelephonyCallback.ServiceStateListener {
         public /* synthetic */ CallAttributesListener(MobileDataTile mobileDataTile, int i) {
             this();
@@ -149,7 +147,6 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class GlobalSetting extends ContentObserver {
         public final Context mContext;
         public final String mSettingName;
@@ -172,13 +169,12 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscreenMobileDataTileReceiver extends BroadcastReceiver {
         public SubscreenMobileDataTileReceiver() {
         }
 
         @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
+        public final void onReceive(Context context, Intent intent) throws Resources.NotFoundException {
             if (intent.getAction().equals("MOBILEDATA_STATE_CHANGE")) {
                 MobileDataTile.this.handleClick(null);
             }
@@ -193,9 +189,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
     /* JADX WARN: Type inference failed for: r2v6, types: [com.android.systemui.qs.tiles.MobileDataTile$3] */
     public MobileDataTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, NetworkController networkController, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, BroadcastDispatcher broadcastDispatcher, PanelInteractor panelInteractor, SatelliteModeObserverHelper satelliteModeObserverHelper, UserTracker userTracker, DisplayLifecycle displayLifecycle, SubscreenUtil subscreenUtil) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.MobileDataTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mSatelliteModeCallback = new SatelliteEnabledListener() { // from class: com.android.systemui.qs.tiles.MobileDataTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteEnabledListener
+            public final void onSatelliteEnabledChanged(boolean z) {
                 MobileDataTile mobileDataTile = MobileDataTile.this;
                 mobileDataTile.mIsSatelliteModeOn = z;
                 mobileDataTile.refreshState(null);
@@ -237,9 +233,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
                 MobileDataTile mobileDataTile = MobileDataTile.this;
                 Intent intent = MobileDataTile.DATA_SETTINGS;
                 String str = mobileDataTile.TAG;
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "mobile data has changed value : ", " is enabled : ");
-                m.append(MobileDataTile.this.mDataController.isMobileDataEnabled());
-                Log.d(str, m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "mobile data has changed value : ", " is enabled : ");
+                sbM.append(MobileDataTile.this.mDataController.isMobileDataEnabled());
+                Log.d(str, sbM.toString());
                 MobileDataTile.this.refreshState(null);
             }
         };
@@ -324,9 +320,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(final Expandable expandable) {
+    public final void handleClick(final Expandable expandable) throws Resources.NotFoundException {
         boolean z;
-        View inflate;
+        View viewInflate;
         final CheckBox checkBox;
         TextView textView;
         SubscreenUtil subscreenUtil;
@@ -344,9 +340,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         sb.append(" is enabled :  ");
         DataUsageController dataUsageController = this.mDataController;
         sb.append(dataUsageController.isMobileDataEnabled());
-        String sb2 = sb.toString();
+        String string = sb.toString();
         String str = this.TAG;
-        Log.d(str, sb2);
+        Log.d(str, string);
         if (((QSTile.BooleanState) this.mState).state == 0) {
             return;
         }
@@ -380,8 +376,8 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
             if (!QpRune.QUICK_SUBSCREEN_PANEL || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
                 this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.MobileDataTile$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        MobileDataTile mobileDataTile = MobileDataTile.this;
+                    public final void run() throws Resources.NotFoundException {
+                        MobileDataTile mobileDataTile = this.f$0;
                         Expandable expandable2 = expandable;
                         Intent intent = MobileDataTile.DATA_SETTINGS;
                         mobileDataTile.handleClick(expandable2);
@@ -396,9 +392,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         Log.d(str, "isKeyguardVisible() = " + keyguardStateControllerImpl.mShowing + ", isSecure() = " + keyguardUpdateMonitor.isSecure() + ", canSkipBouncer() = " + keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) + ", isLockFunctionsEnabled() = " + this.mSettingsHelper.isLockFunctionsEnabled());
         Intent intent = null;
         if (!Operator.isKoreaQsTileBranding()) {
-            boolean shouldSupportMobileDataOffDontShowPopup = Operator.shouldSupportMobileDataOffDontShowPopup();
+            boolean zShouldSupportMobileDataOffDontShowPopup = Operator.shouldSupportMobileDataOffDontShowPopup();
             int i = R.string.mobile_data_show_popup_disable_jpn;
-            if (shouldSupportMobileDataOffDontShowPopup && dataUsageController.isMobileDataEnabled()) {
+            if (zShouldSupportMobileDataOffDontShowPopup && dataUsageController.isMobileDataEnabled()) {
                 z = Settings.System.getInt(this.mContext.getContentResolver(), "mobile_data_off_popup_show_again", 0) != 0;
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("handleClick : doNotShowAgainChecked :  ", str, z);
                 if (z) {
@@ -414,31 +410,31 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
                     }
                     LayoutInflater layoutInflater = (LayoutInflater) this.mContext.getSystemService("layout_inflater");
                     if (!QpRune.QUICK_SUBSCREEN_PANEL || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
-                        inflate = layoutInflater.inflate(R.layout.sec_mobile_data_dont_show_layout, (ViewGroup) null);
-                        TextView textView2 = (TextView) inflate.findViewById(R.id.mobile_data_message_text);
-                        Typeface create = Typeface.create(Typeface.create("sec", 0), 400, false);
-                        textView2.setTypeface(create);
-                        checkBox = (CheckBox) inflate.findViewById(R.id.do_not_show_again);
-                        checkBox.setTypeface(create);
+                        viewInflate = layoutInflater.inflate(R.layout.sec_mobile_data_dont_show_layout, (ViewGroup) null);
+                        TextView textView2 = (TextView) viewInflate.findViewById(R.id.mobile_data_message_text);
+                        Typeface typefaceCreate = Typeface.create(Typeface.create("sec", 0), 400, false);
+                        textView2.setTypeface(typefaceCreate);
+                        checkBox = (CheckBox) viewInflate.findViewById(R.id.do_not_show_again);
+                        checkBox.setTypeface(typefaceCreate);
                         textView = textView2;
                     } else {
-                        inflate = layoutInflater.inflate(R.layout.subscreen_mobile_data_dont_show_layout, (ViewGroup) null);
-                        textView = (TextView) inflate.findViewById(R.id.mobile_data_message_text);
+                        viewInflate = layoutInflater.inflate(R.layout.subscreen_mobile_data_dont_show_layout, (ViewGroup) null);
+                        textView = (TextView) viewInflate.findViewById(R.id.mobile_data_message_text);
                         if (textView != null) {
                             FontSizeUtils.updateFontSize(textView, R.dimen.subscreen_dialog_text_size, 0.9f, 1.3f);
                         }
-                        checkBox = (CheckBox) inflate.findViewById(R.id.do_not_show_again);
+                        checkBox = (CheckBox) viewInflate.findViewById(R.id.do_not_show_again);
                         if (checkBox != null) {
                             FontSizeUtils.updateFontSize(checkBox, R.dimen.subscreen_dialog_text_size, 0.9f, 1.3f);
                         }
                     }
-                    View view = inflate;
+                    View view = viewInflate;
                     textView.setText(this.mContext.getString(i));
                     checkBox.setOnClickListener(new MobileDataTile$$ExternalSyntheticLambda8());
                     showPopupDialog(this.mContext.getString(i2), null, R.string.sec_data_usage_disabled_dialog_turn_off, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.MobileDataTile$$ExternalSyntheticLambda9
                         @Override // android.content.DialogInterface.OnClickListener
                         public final void onClick(DialogInterface dialogInterface, int i3) {
-                            MobileDataTile mobileDataTile = MobileDataTile.this;
+                            MobileDataTile mobileDataTile = this.f$0;
                             CheckBox checkBox2 = checkBox;
                             Intent intent2 = MobileDataTile.DATA_SETTINGS;
                             Settings.System.putInt(mobileDataTile.mContext.getContentResolver(), "mobile_data_off_popup_show_again", checkBox2.isChecked() ? 1 : 0);
@@ -606,9 +602,9 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         checkIfRestrictionEnforcedByAdminOnly(booleanState, "no_config_mobile_networks");
         Resources resources = this.mContext.getResources();
         booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_data_connection);
-        boolean isNetworkRoaming$1 = isNetworkRoaming$1();
+        boolean zIsNetworkRoaming$1 = isNetworkRoaming$1();
         AnonymousClass3 anonymousClass3 = this.mAirplaneSetting;
-        if (isNetworkRoaming$1) {
+        if (zIsNetworkRoaming$1) {
             booleanState.label = resources.getString(R.string.quick_settings_data_roaming_label);
             booleanState.value = anonymousClass3.getValue() != 1 && Settings.Global.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_DATA_ROAMING, 0) == 1;
         } else {
@@ -640,21 +636,21 @@ public class MobileDataTile extends SQSTileImpl implements SignalCallback {
         TelephonyManager telephonyManager = this.mTelephonyManager;
         if (telephonyManager != null) {
             int phoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
-            String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(phoneId, "getDefaultDataPhoneId ");
+            String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(phoneId, "getDefaultDataPhoneId ");
             String str = this.TAG;
-            Log.d(str, m);
+            Log.d(str, strM);
             if (phoneId < 0) {
                 phoneId = 0;
             } else if (phoneId > 1) {
                 phoneId = 1;
             }
-            ServiceState semGetServiceState = telephonyManager.semGetServiceState(phoneId);
-            r1 = semGetServiceState != null ? semGetServiceState.getRoaming() : false;
-            if (r1) {
+            ServiceState serviceStateSemGetServiceState = telephonyManager.semGetServiceState(phoneId);
+            roaming = serviceStateSemGetServiceState != null ? serviceStateSemGetServiceState.getRoaming() : false;
+            if (roaming) {
                 Log.d(str, "isNetworkRoaming : Roaming state");
             }
         }
-        return r1;
+        return roaming;
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl

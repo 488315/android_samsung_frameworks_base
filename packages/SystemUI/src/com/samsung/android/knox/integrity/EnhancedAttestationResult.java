@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnhancedAttestationResult implements Parcelable {
     public static final Parcelable.Creator<EnhancedAttestationResult> CREATOR = new Parcelable.Creator<EnhancedAttestationResult>() { // from class: com.samsung.android.knox.integrity.EnhancedAttestationResult.1
@@ -80,15 +79,15 @@ public class EnhancedAttestationResult implements Parcelable {
         return bundle.getString(DATA_FIELD_SERVER_RESPONSE_RAW_DATA);
     }
 
-    public int getRetryAfterTime() {
+    public int getRetryAfterTime() throws NumberFormatException {
         try {
             String str = this.reason;
             if (str == null || !str.contains(ERROR_RETRY_AFTER)) {
                 return -1;
             }
-            int parseInt = Integer.parseInt(this.reason.replace(ERROR_RETRY_AFTER, ""));
-            if (parseInt > 0) {
-                return parseInt;
+            int i = Integer.parseInt(this.reason.replace(ERROR_RETRY_AFTER, ""));
+            if (i > 0) {
+                return i;
             }
             return -1;
         } catch (Exception e) {

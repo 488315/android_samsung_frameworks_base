@@ -127,9 +127,9 @@ public interface ITimeDetectorService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITimeDetectorService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITimeDetectorService)) {
-                return (ITimeDetectorService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITimeDetectorService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITimeDetectorService)) {
+                return (ITimeDetectorService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -184,23 +184,23 @@ public interface ITimeDetectorService extends IInterface {
                     parcel2.writeTypedObject(capabilitiesAndConfig, 1);
                     return true;
                 case 2:
-                    ITimeDetectorListener asInterface = ITimeDetectorListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITimeDetectorListener iTimeDetectorListenerAsInterface = ITimeDetectorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addListener(asInterface);
+                    addListener(iTimeDetectorListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ITimeDetectorListener asInterface2 = ITimeDetectorListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITimeDetectorListener iTimeDetectorListenerAsInterface2 = ITimeDetectorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeListener(asInterface2);
+                    removeListener(iTimeDetectorListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
                     TimeConfiguration timeConfiguration = (TimeConfiguration) parcel.readTypedObject(TimeConfiguration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean updateConfiguration = updateConfiguration(timeConfiguration);
+                    boolean zUpdateConfiguration = updateConfiguration(timeConfiguration);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateConfiguration);
+                    parcel2.writeBoolean(zUpdateConfiguration);
                     return true;
                 case 5:
                     TimeState timeState = getTimeState();
@@ -210,9 +210,9 @@ public interface ITimeDetectorService extends IInterface {
                 case 6:
                     UnixEpochTime unixEpochTime = (UnixEpochTime) parcel.readTypedObject(UnixEpochTime.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean confirmTime = confirmTime(unixEpochTime);
+                    boolean zConfirmTime = confirmTime(unixEpochTime);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(confirmTime);
+                    parcel2.writeBoolean(zConfirmTime);
                     return true;
                 case 7:
                     ManualTimeSuggestion manualTimeSuggestion = (ManualTimeSuggestion) parcel.readTypedObject(ManualTimeSuggestion.CREATOR);
@@ -230,9 +230,9 @@ public interface ITimeDetectorService extends IInterface {
                 case 9:
                     ManualTimeSuggestion manualTimeSuggestion2 = (ManualTimeSuggestion) parcel.readTypedObject(ManualTimeSuggestion.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean suggestManualTime = suggestManualTime(manualTimeSuggestion2);
+                    boolean zSuggestManualTime = suggestManualTime(manualTimeSuggestion2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(suggestManualTime);
+                    parcel2.writeBoolean(zSuggestManualTime);
                     return true;
                 case 10:
                     TelephonyTimeSuggestion telephonyTimeSuggestion = (TelephonyTimeSuggestion) parcel.readTypedObject(TelephonyTimeSuggestion.CREATOR);
@@ -241,9 +241,9 @@ public interface ITimeDetectorService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    UnixEpochTime latestNetworkTime = latestNetworkTime();
+                    UnixEpochTime unixEpochTimeLatestNetworkTime = latestNetworkTime();
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(latestNetworkTime, 1);
+                    parcel2.writeTypedObject(unixEpochTimeLatestNetworkTime, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -268,170 +268,170 @@ public interface ITimeDetectorService extends IInterface {
 
             @Override // android.app.timedetector.ITimeDetectorService
             public TimeCapabilitiesAndConfig getCapabilitiesAndConfig() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TimeCapabilitiesAndConfig) obtain2.readTypedObject(TimeCapabilitiesAndConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TimeCapabilitiesAndConfig) parcelObtain2.readTypedObject(TimeCapabilitiesAndConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public void addListener(ITimeDetectorListener iTimeDetectorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTimeDetectorListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTimeDetectorListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public void removeListener(ITimeDetectorListener iTimeDetectorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTimeDetectorListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTimeDetectorListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public boolean updateConfiguration(TimeConfiguration timeConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(timeConfiguration, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(timeConfiguration, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public TimeState getTimeState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TimeState) obtain2.readTypedObject(TimeState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TimeState) parcelObtain2.readTypedObject(TimeState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public boolean confirmTime(UnixEpochTime unixEpochTime) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(unixEpochTime, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(unixEpochTime, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public boolean setManualTime(ManualTimeSuggestion manualTimeSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(manualTimeSuggestion, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(manualTimeSuggestion, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public void suggestExternalTime(ExternalTimeSuggestion externalTimeSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(externalTimeSuggestion, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(externalTimeSuggestion, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public boolean suggestManualTime(ManualTimeSuggestion manualTimeSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(manualTimeSuggestion, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(manualTimeSuggestion, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public void suggestTelephonyTime(TelephonyTimeSuggestion telephonyTimeSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(telephonyTimeSuggestion, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(telephonyTimeSuggestion, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
             public UnixEpochTime latestNetworkTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UnixEpochTime) obtain2.readTypedObject(UnixEpochTime.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UnixEpochTime) parcelObtain2.readTypedObject(UnixEpochTime.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

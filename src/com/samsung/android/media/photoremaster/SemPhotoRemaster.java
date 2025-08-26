@@ -144,19 +144,19 @@ public class SemPhotoRemaster {
             if (this.mInputUri == null) {
                 return;
             }
-            Cursor query = context.getContentResolver().query(this.mInputUri, new String[]{"_data"}, null, null, null);
+            Cursor cursorQuery = context.getContentResolver().query(this.mInputUri, new String[]{"_data"}, null, null, null);
             try {
-                if (query == null) {
+                if (cursorQuery == null) {
                     LogUtil.d(TAG, "InputPath is set as inputUri.getPath()");
                 } else {
-                    int columnIndexOrThrow = query.getColumnIndexOrThrow("_data");
-                    query.moveToFirst();
+                    int columnIndexOrThrow = cursorQuery.getColumnIndexOrThrow("_data");
+                    cursorQuery.moveToFirst();
                     LogUtil.i(TAG, "InputPath is replaced with content provider");
-                    this.mInputPathName = query.getString(columnIndexOrThrow);
+                    this.mInputPathName = cursorQuery.getString(columnIndexOrThrow);
                     LogUtil.d(TAG, "mInputPathName is updated as " + this.mInputPathName);
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
             } finally {
             }
@@ -282,7 +282,7 @@ public class SemPhotoRemaster {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void setParameter(int i, String str) {
+        public void setParameter(int i, String str) throws JSONException {
             try {
                 this.mResultJson.put(String.valueOf(i), str);
             } catch (JSONException e) {
@@ -300,7 +300,7 @@ public class SemPhotoRemaster {
         }
     }
 
-    private Result getParameters() {
+    private Result getParameters() throws JSONException {
         LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called");
         final Result result = new Result(this.mBuilder.mBitmap == null ? null : this.mServiceClient.getBitmapParam(ResultParam.OUTPUT_BITMAP.ID));
         String stringParam = this.mServiceClient.getStringParam(1003);
@@ -319,8 +319,8 @@ public class SemPhotoRemaster {
             }
         }).forEach(new Consumer() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SemPhotoRemaster.this.lambda$getParameters$2(result, (SemPhotoRemaster.ResultParam) obj);
+            public final void accept(Object obj) throws JSONException {
+                this.f$0.lambda$getParameters$2(result, (SemPhotoRemaster.ResultParam) obj);
             }
         });
         Arrays.stream(ResultParam.values()).filter(new Predicate() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda3
@@ -335,8 +335,8 @@ public class SemPhotoRemaster {
             }
         }).forEach(new Consumer() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SemPhotoRemaster.this.lambda$getParameters$5(result, (SemPhotoRemaster.ResultParam) obj);
+            public final void accept(Object obj) throws JSONException {
+                this.f$0.lambda$getParameters$5(result, (SemPhotoRemaster.ResultParam) obj);
             }
         });
         return result;
@@ -351,7 +351,7 @@ public class SemPhotoRemaster {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$getParameters$2(Result result, ResultParam resultParam) {
+    public /* synthetic */ void lambda$getParameters$2(Result result, ResultParam resultParam) throws JSONException {
         String stringParam = this.mServiceClient.getStringParam(resultParam.ID);
         LogUtil.d(TAG, "getStringParam(" + resultParam.ID + ") : " + stringParam);
         result.setParameter(resultParam.ID, stringParam);
@@ -366,10 +366,10 @@ public class SemPhotoRemaster {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$getParameters$5(Result result, ResultParam resultParam) {
-        String valueOf = String.valueOf(this.mServiceClient.getLongParam(resultParam.ID));
-        LogUtil.d(TAG, "getLongParam(" + resultParam.ID + ") : " + valueOf);
-        result.setParameter(resultParam.ID, valueOf);
+    public /* synthetic */ void lambda$getParameters$5(Result result, ResultParam resultParam) throws JSONException {
+        String strValueOf = String.valueOf(this.mServiceClient.getLongParam(resultParam.ID));
+        LogUtil.d(TAG, "getLongParam(" + resultParam.ID + ") : " + strValueOf);
+        result.setParameter(resultParam.ID, strValueOf);
     }
 
     private Result doRemaster(int i, List<Integer> list, Context context) {
@@ -392,9 +392,9 @@ public class SemPhotoRemaster {
                     this.mServiceClient.init(context);
                 }
                 setParameters(context);
-                boolean processImage = this.mServiceClient.processImage(i, list);
-                Result parameters = processImage ? getParameters() : null;
-                if (processImage) {
+                boolean zProcessImage = this.mServiceClient.processImage(i, list);
+                Result parameters = zProcessImage ? getParameters() : null;
+                if (zProcessImage) {
                     LogUtil.d(TAG, "Raw Result: " + parameters.mResultJson);
                 }
                 synchronized (obj) {

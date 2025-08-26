@@ -8,7 +8,6 @@ import kotlinx.atomicfu.AtomicInt;
 import kotlinx.coroutines.internal.DispatchedContinuationKt;
 import kotlinx.coroutines.internal.ScopeCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DispatchedCoroutine extends ScopeCoroutine {
     public final AtomicInt _decision;

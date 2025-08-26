@@ -46,14 +46,14 @@ public class ListActivity extends Activity {
     @Override // android.app.Activity, android.view.Window.Callback
     public void onContentChanged() {
         super.onContentChanged();
-        View findViewById = findViewById(16908292);
+        View viewFindViewById = findViewById(16908292);
         ListView listView = (ListView) findViewById(16908298);
         this.mList = listView;
         if (listView == null) {
             throw new RuntimeException("Your content must have a ListView whose id attribute is 'android.R.id.list'");
         }
-        if (findViewById != null) {
-            listView.setEmptyView(findViewById);
+        if (viewFindViewById != null) {
+            listView.setEmptyView(viewFindViewById);
         }
         this.mList.setOnItemClickListener(this.mOnClickListener);
         if (this.mFinishedStart) {

@@ -17,14 +17,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromLockscreenTransitionInteractor$listenForLockscreenToDreaming$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Set<KeyguardState> $invalidFromStates;
     int label;
     final /* synthetic */ FromLockscreenTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromLockscreenTransitionInteractor$listenForLockscreenToDreaming$1$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -68,26 +66,26 @@ final class FromLockscreenTransitionInteractor$listenForLockscreenToDreaming$1 e
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FromLockscreenTransitionInteractor fromLockscreenTransitionInteractor = this.this$0;
-            Flow sample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardState$$inlined$filter$1(fromLockscreenTransitionInteractor.keyguardInteractor.isAbleToDream, fromLockscreenTransitionInteractor), this.this$0.transitionInteractor.isFinishedIn$1(KeyguardState.LOCKSCREEN), AnonymousClass3.INSTANCE);
+            Flow flowSample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardState$$inlined$filter$1(fromLockscreenTransitionInteractor.keyguardInteractor.isAbleToDream, fromLockscreenTransitionInteractor), this.this$0.transitionInteractor.isFinishedIn$1(KeyguardState.LOCKSCREEN), AnonymousClass3.INSTANCE);
             final FromLockscreenTransitionInteractor fromLockscreenTransitionInteractor2 = this.this$0;
             final Set<KeyguardState> set = this.$invalidFromStates;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromLockscreenTransitionInteractor$listenForLockscreenToDreaming$1.4
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Pair pair = (Pair) obj2;
-                    boolean booleanValue = ((Boolean) pair.component1()).booleanValue();
-                    boolean booleanValue2 = ((Boolean) pair.component2()).booleanValue();
-                    TransitionInfo currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core = FromLockscreenTransitionInteractor.this.internalTransitionInteractor.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
-                    boolean z = currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core.to == KeyguardState.LOCKSCREEN && !set.contains(currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core.from);
-                    if (!booleanValue || (!booleanValue2 && !z)) {
+                    boolean zBooleanValue = ((Boolean) pair.component1()).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) pair.component2()).booleanValue();
+                    TransitionInfo transitionInfoCurrentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core = fromLockscreenTransitionInteractor2.internalTransitionInteractor.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                    boolean z = transitionInfoCurrentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core.to == KeyguardState.LOCKSCREEN && !set.contains(transitionInfoCurrentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core.from);
+                    if (!zBooleanValue || (!zBooleanValue2 && !z)) {
                         return Unit.INSTANCE;
                     }
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromLockscreenTransitionInteractor.this, KeyguardState.DREAMING, null, null, null, continuation, 14);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromLockscreenTransitionInteractor2, KeyguardState.DREAMING, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (sample.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

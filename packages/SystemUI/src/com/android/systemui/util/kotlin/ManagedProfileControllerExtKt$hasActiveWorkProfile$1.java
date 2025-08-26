@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ManagedProfileController $this_hasActiveWorkProfile;
@@ -52,7 +51,7 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
             final ?? r1 = new ManagedProfileController.Callback() { // from class: com.android.systemui.util.kotlin.ManagedProfileControllerExtKt$hasActiveWorkProfile$1$callback$1
                 @Override // com.android.systemui.statusbar.phone.ManagedProfileController.Callback
                 public void onManagedProfileChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(((ManagedProfileControllerImpl) managedProfileController).hasActiveProfile()));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((ManagedProfileControllerImpl) managedProfileController).hasActiveProfile()));
                 }
 
                 @Override // com.android.systemui.statusbar.phone.ManagedProfileController.Callback
@@ -64,9 +63,7 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.kotlin.ManagedProfileControllerExtKt$hasActiveWorkProfile$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Unit invokeSuspend$lambda$0;
-                    invokeSuspend$lambda$0 = ManagedProfileControllerExtKt$hasActiveWorkProfile$1.invokeSuspend$lambda$0(ManagedProfileController.this, r1);
-                    return invokeSuspend$lambda$0;
+                    return ManagedProfileControllerExtKt$hasActiveWorkProfile$1.invokeSuspend$lambda$0(managedProfileController2, r1);
                 }
             };
             this.label = 1;

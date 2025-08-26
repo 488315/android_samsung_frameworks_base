@@ -129,13 +129,13 @@ public class SpanUtils {
         if (i == i2) {
             return false;
         }
-        List asList = Arrays.asList((UnderlineSpan[]) spannable.getSpans(i, i2, UnderlineSpan.class));
-        if (!isCovered(spannable, asList, i, i2)) {
+        List listAsList = Arrays.asList((UnderlineSpan[]) spannable.getSpans(i, i2, UnderlineSpan.class));
+        if (!isCovered(spannable, listAsList, i, i2)) {
             spannable.setSpan(new UnderlineSpan(), i, i2, 17);
             return true;
         }
-        for (int i3 = 0; i3 < asList.size(); i3++) {
-            UnderlineSpan underlineSpan = (UnderlineSpan) asList.get(i3);
+        for (int i3 = 0; i3 < listAsList.size(); i3++) {
+            UnderlineSpan underlineSpan = (UnderlineSpan) listAsList.get(i3);
             int spanStart = spannable.getSpanStart(underlineSpan);
             int spanEnd = spannable.getSpanEnd(underlineSpan);
             int spanFlags = spannable.getSpanFlags(underlineSpan);
@@ -173,19 +173,19 @@ public class SpanUtils {
             int spanEnd = spannable.getSpanEnd(t);
             for (int i4 = 0; i4 < longArray.size(); i4++) {
                 long j = longArray.get(i4);
-                int min = min(j);
-                int max = max(j);
-                if (!hasIntersection(spanStart, spanEnd, min, max)) {
+                int iMin = min(j);
+                int iMax = max(j);
+                if (!hasIntersection(spanStart, spanEnd, iMin, iMax)) {
                     longArray2.add(j);
                 } else {
-                    long intersection = intersection(spanStart, spanEnd, min, max);
-                    int min2 = min(intersection);
-                    int max2 = max(intersection);
-                    if (min != min2) {
-                        longArray2.add(pack(min, min2));
+                    long jIntersection = intersection(spanStart, spanEnd, iMin, iMax);
+                    int iMin2 = min(jIntersection);
+                    int iMax2 = max(jIntersection);
+                    if (iMin != iMin2) {
+                        longArray2.add(pack(iMin, iMin2));
                     }
-                    if (max2 != max) {
-                        longArray2.add(pack(max2, max));
+                    if (iMax2 != iMax) {
+                        longArray2.add(pack(iMax2, iMax));
                     }
                 }
             }

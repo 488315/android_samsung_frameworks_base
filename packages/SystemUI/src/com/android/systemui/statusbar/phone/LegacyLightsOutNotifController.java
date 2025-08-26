@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.notification.shared.NotificationsLiveDataS
 import com.android.systemui.util.ListenerSet;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LegacyLightsOutNotifController extends ViewController {
     int mAppearance;
@@ -34,7 +33,7 @@ public class LegacyLightsOutNotifController extends ViewController {
         this.mObserver = new Observer() { // from class: com.android.systemui.statusbar.phone.LegacyLightsOutNotifController$$ExternalSyntheticLambda0
             @Override // androidx.lifecycle.Observer
             public final void onChanged(Object obj) {
-                LegacyLightsOutNotifController.this.updateLightsOutView();
+                this.f$0.updateLightsOutView();
             }
         };
         this.mCallback = new CommandQueue.Callbacks() { // from class: com.android.systemui.statusbar.phone.LegacyLightsOutNotifController.2
@@ -93,17 +92,17 @@ public class LegacyLightsOutNotifController extends ViewController {
     }
 
     public void updateLightsOutView() {
-        final boolean shouldShowDot = shouldShowDot();
-        if (shouldShowDot != isShowingDot()) {
-            if (shouldShowDot) {
+        final boolean zShouldShowDot = shouldShowDot();
+        if (zShouldShowDot != isShowingDot()) {
+            if (zShouldShowDot) {
                 this.mView.setAlpha(0.0f);
                 this.mView.setVisibility(0);
             }
-            this.mView.animate().alpha(shouldShowDot ? 1.0f : 0.0f).setDuration(shouldShowDot ? 750L : 250L).setInterpolator(new AccelerateInterpolator(2.0f)).setListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.LegacyLightsOutNotifController.1
+            this.mView.animate().alpha(zShouldShowDot ? 1.0f : 0.0f).setDuration(zShouldShowDot ? 750L : 250L).setInterpolator(new AccelerateInterpolator(2.0f)).setListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.LegacyLightsOutNotifController.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    ((ViewController) LegacyLightsOutNotifController.this).mView.setAlpha(shouldShowDot ? 1.0f : 0.0f);
-                    ((ViewController) LegacyLightsOutNotifController.this).mView.setVisibility(shouldShowDot ? 0 : 8);
+                    ((ViewController) LegacyLightsOutNotifController.this).mView.setAlpha(zShouldShowDot ? 1.0f : 0.0f);
+                    ((ViewController) LegacyLightsOutNotifController.this).mView.setVisibility(zShouldShowDot ? 0 : 8);
                     ((ViewController) LegacyLightsOutNotifController.this).mView.animate().setListener(null);
                 }
             }).start();

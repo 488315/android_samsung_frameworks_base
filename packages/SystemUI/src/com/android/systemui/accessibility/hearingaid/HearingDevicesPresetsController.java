@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesPresetsController implements LocalBluetoothProfileManager.ServiceListener, BluetoothHapClient.Callback {
     public CachedBluetoothDevice mDevice;
@@ -25,7 +24,6 @@ public class HearingDevicesPresetsController implements LocalBluetoothProfileMan
     public List mPresetInfos = new ArrayList();
     public int mActivePresetIndex = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PresetCallback {
     }
 
@@ -137,76 +135,53 @@ public class HearingDevicesPresetsController implements LocalBluetoothProfileMan
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0057  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final void refreshPresetInfo() {
-        /*
-            r5 = this;
-            java.util.ArrayList r0 = new java.util.ArrayList
-            r0.<init>()
-            com.android.settingslib.bluetooth.HapClientProfile r1 = r5.mHapClientProfile
-            r2 = 0
-            if (r1 == 0) goto L4c
-            com.android.settingslib.bluetooth.CachedBluetoothDevice r3 = r5.mDevice
-            if (r3 == 0) goto L4c
-            android.bluetooth.BluetoothDevice r0 = r3.mDevice
-            android.bluetooth.BluetoothHapClient r1 = r1.mService
-            java.lang.String r3 = "HapClientProfile"
-            if (r1 != 0) goto L21
-            java.lang.String r0 = "Proxy not attached to service. Cannot get all preset info."
-            android.util.Log.w(r3, r0)
-            java.util.ArrayList r0 = new java.util.ArrayList
-            r0.<init>()
-            goto L25
-        L21:
-            java.util.List r0 = r1.getAllPresetInfo(r0)
-        L25:
-            java.util.stream.Stream r0 = r0.stream()
-            com.android.systemui.accessibility.hearingaid.HearingDevicesPresetsController$$ExternalSyntheticLambda0 r1 = new com.android.systemui.accessibility.hearingaid.HearingDevicesPresetsController$$ExternalSyntheticLambda0
-            r4 = 0
-            r1.<init>(r4)
-            java.util.stream.Stream r0 = r0.filter(r1)
-            java.util.List r0 = r0.toList()
-            com.android.settingslib.bluetooth.HapClientProfile r1 = r5.mHapClientProfile
-            com.android.settingslib.bluetooth.CachedBluetoothDevice r4 = r5.mDevice
-            android.bluetooth.BluetoothDevice r4 = r4.mDevice
-            android.bluetooth.BluetoothHapClient r1 = r1.mService
-            if (r1 != 0) goto L47
-            java.lang.String r1 = "Proxy not attached to service. Cannot get active preset index."
-            android.util.Log.w(r3, r1)
-            goto L4c
-        L47:
-            int r1 = r1.getActivePresetIndex(r4)
-            goto L4d
-        L4c:
-            r1 = r2
-        L4d:
-            java.util.List r3 = r5.mPresetInfos
-            boolean r3 = r3.equals(r0)
-            int r4 = r5.mActivePresetIndex
-            if (r4 == r1) goto L58
-            r2 = 1
-        L58:
-            r5.mPresetInfos = r0
-            r5.mActivePresetIndex = r1
-            if (r3 == 0) goto L60
-            if (r2 == 0) goto L72
-        L60:
-            com.android.systemui.accessibility.hearingaid.HearingDevicesPresetsController$PresetCallback r5 = r5.mPresetCallback
-            if (r5 == 0) goto L72
-            com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1 r5 = (com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate.AnonymousClass1) r5
-            com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate r2 = com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate.this
-            java.util.concurrent.Executor r2 = r2.mMainExecutor
-            com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1$$ExternalSyntheticLambda1 r3 = new com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1$$ExternalSyntheticLambda1
-            r3.<init>()
-            r2.execute(r3)
-        L72:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.hearingaid.HearingDevicesPresetsController.refreshPresetInfo():void");
+        final int activePresetIndex;
+        PresetCallback presetCallback;
+        CachedBluetoothDevice cachedBluetoothDevice;
+        List allPresetInfo;
+        final List arrayList = new ArrayList();
+        HapClientProfile hapClientProfile = this.mHapClientProfile;
+        if (hapClientProfile == null || (cachedBluetoothDevice = this.mDevice) == null) {
+            activePresetIndex = 0;
+        } else {
+            BluetoothDevice bluetoothDevice = cachedBluetoothDevice.mDevice;
+            BluetoothHapClient bluetoothHapClient = hapClientProfile.mService;
+            if (bluetoothHapClient == null) {
+                Log.w("HapClientProfile", "Proxy not attached to service. Cannot get all preset info.");
+                allPresetInfo = new ArrayList();
+            } else {
+                allPresetInfo = bluetoothHapClient.getAllPresetInfo(bluetoothDevice);
+            }
+            arrayList = allPresetInfo.stream().filter(new HearingDevicesPresetsController$$ExternalSyntheticLambda0(0)).toList();
+            HapClientProfile hapClientProfile2 = this.mHapClientProfile;
+            BluetoothDevice bluetoothDevice2 = this.mDevice.mDevice;
+            BluetoothHapClient bluetoothHapClient2 = hapClientProfile2.mService;
+            if (bluetoothHapClient2 == null) {
+                Log.w("HapClientProfile", "Proxy not attached to service. Cannot get active preset index.");
+                activePresetIndex = 0;
+            } else {
+                activePresetIndex = bluetoothHapClient2.getActivePresetIndex(bluetoothDevice2);
+            }
+        }
+        boolean zEquals = this.mPresetInfos.equals(arrayList);
+        boolean z = this.mActivePresetIndex != activePresetIndex;
+        this.mPresetInfos = arrayList;
+        this.mActivePresetIndex = activePresetIndex;
+        if ((!zEquals || z) && (presetCallback = this.mPresetCallback) != null) {
+            final HearingDevicesDialogDelegate.AnonymousClass1 anonymousClass1 = (HearingDevicesDialogDelegate.AnonymousClass1) presetCallback;
+            HearingDevicesDialogDelegate.this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1$$ExternalSyntheticLambda1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    HearingDevicesDialogDelegate.AnonymousClass1 anonymousClass12 = anonymousClass1;
+                    List list = arrayList;
+                    int i = activePresetIndex;
+                    anonymousClass12.getClass();
+                    String str = HearingDevicesDialogDelegate.ACTION_BLUETOOTH_DEVICE_DETAILS;
+                    HearingDevicesDialogDelegate.this.refreshPresetUi(i, list);
+                }
+            });
+        }
     }
 
     public final void registerHapCallback() {
@@ -235,9 +210,9 @@ public class HearingDevicesPresetsController implements LocalBluetoothProfileMan
         if (this.mDevice == null || this.mHapClientProfile == null) {
             return;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "selectPresetIndependently, presetIndex: ", ", device: ");
-        m.append(this.mDevice.mDevice.getAddress());
-        Log.d("HearingDevicesPresetsController", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "selectPresetIndependently, presetIndex: ", ", device: ");
+        sbM.append(this.mDevice.mDevice.getAddress());
+        Log.d("HearingDevicesPresetsController", sbM.toString());
         this.mHapClientProfile.selectPreset(this.mDevice.mDevice, i);
         CachedBluetoothDevice cachedBluetoothDevice = this.mDevice.mSubDevice;
         if (cachedBluetoothDevice != null) {

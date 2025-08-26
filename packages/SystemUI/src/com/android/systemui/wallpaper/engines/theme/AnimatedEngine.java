@@ -15,7 +15,6 @@ import com.android.systemui.wallpaper.theme.builder.ComplexAnimationBuilder;
 import com.android.systemui.wallpaper.theme.view.FrameAnimationView;
 import com.android.systemui.wallpapers.ImageWallpaper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AnimatedEngine extends WallpaperEngine {
     public final String TAG;
@@ -43,8 +42,8 @@ public class AnimatedEngine extends WallpaperEngine {
         this.mChoreographer = Choreographer.getInstance();
         this.mSurfaceHolder = surfaceHolder;
         this.mSource = new AnimatedSource(this.mContext, getWhich(), this.mRootView);
-        boolean isValid = getSurfaceHolder().getSurface().isValid();
-        ImageWallpaper.IntegratedEngine.this.semSetFixedOrientation(this.mSource.isFixedOrientation(), isValid);
+        boolean zIsValid = getSurfaceHolder().getSurface().isValid();
+        ImageWallpaper.IntegratedEngine.this.semSetFixedOrientation(this.mSource.isFixedOrientation(), zIsValid);
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine

@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BluetoothControllerImpl implements BluetoothController, BluetoothCallback, CachedBluetoothDevice.Callback, LocalBluetoothProfileManager.ServiceListener {
     public boolean mAudioProfileOnly;
@@ -48,7 +47,6 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     public final BluetoothLogger mLogger;
     public int mState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public final ArrayList mCallbacks;
 
@@ -192,17 +190,17 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     @Override // com.android.settingslib.bluetooth.BluetoothCallback
     public final void onAclConnectionStateChanged(CachedBluetoothDevice cachedBluetoothDevice, int i) {
         String address = cachedBluetoothDevice.mDevice.getAddress();
-        String connectionStateToString = connectionStateToString(i);
+        String strConnectionStateToString = connectionStateToString(i);
         BluetoothLogger bluetoothLogger = this.mLogger;
         bluetoothLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = address;
-        logMessageImpl.str2 = connectionStateToString;
-        logBuffer.commit(obtain);
+        logMessageImpl.str2 = strConnectionStateToString;
+        logBuffer.commit(logMessageObtain);
         updateConnected();
         this.mHandler.sendEmptyMessage(2);
     }
@@ -215,11 +213,11 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = address;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         LocalBluetoothManager localBluetoothManager = this.mLocalBluetoothManager;
         boolean z = false;
         for (CachedBluetoothDevice cachedBluetoothDevice2 : localBluetoothManager != null ? localBluetoothManager.mCachedDeviceManager.getCachedDevicesCopy() : Collections.EMPTY_LIST) {
@@ -240,15 +238,15 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
 
     @Override // com.android.settingslib.bluetooth.BluetoothCallback
     public final void onBluetoothStateChanged(int i) {
-        String nameForState = BluetoothAdapter.nameForState(i);
+        String strNameForState = BluetoothAdapter.nameForState(i);
         BluetoothLogger bluetoothLogger = this.mLogger;
         bluetoothLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = nameForState;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = strNameForState;
+        logBuffer.commit(logMessageObtain);
         this.mEnabled = i == 12 || i == 11;
         this.mState = i;
         updateConnected();
@@ -258,17 +256,17 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
     @Override // com.android.settingslib.bluetooth.BluetoothCallback
     public final void onConnectionStateChanged(CachedBluetoothDevice cachedBluetoothDevice, int i) {
         String address = cachedBluetoothDevice == null ? null : cachedBluetoothDevice.mDevice.getAddress();
-        String connectionStateToString = connectionStateToString(i);
+        String strConnectionStateToString = connectionStateToString(i);
         BluetoothLogger bluetoothLogger = this.mLogger;
         bluetoothLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = address;
-        logMessageImpl.str2 = connectionStateToString;
-        logBuffer.commit(obtain);
+        logMessageImpl.str2 = strConnectionStateToString;
+        logBuffer.commit(logMessageObtain);
         updateConnected();
         this.mHandler.sendEmptyMessage(2);
     }
@@ -281,9 +279,9 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = address;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = address;
+        logBuffer.commit(logMessageObtain);
         cachedBluetoothDevice.registerCallback(this);
         updateConnected();
         this.mHandler.sendEmptyMessage(1);
@@ -309,11 +307,11 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = address;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         updateConnected();
         this.mHandler.sendEmptyMessage(1);
     }
@@ -326,9 +324,9 @@ public class BluetoothControllerImpl implements BluetoothController, BluetoothCa
         LogLevel logLevel = LogLevel.DEBUG;
         BluetoothLogger$$ExternalSyntheticLambda0 bluetoothLogger$$ExternalSyntheticLambda0 = new BluetoothLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = bluetoothLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = address;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("BluetoothLog", logLevel, bluetoothLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = address;
+        logBuffer.commit(logMessageObtain);
         updateConnected();
         this.mHandler.sendEmptyMessage(1);
     }

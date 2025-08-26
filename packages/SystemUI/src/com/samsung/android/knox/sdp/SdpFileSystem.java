@@ -17,7 +17,6 @@ import com.samsung.android.knox.sdp.core.SdpEngineInfo;
 import com.samsung.android.knox.sdp.core.SdpException;
 import java.io.File;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SdpFileSystem {
     private static final String BASE_USER_DATA_DIR = "/data/enc_user";
@@ -84,14 +83,14 @@ public class SdpFileSystem {
     }
 
     private static void enforcePermission() throws SdpException {
-        int i;
+        int iIsLicensed;
         try {
-            i = getSdpService().isLicensed();
+            iIsLicensed = getSdpService().isLicensed();
         } catch (RemoteException e) {
             Log.e("SdpFileSystem", "Failed to talk with sdp service...", e);
-            i = -99;
+            iIsLicensed = -99;
         }
-        if (i != 0) {
+        if (iIsLicensed != 0) {
             throw new SdpException(-9);
         }
     }
@@ -125,11 +124,11 @@ public class SdpFileSystem {
         if (!file.exists()) {
             try {
                 Log.d("SdpFileSystem", "getFilesDir callihng createEncPkgDir " + this.mUserId + " " + packageName);
-                int createEncPkgDir = sService.createEncPkgDir(this.mUserId, packageName);
+                int iCreateEncPkgDir = sService.createEncPkgDir(this.mUserId, packageName);
                 StringBuilder sb = new StringBuilder("getFilesDir done createEncPkgDir result ");
-                sb.append(createEncPkgDir);
+                sb.append(iCreateEncPkgDir);
                 Log.d("SdpFileSystem", sb.toString());
-                if (createEncPkgDir != 0 || !file.exists()) {
+                if (iCreateEncPkgDir != 0 || !file.exists()) {
                     return null;
                 }
             } catch (RemoteException e) {
@@ -187,16 +186,14 @@ public class SdpFileSystem {
 
     private static synchronized IDarManagerService getSdpService() throws SdpException {
         IDarManagerService iDarManagerService;
-        synchronized (SdpFileSystem.class) {
-            try {
-                sService = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-            } catch (Exception e) {
-                Log.e("SdpFileSystem", "Failed to talk with sdp service...", e);
-            }
-            iDarManagerService = sService;
-            if (iDarManagerService == null) {
-                throw new SdpException(-13);
-            }
+        try {
+            sService = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        } catch (Exception e) {
+            Log.e("SdpFileSystem", "Failed to talk with sdp service...", e);
+        }
+        iDarManagerService = sService;
+        if (iDarManagerService == null) {
+            throw new SdpException(-13);
         }
         return iDarManagerService;
     }
@@ -245,30 +242,30 @@ public class SdpFileSystem {
     }
 
     public static boolean testSdpIoctl() {
-        boolean Native_Sdp_TestSdpIoctl = Native_Sdp_TestSdpIoctl();
-        Log.d("SdpFileSystem", "Test SDP IOCTL :: ".concat(Native_Sdp_TestSdpIoctl ? "Success" : "Failed..."));
-        return Native_Sdp_TestSdpIoctl;
+        boolean zNative_Sdp_TestSdpIoctl = Native_Sdp_TestSdpIoctl();
+        Log.d("SdpFileSystem", "Test SDP IOCTL :: ".concat(zNative_Sdp_TestSdpIoctl ? "Success" : "Failed..."));
+        return zNative_Sdp_TestSdpIoctl;
     }
 
     private File validateFilePath(String str, boolean z) {
         File databasesDir;
-        File makeFilename;
-        char charAt = str.charAt(0);
+        File fileMakeFilename;
+        char cCharAt = str.charAt(0);
         char c = File.separatorChar;
-        if (charAt == c) {
+        if (cCharAt == c) {
             databasesDir = new File(str.substring(0, str.lastIndexOf(c)));
-            makeFilename = new File(databasesDir, str.substring(str.lastIndexOf(c)));
+            fileMakeFilename = new File(databasesDir, str.substring(str.lastIndexOf(c)));
         } else {
             databasesDir = getDatabasesDir();
             if (databasesDir == null) {
                 return null;
             }
-            makeFilename = makeFilename(databasesDir, str);
+            fileMakeFilename = makeFilename(databasesDir, str);
         }
         if (z && !databasesDir.isDirectory() && databasesDir.mkdir()) {
             FileUtils.setPermissions(databasesDir.getPath(), 505, -1, -1);
         }
-        return makeFilename;
+        return fileMakeFilename;
     }
 
     public File getCacheDir() {
@@ -322,33 +319,33 @@ public class SdpFileSystem {
     }
 
     public boolean isSensitive(File file) {
-        String replace;
+        String strReplace;
         if (file == null) {
             return false;
         }
         String absolutePath = file.getAbsolutePath();
-        boolean startsWith = absolutePath.startsWith("/storage/emulated");
-        boolean startsWith2 = absolutePath.startsWith(BASE_USER_SDCARD_DIR);
-        if (!startsWith && !startsWith2) {
+        boolean zStartsWith = absolutePath.startsWith("/storage/emulated");
+        boolean zStartsWith2 = absolutePath.startsWith(BASE_USER_SDCARD_DIR);
+        if (!zStartsWith && !zStartsWith2) {
             try {
             } catch (Exception unused) {
                 Log.e("SdpFileSystem", "Error- Exception in setting Policy");
             }
             return Native_Sdp_IsSensitiveFile(absolutePath) == 1;
         }
-        if (startsWith) {
-            replace = absolutePath.replace("/storage/emulated", FUSE_LOWERFS_DIR);
+        if (zStartsWith) {
+            strReplace = absolutePath.replace("/storage/emulated", FUSE_LOWERFS_DIR);
         } else {
-            replace = absolutePath.replace(STORAGE_DIR, "/mnt/user/" + this.mUserId);
+            strReplace = absolutePath.replace(STORAGE_DIR, "/mnt/user/" + this.mUserId);
         }
-        String replace2 = replace.replace("/storage/emulated", FUSE_LOWERFS_DIR);
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        String strReplace2 = strReplace.replace("/storage/emulated", FUSE_LOWERFS_DIR);
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
         try {
         } catch (RemoteException e) {
             Log.e("SdpFileSystem", "Failed to talk with sdp service...", e);
         }
-        if (asInterface != null) {
-            return asInterface.isSensitive(replace2);
+        if (iDarManagerServiceAsInterface != null) {
+            return iDarManagerServiceAsInterface.isSensitive(strReplace2);
         }
         Log.e("SdpFileSystem", "Service not found");
         return false;
@@ -359,15 +356,15 @@ public class SdpFileSystem {
     }
 
     public boolean setSensitive(File file) {
-        String replace;
+        String strReplace;
         EnterpriseLicenseManager.log(this.mContextInfo, "SdpFileSystem.setSensitive");
         if (file == null) {
             return false;
         }
         String absolutePath = file.getAbsolutePath();
-        boolean startsWith = absolutePath.startsWith("/storage/emulated");
-        boolean startsWith2 = absolutePath.startsWith(BASE_USER_SDCARD_DIR);
-        if (!startsWith && !startsWith2) {
+        boolean zStartsWith = absolutePath.startsWith("/storage/emulated");
+        boolean zStartsWith2 = absolutePath.startsWith(BASE_USER_SDCARD_DIR);
+        if (!zStartsWith && !zStartsWith2) {
             try {
                 if (Native_Sdp_SetSensitiveFile(this.mEngineId, absolutePath) != 0) {
                     return true;
@@ -379,18 +376,18 @@ public class SdpFileSystem {
                 return false;
             }
         }
-        if (startsWith) {
-            replace = absolutePath.replace("/storage/emulated", FUSE_LOWERFS_DIR);
+        if (zStartsWith) {
+            strReplace = absolutePath.replace("/storage/emulated", FUSE_LOWERFS_DIR);
         } else {
-            replace = absolutePath.replace(STORAGE_DIR, "/mnt/user/" + this.mUserId);
+            strReplace = absolutePath.replace(STORAGE_DIR, "/mnt/user/" + this.mUserId);
         }
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
         try {
         } catch (RemoteException e) {
             Log.e("SdpFileSystem", "Failed to talk with sdp service...", e);
         }
-        if (asInterface != null) {
-            return asInterface.setSensitive(this.mEngineId, replace);
+        if (iDarManagerServiceAsInterface != null) {
+            return iDarManagerServiceAsInterface.setSensitive(this.mEngineId, strReplace);
         }
         Log.e("SdpFileSystem", "Service not found");
         return false;
@@ -404,18 +401,18 @@ public class SdpFileSystem {
         if (isDefaultPathUser(this.mUserId)) {
             return this.mContext.openOrCreateDatabase(str, i, cursorFactory, databaseErrorHandler);
         }
-        File validateFilePath = validateFilePath(str, true);
+        File fileValidateFilePath = validateFilePath(str, true);
         int i2 = (i & 8) != 0 ? 805306368 : 268435456;
-        if (validateFilePath == null) {
+        if (fileValidateFilePath == null) {
             return null;
         }
-        SQLiteDatabase openDatabase = SQLiteDatabase.openDatabase(validateFilePath.getPath(), cursorFactory, i2, databaseErrorHandler);
-        setFilePermissionsFromMode(validateFilePath.getPath(), i, 0);
-        return openDatabase;
+        SQLiteDatabase sQLiteDatabaseOpenDatabase = SQLiteDatabase.openDatabase(fileValidateFilePath.getPath(), cursorFactory, i2, databaseErrorHandler);
+        setFilePermissionsFromMode(fileValidateFilePath.getPath(), i, 0);
+        return sQLiteDatabaseOpenDatabase;
     }
 
     public File getExternalStorageDirectory() {
-        File createDirLocked;
+        File fileCreateDirLocked;
         synchronized (this.mSync) {
             try {
                 if (isDefaultPathUser(this.mUserId)) {
@@ -425,12 +422,12 @@ public class SdpFileSystem {
                 } else if (this.mEmulatedDir == null) {
                     this.mEmulatedDir = new File("/storage/enc_emulated/" + this.mUserId);
                 }
-                createDirLocked = createDirLocked(this.mEmulatedDir);
+                fileCreateDirLocked = createDirLocked(this.mEmulatedDir);
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return createDirLocked;
+        return fileCreateDirLocked;
     }
 
     public File getUserDataDir() {

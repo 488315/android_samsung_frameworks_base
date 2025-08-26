@@ -13,12 +13,10 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LegacyDragSourceNodeWithDefaultPainter extends DelegatingNode {
     public Function2 dragAndDropSourceHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.foundation.draganddrop.LegacyDragSourceNodeWithDefaultPainter$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
@@ -73,9 +71,9 @@ final class LegacyDragSourceNodeWithDefaultPainter extends DelegatingNode {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DrawScope drawScope = (DrawScope) obj;
-                GraphicsLayer graphicsLayer = CacheDrawScopeDragShadowCallback.this.graphicsLayer;
+                GraphicsLayer graphicsLayer = cacheDrawScopeDragShadowCallback.graphicsLayer;
                 if (graphicsLayer == null) {
                     throw new IllegalArgumentException("No cached drag shadow. Check if the drag source node was rendered first");
                 }

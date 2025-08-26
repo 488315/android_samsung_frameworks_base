@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public final class ImsRegistrationAttributes implements Parcelable {
         this.mSipDetails = sipDetails;
     }
 
-    public ImsRegistrationAttributes(Parcel parcel) {
+    public ImsRegistrationAttributes(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mRegistrationTech = parcel.readInt();
         this.mTransportType = parcel.readInt();
         this.mImsAttributeFlags = parcel.readInt();

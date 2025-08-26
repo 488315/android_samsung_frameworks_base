@@ -26,6 +26,7 @@ import java.util.List;
 /* loaded from: classes.dex */
 public class ActivityTaskManager {
     public static final int ADAPTIVE_APP_BY_DEFAULT_OVERRIDES = 16384;
+    public static final int APP_COMPAT_SETTINGS_OVERRIDES = 32768;
     public static final int APP_CONTINUITY_PACKAGES = 1;
     public static final int COVER_LAUNCHER_PACKAGES = 2048;
     public static final int DEFAULT_MINIMAL_SPLIT_SCREEN_DISPLAY_SIZE_DP = 440;
@@ -175,8 +176,8 @@ public class ActivityTaskManager {
     }
 
     private static boolean supportsMultiWindow(Context context, boolean z) {
-        boolean hasSystemFeature = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
-        if ((!ActivityManager.isLowRamDeviceStatic() || hasSystemFeature) && Resources.getSystem().getBoolean(R.bool.config_supportsMultiWindow)) {
+        boolean zHasSystemFeature = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
+        if ((!ActivityManager.isLowRamDeviceStatic() || zHasSystemFeature) && Resources.getSystem().getBoolean(R.bool.config_supportsMultiWindow)) {
             return z || MultiWindowCoreState.MW_ENABLED;
         }
         return false;

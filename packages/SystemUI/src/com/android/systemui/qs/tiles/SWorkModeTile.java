@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.phone.ManagedProfileController;
 import com.android.systemui.statusbar.phone.ManagedProfileControllerImpl;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SWorkModeTile extends SQSTileImpl implements ManagedProfileController.Callback {
     public final QSTile.Icon mIcon;
@@ -50,7 +49,7 @@ public class SWorkModeTile extends SQSTileImpl implements ManagedProfileControll
         return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString("SystemUi.QS_WORK_PROFILE_LABEL", new Supplier() { // from class: com.android.systemui.qs.tiles.SWorkModeTile$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return SWorkModeTile.this.mContext.getString(R.string.quick_settings_work_mode_label);
+                return this.f$0.mContext.getString(R.string.quick_settings_work_mode_label);
             }
         });
     }

@@ -13,7 +13,6 @@ import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupdesign.template.RecyclerMixin;
 import com.google.android.setupdesign.util.ThemeHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GlifPreferenceLayout extends GlifRecyclerLayout {
     public GlifPreferenceLayout(Context context) {
@@ -46,7 +45,7 @@ public class GlifPreferenceLayout extends GlifRecyclerLayout {
 
     @Override // com.google.android.setupdesign.GlifRecyclerLayout, com.google.android.setupcompat.internal.TemplateLayout
     public final void onTemplateInflated() {
-        LayoutInflater from = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         Context context = getContext();
         int i = ForceTwoPaneHelper.$r8$clinit;
         int i2 = PartnerConfigHelper.isForceTwoPaneEnabled(context) ? R.layout.sud_glif_preference_recycler_view_compat_two_pane : R.layout.sud_glif_preference_recycler_view;
@@ -55,7 +54,7 @@ public class GlifPreferenceLayout extends GlifRecyclerLayout {
         if (PartnerConfigHelper.isGlifExpressiveEnabled(context2)) {
             i2 = R.layout.sud_glif_expressive_preference_recycler_view;
         }
-        this.recyclerMixin = new RecyclerMixin(this, (RecyclerView) from.inflate(i2, (ViewGroup) this, false));
+        this.recyclerMixin = new RecyclerMixin(this, (RecyclerView) layoutInflaterFrom.inflate(i2, (ViewGroup) this, false));
     }
 
     public GlifPreferenceLayout(Context context, int i, int i2) {

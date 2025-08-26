@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslRecoilNodeFactory implements IndicationNodeFactory {
     public final ColorProducer colorProducer;
@@ -49,11 +48,11 @@ public final class SeslRecoilNodeFactory implements IndicationNodeFactory {
         this.drawStrategy = seslRecoilDrawStrategy;
     }
 
-    private SeslRecoilNodeFactory(final long j, final float f, Shape shape, SeslRecoilDrawStrategy seslRecoilDrawStrategy) {
+    private SeslRecoilNodeFactory(final long j, final float f, final Shape shape, SeslRecoilDrawStrategy seslRecoilDrawStrategy) {
         this(new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilNodeFactory.1
             @Override // androidx.compose.ui.graphics.ColorProducer
             /* renamed from: invoke-0d7_KjU */
-            public final long mo261invoke0d7_KjU() {
+            public final long mo262invoke0d7_KjU() {
                 return j;
             }
         }, new Function0() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilNodeFactory$$ExternalSyntheticLambda0
@@ -61,6 +60,11 @@ public final class SeslRecoilNodeFactory implements IndicationNodeFactory {
             public final Object invoke() {
                 return Float.valueOf(f);
             }
-        }, new SeslRecoilNode$$ExternalSyntheticLambda3(shape, 2), seslRecoilDrawStrategy);
+        }, new Function0() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilNodeFactory$$ExternalSyntheticLambda1
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                return shape;
+            }
+        }, seslRecoilDrawStrategy);
     }
 }

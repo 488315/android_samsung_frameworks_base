@@ -237,11 +237,11 @@ public class NetworkPolicyManager {
         if (subscriptionCallback == null) {
             throw new NullPointerException("Callback cannot be null.");
         }
-        SubscriptionCallbackProxy remove = this.mSubscriptionCallbackMap.remove(subscriptionCallback);
-        if (remove == null) {
+        SubscriptionCallbackProxy subscriptionCallbackProxyRemove = this.mSubscriptionCallbackMap.remove(subscriptionCallback);
+        if (subscriptionCallbackProxyRemove == null) {
             return;
         }
-        unregisterListener(remove);
+        unregisterListener(subscriptionCallbackProxyRemove);
     }
 
     public void setNetworkPolicies(NetworkPolicy[] networkPolicyArr) {
@@ -371,18 +371,18 @@ public class NetworkPolicyManager {
 
     @Deprecated
     public static Iterator<Pair<ZonedDateTime, ZonedDateTime>> cycleIterator(NetworkPolicy networkPolicy) {
-        final Iterator<Range<ZonedDateTime>> cycleIterator = networkPolicy.cycleIterator();
+        final Iterator<Range<ZonedDateTime>> itCycleIterator = networkPolicy.cycleIterator();
         return new Iterator<Pair<ZonedDateTime, ZonedDateTime>>() { // from class: android.net.NetworkPolicyManager.1
             @Override // java.util.Iterator
             public boolean hasNext() {
-                return cycleIterator.hasNext();
+                return itCycleIterator.hasNext();
             }
 
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // java.util.Iterator
             public Pair<ZonedDateTime, ZonedDateTime> next() {
                 if (hasNext()) {
-                    Range range = (Range) cycleIterator.next();
+                    Range range = (Range) itCycleIterator.next();
                     return Pair.create((ZonedDateTime) range.getLower(), (ZonedDateTime) range.getUpper());
                 }
                 return Pair.create(null, null);
@@ -511,11 +511,11 @@ public class NetworkPolicyManager {
         if (networkPolicyCallback == null) {
             throw new NullPointerException("Callback cannot be null.");
         }
-        NetworkPolicyCallbackProxy remove = this.mNetworkPolicyCallbackMap.remove(networkPolicyCallback);
-        if (remove == null) {
+        NetworkPolicyCallbackProxy networkPolicyCallbackProxyRemove = this.mNetworkPolicyCallbackMap.remove(networkPolicyCallback);
+        if (networkPolicyCallbackProxyRemove == null) {
             return;
         }
-        unregisterListener(remove);
+        unregisterListener(networkPolicyCallbackProxyRemove);
     }
 
     public static class NetworkPolicyCallbackProxy extends Listener {

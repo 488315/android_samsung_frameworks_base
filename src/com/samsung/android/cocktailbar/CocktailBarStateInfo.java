@@ -108,12 +108,12 @@ public class CocktailBarStateInfo implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public CocktailBarStateInfo m9024clone() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        CocktailBarStateInfo cocktailBarStateInfo = new CocktailBarStateInfo(obtain);
-        obtain.recycle();
+    public CocktailBarStateInfo m9036clone() {
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        CocktailBarStateInfo cocktailBarStateInfo = new CocktailBarStateInfo(parcelObtain);
+        parcelObtain.recycle();
         return cocktailBarStateInfo;
     }
 

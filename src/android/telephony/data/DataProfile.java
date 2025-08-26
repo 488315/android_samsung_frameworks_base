@@ -97,6 +97,7 @@ public final class DataProfile implements Parcelable {
     }
 
     private DataProfile(Builder builder) {
+        int networkTypeBitmask;
         this.hasFailure = false;
         ApnSetting apnSetting = builder.mApnSetting;
         this.mApnSetting = apnSetting;
@@ -104,22 +105,17 @@ public final class DataProfile implements Parcelable {
         this.mPreferred = builder.mPreferred;
         if (builder.mType != -1) {
             this.mType = builder.mType;
-        } else if (apnSetting != null) {
-            int networkTypeBitmask = apnSetting.getNetworkTypeBitmask();
-            if (networkTypeBitmask == 0) {
-                this.mType = 0;
-            } else {
-                long j = networkTypeBitmask;
-                if ((TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP2 & j) == j) {
-                    this.mType = 2;
-                } else if ((TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP & j) == j) {
-                    this.mType = 1;
-                } else {
-                    this.mType = 0;
-                }
-            }
-        } else {
+        } else if (apnSetting == null || (networkTypeBitmask = apnSetting.getNetworkTypeBitmask()) == 0) {
             this.mType = 0;
+        } else {
+            long j = networkTypeBitmask;
+            if ((TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP2 & j) == j) {
+                this.mType = 2;
+            } else if ((TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP & j) == j) {
+                this.mType = 1;
+            } else {
+                this.mType = 0;
+            }
         }
         this.mCid = builder.mCid;
         this.mProfileId = builder.mProfileId;

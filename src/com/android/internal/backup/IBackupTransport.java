@@ -250,9 +250,9 @@ public interface IBackupTransport extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackupTransport)) {
-                return (IBackupTransport) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackupTransport)) {
+                return (IBackupTransport) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -373,28 +373,28 @@ public interface IBackupTransport extends IInterface {
                     requestBackupTime(androidFuture7);
                     return true;
                 case 8:
-                    ITransportStatusCallback asInterface = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    initializeDevice(asInterface);
+                    initializeDevice(iTransportStatusCallbackAsInterface);
                     return true;
                 case 9:
                     PackageInfo packageInfo = (PackageInfo) parcel.readTypedObject(PackageInfo.CREATOR);
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    int readInt = parcel.readInt();
-                    ITransportStatusCallback asInterface2 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface2 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    performBackup(packageInfo, parcelFileDescriptor, readInt, asInterface2);
+                    performBackup(packageInfo, parcelFileDescriptor, i3, iTransportStatusCallbackAsInterface2);
                     return true;
                 case 10:
                     PackageInfo packageInfo2 = (PackageInfo) parcel.readTypedObject(PackageInfo.CREATOR);
-                    ITransportStatusCallback asInterface3 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface3 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    clearBackupData(packageInfo2, asInterface3);
+                    clearBackupData(packageInfo2, iTransportStatusCallbackAsInterface3);
                     return true;
                 case 11:
-                    ITransportStatusCallback asInterface4 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface4 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    finishBackup(asInterface4);
+                    finishBackup(iTransportStatusCallbackAsInterface4);
                     return true;
                 case 12:
                     AndroidFuture<List<RestoreSet>> androidFuture8 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -407,11 +407,11 @@ public interface IBackupTransport extends IInterface {
                     getCurrentRestoreSet(androidFuture9);
                     return true;
                 case 14:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     PackageInfo[] packageInfoArr = (PackageInfo[]) parcel.createTypedArray(PackageInfo.CREATOR);
-                    ITransportStatusCallback asInterface5 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface5 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startRestore(readLong, packageInfoArr, asInterface5);
+                    startRestore(j, packageInfoArr, iTransportStatusCallbackAsInterface5);
                     return true;
                 case 15:
                     AndroidFuture<RestoreDescription> androidFuture10 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -420,14 +420,14 @@ public interface IBackupTransport extends IInterface {
                     return true;
                 case 16:
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ITransportStatusCallback asInterface6 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface6 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getRestoreData(parcelFileDescriptor2, asInterface6);
+                    getRestoreData(parcelFileDescriptor2, iTransportStatusCallbackAsInterface6);
                     return true;
                 case 17:
-                    ITransportStatusCallback asInterface7 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface7 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    finishRestore(asInterface7);
+                    finishRestore(iTransportStatusCallbackAsInterface7);
                     return true;
                 case 18:
                     AndroidFuture<Long> androidFuture11 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -437,52 +437,52 @@ public interface IBackupTransport extends IInterface {
                 case 19:
                     PackageInfo packageInfo3 = (PackageInfo) parcel.readTypedObject(PackageInfo.CREATOR);
                     ParcelFileDescriptor parcelFileDescriptor3 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    ITransportStatusCallback asInterface8 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface8 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    performFullBackup(packageInfo3, parcelFileDescriptor3, readInt2, asInterface8);
+                    performFullBackup(packageInfo3, parcelFileDescriptor3, i4, iTransportStatusCallbackAsInterface8);
                     return true;
                 case 20:
-                    long readLong2 = parcel.readLong();
-                    ITransportStatusCallback asInterface9 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j2 = parcel.readLong();
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface9 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    checkFullBackupSize(readLong2, asInterface9);
+                    checkFullBackupSize(j2, iTransportStatusCallbackAsInterface9);
                     return true;
                 case 21:
-                    int readInt3 = parcel.readInt();
-                    ITransportStatusCallback asInterface10 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface10 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendBackupData(readInt3, asInterface10);
+                    sendBackupData(i5, iTransportStatusCallbackAsInterface10);
                     return true;
                 case 22:
-                    ITransportStatusCallback asInterface11 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface11 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    cancelFullBackup(asInterface11);
+                    cancelFullBackup(iTransportStatusCallbackAsInterface11);
                     return true;
                 case 23:
                     PackageInfo packageInfo4 = (PackageInfo) parcel.readTypedObject(PackageInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     AndroidFuture<Boolean> androidFuture12 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    isAppEligibleForBackup(packageInfo4, readBoolean, androidFuture12);
+                    isAppEligibleForBackup(packageInfo4, z, androidFuture12);
                     return true;
                 case 24:
-                    String readString = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     AndroidFuture<Long> androidFuture13 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getBackupQuota(readString, readBoolean2, androidFuture13);
+                    getBackupQuota(string, z2, androidFuture13);
                     return true;
                 case 25:
                     ParcelFileDescriptor parcelFileDescriptor4 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ITransportStatusCallback asInterface12 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface12 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getNextFullRestoreDataChunk(parcelFileDescriptor4, asInterface12);
+                    getNextFullRestoreDataChunk(parcelFileDescriptor4, iTransportStatusCallbackAsInterface12);
                     return true;
                 case 26:
-                    ITransportStatusCallback asInterface13 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITransportStatusCallback iTransportStatusCallbackAsInterface13 = ITransportStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    abortFullRestore(asInterface13);
+                    abortFullRestore(iTransportStatusCallbackAsInterface13);
                     return true;
                 case 27:
                     AndroidFuture<Integer> androidFuture14 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -495,11 +495,11 @@ public interface IBackupTransport extends IInterface {
                     getBackupManagerMonitor(androidFuture15);
                     return true;
                 case 29:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt4 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i6 = parcel.readInt();
                     AndroidFuture<List<String>> androidFuture16 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getPackagesThatShouldNotUseRestrictedMode(createStringArrayList, readInt4, androidFuture16);
+                    getPackagesThatShouldNotUseRestrictedMode(arrayListCreateStringArrayList, i6, androidFuture16);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -524,368 +524,368 @@ public interface IBackupTransport extends IInterface {
 
             @Override // com.android.internal.backup.IBackupTransport
             public void name(AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void configurationIntent(AndroidFuture<Intent> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void currentDestinationString(AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void dataManagementIntent(AndroidFuture<Intent> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void dataManagementIntentLabel(AndroidFuture<CharSequence> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void transportDirName(AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void requestBackupTime(AndroidFuture<Long> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void initializeDevice(ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void performBackup(PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packageInfo, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packageInfo, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packageInfo, 0);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packageInfo, 0);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void finishBackup(ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getCurrentRestoreSet(AndroidFuture<Long> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void startRestore(long j, PackageInfo[] packageInfoArr, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedArray(packageInfoArr, 0);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedArray(packageInfoArr, 0);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void nextRestorePackage(AndroidFuture<RestoreDescription> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getRestoreData(ParcelFileDescriptor parcelFileDescriptor, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void finishRestore(ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void requestFullBackupTime(AndroidFuture<Long> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void performFullBackup(PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packageInfo, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packageInfo, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void checkFullBackupSize(long j, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void sendBackupData(int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void cancelFullBackup(ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void isAppEligibleForBackup(PackageInfo packageInfo, boolean z, AndroidFuture<Boolean> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packageInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packageInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getBackupQuota(String str, boolean z, AndroidFuture<Long> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getNextFullRestoreDataChunk(ParcelFileDescriptor parcelFileDescriptor, ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void abortFullRestore(ITransportStatusCallback iTransportStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportStatusCallback);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportStatusCallback);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getTransportFlags(AndroidFuture<Integer> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IBackupTransport
             public void getPackagesThatShouldNotUseRestrictedMode(List<String> list, int i, AndroidFuture<List<String>> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

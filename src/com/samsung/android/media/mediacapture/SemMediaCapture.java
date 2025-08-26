@@ -156,7 +156,7 @@ public final class SemMediaCapture {
 
     private native void _pause() throws IllegalStateException;
 
-    private native void _prepare() throws IOException, IllegalStateException;
+    private native void _prepare() throws IllegalStateException, IOException;
 
     private native void _release();
 
@@ -170,9 +170,9 @@ public final class SemMediaCapture {
 
     private native void _setCaptureRange(int i, int i2);
 
-    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalArgumentException, IllegalStateException;
+    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalStateException, IllegalArgumentException;
 
-    private native void _setOutputFile(FileDescriptor fileDescriptor) throws IllegalArgumentException, IllegalStateException;
+    private native void _setOutputFile(FileDescriptor fileDescriptor) throws IllegalStateException, IllegalArgumentException;
 
     private native void _setParameter(int i, int i2);
 
@@ -188,7 +188,7 @@ public final class SemMediaCapture {
 
     private native void _stopCapture();
 
-    private native void nativeSetDataSource(IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
+    private native void nativeSetDataSource(IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IllegalStateException, IOException, SecurityException, IllegalArgumentException;
 
     private final native void native_finalize();
 
@@ -204,9 +204,9 @@ public final class SemMediaCapture {
     }
 
     public SemMediaCapture() {
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -218,24 +218,24 @@ public final class SemMediaCapture {
         native_setup(new WeakReference(this));
     }
 
-    public void setDataSource(FileDescriptor fileDescriptor) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setDataSource(FileDescriptor fileDescriptor) throws IllegalStateException, IOException, IllegalArgumentException {
         _setDataSource(fileDescriptor, 0L, 576460752303423487L);
     }
 
-    public void setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IOException, IllegalStateException, IllegalArgumentException {
-        ParcelFileDescriptor convertToModernFd = FileUtils.convertToModernFd(fileDescriptor);
-        if (convertToModernFd == null) {
+    public void setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalStateException, IOException, IllegalArgumentException {
+        ParcelFileDescriptor parcelFileDescriptorConvertToModernFd = FileUtils.convertToModernFd(fileDescriptor);
+        if (parcelFileDescriptorConvertToModernFd == null) {
             _setDataSource(fileDescriptor, j, j2);
         } else {
-            _setDataSource(convertToModernFd.getFileDescriptor(), j, j2);
+            _setDataSource(parcelFileDescriptorConvertToModernFd.getFileDescriptor(), j, j2);
         }
     }
 
-    public void setDataSource(String str) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setDataSource(String str) throws Throwable {
         setDataSource(str, (Map<String, String>) null, (List<HttpCookie>) null);
     }
 
-    private void setDataSource(String str, Map<String, String> map, List<HttpCookie> list) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void setDataSource(String str, Map<String, String> map, List<HttpCookie> list) throws Throwable {
         String[] strArr;
         String[] strArr2;
         if (map != null) {
@@ -256,23 +256,23 @@ public final class SemMediaCapture {
 
     private boolean attemptDataSource(ContentResolver contentResolver, Uri uri) {
         try {
-            AssetFileDescriptor openAssetFileDescriptor = contentResolver.openAssetFileDescriptor(uri, "r");
+            AssetFileDescriptor assetFileDescriptorOpenAssetFileDescriptor = contentResolver.openAssetFileDescriptor(uri, "r");
             try {
-                if (openAssetFileDescriptor.getDeclaredLength() < 0) {
-                    setDataSource(openAssetFileDescriptor.getFileDescriptor());
+                if (assetFileDescriptorOpenAssetFileDescriptor.getDeclaredLength() < 0) {
+                    setDataSource(assetFileDescriptorOpenAssetFileDescriptor.getFileDescriptor());
                 } else {
-                    _setDataSource(openAssetFileDescriptor.getFileDescriptor(), openAssetFileDescriptor.getStartOffset(), openAssetFileDescriptor.getDeclaredLength());
+                    _setDataSource(assetFileDescriptorOpenAssetFileDescriptor.getFileDescriptor(), assetFileDescriptorOpenAssetFileDescriptor.getStartOffset(), assetFileDescriptorOpenAssetFileDescriptor.getDeclaredLength());
                 }
-                if (openAssetFileDescriptor != null) {
-                    openAssetFileDescriptor.close();
+                if (assetFileDescriptorOpenAssetFileDescriptor != null) {
+                    assetFileDescriptorOpenAssetFileDescriptor.close();
                 }
                 return true;
             } catch (Throwable th) {
-                if (openAssetFileDescriptor == null) {
+                if (assetFileDescriptorOpenAssetFileDescriptor == null) {
                     throw th;
                 }
                 try {
-                    openAssetFileDescriptor.close();
+                    assetFileDescriptorOpenAssetFileDescriptor.close();
                     throw th;
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
@@ -284,11 +284,11 @@ public final class SemMediaCapture {
         }
     }
 
-    public void setDataSource(Context context, Uri uri) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    public void setDataSource(Context context, Uri uri) throws Throwable {
         setDataSource(context, uri, (Map<String, String>) null, (List<HttpCookie>) null);
     }
 
-    public void setDataSource(Context context, Uri uri, Map<String, String> map, List<HttpCookie> list) throws IOException {
+    public void setDataSource(Context context, Uri uri, Map<String, String> map, List<HttpCookie> list) throws Throwable {
         CookieHandler cookieHandler;
         if (context == null) {
             throw new NullPointerException("context param can not be null.");
@@ -317,43 +317,44 @@ public final class SemMediaCapture {
         return null;
     }
 
-    private void setDataSource(String str, String[] strArr, String[] strArr2, List<HttpCookie> list) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void setDataSource(String str, String[] strArr, String[] strArr2, List<HttpCookie> list) throws Throwable {
+        FileInputStream fileInputStream;
         if (str == null) {
             throw new IllegalArgumentException("input path is null.");
         }
-        Uri parse = Uri.parse(str);
-        String scheme = parse.getScheme();
+        Uri uri = Uri.parse(str);
+        String scheme = uri.getScheme();
         if ("file".equals(scheme)) {
-            str = parse.getPath();
+            str = uri.getPath();
         } else if (scheme != null) {
             nativeSetDataSource(createHttpServiceBinderIfNecessary(str, list), str, strArr, strArr2);
             return;
         }
         File file = new File(str);
         if (file.exists()) {
-            FileInputStream fileInputStream = null;
+            FileInputStream fileInputStream2 = null;
             try {
-                FileInputStream fileInputStream2 = new FileInputStream(file);
-                try {
-                    setDataSource(fileInputStream2.getFD());
-                    fileInputStream2.close();
-                } catch (Throwable th) {
-                    th = th;
-                    fileInputStream = fileInputStream2;
-                    if (fileInputStream != null) {
-                        fileInputStream.close();
-                    }
-                    throw th;
-                }
+                fileInputStream = new FileInputStream(file);
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                setDataSource(fileInputStream.getFD());
+                fileInputStream.close();
+                return;
             } catch (Throwable th2) {
                 th = th2;
+                fileInputStream2 = fileInputStream;
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                throw th;
             }
-        } else {
-            throw new IOException("setDataSource failed.");
         }
+        throw new IOException("setDataSource failed.");
     }
 
-    public void setOutputFile(FileDescriptor fileDescriptor) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setOutputFile(FileDescriptor fileDescriptor) throws IllegalStateException, IOException, IllegalArgumentException {
         _setOutputFile(fileDescriptor);
     }
 
@@ -380,12 +381,12 @@ public final class SemMediaCapture {
     }
 
     public void invoke(Parcel parcel, Parcel parcel2) throws IllegalStateException {
-        int native_invoke = native_invoke(parcel, parcel2);
+        int iNative_invoke = native_invoke(parcel, parcel2);
         parcel2.setDataPosition(0);
-        if (native_invoke == 0) {
+        if (iNative_invoke == 0) {
             return;
         }
-        throw new RuntimeException("failure code: " + native_invoke);
+        throw new RuntimeException("failure code: " + iNative_invoke);
     }
 
     public final class DynamicViewingConfiguration {
@@ -420,12 +421,12 @@ public final class SemMediaCapture {
         if (size <= 0) {
             throw new IllegalArgumentException("DynamicViewingConfiguration size : " + size);
         }
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
         try {
-            obtain.writeInterfaceToken(IMEDIA_CAPTURE);
-            obtain.writeInt(1);
-            obtain.writeInt(size);
+            parcelObtain.writeInterfaceToken(IMEDIA_CAPTURE);
+            parcelObtain.writeInt(1);
+            parcelObtain.writeInt(size);
             for (int i = 0; i < size; i++) {
                 DynamicViewingConfiguration dynamicViewingConfiguration = list.get(i);
                 int startTime = dynamicViewingConfiguration.getStartTime();
@@ -434,14 +435,14 @@ public final class SemMediaCapture {
                 if (startTime < 0 || endTime < 0 || startTime == endTime || speedRate <= 0.0f) {
                     throw new IllegalArgumentException("DynamicViewingConfiguration is abnormal. dvConfig(" + i + ") = " + startTime + ":" + endTime + ":" + speedRate);
                 }
-                obtain.writeInt(startTime);
-                obtain.writeInt(endTime);
-                obtain.writeFloat(speedRate);
+                parcelObtain.writeInt(startTime);
+                parcelObtain.writeInt(endTime);
+                parcelObtain.writeFloat(speedRate);
             }
-            invoke(obtain, obtain2);
+            invoke(parcelObtain, parcelObtain2);
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
@@ -486,19 +487,19 @@ public final class SemMediaCapture {
         if (startTime < 0 || endTime < 0 || startTime == endTime || speedRate < 1.0f || loopCount < 1) {
             throw new IllegalArgumentException("BoomerangConfiguration is invalid. bmConfig = " + startTime + ":" + endTime + ":" + speedRate + ":" + loopCount);
         }
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
         try {
-            obtain.writeInterfaceToken(IMEDIA_CAPTURE);
-            obtain.writeInt(3);
-            obtain.writeInt(startTime);
-            obtain.writeInt(endTime);
-            obtain.writeFloat(speedRate);
-            obtain.writeInt(loopCount);
-            invoke(obtain, obtain2);
+            parcelObtain.writeInterfaceToken(IMEDIA_CAPTURE);
+            parcelObtain.writeInt(3);
+            parcelObtain.writeInt(startTime);
+            parcelObtain.writeInt(endTime);
+            parcelObtain.writeFloat(speedRate);
+            parcelObtain.writeInt(loopCount);
+            invoke(parcelObtain, parcelObtain2);
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
@@ -510,7 +511,7 @@ public final class SemMediaCapture {
         _stopCapture();
     }
 
-    public void prepare() throws IOException, IllegalStateException {
+    public void prepare() throws IllegalStateException, IOException {
         _prepare();
     }
 
@@ -539,16 +540,16 @@ public final class SemMediaCapture {
     }
 
     public float getProgressForCapture() throws IllegalStateException {
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
         try {
-            obtain.writeInterfaceToken(IMEDIA_CAPTURE);
-            obtain.writeInt(2);
-            invoke(obtain, obtain2);
-            return obtain2.readFloat();
+            parcelObtain.writeInterfaceToken(IMEDIA_CAPTURE);
+            parcelObtain.writeInt(2);
+            invoke(parcelObtain, parcelObtain2);
+            return parcelObtain2.readFloat();
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
@@ -577,19 +578,19 @@ public final class SemMediaCapture {
         }
 
         protected Parcel writeToParcel() {
-            Parcel obtain = Parcel.obtain();
-            obtain.writeInterfaceToken(SemMediaCapture.IMEDIA_CAPTURE);
-            obtain.writeInt(this.mBGMInfos.size());
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.writeInterfaceToken(SemMediaCapture.IMEDIA_CAPTURE);
+            parcelObtain.writeInt(this.mBGMInfos.size());
             Log.i(SemMediaCapture.TAG, "BackgroundMusic size : " + this.mBGMInfos.size());
             for (int i = 0; i < this.mBGMInfos.size(); i++) {
-                obtain.writeFileDescriptor(this.mBGMInfos.get(i).fd);
-                obtain.writeLong(this.mBGMInfos.get(i).offset);
-                obtain.writeLong(this.mBGMInfos.get(i).length);
-                obtain.writeInt(this.mBGMInfos.get(i).startTimeMs);
-                obtain.writeInt(this.mBGMInfos.get(i).endTimeMs);
-                obtain.writeInt(this.mBGMInfos.get(i).durationMs);
+                parcelObtain.writeFileDescriptor(this.mBGMInfos.get(i).fd);
+                parcelObtain.writeLong(this.mBGMInfos.get(i).offset);
+                parcelObtain.writeLong(this.mBGMInfos.get(i).length);
+                parcelObtain.writeInt(this.mBGMInfos.get(i).startTimeMs);
+                parcelObtain.writeInt(this.mBGMInfos.get(i).endTimeMs);
+                parcelObtain.writeInt(this.mBGMInfos.get(i).durationMs);
             }
-            return obtain;
+            return parcelObtain;
         }
 
         protected BGMInfo addInfo(BGMInfo bGMInfo, FileDescriptor fileDescriptor, int i, int i2) {
@@ -662,12 +663,12 @@ public final class SemMediaCapture {
         @Override // com.samsung.android.media.mediacapture.SemMediaCapture.BackgroundMusic
         public Parcel writeToParcel() {
             addSections();
-            Parcel writeToParcel = super.writeToParcel();
-            writeToParcel.writeInt(1);
-            writeToParcel.writeInt(this.mBodyCycle);
-            writeToParcel.writeInt(this.mLastIndex);
-            writeToParcel.writeInt(this.mEndOutro ? 1 : 0);
-            return writeToParcel;
+            Parcel parcelWriteToParcel = super.writeToParcel();
+            parcelWriteToParcel.writeInt(1);
+            parcelWriteToParcel.writeInt(this.mBodyCycle);
+            parcelWriteToParcel.writeInt(this.mLastIndex);
+            parcelWriteToParcel.writeInt(this.mEndOutro ? 1 : 0);
+            return parcelWriteToParcel;
         }
 
         public void setIntro(FileDescriptor fileDescriptor, int i, int i2) {
@@ -741,18 +742,18 @@ public final class SemMediaCapture {
         if (backgroundMusic == null) {
             throw new NullPointerException("BackgroundMusic param can not be null.");
         }
-        Parcel writeToParcel = backgroundMusic.writeToParcel();
-        _setBackgroundMusic(writeToParcel);
-        writeToParcel.recycle();
+        Parcel parcelWriteToParcel = backgroundMusic.writeToParcel();
+        _setBackgroundMusic(parcelWriteToParcel);
+        parcelWriteToParcel.recycle();
     }
 
     public void setBackgroundMusic(SemBackgroundMusic semBackgroundMusic) throws IllegalStateException {
         if (semBackgroundMusic == null) {
             throw new NullPointerException("SemBackgroundMusic param can not be null.");
         }
-        Parcel writeToParcel = semBackgroundMusic.writeToParcel(IMEDIA_CAPTURE);
-        _setBackgroundMusic(writeToParcel);
-        writeToParcel.recycle();
+        Parcel parcelWriteToParcel = semBackgroundMusic.writeToParcel(IMEDIA_CAPTURE);
+        _setBackgroundMusic(parcelWriteToParcel);
+        parcelWriteToParcel.recycle();
     }
 
     private void updateSurfaceScreenOn() {

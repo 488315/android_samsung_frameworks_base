@@ -9,13 +9,11 @@ import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class IntroPreference extends Preference {
     public final boolean isCollapsable;
     public final int minLines;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,8 +36,8 @@ public final class IntroPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedBelow = false;
         preferenceViewHolder.mDividerAllowedAbove = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.collapsable_summary);
-        CollapsableTextView collapsableTextView = findViewById instanceof CollapsableTextView ? (CollapsableTextView) findViewById : null;
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.collapsable_summary);
+        CollapsableTextView collapsableTextView = viewFindViewById instanceof CollapsableTextView ? (CollapsableTextView) viewFindViewById : null;
         if (collapsableTextView != null) {
             boolean z = this.isCollapsable;
             collapsableTextView.isCollapsable = z;

@@ -52,9 +52,9 @@ public interface IAppFunctionEnabledCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppFunctionEnabledCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppFunctionEnabledCallback)) {
-                return (IAppFunctionEnabledCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppFunctionEnabledCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppFunctionEnabledCallback)) {
+                return (IAppFunctionEnabledCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,24 +113,24 @@ public interface IAppFunctionEnabledCallback extends IInterface {
 
             @Override // android.app.appfunctions.IAppFunctionEnabledCallback
             public void onSuccess() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAppFunctionEnabledCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAppFunctionEnabledCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.appfunctions.IAppFunctionEnabledCallback
             public void onError(ParcelableException parcelableException) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAppFunctionEnabledCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelableException, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAppFunctionEnabledCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelableException, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

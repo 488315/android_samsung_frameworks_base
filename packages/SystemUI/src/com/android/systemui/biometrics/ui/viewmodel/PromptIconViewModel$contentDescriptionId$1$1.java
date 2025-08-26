@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptIconViewModel$contentDescriptionId$1$1 extends SuspendLambda implements Function6 {
     /* synthetic */ Object L$0;
@@ -29,19 +28,23 @@ final class PromptIconViewModel$contentDescriptionId$1$1 extends SuspendLambda i
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj3).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj4).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj5).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj5).booleanValue();
         PromptIconViewModel$contentDescriptionId$1$1 promptIconViewModel$contentDescriptionId$1$1 = new PromptIconViewModel$contentDescriptionId$1$1(this.this$0, (Continuation) obj6);
         promptIconViewModel$contentDescriptionId$1$1.L$0 = (FingerprintSensorType) obj;
         promptIconViewModel$contentDescriptionId$1$1.L$1 = (PromptAuthState) obj2;
-        promptIconViewModel$contentDescriptionId$1$1.Z$0 = booleanValue;
-        promptIconViewModel$contentDescriptionId$1$1.Z$1 = booleanValue2;
-        promptIconViewModel$contentDescriptionId$1$1.Z$2 = booleanValue3;
+        promptIconViewModel$contentDescriptionId$1$1.Z$0 = zBooleanValue;
+        promptIconViewModel$contentDescriptionId$1$1.Z$1 = zBooleanValue2;
+        promptIconViewModel$contentDescriptionId$1$1.Z$2 = zBooleanValue3;
         return promptIconViewModel$contentDescriptionId$1$1.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         int i;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -58,17 +61,11 @@ final class PromptIconViewModel$contentDescriptionId$1$1 extends SuspendLambda i
         boolean z4 = promptAuthState.isAuthenticated;
         promptIconViewModel.getClass();
         if (z2) {
-            if (PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0[fingerprintSensorType.ordinal()] != 1) {
-                i = R.string.biometric_dialog_confirm;
-            }
-            i = -1;
+            i = PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0[fingerprintSensorType.ordinal()] == 1 ? -1 : R.string.biometric_dialog_confirm;
         } else if (z || z4) {
             i = PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0[fingerprintSensorType.ordinal()] == 1 ? R.string.security_settings_sfps_enroll_find_sensor_message : R.string.accessibility_fingerprint_label;
-        } else {
-            if (z3) {
-                i = R.string.biometric_dialog_try_again;
-            }
-            i = -1;
+        } else if (z3) {
+            i = R.string.biometric_dialog_try_again;
         }
         return new Integer(i);
     }

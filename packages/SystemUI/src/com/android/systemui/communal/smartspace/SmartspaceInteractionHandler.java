@@ -13,14 +13,12 @@ import com.android.systemui.log.core.Logger;
 import com.android.systemui.plugins.ActivityStarter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SmartspaceInteractionHandler implements RemoteViews.InteractionHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ActivityStarter activityStarter;
     public final InteractionHandlerDelegate delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,7 @@ public final class SmartspaceInteractionHandler implements RemoteViews.Interacti
         this.delegate = new InteractionHandlerDelegate(communalSceneInteractor, new SmartspaceInteractionHandler$$ExternalSyntheticLambda0(), new InteractionHandlerDelegate.IntentStarter() { // from class: com.android.systemui.communal.smartspace.SmartspaceInteractionHandler$delegate$2
             @Override // com.android.systemui.communal.util.InteractionHandlerDelegate.IntentStarter
             public final void startActivity(PendingIntent pendingIntent, Intent intent, ActivityOptions activityOptions, CommunalTransitionAnimatorController communalTransitionAnimatorController) {
-                SmartspaceInteractionHandler.this.activityStarter.startPendingIntentWithoutDismissing(pendingIntent, false, null, communalTransitionAnimatorController, intent, activityOptions.toBundle());
+                this.this$0.activityStarter.startPendingIntentWithoutDismissing(pendingIntent, false, null, communalTransitionAnimatorController, intent, activityOptions.toBundle());
             }
         }, new Logger(logBuffer, "SmartspaceInteractionHandler"));
     }

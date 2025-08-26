@@ -17,7 +17,6 @@ import com.android.systemui.dextouchpad.util.Features;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.shared.system.QuickStepContract;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class StartingGuideDialog extends AlertDialog {
     public final SettingsRepository mSettingsRepo;
@@ -37,15 +36,15 @@ public class StartingGuideDialog extends AlertDialog {
                 StartingGuideDialog.this.dismiss();
             }
         });
-        View inflate = LayoutInflater.from(context).inflate(QuickStepContract.isGesturalMode(i) ? R.layout.dialog_start_touchpad_on_your_phone_noti : R.layout.dialog_start_touchpad_on_your_phone_navbar, (ViewGroup) null);
+        View viewInflate = LayoutInflater.from(context).inflate(QuickStepContract.isGesturalMode(i) ? R.layout.dialog_start_touchpad_on_your_phone_noti : R.layout.dialog_start_touchpad_on_your_phone_navbar, (ViewGroup) null);
         Configuration configuration = context.getResources().getConfiguration();
         int i2 = ((configuration.screenHeightDp * configuration.densityDpi) / 160) - 34;
-        if (inflate.getHeight() > i2) {
-            ViewGroup.LayoutParams layoutParams = inflate.getLayoutParams();
+        if (viewInflate.getHeight() > i2) {
+            ViewGroup.LayoutParams layoutParams = viewInflate.getLayoutParams();
             layoutParams.height = i2;
-            inflate.setLayoutParams(layoutParams);
+            viewInflate.setLayoutParams(layoutParams);
         }
-        setView(inflate);
+        setView(viewInflate);
         Window window = getWindow();
         if (window != null) {
             window.setType(2008);

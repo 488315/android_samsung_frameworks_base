@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CachedBluetoothCastDevice implements Comparable {
     public final String TAG;
@@ -39,7 +38,6 @@ public class CachedBluetoothCastDevice implements Comparable {
     public int mSequence;
     public final Handler toastHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ToastRunnable implements Runnable {
         public final int mLength;
         public final String mText;
@@ -56,6 +54,7 @@ public class CachedBluetoothCastDevice implements Comparable {
     }
 
     public CachedBluetoothCastDevice(Context context, LocalBluetoothCastProfileManager localBluetoothCastProfileManager, SemBluetoothCastDevice semBluetoothCastDevice) {
+        AudioCastProfile audioCastProfile;
         String simpleName = getClass().getSimpleName();
         this.TAG = simpleName;
         LinkedHashSet linkedHashSet = new LinkedHashSet();
@@ -71,12 +70,7 @@ public class CachedBluetoothCastDevice implements Comparable {
         synchronized (localBluetoothCastProfileManager) {
             try {
                 linkedHashSet.clear();
-                if (arrayList.contains(1)) {
-                    AudioCastProfile audioCastProfile = localBluetoothCastProfileManager.mAudioCastProfile;
-                    if (audioCastProfile == null) {
-                        if (!linkedHashSet.contains(audioCastProfile)) {
-                        }
-                    }
+                if (arrayList.contains(1) && ((audioCastProfile = localBluetoothCastProfileManager.mAudioCastProfile) != null || !linkedHashSet.contains(audioCastProfile))) {
                     Log.d("LocalBluetoothCastProfileManager", "Audio Cast Profile added");
                     linkedHashSet.add(localBluetoothCastProfileManager.mAudioCastProfile);
                 }
@@ -180,7 +174,13 @@ public class CachedBluetoothCastDevice implements Comparable {
         return this.mCastDevice.equals(((CachedBluetoothCastDevice) obj).mCastDevice);
     }
 
-    public final Drawable getBtCastDrawable() {
+    /* JADX WARN: Removed duplicated region for block: B:51:0x0104  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x0126  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x014f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final Drawable getBtCastDrawable() throws Resources.NotFoundException {
         Drawable drawable = this.mContext.getResources().getDrawable(R.drawable.list_ic_general_device);
         if (this.mCastDevice.getBluetoothCastType() == 1) {
             Resources resources = this.mContext.getResources();
@@ -193,46 +193,33 @@ public class CachedBluetoothCastDevice implements Comparable {
                 deviceIcon = R.drawable.list_ic_sound_accessory_default;
                 if (bluetoothClass != null) {
                     int majorDeviceClass = bluetoothClass.getMajorDeviceClass();
-                    if (majorDeviceClass == 256) {
-                        if (bluetoothClass.getDeviceClass() != 284) {
-                            deviceIcon = R.drawable.list_ic_laptop;
-                        }
-                        deviceIcon = R.drawable.list_ic_tablet;
-                    } else if (majorDeviceClass == 512) {
-                        byte[] manufacturerData2 = this.mCastDevice.getManufacturerData();
-                        ManufacturerData manufacturerData3 = new ManufacturerData(manufacturerData2);
-                        if (manufacturerData2 == null || manufacturerData3.mManufacturerType != 2 || manufacturerData3.mData.mDeviceCategory != 2) {
-                            deviceIcon = R.drawable.list_ic_mobile;
-                        }
-                        deviceIcon = R.drawable.list_ic_tablet;
-                    } else if (majorDeviceClass == 1024) {
-                        if (deviceName != null) {
+                    if (majorDeviceClass != 256) {
+                        if (majorDeviceClass == 512) {
+                            byte[] manufacturerData2 = this.mCastDevice.getManufacturerData();
+                            ManufacturerData manufacturerData3 = new ManufacturerData(manufacturerData2);
+                            deviceIcon = (manufacturerData2 != null && manufacturerData3.mManufacturerType == 2 && manufacturerData3.mData.mDeviceCategory == 2) ? R.drawable.list_ic_tablet : R.drawable.list_ic_mobile;
+                        } else if (majorDeviceClass != 1024) {
+                            if (majorDeviceClass == 1536) {
+                                deviceIcon = (bluetoothClass.getDeviceClass() == 1664 || bluetoothClass.getDeviceClass() == 1600) ? R.drawable.list_ic_printer : R.drawable.list_ic_camera;
+                            } else if (majorDeviceClass == 1792 && bluetoothClass.getDeviceClass() == 1796) {
+                                deviceIcon = (deviceName == null || !(deviceName.toUpperCase().startsWith("GEAR FIT") || deviceName.toUpperCase().startsWith("GALAXY FIT"))) ? R.drawable.list_ic_wearable : R.drawable.list_ic_band;
+                            } else if (!bluetoothClass.doesClassMatch(1) && bluetoothClass.doesClassMatch(0)) {
+                                deviceIcon = R.drawable.list_ic_mono_headset;
+                            }
+                        } else if (deviceName != null) {
                             int i = deviceName.toUpperCase().startsWith("SAMSUNG LEVEL") ? deviceName.toUpperCase().contains("BOX") ? R.drawable.list_ic_dlna_audio : R.drawable.list_ic_headset : (deviceName.toUpperCase().startsWith("GEAR CIRCLE") && isGearIconX()) ? R.drawable.list_ic_gear_circle : 0;
                             if (i != 0) {
                                 deviceIcon = i;
                             }
-                        }
-                        if (isGearIconX()) {
+                        } else if (isGearIconX()) {
                             deviceIcon = R.drawable.list_ic_true_wireless_earbuds;
                         } else if (bluetoothClass.getDeviceClass() == 1084) {
                             deviceIcon = R.drawable.list_ic_tv;
-                        } else {
-                            if (bluetoothClass.getDeviceClass() == 1076) {
-                                deviceIcon = R.drawable.list_ic_camcoder;
-                            }
-                            if (!bluetoothClass.doesClassMatch(1)) {
-                                deviceIcon = R.drawable.list_ic_mono_headset;
-                            }
+                        } else if (bluetoothClass.getDeviceClass() == 1076) {
+                            deviceIcon = R.drawable.list_ic_camcoder;
                         }
-                    } else if (majorDeviceClass != 1536) {
-                        if (majorDeviceClass == 1792 && bluetoothClass.getDeviceClass() == 1796) {
-                            deviceIcon = (deviceName == null || !(deviceName.toUpperCase().startsWith("GEAR FIT") || deviceName.toUpperCase().startsWith("GALAXY FIT"))) ? R.drawable.list_ic_wearable : R.drawable.list_ic_band;
-                        }
-                        if (!bluetoothClass.doesClassMatch(1) && bluetoothClass.doesClassMatch(0)) {
-                            deviceIcon = R.drawable.list_ic_mono_headset;
-                        }
-                    } else {
-                        deviceIcon = (bluetoothClass.getDeviceClass() == 1664 || bluetoothClass.getDeviceClass() == 1600) ? R.drawable.list_ic_printer : R.drawable.list_ic_camera;
+                    } else if (bluetoothClass.getDeviceClass() != 284) {
+                        deviceIcon = R.drawable.list_ic_laptop;
                     }
                 } else {
                     Log.w(this.TAG, "mBtClass is null");

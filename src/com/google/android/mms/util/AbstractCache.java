@@ -33,9 +33,9 @@ public abstract class AbstractCache<K, V> {
     }
 
     public V purge(K k) {
-        CacheEntry<V> remove = this.mCacheMap.remove(k);
-        if (remove != null) {
-            return remove.value;
+        CacheEntry<V> cacheEntryRemove = this.mCacheMap.remove(k);
+        if (cacheEntryRemove != null) {
+            return cacheEntryRemove.value;
         }
         return null;
     }

@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SingleChoiceTemplate extends CommandTemplate {
     public final String mCurrentActiveValue;
@@ -64,7 +63,6 @@ public class SingleChoiceTemplate extends CommandTemplate {
         return 5;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Entry {
         public final int mIconResId;
         public final String mPrimaryTitle;
@@ -105,12 +103,12 @@ public class SingleChoiceTemplate extends CommandTemplate {
                 String str2 = null;
                 String str3 = (arrayList == null || arrayList.size() <= i) ? null : (String) this.mEntrySecondaryTitleList.get(i);
                 ArrayList arrayList2 = this.mEntryImageList;
-                int intValue = (arrayList2 == null || arrayList2.size() <= i) ? 0 : ((Integer) this.mEntryImageList.get(i)).intValue();
+                int iIntValue = (arrayList2 == null || arrayList2.size() <= i) ? 0 : ((Integer) this.mEntryImageList.get(i)).intValue();
                 ArrayList arrayList3 = this.mEntryValueList;
                 if (arrayList3 != null && arrayList3.size() > i) {
                     str2 = (String) this.mEntryValueList.get(i);
                 }
-                this.mEntries.add(new Entry(str, str3, intValue, str2));
+                this.mEntries.add(new Entry(str, str3, iIntValue, str2));
                 i++;
             }
         }

@@ -1,6 +1,9 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
+import android.app.Notification;
 import android.os.Handler;
+import android.service.notification.StatusBarNotification;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.Dumpable;
 import com.android.systemui.dump.DumpManager;
@@ -16,7 +19,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpable {
@@ -27,25 +29,9 @@ public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpab
     private InternalNotifUpdater mNotifUpdater;
     private final SubscreenQuickReplyExtender mQuickReplyExtender = new SubscreenQuickReplyExtender();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SubscreenQuickReplyExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public SubscreenQuickReplyExtender() {
-            /*
-                r3 = this;
-                com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator.this = r4
-                boolean r0 = com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinatorKt.access$getDEBUG()
-                android.os.Handler r4 = com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator.access$getMMainHandler$p(r4)
-                java.lang.String r1 = "SubscreenQuickReplyCoordinator"
-                java.lang.String r2 = "SubscreenQuickReply"
-                r3.<init>(r1, r2, r0, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator.SubscreenQuickReplyExtender.<init>(com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator):void");
+            super("SubscreenQuickReplyCoordinator", "SubscreenQuickReply", SubscreenQuickReplyCoordinatorKt.getDEBUG(), SubscreenQuickReplyCoordinator.this.mMainHandler);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -55,6 +41,47 @@ public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpab
                 ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("   should extend lifetime - "), notificationEntry.mKey, "SubscreenQuickReplyCoordinator");
             }
             return z;
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator$registerSubscreenStateChangeListener$1, reason: invalid class name and case insensitive filesystem */
+    public final class C10791 {
+        public C10791() {
+        }
+
+        public void onHideDetail(String str) {
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("   end extension - ", str, "SubscreenQuickReplyCoordinator");
+            SubscreenQuickReplyExtender mQuickReplyExtender = SubscreenQuickReplyCoordinator.this.getMQuickReplyExtender();
+            if (str == null) {
+                str = "";
+            }
+            mQuickReplyExtender.endLifetimeExtension(str);
+        }
+
+        public void onReply(NotificationEntry notificationEntry) {
+            StatusBarNotification statusBarNotification;
+            Notification notification2;
+            int iIntValue;
+            Notification notification3;
+            Notification notification4;
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("   subscreen quick reply - ", notificationEntry != null ? notificationEntry.mKey : null, "SubscreenQuickReplyCoordinator");
+            if (notificationEntry != null && (statusBarNotification = notificationEntry.mSbn) != null && (notification2 = statusBarNotification.getNotification()) != null) {
+                StatusBarNotification statusBarNotification2 = notificationEntry.mSbn;
+                if (statusBarNotification2 == null || (notification4 = statusBarNotification2.getNotification()) == null) {
+                    StatusBarNotification statusBarNotification3 = notificationEntry.mSbn;
+                    Integer numValueOf = (statusBarNotification3 == null || (notification3 = statusBarNotification3.getNotification()) == null) ? null : Integer.valueOf(notification3.flags);
+                    numValueOf.getClass();
+                    iIntValue = numValueOf.intValue();
+                } else {
+                    iIntValue = notification4.flags | 8;
+                }
+                notification2.flags = iIntValue;
+            }
+            InternalNotifUpdater internalNotifUpdater = SubscreenQuickReplyCoordinator.this.mNotifUpdater;
+            if (internalNotifUpdater == null) {
+                internalNotifUpdater = null;
+            }
+            ((NotifCollection$$ExternalSyntheticLambda0) internalNotifUpdater).onInternalNotificationUpdate("Extending lifetime of notification with subscreen quick reply", notificationEntry != null ? notificationEntry.mSbn : null);
         }
     }
 
@@ -80,7 +107,7 @@ public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpab
     }
 
     public final SemWindowManager.FoldStateListener getFoldStateListener() {
-        return new SemWindowManager.FoldStateListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator$getFoldStateListener$1
+        return new SemWindowManager.FoldStateListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SubscreenQuickReplyCoordinator.getFoldStateListener.1
             public void onFoldStateChanged(boolean z) {
                 SubscreenQuickReplyCoordinator.this.setMIsFolded(z);
                 if (z) {
@@ -108,7 +135,7 @@ public final class SubscreenQuickReplyCoordinator implements Coordinator, Dumpab
 
     public final void registerSubscreenStateChangeListener() {
         SubscreenNotificationController subscreenNotificationController = this.mController;
-        ((ArrayList) subscreenNotificationController.subscreenStateListenerList).add(new SubscreenQuickReplyCoordinator$registerSubscreenStateChangeListener$1(this));
+        ((ArrayList) subscreenNotificationController.subscreenStateListenerList).add(new C10791());
     }
 
     public final void setMIsFolded(boolean z) {

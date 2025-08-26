@@ -10,7 +10,6 @@ import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NestedMutableSnapshot extends MutableSnapshot {
     public boolean deactivated;
@@ -31,7 +30,7 @@ public final class NestedMutableSnapshot extends MutableSnapshot {
         }
         MutableScatterSet mutableScatterSet = this.modified;
         long j = this.snapshotId;
-        Map access$optimisticMerges = mutableScatterSet != null ? SnapshotKt.access$optimisticMerges(mutableSnapshot.getSnapshotId(), this, this.parent.getInvalid$runtime_release()) : null;
+        Map mapAccess$optimisticMerges = mutableScatterSet != null ? SnapshotKt.access$optimisticMerges(mutableSnapshot.getSnapshotId(), this, this.parent.getInvalid$runtime_release()) : null;
         Object obj = SnapshotKt.lock;
         synchronized (obj) {
             try {
@@ -41,9 +40,9 @@ public final class NestedMutableSnapshot extends MutableSnapshot {
                     nestedMutableSnapshot.closeAndReleasePinning$runtime_release();
                 } else {
                     nestedMutableSnapshot = this;
-                    SnapshotApplyResult innerApplyLocked$runtime_release = nestedMutableSnapshot.innerApplyLocked$runtime_release(this.parent.getSnapshotId(), mutableScatterSet, access$optimisticMerges, this.parent.getInvalid$runtime_release());
-                    if (!Intrinsics.areEqual(innerApplyLocked$runtime_release, SnapshotApplyResult.Success.INSTANCE)) {
-                        return innerApplyLocked$runtime_release;
+                    SnapshotApplyResult snapshotApplyResultInnerApplyLocked$runtime_release = nestedMutableSnapshot.innerApplyLocked$runtime_release(this.parent.getSnapshotId(), mutableScatterSet, mapAccess$optimisticMerges, this.parent.getInvalid$runtime_release());
+                    if (!Intrinsics.areEqual(snapshotApplyResultInnerApplyLocked$runtime_release, SnapshotApplyResult.Success.INSTANCE)) {
+                        return snapshotApplyResultInnerApplyLocked$runtime_release;
                     }
                     MutableScatterSet modified$runtime_release = nestedMutableSnapshot.parent.getModified$runtime_release();
                     if (modified$runtime_release != null) {
@@ -65,9 +64,9 @@ public final class NestedMutableSnapshot extends MutableSnapshot {
                 if (i >= 0) {
                     int[] iArr = mutableSnapshot3.previousPinnedSnapshots;
                     int length = iArr.length;
-                    int[] copyOf = Arrays.copyOf(iArr, length + 1);
-                    copyOf[length] = i;
-                    mutableSnapshot3.previousPinnedSnapshots = copyOf;
+                    int[] iArrCopyOf = Arrays.copyOf(iArr, length + 1);
+                    iArrCopyOf[length] = i;
+                    mutableSnapshot3.previousPinnedSnapshots = iArrCopyOf;
                 } else {
                     mutableSnapshot3.getClass();
                 }
@@ -78,14 +77,14 @@ public final class NestedMutableSnapshot extends MutableSnapshot {
                     mutableSnapshot4.previousIds = mutableSnapshot4.previousIds.or(snapshotIdSet);
                     Unit unit = Unit.INSTANCE;
                     MutableSnapshot mutableSnapshot5 = nestedMutableSnapshot.parent;
-                    int[] iArr2 = nestedMutableSnapshot.previousPinnedSnapshots;
+                    int[] iArrPlus = nestedMutableSnapshot.previousPinnedSnapshots;
                     mutableSnapshot5.getClass();
-                    if (iArr2.length != 0) {
-                        int[] iArr3 = mutableSnapshot5.previousPinnedSnapshots;
-                        if (iArr3.length != 0) {
-                            iArr2 = ArraysKt___ArraysJvmKt.plus(iArr3, iArr2);
+                    if (iArrPlus.length != 0) {
+                        int[] iArr2 = mutableSnapshot5.previousPinnedSnapshots;
+                        if (iArr2.length != 0) {
+                            iArrPlus = ArraysKt___ArraysJvmKt.plus(iArr2, iArrPlus);
                         }
-                        mutableSnapshot5.previousPinnedSnapshots = iArr2;
+                        mutableSnapshot5.previousPinnedSnapshots = iArrPlus;
                     }
                 }
                 nestedMutableSnapshot.applied = true;

@@ -1,5 +1,7 @@
 package com.android.systemui.statusbar.notification.row;
 
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.view.View;
@@ -46,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExpandableNotificationRowController implements NotifViewController {
     public static final Uri BUBBLES_SETTING_URI = Settings.Secure.getUriFor("notification_bubbles");
@@ -98,13 +99,12 @@ public class ExpandableNotificationRowController implements NotifViewController 
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowController$1, reason: invalid class name */
     public class AnonymousClass1 implements NotificationSettingsController.Listener {
         public AnonymousClass1() {
         }
 
-        public final void onSettingChanged(int i, Uri uri, String str) {
+        public final void onSettingChanged(int i, Uri uri, String str) throws Resources.NotFoundException {
             if (ExpandableNotificationRowController.BUBBLES_SETTING_URI.equals(uri)) {
                 int i2 = NotificationBundleUi.$r8$clinit;
                 ExpandableNotificationRowController expandableNotificationRowController = ExpandableNotificationRowController.this;
@@ -119,7 +119,6 @@ public class ExpandableNotificationRowController implements NotifViewController 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.ExpandableNotificationRowController$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
@@ -131,11 +130,11 @@ public class ExpandableNotificationRowController implements NotifViewController 
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationRowLogger$$ExternalSyntheticLambda0 notificationRowLogger$$ExternalSyntheticLambda0 = new NotificationRowLogger$$ExternalSyntheticLambda0(12);
             LogBuffer logBuffer = notificationRowLogger.notificationRenderBuffer;
-            LogMessage obtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotifRow", logLevel, notificationRowLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.bool1 = z;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
@@ -183,7 +182,7 @@ public class ExpandableNotificationRowController implements NotifViewController 
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.render.NodeController
-    public final void addChildAt(NodeController nodeController, int i) {
+    public final void addChildAt(NodeController nodeController, int i) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) nodeController.getView();
         this.mView.addChildNotification((ExpandableNotificationRow) nodeController.getView(), i);
         NotificationStackScrollLayoutController.this.mView.onViewAddedInternal(expandableNotificationRow);
@@ -221,7 +220,7 @@ public class ExpandableNotificationRowController implements NotifViewController 
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.render.NodeController
-    public final void moveChildTo(NodeController nodeController, int i) {
+    public final void moveChildTo(NodeController nodeController, int i) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) nodeController.getView();
         expandableNotificationRow.mChangingPosition = true;
         ExpandableNotificationRow expandableNotificationRow2 = this.mView;
@@ -243,7 +242,7 @@ public class ExpandableNotificationRowController implements NotifViewController 
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.render.NodeController
-    public final void removeChild(NodeController nodeController, boolean z) {
+    public final void removeChild(NodeController nodeController, boolean z) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) nodeController.getView();
         if (z) {
             expandableNotificationRow.mChangingPosition = true;
@@ -257,7 +256,7 @@ public class ExpandableNotificationRowController implements NotifViewController 
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.render.NodeController
-    public final boolean removeFromParentIfKeptForAnimation() {
+    public final boolean removeFromParentIfKeptForAnimation() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ExpandableNotificationRow expandableNotificationRow = this.mView;
         ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow.mNotificationParent;
         if (!expandableNotificationRow.mKeepInParentForDismissAnimation || expandableNotificationRow2 == null) {

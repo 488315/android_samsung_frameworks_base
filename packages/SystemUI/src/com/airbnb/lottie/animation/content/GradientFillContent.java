@@ -1,10 +1,15 @@
 package com.airbnb.lottie.animation.content;
 
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RadialGradient;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import androidx.collection.LongSparseArray;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieDrawable;
@@ -17,6 +22,7 @@ import com.airbnb.lottie.animation.keyframe.IntegerKeyframeAnimation;
 import com.airbnb.lottie.animation.keyframe.PointKeyframeAnimation;
 import com.airbnb.lottie.animation.keyframe.ValueCallbackKeyframeAnimation;
 import com.airbnb.lottie.model.KeyPath;
+import com.airbnb.lottie.model.content.GradientColor;
 import com.airbnb.lottie.model.content.GradientFill;
 import com.airbnb.lottie.model.content.GradientType;
 import com.airbnb.lottie.model.layer.BaseLayer;
@@ -25,7 +31,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class GradientFillContent implements DrawingContent, BaseKeyframeAnimation.AnimationListener, KeyPathElementContent {
     public BaseKeyframeAnimation blurAnimation;
@@ -64,26 +69,26 @@ public class GradientFillContent implements DrawingContent, BaseKeyframeAnimatio
         this.type = gradientFill.gradientType;
         path.setFillType(gradientFill.fillType);
         this.cacheSteps = (int) (lottieComposition.getDuration() / 32.0f);
-        BaseKeyframeAnimation createAnimation = gradientFill.gradientColor.createAnimation();
-        this.colorAnimation = (GradientColorKeyframeAnimation) createAnimation;
-        createAnimation.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation);
-        BaseKeyframeAnimation createAnimation2 = gradientFill.opacity.createAnimation();
-        this.opacityAnimation = (IntegerKeyframeAnimation) createAnimation2;
-        createAnimation2.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation2);
-        BaseKeyframeAnimation createAnimation3 = gradientFill.startPoint.createAnimation();
-        this.startPointAnimation = (PointKeyframeAnimation) createAnimation3;
-        createAnimation3.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation3);
-        BaseKeyframeAnimation createAnimation4 = gradientFill.endPoint.createAnimation();
-        this.endPointAnimation = (PointKeyframeAnimation) createAnimation4;
-        createAnimation4.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation4);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = gradientFill.gradientColor.createAnimation();
+        this.colorAnimation = (GradientColorKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = gradientFill.opacity.createAnimation();
+        this.opacityAnimation = (IntegerKeyframeAnimation) baseKeyframeAnimationCreateAnimation2;
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = gradientFill.startPoint.createAnimation();
+        this.startPointAnimation = (PointKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation4 = gradientFill.endPoint.createAnimation();
+        this.endPointAnimation = (PointKeyframeAnimation) baseKeyframeAnimationCreateAnimation4;
+        baseKeyframeAnimationCreateAnimation4.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation4);
         if (baseLayer.getBlurEffect() != null) {
-            BaseKeyframeAnimation createAnimation5 = baseLayer.getBlurEffect().blurriness.createAnimation();
-            this.blurAnimation = createAnimation5;
-            createAnimation5.addUpdateListener(this);
+            BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation5 = baseLayer.getBlurEffect().blurriness.createAnimation();
+            this.blurAnimation = baseKeyframeAnimationCreateAnimation5;
+            baseKeyframeAnimationCreateAnimation5.addUpdateListener(this);
             baseLayer.addAnimation(this.blurAnimation);
         }
         if (baseLayer.getDropShadowEffect() != null) {
@@ -188,20 +193,78 @@ public class GradientFillContent implements DrawingContent, BaseKeyframeAnimatio
         return iArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00e5  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x011b  */
     @Override // com.airbnb.lottie.animation.content.DrawingContent
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void draw(android.graphics.Canvas r21, android.graphics.Matrix r22, int r23) {
-        /*
-            Method dump skipped, instructions count: 335
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.airbnb.lottie.animation.content.GradientFillContent.draw(android.graphics.Canvas, android.graphics.Matrix, int):void");
+    public final void draw(Canvas canvas, Matrix matrix, int i) {
+        Shader shader;
+        Shader radialGradient;
+        if (this.hidden) {
+            return;
+        }
+        this.path.reset();
+        for (int i2 = 0; i2 < ((ArrayList) this.paths).size(); i2++) {
+            this.path.addPath(((PathContent) ((ArrayList) this.paths).get(i2)).getPath(), matrix);
+        }
+        this.path.computeBounds(this.boundsRect, false);
+        GradientType gradientType = GradientType.LINEAR;
+        GradientColorKeyframeAnimation gradientColorKeyframeAnimation = this.colorAnimation;
+        PointKeyframeAnimation pointKeyframeAnimation = this.endPointAnimation;
+        PointKeyframeAnimation pointKeyframeAnimation2 = this.startPointAnimation;
+        if (this.type == gradientType) {
+            long gradientHash$1 = getGradientHash$1();
+            LongSparseArray longSparseArray = this.linearGradientCache;
+            shader = (LinearGradient) longSparseArray.get(gradientHash$1);
+            if (shader == null) {
+                PointF pointF = (PointF) pointKeyframeAnimation2.getValue();
+                PointF pointF2 = (PointF) pointKeyframeAnimation.getValue();
+                GradientColor gradientColor = (GradientColor) gradientColorKeyframeAnimation.getValue();
+                radialGradient = new LinearGradient(pointF.x, pointF.y, pointF2.x, pointF2.y, applyDynamicColorsIfNeeded$1(gradientColor.colors), gradientColor.positions, Shader.TileMode.CLAMP);
+                longSparseArray.put(gradientHash$1, radialGradient);
+                shader = radialGradient;
+            }
+        } else {
+            long gradientHash$12 = getGradientHash$1();
+            LongSparseArray longSparseArray2 = this.radialGradientCache;
+            shader = (RadialGradient) longSparseArray2.get(gradientHash$12);
+            if (shader == null) {
+                PointF pointF3 = (PointF) pointKeyframeAnimation2.getValue();
+                PointF pointF4 = (PointF) pointKeyframeAnimation.getValue();
+                GradientColor gradientColor2 = (GradientColor) gradientColorKeyframeAnimation.getValue();
+                int[] iArrApplyDynamicColorsIfNeeded$1 = applyDynamicColorsIfNeeded$1(gradientColor2.colors);
+                float f = pointF3.x;
+                float f2 = pointF3.y;
+                float fHypot = (float) Math.hypot(pointF4.x - f, pointF4.y - f2);
+                if (fHypot <= 0.0f) {
+                    fHypot = 0.001f;
+                }
+                radialGradient = new RadialGradient(f, f2, fHypot, iArrApplyDynamicColorsIfNeeded$1, gradientColor2.positions, Shader.TileMode.CLAMP);
+                longSparseArray2.put(gradientHash$12, radialGradient);
+                shader = radialGradient;
+            }
+        }
+        shader.setLocalMatrix(matrix);
+        LPaint lPaint = this.paint;
+        lPaint.setShader(shader);
+        ValueCallbackKeyframeAnimation valueCallbackKeyframeAnimation = this.colorFilterAnimation;
+        if (valueCallbackKeyframeAnimation != null) {
+            lPaint.setColorFilter((ColorFilter) valueCallbackKeyframeAnimation.getValue());
+        }
+        BaseKeyframeAnimation baseKeyframeAnimation = this.blurAnimation;
+        if (baseKeyframeAnimation != null) {
+            float fFloatValue = ((Float) baseKeyframeAnimation.getValue()).floatValue();
+            if (fFloatValue == 0.0f) {
+                lPaint.setMaskFilter(null);
+            } else if (fFloatValue != this.blurMaskFilterRadius) {
+                lPaint.setMaskFilter(new BlurMaskFilter(fFloatValue, BlurMaskFilter.Blur.NORMAL));
+            }
+            this.blurMaskFilterRadius = fFloatValue;
+        }
+        DropShadowKeyframeAnimation dropShadowKeyframeAnimation = this.dropShadowAnimation;
+        if (dropShadowKeyframeAnimation != null) {
+            dropShadowKeyframeAnimation.applyTo(lPaint);
+        }
+        PointF pointF5 = MiscUtils.pathFromDataCurrentPoint;
+        lPaint.setAlpha(Math.max(0, Math.min(255, (int) ((((i / 255.0f) * ((Integer) this.opacityAnimation.getValue()).intValue()) / 100.0f) * 255.0f))));
+        canvas.drawPath(this.path, lPaint);
     }
 
     @Override // com.airbnb.lottie.animation.content.DrawingContent
@@ -217,14 +280,14 @@ public class GradientFillContent implements DrawingContent, BaseKeyframeAnimatio
     public final int getGradientHash$1() {
         float f = this.startPointAnimation.progress;
         float f2 = this.cacheSteps;
-        int round = Math.round(f * f2);
-        int round2 = Math.round(this.endPointAnimation.progress * f2);
-        int round3 = Math.round(this.colorAnimation.progress * f2);
-        int i = round != 0 ? 527 * round : 17;
-        if (round2 != 0) {
-            i = i * 31 * round2;
+        int iRound = Math.round(f * f2);
+        int iRound2 = Math.round(this.endPointAnimation.progress * f2);
+        int iRound3 = Math.round(this.colorAnimation.progress * f2);
+        int i = iRound != 0 ? 527 * iRound : 17;
+        if (iRound2 != 0) {
+            i = i * 31 * iRound2;
         }
-        return round3 != 0 ? i * 31 * round3 : i;
+        return iRound3 != 0 ? i * 31 * iRound3 : i;
     }
 
     @Override // com.airbnb.lottie.animation.content.Content

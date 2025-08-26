@@ -11,7 +11,6 @@ import androidx.core.animation.PropertyValuesHolder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ValueAnimator extends Animator implements AnimationHandler.AnimationFrameCallback {
     public static final AccelerateDecelerateInterpolator sDefaultInterpolator = new AccelerateDecelerateInterpolator();
@@ -105,21 +104,77 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         endAnimation$1();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x00b2, code lost:
-    
-        if (r13 != false) goto L59;
-     */
     @Override // androidx.core.animation.AnimationHandler.AnimationFrameCallback
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean doAnimationFrame(long r12) {
-        /*
-            Method dump skipped, instructions count: 204
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.core.animation.ValueAnimator.doAnimationFrame(long):boolean");
+    public final boolean doAnimationFrame(long j) {
+        long j2;
+        if (this.mStartTime < 0) {
+            if (this.mReversing) {
+                j2 = j;
+            } else {
+                float f = this.mStartDelay;
+                float f2 = this.mDurationScale;
+                if (f2 < 0.0f) {
+                    f2 = 1.0f;
+                }
+                j2 = ((long) (f2 * f)) + j;
+            }
+            this.mStartTime = j2;
+        }
+        boolean z = true;
+        boolean z2 = false;
+        if (!this.mRunning) {
+            if (this.mStartTime > j && this.mSeekFraction == -1.0f) {
+                return false;
+            }
+            this.mRunning = true;
+            startAnimation$1();
+        }
+        if (this.mLastFrameTime < 0) {
+            float f3 = this.mSeekFraction;
+            if (f3 >= 0.0f) {
+                float f4 = this.mDuration;
+                float f5 = this.mDurationScale;
+                if (f5 < 0.0f) {
+                    f5 = 1.0f;
+                }
+                this.mStartTime = j - ((long) (((long) (f5 * f4)) * f3));
+                this.mSeekFraction = -1.0f;
+            }
+        }
+        this.mLastFrameTime = j;
+        long jMax = Math.max(j, this.mStartTime);
+        if (this.mRunning) {
+            float f6 = this.mDuration;
+            float f7 = this.mDurationScale;
+            if (f7 < 0.0f) {
+                f7 = 1.0f;
+            }
+            long j3 = (long) (f7 * f6);
+            float f8 = j3 > 0 ? (jMax - this.mStartTime) / j3 : 1.0f;
+            boolean z3 = ((int) f8) > ((int) this.mOverallFraction);
+            boolean z4 = f8 >= ((float) 1);
+            if (j3 != 0) {
+                if (z3 && !z4) {
+                    ArrayList arrayList = this.mListeners;
+                    if (arrayList != null) {
+                        int size = arrayList.size();
+                        for (int i = 0; i < size; i++) {
+                            ((Animator.AnimatorListener) this.mListeners.get(i)).onAnimationRepeat(this);
+                        }
+                    }
+                } else if (!z4) {
+                }
+                z = false;
+            }
+            float fClampFraction = clampFraction(f8);
+            this.mOverallFraction = fClampFraction;
+            animateValue(getCurrentIterationFraction(fClampFraction, this.mReversing));
+            z2 = z;
+        }
+        if (z2) {
+            endAnimation$1();
+        }
+        return z2;
     }
 
     @Override // androidx.core.animation.Animator
@@ -144,9 +199,9 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         }
         if (this.mSelfPulse) {
             AnimationHandler animationHandler = AnimationHandler.getInstance();
-            int indexOf = animationHandler.mAnimationCallbacks.indexOf(this);
-            if (indexOf >= 0) {
-                animationHandler.mAnimationCallbacks.set(indexOf, null);
+            int iIndexOf = animationHandler.mAnimationCallbacks.indexOf(this);
+            if (iIndexOf >= 0) {
+                animationHandler.mAnimationCallbacks.set(iIndexOf, null);
                 animationHandler.mListDirty = true;
             }
         }
@@ -178,61 +233,27 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         return propertyValuesHolderArr[0].getAnimatedValue();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0030, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0030, code lost:
     
         r7 = true;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final float getCurrentIterationFraction(float r6, boolean r7) {
-        /*
-            r5 = this;
-            float r6 = clampFraction(r6)
-            float r0 = clampFraction(r6)
-            double r1 = (double) r0
-            double r3 = java.lang.Math.floor(r1)
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 != 0) goto L19
-            r1 = 0
-            int r0 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-            if (r0 <= 0) goto L19
-            r0 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-            double r3 = r3 - r0
-        L19:
-            int r0 = (int) r3
-            float r1 = (float) r0
-            float r6 = r6 - r1
-            if (r0 <= 0) goto L33
-            int r5 = r5.mRepeatMode
-            r1 = 2
-            if (r5 != r1) goto L33
-            r5 = 1
-            if (r0 < r5) goto L27
-            goto L33
-        L27:
-            if (r7 == 0) goto L2d
-            int r0 = r0 % r1
-            if (r0 != 0) goto L32
-            goto L30
-        L2d:
-            int r0 = r0 % r1
-            if (r0 == 0) goto L32
-        L30:
-            r7 = r5
-            goto L33
-        L32:
-            r7 = 0
-        L33:
-            if (r7 == 0) goto L39
-            r5 = 1065353216(0x3f800000, float:1.0)
-            float r5 = r5 - r6
-            return r5
-        L39:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.core.animation.ValueAnimator.getCurrentIterationFraction(float, boolean):float");
+    public final float getCurrentIterationFraction(float f, boolean z) {
+        float fClampFraction = clampFraction(f);
+        float fClampFraction2 = clampFraction(fClampFraction);
+        double d = fClampFraction2;
+        double dFloor = Math.floor(d);
+        if (d == dFloor && fClampFraction2 > 0.0f) {
+            dFloor -= 1.0d;
+        }
+        int i = (int) dFloor;
+        float f2 = fClampFraction - i;
+        if (i > 0 && this.mRepeatMode == 2 && i < 1) {
+            z = z ? false : false;
+        }
+        return z ? 1.0f - f2 : f2;
     }
 
     @Override // androidx.core.animation.Animator
@@ -316,32 +337,32 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
                 return;
             }
         }
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-        long j = currentAnimationTimeMillis - this.mStartTime;
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        long j = jCurrentAnimationTimeMillis - this.mStartTime;
         float f = this.mDuration;
         float f2 = this.mDurationScale;
         if (f2 < 0.0f) {
             f2 = 1.0f;
         }
-        this.mStartTime = currentAnimationTimeMillis - (((long) (f2 * f)) - j);
+        this.mStartTime = jCurrentAnimationTimeMillis - (((long) (f2 * f)) - j);
         this.mReversing = !this.mReversing;
     }
 
     public final void setCurrentFraction(float f) {
         initAnimation$1();
-        float clampFraction = clampFraction(f);
+        float fClampFraction = clampFraction(f);
         if (this.mLastFrameTime >= 0) {
             float f2 = this.mDuration;
             float f3 = this.mDurationScale;
             if (f3 < 0.0f) {
                 f3 = 1.0f;
             }
-            this.mStartTime = AnimationUtils.currentAnimationTimeMillis() - ((long) (((long) (f3 * f2)) * clampFraction));
+            this.mStartTime = AnimationUtils.currentAnimationTimeMillis() - ((long) (((long) (f3 * f2)) * fClampFraction));
         } else {
-            this.mSeekFraction = clampFraction;
+            this.mSeekFraction = fClampFraction;
         }
-        this.mOverallFraction = clampFraction;
-        animateValue(getCurrentIterationFraction(clampFraction, this.mReversing));
+        this.mOverallFraction = fClampFraction;
+        animateValue(getCurrentIterationFraction(fClampFraction, this.mReversing));
     }
 
     public void setFloatValues(float... fArr) {
@@ -450,15 +471,15 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     public String toString() {
-        String str = "ValueAnimator@" + Integer.toHexString(hashCode());
+        String string = "ValueAnimator@" + Integer.toHexString(hashCode());
         if (this.mValues != null) {
             for (int i = 0; i < this.mValues.length; i++) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "\n    ");
-                m.append(this.mValues[i].toString());
-                str = m.toString();
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n    ");
+                sbM.append(this.mValues[i].toString());
+                string = sbM.toString();
             }
         }
-        return str;
+        return string;
     }
 
     @Override // androidx.core.animation.Animator
@@ -472,8 +493,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
 
     @Override // androidx.core.animation.Animator
     /* renamed from: clone */
-    public ValueAnimator mo890clone() {
-        ValueAnimator valueAnimator = (ValueAnimator) super.mo890clone();
+    public ValueAnimator mo892clone() {
+        ValueAnimator valueAnimator = (ValueAnimator) super.mo892clone();
         if (this.mUpdateListeners != null) {
             valueAnimator.mUpdateListeners = new ArrayList(this.mUpdateListeners);
         }
@@ -496,9 +517,9 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
             valueAnimator.mValues = new PropertyValuesHolder[length];
             valueAnimator.mValuesMap = new HashMap(length);
             for (int i = 0; i < length; i++) {
-                PropertyValuesHolder mo895clone = propertyValuesHolderArr[i].mo895clone();
-                valueAnimator.mValues[i] = mo895clone;
-                valueAnimator.mValuesMap.put(mo895clone.mPropertyName, mo895clone);
+                PropertyValuesHolder propertyValuesHolderClone = propertyValuesHolderArr[i].mo897clone();
+                valueAnimator.mValues[i] = propertyValuesHolderClone;
+                valueAnimator.mValuesMap.put(propertyValuesHolderClone.mPropertyName, propertyValuesHolderClone);
             }
         }
         return valueAnimator;

@@ -7,7 +7,6 @@ import java.util.ListIterator;
 import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class VectorizedCombinedSpec<V extends AnimationVector> implements VectorizedFiniteAnimationSpec<V> {
     public final List animations;
@@ -17,20 +16,20 @@ final class VectorizedCombinedSpec<V extends AnimationVector> implements Vectori
     }
 
     public final Pair chooseAnimation(long j) {
-        Object obj;
+        Object objPrevious;
         List list = this.animations;
         ListIterator listIterator = list.listIterator(list.size());
         while (true) {
             if (!listIterator.hasPrevious()) {
-                obj = null;
+                objPrevious = null;
                 break;
             }
-            obj = listIterator.previous();
-            if (((Number) ((Pair) obj).component1()).longValue() <= j) {
+            objPrevious = listIterator.previous();
+            if (((Number) ((Pair) objPrevious).component1()).longValue() <= j) {
                 break;
             }
         }
-        Pair pair = (Pair) obj;
+        Pair pair = (Pair) objPrevious;
         return pair == null ? (Pair) CollectionsKt___CollectionsKt.first(this.animations) : pair;
     }
 
@@ -42,13 +41,13 @@ final class VectorizedCombinedSpec<V extends AnimationVector> implements Vectori
 
     @Override // androidx.compose.animation.core.VectorizedAnimationSpec
     public final AnimationVector getValueFromNanos(long j, AnimationVector animationVector, AnimationVector animationVector2, AnimationVector animationVector3) {
-        Pair chooseAnimation = chooseAnimation(j);
-        return ((VectorizedFiniteAnimationSpec) chooseAnimation.component2()).getValueFromNanos(j - ((Number) chooseAnimation.component1()).longValue(), animationVector, animationVector2, animationVector3);
+        Pair pairChooseAnimation = chooseAnimation(j);
+        return ((VectorizedFiniteAnimationSpec) pairChooseAnimation.component2()).getValueFromNanos(j - ((Number) pairChooseAnimation.component1()).longValue(), animationVector, animationVector2, animationVector3);
     }
 
     @Override // androidx.compose.animation.core.VectorizedAnimationSpec
     public final AnimationVector getVelocityFromNanos(long j, AnimationVector animationVector, AnimationVector animationVector2, AnimationVector animationVector3) {
-        Pair chooseAnimation = chooseAnimation(j);
-        return ((VectorizedFiniteAnimationSpec) chooseAnimation.component2()).getVelocityFromNanos(j - ((Number) chooseAnimation.component1()).longValue(), animationVector, animationVector2, animationVector3);
+        Pair pairChooseAnimation = chooseAnimation(j);
+        return ((VectorizedFiniteAnimationSpec) pairChooseAnimation.component2()).getVelocityFromNanos(j - ((Number) pairChooseAnimation.component1()).longValue(), animationVector, animationVector2, animationVector3);
     }
 }

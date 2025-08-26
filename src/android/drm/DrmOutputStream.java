@@ -27,27 +27,27 @@ public class DrmOutputStream extends OutputStream {
         this.mClient = drmManagerClient;
         this.mPfd = parcelFileDescriptor;
         this.mFd = parcelFileDescriptor.getFileDescriptor();
-        int openConvertSession = drmManagerClient.openConvertSession(str);
-        this.mSessionId = openConvertSession;
-        if (openConvertSession != -1) {
+        int iOpenConvertSession = drmManagerClient.openConvertSession(str);
+        this.mSessionId = iOpenConvertSession;
+        if (iOpenConvertSession != -1) {
             return;
         }
         throw new UnknownServiceException("Failed to open DRM session for " + str);
     }
 
-    public void finish() throws IOException {
-        DrmConvertedStatus closeConvertSession = this.mClient.closeConvertSession(this.mSessionId);
-        if (closeConvertSession.statusCode == 1) {
+    public void finish() throws IOException, ErrnoException {
+        DrmConvertedStatus drmConvertedStatusCloseConvertSession = this.mClient.closeConvertSession(this.mSessionId);
+        if (drmConvertedStatusCloseConvertSession.statusCode == 1) {
             try {
-                Os.lseek(this.mFd, closeConvertSession.offset, OsConstants.SEEK_SET);
+                Os.lseek(this.mFd, drmConvertedStatusCloseConvertSession.offset, OsConstants.SEEK_SET);
             } catch (ErrnoException e) {
                 e.rethrowAsIOException();
             }
-            IoBridge.write(this.mFd, closeConvertSession.convertedData, 0, closeConvertSession.convertedData.length);
+            IoBridge.write(this.mFd, drmConvertedStatusCloseConvertSession.convertedData, 0, drmConvertedStatusCloseConvertSession.convertedData.length);
             this.mSessionId = -1;
             return;
         }
-        throw new IOException("Unexpected DRM status: " + closeConvertSession.statusCode);
+        throw new IOException("Unexpected DRM status: " + drmConvertedStatusCloseConvertSession.statusCode);
     }
 
     @Override // java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
@@ -66,11 +66,11 @@ public class DrmOutputStream extends OutputStream {
             System.arraycopy(bArr, i, bArr2, 0, i2);
             bArr = bArr2;
         }
-        DrmConvertedStatus convertData = this.mClient.convertData(this.mSessionId, bArr);
-        if (convertData.statusCode == 1) {
-            IoBridge.write(this.mFd, convertData.convertedData, 0, convertData.convertedData.length);
+        DrmConvertedStatus drmConvertedStatusConvertData = this.mClient.convertData(this.mSessionId, bArr);
+        if (drmConvertedStatusConvertData.statusCode == 1) {
+            IoBridge.write(this.mFd, drmConvertedStatusConvertData.convertedData, 0, drmConvertedStatusConvertData.convertedData.length);
         } else {
-            throw new IOException("Unexpected DRM status: " + convertData.statusCode);
+            throw new IOException("Unexpected DRM status: " + drmConvertedStatusConvertData.statusCode);
         }
     }
 

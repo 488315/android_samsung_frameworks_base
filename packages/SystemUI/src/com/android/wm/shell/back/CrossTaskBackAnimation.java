@@ -34,7 +34,6 @@ import com.android.wm.shell.back.CrossTaskBackAnimation;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CrossTaskBackAnimation extends ShellBackAnimation {
     public final BackAnimationRunner mBackAnimationRunner;
@@ -68,7 +67,6 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
     public final ProgressVelocityTracker mVelocityTracker = new ProgressVelocityTracker();
     public float mGestureProgress = 0.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback extends IOnBackInvokedCallback.Default {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -81,7 +79,7 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
             crossTaskBackAnimation.mProgressAnimator.onBackCancelled(new Runnable() { // from class: com.android.wm.shell.back.CrossTaskBackAnimation$Callback$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CrossTaskBackAnimation crossTaskBackAnimation2 = CrossTaskBackAnimation.this;
+                    CrossTaskBackAnimation crossTaskBackAnimation2 = crossTaskBackAnimation;
                     int i = CrossTaskBackAnimation.Callback.$r8$clinit;
                     crossTaskBackAnimation2.finishAnimation$1();
                 }
@@ -113,25 +111,25 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
             duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.back.CrossTaskBackAnimation$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    CrossTaskBackAnimation crossTaskBackAnimation2 = CrossTaskBackAnimation.this;
+                    CrossTaskBackAnimation crossTaskBackAnimation2 = crossTaskBackAnimation;
                     crossTaskBackAnimation2.getClass();
                     float animatedFraction = valueAnimator.getAnimatedFraction();
-                    float mapRange = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.left, crossTaskBackAnimation2.mStartTaskRect.left);
-                    float mapRange2 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.top, crossTaskBackAnimation2.mStartTaskRect.top);
-                    crossTaskBackAnimation2.mEnteringCurrentRect.set(mapRange, mapRange2, CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.width(), crossTaskBackAnimation2.mStartTaskRect.width()) + mapRange, CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.height(), crossTaskBackAnimation2.mStartTaskRect.height()) + mapRange2);
+                    float fMapRange = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.left, crossTaskBackAnimation2.mStartTaskRect.left);
+                    float fMapRange2 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.top, crossTaskBackAnimation2.mStartTaskRect.top);
+                    crossTaskBackAnimation2.mEnteringCurrentRect.set(fMapRange, fMapRange2, CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.width(), crossTaskBackAnimation2.mStartTaskRect.width()) + fMapRange, CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mEnteringStartRect.height(), crossTaskBackAnimation2.mStartTaskRect.height()) + fMapRange2);
                     crossTaskBackAnimation2.applyFlingScale(crossTaskBackAnimation2.mEnteringCurrentRect);
                     crossTaskBackAnimation2.applyTransform(crossTaskBackAnimation2.mEnteringTarget.leash, crossTaskBackAnimation2.mEnteringCurrentRect, crossTaskBackAnimation2.mCornerRadius);
                     Rect rect = crossTaskBackAnimation2.mStartTaskRect;
                     Rect rect2 = crossTaskBackAnimation2.mStartTaskRect;
-                    float mapRange3 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.left, ((rect.width() * 0.19999999f) / 2.0f) + rect.left);
-                    float mapRange4 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.top, ((rect2.height() * 0.19999999f) / 2.0f) + rect2.top);
-                    float mapRange5 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.width(), crossTaskBackAnimation2.mStartTaskRect.width() * 0.8f);
-                    float mapRange6 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.height(), crossTaskBackAnimation2.mStartTaskRect.height() * 0.8f);
+                    float fMapRange3 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.left, ((rect.width() * 0.19999999f) / 2.0f) + rect.left);
+                    float fMapRange4 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.top, ((rect2.height() * 0.19999999f) / 2.0f) + rect2.top);
+                    float fMapRange5 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.width(), crossTaskBackAnimation2.mStartTaskRect.width() * 0.8f);
+                    float fMapRange6 = CrossTaskBackAnimation.mapRange(animatedFraction, crossTaskBackAnimation2.mClosingStartRect.height(), crossTaskBackAnimation2.mStartTaskRect.height() * 0.8f);
                     SurfaceControl surfaceControl = crossTaskBackAnimation2.mClosingTarget.leash;
                     if (surfaceControl != null && surfaceControl.isValid()) {
                         crossTaskBackAnimation2.mTransaction.setLayer(crossTaskBackAnimation2.mClosingTarget.leash, 0);
                     }
-                    crossTaskBackAnimation2.mClosingCurrentRect.set(mapRange3, mapRange4, mapRange5 + mapRange3, mapRange6 + mapRange4);
+                    crossTaskBackAnimation2.mClosingCurrentRect.set(fMapRange3, fMapRange4, fMapRange5 + fMapRange3, fMapRange6 + fMapRange4);
                     crossTaskBackAnimation2.applyFlingScale(crossTaskBackAnimation2.mClosingCurrentRect);
                     crossTaskBackAnimation2.applyTransform(crossTaskBackAnimation2.mClosingTarget.leash, crossTaskBackAnimation2.mClosingCurrentRect, crossTaskBackAnimation2.mCornerRadius);
                     if (animatedFraction > 0.8f) {
@@ -161,7 +159,7 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
             final CrossTaskBackAnimation crossTaskBackAnimation = CrossTaskBackAnimation.this;
             crossTaskBackAnimation.mProgressAnimator.onBackStarted(backMotionEvent, new BackProgressAnimator.ProgressCallback() { // from class: com.android.wm.shell.back.CrossTaskBackAnimation$Callback$$ExternalSyntheticLambda0
                 public final void onProgressUpdate(BackEvent backEvent) {
-                    CrossTaskBackAnimation crossTaskBackAnimation2 = CrossTaskBackAnimation.this;
+                    CrossTaskBackAnimation crossTaskBackAnimation2 = crossTaskBackAnimation;
                     int i = CrossTaskBackAnimation.Callback.$r8$clinit;
                     if (!crossTaskBackAnimation2.mBackInProgress) {
                         crossTaskBackAnimation2.mBackInProgress = true;
@@ -181,28 +179,28 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
                     }
                     crossTaskBackAnimation2.mGestureProgress = interpolation;
                     float touchY = backEvent.getTouchY();
-                    int width = crossTaskBackAnimation2.mStartTaskRect.width();
-                    int height = crossTaskBackAnimation2.mStartTaskRect.height();
-                    float mapRange = CrossTaskBackAnimation.mapRange(interpolation, 1.0f, 0.8f);
-                    float f2 = width;
-                    float f3 = mapRange * f2;
-                    float f4 = height;
-                    float f5 = mapRange * f4;
+                    int iWidth = crossTaskBackAnimation2.mStartTaskRect.width();
+                    int iHeight = crossTaskBackAnimation2.mStartTaskRect.height();
+                    float fMapRange = CrossTaskBackAnimation.mapRange(interpolation, 1.0f, 0.8f);
+                    float f2 = iWidth;
+                    float f3 = fMapRange * f2;
+                    float f4 = iHeight;
+                    float f5 = fMapRange * f4;
                     float f6 = touchY - crossTaskBackAnimation2.mInitialTouchPos.y;
                     float f7 = f4 / 2.0f;
                     float f8 = f4 - f5;
-                    float max = (f8 * 0.5f) + (Math.max(0.0f, (f8 / 2.0f) - crossTaskBackAnimation2.mVerticalMargin) * ((DecelerateInterpolator) crossTaskBackAnimation2.mVerticalMoveInterpolator).getInterpolation(Math.min(f7, Math.abs(f6)) / f7) * (f6 < 0.0f ? -1.0f : 1.0f));
-                    float m$1 = crossTaskBackAnimation2.mIsRightEdge ? DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, 0.5f, f3) : f2 - (interpolation * crossTaskBackAnimation2.mVerticalMargin);
-                    float f9 = m$1 - f3;
-                    float f10 = f5 + max;
-                    crossTaskBackAnimation2.mClosingCurrentRect.set(f9, max, m$1, f10);
+                    float fMax = (f8 * 0.5f) + (Math.max(0.0f, (f8 / 2.0f) - crossTaskBackAnimation2.mVerticalMargin) * ((DecelerateInterpolator) crossTaskBackAnimation2.mVerticalMoveInterpolator).getInterpolation(Math.min(f7, Math.abs(f6)) / f7) * (f6 < 0.0f ? -1.0f : 1.0f));
+                    float fM$1 = crossTaskBackAnimation2.mIsRightEdge ? DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, 0.5f, f3) : f2 - (interpolation * crossTaskBackAnimation2.mVerticalMargin);
+                    float f9 = fM$1 - f3;
+                    float f10 = f5 + fMax;
+                    crossTaskBackAnimation2.mClosingCurrentRect.set(f9, fMax, fM$1, f10);
                     RectF rectF = crossTaskBackAnimation2.mEnteringCurrentRect;
                     float f11 = crossTaskBackAnimation2.mInterWindowMargin;
-                    rectF.set((f9 - f3) - f11, max, f9 - f11, f10);
+                    rectF.set((f9 - f3) - f11, fMax, f9 - f11, f10);
                     crossTaskBackAnimation2.applyTransform(crossTaskBackAnimation2.mClosingTarget.leash, crossTaskBackAnimation2.mClosingCurrentRect, crossTaskBackAnimation2.mCornerRadius);
                     crossTaskBackAnimation2.applyTransform(crossTaskBackAnimation2.mEnteringTarget.leash, crossTaskBackAnimation2.mEnteringCurrentRect, crossTaskBackAnimation2.mCornerRadius);
                     crossTaskBackAnimation2.applyTransaction$1();
-                    crossTaskBackAnimation2.mBackground.customizeStatusBarAppearance((int) max);
+                    crossTaskBackAnimation2.mBackground.customizeStatusBarAppearance((int) fMax);
                 }
             });
         }
@@ -211,7 +209,6 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Runner extends IRemoteAnimationRunner.Default {
         public /* synthetic */ Runner(CrossTaskBackAnimation crossTaskBackAnimation, int i) {
             this();
@@ -267,15 +264,15 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
     }
 
     public final void applyFlingScale(RectF rectF) {
-        float min = Math.min(this.mPostCommitFlingScale.getValue() / 100.0f, 1.0f);
-        if (min >= 1.0f) {
+        float fMin = Math.min(this.mPostCommitFlingScale.getValue() / 100.0f, 1.0f);
+        if (fMin >= 1.0f) {
             return;
         }
         float f = rectF.right;
-        float height = (rectF.height() / 2.0f) + rectF.top;
-        rectF.offset(-f, -height);
-        rectF.scale(min);
-        rectF.offset(f, height);
+        float fHeight = (rectF.height() / 2.0f) + rectF.top;
+        rectF.offset(-f, -fHeight);
+        rectF.scale(fMin);
+        rectF.offset(f, fHeight);
     }
 
     public final void applyTransaction$1() {
@@ -287,9 +284,9 @@ public class CrossTaskBackAnimation extends ShellBackAnimation {
         if (surfaceControl == null || !surfaceControl.isValid()) {
             return;
         }
-        float width = rectF.width() / this.mStartTaskRect.width();
+        float fWidth = rectF.width() / this.mStartTaskRect.width();
         this.mTransformMatrix.reset();
-        this.mTransformMatrix.setScale(width, width);
+        this.mTransformMatrix.setScale(fWidth, fWidth);
         this.mTransformMatrix.postTranslate(rectF.left, rectF.top);
         this.mTransaction.setMatrix(surfaceControl, this.mTransformMatrix, this.mTmpFloat9).setWindowCrop(surfaceControl, this.mStartTaskRect).setCornerRadius(surfaceControl, f);
     }

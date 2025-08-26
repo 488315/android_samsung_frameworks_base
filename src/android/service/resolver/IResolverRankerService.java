@@ -54,9 +54,9 @@ public interface IResolverRankerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResolverRankerService)) {
-                return (IResolverRankerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResolverRankerService)) {
+                return (IResolverRankerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,15 +86,15 @@ public interface IResolverRankerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ResolverTarget.CREATOR);
-                IResolverRankerResult asInterface = IResolverRankerResult.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ResolverTarget.CREATOR);
+                IResolverRankerResult iResolverRankerResultAsInterface = IResolverRankerResult.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                predict(createTypedArrayList, asInterface);
+                predict(arrayListCreateTypedArrayList, iResolverRankerResultAsInterface);
             } else if (i == 2) {
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(ResolverTarget.CREATOR);
-                int readInt = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(ResolverTarget.CREATOR);
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                train(createTypedArrayList2, readInt);
+                train(arrayListCreateTypedArrayList2, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -119,27 +119,27 @@ public interface IResolverRankerService extends IInterface {
 
             @Override // android.service.resolver.IResolverRankerService
             public void predict(List<ResolverTarget> list, IResolverRankerResult iResolverRankerResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iResolverRankerResult);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iResolverRankerResult);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.resolver.IResolverRankerService
             public void train(List<ResolverTarget> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

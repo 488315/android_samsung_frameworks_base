@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationCompat$Action {
     public final PendingIntent actionIntent;
@@ -24,7 +23,6 @@ public class NotificationCompat$Action {
     public final boolean mShowsUserInterface;
     public final CharSequence title;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public boolean mAllowGeneratedReplies;
         public boolean mAuthenticationRequired;
@@ -37,7 +35,6 @@ public class NotificationCompat$Action {
         public final boolean mShowsUserInterface;
         public final CharSequence mTitle;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api20Impl {
             private Api20Impl() {
             }
@@ -51,7 +48,6 @@ public class NotificationCompat$Action {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api23Impl {
             private Api23Impl() {
             }
@@ -61,7 +57,6 @@ public class NotificationCompat$Action {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api24Impl {
             private Api24Impl() {
             }
@@ -71,7 +66,6 @@ public class NotificationCompat$Action {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api28Impl {
             private Api28Impl() {
             }
@@ -81,7 +75,6 @@ public class NotificationCompat$Action {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api29Impl {
             private Api29Impl() {
             }
@@ -91,7 +84,6 @@ public class NotificationCompat$Action {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api31Impl {
             private Api31Impl() {
             }

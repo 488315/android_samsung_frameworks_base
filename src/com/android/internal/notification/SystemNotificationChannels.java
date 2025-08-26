@@ -111,9 +111,7 @@ public class SystemNotificationChannels {
         return ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.NOTIFICATION_CHANNEL_DEVICE_ADMIN, new Supplier() { // from class: com.android.internal.notification.SystemNotificationChannels$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                String string;
-                string = Context.this.getString(R.string.notification_channel_device_admin);
-                return string;
+                return context.getString(R.string.notification_channel_device_admin);
             }
         });
     }

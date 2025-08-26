@@ -44,9 +44,9 @@ public interface IDsmsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDsmsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDsmsService)) {
-                return (IDsmsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDsmsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDsmsService)) {
+                return (IDsmsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IDsmsService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                long readLong = parcel.readLong();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                sendMessage(readString, readString2, readLong);
+                sendMessage(string, string2, j);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IDsmsService extends IInterface {
 
             @Override // com.samsung.android.dsms.aidl.IDsmsService
             public void sendMessage(String str, String str2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDsmsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDsmsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

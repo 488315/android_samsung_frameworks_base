@@ -111,17 +111,21 @@ public class AdaptingKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(OutputStream outputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         this.keyStoreSpi.engineStore(outputStream, cArr);
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException {
         this.keyStoreSpi.engineStore(loadStoreParameter);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x001d  */
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void engineLoad(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         if (inputStream == null) {
             KeyStoreSpi keyStoreSpi = this.primaryStore;
             this.keyStoreSpi = keyStoreSpi;
@@ -130,26 +134,26 @@ public class AdaptingKeyStoreSpi extends KeyStoreSpi {
         }
         if (!Properties.isOverrideSet(COMPAT_OVERRIDE)) {
             KeyStoreSpi keyStoreSpi2 = this.primaryStore;
-            if (keyStoreSpi2 instanceof PKCS12KeyStoreSpi) {
+            if (!(keyStoreSpi2 instanceof PKCS12KeyStoreSpi)) {
+                if (!inputStream.markSupported()) {
+                    inputStream = new BufferedInputStream(inputStream);
+                }
+                inputStream.mark(8);
+                if (this.jksStore.engineProbe(inputStream)) {
+                    this.keyStoreSpi = this.jksStore;
+                } else {
+                    this.keyStoreSpi = this.primaryStore;
+                }
+                inputStream.reset();
+            } else {
                 this.keyStoreSpi = keyStoreSpi2;
-                this.keyStoreSpi.engineLoad(inputStream, cArr);
             }
         }
-        if (!inputStream.markSupported()) {
-            inputStream = new BufferedInputStream(inputStream);
-        }
-        inputStream.mark(8);
-        if (this.jksStore.engineProbe(inputStream)) {
-            this.keyStoreSpi = this.jksStore;
-        } else {
-            this.keyStoreSpi = this.primaryStore;
-        }
-        inputStream.reset();
         this.keyStoreSpi.engineLoad(inputStream, cArr);
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException {
         this.keyStoreSpi.engineLoad(loadStoreParameter);
     }
 }

@@ -28,7 +28,6 @@ import android.widget.Toast;
 import androidx.slice.SliceItem;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RemoteInputView extends LinearLayout implements View.OnClickListener, TextWatcher {
     public static final Object VIEW_TAG = null;
@@ -40,7 +39,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     public boolean mResetting;
     public ImageButton mSendButton;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RemoteEditText extends EditText {
         public final Drawable mBackground;
         public RemoteInputView mRemoteInputView;
@@ -83,8 +81,8 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         @Override // android.widget.TextView, android.view.View
         public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
             final InputMethodManager inputMethodManager;
-            InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
-            if (this.mShowImeOnInputConnection && onCreateInputConnection != null && (inputMethodManager = (InputMethodManager) getContext().getSystemService(InputMethodManager.class)) != null) {
+            InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
+            if (this.mShowImeOnInputConnection && inputConnectionOnCreateInputConnection != null && (inputMethodManager = (InputMethodManager) getContext().getSystemService(InputMethodManager.class)) != null) {
                 post(new Runnable() { // from class: androidx.slice.widget.RemoteInputView.RemoteEditText.1
                     @Override // java.lang.Runnable
                     public final void run() {
@@ -93,7 +91,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                     }
                 });
             }
-            return onCreateInputConnection;
+            return inputConnectionOnCreateInputConnection;
         }
 
         @Override // android.widget.TextView, android.view.View
@@ -187,66 +185,26 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         RemoteEditText remoteEditText = (RemoteEditText) getChildAt(0);
         this.mEditText = remoteEditText;
         remoteEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() { // from class: androidx.slice.widget.RemoteInputView.1
-            /* JADX WARN: Removed duplicated region for block: B:28:0x0042  */
+            /* JADX WARN: Removed duplicated region for block: B:25:0x0031  */
             @Override // android.widget.TextView.OnEditorActionListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final boolean onEditorAction(android.widget.TextView r4, int r5, android.view.KeyEvent r6) {
-                /*
-                    r3 = this;
-                    r4 = 0
-                    r0 = 1
-                    if (r6 != 0) goto Lf
-                    r1 = 6
-                    if (r5 == r1) goto Ld
-                    r1 = 5
-                    if (r5 == r1) goto Ld
-                    r1 = 4
-                    if (r5 != r1) goto Lf
-                Ld:
-                    r5 = r0
-                    goto L10
-                Lf:
-                    r5 = r4
-                L10:
-                    if (r6 == 0) goto L31
-                    int r1 = r6.getKeyCode()
-                    java.lang.Object r2 = androidx.slice.widget.RemoteInputView.VIEW_TAG
-                    r2 = 23
-                    if (r1 == r2) goto L29
-                    r2 = 62
-                    if (r1 == r2) goto L29
-                    r2 = 66
-                    if (r1 == r2) goto L29
-                    r2 = 160(0xa0, float:2.24E-43)
-                    if (r1 == r2) goto L29
-                    goto L31
-                L29:
-                    int r6 = r6.getAction()
-                    if (r6 != 0) goto L31
-                    r6 = r0
-                    goto L32
-                L31:
-                    r6 = r4
-                L32:
-                    if (r5 != 0) goto L38
-                    if (r6 == 0) goto L37
-                    goto L38
-                L37:
-                    return r4
-                L38:
-                    androidx.slice.widget.RemoteInputView r4 = androidx.slice.widget.RemoteInputView.this
-                    androidx.slice.widget.RemoteInputView$RemoteEditText r4 = r4.mEditText
-                    int r4 = r4.length()
-                    if (r4 <= 0) goto L47
-                    androidx.slice.widget.RemoteInputView r3 = androidx.slice.widget.RemoteInputView.this
-                    r3.sendRemoteInput()
-                L47:
-                    return r0
-                */
-                throw new UnsupportedOperationException("Method not decompiled: androidx.slice.widget.RemoteInputView.AnonymousClass1.onEditorAction(android.widget.TextView, int, android.view.KeyEvent):boolean");
+            public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                boolean z;
+                boolean z2 = keyEvent == null && (i == 6 || i == 5 || i == 4);
+                if (keyEvent != null) {
+                    int keyCode = keyEvent.getKeyCode();
+                    Object obj = RemoteInputView.VIEW_TAG;
+                    z = (keyCode == 23 || keyCode == 62 || keyCode == 66 || keyCode == 160) && keyEvent.getAction() == 0;
+                }
+                if (!z2 && !z) {
+                    return false;
+                }
+                if (RemoteInputView.this.mEditText.length() > 0) {
+                    RemoteInputView.this.sendRemoteInput();
+                }
+                return true;
             }
         });
         this.mEditText.addTextChangedListener(this);
@@ -282,14 +240,14 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     public final void sendRemoteInput() {
         Bundle bundle = new Bundle();
         bundle.putString(this.mRemoteInput.getResultKey(), this.mEditText.getText().toString());
-        Intent addFlags = new Intent().addFlags(268435456);
-        RemoteInput.addResultsToIntent(this.mRemoteInputs, addFlags, bundle);
+        Intent intentAddFlags = new Intent().addFlags(268435456);
+        RemoteInput.addResultsToIntent(this.mRemoteInputs, intentAddFlags, bundle);
         this.mEditText.setEnabled(false);
         this.mSendButton.setVisibility(4);
         this.mProgressBar.setVisibility(0);
         this.mEditText.mShowImeOnInputConnection = false;
         try {
-            this.mAction.fireActionInternal(getContext(), addFlags);
+            this.mAction.fireActionInternal(getContext(), intentAddFlags);
             reset();
         } catch (PendingIntent.CanceledException e) {
             Log.i("RemoteInput", "Unable to send remote input result", e);

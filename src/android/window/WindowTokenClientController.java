@@ -62,11 +62,11 @@ public class WindowTokenClientController {
 
     public boolean attachToDisplayArea(WindowTokenClient windowTokenClient, int i, int i2, Bundle bundle) {
         try {
-            WindowContextInfo attachWindowContextToDisplayArea = getWindowManagerService().attachWindowContextToDisplayArea(this.mAppThread, windowTokenClient, i, i2, bundle);
-            if (attachWindowContextToDisplayArea == null) {
+            WindowContextInfo windowContextInfoAttachWindowContextToDisplayArea = getWindowManagerService().attachWindowContextToDisplayArea(this.mAppThread, windowTokenClient, i, i2, bundle);
+            if (windowContextInfoAttachWindowContextToDisplayArea == null) {
                 return false;
             }
-            onWindowContextTokenAttached(windowTokenClient, attachWindowContextToDisplayArea, false);
+            onWindowContextTokenAttached(windowTokenClient, windowContextInfoAttachWindowContextToDisplayArea, false);
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -82,11 +82,11 @@ public class WindowTokenClientController {
             return false;
         }
         try {
-            WindowContextInfo attachWindowContextToDisplayContent = windowManagerService.attachWindowContextToDisplayContent(this.mAppThread, windowTokenClient, i);
-            if (attachWindowContextToDisplayContent == null) {
+            WindowContextInfo windowContextInfoAttachWindowContextToDisplayContent = windowManagerService.attachWindowContextToDisplayContent(this.mAppThread, windowTokenClient, i);
+            if (windowContextInfoAttachWindowContextToDisplayContent == null) {
                 return false;
             }
-            onWindowContextTokenAttached(windowTokenClient, attachWindowContextToDisplayContent, false);
+            onWindowContextTokenAttached(windowTokenClient, windowContextInfoAttachWindowContextToDisplayContent, false);
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -98,11 +98,11 @@ public class WindowTokenClientController {
 
     public boolean attachToWindowToken(WindowTokenClient windowTokenClient, IBinder iBinder) {
         try {
-            WindowContextInfo attachWindowContextToWindowToken = getWindowManagerService().attachWindowContextToWindowToken(this.mAppThread, windowTokenClient, iBinder);
-            if (attachWindowContextToWindowToken == null) {
+            WindowContextInfo windowContextInfoAttachWindowContextToWindowToken = getWindowManagerService().attachWindowContextToWindowToken(this.mAppThread, windowTokenClient, iBinder);
+            if (windowContextInfoAttachWindowContextToWindowToken == null) {
                 return false;
             }
-            onWindowContextTokenAttached(windowTokenClient, attachWindowContextToWindowToken, true);
+            onWindowContextTokenAttached(windowTokenClient, windowContextInfoAttachWindowContextToWindowToken, true);
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();

@@ -194,13 +194,13 @@ public abstract class Nat224 {
     }
 
     public static boolean diff(int[] iArr, int i, int[] iArr2, int i2, int[] iArr3, int i3) {
-        boolean gte = gte(iArr, i, iArr2, i2);
-        if (gte) {
+        boolean zGte = gte(iArr, i, iArr2, i2);
+        if (zGte) {
             sub(iArr, i, iArr2, i2, iArr3, i3);
-            return gte;
+            return zGte;
         }
         sub(iArr2, i2, iArr, i, iArr3, i3);
-        return gte;
+        return zGte;
     }
 
     public static boolean eq(int[] iArr, int[] iArr2) {
@@ -216,12 +216,12 @@ public abstract class Nat224 {
         if (bigInteger.signum() < 0 || bigInteger.bitLength() > 224) {
             throw new IllegalArgumentException();
         }
-        int[] create = create();
+        int[] iArrCreate = create();
         for (int i = 0; i < 7; i++) {
-            create[i] = bigInteger.intValue();
+            iArrCreate[i] = bigInteger.intValue();
             bigInteger = bigInteger.shiftRight(32);
         }
-        return create;
+        return iArrCreate;
     }
 
     public static int getBit(int[] iArr, int i) {

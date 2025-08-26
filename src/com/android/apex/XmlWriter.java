@@ -25,15 +25,15 @@ public class XmlWriter implements Closeable {
     }
 
     void print(String str) {
-        String[] split = str.split(ShaderAssembler.NEWLINE, -1);
+        String[] strArrSplit = str.split(ShaderAssembler.NEWLINE, -1);
         int i = 0;
-        while (i < split.length) {
-            if (this.startLine && !split[i].isEmpty()) {
+        while (i < strArrSplit.length) {
+            if (this.startLine && !strArrSplit[i].isEmpty()) {
                 printIndent();
             }
-            this.outBuffer.append(split[i]);
+            this.outBuffer.append(strArrSplit[i]);
             i++;
-            if (i < split.length) {
+            if (i < strArrSplit.length) {
                 this.outBuffer.append(ShaderAssembler.NEWLINE);
                 this.startLine = true;
             }

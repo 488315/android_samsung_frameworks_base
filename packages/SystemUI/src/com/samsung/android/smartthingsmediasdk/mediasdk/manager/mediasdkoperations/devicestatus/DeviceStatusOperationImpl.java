@@ -12,7 +12,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DeviceStatusOperationImpl extends AbstractMediaSdkManager {
     public DeviceStatusOperationImpl(MediaSdkSupportServiceClient mediaSdkSupportServiceClient) {
@@ -20,25 +19,25 @@ public final class DeviceStatusOperationImpl extends AbstractMediaSdkManager {
     }
 
     public final void addDeviceStatusChangeCallback(final IDeviceStatusChangeCallback.Stub stub) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl$addDeviceStatusChangeCallback$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl.addDeviceStatusChangeCallback.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).addDeviceStatusChangeCallback(IDeviceStatusChangeCallback.this);
+            public final Object mo781invoke(Object obj) {
+                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).addDeviceStatusChangeCallback(stub);
                 return Unit.INSTANCE;
             }
         });
     }
 
     public final List getDevices() {
-        return (List) useSafeMediaSdkSupportService(EmptyList.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl$getDevices$1
+        return (List) useSafeMediaSdkSupportService(EmptyList.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl.getDevices.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 List<Device> devices = ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).getDevices();
                 ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(devices, 10));
                 for (Device device : devices) {
@@ -55,7 +54,7 @@ public final class DeviceStatusOperationImpl extends AbstractMediaSdkManager {
     }
 
     public final boolean isSupported(final String str) {
-        return ((Boolean) useSafeMediaSdkSupportService(Boolean.FALSE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl$isSupported$1
+        return ((Boolean) useSafeMediaSdkSupportService(Boolean.FALSE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl.isSupported.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -63,22 +62,22 @@ public final class DeviceStatusOperationImpl extends AbstractMediaSdkManager {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).isSupported(str));
             }
         })).booleanValue();
     }
 
     public final void removeDeviceStatusChangeCallback(final IDeviceStatusChangeCallback iDeviceStatusChangeCallback) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl$removeDeviceStatusChangeCallback$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl.removeDeviceStatusChangeCallback.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).removeDeviceStatusChangeCallback(IDeviceStatusChangeCallback.this);
+            public final Object mo781invoke(Object obj) {
+                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).removeDeviceStatusChangeCallback(iDeviceStatusChangeCallback);
                 return Unit.INSTANCE;
             }
         });

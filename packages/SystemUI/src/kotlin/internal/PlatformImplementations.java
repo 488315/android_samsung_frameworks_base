@@ -6,11 +6,9 @@ import java.util.List;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PlatformImplementations {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReflectThrowable {
         public static final Method addSuppressed;
         public static final Method getSuppressed;
@@ -67,9 +65,9 @@ public class PlatformImplementations {
     }
 
     public List getSuppressed(Throwable th) {
-        Object invoke;
-        List asList;
+        Object objInvoke;
+        List listAsList;
         Method method = ReflectThrowable.getSuppressed;
-        return (method == null || (invoke = method.invoke(th, null)) == null || (asList = Arrays.asList((Throwable[]) invoke)) == null) ? EmptyList.INSTANCE : asList;
+        return (method == null || (objInvoke = method.invoke(th, null)) == null || (listAsList = Arrays.asList((Throwable[]) objInvoke)) == null) ? EmptyList.INSTANCE : listAsList;
     }
 }

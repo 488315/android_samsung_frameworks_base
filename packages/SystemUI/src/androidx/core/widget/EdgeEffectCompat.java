@@ -5,11 +5,9 @@ import android.util.AttributeSet;
 import android.widget.EdgeEffect;
 import androidx.reflect.view.SeslViewRuneReflector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EdgeEffectCompat {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api21Impl {
         private Api21Impl() {
         }
@@ -19,7 +17,6 @@ public final class EdgeEffectCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api31Impl {
         private Api31Impl() {
         }

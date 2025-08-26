@@ -52,9 +52,9 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRecognitionServiceManagerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecognitionServiceManagerCallback)) {
-                return (IRecognitionServiceManagerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRecognitionServiceManagerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecognitionServiceManagerCallback)) {
+                return (IRecognitionServiceManagerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,13 +84,13 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRecognitionService asInterface = IRecognitionService.Stub.asInterface(parcel.readStrongBinder());
+                IRecognitionService iRecognitionServiceAsInterface = IRecognitionService.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onSuccess(asInterface);
+                onSuccess(iRecognitionServiceAsInterface);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readInt);
+                onError(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
 
             @Override // android.speech.IRecognitionServiceManagerCallback
             public void onSuccess(IRecognitionService iRecognitionService) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionServiceManagerCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecognitionService);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionServiceManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecognitionService);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionServiceManagerCallback
             public void onError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionServiceManagerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionServiceManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

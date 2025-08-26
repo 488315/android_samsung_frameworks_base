@@ -1,6 +1,8 @@
 package android.text;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.text.LineBreakConfig;
 import android.text.Layout;
@@ -148,13 +150,13 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
         if (z2) {
             this.mMax = metrics.width;
         } else {
-            TextLine obtain = TextLine.obtain();
+            TextLine textLineObtain = TextLine.obtain();
             int length = charSequence.length();
             Layout.Directions directions = Layout.DIRS_ALL_LEFT_TO_RIGHT;
             int i2 = this.mEllipsizedStart;
-            obtain.set(textPaint, charSequence, 0, length, 1, directions, false, null, i2, i2 + this.mEllipsizedCount, z3);
-            this.mMax = (int) Math.ceil(obtain.metrics(null, null, false, null));
-            TextLine.recycle(obtain);
+            textLineObtain.set(textPaint, charSequence, 0, length, 1, directions, false, null, i2, i2 + this.mEllipsizedCount, z3);
+            this.mMax = (int) Math.ceil(textLineObtain.metrics(null, null, false, null));
+            TextLine.recycle(textLineObtain);
         }
         if (z) {
             this.mTopPadding = metrics.top - metrics.ascent;
@@ -173,24 +175,24 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
     }
 
     private static boolean hasAnyInterestingChars(CharSequence charSequence, int i) {
-        char[] obtain = TextUtils.obtain(500);
+        char[] cArrObtain = TextUtils.obtain(500);
         int i2 = 0;
         while (i2 < i) {
             int i3 = i2 + 500;
             try {
-                int min = Math.min(i3, i);
-                TextUtils.getChars(charSequence, i2, min, obtain, 0);
-                int i4 = min - i2;
+                int iMin = Math.min(i3, i);
+                TextUtils.getChars(charSequence, i2, iMin, cArrObtain, 0);
+                int i4 = iMin - i2;
                 for (int i5 = 0; i5 < i4; i5++) {
-                    char c = obtain[i5];
+                    char c = cArrObtain[i5];
                     if (c == '\n' || c == '\t' || TextUtils.couldAffectRtl(c)) {
-                        TextUtils.recycle(obtain);
+                        TextUtils.recycle(cArrObtain);
                         return true;
                     }
                 }
                 i2 = i3;
             } finally {
-                TextUtils.recycle(obtain);
+                TextUtils.recycle(cArrObtain);
             }
         }
         return false;
@@ -228,10 +230,10 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
             metrics2.top = Math.min(metrics2.top, metrics2.ascent);
             metrics2.bottom = Math.max(metrics2.bottom, metrics2.descent);
         }
-        TextLine obtain = TextLine.obtain();
-        obtain.set(textPaint, charSequence, 0, length, 1, Layout.DIRS_ALL_LEFT_TO_RIGHT, false, null, 0, 0, z);
-        metrics2.width = (int) Math.ceil(obtain.metrics(metrics2, metrics2.mDrawingBounds, false, null));
-        TextLine.recycle(obtain);
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(textPaint, charSequence, 0, length, 1, Layout.DIRS_ALL_LEFT_TO_RIGHT, false, null, 0, 0, z);
+        metrics2.width = (int) Math.ceil(textLineObtain.metrics(metrics2, metrics2.mDrawingBounds, false, null));
+        TextLine.recycle(textLineObtain);
         return metrics2;
     }
 
@@ -320,53 +322,31 @@ public class BoringLayout extends Layout implements TextUtils.EllipsizeCallback 
         return this.mDrawingBounds;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0024  */
     @Override // android.text.Layout
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void draw(android.graphics.Canvas r3, android.graphics.Path r4, android.graphics.Paint r5, int r6) {
-        /*
-            r2 = this;
-            java.lang.String r0 = r2.mDirect
-            if (r0 == 0) goto L3b
-            if (r4 != 0) goto L3b
-            boolean r4 = r2.getUseBoundsForWidth()
-            r5 = 0
-            if (r4 == 0) goto L24
-            boolean r4 = r2.getShiftDrawingOffsetForStartOverhang()
-            if (r4 == 0) goto L24
-            android.graphics.RectF r4 = r2.computeDrawingBoundingBox()
-            float r6 = r4.left
-            int r6 = (r6 > r5 ? 1 : (r6 == r5 ? 0 : -1))
-            if (r6 >= 0) goto L24
-            float r4 = r4.left
-            float r4 = -r4
-            r3.translate(r4, r5)
-            goto L25
-        L24:
-            r4 = r5
-        L25:
-            java.lang.String r6 = r2.mDirect
-            int r0 = r2.mBottom
-            int r1 = r2.mDesc
-            int r0 = r0 - r1
-            float r0 = (float) r0
-            android.graphics.Paint r2 = r2.mPaint
-            r3.drawText(r6, r5, r0, r2)
-            int r2 = (r4 > r5 ? 1 : (r4 == r5 ? 0 : -1))
-            if (r2 == 0) goto L3a
-            float r2 = -r4
-            r3.translate(r2, r5)
-        L3a:
-            return
-        L3b:
-            super.draw(r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.BoringLayout.draw(android.graphics.Canvas, android.graphics.Path, android.graphics.Paint, int):void");
+    public void draw(Canvas canvas, Path path, Paint paint, int i) {
+        float f;
+        if (this.mDirect != null && path == null) {
+            if (getUseBoundsForWidth() && getShiftDrawingOffsetForStartOverhang()) {
+                RectF rectFComputeDrawingBoundingBox = computeDrawingBoundingBox();
+                if (rectFComputeDrawingBoundingBox.left < 0.0f) {
+                    f = -rectFComputeDrawingBoundingBox.left;
+                    canvas.translate(f, 0.0f);
+                }
+            } else {
+                f = 0.0f;
+            }
+            canvas.drawText(this.mDirect, 0.0f, this.mBottom - this.mDesc, this.mPaint);
+            if (f != 0.0f) {
+                canvas.translate(-f, 0.0f);
+                return;
+            }
+            return;
+        }
+        super.draw(canvas, path, paint, i);
     }
 
     @Override // android.text.TextUtils.EllipsizeCallback

@@ -7,11 +7,17 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore2.AndroidKeyStoreSpi;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.ProviderException;
 import java.security.SecureRandom;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.spec.ECGenParameterSpec;
@@ -47,15 +53,15 @@ public abstract class AttestationUtils {
         }
     }
 
-    public static X509Certificate[] attestDeviceIds(Context context, int[] iArr, byte[] bArr) throws DeviceIdAttestationException {
+    public static X509Certificate[] attestDeviceIds(Context context, int[] iArr, byte[] bArr) throws NoSuchAlgorithmException, DeviceIdAttestationException, IOException, KeyStoreException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
         if (bArr == null) {
             throw new NullPointerException("Missing attestation challenge");
         }
         if (iArr == null) {
             throw new NullPointerException("Missing id types");
         }
-        String generateRandomAlias = generateRandomAlias();
-        KeyGenParameterSpec.Builder attestationChallenge = new KeyGenParameterSpec.Builder(generateRandomAlias, 4).setAlgorithmParameterSpec(new ECGenParameterSpec("secp256r1")).setDigests("SHA-256").setAttestationChallenge(bArr);
+        String strGenerateRandomAlias = generateRandomAlias();
+        KeyGenParameterSpec.Builder attestationChallenge = new KeyGenParameterSpec.Builder(strGenerateRandomAlias, 4).setAlgorithmParameterSpec(new ECGenParameterSpec("secp256r1")).setDigests("SHA-256").setAttestationChallenge(bArr);
         if (iArr != null) {
             attestationChallenge.setAttestationIds(iArr);
             attestationChallenge.setDevicePropertiesAttestationIncluded(true);
@@ -66,9 +72,9 @@ public abstract class AttestationUtils {
             keyPairGenerator.generateKeyPair();
             KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
             keyStore.load(null);
-            Certificate[] certificateChain = keyStore.getCertificateChain(generateRandomAlias);
+            Certificate[] certificateChain = keyStore.getCertificateChain(strGenerateRandomAlias);
             X509Certificate[] x509CertificateArr = (X509Certificate[]) Arrays.copyOf(certificateChain, certificateChain.length, X509Certificate[].class);
-            keyStore.deleteEntry(generateRandomAlias);
+            keyStore.deleteEntry(strGenerateRandomAlias);
             return x509CertificateArr;
         } catch (SecurityException e) {
             throw e;

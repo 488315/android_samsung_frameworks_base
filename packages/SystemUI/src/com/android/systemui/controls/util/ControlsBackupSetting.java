@@ -4,7 +4,6 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsBackupSetting {
     public boolean controlDevice;
@@ -31,9 +30,9 @@ public final class ControlsBackupSetting {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.showDevice) * 31, 31, this.controlDevice), 31, this.isOOBECompleted);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.showDevice) * 31, 31, this.controlDevice), 31, this.isOOBECompleted);
         String str = this.selectedComponent;
-        return m + (str == null ? 0 : str.hashCode());
+        return iM + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {
@@ -41,11 +40,11 @@ public final class ControlsBackupSetting {
         boolean z2 = this.controlDevice;
         boolean z3 = this.isOOBECompleted;
         String str = this.selectedComponent;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("ControlsBackupSetting(showDevice=", ", controlDevice=", ", isOOBECompleted=", z, z2);
-        m.append(z3);
-        m.append(", selectedComponent=");
-        m.append(str);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("ControlsBackupSetting(showDevice=", ", controlDevice=", ", isOOBECompleted=", z, z2);
+        sbM.append(z3);
+        sbM.append(", selectedComponent=");
+        sbM.append(str);
+        sbM.append(")");
+        return sbM.toString();
     }
 }

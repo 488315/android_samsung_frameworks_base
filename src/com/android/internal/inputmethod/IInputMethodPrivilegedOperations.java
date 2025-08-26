@@ -182,9 +182,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputMethodPrivilegedOperations.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMethodPrivilegedOperations)) {
-                return (IInputMethodPrivilegedOperations) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputMethodPrivilegedOperations.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMethodPrivilegedOperations)) {
+                return (IInputMethodPrivilegedOperations) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -252,62 +252,62 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setImeWindowStatusAsync(readInt, readInt2);
+                    setImeWindowStatusAsync(i3, i4);
                     return true;
                 case 2:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    reportStartInputAsync(readStrongBinder);
+                    reportStartInputAsync(strongBinder);
                     return true;
                 case 3:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createInputContentUriToken(uri, readString, androidFuture);
+                    createInputContentUriToken(uri, string, androidFuture);
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reportFullscreenModeAsync(readBoolean);
+                    reportFullscreenModeAsync(z);
                     return true;
                 case 5:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     AndroidFuture androidFuture2 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setInputMethod(readString2, androidFuture2);
+                    setInputMethod(string2, androidFuture2);
                     return true;
                 case 6:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     InputMethodSubtype inputMethodSubtype = (InputMethodSubtype) parcel.readTypedObject(InputMethodSubtype.CREATOR);
                     AndroidFuture androidFuture3 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setInputMethodAndSubtype(readString3, inputMethodSubtype, androidFuture3);
+                    setInputMethodAndSubtype(string3, inputMethodSubtype, androidFuture3);
                     return true;
                 case 7:
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     AndroidFuture androidFuture4 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    hideMySoftInput(token, readInt3, readInt4, androidFuture4);
+                    hideMySoftInput(token, i5, i6, androidFuture4);
                     return true;
                 case 8:
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     AndroidFuture androidFuture5 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    showMySoftInput(token2, readInt5, readInt6, androidFuture5);
+                    showMySoftInput(token2, i7, i8, androidFuture5);
                     return true;
                 case 9:
-                    String readString4 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateStatusIconAsync(readString4, readInt7);
+                    updateStatusIconAsync(string4, i9);
                     return true;
                 case 10:
                     AndroidFuture androidFuture6 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -315,10 +315,10 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                     switchToPreviousInputMethod(androidFuture6);
                     return true;
                 case 11:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     AndroidFuture androidFuture7 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    switchToNextInputMethod(readBoolean2, androidFuture7);
+                    switchToNextInputMethod(z2, androidFuture7);
                     return true;
                 case 12:
                     AndroidFuture androidFuture8 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -326,40 +326,40 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                     shouldOfferSwitchingToNextInputMethod(androidFuture8);
                     return true;
                 case 13:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onImeSwitchButtonClickFromClient(readInt8);
+                    onImeSwitchButtonClickFromClient(i10);
                     return true;
                 case 14:
                     notifyUserActionAsync();
                     return true;
                 case 15:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    boolean z3 = parcel.readBoolean();
                     ImeTracker.Token token3 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    applyImeVisibilityAsync(readStrongBinder2, readBoolean3, token3);
+                    applyImeVisibilityAsync(strongBinder2, z3, token3);
                     return true;
                 case 16:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onStylusHandwritingReady(readInt9, readInt10);
+                    onStylusHandwritingReady(i11, i12);
                     return true;
                 case 17:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetStylusHandwriting(readInt11);
+                    resetStylusHandwriting(i13);
                     return true;
                 case 18:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    switchKeyboardLayoutAsync(readInt12);
+                    switchKeyboardLayoutAsync(i14);
                     return true;
                 case 19:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setHandwritingSurfaceNotTouchable(readBoolean4);
+                    setHandwritingSurfaceNotTouchable(z4);
                     return true;
                 case 20:
                     Region region = (Region) parcel.readTypedObject(Region.CREATOR);
@@ -389,257 +389,257 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void setImeWindowStatusAsync(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void reportStartInputAsync(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void createInputContentUriToken(Uri uri, String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void reportFullscreenModeAsync(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void setInputMethod(String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void setInputMethodAndSubtype(String str, InputMethodSubtype inputMethodSubtype, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(inputMethodSubtype, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(inputMethodSubtype, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void hideMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void showMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void updateStatusIconAsync(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void switchToPreviousInputMethod(AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void switchToNextInputMethod(boolean z, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void shouldOfferSwitchingToNextInputMethod(AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void onImeSwitchButtonClickFromClient(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void notifyUserActionAsync() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void applyImeVisibilityAsync(IBinder iBinder, boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void onStylusHandwritingReady(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void resetStylusHandwriting(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void switchKeyboardLayoutAsync(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void setHandwritingSurfaceNotTouchable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
             public void setHandwritingTouchableRegion(Region region) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
-                    obtain.writeTypedObject(region, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(region, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -125,107 +125,81 @@ public final class TextBoundsInfo implements Parcelable {
             return -1;
         }
         int i3 = (2 & getCharacterFlags(i + (-1))) != 0 ? i : i + 1;
-        int nextEndBoundary = this.mGraphemeSegmentFinder.nextEndBoundary(i2);
-        if (nextEndBoundary == -1) {
+        int iNextEndBoundary = this.mGraphemeSegmentFinder.nextEndBoundary(i2);
+        if (iNextEndBoundary == -1) {
             return -1;
         }
         int i4 = -1;
-        int previousStartBoundary = this.mGraphemeSegmentFinder.previousStartBoundary(nextEndBoundary);
+        int iPreviousStartBoundary = this.mGraphemeSegmentFinder.previousStartBoundary(iNextEndBoundary);
         float f3 = Float.MAX_VALUE;
-        while (previousStartBoundary != -1 && previousStartBoundary < i3) {
-            if (previousStartBoundary >= i2) {
+        while (iPreviousStartBoundary != -1 && iPreviousStartBoundary < i3) {
+            if (iPreviousStartBoundary >= i2) {
                 textBoundsInfo = this;
-                float abs = Math.abs(textBoundsInfo.getCursorHorizontalPosition(previousStartBoundary, i2, i, rectF.left, rectF.right) - f);
-                if (abs < f3) {
-                    f3 = abs;
-                    i4 = previousStartBoundary;
+                float fAbs = Math.abs(textBoundsInfo.getCursorHorizontalPosition(iPreviousStartBoundary, i2, i, rectF.left, rectF.right) - f);
+                if (fAbs < f3) {
+                    f3 = fAbs;
+                    i4 = iPreviousStartBoundary;
                 }
             } else {
                 textBoundsInfo = this;
             }
-            previousStartBoundary = textBoundsInfo.mGraphemeSegmentFinder.nextStartBoundary(previousStartBoundary);
+            iPreviousStartBoundary = textBoundsInfo.mGraphemeSegmentFinder.nextStartBoundary(iPreviousStartBoundary);
             this = textBoundsInfo;
         }
         return i4;
     }
 
     private boolean primaryIsTrailingPrevious(int i, int i2, int i3) {
-        int i4;
-        int i5;
+        int characterBidiLevel;
+        int characterBidiLevel2;
         if (i < i3) {
-            i4 = getCharacterBidiLevel(i);
+            characterBidiLevel = getCharacterBidiLevel(i);
         } else {
-            i4 = (getCharacterFlags(i + (-1)) & 8) == 8 ? 1 : 0;
+            characterBidiLevel = (getCharacterFlags(i + (-1)) & 8) == 8 ? 1 : 0;
         }
         if (i > i2) {
-            i5 = getCharacterBidiLevel(i - 1);
+            characterBidiLevel2 = getCharacterBidiLevel(i - 1);
         } else {
-            i5 = (getCharacterFlags(i) & 8) == 8 ? 1 : 0;
+            characterBidiLevel2 = (getCharacterFlags(i) & 8) == 8 ? 1 : 0;
         }
-        return i5 < i4;
+        return characterBidiLevel2 < characterBidiLevel;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0026 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0025 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0026 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002f  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x003c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private float getCursorHorizontalPosition(int r5, int r6, int r7, float r8, float r9) {
-        /*
-            r4 = this;
-            java.lang.String r0 = "index"
-            com.android.internal.util.Preconditions.checkArgumentInRange(r5, r6, r7, r0)
-            int r0 = r4.getCharacterFlags(r6)
-            r0 = r0 & 8
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L11
-            r0 = r2
-            goto L12
-        L11:
-            r0 = r1
-        L12:
-            boolean r3 = r4.primaryIsTrailingPrevious(r5, r6, r7)
-            if (r3 == 0) goto L21
-            if (r5 > r6) goto L1d
-            if (r0 == 0) goto L25
-            goto L26
-        L1d:
-            int r5 = r5 + (-1)
-            r6 = r1
-            goto L28
-        L21:
-            if (r5 < r7) goto L27
-            if (r0 == 0) goto L26
-        L25:
-            return r8
-        L26:
-            return r9
-        L27:
-            r6 = r2
-        L28:
-            int r7 = r4.getCharacterBidiLevel(r5)
-            r7 = r7 & r2
-            if (r7 == 0) goto L30
-            r1 = r2
-        L30:
-            int r7 = r4.mStart
-            int r5 = r5 - r7
-            float[] r4 = r4.mCharacterBounds
-            int r5 = r5 * 4
-            if (r1 == r6) goto L3c
-            r4 = r4[r5]
-            return r4
-        L3c:
-            int r5 = r5 + 2
-            r4 = r4[r5]
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.inputmethod.TextBoundsInfo.getCursorHorizontalPosition(int, int, int, float, float):float");
+    private float getCursorHorizontalPosition(int i, int i2, int i3, float f, float f2) {
+        boolean z;
+        Preconditions.checkArgumentInRange(i, i2, i3, "index");
+        boolean z2 = (getCharacterFlags(i2) & 8) != 0;
+        if (primaryIsTrailingPrevious(i, i2, i3)) {
+            if (i <= i2) {
+                return z2 ? f2 : f;
+            }
+            i--;
+            z = false;
+            boolean z3 = (getCharacterBidiLevel(i) & 1) != 0;
+            int i4 = i - this.mStart;
+            float[] fArr = this.mCharacterBounds;
+            int i5 = i4 * 4;
+            return z3 == z ? fArr[i5] : fArr[i5 + 2];
+        }
+        if (i < i3) {
+            z = true;
+            if ((getCharacterBidiLevel(i) & 1) != 0) {
+            }
+            int i42 = i - this.mStart;
+            float[] fArr2 = this.mCharacterBounds;
+            int i52 = i42 * 4;
+            if (z3 == z) {
+            }
+        } else if (z2) {
+        }
     }
 
     private void getBoundsForRange(int i, int i2, RectF rectF) {
@@ -252,44 +226,44 @@ public final class TextBoundsInfo implements Parcelable {
     private void getLineInfo(float f, int[] iArr, RectF rectF) {
         iArr[0] = -1;
         iArr[1] = -1;
-        int nextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(this.mStart);
-        if (nextEndBoundary == -1) {
+        int iNextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(this.mStart);
+        if (iNextEndBoundary == -1) {
             return;
         }
-        int previousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(nextEndBoundary);
+        int iPreviousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(iNextEndBoundary);
         RectF rectF2 = new RectF();
+        float fMin = Float.MAX_VALUE;
+        float fMax = Float.MIN_VALUE;
         float f2 = Float.MAX_VALUE;
-        float f3 = Float.MIN_VALUE;
-        float f4 = Float.MAX_VALUE;
-        while (previousStartBoundary != -1 && previousStartBoundary < this.mEnd) {
-            getBoundsForRange(Math.max(this.mStart, previousStartBoundary), Math.min(this.mEnd, nextEndBoundary), rectF2);
-            f2 = Math.min(rectF2.top, f2);
-            f3 = Math.max(rectF2.bottom, f3);
-            float verticalDistance = verticalDistance(rectF2, f);
-            if (verticalDistance == 0.0f) {
-                iArr[0] = previousStartBoundary;
-                iArr[1] = nextEndBoundary;
+        while (iPreviousStartBoundary != -1 && iPreviousStartBoundary < this.mEnd) {
+            getBoundsForRange(Math.max(this.mStart, iPreviousStartBoundary), Math.min(this.mEnd, iNextEndBoundary), rectF2);
+            fMin = Math.min(rectF2.top, fMin);
+            fMax = Math.max(rectF2.bottom, fMax);
+            float fVerticalDistance = verticalDistance(rectF2, f);
+            if (fVerticalDistance == 0.0f) {
+                iArr[0] = iPreviousStartBoundary;
+                iArr[1] = iNextEndBoundary;
                 if (rectF != null) {
                     rectF.set(rectF2);
                     return;
                 }
                 return;
             }
-            if (verticalDistance < f4) {
-                iArr[0] = previousStartBoundary;
-                iArr[1] = nextEndBoundary;
+            if (fVerticalDistance < f2) {
+                iArr[0] = iPreviousStartBoundary;
+                iArr[1] = iNextEndBoundary;
                 if (rectF != null) {
                     rectF.set(rectF2);
                 }
-                f4 = verticalDistance;
+                f2 = fVerticalDistance;
             }
             if (f < rectF.top) {
                 break;
             }
-            previousStartBoundary = this.mLineSegmentFinder.nextStartBoundary(previousStartBoundary);
-            nextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(nextEndBoundary);
+            iPreviousStartBoundary = this.mLineSegmentFinder.nextStartBoundary(iPreviousStartBoundary);
+            iNextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(iNextEndBoundary);
         }
-        if (f < f2 || f > f3) {
+        if (f < fMin || f > fMax) {
             iArr[0] = -1;
             iArr[1] = -1;
             if (rectF != null) {
@@ -299,30 +273,30 @@ public final class TextBoundsInfo implements Parcelable {
     }
 
     public int[] getRangeForRect(RectF rectF, SegmentFinder segmentFinder, Layout.TextInclusionStrategy textInclusionStrategy) {
-        int previousStartBoundary;
-        int nextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(this.mStart);
-        if (nextEndBoundary == -1) {
+        int iPreviousStartBoundary;
+        int iNextEndBoundary = this.mLineSegmentFinder.nextEndBoundary(this.mStart);
+        if (iNextEndBoundary == -1) {
             return null;
         }
-        int i = nextEndBoundary;
-        int previousStartBoundary2 = this.mLineSegmentFinder.previousStartBoundary(nextEndBoundary);
-        int i2 = -1;
-        while (previousStartBoundary2 != -1 && i2 == -1) {
-            i2 = getStartForRectWithinLine(previousStartBoundary2, i, rectF, segmentFinder, textInclusionStrategy);
-            previousStartBoundary2 = this.mLineSegmentFinder.nextStartBoundary(previousStartBoundary2);
-            i = this.mLineSegmentFinder.nextEndBoundary(i);
+        int iNextEndBoundary2 = iNextEndBoundary;
+        int iPreviousStartBoundary2 = this.mLineSegmentFinder.previousStartBoundary(iNextEndBoundary);
+        int startForRectWithinLine = -1;
+        while (iPreviousStartBoundary2 != -1 && startForRectWithinLine == -1) {
+            startForRectWithinLine = getStartForRectWithinLine(iPreviousStartBoundary2, iNextEndBoundary2, rectF, segmentFinder, textInclusionStrategy);
+            iPreviousStartBoundary2 = this.mLineSegmentFinder.nextStartBoundary(iPreviousStartBoundary2);
+            iNextEndBoundary2 = this.mLineSegmentFinder.nextEndBoundary(iNextEndBoundary2);
         }
-        if (i2 == -1 || (previousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(this.mEnd)) == -1) {
+        if (startForRectWithinLine == -1 || (iPreviousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(this.mEnd)) == -1) {
             return null;
         }
-        int nextEndBoundary2 = this.mLineSegmentFinder.nextEndBoundary(previousStartBoundary);
-        int i3 = -1;
-        while (nextEndBoundary2 > i2 && i3 == -1) {
-            i3 = getEndForRectWithinLine(previousStartBoundary, nextEndBoundary2, rectF, segmentFinder, textInclusionStrategy);
-            previousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(previousStartBoundary);
-            nextEndBoundary2 = this.mLineSegmentFinder.previousEndBoundary(nextEndBoundary2);
+        int iNextEndBoundary3 = this.mLineSegmentFinder.nextEndBoundary(iPreviousStartBoundary);
+        int endForRectWithinLine = -1;
+        while (iNextEndBoundary3 > startForRectWithinLine && endForRectWithinLine == -1) {
+            endForRectWithinLine = getEndForRectWithinLine(iPreviousStartBoundary, iNextEndBoundary3, rectF, segmentFinder, textInclusionStrategy);
+            iPreviousStartBoundary = this.mLineSegmentFinder.previousStartBoundary(iPreviousStartBoundary);
+            iNextEndBoundary3 = this.mLineSegmentFinder.previousEndBoundary(iNextEndBoundary3);
         }
-        return new int[]{segmentFinder.previousStartBoundary(i2 + 1), segmentFinder.nextEndBoundary(i3 - 1)};
+        return new int[]{segmentFinder.previousStartBoundary(startForRectWithinLine + 1), segmentFinder.nextEndBoundary(endForRectWithinLine - 1)};
     }
 
     private int getStartForRectWithinLine(int i, int i2, RectF rectF, SegmentFinder segmentFinder, Layout.TextInclusionStrategy textInclusionStrategy) {
@@ -349,20 +323,20 @@ public final class TextBoundsInfo implements Parcelable {
     }
 
     private int getStartForRectWithinRun(int i, int i2, RectF rectF, SegmentFinder segmentFinder, Layout.TextInclusionStrategy textInclusionStrategy) {
-        int nextEndBoundary;
-        if (i >= i2 || (nextEndBoundary = segmentFinder.nextEndBoundary(i)) == -1) {
+        int iNextEndBoundary;
+        if (i >= i2 || (iNextEndBoundary = segmentFinder.nextEndBoundary(i)) == -1) {
             return -1;
         }
-        int previousStartBoundary = segmentFinder.previousStartBoundary(nextEndBoundary);
+        int iPreviousStartBoundary = segmentFinder.previousStartBoundary(iNextEndBoundary);
         RectF rectF2 = new RectF();
-        while (previousStartBoundary != -1 && previousStartBoundary < i2) {
-            int max = Math.max(i, previousStartBoundary);
-            getBoundsForRange(max, Math.min(i2, nextEndBoundary), rectF2);
+        while (iPreviousStartBoundary != -1 && iPreviousStartBoundary < i2) {
+            int iMax = Math.max(i, iPreviousStartBoundary);
+            getBoundsForRange(iMax, Math.min(i2, iNextEndBoundary), rectF2);
             if (textInclusionStrategy.isSegmentInside(rectF2, rectF)) {
-                return max;
+                return iMax;
             }
-            previousStartBoundary = segmentFinder.nextStartBoundary(previousStartBoundary);
-            nextEndBoundary = segmentFinder.nextEndBoundary(nextEndBoundary);
+            iPreviousStartBoundary = segmentFinder.nextStartBoundary(iPreviousStartBoundary);
+            iNextEndBoundary = segmentFinder.nextEndBoundary(iNextEndBoundary);
         }
         return -1;
     }
@@ -373,49 +347,49 @@ public final class TextBoundsInfo implements Parcelable {
         if (i >= i2) {
             return -1;
         }
-        int max = Math.max(i, this.mStart);
-        int min = Math.min(i2, this.mEnd);
-        int i4 = min - 1;
+        int iMax = Math.max(i, this.mStart);
+        int iMin = Math.min(i2, this.mEnd);
+        int i4 = iMin - 1;
         int i5 = -1;
-        while (i4 >= max) {
+        while (i4 >= iMax) {
             int characterBidiLevel = this.getCharacterBidiLevel(i4);
             if (characterBidiLevel != i5) {
                 i3 = i4 + 1;
                 TextBoundsInfo textBoundsInfo2 = this;
-                int endForRectWithinRun = textBoundsInfo2.getEndForRectWithinRun(i3, min, rectF, segmentFinder, textInclusionStrategy);
+                int endForRectWithinRun = textBoundsInfo2.getEndForRectWithinRun(i3, iMin, rectF, segmentFinder, textInclusionStrategy);
                 textBoundsInfo = textBoundsInfo2;
                 if (endForRectWithinRun != -1) {
                     return endForRectWithinRun;
                 }
                 i5 = characterBidiLevel;
             } else {
-                int i6 = min;
+                int i6 = iMin;
                 textBoundsInfo = this;
                 i3 = i6;
             }
             i4--;
             this = textBoundsInfo;
-            min = i3;
+            iMin = i3;
         }
-        return this.getEndForRectWithinRun(max, min, rectF, segmentFinder, textInclusionStrategy);
+        return this.getEndForRectWithinRun(iMax, iMin, rectF, segmentFinder, textInclusionStrategy);
     }
 
     private int getEndForRectWithinRun(int i, int i2, RectF rectF, SegmentFinder segmentFinder, Layout.TextInclusionStrategy textInclusionStrategy) {
-        int previousStartBoundary;
-        if (i >= i2 || (previousStartBoundary = segmentFinder.previousStartBoundary(i2)) == -1) {
+        int iPreviousStartBoundary;
+        if (i >= i2 || (iPreviousStartBoundary = segmentFinder.previousStartBoundary(i2)) == -1) {
             return -1;
         }
-        int nextEndBoundary = segmentFinder.nextEndBoundary(previousStartBoundary);
+        int iNextEndBoundary = segmentFinder.nextEndBoundary(iPreviousStartBoundary);
         RectF rectF2 = new RectF();
-        while (nextEndBoundary != -1 && nextEndBoundary > i) {
-            int max = Math.max(i, previousStartBoundary);
-            int min = Math.min(i2, nextEndBoundary);
-            getBoundsForRange(max, min, rectF2);
+        while (iNextEndBoundary != -1 && iNextEndBoundary > i) {
+            int iMax = Math.max(i, iPreviousStartBoundary);
+            int iMin = Math.min(i2, iNextEndBoundary);
+            getBoundsForRange(iMax, iMin, rectF2);
             if (textInclusionStrategy.isSegmentInside(rectF2, rectF)) {
-                return min;
+                return iMin;
             }
-            previousStartBoundary = segmentFinder.previousStartBoundary(previousStartBoundary);
-            nextEndBoundary = segmentFinder.previousEndBoundary(nextEndBoundary);
+            iPreviousStartBoundary = segmentFinder.previousStartBoundary(iPreviousStartBoundary);
+            iNextEndBoundary = segmentFinder.previousEndBoundary(iNextEndBoundary);
         }
         return -1;
     }
@@ -436,28 +410,28 @@ public final class TextBoundsInfo implements Parcelable {
         parcel.writeInt(this.mEnd);
         parcel.writeFloatArray(this.mMatrixValues);
         parcel.writeFloatArray(this.mCharacterBounds);
-        int[] copyOf = Arrays.copyOf(this.mInternalCharacterFlags, (this.mEnd - this.mStart) + 1);
-        encodeSegmentFinder(copyOf, 134217728, 67108864, this.mStart, this.mEnd, this.mGraphemeSegmentFinder);
-        encodeSegmentFinder(copyOf, 536870912, 268435456, this.mStart, this.mEnd, this.mWordSegmentFinder);
-        encodeSegmentFinder(copyOf, Integer.MIN_VALUE, 1073741824, this.mStart, this.mEnd, this.mLineSegmentFinder);
-        parcel.writeIntArray(copyOf);
+        int[] iArrCopyOf = Arrays.copyOf(this.mInternalCharacterFlags, (this.mEnd - this.mStart) + 1);
+        encodeSegmentFinder(iArrCopyOf, 134217728, 67108864, this.mStart, this.mEnd, this.mGraphemeSegmentFinder);
+        encodeSegmentFinder(iArrCopyOf, 536870912, 268435456, this.mStart, this.mEnd, this.mWordSegmentFinder);
+        encodeSegmentFinder(iArrCopyOf, Integer.MIN_VALUE, 1073741824, this.mStart, this.mEnd, this.mLineSegmentFinder);
+        parcel.writeIntArray(iArrCopyOf);
     }
 
     private TextBoundsInfo(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mStart = readInt;
-        int readInt2 = parcel.readInt();
-        this.mEnd = readInt2;
+        int i = parcel.readInt();
+        this.mStart = i;
+        int i2 = parcel.readInt();
+        this.mEnd = i2;
         this.mMatrixValues = (float[]) Objects.requireNonNull(parcel.createFloatArray());
         this.mCharacterBounds = (float[]) Objects.requireNonNull(parcel.createFloatArray());
         int[] iArr = (int[]) Objects.requireNonNull(parcel.createIntArray());
-        this.mGraphemeSegmentFinder = decodeSegmentFinder(iArr, 134217728, 67108864, readInt, readInt2);
-        this.mWordSegmentFinder = decodeSegmentFinder(iArr, 536870912, 268435456, readInt, readInt2);
-        this.mLineSegmentFinder = decodeSegmentFinder(iArr, Integer.MIN_VALUE, 1073741824, readInt, readInt2);
-        int i = readInt2 - readInt;
-        this.mInternalCharacterFlags = new int[i];
-        for (int i2 = 0; i2 < i; i2++) {
-            this.mInternalCharacterFlags[i2] = iArr[i2] & 66584591;
+        this.mGraphemeSegmentFinder = decodeSegmentFinder(iArr, 134217728, 67108864, i, i2);
+        this.mWordSegmentFinder = decodeSegmentFinder(iArr, 536870912, 268435456, i, i2);
+        this.mLineSegmentFinder = decodeSegmentFinder(iArr, Integer.MIN_VALUE, 1073741824, i, i2);
+        int i3 = i2 - i;
+        this.mInternalCharacterFlags = new int[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            this.mInternalCharacterFlags[i4] = iArr[i4] & 66584591;
         }
     }
 
@@ -625,20 +599,20 @@ public final class TextBoundsInfo implements Parcelable {
         if ((i4 - i3) + 1 != iArr.length) {
             throw new IllegalStateException("The given flags array must have the same length as the given range. flags length: " + iArr.length + " range: [" + i3 + ", " + i4 + NavigationBarInflaterView.SIZE_MOD_END);
         }
-        int nextEndBoundary = segmentFinder.nextEndBoundary(i3);
-        if (nextEndBoundary == -1) {
+        int iNextEndBoundary = segmentFinder.nextEndBoundary(i3);
+        if (iNextEndBoundary == -1) {
             return;
         }
-        int previousStartBoundary = segmentFinder.previousStartBoundary(nextEndBoundary);
-        while (nextEndBoundary != -1 && nextEndBoundary <= i4) {
-            if (previousStartBoundary >= i3) {
-                int i5 = previousStartBoundary - i3;
+        int iPreviousStartBoundary = segmentFinder.previousStartBoundary(iNextEndBoundary);
+        while (iNextEndBoundary != -1 && iNextEndBoundary <= i4) {
+            if (iPreviousStartBoundary >= i3) {
+                int i5 = iPreviousStartBoundary - i3;
                 iArr[i5] = iArr[i5] | i;
-                int i6 = nextEndBoundary - i3;
+                int i6 = iNextEndBoundary - i3;
                 iArr[i6] = iArr[i6] | i2;
             }
-            previousStartBoundary = segmentFinder.nextStartBoundary(previousStartBoundary);
-            nextEndBoundary = segmentFinder.nextEndBoundary(nextEndBoundary);
+            iPreviousStartBoundary = segmentFinder.nextStartBoundary(iPreviousStartBoundary);
+            iNextEndBoundary = segmentFinder.nextEndBoundary(iNextEndBoundary);
         }
     }
 
@@ -646,75 +620,47 @@ public final class TextBoundsInfo implements Parcelable {
         if ((i4 - i3) + 1 != iArr.length) {
             throw new IllegalStateException("The given flags array must have the same length as the given range. flags length: " + iArr.length + " range: [" + i3 + ", " + i4 + NavigationBarInflaterView.SIZE_MOD_END);
         }
-        int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(10);
+        int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(10);
         int i5 = 0;
         for (int i6 = 0; i6 < iArr.length; i6++) {
             if ((iArr[i6] & i) == i) {
-                newUnpaddedIntArray = GrowingArrayUtils.append(newUnpaddedIntArray, i5, i3 + i6);
+                iArrNewUnpaddedIntArray = GrowingArrayUtils.append(iArrNewUnpaddedIntArray, i5, i3 + i6);
                 i5++;
             }
             if ((iArr[i6] & i2) == i2) {
-                newUnpaddedIntArray = GrowingArrayUtils.append(newUnpaddedIntArray, i5, i3 + i6);
+                iArrNewUnpaddedIntArray = GrowingArrayUtils.append(iArrNewUnpaddedIntArray, i5, i3 + i6);
                 i5++;
             }
         }
-        return new SegmentFinder.PrescribedSegmentFinder(Arrays.copyOf(newUnpaddedIntArray, i5));
+        return new SegmentFinder.PrescribedSegmentFinder(Arrays.copyOf(iArrNewUnpaddedIntArray, i5));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0037, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0037, code lost:
     
         r3 = r10.nextStartBoundary(r3);
         r0 = r10.nextEndBoundary(r0);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean isLineDirectionFlagConsistent(int[] r9, android.text.SegmentFinder r10, int r11, int r12) {
-        /*
-            int r0 = r10.nextEndBoundary(r11)
-            r1 = 1
-            r2 = -1
-            if (r0 != r2) goto L9
-            return r1
-        L9:
-            int r3 = r10.previousStartBoundary(r0)
-        Ld:
-            if (r3 == r2) goto L40
-            if (r3 >= r12) goto L40
-            int r4 = java.lang.Math.max(r3, r11)
-            int r5 = java.lang.Math.min(r0, r12)
-            int r6 = r4 - r11
-            r6 = r9[r6]
-            r6 = r6 & 8
-            r7 = 0
-            if (r6 == 0) goto L24
-            r6 = r1
-            goto L25
-        L24:
-            r6 = r7
-        L25:
-            int r4 = r4 + 1
-            if (r4 >= r5) goto L37
-            int r8 = r4 - r11
-            r8 = r9[r8]
-            r8 = r8 & 8
-            if (r8 == 0) goto L33
-            r8 = r1
-            goto L34
-        L33:
-            r8 = r7
-        L34:
-            if (r8 == r6) goto L25
-            return r7
-        L37:
-            int r3 = r10.nextStartBoundary(r3)
-            int r0 = r10.nextEndBoundary(r0)
-            goto Ld
-        L40:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.inputmethod.TextBoundsInfo.isLineDirectionFlagConsistent(int[], android.text.SegmentFinder, int, int):boolean");
+    public static boolean isLineDirectionFlagConsistent(int[] iArr, SegmentFinder segmentFinder, int i, int i2) {
+        int iNextEndBoundary = segmentFinder.nextEndBoundary(i);
+        if (iNextEndBoundary == -1) {
+            return true;
+        }
+        int iPreviousStartBoundary = segmentFinder.previousStartBoundary(iNextEndBoundary);
+        while (iPreviousStartBoundary != -1 && iPreviousStartBoundary < i2) {
+            int iMax = Math.max(iPreviousStartBoundary, i);
+            int iMin = Math.min(iNextEndBoundary, i2);
+            boolean z = (iArr[iMax - i] & 8) != 0;
+            do {
+                iMax++;
+                if (iMax < iMin) {
+                }
+            } while (((iArr[iMax - i] & 8) != 0) == z);
+            return false;
+        }
+        return true;
     }
 }

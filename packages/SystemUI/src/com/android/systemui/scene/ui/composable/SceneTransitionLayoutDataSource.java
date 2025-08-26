@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneTransitionLayoutDataSource implements SceneDataSource {
     public final CoroutineScope coroutineScope;
@@ -33,13 +32,13 @@ public final class SceneTransitionLayoutDataSource implements SceneDataSource {
     public SceneTransitionLayoutDataSource(MutableSceneTransitionLayoutState mutableSceneTransitionLayoutState, CoroutineScope coroutineScope) {
         this.state = mutableSceneTransitionLayoutState;
         this.coroutineScope = coroutineScope;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(FlowKt.distinctUntilChanged(SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(mutableSceneTransitionLayoutState, 5))), new SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1(null));
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(FlowKt.distinctUntilChanged(SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(mutableSceneTransitionLayoutState, 5))), new SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1(null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        this.currentScene = FlowKt.stateIn(transformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), ((MutableSceneTransitionLayoutStateImpl) mutableSceneTransitionLayoutState).getTransitionState().getCurrentScene());
+        this.currentScene = FlowKt.stateIn(channelFlowTransformLatestTransformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), ((MutableSceneTransitionLayoutStateImpl) mutableSceneTransitionLayoutState).getTransitionState().getCurrentScene());
         this.currentOverlays = FlowKt.stateIn(SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.systemui.scene.ui.composable.SceneTransitionLayoutDataSource$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return ((MutableSceneTransitionLayoutStateImpl) SceneTransitionLayoutDataSource.this.state).getTransitionState().getCurrentOverlays();
+                return ((MutableSceneTransitionLayoutStateImpl) this.f$0.state).getTransitionState().getCurrentOverlays();
             }
         }), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), EmptySet.INSTANCE);
     }

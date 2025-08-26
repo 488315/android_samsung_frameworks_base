@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DreamOverlayStatusBarItemsProvider$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -35,7 +34,7 @@ public final /* synthetic */ class DreamOverlayStatusBarItemsProvider$$ExternalS
                         ambientStatusBarViewController.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda12
                             @Override // java.lang.Runnable
                             public final void run() {
-                                AmbientStatusBarViewController.m1009$r8$lambda$58bl0PfQY4gnoAw786XPvbTz9k(AmbientStatusBarViewController.this, list);
+                                AmbientStatusBarViewController.m1011$r8$lambda$58bl0PfQY4gnoAw786XPvbTz9k(ambientStatusBarViewController, list);
                             }
                         });
                         break;

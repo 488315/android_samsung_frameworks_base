@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.os.Process;
 import android.os.UserHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContextInfo implements Parcelable {
     public static final Parcelable.Creator<ContextInfo> CREATOR = new Parcelable.Creator<ContextInfo>() { // from class: com.samsung.android.knox.ContextInfo.1
@@ -50,9 +49,9 @@ public class ContextInfo implements Parcelable {
     }
 
     public ContextInfo() {
-        int myUid = Process.myUid();
-        this.mCallerUid = myUid;
-        int userId = UserHandle.getUserId(myUid);
+        int iMyUid = Process.myUid();
+        this.mCallerUid = iMyUid;
+        int userId = UserHandle.getUserId(iMyUid);
         if (SemPersonaManager.isKnoxId(userId)) {
             this.mContainerId = userId;
         } else {

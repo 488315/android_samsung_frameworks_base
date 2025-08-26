@@ -3,6 +3,7 @@ package com.android.systemui.controls.controller;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.util.Log;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.BasicRune;
@@ -30,7 +31,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptySet;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecDeviceControlsControllerImpl implements SecDeviceControlsController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,12 +41,12 @@ public final class SecDeviceControlsControllerImpl implements SecDeviceControlsC
     public final KeyguardUpdateMonitor keyguardUpdateMonitor;
     public final SecDeviceControlsControllerImpl$listingCallback$1 listingCallback = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.controls.controller.SecDeviceControlsControllerImpl$listingCallback$1
         @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
-        public final void onServicesUpdated(List list) {
+        public final void onServicesUpdated(List list) throws Resources.NotFoundException {
             Log.d("SecDeviceControlsControllerImpl", "onServicesUpdated serviceInfos = " + Integer.valueOf(((ArrayList) list).size()) + ", isNotEmpty = " + (!list.isEmpty()));
             if (list.isEmpty()) {
                 return;
             }
-            final SecDeviceControlsControllerImpl secDeviceControlsControllerImpl = SecDeviceControlsControllerImpl.this;
+            final SecDeviceControlsControllerImpl secDeviceControlsControllerImpl = this.this$0;
             String[] stringArray = secDeviceControlsControllerImpl.context.getResources().getStringArray(R.array.config_controlsPreferredPackages);
             int i = 0;
             final SharedPreferences sharedPreferences = ((UserTrackerImpl) secDeviceControlsControllerImpl.userContextProvider).getUserContext().getSharedPreferences(SystemUIAnalytics.CONTROL_PREF_NAME, 0);
@@ -95,13 +95,13 @@ public final class SecDeviceControlsControllerImpl implements SecDeviceControlsC
                     SeedResponse seedResponse = (SeedResponse) obj;
                     Log.d("SecDeviceControlsControllerImpl", "Controls seeded: " + seedResponse);
                     if (seedResponse.accepted) {
-                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl2 = SecDeviceControlsControllerImpl.this;
+                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl2 = secDeviceControlsControllerImpl;
                         SharedPreferences sharedPreferences2 = sharedPreferences;
                         sharedPreferences2.getClass();
                         int i2 = SecDeviceControlsControllerImpl.$r8$clinit;
                         secDeviceControlsControllerImpl2.getClass();
                         SecDeviceControlsControllerImpl.addPackageToSeededSet(sharedPreferences2, seedResponse.packageName);
-                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl3 = SecDeviceControlsControllerImpl.this;
+                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl3 = secDeviceControlsControllerImpl;
                         secDeviceControlsControllerImpl3.getClass();
                         Log.i("SecDeviceControlsControllerImpl", "fireControlsUpdate()");
                         MediaDevicesBar.AnonymousClass1 anonymousClass1 = secDeviceControlsControllerImpl3.callback;
@@ -110,7 +110,7 @@ public final class SecDeviceControlsControllerImpl implements SecDeviceControlsC
                             secDeviceControlsControllerImpl4.callback = null;
                             secDeviceControlsControllerImpl4.controlsComponent.controlsListingController.ifPresent(new SecDeviceControlsControllerImpl$sam$java_util_function_Consumer$0(new SecDeviceControlsControllerImpl$$ExternalSyntheticLambda0(secDeviceControlsControllerImpl4, 1)));
                         }
-                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl5 = SecDeviceControlsControllerImpl.this;
+                        SecDeviceControlsControllerImpl secDeviceControlsControllerImpl5 = secDeviceControlsControllerImpl;
                         secDeviceControlsControllerImpl5.controlsComponent.controlsListingController.ifPresent(new SecDeviceControlsControllerImpl$sam$java_util_function_Consumer$0(new SecDeviceControlsControllerImpl$$ExternalSyntheticLambda0(secDeviceControlsControllerImpl5, 2)));
                     }
                 }
@@ -121,7 +121,6 @@ public final class SecDeviceControlsControllerImpl implements SecDeviceControlsC
     public final SecureSettings secureSettings;
     public final UserContextProvider userContextProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleBarLocation implements Parcelable {
     public static final /* synthetic */ BubbleBarLocation[] $VALUES;
@@ -16,7 +15,6 @@ public final class BubbleBarLocation implements Parcelable {
     public static final BubbleBarLocation LEFT;
     public static final BubbleBarLocation RIGHT;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,9 +38,9 @@ public final class BubbleBarLocation implements Parcelable {
         CREATOR = new Parcelable.Creator() { // from class: com.android.wm.shell.shared.bubbles.BubbleBarLocation$Companion$CREATOR$1
             @Override // android.os.Parcelable.Creator
             public final Object createFromParcel(Parcel parcel) {
-                BubbleBarLocation valueOf;
-                String readString = parcel.readString();
-                return (readString == null || (valueOf = BubbleBarLocation.valueOf(readString)) == null) ? BubbleBarLocation.DEFAULT : valueOf;
+                BubbleBarLocation bubbleBarLocationValueOf;
+                String string = parcel.readString();
+                return (string == null || (bubbleBarLocationValueOf = BubbleBarLocation.valueOf(string)) == null) ? BubbleBarLocation.DEFAULT : bubbleBarLocationValueOf;
             }
 
             @Override // android.os.Parcelable.Creator

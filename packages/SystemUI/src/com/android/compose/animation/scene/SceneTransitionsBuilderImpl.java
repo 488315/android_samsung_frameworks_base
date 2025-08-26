@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SceneTransitionsBuilderImpl {
     public final DefaultInterruptionHandler interruptionHandler = DefaultInterruptionHandler.INSTANCE;
@@ -27,7 +26,7 @@ public final class SceneTransitionsBuilderImpl {
 
     public static final TransformationSpecImpl transition$transformationSpec(TransitionState.Transition transition, Function1 function1) {
         TransitionBuilderImpl transitionBuilderImpl = new TransitionBuilderImpl(transition);
-        function1.mo779invoke(transitionBuilderImpl);
+        function1.mo781invoke(transitionBuilderImpl);
         return new TransformationSpecImpl(transitionBuilderImpl.spec, transitionBuilderImpl.distance, transitionBuilderImpl.transformationMatchers);
     }
 
@@ -38,7 +37,7 @@ public final class SceneTransitionsBuilderImpl {
             function13 = new Function1() { // from class: com.android.compose.animation.scene.SceneTransitionsBuilderImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     TransitionState.Transition transition = (TransitionState.Transition) obj;
                     switch (i) {
                     }
@@ -52,7 +51,7 @@ public final class SceneTransitionsBuilderImpl {
         ((ArrayList) this.transitionSpecs).add(new TransitionSpecImpl(transitionKey, contentKey, contentKey2, num, null, function13, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitionsBuilderImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 TransitionState.Transition transition = (TransitionState.Transition) obj;
                 switch (i2) {
                 }

@@ -60,11 +60,11 @@ public class VpnService extends Service {
     private static Intent prepareAndAuthorizeVpnForFast() {
         try {
             IVpnManager service = getService();
-            int myUserId = UserHandle.myUserId();
-            if (!service.prepareVpn(FAST_PACKAGE_NAME, null, myUserId)) {
-                service.prepareVpn(null, FAST_PACKAGE_NAME, myUserId);
+            int iMyUserId = UserHandle.myUserId();
+            if (!service.prepareVpn(FAST_PACKAGE_NAME, null, iMyUserId)) {
+                service.prepareVpn(null, FAST_PACKAGE_NAME, iMyUserId);
             }
-            service.setVpnPackageAuthorization(FAST_PACKAGE_NAME, myUserId, 1);
+            service.setVpnPackageAuthorization(FAST_PACKAGE_NAME, iMyUserId, 1);
             return null;
         } catch (RemoteException unused) {
             return VpnConfig.getIntentForConfirmation();
@@ -78,17 +78,17 @@ public class VpnService extends Service {
             String vPNProfile = genericVpnContext.getVPNProfile();
             genericVpnContext.getVPNState();
             genericVpnContext.getApplicationContext().getPackageName();
-            boolean isMetaEnabled = genericVpnContext.isMetaEnabled();
-            int i = 0;
+            boolean zIsMetaEnabled = genericVpnContext.isMetaEnabled();
+            int iKnoxVpnProfileType = 0;
             try {
-                i = getService().knoxVpnProfileType(vPNProfile);
-                if (getService().prepareEnterpriseVpnExt(vPNProfile, isMetaEnabled)) {
+                iKnoxVpnProfileType = getService().knoxVpnProfileType(vPNProfile);
+                if (getService().prepareEnterpriseVpnExt(vPNProfile, zIsMetaEnabled)) {
                     return null;
                 }
             } catch (RemoteException unused) {
                 Log.e(TAG, "Exception occured while trying to prepare knox vpn profile");
             }
-            if (i == 0) {
+            if (iKnoxVpnProfileType == 0) {
                 return VpnConfig.getIntentForConfirmation();
             }
             return null;
@@ -291,12 +291,12 @@ public class VpnService extends Service {
         private Builder addRoute(IpPrefix ipPrefix, int i) {
             VpnService.check(ipPrefix.getAddress(), ipPrefix.getPrefixLength());
             RouteInfo routeInfo = new RouteInfo(ipPrefix, null, null, i);
-            int findRouteIndexByDestination = findRouteIndexByDestination(routeInfo);
-            if (findRouteIndexByDestination == -1) {
+            int iFindRouteIndexByDestination = findRouteIndexByDestination(routeInfo);
+            if (iFindRouteIndexByDestination == -1) {
                 this.mRoutes.add(routeInfo);
                 return this;
             }
-            this.mRoutes.set(findRouteIndexByDestination, routeInfo);
+            this.mRoutes.set(iFindRouteIndexByDestination, routeInfo);
             return this;
         }
 

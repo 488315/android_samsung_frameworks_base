@@ -23,22 +23,22 @@ public final class SaveInfo implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public SaveInfo createFromParcel(Parcel parcel) {
             Builder builder;
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             AutofillId[] autofillIdArr = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
             if (autofillIdArr != null) {
-                builder = new Builder(readInt, autofillIdArr);
+                builder = new Builder(i, autofillIdArr);
             } else {
-                builder = new Builder(readInt);
+                builder = new Builder(i);
             }
             AutofillId[] autofillIdArr2 = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
             if (autofillIdArr2 != null) {
                 builder.setOptionalIds(autofillIdArr2);
             }
-            int readInt2 = parcel.readInt();
-            if (readInt2 == 999) {
-                builder.semSetNegativeSecondAction(readInt2, (IntentSender) parcel.readParcelable(null, IntentSender.class), (IntentSender) parcel.readParcelable(null, IntentSender.class));
+            int i2 = parcel.readInt();
+            if (i2 == 999) {
+                builder.semSetNegativeSecondAction(i2, (IntentSender) parcel.readParcelable(null, IntentSender.class), (IntentSender) parcel.readParcelable(null, IntentSender.class));
             } else {
-                builder.setNegativeAction(readInt2, (IntentSender) parcel.readParcelable(null, IntentSender.class));
+                builder.setNegativeAction(i2, (IntentSender) parcel.readParcelable(null, IntentSender.class));
                 parcel.readParcelable(null, IntentSender.class);
             }
             builder.setPositiveAction(parcel.readInt());

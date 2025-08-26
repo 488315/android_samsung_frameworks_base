@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalMediaRepositoryImpl implements CommunalMediaRepository, MediaDataManager.Listener {
     public final StateFlowImpl _mediaModel;
@@ -20,9 +19,9 @@ public final class CommunalMediaRepositoryImpl implements CommunalMediaRepositor
         this.mediaDataManager = mediaDataManager;
         CommunalMediaModel.Companion.getClass();
         CommunalMediaModel communalMediaModel = CommunalMediaModel.INACTIVE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(communalMediaModel);
-        this._mediaModel = MutableStateFlow;
-        this.mediaModel = DiffableKt.logDiffsForTable(MutableStateFlow, tableLogBuffer, "", communalMediaModel);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(communalMediaModel);
+        this._mediaModel = stateFlowImplMutableStateFlow;
+        this.mediaModel = DiffableKt.logDiffsForTable(stateFlowImplMutableStateFlow, tableLogBuffer, "", communalMediaModel);
     }
 
     @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
@@ -36,9 +35,9 @@ public final class CommunalMediaRepositoryImpl implements CommunalMediaRepositor
     }
 
     public final void updateMediaModel(MediaData mediaData) {
-        boolean hasAnyMediaOrRecommendation = this.mediaDataManager.hasAnyMediaOrRecommendation();
+        boolean zHasAnyMediaOrRecommendation = this.mediaDataManager.hasAnyMediaOrRecommendation();
         StateFlowImpl stateFlowImpl = this._mediaModel;
-        if (hasAnyMediaOrRecommendation) {
+        if (zHasAnyMediaOrRecommendation) {
             stateFlowImpl.updateState(null, new CommunalMediaModel(true, mediaData != null ? mediaData.createdTimestampMillis : 0L));
         } else {
             CommunalMediaModel.Companion.getClass();

@@ -10,7 +10,6 @@ import kotlinx.coroutines.Delay;
 import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.MainCoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MissingMainCoroutineDispatcher extends MainCoroutineDispatcher implements Delay {
     public final Throwable cause;
@@ -45,15 +44,15 @@ public final class MissingMainCoroutineDispatcher extends MainCoroutineDispatche
     }
 
     public final void missing() {
-        String str;
+        String strConcat;
         if (this.cause == null) {
             throw new IllegalStateException("Module with the Main dispatcher is missing. Add dependency providing the Main dispatcher, e.g. 'kotlinx-coroutines-android' and ensure it has the same version as 'kotlinx-coroutines-core'");
         }
-        String str2 = this.errorHint;
-        if (str2 == null || (str = ". ".concat(str2)) == null) {
-            str = "";
+        String str = this.errorHint;
+        if (str == null || (strConcat = ". ".concat(str)) == null) {
+            strConcat = "";
         }
-        throw new IllegalStateException("Module with the Main dispatcher had failed to initialize".concat(str), this.cause);
+        throw new IllegalStateException("Module with the Main dispatcher had failed to initialize".concat(strConcat), this.cause);
     }
 
     @Override // kotlinx.coroutines.Delay

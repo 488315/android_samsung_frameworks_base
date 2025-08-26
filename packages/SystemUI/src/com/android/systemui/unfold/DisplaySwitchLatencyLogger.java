@@ -5,45 +5,44 @@ import android.util.StatsLog;
 import com.android.systemui.unfold.DisplaySwitchLatencyTracker;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisplaySwitchLatencyLogger {
     public static void log(DisplaySwitchLatencyTracker.DisplaySwitchLatencyEvent displaySwitchLatencyEvent) {
         int i = displaySwitchLatencyEvent.latencyMs;
         int[] intArray = CollectionsKt___CollectionsKt.toIntArray(displaySwitchLatencyEvent.fromVisibleAppsUid);
         int[] intArray2 = CollectionsKt___CollectionsKt.toIntArray(displaySwitchLatencyEvent.toVisibleAppsUid);
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(753);
-        newBuilder.writeInt(i);
-        newBuilder.writeInt(displaySwitchLatencyEvent.fromFoldableDeviceState);
-        newBuilder.writeInt(displaySwitchLatencyEvent.fromState);
-        newBuilder.writeInt(displaySwitchLatencyEvent.fromFocusedAppUid);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeInt(displaySwitchLatencyEvent.fromPipAppUid);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeIntArray(intArray);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeInt(displaySwitchLatencyEvent.fromDensityDpi);
-        newBuilder.writeInt(displaySwitchLatencyEvent.toState);
-        newBuilder.writeInt(displaySwitchLatencyEvent.toFoldableDeviceState);
-        newBuilder.writeInt(displaySwitchLatencyEvent.toFocusedAppUid);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeInt(displaySwitchLatencyEvent.toPipAppUid);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeIntArray(intArray2);
-        newBuilder.addBooleanAnnotation((byte) 1, true);
-        newBuilder.writeInt(displaySwitchLatencyEvent.toDensityDpi);
-        newBuilder.writeInt(displaySwitchLatencyEvent.notificationCount);
-        newBuilder.writeInt(displaySwitchLatencyEvent.externalDisplayCount);
-        newBuilder.writeInt(displaySwitchLatencyEvent.throttlingLevel);
-        newBuilder.writeInt(displaySwitchLatencyEvent.vskinTemperatureC);
-        newBuilder.writeInt(displaySwitchLatencyEvent.hallSensorToFirstHingeAngleChangeMs);
-        newBuilder.writeInt(displaySwitchLatencyEvent.hallSensorToDeviceStateChangeMs);
-        newBuilder.writeInt(displaySwitchLatencyEvent.onScreenTurningOnToOnDrawnMs);
-        newBuilder.writeInt(displaySwitchLatencyEvent.onDrawnToOnScreenTurnedOnMs);
-        newBuilder.writeInt(displaySwitchLatencyEvent.trackingResult);
-        newBuilder.writeInt(displaySwitchLatencyEvent.screenWakelockStatus);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(753);
+        builderNewBuilder.writeInt(i);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.fromFoldableDeviceState);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.fromState);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.fromFocusedAppUid);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.fromPipAppUid);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeIntArray(intArray);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.fromDensityDpi);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.toState);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.toFoldableDeviceState);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.toFocusedAppUid);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.toPipAppUid);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeIntArray(intArray2);
+        builderNewBuilder.addBooleanAnnotation((byte) 1, true);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.toDensityDpi);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.notificationCount);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.externalDisplayCount);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.throttlingLevel);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.vskinTemperatureC);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.hallSensorToFirstHingeAngleChangeMs);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.hallSensorToDeviceStateChangeMs);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.onScreenTurningOnToOnDrawnMs);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.onDrawnToOnScreenTurnedOnMs);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.trackingResult);
+        builderNewBuilder.writeInt(displaySwitchLatencyEvent.screenWakelockStatus);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 }

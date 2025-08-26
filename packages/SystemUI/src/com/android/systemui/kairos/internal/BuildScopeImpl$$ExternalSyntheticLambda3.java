@@ -6,7 +6,6 @@ import kotlin.Pair;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class BuildScopeImpl$$ExternalSyntheticLambda3 implements Function1 {
     public final /* synthetic */ BuildScopeImpl f$0;
@@ -21,7 +20,7 @@ public final /* synthetic */ class BuildScopeImpl$$ExternalSyntheticLambda3 impl
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         CoalescingMutableEvents coalescingMutableEvents = new CoalescingMutableEvents(null, new BuildScopeImpl$$ExternalSyntheticLambda11(this.f$2, 0), this.f$0.getNetwork(), this.f$1, (InputNode) obj);
         return new Pair(coalescingMutableEvents, new BuildScopeImpl$coalescingEvents$1$1(coalescingMutableEvents));
     }

@@ -72,9 +72,9 @@ public interface IAltitudeService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAltitudeService)) {
-                return (IAltitudeService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAltitudeService)) {
+                return (IAltitudeService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,9 +124,9 @@ public interface IAltitudeService extends IInterface {
             if (i == 1) {
                 AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest = (AddMslAltitudeToLocationRequest) parcel.readTypedObject(AddMslAltitudeToLocationRequest.CREATOR);
                 parcel.enforceNoDataAvail();
-                AddMslAltitudeToLocationResponse addMslAltitudeToLocation = addMslAltitudeToLocation(addMslAltitudeToLocationRequest);
+                AddMslAltitudeToLocationResponse addMslAltitudeToLocationResponseAddMslAltitudeToLocation = addMslAltitudeToLocation(addMslAltitudeToLocationRequest);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(addMslAltitudeToLocation, 1);
+                parcel2.writeTypedObject(addMslAltitudeToLocationResponseAddMslAltitudeToLocation, 1);
             } else if (i == 2) {
                 GetGeoidHeightRequest getGeoidHeightRequest = (GetGeoidHeightRequest) parcel.readTypedObject(GetGeoidHeightRequest.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -159,53 +159,53 @@ public interface IAltitudeService extends IInterface {
 
             @Override // android.frameworks.location.altitude.IAltitudeService
             public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(addMslAltitudeToLocationRequest, 0);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(addMslAltitudeToLocationRequest, 0);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method addMslAltitudeToLocation is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (AddMslAltitudeToLocationResponse) obtain2.readTypedObject(AddMslAltitudeToLocationResponse.CREATOR);
+                    parcelObtain2.readException();
+                    return (AddMslAltitudeToLocationResponse) parcelObtain2.readTypedObject(AddMslAltitudeToLocationResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.frameworks.location.altitude.IAltitudeService
             public GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest getGeoidHeightRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(getGeoidHeightRequest, 0);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getGeoidHeightRequest, 0);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getGeoidHeight is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (GetGeoidHeightResponse) obtain2.readTypedObject(GetGeoidHeightResponse.CREATOR);
+                    parcelObtain2.readException();
+                    return (GetGeoidHeightResponse) parcelObtain2.readTypedObject(GetGeoidHeightResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.frameworks.location.altitude.IAltitudeService
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -214,18 +214,18 @@ public interface IAltitudeService extends IInterface {
             @Override // android.frameworks.location.altitude.IAltitudeService
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

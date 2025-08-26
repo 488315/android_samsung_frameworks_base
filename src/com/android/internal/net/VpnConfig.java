@@ -113,8 +113,8 @@ public class VpnConfig implements Parcelable {
 
     public static Intent getIntentForConfirmation() {
         Intent intent = new Intent();
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_customVpnConfirmDialogComponent));
-        intent.setClassName(unflattenFromString.getPackageName(), unflattenFromString.getClassName());
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_customVpnConfirmDialogComponent));
+        intent.setClassName(componentNameUnflattenFromString.getPackageName(), componentNameUnflattenFromString.getClassName());
         return intent;
     }
 
@@ -129,9 +129,9 @@ public class VpnConfig implements Parcelable {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent("android.net.VpnService");
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 0);
-        if (queryIntentServices != null && queryIntentServices.size() == 1) {
-            return queryIntentServices.get(0).loadLabel(packageManager);
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 0);
+        if (listQueryIntentServices != null && listQueryIntentServices.size() == 1) {
+            return listQueryIntentServices.get(0).loadLabel(packageManager);
         }
         return packageManager.getApplicationInfo(str, 0).loadLabel(packageManager);
     }

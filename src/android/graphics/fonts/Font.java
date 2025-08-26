@@ -145,7 +145,7 @@ public final class Font {
             this.mLocaleList = str;
         }
 
-        public Builder(File file) {
+        public Builder(File file) throws IOException {
             this.mLocaleList = "";
             this.mWeight = -1;
             this.mItalic = -1;
@@ -170,7 +170,7 @@ public final class Font {
             this(parcelFileDescriptor, 0L, -1L);
         }
 
-        public Builder(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) {
+        public Builder(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws IOException {
             this.mLocaleList = "";
             this.mWeight = -1;
             this.mItalic = -1;
@@ -215,7 +215,7 @@ public final class Font {
             }
         }
 
-        public Builder(Resources resources, int i) {
+        public Builder(Resources resources, int i) throws Resources.NotFoundException {
             this.mLocaleList = "";
             this.mWeight = -1;
             this.mItalic = -1;
@@ -227,13 +227,13 @@ public final class Font {
                 this.mException = new FileNotFoundException(i + " not found");
                 return;
             }
-            String charSequence = typedValue.string.toString();
-            if (charSequence.toLowerCase().endsWith(".xml")) {
+            String string = typedValue.string.toString();
+            if (string.toLowerCase().endsWith(".xml")) {
                 this.mException = new FileNotFoundException(i + " must be font file.");
                 return;
             }
             try {
-                this.mBuffer = createBuffer(resources.getAssets(), charSequence, false, typedValue.assetCookie);
+                this.mBuffer = createBuffer(resources.getAssets(), string, false, typedValue.assetCookie);
             } catch (IOException e) {
                 this.mException = e;
             }
@@ -255,46 +255,46 @@ public final class Font {
         }
 
         public static ByteBuffer createBuffer(AssetManager assetManager, String str, boolean z, int i) throws IOException {
-            InputStream openNonAsset;
-            AssetFileDescriptor openNonAssetFd;
+            InputStream inputStreamOpenNonAsset;
+            AssetFileDescriptor assetFileDescriptorOpenNonAssetFd;
             Preconditions.checkNotNull(assetManager, "assetManager can not be null");
             Preconditions.checkNotNull(str, "path can not be null");
             try {
                 if (z) {
-                    openNonAssetFd = assetManager.openFd(str);
+                    assetFileDescriptorOpenNonAssetFd = assetManager.openFd(str);
                 } else if (i > 0) {
-                    openNonAssetFd = assetManager.openNonAssetFd(i, str);
+                    assetFileDescriptorOpenNonAssetFd = assetManager.openNonAssetFd(i, str);
                 } else {
-                    openNonAssetFd = assetManager.openNonAssetFd(str);
+                    assetFileDescriptorOpenNonAssetFd = assetManager.openNonAssetFd(str);
                 }
-                FileInputStream createInputStream = openNonAssetFd.createInputStream();
+                FileInputStream fileInputStreamCreateInputStream = assetFileDescriptorOpenNonAssetFd.createInputStream();
                 try {
-                    MappedByteBuffer map = createInputStream.getChannel().map(FileChannel.MapMode.READ_ONLY, openNonAssetFd.getStartOffset(), openNonAssetFd.getDeclaredLength());
-                    if (createInputStream != null) {
-                        createInputStream.close();
+                    MappedByteBuffer map = fileInputStreamCreateInputStream.getChannel().map(FileChannel.MapMode.READ_ONLY, assetFileDescriptorOpenNonAssetFd.getStartOffset(), assetFileDescriptorOpenNonAssetFd.getDeclaredLength());
+                    if (fileInputStreamCreateInputStream != null) {
+                        fileInputStreamCreateInputStream.close();
                     }
                     return map;
                 } finally {
                 }
             } catch (IOException unused) {
                 if (z) {
-                    openNonAsset = assetManager.open(str, 3);
+                    inputStreamOpenNonAsset = assetManager.open(str, 3);
                 } else {
-                    openNonAsset = assetManager.openNonAsset(i, str, 3);
+                    inputStreamOpenNonAsset = assetManager.openNonAsset(i, str, 3);
                 }
                 try {
-                    ByteBuffer allocateDirect = ByteBuffer.allocateDirect(openNonAsset.available());
-                    allocateDirect.order(ByteOrder.nativeOrder());
-                    if (allocateDirect.hasArray()) {
-                        openNonAsset.read(allocateDirect.array(), allocateDirect.arrayOffset(), openNonAsset.available());
+                    ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(inputStreamOpenNonAsset.available());
+                    byteBufferAllocateDirect.order(ByteOrder.nativeOrder());
+                    if (byteBufferAllocateDirect.hasArray()) {
+                        inputStreamOpenNonAsset.read(byteBufferAllocateDirect.array(), byteBufferAllocateDirect.arrayOffset(), inputStreamOpenNonAsset.available());
                     } else {
-                        Channels.newChannel(openNonAsset).read(allocateDirect.duplicate());
+                        Channels.newChannel(inputStreamOpenNonAsset).read(byteBufferAllocateDirect.duplicate());
                     }
-                    if (openNonAsset.read() == -1) {
-                        if (openNonAsset != null) {
-                            openNonAsset.close();
+                    if (inputStreamOpenNonAsset.read() == -1) {
+                        if (inputStreamOpenNonAsset != null) {
+                            inputStreamOpenNonAsset.close();
                         }
-                        return allocateDirect;
+                        return byteBufferAllocateDirect;
                     }
                     throw new IOException("Unable to access full contents of " + str);
                 } finally {
@@ -333,13 +333,13 @@ public final class Font {
                 throw new IOException("Failed to read font contents", this.mException);
             }
             if (this.mWeight == -1 || this.mItalic == -1) {
-                int analyzeStyle = FontFileUtil.analyzeStyle(this.mBuffer, this.mTtcIndex, this.mAxes);
-                if (FontFileUtil.isSuccess(analyzeStyle)) {
+                int iAnalyzeStyle = FontFileUtil.analyzeStyle(this.mBuffer, this.mTtcIndex, this.mAxes);
+                if (FontFileUtil.isSuccess(iAnalyzeStyle)) {
                     if (this.mWeight == -1) {
-                        this.mWeight = FontFileUtil.unpackWeight(analyzeStyle);
+                        this.mWeight = FontFileUtil.unpackWeight(iAnalyzeStyle);
                     }
                     if (this.mItalic == -1) {
-                        this.mItalic = FontFileUtil.unpackItalic(analyzeStyle) ? 1 : 0;
+                        this.mItalic = FontFileUtil.unpackItalic(iAnalyzeStyle) ? 1 : 0;
                     }
                 } else {
                     this.mWeight = 400;
@@ -348,21 +348,21 @@ public final class Font {
             }
             this.mWeight = Math.max(1, Math.min(1000, this.mWeight));
             boolean z = this.mItalic == 1;
-            long nInitBuilder = nInitBuilder();
+            long jNInitBuilder = nInitBuilder();
             FontVariationAxis[] fontVariationAxisArr = this.mAxes;
             if (fontVariationAxisArr != null) {
                 for (FontVariationAxis fontVariationAxis : fontVariationAxisArr) {
-                    nAddAxis(nInitBuilder, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
+                    nAddAxis(jNInitBuilder, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
                 }
             }
-            ByteBuffer asReadOnlyBuffer = this.mBuffer.asReadOnlyBuffer();
+            ByteBuffer byteBufferAsReadOnlyBuffer = this.mBuffer.asReadOnlyBuffer();
             File file = this.mFile;
             String absolutePath = file == null ? "" : file.getAbsolutePath();
             Font font = this.mFont;
             if (font == null) {
-                return new Font(nBuild(nInitBuilder, asReadOnlyBuffer, absolutePath, this.mLocaleList, this.mWeight, z, this.mTtcIndex));
+                return new Font(nBuild(jNInitBuilder, byteBufferAsReadOnlyBuffer, absolutePath, this.mLocaleList, this.mWeight, z, this.mTtcIndex));
             }
-            return new Font(nClone(font.getNativePtr(), nInitBuilder, this.mWeight, z, this.mTtcIndex));
+            return new Font(nClone(font.getNativePtr(), jNInitBuilder, this.mWeight, z, this.mTtcIndex));
         }
     }
 
@@ -375,10 +375,10 @@ public final class Font {
         ByteBuffer byteBuffer;
         synchronized (this.mLock) {
             if (this.mBuffer == null) {
-                long nCloneFont = nCloneFont(this.mNativePtr);
-                ByteBuffer nNewByteBuffer = nNewByteBuffer(this.mNativePtr);
-                NoImagePreloadHolder.BUFFER_REGISTRY.registerNativeAllocation(nNewByteBuffer, nCloneFont);
-                this.mBuffer = nNewByteBuffer.asReadOnlyBuffer();
+                long jNCloneFont = nCloneFont(this.mNativePtr);
+                ByteBuffer byteBufferNNewByteBuffer = nNewByteBuffer(this.mNativePtr);
+                NoImagePreloadHolder.BUFFER_REGISTRY.registerNativeAllocation(byteBufferNNewByteBuffer, jNCloneFont);
+                this.mBuffer = byteBufferNNewByteBuffer.asReadOnlyBuffer();
             }
             byteBuffer = this.mBuffer;
         }
@@ -389,9 +389,9 @@ public final class Font {
         File file;
         synchronized (this.mLock) {
             if (!this.mIsFileInitialized) {
-                String nGetFontPath = nGetFontPath(this.mNativePtr);
-                if (!TextUtils.isEmpty(nGetFontPath)) {
-                    this.mFile = new File(nGetFontPath);
+                String strNGetFontPath = nGetFontPath(this.mNativePtr);
+                if (!TextUtils.isEmpty(strNGetFontPath)) {
+                    this.mFile = new File(strNGetFontPath);
                 }
                 this.mIsFileInitialized = true;
             }
@@ -404,8 +404,8 @@ public final class Font {
         FontStyle fontStyle;
         synchronized (this.mLock) {
             if (this.mFontStyle == null) {
-                int nGetPackedStyle = nGetPackedStyle(this.mNativePtr);
-                this.mFontStyle = new FontStyle(FontFileUtil.unpackWeight(nGetPackedStyle), FontFileUtil.unpackItalic(nGetPackedStyle) ? 1 : 0);
+                int iNGetPackedStyle = nGetPackedStyle(this.mNativePtr);
+                this.mFontStyle = new FontStyle(FontFileUtil.unpackWeight(iNGetPackedStyle), FontFileUtil.unpackItalic(iNGetPackedStyle) ? 1 : 0);
             }
             fontStyle = this.mFontStyle;
         }
@@ -419,9 +419,9 @@ public final class Font {
     public FontVariationAxis[] getAxes() {
         synchronized (this.mLock) {
             if (this.mAxes == null) {
-                int nGetAxisCount = nGetAxisCount(this.mNativePtr);
-                this.mAxes = new FontVariationAxis[nGetAxisCount];
-                for (int i = 0; i < nGetAxisCount; i++) {
+                int iNGetAxisCount = nGetAxisCount(this.mNativePtr);
+                this.mAxes = new FontVariationAxis[iNGetAxisCount];
+                for (int i = 0; i < iNGetAxisCount; i++) {
                     this.mAxes[i] = new FontVariationAxis(new String(new char[]{(char) ((BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK & r4) >>> 56), (char) ((BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK & r4) >>> 48), (char) ((BatteryStats.STEP_LEVEL_LEVEL_MASK & r4) >>> 40), (char) ((r4 & ProtoStream.FIELD_TYPE_MASK) >>> 32)}), Float.intBitsToFloat((int) (4294967295L & nGetAxisInfo(this.mNativePtr, i))));
                 }
             }
@@ -433,11 +433,11 @@ public final class Font {
         LocaleList localeList;
         synchronized (this.mLock) {
             if (this.mLocaleList == null) {
-                String nGetLocaleList = nGetLocaleList(this.mNativePtr);
-                if (TextUtils.isEmpty(nGetLocaleList)) {
+                String strNGetLocaleList = nGetLocaleList(this.mNativePtr);
+                if (TextUtils.isEmpty(strNGetLocaleList)) {
                     this.mLocaleList = LocaleList.getEmptyLocaleList();
                 } else {
-                    this.mLocaleList = LocaleList.forLanguageTags(nGetLocaleList);
+                    this.mLocaleList = LocaleList.forLanguageTags(strNGetLocaleList);
                 }
             }
             localeList = this.mLocaleList;

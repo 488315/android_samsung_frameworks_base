@@ -99,9 +99,9 @@ public class SemBitmapFactory {
 
     private static Bitmap decodePhotoHdrFile(String str, BitmapFactory.Options options) {
         try {
-            Bitmap native_decodePhotoHdrFile = native_decodePhotoHdrFile(str, options);
-            if (native_decodePhotoHdrFile != null) {
-                return native_decodePhotoHdrFile;
+            Bitmap bitmapNative_decodePhotoHdrFile = native_decodePhotoHdrFile(str, options);
+            if (bitmapNative_decodePhotoHdrFile != null) {
+                return bitmapNative_decodePhotoHdrFile;
             }
             Log.e(TAG, "coverBitmap null");
             return null;
@@ -113,9 +113,9 @@ public class SemBitmapFactory {
 
     private static Bitmap decodePhotoHdrByteArray(byte[] bArr, int i, int i2, BitmapFactory.Options options) {
         try {
-            Bitmap native_decodePhotoHdrByteArray = native_decodePhotoHdrByteArray(bArr, i, i2, options);
-            if (native_decodePhotoHdrByteArray != null) {
-                return native_decodePhotoHdrByteArray;
+            Bitmap bitmapNative_decodePhotoHdrByteArray = native_decodePhotoHdrByteArray(bArr, i, i2, options);
+            if (bitmapNative_decodePhotoHdrByteArray != null) {
+                return bitmapNative_decodePhotoHdrByteArray;
             }
             Log.e(TAG, "coverBitmap null");
             return null;
@@ -125,8 +125,8 @@ public class SemBitmapFactory {
         }
     }
 
-    public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) {
-        Bitmap bitmap = null;
+    public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) throws IOException {
+        Bitmap bitmapDecodeStream = null;
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeFileDescriptor - mLibraryLoaded is false");
             return null;
@@ -140,18 +140,18 @@ public class SemBitmapFactory {
         try {
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             try {
-                bitmap = decodeStream(fileInputStream, options);
+                bitmapDecodeStream = decodeStream(fileInputStream, options);
                 fileInputStream.close();
-                return bitmap;
+                return bitmapDecodeStream;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return bitmap;
+            return bitmapDecodeStream;
         }
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, BitmapFactory.Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, BitmapFactory.Options options) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeStream - mLibraryLoaded is false");
             return null;
@@ -166,9 +166,9 @@ public class SemBitmapFactory {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();
@@ -235,8 +235,8 @@ public class SemBitmapFactory {
         return native_decodeFile(str, options, 1);
     }
 
-    public static Bitmap decodeThumbnailFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) {
-        Bitmap bitmap = null;
+    public static Bitmap decodeThumbnailFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) throws IOException {
+        Bitmap bitmapDecodeThumbnailStream = null;
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeThumbnailFileDescriptor - mLibraryLoaded is false");
             return null;
@@ -250,18 +250,18 @@ public class SemBitmapFactory {
         try {
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             try {
-                bitmap = decodeThumbnailStream(fileInputStream, options);
+                bitmapDecodeThumbnailStream = decodeThumbnailStream(fileInputStream, options);
                 fileInputStream.close();
-                return bitmap;
+                return bitmapDecodeThumbnailStream;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return bitmap;
+            return bitmapDecodeThumbnailStream;
         }
     }
 
-    public static Bitmap decodeThumbnailStream(InputStream inputStream, BitmapFactory.Options options) {
+    public static Bitmap decodeThumbnailStream(InputStream inputStream, BitmapFactory.Options options) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeThumbnailStream - mLibraryLoaded is false");
             return null;
@@ -276,9 +276,9 @@ public class SemBitmapFactory {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();
@@ -319,7 +319,7 @@ public class SemBitmapFactory {
         return native_getExifData(str);
     }
 
-    public static byte[] getExifDataFileDescriptor(FileDescriptor fileDescriptor) {
+    public static byte[] getExifDataFileDescriptor(FileDescriptor fileDescriptor) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getExifDataFileDescriptor - mLibraryLoaded is false");
             return null;
@@ -341,7 +341,7 @@ public class SemBitmapFactory {
         }
     }
 
-    public static byte[] getExifDataStream(InputStream inputStream) {
+    public static byte[] getExifDataStream(InputStream inputStream) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getExifDataStream - mLibraryLoaded is false");
             return null;
@@ -353,9 +353,9 @@ public class SemBitmapFactory {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();

@@ -64,7 +64,7 @@ public class LockPatternUtilsWrapper {
             new Thread(new Runnable() { // from class: com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    LockPatternUtilsWrapper.this.lambda$lockDown$0();
+                    this.f$0.lambda$lockDown$0();
                 }
             }).start();
         } catch (RemoteException e) {
@@ -89,7 +89,7 @@ public class LockPatternUtilsWrapper {
         this.mHandlerUtil.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                LockPatternUtilsWrapper.this.lockDown();
+                this.f$0.lockDown();
             }
         }, i);
     }

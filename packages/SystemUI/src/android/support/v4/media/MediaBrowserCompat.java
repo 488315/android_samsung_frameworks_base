@@ -26,13 +26,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MediaBrowserCompat {
     public static final boolean DEBUG = Log.isLoggable("MediaBrowserCompat", 3);
     public final MediaBrowserImplApi26 mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api21Impl {
         private Api21Impl() {
         }
@@ -46,7 +44,6 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallbackHandler extends Handler {
         public final WeakReference mCallbackImplRef;
         public WeakReference mCallbacksMessengerRef;
@@ -95,11 +92,9 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CustomActionCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class CustomActionResultReceiver extends ResultReceiver {
         public final CustomActionCallback mCallback;
         public final Bundle mExtras;
@@ -128,19 +123,17 @@ public final class MediaBrowserCompat {
                 this.mCallback.getClass();
                 return;
             }
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown result code: ", " (extras=");
-            m.append(this.mExtras);
-            m.append(", resultData=");
-            m.append(bundle);
-            m.append(")");
-            Log.w("MediaBrowserCompat", m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown result code: ", " (extras=");
+            sbM.append(this.mExtras);
+            sbM.append(", resultData=");
+            sbM.append(bundle);
+            sbM.append(")");
+            Log.w("MediaBrowserCompat", sbM.toString());
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ItemCallback {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ItemCallbackApi23 extends MediaBrowser.ItemCallback {
             public ItemCallbackApi23() {
             }
@@ -166,7 +159,6 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ItemReceiver extends ResultReceiver {
         public final ItemCallback mCallback;
 
@@ -193,21 +185,18 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaBrowserImplApi23 extends MediaBrowserImplApi21 {
         public MediaBrowserImplApi23(Context context, ComponentName componentName, ConnectionCallback connectionCallback, Bundle bundle) {
             super(context, componentName, connectionCallback, bundle);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaBrowserImplApi26 extends MediaBrowserImplApi23 {
         public MediaBrowserImplApi26(Context context, ComponentName componentName, ConnectionCallback connectionCallback, Bundle bundle) {
             super(context, componentName, connectionCallback, bundle);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MediaBrowserServiceCallbackImpl {
         void onConnectionFailed(Messenger messenger);
 
@@ -216,11 +205,9 @@ public final class MediaBrowserCompat {
         void onServiceConnected(Messenger messenger, String str, MediaSessionCompat.Token token);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SearchCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SearchResultReceiver extends ResultReceiver {
         public final SearchCallback mCallback;
 
@@ -251,7 +238,6 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ServiceBinderWrapper {
         public final Messenger mMessenger;
         public final Bundle mRootHints;
@@ -262,26 +248,23 @@ public final class MediaBrowserCompat {
         }
 
         public final void sendRequest(int i, Bundle bundle, Messenger messenger) {
-            Message obtain = Message.obtain();
-            obtain.what = i;
-            obtain.arg1 = 1;
-            obtain.setData(bundle);
-            obtain.replyTo = messenger;
-            this.mMessenger.send(obtain);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = i;
+            messageObtain.arg1 = 1;
+            messageObtain.setData(bundle);
+            messageObtain.replyTo = messenger;
+            this.mMessenger.send(messageObtain);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Subscription {
         public final List mCallbacks = new ArrayList();
         public final List mOptionsList = new ArrayList();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SubscriptionCallback {
         public final IBinder mToken = new Binder();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class SubscriptionCallbackApi21 extends MediaBrowser.SubscriptionCallback {
             public SubscriptionCallbackApi21() {
             }
@@ -300,7 +283,6 @@ public final class MediaBrowserCompat {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class SubscriptionCallbackApi26 extends SubscriptionCallbackApi21 {
             public SubscriptionCallbackApi26() {
                 super();
@@ -330,7 +312,6 @@ public final class MediaBrowserCompat {
         this.mImpl = new MediaBrowserImplApi26(context, componentName, connectionCallback, bundle);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaItem implements Parcelable {
         public static final Parcelable.Creator<MediaItem> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.MediaBrowserCompat.MediaItem.1
             @Override // android.os.Parcelable.Creator
@@ -394,12 +375,10 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectionCallback {
         public final ConnectionCallbackApi21 mConnectionCallbackFwk = new ConnectionCallbackApi21();
         public MediaBrowserImplApi21 mConnectionCallbackInternal;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ConnectionCallbackApi21 extends MediaBrowser.ConnectionCallback {
             public ConnectionCallbackApi21() {
             }
@@ -434,11 +413,11 @@ public final class MediaBrowserCompat {
                                     Log.i("MediaBrowserCompat", "Remote error registering client messenger.");
                                 }
                             }
-                            IMediaSession asInterface = IMediaSession.Stub.asInterface(extras.getBinder("extra_session_binder"));
-                            if (asInterface != null) {
+                            IMediaSession iMediaSessionAsInterface = IMediaSession.Stub.asInterface(extras.getBinder("extra_session_binder"));
+                            if (iMediaSessionAsInterface != null) {
                                 MediaSession.Token sessionToken = mediaBrowserImplApi21.mBrowserFwk.getSessionToken();
                                 Parcelable.Creator<MediaSessionCompat.Token> creator = MediaSessionCompat.Token.CREATOR;
-                                mediaBrowserImplApi21.mMediaSessionToken = sessionToken != null ? new MediaSessionCompat.Token(sessionToken, asInterface) : null;
+                                mediaBrowserImplApi21.mMediaSessionToken = sessionToken != null ? new MediaSessionCompat.Token(sessionToken, iMediaSessionAsInterface) : null;
                             }
                         }
                     } catch (IllegalStateException e) {
@@ -480,7 +459,6 @@ public final class MediaBrowserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaBrowserImplApi21 implements MediaBrowserServiceCallbackImpl {
         public final MediaBrowser mBrowserFwk;
         public Messenger mCallbacksMessenger;
@@ -518,14 +496,12 @@ public final class MediaBrowserCompat {
                 Bundle bundle2 = (Bundle) ((ArrayList) subscription.mOptionsList).get(i);
                 if (bundle2 != bundle) {
                     if (bundle2 == null) {
-                        if (bundle.getInt("android.media.browse.extra.PAGE", -1) == -1 && bundle.getInt("android.media.browse.extra.PAGE_SIZE", -1) == -1) {
+                        if (bundle.getInt("android.media.browse.extra.PAGE", -1) != -1 || bundle.getInt("android.media.browse.extra.PAGE_SIZE", -1) != -1) {
                         }
                     } else if (bundle == null) {
-                        if (bundle2.getInt("android.media.browse.extra.PAGE", -1) == -1 && bundle2.getInt("android.media.browse.extra.PAGE_SIZE", -1) == -1) {
+                        if (bundle2.getInt("android.media.browse.extra.PAGE", -1) != -1 || bundle2.getInt("android.media.browse.extra.PAGE_SIZE", -1) != -1) {
                         }
-                    } else {
-                        if (bundle2.getInt("android.media.browse.extra.PAGE", -1) == bundle.getInt("android.media.browse.extra.PAGE", -1) && bundle2.getInt("android.media.browse.extra.PAGE_SIZE", -1) == bundle.getInt("android.media.browse.extra.PAGE_SIZE", -1)) {
-                        }
+                    } else if (bundle2.getInt("android.media.browse.extra.PAGE", -1) != bundle.getInt("android.media.browse.extra.PAGE", -1) || bundle2.getInt("android.media.browse.extra.PAGE_SIZE", -1) != bundle.getInt("android.media.browse.extra.PAGE_SIZE", -1)) {
                     }
                 }
                 return;

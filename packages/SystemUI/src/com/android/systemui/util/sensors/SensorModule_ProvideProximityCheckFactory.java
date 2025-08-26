@@ -4,7 +4,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SensorModule_ProvideProximityCheckFactory implements Provider {
     private final Provider delayableExecutorProvider;
@@ -20,9 +19,9 @@ public final class SensorModule_ProvideProximityCheckFactory implements Provider
     }
 
     public static ProximityCheck provideProximityCheck(ProximitySensor proximitySensor, DelayableExecutor delayableExecutor) {
-        ProximityCheck provideProximityCheck = SensorModule.provideProximityCheck(proximitySensor, delayableExecutor);
-        provideProximityCheck.getClass();
-        return provideProximityCheck;
+        ProximityCheck proximityCheckProvideProximityCheck = SensorModule.provideProximityCheck(proximitySensor, delayableExecutor);
+        proximityCheckProvideProximityCheck.getClass();
+        return proximityCheckProvideProximityCheck;
     }
 
     public static SensorModule_ProvideProximityCheckFactory create(Provider provider, Provider provider2) {

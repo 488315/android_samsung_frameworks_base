@@ -15,9 +15,9 @@ public class PemWriter extends BufferedWriter {
     public PemWriter(Writer writer) {
         super(writer);
         this.buf = new char[64];
-        String lineSeparator = Strings.lineSeparator();
-        if (lineSeparator != null) {
-            this.nlLength = lineSeparator.length();
+        String strLineSeparator = Strings.lineSeparator();
+        if (strLineSeparator != null) {
+            this.nlLength = strLineSeparator.length();
         } else {
             this.nlLength = 2;
         }
@@ -36,10 +36,10 @@ public class PemWriter extends BufferedWriter {
     }
 
     public void writeObject(PemObjectGenerator pemObjectGenerator) throws IOException {
-        PemObject generate = pemObjectGenerator.generate();
-        writePreEncapsulationBoundary(generate.getType());
-        if (!generate.getHeaders().isEmpty()) {
-            for (PemHeader pemHeader : generate.getHeaders()) {
+        PemObject pemObjectGenerate = pemObjectGenerator.generate();
+        writePreEncapsulationBoundary(pemObjectGenerate.getType());
+        if (!pemObjectGenerate.getHeaders().isEmpty()) {
+            for (PemHeader pemHeader : pemObjectGenerate.getHeaders()) {
                 write(pemHeader.getName());
                 write(": ");
                 write(pemHeader.getValue());
@@ -47,27 +47,28 @@ public class PemWriter extends BufferedWriter {
             }
             newLine();
         }
-        writeEncoded(generate.getContent());
-        writePostEncapsulationBoundary(generate.getType());
+        writeEncoded(pemObjectGenerate.getContent());
+        writePostEncapsulationBoundary(pemObjectGenerate.getType());
     }
 
     private void writeEncoded(byte[] bArr) throws IOException {
         char[] cArr;
         int i;
-        byte[] encode = Base64.encode(bArr);
-        int i2 = 0;
-        while (i2 < encode.length) {
-            int i3 = 0;
+        byte[] bArrEncode = Base64.encode(bArr);
+        int length = 0;
+        while (length < bArrEncode.length) {
+            int i2 = 0;
             while (true) {
                 cArr = this.buf;
-                if (i3 != cArr.length && (i = i2 + i3) < encode.length) {
-                    cArr[i3] = (char) encode[i];
-                    i3++;
+                if (i2 == cArr.length || (i = length + i2) >= bArrEncode.length) {
+                    break;
                 }
+                cArr[i2] = (char) bArrEncode[i];
+                i2++;
             }
-            write(cArr, 0, i3);
+            write(cArr, 0, i2);
             newLine();
-            i2 += this.buf.length;
+            length += this.buf.length;
         }
     }
 

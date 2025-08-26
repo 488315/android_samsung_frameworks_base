@@ -4,7 +4,7 @@ import android.app.Notification;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResourcesManager;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Parcelable;
@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingActivityLayoutCreatorImpl {
     public final Context context;
@@ -69,21 +68,20 @@ public final class OngoingActivityLayoutCreatorImpl {
     public static void updateExpandViewFontSize$default(OngoingActivityLayoutCreatorImpl ongoingActivityLayoutCreatorImpl, RemoteViews remoteViews, boolean z) {
         Context context = ongoingActivityLayoutCreatorImpl.context;
         ongoingActivityLayoutCreatorImpl.getClass();
-        float upToLargeFontSize = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.oa_common_view_info_chip_size));
-        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, upToLargeFontSize, 0);
-        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, upToLargeFontSize, 0);
+        float fUpToLargeFontSize = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.oa_common_view_info_chip_size));
+        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, fUpToLargeFontSize, 0);
+        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, fUpToLargeFontSize, 0);
         remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_primary, 0, upToLargeFontSize(context.getResources().getDimensionPixelSize(z ? R.dimen.ongoing_activity_card_item_promoted_main_text_size : R.dimen.ongoing_activity_card_item_main_text_size)));
-        float upToLargeFontSize2 = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_sub_text_size));
-        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_secondary_text, 0, upToLargeFontSize2);
-        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_description, 0, upToLargeFontSize2);
-        float upToLargeFontSize3 = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_app_label_text_size));
-        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_secondary_text_below_chronometer, 0, upToLargeFontSize3);
-        remoteViews.setTextViewTextSize(android.R.id.beforeDescendants, 0, upToLargeFontSize3);
-        remoteViews.setTextViewTextSize(16909967, 0, upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_time_text_size)));
+        float fUpToLargeFontSize2 = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_sub_text_size));
+        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_secondary_text, 0, fUpToLargeFontSize2);
+        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_description, 0, fUpToLargeFontSize2);
+        float fUpToLargeFontSize3 = upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_app_label_text_size));
+        remoteViews.setTextViewTextSize(R.id.ongoing_activity_expand_secondary_text_below_chronometer, 0, fUpToLargeFontSize3);
+        remoteViews.setTextViewTextSize(android.R.id.beforeDescendants, 0, fUpToLargeFontSize3);
+        remoteViews.setTextViewTextSize(16909968, 0, upToLargeFontSize(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_time_text_size)));
     }
 
     public final void bindProfileBadge(RemoteViews remoteViews, int i) {
-        Bitmap bitmap;
         DevicePolicyResourcesManager resources;
         OngoingActivityLayoutUtil ongoingActivityLayoutUtil = OngoingActivityLayoutUtil.INSTANCE;
         Context context = this.context;
@@ -103,19 +101,18 @@ public final class OngoingActivityLayoutCreatorImpl {
             }
         }
         if (drawable != null) {
-            bitmap = DrawableKt.toBitmap(drawable, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), null);
-            remoteViews.setImageViewBitmap(android.R.id.small, bitmap);
-            remoteViews.setViewVisibility(android.R.id.small, 0);
+            remoteViews.setImageViewBitmap(android.R.id.smallIcon, DrawableKt.toBitmap(drawable, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), null));
+            remoteViews.setViewVisibility(android.R.id.smallIcon, 0);
         }
     }
 
     public final void bindTime(RemoteViews remoteViews, Long l) {
-        remoteViews.setLong(16909967, "setTime", l != null ? l.longValue() : System.currentTimeMillis());
-        remoteViews.setTextColor(16909967, this.context.getColor(R.color.ongoing_activity_expand_header_text_color));
-        remoteViews.setViewVisibility(16909967, 0);
+        remoteViews.setLong(16909968, "setTime", l != null ? l.longValue() : System.currentTimeMillis());
+        remoteViews.setTextColor(16909968, this.context.getColor(R.color.ongoing_activity_expand_header_text_color));
+        remoteViews.setViewVisibility(16909968, 0);
     }
 
-    public final RemoteViews createExpandView(OngoingActivityData ongoingActivityData, OngoingType ongoingType) {
+    public final RemoteViews createExpandView(OngoingActivityData ongoingActivityData, OngoingType ongoingType) throws Resources.NotFoundException {
         ArrayList arrayList;
         RemoteViews remoteViews = new RemoteViews(this.context.getPackageName(), R.layout.ongoing_expand_view);
         NotificationEntry notificationEntry = ongoingActivityData.mNotificationEntry;
@@ -130,14 +127,14 @@ public final class OngoingActivityLayoutCreatorImpl {
             }
             OngoingActivityLayoutUtil.INSTANCE.getClass();
             boolean z = OngoingActivityLayoutUtil.isActionStyle(ongoingActivityData) && !isBottomBtnActionStyle(this.context);
-            boolean isPromotedState = notificationEntry.isPromotedState();
+            boolean zIsPromotedState = notificationEntry.isPromotedState();
             remoteViews.addView(R.id.ongoing_activity_expand_view, z ? new RemoteViews(this.context.getPackageName(), R.layout.ongoing_action_style_view) : new RemoteViews(this.context.getPackageName(), R.layout.ongoing_normal_view));
             OngoingActivityLayoutUtil.setOngoingNotificationIcon(ongoingActivityData, remoteViews, R.id.ongoing_activity_expand_left_image, this.context);
             StatusBarNotification statusBarNotification = notificationEntry.mSbn;
             Context context = this.context;
             int i = ongoingActivityData.mUserId;
-            boolean isManagedProfile = OngoingActivityLayoutUtil.isManagedProfile(statusBarNotification, context, i);
-            if (!isPromotedState || isManagedProfile) {
+            boolean zIsManagedProfile = OngoingActivityLayoutUtil.isManagedProfile(statusBarNotification, context, i);
+            if (!zIsPromotedState || zIsManagedProfile) {
                 if (z) {
                     remoteViews.setViewLayoutMarginDimen(R.id.ongoing_activity_expand_left_image, 3, R.dimen.oa_expanded_view_first_icon_bottom_margin);
                 }
@@ -161,7 +158,7 @@ public final class OngoingActivityLayoutCreatorImpl {
             }
             CharSequence charSequence = ongoingActivityData.mSecondaryInfo;
             if (StringsKt__StringsKt.trim(charSequence).toString().length() > 0) {
-                if (OngoingActivityLayoutUtil.isPrimaryChronometer(ongoingActivityData) && OngoingActivityLayoutUtil.isActionStyle(ongoingActivityData) && isPromotedState) {
+                if (OngoingActivityLayoutUtil.isPrimaryChronometer(ongoingActivityData) && OngoingActivityLayoutUtil.isActionStyle(ongoingActivityData) && zIsPromotedState) {
                     remoteViews.removeAllViewsExceptId(R.id.ongoing_activity_expand_secondary_text_container, R.id.ongoing_activity_expand_secondary_text_below_chronometer);
                     remoteViews.setTextViewText(R.id.ongoing_activity_expand_secondary_text_below_chronometer, charSequence);
                     remoteViews.setViewVisibility(R.id.ongoing_activity_expand_secondary_text_below_chronometer, 0);
@@ -223,15 +220,15 @@ public final class OngoingActivityLayoutCreatorImpl {
                     remoteViews.setViewVisibility(R.id.ongoing_activity_expand_buttons, 0);
                 }
             }
-            if (!isPromotedState) {
+            if (!zIsPromotedState) {
                 updateNotiExpandButtonView(ongoingActivityData, remoteViews, isBottomBtnActionStyle(this.context));
             }
-            if (isManagedProfile) {
+            if (zIsManagedProfile) {
                 bindProfileBadge(remoteViews, i);
-            } else if (isPromotedState) {
+            } else if (zIsPromotedState) {
                 remoteViews.setViewVisibility(R.id.ongoing_activity_expanded_header_container, 8);
             }
-            updateExpandViewFontSize$default(this, remoteViews, isPromotedState);
+            updateExpandViewFontSize$default(this, remoteViews, zIsPromotedState);
             RemoteViews remoteViews3 = ongoingActivityData.mChronometerView;
             if (remoteViews3 != null) {
                 int i7 = ongoingActivityData.mChronometerPosition;
@@ -272,25 +269,25 @@ public final class OngoingActivityLayoutCreatorImpl {
     }
 
     public final void updateCollapsedViewFontSize(RemoteViews remoteViews) {
-        float upToLargeFontSize = upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.oa_common_view_info_chip_size));
-        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, upToLargeFontSize, 0);
-        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, upToLargeFontSize, 0);
+        float fUpToLargeFontSize = upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.oa_common_view_info_chip_size));
+        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, fUpToLargeFontSize, 0);
+        remoteViews.setViewLayoutWidth(R.id.ongoing_activity_secondary_info_icon, fUpToLargeFontSize, 0);
         remoteViews.setTextViewTextSize(android.R.id.title, 0, upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_main_text_size)));
         remoteViews.setTextViewTextSize(R.id.ongoing_activity_collapsed_secondary_text, 0, upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_sub_text_size)));
         remoteViews.setTextViewTextSize(android.R.id.beforeDescendants, 0, upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_app_label_text_size)));
-        remoteViews.setTextViewTextSize(16909967, 0, upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_time_text_size)));
+        remoteViews.setTextViewTextSize(16909968, 0, upToLargeFontSize(this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_item_header_time_text_size)));
     }
 
     public final void updateIconButtonRemoteView(ArrayList arrayList, RemoteViews remoteViews, boolean z) {
-        RemoteViews makeIconButtons = makeIconButtons(arrayList);
+        RemoteViews remoteViewsMakeIconButtons = makeIconButtons(arrayList);
         remoteViews.removeAllViews(R.id.ongoing_activity_expand_icon_buttons_bottom);
         remoteViews.removeAllViews(R.id.ongoing_activity_expand_icon_buttons_end);
         if (!z) {
-            remoteViews.addView(R.id.ongoing_activity_expand_icon_buttons_end, makeIconButtons);
+            remoteViews.addView(R.id.ongoing_activity_expand_icon_buttons_end, remoteViewsMakeIconButtons);
             remoteViews.setViewVisibility(R.id.ongoing_activity_expand_icon_buttons_end, 0);
             remoteViews.setViewVisibility(R.id.ongoing_activity_expand_icon_buttons_bottom, 8);
         } else {
-            remoteViews.addView(R.id.ongoing_activity_expand_icon_buttons_bottom, makeIconButtons);
+            remoteViews.addView(R.id.ongoing_activity_expand_icon_buttons_bottom, remoteViewsMakeIconButtons);
             remoteViews.setViewVisibility(R.id.ongoing_activity_expand_icon_buttons_bottom, 0);
             remoteViews.setViewVisibility(R.id.ongoing_activity_expand_icon_buttons_end, 8);
             remoteViews.setViewLayoutMarginDimen(R.id.ongoing_activity_contents_vertical_margin_parent, 3, 0);

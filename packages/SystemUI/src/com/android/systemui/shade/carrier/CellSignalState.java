@@ -5,7 +5,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CellSignalState {
     public final String contentDescription;
@@ -30,11 +29,11 @@ public final class CellSignalState {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.mobileSignalIconId, Boolean.hashCode(this.visible) * 31, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.mobileSignalIconId, Boolean.hashCode(this.visible) * 31, 31);
         String str = this.contentDescription;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.typeContentDescription;
-        return Boolean.hashCode(this.roaming) + ((hashCode + (str2 != null ? str2.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.roaming) + ((iHashCode + (str2 != null ? str2.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

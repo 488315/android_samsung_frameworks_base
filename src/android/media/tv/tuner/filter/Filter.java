@@ -118,7 +118,7 @@ public class Filter implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Filter.this.lambda$onFilterStatus$0(i);
+                        this.f$0.lambda$onFilterStatus$0(i);
                     }
                 });
             }
@@ -156,7 +156,7 @@ public class Filter implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Filter.this.lambda$onFilterEvent$1(filterEventArr);
+                        this.f$0.lambda$onFilterEvent$1(filterEventArr);
                     }
                 });
             }
@@ -225,21 +225,21 @@ public class Filter implements AutoCloseable {
     }
 
     public int getId() {
-        int nativeGetId;
+        int iNativeGetId;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeGetId = nativeGetId();
+            iNativeGetId = nativeGetId();
         }
-        return nativeGetId;
+        return iNativeGetId;
     }
 
     public long getIdLong() {
-        long nativeGetId64Bit;
+        long jNativeGetId64Bit;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeGetId64Bit = nativeGetId64Bit();
+            jNativeGetId64Bit = nativeGetId64Bit();
         }
-        return nativeGetId64Bit;
+        return jNativeGetId64Bit;
     }
 
     public int setMonitorEventMask(int i) {
@@ -264,11 +264,11 @@ public class Filter implements AutoCloseable {
             if (this.mSource != null) {
                 throw new IllegalStateException("Data source is existing");
             }
-            int nativeSetDataSource = nativeSetDataSource(filter);
-            if (nativeSetDataSource == 0) {
+            int iNativeSetDataSource = nativeSetDataSource(filter);
+            if (iNativeSetDataSource == 0) {
                 this.mSource = filter;
             }
-            return nativeSetDataSource;
+            return iNativeSetDataSource;
         }
     }
 
@@ -278,11 +278,11 @@ public class Filter implements AutoCloseable {
             if (this.mIsShared) {
                 return 3;
             }
-            int nativeStartFilter = nativeStartFilter();
-            if (nativeStartFilter == 0) {
+            int iNativeStartFilter = nativeStartFilter();
+            if (iNativeStartFilter == 0) {
                 this.mIsStarted = true;
             }
-            return nativeStartFilter;
+            return iNativeStartFilter;
         }
     }
 
@@ -292,11 +292,11 @@ public class Filter implements AutoCloseable {
             if (this.mIsShared) {
                 return 3;
             }
-            int nativeStopFilter = nativeStopFilter();
-            if (nativeStopFilter == 0) {
+            int iNativeStopFilter = nativeStopFilter();
+            if (iNativeStopFilter == 0) {
                 this.mIsStarted = false;
             }
-            return nativeStopFilter;
+            return iNativeStopFilter;
         }
     }
 
@@ -330,9 +330,9 @@ public class Filter implements AutoCloseable {
             if (this.mIsClosed) {
                 return;
             }
-            int nativeClose = nativeClose();
-            if (nativeClose != 0) {
-                TunerUtils.throwExceptionForResult(nativeClose, "Failed to close filter.");
+            int iNativeClose = nativeClose();
+            if (iNativeClose != 0) {
+                TunerUtils.throwExceptionForResult(iNativeClose, "Failed to close filter.");
             } else {
                 this.mIsStarted = false;
                 this.mIsClosed = true;
@@ -344,11 +344,11 @@ public class Filter implements AutoCloseable {
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
             if (!this.mIsStarted && !this.mIsShared) {
-                String nativeAcquireSharedFilterToken = nativeAcquireSharedFilterToken();
-                if (nativeAcquireSharedFilterToken != null) {
+                String strNativeAcquireSharedFilterToken = nativeAcquireSharedFilterToken();
+                if (strNativeAcquireSharedFilterToken != null) {
                     this.mIsShared = true;
                 }
-                return nativeAcquireSharedFilterToken;
+                return strNativeAcquireSharedFilterToken;
             }
             Log.d(TAG, "Acquire shared filter in a wrong state, started: " + this.mIsStarted + "shared: " + this.mIsShared);
             return null;
@@ -366,7 +366,7 @@ public class Filter implements AutoCloseable {
     }
 
     public int delayCallbackForDurationMillis(long j) {
-        int nativeSetTimeDelayHint;
+        int iNativeSetTimeDelayHint;
         if (!TunerVersionChecker.checkHigherOrEqualVersionTo(131072, "setTimeDelayHint")) {
             return 1;
         }
@@ -374,19 +374,19 @@ public class Filter implements AutoCloseable {
             return 4;
         }
         synchronized (this.mLock) {
-            nativeSetTimeDelayHint = nativeSetTimeDelayHint((int) j);
+            iNativeSetTimeDelayHint = nativeSetTimeDelayHint((int) j);
         }
-        return nativeSetTimeDelayHint;
+        return iNativeSetTimeDelayHint;
     }
 
     public int delayCallbackUntilBytesAccumulated(int i) {
-        int nativeSetDataSizeDelayHint;
+        int iNativeSetDataSizeDelayHint;
         if (!TunerVersionChecker.checkHigherOrEqualVersionTo(131072, "setTimeDelayHint")) {
             return 1;
         }
         synchronized (this.mLock) {
-            nativeSetDataSizeDelayHint = nativeSetDataSizeDelayHint(i);
+            iNativeSetDataSizeDelayHint = nativeSetDataSizeDelayHint(i);
         }
-        return nativeSetDataSizeDelayHint;
+        return iNativeSetDataSizeDelayHint;
     }
 }

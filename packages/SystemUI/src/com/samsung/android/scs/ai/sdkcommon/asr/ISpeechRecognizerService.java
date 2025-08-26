@@ -9,12 +9,10 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ISpeechRecognizerService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizerService";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ISpeechRecognizerService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,10 +25,9 @@ public interface ISpeechRecognizerService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static /* bridge */ /* synthetic */ Object m3296$$Nest$smreadTypedObject(Parcel parcel) {
+        public static /* bridge */ /* synthetic */ Object m3314$$Nest$smreadTypedObject(Parcel parcel) {
             return readTypedObject(parcel, Bundle.CREATOR);
         }
 
@@ -54,11 +51,9 @@ public interface ISpeechRecognizerService extends IInterface {
 
     ISpeechRecognizer create(Bundle bundle) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISpeechRecognizerService {
         static final int TRANSACTION_create = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ISpeechRecognizerService {
             private IBinder mRemote;
 
@@ -73,17 +68,17 @@ public interface ISpeechRecognizerService extends IInterface {
 
             @Override // com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizerService
             public ISpeechRecognizer create(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpeechRecognizerService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISpeechRecognizer.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISpeechRecognizerService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISpeechRecognizer.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -100,8 +95,8 @@ public interface ISpeechRecognizerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpeechRecognizerService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ISpeechRecognizerService)) ? new Proxy(iBinder) : (ISpeechRecognizerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpeechRecognizerService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISpeechRecognizerService)) ? new Proxy(iBinder) : (ISpeechRecognizerService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -117,9 +112,9 @@ public interface ISpeechRecognizerService extends IInterface {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
             Parcelable.Creator creator = Bundle.CREATOR;
-            ISpeechRecognizer create = create((Bundle) _Parcel.m3296$$Nest$smreadTypedObject(parcel));
+            ISpeechRecognizer iSpeechRecognizerCreate = create((Bundle) _Parcel.m3314$$Nest$smreadTypedObject(parcel));
             parcel2.writeNoException();
-            parcel2.writeStrongInterface(create);
+            parcel2.writeStrongInterface(iSpeechRecognizerCreate);
             return true;
         }
 

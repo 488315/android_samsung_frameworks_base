@@ -54,20 +54,20 @@ public class EditText extends TextView {
         super(context, attributeSet, i, i2);
         this.mStyleShortcutsEnabled = false;
         Resources.Theme theme = context.getTheme();
-        TypedArray obtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.EditText, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.EditText, i, i2);
         try {
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i3 = 0; i3 < indexCount; i3++) {
-                int index = obtainStyledAttributes.getIndex(i3);
+                int index = typedArrayObtainStyledAttributes.getIndex(i3);
                 if (index == 0) {
-                    this.mStyleShortcutsEnabled = obtainStyledAttributes.getBoolean(index, false);
+                    this.mStyleShortcutsEnabled = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 }
             }
-            obtainStyledAttributes.recycle();
-            obtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
+            typedArrayObtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
             try {
-                boolean hasValue = obtainStyledAttributes.hasValue(102);
-                setLocalePreferredLineHeightForMinimumUsed(hasValue ? hasValue ? obtainStyledAttributes.getBoolean(102, false) : false : CompatChanges.isChangeEnabled(LINE_HEIGHT_FOR_LOCALE));
+                boolean zHasValue = typedArrayObtainStyledAttributes.hasValue(102);
+                setLocalePreferredLineHeightForMinimumUsed(zHasValue ? zHasValue ? typedArrayObtainStyledAttributes.getBoolean(102, false) : false : CompatChanges.isChangeEnabled(LINE_HEIGHT_FOR_LOCALE));
             } finally {
             }
         } finally {
@@ -160,17 +160,17 @@ public class EditText extends TextView {
         int selectionStart = getSelectionStart();
         int selectionEnd = getSelectionEnd();
         if (selectionStart >= 0 && selectionEnd >= 0) {
-            int min = Math.min(selectionStart, selectionEnd);
-            int max = Math.max(selectionStart, selectionEnd);
+            int iMin = Math.min(selectionStart, selectionEnd);
+            int iMax = Math.max(selectionStart, selectionEnd);
             Editable text = getText();
             if (i == 16908379) {
-                return SpanUtils.toggleBold(text, min, max);
+                return SpanUtils.toggleBold(text, iMin, iMax);
             }
             if (i == 16908380) {
-                return SpanUtils.toggleItalic(text, min, max);
+                return SpanUtils.toggleItalic(text, iMin, iMax);
             }
             if (i == 16908381) {
-                return SpanUtils.toggleUnderline(text, min, max);
+                return SpanUtils.toggleUnderline(text, iMin, iMax);
             }
         }
         return false;

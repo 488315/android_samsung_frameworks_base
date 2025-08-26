@@ -2,7 +2,6 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.os.Binder;
-import android.telephony.ims.SipDialogStateCallback;
 import com.android.internal.telephony.ISipDialogStateCallback;
 import com.android.internal.util.FunctionalUtils;
 import java.lang.ref.WeakReference;
@@ -48,8 +47,8 @@ public abstract class SipDialogStateCallback {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    SipDialogStateCallback.CallbackBinder.this.lambda$onActiveSipDialogsChanged$1(sipDialogStateCallback, list);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onActiveSipDialogsChanged$1(sipDialogStateCallback, list);
                 }
             });
         }
@@ -59,7 +58,7 @@ public abstract class SipDialogStateCallback {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipDialogStateCallback.this.onActiveSipDialogsChanged(list);
+                    sipDialogStateCallback.onActiveSipDialogsChanged(list);
                 }
             });
         }
@@ -71,7 +70,7 @@ public abstract class SipDialogStateCallback {
             callbackBinder.getExecutor().execute(new Runnable() { // from class: android.telephony.ims.SipDialogStateCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipDialogStateCallback.this.lambda$binderDied$0();
+                    this.f$0.lambda$binderDied$0();
                 }
             });
         }

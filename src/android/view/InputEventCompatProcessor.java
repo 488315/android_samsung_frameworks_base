@@ -30,19 +30,19 @@ public class InputEventCompatProcessor {
 
     public List<InputEvent> processInputEventForCompatibility(InputEvent inputEvent) {
         this.mProcessedEvents.clear();
-        InputEvent processStylusButtonCompatibility = processStylusButtonCompatibility(inputEvent);
-        if (processStylusButtonCompatibility != null) {
-            inputEvent = processStylusButtonCompatibility;
+        InputEvent inputEventProcessStylusButtonCompatibility = processStylusButtonCompatibility(inputEvent);
+        if (inputEventProcessStylusButtonCompatibility != null) {
+            inputEvent = inputEventProcessStylusButtonCompatibility;
         }
-        List<MotionEvent> processLetterboxScrollCompatibility = processLetterboxScrollCompatibility(inputEvent);
-        if (processLetterboxScrollCompatibility != null) {
-            this.mProcessedEvents.addAll(processLetterboxScrollCompatibility);
+        List<MotionEvent> listProcessLetterboxScrollCompatibility = processLetterboxScrollCompatibility(inputEvent);
+        if (listProcessLetterboxScrollCompatibility != null) {
+            this.mProcessedEvents.addAll(listProcessLetterboxScrollCompatibility);
             return this.mProcessedEvents;
         }
-        if (processStylusButtonCompatibility == null) {
+        if (inputEventProcessStylusButtonCompatibility == null) {
             return null;
         }
-        this.mProcessedEvents.add(processStylusButtonCompatibility);
+        this.mProcessedEvents.add(inputEventProcessStylusButtonCompatibility);
         return this.mProcessedEvents;
     }
 

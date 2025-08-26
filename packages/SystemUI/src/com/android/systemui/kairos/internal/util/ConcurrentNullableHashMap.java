@@ -10,7 +10,6 @@ import kotlin.collections.AbstractMutableMap;
 import kotlin.collections.AbstractMutableSet;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ConcurrentNullableHashMap extends AbstractMutableMap implements ConcurrentMap {
     public final ConcurrentNullableHashMap$entries$1 entries;
@@ -23,12 +22,12 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
             public final Set wrapped;
 
             {
-                this.wrapped = ConcurrentNullableHashMap.this.inner.entrySet();
+                this.wrapped = this.this$0.inner.entrySet();
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
             public final boolean add(Object obj) {
-                return this.wrapped.add(new ConcurrentNullableHashMap$entries$1$add$e$1((Map.Entry) obj, ConcurrentNullableHashMap.this));
+                return this.wrapped.add(new ConcurrentNullableHashMap$entries$1$add$e$1((Map.Entry) obj, this.this$0));
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -46,7 +45,7 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
             public final Iterator iterator() {
-                return new ConcurrentNullableHashMap$entries$1$iterator$1(this.wrapped.iterator(), ConcurrentNullableHashMap.this);
+                return new ConcurrentNullableHashMap$entries$1$iterator$1(this.wrapped.iterator(), this.this$0);
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -105,11 +104,11 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
         if (obj2 == null) {
             obj2 = NullValue.INSTANCE;
         }
-        Object put = concurrentHashMap.put(obj, obj2);
-        if (put == null || put == NullValue.INSTANCE) {
+        Object objPut = concurrentHashMap.put(obj, obj2);
+        if (objPut == null || objPut == NullValue.INSTANCE) {
             return null;
         }
-        return put;
+        return objPut;
     }
 
     @Override // java.util.Map, java.util.concurrent.ConcurrentMap
@@ -121,11 +120,11 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
         if (obj2 == null) {
             obj2 = NullValue.INSTANCE;
         }
-        Object putIfAbsent = concurrentHashMap.putIfAbsent(obj, obj2);
-        if (putIfAbsent == null || putIfAbsent == NullValue.INSTANCE) {
+        Object objPutIfAbsent = concurrentHashMap.putIfAbsent(obj, obj2);
+        if (objPutIfAbsent == null || objPutIfAbsent == NullValue.INSTANCE) {
             return null;
         }
-        return putIfAbsent;
+        return objPutIfAbsent;
     }
 
     @Override // java.util.Map, java.util.concurrent.ConcurrentMap
@@ -161,11 +160,11 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
         if (obj == null) {
             obj = NullValue.INSTANCE;
         }
-        Object remove = concurrentHashMap.remove(obj);
-        if (remove == null || remove == NullValue.INSTANCE) {
+        Object objRemove = concurrentHashMap.remove(obj);
+        if (objRemove == null || objRemove == NullValue.INSTANCE) {
             return null;
         }
-        return remove;
+        return objRemove;
     }
 
     @Override // java.util.Map, java.util.concurrent.ConcurrentMap
@@ -177,11 +176,11 @@ public final class ConcurrentNullableHashMap extends AbstractMutableMap implemen
         if (obj2 == null) {
             obj2 = NullValue.INSTANCE;
         }
-        Object replace = concurrentHashMap.replace(obj, obj2);
-        if (replace == null || replace == NullValue.INSTANCE) {
+        Object objReplace = concurrentHashMap.replace(obj, obj2);
+        if (objReplace == null || objReplace == NullValue.INSTANCE) {
             return null;
         }
-        return replace;
+        return objReplace;
     }
 
     public ConcurrentNullableHashMap() {

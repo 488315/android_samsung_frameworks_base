@@ -7,11 +7,9 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface FakeNetworkEventModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MobileDisabled implements FakeNetworkEventModel {
         public final Integer subId;
 
@@ -46,7 +44,6 @@ public interface FakeNetworkEventModel {
 
     Integer getSubId();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Mobile implements FakeNetworkEventModel {
         public final Integer activity;
         public final Integer carrierId;
@@ -92,15 +89,15 @@ public interface FakeNetworkEventModel {
 
         public final int hashCode() {
             Integer num = this.level;
-            int hashCode = (num == null ? 0 : num.hashCode()) * 31;
+            int iHashCode = (num == null ? 0 : num.hashCode()) * 31;
             SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = this.dataType;
-            int hashCode2 = (hashCode + (signalIcon$MobileIconGroup == null ? 0 : signalIcon$MobileIconGroup.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (signalIcon$MobileIconGroup == null ? 0 : signalIcon$MobileIconGroup.hashCode())) * 31;
             Integer num2 = this.subId;
-            int hashCode3 = (hashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
             Integer num3 = this.carrierId;
-            int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode3 + (num3 == null ? 0 : num3.hashCode())) * 31, 31, this.inflateStrength);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode3 + (num3 == null ? 0 : num3.hashCode())) * 31, 31, this.inflateStrength);
             Integer num4 = this.activity;
-            return Boolean.hashCode(this.ntn) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((m + (num4 != null ? num4.hashCode() : 0)) * 31, 31, this.carrierNetworkChange), 31, this.roaming), 31, this.name), 31, this.slice);
+            return Boolean.hashCode(this.ntn) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iM + (num4 != null ? num4.hashCode() : 0)) * 31, 31, this.carrierNetworkChange), 31, this.roaming), 31, this.name), 31, this.slice);
         }
 
         public final String toString() {

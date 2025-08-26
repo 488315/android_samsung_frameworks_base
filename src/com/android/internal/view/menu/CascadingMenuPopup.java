@@ -285,83 +285,76 @@ final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, View.
     private void showMenu(MenuBuilder menuBuilder) {
         MenuAdapter menuAdapter;
         CascadingMenuInfo cascadingMenuInfo;
-        View view;
+        View viewFindParentViewForSubmenu;
         FrameLayout frameLayout;
-        LayoutInflater from = LayoutInflater.from(this.mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
         if (this.mIsParentThemeDeviceDefault) {
-            menuAdapter = new MenuAdapter(menuBuilder, from, this.mOverflowOnly, 17367451);
+            menuAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, 17367451);
         } else {
-            menuAdapter = new MenuAdapter(menuBuilder, from, this.mOverflowOnly, this.mItemLayout);
+            menuAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, this.mItemLayout);
         }
         if (!isShowing() && this.mForceShowIcon) {
             menuAdapter.setForceShowIcon(true);
         } else if (isShowing()) {
             menuAdapter.setForceShowIcon(MenuPopup.shouldPreserveIconSpacing(menuBuilder));
         }
-        int measureIndividualMenuWidth = measureIndividualMenuWidth(menuAdapter, null, this.mContext, this.mMenuMaxWidth);
-        MenuPopupWindow createPopupWindow = createPopupWindow();
-        createPopupWindow.setAdapter(menuAdapter);
-        createPopupWindow.setContentWidth(measureIndividualMenuWidth);
-        createPopupWindow.setDropDownGravity(this.mDropDownGravity);
+        int iMeasureIndividualMenuWidth = measureIndividualMenuWidth(menuAdapter, null, this.mContext, this.mMenuMaxWidth);
+        MenuPopupWindow menuPopupWindowCreatePopupWindow = createPopupWindow();
+        menuPopupWindowCreatePopupWindow.setAdapter(menuAdapter);
+        menuPopupWindowCreatePopupWindow.setContentWidth(iMeasureIndividualMenuWidth);
+        menuPopupWindowCreatePopupWindow.setDropDownGravity(this.mDropDownGravity);
         if (this.mShowingMenus.size() > 0) {
             List<CascadingMenuInfo> list = this.mShowingMenus;
             cascadingMenuInfo = list.get(list.size() - 1);
-            view = findParentViewForSubmenu(cascadingMenuInfo, menuBuilder);
+            viewFindParentViewForSubmenu = findParentViewForSubmenu(cascadingMenuInfo, menuBuilder);
         } else {
             cascadingMenuInfo = null;
-            view = null;
+            viewFindParentViewForSubmenu = null;
         }
-        if (view != null) {
-            createPopupWindow.setAnchorView(view);
-            createPopupWindow.setTouchModal(false);
-            createPopupWindow.setEnterTransition(null);
-            int nextMenuPosition = getNextMenuPosition(measureIndividualMenuWidth);
+        if (viewFindParentViewForSubmenu != null) {
+            menuPopupWindowCreatePopupWindow.setAnchorView(viewFindParentViewForSubmenu);
+            menuPopupWindowCreatePopupWindow.setTouchModal(false);
+            menuPopupWindowCreatePopupWindow.setEnterTransition(null);
+            int nextMenuPosition = getNextMenuPosition(iMeasureIndividualMenuWidth);
             boolean z = nextMenuPosition == 1;
             this.mLastPosition = nextMenuPosition;
-            if ((this.mDropDownGravity & 5) == 5) {
-                if (!z) {
-                    measureIndividualMenuWidth = view.getWidth();
-                    measureIndividualMenuWidth = -measureIndividualMenuWidth;
-                }
-                createPopupWindow.setHorizontalOffset(measureIndividualMenuWidth);
-                createPopupWindow.setOverlapAnchor(true);
-                createPopupWindow.setVerticalOffset(0);
+            if ((this.mDropDownGravity & 5) != 5) {
+                iMeasureIndividualMenuWidth = z ? viewFindParentViewForSubmenu.getWidth() : -iMeasureIndividualMenuWidth;
+                menuPopupWindowCreatePopupWindow.setHorizontalOffset(iMeasureIndividualMenuWidth);
+                menuPopupWindowCreatePopupWindow.setOverlapAnchor(true);
+                menuPopupWindowCreatePopupWindow.setVerticalOffset(0);
             } else {
-                if (z) {
-                    measureIndividualMenuWidth = view.getWidth();
-                    createPopupWindow.setHorizontalOffset(measureIndividualMenuWidth);
-                    createPopupWindow.setOverlapAnchor(true);
-                    createPopupWindow.setVerticalOffset(0);
+                if (!z) {
+                    iMeasureIndividualMenuWidth = viewFindParentViewForSubmenu.getWidth();
                 }
-                measureIndividualMenuWidth = -measureIndividualMenuWidth;
-                createPopupWindow.setHorizontalOffset(measureIndividualMenuWidth);
-                createPopupWindow.setOverlapAnchor(true);
-                createPopupWindow.setVerticalOffset(0);
+                menuPopupWindowCreatePopupWindow.setHorizontalOffset(iMeasureIndividualMenuWidth);
+                menuPopupWindowCreatePopupWindow.setOverlapAnchor(true);
+                menuPopupWindowCreatePopupWindow.setVerticalOffset(0);
             }
         } else {
             if (this.mHasXOffset) {
-                createPopupWindow.setHorizontalOffset(this.mXOffset);
+                menuPopupWindowCreatePopupWindow.setHorizontalOffset(this.mXOffset);
             }
             if (this.mHasYOffset) {
-                createPopupWindow.setVerticalOffset(this.mYOffset);
+                menuPopupWindowCreatePopupWindow.setVerticalOffset(this.mYOffset);
             }
-            createPopupWindow.setEpicenterBounds(getEpicenterBounds());
+            menuPopupWindowCreatePopupWindow.setEpicenterBounds(getEpicenterBounds());
         }
-        this.mShowingMenus.add(new CascadingMenuInfo(createPopupWindow, menuBuilder, this.mLastPosition));
-        createPopupWindow.show();
-        ListView listView = createPopupWindow.getListView();
+        this.mShowingMenus.add(new CascadingMenuInfo(menuPopupWindowCreatePopupWindow, menuBuilder, this.mLastPosition));
+        menuPopupWindowCreatePopupWindow.show();
+        ListView listView = menuPopupWindowCreatePopupWindow.getListView();
         listView.setOnKeyListener(this);
         if (cascadingMenuInfo == null && this.mShowTitle && menuBuilder.getHeaderTitle() != null) {
             if (this.mIsParentThemeDeviceDefault) {
-                frameLayout = (FrameLayout) from.inflate(R.layout.sem_popup_menu_header_item_layout, (ViewGroup) listView, false);
+                frameLayout = (FrameLayout) layoutInflaterFrom.inflate(R.layout.sem_popup_menu_header_item_layout, (ViewGroup) listView, false);
             } else {
-                frameLayout = (FrameLayout) from.inflate(R.layout.popup_menu_header_item_layout, (ViewGroup) listView, false);
+                frameLayout = (FrameLayout) layoutInflaterFrom.inflate(R.layout.popup_menu_header_item_layout, (ViewGroup) listView, false);
             }
             TextView textView = (TextView) frameLayout.findViewById(16908310);
             frameLayout.setEnabled(false);
             textView.lambda$setTextAsync$0(menuBuilder.getHeaderTitle());
             listView.addHeaderView(frameLayout, null, false);
-            createPopupWindow.show();
+            menuPopupWindowCreatePopupWindow.show();
         }
     }
 
@@ -378,35 +371,35 @@ final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, View.
 
     private View findParentViewForSubmenu(CascadingMenuInfo cascadingMenuInfo, MenuBuilder menuBuilder) {
         MenuAdapter menuAdapter;
-        int i;
+        int headersCount;
         int firstVisiblePosition;
-        MenuItem findMenuItemForSubmenu = findMenuItemForSubmenu(cascadingMenuInfo.menu, menuBuilder);
-        if (findMenuItemForSubmenu == null) {
+        MenuItem menuItemFindMenuItemForSubmenu = findMenuItemForSubmenu(cascadingMenuInfo.menu, menuBuilder);
+        if (menuItemFindMenuItemForSubmenu == null) {
             return null;
         }
         ListView listView = cascadingMenuInfo.getListView();
         ListAdapter adapter = listView.getAdapter();
-        int i2 = 0;
+        int i = 0;
         if (adapter instanceof HeaderViewListAdapter) {
             HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
-            i = headerViewListAdapter.getHeadersCount();
+            headersCount = headerViewListAdapter.getHeadersCount();
             menuAdapter = (MenuAdapter) headerViewListAdapter.getWrappedAdapter();
         } else {
             menuAdapter = (MenuAdapter) adapter;
-            i = 0;
+            headersCount = 0;
         }
         int count = menuAdapter.getCount();
         while (true) {
-            if (i2 >= count) {
-                i2 = -1;
+            if (i >= count) {
+                i = -1;
                 break;
             }
-            if (findMenuItemForSubmenu == menuAdapter.getItem(i2)) {
+            if (menuItemFindMenuItemForSubmenu == menuAdapter.getItem(i)) {
                 break;
             }
-            i2++;
+            i++;
         }
-        if (i2 != -1 && (firstVisiblePosition = (i2 + i) - listView.getFirstVisiblePosition()) >= 0 && firstVisiblePosition < listView.getChildCount()) {
+        if (i != -1 && (firstVisiblePosition = (i + headersCount) - listView.getFirstVisiblePosition()) >= 0 && firstVisiblePosition < listView.getChildCount()) {
             return listView.getChildAt(firstVisiblePosition);
         }
         return null;
@@ -484,21 +477,21 @@ final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, View.
 
     @Override // com.android.internal.view.menu.MenuPresenter
     public void onCloseMenu(MenuBuilder menuBuilder, boolean z) {
-        int findIndexOfAddedMenu = findIndexOfAddedMenu(menuBuilder);
-        if (findIndexOfAddedMenu < 0) {
+        int iFindIndexOfAddedMenu = findIndexOfAddedMenu(menuBuilder);
+        if (iFindIndexOfAddedMenu < 0) {
             return;
         }
-        int i = findIndexOfAddedMenu + 1;
+        int i = iFindIndexOfAddedMenu + 1;
         if (i < this.mShowingMenus.size()) {
             this.mShowingMenus.get(i).menu.close(false);
         }
-        CascadingMenuInfo remove = this.mShowingMenus.remove(findIndexOfAddedMenu);
-        remove.menu.removeMenuPresenter(this);
+        CascadingMenuInfo cascadingMenuInfoRemove = this.mShowingMenus.remove(iFindIndexOfAddedMenu);
+        cascadingMenuInfoRemove.menu.removeMenuPresenter(this);
         if (this.mShouldCloseImmediately) {
-            remove.window.setExitTransition(null);
-            remove.window.setAnimationStyle(0);
+            cascadingMenuInfoRemove.window.setExitTransition(null);
+            cascadingMenuInfoRemove.window.setAnimationStyle(0);
         }
-        remove.window.dismiss();
+        cascadingMenuInfoRemove.window.dismiss();
         int size = this.mShowingMenus.size();
         if (size > 0) {
             this.mLastPosition = this.mShowingMenus.get(size - 1).position;

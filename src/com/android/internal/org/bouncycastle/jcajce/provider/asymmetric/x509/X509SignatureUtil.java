@@ -18,6 +18,7 @@ import com.android.internal.org.bouncycastle.util.encoders.Hex;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
@@ -37,10 +38,10 @@ class X509SignatureUtil {
     }
 
     static {
-        HashMap hashMap = new HashMap();
-        algNames = hashMap;
-        hashMap.put(OIWObjectIdentifiers.dsaWithSHA1, "SHA1withDSA");
-        hashMap.put(X9ObjectIdentifiers.id_dsa_with_sha1, "SHA1withDSA");
+        HashMap map = new HashMap();
+        algNames = map;
+        map.put(OIWObjectIdentifiers.dsaWithSHA1, "SHA1withDSA");
+        map.put(X9ObjectIdentifiers.id_dsa_with_sha1, "SHA1withDSA");
         derNull = DERNull.INSTANCE;
     }
 
@@ -48,7 +49,7 @@ class X509SignatureUtil {
         return MiscObjectIdentifiers.id_alg_composite.equals((ASN1Primitive) algorithmIdentifier.getAlgorithm());
     }
 
-    static void setSignatureParameters(Signature signature, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    static void setSignatureParameters(Signature signature, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         if (aSN1Encodable == null || derNull.equals(aSN1Encodable)) {
             return;
         }
@@ -83,25 +84,25 @@ class X509SignatureUtil {
 
     private static String getDigestAlgName(ASN1ObjectIdentifier aSN1ObjectIdentifier) {
         String digestName = MessageDigestUtils.getDigestName(aSN1ObjectIdentifier);
-        int indexOf = digestName.indexOf(45);
-        if (indexOf <= 0 || digestName.startsWith("SHA3")) {
+        int iIndexOf = digestName.indexOf(45);
+        if (iIndexOf <= 0 || digestName.startsWith("SHA3")) {
             return digestName;
         }
-        return digestName.substring(0, indexOf) + digestName.substring(indexOf + 1);
+        return digestName.substring(0, iIndexOf) + digestName.substring(iIndexOf + 1);
     }
 
     private static String findAlgName(ASN1ObjectIdentifier aSN1ObjectIdentifier) {
-        String lookupAlg;
-        String lookupAlg2;
+        String strLookupAlg;
+        String strLookupAlg2;
         Provider provider = Security.getProvider(BouncyCastleProvider.PROVIDER_NAME);
-        if (provider != null && (lookupAlg2 = lookupAlg(provider, aSN1ObjectIdentifier)) != null) {
-            return lookupAlg2;
+        if (provider != null && (strLookupAlg2 = lookupAlg(provider, aSN1ObjectIdentifier)) != null) {
+            return strLookupAlg2;
         }
         Provider[] providers = Security.getProviders();
         for (int i = 0; i != providers.length; i++) {
             Provider provider2 = providers[i];
-            if (provider != provider2 && (lookupAlg = lookupAlg(provider2, aSN1ObjectIdentifier)) != null) {
-                return lookupAlg;
+            if (provider != provider2 && (strLookupAlg = lookupAlg(provider2, aSN1ObjectIdentifier)) != null) {
+                return strLookupAlg;
             }
         }
         return aSN1ObjectIdentifier.getId();

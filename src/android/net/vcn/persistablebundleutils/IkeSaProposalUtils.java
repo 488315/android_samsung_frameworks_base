@@ -16,9 +16,7 @@ public final class IkeSaProposalUtils extends SaProposalUtilsBase {
         persistableBundle.putIntArray(PRF_KEY, ikeSaProposal.getPseudorandomFunctions().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.IkeSaProposalUtils$$ExternalSyntheticLambda0
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray());
         return persistableBundle;

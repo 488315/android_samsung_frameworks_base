@@ -75,9 +75,9 @@ public interface ISettingsPreferenceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISettingsPreferenceService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISettingsPreferenceService)) {
-                return (ISettingsPreferenceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISettingsPreferenceService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISettingsPreferenceService)) {
+                return (ISettingsPreferenceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -111,19 +111,19 @@ public interface ISettingsPreferenceService extends IInterface {
             }
             if (i == 2) {
                 MetadataRequest metadataRequest = (MetadataRequest) parcel.readTypedObject(MetadataRequest.CREATOR);
-                IMetadataCallback asInterface = IMetadataCallback.Stub.asInterface(parcel.readStrongBinder());
+                IMetadataCallback iMetadataCallbackAsInterface = IMetadataCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getAllPreferenceMetadata(metadataRequest, asInterface);
+                getAllPreferenceMetadata(metadataRequest, iMetadataCallbackAsInterface);
             } else if (i == 3) {
                 GetValueRequest getValueRequest = (GetValueRequest) parcel.readTypedObject(GetValueRequest.CREATOR);
-                IGetValueCallback asInterface2 = IGetValueCallback.Stub.asInterface(parcel.readStrongBinder());
+                IGetValueCallback iGetValueCallbackAsInterface = IGetValueCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getPreferenceValue(getValueRequest, asInterface2);
+                getPreferenceValue(getValueRequest, iGetValueCallbackAsInterface);
             } else if (i == 4) {
                 SetValueRequest setValueRequest = (SetValueRequest) parcel.readTypedObject(SetValueRequest.CREATOR);
-                ISetValueCallback asInterface3 = ISetValueCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISetValueCallback iSetValueCallbackAsInterface = ISetValueCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setPreferenceValue(setValueRequest, asInterface3);
+                setPreferenceValue(setValueRequest, iSetValueCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -148,40 +148,40 @@ public interface ISettingsPreferenceService extends IInterface {
 
             @Override // android.service.settings.preferences.ISettingsPreferenceService
             public void getAllPreferenceMetadata(MetadataRequest metadataRequest, IMetadataCallback iMetadataCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
-                    obtain.writeTypedObject(metadataRequest, 0);
-                    obtain.writeStrongInterface(iMetadataCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(metadataRequest, 0);
+                    parcelObtain.writeStrongInterface(iMetadataCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.settings.preferences.ISettingsPreferenceService
             public void getPreferenceValue(GetValueRequest getValueRequest, IGetValueCallback iGetValueCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
-                    obtain.writeTypedObject(getValueRequest, 0);
-                    obtain.writeStrongInterface(iGetValueCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getValueRequest, 0);
+                    parcelObtain.writeStrongInterface(iGetValueCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.settings.preferences.ISettingsPreferenceService
             public void setPreferenceValue(SetValueRequest setValueRequest, ISetValueCallback iSetValueCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
-                    obtain.writeTypedObject(setValueRequest, 0);
-                    obtain.writeStrongInterface(iSetValueCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISettingsPreferenceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(setValueRequest, 0);
+                    parcelObtain.writeStrongInterface(iSetValueCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

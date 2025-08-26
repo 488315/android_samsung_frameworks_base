@@ -44,9 +44,9 @@ public interface ILoadBoundProfilePackageCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILoadBoundProfilePackageCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILoadBoundProfilePackageCallback)) {
-                return (ILoadBoundProfilePackageCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILoadBoundProfilePackageCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILoadBoundProfilePackageCallback)) {
+                return (ILoadBoundProfilePackageCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface ILoadBoundProfilePackageCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onComplete(readInt, createByteArray);
+                onComplete(i3, bArrCreateByteArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface ILoadBoundProfilePackageCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.ILoadBoundProfilePackageCallback
             public void onComplete(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILoadBoundProfilePackageCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILoadBoundProfilePackageCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -18,16 +18,16 @@ public class StreamDefaultEffect extends DefaultEffect {
 
     public StreamDefaultEffect(UUID uuid, UUID uuid2, int i, int i2) {
         int[] iArr = new int[1];
-        int native_setup = native_setup(uuid.toString(), uuid2.toString(), i, i2, ActivityThread.currentOpPackageName(), iArr);
-        if (native_setup != 0) {
-            Log.e(TAG, "Error code " + native_setup + " when initializing StreamDefaultEffect");
-            if (native_setup == -5) {
+        int iNative_setup = native_setup(uuid.toString(), uuid2.toString(), i, i2, ActivityThread.currentOpPackageName(), iArr);
+        if (iNative_setup != 0) {
+            Log.e(TAG, "Error code " + iNative_setup + " when initializing StreamDefaultEffect");
+            if (iNative_setup == -5) {
                 throw new UnsupportedOperationException("Effect library not loaded");
             }
-            if (native_setup == -4) {
+            if (iNative_setup == -4) {
                 throw new IllegalArgumentException("Stream usage, type uuid, or implementation uuid not supported.");
             }
-            throw new RuntimeException("Cannot initialize effect engine for type: " + uuid + " Error: " + native_setup);
+            throw new RuntimeException("Cannot initialize effect engine for type: " + uuid + " Error: " + iNative_setup);
         }
         this.mId = iArr[0];
     }

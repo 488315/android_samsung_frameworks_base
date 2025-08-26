@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.Velocity;
 import androidx.compose.ui.unit.VelocityKt;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VelocityTracker {
     public long lastMoveEventTimeStamp;
@@ -22,17 +21,17 @@ public final class VelocityTracker {
     }
 
     /* renamed from: addPosition-Uv8p0NA, reason: not valid java name */
-    public final void m599addPositionUv8p0NA(long j, long j2) {
+    public final void m601addPositionUv8p0NA(long j, long j2) {
         this.xVelocityTracker.addDataPoint(Float.intBitsToFloat((int) (j2 >> 32)), j);
         this.yVelocityTracker.addDataPoint(Float.intBitsToFloat((int) (j2 & 4294967295L)), j);
     }
 
     /* renamed from: calculateVelocity-AH228Gc, reason: not valid java name */
-    public final long m600calculateVelocityAH228Gc(long j) {
-        if (!(Velocity.m878getXimpl(j) > 0.0f && Velocity.m879getYimpl(j) > 0.0f)) {
-            InlineClassHelperKt.throwIllegalStateException("maximumVelocity should be a positive value. You specified=" + ((Object) Velocity.m883toStringimpl(j)));
+    public final long m602calculateVelocityAH228Gc(long j) {
+        if (!(Velocity.m880getXimpl(j) > 0.0f && Velocity.m881getYimpl(j) > 0.0f)) {
+            InlineClassHelperKt.throwIllegalStateException("maximumVelocity should be a positive value. You specified=" + ((Object) Velocity.m885toStringimpl(j)));
         }
-        return VelocityKt.Velocity(this.xVelocityTracker.calculateVelocity(Velocity.m878getXimpl(j)), this.yVelocityTracker.calculateVelocity(Velocity.m879getYimpl(j)));
+        return VelocityKt.Velocity(this.xVelocityTracker.calculateVelocity(Velocity.m880getXimpl(j)), this.yVelocityTracker.calculateVelocity(Velocity.m881getYimpl(j)));
     }
 
     public final void resetTracking() {

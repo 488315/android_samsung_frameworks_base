@@ -150,12 +150,12 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         updateStateFromTypedArray(obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedImageDrawable), this.mSrcDensityOverride);
     }
 
-    private void updateStateFromTypedArray(TypedArray typedArray, int i) throws XmlPullParserException {
+    private void updateStateFromTypedArray(TypedArray typedArray, int i) throws XmlPullParserException, Resources.NotFoundException {
         int i2;
         State state = this.mState;
         Resources resources = typedArray.getResources();
@@ -176,17 +176,17 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
                 i2 = typedValue.density != 65535 ? typedValue.density : 0;
             }
             try {
-                Drawable decodeDrawable = ImageDecoder.decodeDrawable(ImageDecoder.createSource(resources, resources.openRawResource(resourceId, typedValue), i2), new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.AnimatedImageDrawable$$ExternalSyntheticLambda3
+                Drawable drawableDecodeDrawable = ImageDecoder.decodeDrawable(ImageDecoder.createSource(resources, resources.openRawResource(resourceId, typedValue), i2), new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.AnimatedImageDrawable$$ExternalSyntheticLambda3
                     @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                     public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
                         AnimatedImageDrawable.lambda$updateStateFromTypedArray$0(imageDecoder, imageInfo, source);
                     }
                 });
-                if (!(decodeDrawable instanceof AnimatedImageDrawable)) {
+                if (!(drawableDecodeDrawable instanceof AnimatedImageDrawable)) {
                     throw new XmlPullParserException(typedArray.getPositionDescription() + ": <animated-image> did not decode animated");
                 }
                 int i3 = this.mState.mRepeatCount;
-                AnimatedImageDrawable animatedImageDrawable = (AnimatedImageDrawable) decodeDrawable;
+                AnimatedImageDrawable animatedImageDrawable = (AnimatedImageDrawable) drawableDecodeDrawable;
                 this.mState = animatedImageDrawable.mState;
                 animatedImageDrawable.mState = null;
                 this.mIntrinsicWidth = animatedImageDrawable.mIntrinsicWidth;
@@ -221,21 +221,21 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
 
     public AnimatedImageDrawable(long j, ImageDecoder imageDecoder, int i, int i2, long j2, boolean z, int i3, int i4, Rect rect, InputStream inputStream, AssetFileDescriptor assetFileDescriptor) throws IOException {
         this.mAnimationCallbacks = null;
-        int scaleFromDensity = Bitmap.scaleFromDensity(i, i3, i4);
-        int scaleFromDensity2 = Bitmap.scaleFromDensity(i2, i3, i4);
+        int iScaleFromDensity = Bitmap.scaleFromDensity(i, i3, i4);
+        int iScaleFromDensity2 = Bitmap.scaleFromDensity(i2, i3, i4);
         if (rect == null) {
-            this.mIntrinsicWidth = scaleFromDensity;
-            this.mIntrinsicHeight = scaleFromDensity2;
+            this.mIntrinsicWidth = iScaleFromDensity;
+            this.mIntrinsicHeight = iScaleFromDensity2;
         } else {
             rect.set(Bitmap.scaleFromDensity(rect.left, i3, i4), Bitmap.scaleFromDensity(rect.top, i3, i4), Bitmap.scaleFromDensity(rect.right, i3, i4), Bitmap.scaleFromDensity(rect.bottom, i3, i4));
             this.mIntrinsicWidth = rect.width();
             this.mIntrinsicHeight = rect.height();
         }
-        State state = new State(this, nCreate(j, imageDecoder, scaleFromDensity, scaleFromDensity2, j2, z, rect), inputStream, assetFileDescriptor);
+        State state = new State(this, nCreate(j, imageDecoder, iScaleFromDensity, iScaleFromDensity2, j2, z, rect), inputStream, assetFileDescriptor);
         this.mState = state;
-        NativeAllocationRegistry createMalloced = NativeAllocationRegistry.createMalloced(AnimatedImageDrawable.class.getClassLoader(), nGetNativeFinalizer(), nNativeByteSize(state.mNativePtr));
+        NativeAllocationRegistry nativeAllocationRegistryCreateMalloced = NativeAllocationRegistry.createMalloced(AnimatedImageDrawable.class.getClassLoader(), nGetNativeFinalizer(), nNativeByteSize(state.mNativePtr));
         State state2 = this.mState;
-        createMalloced.registerNativeAllocation(state2, state2.mNativePtr);
+        nativeAllocationRegistryCreateMalloced.registerNativeAllocation(state2, state2.mNativePtr);
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -257,18 +257,18 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
             this.mStarting = false;
             postOnAnimationStart();
         }
-        long nDraw = nDraw(this.mState.mNativePtr, canvas.getNativeCanvasWrapper());
-        if (nDraw > 0) {
+        long jNDraw = nDraw(this.mState.mNativePtr, canvas.getNativeCanvasWrapper());
+        if (jNDraw > 0) {
             if (this.mRunnable == null) {
                 this.mRunnable = new Runnable() { // from class: android.graphics.drawable.AnimatedImageDrawable$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AnimatedImageDrawable.this.invalidateSelf();
+                        this.f$0.invalidateSelf();
                     }
                 };
             }
-            scheduleSelf(this.mRunnable, nDraw + SystemClock.uptimeMillis());
-        } else if (nDraw == -1) {
+            scheduleSelf(this.mRunnable, jNDraw + SystemClock.uptimeMillis());
+        } else if (jNDraw == -1) {
             postOnAnimationEnd();
         }
     }
@@ -433,7 +433,7 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
         getHandler().post(new Runnable() { // from class: android.graphics.drawable.AnimatedImageDrawable$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                AnimatedImageDrawable.this.lambda$postOnAnimationStart$1();
+                this.f$0.lambda$postOnAnimationStart$1();
             }
         });
     }
@@ -453,7 +453,7 @@ public class AnimatedImageDrawable extends Drawable implements Animatable2 {
         getHandler().post(new Runnable() { // from class: android.graphics.drawable.AnimatedImageDrawable$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                AnimatedImageDrawable.this.lambda$postOnAnimationEnd$2();
+                this.f$0.lambda$postOnAnimationEnd$2();
             }
         });
     }

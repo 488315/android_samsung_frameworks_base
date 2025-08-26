@@ -39,7 +39,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
@@ -68,14 +67,12 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     public final Date mCurrentDate = new Date();
     public final Date mCurrentShortenDate = new Date();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TimeAudience {
         String getTicket();
 
         void notifyTimeChanged(QSClockBellSound qSClockBellSound);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TimeBroadcastReceiver extends BroadcastReceiver {
         public static final /* synthetic */ int $r8$clinit = 0;
         public String mTimeZoneString;
@@ -93,9 +90,9 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
                 return;
             }
             String action = intent.getAction();
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onReceive(", action, ") mTimeZoneString:");
-            m.append(this.mTimeZoneString);
-            Log.d("QSClockBellTower", m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onReceive(", action, ") mTimeZoneString:");
+            sbM.append(this.mTimeZoneString);
+            Log.d("QSClockBellTower", sbM.toString());
             action.getClass();
             switch (action) {
                 case "android.intent.action.LOCALE_CHANGED":
@@ -109,7 +106,7 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
                     QSClockBellTower.this.mHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.policy.QSClockBellTower$TimeBroadcastReceiver$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            QSClockBellTower.TimeBroadcastReceiver timeBroadcastReceiver = QSClockBellTower.TimeBroadcastReceiver.this;
+                            QSClockBellTower.TimeBroadcastReceiver timeBroadcastReceiver = this.f$0;
                             String str = stringExtra;
                             int i2 = QSClockBellTower.TimeBroadcastReceiver.$r8$clinit;
                             timeBroadcastReceiver.updateTimeZone(str);
@@ -128,9 +125,9 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
             QSClockBellTower.this.mCalendar = Calendar.getInstance(TimeZone.getTimeZone(str));
             TimeZone timeZone = QSClockBellTower.this.mCalendar.getTimeZone();
             Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("updateTimeZone() newTimezone: ", str, ", defaultTimezone: ");
-            m.append(calendar.getTimeZone());
-            Log.d("QSClockBellTower", m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("updateTimeZone() newTimezone: ", str, ", defaultTimezone: ");
+            sbM.append(calendar.getTimeZone());
+            Log.d("QSClockBellTower", sbM.toString());
             SimpleDateFormat simpleDateFormat = QSClockBellTower.this.mClockFormat;
             if (simpleDateFormat != null) {
                 simpleDateFormat.setTimeZone(timeZone);
@@ -183,10 +180,10 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
         ?? r6 = new Runnable() { // from class: com.android.systemui.statusbar.policy.QSClockBellTower.1
             @Override // java.lang.Runnable
             public final void run() {
-                long currentTimeMillis = System.currentTimeMillis();
-                QSClockBellTower.this.mCalendar.setTimeInMillis(currentTimeMillis);
+                long jCurrentTimeMillis = System.currentTimeMillis();
+                QSClockBellTower.this.mCalendar.setTimeInMillis(jCurrentTimeMillis);
                 QSClockBellTower.this.ringBellOfTower();
-                Log.d("QSClockBellTower", "Everyone heard the bell. run(currentTime:" + currentTimeMillis + ", getTime():" + QSClockBellTower.this.mCalendar.getTime() + ", getTimeZone():" + QSClockBellTower.this.mCalendar.getTimeZone() + ")");
+                Log.d("QSClockBellTower", "Everyone heard the bell. run(currentTime:" + jCurrentTimeMillis + ", getTime():" + QSClockBellTower.this.mCalendar.getTime() + ", getTimeZone():" + QSClockBellTower.this.mCalendar.getTimeZone() + ")");
             }
         };
         this.mUpdateNotifyNewClockTime = r6;
@@ -254,13 +251,13 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     }
 
     public static String getBasicSmallTime(String str) {
-        int indexOf = str.indexOf(61184);
-        int indexOf2 = str.indexOf(61185);
-        if (indexOf < 0 || indexOf2 <= indexOf) {
+        int iIndexOf = str.indexOf(61184);
+        int iIndexOf2 = str.indexOf(61185);
+        if (iIndexOf < 0 || iIndexOf2 <= iIndexOf) {
             return str;
         }
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str);
-        spannableStringBuilder.delete(indexOf, indexOf2 + 1);
+        spannableStringBuilder.delete(iIndexOf, iIndexOf2 + 1);
         if (Character.isWhitespace(spannableStringBuilder.charAt(0))) {
             int i = 0;
             while (spannableStringBuilder.length() > i && Character.isWhitespace(spannableStringBuilder.charAt(i))) {
@@ -272,25 +269,25 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     }
 
     @Override // com.android.systemui.demomode.DemoModeCommandReceiver
-    public final void dispatchDemoCommand(Bundle bundle, String str) {
+    public final void dispatchDemoCommand(Bundle bundle, String str) throws NumberFormatException {
         String string = bundle.getString("millis");
         String string2 = bundle.getString("hhmm");
         if (string != null) {
             this.mCalendar.setTimeInMillis(Long.parseLong(string));
         } else if (string2 != null && string2.length() == 4) {
-            boolean z = false;
-            int parseInt = Integer.parseInt(string2.substring(0, 2));
-            int parseInt2 = Integer.parseInt(string2.substring(2));
+            boolean zIs24HourFormat = false;
+            int i = Integer.parseInt(string2.substring(0, 2));
+            int i2 = Integer.parseInt(string2.substring(2));
             Context context = this.mContext;
             if (context != null && !DeviceState.isTesting()) {
-                z = DateFormat.is24HourFormat(context, ((UserTrackerImpl) ((UserTracker) Dependency.sDependency.getDependencyInner(UserTracker.class))).getUserId());
+                zIs24HourFormat = DateFormat.is24HourFormat(context, ((UserTrackerImpl) ((UserTracker) Dependency.sDependency.getDependencyInner(UserTracker.class))).getUserId());
             }
-            if (z) {
-                this.mCalendar.set(11, parseInt);
+            if (zIs24HourFormat) {
+                this.mCalendar.set(11, i);
             } else {
-                this.mCalendar.set(10, parseInt);
+                this.mCalendar.set(10, i);
             }
-            this.mCalendar.set(12, parseInt2);
+            this.mCalendar.set(12, i2);
         }
         Handler handler = this.mHandler;
         if (handler != null) {
@@ -318,13 +315,13 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
     public final String getBestPatternFormat(boolean z) {
         Locale locale;
         Context context = this.mContext;
-        boolean is24HourFormat = (context == null || DeviceState.isTesting()) ? false : DateFormat.is24HourFormat(context, ((UserTrackerImpl) ((UserTracker) Dependency.sDependency.getDependencyInner(UserTracker.class))).getUserId());
-        if (z && is24HourFormat && (locale = this.mLocale) != null && locale.getLanguage().equals(new Locale("ko").getLanguage())) {
+        boolean zIs24HourFormat = (context == null || DeviceState.isTesting()) ? false : DateFormat.is24HourFormat(context, ((UserTrackerImpl) ((UserTracker) Dependency.sDependency.getDependencyInner(UserTracker.class))).getUserId());
+        if (z && zIs24HourFormat && (locale = this.mLocale) != null && locale.getLanguage().equals(new Locale("ko").getLanguage())) {
             return "a H:mm:ss";
         }
         DateTimePatternGenerator dateTimePatternGenerator = DateTimePatternGenerator.getInstance(this.mLocale);
         StringBuilder sb = new StringBuilder();
-        sb.append(is24HourFormat ? ImsProfile.TIMER_NAME_H : "h");
+        sb.append(zIs24HourFormat ? ImsProfile.TIMER_NAME_H : "h");
         sb.append("m");
         if (z) {
             sb.append("s");
@@ -356,16 +353,23 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
         this.mAudienceList.remove(timeAudience.getTicket());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00c5  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00d5  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void ringBellOfTower(boolean z) {
         SimpleDateFormat simpleDateFormat;
-        String replaceAll;
-        String sb;
+        String strReplaceAll;
+        StringBuilder sb;
+        boolean z2;
+        String string;
         QSClockBellAlternateCalendarUtil qSClockBellAlternateCalendarUtil;
         String str;
         SimpleDateFormat simpleDateFormat2;
-        String str2 = "";
+        String string2 = "";
         if (this.mLocale == null) {
-            replaceAll = "12:34";
+            strReplaceAll = "12:34";
         } else {
             String bestPatternFormat = getBestPatternFormat(false);
             if (bestPatternFormat.equals(this.mClockFormatString)) {
@@ -380,46 +384,59 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
                 this.mClockFormatString = getBestPatternFormat(false);
                 simpleDateFormat = simpleDateFormat3;
             }
-            replaceAll = getBasicSmallTime(simpleDateFormat.format(this.mCalendar.getTime())).replaceAll(NNBSP_UNICODE, "");
+            strReplaceAll = getBasicSmallTime(simpleDateFormat.format(this.mCalendar.getTime())).replaceAll(NNBSP_UNICODE, "");
         }
         SimpleDateFormat simpleDateFormat4 = this.mContentDescriptionFormat;
-        String format = simpleDateFormat4 != null ? simpleDateFormat4.format(this.mCalendar.getTime()) : "";
+        String str2 = simpleDateFormat4 != null ? simpleDateFormat4.format(this.mCalendar.getTime()) : "";
         if (TextUtils.isEmpty(this.mDateStringFormat)) {
             this.mDateStringPattern = this.mContext.getString(R.string.system_ui_quick_panel_date_pattern);
             try {
                 this.mDateStringFormat = DateFormat.getBestDateTimePattern(Locale.getDefault(), this.mDateStringPattern).trim();
+                this.mCurrentDate.setTime(System.currentTimeMillis());
+                sb = new StringBuilder(DateFormat.format(this.mDateStringFormat, this.mCurrentDate).toString());
+                z2 = QpRune.QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR;
+                if (z2 && (qSClockBellAlternateCalendarUtil = this.mAlternateCalendarUtil) != null && qSClockBellAlternateCalendarUtil.isAlternateCalendarEnabled()) {
+                    if (z2) {
+                        str = null;
+                    } else {
+                        if (".".equals(qSClockBellAlternateCalendarUtil.mCachedAlternateCalendar)) {
+                            qSClockBellAlternateCalendarUtil.updateAlternateCalendar(".");
+                        }
+                        str = qSClockBellAlternateCalendarUtil.mCachedAlternateCalendar;
+                    }
+                    sb.append(TextUtils.emptyIfNull(str));
+                }
+                string = sb.toString();
             } catch (ExceptionInInitializerError unused) {
                 this.mDateStringFormat = null;
-                sb = "";
+                string = "";
             }
-        }
-        this.mCurrentDate.setTime(System.currentTimeMillis());
-        StringBuilder sb2 = new StringBuilder(DateFormat.format(this.mDateStringFormat, this.mCurrentDate).toString());
-        boolean z2 = QpRune.QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR;
-        if (z2 && (qSClockBellAlternateCalendarUtil = this.mAlternateCalendarUtil) != null && qSClockBellAlternateCalendarUtil.isAlternateCalendarEnabled()) {
+        } else {
+            this.mCurrentDate.setTime(System.currentTimeMillis());
+            sb = new StringBuilder(DateFormat.format(this.mDateStringFormat, this.mCurrentDate).toString());
+            z2 = QpRune.QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR;
             if (z2) {
-                if (".".equals(qSClockBellAlternateCalendarUtil.mCachedAlternateCalendar)) {
-                    qSClockBellAlternateCalendarUtil.updateAlternateCalendar(".");
+                if (z2) {
                 }
-                str = qSClockBellAlternateCalendarUtil.mCachedAlternateCalendar;
-            } else {
-                str = null;
+                sb.append(TextUtils.emptyIfNull(str));
             }
-            sb2.append(TextUtils.emptyIfNull(str));
+            string = sb.toString();
         }
-        sb = sb2.toString();
         if (TextUtils.isEmpty(this.mShortenDateStringFormat)) {
             this.mShortenDateStringPattern = this.mContext.getString(R.string.quick_panel_shorten_date_pattern);
             try {
                 this.mShortenDateStringFormat = DateFormat.getBestDateTimePattern(Locale.getDefault(), this.mShortenDateStringPattern).trim();
+                this.mCurrentShortenDate.setTime(System.currentTimeMillis());
+                string2 = DateFormat.format(this.mShortenDateStringFormat, this.mCurrentShortenDate).toString();
             } catch (ExceptionInInitializerError unused2) {
                 this.mShortenDateStringFormat = null;
             }
+        } else {
+            this.mCurrentShortenDate.setTime(System.currentTimeMillis());
+            string2 = DateFormat.format(this.mShortenDateStringFormat, this.mCurrentShortenDate).toString();
         }
-        this.mCurrentShortenDate.setTime(System.currentTimeMillis());
-        str2 = DateFormat.format(this.mShortenDateStringFormat, this.mCurrentShortenDate).toString();
         QSClockQuickStarHelper qSClockQuickStarHelper = this.mQSClockQuickStarHelper;
-        String str3 = "12:34:56";
+        String basicSmallTime = "12:34:56";
         if (qSClockQuickStarHelper.shouldShowSecondsClock() && this.mLocale != null) {
             String bestPatternFormat2 = getBestPatternFormat(true);
             if (bestPatternFormat2.equals(this.mClockFormatStringWithSeconds)) {
@@ -431,15 +448,15 @@ public class QSClockBellTower implements DemoModeCommandReceiver, Dumpable {
                 this.mClockFormatStringWithSeconds = getBestPatternFormat(true);
             }
             this.mCalendar.setTimeInMillis(System.currentTimeMillis());
-            str3 = getBasicSmallTime(simpleDateFormat2.format(this.mCalendar.getTime()));
+            basicSmallTime = getBasicSmallTime(simpleDateFormat2.format(this.mCalendar.getTime()));
         }
-        final QSClockBellSound qSClockBellSound = new QSClockBellSound(replaceAll, format, sb, str2, z, str3, qSClockQuickStarHelper.shouldShowSecondsClock(), qSClockQuickStarHelper.getQuickStarDateViewText());
+        final QSClockBellSound qSClockBellSound = new QSClockBellSound(strReplaceAll, str2, string, string2, z, basicSmallTime, qSClockQuickStarHelper.shouldShowSecondsClock(), qSClockQuickStarHelper.getQuickStarDateViewText());
         this.mQSClockBellSound = qSClockBellSound;
         Log.d("QSClockBellTower", "He is ready to ring the bell. (((" + qSClockBellSound.toString() + ")))");
         this.mAudienceList.values().stream().filter(new QSClockBellTower$$ExternalSyntheticLambda0()).forEach(new Consumer() { // from class: com.android.systemui.statusbar.policy.QSClockBellTower$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                QSClockBellSound qSClockBellSound2 = QSClockBellSound.this;
+                QSClockBellSound qSClockBellSound2 = qSClockBellSound;
                 boolean z3 = QSClockBellTower.DEBUG;
                 ((QSClockBellTower.TimeAudience) obj).notifyTimeChanged(qSClockBellSound2);
             }

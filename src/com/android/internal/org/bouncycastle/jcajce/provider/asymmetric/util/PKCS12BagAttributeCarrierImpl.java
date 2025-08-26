@@ -67,23 +67,23 @@ public class PKCS12BagAttributeCarrierImpl implements PKCS12BagAttributeCarrier 
             return;
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ASN1OutputStream create = ASN1OutputStream.create(byteArrayOutputStream);
+        ASN1OutputStream aSN1OutputStreamCreate = ASN1OutputStream.create(byteArrayOutputStream);
         Enumeration bagAttributeKeys = getBagAttributeKeys();
         while (bagAttributeKeys.hasMoreElements()) {
             ASN1ObjectIdentifier aSN1ObjectIdentifier = ASN1ObjectIdentifier.getInstance(bagAttributeKeys.nextElement());
-            create.writeObject((ASN1Primitive) aSN1ObjectIdentifier);
-            create.writeObject((ASN1Encodable) this.pkcs12Attributes.get(aSN1ObjectIdentifier));
+            aSN1OutputStreamCreate.writeObject((ASN1Primitive) aSN1ObjectIdentifier);
+            aSN1OutputStreamCreate.writeObject((ASN1Encodable) this.pkcs12Attributes.get(aSN1ObjectIdentifier));
         }
         objectOutputStream.writeObject(byteArrayOutputStream.toByteArray());
     }
 
-    public void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
-        Object readObject = objectInputStream.readObject();
-        if (readObject instanceof Hashtable) {
-            this.pkcs12Attributes = (Hashtable) readObject;
+    public void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
+        Object object = objectInputStream.readObject();
+        if (object instanceof Hashtable) {
+            this.pkcs12Attributes = (Hashtable) object;
             this.pkcs12Ordering = (Vector) objectInputStream.readObject();
         } else {
-            ASN1InputStream aSN1InputStream = new ASN1InputStream((byte[]) readObject);
+            ASN1InputStream aSN1InputStream = new ASN1InputStream((byte[]) object);
             while (true) {
                 ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) aSN1InputStream.readObject();
                 if (aSN1ObjectIdentifier == null) {

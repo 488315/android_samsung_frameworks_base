@@ -11,7 +11,6 @@ import kotlinx.coroutines.SupervisorJobImpl;
 import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FontListFontFamilyTypefaceAdapter {
     public static final FontListFontFamilyTypefaceAdapter$special$$inlined$CoroutineExceptionHandler$1 DropExceptionHandler;
@@ -19,7 +18,6 @@ public final class FontListFontFamilyTypefaceAdapter {
     public final ContextScope asyncLoadScope;
     public final AsyncTypefaceCache asyncTypefaceCache;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,6 +33,7 @@ public final class FontListFontFamilyTypefaceAdapter {
         DropExceptionHandler = new FontListFontFamilyTypefaceAdapter$special$$inlined$CoroutineExceptionHandler$1(CoroutineExceptionHandler.Key);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public FontListFontFamilyTypefaceAdapter() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }

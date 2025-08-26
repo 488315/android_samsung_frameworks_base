@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
     public final Context mContext;
@@ -92,13 +91,13 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
                     }
                     break;
                 case 5003:
-                    int intValue = ((Integer) message.obj).intValue();
+                    int iIntValue = ((Integer) message.obj).intValue();
                     knoxStateMonitorImpl.getClass();
-                    Log.d("KnoxStateMonitorImpl", "handleDoKeyguard " + intValue);
+                    Log.d("KnoxStateMonitorImpl", "handleDoKeyguard " + iIntValue);
                     while (i2 < knoxStateMonitorImpl.mCallbacks.size()) {
                         KnoxStateMonitorCallback knoxStateMonitorCallback = (KnoxStateMonitorCallback) ((WeakReference) knoxStateMonitorImpl.mCallbacks.get(i2)).get();
                         if (knoxStateMonitorCallback != null) {
-                            knoxStateMonitorCallback.onDoKeyguard(intValue);
+                            knoxStateMonitorCallback.onDoKeyguard(iIntValue);
                         }
                         i2++;
                     }
@@ -284,13 +283,13 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
                     }
                     break;
                 case 5027:
-                    boolean booleanValue = ((Boolean) message.obj).booleanValue();
+                    boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
                     knoxStateMonitorImpl.getClass();
                     Log.d("KnoxStateMonitorImpl", "handleSetHardKeyIntentState");
                     while (i2 < knoxStateMonitorImpl.mCallbacks.size()) {
                         KnoxStateMonitorCallback knoxStateMonitorCallback15 = (KnoxStateMonitorCallback) ((WeakReference) knoxStateMonitorImpl.mCallbacks.get(i2)).get();
                         if (knoxStateMonitorCallback15 != null) {
-                            knoxStateMonitorCallback15.onSetHardKeyIntentState(booleanValue);
+                            knoxStateMonitorCallback15.onSetHardKeyIntentState(zBooleanValue);
                         }
                         i2++;
                     }
@@ -339,7 +338,7 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
             Thread thread = new Thread(new Runnable() { // from class: com.android.systemui.knox.KnoxStateMonitorImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KnoxStateMonitorImpl knoxStateMonitorImpl = KnoxStateMonitorImpl.this;
+                    KnoxStateMonitorImpl knoxStateMonitorImpl = this.f$0;
                     knoxStateMonitorImpl.initKnoxClass();
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction("com.sec.knox.keyguard.show");
@@ -426,9 +425,9 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
         }
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
         dualDarMonitor.getClass();
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         long j = dualDarMonitor.mLockoutAttemptDeadline;
-        return (j >= elapsedRealtime || dualDarMonitor.mLockoutAttemptTimeout == 0) ? j > elapsedRealtime + dualDarMonitor.mLockoutAttemptTimeout ? dualDarMonitor.mLockPatternUtils.getLockoutAttemptDeadline(dualDarMonitor.getInnerAuthUserId(selectedUserId)) : j : dualDarMonitor.mLockPatternUtils.getLockoutAttemptDeadline(dualDarMonitor.getInnerAuthUserId(selectedUserId));
+        return (j >= jElapsedRealtime || dualDarMonitor.mLockoutAttemptTimeout == 0) ? j > jElapsedRealtime + dualDarMonitor.mLockoutAttemptTimeout ? dualDarMonitor.mLockPatternUtils.getLockoutAttemptDeadline(dualDarMonitor.getInnerAuthUserId(selectedUserId)) : j : dualDarMonitor.mLockPatternUtils.getLockoutAttemptDeadline(dualDarMonitor.getInnerAuthUserId(selectedUserId));
     }
 
     public final int getInnerAuthUserId(int i) {
@@ -531,13 +530,13 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
         if (DeviceState.isTesting()) {
             return;
         }
-        IUcmService asInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
-        if (asInterface == null) {
+        IUcmService iUcmServiceAsInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+        if (iUcmServiceAsInterface == null) {
             Log.d("SdpMonitor", "UcmMonitor failed to get UCM System service");
             return;
         }
         try {
-            asInterface.registerSystemUICallback(ucmMonitor);
+            iUcmServiceAsInterface.registerSystemUICallback(ucmMonitor);
         } catch (Exception unused) {
             Log.d("SdpMonitor", "UcmMonitor failed to be registered");
         }
@@ -616,9 +615,9 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
         if (dualDarMonitor == null) {
             return false;
         }
-        boolean isInnerAuthRequired = DualDarManager.getInstance(dualDarMonitor.mContext).isInnerAuthRequired(i);
-        KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isInnerAuthRequired - userId : ", i, ", ret : ", isInnerAuthRequired, "DualDarMonitor");
-        return isInnerAuthRequired;
+        boolean zIsInnerAuthRequired = DualDarManager.getInstance(dualDarMonitor.mContext).isInnerAuthRequired(i);
+        KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isInnerAuthRequired - userId : ", i, ", ret : ", zIsInnerAuthRequired, "DualDarMonitor");
+        return zIsInnerAuthRequired;
     }
 
     public final boolean isDualDarInnerLayerUnlocked(int i) {
@@ -626,9 +625,9 @@ public final class KnoxStateMonitorImpl implements KnoxStateMonitor, Dumpable {
         if (dualDarMonitor == null) {
             return false;
         }
-        boolean isInnerLayerUnlocked = DualDarManager.getInstance(dualDarMonitor.mContext).isInnerLayerUnlocked(i);
-        KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isDualDarInnerLayerUnlocked - userId : ", i, ", ret : ", isInnerLayerUnlocked, "DualDarMonitor");
-        return isInnerLayerUnlocked;
+        boolean zIsInnerLayerUnlocked = DualDarManager.getInstance(dualDarMonitor.mContext).isInnerLayerUnlocked(i);
+        KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isDualDarInnerLayerUnlocked - userId : ", i, ", ret : ", zIsInnerLayerUnlocked, "DualDarMonitor");
+        return zIsInnerLayerUnlocked;
     }
 
     public final boolean isMobileDataTileBlocked() {

@@ -37,9 +37,9 @@ public class NetworkMetrics {
         if (this.pendingSummary == null) {
             this.pendingSummary = new Summary(this.netId, this.transports);
         }
-        boolean addResult = this.dnsMetrics.addResult((byte) i, (byte) i2, i3);
+        boolean zAddResult = this.dnsMetrics.addResult((byte) i, (byte) i2, i3);
         this.pendingSummary.dnsLatencies.count(i3);
-        this.pendingSummary.dnsErrorRate.count(addResult ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
+        this.pendingSummary.dnsErrorRate.count(zAddResult ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
         if (i2 == 255 || i3 >= 1000) {
             this.pendingSummary.dnsDelayedResponseCnt.count(1.0d);
         }

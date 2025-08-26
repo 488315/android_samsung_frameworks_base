@@ -36,8 +36,8 @@ public class V4Signature {
         }
 
         public static HashingInfo fromByteArray(byte[] bArr) throws IOException {
-            ByteBuffer order = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
-            return new HashingInfo(order.getInt(), order.get(), V4Signature.readBytes(order), V4Signature.readBytes(order));
+            ByteBuffer byteBufferOrder = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
+            return new HashingInfo(byteBufferOrder.getInt(), byteBufferOrder.get(), V4Signature.readBytes(byteBufferOrder), V4Signature.readBytes(byteBufferOrder));
         }
     }
 
@@ -96,25 +96,25 @@ public class V4Signature {
         }
 
         public static SigningInfos fromByteArray(byte[] bArr) throws IOException {
-            ByteBuffer order = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
-            SigningInfo fromByteBuffer = SigningInfo.fromByteBuffer(order);
-            if (!order.hasRemaining()) {
-                return new SigningInfos(fromByteBuffer);
+            ByteBuffer byteBufferOrder = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
+            SigningInfo signingInfoFromByteBuffer = SigningInfo.fromByteBuffer(byteBufferOrder);
+            if (!byteBufferOrder.hasRemaining()) {
+                return new SigningInfos(signingInfoFromByteBuffer);
             }
             ArrayList arrayList = new ArrayList(1);
-            while (order.hasRemaining()) {
-                arrayList.add(SigningInfoBlock.fromByteBuffer(order));
+            while (byteBufferOrder.hasRemaining()) {
+                arrayList.add(SigningInfoBlock.fromByteBuffer(byteBufferOrder));
             }
-            return new SigningInfos(fromByteBuffer, (SigningInfoBlock[]) arrayList.toArray(new SigningInfoBlock[arrayList.size()]));
+            return new SigningInfos(signingInfoFromByteBuffer, (SigningInfoBlock[]) arrayList.toArray(new SigningInfoBlock[arrayList.size()]));
         }
     }
 
     public static V4Signature readFrom(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
         ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream = new ParcelFileDescriptor.AutoCloseInputStream(parcelFileDescriptor.dup());
         try {
-            V4Signature readFrom = readFrom(autoCloseInputStream);
+            V4Signature from = readFrom(autoCloseInputStream);
             autoCloseInputStream.close();
-            return readFrom;
+            return from;
         } catch (Throwable th) {
             try {
                 autoCloseInputStream.close();
@@ -128,9 +128,9 @@ public class V4Signature {
     public static V4Signature readFrom(byte[] bArr) throws IOException {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         try {
-            V4Signature readFrom = readFrom(byteArrayInputStream);
+            V4Signature from = readFrom(byteArrayInputStream);
             byteArrayInputStream.close();
-            return readFrom;
+            return from;
         } catch (Throwable th) {
             try {
                 byteArrayInputStream.close();
@@ -141,7 +141,7 @@ public class V4Signature {
         }
     }
 
-    public byte[] toByteArray() {
+    public byte[] toByteArray() throws IOException {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             try {
@@ -157,18 +157,18 @@ public class V4Signature {
     }
 
     public static byte[] getSignedData(long j, HashingInfo hashingInfo, SigningInfo signingInfo) {
-        int bytesSize = bytesSize(hashingInfo.salt) + 17 + bytesSize(hashingInfo.rawRootHash) + bytesSize(signingInfo.apkDigest) + bytesSize(signingInfo.certificate) + bytesSize(signingInfo.additionalData);
-        ByteBuffer order = ByteBuffer.allocate(bytesSize).order(ByteOrder.LITTLE_ENDIAN);
-        order.putInt(bytesSize);
-        order.putLong(j);
-        order.putInt(hashingInfo.hashAlgorithm);
-        order.put(hashingInfo.log2BlockSize);
-        writeBytes(order, hashingInfo.salt);
-        writeBytes(order, hashingInfo.rawRootHash);
-        writeBytes(order, signingInfo.apkDigest);
-        writeBytes(order, signingInfo.certificate);
-        writeBytes(order, signingInfo.additionalData);
-        return order.array();
+        int iBytesSize = bytesSize(hashingInfo.salt) + 17 + bytesSize(hashingInfo.rawRootHash) + bytesSize(signingInfo.apkDigest) + bytesSize(signingInfo.certificate) + bytesSize(signingInfo.additionalData);
+        ByteBuffer byteBufferOrder = ByteBuffer.allocate(iBytesSize).order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferOrder.putInt(iBytesSize);
+        byteBufferOrder.putLong(j);
+        byteBufferOrder.putInt(hashingInfo.hashAlgorithm);
+        byteBufferOrder.put(hashingInfo.log2BlockSize);
+        writeBytes(byteBufferOrder, hashingInfo.salt);
+        writeBytes(byteBufferOrder, hashingInfo.rawRootHash);
+        writeBytes(byteBufferOrder, signingInfo.apkDigest);
+        writeBytes(byteBufferOrder, signingInfo.certificate);
+        writeBytes(byteBufferOrder, signingInfo.additionalData);
+        return byteBufferOrder.array();
     }
 
     public boolean isVersionSupported() {
@@ -182,13 +182,13 @@ public class V4Signature {
     }
 
     public static V4Signature readFrom(InputStream inputStream) throws IOException {
-        int readIntLE = readIntLE(inputStream);
-        int i = INCFS_MAX_SIGNATURE_SIZE;
-        byte[] readBytes = readBytes(inputStream, INCFS_MAX_SIGNATURE_SIZE);
-        if (readBytes != null) {
-            i = INCFS_MAX_SIGNATURE_SIZE - readBytes.length;
+        int intLE = readIntLE(inputStream);
+        int length = INCFS_MAX_SIGNATURE_SIZE;
+        byte[] bytes = readBytes(inputStream, INCFS_MAX_SIGNATURE_SIZE);
+        if (bytes != null) {
+            length = INCFS_MAX_SIGNATURE_SIZE - bytes.length;
         }
-        return new V4Signature(readIntLE, readBytes, readBytes(inputStream, i));
+        return new V4Signature(intLE, bytes, readBytes(inputStream, length));
     }
 
     private void writeTo(OutputStream outputStream) throws IOException {
@@ -205,11 +205,11 @@ public class V4Signature {
         int length = bArr.length;
         int i = 0;
         while (i < length) {
-            int read = inputStream.read(bArr, i, length - i);
-            if (read < 0) {
+            int i2 = inputStream.read(bArr, i, length - i);
+            if (i2 < 0) {
                 throw new EOFException();
             }
-            i += read;
+            i += i2;
         }
     }
 
@@ -225,11 +225,11 @@ public class V4Signature {
 
     private static byte[] readBytes(InputStream inputStream, int i) throws IOException {
         try {
-            int readIntLE = readIntLE(inputStream);
-            if (readIntLE > i) {
+            int intLE = readIntLE(inputStream);
+            if (intLE > i) {
                 throw new IOException("Signature is too long. Max allowed is 8096");
             }
-            byte[] bArr = new byte[readIntLE];
+            byte[] bArr = new byte[intLE];
             readFully(inputStream, bArr);
             return bArr;
         } catch (EOFException unused) {

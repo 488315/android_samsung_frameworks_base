@@ -14,6 +14,7 @@ import com.android.internal.telephony.SmsConstants;
 import com.android.internal.telephony.cdma.sms.SmsEnvelope;
 import com.android.telephony.Rlog;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.text.BreakIterator;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -214,100 +215,60 @@ public abstract class SmsMessageBase {
     }
 
     protected void extractEmailAddressFromMessageBody() {
-        String[] split = this.mMessageBody.split("( /)|( )", 2);
-        if (split.length < 2) {
+        String[] strArrSplit = this.mMessageBody.split("( /)|( )", 2);
+        if (strArrSplit.length < 2) {
             return;
         }
-        this.mEmailFrom = split[0];
+        this.mEmailFrom = strArrSplit[0];
         if (!SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId).getSmsSetting(SmsConstants.SMS_SUPPORT_REPLY_ADDRESS)) {
             int length = this.mEmailFrom.length();
-            int indexOf = this.mEmailFrom.indexOf(64);
-            int lastIndexOf = this.mEmailFrom.lastIndexOf(64);
-            int i = lastIndexOf + 1;
-            int indexOf2 = this.mEmailFrom.indexOf(46, i);
-            int lastIndexOf2 = this.mEmailFrom.lastIndexOf(46);
-            if (indexOf <= 0 || indexOf != lastIndexOf || i >= indexOf2 || indexOf2 > lastIndexOf2 || lastIndexOf2 >= length - 1) {
+            int iIndexOf = this.mEmailFrom.indexOf(64);
+            int iLastIndexOf = this.mEmailFrom.lastIndexOf(64);
+            int i = iLastIndexOf + 1;
+            int iIndexOf2 = this.mEmailFrom.indexOf(46, i);
+            int iLastIndexOf2 = this.mEmailFrom.lastIndexOf(46);
+            if (iIndexOf <= 0 || iIndexOf != iLastIndexOf || i >= iIndexOf2 || iIndexOf2 > iLastIndexOf2 || iLastIndexOf2 >= length - 1) {
                 return;
             }
-            this.mEmailBody = split[1];
+            this.mEmailBody = strArrSplit[1];
             this.mIsEmail = true;
             return;
         }
-        this.mEmailBody = split[1];
+        this.mEmailBody = strArrSplit[1];
         this.mIsEmail = isEmailAddress(this.mEmailFrom);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x007d, code lost:
-    
-        return r5;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static int findNextUnicodePosition(int r4, int r5, java.lang.CharSequence r6) {
-        /*
-            int r0 = r5 / 2
-            int r0 = r0 + r4
-            int r1 = r6.length()
-            int r0 = java.lang.Math.min(r0, r1)
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "currentPosition = "
-            r1.<init>(r2)
-            r1.append(r4)
-            java.lang.String r2 = " byteLimit= "
-            r1.append(r2)
-            r1.append(r5)
-            java.lang.String r5 = " msgBody.length()= "
-            r1.append(r5)
-            int r5 = r6.length()
-            r1.append(r5)
-            java.lang.String r5 = r1.toString()
-            java.lang.String r1 = "SmsMessageBase"
-            com.android.telephony.Rlog.d(r1, r5)
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r2 = "nextPos = "
-            r5.<init>(r2)
-            r5.append(r0)
-            java.lang.String r5 = r5.toString()
-            com.android.telephony.Rlog.d(r1, r5)
-            int r5 = r6.length()     // Catch: java.lang.IllegalArgumentException -> L8d
-            if (r0 >= r5) goto L92
-            java.text.BreakIterator r5 = java.text.BreakIterator.getCharacterInstance()     // Catch: java.lang.IllegalArgumentException -> L8d
-            java.lang.String r2 = r6.toString()     // Catch: java.lang.IllegalArgumentException -> L8d
-            r5.setText(r2)     // Catch: java.lang.IllegalArgumentException -> L8d
-            boolean r2 = r5.isBoundary(r0)     // Catch: java.lang.IllegalArgumentException -> L8d
-            if (r2 != 0) goto L92
-            int r5 = r5.preceding(r0)     // Catch: java.lang.IllegalArgumentException -> L8d
-        L5f:
-            int r2 = r5 + 4
-            if (r2 > r0) goto L7b
-            int r3 = java.lang.Character.codePointAt(r6, r5)     // Catch: java.lang.IllegalArgumentException -> L8d
-            boolean r3 = isRegionalIndicatorSymbol(r3)     // Catch: java.lang.IllegalArgumentException -> L8d
-            if (r3 == 0) goto L7b
-            int r3 = r5 + 2
-            int r3 = java.lang.Character.codePointAt(r6, r3)     // Catch: java.lang.IllegalArgumentException -> L8d
-            boolean r3 = isRegionalIndicatorSymbol(r3)     // Catch: java.lang.IllegalArgumentException -> L8d
-            if (r3 == 0) goto L7b
-            r5 = r2
-            goto L5f
-        L7b:
-            if (r5 <= r4) goto L7e
-            return r5
-        L7e:
-            int r4 = r0 + (-1)
-            char r4 = r6.charAt(r4)     // Catch: java.lang.IllegalArgumentException -> L8d
-            boolean r4 = java.lang.Character.isHighSurrogate(r4)     // Catch: java.lang.IllegalArgumentException -> L8d
-            if (r4 == 0) goto L92
-            int r0 = r0 + (-1)
-            return r0
-        L8d:
-            java.lang.String r4 = "IllegalArgumentException"
-            com.android.telephony.Rlog.e(r1, r4)
-        L92:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsMessageBase.findNextUnicodePosition(int, int, java.lang.CharSequence):int");
+    public static int findNextUnicodePosition(int i, int i2, CharSequence charSequence) {
+        int iMin = Math.min((i2 / 2) + i, charSequence.length());
+        Rlog.d(LOG_TAG, "currentPosition = " + i + " byteLimit= " + i2 + " msgBody.length()= " + charSequence.length());
+        StringBuilder sb = new StringBuilder("nextPos = ");
+        sb.append(iMin);
+        Rlog.d(LOG_TAG, sb.toString());
+        try {
+            if (iMin < charSequence.length()) {
+                BreakIterator characterInstance = BreakIterator.getCharacterInstance();
+                characterInstance.setText(charSequence.toString());
+                if (!characterInstance.isBoundary(iMin)) {
+                    int iPreceding = characterInstance.preceding(iMin);
+                    while (true) {
+                        int i3 = iPreceding + 4;
+                        if (i3 > iMin || !isRegionalIndicatorSymbol(Character.codePointAt(charSequence, iPreceding)) || !isRegionalIndicatorSymbol(Character.codePointAt(charSequence, iPreceding + 2))) {
+                            break;
+                        }
+                        iPreceding = i3;
+                    }
+                    if (iPreceding > i) {
+                        return iPreceding;
+                    }
+                    if (Character.isHighSurrogate(charSequence.charAt(iMin - 1))) {
+                        return iMin - 1;
+                    }
+                }
+            }
+        } catch (IllegalArgumentException unused) {
+            Rlog.e(LOG_TAG, "IllegalArgumentException");
+        }
+        return iMin;
     }
 
     public static GsmAlphabet.TextEncodingDetails calcUnicodeEncodingDetails(CharSequence charSequence) {
@@ -320,18 +281,18 @@ public abstract class SmsMessageBase {
             int i2 = 0;
             int i3 = 0;
             while (i2 < charSequence.length()) {
-                int findNextUnicodePosition = findNextUnicodePosition(i2, i, charSequence);
-                if (findNextUnicodePosition == charSequence.length()) {
+                int iFindNextUnicodePosition = findNextUnicodePosition(i2, i, charSequence);
+                if (iFindNextUnicodePosition == charSequence.length()) {
                     textEncodingDetails.codeUnitsRemaining = ((i / 2) + i2) - charSequence.length();
                 }
-                if (findNextUnicodePosition <= i2 || findNextUnicodePosition > charSequence.length()) {
-                    Log.e(LOG_TAG, "findNextUnicodePosition() isn`t working.(" + i2 + " >= " + findNextUnicodePosition + " or " + findNextUnicodePosition + " >= " + charSequence.length() + NavigationBarInflaterView.KEY_CODE_END);
+                if (iFindNextUnicodePosition <= i2 || iFindNextUnicodePosition > charSequence.length()) {
+                    Log.e(LOG_TAG, "findNextUnicodePosition() isn`t working.(" + i2 + " >= " + iFindNextUnicodePosition + " or " + iFindNextUnicodePosition + " >= " + charSequence.length() + NavigationBarInflaterView.KEY_CODE_END);
                     i3 = ((i + (-1)) + length) / i;
                     textEncodingDetails.codeUnitsRemaining = ((i * i3) - length) / 2;
                     break;
                 }
                 i3++;
-                i2 = findNextUnicodePosition;
+                i2 = iFindNextUnicodePosition;
             }
             textEncodingDetails.msgCount = i3;
             return textEncodingDetails;
@@ -487,37 +448,37 @@ public abstract class SmsMessageBase {
     }
 
     private void parseLGTWebNWapNoti(int i) {
-        String str;
-        int indexOf = this.mMessageBody.indexOf(29);
-        if (indexOf != -1) {
-            str = this.mMessageBody.substring(0, indexOf);
-            int indexOf2 = this.mMessageBody.indexOf(3);
-            if (indexOf2 == -1) {
-                indexOf2 = this.mMessageBody.length();
+        String strSubstring;
+        int iIndexOf = this.mMessageBody.indexOf(29);
+        if (iIndexOf != -1) {
+            strSubstring = this.mMessageBody.substring(0, iIndexOf);
+            int iIndexOf2 = this.mMessageBody.indexOf(3);
+            if (iIndexOf2 == -1) {
+                iIndexOf2 = this.mMessageBody.length();
             }
-            if (indexOf2 == -1 || indexOf > indexOf2) {
+            if (iIndexOf2 == -1 || iIndexOf > iIndexOf2) {
                 Log.e(LOG_TAG, "parseLGTWapUrlNoti parsing error...  DELIMITER_ETX");
             } else {
-                this.linkUrl = this.mMessageBody.substring(indexOf, indexOf2).trim();
+                this.linkUrl = this.mMessageBody.substring(iIndexOf, iIndexOf2).trim();
             }
         } else {
-            str = this.mMessageBody;
+            strSubstring = this.mMessageBody;
             Log.e(LOG_TAG, "parseLGTWapUrlNoti parsing error...  DELIMITER_GS");
         }
         switch (i) {
             case SmsEnvelope.TELESERVICE_LGT_WAP_URL_NOTI_49166 /* 49166 */:
             case SmsEnvelope.TELESERVICE_LGT_WEB_THIRD_49763 /* 49763 */:
-                this.mMessageBody = String.valueOf(thirdPartyText) + ShaderAssembler.NEWLINE + str + ShaderAssembler.NEWLINE + String.valueOf(connectText);
+                this.mMessageBody = String.valueOf(thirdPartyText) + ShaderAssembler.NEWLINE + strSubstring + ShaderAssembler.NEWLINE + String.valueOf(connectText);
                 break;
             case SmsEnvelope.TELESERVICE_LGT_WAP_URL_NOTI_49167 /* 49167 */:
-                this.mMessageBody = String.valueOf(dataText) + ShaderAssembler.NEWLINE + str;
+                this.mMessageBody = String.valueOf(dataText) + ShaderAssembler.NEWLINE + strSubstring;
                 break;
             case SmsEnvelope.TELESERVICE_LGT_WAP_URL_NOTI_49168 /* 49168 */:
-                this.mMessageBody = String.valueOf(lguText) + ShaderAssembler.NEWLINE + str;
+                this.mMessageBody = String.valueOf(lguText) + ShaderAssembler.NEWLINE + strSubstring;
                 break;
             case SmsEnvelope.TELESERVICE_LGT_WEB_LGT_49765 /* 49765 */:
             case SmsEnvelope.TELESERVICE_LGT_WEB_CP_49767 /* 49767 */:
-                this.mMessageBody = String.valueOf(webText) + ShaderAssembler.NEWLINE + str + ShaderAssembler.NEWLINE + String.valueOf(connectText);
+                this.mMessageBody = String.valueOf(webText) + ShaderAssembler.NEWLINE + strSubstring + ShaderAssembler.NEWLINE + String.valueOf(connectText);
                 break;
         }
     }
@@ -527,18 +488,18 @@ public abstract class SmsMessageBase {
         String str = "";
         int i = 0;
         while (stringTokenizer.hasMoreTokens()) {
-            String trim = stringTokenizer.nextToken().trim();
+            String strTrim = stringTokenizer.nextToken().trim();
             if (i == 0) {
-                str = trim;
+                str = strTrim;
             } else if (i == 1) {
-                this.mSharedAppID = trim;
+                this.mSharedAppID = strTrim;
             } else if (i == 2) {
-                this.mSharedCmd = trim;
+                this.mSharedCmd = strTrim;
             } else if (i == 3) {
-                this.mSharedPayLoad = trim;
-                int lastIndexOf = trim.lastIndexOf(String.valueOf((char) 3));
-                if (lastIndexOf != -1) {
-                    this.mSharedPayLoad = this.mSharedPayLoad.substring(0, lastIndexOf);
+                this.mSharedPayLoad = strTrim;
+                int iLastIndexOf = strTrim.lastIndexOf(String.valueOf((char) 3));
+                if (iLastIndexOf != -1) {
+                    this.mSharedPayLoad = this.mSharedPayLoad.substring(0, iLastIndexOf);
                 }
             }
             i++;

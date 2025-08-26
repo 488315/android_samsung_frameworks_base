@@ -31,17 +31,17 @@ public final class WhitelistHelper {
         }
         if (arraySet2 != null) {
             for (int i2 = 0; i2 < arraySet2.size(); i2++) {
-                ComponentName valueAt = arraySet2.valueAt(i2);
-                if (valueAt == null) {
+                ComponentName componentNameValueAt = arraySet2.valueAt(i2);
+                if (componentNameValueAt == null) {
                     Log.w(TAG, "setWhitelist(): component is null");
                 } else {
-                    String packageName = valueAt.getPackageName();
+                    String packageName = componentNameValueAt.getPackageName();
                     ArraySet<ComponentName> arraySet3 = this.mWhitelistedPackages.get(packageName);
                     if (arraySet3 == null) {
                         arraySet3 = new ArraySet<>();
                         this.mWhitelistedPackages.put(packageName, arraySet3);
                     }
-                    arraySet3.add(valueAt);
+                    arraySet3.add(componentNameValueAt);
                 }
             }
         }
@@ -103,21 +103,21 @@ public final class WhitelistHelper {
         printWriter.print(size);
         printWriter.println(" packages");
         for (int i = 0; i < this.mWhitelistedPackages.size(); i++) {
-            String keyAt = this.mWhitelistedPackages.keyAt(i);
-            ArraySet<ComponentName> valueAt = this.mWhitelistedPackages.valueAt(i);
+            String strKeyAt = this.mWhitelistedPackages.keyAt(i);
+            ArraySet<ComponentName> arraySetValueAt = this.mWhitelistedPackages.valueAt(i);
             printWriter.print(str3);
             printWriter.print(i);
             printWriter.print(MediaMetrics.SEPARATOR);
-            printWriter.print(keyAt);
+            printWriter.print(strKeyAt);
             printWriter.print(": ");
-            if (valueAt == null) {
+            if (arraySetValueAt == null) {
                 printWriter.println("(whole package)");
             } else {
                 printWriter.print(NavigationBarInflaterView.SIZE_MOD_START);
-                printWriter.print(valueAt.valueAt(0));
-                for (int i2 = 1; i2 < valueAt.size(); i2++) {
+                printWriter.print(arraySetValueAt.valueAt(0));
+                for (int i2 = 1; i2 < arraySetValueAt.size(); i2++) {
                     printWriter.print(", ");
-                    printWriter.print(valueAt.valueAt(i2));
+                    printWriter.print(arraySetValueAt.valueAt(i2));
                 }
                 printWriter.println(NavigationBarInflaterView.SIZE_MOD_END);
             }

@@ -21,7 +21,6 @@ import com.android.wm.shell.windowdecor.common.WindowDecorTaskResourceLoader;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.MainCoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTilingDecorViewModel implements DisplayChangeController.OnDisplayChangingListener {
     public final CoroutineScope bgScope;
@@ -31,9 +30,11 @@ public final class DesktopTilingDecorViewModel implements DisplayChangeControlle
     public final DesktopUserRepositories desktopUserRepositories;
     public final DisplayController displayController;
     public final FocusTransitionObserver focusTransitionObserver;
+    public boolean leftTileReadyForRotation;
     public final MainCoroutineDispatcher mainDispatcher;
     public final ShellExecutor mainExecutor;
     public final ReturnToDragStartAnimator returnToDragStartAnimator;
+    public boolean rightTileReadyForRotation;
     public final RootTaskDisplayAreaOrganizer rootTdaOrganizer;
     public final ShellTaskOrganizer shellTaskOrganizer;
     public final SyncTransactionQueue syncQueue;
@@ -72,15 +73,10 @@ public final class DesktopTilingDecorViewModel implements DisplayChangeControlle
         }, -1);
     }
 
-    @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
-    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
-        DesktopTilingWindowDecoration desktopTilingWindowDecoration;
-        if (i2 % 2 == i3 % 2 || (desktopTilingWindowDecoration = (DesktopTilingWindowDecoration) this.tilingTransitionHandlerByDisplayId.get(i)) == null) {
-            return;
-        }
-        desktopTilingWindowDecoration.resetTilingSession();
+    public static /* synthetic */ void getTilingTransitionHandlerByDisplayId$annotations() {
     }
 
-    public static /* synthetic */ void getTilingTransitionHandlerByDisplayId$annotations() {
+    @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
+    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
     }
 }

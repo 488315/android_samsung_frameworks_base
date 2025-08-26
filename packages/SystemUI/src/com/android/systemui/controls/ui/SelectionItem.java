@@ -6,7 +6,6 @@ import com.android.systemui.controls.controller.ControlInfo$$ExternalSyntheticOu
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SelectionItem {
     public final CharSequence appName;
@@ -37,9 +36,9 @@ public final class SelectionItem {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.uid, (this.componentName.hashCode() + ((this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(this.appName.hashCode() * 31, 31, this.structure)) * 31)) * 31, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.uid, (this.componentName.hashCode() + ((this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(this.appName.hashCode() * 31, 31, this.structure)) * 31)) * 31, 31);
         ComponentName componentName = this.panelComponentName;
-        return m + (componentName == null ? 0 : componentName.hashCode());
+        return iM + (componentName == null ? 0 : componentName.hashCode());
     }
 
     public final String toString() {

@@ -3,10 +3,10 @@ package gov.nist.javax.sip.parser;
 import gov.nist.core.ParserCore;
 import gov.nist.javax.sip.header.SIPDateHeader;
 import gov.nist.javax.sip.header.SIPHeader;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DateParser extends HeaderParser {
     public DateParser(String str) {
@@ -14,7 +14,7 @@ public class DateParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws NumberFormatException, ParseException {
         headerName(2080);
         ParserCore.dbg_enter();
         try {
@@ -26,11 +26,11 @@ public class DateParser extends HeaderParser {
             this.lexer.match(32);
             try {
                 Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-                int parseInt = Integer.parseInt(this.lexer.number());
-                if (parseInt <= 0 || parseInt > 31) {
+                int i = Integer.parseInt(this.lexer.number());
+                if (i <= 0 || i > 31) {
                     throw createParseException("Bad day ");
                 }
-                calendar.set(5, parseInt);
+                calendar.set(5, i);
                 this.lexer.match(32);
                 String lowerCase2 = this.lexer.ttoken().toLowerCase();
                 if (lowerCase2.equals("jan")) {

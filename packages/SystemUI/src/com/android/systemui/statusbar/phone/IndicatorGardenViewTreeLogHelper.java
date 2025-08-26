@@ -6,7 +6,6 @@ import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOu
 import com.android.systemui.statusbar.StatusBarIconView;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorGardenViewTreeLogHelper {
     public static void printChildWidthRecursive(PrintWriter printWriter, ViewGroup viewGroup, int i) {
@@ -26,11 +25,11 @@ public final class IndicatorGardenViewTreeLogHelper {
     }
 
     public static void printDumpLog(PrintWriter printWriter, View view, int i, int i2) {
-        String str = " ";
+        String strM = " ";
         if (i2 >= 0) {
             int i3 = 0;
             while (true) {
-                str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  |  ");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "  |  ");
                 if (i3 == i2) {
                     break;
                 } else {
@@ -38,7 +37,7 @@ public final class IndicatorGardenViewTreeLogHelper {
                 }
             }
         }
-        printWriter.print(str + " idx=" + i);
+        printWriter.print(strM + " idx=" + i);
         StringBuilder sb = new StringBuilder(":::");
         sb.append(view);
         printWriter.print(sb.toString());

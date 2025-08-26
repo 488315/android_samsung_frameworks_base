@@ -652,9 +652,9 @@ public interface ISemTelephony extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemTelephony.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemTelephony)) {
-                return (ISemTelephony) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemTelephony.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemTelephony)) {
+                return (ISemTelephony) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -837,71 +837,71 @@ public interface ISemTelephony extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CellIdentity cellLocationBySubId = getCellLocationBySubId(readInt, readString, readString2);
+                    CellIdentity cellLocationBySubId = getCellLocationBySubId(i3, string, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cellLocationBySubId, 1);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CellIdentity cellLocationForPhone = getCellLocationForPhone(readInt2, readString3, readString4);
+                    CellIdentity cellLocationForPhone = getCellLocationForPhone(i4, string3, string4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cellLocationForPhone, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<CellInfo> allCellInfoBySubId = getAllCellInfoBySubId(readInt3, readString5, readString6);
+                    List<CellInfo> allCellInfoBySubId = getAllCellInfoBySubId(i5, string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(allCellInfoBySubId, 1);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<CellInfo> allCellInfoForPhone = getAllCellInfoForPhone(readInt4, readString7, readString8);
+                    List<CellInfo> allCellInfoForPhone = getAllCellInfoForPhone(i6, string7, string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(allCellInfoForPhone, 1);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    dialForSubscriber(readInt5, readString9);
+                    dialForSubscriber(i7, string9);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
-                    String readString10 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isEmergencyNumberBySubId = isEmergencyNumberBySubId(readInt6, readString10, readBoolean);
+                    boolean zIsEmergencyNumberBySubId = isEmergencyNumberBySubId(i8, string10, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEmergencyNumberBySubId);
+                    parcel2.writeBoolean(zIsEmergencyNumberBySubId);
                     return true;
                 case 7:
                     reloadTestEmergencyNumber();
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAllowDataDuringCall(readInt7);
+                    setAllowDataDuringCall(i9);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    boolean isVideoCall = isVideoCall();
+                    boolean zIsVideoCall = isVideoCall();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVideoCall);
+                    parcel2.writeBoolean(zIsVideoCall);
                     return true;
                 case 10:
                     int disable2g = getDisable2g();
@@ -909,153 +909,153 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeInt(disable2g);
                     return true;
                 case 11:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean disable2g2 = setDisable2g(readInt8);
+                    boolean disable2g2 = setDisable2g(i10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(disable2g2);
                     return true;
                 case 12:
-                    int readInt9 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean transmitPowerWithFlag = setTransmitPowerWithFlag(readInt9, readBoolean2);
+                    boolean transmitPowerWithFlag = setTransmitPowerWithFlag(i11, z2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(transmitPowerWithFlag);
                     return true;
                 case 13:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean transmitPowerWithDSI = setTransmitPowerWithDSI(readInt10);
+                    boolean transmitPowerWithDSI = setTransmitPowerWithDSI(i12);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(transmitPowerWithDSI);
                     return true;
                 case 14:
-                    long readLong = parcel.readLong();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    long j = parcel.readLong();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean transmitPowerExt = setTransmitPowerExt(readLong, readBoolean3);
+                    boolean transmitPowerExt = setTransmitPowerExt(j, z3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(transmitPowerExt);
                     return true;
                 case 15:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String activationDay = getActivationDay(readString11, readString12);
+                    String activationDay = getActivationDay(string11, string12);
                     parcel2.writeNoException();
                     parcel2.writeString(activationDay);
                     return true;
                 case 16:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int networkStatusDisplayOption = getNetworkStatusDisplayOption(readString13, readString14);
+                    int networkStatusDisplayOption = getNetworkStatusDisplayOption(string13, string14);
                     parcel2.writeNoException();
                     parcel2.writeInt(networkStatusDisplayOption);
                     return true;
                 case 17:
-                    int readInt11 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isMmiForSubscriber = isMmiForSubscriber(readInt11, readString15);
+                    boolean zIsMmiForSubscriber = isMmiForSubscriber(i13, string15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMmiForSubscriber);
+                    parcel2.writeBoolean(zIsMmiForSubscriber);
                     return true;
                 case 18:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int lteCsCapa = getLteCsCapa(readInt12);
+                    int lteCsCapa = getLteCsCapa(i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(lteCsCapa);
                     return true;
                 case 19:
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    sendVolteState(readInt13, readBoolean4);
+                    sendVolteState(i15, z4);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    String readString16 = parcel.readString();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean nrMode = setNrMode(readInt14, readInt15, readBoolean5, readString16);
+                    boolean nrMode = setNrMode(i16, i17, z5, string16);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(nrMode);
                     return true;
                 case 21:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int nrMode2 = getNrMode(readInt16);
+                    int nrMode2 = getNrMode(i18);
                     parcel2.writeNoException();
                     parcel2.writeInt(nrMode2);
                     return true;
                 case 22:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean voNRMode = setVoNRMode(readInt17, readInt18);
+                    boolean voNRMode = setVoNRMode(i19, i20);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(voNRMode);
                     return true;
                 case 23:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int voNRMode2 = getVoNRMode(readInt19);
+                    int voNRMode2 = getVoNRMode(i21);
                     parcel2.writeNoException();
                     parcel2.writeInt(voNRMode2);
                     return true;
                 case 24:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean supportedNrca = getSupportedNrca(readInt20);
+                    boolean supportedNrca = getSupportedNrca(i22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(supportedNrca);
                     return true;
                 case 25:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSupportLteCapaOptionC = isSupportLteCapaOptionC(readInt21);
+                    boolean zIsSupportLteCapaOptionC = isSupportLteCapaOptionC(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportLteCapaOptionC);
+                    parcel2.writeBoolean(zIsSupportLteCapaOptionC);
                     return true;
                 case 26:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int supportUacType = getSupportUacType(readInt22);
+                    int supportUacType = getSupportUacType(i24);
                     parcel2.writeNoException();
                     parcel2.writeInt(supportUacType);
                     return true;
                 case 27:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VendorConfigurationState vendorConfigState = getVendorConfigState(readInt23);
+                    VendorConfigurationState vendorConfigState = getVendorConfigState(i25);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vendorConfigState, 1);
                     return true;
                 case 28:
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    requestModemActivityInfo(resultReceiver, readString17);
+                    requestModemActivityInfo(resultReceiver, string17);
                     return true;
                 case 29:
-                    int readInt24 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    IIntegerConsumer asInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i26 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
+                    IIntegerConsumer iIntegerConsumerAsInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    semRequestSatelliteMode(readInt24, readBoolean6, asInterface);
+                    semRequestSatelliteMode(i26, z6, iIntegerConsumerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemSatelliteState semGetSatelliteState = semGetSatelliteState(readInt25);
+                    SemSatelliteState semSatelliteStateSemGetSatelliteState = semGetSatelliteState(i27);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(semGetSatelliteState, 1);
+                    parcel2.writeTypedObject(semSatelliteStateSemGetSatelliteState, 1);
                     return true;
                 case 31:
                     boolean ntnSmsSupported = getNtnSmsSupported();
@@ -1063,9 +1063,9 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeBoolean(ntnSmsSupported);
                     return true;
                 case 32:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetNetworkSettings(readInt26);
+                    resetNetworkSettings(i28);
                     parcel2.writeNoException();
                     return true;
                 case 33:
@@ -1074,55 +1074,55 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeBoolean(sdnAvailable);
                     return true;
                 case 34:
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int sendRequestToRIL = sendRequestToRIL(createByteArray, createByteArray2, readInt27, readInt28);
+                    int iSendRequestToRIL = sendRequestToRIL(bArrCreateByteArray, bArrCreateByteArray2, i29, i30);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendRequestToRIL);
-                    parcel2.writeByteArray(createByteArray2);
+                    parcel2.writeInt(iSendRequestToRIL);
+                    parcel2.writeByteArray(bArrCreateByteArray2);
                     return true;
                 case 35:
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean supplyPerso = supplyPerso(readString18);
+                    boolean zSupplyPerso = supplyPerso(string18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supplyPerso);
+                    parcel2.writeBoolean(zSupplyPerso);
                     return true;
                 case 36:
-                    int readInt29 = parcel.readInt();
-                    String readString19 = parcel.readString();
+                    int i31 = parcel.readInt();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean supplyPersoForSubId = supplyPersoForSubId(readInt29, readString19);
+                    boolean zSupplyPersoForSubId = supplyPersoForSubId(i31, string19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supplyPersoForSubId);
+                    parcel2.writeBoolean(zSupplyPersoForSubId);
                     return true;
                 case 37:
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setEPSLOCI(createByteArray3);
+                    setEPSLOCI(bArrCreateByteArray3);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSimFDNEnabledForSubscriber = isSimFDNEnabledForSubscriber(readInt30);
+                    boolean zIsSimFDNEnabledForSubscriber = isSimFDNEnabledForSubscriber(i32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSimFDNEnabledForSubscriber);
+                    parcel2.writeBoolean(zIsSimFDNEnabledForSubscriber);
                     return true;
                 case 39:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int simPinRetryForSubscriber = getSimPinRetryForSubscriber(readInt31);
+                    int simPinRetryForSubscriber = getSimPinRetryForSubscriber(i33);
                     parcel2.writeNoException();
                     parcel2.writeInt(simPinRetryForSubscriber);
                     return true;
                 case 40:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int simPukRetryForSubscriber = getSimPukRetryForSubscriber(readInt32);
+                    int simPukRetryForSubscriber = getSimPukRetryForSubscriber(i34);
                     parcel2.writeNoException();
                     parcel2.writeInt(simPukRetryForSubscriber);
                     return true;
@@ -1132,43 +1132,43 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeBoolean(iccUsimPersoEnabled);
                     return true;
                 case 42:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean iccUsimPersoEnabledForSubId = getIccUsimPersoEnabledForSubId(readInt33);
+                    boolean iccUsimPersoEnabledForSubId = getIccUsimPersoEnabledForSubId(i35);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(iccUsimPersoEnabledForSubId);
                     return true;
                 case 43:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean changeIccSimPersoPassword = changeIccSimPersoPassword(readString20, readString21);
+                    boolean zChangeIccSimPersoPassword = changeIccSimPersoPassword(string20, string21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeIccSimPersoPassword);
+                    parcel2.writeBoolean(zChangeIccSimPersoPassword);
                     return true;
                 case 44:
-                    int readInt34 = parcel.readInt();
-                    String readString22 = parcel.readString();
-                    String readString23 = parcel.readString();
+                    int i36 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean changeIccSimPersoPasswordForSubId = changeIccSimPersoPasswordForSubId(readInt34, readString22, readString23);
+                    boolean zChangeIccSimPersoPasswordForSubId = changeIccSimPersoPasswordForSubId(i36, string22, string23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeIccSimPersoPasswordForSubId);
+                    parcel2.writeBoolean(zChangeIccSimPersoPasswordForSubId);
                     return true;
                 case 45:
-                    boolean readBoolean7 = parcel.readBoolean();
-                    String readString24 = parcel.readString();
+                    boolean z7 = parcel.readBoolean();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean iccSimPersoEnabled = setIccSimPersoEnabled(readBoolean7, readString24);
+                    boolean iccSimPersoEnabled = setIccSimPersoEnabled(z7, string24);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(iccSimPersoEnabled);
                     return true;
                 case 46:
-                    int readInt35 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
-                    String readString25 = parcel.readString();
+                    int i37 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean iccSimPersoEnabledForSubId = setIccSimPersoEnabledForSubId(readInt35, readBoolean8, readString25);
+                    boolean iccSimPersoEnabledForSubId = setIccSimPersoEnabledForSubId(i37, z8, string25);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(iccSimPersoEnabledForSubId);
                     return true;
@@ -1178,131 +1178,131 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeString(euimid);
                     return true;
                 case 48:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String cdmaMinForOtasp = getCdmaMinForOtasp(readInt36);
+                    String cdmaMinForOtasp = getCdmaMinForOtasp(i38);
                     parcel2.writeNoException();
                     parcel2.writeString(cdmaMinForOtasp);
                     return true;
                 case 49:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] atr = getAtr(readInt37);
+                    byte[] atr = getAtr(i39);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(atr);
                     return true;
                 case 50:
-                    int readInt38 = parcel.readInt();
-                    String readString26 = parcel.readString();
+                    int i40 = parcel.readInt();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String checkCallControl = checkCallControl(readInt38, readString26);
+                    String strCheckCallControl = checkCallControl(i40, string26);
                     parcel2.writeNoException();
-                    parcel2.writeString(checkCallControl);
+                    parcel2.writeString(strCheckCallControl);
                     return true;
                 case 51:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean fDNavailable = getFDNavailable(readInt39);
+                    boolean fDNavailable = getFDNavailable(i41);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(fDNavailable);
                     return true;
                 case 52:
-                    int readInt40 = parcel.readInt();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    int readInt41 = parcel.readInt();
-                    if (readInt41 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt41);
+                    int i42 = parcel.readInt();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    int i43 = parcel.readInt();
+                    if (i43 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i43);
                     }
-                    bArr = readInt41 >= 0 ? new byte[readInt41] : null;
+                    bArr = i43 >= 0 ? new byte[i43] : null;
                     parcel.enforceNoDataAvail();
-                    int invokeOemRilRequestRawForPhone = invokeOemRilRequestRawForPhone(readInt40, createByteArray4, bArr);
+                    int iInvokeOemRilRequestRawForPhone = invokeOemRilRequestRawForPhone(i42, bArrCreateByteArray4, bArr);
                     parcel2.writeNoException();
-                    parcel2.writeInt(invokeOemRilRequestRawForPhone);
+                    parcel2.writeInt(iInvokeOemRilRequestRawForPhone);
                     parcel2.writeByteArray(bArr);
                     return true;
                 case 53:
-                    int readInt42 = parcel.readInt();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    int readInt43 = parcel.readInt();
-                    if (readInt43 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt43);
+                    int i44 = parcel.readInt();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    int i45 = parcel.readInt();
+                    if (i45 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i45);
                     }
-                    bArr = readInt43 >= 0 ? new byte[readInt43] : null;
+                    bArr = i45 >= 0 ? new byte[i45] : null;
                     parcel.enforceNoDataAvail();
-                    int invokeOemRilRequestRawForSubscriber = invokeOemRilRequestRawForSubscriber(readInt42, createByteArray5, bArr);
+                    int iInvokeOemRilRequestRawForSubscriber = invokeOemRilRequestRawForSubscriber(i44, bArrCreateByteArray5, bArr);
                     parcel2.writeNoException();
-                    parcel2.writeInt(invokeOemRilRequestRawForSubscriber);
+                    parcel2.writeInt(iInvokeOemRilRequestRawForSubscriber);
                     parcel2.writeByteArray(bArr);
                     return true;
                 case 54:
-                    int readInt44 = parcel.readInt();
-                    int readInt45 = parcel.readInt();
+                    int i46 = parcel.readInt();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean simOnOffForSlot = setSimOnOffForSlot(readInt44, readInt45);
+                    boolean simOnOffForSlot = setSimOnOffForSlot(i46, i47);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(simOnOffForSlot);
                     return true;
                 case 55:
-                    String readString27 = parcel.readString();
-                    String readString28 = parcel.readString();
+                    String string27 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String secondaryImei = getSecondaryImei(readString27, readString28);
+                    String secondaryImei = getSecondaryImei(string27, string28);
                     parcel2.writeNoException();
                     parcel2.writeString(secondaryImei);
                     return true;
                 case 56:
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String semGetSatelliteImei = semGetSatelliteImei(readString29, readString30);
+                    String strSemGetSatelliteImei = semGetSatelliteImei(string29, string30);
                     parcel2.writeNoException();
-                    parcel2.writeString(semGetSatelliteImei);
+                    parcel2.writeString(strSemGetSatelliteImei);
                     return true;
                 case 57:
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String uaUap = getUaUap(readString31);
+                    String uaUap = getUaUap(string31);
                     parcel2.writeNoException();
                     parcel2.writeString(uaUap);
                     return true;
                 case 58:
-                    int readInt46 = parcel.readInt();
-                    String readString32 = parcel.readString();
-                    byte[] createByteArray6 = parcel.createByteArray();
+                    int i48 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] sms_NSRI_encryptsms = sms_NSRI_encryptsms(readInt46, readString32, createByteArray6);
+                    byte[] bArrSms_NSRI_encryptsms = sms_NSRI_encryptsms(i48, string32, bArrCreateByteArray6);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(sms_NSRI_encryptsms);
+                    parcel2.writeByteArray(bArrSms_NSRI_encryptsms);
                     return true;
                 case 59:
-                    int readInt47 = parcel.readInt();
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    int i49 = parcel.readInt();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] sms_NSRI_decryptsms = sms_NSRI_decryptsms(readInt47, createByteArray7);
+                    byte[] bArrSms_NSRI_decryptsms = sms_NSRI_decryptsms(i49, bArrCreateByteArray7);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(sms_NSRI_decryptsms);
+                    parcel2.writeByteArray(bArrSms_NSRI_decryptsms);
                     return true;
                 case 60:
-                    int readInt48 = parcel.readInt();
-                    String readString33 = parcel.readString();
-                    byte[] createByteArray8 = parcel.createByteArray();
+                    int i50 = parcel.readInt();
+                    String string33 = parcel.readString();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] sms_NSRI_decryptsmsintxside = sms_NSRI_decryptsmsintxside(readInt48, readString33, createByteArray8);
+                    byte[] bArrSms_NSRI_decryptsmsintxside = sms_NSRI_decryptsmsintxside(i50, string33, bArrCreateByteArray8);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(sms_NSRI_decryptsmsintxside);
+                    parcel2.writeByteArray(bArrSms_NSRI_decryptsmsintxside);
                     return true;
                 case 61:
-                    int checkNSRIUSIMstate_int = checkNSRIUSIMstate_int();
+                    int iCheckNSRIUSIMstate_int = checkNSRIUSIMstate_int();
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkNSRIUSIMstate_int);
+                    parcel2.writeInt(iCheckNSRIUSIMstate_int);
                     return true;
                 case 62:
-                    int readInt49 = parcel.readInt();
-                    byte[] createByteArray9 = parcel.createByteArray();
+                    int i51 = parcel.readInt();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] NSRI_requestProc = NSRI_requestProc(readInt49, createByteArray9);
+                    byte[] bArrNSRI_requestProc = NSRI_requestProc(i51, bArrCreateByteArray9);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(NSRI_requestProc);
+                    parcel2.writeByteArray(bArrNSRI_requestProc);
                     return true;
                 case 63:
                     boolean dataRoamingEnabled = getDataRoamingEnabled();
@@ -1310,12 +1310,12 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeBoolean(dataRoamingEnabled);
                     return true;
                 case 64:
-                    int readInt50 = parcel.readInt();
-                    byte[] createByteArray10 = parcel.createByteArray();
-                    String readString34 = parcel.readString();
-                    String readString35 = parcel.readString();
+                    int i52 = parcel.readInt();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
+                    String string34 = parcel.readString();
+                    String string35 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setGbaBootstrappingParams(readInt50, createByteArray10, readString34, readString35);
+                    setGbaBootstrappingParams(i52, bArrCreateByteArray10, string34, string35);
                     parcel2.writeNoException();
                     return true;
                 case 65:
@@ -1324,102 +1324,102 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeByteArray(currentUATI);
                     return true;
                 case 66:
-                    int readInt51 = parcel.readInt();
-                    int readInt52 = parcel.readInt();
-                    if (readInt52 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt52);
+                    int i53 = parcel.readInt();
+                    int i54 = parcel.readInt();
+                    if (i54 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i54);
                     }
-                    bArr = readInt52 >= 0 ? new byte[readInt52] : null;
+                    bArr = i54 >= 0 ? new byte[i54] : null;
                     parcel.enforceNoDataAvail();
-                    int cpaiModelVersion = getCpaiModelVersion(readInt51, bArr);
+                    int cpaiModelVersion = getCpaiModelVersion(i53, bArr);
                     parcel2.writeNoException();
                     parcel2.writeInt(cpaiModelVersion);
                     parcel2.writeByteArray(bArr);
                     return true;
                 case 67:
-                    int readInt53 = parcel.readInt();
-                    int readInt54 = parcel.readInt();
+                    int i55 = parcel.readInt();
+                    int i56 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int execCpaiModelUpdate = execCpaiModelUpdate(readInt53, readInt54);
+                    int iExecCpaiModelUpdate = execCpaiModelUpdate(i55, i56);
                     parcel2.writeNoException();
-                    parcel2.writeInt(execCpaiModelUpdate);
+                    parcel2.writeInt(iExecCpaiModelUpdate);
                     return true;
                 case 68:
-                    int readInt55 = parcel.readInt();
-                    int readInt56 = parcel.readInt();
-                    int readInt57 = parcel.readInt();
-                    if (readInt57 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt57);
+                    int i57 = parcel.readInt();
+                    int i58 = parcel.readInt();
+                    int i59 = parcel.readInt();
+                    if (i59 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i59);
                     }
-                    bArr = readInt57 >= 0 ? new byte[readInt57] : null;
+                    bArr = i59 >= 0 ? new byte[i59] : null;
                     parcel.enforceNoDataAvail();
-                    int cpaiFeatureInfo = getCpaiFeatureInfo(readInt55, readInt56, bArr);
+                    int cpaiFeatureInfo = getCpaiFeatureInfo(i57, i58, bArr);
                     parcel2.writeNoException();
                     parcel2.writeInt(cpaiFeatureInfo);
                     parcel2.writeByteArray(bArr);
                     return true;
                 case 69:
-                    int readInt58 = parcel.readInt();
-                    int readInt59 = parcel.readInt();
-                    int readInt60 = parcel.readInt();
-                    String readString36 = parcel.readString();
+                    int i60 = parcel.readInt();
+                    int i61 = parcel.readInt();
+                    int i62 = parcel.readInt();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int cfrmCpaiFeatureInfo = cfrmCpaiFeatureInfo(readInt58, readInt59, readInt60, readString36);
+                    int iCfrmCpaiFeatureInfo = cfrmCpaiFeatureInfo(i60, i61, i62, string36);
                     parcel2.writeNoException();
-                    parcel2.writeInt(cfrmCpaiFeatureInfo);
+                    parcel2.writeInt(iCfrmCpaiFeatureInfo);
                     return true;
                 case 70:
-                    int readInt61 = parcel.readInt();
-                    int readInt62 = parcel.readInt();
-                    int readInt63 = parcel.readInt();
-                    int readInt64 = parcel.readInt();
-                    int readInt65 = parcel.readInt();
+                    int i63 = parcel.readInt();
+                    int i64 = parcel.readInt();
+                    int i65 = parcel.readInt();
+                    int i66 = parcel.readInt();
+                    int i67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int cpaiDataGathering = setCpaiDataGathering(readInt61, readInt62, readInt63, readInt64, readInt65);
+                    int cpaiDataGathering = setCpaiDataGathering(i63, i64, i65, i66, i67);
                     parcel2.writeNoException();
                     parcel2.writeInt(cpaiDataGathering);
                     return true;
                 case 71:
-                    int readInt66 = parcel.readInt();
-                    int readInt67 = parcel.readInt();
-                    byte[] createByteArray11 = parcel.createByteArray();
+                    int i68 = parcel.readInt();
+                    int i69 = parcel.readInt();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int evtCpaiDataGathering = evtCpaiDataGathering(readInt66, readInt67, createByteArray11);
+                    int iEvtCpaiDataGathering = evtCpaiDataGathering(i68, i69, bArrCreateByteArray11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(evtCpaiDataGathering);
+                    parcel2.writeInt(iEvtCpaiDataGathering);
                     return true;
                 case 72:
-                    int readInt68 = parcel.readInt();
-                    int readInt69 = parcel.readInt();
-                    int readInt70 = parcel.readInt();
-                    String readString37 = parcel.readString();
+                    int i70 = parcel.readInt();
+                    int i71 = parcel.readInt();
+                    int i72 = parcel.readInt();
+                    String string37 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int cpaiDevAppMessage = setCpaiDevAppMessage(readInt68, readInt69, readInt70, readString37);
+                    int cpaiDevAppMessage = setCpaiDevAppMessage(i70, i71, i72, string37);
                     parcel2.writeNoException();
                     parcel2.writeInt(cpaiDevAppMessage);
                     return true;
                 case 73:
-                    int readInt71 = parcel.readInt();
-                    String readString38 = parcel.readString();
-                    String readString39 = parcel.readString();
+                    int i73 = parcel.readInt();
+                    String string38 = parcel.readString();
+                    String string39 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String mobileQualityInformation = getMobileQualityInformation(readInt71, readString38, readString39);
+                    String mobileQualityInformation = getMobileQualityInformation(i73, string38, string39);
                     parcel2.writeNoException();
                     parcel2.writeString(mobileQualityInformation);
                     return true;
                 case 74:
-                    String readString40 = parcel.readString();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String ipAddressFromLinkProp = getIpAddressFromLinkProp(readString40);
+                    String ipAddressFromLinkProp = getIpAddressFromLinkProp(string40);
                     parcel2.writeNoException();
                     parcel2.writeString(ipAddressFromLinkProp);
                     return true;
                 case 75:
-                    int readInt72 = parcel.readInt();
+                    int i74 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] simCheck = simCheck(readInt72);
+                    byte[] bArrSimCheck = simCheck(i74);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(simCheck);
+                    parcel2.writeByteArray(bArrSimCheck);
                     return true;
                 case 76:
                     long nextRetryTime = getNextRetryTime();
@@ -1427,9 +1427,9 @@ public interface ISemTelephony extends IInterface {
                     parcel2.writeLong(nextRetryTime);
                     return true;
                 case 77:
-                    int readInt73 = parcel.readInt();
+                    int i75 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String lastNetworkCountryIsoForPhone = getLastNetworkCountryIsoForPhone(readInt73);
+                    String lastNetworkCountryIsoForPhone = getLastNetworkCountryIsoForPhone(i75);
                     parcel2.writeNoException();
                     parcel2.writeString(lastNetworkCountryIsoForPhone);
                     return true;
@@ -1456,1289 +1456,1289 @@ public interface ISemTelephony extends IInterface {
 
             @Override // com.android.internal.telephony.ISemTelephony
             public CellIdentity getCellLocationBySubId(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CellIdentity) obtain2.readTypedObject(CellIdentity.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CellIdentity) parcelObtain2.readTypedObject(CellIdentity.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public CellIdentity getCellLocationForPhone(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CellIdentity) obtain2.readTypedObject(CellIdentity.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CellIdentity) parcelObtain2.readTypedObject(CellIdentity.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public List<CellInfo> getAllCellInfoBySubId(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(CellInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(CellInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public List<CellInfo> getAllCellInfoForPhone(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(CellInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(CellInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void dialForSubscriber(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean isEmergencyNumberBySubId(int i, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void reloadTestEmergencyNumber() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void setAllowDataDuringCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean isVideoCall() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getDisable2g() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setDisable2g(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setTransmitPowerWithFlag(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setTransmitPowerWithDSI(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setTransmitPowerExt(long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getActivationDay(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getNetworkStatusDisplayOption(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean isMmiForSubscriber(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getLteCsCapa(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void sendVolteState(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setNrMode(int i, int i2, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getNrMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setVoNRMode(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getVoNRMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getSupportedNrca(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean isSupportLteCapaOptionC(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getSupportUacType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public VendorConfigurationState getVendorConfigState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VendorConfigurationState) obtain2.readTypedObject(VendorConfigurationState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VendorConfigurationState) parcelObtain2.readTypedObject(VendorConfigurationState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void requestModemActivityInfo(ResultReceiver resultReceiver, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void semRequestSatelliteMode(int i, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public SemSatelliteState semGetSatelliteState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemSatelliteState) obtain2.readTypedObject(SemSatelliteState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemSatelliteState) parcelObtain2.readTypedObject(SemSatelliteState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getNtnSmsSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void resetNetworkSettings(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getSdnAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int sendRequestToRIL(byte[] bArr, byte[] bArr2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i3 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i3;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean supplyPerso(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean supplyPersoForSubId(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void setEPSLOCI(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean isSimFDNEnabledForSubscriber(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getSimPinRetryForSubscriber(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getSimPukRetryForSubscriber(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getIccUsimPersoEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getIccUsimPersoEnabledForSubId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean changeIccSimPersoPassword(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean changeIccSimPersoPasswordForSubId(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setIccSimPersoEnabled(boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setIccSimPersoEnabledForSubId(int i, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getEuimid() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getCdmaMinForOtasp(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] getAtr(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String checkCallControl(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getFDNavailable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int invokeOemRilRequestRawForPhone(int i, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(bArr2.length);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(bArr2.length);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int invokeOemRilRequestRawForSubscriber(int i, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(bArr2.length);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(bArr2.length);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean setSimOnOffForSlot(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getSecondaryImei(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String semGetSatelliteImei(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getUaUap(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] sms_NSRI_encryptsms(int i, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] sms_NSRI_decryptsms(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] sms_NSRI_decryptsmsintxside(int i, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int checkNSRIUSIMstate_int() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] NSRI_requestProc(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public boolean getDataRoamingEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public void setGbaBootstrappingParams(int i, byte[] bArr, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] getCurrentUATI() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getCpaiModelVersion(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(bArr.length);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(bArr.length);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int execCpaiModelUpdate(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int getCpaiFeatureInfo(int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(bArr.length);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(bArr.length);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i3 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i3;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int cfrmCpaiFeatureInfo(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int setCpaiDataGathering(int i, int i2, int i3, int i4, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int evtCpaiDataGathering(int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public int setCpaiDevAppMessage(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getMobileQualityInformation(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getIpAddressFromLinkProp(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public byte[] simCheck(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public long getNextRetryTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
             public String getLastNetworkCountryIsoForPhone(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -1,7 +1,16 @@
 package com.android.systemui.edgelighting.backup;
 
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.SecretKeyFactory;
@@ -9,7 +18,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Encryption {
     public static Cipher mCipher;
@@ -17,19 +25,11 @@ public class Encryption {
     public static SecretKeySpec secretKey;
     public static String securityPassword;
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00c1, code lost:
-    
-        if (r2 != 0) goto L59;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00ae, code lost:
-    
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00ac, code lost:
-    
-        if (r2 != 0) goto L59;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00ae A[PHI: r1 r2 r9
+      0x00ae: PHI (r1v10 ??) = (r1v8 ??), (r1v11 ??) binds: [B:58:0x00ac, B:67:0x00c1] A[DONT_GENERATE, DONT_INLINE]
+      0x00ae: PHI (r2v8 ??) = (r2v6 ??), (r2v9 ??) binds: [B:58:0x00ac, B:67:0x00c1] A[DONT_GENERATE, DONT_INLINE]
+      0x00ae: PHI (r9v7 java.io.InputStream) = (r9v5 java.io.InputStream), (r9v8 java.io.InputStream) binds: [B:58:0x00ac, B:67:0x00c1] A[DONT_GENERATE, DONT_INLINE]] */
     /* JADX WARN: Type inference failed for: r1v10 */
     /* JADX WARN: Type inference failed for: r1v11, types: [java.io.OutputStream] */
     /* JADX WARN: Type inference failed for: r1v14 */
@@ -68,17 +68,147 @@ public class Encryption {
     /* JADX WARN: Type inference failed for: r2v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.io.File decrypt(int r8, java.lang.String r9) {
-        /*
-            Method dump skipped, instructions count: 213
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.edgelighting.backup.Encryption.decrypt(int, java.lang.String):java.io.File");
+    public static File decrypt(int i, String str) throws Throwable {
+        OutputStream outputStream;
+        InputStream inputStream;
+        InputStream inputStreamDecryptStream;
+        File file = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/decrypt_cocktailbar.xml"));
+        ?? fileInputStream = "/encrypt_cocktailbar.xml";
+        ?? file2 = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/encrypt_cocktailbar.xml"));
+        InputStream inputStream2 = null;
+        try {
+            try {
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (IOException e) {
+            e = e;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Exception e2) {
+            e = e2;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Throwable th2) {
+            th = th2;
+            file2 = 0;
+            fileInputStream = 0;
+        }
+        if (!file2.exists()) {
+            return null;
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        if (file2.length() > 0) {
+            fileInputStream = new FileInputStream((File) file2);
+            try {
+                inputStreamDecryptStream = decryptStream(fileInputStream, i);
+                try {
+                    file2 = new FileOutputStream(file);
+                } catch (IOException e3) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e3;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Exception e4) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e4;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Throwable th3) {
+                    file2 = 0;
+                    inputStream2 = inputStreamDecryptStream;
+                    th = th3;
+                }
+            } catch (IOException e5) {
+                e = e5;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Exception e6) {
+                e = e6;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Throwable th4) {
+                th = th4;
+                file2 = 0;
+            }
+            try {
+                byte[] bArr = new byte[1024];
+                while (true) {
+                    int i2 = inputStreamDecryptStream.read(bArr, 0, 1024);
+                    if (i2 == -1) {
+                        break;
+                    }
+                    file2.write(bArr, 0, i2);
+                }
+                inputStream2 = inputStreamDecryptStream;
+                outputStream = file2;
+                inputStream = fileInputStream;
+            } catch (IOException e7) {
+                inputStream2 = inputStreamDecryptStream;
+                e = e7;
+                file2 = file2;
+                fileInputStream = fileInputStream;
+                e.printStackTrace();
+                if (inputStream2 != null) {
+                    inputStream2.close();
+                }
+                if (file2 != 0) {
+                    file2.close();
+                }
+                if (fileInputStream != 0) {
+                    fileInputStream.close();
+                }
+                return file;
+            } catch (Exception e8) {
+                inputStream2 = inputStreamDecryptStream;
+                e = e8;
+                file2 = file2;
+                fileInputStream = fileInputStream;
+                e.printStackTrace();
+                if (inputStream2 != null) {
+                    inputStream2.close();
+                }
+                if (file2 != 0) {
+                    file2.close();
+                }
+                if (fileInputStream != 0) {
+                }
+                return file;
+            } catch (Throwable th5) {
+                inputStream2 = inputStreamDecryptStream;
+                th = th5;
+                if (inputStream2 != null) {
+                    inputStream2.close();
+                }
+                if (file2 != 0) {
+                    file2.close();
+                }
+                if (fileInputStream != 0) {
+                    fileInputStream.close();
+                }
+                throw th;
+            }
+        } else {
+            outputStream = null;
+            inputStream = null;
+        }
+        if (inputStream2 != null) {
+            inputStream2.close();
+        }
+        if (outputStream != null) {
+            outputStream.close();
+        }
+        if (inputStream != null) {
+            inputStream.close();
+            return file;
+        }
+        return file;
     }
 
-    public static InputStream decryptStream(InputStream inputStream, int i) {
+    public static InputStream decryptStream(InputStream inputStream, int i) throws NoSuchAlgorithmException, IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArr = new byte[mCipher.getBlockSize()];
         inputStream.read(bArr);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(bArr);
@@ -98,7 +228,7 @@ public class Encryption {
         return new CipherInputStream(inputStream, mCipher);
     }
 
-    public static void streamCrypt(String str) {
+    public static void streamCrypt(String str) throws NoSuchAlgorithmException {
         securityPassword = str;
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(securityPassword.getBytes("UTF-8"));

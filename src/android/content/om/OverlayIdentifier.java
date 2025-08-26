@@ -49,11 +49,11 @@ public final class OverlayIdentifier implements Parcelable {
     }
 
     public static OverlayIdentifier fromString(String str) {
-        String[] split = str.split(":", 2);
-        if (split.length == 2) {
-            return new OverlayIdentifier(split[0], split[1]);
+        String[] strArrSplit = str.split(":", 2);
+        if (strArrSplit.length == 2) {
+            return new OverlayIdentifier(strArrSplit[0], strArrSplit[1]);
         }
-        return new OverlayIdentifier(split[0]);
+        return new OverlayIdentifier(strArrSplit[0]);
     }
 
     public String getPackageName() {
@@ -99,10 +99,10 @@ public final class OverlayIdentifier implements Parcelable {
     }
 
     OverlayIdentifier(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        String readString = (readByte & 1) == 0 ? null : parcel.readString();
-        String readString2 = (readByte & 2) != 0 ? parcel.readString() : null;
-        this.mPackageName = readString;
-        this.mOverlayName = readString2;
+        byte b = parcel.readByte();
+        String string = (b & 1) == 0 ? null : parcel.readString();
+        String string2 = (b & 2) != 0 ? parcel.readString() : null;
+        this.mPackageName = string;
+        this.mOverlayName = string2;
     }
 }

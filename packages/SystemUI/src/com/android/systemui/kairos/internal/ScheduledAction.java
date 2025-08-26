@@ -1,17 +1,40 @@
 package com.android.systemui.kairos.internal;
 
 import com.android.systemui.kairos.util.Maybe;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CompletableDeferred;
 import kotlinx.coroutines.CompletableDeferredImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScheduledAction {
     public final CompletableDeferred onResult;
     public final Function2 onStartTransaction;
     public Maybe result;
+
+    /* renamed from: com.android.systemui.kairos.internal.ScheduledAction$started$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ScheduledAction.this.started(null, this);
+        }
+    }
 
     public ScheduledAction(String str, CompletableDeferred completableDeferred, Function2 function2) {
         this.onResult = completableDeferred;
@@ -32,69 +55,50 @@ public final class ScheduledAction {
         this.result = Maybe.Companion.absent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object started(com.android.systemui.kairos.internal.EvalScope r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5 = this;
-            boolean r0 = r7 instanceof com.android.systemui.kairos.internal.ScheduledAction$started$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.kairos.internal.ScheduledAction$started$1 r0 = (com.android.systemui.kairos.internal.ScheduledAction$started$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.kairos.internal.ScheduledAction$started$1 r0 = new com.android.systemui.kairos.internal.ScheduledAction$started$1
-            r0.<init>(r5, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3b
-            if (r2 != r3) goto L33
-            java.lang.Object r5 = r0.L$1
-            com.android.systemui.kairos.util.Maybe$Companion r5 = (com.android.systemui.kairos.util.Maybe.Companion) r5
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.kairos.internal.ScheduledAction r6 = (com.android.systemui.kairos.internal.ScheduledAction) r6
-            kotlin.ResultKt.throwOnFailure(r7)
-            r4 = r7
-            r7 = r5
-            r5 = r6
-            r6 = r4
-            goto L4f
-        L33:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.kairos.util.Maybe$Companion r7 = com.android.systemui.kairos.util.Maybe.Companion
-            r0.L$0 = r5
-            r0.L$1 = r7
-            r0.label = r3
-            kotlin.jvm.functions.Function2 r2 = r5.onStartTransaction
-            java.lang.Object r6 = r2.invoke(r6, r0)
-            if (r6 != r1) goto L4f
-            return r1
-        L4f:
-            r7.getClass()
-            com.android.systemui.kairos.util.Maybe$Present r6 = com.android.systemui.kairos.util.Maybe.Present.m2573boximpl(r6)
-            r5.result = r6
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.kairos.internal.ScheduledAction.started(com.android.systemui.kairos.internal.EvalScope, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object started(EvalScope evalScope, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        Maybe.Companion companion;
+        Object objInvoke;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            companion = Maybe.Companion;
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = companion;
+            anonymousClass1.label = 1;
+            objInvoke = this.onStartTransaction.invoke(evalScope, anonymousClass1);
+            if (objInvoke == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            Maybe.Companion companion2 = (Maybe.Companion) anonymousClass1.L$1;
+            ScheduledAction scheduledAction = (ScheduledAction) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            companion = companion2;
+            this = scheduledAction;
+            objInvoke = obj;
+        }
+        companion.getClass();
+        this.result = Maybe.Present.m2590boximpl(objInvoke);
+        return Unit.INSTANCE;
     }
 
     public /* synthetic */ ScheduledAction(String str, CompletableDeferred completableDeferred, Function2 function2, int i, DefaultConstructorMarker defaultConstructorMarker) {

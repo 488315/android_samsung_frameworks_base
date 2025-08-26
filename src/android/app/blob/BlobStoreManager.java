@@ -37,7 +37,7 @@ public class BlobStoreManager {
         this.mService = iBlobStoreManager;
     }
 
-    public long createSession(BlobHandle blobHandle) throws IOException {
+    public long createSession(BlobHandle blobHandle) throws Throwable {
         try {
             return this.mService.createSession(blobHandle, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -49,7 +49,7 @@ public class BlobStoreManager {
         }
     }
 
-    public Session openSession(long j) throws IOException {
+    public Session openSession(long j) throws Throwable {
         try {
             return new Session(this.mService.openSession(j, this.mContext.getOpPackageName()));
         } catch (ParcelableException e) {
@@ -60,7 +60,7 @@ public class BlobStoreManager {
         }
     }
 
-    public void abandonSession(long j) throws IOException {
+    public void abandonSession(long j) throws Throwable {
         try {
             this.mService.abandonSession(j, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -71,7 +71,7 @@ public class BlobStoreManager {
         }
     }
 
-    public ParcelFileDescriptor openBlob(BlobHandle blobHandle) throws IOException {
+    public ParcelFileDescriptor openBlob(BlobHandle blobHandle) throws Throwable {
         try {
             return this.mService.openBlob(blobHandle, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -82,7 +82,7 @@ public class BlobStoreManager {
         }
     }
 
-    public void acquireLease(BlobHandle blobHandle, int i, long j) throws IOException {
+    public void acquireLease(BlobHandle blobHandle, int i, long j) throws Throwable {
         try {
             this.mService.acquireLease(blobHandle, i, null, j, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -94,7 +94,7 @@ public class BlobStoreManager {
         }
     }
 
-    public void acquireLease(BlobHandle blobHandle, CharSequence charSequence, long j) throws IOException {
+    public void acquireLease(BlobHandle blobHandle, CharSequence charSequence, long j) throws Throwable {
         try {
             this.mService.acquireLease(blobHandle, -1, charSequence, j, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -106,15 +106,15 @@ public class BlobStoreManager {
         }
     }
 
-    public void acquireLease(BlobHandle blobHandle, int i) throws IOException {
+    public void acquireLease(BlobHandle blobHandle, int i) throws Throwable {
         acquireLease(blobHandle, i, 0L);
     }
 
-    public void acquireLease(BlobHandle blobHandle, CharSequence charSequence) throws IOException {
+    public void acquireLease(BlobHandle blobHandle, CharSequence charSequence) throws Throwable {
         acquireLease(blobHandle, charSequence, 0L);
     }
 
-    public void releaseLease(BlobHandle blobHandle) throws IOException {
+    public void releaseLease(BlobHandle blobHandle) throws Throwable {
         try {
             this.mService.releaseLease(blobHandle, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -164,7 +164,7 @@ public class BlobStoreManager {
         }
     }
 
-    public List<BlobInfo> queryBlobsForUser(UserHandle userHandle) throws IOException {
+    public List<BlobInfo> queryBlobsForUser(UserHandle userHandle) throws Throwable {
         try {
             return this.mService.queryBlobsForUser(userHandle.getIdentifier());
         } catch (ParcelableException e) {
@@ -175,7 +175,7 @@ public class BlobStoreManager {
         }
     }
 
-    public void deleteBlob(BlobInfo blobInfo) throws IOException {
+    public void deleteBlob(BlobInfo blobInfo) throws Throwable {
         try {
             this.mService.deleteBlob(blobInfo.getId());
         } catch (ParcelableException e) {
@@ -186,7 +186,7 @@ public class BlobStoreManager {
         }
     }
 
-    public List<BlobHandle> getLeasedBlobs() throws IOException {
+    public List<BlobHandle> getLeasedBlobs() throws Throwable {
         try {
             return this.mService.getLeasedBlobs(this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -197,7 +197,7 @@ public class BlobStoreManager {
         }
     }
 
-    public LeaseInfo getLeaseInfo(BlobHandle blobHandle) throws IOException {
+    public LeaseInfo getLeaseInfo(BlobHandle blobHandle) throws Throwable {
         try {
             return this.mService.getLeaseInfo(blobHandle, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -215,11 +215,11 @@ public class BlobStoreManager {
             this.mSession = iBlobStoreSession;
         }
 
-        public ParcelFileDescriptor openWrite(long j, long j2) throws IOException {
+        public ParcelFileDescriptor openWrite(long j, long j2) throws Throwable {
             try {
-                ParcelFileDescriptor openWrite = this.mSession.openWrite(j, j2);
-                openWrite.seekTo(j);
-                return openWrite;
+                ParcelFileDescriptor parcelFileDescriptorOpenWrite = this.mSession.openWrite(j, j2);
+                parcelFileDescriptorOpenWrite.seekTo(j);
+                return parcelFileDescriptorOpenWrite;
             } catch (ParcelableException e) {
                 e.maybeRethrow(IOException.class);
                 throw new RuntimeException(e);
@@ -228,7 +228,7 @@ public class BlobStoreManager {
             }
         }
 
-        public ParcelFileDescriptor openRead() throws IOException {
+        public ParcelFileDescriptor openRead() throws Throwable {
             try {
                 return this.mSession.openRead();
             } catch (ParcelableException e) {
@@ -239,7 +239,7 @@ public class BlobStoreManager {
             }
         }
 
-        public long getSize() throws IOException {
+        public long getSize() throws Throwable {
             try {
                 return this.mSession.getSize();
             } catch (ParcelableException e) {
@@ -251,7 +251,7 @@ public class BlobStoreManager {
         }
 
         @Override // java.io.Closeable, java.lang.AutoCloseable
-        public void close() throws IOException {
+        public void close() throws Throwable {
             try {
                 this.mSession.close();
             } catch (ParcelableException e) {
@@ -262,7 +262,7 @@ public class BlobStoreManager {
             }
         }
 
-        public void abandon() throws IOException {
+        public void abandon() throws Throwable {
             try {
                 this.mSession.abandon();
             } catch (ParcelableException e) {
@@ -273,7 +273,7 @@ public class BlobStoreManager {
             }
         }
 
-        public void allowPackageAccess(String str, byte[] bArr) throws IOException {
+        public void allowPackageAccess(String str, byte[] bArr) throws Throwable {
             Objects.requireNonNull(str);
             Preconditions.checkArgument(str.length() <= 223, "packageName is longer than 223 chars");
             Objects.requireNonNull(bArr);
@@ -289,7 +289,7 @@ public class BlobStoreManager {
             }
         }
 
-        public boolean isPackageAccessAllowed(String str, byte[] bArr) throws IOException {
+        public boolean isPackageAccessAllowed(String str, byte[] bArr) throws Throwable {
             try {
                 return this.mSession.isPackageAccessAllowed(str, bArr);
             } catch (ParcelableException e) {
@@ -300,7 +300,7 @@ public class BlobStoreManager {
             }
         }
 
-        public void allowSameSignatureAccess() throws IOException {
+        public void allowSameSignatureAccess() throws Throwable {
             try {
                 this.mSession.allowSameSignatureAccess();
             } catch (ParcelableException e) {
@@ -311,7 +311,7 @@ public class BlobStoreManager {
             }
         }
 
-        public boolean isSameSignatureAccessAllowed() throws IOException {
+        public boolean isSameSignatureAccessAllowed() throws Throwable {
             try {
                 return this.mSession.isSameSignatureAccessAllowed();
             } catch (ParcelableException e) {
@@ -322,7 +322,7 @@ public class BlobStoreManager {
             }
         }
 
-        public void allowPublicAccess() throws IOException {
+        public void allowPublicAccess() throws Throwable {
             try {
                 this.mSession.allowPublicAccess();
             } catch (ParcelableException e) {
@@ -333,7 +333,7 @@ public class BlobStoreManager {
             }
         }
 
-        public boolean isPublicAccessAllowed() throws IOException {
+        public boolean isPublicAccessAllowed() throws Throwable {
             try {
                 return this.mSession.isPublicAccessAllowed();
             } catch (ParcelableException e) {
@@ -344,7 +344,7 @@ public class BlobStoreManager {
             }
         }
 
-        public void commit(final Executor executor, final Consumer<Integer> consumer) throws IOException {
+        public void commit(final Executor executor, final Consumer<Integer> consumer) throws Throwable {
             try {
                 this.mSession.commit(new IBlobCommitCallback.Stub(this) { // from class: android.app.blob.BlobStoreManager.Session.1
                     @Override // android.app.blob.IBlobCommitCallback

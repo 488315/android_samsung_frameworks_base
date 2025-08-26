@@ -23,20 +23,19 @@ import java.lang.Thread;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MemoryMonitor implements Dumpable {
     private static final int ALLOWED_NOTI_COUNT = 100;
     private static final String DATE_FORMAT = "MM-dd HH:mm:ss.SSS";
-    private static final int GC_COUNTS = 2;
+    private static final int GC_COUNTS = 3;
     private static final int GC_SLEEP = 10000;
     private static final int HIGHER_PSS = 819200;
     private static final int HOUR = 3600000;
-    private static final int MAX_BROADCAST_RECEIVER_COUNT = 1200;
-    private static final int MAX_GRAPHICS_HEAP = 512000;
-    private static final int MAX_JAVA_HEAP = 225280;
+    private static final int MAX_BROADCAST_RECEIVER_COUNT = 1100;
+    private static final int MAX_GRAPHICS_HEAP = 819200;
+    private static final int MAX_JAVA_HEAP = 245760;
     private static final int MAX_NATIVE_HEAP = 819200;
-    private static final int MAX_PSS = 1024000;
+    private static final int MAX_PSS = 2048000;
     private static final int MAX_VIEWROOT_COUNT = 50;
     private static final int MAX_VIEW_COUNT = 25000;
     private static final int MB = 1024;
@@ -75,9 +74,9 @@ public class MemoryMonitor implements Dumpable {
     };
     private Runnable mGcRunnable = new Runnable() { // from class: com.android.systemui.util.MemoryMonitor.2
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws InterruptedException {
             int i = 0;
-            while (i < 2) {
+            while (i < 3) {
                 String str = MemoryMonitor.TAG;
                 StringBuilder sb = new StringBuilder("run GC - ");
                 i++;
@@ -94,14 +93,13 @@ public class MemoryMonitor implements Dumpable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SystemUIExceptionHandler implements Thread.UncaughtExceptionHandler {
         public /* synthetic */ SystemUIExceptionHandler(MemoryMonitor memoryMonitor, int i) {
             this();
         }
 
         @Override // java.lang.Thread.UncaughtExceptionHandler
-        public void uncaughtException(Thread thread, Throwable th) {
+        public void uncaughtException(Thread thread, Throwable th) throws NumberFormatException {
             if (th instanceof OutOfMemoryError) {
                 MemoryMonitor.this.mHeapDumpHelper.dump("OutOfMemoryError");
             }
@@ -128,7 +126,7 @@ public class MemoryMonitor implements Dumpable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$startMonitoring$2(boolean z) {
+    public /* synthetic */ void lambda$startMonitoring$2(boolean z) throws NumberFormatException {
         printMemoryInfo(z);
         this.mIsInCalcMemInfo = false;
         this.mLastMemoryInfoLogTime = new SimpleDateFormat(DATE_FORMAT).format(new Date(System.currentTimeMillis()));
@@ -141,41 +139,41 @@ public class MemoryMonitor implements Dumpable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void printMemoryInfo(final boolean z) {
+    public void printMemoryInfo(final boolean z) throws NumberFormatException {
         String str = TAG;
         Slog.d(str, " - Memory Information -");
         Debug.MemoryInfo memoryInfo = new Debug.MemoryInfo();
         Debug.getMemoryInfo(memoryInfo);
-        long countInstancesOfClass = Debug.countInstancesOfClass(View.class);
-        long countInstancesOfClass2 = Debug.countInstancesOfClass(ViewRootImpl.class);
-        long countInstancesOfClass3 = Debug.countInstancesOfClass(Notification.class);
-        long countInstancesOfClass4 = Debug.countInstancesOfClass(BroadcastReceiver.class);
+        long jCountInstancesOfClass = Debug.countInstancesOfClass(View.class);
+        long jCountInstancesOfClass2 = Debug.countInstancesOfClass(ViewRootImpl.class);
+        long jCountInstancesOfClass3 = Debug.countInstancesOfClass(Notification.class);
+        long jCountInstancesOfClass4 = Debug.countInstancesOfClass(BroadcastReceiver.class);
         Slog.d(str, "Dalvik Heap : " + getDalvikHeapTotal(memoryInfo));
         Slog.d(str, "Native Heap : " + getNativeHeapTotal(memoryInfo));
         Slog.d(str, "Graphics : " + memoryInfo.getMemoryStat("summary.graphics"));
         Slog.d(str, "Total PSS : " + memoryInfo.getMemoryStat("summary.total-pss"));
         Slog.d(str, " - View count -");
-        Slog.d(str, "View=" + countInstancesOfClass);
-        Slog.d(str, "ViewRootImpl=" + countInstancesOfClass2);
-        Slog.d(str, "Notification=" + countInstancesOfClass3);
-        Slog.d(str, "BroadcastReceivers=" + countInstancesOfClass4);
-        if (isLeakSuspect(memoryInfo, countInstancesOfClass, countInstancesOfClass2)) {
+        Slog.d(str, "View=" + jCountInstancesOfClass);
+        Slog.d(str, "ViewRootImpl=" + jCountInstancesOfClass2);
+        Slog.d(str, "Notification=" + jCountInstancesOfClass3);
+        Slog.d(str, "BroadcastReceivers=" + jCountInstancesOfClass4);
+        if (isLeakSuspect(memoryInfo, jCountInstancesOfClass, jCountInstancesOfClass2)) {
             new Thread(this.mGcRunnable, "gcRunnable").start();
-        } else if (!this.mHasBroadcastLeakDetected && countInstancesOfClass4 > 1200) {
-            this.mReason = ValueAnimator$$ExternalSyntheticOutline0.m("BR=", countInstancesOfClass4);
+        } else if (!this.mHasBroadcastLeakDetected && jCountInstancesOfClass4 > 1100) {
+            this.mReason = ValueAnimator$$ExternalSyntheticOutline0.m("BR=", jCountInstancesOfClass4);
             Slog.d(str, "SystemUI Broadcast Receivers Report :" + this.mReason);
             this.mHeapDumpHelper.dump(this.mReason);
             this.mHasBroadcastLeakDetected = true;
         }
         if (z) {
-            int parseInt = Integer.parseInt(memoryInfo.getMemoryStat("summary.total-pss"));
-            final int i = parseInt < 512000 ? STANDARD_DELAY : parseInt < 819200 ? 3600000 : SHORT_DELAY;
+            int i = Integer.parseInt(memoryInfo.getMemoryStat("summary.total-pss"));
+            final int i2 = i < STANDARD_PSS ? STANDARD_DELAY : i < 819200 ? 3600000 : SHORT_DELAY;
             this.mMainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.util.MemoryMonitor$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MemoryMonitor.this.lambda$printMemoryInfo$1(z, i);
+                    this.f$0.lambda$printMemoryInfo$1(z, i2);
                 }
-            }, i);
+            }, i2);
         }
     }
 
@@ -213,9 +211,9 @@ public class MemoryMonitor implements Dumpable {
     @Override // com.android.systemui.Dumpable
     public void dump(PrintWriter printWriter, String[] strArr) {
         if (this.mHeapDumpHelper.isDumped) {
-            StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "SystemUI Memory Report Info", "    Reason : ");
-            m.append(this.mReason);
-            printWriter.println(m.toString());
+            StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "SystemUI Memory Report Info", "    Reason : ");
+            sbM.append(this.mReason);
+            printWriter.println(sbM.toString());
             CarrierTextController$$ExternalSyntheticOutline0.m(new StringBuilder("    path : "), this.mHeapDumpHelper.mHeapDumpFilePath, printWriter);
         }
     }
@@ -230,20 +228,44 @@ public class MemoryMonitor implements Dumpable {
         return Integer.valueOf(memoryInfo.getMemoryStat("summary.native-heap")).intValue() + (memoryInfo.hasSwappedOutPss ? memoryInfo.nativeSwappedOutPss : memoryInfo.nativeSwappedOut);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0051, code lost:
-    
-        if (r18.mCurrentNotiCount >= 100) goto L15;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean isLeakSuspect(android.os.Debug.MemoryInfo r19, long r20, long r22) {
-        /*
-            Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.MemoryMonitor.isLeakSuspect(android.os.Debug$MemoryInfo, long, long):boolean");
+    public boolean isLeakSuspect(Debug.MemoryInfo memoryInfo, long j, long j2) throws NumberFormatException {
+        Object obj;
+        Object obj2;
+        if (this.mHeapDumpHelper.isDumped) {
+            return false;
+        }
+        int i = Integer.parseInt(memoryInfo.getMemoryStat("summary.java-heap"));
+        int nativeHeapTotal = getNativeHeapTotal(memoryInfo);
+        int i2 = Integer.parseInt(memoryInfo.getMemoryStat("summary.graphics"));
+        int i3 = Integer.parseInt(memoryInfo.getMemoryStat("summary.total-pss"));
+        if (i <= MAX_JAVA_HEAP && ((nativeHeapTotal <= 819200 || this.mCurrentNotiCount >= 100) && i2 <= 819200 && i3 <= MAX_PSS && ((j <= 25000 || this.mCurrentNotiCount >= 100) && j2 <= 50))) {
+            return false;
+        }
+        StringBuilder sb = new StringBuilder("J=");
+        sb.append(i > MAX_JAVA_HEAP ? Integer.valueOf(i) : Boolean.FALSE);
+        sb.append(", N=");
+        if (nativeHeapTotal > 819200) {
+            obj = nativeHeapTotal + "/" + this.mCurrentNotiCount;
+        } else {
+            obj = Boolean.FALSE;
+        }
+        sb.append(obj);
+        sb.append(", G=");
+        sb.append(i2 > 819200 ? Integer.valueOf(i2) : Boolean.FALSE);
+        sb.append(", T=");
+        sb.append(i3 > MAX_PSS ? Integer.valueOf(i3) : Boolean.FALSE);
+        sb.append(", V=");
+        if (j > 25000) {
+            obj2 = j + "/" + this.mCurrentNotiCount;
+        } else {
+            obj2 = Boolean.FALSE;
+        }
+        sb.append(obj2);
+        sb.append(", VR=");
+        sb.append(j2 > 50 ? Long.valueOf(j2) : Boolean.FALSE);
+        this.mReason = sb.toString();
+        Slog.d(TAG, "SystemUI Memory Report :" + this.mReason);
+        return true;
     }
 
     public void registerUncaughtException() {

@@ -132,7 +132,7 @@ public class X509CertificateHolder implements Encodable, Serializable {
         return (date.before(this.x509Certificate.getStartDate().getDate()) || date.after(this.x509Certificate.getEndDate().getDate())) ? false : true;
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException, IOException {
         TBSCertificate tBSCertificate = this.x509Certificate.getTBSCertificate();
         if (!CertUtils.isAlgIdEqual(tBSCertificate.getSignature(), this.x509Certificate.getSignatureAlgorithm())) {
             throw new CertException("signature invalid - algorithm identifier mismatch");
@@ -148,12 +148,12 @@ public class X509CertificateHolder implements Encodable, Serializable {
         }
     }
 
-    public boolean isAlternativeSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException {
+    public boolean isAlternativeSignatureValid(ContentVerifierProvider contentVerifierProvider) throws IOException, CertException {
         TBSCertificate tBSCertificate = this.x509Certificate.getTBSCertificate();
-        AltSignatureAlgorithm fromExtensions = AltSignatureAlgorithm.fromExtensions(tBSCertificate.getExtensions());
-        AltSignatureValue fromExtensions2 = AltSignatureValue.fromExtensions(tBSCertificate.getExtensions());
+        AltSignatureAlgorithm altSignatureAlgorithmFromExtensions = AltSignatureAlgorithm.fromExtensions(tBSCertificate.getExtensions());
+        AltSignatureValue altSignatureValueFromExtensions = AltSignatureValue.fromExtensions(tBSCertificate.getExtensions());
         try {
-            ContentVerifier contentVerifier = contentVerifierProvider.get(AlgorithmIdentifier.getInstance(fromExtensions.toASN1Primitive()));
+            ContentVerifier contentVerifier = contentVerifierProvider.get(AlgorithmIdentifier.getInstance(altSignatureAlgorithmFromExtensions.toASN1Primitive()));
             OutputStream outputStream = contentVerifier.getOutputStream();
             ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(tBSCertificate.toASN1Primitive());
             ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
@@ -165,7 +165,7 @@ public class X509CertificateHolder implements Encodable, Serializable {
             aSN1EncodableVector.add(CertUtils.trimExtensions(3, tBSCertificate.getExtensions()));
             new DERSequence(aSN1EncodableVector).encodeTo(outputStream, ASN1Encoding.DER);
             outputStream.close();
-            return contentVerifier.verify(fromExtensions2.getSignature().getOctets());
+            return contentVerifier.verify(altSignatureValueFromExtensions.getSignature().getOctets());
         } catch (Exception e) {
             throw new CertException("unable to process signature: " + e.getMessage(), e);
         }
@@ -190,7 +190,7 @@ public class X509CertificateHolder implements Encodable, Serializable {
         return this.x509Certificate.getEncoded();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         init(Certificate.getInstance(objectInputStream.readObject()));
     }

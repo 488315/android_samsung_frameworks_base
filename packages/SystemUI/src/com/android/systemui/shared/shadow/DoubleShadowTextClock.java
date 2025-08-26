@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DoubleShadowTextClock extends TextClock {
     public static final int paddingDividedOffset;
@@ -23,7 +22,6 @@ public final class DoubleShadowTextClock extends TextClock {
     public DoubleShadowTextHelper.ShadowInfo mKeyShadowInfo;
     public final Resources resources;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,27 +46,27 @@ public final class DoubleShadowTextClock extends TextClock {
     }
 
     public final void initializeAttributes(AttributeSet attributeSet, int i, int i2) {
-        TypedArray typedArray = this.attributesInput;
-        if (typedArray == null) {
-            typedArray = getContext().obtainStyledAttributes(attributeSet, R$styleable.DoubleShadowTextClock, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = this.attributesInput;
+        if (typedArrayObtainStyledAttributes == null) {
+            typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.DoubleShadowTextClock, i, i2);
         }
         Resources resources = this.resources;
         if (resources == null) {
             resources = getContext().getResources();
         }
         try {
-            this.mKeyShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArray.getDimensionPixelSize(5, 0), typedArray.getDimensionPixelSize(6, 0), typedArray.getDimensionPixelSize(7, 0), typedArray.getFloat(4, 0.0f));
-            this.mAmbientShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArray.getDimensionPixelSize(1, 0), typedArray.getDimensionPixelSize(2, 0), typedArray.getDimensionPixelSize(3, 0), typedArray.getFloat(0, 0.0f));
-            boolean z = typedArray.getBoolean(8, false);
-            int dimensionPixelSize = typedArray.getDimensionPixelSize(9, 0);
+            this.mKeyShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArrayObtainStyledAttributes.getDimensionPixelSize(5, 0), typedArrayObtainStyledAttributes.getDimensionPixelSize(6, 0), typedArrayObtainStyledAttributes.getDimensionPixelSize(7, 0), typedArrayObtainStyledAttributes.getFloat(4, 0.0f));
+            this.mAmbientShadowInfo = new DoubleShadowTextHelper.ShadowInfo(typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0), typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0), typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 0), typedArrayObtainStyledAttributes.getFloat(0, 0.0f));
+            boolean z = typedArrayObtainStyledAttributes.getBoolean(8, false);
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, 0);
             if (z) {
                 boolean z2 = resources.getBoolean(R.bool.dream_overlay_complication_clock_bottom_padding);
                 Paint.FontMetrics fontMetrics = getPaint().getFontMetrics();
                 setPaddingRelative(0, 0, 0, z2 ? dimensionPixelSize + (((int) Math.floor(fontMetrics.descent)) / paddingDividedOffset) : dimensionPixelSize - ((int) Math.floor(fontMetrics.descent)));
             }
-            typedArray.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         } catch (Throwable th) {
-            typedArray.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }
@@ -85,7 +83,7 @@ public final class DoubleShadowTextClock extends TextClock {
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.shadow.DoubleShadowTextClock$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return DoubleShadowTextClock.$r8$lambda$y586VqXeueHNllCFpB83wsDCduE(DoubleShadowTextClock.this, canvas);
+                return DoubleShadowTextClock.$r8$lambda$y586VqXeueHNllCFpB83wsDCduE(this.f$0, canvas);
             }
         };
         doubleShadowTextHelper.getClass();

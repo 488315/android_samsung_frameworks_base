@@ -6,7 +6,6 @@ import androidx.lifecycle.Lifecycle;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FragmentTransaction {
     public boolean mAddToBackStack;
@@ -27,7 +26,6 @@ public abstract class FragmentTransaction {
     public ArrayList mSharedElementTargetNames;
     public int mTransition;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Op {
         public int mCmd;
         public Lifecycle.State mCurrentMaxState;

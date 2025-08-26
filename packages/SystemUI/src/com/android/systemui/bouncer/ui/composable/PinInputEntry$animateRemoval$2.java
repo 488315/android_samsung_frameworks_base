@@ -14,14 +14,12 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Deferred;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PinInputEntry$animateRemoval$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ PinInputEntry this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.ui.composable.PinInputEntry$animateRemoval$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -56,15 +54,14 @@ final class PinInputEntry$animateRemoval$2 extends SuspendLambda implements Func
             }
             ResultKt.throwOnFailure(obj);
             Animatable animatable = this.this$0.entryWidth;
-            Dp m835boximpl = Dp.m835boximpl(0);
+            Dp dpM837boximpl = Dp.m837boximpl(0);
             TweenSpec tweenSpec = this.this$0.shapeAnimations.inputShiftAnimationSpec;
             this.label = 1;
-            Object animateTo$default = Animatable.animateTo$default(animatable, m835boximpl, tweenSpec, null, null, this, 12);
-            return animateTo$default == coroutineSingletons ? coroutineSingletons : animateTo$default;
+            Object objAnimateTo$default = Animatable.animateTo$default(animatable, dpM837boximpl, tweenSpec, null, null, this, 12);
+            return objAnimateTo$default == coroutineSingletons ? coroutineSingletons : objAnimateTo$default;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.ui.composable.PinInputEntry$animateRemoval$2$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -99,11 +96,11 @@ final class PinInputEntry$animateRemoval$2 extends SuspendLambda implements Func
             }
             ResultKt.throwOnFailure(obj);
             Animatable animatable = this.this$0.shapeSize;
-            Dp m835boximpl = Dp.m835boximpl(0);
+            Dp dpM837boximpl = Dp.m837boximpl(0);
             TweenSpec tweenSpec = this.this$0.shapeAnimations.deleteShapeSizeAnimationSpec;
             this.label = 1;
-            Object animateTo$default = Animatable.animateTo$default(animatable, m835boximpl, tweenSpec, null, null, this, 12);
-            return animateTo$default == coroutineSingletons ? coroutineSingletons : animateTo$default;
+            Object objAnimateTo$default = Animatable.animateTo$default(animatable, dpM837boximpl, tweenSpec, null, null, this, 12);
+            return objAnimateTo$default == coroutineSingletons ? coroutineSingletons : objAnimateTo$default;
         }
     }
 
@@ -140,7 +137,7 @@ final class PinInputEntry$animateRemoval$2 extends SuspendLambda implements Func
         CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
         Deferred[] deferredArr = {BuildersKt.async$default(coroutineScope, null, new AnonymousClass1(this.this$0, null), 3), BuildersKt.async$default(coroutineScope, null, new AnonymousClass2(this.this$0, null), 3)};
         this.label = 1;
-        Object await = new AwaitAll(deferredArr).await(this);
-        return await == coroutineSingletons ? coroutineSingletons : await;
+        Object objAwait = new AwaitAll(deferredArr).await(this);
+        return objAwait == coroutineSingletons ? coroutineSingletons : objAwait;
     }
 }

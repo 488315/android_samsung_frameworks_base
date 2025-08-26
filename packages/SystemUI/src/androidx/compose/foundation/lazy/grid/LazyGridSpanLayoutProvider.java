@@ -10,7 +10,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridSpanLayoutProvider {
     public final ArrayList buckets;
@@ -23,7 +22,6 @@ public final class LazyGridSpanLayoutProvider {
     public List previousDefaultSpans;
     public int slotsPerLine;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class LazyGridItemSpanScopeImpl implements LazyGridItemSpanScope {
         public static final LazyGridItemSpanScopeImpl INSTANCE = new LazyGridItemSpanScopeImpl();
 
@@ -31,7 +29,6 @@ public final class LazyGridSpanLayoutProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LineConfiguration {
         public final int firstItemIndex;
         public final List spans;
@@ -57,20 +54,113 @@ public final class LazyGridSpanLayoutProvider {
         return ((int) Math.sqrt((getTotalSize() * 1.0d) / this.slotsPerLine)) + 1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x00a6, code lost:
-    
-        if (r7 < r6) goto L34;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00a9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.compose.foundation.lazy.grid.LazyGridSpanLayoutProvider.LineConfiguration getLineConfiguration(int r11) {
-        /*
-            Method dump skipped, instructions count: 374
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.grid.LazyGridSpanLayoutProvider.getLineConfiguration(int):androidx.compose.foundation.lazy.grid.LazyGridSpanLayoutProvider$LineConfiguration");
+    public final LineConfiguration getLineConfiguration(int i) {
+        int i2;
+        boolean z;
+        int i3;
+        int i4;
+        List list;
+        if (!this.gridContent.hasCustomSpans) {
+            int i5 = this.slotsPerLine;
+            int i6 = i * i5;
+            int totalSize = getTotalSize() - i6;
+            if (i5 > totalSize) {
+                i5 = totalSize;
+            }
+            if (i5 < 0) {
+                i5 = 0;
+            }
+            if (i5 == this.previousDefaultSpans.size()) {
+                list = this.previousDefaultSpans;
+            } else {
+                ArrayList arrayList = new ArrayList(i5);
+                for (int i7 = 0; i7 < i5; i7++) {
+                    arrayList.add(GridItemSpan.m158boximpl(LazyGridSpanKt.GridItemSpan(1)));
+                }
+                this.previousDefaultSpans = arrayList;
+                list = arrayList;
+            }
+            return new LineConfiguration(i6, list);
+        }
+        int iMin = Math.min(i / getBucketSize(), this.buckets.size() - 1);
+        int bucketSize = getBucketSize() * iMin;
+        int iIntValue = ((Bucket) this.buckets.get(iMin)).firstItemIndex;
+        int iSpanOf = ((Bucket) this.buckets.get(iMin)).firstItemKnownSpan;
+        int i8 = this.lastLineIndex;
+        if (bucketSize <= i8 && i8 <= i) {
+            iIntValue = this.lastLineStartItemIndex;
+            iSpanOf = this.lastLineStartKnownSpan;
+            bucketSize = i8;
+        } else if (iMin == this.cachedBucketIndex && (i2 = i - bucketSize) < ((ArrayList) this.cachedBucket).size()) {
+            iIntValue = ((Number) ((ArrayList) this.cachedBucket).get(i2)).intValue();
+            bucketSize = i;
+            iSpanOf = 0;
+        }
+        if (bucketSize % getBucketSize() == 0) {
+            int i9 = i - bucketSize;
+            z = 2 <= i9 && i9 < getBucketSize();
+        }
+        if (z) {
+            this.cachedBucketIndex = iMin;
+            ((ArrayList) this.cachedBucket).clear();
+        }
+        if (bucketSize > i) {
+            InlineClassHelperKt.throwIllegalStateException("currentLine (" + bucketSize + ") > lineIndex (" + i + ')');
+        }
+        while (bucketSize < i && iIntValue < getTotalSize()) {
+            if (z) {
+                ((ArrayList) this.cachedBucket).add(Integer.valueOf(iIntValue));
+            }
+            int i10 = 0;
+            while (i10 < this.slotsPerLine && iIntValue < getTotalSize()) {
+                if (iSpanOf == 0) {
+                    i4 = iSpanOf;
+                    iSpanOf = spanOf(iIntValue);
+                } else {
+                    i4 = 0;
+                }
+                i10 += iSpanOf;
+                if (i10 > this.slotsPerLine) {
+                    break;
+                }
+                iIntValue++;
+                iSpanOf = i4;
+            }
+            bucketSize++;
+            if (bucketSize % getBucketSize() == 0 && iIntValue < getTotalSize()) {
+                if (this.buckets.size() != bucketSize / getBucketSize()) {
+                    InlineClassHelperKt.throwIllegalStateException("invalid starting point");
+                }
+                this.buckets.add(new Bucket(iIntValue, iSpanOf));
+            }
+        }
+        this.lastLineIndex = i;
+        this.lastLineStartItemIndex = iIntValue;
+        this.lastLineStartKnownSpan = iSpanOf;
+        ArrayList arrayList2 = new ArrayList();
+        int i11 = 0;
+        int i12 = iIntValue;
+        while (i11 < this.slotsPerLine && i12 < getTotalSize()) {
+            if (iSpanOf == 0) {
+                int i13 = iSpanOf;
+                iSpanOf = spanOf(i12);
+                i3 = i13;
+            } else {
+                i3 = 0;
+            }
+            i11 += iSpanOf;
+            if (i11 > this.slotsPerLine) {
+                break;
+            }
+            i12++;
+            arrayList2.add(GridItemSpan.m158boximpl(LazyGridSpanKt.GridItemSpan(iSpanOf)));
+            iSpanOf = i3;
+        }
+        return new LineConfiguration(iIntValue, arrayList2);
     }
 
     public final int getLineIndexOfItem(final int i) {
@@ -94,7 +184,7 @@ public final class LazyGridSpanLayoutProvider {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Integer.valueOf(((LazyGridSpanLayoutProvider.Bucket) obj).firstItemIndex - i);
             }
         };
@@ -108,9 +198,9 @@ public final class LazyGridSpanLayoutProvider {
                 break;
             }
             i2 = (i5 + i4) >>> 1;
-            int intValue = ((Number) function1.mo779invoke(arrayList.get(i2))).intValue();
-            if (intValue >= 0) {
-                if (intValue <= 0) {
+            int iIntValue = ((Number) function1.mo781invoke(arrayList.get(i2))).intValue();
+            if (iIntValue >= 0) {
+                if (iIntValue <= 0) {
                     break;
                 }
                 i4 = i2 - 1;
@@ -133,8 +223,8 @@ public final class LazyGridSpanLayoutProvider {
                 break;
             }
             int i9 = i7 + 1;
-            int spanOf = spanOf(i7);
-            i8 += spanOf;
+            int iSpanOf = spanOf(i7);
+            i8 += iSpanOf;
             int i10 = this.slotsPerLine;
             if (i8 >= i10) {
                 if (i8 == i10) {
@@ -142,7 +232,7 @@ public final class LazyGridSpanLayoutProvider {
                     i8 = 0;
                 } else {
                     bucketSize++;
-                    i8 = spanOf;
+                    i8 = iSpanOf;
                 }
             }
             if (bucketSize % getBucketSize() == 0 && bucketSize / getBucketSize() >= this.buckets.size()) {
@@ -164,7 +254,6 @@ public final class LazyGridSpanLayoutProvider {
         return (int) ((GridItemSpan) ((LazyGridInterval) intervalList$Interval.value).span.invoke(lazyGridItemSpanScopeImpl, Integer.valueOf(i - intervalList$Interval.startIndex))).packedValue;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Bucket {
         public final int firstItemIndex;
         public final int firstItemKnownSpan;

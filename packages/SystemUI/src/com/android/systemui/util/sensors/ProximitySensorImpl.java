@@ -6,7 +6,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.Execution;
-import com.android.systemui.util.sensors.ProximitySensorImpl;
 import com.android.systemui.util.sensors.ThresholdSensor;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -14,7 +13,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ProximitySensorImpl implements ProximitySensor {
     private static final boolean DEBUG;
@@ -38,12 +36,11 @@ public class ProximitySensorImpl implements ProximitySensor {
     final ThresholdSensor.Listener mPrimaryEventListener = new ThresholdSensor.Listener() { // from class: com.android.systemui.util.sensors.ProximitySensorImpl$$ExternalSyntheticLambda1
         @Override // com.android.systemui.util.sensors.ThresholdSensor.Listener
         public final void onThresholdCrossed(ThresholdSensorEvent thresholdSensorEvent) {
-            ProximitySensorImpl.this.onPrimarySensorEvent(thresholdSensorEvent);
+            this.f$0.onPrimarySensorEvent(thresholdSensorEvent);
         }
     };
     final ThresholdSensor.Listener mSecondaryEventListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.util.sensors.ProximitySensorImpl$1, reason: invalid class name */
     class AnonymousClass1 implements ThresholdSensor.Listener {
         public AnonymousClass1() {
@@ -71,7 +68,7 @@ public class ProximitySensorImpl implements ProximitySensor {
                 proximitySensorImpl.mCancelSecondaryRunnable = proximitySensorImpl.mDelayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.util.sensors.ProximitySensorImpl$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ProximitySensorImpl.AnonymousClass1.this.lambda$onThresholdCrossed$0();
+                        this.f$0.lambda$onThresholdCrossed$0();
                     }
                 }, ProximitySensorImpl.SECONDARY_PING_INTERVAL_MS);
             }
@@ -164,7 +161,7 @@ public class ProximitySensorImpl implements ProximitySensor {
             this.mListeners.forEach(new Consumer() { // from class: com.android.systemui.util.sensors.ProximitySensorImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((ThresholdSensor.Listener) obj).onThresholdCrossed(ThresholdSensorEvent.this);
+                    ((ThresholdSensor.Listener) obj).onThresholdCrossed(thresholdSensorEvent);
                 }
             });
         }

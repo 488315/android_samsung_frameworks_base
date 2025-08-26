@@ -31,12 +31,12 @@ public class DateSorter {
         calendar.add(2, -1);
         this.mBins[3] = calendar.getTimeInMillis();
         Locale locale = resources.getConfiguration().locale;
-        DateSorterBridge createInstance = DateSorterBridge.createInstance(locale == null ? Locale.getDefault() : locale);
-        this.mLabels[0] = createInstance.getToday();
-        this.mLabels[1] = createInstance.getYesterday();
-        HashMap hashMap = new HashMap();
-        hashMap.put(Contract.Events.Projection.COUNT_ONLY, 7);
-        this.mLabels[2] = PluralsMessageFormatter.format(resources, hashMap, R.string.last_num_days);
+        DateSorterBridge dateSorterBridgeCreateInstance = DateSorterBridge.createInstance(locale == null ? Locale.getDefault() : locale);
+        this.mLabels[0] = dateSorterBridgeCreateInstance.getToday();
+        this.mLabels[1] = dateSorterBridgeCreateInstance.getYesterday();
+        HashMap map = new HashMap();
+        map.put(Contract.Events.Projection.COUNT_ONLY, 7);
+        this.mLabels[2] = PluralsMessageFormatter.format(resources, map, R.string.last_num_days);
         this.mLabels[3] = context.getString(R.string.last_month);
         this.mLabels[4] = context.getString(R.string.older);
     }

@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarWindowStateController {
     public final Set listeners;
@@ -17,7 +16,7 @@ public final class StatusBarWindowStateController {
         CommandQueue.Callbacks callbacks = new CommandQueue.Callbacks() { // from class: com.android.systemui.statusbar.window.StatusBarWindowStateController$commandQueueCallback$1
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
             public final void setWindowState(int i2, int i3, int i4) {
-                StatusBarWindowStateController statusBarWindowStateController = StatusBarWindowStateController.this;
+                StatusBarWindowStateController statusBarWindowStateController = this.this$0;
                 if (i2 == statusBarWindowStateController.thisDisplayId && i3 == 1 && statusBarWindowStateController.windowState != i4) {
                     statusBarWindowStateController.windowState = i4;
                     Iterator it = ((HashSet) statusBarWindowStateController.listeners).iterator();

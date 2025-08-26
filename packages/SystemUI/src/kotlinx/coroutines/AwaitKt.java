@@ -1,64 +1,71 @@
 package kotlinx.coroutines;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+import java.util.Collection;
+import java.util.Iterator;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+
 /* loaded from: classes4.dex */
 public abstract class AwaitKt {
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+
+    /* renamed from: kotlinx.coroutines.AwaitKt$joinAll$3, reason: invalid class name */
+    final class AnonymousClass3 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AwaitKt.joinAll(null, this);
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object joinAll(java.util.Collection r4, kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            boolean r0 = r5 instanceof kotlinx.coroutines.AwaitKt$joinAll$3
-            if (r0 == 0) goto L13
-            r0 = r5
-            kotlinx.coroutines.AwaitKt$joinAll$3 r0 = (kotlinx.coroutines.AwaitKt$joinAll$3) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            kotlinx.coroutines.AwaitKt$joinAll$3 r0 = new kotlinx.coroutines.AwaitKt$joinAll$3
-            r0.<init>(r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            java.util.Iterator r4 = (java.util.Iterator) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L3a
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r5)
-            java.util.Iterator r4 = r4.iterator()
-        L3a:
-            boolean r5 = r4.hasNext()
-            if (r5 == 0) goto L51
-            java.lang.Object r5 = r4.next()
-            kotlinx.coroutines.Job r5 = (kotlinx.coroutines.Job) r5
-            r0.L$0 = r4
-            r0.label = r3
-            java.lang.Object r5 = r5.join(r0)
-            if (r5 != r1) goto L3a
-            return r1
-        L51:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.AwaitKt.joinAll(java.util.Collection, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object joinAll(Collection collection, ContinuationImpl continuationImpl) {
+        AnonymousClass3 anonymousClass3;
+        Iterator it;
+        if (continuationImpl instanceof AnonymousClass3) {
+            anonymousClass3 = (AnonymousClass3) continuationImpl;
+            int i = anonymousClass3.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass3.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass3 = new AnonymousClass3(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass3.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass3.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            it = collection.iterator();
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            it = (Iterator) anonymousClass3.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        while (it.hasNext()) {
+            Job job = (Job) it.next();
+            anonymousClass3.L$0 = it;
+            anonymousClass3.label = 1;
+            if (job.join(anonymousClass3) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        }
+        return Unit.INSTANCE;
     }
 }

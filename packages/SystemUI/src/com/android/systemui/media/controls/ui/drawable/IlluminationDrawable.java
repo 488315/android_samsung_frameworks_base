@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import kotlin.jvm.internal.Intrinsics;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class IlluminationDrawable extends Drawable {
     public static final int $stable = 8;
@@ -45,48 +44,40 @@ public final class IlluminationDrawable extends Drawable {
         fArr[2] = MathUtils.constrain(f < 1.0f - f2 ? f + f2 : f - f2, 0.0f, 1.0f);
         final int color = this.paint.getColor();
         final int i = this.highlightColor;
-        final int HSLToColor = ColorUtils.HSLToColor(this.tmpHsl);
+        final int iHSLToColor = ColorUtils.HSLToColor(this.tmpHsl);
         ValueAnimator valueAnimator = this.backgroundAnimation;
         if (valueAnimator != null) {
             valueAnimator.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(370L);
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.IlluminationDrawable$animateBackground$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(370L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.IlluminationDrawable$animateBackground$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                Paint paint;
-                int i2;
-                ArrayList arrayList;
-                int i3;
-                float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                paint = IlluminationDrawable.this.paint;
-                int i4 = color;
-                i2 = IlluminationDrawable.this.backgroundColor;
-                paint.setColor(ColorUtils.blendARGB(i4, i2, floatValue));
-                IlluminationDrawable.this.highlightColor = ColorUtils.blendARGB(i, HSLToColor, floatValue);
-                arrayList = IlluminationDrawable.this.lightSources;
-                IlluminationDrawable illuminationDrawable = IlluminationDrawable.this;
+                float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                this.this$0.paint.setColor(ColorUtils.blendARGB(color, this.this$0.backgroundColor, fFloatValue));
+                this.this$0.highlightColor = ColorUtils.blendARGB(i, iHSLToColor, fFloatValue);
+                ArrayList arrayList = this.this$0.lightSources;
+                IlluminationDrawable illuminationDrawable = this.this$0;
                 int size = arrayList.size();
-                int i5 = 0;
-                while (i5 < size) {
-                    Object obj = arrayList.get(i5);
-                    i5++;
-                    i3 = illuminationDrawable.highlightColor;
-                    ((LightSourceDrawable) obj).setHighlightColor(i3);
+                int i2 = 0;
+                while (i2 < size) {
+                    Object obj = arrayList.get(i2);
+                    i2++;
+                    ((LightSourceDrawable) obj).setHighlightColor(illuminationDrawable.highlightColor);
                 }
-                IlluminationDrawable.this.invalidateSelf();
+                this.this$0.invalidateSelf();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.IlluminationDrawable$animateBackground$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.IlluminationDrawable$animateBackground$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                IlluminationDrawable.this.backgroundAnimation = null;
+                this.this$0.backgroundAnimation = null;
             }
         });
-        ofFloat.start();
-        this.backgroundAnimation = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.backgroundAnimation = valueAnimatorOfFloat;
     }
 
     private final void setBackgroundColor(int i) {
@@ -111,9 +102,9 @@ public final class IlluminationDrawable extends Drawable {
         super.applyTheme(theme);
         int[] iArr = this.themeAttrs;
         if (iArr != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(iArr, R$styleable.IlluminationDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr, R$styleable.IlluminationDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -156,10 +147,10 @@ public final class IlluminationDrawable extends Drawable {
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) {
-        TypedArray obtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R$styleable.IlluminationDrawable);
-        this.themeAttrs = obtainAttributes.extractThemeAttrs();
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R$styleable.IlluminationDrawable);
+        this.themeAttrs = typedArrayObtainAttributes.extractThemeAttrs();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
     }
 
     public final void registerLightSource(View view) {

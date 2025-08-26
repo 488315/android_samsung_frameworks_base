@@ -45,38 +45,38 @@ public final class ParcelableUsageEventList implements Parcelable {
     }
 
     private ParcelableUsageEventList(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mList = new ArrayList(readInt);
-        if (readInt <= 0) {
+        int i = parcel.readInt();
+        this.mList = new ArrayList(i);
+        if (i <= 0) {
             return;
         }
-        int i = 0;
-        while (i < readInt && parcel.readInt() != 0) {
+        int i2 = 0;
+        while (i2 < i && parcel.readInt() != 0) {
             this.mList.add(readEventFromParcel(parcel));
-            i++;
+            i2++;
         }
-        if (i >= readInt) {
+        if (i2 >= i) {
             return;
         }
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        while (i < readInt) {
-            Parcel obtain = Parcel.obtain();
-            Parcel obtain2 = Parcel.obtain();
-            obtain.writeInt(i);
+        IBinder strongBinder = parcel.readStrongBinder();
+        while (i2 < i) {
+            Parcel parcelObtain = Parcel.obtain();
+            Parcel parcelObtain2 = Parcel.obtain();
+            parcelObtain.writeInt(i2);
             try {
                 try {
-                    readStrongBinder.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    while (i < readInt && obtain2.readInt() != 0) {
-                        this.mList.add(readEventFromParcel(obtain2));
-                        i++;
+                    strongBinder.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    while (i2 < i && parcelObtain2.readInt() != 0) {
+                        this.mList.add(readEventFromParcel(parcelObtain2));
+                        i2++;
                     }
                 } catch (RemoteException e) {
-                    throw new BadParcelableException("Failure retrieving array; only received " + i + " of " + readInt, e);
+                    throw new BadParcelableException("Failure retrieving array; only received " + i2 + " of " + i, e);
                 }
             } finally {
-                obtain2.recycle();
-                obtain.recycle();
+                parcelObtain2.recycle();
+                parcelObtain.recycle();
             }
         }
     }
@@ -103,15 +103,15 @@ public final class ParcelableUsageEventList implements Parcelable {
                         if (ParcelableUsageEventList.this.mList == null) {
                             throw new IllegalArgumentException("Attempt to transfer null list, did transfer finish?");
                         }
-                        int readInt = parcel2.readInt();
+                        int i5 = parcel2.readInt();
                         try {
                             parcel3.writeNoException();
-                            while (readInt < size && parcel3.dataSize() < 65536) {
+                            while (i5 < size && parcel3.dataSize() < 65536) {
                                 parcel3.writeInt(1);
-                                ParcelableUsageEventList.this.writeEventToParcel((UsageEvents.Event) ParcelableUsageEventList.this.mList.get(readInt), parcel3, i);
-                                readInt++;
+                                ParcelableUsageEventList.this.writeEventToParcel((UsageEvents.Event) ParcelableUsageEventList.this.mList.get(i5), parcel3, i);
+                                i5++;
                             }
-                            if (readInt < size) {
+                            if (i5 < size) {
                                 parcel3.writeInt(0);
                             } else {
                                 ParcelableUsageEventList.this.mList = null;

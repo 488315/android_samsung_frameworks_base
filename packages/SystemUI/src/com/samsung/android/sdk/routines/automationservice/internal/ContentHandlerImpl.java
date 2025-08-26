@@ -9,12 +9,10 @@ import com.samsung.android.sdk.routines.automationservice.interfaces.ChangeObser
 import com.samsung.android.sdk.routines.automationservice.interfaces.ContentHandler;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ContentHandlerImpl implements ContentHandler {
-    public ContentHandlerImpl$register$1 contentObserver;
+    public AnonymousClass1 contentObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,13 +31,12 @@ public final class ContentHandlerImpl implements ContentHandler {
     }
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.sdk.routines.automationservice.internal.ContentHandlerImpl$register$1] */
-    public final void register(final Context context, String str, final ChangeObserver changeObserver) {
-        ContentHandlerImpl$register$1 contentHandlerImpl$register$1 = this.contentObserver;
-        if (contentHandlerImpl$register$1 != null) {
-            context.getContentResolver().unregisterContentObserver(contentHandlerImpl$register$1);
+    public final void register(Context context, String str, ChangeObserver changeObserver) {
+        AnonymousClass1 anonymousClass1 = this.contentObserver;
+        if (anonymousClass1 != null) {
+            context.getContentResolver().unregisterContentObserver(anonymousClass1);
         }
-        final Handler handler = new Handler(Looper.getMainLooper());
-        this.contentObserver = new ContentObserver(context, handler) { // from class: com.samsung.android.sdk.routines.automationservice.internal.ContentHandlerImpl$register$1
+        this.contentObserver = new ContentObserver(context, new Handler(Looper.getMainLooper())) { // from class: com.samsung.android.sdk.routines.automationservice.internal.ContentHandlerImpl.register.1
             {
                 super(handler);
             }
@@ -52,14 +49,14 @@ public final class ContentHandlerImpl implements ContentHandler {
                 if (uri == null || uri.getLastPathSegment() == null) {
                     return;
                 }
-                ChangeObserver.this.getClass();
+                this.$observer.getClass();
             }
         };
-        Uri parse = Uri.parse("content://com.samsung.android.app.routines.routineinfoprovider/core_service/" + str + '/');
-        parse.getClass();
-        ContentHandlerImpl$register$1 contentHandlerImpl$register$12 = this.contentObserver;
-        if (contentHandlerImpl$register$12 != null) {
-            context.getContentResolver().registerContentObserver(parse, true, contentHandlerImpl$register$12);
+        Uri uri = Uri.parse("content://com.samsung.android.app.routines.routineinfoprovider/core_service/" + str + '/');
+        uri.getClass();
+        AnonymousClass1 anonymousClass12 = this.contentObserver;
+        if (anonymousClass12 != null) {
+            context.getContentResolver().registerContentObserver(uri, true, anonymousClass12);
         }
     }
 }

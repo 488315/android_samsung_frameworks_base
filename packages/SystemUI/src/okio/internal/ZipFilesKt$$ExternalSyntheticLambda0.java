@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import okio.RealBufferedSource;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class ZipFilesKt$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId = 1;
@@ -29,22 +28,22 @@ public final /* synthetic */ class ZipFilesKt$$ExternalSyntheticLambda0 implemen
     /* JADX WARN: Type inference failed for: r12v22, types: [T, java.lang.Long] */
     /* JADX WARN: Type inference failed for: r12v9, types: [T, java.lang.Integer] */
     @Override // kotlin.jvm.functions.Function2
-    public final Object invoke(Object obj, Object obj2) {
+    public final Object invoke(Object obj, Object obj2) throws IOException {
         int i = this.$r8$classId;
-        int intValue = ((Integer) obj).intValue();
+        int iIntValue = ((Integer) obj).intValue();
         Long l = (Long) obj2;
         switch (i) {
             case 0:
-                long longValue = l.longValue();
-                if (intValue == 21589) {
-                    if (longValue < 1) {
+                long jLongValue = l.longValue();
+                if (iIntValue == 21589) {
+                    if (jLongValue < 1) {
                         throw new IOException("bad zip: extended timestamp extra too short");
                     }
                     RealBufferedSource realBufferedSource = this.f$0;
-                    byte readByte = realBufferedSource.readByte();
-                    boolean z = (readByte & 1) == 1;
-                    boolean z2 = (readByte & 2) == 2;
-                    boolean z3 = (readByte & 4) == 4;
+                    byte b = realBufferedSource.readByte();
+                    boolean z = (b & 1) == 1;
+                    boolean z2 = (b & 2) == 2;
+                    boolean z3 = (b & 4) == 4;
                     long j = z ? 5L : 1L;
                     if (z2) {
                         j += 4;
@@ -52,7 +51,7 @@ public final /* synthetic */ class ZipFilesKt$$ExternalSyntheticLambda0 implemen
                     if (z3) {
                         j += 4;
                     }
-                    if (longValue < j) {
+                    if (jLongValue < j) {
                         throw new IOException("bad zip: extended timestamp extra too short");
                     }
                     if (z) {
@@ -67,13 +66,13 @@ public final /* synthetic */ class ZipFilesKt$$ExternalSyntheticLambda0 implemen
                 }
                 return Unit.INSTANCE;
             default:
-                long longValue2 = l.longValue();
-                if (intValue == 1) {
+                long jLongValue2 = l.longValue();
+                if (iIntValue == 1) {
                     Ref$ObjectRef ref$ObjectRef = this.f$1;
                     if (ref$ObjectRef.element != 0) {
                         throw new IOException("bad zip: NTFS extra attribute tag 0x0001 repeated");
                     }
-                    if (longValue2 != 24) {
+                    if (jLongValue2 != 24) {
                         throw new IOException("bad zip: NTFS extra attribute tag 0x0001 size != 24");
                     }
                     RealBufferedSource realBufferedSource2 = this.f$0;

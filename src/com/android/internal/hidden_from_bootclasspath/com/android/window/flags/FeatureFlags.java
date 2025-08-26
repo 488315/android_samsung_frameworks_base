@@ -384,8 +384,6 @@ public interface FeatureFlags {
 
     boolean jankApi();
 
-    boolean keepAppWindowHideWhileLocked();
-
     boolean keyboardShortcutsToSwitchDesks();
 
     boolean keyguardGoingAwayTimeout();

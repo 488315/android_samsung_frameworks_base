@@ -27,7 +27,6 @@ import com.android.systemui.screenshot.sep.ScreenCaptureHelperForLargeCoverScree
 import com.android.systemui.screenshot.sep.ScreenshotUtils;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SemScreenshotLayout extends FrameLayout {
     public static final PathInterpolator CUSTOM_INTERPOLATOR = new PathInterpolator(0.7f, 0.0f, 0.7f, 1.0f);
@@ -46,10 +45,10 @@ public class SemScreenshotLayout extends FrameLayout {
 
     public final void addCaptureEffectViewInLayout(ScreenCaptureHelper screenCaptureHelper) {
         FrameLayout.LayoutParams layoutParams;
-        boolean isB5ScreenEffect = screenCaptureHelper.isB5ScreenEffect();
+        boolean zIsB5ScreenEffect = screenCaptureHelper.isB5ScreenEffect();
         boolean z = screenCaptureHelper instanceof ScreenCaptureHelperForLargeCoverScreen;
-        Log.i(this.TAG, "isB5ScreenEffect: " + isB5ScreenEffect + " shouldShowLargeCoverScreenEffect: " + z);
-        if (isB5ScreenEffect) {
+        Log.i(this.TAG, "isB5ScreenEffect: " + zIsB5ScreenEffect + " shouldShowLargeCoverScreenEffect: " + z);
+        if (zIsB5ScreenEffect) {
             this.mAnimationView = new CaptureEffectViewB5(getContext());
         } else if (z) {
             this.mAnimationView = new CaptureEffectViewCoverScreen(getContext());
@@ -84,7 +83,7 @@ public class SemScreenshotLayout extends FrameLayout {
         return true;
     }
 
-    public final void startAnimation(int i, int i2) {
+    public final void startAnimation(int i, int i2) throws Resources.NotFoundException {
         Resources resources = getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.gradient_screenshot_effect_width);
         if (Settings.System.getIntForUser(((FrameLayout) this).mContext.getContentResolver(), SettingsHelper.INDEX_ONE_HAND_MODE_RUNNING, 0, -2) == 1 || ScreenshotUtils.isDesktopMode(((FrameLayout) this).mContext)) {
@@ -104,9 +103,9 @@ public class SemScreenshotLayout extends FrameLayout {
             captureEffectView.setEffectParams(dimensionPixelSize, i3, i3);
         }
         this.mAnimationView.setVisibility(4);
-        ValueAnimator ofInt = ValueAnimator.ofInt(0, dimensionPixelSize);
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, dimensionPixelSize);
         final int i4 = 0;
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$$ExternalSyntheticLambda0
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$$ExternalSyntheticLambda0
             public final /* synthetic */ SemScreenshotLayout f$0;
 
             {
@@ -129,11 +128,11 @@ public class SemScreenshotLayout extends FrameLayout {
                 }
             }
         });
-        ofInt.setInterpolator(SINEINOUT70);
-        ofInt.setDuration(150L);
-        ValueAnimator ofInt2 = ValueAnimator.ofInt(dimensionPixelSize, 0);
+        valueAnimatorOfInt.setInterpolator(SINEINOUT70);
+        valueAnimatorOfInt.setDuration(150L);
+        ValueAnimator valueAnimatorOfInt2 = ValueAnimator.ofInt(dimensionPixelSize, 0);
         final int i5 = 1;
-        ofInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$$ExternalSyntheticLambda0
+        valueAnimatorOfInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$$ExternalSyntheticLambda0
             public final /* synthetic */ SemScreenshotLayout f$0;
 
             {
@@ -156,11 +155,11 @@ public class SemScreenshotLayout extends FrameLayout {
                 }
             }
         });
-        ofInt2.setInterpolator(CUSTOM_INTERPOLATOR);
-        ofInt2.setDuration(167L);
-        ofInt2.setStartDelay(216L);
+        valueAnimatorOfInt2.setInterpolator(CUSTOM_INTERPOLATOR);
+        valueAnimatorOfInt2.setDuration(167L);
+        valueAnimatorOfInt2.setStartDelay(216L);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofInt, ofInt2);
+        animatorSet.playTogether(valueAnimatorOfInt, valueAnimatorOfInt2);
         animatorSet.addListener(new AnonymousClass1());
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         final AlphaAnimation alphaAnimation2 = new AlphaAnimation(1.0f, 0.0f);
@@ -198,7 +197,6 @@ public class SemScreenshotLayout extends FrameLayout {
         this.TAG = "Screenshot";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$1, reason: invalid class name */
     public class AnonymousClass1 implements Animator.AnimatorListener {
         public AnonymousClass1() {
@@ -225,7 +223,6 @@ public class SemScreenshotLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenshot.sep.widget.SemScreenshotLayout$3, reason: invalid class name */
     public class AnonymousClass3 implements Animation.AnimationListener {
         public AnonymousClass3() {

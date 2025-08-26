@@ -23,7 +23,6 @@ import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.MutableStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Function3 $block;
@@ -35,7 +34,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
@@ -46,9 +44,8 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
         final /* synthetic */ MutableStateFlow $visibilityState;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03781 extends SuspendLambda implements Function2 {
+        final class C05831 extends SuspendLambda implements Function2 {
             final /* synthetic */ MutableStateFlow $decorTint;
             final /* synthetic */ MutableStateFlow $iconTint;
             final /* synthetic */ Ref$BooleanRef $isCollecting;
@@ -57,15 +54,14 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
             private /* synthetic */ Object L$0;
             int label;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$1$1$1$1, reason: invalid class name and collision with other inner class name */
-            final class C03791 extends SuspendLambda implements Function2 {
+            final class C05841 extends SuspendLambda implements Function2 {
                 final /* synthetic */ SingleBindableStatusBarIconView $view;
                 final /* synthetic */ MutableStateFlow $visibilityState;
                 int label;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C03791(MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
+                public C05841(MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
                     super(2, continuation);
                     this.$visibilityState = mutableStateFlow;
                     this.$view = singleBindableStatusBarIconView;
@@ -73,12 +69,12 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    return new C03791(this.$visibilityState, this.$view, continuation);
+                    return new C05841(this.$visibilityState, this.$view, continuation);
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C03791) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C05841) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -92,9 +88,9 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView.Companion.withDefaultBinding.1.1.1.1.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                int intValue = ((Number) obj2).intValue();
+                                int iIntValue = ((Number) obj2).intValue();
                                 ModernStatusBarViewVisibilityHelper.Companion companion = ModernStatusBarViewVisibilityHelper.Companion;
-                                SingleBindableStatusBarIconView singleBindableStatusBarIconView2 = SingleBindableStatusBarIconView.this;
+                                SingleBindableStatusBarIconView singleBindableStatusBarIconView2 = singleBindableStatusBarIconView;
                                 ImageView imageView = singleBindableStatusBarIconView2.iconView;
                                 if (imageView == null) {
                                     imageView = null;
@@ -102,7 +98,7 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                                 StatusBarIconView statusBarIconView = singleBindableStatusBarIconView2.dotView;
                                 StatusBarIconView statusBarIconView2 = statusBarIconView != null ? statusBarIconView : null;
                                 companion.getClass();
-                                ModernStatusBarViewVisibilityHelper.Companion.setVisibilityState(imageView, statusBarIconView2, intValue);
+                                ModernStatusBarViewVisibilityHelper.Companion.setVisibilityState(imageView, statusBarIconView2, iIntValue);
                                 return Unit.INSTANCE;
                             }
                         };
@@ -120,7 +116,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$1$1$1$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 final /* synthetic */ MutableStateFlow $iconTint;
@@ -155,16 +150,16 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView.Companion.withDefaultBinding.1.1.1.2.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                int intValue = ((Number) obj2).intValue();
-                                ColorStateList valueOf = ColorStateList.valueOf(intValue);
-                                SingleBindableStatusBarIconView singleBindableStatusBarIconView2 = SingleBindableStatusBarIconView.this;
+                                int iIntValue = ((Number) obj2).intValue();
+                                ColorStateList colorStateListValueOf = ColorStateList.valueOf(iIntValue);
+                                SingleBindableStatusBarIconView singleBindableStatusBarIconView2 = singleBindableStatusBarIconView;
                                 ImageView imageView = singleBindableStatusBarIconView2.iconView;
                                 if (imageView == null) {
                                     imageView = null;
                                 }
-                                imageView.setImageTintList(valueOf);
+                                imageView.setImageTintList(colorStateListValueOf);
                                 StatusBarIconView statusBarIconView = singleBindableStatusBarIconView2.dotView;
-                                (statusBarIconView != null ? statusBarIconView : null).setDecorColor(intValue);
+                                (statusBarIconView != null ? statusBarIconView : null).setDecorColor(iIntValue);
                                 return Unit.INSTANCE;
                             }
                         };
@@ -182,7 +177,6 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$1$1$1$3, reason: invalid class name */
             final class AnonymousClass3 extends SuspendLambda implements Function2 {
                 final /* synthetic */ MutableStateFlow $decorTint;
@@ -217,12 +211,12 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView.Companion.withDefaultBinding.1.1.1.3.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                int intValue = ((Number) obj2).intValue();
-                                StatusBarIconView statusBarIconView = SingleBindableStatusBarIconView.this.dotView;
+                                int iIntValue = ((Number) obj2).intValue();
+                                StatusBarIconView statusBarIconView = singleBindableStatusBarIconView.dotView;
                                 if (statusBarIconView == null) {
                                     statusBarIconView = null;
                                 }
-                                statusBarIconView.setDecorColor(intValue);
+                                statusBarIconView.setDecorColor(iIntValue);
                                 return Unit.INSTANCE;
                             }
                         };
@@ -241,7 +235,7 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
             }
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C03781(Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, MutableStateFlow mutableStateFlow2, MutableStateFlow mutableStateFlow3, Continuation continuation) {
+            public C05831(Ref$BooleanRef ref$BooleanRef, MutableStateFlow mutableStateFlow, SingleBindableStatusBarIconView singleBindableStatusBarIconView, MutableStateFlow mutableStateFlow2, MutableStateFlow mutableStateFlow3, Continuation continuation) {
                 super(2, continuation);
                 this.$isCollecting = ref$BooleanRef;
                 this.$visibilityState = mutableStateFlow;
@@ -252,14 +246,14 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C03781 c03781 = new C03781(this.$isCollecting, this.$visibilityState, this.$view, this.$iconTint, this.$decorTint, continuation);
-                c03781.L$0 = obj;
-                return c03781;
+                C05831 c05831 = new C05831(this.$isCollecting, this.$visibilityState, this.$view, this.$iconTint, this.$decorTint, continuation);
+                c05831.L$0 = obj;
+                return c05831;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C03781) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C05831) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -270,7 +264,7 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                     if (i == 0) {
                         ResultKt.throwOnFailure(obj);
                         CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-                        CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C03791(this.$visibilityState, this.$view, null), 7);
+                        CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C05841(this.$visibilityState, this.$view, null), 7);
                         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$iconTint, this.$view, null), 7);
                         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$decorTint, this.$view, null), 7);
                         this.label = 1;
@@ -320,9 +314,9 @@ final class SingleBindableStatusBarIconView$Companion$withDefaultBinding$1 exten
                 ResultKt.throwOnFailure(obj);
                 LifecycleOwner lifecycleOwner = this.$$this$repeatWhenAttached;
                 Lifecycle.State state = Lifecycle.State.STARTED;
-                C03781 c03781 = new C03781(this.$isCollecting, this.$visibilityState, this.$view, this.$iconTint, this.$decorTint, null);
+                C05831 c05831 = new C05831(this.$isCollecting, this.$visibilityState, this.$view, this.$iconTint, this.$decorTint, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c03781, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c05831, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

@@ -184,8 +184,8 @@ public final class MediaRoute2Info implements Parcelable {
         this.mIsVisibilityRestricted = parcel.readBoolean();
         this.mAllowedPackages = Set.of((Object[]) parcel.createString8Array());
         ArrayList arrayList = new ArrayList();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             arrayList.add(Set.of((Object[]) parcel.createString8Array()));
         }
         this.mRequiredPermissions = List.copyOf(arrayList);
@@ -386,9 +386,7 @@ public final class MediaRoute2Info implements Parcelable {
         return "MediaRoute2Info{ id=" + getId() + ", name=" + getName() + ", type=" + getDeviceTypeString(getType()) + ", routingTypes=" + getRoutingTypeFlagsString(getSupportedRoutingTypes()) + ", isSystem=" + isSystemRoute() + ", features=" + getFeatures() + ", iconUri=" + getIconUri() + ", description=" + getDescription() + ", connectionState=" + getConnectionState() + ", clientPackageName=" + getClientPackageName() + ", " + getVolumeString(this.mVolume, this.mVolumeMax, this.mVolumeHandling) + ", address=" + getAddress() + ", deduplicationIds=" + String.join(",", getDeduplicationIds()) + ", providerId=" + getProviderId() + ", isVisibilityRestricted=" + this.mIsVisibilityRestricted + ", allowedPackages=" + String.join(",", this.mAllowedPackages) + ", mRequiredPermissions=" + ((String) this.mRequiredPermissions.stream().map(new Function() { // from class: android.media.MediaRoute2Info$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String join;
-                join = String.join(",", (Set) obj);
-                return join;
+                return String.join(",", (Set) obj);
             }
         }).collect(Collectors.joining("),(", NavigationBarInflaterView.KEY_CODE_START, NavigationBarInflaterView.KEY_CODE_END))) + ", suitabilityStatus=" + this.mSuitabilityStatus + " }";
     }

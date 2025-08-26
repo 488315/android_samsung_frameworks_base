@@ -78,16 +78,14 @@ public class SessionManager {
         this.mSessionCleanupTimeoutMs = new ISessionCleanupTimeoutMs() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda1
             @Override // android.telecom.Logging.SessionManager.ISessionCleanupTimeoutMs
             public final long get() {
-                long lambda$new$0;
-                lambda$new$0 = SessionManager.this.lambda$new$0();
-                return lambda$new$0;
+                return this.f$0.lambda$new$0();
             }
         };
         this.mSessionListeners = new ArrayList();
         this.mCleanStaleSessions = new java.lang.Runnable() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                SessionManager.this.lambda$new$1();
+                this.f$0.lambda$new$1();
             }
         };
     }
@@ -110,9 +108,7 @@ public class SessionManager {
         this.mSessionCleanupTimeoutMs = new ISessionCleanupTimeoutMs() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda1
             @Override // android.telecom.Logging.SessionManager.ISessionCleanupTimeoutMs
             public final long get() {
-                long lambda$new$0;
-                lambda$new$0 = SessionManager.this.lambda$new$0();
-                return lambda$new$0;
+                return this.f$0.lambda$new$0();
             }
         };
         this.mSessionListeners = new ArrayList();
@@ -279,9 +275,9 @@ public class SessionManager {
                 parentSession.removeChild(session);
             }
             if (z) {
-                long currentTimeMillis = System.currentTimeMillis() - session.getExecutionStartTimeMilliseconds();
-                Log.d(LOGGING_TAG, "END_SESSION (dur: " + currentTimeMillis + " ms): " + session, new Object[0]);
-                notifySessionCompleteListeners(session.getShortMethodName(), currentTimeMillis);
+                long jCurrentTimeMillis = System.currentTimeMillis() - session.getExecutionStartTimeMilliseconds();
+                Log.d(LOGGING_TAG, "END_SESSION (dur: " + jCurrentTimeMillis + " ms): " + session, new Object[0]);
+                notifySessionCompleteListeners(session.getShortMethodName(), jCurrentTimeMillis);
             }
             session = parentSession;
         }
@@ -299,12 +295,12 @@ public class SessionManager {
                 endParentSessionsRecursive(parentSession);
                 return;
             }
-            long currentTimeMillis = System.currentTimeMillis() - session.getExecutionStartTimeMilliseconds();
-            Log.d(LOGGING_TAG, "END_SESSION (dur: " + currentTimeMillis + " ms): " + session.toString(), new Object[0]);
+            long jCurrentTimeMillis = System.currentTimeMillis() - session.getExecutionStartTimeMilliseconds();
+            Log.d(LOGGING_TAG, "END_SESSION (dur: " + jCurrentTimeMillis + " ms): " + session.toString(), new Object[0]);
             if (session.isExternal()) {
                 return;
             }
-            notifySessionCompleteListeners(session.getShortMethodName(), currentTimeMillis);
+            notifySessionCompleteListeners(session.getShortMethodName(), jCurrentTimeMillis);
         }
     }
 
@@ -329,18 +325,18 @@ public class SessionManager {
     }
 
     private synchronized String getNextSessionID() {
-        Integer valueOf;
+        Integer numValueOf;
         int i = this.sCodeEntryCounter;
         this.sCodeEntryCounter = i + 1;
-        valueOf = Integer.valueOf(i);
-        valueOf.getClass();
+        numValueOf = Integer.valueOf(i);
+        numValueOf.getClass();
         if (i >= 262144) {
             restartSessionCounter();
             int i2 = this.sCodeEntryCounter;
             this.sCodeEntryCounter = i2 + 1;
-            valueOf = Integer.valueOf(i2);
+            numValueOf = Integer.valueOf(i2);
         }
-        return getBase64Encoding(valueOf.intValue());
+        return getBase64Encoding(numValueOf.intValue());
     }
 
     private synchronized void restartSessionCounter() {
@@ -368,12 +364,12 @@ public class SessionManager {
 
     public synchronized void cleanupStaleSessions(long j) {
         StringBuilder sb = new StringBuilder("Stale Sessions Cleaned:");
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         Iterator<Map.Entry<Integer, Session>> it = this.mSessionMapper.entrySet().iterator();
         boolean z = false;
         while (it.hasNext()) {
             Session value = it.next().getValue();
-            long executionStartTimeMilliseconds = currentTimeMillis - value.getExecutionStartTimeMilliseconds();
+            long executionStartTimeMilliseconds = jCurrentTimeMillis - value.getExecutionStartTimeMilliseconds();
             if (executionStartTimeMilliseconds > j) {
                 it.remove();
                 sb.append(ShaderAssembler.NEWLINE);

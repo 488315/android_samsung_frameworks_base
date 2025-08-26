@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,16 +49,16 @@ final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements 
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.flags.PluggedInCondition$canRestartNow$1$batteryCallback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             ((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).addCallback(r1);
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).mPluggedIn));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).mPluggedIn));
             final PluggedInCondition pluggedInCondition = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.flags.PluggedInCondition$canRestartNow$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((BatteryControllerImpl) ((BatteryController) PluggedInCondition.this.batteryControllerLazy.get())).removeCallback(r1);
+                    ((BatteryControllerImpl) ((BatteryController) pluggedInCondition.batteryControllerLazy.get())).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

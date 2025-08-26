@@ -76,14 +76,14 @@ public final class SizeConfigurationBuckets implements Parcelable {
         if (sizeConfigurationBuckets == null) {
             return i;
         }
-        boolean areNonSizeLayoutFieldsUnchanged = areNonSizeLayoutFieldsUnchanged(configuration.screenLayout, configuration2.screenLayout);
+        boolean zAreNonSizeLayoutFieldsUnchanged = areNonSizeLayoutFieldsUnchanged(configuration.screenLayout, configuration2.screenLayout);
         if ((i & 1024) != 0 && !sizeConfigurationBuckets.crossesHorizontalSizeThreshold(configuration.screenWidthDp, configuration2.screenWidthDp) && !sizeConfigurationBuckets.crossesVerticalSizeThreshold(configuration.screenHeightDp, configuration2.screenHeightDp)) {
             i &= -1025;
         }
         if ((i & 2048) != 0 && !sizeConfigurationBuckets.crossesSmallestSizeThreshold(configuration.smallestScreenWidthDp, configuration2.smallestScreenWidthDp)) {
             i &= -2049;
         }
-        return ((i & 256) == 0 || !areNonSizeLayoutFieldsUnchanged || sizeConfigurationBuckets.crossesScreenLayoutSizeThreshold(configuration, configuration2) || sizeConfigurationBuckets.crossesScreenLayoutLongThreshold(configuration.screenLayout, configuration2.screenLayout)) ? i : i & (-257);
+        return ((i & 256) == 0 || !zAreNonSizeLayoutFieldsUnchanged || sizeConfigurationBuckets.crossesScreenLayoutSizeThreshold(configuration, configuration2) || sizeConfigurationBuckets.crossesScreenLayoutLongThreshold(configuration.screenLayout, configuration2.screenLayout)) ? i : i & (-257);
     }
 
     private boolean crossesHorizontalSizeThreshold(int i, int i2) {
@@ -200,16 +200,16 @@ public final class SizeConfigurationBuckets implements Parcelable {
     }
 
     SizeConfigurationBuckets(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        boolean z = (readByte & 16) != 0;
-        int[] createIntArray = (readByte & 1) == 0 ? null : parcel.createIntArray();
-        int[] createIntArray2 = (readByte & 2) == 0 ? null : parcel.createIntArray();
-        int[] createIntArray3 = (readByte & 4) == 0 ? null : parcel.createIntArray();
-        int[] createIntArray4 = (readByte & 8) != 0 ? parcel.createIntArray() : null;
-        this.mHorizontal = createIntArray;
-        this.mVertical = createIntArray2;
-        this.mSmallest = createIntArray3;
-        this.mScreenLayoutSize = createIntArray4;
+        byte b = parcel.readByte();
+        boolean z = (b & 16) != 0;
+        int[] iArrCreateIntArray = (b & 1) == 0 ? null : parcel.createIntArray();
+        int[] iArrCreateIntArray2 = (b & 2) == 0 ? null : parcel.createIntArray();
+        int[] iArrCreateIntArray3 = (b & 4) == 0 ? null : parcel.createIntArray();
+        int[] iArrCreateIntArray4 = (b & 8) != 0 ? parcel.createIntArray() : null;
+        this.mHorizontal = iArrCreateIntArray;
+        this.mVertical = iArrCreateIntArray2;
+        this.mSmallest = iArrCreateIntArray3;
+        this.mScreenLayoutSize = iArrCreateIntArray4;
         this.mScreenLayoutLongSet = z;
     }
 }

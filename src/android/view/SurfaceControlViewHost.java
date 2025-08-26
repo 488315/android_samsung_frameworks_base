@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.ISurfaceControlViewHost;
 import android.view.SurfaceControl;
-import android.view.SurfaceControlViewHost;
 import android.view.ViewRootImpl;
 import android.view.WindowManager;
 import android.view.WindowlessWindowManager;
@@ -52,7 +51,7 @@ public class SurfaceControlViewHost {
             SurfaceControlViewHost.this.mViewRoot.mHandler.post(new Runnable() { // from class: android.view.SurfaceControlViewHost$ISurfaceControlViewHostImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceControlViewHost.ISurfaceControlViewHostImpl.this.lambda$onConfigurationChanged$0(configuration);
+                    this.f$0.lambda$onConfigurationChanged$0(configuration);
                 }
             });
         }
@@ -73,7 +72,7 @@ public class SurfaceControlViewHost {
             SurfaceControlViewHost.this.mViewRoot.mHandler.post(new Runnable() { // from class: android.view.SurfaceControlViewHost$ISurfaceControlViewHostImpl$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceControlViewHost.ISurfaceControlViewHostImpl.this.lambda$onDispatchDetachedFromWindow$1();
+                    this.f$0.lambda$onDispatchDetachedFromWindow$1();
                 }
             });
         }
@@ -89,7 +88,7 @@ public class SurfaceControlViewHost {
                 SurfaceControlViewHost.this.mViewRoot.mHandler.post(new Runnable() { // from class: android.view.SurfaceControlViewHost$ISurfaceControlViewHostImpl$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceControlViewHost.ISurfaceControlViewHostImpl.this.lambda$onInsetsChanged$2(rect);
+                        this.f$0.lambda$onInsetsChanged$2(rect);
                     }
                 });
             }
@@ -110,7 +109,7 @@ public class SurfaceControlViewHost {
             SurfaceControlViewHost.this.mViewRoot.mHandler.post(new Runnable() { // from class: android.view.SurfaceControlViewHost$ISurfaceControlViewHostImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceControlViewHost.ISurfaceControlViewHostImpl.this.lambda$getSurfaceSyncGroup$3(completableFuture);
+                    this.f$0.lambda$getSurfaceSyncGroup$3(completableFuture);
                 }
             });
             try {
@@ -134,7 +133,7 @@ public class SurfaceControlViewHost {
                 SurfaceControlViewHost.this.mViewRoot.mHandler.post(new Runnable() { // from class: android.view.SurfaceControlViewHost$ISurfaceControlViewHostImpl$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceControlViewHost.ISurfaceControlViewHostImpl.this.lambda$attachParentInterface$4(iSurfaceControlViewHostParent);
+                        this.f$0.lambda$attachParentInterface$4(iSurfaceControlViewHostParent);
                     }
                 });
             }
@@ -292,7 +291,7 @@ public class SurfaceControlViewHost {
         ViewRootImpl.ConfigChangedCallback configChangedCallback = new ViewRootImpl.ConfigChangedCallback() { // from class: android.view.SurfaceControlViewHost$$ExternalSyntheticLambda0
             @Override // android.view.ViewRootImpl.ConfigChangedCallback
             public final void onConfigurationChanged(Configuration configuration) {
-                SurfaceControlViewHost.lambda$setConfigCallback$0(IBinder.this, display, configuration);
+                SurfaceControlViewHost.lambda$setConfigCallback$0(windowContextToken, display, configuration);
             }
         };
         this.mConfigChangedCallback = configChangedCallback;
@@ -343,7 +342,7 @@ public class SurfaceControlViewHost {
         viewRootImpl.setBackKeyCallbackForWindowlessWindow(new Predicate() { // from class: android.view.SurfaceControlViewHost$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return WindowlessWindowManager.this.forwardBackKeyToParent((KeyEvent) obj);
+                return windowlessWindowManager.forwardBackKeyToParent((KeyEvent) obj);
             }
         });
     }

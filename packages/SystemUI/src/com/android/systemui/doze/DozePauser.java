@@ -5,14 +5,12 @@ import android.os.Handler;
 import com.android.systemui.doze.DozeMachine;
 import com.android.systemui.util.AlarmTimeout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozePauser implements DozeMachine.Part {
     public DozeMachine mMachine;
     public final AlarmTimeout mPauseTimeout;
     public final AlwaysOnDisplayPolicy mPolicy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.DozePauser$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -31,7 +29,7 @@ public class DozePauser implements DozeMachine.Part {
         this.mPauseTimeout = new AlarmTimeout(alarmManager, new AlarmManager.OnAlarmListener() { // from class: com.android.systemui.doze.DozePauser$$ExternalSyntheticLambda0
             @Override // android.app.AlarmManager.OnAlarmListener
             public final void onAlarm() {
-                DozePauser.this.mMachine.requestState(DozeMachine.State.DOZE_AOD_PAUSED);
+                this.f$0.mMachine.requestState(DozeMachine.State.DOZE_AOD_PAUSED);
             }
         }, "DozePauser", handler);
         this.mPolicy = alwaysOnDisplayPolicy;

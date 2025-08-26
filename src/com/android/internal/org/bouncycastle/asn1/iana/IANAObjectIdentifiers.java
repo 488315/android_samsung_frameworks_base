@@ -29,21 +29,21 @@ public interface IANAObjectIdentifiers {
         mgmt = aSN1ObjectIdentifier.branch("2");
         experimental = aSN1ObjectIdentifier.branch("3");
         _private = aSN1ObjectIdentifier.branch("4");
-        ASN1ObjectIdentifier branch = aSN1ObjectIdentifier.branch("5");
-        security = branch;
+        ASN1ObjectIdentifier aSN1ObjectIdentifierBranch = aSN1ObjectIdentifier.branch("5");
+        security = aSN1ObjectIdentifierBranch;
         SNMPv2 = aSN1ObjectIdentifier.branch("6");
         mail = aSN1ObjectIdentifier.branch("7");
-        ASN1ObjectIdentifier branch2 = branch.branch("5");
-        security_mechanisms = branch2;
-        security_nametypes = branch.branch("6");
-        pkix = branch2.branch("6");
-        ASN1ObjectIdentifier branch3 = branch2.branch("8");
-        ipsec = branch3;
-        ASN1ObjectIdentifier branch4 = branch3.branch("1");
-        isakmpOakley = branch4;
-        hmacMD5 = branch4.branch("1");
-        hmacSHA1 = branch4.branch("2");
-        hmacTIGER = branch4.branch("3");
-        hmacRIPEMD160 = branch4.branch("4");
+        ASN1ObjectIdentifier aSN1ObjectIdentifierBranch2 = aSN1ObjectIdentifierBranch.branch("5");
+        security_mechanisms = aSN1ObjectIdentifierBranch2;
+        security_nametypes = aSN1ObjectIdentifierBranch.branch("6");
+        pkix = aSN1ObjectIdentifierBranch2.branch("6");
+        ASN1ObjectIdentifier aSN1ObjectIdentifierBranch3 = aSN1ObjectIdentifierBranch2.branch("8");
+        ipsec = aSN1ObjectIdentifierBranch3;
+        ASN1ObjectIdentifier aSN1ObjectIdentifierBranch4 = aSN1ObjectIdentifierBranch3.branch("1");
+        isakmpOakley = aSN1ObjectIdentifierBranch4;
+        hmacMD5 = aSN1ObjectIdentifierBranch4.branch("1");
+        hmacSHA1 = aSN1ObjectIdentifierBranch4.branch("2");
+        hmacTIGER = aSN1ObjectIdentifierBranch4.branch("3");
+        hmacRIPEMD160 = aSN1ObjectIdentifierBranch4.branch("4");
     }
 }

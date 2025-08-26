@@ -37,22 +37,22 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
     }
 
     void setParameter(String str, Object obj) {
-        ECParameterSpec eCParameterSpec;
+        ECParameterSpec eCParameterSpecConvertSpec;
         SecurityManager securityManager = System.getSecurityManager();
         if (str.equals(ConfigurableProvider.THREAD_LOCAL_EC_IMPLICITLY_CA)) {
             if (securityManager != null) {
                 securityManager.checkPermission(BC_EC_LOCAL_PERMISSION);
             }
             if ((obj instanceof ECParameterSpec) || obj == null) {
-                eCParameterSpec = (ECParameterSpec) obj;
+                eCParameterSpecConvertSpec = (ECParameterSpec) obj;
             } else {
-                eCParameterSpec = EC5Util.convertSpec((java.security.spec.ECParameterSpec) obj);
+                eCParameterSpecConvertSpec = EC5Util.convertSpec((java.security.spec.ECParameterSpec) obj);
             }
-            if (eCParameterSpec == null) {
+            if (eCParameterSpecConvertSpec == null) {
                 this.ecThreadSpec.remove();
                 return;
             } else {
-                this.ecThreadSpec.set(eCParameterSpec);
+                this.ecThreadSpec.set(eCParameterSpecConvertSpec);
                 return;
             }
         }

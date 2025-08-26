@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideNotifInflationExecutorFactory implements Provider {
     private final Provider looperProvider;
@@ -19,9 +18,9 @@ public final class SysUIConcurrencyModule_ProvideNotifInflationExecutorFactory i
     }
 
     public static Executor provideNotifInflationExecutor(Looper looper) {
-        Executor provideNotifInflationExecutor = SysUIConcurrencyModule.INSTANCE.provideNotifInflationExecutor(looper);
-        provideNotifInflationExecutor.getClass();
-        return provideNotifInflationExecutor;
+        Executor executorProvideNotifInflationExecutor = SysUIConcurrencyModule.INSTANCE.provideNotifInflationExecutor(looper);
+        executorProvideNotifInflationExecutor.getClass();
+        return executorProvideNotifInflationExecutor;
     }
 
     public static SysUIConcurrencyModule_ProvideNotifInflationExecutorFactory create(Provider provider) {

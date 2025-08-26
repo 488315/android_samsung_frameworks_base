@@ -47,16 +47,16 @@ public class KMeans {
 
     public static double score(List<Mean> list) {
         int size = list.size();
-        double d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+        double dSqrt = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         for (int i = 0; i < size; i++) {
             Mean mean = list.get(i);
             for (int i2 = 0; i2 < size; i2++) {
                 if (mean != list.get(i2)) {
-                    d += Math.sqrt(sqDistance(mean.mCentroid, r7.mCentroid));
+                    dSqrt += Math.sqrt(sqDistance(mean.mCentroid, r7.mCentroid));
                 }
             }
         }
-        return d;
+        return dSqrt;
     }
 
     public void checkDataSetSanity(float[][] fArr) {
@@ -118,10 +118,10 @@ public class KMeans {
         float f = Float.MAX_VALUE;
         for (int i = 0; i < size; i++) {
             Mean mean2 = list.get(i);
-            float sqDistance = sqDistance(fArr, mean2.mCentroid);
-            if (sqDistance < f) {
+            float fSqDistance = sqDistance(fArr, mean2.mCentroid);
+            if (fSqDistance < f) {
                 mean = mean2;
-                f = sqDistance;
+                f = fSqDistance;
             }
         }
         return mean;

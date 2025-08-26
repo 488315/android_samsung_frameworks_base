@@ -1,6 +1,5 @@
 package com.android.systemui.brightness.shared.model;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LinearBrightness {
     public final float floatValue;
@@ -10,12 +9,12 @@ public final class LinearBrightness {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ LinearBrightness m1067boximpl(float f) {
+    public static final /* synthetic */ LinearBrightness m1069boximpl(float f) {
         return new LinearBrightness(f);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m1068toStringimpl(float f) {
+    public static String m1070toStringimpl(float f) {
         return "LinearBrightness(floatValue=" + f + ")";
     }
 
@@ -31,6 +30,6 @@ public final class LinearBrightness {
     }
 
     public final String toString() {
-        return m1068toStringimpl(this.floatValue);
+        return m1070toStringimpl(this.floatValue);
     }
 }

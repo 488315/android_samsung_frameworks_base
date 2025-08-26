@@ -4,7 +4,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BufferedChannel$receiveCatching$1<E> extends ContinuationImpl {
     int label;
@@ -21,7 +20,7 @@ final class BufferedChannel$receiveCatching$1<E> extends ContinuationImpl {
     public final Object invokeSuspend(Object obj) {
         this.result = obj;
         this.label |= Integer.MIN_VALUE;
-        Object m3452receiveCatchingJP2dKIU$suspendImpl = BufferedChannel.m3452receiveCatchingJP2dKIU$suspendImpl(this.this$0, this);
-        return m3452receiveCatchingJP2dKIU$suspendImpl == CoroutineSingletons.COROUTINE_SUSPENDED ? m3452receiveCatchingJP2dKIU$suspendImpl : ChannelResult.m3457boximpl(m3452receiveCatchingJP2dKIU$suspendImpl);
+        Object objM3472receiveCatchingJP2dKIU$suspendImpl = BufferedChannel.m3472receiveCatchingJP2dKIU$suspendImpl(this.this$0, this);
+        return objM3472receiveCatchingJP2dKIU$suspendImpl == CoroutineSingletons.COROUTINE_SUSPENDED ? objM3472receiveCatchingJP2dKIU$suspendImpl : ChannelResult.m3477boximpl(objM3472receiveCatchingJP2dKIU$suspendImpl);
     }
 }

@@ -15,7 +15,6 @@ import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import com.android.systemui.navigationbar.views.NavigationBarView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DeadZone {
     public static final AnonymousClass1 FLASH_PROPERTY = new FloatProperty("DeadZoneFlash") { // from class: com.android.systemui.navigationbar.views.buttons.DeadZone.1
@@ -64,7 +63,7 @@ public class DeadZone {
     }
 
     public final float getSize(long j) {
-        int m$1;
+        int iM$1;
         int i = this.mSizeMax;
         if (i == 0) {
             return 0.0f;
@@ -73,15 +72,15 @@ public class DeadZone {
         int i2 = this.mHold;
         int i3 = this.mDecay;
         if (j2 > i2 + i3) {
-            m$1 = this.mSizeMin;
+            iM$1 = this.mSizeMin;
         } else {
             if (j2 < i2) {
                 return i;
             }
             float f = i;
-            m$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mSizeMin, f, (j2 - i2) / i3, f);
+            iM$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mSizeMin, f, (j2 - i2) / i3, f);
         }
-        return m$1;
+        return iM$1;
     }
 
     public final void onConfigurationChanged(int i) {
@@ -96,10 +95,10 @@ public class DeadZone {
             this.mSizeMax = resources.getDimensionPixelSize(R.dimen.navigation_bar_deadzone_size_max);
             if (BasicRune.NAVBAR_ENABLED) {
                 EventTypeFactory.EventType.GetDeadZoneSize getDeadZoneSize = new EventTypeFactory.EventType.GetDeadZoneSize(false);
-                Integer valueOf = Integer.valueOf(resources.getDimensionPixelSize(R.dimen.navigation_bar_deadzone_size));
+                Integer numValueOf = Integer.valueOf(resources.getDimensionPixelSize(R.dimen.navigation_bar_deadzone_size));
                 NavBarStore navBarStore = this.mNavBarStore;
                 int i2 = this.mDisplayId;
-                this.mSizeMin = ((Integer) ((NavBarStoreImpl) navBarStore).handleEvent(this, getDeadZoneSize, i2, valueOf)).intValue();
+                this.mSizeMin = ((Integer) ((NavBarStoreImpl) navBarStore).handleEvent(this, getDeadZoneSize, i2, numValueOf)).intValue();
                 this.mSizeMax = ((Integer) ((NavBarStoreImpl) navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetDeadZoneSize(true), i2, Integer.valueOf(resources.getDimensionPixelSize(R.dimen.navigation_bar_deadzone_size_max)))).intValue();
             }
             this.mVertical = resources.getInteger(R.integer.navigation_bar_deadzone_orientation) == 1;

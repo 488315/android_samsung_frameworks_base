@@ -20,15 +20,15 @@ public class LongSparseLongArray implements Cloneable {
             this.mKeys = EmptyArray.LONG;
             this.mValues = EmptyArray.LONG;
         } else {
-            long[] newUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i);
-            this.mKeys = newUnpaddedLongArray;
-            this.mValues = new long[newUnpaddedLongArray.length];
+            long[] jArrNewUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i);
+            this.mKeys = jArrNewUnpaddedLongArray;
+            this.mValues = new long[jArrNewUnpaddedLongArray.length];
         }
         this.mSize = 0;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public LongSparseLongArray m5520clone() {
+    public LongSparseLongArray m5527clone() {
         try {
             LongSparseLongArray longSparseLongArray = (LongSparseLongArray) super.clone();
             try {
@@ -48,14 +48,14 @@ public class LongSparseLongArray implements Cloneable {
     }
 
     public long get(long j, long j2) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        return binarySearch < 0 ? j2 : this.mValues[binarySearch];
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        return iBinarySearch < 0 ? j2 : this.mValues[iBinarySearch];
     }
 
     public void delete(long j) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        if (binarySearch >= 0) {
-            removeAt(binarySearch);
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        if (iBinarySearch >= 0) {
+            removeAt(iBinarySearch);
         }
     }
 
@@ -69,12 +69,12 @@ public class LongSparseLongArray implements Cloneable {
     }
 
     public void put(long j, long j2) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = j2;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = j2;
             return;
         }
-        int i = ~binarySearch;
+        int i = ~iBinarySearch;
         this.mKeys = GrowingArrayUtils.insert(this.mKeys, this.mSize, i, j);
         this.mValues = GrowingArrayUtils.insert(this.mValues, this.mSize, i, j2);
         this.mSize++;
@@ -159,20 +159,20 @@ public class LongSparseLongArray implements Cloneable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.util.Parcelling
         public LongSparseLongArray unparcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 return null;
             }
             LongSparseLongArray longSparseLongArray = new LongSparseLongArray(0);
-            longSparseLongArray.mSize = readInt;
+            longSparseLongArray.mSize = i;
             longSparseLongArray.mKeys = parcel.createLongArray();
             longSparseLongArray.mValues = parcel.createLongArray();
-            Preconditions.checkArgument(longSparseLongArray.mKeys.length >= readInt);
-            Preconditions.checkArgument(longSparseLongArray.mValues.length >= readInt);
-            if (readInt > 0) {
+            Preconditions.checkArgument(longSparseLongArray.mKeys.length >= i);
+            Preconditions.checkArgument(longSparseLongArray.mValues.length >= i);
+            if (i > 0) {
                 long j = longSparseLongArray.mKeys[0];
-                for (int i = 1; i < readInt; i++) {
-                    Preconditions.checkArgument(j < longSparseLongArray.mKeys[i]);
+                for (int i2 = 1; i2 < i; i2++) {
+                    Preconditions.checkArgument(j < longSparseLongArray.mKeys[i2]);
                 }
             }
             return longSparseLongArray;

@@ -81,11 +81,11 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
     }
 
     protected ParsedUsesPermissionImpl(Parcel parcel) {
-        String unparcel = sParcellingForName.unparcel(parcel);
-        int readInt = parcel.readInt();
-        this.name = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.usesPermissionFlags = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class, (Annotation) null, readInt);
+        String strUnparcel = sParcellingForName.unparcel(parcel);
+        int i = parcel.readInt();
+        this.name = strUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) strUnparcel);
+        this.usesPermissionFlags = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class, (Annotation) null, i);
     }
 }

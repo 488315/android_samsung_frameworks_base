@@ -73,9 +73,9 @@ public interface IQuickAccessWalletServiceCallbacks extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IQuickAccessWalletServiceCallbacks)) {
-                return (IQuickAccessWalletServiceCallbacks) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IQuickAccessWalletServiceCallbacks)) {
+                return (IQuickAccessWalletServiceCallbacks) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -157,61 +157,61 @@ public interface IQuickAccessWalletServiceCallbacks extends IInterface {
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks
             public void onGetWalletCardsSuccess(GetWalletCardsResponse getWalletCardsResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-                    obtain.writeTypedObject(getWalletCardsResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getWalletCardsResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks
             public void onGetWalletCardsFailure(GetWalletCardsError getWalletCardsError) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-                    obtain.writeTypedObject(getWalletCardsError, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getWalletCardsError, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks
             public void onWalletServiceEvent(WalletServiceEvent walletServiceEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-                    obtain.writeTypedObject(walletServiceEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(walletServiceEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks
             public void onTargetActivityPendingIntentReceived(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks
             public void onGestureTargetActivityPendingIntentReceived(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletServiceCallbacks.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

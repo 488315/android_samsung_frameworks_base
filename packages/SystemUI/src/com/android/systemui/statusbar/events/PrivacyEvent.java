@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PrivacyEvent implements StatusEvent {
     public String contentDescription;
@@ -100,9 +99,9 @@ public class PrivacyEvent implements StatusEvent {
         this.viewCreator = new Function1() { // from class: com.android.systemui.statusbar.events.PrivacyEvent$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 OngoingPrivacyChip ongoingPrivacyChip = new OngoingPrivacyChip(new ContextThemeWrapper((Context) obj, R.style.SamsungOngoingPrivacyChip), null, 0, 0, 14, null);
-                PrivacyEvent privacyEvent = PrivacyEvent.this;
+                PrivacyEvent privacyEvent = this.f$0;
                 ongoingPrivacyChip.setPrivacyList(privacyEvent.privacyItems);
                 ongoingPrivacyChip.setContentDescription(privacyEvent.contentDescription);
                 privacyEvent.privacyChip = ongoingPrivacyChip;

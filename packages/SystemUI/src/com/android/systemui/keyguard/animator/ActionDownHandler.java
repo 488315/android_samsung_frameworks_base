@@ -14,7 +14,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionDownHandler extends ActionHandlerType {
     public ActionDownHandler(KeyguardTouchAnimator keyguardTouchAnimator) {
@@ -42,9 +41,9 @@ public final class ActionDownHandler extends ActionHandlerType {
         ((ArrayList) keyguardTouchAnimator.tapAffordanceViewController.restoreSpringAnimationList).clear();
         keyguardTouchAnimator.pivotViewController.setChildViewPivot$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
         if (!keyguardTouchAnimator.hasDozeAmount) {
-            boolean canBeEditMode = ((KeyguardEditModeControllerImpl) keyguardTouchAnimator.keyguardEditModeController).canBeEditMode(keyguardTouchAnimator.context);
+            boolean zCanBeEditMode = ((KeyguardEditModeControllerImpl) keyguardTouchAnimator.keyguardEditModeController).canBeEditMode(keyguardTouchAnimator.context);
             KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = keyguardTouchAnimator.editModeAnimatorController;
-            if (canBeEditMode && keyguardTouchAnimator.canLongPressArea(motionEvent) && !keyguardEditModeAnimatorController.animatorSet.isRunning()) {
+            if (zCanBeEditMode && keyguardTouchAnimator.canLongPressArea(motionEvent) && !keyguardEditModeAnimatorController.animatorSet.isRunning()) {
                 Log.d("KeyguardEditModeAnimatorController", "actionDown editMode(" + keyguardEditModeAnimatorController.isEditMode() + ")");
                 if (!keyguardEditModeAnimatorController.isEditMode()) {
                     StandaloneCoroutine standaloneCoroutine2 = keyguardEditModeAnimatorController.longPressJob;

@@ -2,18 +2,21 @@ package com.android.systemui.volume.panel.component.volume.domain.interactor;
 
 import com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaDeviceSessions;
 import com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession;
+import com.android.systemui.volume.panel.component.volume.domain.model.SliderType;
 import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsJVMKt;
+import kotlin.collections.builders.ListBuilder;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function6;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda implements Function6 {
     private /* synthetic */ Object L$0;
@@ -24,7 +27,6 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
     int label;
     final /* synthetic */ AudioSlidersInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor$volumePanelSliders$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ FlowCollector $$this$combineTransform;
@@ -56,92 +58,60 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
             return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:27:0x006a  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x0087 A[RETURN] */
+        /* JADX WARN: Removed duplicated region for block: B:25:0x0055  */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r10) {
-            /*
-                r9 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r9.label
-                r2 = 1
-                if (r1 == 0) goto L16
-                if (r1 != r2) goto Le
-                kotlin.ResultKt.throwOnFailure(r10)
-                goto L88
-            Le:
-                java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-                java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-                r9.<init>(r10)
-                throw r9
-            L16:
-                kotlin.ResultKt.throwOnFailure(r10)
-                boolean r10 = r9.$isOngoingCall
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor r1 = r9.this$0
-                com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r3 = r9.$defaultSession
-                com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaDeviceSessions r4 = r9.$activeSessions
-                kotlin.collections.builders.ListBuilder r5 = kotlin.collections.CollectionsKt__CollectionsJVMKt.createListBuilder()
-                r6 = 0
-                if (r10 == 0) goto L2b
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r6)
-            L2b:
-                r7 = 3
-                if (r3 == 0) goto L55
-                com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r8 = r4.remote
-                android.media.session.MediaSession$Token r3 = r3.sessionToken
-                if (r8 == 0) goto L37
-                android.media.session.MediaSession$Token r8 = r8.sessionToken
-                goto L38
-            L37:
-                r8 = 0
-            L38:
-                boolean r3 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r8)
-                if (r3 != r2) goto L55
-                r1.getClass()
-                com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r3 = r4.remote
-                if (r3 == 0) goto L51
-                boolean r4 = r3.canAdjustVolume
-                if (r4 != r2) goto L51
-                com.android.systemui.volume.panel.component.volume.domain.model.SliderType$MediaDeviceCast r4 = new com.android.systemui.volume.panel.component.volume.domain.model.SliderType$MediaDeviceCast
-                r4.<init>(r3)
-                r5.add(r4)
-            L51:
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r7)
-                goto L68
-            L55:
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r7)
-                com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r3 = r4.remote
-                if (r3 == 0) goto L68
-                boolean r4 = r3.canAdjustVolume
-                if (r4 != r2) goto L68
-                com.android.systemui.volume.panel.component.volume.domain.model.SliderType$MediaDeviceCast r4 = new com.android.systemui.volume.panel.component.volume.domain.model.SliderType$MediaDeviceCast
-                r4.<init>(r3)
-                r5.add(r4)
-            L68:
-                if (r10 != 0) goto L6d
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r6)
-            L6d:
-                r10 = 2
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r10)
-                r10 = 5
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r10)
-                r10 = 4
-                com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor.access$addStream(r1, r5, r10)
-                kotlin.collections.builders.ListBuilder r10 = r5.build()
-                kotlinx.coroutines.flow.FlowCollector r1 = r9.$$this$combineTransform
-                r9.label = r2
-                java.lang.Object r9 = r1.emit(r10, r9)
-                if (r9 != r0) goto L88
-                return r0
-            L88:
-                kotlin.Unit r9 = kotlin.Unit.INSTANCE
-                return r9
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.volume.domain.interactor.AudioSlidersInteractor$volumePanelSliders$1.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                boolean z = this.$isOngoingCall;
+                AudioSlidersInteractor audioSlidersInteractor = this.this$0;
+                MediaDeviceSession mediaDeviceSession = this.$defaultSession;
+                MediaDeviceSessions mediaDeviceSessions = this.$activeSessions;
+                ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                if (z) {
+                    AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 0);
+                }
+                if (mediaDeviceSession != null) {
+                    MediaDeviceSession mediaDeviceSession2 = mediaDeviceSessions.remote;
+                    if (Intrinsics.areEqual(mediaDeviceSession.sessionToken, mediaDeviceSession2 != null ? mediaDeviceSession2.sessionToken : null)) {
+                        audioSlidersInteractor.getClass();
+                        MediaDeviceSession mediaDeviceSession3 = mediaDeviceSessions.remote;
+                        if (mediaDeviceSession3 != null && mediaDeviceSession3.canAdjustVolume) {
+                            listBuilderCreateListBuilder.add(new SliderType.MediaDeviceCast(mediaDeviceSession3));
+                        }
+                        AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 3);
+                    } else {
+                        AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 3);
+                        MediaDeviceSession mediaDeviceSession4 = mediaDeviceSessions.remote;
+                        if (mediaDeviceSession4 != null && mediaDeviceSession4.canAdjustVolume) {
+                            listBuilderCreateListBuilder.add(new SliderType.MediaDeviceCast(mediaDeviceSession4));
+                        }
+                    }
+                    if (!z) {
+                        AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 0);
+                    }
+                    AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 2);
+                    AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 5);
+                    AudioSlidersInteractor.access$addStream(audioSlidersInteractor, listBuilderCreateListBuilder, 4);
+                    ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
+                    FlowCollector flowCollector = this.$$this$combineTransform;
+                    this.label = 1;
+                    if (flowCollector.emit(listBuilderBuild, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -153,12 +123,12 @@ final class AudioSlidersInteractor$volumePanelSliders$1 extends SuspendLambda im
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj4).booleanValue();
         AudioSlidersInteractor$volumePanelSliders$1 audioSlidersInteractor$volumePanelSliders$1 = new AudioSlidersInteractor$volumePanelSliders$1(this.this$0, (Continuation) obj6);
         audioSlidersInteractor$volumePanelSliders$1.L$0 = (FlowCollector) obj;
         audioSlidersInteractor$volumePanelSliders$1.L$1 = (MediaDeviceSessions) obj2;
         audioSlidersInteractor$volumePanelSliders$1.L$2 = (MediaDeviceSession) obj3;
-        audioSlidersInteractor$volumePanelSliders$1.Z$0 = booleanValue;
+        audioSlidersInteractor$volumePanelSliders$1.Z$0 = zBooleanValue;
         audioSlidersInteractor$volumePanelSliders$1.L$3 = (Integer) obj5;
         return audioSlidersInteractor$volumePanelSliders$1.invokeSuspend(Unit.INSTANCE);
     }

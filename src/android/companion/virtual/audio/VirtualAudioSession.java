@@ -4,7 +4,6 @@ import android.companion.virtual.audio.IAudioConfigChangedCallback;
 import android.companion.virtual.audio.IAudioRoutingCallback;
 import android.companion.virtual.audio.UserRestrictionsDetector;
 import android.companion.virtual.audio.VirtualAudioDevice;
-import android.companion.virtual.audio.VirtualAudioSession;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -50,7 +49,7 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.audio.VirtualAudioSession$AudioConfigChangedCallback$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualAudioSession.AudioConfigChangedCallback.this.lambda$onPlaybackConfigChanged$0(list);
+                        this.f$0.lambda$onPlaybackConfigChanged$0(list);
                     }
                 });
             }
@@ -67,7 +66,7 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
                 this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.audio.VirtualAudioSession$AudioConfigChangedCallback$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualAudioSession.AudioConfigChangedCallback.this.lambda$onRecordingConfigChanged$1(list);
+                        this.f$0.lambda$onRecordingConfigChanged$1(list);
                     }
                 });
             }
@@ -180,8 +179,8 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
     }
 
     private void createAudioStreams(int[] iArr) {
-        AudioMix audioMix;
-        AudioMix audioMix2;
+        AudioMix audioMixCreateAudioRecordMix;
+        AudioMix audioMixCreateAudioTrackMix;
         synchronized (this.mLock) {
             if (this.mAudioCapture == null && this.mAudioInjection == null) {
                 throw new IllegalStateException("At least one of AudioCapture and AudioInjection must be started.");
@@ -196,31 +195,31 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
             AudioPolicy.Builder builder = new AudioPolicy.Builder(this.mContext);
             AudioCapture audioCapture = this.mAudioCapture;
             if (audioCapture != null) {
-                audioMix = createAudioRecordMix(audioCapture.getFormat(), iArr);
-                builder.addMix(audioMix);
+                audioMixCreateAudioRecordMix = createAudioRecordMix(audioCapture.getFormat(), iArr);
+                builder.addMix(audioMixCreateAudioRecordMix);
             } else {
-                audioMix = null;
+                audioMixCreateAudioRecordMix = null;
             }
             AudioInjection audioInjection = this.mAudioInjection;
             if (audioInjection != null) {
-                audioMix2 = createAudioTrackMix(audioInjection.getFormat(), iArr);
-                builder.addMix(audioMix2);
+                audioMixCreateAudioTrackMix = createAudioTrackMix(audioInjection.getFormat(), iArr);
+                builder.addMix(audioMixCreateAudioTrackMix);
             } else {
-                audioMix2 = null;
+                audioMixCreateAudioTrackMix = null;
             }
             this.mAudioPolicy = builder.build();
             if (((AudioManager) this.mContext.getSystemService(AudioManager.class)).registerAudioPolicy(this.mAudioPolicy) == -1) {
                 Log.e(TAG, "Failed to register audio policy!");
             }
-            AudioRecord createAudioRecordSink = audioMix != null ? this.mAudioPolicy.createAudioRecordSink(audioMix) : null;
-            AudioTrack createAudioTrackSource = audioMix2 != null ? this.mAudioPolicy.createAudioTrackSource(audioMix2) : null;
+            AudioRecord audioRecordCreateAudioRecordSink = audioMixCreateAudioRecordMix != null ? this.mAudioPolicy.createAudioRecordSink(audioMixCreateAudioRecordMix) : null;
+            AudioTrack audioTrackCreateAudioTrackSource = audioMixCreateAudioTrackMix != null ? this.mAudioPolicy.createAudioTrackSource(audioMixCreateAudioTrackMix) : null;
             AudioCapture audioCapture2 = this.mAudioCapture;
             if (audioCapture2 != null) {
-                audioCapture2.setAudioRecord(createAudioRecordSink);
+                audioCapture2.setAudioRecord(audioRecordCreateAudioRecordSink);
             }
             AudioInjection audioInjection2 = this.mAudioInjection;
             if (audioInjection2 != null) {
-                audioInjection2.setAudioTrack(createAudioTrackSource);
+                audioInjection2.setAudioTrack(audioTrackCreateAudioTrackSource);
             }
         }
     }
@@ -252,7 +251,7 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
         return intArray;
     }
 
-    private static AudioMix createAudioRecordMix(AudioFormat audioFormat, int[] iArr) {
+    private static AudioMix createAudioRecordMix(AudioFormat audioFormat, int[] iArr) throws IllegalArgumentException {
         AudioMixingRule.Builder builder = new AudioMixingRule.Builder();
         builder.setTargetMixRole(0);
         for (int i : iArr) {
@@ -261,7 +260,7 @@ public final class VirtualAudioSession extends IAudioRoutingCallback.Stub implem
         return new AudioMix.Builder(builder.allowPrivilegedPlaybackCapture(false).build()).setFormat(audioFormat).setRouteFlags(2).build();
     }
 
-    private static AudioMix createAudioTrackMix(AudioFormat audioFormat, int[] iArr) {
+    private static AudioMix createAudioTrackMix(AudioFormat audioFormat, int[] iArr) throws IllegalArgumentException {
         AudioMixingRule.Builder builder = new AudioMixingRule.Builder();
         builder.setTargetMixRole(1);
         for (int i : iArr) {

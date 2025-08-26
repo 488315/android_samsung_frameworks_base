@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DisplayStateInteractorImpl implements DisplayStateInteractor {
     public final ReadonlyStateFlow currentRotation;
@@ -25,7 +24,6 @@ public final class DisplayStateInteractorImpl implements DisplayStateInteractor 
     public final ReadonlyStateFlow isLargeScreen;
     public final ScreenSizeFoldProvider screenSizeFoldProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,9 +41,9 @@ public final class DisplayStateInteractorImpl implements DisplayStateInteractor 
         this.screenSizeFoldProvider = new ScreenSizeFoldProvider(context);
         DisplayRepositoryImpl displayRepositoryImpl = (DisplayRepositoryImpl) displayRepository;
         this.displayChanges = displayRepositoryImpl.displayRepositoryFromLib.getDisplayChangeEvent();
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DisplayStateInteractorImpl$isFolded$1(this, executor, null));
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DisplayStateInteractorImpl$isFolded$1(this, executor, null));
         SharingStarted.Companion.getClass();
-        FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
+        FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
         DisplayStateRepositoryImpl displayStateRepositoryImpl = (DisplayStateRepositoryImpl) displayStateRepository;
         this.isInRearDisplayMode = displayStateRepositoryImpl.isInRearDisplayMode;
         this.currentRotation = displayStateRepositoryImpl.currentRotation;

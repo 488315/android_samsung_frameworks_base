@@ -10,7 +10,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultLazyListPrefetchStrategy implements LazyListPrefetchStrategy {
     public LazyLayoutPrefetchState.PrefetchHandle currentPrefetchHandle;
@@ -56,11 +55,11 @@ final class DefaultLazyListPrefetchStrategy implements LazyListPrefetchStrategy 
             companion.getClass();
             Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
             Function1 readObserver = currentThreadSnapshot != null ? currentThreadSnapshot.getReadObserver() : null;
-            Snapshot makeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
+            Snapshot snapshotMakeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
             try {
                 final LazyListMeasureResult lazyListMeasureResult2 = (LazyListMeasureResult) ((SnapshotMutableStateImpl) lazyListState.layoutInfoState).getValue();
-                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
-                this.currentPrefetchHandle = lazyListState.prefetchState.m170schedulePrefetchVKLhPVY(index, lazyListMeasureResult2.childConstraints, new Function1() { // from class: androidx.compose.foundation.lazy.LazyListState$prefetchScope$1$schedulePrefetch$1
+                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
+                this.currentPrefetchHandle = lazyListState.prefetchState.m171schedulePrefetchVKLhPVY(index, lazyListMeasureResult2.childConstraints, new Function1() { // from class: androidx.compose.foundation.lazy.LazyListState$prefetchScope$1$schedulePrefetch$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
@@ -68,22 +67,22 @@ final class DefaultLazyListPrefetchStrategy implements LazyListPrefetchStrategy 
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         LazyLayoutPrefetchState.LazyLayoutPrefetchResultScope lazyLayoutPrefetchResultScope = (LazyLayoutPrefetchState.LazyLayoutPrefetchResultScope) obj;
-                        if (Function1.this != null) {
+                        if (function1 != null) {
                             int placeablesCount = lazyLayoutPrefetchResultScope.getPlaceablesCount();
                             LazyListMeasureResult lazyListMeasureResult3 = lazyListMeasureResult2;
-                            int i = 0;
-                            for (int i2 = 0; i2 < placeablesCount; i2++) {
-                                i += (int) (lazyListMeasureResult3.orientation == Orientation.Vertical ? lazyLayoutPrefetchResultScope.mo171getSizeYEO4UFw(i2) & 4294967295L : lazyLayoutPrefetchResultScope.mo171getSizeYEO4UFw(i2) >> 32);
+                            int iMo172getSizeYEO4UFw = 0;
+                            for (int i = 0; i < placeablesCount; i++) {
+                                iMo172getSizeYEO4UFw += (int) (lazyListMeasureResult3.orientation == Orientation.Vertical ? lazyLayoutPrefetchResultScope.mo172getSizeYEO4UFw(i) & 4294967295L : lazyLayoutPrefetchResultScope.mo172getSizeYEO4UFw(i) >> 32);
                             }
-                            Function1.this.mo779invoke(Integer.valueOf(i));
+                            function1.mo781invoke(Integer.valueOf(iMo172getSizeYEO4UFw));
                         }
                         return Unit.INSTANCE;
                     }
                 });
             } catch (Throwable th) {
-                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                 throw th;
             }
         }

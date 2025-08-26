@@ -41,7 +41,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PlayLastSongHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +61,6 @@ public final class PlayLastSongHelper {
     public final FrameLayout restartViewContainer;
     public final SemSoundAssistantManager soundAssistantManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,7 +95,7 @@ public final class PlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 MediaSession.Token token = playLastSongHelper2.mediaSessionToken;
                                 String str = playLastSongHelper2.lastPkgName;
                                 boolean z = playLastSongHelper2.enabled;
@@ -107,7 +105,7 @@ public final class PlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "PlayLastSongHelper");
-                                PlayLastSongHelper playLastSongHelper3 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper3 = playLastSongHelper;
                                 if (!playLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
                                     if (playLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser()).isEmpty()) {
@@ -136,7 +134,7 @@ public final class PlayLastSongHelper {
                                 } else {
                                     String str2 = playLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        PlayLastSongHelper playLastSongHelper4 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper4 = playLastSongHelper;
                                         Log.d("PlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) playLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -144,11 +142,11 @@ public final class PlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_MEDIA_PLAY_LAST_SONG);
                                     }
                                 }
-                                final PlayLastSongHelper playLastSongHelper5 = PlayLastSongHelper.this;
+                                final PlayLastSongHelper playLastSongHelper5 = playLastSongHelper;
                                 playLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        PlayLastSongHelper playLastSongHelper6 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper6 = playLastSongHelper5;
                                         if (playLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -163,7 +161,7 @@ public final class PlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "PlayLastSongHelper", str != null, token != null);
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 playLastSongHelper2.lastPkgName = str;
                                 playLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -180,7 +178,7 @@ public final class PlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "PlayLastSongHelper", playLastSongHelper2.playerVisible, z);
                                 if (playLastSongHelper2.playerVisible) {
                                     playLastSongHelper2.handler.removeCallbacksAndMessages(null);
@@ -209,7 +207,7 @@ public final class PlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 MediaSession.Token token = playLastSongHelper2.mediaSessionToken;
                                 String str = playLastSongHelper2.lastPkgName;
                                 boolean z = playLastSongHelper2.enabled;
@@ -219,7 +217,7 @@ public final class PlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "PlayLastSongHelper");
-                                PlayLastSongHelper playLastSongHelper3 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper3 = playLastSongHelper;
                                 if (!playLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
                                     if (playLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser()).isEmpty()) {
@@ -248,7 +246,7 @@ public final class PlayLastSongHelper {
                                 } else {
                                     String str2 = playLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        PlayLastSongHelper playLastSongHelper4 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper4 = playLastSongHelper;
                                         Log.d("PlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) playLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -256,11 +254,11 @@ public final class PlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_MEDIA_PLAY_LAST_SONG);
                                     }
                                 }
-                                final PlayLastSongHelper playLastSongHelper5 = PlayLastSongHelper.this;
+                                final PlayLastSongHelper playLastSongHelper5 = playLastSongHelper;
                                 playLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        PlayLastSongHelper playLastSongHelper6 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper6 = playLastSongHelper5;
                                         if (playLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -275,7 +273,7 @@ public final class PlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "PlayLastSongHelper", str != null, token != null);
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 playLastSongHelper2.lastPkgName = str;
                                 playLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -292,7 +290,7 @@ public final class PlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "PlayLastSongHelper", playLastSongHelper2.playerVisible, z);
                                 if (playLastSongHelper2.playerVisible) {
                                     playLastSongHelper2.handler.removeCallbacksAndMessages(null);
@@ -321,7 +319,7 @@ public final class PlayLastSongHelper {
                         return new View.OnClickListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 MediaSession.Token token = playLastSongHelper2.mediaSessionToken;
                                 String str = playLastSongHelper2.lastPkgName;
                                 boolean z = playLastSongHelper2.enabled;
@@ -331,7 +329,7 @@ public final class PlayLastSongHelper {
                                 sb.append(str);
                                 sb.append(" ");
                                 ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "PlayLastSongHelper");
-                                PlayLastSongHelper playLastSongHelper3 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper3 = playLastSongHelper;
                                 if (!playLastSongHelper3.enabled) {
                                     Intent intent = new Intent("android.intent.action.MUSIC_PLAYER");
                                     if (playLastSongHelper3.context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, ActivityManager.getCurrentUser()).isEmpty()) {
@@ -360,7 +358,7 @@ public final class PlayLastSongHelper {
                                 } else {
                                     String str2 = playLastSongHelper3.lastPkgName;
                                     if (str2 != null && str2.length() != 0) {
-                                        PlayLastSongHelper playLastSongHelper4 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper4 = playLastSongHelper;
                                         Log.d("PlayLastSongHelper", "dispatchMediaKeyEvent");
                                         AudioManager audioManager = (AudioManager) playLastSongHelper4.context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
                                         audioManager.dispatchMediaKeyEvent(new KeyEvent(0, 126));
@@ -368,11 +366,11 @@ public final class PlayLastSongHelper {
                                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_MEDIA_PLAY_LAST_SONG);
                                     }
                                 }
-                                final PlayLastSongHelper playLastSongHelper5 = PlayLastSongHelper.this;
+                                final PlayLastSongHelper playLastSongHelper5 = playLastSongHelper;
                                 playLastSongHelper5.handler.postDelayed(new Runnable() { // from class: com.android.systemui.media.PlayLastSongHelper$onClickListener$2$1$1$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        PlayLastSongHelper playLastSongHelper6 = PlayLastSongHelper.this;
+                                        PlayLastSongHelper playLastSongHelper6 = playLastSongHelper5;
                                         if (playLastSongHelper6.playerVisible) {
                                             return;
                                         }
@@ -387,7 +385,7 @@ public final class PlayLastSongHelper {
                             public final void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) {
                                 MediaController mediaController;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("OnMediaKeyEventSessionChanged ", "  ", "PlayLastSongHelper", str != null, token != null);
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 playLastSongHelper2.lastPkgName = str;
                                 playLastSongHelper2.mediaSessionToken = token;
                                 if (token != null) {
@@ -404,7 +402,7 @@ public final class PlayLastSongHelper {
                         return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.media.PlayLastSongHelper$onPlayerVisibilityListener$2$1
                             @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                             public final void onMediaVisibilityChanged(boolean z) {
-                                PlayLastSongHelper playLastSongHelper2 = PlayLastSongHelper.this;
+                                PlayLastSongHelper playLastSongHelper2 = playLastSongHelper;
                                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "PlayLastSongHelper", playLastSongHelper2.playerVisible, z);
                                 if (playLastSongHelper2.playerVisible) {
                                     playLastSongHelper2.handler.removeCallbacksAndMessages(null);

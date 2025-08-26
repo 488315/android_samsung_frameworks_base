@@ -77,9 +77,9 @@ public class GCMBlockCipher implements GCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException {
+    public void init(boolean z, CipherParameters cipherParameters) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         byte[] iv;
-        KeyParameter keyParameter;
+        KeyParameter key;
         byte[] bArr;
         this.forEncryption = z;
         this.macBlock = null;
@@ -93,13 +93,13 @@ public class GCMBlockCipher implements GCMModeCipher {
                 throw new IllegalArgumentException("Invalid value for MAC size: " + macSize);
             }
             this.macSize = macSize / 8;
-            keyParameter = aEADParameters.getKey();
+            key = aEADParameters.getKey();
         } else if (cipherParameters instanceof ParametersWithIV) {
             ParametersWithIV parametersWithIV = (ParametersWithIV) cipherParameters;
             iv = parametersWithIV.getIV();
             this.initialAssociatedText = null;
             this.macSize = 16;
-            keyParameter = (KeyParameter) parametersWithIV.getParameters();
+            key = (KeyParameter) parametersWithIV.getParameters();
         } else {
             throw new IllegalArgumentException("invalid parameters passed to GCM");
         }
@@ -108,20 +108,20 @@ public class GCMBlockCipher implements GCMModeCipher {
             throw new IllegalArgumentException("IV must be at least 1 byte");
         }
         if (z && (bArr = this.nonce) != null && Arrays.areEqual(bArr, iv)) {
-            if (keyParameter == null) {
+            if (key == null) {
                 throw new IllegalArgumentException("cannot reuse nonce for GCM encryption");
             }
             byte[] bArr2 = this.lastKey;
-            if (bArr2 != null && Arrays.areEqual(bArr2, keyParameter.getKey())) {
+            if (bArr2 != null && Arrays.areEqual(bArr2, key.getKey())) {
                 throw new IllegalArgumentException("cannot reuse nonce for GCM encryption");
             }
         }
         this.nonce = iv;
-        if (keyParameter != null) {
-            this.lastKey = keyParameter.getKey();
+        if (key != null) {
+            this.lastKey = key.getKey();
         }
-        if (keyParameter != null) {
-            this.cipher.init(true, keyParameter);
+        if (key != null) {
+            this.cipher.init(true, key);
             byte[] bArr3 = new byte[16];
             this.H = bArr3;
             this.cipher.processBlock(bArr3, 0, bArr3, 0);
@@ -265,7 +265,7 @@ public class GCMBlockCipher implements GCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processByte(byte b, byte[] bArr, int i) throws DataLengthException {
+    public int processByte(byte b, byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         checkStatus();
         if (getTotalInputSizeAfterNewInput(1) > MAX_INPUT_SIZE) {
             throw new DataLengthException("Input exceeded 68719476704 bytes");
@@ -291,7 +291,7 @@ public class GCMBlockCipher implements GCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException {
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         int i4;
         checkStatus();
         if (getTotalInputSizeAfterNewInput(i2) > MAX_INPUT_SIZE) {
@@ -374,7 +374,7 @@ public class GCMBlockCipher implements GCMModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] bArr, int i) throws IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         GCMBlockCipher gCMBlockCipher;
         byte[] bArr2;
         int i2;
@@ -491,7 +491,7 @@ public class GCMBlockCipher implements GCMModeCipher {
         }
     }
 
-    private void decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
+    private void decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         if (bArr2.length - i2 < 16) {
             throw new OutputLengthException("Output buffer too short");
         }
@@ -505,7 +505,7 @@ public class GCMBlockCipher implements GCMModeCipher {
         this.totalLength += 16;
     }
 
-    private void encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
+    private void encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         if (bArr2.length - i2 < 16) {
             throw new OutputLengthException("Output buffer too short");
         }
@@ -520,7 +520,7 @@ public class GCMBlockCipher implements GCMModeCipher {
         this.totalLength += 16;
     }
 
-    private void processPartial(byte[] bArr, int i, int i2, byte[] bArr2, int i3) {
+    private void processPartial(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         byte[] bArr3 = new byte[16];
         getNextCTRBlock(bArr3);
         if (this.forEncryption) {
@@ -555,7 +555,7 @@ public class GCMBlockCipher implements GCMModeCipher {
         this.multiplier.multiplyH(bArr);
     }
 
-    private void getNextCTRBlock(byte[] bArr) {
+    private void getNextCTRBlock(byte[] bArr) throws IllegalStateException, DataLengthException {
         int i = this.blocksRemaining;
         if (i == 0) {
             throw new IllegalStateException("Attempt to process too many blocks");

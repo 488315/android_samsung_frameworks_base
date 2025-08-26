@@ -23,15 +23,15 @@ public class CycleInterpolator extends BaseInterpolator implements NativeInterpo
     }
 
     public CycleInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.CycleInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.CycleInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.CycleInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.CycleInterpolator);
         }
-        this.mCycles = obtainAttributes.getFloat(0, 1.0f);
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        this.mCycles = typedArrayObtainAttributes.getFloat(0, 1.0f);
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.animation.TimeInterpolator

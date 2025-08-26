@@ -16,7 +16,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ShadowGraphicsLayerElement extends ModifierNodeElement<BlockGraphicsLayerModifier> {
     public final long ambientColor;
@@ -42,19 +41,19 @@ public final class ShadowGraphicsLayerElement extends ModifierNodeElement<BlockG
             return false;
         }
         ShadowGraphicsLayerElement shadowGraphicsLayerElement = (ShadowGraphicsLayerElement) obj;
-        if (!Dp.m836equalsimpl0(this.elevation, shadowGraphicsLayerElement.elevation) || !Intrinsics.areEqual(this.shape, shadowGraphicsLayerElement.shape) || this.clip != shadowGraphicsLayerElement.clip) {
+        if (!Dp.m838equalsimpl0(this.elevation, shadowGraphicsLayerElement.elevation) || !Intrinsics.areEqual(this.shape, shadowGraphicsLayerElement.shape) || this.clip != shadowGraphicsLayerElement.clip) {
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.ambientColor, shadowGraphicsLayerElement.ambientColor) && ULong.m3427equalsimpl0(this.spotColor, shadowGraphicsLayerElement.spotColor);
+        return ULong.m3447equalsimpl0(this.ambientColor, shadowGraphicsLayerElement.ambientColor) && ULong.m3447equalsimpl0(this.spotColor, shadowGraphicsLayerElement.spotColor);
     }
 
     public final int hashCode() {
         Dp.Companion companion = Dp.Companion;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((this.shape.hashCode() + (Float.hashCode(this.elevation) * 31)) * 31, 31, this.clip);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((this.shape.hashCode() + (Float.hashCode(this.elevation) * 31)) * 31, 31, this.clip);
         Color.Companion companion2 = Color.Companion;
         int i = ULong.$r8$clinit;
-        return Long.hashCode(this.spotColor) + MoveResult$$ExternalSyntheticOutline0.m(m, 31, this.ambientColor);
+        return Long.hashCode(this.spotColor) + MoveResult$$ExternalSyntheticOutline0.m(iM, 31, this.ambientColor);
     }
 
     public final String toString() {
@@ -65,7 +64,7 @@ public final class ShadowGraphicsLayerElement extends ModifierNodeElement<BlockG
         sb.append(this.clip);
         sb.append(", ambientColor=");
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.ambientColor, ", spotColor=", sb);
-        sb.append((Object) Color.m462toStringimpl(this.spotColor));
+        sb.append((Object) Color.m464toStringimpl(this.spotColor));
         sb.append(')');
         return sb.toString();
     }
@@ -74,7 +73,7 @@ public final class ShadowGraphicsLayerElement extends ModifierNodeElement<BlockG
     public final void update(Modifier.Node node) {
         BlockGraphicsLayerModifier blockGraphicsLayerModifier = (BlockGraphicsLayerModifier) node;
         blockGraphicsLayerModifier.layerBlock = new ShadowGraphicsLayerElement$createBlock$1(this);
-        NodeCoordinator nodeCoordinator = DelegatableNodeKt.m632requireCoordinator64DMado(blockGraphicsLayerModifier, 2).wrapped;
+        NodeCoordinator nodeCoordinator = DelegatableNodeKt.m634requireCoordinator64DMado(blockGraphicsLayerModifier, 2).wrapped;
         if (nodeCoordinator != null) {
             nodeCoordinator.updateLayerBlock(blockGraphicsLayerModifier.layerBlock, true);
         }

@@ -78,9 +78,9 @@ class UnknownFieldSetLiteSchema extends UnknownFieldSchema<UnknownFieldSetLite, 
         if (fromMessage != UnknownFieldSetLite.getDefaultInstance()) {
             return fromMessage;
         }
-        UnknownFieldSetLite newInstance = UnknownFieldSetLite.newInstance();
-        setToMessage(obj, newInstance);
-        return newInstance;
+        UnknownFieldSetLite unknownFieldSetLiteNewInstance = UnknownFieldSetLite.newInstance();
+        setToMessage(obj, unknownFieldSetLiteNewInstance);
+        return unknownFieldSetLiteNewInstance;
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */

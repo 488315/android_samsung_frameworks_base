@@ -43,13 +43,13 @@ public class DropBoxManager {
 
             @Override // android.os.Parcelable.Creator
             public Entry createFromParcel(Parcel parcel) {
-                String readString = parcel.readString();
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
-                if ((readInt & 8) != 0) {
-                    return new Entry(readString, readLong, parcel.createByteArray(), readInt & (-9));
+                String string = parcel.readString();
+                long j = parcel.readLong();
+                int i = parcel.readInt();
+                if ((i & 8) != 0) {
+                    return new Entry(string, j, parcel.createByteArray(), i & (-9));
                 }
-                return new Entry(readString, readLong, ParcelFileDescriptor.CREATOR.createFromParcel(parcel), readInt);
+                return new Entry(string, j, ParcelFileDescriptor.CREATOR.createFromParcel(parcel), i);
             }
         };
         private final byte[] mData;
@@ -148,7 +148,7 @@ public class DropBoxManager {
             return this.mFlags & (-5);
         }
 
-        public String getText(int i) {
+        public String getText(int i) throws Throwable {
             InputStream inputStream;
             InputStream inputStream2 = null;
             if ((this.mFlags & 2) == 0) {
@@ -280,11 +280,11 @@ public class DropBoxManager {
             throw new NullPointerException("file == null");
         }
         try {
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
             try {
-                this.mService.addFile(str, open, i);
-                if (open != null) {
-                    open.close();
+                this.mService.addFile(str, parcelFileDescriptorOpen, i);
+                if (parcelFileDescriptorOpen != null) {
+                    parcelFileDescriptorOpen.close();
                 }
             } finally {
             }

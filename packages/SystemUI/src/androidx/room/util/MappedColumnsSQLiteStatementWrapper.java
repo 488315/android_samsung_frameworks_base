@@ -4,7 +4,6 @@ import androidx.sqlite.SQLiteStatement;
 import java.util.List;
 import kotlin.collections.builders.MapBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MappedColumnsSQLiteStatementWrapper implements SQLiteStatement {
     public final MapBuilder columnNameToIndexMap;
@@ -51,7 +50,7 @@ public final class MappedColumnsSQLiteStatementWrapper implements SQLiteStatemen
     }
 
     @Override // java.lang.AutoCloseable
-    public final void close() {
+    public final void close() throws Exception {
         this.delegate.close();
     }
 

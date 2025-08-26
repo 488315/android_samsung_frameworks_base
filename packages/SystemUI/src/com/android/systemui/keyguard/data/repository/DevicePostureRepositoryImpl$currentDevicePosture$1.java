@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DevicePostureRepositoryImpl$currentDevicePosture$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,28 +51,28 @@ final class DevicePostureRepositoryImpl$currentDevicePosture$1 extends SuspendLa
             final Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl$currentDevicePosture$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    int intValue = ((Integer) obj2).intValue();
+                public final Object mo781invoke(Object obj2) {
+                    int iIntValue = ((Integer) obj2).intValue();
                     DevicePosture.Companion.getClass();
-                    DevicePosture posture = DevicePosture.Companion.toPosture(intValue);
+                    DevicePosture posture = DevicePosture.Companion.toPosture(iIntValue);
                     ChannelExt.INSTANCE.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, posture, "PostureRepositoryImpl", "Error sending posture update to " + posture);
+                    ChannelExt.trySendWithFailureLogging(producerScope, posture, "PostureRepositoryImpl", "Error sending posture update to " + posture);
                     return Unit.INSTANCE;
                 }
             };
             final ?? r3 = new DevicePostureController.Callback() { // from class: com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl$currentDevicePosture$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
                 public final void onPostureChanged(int i2) {
-                    Function1.this.mo779invoke(Integer.valueOf(i2));
+                    function1.mo781invoke(Integer.valueOf(i2));
                 }
             };
             ((DevicePostureControllerImpl) this.this$0.postureController).addCallback(r3);
-            function1.mo779invoke(new Integer(((DevicePostureControllerImpl) this.this$0.postureController).getDevicePosture()));
+            function1.mo781invoke(new Integer(((DevicePostureControllerImpl) this.this$0.postureController).getDevicePosture()));
             final DevicePostureRepositoryImpl devicePostureRepositoryImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.DevicePostureRepositoryImpl$currentDevicePosture$1$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((DevicePostureControllerImpl) DevicePostureRepositoryImpl.this.postureController).removeCallback(r3);
+                    ((DevicePostureControllerImpl) devicePostureRepositoryImpl.postureController).removeCallback(r3);
                     return Unit.INSTANCE;
                 }
             };

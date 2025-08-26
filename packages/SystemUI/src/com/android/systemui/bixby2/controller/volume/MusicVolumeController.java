@@ -9,7 +9,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MusicVolumeController extends VolumeType {
     public static final int $stable = 8;
@@ -22,9 +21,7 @@ public final class MusicVolumeController extends VolumeType {
         this.mediaSessionManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.MusicVolumeController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                MediaSessionManager mediaSessionManager_delegate$lambda$0;
-                mediaSessionManager_delegate$lambda$0 = MusicVolumeController.mediaSessionManager_delegate$lambda$0(context);
-                return mediaSessionManager_delegate$lambda$0;
+                return MusicVolumeController.mediaSessionManager_delegate$lambda$0(context);
             }
         });
     }
@@ -38,20 +35,20 @@ public final class MusicVolumeController extends VolumeType {
     }
 
     private final boolean isRemotePlayerActive() {
-        Object obj;
+        Object next;
         Iterator<T> it = getActiveSessions().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            MediaController.PlaybackInfo playbackInfo = ((MediaController) obj).getPlaybackInfo();
+            next = it.next();
+            MediaController.PlaybackInfo playbackInfo = ((MediaController) next).getPlaybackInfo();
             if (playbackInfo != null && playbackInfo.getPlaybackType() == 2) {
                 break;
             }
         }
-        MediaController mediaController = (MediaController) obj;
+        MediaController mediaController = (MediaController) next;
         if (mediaController == null) {
             return false;
         }

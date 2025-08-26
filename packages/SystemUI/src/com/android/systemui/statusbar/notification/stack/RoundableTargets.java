@@ -4,7 +4,6 @@ import com.android.systemui.statusbar.notification.Roundable;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RoundableTargets {
     public final Roundable after;
@@ -30,11 +29,11 @@ public final class RoundableTargets {
 
     public final int hashCode() {
         Roundable roundable = this.before;
-        int hashCode = (roundable == null ? 0 : roundable.hashCode()) * 31;
+        int iHashCode = (roundable == null ? 0 : roundable.hashCode()) * 31;
         ExpandableNotificationRow expandableNotificationRow = this.swiped;
-        int hashCode2 = (hashCode + (expandableNotificationRow == null ? 0 : expandableNotificationRow.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (expandableNotificationRow == null ? 0 : expandableNotificationRow.hashCode())) * 31;
         Roundable roundable2 = this.after;
-        return hashCode2 + (roundable2 != null ? roundable2.hashCode() : 0);
+        return iHashCode2 + (roundable2 != null ? roundable2.hashCode() : 0);
     }
 
     public final String toString() {

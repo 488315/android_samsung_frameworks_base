@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogSettingsButtonViewModel$icon$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -37,7 +36,7 @@ final class VolumeDialogSettingsButtonViewModel$icon$2 extends SuspendLambda imp
         ResultKt.throwOnFailure(obj);
         VolumeDialogSettingsButtonViewModel.PlaybackStates playbackStates = (VolumeDialogSettingsButtonViewModel.PlaybackStates) this.L$0;
         PlaybackState playbackState = (PlaybackState) this.L$1;
-        boolean isActive = playbackState != null ? playbackState.isActive() : false;
-        return (playbackStates == null || playbackState == null || isActive != playbackState.isActive()) ? playbackStates != null ? new VolumeDialogSettingsButtonViewModel.PlaybackStates(Boolean.valueOf(playbackStates.isCurrentActive), isActive) : new VolumeDialogSettingsButtonViewModel.PlaybackStates(null, isActive) : playbackStates;
+        boolean zIsActive = playbackState != null ? playbackState.isActive() : false;
+        return (playbackStates == null || playbackState == null || zIsActive != playbackState.isActive()) ? playbackStates != null ? new VolumeDialogSettingsButtonViewModel.PlaybackStates(Boolean.valueOf(playbackStates.isCurrentActive), zIsActive) : new VolumeDialogSettingsButtonViewModel.PlaybackStates(null, zIsActive) : playbackStates;
     }
 }

@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import com.android.systemui.qs.bar.VideoCallMicModeBar;
 import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractor;
 import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractorImpl;
 import com.android.systemui.util.SystemUIAnalytics;
+import java.io.IOException;
 import java.util.ArrayList;
 import kotlin.Result;
 import kotlin.Unit;
@@ -25,7 +27,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicModeBarBase {
     public static final Uri URI_VSET_APP_STATUS_DATA;
@@ -41,7 +42,6 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
     public TextView videoCallEffectsNum;
     public TextView videoCallEffectsText;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -68,7 +68,7 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
             public final void onChange(boolean z, Uri uri) {
                 Object failure;
                 super.onChange(z, uri);
-                VideoCallEffect videoCallEffect = VideoCallEffect.this;
+                VideoCallEffect videoCallEffect = this.this$0;
                 try {
                     int i = Result.$r8$clinit;
                     if (uri != null) {
@@ -82,9 +82,9 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
                     int i2 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
-                    Log.e("VideoCallEffect", "onChange: exception occurred: " + m3422exceptionOrNullimpl.getMessage());
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    Log.e("VideoCallEffect", "onChange: exception occurred: " + thM3442exceptionOrNullimpl.getMessage());
                 }
             }
         };
@@ -107,12 +107,12 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
     public final void inflate(View view) {
         View view2 = null;
-        View inflate = this.util.inflate(R.layout.sec_video_call_effects_button, view instanceof ViewGroup ? (ViewGroup) view : null, true);
-        if (inflate != null) {
-            this.videoCallEffectsText = (TextView) inflate.findViewById(R.id.video_call_effects_text);
-            this.videoCallEffectsNum = (TextView) inflate.findViewById(R.id.video_call_effects_number);
-            this.videoCallEffectsContainer = (LinearLayout) inflate.findViewById(R.id.video_call_effects_container);
-            view2 = inflate;
+        View viewInflate = this.util.inflate(R.layout.sec_video_call_effects_button, view instanceof ViewGroup ? (ViewGroup) view : null, true);
+        if (viewInflate != null) {
+            this.videoCallEffectsText = (TextView) viewInflate.findViewById(R.id.video_call_effects_text);
+            this.videoCallEffectsNum = (TextView) viewInflate.findViewById(R.id.video_call_effects_number);
+            this.videoCallEffectsContainer = (LinearLayout) viewInflate.findViewById(R.id.video_call_effects_container);
+            view2 = viewInflate;
         }
         this.videoCallEffectsButton = view2;
     }
@@ -131,9 +131,9 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            Log.e("VideoCallEffect", "registerContentObserver: exception occurred: " + m3422exceptionOrNullimpl.getMessage());
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            Log.e("VideoCallEffect", "registerContentObserver: exception occurred: " + thM3442exceptionOrNullimpl.getMessage());
         }
     }
 
@@ -142,20 +142,20 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
         return this.isVCEEnabled && this.isCameraOpened;
     }
 
-    public final void parseVce(Uri uri) {
-        Cursor query = this.context.getApplicationContext().getContentResolver().query(uri, null, null, null, null);
-        if (query != null) {
+    public final void parseVce(Uri uri) throws IOException {
+        Cursor cursorQuery = this.context.getApplicationContext().getContentResolver().query(uri, null, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() >= 1) {
-                    if (!query.moveToNext()) {
+                if (cursorQuery.getCount() >= 1) {
+                    if (!cursorQuery.moveToNext()) {
                         Log.e("VideoCallEffect", "current position is invalid");
-                        CloseableKt.closeFinally(query, null);
+                        CloseableKt.closeFinally(cursorQuery, null);
                         return;
                     }
-                    String[] columnNames = query.getColumnNames();
+                    String[] columnNames = cursorQuery.getColumnNames();
                     ArrayList arrayList = new ArrayList(columnNames.length);
                     for (String str : columnNames) {
-                        arrayList.add(Integer.valueOf(query.getColumnIndex(str)));
+                        arrayList.add(Integer.valueOf(cursorQuery.getColumnIndex(str)));
                     }
                     ArrayList arrayList2 = new ArrayList();
                     int size = arrayList.size();
@@ -172,21 +172,21 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
                     while (i2 < size2) {
                         Object obj2 = arrayList2.get(i2);
                         i2++;
-                        int intValue = ((Number) obj2).intValue();
-                        String columnName = query.getColumnName(intValue);
-                        String string = query.getString(intValue);
+                        int iIntValue = ((Number) obj2).intValue();
+                        String columnName = cursorQuery.getColumnName(iIntValue);
+                        String string = cursorQuery.getString(iIntValue);
                         if (columnName != null) {
-                            int hashCode = columnName.hashCode();
-                            if (hashCode != -1609594047) {
-                                if (hashCode != -1054699790) {
-                                    if (hashCode == -17833129 && columnName.equals("camerastatus")) {
+                            int iHashCode = columnName.hashCode();
+                            if (iHashCode != -1609594047) {
+                                if (iHashCode != -1054699790) {
+                                    if (iHashCode == -17833129 && columnName.equals("camerastatus")) {
                                         Log.i("VideoCallEffect", "parseVce: " + columnName + " -> " + string);
                                         this.isCameraOpened = Intrinsics.areEqual(string, "OPEN");
                                         this.updateBarVisibilitiesRunnable.run();
                                     }
                                 } else if (columnName.equals("availablefunctions")) {
                                     Log.i("VideoCallEffect", "parseVce: " + columnName + " -> " + string);
-                                    int i3 = query.getInt(intValue);
+                                    int i3 = cursorQuery.getInt(iIntValue);
                                     TextView textView = this.videoCallEffectsNum;
                                     if (textView != null) {
                                         if (i3 > 0) {
@@ -205,7 +205,7 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
                         }
                     }
                     Unit unit = Unit.INSTANCE;
-                    CloseableKt.closeFinally(query, null);
+                    CloseableKt.closeFinally(cursorQuery, null);
                     return;
                 }
             } finally {
@@ -214,14 +214,14 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
         Log.e("VideoCallEffect", "cursor is null or number of cursor is less than 1");
         this.isVCEEnabled = false;
         this.isCameraOpened = false;
-        CloseableKt.closeFinally(query, null);
+        CloseableKt.closeFinally(cursorQuery, null);
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
     public final void setClickListener(final Function1 function1) {
         View view = this.videoCallEffectsButton;
         if (view != null) {
-            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.VideoCallEffect$setClickListener$1
+            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.VideoCallEffect.setClickListener.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
                     Log.d("VideoCallEffect", "onClicked");
@@ -232,14 +232,14 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
                     intent.setPackage("com.samsung.android.vtcamerasettings");
                     ((PanelInteractorImpl) videoCallEffect.panelInteractor).collapsePanels();
                     videoCallEffect.context.startService(intent);
-                    function1.mo779invoke(SystemUIAnalytics.EID_VIDEO_EFFECTS);
+                    function1.mo781invoke(SystemUIAnalytics.EID_VIDEO_EFFECTS);
                 }
             });
         }
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
-    public final void updateFontScale() {
+    public final void updateFontScale() throws Resources.NotFoundException {
         TextView textView = this.videoCallEffectsText;
         this.util.getClass();
         FontSizeUtils.updateFontSize(textView, R.dimen.sec_style_qs_tile_text_size, 0.8f, 1.3f);

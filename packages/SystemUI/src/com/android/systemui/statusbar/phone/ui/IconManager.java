@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class IconManager implements DemoModeCommandReceiver {
     public final ArrayList excludeSlotsForPadding;
@@ -82,9 +81,9 @@ public class IconManager implements DemoModeCommandReceiver {
         this.mMobileUiAdapterKairos = lazy;
         this.mWifiViewModel = wifiUiAdapter.bindGroup(viewGroup, statusBarLocation);
         bTTetherUiAdapter.bindGroup(viewGroup);
-        arrayList.add(context.getString(17043278));
-        arrayList.add(context.getString(17043279));
-        arrayList.add(context.getString(17043257));
+        arrayList.add(context.getString(17043282));
+        arrayList.add(context.getString(17043283));
+        arrayList.add(context.getString(17043261));
     }
 
     public final StatusIconDisplayable addHolder(int i, String str, boolean z, StatusBarIconHolder statusBarIconHolder) {
@@ -121,42 +120,42 @@ public class IconManager implements DemoModeCommandReceiver {
             if (type == 4) {
                 Context context = this.mContext;
                 LocationBasedWifiViewModel locationBasedWifiViewModel = this.mWifiViewModel;
-                ModernStatusBarWifiView constructAndBind = ModernStatusBarWifiView.constructAndBind(context, str, locationBasedWifiViewModel);
-                this.mGroup.addView(constructAndBind, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
+                ModernStatusBarWifiView modernStatusBarWifiViewConstructAndBind = ModernStatusBarWifiView.constructAndBind(context, str, locationBasedWifiViewModel);
+                this.mGroup.addView(modernStatusBarWifiViewConstructAndBind, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
                 if (this.mIsInDemoMode) {
                     this.mDemoStatusIcons.addModernWifiView(locationBasedWifiViewModel);
                 }
-                return constructAndBind;
+                return modernStatusBarWifiViewConstructAndBind;
             }
             if (type != 5) {
                 return null;
             }
             StatusBarIconHolder.BindableIconHolder bindableIconHolder = (StatusBarIconHolder.BindableIconHolder) statusBarIconHolder;
             ((HashMap) this.mBindableIcons).put(bindableIconHolder.slot, bindableIconHolder);
-            ModernStatusBarView createAndBind = bindableIconHolder.initializer.createAndBind(this.mContext);
-            this.mGroup.addView(createAndBind, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
+            ModernStatusBarView modernStatusBarViewCreateAndBind = bindableIconHolder.initializer.createAndBind(this.mContext);
+            this.mGroup.addView(modernStatusBarViewCreateAndBind, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
             if (this.mIsInDemoMode) {
                 this.mDemoStatusIcons.addBindableIcon(bindableIconHolder);
             }
-            return createAndBind;
+            return modernStatusBarViewCreateAndBind;
         }
         int i2 = statusBarIconHolder.tag;
         Context context2 = this.mContext;
         MobileContextProvider mobileContextProvider = this.mMobileContextProvider;
         Context mobileContextForSub = mobileContextProvider.getMobileContextForSub(i2, context2);
         MobileIconsViewModel mobileIconsViewModel = this.mMobileIconsViewModel;
-        ModernStatusBarMobileView constructAndBind2 = ModernStatusBarMobileView.constructAndBind(mobileContextForSub, mobileIconsViewModel.logger, str, mobileIconsViewModel.viewModelForSub(i2, statusBarLocation, str), mobileIconsViewModel.configuration);
-        this.mGroup.addView(constructAndBind2, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
+        ModernStatusBarMobileView modernStatusBarMobileViewConstructAndBind = ModernStatusBarMobileView.constructAndBind(mobileContextForSub, mobileIconsViewModel.logger, str, mobileIconsViewModel.viewModelForSub(i2, statusBarLocation, str), mobileIconsViewModel.configuration);
+        this.mGroup.addView(modernStatusBarMobileViewConstructAndBind, i, onCreateLayoutParams(StatusBarIcon.Shape.WRAP_CONTENT));
         if (this.mIsInDemoMode) {
             Context mobileContextForSub2 = mobileContextProvider.getMobileContextForSub(i2, this.mContext);
             DemoStatusIcons demoStatusIcons = this.mDemoStatusIcons;
             demoStatusIcons.getClass();
             Log.d("DemoStatusIcons", "addModernMobileView (subId=" + i2 + ")");
-            ModernStatusBarMobileView constructAndBind3 = ModernStatusBarMobileView.constructAndBind(mobileContextForSub2, mobileIconsViewModel.logger, "mobile", demoStatusIcons.mMobileIconsViewModel.viewModelForSub(i2, demoStatusIcons.mLocation, "mobile"), demoStatusIcons.mMobileIconsViewModel.configuration);
-            demoStatusIcons.mModernMobileViews.add(constructAndBind3);
-            demoStatusIcons.addView(constructAndBind3, demoStatusIcons.getChildCount(), new LinearLayout.LayoutParams(-2, demoStatusIcons.mIconSize));
+            ModernStatusBarMobileView modernStatusBarMobileViewConstructAndBind2 = ModernStatusBarMobileView.constructAndBind(mobileContextForSub2, mobileIconsViewModel.logger, "mobile", demoStatusIcons.mMobileIconsViewModel.viewModelForSub(i2, demoStatusIcons.mLocation, "mobile"), demoStatusIcons.mMobileIconsViewModel.configuration);
+            demoStatusIcons.mModernMobileViews.add(modernStatusBarMobileViewConstructAndBind2);
+            demoStatusIcons.addView(modernStatusBarMobileViewConstructAndBind2, demoStatusIcons.getChildCount(), new LinearLayout.LayoutParams(-2, demoStatusIcons.mIconSize));
         }
-        return constructAndBind2;
+        return modernStatusBarMobileViewConstructAndBind;
     }
 
     public void destroy() {

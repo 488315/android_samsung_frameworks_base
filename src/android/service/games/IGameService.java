@@ -59,9 +59,9 @@ public interface IGameService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameService)) {
-                return (IGameService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGameService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGameService)) {
+                return (IGameService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,9 +94,9 @@ public interface IGameService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IGameServiceController asInterface = IGameServiceController.Stub.asInterface(parcel.readStrongBinder());
+                IGameServiceController iGameServiceControllerAsInterface = IGameServiceController.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                connected(asInterface);
+                connected(iGameServiceControllerAsInterface);
             } else if (i == 2) {
                 disconnected();
             } else if (i == 3) {
@@ -127,36 +127,36 @@ public interface IGameService extends IInterface {
 
             @Override // android.service.games.IGameService
             public void connected(IGameServiceController iGameServiceController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iGameServiceController);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGameServiceController);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.games.IGameService
             public void disconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.games.IGameService
             public void gameStarted(GameStartedEvent gameStartedEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameService.DESCRIPTOR);
-                    obtain.writeTypedObject(gameStartedEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gameStartedEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

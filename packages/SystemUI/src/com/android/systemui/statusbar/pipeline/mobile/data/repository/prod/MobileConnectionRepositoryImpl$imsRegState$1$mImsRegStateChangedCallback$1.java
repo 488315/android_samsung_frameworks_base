@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.pipeline.shared.data.model.ImsRegState;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileConnectionRepositoryImpl$imsRegState$1$mImsRegStateChangedCallback$1 {
     public final /* synthetic */ ProducerScope $$this$conflatedCallbackFlow;
@@ -22,12 +21,12 @@ public final class MobileConnectionRepositoryImpl$imsRegState$1$mImsRegStateChan
         boolean z = imsRegState.voWifiRegState;
         boolean z2 = imsRegState.voLTERegState;
         boolean z3 = imsRegState.ePDGRegState;
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onImsRegStateChanged[", i, "] (", z, " / ");
-        m.append(z2);
-        m.append(" / ");
-        m.append(z3);
-        m.append(")");
-        Log.d("MobileConnectionRepositoryImpl", m.toString());
-        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3456trySendJP2dKIU(imsRegState);
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onImsRegStateChanged[", i, "] (", z, " / ");
+        sbM.append(z2);
+        sbM.append(" / ");
+        sbM.append(z3);
+        sbM.append(")");
+        Log.d("MobileConnectionRepositoryImpl", sbM.toString());
+        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(imsRegState);
     }
 }

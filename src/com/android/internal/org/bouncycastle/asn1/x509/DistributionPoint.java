@@ -82,24 +82,24 @@ public class DistributionPoint extends ASN1Object {
     }
 
     public String toString() {
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("DistributionPoint: [");
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         DistributionPointName distributionPointName = this.distributionPoint;
         if (distributionPointName != null) {
-            appendObject(stringBuffer, lineSeparator, "distributionPoint", distributionPointName.toString());
+            appendObject(stringBuffer, strLineSeparator, "distributionPoint", distributionPointName.toString());
         }
         ReasonFlags reasonFlags = this.reasons;
         if (reasonFlags != null) {
-            appendObject(stringBuffer, lineSeparator, "reasons", reasonFlags.toString());
+            appendObject(stringBuffer, strLineSeparator, "reasons", reasonFlags.toString());
         }
         GeneralNames generalNames = this.cRLIssuer;
         if (generalNames != null) {
-            appendObject(stringBuffer, lineSeparator, "cRLIssuer", generalNames.toString());
+            appendObject(stringBuffer, strLineSeparator, "cRLIssuer", generalNames.toString());
         }
         stringBuffer.append(NavigationBarInflaterView.SIZE_MOD_END);
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         return stringBuffer.toString();
     }
 

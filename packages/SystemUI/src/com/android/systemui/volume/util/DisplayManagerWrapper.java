@@ -10,7 +10,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisplayManagerWrapper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -22,7 +21,6 @@ public final class DisplayManagerWrapper {
     public int minSmartViewVol = -1;
     public int maxSmartViewVol = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,26 +74,28 @@ public final class DisplayManagerWrapper {
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0028  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final String getSmartViewDeviceName() {
-        SemDlnaDevice semGetActiveDlnaDevice;
+        SemDlnaDevice semDlnaDeviceSemGetActiveDlnaDevice;
         SystemServiceExtension systemServiceExtension = SystemServiceExtension.INSTANCE;
         Context context = this.context;
         systemServiceExtension.getClass();
-        SemWifiDisplayStatus semGetWifiDisplayStatus = SystemServiceExtension.getDisplayManager(context).semGetWifiDisplayStatus();
-        if (semGetWifiDisplayStatus != null) {
-            if (semGetWifiDisplayStatus.getActiveDisplayState() != 2) {
-                semGetWifiDisplayStatus = null;
+        SemWifiDisplayStatus semWifiDisplayStatusSemGetWifiDisplayStatus = SystemServiceExtension.getDisplayManager(context).semGetWifiDisplayStatus();
+        if (semWifiDisplayStatusSemGetWifiDisplayStatus != null) {
+            if (semWifiDisplayStatusSemGetWifiDisplayStatus.getActiveDisplayState() != 2) {
+                semWifiDisplayStatusSemGetWifiDisplayStatus = null;
             }
-            if (semGetWifiDisplayStatus != null) {
-                SemWifiDisplay activeDisplay = semGetWifiDisplayStatus.getActiveDisplay();
+            if (semWifiDisplayStatusSemGetWifiDisplayStatus != null) {
+                SemWifiDisplay activeDisplay = semWifiDisplayStatusSemGetWifiDisplayStatus.getActiveDisplay();
                 if (activeDisplay != null) {
                     return activeDisplay.getDeviceName();
                 }
-                return null;
             }
-        }
-        if (SystemServiceExtension.getDisplayManager(this.context).semGetActiveDlnaState() == 1 && (semGetActiveDlnaDevice = SystemServiceExtension.getDisplayManager(this.context).semGetActiveDlnaDevice()) != null) {
-            return semGetActiveDlnaDevice.getDeviceName();
+        } else if (SystemServiceExtension.getDisplayManager(this.context).semGetActiveDlnaState() == 1 && (semDlnaDeviceSemGetActiveDlnaDevice = SystemServiceExtension.getDisplayManager(this.context).semGetActiveDlnaDevice()) != null) {
+            return semDlnaDeviceSemGetActiveDlnaDevice.getDeviceName();
         }
         return null;
     }
@@ -104,11 +104,11 @@ public final class DisplayManagerWrapper {
         SystemServiceExtension systemServiceExtension = SystemServiceExtension.INSTANCE;
         Context context = this.context;
         systemServiceExtension.getClass();
-        SemDlnaDevice semGetActiveDlnaDevice = SystemServiceExtension.getDisplayManager(context).semGetActiveDlnaDevice();
-        if (semGetActiveDlnaDevice == null) {
+        SemDlnaDevice semDlnaDeviceSemGetActiveDlnaDevice = SystemServiceExtension.getDisplayManager(context).semGetActiveDlnaDevice();
+        if (semDlnaDeviceSemGetActiveDlnaDevice == null) {
             return false;
         }
-        int dlnaType = semGetActiveDlnaDevice.getDlnaType();
+        int dlnaType = semDlnaDeviceSemGetActiveDlnaDevice.getDlnaType();
         return dlnaType == 0 || dlnaType == 2 || dlnaType == 3;
     }
 

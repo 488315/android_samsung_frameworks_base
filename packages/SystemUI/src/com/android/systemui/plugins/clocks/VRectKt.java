@@ -2,7 +2,6 @@ package com.android.systemui.plugins.clocks;
 
 import kotlin.ULong;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VRectKt {
     private static final long BOTTOM_MASK = 65535;
@@ -19,7 +18,7 @@ public final class VRectKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackBottom-VKZWuLQ, reason: not valid java name */
-    public static final short m2838unpackBottomVKZWuLQ(long j) {
+    public static final short m2856unpackBottomVKZWuLQ(long j) {
         long j2 = j & BOTTOM_MASK;
         int i = ULong.$r8$clinit;
         return (short) j2;
@@ -27,7 +26,7 @@ public final class VRectKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackLeft-VKZWuLQ, reason: not valid java name */
-    public static final short m2839unpackLeftVKZWuLQ(long j) {
+    public static final short m2857unpackLeftVKZWuLQ(long j) {
         long j2 = j & LEFT_MASK;
         int i = ULong.$r8$clinit;
         return (short) (j2 >>> 48);
@@ -35,7 +34,7 @@ public final class VRectKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackRight-VKZWuLQ, reason: not valid java name */
-    public static final short m2840unpackRightVKZWuLQ(long j) {
+    public static final short m2858unpackRightVKZWuLQ(long j) {
         long j2 = j & RIGHT_MASK;
         int i = ULong.$r8$clinit;
         return (short) (j2 >>> 16);
@@ -43,7 +42,7 @@ public final class VRectKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackTop-VKZWuLQ, reason: not valid java name */
-    public static final short m2841unpackTopVKZWuLQ(long j) {
+    public static final short m2859unpackTopVKZWuLQ(long j) {
         long j2 = j & TOP_MASK;
         int i = ULong.$r8$clinit;
         return (short) (j2 >>> 32);

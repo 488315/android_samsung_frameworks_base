@@ -6,6 +6,7 @@ import android.os.SystemProperties;
 import dalvik.system.PathClassLoader;
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /* loaded from: classes4.dex */
@@ -145,7 +146,7 @@ public class BoostFramework {
         this(context, false);
     }
 
-    public BoostFramework(Context context, boolean z) {
+    public BoostFramework(Context context, boolean z) throws NoSuchMethodException, SecurityException {
         Constructor<?> constructor;
         this.board_first_api_lvl = SystemProperties.getInt("ro.board.first_api_level", 0);
         this.board_api_lvl = SystemProperties.getInt("ro.board.api_level", 0);
@@ -346,18 +347,18 @@ public class BoostFramework {
     }
 
     public int perfIOPrefetchStart(int i, String str, String str2) {
-        int i2;
+        int iIntValue;
         try {
-            i2 = ((Integer) sIOPStart.invoke(this.mPerf, Integer.valueOf(i), str, str2)).intValue();
+            iIntValue = ((Integer) sIOPStart.invoke(this.mPerf, Integer.valueOf(i), str, str2)).intValue();
         } catch (Exception e) {
             Log.e(TAG, "Exception " + e);
-            i2 = -1;
+            iIntValue = -1;
         }
         try {
             return ((Integer) sUxIOPStart.invoke(this.mUxPerf, Integer.valueOf(i), str, str2)).intValue();
         } catch (Exception e2) {
             Log.e(TAG, "Ux Perf Exception " + e2);
-            return i2;
+            return iIntValue;
         }
     }
 
@@ -436,11 +437,11 @@ public class BoostFramework {
         }
     }
 
-    public void perfEvent(int i, String str) {
+    public void perfEvent(int i, String str) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         perfEvent(i, str, 0, new int[0]);
     }
 
-    public void perfEvent(int i, String str, int i2, int... iArr) {
+    public void perfEvent(int i, String str, int i2, int... iArr) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         try {
             Method method = sPerfEventFunc;
             if (method != null) {
@@ -552,7 +553,7 @@ public class BoostFramework {
             }
         }
 
-        public static void setFrameInterval(final long j) {
+        public static void setFrameInterval(final long j) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (sQXIsLoaded) {
                 if (!sScrollOptEnable || (method = sSetFrameInterval) == null) {
@@ -568,7 +569,7 @@ public class BoostFramework {
             }
             new Thread(new Runnable() { // from class: android.util.BoostFramework.ScrollOptimizer.1
                 @Override // java.lang.Runnable
-                public void run() {
+                public void run() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
                     try {
                         ScrollOptimizer.initQXPerfFuncs();
                         if (!ScrollOptimizer.sScrollOptProp || ScrollOptimizer.sSetFrameInterval == null) {
@@ -584,7 +585,7 @@ public class BoostFramework {
             }).start();
         }
 
-        public static void setBLASTBufferQueue(BLASTBufferQueue bLASTBufferQueue) {
+        public static void setBLASTBufferQueue(BLASTBufferQueue bLASTBufferQueue) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (!sScrollOptEnable || (method = sSetBLASTBufferQueue) == null) {
                 return;
@@ -596,7 +597,7 @@ public class BoostFramework {
             }
         }
 
-        public static void setMotionType(int i) {
+        public static void setMotionType(int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (!sScrollOptEnable || (method = sSetMotionType) == null) {
                 return;
@@ -608,7 +609,7 @@ public class BoostFramework {
             }
         }
 
-        public static void setVsyncTime(long j) {
+        public static void setVsyncTime(long j) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (!sScrollOptEnable || (method = sSetVsyncTime) == null) {
                 return;
@@ -620,7 +621,7 @@ public class BoostFramework {
             }
         }
 
-        public static void setUITaskStatus(boolean z) {
+        public static void setUITaskStatus(boolean z) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (!sScrollOptEnable || (method = sSetUITaskStatus) == null) {
                 return;
@@ -632,7 +633,7 @@ public class BoostFramework {
             }
         }
 
-        public static void setFlingFlag(int i) {
+        public static void setFlingFlag(int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (!sScrollOptEnable || (method = sSetFlingFlag) == null) {
                 return;

@@ -16,9 +16,9 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecPanelExpansionStateInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +32,7 @@ public final class SecPanelExpansionStateInteractor {
     public final Lazy statusBarManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor$$ExternalSyntheticLambda2
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            Object systemService = SecPanelExpansionStateInteractor.this.context.getSystemService("sem_statusbar");
+            Object systemService = this.f$0.context.getSystemService("sem_statusbar");
             if (systemService instanceof SemStatusBarManager) {
                 return (SemStatusBarManager) systemService;
             }
@@ -43,40 +43,40 @@ public final class SecPanelExpansionStateInteractor {
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onFinishedGoingToSleep() {
             int i = SecPanelExpansionStateInteractor.$r8$clinit;
-            SecPanelExpansionStateInteractor.this.getRepository()._screenOffState.updateState(null, Boolean.TRUE);
+            this.this$0.getRepository()._screenOffState.updateState(null, Boolean.TRUE);
         }
 
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onFinishedWakingUp() {
             int i = SecPanelExpansionStateInteractor.$r8$clinit;
-            SecPanelExpansionStateInteractor.this.getRepository()._screenOffState.updateState(null, Boolean.FALSE);
+            this.this$0.getRepository()._screenOffState.updateState(null, Boolean.FALSE);
         }
 
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onStartedGoingToSleep() {
             int i = SecPanelExpansionStateInteractor.$r8$clinit;
-            SecPanelExpansionStateInteractor.this.getRepository()._screenOffState.updateState(null, Boolean.TRUE);
+            this.this$0.getRepository()._screenOffState.updateState(null, Boolean.TRUE);
         }
 
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onStartedWakingUp() {
             int i = SecPanelExpansionStateInteractor.$r8$clinit;
-            SecPanelExpansionStateInteractor.this.getRepository()._screenOffState.updateState(null, Boolean.FALSE);
+            this.this$0.getRepository()._screenOffState.updateState(null, Boolean.FALSE);
         }
     };
     public final SecPanelExpansionStateInteractor$shadeExpansionListener$1 shadeExpansionListener = new ShadeExpansionListener() { // from class: com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor$shadeExpansionListener$1
         @Override // com.android.systemui.shade.ShadeExpansionListener
         public final void onPanelExpansionChanged(ShadeExpansionChangeEvent shadeExpansionChangeEvent) {
             int i = SecPanelExpansionStateInteractor.$r8$clinit;
-            SecPanelExpansionStateInteractor.this.getRepository()._shadeFraction.updateState(null, Float.valueOf(shadeExpansionChangeEvent.fraction));
+            this.this$0.getRepository()._shadeFraction.updateState(null, Float.valueOf(shadeExpansionChangeEvent.fraction));
         }
     };
     public final SecPanelExpansionStateInteractor$stateListener$1 stateListener = new SecPanelExpansionStateInteractor$stateListener$1(this);
     public final StateFlowImpl lockscreenShadeFraction = getRepository()._lockscreenShadeFraction;
     public final StateFlowImpl shadeFraction = getRepository()._shadeFraction;
     public final StateFlowImpl statusBarState = getRepository()._statusBarState;
+    public final ReadonlyStateFlow panelState = getRepository().panelState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,7 +101,7 @@ public final class SecPanelExpansionStateInteractor {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = SecPanelExpansionStateInteractor.$r8$clinit;
-                return new SecPanelExpansionStateRepository(CoroutineScope.this, new SecPanelExpansionStateInteractor$repository$2$1(this));
+                return new SecPanelExpansionStateRepository(coroutineScope, new SecPanelExpansionStateInteractor$repository$2$1(this));
             }
         });
         final int i = 0;

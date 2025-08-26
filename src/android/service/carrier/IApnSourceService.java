@@ -46,9 +46,9 @@ public interface IApnSourceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApnSourceService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IApnSourceService)) {
-                return (IApnSourceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApnSourceService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IApnSourceService)) {
+                return (IApnSourceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IApnSourceService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ContentValues[] apns = getApns(readInt);
+                ContentValues[] apns = getApns(i3);
                 parcel2.writeNoException();
                 parcel2.writeTypedArray(apns, 1);
                 return true;
@@ -103,17 +103,17 @@ public interface IApnSourceService extends IInterface {
 
             @Override // android.service.carrier.IApnSourceService
             public ContentValues[] getApns(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSourceService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ContentValues[]) obtain2.createTypedArray(ContentValues.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApnSourceService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ContentValues[]) parcelObtain2.createTypedArray(ContentValues.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SelectorScreenKt$$ExternalSyntheticLambda5 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -32,12 +31,12 @@ public final /* synthetic */ class SelectorScreenKt$$ExternalSyntheticLambda5 im
         ((Integer) obj2).getClass();
         switch (i) {
             case 0:
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                SelectorScreenKt.DeviceListItem(this.f$0, (DeviceSession) this.f$1, this.f$2, composer, updateChangedFlags);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                SelectorScreenKt.DeviceListItem(this.f$0, (DeviceSession) this.f$1, this.f$2, composer, iUpdateChangedFlags);
                 break;
             default:
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(1);
-                SelectorScreenKt.SessionListItem(this.f$0, (MediaSession) this.f$1, this.f$2, composer, updateChangedFlags2);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(1);
+                SelectorScreenKt.SessionListItem(this.f$0, (MediaSession) this.f$1, this.f$2, composer, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

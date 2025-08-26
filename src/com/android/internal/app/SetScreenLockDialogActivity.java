@@ -60,11 +60,11 @@ public class SetScreenLockDialogActivity extends AlertActivity implements Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.set_up_screen_lock_title).setOnDismissListener(this).setPositiveButton(R.string.set_up_screen_lock_action_label, this).setNegativeButton(17039360, this);
         setLaunchUserSpecificMessage(builder);
-        AlertDialog create = builder.create();
-        create.create();
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.create();
         getWindow().setHideOverlayWindows(true);
-        create.getButton(-1).setFilterTouchesWhenObscured(true);
-        create.show();
+        alertDialogCreate.getButton(-1).setFilterTouchesWhenObscured(true);
+        alertDialogCreate.show();
     }
 
     @Override // android.content.DialogInterface.OnDismissListener

@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class PipTransitionController implements Transitions.TransitionHandler {
     public DefaultMixedHandler mMixedHandler;
@@ -51,10 +50,10 @@ public abstract class PipTransitionController implements Transitions.TransitionH
             SurfaceControl surfaceControl;
             int transitionDirection = pipTransitionAnimator.getTransitionDirection();
             int i = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(transitionDirection, "[PipTransitionController] onPipAnimationCancel: direction=", ", state=");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(transitionDirection, "[PipTransitionController] onPipAnimationCancel: direction=", ", state=");
             PipTransitionController pipTransitionController = PipTransitionController.this;
-            m.append(pipTransitionController.mPipOrganizer.mPipTransitionState);
-            Log.d("PipTaskOrganizer", m.toString());
+            sbM.append(pipTransitionController.mPipOrganizer.mPipTransitionState);
+            Log.d("PipTaskOrganizer", sbM.toString());
             if (PipAnimationController.isInPipDirection(transitionDirection) && (surfaceControl = (pipTaskOrganizer = pipTransitionController.mPipOrganizer).mPipOverlay) != null) {
                 if (pipTaskOrganizer.mPipTransitionState.mState == 5) {
                     Log.e("PipTaskOrganizer", "[PipTransitionController] onPipAnimationCancel: clearContentOverlay immediately, reason=exiting_pip");
@@ -77,11 +76,11 @@ public abstract class PipTransitionController implements Transitions.TransitionH
             SurfaceControl surfaceControl;
             int transitionDirection = pipTransitionAnimator.getTransitionDirection();
             int i = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(transitionDirection, "[PipTransitionController] onPipAnimationEnd direction=", " destination");
-            m.append(pipTransitionAnimator.mDestinationBounds);
-            m.append(" mState=");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(transitionDirection, "[PipTransitionController] onPipAnimationEnd direction=", " destination");
+            sbM.append(pipTransitionAnimator.mDestinationBounds);
+            sbM.append(" mState=");
             PipTransitionController pipTransitionController = PipTransitionController.this;
-            RecyclerView$$ExternalSyntheticOutline0.m(pipTransitionController.mPipOrganizer.mPipTransitionState.mState, "PipTaskOrganizer", m);
+            RecyclerView$$ExternalSyntheticOutline0.m(pipTransitionController.mPipOrganizer.mPipTransitionState.mState, "PipTaskOrganizer", sbM);
             pipTransitionController.mPipBoundsState.setBounds(pipTransitionAnimator.mDestinationBounds);
             if (transitionDirection == 5) {
                 return;
@@ -102,7 +101,6 @@ public abstract class PipTransitionController implements Transitions.TransitionH
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PipTransitionCallback {
         void onPipTransitionCanceled(int i);
 
@@ -122,15 +120,15 @@ public abstract class PipTransitionController implements Transitions.TransitionH
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.pip.PipTransitionController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PipTransitionController.this.onInit();
+                    this.f$0.onInit();
                 }
             }, this);
         }
     }
 
     public static TransitionInfo.Change findFixedRotationChange(TransitionInfo transitionInfo) {
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change.getEndFixedRotation() != -1) {
                 return change;
             }

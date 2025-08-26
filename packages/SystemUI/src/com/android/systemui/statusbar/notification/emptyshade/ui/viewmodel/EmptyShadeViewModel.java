@@ -15,14 +15,12 @@ import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class EmptyShadeViewModel extends FlowDumperImpl {
     public final Lazy areNotificationsHiddenInShade$delegate;
     public final Context context;
     public final StateFlow hasFilteredOutSeenNotifications;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         EmptyShadeViewModel create();
     }
@@ -35,7 +33,7 @@ public final class EmptyShadeViewModel extends FlowDumperImpl {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return EmptyShadeViewModel.this.dumpWhileCollecting(this.f$1.areNotificationsHiddenInShade, "areNotificationsHiddenInShade");
+                return this.f$0.dumpWhileCollecting(this.f$1.areNotificationsHiddenInShade, "areNotificationsHiddenInShade");
             }
         });
         this.hasFilteredOutSeenNotifications = dumpValue(seenNotificationsInteractor.hasFilteredOutSeenNotifications, "hasFilteredOutSeenNotifications");

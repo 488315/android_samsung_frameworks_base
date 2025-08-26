@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GraphicsUtils {
     public static Rect getCenterCropRect(int i, int i2, int i3, int i4) {
@@ -14,11 +13,11 @@ public class GraphicsUtils {
         float f2;
         Rect rect = null;
         if (i <= 0 || i2 <= 0 || i3 <= 0 || i4 <= 0) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getCenterCropRectInternal: incorrect params : ", ", ", ", ");
-            m.append(i3);
-            m.append(", ");
-            m.append(i4);
-            SdkLog.e("GraphicsUtils", m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getCenterCropRectInternal: incorrect params : ", ", ", ", ");
+            sbM.append(i3);
+            sbM.append(", ");
+            sbM.append(i4);
+            SdkLog.e("GraphicsUtils", sbM.toString());
             rectF = null;
         } else {
             if (i * i4 > i3 * i2) {
@@ -42,10 +41,10 @@ public class GraphicsUtils {
                 rect = rect2;
             }
         }
-        StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getCenterCropRect: imgWidth=", ", imgHeight=", ", widthToFit=");
-        ViewPager$$ExternalSyntheticOutline0.m(m2, i3, ", heightToFit=", i4, ", result=");
-        m2.append(rect);
-        SdkLog.d("GraphicsUtils", m2.toString());
+        StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getCenterCropRect: imgWidth=", ", imgHeight=", ", widthToFit=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM2, i3, ", heightToFit=", i4, ", result=");
+        sbM2.append(rect);
+        SdkLog.d("GraphicsUtils", sbM2.toString());
         return rect;
     }
 }

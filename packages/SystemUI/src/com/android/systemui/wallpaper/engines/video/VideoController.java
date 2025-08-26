@@ -13,7 +13,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VideoController {
     public final String TAG;
@@ -26,18 +25,15 @@ public class VideoController {
     public boolean mIsReleased = false;
     public final VideoController mLock = this;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoController$1, reason: invalid class name */
     public class AnonymousClass1 implements PlayerSession.Callback {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Command {
         public final CommandAction mAction;
 
@@ -50,7 +46,6 @@ public class VideoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum CommandAction {
         PLAY,
         PAUSE,
@@ -59,7 +54,6 @@ public class VideoController {
         RELEASE_SESSION
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CommandQueue {
         public final ArrayList mQueue;
 
@@ -100,7 +94,6 @@ public class VideoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PauseAndSeekToFirstFrameCommand extends Command {
         public final boolean mAllowRelease;
 
@@ -118,7 +111,6 @@ public class VideoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PauseCommand extends Command {
         public final boolean mAllowRelease;
 
@@ -136,7 +128,6 @@ public class VideoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PlayerSession {
         public static int sNextId;
         public final String TAG;
@@ -150,7 +141,7 @@ public class VideoController {
         public final VideoController$PlayerSession$$ExternalSyntheticLambda0 mAutoReleaseDispatcher = new Runnable() { // from class: com.android.systemui.wallpaper.engines.video.VideoController$PlayerSession$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                VideoController.PlayerSession playerSession = VideoController.PlayerSession.this;
+                VideoController.PlayerSession playerSession = this.f$0;
                 playerSession.getClass();
                 String str = playerSession.TAG;
                 Log.i(str, "mAutoReleaseHandler: auto release timer expired. " + playerSession);
@@ -162,7 +153,6 @@ public class VideoController {
             }
         };
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Callback {
         }
 
@@ -184,7 +174,7 @@ public class VideoController {
             semMediaPlayer.setParameter(37000, 1);
             semMediaPlayer.setOnSeekCompleteListener(new SemMediaPlayer.OnSeekCompleteListener() { // from class: com.android.systemui.wallpaper.engines.video.VideoController$PlayerSession$$ExternalSyntheticLambda1
                 public final void onSeekComplete(SemMediaPlayer semMediaPlayer2) {
-                    VideoController.PlayerSession playerSession = VideoController.PlayerSession.this;
+                    VideoController.PlayerSession playerSession = this.f$0;
                     if (playerSession.isReleased()) {
                         Log.i(playerSession.TAG, "onSeekComplete : player released");
                         return;
@@ -196,14 +186,14 @@ public class VideoController {
                     }
                 }
             });
-            final long elapsedRealtime = SystemClock.elapsedRealtime();
+            final long jElapsedRealtime = SystemClock.elapsedRealtime();
             semMediaPlayer.setOnInitCompleteListener(new SemMediaPlayer.OnInitCompleteListener() { // from class: com.android.systemui.wallpaper.engines.video.VideoController$PlayerSession$$ExternalSyntheticLambda2
                 public final void onInitComplete(SemMediaPlayer semMediaPlayer2, SemMediaPlayer.TrackInfo[] trackInfoArr) {
-                    VideoController.PlayerSession playerSession = VideoController.PlayerSession.this;
-                    long j = elapsedRealtime;
-                    boolean isReleased = playerSession.isReleased();
+                    VideoController.PlayerSession playerSession = this.f$0;
+                    long j = jElapsedRealtime;
+                    boolean zIsReleased = playerSession.isReleased();
                     String str2 = playerSession.TAG;
-                    if (isReleased) {
+                    if (zIsReleased) {
                         Log.i(str2, "onInitComplete : player released");
                         return;
                     }
@@ -213,7 +203,7 @@ public class VideoController {
             });
             semMediaPlayer.setOnInfoListener(new SemMediaPlayer.OnInfoListener() { // from class: com.android.systemui.wallpaper.engines.video.VideoController$PlayerSession$$ExternalSyntheticLambda3
                 public final boolean onInfo(SemMediaPlayer semMediaPlayer2, int i2, int i3) {
-                    VideoController.PlayerSession playerSession = VideoController.PlayerSession.this;
+                    VideoController.PlayerSession playerSession = this.f$0;
                     playerSession.getClass();
                     Log.i(playerSession.TAG, "onInfo : what=" + i2 + ", extra=" + i3);
                     if (i2 == 3) {
@@ -370,16 +360,18 @@ public class VideoController {
             this.mHandler.removeCallbacks(this.mAutoReleaseDispatcher);
             synchronized (this.mLock) {
                 try {
-                    if (this.mPlayer != null) {
-                        long elapsedRealtime = SystemClock.elapsedRealtime();
-                        this.mPlayer.release();
-                        long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                        Log.i(this.TAG, "release: SemMediaPlayer.release elapsed=" + elapsedRealtime2 + "ms");
-                    }
                 } catch (IllegalStateException e) {
                     Log.e(this.TAG, "release: e=" + e);
                 }
-                this.mPlayer = null;
+                if (this.mPlayer != null) {
+                    long jElapsedRealtime = SystemClock.elapsedRealtime();
+                    this.mPlayer.release();
+                    long jElapsedRealtime2 = SystemClock.elapsedRealtime() - jElapsedRealtime;
+                    Log.i(this.TAG, "release: SemMediaPlayer.release elapsed=" + jElapsedRealtime2 + "ms");
+                    this.mPlayer = null;
+                } else {
+                    this.mPlayer = null;
+                }
             }
             setPlayerState(PlayerState.RELEASED);
         }
@@ -392,9 +384,9 @@ public class VideoController {
                         Log.w(this.TAG, "seekTo: player is null. state=[" + this + "]");
                         return;
                     }
-                    boolean isPlaying = semMediaPlayer.isPlaying();
+                    boolean zIsPlaying = semMediaPlayer.isPlaying();
                     boolean z = false;
-                    boolean z2 = !isPlaying && getCurrentPosition() == 0;
+                    boolean z2 = !zIsPlaying && getCurrentPosition() == 0;
                     if (!this.mIsNeverDrawnAtSurface && i == 0 && z2) {
                         z = true;
                     }
@@ -431,9 +423,9 @@ public class VideoController {
                             Log.d(videoController.TAG, "onStateChanged: non-active session state changed. curActive=" + videoController.mActiveSession + ", stateChanged=" + this);
                             return;
                         }
-                        int ordinal = playerState.ordinal();
-                        if (ordinal != 1) {
-                            if (ordinal != 3) {
+                        int iOrdinal = playerState.ordinal();
+                        if (iOrdinal != 1) {
+                            if (iOrdinal != 3) {
                                 return;
                             }
                             synchronized (videoController.mLock) {
@@ -472,7 +464,6 @@ public class VideoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PlayerState {
         INITIALIZING,
         PLAYER_READY,
@@ -480,7 +471,6 @@ public class VideoController {
         RELEASED
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeekCommand extends Command {
         public final int mSeekTime;
 
@@ -514,17 +504,99 @@ public class VideoController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0147 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:111:0x0147 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void dispatchCommands() {
-        /*
-            Method dump skipped, instructions count: 377
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.video.VideoController.dispatchCommands():void");
+        Command commandPeekFirstCommand;
+        CommandQueue commandQueue;
+        synchronized (this.mLock) {
+            Log.i(this.TAG, "dispatchCommands: " + this.mActiveSession + ", enqueued=[" + this.mCommandQueue.listEnqueued() + "]");
+        }
+        while (true) {
+            commandPeekFirstCommand = this.mCommandQueue.peekFirstCommand();
+            if (commandPeekFirstCommand == null) {
+                return;
+            }
+            synchronized (this.mLock) {
+                try {
+                    int iOrdinal = commandPeekFirstCommand.mAction.ordinal();
+                    if (iOrdinal == 0) {
+                        if (this.mActiveSession != null) {
+                            if (!isSurfaceAndPlayerReady()) {
+                                break;
+                            } else {
+                                this.mActiveSession.play();
+                            }
+                        } else {
+                            PlayerSession playerSessionCreatePlayerSession = createPlayerSession();
+                            this.mActiveSession = playerSessionCreatePlayerSession;
+                            if (playerSessionCreatePlayerSession != null) {
+                                break;
+                            }
+                        }
+                    } else if (iOrdinal == 1) {
+                        if (this.mActiveSession == null) {
+                            Log.i(this.TAG, "dispatchCommands: no active session to pause");
+                        } else if (isSurfaceAndPlayerReady()) {
+                            this.mActiveSession.pause(((PauseCommand) commandPeekFirstCommand).mAllowRelease);
+                        }
+                        Log.i(this.TAG, "dispatchCommands: head=" + commandPeekFirstCommand + " -> consumed");
+                        commandQueue = this.mCommandQueue;
+                        synchronized (commandQueue) {
+                        }
+                    } else if (iOrdinal == 2) {
+                        if (this.mActiveSession != null) {
+                            if (!isSurfaceAndPlayerReady()) {
+                                break;
+                            }
+                            int i = ((SeekCommand) commandPeekFirstCommand).mSeekTime;
+                            Log.i(this.TAG, "dispatchCommands: perform seek. time=" + i);
+                            this.mActiveSession.seekTo(i);
+                        } else {
+                            PlayerSession playerSessionCreatePlayerSession2 = createPlayerSession();
+                            this.mActiveSession = playerSessionCreatePlayerSession2;
+                            if (playerSessionCreatePlayerSession2 != null) {
+                                break;
+                            }
+                        }
+                    } else if (iOrdinal != 3) {
+                        if (iOrdinal != 4) {
+                            Log.w(this.TAG, "dispatchCommands: unexpected cmd : " + commandPeekFirstCommand.mAction);
+                        } else {
+                            PlayerSession playerSession = this.mActiveSession;
+                            if (playerSession == null || playerSession.isReleased()) {
+                                Log.i(this.TAG, "dispatchCommands: no active session to release");
+                            } else if (isSurfaceAndPlayerReady()) {
+                                this.mActiveSession.release();
+                            }
+                        }
+                        Log.i(this.TAG, "dispatchCommands: head=" + commandPeekFirstCommand + " -> consumed");
+                        commandQueue = this.mCommandQueue;
+                        synchronized (commandQueue) {
+                            if (commandQueue.peekFirstCommand() != null) {
+                                commandQueue.mQueue.remove(0);
+                            }
+                        }
+                    } else if (this.mActiveSession == null) {
+                        PlayerSession playerSessionCreatePlayerSession3 = createPlayerSession();
+                        this.mActiveSession = playerSessionCreatePlayerSession3;
+                        if (playerSessionCreatePlayerSession3 == null) {
+                        }
+                    } else if (isSurfaceAndPlayerReady()) {
+                        this.mActiveSession.pause(((PauseAndSeekToFirstFrameCommand) commandPeekFirstCommand).mAllowRelease);
+                        this.mActiveSession.seekTo(0);
+                    }
+                } finally {
+                }
+            }
+            Log.i(this.TAG, "dispatchCommands: head=" + commandPeekFirstCommand + " -> consumed");
+            commandQueue = this.mCommandQueue;
+            synchronized (commandQueue) {
+            }
+        }
+        Log.i(this.TAG, "dispatchCommands: head=" + commandPeekFirstCommand + " -> will consume later");
     }
 
     public final boolean isSurfaceAndPlayerReady() {

@@ -1,22 +1,24 @@
 package com.samsung.android.sdk.routines.automationservice.data;
 
 import com.google.gson.annotations.SerializedName;
+import com.samsung.android.sdk.routines.automationservice.internal.Log;
 import java.util.HashMap;
 import java.util.Map;
+import kotlin.ExceptionsKt__ExceptionsKt;
 import kotlin.enums.EnumEntriesKt;
+import kotlin.jvm.internal.ClassReference;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt__StringsJVMKt;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ParameterValues {
     public static final Companion Companion = new Companion(null);
     public final Map parameterValueMap;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,7 +28,6 @@ public class ParameterValues {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ParameterValue {
         public static final Companion Companion = new Companion(null);
 
@@ -36,10 +37,8 @@ public class ParameterValues {
         @SerializedName("VALUE")
         private Object value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -77,7 +76,7 @@ public class ParameterValues {
                 this();
             }
 
-            public static ValueType parseType(JSONObject jSONObject) {
+            public static ValueType parseType(JSONObject jSONObject) throws JSONException {
                 ValueType.Companion companion = ValueType.Companion;
                 String string = jSONObject.getString("TYPE");
                 companion.getClass();
@@ -89,21 +88,190 @@ public class ParameterValues {
                 return ValueType.UNKNOWN;
             }
 
-            /* JADX WARN: Code restructure failed: missing block: B:135:0x0078, code lost:
-            
-                if (r4.equals(kotlin.jvm.internal.Reflection.getOrCreateKotlinClass(java.lang.String.class)) != false) goto L31;
-             */
             /* JADX WARN: Multi-variable type inference failed */
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public static java.lang.Object parseValue(org.json.JSONObject r8, com.samsung.android.sdk.routines.automationservice.data.ParameterValues.ParameterValue.ValueType r9) {
-                /*
-                    Method dump skipped, instructions count: 622
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sdk.routines.automationservice.data.ParameterValues.ParameterValue.Companion.parseValue(org.json.JSONObject, com.samsung.android.sdk.routines.automationservice.data.ParameterValues$ParameterValue$ValueType):java.lang.Object");
+            public static Object parseValue(JSONObject jSONObject, ValueType valueType) throws JSONException, NumberFormatException {
+                Object[] objArr;
+                ClassReference orCreateKotlinClass;
+                ClassReference orCreateKotlinClass2;
+                ClassReference orCreateKotlinClass3;
+                Object obj;
+                try {
+                    int i = 0;
+                    switch (WhenMappings.$EnumSwitchMapping$0[valueType.ordinal()]) {
+                        case 1:
+                            String string = jSONObject.getString("VALUE");
+                            try {
+                                ClassReference orCreateKotlinClass4 = Reflection.getOrCreateKotlinClass(Boolean.class);
+                                if (orCreateKotlinClass4.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE))) {
+                                    Object objValueOf = Boolean.valueOf(string);
+                                    if (objValueOf == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.Boolean");
+                                    }
+                                    obj = objValueOf;
+                                } else if (orCreateKotlinClass4.equals(Reflection.getOrCreateKotlinClass(Float.TYPE))) {
+                                    Object objValueOf2 = Float.valueOf(string);
+                                    if (objValueOf2 == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.Boolean");
+                                    }
+                                    obj = (Boolean) objValueOf2;
+                                } else {
+                                    if (!orCreateKotlinClass4.equals(Reflection.getOrCreateKotlinClass(String.class))) {
+                                        return null;
+                                    }
+                                    obj = (Boolean) string;
+                                }
+                                return obj;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return null;
+                            }
+                        case 2:
+                            String string2 = jSONObject.getString("VALUE");
+                            try {
+                                ClassReference orCreateKotlinClass5 = Reflection.getOrCreateKotlinClass(Float.class);
+                                if (orCreateKotlinClass5.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE))) {
+                                    Object objValueOf3 = Boolean.valueOf(string2);
+                                    if (objValueOf3 == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.Float");
+                                    }
+                                    obj = (Float) objValueOf3;
+                                } else if (orCreateKotlinClass5.equals(Reflection.getOrCreateKotlinClass(Float.TYPE))) {
+                                    Object objValueOf4 = Float.valueOf(string2);
+                                    if (objValueOf4 == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.Float");
+                                    }
+                                    obj = objValueOf4;
+                                } else {
+                                    if (!orCreateKotlinClass5.equals(Reflection.getOrCreateKotlinClass(String.class))) {
+                                        return null;
+                                    }
+                                    obj = (Float) string2;
+                                }
+                                return obj;
+                            } catch (Exception e2) {
+                                e2.printStackTrace();
+                                return null;
+                            }
+                        case 3:
+                            String string3 = jSONObject.getString("VALUE");
+                            try {
+                                ClassReference orCreateKotlinClass6 = Reflection.getOrCreateKotlinClass(String.class);
+                                if (orCreateKotlinClass6.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE))) {
+                                    Object objValueOf5 = Boolean.valueOf(string3);
+                                    if (objValueOf5 == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.String");
+                                    }
+                                    obj = (String) objValueOf5;
+                                } else if (orCreateKotlinClass6.equals(Reflection.getOrCreateKotlinClass(Float.TYPE))) {
+                                    Object objValueOf6 = Float.valueOf(string3);
+                                    if (objValueOf6 == null) {
+                                        throw new NullPointerException("null cannot be cast to non-null type kotlin.String");
+                                    }
+                                    obj = (String) objValueOf6;
+                                } else {
+                                    obj = string3;
+                                    if (!orCreateKotlinClass6.equals(Reflection.getOrCreateKotlinClass(String.class))) {
+                                        return null;
+                                    }
+                                }
+                                return obj;
+                            } catch (Exception e3) {
+                                e3.printStackTrace();
+                                return null;
+                            }
+                        case 4:
+                            try {
+                                JSONArray jSONArray = jSONObject.getJSONArray("VALUE");
+                                int length = jSONArray.length();
+                                Boolean[] boolArr = new Boolean[length];
+                                for (int i2 = 0; i2 < length; i2++) {
+                                    boolArr[i2] = null;
+                                }
+                                int length2 = jSONArray.length();
+                                while (i < length2) {
+                                    String string4 = jSONArray.getString(i);
+                                    try {
+                                        orCreateKotlinClass3 = Reflection.getOrCreateKotlinClass(Boolean.class);
+                                    } catch (Exception e4) {
+                                        e4.printStackTrace();
+                                    }
+                                    Boolean boolValueOf = orCreateKotlinClass3.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE)) ? Boolean.valueOf(string4) : orCreateKotlinClass3.equals(Reflection.getOrCreateKotlinClass(Float.TYPE)) ? (Boolean) Float.valueOf(string4) : orCreateKotlinClass3.equals(Reflection.getOrCreateKotlinClass(String.class)) ? (Boolean) string4 : null;
+                                    boolArr[i] = boolValueOf;
+                                    i++;
+                                }
+                                return boolArr;
+                            } catch (JSONException e5) {
+                                e5.printStackTrace();
+                                return null;
+                            }
+                        case 5:
+                            try {
+                                JSONArray jSONArray2 = jSONObject.getJSONArray("VALUE");
+                                int length3 = jSONArray2.length();
+                                objArr = new Float[length3];
+                                for (int i3 = 0; i3 < length3; i3++) {
+                                    objArr[i3] = null;
+                                }
+                                int length4 = jSONArray2.length();
+                                while (i < length4) {
+                                    String string5 = jSONArray2.getString(i);
+                                    try {
+                                        orCreateKotlinClass = Reflection.getOrCreateKotlinClass(Float.class);
+                                    } catch (Exception e6) {
+                                        e6.printStackTrace();
+                                    }
+                                    Float fValueOf = orCreateKotlinClass.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE)) ? (Float) Boolean.valueOf(string5) : orCreateKotlinClass.equals(Reflection.getOrCreateKotlinClass(Float.TYPE)) ? Float.valueOf(string5) : orCreateKotlinClass.equals(Reflection.getOrCreateKotlinClass(String.class)) ? (Float) string5 : null;
+                                    objArr[i] = fValueOf;
+                                    i++;
+                                }
+                                return objArr;
+                            } catch (JSONException e7) {
+                                e7.printStackTrace();
+                                return null;
+                            }
+                        case 6:
+                            try {
+                                JSONArray jSONArray3 = jSONObject.getJSONArray("VALUE");
+                                int length5 = jSONArray3.length();
+                                objArr = new String[length5];
+                                for (int i4 = 0; i4 < length5; i4++) {
+                                    objArr[i4] = null;
+                                }
+                                int length6 = jSONArray3.length();
+                                while (i < length6) {
+                                    String string6 = jSONArray3.getString(i);
+                                    try {
+                                        orCreateKotlinClass2 = Reflection.getOrCreateKotlinClass(String.class);
+                                    } catch (Exception e8) {
+                                        e8.printStackTrace();
+                                    }
+                                    if (orCreateKotlinClass2.equals(Reflection.getOrCreateKotlinClass(Boolean.TYPE))) {
+                                        string6 = (String) Boolean.valueOf(string6);
+                                    } else if (orCreateKotlinClass2.equals(Reflection.getOrCreateKotlinClass(Float.TYPE))) {
+                                        string6 = (String) Float.valueOf(string6);
+                                    } else if (!orCreateKotlinClass2.equals(Reflection.getOrCreateKotlinClass(String.class))) {
+                                        string6 = null;
+                                    }
+                                    objArr[i] = string6;
+                                    i++;
+                                }
+                                return objArr;
+                            } catch (JSONException e9) {
+                                e9.printStackTrace();
+                                return null;
+                            }
+                        default:
+                            new Throwable().printStackTrace();
+                            obj = jSONObject.get("VALUE");
+                            return obj;
+                    }
+                } catch (JSONException e10) {
+                    Log log = Log.INSTANCE;
+                    String strStackTraceToString = ExceptionsKt__ExceptionsKt.stackTraceToString(e10);
+                    log.getClass();
+                    Log.e("ParameterValue", strStackTraceToString);
+                    return null;
+                }
             }
 
             private Companion() {
@@ -112,7 +280,6 @@ public class ParameterValues {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ValueType {
             public static final /* synthetic */ ValueType[] $VALUES;
             public static final ValueType BOOLEAN;
@@ -125,7 +292,6 @@ public class ParameterValues {
             public static final ValueType UNKNOWN;
             private final String mName;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Companion {
                 public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                     this();
@@ -173,7 +339,6 @@ public class ParameterValues {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -223,7 +388,7 @@ public class ParameterValues {
             return valueType;
         }
 
-        public final String toJsonString() {
+        public final String toJsonString() throws JSONException {
             JSONObject jSONObject = new JSONObject();
             try {
                 ValueType valueType = this.mValueType;
@@ -334,11 +499,11 @@ public class ParameterValues {
     }
 
     public final String toJsonString() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (Map.Entry entry : ((HashMap) this.parameterValueMap).entrySet()) {
-            hashMap.put(entry.getKey(), ((ParameterValue) entry.getValue()).toJsonString());
+            map.put(entry.getKey(), ((ParameterValue) entry.getValue()).toJsonString());
         }
-        return new JSONObject(hashMap).toString();
+        return new JSONObject(map).toString();
     }
 
     public final String toString() {
@@ -360,8 +525,8 @@ public class ParameterValues {
     }
 
     private ParameterValues(Map<String, ParameterValue> map) {
-        HashMap hashMap = new HashMap();
-        this.parameterValueMap = hashMap;
-        hashMap.putAll(map);
+        HashMap map2 = new HashMap();
+        this.parameterValueMap = map2;
+        map2.putAll(map);
     }
 }

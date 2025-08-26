@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -21,9 +20,9 @@ final class SharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisi
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         SharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1 sharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1 = new SharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1((Continuation) obj3);
-        sharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1.Z$0 = booleanValue;
+        sharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1.Z$0 = zBooleanValue;
         sharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1.L$0 = (StatusBarState) obj2;
         return sharedNotificationContainerViewModel$keyguardAlpha$isKeyguardNotVisible$1.invokeSuspend(Unit.INSTANCE);
     }

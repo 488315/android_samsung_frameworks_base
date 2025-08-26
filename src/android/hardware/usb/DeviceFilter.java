@@ -59,7 +59,7 @@ public class DeviceFilter {
         this.mInterfaceName = deviceFilter.mInterfaceName;
     }
 
-    public static DeviceFilter read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+    public static DeviceFilter read(XmlPullParser xmlPullParser) throws XmlPullParserException, NumberFormatException, IOException {
         int i;
         XmlPullParser xmlPullParser2 = xmlPullParser;
         int attributeCount = xmlPullParser2.getAttributeCount();
@@ -93,17 +93,17 @@ public class DeviceFilter {
                     i = 16;
                 }
                 try {
-                    int parseInt = Integer.parseInt(attributeValue, i);
+                    int i9 = Integer.parseInt(attributeValue, i);
                     if ("vendor-id".equals(attributeName)) {
-                        i3 = parseInt;
+                        i3 = i9;
                     } else if ("product-id".equals(attributeName)) {
-                        i4 = parseInt;
+                        i4 = i9;
                     } else if ("class".equals(attributeName)) {
-                        i5 = parseInt;
+                        i5 = i9;
                     } else if ("subclass".equals(attributeName)) {
-                        i6 = parseInt;
+                        i6 = i9;
                     } else if ("protocol".equals(attributeName)) {
-                        i7 = parseInt;
+                        i7 = i9;
                     }
                 } catch (NumberFormatException e) {
                     Slog.e(TAG, "invalid number for field " + attributeName, e);
@@ -116,7 +116,7 @@ public class DeviceFilter {
         return new DeviceFilter(i3, i4, i5, i6, i7, str, str2, str3, str4);
     }
 
-    public void write(XmlSerializer xmlSerializer) throws IOException {
+    public void write(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, "usb-device");
         int i = this.mVendorId;
         if (i != -1) {
@@ -216,48 +216,48 @@ public class DeviceFilter {
         while (i < interfaceCount) {
             try {
                 usbInterface = usbDevice.getInterface(i);
-            } catch (NullPointerException e) {
-                e = e;
-                i = i2;
-            } catch (Exception e2) {
-                e = e2;
-                i = i2;
-            }
-            try {
-                String str = TAG;
-                Slog.d(str, "matches Interface intfNum=" + i);
-                if (usbInterface != null) {
-                    if (matches(usbInterface.getInterfaceClass(), usbInterface.getInterfaceSubclass(), usbInterface.getInterfaceProtocol(), usbInterface.getName())) {
-                        return true;
+                try {
+                    String str = TAG;
+                    Slog.d(str, "matches Interface intfNum=" + i);
+                    if (usbInterface != null) {
+                        if (matches(usbInterface.getInterfaceClass(), usbInterface.getInterfaceSubclass(), usbInterface.getInterfaceProtocol(), usbInterface.getName())) {
+                            return true;
+                        }
+                        i2 = i;
+                        i++;
+                    } else {
+                        Slog.d(str, "matches delivered UsbDevice=" + usbDevice);
+                        Slog.d(str, "matches Interface Count=" + interfaceCount);
+                        Slog.d(str, "matches interface(" + i + ") -> [null]");
+                        throw new NullPointerException("DeviceFilter's matches met interface null");
                     }
-                    i2 = i;
-                    i++;
-                } else {
-                    Slog.d(str, "matches delivered UsbDevice=" + usbDevice);
-                    Slog.d(str, "matches Interface Count=" + interfaceCount);
-                    Slog.d(str, "matches interface(" + i + ") -> [null]");
-                    throw new NullPointerException("DeviceFilter's matches met interface null");
+                } catch (NullPointerException e) {
+                    e = e;
+                    String str2 = TAG;
+                    Slog.e(str2, "matches got NPE ", e);
+                    Slog.d(str2, "matches delivered UsbDevice=" + usbDevice);
+                    Slog.d(str2, "matches Interface Count=" + interfaceCount);
+                    if (usbInterface != null) {
+                        Slog.d(str2, "matches interface(" + i + ") -> [" + usbInterface.toString() + NavigationBarInflaterView.SIZE_MOD_END);
+                    }
+                    return false;
+                } catch (Exception e2) {
+                    e = e2;
+                    String str3 = TAG;
+                    Slog.w(str3, "matches got Exception ", e);
+                    Slog.d(str3, "matches delivered UsbDevice=" + usbDevice);
+                    Slog.d(str3, "matches Interface Count=" + interfaceCount);
+                    if (usbInterface != null) {
+                        Slog.d(str3, "matches interface(" + i + ") -> [" + usbInterface.toString() + NavigationBarInflaterView.SIZE_MOD_END);
+                    }
+                    return false;
                 }
             } catch (NullPointerException e3) {
                 e = e3;
-                String str2 = TAG;
-                Slog.e(str2, "matches got NPE ", e);
-                Slog.d(str2, "matches delivered UsbDevice=" + usbDevice);
-                Slog.d(str2, "matches Interface Count=" + interfaceCount);
-                if (usbInterface != null) {
-                    Slog.d(str2, "matches interface(" + i + ") -> [" + usbInterface.toString() + NavigationBarInflaterView.SIZE_MOD_END);
-                }
-                return false;
+                i = i2;
             } catch (Exception e4) {
                 e = e4;
-                String str3 = TAG;
-                Slog.w(str3, "matches got Exception ", e);
-                Slog.d(str3, "matches delivered UsbDevice=" + usbDevice);
-                Slog.d(str3, "matches Interface Count=" + interfaceCount);
-                if (usbInterface != null) {
-                    Slog.d(str3, "matches interface(" + i + ") -> [" + usbInterface.toString() + NavigationBarInflaterView.SIZE_MOD_END);
-                }
-                return false;
+                i = i2;
             }
         }
         return false;
@@ -334,7 +334,7 @@ public class DeviceFilter {
     }
 
     public void dump(DualDumpOutputStream dualDumpOutputStream, String str, long j) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("vendor_id", 1120986464257L, this.mVendorId);
         dualDumpOutputStream.write("product_id", 1120986464258L, this.mProductId);
         dualDumpOutputStream.write("class", 1120986464259L, this.mClass);
@@ -343,6 +343,6 @@ public class DeviceFilter {
         dualDumpOutputStream.write("manufacturer_name", 1138166333446L, this.mManufacturerName);
         dualDumpOutputStream.write("product_name", 1138166333447L, this.mProductName);
         dualDumpOutputStream.write("serial_number", 1138166333448L, this.mSerialNumber);
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 }

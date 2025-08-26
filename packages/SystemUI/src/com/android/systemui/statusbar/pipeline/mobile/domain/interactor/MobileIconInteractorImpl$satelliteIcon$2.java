@@ -17,7 +17,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileIconInteractorImpl$satelliteIcon$2 extends SuspendLambda implements Function3 {
     /* synthetic */ int I$0;
@@ -33,17 +32,21 @@ final class MobileIconInteractorImpl$satelliteIcon$2 extends SuspendLambda imple
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj).intValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj).intValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         MobileIconInteractorImpl$satelliteIcon$2 mobileIconInteractorImpl$satelliteIcon$2 = new MobileIconInteractorImpl$satelliteIcon$2(this.this$0, (Continuation) obj3);
-        mobileIconInteractorImpl$satelliteIcon$2.I$0 = intValue;
-        mobileIconInteractorImpl$satelliteIcon$2.Z$0 = booleanValue;
+        mobileIconInteractorImpl$satelliteIcon$2.I$0 = iIntValue;
+        mobileIconInteractorImpl$satelliteIcon$2.Z$0 = zBooleanValue;
         return mobileIconInteractorImpl$satelliteIcon$2.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00d7  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
-        Icon.Resource fromSignalStrengthVZW;
+        Icon.Resource resourceFromSignalStrengthVZW;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -56,54 +59,52 @@ final class MobileIconInteractorImpl$satelliteIcon$2 extends SuspendLambda imple
             MobileIconInteractorImpl mobileIconInteractorImpl2 = this.this$0;
             if (!Intrinsics.areEqual(mobileIconInteractorImpl2.carrierInfraMediator.get(CarrierInfraMediator.Values.ICON_BRANDING, mobileIconInteractorImpl2.slotId, new Object[0]), "VZW_OPEN")) {
                 MobileIconInteractorImpl mobileIconInteractorImpl3 = this.this$0;
-                if (!ArraysKt___ArraysKt.contains(mobileIconInteractorImpl3.carrierIdOfVzwMVNO, mobileIconInteractorImpl3.connectionRepository.carrierId.getValue())) {
-                    if (z) {
-                        if (this.this$0.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_KDDI_DEVICE, 0, new Object[0])) {
-                            SatelliteIconModel.INSTANCE.getClass();
-                            fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(i);
-                            if (fromSignalStrengthVZW == null) {
-                                fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(0);
-                                fromSignalStrengthVZW.getClass();
-                            }
-                        } else {
-                            SatelliteIconModel.INSTANCE.getClass();
-                            fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrength(i);
-                            if (fromSignalStrengthVZW == null) {
-                                fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrength(0);
-                                fromSignalStrengthVZW.getClass();
-                            }
-                        }
-                    } else if (this.this$0.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_KDDI_DEVICE, 0, new Object[0])) {
-                        SatelliteIconModel satelliteIconModel = SatelliteIconModel.INSTANCE;
-                        SatelliteConnectionState satelliteConnectionState = SatelliteConnectionState.On;
-                        satelliteIconModel.getClass();
-                        int i2 = SatelliteIconModel.WhenMappings.$EnumSwitchMapping$0[satelliteConnectionState.ordinal()];
-                        if (i2 == 1 || i2 == 2 || i2 == 3) {
-                            fromSignalStrengthVZW = new Icon.Resource(R.drawable.stat_sys_sos_satellite_anim_2_level, new ContentDescription.Resource(R.string.accessibility_status_bar_satellite_available));
-                        } else {
-                            if (i2 != 4) {
-                                throw new NoWhenBranchMatchedException();
-                            }
-                            fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(i);
-                        }
-                        fromSignalStrengthVZW.getClass();
-                    } else {
-                        SatelliteIconModel satelliteIconModel2 = SatelliteIconModel.INSTANCE;
-                        SatelliteConnectionState satelliteConnectionState2 = SatelliteConnectionState.On;
-                        satelliteIconModel2.getClass();
-                        fromSignalStrengthVZW = SatelliteIconModel.fromConnectionState(satelliteConnectionState2, i);
-                        fromSignalStrengthVZW.getClass();
+                if (ArraysKt___ArraysKt.contains(mobileIconInteractorImpl3.carrierIdOfVzwMVNO, mobileIconInteractorImpl3.connectionRepository.carrierId.getValue())) {
+                    SatelliteIconModel.INSTANCE.getClass();
+                    resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthVZW(i);
+                    if (resourceFromSignalStrengthVZW == null) {
+                        resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthVZW(0);
+                        resourceFromSignalStrengthVZW.getClass();
                     }
-                    return new SignalIconModel.Satellite(i, fromSignalStrengthVZW);
+                } else if (z) {
+                    if (this.this$0.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_KDDI_DEVICE, 0, new Object[0])) {
+                        SatelliteIconModel.INSTANCE.getClass();
+                        resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(i);
+                        if (resourceFromSignalStrengthVZW == null) {
+                            resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(0);
+                            resourceFromSignalStrengthVZW.getClass();
+                        }
+                    } else {
+                        SatelliteIconModel.INSTANCE.getClass();
+                        resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrength(i);
+                        if (resourceFromSignalStrengthVZW == null) {
+                            resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrength(0);
+                            resourceFromSignalStrengthVZW.getClass();
+                        }
+                    }
+                } else if (this.this$0.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_KDDI_DEVICE, 0, new Object[0])) {
+                    SatelliteIconModel satelliteIconModel = SatelliteIconModel.INSTANCE;
+                    SatelliteConnectionState satelliteConnectionState = SatelliteConnectionState.On;
+                    satelliteIconModel.getClass();
+                    int i2 = SatelliteIconModel.WhenMappings.$EnumSwitchMapping$0[satelliteConnectionState.ordinal()];
+                    if (i2 == 1 || i2 == 2 || i2 == 3) {
+                        resourceFromSignalStrengthVZW = new Icon.Resource(R.drawable.stat_sys_sos_satellite_anim_2_level, new ContentDescription.Resource(R.string.accessibility_status_bar_satellite_available));
+                    } else {
+                        if (i2 != 4) {
+                            throw new NoWhenBranchMatchedException();
+                        }
+                        resourceFromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthKDDI(i);
+                    }
+                    resourceFromSignalStrengthVZW.getClass();
+                } else {
+                    SatelliteIconModel satelliteIconModel2 = SatelliteIconModel.INSTANCE;
+                    SatelliteConnectionState satelliteConnectionState2 = SatelliteConnectionState.On;
+                    satelliteIconModel2.getClass();
+                    resourceFromSignalStrengthVZW = SatelliteIconModel.fromConnectionState(satelliteConnectionState2, i);
+                    resourceFromSignalStrengthVZW.getClass();
                 }
             }
         }
-        SatelliteIconModel.INSTANCE.getClass();
-        fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthVZW(i);
-        if (fromSignalStrengthVZW == null) {
-            fromSignalStrengthVZW = SatelliteIconModel.fromSignalStrengthVZW(0);
-            fromSignalStrengthVZW.getClass();
-        }
-        return new SignalIconModel.Satellite(i, fromSignalStrengthVZW);
+        return new SignalIconModel.Satellite(i, resourceFromSignalStrengthVZW);
     }
 }

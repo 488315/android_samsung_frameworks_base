@@ -14,12 +14,12 @@ public class UsbConfiguration implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public UsbConfiguration createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
+            int i = parcel.readInt();
+            String string = parcel.readString();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
             Parcelable[] parcelableArr = (Parcelable[]) parcel.readParcelableArray(UsbInterface.class.getClassLoader(), UsbInterface.class);
-            UsbConfiguration usbConfiguration = new UsbConfiguration(readInt, readString, readInt2, readInt3);
+            UsbConfiguration usbConfiguration = new UsbConfiguration(i, string, i2, i3);
             usbConfiguration.setInterfaces(parcelableArr);
             return usbConfiguration;
         }

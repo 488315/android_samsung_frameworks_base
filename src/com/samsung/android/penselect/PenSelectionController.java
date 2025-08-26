@@ -108,19 +108,19 @@ public class PenSelectionController {
 
     public View findTargetTextView(Context context, View view, Rect rect) {
         Drawable background;
-        View view2 = null;
+        View viewFindTargetTextView = null;
         if (checkRectInView(view, rect)) {
             if (view instanceof ViewGroup) {
                 ViewGroup viewGroup = (ViewGroup) view;
                 int childCount = viewGroup.getChildCount();
                 if (childCount != 0 || (!(view instanceof WebView) && ((background = viewGroup.getBackground()) == null || !background.isVisible() || background.getOpacity() <= -2))) {
                     for (int i = childCount - 1; i >= 0; i--) {
-                        view2 = findTargetTextView(context, viewGroup.getChildAt(i), rect);
-                        if (view2 != null) {
-                            return view2;
+                        viewFindTargetTextView = findTargetTextView(context, viewGroup.getChildAt(i), rect);
+                        if (viewFindTargetTextView != null) {
+                            return viewFindTargetTextView;
                         }
                     }
-                    return view2;
+                    return viewFindTargetTextView;
                 }
             } else if (view instanceof TextView) {
             }

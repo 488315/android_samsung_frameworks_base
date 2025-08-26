@@ -126,15 +126,15 @@ public class MediaFile {
     }
 
     private static void addFileType(int i, String str) {
-        HashMap<String, Integer> hashMap = sMimeTypeToFormatMap;
-        if (!hashMap.containsKey(str)) {
-            hashMap.put(str, Integer.valueOf(i));
+        HashMap<String, Integer> map = sMimeTypeToFormatMap;
+        if (!map.containsKey(str)) {
+            map.put(str, Integer.valueOf(i));
         }
-        HashMap<Integer, String> hashMap2 = sFormatToMimeTypeMap;
-        if (hashMap2.containsKey(Integer.valueOf(i))) {
+        HashMap<Integer, String> map2 = sFormatToMimeTypeMap;
+        if (map2.containsKey(Integer.valueOf(i))) {
             return;
         }
-        hashMap2.put(Integer.valueOf(i), str);
+        map2.put(Integer.valueOf(i), str);
     }
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
@@ -142,11 +142,11 @@ public class MediaFile {
         if (str == null) {
             return false;
         }
-        String normalizeMimeType = normalizeMimeType(str);
-        if (normalizeMimeType.startsWith("text/")) {
+        String strNormalizeMimeType = normalizeMimeType(str);
+        if (strNormalizeMimeType.startsWith("text/")) {
             return true;
         }
-        String lowerCase = normalizeMimeType.toLowerCase(Locale.ROOT);
+        String lowerCase = strNormalizeMimeType.toLowerCase(Locale.ROOT);
         lowerCase.hashCode();
         char c = 65535;
         switch (lowerCase.hashCode()) {
@@ -567,9 +567,9 @@ public class MediaFile {
     }
 
     public static boolean isPlayListMimeType(String str) {
-        String normalizeMimeType = normalizeMimeType(str);
-        normalizeMimeType.hashCode();
-        switch (normalizeMimeType) {
+        String strNormalizeMimeType = normalizeMimeType(str);
+        strNormalizeMimeType.hashCode();
+        switch (strNormalizeMimeType) {
             case "audio/x-scpls":
             case "application/x-mpegurl":
             case "application/vnd.apple.mpegurl":
@@ -588,18 +588,18 @@ public class MediaFile {
 
     public static String getFileTitle(String str) {
         int i;
-        int lastIndexOf = str.lastIndexOf(47);
-        if (lastIndexOf >= 0 && (i = lastIndexOf + 1) < str.length()) {
+        int iLastIndexOf = str.lastIndexOf(47);
+        if (iLastIndexOf >= 0 && (i = iLastIndexOf + 1) < str.length()) {
             str = str.substring(i);
         }
-        int lastIndexOf2 = str.lastIndexOf(46);
-        return lastIndexOf2 > 0 ? str.substring(0, lastIndexOf2) : str;
+        int iLastIndexOf2 = str.lastIndexOf(46);
+        return iLastIndexOf2 > 0 ? str.substring(0, iLastIndexOf2) : str;
     }
 
     public static String getFileExtension(String str) {
-        int lastIndexOf;
-        if (str != null && (lastIndexOf = str.lastIndexOf(46)) >= 0) {
-            return str.substring(lastIndexOf + 1);
+        int iLastIndexOf;
+        if (str != null && (iLastIndexOf = str.lastIndexOf(46)) >= 0) {
+            return str.substring(iLastIndexOf + 1);
         }
         return null;
     }
@@ -610,8 +610,8 @@ public class MediaFile {
     }
 
     public static String getMimeTypeForFile(String str) {
-        String guessMimeTypeFromExtension = MimeMap.getDefault().guessMimeTypeFromExtension(getFileExtension(str));
-        return guessMimeTypeFromExtension != null ? guessMimeTypeFromExtension : "application/octet-stream";
+        String strGuessMimeTypeFromExtension = MimeMap.getDefault().guessMimeTypeFromExtension(getFileExtension(str));
+        return strGuessMimeTypeFromExtension != null ? strGuessMimeTypeFromExtension : "application/octet-stream";
     }
 
     public static String getMimeTypeForFormatCode(int i) {
@@ -632,26 +632,26 @@ public class MediaFile {
         if (str == null) {
             return 12288;
         }
-        HashMap<String, Integer> hashMap = sMimeTypeToFormatMap;
-        Integer num = hashMap.get(str);
+        HashMap<String, Integer> map = sMimeTypeToFormatMap;
+        Integer num = map.get(str);
         if (num != null) {
             return num.intValue();
         }
-        String normalizeMimeType = normalizeMimeType(str);
-        Integer num2 = hashMap.get(normalizeMimeType);
+        String strNormalizeMimeType = normalizeMimeType(str);
+        Integer num2 = map.get(strNormalizeMimeType);
         if (num2 != null) {
             return num2.intValue();
         }
-        if (normalizeMimeType.startsWith("audio/")) {
+        if (strNormalizeMimeType.startsWith("audio/")) {
             return 47360;
         }
-        return normalizeMimeType.startsWith(BnRConstants.VIDEO_DIR_PATH) ? MtpConstants.FORMAT_UNDEFINED_VIDEO : normalizeMimeType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX) ? 14336 : 12288;
+        return strNormalizeMimeType.startsWith(BnRConstants.VIDEO_DIR_PATH) ? MtpConstants.FORMAT_UNDEFINED_VIDEO : strNormalizeMimeType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX) ? 14336 : 12288;
     }
 
     private static String normalizeMimeType(String str) {
-        String guessMimeTypeFromExtension;
+        String strGuessMimeTypeFromExtension;
         MimeMap mimeMap = MimeMap.getDefault();
-        String guessExtensionFromMimeType = mimeMap.guessExtensionFromMimeType(str);
-        return (guessExtensionFromMimeType == null || (guessMimeTypeFromExtension = mimeMap.guessMimeTypeFromExtension(guessExtensionFromMimeType)) == null) ? str != null ? str : "application/octet-stream" : guessMimeTypeFromExtension;
+        String strGuessExtensionFromMimeType = mimeMap.guessExtensionFromMimeType(str);
+        return (strGuessExtensionFromMimeType == null || (strGuessMimeTypeFromExtension = mimeMap.guessMimeTypeFromExtension(strGuessExtensionFromMimeType)) == null) ? str != null ? str : "application/octet-stream" : strGuessMimeTypeFromExtension;
     }
 }

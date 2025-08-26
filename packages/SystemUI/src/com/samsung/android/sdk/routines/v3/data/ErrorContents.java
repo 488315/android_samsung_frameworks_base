@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import com.samsung.android.sdk.routines.v3.internal.ExtraKey;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ErrorContents {
     public final String a;
     public final String b;
     public final DialogButton c;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public String a;
         public final String b;
@@ -22,7 +20,6 @@ public class ErrorContents {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DialogButton {
         public final String a;
         public final PendingIntent b;

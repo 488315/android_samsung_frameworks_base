@@ -4,7 +4,6 @@ import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableTransitionState<S> extends TransitionState<S> {
     public final MutableState currentState$delegate;
@@ -29,6 +28,10 @@ public final class MutableTransitionState<S> extends TransitionState<S> {
     @Override // androidx.compose.animation.core.TransitionState
     public final void setCurrentState$animation_core(Object obj) {
         ((SnapshotMutableStateImpl) this.currentState$delegate).setValue(obj);
+    }
+
+    public final void setTargetState(Object obj) {
+        ((SnapshotMutableStateImpl) this.targetState$delegate).setValue(obj);
     }
 
     @Override // androidx.compose.animation.core.TransitionState

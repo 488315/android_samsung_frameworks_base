@@ -26,14 +26,14 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
     }
 
     public static String getPackageNameFromSchema(String str) {
-        String[] split = str.split("-");
-        if (split.length > 2) {
+        String[] strArrSplit = str.split("-");
+        if (strArrSplit.length > 2) {
             throw new IllegalArgumentException("Invalid schema type: " + str + " for app function runtime");
         }
-        if (split.length < 2) {
+        if (strArrSplit.length < 2) {
             return "android";
         }
-        return split[1];
+        return strArrSplit[1];
     }
 
     public static String getDocumentIdForAppFunction(String str, String str2) {

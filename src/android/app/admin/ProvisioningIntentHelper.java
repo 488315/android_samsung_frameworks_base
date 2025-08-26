@@ -41,22 +41,22 @@ final class ProvisioningIntentHelper {
         return null;
     }
 
-    private static Intent createProvisioningIntentFromNdefRecord(NdefRecord ndefRecord) {
+    private static Intent createProvisioningIntentFromNdefRecord(NdefRecord ndefRecord) throws IOException {
         Objects.requireNonNull(ndefRecord);
-        Properties loadPropertiesFromPayload = loadPropertiesFromPayload(ndefRecord.getPayload());
-        if (loadPropertiesFromPayload == null) {
+        Properties propertiesLoadPropertiesFromPayload = loadPropertiesFromPayload(ndefRecord.getPayload());
+        if (propertiesLoadPropertiesFromPayload == null) {
             Log.e(TAG, "Failed to load NdefRecord properties.");
             return null;
         }
-        Bundle createBundleFromProperties = createBundleFromProperties(loadPropertiesFromPayload);
-        if (!containsRequiredProvisioningExtras(createBundleFromProperties)) {
+        Bundle bundleCreateBundleFromProperties = createBundleFromProperties(propertiesLoadPropertiesFromPayload);
+        if (!containsRequiredProvisioningExtras(bundleCreateBundleFromProperties)) {
             Log.e(TAG, "Bundle does not contain the required provisioning extras.");
             return null;
         }
-        return createProvisioningIntentFromBundle(createBundleFromProperties);
+        return createProvisioningIntentFromBundle(bundleCreateBundleFromProperties);
     }
 
-    private static Properties loadPropertiesFromPayload(byte[] bArr) {
+    private static Properties loadPropertiesFromPayload(byte[] bArr) throws IOException {
         Properties properties = new Properties();
         try {
             properties.load(new StringReader(new String(bArr, StandardCharsets.UTF_8)));
@@ -68,10 +68,10 @@ final class ProvisioningIntentHelper {
     }
 
     private static Bundle createBundleFromProperties(Properties properties) {
-        Enumeration<?> propertyNames = properties.propertyNames();
+        Enumeration<?> enumerationPropertyNames = properties.propertyNames();
         Bundle bundle = new Bundle();
-        while (propertyNames.hasMoreElements()) {
-            addPropertyToBundle((String) propertyNames.nextElement(), properties, bundle);
+        while (enumerationPropertyNames.hasMoreElements()) {
+            addPropertyToBundle((String) enumerationPropertyNames.nextElement(), properties, bundle);
         }
         return bundle;
     }
@@ -150,28 +150,28 @@ final class ProvisioningIntentHelper {
     }
 
     private static Map<String, Class> createExtrasToClassMap() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         Iterator<String> it = getBooleanExtras().iterator();
         while (it.hasNext()) {
-            hashMap.put(it.next(), Boolean.class);
+            map.put(it.next(), Boolean.class);
         }
         Iterator<String> it2 = getLongExtras().iterator();
         while (it2.hasNext()) {
-            hashMap.put(it2.next(), Long.class);
+            map.put(it2.next(), Long.class);
         }
         Iterator<String> it3 = getIntExtras().iterator();
         while (it3.hasNext()) {
-            hashMap.put(it3.next(), Integer.class);
+            map.put(it3.next(), Integer.class);
         }
         Iterator<String> it4 = getComponentNameExtras().iterator();
         while (it4.hasNext()) {
-            hashMap.put(it4.next(), ComponentName.class);
+            map.put(it4.next(), ComponentName.class);
         }
         Iterator<String> it5 = getPersistableBundleExtras().iterator();
         while (it5.hasNext()) {
-            hashMap.put(it5.next(), PersistableBundle.class);
+            map.put(it5.next(), PersistableBundle.class);
         }
-        return hashMap;
+        return map;
     }
 
     private static Set<String> getPersistableBundleExtras() {

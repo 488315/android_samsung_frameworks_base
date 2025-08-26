@@ -4,7 +4,6 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import com.android.systemui.util.settings.SettingsProxy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SettingObserver extends ContentObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -46,7 +45,7 @@ public abstract class SettingObserver extends ContentObserver {
             settingsProxy.registerContentObserverAsync(settingsProxy.getUriFor(this.mSettingName), false, (ContentObserver) this, new Runnable() { // from class: com.android.systemui.qs.SettingObserver$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SettingObserver settingObserver = SettingObserver.this;
+                    SettingObserver settingObserver = this.f$0;
                     int i = SettingObserver.$r8$clinit;
                     settingObserver.mObservedValue = settingObserver.mSettingsProxy.getInt(settingObserver.mSettingName, settingObserver.mDefaultValue);
                 }

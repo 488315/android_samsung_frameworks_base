@@ -58,7 +58,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class EnableWidgetDialogKt {
     public static final void DialogComposable(final String str, final String str2, final Function0 function0, final Function0 function02, Composer composer, final int i) {
@@ -75,15 +74,15 @@ public abstract class EnableWidgetDialogKt {
             }
             Modifier.Companion companion = Modifier.Companion;
             Dp.Companion companion2 = Dp.Companion;
-            Modifier m128paddingqDBjuR0$default = PaddingKt.m128paddingqDBjuR0$default(SizeKt.fillMaxWidth(companion, 1.0f), 0.0f, 18, 0.0f, 8, 5);
+            Modifier modifierM129paddingqDBjuR0$default = PaddingKt.m129paddingqDBjuR0$default(SizeKt.fillMaxWidth(companion, 1.0f), 0.0f, 18, 0.0f, 8, 5);
             MaterialTheme.INSTANCE.getClass();
-            Modifier m26backgroundbw27NRU = BackgroundKt.m26backgroundbw27NRU(m128paddingqDBjuR0$default, MaterialTheme.getColorScheme(composerImpl).surfaceBright, RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(28));
+            Modifier modifierM26backgroundbw27NRU = BackgroundKt.m26backgroundbw27NRU(modifierM129paddingqDBjuR0$default, MaterialTheme.getColorScheme(composerImpl).surfaceBright, RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(28));
             Alignment.Companion.getClass();
             BiasAlignment biasAlignment = Alignment.Companion.TopStart;
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, m26backgroundbw27NRU);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierM26backgroundbw27NRU);
             ComposeUiNode.Companion.getClass();
             Function0 function04 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -97,63 +96,63 @@ public abstract class EnableWidgetDialogKt {
                 composerImpl.useNode();
             }
             Function2 function22 = ComposeUiNode.Companion.SetMeasurePolicy;
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, function22);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, function22);
             Function2 function23 = ComposeUiNode.Companion.SetResolvedCompositionLocals;
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, function23);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, function23);
             Function2 function24 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function24);
             }
             Function2 function25 = ComposeUiNode.Companion.SetModifier;
-            Updater.m336setimpl(composerImpl, materializeModifier, function25);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, function25);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
-            Modifier fillMaxWidth = SizeKt.fillMaxWidth(companion, 1.0f);
+            Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(companion, 1.0f);
             Arrangement.INSTANCE.getClass();
-            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(Arrangement.m91spacedBy0680j_4(20), Alignment.Companion.Start, composerImpl, 6);
+            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(Arrangement.m92spacedBy0680j_4(20), Alignment.Companion.Start, composerImpl, 6);
             int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, fillMaxWidth);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, modifierFillMaxWidth);
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
                 composerImpl.createNode(function04);
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, columnMeasurePolicy, function22);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope2, function23);
+            Updater.m337setimpl(composerImpl, columnMeasurePolicy, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope2, function23);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash2))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash2, composerImpl, currentCompositeKeyHash2, function24);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier2, function25);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier2, function25);
             ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
-            Modifier wrapContentHeight$default = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(PaddingKt.m126paddingVpY3zN4$default(companion, 24, 0.0f, 2), 1.0f), 3);
-            MeasurePolicy maybeCachedBoxMeasurePolicy2 = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
+            Modifier modifierWrapContentHeight$default = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(PaddingKt.m127paddingVpY3zN4$default(companion, 24, 0.0f, 2), 1.0f), 3);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy2 = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
             int currentCompositeKeyHash3 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope3 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier3 = ComposedModifierKt.materializeModifier(composerImpl, wrapContentHeight$default);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope3 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier3 = ComposedModifierKt.materializeModifier(composerImpl, modifierWrapContentHeight$default);
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
                 composerImpl.createNode(function04);
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy2, function22);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope3, function23);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy2, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope3, function23);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash3))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash3, composerImpl, currentCompositeKeyHash3, function24);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier3, function25);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier3, function25);
             TextStyle textStyle = MaterialTheme.getTypography(composerImpl).titleMedium;
             long j = MaterialTheme.getColorScheme(composerImpl).onSurface;
             TextAlign.Companion.getClass();
-            TextKt.m316Text4IGK_g(str, null, j, 0L, null, null, null, 0L, null, TextAlign.m805boximpl(TextAlign.Center), 0L, 0, false, 1, 0, null, textStyle, composerImpl, i2 & 14, 3072, 56826);
+            TextKt.m317Text4IGK_g(str, null, j, 0L, null, null, null, 0L, null, TextAlign.m807boximpl(TextAlign.Center), 0L, 0, false, 1, 0, null, textStyle, composerImpl, i2 & 14, 3072, 56826);
             composerImpl = composerImpl;
             composerImpl.end(true);
-            Modifier wrapContentHeight$default2 = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(PaddingKt.m128paddingqDBjuR0$default(companion, 0.0f, 0.0f, 12, 0.0f, 11), 1.0f), 3);
-            MeasurePolicy maybeCachedBoxMeasurePolicy3 = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            Modifier modifierWrapContentHeight$default2 = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(PaddingKt.m129paddingqDBjuR0$default(companion, 0.0f, 0.0f, 12, 0.0f, 11), 1.0f), 3);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy3 = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash4 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope4 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier4 = ComposedModifierKt.materializeModifier(composerImpl, wrapContentHeight$default2);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope4 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier4 = ComposedModifierKt.materializeModifier(composerImpl, modifierWrapContentHeight$default2);
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
                 function03 = function04;
@@ -162,54 +161,58 @@ public abstract class EnableWidgetDialogKt {
                 function03 = function04;
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy3, function22);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope4, function23);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy3, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope4, function23);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash4))) {
                 function2 = function24;
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash4, composerImpl, currentCompositeKeyHash4, function2);
             } else {
                 function2 = function24;
             }
-            Updater.m336setimpl(composerImpl, materializeModifier4, function25);
-            Modifier fillMaxWidth2 = SizeKt.fillMaxWidth(companion, 1.0f);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier4, function25);
+            Modifier modifierFillMaxWidth2 = SizeKt.fillMaxWidth(companion, 1.0f);
             RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(Arrangement.End, Alignment.Companion.Top, composerImpl, 6);
             int currentCompositeKeyHash5 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope5 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier5 = ComposedModifierKt.materializeModifier(composerImpl, fillMaxWidth2);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope5 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier5 = ComposedModifierKt.materializeModifier(composerImpl, modifierFillMaxWidth2);
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
                 composerImpl.createNode(function03);
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, rowMeasurePolicy, function22);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope5, function23);
+            Updater.m337setimpl(composerImpl, rowMeasurePolicy, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope5, function23);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash5))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash5, composerImpl, currentCompositeKeyHash5, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier5, function25);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier5, function25);
             RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
             float f = 16;
-            PaddingValuesImpl m119PaddingValues0680j_4 = PaddingKt.m119PaddingValues0680j_4(f);
+            PaddingValuesImpl paddingValuesImplM120PaddingValues0680j_4 = PaddingKt.m120PaddingValues0680j_4(f);
             ComposableSingletons$EnableWidgetDialogKt.INSTANCE.getClass();
-            ButtonKt.TextButton(function02, null, false, null, null, null, null, m119PaddingValues0680j_4, null, ComposableSingletons$EnableWidgetDialogKt.f37lambda1, composerImpl, ((i2 >> 9) & 14) | 817889280, VolteConstants.ErrorCode.ALTERNATIVE_SERVICES_EMERGENCY_CSFB);
-            ButtonKt.TextButton(function0, null, false, null, null, null, null, PaddingKt.m119PaddingValues0680j_4(f), null, ComposableLambdaKt.rememberComposableLambda(-1297407490, new Function3() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$DialogComposable$1$1$2$1$1
+            ButtonKt.TextButton(function02, null, false, null, null, null, null, paddingValuesImplM120PaddingValues0680j_4, null, ComposableSingletons$EnableWidgetDialogKt.f37lambda1, composerImpl, ((i2 >> 9) & 14) | 817889280, VolteConstants.ErrorCode.ALTERNATIVE_SERVICES_EMERGENCY_CSFB);
+            ButtonKt.TextButton(function0, null, false, null, null, null, null, PaddingKt.m120PaddingValues0680j_4(f), null, ComposableLambdaKt.rememberComposableLambda(-1297407490, new Function3() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$DialogComposable$1$1$2$1$1
+                /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     Composer composer2 = (Composer) obj2;
                     if ((((Number) obj3).intValue() & 17) == 16) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.systemui.communal.ui.compose.DialogComposable.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (EnableWidgetDialog.kt:133)");
+                            }
+                            TextKt.m317Text4IGK_g(str2, null, 0L, 0L, null, null, null, 0L, null, null, 0L, 0, false, 0, 0, null, null, composer2, 0, 0, 131070);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.systemui.communal.ui.compose.DialogComposable.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (EnableWidgetDialog.kt:133)");
-                    }
-                    TextKt.m316Text4IGK_g(str2, null, 0L, 0L, null, null, null, 0L, null, null, 0L, 0, false, 0, 0, null, null, composer2, 0, 0, 131070);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -222,9 +225,9 @@ public abstract class EnableWidgetDialogKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(str, str2, function0, function02, i) { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$$ExternalSyntheticLambda2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(str, str2, function0, function02, i) { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$$ExternalSyntheticLambda2
                 public final /* synthetic */ String f$0;
                 public final /* synthetic */ String f$1;
                 public final /* synthetic */ Function0 f$2;
@@ -233,10 +236,10 @@ public abstract class EnableWidgetDialogKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     Function0 function05 = this.f$2;
                     Function0 function06 = this.f$3;
-                    EnableWidgetDialogKt.DialogComposable(this.f$0, this.f$1, function05, function06, (Composer) obj, updateChangedFlags);
+                    EnableWidgetDialogKt.DialogComposable(this.f$0, this.f$1, function05, function06, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -293,28 +296,28 @@ public abstract class EnableWidgetDialogKt {
                 ComposerKt.traceEventStart("com.android.systemui.communal.ui.compose.EnableWidgetDialog (EnableWidgetDialog.kt:57)");
             }
             composerImpl.startReplaceGroup(-801121081);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(null);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(null);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            final MutableState mutableState = (MutableState) rememberedValue;
+            final MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl.end(false);
             final Context context = ((View) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalView)).getContext();
-            Boolean valueOf = Boolean.valueOf(z2);
+            Boolean boolValueOf = Boolean.valueOf(z2);
             composerImpl.startReplaceGroup(-801116418);
-            boolean changedInstance = ((i2 & 14) == 4) | composerImpl.changedInstance(systemUIDialogFactory) | composerImpl.changedInstance(context) | ((i2 & 896) == 256) | ((i2 & 7168) == 2048) | ((57344 & i2) == 16384) | ((i2 & 458752) == 131072);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
+            boolean zChangedInstance = ((i2 & 14) == 4) | composerImpl.changedInstance(systemUIDialogFactory) | composerImpl.changedInstance(context) | ((i2 & 896) == 256) | ((i2 & 7168) == 2048) | ((57344 & i2) == 16384) | ((i2 & 458752) == 131072);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
                 final String str5 = str4;
                 final Function0 function05 = function03;
                 final Function0 function06 = function04;
                 Function1 function1 = new Function1() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         Context context2 = context;
                         boolean z3 = z;
                         final MutableState mutableState2 = mutableState;
@@ -346,7 +349,7 @@ public abstract class EnableWidgetDialogKt {
                                 componentSystemUIDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$EnableWidgetDialog$1$1$2$1
                                     @Override // android.content.DialogInterface.OnCancelListener
                                     public final void onCancel(DialogInterface dialogInterface) {
-                                        Function0.this.invoke();
+                                        function08.invoke();
                                     }
                                 });
                                 componentSystemUIDialog.show();
@@ -355,7 +358,7 @@ public abstract class EnableWidgetDialogKt {
                         return new DisposableEffectResult() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$EnableWidgetDialog$lambda$6$lambda$5$$inlined$onDispose$1
                             @Override // androidx.compose.runtime.DisposableEffectResult
                             public final void dispose() {
-                                MutableState mutableState3 = MutableState.this;
+                                MutableState mutableState3 = mutableState2;
                                 ComponentSystemUIDialog componentSystemUIDialog2 = (ComponentSystemUIDialog) mutableState3.getValue();
                                 if (componentSystemUIDialog2 != null) {
                                     componentSystemUIDialog2.dismiss();
@@ -366,17 +369,17 @@ public abstract class EnableWidgetDialogKt {
                     }
                 };
                 composerImpl.updateRememberedValue(function1);
-                rememberedValue2 = function1;
+                objRememberedValue2 = function1;
             }
             composerImpl.end(false);
-            EffectsKt.DisposableEffect(valueOf, (Function1) rememberedValue2, composerImpl);
+            EffectsKt.DisposableEffect(boolValueOf, (Function1) objRememberedValue2, composerImpl);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$$ExternalSyntheticLambda1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.communal.ui.compose.EnableWidgetDialogKt$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();

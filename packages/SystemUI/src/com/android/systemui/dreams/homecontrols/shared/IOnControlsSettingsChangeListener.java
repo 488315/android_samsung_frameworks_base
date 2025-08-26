@@ -6,15 +6,12 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface IOnControlsSettingsChangeListener extends IInterface {
     void onControlsSettingsChanged(ComponentName componentName, boolean z);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IOnControlsSettingsChangeListener {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IOnControlsSettingsChangeListener {
             public final IBinder mRemote;
 
@@ -29,14 +26,14 @@ public interface IOnControlsSettingsChangeListener extends IInterface {
 
             @Override // com.android.systemui.dreams.homecontrols.shared.IOnControlsSettingsChangeListener
             public final void onControlsSettingsChanged(ComponentName componentName, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.dreams.homecontrols.shared.IOnControlsSettingsChangeListener");
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.dreams.homecontrols.shared.IOnControlsSettingsChangeListener");
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -58,9 +55,9 @@ public interface IOnControlsSettingsChangeListener extends IInterface {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            ((IHomeControlsRemoteProxyExtKt$controlsSettings$1$listener$1) this).onControlsSettingsChanged(componentName, readBoolean);
+            ((IHomeControlsRemoteProxyExtKt$controlsSettings$1$listener$1) this).onControlsSettingsChanged(componentName, z);
             return true;
         }
 

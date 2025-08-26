@@ -37,13 +37,13 @@ public final class NrIndicators {
 
     public static final ArrayList<NrIndicators> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NrIndicators> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 3, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 3, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NrIndicators nrIndicators = new NrIndicators();
-            nrIndicators.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 3);
+            nrIndicators.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 3);
             arrayList.add(nrIndicators);
         }
         return arrayList;

@@ -22,11 +22,11 @@ public final class Streams {
     public static void pipeAll(InputStream inputStream, OutputStream outputStream, int i) throws IOException {
         byte[] bArr = new byte[i];
         while (true) {
-            int read = inputStream.read(bArr, 0, i);
-            if (read < 0) {
+            int i2 = inputStream.read(bArr, 0, i);
+            if (i2 < 0) {
                 return;
             } else {
-                outputStream.write(bArr, 0, read);
+                outputStream.write(bArr, 0, i2);
             }
         }
     }
@@ -36,16 +36,16 @@ public final class Streams {
         byte[] bArr = new byte[i];
         long j2 = 0;
         while (true) {
-            int read = inputStream.read(bArr, 0, i);
-            if (read < 0) {
+            int i2 = inputStream.read(bArr, 0, i);
+            if (i2 < 0) {
                 return j2;
             }
-            long j3 = read;
+            long j3 = i2;
             if (j - j2 < j3) {
                 throw new StreamOverflowException("Data Overflow");
             }
             j2 += j3;
-            outputStream.write(bArr, 0, read);
+            outputStream.write(bArr, 0, i2);
         }
     }
 
@@ -68,11 +68,11 @@ public final class Streams {
     public static int readFully(InputStream inputStream, byte[] bArr, int i, int i2) throws IOException {
         int i3 = 0;
         while (i3 < i2) {
-            int read = inputStream.read(bArr, i + i3, i2 - i3);
-            if (read < 0) {
+            int i4 = inputStream.read(bArr, i + i3, i2 - i3);
+            if (i4 < 0) {
                 break;
             }
-            i3 += read;
+            i3 += i4;
         }
         return i3;
     }

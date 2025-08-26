@@ -503,9 +503,9 @@ public class CapInfo implements Parcelable {
         this.mRcsIpVideoOnlyCallSupported = parcel.readInt() != 0;
         this.mExts = parcel.createStringArray();
         this.mCapTimestamp = parcel.readLong();
-        Bundle readBundle = parcel.readBundle();
-        for (String str : readBundle.keySet()) {
-            this.mCapInfoMap.put(str, readBundle.getString(str));
+        Bundle bundle = parcel.readBundle();
+        for (String str : bundle.keySet()) {
+            this.mCapInfoMap.put(str, bundle.getString(str));
         }
     }
 }

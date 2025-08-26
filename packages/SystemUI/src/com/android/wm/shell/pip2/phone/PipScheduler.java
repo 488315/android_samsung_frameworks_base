@@ -22,7 +22,6 @@ import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.samsung.android.knox.EnterpriseContainerCallback;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipScheduler implements PipTransitionState.PipTransitionStateChangedListener {
     public static final int EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS = SystemProperties.getInt("persist.wm.debug.extra_content_overlay_fade_out_delay_ms", 400);
@@ -40,7 +39,6 @@ public class PipScheduler implements PipTransitionState.PipTransitionStateChange
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
     public PipTouchHandler$$ExternalSyntheticLambda1 mUpdateMovementBoundsRunnable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipAlphaAnimatorSupplier {
         PipAlphaAnimator get(Context context, SurfaceControl surfaceControl);
     }
@@ -100,8 +98,8 @@ public class PipScheduler implements PipTransitionState.PipTransitionStateChange
                 rect2.offsetTo(0, 0);
                 SurfaceControl.Transaction transaction = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
                 SurfaceControl surfaceControl = this.mPipTransitionState.mPinnedTaskLeash;
-                SurfaceControl takeScreenshot = ScreenshotUtils.takeScreenshot(transaction, surfaceControl, surfaceControl, rect2, 2147483645);
-                startOverlayFadeoutAnimation(takeScreenshot, false, new PipScheduler$$ExternalSyntheticLambda2(this, takeScreenshot, 0));
+                SurfaceControl surfaceControlTakeScreenshot = ScreenshotUtils.takeScreenshot(transaction, surfaceControl, surfaceControl, rect2, 2147483645);
+                startOverlayFadeoutAnimation(surfaceControlTakeScreenshot, false, new PipScheduler$$ExternalSyntheticLambda2(this, surfaceControlTakeScreenshot, 0));
             }
             pipBoundsState.setBounds(rect);
             PipTouchHandler$$ExternalSyntheticLambda1 pipTouchHandler$$ExternalSyntheticLambda1 = this.mUpdateMovementBoundsRunnable;
@@ -113,9 +111,9 @@ public class PipScheduler implements PipTransitionState.PipTransitionStateChange
     }
 
     public final void scheduleUserResizePip(Rect rect, float f) {
-        boolean isEmpty = rect.isEmpty();
+        boolean zIsEmpty = rect.isEmpty();
         PipTransitionState pipTransitionState = this.mPipTransitionState;
-        if (isEmpty || !pipTransitionState.isInPip()) {
+        if (zIsEmpty || !pipTransitionState.isInPip()) {
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[3]) {
                 ProtoLogImpl_1771455215.w(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 4739848556506594355L, 0, "PipScheduler", String.valueOf(rect), String.valueOf(pipTransitionState));
                 return;
@@ -125,10 +123,10 @@ public class PipScheduler implements PipTransitionState.PipTransitionStateChange
         SurfaceControl surfaceControl = pipTransitionState.mPinnedTaskLeash;
         SurfaceControl.Transaction transaction = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
         Matrix matrix = new Matrix();
-        float width = rect.width();
+        float fWidth = rect.width();
         PipBoundsState pipBoundsState = this.mPipBoundsState;
-        float width2 = width / pipBoundsState.getBounds().width();
-        matrix.setScale(width2, width2);
+        float fWidth2 = fWidth / pipBoundsState.getBounds().width();
+        matrix.setScale(fWidth2, fWidth2);
         matrix.postTranslate(rect.left, rect.top);
         matrix.postRotate(f, rect.centerX(), rect.centerY());
         Rect bounds = pipBoundsState.getBounds();

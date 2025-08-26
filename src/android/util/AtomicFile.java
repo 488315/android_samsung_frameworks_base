@@ -3,6 +3,7 @@ package android.util;
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.FileUtils;
+import android.system.ErrnoException;
 import com.samsung.android.os.ReliableWrite;
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,7 +53,7 @@ public class AtomicFile {
     }
 
     @Deprecated
-    public FileOutputStream startWrite(long j) throws IOException {
+    public FileOutputStream startWrite(long j) throws IOException, ErrnoException {
         SystemConfigFileCommitEventLogger systemConfigFileCommitEventLogger = this.mCommitEventLogger;
         if (systemConfigFileCommitEventLogger != null) {
             systemConfigFileCommitEventLogger.setStartTime(j);
@@ -81,7 +82,7 @@ public class AtomicFile {
         }
     }
 
-    public void finishWrite(FileOutputStream fileOutputStream) {
+    public void finishWrite(FileOutputStream fileOutputStream) throws IOException {
         if (fileOutputStream == null) {
             return;
         }
@@ -100,7 +101,7 @@ public class AtomicFile {
         }
     }
 
-    public void failWrite(FileOutputStream fileOutputStream) {
+    public void failWrite(FileOutputStream fileOutputStream) throws IOException {
         if (fileOutputStream == null) {
             return;
         }
@@ -161,47 +162,47 @@ public class AtomicFile {
     }
 
     public byte[] readFully() throws IOException {
-        FileInputStream openRead = openRead();
+        FileInputStream fileInputStreamOpenRead = openRead();
         try {
-            byte[] bArr = new byte[openRead.available()];
+            byte[] bArr = new byte[fileInputStreamOpenRead.available()];
             int i = 0;
             while (true) {
-                int read = openRead.read(bArr, i, bArr.length - i);
-                if (read <= 0) {
+                int i2 = fileInputStreamOpenRead.read(bArr, i, bArr.length - i);
+                if (i2 <= 0) {
                     return bArr;
                 }
-                i += read;
-                int available = openRead.available();
-                if (available > bArr.length - i) {
-                    byte[] bArr2 = new byte[available + i];
+                i += i2;
+                int iAvailable = fileInputStreamOpenRead.available();
+                if (iAvailable > bArr.length - i) {
+                    byte[] bArr2 = new byte[iAvailable + i];
                     System.arraycopy(bArr, 0, bArr2, 0, i);
                     bArr = bArr2;
                 }
             }
         } finally {
-            openRead.close();
+            fileInputStreamOpenRead.close();
         }
     }
 
     public void write(Consumer<FileOutputStream> consumer) {
-        FileOutputStream fileOutputStream;
+        FileOutputStream fileOutputStreamStartWrite;
         try {
-            fileOutputStream = startWrite();
-            try {
-                consumer.accept(fileOutputStream);
-                finishWrite(fileOutputStream);
-            } catch (Throwable th) {
-                th = th;
-                try {
-                    failWrite(fileOutputStream);
-                    throw ExceptionUtils.propagate(th);
-                } finally {
-                    IoUtils.closeQuietly(fileOutputStream);
-                }
-            }
+            fileOutputStreamStartWrite = startWrite();
+        } catch (Throwable th) {
+            th = th;
+            fileOutputStreamStartWrite = null;
+        }
+        try {
+            consumer.accept(fileOutputStreamStartWrite);
+            finishWrite(fileOutputStreamStartWrite);
         } catch (Throwable th2) {
             th = th2;
-            fileOutputStream = null;
+            try {
+                failWrite(fileOutputStreamStartWrite);
+                throw ExceptionUtils.propagate(th);
+            } finally {
+                IoUtils.closeQuietly(fileOutputStreamStartWrite);
+            }
         }
     }
 

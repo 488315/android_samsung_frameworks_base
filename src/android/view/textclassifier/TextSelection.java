@@ -290,13 +290,13 @@ public final class TextSelection implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel parcel) {
-            CharSequence readCharSequence = parcel.readCharSequence();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            CharSequence charSequence = parcel.readCharSequence();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             LocaleList localeList = (LocaleList) parcel.readParcelable(null, LocaleList.class);
-            Bundle readBundle = parcel.readBundle();
+            Bundle bundle = parcel.readBundle();
             SystemTextClassifierMetadata systemTextClassifierMetadata = (SystemTextClassifierMetadata) parcel.readParcelable(null, SystemTextClassifierMetadata.class);
-            Request request = new Request(readCharSequence, readInt, readInt2, localeList, false, parcel.readBoolean(), readBundle);
+            Request request = new Request(charSequence, i, i2, localeList, false, parcel.readBoolean(), bundle);
             request.setSystemTextClassifierMetadata(systemTextClassifierMetadata);
             return request;
         }

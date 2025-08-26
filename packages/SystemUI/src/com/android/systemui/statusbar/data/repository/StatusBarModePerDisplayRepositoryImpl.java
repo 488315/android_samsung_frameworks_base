@@ -12,6 +12,7 @@ import com.android.internal.view.AppearanceRegion;
 import com.android.systemui.Dependency;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.statusbar.CommandQueue;
+import com.android.systemui.statusbar.data.model.StatusBarAppearance;
 import com.android.systemui.statusbar.data.model.StatusBarMode;
 import com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl;
 import com.android.systemui.statusbar.layout.BoundsPair;
@@ -25,6 +26,7 @@ import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.coroutines.Continuation;
@@ -44,7 +46,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarModePerDisplayRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -61,7 +62,6 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
     public final ReadonlyStateFlow statusBarAppearance;
     public final ReadonlyStateFlow statusBarMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ModifiedStatusBarAttributes {
         public final int appearance;
         public final List appearanceRegions;
@@ -96,7 +96,6 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatusBarAttributes {
         public final int appearance;
         public final List appearanceRegions;
@@ -143,7 +142,7 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
                 if (i2 != i || (WindowInsets.Type.statusBars() & i3) == 0) {
                     return;
                 }
-                StatusBarModePerDisplayRepositoryImpl.this._isTransientShown.updateState(null, Boolean.FALSE);
+                this.this$0._isTransientShown.updateState(null, Boolean.FALSE);
             }
 
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -151,7 +150,7 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
                 if (i2 != i) {
                     return;
                 }
-                StatusBarModePerDisplayRepositoryImpl.this._originalStatusBarAttributes.updateState(null, new StatusBarModePerDisplayRepositoryImpl.StatusBarAttributes(i3, ArraysKt___ArraysKt.toList(appearanceRegionArr), z, i5, ArraysKt___ArraysKt.toList(letterboxDetailsArr)));
+                this.this$0._originalStatusBarAttributes.updateState(null, new StatusBarModePerDisplayRepositoryImpl.StatusBarAttributes(i3, ArraysKt___ArraysKt.toList(appearanceRegionArr), z, i5, ArraysKt___ArraysKt.toList(letterboxDetailsArr)));
             }
 
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -163,24 +162,23 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
                 if (centralSurfaces != null) {
                     ((CentralSurfacesImpl) centralSurfaces).mNoAnimationOnNextBarModeChange = true;
                 }
-                StatusBarModePerDisplayRepositoryImpl.this._isTransientShown.updateState(null, Boolean.TRUE);
+                this.this$0._isTransientShown.updateState(null, Boolean.TRUE);
             }
         };
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isTransientShown = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow);
-        this.isTransientShown = asStateFlow;
-        final StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
-        this._originalStatusBarAttributes = MutableStateFlow2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(new BoundsPair(new Rect(), new Rect()));
-        this._statusBarBounds = MutableStateFlow3;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
-        this._ongoingProcessRequiresStatusBarVisible = MutableStateFlow4;
-        FlowKt.asStateFlow(MutableStateFlow4);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isTransientShown = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.isTransientShown = readonlyStateFlowAsStateFlow;
+        final StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
+        this._originalStatusBarAttributes = stateFlowImplMutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(new BoundsPair(new Rect(), new Rect()));
+        this._statusBarBounds = stateFlowImplMutableStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
+        this._ongoingProcessRequiresStatusBarVisible = stateFlowImplMutableStateFlow4;
+        FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
         Flow flow = new Flow() { // from class: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -207,92 +205,64 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L54
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$StatusBarAttributes r5 = (com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl.StatusBarAttributes) r5
-                        if (r5 == 0) goto L47
-                        int r6 = android.view.WindowInsets.Type.statusBars()
-                        int r5 = r5.requestedVisibleTypes
-                        r5 = r5 & r6
-                        if (r5 != 0) goto L41
-                        r5 = r3
-                        goto L42
-                    L41:
-                        r5 = 0
-                    L42:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        goto L49
-                    L47:
-                        java.lang.Boolean r5 = java.lang.Boolean.FALSE
-                    L49:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L54
-                        return r1
-                    L54:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Boolean boolValueOf;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        StatusBarModePerDisplayRepositoryImpl.StatusBarAttributes statusBarAttributes = (StatusBarModePerDisplayRepositoryImpl.StatusBarAttributes) obj;
+                        if (statusBarAttributes != null) {
+                            boolValueOf = Boolean.valueOf((statusBarAttributes.requestedVisibleTypes & WindowInsets.Type.statusBars()) == 0);
+                        } else {
+                            boolValueOf = Boolean.FALSE;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlowImplMutableStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flow, coroutineScope, startedEagerly, bool);
-        this.isInFullscreenMode = stateIn;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow2, MutableStateFlow3, new StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1(this, null)), coroutineScope, startedEagerly, null);
-        this.modifiedStatusBarAttributes = stateIn2;
-        final ReadonlyStateFlow stateIn3 = FlowKt.stateIn(FlowKt.combine(stateIn2, asStateFlow, stateIn, ongoingCallRepository.ongoingCallState, MutableStateFlow4, new StatusBarModePerDisplayRepositoryImpl$statusBarAppearance$1(this, null)), coroutineScope, startedEagerly, null);
-        this.statusBarAppearance = stateIn3;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flow, coroutineScope, startedEagerly, bool);
+        this.isInFullscreenMode = readonlyStateFlowStateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow2, stateFlowImplMutableStateFlow3, new StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1(this, null)), coroutineScope, startedEagerly, null);
+        this.modifiedStatusBarAttributes = readonlyStateFlowStateIn2;
+        final ReadonlyStateFlow readonlyStateFlowStateIn3 = FlowKt.stateIn(FlowKt.combine(readonlyStateFlowStateIn2, readonlyStateFlowAsStateFlow, readonlyStateFlowStateIn, ongoingCallRepository.ongoingCallState, stateFlowImplMutableStateFlow4, new StatusBarModePerDisplayRepositoryImpl$statusBarAppearance$1(this, null)), coroutineScope, startedEagerly, null);
+        this.statusBarAppearance = readonlyStateFlowStateIn3;
         this.statusBarMode = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -319,70 +289,50 @@ public final class StatusBarModePerDisplayRepositoryImpl implements StatusBarMod
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.data.model.StatusBarAppearance r5 = (com.android.systemui.statusbar.data.model.StatusBarAppearance) r5
-                        if (r5 == 0) goto L3a
-                        com.android.systemui.statusbar.data.model.StatusBarMode r5 = r5.mode
-                        if (r5 != 0) goto L3c
-                    L3a:
-                        com.android.systemui.statusbar.data.model.StatusBarMode r5 = com.android.systemui.statusbar.data.model.StatusBarMode.TRANSPARENT
-                    L3c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    StatusBarMode statusBarMode;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        StatusBarAppearance statusBarAppearance = (StatusBarAppearance) obj;
+                        if (statusBarAppearance == null || (statusBarMode = statusBarAppearance.mode) == null) {
+                            statusBarMode = StatusBarMode.TRANSPARENT;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(statusBarMode, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn3.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, startedEagerly, StatusBarMode.TRANSPARENT);
     }

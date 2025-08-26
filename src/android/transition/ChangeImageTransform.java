@@ -58,9 +58,9 @@ public class ChangeImageTransform extends Transition {
             int intrinsicWidth = drawable.getIntrinsicWidth();
             int intrinsicHeight = drawable.getIntrinsicHeight();
             if (scaleType == ImageView.ScaleType.FIT_XY && intrinsicWidth > 0 && intrinsicHeight > 0) {
-                float height = r5.height() / intrinsicHeight;
+                float fHeight = r5.height() / intrinsicHeight;
                 matrix = new Matrix();
-                matrix.setScale(r5.width() / intrinsicWidth, height);
+                matrix.setScale(r5.width() / intrinsicWidth, fHeight);
             } else {
                 matrix = new Matrix(imageView.getImageMatrix());
             }

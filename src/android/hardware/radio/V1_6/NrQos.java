@@ -39,13 +39,13 @@ public final class NrQos {
 
     public static final ArrayList<NrQos> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NrQos> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NrQos nrQos = new NrQos();
-            nrQos.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            nrQos.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(nrQos);
         }
         return arrayList;

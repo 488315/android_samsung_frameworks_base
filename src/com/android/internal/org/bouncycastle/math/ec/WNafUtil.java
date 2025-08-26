@@ -18,18 +18,18 @@ public abstract class WNafUtil {
             return;
         }
         BigInteger order = curve.getOrder();
-        final int min = Math.min(16, getWindowSize(order == null ? curve.getFieldSize() + 1 : order.bitLength()) + 3);
+        final int iMin = Math.min(16, getWindowSize(order == null ? curve.getFieldSize() + 1 : order.bitLength()) + 3);
         curve.precompute(eCPoint, PRECOMP_NAME, new PreCompCallback() { // from class: com.android.internal.org.bouncycastle.math.ec.WNafUtil.1
             @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
             public PreCompInfo precompute(PreCompInfo preCompInfo) {
                 WNafPreCompInfo wNafPreCompInfo = preCompInfo instanceof WNafPreCompInfo ? (WNafPreCompInfo) preCompInfo : null;
-                if (wNafPreCompInfo != null && wNafPreCompInfo.getConfWidth() == min) {
+                if (wNafPreCompInfo != null && wNafPreCompInfo.getConfWidth() == iMin) {
                     wNafPreCompInfo.setPromotionCountdown(0);
                     return wNafPreCompInfo;
                 }
                 WNafPreCompInfo wNafPreCompInfo2 = new WNafPreCompInfo();
                 wNafPreCompInfo2.setPromotionCountdown(0);
-                wNafPreCompInfo2.setConfWidth(min);
+                wNafPreCompInfo2.setConfWidth(iMin);
                 if (wNafPreCompInfo != null) {
                     wNafPreCompInfo2.setPreComp(wNafPreCompInfo.getPreComp());
                     wNafPreCompInfo2.setPreCompNeg(wNafPreCompInfo.getPreCompNeg());
@@ -48,17 +48,17 @@ public abstract class WNafUtil {
         if (bigInteger.signum() == 0) {
             return EMPTY_INTS;
         }
-        BigInteger add = bigInteger.shiftLeft(1).add(bigInteger);
-        int bitLength = add.bitLength();
-        int i = bitLength >> 1;
+        BigInteger bigIntegerAdd = bigInteger.shiftLeft(1).add(bigInteger);
+        int iBitLength = bigIntegerAdd.bitLength();
+        int i = iBitLength >> 1;
         int[] iArr = new int[i];
-        BigInteger xor = add.xor(bigInteger);
-        int i2 = bitLength - 1;
+        BigInteger bigIntegerXor = bigIntegerAdd.xor(bigInteger);
+        int i2 = iBitLength - 1;
         int i3 = 0;
         int i4 = 1;
         int i5 = 0;
         while (i4 < i2) {
-            if (xor.testBit(i4)) {
+            if (bigIntegerXor.testBit(i4)) {
                 iArr[i3] = i5 | ((bigInteger.testBit(i4) ? -1 : 1) << 16);
                 i4++;
                 i5 = 1;
@@ -86,8 +86,8 @@ public abstract class WNafUtil {
         if (bigInteger.signum() == 0) {
             return EMPTY_INTS;
         }
-        int bitLength = (bigInteger.bitLength() / i) + 1;
-        int[] iArr = new int[bitLength];
+        int iBitLength = (bigInteger.bitLength() / i) + 1;
+        int[] iArr = new int[iBitLength];
         int i2 = 1 << i;
         int i3 = i2 - 1;
         int i4 = i2 >>> 1;
@@ -99,53 +99,53 @@ public abstract class WNafUtil {
                 i5++;
             } else {
                 bigInteger = bigInteger.shiftRight(i5);
-                int intValue = bigInteger.intValue() & i3;
+                int iIntValue = bigInteger.intValue() & i3;
                 if (z) {
-                    intValue++;
+                    iIntValue++;
                 }
-                z = (intValue & i4) != 0;
+                z = (iIntValue & i4) != 0;
                 if (z) {
-                    intValue -= i2;
+                    iIntValue -= i2;
                 }
                 if (i6 > 0) {
                     i5--;
                 }
-                iArr[i6] = i5 | (intValue << 16);
+                iArr[i6] = i5 | (iIntValue << 16);
                 i5 = i;
                 i6++;
             }
         }
-        return bitLength > i6 ? trim(iArr, i6) : iArr;
+        return iBitLength > i6 ? trim(iArr, i6) : iArr;
     }
 
     public static byte[] generateJSF(BigInteger bigInteger, BigInteger bigInteger2) {
-        int max = Math.max(bigInteger.bitLength(), bigInteger2.bitLength()) + 1;
-        byte[] bArr = new byte[max];
-        BigInteger bigInteger3 = bigInteger;
-        BigInteger bigInteger4 = bigInteger2;
+        int iMax = Math.max(bigInteger.bitLength(), bigInteger2.bitLength()) + 1;
+        byte[] bArr = new byte[iMax];
+        BigInteger bigIntegerShiftRight = bigInteger;
+        BigInteger bigIntegerShiftRight2 = bigInteger2;
         int i = 0;
         int i2 = 0;
         int i3 = 0;
         int i4 = 0;
         while (true) {
-            if ((i | i2) == 0 && bigInteger3.bitLength() <= i3 && bigInteger4.bitLength() <= i3) {
+            if ((i | i2) == 0 && bigIntegerShiftRight.bitLength() <= i3 && bigIntegerShiftRight2.bitLength() <= i3) {
                 break;
             }
-            int intValue = (bigInteger3.intValue() >>> i3) + i;
-            int i5 = intValue & 7;
-            int intValue2 = (bigInteger4.intValue() >>> i3) + i2;
-            int i6 = intValue2 & 7;
-            int i7 = intValue & 1;
+            int iIntValue = (bigIntegerShiftRight.intValue() >>> i3) + i;
+            int i5 = iIntValue & 7;
+            int iIntValue2 = (bigIntegerShiftRight2.intValue() >>> i3) + i2;
+            int i6 = iIntValue2 & 7;
+            int i7 = iIntValue & 1;
             if (i7 != 0) {
-                i7 -= intValue & 2;
-                if (i5 + i7 == 4 && (intValue2 & 3) == 2) {
+                i7 -= iIntValue & 2;
+                if (i5 + i7 == 4 && (iIntValue2 & 3) == 2) {
                     i7 = -i7;
                 }
             }
-            int i8 = intValue2 & 1;
+            int i8 = iIntValue2 & 1;
             if (i8 != 0) {
-                i8 -= intValue2 & 2;
-                if (i6 + i8 == 4 && (intValue & 3) == 2) {
+                i8 -= iIntValue2 & 2;
+                if (i6 + i8 == 4 && (iIntValue & 3) == 2) {
                     i8 = -i8;
                 }
             }
@@ -157,34 +157,34 @@ public abstract class WNafUtil {
             }
             i3++;
             if (i3 == 30) {
-                bigInteger3 = bigInteger3.shiftRight(30);
-                bigInteger4 = bigInteger4.shiftRight(30);
+                bigIntegerShiftRight = bigIntegerShiftRight.shiftRight(30);
+                bigIntegerShiftRight2 = bigIntegerShiftRight2.shiftRight(30);
                 i3 = 0;
             }
             bArr[i4] = (byte) ((i8 & 15) | (i7 << 4));
             i4++;
         }
-        return max > i4 ? trim(bArr, i4) : bArr;
+        return iMax > i4 ? trim(bArr, i4) : bArr;
     }
 
     public static byte[] generateNaf(BigInteger bigInteger) {
         if (bigInteger.signum() == 0) {
             return EMPTY_BYTES;
         }
-        BigInteger add = bigInteger.shiftLeft(1).add(bigInteger);
-        int bitLength = add.bitLength();
-        int i = bitLength - 1;
+        BigInteger bigIntegerAdd = bigInteger.shiftLeft(1).add(bigInteger);
+        int iBitLength = bigIntegerAdd.bitLength();
+        int i = iBitLength - 1;
         byte[] bArr = new byte[i];
-        BigInteger xor = add.xor(bigInteger);
+        BigInteger bigIntegerXor = bigIntegerAdd.xor(bigInteger);
         int i2 = 1;
         while (i2 < i) {
-            if (xor.testBit(i2)) {
+            if (bigIntegerXor.testBit(i2)) {
                 bArr[i2 - 1] = (byte) (bigInteger.testBit(i2) ? -1 : 1);
                 i2++;
             }
             i2++;
         }
-        bArr[bitLength - 2] = 1;
+        bArr[iBitLength - 2] = 1;
         return bArr;
     }
 
@@ -198,8 +198,8 @@ public abstract class WNafUtil {
         if (bigInteger.signum() == 0) {
             return EMPTY_BYTES;
         }
-        int bitLength = bigInteger.bitLength() + 1;
-        byte[] bArr = new byte[bitLength];
+        int iBitLength = bigInteger.bitLength() + 1;
+        byte[] bArr = new byte[iBitLength];
         int i2 = 1 << i;
         int i3 = i2 - 1;
         int i4 = i2 >>> 1;
@@ -211,24 +211,24 @@ public abstract class WNafUtil {
                 i5++;
             } else {
                 bigInteger = bigInteger.shiftRight(i5);
-                int intValue = bigInteger.intValue() & i3;
+                int iIntValue = bigInteger.intValue() & i3;
                 if (z) {
-                    intValue++;
+                    iIntValue++;
                 }
-                z = (intValue & i4) != 0;
+                z = (iIntValue & i4) != 0;
                 if (z) {
-                    intValue -= i2;
+                    iIntValue -= i2;
                 }
                 if (i6 > 0) {
                     i5--;
                 }
                 int i7 = i6 + i5;
-                bArr[i7] = (byte) intValue;
+                bArr[i7] = (byte) iIntValue;
                 i6 = i7 + 1;
                 i5 = i;
             }
         }
-        return bitLength > i6 ? trim(bArr, i6) : bArr;
+        return iBitLength > i6 ? trim(bArr, i6) : bArr;
     }
 
     public static int getNafWeight(BigInteger bigInteger) {
@@ -272,19 +272,116 @@ public abstract class WNafUtil {
     public static WNafPreCompInfo precompute(final ECPoint eCPoint, final int i, final boolean z) {
         final ECCurve curve = eCPoint.getCurve();
         return (WNafPreCompInfo) curve.precompute(eCPoint, PRECOMP_NAME, new PreCompCallback() { // from class: com.android.internal.org.bouncycastle.math.ec.WNafUtil.2
-            /* JADX WARN: Removed duplicated region for block: B:43:0x00f2 A[LOOP:0: B:42:0x00f0->B:43:0x00f2, LOOP_END] */
-            /* JADX WARN: Removed duplicated region for block: B:54:0x0117 A[LOOP:1: B:53:0x0115->B:54:0x0117, LOOP_END] */
+            /* JADX WARN: Removed duplicated region for block: B:45:0x00ef A[PHI: r14
+              0x00ef: PHI (r14v6 com.android.internal.org.bouncycastle.math.ec.ECPoint) = 
+              (r14v4 com.android.internal.org.bouncycastle.math.ec.ECPoint)
+              (r14v9 com.android.internal.org.bouncycastle.math.ec.ECPoint)
+              (r14v9 com.android.internal.org.bouncycastle.math.ec.ECPoint)
+              (r14v9 com.android.internal.org.bouncycastle.math.ec.ECPoint)
+              (r14v9 com.android.internal.org.bouncycastle.math.ec.ECPoint)
+             binds: [B:28:0x0091, B:30:0x009d, B:32:0x00a5, B:34:0x00af, B:40:0x00bd] A[DONT_GENERATE, DONT_INLINE]] */
+            /* JADX WARN: Removed duplicated region for block: B:58:0x0117 A[LOOP:1: B:57:0x0115->B:58:0x0117, LOOP_END] */
             @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public com.android.internal.org.bouncycastle.math.ec.PreCompInfo precompute(com.android.internal.org.bouncycastle.math.ec.PreCompInfo r14) {
-                /*
-                    Method dump skipped, instructions count: 303
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.math.ec.WNafUtil.AnonymousClass2.precompute(com.android.internal.org.bouncycastle.math.ec.PreCompInfo):com.android.internal.org.bouncycastle.math.ec.PreCompInfo");
+            public PreCompInfo precompute(PreCompInfo preCompInfo) {
+                ECPoint eCPointTwice;
+                ECPoint[] eCPointArrResizeTable;
+                ECPoint[] preCompNeg;
+                int length;
+                ECPoint[] eCPointArrResizeTable2;
+                int i2;
+                ECPoint eCPointCreatePoint;
+                int coordinateSystem;
+                ECFieldElement zCoord = null;
+                WNafPreCompInfo wNafPreCompInfo = preCompInfo instanceof WNafPreCompInfo ? (WNafPreCompInfo) preCompInfo : null;
+                int iMax = Math.max(2, Math.min(16, i));
+                if (checkExisting(wNafPreCompInfo, iMax, 1 << (iMax - 2), z)) {
+                    wNafPreCompInfo.decrementPromotionCountdown();
+                    return wNafPreCompInfo;
+                }
+                WNafPreCompInfo wNafPreCompInfo2 = new WNafPreCompInfo();
+                if (wNafPreCompInfo != null) {
+                    wNafPreCompInfo2.setPromotionCountdown(wNafPreCompInfo.decrementPromotionCountdown());
+                    wNafPreCompInfo2.setConfWidth(wNafPreCompInfo.getConfWidth());
+                    eCPointArrResizeTable = wNafPreCompInfo.getPreComp();
+                    preCompNeg = wNafPreCompInfo.getPreCompNeg();
+                    eCPointTwice = wNafPreCompInfo.getTwice();
+                } else {
+                    eCPointTwice = null;
+                    eCPointArrResizeTable = null;
+                    preCompNeg = null;
+                }
+                int iMin = Math.min(16, Math.max(wNafPreCompInfo2.getConfWidth(), iMax));
+                int i3 = 1 << (iMin - 2);
+                int length2 = 0;
+                if (eCPointArrResizeTable == null) {
+                    eCPointArrResizeTable = WNafUtil.EMPTY_POINTS;
+                    length = 0;
+                } else {
+                    length = eCPointArrResizeTable.length;
+                }
+                if (length < i3) {
+                    eCPointArrResizeTable = WNafUtil.resizeTable(eCPointArrResizeTable, i3);
+                    if (i3 == 1) {
+                        eCPointArrResizeTable[0] = eCPoint.normalize();
+                    } else {
+                        if (length == 0) {
+                            eCPointArrResizeTable[0] = eCPoint;
+                            i2 = 1;
+                        } else {
+                            i2 = length;
+                        }
+                        if (i3 == 2) {
+                            eCPointArrResizeTable[1] = eCPoint.threeTimes();
+                        } else {
+                            ECPoint eCPointAdd = eCPointArrResizeTable[i2 - 1];
+                            if (eCPointTwice == null) {
+                                eCPointTwice = eCPointArrResizeTable[0].twice();
+                                if (eCPointTwice.isInfinity() || !ECAlgorithms.isFpCurve(curve) || curve.getFieldSize() < 64 || !((coordinateSystem = curve.getCoordinateSystem()) == 2 || coordinateSystem == 3 || coordinateSystem == 4)) {
+                                    eCPointCreatePoint = eCPointTwice;
+                                } else {
+                                    zCoord = eCPointTwice.getZCoord(0);
+                                    eCPointCreatePoint = curve.createPoint(eCPointTwice.getXCoord().toBigInteger(), eCPointTwice.getYCoord().toBigInteger());
+                                    ECFieldElement eCFieldElementSquare = zCoord.square();
+                                    eCPointAdd = eCPointAdd.scaleX(eCFieldElementSquare).scaleY(eCFieldElementSquare.multiply(zCoord));
+                                    if (length == 0) {
+                                        eCPointArrResizeTable[0] = eCPointAdd;
+                                    }
+                                }
+                                while (i2 < i3) {
+                                    eCPointAdd = eCPointAdd.add(eCPointCreatePoint);
+                                    eCPointArrResizeTable[i2] = eCPointAdd;
+                                    i2++;
+                                }
+                            }
+                        }
+                        curve.normalizeAll(eCPointArrResizeTable, length, i3 - length, zCoord);
+                    }
+                }
+                if (z) {
+                    if (preCompNeg == null) {
+                        eCPointArrResizeTable2 = new ECPoint[i3];
+                    } else {
+                        length2 = preCompNeg.length;
+                        if (length2 < i3) {
+                            eCPointArrResizeTable2 = WNafUtil.resizeTable(preCompNeg, i3);
+                        }
+                        while (length2 < i3) {
+                            preCompNeg[length2] = eCPointArrResizeTable[length2].negate();
+                            length2++;
+                        }
+                    }
+                    preCompNeg = eCPointArrResizeTable2;
+                    while (length2 < i3) {
+                    }
+                }
+                wNafPreCompInfo2.setPreComp(eCPointArrResizeTable);
+                wNafPreCompInfo2.setPreCompNeg(preCompNeg);
+                wNafPreCompInfo2.setTwice(eCPointTwice);
+                wNafPreCompInfo2.setWidth(iMin);
+                return wNafPreCompInfo2;
             }
 
             private boolean checkExisting(WNafPreCompInfo wNafPreCompInfo, int i2, int i3, boolean z2) {
@@ -305,18 +402,18 @@ public abstract class WNafUtil {
             @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
             public PreCompInfo precompute(PreCompInfo preCompInfo) {
                 WNafPreCompInfo wNafPreCompInfo2 = preCompInfo instanceof WNafPreCompInfo ? (WNafPreCompInfo) preCompInfo : null;
-                int width = WNafPreCompInfo.this.getWidth();
-                if (checkExisting(wNafPreCompInfo2, width, WNafPreCompInfo.this.getPreComp().length, z)) {
+                int width = wNafPreCompInfo.getWidth();
+                if (checkExisting(wNafPreCompInfo2, width, wNafPreCompInfo.getPreComp().length, z)) {
                     wNafPreCompInfo2.decrementPromotionCountdown();
                     return wNafPreCompInfo2;
                 }
                 WNafPreCompInfo wNafPreCompInfo3 = new WNafPreCompInfo();
-                wNafPreCompInfo3.setPromotionCountdown(WNafPreCompInfo.this.getPromotionCountdown());
-                ECPoint twice = WNafPreCompInfo.this.getTwice();
+                wNafPreCompInfo3.setPromotionCountdown(wNafPreCompInfo.getPromotionCountdown());
+                ECPoint twice = wNafPreCompInfo.getTwice();
                 if (twice != null) {
                     wNafPreCompInfo3.setTwice(eCPointMap.map(twice));
                 }
-                ECPoint[] preComp = WNafPreCompInfo.this.getPreComp();
+                ECPoint[] preComp = wNafPreCompInfo.getPreComp();
                 int length = preComp.length;
                 ECPoint[] eCPointArr = new ECPoint[length];
                 for (int i = 0; i < preComp.length; i++) {

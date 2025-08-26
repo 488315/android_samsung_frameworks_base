@@ -87,7 +87,7 @@ public class BoxLayout extends LayoutManager {
         while (it.hasNext()) {
             ComponentMeasure componentMeasure2 = measurePass.get(it.next());
             int i = this.mVerticalPositioning;
-            float f = 0.0f;
+            float w2 = 0.0f;
             if (i == 2) {
                 h = (h2 - componentMeasure2.getH()) / 2.0f;
             } else {
@@ -96,12 +96,12 @@ public class BoxLayout extends LayoutManager {
             int i2 = this.mHorizontalPositioning;
             if (i2 != 1) {
                 if (i2 == 2) {
-                    f = (w - componentMeasure2.getW()) / 2.0f;
+                    w2 = (w - componentMeasure2.getW()) / 2.0f;
                 } else if (i2 == 3) {
-                    f = w - componentMeasure2.getW();
+                    w2 = w - componentMeasure2.getW();
                 }
             }
-            componentMeasure2.setX(f);
+            componentMeasure2.setX(w2);
             componentMeasure2.setY(h);
         }
     }

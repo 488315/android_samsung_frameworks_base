@@ -1,6 +1,7 @@
 package com.google.android.material.textfield;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -31,7 +32,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EndCompoundLayout extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -55,7 +55,6 @@ public class EndCompoundLayout extends LinearLayout {
     public final TextInputLayout textInputLayout;
     public AccessibilityManagerCompat$TouchExplorationStateChangeListener touchExplorationStateChangeListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.textfield.EndCompoundLayout$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
@@ -83,7 +82,6 @@ public class EndCompoundLayout extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EndIconDelegates {
         public final int customEndIconDrawableId;
         public final SparseArray delegates = new SparseArray();
@@ -98,9 +96,9 @@ public class EndCompoundLayout extends LinearLayout {
     }
 
     /* JADX WARN: Type inference failed for: r4v1, types: [com.google.android.material.textfield.EndCompoundLayout$1] */
-    public EndCompoundLayout(TextInputLayout textInputLayout, TintTypedArray tintTypedArray) {
-        super(textInputLayout.getContext());
+    public EndCompoundLayout(TextInputLayout textInputLayout, TintTypedArray tintTypedArray) throws Resources.NotFoundException {
         CharSequence text;
+        super(textInputLayout.getContext());
         this.endIconMode = 0;
         this.endIconChangedListeners = new LinkedHashSet();
         this.editTextWatcher = new TextWatcherAdapter() { // from class: com.google.android.material.textfield.EndCompoundLayout.1
@@ -124,11 +122,11 @@ public class EndCompoundLayout extends LinearLayout {
         this.endIconFrame = frameLayout;
         frameLayout.setVisibility(8);
         frameLayout.setLayoutParams(new LinearLayout.LayoutParams(-2, -1));
-        LayoutInflater from = LayoutInflater.from(getContext());
-        CheckableImageButton createIconView = createIconView(this, from, R.id.text_input_error_icon);
-        this.errorIconView = createIconView;
-        CheckableImageButton createIconView2 = createIconView(frameLayout, from, R.id.text_input_end_icon);
-        this.endIconView = createIconView2;
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
+        CheckableImageButton checkableImageButtonCreateIconView = createIconView(this, layoutInflaterFrom, R.id.text_input_error_icon);
+        this.errorIconView = checkableImageButtonCreateIconView;
+        CheckableImageButton checkableImageButtonCreateIconView2 = createIconView(frameLayout, layoutInflaterFrom, R.id.text_input_end_icon);
+        this.endIconView = checkableImageButtonCreateIconView2;
         this.endIconDelegates = new EndIconDelegates(this, tintTypedArray);
         AppCompatTextView appCompatTextView = new AppCompatTextView(getContext());
         this.suffixTextView = appCompatTextView;
@@ -139,16 +137,16 @@ public class EndCompoundLayout extends LinearLayout {
             this.errorIconTintMode = ViewUtils.parseTintMode(tintTypedArray.mWrapped.getInt(39, -1), null);
         }
         if (tintTypedArray.mWrapped.hasValue(37)) {
-            createIconView.setImageDrawable(tintTypedArray.getDrawable(37));
+            checkableImageButtonCreateIconView.setImageDrawable(tintTypedArray.getDrawable(37));
             updateErrorIconVisibility();
-            IconHelper.applyIconTint(textInputLayout, createIconView, this.errorIconTintList, this.errorIconTintMode);
+            IconHelper.applyIconTint(textInputLayout, checkableImageButtonCreateIconView, this.errorIconTintList, this.errorIconTintMode);
         }
-        createIconView.setContentDescription(getResources().getText(R.string.error_icon_content_description));
+        checkableImageButtonCreateIconView.setContentDescription(getResources().getText(R.string.error_icon_content_description));
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        createIconView.setImportantForAccessibility(2);
-        createIconView.setClickable(false);
-        createIconView.pressable = false;
-        createIconView.setFocusable(false);
+        checkableImageButtonCreateIconView.setImportantForAccessibility(2);
+        checkableImageButtonCreateIconView.setClickable(false);
+        checkableImageButtonCreateIconView.pressable = false;
+        checkableImageButtonCreateIconView.setFocusable(false);
         if (!tintTypedArray.mWrapped.hasValue(53)) {
             if (tintTypedArray.mWrapped.hasValue(32)) {
                 this.endIconTintList = MaterialResources.getColorStateList(getContext(), tintTypedArray, 32);
@@ -159,13 +157,13 @@ public class EndCompoundLayout extends LinearLayout {
         }
         if (tintTypedArray.mWrapped.hasValue(30)) {
             setEndIconMode(tintTypedArray.mWrapped.getInt(30, 0));
-            if (tintTypedArray.mWrapped.hasValue(27) && createIconView2.getContentDescription() != (text = tintTypedArray.mWrapped.getText(27))) {
-                createIconView2.setContentDescription(text);
+            if (tintTypedArray.mWrapped.hasValue(27) && checkableImageButtonCreateIconView2.getContentDescription() != (text = tintTypedArray.mWrapped.getText(27))) {
+                checkableImageButtonCreateIconView2.setContentDescription(text);
             }
             boolean z = tintTypedArray.mWrapped.getBoolean(26, true);
-            if (createIconView2.checkable != z) {
-                createIconView2.checkable = z;
-                createIconView2.sendAccessibilityEvent(0);
+            if (checkableImageButtonCreateIconView2.checkable != z) {
+                checkableImageButtonCreateIconView2.checkable = z;
+                checkableImageButtonCreateIconView2.sendAccessibilityEvent(0);
             }
         } else if (tintTypedArray.mWrapped.hasValue(53)) {
             if (tintTypedArray.mWrapped.hasValue(54)) {
@@ -176,8 +174,8 @@ public class EndCompoundLayout extends LinearLayout {
             }
             setEndIconMode(tintTypedArray.mWrapped.getBoolean(53, false) ? 1 : 0);
             CharSequence text2 = tintTypedArray.mWrapped.getText(51);
-            if (createIconView2.getContentDescription() != text2) {
-                createIconView2.setContentDescription(text2);
+            if (checkableImageButtonCreateIconView2.getContentDescription() != text2) {
+                checkableImageButtonCreateIconView2.setContentDescription(text2);
             }
         }
         int dimensionPixelSize = tintTypedArray.mWrapped.getDimensionPixelSize(29, getResources().getDimensionPixelSize(R.dimen.mtrl_min_touch_target_size));
@@ -186,15 +184,15 @@ public class EndCompoundLayout extends LinearLayout {
         }
         if (dimensionPixelSize != this.endIconMinSize) {
             this.endIconMinSize = dimensionPixelSize;
-            createIconView2.setMinimumWidth(dimensionPixelSize);
-            createIconView2.setMinimumHeight(dimensionPixelSize);
-            createIconView.setMinimumWidth(dimensionPixelSize);
-            createIconView.setMinimumHeight(dimensionPixelSize);
+            checkableImageButtonCreateIconView2.setMinimumWidth(dimensionPixelSize);
+            checkableImageButtonCreateIconView2.setMinimumHeight(dimensionPixelSize);
+            checkableImageButtonCreateIconView.setMinimumWidth(dimensionPixelSize);
+            checkableImageButtonCreateIconView.setMinimumHeight(dimensionPixelSize);
         }
         if (tintTypedArray.mWrapped.hasValue(31)) {
-            ImageView.ScaleType convertScaleType = IconHelper.convertScaleType(tintTypedArray.mWrapped.getInt(31, -1));
-            createIconView2.setScaleType(convertScaleType);
-            createIconView.setScaleType(convertScaleType);
+            ImageView.ScaleType scaleTypeConvertScaleType = IconHelper.convertScaleType(tintTypedArray.mWrapped.getInt(31, -1));
+            checkableImageButtonCreateIconView2.setScaleType(scaleTypeConvertScaleType);
+            checkableImageButtonCreateIconView.setScaleType(scaleTypeConvertScaleType);
         }
         appCompatTextView.setVisibility(8);
         appCompatTextView.setId(R.id.textinput_suffix_text);
@@ -208,10 +206,10 @@ public class EndCompoundLayout extends LinearLayout {
         this.suffixText = TextUtils.isEmpty(text3) ? null : text3;
         appCompatTextView.setText(text3);
         updateSuffixTextVisibility();
-        frameLayout.addView(createIconView2);
+        frameLayout.addView(checkableImageButtonCreateIconView2);
         addView(appCompatTextView);
         addView(frameLayout);
-        addView(createIconView);
+        addView(checkableImageButtonCreateIconView);
         textInputLayout.editTextAttachedListeners.add(anonymousClass2);
         if (textInputLayout.editText != null) {
             anonymousClass2.onEditTextAttached(textInputLayout);
@@ -256,26 +254,26 @@ public class EndCompoundLayout extends LinearLayout {
     public final EndIconDelegate getEndIconDelegate() {
         EndIconDelegates endIconDelegates = this.endIconDelegates;
         int i = this.endIconMode;
-        EndIconDelegate endIconDelegate = (EndIconDelegate) endIconDelegates.delegates.get(i);
-        if (endIconDelegate == null) {
+        EndIconDelegate customEndIconDelegate = (EndIconDelegate) endIconDelegates.delegates.get(i);
+        if (customEndIconDelegate == null) {
             EndCompoundLayout endCompoundLayout = endIconDelegates.endLayout;
             if (i == -1) {
-                endIconDelegate = new CustomEndIconDelegate(endCompoundLayout);
+                customEndIconDelegate = new CustomEndIconDelegate(endCompoundLayout);
             } else if (i == 0) {
-                endIconDelegate = new NoEndIconDelegate(endCompoundLayout);
+                customEndIconDelegate = new NoEndIconDelegate(endCompoundLayout);
             } else if (i == 1) {
-                endIconDelegate = new PasswordToggleEndIconDelegate(endCompoundLayout, endIconDelegates.passwordIconDrawableId);
+                customEndIconDelegate = new PasswordToggleEndIconDelegate(endCompoundLayout, endIconDelegates.passwordIconDrawableId);
             } else if (i == 2) {
-                endIconDelegate = new ClearTextEndIconDelegate(endCompoundLayout);
+                customEndIconDelegate = new ClearTextEndIconDelegate(endCompoundLayout);
             } else {
                 if (i != 3) {
                     throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Invalid end icon mode: "));
                 }
-                endIconDelegate = new DropdownMenuEndIconDelegate(endCompoundLayout);
+                customEndIconDelegate = new DropdownMenuEndIconDelegate(endCompoundLayout);
             }
-            endIconDelegates.delegates.append(i, endIconDelegate);
+            endIconDelegates.delegates.append(i, customEndIconDelegate);
         }
-        return endIconDelegate;
+        return customEndIconDelegate;
     }
 
     public final int getSuffixTextEndOffset() {
@@ -294,7 +292,7 @@ public class EndCompoundLayout extends LinearLayout {
 
     public final void refreshIconState(boolean z) {
         boolean z2;
-        boolean isActivated;
+        boolean zIsActivated;
         boolean z3;
         EndIconDelegate endIconDelegate = getEndIconDelegate();
         boolean z4 = true;
@@ -304,17 +302,17 @@ public class EndCompoundLayout extends LinearLayout {
             this.endIconView.setChecked(!z3);
             z2 = true;
         }
-        if (!(endIconDelegate instanceof DropdownMenuEndIconDelegate) || (isActivated = this.endIconView.isActivated()) == endIconDelegate.isIconActivated()) {
+        if (!(endIconDelegate instanceof DropdownMenuEndIconDelegate) || (zIsActivated = this.endIconView.isActivated()) == endIconDelegate.isIconActivated()) {
             z4 = z2;
         } else {
-            this.endIconView.setActivated(!isActivated);
+            this.endIconView.setActivated(!zIsActivated);
         }
         if (z || z4) {
             IconHelper.refreshIconDrawableState(this.textInputLayout, this.endIconView, this.endIconTintList);
         }
     }
 
-    public final void setEndIconMode(int i) {
+    public final void setEndIconMode(int i) throws Resources.NotFoundException {
         AccessibilityManager accessibilityManager;
         if (this.endIconMode == i) {
             return;
@@ -333,11 +331,11 @@ public class EndCompoundLayout extends LinearLayout {
         }
         setEndIconVisible(i != 0);
         EndIconDelegate endIconDelegate2 = getEndIconDelegate();
-        int i2 = this.endIconDelegates.customEndIconDrawableId;
-        if (i2 == 0) {
-            i2 = endIconDelegate2.getIconDrawableResId();
+        int iconDrawableResId = this.endIconDelegates.customEndIconDrawableId;
+        if (iconDrawableResId == 0) {
+            iconDrawableResId = endIconDelegate2.getIconDrawableResId();
         }
-        Drawable drawable = i2 != 0 ? AppCompatResources.getDrawable(i2, getContext()) : null;
+        Drawable drawable = iconDrawableResId != 0 ? AppCompatResources.getDrawable(iconDrawableResId, getContext()) : null;
         this.endIconView.setImageDrawable(drawable);
         if (drawable != null) {
             IconHelper.applyIconTint(this.textInputLayout, this.endIconView, this.endIconTintList, this.endIconTintMode);
@@ -348,10 +346,10 @@ public class EndCompoundLayout extends LinearLayout {
         if (this.endIconView.getContentDescription() != text) {
             this.endIconView.setContentDescription(text);
         }
-        boolean isIconCheckable = endIconDelegate2.isIconCheckable();
+        boolean zIsIconCheckable = endIconDelegate2.isIconCheckable();
         CheckableImageButton checkableImageButton = this.endIconView;
-        if (checkableImageButton.checkable != isIconCheckable) {
-            checkableImageButton.checkable = isIconCheckable;
+        if (checkableImageButton.checkable != zIsIconCheckable) {
+            checkableImageButton.checkable = zIsIconCheckable;
             checkableImageButton.sendAccessibilityEvent(0);
         }
         if (!endIconDelegate2.isBoxBackgroundModeSupported(this.textInputLayout.boxBackgroundMode)) {
@@ -379,7 +377,7 @@ public class EndCompoundLayout extends LinearLayout {
         refreshIconState(true);
     }
 
-    public final void setEndIconVisible(boolean z) {
+    public final void setEndIconVisible(boolean z) throws Resources.NotFoundException {
         if (isEndIconVisible() != z) {
             this.endIconView.setVisibility(z ? 0 : 8);
             updateEndLayoutVisibility();
@@ -405,69 +403,43 @@ public class EndCompoundLayout extends LinearLayout {
         setVisibility((isEndIconVisible() || isErrorIconVisible() || !((this.suffixText == null || this.hintExpanded) ? 8 : false)) ? 0 : 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x002e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0019  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateErrorIconVisibility() {
-        /*
-            r3 = this;
-            com.google.android.material.internal.CheckableImageButton r0 = r3.errorIconView
-            android.graphics.drawable.Drawable r0 = r0.getDrawable()
-            r1 = 0
-            if (r0 == 0) goto L19
-            com.google.android.material.textfield.TextInputLayout r0 = r3.textInputLayout
-            com.google.android.material.textfield.IndicatorViewController r2 = r0.indicatorViewController
-            boolean r2 = r2.errorEnabled
-            if (r2 == 0) goto L19
-            boolean r0 = r0.shouldShowError()
-            if (r0 == 0) goto L19
-            r0 = 1
-            goto L1a
-        L19:
-            r0 = r1
-        L1a:
-            com.google.android.material.internal.CheckableImageButton r2 = r3.errorIconView
-            if (r0 == 0) goto L1f
-            goto L21
-        L1f:
-            r1 = 8
-        L21:
-            r2.setVisibility(r1)
-            r3.updateEndLayoutVisibility()
-            r3.updateSuffixTextViewPadding()
-            int r0 = r3.endIconMode
-            if (r0 == 0) goto L2f
-            return
-        L2f:
-            com.google.android.material.textfield.TextInputLayout r3 = r3.textInputLayout
-            r3.updateDummyDrawables()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.textfield.EndCompoundLayout.updateErrorIconVisibility():void");
+    public final void updateErrorIconVisibility() throws Resources.NotFoundException {
+        boolean z;
+        if (this.errorIconView.getDrawable() != null) {
+            TextInputLayout textInputLayout = this.textInputLayout;
+            z = textInputLayout.indicatorViewController.errorEnabled && textInputLayout.shouldShowError();
+        }
+        this.errorIconView.setVisibility(z ? 0 : 8);
+        updateEndLayoutVisibility();
+        updateSuffixTextViewPadding();
+        if (this.endIconMode != 0) {
+            return;
+        }
+        this.textInputLayout.updateDummyDrawables();
     }
 
-    public final void updateSuffixTextViewPadding() {
-        int i;
+    public final void updateSuffixTextViewPadding() throws Resources.NotFoundException {
+        int paddingEnd;
         if (this.textInputLayout.editText == null) {
             return;
         }
         if (isEndIconVisible() || isErrorIconVisible()) {
-            i = 0;
+            paddingEnd = 0;
         } else {
             EditText editText = this.textInputLayout.editText;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            i = editText.getPaddingEnd();
+            paddingEnd = editText.getPaddingEnd();
         }
         AppCompatTextView appCompatTextView = this.suffixTextView;
         int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.material_input_text_to_prefix_suffix_padding);
         int paddingTop = this.textInputLayout.editText.getPaddingTop();
         int paddingBottom = this.textInputLayout.editText.getPaddingBottom();
         WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-        appCompatTextView.setPaddingRelative(dimensionPixelSize, paddingTop, i, paddingBottom);
+        appCompatTextView.setPaddingRelative(dimensionPixelSize, paddingTop, paddingEnd, paddingBottom);
     }
 
     public final void updateSuffixTextVisibility() {

@@ -1,6 +1,7 @@
 package com.google.android.material.textfield;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -18,7 +19,6 @@ import com.google.android.material.internal.ViewUtils;
 import com.google.android.material.resources.MaterialResources;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StartCompoundLayout extends LinearLayout {
     public boolean hintExpanded;
@@ -30,9 +30,9 @@ public class StartCompoundLayout extends LinearLayout {
     public final CheckableImageButton startIconView;
     public final TextInputLayout textInputLayout;
 
-    public StartCompoundLayout(TextInputLayout textInputLayout, TintTypedArray tintTypedArray) {
-        super(textInputLayout.getContext());
+    public StartCompoundLayout(TextInputLayout textInputLayout, TintTypedArray tintTypedArray) throws Resources.NotFoundException {
         CharSequence text;
+        super(textInputLayout.getContext());
         this.textInputLayout = textInputLayout;
         setVisibility(8);
         setOrientation(0);
@@ -118,23 +118,23 @@ public class StartCompoundLayout extends LinearLayout {
     }
 
     public final int getPrefixTextStartOffset() {
-        int i;
+        int marginEnd;
         if (this.startIconView.getVisibility() == 0) {
-            i = ((ViewGroup.MarginLayoutParams) this.startIconView.getLayoutParams()).getMarginEnd() + this.startIconView.getMeasuredWidth();
+            marginEnd = ((ViewGroup.MarginLayoutParams) this.startIconView.getLayoutParams()).getMarginEnd() + this.startIconView.getMeasuredWidth();
         } else {
-            i = 0;
+            marginEnd = 0;
         }
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        return this.prefixTextView.getPaddingStart() + getPaddingStart() + i;
+        return this.prefixTextView.getPaddingStart() + getPaddingStart() + marginEnd;
     }
 
     @Override // android.widget.LinearLayout, android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         super.onMeasure(i, i2);
         updatePrefixTextViewPadding();
     }
 
-    public final void updatePrefixTextViewPadding() {
+    public final void updatePrefixTextViewPadding() throws Resources.NotFoundException {
         int paddingStart;
         EditText editText = this.textInputLayout.editText;
         if (editText == null) {

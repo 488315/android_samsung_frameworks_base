@@ -4,7 +4,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ResourceString implements CharSequence {
     public final List args;
@@ -32,9 +31,9 @@ public final class ResourceString implements CharSequence {
     }
 
     public final int hashCode() {
-        int hashCode = Integer.hashCode(this.resId) * 31;
+        int iHashCode = Integer.hashCode(this.resId) * 31;
         List list = this.args;
-        return hashCode + (list == null ? 0 : list.hashCode());
+        return iHashCode + (list == null ? 0 : list.hashCode());
     }
 
     @Override // java.lang.CharSequence

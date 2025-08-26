@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TrackedGarbage {
     private static final long GARBAGE_COLLECTION_DEADLINE_MILLIS = 60000;
@@ -18,7 +17,6 @@ public class TrackedGarbage {
     private final ReferenceQueue<Object> mRefQueue = new ReferenceQueue<>();
     private final TrackedCollections mTrackedCollections;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class LeakReference extends WeakReference<Object> {
         private final Class<?> clazz;
         private final long createdUptimeMillis;
@@ -36,11 +34,11 @@ public class TrackedGarbage {
 
     private void cleanUp() {
         while (true) {
-            Reference<? extends Object> poll = this.mRefQueue.poll();
-            if (poll == null) {
+            Reference<? extends Object> referencePoll = this.mRefQueue.poll();
+            if (referencePoll == null) {
                 return;
             } else {
-                this.mGarbage.remove(poll);
+                this.mGarbage.remove(referencePoll);
             }
         }
     }
@@ -52,11 +50,11 @@ public class TrackedGarbage {
     public synchronized int countOldGarbage() {
         int i;
         cleanUp();
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         Iterator<LeakReference> it = this.mGarbage.iterator();
         i = 0;
         while (it.hasNext()) {
-            if (isOld(it.next().createdUptimeMillis, uptimeMillis)) {
+            if (isOld(it.next().createdUptimeMillis, jUptimeMillis)) {
                 i++;
             }
         }
@@ -66,14 +64,14 @@ public class TrackedGarbage {
     public synchronized void dump(PrintWriter printWriter) {
         try {
             cleanUp();
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             ArrayMap arrayMap = new ArrayMap();
             ArrayMap arrayMap2 = new ArrayMap();
             Iterator<LeakReference> it = this.mGarbage.iterator();
             while (it.hasNext()) {
                 LeakReference next = it.next();
                 arrayMap.put(next.clazz, Integer.valueOf(((Integer) arrayMap.getOrDefault(next.clazz, 0)).intValue() + 1));
-                if (isOld(next.createdUptimeMillis, uptimeMillis)) {
+                if (isOld(next.createdUptimeMillis, jUptimeMillis)) {
                     arrayMap2.put(next.clazz, Integer.valueOf(((Integer) arrayMap2.getOrDefault(next.clazz, 0)).intValue() + 1));
                 }
             }

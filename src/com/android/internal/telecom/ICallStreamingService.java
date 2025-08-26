@@ -67,9 +67,9 @@ public interface ICallStreamingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallStreamingService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallStreamingService)) {
-                return (ICallStreamingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallStreamingService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallStreamingService)) {
+                return (ICallStreamingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,9 +105,9 @@ public interface ICallStreamingService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IStreamingCallAdapter asInterface = IStreamingCallAdapter.Stub.asInterface(parcel.readStrongBinder());
+                IStreamingCallAdapter iStreamingCallAdapterAsInterface = IStreamingCallAdapter.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setStreamingCallAdapter(asInterface);
+                setStreamingCallAdapter(iStreamingCallAdapterAsInterface);
             } else if (i == 2) {
                 StreamingCall streamingCall = (StreamingCall) parcel.readTypedObject(StreamingCall.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -115,9 +115,9 @@ public interface ICallStreamingService extends IInterface {
             } else if (i == 3) {
                 onCallStreamingStopped();
             } else if (i == 4) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCallStreamingStateChanged(readInt);
+                onCallStreamingStateChanged(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -142,48 +142,48 @@ public interface ICallStreamingService extends IInterface {
 
             @Override // com.android.internal.telecom.ICallStreamingService
             public void setStreamingCallAdapter(IStreamingCallAdapter iStreamingCallAdapter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStreamingCallAdapter);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStreamingCallAdapter);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallStreamingService
             public void onCallStreamingStarted(StreamingCall streamingCall) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
-                    obtain.writeTypedObject(streamingCall, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(streamingCall, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallStreamingService
             public void onCallStreamingStopped() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallStreamingService
             public void onCallStreamingStateChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

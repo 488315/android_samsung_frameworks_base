@@ -11,7 +11,6 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.systemui.animation.DialogTransitionAnimator;
 import com.android.systemui.animation.TransitionAnimator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewDialogTransitionAnimatorController implements DialogTransitionAnimator.Controller {
     public final DialogCuj cuj;
@@ -31,14 +30,13 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
 
     @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
     public final TransitionAnimator.Controller createTransitionController() {
-        final GhostedViewTransitionAnimatorController ghostedViewTransitionAnimatorController = new GhostedViewTransitionAnimatorController(this.source, null, null, null, null, false, null, null, 254, null);
-        return new TransitionAnimator.Controller(this) { // from class: com.android.systemui.animation.ViewDialogTransitionAnimatorController$createTransitionController$1
+        return new TransitionAnimator.Controller(this) { // from class: com.android.systemui.animation.ViewDialogTransitionAnimatorController.createTransitionController.1
             public final /* synthetic */ GhostedViewTransitionAnimatorController $$delegate_0;
             public final /* synthetic */ ViewDialogTransitionAnimatorController this$0;
 
             {
                 this.this$0 = this;
-                this.$$delegate_0 = GhostedViewTransitionAnimatorController.this;
+                this.$$delegate_0 = this.$delegate;
             }
 
             @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -71,7 +69,7 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
             /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.animation.TransitionAnimator.Controller
             public final void onTransitionAnimationEnd(boolean z) {
-                GhostedViewTransitionAnimatorController.this.onTransitionAnimationEnd(z);
+                this.$delegate.onTransitionAnimationEnd(z);
                 ViewDialogTransitionAnimatorController viewDialogTransitionAnimatorController = this.this$0;
                 View view = viewDialogTransitionAnimatorController.source;
                 if (!(view instanceof LaunchableView)) {
@@ -90,7 +88,7 @@ public final class ViewDialogTransitionAnimatorController implements DialogTrans
             @Override // com.android.systemui.animation.TransitionAnimator.Controller
             public final void onTransitionAnimationStart(boolean z) {
                 GhostView.removeGhost(this.this$0.source);
-                GhostedViewTransitionAnimatorController.this.onTransitionAnimationStart(z);
+                this.$delegate.onTransitionAnimationStart(z);
             }
 
             @Override // com.android.systemui.animation.TransitionAnimator.Controller

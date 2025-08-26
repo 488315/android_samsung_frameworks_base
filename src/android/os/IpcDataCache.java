@@ -2,6 +2,7 @@ package android.os;
 
 import android.annotation.SystemApi;
 import android.app.PropertyInvalidatedCache;
+import android.multiuser.Flags;
 import android.util.ArraySet;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -170,27 +171,23 @@ public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query,
         }
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public IpcDataCache(android.os.IpcDataCache.Config r2, final android.os.IpcDataCache.RemoteCall<Query, Result> r3) {
-        /*
-            r1 = this;
-            boolean r0 = android.multiuser.Flags.cachingDevelopmentImprovements()
-            if (r0 == 0) goto Lc
-            android.os.IpcDataCache$1 r0 = new android.os.IpcDataCache$1
-            r0.<init>()
-            goto L11
-        Lc:
-            android.os.IpcDataCache$SystemServerCallHandler r0 = new android.os.IpcDataCache$SystemServerCallHandler
-            r0.<init>(r3)
-        L11:
-            r1.<init>(r2, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.IpcDataCache.<init>(android.os.IpcDataCache$Config, android.os.IpcDataCache$RemoteCall):void");
+    public IpcDataCache(Config config, final RemoteCall<Query, Result> remoteCall) {
+        QueryHandler systemServerCallHandler;
+        if (Flags.cachingDevelopmentImprovements()) {
+            systemServerCallHandler = new QueryHandler<Query, Result>() { // from class: android.os.IpcDataCache.1
+                @Override // android.os.IpcDataCache.QueryHandler, android.app.PropertyInvalidatedCache.QueryHandler
+                public Result apply(Query query) {
+                    try {
+                        return (Result) remoteCall.apply(query);
+                    } catch (RemoteException e) {
+                        throw e.rethrowFromSystemServer();
+                    }
+                }
+            };
+        } else {
+            systemServerCallHandler = new SystemServerCallHandler(remoteCall);
+        }
+        this(config, systemServerCallHandler);
     }
 
     public IpcDataCache(Config config, final RemoteCall<Query, Result> remoteCall, final BypassCall<Query> bypassCall) {
@@ -198,7 +195,7 @@ public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query,
             @Override // android.os.IpcDataCache.QueryHandler, android.app.PropertyInvalidatedCache.QueryHandler
             public Result apply(Query query) {
                 try {
-                    return (Result) RemoteCall.this.apply(query);
+                    return (Result) remoteCall.apply(query);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryIconViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ShadeInteractor $shadeInteractor$inlined;
@@ -49,9 +48,9 @@ public final class DeviceEntryIconViewModel$special$$inlined$flatMapLatest$1 ext
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             if (((Boolean) this.L$1).booleanValue()) {
-                Flow sample = FlowKt.sample(this.$transitionInteractor$inlined.startedKeyguardTransitionStep, ((ShadeInteractorImpl) this.$shadeInteractor$inlined).isAnyFullyExpanded, DeviceEntryIconViewModel$burnInOffsets$1$3.INSTANCE);
+                Flow flowSample = FlowKt.sample(this.$transitionInteractor$inlined.startedKeyguardTransitionStep, ((ShadeInteractorImpl) this.$shadeInteractor$inlined).isAnyFullyExpanded, DeviceEntryIconViewModel$burnInOffsets$1$3.INSTANCE);
                 DeviceEntryIconViewModel deviceEntryIconViewModel = this.this$0;
-                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = kotlinx.coroutines.flow.FlowKt.combine(sample, deviceEntryIconViewModel.animatedBurnInOffsets, deviceEntryIconViewModel.nonAnimatedBurnInOffsets, new DeviceEntryIconViewModel$burnInOffsets$1$4(null));
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = kotlinx.coroutines.flow.FlowKt.combine(flowSample, deviceEntryIconViewModel.animatedBurnInOffsets, deviceEntryIconViewModel.nonAnimatedBurnInOffsets, new DeviceEntryIconViewModel$burnInOffsets$1$4(null));
             } else {
                 flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new BurnInOffsets(0, 0, 0.0f));
             }

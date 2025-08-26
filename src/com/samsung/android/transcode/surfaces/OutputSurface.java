@@ -109,9 +109,9 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     private void eglSetup(int i, int i2) {
         EGL10 egl10 = (EGL10) EGLContext.getEGL();
         this.mEGL = egl10;
-        EGLDisplay eglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
-        this.mEGLDisplay = eglGetDisplay;
-        if (!this.mEGL.eglInitialize(eglGetDisplay, null)) {
+        EGLDisplay eGLDisplayEglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
+        this.mEGLDisplay = eGLDisplayEglGetDisplay;
+        if (!this.mEGL.eglInitialize(eGLDisplayEglGetDisplay, null)) {
             throw new RuntimeException("unable to initialize EGL10");
         }
         EGLConfig[] eGLConfigArr = new EGLConfig[1];
@@ -162,21 +162,20 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
 
     public boolean checkForNewImage(int i) {
         synchronized (this.mFrameSyncObject) {
-            do {
-                if (!this.mFrameAvailable) {
-                    try {
-                        this.mFrameSyncObject.wait(i);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+            while (!this.mFrameAvailable) {
+                try {
+                    this.mFrameSyncObject.wait(i);
+                    if (!this.mFrameAvailable) {
+                        return false;
                     }
-                } else {
-                    this.mFrameAvailable = false;
-                    OpenGlHelper.checkGLError("before updateTexImage");
-                    this.mSurfaceTexture.updateTexImage();
-                    return true;
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
-            } while (this.mFrameAvailable);
-            return false;
+            }
+            this.mFrameAvailable = false;
+            OpenGlHelper.checkGLError("before updateTexImage");
+            this.mSurfaceTexture.updateTexImage();
+            return true;
         }
     }
 
@@ -202,18 +201,18 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     }
 
     private void checkEglError(String str) {
-        int eglGetError;
+        int iEglGetError;
         boolean z = false;
         while (true) {
-            eglGetError = this.mEGL.eglGetError();
-            if (eglGetError == 12288) {
+            iEglGetError = this.mEGL.eglGetError();
+            if (iEglGetError == 12288) {
                 break;
             } else {
                 z = true;
             }
         }
         if (z) {
-            throw new RuntimeException(str + ": EGL error: 0x" + Integer.toHexString(eglGetError));
+            throw new RuntimeException(str + ": EGL error: 0x" + Integer.toHexString(iEglGetError));
         }
     }
 }

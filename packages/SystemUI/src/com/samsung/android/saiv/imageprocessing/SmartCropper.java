@@ -3,7 +3,6 @@ package com.samsung.android.saiv.imageprocessing;
 import android.graphics.Rect;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SmartCropper {
     public long mBDPtr;
@@ -26,7 +25,7 @@ public class SmartCropper {
 
     public static native long setImageIntBuf(long j, int[] iArr, int i, int i2, int i3);
 
-    public final void finalize() {
+    public final void finalize() throws Throwable {
         long j = this.mBDPtr;
         if (0 != j) {
             release(j);

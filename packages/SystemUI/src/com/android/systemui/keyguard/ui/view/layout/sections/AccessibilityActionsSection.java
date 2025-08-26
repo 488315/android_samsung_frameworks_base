@@ -9,13 +9,12 @@ import com.android.systemui.communal.domain.interactor.CommunalSettingsInteracto
 import com.android.systemui.keyguard.shared.model.KeyguardSection;
 import com.android.systemui.keyguard.ui.binder.AccessibilityActionsViewBinder;
 import com.android.systemui.keyguard.ui.viewmodel.AccessibilityActionsViewModel;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.util.Utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AccessibilityActionsSection extends KeyguardSection {
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 accessibilityActionsViewHandle;
+    public RepeatWhenAttachedKt.C09181 accessibilityActionsViewHandle;
     public final AccessibilityActionsViewModel accessibilityActionsViewModel;
     public final CommunalSettingsInteractor communalSettingsInteractor;
     public final Context context;
@@ -47,17 +46,17 @@ public final class AccessibilityActionsSection extends KeyguardSection {
     public final void bindData(ConstraintLayout constraintLayout) {
         if (this.communalSettingsInteractor.isCommunalFlagEnabled()) {
             AccessibilityActionsViewBinder accessibilityActionsViewBinder = AccessibilityActionsViewBinder.INSTANCE;
-            View requireViewById = constraintLayout.requireViewById(R.id.accessibility_actions_view);
+            View viewRequireViewById = constraintLayout.requireViewById(R.id.accessibility_actions_view);
             accessibilityActionsViewBinder.getClass();
-            this.accessibilityActionsViewHandle = AccessibilityActionsViewBinder.bind(requireViewById, this.accessibilityActionsViewModel);
+            this.accessibilityActionsViewHandle = AccessibilityActionsViewBinder.bind(viewRequireViewById, this.accessibilityActionsViewModel);
         }
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void removeViews(ConstraintLayout constraintLayout) {
-        RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.accessibilityActionsViewHandle;
-        if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-            repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+        RepeatWhenAttachedKt.C09181 c09181 = this.accessibilityActionsViewHandle;
+        if (c09181 != null) {
+            c09181.dispose();
         }
         this.accessibilityActionsViewHandle = null;
         ExtensionsKt.removeView(constraintLayout, R.id.accessibility_actions_view);

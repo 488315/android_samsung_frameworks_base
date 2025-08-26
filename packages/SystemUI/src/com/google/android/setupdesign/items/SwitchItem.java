@@ -9,7 +9,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.android.systemui.R;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SwitchItem extends Item implements CompoundButton.OnCheckedChangeListener {
     public boolean checked;
@@ -41,8 +40,8 @@ public class SwitchItem extends Item implements CompoundButton.OnCheckedChangeLi
     public SwitchItem(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.checked = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudSwitchItem);
-        this.checked = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudSwitchItem);
+        this.checked = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

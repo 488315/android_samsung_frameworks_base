@@ -64,11 +64,11 @@ public final class MultiVibratorInfo extends VibratorInfo {
     }
 
     private static int capabilitiesIntersection(VibratorInfo[] vibratorInfoArr, boolean z) {
-        int i = -1;
+        int capabilities = -1;
         for (VibratorInfo vibratorInfo : vibratorInfoArr) {
-            i = (int) (i & vibratorInfo.getCapabilities());
+            capabilities = (int) (capabilities & vibratorInfo.getCapabilities());
         }
-        return z ? i & (-513) : i;
+        return z ? capabilities & (-513) : capabilities;
     }
 
     private static SparseBooleanArray supportedBrakingIntersection(VibratorInfo[] vibratorInfoArr) {
@@ -80,17 +80,17 @@ public final class MultiVibratorInfo extends VibratorInfo {
         SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
         SparseBooleanArray supportedBraking = vibratorInfoArr[0].getSupportedBraking();
         for (int i = 0; i < supportedBraking.size(); i++) {
-            int keyAt = supportedBraking.keyAt(i);
+            int iKeyAt = supportedBraking.keyAt(i);
             if (supportedBraking.valueAt(i)) {
                 int i2 = 1;
                 while (true) {
                     if (i2 < vibratorInfoArr.length) {
-                        if (!vibratorInfoArr[i2].hasBrakingSupport(keyAt)) {
+                        if (!vibratorInfoArr[i2].hasBrakingSupport(iKeyAt)) {
                             break;
                         }
                         i2++;
                     } else {
-                        sparseBooleanArray.put(keyAt, true);
+                        sparseBooleanArray.put(iKeyAt, true);
                         break;
                     }
                 }
@@ -108,17 +108,17 @@ public final class MultiVibratorInfo extends VibratorInfo {
         SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
         SparseBooleanArray supportedEffects = vibratorInfoArr[0].getSupportedEffects();
         for (int i = 0; i < supportedEffects.size(); i++) {
-            int keyAt = supportedEffects.keyAt(i);
+            int iKeyAt = supportedEffects.keyAt(i);
             if (supportedEffects.valueAt(i)) {
                 int i2 = 1;
                 while (true) {
                     if (i2 < vibratorInfoArr.length) {
-                        if (vibratorInfoArr[i2].isEffectSupported(keyAt) != 1) {
+                        if (vibratorInfoArr[i2].isEffectSupported(iKeyAt) != 1) {
                             break;
                         }
                         i2++;
                     } else {
-                        sparseBooleanArray.put(keyAt, true);
+                        sparseBooleanArray.put(iKeyAt, true);
                         break;
                     }
                 }
@@ -131,20 +131,20 @@ public final class MultiVibratorInfo extends VibratorInfo {
         SparseIntArray sparseIntArray = new SparseIntArray();
         SparseIntArray supportedPrimitives = vibratorInfoArr[0].getSupportedPrimitives();
         for (int i = 0; i < supportedPrimitives.size(); i++) {
-            int keyAt = supportedPrimitives.keyAt(i);
-            int valueAt = supportedPrimitives.valueAt(i);
-            if (valueAt != 0) {
+            int iKeyAt = supportedPrimitives.keyAt(i);
+            int iValueAt = supportedPrimitives.valueAt(i);
+            if (iValueAt != 0) {
                 int i2 = 1;
                 while (true) {
                     if (i2 < vibratorInfoArr.length) {
-                        int primitiveDuration = vibratorInfoArr[i2].getPrimitiveDuration(keyAt);
+                        int primitiveDuration = vibratorInfoArr[i2].getPrimitiveDuration(iKeyAt);
                         if (primitiveDuration == 0) {
                             break;
                         }
-                        valueAt = Math.max(valueAt, primitiveDuration);
+                        iValueAt = Math.max(iValueAt, primitiveDuration);
                         i2++;
                     } else {
-                        sparseIntArray.put(keyAt, valueAt);
+                        sparseIntArray.put(iKeyAt, iValueAt);
                         break;
                     }
                 }
@@ -156,109 +156,107 @@ public final class MultiVibratorInfo extends VibratorInfo {
     private static int integerLimitIntersection(VibratorInfo[] vibratorInfoArr, Function<VibratorInfo, Integer> function) {
         int i = 0;
         for (VibratorInfo vibratorInfo : vibratorInfoArr) {
-            int intValue = function.apply(vibratorInfo).intValue();
-            if (i == 0 || (intValue > 0 && intValue < i)) {
-                i = intValue;
+            int iIntValue = function.apply(vibratorInfo).intValue();
+            if (i == 0 || (iIntValue > 0 && iIntValue < i)) {
+                i = iIntValue;
             }
         }
         return i;
     }
 
     private static float floatPropertyIntersection(VibratorInfo[] vibratorInfoArr, Function<VibratorInfo, Float> function) {
-        float floatValue = function.apply(vibratorInfoArr[0]).floatValue();
-        if (Float.isNaN(floatValue)) {
+        float fFloatValue = function.apply(vibratorInfoArr[0]).floatValue();
+        if (Float.isNaN(fFloatValue)) {
             return Float.NaN;
         }
         for (int i = 1; i < vibratorInfoArr.length; i++) {
-            if (Float.compare(floatValue, function.apply(vibratorInfoArr[i]).floatValue()) != 0) {
+            if (Float.compare(fFloatValue, function.apply(vibratorInfoArr[i]).floatValue()) != 0) {
                 return Float.NaN;
             }
         }
-        return floatValue;
+        return fFloatValue;
     }
 
     private static VibratorInfo.FrequencyProfile frequencyProfileIntersection(VibratorInfo[] vibratorInfoArr) {
         if (vibratorInfoArr == null || vibratorInfoArr.length == 0) {
             return new VibratorInfo.FrequencyProfile(Float.NaN, null, null);
         }
-        float floatPropertyIntersection = floatPropertyIntersection(vibratorInfoArr, new MultiVibratorInfo$$ExternalSyntheticLambda9());
-        if (Float.isNaN(floatPropertyIntersection)) {
+        float fFloatPropertyIntersection = floatPropertyIntersection(vibratorInfoArr, new MultiVibratorInfo$$ExternalSyntheticLambda9());
+        if (Float.isNaN(fFloatPropertyIntersection)) {
             return new VibratorInfo.FrequencyProfile(Float.NaN, null, null);
         }
         TreeSet<Float> treeSet = new TreeSet();
-        float f = 0.0f;
-        float f2 = Float.MAX_VALUE;
+        float fMax = 0.0f;
+        float fMin = Float.MAX_VALUE;
         for (VibratorInfo vibratorInfo : vibratorInfoArr) {
             float minFrequencyHz = vibratorInfo.getFrequencyProfile().getMinFrequencyHz();
             float maxFrequencyHz = vibratorInfo.getFrequencyProfile().getMaxFrequencyHz();
             if (Float.isNaN(minFrequencyHz) || Float.isNaN(maxFrequencyHz)) {
                 return new VibratorInfo.FrequencyProfile(Float.NaN, null, null);
             }
-            f = Math.max(f, minFrequencyHz);
-            f2 = Math.min(f2, maxFrequencyHz);
+            fMax = Math.max(fMax, minFrequencyHz);
+            fMin = Math.min(fMin, maxFrequencyHz);
             if (vibratorInfo.getFrequencyProfile().getFrequenciesHz() == null) {
                 return new VibratorInfo.FrequencyProfile(Float.NaN, null, null);
             }
-            for (float f3 : vibratorInfo.getFrequencyProfile().getFrequenciesHz()) {
-                treeSet.add(Float.valueOf(f3));
+            for (float f : vibratorInfo.getFrequencyProfile().getFrequenciesHz()) {
+                treeSet.add(Float.valueOf(f));
             }
         }
-        if (f > f2) {
+        if (fMax > fMin) {
             return new VibratorInfo.FrequencyProfile(Float.NaN, null, null);
         }
         Iterator it = treeSet.iterator();
         while (it.hasNext()) {
-            float floatValue = ((Float) it.next()).floatValue();
-            if (floatValue < f || floatValue > f2) {
+            float fFloatValue = ((Float) it.next()).floatValue();
+            if (fFloatValue < fMax || fFloatValue > fMin) {
                 it.remove();
             }
         }
         float[] fArr = new float[treeSet.size()];
         float[] fArr2 = new float[treeSet.size()];
         int i = 0;
-        for (Float f4 : treeSet) {
-            float f5 = Float.MAX_VALUE;
+        for (Float f2 : treeSet) {
+            float fMin2 = Float.MAX_VALUE;
             for (VibratorInfo vibratorInfo2 : vibratorInfoArr) {
-                f5 = Math.min(f5, vibratorInfo2.getFrequencyProfile().getOutputAccelerationGs(f4.floatValue()));
+                fMin2 = Math.min(fMin2, vibratorInfo2.getFrequencyProfile().getOutputAccelerationGs(f2.floatValue()));
             }
-            fArr[i] = f4.floatValue();
-            fArr2[i] = f5;
+            fArr[i] = f2.floatValue();
+            fArr2[i] = fMin2;
             i++;
         }
-        return new VibratorInfo.FrequencyProfile(floatPropertyIntersection, fArr, fArr2);
+        return new VibratorInfo.FrequencyProfile(fFloatPropertyIntersection, fArr, fArr2);
     }
 
     private static VibratorInfo.FrequencyProfileLegacy frequencyProfileLegacyIntersection(VibratorInfo[] vibratorInfoArr) {
-        float floatPropertyIntersection = floatPropertyIntersection(vibratorInfoArr, new Function() { // from class: android.os.vibrator.MultiVibratorInfo$$ExternalSyntheticLambda8
+        float fFloatPropertyIntersection = floatPropertyIntersection(vibratorInfoArr, new Function() { // from class: android.os.vibrator.MultiVibratorInfo$$ExternalSyntheticLambda8
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(((VibratorInfo) obj).getFrequencyProfileLegacy().getFrequencyResolutionHz());
-                return valueOf;
+                return Float.valueOf(((VibratorInfo) obj).getFrequencyProfileLegacy().getFrequencyResolutionHz());
             }
         });
-        float floatPropertyIntersection2 = floatPropertyIntersection(vibratorInfoArr, new MultiVibratorInfo$$ExternalSyntheticLambda9());
-        Range<Float> frequencyRangeIntersection = frequencyRangeIntersection(vibratorInfoArr, floatPropertyIntersection);
-        if (frequencyRangeIntersection == null || Float.isNaN(floatPropertyIntersection)) {
-            return new VibratorInfo.FrequencyProfileLegacy(floatPropertyIntersection2, Float.NaN, floatPropertyIntersection, null);
+        float fFloatPropertyIntersection2 = floatPropertyIntersection(vibratorInfoArr, new MultiVibratorInfo$$ExternalSyntheticLambda9());
+        Range<Float> rangeFrequencyRangeIntersection = frequencyRangeIntersection(vibratorInfoArr, fFloatPropertyIntersection);
+        if (rangeFrequencyRangeIntersection == null || Float.isNaN(fFloatPropertyIntersection)) {
+            return new VibratorInfo.FrequencyProfileLegacy(fFloatPropertyIntersection2, Float.NaN, fFloatPropertyIntersection, null);
         }
-        int round = Math.round(((frequencyRangeIntersection.getUpper().floatValue() - frequencyRangeIntersection.getLower().floatValue()) / floatPropertyIntersection) + 1.0f);
-        float[] fArr = new float[round];
+        int iRound = Math.round(((((Float) rangeFrequencyRangeIntersection.getUpper()).floatValue() - ((Float) rangeFrequencyRangeIntersection.getLower()).floatValue()) / fFloatPropertyIntersection) + 1.0f);
+        float[] fArr = new float[iRound];
         Arrays.fill(fArr, Float.MAX_VALUE);
         for (VibratorInfo vibratorInfo : vibratorInfoArr) {
             Range<Float> frequencyRangeHz = vibratorInfo.getFrequencyProfileLegacy().getFrequencyRangeHz();
             float[] maxAmplitudes = vibratorInfo.getFrequencyProfileLegacy().getMaxAmplitudes();
-            int round2 = Math.round((frequencyRangeIntersection.getLower().floatValue() - frequencyRangeHz.getLower().floatValue()) / floatPropertyIntersection);
-            int i = (round2 + round) - 1;
-            if (round2 < 0 || i >= maxAmplitudes.length) {
-                Slog.w(TAG, "Error calculating the intersection of vibrator frequency profiles: attempted to fetch from vibrator " + vibratorInfo.getId() + " max amplitude with bad index " + round2);
-                return new VibratorInfo.FrequencyProfileLegacy(floatPropertyIntersection2, Float.NaN, Float.NaN, null);
+            int iRound2 = Math.round((((Float) rangeFrequencyRangeIntersection.getLower()).floatValue() - ((Float) frequencyRangeHz.getLower()).floatValue()) / fFloatPropertyIntersection);
+            int i = (iRound2 + iRound) - 1;
+            if (iRound2 < 0 || i >= maxAmplitudes.length) {
+                Slog.w(TAG, "Error calculating the intersection of vibrator frequency profiles: attempted to fetch from vibrator " + vibratorInfo.getId() + " max amplitude with bad index " + iRound2);
+                return new VibratorInfo.FrequencyProfileLegacy(fFloatPropertyIntersection2, Float.NaN, Float.NaN, null);
             }
-            for (int i2 = 0; i2 < round; i2++) {
-                fArr[i2] = Math.min(fArr[i2], maxAmplitudes[round2 + i2]);
+            for (int i2 = 0; i2 < iRound; i2++) {
+                fArr[i2] = Math.min(fArr[i2], maxAmplitudes[iRound2 + i2]);
             }
         }
-        return new VibratorInfo.FrequencyProfileLegacy(floatPropertyIntersection2, frequencyRangeIntersection.getLower().floatValue(), floatPropertyIntersection, fArr);
+        return new VibratorInfo.FrequencyProfileLegacy(fFloatPropertyIntersection2, ((Float) rangeFrequencyRangeIntersection.getLower()).floatValue(), fFloatPropertyIntersection, fArr);
     }
 
     private static Range<Float> frequencyRangeIntersection(VibratorInfo[] vibratorInfoArr, float f) {
@@ -266,19 +264,19 @@ public final class MultiVibratorInfo extends VibratorInfo {
         if (frequencyRangeHz == null) {
             return null;
         }
-        float floatValue = frequencyRangeHz.getLower().floatValue();
-        float floatValue2 = frequencyRangeHz.getUpper().floatValue();
+        float fFloatValue = ((Float) frequencyRangeHz.getLower()).floatValue();
+        float fFloatValue2 = ((Float) frequencyRangeHz.getUpper()).floatValue();
         for (int i = 1; i < vibratorInfoArr.length; i++) {
             Range<Float> frequencyRangeHz2 = vibratorInfoArr[i].getFrequencyProfileLegacy().getFrequencyRangeHz();
-            if (frequencyRangeHz2 == null || frequencyRangeHz2.getLower().floatValue() >= floatValue2 || frequencyRangeHz2.getUpper().floatValue() <= floatValue || Math.abs(floatValue - frequencyRangeHz2.getLower().floatValue()) % f > 1.0E-5f) {
+            if (frequencyRangeHz2 == null || ((Float) frequencyRangeHz2.getLower()).floatValue() >= fFloatValue2 || ((Float) frequencyRangeHz2.getUpper()).floatValue() <= fFloatValue || Math.abs(fFloatValue - ((Float) frequencyRangeHz2.getLower()).floatValue()) % f > 1.0E-5f) {
                 return null;
             }
-            floatValue = Math.max(floatValue, frequencyRangeHz2.getLower().floatValue());
-            floatValue2 = Math.min(floatValue2, frequencyRangeHz2.getUpper().floatValue());
+            fFloatValue = Math.max(fFloatValue, ((Float) frequencyRangeHz2.getLower()).floatValue());
+            fFloatValue2 = Math.min(fFloatValue2, ((Float) frequencyRangeHz2.getUpper()).floatValue());
         }
-        if (floatValue2 - floatValue < f) {
+        if (fFloatValue2 - fFloatValue < f) {
             return null;
         }
-        return Range.create(Float.valueOf(floatValue), Float.valueOf(floatValue2));
+        return Range.create(Float.valueOf(fFloatValue), Float.valueOf(fFloatValue2));
     }
 }

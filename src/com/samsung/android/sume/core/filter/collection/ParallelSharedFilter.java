@@ -35,14 +35,14 @@ public class ParallelSharedFilter extends ParallelFilter {
         list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.collection.ParallelSharedFilter$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ParallelSharedFilter.this.m9558x3bc28532((MediaFilter) obj);
+                this.f$0.m9571x3bc28532((MediaFilter) obj);
             }
         });
         return super.addFilter(list);
     }
 
     /* renamed from: lambda$addFilter$0$com-samsung-android-sume-core-filter-collection-ParallelSharedFilter, reason: not valid java name */
-    /* synthetic */ void m9558x3bc28532(MediaFilter mediaFilter) {
+    /* synthetic */ void m9571x3bc28532(MediaFilter mediaFilter) {
         BufferChannel bufferChannel = this.channelSupplier.get();
         BufferChannel bufferChannel2 = this.channelSupplier.get();
         this.inChannels.add(bufferChannel);
@@ -55,7 +55,7 @@ public class ParallelSharedFilter extends ParallelFilter {
         this.inChannels.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.collection.ParallelSharedFilter$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((BufferChannel) obj).send(MediaBuffer.this);
+                ((BufferChannel) obj).send(mediaBuffer);
             }
         });
         List<MediaBuffer> list = (List) ((Stream) this.outChannels.stream().parallel()).map(new ReceiveChannelRouter$$ExternalSyntheticLambda3()).collect(Collectors.toList());
@@ -63,16 +63,12 @@ public class ParallelSharedFilter extends ParallelFilter {
             mutableMediaBuffer.put(((BufferComposer) list.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.filter.collection.ParallelSharedFilter$$ExternalSyntheticLambda1
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean containsExtra;
-                    containsExtra = ((MediaBuffer) obj).containsExtra("composer");
-                    return containsExtra;
+                    return ((MediaBuffer) obj).containsExtra("composer");
                 }
             }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.filter.collection.ParallelSharedFilter$$ExternalSyntheticLambda2
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Object extra;
-                    extra = ((MediaBuffer) obj).getExtra("composer");
-                    return extra;
+                    return ((MediaBuffer) obj).getExtra("composer");
                 }
             }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3())).compose(list, null));
             return mutableMediaBuffer;

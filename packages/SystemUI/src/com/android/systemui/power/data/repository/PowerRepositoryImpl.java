@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PowerRepositoryImpl implements PowerRepository {
     public final StateFlowImpl _screenPowerState;
@@ -30,7 +29,6 @@ public final class PowerRepositoryImpl implements PowerRepository {
     public final SystemClock systemClock;
     public final ReadonlyStateFlow wakefulness;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,12 +47,12 @@ public final class PowerRepositoryImpl implements PowerRepository {
         this.applicationContext = context;
         this.systemClock = systemClock;
         this.isInteractive = FlowConflatedKt.conflatedCallbackFlow(new PowerRepositoryImpl$isInteractive$1(broadcastDispatcher, this, null));
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new WakefulnessModel(null, null, null, false, 15, null));
-        this._wakefulness = MutableStateFlow;
-        this.wakefulness = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(ScreenPowerState.SCREEN_OFF);
-        this._screenPowerState = MutableStateFlow2;
-        this.screenPowerState = FlowKt.asStateFlow(MutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new WakefulnessModel(null, null, null, false, 15, null));
+        this._wakefulness = stateFlowImplMutableStateFlow;
+        this.wakefulness = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(ScreenPowerState.SCREEN_OFF);
+        this._screenPowerState = stateFlowImplMutableStateFlow2;
+        this.screenPowerState = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
     }
 
     public final void wakeUp(int i, String str) {

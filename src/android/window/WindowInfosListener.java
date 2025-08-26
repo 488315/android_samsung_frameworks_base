@@ -21,10 +21,10 @@ public abstract class WindowInfosListener {
     public abstract void onWindowInfosChanged(InputWindowHandle[] inputWindowHandleArr, DisplayInfo[] displayInfoArr);
 
     public WindowInfosListener() {
-        NativeAllocationRegistry createMalloced = NativeAllocationRegistry.createMalloced(WindowInfosListener.class.getClassLoader(), nativeGetFinalizer());
-        long nativeCreate = nativeCreate(this);
-        this.mNativeListener = nativeCreate;
-        createMalloced.registerNativeAllocation(this, nativeCreate);
+        NativeAllocationRegistry nativeAllocationRegistryCreateMalloced = NativeAllocationRegistry.createMalloced(WindowInfosListener.class.getClassLoader(), nativeGetFinalizer());
+        long jNativeCreate = nativeCreate(this);
+        this.mNativeListener = jNativeCreate;
+        nativeAllocationRegistryCreateMalloced.registerNativeAllocation(this, jNativeCreate);
     }
 
     public Pair<InputWindowHandle[], DisplayInfo[]> register() {

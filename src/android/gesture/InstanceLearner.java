@@ -25,7 +25,7 @@ class InstanceLearner extends Learner {
 
     @Override // android.gesture.Learner
     ArrayList<Prediction> classify(int i, int i2, float[] fArr) {
-        float squaredEuclideanDistance;
+        float fSquaredEuclideanDistance;
         ArrayList<Prediction> arrayList = new ArrayList<>();
         ArrayList<Instance> instances = getInstances();
         int size = instances.size();
@@ -34,11 +34,11 @@ class InstanceLearner extends Learner {
             Instance instance = instances.get(i3);
             if (instance.vector.length == fArr.length) {
                 if (i == 2) {
-                    squaredEuclideanDistance = GestureUtils.minimumCosineDistance(instance.vector, fArr, i2);
+                    fSquaredEuclideanDistance = GestureUtils.minimumCosineDistance(instance.vector, fArr, i2);
                 } else {
-                    squaredEuclideanDistance = GestureUtils.squaredEuclideanDistance(instance.vector, fArr);
+                    fSquaredEuclideanDistance = GestureUtils.squaredEuclideanDistance(instance.vector, fArr);
                 }
-                double d = squaredEuclideanDistance;
+                double d = fSquaredEuclideanDistance;
                 double d2 = d == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? Double.MAX_VALUE : 1.0d / d;
                 Double d3 = (Double) treeMap.get(instance.label);
                 if (d3 == null || d2 > d3.doubleValue()) {

@@ -44,9 +44,9 @@ public class GestureStroke {
             } else {
                 int i5 = (i2 - 1) * 2;
                 i = i2;
-                float hypot = (float) (f + Math.hypot(gesturePoint.x - fArr[i5], gesturePoint.y - fArr[i5 + 1]));
+                float fHypot = (float) (f + Math.hypot(gesturePoint.x - fArr[i5], gesturePoint.y - fArr[i5 + 1]));
                 rectF.union(gesturePoint.x, gesturePoint.y);
-                f = hypot;
+                f = fHypot;
             }
             i3++;
             i2 = i + 1;
@@ -95,9 +95,9 @@ public class GestureStroke {
                 path = new Path();
                 path.moveTo(f3, f4);
             } else {
-                float abs = Math.abs(f3 - f);
-                float abs2 = Math.abs(f4 - f2);
-                if (abs >= 3.0f || abs2 >= 3.0f) {
+                float fAbs = Math.abs(f3 - f);
+                float fAbs2 = Math.abs(f4 - f2);
+                if (fAbs >= 3.0f || fAbs2 >= 3.0f) {
                     path.quadTo(f, f2, (f3 + f) / 2.0f, (f4 + f2) / 2.0f);
                 }
             }
@@ -108,30 +108,30 @@ public class GestureStroke {
     }
 
     public Path toPath(float f, float f2, int i) {
-        float[] temporalSampling = GestureUtils.temporalSampling(this, i);
+        float[] fArrTemporalSampling = GestureUtils.temporalSampling(this, i);
         RectF rectF = this.boundingBox;
-        GestureUtils.translate(temporalSampling, -rectF.left, -rectF.top);
-        float width = f / rectF.width();
-        float height = f2 / rectF.height();
-        if (width > height) {
-            width = height;
+        GestureUtils.translate(fArrTemporalSampling, -rectF.left, -rectF.top);
+        float fWidth = f / rectF.width();
+        float fHeight = f2 / rectF.height();
+        if (fWidth > fHeight) {
+            fWidth = fHeight;
         }
-        GestureUtils.scale(temporalSampling, width, width);
-        int length = temporalSampling.length;
+        GestureUtils.scale(fArrTemporalSampling, fWidth, fWidth);
+        int length = fArrTemporalSampling.length;
         float f3 = 0.0f;
         Path path = null;
         float f4 = 0.0f;
         for (int i2 = 0; i2 < length; i2 += 2) {
-            float f5 = temporalSampling[i2];
-            float f6 = temporalSampling[i2 + 1];
+            float f5 = fArrTemporalSampling[i2];
+            float f6 = fArrTemporalSampling[i2 + 1];
             if (path == null) {
                 Path path2 = new Path();
                 path2.moveTo(f5, f6);
                 path = path2;
             } else {
-                float abs = Math.abs(f5 - f3);
-                float abs2 = Math.abs(f6 - f4);
-                if (abs >= 3.0f || abs2 >= 3.0f) {
+                float fAbs = Math.abs(f5 - f3);
+                float fAbs2 = Math.abs(f6 - f4);
+                if (fAbs >= 3.0f || fAbs2 >= 3.0f) {
                     path.quadTo(f3, f4, (f5 + f3) / 2.0f, (f6 + f4) / 2.0f);
                 }
             }
@@ -154,9 +154,9 @@ public class GestureStroke {
     }
 
     static GestureStroke deserialize(DataInputStream dataInputStream) throws IOException {
-        int readInt = dataInputStream.readInt();
-        ArrayList arrayList = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = dataInputStream.readInt();
+        ArrayList arrayList = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayList.add(GesturePoint.deserialize(dataInputStream));
         }
         return new GestureStroke(arrayList);

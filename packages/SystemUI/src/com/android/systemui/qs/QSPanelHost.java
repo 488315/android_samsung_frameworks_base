@@ -23,6 +23,7 @@ import com.android.systemui.qs.bar.BottomLargeTileBar;
 import com.android.systemui.qs.bar.BrightnessVolumeBar;
 import com.android.systemui.qs.bar.SmartViewLargeTileBar;
 import com.android.systemui.qs.bar.TopLargeTileBar;
+import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.qs.tileimpl.LabelTileView;
 import com.android.systemui.qs.tileimpl.LargeTileView;
 import com.android.systemui.qs.tileimpl.NoLabelTileView;
@@ -37,7 +38,6 @@ import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSPanelHost implements QSHost.Callback {
     public SecQSPanelController$$ExternalSyntheticLambda1 applyBarOrderRunnable;
@@ -55,13 +55,13 @@ public class QSPanelHost implements QSHost.Callback {
     public final QSPanelHost$$ExternalSyntheticLambda15 mResetSettingsApplier = new QsResetSettingsManager.ResetSettingsApplier() { // from class: com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda15
         @Override // com.android.systemui.util.QsResetSettingsManager.ResetSettingsApplier
         public final void applyResetSetting() {
-            QSPanelHost.this.resetSettings();
+            this.f$0.resetSettings();
         }
     };
     public final QSPanelHost$$ExternalSyntheticLambda16 mDemoResetSettingsApplier = new QsResetSettingsManager.DemoResetSettingsApplier() { // from class: com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda16
         @Override // com.android.systemui.util.QsResetSettingsManager.DemoResetSettingsApplier
         public final void applyDemoResetSetting() {
-            QSPanelHost qSPanelHost = QSPanelHost.this;
+            QSPanelHost qSPanelHost = this.f$0;
             qSPanelHost.resetSettings();
             SecQSPanelController$$ExternalSyntheticLambda1 secQSPanelController$$ExternalSyntheticLambda1 = qSPanelHost.applyBarOrderRunnable;
             if (secQSPanelController$$ExternalSyntheticLambda1 != null) {
@@ -205,7 +205,7 @@ public class QSPanelHost implements QSHost.Callback {
         }
     }
 
-    public final void setBarsToPanel(List list) {
+    public final void setBarsToPanel(List list) throws Resources.NotFoundException {
         SecQSPanel secQSPanel = this.mTargetView;
         int dimensionPixelSize = secQSPanel.getContext().getResources().getDimensionPixelSize(R.dimen.bar_top_margin);
         ArrayList arrayList = (ArrayList) list;
@@ -230,38 +230,45 @@ public class QSPanelHost implements QSHost.Callback {
     }
 
     public final void setTiles(Boolean bool) {
-        int i;
+        int asInt;
+        List arrayList;
         SecQSDetailController secQSDetailController;
         Context context = this.mTargetView.getContext();
         IntSupplier intSupplier = this.mOrientationSupplier;
         if (intSupplier == null || intSupplier.getAsInt() == 0) {
-            i = context.getResources().getConfiguration().orientation;
+            asInt = context.getResources().getConfiguration().orientation;
         } else {
             StringBuilder sb = new StringBuilder("getOrientation controller.orientation = ");
             sb.append(this.mOrientationSupplier.getAsInt());
             sb.append(", view.orientation = ");
             RecyclerView$$ExternalSyntheticOutline0.m(context.getResources().getConfiguration().orientation, "QSPanelHost", sb);
-            i = this.mOrientationSupplier.getAsInt();
+            asInt = this.mOrientationSupplier.getAsInt();
         }
-        if (!((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && !QpRune.QUICK_PANEL_BLUR_MASSIVE && bool.booleanValue() && QsAnimatorState.isDetailPopupShowing && (secQSDetailController = this.mDetailController) != null && i == secQSDetailController.oldOrientation) {
+        if (!((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && !QpRune.QUICK_PANEL_BLUR_MASSIVE && bool.booleanValue() && QsAnimatorState.isDetailPopupShowing && (secQSDetailController = this.mDetailController) != null && asInt == secQSDetailController.oldOrientation) {
             Log.d("QSPanelHost", "setTiles isDetailPopupShowing : closeDetail");
             this.mDetailController.closeDetail();
         }
         StringBuilder sb2 = new StringBuilder("setTiles isForcedCloseDetail = ");
         sb2.append(bool);
         sb2.append(", orientation = ");
-        sb2.append(i != 0 ? i != 1 ? i != 2 ? String.valueOf(i) : "land" : HostAuth.PORT : "undef");
+        sb2.append(asInt != 0 ? asInt != 1 ? asInt != 2 ? String.valueOf(asInt) : "land" : HostAuth.PORT : "undef");
         Log.d("QSPanelHost", sb2.toString());
-        boolean isHeader = isHeader();
+        boolean zIsHeader = isHeader();
         QSHost qSHost = this.mQsHost;
-        List arrayList = isHeader ? (List) qSHost.getTiles().stream().limit(this.mResourcePicker.resourcePickHelper.getTargetPicker().getQuickQsTileNum(context)).collect(Collectors.toList()) : new ArrayList(qSHost.getTiles());
+        if (zIsHeader) {
+            this.mResourcePicker.resourcePickHelper.getTargetPicker().getClass();
+            SecQSPanelResourceCommon.Companion.getClass();
+            arrayList = (List) qSHost.getTiles().stream().limit(SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_qs_panel_max_columns, context)).collect(Collectors.toList());
+        } else {
+            arrayList = new ArrayList(qSHost.getTiles());
+        }
         this.mRecords.forEach(new QSPanelHost$$ExternalSyntheticLambda1(this, 0));
         this.mRecords.clear();
         if (this.mType == 0) {
-            addBarTiles(0, i);
-            addBarTiles(1, i);
-            addBarTiles(3, i);
-            addBarTiles(2, i);
+            addBarTiles(0, asInt);
+            addBarTiles(1, asInt);
+            addBarTiles(3, asInt);
+            addBarTiles(2, asInt);
             getBarItems().stream().filter(new QSPanelHost$$ExternalSyntheticLambda2(0)).forEach(new QSPanelHost$$ExternalSyntheticLambda1(arrayList, 1));
         }
         Stream map = arrayList.stream().map(new QSPanelHost$$ExternalSyntheticLambda4(this, 0));

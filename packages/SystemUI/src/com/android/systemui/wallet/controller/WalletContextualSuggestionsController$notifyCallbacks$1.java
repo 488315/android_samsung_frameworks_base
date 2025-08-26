@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WalletContextualSuggestionsController$notifyCallbacks$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ List<WalletCard> $cards;
@@ -53,7 +52,7 @@ final class WalletContextualSuggestionsController$notifyCallbacks$1 extends Susp
                     arrayList.add(obj2);
                 }
             }
-            function1.mo779invoke(arrayList);
+            function1.mo781invoke(arrayList);
         }
         return Unit.INSTANCE;
     }

@@ -3,7 +3,6 @@ package androidx.compose.foundation.lazy.grid;
 import java.util.List;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridMeasuredLine {
     public final int index;
@@ -22,13 +21,13 @@ public final class LazyGridMeasuredLine {
         this.spans = list;
         this.isVertical = z;
         this.mainAxisSpacing = i2;
-        int i3 = 0;
+        int iMax = 0;
         for (LazyGridMeasuredItem lazyGridMeasuredItem : lazyGridMeasuredItemArr) {
-            i3 = Math.max(i3, lazyGridMeasuredItem.mainAxisSize);
+            iMax = Math.max(iMax, lazyGridMeasuredItem.mainAxisSize);
         }
-        this.mainAxisSize = i3;
-        int i4 = i3 + this.mainAxisSpacing;
-        this.mainAxisSizeWithSpacings = i4 >= 0 ? i4 : 0;
+        this.mainAxisSize = iMax;
+        int i3 = iMax + this.mainAxisSpacing;
+        this.mainAxisSizeWithSpacings = i3 >= 0 ? i3 : 0;
     }
 
     public final LazyGridMeasuredItem[] position(int i, int i2, int i3) {

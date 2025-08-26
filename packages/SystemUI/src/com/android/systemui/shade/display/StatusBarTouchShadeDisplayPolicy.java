@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarTouchShadeDisplayPolicy implements ShadeDisplayPolicy, ShadeExpansionIntent {
     public static final Companion Companion = new Companion(null);
@@ -36,7 +35,6 @@ public final class StatusBarTouchShadeDisplayPolicy implements ShadeDisplayPolic
     public StandaloneCoroutine removalListener;
     public StandaloneCoroutine timeoutJob;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,11 +53,11 @@ public final class StatusBarTouchShadeDisplayPolicy implements ShadeDisplayPolic
         this.backgroundScope = coroutineScope;
         this.qsShadeElement = lazy;
         this.notificationElement = lazy2;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(0);
-        this.currentDisplayId = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(0);
+        this.currentDisplayId = stateFlowImplMutableStateFlow;
         this.availableDisplayIds = ((DisplayRepositoryImpl) displayRepository).displayRepositoryFromLib.getDisplayIds();
         this.latestIntent = new AtomicReference();
-        this.displayId = MutableStateFlow;
+        this.displayId = stateFlowImplMutableStateFlow;
     }
 
     @Override // com.android.systemui.shade.display.ShadeDisplayPolicy
@@ -80,9 +78,9 @@ public final class StatusBarTouchShadeDisplayPolicy implements ShadeDisplayPolic
             RefactorFlagUtils.assertOnEngBuild("New code path expects com.android.systemui.shade_window_goes_around to be enabled.");
         }
         int displayId = motionEvent.getDisplayId();
-        boolean contains = ((Set) this.availableDisplayIds.getValue()).contains(Integer.valueOf(displayId));
+        boolean zContains = ((Set) this.availableDisplayIds.getValue()).contains(Integer.valueOf(displayId));
         CoroutineScope coroutineScope = this.backgroundScope;
-        if (contains) {
+        if (zContains) {
             this.currentDisplayId.updateState(null, Integer.valueOf(displayId));
             if (this.removalListener == null) {
                 this.removalListener = CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new StatusBarTouchShadeDisplayPolicy$monitorDisplayRemovals$1(this, null), 6);

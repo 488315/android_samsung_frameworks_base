@@ -74,7 +74,7 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         return this.mExtras;
     }
 
-    public long getLength() {
+    public long getLength() throws ErrnoException {
         long j = this.mLength;
         if (j >= 0) {
             return j;
@@ -123,11 +123,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
     public static class AutoCloseInputStream extends ParcelFileDescriptor.AutoCloseInputStream {
         private ParcelFileDescriptor.AutoCloseInputStream mDelegateInputStream;
 
-        public AutoCloseInputStream(AssetFileDescriptor assetFileDescriptor) throws IOException {
+        public AutoCloseInputStream(AssetFileDescriptor assetFileDescriptor) throws IOException, ErrnoException {
             super(assetFileDescriptor.getParcelFileDescriptor());
             try {
-                StructStat fstat = Os.fstat(assetFileDescriptor.getParcelFileDescriptor().getFileDescriptor());
-                if (OsConstants.S_ISSOCK(fstat.st_mode) || OsConstants.S_ISFIFO(fstat.st_mode)) {
+                StructStat structStatFstat = Os.fstat(assetFileDescriptor.getParcelFileDescriptor().getFileDescriptor());
+                if (OsConstants.S_ISSOCK(structStatFstat.st_mode) || OsConstants.S_ISFIFO(structStatFstat.st_mode)) {
                     this.mDelegateInputStream = new NonSeekableAutoCloseInputStream(assetFileDescriptor);
                 } else {
                     this.mDelegateInputStream = new SeekableAutoCloseInputStream(assetFileDescriptor);
@@ -202,12 +202,12 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
 
         private long skipRaw$ravenwood(long j) throws IOException {
-            int read;
-            int min = (int) Math.min(1024L, j);
-            byte[] bArr = new byte[min];
+            int i;
+            int iMin = (int) Math.min(1024L, j);
+            byte[] bArr = new byte[iMin];
             long j2 = 0;
-            while (j2 < j && (read = super.read(bArr, 0, (int) Math.min(j - j2, min))) != -1) {
-                j2 += read;
+            while (j2 < j && (i = super.read(bArr, 0, (int) Math.min(j - j2, iMin))) != -1) {
+                j2 += i;
             }
             return j2;
         }
@@ -245,11 +245,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             if (i2 > j) {
                 i2 = (int) j;
             }
-            int read = super.read(bArr, i, i2);
-            if (read >= 0) {
-                this.mRemaining -= read;
+            int i3 = super.read(bArr, i, i2);
+            if (i3 >= 0) {
+                this.mRemaining -= i3;
             }
-            return read;
+            return i3;
         }
 
         @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
@@ -269,11 +269,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             if (j > j2) {
                 j = j2;
             }
-            long skipRaw = skipRaw(j);
-            if (skipRaw >= 0) {
-                this.mRemaining -= skipRaw;
+            long jSkipRaw = skipRaw(j);
+            if (jSkipRaw >= 0) {
+                this.mRemaining -= jSkipRaw;
             }
-            return skipRaw;
+            return jSkipRaw;
         }
 
         @Override // java.io.InputStream
@@ -350,19 +350,19 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
 
         @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
-        public int read(byte[] bArr, int i, int i2) throws IOException {
-            int available = available();
+        public int read(byte[] bArr, int i, int i2) throws IOException, ErrnoException {
+            int iAvailable = available();
             int i3 = -1;
-            if (available <= 0) {
+            if (iAvailable <= 0) {
                 return -1;
             }
             if (i2 == 0) {
                 return 0;
             }
             try {
-                int pread = Os.pread(getFD(), bArr, i, i2 > available ? available : i2, this.mOffset + this.mFileOffset);
-                if (pread != 0) {
-                    i3 = pread;
+                int iPread = Os.pread(getFD(), bArr, i, i2 > iAvailable ? iAvailable : i2, this.mOffset + this.mFileOffset);
+                if (iPread != 0) {
+                    i3 = iPread;
                 }
                 if (i3 > 0) {
                     long j = this.mOffset + i3;
@@ -382,11 +382,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
 
         @Override // java.io.FileInputStream, java.io.InputStream
         public long skip(long j) throws IOException {
-            int available = available();
-            if (available <= 0) {
+            int iAvailable = available();
+            if (iAvailable <= 0) {
                 return -1L;
             }
-            long j2 = available;
+            long j2 = iAvailable;
             if (j > j2) {
                 j = j2;
             }
@@ -433,11 +433,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
                 if (SeekableAutoCloseInputStream.this.available() <= 0) {
                     return -1;
                 }
-                int read = this.mDelegate.read(byteBuffer);
-                if (read != -1) {
-                    SeekableAutoCloseInputStream.this.mOffset += read;
+                int i = this.mDelegate.read(byteBuffer);
+                if (i != -1) {
+                    SeekableAutoCloseInputStream.this.mOffset += i;
                 }
-                return read;
+                return i;
             }
 
             @Override // java.nio.channels.FileChannel, java.nio.channels.ScatteringByteChannel
@@ -448,11 +448,11 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
                 if (SeekableAutoCloseInputStream.this.mOffset + i2 > SeekableAutoCloseInputStream.this.mTotalSize) {
                     i2 = (int) (SeekableAutoCloseInputStream.this.mTotalSize - SeekableAutoCloseInputStream.this.mOffset);
                 }
-                long read = this.mDelegate.read(byteBufferArr, i, i2);
-                if (read != -1) {
-                    SeekableAutoCloseInputStream.this.mOffset += read;
+                long j = this.mDelegate.read(byteBufferArr, i, i2);
+                if (j != -1) {
+                    SeekableAutoCloseInputStream.this.mOffset += j;
                 }
-                return read;
+                return j;
             }
 
             @Override // java.nio.channels.FileChannel

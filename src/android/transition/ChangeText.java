@@ -67,17 +67,17 @@ public class ChangeText extends Transition {
     @Override // android.transition.Transition
     public Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
         final int i;
-        int i2;
-        int i3;
-        final int i4;
-        final int i5;
+        int iIntValue;
+        int iIntValue2;
+        final int i2;
+        final int i3;
         ValueAnimator valueAnimator;
-        final int i6;
+        final int i4;
         final CharSequence charSequence;
+        Animator animatorOfFloat;
+        ValueAnimator valueAnimatorOfInt;
         Animator animator;
-        ValueAnimator ofInt;
         Animator animator2;
-        Animator animator3;
         if (transitionValues == null || transitionValues2 == null || !(transitionValues.view instanceof TextView) || !(transitionValues2.view instanceof TextView)) {
             return null;
         }
@@ -88,15 +88,15 @@ public class ChangeText extends Transition {
         final CharSequence charSequence2 = map2.get(PROPNAME_TEXT) != null ? (CharSequence) map2.get(PROPNAME_TEXT) : "";
         boolean z = textView instanceof EditText;
         if (z) {
-            i2 = map.get(PROPNAME_TEXT_SELECTION_START) != null ? ((Integer) map.get(PROPNAME_TEXT_SELECTION_START)).intValue() : -1;
-            int intValue = map.get(PROPNAME_TEXT_SELECTION_END) != null ? ((Integer) map.get(PROPNAME_TEXT_SELECTION_END)).intValue() : i2;
-            r6 = map2.get(PROPNAME_TEXT_SELECTION_START) != null ? ((Integer) map2.get(PROPNAME_TEXT_SELECTION_START)).intValue() : -1;
-            i3 = map2.get(PROPNAME_TEXT_SELECTION_END) != null ? ((Integer) map2.get(PROPNAME_TEXT_SELECTION_END)).intValue() : r6;
-            i = intValue;
+            iIntValue = map.get(PROPNAME_TEXT_SELECTION_START) != null ? ((Integer) map.get(PROPNAME_TEXT_SELECTION_START)).intValue() : -1;
+            int iIntValue3 = map.get(PROPNAME_TEXT_SELECTION_END) != null ? ((Integer) map.get(PROPNAME_TEXT_SELECTION_END)).intValue() : iIntValue;
+            iIntValue = map2.get(PROPNAME_TEXT_SELECTION_START) != null ? ((Integer) map2.get(PROPNAME_TEXT_SELECTION_START)).intValue() : -1;
+            iIntValue2 = map2.get(PROPNAME_TEXT_SELECTION_END) != null ? ((Integer) map2.get(PROPNAME_TEXT_SELECTION_END)).intValue() : iIntValue;
+            i = iIntValue3;
         } else {
             i = -1;
-            i2 = -1;
-            i3 = -1;
+            iIntValue = -1;
+            iIntValue2 = -1;
         }
         if (str.equals(charSequence2)) {
             return null;
@@ -104,102 +104,102 @@ public class ChangeText extends Transition {
         if (this.mChangeBehavior != 2) {
             textView.lambda$setTextAsync$0(str);
             if (z) {
-                setSelection((EditText) textView, i2, i);
+                setSelection((EditText) textView, iIntValue, i);
             }
         }
-        int i7 = 0;
+        int i5 = 0;
         if (this.mChangeBehavior == 0) {
-            animator = ValueAnimator.ofFloat(0.0f, 1.0f);
-            i4 = r6;
+            animatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            i2 = iIntValue;
             charSequence = str;
-            i5 = i3;
-            animator.addListener(new AnimatorListenerAdapter() { // from class: android.transition.ChangeText.1
+            i3 = iIntValue2;
+            animatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: android.transition.ChangeText.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animator4) {
+                public void onAnimationEnd(Animator animator3) {
                     if (charSequence.equals(textView.getText())) {
                         textView.lambda$setTextAsync$0(charSequence2);
                         TextView textView2 = textView;
                         if (textView2 instanceof EditText) {
-                            ChangeText.this.setSelection((EditText) textView2, i4, i5);
+                            ChangeText.this.setSelection((EditText) textView2, i2, i3);
                         }
                     }
                 }
             });
         } else {
-            i4 = r6;
-            i5 = i3;
-            final int intValue2 = ((Integer) map.get(PROPNAME_TEXT_COLOR)).intValue();
-            int intValue3 = ((Integer) map2.get(PROPNAME_TEXT_COLOR)).intValue();
-            int i8 = this.mChangeBehavior;
-            if (i8 == 3 || i8 == 1) {
-                ValueAnimator ofInt2 = ValueAnimator.ofInt(Color.alpha(intValue2), 0);
+            i2 = iIntValue;
+            i3 = iIntValue2;
+            final int iIntValue4 = ((Integer) map.get(PROPNAME_TEXT_COLOR)).intValue();
+            int iIntValue5 = ((Integer) map2.get(PROPNAME_TEXT_COLOR)).intValue();
+            int i6 = this.mChangeBehavior;
+            if (i6 == 3 || i6 == 1) {
+                ValueAnimator valueAnimatorOfInt2 = ValueAnimator.ofInt(Color.alpha(iIntValue4), 0);
                 valueAnimator = null;
-                ofInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.ChangeText.2
+                valueAnimatorOfInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.ChangeText.2
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        int intValue4 = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
-                        textView.setTextColor((intValue2 & 16777215) | (intValue4 << 24));
+                        int iIntValue6 = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                        textView.setTextColor((iIntValue4 & 16777215) | (iIntValue6 << 24));
                     }
                 });
                 CharSequence charSequence3 = str;
-                i6 = intValue3;
+                i4 = iIntValue5;
                 charSequence = charSequence3;
-                ofInt2.addListener(new AnimatorListenerAdapter() { // from class: android.transition.ChangeText.3
+                valueAnimatorOfInt2.addListener(new AnimatorListenerAdapter() { // from class: android.transition.ChangeText.3
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animator4) {
+                    public void onAnimationEnd(Animator animator3) {
                         if (charSequence.equals(textView.getText())) {
                             textView.lambda$setTextAsync$0(charSequence2);
                             TextView textView2 = textView;
                             if (textView2 instanceof EditText) {
-                                ChangeText.this.setSelection((EditText) textView2, i4, i5);
+                                ChangeText.this.setSelection((EditText) textView2, i2, i3);
                             }
                         }
-                        textView.setTextColor(i6);
+                        textView.setTextColor(i4);
                     }
                 });
-                animator = ofInt2;
+                animatorOfFloat = valueAnimatorOfInt2;
             } else {
                 CharSequence charSequence4 = str;
-                i6 = intValue3;
+                i4 = iIntValue5;
                 charSequence = charSequence4;
                 valueAnimator = null;
-                animator = null;
+                animatorOfFloat = null;
             }
-            int i9 = this.mChangeBehavior;
-            if (i9 == 3 || i9 == 2) {
-                ofInt = ValueAnimator.ofInt(0, Color.alpha(i6));
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.ChangeText.4
+            int i7 = this.mChangeBehavior;
+            if (i7 == 3 || i7 == 2) {
+                valueAnimatorOfInt = ValueAnimator.ofInt(0, Color.alpha(i4));
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: android.transition.ChangeText.4
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        int intValue4 = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
-                        textView.setTextColor((i6 & 16777215) | (intValue4 << 24));
+                        int iIntValue6 = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                        textView.setTextColor((i4 & 16777215) | (iIntValue6 << 24));
                     }
                 });
-                ofInt.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeText.5
+                valueAnimatorOfInt.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeText.5
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationCancel(Animator animator4) {
-                        textView.setTextColor(i6);
+                    public void onAnimationCancel(Animator animator3) {
+                        textView.setTextColor(i4);
                     }
                 });
             } else {
-                ofInt = valueAnimator;
+                valueAnimatorOfInt = valueAnimator;
             }
-            if (animator != null && ofInt != null) {
+            if (animatorOfFloat != null && valueAnimatorOfInt != null) {
                 AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(animator, ofInt);
-                animator2 = animatorSet;
-            } else if (animator != null) {
-                i7 = i6;
+                animatorSet.playSequentially(animatorOfFloat, valueAnimatorOfInt);
+                animator = animatorSet;
+            } else if (animatorOfFloat != null) {
+                i5 = i4;
             } else {
-                animator2 = ofInt;
+                animator = valueAnimatorOfInt;
             }
-            i7 = i6;
-            animator3 = animator2;
+            i5 = i4;
+            animator2 = animator;
             final CharSequence charSequence5 = charSequence;
-            final int i10 = i4;
+            final int i8 = i2;
+            final int i9 = i3;
+            final int i10 = iIntValue;
             final int i11 = i5;
-            final int i12 = i2;
-            final int i13 = i7;
             addListener(new TransitionListenerAdapter() { // from class: android.transition.ChangeText.6
                 int mPausedColor = 0;
 
@@ -209,12 +209,12 @@ public class ChangeText extends Transition {
                         textView.lambda$setTextAsync$0(charSequence2);
                         TextView textView2 = textView;
                         if (textView2 instanceof EditText) {
-                            ChangeText.this.setSelection((EditText) textView2, i10, i11);
+                            ChangeText.this.setSelection((EditText) textView2, i8, i9);
                         }
                     }
                     if (ChangeText.this.mChangeBehavior > 0) {
                         this.mPausedColor = textView.getCurrentTextColor();
-                        textView.setTextColor(i13);
+                        textView.setTextColor(i11);
                     }
                 }
 
@@ -224,7 +224,7 @@ public class ChangeText extends Transition {
                         textView.lambda$setTextAsync$0(charSequence5);
                         TextView textView2 = textView;
                         if (textView2 instanceof EditText) {
-                            ChangeText.this.setSelection((EditText) textView2, i12, i);
+                            ChangeText.this.setSelection((EditText) textView2, i10, i);
                         }
                     }
                     if (ChangeText.this.mChangeBehavior > 0) {
@@ -237,14 +237,14 @@ public class ChangeText extends Transition {
                     transition.removeListener(this);
                 }
             });
-            return animator3;
+            return animator2;
         }
-        animator3 = animator;
+        animator2 = animatorOfFloat;
         final CharSequence charSequence52 = charSequence;
-        final int i102 = i4;
+        final int i82 = i2;
+        final int i92 = i3;
+        final int i102 = iIntValue;
         final int i112 = i5;
-        final int i122 = i2;
-        final int i132 = i7;
         addListener(new TransitionListenerAdapter() { // from class: android.transition.ChangeText.6
             int mPausedColor = 0;
 
@@ -254,12 +254,12 @@ public class ChangeText extends Transition {
                     textView.lambda$setTextAsync$0(charSequence2);
                     TextView textView2 = textView;
                     if (textView2 instanceof EditText) {
-                        ChangeText.this.setSelection((EditText) textView2, i102, i112);
+                        ChangeText.this.setSelection((EditText) textView2, i82, i92);
                     }
                 }
                 if (ChangeText.this.mChangeBehavior > 0) {
                     this.mPausedColor = textView.getCurrentTextColor();
-                    textView.setTextColor(i132);
+                    textView.setTextColor(i112);
                 }
             }
 
@@ -269,7 +269,7 @@ public class ChangeText extends Transition {
                     textView.lambda$setTextAsync$0(charSequence52);
                     TextView textView2 = textView;
                     if (textView2 instanceof EditText) {
-                        ChangeText.this.setSelection((EditText) textView2, i122, i);
+                        ChangeText.this.setSelection((EditText) textView2, i102, i);
                     }
                 }
                 if (ChangeText.this.mChangeBehavior > 0) {
@@ -282,7 +282,7 @@ public class ChangeText extends Transition {
                 transition.removeListener(this);
             }
         });
-        return animator3;
+        return animator2;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

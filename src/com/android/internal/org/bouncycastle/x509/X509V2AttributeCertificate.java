@@ -109,12 +109,12 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity() throws CertificateNotYetValidException, CertificateExpiredException {
         checkValidity(new Date());
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date) throws CertificateNotYetValidException, CertificateExpiredException {
         if (date.after(getNotAfter())) {
             throw new CertificateExpiredException("certificate expired on " + getNotAfter());
         }
@@ -129,7 +129,7 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public final void verify(PublicKey publicKey, String str) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey publicKey, String str) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateException, NoSuchProviderException {
         if (!this.cert.getSignatureAlgorithm().equals(this.cert.getAcinfo().getSignature())) {
             throw new CertificateException("Signature algorithm in certificate info not same as outer certificate");
         }
@@ -170,9 +170,9 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
             return null;
         }
         HashSet hashSet = new HashSet();
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (extensions.getExtension(aSN1ObjectIdentifier).isCritical() == z) {
                 hashSet.add(aSN1ObjectIdentifier.getId());
             }

@@ -25,7 +25,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Lambda;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidRippleNode extends RippleNode implements RippleHostKey {
     public RippleContainer rippleContainer;
@@ -40,17 +39,17 @@ public final class AndroidRippleNode extends RippleNode implements RippleHostKey
     public final void addRipple$1(PressInteraction$Press pressInteraction$Press) {
         RippleContainer rippleContainer = this.rippleContainer;
         if (rippleContainer == null) {
-            ViewGroup access$findNearestViewGroup = Ripple_androidKt.access$findNearestViewGroup((View) CompositionLocalConsumerModifierNodeKt.currentValueOf(this, AndroidCompositionLocals_androidKt.LocalView));
-            int childCount = access$findNearestViewGroup.getChildCount();
+            ViewGroup viewGroupAccess$findNearestViewGroup = Ripple_androidKt.access$findNearestViewGroup((View) CompositionLocalConsumerModifierNodeKt.currentValueOf(this, AndroidCompositionLocals_androidKt.LocalView));
+            int childCount = viewGroupAccess$findNearestViewGroup.getChildCount();
             int i = 0;
             while (true) {
                 if (i >= childCount) {
-                    RippleContainer rippleContainer2 = new RippleContainer(access$findNearestViewGroup.getContext());
-                    access$findNearestViewGroup.addView(rippleContainer2);
+                    RippleContainer rippleContainer2 = new RippleContainer(viewGroupAccess$findNearestViewGroup.getContext());
+                    viewGroupAccess$findNearestViewGroup.addView(rippleContainer2);
                     rippleContainer = rippleContainer2;
                     break;
                 } else {
-                    View childAt = access$findNearestViewGroup.getChildAt(i);
+                    View childAt = viewGroupAccess$findNearestViewGroup.getChildAt(i);
                     if (childAt instanceof RippleContainer) {
                         rippleContainer = (RippleContainer) childAt;
                         break;
@@ -96,8 +95,8 @@ public final class AndroidRippleNode extends RippleNode implements RippleHostKey
         }
         RippleHostView rippleHostView3 = rippleHostView;
         long j = this.rippleSize;
-        int roundToInt = MathKt__MathJVMKt.roundToInt(this.targetRadius);
-        long mo261invoke0d7_KjU = this.color.mo261invoke0d7_KjU();
+        int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.targetRadius);
+        long jMo262invoke0d7_KjU = this.color.mo262invoke0d7_KjU();
         float f = ((RippleAlpha) this.rippleAlpha.invoke()).pressedAlpha;
         Function function = new Function0() { // from class: androidx.compose.material.ripple.AndroidRippleNode$addRipple$1$1$1
             {
@@ -106,7 +105,7 @@ public final class AndroidRippleNode extends RippleNode implements RippleHostKey
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                DrawModifierNodeKt.invalidateDraw(AndroidRippleNode.this);
+                DrawModifierNodeKt.invalidateDraw(this.this$0);
                 return Unit.INSTANCE;
             }
         };
@@ -120,9 +119,9 @@ public final class AndroidRippleNode extends RippleNode implements RippleHostKey
         UnprojectedRipple unprojectedRipple2 = rippleHostView3.ripple;
         unprojectedRipple2.getClass();
         rippleHostView3.onInvalidateRipple = (Lambda) function;
-        rippleHostView3.m244updateRipplePropertiesbiQXAtU(j, mo261invoke0d7_KjU, roundToInt, f);
+        rippleHostView3.m245updateRipplePropertiesbiQXAtU(j, jMo262invoke0d7_KjU, iRoundToInt, f);
         if (z) {
-            unprojectedRipple2.setHotspot(Offset.m398getXimpl(pressInteraction$Press.pressPosition), Offset.m399getYimpl(pressInteraction$Press.pressPosition));
+            unprojectedRipple2.setHotspot(Offset.m400getXimpl(pressInteraction$Press.pressPosition), Offset.m401getYimpl(pressInteraction$Press.pressPosition));
         } else {
             unprojectedRipple2.setHotspot(unprojectedRipple2.getBounds().centerX(), unprojectedRipple2.getBounds().centerY());
         }
@@ -134,11 +133,11 @@ public final class AndroidRippleNode extends RippleNode implements RippleHostKey
     @Override // androidx.compose.material.ripple.RippleNode
     public final void drawRipples(LayoutNodeDrawScope layoutNodeDrawScope) {
         CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
-        this.rippleSize = canvasDrawScope.mo545getSizeNHjbRc();
+        this.rippleSize = canvasDrawScope.mo547getSizeNHjbRc();
         Canvas canvas = canvasDrawScope.drawContext.getCanvas();
         RippleHostView rippleHostView = this.rippleHostView;
         if (rippleHostView != null) {
-            rippleHostView.m244updateRipplePropertiesbiQXAtU(canvasDrawScope.mo545getSizeNHjbRc(), this.color.mo261invoke0d7_KjU(), MathKt__MathJVMKt.roundToInt(this.targetRadius), ((RippleAlpha) this.rippleAlpha.invoke()).pressedAlpha);
+            rippleHostView.m245updateRipplePropertiesbiQXAtU(canvasDrawScope.mo547getSizeNHjbRc(), this.color.mo262invoke0d7_KjU(), MathKt__MathJVMKt.roundToInt(this.targetRadius), ((RippleAlpha) this.rippleAlpha.invoke()).pressedAlpha);
             android.graphics.Canvas canvas2 = AndroidCanvas_androidKt.EmptyCanvas;
             rippleHostView.draw(((AndroidCanvas) canvas).internalCanvas);
         }

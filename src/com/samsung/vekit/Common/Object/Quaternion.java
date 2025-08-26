@@ -64,22 +64,22 @@ public class Quaternion {
         float radians2 = (float) Math.toRadians(f2);
         float radians3 = (float) Math.toRadians(f3);
         double d = radians / 2.0f;
-        float cos = (float) Math.cos(d);
+        float fCos = (float) Math.cos(d);
         double d2 = radians2 / 2.0f;
-        float cos2 = (float) Math.cos(d2);
+        float fCos2 = (float) Math.cos(d2);
         double d3 = radians3 / 2.0f;
-        float cos3 = (float) Math.cos(d3);
-        float sin = (float) Math.sin(d);
-        float sin2 = (float) Math.sin(d2);
-        float sin3 = (float) Math.sin(d3);
-        float f4 = sin * cos2;
-        float f5 = cos * sin2;
-        this.x = (f4 * cos3) + (f5 * sin3);
-        this.y = (f5 * cos3) - (f4 * sin3);
-        float f6 = cos * cos2;
-        float f7 = sin * sin2;
-        this.z = (f6 * sin3) + (f7 * cos3);
-        this.w = (f6 * cos3) - (f7 * sin3);
+        float fCos3 = (float) Math.cos(d3);
+        float fSin = (float) Math.sin(d);
+        float fSin2 = (float) Math.sin(d2);
+        float fSin3 = (float) Math.sin(d3);
+        float f4 = fSin * fCos2;
+        float f5 = fCos * fSin2;
+        this.x = (f4 * fCos3) + (f5 * fSin3);
+        this.y = (f5 * fCos3) - (f4 * fSin3);
+        float f6 = fCos * fCos2;
+        float f7 = fSin * fSin2;
+        this.z = (f6 * fSin3) + (f7 * fCos3);
+        this.w = (f6 * fCos3) - (f7 * fSin3);
     }
 
     private float clamp(float f, float f2, float f3) {
@@ -87,30 +87,30 @@ public class Quaternion {
     }
 
     public Vector3<Float> getRotation() {
-        float atan2;
-        float f;
+        float fAtan2;
+        float fAtan22;
         Matrix4 matrix = getMatrix();
-        float asin = (float) Math.asin(clamp(matrix.get(2, 0), -1.0f, 1.0f));
+        float fAsin = (float) Math.asin(clamp(matrix.get(2, 0), -1.0f, 1.0f));
         if (Math.abs(matrix.get(2, 0)) < 0.999999d) {
-            atan2 = (float) Math.atan2(-matrix.get(2, 1), matrix.get(2, 2));
-            f = (float) Math.atan2(-matrix.get(1, 0), matrix.get(0, 0));
+            fAtan2 = (float) Math.atan2(-matrix.get(2, 1), matrix.get(2, 2));
+            fAtan22 = (float) Math.atan2(-matrix.get(1, 0), matrix.get(0, 0));
         } else {
-            atan2 = (float) Math.atan2(matrix.get(1, 2), matrix.get(1, 1));
-            f = 0.0f;
+            fAtan2 = (float) Math.atan2(matrix.get(1, 2), matrix.get(1, 1));
+            fAtan22 = 0.0f;
         }
-        return new Vector3<>(Float.valueOf((float) Math.toDegrees(atan2)), Float.valueOf((float) Math.toDegrees(asin)), Float.valueOf((float) Math.toDegrees(f)));
+        return new Vector3<>(Float.valueOf((float) Math.toDegrees(fAtan2)), Float.valueOf((float) Math.toDegrees(fAsin)), Float.valueOf((float) Math.toDegrees(fAtan22)));
     }
 
     public void setRotation(Vector3<Float> vector3, float f) {
-        float sqrt = (float) Math.sqrt((vector3.getX().floatValue() * vector3.getX().floatValue()) + (vector3.getY().floatValue() * vector3.getY().floatValue()) + (vector3.getZ().floatValue() * vector3.getZ().floatValue()));
-        Vector3 vector32 = new Vector3(Float.valueOf(vector3.getX().floatValue() / sqrt), Float.valueOf(vector3.getY().floatValue() / sqrt), Float.valueOf(vector3.getZ().floatValue() / sqrt));
+        float fSqrt = (float) Math.sqrt((vector3.getX().floatValue() * vector3.getX().floatValue()) + (vector3.getY().floatValue() * vector3.getY().floatValue()) + (vector3.getZ().floatValue() * vector3.getZ().floatValue()));
+        Vector3 vector32 = new Vector3(Float.valueOf(vector3.getX().floatValue() / fSqrt), Float.valueOf(vector3.getY().floatValue() / fSqrt), Float.valueOf(vector3.getZ().floatValue() / fSqrt));
         double d = f;
-        float sin = (float) Math.sin(Math.toRadians(d) * 0.5d);
-        float cos = (float) Math.cos(Math.toRadians(d) * 0.5d);
-        this.x = ((Float) vector32.getX()).floatValue() * sin;
-        this.y = ((Float) vector32.getY()).floatValue() * sin;
-        this.z = ((Float) vector32.getZ()).floatValue() * sin;
-        this.w = cos;
+        float fSin = (float) Math.sin(Math.toRadians(d) * 0.5d);
+        float fCos = (float) Math.cos(Math.toRadians(d) * 0.5d);
+        this.x = ((Float) vector32.getX()).floatValue() * fSin;
+        this.y = ((Float) vector32.getY()).floatValue() * fSin;
+        this.z = ((Float) vector32.getZ()).floatValue() * fSin;
+        this.w = fCos;
     }
 
     /* renamed from: com.samsung.vekit.Common.Object.Quaternion$1, reason: invalid class name */

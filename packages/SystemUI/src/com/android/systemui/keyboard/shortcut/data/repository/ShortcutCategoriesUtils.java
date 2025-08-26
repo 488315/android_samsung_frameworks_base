@@ -34,7 +34,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShortcutCategoriesUtils {
     public static final List SUPPORTED_MODIFIERS;
@@ -43,7 +42,6 @@ public final class ShortcutCategoriesUtils {
     public final InputManager inputManager;
     public final ShortcutHelperExclusions shortcutHelperExclusions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,13 +75,14 @@ public final class ShortcutCategoriesUtils {
         boolean z;
         ?? shortcutIcon;
         ShortcutCategory shortcut;
+        int[] functionRowKeys;
         ShortcutCategory shortcutCategory = null;
         if (shortcutCategoryType == null) {
             return null;
         }
         KeyGlyphMap keyGlyphMap2 = this.inputManager.getKeyGlyphMap(inputDevice.getId());
         KeyCharacterMap keyCharacterMap2 = inputDevice.getKeyCharacterMap();
-        boolean isTrusted = shortcutCategoryType.isTrusted();
+        boolean zIsTrusted = shortcutCategoryType.isTrusted();
         List<InternalKeyboardShortcutGroup> list2 = list;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
         for (InternalKeyboardShortcutGroup internalKeyboardShortcutGroup : list2) {
@@ -94,19 +93,9 @@ public final class ShortcutCategoriesUtils {
                 InternalKeyboardShortcutInfo internalKeyboardShortcutInfo = (InternalKeyboardShortcutInfo) obj;
                 ShortcutCategory shortcutCategory2 = shortcutCategory;
                 int i = internalKeyboardShortcutInfo.keycode;
-                if (i != 0) {
-                    if (!set.contains(Integer.valueOf(i))) {
-                        if (keyGlyphMap2 != null) {
-                            int[] functionRowKeys = keyGlyphMap2.getFunctionRowKeys();
-                            if (functionRowKeys != null) {
-                                if (ArraysKt___ArraysKt.indexOf(internalKeyboardShortcutInfo.keycode, functionRowKeys) < 0) {
-                                }
-                            }
-                        }
-                        shortcutCategory = shortcutCategory2;
-                    }
+                if (i == 0 || set.contains(Integer.valueOf(i)) || (keyGlyphMap2 != null && (functionRowKeys = keyGlyphMap2.getFunctionRowKeys()) != null && ArraysKt___ArraysKt.indexOf(internalKeyboardShortcutInfo.keycode, functionRowKeys) >= 0)) {
+                    arrayList2.add(obj);
                 }
-                arrayList2.add(obj);
                 shortcutCategory = shortcutCategory2;
             }
             ShortcutCategory shortcutCategory3 = shortcutCategory;
@@ -121,43 +110,43 @@ public final class ShortcutCategoriesUtils {
                 if (shortcutCommand == null) {
                     keyGlyphMap = keyGlyphMap2;
                     keyCharacterMap = keyCharacterMap2;
-                    z = isTrusted;
+                    z = zIsTrusted;
                     shortcut = shortcutCategory3;
                 } else {
-                    if (isTrusted) {
+                    if (zIsTrusted) {
                         keyGlyphMap = keyGlyphMap2;
                         Icon icon = internalKeyboardShortcutInfo2.icon;
                         if (icon != null) {
                             keyCharacterMap = keyCharacterMap2;
                             if (icon.getType() == 2 && (resPackage = icon.getResPackage()) != null && resPackage.length() != 0 && icon.getResId() > 0) {
-                                z = isTrusted;
+                                z = zIsTrusted;
                                 shortcutIcon = new ShortcutIcon(icon.getResPackage(), icon.getResId());
-                                List singletonList = Collections.singletonList(shortcutCommand);
-                                ShortcutHelperExclusions shortcutHelperExclusions = this.shortcutHelperExclusions;
-                                shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, singletonList, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
                             }
-                            z = isTrusted;
-                            shortcutIcon = shortcutCategory3;
-                            List singletonList2 = Collections.singletonList(shortcutCommand);
-                            ShortcutHelperExclusions shortcutHelperExclusions2 = this.shortcutHelperExclusions;
-                            shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, singletonList2, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions2.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions2.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
+                            List listSingletonList = Collections.singletonList(shortcutCommand);
+                            ShortcutHelperExclusions shortcutHelperExclusions = this.shortcutHelperExclusions;
+                            shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, listSingletonList, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
                         }
+                        z = zIsTrusted;
+                        shortcutIcon = shortcutCategory3;
+                        List listSingletonList2 = Collections.singletonList(shortcutCommand);
+                        ShortcutHelperExclusions shortcutHelperExclusions2 = this.shortcutHelperExclusions;
+                        shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, listSingletonList2, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions2.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions2.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
                     } else {
                         keyGlyphMap = keyGlyphMap2;
                     }
                     keyCharacterMap = keyCharacterMap2;
-                    z = isTrusted;
+                    z = zIsTrusted;
                     shortcutIcon = shortcutCategory3;
-                    List singletonList22 = Collections.singletonList(shortcutCommand);
+                    List listSingletonList22 = Collections.singletonList(shortcutCommand);
                     ShortcutHelperExclusions shortcutHelperExclusions22 = this.shortcutHelperExclusions;
-                    shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, singletonList22, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions22.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions22.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
+                    shortcut = new Shortcut(internalKeyboardShortcutInfo2.label, listSingletonList22, shortcutIcon, null, !Arrays.asList(shortcutHelperExclusions22.context.getString(R.string.group_system_cycle_forward), shortcutHelperExclusions22.context.getString(R.string.group_system_cycle_back)).contains(internalKeyboardShortcutInfo2.label), 8, null);
                 }
                 if (shortcut != null) {
                     arrayList3.add(shortcut);
                 }
                 keyGlyphMap2 = keyGlyphMap;
                 keyCharacterMap2 = keyCharacterMap;
-                isTrusted = z;
+                zIsTrusted = z;
             }
             arrayList.add(new ShortcutSubCategory(str, arrayList3));
             shortcutCategory = shortcutCategory3;
@@ -204,14 +193,14 @@ public final class ShortcutCategoriesUtils {
                 Log.w("ShortcutCategoriesUtils", "No keys for " + internalKeyboardShortcutInfo);
                 return null;
             }
-            int intValue = ((Number) it.next()).intValue();
-            if ((intValue & i) != 0) {
-                ShortcutKey shortcutModifierKey = toShortcutModifierKey(intValue, keyGlyphMap);
+            int iIntValue = ((Number) it.next()).intValue();
+            if ((iIntValue & i) != 0) {
+                ShortcutKey shortcutModifierKey = toShortcutModifierKey(iIntValue, keyGlyphMap);
                 if (shortcutModifierKey == null) {
                     break;
                 }
                 arrayList.add(shortcutModifierKey);
-                i &= ~intValue;
+                i &= ~iIntValue;
             }
         }
         return null;
@@ -234,7 +223,7 @@ public final class ShortcutCategoriesUtils {
         shortcutHelperKeys.getClass();
         Function1 function1 = (Function1) ShortcutHelperKeys.specialKeyLabels.get(Integer.valueOf(i));
         if (function1 != null) {
-            return new ShortcutKey.Text((String) function1.mo779invoke(this.context));
+            return new ShortcutKey.Text((String) function1.mo781invoke(this.context));
         }
         char displayLabel = keyCharacterMap.getDisplayLabel(i);
         if (displayLabel != 0) {
@@ -256,7 +245,7 @@ public final class ShortcutCategoriesUtils {
         ShortcutHelperKeys.INSTANCE.getClass();
         Function1 function1 = (Function1) ShortcutHelperKeys.modifierLabels.get(Integer.valueOf(i));
         if (function1 != null) {
-            return new ShortcutKey.Text((String) function1.mo779invoke(this.context));
+            return new ShortcutKey.Text((String) function1.mo781invoke(this.context));
         }
         Log.wtf("TAG", "Couldn't find label or icon for modifier " + i);
         return null;
@@ -266,14 +255,14 @@ public final class ShortcutCategoriesUtils {
         ArrayList arrayList = new ArrayList();
         Iterator it = SUPPORTED_MODIFIERS.iterator();
         while (it.hasNext()) {
-            int intValue = ((Number) it.next()).intValue();
-            if ((intValue & i) != 0) {
-                ShortcutKey shortcutModifierKey = toShortcutModifierKey(intValue, keyGlyphMap);
+            int iIntValue = ((Number) it.next()).intValue();
+            if ((iIntValue & i) != 0) {
+                ShortcutKey shortcutModifierKey = toShortcutModifierKey(iIntValue, keyGlyphMap);
                 if (shortcutModifierKey == null) {
                     return null;
                 }
                 arrayList.add(shortcutModifierKey);
-                i &= ~intValue;
+                i &= ~iIntValue;
             }
         }
         return arrayList;

@@ -118,17 +118,17 @@ public final class WindowInsets {
 
     static Insets getInsets(Insets[] insetsArr, int i) {
         Insets insets;
-        Insets insets2 = null;
+        Insets insetsMax = null;
         for (int i2 = 1; i2 <= 512; i2 <<= 1) {
             if ((i & i2) != 0 && (insets = insetsArr[Type.indexOf(i2)]) != null) {
-                if (insets2 == null) {
-                    insets2 = Insets.max(Insets.NONE, insets);
+                if (insetsMax == null) {
+                    insetsMax = Insets.max(Insets.NONE, insets);
                 } else {
-                    insets2 = Insets.max(insets2, insets);
+                    insetsMax = Insets.max(insetsMax, insets);
                 }
             }
         }
-        return insets2 == null ? Insets.NONE : insets2;
+        return insetsMax == null ? Insets.NONE : insetsMax;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -162,9 +162,9 @@ public final class WindowInsets {
         boolean[] zArr = new boolean[10];
         if (insetsArr != null) {
             for (int i = 1; i <= 512; i <<= 1) {
-                int indexOf = Type.indexOf(i);
-                if (!Insets.NONE.equals(insetsArr[indexOf])) {
-                    zArr[indexOf] = true;
+                int iIndexOf = Type.indexOf(i);
+                if (!Insets.NONE.equals(insetsArr[iIndexOf])) {
+                    zArr[iIndexOf] = true;
                 }
             }
         }
@@ -552,13 +552,13 @@ public final class WindowInsets {
     }
 
     public WindowInsets insetUnchecked(int i, int i2, int i3, int i4) {
-        DisplayCutout inset;
+        DisplayCutout displayCutoutInset;
         DisplayCutout displayCutout;
-        RoundedCorners inset2;
+        RoundedCorners roundedCornersInset;
         int i5;
-        Rect[][] insetBoundingRects;
-        Insets[] insetInsets = this.mSystemWindowInsetsConsumed ? null : insetInsets(this.mTypeInsetsMap, i, i2, i3, i4);
-        Insets[] insetInsets2 = this.mStableInsetsConsumed ? null : insetInsets(this.mTypeMaxInsetsMap, i, i2, i3, i4);
+        Rect[][] rectArrInsetBoundingRects;
+        Insets[] insetsArrInsetInsets = this.mSystemWindowInsetsConsumed ? null : insetInsets(this.mTypeInsetsMap, i, i2, i3, i4);
+        Insets[] insetsArrInsetInsets2 = this.mStableInsetsConsumed ? null : insetInsets(this.mTypeMaxInsetsMap, i, i2, i3, i4);
         boolean[] zArr = this.mTypeVisibilityMap;
         boolean z = this.mIsRound;
         int i6 = this.mForceConsumingTypes;
@@ -570,32 +570,32 @@ public final class WindowInsets {
         } else {
             DisplayCutout displayCutout2 = this.mDisplayCutout;
             if (displayCutout2 == null) {
-                inset = DisplayCutout.NO_CUTOUT;
+                displayCutoutInset = DisplayCutout.NO_CUTOUT;
             } else {
-                inset = displayCutout2.inset(i, i2, i3, i4);
+                displayCutoutInset = displayCutout2.inset(i, i2, i3, i4);
             }
-            displayCutout = inset;
+            displayCutout = displayCutoutInset;
         }
         RoundedCorners roundedCorners = this.mRoundedCorners;
         if (roundedCorners == null) {
-            inset2 = RoundedCorners.NO_ROUNDED_CORNERS;
+            roundedCornersInset = RoundedCorners.NO_ROUNDED_CORNERS;
         } else {
-            inset2 = roundedCorners.inset(i, i2, i3, i4);
+            roundedCornersInset = roundedCorners.inset(i, i2, i3, i4);
         }
-        RoundedCorners roundedCorners2 = inset2;
+        RoundedCorners roundedCorners2 = roundedCornersInset;
         PrivacyIndicatorBounds privacyIndicatorBounds = this.mPrivacyIndicatorBounds;
-        PrivacyIndicatorBounds inset3 = privacyIndicatorBounds == null ? null : privacyIndicatorBounds.inset(i, i2, i3, i4);
+        PrivacyIndicatorBounds privacyIndicatorBoundsInset = privacyIndicatorBounds == null ? null : privacyIndicatorBounds.inset(i, i2, i3, i4);
         DisplayShape displayShape = this.mDisplayShape;
         int i9 = this.mCompatInsetsTypes;
         boolean z3 = this.mCompatIgnoreVisibility;
         if (this.mSystemWindowInsetsConsumed) {
             i5 = i7;
-            insetBoundingRects = null;
+            rectArrInsetBoundingRects = null;
         } else {
             i5 = i7;
-            insetBoundingRects = insetBoundingRects(this.mTypeBoundingRectsMap, i, i2, i3, i4, this.mFrameWidth, this.mFrameHeight);
+            rectArrInsetBoundingRects = insetBoundingRects(this.mTypeBoundingRectsMap, i, i2, i3, i4, this.mFrameWidth, this.mFrameHeight);
         }
-        return new WindowInsets(insetInsets, insetInsets2, zArr, z, i6, z2, i5, i8, displayCutout, roundedCorners2, inset3, displayShape, i9, z3, insetBoundingRects, this.mStableInsetsConsumed ? null : insetBoundingRects(this.mTypeMaxBoundingRectsMap, i, i2, i3, i4, this.mFrameWidth, this.mFrameHeight), Math.max(0, (this.mFrameWidth - i) - i3), Math.max(0, (this.mFrameHeight - i2) - i4));
+        return new WindowInsets(insetsArrInsetInsets, insetsArrInsetInsets2, zArr, z, i6, z2, i5, i8, displayCutout, roundedCorners2, privacyIndicatorBoundsInset, displayShape, i9, z3, rectArrInsetBoundingRects, this.mStableInsetsConsumed ? null : insetBoundingRects(this.mTypeMaxBoundingRectsMap, i, i2, i3, i4, this.mFrameWidth, this.mFrameHeight), Math.max(0, (this.mFrameWidth - i) - i3), Math.max(0, (this.mFrameHeight - i2) - i4));
     }
 
     public boolean equals(Object obj) {
@@ -616,27 +616,27 @@ public final class WindowInsets {
     }
 
     private static Insets[] insetInsets(Insets[] insetsArr, int i, int i2, int i3, int i4) {
-        Insets insetInsets;
+        Insets insetsInsetInsets;
         boolean z = false;
         for (int i5 = 0; i5 < 10; i5++) {
             Insets insets = insetsArr[i5];
-            if (insets != null && (insetInsets = insetInsets(insets, i, i2, i3, i4)) != insets) {
+            if (insets != null && (insetsInsetInsets = insetInsets(insets, i, i2, i3, i4)) != insets) {
                 if (!z) {
                     insetsArr = (Insets[]) insetsArr.clone();
                     z = true;
                 }
-                insetsArr[i5] = insetInsets;
+                insetsArr[i5] = insetsInsetInsets;
             }
         }
         return insetsArr;
     }
 
     static Insets insetInsets(Insets insets, int i, int i2, int i3, int i4) {
-        int max = Math.max(0, insets.left - i);
-        int max2 = Math.max(0, insets.top - i2);
-        int max3 = Math.max(0, insets.right - i3);
-        int max4 = Math.max(0, insets.bottom - i4);
-        return (max == insets.left && max2 == insets.top && max3 == insets.right && max4 == insets.bottom) ? insets : Insets.of(max, max2, max3, max4);
+        int iMax = Math.max(0, insets.left - i);
+        int iMax2 = Math.max(0, insets.top - i2);
+        int iMax3 = Math.max(0, insets.right - i3);
+        int iMax4 = Math.max(0, insets.bottom - i4);
+        return (iMax == insets.left && iMax2 == insets.top && iMax3 == insets.right && iMax4 == insets.bottom) ? insets : Insets.of(iMax, iMax2, iMax3, iMax4);
     }
 
     static Rect[][] insetBoundingRects(Rect[][] rectArr, int i, int i2, int i3, int i4, int i5, int i6) {
@@ -647,13 +647,13 @@ public final class WindowInsets {
         for (int i7 = 0; i7 < 10; i7++) {
             Rect[] rectArr2 = rectArr[i7];
             if (rectArr2 != null) {
-                Rect[] insetBoundingRects = insetBoundingRects(rectArr2, i, i2, i3, i4, i5, i6);
-                if (!Arrays.equals(insetBoundingRects, rectArr2)) {
+                Rect[] rectArrInsetBoundingRects = insetBoundingRects(rectArr2, i, i2, i3, i4, i5, i6);
+                if (!Arrays.equals(rectArrInsetBoundingRects, rectArr2)) {
                     if (!z) {
                         rectArr = (Rect[][]) rectArr.clone();
                         z = true;
                     }
-                    rectArr[i7] = insetBoundingRects;
+                    rectArr[i7] = rectArrInsetBoundingRects;
                 }
             }
         }
@@ -663,9 +663,9 @@ public final class WindowInsets {
     static Rect[] insetBoundingRects(Rect[] rectArr, int i, int i2, int i3, int i4, int i5, int i6) {
         ArrayList arrayList = new ArrayList();
         for (Rect rect : rectArr) {
-            Rect insetRect = insetRect(rect, i, i2, i3, i4, i5, i6);
-            if (insetRect != null) {
-                arrayList.add(insetRect);
+            Rect rectInsetRect = insetRect(rect, i, i2, i3, i4, i5, i6);
+            if (rectInsetRect != null) {
+                arrayList.add(rectInsetRect);
             }
         }
         return (Rect[]) arrayList.toArray(new Rect[0]);
@@ -692,10 +692,10 @@ public final class WindowInsets {
         int i = this.mCompatInsetsTypes & (-5);
         this.mCompatInsetsTypes = i;
         WindowInsets windowInsets = new WindowInsets(this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mConsumedCaptionType, this.mSuppressScrimTypes, this.mDisplayCutout, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, i, this.mCompatIgnoreVisibility, this.mTypeBoundingRectsMap, this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight);
-        int indexOf = Type.indexOf(4);
-        windowInsets.mTypeInsetsMap[indexOf] = null;
-        windowInsets.mTypeMaxInsetsMap[indexOf] = null;
-        windowInsets.mTypeVisibilityMap[indexOf] = false;
+        int iIndexOf = Type.indexOf(4);
+        windowInsets.mTypeInsetsMap[iIndexOf] = null;
+        windowInsets.mTypeMaxInsetsMap[iIndexOf] = null;
+        windowInsets.mTypeVisibilityMap[iIndexOf] = false;
         return windowInsets;
     }
 
@@ -828,11 +828,11 @@ public final class WindowInsets {
             }
             this.mDisplayCutout = displayCutout;
             if (!displayCutout.isEmpty()) {
-                Insets of = Insets.of(this.mDisplayCutout.getSafeInsets());
-                int indexOf = Type.indexOf(128);
-                this.mTypeInsetsMap[indexOf] = of;
-                this.mTypeMaxInsetsMap[indexOf] = of;
-                this.mTypeVisibilityMap[indexOf] = true;
+                Insets insetsOf = Insets.of(this.mDisplayCutout.getSafeInsets());
+                int iIndexOf = Type.indexOf(128);
+                this.mTypeInsetsMap[iIndexOf] = insetsOf;
+                this.mTypeMaxInsetsMap[iIndexOf] = insetsOf;
+                this.mTypeVisibilityMap[iIndexOf] = true;
             }
             return this;
         }
@@ -1102,10 +1102,10 @@ public final class WindowInsets {
     public WindowInsets removeCutoutInsets(boolean z) {
         this.mCompatInsetsTypes &= PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE;
         WindowInsets windowInsets = new WindowInsets(this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mConsumedCaptionType, this.mSuppressScrimTypes, DisplayCutout.NO_CUTOUT, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, this.mCompatInsetsTypes, this.mCompatIgnoreVisibility, this.mTypeBoundingRectsMap, this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight, (CoreRune.FW_CAN_DISPATCH_UDC_CUTOUT && z) ? this.mDisplayCutoutForUdc : null);
-        int indexOf = Type.indexOf(128);
-        windowInsets.mTypeInsetsMap[indexOf] = null;
-        windowInsets.mTypeMaxInsetsMap[indexOf] = null;
-        windowInsets.mTypeVisibilityMap[indexOf] = false;
+        int iIndexOf = Type.indexOf(128);
+        windowInsets.mTypeInsetsMap[iIndexOf] = null;
+        windowInsets.mTypeMaxInsetsMap[iIndexOf] = null;
+        windowInsets.mTypeVisibilityMap[iIndexOf] = false;
         return windowInsets;
     }
 }

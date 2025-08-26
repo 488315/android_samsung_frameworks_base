@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SharedNotificationContainerInteractor {
     public final StateFlowImpl _bottomPosition;
@@ -35,7 +34,6 @@ public final class SharedNotificationContainerInteractor {
     public final ReadonlyStateFlow topPosition;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 useExtraShelfSpace;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConfigurationBasedDimensions {
         public final int keyguardSplitShadeTopMargin;
         public final int marginBottom;
@@ -84,25 +82,25 @@ public final class SharedNotificationContainerInteractor {
     public SharedNotificationContainerInteractor(Context context, Lazy lazy, ConfigurationInteractor configurationInteractor, KeyguardInteractor keyguardInteractor, DeviceEntryUdfpsInteractor deviceEntryUdfpsInteractor, Lazy lazy2) {
         this.context = context;
         this.splitShadeStateController = lazy;
-        Float valueOf = Float.valueOf(0.0f);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(valueOf);
-        this._topPosition = MutableStateFlow;
-        this.topPosition = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(valueOf);
-        this._bottomPosition = MutableStateFlow2;
-        this.bottomPosition = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(0L);
-        this._notificationStackChanged = MutableStateFlow3;
-        this.notificationStackChanged = FlowKt.debounce(MutableStateFlow3, 20L);
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(0);
-        this._naviBarHeight = MutableStateFlow4;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow4);
-        this.naviBarHeight = asStateFlow;
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(0);
-        this._nsslWidth = MutableStateFlow5;
-        ReadonlyStateFlow asStateFlow2 = FlowKt.asStateFlow(MutableStateFlow5);
-        this.nsslWidth = asStateFlow2;
-        this.configurationBasedDimensions = FlowKt.distinctUntilChanged(FlowKt.combine(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, asStateFlow, asStateFlow2, new SharedNotificationContainerInteractor$configurationBasedDimensions$1(this, lazy2, null)));
+        Float fValueOf = Float.valueOf(0.0f);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(fValueOf);
+        this._topPosition = stateFlowImplMutableStateFlow;
+        this.topPosition = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._bottomPosition = stateFlowImplMutableStateFlow2;
+        this.bottomPosition = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(0L);
+        this._notificationStackChanged = stateFlowImplMutableStateFlow3;
+        this.notificationStackChanged = FlowKt.debounce(stateFlowImplMutableStateFlow3, 20L);
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(0);
+        this._naviBarHeight = stateFlowImplMutableStateFlow4;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
+        this.naviBarHeight = readonlyStateFlowAsStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(0);
+        this._nsslWidth = stateFlowImplMutableStateFlow5;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow2 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow5);
+        this.nsslWidth = readonlyStateFlowAsStateFlow2;
+        this.configurationBasedDimensions = FlowKt.distinctUntilChanged(FlowKt.combine(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, readonlyStateFlowAsStateFlow, readonlyStateFlowAsStateFlow2, new SharedNotificationContainerInteractor$configurationBasedDimensions$1(this, lazy2, null)));
         this.useExtraShelfSpace = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardInteractor.ambientIndicationVisible, deviceEntryUdfpsInteractor.isUdfpsSupported, new SharedNotificationContainerInteractor$useExtraShelfSpace$1(null));
     }
 }

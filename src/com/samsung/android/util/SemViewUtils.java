@@ -34,18 +34,18 @@ public class SemViewUtils {
         }
         float f6 = f4 / 2.0f;
         float f7 = f5 / 2.0f;
-        float min = Math.min(f6, f7);
-        float min2 = Math.min(Math.max(f, 0.0f), min);
-        float f8 = min2 / min;
-        float min3 = f8 > 0.5f ? 1.0f - (Math.min(1.0f, (f8 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
-        float min4 = ((double) f8) > 0.6d ? 1.0f + (Math.min(1.0f, (f8 - 0.6f) / 0.3f) * 0.042454004f) : 1.0f;
+        float fMin = Math.min(f6, f7);
+        float fMin2 = Math.min(Math.max(f, 0.0f), fMin);
+        float f8 = fMin2 / fMin;
+        float fMin3 = f8 > 0.5f ? 1.0f - (Math.min(1.0f, (f8 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
+        float fMin4 = ((double) f8) > 0.6d ? 1.0f + (Math.min(1.0f, (f8 - 0.6f) / 0.3f) * 0.042454004f) : 1.0f;
         path2.moveTo(f2 + f6, f3);
-        float f9 = min2 / 100.0f;
-        float f10 = 128.19f * f9 * min3;
+        float f9 = fMin2 / 100.0f;
+        float f10 = 128.19f * f9 * fMin3;
         float f11 = f4 - f10;
         path2.lineTo(f2 + Math.max(f6, f11), f3);
         float f12 = f2 + f4;
-        float f13 = 83.62f * f9 * min4;
+        float f13 = 83.62f * f9 * fMin4;
         float f14 = f12 - f13;
         float f15 = f9 * 67.45f;
         float f16 = f12 - f15;

@@ -17,7 +17,6 @@ import com.android.wm.shell.desktopmode.DesktopWallpaperActivity;
 import com.android.wm.shell.desktopmode.desktopwallpaperactivity.DesktopWallpaperActivityTokenProvider;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransitionUtil;
-import com.android.wm.shell.shared.desktopmode.DesktopModeCompatPolicy;
 import com.android.wm.shell.shared.desktopmode.DesktopState;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.sysui.ShellInit;
@@ -28,19 +27,16 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksTransitionObserver implements Transitions.TransitionObserver {
     public final BackAnimationController backAnimationController;
     public final DesktopMixedTransitionHandler desktopMixedTransitionHandler;
-    public final DesktopModeCompatPolicy desktopModeCompatPolicy;
     public final DesktopUserRepositories desktopUserRepositories;
     public final DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider;
     public final ShellTaskOrganizer shellTaskOrganizer;
     public CloseWallpaperTransition transitionToCloseWallpaper;
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CloseWallpaperTransition {
         public final int displayId;
         public final IBinder transition;
@@ -70,8 +66,7 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
         }
     }
 
-    public DesktopTasksTransitionObserver(DesktopModeCompatPolicy desktopModeCompatPolicy, DesktopUserRepositories desktopUserRepositories, Transitions transitions, ShellTaskOrganizer shellTaskOrganizer, DesktopMixedTransitionHandler desktopMixedTransitionHandler, BackAnimationController backAnimationController, DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider, DesktopState desktopState, ShellInit shellInit) {
-        this.desktopModeCompatPolicy = desktopModeCompatPolicy;
+    public DesktopTasksTransitionObserver(DesktopUserRepositories desktopUserRepositories, Transitions transitions, ShellTaskOrganizer shellTaskOrganizer, DesktopMixedTransitionHandler desktopMixedTransitionHandler, BackAnimationController backAnimationController, DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider, DesktopState desktopState, ShellInit shellInit) {
         this.desktopUserRepositories = desktopUserRepositories;
         this.transitions = transitions;
         this.shellTaskOrganizer = shellTaskOrganizer;
@@ -93,10 +88,7 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
     }
 
     public final boolean allowInDesk(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        if (this.desktopModeCompatPolicy.isTopActivityExemptFromDesktopWindowing(runningTaskInfo)) {
-            return this.desktopUserRepositories.getProfile(runningTaskInfo.userId).getAllDeskIds().contains(Integer.valueOf(runningTaskInfo.parentTaskId));
-        }
-        return false;
+        return runningTaskInfo.getWindowingMode() == 1 && this.desktopUserRepositories.getProfile(runningTaskInfo.userId).getAllDeskIds().contains(Integer.valueOf(runningTaskInfo.parentTaskId));
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
@@ -105,9 +97,9 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
         if (Intrinsics.areEqual(closeWallpaperTransition != null ? closeWallpaperTransition.transition : null, iBinder)) {
             WindowContainerToken token = this.desktopWallpaperActivityTokenProvider.getToken(closeWallpaperTransition.displayId);
             if (token != null) {
-                boolean isTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
+                boolean zIsTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
                 Transitions transitions = this.transitions;
-                if (isTrue) {
+                if (zIsTrue) {
                     transitions.startTransition(4, new WindowContainerTransaction().reorder(token, false), null);
                 } else {
                     transitions.startTransition(2, new WindowContainerTransaction().removeTask(token), null);
@@ -117,21 +109,25 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:74:0x017e  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
         Integer num;
         boolean z;
-        boolean isTrue = DesktopModeFlags.INCLUDE_TOP_TRANSPARENT_FULLSCREEN_TASK_IN_DESKTOP_HEURISTIC.isTrue();
+        boolean zIsTrue = DesktopModeFlags.INCLUDE_TOP_TRANSPARENT_FULLSCREEN_TASK_IN_DESKTOP_HEURISTIC.isTrue();
         boolean z2 = false;
         DesktopUserRepositories desktopUserRepositories = this.desktopUserRepositories;
-        if (isTrue && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODALS_POLICY.isTrue()) {
+        if (zIsTrue && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODALS_POLICY.isTrue()) {
             for (TransitionInfo.Change change : transitionInfo.getChanges()) {
                 ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
                 if (taskInfo != null) {
                     DesktopRepository profile = desktopUserRepositories.getProfile(taskInfo.userId);
                     int i = taskInfo.displayId;
                     DesktopRepository.DesktopData desktopData = profile.desktopData;
-                    Integer num2 = (Integer) SequencesKt___SequencesKt.firstOrNull(SequencesKt___SequencesKt.mapNotNull(desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda2(2)));
+                    Integer num2 = (Integer) SequencesKt___SequencesKt.firstOrNull(SequencesKt___SequencesKt.mapNotNull(desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda0(4)));
                     if (num2 == null) {
                         break;
                     }
@@ -141,7 +137,7 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
                     boolean z4 = i2 != num2.intValue() && TransitionUtil.isOpeningMode(mode);
                     if (z3 || z4) {
                         DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(i);
-                        DesktopRepository.logD("Top transparent fullscreen task cleared for display: taskId=%d, displayId=%d", activeDesk != null ? activeDesk.topTransparentFullscreenTaskId : null, Integer.valueOf(i));
+                        profile.logD("Top transparent fullscreen task cleared for display: taskId=%d, displayId=%d", activeDesk != null ? activeDesk.topTransparentFullscreenTaskId : null, Integer.valueOf(i));
                         DesktopRepository.Desk activeDesk2 = desktopData.getActiveDesk(i);
                         if (activeDesk2 != null) {
                             activeDesk2.topTransparentFullscreenTaskId = null;
@@ -150,9 +146,9 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
                 }
             }
         }
-        boolean isTrue2 = DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_WALLPAPER_ACTIVITY.isTrue();
+        boolean zIsTrue2 = DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_WALLPAPER_ACTIVITY.isTrue();
         DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider = this.desktopWallpaperActivityTokenProvider;
-        if (isTrue2) {
+        if (zIsTrue2) {
             for (TransitionInfo.Change change2 : transitionInfo.getChanges()) {
                 ActivityManager.RunningTaskInfo taskInfo2 = change2.getTaskInfo();
                 if (taskInfo2 != null) {
@@ -192,19 +188,11 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
                                 DesktopRepository.Desk activeDesk3 = profile2.desktopData.getActiveDesk(taskInfo3.displayId);
                                 if (activeDesk3 == null || activeDesk3.visibleTasks.size() != 1 || (num = (Integer) CollectionsKt___CollectionsKt.single(activeDesk3.visibleTasks)) == null || num.intValue() != i5) {
                                     z = false;
-                                    profile2.minimizeTask(taskInfo3.displayId, taskInfo3.taskId);
-                                    ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, taskInfo3.taskId, z));
                                 }
-                                z = true;
                                 profile2.minimizeTask(taskInfo3.displayId, taskInfo3.taskId);
                                 ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, taskInfo3.taskId, z));
                             } else {
-                                if (profile2.getVisibleTaskCount(taskInfo3.displayId) != 1) {
-                                    z = z2;
-                                    profile2.minimizeTask(taskInfo3.displayId, taskInfo3.taskId);
-                                    ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, taskInfo3.taskId, z));
-                                }
-                                z = true;
+                                z = profile2.getVisibleTaskCount(taskInfo3.displayId) == 1 ? true : z2;
                                 profile2.minimizeTask(taskInfo3.displayId, taskInfo3.taskId);
                                 ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, taskInfo3.taskId, z));
                             }
@@ -213,7 +201,7 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
                     z2 = false;
                 }
             } else if (transitionInfo.getType() == 2) {
-                Integer num3 = null;
+                Integer numValueOf = null;
                 boolean z5 = false;
                 for (TransitionInfo.Change change4 : transitionInfo.getChanges()) {
                     ActivityManager.RunningTaskInfo taskInfo4 = change4.getTaskInfo();
@@ -224,22 +212,22 @@ public final class DesktopTasksTransitionObserver implements Transitions.Transit
                                 z5 = true;
                             }
                         }
-                        if (change4.getMode() == 2 && num3 == null) {
+                        if (change4.getMode() == 2 && numValueOf == null) {
                             DesktopRepository profile3 = desktopUserRepositories.getProfile(taskInfo4.userId);
                             if (profile3.isAnyDeskActive(taskInfo4.displayId) && (taskInfo4.getWindowingMode() == 5 || allowInDesk(taskInfo4))) {
                                 int i6 = this.backAnimationController.mBackTransitionObserver.mFocusedTaskId;
                                 int i7 = taskInfo4.taskId;
                                 if (i6 == i7 && !profile3.isClosingTask(i7)) {
                                     profile3.minimizeTask(taskInfo4.displayId, taskInfo4.taskId);
-                                    num3 = Integer.valueOf(taskInfo4.taskId);
+                                    numValueOf = Integer.valueOf(taskInfo4.taskId);
                                 }
                             }
-                            num3 = null;
+                            numValueOf = null;
                         }
                     }
                 }
-                if (num3 != null) {
-                    ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, num3.intValue(), z5));
+                if (numValueOf != null) {
+                    ((ArrayList) desktopMixedTransitionHandler.pendingMixedTransitions).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Minimize(iBinder, numValueOf.intValue(), z5));
                 }
             }
             if (TransitionUtil.isOpeningType(transitionInfo.getType()) || DesktopModeTransitionTypes.isExitDesktopModeTransition(transitionInfo.getType())) {

@@ -22,10 +22,11 @@ import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.ForwardingListener;
 import androidx.appcompat.widget.TooltipCompatHandler;
+import androidx.core.view.ViewCompat;
 import androidx.reflect.widget.SeslTextViewReflector;
 import com.android.systemui.R;
+import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActionMenuItemView extends AppCompatTextView implements MenuView.ItemView, View.OnClickListener, ActionMenuView.ActionMenuChildView, View.OnLongClickListener {
     public final Drawable initBackgroundDrawable;
@@ -42,7 +43,6 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
     public int mSavedPaddingLeft;
     public CharSequence mTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActionMenuItemForwardingListener extends ForwardingListener {
         public ActionMenuItemForwardingListener() {
             super(ActionMenuItemView.this);
@@ -66,7 +66,6 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PopupCallback {
         public abstract MenuPopup getPopup();
     }
@@ -95,85 +94,50 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
         return !TextUtils.isEmpty(getText());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0042  */
     @Override // androidx.appcompat.view.menu.MenuView.ItemView
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initialize(androidx.appcompat.view.menu.MenuItemImpl r7) {
-        /*
-            r6 = this;
-            r6.mItemData = r7
-            android.graphics.drawable.Drawable r0 = r7.getIcon()
-            r6.mIcon = r0
-            r1 = 0
-            if (r0 == 0) goto L2b
-            int r2 = r0.getIntrinsicWidth()
-            int r3 = r0.getIntrinsicHeight()
-            int r4 = r6.mMaxIconSize
-            if (r2 <= r4) goto L1e
-            float r5 = (float) r4
-            float r2 = (float) r2
-            float r5 = r5 / r2
-            float r2 = (float) r3
-            float r2 = r2 * r5
-            int r3 = (int) r2
-            r2 = r4
-        L1e:
-            if (r3 <= r4) goto L27
-            float r5 = (float) r4
-            float r3 = (float) r3
-            float r5 = r5 / r3
-            float r2 = (float) r2
-            float r2 = r2 * r5
-            int r2 = (int) r2
-            goto L28
-        L27:
-            r4 = r3
-        L28:
-            r0.setBounds(r1, r1, r2, r4)
-        L2b:
-            r2 = 0
-            r6.setCompoundDrawables(r0, r2, r2, r2)
-            boolean r3 = r6.hasText()
-            if (r3 == 0) goto L42
-            java.util.WeakHashMap r3 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            int r3 = r6.getLayoutDirection()
-            r4 = 1
-            if (r3 != r4) goto L42
-            r6.setCompoundDrawables(r2, r2, r0, r2)
-            goto L45
-        L42:
-            r6.setCompoundDrawables(r0, r2, r2, r2)
-        L45:
-            r6.updateTextButtonVisibility()
-            java.lang.CharSequence r0 = r7.getTitleCondensed()
-            r6.mTitle = r0
-            r6.setContentDescription(r0)
-            r6.updateTextButtonVisibility()
-            int r0 = r7.mId
-            r6.setId(r0)
-            boolean r0 = r7.isVisible()
-            if (r0 == 0) goto L60
-            goto L62
-        L60:
-            r1 = 8
-        L62:
-            r6.setVisibility(r1)
-            boolean r0 = r7.isEnabled()
-            r6.setEnabled(r0)
-            boolean r7 = r7.hasSubMenu()
-            if (r7 == 0) goto L7d
-            androidx.appcompat.view.menu.ActionMenuItemView$ActionMenuItemForwardingListener r7 = r6.mForwardingListener
-            if (r7 != 0) goto L7d
-            androidx.appcompat.view.menu.ActionMenuItemView$ActionMenuItemForwardingListener r7 = new androidx.appcompat.view.menu.ActionMenuItemView$ActionMenuItemForwardingListener
-            r7.<init>()
-            r6.mForwardingListener = r7
-        L7d:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.view.menu.ActionMenuItemView.initialize(androidx.appcompat.view.menu.MenuItemImpl):void");
+    public final void initialize(MenuItemImpl menuItemImpl) {
+        this.mItemData = menuItemImpl;
+        Drawable icon = menuItemImpl.getIcon();
+        this.mIcon = icon;
+        if (icon != null) {
+            int intrinsicWidth = icon.getIntrinsicWidth();
+            int intrinsicHeight = icon.getIntrinsicHeight();
+            int i = this.mMaxIconSize;
+            if (intrinsicWidth > i) {
+                intrinsicHeight = (int) (intrinsicHeight * (i / intrinsicWidth));
+                intrinsicWidth = i;
+            }
+            if (intrinsicHeight > i) {
+                intrinsicWidth = (int) (intrinsicWidth * (i / intrinsicHeight));
+            } else {
+                i = intrinsicHeight;
+            }
+            icon.setBounds(0, 0, intrinsicWidth, i);
+        }
+        setCompoundDrawables(icon, null, null, null);
+        if (hasText()) {
+            WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+            if (getLayoutDirection() == 1) {
+                setCompoundDrawables(null, null, icon, null);
+            } else {
+                setCompoundDrawables(icon, null, null, null);
+            }
+        }
+        updateTextButtonVisibility();
+        CharSequence titleCondensed = menuItemImpl.getTitleCondensed();
+        this.mTitle = titleCondensed;
+        setContentDescription(titleCondensed);
+        updateTextButtonVisibility();
+        setId(menuItemImpl.mId);
+        setVisibility(menuItemImpl.isVisible() ? 0 : 8);
+        setEnabled(menuItemImpl.isEnabled());
+        if (menuItemImpl.hasSubMenu() && this.mForwardingListener == null) {
+            this.mForwardingListener = new ActionMenuItemForwardingListener();
+        }
     }
 
     @Override // androidx.appcompat.widget.ActionMenuView.ActionMenuChildView
@@ -222,27 +186,27 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
     @Override // androidx.appcompat.widget.AppCompatTextView, android.widget.TextView, android.view.View
     public final void onMeasure(int i, int i2) {
         int i3;
-        boolean hasText = hasText();
-        if (hasText && (i3 = this.mSavedPaddingLeft) >= 0) {
+        boolean zHasText = hasText();
+        if (zHasText && (i3 = this.mSavedPaddingLeft) >= 0) {
             super.setPadding(i3, getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
         super.onMeasure(i, i2);
         int mode = View.MeasureSpec.getMode(i);
         int size = View.MeasureSpec.getSize(i);
         int measuredWidth = getMeasuredWidth();
-        int min = mode == Integer.MIN_VALUE ? Math.min(size, this.mMinWidth) : this.mMinWidth;
-        if (mode != 1073741824 && this.mMinWidth > 0 && measuredWidth < min) {
-            super.onMeasure(View.MeasureSpec.makeMeasureSpec(min, 1073741824), i2);
+        int iMin = mode == Integer.MIN_VALUE ? Math.min(size, this.mMinWidth) : this.mMinWidth;
+        if (mode != 1073741824 && this.mMinWidth > 0 && measuredWidth < iMin) {
+            super.onMeasure(View.MeasureSpec.makeMeasureSpec(iMin, 1073741824), i2);
         }
-        if (hasText || this.mIcon == null) {
+        if (zHasText || this.mIcon == null) {
             return;
         }
         int measuredWidth2 = getMeasuredWidth();
-        int width = this.mIcon.getBounds().width();
+        int iWidth = this.mIcon.getBounds().width();
         if (this.mIsChangedRelativePadding) {
             return;
         }
-        super.setPadding((measuredWidth2 - width) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+        super.setPadding((measuredWidth2 - iWidth) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
     }
 
     @Override // android.view.View
@@ -332,44 +296,44 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
     }
 
     public final void updateTextButtonVisibility() {
-        boolean seslIsTextButtonVisible = seslIsTextButtonVisible();
-        setText(seslIsTextButtonVisible ? this.mTitle : null);
-        if (seslIsTextButtonVisible) {
+        boolean zSeslIsTextButtonVisible = seslIsTextButtonVisible();
+        setText(zSeslIsTextButtonVisible ? this.mTitle : null);
+        if (zSeslIsTextButtonVisible) {
             setBackgroundResource(SeslMisc.isLightTheme(getContext()) ? R.drawable.sesl_action_bar_item_text_background_light : R.drawable.sesl_action_bar_item_text_background_dark);
         } else {
             super.setBackground(this.initBackgroundDrawable);
         }
         CharSequence charSequence = this.mItemData.mContentDescription;
         if (TextUtils.isEmpty(charSequence)) {
-            setContentDescription(seslIsTextButtonVisible ? null : this.mItemData.mTitle);
+            setContentDescription(zSeslIsTextButtonVisible ? null : this.mItemData.mTitle);
         } else {
             setContentDescription(charSequence);
         }
         CharSequence charSequence2 = this.mItemData.mTooltipText;
         if (TextUtils.isEmpty(charSequence2)) {
-            setTooltipText(seslIsTextButtonVisible ? null : this.mItemData.mTitle);
+            setTooltipText(zSeslIsTextButtonVisible ? null : this.mItemData.mTitle);
         } else {
             setTooltipText(charSequence2);
         }
         if (this.mDefaultTextSize > 0.0f) {
             setTextSize(1, this.mDefaultTextSize * Math.min(getResources().getConfiguration().fontScale, 1.2f));
         }
-        setText(seslIsTextButtonVisible ? this.mTitle : null);
+        setText(zSeslIsTextButtonVisible ? this.mTitle : null);
     }
 
     public ActionMenuItemView(Context context, AttributeSet attributeSet) {
         this(context, attributeSet, 0);
     }
 
-    public ActionMenuItemView(Context context, AttributeSet attributeSet, int i) {
+    public ActionMenuItemView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         this.mIsChangedRelativePadding = false;
         this.mDefaultTextSize = 0.0f;
         Resources resources = context.getResources();
         this.mAllowTextWithIcon = shouldAllowTextWithIcon();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionMenuItemView, i, 0);
-        this.mMinWidth = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionMenuItemView, i, 0);
+        this.mMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         this.mMaxIconSize = (int) ((resources.getDisplayMetrics().density * 32.0f) + 0.5f);
         setOnClickListener(this);
         setOnLongClickListener(this);
@@ -377,21 +341,21 @@ public class ActionMenuItemView extends AppCompatTextView implements MenuView.It
         setSaveEnabled(false);
         Resources.Theme theme = context.getTheme();
         int[] iArr = R$styleable.AppCompatTheme;
-        TypedArray obtainStyledAttributes2 = theme.obtainStyledAttributes(null, iArr, 0, 0);
-        int resourceId = obtainStyledAttributes2.getResourceId(26, 0);
-        obtainStyledAttributes2.recycle();
-        TypedArray obtainStyledAttributes3 = context.obtainStyledAttributes(resourceId, R$styleable.TextAppearance);
-        TypedValue peekValue = obtainStyledAttributes3.peekValue(0);
-        obtainStyledAttributes3.recycle();
-        if (peekValue != null) {
-            this.mDefaultTextSize = TypedValue.complexToFloat(peekValue.data);
+        TypedArray typedArrayObtainStyledAttributes2 = theme.obtainStyledAttributes(null, iArr, 0, 0);
+        int resourceId = typedArrayObtainStyledAttributes2.getResourceId(26, 0);
+        typedArrayObtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes3 = context.obtainStyledAttributes(resourceId, R$styleable.TextAppearance);
+        TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes3.peekValue(0);
+        typedArrayObtainStyledAttributes3.recycle();
+        if (typedValuePeekValue != null) {
+            this.mDefaultTextSize = TypedValue.complexToFloat(typedValuePeekValue.data);
         }
         SeslTextViewReflector.semSetButtonShapeEnabled(this, true);
-        TypedArray obtainStyledAttributes4 = context.getTheme().obtainStyledAttributes(null, iArr, 0, 0);
-        int resourceId2 = obtainStyledAttributes4.getResourceId(24, 0);
-        obtainStyledAttributes4.recycle();
-        TypedArray obtainStyledAttributes5 = context.getTheme().obtainStyledAttributes(resourceId2, new int[]{android.R.attr.background});
-        this.initBackgroundDrawable = obtainStyledAttributes5.getDrawable(0);
-        obtainStyledAttributes5.recycle();
+        TypedArray typedArrayObtainStyledAttributes4 = context.getTheme().obtainStyledAttributes(null, iArr, 0, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes4.getResourceId(24, 0);
+        typedArrayObtainStyledAttributes4.recycle();
+        TypedArray typedArrayObtainStyledAttributes5 = context.getTheme().obtainStyledAttributes(resourceId2, new int[]{android.R.attr.background});
+        this.initBackgroundDrawable = typedArrayObtainStyledAttributes5.getDrawable(0);
+        typedArrayObtainStyledAttributes5.recycle();
     }
 }

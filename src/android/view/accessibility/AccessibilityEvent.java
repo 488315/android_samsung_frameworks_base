@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.util.BitUtils;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         CREATOR = new Parcelable.Creator<AccessibilityEvent>() { // from class: android.view.accessibility.AccessibilityEvent.1
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
-            public AccessibilityEvent createFromParcel(Parcel parcel) {
+            public AccessibilityEvent createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
                 AccessibilityEvent accessibilityEvent = new AccessibilityEvent();
                 accessibilityEvent.initFromParcel(parcel);
                 return accessibilityEvent;
@@ -219,9 +220,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         return BitUtils.flagsToString(i, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda2
             @Override // java.util.function.IntFunction
             public final Object apply(int i2) {
-                String singleContentChangeTypeToString;
-                singleContentChangeTypeToString = AccessibilityEvent.singleContentChangeTypeToString(i2);
-                return singleContentChangeTypeToString;
+                return AccessibilityEvent.singleContentChangeTypeToString(i2);
             }
         });
     }
@@ -297,9 +296,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         return BitUtils.flagsToString(i, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda0
             @Override // java.util.function.IntFunction
             public final Object apply(int i2) {
-                String singleSpeechStateChangeTypeToString;
-                singleSpeechStateChangeTypeToString = AccessibilityEvent.singleSpeechStateChangeTypeToString(i2);
-                return singleSpeechStateChangeTypeToString;
+                return AccessibilityEvent.singleSpeechStateChangeTypeToString(i2);
             }
         });
     }
@@ -338,9 +335,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         return BitUtils.flagsToString(i, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda1
             @Override // java.util.function.IntFunction
             public final Object apply(int i2) {
-                String singleWindowChangeTypeToString;
-                singleWindowChangeTypeToString = AccessibilityEvent.singleWindowChangeTypeToString(i2);
-                return singleWindowChangeTypeToString;
+                return AccessibilityEvent.singleWindowChangeTypeToString(i2);
             }
         });
     }
@@ -470,7 +465,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         }
     }
 
-    public void initFromParcel(Parcel parcel) {
+    public void initFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mSealed = parcel.readInt() == 1;
         this.mEventType = parcel.readInt();
         this.mMovementGranularity = parcel.readInt();
@@ -482,10 +477,10 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         this.mEventTime = parcel.readLong();
         this.mConnectionId = parcel.readInt();
         readAccessibilityRecordFromParcel(this, parcel);
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            this.mRecords = new ArrayList<>(readInt);
-            for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        if (i > 0) {
+            this.mRecords = new ArrayList<>(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 AccessibilityRecord accessibilityRecord = new AccessibilityRecord();
                 readAccessibilityRecordFromParcel(accessibilityRecord, parcel);
                 accessibilityRecord.mConnectionId = this.mConnectionId;
@@ -494,7 +489,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         }
     }
 
-    private void readAccessibilityRecordFromParcel(AccessibilityRecord accessibilityRecord, Parcel parcel) {
+    private void readAccessibilityRecordFromParcel(AccessibilityRecord accessibilityRecord, Parcel parcel) throws ClassNotFoundException, IOException {
         accessibilityRecord.mBooleanProperties = parcel.readInt();
         accessibilityRecord.mCurrentItemIndex = parcel.readInt();
         accessibilityRecord.mItemCount = parcel.readInt();
@@ -613,12 +608,12 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         StringBuilder sb = new StringBuilder();
         int i2 = 0;
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
             if (i2 > 0) {
                 sb.append(", ");
             }
-            sb.append(singleEventTypeToString(numberOfTrailingZeros));
+            sb.append(singleEventTypeToString(iNumberOfTrailingZeros));
             i2++;
         }
         if (i2 > 1) {

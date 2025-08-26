@@ -7,14 +7,12 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TrackedCollections {
     private static final long HALFWAY_DELAY = 1800000;
     private static final long MILLIS_IN_MINUTE = 60000;
     private final WeakIdentityHashMap<Collection<?>, CollectionState> mCollections = new WeakIdentityHashMap<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class CollectionState {
         int halfwayCount;
         int lastCount;
@@ -34,10 +32,10 @@ public class TrackedCollections {
         }
 
         public void dump(PrintWriter printWriter) {
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             String str = this.tag;
             long j = this.startUptime;
-            printWriter.format("%s: %.2f (start-30min) / %.2f (30min-now) / %.2f (start-now) (growth rate in #/hour); %d (current size)", str, Float.valueOf(ratePerHour(j, 0, j + TrackedCollections.HALFWAY_DELAY, this.halfwayCount)), Float.valueOf(ratePerHour(this.startUptime + TrackedCollections.HALFWAY_DELAY, this.halfwayCount, uptimeMillis, this.lastCount)), Float.valueOf(ratePerHour(this.startUptime, 0, uptimeMillis, this.lastCount)), Integer.valueOf(this.lastCount));
+            printWriter.format("%s: %.2f (start-30min) / %.2f (30min-now) / %.2f (start-now) (growth rate in #/hour); %d (current size)", str, Float.valueOf(ratePerHour(j, 0, j + TrackedCollections.HALFWAY_DELAY, this.halfwayCount)), Float.valueOf(ratePerHour(this.startUptime + TrackedCollections.HALFWAY_DELAY, this.halfwayCount, jUptimeMillis, this.lastCount)), Float.valueOf(ratePerHour(this.startUptime, 0, jUptimeMillis, this.lastCount)), Integer.valueOf(this.lastCount));
         }
 
         private CollectionState() {
@@ -50,12 +48,10 @@ public class TrackedCollections {
         try {
             for (Map.Entry<WeakReference<Collection<?>>, CollectionState> entry : this.mCollections.entrySet()) {
                 Collection<?> collection = entry.getKey().get();
-                if (predicate != null) {
-                    if (collection != null && predicate.test(collection)) {
-                    }
+                if (predicate == null || (collection != null && predicate.test(collection))) {
+                    entry.getValue().dump(printWriter);
+                    printWriter.println();
                 }
-                entry.getValue().dump(printWriter);
-                printWriter.println();
             }
         } catch (Throwable th) {
             throw th;

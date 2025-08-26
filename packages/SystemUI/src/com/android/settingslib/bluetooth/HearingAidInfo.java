@@ -3,7 +3,6 @@ package com.android.settingslib.bluetooth;
 import android.util.SparseIntArray;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingAidInfo {
     public static final SparseIntArray ASHA_DEVICE_MODE_TO_INTERNAL_MODE_MAPPING;
@@ -13,7 +12,6 @@ public class HearingAidInfo {
     public final int mMode;
     public final int mSide;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public int mSide = -1;
         public int mMode = -1;

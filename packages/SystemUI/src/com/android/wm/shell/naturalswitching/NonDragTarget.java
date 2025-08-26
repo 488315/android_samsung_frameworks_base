@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.RectEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Outline;
@@ -30,7 +31,6 @@ import com.samsung.android.util.InterpolatorUtils;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NonDragTarget extends FrameLayout {
     public boolean mAnimatingExit;
@@ -64,7 +64,7 @@ public class NonDragTarget extends FrameLayout {
     public static final float[] DARK_BLUR_PRESET = {250.0f, 0.0f, 8.0f, 29.4f, 255.0f, 0.0f, 216.8f};
 
     /* renamed from: -$$Nest$mupdateImageMatrix, reason: not valid java name */
-    public static void m3254$$Nest$mupdateImageMatrix(NonDragTarget nonDragTarget, ImageView imageView) {
+    public static void m3271$$Nest$mupdateImageMatrix(NonDragTarget nonDragTarget, ImageView imageView) {
         nonDragTarget.getClass();
         Matrix imageMatrix = imageView.getImageMatrix();
         int i = nonDragTarget.mCurrentOutlineInsets.top - nonDragTarget.mInitialOutlineInsets.top;
@@ -137,36 +137,36 @@ public class NonDragTarget extends FrameLayout {
         }
         final ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mView.getLayoutParams();
         final ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) this.mBlurView.getLayoutParams();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mAnimator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.2
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator3) {
-                Rect evaluate = NonDragTarget.RECT_EVALUATOR.evaluate(((Float) valueAnimator3.getAnimatedValue()).floatValue(), rect2, NonDragTarget.this.mEndBounds);
+                Rect rectEvaluate = NonDragTarget.RECT_EVALUATOR.evaluate(((Float) valueAnimator3.getAnimatedValue()).floatValue(), rect2, NonDragTarget.this.mEndBounds);
                 ViewGroup.MarginLayoutParams marginLayoutParams3 = marginLayoutParams2;
                 ViewGroup.MarginLayoutParams marginLayoutParams4 = marginLayoutParams;
-                int width = evaluate.width();
-                marginLayoutParams4.width = width;
-                marginLayoutParams3.width = width;
+                int iWidth = rectEvaluate.width();
+                marginLayoutParams4.width = iWidth;
+                marginLayoutParams3.width = iWidth;
                 ViewGroup.MarginLayoutParams marginLayoutParams5 = marginLayoutParams2;
                 ViewGroup.MarginLayoutParams marginLayoutParams6 = marginLayoutParams;
-                int height = evaluate.height();
-                marginLayoutParams6.height = height;
-                marginLayoutParams5.height = height;
+                int iHeight = rectEvaluate.height();
+                marginLayoutParams6.height = iHeight;
+                marginLayoutParams5.height = iHeight;
                 ViewGroup.MarginLayoutParams marginLayoutParams7 = marginLayoutParams2;
                 ViewGroup.MarginLayoutParams marginLayoutParams8 = marginLayoutParams;
-                int i = evaluate.left;
+                int i = rectEvaluate.left;
                 marginLayoutParams8.leftMargin = i;
                 marginLayoutParams7.leftMargin = i;
-                int i2 = evaluate.top;
+                int i2 = rectEvaluate.top;
                 marginLayoutParams8.topMargin = i2;
                 marginLayoutParams7.topMargin = i2;
                 NonDragTarget.this.mView.setLayoutParams(marginLayoutParams8);
                 NonDragTarget.this.mBlurView.setLayoutParams(marginLayoutParams2);
                 NonDragTarget nonDragTarget = NonDragTarget.this;
-                NonDragTarget.m3254$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
+                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
                 NonDragTarget nonDragTarget2 = NonDragTarget.this;
-                NonDragTarget.m3254$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
+                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
             }
         });
         this.mAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.3
@@ -182,9 +182,9 @@ public class NonDragTarget extends FrameLayout {
             boolean z = this.mBlurView.getAlpha() > 0.0f;
             boolean z2 = (this.mEndBounds.width() == this.mOriginBounds.width() && this.mEndBounds.height() == this.mOriginBounds.height()) ? false : true;
             if (z != z2) {
-                ValueAnimator ofFloat2 = z2 ? ValueAnimator.ofFloat(0.0f, 1.0f) : ValueAnimator.ofFloat(1.0f, 0.0f);
-                this.mBlurAnimator = ofFloat2;
-                ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.4
+                ValueAnimator valueAnimatorOfFloat2 = z2 ? ValueAnimator.ofFloat(0.0f, 1.0f) : ValueAnimator.ofFloat(1.0f, 0.0f);
+                this.mBlurAnimator = valueAnimatorOfFloat2;
+                valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.4
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator3) {
                         NonDragTarget.this.mBlurView.setAlpha(((Float) valueAnimator3.getAnimatedValue()).floatValue());
@@ -218,25 +218,25 @@ public class NonDragTarget extends FrameLayout {
         this.mBaseBounds.set(rect);
         this.mOriginBounds.set(rect);
         if (!this.mOriginBounds.isEmpty()) {
-            int width = this.mOriginBounds.width();
-            int height = this.mOriginBounds.height();
+            int iWidth = this.mOriginBounds.width();
+            int iHeight = this.mOriginBounds.height();
             PointF pointF = this.mDownScale;
             int i4 = this.mNonDragTargetView.mScaleDeltaSize;
-            pointF.x = (width - i4) / width;
-            pointF.y = (height - i4) / height;
+            pointF.x = (iWidth - i4) / iWidth;
+            pointF.y = (iHeight - i4) / iHeight;
         }
         this.mStagePosition = i3;
     }
 
-    public final void initForTaskOnly(NonDragTargetView nonDragTargetView, Rect rect, int i) {
+    public final void initForTaskOnly(NonDragTargetView nonDragTargetView, Rect rect, int i) throws Resources.NotFoundException {
         this.mNonDragTargetView = nonDragTargetView;
         this.mNsWindowingMode = i;
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         int dimensionPixelSize = ((FrameLayout) this).mContext.getResources().getDimensionPixelSize(R.dimen.ns_drop_freeform_width);
         int dimensionPixelSize2 = ((FrameLayout) this).mContext.getResources().getDimensionPixelSize(R.dimen.ns_drop_freeform_height);
-        int i2 = (width - dimensionPixelSize) / 2;
-        int i3 = (height - dimensionPixelSize2) / 2;
+        int i2 = (iWidth - dimensionPixelSize) / 2;
+        int i3 = (iHeight - dimensionPixelSize2) / 2;
         Rect rect2 = new Rect();
         rect2.set(i2, i3, dimensionPixelSize + i2, dimensionPixelSize2 + i3);
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mView.getLayoutParams();
@@ -316,7 +316,7 @@ public class NonDragTarget extends FrameLayout {
         int i;
         final boolean z = !this.mInsetsInitialized;
         this.mTmpInsetsRect.setEmpty();
-        boolean isLandscape = this.mNonDragTargetView.mTaskVisibility.mDisplayLayout.isLandscape();
+        boolean zIsLandscape = this.mNonDragTargetView.mTaskVisibility.mDisplayLayout.isLandscape();
         Rect rect = this.mEndBounds.isEmpty() ? this.mOriginBounds : this.mEndBounds;
         Rect rect2 = this.mNonDragTargetView.mStableRect;
         int i2 = rect.left;
@@ -326,7 +326,7 @@ public class NonDragTarget extends FrameLayout {
         }
         int i4 = rect.top;
         int i5 = rect2.top;
-        if (i4 < i5 && !isLandscape) {
+        if (i4 < i5 && !zIsLandscape) {
             this.mTmpInsetsRect.top = i5 - i4;
         }
         int i6 = rect.right;
@@ -340,7 +340,7 @@ public class NonDragTarget extends FrameLayout {
             Rect rect3 = this.mTmpInsetsRect;
             int i10 = i8 - i9;
             rect3.bottom = i10;
-            if (!isLandscape && (i = this.mInitialOutlineInsets.top) > 0) {
+            if (!zIsLandscape && (i = this.mInitialOutlineInsets.top) > 0) {
                 rect3.bottom = i10 - i;
             }
         }
@@ -358,9 +358,9 @@ public class NonDragTarget extends FrameLayout {
         }
         final Rect rect4 = new Rect(this.mCurrentOutlineInsets);
         final Rect rect5 = new Rect(this.mTargetOutlineInsets);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mOutlineInsetsAnimator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.6
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mOutlineInsetsAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.6
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                 NonDragTarget.this.mCurrentOutlineInsets.set(NonDragTarget.RECT_EVALUATOR.evaluate(((Float) valueAnimator2.getAnimatedValue()).floatValue(), rect4, rect5));
@@ -370,9 +370,9 @@ public class NonDragTarget extends FrameLayout {
                     return;
                 }
                 NonDragTarget nonDragTarget = NonDragTarget.this;
-                NonDragTarget.m3254$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
+                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
                 NonDragTarget nonDragTarget2 = NonDragTarget.this;
-                NonDragTarget.m3254$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
+                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
             }
         });
         this.mOutlineInsetsAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.7

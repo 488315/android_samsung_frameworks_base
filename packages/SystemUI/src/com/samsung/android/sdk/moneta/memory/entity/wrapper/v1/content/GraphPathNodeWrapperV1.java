@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class GraphPathNodeWrapperV1 implements Parcelable {
     private final Long endTimestamp;
@@ -25,7 +24,6 @@ public final class GraphPathNodeWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<GraphPathNodeWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,23 +33,22 @@ public final class GraphPathNodeWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            String readString4 = parcel.readString();
-            String readString5 = parcel.readString();
-            Long valueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            Long valueOf2 = parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null;
-            int readInt = parcel.readInt();
-            ArrayList arrayList = new ArrayList(readInt);
-            for (int i = 0; i != readInt; i++) {
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            String string4 = parcel.readString();
+            String string5 = parcel.readString();
+            Long lValueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            Long lValueOf2 = parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null;
+            int i = parcel.readInt();
+            ArrayList arrayList = new ArrayList(i);
+            for (int i2 = 0; i2 != i; i2++) {
                 arrayList.add(GraphPathEdge.CREATOR.createFromParcel(parcel));
             }
-            return new GraphPathNodeWrapperV1(readString, readString2, readString3, readString4, readString5, valueOf, valueOf2, arrayList);
+            return new GraphPathNodeWrapperV1(string, string2, string3, string4, string5, lValueOf, lValueOf2, arrayList);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -131,9 +128,9 @@ public final class GraphPathNodeWrapperV1 implements Parcelable {
         } else {
             Person$$ExternalSyntheticOutline0.m(parcel, 1, l2);
         }
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.outboundEdges);
-        while (m.hasNext()) {
-            ((GraphPathEdge) m.next()).writeToParcel(parcel, i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.outboundEdges);
+        while (itM.hasNext()) {
+            ((GraphPathEdge) itM.next()).writeToParcel(parcel, i);
         }
     }
 

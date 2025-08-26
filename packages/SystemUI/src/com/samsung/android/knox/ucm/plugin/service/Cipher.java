@@ -11,7 +11,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Cipher {
     public static final String SERVICE = "Cipher";
@@ -39,7 +38,7 @@ public class Cipher {
         throw new NullPointerException("spi == null");
     }
 
-    public byte[] doFinal(byte[] bArr) throws IllegalBlockSizeException, BadPaddingException {
+    public byte[] doFinal(byte[] bArr) throws BadPaddingException, IllegalBlockSizeException {
         return this.spiImpl.engineDoFinal(bArr, 0, bArr.length);
     }
 

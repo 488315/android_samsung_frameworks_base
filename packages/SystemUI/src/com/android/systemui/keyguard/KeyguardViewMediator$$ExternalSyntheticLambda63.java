@@ -16,7 +16,6 @@ import com.android.systemui.util.LogUtil;
 import java.util.function.Consumer;
 import kotlin.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda63 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -33,8 +32,8 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.f$0;
         switch (i) {
             case 0:
-                int intValue = ((Integer) obj).intValue();
-                if (intValue == 103) {
+                int iIntValue = ((Integer) obj).intValue();
+                if (iIntValue == 103) {
                     keyguardViewMediatorHelperImpl.getClass();
                 } else if (keyguardViewMediatorHelperImpl.curIsOccluded) {
                     ((ScrimController) keyguardViewMediatorHelperImpl.scrimControllerLazy.get()).mSecLsScrimControlHelper.setFrontScrimToBlack(false);
@@ -43,14 +42,14 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                     ((PluginAODManager) keyguardViewMediatorHelperImpl.pluginAODManagerLazy.get()).updateRefreshRate(false);
                 }
                 keyguardViewMediatorHelperImpl.enableLooperLogController(4, 3000L);
-                keyguardViewMediatorHelperImpl.lastWakeReason = intValue;
+                keyguardViewMediatorHelperImpl.lastWakeReason = iIntValue;
                 if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK) {
-                    keyguardViewMediatorHelperImpl.foldControllerImpl.wakeReason = intValue;
+                    keyguardViewMediatorHelperImpl.foldControllerImpl.wakeReason = iIntValue;
                 }
-                KeyguardDumpLog.state$default(KeyguardDumpLog.INSTANCE, 3, false, false, false, 1, intValue, 14);
+                KeyguardDumpLog.state$default(KeyguardDumpLog.INSTANCE, 3, false, false, false, 1, iIntValue, 14);
                 break;
             case 1:
-                int intValue2 = ((Integer) obj).intValue();
+                int iIntValue2 = ((Integer) obj).intValue();
                 if (keyguardViewMediatorHelperImpl.extraUserPresentIntent == null) {
                     ViewMediatorProvider viewMediatorProvider = keyguardViewMediatorHelperImpl.viewMediatorProvider;
                     if (viewMediatorProvider == null) {
@@ -67,7 +66,7 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                             applicationInfo.getClass();
                             if ((applicationInfo.flags & 129) != 0) {
                                 intent.setPackage("com.verizon.mips.services");
-                                keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(intValue2));
+                                keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(iIntValue2));
                             }
                         } catch (Exception e) {
                             Log.e("KeyguardViewMediator", "com.verizon.mips.services exception : " + e);
@@ -75,9 +74,9 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                     }
                     intent.setPackage("com.sec.android.daemonapp");
                     intent.addFlags(32);
-                    keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(intValue2));
+                    keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(iIntValue2));
                     intent.setPackage("com.samsung.android.privateaccesstokens");
-                    keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(intValue2));
+                    keyguardViewMediatorHelperImpl.context.sendBroadcastAsUser(intent, UserHandle.of(iIntValue2));
                     break;
                 }
                 break;
@@ -92,7 +91,7 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                 keyguardViewMediatorHelperImpl.handleMsgLogKey = LogUtil.startTime(-1);
                 KeyguardViewMediatorHelperImpl.logD$1("handleMessage " + i3);
                 int i4 = message.what;
-                boolean z = true;
+                boolean zIsValid = true;
                 Lazy lazy = keyguardViewMediatorHelperImpl.CANCEL_KEYGUARD_EXIT_ANIM$delegate;
                 if (i4 != 1004) {
                     int show = keyguardViewMediatorHelperImpl.getSHOW();
@@ -107,9 +106,9 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                         SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParams = ((KeyguardSurfaceControllerImpl) lazy2.get()).lastKeyguardSurfaceParams;
                         if (surfaceParams != null) {
                             SurfaceControl surfaceControl = surfaceParams.surface;
-                            z = true ^ (surfaceControl != null ? surfaceControl.isValid() : false);
+                            zIsValid = true ^ (surfaceControl != null ? surfaceControl.isValid() : false);
                         }
-                        if (!z) {
+                        if (!zIsValid) {
                             ((KeyguardSurfaceControllerImpl) lazy2.get()).restoreKeyguardSurface();
                         }
                         keyguardSysDumpTrigger.cancel();

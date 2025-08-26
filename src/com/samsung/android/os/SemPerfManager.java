@@ -64,12 +64,12 @@ public class SemPerfManager {
 
     public static void sendCommandToSsrm(String str, String str2) {
         try {
-            Message obtainMessage = mCommandHandler.obtainMessage();
+            Message messageObtainMessage = mCommandHandler.obtainMessage();
             Bundle bundle = new Bundle();
             bundle.putString("type", str);
             bundle.putString("value", str2);
-            obtainMessage.setData(bundle);
-            mCommandHandler.sendMessage(obtainMessage);
+            messageObtainMessage.setData(bundle);
+            mCommandHandler.sendMessage(messageObtainMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }

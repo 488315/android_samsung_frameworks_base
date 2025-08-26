@@ -17,7 +17,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerInteractor$configurationBasedDimensions$1 extends SuspendLambda implements Function4 {
     final /* synthetic */ Lazy $largeScreenHeaderHelperLazy;
@@ -34,10 +33,10 @@ final class SharedNotificationContainerInteractor$configurationBasedDimensions$1
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        int intValue = ((Number) obj2).intValue();
+        int iIntValue = ((Number) obj2).intValue();
         ((Number) obj3).intValue();
         SharedNotificationContainerInteractor$configurationBasedDimensions$1 sharedNotificationContainerInteractor$configurationBasedDimensions$1 = new SharedNotificationContainerInteractor$configurationBasedDimensions$1(this.this$0, this.$largeScreenHeaderHelperLazy, (Continuation) obj4);
-        sharedNotificationContainerInteractor$configurationBasedDimensions$1.I$0 = intValue;
+        sharedNotificationContainerInteractor$configurationBasedDimensions$1.I$0 = iIntValue;
         return sharedNotificationContainerInteractor$configurationBasedDimensions$1.invokeSuspend(Unit.INSTANCE);
     }
 

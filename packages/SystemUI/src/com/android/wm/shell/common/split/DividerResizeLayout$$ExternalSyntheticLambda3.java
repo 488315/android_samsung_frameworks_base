@@ -3,7 +3,6 @@ package com.android.wm.shell.common.split;
 import android.animation.ValueAnimator;
 import com.android.wm.shell.common.split.DividerResizeLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DividerResizeLayout$$ExternalSyntheticLambda3 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -28,10 +27,10 @@ public final /* synthetic */ class DividerResizeLayout$$ExternalSyntheticLambda3
             default:
                 DividerResizeLayout.DividerResizeTarget dividerResizeTarget = (DividerResizeLayout.DividerResizeTarget) obj;
                 dividerResizeTarget.getClass();
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                dividerResizeTarget.mBlurView.setAlpha(floatValue);
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                dividerResizeTarget.mBlurView.setAlpha(fFloatValue);
                 if (DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
-                    DividerResizeLayout.this.mGuideBarView.setAlpha(floatValue);
+                    DividerResizeLayout.this.mGuideBarView.setAlpha(fFloatValue);
                     break;
                 }
                 break;

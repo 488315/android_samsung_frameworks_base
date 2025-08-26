@@ -55,7 +55,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScrollableNode extends DragGestureNode implements KeyInputModifierNode, SemanticsModifierNode, CompositionLocalConsumerModifierNode {
     public final ContentInViewNode contentInViewNode;
@@ -93,7 +92,7 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(ScrollableNode.this.isAttached);
+                return Boolean.valueOf(this.this$0.isAttached);
             }
         });
         this.scrollingLogic = scrollingLogic;
@@ -109,11 +108,11 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
         delegate(new FocusedBoundsObserverNode(new Function1() { // from class: androidx.compose.foundation.gestures.ScrollableNode.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Rect focusedChildBounds;
                 ContentInViewNode contentInViewNode2 = ScrollableNode.this.contentInViewNode;
                 contentInViewNode2.focusedChild = (LayoutCoordinates) obj;
-                if (contentInViewNode2.childWasMaxVisibleBeforeViewportShrunk && (focusedChildBounds = contentInViewNode2.getFocusedChildBounds()) != null && !contentInViewNode2.m64isMaxVisibleO0kMr_c(focusedChildBounds, contentInViewNode2.viewportSize)) {
+                if (contentInViewNode2.childWasMaxVisibleBeforeViewportShrunk && (focusedChildBounds = contentInViewNode2.getFocusedChildBounds()) != null && !contentInViewNode2.m65isMaxVisibleO0kMr_c(focusedChildBounds, contentInViewNode2.viewportSize)) {
                     contentInViewNode2.trackingFocusedChild = true;
                     contentInViewNode2.launchAnimation();
                 }
@@ -128,7 +127,6 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
         if (this.enabled && (this.scrollByAction == null || this.scrollByOffsetAction == null)) {
             this.scrollByAction = new Function2() { // from class: androidx.compose.foundation.gestures.ScrollableNode$setScrollSemanticsActions$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: androidx.compose.foundation.gestures.ScrollableNode$setScrollSemanticsActions$1$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ float $x;
@@ -163,11 +161,11 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
                             ScrollingLogic scrollingLogic = this.this$0.scrollingLogic;
                             float f = this.$x;
                             float f2 = this.$y;
-                            long floatToRawIntBits = Float.floatToRawIntBits(f);
-                            long floatToRawIntBits2 = Float.floatToRawIntBits(f2);
+                            long jFloatToRawIntBits = Float.floatToRawIntBits(f);
+                            long jFloatToRawIntBits2 = Float.floatToRawIntBits(f2);
                             Offset.Companion companion = Offset.Companion;
                             this.label = 1;
-                            if (ScrollableKt.m76access$semanticsScrollByd4ec7I(scrollingLogic, (floatToRawIntBits << 32) | (floatToRawIntBits2 & 4294967295L), this) == coroutineSingletons) {
+                            if (ScrollableKt.m77access$semanticsScrollByd4ec7I(scrollingLogic, (jFloatToRawIntBits << 32) | (jFloatToRawIntBits2 & 4294967295L), this) == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
                         } else {
@@ -186,7 +184,7 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    BuildersKt.launch$default(ScrollableNode.this.getCoroutineScope(), null, null, new AnonymousClass1(ScrollableNode.this, ((Number) obj).floatValue(), ((Number) obj2).floatValue(), null), 3);
+                    BuildersKt.launch$default(this.this$0.getCoroutineScope(), null, null, new AnonymousClass1(this.this$0, ((Number) obj).floatValue(), ((Number) obj2).floatValue(), null), 3);
                     return Boolean.TRUE;
                 }
             };
@@ -210,8 +208,8 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
     public final Object drag(Function2 function2, Continuation continuation) {
         MutatePriority mutatePriority = MutatePriority.UserInput;
         ScrollingLogic scrollingLogic = this.scrollingLogic;
-        Object scroll = scrollingLogic.scroll(mutatePriority, new ScrollableNode$drag$2$1(function2, scrollingLogic, null), (ContinuationImpl) continuation);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = scrollingLogic.scroll(mutatePriority, new ScrollableNode$drag$2$1(function2, scrollingLogic, null), (ContinuationImpl) continuation);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
     @Override // androidx.compose.ui.Modifier.Node
@@ -250,33 +248,33 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
 
     @Override // androidx.compose.foundation.gestures.DragGestureNode
     /* renamed from: onDragStopped-TH1AsA0 */
-    public final void mo63onDragStoppedTH1AsA0(long j) {
+    public final void mo64onDragStoppedTH1AsA0(long j) {
         BuildersKt.launch$default(this.nestedScrollDispatcher.getCoroutineScope(), null, null, new ScrollableNode$onDragStopped$1(this, j, null), 3);
     }
 
     @Override // androidx.compose.ui.input.key.KeyInputModifierNode
     /* renamed from: onKeyEvent-ZmokQxo */
     public final boolean mo15onKeyEventZmokQxo(KeyEvent keyEvent) {
-        long floatToRawIntBits;
+        long jFloatToRawIntBits;
         if (this.enabled) {
-            long m578getKeyZmokQxo = KeyEvent_androidKt.m578getKeyZmokQxo(keyEvent);
+            long jM580getKeyZmokQxo = KeyEvent_androidKt.m580getKeyZmokQxo(keyEvent);
             Key.Companion.getClass();
-            if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.PageDown) || Key.m576equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp)) {
-                int m579getTypeZmokQxo = KeyEvent_androidKt.m579getTypeZmokQxo(keyEvent);
+            if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.PageDown) || Key.m578equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp)) {
+                int iM581getTypeZmokQxo = KeyEvent_androidKt.m581getTypeZmokQxo(keyEvent);
                 KeyEventType.Companion.getClass();
-                if (m579getTypeZmokQxo == KeyEventType.KeyDown && !keyEvent.isCtrlPressed()) {
+                if (iM581getTypeZmokQxo == KeyEventType.KeyDown && !keyEvent.isCtrlPressed()) {
                     boolean z = this.scrollingLogic.orientation == Orientation.Vertical;
                     ContentInViewNode contentInViewNode = this.contentInViewNode;
                     if (z) {
                         int i = (int) (contentInViewNode.viewportSize & 4294967295L);
-                        floatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(Key.m576equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp) ? i : -i) & 4294967295L);
+                        jFloatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(Key.m578equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp) ? i : -i) & 4294967295L);
                         Offset.Companion companion = Offset.Companion;
                     } else {
                         int i2 = (int) (contentInViewNode.viewportSize >> 32);
-                        floatToRawIntBits = (Float.floatToRawIntBits(Key.m576equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp) ? i2 : -i2) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L);
+                        jFloatToRawIntBits = (Float.floatToRawIntBits(Key.m578equalsimpl0(Key_androidKt.Key(keyEvent.getKeyCode()), Key.PageUp) ? i2 : -i2) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L);
                         Offset.Companion companion2 = Offset.Companion;
                     }
-                    BuildersKt.launch$default(getCoroutineScope(), null, null, new ScrollableNode$onKeyEvent$1(this, floatToRawIntBits, null), 3);
+                    BuildersKt.launch$default(getCoroutineScope(), null, null, new ScrollableNode$onKeyEvent$1(this, jFloatToRawIntBits, null), 3);
                     return true;
                 }
             }
@@ -296,7 +294,7 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
             if (i >= size) {
                 break;
             }
-            if (((Boolean) this.canDrag.mo779invoke((PointerInputChange) list.get(i))).booleanValue()) {
+            if (((Boolean) this.canDrag.mo781invoke((PointerInputChange) list.get(i))).booleanValue()) {
                 super.mo16onPointerEventH0pRuoY(pointerEvent, pointerEventPass, j);
                 break;
             }
@@ -343,27 +341,27 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
                 float f2 = -androidConfig.viewConfiguration.getScaledHorizontalScrollFactor();
                 List list3 = pointerEvent.changes;
                 Offset.Companion.getClass();
-                Offset m393boximpl = Offset.m393boximpl(0L);
+                Offset offsetM395boximpl = Offset.m395boximpl(0L);
                 int size3 = list3.size();
                 int i5 = 0;
                 while (true) {
-                    j2 = m393boximpl.packedValue;
+                    j2 = offsetM395boximpl.packedValue;
                     if (i5 >= size3) {
                         break;
                     }
-                    m393boximpl = Offset.m393boximpl(Offset.m401plusMKHz9U(j2, ((PointerInputChange) list3.get(i5)).scrollDelta));
+                    offsetM395boximpl = Offset.m395boximpl(Offset.m403plusMKHz9U(j2, ((PointerInputChange) list3.get(i5)).scrollDelta));
                     i5++;
                 }
-                long floatToRawIntBits = (Float.floatToRawIntBits(Float.intBitsToFloat((int) (j2 >> 32)) * f2) << 32) | (Float.floatToRawIntBits(Float.intBitsToFloat((int) (j2 & 4294967295L)) * f) & 4294967295L);
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(Float.intBitsToFloat((int) (j2 >> 32)) * f2) << 32) | (Float.floatToRawIntBits(Float.intBitsToFloat((int) (j2 & 4294967295L)) * f) & 4294967295L);
                 ScrollingLogic scrollingLogic = mouseWheelScrollingLogic2.scrollingLogic;
-                float m84toFloatk4lQ0M = scrollingLogic.m84toFloatk4lQ0M(scrollingLogic.m83reverseIfNeededMKHz9U(floatToRawIntBits));
-                if (m84toFloatk4lQ0M == 0.0f ? false : m84toFloatk4lQ0M > 0.0f ? scrollingLogic.scrollableState.getCanScrollForward() : scrollingLogic.scrollableState.getCanScrollBackward()) {
+                float fM85toFloatk4lQ0M = scrollingLogic.m85toFloatk4lQ0M(scrollingLogic.m84reverseIfNeededMKHz9U(jFloatToRawIntBits));
+                if (fM85toFloatk4lQ0M == 0.0f ? false : fM85toFloatk4lQ0M > 0.0f ? scrollingLogic.scrollableState.getCanScrollForward() : scrollingLogic.scrollableState.getCanScrollBackward()) {
                     BufferedChannel bufferedChannel = mouseWheelScrollingLogic2.channel;
                     long j3 = ((PointerInputChange) CollectionsKt___CollectionsKt.first(pointerEvent.changes)).uptimeMillis;
                     scrollConfig.getClass();
-                    Object mo3456trySendJP2dKIU = bufferedChannel.mo3456trySendJP2dKIU(new MouseWheelScrollingLogic.MouseWheelScrollDelta(floatToRawIntBits, j3, false, null));
+                    Object objMo3476trySendJP2dKIU = bufferedChannel.mo3476trySendJP2dKIU(new MouseWheelScrollingLogic.MouseWheelScrollDelta(jFloatToRawIntBits, j3, false, null));
                     ChannelResult.Companion companion = ChannelResult.Companion;
-                    z = !(mo3456trySendJP2dKIU instanceof ChannelResult.Failed);
+                    z = !(objMo3476trySendJP2dKIU instanceof ChannelResult.Failed);
                 } else {
                     z = mouseWheelScrollingLogic2.isScrolling;
                 }
@@ -445,6 +443,6 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
 
     @Override // androidx.compose.foundation.gestures.DragGestureNode
     /* renamed from: onDragStarted-k-4lQ0M */
-    public final void mo62onDragStartedk4lQ0M(long j) {
+    public final void mo63onDragStartedk4lQ0M(long j) {
     }
 }

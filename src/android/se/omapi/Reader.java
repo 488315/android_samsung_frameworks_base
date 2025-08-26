@@ -35,11 +35,11 @@ public final class Reader {
         synchronized (this.mLock) {
             try {
                 try {
-                    ISecureElementSession openSession = this.mReader.openSession();
-                    if (openSession == null) {
+                    ISecureElementSession iSecureElementSessionOpenSession = this.mReader.openSession();
+                    if (iSecureElementSessionOpenSession == null) {
                         throw new IOException("service session is null.");
                     }
-                    session = new Session(this.mService, openSession, this);
+                    session = new Session(this.mService, iSecureElementSessionOpenSession, this);
                 } catch (RemoteException e) {
                     throw new IllegalStateException(e.getMessage());
                 } catch (ServiceSpecificException e2) {
@@ -82,7 +82,7 @@ public final class Reader {
 
     @SystemApi
     public boolean reset() {
-        boolean reset;
+        boolean zReset;
         if (!this.mService.isConnected()) {
             Log.e(TAG, "service is not connected");
             return false;
@@ -91,7 +91,7 @@ public final class Reader {
             try {
                 try {
                     closeSessions();
-                    reset = this.mReader.reset();
+                    zReset = this.mReader.reset();
                 } catch (RemoteException unused) {
                     return false;
                 }
@@ -99,6 +99,6 @@ public final class Reader {
                 throw th;
             }
         }
-        return reset;
+        return zReset;
     }
 }

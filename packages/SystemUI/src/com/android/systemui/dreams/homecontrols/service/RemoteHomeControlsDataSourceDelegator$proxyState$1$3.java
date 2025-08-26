@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RemoteHomeControlsDataSourceDelegator$proxyState$1$3 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -48,9 +47,9 @@ final class RemoteHomeControlsDataSourceDelegator$proxyState$1$3 extends Suspend
         boolean z = this.Z$0;
         DreamLogger dreamLogger = this.this$0.logger;
         RemoteHomeControlsDataSourceDelegator$callback$1$$ExternalSyntheticLambda0 remoteHomeControlsDataSourceDelegator$callback$1$$ExternalSyntheticLambda0 = new RemoteHomeControlsDataSourceDelegator$callback$1$$ExternalSyntheticLambda0(1);
-        LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, remoteHomeControlsDataSourceDelegator$callback$1$$ExternalSyntheticLambda0, null);
-        obtain.setBool1(z);
-        dreamLogger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, remoteHomeControlsDataSourceDelegator$callback$1$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setBool1(z);
+        dreamLogger.getBuffer().commit(logMessageObtain);
         if (z) {
             ((PersistentConnectionManager) this.this$0.connectionManager$delegate.getValue()).start();
         } else {

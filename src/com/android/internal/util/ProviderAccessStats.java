@@ -83,10 +83,10 @@ public class ProviderAccessStats {
         PerThreadData perThreadData = this.mThreadLocal.get();
         perThreadData.nestCount--;
         if (perThreadData.nestCount == 0) {
-            long max = Math.max(1L, SystemClock.uptimeMillis() - perThreadData.startUptimeMillis);
+            long jMax = Math.max(1L, SystemClock.uptimeMillis() - perThreadData.startUptimeMillis);
             synchronized (this.mLock) {
                 SparseLongArray sparseLongArray = this.mOperationDurationMillis;
-                sparseLongArray.put(i, sparseLongArray.get(i) + max);
+                sparseLongArray.put(i, sparseLongArray.get(i) + jMax);
             }
         }
     }
@@ -102,9 +102,9 @@ public class ProviderAccessStats {
             printWriter.print(str);
             printWriter.println("  UID        Query  Insert Update Delete   Batch Insert Update Delete          Sec");
             for (int i = 0; i < this.mAllCallingUids.size(); i++) {
-                int keyAt = this.mAllCallingUids.keyAt(i);
+                int iKeyAt = this.mAllCallingUids.keyAt(i);
                 printWriter.print(str);
-                printWriter.println(String.format("  %-9d %6d  %6d %6d %6d  %6d %6d %6d %6d %12.3f", Integer.valueOf(keyAt), Long.valueOf(this.mQueryStats.get(keyAt)), Long.valueOf(this.mInsertStats.get(keyAt)), Long.valueOf(this.mUpdateStats.get(keyAt)), Long.valueOf(this.mDeleteStats.get(keyAt)), Long.valueOf(this.mBatchStats.get(keyAt)), Long.valueOf(this.mInsertInBatchStats.get(keyAt)), Long.valueOf(this.mUpdateInBatchStats.get(keyAt)), Long.valueOf(this.mDeleteInBatchStats.get(keyAt)), Double.valueOf(this.mOperationDurationMillis.get(keyAt) / 1000.0d)));
+                printWriter.println(String.format("  %-9d %6d  %6d %6d %6d  %6d %6d %6d %6d %12.3f", Integer.valueOf(iKeyAt), Long.valueOf(this.mQueryStats.get(iKeyAt)), Long.valueOf(this.mInsertStats.get(iKeyAt)), Long.valueOf(this.mUpdateStats.get(iKeyAt)), Long.valueOf(this.mDeleteStats.get(iKeyAt)), Long.valueOf(this.mBatchStats.get(iKeyAt)), Long.valueOf(this.mInsertInBatchStats.get(iKeyAt)), Long.valueOf(this.mUpdateInBatchStats.get(iKeyAt)), Long.valueOf(this.mDeleteInBatchStats.get(iKeyAt)), Double.valueOf(this.mOperationDurationMillis.get(iKeyAt) / 1000.0d)));
             }
             printWriter.println();
         }

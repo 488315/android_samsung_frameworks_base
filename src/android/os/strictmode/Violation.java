@@ -16,10 +16,10 @@ public abstract class Violation extends Throwable {
             }
             String message = getMessage();
             Throwable cause = getCause();
-            int hashCode = ((((message != null ? message.hashCode() : getClass().hashCode()) * 37) + calcStackTraceHashCode(getStackTrace())) * 37) + (cause != null ? cause.toString().hashCode() : 0);
+            int iHashCode = ((((message != null ? message.hashCode() : getClass().hashCode()) * 37) + calcStackTraceHashCode(getStackTrace())) * 37) + (cause != null ? cause.toString().hashCode() : 0);
             this.mHashCodeValid = true;
-            this.mHashCode = hashCode;
-            return hashCode;
+            this.mHashCode = iHashCode;
+            return iHashCode;
         }
     }
 
@@ -44,14 +44,14 @@ public abstract class Violation extends Throwable {
     }
 
     private static int calcStackTraceHashCode(StackTraceElement[] stackTraceElementArr) {
-        int i = 17;
+        int iHashCode = 17;
         if (stackTraceElementArr != null) {
             for (StackTraceElement stackTraceElement : stackTraceElementArr) {
                 if (stackTraceElement != null) {
-                    i = (i * 37) + stackTraceElement.hashCode();
+                    iHashCode = (iHashCode * 37) + stackTraceElement.hashCode();
                 }
             }
         }
-        return i;
+        return iHashCode;
     }
 }

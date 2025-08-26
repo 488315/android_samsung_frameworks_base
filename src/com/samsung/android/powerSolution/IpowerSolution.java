@@ -40,9 +40,9 @@ public interface IpowerSolution extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IpowerSolution.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IpowerSolution)) {
-                return (IpowerSolution) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IpowerSolution.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IpowerSolution)) {
+                return (IpowerSolution) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

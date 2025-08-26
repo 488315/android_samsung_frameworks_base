@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class KnoxsdkFileLog {
     public static final int LOG_FILE_MAX_COUNT = 2;
@@ -21,7 +20,6 @@ public final class KnoxsdkFileLog {
     public static String TAG = "knoxsdk/filelog";
     public static Logger sLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class KnoxsdkFileLogHolder {
         public static final KnoxsdkFileLog INSTANCE = new KnoxsdkFileLog(0);
 
@@ -60,7 +58,7 @@ public final class KnoxsdkFileLog {
         SemLog.i(str, str2);
     }
 
-    public static void init() {
+    public static void init() throws SecurityException {
         try {
             final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
             FileHandler fileHandler = new FileHandler("/data/log/knoxsdk.log", LOG_FILE_SIZE_LIMIT, 2, true);
@@ -96,7 +94,7 @@ public final class KnoxsdkFileLog {
         SemLog.w(str, str2);
     }
 
-    private KnoxsdkFileLog() {
+    private KnoxsdkFileLog() throws SecurityException {
         init();
     }
 

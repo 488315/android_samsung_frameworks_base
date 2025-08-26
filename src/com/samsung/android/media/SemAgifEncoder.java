@@ -190,25 +190,25 @@ public class SemAgifEncoder {
     }
 
     public boolean finish() {
-        boolean nativeFinish = nativeFinish(this.mHandle);
+        boolean zNativeFinish = nativeFinish(this.mHandle);
         this.mHandle = 0L;
-        return nativeFinish;
+        return zNativeFinish;
     }
 
     public byte[] finishByteArray() {
-        byte[] nativeFinishByteArray = nativeFinishByteArray(this.mHandle);
+        byte[] bArrNativeFinishByteArray = nativeFinishByteArray(this.mHandle);
         this.mHandle = 0L;
-        return nativeFinishByteArray;
+        return bArrNativeFinishByteArray;
     }
 
-    public boolean finishFileDescriptor(FileDescriptor fileDescriptor) {
-        byte[] nativeFinishByteArray = nativeFinishByteArray(this.mHandle);
+    public boolean finishFileDescriptor(FileDescriptor fileDescriptor) throws IOException {
+        byte[] bArrNativeFinishByteArray = nativeFinishByteArray(this.mHandle);
         this.mHandle = 0L;
-        if (nativeFinishByteArray == null) {
+        if (bArrNativeFinishByteArray == null) {
             return false;
         }
         try {
-            new FileOutputStream(fileDescriptor).write(nativeFinishByteArray);
+            new FileOutputStream(fileDescriptor).write(bArrNativeFinishByteArray);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -216,11 +216,11 @@ public class SemAgifEncoder {
         }
     }
 
-    public boolean finishURI(Context context, Uri uri) {
+    public boolean finishURI(Context context, Uri uri) throws IOException {
         FileDescriptor fileDescriptor;
-        byte[] nativeFinishByteArray = nativeFinishByteArray(this.mHandle);
+        byte[] bArrNativeFinishByteArray = nativeFinishByteArray(this.mHandle);
         this.mHandle = 0L;
-        if (nativeFinishByteArray == null) {
+        if (bArrNativeFinishByteArray == null) {
             return false;
         }
         try {
@@ -230,7 +230,7 @@ public class SemAgifEncoder {
             fileDescriptor = null;
         }
         try {
-            new FileOutputStream(fileDescriptor).write(nativeFinishByteArray);
+            new FileOutputStream(fileDescriptor).write(bArrNativeFinishByteArray);
             return true;
         } catch (IOException e2) {
             e2.printStackTrace();

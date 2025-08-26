@@ -22,7 +22,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor;
 import kotlinx.serialization.descriptors.SerialKind;
 import kotlinx.serialization.descriptors.StructureKind;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PluginGeneratedSerialDescriptor implements SerialDescriptor, CachedNames {
     public final Lazy _hashCode$delegate;
@@ -121,7 +120,6 @@ public class PluginGeneratedSerialDescriptor implements SerialDescriptor, Cached
     }
 
     public boolean equals(Object obj) {
-        int i;
         if (this == obj) {
             return true;
         }
@@ -129,10 +127,11 @@ public class PluginGeneratedSerialDescriptor implements SerialDescriptor, Cached
             SerialDescriptor serialDescriptor = (SerialDescriptor) obj;
             if (Intrinsics.areEqual(this.serialName, serialDescriptor.getSerialName()) && Arrays.equals((SerialDescriptor[]) this.typeParameterDescriptors$delegate.getValue(), (SerialDescriptor[]) ((PluginGeneratedSerialDescriptor) obj).typeParameterDescriptors$delegate.getValue())) {
                 int elementsCount = serialDescriptor.getElementsCount();
-                int i2 = this.elementsCount;
-                if (i2 == elementsCount) {
-                    for (0; i < i2; i + 1) {
-                        i = (Intrinsics.areEqual(getElementDescriptor(i).getSerialName(), serialDescriptor.getElementDescriptor(i).getSerialName()) && Intrinsics.areEqual(getElementDescriptor(i).getKind(), serialDescriptor.getElementDescriptor(i).getKind())) ? i + 1 : 0;
+                int i = this.elementsCount;
+                if (i == elementsCount) {
+                    for (int i2 = 0; i2 < i; i2++) {
+                        if (Intrinsics.areEqual(getElementDescriptor(i2).getSerialName(), serialDescriptor.getElementDescriptor(i2).getSerialName()) && Intrinsics.areEqual(getElementDescriptor(i2).getKind(), serialDescriptor.getElementDescriptor(i2).getKind())) {
+                        }
                     }
                     return true;
                 }
@@ -189,10 +188,10 @@ public class PluginGeneratedSerialDescriptor implements SerialDescriptor, Cached
         return CollectionsKt___CollectionsKt.joinToString$default(RangesKt___RangesKt.until(0, this.elementsCount), ", ", TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.serialName, "("), ")", new Function1() { // from class: kotlinx.serialization.internal.PluginGeneratedSerialDescriptor$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
-                PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = PluginGeneratedSerialDescriptor.this;
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(pluginGeneratedSerialDescriptor.names[intValue], ": ", pluginGeneratedSerialDescriptor.getElementDescriptor(intValue).getSerialName());
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
+                PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = this.f$0;
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(pluginGeneratedSerialDescriptor.names[iIntValue], ": ", pluginGeneratedSerialDescriptor.getElementDescriptor(iIntValue).getSerialName());
             }
         }, 24);
     }

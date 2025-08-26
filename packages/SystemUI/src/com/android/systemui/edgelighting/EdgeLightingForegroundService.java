@@ -13,13 +13,11 @@ import android.util.Slog;
 import com.android.systemui.R;
 import com.android.systemui.plugins.subscreen.SubRoom;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingForegroundService extends Service {
     public String CHANNEL_TAG;
     public ScreenStateReceiver mScreenStateReceiver = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScreenStateReceiver extends BroadcastReceiver {
         public /* synthetic */ ScreenStateReceiver(EdgeLightingForegroundService edgeLightingForegroundService, int i) {
             this();

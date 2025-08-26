@@ -16,11 +16,9 @@ import android.view.animation.PathInterpolator;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VisibilityTransition extends Visibility {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,36 +57,36 @@ public final class VisibilityTransition extends Visibility {
 
     public final Animator createScaleAnimation(boolean z, final View view, float f, float f2, float f3, float f4, float f5, float f6) {
         PathInterpolator pathInterpolator = new PathInterpolator(0.33f, 1.0f, 0.68f, 1.0f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f3);
-        ofFloat.setInterpolator(pathInterpolator);
-        ofFloat.setDuration(z ? 500L : 200L);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f2, f4);
-        ofFloat2.setInterpolator(pathInterpolator);
-        ofFloat2.setDuration(z ? 500L : 200L);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f5, f6);
-        ofFloat3.setInterpolator(pathInterpolator);
-        ofFloat3.setDuration(z ? 500L : 200L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f3);
+        objectAnimatorOfFloat.setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat.setDuration(z ? 500L : 200L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f2, f4);
+        objectAnimatorOfFloat2.setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat2.setDuration(z ? 500L : 200L);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f5, f6);
+        objectAnimatorOfFloat3.setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat3.setDuration(z ? 500L : 200L);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat3, ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat, objectAnimatorOfFloat2);
         if (view != null) {
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.animation.VisibilityTransition$getAnimatorListener$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     Log.d("VisibilityTransition", "onAnimationEnd");
-                    VisibilityTransition.access$endAction(VisibilityTransition.this, view);
+                    VisibilityTransition.access$endAction(this.this$0, view);
                 }
             });
             addListener(new TransitionListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.animation.VisibilityTransition$getTransitionListener$1
                 @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
                 public final void onTransitionCancel(Transition transition) {
                     Log.d("VisibilityTransition", "onTransitionCancel");
-                    VisibilityTransition.access$endAction(VisibilityTransition.this, view);
+                    VisibilityTransition.access$endAction(this.this$0, view);
                 }
 
                 @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
                 public final void onTransitionEnd(Transition transition) {
                     Log.d("VisibilityTransition", "onTransitionEnd");
-                    VisibilityTransition.access$endAction(VisibilityTransition.this, view);
+                    VisibilityTransition.access$endAction(this.this$0, view);
                 }
             });
         }

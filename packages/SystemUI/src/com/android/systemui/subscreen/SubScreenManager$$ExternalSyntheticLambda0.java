@@ -12,7 +12,6 @@ import com.android.systemui.subscreen.SubScreenManager;
 import com.android.systemui.util.SettingsHelper;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class SubScreenManager$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -24,7 +23,7 @@ public final /* synthetic */ class SubScreenManager$$ExternalSyntheticLambda0 im
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws SecurityException {
         ComponentName componentName;
         int i = this.$r8$classId;
         Object obj = this.f$0;
@@ -66,12 +65,12 @@ public final /* synthetic */ class SubScreenManager$$ExternalSyntheticLambda0 im
                 break;
             case 2:
                 SubScreenManager subScreenManager3 = (SubScreenManager) obj;
-                boolean z3 = true;
+                boolean zIsShowWhenCoverLocked = true;
                 List<ActivityManager.RunningTaskInfo> runningTasks2 = subScreenManager3.mActivityManager.getRunningTasks(1);
                 if (!runningTasks2.isEmpty() && (componentName = ((TaskInfo) runningTasks2.get(0)).topActivity) != null) {
-                    z3 = true ^ subScreenManager3.isShowWhenCoverLocked(componentName);
+                    zIsShowWhenCoverLocked = true ^ subScreenManager3.isShowWhenCoverLocked(componentName);
                 }
-                if (z3) {
+                if (zIsShowWhenCoverLocked) {
                     subScreenManager3.startSubHomeActivity();
                     break;
                 }
@@ -84,9 +83,9 @@ public final /* synthetic */ class SubScreenManager$$ExternalSyntheticLambda0 im
                     anonymousClass5.removeMessages(1000);
                 }
                 int coverScreenTimeout = ((SettingsHelper) subScreenManager4.mSettingsHelperLazy.get()).getCoverScreenTimeout() * 1000;
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(coverScreenTimeout, "sendTurnOffScreenSmartCover() send Message screen after ", " , ");
-                m.append(subScreenManager4.mActivity);
-                Log.i("SubScreenManager", m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(coverScreenTimeout, "sendTurnOffScreenSmartCover() send Message screen after ", " , ");
+                sbM.append(subScreenManager4.mActivity);
+                Log.i("SubScreenManager", sbM.toString());
                 anonymousClass5.sendMessageDelayed(anonymousClass5.obtainMessage(1000), coverScreenTimeout);
                 SubScreenManager subScreenManager5 = SubScreenManager.this;
                 subScreenManager5.startSubHomeActivity(subScreenManager5.mSubDisplay);

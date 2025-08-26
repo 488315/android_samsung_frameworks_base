@@ -104,7 +104,7 @@ public class Item extends Element implements ItemStatusListener {
     }
 
     public Item setPanel(Panel panel) {
-        this.panel = panel.m9809clone();
+        this.panel = panel.m9822clone();
         return this;
     }
 
@@ -251,12 +251,12 @@ public class Item extends Element implements ItemStatusListener {
         if (layer == null) {
             return this.padding;
         }
-        long j = this.padding;
+        long itemEndTime = this.padding;
         Iterator<Item> it = layer.getChildren().iterator();
         while (it.hasNext() && (next = it.next()) != this) {
-            j += next.getItemEndTime();
+            itemEndTime += next.getItemEndTime();
         }
-        return j;
+        return itemEndTime;
     }
 
     public long getAbsoluteEndTime() {

@@ -1,14 +1,27 @@
 package androidx.datastore.core.okio;
 
+import androidx.datastore.core.Closeable;
 import androidx.datastore.core.InterProcessCoordinator;
 import androidx.datastore.core.StorageConnection;
+import com.samsung.android.knox.lockscreen.LSOUtils;
+import java.io.IOException;
+import java.util.Iterator;
+import kotlin.ExceptionsKt__ExceptionsKt;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.ArrayDeque;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 import okio.FileSystem;
 import okio.Path;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OkioStorageConnection implements StorageConnection {
     public final InterProcessCoordinator coordinator;
@@ -18,6 +31,47 @@ public final class OkioStorageConnection implements StorageConnection {
     public final OkioSerializer serializer;
     public final AtomicBoolean closed = new AtomicBoolean(false);
     public final MutexImpl transactionMutex = MutexKt.Mutex$default();
+
+    /* renamed from: androidx.datastore.core.okio.OkioStorageConnection$readScope$1, reason: invalid class name */
+    final class AnonymousClass1<R> extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return OkioStorageConnection.this.readScope(null, this);
+        }
+    }
+
+    /* renamed from: androidx.datastore.core.okio.OkioStorageConnection$writeScope$1, reason: invalid class name and case insensitive filesystem */
+    final class C07611 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        int label;
+        /* synthetic */ Object result;
+
+        public C07611(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return OkioStorageConnection.this.writeScope(null, this);
+        }
+    }
 
     public OkioStorageConnection(FileSystem fileSystem, Path path, OkioSerializer okioSerializer, InterProcessCoordinator interProcessCoordinator, Function0 function0) {
         this.fileSystem = fileSystem;
@@ -38,17 +92,10 @@ public final class OkioStorageConnection implements StorageConnection {
         return this.coordinator;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(7:(2:3|(8:5|6|7|(1:(3:10|11|12)(2:41|42))(2:43|(5:45|46|47|48|(1:50)(1:51))(2:55|56))|14|15|16|(2:(1:19)|20)(2:22|23)))|7|(0)(0)|14|15|16|(0)(0)) */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x007a, code lost:
-    
-        r10 = th;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0085 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0085 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r10v0, types: [kotlin.jvm.functions.Function3] */
     /* JADX WARN: Type inference failed for: r11v8, types: [boolean] */
     /* JADX WARN: Type inference failed for: r9v11, types: [boolean] */
@@ -57,133 +104,114 @@ public final class OkioStorageConnection implements StorageConnection {
     @Override // androidx.datastore.core.StorageConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object readScope(kotlin.jvm.functions.Function3 r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            r9 = this;
-            boolean r0 = r11 instanceof androidx.datastore.core.okio.OkioStorageConnection$readScope$1
-            if (r0 == 0) goto L13
-            r0 = r11
-            androidx.datastore.core.okio.OkioStorageConnection$readScope$1 r0 = (androidx.datastore.core.okio.OkioStorageConnection$readScope$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.datastore.core.okio.OkioStorageConnection$readScope$1 r0 = new androidx.datastore.core.okio.OkioStorageConnection$readScope$1
-            r0.<init>(r9, r11)
-        L18:
-            java.lang.Object r11 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L40
-            if (r2 != r4) goto L38
-            boolean r9 = r0.Z$0
-            java.lang.Object r10 = r0.L$1
-            androidx.datastore.core.Closeable r10 = (androidx.datastore.core.Closeable) r10
-            java.lang.Object r0 = r0.L$0
-            androidx.datastore.core.okio.OkioStorageConnection r0 = (androidx.datastore.core.okio.OkioStorageConnection) r0
-            kotlin.ResultKt.throwOnFailure(r11)     // Catch: java.lang.Throwable -> L32
-            goto L75
-        L32:
-            r11 = move-exception
-            r8 = r11
-            r11 = r9
-            r9 = r0
-            r0 = r8
-            goto L8d
-        L38:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L40:
-            kotlin.ResultKt.throwOnFailure(r11)
-            androidx.datastore.core.okio.AtomicBoolean r11 = r9.closed
-            java.util.concurrent.atomic.AtomicBoolean r11 = r11.delegate
-            boolean r11 = r11.get()
-            if (r11 != 0) goto L9f
-            kotlinx.coroutines.sync.MutexImpl r11 = r9.transactionMutex
-            boolean r11 = r11.tryLock()
-            androidx.datastore.core.okio.OkioReadScope r2 = new androidx.datastore.core.okio.OkioReadScope     // Catch: java.lang.Throwable -> L96
-            okio.FileSystem r5 = r9.fileSystem     // Catch: java.lang.Throwable -> L96
-            okio.Path r6 = r9.path     // Catch: java.lang.Throwable -> L96
-            androidx.datastore.core.okio.OkioSerializer r7 = r9.serializer     // Catch: java.lang.Throwable -> L96
-            r2.<init>(r5, r6, r7)     // Catch: java.lang.Throwable -> L96
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r11)     // Catch: java.lang.Throwable -> L8a
-            r0.L$0 = r9     // Catch: java.lang.Throwable -> L8a
-            r0.L$1 = r2     // Catch: java.lang.Throwable -> L8a
-            r0.Z$0 = r11     // Catch: java.lang.Throwable -> L8a
-            r0.label = r4     // Catch: java.lang.Throwable -> L8a
-            java.lang.Object r10 = r10.invoke(r2, r5, r0)     // Catch: java.lang.Throwable -> L8a
-            if (r10 != r1) goto L71
-            return r1
-        L71:
-            r0 = r9
-            r9 = r11
-            r11 = r10
-            r10 = r2
-        L75:
-            r10.close()     // Catch: java.lang.Throwable -> L7a
-            r10 = r3
-            goto L7b
-        L7a:
-            r10 = move-exception
-        L7b:
-            if (r10 != 0) goto L85
-            if (r9 == 0) goto L84
-            kotlinx.coroutines.sync.MutexImpl r9 = r0.transactionMutex
-            r9.unlock(r3)
-        L84:
-            return r11
-        L85:
-            throw r10     // Catch: java.lang.Throwable -> L86
-        L86:
-            r10 = move-exception
-            r11 = r9
-            r9 = r0
-            goto L97
-        L8a:
-            r10 = move-exception
-            r0 = r10
-            r10 = r2
-        L8d:
-            r10.close()     // Catch: java.lang.Throwable -> L91
-            goto L95
-        L91:
-            r10 = move-exception
-            kotlin.ExceptionsKt__ExceptionsKt.addSuppressed(r0, r10)     // Catch: java.lang.Throwable -> L96
-        L95:
-            throw r0     // Catch: java.lang.Throwable -> L96
-        L96:
-            r10 = move-exception
-        L97:
-            if (r11 == 0) goto L9e
-            kotlinx.coroutines.sync.MutexImpl r9 = r9.transactionMutex
-            r9.unlock(r3)
-        L9e:
-            throw r10
-        L9f:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "StorageConnection has already been disposed."
-            r9.<init>(r10)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.okio.OkioStorageConnection.readScope(kotlin.jvm.functions.Function3, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object readScope(Function3 function3, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        Throwable th;
+        Closeable closeable;
+        OkioStorageConnection okioStorageConnection;
+        ?? r9;
+        Object obj;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj2 = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj2);
+                if (this.closed.delegate.get()) {
+                    throw new IllegalStateException("StorageConnection has already been disposed.");
+                }
+                ?? TryLock = this.transactionMutex.tryLock();
+                OkioReadScope okioReadScope = new OkioReadScope(this.fileSystem, this.path, this.serializer);
+                try {
+                    Boolean boolValueOf = Boolean.valueOf((boolean) TryLock);
+                    anonymousClass1.L$0 = this;
+                    anonymousClass1.L$1 = okioReadScope;
+                    anonymousClass1.Z$0 = TryLock;
+                    anonymousClass1.label = 1;
+                    Object objInvoke = function3.invoke(okioReadScope, boolValueOf, anonymousClass1);
+                    if (objInvoke == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                    okioStorageConnection = this;
+                    r9 = TryLock == true ? 1 : 0;
+                    obj = objInvoke;
+                    closeable = okioReadScope;
+                    closeable.close();
+                    th = null;
+                    if (th != null) {
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    closeable = okioReadScope;
+                    obj2 = TryLock;
+                    closeable.close();
+                    throw th;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                r9 = anonymousClass1.Z$0;
+                closeable = (Closeable) anonymousClass1.L$1;
+                okioStorageConnection = (OkioStorageConnection) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj2);
+                    obj = obj2;
+                    try {
+                        closeable.close();
+                        th = null;
+                    } catch (Throwable th3) {
+                        th = th3;
+                    }
+                    if (th != null) {
+                        if (r9 != false) {
+                            okioStorageConnection.transactionMutex.unlock(null);
+                        }
+                        return obj;
+                    }
+                    try {
+                        throw th;
+                    } catch (Throwable th4) {
+                        th = th4;
+                        obj2 = r9;
+                        this = okioStorageConnection;
+                    }
+                } catch (Throwable th5) {
+                    obj2 = r9;
+                    this = okioStorageConnection;
+                    th = th5;
+                    try {
+                        closeable.close();
+                        throw th;
+                    } catch (Throwable th6) {
+                        ExceptionsKt__ExceptionsKt.addSuppressed(th, th6);
+                        throw th;
+                    }
+                }
+            }
+        } catch (Throwable th7) {
+            th = th7;
+        }
+        if (obj2 != null) {
+            this.transactionMutex.unlock(null);
+        }
+        throw th;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00fd A[Catch: all -> 0x010d, IOException -> 0x0110, TRY_ENTER, TryCatch #3 {IOException -> 0x0110, blocks: (B:19:0x00fd, B:21:0x0105, B:26:0x011b, B:33:0x0129, B:36:0x0126), top: B:7:0x0021 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x011b A[Catch: all -> 0x010d, IOException -> 0x0110, TRY_ENTER, TRY_LEAVE, TryCatch #3 {IOException -> 0x0110, blocks: (B:19:0x00fd, B:21:0x0105, B:26:0x011b, B:33:0x0129, B:36:0x0126), top: B:7:0x0021 }] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00fd A[Catch: all -> 0x010d, IOException -> 0x0110, TRY_ENTER, TryCatch #3 {IOException -> 0x0110, blocks: (B:50:0x00fd, B:52:0x0105, B:61:0x011b, B:68:0x0129, B:67:0x0126), top: B:86:0x0021 }] */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x011b A[Catch: all -> 0x010d, IOException -> 0x0110, TRY_ENTER, TRY_LEAVE, TryCatch #3 {IOException -> 0x0110, blocks: (B:50:0x00fd, B:52:0x0105, B:61:0x011b, B:68:0x0129, B:67:0x0126), top: B:86:0x0021 }] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r0v16 */
     /* JADX WARN: Type inference failed for: r0v17 */
     /* JADX WARN: Type inference failed for: r0v2, types: [androidx.datastore.core.okio.OkioStorageConnection$writeScope$1, java.lang.Object, kotlin.coroutines.Continuation] */
@@ -202,13 +230,177 @@ public final class OkioStorageConnection implements StorageConnection {
     @Override // androidx.datastore.core.StorageConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object writeScope(kotlin.jvm.functions.Function2 r11, kotlin.coroutines.jvm.internal.ContinuationImpl r12) {
-        /*
-            Method dump skipped, instructions count: 338
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.okio.OkioStorageConnection.writeScope(kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object writeScope(Function2 function2, ContinuationImpl continuationImpl) throws Throwable {
+        ?? c07611;
+        ?? r11;
+        OkioStorageConnection okioStorageConnection;
+        ?? r2;
+        Path path;
+        Mutex mutex;
+        FileSystem fileSystem;
+        Path pathResolve;
+        OkioWriteScope okioWriteScope;
+        Throwable th;
+        Closeable closeable;
+        OkioStorageConnection okioStorageConnection2;
+        Mutex mutex2;
+        Path path2;
+        if (continuationImpl instanceof C07611) {
+            C07611 c076112 = (C07611) continuationImpl;
+            int i = c076112.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c076112.label = i - Integer.MIN_VALUE;
+                c07611 = c076112;
+            } else {
+                c07611 = new C07611(continuationImpl);
+            }
+        }
+        ?? r12 = c07611.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c07611.label;
+        try {
+            try {
+                try {
+                } catch (Throwable th2) {
+                    th = th2;
+                    r12.unlock(null);
+                    throw th;
+                }
+            } catch (IOException e) {
+                e = e;
+                okioStorageConnection = c07611;
+                r11 = function2;
+            }
+            try {
+                try {
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(r12);
+                        if (this.closed.delegate.get()) {
+                            throw new IllegalStateException("StorageConnection has already been disposed.");
+                        }
+                        Path pathParent = this.path.parent();
+                        if (pathParent == null) {
+                            throw new IllegalStateException("must have a parent path");
+                        }
+                        FileSystem fileSystem2 = this.fileSystem;
+                        fileSystem2.getClass();
+                        ArrayDeque arrayDeque = new ArrayDeque();
+                        for (Path pathParent2 = pathParent; pathParent2 != null && !fileSystem2.exists(pathParent2); pathParent2 = pathParent2.parent()) {
+                            arrayDeque.addFirst(pathParent2);
+                        }
+                        Iterator it = arrayDeque.iterator();
+                        while (it.hasNext()) {
+                            fileSystem2.createDirectory((Path) it.next());
+                        }
+                        ?? r22 = this.transactionMutex;
+                        c07611.L$0 = this;
+                        c07611.L$1 = function2;
+                        c07611.L$2 = pathParent;
+                        c07611.L$3 = r22;
+                        c07611.label = 1;
+                        if (r22.lock(c07611) != coroutineSingletons) {
+                            r2 = function2;
+                            path = pathParent;
+                            mutex = r22;
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 != 1) {
+                        if (i2 != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        closeable = (Closeable) c07611.L$3;
+                        Path path3 = (Path) c07611.L$2;
+                        mutex2 = (Mutex) c07611.L$1;
+                        okioStorageConnection2 = (OkioStorageConnection) c07611.L$0;
+                        try {
+                            ResultKt.throwOnFailure(r12);
+                            path2 = path3;
+                            Unit unit = Unit.INSTANCE;
+                            try {
+                                closeable.close();
+                                th = null;
+                            } catch (Throwable th3) {
+                                th = th3;
+                            }
+                            if (th == null) {
+                                throw th;
+                            }
+                            if (okioStorageConnection2.fileSystem.exists(path2)) {
+                                okioStorageConnection2.fileSystem.atomicMove(path2, okioStorageConnection2.path);
+                            }
+                            Unit unit2 = Unit.INSTANCE;
+                            mutex2.unlock(null);
+                            return Unit.INSTANCE;
+                        } catch (Throwable th4) {
+                            th = th4;
+                            try {
+                                closeable.close();
+                            } catch (Throwable th5) {
+                                ExceptionsKt__ExceptionsKt.addSuppressed(th, th5);
+                            }
+                            throw th;
+                        }
+                    }
+                    Mutex mutex3 = (Mutex) c07611.L$3;
+                    path = (Path) c07611.L$2;
+                    Function2 function22 = (Function2) c07611.L$1;
+                    OkioStorageConnection okioStorageConnection3 = (OkioStorageConnection) c07611.L$0;
+                    ResultKt.throwOnFailure(r12);
+                    mutex = mutex3;
+                    this = okioStorageConnection3;
+                    r2 = function22;
+                    c07611.L$0 = this;
+                    c07611.L$1 = mutex;
+                    c07611.L$2 = pathResolve;
+                    c07611.L$3 = okioWriteScope;
+                    c07611.label = 2;
+                    if (r2.invoke(okioWriteScope, c07611) != coroutineSingletons) {
+                        okioStorageConnection2 = this;
+                        mutex2 = mutex;
+                        closeable = okioWriteScope;
+                        path2 = pathResolve;
+                        Unit unit3 = Unit.INSTANCE;
+                        closeable.close();
+                        th = null;
+                        if (th == null) {
+                        }
+                    }
+                    return coroutineSingletons;
+                } catch (Throwable th6) {
+                    th = th6;
+                    closeable = okioWriteScope;
+                    closeable.close();
+                    throw th;
+                }
+                fileSystem.delete(pathResolve);
+                okioWriteScope = new OkioWriteScope(fileSystem, pathResolve, this.serializer);
+            } catch (IOException e2) {
+                okioStorageConnection = this;
+                e = e2;
+                r11 = pathResolve;
+                if (!okioStorageConnection.fileSystem.exists(r11)) {
+                    throw e;
+                }
+                try {
+                    okioStorageConnection.fileSystem.delete(r11);
+                    throw e;
+                } catch (IOException unused) {
+                    throw e;
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            Path path4 = this.path;
+            fileSystem = this.fileSystem;
+            sb.append(path4.name());
+            sb.append(LSOUtils.TEMP_DIR);
+            pathResolve = path.resolve(sb.toString());
+        } catch (Throwable th7) {
+            th = th7;
+            r12 = coroutineSingletons;
+            r12.unlock(null);
+            throw th;
+        }
     }
 }

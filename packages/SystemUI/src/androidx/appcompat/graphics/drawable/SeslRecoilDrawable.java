@@ -20,10 +20,10 @@ import android.view.animation.PathInterpolator;
 import androidx.appcompat.R$styleable;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.RecyclerView;
+import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslRecoilDrawable extends LayerDrawable {
     public static final Interpolator PRESS_INTERPOLATOR = new LinearInterpolator();
@@ -48,36 +48,42 @@ public class SeslRecoilDrawable extends LayerDrawable {
         init();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0039 A[PHI: r4
+      0x0039: PHI (r4v7 int) = (r4v2 int), (r4v5 int) binds: [B:8:0x0037, B:11:0x0049] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void draw(Canvas canvas) {
-        float height;
+        float fHeight;
         int saveCount = canvas.getSaveCount();
         if (getNumberOfLayers() <= 0) {
-            float f = this.mHotspotPointX;
-            float f2 = this.mHotspotPointY;
+            float fCenterX = this.mHotspotPointX;
+            float fCenterY = this.mHotspotPointY;
             Rect rect = new Rect();
             getHotspotBounds(rect);
             if (rect.height() > 0) {
-                f = rect.centerX();
-                f2 = rect.centerY();
+                fCenterX = rect.centerX();
+                fCenterY = rect.centerY();
             }
-            canvas.translate(f, f2);
+            canvas.translate(fCenterX, fCenterY);
             Paint paint = new Paint();
             paint.setColor(getAnimatingTintColor());
-            int i = this.mRadius;
-            if (i <= 0) {
+            int iHeight = this.mRadius;
+            if (iHeight > 0) {
+                fHeight = iHeight;
+                canvas.drawCircle(0.0f, 0.0f, fHeight, paint);
+                canvas.translate(-fCenterX, -fCenterY);
+            } else {
                 Rect rect2 = new Rect();
                 getHotspotBounds(rect2);
-                i = rect2.height() / 2;
-                if (i <= 0) {
-                    height = getBounds().height() / 2;
-                    canvas.drawCircle(0.0f, 0.0f, height, paint);
-                    canvas.translate(-f, -f2);
+                iHeight = rect2.height() / 2;
+                if (iHeight <= 0) {
+                    fHeight = getBounds().height() / 2;
                 }
+                canvas.drawCircle(0.0f, 0.0f, fHeight, paint);
+                canvas.translate(-fCenterX, -fCenterY);
             }
-            height = i;
-            canvas.drawCircle(0.0f, 0.0f, height, paint);
-            canvas.translate(-f, -f2);
         } else {
             super.draw(canvas);
         }
@@ -99,22 +105,22 @@ public class SeslRecoilDrawable extends LayerDrawable {
     }
 
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
-    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) {
-        TypedArray obtainAttributes = resources.obtainAttributes(attributeSet, R$styleable.SeslRecoil);
+    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R$styleable.SeslRecoil);
         try {
             try {
-                updateStateFromTypedArray(obtainAttributes);
+                updateStateFromTypedArray(typedArrayObtainAttributes);
             } catch (XmlPullParserException e) {
                 Log.e("SeslRecoilDrawable", "Failed to parse!!", e);
             }
             super.inflate(resources, xmlPullParser, attributeSet, theme);
-            Drawable findDrawableByLayerId = findDrawableByLayerId(R.id.mask);
-            if (findDrawableByLayerId != null) {
-                findDrawableByLayerId.setTint(0);
-                findDrawableByLayerId.setTintBlendMode(BlendMode.SRC_IN);
+            Drawable drawableFindDrawableByLayerId = findDrawableByLayerId(R.id.mask);
+            if (drawableFindDrawableByLayerId != null) {
+                drawableFindDrawableByLayerId.setTint(0);
+                drawableFindDrawableByLayerId.setTintBlendMode(BlendMode.SRC_IN);
             }
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 
@@ -124,12 +130,12 @@ public class SeslRecoilDrawable extends LayerDrawable {
         this.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.graphics.drawable.SeslRecoilDrawable$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SeslRecoilDrawable seslRecoilDrawable = SeslRecoilDrawable.this;
+                SeslRecoilDrawable seslRecoilDrawable = this.f$0;
                 Interpolator interpolator = SeslRecoilDrawable.PRESS_INTERPOLATOR;
                 int animatingTintColor = seslRecoilDrawable.getAnimatingTintColor();
-                Drawable findDrawableByLayerId = seslRecoilDrawable.findDrawableByLayerId(R.id.mask);
-                if (findDrawableByLayerId != null) {
-                    findDrawableByLayerId.setTint(animatingTintColor);
+                Drawable drawableFindDrawableByLayerId = seslRecoilDrawable.findDrawableByLayerId(R.id.mask);
+                if (drawableFindDrawableByLayerId != null) {
+                    drawableFindDrawableByLayerId.setTint(animatingTintColor);
                 } else {
                     seslRecoilDrawable.setTintBlendMode(BlendMode.HARD_LIGHT);
                     seslRecoilDrawable.setTint(animatingTintColor);
@@ -213,18 +219,18 @@ public class SeslRecoilDrawable extends LayerDrawable {
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
     public final void setTintBlendMode(BlendMode blendMode) {
         super.setTintBlendMode(blendMode);
-        Drawable findDrawableByLayerId = findDrawableByLayerId(R.id.mask);
-        if (findDrawableByLayerId != null) {
-            findDrawableByLayerId.setTintBlendMode(BlendMode.SRC_IN);
+        Drawable drawableFindDrawableByLayerId = findDrawableByLayerId(R.id.mask);
+        if (drawableFindDrawableByLayerId != null) {
+            drawableFindDrawableByLayerId.setTintBlendMode(BlendMode.SRC_IN);
         }
     }
 
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
     public final void setTintList(ColorStateList colorStateList) {
         super.setTintList(colorStateList);
-        Drawable findDrawableByLayerId = findDrawableByLayerId(R.id.mask);
-        if (findDrawableByLayerId != null) {
-            findDrawableByLayerId.setTint(getAnimatingTintColor());
+        Drawable drawableFindDrawableByLayerId = findDrawableByLayerId(R.id.mask);
+        if (drawableFindDrawableByLayerId != null) {
+            drawableFindDrawableByLayerId.setTint(getAnimatingTintColor());
         }
     }
 

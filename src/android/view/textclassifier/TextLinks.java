@@ -322,14 +322,14 @@ public final class TextLinks implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
+            String string = parcel.readString();
             LocaleList localeList = (LocaleList) parcel.readParcelable(null, LocaleList.class);
             TextClassifier.EntityConfig entityConfig = (TextClassifier.EntityConfig) parcel.readParcelable(null, TextClassifier.EntityConfig.class);
-            Bundle readBundle = parcel.readBundle();
-            String readString2 = parcel.readString();
-            ZonedDateTime parse = readString2 == null ? null : ZonedDateTime.parse(readString2);
+            Bundle bundle = parcel.readBundle();
+            String string2 = parcel.readString();
+            ZonedDateTime zonedDateTime = string2 == null ? null : ZonedDateTime.parse(string2);
             SystemTextClassifierMetadata systemTextClassifierMetadata = (SystemTextClassifierMetadata) parcel.readParcelable(null, SystemTextClassifierMetadata.class);
-            Request request = new Request(readString, localeList, entityConfig, true, parse, readBundle);
+            Request request = new Request(string, localeList, entityConfig, true, zonedDateTime, bundle);
             request.setSystemTextClassifierMetadata(systemTextClassifierMetadata);
             return request;
         }

@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VisibleTasks {
     public final int mDisplayId;
@@ -50,12 +49,12 @@ public class VisibleTasks {
                 }
             }
             if (i != -1) {
-                List list = (List) ((HashMap) this.mMap).get(Integer.valueOf(i));
-                if (list == null) {
-                    list = new ArrayList();
-                    ((HashMap) this.mMap).put(Integer.valueOf(i), list);
+                List arrayList = (List) ((HashMap) this.mMap).get(Integer.valueOf(i));
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    ((HashMap) this.mMap).put(Integer.valueOf(i), arrayList);
                 }
-                list.add(runningTaskInfo);
+                arrayList.add(runningTaskInfo);
             }
         }
     }

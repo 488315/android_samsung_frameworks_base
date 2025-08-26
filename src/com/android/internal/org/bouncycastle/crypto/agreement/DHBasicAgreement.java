@@ -49,11 +49,11 @@ public class DHBasicAgreement implements BasicAgreement {
         if (y != null) {
             BigInteger bigInteger = ONE;
             if (y.compareTo(bigInteger) > 0 && y.compareTo(p.subtract(bigInteger)) < 0) {
-                BigInteger modPow = y.modPow(this.key.getX(), p);
-                if (modPow.equals(bigInteger)) {
+                BigInteger bigIntegerModPow = y.modPow(this.key.getX(), p);
+                if (bigIntegerModPow.equals(bigInteger)) {
                     throw new IllegalStateException("Shared key can't be 1");
                 }
-                return modPow;
+                return bigIntegerModPow;
             }
         }
         throw new IllegalArgumentException("Diffie-Hellman public key is weak");

@@ -6,7 +6,6 @@ import com.android.systemui.accessibility.MagnificationImpl$$ExternalSyntheticOu
 import com.android.systemui.dump.DumpManager;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenLifecycle extends SecLifecycle implements Dumpable {
     public int mScreenState = 0;
@@ -27,7 +26,6 @@ public class ScreenLifecycle extends SecLifecycle implements Dumpable {
         return this.mScreenState;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Observer {
         default void onScreenTurnedOff() {
         }

@@ -102,11 +102,11 @@ public class Base64Encoder implements Encoder {
         int i3 = i;
         int i4 = i2;
         while (i4 > 0) {
-            int min = Math.min(54, i4);
+            int iMin = Math.min(54, i4);
             Base64Encoder base64Encoder = this;
-            outputStream.write(bArr2, 0, base64Encoder.encode(bArr, i3, min, bArr2, 0));
-            i3 += min;
-            i4 -= min;
+            outputStream.write(bArr2, 0, base64Encoder.encode(bArr, i3, iMin, bArr2, 0));
+            i3 += iMin;
+            i4 -= iMin;
             this = base64Encoder;
         }
         return ((i2 + 2) / 3) * 4;
@@ -130,21 +130,21 @@ public class Base64Encoder implements Encoder {
             }
             i4--;
         }
-        int nextI = nextI(bArr, i, i4);
+        int iNextI = nextI(bArr, i, i4);
         int i6 = 0;
         int i7 = 0;
-        while (nextI < i4) {
-            int i8 = nextI + 1;
-            byte b = this.decodingTable[bArr[nextI]];
-            int nextI2 = nextI(bArr, i8, i4);
-            int i9 = nextI2 + 1;
-            byte b2 = this.decodingTable[bArr[nextI2]];
-            int nextI3 = nextI(bArr, i9, i4);
-            int i10 = nextI3 + 1;
-            byte b3 = this.decodingTable[bArr[nextI3]];
-            int nextI4 = nextI(bArr, i10, i4);
-            int i11 = nextI4 + 1;
-            byte b4 = this.decodingTable[bArr[nextI4]];
+        while (iNextI < i4) {
+            int i8 = iNextI + 1;
+            byte b = this.decodingTable[bArr[iNextI]];
+            int iNextI2 = nextI(bArr, i8, i4);
+            int i9 = iNextI2 + 1;
+            byte b2 = this.decodingTable[bArr[iNextI2]];
+            int iNextI3 = nextI(bArr, i9, i4);
+            int i10 = iNextI3 + 1;
+            byte b3 = this.decodingTable[bArr[iNextI3]];
+            int iNextI4 = nextI(bArr, i10, i4);
+            int i11 = iNextI4 + 1;
+            byte b4 = this.decodingTable[bArr[iNextI4]];
             if ((b | b2 | b3 | b4) < 0) {
                 throw new IOException("invalid characters encountered in base64 data");
             }
@@ -158,15 +158,15 @@ public class Base64Encoder implements Encoder {
                 i6 = 0;
             }
             i7 += 3;
-            nextI = nextI(bArr, i11, i4);
+            iNextI = nextI(bArr, i11, i4);
         }
         if (i6 > 0) {
             outputStream.write(bArr2, 0, i6);
         }
-        int nextI5 = nextI(bArr, nextI, i3);
-        int nextI6 = nextI(bArr, nextI5 + 1, i3);
-        int nextI7 = nextI(bArr, nextI6 + 1, i3);
-        return i7 + decodeLastBlock(outputStream, (char) bArr[nextI5], (char) bArr[nextI6], (char) bArr[nextI7], (char) bArr[nextI(bArr, nextI7 + 1, i3)]);
+        int iNextI5 = nextI(bArr, iNextI, i3);
+        int iNextI6 = nextI(bArr, iNextI5 + 1, i3);
+        int iNextI7 = nextI(bArr, iNextI6 + 1, i3);
+        return i7 + decodeLastBlock(outputStream, (char) bArr[iNextI5], (char) bArr[iNextI6], (char) bArr[iNextI7], (char) bArr[nextI(bArr, iNextI7 + 1, i3)]);
     }
 
     private int nextI(byte[] bArr, int i, int i2) {
@@ -194,21 +194,21 @@ public class Base64Encoder implements Encoder {
             }
             i--;
         }
-        int nextI = nextI(str, 0, i);
+        int iNextI = nextI(str, 0, i);
         int i3 = 0;
         int i4 = 0;
-        while (nextI < i) {
-            int i5 = nextI + 1;
-            byte b = this.decodingTable[str.charAt(nextI)];
-            int nextI2 = nextI(str, i5, i);
-            int i6 = nextI2 + 1;
-            byte b2 = this.decodingTable[str.charAt(nextI2)];
-            int nextI3 = nextI(str, i6, i);
-            int i7 = nextI3 + 1;
-            byte b3 = this.decodingTable[str.charAt(nextI3)];
-            int nextI4 = nextI(str, i7, i);
-            int i8 = nextI4 + 1;
-            byte b4 = this.decodingTable[str.charAt(nextI4)];
+        while (iNextI < i) {
+            int i5 = iNextI + 1;
+            byte b = this.decodingTable[str.charAt(iNextI)];
+            int iNextI2 = nextI(str, i5, i);
+            int i6 = iNextI2 + 1;
+            byte b2 = this.decodingTable[str.charAt(iNextI2)];
+            int iNextI3 = nextI(str, i6, i);
+            int i7 = iNextI3 + 1;
+            byte b3 = this.decodingTable[str.charAt(iNextI3)];
+            int iNextI4 = nextI(str, i7, i);
+            int i8 = iNextI4 + 1;
+            byte b4 = this.decodingTable[str.charAt(iNextI4)];
             if ((b | b2 | b3 | b4) < 0) {
                 throw new IOException("invalid characters encountered in base64 data");
             }
@@ -222,15 +222,15 @@ public class Base64Encoder implements Encoder {
                 outputStream.write(bArr);
                 i3 = 0;
             }
-            nextI = nextI(str, i8, i);
+            iNextI = nextI(str, i8, i);
         }
         if (i3 > 0) {
             outputStream.write(bArr, 0, i3);
         }
-        int nextI5 = nextI(str, nextI, length);
-        int nextI6 = nextI(str, nextI5 + 1, length);
-        int nextI7 = nextI(str, nextI6 + 1, length);
-        return i4 + decodeLastBlock(outputStream, str.charAt(nextI5), str.charAt(nextI6), str.charAt(nextI7), str.charAt(nextI(str, nextI7 + 1, length)));
+        int iNextI5 = nextI(str, iNextI, length);
+        int iNextI6 = nextI(str, iNextI5 + 1, length);
+        int iNextI7 = nextI(str, iNextI6 + 1, length);
+        return i4 + decodeLastBlock(outputStream, str.charAt(iNextI5), str.charAt(iNextI6), str.charAt(iNextI7), str.charAt(nextI(str, iNextI7 + 1, length)));
     }
 
     private int decodeLastBlock(OutputStream outputStream, char c, char c2, char c3, char c4) throws IOException {

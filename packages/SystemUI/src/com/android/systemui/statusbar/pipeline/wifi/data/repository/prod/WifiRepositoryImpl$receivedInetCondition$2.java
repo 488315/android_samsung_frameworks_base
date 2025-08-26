@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiRepositoryImpl$receivedInetCondition$2 extends SuspendLambda implements Function2 {
     /* synthetic */ int I$0;
@@ -51,9 +50,9 @@ final class WifiRepositoryImpl$receivedInetCondition$2 extends SuspendLambda imp
         LogLevel logLevel = LogLevel.DEBUG;
         WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(0);
         LogBuffer logBuffer = wifiRepositoryImpl.inputLogger;
-        LogMessage obtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

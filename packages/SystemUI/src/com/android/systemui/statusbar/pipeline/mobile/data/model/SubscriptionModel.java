@@ -8,7 +8,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscriptionModel {
     public final boolean bootstrap;
@@ -47,9 +46,9 @@ public final class SubscriptionModel {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.subscriptionId) * 31, 31, this.isOpportunistic), 31, this.isExclusivelyNonTerrestrial);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.subscriptionId) * 31, 31, this.isOpportunistic), 31, this.isExclusivelyNonTerrestrial);
         ParcelUuid parcelUuid = this.groupUuid;
-        return Boolean.hashCode(this.simSetting) + ReorderTile$$ExternalSyntheticOutline0.m(this.simSlotId, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.profileClass, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((m + (parcelUuid == null ? 0 : parcelUuid.hashCode())) * 31, 31, this.carrierName), 31), 31, this.embedded), 31, this.bootstrap), 31);
+        return Boolean.hashCode(this.simSetting) + ReorderTile$$ExternalSyntheticOutline0.m(this.simSlotId, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.profileClass, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iM + (parcelUuid == null ? 0 : parcelUuid.hashCode())) * 31, 31, this.carrierName), 31), 31, this.embedded), 31, this.bootstrap), 31);
     }
 
     public final String toString() {

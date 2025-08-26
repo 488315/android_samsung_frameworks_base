@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ChildHelper {
     public final Callback mCallback;
@@ -17,7 +16,6 @@ public class ChildHelper {
     public final Bucket mBucket = new Bucket();
     public final List mHiddenViews = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Bucket {
         public long mData = 0;
         public Bucket mNext;
@@ -129,7 +127,6 @@ public class ChildHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
@@ -214,14 +211,14 @@ public class ChildHelper {
         int i2 = i;
         while (i2 < childCount) {
             Bucket bucket = this.mBucket;
-            int countOnesBefore = i - (i2 - bucket.countOnesBefore(i2));
-            if (countOnesBefore == 0) {
+            int iCountOnesBefore = i - (i2 - bucket.countOnesBefore(i2));
+            if (iCountOnesBefore == 0) {
                 while (bucket.get(i2)) {
                     i2++;
                 }
                 return i2;
             }
-            i2 += countOnesBefore;
+            i2 += iCountOnesBefore;
         }
         return -1;
     }
@@ -253,15 +250,15 @@ public class ChildHelper {
     }
 
     public final int indexOfChild(View view) {
-        int indexOfChild = RecyclerView.this.indexOfChild(view);
-        if (indexOfChild == -1) {
+        int iIndexOfChild = RecyclerView.this.indexOfChild(view);
+        if (iIndexOfChild == -1) {
             return -1;
         }
         Bucket bucket = this.mBucket;
-        if (bucket.get(indexOfChild)) {
+        if (bucket.get(iIndexOfChild)) {
             return -1;
         }
-        return indexOfChild - bucket.countOnesBefore(indexOfChild);
+        return iIndexOfChild - bucket.countOnesBefore(iIndexOfChild);
     }
 
     public final boolean isHidden(View view) {

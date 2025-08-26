@@ -20,7 +20,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TransitionLayout extends ConstraintLayout implements LaunchableView {
     public static final int $stable = 8;
@@ -50,15 +49,15 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
             View childAt = getChildAt(i3);
             WidgetState widgetState = this.currentState.getWidgetStates().get(Integer.valueOf(childAt.getId()));
             if (widgetState != null) {
-                Integer valueOf = (!(childAt instanceof TextView) || widgetState.getWidth() >= widgetState.getMeasureWidth()) ? null : Integer.valueOf(((TextView) childAt).getLayout().getParagraphDirection(0) == -1 ? widgetState.getMeasureWidth() - widgetState.getWidth() : 0);
+                Integer numValueOf = (!(childAt instanceof TextView) || widgetState.getWidth() >= widgetState.getMeasureWidth()) ? null : Integer.valueOf(((TextView) childAt).getLayout().getParagraphDirection(0) == -1 ? widgetState.getMeasureWidth() - widgetState.getWidth() : 0);
                 if (childAt.getMeasuredWidth() != widgetState.getMeasureWidth() || childAt.getMeasuredHeight() != widgetState.getMeasureHeight()) {
                     childAt.measure(View.MeasureSpec.makeMeasureSpec(widgetState.getMeasureWidth(), 1073741824), View.MeasureSpec.makeMeasureSpec(widgetState.getMeasureHeight(), 1073741824));
                     childAt.layout(0, 0, childAt.getMeasuredWidth(), childAt.getMeasuredHeight());
                 }
-                int intValue = valueOf != null ? valueOf.intValue() : 0;
-                int x = (((int) widgetState.getX()) + i) - intValue;
+                int iIntValue = numValueOf != null ? numValueOf.intValue() : 0;
+                int x = (((int) widgetState.getX()) + i) - iIntValue;
                 int y = ((int) widgetState.getY()) + i2;
-                boolean z = valueOf != null;
+                boolean z = numValueOf != null;
                 childAt.setLeftTopRightBottom(x, y, (z ? widgetState.getMeasureWidth() : widgetState.getWidth()) + x, (z ? widgetState.getMeasureHeight() : widgetState.getHeight()) + y);
                 childAt.setScaleX(widgetState.getScale());
                 childAt.setScaleY(widgetState.getScale());
@@ -66,7 +65,7 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
                 if (clipBounds == null) {
                     clipBounds = new Rect();
                 }
-                clipBounds.set(intValue, 0, widgetState.getWidth() + intValue, widgetState.getHeight());
+                clipBounds.set(iIntValue, 0, widgetState.getWidth() + iIntValue, widgetState.getHeight());
                 childAt.setClipBounds(clipBounds);
                 CrossFadeHelper.fadeIn(childAt, widgetState.getAlpha(), false);
                 childAt.setVisibility((widgetState.getGone() || widgetState.getAlpha() == 0.0f) ? 4 : 0);
@@ -153,7 +152,7 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintLayout, android.view.ViewGroup, android.view.View
-    public void dispatchDraw(Canvas canvas) {
+    public void dispatchDraw(Canvas canvas) throws NumberFormatException {
         canvas.save();
         canvas.clipRect(this.boundsRect);
         super.dispatchDraw(canvas);
@@ -273,20 +272,18 @@ public final class TransitionLayout extends ConstraintLayout implements Launchab
         this.delegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.util.animation.TransitionLayout$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Unit delegate$lambda$0;
-                delegate$lambda$0 = TransitionLayout.delegate$lambda$0(TransitionLayout.this, ((Integer) obj).intValue());
-                return delegate$lambda$0;
+            public final Object mo781invoke(Object obj) {
+                return TransitionLayout.delegate$lambda$0(this.f$0, ((Integer) obj).intValue());
             }
         });
         this.measureState = new TransitionViewState();
         this.preDrawApplicator = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.util.animation.TransitionLayout$preDrawApplicator$1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public boolean onPreDraw() {
-                TransitionLayout.this.updateScheduled = false;
-                TransitionLayout.this.getViewTreeObserver().removeOnPreDrawListener(this);
-                TransitionLayout.this.isPreDrawApplicatorRegistered = false;
-                TransitionLayout.this.applyCurrentState();
+                this.this$0.updateScheduled = false;
+                this.this$0.getViewTreeObserver().removeOnPreDrawListener(this);
+                this.this$0.isPreDrawApplicatorRegistered = false;
+                this.this$0.applyCurrentState();
                 return true;
             }
         };

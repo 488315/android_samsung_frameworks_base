@@ -6,7 +6,6 @@ import com.android.systemui.common.shared.model.Icon;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.ClosedFloatingPointRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogSliderStateModel {
     public final Icon.Loaded icon;

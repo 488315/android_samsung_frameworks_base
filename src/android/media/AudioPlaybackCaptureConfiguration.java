@@ -27,9 +27,7 @@ public final class AudioPlaybackCaptureConfiguration {
         return getIntPredicates(1, new ToIntFunction() { // from class: android.media.AudioPlaybackCaptureConfiguration$$ExternalSyntheticLambda2
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int usage;
-                usage = ((AudioMixingRule.AudioMixMatchCriterion) obj).getAudioAttributes().getUsage();
-                return usage;
+                return ((AudioMixingRule.AudioMixMatchCriterion) obj).getAudioAttributes().getUsage();
             }
         });
     }
@@ -38,9 +36,7 @@ public final class AudioPlaybackCaptureConfiguration {
         return getIntPredicates(4, new ToIntFunction() { // from class: android.media.AudioPlaybackCaptureConfiguration$$ExternalSyntheticLambda1
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intProp;
-                intProp = ((AudioMixingRule.AudioMixMatchCriterion) obj).getIntProp();
-                return intProp;
+                return ((AudioMixingRule.AudioMixMatchCriterion) obj).getIntProp();
             }
         });
     }
@@ -49,9 +45,7 @@ public final class AudioPlaybackCaptureConfiguration {
         return getIntPredicates(32769, new ToIntFunction() { // from class: android.media.AudioPlaybackCaptureConfiguration$$ExternalSyntheticLambda4
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int usage;
-                usage = ((AudioMixingRule.AudioMixMatchCriterion) obj).getAudioAttributes().getUsage();
-                return usage;
+                return ((AudioMixingRule.AudioMixMatchCriterion) obj).getAudioAttributes().getUsage();
             }
         });
     }
@@ -60,9 +54,7 @@ public final class AudioPlaybackCaptureConfiguration {
         return getIntPredicates(32772, new ToIntFunction() { // from class: android.media.AudioPlaybackCaptureConfiguration$$ExternalSyntheticLambda3
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intProp;
-                intProp = ((AudioMixingRule.AudioMixMatchCriterion) obj).getIntProp();
-                return intProp;
+                return ((AudioMixingRule.AudioMixMatchCriterion) obj).getIntProp();
             }
         });
     }
@@ -107,28 +99,28 @@ public final class AudioPlaybackCaptureConfiguration {
             }
         }
 
-        public Builder addMatchingUsage(int i) {
+        public Builder addMatchingUsage(int i) throws IllegalArgumentException {
             Preconditions.checkState(this.mUsageMatchType != 2, ERROR_MESSAGE_MISMATCHED_RULES);
             this.mAudioMixingRuleBuilder.addRule(new AudioAttributes.Builder().setUsage(i).build(), 1);
             this.mUsageMatchType = 1;
             return this;
         }
 
-        public Builder addMatchingUid(int i) {
+        public Builder addMatchingUid(int i) throws IllegalArgumentException {
             Preconditions.checkState(this.mUidMatchType != 2, ERROR_MESSAGE_MISMATCHED_RULES);
             this.mAudioMixingRuleBuilder.addMixRule(4, Integer.valueOf(i));
             this.mUidMatchType = 1;
             return this;
         }
 
-        public Builder excludeUsage(int i) {
+        public Builder excludeUsage(int i) throws IllegalArgumentException {
             Preconditions.checkState(this.mUsageMatchType != 1, ERROR_MESSAGE_MISMATCHED_RULES);
             this.mAudioMixingRuleBuilder.excludeRule(new AudioAttributes.Builder().setUsage(i).build(), 1);
             this.mUsageMatchType = 2;
             return this;
         }
 
-        public Builder excludeUid(int i) {
+        public Builder excludeUid(int i) throws IllegalArgumentException {
             Preconditions.checkState(this.mUidMatchType != 1, ERROR_MESSAGE_MISMATCHED_RULES);
             this.mAudioMixingRuleBuilder.excludeMixRule(4, Integer.valueOf(i));
             this.mUidMatchType = 2;

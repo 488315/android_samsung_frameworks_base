@@ -119,19 +119,17 @@ public class AudioProfile implements Parcelable {
         return (String) Arrays.stream(iArr).mapToObj(new IntFunction() { // from class: android.media.AudioProfile$$ExternalSyntheticLambda0
             @Override // java.util.function.IntFunction
             public final Object apply(int i) {
-                String format;
-                format = String.format("0x%02X", Integer.valueOf(i));
-                return format;
+                return String.format("0x%02X", Integer.valueOf(i));
             }
         }).collect(Collectors.joining(", "));
     }
 
     private static boolean hasIdenticalElements(int[] iArr, int[] iArr2) {
-        int[] copyOf = Arrays.copyOf(iArr, iArr.length);
-        Arrays.sort(copyOf);
-        int[] copyOf2 = Arrays.copyOf(iArr2, iArr2.length);
-        Arrays.sort(copyOf2);
-        return Arrays.equals(copyOf, copyOf2);
+        int[] iArrCopyOf = Arrays.copyOf(iArr, iArr.length);
+        Arrays.sort(iArrCopyOf);
+        int[] iArrCopyOf2 = Arrays.copyOf(iArr2, iArr2.length);
+        Arrays.sort(iArrCopyOf2);
+        return Arrays.equals(iArrCopyOf, iArrCopyOf2);
     }
 
     @Override // android.os.Parcelable

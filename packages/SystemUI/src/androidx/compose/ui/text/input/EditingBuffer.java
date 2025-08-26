@@ -8,7 +8,6 @@ import androidx.compose.ui.text.TextRangeKt;
 import androidx.compose.ui.text.internal.InlineClassHelperKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EditingBuffer {
     public int compositionEnd;
@@ -17,7 +16,6 @@ public final class EditingBuffer {
     public int selectionEnd;
     public int selectionStart;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,19 +34,19 @@ public final class EditingBuffer {
     }
 
     public final void delete$ui_text_release(int i, int i2) {
-        long TextRange = TextRangeKt.TextRange(i, i2);
+        long jTextRange = TextRangeKt.TextRange(i, i2);
         this.gapBuffer.replace(i, i2, "");
-        long m771updateRangeAfterDeletepWDy79M = EditingBufferKt.m771updateRangeAfterDeletepWDy79M(TextRangeKt.TextRange(this.selectionStart, this.selectionEnd), TextRange);
-        setSelectionStart(TextRange.m750getMinimpl(m771updateRangeAfterDeletepWDy79M));
-        setSelectionEnd(TextRange.m749getMaximpl(m771updateRangeAfterDeletepWDy79M));
+        long jM773updateRangeAfterDeletepWDy79M = EditingBufferKt.m773updateRangeAfterDeletepWDy79M(TextRangeKt.TextRange(this.selectionStart, this.selectionEnd), jTextRange);
+        setSelectionStart(TextRange.m752getMinimpl(jM773updateRangeAfterDeletepWDy79M));
+        setSelectionEnd(TextRange.m751getMaximpl(jM773updateRangeAfterDeletepWDy79M));
         if (hasComposition$ui_text_release()) {
-            long m771updateRangeAfterDeletepWDy79M2 = EditingBufferKt.m771updateRangeAfterDeletepWDy79M(TextRangeKt.TextRange(this.compositionStart, this.compositionEnd), TextRange);
-            if (TextRange.m747getCollapsedimpl(m771updateRangeAfterDeletepWDy79M2)) {
+            long jM773updateRangeAfterDeletepWDy79M2 = EditingBufferKt.m773updateRangeAfterDeletepWDy79M(TextRangeKt.TextRange(this.compositionStart, this.compositionEnd), jTextRange);
+            if (TextRange.m749getCollapsedimpl(jM773updateRangeAfterDeletepWDy79M2)) {
                 this.compositionStart = -1;
                 this.compositionEnd = -1;
             } else {
-                this.compositionStart = TextRange.m750getMinimpl(m771updateRangeAfterDeletepWDy79M2);
-                this.compositionEnd = TextRange.m749getMaximpl(m771updateRangeAfterDeletepWDy79M2);
+                this.compositionStart = TextRange.m752getMinimpl(jM773updateRangeAfterDeletepWDy79M2);
+                this.compositionEnd = TextRange.m751getMaximpl(jM773updateRangeAfterDeletepWDy79M2);
             }
         }
     }
@@ -62,10 +60,10 @@ public final class EditingBuffer {
         if (i < partialGapBuffer.bufStart) {
             return partialGapBuffer.text.charAt(i);
         }
-        int gapLength = gapBuffer.capacity - gapBuffer.gapLength();
+        int iGapLength = gapBuffer.capacity - gapBuffer.gapLength();
         int i2 = partialGapBuffer.bufStart;
-        if (i >= gapLength + i2) {
-            return partialGapBuffer.text.charAt(i - ((gapLength - partialGapBuffer.bufEnd) + i2));
+        if (i >= iGapLength + i2) {
+            return partialGapBuffer.text.charAt(i - ((iGapLength - partialGapBuffer.bufEnd) + i2));
         }
         int i3 = i - i2;
         int i4 = gapBuffer.gapStart;
@@ -73,9 +71,9 @@ public final class EditingBuffer {
     }
 
     /* renamed from: getComposition-MzsxiRA$ui_text_release, reason: not valid java name */
-    public final TextRange m770getCompositionMzsxiRA$ui_text_release() {
+    public final TextRange m772getCompositionMzsxiRA$ui_text_release() {
         if (hasComposition$ui_text_release()) {
-            return TextRange.m745boximpl(TextRangeKt.TextRange(this.compositionStart, this.compositionEnd));
+            return TextRange.m747boximpl(TextRangeKt.TextRange(this.compositionStart, this.compositionEnd));
         }
         return null;
     }
@@ -96,14 +94,14 @@ public final class EditingBuffer {
     public final void replace$ui_text_release(int i, int i2, String str) {
         PartialGapBuffer partialGapBuffer = this.gapBuffer;
         if (i < 0 || i > partialGapBuffer.getLength()) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
-            m.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
+            sbM.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         if (i2 < 0 || i2 > partialGapBuffer.getLength()) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
-            m2.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m2.toString());
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
+            sbM2.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM2.toString());
         }
         if (i > i2) {
             throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "Do not set reversed range: ", " > "));
@@ -118,14 +116,14 @@ public final class EditingBuffer {
     public final void setComposition$ui_text_release(int i, int i2) {
         PartialGapBuffer partialGapBuffer = this.gapBuffer;
         if (i < 0 || i > partialGapBuffer.getLength()) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
-            m.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
+            sbM.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         if (i2 < 0 || i2 > partialGapBuffer.getLength()) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
-            m2.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m2.toString());
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
+            sbM2.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM2.toString());
         }
         if (i >= i2) {
             throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "Do not set reversed or empty range: ", " > "));
@@ -137,14 +135,14 @@ public final class EditingBuffer {
     public final void setSelection$ui_text_release(int i, int i2) {
         PartialGapBuffer partialGapBuffer = this.gapBuffer;
         if (i < 0 || i > partialGapBuffer.getLength()) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
-            m.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "start (", ") offset is outside of text region ");
+            sbM.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         if (i2 < 0 || i2 > partialGapBuffer.getLength()) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
-            m2.append(partialGapBuffer.getLength());
-            throw new IndexOutOfBoundsException(m2.toString());
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "end (", ") offset is outside of text region ");
+            sbM2.append(partialGapBuffer.getLength());
+            throw new IndexOutOfBoundsException(sbM2.toString());
         }
         if (i > i2) {
             throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "Do not set reversed range: ", " > "));
@@ -177,26 +175,26 @@ public final class EditingBuffer {
 
     private EditingBuffer(AnnotatedString annotatedString, long j) {
         this.gapBuffer = new PartialGapBuffer(annotatedString.text);
-        this.selectionStart = TextRange.m750getMinimpl(j);
-        this.selectionEnd = TextRange.m749getMaximpl(j);
+        this.selectionStart = TextRange.m752getMinimpl(j);
+        this.selectionEnd = TextRange.m751getMaximpl(j);
         this.compositionStart = -1;
         this.compositionEnd = -1;
-        int m750getMinimpl = TextRange.m750getMinimpl(j);
-        int m749getMaximpl = TextRange.m749getMaximpl(j);
-        if (m750getMinimpl >= 0 && m750getMinimpl <= annotatedString.text.length()) {
-            if (m749getMaximpl < 0 || m749getMaximpl > annotatedString.text.length()) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m749getMaximpl, "end (", ") offset is outside of text region ");
-                m.append(annotatedString.text.length());
-                throw new IndexOutOfBoundsException(m.toString());
+        int iM752getMinimpl = TextRange.m752getMinimpl(j);
+        int iM751getMaximpl = TextRange.m751getMaximpl(j);
+        if (iM752getMinimpl >= 0 && iM752getMinimpl <= annotatedString.text.length()) {
+            if (iM751getMaximpl < 0 || iM751getMaximpl > annotatedString.text.length()) {
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iM751getMaximpl, "end (", ") offset is outside of text region ");
+                sbM.append(annotatedString.text.length());
+                throw new IndexOutOfBoundsException(sbM.toString());
             }
-            if (m750getMinimpl > m749getMaximpl) {
-                throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(m750getMinimpl, m749getMaximpl, "Do not set reversed range: ", " > "));
+            if (iM752getMinimpl > iM751getMaximpl) {
+                throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(iM752getMinimpl, iM751getMaximpl, "Do not set reversed range: ", " > "));
             }
             return;
         }
-        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m750getMinimpl, "start (", ") offset is outside of text region ");
-        m2.append(annotatedString.text.length());
-        throw new IndexOutOfBoundsException(m2.toString());
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iM752getMinimpl, "start (", ") offset is outside of text region ");
+        sbM2.append(annotatedString.text.length());
+        throw new IndexOutOfBoundsException(sbM2.toString());
     }
 
     private EditingBuffer(String str, long j) {

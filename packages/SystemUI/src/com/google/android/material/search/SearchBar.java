@@ -41,7 +41,6 @@ import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SearchBar extends Toolbar {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -61,7 +60,6 @@ public class SearchBar extends Toolbar {
     public final boolean tintNavigationIcon;
     public final SearchBar$$ExternalSyntheticLambda0 touchExplorationStateChangeListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends AbsSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.ClassLoaderCreator() { // from class: com.google.android.material.search.SearchBar.SavedState.1
             @Override // android.os.Parcelable.ClassLoaderCreator
@@ -128,7 +126,7 @@ public class SearchBar extends Toolbar {
     }
 
     @Override // androidx.appcompat.widget.Toolbar, android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         MaterialShapeUtils.setParentAbsoluteElevation(this, this.backgroundShape);
         if (this.defaultMarginsEnabled && (getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
@@ -175,10 +173,10 @@ public class SearchBar extends Toolbar {
         accessibilityNodeInfo.setClassName(EditText.class.getCanonicalName());
         accessibilityNodeInfo.setEditable(isEnabled());
         CharSequence text = this.textView.getText();
-        boolean isEmpty = TextUtils.isEmpty(text);
+        boolean zIsEmpty = TextUtils.isEmpty(text);
         accessibilityNodeInfo.setHintText(this.textView.getHint());
-        accessibilityNodeInfo.setShowingHintText(isEmpty);
-        if (isEmpty) {
+        accessibilityNodeInfo.setShowingHintText(zIsEmpty);
+        if (zIsEmpty) {
             text = this.textView.getHint();
         }
         accessibilityNodeInfo.setText(text);
@@ -207,7 +205,7 @@ public class SearchBar extends Toolbar {
     }
 
     @Override // androidx.appcompat.widget.Toolbar, android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         super.onMeasure(i, i2);
         View view = this.centerView;
         if (view != null) {
@@ -296,7 +294,6 @@ public class SearchBar extends Toolbar {
         setNavigationIconDecorative(false);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScrollingViewBehavior extends AppBarLayout.ScrollingViewBehavior {
         public boolean initialized;
 
@@ -305,7 +302,7 @@ public class SearchBar extends Toolbar {
         }
 
         @Override // com.google.android.material.appbar.AppBarLayout.ScrollingViewBehavior, androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
-        public final boolean onDependentViewChanged(CoordinatorLayout coordinatorLayout, View view, View view2) {
+        public final boolean onDependentViewChanged(CoordinatorLayout coordinatorLayout, View view, View view2) throws Resources.NotFoundException {
             super.onDependentViewChanged(coordinatorLayout, view, view2);
             if (!this.initialized && (view2 instanceof AppBarLayout)) {
                 this.initialized = true;
@@ -334,7 +331,7 @@ public class SearchBar extends Toolbar {
             @Override // androidx.core.view.accessibility.AccessibilityManagerCompat$TouchExplorationStateChangeListener
             public final void onTouchExplorationStateChanged(boolean z) {
                 int i2 = SearchBar.$r8$clinit;
-                SearchBar.this.setFocusableInTouchMode(z);
+                this.f$0.setFocusableInTouchMode(z);
             }
         };
         Context context2 = getContext();
@@ -350,24 +347,24 @@ public class SearchBar extends Toolbar {
         Drawable drawable = AppCompatResources.getDrawable(R.drawable.ic_search_black_24, context2);
         this.defaultNavigationIcon = drawable;
         this.searchBarAnimationHelper = new SearchBarAnimationHelper();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.SearchBar, i, R.style.Widget_Material3_SearchBar, new int[0]);
-        ShapeAppearanceModel build = ShapeAppearanceModel.builder(context2, attributeSet, i, R.style.Widget_Material3_SearchBar).build();
-        int color = obtainStyledAttributes.getColor(3, 0);
-        float dimension = obtainStyledAttributes.getDimension(6, 0.0f);
-        this.defaultMarginsEnabled = obtainStyledAttributes.getBoolean(4, true);
-        this.defaultScrollFlagsEnabled = obtainStyledAttributes.getBoolean(5, true);
-        boolean z = obtainStyledAttributes.getBoolean(8, false);
-        this.forceDefaultNavigationOnClickListener = obtainStyledAttributes.getBoolean(7, false);
-        this.tintNavigationIcon = obtainStyledAttributes.getBoolean(12, true);
-        if (obtainStyledAttributes.hasValue(9)) {
-            this.navigationIconTint = Integer.valueOf(obtainStyledAttributes.getColor(9, -1));
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.SearchBar, i, R.style.Widget_Material3_SearchBar, new int[0]);
+        ShapeAppearanceModel shapeAppearanceModelBuild = ShapeAppearanceModel.builder(context2, attributeSet, i, R.style.Widget_Material3_SearchBar).build();
+        int color = typedArrayObtainStyledAttributes.getColor(3, 0);
+        float dimension = typedArrayObtainStyledAttributes.getDimension(6, 0.0f);
+        this.defaultMarginsEnabled = typedArrayObtainStyledAttributes.getBoolean(4, true);
+        this.defaultScrollFlagsEnabled = typedArrayObtainStyledAttributes.getBoolean(5, true);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(8, false);
+        this.forceDefaultNavigationOnClickListener = typedArrayObtainStyledAttributes.getBoolean(7, false);
+        this.tintNavigationIcon = typedArrayObtainStyledAttributes.getBoolean(12, true);
+        if (typedArrayObtainStyledAttributes.hasValue(9)) {
+            this.navigationIconTint = Integer.valueOf(typedArrayObtainStyledAttributes.getColor(9, -1));
         }
-        int resourceId = obtainStyledAttributes.getResourceId(0, -1);
-        String string = obtainStyledAttributes.getString(1);
-        String string2 = obtainStyledAttributes.getString(2);
-        float dimension2 = obtainStyledAttributes.getDimension(11, -1.0f);
-        int color2 = obtainStyledAttributes.getColor(10, 0);
-        obtainStyledAttributes.recycle();
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        String string = typedArrayObtainStyledAttributes.getString(1);
+        String string2 = typedArrayObtainStyledAttributes.getString(2);
+        float dimension2 = typedArrayObtainStyledAttributes.getDimension(11, -1.0f);
+        int color2 = typedArrayObtainStyledAttributes.getColor(10, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (!z) {
             setNavigationIcon(getNavigationIcon() != null ? getNavigationIcon() : drawable);
             setNavigationIconDecorative(true);
@@ -388,7 +385,7 @@ public class SearchBar extends Toolbar {
         if (getNavigationIcon() == null) {
             ((ViewGroup.MarginLayoutParams) textView.getLayoutParams()).setMarginStart(getResources().getDimensionPixelSize(R.dimen.m3_searchbar_text_margin_start_no_navigation_icon));
         }
-        MaterialShapeDrawable materialShapeDrawable = new MaterialShapeDrawable(build);
+        MaterialShapeDrawable materialShapeDrawable = new MaterialShapeDrawable(shapeAppearanceModelBuild);
         this.backgroundShape = materialShapeDrawable;
         materialShapeDrawable.initializeElevationOverlay(getContext());
         this.backgroundShape.setElevation(dimension);
@@ -400,9 +397,9 @@ public class SearchBar extends Toolbar {
         }
         int color3 = MaterialColors.getColor(this, R.attr.colorControlHighlight);
         this.backgroundShape.setFillColor(ColorStateList.valueOf(color));
-        ColorStateList valueOf = ColorStateList.valueOf(color3);
+        ColorStateList colorStateListValueOf = ColorStateList.valueOf(color3);
         MaterialShapeDrawable materialShapeDrawable3 = this.backgroundShape;
-        setBackground(new RippleDrawable(valueOf, materialShapeDrawable3, materialShapeDrawable3));
+        setBackground(new RippleDrawable(colorStateListValueOf, materialShapeDrawable3, materialShapeDrawable3));
         AccessibilityManager accessibilityManager = (AccessibilityManager) getContext().getSystemService("accessibility");
         this.accessibilityManager = accessibilityManager;
         if (accessibilityManager != null) {

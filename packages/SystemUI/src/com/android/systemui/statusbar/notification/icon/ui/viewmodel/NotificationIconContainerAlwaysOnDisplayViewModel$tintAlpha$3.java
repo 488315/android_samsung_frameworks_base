@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3 extends SuspendLambda implements Function3 {
     /* synthetic */ float F$0;
@@ -20,11 +19,11 @@ final class NotificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3 extend
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        float floatValue = ((Number) obj).floatValue();
-        float floatValue2 = ((Number) obj2).floatValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        float fFloatValue2 = ((Number) obj2).floatValue();
         NotificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3 notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3 = new NotificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3((Continuation) obj3);
-        notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3.F$0 = floatValue;
-        notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3.F$1 = floatValue2;
+        notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3.F$0 = fFloatValue;
+        notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3.F$1 = fFloatValue2;
         return notificationIconContainerAlwaysOnDisplayViewModel$tintAlpha$3.invokeSuspend(Unit.INSTANCE);
     }
 

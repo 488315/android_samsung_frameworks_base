@@ -12,7 +12,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BluetoothPolicy {
     public static final int NO_PROFILE = -1;
@@ -20,7 +19,6 @@ public class BluetoothPolicy {
     public ContextInfo mContextInfo;
     public IBluetoothPolicy mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BluetoothProfile {
         public static final int BLUETOOTH_A2DP_PROFILE = 8;
         public static final int BLUETOOTH_AVRCP_PROFILE = 16;
@@ -37,7 +35,6 @@ public class BluetoothPolicy {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BluetoothUUID {
         public static final String A2DP_ADVAUDIODIST_UUID = "0000110D-0000-1000-8000-00805F9B34FB";
         public static final String A2DP_AUDIOSINK_UUID = "0000110B-0000-1000-8000-00805F9B34FB";
@@ -765,83 +762,89 @@ public class BluetoothPolicy {
     }
 
     public void bluetoothLog(String str, int i, BluetoothDevice bluetoothDevice) {
-        String str2;
-        String str3;
-        String str4;
-        String str5;
+        String address;
+        String name;
+        String address2;
+        String name2;
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (defaultAdapter == null) {
-            str2 = "";
-            str3 = str2;
+            address = "";
+            name = address;
         } else {
-            str3 = defaultAdapter.getName();
-            str2 = defaultAdapter.getAddress();
+            name = defaultAdapter.getName();
+            address = defaultAdapter.getAddress();
         }
         if (bluetoothDevice == null) {
-            str4 = "";
-            str5 = str4;
+            address2 = "";
+            name2 = address2;
         } else {
-            str5 = bluetoothDevice.getName();
-            str4 = bluetoothDevice.getAddress();
+            name2 = bluetoothDevice.getName();
+            address2 = bluetoothDevice.getAddress();
         }
         StringBuilder sb = new StringBuilder("");
         if (i != -1) {
             sb.append(convertBluetoothProfile(i));
         }
-        if (str4 != null && str4.length() > 0) {
+        if (address2 != null && address2.length() > 0) {
             sb.append("Remote Address: ");
-            sb.append(str4);
+            sb.append(address2);
             sb.append('\n');
         }
-        if (str4 != null && str4.length() > 0) {
+        if (address2 != null && address2.length() > 0) {
             sb.append("Remote Name: ");
-            sb.append(str5);
+            sb.append(name2);
             sb.append('\n');
         }
-        if (str2 != null && str2.length() > 0) {
+        if (address != null && address.length() > 0) {
             sb.append("Local Address: ");
-            sb.append(str2);
+            sb.append(address);
             sb.append('\n');
         }
-        if (str2 != null && str2.length() > 0) {
+        if (address != null && address.length() > 0) {
             sb.append("Local Name: ");
-            sb.append(str3);
+            sb.append(name);
             sb.append('\n');
         }
         bluetoothLog(str, sb.toString());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean addBluetoothDevicesToWhiteList(List<String> list, boolean z) {
         boolean z2;
         EnterpriseLicenseManager.log(this.mContextInfo, "BluetoothPolicy.addBluetoothDevicesToWhiteList(List<String>, boolean)");
         if (z) {
             ArrayList arrayList = new ArrayList();
             arrayList.add("*");
-            if (!addBluetoothDevicesToBlackList(arrayList)) {
+            if (addBluetoothDevicesToBlackList(arrayList)) {
+                z2 = true;
+            } else {
                 Log.d(TAG, "Failed to update WildCard");
                 z2 = false;
-                return !addBluetoothDevicesToWhiteList(list) && z2;
             }
         }
-        z2 = true;
-        if (addBluetoothDevicesToWhiteList(list)) {
-        }
+        return addBluetoothDevicesToWhiteList(list) && z2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean addBluetoothUUIDsToWhiteList(List<String> list, boolean z) {
         boolean z2;
         EnterpriseLicenseManager.log(this.mContextInfo, "BluetoothPolicy.addBluetoothUUIDsToWhiteList(List<String>, boolean)");
         if (z) {
             ArrayList arrayList = new ArrayList();
             arrayList.add("*");
-            if (!addBluetoothUUIDsToBlackList(arrayList)) {
+            if (addBluetoothUUIDsToBlackList(arrayList)) {
+                z2 = true;
+            } else {
                 Log.d(TAG, "Failed to update wildCard");
                 z2 = false;
-                return !addBluetoothUUIDsToWhiteList(list) && z2;
             }
         }
-        z2 = true;
-        if (addBluetoothUUIDsToWhiteList(list)) {
-        }
+        return addBluetoothUUIDsToWhiteList(list) && z2;
     }
 }

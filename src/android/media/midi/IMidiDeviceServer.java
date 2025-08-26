@@ -91,9 +91,9 @@ public interface IMidiDeviceServer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMidiDeviceServer)) {
-                return (IMidiDeviceServer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMidiDeviceServer)) {
+                return (IMidiDeviceServer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -135,38 +135,38 @@ public interface IMidiDeviceServer extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FileDescriptor openInputPort = openInputPort(readStrongBinder, readInt);
+                    FileDescriptor fileDescriptorOpenInputPort = openInputPort(strongBinder, i3);
                     parcel2.writeNoException();
-                    parcel2.writeRawFileDescriptor(openInputPort);
+                    parcel2.writeRawFileDescriptor(fileDescriptorOpenInputPort);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FileDescriptor openOutputPort = openOutputPort(readStrongBinder2, readInt2);
+                    FileDescriptor fileDescriptorOpenOutputPort = openOutputPort(strongBinder2, i4);
                     parcel2.writeNoException();
-                    parcel2.writeRawFileDescriptor(openOutputPort);
+                    parcel2.writeRawFileDescriptor(fileDescriptorOpenOutputPort);
                     return true;
                 case 3:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    closePort(readStrongBinder3);
+                    closePort(strongBinder3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
                     closeDevice();
                     return true;
                 case 5:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    FileDescriptor readRawFileDescriptor = parcel.readRawFileDescriptor();
-                    int readInt3 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    FileDescriptor rawFileDescriptor = parcel.readRawFileDescriptor();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int connectPorts = connectPorts(readStrongBinder4, readRawFileDescriptor, readInt3);
+                    int iConnectPorts = connectPorts(strongBinder4, rawFileDescriptor, i5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(connectPorts);
+                    parcel2.writeInt(iConnectPorts);
                     return true;
                 case 6:
                     MidiDeviceInfo deviceInfo = getDeviceInfo();
@@ -201,106 +201,106 @@ public interface IMidiDeviceServer extends IInterface {
 
             @Override // android.media.midi.IMidiDeviceServer
             public FileDescriptor openInputPort(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readRawFileDescriptor();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readRawFileDescriptor();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public FileDescriptor openOutputPort(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readRawFileDescriptor();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readRawFileDescriptor();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public void closePort(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public void closeDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public int connectPorts(IBinder iBinder, FileDescriptor fileDescriptor, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public MidiDeviceInfo getDeviceInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (MidiDeviceInfo) obtain2.readTypedObject(MidiDeviceInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (MidiDeviceInfo) parcelObtain2.readTypedObject(MidiDeviceInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.midi.IMidiDeviceServer
             public void setDeviceInfo(MidiDeviceInfo midiDeviceInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(midiDeviceInfo, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(midiDeviceInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

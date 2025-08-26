@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposeDragShadowBuilder extends View.DragShadowBuilder {
     public final long decorationSize;
@@ -42,7 +41,7 @@ public final class ComposeDragShadowBuilder extends View.DragShadowBuilder {
         drawParams.canvas = androidCanvas;
         drawParams.size = j;
         androidCanvas.save();
-        function1.mo779invoke(canvasDrawScope);
+        function1.mo781invoke(canvasDrawScope);
         androidCanvas.restore();
         drawParams.density = density2;
         drawParams.layoutDirection = layoutDirection2;
@@ -53,7 +52,7 @@ public final class ComposeDragShadowBuilder extends View.DragShadowBuilder {
     @Override // android.view.View.DragShadowBuilder
     public final void onProvideShadowMetrics(Point point, Point point2) {
         Density density = this.density;
-        point.set(density.mo51roundToPx0680j_4(density.mo53toDpu2uoSUM(Float.intBitsToFloat((int) (this.decorationSize >> 32)))), density.mo51roundToPx0680j_4(density.mo53toDpu2uoSUM(Float.intBitsToFloat((int) (this.decorationSize & 4294967295L)))));
+        point.set(density.mo52roundToPx0680j_4(density.mo54toDpu2uoSUM(Float.intBitsToFloat((int) (this.decorationSize >> 32)))), density.mo52roundToPx0680j_4(density.mo54toDpu2uoSUM(Float.intBitsToFloat((int) (this.decorationSize & 4294967295L)))));
         point2.set(point.x / 2, point.y / 2);
     }
 

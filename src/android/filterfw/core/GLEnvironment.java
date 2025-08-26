@@ -111,27 +111,27 @@ public class GLEnvironment {
     }
 
     public int registerSurface(Surface surface) {
-        int nativeAddSurface = nativeAddSurface(surface);
-        if (nativeAddSurface >= 0) {
-            return nativeAddSurface;
+        int iNativeAddSurface = nativeAddSurface(surface);
+        if (iNativeAddSurface >= 0) {
+            return iNativeAddSurface;
         }
         throw new RuntimeException("Error registering surface " + surface + "!");
     }
 
     public int registerSurfaceTexture(SurfaceTexture surfaceTexture, int i, int i2) {
         Surface surface = new Surface(surfaceTexture);
-        int nativeAddSurfaceWidthHeight = nativeAddSurfaceWidthHeight(surface, i, i2);
+        int iNativeAddSurfaceWidthHeight = nativeAddSurfaceWidthHeight(surface, i, i2);
         surface.release();
-        if (nativeAddSurfaceWidthHeight >= 0) {
-            return nativeAddSurfaceWidthHeight;
+        if (iNativeAddSurfaceWidthHeight >= 0) {
+            return iNativeAddSurfaceWidthHeight;
         }
         throw new RuntimeException("Error registering surfaceTexture " + surfaceTexture + "!");
     }
 
     public int registerSurfaceFromMediaRecorder(MediaRecorder mediaRecorder) {
-        int nativeAddSurfaceFromMediaRecorder = nativeAddSurfaceFromMediaRecorder(mediaRecorder);
-        if (nativeAddSurfaceFromMediaRecorder >= 0) {
-            return nativeAddSurfaceFromMediaRecorder;
+        int iNativeAddSurfaceFromMediaRecorder = nativeAddSurfaceFromMediaRecorder(mediaRecorder);
+        if (iNativeAddSurfaceFromMediaRecorder >= 0) {
+            return iNativeAddSurfaceFromMediaRecorder;
         }
         throw new RuntimeException("Error registering surface from MediaRecorder" + mediaRecorder + "!");
     }

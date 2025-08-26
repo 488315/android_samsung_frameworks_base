@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MaterialDatePicker<S> extends DialogFragment {
     public MaterialShapeDrawable background;
@@ -69,17 +68,17 @@ public final class MaterialDatePicker<S> extends DialogFragment {
     public final LinkedHashSet onCancelListeners = new LinkedHashSet();
     public final LinkedHashSet onDismissListeners = new LinkedHashSet();
 
-    public static int getPaddedPickerWidth(Context context) {
+    public static int getPaddedPickerWidth(Context context) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         int dimensionPixelOffset = resources.getDimensionPixelOffset(R.dimen.mtrl_calendar_content_padding);
         int i = Month.current().daysInWeek;
         return ((i - 1) * resources.getDimensionPixelOffset(R.dimen.mtrl_calendar_month_horizontal_padding)) + (resources.getDimensionPixelSize(R.dimen.mtrl_calendar_day_width) * i) + (dimensionPixelOffset * 2);
     }
 
-    public static boolean readMaterialCalendarStyleBoolean(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(MaterialAttributes.resolveTypedValueOrThrow(context, MaterialCalendar.class.getCanonicalName(), R.attr.materialCalendarStyle).data, new int[]{i});
-        boolean z = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
+    public static boolean readMaterialCalendarStyleBoolean(int i, Context context) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(MaterialAttributes.resolveTypedValueOrThrow(context, MaterialCalendar.class.getCanonicalName(), R.attr.materialCalendarStyle).data, new int[]{i});
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
         return z;
     }
 
@@ -98,7 +97,7 @@ public final class MaterialDatePicker<S> extends DialogFragment {
     }
 
     @Override // androidx.fragment.app.DialogFragment, androidx.fragment.app.Fragment
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         if (bundle == null) {
             bundle = this.mArguments;
@@ -120,38 +119,38 @@ public final class MaterialDatePicker<S> extends DialogFragment {
         this.negativeButtonText = bundle.getCharSequence("NEGATIVE_BUTTON_TEXT_KEY");
         this.negativeButtonContentDescriptionResId = bundle.getInt("NEGATIVE_BUTTON_CONTENT_DESCRIPTION_RES_ID_KEY");
         this.negativeButtonContentDescription = bundle.getCharSequence("NEGATIVE_BUTTON_CONTENT_DESCRIPTION_KEY");
-        CharSequence charSequence = this.titleText;
-        if (charSequence == null) {
-            charSequence = requireContext().getResources().getText(this.titleTextResId);
+        CharSequence text = this.titleText;
+        if (text == null) {
+            text = requireContext().getResources().getText(this.titleTextResId);
         }
-        this.fullTitleText = charSequence;
-        if (charSequence != null) {
-            CharSequence[] split = TextUtils.split(String.valueOf(charSequence), "\n");
-            if (split.length > 1) {
-                charSequence = split[0];
+        this.fullTitleText = text;
+        if (text != null) {
+            CharSequence[] charSequenceArrSplit = TextUtils.split(String.valueOf(text), "\n");
+            if (charSequenceArrSplit.length > 1) {
+                text = charSequenceArrSplit[0];
             }
         } else {
-            charSequence = null;
+            text = null;
         }
-        this.singleLineTitleText = charSequence;
+        this.singleLineTitleText = text;
     }
 
     @Override // androidx.fragment.app.DialogFragment
     public final Dialog onCreateDialog() {
-        Context requireContext = requireContext();
+        Context contextRequireContext = requireContext();
         requireContext();
         int i = this.overrideThemeResId;
         if (i == 0) {
             getDateSelector();
             throw null;
         }
-        Dialog dialog = new Dialog(requireContext, i);
+        Dialog dialog = new Dialog(contextRequireContext, i);
         Context context = dialog.getContext();
         this.fullscreen = readMaterialCalendarStyleBoolean(android.R.attr.windowFullscreen, context);
         this.background = new MaterialShapeDrawable(context, null, R.attr.materialCalendarStyle, R.style.Widget_MaterialComponents_MaterialCalendar);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R$styleable.MaterialCalendar, R.attr.materialCalendarStyle, R.style.Widget_MaterialComponents_MaterialCalendar);
-        int color = obtainStyledAttributes.getColor(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R$styleable.MaterialCalendar, R.attr.materialCalendarStyle, R.style.Widget_MaterialComponents_MaterialCalendar);
+        int color = typedArrayObtainStyledAttributes.getColor(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         this.background.initializeElevationOverlay(context);
         this.background.setFillColor(ColorStateList.valueOf(color));
         MaterialShapeDrawable materialShapeDrawable = this.background;
@@ -163,18 +162,18 @@ public final class MaterialDatePicker<S> extends DialogFragment {
 
     @Override // androidx.fragment.app.Fragment
     public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
-        View inflate = layoutInflater.inflate(this.fullscreen ? R.layout.mtrl_picker_fullscreen : R.layout.mtrl_picker_dialog, viewGroup);
-        Context context = inflate.getContext();
+        View viewInflate = layoutInflater.inflate(this.fullscreen ? R.layout.mtrl_picker_fullscreen : R.layout.mtrl_picker_dialog, viewGroup);
+        Context context = viewInflate.getContext();
         if (this.fullscreen) {
-            inflate.findViewById(R.id.mtrl_calendar_frame).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -2));
+            viewInflate.findViewById(R.id.mtrl_calendar_frame).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -2));
         } else {
-            inflate.findViewById(R.id.mtrl_calendar_main_pane).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -1));
+            viewInflate.findViewById(R.id.mtrl_calendar_main_pane).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -1));
         }
-        TextView textView = (TextView) inflate.findViewById(R.id.mtrl_picker_header_selection_text);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.mtrl_picker_header_selection_text);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         textView.setAccessibilityLiveRegion(1);
-        this.headerToggleButton = (CheckableImageButton) inflate.findViewById(R.id.mtrl_picker_header_toggle);
-        this.headerTitleTextView = (TextView) inflate.findViewById(R.id.mtrl_picker_title_text);
+        this.headerToggleButton = (CheckableImageButton) viewInflate.findViewById(R.id.mtrl_picker_header_toggle);
+        this.headerTitleTextView = (TextView) viewInflate.findViewById(R.id.mtrl_picker_title_text);
         this.headerToggleButton.setTag("TOGGLE_BUTTON_TAG");
         CheckableImageButton checkableImageButton = this.headerToggleButton;
         StateListDrawable stateListDrawable = new StateListDrawable();
@@ -188,7 +187,7 @@ public final class MaterialDatePicker<S> extends DialogFragment {
         this.headerToggleButton.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.material.datepicker.MaterialDatePicker$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MaterialDatePicker.this.getDateSelector();
+                this.f$0.getDateSelector();
                 throw null;
             }
         });
@@ -222,11 +221,11 @@ public final class MaterialDatePicker<S> extends DialogFragment {
         }
         Bundle bundle2 = new Bundle();
         bundle2.putParcelable("DEEP_COPY_VALIDATOR_KEY", builder.validator);
-        Month create = Month.create(builder.start);
-        Month create2 = Month.create(builder.end);
+        Month monthCreate = Month.create(builder.start);
+        Month monthCreate2 = Month.create(builder.end);
         CalendarConstraints.DateValidator dateValidator = (CalendarConstraints.DateValidator) bundle2.getParcelable("DEEP_COPY_VALIDATOR_KEY");
         Long l = builder.openAt;
-        bundle.putParcelable("CALENDAR_CONSTRAINTS_KEY", new CalendarConstraints(create, create2, dateValidator, l != null ? Month.create(l.longValue()) : null, builder.firstDayOfWeek));
+        bundle.putParcelable("CALENDAR_CONSTRAINTS_KEY", new CalendarConstraints(monthCreate, monthCreate2, dateValidator, l != null ? Month.create(l.longValue()) : null, builder.firstDayOfWeek));
         bundle.putParcelable("DAY_VIEW_DECORATOR_KEY", this.dayViewDecorator);
         bundle.putInt("TITLE_TEXT_RES_ID_KEY", this.titleTextResId);
         bundle.putCharSequence("TITLE_TEXT_KEY", this.titleText);
@@ -242,7 +241,7 @@ public final class MaterialDatePicker<S> extends DialogFragment {
     }
 
     @Override // androidx.fragment.app.DialogFragment, androidx.fragment.app.Fragment
-    public final void onStart() {
+    public final void onStart() throws Resources.NotFoundException {
         super.onStart();
         Dialog dialog = this.mDialog;
         if (dialog == null) {
@@ -253,45 +252,45 @@ public final class MaterialDatePicker<S> extends DialogFragment {
             window.setLayout(-1, -1);
             window.setBackgroundDrawable(this.background);
             if (!this.edgeToEdgeEnabled) {
-                final View findViewById = requireView().findViewById(R.id.fullscreen_header);
-                ColorStateList colorStateListOrNull = DrawableUtils.getColorStateListOrNull(findViewById.getBackground());
-                Integer valueOf = colorStateListOrNull != null ? Integer.valueOf(colorStateListOrNull.getDefaultColor()) : null;
+                final View viewFindViewById = requireView().findViewById(R.id.fullscreen_header);
+                ColorStateList colorStateListOrNull = DrawableUtils.getColorStateListOrNull(viewFindViewById.getBackground());
+                Integer numValueOf = colorStateListOrNull != null ? Integer.valueOf(colorStateListOrNull.getDefaultColor()) : null;
                 boolean z = false;
-                boolean z2 = valueOf == null || valueOf.intValue() == 0;
+                boolean z2 = numValueOf == null || numValueOf.intValue() == 0;
                 int color = MaterialColors.getColor(window.getContext(), android.R.attr.colorBackground, -16777216);
                 if (z2) {
-                    valueOf = Integer.valueOf(color);
+                    numValueOf = Integer.valueOf(color);
                 }
                 window.setDecorFitsSystemWindows(false);
                 window.getContext();
                 window.getContext();
                 window.setStatusBarColor(0);
                 window.setNavigationBarColor(0);
-                int intValue = valueOf.intValue();
-                new WindowInsetsControllerCompat(window, window.getDecorView()).setAppearanceLightStatusBars(intValue != 0 && ColorUtils.calculateLuminance(intValue) > 0.5d);
+                int iIntValue = numValueOf.intValue();
+                new WindowInsetsControllerCompat(window, window.getDecorView()).setAppearanceLightStatusBars(iIntValue != 0 && ColorUtils.calculateLuminance(iIntValue) > 0.5d);
                 if (color != 0 && ColorUtils.calculateLuminance(color) > 0.5d) {
                     z = true;
                 }
                 new WindowInsetsControllerCompat(window, window.getDecorView()).setAppearanceLightNavigationBars(z);
-                final int paddingTop = findViewById.getPaddingTop();
-                final int i = findViewById.getLayoutParams().height;
+                final int paddingTop = viewFindViewById.getPaddingTop();
+                final int i = viewFindViewById.getLayoutParams().height;
                 OnApplyWindowInsetsListener onApplyWindowInsetsListener = new OnApplyWindowInsetsListener(this) { // from class: com.google.android.material.datepicker.MaterialDatePicker.3
                     @Override // androidx.core.view.OnApplyWindowInsetsListener
                     public final WindowInsetsCompat onApplyWindowInsets(WindowInsetsCompat windowInsetsCompat, View view) {
                         int i2 = windowInsetsCompat.mImpl.getInsets(7).top;
                         int i3 = i;
                         if (i3 >= 0) {
-                            findViewById.getLayoutParams().height = i3 + i2;
-                            View view2 = findViewById;
+                            viewFindViewById.getLayoutParams().height = i3 + i2;
+                            View view2 = viewFindViewById;
                             view2.setLayoutParams(view2.getLayoutParams());
                         }
-                        View view3 = findViewById;
-                        view3.setPadding(view3.getPaddingLeft(), paddingTop + i2, findViewById.getPaddingRight(), findViewById.getPaddingBottom());
+                        View view3 = viewFindViewById;
+                        view3.setPadding(view3.getPaddingLeft(), paddingTop + i2, viewFindViewById.getPaddingRight(), viewFindViewById.getPaddingBottom());
                         return windowInsetsCompat;
                     }
                 };
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById, onApplyWindowInsetsListener);
+                ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(viewFindViewById, onApplyWindowInsetsListener);
                 this.edgeToEdgeEnabled = true;
             }
         } else {

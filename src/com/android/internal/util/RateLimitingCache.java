@@ -51,12 +51,12 @@ public class RateLimitingCache<Value> {
         long time = getTime() + this.mRandomOffset;
         boolean z = cachedValue == null || time - cachedValue.timestamp >= this.mPeriodMillis;
         if (z || cachedValue.count.getAndIncrement() < this.mLimit) {
-            Value fetchValue = valueFetcher.fetchValue();
+            Value valueFetchValue = valueFetcher.fetchValue();
             if (this.mLimit > 1) {
                 time -= time % this.mPeriodMillis;
             }
             RateLimitingCache<Value>.CachedValue cachedValue2 = new CachedValue(this);
-            cachedValue2.value = fetchValue;
+            cachedValue2.value = valueFetchValue;
             cachedValue2.timestamp = time;
             if (z) {
                 cachedValue2.count = new AtomicInteger(1);

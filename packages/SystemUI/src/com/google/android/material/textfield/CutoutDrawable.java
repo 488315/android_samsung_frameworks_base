@@ -6,13 +6,11 @@ import android.graphics.drawable.Drawable;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.shape.ShapeAppearanceModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CutoutDrawable extends MaterialShapeDrawable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public CutoutDrawableState drawableState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImplApi18 extends CutoutDrawable {
         public ImplApi18(CutoutDrawableState cutoutDrawableState) {
             super(cutoutDrawableState);
@@ -46,7 +44,6 @@ public class CutoutDrawable extends MaterialShapeDrawable {
         invalidateSelf();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CutoutDrawableState extends MaterialShapeDrawable.MaterialShapeDrawableState {
         public final RectF cutoutBounds;
 

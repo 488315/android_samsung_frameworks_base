@@ -79,8 +79,8 @@ public class CMSSignedGenerator {
         ENCRYPTION_ECDSA_WITH_SHA512 = id12;
         HashSet hashSet = new HashSet();
         NO_PARAMS = hashSet;
-        HashMap hashMap = new HashMap();
-        EC_ALGORITHMS = hashMap;
+        HashMap map = new HashMap();
+        EC_ALGORITHMS = map;
         hashSet.add(id6);
         hashSet.add(id7);
         hashSet.add(id8);
@@ -88,11 +88,11 @@ public class CMSSignedGenerator {
         hashSet.add(id10);
         hashSet.add(id11);
         hashSet.add(id12);
-        hashMap.put(id, id8);
-        hashMap.put(id2, id9);
-        hashMap.put(id3, id10);
-        hashMap.put(id4, id11);
-        hashMap.put(id5, id12);
+        map.put(id, id8);
+        map.put(id2, id9);
+        map.put(id3, id10);
+        map.put(id4, id11);
+        map.put(id5, id12);
     }
 
     protected CMSSignedGenerator() {
@@ -109,11 +109,11 @@ public class CMSSignedGenerator {
     }
 
     protected Map getBaseParameters(ASN1ObjectIdentifier aSN1ObjectIdentifier, AlgorithmIdentifier algorithmIdentifier, byte[] bArr) {
-        HashMap hashMap = new HashMap();
-        hashMap.put("contentType", aSN1ObjectIdentifier);
-        hashMap.put(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER, algorithmIdentifier);
-        hashMap.put(CMSAttributeTableGenerator.DIGEST, Arrays.clone(bArr));
-        return hashMap;
+        HashMap map = new HashMap();
+        map.put("contentType", aSN1ObjectIdentifier);
+        map.put(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER, algorithmIdentifier);
+        map.put(CMSAttributeTableGenerator.DIGEST, Arrays.clone(bArr));
+        return map;
     }
 
     public void addCertificate(X509CertificateHolder x509CertificateHolder) throws CMSException {

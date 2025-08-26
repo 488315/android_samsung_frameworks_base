@@ -5,7 +5,6 @@ import androidx.compose.ui.text.internal.InlineClassHelperKt;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LineHeightStyle {
     public static final Companion Companion;
@@ -14,7 +13,6 @@ public final class LineHeightStyle {
     public final int mode;
     public final int trim;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Alignment {
         public static final float Bottom;
         public static final float Center;
@@ -22,7 +20,6 @@ public final class LineHeightStyle {
         public static final float Proportional;
         public final float topRatio;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -33,12 +30,12 @@ public final class LineHeightStyle {
         }
 
         static {
-            m800constructorimpl(0.0f);
-            m800constructorimpl(0.5f);
+            m802constructorimpl(0.0f);
+            m802constructorimpl(0.5f);
             Center = 0.5f;
-            m800constructorimpl(-1.0f);
+            m802constructorimpl(-1.0f);
             Proportional = -1.0f;
-            m800constructorimpl(1.0f);
+            m802constructorimpl(1.0f);
             Bottom = 1.0f;
         }
 
@@ -47,19 +44,19 @@ public final class LineHeightStyle {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Alignment m799boximpl(float f) {
+        public static final /* synthetic */ Alignment m801boximpl(float f) {
             return new Alignment(f);
         }
 
         /* renamed from: constructor-impl, reason: not valid java name */
-        public static void m800constructorimpl(float f) {
+        public static void m802constructorimpl(float f) {
             if ((0.0f > f || f > 1.0f) && f != -1.0f) {
                 InlineClassHelperKt.throwIllegalStateException("topRatio should be in [0..1] range or -1");
             }
         }
 
         /* renamed from: toString-impl, reason: not valid java name */
-        public static String m801toStringimpl(float f) {
+        public static String m803toStringimpl(float f) {
             if (f == 0.0f) {
                 return "LineHeightStyle.Alignment.Top";
             }
@@ -87,11 +84,10 @@ public final class LineHeightStyle {
         }
 
         public final String toString() {
-            return m801toStringimpl(this.topRatio);
+            return m803toStringimpl(this.topRatio);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,13 +97,11 @@ public final class LineHeightStyle {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Mode {
         public static final Companion Companion = new Companion(null);
         public static final int Minimum = 1;
         public final int value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -122,7 +116,7 @@ public final class LineHeightStyle {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Mode m802boximpl(int i) {
+        public static final /* synthetic */ Mode m804boximpl(int i) {
             return new Mode(i);
         }
 
@@ -142,7 +136,6 @@ public final class LineHeightStyle {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Trim {
         public final int value;
         public static final Companion Companion = new Companion(null);
@@ -150,7 +143,6 @@ public final class LineHeightStyle {
         public static final int LastLineBottom = 16;
         public static final int Both = 17;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -165,12 +157,12 @@ public final class LineHeightStyle {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Trim m803boximpl(int i) {
+        public static final /* synthetic */ Trim m805boximpl(int i) {
             return new Trim(i);
         }
 
         /* renamed from: toString-impl, reason: not valid java name */
-        public static String m804toStringimpl(int i) {
+        public static String m806toStringimpl(int i) {
             return i == FirstLineTop ? "LineHeightStyle.Trim.FirstLineTop" : i == LastLineBottom ? "LineHeightStyle.Trim.LastLineBottom" : i == Both ? "LineHeightStyle.Trim.Both" : i == 0 ? "LineHeightStyle.Trim.None" : "Invalid";
         }
 
@@ -186,7 +178,7 @@ public final class LineHeightStyle {
         }
 
         public final String toString() {
-            return m804toStringimpl(this.value);
+            return m806toStringimpl(this.value);
         }
     }
 
@@ -231,15 +223,15 @@ public final class LineHeightStyle {
 
     public final int hashCode() {
         Alignment.Companion companion = Alignment.Companion;
-        int hashCode = Float.hashCode(this.alignment) * 31;
+        int iHashCode = Float.hashCode(this.alignment) * 31;
         Trim.Companion companion2 = Trim.Companion;
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.trim, hashCode, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.trim, iHashCode, 31);
         Mode.Companion companion3 = Mode.Companion;
-        return Integer.hashCode(this.mode) + m;
+        return Integer.hashCode(this.mode) + iM;
     }
 
     public final String toString() {
-        return "LineHeightStyle(alignment=" + ((Object) Alignment.m801toStringimpl(this.alignment)) + ", trim=" + ((Object) Trim.m804toStringimpl(this.trim)) + ",mode=" + ((Object) ("Mode(value=" + this.mode + ')')) + ')';
+        return "LineHeightStyle(alignment=" + ((Object) Alignment.m803toStringimpl(this.alignment)) + ", trim=" + ((Object) Trim.m806toStringimpl(this.trim)) + ",mode=" + ((Object) ("Mode(value=" + this.mode + ')')) + ')';
     }
 
     public /* synthetic */ LineHeightStyle(float f, int i, DefaultConstructorMarker defaultConstructorMarker) {

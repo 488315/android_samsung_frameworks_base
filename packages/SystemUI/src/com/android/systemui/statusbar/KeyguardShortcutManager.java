@@ -1,17 +1,21 @@
 package com.android.systemui.statusbar;
 
+import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.content.pm.SigningInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
 import android.graphics.BlurMaskFilter;
@@ -23,6 +27,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.net.Uri;
@@ -31,20 +36,27 @@ import android.os.Handler;
 import android.os.Process;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
-import android.view.View;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import androidx.core.app.NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0;
+import androidx.core.graphics.drawable.DrawableKt;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardCarrierViewController$2$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardDeskTopStateMonitor;
 import com.android.keyguard.KeyguardDisplayManager;
 import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecSimPinViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
+import com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0;
 import com.android.systemui.CscRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
@@ -74,6 +86,7 @@ import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import dagger.Lazy;
@@ -81,21 +94,27 @@ import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsKt;
+import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.CharsKt__CharJVMKt;
+import kotlin.text.Regex;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback implements SettingsHelper.OnChangedCallback, Dumpable {
     public final Context context;
@@ -161,7 +180,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -171,7 +189,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShortcutData {
         public String appLabel;
         public ComponentName componentName;
@@ -190,7 +207,7 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
 
     /* JADX WARN: Type inference failed for: r7v11, types: [com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutsRunnable$1] */
     /* JADX WARN: Type inference failed for: r7v15, types: [com.android.systemui.statusbar.KeyguardShortcutManager$intentReceiver$1] */
-    public KeyguardShortcutManager(Context context, BroadcastDispatcher broadcastDispatcher, Executor executor, Handler handler, UserTracker userTracker, SelectedUserInteractor selectedUserInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, PackageManager packageManager, KeyguardStateController keyguardStateController, Set<KeyguardQuickAffordanceConfig> set, DumpManager dumpManager, SecLockscreenTileHost secLockscreenTileHost, UserSwitcherController userSwitcherController, KeyguardDisplayManager keyguardDisplayManager) {
+    public KeyguardShortcutManager(Context context, BroadcastDispatcher broadcastDispatcher, Executor executor, Handler handler, UserTracker userTracker, SelectedUserInteractor selectedUserInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, SettingsHelper settingsHelper, PackageManager packageManager, KeyguardStateController keyguardStateController, Set<KeyguardQuickAffordanceConfig> set, DumpManager dumpManager, SecLockscreenTileHost secLockscreenTileHost, UserSwitcherController userSwitcherController, KeyguardDisplayManager keyguardDisplayManager) throws Resources.NotFoundException {
         String[] stringArray;
         String[] stringArray2;
         this.context = context;
@@ -215,7 +232,7 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         this.updateShortcutsRunnable = new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutsRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardShortcutManager.access$handleUpdateShortcuts(KeyguardShortcutManager.this);
+                KeyguardShortcutManager.access$handleUpdateShortcuts(this.this$0);
             }
         };
         this.themeShortcutHashMap = new HashMap();
@@ -223,19 +240,139 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         this.wallpaperBrightness = -1;
         this.intentReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$intentReceiver$1
             /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0121  */
-            /* JADX WARN: Removed duplicated region for block: B:37:0x0167  */
+            /* JADX WARN: Removed duplicated region for block: B:70:0x0121  */
+            /* JADX WARN: Removed duplicated region for block: B:85:0x0167  */
             @Override // android.content.BroadcastReceiver
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onReceive(android.content.Context r9, android.content.Intent r10) {
-                /*
-                    Method dump skipped, instructions count: 522
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager$intentReceiver$1.onReceive(android.content.Context, android.content.Intent):void");
+            public final void onReceive(Context context2, Intent intent) {
+                Uri data;
+                String schemeSpecificPart;
+                Uri data2;
+                String schemeSpecificPart2;
+                String action = intent.getAction();
+                if (action != null) {
+                    switch (action.hashCode()) {
+                        case -1662080879:
+                            if (!action.equals("com.sec.android.app.secsetupwizard.SETUPWIZARD_COMPLETE")) {
+                            }
+                            Log.d("KeyguardShortcutManager", "onReceive : ".concat(action));
+                            this.this$0.keyguardShortcutDialerUpdateManager.updateLockShortcutDialerApp(intent);
+                            break;
+                        case -1001645458:
+                            if (!action.equals("android.intent.action.PACKAGES_SUSPENDED")) {
+                            }
+                            String[] stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_package_list");
+                            for (int i = 0; i < 2; i++) {
+                                if (this.this$0.shortcutsData[i].componentName != null && stringArrayExtra != null) {
+                                    List listListOf = CollectionsKt__CollectionsKt.listOf(Arrays.copyOf(stringArrayExtra, stringArrayExtra.length));
+                                    ComponentName componentName = this.this$0.shortcutsData[i].componentName;
+                                    if (listListOf.contains(componentName != null ? componentName.getPackageName() : null)) {
+                                        ComponentName componentName2 = this.this$0.shortcutsData[i].componentName;
+                                        MediaSessions$H$$ExternalSyntheticOutline0.m("onReceive : ", action, ", suspended shortcut ", componentName2 != null ? componentName2.getPackageName() : null, "KeyguardShortcutManager");
+                                        KeyguardShortcutManager keyguardShortcutManager = this.this$0;
+                                        keyguardShortcutManager.executor.execute(new KeyguardShortcutManager$updateShortcut$1(keyguardShortcutManager.shortcutsData[i].componentName, keyguardShortcutManager, i));
+                                    }
+                                }
+                            }
+                            break;
+                        case -810471698:
+                            if (!action.equals("android.intent.action.PACKAGE_REPLACED")) {
+                            }
+                            data2 = intent.getData();
+                            if (data2 != null && (schemeSpecificPart2 = data2.getSchemeSpecificPart()) != null) {
+                                KeyguardShortcutManager keyguardShortcutManager2 = this.this$0;
+                                for (int i2 = 0; i2 < 2; i2++) {
+                                    ComponentName componentName3 = keyguardShortcutManager2.shortcutsData[i2].componentName;
+                                    if (componentName3 != null && schemeSpecificPart2.equals(componentName3.getPackageName())) {
+                                        MediaSessions$H$$ExternalSyntheticOutline0.m("onReceive : ", action, ", starting update of shortcut ", schemeSpecificPart2, "KeyguardShortcutManager");
+                                        keyguardShortcutManager2.executor.execute(new KeyguardShortcutManager$updateShortcut$1(keyguardShortcutManager2.shortcutsData[i2].componentName, keyguardShortcutManager2, i2));
+                                    }
+                                }
+                                break;
+                            }
+                            break;
+                        case -224747295:
+                            if (action.equals("com.samsung.android.action.LOCK_TASK_MODE")) {
+                                KeyguardShortcutManager keyguardShortcutManager3 = this.this$0;
+                                keyguardShortcutManager3.isLockTaskMode = ((ActivityManager) keyguardShortcutManager3.context.getSystemService("activity")).getLockTaskModeState() == 1;
+                                Log.d("KeyguardShortcutManager", "onReceive : " + action + ", mIsLocksTaskModeLocked : " + this.this$0.isLockTaskMode);
+                                break;
+                            }
+                            break;
+                        case -147579983:
+                            if (action.equals("com.samsung.intent.action.EMERGENCY_STATE_CHANGED")) {
+                                int intExtra = intent.getIntExtra("reason", 0);
+                                Log.d("KeyguardShortcutManager", ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m(intExtra, "onReceive : ", action, ", with state ", ", updating shortcuts"));
+                                if (intExtra == 3 || intExtra == 5) {
+                                    this.this$0.updateShortcuts();
+                                    break;
+                                }
+                            }
+                            break;
+                        case -19011148:
+                            if (!action.equals("android.intent.action.LOCALE_CHANGED")) {
+                            }
+                            this.this$0.updateShortcuts();
+                            break;
+                        case 30791346:
+                            if (!action.equals("android.telecom.action.DEFAULT_DIALER_CHANGED")) {
+                            }
+                            Log.d("KeyguardShortcutManager", "onReceive : ".concat(action));
+                            this.this$0.keyguardShortcutDialerUpdateManager.updateLockShortcutDialerApp(intent);
+                            break;
+                        case 172491798:
+                            if (!action.equals("android.intent.action.PACKAGE_CHANGED")) {
+                            }
+                            data2 = intent.getData();
+                            if (data2 != null) {
+                                break;
+                            }
+                            break;
+                        case 525384130:
+                            if (action.equals("android.intent.action.PACKAGE_REMOVED")) {
+                                Bundle extras = intent.getExtras();
+                                extras.getClass();
+                                if (!extras.getBoolean("android.intent.extra.REPLACING") && (data = intent.getData()) != null && (schemeSpecificPart = data.getSchemeSpecificPart()) != null) {
+                                    KeyguardShortcutManager keyguardShortcutManager4 = this.this$0;
+                                    Log.d("KeyguardShortcutManager", "onReceive : Intent.EXTRA_REPLACING false, ".concat(schemeSpecificPart));
+                                    for (int i3 = 0; i3 < 2; i3++) {
+                                        ComponentName componentName4 = keyguardShortcutManager4.shortcutsData[i3].componentName;
+                                        if (componentName4 != null && schemeSpecificPart.equals(componentName4.getPackageName())) {
+                                            KeyguardShortcutManager.access$resetShortcut(keyguardShortcutManager4, i3);
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                            break;
+                        case 1129769556:
+                            if (!action.equals("com.samsung.applock.intent.action.APPLOCK_ENABLE_CHANGED")) {
+                            }
+                            this.this$0.updateShortcuts();
+                            break;
+                        case 1290767157:
+                            if (!action.equals("android.intent.action.PACKAGES_UNSUSPENDED")) {
+                            }
+                            String[] stringArrayExtra2 = intent.getStringArrayExtra("android.intent.extra.changed_package_list");
+                            while (i < 2) {
+                            }
+                            break;
+                        case 1544582882:
+                            if (!action.equals("android.intent.action.PACKAGE_ADDED")) {
+                            }
+                            data2 = intent.getData();
+                            if (data2 != null) {
+                            }
+                            break;
+                        case 2039271079:
+                            if (!action.equals("com.samsung.applock.intent.action.SSECURE_UPDATE")) {
+                            }
+                            this.this$0.updateShortcuts();
+                            break;
+                    }
+                }
             }
         };
         if (!Intrinsics.areEqual(Process.myUserHandle(), UserHandle.SYSTEM)) {
@@ -286,43 +423,334 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         DumpManager.registerDumpable$default(this.dumpManager, "KeyguardShortcutManager", this);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x00f3, code lost:
-    
-        if (r6 != null) goto L44;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00d8 A[PHI: r6
+      0x00d8: PHI (r6v30 android.graphics.drawable.Drawable) = (r6v21 android.graphics.drawable.Drawable), (r6v28 android.graphics.drawable.Drawable) binds: [B:43:0x00d6, B:54:0x00f3] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final android.graphics.drawable.Drawable access$getShortcutIcon(com.android.systemui.statusbar.KeyguardShortcutManager r9, android.content.pm.ActivityInfo r10, boolean r11, int r12) {
-        /*
-            Method dump skipped, instructions count: 459
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.access$getShortcutIcon(com.android.systemui.statusbar.KeyguardShortcutManager, android.content.pm.ActivityInfo, boolean, int):android.graphics.drawable.Drawable");
+    public static final Drawable access$getShortcutIcon(KeyguardShortcutManager keyguardShortcutManager, ActivityInfo activityInfo, boolean z, int i) {
+        Drawable drawableLoadIcon;
+        int identifier;
+        Drawable monochrome;
+        boolean z2 = keyguardShortcutManager.shortcutsData[i].isMonotoneIcon;
+        String str = activityInfo.packageName;
+        if (keyguardShortcutManager.settingsHelper.getActiveIconPackage() == null) {
+            drawableLoadIcon = keyguardShortcutManager.getSamsungAppIconDrawable(str);
+        } else {
+            str.getClass();
+            String str2 = (String) keyguardShortcutManager.themeShortcutHashMap.get(str);
+            if (str2 == null) {
+                str2 = null;
+            }
+            if (str2 == null || (identifier = keyguardShortcutManager.context.getResources().getIdentifier(str2, "drawable", keyguardShortcutManager.context.getPackageName())) == 0) {
+                drawableLoadIcon = null;
+                if (drawableLoadIcon == null) {
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeResource(keyguardShortcutManager.context.getResources(), R.drawable.ic_shortcut_theme_bg, options);
+                    if (options.outWidth != 1) {
+                        drawableLoadIcon = activityInfo.loadIcon(keyguardShortcutManager.packageManager, true, 256);
+                    }
+                }
+            } else {
+                BitmapFactory.Options options2 = new BitmapFactory.Options();
+                options2.inJustDecodeBounds = true;
+                BitmapFactory.decodeResource(keyguardShortcutManager.context.getResources(), identifier, options2);
+                BitmapFactory.Options options3 = new BitmapFactory.Options();
+                options3.inJustDecodeBounds = true;
+                BitmapFactory.decodeResource(keyguardShortcutManager.context.getResources(), identifier, options3);
+                if (options3.outWidth != 1) {
+                    drawableLoadIcon = keyguardShortcutManager.context.getDrawable(identifier);
+                }
+                if (drawableLoadIcon == null) {
+                }
+            }
+        }
+        if (drawableLoadIcon == null) {
+            drawableLoadIcon = activityInfo.loadIcon(keyguardShortcutManager.packageManager, true, 1);
+        }
+        if (drawableLoadIcon == null) {
+            drawableLoadIcon = activityInfo.loadDefaultIcon(keyguardShortcutManager.packageManager);
+        }
+        int shortcutIconSizeValue = keyguardShortcutManager.getShortcutIconSizeValue(keyguardShortcutManager.isNowBarVisible);
+        if (z2) {
+            try {
+                str.getClass();
+                if ("com.sec.android.app.camera".equals(str) && keyguardShortcutManager.settingsHelper.getActiveIconPackage() == null) {
+                    monochrome = keyguardShortcutManager.getSamsungAppIconDrawable(str);
+                } else {
+                    DrawableWrapper drawableWrapper = (DrawableWrapper) drawableLoadIcon;
+                    AdaptiveIconDrawable adaptiveIconDrawable = (AdaptiveIconDrawable) (drawableWrapper != null ? drawableWrapper.getDrawable() : null);
+                    monochrome = adaptiveIconDrawable != null ? adaptiveIconDrawable.getMonochrome() : null;
+                }
+                if (monochrome == null) {
+                    if (isARShortcutIcon(str)) {
+                        DrawableWrapper drawableWrapper2 = (DrawableWrapper) drawableLoadIcon;
+                        AdaptiveIconDrawable adaptiveIconDrawable2 = (AdaptiveIconDrawable) (drawableWrapper2 != null ? drawableWrapper2.getDrawable() : null);
+                        if (adaptiveIconDrawable2 != null) {
+                            monochrome = adaptiveIconDrawable2.getForeground();
+                            if (monochrome != null) {
+                                drawableLoadIcon = monochrome;
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("Making samsung Icon error : ", e, "KeyguardShortcutManager");
+            }
+        }
+        Bitmap bitmap = drawableLoadIcon != null ? DrawableKt.toBitmap(drawableLoadIcon, drawableLoadIcon.getIntrinsicWidth(), drawableLoadIcon.getIntrinsicHeight(), null) : null;
+        if (keyguardShortcutManager.settingsHelper.getActiveIconPackage() == null || keyguardShortcutManager.isTaskType(i)) {
+            if (!z2) {
+                float f = keyguardShortcutManager.context.getResources().getDisplayMetrics().density * 2;
+                if (bitmap == null) {
+                    bitmap = null;
+                } else if (shortcutIconSizeValue > 0) {
+                    bitmap.setDensity(keyguardShortcutManager.context.getResources().getDisplayMetrics().densityDpi);
+                    int i2 = (int) (shortcutIconSizeValue + f);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, i2, i2, true);
+                }
+                bitmap = bitmap != null ? getCircleBitmap(bitmap, f) : null;
+                if (bitmap != null) {
+                    bitmap.setDensity(keyguardShortcutManager.context.getResources().getDisplayMetrics().densityDpi);
+                }
+            } else if (bitmap != null) {
+                if (!z) {
+                    bitmap = keyguardShortcutManager.scaleIcon(bitmap, false);
+                }
+                bitmap = getCircleBitmap(bitmap, 0.0f);
+                if (!z) {
+                    if (!LsRune.LOCKUI_SHORTCUT_BLUR_BG) {
+                        return new BitmapDrawable(keyguardShortcutManager.context.getResources(), imgShadow(bitmap, keyguardShortcutManager.getInvertColor(WallpaperUtils.isWhiteKeyguardWallpaper("navibar"), false)));
+                    }
+                    BitmapDrawable bitmapDrawable = new BitmapDrawable(keyguardShortcutManager.context.getResources(), bitmap);
+                    boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
+                    if (isARShortcutIcon(str)) {
+                        return bitmapDrawable;
+                    }
+                    bitmapDrawable.mutate().setColorFilter(new BlendModeColorFilter(keyguardShortcutManager.getInvertColor(zIsWhiteKeyguardWallpaper, false), BlendMode.SRC_ATOP));
+                    return bitmapDrawable;
+                }
+                new BitmapDrawable(keyguardShortcutManager.context.getResources(), bitmap);
+            }
+        }
+        return bitmap != null ? new BitmapDrawable(keyguardShortcutManager.context.getResources(), bitmap) : null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x016a  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0158  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void access$handleUpdateShortcuts(final com.android.systemui.statusbar.KeyguardShortcutManager r13) {
-        /*
-            Method dump skipped, instructions count: 442
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.access$handleUpdateShortcuts(com.android.systemui.statusbar.KeyguardShortcutManager):void");
+    public static final void access$handleUpdateShortcuts(final KeyguardShortcutManager keyguardShortcutManager) {
+        final int i;
+        String shortcutAppList = keyguardShortcutManager.settingsHelper.getShortcutAppList();
+        boolean zIsEmpty = TextUtils.isEmpty(shortcutAppList);
+        ShortcutData[] shortcutDataArr = keyguardShortcutManager.shortcutsData;
+        if (zIsEmpty) {
+            List listAsList = Arrays.asList(0, 1);
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+            Iterator it = listAsList.iterator();
+            while (it.hasNext()) {
+                ShortcutData shortcutData = shortcutDataArr[((Number) it.next()).intValue()];
+                shortcutData.taskName = null;
+                shortcutData.componentName = null;
+                shortcutData.enabled = false;
+                arrayList.add(Unit.INSTANCE);
+            }
+        } else {
+            shortcutAppList.getClass();
+            StringBuilder sb = keyguardShortcutManager.stringBuilder;
+            sb.setLength(0);
+            int length = shortcutAppList.length();
+            for (int i2 = 0; i2 < length; i2++) {
+                if (i2 % 5 == 0) {
+                    sb.append((char) (shortcutAppList.codePointAt(i2) + 1));
+                } else {
+                    sb.append(shortcutAppList.charAt(i2));
+                }
+            }
+            Log.d("KeyguardShortcutManager", "getSettingValues(" + sb.toString() + ")");
+            String[] strArr = (String[]) new Regex(";").split(shortcutAppList).toArray(new String[0]);
+            if (strArr.length < 4) {
+                List listAsList2 = Arrays.asList(0, 1);
+                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList2, 10));
+                Iterator it2 = listAsList2.iterator();
+                while (it2.hasNext()) {
+                    ShortcutData shortcutData2 = shortcutDataArr[((Number) it2.next()).intValue()];
+                    shortcutData2.taskName = null;
+                    shortcutData2.componentName = null;
+                    shortcutData2.enabled = false;
+                    arrayList2.add(Unit.INSTANCE);
+                }
+                Unit unit = Unit.INSTANCE;
+                for (i = 0; i < 2; i++) {
+                    if (keyguardShortcutManager.isTaskType(i)) {
+                        final String str = shortcutDataArr[i].taskName;
+                        keyguardShortcutManager.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateTaskShortcut$1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                try {
+                                    final int i3 = i;
+                                    final KeyguardShortcutManager keyguardShortcutManager2 = keyguardShortcutManager;
+                                    final String str2 = str;
+                                    if (new Predicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateTaskShortcut$1.1
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            if (((String) obj) == null) {
+                                                NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i3, "updateTaskShortcut : ", " is disabled from settings", "KeyguardShortcutManager");
+                                                return false;
+                                            }
+                                            KeyguardShortcutManager keyguardShortcutManager3 = keyguardShortcutManager2;
+                                            KeyguardQuickAffordanceConfig[] keyguardQuickAffordanceConfigArr = keyguardShortcutManager3.keyguardBottomAreaShortcutTask;
+                                            int i4 = i3;
+                                            keyguardQuickAffordanceConfigArr[i4] = keyguardShortcutManager3.getKeyguardBottomAreaShortcutTask(i4, keyguardShortcutManager3.shortcutsData[i4].taskName);
+                                            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("updateTaskShortcut: taskName =  ", keyguardShortcutManager2.shortcutsData[i3].taskName, "KeyguardShortcutManager");
+                                            if (Intrinsics.areEqual(keyguardShortcutManager2.keyguardBottomAreaShortcutTask[i3], KeyguardShortcutManager.EMPTY_CONFIG)) {
+                                                NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i3, "updateTaskShortcut : ", " is invalid task name", "KeyguardShortcutManager");
+                                                return false;
+                                            }
+                                            if (!keyguardShortcutManager2.keyguardBottomAreaShortcutTask[i3].isAvailable()) {
+                                                int i5 = i3;
+                                                String str3 = str2;
+                                                ExifInterface$$ExternalSyntheticOutline0.m(KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i5, "updateTaskShortcut : ", " Shortcut set to ", str3, " but "), str3, " is not supported for the device", "KeyguardShortcutManager");
+                                                return false;
+                                            }
+                                            KeyguardShortcutManager keyguardShortcutManager4 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr2 = keyguardShortcutManager4.shortcutsData;
+                                            int i6 = i3;
+                                            KeyguardShortcutManager.ShortcutData shortcutData3 = shortcutDataArr2[i6];
+                                            shortcutData3.noUnlockNeeded = true;
+                                            shortcutData3.enabled = true;
+                                            shortcutData3.isMonotoneIcon = true;
+                                            boolean zIsTaskTypeEnabled = keyguardShortcutManager4.isTaskTypeEnabled(i6);
+                                            KeyguardShortcutManager keyguardShortcutManager5 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr3 = keyguardShortcutManager5.shortcutsData;
+                                            int i7 = i3;
+                                            shortcutDataArr3[i7].isIconPaddingNeeded = keyguardShortcutManager5.keyguardBottomAreaShortcutTask[i7].isIconPaddingRequired();
+                                            KeyguardShortcutManager keyguardShortcutManager6 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr4 = keyguardShortcutManager6.shortcutsData;
+                                            int i8 = i3;
+                                            shortcutDataArr4[i8].drawable = keyguardShortcutManager6.convertTaskDrawable(keyguardShortcutManager6.keyguardBottomAreaShortcutTask[i8].getDrawable(), WallpaperUtils.isWhiteKeyguardWallpaper("navibar"), zIsTaskTypeEnabled, false, keyguardShortcutManager2.shortcutsData[i3].isIconPaddingNeeded);
+                                            KeyguardShortcutManager keyguardShortcutManager7 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr5 = keyguardShortcutManager7.shortcutsData;
+                                            int i9 = i3;
+                                            shortcutDataArr5[i9].panelDrawable = keyguardShortcutManager7.keyguardBottomAreaShortcutTask[i9].getDrawable();
+                                            KeyguardShortcutManager keyguardShortcutManager8 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr6 = keyguardShortcutManager8.shortcutsData;
+                                            int i10 = i3;
+                                            shortcutDataArr6[i10].panelTransitDrawable = keyguardShortcutManager8.keyguardBottomAreaShortcutTask[i10].getPanelIconTransitionDrawable();
+                                            KeyguardShortcutManager keyguardShortcutManager9 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr7 = keyguardShortcutManager9.shortcutsData;
+                                            int i11 = i3;
+                                            KeyguardShortcutManager.ShortcutData shortcutData4 = shortcutDataArr7[i11];
+                                            shortcutData4.componentName = null;
+                                            shortcutData4.appLabel = keyguardShortcutManager9.keyguardBottomAreaShortcutTask[i11].pickerName();
+                                            KeyguardShortcutManager keyguardShortcutManager10 = keyguardShortcutManager2;
+                                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr8 = keyguardShortcutManager10.shortcutsData;
+                                            int i12 = i3;
+                                            shortcutDataArr8[i12].isUnlockWaitNeeded = keyguardShortcutManager10.keyguardBottomAreaShortcutTask[i12].isUnlockWaitRequired();
+                                            int i13 = i3;
+                                            KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(i13, "updateTaskShortcut th : ", " class : ", keyguardShortcutManager2.shortcutsData[i13].taskName, "KeyguardShortcutManager");
+                                            keyguardShortcutManager2.getQuickAffordanceConfigList();
+                                            return true;
+                                        }
+                                    }.test(str)) {
+                                        final KeyguardShortcutManager keyguardShortcutManager3 = keyguardShortcutManager;
+                                        Handler handler = keyguardShortcutManager3.handler;
+                                        final int i4 = i;
+                                        handler.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateTaskShortcut$1.2
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                KeyguardShortcutManager keyguardShortcutManager4 = keyguardShortcutManager3;
+                                                int i5 = i4;
+                                                KeyguardShortcutManager.Companion companion = KeyguardShortcutManager.Companion;
+                                                keyguardShortcutManager4.sendUpdateShortcutViewToCallback(i5);
+                                            }
+                                        });
+                                        return;
+                                    }
+                                    final KeyguardShortcutManager keyguardShortcutManager4 = keyguardShortcutManager;
+                                    Handler handler2 = keyguardShortcutManager4.handler;
+                                    final int i5 = i;
+                                    handler2.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateTaskShortcut$1.3
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            KeyguardShortcutManager.access$resetShortcut(keyguardShortcutManager4, i5);
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    keyguardShortcutManager.settingsHelper.resetShortcutValue(keyguardShortcutManager.selectedUserInteractor.getSelectedUserId());
+                                    Log.e("KeyguardShortcutManager", "getPositionCorrectionRatio exception = " + e);
+                                }
+                            }
+                        });
+                    } else {
+                        keyguardShortcutManager.keyguardBottomAreaShortcutTask[i].setSpecName("");
+                        keyguardShortcutManager.executor.execute(new KeyguardShortcutManager$updateShortcut$1(shortcutDataArr[i].componentName, keyguardShortcutManager, i));
+                    }
+                }
+                SharedPreferences.Editor editorEdit = keyguardShortcutManager.context.getSharedPreferences(SystemUIAnalytics.LOCK_PREF_NAME, 0).edit();
+                editorEdit.putString(SystemUIAnalytics.STATUS_ID_LOCK_LEFT_SHORTCUT, keyguardShortcutManager.getComponentNameForSALogging(0));
+                editorEdit.putString(SystemUIAnalytics.STATUS_ID_LOCK_RIGHT_SHORTCUT, keyguardShortcutManager.getComponentNameForSALogging(1));
+                editorEdit.apply();
+            }
+            int length2 = strArr.length / 2;
+            for (int i3 = 0; i3 < length2 && i3 < 2; i3++) {
+                int i4 = i3 * 2;
+                if ("1".equals(strArr[i4])) {
+                    int i5 = i4 + 1;
+                    String str2 = strArr[i5];
+                    if (str2 == null || !StringsKt__StringsKt.contains(str2, "NoUnlockNeeded", false)) {
+                        shortcutDataArr[i3].shortcutProperty = 0;
+                        String str3 = strArr[i5];
+                        str3.getClass();
+                        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str3);
+                        if (componentNameUnflattenFromString == null) {
+                            PackageManager packageManager = keyguardShortcutManager.packageManager;
+                            String str4 = strArr[i5];
+                            str4.getClass();
+                            Intent launchIntentForPackage = packageManager.getLaunchIntentForPackage(str4);
+                            if (launchIntentForPackage != null) {
+                                componentNameUnflattenFromString = launchIntentForPackage.getComponent();
+                            }
+                        }
+                        shortcutDataArr[i3].componentName = componentNameUnflattenFromString;
+                    } else {
+                        ShortcutData shortcutData3 = shortcutDataArr[i3];
+                        shortcutData3.shortcutProperty = 1;
+                        String str5 = strArr[i5];
+                        str5.getClass();
+                        String str6 = strArr[i5];
+                        str6.getClass();
+                        shortcutData3.taskName = str5.substring(StringsKt__StringsKt.lastIndexOf$default(str6, "/", 6) + 1);
+                    }
+                } else {
+                    String str7 = strArr[i4];
+                    ShortcutData shortcutData4 = shortcutDataArr[i3];
+                    shortcutData4.taskName = null;
+                    shortcutData4.componentName = null;
+                    shortcutData4.enabled = false;
+                }
+            }
+        }
+        Unit unit2 = Unit.INSTANCE;
+        while (i < 2) {
+        }
+        SharedPreferences.Editor editorEdit2 = keyguardShortcutManager.context.getSharedPreferences(SystemUIAnalytics.LOCK_PREF_NAME, 0).edit();
+        editorEdit2.putString(SystemUIAnalytics.STATUS_ID_LOCK_LEFT_SHORTCUT, keyguardShortcutManager.getComponentNameForSALogging(0));
+        editorEdit2.putString(SystemUIAnalytics.STATUS_ID_LOCK_RIGHT_SHORTCUT, keyguardShortcutManager.getComponentNameForSALogging(1));
+        editorEdit2.apply();
     }
 
     public static final boolean access$isMonotoneIconRequired(KeyguardShortcutManager keyguardShortcutManager, int i) {
         Drawable drawable;
         if (keyguardShortcutManager.settingsHelper.getActiveIconPackage() == null) {
-            ResolveInfo resolveActivityAsUser = keyguardShortcutManager.packageManager.resolveActivityAsUser(Intent.makeMainActivity(keyguardShortcutManager.shortcutsData[i].componentName), 129, ((UserTrackerImpl) keyguardShortcutManager.userTracker).getUserId());
-            ActivityInfo activityInfo = resolveActivityAsUser != null ? resolveActivityAsUser.activityInfo : null;
+            ResolveInfo resolveInfoResolveActivityAsUser = keyguardShortcutManager.packageManager.resolveActivityAsUser(Intent.makeMainActivity(keyguardShortcutManager.shortcutsData[i].componentName), 129, ((UserTrackerImpl) keyguardShortcutManager.userTracker).getUserId());
+            ActivityInfo activityInfo = resolveInfoResolveActivityAsUser != null ? resolveInfoResolveActivityAsUser.activityInfo : null;
             if (activityInfo == null) {
-                Slog.d("KeyguardShortcutManager", "updateShortcut : " + i + " activityInfo is null, resolveInfo is : " + resolveActivityAsUser + ",  return FALSE");
+                Slog.d("KeyguardShortcutManager", "updateShortcut : " + i + " activityInfo is null, resolveInfo is : " + resolveInfoResolveActivityAsUser + ",  return FALSE");
                 return false;
             }
             Drawable samsungAppIconDrawable = keyguardShortcutManager.settingsHelper.getActiveIconPackage() == null ? keyguardShortcutManager.getSamsungAppIconDrawable(activityInfo.packageName) : null;
@@ -360,7 +788,6 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     }
 
     public static final void access$sendUpdateIconOnlyToCallback(KeyguardShortcutManager keyguardShortcutManager, final int i) {
-        View view;
         ArrayList arrayList = keyguardShortcutManager.shortcutCallbacks;
         int size = arrayList.size();
         int i2 = 0;
@@ -372,8 +799,7 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                 Object obj2 = weakReference.get();
                 obj2.getClass();
                 final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = ((KeyguardSecBottomAreaViewController$shortcutManagerCallback$1) obj2).this$0;
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view).post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutManagerCallback$1$updateShortcutIconOnly$1
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutManagerCallback$1$updateShortcutIconOnly$1
                     @Override // java.lang.Runnable
                     public final void run() {
                         if (i == 0) {
@@ -401,26 +827,26 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     public static Bitmap getCircleBitmap(Bitmap bitmap, float f) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Path path = new Path();
         float f2 = width / 2;
         float f3 = height / 2;
         path.addCircle(f2, f3, Math.min(f2 - f, f3 - f), Path.Direction.CCW);
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         canvas.clipPath(path);
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static Bitmap imgShadow(Bitmap bitmap, int i) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
         Matrix matrix = new Matrix();
         matrix.setRectToRect(new RectF(0.0f, 0.0f, bitmap.getWidth(), bitmap.getHeight()), new RectF(0.0f, 0.0f, width, height), Matrix.ScaleToFit.CENTER);
         Matrix matrix2 = new Matrix(matrix);
         matrix2.postTranslate(0.0f, 0.0f);
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint(1);
         canvas.drawBitmap(bitmap, matrix, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
@@ -435,19 +861,19 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         Paint paint2 = new Paint(1);
         paint2.setFilterBitmap(true);
         paint2.setColorFilter(new BlendModeColorFilter(i, BlendMode.SRC_ATOP));
-        Bitmap createBitmap2 = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas2 = new Canvas(createBitmap2);
-        canvas2.drawBitmap(createBitmap, 0.0f, 0.0f, paint);
+        Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(bitmapCreateBitmap2);
+        canvas2.drawBitmap(bitmapCreateBitmap, 0.0f, 0.0f, paint);
         canvas2.drawBitmap(bitmap, matrix, paint2);
-        createBitmap.recycle();
-        return createBitmap2;
+        bitmapCreateBitmap.recycle();
+        return bitmapCreateBitmap2;
     }
 
     public static boolean isARShortcutIcon(String str) {
         return "com.samsung.android.aremoji".equals(str) || "com.sec.android.mimage.avatarstickers".equals(str);
     }
 
-    public static boolean isAllowNonPlatformKeyApp(Context context, String str, String str2) {
+    public static boolean isAllowNonPlatformKeyApp(Context context, String str, String str2) throws NoSuchAlgorithmException {
         ArrayList arrayList = new ArrayList();
         arrayList.add(str2);
         Unit unit = Unit.INSTANCE;
@@ -486,91 +912,38 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         return "com.sec.android.app.camera".equals(componentName.getPackageName());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0012, code lost:
-    
-        if (r5 != false) goto L17;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000a, code lost:
-    
-        if (r5 != false) goto L6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x000c, code lost:
-    
-        r0 = com.android.systemui.R.color.shortcut_black_tint_task_on;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.graphics.drawable.Drawable convertTaskDrawable(android.graphics.drawable.Drawable r4, boolean r5, boolean r6, boolean r7, boolean r8) {
-        /*
-            r3 = this;
-            if (r4 == 0) goto L70
-            r0 = 2131102171(0x7f0609db, float:1.7816772E38)
-            r1 = 2131102162(0x7f0609d2, float:1.7816754E38)
-            if (r7 == 0) goto Le
-            if (r5 == 0) goto L26
-        Lc:
-            r0 = r1
-            goto L26
-        Le:
-            boolean r2 = r3.isReduceTransparencyEnabled
-            if (r2 == 0) goto L15
-            if (r5 == 0) goto Lc
-            goto L26
-        L15:
-            if (r6 == 0) goto L19
-            if (r5 == 0) goto L1f
-        L19:
-            int r5 = r3.wallpaperBrightness
-            r6 = 84
-            if (r5 <= r6) goto L23
-        L1f:
-            r0 = 2131102165(0x7f0609d5, float:1.781676E38)
-            goto L26
-        L23:
-            r0 = 2131102166(0x7f0609d6, float:1.7816762E38)
-        L26:
-            android.content.Context r5 = r3.context
-            int r5 = r5.getColor(r0)
-            android.graphics.Bitmap r4 = androidx.core.graphics.drawable.DrawableKt.toBitmap$default(r4)
-            android.graphics.Bitmap r4 = r3.scaleIcon(r4, r8)
-            boolean r6 = com.android.systemui.LsRune.LOCKUI_SHORTCUT_BLUR_BG
-            if (r6 != 0) goto L4b
-            if (r7 == 0) goto L3b
-            goto L4b
-        L3b:
-            android.graphics.drawable.BitmapDrawable r6 = new android.graphics.drawable.BitmapDrawable
-            android.content.Context r3 = r3.context
-            android.content.res.Resources r3 = r3.getResources()
-            android.graphics.Bitmap r4 = imgShadow(r4, r5)
-            r6.<init>(r3, r4)
-            return r6
-        L4b:
-            android.graphics.drawable.BitmapDrawable r6 = new android.graphics.drawable.BitmapDrawable
-            android.content.Context r3 = r3.context
-            android.content.res.Resources r3 = r3.getResources()
-            r6.<init>(r3, r4)
-            android.graphics.drawable.Drawable r3 = r6.mutate()
-            r3.clearColorFilter()
-            android.graphics.drawable.Drawable r3 = r6.mutate()
-            r4 = 0
-            r3.setTint(r4)
-            android.graphics.BlendModeColorFilter r3 = new android.graphics.BlendModeColorFilter
-            android.graphics.BlendMode r4 = android.graphics.BlendMode.SRC_ATOP
-            r3.<init>(r5, r4)
-            r6.setColorFilter(r3)
-            return r6
-        L70:
-            r3 = 0
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.convertTaskDrawable(android.graphics.drawable.Drawable, boolean, boolean, boolean, boolean):android.graphics.drawable.Drawable");
+    public final Drawable convertTaskDrawable(Drawable drawable, boolean z, boolean z2, boolean z3, boolean z4) {
+        if (drawable == null) {
+            return null;
+        }
+        int i = R.color.shortcut_white_tint_task_on;
+        if (z3) {
+            if (z) {
+                i = R.color.shortcut_black_tint_task_on;
+            }
+        } else if (!this.isReduceTransparencyEnabled) {
+            i = ((!z2 || z) && (z2 || this.wallpaperBrightness <= 84)) ? R.color.shortcut_icon_color_white : R.color.shortcut_icon_color_black;
+        } else if (!z) {
+        }
+        int color = this.context.getColor(i);
+        Bitmap bitmapScaleIcon = scaleIcon(DrawableKt.toBitmap(drawable, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), null), z4);
+        if (!LsRune.LOCKUI_SHORTCUT_BLUR_BG && !z3) {
+            return new BitmapDrawable(this.context.getResources(), imgShadow(bitmapScaleIcon, color));
+        }
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.context.getResources(), bitmapScaleIcon);
+        bitmapDrawable.mutate().clearColorFilter();
+        bitmapDrawable.mutate().setTint(0);
+        bitmapDrawable.setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_ATOP));
+        return bitmapDrawable;
     }
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        String str;
+        String packageName;
         printWriter.println("KeyguardShortcutManager state:");
         printWriter.println("  CurrentUserId = " + this.selectedUserInteractor.getSelectedUserId());
         printWriter.println("  Shortcut count = 2");
@@ -595,10 +968,10 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                 DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("    blurPreset = ", getColorCurvePreset(i), printWriter);
                 ComponentName componentName = shortcutData.componentName;
                 if (componentName != null) {
-                    if (componentName == null || (str = componentName.getPackageName()) == null) {
-                        str = "";
+                    if (componentName == null || (packageName = componentName.getPackageName()) == null) {
+                        packageName = "";
                     }
-                    ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "    isSuspended = ", getSuspended(str));
+                    ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "    isSuspended = ", getSuspended(packageName));
                     ComponentName componentName2 = shortcutData.componentName;
                     ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "    isLockTaskPermitted = ", isLockTaskPermitted(componentName2 != null ? componentName2.getPackageName() : null));
                 }
@@ -608,13 +981,13 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
 
     public final int getColorCurvePreset(int i) {
         boolean z = isTaskType(i) && isTaskTypeEnabled(i);
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
         if (z) {
-            return isWhiteKeyguardWallpaper ? 120 : 105;
+            return zIsWhiteKeyguardWallpaper ? 120 : 105;
         }
         int i2 = this.wallpaperBrightness;
         if (i2 == -1) {
-            return isWhiteKeyguardWallpaper ? 117 : 106;
+            return zIsWhiteKeyguardWallpaper ? 117 : 106;
         }
         if (i2 < 0 || i2 >= 29) {
             return (29 > i2 || i2 >= 85) ? 117 : 116;
@@ -623,7 +996,7 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     }
 
     public final String getComponentNameForSALogging(int i) {
-        String m;
+        String strM;
         if (i < 0 || i >= 2) {
             ClockEventController$$ExternalSyntheticOutline0.m(i, "IllegalArgument : ", "KeyguardShortcutManager");
             return "Empty";
@@ -637,8 +1010,8 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                 }
             } else {
                 ComponentName componentName = shortcutDataArr[i].componentName;
-                if (componentName != null && (m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName())) != null) {
-                    return m;
+                if (componentName != null && (strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName())) != null) {
+                    return strM;
                 }
             }
         }
@@ -646,11 +1019,12 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     }
 
     public final int getInvertColor(boolean z, boolean z2) {
-        return (((this.isReduceTransparencyEnabled || z2) && !z) || this.wallpaperBrightness > 84) ? this.context.getColor(R.color.shortcut_icon_color_black) : this.context.getColor(R.color.shortcut_icon_color_white);
+        boolean z3 = this.isReduceTransparencyEnabled;
+        return (((z3 || z2) && !z) || !(z2 || z3 || this.wallpaperBrightness <= 84)) ? this.context.getColor(R.color.shortcut_icon_color_black) : this.context.getColor(R.color.shortcut_icon_color_white);
     }
 
     public final KeyguardQuickAffordanceConfig getKeyguardBottomAreaShortcutTask(int i, String str) {
-        Object obj;
+        Object next;
         if (isTaskType(i)) {
             KeyguardQuickAffordanceConfig[] keyguardQuickAffordanceConfigArr = this.keyguardBottomAreaShortcutTask;
             keyguardQuickAffordanceConfigArr[i].setSpecName(str);
@@ -659,72 +1033,73 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         Iterator it = this.taskConfigs.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((KeyguardQuickAffordanceConfig) obj).getKey(), str)) {
+            next = it.next();
+            if (Intrinsics.areEqual(((KeyguardQuickAffordanceConfig) next).getKey(), str)) {
                 break;
             }
         }
-        KeyguardQuickAffordanceConfig keyguardQuickAffordanceConfig = (KeyguardQuickAffordanceConfig) obj;
+        KeyguardQuickAffordanceConfig keyguardQuickAffordanceConfig = (KeyguardQuickAffordanceConfig) next;
         return keyguardQuickAffordanceConfig == null ? EMPTY_CONFIG : keyguardQuickAffordanceConfig;
     }
 
     public final int getNowBarBottomMargin(int i, int i2) {
+        Lazy lazy;
         float f;
         float f2;
+        float f3;
         boolean z = i2 == 2;
-        if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
-            if (!z) {
-                Lazy lazy = this.keyguardDisplayManager.mKeyguardDeskTopStateMonitorLazy;
-                if (!(lazy != null ? ((KeyguardDeskTopStateMonitor) lazy.get()).mIsDesktopStandAlone : false)) {
-                    f = i;
-                    f2 = 0.045f;
+        if (!DeviceState.isTablet() && !DeviceState.isMultiFoldMain()) {
+            if (!LsRune.LOCKUI_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+                if (z) {
+                    f2 = i;
+                    f3 = 0.056f;
+                } else {
+                    f2 = i;
+                    f3 = 0.035f;
                 }
+                f = f2 * f3;
             }
-            f = i;
-            f2 = 0.059f;
-        } else if (LsRune.LOCKUI_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-            f = i;
-            f2 = 0.047f;
-        } else if (z) {
-            f = i;
-            f2 = 0.056f;
-        } else {
-            f = i;
-            f2 = 0.035f;
+            return (int) f;
         }
-        return (int) (f * f2);
+        if (!z && (lazy = this.keyguardDisplayManager.mKeyguardDeskTopStateMonitorLazy) != null) {
+            boolean z2 = ((KeyguardDeskTopStateMonitor) lazy.get()).mIsDesktopStandAlone;
+        }
+        f = i * 0.045f;
+        return (int) f;
     }
 
     public final int getNowBarCollapsedHeight() {
-        Number valueOf;
+        Number numberValueOf;
         float f = this.context.getResources().getDisplayMetrics().widthPixels;
         float f2 = this.context.getResources().getDisplayMetrics().heightPixels;
         float f3 = this.context.getResources().getDisplayMetrics().density;
-        if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
-            valueOf = Float.valueOf(62 * f3);
+        if (DeviceState.isLargeScreenTablet(this.context)) {
+            numberValueOf = Float.valueOf(72 * f3);
+        } else if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
+            numberValueOf = Float.valueOf(62 * f3);
         } else if (LsRune.LOCKUI_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-            valueOf = Float.valueOf(56 * f3);
+            numberValueOf = Float.valueOf(56 * f3);
         } else {
             if (f < f2) {
                 f = f2;
             }
-            valueOf = Integer.valueOf((int) (f * 0.07f));
+            numberValueOf = Integer.valueOf((int) (f * 0.07f));
         }
-        return valueOf.intValue();
+        return numberValueOf.intValue();
     }
 
     public final List getQuickAffordanceConfigList() {
         ComponentName componentName;
-        KeyguardQuickAffordancePosition[] values = KeyguardQuickAffordancePosition.values();
-        ArrayList arrayList = new ArrayList(values.length);
-        for (KeyguardQuickAffordancePosition keyguardQuickAffordancePosition : values) {
-            final int ordinal = keyguardQuickAffordancePosition.ordinal();
+        KeyguardQuickAffordancePosition[] keyguardQuickAffordancePositionArrValues = KeyguardQuickAffordancePosition.values();
+        ArrayList arrayList = new ArrayList(keyguardQuickAffordancePositionArrValues.length);
+        for (KeyguardQuickAffordancePosition keyguardQuickAffordancePosition : keyguardQuickAffordancePositionArrValues) {
+            final int iOrdinal = keyguardQuickAffordancePosition.ordinal();
             ShortcutData[] shortcutDataArr = this.shortcutsData;
-            final ShortcutData shortcutData = shortcutDataArr[ordinal];
-            arrayList.add((shortcutData == null || !shortcutData.enabled || (!isTaskType(ordinal) && ((componentName = shortcutData.componentName) == null || componentName.getPackageName() == null))) ? EMPTY_CONFIG : isTaskType(ordinal) ? getKeyguardBottomAreaShortcutTask(keyguardQuickAffordancePosition.ordinal(), shortcutDataArr[ordinal].taskName) : new KeyguardQuickAffordanceConfig(this, ordinal) { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$generateQuickAffordanceConfig$1$1
+            final ShortcutData shortcutData = shortcutDataArr[iOrdinal];
+            arrayList.add((shortcutData == null || !shortcutData.enabled || (!isTaskType(iOrdinal) && ((componentName = shortcutData.componentName) == null || componentName.getPackageName() == null))) ? EMPTY_CONFIG : isTaskType(iOrdinal) ? getKeyguardBottomAreaShortcutTask(keyguardQuickAffordancePosition.ordinal(), shortcutDataArr[iOrdinal].taskName) : new KeyguardQuickAffordanceConfig(this, iOrdinal) { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$generateQuickAffordanceConfig$1$1
                 public final /* synthetic */ int $this_with;
                 public final String key;
                 public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 lockScreenState;
@@ -732,15 +1107,15 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                 public final /* synthetic */ KeyguardShortcutManager this$0;
 
                 {
-                    String flattenToString;
+                    String strFlattenToString;
                     this.this$0 = this;
-                    this.$this_with = ordinal;
-                    ComponentName componentName2 = KeyguardShortcutManager.ShortcutData.this.componentName;
-                    this.key = (componentName2 == null || (flattenToString = componentName2.flattenToString()) == null) ? "" : flattenToString;
+                    this.$this_with = iOrdinal;
+                    ComponentName componentName2 = this.$shortcutData.componentName;
+                    this.key = (componentName2 == null || (strFlattenToString = componentName2.flattenToString()) == null) ? "" : strFlattenToString;
                     this.pickerIconResourceId = R.drawable.bg_bk;
                     Drawable drawable = this.context.getDrawable(R.drawable.bg_bk);
                     drawable.getClass();
-                    this.lockScreenState = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new KeyguardQuickAffordanceConfig.LockScreenState.Visible(new Icon.Loaded(drawable, new ContentDescription.Loaded((String) this.getShortcutContentDescription(ordinal)), null, 4, null), null, 2, null));
+                    this.lockScreenState = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new KeyguardQuickAffordanceConfig.LockScreenState.Visible(new Icon.Loaded(drawable, new ContentDescription.Loaded((String) this.getShortcutContentDescription(iOrdinal)), null, 4, null), null, 2, null));
                 }
 
                 @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
@@ -763,48 +1138,48 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                     KeyguardShortcutManager keyguardShortcutManager = this.this$0;
                     keyguardShortcutManager.getClass();
                     int i = this.$this_with;
-                    Intent intent = null;
+                    Intent intentAddFlags = null;
                     if (i < 0 || i >= 2) {
                         ClockEventController$$ExternalSyntheticOutline0.m(i, "getIntent wrong param : ", "KeyguardShortcutManager");
                     } else {
                         KeyguardShortcutManager.ShortcutData[] shortcutDataArr2 = keyguardShortcutManager.shortcutsData;
                         if (KeyguardShortcutManager.isSamsungCameraPackage(shortcutDataArr2[i].componentName)) {
                             Log.d("KeyguardShortcutManager", "th = " + i + " is camera package");
-                            intent = keyguardShortcutManager.isSecure() ? KeyguardShortcutManager.SECURE_CAMERA_INTENT : KeyguardShortcutManager.INSECURE_CAMERA_INTENT;
+                            intentAddFlags = keyguardShortcutManager.isSecure() ? KeyguardShortcutManager.SECURE_CAMERA_INTENT : KeyguardShortcutManager.INSECURE_CAMERA_INTENT;
                         } else {
                             ComponentName componentName2 = shortcutDataArr2[i].componentName;
                             if (componentName2 == null ? false : "com.samsung.android.app.galaxyraw".equals(componentName2.getPackageName())) {
                                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "th = ", " is expert raw camera package", "KeyguardShortcutManager");
-                                intent = KeyguardShortcutManager.SAMSUNG_EXPERT_RAW_CAMERA_INTENT;
+                                intentAddFlags = KeyguardShortcutManager.SAMSUNG_EXPERT_RAW_CAMERA_INTENT;
                             } else {
-                                Intent intent2 = new Intent("android.intent.action.MAIN");
-                                boolean isSecure = keyguardShortcutManager.isSecure();
-                                if (isSecure || !shortcutDataArr2[i].launchInsecureMain) {
-                                    intent2.setComponent(shortcutDataArr2[i].componentName);
+                                Intent intent = new Intent("android.intent.action.MAIN");
+                                boolean zIsSecure = keyguardShortcutManager.isSecure();
+                                if (zIsSecure || !shortcutDataArr2[i].launchInsecureMain) {
+                                    intent.setComponent(shortcutDataArr2[i].componentName);
                                 } else {
-                                    intent2.addCategory("android.intent.category.LAUNCHER");
+                                    intent.addCategory("android.intent.category.LAUNCHER");
                                     ComponentName componentName3 = shortcutDataArr2[i].componentName;
-                                    intent2.setPackage(componentName3 != null ? componentName3.getPackageName() : null);
-                                    ResolveInfo resolveActivityAsUser = keyguardShortcutManager.packageManager.resolveActivityAsUser(intent2, 1, keyguardShortcutManager.selectedUserInteractor.getSelectedUserId());
-                                    if ((resolveActivityAsUser != null ? resolveActivityAsUser.activityInfo : null) != null) {
-                                        ActivityInfo activityInfo = resolveActivityAsUser.activityInfo;
-                                        intent2.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
+                                    intent.setPackage(componentName3 != null ? componentName3.getPackageName() : null);
+                                    ResolveInfo resolveInfoResolveActivityAsUser = keyguardShortcutManager.packageManager.resolveActivityAsUser(intent, 1, keyguardShortcutManager.selectedUserInteractor.getSelectedUserId());
+                                    if ((resolveInfoResolveActivityAsUser != null ? resolveInfoResolveActivityAsUser.activityInfo : null) != null) {
+                                        ActivityInfo activityInfo = resolveInfoResolveActivityAsUser.activityInfo;
+                                        intent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
                                     } else {
-                                        intent2.setComponent(shortcutDataArr2[i].componentName);
+                                        intent.setComponent(shortcutDataArr2[i].componentName);
                                     }
                                 }
-                                intent2.putExtra("isSecure", isSecure);
-                                intent = intent2.addFlags(268500992);
+                                intent.putExtra("isSecure", zIsSecure);
+                                intentAddFlags = intent.addFlags(268500992);
                             }
                         }
                     }
-                    intent.getClass();
-                    return new KeyguardQuickAffordanceConfig.OnTriggeredResult.StartActivity(intent, keyguardShortcutManager.isNoUnlockNeeded(i));
+                    intentAddFlags.getClass();
+                    return new KeyguardQuickAffordanceConfig.OnTriggeredResult.StartActivity(intentAddFlags, keyguardShortcutManager.isNoUnlockNeeded(i));
                 }
 
                 @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
                 public final String pickerName() {
-                    String str = KeyguardShortcutManager.ShortcutData.this.appLabel;
+                    String str = this.$shortcutData.appLabel;
                     return str == null ? "" : str;
                 }
             });
@@ -826,18 +1201,14 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     public final int getShortcutBottomMargin(boolean z) {
         int i = this.context.getResources().getDisplayMetrics().heightPixels;
         int i2 = this.context.getResources().getConfiguration().orientation;
-        if (z) {
+        if (z || DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
             return getNowBarBottomMargin(i, i2) + ((getNowBarCollapsedHeight() - getShortcutIconSizeValue(true)) / 2);
         }
         double d = 0.051d;
         if (i2 == 1) {
-            if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
-                d = 0.045d;
-            } else if (!LsRune.LOCKUI_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+            if (!LsRune.LOCKUI_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
                 d = 0.038d;
             }
-        } else if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
-            d = 0.069d;
         } else if (!LsRune.LOCKUI_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             d = 0.053d;
         }
@@ -864,143 +1235,94 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     public final int getShortcutIconSizeValue(boolean z) {
         int i = this.context.getResources().getDisplayMetrics().widthPixels;
         int i2 = this.context.getResources().getDisplayMetrics().heightPixels;
-        if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
-            this.shortcutIconSize = (int) ((z ? 48 : 60) * this.context.getResources().getDisplayMetrics().density);
+        if (DeviceState.isLargeScreenTablet(this.context)) {
+            this.shortcutIconSize = (int) (64 * this.context.getResources().getDisplayMetrics().density);
+        } else if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
+            this.shortcutIconSize = (int) (54 * this.context.getResources().getDisplayMetrics().density);
         } else if (LsRune.LOCKUI_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-            this.shortcutIconSize = (int) ((z ? 40 : 50) * this.context.getResources().getDisplayMetrics().density);
+            this.shortcutIconSize = (int) ((z ? 50 : 56) * this.context.getResources().getDisplayMetrics().density);
         } else {
             this.shortcutIconSize = (int) (Math.min(i, i2) * (z ? 0.111d : 0.139d));
         }
         return this.shortcutIconSize;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00bc  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00ba  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x00ea  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00ec  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00f0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getShortcutSideMargin() {
-        /*
-            r10 = this;
-            android.content.Context r0 = r10.context
-            android.content.res.Resources r0 = r0.getResources()
-            android.util.DisplayMetrics r0 = r0.getDisplayMetrics()
-            int r0 = r0.widthPixels
-            android.content.Context r1 = r10.context
-            android.content.res.Resources r1 = r1.getResources()
-            android.util.DisplayMetrics r1 = r1.getDisplayMetrics()
-            int r1 = r1.heightPixels
-            android.content.Context r2 = r10.context
-            android.content.res.Resources r2 = r2.getResources()
-            android.content.res.Configuration r2 = r2.getConfiguration()
-            int r2 = r2.orientation
-            r3 = 1
-            int r4 = r10.getShortcutIconSizeValue(r3)
-            r5 = 2
-            int r4 = r4 * r5
-            int r4 = r0 - r4
-            r6 = 0
-            if (r2 != r5) goto L32
-            r7 = r3
-            goto L33
-        L32:
-            r7 = r6
-        L33:
-            boolean r8 = com.android.systemui.util.DeviceState.isTablet()
-            java.lang.Class<com.android.systemui.keyguard.DisplayLifecycle> r9 = com.android.systemui.keyguard.DisplayLifecycle.class
-            if (r8 == 0) goto L47
-            if (r7 == 0) goto L41
-            r10 = 1049012208(0x3e86a7f0, float:0.263)
-            goto L44
-        L41:
-            r10 = 1054280253(0x3ed70a3d, float:0.42)
-        L44:
-            float r1 = (float) r0
-        L45:
-            float r10 = r10 * r1
-            goto L7f
-        L47:
-            boolean r8 = com.android.systemui.util.DeviceState.isMultiFoldMain()
-            if (r8 == 0) goto L5c
-            android.content.Context r10 = r10.context
-            android.content.res.Resources r10 = r10.getResources()
-            r1 = 2131168494(0x7f070cee, float:1.7951291E38)
-            int r10 = r10.getDimensionPixelSize(r1)
-            float r10 = (float) r10
-            goto L7f
-        L5c:
-            boolean r10 = com.android.systemui.LsRune.LOCKUI_SUB_DISPLAY_LOCK
-            if (r10 == 0) goto L75
-            com.android.systemui.Dependency r10 = com.android.systemui.Dependency.sDependency
-            java.lang.Object r10 = r10.getDependencyInner(r9)
-            com.android.systemui.keyguard.DisplayLifecycle r10 = (com.android.systemui.keyguard.DisplayLifecycle) r10
-            boolean r10 = r10.mIsFolderOpened
-            if (r10 == 0) goto L75
-            int r10 = java.lang.Math.min(r1, r0)
-            float r10 = (float) r10
-            r1 = 1052736750(0x3ebf7cee, float:0.374)
-            goto L45
-        L75:
-            if (r7 == 0) goto L7b
-            r10 = 1053609165(0x3ecccccd, float:0.4)
-            goto L44
-        L7b:
-            r10 = 1058457780(0x3f16c8b4, float:0.589)
-            goto L44
-        L7f:
-            int r10 = (int) r10
-            int r4 = r4 - r10
-            if (r2 != r5) goto L84
-            goto L85
-        L84:
-            r3 = r6
-        L85:
-            boolean r10 = com.android.systemui.util.DeviceState.isTablet()
-            if (r10 != 0) goto Lb6
-            boolean r10 = com.android.systemui.util.DeviceState.isMultiFoldMain()
-            if (r10 == 0) goto L92
-            goto Lb6
-        L92:
-            boolean r10 = com.android.systemui.LsRune.LOCKUI_SUB_DISPLAY_LOCK
-            if (r10 == 0) goto La9
-            com.android.systemui.Dependency r10 = com.android.systemui.Dependency.sDependency
-            java.lang.Object r10 = r10.getDependencyInner(r9)
-            com.android.systemui.keyguard.DisplayLifecycle r10 = (com.android.systemui.keyguard.DisplayLifecycle) r10
-            boolean r10 = r10.mIsFolderOpened
-            if (r10 == 0) goto La9
-            r10 = 1042871747(0x3e28f5c3, float:0.165)
-            float r0 = (float) r0
-            float r0 = r0 * r10
-            int r10 = (int) r0
-            goto Lc0
-        La9:
-            if (r3 == 0) goto Laf
-            r10 = 1038710997(0x3de978d5, float:0.114)
-            goto Lb2
-        Laf:
-            r10 = 1021665346(0x3ce56042, float:0.028)
-        Lb2:
-            float r0 = (float) r0
-            float r10 = r10 * r0
-            int r10 = (int) r10
-            goto Lc0
-        Lb6:
-            if (r3 == 0) goto Lbc
-            r10 = 1032402764(0x3d89374c, float:0.067)
-            goto Lb2
-        Lbc:
-            r10 = 1037771473(0x3ddb22d1, float:0.107)
-            goto Lb2
-        Lc0:
-            int r10 = r10 * r5
-            int r4 = r4 - r10
-            int r4 = r4 / r5
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.getShortcutSideMargin():int");
+        float f;
+        float f2;
+        boolean z;
+        float fMin;
+        float f3;
+        float dimensionPixelSize;
+        boolean z2;
+        float f4;
+        int i;
+        if (DeviceState.isLargeScreenTablet(this.context)) {
+            f = 60;
+            f2 = this.context.getResources().getDisplayMetrics().density;
+        } else {
+            if (!DeviceState.isTablet() && !DeviceState.isMultiFoldMain() && (!(z = LsRune.LOCKUI_SUB_DISPLAY_LOCK) || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened)) {
+                int i2 = this.context.getResources().getDisplayMetrics().widthPixels;
+                int i3 = this.context.getResources().getDisplayMetrics().heightPixels;
+                int i4 = this.context.getResources().getConfiguration().orientation;
+                int shortcutIconSizeValue = i2 - (getShortcutIconSizeValue(true) * 2);
+                boolean z3 = i4 == 2;
+                if (DeviceState.isTablet()) {
+                    fMin = z3 ? 0.263f : 0.42f;
+                } else {
+                    if (DeviceState.isMultiFoldMain()) {
+                        dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.now_bar_cardview_normal_width_multifold);
+                        int i5 = shortcutIconSizeValue - ((int) dimensionPixelSize);
+                        z2 = i4 == 2;
+                        if (DeviceState.isTablet() || DeviceState.isMultiFoldMain()) {
+                            f4 = !z2 ? 0.067f : 0.107f;
+                        } else {
+                            if (z && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+                                i = (int) (i2 * 0.165f);
+                                return (i5 - (i * 2)) / 2;
+                            }
+                            f4 = z2 ? 0.114f : 0.028f;
+                        }
+                        i = (int) (f4 * i2);
+                        return (i5 - (i * 2)) / 2;
+                    }
+                    if (z && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+                        fMin = Math.min(i3, i2);
+                        f3 = 0.374f;
+                        dimensionPixelSize = fMin * f3;
+                        int i52 = shortcutIconSizeValue - ((int) dimensionPixelSize);
+                        if (i4 == 2) {
+                        }
+                        if (DeviceState.isTablet()) {
+                            if (!z2) {
+                            }
+                            i = (int) (f4 * i2);
+                        }
+                        return (i52 - (i * 2)) / 2;
+                    }
+                    fMin = z3 ? 0.4f : 0.589f;
+                }
+                f3 = i2;
+                dimensionPixelSize = fMin * f3;
+                int i522 = shortcutIconSizeValue - ((int) dimensionPixelSize);
+                if (i4 == 2) {
+                }
+                if (DeviceState.isTablet()) {
+                }
+                return (i522 - (i * 2)) / 2;
+            }
+            f = 40;
+            f2 = this.context.getResources().getDisplayMetrics().density;
+        }
+        return (int) (f * f2);
     }
 
     public final boolean getSuspended(String str) {
@@ -1013,20 +1335,18 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
     }
 
     public final boolean hasShortcut(int i) {
-        Lazy lazy = this.keyguardDisplayManager.mKeyguardDeskTopStateMonitorLazy;
-        if (!(lazy == null ? false : ((KeyguardDeskTopStateMonitor) lazy.get()).mIsDesktopStandAlone) && 2 > i && this.settingsHelper.isShortcutMasterEnabled()) {
-            ShortcutData[] shortcutDataArr = this.shortcutsData;
-            if (shortcutDataArr[i].enabled) {
-                if (isTaskType(i) && shortcutDataArr[i].taskName != null) {
-                    return true;
-                }
-                ComponentName componentName = shortcutDataArr[i].componentName;
-                if (componentName != null && isLockTaskPermitted(componentName.getPackageName())) {
-                    return true;
-                }
-            }
+        if (2 <= i || !this.settingsHelper.isShortcutMasterEnabled()) {
+            return false;
         }
-        return false;
+        ShortcutData[] shortcutDataArr = this.shortcutsData;
+        if (!shortcutDataArr[i].enabled) {
+            return false;
+        }
+        if (isTaskType(i) && shortcutDataArr[i].taskName != null) {
+            return true;
+        }
+        ComponentName componentName = shortcutDataArr[i].componentName;
+        return componentName != null && isLockTaskPermitted(componentName.getPackageName());
     }
 
     public final boolean isDarkPanel(int i) {
@@ -1080,88 +1400,51 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
         return componentName != null && "com.samsung.android.dialer".equals(componentName.getPackageName()) && "com.samsung.android.dialer.DialtactsActivity".equals(componentName.getClassName());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0038, code lost:
-    
-        if (r6.equals("com.sec.android.app.popupcalculator") == false) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0068, code lost:
-    
-        if (isAllowNonPlatformKeyApp(r5.context, r6, "9e92121f90ad13d9f1085b06ea9e7c72ca6d5b603cdfd6adaff7b3071792d71f") == false) goto L24;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x006e A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isShortcutPermission(java.lang.String r6) {
-        /*
-            r5 = this;
-            android.content.pm.PackageManager r0 = r5.packageManager
-            java.lang.String r1 = "com.samsung.keyguard.SHORTCUT_PERMISSION"
-            int r0 = r0.checkPermission(r1, r6)
-            r1 = 1
-            if (r0 == 0) goto L6f
-            int r0 = r6.hashCode()
-            r2 = 0
-            r3 = -662003450(0xffffffffd88aa106, float:-1.2193936E15)
-            java.lang.String r4 = "com.snapchat.android"
-            if (r0 == r3) goto L3d
-            r3 = 988032088(0x3ae42c58, float:0.0017408235)
-            if (r0 == r3) goto L32
-            r3 = 2094270320(0x7cd40770, float:8.807342E36)
-            if (r0 == r3) goto L22
-            goto L45
-        L22:
-            boolean r0 = r6.equals(r4)
-            if (r0 != 0) goto L29
-            goto L45
-        L29:
-            android.content.Context r5 = r5.context
-            java.lang.String r0 = "9c1c8918e17cc686d3274f41cd04154b4cbe6a5272700de3f4f30c2c62ae2ad4"
-            boolean r5 = isAllowNonPlatformKeyApp(r5, r6, r0)
-            goto L6b
-        L32:
-            java.lang.String r0 = "com.sec.android.app.popupcalculator"
-            boolean r0 = r6.equals(r0)
-            if (r0 != 0) goto L3b
-            goto L45
-        L3b:
-            r5 = r1
-            goto L6b
-        L3d:
-            java.lang.String r0 = "com.instagram.android"
-            boolean r0 = r6.equals(r0)
-            if (r0 != 0) goto L56
-        L45:
-            boolean r0 = r6.startsWith(r4)
-            if (r0 == 0) goto L54
-            android.content.Context r5 = r5.context
-            java.lang.String r0 = "2f4eaa0c67e2a670935ca79164f3ba4b426988b6997a97bb31152cc317dc648a"
-            boolean r5 = isAllowNonPlatformKeyApp(r5, r6, r0)
-            goto L6b
-        L54:
-            r5 = r2
-            goto L6b
-        L56:
-            android.content.Context r0 = r5.context
-            java.lang.String r3 = "a044dbdb712ab81e76949f5d76ada4dd7035643b462cb7ea2b75ecae637c2da3"
-            boolean r0 = isAllowNonPlatformKeyApp(r0, r6, r3)
-            if (r0 != 0) goto L3b
-            android.content.Context r5 = r5.context
-            java.lang.String r0 = "9e92121f90ad13d9f1085b06ea9e7c72ca6d5b603cdfd6adaff7b3071792d71f"
-            boolean r5 = isAllowNonPlatformKeyApp(r5, r6, r0)
-            if (r5 == 0) goto L54
-            goto L3b
-        L6b:
-            if (r5 == 0) goto L6e
-            goto L6f
-        L6e:
-            return r2
-        L6f:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardShortcutManager.isShortcutPermission(java.lang.String):boolean");
+    public final boolean isShortcutPermission(String str) throws NoSuchAlgorithmException {
+        boolean zIsAllowNonPlatformKeyApp;
+        if (this.packageManager.checkPermission("com.samsung.keyguard.SHORTCUT_PERMISSION", str) != 0) {
+            int iHashCode = str.hashCode();
+            if (iHashCode != -662003450) {
+                if (iHashCode != 988032088) {
+                    if (iHashCode == 2094270320 && str.equals("com.snapchat.android")) {
+                        zIsAllowNonPlatformKeyApp = isAllowNonPlatformKeyApp(this.context, str, "9c1c8918e17cc686d3274f41cd04154b4cbe6a5272700de3f4f30c2c62ae2ad4");
+                    }
+                    if (zIsAllowNonPlatformKeyApp) {
+                        return false;
+                    }
+                } else {
+                    if (str.equals("com.sec.android.app.popupcalculator")) {
+                        zIsAllowNonPlatformKeyApp = true;
+                    }
+                    if (zIsAllowNonPlatformKeyApp) {
+                    }
+                }
+                zIsAllowNonPlatformKeyApp = !str.startsWith("com.snapchat.android") ? isAllowNonPlatformKeyApp(this.context, str, "2f4eaa0c67e2a670935ca79164f3ba4b426988b6997a97bb31152cc317dc648a") : false;
+                if (zIsAllowNonPlatformKeyApp) {
+                }
+            } else {
+                if (str.equals("com.instagram.android")) {
+                    if (isAllowNonPlatformKeyApp(this.context, str, "a044dbdb712ab81e76949f5d76ada4dd7035643b462cb7ea2b75ecae637c2da3") || isAllowNonPlatformKeyApp(this.context, str, "9e92121f90ad13d9f1085b06ea9e7c72ca6d5b603cdfd6adaff7b3071792d71f")) {
+                    }
+                    if (zIsAllowNonPlatformKeyApp) {
+                    }
+                } else {
+                    if (!str.startsWith("com.snapchat.android")) {
+                    }
+                    if (zIsAllowNonPlatformKeyApp) {
+                    }
+                }
+                if (zIsAllowNonPlatformKeyApp) {
+                }
+            }
+        }
+        return true;
     }
 
     public final boolean isSupportBlur() {
@@ -1210,9 +1493,9 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
             return;
         }
         boolean z = this.isShortcutVisibleForMDM;
-        boolean isShortcutsVisibleForMDM = this.settingsHelper.isShortcutsVisibleForMDM();
-        this.isShortcutVisibleForMDM = isShortcutsVisibleForMDM;
-        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onSystemSettingsChanged oldShortcutVisibleForMDM = ", ", isShortcutVisibleForMDM = ", "KeyguardShortcutManager", z, isShortcutsVisibleForMDM);
+        boolean zIsShortcutsVisibleForMDM = this.settingsHelper.isShortcutsVisibleForMDM();
+        this.isShortcutVisibleForMDM = zIsShortcutsVisibleForMDM;
+        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onSystemSettingsChanged oldShortcutVisibleForMDM = ", ", isShortcutVisibleForMDM = ", "KeyguardShortcutManager", z, zIsShortcutsVisibleForMDM);
         if (z != this.isShortcutVisibleForMDM) {
             updateShortcuts();
         }
@@ -1304,37 +1587,37 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
 
     public final void updateShortcutIcon(final int i) {
         if (isTaskType(i)) {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$1
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     final KeyguardShortcutManager keyguardShortcutManager = this;
                     final int i2 = i;
-                    if (new IntPredicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$1.1
+                    if (new IntPredicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.1.1
                         @Override // java.util.function.IntPredicate
                         public final boolean test(int i3) {
-                            if (Intrinsics.areEqual(KeyguardShortcutManager.this.keyguardBottomAreaShortcutTask[i3], KeyguardShortcutManager.EMPTY_CONFIG)) {
+                            if (Intrinsics.areEqual(keyguardShortcutManager.keyguardBottomAreaShortcutTask[i3], KeyguardShortcutManager.EMPTY_CONFIG)) {
                                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i3, "updateShortcutsIcon : ", " is invalid task name", "KeyguardShortcutManager");
                                 return false;
                             }
-                            KeyguardShortcutManager keyguardShortcutManager2 = KeyguardShortcutManager.this;
+                            KeyguardShortcutManager keyguardShortcutManager2 = keyguardShortcutManager;
                             keyguardShortcutManager2.shortcutsData[i3].isMonotoneIcon = true;
-                            boolean isTaskTypeEnabled = keyguardShortcutManager2.isTaskTypeEnabled(i2);
-                            KeyguardShortcutManager keyguardShortcutManager3 = KeyguardShortcutManager.this;
-                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr = keyguardShortcutManager3.shortcutsData;
+                            boolean zIsTaskTypeEnabled = keyguardShortcutManager2.isTaskTypeEnabled(i2);
+                            KeyguardShortcutManager keyguardShortcutManager3 = keyguardShortcutManager;
+                            ShortcutData[] shortcutDataArr = keyguardShortcutManager3.shortcutsData;
                             int i4 = i2;
                             shortcutDataArr[i4].isIconPaddingNeeded = keyguardShortcutManager3.keyguardBottomAreaShortcutTask[i4].isIconPaddingRequired();
-                            KeyguardShortcutManager keyguardShortcutManager4 = KeyguardShortcutManager.this;
-                            keyguardShortcutManager4.shortcutsData[i3].drawable = keyguardShortcutManager4.convertTaskDrawable(keyguardShortcutManager4.keyguardBottomAreaShortcutTask[i2].getDrawable(), WallpaperUtils.isWhiteKeyguardWallpaper("navibar"), isTaskTypeEnabled, false, KeyguardShortcutManager.this.shortcutsData[i2].isIconPaddingNeeded);
-                            KeyguardShortcutManager keyguardShortcutManager5 = KeyguardShortcutManager.this;
-                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr2 = keyguardShortcutManager5.shortcutsData;
+                            KeyguardShortcutManager keyguardShortcutManager4 = keyguardShortcutManager;
+                            keyguardShortcutManager4.shortcutsData[i3].drawable = keyguardShortcutManager4.convertTaskDrawable(keyguardShortcutManager4.keyguardBottomAreaShortcutTask[i2].getDrawable(), WallpaperUtils.isWhiteKeyguardWallpaper("navibar"), zIsTaskTypeEnabled, false, keyguardShortcutManager.shortcutsData[i2].isIconPaddingNeeded);
+                            KeyguardShortcutManager keyguardShortcutManager5 = keyguardShortcutManager;
+                            ShortcutData[] shortcutDataArr2 = keyguardShortcutManager5.shortcutsData;
                             int i5 = i2;
                             shortcutDataArr2[i5].panelDrawable = keyguardShortcutManager5.keyguardBottomAreaShortcutTask[i5].getDrawable();
-                            KeyguardShortcutManager keyguardShortcutManager6 = KeyguardShortcutManager.this;
-                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr3 = keyguardShortcutManager6.shortcutsData;
+                            KeyguardShortcutManager keyguardShortcutManager6 = keyguardShortcutManager;
+                            ShortcutData[] shortcutDataArr3 = keyguardShortcutManager6.shortcutsData;
                             int i6 = i2;
                             shortcutDataArr3[i6].panelTransitDrawable = keyguardShortcutManager6.keyguardBottomAreaShortcutTask[i6].getPanelIconTransitionDrawable();
-                            KeyguardShortcutManager keyguardShortcutManager7 = KeyguardShortcutManager.this;
-                            KeyguardShortcutManager.ShortcutData[] shortcutDataArr4 = keyguardShortcutManager7.shortcutsData;
+                            KeyguardShortcutManager keyguardShortcutManager7 = keyguardShortcutManager;
+                            ShortcutData[] shortcutDataArr4 = keyguardShortcutManager7.shortcutsData;
                             int i7 = i2;
                             shortcutDataArr4[i7].isUnlockWaitNeeded = keyguardShortcutManager7.keyguardBottomAreaShortcutTask[i7].isUnlockWaitRequired();
                             return true;
@@ -1343,35 +1626,35 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                         final KeyguardShortcutManager keyguardShortcutManager2 = this;
                         Handler handler = keyguardShortcutManager2.handler;
                         final int i3 = i;
-                        handler.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$1.2
+                        handler.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.1.2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardShortcutManager.access$sendUpdateIconOnlyToCallback(KeyguardShortcutManager.this, i3);
+                                KeyguardShortcutManager.access$sendUpdateIconOnlyToCallback(keyguardShortcutManager2, i3);
                             }
                         });
                     }
                 }
             });
         } else if (this.shortcutsData[i].componentName != null) {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$2
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.2
                 @Override // java.lang.Runnable
                 public final void run() {
                     final KeyguardShortcutManager keyguardShortcutManager = this;
-                    if (new IntPredicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$2.1
+                    if (new IntPredicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.2.1
                         @Override // java.util.function.IntPredicate
                         public final boolean test(int i2) {
                             try {
                                 Intent intent = new Intent("android.intent.action.MAIN");
-                                intent.setComponent(KeyguardShortcutManager.this.shortcutsData[i2].componentName);
-                                KeyguardShortcutManager keyguardShortcutManager2 = KeyguardShortcutManager.this;
-                                ResolveInfo resolveActivityAsUser = keyguardShortcutManager2.packageManager.resolveActivityAsUser(intent, 129, keyguardShortcutManager2.selectedUserInteractor.getSelectedUserId());
-                                ActivityInfo activityInfo = resolveActivityAsUser != null ? resolveActivityAsUser.activityInfo : null;
+                                intent.setComponent(keyguardShortcutManager.shortcutsData[i2].componentName);
+                                KeyguardShortcutManager keyguardShortcutManager2 = keyguardShortcutManager;
+                                ResolveInfo resolveInfoResolveActivityAsUser = keyguardShortcutManager2.packageManager.resolveActivityAsUser(intent, 129, keyguardShortcutManager2.selectedUserInteractor.getSelectedUserId());
+                                ActivityInfo activityInfo = resolveInfoResolveActivityAsUser != null ? resolveInfoResolveActivityAsUser.activityInfo : null;
                                 if (activityInfo != null) {
-                                    KeyguardShortcutManager keyguardShortcutManager3 = KeyguardShortcutManager.this;
+                                    KeyguardShortcutManager keyguardShortcutManager3 = keyguardShortcutManager;
                                     keyguardShortcutManager3.shortcutsData[i2].isMonotoneIcon = KeyguardShortcutManager.access$isMonotoneIconRequired(keyguardShortcutManager3, i2);
-                                    KeyguardShortcutManager keyguardShortcutManager4 = KeyguardShortcutManager.this;
+                                    KeyguardShortcutManager keyguardShortcutManager4 = keyguardShortcutManager;
                                     keyguardShortcutManager4.shortcutsData[i2].drawable = KeyguardShortcutManager.access$getShortcutIcon(keyguardShortcutManager4, activityInfo, false, i2);
-                                    KeyguardShortcutManager keyguardShortcutManager5 = KeyguardShortcutManager.this;
+                                    KeyguardShortcutManager keyguardShortcutManager5 = keyguardShortcutManager;
                                     keyguardShortcutManager5.shortcutsData[i2].panelDrawable = KeyguardShortcutManager.access$getShortcutIcon(keyguardShortcutManager5, activityInfo, true, i2);
                                 }
                                 return true;
@@ -1384,10 +1667,10 @@ public final class KeyguardShortcutManager extends KeyguardUpdateMonitorCallback
                         final KeyguardShortcutManager keyguardShortcutManager2 = this;
                         Handler handler = keyguardShortcutManager2.handler;
                         final int i2 = i;
-                        handler.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$updateShortcutIcon$2.2
+                        handler.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager.updateShortcutIcon.2.2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardShortcutManager.access$sendUpdateIconOnlyToCallback(KeyguardShortcutManager.this, i2);
+                                KeyguardShortcutManager.access$sendUpdateIconOnlyToCallback(keyguardShortcutManager2, i2);
                             }
                         });
                     }

@@ -5,7 +5,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SemScreenshotResult {
     public final Bitmap bitmap;
@@ -33,11 +32,11 @@ public final class SemScreenshotResult {
 
     public final int hashCode() {
         Bitmap bitmap = this.bitmap;
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.failedReason, (bitmap == null ? 0 : bitmap.hashCode()) * 31, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.failedReason, (bitmap == null ? 0 : bitmap.hashCode()) * 31, 31);
         String str = this.targetWindowName;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.secureWindowName;
-        return hashCode + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode + (str2 != null ? str2.hashCode() : 0);
     }
 
     public final String toString() {

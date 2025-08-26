@@ -48,33 +48,33 @@ public final class TimeState implements Parcelable {
     }
 
     public static TimeState parseCommandLineArgs(ShellCommand shellCommand) {
-        Long l = null;
-        Long l2 = null;
-        Boolean bool = null;
+        Long lValueOf = null;
+        Long lValueOf2 = null;
+        Boolean boolValueOf = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg == null) {
-                if (l == null) {
+                if (lValueOf == null) {
                     throw new IllegalArgumentException("No elapsedRealtimeMillis specified.");
                 }
-                if (l2 == null) {
+                if (lValueOf2 == null) {
                     throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
                 }
-                if (bool == null) {
+                if (boolValueOf == null) {
                     throw new IllegalArgumentException("No userShouldConfirmTime specified.");
                 }
-                return new TimeState(new UnixEpochTime(l.longValue(), l2.longValue()), bool.booleanValue());
+                return new TimeState(new UnixEpochTime(lValueOf.longValue(), lValueOf2.longValue()), boolValueOf.booleanValue());
             }
             nextArg.hashCode();
             switch (nextArg) {
                 case "--elapsed_realtime":
-                    l = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                    lValueOf = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
                     break;
                 case "--unix_epoch_time":
-                    l2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                    lValueOf2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
                     break;
                 case "--user_should_confirm_time":
-                    bool = Boolean.valueOf(Boolean.parseBoolean(shellCommand.getNextArgRequired()));
+                    boolValueOf = Boolean.valueOf(Boolean.parseBoolean(shellCommand.getNextArgRequired()));
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown option: " + nextArg);

@@ -11,14 +11,12 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxCommandHandler implements ShellCommandHandler.ShellCommandActionHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context context;
     public final LetterboxConfiguration letterboxConfiguration;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,7 +43,7 @@ public final class LetterboxCommandHandler implements ShellCommandHandler.ShellC
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
     @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
-    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
+    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) throws NumberFormatException {
         if (strArr == null || printWriter == null) {
             printWriter.getClass();
             printWriter.println("Missing arguments.");
@@ -53,7 +51,7 @@ public final class LetterboxCommandHandler implements ShellCommandHandler.ShellC
         }
         int length = strArr.length;
         LetterboxConfiguration letterboxConfiguration = this.letterboxConfiguration;
-        Integer num = null;
+        Integer numValueOf = null;
         if (length == 1) {
             String str = strArr[0];
             switch (str.hashCode()) {
@@ -92,42 +90,42 @@ public final class LetterboxCommandHandler implements ShellCommandHandler.ShellC
         }
         String str2 = strArr[0];
         String str3 = strArr[1];
-        int hashCode = str2.hashCode();
-        if (hashCode != -1260881405) {
-            if (hashCode != 583595847) {
-                if (hashCode == 1287124693 && str2.equals("backgroundColor")) {
-                    Object mo779invoke = new LetterboxCommandHandler$onSingleParamCommand$1(this).mo779invoke(str3);
-                    if (mo779invoke == null) {
+        int iHashCode = str2.hashCode();
+        if (iHashCode != -1260881405) {
+            if (iHashCode != 583595847) {
+                if (iHashCode == 1287124693 && str2.equals("backgroundColor")) {
+                    Object objMo781invoke = new LetterboxCommandHandler$onSingleParamCommand$1(this).mo781invoke(str3);
+                    if (objMo781invoke == null) {
                         QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str3, " is not a valid color.");
                         return false;
                     }
-                    letterboxConfiguration.letterboxBackgroundColorOverride = (Color) mo779invoke;
+                    letterboxConfiguration.letterboxBackgroundColorOverride = (Color) objMo781invoke;
                     Unit unit = Unit.INSTANCE;
                     return true;
                 }
             } else if (str2.equals("cornerRadius")) {
                 try {
-                    int parseInt = Integer.parseInt(str3);
-                    if (parseInt >= 0) {
-                        num = Integer.valueOf(parseInt);
+                    int i = Integer.parseInt(str3);
+                    if (i >= 0) {
+                        numValueOf = Integer.valueOf(i);
                     }
                 } catch (IllegalArgumentException unused) {
                 }
-                if (num == null) {
+                if (numValueOf == null) {
                     QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str3, " is not a valid radius. It must be an integer >= 0.");
                     return false;
                 }
-                letterboxConfiguration.letterboxActivityCornersRadius = num.intValue();
+                letterboxConfiguration.letterboxActivityCornersRadius = numValueOf.intValue();
                 Unit unit2 = Unit.INSTANCE;
                 return true;
             }
         } else if (str2.equals("backgroundColorResource")) {
-            Object mo779invoke2 = new LetterboxCommandHandler$onSingleParamCommand$4(this).mo779invoke(str3);
-            if (mo779invoke2 == null) {
+            Object objMo781invoke2 = new LetterboxCommandHandler$onSingleParamCommand$4(this).mo781invoke(str3);
+            if (objMo781invoke2 == null) {
                 QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str3, " is not a valid resource. Color in '@android:color/resource_name' format should be provided as an argument.");
                 return false;
             }
-            letterboxConfiguration.letterboxBackgroundColorResourceIdOverride = (Integer) mo779invoke2;
+            letterboxConfiguration.letterboxBackgroundColorResourceIdOverride = (Integer) objMo781invoke2;
             Unit unit3 = Unit.INSTANCE;
             return true;
         }

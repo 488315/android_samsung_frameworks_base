@@ -16,14 +16,12 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextFieldValue {
     public final AnnotatedString annotatedString;
     public final TextRange composition;
     public final long selection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,13 +38,13 @@ public final class TextFieldValue {
             public final Object invoke(Object obj, Object obj2) {
                 SaverScope saverScope = (SaverScope) obj;
                 TextFieldValue textFieldValue = (TextFieldValue) obj2;
-                return CollectionsKt__CollectionsKt.arrayListOf(SaversKt.save(textFieldValue.annotatedString, SaversKt.AnnotatedStringSaver, saverScope), SaversKt.save(TextRange.m745boximpl(textFieldValue.selection), SaversKt.TextRangeSaver, saverScope));
+                return CollectionsKt__CollectionsKt.arrayListOf(SaversKt.save(textFieldValue.annotatedString, SaversKt.AnnotatedStringSaver, saverScope), SaversKt.save(TextRange.m747boximpl(textFieldValue.selection), SaversKt.TextRangeSaver, saverScope));
             }
         };
         TextFieldValue$Companion$Saver$2 textFieldValue$Companion$Saver$2 = new Function1() { // from class: androidx.compose.ui.text.input.TextFieldValue$Companion$Saver$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke, reason: collision with other method in class */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return invoke(obj);
             }
 
@@ -56,13 +54,13 @@ public final class TextFieldValue {
                 SaverKt$Saver$1 saverKt$Saver$1 = SaversKt.AnnotatedStringSaver;
                 Boolean bool = Boolean.FALSE;
                 TextRange textRange = null;
-                AnnotatedString annotatedString = ((!Intrinsics.areEqual(obj2, bool) || (saverKt$Saver$1 instanceof NonNullValueClassSaver)) && obj2 != null) ? (AnnotatedString) saverKt$Saver$1.$restore.mo779invoke(obj2) : null;
+                AnnotatedString annotatedString = ((!Intrinsics.areEqual(obj2, bool) || (saverKt$Saver$1 instanceof NonNullValueClassSaver)) && obj2 != null) ? (AnnotatedString) saverKt$Saver$1.$restore.mo781invoke(obj2) : null;
                 annotatedString.getClass();
                 Object obj3 = list.get(1);
                 TextRange.Companion companion = TextRange.Companion;
                 SaverKt$Saver$1 saverKt$Saver$12 = SaversKt.TextRangeSaver;
                 if ((!Intrinsics.areEqual(obj3, bool) || (saverKt$Saver$12 instanceof NonNullValueClassSaver)) && obj3 != null) {
-                    textRange = (TextRange) saverKt$Saver$12.$restore.mo779invoke(obj3);
+                    textRange = (TextRange) saverKt$Saver$12.$restore.mo781invoke(obj3);
                 }
                 textRange.getClass();
                 return new TextFieldValue(annotatedString, textRange.packedValue, (TextRange) null, 4, (DefaultConstructorMarker) null);
@@ -77,7 +75,7 @@ public final class TextFieldValue {
     }
 
     /* renamed from: copy-3r_uNRQ$default, reason: not valid java name */
-    public static TextFieldValue m778copy3r_uNRQ$default(TextFieldValue textFieldValue, AnnotatedString annotatedString, long j, int i) {
+    public static TextFieldValue m780copy3r_uNRQ$default(TextFieldValue textFieldValue, AnnotatedString annotatedString, long j, int i) {
         if ((i & 1) != 0) {
             annotatedString = textFieldValue.annotatedString;
         }
@@ -99,19 +97,19 @@ public final class TextFieldValue {
             return false;
         }
         TextFieldValue textFieldValue = (TextFieldValue) obj;
-        return TextRange.m746equalsimpl0(this.selection, textFieldValue.selection) && Intrinsics.areEqual(this.composition, textFieldValue.composition) && Intrinsics.areEqual(this.annotatedString, textFieldValue.annotatedString);
+        return TextRange.m748equalsimpl0(this.selection, textFieldValue.selection) && Intrinsics.areEqual(this.composition, textFieldValue.composition) && Intrinsics.areEqual(this.annotatedString, textFieldValue.annotatedString);
     }
 
     public final int hashCode() {
-        int hashCode = this.annotatedString.hashCode() * 31;
+        int iHashCode = this.annotatedString.hashCode() * 31;
         TextRange.Companion companion = TextRange.Companion;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(hashCode, 31, this.selection);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(iHashCode, 31, this.selection);
         TextRange textRange = this.composition;
-        return m + (textRange != null ? Long.hashCode(textRange.packedValue) : 0);
+        return iM + (textRange != null ? Long.hashCode(textRange.packedValue) : 0);
     }
 
     public final String toString() {
-        return "TextFieldValue(text='" + ((Object) this.annotatedString) + "', selection=" + ((Object) TextRange.m752toStringimpl(this.selection)) + ", composition=" + this.composition + ')';
+        return "TextFieldValue(text='" + ((Object) this.annotatedString) + "', selection=" + ((Object) TextRange.m754toStringimpl(this.selection)) + ", composition=" + this.composition + ')';
     }
 
     public /* synthetic */ TextFieldValue(String str, long j, TextRange textRange, DefaultConstructorMarker defaultConstructorMarker) {
@@ -120,70 +118,27 @@ public final class TextFieldValue {
 
     private TextFieldValue(AnnotatedString annotatedString, long j, TextRange textRange) {
         this.annotatedString = annotatedString;
-        this.selection = TextRangeKt.m753coerceIn8ffj60Q(annotatedString.text.length(), j);
-        this.composition = textRange != null ? TextRange.m745boximpl(TextRangeKt.m753coerceIn8ffj60Q(annotatedString.text.length(), textRange.packedValue)) : null;
+        this.selection = TextRangeKt.m755coerceIn8ffj60Q(annotatedString.text.length(), j);
+        this.composition = textRange != null ? TextRange.m747boximpl(TextRangeKt.m755coerceIn8ffj60Q(annotatedString.text.length(), textRange.packedValue)) : null;
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TextFieldValue(androidx.compose.ui.text.AnnotatedString r7, long r8, androidx.compose.ui.text.TextRange r10, int r11, kotlin.jvm.internal.DefaultConstructorMarker r12) {
-        /*
-            r6 = this;
-            r12 = r11 & 2
-            if (r12 == 0) goto Lb
-            androidx.compose.ui.text.TextRange$Companion r8 = androidx.compose.ui.text.TextRange.Companion
-            r8.getClass()
-            long r8 = androidx.compose.ui.text.TextRange.Zero
-        Lb:
-            r2 = r8
-            r8 = r11 & 4
-            if (r8 == 0) goto L11
-            r10 = 0
-        L11:
-            r4 = r10
-            r5 = 0
-            r0 = r6
-            r1 = r7
-            r0.<init>(r1, r2, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.input.TextFieldValue.<init>(androidx.compose.ui.text.AnnotatedString, long, androidx.compose.ui.text.TextRange, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public TextFieldValue(AnnotatedString annotatedString, long j, TextRange textRange, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 2) != 0) {
+            TextRange.Companion.getClass();
+            j = TextRange.Zero;
+        }
+        this(annotatedString, j, (i & 4) != 0 ? null : textRange, (DefaultConstructorMarker) null);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TextFieldValue(java.lang.String r7, long r8, androidx.compose.ui.text.TextRange r10, int r11, kotlin.jvm.internal.DefaultConstructorMarker r12) {
-        /*
-            r6 = this;
-            r12 = r11 & 1
-            if (r12 == 0) goto L6
-            java.lang.String r7 = ""
-        L6:
-            r1 = r7
-            r7 = r11 & 2
-            if (r7 == 0) goto L12
-            androidx.compose.ui.text.TextRange$Companion r7 = androidx.compose.ui.text.TextRange.Companion
-            r7.getClass()
-            long r8 = androidx.compose.ui.text.TextRange.Zero
-        L12:
-            r2 = r8
-            r7 = r11 & 4
-            if (r7 == 0) goto L18
-            r10 = 0
-        L18:
-            r4 = r10
-            r5 = 0
-            r0 = r6
-            r0.<init>(r1, r2, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.input.TextFieldValue.<init>(java.lang.String, long, androidx.compose.ui.text.TextRange, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public TextFieldValue(String str, long j, TextRange textRange, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        String str2 = (i & 1) != 0 ? "" : str;
+        if ((i & 2) != 0) {
+            TextRange.Companion.getClass();
+            j = TextRange.Zero;
+        }
+        this(str2, j, (i & 4) != 0 ? null : textRange, (DefaultConstructorMarker) null);
     }
 
     private TextFieldValue(String str, long j, TextRange textRange) {

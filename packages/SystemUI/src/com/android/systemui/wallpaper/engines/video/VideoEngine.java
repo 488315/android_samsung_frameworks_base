@@ -33,7 +33,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.DisplayUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.GraphicsUtils;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VideoEngine extends WallpaperEngine {
     public final String TAG;
@@ -51,7 +50,6 @@ public class VideoEngine extends WallpaperEngine {
     public final VideoSource mVideoSource;
     public final Handler mWorkerHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoEngine$1, reason: invalid class name */
     public class AnonymousClass1 implements VideoController.Callback {
         public AnonymousClass1() {
@@ -61,13 +59,12 @@ public class VideoEngine extends WallpaperEngine {
             VideoEngine videoEngine = VideoEngine.this;
             Log.i(videoEngine.TAG, "onSurfaceAndPlayerReady: " + videoEngine.mVideoSize + ", validSurface=" + videoEngine.mSurfaceHolder.getSurface().isValid());
             if ((videoEngine.mVideoSource.mType & 2) == 2) {
-                ImageWallpaper.IntegratedEngine.m3214$$Nest$mrecreateSurfaceControl(ImageWallpaper.IntegratedEngine.this);
+                ImageWallpaper.IntegratedEngine.m3231$$Nest$mrecreateSurfaceControl(ImageWallpaper.IntegratedEngine.this);
             }
             videoEngine.setVisibleRectOfSurface(videoEngine.getVisibleRectOfSurface());
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.engines.video.VideoEngine$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$wallpaper$live$sdk$data$DisplayState;
@@ -94,7 +91,6 @@ public class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StateSnapshot {
         public final DisplayState mDisplayState;
 
@@ -124,7 +120,7 @@ public class VideoEngine extends WallpaperEngine {
         this.mVideoPauseDispatcher = new Runnable() { // from class: com.android.systemui.wallpaper.engines.video.VideoEngine$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                VideoEngine videoEngine = VideoEngine.this;
+                VideoEngine videoEngine = this.f$0;
                 Log.i(videoEngine.TAG, "mVideoPauseDispatcher: video pause timer expired");
                 videoEngine.pauseVideo();
             }
@@ -145,11 +141,11 @@ public class VideoEngine extends WallpaperEngine {
         boolean z = this.mBouncerVisible;
         boolean z2 = this.mPlayerPausedForcefully;
         boolean z3 = (which & 3) == 2;
-        boolean isWatchFace = WhichChecker.isWatchFace(which);
+        boolean zIsWatchFace = WhichChecker.isWatchFace(which);
         Context appContext = getAppContext();
         int currentUserId = getCurrentUserId();
         boolean z4 = WallpaperUtils.mIsExternalLiveWallpaper;
-        boolean isLockScreenDisabled = new LockPatternUtils(appContext).isLockScreenDisabled(currentUserId);
+        boolean zIsLockScreenDisabled = new LockPatternUtils(appContext).isLockScreenDisabled(currentUserId);
         int i = AnonymousClass2.$SwitchMap$com$samsung$android$wallpaper$live$sdk$data$DisplayState[stateSnapshot.mDisplayState.ordinal()];
         if (i == 1) {
             handler.removeCallbacks(videoEngine$$ExternalSyntheticLambda0);
@@ -157,7 +153,7 @@ public class VideoEngine extends WallpaperEngine {
                 pauseVideo();
                 return;
             }
-            if (z3 && (this.mIsGoingToSleepFromNonKeyguard || this.mIsUnlockingFromScreenOffOrAod || isLockScreenDisabled)) {
+            if (z3 && (this.mIsGoingToSleepFromNonKeyguard || this.mIsUnlockingFromScreenOffOrAod || zIsLockScreenDisabled)) {
                 pauseVideo();
                 return;
             } else {
@@ -177,7 +173,7 @@ public class VideoEngine extends WallpaperEngine {
             handler.removeCallbacks(videoEngine$$ExternalSyntheticLambda0);
             pauseVideo();
         } else {
-            int i2 = isWatchFace ? 100 : 400;
+            int i2 = zIsWatchFace ? 100 : 400;
             handler.removeCallbacks(videoEngine$$ExternalSyntheticLambda0);
             handler.postDelayed(videoEngine$$ExternalSyntheticLambda0, i2);
         }
@@ -185,10 +181,10 @@ public class VideoEngine extends WallpaperEngine {
 
     public final Rect getVisibleRectOfSurface() {
         Rect surfaceFrame = this.mSurfaceHolder.getSurfaceFrame();
-        boolean isEmpty = surfaceFrame.isEmpty();
+        boolean zIsEmpty = surfaceFrame.isEmpty();
         String str = this.TAG;
         Rect rect = null;
-        if (isEmpty) {
+        if (zIsEmpty) {
             Log.w(str, "getVisibleRectOfSurface : frame is empty");
             return null;
         }
@@ -199,9 +195,9 @@ public class VideoEngine extends WallpaperEngine {
             Log.e(str2, "getCropHint: mVideoSize is null.");
         } else {
             int i = videoSource.mWhich;
-            boolean isWatchFace = WhichChecker.isWatchFace(i);
+            boolean zIsWatchFace = WhichChecker.isWatchFace(i);
             CoverWallpaper coverWallpaper = videoSource.mCoverWallpaper;
-            if (isWatchFace) {
+            if (zIsWatchFace) {
                 CoverWallpaperController coverWallpaperController = (CoverWallpaperController) coverWallpaper;
                 Rect fbeWallpaperRect = coverWallpaperController.isCoverWallpaperRequired() ? coverWallpaperController.isFbeAvailable() ? coverWallpaperController.mPluginWallpaperManager.getFbeWallpaperRect(1) : coverWallpaperController.mPluginWallpaperManager.getHomeWallpaperRect(CoverWallpaperController.getCoverMode()) : WallpaperManager.getInstance(videoSource.mContext).semGetWallpaperCropHint(i);
                 if (fbeWallpaperRect == null || fbeWallpaperRect.isEmpty()) {
@@ -209,15 +205,15 @@ public class VideoEngine extends WallpaperEngine {
                     Point point2 = videoSource.mVideoSize;
                     rect = new Rect(0, 0, point2.x, point2.y);
                 } else {
-                    int width = surfaceFrame.width();
-                    int height = surfaceFrame.height();
-                    if (width == 0 || height == 0) {
-                        Log.w(str2, "getCropHint: screenWidth = " + width + ", screenHeight = " + height);
+                    int iWidth = surfaceFrame.width();
+                    int iHeight = surfaceFrame.height();
+                    if (iWidth == 0 || iHeight == 0) {
+                        Log.w(str2, "getCropHint: screenWidth = " + iWidth + ", screenHeight = " + iHeight);
                     } else {
-                        float width2 = videoSource.mVideoSize.x / fbeWallpaperRect.width();
-                        float f = (-fbeWallpaperRect.left) * width2;
-                        float f2 = (-fbeWallpaperRect.top) * width2;
-                        Rect rect2 = new Rect((int) f, (int) f2, (int) ((width * width2) + f), (int) ((height * width2) + f2));
+                        float fWidth = videoSource.mVideoSize.x / fbeWallpaperRect.width();
+                        float f = (-fbeWallpaperRect.left) * fWidth;
+                        float f2 = (-fbeWallpaperRect.top) * fWidth;
+                        Rect rect2 = new Rect((int) f, (int) f2, (int) ((iWidth * fWidth) + f), (int) ((iHeight * fWidth) + f2));
                         Point point3 = videoSource.mVideoSize;
                         rect2.intersect(0, 0, point3.x, point3.y);
                         rect = rect2;
@@ -235,10 +231,10 @@ public class VideoEngine extends WallpaperEngine {
                     if (i2 == 0 || i3 == 0) {
                         Log.w(str2, "getCropHint: screenWidth = " + i2 + ", screenHeight = " + i3);
                     } else {
-                        float width3 = videoSource.mVideoSize.x / fbeWallpaperRect2.width();
-                        float f3 = (-fbeWallpaperRect2.left) * width3;
-                        float f4 = (-fbeWallpaperRect2.top) * width3;
-                        rect = new Rect((int) f3, (int) f4, (int) ((i2 * width3) + f3), (int) ((i3 * width3) + f4));
+                        float fWidth2 = videoSource.mVideoSize.x / fbeWallpaperRect2.width();
+                        float f3 = (-fbeWallpaperRect2.left) * fWidth2;
+                        float f4 = (-fbeWallpaperRect2.top) * fWidth2;
+                        rect = new Rect((int) f3, (int) f4, (int) ((i2 * fWidth2) + f3), (int) ((i3 * fWidth2) + f4));
                     }
                 }
             } else {
@@ -254,26 +250,26 @@ public class VideoEngine extends WallpaperEngine {
         Rect rect3 = new Rect();
         rect3.set(rect);
         if (surfaceFrame.height() * rect.width() > rect.height() * surfaceFrame.width()) {
-            float height2 = surfaceFrame.height() / rect.height();
-            int width4 = (int) ((((rect.width() * height2) - surfaceFrame.width()) / height2) / 2.0f);
-            rect3.left += width4;
-            rect3.right -= width4;
+            float fHeight = surfaceFrame.height() / rect.height();
+            int iWidth2 = (int) ((((rect.width() * fHeight) - surfaceFrame.width()) / fHeight) / 2.0f);
+            rect3.left += iWidth2;
+            rect3.right -= iWidth2;
         } else {
-            float width5 = surfaceFrame.width() / rect.width();
-            int height3 = (int) ((((rect.height() * width5) - surfaceFrame.height()) / width5) / 2.0f);
-            rect3.top += height3;
-            rect3.bottom -= height3;
+            float fWidth3 = surfaceFrame.width() / rect.width();
+            int iHeight2 = (int) ((((rect.height() * fWidth3) - surfaceFrame.height()) / fWidth3) / 2.0f);
+            rect3.top += iHeight2;
+            rect3.bottom -= iHeight2;
         }
         rect3.toString();
         Point point5 = this.mVideoSize;
         Rect rect4 = new Rect();
         rect4.set(rect3);
-        float width6 = surfaceFrame.width() / point5.x;
-        float height4 = surfaceFrame.height() / point5.y;
-        rect4.left = (int) (rect4.left * width6);
-        rect4.right = (int) (rect4.right * width6);
-        rect4.top = (int) (rect4.top * height4);
-        rect4.bottom = (int) (rect4.bottom * height4);
+        float fWidth4 = surfaceFrame.width() / point5.x;
+        float fHeight2 = surfaceFrame.height() / point5.y;
+        rect4.left = (int) (rect4.left * fWidth4);
+        rect4.right = (int) (rect4.right * fWidth4);
+        rect4.top = (int) (rect4.top * fHeight2);
+        rect4.bottom = (int) (rect4.bottom * fHeight2);
         rect4.toString();
         surfaceFrame.toString();
         return rect4;
@@ -376,9 +372,8 @@ public class VideoEngine extends WallpaperEngine {
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
-    public final ScreenshotResults onGetScreenshot(ScreenshotOptions screenshotOptions) {
-        Bitmap bitmap;
-        boolean semIsFixedOrientationRequested;
+    public final ScreenshotResults onGetScreenshot(ScreenshotOptions screenshotOptions) throws NoSuchMethodException, SecurityException {
+        Bitmap currentVideoFrame;
         Log.d(this.TAG, "onGetScreenshot");
         Context appContext = getAppContext();
         VideoController videoController = this.mVideoController;
@@ -386,48 +381,46 @@ public class VideoEngine extends WallpaperEngine {
             try {
                 if (videoController.mIsReleased) {
                     Log.i(videoController.TAG, "getCurrentVideoFrame: released");
-                    bitmap = null;
-                } else {
-                    if (videoController.mActiveSession != null && videoController.isSurfaceAndPlayerReady()) {
-                        bitmap = videoController.mActiveSession.getCurrentVideoFrame();
-                    }
+                    currentVideoFrame = null;
+                } else if (videoController.mActiveSession == null || !videoController.isSurfaceAndPlayerReady()) {
                     VideoSource videoSource = videoController.mVideoSource;
                     VideoSource.VideoLocation videoLocation = videoSource.mVideoLocation;
                     if (videoLocation == null) {
-                        bitmap = null;
+                        currentVideoFrame = null;
                     } else {
                         Bitmap[] bitmapArr = {null};
                         videoLocation.useMediaRetriever(new VideoSource$$ExternalSyntheticLambda0(videoSource, bitmapArr));
-                        bitmap = bitmapArr[0];
+                        currentVideoFrame = bitmapArr[0];
                     }
+                } else {
+                    currentVideoFrame = videoController.mActiveSession.getCurrentVideoFrame();
                 }
             } finally {
             }
         }
         int displayRotation = DisplayUtils.getDisplayRotation(getSourceWhich(), appContext);
-        if (bitmap == null) {
+        if (currentVideoFrame == null) {
             Log.w(this.TAG, "onGetScreenshot : failed to get video frame");
             return null;
         }
         SurfaceHolder surfaceHolder = this.mSurfaceHolder;
         if (surfaceHolder == null) {
-            return new ScreenshotResults(bitmap);
+            return new ScreenshotResults(currentVideoFrame);
         }
         Rect surfaceFrame = surfaceHolder.getSurfaceFrame();
-        Rect centerCropRect = GraphicsUtils.getCenterCropRect(bitmap.getWidth(), bitmap.getHeight(), surfaceFrame.width(), surfaceFrame.height());
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap, centerCropRect.left, centerCropRect.top, centerCropRect.width(), centerCropRect.height());
-        if (bitmap != createBitmap) {
-            bitmap.recycle();
+        Rect centerCropRect = GraphicsUtils.getCenterCropRect(currentVideoFrame.getWidth(), currentVideoFrame.getHeight(), surfaceFrame.width(), surfaceFrame.height());
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(currentVideoFrame, centerCropRect.left, centerCropRect.top, centerCropRect.width(), centerCropRect.height());
+        if (currentVideoFrame != bitmapCreateBitmap) {
+            currentVideoFrame.recycle();
         }
-        semIsFixedOrientationRequested = ImageWallpaper.IntegratedEngine.this.semIsFixedOrientationRequested();
-        if (!semIsFixedOrientationRequested) {
-            return new ScreenshotResults(createBitmap);
+        if (!ImageWallpaper.IntegratedEngine.this.semIsFixedOrientationRequested()) {
+            return new ScreenshotResults(bitmapCreateBitmap);
         }
-        Bitmap cropRotateResizeBitmap = BitmapUtils.cropRotateResizeBitmap(createBitmap, null, -DisplayUtils.convertDisplayRotationToAngle(displayRotation), 1.0f, true);
-        if (createBitmap != cropRotateResizeBitmap) {
-            createBitmap.recycle();
+        Bitmap bitmapCropRotateResizeBitmap = BitmapUtils.cropRotateResizeBitmap(bitmapCreateBitmap, null, -DisplayUtils.convertDisplayRotationToAngle(displayRotation), 1.0f, true);
+        if (bitmapCreateBitmap != bitmapCropRotateResizeBitmap) {
+            bitmapCreateBitmap.recycle();
         }
-        return new ScreenshotResults(cropRotateResizeBitmap);
+        return new ScreenshotResults(bitmapCropRotateResizeBitmap);
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
@@ -452,9 +445,9 @@ public class VideoEngine extends WallpaperEngine {
                 }
                 boolean z2 = videoController.mSurface == null && surface != null;
                 videoController.mSurface = surface;
-                boolean isSurfaceAndPlayerReady = videoController.isSurfaceAndPlayerReady();
-                Log.i(videoController.TAG, "setSurface: firstAssign=" + z2 + ", isReady=" + isSurfaceAndPlayerReady);
-                if (!z2 || !isSurfaceAndPlayerReady) {
+                boolean zIsSurfaceAndPlayerReady = videoController.isSurfaceAndPlayerReady();
+                Log.i(videoController.TAG, "setSurface: firstAssign=" + z2 + ", isReady=" + zIsSurfaceAndPlayerReady);
+                if (!z2 || !zIsSurfaceAndPlayerReady) {
                     z = false;
                 }
                 if (z) {
@@ -482,9 +475,9 @@ public class VideoEngine extends WallpaperEngine {
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
     public final void onVisibilityChanged(boolean z) {
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("onVisibilityChanged: engineVisible=", ", windowVisible=", ", displayState = ", z, isWindowVisible());
-        m.append(this.mDisplayState);
-        Log.d(this.TAG, m.toString());
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("onVisibilityChanged: engineVisible=", ", windowVisible=", ", displayState = ", z, isWindowVisible());
+        sbM.append(this.mDisplayState);
+        Log.d(this.TAG, sbM.toString());
         updatePlayerState$1();
     }
 
@@ -560,19 +553,61 @@ public class VideoEngine extends WallpaperEngine {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00d8  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x005a  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final synchronized void updatePlayerState$1() {
-        /*
-            Method dump skipped, instructions count: 304
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.video.VideoEngine.updatePlayerState$1():void");
+        DisplayState displayState;
+        try {
+            StateSnapshot stateSnapshot = this.mLastPlayerUpdateSnapshot;
+            StateSnapshot stateSnapshot2 = new StateSnapshot(this.mDisplayState);
+            this.mLastPlayerUpdateSnapshot = stateSnapshot2;
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(getAppContext());
+            int which = getWhich();
+            int i = which & 60;
+            int lidState = wallpaperManager.getLidState();
+            boolean z = true;
+            boolean z2 = i == 4 || i == 16;
+            boolean zIsKeyguardVisible = this.mKeyguardUpdateMonitor.isKeyguardVisible();
+            boolean zIsWindowVisible = isWindowVisible();
+            boolean zIsVisible = isVisible();
+            Context appContext = getAppContext();
+            int currentUserId = getCurrentUserId();
+            boolean z3 = WallpaperUtils.mIsExternalLiveWallpaper;
+            boolean zIsLockScreenDisabled = new LockPatternUtils(appContext).isLockScreenDisabled(currentUserId);
+            if ((this.mVideoSource.mType & 2) != 2) {
+                z = false;
+            }
+            boolean z4 = this.mBouncerVisible;
+            boolean z5 = this.mPlayerPausedForcefully;
+            boolean z6 = this.mIsGoingToSleepFromNonKeyguard;
+            boolean z7 = this.mIsUnlockingFromScreenOffOrAod;
+            boolean z8 = z2;
+            Log.i(this.TAG, "updatePlayerState: which=" + which + ", disp=" + this.mDisplayState + ", visible(window=" + zIsWindowVisible + ", engine=" + zIsVisible + "), goingToSleepFromNonKeyguard=" + z6 + ", unlockingFromOffOrAod=" + z7 + ", lidState=" + lidState + ", isKeyguard=" + zIsKeyguardVisible + ", bouncer=" + z4 + ", forcePause=" + z5 + ", customPack=" + z + ", lockDisabled=" + zIsLockScreenDisabled);
+            if (WhichChecker.isWatchFace(which)) {
+                if (!zIsVisible) {
+                    pauseAndSeekToFirstFrame$1();
+                } else if (this.mPlayerPausedForcefully) {
+                    pauseVideo();
+                } else if (lidState == 0 && ((displayState = this.mDisplayState) == DisplayState.AOD_WITH_WALLPAPER || displayState == DisplayState.AOD_WITHOUT_WALLPAPER)) {
+                    this.mWorkerHandler.removeCallbacks(this.mVideoPauseDispatcher);
+                    pauseVideo();
+                } else {
+                    playVideo();
+                }
+            } else if (z8) {
+                if (!zIsWindowVisible || (!zIsVisible && this.mDisplayState == DisplayState.OFF)) {
+                    pauseAndSeekToFirstFrame$1();
+                    releaseMediaPlayerSession();
+                } else {
+                    dispatchCurrentStateForMainOrSubDisplay(stateSnapshot2, stateSnapshot);
+                }
+            } else if (!zIsVisible) {
+                pauseAndSeekToFirstFrame$1();
+            } else if (z5) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        } catch (Throwable th) {
+            throw th;
+        }
     }
 }

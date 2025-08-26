@@ -23,10 +23,10 @@ public class SemSurfaceControl {
             return null;
         }
         Log.d(TAG, "Taking fullscreen screenshot");
-        ScreenCapture.ScreenshotHardwareBuffer captureDisplay = ScreenCapture.captureDisplay(new ScreenCapture.DisplayCaptureArgs.Builder(getInternalDisplayToken()).setSize(i, i2).setUseIdentityTransform(true).build());
-        Bitmap asBitmap = captureDisplay == null ? null : captureDisplay.asBitmap();
-        if (asBitmap != null) {
-            return asBitmap;
+        ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBufferCaptureDisplay = ScreenCapture.captureDisplay(new ScreenCapture.DisplayCaptureArgs.Builder(getInternalDisplayToken()).setSize(i, i2).setUseIdentityTransform(true).build());
+        Bitmap bitmapAsBitmap = screenshotHardwareBufferCaptureDisplay == null ? null : screenshotHardwareBufferCaptureDisplay.asBitmap();
+        if (bitmapAsBitmap != null) {
+            return bitmapAsBitmap;
         }
         Log.e(TAG, "Failed to take fullscreen screenshot");
         return null;
@@ -37,10 +37,10 @@ public class SemSurfaceControl {
             return null;
         }
         Log.d(TAG, "Taking screenshot with sourceCrop");
-        ScreenCapture.ScreenshotHardwareBuffer captureDisplay = ScreenCapture.captureDisplay(new ScreenCapture.DisplayCaptureArgs.Builder(getInternalDisplayToken()).setSourceCrop(rect).setSize(i, i2).setUseIdentityTransform(z).build());
-        Bitmap asBitmap = captureDisplay == null ? null : captureDisplay.asBitmap();
-        if (asBitmap != null) {
-            return asBitmap;
+        ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBufferCaptureDisplay = ScreenCapture.captureDisplay(new ScreenCapture.DisplayCaptureArgs.Builder(getInternalDisplayToken()).setSourceCrop(rect).setSize(i, i2).setUseIdentityTransform(z).build());
+        Bitmap bitmapAsBitmap = screenshotHardwareBufferCaptureDisplay == null ? null : screenshotHardwareBufferCaptureDisplay.asBitmap();
+        if (bitmapAsBitmap != null) {
+            return bitmapAsBitmap;
         }
         Log.e(TAG, "Failed to take screenshot with sourceCrop");
         return null;

@@ -27,7 +27,6 @@ import androidx.compose.ui.platform.AndroidComposeView;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPropertiesModifierNode, ViewTreeObserver.OnGlobalFocusChangeListener {
     public ViewTreeObserver attachedViewTreeObserver;
@@ -39,12 +38,12 @@ final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPrope
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             FocusEnterExitScope focusEnterExitScope = (FocusEnterExitScope) obj;
-            View access$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(FocusGroupPropertiesNode.this);
-            if (!access$getEmbeddedView.isFocused() && !access$getEmbeddedView.hasFocus()) {
+            View viewAccess$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(this.this$0);
+            if (!viewAccess$getEmbeddedView.isFocused() && !viewAccess$getEmbeddedView.hasFocus()) {
                 CancelIndicatingFocusBoundaryScope cancelIndicatingFocusBoundaryScope = (CancelIndicatingFocusBoundaryScope) focusEnterExitScope;
-                if (!FocusInteropUtils_androidKt.requestInteropFocus(access$getEmbeddedView, FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(cancelIndicatingFocusBoundaryScope.requestedFocusDirection), FocusGroupNode_androidKt.access$getCurrentlyFocusedRect(((AndroidComposeView) DelegatableNodeKt.requireOwner(FocusGroupPropertiesNode.this)).focusOwner, DelegatableNode_androidKt.requireView(FocusGroupPropertiesNode.this), access$getEmbeddedView))) {
+                if (!FocusInteropUtils_androidKt.requestInteropFocus(viewAccess$getEmbeddedView, FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(cancelIndicatingFocusBoundaryScope.requestedFocusDirection), FocusGroupNode_androidKt.access$getCurrentlyFocusedRect(((AndroidComposeView) DelegatableNodeKt.requireOwner(this.this$0)).focusOwner, DelegatableNode_androidKt.requireView(this.this$0), viewAccess$getEmbeddedView))) {
                     cancelIndicatingFocusBoundaryScope.isCanceled = true;
                 }
             }
@@ -58,31 +57,31 @@ final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPrope
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             FocusEnterExitScope focusEnterExitScope = (FocusEnterExitScope) obj;
-            View access$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(FocusGroupPropertiesNode.this);
+            View viewAccess$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(this.this$0);
             if (ComposeUiFlags.isViewFocusFixEnabled) {
-                if (access$getEmbeddedView.hasFocus() || access$getEmbeddedView.isFocused()) {
-                    access$getEmbeddedView.clearFocus();
+                if (viewAccess$getEmbeddedView.hasFocus() || viewAccess$getEmbeddedView.isFocused()) {
+                    viewAccess$getEmbeddedView.clearFocus();
                 }
-            } else if (access$getEmbeddedView.hasFocus()) {
-                FocusOwnerImpl focusOwnerImpl = ((AndroidComposeView) DelegatableNodeKt.requireOwner(FocusGroupPropertiesNode.this)).focusOwner;
-                View requireView = DelegatableNode_androidKt.requireView(FocusGroupPropertiesNode.this);
-                if (access$getEmbeddedView instanceof ViewGroup) {
-                    Rect access$getCurrentlyFocusedRect = FocusGroupNode_androidKt.access$getCurrentlyFocusedRect(focusOwnerImpl, requireView, access$getEmbeddedView);
+            } else if (viewAccess$getEmbeddedView.hasFocus()) {
+                FocusOwnerImpl focusOwnerImpl = ((AndroidComposeView) DelegatableNodeKt.requireOwner(this.this$0)).focusOwner;
+                View viewRequireView = DelegatableNode_androidKt.requireView(this.this$0);
+                if (viewAccess$getEmbeddedView instanceof ViewGroup) {
+                    Rect rectAccess$getCurrentlyFocusedRect = FocusGroupNode_androidKt.access$getCurrentlyFocusedRect(focusOwnerImpl, viewRequireView, viewAccess$getEmbeddedView);
                     CancelIndicatingFocusBoundaryScope cancelIndicatingFocusBoundaryScope = (CancelIndicatingFocusBoundaryScope) focusEnterExitScope;
-                    Integer m368toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(cancelIndicatingFocusBoundaryScope.requestedFocusDirection);
-                    int intValue = m368toAndroidFocusDirection3ESFkO8 != null ? m368toAndroidFocusDirection3ESFkO8.intValue() : 130;
+                    Integer numM370toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(cancelIndicatingFocusBoundaryScope.requestedFocusDirection);
+                    int iIntValue = numM370toAndroidFocusDirection3ESFkO8 != null ? numM370toAndroidFocusDirection3ESFkO8.intValue() : 130;
                     FocusFinder focusFinder = FocusFinder.getInstance();
-                    View view = FocusGroupPropertiesNode.this.focusedChild;
-                    View findNextFocus = view != null ? focusFinder.findNextFocus((ViewGroup) requireView, view, intValue) : focusFinder.findNextFocusFromRect((ViewGroup) requireView, access$getCurrentlyFocusedRect, intValue);
-                    if (findNextFocus != null && FocusGroupNode_androidKt.access$containsDescendant(access$getEmbeddedView, findNextFocus)) {
-                        findNextFocus.requestFocus(intValue, access$getCurrentlyFocusedRect);
+                    View view = this.this$0.focusedChild;
+                    View viewFindNextFocus = view != null ? focusFinder.findNextFocus((ViewGroup) viewRequireView, view, iIntValue) : focusFinder.findNextFocusFromRect((ViewGroup) viewRequireView, rectAccess$getCurrentlyFocusedRect, iIntValue);
+                    if (viewFindNextFocus != null && FocusGroupNode_androidKt.access$containsDescendant(viewAccess$getEmbeddedView, viewFindNextFocus)) {
+                        viewFindNextFocus.requestFocus(iIntValue, rectAccess$getCurrentlyFocusedRect);
                         cancelIndicatingFocusBoundaryScope.isCanceled = true;
-                    } else if (!requireView.requestFocus()) {
+                    } else if (!viewRequireView.requestFocus()) {
                         throw new IllegalStateException("host view did not take focus");
                     }
-                } else if (!requireView.requestFocus()) {
+                } else if (!viewRequireView.requestFocus()) {
                     throw new IllegalStateException("host view did not take focus");
                 }
             }
@@ -106,38 +105,38 @@ final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPrope
             boolean z = false;
             for (Modifier.Node node2 = node.child; node2 != null; node2 = node2.child) {
                 if ((node2.kindSet & 1024) != 0) {
-                    Modifier.Node node3 = node2;
+                    Modifier.Node nodeAccess$pop = node2;
                     MutableVector mutableVector = null;
-                    while (node3 != null) {
-                        if (node3 instanceof FocusTargetNode) {
-                            FocusTargetNode focusTargetNode = (FocusTargetNode) node3;
+                    while (nodeAccess$pop != null) {
+                        if (nodeAccess$pop instanceof FocusTargetNode) {
+                            FocusTargetNode focusTargetNode = (FocusTargetNode) nodeAccess$pop;
                             if (z) {
                                 return focusTargetNode;
                             }
                             z = true;
-                        } else if ((node3.kindSet & 1024) != 0 && (node3 instanceof DelegatingNode)) {
+                        } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                             int i = 0;
-                            for (Modifier.Node node4 = ((DelegatingNode) node3).delegate; node4 != null; node4 = node4.child) {
-                                if ((node4.kindSet & 1024) != 0) {
+                            for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                if ((node3.kindSet & 1024) != 0) {
                                     i++;
                                     if (i == 1) {
-                                        node3 = node4;
+                                        nodeAccess$pop = node3;
                                     } else {
                                         if (mutableVector == null) {
                                             mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                         }
-                                        if (node3 != null) {
-                                            mutableVector.add(node3);
-                                            node3 = null;
+                                        if (nodeAccess$pop != null) {
+                                            mutableVector.add(nodeAccess$pop);
+                                            nodeAccess$pop = null;
                                         }
-                                        mutableVector.add(node4);
+                                        mutableVector.add(node3);
                                     }
                                 }
                             }
                             if (i == 1) {
                             }
                         }
-                        node3 = DelegatableNodeKt.access$pop(mutableVector);
+                        nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                     }
                 }
             }
@@ -168,11 +167,11 @@ final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPrope
         if (DelegatableNodeKt.requireLayoutNode(this).owner == null) {
             return;
         }
-        View access$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(this);
+        View viewAccess$getEmbeddedView = FocusGroupNode_androidKt.access$getEmbeddedView(this);
         FocusOwnerImpl focusOwnerImpl = ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).focusOwner;
-        Owner requireOwner = DelegatableNodeKt.requireOwner(this);
-        boolean z = (view == null || view.equals(requireOwner) || !FocusGroupNode_androidKt.access$containsDescendant(access$getEmbeddedView, view)) ? false : true;
-        boolean z2 = (view2 == null || view2.equals(requireOwner) || !FocusGroupNode_androidKt.access$containsDescendant(access$getEmbeddedView, view2)) ? false : true;
+        Owner ownerRequireOwner = DelegatableNodeKt.requireOwner(this);
+        boolean z = (view == null || view.equals(ownerRequireOwner) || !FocusGroupNode_androidKt.access$containsDescendant(viewAccess$getEmbeddedView, view)) ? false : true;
+        boolean z2 = (view2 == null || view2.equals(ownerRequireOwner) || !FocusGroupNode_androidKt.access$containsDescendant(viewAccess$getEmbeddedView, view2)) ? false : true;
         if (z && z2) {
             this.focusedChild = view2;
             return;
@@ -185,7 +184,7 @@ final class FocusGroupPropertiesNode extends Modifier.Node implements FocusPrope
             this.focusedChild = null;
             if (getFocusTargetOfEmbeddedViewWrapper().getFocusState().isFocused()) {
                 FocusDirection.Companion.getClass();
-                focusOwnerImpl.m370clearFocusI7lrPNg(FocusDirection.Exit, false, false);
+                focusOwnerImpl.m372clearFocusI7lrPNg(FocusDirection.Exit, false, false);
                 return;
             }
             return;

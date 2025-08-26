@@ -5,7 +5,6 @@ import gov.nist.javax.sip.header.SIPHeader;
 import gov.nist.javax.sip.header.Server;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ServerParser extends HeaderParser {
     public ServerParser(String str) {
@@ -13,12 +12,10 @@ public class ServerParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
-        LexerCore lexerCore;
-        int i;
+    public final SIPHeader parse() throws ParseException {
         Server server = new Server();
         headerName(2066);
-        int i2 = 0;
+        int i = 0;
         if (this.lexer.lookAhead(0) == '\n') {
             throw createParseException("empty header");
         }
@@ -27,22 +24,22 @@ public class ServerParser extends HeaderParser {
                 server.addProductToken("(" + this.lexer.comment() + ')');
             } else {
                 try {
-                    lexerCore = this.lexer;
-                    i = lexerCore.ptr;
-                } catch (ParseException unused) {
-                }
-                try {
-                    String string = lexerCore.getString();
-                    if (string.charAt(string.length() - 1) == '\n') {
-                        string = string.trim();
+                    LexerCore lexerCore = this.lexer;
+                    int i2 = lexerCore.ptr;
+                    try {
+                        String string = lexerCore.getString();
+                        if (string.charAt(string.length() - 1) == '\n') {
+                            string = string.trim();
+                        }
+                        server.addProductToken(string);
+                    } catch (ParseException unused) {
+                        i = i2;
+                        LexerCore lexerCore2 = this.lexer;
+                        lexerCore2.ptr = i;
+                        server.addProductToken(lexerCore2.getRest().trim());
+                        return server;
                     }
-                    server.addProductToken(string);
                 } catch (ParseException unused2) {
-                    i2 = i;
-                    LexerCore lexerCore2 = this.lexer;
-                    lexerCore2.ptr = i2;
-                    server.addProductToken(lexerCore2.getRest().trim());
-                    return server;
                 }
             }
         }

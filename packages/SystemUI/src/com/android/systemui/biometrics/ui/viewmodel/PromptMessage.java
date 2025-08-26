@@ -3,11 +3,9 @@ package com.android.systemui.biometrics.ui.viewmodel;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface PromptMessage {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Empty implements PromptMessage {
         public static final Empty INSTANCE = new Empty();
 
@@ -15,7 +13,6 @@ public interface PromptMessage {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Error implements PromptMessage {
         public final String errorMessage;
 
@@ -39,7 +36,6 @@ public interface PromptMessage {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Help implements PromptMessage {
         public final String helpMessage;
 

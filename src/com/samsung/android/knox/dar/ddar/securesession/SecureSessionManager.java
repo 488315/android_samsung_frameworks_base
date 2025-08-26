@@ -33,9 +33,9 @@ class SecureSessionManager {
 
         PrivateSessionEndpoint() throws Exception {
             try {
-                KeyPair createKeyPair = createKeyPair();
-                this.publicKey = createKeyPair.getPublic();
-                this.privateKey = createKeyPair.getPrivate();
+                KeyPair keyPairCreateKeyPair = createKeyPair();
+                this.publicKey = keyPairCreateKeyPair.getPublic();
+                this.privateKey = keyPairCreateKeyPair.getPrivate();
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new Exception("Error: PrivateSessionEndpoint creation failure");
@@ -111,12 +111,12 @@ class SecureSessionManager {
             KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH", SecureSessionManager.CRYPTO_PROVIDER);
             keyAgreement.init(this.privateSessionEndpoint.getPrivateKey());
             keyAgreement.doPhase(this.publicSessionEndpoint.getPublicKey(), true);
-            byte[] generateSecret = keyAgreement.generateSecret();
-            byte[] copyOf = Arrays.copyOf(generateSecret, 16);
-            this.xorMask = Arrays.copyOfRange(generateSecret, 16, generateSecret.length);
-            this.sessionKey = new SessionSecretKeySpec(copyOf, "AES");
-            Wiper.wipe(generateSecret);
-            Wiper.wipe(copyOf);
+            byte[] bArrGenerateSecret = keyAgreement.generateSecret();
+            byte[] bArrCopyOf = Arrays.copyOf(bArrGenerateSecret, 16);
+            this.xorMask = Arrays.copyOfRange(bArrGenerateSecret, 16, bArrGenerateSecret.length);
+            this.sessionKey = new SessionSecretKeySpec(bArrCopyOf, "AES");
+            Wiper.wipe(bArrGenerateSecret);
+            Wiper.wipe(bArrCopyOf);
         }
 
         void destroySessionkey() throws Exception {
@@ -157,8 +157,8 @@ class SecureSessionManager {
         }
 
         private byte[] decryptData(String str) throws Exception {
-            String[] split = str.split(":");
-            return decrypt(Util.decodeBase64(split[0]), Util.decodeBase64(split[1]));
+            String[] strArrSplit = str.split(":");
+            return decrypt(Util.decodeBase64(strArrSplit[0]), Util.decodeBase64(strArrSplit[1]));
         }
 
         private byte[] generateIV() {
@@ -177,9 +177,9 @@ class SecureSessionManager {
         private byte[] decrypt(byte[] bArr, byte[] bArr2) throws Exception {
             Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE, Security.getProvider(SecureSessionManager.CRYPTO_PROVIDER));
             cipher.init(2, this.sessionKey, new IvParameterSpec(bArr));
-            byte[] doFinal = cipher.doFinal(bArr2);
-            applyXorMask(doFinal);
-            return doFinal;
+            byte[] bArrDoFinal = cipher.doFinal(bArr2);
+            applyXorMask(bArrDoFinal);
+            return bArrDoFinal;
         }
 
         private void applyXorMask(byte[] bArr) {

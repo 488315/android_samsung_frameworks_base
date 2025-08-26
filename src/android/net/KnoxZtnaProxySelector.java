@@ -18,11 +18,11 @@ public class KnoxZtnaProxySelector extends ProxySelector {
 
     @Override // java.net.ProxySelector
     public List<java.net.Proxy> select(URI uri) {
-        ArrayList newArrayList = Lists.newArrayList();
+        ArrayList arrayListNewArrayList = Lists.newArrayList();
         String property = System.getProperty("http.proxyPort");
         Log.d(TAG, "Proxy port configured is " + property + "for the caller " + Process.myUid());
-        newArrayList.add(new java.net.Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved("::1", Integer.parseInt(property))));
-        return newArrayList;
+        arrayListNewArrayList.add(new java.net.Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved("::1", Integer.parseInt(property))));
+        return arrayListNewArrayList;
     }
 
     @Override // java.net.ProxySelector

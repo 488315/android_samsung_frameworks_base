@@ -6,12 +6,10 @@ import androidx.compose.ui.graphics.vector.ImageVector;
 import java.util.HashMap;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ImageVectorCache {
     public final HashMap map = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ImageVectorEntry {
         public final int configFlags;
         public final ImageVector imageVector;
@@ -44,7 +42,6 @@ public final class ImageVectorCache {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Key {
         public final int id;
         public final Resources.Theme theme;

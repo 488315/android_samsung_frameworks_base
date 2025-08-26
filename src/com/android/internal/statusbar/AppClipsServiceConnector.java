@@ -57,9 +57,9 @@ public class AppClipsServiceConnector {
                 completableFuture.complete(false);
             }
         };
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(this.mContext.getResources().getString(R.string.config_screenshotAppClipsServiceComponent));
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(this.mContext.getResources().getString(R.string.config_screenshotAppClipsServiceComponent));
         Intent intent = new Intent();
-        intent.setComponent(unflattenFromString);
+        intent.setComponent(componentNameUnflattenFromString);
         Context context = this.mContext;
         if (context.bindServiceAsUser(intent, serviceConnection, Enums.AUDIO_FORMAT_AAC_MAIN, this.mHandler, context.getUser())) {
             return;

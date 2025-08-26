@@ -5,7 +5,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import gov.nist.core.LexerCore;
 import java.util.Hashtable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Lexer extends LexerCore {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -136,9 +135,7 @@ public class Lexer extends LexerCore {
                         addKeyword(2144, "P-Preferred-Service");
                         addKeyword(2145, "P-Asserted-Service");
                         addKeyword(2146, "References");
-                    } else if (str.equals("status_lineLexer")) {
-                        addKeyword(2051, "sip");
-                    } else if (str.equals("request_lineLexer")) {
+                    } else if (str.equals("status_lineLexer") || str.equals("request_lineLexer")) {
                         addKeyword(2051, "sip");
                     } else if (str.equals("sip_urlLexer")) {
                         addKeyword(2105, "tel");

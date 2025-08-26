@@ -7,7 +7,6 @@ import com.samsung.android.sdk.moneta.memory.entity.context.Person;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CallLog extends Content {
     public static final Parcelable.Creator<CallLog> CREATOR = new Creator();
@@ -16,7 +15,6 @@ public final class CallLog extends Content {
     private final String id;
     private final Person senderOrRecipient;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -107,9 +105,9 @@ public final class CallLog extends Content {
     }
 
     public int hashCode() {
-        int m = MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.contentUri), 31, this.callId);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.contentUri), 31, this.callId);
         Person person = this.senderOrRecipient;
-        return m + (person == null ? 0 : person.hashCode());
+        return iM + (person == null ? 0 : person.hashCode());
     }
 
     public String toString() {

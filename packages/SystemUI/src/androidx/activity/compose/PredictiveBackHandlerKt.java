@@ -21,7 +21,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PredictiveBackHandlerKt {
     public static final void PredictiveBackHandler(final boolean z, final Function2 function2, Composer composer, final int i, final int i2) {
@@ -50,37 +49,37 @@ public abstract class PredictiveBackHandlerKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.activity.compose.PredictiveBackHandler (PredictiveBackHandler.kt:76)");
             }
-            MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function2, composerImpl);
-            Object rememberedValue = composerImpl.rememberedValue();
+            MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function2, composerImpl);
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
+            if (objRememberedValue == composer$Companion$Empty$1) {
                 CompositionScopedCoroutineScopeCanceller compositionScopedCoroutineScopeCanceller = new CompositionScopedCoroutineScopeCanceller(EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl));
                 composerImpl.updateRememberedValue(compositionScopedCoroutineScopeCanceller);
-                rememberedValue = compositionScopedCoroutineScopeCanceller;
+                objRememberedValue = compositionScopedCoroutineScopeCanceller;
             }
-            CoroutineScope coroutineScope = ((CompositionScopedCoroutineScopeCanceller) rememberedValue).coroutineScope;
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = new PredictiveBackHandlerCallback(z, coroutineScope, (Function2) rememberUpdatedState.getValue());
-                composerImpl.updateRememberedValue(rememberedValue2);
+            CoroutineScope coroutineScope = ((CompositionScopedCoroutineScopeCanceller) objRememberedValue).coroutineScope;
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = new PredictiveBackHandlerCallback(z, coroutineScope, (Function2) mutableStateRememberUpdatedState.getValue());
+                composerImpl.updateRememberedValue(objRememberedValue2);
             }
-            final PredictiveBackHandlerCallback predictiveBackHandlerCallback = (PredictiveBackHandlerCallback) rememberedValue2;
-            boolean changed = composerImpl.changed((Function2) rememberUpdatedState.getValue()) | composerImpl.changed(coroutineScope);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (changed || rememberedValue3 == composer$Companion$Empty$1) {
-                predictiveBackHandlerCallback.currentOnBack = (Function2) rememberUpdatedState.getValue();
+            final PredictiveBackHandlerCallback predictiveBackHandlerCallback = (PredictiveBackHandlerCallback) objRememberedValue2;
+            boolean zChanged = composerImpl.changed((Function2) mutableStateRememberUpdatedState.getValue()) | composerImpl.changed(coroutineScope);
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (zChanged || objRememberedValue3 == composer$Companion$Empty$1) {
+                predictiveBackHandlerCallback.currentOnBack = (Function2) mutableStateRememberUpdatedState.getValue();
                 predictiveBackHandlerCallback.onBackScope = coroutineScope;
                 composerImpl.updateRememberedValue(Unit.INSTANCE);
             }
-            Boolean valueOf = Boolean.valueOf(z);
-            boolean changedInstance = composerImpl.changedInstance(predictiveBackHandlerCallback) | ((i3 & 14) == 4);
-            Object rememberedValue4 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue4 == composer$Companion$Empty$1) {
-                rememberedValue4 = new PredictiveBackHandlerKt$PredictiveBackHandler$2$1(predictiveBackHandlerCallback, z, null);
-                composerImpl.updateRememberedValue(rememberedValue4);
+            Boolean boolValueOf = Boolean.valueOf(z);
+            boolean zChangedInstance = composerImpl.changedInstance(predictiveBackHandlerCallback) | ((i3 & 14) == 4);
+            Object objRememberedValue4 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue4 == composer$Companion$Empty$1) {
+                objRememberedValue4 = new PredictiveBackHandlerKt$PredictiveBackHandler$2$1(predictiveBackHandlerCallback, z, null);
+                composerImpl.updateRememberedValue(objRememberedValue4);
             }
-            EffectsKt.LaunchedEffect(composerImpl, valueOf, (Function2) rememberedValue4);
+            EffectsKt.LaunchedEffect(composerImpl, boolValueOf, (Function2) objRememberedValue4);
             LocalOnBackPressedDispatcherOwner.INSTANCE.getClass();
             OnBackPressedDispatcherOwner current = LocalOnBackPressedDispatcherOwner.getCurrent(composerImpl);
             if (current == null) {
@@ -88,10 +87,10 @@ public abstract class PredictiveBackHandlerKt {
             }
             final OnBackPressedDispatcher onBackPressedDispatcher = current.getOnBackPressedDispatcher();
             final LifecycleOwner lifecycleOwner = (LifecycleOwner) composerImpl.consume(AndroidCompositionLocals_androidKt.getLocalLifecycleOwner());
-            boolean changedInstance2 = composerImpl.changedInstance(onBackPressedDispatcher) | composerImpl.changedInstance(lifecycleOwner) | composerImpl.changedInstance(predictiveBackHandlerCallback);
-            Object rememberedValue5 = composerImpl.rememberedValue();
-            if (changedInstance2 || rememberedValue5 == composer$Companion$Empty$1) {
-                rememberedValue5 = new Function1() { // from class: androidx.activity.compose.PredictiveBackHandlerKt$PredictiveBackHandler$3$1
+            boolean zChangedInstance2 = composerImpl.changedInstance(onBackPressedDispatcher) | composerImpl.changedInstance(lifecycleOwner) | composerImpl.changedInstance(predictiveBackHandlerCallback);
+            Object objRememberedValue5 = composerImpl.rememberedValue();
+            if (zChangedInstance2 || objRememberedValue5 == composer$Companion$Empty$1) {
+                objRememberedValue5 = new Function1() { // from class: androidx.activity.compose.PredictiveBackHandlerKt$PredictiveBackHandler$3$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
@@ -99,27 +98,27 @@ public abstract class PredictiveBackHandlerKt {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        OnBackPressedDispatcher.this.addCallback(lifecycleOwner, predictiveBackHandlerCallback);
+                    public final Object mo781invoke(Object obj) {
+                        onBackPressedDispatcher.addCallback(lifecycleOwner, predictiveBackHandlerCallback);
                         final PredictiveBackHandlerCallback predictiveBackHandlerCallback2 = predictiveBackHandlerCallback;
                         return new DisposableEffectResult() { // from class: androidx.activity.compose.PredictiveBackHandlerKt$PredictiveBackHandler$3$1$invoke$$inlined$onDispose$1
                             @Override // androidx.compose.runtime.DisposableEffectResult
                             public final void dispose() {
-                                PredictiveBackHandlerCallback.this.remove();
+                                predictiveBackHandlerCallback2.remove();
                             }
                         };
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue5);
+                composerImpl.updateRememberedValue(objRememberedValue5);
             }
-            EffectsKt.DisposableEffect(lifecycleOwner, onBackPressedDispatcher, (Function1) rememberedValue5, composerImpl);
+            EffectsKt.DisposableEffect(lifecycleOwner, onBackPressedDispatcher, (Function1) objRememberedValue5, composerImpl);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.activity.compose.PredictiveBackHandlerKt$PredictiveBackHandler$4
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.activity.compose.PredictiveBackHandlerKt.PredictiveBackHandler.4
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);

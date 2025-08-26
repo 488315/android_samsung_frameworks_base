@@ -7,6 +7,8 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -38,7 +40,7 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
     }
 
     @Override // android.service.autofill.InternalSanitizer
-    public AutofillValue sanitize(AutofillValue autofillValue) {
+    public AutofillValue sanitize(AutofillValue autofillValue) throws ParseException {
         if (autofillValue == null) {
             Log.w(TAG, "sanitize() called with null value");
             return null;
@@ -51,15 +53,15 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
         }
         try {
             Date date = new Date(autofillValue.getDateValue());
-            String format = this.mDateFormat.format(date);
+            String str = this.mDateFormat.format(date);
             if (Helper.sDebug) {
-                Log.d(TAG, "Transformed " + date + " to " + format);
+                Log.d(TAG, "Transformed " + date + " to " + str);
             }
-            Date parse = this.mDateFormat.parse(format);
+            Date date2 = this.mDateFormat.parse(str);
             if (Helper.sDebug) {
-                Log.d(TAG, "Sanitized to " + parse);
+                Log.d(TAG, "Sanitized to " + date2);
             }
-            return AutofillValue.forDate(parse.getTime());
+            return AutofillValue.forDate(date2.getTime());
         } catch (Exception e) {
             Log.w(TAG, "Could not apply " + this.mDateFormat + " to " + autofillValue + ": " + e);
             return null;
@@ -74,7 +76,7 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeSerializable(this.mDateFormat);
     }
 }

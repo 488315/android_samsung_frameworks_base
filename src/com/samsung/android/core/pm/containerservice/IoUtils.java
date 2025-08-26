@@ -5,7 +5,7 @@ public final class IoUtils {
     private IoUtils() {
     }
 
-    public static void closeQuietly(AutoCloseable autoCloseable) {
+    public static void closeQuietly(AutoCloseable autoCloseable) throws Exception {
         if (autoCloseable != null) {
             try {
                 autoCloseable.close();

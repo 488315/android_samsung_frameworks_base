@@ -52,9 +52,9 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IConnectionlessHandwritingCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IConnectionlessHandwritingCallback)) {
-                return (IConnectionlessHandwritingCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IConnectionlessHandwritingCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IConnectionlessHandwritingCallback)) {
+                return (IConnectionlessHandwritingCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,9 +88,9 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onResult(charSequence);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readInt);
+                onError(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,30 +115,30 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
 
             @Override // com.android.internal.inputmethod.IConnectionlessHandwritingCallback
             public void onResult(CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConnectionlessHandwritingCallback.DESCRIPTOR);
+                    parcelObtain.writeInterfaceToken(IConnectionlessHandwritingCallback.DESCRIPTOR);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(1, obtain, null, 1);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IConnectionlessHandwritingCallback
             public void onError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConnectionlessHandwritingCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IConnectionlessHandwritingCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

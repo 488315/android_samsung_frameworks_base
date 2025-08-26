@@ -7,7 +7,6 @@ import com.android.systemui.statusbar.notification.collection.coordinator.dagger
 import com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class NotificationControlActionCoordinator implements Coordinator {
@@ -28,7 +27,7 @@ public class NotificationControlActionCoordinator implements Coordinator {
         notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotificationControlActionCoordinator$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener
             public final void onAfterRenderList(List list) {
-                NotificationControlActionCoordinator.this.onAfterRenderList(list);
+                this.f$0.onAfterRenderList(list);
             }
         });
     }

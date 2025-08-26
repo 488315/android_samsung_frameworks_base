@@ -21,7 +21,7 @@ public final class SystemBarUtils {
         return getStatusBarHeight(context.getResources(), context.getDisplay().getCutout());
     }
 
-    public static int getStatusBarHeight(Resources resources, DisplayCutout displayCutout) {
+    public static int getStatusBarHeight(Resources resources, DisplayCutout displayCutout) throws Resources.NotFoundException {
         if (STATUS_LAYOUT_HEIGHT) {
             return getStatusBarHeight(resources, displayCutout, resources.getConfiguration().orientation == 2);
         }
@@ -50,9 +50,9 @@ public final class SystemBarUtils {
             waterfallInsets = Insets.NONE;
         } else {
             DisplayCutout rotated = cutout.getRotated(i2, i3, rotation, i);
-            Insets of = Insets.of(rotated.getSafeInsets());
+            Insets insetsOf = Insets.of(rotated.getSafeInsets());
             waterfallInsets = rotated.getWaterfallInsets();
-            insets = of;
+            insets = insetsOf;
         }
         return Math.max(insets.top, context.getResources().getDimensionPixelSize(R.dimen.status_bar_height_default) + waterfallInsets.top);
     }

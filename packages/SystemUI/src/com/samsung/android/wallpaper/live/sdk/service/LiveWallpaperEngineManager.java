@@ -6,7 +6,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.SdkLog;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LiveWallpaperEngineManager {
     public static LiveWallpaperEngineManager sInstance;
@@ -17,18 +16,14 @@ public class LiveWallpaperEngineManager {
     }
 
     public static synchronized LiveWallpaperEngineManager getInstance(Context context) {
-        LiveWallpaperEngineManager liveWallpaperEngineManager;
-        synchronized (LiveWallpaperEngineManager.class) {
-            try {
-                if (sInstance == null) {
-                    sInstance = new LiveWallpaperEngineManager(context);
-                }
-                liveWallpaperEngineManager = sInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sInstance == null) {
+                sInstance = new LiveWallpaperEngineManager(context);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return liveWallpaperEngineManager;
+        return sInstance;
     }
 
     public final synchronized LiveWallpaperService.BaseEngine getEngine(int i) {

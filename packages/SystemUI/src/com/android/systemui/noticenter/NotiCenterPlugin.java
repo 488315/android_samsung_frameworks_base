@@ -17,7 +17,6 @@ import com.samsung.systemui.splugins.noticenter.PluginNotiCenter;
 import java.io.PrintWriter;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NotiCenterPlugin implements Dumpable {
     public static final NotiCenterPlugin INSTANCE;
@@ -35,7 +34,6 @@ public final class NotiCenterPlugin implements Dumpable {
     public static PluginNotiCenter plugin;
     public static boolean showNotilusOnKeyguard;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotiCenterPluginListener implements SPluginListener {
         public final NotiCenterPlugin notiCenterPlugin;
 

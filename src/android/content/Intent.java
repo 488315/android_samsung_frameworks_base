@@ -20,7 +20,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Process;
 import android.os.ShellCommand;
+import android.os.StrictMode;
 import android.os.UserHandle;
+import android.os.storage.StorageManager;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -1334,9 +1337,9 @@ public class Intent implements Parcelable, Cloneable {
     }
 
     public static Intent makeRestartActivityTask(ComponentName componentName) {
-        Intent makeMainActivity = makeMainActivity(componentName);
-        makeMainActivity.addFlags(268468224);
-        return makeMainActivity;
+        Intent intentMakeMainActivity = makeMainActivity(componentName);
+        intentMakeMainActivity.addFlags(268468224);
+        return intentMakeMainActivity;
     }
 
     @Deprecated
@@ -1345,195 +1348,310 @@ public class Intent implements Parcelable, Cloneable {
     }
 
     public static Intent parseUri(String str, int i) throws URISyntaxException {
-        Intent parseUriInternal = parseUriInternal(str, i);
-        parseUriInternal.mLocalFlags |= 16;
-        return parseUriInternal;
+        Intent uriInternal = parseUriInternal(str, i);
+        uriInternal.mLocalFlags |= 16;
+        return uriInternal;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:143:0x0221, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:120:0x0221, code lost:
     
         if (r9 == false) goto L124;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:145:0x0225, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:122:0x0225, code lost:
     
         if (r3.mPackage != null) goto L125;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:146:0x0227, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:123:0x0227, code lost:
     
         r3.setSelector(r8);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:147:0x022c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:124:0x022b, code lost:
+    
+        r3 = r8;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:125:0x022c, code lost:
     
         if (r7 == null) goto L170;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:149:0x0232, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:127:0x0232, code lost:
     
         if (r7.startsWith("intent:") == false) goto L131;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:150:0x0234, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:128:0x0234, code lost:
     
         r7 = r7.substring(7);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:151:0x0239, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:129:0x0239, code lost:
     
         if (r10 == null) goto L163;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:152:0x023b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:130:0x023b, code lost:
     
         r7 = r10 + com.android.internal.accessibility.common.ShortcutConstants.SERVICES_SEPARATOR + r7;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:154:0x0302, code lost:
-    
-        if (r7.length() <= 0) goto L170;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:156:0x0304, code lost:
-    
-        r3.mData = android.net.Uri.parse(r7);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:157:0x030a, code lost:
-    
-        return r3;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:159:0x030b, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:161:0x0315, code lost:
-    
-        throw new java.net.URISyntaxException(r17, r0.getMessage());
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:163:0x0255, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:132:0x0255, code lost:
     
         if (r7.startsWith("android-app:") == false) goto L163;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:165:0x025f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:134:0x025f, code lost:
     
         if (r7.charAt(12) != '/') goto L162;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:167:0x0267, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:136:0x0267, code lost:
     
         if (r7.charAt(13) != '/') goto L162;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:168:0x0269, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:137:0x0269, code lost:
     
         r5 = r7.indexOf(47, 14);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:170:0x0271, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:139:0x0271, code lost:
     
         if (r5 >= 0) goto L143;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:171:0x0273, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:140:0x0273, code lost:
     
         r3.mPackage = android.net.Uri.decodeIfNeeded(r7.substring(14));
      */
-    /* JADX WARN: Code restructure failed: missing block: B:172:0x027d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:141:0x027d, code lost:
     
         if (r11 != false) goto L162;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:173:0x027f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:142:0x027f, code lost:
     
         r3.setAction(android.content.Intent.ACTION_MAIN);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:174:0x0284, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:143:0x0284, code lost:
     
         r3.mPackage = android.net.Uri.decodeIfNeeded(r7.substring(14, r5));
         r0 = r5 + 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:175:0x0294, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:144:0x0294, code lost:
     
         if (r0 >= r7.length()) goto L154;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:176:0x0296, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:145:0x0296, code lost:
     
         r8 = r7.indexOf(47, r0);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:177:0x029a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:146:0x029a, code lost:
     
         if (r8 < 0) goto L153;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:178:0x029c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:147:0x029c, code lost:
     
         r10 = android.net.Uri.decodeIfNeeded(r7.substring(r0, r8));
      */
-    /* JADX WARN: Code restructure failed: missing block: B:179:0x02a8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:148:0x02a8, code lost:
     
         if (r8 >= r7.length()) goto L152;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:180:0x02aa, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:149:0x02aa, code lost:
     
         r0 = r8 + 1;
         r5 = r7.indexOf(47, r0);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:181:0x02b0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:150:0x02b0, code lost:
     
         if (r5 < 0) goto L152;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:182:0x02b2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:151:0x02b2, code lost:
     
         r0 = android.net.Uri.decodeIfNeeded(r7.substring(r0, r5));
      */
-    /* JADX WARN: Code restructure failed: missing block: B:183:0x02c6, code lost:
-    
-        if (r10 != null) goto L158;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:184:0x02c8, code lost:
-    
-        if (r11 != false) goto L162;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:185:0x02ca, code lost:
-    
-        r3.setAction(android.content.Intent.ACTION_MAIN);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:186:0x02ce, code lost:
-    
-        if (r0 != null) goto L161;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:187:0x02d0, code lost:
-    
-        r0 = r10 + ":";
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:188:0x02df, code lost:
-    
-        r7 = r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:189:0x02e1, code lost:
-    
-        r0 = r10 + "://" + r0 + r7.substring(r5);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:190:0x02bb, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:152:0x02bb, code lost:
     
         r5 = r8;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:191:0x02bd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:153:0x02bd, code lost:
     
         r10 = android.net.Uri.decodeIfNeeded(r7.substring(r0));
      */
-    /* JADX WARN: Code restructure failed: missing block: B:192:0x02c5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:154:0x02c5, code lost:
     
         r0 = null;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:193:0x02fd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:155:0x02c6, code lost:
+    
+        if (r10 != null) goto L158;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:156:0x02c8, code lost:
+    
+        if (r11 != false) goto L162;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:157:0x02ca, code lost:
+    
+        r3.setAction(android.content.Intent.ACTION_MAIN);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:158:0x02ce, code lost:
+    
+        if (r0 != null) goto L161;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:159:0x02d0, code lost:
+    
+        r0 = r10 + ":";
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:160:0x02df, code lost:
+    
+        r7 = r0;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:161:0x02e1, code lost:
+    
+        r0 = r10 + "://" + r0 + r7.substring(r5);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:162:0x02fd, code lost:
     
         r7 = "";
      */
-    /* JADX WARN: Code restructure failed: missing block: B:194:0x0316, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:164:0x0302, code lost:
+    
+        if (r7.length() <= 0) goto L170;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:165:0x0304, code lost:
+    
+        r3.mData = android.net.Uri.parse(r7);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:166:0x030a, code lost:
     
         return r3;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:195:0x022b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:167:0x030b, code lost:
     
-        r3 = r8;
+        r0 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:169:0x0315, code lost:
+    
+        throw new java.net.URISyntaxException(r17, r0.getMessage());
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:170:0x0316, code lost:
+    
+        return r3;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.Intent parseUriInternal(java.lang.String r17, int r18) throws java.net.URISyntaxException {
-        /*
-            Method dump skipped, instructions count: 800
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.Intent.parseUriInternal(java.lang.String, int):android.content.Intent");
+    private static Intent parseUriInternal(String str, int i) throws URISyntaxException {
+        String strSubstring;
+        int i2 = 0;
+        try {
+            boolean zStartsWith = str.startsWith("android-app:");
+            if ((i & 3) != 0 && !str.startsWith("intent:") && !zStartsWith) {
+                Intent intent = new Intent("android.intent.action.VIEW");
+                try {
+                    intent.setData(Uri.parse(str));
+                    return intent;
+                } catch (IllegalArgumentException e) {
+                    throw new URISyntaxException(str, e.getMessage());
+                }
+            }
+            int iLastIndexOf = str.lastIndexOf("#");
+            try {
+                if (iLastIndexOf == -1) {
+                    if (!zStartsWith) {
+                        return new Intent("android.intent.action.VIEW", Uri.parse(str));
+                    }
+                } else if (!str.startsWith("#Intent;", iLastIndexOf)) {
+                    if (!zStartsWith) {
+                        return getIntentOld(str, i);
+                    }
+                    iLastIndexOf = -1;
+                }
+                Intent intent2 = new Intent("android.intent.action.VIEW");
+                if (iLastIndexOf >= 0) {
+                    strSubstring = str.substring(0, iLastIndexOf);
+                    iLastIndexOf += 8;
+                } else {
+                    strSubstring = str;
+                }
+                boolean z = false;
+                boolean z2 = false;
+                Intent intent3 = intent2;
+                String strDecodeIfNeeded = null;
+                while (true) {
+                    if (iLastIndexOf < 0 || str.startsWith("end", iLastIndexOf)) {
+                        break;
+                    }
+                    int iIndexOf = str.indexOf(61, iLastIndexOf);
+                    if (iIndexOf < 0) {
+                        iIndexOf = iLastIndexOf - 1;
+                    }
+                    int iIndexOf2 = str.indexOf(59, iLastIndexOf);
+                    if (iIndexOf2 < 0) {
+                        throw new URISyntaxException(str, "uri end not found");
+                    }
+                    String strDecode = iIndexOf < iIndexOf2 ? Uri.decode(str.substring(iIndexOf + 1, iIndexOf2)) : "";
+                    if (str.startsWith("action=", iLastIndexOf)) {
+                        intent3.setAction(strDecode);
+                        if (!z) {
+                            z2 = true;
+                        }
+                    } else if (str.startsWith("category=", iLastIndexOf)) {
+                        intent3.addCategory(strDecode);
+                    } else if (str.startsWith("type=", iLastIndexOf)) {
+                        intent3.mType = strDecode;
+                    } else if (str.startsWith("identifier=", iLastIndexOf)) {
+                        intent3.mIdentifier = strDecode;
+                    } else if (str.startsWith("launchFlags=", iLastIndexOf)) {
+                        int iIntValue = decodeInteger(strDecode).intValue();
+                        intent3.mFlags = iIntValue;
+                        if ((i & 4) == 0) {
+                            intent3.mFlags = iIntValue & (-196);
+                        }
+                    } else if (str.startsWith("extendedLaunchFlags=", iLastIndexOf)) {
+                        intent3.mExtendedFlags = decodeInteger(strDecode).intValue();
+                    } else if (str.startsWith("package=", iLastIndexOf)) {
+                        intent3.mPackage = strDecode;
+                    } else if (str.startsWith("component=", iLastIndexOf)) {
+                        intent3.mComponent = ComponentName.unflattenFromString(strDecode);
+                    } else if (str.startsWith("scheme=", iLastIndexOf)) {
+                        if (z) {
+                            intent3.mData = Uri.parse(strDecode + ":");
+                        } else {
+                            strDecodeIfNeeded = strDecode;
+                        }
+                    } else if (str.startsWith("sourceBounds=", iLastIndexOf)) {
+                        intent3.mSourceBounds = Rect.unflattenFromString(strDecode);
+                    } else if (iIndexOf2 == iLastIndexOf + 3 && str.startsWith("SEL", iLastIndexOf)) {
+                        intent3 = new Intent();
+                        z = true;
+                    } else {
+                        String strDecode2 = Uri.decode(str.substring(iLastIndexOf + 2, iIndexOf));
+                        if (intent3.mExtras == null) {
+                            intent3.mExtras = new Bundle();
+                        }
+                        Bundle bundle = intent3.mExtras;
+                        if (str.startsWith("S.", iLastIndexOf)) {
+                            bundle.putString(strDecode2, strDecode);
+                        } else if (str.startsWith("B.", iLastIndexOf)) {
+                            bundle.putBoolean(strDecode2, Boolean.parseBoolean(strDecode));
+                        } else if (str.startsWith("b.", iLastIndexOf)) {
+                            bundle.putByte(strDecode2, Byte.parseByte(strDecode));
+                        } else if (str.startsWith("c.", iLastIndexOf)) {
+                            bundle.putChar(strDecode2, strDecode.charAt(0));
+                        } else if (str.startsWith("d.", iLastIndexOf)) {
+                            bundle.putDouble(strDecode2, Double.parseDouble(strDecode));
+                        } else if (str.startsWith("f.", iLastIndexOf)) {
+                            bundle.putFloat(strDecode2, Float.parseFloat(strDecode));
+                        } else if (str.startsWith("i.", iLastIndexOf)) {
+                            bundle.putInt(strDecode2, Integer.parseInt(strDecode));
+                        } else if (str.startsWith("l.", iLastIndexOf)) {
+                            bundle.putLong(strDecode2, Long.parseLong(strDecode));
+                        } else {
+                            if (!str.startsWith("s.", iLastIndexOf)) {
+                                throw new URISyntaxException(str, "unknown EXTRA type", iLastIndexOf);
+                            }
+                            bundle.putShort(strDecode2, Short.parseShort(strDecode));
+                        }
+                    }
+                    iLastIndexOf = iIndexOf2 + 1;
+                }
+            } catch (IndexOutOfBoundsException unused) {
+                i2 = iLastIndexOf;
+                throw new URISyntaxException(str, "illegal Intent URI format", i2);
+            }
+        } catch (IndexOutOfBoundsException unused2) {
+            throw new URISyntaxException(str, "illegal Intent URI format", i2);
+        }
     }
 
     public static Intent getIntentOld(String str) throws URISyntaxException {
@@ -1544,133 +1662,133 @@ public class Intent implements Parcelable, Cloneable {
 
     private static Intent getIntentOld(String str, int i) throws URISyntaxException {
         int i2;
-        String str2;
+        String strSubstring;
         boolean z;
         boolean z2;
-        int lastIndexOf = str.lastIndexOf(35);
-        if (lastIndexOf >= 0) {
-            int i3 = lastIndexOf + 1;
+        int iLastIndexOf = str.lastIndexOf(35);
+        if (iLastIndexOf >= 0) {
+            int i3 = iLastIndexOf + 1;
             if (str.regionMatches(i3, "action(", 0, 7)) {
-                int i4 = lastIndexOf + 8;
-                int indexOf = str.indexOf(41, i4);
-                str2 = str.substring(i4, indexOf);
-                i2 = indexOf + 1;
+                int i4 = iLastIndexOf + 8;
+                int iIndexOf = str.indexOf(41, i4);
+                strSubstring = str.substring(i4, iIndexOf);
+                i2 = iIndexOf + 1;
                 z = true;
             } else {
                 i2 = i3;
-                str2 = null;
+                strSubstring = null;
                 z = false;
             }
-            Intent intent = new Intent(str2);
+            Intent intent = new Intent(strSubstring);
             if (str.regionMatches(i2, "categories(", 0, 11)) {
                 int i5 = i2 + 11;
-                int indexOf2 = str.indexOf(41, i5);
-                while (i5 < indexOf2) {
-                    int indexOf3 = str.indexOf(33, i5);
-                    if (indexOf3 < 0 || indexOf3 > indexOf2) {
-                        indexOf3 = indexOf2;
+                int iIndexOf2 = str.indexOf(41, i5);
+                while (i5 < iIndexOf2) {
+                    int iIndexOf3 = str.indexOf(33, i5);
+                    if (iIndexOf3 < 0 || iIndexOf3 > iIndexOf2) {
+                        iIndexOf3 = iIndexOf2;
                     }
-                    if (i5 < indexOf3) {
-                        intent.addCategory(str.substring(i5, indexOf3));
+                    if (i5 < iIndexOf3) {
+                        intent.addCategory(str.substring(i5, iIndexOf3));
                     }
-                    i5 = indexOf3 + 1;
+                    i5 = iIndexOf3 + 1;
                 }
-                i2 = indexOf2 + 1;
+                i2 = iIndexOf2 + 1;
                 z = true;
             }
             if (str.regionMatches(i2, "type(", 0, 5)) {
                 int i6 = i2 + 5;
-                int indexOf4 = str.indexOf(41, i6);
-                intent.mType = str.substring(i6, indexOf4);
-                i2 = indexOf4 + 1;
+                int iIndexOf4 = str.indexOf(41, i6);
+                intent.mType = str.substring(i6, iIndexOf4);
+                i2 = iIndexOf4 + 1;
                 z = true;
             }
             if (str.regionMatches(i2, "launchFlags(", 0, 12)) {
                 int i7 = i2 + 12;
-                int indexOf5 = str.indexOf(41, i7);
-                int intValue = decodeInteger(str.substring(i7, indexOf5)).intValue();
-                intent.mFlags = intValue;
+                int iIndexOf5 = str.indexOf(41, i7);
+                int iIntValue = decodeInteger(str.substring(i7, iIndexOf5)).intValue();
+                intent.mFlags = iIntValue;
                 if ((i & 4) == 0) {
-                    intent.mFlags = intValue & (-196);
+                    intent.mFlags = iIntValue & (-196);
                 }
-                i2 = indexOf5 + 1;
+                i2 = iIndexOf5 + 1;
                 z = true;
             }
             if (str.regionMatches(i2, "component(", 0, 10)) {
                 int i8 = i2 + 10;
-                int indexOf6 = str.indexOf(41, i8);
-                int indexOf7 = str.indexOf(33, i8);
-                if (indexOf7 >= 0 && indexOf7 < indexOf6) {
-                    intent.mComponent = new ComponentName(str.substring(i8, indexOf7), str.substring(indexOf7 + 1, indexOf6));
+                int iIndexOf6 = str.indexOf(41, i8);
+                int iIndexOf7 = str.indexOf(33, i8);
+                if (iIndexOf7 >= 0 && iIndexOf7 < iIndexOf6) {
+                    intent.mComponent = new ComponentName(str.substring(i8, iIndexOf7), str.substring(iIndexOf7 + 1, iIndexOf6));
                 }
-                i2 = indexOf6 + 1;
+                i2 = iIndexOf6 + 1;
                 z = true;
             }
             if (str.regionMatches(i2, "extras(", 0, 7)) {
                 int i9 = i2 + 7;
-                int indexOf8 = str.indexOf(41, i9);
-                if (indexOf8 == -1) {
+                int iIndexOf8 = str.indexOf(41, i9);
+                if (iIndexOf8 == -1) {
                     throw new URISyntaxException(str, "EXTRA missing trailing ')'", i9);
                 }
-                while (i9 < indexOf8) {
-                    int indexOf9 = str.indexOf(61, i9);
+                while (i9 < iIndexOf8) {
+                    int iIndexOf9 = str.indexOf(61, i9);
                     int i10 = i9 + 1;
-                    if (indexOf9 <= i10 || i9 >= indexOf8) {
+                    if (iIndexOf9 <= i10 || i9 >= iIndexOf8) {
                         throw new URISyntaxException(str, "EXTRA missing '='", i9);
                     }
-                    char charAt = str.charAt(i9);
-                    String substring = str.substring(i10, indexOf9);
-                    int i11 = indexOf9 + 1;
-                    int indexOf10 = str.indexOf(33, i11);
-                    if (indexOf10 == -1 || indexOf10 >= indexOf8) {
-                        indexOf10 = indexOf8;
+                    char cCharAt = str.charAt(i9);
+                    String strSubstring2 = str.substring(i10, iIndexOf9);
+                    int i11 = iIndexOf9 + 1;
+                    int iIndexOf10 = str.indexOf(33, i11);
+                    if (iIndexOf10 == -1 || iIndexOf10 >= iIndexOf8) {
+                        iIndexOf10 = iIndexOf8;
                     }
-                    if (i11 >= indexOf10) {
+                    if (i11 >= iIndexOf10) {
                         throw new URISyntaxException(str, "EXTRA missing '!'", i11);
                     }
-                    String substring2 = str.substring(i11, indexOf10);
+                    String strSubstring3 = str.substring(i11, iIndexOf10);
                     if (intent.mExtras == null) {
                         intent.mExtras = new Bundle();
                     }
-                    if (charAt == 'B') {
-                        intent.mExtras.putBoolean(substring, Boolean.parseBoolean(substring2));
-                    } else if (charAt == 'S') {
-                        intent.mExtras.putString(substring, Uri.decode(substring2));
-                    } else if (charAt == 'f') {
-                        intent.mExtras.putFloat(substring, Float.parseFloat(substring2));
-                    } else if (charAt == 'i') {
-                        intent.mExtras.putInt(substring, Integer.parseInt(substring2));
-                    } else if (charAt == 'l') {
-                        intent.mExtras.putLong(substring, Long.parseLong(substring2));
-                    } else if (charAt != 's') {
-                        switch (charAt) {
+                    if (cCharAt == 'B') {
+                        intent.mExtras.putBoolean(strSubstring2, Boolean.parseBoolean(strSubstring3));
+                    } else if (cCharAt == 'S') {
+                        intent.mExtras.putString(strSubstring2, Uri.decode(strSubstring3));
+                    } else if (cCharAt == 'f') {
+                        intent.mExtras.putFloat(strSubstring2, Float.parseFloat(strSubstring3));
+                    } else if (cCharAt == 'i') {
+                        intent.mExtras.putInt(strSubstring2, Integer.parseInt(strSubstring3));
+                    } else if (cCharAt == 'l') {
+                        intent.mExtras.putLong(strSubstring2, Long.parseLong(strSubstring3));
+                    } else if (cCharAt != 's') {
+                        switch (cCharAt) {
                             case 'b':
-                                intent.mExtras.putByte(substring, Byte.parseByte(substring2));
+                                intent.mExtras.putByte(strSubstring2, Byte.parseByte(strSubstring3));
                                 break;
                             case 'c':
-                                intent.mExtras.putChar(substring, Uri.decode(substring2).charAt(0));
+                                intent.mExtras.putChar(strSubstring2, Uri.decode(strSubstring3).charAt(0));
                                 break;
                             case 'd':
                                 try {
-                                    intent.mExtras.putDouble(substring, Double.parseDouble(substring2));
+                                    intent.mExtras.putDouble(strSubstring2, Double.parseDouble(strSubstring3));
                                     break;
                                 } catch (NumberFormatException unused) {
-                                    throw new URISyntaxException(str, "EXTRA value can't be parsed", indexOf10);
+                                    throw new URISyntaxException(str, "EXTRA value can't be parsed", iIndexOf10);
                                 }
                             default:
-                                throw new URISyntaxException(str, "EXTRA has unknown type", indexOf10);
+                                throw new URISyntaxException(str, "EXTRA has unknown type", iIndexOf10);
                         }
                     } else {
-                        intent.mExtras.putShort(substring, Short.parseShort(substring2));
+                        intent.mExtras.putShort(strSubstring2, Short.parseShort(strSubstring3));
                     }
-                    char charAt2 = str.charAt(indexOf10);
-                    if (charAt2 == ')') {
+                    char cCharAt2 = str.charAt(iIndexOf10);
+                    if (cCharAt2 == ')') {
                         z2 = true;
                     } else {
-                        if (charAt2 != '!') {
-                            throw new URISyntaxException(str, "EXTRA missing '!'", indexOf10);
+                        if (cCharAt2 != '!') {
+                            throw new URISyntaxException(str, "EXTRA missing '!'", iIndexOf10);
                         }
-                        i9 = indexOf10 + 1;
+                        i9 = iIndexOf10 + 1;
                     }
                 }
                 z2 = true;
@@ -1678,7 +1796,7 @@ public class Intent implements Parcelable, Cloneable {
                 z2 = z;
             }
             if (z2) {
-                intent.mData = Uri.parse(str.substring(0, lastIndexOf));
+                intent.mData = Uri.parse(str.substring(0, iLastIndexOf));
             } else {
                 intent.mData = Uri.parse(str);
             }
@@ -1716,7 +1834,7 @@ public class Intent implements Parcelable, Cloneable {
     public static android.content.Intent parseCommandArgs(android.os.ShellCommand r18, android.content.Intent.CommandOptionHandler r19) throws java.net.URISyntaxException {
         /*
             Method dump skipped, instructions count: 2434
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: android.content.Intent.parseCommandArgs(android.os.ShellCommand, android.content.Intent$CommandOptionHandler):android.content.Intent");
     }
@@ -2162,9 +2280,9 @@ public class Intent implements Parcelable, Cloneable {
         if (componentName != null) {
             return componentName;
         }
-        ResolveInfo resolveActivity = packageManager.resolveActivity(this, 65536);
-        if (resolveActivity != null) {
-            return new ComponentName(resolveActivity.activityInfo.applicationInfo.packageName, resolveActivity.activityInfo.name);
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(this, 65536);
+        if (resolveInfoResolveActivity != null) {
+            return new ComponentName(resolveInfoResolveActivity.activityInfo.applicationInfo.packageName, resolveInfoResolveActivity.activityInfo.name);
         }
         return null;
     }
@@ -2178,9 +2296,9 @@ public class Intent implements Parcelable, Cloneable {
                 return null;
             }
         }
-        ResolveInfo resolveActivity = packageManager.resolveActivity(this, i | 65536);
-        if (resolveActivity != null) {
-            return resolveActivity.activityInfo;
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(this, i | 65536);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.activityInfo;
         }
         return null;
     }
@@ -2190,13 +2308,13 @@ public class Intent implements Parcelable, Cloneable {
         if (componentName != null) {
             return componentName;
         }
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(this, i);
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(this, i);
         ComponentName componentName2 = null;
-        if (queryIntentServices == null) {
+        if (listQueryIntentServices == null) {
             return null;
         }
-        for (int i2 = 0; i2 < queryIntentServices.size(); i2++) {
-            ResolveInfo resolveInfo = queryIntentServices.get(i2);
+        for (int i2 = 0; i2 < listQueryIntentServices.size(); i2++) {
+            ResolveInfo resolveInfo = listQueryIntentServices.get(i2);
             if ((resolveInfo.serviceInfo.applicationInfo.flags & 1) != 0) {
                 ComponentName componentName3 = new ComponentName(resolveInfo.serviceInfo.applicationInfo.packageName, resolveInfo.serviceInfo.name);
                 if (componentName2 != null) {
@@ -2626,6 +2744,10 @@ public class Intent implements Parcelable, Cloneable {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:83:0x00f4  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public int fillIn(Intent intent, int i) {
         int i2;
         int i3;
@@ -2688,19 +2810,17 @@ public class Intent implements Parcelable, Cloneable {
         if (this.mExtras == null) {
             if (intent.mExtras != null) {
                 this.mExtras = new Bundle(intent.mExtras);
+            } else {
+                z = z2;
             }
-            z = z2;
-        } else {
-            if (intent.mExtras != null) {
-                try {
-                    Bundle bundle = new Bundle(intent.mExtras);
-                    bundle.putAll(this.mExtras);
-                    this.mExtras = bundle;
-                } catch (RuntimeException e) {
-                    Log.w(TAG, "Failure filling in extras", e);
-                }
+        } else if (intent.mExtras != null) {
+            try {
+                Bundle bundle = new Bundle(intent.mExtras);
+                bundle.putAll(this.mExtras);
+                this.mExtras = bundle;
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Failure filling in extras", e);
             }
-            z = z2;
         }
         fillInCreatorTokenInfo(intent.mCreatorTokenInfo, i2);
         if (z && this.mContentUserHint == -2 && (i3 = intent.mContentUserHint) != -2) {
@@ -2776,29 +2896,29 @@ public class Intent implements Parcelable, Cloneable {
 
     public int filterHashCode() {
         String str = this.mAction;
-        int hashCode = str != null ? str.hashCode() : 0;
+        int iHashCode = str != null ? str.hashCode() : 0;
         Uri uri = this.mData;
         if (uri != null) {
-            hashCode += uri.hashCode();
+            iHashCode += uri.hashCode();
         }
         String str2 = this.mType;
         if (str2 != null) {
-            hashCode += str2.hashCode();
+            iHashCode += str2.hashCode();
         }
         String str3 = this.mIdentifier;
         if (str3 != null) {
-            hashCode += str3.hashCode();
+            iHashCode += str3.hashCode();
         }
         String str4 = this.mPackage;
         if (str4 != null) {
-            hashCode += str4.hashCode();
+            iHashCode += str4.hashCode();
         }
         ComponentName componentName = this.mComponent;
         if (componentName != null) {
-            hashCode += componentName.hashCode();
+            iHashCode += componentName.hashCode();
         }
         ArraySet<String> arraySet = this.mCategories;
-        return arraySet != null ? hashCode + arraySet.hashCode() : hashCode;
+        return arraySet != null ? iHashCode + arraySet.hashCode() : iHashCode;
     }
 
     public String toString() {
@@ -2999,9 +3119,9 @@ public class Intent implements Parcelable, Cloneable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, boolean z, boolean z2, boolean z3, boolean z4) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         dumpDebugWithoutFieldId(protoOutputStream, z, z2, z3, z4);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private void dumpDebugWithoutFieldId(ProtoOutputStream protoOutputStream, boolean z, boolean z2, boolean z3, boolean z4) {
@@ -3072,7 +3192,7 @@ public class Intent implements Parcelable, Cloneable {
 
     public String toUri(int i) {
         StringBuilder sb = new StringBuilder(128);
-        String str = null;
+        String strSubstring = null;
         if ((i & 2) != 0) {
             if (this.mPackage == null) {
                 throw new IllegalArgumentException("Intent must include an explicit package name to build an android-app: " + this);
@@ -3081,60 +3201,60 @@ public class Intent implements Parcelable, Cloneable {
             sb.append(Uri.encode(this.mPackage));
             Uri uri = this.mData;
             if (uri != null) {
-                String encodeIfNotEncoded = Uri.encodeIfNotEncoded(uri.getScheme(), null);
-                if (encodeIfNotEncoded != null) {
+                String strEncodeIfNotEncoded = Uri.encodeIfNotEncoded(uri.getScheme(), null);
+                if (strEncodeIfNotEncoded != null) {
                     sb.append('/');
-                    sb.append(encodeIfNotEncoded);
-                    String encodeIfNotEncoded2 = Uri.encodeIfNotEncoded(this.mData.getEncodedAuthority(), null);
-                    if (encodeIfNotEncoded2 != null) {
+                    sb.append(strEncodeIfNotEncoded);
+                    String strEncodeIfNotEncoded2 = Uri.encodeIfNotEncoded(this.mData.getEncodedAuthority(), null);
+                    if (strEncodeIfNotEncoded2 != null) {
                         sb.append('/');
-                        sb.append(encodeIfNotEncoded2);
-                        String encodeIfNotEncoded3 = Uri.encodeIfNotEncoded(this.mData.getEncodedPath(), "/");
-                        if (encodeIfNotEncoded3 != null) {
-                            sb.append(encodeIfNotEncoded3);
+                        sb.append(strEncodeIfNotEncoded2);
+                        String strEncodeIfNotEncoded3 = Uri.encodeIfNotEncoded(this.mData.getEncodedPath(), "/");
+                        if (strEncodeIfNotEncoded3 != null) {
+                            sb.append(strEncodeIfNotEncoded3);
                         }
-                        String encodeIfNotEncoded4 = Uri.encodeIfNotEncoded(this.mData.getEncodedQuery(), null);
-                        if (encodeIfNotEncoded4 != null) {
+                        String strEncodeIfNotEncoded4 = Uri.encodeIfNotEncoded(this.mData.getEncodedQuery(), null);
+                        if (strEncodeIfNotEncoded4 != null) {
                             sb.append('?');
-                            sb.append(encodeIfNotEncoded4);
+                            sb.append(strEncodeIfNotEncoded4);
                         }
-                        String encodeIfNotEncoded5 = Uri.encodeIfNotEncoded(this.mData.getEncodedFragment(), null);
-                        if (encodeIfNotEncoded5 != null) {
+                        String strEncodeIfNotEncoded5 = Uri.encodeIfNotEncoded(this.mData.getEncodedFragment(), null);
+                        if (strEncodeIfNotEncoded5 != null) {
                             sb.append('#');
-                            sb.append(encodeIfNotEncoded5);
+                            sb.append(strEncodeIfNotEncoded5);
                         }
                     }
                 }
-                str = encodeIfNotEncoded;
+                strSubstring = strEncodeIfNotEncoded;
             }
-            toUriFragment(sb, null, str == null ? ACTION_MAIN : "android.intent.action.VIEW", this.mPackage, i);
+            toUriFragment(sb, null, strSubstring == null ? ACTION_MAIN : "android.intent.action.VIEW", this.mPackage, i);
             return sb.toString();
         }
         Uri uri2 = this.mData;
         if (uri2 != null) {
-            String uri3 = uri2.toString();
+            String string = uri2.toString();
             if ((i & 1) != 0) {
-                int length = uri3.length();
+                int length = string.length();
                 int i2 = 0;
                 while (true) {
                     if (i2 >= length) {
                         break;
                     }
-                    char charAt = uri3.charAt(i2);
-                    if ((charAt >= 'a' && charAt <= 'z') || ((charAt >= 'A' && charAt <= 'Z') || ((charAt >= '0' && charAt <= '9') || charAt == '.' || charAt == '-' || charAt == '+'))) {
+                    char cCharAt = string.charAt(i2);
+                    if ((cCharAt >= 'a' && cCharAt <= 'z') || ((cCharAt >= 'A' && cCharAt <= 'Z') || ((cCharAt >= '0' && cCharAt <= '9') || cCharAt == '.' || cCharAt == '-' || cCharAt == '+'))) {
                         i2++;
-                    } else if (charAt == ':' && i2 > 0) {
-                        str = uri3.substring(0, i2);
+                    } else if (cCharAt == ':' && i2 > 0) {
+                        strSubstring = string.substring(0, i2);
                         sb.append("intent:");
-                        uri3 = uri3.substring(i2 + 1);
+                        string = string.substring(i2 + 1);
                     }
                 }
             }
-            sb.append(uri3);
+            sb.append(string);
         } else if ((i & 1) != 0) {
             sb.append("intent:");
         }
-        toUriFragment(sb, str, "android.intent.action.VIEW", null, i);
+        toUriFragment(sb, strSubstring, "android.intent.action.VIEW", null, i);
         return sb.toString();
     }
 
@@ -3343,102 +3463,48 @@ public class Intent implements Parcelable, Cloneable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0057 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x004b A[SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void collectNestedIntentKeysRecur(java.util.Set<android.content.Intent> r9, boolean r10) {
-        /*
-            r8 = this;
-            android.os.Bundle r0 = r8.mExtras
-            r1 = 0
-            r2 = 4
-            r3 = 0
-            if (r0 == 0) goto L6b
-            if (r10 != 0) goto Lf
-            boolean r0 = r0.isParcelled()
-            if (r0 != 0) goto L6b
-        Lf:
-            android.os.Bundle r0 = r8.mExtras
-            boolean r0 = r0.isEmpty()
-            if (r0 != 0) goto L6b
-            r8.addExtendedFlags(r2)
-            android.os.Bundle r0 = r8.mExtras
-            java.util.Set r0 = r0.keySet()
-            java.util.Iterator r0 = r0.iterator()
-        L24:
-            boolean r4 = r0.hasNext()
-            if (r4 == 0) goto L6b
-            java.lang.Object r4 = r0.next()
-            java.lang.String r4 = (java.lang.String) r4
-            if (r10 != 0) goto L3f
-            android.os.Bundle r5 = r8.mExtras     // Catch: android.os.BadParcelableException -> L46
-            boolean r5 = r5.isValueParceled(r4)     // Catch: android.os.BadParcelableException -> L46
-            if (r5 != 0) goto L3b
-            goto L3f
-        L3b:
-            r8.removeExtendedFlags(r2)     // Catch: android.os.BadParcelableException -> L46
-            goto L46
-        L3f:
-            android.os.Bundle r5 = r8.mExtras     // Catch: android.os.BadParcelableException -> L46
-            java.lang.Object r5 = r5.get(r4)     // Catch: android.os.BadParcelableException -> L46
-            goto L47
-        L46:
-            r5 = r3
-        L47:
-            boolean r6 = r5 instanceof android.content.Intent
-            if (r6 == 0) goto L57
-            android.content.Intent r5 = (android.content.Intent) r5
-            android.content.Intent$NestedIntentKey r6 = new android.content.Intent$NestedIntentKey
-            r7 = 1
-            r6.<init>(r7, r4, r1)
-            r8.handleNestedIntent(r5, r9, r6, r10)
-            goto L24
-        L57:
-            boolean r6 = r5 instanceof android.os.Parcelable[]
-            if (r6 == 0) goto L61
-            android.os.Parcelable[] r5 = (android.os.Parcelable[]) r5
-            r8.handleParcelableArray(r5, r4, r9, r10)
-            goto L24
-        L61:
-            boolean r6 = r5 instanceof java.util.ArrayList
-            if (r6 == 0) goto L24
-            java.util.ArrayList r5 = (java.util.ArrayList) r5
-            r8.handleParcelableList(r5, r4, r9, r10)
-            goto L24
-        L6b:
-            android.os.Bundle r0 = r8.mExtras
-            if (r0 == 0) goto L75
-            boolean r0 = r0.isDefinitelyEmpty()
-            if (r0 == 0) goto L78
-        L75:
-            r8.addExtendedFlags(r2)
-        L78:
-            android.content.ClipData r0 = r8.mClipData
-            if (r0 == 0) goto La1
-        L7c:
-            android.content.ClipData r0 = r8.mClipData
-            int r0 = r0.getItemCount()
-            if (r1 >= r0) goto La1
-            android.content.ClipData r0 = r8.mClipData
-            android.content.ClipData$Item r0 = r0.getItemAt(r1)
-            android.content.Intent r0 = r0.mIntent
-            if (r0 == 0) goto L9e
-            boolean r2 = r9.contains(r0)
-            if (r2 != 0) goto L9e
-            android.content.Intent$NestedIntentKey r2 = new android.content.Intent$NestedIntentKey
-            r4 = 8
-            r2.<init>(r4, r3, r1)
-            r8.handleNestedIntent(r0, r9, r2, r10)
-        L9e:
-            int r1 = r1 + 1
-            goto L7c
-        La1:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.Intent.collectNestedIntentKeysRecur(java.util.Set, boolean):void");
+    /* JADX WARN: Multi-variable type inference failed */
+    private void collectNestedIntentKeysRecur(Set<Intent> set, boolean z) {
+        Object obj;
+        Bundle bundle = this.mExtras;
+        int i = 0;
+        Object[] objArr = 0;
+        Object[] objArr2 = 0;
+        if (bundle != null && ((z || !bundle.isParcelled()) && !this.mExtras.isEmpty())) {
+            addExtendedFlags(4);
+            for (String str : this.mExtras.keySet()) {
+                if (!z) {
+                    if (!this.mExtras.isValueParceled(str)) {
+                        obj = this.mExtras.get(str);
+                    } else {
+                        removeExtendedFlags(4);
+                        obj = null;
+                    }
+                } else {
+                    obj = this.mExtras.get(str);
+                }
+                if (obj instanceof Intent) {
+                    handleNestedIntent((Intent) obj, set, new NestedIntentKey(1, str, i), z);
+                } else if (obj instanceof Parcelable[]) {
+                    handleParcelableArray((Parcelable[]) obj, str, set, z);
+                } else if (obj instanceof ArrayList) {
+                    handleParcelableList((ArrayList) obj, str, set, z);
+                }
+            }
+        }
+        Bundle bundle2 = this.mExtras;
+        if (bundle2 == null || bundle2.isDefinitelyEmpty()) {
+            addExtendedFlags(4);
+        }
+        if (this.mClipData != null) {
+            while (i < this.mClipData.getItemCount()) {
+                Intent intent = this.mClipData.getItemAt(i).mIntent;
+                if (intent != null && !set.contains(intent)) {
+                    handleNestedIntent(intent, set, new NestedIntentKey(8, objArr2 == true ? 1 : 0, i), z);
+                }
+                i++;
+            }
+        }
     }
 
     private void handleNestedIntent(Intent intent, Set<Intent> set, NestedIntentKey nestedIntentKey, boolean z) {
@@ -3519,12 +3585,12 @@ public class Intent implements Parcelable, Cloneable {
         int size = this.mCreatorTokenInfo.mNestedIntentKeys.size();
         for (int i = 0; i < size; i++) {
             NestedIntentKey nestedIntentKey = (NestedIntentKey) this.mCreatorTokenInfo.mNestedIntentKeys.valueAt(i);
-            Intent extractIntentFromKey = extractIntentFromKey(nestedIntentKey);
-            if (extractIntentFromKey != null) {
-                consumer.accept(extractIntentFromKey);
-                extractIntentFromKey.forEachNestedCreatorToken(consumer);
+            Intent intentExtractIntentFromKey = extractIntentFromKey(nestedIntentKey);
+            if (intentExtractIntentFromKey != null) {
+                consumer.accept(intentExtractIntentFromKey);
+                intentExtractIntentFromKey.forEachNestedCreatorToken(consumer);
                 if (consumer2 != null) {
-                    consumer2.accept(extractIntentFromKey);
+                    consumer2.accept(intentExtractIntentFromKey);
                 }
             } else {
                 Log.w(TAG, getLogMessageForKey(nestedIntentKey));
@@ -3686,10 +3752,10 @@ public class Intent implements Parcelable, Cloneable {
         if (parcel.readInt() != 0) {
             this.mSourceBounds = Rect.CREATOR.createFromParcel(parcel);
         }
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
+        int i = parcel.readInt();
+        if (i > 0) {
             this.mCategories = new ArraySet<>();
-            for (int i = 0; i < readInt; i++) {
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mCategories.add(parcel.readString8().intern());
             }
         } else {
@@ -3710,10 +3776,10 @@ public class Intent implements Parcelable, Cloneable {
             CreatorTokenInfo creatorTokenInfo = new CreatorTokenInfo();
             this.mCreatorTokenInfo = creatorTokenInfo;
             creatorTokenInfo.mCreatorToken = parcel.readStrongBinder();
-            int readInt2 = parcel.readInt();
-            if (readInt2 > 0) {
-                this.mCreatorTokenInfo.mNestedIntentKeys = new ArraySet(readInt2);
-                for (int i2 = 0; i2 < readInt2; i2++) {
+            int i3 = parcel.readInt();
+            if (i3 > 0) {
+                this.mCreatorTokenInfo.mNestedIntentKeys = new ArraySet(i3);
+                for (int i4 = 0; i4 < i3; i4++) {
                     this.mCreatorTokenInfo.mNestedIntentKeys.append(new NestedIntentKey(parcel.readInt(), parcel.readString8(), parcel.readInt()));
                 }
             }
@@ -3726,17 +3792,17 @@ public class Intent implements Parcelable, Cloneable {
 
     public static Intent parseIntent(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet) throws XmlPullParserException, IOException {
         Intent intent = new Intent();
-        TypedArray obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.Intent);
-        intent.setAction(obtainAttributes.getString(2));
-        String string = obtainAttributes.getString(3);
-        intent.setDataAndType(string != null ? Uri.parse(string) : null, obtainAttributes.getString(1));
-        intent.setIdentifier(obtainAttributes.getString(5));
-        String string2 = obtainAttributes.getString(0);
-        String string3 = obtainAttributes.getString(4);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.Intent);
+        intent.setAction(typedArrayObtainAttributes.getString(2));
+        String string = typedArrayObtainAttributes.getString(3);
+        intent.setDataAndType(string != null ? Uri.parse(string) : null, typedArrayObtainAttributes.getString(1));
+        intent.setIdentifier(typedArrayObtainAttributes.getString(5));
+        String string2 = typedArrayObtainAttributes.getString(0);
+        String string3 = typedArrayObtainAttributes.getString(4);
         if (string2 != null && string3 != null) {
             intent.setComponent(new ComponentName(string2, string3));
         }
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         int depth = xmlPullParser.getDepth();
         while (true) {
             int next = xmlPullParser.next();
@@ -3746,9 +3812,9 @@ public class Intent implements Parcelable, Cloneable {
             if (next != 3 && next != 4) {
                 String name = xmlPullParser.getName();
                 if (name.equals("categories")) {
-                    TypedArray obtainAttributes2 = resources.obtainAttributes(attributeSet, R.styleable.IntentCategory);
-                    String string4 = obtainAttributes2.getString(0);
-                    obtainAttributes2.recycle();
+                    TypedArray typedArrayObtainAttributes2 = resources.obtainAttributes(attributeSet, R.styleable.IntentCategory);
+                    String string4 = typedArrayObtainAttributes2.getString(0);
+                    typedArrayObtainAttributes2.recycle();
                     if (string4 != null) {
                         intent.addCategory(string4);
                     }
@@ -3767,7 +3833,7 @@ public class Intent implements Parcelable, Cloneable {
         return intent;
     }
 
-    public void saveToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void saveToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         String str;
         String str2 = this.mAction;
         if (str2 != null) {
@@ -3802,7 +3868,7 @@ public class Intent implements Parcelable, Cloneable {
         }
     }
 
-    public static Intent restoreFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public static Intent restoreFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         Intent intent = new Intent();
         int depth = xmlPullParser.getDepth();
         for (int attributeCount = xmlPullParser.getAttributeCount() - 1; attributeCount >= 0; attributeCount--) {
@@ -3851,24 +3917,24 @@ public class Intent implements Parcelable, Cloneable {
             return null;
         }
         String lowerCase = str.trim().toLowerCase(Locale.ROOT);
-        int indexOf = lowerCase.indexOf(59);
-        return indexOf != -1 ? lowerCase.substring(0, indexOf) : lowerCase;
+        int iIndexOf = lowerCase.indexOf(59);
+        return iIndexOf != -1 ? lowerCase.substring(0, iIndexOf) : lowerCase;
     }
 
     public void prepareToLeaveProcess(Context context) {
-        boolean equals;
+        boolean zEquals;
         ComponentName componentName = this.mComponent;
         boolean z = true;
         if (componentName != null) {
-            equals = Objects.equals(componentName.getPackageName(), context.getPackageName());
+            zEquals = Objects.equals(componentName.getPackageName(), context.getPackageName());
         } else {
             String str = this.mPackage;
             if (str != null) {
-                equals = Objects.equals(str, context.getPackageName());
+                zEquals = Objects.equals(str, context.getPackageName());
             }
             prepareToLeaveProcess(z);
         }
-        z = true ^ equals;
+        z = true ^ zEquals;
         prepareToLeaveProcess(z);
     }
 
@@ -3877,20 +3943,193 @@ public class Intent implements Parcelable, Cloneable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:78:0x0128, code lost:
-    
-        if (r1.equals(android.content.Intent.ACTION_PACKAGE_NEEDS_INTEGRITY_VERIFICATION) == false) goto L27;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x005b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void prepareToLeaveProcess(boolean r8, boolean r9) {
-        /*
-            Method dump skipped, instructions count: 618
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.Intent.prepareToLeaveProcess(boolean, boolean):void");
+    void prepareToLeaveProcess(boolean z, boolean z2) {
+        ArraySet<String> arraySet;
+        Uri uri;
+        char c = 0;
+        setAllowFds(false);
+        Intent intent = this.mSelector;
+        if (intent != null) {
+            intent.prepareToLeaveProcess(z, false);
+        }
+        ClipData clipData = this.mClipData;
+        if (clipData != null) {
+            clipData.prepareToLeaveProcess(z, getFlags());
+        }
+        Intent intent2 = this.mOriginalIntent;
+        if (intent2 != null) {
+            intent2.prepareToLeaveProcess(z, false);
+        }
+        Bundle bundle = this.mExtras;
+        if (bundle != null && !bundle.isParcelled()) {
+            Object obj = this.mExtras.get("android.intent.extra.INTENT");
+            if (obj instanceof Intent) {
+                ((Intent) obj).prepareToLeaveProcess(z, false);
+            }
+        }
+        if (this.mAction != null && this.mData != null && StrictMode.vmFileUriExposureEnabled() && z) {
+            String str = this.mAction;
+            str.hashCode();
+            switch (str.hashCode()) {
+                case -2015721043:
+                    if (!str.equals(ACTION_PACKAGE_NEEDS_INTEGRITY_VERIFICATION)) {
+                        c = 65535;
+                        break;
+                    }
+                    break;
+                case -1823790459:
+                    if (str.equals(ACTION_MEDIA_SHARED)) {
+                        c = 1;
+                        break;
+                    }
+                    break;
+                case -1665311200:
+                    if (str.equals(ACTION_MEDIA_REMOVED)) {
+                        c = 2;
+                        break;
+                    }
+                    break;
+                case -1514214344:
+                    if (str.equals(ACTION_MEDIA_MOUNTED)) {
+                        c = 3;
+                        break;
+                    }
+                    break;
+                case -1142424621:
+                    if (str.equals(ACTION_MEDIA_SCANNER_FINISHED)) {
+                        c = 4;
+                        break;
+                    }
+                    break;
+                case -963871873:
+                    if (str.equals(ACTION_MEDIA_UNMOUNTED)) {
+                        c = 5;
+                        break;
+                    }
+                    break;
+                case -625887599:
+                    if (str.equals(ACTION_MEDIA_EJECT)) {
+                        c = 6;
+                        break;
+                    }
+                    break;
+                case 257177710:
+                    if (str.equals(ACTION_MEDIA_NOFS)) {
+                        c = 7;
+                        break;
+                    }
+                    break;
+                case 410719838:
+                    if (str.equals(ACTION_MEDIA_UNSHARED)) {
+                        c = '\b';
+                        break;
+                    }
+                    break;
+                case 582421979:
+                    if (str.equals(ACTION_PACKAGE_NEEDS_VERIFICATION)) {
+                        c = '\t';
+                        break;
+                    }
+                    break;
+                case 852070077:
+                    if (str.equals(ACTION_MEDIA_SCANNER_SCAN_FILE)) {
+                        c = '\n';
+                        break;
+                    }
+                    break;
+                case 1412829408:
+                    if (str.equals(ACTION_MEDIA_SCANNER_STARTED)) {
+                        c = 11;
+                        break;
+                    }
+                    break;
+                case 1431947322:
+                    if (str.equals(ACTION_MEDIA_UNMOUNTABLE)) {
+                        c = '\f';
+                        break;
+                    }
+                    break;
+                case 1599438242:
+                    if (str.equals(ACTION_PACKAGE_ENABLE_ROLLBACK)) {
+                        c = '\r';
+                        break;
+                    }
+                    break;
+                case 1920444806:
+                    if (str.equals(ACTION_PACKAGE_VERIFIED)) {
+                        c = 14;
+                        break;
+                    }
+                    break;
+                case 1964681210:
+                    if (str.equals(ACTION_MEDIA_CHECKING)) {
+                        c = 15;
+                        break;
+                    }
+                    break;
+                case 2045140818:
+                    if (str.equals(ACTION_MEDIA_BAD_REMOVAL)) {
+                        c = 16;
+                        break;
+                    }
+                    break;
+            }
+            switch (c) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case '\b':
+                case '\t':
+                case '\n':
+                case 11:
+                case '\f':
+                case '\r':
+                case 14:
+                case 15:
+                case 16:
+                    break;
+                default:
+                    this.mData.checkFileUriExposed("Intent.getData()");
+                    break;
+            }
+        }
+        if (this.mAction != null && this.mData != null && StrictMode.vmContentUriWithoutPermissionEnabled() && z) {
+            String str2 = this.mAction;
+            str2.hashCode();
+            if (!str2.equals(ContactsContract.QuickContact.ACTION_QUICK_CONTACT) && !str2.equals(ACTION_PROVIDER_CHANGED)) {
+                this.mData.checkContentUriWithoutPermission("Intent.getData()", getFlags());
+            }
+        }
+        if (ACTION_MEDIA_SCANNER_SCAN_FILE.equals(this.mAction) && (uri = this.mData) != null && "file".equals(uri.getScheme()) && z) {
+            StorageManager storageManager = (StorageManager) AppGlobals.getInitialApplication().getSystemService(StorageManager.class);
+            File file = new File(this.mData.getPath());
+            File fileTranslateAppToSystem = storageManager.translateAppToSystem(file, Process.myPid(), Process.myUid());
+            if (!file.equals(fileTranslateAppToSystem)) {
+                Log.v(TAG, "Translated " + file + " to " + fileTranslateAppToSystem);
+                this.mData = Uri.fromFile(fileTranslateAppToSystem);
+            }
+        }
+        if (StrictMode.vmUnsafeIntentLaunchEnabled()) {
+            int i = this.mLocalFlags;
+            if (((i & 2) != 0 && (i & 36) == 0) || (i & 8) != 0) {
+                StrictMode.onUnsafeIntentLaunch(this);
+            } else if ((i & 16) != 0 && ((arraySet = this.mCategories) == null || !arraySet.contains(CATEGORY_BROWSABLE) || this.mComponent != null)) {
+                StrictMode.onUnsafeIntentLaunch(this);
+            }
+        }
+        if (z2) {
+            collectExtraIntentKeys();
+        }
     }
 
     public void prepareToEnterProcess(boolean z, AttributionSource attributionSource) {
@@ -3997,20 +4236,87 @@ public class Intent implements Parcelable, Cloneable {
         return migrateExtraStreamToClipData(AppGlobals.getInitialApplication());
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(7:(2:58|59)|(5:61|63|64|(2:(4:68|(3:70|71|72)(1:74)|73|66)|75)|77)|79|63|64|(0)|77) */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x003c A[Catch: ClassCastException -> 0x004d, LOOP:1: B:66:0x003c->B:73:0x004a, LOOP_START, PHI: r0 r2
-      0x003c: PHI (r0v5 boolean) = (r0v2 boolean), (r0v6 boolean) binds: [B:65:0x003a, B:73:0x004a] A[DONT_GENERATE, DONT_INLINE]
-      0x003c: PHI (r2v1 int) = (r2v0 int), (r2v2 int) binds: [B:65:0x003a, B:73:0x004a] A[DONT_GENERATE, DONT_INLINE], TryCatch #2 {ClassCastException -> 0x004d, blocks: (B:64:0x0034, B:66:0x003c, B:68:0x003f, B:70:0x0045), top: B:63:0x0034 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean migrateExtraStreamToClipData(android.content.Context r10) {
-        /*
-            Method dump skipped, instructions count: 297
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.Intent.migrateExtraStreamToClipData(android.content.Context):boolean");
+    public boolean migrateExtraStreamToClipData(Context context) throws IOException {
+        Intent intent;
+        Uri uri;
+        Bundle bundle = this.mExtras;
+        if ((bundle != null && bundle.isParcelled()) || getClipData() != null) {
+            return false;
+        }
+        String action = getAction();
+        if (ACTION_CHOOSER.equals(action)) {
+            try {
+                intent = (Intent) getParcelableExtra("android.intent.extra.INTENT", Intent.class);
+            } catch (ClassCastException unused) {
+            }
+            boolean zMigrateExtraStreamToClipData = intent != null ? intent.migrateExtraStreamToClipData(context) : false;
+            try {
+                Parcelable[] parcelableArrayExtra = getParcelableArrayExtra(EXTRA_INITIAL_INTENTS);
+                if (parcelableArrayExtra != null) {
+                    for (Parcelable parcelable : parcelableArrayExtra) {
+                        Intent intent2 = (Intent) parcelable;
+                        if (intent2 != null) {
+                            zMigrateExtraStreamToClipData |= intent2.migrateExtraStreamToClipData(context);
+                        }
+                    }
+                }
+            } catch (ClassCastException unused2) {
+            }
+            return zMigrateExtraStreamToClipData;
+        }
+        try {
+            if (ACTION_SEND.equals(action)) {
+                Uri uri2 = (Uri) getParcelableExtra(EXTRA_STREAM, Uri.class);
+                CharSequence charSequenceExtra = getCharSequenceExtra(EXTRA_TEXT);
+                String stringExtra = getStringExtra(EXTRA_HTML_TEXT);
+                if (uri2 != null || charSequenceExtra != null || stringExtra != null) {
+                    setClipData(new ClipData(null, new String[]{getType()}, new ClipData.Item(charSequenceExtra, stringExtra, null, uri2)));
+                    if (uri2 != null) {
+                        logCounterIfFlagsMissing(1, "intents.value_explicit_uri_grant_for_send_action");
+                        addFlags(1);
+                    }
+                    return true;
+                }
+            } else if (ACTION_SEND_MULTIPLE.equals(action)) {
+                ArrayList parcelableArrayListExtra = getParcelableArrayListExtra(EXTRA_STREAM, Uri.class);
+                ArrayList<CharSequence> charSequenceArrayListExtra = getCharSequenceArrayListExtra(EXTRA_TEXT);
+                ArrayList<String> stringArrayListExtra = getStringArrayListExtra(EXTRA_HTML_TEXT);
+                int size = parcelableArrayListExtra != null ? parcelableArrayListExtra.size() : -1;
+                if (charSequenceArrayListExtra != null) {
+                    if (size >= 0 && size != charSequenceArrayListExtra.size()) {
+                        return false;
+                    }
+                    size = charSequenceArrayListExtra.size();
+                }
+                if (stringArrayListExtra != null) {
+                    if (size >= 0 && size != stringArrayListExtra.size()) {
+                        return false;
+                    }
+                    size = stringArrayListExtra.size();
+                }
+                if (size > 0) {
+                    ClipData clipData = new ClipData(null, new String[]{getType()}, makeClipItem(parcelableArrayListExtra, charSequenceArrayListExtra, stringArrayListExtra, 0));
+                    for (int i = 1; i < size; i++) {
+                        clipData.addItem(makeClipItem(parcelableArrayListExtra, charSequenceArrayListExtra, stringArrayListExtra, i));
+                    }
+                    setClipData(clipData);
+                    if (parcelableArrayListExtra != null) {
+                        logCounterIfFlagsMissing(1, "intents.value_explicit_uri_grant_for_send_multiple_action");
+                        addFlags(1);
+                    }
+                    return true;
+                }
+            } else if (isImageCaptureIntent() && (uri = (Uri) getParcelableExtra("output", Uri.class)) != null) {
+                Uri uriMaybeConvertFileToContentUri = maybeConvertFileToContentUri(context, uri);
+                putExtra("output", uriMaybeConvertFileToContentUri);
+                setClipData(ClipData.newRawUri("", uriMaybeConvertFileToContentUri));
+                logCounterIfFlagsMissing(3, "intents.value_explicit_uri_grant_for_image_capture_action");
+                addFlags(3);
+                return true;
+            }
+        } catch (ClassCastException unused3) {
+        }
+        return false;
     }
 
     private void logCounterIfFlagsMissing(int i, String str) {
@@ -4019,7 +4325,7 @@ public class Intent implements Parcelable, Cloneable {
         }
     }
 
-    private Uri maybeConvertFileToContentUri(Context context, Uri uri) {
+    private Uri maybeConvertFileToContentUri(Context context, Uri uri) throws IOException {
         if ("file".equals(uri.getScheme()) && context.getApplicationInfo().targetSdkVersion < 30) {
             File file = new File(uri.getPath());
             try {

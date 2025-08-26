@@ -2,15 +2,19 @@ package com.android.systemui.statusbar.notification.collection.notifcollection;
 
 import android.os.Handler;
 import android.util.ArrayMap;
+import android.util.IndentingPrintWriter;
 import android.util.Log;
 import com.android.systemui.Dumpable;
 import com.android.systemui.statusbar.notification.collection.NotifCollection$$ExternalSyntheticLambda4;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender;
+import com.android.systemui.util.DumpUtilsKt;
+import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class SelfTrackingLifetimeExtender implements NotifLifetimeExtender, Dumpable {
     public static final int $stable = 8;
@@ -42,63 +46,33 @@ public abstract class SelfTrackingLifetimeExtender implements NotifLifetimeExten
         onCanceledLifetimeExtension(notificationEntry);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0049, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0049, code lost:
     
         r1 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0052, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0052, code lost:
     
         throw r1;
      */
     @Override // com.android.systemui.Dumpable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dump(java.io.PrintWriter r2, java.lang.String[] r3) {
-        /*
-            r1 = this;
-            android.util.IndentingPrintWriter r2 = com.android.systemui.util.DumpUtilsKt.asIndenting(r2)
-            java.lang.String r3 = "LifetimeExtender"
-            java.lang.String r0 = r1.name
-            com.android.systemui.util.DumpUtilsKt.println(r2, r3, r0)
-            r2.increaseIndent()
-            java.lang.String r3 = "mEntriesExtended"
-            android.util.ArrayMap<java.lang.String, com.android.systemui.statusbar.notification.collection.NotificationEntry> r1 = r1.mEntriesExtended     // Catch: java.lang.Throwable -> L49
-            java.util.Set r1 = r1.keySet()     // Catch: java.lang.Throwable -> L49
-            java.util.Collection r1 = (java.util.Collection) r1     // Catch: java.lang.Throwable -> L49
-            java.io.PrintWriter r3 = r2.append(r3)     // Catch: java.lang.Throwable -> L49
-            java.lang.String r0 = ": "
-            java.io.PrintWriter r3 = r3.append(r0)     // Catch: java.lang.Throwable -> L49
-            int r0 = r1.size()     // Catch: java.lang.Throwable -> L49
-            r3.println(r0)     // Catch: java.lang.Throwable -> L49
-            r2.increaseIndent()     // Catch: java.lang.Throwable -> L49
-            java.lang.Iterable r1 = (java.lang.Iterable) r1     // Catch: java.lang.Throwable -> L40
-            java.util.Iterator r1 = r1.iterator()     // Catch: java.lang.Throwable -> L40
-        L32:
-            boolean r3 = r1.hasNext()     // Catch: java.lang.Throwable -> L40
-            if (r3 == 0) goto L42
-            java.lang.Object r3 = r1.next()     // Catch: java.lang.Throwable -> L40
-            r2.println(r3)     // Catch: java.lang.Throwable -> L40
-            goto L32
-        L40:
-            r1 = move-exception
-            goto L4b
-        L42:
-            r2.decreaseIndent()     // Catch: java.lang.Throwable -> L49
-            r2.decreaseIndent()
-            return
-        L49:
-            r1 = move-exception
-            goto L4f
-        L4b:
-            r2.decreaseIndent()     // Catch: java.lang.Throwable -> L49
-            throw r1     // Catch: java.lang.Throwable -> L49
-        L4f:
-            r2.decreaseIndent()
-            throw r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender.dump(java.io.PrintWriter, java.lang.String[]):void");
+    public final void dump(PrintWriter printWriter, String[] strArr) {
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "LifetimeExtender", this.name);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        try {
+            Set<String> setKeySet = this.mEntriesExtended.keySet();
+            indentingPrintWriterAsIndenting.append("mEntriesExtended").append((CharSequence) ": ").println(setKeySet.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
+            Iterator<T> it = setKeySet.iterator();
+            while (it.hasNext()) {
+                indentingPrintWriterAsIndenting.println(it.next());
+            }
+            indentingPrintWriterAsIndenting.decreaseIndent();
+        } finally {
+        }
     }
 
     public final void endAllLifetimeExtensions() {
@@ -125,13 +99,13 @@ public abstract class SelfTrackingLifetimeExtender implements NotifLifetimeExten
         }
         warnIfEnding();
         this.mEnding = true;
-        NotificationEntry remove = this.mEntriesExtended.remove(str);
-        if (remove != null) {
+        NotificationEntry notificationEntryRemove = this.mEntriesExtended.remove(str);
+        if (notificationEntryRemove != null) {
             NotifLifetimeExtender.OnEndLifetimeExtensionCallback onEndLifetimeExtensionCallback = this.mCallback;
             if (onEndLifetimeExtensionCallback == null) {
                 onEndLifetimeExtensionCallback = null;
             }
-            ((NotifCollection$$ExternalSyntheticLambda4) onEndLifetimeExtensionCallback).onEndLifetimeExtension(this, remove);
+            ((NotifCollection$$ExternalSyntheticLambda4) onEndLifetimeExtensionCallback).onEndLifetimeExtension(this, notificationEntryRemove);
         }
         this.mEnding = false;
     }
@@ -141,7 +115,7 @@ public abstract class SelfTrackingLifetimeExtender implements NotifLifetimeExten
             Log.d(this.tag, this.name + ".endLifetimeExtensionAfterDelay(key=" + str + ", delayMillis=" + j + ") isExtending=" + isExtending(str));
         }
         if (isExtending(str)) {
-            this.mainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender$endLifetimeExtensionAfterDelay$1
+            this.mainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender.endLifetimeExtensionAfterDelay.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     SelfTrackingLifetimeExtender.this.endLifetimeExtension(str);
@@ -165,18 +139,18 @@ public abstract class SelfTrackingLifetimeExtender implements NotifLifetimeExten
 
     @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
     public final boolean maybeExtendLifetime(NotificationEntry notificationEntry, int i) {
-        boolean queryShouldExtendLifetime = queryShouldExtendLifetime(notificationEntry);
+        boolean zQueryShouldExtendLifetime = queryShouldExtendLifetime(notificationEntry);
         if (this.debug) {
             String str = this.tag;
             String str2 = this.name;
             String str3 = notificationEntry.mKey;
-            Log.d(str, str2 + ".shouldExtendLifetime(key=" + str3 + ", reason=" + i + ") isExtending=" + isExtending(str3) + " shouldExtend=" + queryShouldExtendLifetime);
+            Log.d(str, str2 + ".shouldExtendLifetime(key=" + str3 + ", reason=" + i + ") isExtending=" + isExtending(str3) + " shouldExtend=" + zQueryShouldExtendLifetime);
         }
         warnIfEnding();
-        if (queryShouldExtendLifetime && this.mEntriesExtended.put(notificationEntry.mKey, notificationEntry) == null) {
+        if (zQueryShouldExtendLifetime && this.mEntriesExtended.put(notificationEntry.mKey, notificationEntry) == null) {
             onStartedLifetimeExtension(notificationEntry);
         }
-        return queryShouldExtendLifetime;
+        return zQueryShouldExtendLifetime;
     }
 
     public abstract boolean queryShouldExtendLifetime(NotificationEntry notificationEntry);

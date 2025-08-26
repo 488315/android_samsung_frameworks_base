@@ -27,16 +27,16 @@ public class DecelerateInterpolator extends BaseInterpolator implements NativeIn
     }
 
     public DecelerateInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         this.mFactor = 1.0f;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.DecelerateInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.DecelerateInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.DecelerateInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.DecelerateInterpolator);
         }
-        this.mFactor = obtainAttributes.getFloat(0, 1.0f);
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        this.mFactor = typedArrayObtainAttributes.getFloat(0, 1.0f);
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.animation.TimeInterpolator

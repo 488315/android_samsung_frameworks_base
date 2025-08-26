@@ -3,7 +3,6 @@ package com.facebook.rebound;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Spring {
     public static int ID;
@@ -20,7 +19,6 @@ public class Spring {
     public final CopyOnWriteArraySet mListeners = new CopyOnWriteArraySet();
     public double mTimeAccumulator = 0.0d;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PhysicsState {
         public double position;
         public double velocity;

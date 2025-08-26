@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocalBluetoothProfileManager {
     public static final boolean DEBUG = BluetoothUtils.DEBUG;
@@ -60,7 +59,6 @@ public class LocalBluetoothProfileManager {
     public SppProfile mSppProfile;
     public VolumeControlProfile mVolumeControlProfile;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PanStateChangedHandler extends StateChangedHandler {
         public PanStateChangedHandler(LocalBluetoothProfileManager localBluetoothProfileManager, LocalBluetoothProfile localBluetoothProfile) {
             super(localBluetoothProfile);
@@ -73,14 +71,12 @@ public class LocalBluetoothProfileManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ServiceListener {
         void onServiceConnected();
 
         void onServiceDisconnected();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StateChangedHandler implements BluetoothEventManager.Handler {
         public final LocalBluetoothProfile mProfile;
 
@@ -92,7 +88,7 @@ public class LocalBluetoothProfileManager {
         public void onReceive(Context context, Intent intent, BluetoothDevice bluetoothDevice) {
             boolean z;
             int i;
-            boolean onProfileConnectionStateChangedIfProcessed;
+            boolean zOnProfileConnectionStateChangedIfProcessed;
             boolean z2;
             String string;
             long j;
@@ -104,8 +100,8 @@ public class LocalBluetoothProfileManager {
             }
             int intExtra = intent.getIntExtra("android.bluetooth.profile.extra.STATE", 0);
             int intExtra2 = intent.getIntExtra("android.bluetooth.profile.extra.PREVIOUS_STATE", 0);
-            CachedBluetoothDevice findDevice = LocalBluetoothProfileManager.this.mDeviceManager.findDevice(bluetoothDevice);
-            if (findDevice == null) {
+            CachedBluetoothDevice cachedBluetoothDeviceFindDevice = LocalBluetoothProfileManager.this.mDeviceManager.findDevice(bluetoothDevice);
+            if (cachedBluetoothDeviceFindDevice == null) {
                 boolean z3 = LocalBluetoothProfileManager.DEBUG;
                 if (z3) {
                     Log.w("LocalBluetoothProfileManager", "StateChangedHandler found new device: " + bluetoothDevice);
@@ -114,18 +110,18 @@ public class LocalBluetoothProfileManager {
                     Log.w("LocalBluetoothProfileManager", "StateChangedHandler: not create cached for devices that have already been unbonded");
                     return;
                 }
-                CachedBluetoothDevice addDevice = LocalBluetoothProfileManager.this.mDeviceManager.addDevice(bluetoothDevice);
-                if (addDevice == null) {
+                CachedBluetoothDevice cachedBluetoothDeviceAddDevice = LocalBluetoothProfileManager.this.mDeviceManager.addDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceAddDevice == null) {
                     if (z3) {
                         Log.w("LocalBluetoothProfileManager", "StateChangedHandler :: Can't add CachedDevice");
                         return;
                     }
                     return;
                 }
-                findDevice = addDevice;
+                cachedBluetoothDeviceFindDevice = cachedBluetoothDeviceAddDevice;
             }
             boolean booleanExtra = intent.getBooleanExtra("android.bluetooth.profile.extra.isNormallyType", false);
-            Log.d("LocalBluetoothProfileManager", "Profiles StateChangedHandler device : " + findDevice.getNameForLog() + ", mProfile : " + this.mProfile + ", new state : " + intExtra + ", old state : " + intExtra2 + ", normally type : " + booleanExtra);
+            Log.d("LocalBluetoothProfileManager", "Profiles StateChangedHandler device : " + cachedBluetoothDeviceFindDevice.getNameForLog() + ", mProfile : " + this.mProfile + ", new state : " + intExtra + ", old state : " + intExtra2 + ", normally type : " + booleanExtra);
             int intExtra3 = intent.getIntExtra("android.bluetooth.profile.extra.STATE", 0);
             int intExtra4 = intent.getIntExtra("android.bluetooth.profile.extra.PREVIOUS_STATE", 0);
             if (intExtra3 == 0 && intExtra4 == 1) {
@@ -139,9 +135,9 @@ public class LocalBluetoothProfileManager {
                 if (LocalBluetoothProfileManager.DEBUG) {
                     Log.d("LocalBluetoothProfileManager", "onReceive, hearing aid profile connected, check hisyncid");
                 }
-                if (findDevice.getHiSyncId() == 0) {
+                if (cachedBluetoothDeviceFindDevice.getHiSyncId() == 0) {
                     HearingAidProfile hearingAidProfile = LocalBluetoothProfileManager.this.mHearingAidProfile;
-                    BluetoothDevice bluetoothDevice2 = findDevice.mDevice;
+                    BluetoothDevice bluetoothDevice2 = cachedBluetoothDeviceFindDevice.mDevice;
                     BluetoothHearingAid bluetoothHearingAid = hearingAidProfile.mService;
                     if (bluetoothHearingAid == null || bluetoothDevice2 == null) {
                         i = intExtra2;
@@ -152,7 +148,7 @@ public class LocalBluetoothProfileManager {
                         j = hiSyncId;
                     }
                     if (j != 0) {
-                        BluetoothDevice bluetoothDevice3 = findDevice.mDevice;
+                        BluetoothDevice bluetoothDevice3 = cachedBluetoothDeviceFindDevice.mDevice;
                         HearingAidInfo.Builder builder = new HearingAidInfo.Builder();
                         BluetoothHearingAid bluetoothHearingAid2 = LocalBluetoothProfileManager.this.mHearingAidProfile.mService;
                         if (bluetoothHearingAid2 == null) {
@@ -172,7 +168,7 @@ public class LocalBluetoothProfileManager {
                         }
                         builder.mMode = HearingAidInfo.ASHA_DEVICE_MODE_TO_INTERNAL_MODE_MAPPING.get(deviceMode, -1);
                         builder.mHiSyncId = j;
-                        findDevice.setHearingAidInfo(builder.build());
+                        cachedBluetoothDeviceFindDevice.setHearingAidInfo(builder.build());
                     } else {
                         z = booleanExtra;
                     }
@@ -180,7 +176,7 @@ public class LocalBluetoothProfileManager {
                     z = booleanExtra;
                     i = intExtra2;
                 }
-                HearingAidStatsLogUtils.logHearingAidInfo(findDevice);
+                HearingAidStatsLogUtils.logHearingAidInfo(cachedBluetoothDeviceFindDevice);
             } else {
                 z = booleanExtra;
                 i = intExtra2;
@@ -189,16 +185,16 @@ public class LocalBluetoothProfileManager {
                 if (LocalBluetoothProfileManager.DEBUG) {
                     Log.d("LocalBluetoothProfileManager", "onReceive, hap/lea profile connected, check hearing aid info");
                 }
-                HapClientProfile hapClientProfile = findDevice.mProfileManager.mHapClientProfile;
-                if (hapClientProfile != null && hapClientProfile.getConnectionStatus(findDevice.mDevice) == 2 && findDevice.isConnectedLeAudioDevice()) {
-                    BluetoothDevice bluetoothDevice4 = findDevice.mDevice;
+                HapClientProfile hapClientProfile = cachedBluetoothDeviceFindDevice.mProfileManager.mHapClientProfile;
+                if (hapClientProfile != null && hapClientProfile.getConnectionStatus(cachedBluetoothDeviceFindDevice.mDevice) == 2 && cachedBluetoothDeviceFindDevice.isConnectedLeAudioDevice()) {
+                    BluetoothDevice bluetoothDevice4 = cachedBluetoothDeviceFindDevice.mDevice;
                     HearingAidInfo.Builder builder2 = new HearingAidInfo.Builder();
                     BluetoothLeAudio bluetoothLeAudio = LocalBluetoothProfileManager.this.mLeAudioProfile.mService;
                     builder2.setLeAudioLocation((bluetoothLeAudio == null || bluetoothDevice4 == null) ? 0 : bluetoothLeAudio.getAudioLocation(bluetoothDevice4));
                     BluetoothHapClient bluetoothHapClient = LocalBluetoothProfileManager.this.mHapClientProfile.mService;
                     builder2.mMode = HearingAidInfo.HAP_DEVICE_TYPE_TO_INTERNAL_MODE_MAPPING.get(bluetoothHapClient == null ? -1 : bluetoothHapClient.getHearingAidType(bluetoothDevice4), -1);
-                    findDevice.setHearingAidInfo(builder2.build());
-                    HearingAidStatsLogUtils.logHearingAidInfo(findDevice);
+                    cachedBluetoothDeviceFindDevice.setHearingAidInfo(builder2.build());
+                    HearingAidStatsLogUtils.logHearingAidInfo(cachedBluetoothDeviceFindDevice);
                 }
             }
             if (z6 && intExtra3 == 2) {
@@ -206,9 +202,9 @@ public class LocalBluetoothProfileManager {
                 if (z7) {
                     Log.d("LocalBluetoothProfileManager", "onReceive, csip profile connected, check group id");
                 }
-                if (findDevice.mGroupId == -1) {
+                if (cachedBluetoothDeviceFindDevice.mGroupId == -1) {
                     CsipSetCoordinatorProfile csipSetCoordinatorProfile = LocalBluetoothProfileManager.this.mCsipSetCoordinatorProfile;
-                    BluetoothDevice bluetoothDevice5 = findDevice.mDevice;
+                    BluetoothDevice bluetoothDevice5 = cachedBluetoothDeviceFindDevice.mDevice;
                     BluetoothCsipSetCoordinator bluetoothCsipSetCoordinator = csipSetCoordinatorProfile.mService;
                     Map groupUuidMapByDevice = (bluetoothCsipSetCoordinator == null || bluetoothDevice5 == null) ? null : bluetoothCsipSetCoordinator.getGroupUuidMapByDevice(bluetoothDevice5);
                     if (z7) {
@@ -222,7 +218,7 @@ public class LocalBluetoothProfileManager {
                             }
                             Map.Entry entry = (Map.Entry) it.next();
                             if (((ParcelUuid) entry.getValue()).equals(BluetoothUuid.CAP)) {
-                                findDevice.setGroupId(((Integer) entry.getKey()).intValue());
+                                cachedBluetoothDeviceFindDevice.setGroupId(((Integer) entry.getKey()).intValue());
                                 break;
                             }
                         }
@@ -232,45 +228,45 @@ public class LocalBluetoothProfileManager {
             if (Set.of(21, 28, 22, 25).contains(Integer.valueOf(this.mProfile.getProfileId()))) {
                 CachedBluetoothDeviceManager cachedBluetoothDeviceManager = LocalBluetoothProfileManager.this.mDeviceManager;
                 synchronized (cachedBluetoothDeviceManager) {
-                    if (findDevice.isHearingDevice()) {
+                    if (cachedBluetoothDeviceFindDevice.isHearingDevice()) {
                         cachedBluetoothDeviceManager.mHearingAidDeviceManager.notifyDevicesConnectionStatusChanged();
                     }
                 }
             }
-            findDevice.onProfileStateChanged(this.mProfile, intExtra3);
-            if (findDevice.getHiSyncId() == 0 && findDevice.mGroupId == -1) {
+            cachedBluetoothDeviceFindDevice.onProfileStateChanged(this.mProfile, intExtra3);
+            if (cachedBluetoothDeviceFindDevice.getHiSyncId() == 0 && cachedBluetoothDeviceFindDevice.mGroupId == -1) {
                 z2 = true;
             } else {
                 CachedBluetoothDeviceManager cachedBluetoothDeviceManager2 = LocalBluetoothProfileManager.this.mDeviceManager;
                 int profileId = this.mProfile.getProfileId();
                 synchronized (cachedBluetoothDeviceManager2) {
                     if ((profileId == 28 || profileId == 21 || profileId == 25) && intExtra3 == 2) {
-                        cachedBluetoothDeviceManager2.mHearingAidDeviceManager.syncDeviceIfNeeded(findDevice);
+                        cachedBluetoothDeviceManager2.mHearingAidDeviceManager.syncDeviceIfNeeded(cachedBluetoothDeviceFindDevice);
                     }
                 }
                 CachedBluetoothDeviceManager cachedBluetoothDeviceManager3 = LocalBluetoothProfileManager.this.mDeviceManager;
                 int profileId2 = this.mProfile.getProfileId();
                 synchronized (cachedBluetoothDeviceManager3) {
                     if (profileId2 == 21) {
-                        onProfileConnectionStateChangedIfProcessed = cachedBluetoothDeviceManager3.mHearingAidDeviceManager.onProfileConnectionStateChangedIfProcessed(findDevice, intExtra3);
+                        zOnProfileConnectionStateChangedIfProcessed = cachedBluetoothDeviceManager3.mHearingAidDeviceManager.onProfileConnectionStateChangedIfProcessed(cachedBluetoothDeviceFindDevice, intExtra3);
                     } else if (profileId2 == 1 || profileId2 == 2 || profileId2 == 22 || profileId2 == 25) {
-                        onProfileConnectionStateChangedIfProcessed = cachedBluetoothDeviceManager3.mCsipDeviceManager.onProfileConnectionStateChangedIfProcessed(findDevice, intExtra3);
+                        zOnProfileConnectionStateChangedIfProcessed = cachedBluetoothDeviceManager3.mCsipDeviceManager.onProfileConnectionStateChangedIfProcessed(cachedBluetoothDeviceFindDevice, intExtra3);
                     } else {
-                        onProfileConnectionStateChangedIfProcessed = false;
+                        zOnProfileConnectionStateChangedIfProcessed = false;
                     }
                 }
-                z2 = !onProfileConnectionStateChangedIfProcessed;
+                z2 = !zOnProfileConnectionStateChangedIfProcessed;
             }
             if (z2) {
                 if (LocalBluetoothProfileManager.DEBUG) {
                     Log.d("LocalBluetoothProfileManager", "needDispatchProfileConnectionState");
                 }
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.refresh();
                 BluetoothEventManager bluetoothEventManager = LocalBluetoothProfileManager.this.mEventManager;
                 int profileId3 = this.mProfile.getProfileId();
                 Iterator it2 = ((CopyOnWriteArrayList) bluetoothEventManager.mCallbacks).iterator();
                 while (it2.hasNext()) {
-                    ((BluetoothCallback) it2.next()).onProfileConnectionStateChanged(findDevice, intExtra3, profileId3);
+                    ((BluetoothCallback) it2.next()).onProfileConnectionStateChanged(cachedBluetoothDeviceFindDevice, intExtra3, profileId3);
                 }
                 if (bluetoothEventManager.mIsWorkProfile) {
                     Log.d("BluetoothEventManager", "Skip profileConnectionStateChanged for audio sharing, work profile");
@@ -309,7 +305,7 @@ public class LocalBluetoothProfileManager {
             }
             if (intExtra == 0 && i == 1) {
                 Log.d("LocalBluetoothProfileManager", "Failed to connect " + this.mProfile + " device");
-                if (findDevice.isBusy() || findDevice.isConnected()) {
+                if (cachedBluetoothDeviceFindDevice.isBusy() || cachedBluetoothDeviceFindDevice.isConnected()) {
                     return;
                 }
                 if (this.mProfile.toString().equals("PAN")) {
@@ -320,9 +316,9 @@ public class LocalBluetoothProfileManager {
                             return;
                         }
                         if (intExtra5 == 1) {
-                            string = context.getString(R.string.bluetooth_connecting_error_message, findDevice.getName());
+                            string = context.getString(R.string.bluetooth_connecting_error_message, cachedBluetoothDeviceFindDevice.getName());
                         } else {
-                            String name = findDevice.mBondState == 10 ? findDevice.mDeviceName : findDevice.getName();
+                            String name = cachedBluetoothDeviceFindDevice.mBondState == 10 ? cachedBluetoothDeviceFindDevice.mDeviceName : cachedBluetoothDeviceFindDevice.getName();
                             if (BluetoothUtils.isRTL(context)) {
                                 name = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", name, "\u200e");
                             }
@@ -333,16 +329,16 @@ public class LocalBluetoothProfileManager {
                     }
                     if (localBluetoothManager2.semIsForegroundActivity() || localBluetoothManager2.isTetheredSettings()) {
                         if (intExtra5 == 1) {
-                            findDevice.mErrorMsg = context.getString(R.string.bluetooth_pan_nap_connecting_error_summury);
+                            cachedBluetoothDeviceFindDevice.mErrorMsg = context.getString(R.string.bluetooth_pan_nap_connecting_error_summury);
                             return;
                         }
-                        String name2 = findDevice.mBondState == 10 ? findDevice.mDeviceName : findDevice.getName();
+                        String name2 = cachedBluetoothDeviceFindDevice.mBondState == 10 ? cachedBluetoothDeviceFindDevice.mDeviceName : cachedBluetoothDeviceFindDevice.getName();
                         if (BluetoothUtils.isRTL(context)) {
                             name2 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", name2, "\u200e");
                         }
                         String string2 = context.getString(R.string.bluetooth_pan_connecting_error_summury, name2);
                         if (localBluetoothManager2.semIsForegroundActivity()) {
-                            findDevice.mErrorMsg = string2;
+                            cachedBluetoothDeviceFindDevice.mErrorMsg = string2;
                             return;
                         } else {
                             if (localBluetoothManager2.isTetheredSettings()) {
@@ -358,22 +354,22 @@ public class LocalBluetoothProfileManager {
                     if (localBluetoothManager2.semIsForegroundActivity() || !LocalBluetoothManager.mSystemUiInstance) {
                         return;
                     }
-                    if (findDevice.mGroupId != -1) {
-                        CachedBluetoothDevice cachedBluetoothDevice = findDevice.mLeadDevice;
+                    if (cachedBluetoothDeviceFindDevice.mGroupId != -1) {
+                        CachedBluetoothDevice cachedBluetoothDevice = cachedBluetoothDeviceFindDevice.mLeadDevice;
                         if (cachedBluetoothDevice == null) {
-                            cachedBluetoothDevice = findDevice;
+                            cachedBluetoothDevice = cachedBluetoothDeviceFindDevice;
                         }
                         if (BluetoothUtils.getDeviceForGroupConnectionState(cachedBluetoothDevice).mCachedMaxConnectionState > 0) {
                             return;
                         }
                     }
-                    BluetoothUtils.showToast(context, context.getString(R.string.bluetooth_connecting_error_message, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", findDevice.getName(), "\u200e")));
+                    BluetoothUtils.showToast(context, context.getString(R.string.bluetooth_connecting_error_message, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", cachedBluetoothDeviceFindDevice.getName(), "\u200e")));
                     return;
                 }
                 if (z) {
                     if (!LocalBluetoothManager.mSystemUiInstance) {
                         if (localBluetoothManager2.semIsForegroundActivity()) {
-                            findDevice.mErrorMsg = context.getString(R.string.bluetooth_hid_normally_connecting_error_summury);
+                            cachedBluetoothDeviceFindDevice.mErrorMsg = context.getString(R.string.bluetooth_hid_normally_connecting_error_summury);
                             return;
                         }
                         return;
@@ -381,7 +377,7 @@ public class LocalBluetoothProfileManager {
                         if (localBluetoothManager2.semIsForegroundActivity()) {
                             return;
                         }
-                        String name3 = findDevice.getName();
+                        String name3 = cachedBluetoothDeviceFindDevice.getName();
                         if (BluetoothUtils.isRTL(context)) {
                             name3 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", name3, "\u200e");
                         }
@@ -390,7 +386,7 @@ public class LocalBluetoothProfileManager {
                     }
                 }
                 Log.d("LocalBluetoothProfileManager", "Failed to connect " + this.mProfile + " device");
-                String name4 = findDevice.getName();
+                String name4 = cachedBluetoothDeviceFindDevice.getName();
                 if (BluetoothUtils.isRTL(context)) {
                     name4 = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\u200e", name4, "\u200e");
                 }
@@ -401,15 +397,15 @@ public class LocalBluetoothProfileManager {
                     }
                     BluetoothUtils.showToast(context, string3);
                 } else if (localBluetoothManager2.semIsForegroundActivity()) {
-                    findDevice.mErrorMsg = string3;
+                    cachedBluetoothDeviceFindDevice.mErrorMsg = string3;
                 }
             }
         }
     }
 
     public LocalBluetoothProfileManager(Context context, LocalBluetoothAdapter localBluetoothAdapter, CachedBluetoothDeviceManager cachedBluetoothDeviceManager, BluetoothEventManager bluetoothEventManager) {
-        HashMap hashMap = new HashMap();
-        this.mProfileNameMap = hashMap;
+        HashMap map = new HashMap();
+        this.mProfileNameMap = map;
         this.mServiceListeners = new CopyOnWriteArrayList();
         this.mContext = context;
         this.mDeviceManager = cachedBluetoothDeviceManager;
@@ -421,7 +417,7 @@ public class LocalBluetoothProfileManager {
             PanProfile panProfile = new PanProfile(context, cachedBluetoothDeviceManager, this);
             this.mPanProfile = panProfile;
             bluetoothEventManager.addProfileHandler("android.bluetooth.pan.profile.action.CONNECTION_STATE_CHANGED", new PanStateChangedHandler(this, panProfile));
-            hashMap.put("PAN", panProfile);
+            map.put("PAN", panProfile);
         } else {
             Log.w("LocalBluetoothProfileManager", "Warning: PAN profile was previously added.");
         }

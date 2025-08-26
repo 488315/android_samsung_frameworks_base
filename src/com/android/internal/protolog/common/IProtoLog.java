@@ -2,7 +2,7 @@ package com.android.internal.protolog.common;
 
 import java.util.List;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public interface IProtoLog {
     List<IProtoLogGroup> getRegisteredGroups();
 

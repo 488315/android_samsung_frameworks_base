@@ -5,13 +5,11 @@ import com.android.systemui.plugins.keyguardstatusview.PluginLockscreenShadeTran
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetLockscreenShadeTransitionControllerWrapper implements PluginLockscreenShadeTransitionController {
     public final LockscreenShadeTransitionController mController;
     public final HashMap mHashMap = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallbackWrapper implements LockscreenShadeTransitionController.Callback {
         public final PluginLockscreenShadeTransitionControllerCallback mCallback;
 

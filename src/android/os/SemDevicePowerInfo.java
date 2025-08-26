@@ -686,37 +686,37 @@ public class SemDevicePowerInfo implements Parcelable {
         this.lcRxTime = parcel.readLong();
         this.lcTxByte = parcel.readLong();
         this.lcRxByte = parcel.readLong();
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
+        int i6 = parcel.readInt();
+        if (i6 == 0) {
             this.mKernelCpuSpeedTime = (long[][]) Array.newInstance((Class<?>) Long.TYPE, 0, 0);
         } else {
-            this.mKernelCpuSpeedTime = new long[readInt][];
-            for (int i6 = 0; i6 < readInt; i6++) {
-                int readInt2 = parcel.readInt();
-                if (readInt2 == 0) {
-                    this.mKernelCpuSpeedTime[i6] = new long[0];
+            this.mKernelCpuSpeedTime = new long[i6][];
+            for (int i7 = 0; i7 < i6; i7++) {
+                int i8 = parcel.readInt();
+                if (i8 == 0) {
+                    this.mKernelCpuSpeedTime[i7] = new long[0];
                 } else {
-                    this.mKernelCpuSpeedTime[i6] = new long[readInt2];
-                    for (int i7 = 0; i7 < readInt2; i7++) {
-                        this.mKernelCpuSpeedTime[i6][i7] = parcel.readLong();
+                    this.mKernelCpuSpeedTime[i7] = new long[i8];
+                    for (int i9 = 0; i9 < i8; i9++) {
+                        this.mKernelCpuSpeedTime[i7][i9] = parcel.readLong();
                     }
                 }
             }
         }
-        int readInt3 = parcel.readInt();
-        if (readInt3 == 0) {
+        int i10 = parcel.readInt();
+        if (i10 == 0) {
             this.mScreenOffKernelCpuSpeedTime = (long[][]) Array.newInstance((Class<?>) Long.TYPE, 0, 0);
             return;
         }
-        this.mScreenOffKernelCpuSpeedTime = new long[readInt3][];
-        for (int i8 = 0; i8 < readInt3; i8++) {
-            int readInt4 = parcel.readInt();
-            if (readInt4 == 0) {
-                this.mScreenOffKernelCpuSpeedTime[i8] = new long[0];
+        this.mScreenOffKernelCpuSpeedTime = new long[i10][];
+        for (int i11 = 0; i11 < i10; i11++) {
+            int i12 = parcel.readInt();
+            if (i12 == 0) {
+                this.mScreenOffKernelCpuSpeedTime[i11] = new long[0];
             } else {
-                this.mScreenOffKernelCpuSpeedTime[i8] = new long[readInt4];
-                for (int i9 = 0; i9 < readInt4; i9++) {
-                    this.mScreenOffKernelCpuSpeedTime[i8][i9] = parcel.readLong();
+                this.mScreenOffKernelCpuSpeedTime[i11] = new long[i12];
+                for (int i13 = 0; i13 < i12; i13++) {
+                    this.mScreenOffKernelCpuSpeedTime[i11][i13] = parcel.readLong();
                 }
             }
         }

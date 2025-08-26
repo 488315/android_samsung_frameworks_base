@@ -88,14 +88,14 @@ public final class DataShareRequest implements Parcelable {
     }
 
     DataShareRequest(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        String readString = parcel.readString();
-        LocusId locusId = (readByte & 2) == 0 ? null : (LocusId) parcel.readTypedObject(LocusId.CREATOR);
-        String readString2 = parcel.readString();
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        byte b = parcel.readByte();
+        String string = parcel.readString();
+        LocusId locusId = (b & 2) == 0 ? null : (LocusId) parcel.readTypedObject(LocusId.CREATOR);
+        String string2 = parcel.readString();
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mLocusId = locusId;
-        this.mMimeType = readString2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString2);
+        this.mMimeType = string2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string2);
     }
 }

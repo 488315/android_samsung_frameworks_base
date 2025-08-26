@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ToastUI implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public class ToastUI implements CoreStartable, ConfigurationController.Configura
     public final ToastLogger mToastLogger;
     ToastOutAnimatorListener mToastOutAnimatorListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ToastOutAnimatorListener extends AnimatorListenerAdapter {
         public final Animator mAnimator;
         public final ITransientNotificationCallback mPrevCallback;
@@ -109,17 +107,17 @@ public class ToastUI implements CoreStartable, ConfigurationController.Configura
             MotionLayout$$ExternalSyntheticOutline0.m("Attempt to hide non-current toast from package ", str, "ToastUI");
             return;
         }
-        String iBinder2 = iBinder.toString();
+        String string = iBinder.toString();
         ToastLogger toastLogger = this.mToastLogger;
         toastLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         ToastLogger$$ExternalSyntheticLambda0 toastLogger$$ExternalSyntheticLambda0 = new ToastLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = toastLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("ToastLog", logLevel, toastLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("ToastLog", logLevel, toastLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
-        logMessageImpl.str2 = iBinder2;
-        logBuffer.commit(obtain);
+        logMessageImpl.str2 = string;
+        logBuffer.commit(logMessageObtain);
         hideCurrentToast(null);
     }
 
@@ -130,18 +128,18 @@ public class ToastUI implements CoreStartable, ConfigurationController.Configura
             this.mOrientation = i;
             SystemUIToast systemUIToast = this.mToast;
             if (systemUIToast != null) {
-                String charSequence = systemUIToast.mText.toString();
+                String string = systemUIToast.mText.toString();
                 boolean z = this.mOrientation == 1;
                 ToastLogger toastLogger = this.mToastLogger;
                 toastLogger.getClass();
                 LogLevel logLevel = LogLevel.DEBUG;
                 ToastLogger$$ExternalSyntheticLambda0 toastLogger$$ExternalSyntheticLambda0 = new ToastLogger$$ExternalSyntheticLambda0(0);
                 LogBuffer logBuffer = toastLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("ToastLog", logLevel, toastLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                logMessageImpl.str1 = charSequence;
+                LogMessage logMessageObtain = logBuffer.obtain("ToastLog", logLevel, toastLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = string;
                 logMessageImpl.bool1 = z;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 this.mToast.onOrientationChange(this.mOrientation);
                 this.mPresenter.updateLayoutParams(this.mToast.getXOffset().intValue(), this.mToast.getYOffset().intValue(), this.mToast.getHorizontalMargin().intValue(), this.mToast.getVerticalMargin().intValue(), this.mToast.getGravity().intValue());
             }

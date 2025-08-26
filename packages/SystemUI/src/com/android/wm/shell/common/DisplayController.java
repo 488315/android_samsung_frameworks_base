@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayController {
     public final DisplayChangeController mChangeController;
@@ -43,7 +42,6 @@ public class DisplayController {
     public final Map mUnpopulatedDisplayBounds = new HashMap();
     public final DisplayWindowListenerImpl mDisplayContainerListener = new DisplayWindowListenerImpl(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayRecord {
         public Context mContext;
         public DisplayLayout mDisplayLayout;
@@ -58,7 +56,6 @@ public class DisplayController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayWindowListenerImpl extends IDisplayWindowListener.Stub {
         public /* synthetic */ DisplayWindowListenerImpl(DisplayController displayController, int i) {
             this();
@@ -76,7 +73,7 @@ public class DisplayController {
             DisplayController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayController$DisplayWindowListenerImpl$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = DisplayController.DisplayWindowListenerImpl.this;
+                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = this.f$0;
                     int i2 = i;
                     Configuration configuration2 = configuration;
                     DisplayController displayController = DisplayController.this;
@@ -92,15 +89,15 @@ public class DisplayController {
                                 Slog.w("DisplayController", "Skipping Display Configuration change on invalid display. It may have been removed.");
                                 return;
                             }
-                            Context createConfigurationContext = (i2 == 0 ? displayController.mContext : displayController.mContext.createDisplayContext(display)).createConfigurationContext(configuration2);
-                            DisplayLayout displayLayout = new DisplayLayout(createConfigurationContext, display);
+                            Context contextCreateConfigurationContext = (i2 == 0 ? displayController.mContext : displayController.mContext.createDisplayContext(display)).createConfigurationContext(configuration2);
+                            DisplayLayout displayLayout = new DisplayLayout(contextCreateConfigurationContext, display);
                             DisplayTopology displayTopology = displayController.mDisplayTopology;
                             if (displayTopology != null) {
                                 displayLayout.mGlobalBoundsDp = (RectF) displayTopology.getAbsoluteBounds().get(i2, displayLayout.mGlobalBoundsDp);
                             }
-                            displayRecord.mContext = createConfigurationContext;
+                            displayRecord.mContext = contextCreateConfigurationContext;
                             displayRecord.mDisplayLayout = displayLayout;
-                            Resources resources = createConfigurationContext.getResources();
+                            Resources resources = contextCreateConfigurationContext.getResources();
                             displayLayout.mInsetsState = displayRecord.mInsetsState;
                             displayLayout.recalcInsets(resources);
                             for (int i3 = 0; i3 < displayController.mDisplayChangedListeners.size(); i3++) {
@@ -126,7 +123,7 @@ public class DisplayController {
             DisplayController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayController$DisplayWindowListenerImpl$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = DisplayController.DisplayWindowListenerImpl.this;
+                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = this.f$0;
                     int i3 = i;
                     int i4 = i2;
                     DisplayController displayController = DisplayController.this;
@@ -151,7 +148,7 @@ public class DisplayController {
             DisplayController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayController$DisplayWindowListenerImpl$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = DisplayController.DisplayWindowListenerImpl.this;
+                    DisplayController.DisplayWindowListenerImpl displayWindowListenerImpl = this.f$0;
                     int i2 = i;
                     List list3 = list;
                     List list4 = list2;
@@ -189,7 +186,7 @@ public class DisplayController {
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.common.DisplayController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final DisplayController displayController = DisplayController.this;
+                final DisplayController displayController = this.f$0;
                 try {
                     for (int i : displayController.mWmService.registerDisplayWindowListener(displayController.mDisplayContainerListener)) {
                         displayController.onDisplayAdded(i);
@@ -198,7 +195,7 @@ public class DisplayController {
                         displayController.mDisplayManager.registerTopologyListener(displayController.mMainExecutor, new Consumer() { // from class: com.android.wm.shell.common.DisplayController$$ExternalSyntheticLambda1
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
-                                DisplayController.this.onDisplayTopologyChanged((DisplayTopology) obj);
+                                displayController.onDisplayTopologyChanged((DisplayTopology) obj);
                             }
                         });
                         displayController.onDisplayTopologyChanged(displayController.mDisplayManager.getDisplayTopology());
@@ -225,11 +222,11 @@ public class DisplayController {
                     if (!CoreRune.MW_CAPTION_BUG_FIX || i == -1) {
                         onDisplaysChangedListener.onDisplayAdded(this.mDisplays.keyAt(i2));
                     } else {
-                        int keyAt = this.mDisplays.keyAt(i2);
-                        if (keyAt == i) {
+                        int iKeyAt = this.mDisplays.keyAt(i2);
+                        if (iKeyAt == i) {
                             Slog.w("DisplayController", "addDisplayWindowListener: The display " + i + " is not registered in DisplayManager.");
                         } else {
-                            onDisplaysChangedListener.onDisplayAdded(keyAt);
+                            onDisplaysChangedListener.onDisplayAdded(iKeyAt);
                         }
                     }
                 }
@@ -274,16 +271,16 @@ public class DisplayController {
                 if (display == null) {
                     return;
                 }
-                Context createDisplayContext = i == 0 ? this.mContext : this.mContext.createDisplayContext(display);
+                Context contextCreateDisplayContext = i == 0 ? this.mContext : this.mContext.createDisplayContext(display);
                 int i2 = 0;
                 DisplayRecord displayRecord = new DisplayRecord(i, i2);
-                DisplayLayout displayLayout = new DisplayLayout(createDisplayContext, display);
+                DisplayLayout displayLayout = new DisplayLayout(contextCreateDisplayContext, display);
                 if (((HashMap) this.mUnpopulatedDisplayBounds).containsKey(Integer.valueOf(i))) {
                     displayLayout.mGlobalBoundsDp = (RectF) ((HashMap) this.mUnpopulatedDisplayBounds).get(Integer.valueOf(i));
                 }
-                displayRecord.mContext = createDisplayContext;
+                displayRecord.mContext = contextCreateDisplayContext;
                 displayRecord.mDisplayLayout = displayLayout;
-                Resources resources = createDisplayContext.getResources();
+                Resources resources = contextCreateDisplayContext.getResources();
                 displayLayout.mInsetsState = displayRecord.mInsetsState;
                 displayLayout.recalcInsets(resources);
                 this.mDisplays.put(i, displayRecord);
@@ -308,11 +305,11 @@ public class DisplayController {
         SparseArray absoluteBounds = displayTopology.getAbsoluteBounds();
         ((HashMap) this.mUnpopulatedDisplayBounds).clear();
         for (int i = 0; i < absoluteBounds.size(); i++) {
-            int keyAt = absoluteBounds.keyAt(i);
-            DisplayLayout displayLayout = getDisplayLayout(keyAt);
+            int iKeyAt = absoluteBounds.keyAt(i);
+            DisplayLayout displayLayout = getDisplayLayout(iKeyAt);
             if (displayLayout == null) {
-                Slog.d("DisplayController", "Storing bounds for onDisplayTopologyChanged on unknown display, displayId=" + keyAt);
-                ((HashMap) this.mUnpopulatedDisplayBounds).put(Integer.valueOf(keyAt), (RectF) absoluteBounds.valueAt(i));
+                Slog.d("DisplayController", "Storing bounds for onDisplayTopologyChanged on unknown display, displayId=" + iKeyAt);
+                ((HashMap) this.mUnpopulatedDisplayBounds).put(Integer.valueOf(iKeyAt), (RectF) absoluteBounds.valueAt(i));
             } else {
                 displayLayout.mGlobalBoundsDp = (RectF) absoluteBounds.valueAt(i);
             }
@@ -328,7 +325,6 @@ public class DisplayController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnDisplaysChangedListener {
         default void onDesktopModeEligibleChanged(int i) {
         }

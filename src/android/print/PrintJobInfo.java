@@ -113,10 +113,10 @@ public final class PrintJobInfo implements Parcelable {
         this.mStatusRes = parcel.readInt();
         this.mStatusResAppPackageName = parcel.readCharSequence();
         this.mCanceling = parcel.readInt() == 1;
-        Bundle readBundle = parcel.readBundle();
-        this.mAdvancedOptions = readBundle;
-        if (readBundle != null) {
-            Preconditions.checkArgument(!readBundle.containsKey(null));
+        Bundle bundle = parcel.readBundle();
+        this.mAdvancedOptions = bundle;
+        if (bundle != null) {
+            Preconditions.checkArgument(!bundle.containsKey(null));
         }
     }
 

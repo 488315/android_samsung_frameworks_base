@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
@@ -36,7 +37,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,7 +48,6 @@ public final class SoundCraftManager {
     public final SoundCraftSettings soundCraftSettings;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -72,7 +71,7 @@ public final class SoundCraftManager {
         Log.d("SoundCraft.SoundCraftManager", "init");
         final Consumer consumer = new Consumer() { // from class: com.android.systemui.audio.soundcraft.interfaces.connectivity.SoundCraftManager.1
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) obj;
                 SoundCraftManager.access$clearSettings(SoundCraftManager.this);
                 if (bluetoothDevice == null) {
@@ -80,9 +79,9 @@ public final class SoundCraftManager {
                     return;
                 }
                 SoundCraftManager.this.bluetoothDeviceManager.getClass();
-                boolean isSupportedSoundCraft = BluetoothDeviceManager.isSupportedSoundCraft(bluetoothDevice);
-                Log.d("SoundCraft.SoundCraftManager", "onA2dpActiveDeviceChanged : name=" + bluetoothDevice.getName() + ", isBuds3OrNextModel=" + isSupportedSoundCraft);
-                if (isSupportedSoundCraft) {
+                boolean zIsSupportedSoundCraft = BluetoothDeviceManager.isSupportedSoundCraft(bluetoothDevice);
+                Log.d("SoundCraft.SoundCraftManager", "onA2dpActiveDeviceChanged : name=" + bluetoothDevice.getName() + ", isBuds3OrNextModel=" + zIsSupportedSoundCraft);
+                if (zIsSupportedSoundCraft) {
                     SoundCraftManager.this.requestGWPluginModel(bluetoothDevice);
                 }
             }
@@ -105,7 +104,7 @@ public final class SoundCraftManager {
         }
         final Consumer consumer2 = new Consumer() { // from class: com.android.systemui.audio.soundcraft.interfaces.connectivity.SoundCraftManager.2
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 BluetoothDevice activeDevice;
                 Integer num = (Integer) obj;
                 Log.i("SoundCraft.SoundCraftManager", "onStreamDevicesChanged devices = " + num);
@@ -185,19 +184,19 @@ public final class SoundCraftManager {
             public final void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) {
                 String packageName;
                 ComponentName componentName = runningTaskInfo.baseActivity;
-                boolean z = false;
+                boolean zContains = false;
                 if (componentName != null && (packageName = componentName.getPackageName()) != null) {
-                    z = StringsKt__StringsKt.contains(packageName, "com.samsung.accessory", false);
+                    zContains = StringsKt__StringsKt.contains(packageName, "com.samsung.accessory", false);
                 }
-                SoundCraftManager.this.isBudsManagerFront = z;
-                if (z) {
-                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onTaskMoveToFront : isBudsManagerFront=", "SoundCraft.SoundCraftManager", z);
+                SoundCraftManager.this.isBudsManagerFront = zContains;
+                if (zContains) {
+                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onTaskMoveToFront : isBudsManagerFront=", "SoundCraft.SoundCraftManager", zContains);
                 }
             }
 
             @Override // com.android.systemui.shared.system.TaskStackChangeListener
             public final void onTaskStackChanged() {
-                String str;
+                String className;
                 BluetoothDeviceManager bluetoothDeviceManager2;
                 BluetoothDevice activeDevice;
                 ComponentName componentName;
@@ -209,12 +208,12 @@ public final class SoundCraftManager {
                     Object systemService = context2.getSystemService((Class<Object>) ActivityManager.class);
                     systemService.getClass();
                     ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull((List) ((ActivityManager) systemService).getRunningTasks(3));
-                    if (runningTaskInfo == null || (componentName = runningTaskInfo.topActivity) == null || (str = componentName.getClassName()) == null) {
-                        str = "";
+                    if (runningTaskInfo == null || (componentName = runningTaskInfo.topActivity) == null || (className = componentName.getClassName()) == null) {
+                        className = "";
                     }
-                    boolean equals = str.equals("com.samsung.accessory.hearablemgr.module.home.activity.HomeActivity");
-                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onTaskStackChanged : isBudsMainPageFront=", "SoundCraft.SoundCraftManager", equals);
-                    if (!equals || (activeDevice = (bluetoothDeviceManager2 = soundCraftManager.bluetoothDeviceManager).getActiveDevice()) == null) {
+                    boolean zContains = StringsKt__StringsKt.contains(className, "com.samsung.accessory.hearablemgr.module.home.activity", false);
+                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onTaskStackChanged : isBudsMainPageFront=", "SoundCraft.SoundCraftManager", zContains);
+                    if (!zContains || (activeDevice = (bluetoothDeviceManager2 = soundCraftManager.bluetoothDeviceManager).getActiveDevice()) == null) {
                         return;
                     }
                     bluetoothDeviceManager2.getClass();
@@ -229,7 +228,7 @@ public final class SoundCraftManager {
         });
     }
 
-    public static final void access$clearSettings(SoundCraftManager soundCraftManager) {
+    public static final void access$clearSettings(SoundCraftManager soundCraftManager) throws Resources.NotFoundException {
         ((SecQSDetailController) soundCraftManager.qsDetailControllerLazy.get()).closeTargetDetail(soundCraftManager.soundCraftQpDetailAdapter);
         SoundCraftSettingConstants soundCraftSettingConstants = SoundCraftSettingConstants.INSTANCE;
         Context context = soundCraftManager.context;
@@ -244,8 +243,8 @@ public final class SoundCraftManager {
         Function1 function1 = new Function1() { // from class: com.android.systemui.audio.soundcraft.interfaces.connectivity.SoundCraftManager$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Object obj2;
+            public final Object mo781invoke(Object obj) {
+                Object next;
                 BluetoothDevice bluetoothDevice2 = bluetoothDevice;
                 List list = (List) obj;
                 int i = SoundCraftManager.$r8$clinit;
@@ -253,18 +252,18 @@ public final class SoundCraftManager {
                 Iterator it = list.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj2 = null;
+                        next = null;
                         break;
                     }
-                    obj2 = it.next();
-                    GWPluginModel gWPluginModel = (GWPluginModel) obj2;
+                    next = it.next();
+                    GWPluginModel gWPluginModel = (GWPluginModel) next;
                     Log.d("SoundCraft.SoundCraftManager", "onGWPluginModelReceived: model.packageName=" + gWPluginModel.packageName);
                     if (Intrinsics.areEqual(gWPluginModel.deviceId, bluetoothDevice2.getAddress())) {
                         break;
                     }
                 }
-                GWPluginModel gWPluginModel2 = (GWPluginModel) obj2;
-                SoundCraftManager soundCraftManager = SoundCraftManager.this;
+                GWPluginModel gWPluginModel2 = (GWPluginModel) next;
+                SoundCraftManager soundCraftManager = this.f$0;
                 if (gWPluginModel2 != null) {
                     SoundCraftSettingConstants soundCraftSettingConstants = SoundCraftSettingConstants.INSTANCE;
                     Context context = soundCraftManager.context;
@@ -286,21 +285,21 @@ public final class SoundCraftManager {
         GWStubPluginStateRequester gWStubPluginStateRequester = new GWStubPluginStateRequester(wearableManager.context, function1);
         Intent intent2 = new Intent("com.samsung.accessory.hearablemgr.action.PLUGIN_INFO_SERVICE");
         boolean z = false;
-        List<ResolveInfo> queryIntentServices = gWStubPluginStateRequester.context.getPackageManager().queryIntentServices(intent2, 0);
-        if (queryIntentServices.size() == 0) {
+        List<ResolveInfo> listQueryIntentServices = gWStubPluginStateRequester.context.getPackageManager().queryIntentServices(intent2, 0);
+        if (listQueryIntentServices.size() == 0) {
             intent = null;
         } else {
             Intent intent3 = new Intent(intent2);
-            intent3.setComponent(new ComponentName(queryIntentServices.get(0).serviceInfo.packageName, queryIntentServices.get(0).serviceInfo.name));
+            intent3.setComponent(new ComponentName(listQueryIntentServices.get(0).serviceInfo.packageName, listQueryIntentServices.get(0).serviceInfo.name));
             intent = intent3;
         }
         if (intent == null) {
             Log.e("SoundCraft.wearable.GWStubServiceRequester", "bindService : intent is null.");
         } else {
             try {
-                boolean bindService = gWStubPluginStateRequester.context.bindService(intent, gWStubPluginStateRequester.serviceConnection, 1);
-                Log.d("SoundCraft.wearable.GWStubServiceRequester", "isSuccess=" + bindService);
-                z = bindService;
+                boolean zBindService = gWStubPluginStateRequester.context.bindService(intent, gWStubPluginStateRequester.serviceConnection, 1);
+                Log.d("SoundCraft.wearable.GWStubServiceRequester", "isSuccess=" + zBindService);
+                z = zBindService;
             } catch (Exception e) {
                 e.printStackTrace();
             }

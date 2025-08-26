@@ -2,7 +2,6 @@ package android.companion.virtual.camera;
 
 import android.annotation.SystemApi;
 import android.companion.virtual.camera.IVirtualCameraCallback;
-import android.companion.virtual.camera.VirtualCameraConfig;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
@@ -61,9 +60,9 @@ public final class VirtualCameraConfig implements Parcelable {
             throw new IllegalArgumentException("Lens facing must be set");
         }
         this.mLensFacing = i2;
-        Set<VirtualCameraStreamConfig> copyOf = Set.copyOf((Collection) Objects.requireNonNull(set, "Missing stream configurations"));
-        this.mStreamConfigurations = copyOf;
-        if (copyOf.isEmpty()) {
+        Set<VirtualCameraStreamConfig> setCopyOf = Set.copyOf((Collection) Objects.requireNonNull(set, "Missing stream configurations"));
+        this.mStreamConfigurations = setCopyOf;
+        if (setCopyOf.isEmpty()) {
             throw new IllegalArgumentException("At least one stream configuration is needed to create a virtual camera.");
         }
         this.mCallback = new VirtualCameraCallbackInternal((VirtualCameraCallback) Objects.requireNonNull(virtualCameraCallback, "Missing callback"), (Executor) Objects.requireNonNull(executor, "Missing callback executor"));
@@ -183,7 +182,7 @@ public final class VirtualCameraConfig implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.camera.VirtualCameraConfig$VirtualCameraCallbackInternal$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualCameraConfig.VirtualCameraCallbackInternal.this.lambda$onStreamConfigured$0(i, surface, i2, i3, i4);
+                    this.f$0.lambda$onStreamConfigured$0(i, surface, i2, i3, i4);
                 }
             });
         }
@@ -198,7 +197,7 @@ public final class VirtualCameraConfig implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.camera.VirtualCameraConfig$VirtualCameraCallbackInternal$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualCameraConfig.VirtualCameraCallbackInternal.this.lambda$onProcessCaptureRequest$1(i, j);
+                    this.f$0.lambda$onProcessCaptureRequest$1(i, j);
                 }
             });
         }
@@ -213,7 +212,7 @@ public final class VirtualCameraConfig implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.camera.VirtualCameraConfig$VirtualCameraCallbackInternal$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualCameraConfig.VirtualCameraCallbackInternal.this.lambda$onStreamClosed$2(i);
+                    this.f$0.lambda$onStreamClosed$2(i);
                 }
             });
         }

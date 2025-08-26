@@ -9,7 +9,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PromotedNotificationContentModel {
     public static final Companion Companion = new Companion(null);
@@ -33,7 +32,6 @@ public final class PromotedNotificationContentModel {
     public final CharSequence verificationText;
     public final boolean wasPromotedAutomatically;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Colors {
         public final int backgroundColor;
         public final int primaryTextColor;
@@ -66,7 +64,6 @@ public final class PromotedNotificationContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,7 +73,6 @@ public final class PromotedNotificationContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Identity {
         public final String key;
         public final Style style;
@@ -106,7 +102,6 @@ public final class PromotedNotificationContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OldProgress {
         public final boolean isIndeterminate;
         public final int max;
@@ -145,7 +140,6 @@ public final class PromotedNotificationContentModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Style {
         public static final /* synthetic */ Style[] $VALUES;
         public static final Style Base = null;
@@ -184,7 +178,6 @@ public final class PromotedNotificationContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class When {
         public /* synthetic */ When(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -228,33 +221,33 @@ public final class PromotedNotificationContentModel {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(this.identity.hashCode() * 31, 31, this.wasPromotedAutomatically);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(this.identity.hashCode() * 31, 31, this.wasPromotedAutomatically);
         ImageModel imageModel = this.smallIcon;
-        int m2 = ReorderTile$$ExternalSyntheticOutline0.m(this.iconLevel, (m + (imageModel == null ? 0 : imageModel.hashCode())) * 31, 31);
+        int iM2 = ReorderTile$$ExternalSyntheticOutline0.m(this.iconLevel, (iM + (imageModel == null ? 0 : imageModel.hashCode())) * 31, 31);
         CharSequence charSequence = this.appName;
-        int hashCode = (m2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode = (iM2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         CharSequence charSequence2 = this.subText;
-        int hashCode2 = (hashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
         String str = this.shortCriticalText;
-        int hashCode3 = (hashCode2 + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str == null ? 0 : str.hashCode())) * 31;
         When when = this.time;
-        int m3 = MoveResult$$ExternalSyntheticOutline0.m((hashCode3 + (when == null ? 0 : when.hashCode())) * 31, 31, this.lastAudiblyAlertedMs);
+        int iM3 = MoveResult$$ExternalSyntheticOutline0.m((iHashCode3 + (when == null ? 0 : when.hashCode())) * 31, 31, this.lastAudiblyAlertedMs);
         Integer num = this.profileBadgeResId;
-        int hashCode4 = (m3 + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode4 = (iM3 + (num == null ? 0 : num.hashCode())) * 31;
         CharSequence charSequence3 = this.title;
-        int hashCode5 = (hashCode4 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31;
         CharSequence charSequence4 = this.text;
-        int hashCode6 = (hashCode5 + (charSequence4 == null ? 0 : charSequence4.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (charSequence4 == null ? 0 : charSequence4.hashCode())) * 31;
         ImageModel imageModel2 = this.skeletonLargeIcon;
-        int hashCode7 = (hashCode6 + (imageModel2 == null ? 0 : imageModel2.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (imageModel2 == null ? 0 : imageModel2.hashCode())) * 31;
         OldProgress oldProgress = this.oldProgress;
-        int hashCode8 = (this.style.hashCode() + ((this.colors.hashCode() + ((hashCode7 + (oldProgress == null ? 0 : oldProgress.hashCode())) * 31)) * 31)) * 31;
+        int iHashCode8 = (this.style.hashCode() + ((this.colors.hashCode() + ((iHashCode7 + (oldProgress == null ? 0 : oldProgress.hashCode())) * 31)) * 31)) * 31;
         ImageModel imageModel3 = this.verificationIcon;
-        int hashCode9 = (hashCode8 + (imageModel3 == null ? 0 : imageModel3.hashCode())) * 31;
+        int iHashCode9 = (iHashCode8 + (imageModel3 == null ? 0 : imageModel3.hashCode())) * 31;
         CharSequence charSequence5 = this.verificationText;
-        int hashCode10 = (hashCode9 + (charSequence5 == null ? 0 : charSequence5.hashCode())) * 31;
+        int iHashCode10 = (iHashCode9 + (charSequence5 == null ? 0 : charSequence5.hashCode())) * 31;
         NotificationProgressModel notificationProgressModel = this.newProgress;
-        return hashCode10 + (notificationProgressModel != null ? notificationProgressModel.hashCode() : 0);
+        return iHashCode10 + (notificationProgressModel != null ? notificationProgressModel.hashCode() : 0);
     }
 
     public final String toString() {

@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.DialogKt;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CastTile$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -27,7 +26,7 @@ public final /* synthetic */ class CastTile$$ExternalSyntheticLambda2 implements
 
     @Override // java.lang.Runnable
     public final void run() {
-        DialogTransitionAnimator.Controller dialogTransitionController;
+        DialogTransitionAnimator.Controller controllerDialogTransitionController;
         switch (this.$r8$classId) {
             case 0:
                 CastTile castTile = this.f$0;
@@ -54,8 +53,8 @@ public final /* synthetic */ class CastTile$$ExternalSyntheticLambda2 implements
                 Dialog dialog = (Dialog) this.f$2;
                 int i = CastTile.$r8$clinit;
                 castTile2.getClass();
-                if (expandable != null && (dialogTransitionController = expandable.dialogTransitionController(new DialogCuj(58, "cast"))) != null) {
-                    castTile2.mDialogTransitionAnimator.show(dialog, dialogTransitionController, false);
+                if (expandable != null && (controllerDialogTransitionController = expandable.dialogTransitionController(new DialogCuj(58, "cast"))) != null) {
+                    castTile2.mDialogTransitionAnimator.show(dialog, controllerDialogTransitionController, false);
                     break;
                 } else {
                     if (dialog.getWindow() != null) {

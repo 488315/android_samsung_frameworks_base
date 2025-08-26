@@ -156,8 +156,8 @@ public interface MenuItem {
     MenuItem setVisible(boolean z);
 
     default MenuItem setIconTintBlendMode(BlendMode blendMode) {
-        PorterDuff.Mode blendModeToPorterDuffMode = BlendMode.blendModeToPorterDuffMode(blendMode);
-        return blendModeToPorterDuffMode != null ? setIconTintMode(blendModeToPorterDuffMode) : this;
+        PorterDuff.Mode modeBlendModeToPorterDuffMode = BlendMode.blendModeToPorterDuffMode(blendMode);
+        return modeBlendModeToPorterDuffMode != null ? setIconTintMode(modeBlendModeToPorterDuffMode) : this;
     }
 
     default BlendMode getIconTintBlendMode() {

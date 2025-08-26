@@ -148,26 +148,26 @@ public final class InlineSuggestionInfo implements Parcelable {
     }
 
     InlineSuggestionInfo(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        boolean z = (readByte & 16) != 0;
+        byte b = parcel.readByte();
+        boolean z = (b & 16) != 0;
         InlinePresentationSpec inlinePresentationSpec = (InlinePresentationSpec) parcel.readTypedObject(InlinePresentationSpec.CREATOR);
-        String readString = parcel.readString();
-        String[] createStringArray = (readByte & 4) == 0 ? null : parcel.createStringArray();
-        String readString2 = parcel.readString();
-        InlineSuggestion inlineSuggestion = (readByte & 32) == 0 ? null : (InlineSuggestion) parcel.readTypedObject(InlineSuggestion.CREATOR);
+        String string = parcel.readString();
+        String[] strArrCreateStringArray = (b & 4) == 0 ? null : parcel.createStringArray();
+        String string2 = parcel.readString();
+        InlineSuggestion inlineSuggestion = (b & 32) == 0 ? null : (InlineSuggestion) parcel.readTypedObject(InlineSuggestion.CREATOR);
         this.mInlinePresentationSpec = inlinePresentationSpec;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) inlinePresentationSpec);
-        this.mSource = readString;
-        if (!Objects.equals(readString, SOURCE_AUTOFILL) && !Objects.equals(readString, SOURCE_PLATFORM)) {
-            throw new IllegalArgumentException("source was " + readString + " but must be one of: SOURCE_AUTOFILL(android:autofill), SOURCE_PLATFORM(android:platform)");
+        this.mSource = string;
+        if (!Objects.equals(string, SOURCE_AUTOFILL) && !Objects.equals(string, SOURCE_PLATFORM)) {
+            throw new IllegalArgumentException("source was " + string + " but must be one of: SOURCE_AUTOFILL(android:autofill), SOURCE_PLATFORM(android:platform)");
         }
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mAutofillHints = createStringArray;
-        this.mType = readString2;
-        if (!Objects.equals(readString2, TYPE_SUGGESTION) && !Objects.equals(readString2, TYPE_ACTION)) {
-            throw new IllegalArgumentException("type was " + readString2 + " but must be one of: TYPE_SUGGESTION(android:autofill:suggestion), TYPE_ACTION(android:autofill:action)");
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mAutofillHints = strArrCreateStringArray;
+        this.mType = string2;
+        if (!Objects.equals(string2, TYPE_SUGGESTION) && !Objects.equals(string2, TYPE_ACTION)) {
+            throw new IllegalArgumentException("type was " + string2 + " but must be one of: TYPE_SUGGESTION(android:autofill:suggestion), TYPE_ACTION(android:autofill:action)");
         }
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString2);
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string2);
         this.mPinned = z;
         this.mTooltip = inlineSuggestion;
     }

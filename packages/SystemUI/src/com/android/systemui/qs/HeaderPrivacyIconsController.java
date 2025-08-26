@@ -53,7 +53,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HeaderPrivacyIconsController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -90,7 +89,6 @@ public final class HeaderPrivacyIconsController {
     public final UiEventLogger uiEventLogger;
     public final Executor uiExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -126,23 +124,23 @@ public final class HeaderPrivacyIconsController {
         this.delayableUiExecutor = delayableExecutor;
         this.systemClock = systemClock;
         this.taskbarIndicatorController = taskbarIndicatorController;
-        this.cameraSlot = ongoingPrivacyChip.getResources().getString(17043264);
-        this.micSlot = ongoingPrivacyChip.getResources().getString(17043282);
-        this.locationSlot = ongoingPrivacyChip.getResources().getString(17043280);
+        this.cameraSlot = ongoingPrivacyChip.getResources().getString(17043268);
+        this.micSlot = ongoingPrivacyChip.getResources().getString(17043286);
+        this.locationSlot = ongoingPrivacyChip.getResources().getString(17043284);
         EmptyList emptyList = EmptyList.INSTANCE;
         this.privacyList = emptyList;
         this.recentLocationPrivacyList = emptyList;
         this.desktopCallback = new StatusBarSignalPolicy.DesktopCallback() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1
             @Override // com.android.systemui.statusbar.phone.StatusBarSignalPolicy.DesktopCallback
             public final void updateDesktopStatusBarIcons() {
-                HeaderPrivacyIconsController headerPrivacyIconsController = HeaderPrivacyIconsController.this;
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
                 headerPrivacyIconsController.notifyPrivacyItemsChanged(headerPrivacyIconsController.privacyChip.privacyList);
             }
         };
         ?? r1 = new BroadcastReceiver() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$safetyCenterReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                HeaderPrivacyIconsController headerPrivacyIconsController = HeaderPrivacyIconsController.this;
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
                 headerPrivacyIconsController.safetyCenterManager.isSafetyCenterEnabled();
                 headerPrivacyIconsController.getClass();
             }
@@ -152,7 +150,7 @@ public final class HeaderPrivacyIconsController {
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
                 PrivacyDialog privacyDialog;
-                if (!"com.samsung.systemui.statusbar.COLLAPSED".equals(intent.getAction()) || (privacyDialog = HeaderPrivacyIconsController.this.privacyDialogController.dialog) == null) {
+                if (!"com.samsung.systemui.statusbar.COLLAPSED".equals(intent.getAction()) || (privacyDialog = this.this$0.privacyDialogController.dialog) == null) {
                     return;
                 }
                 privacyDialog.dismiss();
@@ -161,17 +159,17 @@ public final class HeaderPrivacyIconsController {
         ?? r9 = new View.OnAttachStateChangeListener() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$attachStateChangeListener$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                HeaderPrivacyIconsController headerPrivacyIconsController = HeaderPrivacyIconsController.this;
-                BroadcastDispatcher.registerReceiver$default(headerPrivacyIconsController.broadcastDispatcher, headerPrivacyIconsController.safetyCenterReceiver, new IntentFilter("android.safetycenter.action.SAFETY_CENTER_ENABLED_CHANGED"), HeaderPrivacyIconsController.this.backgroundExecutor, null, 0, null, 56);
-                HeaderPrivacyIconsController headerPrivacyIconsController2 = HeaderPrivacyIconsController.this;
-                BroadcastDispatcher.registerReceiver$default(headerPrivacyIconsController2.broadcastDispatcher, headerPrivacyIconsController2.panelEventReceiver, new IntentFilter("com.samsung.systemui.statusbar.COLLAPSED"), HeaderPrivacyIconsController.this.backgroundExecutor, null, 0, null, 56);
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+                BroadcastDispatcher.registerReceiver$default(headerPrivacyIconsController.broadcastDispatcher, headerPrivacyIconsController.safetyCenterReceiver, new IntentFilter("android.safetycenter.action.SAFETY_CENTER_ENABLED_CHANGED"), this.this$0.backgroundExecutor, null, 0, null, 56);
+                HeaderPrivacyIconsController headerPrivacyIconsController2 = this.this$0;
+                BroadcastDispatcher.registerReceiver$default(headerPrivacyIconsController2.broadcastDispatcher, headerPrivacyIconsController2.panelEventReceiver, new IntentFilter("com.samsung.systemui.statusbar.COLLAPSED"), this.this$0.backgroundExecutor, null, 0, null, 56);
             }
 
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
-                HeaderPrivacyIconsController headerPrivacyIconsController = HeaderPrivacyIconsController.this;
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
                 headerPrivacyIconsController.broadcastDispatcher.unregisterReceiver(headerPrivacyIconsController.safetyCenterReceiver);
-                HeaderPrivacyIconsController headerPrivacyIconsController2 = HeaderPrivacyIconsController.this;
+                HeaderPrivacyIconsController headerPrivacyIconsController2 = this.this$0;
                 headerPrivacyIconsController2.broadcastDispatcher.unregisterReceiver(headerPrivacyIconsController2.panelEventReceiver);
             }
         };
@@ -213,13 +211,13 @@ public final class HeaderPrivacyIconsController {
         try {
             ITaskbarStatusIconListener$Stub$Proxy iTaskbarStatusIconListener$Stub$Proxy = taskbarIndicatorController.taskbarStatusIconListener;
             if (iTaskbarStatusIconListener$Stub$Proxy != null) {
-                Parcel obtain = Parcel.obtain(iTaskbarStatusIconListener$Stub$Proxy.mRemote);
+                Parcel parcelObtain = Parcel.obtain(iTaskbarStatusIconListener$Stub$Proxy.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
-                    obtain.writeBoolean(z);
-                    iTaskbarStatusIconListener$Stub$Proxy.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
+                    parcelObtain.writeBoolean(z);
+                    iTaskbarStatusIconListener$Stub$Proxy.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         } catch (DeadObjectException unused) {
@@ -234,9 +232,9 @@ public final class HeaderPrivacyIconsController {
             LogLevel logLevel = LogLevel.INFO;
             PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(9);
             LogBuffer logBuffer = privacyLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = true;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = true;
+            logBuffer.commit(logMessageObtain);
             if (!this.privacyChipLogged && this.listening) {
                 this.privacyChipLogged = true;
                 this.uiEventLogger.log(PrivacyChipEvent.ONGOING_INDICATORS_CHIP_VIEW);
@@ -246,9 +244,9 @@ public final class HeaderPrivacyIconsController {
             LogLevel logLevel2 = LogLevel.INFO;
             PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda02 = new PrivacyLogger$$ExternalSyntheticLambda0(9);
             LogBuffer logBuffer2 = privacyLogger.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
-            ((LogMessageImpl) obtain2).bool1 = false;
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
+            ((LogMessageImpl) logMessageObtain2).bool1 = false;
+            logBuffer2.commit(logMessageObtain2);
         }
         this.privacyChip.setVisibility(z ? 0 : 8);
         ShadeHeaderController$chipVisibilityListener$1 shadeHeaderController$chipVisibilityListener$1 = this.chipVisibilityListener;
@@ -259,7 +257,7 @@ public final class HeaderPrivacyIconsController {
             ConstraintsChanges constraintsChanges = new ConstraintsChanges(new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda4
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     CombinedShadeHeadersConstraintManagerImpl combinedShadeHeadersConstraintManagerImpl = CombinedShadeHeadersConstraintManagerImpl.INSTANCE;
                     ((ConstraintSet) obj).setAlpha(R.id.shade_header_system_icons, f);
                     return Unit.INSTANCE;
@@ -271,7 +269,7 @@ public final class HeaderPrivacyIconsController {
                 int i = ShadeHeaderController.QQS_HEADER_CONSTRAINT;
                 ConstraintSet constraintSet = motionLayout.getConstraintSet(i);
                 constraintSet.getClass();
-                function1.mo779invoke(constraintSet);
+                function1.mo781invoke(constraintSet);
                 motionLayout.updateState(i, constraintSet);
             }
             Function1 function12 = constraintsChanges.qsConstraintsChanges;
@@ -279,7 +277,7 @@ public final class HeaderPrivacyIconsController {
                 int i2 = ShadeHeaderController.QS_HEADER_CONSTRAINT;
                 ConstraintSet constraintSet2 = motionLayout.getConstraintSet(i2);
                 constraintSet2.getClass();
-                function12.mo779invoke(constraintSet2);
+                function12.mo781invoke(constraintSet2);
                 motionLayout.updateState(i2, constraintSet2);
             }
         }

@@ -23,7 +23,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DolbyViewModel extends BaseSingleChoiceViewModel {
     public final Context context;
@@ -31,7 +30,6 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
     public final RoutineManager routineManager;
     public final SoundAliveManager soundAliveManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,7 +79,7 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     public final void notifyChange() {
-        Object obj;
+        Object next;
         List list = this.modelProvider.effectModel.dolbyList;
         if (list != null) {
             MutableLiveData optionNames = getOptionNames();
@@ -96,16 +94,16 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
             Iterator it2 = list2.iterator();
             while (true) {
                 if (!it2.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 } else {
-                    obj = it2.next();
-                    if (((Dolby) obj).state) {
+                    next = it2.next();
+                    if (((Dolby) next).state) {
                         break;
                     }
                 }
             }
-            Dolby dolby = (Dolby) obj;
+            Dolby dolby = (Dolby) next;
             mutableLiveData.setValue(dolby != null ? dolby.name : null);
         }
     }
@@ -119,7 +117,7 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseSingleChoiceViewModel
     public final void onItemSelected(int i) {
         Object obj;
-        Object obj2;
+        Object next;
         Log.d("SoundCraft.DolbyViewModel", "onItemSelected : position=" + i);
         ModelProvider modelProvider = this.modelProvider;
         EffectModel effectModel = modelProvider.effectModel;
@@ -138,16 +136,16 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
             while (true) {
                 obj = null;
                 if (!it.hasNext()) {
-                    obj2 = null;
+                    next = null;
                     break;
                 } else {
-                    obj2 = it.next();
-                    if (((Dolby) obj2).state) {
+                    next = it.next();
+                    if (((Dolby) next).state) {
                         break;
                     }
                 }
             }
-            Dolby dolby = (Dolby) obj2;
+            Dolby dolby = (Dolby) next;
             if (dolby != null) {
                 if (i == 0) {
                     Iterator it2 = modelProvider.effectModel.dolbyOldList.iterator();
@@ -155,9 +153,9 @@ public final class DolbyViewModel extends BaseSingleChoiceViewModel {
                         if (!it2.hasNext()) {
                             break;
                         }
-                        Object next = it2.next();
-                        if (Intrinsics.areEqual(((Dolby) next).name, dolby.name)) {
-                            obj = next;
+                        Object next2 = it2.next();
+                        if (Intrinsics.areEqual(((Dolby) next2).name, dolby.name)) {
+                            obj = next2;
                             break;
                         }
                     }

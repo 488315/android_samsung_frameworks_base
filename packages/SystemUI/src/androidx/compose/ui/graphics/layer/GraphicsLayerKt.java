@@ -20,10 +20,13 @@ import androidx.compose.ui.unit.IntOffset;
 import androidx.compose.ui.unit.IntSizeKt;
 import androidx.compose.ui.unit.LayoutDirection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class GraphicsLayerKt {
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0097  */
     /* JADX WARN: Type inference failed for: r0v1, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.Lambda] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final void drawLayer(DrawScope drawScope, GraphicsLayer graphicsLayer) {
         boolean z;
         boolean z2;
@@ -50,8 +53,8 @@ public abstract class GraphicsLayerKt {
         android.graphics.Canvas canvas2 = AndroidCanvas_androidKt.EmptyCanvas;
         AndroidCanvas androidCanvas = (AndroidCanvas) canvas;
         android.graphics.Canvas canvas3 = androidCanvas.internalCanvas;
-        boolean isHardwareAccelerated = canvas3.isHardwareAccelerated();
-        if (isHardwareAccelerated) {
+        boolean zIsHardwareAccelerated = canvas3.isHardwareAccelerated();
+        if (zIsHardwareAccelerated) {
             z = z5;
             z2 = true;
         } else {
@@ -66,51 +69,52 @@ public abstract class GraphicsLayerKt {
             float f5 = ((int) (j2 & 4294967295L)) + f3;
             float alpha = graphicsLayerImpl.getAlpha();
             ColorFilter colorFilter = graphicsLayerImpl.getColorFilter();
-            int mo550getBlendMode0nO6VwU = graphicsLayerImpl.mo550getBlendMode0nO6VwU();
+            int iMo552getBlendMode0nO6VwU = graphicsLayerImpl.mo552getBlendMode0nO6VwU();
             if (alpha >= 1.0f) {
                 BlendMode.Companion.getClass();
-                if (mo550getBlendMode0nO6VwU == BlendMode.SrcOver && colorFilter == null) {
-                    int mo551getCompositingStrategyke2Ky5w = graphicsLayerImpl.mo551getCompositingStrategyke2Ky5w();
+                if (iMo552getBlendMode0nO6VwU == BlendMode.SrcOver && colorFilter == null) {
+                    int iMo553getCompositingStrategyke2Ky5w = graphicsLayerImpl.mo553getCompositingStrategyke2Ky5w();
                     CompositingStrategy.Companion.getClass();
-                    if (mo551getCompositingStrategyke2Ky5w != CompositingStrategy.Offscreen) {
+                    if (iMo553getCompositingStrategyke2Ky5w != CompositingStrategy.Offscreen) {
                         canvas3.save();
                         f = f2;
-                        canvas3.translate(f, f3);
-                        canvas3.concat(graphicsLayerImpl.calculateMatrix());
                     }
+                    canvas3.translate(f, f3);
+                    canvas3.concat(graphicsLayerImpl.calculateMatrix());
+                } else {
+                    AndroidPaint androidPaint = graphicsLayer.softwareLayerPaint;
+                    if (androidPaint == null) {
+                        androidPaint = new AndroidPaint();
+                        graphicsLayer.softwareLayerPaint = androidPaint;
+                    }
+                    androidPaint.setAlpha(alpha);
+                    androidPaint.m439setBlendModes9anfk8(iMo552getBlendMode0nO6VwU);
+                    androidPaint.setColorFilter(colorFilter);
+                    f = f2;
+                    canvas3.saveLayer(f, f3, f4, f5, androidPaint.internalPaint);
+                    canvas3.translate(f, f3);
+                    canvas3.concat(graphicsLayerImpl.calculateMatrix());
                 }
             }
-            AndroidPaint androidPaint = graphicsLayer.softwareLayerPaint;
-            if (androidPaint == null) {
-                androidPaint = new AndroidPaint();
-                graphicsLayer.softwareLayerPaint = androidPaint;
-            }
-            androidPaint.setAlpha(alpha);
-            androidPaint.m437setBlendModes9anfk8(mo550getBlendMode0nO6VwU);
-            androidPaint.setColorFilter(colorFilter);
-            f = f2;
-            canvas3.saveLayer(f, f3, f4, f5, androidPaint.internalPaint);
-            canvas3.translate(f, f3);
-            canvas3.concat(graphicsLayerImpl.calculateMatrix());
         }
-        boolean z6 = (isHardwareAccelerated || !graphicsLayer.clip) ? false : z2;
+        boolean z6 = (zIsHardwareAccelerated || !graphicsLayer.clip) ? false : z2;
         if (z6) {
             canvas.save();
             Outline outline = graphicsLayer.getOutline();
             if (outline instanceof Outline.Rectangle) {
-                Canvas.m453clipRectmtrdDE$default(canvas, outline.getBounds());
+                Canvas.m455clipRectmtrdDE$default(canvas, outline.getBounds());
             } else if (outline instanceof Outline.Rounded) {
-                AndroidPath androidPath = graphicsLayer.roundRectClipPath;
-                if (androidPath != null) {
-                    androidPath.internalPath.rewind();
+                AndroidPath androidPathPath = graphicsLayer.roundRectClipPath;
+                if (androidPathPath != null) {
+                    androidPathPath.internalPath.rewind();
                 } else {
-                    androidPath = AndroidPath_androidKt.Path();
-                    graphicsLayer.roundRectClipPath = androidPath;
+                    androidPathPath = AndroidPath_androidKt.Path();
+                    graphicsLayer.roundRectClipPath = androidPathPath;
                 }
-                Path.addRoundRect$default(androidPath, ((Outline.Rounded) outline).roundRect);
-                Canvas.m452clipPathmtrdDE$default(canvas, androidPath);
+                Path.addRoundRect$default(androidPathPath, ((Outline.Rounded) outline).roundRect);
+                Canvas.m454clipPathmtrdDE$default(canvas, androidPathPath);
             } else if (outline instanceof Outline.Generic) {
-                Canvas.m452clipPathmtrdDE$default(canvas, ((Outline.Generic) outline).path);
+                Canvas.m454clipPathmtrdDE$default(canvas, ((Outline.Generic) outline).path);
             }
         }
         if (graphicsLayer2 != null) {
@@ -122,12 +126,12 @@ public abstract class GraphicsLayerKt {
             if (mutableScatterSet != null) {
                 mutableScatterSet.add(graphicsLayer);
             } else if (childLayerDependenciesTracker.dependency != null) {
-                MutableScatterSet mutableScatterSetOf = ScatterSetKt.mutableScatterSetOf();
+                MutableScatterSet mutableScatterSetMutableScatterSetOf = ScatterSetKt.mutableScatterSetOf();
                 GraphicsLayer graphicsLayer3 = childLayerDependenciesTracker.dependency;
                 graphicsLayer3.getClass();
-                mutableScatterSetOf.add(graphicsLayer3);
-                mutableScatterSetOf.add(graphicsLayer);
-                childLayerDependenciesTracker.dependenciesSet = mutableScatterSetOf;
+                mutableScatterSetMutableScatterSetOf.add(graphicsLayer3);
+                mutableScatterSetMutableScatterSetOf.add(graphicsLayer);
+                childLayerDependenciesTracker.dependenciesSet = mutableScatterSetMutableScatterSetOf;
                 childLayerDependenciesTracker.dependency = null;
             } else {
                 childLayerDependenciesTracker.dependency = graphicsLayer;
@@ -146,7 +150,7 @@ public abstract class GraphicsLayerKt {
             }
         }
         if (androidCanvas.internalCanvas.isHardwareAccelerated()) {
-            z3 = isHardwareAccelerated;
+            z3 = zIsHardwareAccelerated;
             graphicsLayerImpl.draw(canvas);
         } else {
             CanvasDrawScope canvasDrawScope = graphicsLayer.softwareDrawScope;
@@ -156,20 +160,20 @@ public abstract class GraphicsLayerKt {
             }
             Density density = graphicsLayer.density;
             LayoutDirection layoutDirection = graphicsLayer.layoutDirection;
-            long m864toSizeozmzZPI = IntSizeKt.m864toSizeozmzZPI(graphicsLayer.size);
+            long jM866toSizeozmzZPI = IntSizeKt.m866toSizeozmzZPI(graphicsLayer.size);
             ?? r0 = graphicsLayer.drawBlock;
             CanvasDrawScope.DrawParams drawParams = canvasDrawScope.drawParams;
             Density density2 = drawParams.density;
             LayoutDirection layoutDirection2 = drawParams.layoutDirection;
             Canvas canvas4 = drawParams.canvas;
-            z3 = isHardwareAccelerated;
+            z3 = zIsHardwareAccelerated;
             long j3 = drawParams.size;
             drawParams.density = density;
             drawParams.layoutDirection = layoutDirection;
             drawParams.canvas = canvas;
-            drawParams.size = m864toSizeozmzZPI;
+            drawParams.size = jM866toSizeozmzZPI;
             canvas.save();
-            r0.mo779invoke(canvasDrawScope);
+            r0.mo781invoke(canvasDrawScope);
             canvas.restore();
             drawParams.density = density2;
             drawParams.layoutDirection = layoutDirection2;

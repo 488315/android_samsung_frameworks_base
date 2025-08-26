@@ -21,7 +21,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.DialogPreference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PreferenceDialogFragmentCompat extends DialogFragment implements DialogInterface.OnClickListener {
     public BitmapDrawable mDialogIcon;
@@ -33,7 +32,6 @@ public abstract class PreferenceDialogFragmentCompat extends DialogFragment impl
     public DialogPreference mPreference;
     public int mWhichButtonClicked;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api30Impl {
         private Api30Impl() {
         }
@@ -56,19 +54,19 @@ public abstract class PreferenceDialogFragmentCompat extends DialogFragment impl
 
     public void onBindDialogView(View view) {
         int i;
-        View findViewById = view.findViewById(R.id.message);
-        if (findViewById != null) {
+        View viewFindViewById = view.findViewById(R.id.message);
+        if (viewFindViewById != null) {
             CharSequence charSequence = this.mDialogMessage;
             if (TextUtils.isEmpty(charSequence)) {
                 i = 8;
             } else {
-                if (findViewById instanceof TextView) {
-                    ((TextView) findViewById).setText(charSequence);
+                if (viewFindViewById instanceof TextView) {
+                    ((TextView) viewFindViewById).setText(charSequence);
                 }
                 i = 0;
             }
-            if (findViewById.getVisibility() != i) {
-                findViewById.setVisibility(i);
+            if (viewFindViewById.getVisibility() != i) {
+                viewFindViewById.setVisibility(i);
             }
         }
     }
@@ -116,11 +114,11 @@ public abstract class PreferenceDialogFragmentCompat extends DialogFragment impl
             this.mDialogIcon = (BitmapDrawable) drawable;
             return;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        this.mDialogIcon = new BitmapDrawable(getResources(), createBitmap);
+        this.mDialogIcon = new BitmapDrawable(getResources(), bitmapCreateBitmap);
     }
 
     @Override // androidx.fragment.app.DialogFragment
@@ -136,27 +134,27 @@ public abstract class PreferenceDialogFragmentCompat extends DialogFragment impl
         alertParams.mNegativeButtonListener = this;
         requireContext();
         int i = this.mDialogLayoutRes;
-        View view = null;
+        View viewInflate = null;
         if (i != 0) {
-            LayoutInflater layoutInflater = this.mLayoutInflater;
-            if (layoutInflater == null) {
-                layoutInflater = onGetLayoutInflater(null);
-                this.mLayoutInflater = layoutInflater;
+            LayoutInflater layoutInflaterOnGetLayoutInflater = this.mLayoutInflater;
+            if (layoutInflaterOnGetLayoutInflater == null) {
+                layoutInflaterOnGetLayoutInflater = onGetLayoutInflater(null);
+                this.mLayoutInflater = layoutInflaterOnGetLayoutInflater;
             }
-            view = layoutInflater.inflate(i, (ViewGroup) null);
+            viewInflate = layoutInflaterOnGetLayoutInflater.inflate(i, (ViewGroup) null);
         }
-        if (view != null) {
-            onBindDialogView(view);
-            builder.setView(view);
+        if (viewInflate != null) {
+            onBindDialogView(viewInflate);
+            builder.setView(viewInflate);
         } else {
             alertParams.mMessage = this.mDialogMessage;
         }
         onPrepareDialogBuilder(builder);
-        AlertDialog create = builder.create();
+        AlertDialog alertDialogCreate = builder.create();
         if (this instanceof EditTextPreferenceDialogFragmentCompat) {
-            Api30Impl.showIme(create.getWindow());
+            Api30Impl.showIme(alertDialogCreate.getWindow());
         }
-        return create;
+        return alertDialogCreate;
     }
 
     public abstract void onDialogClosed(boolean z);

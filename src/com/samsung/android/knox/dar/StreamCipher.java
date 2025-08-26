@@ -33,14 +33,10 @@ public class StreamCipher {
     }
 
     public static synchronized StreamCipher getInstance() {
-        StreamCipher streamCipher;
-        synchronized (StreamCipher.class) {
-            if (sInstance == null) {
-                sInstance = new StreamCipher();
-            }
-            streamCipher = sInstance;
+        if (sInstance == null) {
+            sInstance = new StreamCipher();
         }
-        return streamCipher;
+        return sInstance;
     }
 
     private void initKeyMap() {
@@ -69,9 +65,9 @@ public class StreamCipher {
     public long issueKeyStream(int i) {
         if (i > 0) {
             for (int i2 = 0; i2 < 100; i2++) {
-                long nextLong = sSecureRandom.nextLong();
-                if (nextLong != 0 && registerKeyStream(nextLong, new KeyStream(generateKey(i)))) {
-                    return nextLong;
+                long jNextLong = sSecureRandom.nextLong();
+                if (jNextLong != 0 && registerKeyStream(jNextLong, new KeyStream(generateKey(i)))) {
+                    return jNextLong;
                 }
             }
         }
@@ -92,7 +88,7 @@ public class StreamCipher {
     }
 
     public byte[] streamCipher(byte[] bArr, long j) {
-        byte[] streamCipher;
+        byte[] bArrStreamCipher;
         if (bArr == null) {
             return null;
         }
@@ -105,9 +101,9 @@ public class StreamCipher {
                 keyStreamLocked = new KeyStream(generateKey(bArr.length));
                 registerKeyStream(j, keyStreamLocked);
             }
-            streamCipher = streamCipher(bArr, keyStreamLocked.getKey());
+            bArrStreamCipher = streamCipher(bArr, keyStreamLocked.getKey());
         }
-        return streamCipher;
+        return bArrStreamCipher;
     }
 
     private byte[] streamCipher(byte[] bArr, byte[] bArr2) throws IllegalArgumentException {
@@ -117,11 +113,11 @@ public class StreamCipher {
         byte[] bArr3 = new byte[bArr.length];
         int i = 0;
         if (bArr.length > bArr2.length) {
-            int i2 = 0;
+            int length = 0;
             while (i < bArr.length) {
-                bArr3[i] = (byte) (bArr2[i2] ^ bArr[i]);
+                bArr3[i] = (byte) (bArr2[length] ^ bArr[i]);
                 i++;
-                i2 = i % bArr2.length;
+                length = i % bArr2.length;
             }
         } else {
             while (i < bArr.length) {
@@ -144,17 +140,17 @@ public class StreamCipher {
     }
 
     public byte[] getKey(long j) {
-        byte[] bArr;
+        byte[] key;
         synchronized (this.mKeyMap) {
             KeyStream keyStreamLocked = getKeyStreamLocked(j);
             if (keyStreamLocked != null) {
                 Log.d(TAG, "Key found with handle " + j);
-                bArr = keyStreamLocked.getKey();
+                key = keyStreamLocked.getKey();
             } else {
-                bArr = null;
+                key = null;
             }
         }
-        return bArr;
+        return key;
     }
 
     private KeyStream getKeyStreamLocked(long j) {

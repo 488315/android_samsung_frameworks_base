@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class IWalletContextualLocationsService$Stub extends Binder implements IInterface {
     public IWalletContextualLocationsService$Stub() {
@@ -24,12 +23,12 @@ public abstract class IWalletContextualLocationsService$Stub extends Binder impl
             return true;
         }
         if (i == 1) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder == null) {
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder == null) {
                 iWalletCardsUpdatedListener$Stub$Proxy = null;
             } else {
-                IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.wallet.controller.IWalletCardsUpdatedListener");
-                iWalletCardsUpdatedListener$Stub$Proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IWalletCardsUpdatedListener)) ? new IWalletCardsUpdatedListener$Stub$Proxy(readStrongBinder) : (IWalletCardsUpdatedListener) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.wallet.controller.IWalletCardsUpdatedListener");
+                iWalletCardsUpdatedListener$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IWalletCardsUpdatedListener)) ? new IWalletCardsUpdatedListener$Stub$Proxy(strongBinder) : (IWalletCardsUpdatedListener) iInterfaceQueryLocalInterface;
             }
             parcel.enforceNoDataAvail();
             ((WalletContextualLocationsService$binder$1) this).this$0.addWalletCardsUpdatedListenerInternal(iWalletCardsUpdatedListener$Stub$Proxy);
@@ -38,9 +37,9 @@ public abstract class IWalletContextualLocationsService$Stub extends Binder impl
             if (i != 2) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             parcel.enforceNoDataAvail();
-            ((WalletContextualLocationsService$binder$1) this).this$0.onWalletContextualLocationsStateUpdatedInternal(createStringArrayList);
+            ((WalletContextualLocationsService$binder$1) this).this$0.onWalletContextualLocationsStateUpdatedInternal(arrayListCreateStringArrayList);
             parcel2.writeNoException();
         }
         return true;

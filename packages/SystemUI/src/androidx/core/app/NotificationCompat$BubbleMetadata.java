@@ -7,7 +7,6 @@ import android.graphics.drawable.Icon;
 import android.text.TextUtils;
 import androidx.core.graphics.drawable.IconCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NotificationCompat$BubbleMetadata {
     public final PendingIntent mDeleteIntent;
@@ -18,7 +17,6 @@ public final class NotificationCompat$BubbleMetadata {
     public final PendingIntent mPendingIntent;
     public final String mShortcutId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api30Impl {
         private Api30Impl() {
         }
@@ -78,7 +76,6 @@ public final class NotificationCompat$BubbleMetadata {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public PendingIntent mDeleteIntent;
         public int mDesiredHeight;

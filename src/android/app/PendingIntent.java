@@ -24,6 +24,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.proto.ProtoOutputStream;
 import com.android.internal.os.IResultReceiver;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -56,9 +57,9 @@ public final class PendingIntent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PendingIntent createFromParcel(Parcel parcel) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder != null) {
-                return new PendingIntent(readStrongBinder, parcel.getClassCookie(PendingIntent.class));
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder != null) {
+                return new PendingIntent(strongBinder, parcel.getClassCookie(PendingIntent.class));
             }
             return null;
         }
@@ -213,14 +214,14 @@ public final class PendingIntent implements Parcelable {
         return getActivityAsUser(context, i, intent, i2, bundle, user);
     }
 
-    public static PendingIntent getActivityAsUser(Context context, int i, Intent intent, int i2, Bundle bundle, UserHandle userHandle) {
+    public static PendingIntent getActivityAsUser(Context context, int i, Intent intent, int i2, Bundle bundle, UserHandle userHandle) throws IOException {
         String packageName = context.getPackageName();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
         checkPendingIntent(i2, intent, context, false);
         try {
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(2, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, resolveTypeIfNeeded != null ? new String[]{resolveTypeIfNeeded} : null, i2, context instanceof Activity ? setFreeformInOptionsIfNeeded((Activity) context, bundle) : bundle, userHandle.getIdentifier());
+            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(2, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, strResolveTypeIfNeeded != null ? new String[]{strResolveTypeIfNeeded} : null, i2, context instanceof Activity ? setFreeformInOptionsIfNeeded((Activity) context, bundle) : bundle, userHandle.getIdentifier());
             if (intentSenderWithFeature != null) {
                 return new PendingIntent(intentSenderWithFeature);
             }
@@ -242,7 +243,7 @@ public final class PendingIntent implements Parcelable {
         return getActivitiesAsUser(context, i, intentArr, i2, bundle, user);
     }
 
-    public static PendingIntent getActivitiesAsUser(Context context, int i, Intent[] intentArr, int i2, Bundle bundle, UserHandle userHandle) {
+    public static PendingIntent getActivitiesAsUser(Context context, int i, Intent[] intentArr, int i2, Bundle bundle, UserHandle userHandle) throws IOException {
         String packageName = context.getPackageName();
         String[] strArr = new String[intentArr.length];
         for (int i3 = 0; i3 < intentArr.length; i3++) {
@@ -268,11 +269,11 @@ public final class PendingIntent implements Parcelable {
 
     public static PendingIntent getBroadcastAsUser(Context context, int i, Intent intent, int i2, UserHandle userHandle) {
         String packageName = context.getPackageName();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
         checkPendingIntent(i2, intent, context, false);
         try {
             intent.prepareToLeaveProcess(context);
-            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(1, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, resolveTypeIfNeeded != null ? new String[]{resolveTypeIfNeeded} : null, i2, null, userHandle.getIdentifier());
+            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(1, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, strResolveTypeIfNeeded != null ? new String[]{strResolveTypeIfNeeded} : null, i2, null, userHandle.getIdentifier());
             if (intentSenderWithFeature != null) {
                 return new PendingIntent(intentSenderWithFeature);
             }
@@ -292,11 +293,11 @@ public final class PendingIntent implements Parcelable {
 
     private static PendingIntent buildServicePendingIntent(Context context, int i, Intent intent, int i2, int i3) {
         String packageName = context.getPackageName();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(context.getContentResolver());
         checkPendingIntent(i2, intent, context, false);
         try {
             intent.prepareToLeaveProcess(context);
-            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(i3, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, resolveTypeIfNeeded != null ? new String[]{resolveTypeIfNeeded} : null, i2, null, context.getUserId());
+            IIntentSender intentSenderWithFeature = ActivityManager.getService().getIntentSenderWithFeature(i3, packageName, context.getAttributionTag(), null, null, i, new Intent[]{intent}, strResolveTypeIfNeeded != null ? new String[]{strResolveTypeIfNeeded} : null, i2, null, context.getUserId());
             if (intentSenderWithFeature != null) {
                 return new PendingIntent(intentSenderWithFeature);
             }
@@ -354,7 +355,7 @@ public final class PendingIntent implements Parcelable {
 
     public int sendAndReturnResult(Context context, int i, Intent intent, OnFinished onFinished, Handler handler, String str, Bundle bundle) throws CanceledException {
         Bundle bundle2;
-        ActivityOptions makeBasic;
+        ActivityOptions activityOptionsMakeBasic;
         if (intent != null) {
             try {
                 intent.collectExtraIntentKeys();
@@ -362,19 +363,19 @@ public final class PendingIntent implements Parcelable {
                 throw new CanceledException(e);
             }
         }
-        String resolveTypeIfNeeded = intent != null ? intent.resolveTypeIfNeeded(context.getContentResolver()) : null;
+        String strResolveTypeIfNeeded = intent != null ? intent.resolveTypeIfNeeded(context.getContentResolver()) : null;
         if (context == null || !isActivity()) {
             bundle2 = bundle;
         } else {
             if (bundle != null) {
-                makeBasic = new ActivityOptions(bundle);
+                activityOptionsMakeBasic = new ActivityOptions(bundle);
             } else {
-                makeBasic = ActivityOptions.makeBasic();
+                activityOptionsMakeBasic = ActivityOptions.makeBasic();
             }
-            makeBasic.setCallerDisplayId(context.getDisplayId());
-            bundle2 = makeBasic.toBundle();
+            activityOptionsMakeBasic.setCallerDisplayId(context.getDisplayId());
+            bundle2 = activityOptionsMakeBasic.toBundle();
         }
-        return ActivityManager.getService().sendIntentSender(ActivityThread.currentActivityThread().getApplicationThread(), this.mTarget, this.mWhitelistToken, i, intent, resolveTypeIfNeeded, onFinished != null ? new FinishedDispatcher(this, onFinished, handler) : null, str, bundle2);
+        return ActivityManager.getService().sendIntentSender(ActivityThread.currentActivityThread().getApplicationThread(), this.mTarget, this.mWhitelistToken, i, intent, strResolveTypeIfNeeded, onFinished != null ? new FinishedDispatcher(this, onFinished, handler) : null, str, bundle2);
     }
 
     @Deprecated
@@ -409,15 +410,15 @@ public final class PendingIntent implements Parcelable {
                 this.mCancelListerInfo = new CancelListerInfo();
             }
             CancelListerInfo cancelListerInfo2 = this.mCancelListerInfo;
-            boolean isEmpty = cancelListerInfo2.mCancelListeners.isEmpty();
+            boolean zIsEmpty = cancelListerInfo2.mCancelListeners.isEmpty();
             cancelListerInfo2.mCancelListeners.add(Pair.create(executor, cancelListener));
-            if (isEmpty) {
+            if (zIsEmpty) {
                 try {
-                    boolean registerIntentSenderCancelListenerEx = ActivityManager.getService().registerIntentSenderCancelListenerEx(this.mTarget, cancelListerInfo2);
-                    if (!registerIntentSenderCancelListenerEx) {
+                    boolean zRegisterIntentSenderCancelListenerEx = ActivityManager.getService().registerIntentSenderCancelListenerEx(this.mTarget, cancelListerInfo2);
+                    if (!zRegisterIntentSenderCancelListenerEx) {
                         cancelListerInfo2.mCanceled = true;
                     }
-                    return registerIntentSenderCancelListenerEx;
+                    return zRegisterIntentSenderCancelListenerEx;
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -441,7 +442,7 @@ public final class PendingIntent implements Parcelable {
             ((Executor) pair.first).execute(new Runnable() { // from class: android.app.PendingIntent$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PendingIntent.this.lambda$notifyCancelListeners$0(pair);
+                    this.f$0.lambda$notifyCancelListeners$0(pair);
                 }
             });
         }
@@ -529,11 +530,11 @@ public final class PendingIntent implements Parcelable {
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public List<ResolveInfo> queryIntentComponents(int i) {
         try {
-            ParceledListSlice queryIntentComponentsForIntentSender = ActivityManager.getService().queryIntentComponentsForIntentSender(this.mTarget, i);
-            if (queryIntentComponentsForIntentSender == null) {
+            ParceledListSlice parceledListSliceQueryIntentComponentsForIntentSender = ActivityManager.getService().queryIntentComponentsForIntentSender(this.mTarget, i);
+            if (parceledListSliceQueryIntentComponentsForIntentSender == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentComponentsForIntentSender.getList();
+            return parceledListSliceQueryIntentComponentsForIntentSender.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -573,9 +574,9 @@ public final class PendingIntent implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mTarget.asBinder().toString());
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     @Override // android.os.Parcelable
@@ -600,9 +601,9 @@ public final class PendingIntent implements Parcelable {
     }
 
     public static PendingIntent readPendingIntentOrNullFromParcel(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        if (readStrongBinder != null) {
-            return new PendingIntent(readStrongBinder, parcel.getClassCookie(PendingIntent.class));
+        IBinder strongBinder = parcel.readStrongBinder();
+        if (strongBinder != null) {
+            return new PendingIntent(strongBinder, parcel.getClassCookie(PendingIntent.class));
         }
         return null;
     }
@@ -638,11 +639,11 @@ public final class PendingIntent implements Parcelable {
     }
 
     private static Bundle setFreeformInOptionsIfNeeded(Activity activity, Bundle bundle) {
-        ActivityOptions makeBasic = bundle == null ? ActivityOptions.makeBasic() : ActivityOptions.fromBundle(bundle);
-        if (activity.getWindowingMode() == 5 && makeBasic.getLaunchWindowingMode() == 0) {
-            makeBasic.setLaunchWindowingMode(5);
+        ActivityOptions activityOptionsMakeBasic = bundle == null ? ActivityOptions.makeBasic() : ActivityOptions.fromBundle(bundle);
+        if (activity.getWindowingMode() == 5 && activityOptionsMakeBasic.getLaunchWindowingMode() == 0) {
+            activityOptionsMakeBasic.setLaunchWindowingMode(5);
         }
-        return makeBasic.toBundle();
+        return activityOptionsMakeBasic.toBundle();
     }
 
     public ActivityOptions getOptions() {

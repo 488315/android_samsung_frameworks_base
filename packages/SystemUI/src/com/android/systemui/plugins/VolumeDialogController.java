@@ -11,14 +11,12 @@ import com.android.systemui.plugins.annotations.DependsOn;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Dependencies({@DependsOn(target = StreamState.class), @DependsOn(target = State.class), @DependsOn(target = Callbacks.class)})
 @ProvidesInterface(version = 1)
 /* loaded from: classes2.dex */
 public interface VolumeDialogController {
     public static final int VERSION = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 2)
     public interface Callbacks {
         public static final int VERSION = 2;
@@ -64,7 +62,6 @@ public interface VolumeDialogController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 1)
     public final class State {
         public static int NO_ACTIVE_STREAM = -1;
@@ -138,20 +135,20 @@ public interface VolumeDialogController {
                 if (i2 > 0) {
                     sep(sb, i);
                 }
-                int keyAt = this.states.keyAt(i2);
-                StreamState valueAt = this.states.valueAt(i2);
-                sb.append(AudioSystem.streamToString(keyAt));
+                int iKeyAt = this.states.keyAt(i2);
+                StreamState streamStateValueAt = this.states.valueAt(i2);
+                sb.append(AudioSystem.streamToString(iKeyAt));
                 sb.append(":");
-                sb.append(valueAt.level);
+                sb.append(streamStateValueAt.level);
                 sb.append('[');
-                sb.append(valueAt.levelMin);
+                sb.append(streamStateValueAt.levelMin);
                 sb.append("..");
-                sb.append(valueAt.levelMax);
+                sb.append(streamStateValueAt.levelMax);
                 sb.append(']');
-                if (valueAt.muted) {
+                if (streamStateValueAt.muted) {
                     sb.append(" [MUTED]");
                 }
-                if (valueAt.dynamic) {
+                if (streamStateValueAt.dynamic) {
                     sb.append(" [DYNAMIC]");
                 }
             }
@@ -193,7 +190,6 @@ public interface VolumeDialogController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 1)
     public final class StreamState {
         public static final int VERSION = 1;

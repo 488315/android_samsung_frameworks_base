@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import com.android.systemui.ScreenDecorations;
 import com.android.systemui.decor.CutoutDecorProviderFactory;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda5 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -17,12 +16,12 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda5 i
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Throwable {
         int i = this.$r8$classId;
         ScreenDecorations screenDecorations = this.f$0;
         switch (i) {
             case 0:
-                ScreenDecorations.m997$r8$lambda$KoNSRBrMuoZsUyWIX90PQvGYvA(screenDecorations);
+                ScreenDecorations.m999$r8$lambda$KoNSRBrMuoZsUyWIX90PQvGYvA(screenDecorations);
                 break;
             case 1:
                 boolean z = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;

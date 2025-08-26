@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaAction {
     public final Runnable action;
@@ -34,15 +33,15 @@ public final class MediaAction {
 
     public final int hashCode() {
         Drawable drawable = this.icon;
-        int hashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
+        int iHashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
         Runnable runnable = this.action;
-        int hashCode2 = (hashCode + (runnable == null ? 0 : runnable.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (runnable == null ? 0 : runnable.hashCode())) * 31;
         CharSequence charSequence = this.contentDescription;
-        int hashCode3 = (hashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         Drawable drawable2 = this.background;
-        int hashCode4 = (hashCode3 + (drawable2 == null ? 0 : drawable2.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (drawable2 == null ? 0 : drawable2.hashCode())) * 31;
         Integer num = this.rebindId;
-        return hashCode4 + (num != null ? num.hashCode() : 0);
+        return iHashCode4 + (num != null ? num.hashCode() : 0);
     }
 
     public final String toString() {

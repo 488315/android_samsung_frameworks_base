@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ShadeDependentFlows $shadeDependentFlows$inlined;
@@ -43,7 +42,7 @@ public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLa
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        ChannelLimitedFlowMerge transitionFlow;
+        ChannelLimitedFlowMerge channelLimitedFlowMergeTransitionFlow;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -53,10 +52,10 @@ public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLa
                 ShadeDependentFlows shadeDependentFlows = this.$shadeDependentFlows$inlined;
                 KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = this.this$0.transitionAnimation;
                 Duration.Companion companion = Duration.Companion;
-                transitionFlow = shadeDependentFlows.transitionFlow(KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(flowBuilder, DurationKt.toDuration(300, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
+                channelLimitedFlowMergeTransitionFlow = shadeDependentFlows.transitionFlow(KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, DurationKt.toDuration(300, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         return Float.valueOf(((Number) obj2).floatValue());
                     }
                 }, 0L, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$2
@@ -72,13 +71,13 @@ public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLa
                 }, null, null, 204), this.this$0.transitionAnimation.immediatelyTransitionTo(1.0f));
             } else {
                 ShadeDependentFlows shadeDependentFlows2 = this.$shadeDependentFlows$inlined;
-                KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 immediatelyTransitionTo = this.this$0.transitionAnimation.immediatelyTransitionTo(0.0f);
+                KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1ImmediatelyTransitionTo = this.this$0.transitionAnimation.immediatelyTransitionTo(0.0f);
                 KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder2 = this.this$0.transitionAnimation;
                 Duration.Companion companion2 = Duration.Companion;
-                transitionFlow = shadeDependentFlows2.transitionFlow(immediatelyTransitionTo, KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(flowBuilder2, DurationKt.toDuration(200, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$4
+                channelLimitedFlowMergeTransitionFlow = shadeDependentFlows2.transitionFlow(keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1ImmediatelyTransitionTo, KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder2, DurationKt.toDuration(200, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$4
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         return Float.valueOf(1.0f - ((Number) obj2).floatValue());
                     }
                 }, 0L, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToAodTransitionViewModel$deviceEntryParentViewAlpha$1$5
@@ -94,7 +93,7 @@ public final class LockscreenToAodTransitionViewModel$special$$inlined$flatMapLa
                 }, null, null, 204));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, transitionFlow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, channelLimitedFlowMergeTransitionFlow, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

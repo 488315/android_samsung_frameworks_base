@@ -4,16 +4,15 @@ import androidx.collection.MutableScatterMap;
 import androidx.collection.MutableScatterSet;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScopeMap<Key, Scope> {
     public final MutableScatterMap map;
 
     /* renamed from: add-impl, reason: not valid java name */
-    public static final void m347addimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
-        int findInsertIndex = mutableScatterMap.findInsertIndex(obj);
-        boolean z = findInsertIndex < 0;
-        Object obj3 = z ? null : mutableScatterMap.values[findInsertIndex];
+    public static final void m348addimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
+        int iFindInsertIndex = mutableScatterMap.findInsertIndex(obj);
+        boolean z = iFindInsertIndex < 0;
+        Object obj3 = z ? null : mutableScatterMap.values[iFindInsertIndex];
         if (obj3 != null) {
             if (obj3 instanceof MutableScatterSet) {
                 ((MutableScatterSet) obj3).add(obj2);
@@ -26,16 +25,16 @@ public final class ScopeMap<Key, Scope> {
             obj2 = obj3;
         }
         if (!z) {
-            mutableScatterMap.values[findInsertIndex] = obj2;
+            mutableScatterMap.values[iFindInsertIndex] = obj2;
             return;
         }
-        int i = ~findInsertIndex;
+        int i = ~iFindInsertIndex;
         mutableScatterMap.keys[i] = obj;
         mutableScatterMap.values[i] = obj2;
     }
 
     /* renamed from: remove-impl, reason: not valid java name */
-    public static final boolean m348removeimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
+    public static final boolean m349removeimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
         Object obj3 = mutableScatterMap.get(obj);
         if (obj3 == null) {
             return false;
@@ -48,16 +47,16 @@ public final class ScopeMap<Key, Scope> {
             return true;
         }
         MutableScatterSet mutableScatterSet = (MutableScatterSet) obj3;
-        boolean remove = mutableScatterSet.remove(obj2);
-        if (remove && mutableScatterSet.isEmpty()) {
+        boolean zRemove = mutableScatterSet.remove(obj2);
+        if (zRemove && mutableScatterSet.isEmpty()) {
             mutableScatterMap.remove(obj);
         }
-        return remove;
+        return zRemove;
     }
 
     /* renamed from: removeScope-impl, reason: not valid java name */
-    public static final void m349removeScopeimpl(MutableScatterMap mutableScatterMap, Object obj) {
-        boolean z;
+    public static final void m350removeScopeimpl(MutableScatterMap mutableScatterMap, Object obj) {
+        boolean zIsEmpty;
         long[] jArr = mutableScatterMap.metadata;
         int length = jArr.length - 2;
         if (length < 0) {
@@ -76,11 +75,11 @@ public final class ScopeMap<Key, Scope> {
                         if (obj3 instanceof MutableScatterSet) {
                             MutableScatterSet mutableScatterSet = (MutableScatterSet) obj3;
                             mutableScatterSet.remove(obj);
-                            z = mutableScatterSet.isEmpty();
+                            zIsEmpty = mutableScatterSet.isEmpty();
                         } else {
-                            z = obj3 == obj;
+                            zIsEmpty = obj3 == obj;
                         }
-                        if (z) {
+                        if (zIsEmpty) {
                             mutableScatterMap.removeValueAt(i4);
                         }
                     }

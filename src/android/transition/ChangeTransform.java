@@ -64,10 +64,10 @@ public class ChangeTransform extends Transition {
         this.mUseOverlay = true;
         this.mReparent = true;
         this.mTempMatrix = new Matrix();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ChangeTransform);
-        this.mUseOverlay = obtainStyledAttributes.getBoolean(1, true);
-        this.mReparent = obtainStyledAttributes.getBoolean(0, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ChangeTransform);
+        this.mUseOverlay = typedArrayObtainStyledAttributes.getBoolean(1, true);
+        this.mReparent = typedArrayObtainStyledAttributes.getBoolean(0, true);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public boolean getReparentWithOverlay() {
@@ -137,11 +137,11 @@ public class ChangeTransform extends Transition {
         if (z) {
             setMatricesForParent(transitionValues, transitionValues2);
         }
-        ObjectAnimator createTransformAnimator = createTransformAnimator(transitionValues, transitionValues2, z);
-        if (z && createTransformAnimator != null && this.mUseOverlay) {
+        ObjectAnimator objectAnimatorCreateTransformAnimator = createTransformAnimator(transitionValues, transitionValues2, z);
+        if (z && objectAnimatorCreateTransformAnimator != null && this.mUseOverlay) {
             createGhostView(viewGroup, transitionValues, transitionValues2);
         }
-        return createTransformAnimator;
+        return objectAnimatorCreateTransformAnimator;
     }
 
     private ObjectAnimator createTransformAnimator(TransitionValues transitionValues, TransitionValues transitionValues2, final boolean z) {
@@ -165,7 +165,7 @@ public class ChangeTransform extends Transition {
         float[] fArr2 = new float[9];
         matrix3.getValues(fArr2);
         final PathAnimatorMatrix pathAnimatorMatrix = new PathAnimatorMatrix(view, fArr);
-        ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(pathAnimatorMatrix, PropertyValuesHolder.ofObject(NON_TRANSLATIONS_PROPERTY, new FloatArrayEvaluator(new float[9]), fArr, fArr2), PropertyValuesHolder.ofObject(TRANSLATIONS_PROPERTY, (TypeConverter) null, getPathMotion().getPath(fArr[2], fArr[5], fArr2[2], fArr2[5])));
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(pathAnimatorMatrix, PropertyValuesHolder.ofObject(NON_TRANSLATIONS_PROPERTY, new FloatArrayEvaluator(new float[9]), fArr, fArr2), PropertyValuesHolder.ofObject(TRANSLATIONS_PROPERTY, (TypeConverter) null, getPathMotion().getPath(fArr[2], fArr[5], fArr2[2], fArr2[5])));
         AnimatorListenerAdapter animatorListenerAdapter = new AnimatorListenerAdapter() { // from class: android.transition.ChangeTransform.3
             private boolean mIsCanceled;
             private Matrix mTempMatrix = new Matrix();
@@ -205,9 +205,9 @@ public class ChangeTransform extends Transition {
                 transforms.restore(view);
             }
         };
-        ofPropertyValuesHolder.addListener(animatorListenerAdapter);
-        ofPropertyValuesHolder.addPauseListener(animatorListenerAdapter);
-        return ofPropertyValuesHolder;
+        objectAnimatorOfPropertyValuesHolder.addListener(animatorListenerAdapter);
+        objectAnimatorOfPropertyValuesHolder.addPauseListener(animatorListenerAdapter);
+        return objectAnimatorOfPropertyValuesHolder;
     }
 
     private boolean parentsMatch(ViewGroup viewGroup, ViewGroup viewGroup2) {
@@ -226,12 +226,12 @@ public class ChangeTransform extends Transition {
         View view = transitionValues2.view;
         Matrix matrix = new Matrix((Matrix) transitionValues2.values.get(PROPNAME_PARENT_MATRIX));
         viewGroup.transformMatrixToLocal(matrix);
-        GhostView addGhost = GhostView.addGhost(view, viewGroup, matrix);
+        GhostView ghostViewAddGhost = GhostView.addGhost(view, viewGroup, matrix);
         ?? r3 = this;
         while (r3.mParent != null) {
             r3 = r3.mParent;
         }
-        r3.addListener(new GhostListener(view, transitionValues.view, addGhost));
+        r3.addListener(new GhostListener(view, transitionValues.view, ghostViewAddGhost));
         if (transitionValues.view != transitionValues2.view) {
             transitionValues.view.setTransitionAlpha(0.0f);
         }

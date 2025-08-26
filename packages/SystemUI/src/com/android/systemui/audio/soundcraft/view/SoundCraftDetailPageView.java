@@ -3,6 +3,7 @@ package com.android.systemui.audio.soundcraft.view;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DisplayCutout;
@@ -34,7 +35,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftDetailPageView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +42,6 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
     public SoundCraftViewBinding viewBinding;
     public final Lazy viewModel$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,7 +88,7 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3422exceptionOrNullimpl(failure) != null) {
+        if (Result.m3442exceptionOrNullimpl(failure) != null) {
             Log.d("SoundCraft.SoundCraftDetailPageView", "updatePadding fail");
         }
     }
@@ -107,10 +106,15 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
         }
     }
 
-    public final void updatePadding$1() {
-        int i;
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00fa A[PHI: r0
+      0x00fa: PHI (r0v4 int) = (r0v3 int), (r0v6 int), (r0v6 int) binds: [B:28:0x00c7, B:30:0x00d3, B:32:0x00d9] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void updatePadding$1() throws Resources.NotFoundException {
+        int safeInsetTop;
         DisplayCutout displayCutout;
-        boolean isScreenWideMobileDevice = ContextUtils.isScreenWideMobileDevice(getContext());
+        boolean zIsScreenWideMobileDevice = ContextUtils.isScreenWideMobileDevice(getContext());
         Object value = getViewModel().isActionBarVisible.getValue();
         Boolean bool = Boolean.TRUE;
         if (!Intrinsics.areEqual(value, bool) && !Intrinsics.areEqual(getViewModel().isFromCover.getValue(), bool)) {
@@ -131,7 +135,7 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
             layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.soundcraft_bottom_margin);
         }
         viewGroup.setLayoutParams(layoutParams);
-        if (isScreenWideMobileDevice) {
+        if (zIsScreenWideMobileDevice) {
             getContext();
             LayoutHelperUtil layoutHelperUtil = LayoutHelperUtil.INSTANCE;
             Context context = getContext();
@@ -142,8 +146,10 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
             if (Intrinsics.areEqual(getViewModel().isFromCover.getValue(), bool)) {
                 dimensionPixelSize /= 3;
                 WindowInsets rootWindowInsets = getRootView().getRootWindowInsets();
-                if (rootWindowInsets != null && (displayCutout = rootWindowInsets.getDisplayCutout()) != null) {
-                    i = displayCutout.getSafeInsetTop();
+                if (rootWindowInsets == null || (displayCutout = rootWindowInsets.getDisplayCutout()) == null) {
+                    safeInsetTop = 0;
+                } else {
+                    safeInsetTop = displayCutout.getSafeInsetTop();
                     SoundCraftViewBinding soundCraftViewBinding2 = this.viewBinding;
                     if (soundCraftViewBinding2 == null) {
                         soundCraftViewBinding2 = null;
@@ -154,11 +160,9 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
                         soundCraftViewBinding3 = null;
                     }
                     soundCraftViewBinding3.scrollView.setClipToPadding(false);
-                    setPadding(dimensionPixelSize, i, dimensionPixelSize, 0);
                 }
+                setPadding(dimensionPixelSize, safeInsetTop, dimensionPixelSize, 0);
             }
-            i = 0;
-            setPadding(dimensionPixelSize, i, dimensionPixelSize, 0);
         }
         SoundCraftViewBinding soundCraftViewBinding4 = this.viewBinding;
         (soundCraftViewBinding4 != null ? soundCraftViewBinding4 : null).actionBar.root.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.layout_edit_action_min_height));
@@ -204,7 +208,7 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                if (Result.m3422exceptionOrNullimpl(failure) != null) {
+                if (Result.m3442exceptionOrNullimpl(failure) != null) {
                     Log.d("SoundCraft.SoundCraftDetailPageView", "updatePadding fail");
                 }
                 return windowInsetsCompat;

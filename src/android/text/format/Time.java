@@ -186,12 +186,7 @@ public class Time {
         this.year = getChar(str, 0, 1000) + getChar(str, 1, 100) + getChar(str, 2, 10) + getChar(str, 3, 1);
         this.month = (getChar(str, 4, 10) + getChar(str, 5, 1)) - 1;
         this.monthDay = getChar(str, 6, 10) + getChar(str, 7, 1);
-        if (length <= 8) {
-            this.allDay = true;
-            this.hour = 0;
-            this.minute = 0;
-            this.second = 0;
-        } else {
+        if (length > 8) {
             if (length < 15) {
                 throw new TimeFormatException("String is too short: \"" + str + "\" If there are more than 8 characters there must be at least 15.");
             }
@@ -202,13 +197,17 @@ public class Time {
             this.second = getChar(str, 13, 10) + getChar(str, 14, 1);
             if (length > 15) {
                 checkChar(str, 15, 'Z');
-                this.weekDay = 0;
-                this.yearDay = 0;
-                this.isDst = -1;
-                this.gmtoff = 0L;
-                return z;
             }
+            this.weekDay = 0;
+            this.yearDay = 0;
+            this.isDst = -1;
+            this.gmtoff = 0L;
+            return z;
         }
+        this.allDay = true;
+        this.hour = 0;
+        this.minute = 0;
+        this.second = 0;
         z = false;
         this.weekDay = 0;
         this.yearDay = 0;
@@ -218,16 +217,16 @@ public class Time {
     }
 
     private void checkChar(String str, int i, char c) {
-        char charAt = str.charAt(i);
-        if (charAt != c) {
-            throw new TimeFormatException(String.format("Unexpected character 0x%02d at pos=%d.  Expected 0x%02d ('%c').", Integer.valueOf(charAt), Integer.valueOf(i), Integer.valueOf(c), Character.valueOf(c)));
+        char cCharAt = str.charAt(i);
+        if (cCharAt != c) {
+            throw new TimeFormatException(String.format("Unexpected character 0x%02d at pos=%d.  Expected 0x%02d ('%c').", Integer.valueOf(cCharAt), Integer.valueOf(i), Integer.valueOf(c), Character.valueOf(c)));
         }
     }
 
     private static int getChar(String str, int i, int i2) {
-        char charAt = str.charAt(i);
-        if (Character.isDigit(charAt)) {
-            return Character.getNumericValue(charAt) * i2;
+        char cCharAt = str.charAt(i);
+        if (Character.isDigit(cCharAt)) {
+            return Character.getNumericValue(cCharAt) * i2;
         }
         throw new TimeFormatException("Parse error at pos=" + i);
     }
@@ -273,14 +272,14 @@ public class Time {
                 } while (Character.isDigit(str.charAt(i2)));
             }
             if (length > i2) {
-                char charAt = str.charAt(i2);
-                if (charAt == '+') {
+                char cCharAt = str.charAt(i2);
+                if (cCharAt == '+') {
                     i = -1;
-                } else if (charAt == '-') {
+                } else if (cCharAt == '-') {
                     i = 1;
                 } else {
-                    if (charAt != 'Z') {
-                        throw new TimeFormatException(String.format("Unexpected character 0x%02d at position %d.  Expected + or -", Integer.valueOf(charAt), Integer.valueOf(i2)));
+                    if (cCharAt != 'Z') {
+                        throw new TimeFormatException(String.format("Unexpected character 0x%02d at position %d.  Expected + or -", Integer.valueOf(cCharAt), Integer.valueOf(i2)));
                     }
                     i = 0;
                 }
@@ -411,11 +410,11 @@ public class Time {
         if (TIMEZONE_UTC.equals(this.timezone)) {
             return format(Y_M_D_T_H_M_S_000_Z);
         }
-        String format = format(Y_M_D_T_H_M_S_000);
+        String str = format(Y_M_D_T_H_M_S_000);
         long j = this.gmtoff;
-        String str = j < 0 ? NativeLibraryHelper.CLEAR_ABI_OVERRIDE : "+";
-        int abs = (int) Math.abs(j);
-        return String.format(Locale.US, "%s%s%02d:%02d", format, str, Integer.valueOf(abs / 3600), Integer.valueOf((abs % 3600) / 60));
+        String str2 = j < 0 ? NativeLibraryHelper.CLEAR_ABI_OVERRIDE : "+";
+        int iAbs = (int) Math.abs(j);
+        return String.format(Locale.US, "%s%s%02d:%02d", str, str2, Integer.valueOf(iAbs / 3600), Integer.valueOf((iAbs % 3600) / 60));
     }
 
     public static boolean isEpoch(Time time) {
@@ -470,11 +469,11 @@ public class Time {
             if (z) {
                 this.wallTime.setIsDst(-1);
             }
-            int mktime = this.wallTime.mktime(this.mZoneInfoData);
-            if (mktime == -1) {
+            int iMktime = this.wallTime.mktime(this.mZoneInfoData);
+            if (iMktime == -1) {
                 return -1L;
             }
-            return mktime * 1000;
+            return iMktime * 1000;
         }
 
         public void setTimeInMillis(long j) {
@@ -497,21 +496,21 @@ public class Time {
         }
 
         private static ZoneInfoData lookupZoneInfoData(String str) {
-            ZoneInfoData makeZoneInfoData = ZoneInfoDb.getInstance().makeZoneInfoData(str);
-            if (makeZoneInfoData == null) {
-                makeZoneInfoData = ZoneInfoDb.getInstance().makeZoneInfoData("GMT");
+            ZoneInfoData zoneInfoDataMakeZoneInfoData = ZoneInfoDb.getInstance().makeZoneInfoData(str);
+            if (zoneInfoDataMakeZoneInfoData == null) {
+                zoneInfoDataMakeZoneInfoData = ZoneInfoDb.getInstance().makeZoneInfoData("GMT");
             }
-            if (makeZoneInfoData != null) {
-                return makeZoneInfoData;
+            if (zoneInfoDataMakeZoneInfoData != null) {
+                return zoneInfoDataMakeZoneInfoData;
             }
             throw new AssertionError("GMT not found: \"" + str + "\"");
         }
 
         public void switchTimeZone(String str) {
-            int mktime = this.wallTime.mktime(this.mZoneInfoData);
+            int iMktime = this.wallTime.mktime(this.mZoneInfoData);
             this.timezone = str;
             updateZoneInfoFromTimeZone();
-            this.wallTime.localtime(mktime, this.mZoneInfoData);
+            this.wallTime.localtime(iMktime, this.mZoneInfoData);
         }
 
         public String format2445(boolean z) {

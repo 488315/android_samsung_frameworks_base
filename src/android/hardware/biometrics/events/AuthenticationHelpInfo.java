@@ -93,17 +93,17 @@ public final class AuthenticationHelpInfo implements Parcelable {
     }
 
     AuthenticationHelpInfo(Parcel parcel) {
-        byte readByte = parcel.readByte();
+        byte b = parcel.readByte();
         BiometricSourceType biometricSourceType = (BiometricSourceType) parcel.readTypedObject(BiometricSourceType.CREATOR);
-        int readInt = parcel.readInt();
-        String readString = (readByte & 4) == 0 ? null : parcel.readString();
-        int readInt2 = parcel.readInt();
+        int i = parcel.readInt();
+        String string = (b & 4) == 0 ? null : parcel.readString();
+        int i2 = parcel.readInt();
         this.mBiometricSourceType = biometricSourceType;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) biometricSourceType);
-        this.mRequestReason = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, readInt);
-        this.mHelpString = readString;
-        this.mHelpCode = readInt2;
+        this.mRequestReason = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, i);
+        this.mHelpString = string;
+        this.mHelpCode = i2;
     }
 
     public static final class Builder {

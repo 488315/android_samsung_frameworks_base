@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.notification;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.UserManager;
 import android.view.LayoutInflater;
@@ -23,13 +24,11 @@ import com.android.systemui.util.SettingsHelper;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
     public int cutoutBottomMargin;
     public int cutoutTopMargin;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +47,7 @@ public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
-    public final void adjustLayoutByCutout(int i, int i2) {
+    public final void adjustLayoutByCutout(int i, int i2) throws Resources.NotFoundException {
         SubscreenRecyclerView subscreenRecyclerView;
         RecyclerView.Adapter adapter;
         Context context = this.mDisplayContext;
@@ -93,9 +92,9 @@ public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
         if (i != 1) {
             return super.getGroupAdapterLayout(viewGroup, i, context);
         }
-        View inflate = LayoutInflater.from(context).inflate(R.layout.subscreen_notification_adapter_clear_all_footer_b7, viewGroup, false);
-        ((ViewGroup.MarginLayoutParams) ((RecyclerView.LayoutParams) inflate.getLayoutParams())).bottomMargin += this.footerBottomMargin;
-        return inflate;
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.subscreen_notification_adapter_clear_all_footer_b7, viewGroup, false);
+        ((ViewGroup.MarginLayoutParams) ((RecyclerView.LayoutParams) viewInflate.getLayoutParams())).bottomMargin += this.footerBottomMargin;
+        return viewInflate;
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelB5, com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
@@ -106,11 +105,11 @@ public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
         if (i != 3) {
             return super.getListAdapterLayout(viewGroup, i, context);
         }
-        View inflate = LayoutInflater.from(context).inflate(R.layout.subscreen_notification_adapter_no_notification_b7, viewGroup, false);
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.subscreen_no_notification_layout);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.subscreen_notification_adapter_no_notification_b7, viewGroup, false);
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.subscreen_no_notification_layout);
         boolean z = this.mIsFlexMode;
         linearLayout.setPadding(0, z ? this.cutoutTopMargin : 0, 0, z ? 0 : this.cutoutBottomMargin);
-        return inflate;
+        return viewInflate;
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelB5, com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
@@ -130,7 +129,7 @@ public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelB5, com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
-    public final void initMainHeaderViewItems(Context context, SubscreenNotificationInfo subscreenNotificationInfo, boolean z) {
+    public final void initMainHeaderViewItems(Context context, SubscreenNotificationInfo subscreenNotificationInfo, boolean z) throws Resources.NotFoundException {
         super.initMainHeaderViewItems(context, subscreenNotificationInfo, z);
         View view = this.mHeaderViewLayout;
         if (view != null) {
@@ -154,7 +153,7 @@ public final class SubscreenDeviceModelB7 extends SubscreenDeviceModelB5 {
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
-    public final void showSubscreenNotification() {
+    public final void showSubscreenNotification() throws Resources.NotFoundException {
         int i;
         FrameLayout frameLayout;
         FrameLayout frameLayout2;

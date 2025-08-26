@@ -11,13 +11,11 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
-import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogPlugin$bindPlugin$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ VolumeDialogPluginViewModel $viewModel;
@@ -54,7 +52,7 @@ final class VolumeDialogPlugin$bindPlugin$2 extends SuspendLambda implements Fun
             if (num != null) {
                 this.$viewModel.dialogVisibilityInteractor.resetDismissTimeout();
                 VolumeDialogPlugin volumeDialogPlugin = this.this$0;
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 VolumeDialogPluginViewModel volumeDialogPluginViewModel = this.$viewModel;
                 List list = volumeDialogPluginViewModel.csdWarningConfigModel.actions;
                 final VolumeDialogPlugin$bindPlugin$1$$ExternalSyntheticLambda0 volumeDialogPlugin$bindPlugin$1$$ExternalSyntheticLambda0 = new VolumeDialogPlugin$bindPlugin$1$$ExternalSyntheticLambda0(volumeDialogPluginViewModel, 1);
@@ -62,21 +60,21 @@ final class VolumeDialogPlugin$bindPlugin$2 extends SuspendLambda implements Fun
                 volumeDialogPlugin.getClass();
                 final CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(this), 1);
                 cancellableContinuationImpl.initCancellability();
-                final CsdWarningDialog create = volumeDialogPlugin.csdWarningDialogFactory.create(intValue, new Runnable() { // from class: com.android.systemui.volume.dialog.VolumeDialogPlugin$showCsdWarningDialog$2$dialog$1
+                final CsdWarningDialog csdWarningDialogCreate = volumeDialogPlugin.csdWarningDialogFactory.create(iIntValue, new Runnable() { // from class: com.android.systemui.volume.dialog.VolumeDialogPlugin$showCsdWarningDialog$2$dialog$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Function0.this.invoke();
+                        volumeDialogPlugin$bindPlugin$1$$ExternalSyntheticLambda0.invoke();
                         CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                         int i2 = Result.$r8$clinit;
                         cancellableContinuation.resumeWith(Unit.INSTANCE);
                     }
                 }, Optional.of(list));
-                create.show();
+                csdWarningDialogCreate.show();
                 cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.volume.dialog.VolumeDialogPlugin$showCsdWarningDialog$2$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        CsdWarningDialog.this.dismiss();
+                    public final Object mo781invoke(Object obj2) {
+                        csdWarningDialogCreate.dismiss();
                         return Unit.INSTANCE;
                     }
                 });

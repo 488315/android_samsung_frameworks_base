@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubToLockscreenTransitionViewModel$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -45,21 +44,21 @@ public final class GlanceableHubToLockscreenTransitionViewModel$special$$inlined
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            final int intValue = ((Number) this.L$1).intValue();
+            final int iIntValue = ((Number) this.L$1).intValue();
             KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = this.this$0.transitionAnimation;
             FromGlanceableHubTransitionInteractor.Companion.getClass();
             long j = FromGlanceableHubTransitionInteractor.TO_LOCKSCREEN_DURATION;
             Interpolator interpolator = Interpolators.EMPHASIZED;
             final GlanceableHubToLockscreenTransitionViewModel glanceableHubToLockscreenTransitionViewModel = this.this$0;
-            Flow m2600sharedFlowWithState74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2600sharedFlowWithState74qcysc$default(flowBuilder, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToLockscreenTransitionViewModel$keyguardTranslationX$1$1
+            Flow flowM2617sharedFlowWithState74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2617sharedFlowWithState74qcysc$default(flowBuilder, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToLockscreenTransitionViewModel$keyguardTranslationX$1$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    float floatValue = ((Number) obj2).floatValue();
-                    if (((Boolean) GlanceableHubToLockscreenTransitionViewModel.this.willRotateToPortraitInTransition.$$delegate_0.getValue()).booleanValue()) {
+                public final Object mo781invoke(Object obj2) {
+                    float fFloatValue = ((Number) obj2).floatValue();
+                    if (((Boolean) glanceableHubToLockscreenTransitionViewModel.willRotateToPortraitInTransition.$$delegate_0.getValue()).booleanValue()) {
                         return Float.valueOf(0.0f);
                     }
-                    return Float.valueOf((floatValue * intValue) + (-r1));
+                    return Float.valueOf((fFloatValue * iIntValue) + (-r1));
                 }
             }, 0L, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToLockscreenTransitionViewModel$keyguardTranslationX$1$2
                 @Override // kotlin.jvm.functions.Function0
@@ -73,7 +72,7 @@ public final class GlanceableHubToLockscreenTransitionViewModel$special$$inlined
                 }
             }, interpolator, "GLANCEABLE_HUB->LOCKSCREEN: keyguardTranslationX", 12);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, m2600sharedFlowWithState74qcysc$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowM2617sharedFlowWithState74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

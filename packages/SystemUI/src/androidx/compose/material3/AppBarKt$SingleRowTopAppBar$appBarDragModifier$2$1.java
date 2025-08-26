@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AppBarKt$SingleRowTopAppBar$appBarDragModifier$2$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ TopAppBarScrollBehavior $scrollBehavior;
@@ -22,9 +21,9 @@ final class AppBarKt$SingleRowTopAppBar$appBarDragModifier$2$1 extends SuspendLa
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        float floatValue = ((Number) obj2).floatValue();
+        float fFloatValue = ((Number) obj2).floatValue();
         AppBarKt$SingleRowTopAppBar$appBarDragModifier$2$1 appBarKt$SingleRowTopAppBar$appBarDragModifier$2$1 = new AppBarKt$SingleRowTopAppBar$appBarDragModifier$2$1(this.$scrollBehavior, (Continuation) obj3);
-        appBarKt$SingleRowTopAppBar$appBarDragModifier$2$1.F$0 = floatValue;
+        appBarKt$SingleRowTopAppBar$appBarDragModifier$2$1.F$0 = fFloatValue;
         return appBarKt$SingleRowTopAppBar$appBarDragModifier$2$1.invokeSuspend(Unit.INSTANCE);
     }
 

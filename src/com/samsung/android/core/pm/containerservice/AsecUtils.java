@@ -20,7 +20,7 @@ public class AsecUtils {
     }
 
     public static boolean fitsOnExternal(PackageInstaller.SessionParams sessionParams, StorageManager storageManager) {
-        boolean hasActiveContainer = hasActiveContainer(storageManager);
+        boolean zHasActiveContainer = hasActiveContainer(storageManager);
         StorageVolume[] volumeList = storageManager.getVolumeList();
         if (volumeList == null) {
             Log.e(TAG, "storageVolumes is null");
@@ -29,7 +29,7 @@ public class AsecUtils {
         for (StorageVolume storageVolume : volumeList) {
             if ("sd".equals(storageVolume.getSubSystem()) && storageVolume.isRemovable()) {
                 Log.d(TAG, "getExternalStorageSdPath: " + storageVolume.getPath());
-                return sessionParams.sizeBytes > 0 && hasActiveContainer && sessionParams.sizeBytes <= storageManager.getStorageBytesUntilLow(storageVolume.getPathFile());
+                return sessionParams.sizeBytes > 0 && zHasActiveContainer && sessionParams.sizeBytes <= storageManager.getStorageBytesUntilLow(storageVolume.getPathFile());
             }
         }
         Log.e(TAG, "Cannot find fitsOnExternal volume");
@@ -50,17 +50,17 @@ public class AsecUtils {
     }
 
     public static final PackageInfo getPackageInfoAsUser(String str, int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 return AppGlobals.getPackageManager().getPackageInfo(str, 0L, i);
             } catch (RemoteException e) {
                 Log.i(TAG, "RemoteException", e);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return null;
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 }

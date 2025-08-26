@@ -14,7 +14,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubScreenTimeOutHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,6 @@ public final class SubScreenTimeOutHelper {
     public final Supplier subScreenQsWindowViewSupplier;
     public final Supplier windowManagerSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,21 +47,21 @@ public final class SubScreenTimeOutHelper {
             @Override // android.database.ContentObserver
             public final void onChange(boolean z, Uri uri) {
                 onChange(z);
-                SubScreenTimeOutHelper subScreenTimeOutHelper = SubScreenTimeOutHelper.this;
+                SubScreenTimeOutHelper subScreenTimeOutHelper = this.this$0;
                 int i = SubScreenTimeOutHelper.$r8$clinit;
-                int readScreenTimeOut = subScreenTimeOutHelper.readScreenTimeOut();
-                SubScreenTimeOutHelper subScreenTimeOutHelper2 = SubScreenTimeOutHelper.this;
-                if (readScreenTimeOut != subScreenTimeOutHelper2.screenTimeOut) {
+                int screenTimeOut = subScreenTimeOutHelper.readScreenTimeOut();
+                SubScreenTimeOutHelper subScreenTimeOutHelper2 = this.this$0;
+                if (screenTimeOut != subScreenTimeOutHelper2.screenTimeOut) {
                     WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) subScreenTimeOutHelper2.layoutParamsSupplier.get();
                     if (layoutParams != null) {
-                        SubScreenTimeOutHelper subScreenTimeOutHelper3 = SubScreenTimeOutHelper.this;
-                        layoutParams.semSetScreenTimeout(readScreenTimeOut);
+                        SubScreenTimeOutHelper subScreenTimeOutHelper3 = this.this$0;
+                        layoutParams.semSetScreenTimeout(screenTimeOut);
                         WindowManager windowManager = (WindowManager) subScreenTimeOutHelper3.windowManagerSupplier.get();
                         if (windowManager != null) {
                             windowManager.updateViewLayout((View) subScreenTimeOutHelper3.subScreenQsWindowViewSupplier.get(), layoutParams);
                         }
                     }
-                    subScreenTimeOutHelper2.screenTimeOut = readScreenTimeOut;
+                    subScreenTimeOutHelper2.screenTimeOut = screenTimeOut;
                 }
             }
         };

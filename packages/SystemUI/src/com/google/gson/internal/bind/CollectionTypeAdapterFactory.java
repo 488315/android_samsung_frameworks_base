@@ -15,12 +15,10 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CollectionTypeAdapterFactory implements TypeAdapterFactory {
     private final ConstructorConstructor constructorConstructor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Adapter<E> extends TypeAdapter<Collection<E>> {
         private final ObjectConstructor<? extends Collection<E>> constructor;
         private final TypeAdapter<E> elementTypeAdapter;
@@ -37,13 +35,13 @@ public final class CollectionTypeAdapterFactory implements TypeAdapterFactory {
                 jsonReader.nextNull();
                 return null;
             }
-            Collection<E> construct = this.constructor.construct();
+            Collection<E> collectionConstruct = this.constructor.construct();
             jsonReader.beginArray();
             while (jsonReader.hasNext()) {
-                construct.add(this.elementTypeAdapter.read2(jsonReader));
+                collectionConstruct.add(this.elementTypeAdapter.read2(jsonReader));
             }
             jsonReader.endArray();
-            return construct;
+            return collectionConstruct;
         }
 
         @Override // com.google.gson.TypeAdapter

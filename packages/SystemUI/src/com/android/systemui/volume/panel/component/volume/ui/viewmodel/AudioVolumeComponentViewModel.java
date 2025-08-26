@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioVolumeComponentViewModel {
     public final AudioSharingStreamSliderViewModel.Factory audioSharingStreamSliderViewModelFactory;
@@ -39,7 +38,6 @@ public final class AudioVolumeComponentViewModel {
     public final ReadonlyStateFlow sliderViewModels;
     public final AudioStreamSliderViewModel.Factory streamSliderViewModelFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.panel.component.volume.ui.viewmodel.AudioVolumeComponentViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -75,6 +73,39 @@ public final class AudioVolumeComponentViewModel {
         }
     }
 
+    /* renamed from: com.android.systemui.volume.panel.component.volume.ui.viewmodel.AudioVolumeComponentViewModel$onExpandedChanged$1, reason: invalid class name and case insensitive filesystem */
+    final class C11911 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $isExpanded;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11911(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$isExpanded = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return AudioVolumeComponentViewModel.this.new C11911(this.$isExpanded, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C11911) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            AudioVolumeComponentViewModel.this.mutableIsExpanded.updateState(null, Boolean.valueOf(this.$isExpanded));
+            return Unit.INSTANCE;
+        }
+    }
+
     public AudioVolumeComponentViewModel(CoroutineScope coroutineScope, MediaOutputInteractor mediaOutputInteractor, MediaDeviceSessionInteractor mediaDeviceSessionInteractor, AudioStreamSliderViewModel.Factory factory, CastVolumeSliderViewModel.Factory factory2, AudioSharingStreamSliderViewModel.Factory factory3, AudioModeInteractor audioModeInteractor, AudioSlidersInteractor audioSlidersInteractor) {
         this.scope = coroutineScope;
         this.streamSliderViewModelFactory = factory;
@@ -83,14 +114,14 @@ public final class AudioVolumeComponentViewModel {
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(audioModeInteractor.isOngoingCall, FlowKt.transformLatest(com.android.systemui.volume.panel.shared.model.ResultKt.filterData(mediaOutputInteractor.defaultActiveMediaSession), new AudioVolumeComponentViewModel$special$$inlined$flatMapLatest$1(null, mediaDeviceSessionInteractor)), new AudioVolumeComponentViewModel$isActive$2(null));
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, startedEagerly, null);
-        this.isActive = stateIn;
-        this.portraitExpandable = FlowKt.stateIn(FlowKt.transformLatest(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn), new AudioVolumeComponentViewModel$special$$inlined$flatMapLatest$2(null, this)), coroutineScope, startedEagerly, SlidersExpandableViewModel.Unavailable.INSTANCE);
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, startedEagerly, null);
+        this.isActive = readonlyStateFlowStateIn;
+        this.portraitExpandable = FlowKt.stateIn(FlowKt.transformLatest(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn), new AudioVolumeComponentViewModel$special$$inlined$flatMapLatest$2(null, this)), coroutineScope, startedEagerly, SlidersExpandableViewModel.Unavailable.INSTANCE);
         this.sliderViewModels = FlowKt.stateIn(FlowKt.transformLatest(audioSlidersInteractor.volumePanelSliders, new AudioVolumeComponentViewModel$sliderViewModels$1(this, null)), coroutineScope, startedEagerly, EmptyList.INSTANCE);
-        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn), new AnonymousClass1(null)), coroutineScope);
+        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn), new AnonymousClass1(null)), coroutineScope);
     }
 
     public final void onExpandedChanged(boolean z) {
-        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AudioVolumeComponentViewModel$onExpandedChanged$1(this, z, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new C11911(z, null), 7);
     }
 }

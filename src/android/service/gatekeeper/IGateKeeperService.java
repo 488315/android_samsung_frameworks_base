@@ -91,9 +91,9 @@ public interface IGateKeeperService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.service.gatekeeper.IGateKeeperService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGateKeeperService)) {
-                return (IGateKeeperService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.service.gatekeeper.IGateKeeperService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGateKeeperService)) {
+                return (IGateKeeperService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -135,45 +135,45 @@ public interface IGateKeeperService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    GateKeeperResponse enroll = enroll(readInt, createByteArray, createByteArray2, createByteArray3);
+                    GateKeeperResponse gateKeeperResponseEnroll = enroll(i3, bArrCreateByteArray, bArrCreateByteArray2, bArrCreateByteArray3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(enroll, 1);
+                    parcel2.writeTypedObject(gateKeeperResponseEnroll, 1);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    byte[] createByteArray5 = parcel.createByteArray();
+                    int i4 = parcel.readInt();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    GateKeeperResponse verify = verify(readInt2, createByteArray4, createByteArray5);
+                    GateKeeperResponse gateKeeperResponseVerify = verify(i4, bArrCreateByteArray4, bArrCreateByteArray5);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verify, 1);
+                    parcel2.writeTypedObject(gateKeeperResponseVerify, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    int i5 = parcel.readInt();
+                    long j = parcel.readLong();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    GateKeeperResponse verifyChallenge = verifyChallenge(readInt3, readLong, createByteArray6, createByteArray7);
+                    GateKeeperResponse gateKeeperResponseVerifyChallenge = verifyChallenge(i5, j, bArrCreateByteArray6, bArrCreateByteArray7);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyChallenge, 1);
+                    parcel2.writeTypedObject(gateKeeperResponseVerifyChallenge, 1);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long secureUserId = getSecureUserId(readInt4);
+                    long secureUserId = getSecureUserId(i6);
                     parcel2.writeNoException();
                     parcel2.writeLong(secureUserId);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearSecureUserId(readInt5);
+                    clearSecureUserId(i7);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -181,9 +181,9 @@ public interface IGateKeeperService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int failureCount = getFailureCount(readInt6);
+                    int failureCount = getFailureCount(i8);
                     parcel2.writeNoException();
                     parcel2.writeInt(failureCount);
                     return true;
@@ -210,125 +210,125 @@ public interface IGateKeeperService extends IInterface {
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public GateKeeperResponse enroll(int i, byte[] bArr, byte[] bArr2, byte[] bArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    this.mRemote.transact(1, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return (GateKeeperResponse) obtain2.readTypedObject(GateKeeperResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return (GateKeeperResponse) parcelObtain2.readTypedObject(GateKeeperResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public GateKeeperResponse verify(int i, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(2, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return (GateKeeperResponse) obtain2.readTypedObject(GateKeeperResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return (GateKeeperResponse) parcelObtain2.readTypedObject(GateKeeperResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public GateKeeperResponse verifyChallenge(int i, long j, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(3, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return (GateKeeperResponse) obtain2.readTypedObject(GateKeeperResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return (GateKeeperResponse) parcelObtain2.readTypedObject(GateKeeperResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public long getSecureUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public void clearSecureUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public void reportDeviceSetupComplete() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    this.mRemote.transact(6, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
             public int getFailureCount(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.service.gatekeeper.IGateKeeperService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

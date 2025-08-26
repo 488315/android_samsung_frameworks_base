@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ CommandQueue $commandQueue;
@@ -57,11 +56,11 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
             final ?? r1 = new CommandQueue.Callbacks() { // from class: com.android.systemui.statusbar.disableflags.data.repository.DisableFlagsRepositoryImpl$disableFlags$1$callback$1
                 @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
                 public final void disable(int i2, int i3, int i4, boolean z) {
-                    if (i2 != DisableFlagsRepositoryImpl.this.thisDisplayId) {
+                    if (i2 != disableFlagsRepositoryImpl.thisDisplayId) {
                         return;
                     }
                     remoteInputQuickSettingsDisabler.getClass();
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new DisableFlagsModel(i3, i4, z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisableFlagsModel(i3, i4, z));
                 }
             };
             this.$commandQueue.addCallback((CommandQueue.Callbacks) r1);
@@ -69,7 +68,7 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.disableflags.data.repository.DisableFlagsRepositoryImpl$disableFlags$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    CommandQueue.this.removeCallback((CommandQueue.Callbacks) r1);
+                    commandQueue.removeCallback((CommandQueue.Callbacks) r1);
                     return Unit.INSTANCE;
                 }
             };

@@ -11,13 +11,11 @@ import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneLogger {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final LogBuffer logBuffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,12 +44,12 @@ public final class SceneLogger {
         LogLevel logLevel = LogLevel.INFO;
         SceneLogger$$ExternalSyntheticLambda0 sceneLogger$$ExternalSyntheticLambda0 = new SceneLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = sceneLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = overlayKey != null ? overlayKey.toString() : null;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = overlayKey != null ? overlayKey.toString() : null;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str2 = overlayKey2 != null ? overlayKey2.toString() : null;
         logMessageImpl.str3 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logSceneChangeRejection(ContentKey contentKey, ContentKey contentKey2, String str, String str2) {
@@ -60,7 +58,7 @@ public final class SceneLogger {
         LogLevel logLevel = LogLevel.INFO;
         SceneLogger$$ExternalSyntheticLambda0 sceneLogger$$ExternalSyntheticLambda0 = new SceneLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = this.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
         String str5 = "<none>";
         if (contentKey == null || (str3 = contentKey.debugName) == null) {
             str3 = "<none>";
@@ -68,12 +66,12 @@ public final class SceneLogger {
         if (contentKey2 != null && (str4 = contentKey2.debugName) != null) {
             str5 = str4;
         }
-        ((LogMessageImpl) obtain).str1 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str3, " → ", str5);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        ((LogMessageImpl) logMessageObtain).str1 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str3, " → ", str5);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str2 = str2;
         logMessageImpl.str3 = str;
         logMessageImpl.bool1 = contentKey2 instanceof OverlayKey;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logSceneChanged(SceneKey sceneKey, SceneKey sceneKey2, Object obj, String str, final boolean z) {
@@ -81,7 +79,7 @@ public final class SceneLogger {
         Function1 function1 = new Function1() { // from class: com.android.systemui.scene.shared.logger.SceneLogger$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 LogMessage logMessage = (LogMessage) obj2;
                 int i = SceneLogger.$r8$clinit;
                 StringBuilder sb = new StringBuilder();
@@ -98,13 +96,13 @@ public final class SceneLogger {
             }
         };
         LogBuffer logBuffer = this.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SceneFramework", logLevel, function1, null);
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sceneKey.debugName, " → ", sceneKey2.debugName);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        logMessageImpl.str1 = m;
+        LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", logLevel, function1, null);
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sceneKey.debugName, " → ", sceneKey2.debugName);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.str1 = strM;
         logMessageImpl.str2 = str;
         logMessageImpl.str3 = obj != null ? obj.toString() : null;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

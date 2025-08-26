@@ -87,7 +87,7 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         this(context, attributeSet, i, 0);
     }
 
-    public ActionMenuItemView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public ActionMenuItemView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mIsChangedRelativePadding = false;
         this.mIsDarkTheme = false;
@@ -96,9 +96,9 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         this.mMaxFontScale = 1.3f;
         Resources resources = context.getResources();
         this.mAllowTextWithIcon = shouldAllowTextWithIcon();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionMenuItemView, i, i2);
-        this.mMinWidth = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionMenuItemView, i, i2);
+        this.mMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         this.mMaxIconSize = (int) ((resources.getDisplayMetrics().density * 32.0f) + 0.5f);
         setOnClickListener(this);
         this.mSavedPaddingLeft = -1;
@@ -110,14 +110,14 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, typedValue, true);
         this.mIsDarkTheme = typedValue.data != 0;
         if (this.mIsThemeDeviceDefaultFamily) {
-            TypedArray obtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
-            int resourceId = obtainStyledAttributes2.getResourceId(187, 0);
-            obtainStyledAttributes2.recycle();
-            TypedArray obtainStyledAttributes3 = getContext().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
-            TypedValue peekValue = obtainStyledAttributes3.peekValue(0);
-            obtainStyledAttributes3.recycle();
-            if (peekValue != null) {
-                this.mDefaultTextSize = TypedValue.complexToFloat(peekValue.data);
+            TypedArray typedArrayObtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
+            int resourceId = typedArrayObtainStyledAttributes2.getResourceId(187, 0);
+            typedArrayObtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes3 = getContext().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
+            TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes3.peekValue(0);
+            typedArrayObtainStyledAttributes3.recycle();
+            if (typedValuePeekValue != null) {
+                this.mDefaultTextSize = TypedValue.complexToFloat(typedValuePeekValue.data);
             }
         }
     }
@@ -125,9 +125,9 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     @Override // android.widget.TextView, android.view.View
     public void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843480, 0);
-        setMinHeight(obtainStyledAttributes.getDimensionPixelSize(37, -1));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843480, 0);
+        setMinHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(37, -1));
+        typedArrayObtainStyledAttributes.recycle();
         this.mMaxIconSize = (int) ((getContext().getResources().getDisplayMetrics().density * 32.0f) + 0.5f);
         this.mAllowTextWithIcon = shouldAllowTextWithIcon();
         updateTextButtonVisibility();
@@ -341,7 +341,7 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     }
 
     protected void setTooltipOffset() {
-        int i;
+        int navigationBarHeight;
         if (hasText()) {
             return;
         }
@@ -365,17 +365,17 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         defaultDisplay.getRealMetrics(displayMetrics);
         View view = (View) getParent();
         View view2 = view != null ? (View) view.getParent() : null;
-        int i2 = (!(view2 instanceof Toolbar) || view2.getWidth() >= rect.right - rect.left) ? 0 : (iArr[0] - iArr2[0]) - rect.left;
-        int i3 = iArr2[1] + height;
+        int i = (!(view2 instanceof Toolbar) || view2.getWidth() >= rect.right - rect.left) ? 0 : (iArr[0] - iArr2[0]) - rect.left;
+        int i2 = iArr2[1] + height;
         if (getLayoutDirection() == 0) {
-            i = (((rect.right - rect.left) - (iArr2[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) - i2;
+            navigationBarHeight = (((rect.right - rect.left) - (iArr2[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) - i;
             if (checkNaviBarForLandscape()) {
-                i += (int) ((getNavigationBarHeight() / resources.getDisplayMetrics().density) * displayMetrics.density);
+                navigationBarHeight += (int) ((getNavigationBarHeight() / resources.getDisplayMetrics().density) * displayMetrics.density);
             }
         } else {
-            i = iArr2[0] + paddingStart + ((paddingEnd - paddingStart) / 2);
+            navigationBarHeight = iArr2[0] + paddingStart + ((paddingEnd - paddingStart) / 2);
         }
-        setTooltipPosition(i, i3);
+        setTooltipPosition(navigationBarHeight, i2);
     }
 
     boolean checkNaviBarForLandscape() {
@@ -409,33 +409,33 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
 
     @Override // android.widget.TextView, android.view.View
     protected void onMeasure(int i, int i2) {
+        int iMin;
         int i3;
-        int i4;
-        boolean hasText = hasText();
-        if (hasText && (i4 = this.mSavedPaddingLeft) >= 0) {
-            super.setPadding(i4, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+        boolean zHasText = hasText();
+        if (zHasText && (i3 = this.mSavedPaddingLeft) >= 0) {
+            super.setPadding(i3, getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
         super.onMeasure(i, i2);
         int mode = View.MeasureSpec.getMode(i);
         int size = View.MeasureSpec.getSize(i);
         int measuredWidth = getMeasuredWidth();
         if (mode == Integer.MIN_VALUE) {
-            i3 = Math.min(size, this.mMinWidth);
+            iMin = Math.min(size, this.mMinWidth);
         } else {
-            i3 = this.mMinWidth;
+            iMin = this.mMinWidth;
         }
-        if (mode != 1073741824 && this.mMinWidth > 0 && measuredWidth < i3) {
-            super.onMeasure(View.MeasureSpec.makeMeasureSpec(i3, 1073741824), i2);
+        if (mode != 1073741824 && this.mMinWidth > 0 && measuredWidth < iMin) {
+            super.onMeasure(View.MeasureSpec.makeMeasureSpec(iMin, 1073741824), i2);
         }
-        if (hasText || this.mIcon == null) {
+        if (zHasText || this.mIcon == null) {
             return;
         }
         int measuredWidth2 = getMeasuredWidth();
-        int width = this.mIcon.getBounds().width();
+        int iWidth = this.mIcon.getBounds().width();
         if (this.mIsChangedRelativePadding) {
             return;
         }
-        super.setPadding((measuredWidth2 - width) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+        super.setPadding((measuredWidth2 - iWidth) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
     }
 
     private class ActionMenuItemForwardingListener extends ForwardingListener {
@@ -465,7 +465,7 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.TextView, android.view.View
-    public boolean setFrame(int i, int i2, int i3, int i4) {
+    public boolean setFrame(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         boolean frame = super.setFrame(i, i2, i3, i4);
         if (this.mIsChangedRelativePadding) {
             Drawable background = getBackground();

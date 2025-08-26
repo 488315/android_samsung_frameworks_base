@@ -115,21 +115,21 @@ public class IntegerExpressionEvaluator {
     public int eval(int i, int[] iArr, int... iArr2) {
         this.mStack = iArr;
         this.mVar = iArr2;
-        int i2 = -1;
-        int i3 = 0;
+        int iOpEval = -1;
+        int i2 = 0;
         while (true) {
             int[] iArr3 = this.mStack;
-            if (i3 < iArr3.length) {
-                int i4 = iArr3[i3];
-                if (((1 << i3) & i) != 0) {
-                    i2 = opEval(i2, i4);
+            if (i2 < iArr3.length) {
+                int i3 = iArr3[i2];
+                if (((1 << i2) & i) != 0) {
+                    iOpEval = opEval(iOpEval, i3);
                 } else {
-                    i2++;
-                    iArr3[i2] = i4;
+                    iOpEval++;
+                    iArr3[iOpEval] = i3;
                 }
-                i3++;
+                i2++;
             } else {
-                return iArr3[i2];
+                return iArr3[iOpEval];
             }
         }
     }
@@ -138,35 +138,35 @@ public class IntegerExpressionEvaluator {
         System.arraycopy(iArr, 0, this.mLocalStack, 0, i2);
         this.mStack = this.mLocalStack;
         this.mVar = iArr2;
-        int i3 = -1;
-        for (int i4 = 0; i4 < i2; i4++) {
+        int iOpEval = -1;
+        for (int i3 = 0; i3 < i2; i3++) {
             int[] iArr3 = this.mStack;
-            int i5 = iArr3[i4];
-            if (((1 << i4) & i) != 0) {
-                i3 = opEval(i3, i5);
+            int i4 = iArr3[i3];
+            if (((1 << i3) & i) != 0) {
+                iOpEval = opEval(iOpEval, i4);
             } else {
-                i3++;
-                iArr3[i3] = i5;
+                iOpEval++;
+                iArr3[iOpEval] = i4;
             }
         }
-        return this.mStack[i3];
+        return this.mStack[iOpEval];
     }
 
     public int evalDB(int i, int[] iArr, int... iArr2) {
         this.mStack = iArr;
         this.mVar = iArr2;
-        int i2 = -1;
-        for (int i3 = 0; i3 < iArr.length; i3++) {
+        int iOpEval = -1;
+        for (int i2 = 0; i2 < iArr.length; i2++) {
             int[] iArr3 = this.mStack;
-            int i4 = iArr3[i3];
-            if (((1 << i3) & i) != 0) {
-                i2 = opEval(i2, i4);
+            int i3 = iArr3[i2];
+            if (((1 << i2) & i) != 0) {
+                iOpEval = opEval(iOpEval, i3);
             } else {
-                i2++;
-                iArr3[i2] = i4;
+                iOpEval++;
+                iArr3[iOpEval] = i3;
             }
         }
-        return this.mStack[i2];
+        return this.mStack[iOpEval];
     }
 
     int opEval(int i, int i2) {

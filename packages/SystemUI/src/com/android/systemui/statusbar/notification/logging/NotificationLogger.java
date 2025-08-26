@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationLogger implements StatusBarStateController.StateListener, CoreStartable, NotificationRowStatsLogger {
     public final Object mDozingLock;
@@ -38,14 +37,12 @@ public class NotificationLogger implements StatusBarStateController.StateListene
     public long mLastVisibilityReportUptimeMs;
     public Runnable mVisibilityReporter;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExpansionStateLogger {
         public final Executor mUiBgExecutor;
         public final Map mExpansionStates = new ArrayMap();
         public final Map mLoggedExpansionState = new ArrayMap();
         IStatusBarService mBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class State {
             public Boolean mIsExpanded;
             public Boolean mIsUserAction;
@@ -98,7 +95,7 @@ public class NotificationLogger implements StatusBarStateController.StateListene
                     this.mUiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.logging.NotificationLogger$ExpansionStateLogger$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotificationLogger.ExpansionStateLogger expansionStateLogger = NotificationLogger.ExpansionStateLogger.this;
+                            NotificationLogger.ExpansionStateLogger expansionStateLogger = this.f$0;
                             String str2 = str;
                             NotificationLogger.ExpansionStateLogger.State state3 = state2;
                             expansionStateLogger.getClass();
@@ -131,15 +128,15 @@ public class NotificationLogger implements StatusBarStateController.StateListene
         }
 
         public void onVisibilityChanged(Collection<NotificationVisibility> collection, Collection<NotificationVisibility> collection2) {
-            NotificationVisibility[] cloneVisibilitiesAsArr = NotificationLogger.cloneVisibilitiesAsArr(collection);
-            NotificationVisibility[] cloneVisibilitiesAsArr2 = NotificationLogger.cloneVisibilitiesAsArr(collection2);
-            for (NotificationVisibility notificationVisibility : cloneVisibilitiesAsArr) {
+            NotificationVisibility[] notificationVisibilityArrCloneVisibilitiesAsArr = NotificationLogger.cloneVisibilitiesAsArr(collection);
+            NotificationVisibility[] notificationVisibilityArrCloneVisibilitiesAsArr2 = NotificationLogger.cloneVisibilitiesAsArr(collection2);
+            for (NotificationVisibility notificationVisibility : notificationVisibilityArrCloneVisibilitiesAsArr) {
                 State state = getState(notificationVisibility.key);
                 state.mIsVisible = Boolean.TRUE;
                 state.mLocation = notificationVisibility.location;
                 maybeNotifyOnNotificationExpansionChanged(notificationVisibility.key, state);
             }
-            for (NotificationVisibility notificationVisibility2 : cloneVisibilitiesAsArr2) {
+            for (NotificationVisibility notificationVisibility2 : notificationVisibilityArrCloneVisibilitiesAsArr2) {
                 getState(notificationVisibility2.key).mIsVisible = Boolean.FALSE;
             }
         }

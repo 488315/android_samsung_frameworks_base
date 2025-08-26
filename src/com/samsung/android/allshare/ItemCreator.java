@@ -49,13 +49,13 @@ class ItemCreator {
 
     static Item fromBundle(Bundle bundle) {
         String string;
-        Item.WebContentBuilder.DeliveryMode deliveryMode;
+        Item.WebContentBuilder.DeliveryMode deliveryModeStringToEnum;
         if (bundle == null || (string = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY)) == null || string.isEmpty()) {
             return null;
         }
-        int ordinal = ConstructorType.stringToEnum(string).ordinal();
-        if (ordinal != 1) {
-            if (ordinal != 2) {
+        int iOrdinal = ConstructorType.stringToEnum(string).ordinal();
+        if (iOrdinal != 1) {
+            if (iOrdinal != 2) {
                 return null;
             }
             return new Item.LocalContentBuilder(bundle.getString(AllShareKey.BUNDLE_STRING_FILEPATH), bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE)).setTitle(bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE)).setSubtitle(bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_SUBTITLE_PATH)).build();
@@ -67,10 +67,10 @@ class ItemCreator {
         }
         String string2 = bundle.getString(AllShareKey.BUNDLE_STRING_WEB_PLAY_MODE);
         if (string2 == null || string2.isEmpty()) {
-            deliveryMode = Item.WebContentBuilder.DeliveryMode.UNKNOWN;
+            deliveryModeStringToEnum = Item.WebContentBuilder.DeliveryMode.UNKNOWN;
         } else {
-            deliveryMode = Item.WebContentBuilder.DeliveryMode.stringToEnum(string2);
+            deliveryModeStringToEnum = Item.WebContentBuilder.DeliveryMode.stringToEnum(string2);
         }
-        return duration.setDeliveryMode(deliveryMode).build();
+        return duration.setDeliveryMode(deliveryModeStringToEnum).build();
     }
 }

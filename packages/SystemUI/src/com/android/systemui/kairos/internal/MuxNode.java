@@ -6,7 +6,6 @@ import java.util.Objects;
 import kotlin.collections.builders.SetBuilder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MuxNode implements PushNode {
     public final DepthTracker depthTracker;
@@ -18,7 +17,6 @@ public abstract class MuxNode implements PushNode {
     public final TransactionCache transactionCache;
     public MutableMapK upstreamData;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BranchNode implements SchedulableNode {
         public final Object key;
         public final Schedulable.N schedulable = new Schedulable.N(this);
@@ -30,10 +28,10 @@ public abstract class MuxNode implements PushNode {
 
         @Override // com.android.systemui.kairos.internal.SchedulableNode
         public final void adjustDirectUpstream(SchedulerImpl schedulerImpl, int i, int i2) {
-            Integer valueOf = Integer.valueOf(i);
+            Integer numValueOf = Integer.valueOf(i);
             MuxNode muxNode = MuxNode.this;
             DepthTracker depthTracker = muxNode.depthTracker;
-            if (depthTracker.addDirectUpstream(i2, valueOf)) {
+            if (depthTracker.addDirectUpstream(i2, numValueOf)) {
                 depthTracker.schedule(schedulerImpl, muxNode);
             }
         }
@@ -109,9 +107,9 @@ public abstract class MuxNode implements PushNode {
     }
 
     public final void adjustIndirectUpstream(SchedulerImpl schedulerImpl, int i, int i2, SetBuilder setBuilder, SetBuilder setBuilder2) {
-        Integer valueOf = Integer.valueOf(i);
+        Integer numValueOf = Integer.valueOf(i);
         DepthTracker depthTracker = this.depthTracker;
-        if (depthTracker.addIndirectUpstream(i2, valueOf) || depthTracker.updateIndirectRoots(setBuilder2, setBuilder, this instanceof MuxDeferredNode ? (MuxDeferredNode) this : null)) {
+        if (depthTracker.addIndirectUpstream(i2, numValueOf) || depthTracker.updateIndirectRoots(setBuilder2, setBuilder, this instanceof MuxDeferredNode ? (MuxDeferredNode) this : null)) {
             depthTracker.schedule(schedulerImpl, this);
         }
     }

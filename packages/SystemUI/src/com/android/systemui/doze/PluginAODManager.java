@@ -97,7 +97,7 @@ import com.android.systemui.log.SamsungServiceLoggerImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.media.MediaType;
 import com.android.systemui.media.SecMediaHost;
-import com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda15;
+import com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda17;
 import com.android.systemui.media.SecMediaPlayerData;
 import com.android.systemui.media.SubscreenMusicWidgetController;
 import com.android.systemui.media.SubscreenMusicWidgetSubroom;
@@ -185,7 +185,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginAODManager implements Dumpable, ConfigurationController.ConfigurationListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -306,8 +305,8 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                 WakefulnessLifecycle wakefulnessLifecycle = PluginAODManager.this.mWakefulnessLifecycle;
                 synchronized (wakefulnessLifecycle.mMsgForLifecycle) {
                     try {
-                        Optional findFirst = wakefulnessLifecycle.mMsgForLifecycle.stream().filter(new SecLifecycle$$ExternalSyntheticLambda0(1)).findFirst();
-                        z = findFirst != null && findFirst.isPresent();
+                        Optional optionalFindFirst = wakefulnessLifecycle.mMsgForLifecycle.stream().filter(new SecLifecycle$$ExternalSyntheticLambda0(1)).findFirst();
+                        z = optionalFindFirst != null && optionalFindFirst.isPresent();
                     } catch (Throwable th) {
                         throw th;
                     }
@@ -324,14 +323,14 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
         public final void animateExpandLockedShadePanel(StatusBarNotification statusBarNotification) {
             Log.d("PluginAODManager", "animateExpandLockedShadePanel() sbn=" + statusBarNotification);
             PluginAODManager pluginAODManager = PluginAODManager.this;
-            boolean hasMessages = pluginAODManager.mHandler.hasMessages(1000);
+            boolean zHasMessages = pluginAODManager.mHandler.hasMessages(1000);
             AnonymousClass9 anonymousClass9 = pluginAODManager.mHandler;
-            if (hasMessages) {
+            if (zHasMessages) {
                 anonymousClass9.removeMessages(1000);
             }
-            Message obtainMessage = anonymousClass9.obtainMessage(1000);
-            obtainMessage.obj = statusBarNotification == null ? null : statusBarNotification.clone();
-            anonymousClass9.sendMessageDelayed(obtainMessage, 300L);
+            Message messageObtainMessage = anonymousClass9.obtainMessage(1000);
+            messageObtainMessage.obj = statusBarNotification == null ? null : statusBarNotification.clone();
+            anonymousClass9.sendMessageDelayed(messageObtainMessage, 300L);
         }
 
         @Override // com.android.systemui.plugins.aod.PluginAODNotificationManager.Callback
@@ -340,13 +339,13 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
             PluginAODManager pluginAODManager = PluginAODManager.this;
             NotificationEntry entry = ((NotifPipeline) ((CommonNotifCollection) pluginAODManager.mCommonNotifCollectionLazy.get())).mNotifCollection.getEntry(str);
             if (entry != null) {
-                IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+                IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
                 int rank = entry.mRanking.getRank();
                 int i = NotificationsLiveDataStoreRefactor.$r8$clinit;
-                NotificationVisibility obtain = NotificationVisibility.obtain(str, rank, pluginAODManager.mActiveNotificationsInteractor.getAllNotificationsCountValue(), true);
+                NotificationVisibility notificationVisibilityObtain = NotificationVisibility.obtain(str, rank, pluginAODManager.mActiveNotificationsInteractor.getAllNotificationsCountValue(), true);
                 try {
-                    if (asInterface != null) {
-                        asInterface.onNotificationClick(str, obtain);
+                    if (iStatusBarServiceAsInterface != null) {
+                        iStatusBarServiceAsInterface.onNotificationClick(str, notificationVisibilityObtain);
                     } else {
                         Log.e("PluginAODManager", "can't get STATUS_BAR_SERVICE");
                     }
@@ -565,12 +564,12 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                 }
             }
             sb2.append(sb3.toString());
-            String sb4 = sb2.toString();
+            String string = sb2.toString();
             SamsungServiceLogger samsungServiceLogger3 = AODDumpLog.logger;
             LogLevel logLevel2 = LogLevel.DEBUG;
             SamsungServiceLogger samsungServiceLogger4 = AODDumpLog.logger;
             if (samsungServiceLogger4 != null) {
-                ((SamsungServiceLoggerImpl) samsungServiceLogger4).logWithThreadId("", logLevel2, sb4);
+                ((SamsungServiceLoggerImpl) samsungServiceLogger4).logWithThreadId("", logLevel2, string);
             }
         }
 
@@ -640,10 +639,7 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
 
         @Override // com.android.systemui.plugins.aod.PluginAOD.UICallback
         public final boolean isWonderLandAmbientWallpaperEnabled() {
-            AODAmbientWallpaperHelper aODAmbientWallpaperHelper = PluginAODManager.this.mAODAmbientWallpaperHelper;
-            Lazy lazy = aODAmbientWallpaperHelper.keyguardFoldControllerLazy;
-            ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("isWonderLandAmbientWallpaper: isFolded=", ", isMainWonderLandWallpaper=", ", isSubWonderLandWallpaper=", !((KeyguardFoldControllerImpl) ((KeyguardFoldController) lazy.get())).isFoldOpened(), aODAmbientWallpaperHelper.isMainWonderLandWallpaper), aODAmbientWallpaperHelper.isSubWonderLandWallpaper, "AODAmbientWallpaperHelper");
-            return LsRune.AOD_SUB_DISPLAY_LOCK ? !((KeyguardFoldControllerImpl) ((KeyguardFoldController) lazy.get())).isFoldOpened() ? aODAmbientWallpaperHelper.isSubWonderLandWallpaper : aODAmbientWallpaperHelper.isMainWonderLandWallpaper : aODAmbientWallpaperHelper.isMainWonderLandWallpaper;
+            return PluginAODManager.this.mAODAmbientWallpaperHelper.isWonderLandAmbientWallpaper();
         }
 
         @Override // com.android.systemui.plugins.aod.PluginAOD.UICallback
@@ -705,9 +701,9 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                 batteryMeterViewController.destroy();
             }
             BatteryMeterView batteryMeterView = new BatteryMeterView(context, null);
-            BatteryMeterViewController create = pluginAODManager.mBatteryMeterViewControllerFactory.create(batteryMeterView, StatusBarLocation.AOD);
-            pluginAODManager.mBatteryMeterViewController = create;
-            create.init();
+            BatteryMeterViewController batteryMeterViewControllerCreate = pluginAODManager.mBatteryMeterViewControllerFactory.create(batteryMeterView, StatusBarLocation.AOD);
+            pluginAODManager.mBatteryMeterViewController = batteryMeterViewControllerCreate;
+            batteryMeterViewControllerCreate.init();
             return batteryMeterView;
         }
 
@@ -946,9 +942,9 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
             SubScreenManager subScreenManager = PluginAODManager.this.mSubScreenManager;
             subScreenManager.getClass();
             if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
-                StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateFallback()  , ", " , ", z);
-                m.append(subScreenManager.mFallback);
-                Log.d("SubScreenManager", m.toString());
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateFallback()  , ", " , ", z);
+                sbM.append(subScreenManager.mFallback);
+                Log.d("SubScreenManager", sbM.toString());
                 if (z) {
                     subScreenManager.startSubScreenFallback(subScreenManager.mSubDisplay);
                     return;
@@ -995,19 +991,19 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
             }
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:15:0x003a, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:16:0x003a, code lost:
         
             r6 = r4.mAODPlugin;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x003c, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:17:0x003c, code lost:
         
             if (r6 == null) goto L20;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x003e, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:18:0x003e, code lost:
         
             r6.getNotificationManager().removeNotification(r5);
          */
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x0045, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:19:0x0045, code lost:
         
             return;
          */
@@ -1027,62 +1023,36 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
         
             return;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:24:?, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:32:?, code lost:
         
             return;
          */
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onEntryRemoved(com.android.systemui.statusbar.notification.collection.NotificationEntry r5, int r6) {
-            /*
-                r4 = this;
-                java.lang.String r6 = "PluginAODManager"
-                java.lang.String r0 = "onEntryRemoved: "
-                android.util.Log.d(r6, r0)
-                com.android.systemui.doze.PluginAODManager r4 = com.android.systemui.doze.PluginAODManager.this
-                java.lang.String r5 = r5.mKey
-                java.util.ArrayList r6 = r4.mSmartAlerts
-                int r0 = r6.size()
-                r1 = 0
-            L12:
-                if (r1 >= r0) goto L3a
-                java.lang.Object r2 = r6.get(r1)
-                int r1 = r1 + 1
-                android.service.notification.StatusBarNotification r2 = (android.service.notification.StatusBarNotification) r2
-                if (r2 == 0) goto L12
-                java.lang.String r3 = r2.getKey()
-                boolean r3 = r3.equals(r5)
-                if (r3 == 0) goto L12
-                java.util.ArrayList r3 = r4.mSmartAlerts
-                monitor-enter(r3)
-                java.util.ArrayList r6 = r4.mSmartAlerts     // Catch: java.lang.Throwable -> L37
-                r6.remove(r2)     // Catch: java.lang.Throwable -> L37
-                monitor-exit(r3)     // Catch: java.lang.Throwable -> L37
-                java.lang.String r6 = "removeNotification"
-                r4.logSmartAlert(r6)
-                goto L3a
-            L37:
-                r4 = move-exception
-                monitor-exit(r3)     // Catch: java.lang.Throwable -> L37
-                throw r4
-            L3a:
-                com.android.systemui.plugins.aod.PluginAOD r6 = r4.mAODPlugin
-                if (r6 == 0) goto L46
-                com.android.systemui.plugins.aod.PluginAODNotificationManager r4 = r6.getNotificationManager()
-                r4.removeNotification(r5)
-                return
-            L46:
-                com.android.systemui.plugins.cover.PluginCover r4 = r4.mCoverPlugin
-                if (r4 == 0) goto L51
-                com.android.systemui.plugins.aod.PluginAODNotificationManager r4 = r4.getNotificationManager()
-                r4.removeNotification(r5)
-            L51:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.doze.PluginAODManager.AnonymousClass8.onEntryRemoved(com.android.systemui.statusbar.notification.collection.NotificationEntry, int):void");
+        public final void onEntryRemoved(NotificationEntry notificationEntry, int i) {
+            Log.d("PluginAODManager", "onEntryRemoved: ");
+            PluginAODManager pluginAODManager = PluginAODManager.this;
+            String str = notificationEntry.mKey;
+            ArrayList arrayList = pluginAODManager.mSmartAlerts;
+            int size = arrayList.size();
+            int i2 = 0;
+            while (true) {
+                if (i2 >= size) {
+                    break;
+                }
+                Object obj = arrayList.get(i2);
+                i2++;
+                StatusBarNotification statusBarNotification = (StatusBarNotification) obj;
+                if (statusBarNotification != null && statusBarNotification.getKey().equals(str)) {
+                    synchronized (pluginAODManager.mSmartAlerts) {
+                        pluginAODManager.mSmartAlerts.remove(statusBarNotification);
+                    }
+                    pluginAODManager.logSmartAlert("removeNotification");
+                    break;
+                }
+            }
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
@@ -1205,7 +1175,7 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                             if (QpRune.QUICK_SUBSCREEN_FULLSCREEN_PANEL) {
                                 subScreenQuickPanelWindowView.semSetRoundedCorners(0);
                             } else {
-                                subScreenQuickPanelWindowController.mSubScreenQsWindowView.semSetRoundedCorners(15, subScreenQuickPanelWindowController.mContext.getResources().getDimensionPixelSize(17105923));
+                                subScreenQuickPanelWindowController.mSubScreenQsWindowView.semSetRoundedCorners(15, subScreenQuickPanelWindowController.mContext.getResources().getDimensionPixelSize(17105924));
                                 subScreenQuickPanelWindowController.mSubScreenQsWindowView.semSetRoundedCornerColor(15, subScreenQuickPanelWindowController.mContext.getColor(android.R.color.black));
                             }
                             SubscreenQsPanelController subscreenQsPanelController = subScreenQuickPanelWindowController.mSubscreenQsPanelController;
@@ -1216,7 +1186,7 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                                 ((SubscreenParentLayout) view).getClass();
                                 SecMediaHost secMediaHost = (SecMediaHost) Dependency.sDependency.getDependencyInner(SecMediaHost.class);
                                 secMediaHost.mCoverQSClickConsumer = subScreenQuickPanelWindowController$$ExternalSyntheticLambda15;
-                                SecMediaHost.iteratePlayers((SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(MediaType.COVER_QS), new SecMediaHost$$ExternalSyntheticLambda15(subScreenQuickPanelWindowController$$ExternalSyntheticLambda15, 2));
+                                SecMediaHost.iteratePlayers((SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(MediaType.COVER_QS), new SecMediaHost$$ExternalSyntheticLambda17(subScreenQuickPanelWindowController$$ExternalSyntheticLambda15, 2));
                                 SubscreenParentLayout subscreenParentLayout = (SubscreenParentLayout) subScreenQuickPanelWindowController.mQSPanel;
                                 QSHost qSHost = subscreenQsPanelController.mHost;
                                 subscreenParentLayout.qsHost = qSHost;
@@ -1303,7 +1273,7 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                 @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                 public final void onFoldStateChanged(boolean z) {
                     PluginKeyguardStatusView pluginKeyguardStatusView;
-                    PluginAODManager pluginAODManager = PluginAODManager.this;
+                    PluginAODManager pluginAODManager = this.f$0;
                     AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("onFolderStateChanged isOpened : ", "PluginAODManager", z);
                     pluginAODManager.mIsFolderOpened = z;
                     if (LsRune.AOD_SUB_DISPLAY_COVER) {
@@ -1401,10 +1371,10 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
 
     public final void enableTouch(boolean z) {
         PluginKeyguardStatusView pluginKeyguardStatusView;
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("enableTouch : ", " FaceWidgetContainerWrapper = ", z);
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("enableTouch : ", " FaceWidgetContainerWrapper = ", z);
         FaceWidgetContainerWrapper faceWidgetContainerWrapper = this.mFaceWidgetContainerWrapper;
-        m.append(faceWidgetContainerWrapper);
-        Log.d("PluginAODManager", m.toString());
+        sbM.append(faceWidgetContainerWrapper);
+        Log.d("PluginAODManager", sbM.toString());
         if (faceWidgetContainerWrapper == null || (pluginKeyguardStatusView = faceWidgetContainerWrapper.mPluginKeyguardStatusView) == null) {
             return;
         }
@@ -1447,12 +1417,12 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
             }
         }
         sb.append(sb2.toString());
-        String sb3 = sb.toString();
+        String string = sb.toString();
         SamsungServiceLogger samsungServiceLogger = AODDumpLog.logger;
         LogLevel logLevel = LogLevel.DEBUG;
         SamsungServiceLogger samsungServiceLogger2 = AODDumpLog.logger;
         if (samsungServiceLogger2 != null) {
-            ((SamsungServiceLoggerImpl) samsungServiceLogger2).logWithThreadId("", logLevel, sb3);
+            ((SamsungServiceLoggerImpl) samsungServiceLogger2).logWithThreadId("", logLevel, string);
         }
     }
 
@@ -1708,18 +1678,18 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
         }
         if (this.mControlScreenOff != z2) {
             this.mControlScreenOff = z2;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateAnimateScreenOff : controlScreenOff=", " AlwaysOn=", z2);
-            m.append(dozeParameters.getAlwaysOn());
-            m.append(" keyguardShowing=");
-            m.append(keyguardUpdateMonitor.isKeyguardVisible());
-            m.append(" powerSaveActive=");
-            m.append(((BatteryControllerImpl) ((DozeServiceHost) this.mDozeServiceHostLazy.get()).mBatteryController).mAodPowerSave);
-            m.append(" mIsFolderOpened=");
-            m.append(this.mIsFolderOpened);
-            m.append(" needControlScreenOff=");
-            m.append(needControlScreenOff());
-            m.append(" called=");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(4, "PluginAODManager", m);
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateAnimateScreenOff : controlScreenOff=", " AlwaysOn=", z2);
+            sbM.append(dozeParameters.getAlwaysOn());
+            sbM.append(" keyguardShowing=");
+            sbM.append(keyguardUpdateMonitor.isKeyguardVisible());
+            sbM.append(" powerSaveActive=");
+            sbM.append(((BatteryControllerImpl) ((DozeServiceHost) this.mDozeServiceHostLazy.get()).mBatteryController).mAodPowerSave);
+            sbM.append(" mIsFolderOpened=");
+            sbM.append(this.mIsFolderOpened);
+            sbM.append(" needControlScreenOff=");
+            sbM.append(needControlScreenOff());
+            sbM.append(" called=");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(4, "PluginAODManager", sbM);
         }
         dozeParameters.setControlScreenOffAnimation(z2);
     }
@@ -1730,9 +1700,9 @@ public class PluginAODManager implements Dumpable, ConfigurationController.Confi
                 Log.d("PluginAODManager", "updateRefreshRate: release token in Screen ON");
                 z = false;
             }
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateRefreshRate: acquire=", " called=", z);
-            m.append(Debug.getCallers(2));
-            Log.i("PluginAODManager", m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateRefreshRate: acquire=", " called=", z);
+            sbM.append(Debug.getCallers(2));
+            Log.i("PluginAODManager", sbM.toString());
             if (!z) {
                 IRefreshRateToken iRefreshRateToken = this.mMaxRefreshRateToken;
                 if (iRefreshRateToken != null) {

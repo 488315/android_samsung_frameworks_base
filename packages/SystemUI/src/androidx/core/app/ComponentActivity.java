@@ -13,7 +13,6 @@ import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.ReportFragment;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ComponentActivity extends Activity implements LifecycleOwner, KeyEventDispatcher$Component {
     public final LifecycleRegistry lifecycleRegistry;

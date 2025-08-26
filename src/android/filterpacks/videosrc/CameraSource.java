@@ -115,7 +115,7 @@ public class CameraSource extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void process(FilterContext filterContext) {
+    public void process(FilterContext filterContext) throws InterruptedException {
         if (this.mLogVerbose) {
             Log.v(TAG, "Processing new frame");
         }
@@ -143,15 +143,15 @@ public class CameraSource extends Filter {
         ShaderProgram shaderProgram = this.mFrameExtractor;
         float[] fArr = this.mMappedCoords;
         shaderProgram.setSourceRegion(fArr[0], fArr[1], fArr[4], fArr[5], fArr[8], fArr[9], fArr[12], fArr[13]);
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        this.mFrameExtractor.process(this.mCameraFrame, newFrame);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        this.mFrameExtractor.process(this.mCameraFrame, frameNewFrame);
         long timestamp = this.mSurfaceTexture.getTimestamp();
         if (this.mLogVerbose) {
             Log.v(TAG, "Timestamp: " + (timestamp / 1.0E9d) + " s");
         }
-        newFrame.setTimestamp(timestamp);
-        pushOutput("video", newFrame);
-        newFrame.release();
+        frameNewFrame.setTimestamp(timestamp);
+        pushOutput("video", frameNewFrame);
+        frameNewFrame.release();
         if (this.mLogVerbose) {
             Log.v(TAG, "Done processing new frame");
         }
@@ -180,8 +180,8 @@ public class CameraSource extends Filter {
     public void fieldPortValueUpdated(String str, FilterContext filterContext) {
         if (str.equals("framerate")) {
             getCameraParameters();
-            int[] findClosestFpsRange = findClosestFpsRange(this.mFps, this.mCameraParameters);
-            this.mCameraParameters.setPreviewFpsRange(findClosestFpsRange[0], findClosestFpsRange[1]);
+            int[] iArrFindClosestFpsRange = findClosestFpsRange(this.mFps, this.mCameraParameters);
+            this.mCameraParameters.setPreviewFpsRange(iArrFindClosestFpsRange[0], iArrFindClosestFpsRange[1]);
             this.mCamera.setParameters(this.mCameraParameters);
         }
     }
@@ -201,14 +201,14 @@ public class CameraSource extends Filter {
                 this.mCamera = null;
             }
         }
-        int[] findClosestSize = findClosestSize(this.mWidth, this.mHeight, this.mCameraParameters);
-        int i = findClosestSize[0];
+        int[] iArrFindClosestSize = findClosestSize(this.mWidth, this.mHeight, this.mCameraParameters);
+        int i = iArrFindClosestSize[0];
         this.mWidth = i;
-        int i2 = findClosestSize[1];
+        int i2 = iArrFindClosestSize[1];
         this.mHeight = i2;
         this.mCameraParameters.setPreviewSize(i, i2);
-        int[] findClosestFpsRange = findClosestFpsRange(this.mFps, this.mCameraParameters);
-        this.mCameraParameters.setPreviewFpsRange(findClosestFpsRange[0], findClosestFpsRange[1]);
+        int[] iArrFindClosestFpsRange = findClosestFpsRange(this.mFps, this.mCameraParameters);
+        this.mCameraParameters.setPreviewFpsRange(iArrFindClosestFpsRange[0], iArrFindClosestFpsRange[1]);
         return this.mCameraParameters;
     }
 

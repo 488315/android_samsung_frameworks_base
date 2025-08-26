@@ -44,9 +44,9 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemBiometricSysUiDisplayBrightnessCallback)) {
-                return (ISemBiometricSysUiDisplayBrightnessCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemBiometricSysUiDisplayBrightnessCallback)) {
+                return (ISemBiometricSysUiDisplayBrightnessCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
                 return true;
             }
             if (i == 1) {
-                float readFloat = parcel.readFloat();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                onBrightnessChanged(readFloat);
+                onBrightnessChanged(f);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayBrightnessCallback
             public void onBrightnessChanged(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardTransitionAuditLogger$start$5 extends SuspendLambda implements Function2 {
     int label;
@@ -46,7 +45,7 @@ final class KeyguardTransitionAuditLogger$start$5 extends SuspendLambda implemen
                 public final Object emit(Object obj2, Continuation continuation) {
                     Boolean bool = (Boolean) obj2;
                     bool.booleanValue();
-                    KeyguardTransitionAuditLogger.this.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "Notif: isOnLockscreenWithoutShade", bool);
+                    keyguardTransitionAuditLogger.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "Notif: isOnLockscreenWithoutShade", bool);
                     return Unit.INSTANCE;
                 }
             };

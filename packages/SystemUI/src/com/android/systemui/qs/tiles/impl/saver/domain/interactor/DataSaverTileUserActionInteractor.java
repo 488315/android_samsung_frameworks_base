@@ -22,7 +22,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DataSaverTileUserActionInteractor implements QSTileUserActionInteractor {
     public final CoroutineContext backgroundContext;
@@ -34,7 +33,6 @@ public final class DataSaverTileUserActionInteractor implements QSTileUserAction
     public final SharedPreferences sharedPreferences;
     public final SystemUIDialog.Factory systemUIDialogFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -60,19 +58,19 @@ public final class DataSaverTileUserActionInteractor implements QSTileUserAction
     }
 
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
-    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) throws Throwable {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
             boolean z = ((DataSaverTileModel) qSTileInput.data).isEnabled;
             if (z || this.sharedPreferences.getBoolean("data_saver_dialog_shown", false)) {
-                Object withContext = BuildersKt.withContext(this.backgroundContext, new DataSaverTileUserActionInteractor$handleInput$2$1(this, z, null), continuation);
-                if (withContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return withContext;
+                Object objWithContext = BuildersKt.withContext(this.backgroundContext, new DataSaverTileUserActionInteractor$handleInput$2$1(this, z, null), continuation);
+                if (objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objWithContext;
                 }
             } else {
-                Object withContext2 = BuildersKt.withContext(this.coroutineContext, new DataSaverTileUserActionInteractor$handleInput$2$2(this, qSTileInput, null), continuation);
-                if (withContext2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return withContext2;
+                Object objWithContext2 = BuildersKt.withContext(this.coroutineContext, new DataSaverTileUserActionInteractor$handleInput$2$2(this, qSTileInput, null), continuation);
+                if (objWithContext2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objWithContext2;
                 }
             }
         } else if (qSTileUserAction instanceof QSTileUserAction.LongClick) {

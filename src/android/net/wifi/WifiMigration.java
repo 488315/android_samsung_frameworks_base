@@ -263,9 +263,9 @@ public final class WifiMigration {
         if (Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_MIGRATION_COMPLETED, 0) == 1) {
             return null;
         }
-        SettingsMigrationData build = new SettingsMigrationData.Builder().setScanAlwaysAvailable(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1).setP2pFactoryResetPending(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_P2P_PENDING_FACTORY_RESET, 0) == 1).setP2pDeviceName(Settings.Global.getString(context.getContentResolver(), Settings.Global.WIFI_P2P_DEVICE_NAME)).setSoftApTimeoutEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.SOFT_AP_TIMEOUT_ENABLED, 1) == 1).setWakeUpEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1).setScanThrottleEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, 1) == 1).setVerboseLoggingEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_VERBOSE_LOGGING_ENABLED, 0) == 1).build();
+        SettingsMigrationData settingsMigrationDataBuild = new SettingsMigrationData.Builder().setScanAlwaysAvailable(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1).setP2pFactoryResetPending(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_P2P_PENDING_FACTORY_RESET, 0) == 1).setP2pDeviceName(Settings.Global.getString(context.getContentResolver(), Settings.Global.WIFI_P2P_DEVICE_NAME)).setSoftApTimeoutEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.SOFT_AP_TIMEOUT_ENABLED, 1) == 1).setWakeUpEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1).setScanThrottleEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_SCAN_THROTTLE_ENABLED, 1) == 1).setVerboseLoggingEnabled(Settings.Global.getInt(context.getContentResolver(), Settings.Global.WIFI_VERBOSE_LOGGING_ENABLED, 0) == 1).build();
         Settings.Global.putInt(context.getContentResolver(), Settings.Global.WIFI_MIGRATION_COMPLETED, 1);
-        return build;
+        return settingsMigrationDataBuild;
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
@@ -281,11 +281,11 @@ public final class WifiMigration {
     }
 
     static /* synthetic */ void lambda$migrateLegacyKeystoreToWifiBlobstore$1(Executor executor, final IntConsumer intConsumer) {
-        final int migrateLegacyKeystoreToWifiBlobstoreInternal = migrateLegacyKeystoreToWifiBlobstoreInternal();
+        final int iMigrateLegacyKeystoreToWifiBlobstoreInternal = migrateLegacyKeystoreToWifiBlobstoreInternal();
         executor.execute(new Runnable() { // from class: android.net.wifi.WifiMigration$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                intConsumer.accept(migrateLegacyKeystoreToWifiBlobstoreInternal);
+                intConsumer.accept(iMigrateLegacyKeystoreToWifiBlobstoreInternal);
             }
         });
     }
@@ -295,15 +295,15 @@ public final class WifiMigration {
             Log.i(TAG, "Avoiding migration since supplicant cannot access WifiBlobstore");
             return 1;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             ILegacyKeystore legacyKeystore = WifiBlobStore.getLegacyKeystore();
             String[] list = legacyKeystore.list("", 1010);
             if (list != null && list.length != 0) {
                 WifiBlobStore wifiBlobStore = WifiBlobStore.getInstance();
-                List asList = Arrays.asList(wifiBlobStore.list(""));
+                List listAsList = Arrays.asList(wifiBlobStore.list(""));
                 HashSet hashSet = new HashSet();
-                hashSet.addAll(asList);
+                hashSet.addAll(listAsList);
                 for (String str : list) {
                     if (!hashSet.contains(str)) {
                         wifiBlobStore.put(str, legacyKeystore.get(str, 1010));
@@ -326,7 +326,7 @@ public final class WifiMigration {
             Log.e(TAG, "Encountered an exception while migrating aliases. " + e2);
             return 2;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 }

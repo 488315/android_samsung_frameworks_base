@@ -11,16 +11,15 @@ import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.chips.ui.viewmodel.TimeSource;
 import com.android.systemui.statusbar.core.StatusBarConnectedDisplays;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class OngoingActivityChipModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Active extends OngoingActivityChipModel {
         public final ClickBehavior clickBehavior;
         public final ColorsModel colors;
@@ -31,7 +30,6 @@ public abstract class OngoingActivityChipModel {
         public final View.OnClickListener onClickListenerLegacy;
         public final TransitionManager transitionManager;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Countdown extends Active {
             public final ColorsModel colors;
             public final InstanceId instanceId;
@@ -74,11 +72,11 @@ public abstract class OngoingActivityChipModel {
             }
 
             public final int hashCode() {
-                int m = MoveResult$$ExternalSyntheticOutline0.m((this.colors.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31, 31, this.secondsUntilStarted);
+                int iM = MoveResult$$ExternalSyntheticOutline0.m((this.colors.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31, 31, this.secondsUntilStarted);
                 TransitionManager transitionManager = this.transitionManager;
-                int m2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((m + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
+                int iM2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iM + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
                 InstanceId instanceId = this.instanceId;
-                return m2 + (instanceId != null ? instanceId.hashCode() : 0);
+                return iM2 + (instanceId != null ? instanceId.hashCode() : 0);
             }
 
             @Override // com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.Active
@@ -104,7 +102,6 @@ public abstract class OngoingActivityChipModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class IconOnly extends Active {
             public final ClickBehavior clickBehavior;
             public final ColorsModel colors;
@@ -149,13 +146,13 @@ public abstract class OngoingActivityChipModel {
             }
 
             public final int hashCode() {
-                int hashCode = (this.colors.hashCode() + ((this.icon.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31)) * 31;
+                int iHashCode = (this.colors.hashCode() + ((this.icon.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31)) * 31;
                 View.OnClickListener onClickListener = this.onClickListenerLegacy;
-                int hashCode2 = (this.clickBehavior.hashCode() + ((hashCode + (onClickListener == null ? 0 : onClickListener.hashCode())) * 31)) * 31;
+                int iHashCode2 = (this.clickBehavior.hashCode() + ((iHashCode + (onClickListener == null ? 0 : onClickListener.hashCode())) * 31)) * 31;
                 TransitionManager transitionManager = this.transitionManager;
-                int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
+                int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
                 InstanceId instanceId = this.instanceId;
-                return m + (instanceId != null ? instanceId.hashCode() : 0);
+                return iM + (instanceId != null ? instanceId.hashCode() : 0);
             }
 
             @Override // com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.Active
@@ -199,7 +196,6 @@ public abstract class OngoingActivityChipModel {
             return this.isHidden;
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Timer extends Active {
             public final ClickBehavior clickBehavior;
             public final ColorsModel colors;
@@ -217,7 +213,12 @@ public abstract class OngoingActivityChipModel {
             public final TransitionManager transitionManager;
 
             /*  JADX ERROR: NullPointerException in pass: InitCodeVariables
-                java.lang.NullPointerException
+                java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.SSAVar.getPhiList()" because "resultVar" is null
+                	at jadx.core.dex.visitors.InitCodeVariables.collectConnectedVars(InitCodeVariables.java:119)
+                	at jadx.core.dex.visitors.InitCodeVariables.setCodeVar(InitCodeVariables.java:82)
+                	at jadx.core.dex.visitors.InitCodeVariables.initCodeVar(InitCodeVariables.java:74)
+                	at jadx.core.dex.visitors.InitCodeVariables.initCodeVars(InitCodeVariables.java:48)
+                	at jadx.core.dex.visitors.InitCodeVariables.visit(InitCodeVariables.java:29)
                 */
             public /* synthetic */ Timer(java.lang.String r19, boolean r20, com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.ChipIcon r21, com.android.systemui.statusbar.chips.ui.model.ColorsModel r22, long r23, com.android.systemui.statusbar.chips.ui.viewmodel.TimeSource r25, boolean r26, android.view.View.OnClickListener r27, com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.ClickBehavior r28, com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.TransitionManager r29, boolean r30, boolean r31, com.android.internal.logging.InstanceId r32, int r33, kotlin.jvm.internal.DefaultConstructorMarker r34) {
                 /*
@@ -343,13 +344,13 @@ public abstract class OngoingActivityChipModel {
             }
 
             public final int hashCode() {
-                int m = TransitionData$$ExternalSyntheticOutline0.m((this.timeSource.hashCode() + MoveResult$$ExternalSyntheticOutline0.m((this.colors.hashCode() + ((this.icon.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31)) * 31, 31, this.startTimeMs)) * 31, 31, this.isEventInFuture);
+                int iM = TransitionData$$ExternalSyntheticOutline0.m((this.timeSource.hashCode() + MoveResult$$ExternalSyntheticOutline0.m((this.colors.hashCode() + ((this.icon.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.isImportantForPrivacy)) * 31)) * 31, 31, this.startTimeMs)) * 31, 31, this.isEventInFuture);
                 View.OnClickListener onClickListener = this.onClickListenerLegacy;
-                int hashCode = (this.clickBehavior.hashCode() + ((m + (onClickListener == null ? 0 : onClickListener.hashCode())) * 31)) * 31;
+                int iHashCode = (this.clickBehavior.hashCode() + ((iM + (onClickListener == null ? 0 : onClickListener.hashCode())) * 31)) * 31;
                 TransitionManager transitionManager = this.transitionManager;
-                int m2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
+                int iM2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (transitionManager == null ? 0 : transitionManager.hashCode())) * 31, 31, this.isHidden), 31, this.shouldAnimate);
                 InstanceId instanceId = this.instanceId;
-                return m2 + (instanceId != null ? instanceId.hashCode() : 0);
+                return iM2 + (instanceId != null ? instanceId.hashCode() : 0);
             }
 
             @Override // com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.Active
@@ -397,10 +398,8 @@ public abstract class OngoingActivityChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ChipIcon {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SingleColorIcon extends ChipIcon {
             public final Icon impl;
 
@@ -425,7 +424,6 @@ public abstract class OngoingActivityChipModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class StatusBarView extends ChipIcon {
             public final ContentDescription contentDescription;
             public final StatusBarIconView impl;
@@ -466,10 +464,8 @@ public abstract class OngoingActivityChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ClickBehavior {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ExpandAction implements ClickBehavior {
             public final Function1 onClick;
 
@@ -493,7 +489,6 @@ public abstract class OngoingActivityChipModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class None implements ClickBehavior {
             public static final None INSTANCE = new None();
 
@@ -514,12 +509,12 @@ public abstract class OngoingActivityChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive extends OngoingActivityChipModel {
         public final String logName;
         public final boolean shouldAnimate;
         public final TransitionManager transitionManager;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Inactive() {
             this(false, null, 3, 0 == true ? 1 : 0);
         }
@@ -541,9 +536,9 @@ public abstract class OngoingActivityChipModel {
         }
 
         public final int hashCode() {
-            int hashCode = Boolean.hashCode(this.shouldAnimate) * 31;
+            int iHashCode = Boolean.hashCode(this.shouldAnimate) * 31;
             TransitionManager transitionManager = this.transitionManager;
-            return hashCode + (transitionManager == null ? 0 : transitionManager.hashCode());
+            return iHashCode + (transitionManager == null ? 0 : transitionManager.hashCode());
         }
 
         public final String toString() {
@@ -562,7 +557,6 @@ public abstract class OngoingActivityChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionManager {
         public final ComposableControllerFactory controllerFactory;
         public final boolean hideChipForTransition;
@@ -600,38 +594,31 @@ public abstract class OngoingActivityChipModel {
             this.hideChipForTransition = z;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ TransitionManager(com.android.systemui.animation.ComposableControllerFactory r1, kotlin.jvm.functions.Function0 r2, kotlin.jvm.functions.Function0 r3, boolean r4, int r5, kotlin.jvm.internal.DefaultConstructorMarker r6) {
-            /*
-                r0 = this;
-                r6 = r5 & 1
-                if (r6 == 0) goto L5
-                r1 = 0
-            L5:
-                r6 = r5 & 2
-                if (r6 == 0) goto Lf
-                com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0 r2 = new com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0
-                r6 = 0
-                r2.<init>()
-            Lf:
-                r6 = r5 & 4
-                if (r6 == 0) goto L19
-                com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0 r3 = new com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0
-                r6 = 1
-                r3.<init>()
-            L19:
-                r5 = r5 & 8
-                if (r5 == 0) goto L1e
-                r4 = 0
-            L1e:
-                r0.<init>(r1, r2, r3, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel.TransitionManager.<init>(com.android.systemui.animation.ComposableControllerFactory, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function0, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ TransitionManager(ComposableControllerFactory composableControllerFactory, Function0 function0, Function0 function02, boolean z, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            composableControllerFactory = (i & 1) != 0 ? null : composableControllerFactory;
+            if ((i & 2) != 0) {
+                final int i2 = 0;
+                function0 = new Function0() { // from class: com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        switch (i2) {
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+            }
+            if ((i & 4) != 0) {
+                final int i3 = 1;
+                function02 = new Function0() { // from class: com.android.systemui.statusbar.chips.ui.model.OngoingActivityChipModel$TransitionManager$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        switch (i3) {
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+            }
+            this(composableControllerFactory, function0, function02, (i & 8) != 0 ? false : z);
         }
     }
 

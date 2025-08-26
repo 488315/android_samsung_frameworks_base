@@ -11,7 +11,6 @@ import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Texture implements IGLObject {
     public static final Companion Companion = new Companion(null);
@@ -28,7 +27,6 @@ public final class Texture implements IGLObject {
     public boolean useMipmap;
     public Integer width;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,9 +61,9 @@ public final class Texture implements IGLObject {
                     GLES30.glTexParameteri(i2, ((Number) entry.getKey()).intValue(), ((Number) entry.getValue()).intValue());
                 }
                 Integer num = this.width;
-                int intValue = num != null ? num.intValue() : 0;
+                int iIntValue = num != null ? num.intValue() : 0;
                 Integer num2 = this.height;
-                GLES30.glTexImage2D(this.texType, 0, 6408, intValue, num2 != null ? num2.intValue() : 0, 0, 6408, 5121, this.buffer);
+                GLES30.glTexImage2D(this.texType, 0, 6408, iIntValue, num2 != null ? num2.intValue() : 0, 0, 6408, 5121, this.buffer);
                 if (this.useMipmap) {
                     GLES30.glBindTexture(i2, this.id);
                     GLES30.glTexParameteri(i2, 10241, 9987);
@@ -102,9 +100,9 @@ public final class Texture implements IGLObject {
         if (program != null) {
             this.location = GLES30.glGetUniformLocation(program.id, this.name);
         }
-        IntBuffer allocate = IntBuffer.allocate(1);
-        GLES30.glGenTextures(1, allocate);
-        this.id = allocate.get(0);
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        GLES30.glGenTextures(1, intBufferAllocate);
+        this.id = intBufferAllocate.get(0);
         if (this.texType == 36197) {
             this.surfaceTexture = new SurfaceTexture(this.id);
         }
@@ -123,10 +121,10 @@ public final class Texture implements IGLObject {
         }
         this.surfaceTexture = null;
         bind();
-        IntBuffer allocate = IntBuffer.allocate(1);
-        allocate.put(this.id);
-        allocate.rewind();
-        GLES30.glDeleteTextures(1, allocate);
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        intBufferAllocate.put(this.id);
+        intBufferAllocate.rewind();
+        GLES30.glDeleteTextures(1, intBufferAllocate);
     }
 
     public /* synthetic */ Texture(Program program, String str, Buffer buffer, Integer num, Integer num2, boolean z, boolean z2, int i, DefaultConstructorMarker defaultConstructorMarker) {

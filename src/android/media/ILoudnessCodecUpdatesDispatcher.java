@@ -45,9 +45,9 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILoudnessCodecUpdatesDispatcher)) {
-                return (ILoudnessCodecUpdatesDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILoudnessCodecUpdatesDispatcher)) {
+                return (ILoudnessCodecUpdatesDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                dispatchLoudnessCodecParameterChange(readInt, persistableBundle);
+                dispatchLoudnessCodecParameterChange(i3, persistableBundle);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
 
             @Override // android.media.ILoudnessCodecUpdatesDispatcher
             public void dispatchLoudnessCodecParameterChange(int i, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

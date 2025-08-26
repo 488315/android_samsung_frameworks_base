@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.crypto.engines;
 import android.security.keystore.KeyProperties;
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.CryptoServicesRegistrar;
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.internal.org.bouncycastle.crypto.Wrapper;
@@ -73,17 +74,17 @@ public class DESedeWrapEngine implements Wrapper {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Wrapper
-    public byte[] wrap(byte[] bArr, int i, int i2) {
+    public byte[] wrap(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         if (!this.forWrapping) {
             throw new IllegalStateException("Not initialized for wrapping");
         }
         byte[] bArr2 = new byte[i2];
         System.arraycopy(bArr, i, bArr2, 0, i2);
-        byte[] calculateCMSKeyChecksum = calculateCMSKeyChecksum(bArr2);
-        int length = calculateCMSKeyChecksum.length + i2;
+        byte[] bArrCalculateCMSKeyChecksum = calculateCMSKeyChecksum(bArr2);
+        int length = bArrCalculateCMSKeyChecksum.length + i2;
         byte[] bArr3 = new byte[length];
         System.arraycopy(bArr2, 0, bArr3, 0, i2);
-        System.arraycopy(calculateCMSKeyChecksum, 0, bArr3, i2, calculateCMSKeyChecksum.length);
+        System.arraycopy(bArrCalculateCMSKeyChecksum, 0, bArr3, i2, bArrCalculateCMSKeyChecksum.length);
         int blockSize = this.engine.getBlockSize();
         if (length % blockSize != 0) {
             throw new IllegalStateException("Not multiple of block length");
@@ -107,7 +108,7 @@ public class DESedeWrapEngine implements Wrapper {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Wrapper
-    public byte[] unwrap(byte[] bArr, int i, int i2) throws InvalidCipherTextException {
+    public byte[] unwrap(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException, InvalidCipherTextException {
         if (this.forWrapping) {
             throw new IllegalStateException("Not set for unwrapping");
         }

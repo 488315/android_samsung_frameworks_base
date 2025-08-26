@@ -73,9 +73,9 @@ public class AttributeTable {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
         Object obj = this.attributes.get(aSN1ObjectIdentifier);
         if (obj instanceof Vector) {
-            Enumeration elements = ((Vector) obj).elements();
-            while (elements.hasMoreElements()) {
-                aSN1EncodableVector.add((Attribute) elements.nextElement());
+            Enumeration enumerationElements = ((Vector) obj).elements();
+            while (enumerationElements.hasMoreElements()) {
+                aSN1EncodableVector.add((Attribute) enumerationElements.nextElement());
             }
         } else if (obj != null) {
             aSN1EncodableVector.add((Attribute) obj);
@@ -84,13 +84,13 @@ public class AttributeTable {
     }
 
     public int size() {
-        Enumeration elements = this.attributes.elements();
-        int i = 0;
-        while (elements.hasMoreElements()) {
-            Object nextElement = elements.nextElement();
-            i = nextElement instanceof Vector ? i + ((Vector) nextElement).size() : i + 1;
+        Enumeration enumerationElements = this.attributes.elements();
+        int size = 0;
+        while (enumerationElements.hasMoreElements()) {
+            Object objNextElement = enumerationElements.nextElement();
+            size = objNextElement instanceof Vector ? size + ((Vector) objNextElement).size() : size + 1;
         }
-        return i;
+        return size;
     }
 
     public Hashtable toHashtable() {
@@ -99,16 +99,16 @@ public class AttributeTable {
 
     public ASN1EncodableVector toASN1EncodableVector() {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
-        Enumeration elements = this.attributes.elements();
-        while (elements.hasMoreElements()) {
-            Object nextElement = elements.nextElement();
-            if (nextElement instanceof Vector) {
-                Enumeration elements2 = ((Vector) nextElement).elements();
-                while (elements2.hasMoreElements()) {
-                    aSN1EncodableVector.add(Attribute.getInstance(elements2.nextElement()));
+        Enumeration enumerationElements = this.attributes.elements();
+        while (enumerationElements.hasMoreElements()) {
+            Object objNextElement = enumerationElements.nextElement();
+            if (objNextElement instanceof Vector) {
+                Enumeration enumerationElements2 = ((Vector) objNextElement).elements();
+                while (enumerationElements2.hasMoreElements()) {
+                    aSN1EncodableVector.add(Attribute.getInstance(enumerationElements2.nextElement()));
                 }
             } else {
-                aSN1EncodableVector.add(Attribute.getInstance(nextElement));
+                aSN1EncodableVector.add(Attribute.getInstance(objNextElement));
             }
         }
         return aSN1EncodableVector;
@@ -120,10 +120,10 @@ public class AttributeTable {
 
     private Hashtable copyTable(Hashtable hashtable) {
         Hashtable hashtable2 = new Hashtable();
-        Enumeration keys = hashtable.keys();
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            hashtable2.put(nextElement, hashtable.get(nextElement));
+        Enumeration enumerationKeys = hashtable.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            Object objNextElement = enumerationKeys.nextElement();
+            hashtable2.put(objNextElement, hashtable.get(objNextElement));
         }
         return hashtable2;
     }

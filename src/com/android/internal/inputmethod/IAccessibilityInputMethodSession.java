@@ -67,9 +67,9 @@ public interface IAccessibilityInputMethodSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAccessibilityInputMethodSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccessibilityInputMethodSession)) {
-                return (IAccessibilityInputMethodSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAccessibilityInputMethodSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccessibilityInputMethodSession)) {
+                return (IAccessibilityInputMethodSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,24 +105,24 @@ public interface IAccessibilityInputMethodSession extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                updateSelection(readInt, readInt2, readInt3, readInt4, readInt5, readInt6);
+                updateSelection(i3, i4, i5, i6, i7, i8);
             } else if (i == 2) {
                 finishInput();
             } else if (i == 3) {
                 finishSession();
             } else if (i == 4) {
                 EditorInfo editorInfo = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
-                IRemoteAccessibilityInputConnection asInterface = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                int readInt7 = parcel.readInt();
+                IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnectionAsInterface = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                invalidateInput(editorInfo, asInterface, readInt7);
+                invalidateInput(editorInfo, iRemoteAccessibilityInputConnectionAsInterface, i9);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -147,54 +147,54 @@ public interface IAccessibilityInputMethodSession extends IInterface {
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
             public void updateSelection(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
             public void finishInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
             public void finishSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
             public void invalidateInput(EditorInfo editorInfo, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
-                    obtain.writeTypedObject(editorInfo, 0);
-                    obtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(editorInfo, 0);
+                    parcelObtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

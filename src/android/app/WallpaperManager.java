@@ -11,7 +11,9 @@ import android.app.wallpaper.WallpaperInstance;
 import android.content.APKContents;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -269,6 +271,15 @@ public class WallpaperManager implements SemWallpaperManager {
 
     public static int getOrientation(Point point) {
         float f = point.x / point.y;
+        if (Rune.isMultiFoldable()) {
+            if (f > 2.0f) {
+                return 1;
+            }
+            if (f > 1.0f) {
+                return 3;
+            }
+            return f < 0.5f ? 0 : 2;
+        }
         if (f >= 1.3333334f) {
             return 1;
         }
@@ -423,8 +434,10 @@ public class WallpaperManager implements SemWallpaperManager {
                     } catch (RemoteException e) {
                         Log.w(WallpaperManager.TAG, "Can't register for color updates", e);
                     }
+                    this.mColorListeners.add(new Pair<>(onColorsChangedListener, handler));
+                } else {
+                    this.mColorListeners.add(new Pair<>(onColorsChangedListener, handler));
                 }
-                this.mColorListeners.add(new Pair<>(onColorsChangedListener, handler));
             }
         }
 
@@ -448,17 +461,17 @@ public class WallpaperManager implements SemWallpaperManager {
 
         public void removeOnColorsChangedListener(LocalWallpaperColorConsumer localWallpaperColorConsumer, int i, int i2, int i3) {
             synchronized (this) {
-                ArraySet<RectF> remove = this.mLocalColorCallbackAreas.remove(localWallpaperColorConsumer);
-                if (remove != null && remove.size() != 0) {
+                ArraySet<RectF> arraySetRemove = this.mLocalColorCallbackAreas.remove(localWallpaperColorConsumer);
+                if (arraySetRemove != null && arraySetRemove.size() != 0) {
                     for (LocalWallpaperColorConsumer localWallpaperColorConsumer2 : this.mLocalColorCallbackAreas.keySet()) {
                         ArraySet<RectF> arraySet = this.mLocalColorCallbackAreas.get(localWallpaperColorConsumer2);
                         if (arraySet != null && localWallpaperColorConsumer2 != localWallpaperColorConsumer) {
-                            remove.removeAll((ArraySet<? extends RectF>) arraySet);
+                            arraySetRemove.removeAll((ArraySet<? extends RectF>) arraySet);
                         }
                     }
                     try {
-                        if (remove.size() > 0) {
-                            this.mService.removeOnLocalColorsChangedListener(this.mLocalColorCallback, new ArrayList(remove), i, i2, i3);
+                        if (arraySetRemove.size() > 0) {
+                            this.mService.removeOnLocalColorsChangedListener(this.mLocalColorCallback, new ArrayList(arraySetRemove), i, i2, i3);
                         }
                     } catch (RemoteException e) {
                         Log.e(WallpaperManager.TAG, "Can't unregister for local color updates", e);
@@ -472,7 +485,7 @@ public class WallpaperManager implements SemWallpaperManager {
                 this.mColorListeners.removeIf(new Predicate() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda3
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        return WallpaperManager.Globals.lambda$removeOnColorsChangedListener$0(WallpaperManager.OnColorsChangedListener.this, (Pair) obj);
+                        return WallpaperManager.Globals.lambda$removeOnColorsChangedListener$0(onColorsChangedListener, (Pair) obj);
                     }
                 });
                 if (this.mColorListeners.size() == 0 && this.mColorCallbackRegistered) {
@@ -491,7 +504,7 @@ public class WallpaperManager implements SemWallpaperManager {
         }
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2) {
+        public void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2) throws Throwable {
             final Globals globals;
             Throwable th;
             synchronized (this) {
@@ -517,7 +530,7 @@ public class WallpaperManager implements SemWallpaperManager {
                             handler.post(new Runnable() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    WallpaperManager.Globals.this.lambda$onWallpaperColorsChanged$1(next, wallpaperColors2, i3, i4);
+                                    this.f$0.lambda$onWallpaperColorsChanged$1(next, wallpaperColors2, i3, i4);
                                 }
                             });
                             this = globals;
@@ -539,11 +552,11 @@ public class WallpaperManager implements SemWallpaperManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onWallpaperColorsChanged$1(Pair pair, WallpaperColors wallpaperColors, int i, int i2) {
-            boolean contains;
+            boolean zContains;
             synchronized (WallpaperManager.sGlobals) {
-                contains = this.mColorListeners.contains(pair);
+                zContains = this.mColorListeners.contains(pair);
             }
-            if (contains) {
+            if (zContains) {
                 ((OnColorsChangedListener) pair.first).onColorsChanged(wallpaperColors, i, i2);
             }
         }
@@ -618,151 +631,201 @@ public class WallpaperManager implements SemWallpaperManager {
             return peekWallpaperBitmap(context, z, i, i2, z2, colorManagementProxy, true);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0159 A[Catch: all -> 0x018c, TRY_ENTER, TryCatch #8 {, blocks: (B:8:0x0069, B:12:0x0075, B:14:0x0079, B:16:0x007f, B:18:0x0087, B:19:0x00b6, B:22:0x00b8, B:24:0x00be, B:34:0x00db, B:35:0x00de, B:44:0x00f2, B:46:0x0159, B:47:0x0160, B:49:0x0162, B:51:0x0166, B:53:0x016c, B:54:0x0170, B:56:0x0172, B:73:0x0127, B:74:0x012a, B:87:0x0188, B:88:0x018b, B:26:0x00c0, B:28:0x00c9, B:30:0x00cd, B:32:0x00d3, B:38:0x00e8, B:40:0x00ec, B:42:0x00f0, B:68:0x0107, B:70:0x0110, B:72:0x0119, B:76:0x012c, B:78:0x0136, B:79:0x0140, B:66:0x0143, B:83:0x0100, B:84:0x0104), top: B:7:0x0069, inners: #6 }] */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x0162 A[Catch: all -> 0x018c, TryCatch #8 {, blocks: (B:8:0x0069, B:12:0x0075, B:14:0x0079, B:16:0x007f, B:18:0x0087, B:19:0x00b6, B:22:0x00b8, B:24:0x00be, B:34:0x00db, B:35:0x00de, B:44:0x00f2, B:46:0x0159, B:47:0x0160, B:49:0x0162, B:51:0x0166, B:53:0x016c, B:54:0x0170, B:56:0x0172, B:73:0x0127, B:74:0x012a, B:87:0x0188, B:88:0x018b, B:26:0x00c0, B:28:0x00c9, B:30:0x00cd, B:32:0x00d3, B:38:0x00e8, B:40:0x00ec, B:42:0x00f0, B:68:0x0107, B:70:0x0110, B:72:0x0119, B:76:0x012c, B:78:0x0136, B:79:0x0140, B:66:0x0143, B:83:0x0100, B:84:0x0104), top: B:7:0x0069, inners: #6 }] */
+        /* JADX WARN: Removed duplicated region for block: B:90:0x0159 A[Catch: all -> 0x018c, TRY_ENTER, TryCatch #8 {, blocks: (B:25:0x0069, B:31:0x0075, B:33:0x0079, B:35:0x007f, B:37:0x0087, B:38:0x00b6, B:40:0x00b8, B:42:0x00be, B:51:0x00db, B:52:0x00de, B:59:0x00f2, B:90:0x0159, B:91:0x0160, B:93:0x0162, B:95:0x0166, B:97:0x016c, B:98:0x0170, B:100:0x0172, B:78:0x0127, B:79:0x012a, B:110:0x0188, B:111:0x018b, B:43:0x00c0, B:45:0x00c9, B:47:0x00cd, B:49:0x00d3, B:55:0x00e8, B:56:0x00ec, B:58:0x00f0, B:73:0x0107, B:75:0x0110, B:77:0x0119, B:81:0x012c, B:83:0x0136, B:84:0x0140, B:87:0x0143, B:69:0x0100, B:70:0x0104), top: B:123:0x0069, inners: #6 }] */
+        /* JADX WARN: Removed duplicated region for block: B:93:0x0162 A[Catch: all -> 0x018c, TryCatch #8 {, blocks: (B:25:0x0069, B:31:0x0075, B:33:0x0079, B:35:0x007f, B:37:0x0087, B:38:0x00b6, B:40:0x00b8, B:42:0x00be, B:51:0x00db, B:52:0x00de, B:59:0x00f2, B:90:0x0159, B:91:0x0160, B:93:0x0162, B:95:0x0166, B:97:0x016c, B:98:0x0170, B:100:0x0172, B:78:0x0127, B:79:0x012a, B:110:0x0188, B:111:0x018b, B:43:0x00c0, B:45:0x00c9, B:47:0x00cd, B:49:0x00d3, B:55:0x00e8, B:56:0x00ec, B:58:0x00f0, B:73:0x0107, B:75:0x0110, B:77:0x0119, B:81:0x012c, B:83:0x0136, B:84:0x0140, B:87:0x0143, B:69:0x0100, B:70:0x0104), top: B:123:0x0069, inners: #6 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.graphics.Bitmap peekWallpaperBitmap(android.content.Context r12, boolean r13, int r14, int r15, boolean r16, android.app.WallpaperManager.ColorManagementProxy r17, boolean r18) {
-            /*
-                Method dump skipped, instructions count: 400
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.Globals.peekWallpaperBitmap(android.content.Context, boolean, int, int, boolean, android.app.WallpaperManager$ColorManagementProxy, boolean):android.graphics.Bitmap");
+        public Bitmap peekWallpaperBitmap(Context context, boolean z, int i, int i2, boolean z2, ColorManagementProxy colorManagementProxy, boolean z3) {
+            boolean zIsDesktopModeEnabled;
+            Bitmap currentWallpaperLocked;
+            CachedWallpaper cachedWallpaper;
+            Log.d(WallpaperManager.TAG, "peekWallpaperBitmap: which =" + i + ", useCache = " + z3);
+            if (this.mService != null) {
+                try {
+                    try {
+                        Trace.beginSection("WPMS.isWallpaperSupported");
+                        if (!this.mService.isWallpaperSupported(context.getOpPackageName())) {
+                            return null;
+                        }
+                    } catch (RemoteException e) {
+                        throw e.rethrowFromSystemServer();
+                    }
+                } finally {
+                }
+            }
+            if (Rune.SUPPORT_DESKTOP_MODE) {
+                try {
+                    zIsDesktopModeEnabled = WallpaperManager.sGlobals.mService.isDesktopModeEnabled(i);
+                } catch (RemoteException e2) {
+                    throw e2.rethrowFromSystemServer();
+                }
+            } else {
+                zIsDesktopModeEnabled = false;
+            }
+            synchronized (this) {
+                boolean z4 = this.mIsCachedWallpaperForDeX;
+                if (((z4 && zIsDesktopModeEnabled) || (!z4 && !zIsDesktopModeEnabled)) && z3 && (cachedWallpaper = this.mCachedWallpaper) != null && cachedWallpaper.isValid(i2, i) && context.checkSelfPermission(Manifest.permission.READ_WALLPAPER_INTERNAL) == 0) {
+                    Log.d(WallpaperManager.TAG, "peekWallpaperBitmap() cached image height=" + this.mCachedWallpaper.mCachedWallpaper.getHeight() + " width=" + this.mCachedWallpaper.mCachedWallpaper.getWidth());
+                    return this.mCachedWallpaper.mCachedWallpaper;
+                }
+                this.mCachedWallpaper = null;
+                if (Rune.SUPPORT_DESKTOP_MODE) {
+                    this.mIsCachedWallpaperForDeX = false;
+                }
+                try {
+                    try {
+                        try {
+                            Trace.beginSection("WPMS.getCurrentWallpaperLocked");
+                        } catch (RemoteException e3) {
+                            throw e3.rethrowFromSystemServer();
+                        }
+                    } finally {
+                    }
+                } catch (OutOfMemoryError e4) {
+                    e = e4;
+                    currentWallpaperLocked = null;
+                } catch (SecurityException e5) {
+                    e = e5;
+                    currentWallpaperLocked = null;
+                }
+                if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mService != null && WhichChecker.isSubDisplay(i) && this.mService.isWaitingForUnlockUser(i, i2)) {
+                    return null;
+                }
+                currentWallpaperLocked = getCurrentWallpaperLocked(context, i, i2, z2, colorManagementProxy);
+                try {
+                    if (Rune.SUPPORT_DESKTOP_MODE) {
+                        this.mIsCachedWallpaperForDeX = zIsDesktopModeEnabled;
+                    }
+                } catch (OutOfMemoryError e6) {
+                    e = e6;
+                    Log.w(WallpaperManager.TAG, "Out of memory loading the current wallpaper: " + e);
+                    if (currentWallpaperLocked != null) {
+                    }
+                } catch (SecurityException e7) {
+                    e = e7;
+                    if (CompatChanges.isChangeEnabled(WallpaperManager.RETURN_DEFAULT_ON_SECURITY_EXCEPTION) && !CompatChanges.isChangeEnabled(WallpaperManager.THROW_ON_SECURITY_EXCEPTION)) {
+                        Log.w(WallpaperManager.TAG, "No permission to access wallpaper, returning default wallpaper to avoid crashing legacy app.");
+                        return getDefaultWallpaper(context, 1);
+                    }
+                    if (context.getApplicationInfo().targetSdkVersion >= 27) {
+                        throw e;
+                    }
+                    Log.w(WallpaperManager.TAG, "No permission to access wallpaper, suppressing exception to avoid crashing legacy app.");
+                    if (currentWallpaperLocked != null) {
+                    }
+                }
+                if (currentWallpaperLocked != null) {
+                    this.mCachedWallpaper = new CachedWallpaper(currentWallpaperLocked, i2, i);
+                    return currentWallpaperLocked;
+                }
+                CachedWallpaper cachedWallpaper2 = this.mCachedWallpaper;
+                if (cachedWallpaper2 != null && cachedWallpaper2.isValid(i2, i)) {
+                    return this.mCachedWallpaper.mCachedWallpaper;
+                }
+                if (z || (WhichChecker.isLock(i) && isStaticWallpaper(i))) {
+                    return getDefaultWallpaper(context, i);
+                }
+                return null;
+            }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x0084  */
+        /* JADX WARN: Removed duplicated region for block: B:43:0x0084  */
+        /* JADX WARN: Removed duplicated region for block: B:47:0x0090 A[ADDED_TO_REGION] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.graphics.Rect peekWallpaperDimensions(android.content.Context r14, boolean r15, int r16, int r17) {
-            /*
-                r13 = this;
-                android.app.IWallpaperManager r0 = r13.mService
-                r10 = 0
-                if (r0 != 0) goto Lf
-                java.lang.String r13 = android.app.WallpaperManager.m635$$Nest$sfgetTAG()
-                java.lang.String r14 = "WallpaperService not running"
-                android.util.Log.w(r13, r14)
-                return r10
-            Lf:
-                java.lang.String r1 = r14.getOpPackageName()     // Catch: android.os.RemoteException -> Lc6
-                boolean r0 = r0.isWallpaperSupported(r1)     // Catch: android.os.RemoteException -> Lc6
-                if (r0 != 0) goto L1f
-                android.graphics.Rect r13 = new android.graphics.Rect     // Catch: android.os.RemoteException -> Lc6
-                r13.<init>()     // Catch: android.os.RemoteException -> Lc6
-                return r13
-            L1f:
-                monitor-enter(r13)
-                android.os.Bundle r5 = new android.os.Bundle     // Catch: java.lang.Throwable -> Lc2
-                r5.<init>()     // Catch: java.lang.Throwable -> Lc2
-                r11 = 1
-                r12 = 0
-                android.app.IWallpaperManager r0 = r13.mService     // Catch: java.io.IOException -> L6f android.os.RemoteException -> L73 java.lang.Throwable -> Lc2
-                java.lang.String r1 = r14.getOpPackageName()     // Catch: java.io.IOException -> L6f android.os.RemoteException -> L73 java.lang.Throwable -> Lc2
-                java.lang.String r2 = r14.getAttributionTag()     // Catch: java.io.IOException -> L6f android.os.RemoteException -> L73 java.lang.Throwable -> Lc2
-                r8 = 0
-                r9 = -1
-                r7 = 1
-                r3 = r13
-                r4 = r16
-                r6 = r17
-                android.os.ParcelFileDescriptor r1 = r0.getWallpaperWithFeature(r1, r2, r3, r4, r5, r6, r7, r8, r9)     // Catch: android.os.RemoteException -> L6d java.io.IOException -> L71 java.lang.Throwable -> Lc2
-                if (r1 == 0) goto L64
-                android.graphics.BitmapFactory$Options r0 = new android.graphics.BitmapFactory$Options     // Catch: java.lang.Throwable -> L57
-                r0.<init>()     // Catch: java.lang.Throwable -> L57
-                r0.inJustDecodeBounds = r11     // Catch: java.lang.Throwable -> L57
-                java.io.FileDescriptor r2 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> L57
-                android.graphics.BitmapFactory.decodeFileDescriptor(r2, r10, r0)     // Catch: java.lang.Throwable -> L57
-                android.graphics.Rect r2 = new android.graphics.Rect     // Catch: java.lang.Throwable -> L57
-                int r5 = r0.outWidth     // Catch: java.lang.Throwable -> L57
-                int r0 = r0.outHeight     // Catch: java.lang.Throwable -> L57
-                r2.<init>(r12, r12, r5, r0)     // Catch: java.lang.Throwable -> L57
-                goto L65
-            L57:
-                r0 = move-exception
-                r2 = r0
-                if (r1 == 0) goto L63
-                r1.close()     // Catch: java.lang.Throwable -> L5f
-                goto L63
-            L5f:
-                r0 = move-exception
-                r2.addSuppressed(r0)     // Catch: android.os.RemoteException -> L6d java.io.IOException -> L71 java.lang.Throwable -> Lc2
-            L63:
-                throw r2     // Catch: android.os.RemoteException -> L6d java.io.IOException -> L71 java.lang.Throwable -> Lc2
-            L64:
-                r2 = r10
-            L65:
-                if (r1 == 0) goto L81
-                r1.close()     // Catch: android.os.RemoteException -> L6b java.io.IOException -> L81 java.lang.Throwable -> Lc2
-                goto L81
-            L6b:
-                r0 = move-exception
-                goto L77
-            L6d:
-                r0 = move-exception
-                goto L76
-            L6f:
-                r4 = r16
-            L71:
-                r2 = r10
-                goto L81
-            L73:
-                r0 = move-exception
-                r4 = r16
-            L76:
-                r2 = r10
-            L77:
-                java.lang.String r1 = android.app.WallpaperManager.m635$$Nest$sfgetTAG()     // Catch: java.lang.Throwable -> Lc2
-                java.lang.String r5 = "peek wallpaper dimensions failed"
-                android.util.Log.w(r1, r5, r0)     // Catch: java.lang.Throwable -> Lc2
-            L81:
-                monitor-exit(r13)     // Catch: java.lang.Throwable -> Lc2
-                if (r2 == 0) goto L90
-                int r0 = r2.width()
-                if (r0 == 0) goto L90
-                int r0 = r2.height()
-                if (r0 != 0) goto Lc1
-            L90:
-                if (r15 != 0) goto L9e
-                boolean r15 = com.samsung.android.wallpaper.utils.WhichChecker.isLock(r4)
-                if (r15 == 0) goto Lc1
-                boolean r13 = r13.isStaticWallpaper(r4)
-                if (r13 == 0) goto Lc1
-            L9e:
-                java.io.InputStream r13 = android.app.WallpaperManager.openDefaultWallpaper(r14, r4)
-                if (r13 == 0) goto Lc1
-                android.graphics.BitmapFactory$Options r14 = new android.graphics.BitmapFactory$Options     // Catch: java.lang.Throwable -> Lbb
-                r14.<init>()     // Catch: java.lang.Throwable -> Lbb
-                r14.inJustDecodeBounds = r11     // Catch: java.lang.Throwable -> Lbb
-                android.graphics.BitmapFactory.decodeStream(r13, r10, r14)     // Catch: java.lang.Throwable -> Lbb
-                android.graphics.Rect r2 = new android.graphics.Rect     // Catch: java.lang.Throwable -> Lbb
-                int r15 = r14.outWidth     // Catch: java.lang.Throwable -> Lbb
-                int r14 = r14.outHeight     // Catch: java.lang.Throwable -> Lbb
-                r2.<init>(r12, r12, r15, r14)     // Catch: java.lang.Throwable -> Lbb
-                libcore.io.IoUtils.closeQuietly(r13)
-                goto Lc1
-            Lbb:
-                r0 = move-exception
-                r14 = r0
-                libcore.io.IoUtils.closeQuietly(r13)
-                throw r14
-            Lc1:
-                return r2
-            Lc2:
-                r0 = move-exception
-                r14 = r0
-                monitor-exit(r13)     // Catch: java.lang.Throwable -> Lc2
-                throw r14
-            Lc6:
-                r0 = move-exception
-                r13 = r0
-                java.lang.RuntimeException r13 = r13.rethrowFromSystemServer()
-                throw r13
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.Globals.peekWallpaperDimensions(android.content.Context, boolean, int, int):android.graphics.Rect");
+        public Rect peekWallpaperDimensions(Context context, boolean z, int i, int i2) {
+            int i3;
+            Rect rect;
+            InputStream inputStreamOpenDefaultWallpaper;
+            IWallpaperManager iWallpaperManager = this.mService;
+            if (iWallpaperManager == null) {
+                Log.w(WallpaperManager.TAG, "WallpaperService not running");
+                return null;
+            }
+            try {
+                if (!iWallpaperManager.isWallpaperSupported(context.getOpPackageName())) {
+                    return new Rect();
+                }
+                synchronized (this) {
+                    try {
+                        i3 = i;
+                    } catch (RemoteException e) {
+                        e = e;
+                        i3 = i;
+                    } catch (IOException unused) {
+                        i3 = i;
+                    }
+                    try {
+                        ParcelFileDescriptor wallpaperWithFeature = this.mService.getWallpaperWithFeature(context.getOpPackageName(), context.getAttributionTag(), this, i3, new Bundle(), i2, true, false, -1);
+                        if (wallpaperWithFeature != null) {
+                            try {
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inJustDecodeBounds = true;
+                                BitmapFactory.decodeFileDescriptor(wallpaperWithFeature.getFileDescriptor(), null, options);
+                                rect = new Rect(0, 0, options.outWidth, options.outHeight);
+                            } catch (Throwable th) {
+                                if (wallpaperWithFeature == null) {
+                                    throw th;
+                                }
+                                try {
+                                    wallpaperWithFeature.close();
+                                    throw th;
+                                } catch (Throwable th2) {
+                                    th.addSuppressed(th2);
+                                    throw th;
+                                }
+                            }
+                        } else {
+                            rect = null;
+                        }
+                        if (wallpaperWithFeature != null) {
+                            try {
+                                wallpaperWithFeature.close();
+                            } catch (RemoteException e2) {
+                                e = e2;
+                                Log.w(WallpaperManager.TAG, "peek wallpaper dimensions failed", e);
+                            } catch (IOException unused2) {
+                            }
+                        }
+                    } catch (RemoteException e3) {
+                        e = e3;
+                        rect = null;
+                        Log.w(WallpaperManager.TAG, "peek wallpaper dimensions failed", e);
+                        if (rect == null) {
+                            try {
+                                BitmapFactory.Options options2 = new BitmapFactory.Options();
+                                options2.inJustDecodeBounds = true;
+                                BitmapFactory.decodeStream(inputStreamOpenDefaultWallpaper, null, options2);
+                                rect = new Rect(0, 0, options2.outWidth, options2.outHeight);
+                            } finally {
+                                IoUtils.closeQuietly(inputStreamOpenDefaultWallpaper);
+                            }
+                        } else {
+                            BitmapFactory.Options options22 = new BitmapFactory.Options();
+                            options22.inJustDecodeBounds = true;
+                            BitmapFactory.decodeStream(inputStreamOpenDefaultWallpaper, null, options22);
+                            rect = new Rect(0, 0, options22.outWidth, options22.outHeight);
+                        }
+                        return rect;
+                    } catch (IOException unused3) {
+                        rect = null;
+                        if (rect == null) {
+                        }
+                        return rect;
+                    }
+                }
+                if ((rect == null || rect.width() == 0 || rect.height() == 0) && ((z || (WhichChecker.isLock(i3) && isStaticWallpaper(i3))) && (inputStreamOpenDefaultWallpaper = WallpaperManager.openDefaultWallpaper(context, i3)) != null)) {
+                    BitmapFactory.Options options222 = new BitmapFactory.Options();
+                    options222.inJustDecodeBounds = true;
+                    BitmapFactory.decodeStream(inputStreamOpenDefaultWallpaper, null, options222);
+                    rect = new Rect(0, 0, options222.outWidth, options222.outHeight);
+                }
+                return rect;
+            } catch (RemoteException e4) {
+                throw e4.rethrowFromSystemServer();
+            }
         }
 
         void forgetLoadedWallpaper() {
@@ -777,8 +840,8 @@ public class WallpaperManager implements SemWallpaperManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public Bitmap getCurrentWallpaperLocked(Context context, int i, int i2, final boolean z, final ColorManagementProxy colorManagementProxy) {
-            ImageDecoder.Source createSource;
+        public Bitmap getCurrentWallpaperLocked(Context context, int i, int i2, final boolean z, final ColorManagementProxy colorManagementProxy) throws IOException {
+            ImageDecoder.Source sourceCreateSource;
             if (this.mService == null) {
                 Log.w(WallpaperManager.TAG, "WallpaperService not running");
                 return null;
@@ -796,18 +859,18 @@ public class WallpaperManager implements SemWallpaperManager {
                     ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream = new ParcelFileDescriptor.AutoCloseInputStream(wallpaperWithFeature);
                     try {
                         if (Flags.enableConnectedDisplaysWallpaper()) {
-                            createSource = ImageDecoder.createSource(context.getResources(), autoCloseInputStream, 0);
+                            sourceCreateSource = ImageDecoder.createSource(context.getResources(), autoCloseInputStream, 0);
                         } else {
-                            createSource = ImageDecoder.createSource(context.getResources(), autoCloseInputStream);
+                            sourceCreateSource = ImageDecoder.createSource(context.getResources(), autoCloseInputStream);
                         }
-                        Bitmap decodeBitmap = ImageDecoder.decodeBitmap(createSource, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda0
+                        Bitmap bitmapDecodeBitmap = ImageDecoder.decodeBitmap(sourceCreateSource, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda0
                             @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                             public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
                                 WallpaperManager.Globals.lambda$getCurrentWallpaperLocked$2(z, colorManagementProxy, imageDecoder, imageInfo, source);
                             }
                         });
                         autoCloseInputStream.close();
-                        return decodeBitmap;
+                        return bitmapDecodeBitmap;
                     } finally {
                     }
                 } catch (IOException | OutOfMemoryError e) {
@@ -826,29 +889,29 @@ public class WallpaperManager implements SemWallpaperManager {
             }
         }
 
-        private Bitmap getDefaultWallpaper(Context context, int i) {
+        private Bitmap getDefaultWallpaper(Context context, int i) throws IOException {
             Trace.beginSection("WPMS.getDefaultWallpaper_" + i);
             Bitmap defaultWallpaper = getDefaultWallpaper(i);
             if (defaultWallpaper == null || defaultWallpaper.isRecycled()) {
                 Trace.beginSection("WPMS.openDefaultWallpaper");
                 defaultWallpaper = null;
                 try {
-                    InputStream openDefaultWallpaper = WallpaperManager.openDefaultWallpaper(context, i);
+                    InputStream inputStreamOpenDefaultWallpaper = WallpaperManager.openDefaultWallpaper(context, i);
                     try {
                         Trace.endSection();
-                        if (openDefaultWallpaper != null) {
+                        if (inputStreamOpenDefaultWallpaper != null) {
                             BitmapFactory.Options options = new BitmapFactory.Options();
                             Trace.beginSection("WPMS.decodeStream");
-                            defaultWallpaper = checkDeviceDensity(context, BitmapFactory.decodeStream(openDefaultWallpaper, null, options), i);
+                            defaultWallpaper = checkDeviceDensity(context, BitmapFactory.decodeStream(inputStreamOpenDefaultWallpaper, null, options), i);
                             Trace.endSection();
                         }
-                        if (openDefaultWallpaper != null) {
-                            openDefaultWallpaper.close();
+                        if (inputStreamOpenDefaultWallpaper != null) {
+                            inputStreamOpenDefaultWallpaper.close();
                         }
                     } catch (Throwable th) {
-                        if (openDefaultWallpaper != null) {
+                        if (inputStreamOpenDefaultWallpaper != null) {
                             try {
-                                openDefaultWallpaper.close();
+                                inputStreamOpenDefaultWallpaper.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
@@ -904,8 +967,8 @@ public class WallpaperManager implements SemWallpaperManager {
             Display defaultDisplay = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
             if (i != 0) {
                 boolean z = Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE;
-                boolean isDex = WhichChecker.isDex(i);
-                if (z || isDex) {
+                boolean zIsDex = WhichChecker.isDex(i);
+                if (z || zIsDex) {
                     DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
                     int displayId = WallpaperManager.getDisplayId(context, i);
                     if (displayId == -1) {
@@ -939,10 +1002,10 @@ public class WallpaperManager implements SemWallpaperManager {
             if (i3 == 0 || i2 == 0 || i3 >= width || i2 >= height) {
                 return bitmap;
             }
-            float max = Math.max(i3 / width, i2 / height);
-            Bitmap resizeBitmap = resizeBitmap(bitmap, max);
-            Log.d(WallpaperManager.TAG, "checkDeviceDensity: resize scale down.:" + max);
-            return resizeBitmap;
+            float fMax = Math.max(i3 / width, i2 / height);
+            Bitmap bitmapResizeBitmap = resizeBitmap(bitmap, fMax);
+            Log.d(WallpaperManager.TAG, "checkDeviceDensity: resize scale down.:" + fMax);
+            return bitmapResizeBitmap;
         }
 
         private Bitmap resizeBitmap(Bitmap bitmap, float f) {
@@ -958,8 +1021,10 @@ public class WallpaperManager implements SemWallpaperManager {
                     } catch (RemoteException e) {
                         Log.w(WallpaperManager.TAG, "Can't register for color updates", e);
                     }
+                    this.mSemColorListeners.add(new Pair<>(onSemColorsChangedListener, handler));
+                } else {
+                    this.mSemColorListeners.add(new Pair<>(onSemColorsChangedListener, handler));
                 }
-                this.mSemColorListeners.add(new Pair<>(onSemColorsChangedListener, handler));
             }
         }
 
@@ -968,7 +1033,7 @@ public class WallpaperManager implements SemWallpaperManager {
                 this.mSemColorListeners.removeIf(new Predicate() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda4
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        return WallpaperManager.Globals.lambda$removeOnSemColorsChangedListener$3(OnSemColorsChangedListener.this, (Pair) obj);
+                        return WallpaperManager.Globals.lambda$removeOnSemColorsChangedListener$3(onSemColorsChangedListener, (Pair) obj);
                     }
                 });
                 if (this.mSemColorListeners.size() == 0 && this.mColorCallbackRegistered) {
@@ -1000,7 +1065,7 @@ public class WallpaperManager implements SemWallpaperManager {
                     handler.post(new Runnable() { // from class: android.app.WallpaperManager$Globals$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            WallpaperManager.Globals.this.lambda$onSemWallpaperColorsChanged$4(next, semWallpaperColors, i);
+                            this.f$0.lambda$onSemWallpaperColorsChanged$4(next, semWallpaperColors, i);
                         }
                     });
                 }
@@ -1009,11 +1074,11 @@ public class WallpaperManager implements SemWallpaperManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onSemWallpaperColorsChanged$4(Pair pair, SemWallpaperColors semWallpaperColors, int i) {
-            boolean contains;
+            boolean zContains;
             synchronized (this) {
-                contains = this.mSemColorListeners.contains(pair);
+                zContains = this.mSemColorListeners.contains(pair);
             }
-            if (contains) {
+            if (zContains) {
                 ((OnSemColorsChangedListener) pair.first).onColorsChanged(semWallpaperColors, i);
             }
         }
@@ -1076,11 +1141,11 @@ public class WallpaperManager implements SemWallpaperManager {
 
     @Override // android.app.SemWallpaperManager
     public Drawable getDrawable(int i) {
-        Bitmap peekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, !WhichChecker.isLock(i), i, getColorManagementProxy());
-        if (peekWallpaperBitmap == null) {
+        Bitmap bitmapPeekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, !WhichChecker.isLock(i), i, getColorManagementProxy());
+        if (bitmapPeekWallpaperBitmap == null) {
             return null;
         }
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), peekWallpaperBitmap);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapPeekWallpaperBitmap);
         bitmapDrawable.setDither(false);
         return bitmapDrawable;
     }
@@ -1090,21 +1155,21 @@ public class WallpaperManager implements SemWallpaperManager {
         return semGetDrawable(i, 1);
     }
 
-    public Drawable semGetDrawable(int i, int i2) {
-        boolean isDesktopModeEnabled;
+    public Drawable semGetDrawable(int i, int i2) throws IOException {
+        boolean zIsDesktopModeEnabled;
         Drawable drawableFromBitmap;
-        AssetFileDescriptor assetFileDescriptor;
-        ParcelFileDescriptor semGetThumbnailFileDescriptor;
+        AssetFileDescriptor videoFDFromPackage;
+        ParcelFileDescriptor parcelFileDescriptorSemGetThumbnailFileDescriptor;
         if (!WhichChecker.isSystem(i) && !WhichChecker.isLock(i)) {
             if (WhichChecker.isDex(i)) {
                 i = 9;
             } else {
                 if (i == 0) {
-                    InputStream openDefaultWallpaper = openDefaultWallpaper(this.mContext, 2, false);
-                    if (openDefaultWallpaper == null) {
-                        openDefaultWallpaper = openDefaultWallpaper(this.mContext, 1, false);
+                    InputStream inputStreamOpenDefaultWallpaper = openDefaultWallpaper(this.mContext, 2, false);
+                    if (inputStreamOpenDefaultWallpaper == null) {
+                        inputStreamOpenDefaultWallpaper = openDefaultWallpaper(this.mContext, 1, false);
                     }
-                    return getDrawableFromStream(openDefaultWallpaper);
+                    return getDrawableFromStream(inputStreamOpenDefaultWallpaper);
                 }
                 i = 1;
             }
@@ -1114,51 +1179,51 @@ public class WallpaperManager implements SemWallpaperManager {
             Log.d(TAG, "semGetDrawable: mode is absent. which=" + i + ", adjustedWhich=" + modeEnsuredWhich);
             i = modeEnsuredWhich;
         }
-        int semGetWallpaperType = semGetWallpaperType(i);
-        Log.i(TAG, "semGetDrawable: which = " + i + ", wallpaperType = " + semGetWallpaperType + ", orientation=" + i2 + ", caller=" + this.mContext.getPackageName());
+        int iSemGetWallpaperType = semGetWallpaperType(i);
+        Log.i(TAG, "semGetDrawable: which = " + i + ", wallpaperType = " + iSemGetWallpaperType + ", orientation=" + i2 + ", caller=" + this.mContext.getPackageName());
         try {
-            semGetThumbnailFileDescriptor = semGetThumbnailFileDescriptor(i, this.mContext.getUserId(), i2 == 1 ? 0 : 1);
+            parcelFileDescriptorSemGetThumbnailFileDescriptor = semGetThumbnailFileDescriptor(i, this.mContext.getUserId(), i2 == 1 ? 0 : 1);
         } catch (IOException e) {
             Log.e(TAG, "semGetDrawable: e=" + e, e);
         }
-        if (semGetThumbnailFileDescriptor != null) {
+        if (parcelFileDescriptorSemGetThumbnailFileDescriptor != null) {
             try {
-                Drawable drawableFromBitmap2 = getDrawableFromBitmap(BitmapFactory.decodeFileDescriptor(semGetThumbnailFileDescriptor.getFileDescriptor()));
-                if (semGetThumbnailFileDescriptor != null) {
-                    semGetThumbnailFileDescriptor.close();
+                Drawable drawableFromBitmap2 = getDrawableFromBitmap(BitmapFactory.decodeFileDescriptor(parcelFileDescriptorSemGetThumbnailFileDescriptor.getFileDescriptor()));
+                if (parcelFileDescriptorSemGetThumbnailFileDescriptor != null) {
+                    parcelFileDescriptorSemGetThumbnailFileDescriptor.close();
                 }
                 return drawableFromBitmap2;
             } finally {
             }
         } else {
-            if (semGetThumbnailFileDescriptor != null) {
-                semGetThumbnailFileDescriptor.close();
+            if (parcelFileDescriptorSemGetThumbnailFileDescriptor != null) {
+                parcelFileDescriptorSemGetThumbnailFileDescriptor.close();
             }
             Log.w(TAG, "semGetDrawable: Couldn't get thumbnail. Keep going..");
             if (Rune.SUPPORT_DESKTOP_MODE) {
                 try {
-                    isDesktopModeEnabled = sGlobals.mService.isDesktopModeEnabled(i);
+                    zIsDesktopModeEnabled = sGlobals.mService.isDesktopModeEnabled(i);
                 } catch (RemoteException e2) {
                     throw e2.rethrowFromSystemServer();
                 }
             } else {
-                isDesktopModeEnabled = false;
+                zIsDesktopModeEnabled = false;
             }
-            boolean z = sWallpaperResourcesInfo.isDefaultVideo(i) && !isDesktopModeEnabled && isVideoWallpaper();
+            boolean z = sWallpaperResourcesInfo.isDefaultVideo(i) && !zIsDesktopModeEnabled && isVideoWallpaper();
             int mode = (WhichChecker.isLock(i) && isSystemAndLockPaired(i)) ? WhichChecker.getMode(i) | 1 : i;
             if (z) {
                 String videoFileName = getVideoFileName(i);
                 try {
-                    assetFileDescriptor = getVideoFDFromPackage(WALLPAPER_PACKAGE, videoFileName);
+                    videoFDFromPackage = getVideoFDFromPackage(WALLPAPER_PACKAGE, videoFileName);
                 } catch (Exception e3) {
                     e3.printStackTrace();
-                    assetFileDescriptor = null;
+                    videoFDFromPackage = null;
                 }
-                Bitmap videoWallpaperFrame = getVideoWallpaperFrame(assetFileDescriptor, null, videoFileName);
+                Bitmap videoWallpaperFrame = getVideoWallpaperFrame(videoFDFromPackage, null, videoFileName);
                 if (videoWallpaperFrame != null) {
                     return new BitmapDrawable(this.mContext.getResources(), videoWallpaperFrame);
                 }
-            } else if (semGetWallpaperType == 7) {
+            } else if (iSemGetWallpaperType == 7) {
                 WallpaperInfo wallpaperInfo = getWallpaperInfo(mode, this.mContext.getUserId());
                 if (wallpaperInfo != null) {
                     return wallpaperInfo.loadThumbnail(this.mContext.getPackageManager());
@@ -1190,9 +1255,9 @@ public class WallpaperManager implements SemWallpaperManager {
                 return null;
             }
             try {
-                Bitmap checkDeviceDensity = sGlobals.checkDeviceDensity(this.mContext, BitmapFactory.decodeStream(inputStream, null, new BitmapFactory.Options()));
-                if (checkDeviceDensity != null) {
-                    BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), checkDeviceDensity);
+                Bitmap bitmapCheckDeviceDensity = sGlobals.checkDeviceDensity(this.mContext, BitmapFactory.decodeStream(inputStream, null, new BitmapFactory.Options()));
+                if (bitmapCheckDeviceDensity != null) {
+                    BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapCheckDeviceDensity);
                     bitmapDrawable.setDither(false);
                     return bitmapDrawable;
                 }
@@ -1277,8 +1342,8 @@ public class WallpaperManager implements SemWallpaperManager {
         int i5;
         int i6;
         RectF rectF;
-        BitmapRegionDecoder bitmapRegionDecoder;
-        Bitmap bitmap;
+        BitmapRegionDecoder bitmapRegionDecoderNewInstance;
+        Bitmap bitmapCreateBitmap;
         if (sGlobals.mService == null) {
             Log.w(TAG, "WallpaperService not running");
             throw new RuntimeException(new DeadSystemException());
@@ -1292,14 +1357,14 @@ public class WallpaperManager implements SemWallpaperManager {
         Log.d(TAG, "getBuiltInDrawable: which = " + i4);
         checkExactlyOneWallpaperFlagSet(i4);
         Resources resources = this.mContext.getResources();
-        float max = Math.max(0.0f, Math.min(1.0f, f));
-        float max2 = Math.max(0.0f, Math.min(1.0f, f2));
-        InputStream openDefaultWallpaper = openDefaultWallpaper(this.mContext, i4);
-        if (openDefaultWallpaper == null) {
+        float fMax = Math.max(0.0f, Math.min(1.0f, f));
+        float fMax2 = Math.max(0.0f, Math.min(1.0f, f2));
+        InputStream inputStreamOpenDefaultWallpaper = openDefaultWallpaper(this.mContext, i4);
+        if (inputStreamOpenDefaultWallpaper == null) {
             Log.w(TAG, "default wallpaper stream " + i4 + " is null");
             return null;
         }
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(openDefaultWallpaper);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStreamOpenDefaultWallpaper);
         if (i <= 0 || i2 <= 0) {
             return new BitmapDrawable(resources, BitmapFactory.decodeStream(bufferedInputStream, null, null));
         }
@@ -1310,17 +1375,17 @@ public class WallpaperManager implements SemWallpaperManager {
             int i7 = options.outWidth;
             int i8 = options.outHeight;
             BufferedInputStream bufferedInputStream2 = new BufferedInputStream(openDefaultWallpaper(this.mContext, i4));
-            int min = Math.min(i7, i);
-            int min2 = Math.min(i8, i2);
+            int iMin = Math.min(i7, i);
+            int iMin2 = Math.min(i8, i2);
             if (z) {
-                rectF = getMaxCropRect(i7, i8, min, min2, max, max2);
-                i5 = min;
-                i6 = min2;
+                rectF = getMaxCropRect(i7, i8, iMin, iMin2, fMax, fMax2);
+                i5 = iMin;
+                i6 = iMin2;
             } else {
-                i5 = min;
-                i6 = min2;
-                float f3 = (i7 - i5) * max;
-                float f4 = (i8 - i6) * max2;
+                i5 = iMin;
+                i6 = iMin2;
+                float f3 = (i7 - i5) * fMax;
+                float f4 = (i8 - i6) * fMax2;
                 rectF = new RectF(f3, f4, i5 + f3, i6 + f4);
             }
             Rect rect = new Rect();
@@ -1329,53 +1394,53 @@ public class WallpaperManager implements SemWallpaperManager {
                 Log.w(TAG, "crop has bad values for full size image");
                 return null;
             }
-            int min3 = Math.min(rect.width() / i5, rect.height() / i6);
+            int iMin3 = Math.min(rect.width() / i5, rect.height() / i6);
             try {
-                bitmapRegionDecoder = BitmapRegionDecoder.newInstance((InputStream) bufferedInputStream2, true);
+                bitmapRegionDecoderNewInstance = BitmapRegionDecoder.newInstance((InputStream) bufferedInputStream2, true);
             } catch (IOException unused) {
                 Log.w(TAG, "cannot open region decoder for default wallpaper");
-                bitmapRegionDecoder = null;
+                bitmapRegionDecoderNewInstance = null;
             }
-            if (bitmapRegionDecoder != null) {
+            if (bitmapRegionDecoderNewInstance != null) {
                 BitmapFactory.Options options2 = new BitmapFactory.Options();
-                if (min3 > 1) {
-                    options2.inSampleSize = min3;
+                if (iMin3 > 1) {
+                    options2.inSampleSize = iMin3;
                 }
-                bitmap = bitmapRegionDecoder.decodeRegion(rect, options2);
-                bitmapRegionDecoder.recycle();
+                bitmapCreateBitmap = bitmapRegionDecoderNewInstance.decodeRegion(rect, options2);
+                bitmapRegionDecoderNewInstance.recycle();
             } else {
-                bitmap = null;
+                bitmapCreateBitmap = null;
             }
-            if (bitmap == null) {
+            if (bitmapCreateBitmap == null) {
                 BufferedInputStream bufferedInputStream3 = new BufferedInputStream(openDefaultWallpaper(this.mContext, i4));
                 BitmapFactory.Options options3 = new BitmapFactory.Options();
-                if (min3 > 1) {
-                    options3.inSampleSize = min3;
+                if (iMin3 > 1) {
+                    options3.inSampleSize = iMin3;
                 }
-                Bitmap decodeStream = BitmapFactory.decodeStream(bufferedInputStream3, null, options3);
-                if (decodeStream != null) {
-                    bitmap = Bitmap.createBitmap(decodeStream, rect.left, rect.top, rect.width(), rect.height());
+                Bitmap bitmapDecodeStream = BitmapFactory.decodeStream(bufferedInputStream3, null, options3);
+                if (bitmapDecodeStream != null) {
+                    bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeStream, rect.left, rect.top, rect.width(), rect.height());
                 }
             }
-            if (bitmap == null) {
+            if (bitmapCreateBitmap == null) {
                 Log.w(TAG, "cannot decode default wallpaper");
                 return null;
             }
-            if (i5 > 0 && i6 > 0 && (bitmap.getWidth() != i5 || bitmap.getHeight() != i6)) {
+            if (i5 > 0 && i6 > 0 && (bitmapCreateBitmap.getWidth() != i5 || bitmapCreateBitmap.getHeight() != i6)) {
                 Matrix matrix = new Matrix();
-                RectF rectF2 = new RectF(0.0f, 0.0f, bitmap.getWidth(), bitmap.getHeight());
+                RectF rectF2 = new RectF(0.0f, 0.0f, bitmapCreateBitmap.getWidth(), bitmapCreateBitmap.getHeight());
                 RectF rectF3 = new RectF(0.0f, 0.0f, i5, i6);
                 matrix.setRectToRect(rectF2, rectF3, Matrix.ScaleToFit.FILL);
-                Bitmap createBitmap = Bitmap.createBitmap((int) rectF3.width(), (int) rectF3.height(), Bitmap.Config.ARGB_8888);
-                if (createBitmap != null) {
-                    Canvas canvas = new Canvas(createBitmap);
+                Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap((int) rectF3.width(), (int) rectF3.height(), Bitmap.Config.ARGB_8888);
+                if (bitmapCreateBitmap2 != null) {
+                    Canvas canvas = new Canvas(bitmapCreateBitmap2);
                     Paint paint = new Paint();
                     paint.setFilterBitmap(true);
-                    canvas.drawBitmap(bitmap, matrix, paint);
-                    bitmap = createBitmap;
+                    canvas.drawBitmap(bitmapCreateBitmap, matrix, paint);
+                    bitmapCreateBitmap = bitmapCreateBitmap2;
                 }
             }
-            return new BitmapDrawable(resources, bitmap);
+            return new BitmapDrawable(resources, bitmapCreateBitmap);
         }
         Log.e(TAG, "default wallpaper dimensions are 0");
         return null;
@@ -1426,9 +1491,9 @@ public class WallpaperManager implements SemWallpaperManager {
             checkPermission(new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE, Manifest.permission.READ_WALLPAPER_INTERNAL});
             return null;
         }
-        Bitmap peekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, z, i, colorManagementProxy);
-        if (peekWallpaperBitmap != null) {
-            return new FastBitmapDrawable(peekWallpaperBitmap);
+        Bitmap bitmapPeekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, z, i, colorManagementProxy);
+        if (bitmapPeekWallpaperBitmap != null) {
+            return new FastBitmapDrawable(bitmapPeekWallpaperBitmap);
         }
         return null;
     }
@@ -1443,8 +1508,8 @@ public class WallpaperManager implements SemWallpaperManager {
 
     public boolean wallpaperSupportsWcg(int i) {
         ColorManagementProxy colorManagementProxy;
-        Bitmap peekWallpaperBitmap;
-        return (!shouldEnableWideColorGamut() || (peekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, false, i, (colorManagementProxy = getColorManagementProxy()))) == null || peekWallpaperBitmap.getColorSpace() == null || peekWallpaperBitmap.getColorSpace() == ColorSpace.get(ColorSpace.Named.SRGB) || !colorManagementProxy.isSupportedColorSpace(peekWallpaperBitmap.getColorSpace())) ? false : true;
+        Bitmap bitmapPeekWallpaperBitmap;
+        return (!shouldEnableWideColorGamut() || (bitmapPeekWallpaperBitmap = sGlobals.peekWallpaperBitmap(this.mContext, false, i, (colorManagementProxy = getColorManagementProxy()))) == null || bitmapPeekWallpaperBitmap.getColorSpace() == null || bitmapPeekWallpaperBitmap.getColorSpace() == ColorSpace.get(ColorSpace.Named.SRGB) || !colorManagementProxy.isSupportedColorSpace(bitmapPeekWallpaperBitmap.getColorSpace())) ? false : true;
     }
 
     @Override // android.app.SemWallpaperManager
@@ -1540,11 +1605,11 @@ public class WallpaperManager implements SemWallpaperManager {
             if (bitmapCrops != null) {
                 return bitmapCrops;
             }
-            Rect peekBitmapDimensions = peekBitmapDimensions(i, true);
-            if (peekBitmapDimensions == null) {
+            Rect rectPeekBitmapDimensions = peekBitmapDimensions(i, true);
+            if (rectPeekBitmapDimensions == null) {
                 return Collections.EMPTY_LIST;
             }
-            return getBitmapCrops(new Point(peekBitmapDimensions.width(), peekBitmapDimensions.height()), list, (Map<Point, Rect>) null);
+            return getBitmapCrops(new Point(rectPeekBitmapDimensions.width(), rectPeekBitmapDimensions.height()), list, (Map<Point, Rect>) null);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1558,15 +1623,13 @@ public class WallpaperManager implements SemWallpaperManager {
                 throw e.rethrowFromSystemServer();
             }
         }
-        Set<Map.Entry<Point, Rect>> entrySet = map.entrySet();
-        return sGlobals.mService.getFutureBitmapCrops(point, list, entrySet.stream().mapToInt(new ToIntFunction() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda2
+        Set<Map.Entry<Point, Rect>> setEntrySet = map.entrySet();
+        return sGlobals.mService.getFutureBitmapCrops(point, list, setEntrySet.stream().mapToInt(new ToIntFunction() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda2
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int orientation;
-                orientation = WallpaperManager.getOrientation((Point) ((Map.Entry) obj).getKey());
-                return orientation;
+                return WallpaperManager.getOrientation((Point) ((Map.Entry) obj).getKey());
             }
-        }).toArray(), entrySet.stream().map(new WallpaperManager$$ExternalSyntheticLambda3()).toList());
+        }).toArray(), setEntrySet.stream().map(new WallpaperManager$$ExternalSyntheticLambda3()).toList());
     }
 
     public WallpaperColors getWallpaperColors(Bitmap bitmap, Map<Point, Rect> map) {
@@ -1581,16 +1644,14 @@ public class WallpaperManager implements SemWallpaperManager {
                 throw e.rethrowFromSystemServer();
             }
         }
-        Set<Map.Entry<Point, Rect>> entrySet = map.entrySet();
-        int[] array = entrySet.stream().mapToInt(new ToIntFunction() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda4
+        Set<Map.Entry<Point, Rect>> setEntrySet = map.entrySet();
+        int[] array = setEntrySet.stream().mapToInt(new ToIntFunction() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda4
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int orientation;
-                orientation = WallpaperManager.getOrientation((Point) ((Map.Entry) obj).getKey());
-                return orientation;
+                return WallpaperManager.getOrientation((Point) ((Map.Entry) obj).getKey());
             }
         }).toArray();
-        List<Rect> list = entrySet.stream().map(new WallpaperManager$$ExternalSyntheticLambda3()).toList();
+        List<Rect> list = setEntrySet.stream().map(new WallpaperManager$$ExternalSyntheticLambda3()).toList();
         Rect bitmapCrop = sGlobals.mService.getBitmapCrop(new Point(bitmap.getWidth(), bitmap.getHeight()), array, list);
         return WallpaperColors.fromBitmap(Bitmap.createBitmap(bitmap, bitmapCrop.left, bitmapCrop.top, bitmapCrop.width(), bitmapCrop.height()), getWallpaperDimAmount());
     }
@@ -1872,72 +1933,31 @@ public class WallpaperManager implements SemWallpaperManager {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0044, code lost:
-    
-        if (r0.queryIntentActivities(r1, 0).size() > 0) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0047  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.content.Intent getCropAndSetWallpaperIntent(android.net.Uri r4) {
-        /*
-            r3 = this;
-            if (r4 == 0) goto L6e
-            java.lang.String r0 = "content"
-            java.lang.String r1 = r4.getScheme()
-            boolean r0 = r0.equals(r1)
-            if (r0 == 0) goto L66
-            android.content.Context r0 = r3.mContext
-            android.content.pm.PackageManager r0 = r0.getPackageManager()
-            android.content.Intent r1 = new android.content.Intent
-            java.lang.String r2 = "android.service.wallpaper.CROP_AND_SET_WALLPAPER"
-            r1.<init>(r2, r4)
-            r4 = 1
-            r1.addFlags(r4)
-            android.content.Intent r4 = new android.content.Intent
-            java.lang.String r2 = "android.intent.action.MAIN"
-            r4.<init>(r2)
-            java.lang.String r2 = "android.intent.category.HOME"
-            android.content.Intent r4 = r4.addCategory(r2)
-            r2 = 65536(0x10000, float:9.1835E-41)
-            android.content.pm.ResolveInfo r4 = r0.resolveActivity(r4, r2)
-            r2 = 0
-            if (r4 == 0) goto L47
-            android.content.pm.ActivityInfo r4 = r4.activityInfo
-            java.lang.String r4 = r4.packageName
-            r1.setPackage(r4)
-            java.util.List r4 = r0.queryIntentActivities(r1, r2)
-            int r4 = r4.size()
-            if (r4 <= 0) goto L47
-            goto L5d
-        L47:
-            android.content.Context r3 = r3.mContext
-            r4 = 17040362(0x10403ea, float:2.424738E-38)
-            java.lang.String r3 = r3.getString(r4)
-            r1.setPackage(r3)
-            java.util.List r3 = r0.queryIntentActivities(r1, r2)
-            int r3 = r3.size()
-            if (r3 <= 0) goto L5e
-        L5d:
-            return r1
-        L5e:
-            java.lang.IllegalArgumentException r3 = new java.lang.IllegalArgumentException
-            java.lang.String r4 = "Cannot use passed URI to set wallpaper; check that the type returned by ContentProvider matches image/*"
-            r3.<init>(r4)
-            throw r3
-        L66:
-            java.lang.IllegalArgumentException r3 = new java.lang.IllegalArgumentException
-            java.lang.String r4 = "Image URI must be of the content scheme type"
-            r3.<init>(r4)
-            throw r3
-        L6e:
-            java.lang.IllegalArgumentException r3 = new java.lang.IllegalArgumentException
-            java.lang.String r4 = "Image URI must not be null"
-            r3.<init>(r4)
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.getCropAndSetWallpaperIntent(android.net.Uri):android.content.Intent");
+    public Intent getCropAndSetWallpaperIntent(Uri uri) {
+        if (uri == null) {
+            throw new IllegalArgumentException("Image URI must not be null");
+        }
+        if (!"content".equals(uri.getScheme())) {
+            throw new IllegalArgumentException("Image URI must be of the content scheme type");
+        }
+        PackageManager packageManager = this.mContext.getPackageManager();
+        Intent intent = new Intent(ACTION_CROP_AND_SET_WALLPAPER, uri);
+        intent.addFlags(1);
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 65536);
+        if (resolveInfoResolveActivity != null) {
+            intent.setPackage(resolveInfoResolveActivity.activityInfo.packageName);
+            if (packageManager.queryIntentActivities(intent, 0).size() <= 0) {
+                intent.setPackage(this.mContext.getString(R.string.config_wallpaperCropperPackage));
+                if (packageManager.queryIntentActivities(intent, 0).size() <= 0) {
+                    throw new IllegalArgumentException("Cannot use passed URI to set wallpaper; check that the type returned by ContentProvider matches image/*");
+                }
+            }
+        }
+        return intent;
     }
 
     private boolean isRequestForDex(int i) {
@@ -1956,22 +1976,83 @@ public class WallpaperManager implements SemWallpaperManager {
         return setResource(context, i, i2, 0, z, true, bundle);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00f2 A[Catch: RemoteException -> 0x00fd, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x00fd, blocks: (B:8:0x0054, B:10:0x0066, B:11:0x007f, B:23:0x00d4, B:33:0x00e8, B:34:0x00eb, B:29:0x00e4, B:38:0x00ec, B:40:0x00f2), top: B:7:0x0054 }] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00f2 A[Catch: RemoteException -> 0x00fd, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x00fd, blocks: (B:9:0x0054, B:11:0x0066, B:12:0x007f, B:22:0x00d4, B:33:0x00e8, B:34:0x00eb, B:32:0x00e4, B:35:0x00ec, B:37:0x00f2), top: B:45:0x0054 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int setResource(android.content.Context r17, int r18, int r19, int r20, boolean r21, boolean r22, android.os.Bundle r23) throws java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 277
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.setResource(android.content.Context, int, int, int, boolean, boolean, android.os.Bundle):int");
+    private int setResource(Context context, int i, int i2, int i3, boolean z, boolean z2, Bundle bundle) throws Throwable {
+        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
+        String str = TAG;
+        StringBuilder sb = new StringBuilder("setResource: which = ");
+        sb.append(i2);
+        sb.append(", resid = 0x");
+        sb.append(Integer.toHexString(i));
+        sb.append(", callingPkg = ");
+        sb.append(context.getOpPackageName());
+        sb.append(", hasExtras = ");
+        sb.append(bundle != null);
+        Log.i(str, sb.toString());
+        if (sGlobals.mService == null) {
+            Log.w(TAG, "WallpaperService not running");
+            throw new RuntimeException(new DeadSystemException());
+        }
+        Bundle bundle2 = new Bundle();
+        WallpaperSetCompletion wallpaperSetCompletion = new WallpaperSetCompletion(this);
+        try {
+            Resources resources = context.getResources();
+            if ("com.samsung.android.themecenter".equals(this.mContext.getPackageName())) {
+                resources = new APKContents(APKContents.getMainThemePackagePath(Settings.System.getString(this.mContext.getContentResolver(), "current_sec_wallpaper_theme_package"))).getResources();
+            }
+            Resources resources2 = resources;
+            ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper("res:" + resources.getResourceName(i), context.getOpPackageName(), null, null, z, bundle2, i2, wallpaperSetCompletion, UserHandle.myUserId(), i3, z2, bundle);
+            if (wallpaper != null) {
+                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
+                try {
+                    try {
+                        autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
+                    } catch (ClassCastException e) {
+                        e = e;
+                    }
+                } catch (Throwable th) {
+                    th = th;
+                }
+                try {
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) resources2.getDrawable(i);
+                    if (bitmapDrawable != null && !z2) {
+                        copyDrawableToWallpaperFile(bitmapDrawable, autoCloseOutputStream);
+                    } else {
+                        copyStreamToWallpaperFile(resources2.openRawResource(i), autoCloseOutputStream);
+                    }
+                    autoCloseOutputStream.close();
+                    wallpaperSetCompletion.waitForCompletion();
+                    IoUtils.closeQuietly(autoCloseOutputStream);
+                } catch (ClassCastException e2) {
+                    e = e2;
+                    autoCloseOutputStream2 = autoCloseOutputStream;
+                    e.printStackTrace();
+                    IoUtils.closeQuietly(autoCloseOutputStream2);
+                    if (isNeedToClearBackupData()) {
+                    }
+                    return bundle2.getInt(EXTRA_NEW_WALLPAPER_ID, 0);
+                } catch (Throwable th2) {
+                    th = th2;
+                    autoCloseOutputStream2 = autoCloseOutputStream;
+                    IoUtils.closeQuietly(autoCloseOutputStream2);
+                    throw th;
+                }
+            }
+            if (isNeedToClearBackupData()) {
+                semClearBackupWallpapers(i2);
+            }
+            return bundle2.getInt(EXTRA_NEW_WALLPAPER_ID, 0);
+        } catch (RemoteException e3) {
+            throw e3.rethrowFromSystemServer();
+        }
     }
 
     @Override // android.app.SemWallpaperManager
     @Deprecated
-    public void setWallpaperUri(String str, boolean z, int i) throws IOException, PackageManager.NameNotFoundException {
+    public void setWallpaperUri(String str, boolean z, int i) throws Throwable {
         semSetUri(Uri.parse(str), z, i);
     }
 
@@ -1982,9 +2063,9 @@ public class WallpaperManager implements SemWallpaperManager {
                 Log.d(TAG, "semGetUri: Converting which to system.");
                 i = WhichChecker.getMode(i) | 1;
             }
-            String semGetUri = sGlobals.mService.semGetUri(i, this.mContext.getOpPackageName());
-            if (semGetUri != null) {
-                return Uri.parse(semGetUri);
+            String strSemGetUri = sGlobals.mService.semGetUri(i, this.mContext.getOpPackageName());
+            if (strSemGetUri != null) {
+                return Uri.parse(strSemGetUri);
             }
             return null;
         } catch (RemoteException e) {
@@ -2004,49 +2085,112 @@ public class WallpaperManager implements SemWallpaperManager {
     }
 
     @Override // android.app.SemWallpaperManager
-    public void semSetUri(Uri uri, boolean z, int i) throws IOException, PackageManager.NameNotFoundException {
+    public void semSetUri(Uri uri, boolean z, int i) throws Throwable {
         semSetUri(uri, z, i, -1);
     }
 
     @Override // android.app.SemWallpaperManager
-    public void semSetUri(Uri uri, boolean z, int i, int i2) throws IOException, PackageManager.NameNotFoundException {
+    public void semSetUri(Uri uri, boolean z, int i, int i2) throws Throwable {
         semSetUri(uri, z, i, i2, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0094  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0094  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void semSetUri(android.net.Uri r12, boolean r13, int r14, int r15, android.os.Bundle r16) throws java.io.IOException, android.content.pm.PackageManager.NameNotFoundException {
-        /*
-            Method dump skipped, instructions count: 254
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.semSetUri(android.net.Uri, boolean, int, int, android.os.Bundle):void");
+    public void semSetUri(Uri uri, boolean z, int i, int i2, Bundle bundle) throws Throwable {
+        Context contextCreatePackageContext;
+        String str = TAG;
+        StringBuilder sb = new StringBuilder("semSetUri: which = ");
+        sb.append(i);
+        sb.append(", type = ");
+        sb.append(i2);
+        sb.append(", uri = ");
+        sb.append(uri);
+        sb.append(", allowBackup = ");
+        sb.append(z);
+        sb.append(", hasExtras = ");
+        sb.append(bundle != null);
+        Log.d(str, sb.toString());
+        if (uri == null) {
+            return;
+        }
+        String scheme = uri.getScheme();
+        String authority = uri.getAuthority();
+        String lastPathSegment = uri.getLastPathSegment();
+        int i3 = SEM_SCHEME_MULTIPACK.equals(scheme) ? 3 : i2;
+        if (i3 == 1000 || i3 == 3) {
+            semSetWallpaper(uri.toString(), z, i, i3, bundle);
+            return;
+        }
+        try {
+            int i4 = i3;
+            try {
+                sGlobals.mService.semSetUri(uri.toString(), z, i, i4, this.mContext.getOpPackageName(), this.mContext.getUserId(), bundle);
+                i3 = i4;
+            } catch (RemoteException e) {
+                e = e;
+                i3 = i4;
+                e.printStackTrace();
+                if (i3 != 5) {
+                }
+            }
+        } catch (RemoteException e2) {
+            e = e2;
+        }
+        if (i3 != 5) {
+            if (isNeedToClearBackupData()) {
+                semClearBackupWallpapers(i);
+                return;
+            }
+            return;
+        }
+        if (authority == null || authority.isEmpty() || lastPathSegment == null || lastPathSegment.isEmpty()) {
+            return;
+        }
+        try {
+            contextCreatePackageContext = this.mContext.createPackageContext(authority, 0);
+        } catch (PackageManager.NameNotFoundException e3) {
+            e3.printStackTrace();
+        } catch (IOException e4) {
+            e4.printStackTrace();
+        }
+        if (contextCreatePackageContext == null) {
+            return;
+        }
+        int identifier = contextCreatePackageContext.getResources().getIdentifier(lastPathSegment, "drawable", authority);
+        if (identifier <= 0) {
+            Log.d(TAG, "Resource id not found");
+            return;
+        }
+        Bundle bundle2 = bundle == null ? new Bundle() : bundle;
+        bundle2.putString("uri", uri.toString());
+        setPreloadedResource(contextCreatePackageContext, identifier, i, z, bundle2);
+        Log.d(TAG, "Set wallpaper based on END");
     }
 
-    private void semSetWallpaper(String str, boolean z, int i, int i2, Bundle bundle) throws IOException {
+    private void semSetWallpaper(String str, boolean z, int i, int i2, Bundle bundle) throws Throwable {
         Throwable th;
+        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
         if (i2 != 1000 || WhichChecker.isLock(i)) {
             try {
-                ParcelFileDescriptor semSetWallpaper = sGlobals.mService.semSetWallpaper(str, this.mContext.getOpPackageName(), null, null, z, null, i, null, this.mContext.getUserId(), i2, false, bundle);
-                if (semSetWallpaper != null) {
-                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
+                ParcelFileDescriptor parcelFileDescriptorSemSetWallpaper = sGlobals.mService.semSetWallpaper(str, this.mContext.getOpPackageName(), null, null, z, null, i, null, this.mContext.getUserId(), i2, false, bundle);
+                if (parcelFileDescriptorSemSetWallpaper != null) {
+                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
                     try {
-                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(semSetWallpaper);
-                        try {
-                            autoCloseOutputStream2.close();
-                            IoUtils.closeQuietly(autoCloseOutputStream2);
-                        } catch (Throwable th2) {
-                            th = th2;
-                            autoCloseOutputStream = autoCloseOutputStream2;
-                            IoUtils.closeQuietly(autoCloseOutputStream);
-                            throw th;
-                        }
+                        autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptorSemSetWallpaper);
+                    } catch (Throwable th2) {
+                        th = th2;
+                    }
+                    try {
+                        autoCloseOutputStream.close();
+                        IoUtils.closeQuietly(autoCloseOutputStream);
                     } catch (Throwable th3) {
                         th = th3;
+                        autoCloseOutputStream2 = autoCloseOutputStream;
+                        IoUtils.closeQuietly(autoCloseOutputStream2);
+                        throw th;
                     }
                 }
                 if (isNeedToClearBackupData()) {
@@ -2087,8 +2231,7 @@ public class WallpaperManager implements SemWallpaperManager {
         return setBitmap(bitmap, rect, z, i, this.mContext.getUserId(), 0, bundle);
     }
 
-    private int setBitmap(Bitmap bitmap, Rect rect, boolean z, int i, int i2, int i3, Bundle bundle) throws IOException {
-        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
+    private int setBitmap(Bitmap bitmap, Rect rect, boolean z, int i, int i2, int i3, Bundle bundle) throws Throwable {
         String str = TAG;
         StringBuilder sb = new StringBuilder("setBitmap calling package = ");
         sb.append(this.mContext.getOpPackageName());
@@ -2123,25 +2266,25 @@ public class WallpaperManager implements SemWallpaperManager {
         }
         Bundle bundle2 = new Bundle();
         WallpaperSetCompletion wallpaperSetCompletion = new WallpaperSetCompletion(this);
-        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
+        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
         try {
             ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper(null, this.mContext.getOpPackageName(), null, rect == null ? null : List.of(rect), z, bundle2, i, wallpaperSetCompletion, i2, i3, false, bundle);
             if (wallpaper != null) {
                 try {
-                    autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
-                } catch (Throwable th) {
-                    th = th;
-                }
-                try {
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 90, autoCloseOutputStream);
-                    autoCloseOutputStream.close();
-                    wallpaperSetCompletion.waitForCompletion();
-                    IoUtils.closeQuietly(autoCloseOutputStream);
+                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
+                    try {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 90, autoCloseOutputStream2);
+                        autoCloseOutputStream2.close();
+                        wallpaperSetCompletion.waitForCompletion();
+                        IoUtils.closeQuietly(autoCloseOutputStream2);
+                    } catch (Throwable th) {
+                        th = th;
+                        autoCloseOutputStream = autoCloseOutputStream2;
+                        IoUtils.closeQuietly(autoCloseOutputStream);
+                        throw th;
+                    }
                 } catch (Throwable th2) {
                     th = th2;
-                    autoCloseOutputStream2 = autoCloseOutputStream;
-                    IoUtils.closeQuietly(autoCloseOutputStream2);
-                    throw th;
                 }
             }
             return bundle2.getInt(EXTRA_NEW_WALLPAPER_ID, 0);
@@ -2155,14 +2298,13 @@ public class WallpaperManager implements SemWallpaperManager {
         map.forEach(new BiConsumer() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SparseArray.this.put(WallpaperManager.getOrientation((Point) obj), (Rect) obj2);
+                sparseArray.put(WallpaperManager.getOrientation((Point) obj), (Rect) obj2);
             }
         });
         return setBitmapWithCrops(bitmap, sparseArray, z, i, this.mContext.getUserId());
     }
 
-    private int setBitmapWithCrops(Bitmap bitmap, SparseArray<Rect> sparseArray, boolean z, int i, int i2) throws IOException {
-        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
+    private int setBitmapWithCrops(Bitmap bitmap, SparseArray<Rect> sparseArray, boolean z, int i, int i2) throws Throwable {
         if (sGlobals.mService == null) {
             Log.w(TAG, "WallpaperService not running");
             throw new RuntimeException(new DeadSystemException());
@@ -2172,31 +2314,31 @@ public class WallpaperManager implements SemWallpaperManager {
         ArrayList arrayList = new ArrayList(size);
         for (int i3 = 0; i3 < size; i3++) {
             iArr[i3] = sparseArray.keyAt(i3);
-            Rect valueAt = sparseArray.valueAt(i3);
-            validateRect(valueAt);
-            arrayList.add(valueAt);
+            Rect rectValueAt = sparseArray.valueAt(i3);
+            validateRect(rectValueAt);
+            arrayList.add(rectValueAt);
         }
         Bundle bundle = new Bundle();
         WallpaperSetCompletion wallpaperSetCompletion = new WallpaperSetCompletion(this);
         try {
             ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper(null, this.mContext.getOpPackageName(), iArr, arrayList, z, bundle, i, wallpaperSetCompletion, i2, 0, false, null);
             if (wallpaper != null) {
-                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
+                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
                 try {
-                    autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
-                } catch (Throwable th) {
-                    th = th;
-                }
-                try {
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 90, autoCloseOutputStream);
-                    autoCloseOutputStream.close();
-                    wallpaperSetCompletion.waitForCompletion();
-                    IoUtils.closeQuietly(autoCloseOutputStream);
+                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
+                    try {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 90, autoCloseOutputStream2);
+                        autoCloseOutputStream2.close();
+                        wallpaperSetCompletion.waitForCompletion();
+                        IoUtils.closeQuietly(autoCloseOutputStream2);
+                    } catch (Throwable th) {
+                        th = th;
+                        autoCloseOutputStream = autoCloseOutputStream2;
+                        IoUtils.closeQuietly(autoCloseOutputStream);
+                        throw th;
+                    }
                 } catch (Throwable th2) {
                     th = th2;
-                    autoCloseOutputStream2 = autoCloseOutputStream;
-                    IoUtils.closeQuietly(autoCloseOutputStream2);
-                    throw th;
                 }
             }
             if (isNeedToClearBackupData()) {
@@ -2226,54 +2368,53 @@ public class WallpaperManager implements SemWallpaperManager {
         FileUtils.copy(inputStream, fileOutputStream);
     }
 
-    private void copyDrawableToWallpaperFile(BitmapDrawable bitmapDrawable, FileOutputStream fileOutputStream) {
+    private void copyDrawableToWallpaperFile(BitmapDrawable bitmapDrawable, FileOutputStream fileOutputStream) throws Throwable {
         ByteArrayInputStream byteArrayInputStream;
-        ByteArrayOutputStream byteArrayOutputStream;
         Log.i(TAG, "copyDrawableToWallpaperFile");
         Bitmap bitmap = bitmapDrawable.getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream2 = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
         try {
-            byteArrayOutputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
             try {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-            } catch (Exception e) {
-                e = e;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream2);
+                byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream2.toByteArray());
+                try {
+                    FileUtils.copy(byteArrayInputStream, fileOutputStream);
+                    IoUtils.closeQuietly(byteArrayOutputStream2);
+                    IoUtils.closeQuietly(byteArrayInputStream);
+                } catch (Exception e) {
+                    e = e;
+                    byteArrayOutputStream = byteArrayOutputStream2;
+                    try {
+                        e.printStackTrace();
+                        IoUtils.closeQuietly(byteArrayOutputStream);
+                        IoUtils.closeQuietly(byteArrayInputStream);
+                    } catch (Throwable th) {
+                        th = th;
+                        IoUtils.closeQuietly(byteArrayOutputStream);
+                        IoUtils.closeQuietly(byteArrayInputStream);
+                        throw th;
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    byteArrayOutputStream = byteArrayOutputStream2;
+                    IoUtils.closeQuietly(byteArrayOutputStream);
+                    IoUtils.closeQuietly(byteArrayInputStream);
+                    throw th;
+                }
+            } catch (Exception e2) {
+                e = e2;
                 byteArrayInputStream = null;
-            } catch (Throwable th) {
-                th = th;
-                byteArrayInputStream = null;
-            }
-        } catch (Exception e2) {
-            e = e2;
-            byteArrayInputStream = null;
-        } catch (Throwable th2) {
-            th = th2;
-            byteArrayInputStream = null;
-        }
-        try {
-            FileUtils.copy(byteArrayInputStream, fileOutputStream);
-            IoUtils.closeQuietly(byteArrayOutputStream);
-            IoUtils.closeQuietly(byteArrayInputStream);
-        } catch (Exception e3) {
-            e = e3;
-            byteArrayOutputStream2 = byteArrayOutputStream;
-            try {
-                e.printStackTrace();
-                IoUtils.closeQuietly(byteArrayOutputStream2);
-                IoUtils.closeQuietly(byteArrayInputStream);
             } catch (Throwable th3) {
                 th = th3;
-                IoUtils.closeQuietly(byteArrayOutputStream2);
-                IoUtils.closeQuietly(byteArrayInputStream);
-                throw th;
+                byteArrayInputStream = null;
             }
+        } catch (Exception e3) {
+            e = e3;
+            byteArrayInputStream = null;
         } catch (Throwable th4) {
             th = th4;
-            byteArrayOutputStream2 = byteArrayOutputStream;
-            IoUtils.closeQuietly(byteArrayOutputStream2);
-            IoUtils.closeQuietly(byteArrayInputStream);
-            throw th;
+            byteArrayInputStream = null;
         }
     }
 
@@ -2294,8 +2435,7 @@ public class WallpaperManager implements SemWallpaperManager {
     }
 
     @Override // android.app.SemWallpaperManager
-    public int setStream(InputStream inputStream, Rect rect, boolean z, int i, int i2, boolean z2, Bundle bundle) throws IOException {
-        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
+    public int setStream(InputStream inputStream, Rect rect, boolean z, int i, int i2, boolean z2, Bundle bundle) throws Throwable {
         String str = TAG;
         StringBuilder sb = new StringBuilder("setStream calling package = ");
         sb.append(this.mContext.getOpPackageName());
@@ -2328,28 +2468,28 @@ public class WallpaperManager implements SemWallpaperManager {
         }
         Bundle bundle2 = new Bundle();
         WallpaperSetCompletion wallpaperSetCompletion = new WallpaperSetCompletion(this);
-        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
-        List<Rect> of = rect == null ? null : List.of(rect);
+        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
+        List<Rect> listOf = rect == null ? null : List.of(rect);
         try {
             Log.d(TAG, "begin setWallpaper()");
-            ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper(null, this.mContext.getOpPackageName(), null, of, z, bundle2, i, wallpaperSetCompletion, this.mContext.getUserId(), i2, z2, bundle);
+            ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper(null, this.mContext.getOpPackageName(), null, listOf, z, bundle2, i, wallpaperSetCompletion, this.mContext.getUserId(), i2, z2, bundle);
             Log.d(TAG, "finish setWallpaper()");
             if (wallpaper != null) {
                 try {
-                    autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
-                } catch (Throwable th) {
-                    th = th;
-                }
-                try {
-                    copyStreamToWallpaperFile(inputStream, autoCloseOutputStream);
-                    autoCloseOutputStream.close();
-                    wallpaperSetCompletion.waitForCompletion();
-                    IoUtils.closeQuietly(autoCloseOutputStream);
+                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
+                    try {
+                        copyStreamToWallpaperFile(inputStream, autoCloseOutputStream2);
+                        autoCloseOutputStream2.close();
+                        wallpaperSetCompletion.waitForCompletion();
+                        IoUtils.closeQuietly(autoCloseOutputStream2);
+                    } catch (Throwable th) {
+                        th = th;
+                        autoCloseOutputStream = autoCloseOutputStream2;
+                        IoUtils.closeQuietly(autoCloseOutputStream);
+                        throw th;
+                    }
                 } catch (Throwable th2) {
                     th = th2;
-                    autoCloseOutputStream2 = autoCloseOutputStream;
-                    IoUtils.closeQuietly(autoCloseOutputStream2);
-                    throw th;
                 }
             }
             return bundle2.getInt(EXTRA_NEW_WALLPAPER_ID, 0);
@@ -2363,7 +2503,7 @@ public class WallpaperManager implements SemWallpaperManager {
         map.forEach(new BiConsumer() { // from class: android.app.WallpaperManager$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SparseArray.this.put(WallpaperManager.getOrientation((Point) obj), (Rect) obj2);
+                sparseArray.put(WallpaperManager.getOrientation((Point) obj), (Rect) obj2);
             }
         });
         return setStreamWithCrops(inputStream, sparseArray, z, i);
@@ -2374,8 +2514,9 @@ public class WallpaperManager implements SemWallpaperManager {
         return setStreamWithCrops(inputStream, sparseArray, z, i, null);
     }
 
-    private int setStreamWithCrops(InputStream inputStream, SparseArray<Rect> sparseArray, boolean z, int i, Bundle bundle) throws IOException {
+    private int setStreamWithCrops(InputStream inputStream, SparseArray<Rect> sparseArray, boolean z, int i, Bundle bundle) throws Throwable {
         Throwable th;
+        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
         if (sGlobals.mService == null) {
             Log.w(TAG, "WallpaperService not running");
             throw new RuntimeException(new DeadSystemException());
@@ -2385,31 +2526,31 @@ public class WallpaperManager implements SemWallpaperManager {
         ArrayList arrayList = new ArrayList(size);
         for (int i2 = 0; i2 < size; i2++) {
             iArr[i2] = sparseArray.keyAt(i2);
-            Rect valueAt = sparseArray.valueAt(i2);
-            validateRect(valueAt);
-            arrayList.add(valueAt);
+            Rect rectValueAt = sparseArray.valueAt(i2);
+            validateRect(rectValueAt);
+            arrayList.add(rectValueAt);
         }
         Bundle bundle2 = new Bundle();
         WallpaperSetCompletion wallpaperSetCompletion = new WallpaperSetCompletion(this);
         try {
             ParcelFileDescriptor wallpaper = sGlobals.mService.setWallpaper(null, this.mContext.getOpPackageName(), iArr, arrayList, z, bundle2, i, wallpaperSetCompletion, this.mContext.getUserId(), 0, false, bundle);
             if (wallpaper != null) {
-                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
+                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
                 try {
-                    ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
-                    try {
-                        copyStreamToWallpaperFile(inputStream, autoCloseOutputStream2);
-                        autoCloseOutputStream2.close();
-                        wallpaperSetCompletion.waitForCompletion();
-                        IoUtils.closeQuietly(autoCloseOutputStream2);
-                    } catch (Throwable th2) {
-                        th = th2;
-                        autoCloseOutputStream = autoCloseOutputStream2;
-                        IoUtils.closeQuietly(autoCloseOutputStream);
-                        throw th;
-                    }
+                    autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(wallpaper);
+                } catch (Throwable th2) {
+                    th = th2;
+                }
+                try {
+                    copyStreamToWallpaperFile(inputStream, autoCloseOutputStream);
+                    autoCloseOutputStream.close();
+                    wallpaperSetCompletion.waitForCompletion();
+                    IoUtils.closeQuietly(autoCloseOutputStream);
                 } catch (Throwable th3) {
                     th = th3;
+                    autoCloseOutputStream2 = autoCloseOutputStream;
+                    IoUtils.closeQuietly(autoCloseOutputStream2);
+                    throw th;
                 }
             }
             int callingUserId = UserHandle.getCallingUserId();
@@ -2490,26 +2631,26 @@ public class WallpaperManager implements SemWallpaperManager {
         try {
             try {
                 i3 = SystemProperties.getInt("sys.max_texture_size", 0);
-            } catch (RemoteException e) {
-                throw e.rethrowFromSystemServer();
+            } catch (Exception unused) {
             }
-        } catch (Exception unused) {
-        }
-        if (i3 > 0 && (i > i3 || i2 > i3)) {
-            float f = i2 / i;
-            if (i > i2) {
-                i2 = (int) ((i3 * f) + 0.5d);
-                i = i3;
-            } else {
-                i = (int) ((i3 / f) + 0.5d);
-                i2 = i3;
+            if (i3 > 0 && (i > i3 || i2 > i3)) {
+                float f = i2 / i;
+                if (i > i2) {
+                    i2 = (int) ((i3 * f) + 0.5d);
+                    i = i3;
+                } else {
+                    i = (int) ((i3 / f) + 0.5d);
+                    i2 = i3;
+                }
             }
+            if (sGlobals.mService == null) {
+                Log.w(TAG, "WallpaperService not running");
+                throw new RuntimeException(new DeadSystemException());
+            }
+            sGlobals.mService.setDimensionHints(i, i2, this.mContext.getOpPackageName(), this.mContext.getDisplayId());
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
         }
-        if (sGlobals.mService == null) {
-            Log.w(TAG, "WallpaperService not running");
-            throw new RuntimeException(new DeadSystemException());
-        }
-        sGlobals.mService.setDimensionHints(i, i2, this.mContext.getOpPackageName(), this.mContext.getDisplayId());
     }
 
     public void setDisplayPadding(Rect rect) {
@@ -2821,81 +2962,30 @@ public class WallpaperManager implements SemWallpaperManager {
         return openDefaultWallpaper(context, i, true, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0049  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static java.io.InputStream openDefaultWallpaper(android.content.Context r3, int r4, boolean r5, java.lang.String r6) {
-        /*
-            boolean r5 = com.samsung.android.wallpaper.utils.WhichChecker.isSubDisplay(r4)
-            if (r5 == 0) goto Ld
-            boolean r5 = com.samsung.android.wallpaper.Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
-            if (r5 != 0) goto Lb
-            goto Ld
-        Lb:
-            r5 = 0
-            goto Le
-        Ld:
-            r5 = 1
-        Le:
-            java.lang.String r0 = android.app.WallpaperManager.TAG
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "openDefaultWallpaper() which = "
-            r1.<init>(r2)
-            r1.append(r4)
-            java.lang.String r2 = " , color = "
-            r1.append(r2)
-            r1.append(r6)
-            java.lang.String r1 = r1.toString()
-            android.util.Log.d(r0, r1)
-            boolean r6 = android.text.TextUtils.isEmpty(r6)
-            if (r6 == 0) goto L46
-            if (r5 == 0) goto L46
-            java.io.File r5 = getDefaultWallpaperFile(r3, r4)
-            if (r5 == 0) goto L46
-            java.io.FileInputStream r6 = new java.io.FileInputStream     // Catch: java.io.IOException -> L3e
-            r6.<init>(r5)     // Catch: java.io.IOException -> L3e
-            goto L47
-        L3e:
-            r5 = move-exception
-            java.lang.String r6 = android.app.WallpaperManager.TAG
-            java.lang.String r0 = "getDefaultWallpaperFile error:"
-            android.util.Log.w(r6, r0, r5)
-        L46:
-            r6 = 0
-        L47:
-            if (r6 != 0) goto L62
-            java.lang.Object r5 = android.app.WallpaperManager.sSync
-            monitor-enter(r5)
-            android.app.SemWallpaperResourcesInfo r6 = android.app.WallpaperManager.sWallpaperResourcesInfo     // Catch: java.lang.Throwable -> L5f
-            if (r6 != 0) goto L57
-            android.app.SemWallpaperResourcesInfo r6 = new android.app.SemWallpaperResourcesInfo     // Catch: java.lang.Throwable -> L5f
-            r6.<init>(r3)     // Catch: java.lang.Throwable -> L5f
-            android.app.WallpaperManager.sWallpaperResourcesInfo = r6     // Catch: java.lang.Throwable -> L5f
-        L57:
-            monitor-exit(r5)     // Catch: java.lang.Throwable -> L5f
-            android.app.SemWallpaperResourcesInfo r5 = android.app.WallpaperManager.sWallpaperResourcesInfo
-            java.io.InputStream r6 = r5.getDefaultImageWallpaper(r4)
-            goto L62
-        L5f:
-            r3 = move-exception
-            monitor-exit(r5)     // Catch: java.lang.Throwable -> L5f
-            throw r3
-        L62:
-            java.lang.String r4 = android.app.WallpaperManager.TAG
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r0 = "openDefaultWallpaper: by ["
-            r5.<init>(r0)
-            java.lang.String r3 = r3.getOpPackageName()
-            r5.append(r3)
-            java.lang.String r3 = "]"
-            r5.append(r3)
-            java.lang.String r3 = r5.toString()
-            android.util.Log.d(r4, r3)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.openDefaultWallpaper(android.content.Context, int, boolean, java.lang.String):java.io.InputStream");
+    public static InputStream openDefaultWallpaper(Context context, int i, boolean z, String str) {
+        InputStream defaultImageWallpaper;
+        File defaultWallpaperFile;
+        boolean z2 = (WhichChecker.isSubDisplay(i) && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE) ? false : true;
+        Log.d(TAG, "openDefaultWallpaper() which = " + i + " , color = " + str);
+        if (TextUtils.isEmpty(str) && z2 && (defaultWallpaperFile = getDefaultWallpaperFile(context, i)) != null) {
+            try {
+                defaultImageWallpaper = new FileInputStream(defaultWallpaperFile);
+            } catch (IOException e) {
+                Log.w(TAG, "getDefaultWallpaperFile error:", e);
+            }
+        } else {
+            defaultImageWallpaper = null;
+        }
+        if (defaultImageWallpaper == null) {
+            synchronized (sSync) {
+                if (sWallpaperResourcesInfo == null) {
+                    sWallpaperResourcesInfo = new SemWallpaperResourcesInfo(context);
+                }
+            }
+            defaultImageWallpaper = sWallpaperResourcesInfo.getDefaultImageWallpaper(i);
+        }
+        Log.d(TAG, "openDefaultWallpaper: by [" + context.getOpPackageName() + NavigationBarInflaterView.SIZE_MOD_END);
+        return defaultImageWallpaper;
     }
 
     @Override // android.app.SemWallpaperManager
@@ -3022,34 +3112,36 @@ public class WallpaperManager implements SemWallpaperManager {
 
     public static ComponentName getDefaultWallpaperComponent(Context context) {
         String str = SystemProperties.get(PROP_WALLPAPER_COMPONENT);
-        ComponentName unflattenFromString = !TextUtils.isEmpty(str) ? ComponentName.unflattenFromString(str) : null;
-        if (unflattenFromString == null) {
+        ComponentName componentNameUnflattenFromString = !TextUtils.isEmpty(str) ? ComponentName.unflattenFromString(str) : null;
+        if (componentNameUnflattenFromString == null) {
             String string = context.getString(R.string.default_wallpaper_component);
             if (!TextUtils.isEmpty(string)) {
-                unflattenFromString = ComponentName.unflattenFromString(string);
+                componentNameUnflattenFromString = ComponentName.unflattenFromString(string);
             }
         }
-        if (isComponentExist(context, unflattenFromString)) {
-            return unflattenFromString;
+        if (isComponentExist(context, componentNameUnflattenFromString)) {
+            return componentNameUnflattenFromString;
         }
         return null;
     }
 
-    public static ComponentName getCmfDefaultWallpaperComponent(Context context) {
-        ComponentName componentName;
-        String[] split;
+    public static ComponentName getCmfDefaultWallpaperComponent(Context context) throws Resources.NotFoundException {
+        ComponentName componentNameUnflattenFromString;
+        String[] strArrSplit;
         String[] stringArray = context.getResources().getStringArray(R.array.default_wallpaper_component_per_device_color);
-        if (stringArray != null && stringArray.length > 0) {
+        if (stringArray == null || stringArray.length <= 0) {
+            componentNameUnflattenFromString = null;
+        } else {
             for (String str : stringArray) {
-                if (!TextUtils.isEmpty(str) && (split = str.split(",")) != null && split.length == 2 && VALUE_CMF_COLOR.equals(split[0]) && !TextUtils.isEmpty(split[1])) {
-                    componentName = ComponentName.unflattenFromString(split[1]);
+                if (!TextUtils.isEmpty(str) && (strArrSplit = str.split(",")) != null && strArrSplit.length == 2 && VALUE_CMF_COLOR.equals(strArrSplit[0]) && !TextUtils.isEmpty(strArrSplit[1])) {
+                    componentNameUnflattenFromString = ComponentName.unflattenFromString(strArrSplit[1]);
                     break;
                 }
             }
+            componentNameUnflattenFromString = null;
         }
-        componentName = null;
-        ComponentName componentName2 = isComponentExist(context, componentName) ? componentName : null;
-        return componentName2 == null ? getDefaultWallpaperComponent(context) : componentName2;
+        ComponentName componentName = isComponentExist(context, componentNameUnflattenFromString) ? componentNameUnflattenFromString : null;
+        return componentName == null ? getDefaultWallpaperComponent(context) : componentName;
     }
 
     private static boolean isComponentExist(Context context, ComponentName componentName) {
@@ -3189,7 +3281,7 @@ public class WallpaperManager implements SemWallpaperManager {
         }
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2) throws RemoteException {
+        public void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2) throws Throwable {
             WallpaperManager.sGlobals.onWallpaperColorsChanged(wallpaperColors, i, i2);
         }
 
@@ -3242,11 +3334,11 @@ public class WallpaperManager implements SemWallpaperManager {
     }
 
     @Override // android.app.SemWallpaperManager
-    public void setResourceAll(int i) throws IOException {
+    public void setResourceAll(int i) throws Resources.NotFoundException, IOException {
         Log.d(TAG, "setResourceAll");
-        Bitmap generateBitmap = generateBitmap(i);
-        if (generateBitmap != null) {
-            setBitmap(generateBitmap);
+        Bitmap bitmapGenerateBitmap = generateBitmap(i);
+        if (bitmapGenerateBitmap != null) {
+            setBitmap(bitmapGenerateBitmap);
             try {
                 Settings.System.putInt(this.mContext.getContentResolver(), "android.wallpaper.settings_systemui_transparency", 2);
                 return;
@@ -3258,123 +3350,64 @@ public class WallpaperManager implements SemWallpaperManager {
         Log.e(TAG, "theme bitmap is null");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00c1 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00c1 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:50:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.graphics.Bitmap generateBitmap(int r11) {
-        /*
-            r10 = this;
-            java.lang.String r0 = "Package name "
-            java.lang.String r1 = "themeResourceId="
-            java.lang.String r2 = "resourceName="
-            java.lang.String r3 = android.app.WallpaperManager.TAG
-            java.lang.String r4 = "generateBitmap"
-            android.util.Log.d(r3, r4)
-            r3 = 0
-            android.content.Context r4 = r10.mContext     // Catch: java.lang.OutOfMemoryError -> Lc8
-            android.content.res.Resources r4 = r4.getResources()     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r11 = r4.getResourceName(r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r4 = android.app.WallpaperManager.TAG     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r5.<init>(r2)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r5.append(r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r2 = r5.toString()     // Catch: java.lang.OutOfMemoryError -> Lc8
-            android.util.Log.d(r4, r2)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            boolean r2 = android.text.TextUtils.isEmpty(r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r4 = -1
-            if (r2 != 0) goto Lad
-            r2 = 58
-            int r2 = r11.indexOf(r2)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            if (r2 <= 0) goto L40
-            r5 = 0
-            java.lang.String r5 = r11.substring(r5, r2)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto L41
-        L40:
-            r5 = r3
-        L41:
-            r6 = 47
-            int r6 = r11.lastIndexOf(r6)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            if (r6 <= 0) goto L50
-            int r7 = r6 + 1
-            java.lang.String r7 = r11.substring(r7)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto L51
-        L50:
-            r7 = r3
-        L51:
-            if (r2 <= 0) goto L60
-            if (r6 <= 0) goto L60
-            int r8 = r6 - r2
-            r9 = 1
-            if (r8 <= r9) goto L60
-            int r2 = r2 + r9
-            java.lang.String r2 = r11.substring(r2, r6)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto L61
-        L60:
-            r2 = r3
-        L61:
-            if (r5 == 0) goto Lad
-            if (r7 == 0) goto Lad
-            if (r2 == 0) goto Lad
-            android.content.APKContents r2 = new android.content.APKContents     // Catch: android.content.res.Resources.NotFoundException -> L8c android.content.pm.PackageManager.NameNotFoundException -> L95 java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r6 = android.content.APKContents.getMainThemePackagePath(r5)     // Catch: android.content.res.Resources.NotFoundException -> L8c android.content.pm.PackageManager.NameNotFoundException -> L95 java.lang.OutOfMemoryError -> Lc8
-            r2.<init>(r6)     // Catch: android.content.res.Resources.NotFoundException -> L8c android.content.pm.PackageManager.NameNotFoundException -> L95 java.lang.OutOfMemoryError -> Lc8
-            android.content.res.Resources r2 = r2.getResources()     // Catch: android.content.res.Resources.NotFoundException -> L8c android.content.pm.PackageManager.NameNotFoundException -> L95 java.lang.OutOfMemoryError -> Lc8
-            if (r2 == 0) goto L7c
-            int r10 = r2.getIdentifier(r11, r3, r3)     // Catch: android.content.res.Resources.NotFoundException -> L8d android.content.pm.PackageManager.NameNotFoundException -> L96 java.lang.OutOfMemoryError -> Lc8
-        L7a:
-            r4 = r10
-            goto Lae
-        L7c:
-            android.content.Context r10 = r10.mContext     // Catch: android.content.res.Resources.NotFoundException -> L8d android.content.pm.PackageManager.NameNotFoundException -> L96 java.lang.OutOfMemoryError -> Lc8
-            r6 = 4
-            android.content.Context r10 = r10.createPackageContext(r5, r6)     // Catch: android.content.res.Resources.NotFoundException -> L8d android.content.pm.PackageManager.NameNotFoundException -> L96 java.lang.OutOfMemoryError -> Lc8
-            android.content.res.Resources r2 = r10.getResources()     // Catch: android.content.res.Resources.NotFoundException -> L8d android.content.pm.PackageManager.NameNotFoundException -> L96 java.lang.OutOfMemoryError -> Lc8
-            int r10 = r2.getIdentifier(r11, r3, r3)     // Catch: android.content.res.Resources.NotFoundException -> L8d android.content.pm.PackageManager.NameNotFoundException -> L96 java.lang.OutOfMemoryError -> Lc8
-            goto L7a
-        L8c:
-            r2 = r3
-        L8d:
-            java.lang.String r10 = android.app.WallpaperManager.TAG     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r11 = "Resource not found: -1"
-            android.util.Log.e(r10, r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto Lae
-        L95:
-            r2 = r3
-        L96:
-            java.lang.String r10 = android.app.WallpaperManager.TAG     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r11.<init>(r0)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r11.append(r5)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r0 = " not found"
-            r11.append(r0)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r11 = r11.toString()     // Catch: java.lang.OutOfMemoryError -> Lc8
-            android.util.Log.e(r10, r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto Lae
-        Lad:
-            r2 = r3
-        Lae:
-            java.lang.String r10 = android.app.WallpaperManager.TAG     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r11.<init>(r1)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            r11.append(r4)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            java.lang.String r11 = r11.toString()     // Catch: java.lang.OutOfMemoryError -> Lc8
-            android.util.Log.d(r10, r11)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            if (r2 == 0) goto Ld0
-            if (r4 <= 0) goto Ld0
-            android.graphics.Bitmap r3 = android.graphics.BitmapFactory.decodeResource(r2, r4)     // Catch: java.lang.OutOfMemoryError -> Lc8
-            goto Ld0
-        Lc8:
-            r10 = move-exception
-            java.lang.String r11 = android.app.WallpaperManager.TAG
-            java.lang.String r0 = "Can't decode file"
-            android.util.Log.w(r11, r0, r10)
-        Ld0:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.generateBitmap(int):android.graphics.Bitmap");
+    private Bitmap generateBitmap(int i) throws Resources.NotFoundException {
+        Resources resources;
+        int identifier;
+        Log.d(TAG, "generateBitmap");
+        try {
+            String resourceName = this.mContext.getResources().getResourceName(i);
+            Log.d(TAG, "resourceName=" + resourceName);
+            int i2 = -1;
+            if (TextUtils.isEmpty(resourceName)) {
+                resources = null;
+            } else {
+                int iIndexOf = resourceName.indexOf(58);
+                String strSubstring = iIndexOf > 0 ? resourceName.substring(0, iIndexOf) : null;
+                int iLastIndexOf = resourceName.lastIndexOf(47);
+                String strSubstring2 = iLastIndexOf > 0 ? resourceName.substring(iLastIndexOf + 1) : null;
+                String strSubstring3 = (iIndexOf <= 0 || iLastIndexOf <= 0 || iLastIndexOf - iIndexOf <= 1) ? null : resourceName.substring(iIndexOf + 1, iLastIndexOf);
+                if (strSubstring != null && strSubstring2 != null && strSubstring3 != null) {
+                    try {
+                        resources = new APKContents(APKContents.getMainThemePackagePath(strSubstring)).getResources();
+                        try {
+                            if (resources != null) {
+                                identifier = resources.getIdentifier(resourceName, null, null);
+                            } else {
+                                resources = this.mContext.createPackageContext(strSubstring, 4).getResources();
+                                identifier = resources.getIdentifier(resourceName, null, null);
+                            }
+                            i2 = identifier;
+                        } catch (PackageManager.NameNotFoundException unused) {
+                            Log.e(TAG, "Package name " + strSubstring + " not found");
+                            Log.d(TAG, "themeResourceId=" + i2);
+                            return resources != null ? null : null;
+                        } catch (Resources.NotFoundException unused2) {
+                            Log.e(TAG, "Resource not found: -1");
+                            Log.d(TAG, "themeResourceId=" + i2);
+                            if (resources != null) {
+                            }
+                        }
+                    } catch (PackageManager.NameNotFoundException unused3) {
+                        resources = null;
+                    } catch (Resources.NotFoundException unused4) {
+                        resources = null;
+                    }
+                }
+            }
+            Log.d(TAG, "themeResourceId=" + i2);
+            if (resources != null && i2 > 0) {
+                return BitmapFactory.decodeResource(resources, i2);
+            }
+        } catch (OutOfMemoryError e) {
+            Log.w(TAG, "Can't decode file", e);
+            return null;
+        }
     }
 
     @Override // android.app.SemWallpaperManager
@@ -3658,9 +3691,9 @@ public class WallpaperManager implements SemWallpaperManager {
             throw new RuntimeException(new DeadSystemException());
         }
         try {
-            boolean isVideoWallpaper = sGlobals.mService.isVideoWallpaper();
-            Log.d(TAG, "isVideoWallpaper = " + isVideoWallpaper);
-            return isVideoWallpaper;
+            boolean zIsVideoWallpaper = sGlobals.mService.isVideoWallpaper();
+            Log.d(TAG, "isVideoWallpaper = " + zIsVideoWallpaper);
+            return zIsVideoWallpaper;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3679,11 +3712,15 @@ public class WallpaperManager implements SemWallpaperManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0068  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private Bitmap getVideoWallpaperFrame(AssetFileDescriptor assetFileDescriptor, String str, String str2) {
         long j;
         Log.d(TAG, "getVideoWallpaperFrame, creating MediaMetadataRetriever");
         MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-        Bitmap bitmap = null;
+        Bitmap frameAtTime = null;
         try {
             try {
                 try {
@@ -3702,43 +3739,45 @@ public class WallpaperManager implements SemWallpaperManager {
                         }
                         mediaMetadataRetriever.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
                     }
-                    if (TextUtils.isEmpty(str2)) {
-                        bitmap = mediaMetadataRetriever.getFrameAtTime(0L);
-                        j = 0;
-                    } else {
-                        String extractMetadata = mediaMetadataRetriever.extractMetadata(32);
-                        String extractMetadata2 = mediaMetadataRetriever.extractMetadata(9);
-                        if (!TextUtils.isEmpty(extractMetadata) && !TextUtils.isEmpty(extractMetadata2)) {
-                            int parseInt = Integer.parseInt(extractMetadata);
-                            int parseInt2 = Integer.parseInt(extractMetadata2);
-                            int defaultVideoFrameInfo = sWallpaperResourcesInfo.getDefaultVideoFrameInfo(str2);
-                            if (parseInt > 0 && defaultVideoFrameInfo > 0 && parseInt >= defaultVideoFrameInfo) {
-                                j = (int) (parseInt2 * 1000 * (defaultVideoFrameInfo / parseInt));
-                                MediaMetadataRetriever.BitmapParams bitmapParams = new MediaMetadataRetriever.BitmapParams();
-                                bitmapParams.setPreferredConfig(Bitmap.Config.ARGB_8888);
-                                bitmap = mediaMetadataRetriever.getFrameAtTime(j, 2, bitmapParams);
-                            }
-                        }
-                        j = 0;
-                        MediaMetadataRetriever.BitmapParams bitmapParams2 = new MediaMetadataRetriever.BitmapParams();
-                        bitmapParams2.setPreferredConfig(Bitmap.Config.ARGB_8888);
-                        bitmap = mediaMetadataRetriever.getFrameAtTime(j, 2, bitmapParams2);
-                    }
-                    Log.d(TAG, "getVideoWallpaperFrame " + j);
-                    mediaMetadataRetriever.release();
-                } catch (NumberFormatException e2) {
+                } catch (Exception e2) {
                     e2.printStackTrace();
-                    bitmap = mediaMetadataRetriever.getFrameAtTime(0L);
-                    mediaMetadataRetriever.release();
-                } catch (Exception e3) {
-                    e3.printStackTrace();
-                    mediaMetadataRetriever.release();
                 }
+            } catch (NumberFormatException e3) {
+                e3.printStackTrace();
+                frameAtTime = mediaMetadataRetriever.getFrameAtTime(0L);
+                mediaMetadataRetriever.release();
             } catch (Exception e4) {
                 e4.printStackTrace();
+                mediaMetadataRetriever.release();
             }
+            if (!TextUtils.isEmpty(str2)) {
+                String strExtractMetadata = mediaMetadataRetriever.extractMetadata(32);
+                String strExtractMetadata2 = mediaMetadataRetriever.extractMetadata(9);
+                if (TextUtils.isEmpty(strExtractMetadata) || TextUtils.isEmpty(strExtractMetadata2)) {
+                    j = 0;
+                    MediaMetadataRetriever.BitmapParams bitmapParams = new MediaMetadataRetriever.BitmapParams();
+                    bitmapParams.setPreferredConfig(Bitmap.Config.ARGB_8888);
+                    frameAtTime = mediaMetadataRetriever.getFrameAtTime(j, 2, bitmapParams);
+                } else {
+                    int i = Integer.parseInt(strExtractMetadata);
+                    int i2 = Integer.parseInt(strExtractMetadata2);
+                    int defaultVideoFrameInfo = sWallpaperResourcesInfo.getDefaultVideoFrameInfo(str2);
+                    if (i > 0 && defaultVideoFrameInfo > 0 && i >= defaultVideoFrameInfo) {
+                        j = (int) (i2 * 1000 * (defaultVideoFrameInfo / i));
+                    }
+                    MediaMetadataRetriever.BitmapParams bitmapParams2 = new MediaMetadataRetriever.BitmapParams();
+                    bitmapParams2.setPreferredConfig(Bitmap.Config.ARGB_8888);
+                    frameAtTime = mediaMetadataRetriever.getFrameAtTime(j, 2, bitmapParams2);
+                }
+                Log.d(TAG, "getVideoWallpaperFrame, done");
+                return frameAtTime;
+            }
+            frameAtTime = mediaMetadataRetriever.getFrameAtTime(0L);
+            j = 0;
+            Log.d(TAG, "getVideoWallpaperFrame " + j);
+            mediaMetadataRetriever.release();
             Log.d(TAG, "getVideoWallpaperFrame, done");
-            return bitmap;
+            return frameAtTime;
         } catch (Throwable th) {
             try {
                 mediaMetadataRetriever.release();
@@ -3751,11 +3790,11 @@ public class WallpaperManager implements SemWallpaperManager {
     }
 
     private void checkPermission(String[] strArr) {
-        int myUid = Process.myUid();
-        int myPid = Process.myPid();
+        int iMyUid = Process.myUid();
+        int iMyPid = Process.myPid();
         boolean z = false;
         for (String str : strArr) {
-            if (this.mContext.checkPermission(str, myPid, myUid) == 0) {
+            if (this.mContext.checkPermission(str, iMyPid, iMyUid) == 0) {
                 z = true;
             }
         }
@@ -3763,107 +3802,87 @@ public class WallpaperManager implements SemWallpaperManager {
         if (z) {
             return;
         }
-        ((StorageManager) this.mContext.getSystemService(StorageManager.class)).checkPermissionReadImages(true, myPid, myUid, opPackageName, null);
+        ((StorageManager) this.mContext.getSystemService(StorageManager.class)).checkPermissionReadImages(true, iMyPid, iMyUid, opPackageName, null);
     }
 
     private boolean canPeekWallpaper(int i) {
-        boolean isSystemAndLockPaired = isSystemAndLockPaired(i);
-        if (!WhichChecker.isLock(i) || !isSystemAndLockPaired) {
+        boolean zIsSystemAndLockPaired = isSystemAndLockPaired(i);
+        if (!WhichChecker.isLock(i) || !zIsSystemAndLockPaired) {
             return true;
         }
         Log.w(TAG, "canPeekWallpaper failed, which = " + i);
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:24:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0042  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0042  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x007f  */
+    /* JADX WARN: Removed duplicated region for block: B:29:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.graphics.Bitmap getThemeWallpaperBackground(java.lang.String r5) {
-        /*
-            r4 = this;
-            r0 = 0
-            android.content.APKContents r1 = new android.content.APKContents     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            java.lang.String r2 = android.content.APKContents.getMainThemePackagePath(r5)     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            r1.<init>(r2)     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            android.content.res.AssetManager r1 = r1.getAssets()     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            if (r1 != 0) goto L1e
-            android.content.Context r1 = r4.mContext     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            android.content.pm.PackageManager r1 = r1.getPackageManager()     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            android.content.res.Resources r1 = r1.getResourcesForApplication(r5)     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            android.content.res.AssetManager r1 = r1.getAssets()     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-        L1e:
-            if (r1 == 0) goto L28
-            java.lang.String r2 = "preview/thumbnail_wallpaper.jpg"
-            java.io.InputStream r1 = r1.open(r2)     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            goto L40
-        L28:
-            java.lang.String r1 = android.app.WallpaperManager.TAG     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            java.lang.String r2 = "getAnimatedWallpaperBackground() : Wallpaper pkg, AssetManager is null"
-            android.util.Log.e(r1, r2)     // Catch: java.lang.Exception -> L30 java.io.IOException -> L38
-            return r0
-        L30:
-            java.lang.String r1 = android.app.WallpaperManager.TAG
-            java.lang.String r2 = "getThemeWallpaperBackground Exception"
-            android.util.Log.e(r1, r2)
-            goto L3f
-        L38:
-            java.lang.String r1 = android.app.WallpaperManager.TAG
-            java.lang.String r2 = "getThemeWallpaperBackground IOException"
-            android.util.Log.e(r1, r2)
-        L3f:
-            r1 = r0
-        L40:
-            if (r1 != 0) goto L7d
-            java.lang.String r2 = ".wallpaper"
-            java.lang.String r3 = ""
-            java.lang.String r5 = r5.replace(r2, r3)
-            android.content.APKContents r2 = new android.content.APKContents     // Catch: java.lang.Exception -> L79
-            java.lang.String r3 = android.content.APKContents.getMainThemePackagePath(r5)     // Catch: java.lang.Exception -> L79
-            r2.<init>(r3)     // Catch: java.lang.Exception -> L79
-            android.content.res.AssetManager r2 = r2.getAssets()     // Catch: java.lang.Exception -> L79
-            if (r2 != 0) goto L67
-            android.content.Context r4 = r4.mContext     // Catch: java.lang.Exception -> L79
-            android.content.pm.PackageManager r4 = r4.getPackageManager()     // Catch: java.lang.Exception -> L79
-            android.content.res.Resources r4 = r4.getResourcesForApplication(r5)     // Catch: java.lang.Exception -> L79
-            android.content.res.AssetManager r2 = r4.getAssets()     // Catch: java.lang.Exception -> L79
-        L67:
-            if (r2 == 0) goto L71
-            java.lang.String r4 = "preview/theme_lockscreen.jpg"
-            java.io.InputStream r1 = r2.open(r4)     // Catch: java.lang.Exception -> L79
-            goto L7d
-        L71:
-            java.lang.String r4 = android.app.WallpaperManager.TAG     // Catch: java.lang.Exception -> L79
-            java.lang.String r5 = "getAnimatedWallpaperBackground() : Theme pkg, AssetManager is null"
-            android.util.Log.e(r4, r5)     // Catch: java.lang.Exception -> L79
-            return r0
-        L79:
-            r4 = move-exception
-            r4.printStackTrace()
-        L7d:
-            if (r1 == 0) goto L83
-            android.graphics.Bitmap r0 = android.graphics.BitmapFactory.decodeStream(r1)
-        L83:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.WallpaperManager.getThemeWallpaperBackground(java.lang.String):android.graphics.Bitmap");
+    private Bitmap getThemeWallpaperBackground(String str) {
+        InputStream inputStreamOpen;
+        AssetManager assets;
+        try {
+            assets = new APKContents(APKContents.getMainThemePackagePath(str)).getAssets();
+            if (assets == null) {
+                assets = this.mContext.getPackageManager().getResourcesForApplication(str).getAssets();
+            }
+        } catch (IOException unused) {
+            Log.e(TAG, "getThemeWallpaperBackground IOException");
+            inputStreamOpen = null;
+            if (inputStreamOpen == null) {
+            }
+            if (inputStreamOpen != null) {
+            }
+        } catch (Exception unused2) {
+            Log.e(TAG, "getThemeWallpaperBackground Exception");
+            inputStreamOpen = null;
+            if (inputStreamOpen == null) {
+            }
+            if (inputStreamOpen != null) {
+            }
+        }
+        if (assets != null) {
+            inputStreamOpen = assets.open("preview/thumbnail_wallpaper.jpg");
+            if (inputStreamOpen == null) {
+                String strReplace = str.replace(".wallpaper", "");
+                try {
+                    AssetManager assets2 = new APKContents(APKContents.getMainThemePackagePath(strReplace)).getAssets();
+                    if (assets2 == null) {
+                        assets2 = this.mContext.getPackageManager().getResourcesForApplication(strReplace).getAssets();
+                    }
+                    if (assets2 != null) {
+                        inputStreamOpen = assets2.open("preview/theme_lockscreen.jpg");
+                    } else {
+                        Log.e(TAG, "getAnimatedWallpaperBackground() : Theme pkg, AssetManager is null");
+                        return null;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inputStreamOpen != null) {
+                return BitmapFactory.decodeStream(inputStreamOpen);
+            }
+            return null;
+        }
+        Log.e(TAG, "getAnimatedWallpaperBackground() : Wallpaper pkg, AssetManager is null");
+        return null;
     }
 
     private AssetFileDescriptor getVideoFDFromPackage(String str, String str2) {
-        Context context;
+        Context contextCreatePackageContext;
         Resources resources;
         AssetManager assets;
         Log.d(TAG, "getVideoFDFromPackage() pkgName = " + str + " , fileName = " + str2);
         try {
-            context = this.mContext.createPackageContext(str, 0);
+            contextCreatePackageContext = this.mContext.createPackageContext(str, 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            context = null;
+            contextCreatePackageContext = null;
         }
-        if (context == null) {
+        if (contextCreatePackageContext == null) {
             Log.e(TAG, "getVideoFDFromPackage() otherContext is null");
             APKContents aPKContents = new APKContents(APKContents.getMainThemePackagePath(str));
             resources = aPKContents.getResources();
@@ -3872,8 +3891,8 @@ public class WallpaperManager implements SemWallpaperManager {
                 return null;
             }
         } else {
-            resources = context.getResources();
-            assets = context.getAssets();
+            resources = contextCreatePackageContext.getResources();
+            assets = contextCreatePackageContext.getAssets();
         }
         if (WALLPAPER_PACKAGE.equals(str)) {
             if (TextUtils.isEmpty(str2)) {
@@ -4285,11 +4304,11 @@ public class WallpaperManager implements SemWallpaperManager {
     }
 
     private boolean isApplied(int i, String str) {
-        Uri semGetUri = semGetUri(i);
-        if (semGetUri != null) {
-            String uri = semGetUri.toString();
-            Log.i(TAG, "isApplied: uri = " + uri);
-            if (!TextUtils.isEmpty(uri) && uri.contains(str)) {
+        Uri uriSemGetUri = semGetUri(i);
+        if (uriSemGetUri != null) {
+            String string = uriSemGetUri.toString();
+            Log.i(TAG, "isApplied: uri = " + string);
+            if (!TextUtils.isEmpty(string) && string.contains(str)) {
                 return true;
             }
         }
@@ -4351,9 +4370,9 @@ public class WallpaperManager implements SemWallpaperManager {
         }
         ArrayList arrayList = new ArrayList();
         if (z) {
-            int[] converAccent1ToSeedColors = ColorPaletteCreator.converAccent1ToSeedColors(iArr);
-            if (converAccent1ToSeedColors != null && converAccent1ToSeedColors.length > 0) {
-                for (int i : converAccent1ToSeedColors) {
+            int[] iArrConverAccent1ToSeedColors = ColorPaletteCreator.converAccent1ToSeedColors(iArr);
+            if (iArrConverAccent1ToSeedColors != null && iArrConverAccent1ToSeedColors.length > 0) {
+                for (int i : iArrConverAccent1ToSeedColors) {
                     arrayList.add(new ColorPalette(new ColorScheme(i, false)).getTable());
                 }
             }
@@ -4393,8 +4412,8 @@ public class WallpaperManager implements SemWallpaperManager {
     @Override // android.app.SemWallpaperManager
     public int[] getSeedColors(int i, boolean z) {
         Log.d(TAG, "getSeedColors: which = " + i + ", fromGoogle = " + z);
-        SemWallpaperColors semGetWallpaperColors = semGetWallpaperColors(i);
-        int[] seedColors = semGetWallpaperColors != null ? semGetWallpaperColors.getSeedColors() : null;
+        SemWallpaperColors semWallpaperColorsSemGetWallpaperColors = semGetWallpaperColors(i);
+        int[] seedColors = semWallpaperColorsSemGetWallpaperColors != null ? semWallpaperColorsSemGetWallpaperColors.getSeedColors() : null;
         return z ? ColorPaletteCreator.converAccent1ToSeedColors(seedColors) : seedColors;
     }
 
@@ -4432,24 +4451,24 @@ public class WallpaperManager implements SemWallpaperManager {
 
     @Override // android.app.SemWallpaperManager
     public boolean canBackup(int i) {
-        Uri semGetUri;
-        int semGetWallpaperType = semGetWallpaperType(i);
+        Uri uriSemGetUri;
+        int iSemGetWallpaperType = semGetWallpaperType(i);
         boolean z = true;
         int intForUser = Settings.System.getIntForUser(this.mContext.getContentResolver(), getSettingsName(i), 1, -2);
         boolean z2 = false;
         boolean z3 = ((intForUser == 0) || (intForUser == 3)) && isWallpaperBackupAllowed(i);
-        if (semGetWallpaperType == 3 && !z3 && (semGetUri = semGetUri(i)) != null) {
-            String uri = semGetUri.toString();
-            if (!TextUtils.isEmpty(uri) && uri.startsWith(BnRConstants.CUSTOM_PACK_PREFIX)) {
+        if (iSemGetWallpaperType == 3 && !z3 && (uriSemGetUri = semGetUri(i)) != null) {
+            String string = uriSemGetUri.toString();
+            if (!TextUtils.isEmpty(string) && string.startsWith(BnRConstants.CUSTOM_PACK_PREFIX)) {
                 z3 = true;
             }
         }
-        if (z3 && semGetWallpaperType == 7 && !isStockLiveWallpaper(i)) {
+        if (z3 && iSemGetWallpaperType == 7 && !isStockLiveWallpaper(i)) {
             Log.d(TAG, "canBackup: which = " + i + ", external live wallpaper");
         } else {
             z2 = z3;
         }
-        if (Build.VERSION.SEM_PLATFORM_INT < 160000 || z2 || semGetWallpaperType != 1000) {
+        if (Build.VERSION.SEM_PLATFORM_INT < 160000 || z2 || iSemGetWallpaperType != 1000) {
             z = z2;
         } else {
             Log.d(TAG, "canBackup: which = " + i + ", Dynamic Lockscreen");

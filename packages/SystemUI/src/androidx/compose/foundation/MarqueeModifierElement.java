@@ -10,7 +10,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MarqueeModifierElement extends ModifierNodeElement<MarqueeModifierNode> {
     public final int animationMode;
@@ -41,32 +40,32 @@ public final class MarqueeModifierElement extends ModifierNodeElement<MarqueeMod
             return false;
         }
         MarqueeAnimationMode.Companion companion = MarqueeAnimationMode.Companion;
-        return this.animationMode == marqueeModifierElement.animationMode && this.delayMillis == marqueeModifierElement.delayMillis && this.initialDelayMillis == marqueeModifierElement.initialDelayMillis && Intrinsics.areEqual(this.spacing, marqueeModifierElement.spacing) && Dp.m836equalsimpl0(this.velocity, marqueeModifierElement.velocity);
+        return this.animationMode == marqueeModifierElement.animationMode && this.delayMillis == marqueeModifierElement.delayMillis && this.initialDelayMillis == marqueeModifierElement.initialDelayMillis && Intrinsics.areEqual(this.spacing, marqueeModifierElement.spacing) && Dp.m838equalsimpl0(this.velocity, marqueeModifierElement.velocity);
     }
 
     public final int hashCode() {
-        int hashCode = Integer.hashCode(this.iterations) * 31;
+        int iHashCode = Integer.hashCode(this.iterations) * 31;
         MarqueeAnimationMode.Companion companion = MarqueeAnimationMode.Companion;
-        int hashCode2 = (this.spacing.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.initialDelayMillis, ReorderTile$$ExternalSyntheticOutline0.m(this.delayMillis, ReorderTile$$ExternalSyntheticOutline0.m(this.animationMode, hashCode, 31), 31), 31)) * 31;
+        int iHashCode2 = (this.spacing.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.initialDelayMillis, ReorderTile$$ExternalSyntheticOutline0.m(this.delayMillis, ReorderTile$$ExternalSyntheticOutline0.m(this.animationMode, iHashCode, 31), 31), 31)) * 31;
         Dp.Companion companion2 = Dp.Companion;
-        return Float.hashCode(this.velocity) + hashCode2;
+        return Float.hashCode(this.velocity) + iHashCode2;
     }
 
     public final String toString() {
-        return "MarqueeModifierElement(iterations=" + this.iterations + ", animationMode=" + ((Object) MarqueeAnimationMode.m44toStringimpl(this.animationMode)) + ", delayMillis=" + this.delayMillis + ", initialDelayMillis=" + this.initialDelayMillis + ", spacing=" + this.spacing + ", velocity=" + ((Object) Dp.m837toStringimpl(this.velocity)) + ')';
+        return "MarqueeModifierElement(iterations=" + this.iterations + ", animationMode=" + ((Object) MarqueeAnimationMode.m45toStringimpl(this.animationMode)) + ", delayMillis=" + this.delayMillis + ", initialDelayMillis=" + this.initialDelayMillis + ", spacing=" + this.spacing + ", velocity=" + ((Object) Dp.m839toStringimpl(this.velocity)) + ')';
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement
     public final void update(Modifier.Node node) {
         MarqueeModifierNode marqueeModifierNode = (MarqueeModifierNode) node;
         ((SnapshotMutableStateImpl) marqueeModifierNode.spacing$delegate).setValue(this.spacing);
-        ((SnapshotMutableStateImpl) marqueeModifierNode.animationMode$delegate).setValue(MarqueeAnimationMode.m43boximpl(this.animationMode));
+        ((SnapshotMutableStateImpl) marqueeModifierNode.animationMode$delegate).setValue(MarqueeAnimationMode.m44boximpl(this.animationMode));
         int i = marqueeModifierNode.iterations;
         int i2 = this.iterations;
         int i3 = this.delayMillis;
         int i4 = this.initialDelayMillis;
         float f = this.velocity;
-        if (i == i2 && marqueeModifierNode.delayMillis == i3 && marqueeModifierNode.initialDelayMillis == i4 && Dp.m836equalsimpl0(marqueeModifierNode.velocity, f)) {
+        if (i == i2 && marqueeModifierNode.delayMillis == i3 && marqueeModifierNode.initialDelayMillis == i4 && Dp.m838equalsimpl0(marqueeModifierNode.velocity, f)) {
             return;
         }
         marqueeModifierNode.iterations = i2;

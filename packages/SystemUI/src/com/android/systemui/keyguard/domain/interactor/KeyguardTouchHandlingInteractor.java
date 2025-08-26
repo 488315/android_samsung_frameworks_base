@@ -26,6 +26,7 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
@@ -38,7 +39,6 @@ import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardTouchHandlingInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -58,7 +58,6 @@ public final class KeyguardTouchHandlingInteractor {
     public final ReadonlyStateFlow shouldOpenSettings;
     public final SystemClock systemClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardTouchHandlingInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -91,7 +90,6 @@ public final class KeyguardTouchHandlingInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,7 +104,6 @@ public final class KeyguardTouchHandlingInteractor {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LogEvents implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ LogEvents[] $VALUES;
         public static final LogEvents LOCK_SCREEN_LONG_PRESS_POPUP_CLICKED;
@@ -139,6 +136,48 @@ public final class KeyguardTouchHandlingInteractor {
         }
     }
 
+    /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardTouchHandlingInteractor$scheduleAutomaticMenuHiding$1, reason: invalid class name and case insensitive filesystem */
+    final class C09131 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C09131(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return KeyguardTouchHandlingInteractor.this.new C09131(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09131) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                long recommendedTimeoutMillis = KeyguardTouchHandlingInteractor.this.accessibilityManager.mAccessibilityManager.getRecommendedTimeoutMillis(5000, 7);
+                this.label = 1;
+                if (DelayKt.delay(recommendedTimeoutMillis, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            KeyguardTouchHandlingInteractor keyguardTouchHandlingInteractor = KeyguardTouchHandlingInteractor.this;
+            int i2 = KeyguardTouchHandlingInteractor.$r8$clinit;
+            keyguardTouchHandlingInteractor.hideMenu();
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
@@ -154,16 +193,16 @@ public final class KeyguardTouchHandlingInteractor {
         this.systemClock = systemClock;
         Flow flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = context.getResources().getBoolean(R.bool.long_press_keyguard_customize_lockscreen_enabled) ? new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardTransitionInteractor.isFinishedIn$1(KeyguardState.LOCKSCREEN), ((KeyguardRepositoryImpl) keyguardRepository).isQuickSettingsVisible, new KeyguardTouchHandlingInteractor$isLongPressHandlingEnabled$1(null)) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, WhileSubscribed$default, bool);
-        this.isLongPressHandlingEnabled = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
+        this.isLongPressHandlingEnabled = readonlyStateFlowStateIn;
         this.isDoubleTapHandlingEnabled = FlowKt.stateIn(new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this._isMenuVisible = StateFlowKt.MutableStateFlow(bool);
-        this.isMenuVisible = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new KeyguardTouchHandlingInteractor$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._shouldOpenSettings = MutableStateFlow;
-        this.shouldOpenSettings = FlowKt.asStateFlow(MutableStateFlow);
+        this.isMenuVisible = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new KeyguardTouchHandlingInteractor$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._shouldOpenSettings = stateFlowImplMutableStateFlow;
+        this.shouldOpenSettings = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         if (context.getResources().getBoolean(R.bool.long_press_keyguard_customize_lockscreen_enabled)) {
             FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter(PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS), null, 14), new AnonymousClass1(null)), coroutineScope);
         }
@@ -184,6 +223,6 @@ public final class KeyguardTouchHandlingInteractor {
             standaloneCoroutine.cancel(null);
         }
         this.delayedHideMenuJob = null;
-        this.delayedHideMenuJob = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new KeyguardTouchHandlingInteractor$scheduleAutomaticMenuHiding$1(this, null), 7);
+        this.delayedHideMenuJob = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new C09131(null), 7);
     }
 }

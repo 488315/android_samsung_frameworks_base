@@ -3,7 +3,6 @@ package com.sec.ims;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsRegistrationError implements Parcelable {
     public static final Parcelable.Creator<ImsRegistrationError> CREATOR = new Parcelable.Creator<ImsRegistrationError>() { // from class: com.sec.ims.ImsRegistrationError.1

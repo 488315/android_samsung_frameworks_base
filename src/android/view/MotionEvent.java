@@ -486,12 +486,12 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public static MotionEvent obtain(long j, long j2, int i, int i2, PointerProperties[] pointerPropertiesArr, PointerCoords[] pointerCoordsArr, int i3, int i4, float f, float f2, int i5, int i6, int i7, int i8, int i9, int i10) {
-        MotionEvent obtain = obtain();
-        if (obtain.initialize(i5, i7, i8, i, i9, i6, i3, i4, i10, 0.0f, 0.0f, f, f2, j * 1000000, j2 * 1000000, i2, pointerPropertiesArr, pointerCoordsArr)) {
-            return obtain;
+        MotionEvent motionEventObtain = obtain();
+        if (motionEventObtain.initialize(i5, i7, i8, i, i9, i6, i3, i4, i10, 0.0f, 0.0f, f, f2, j * 1000000, j2 * 1000000, i2, pointerPropertiesArr, pointerCoordsArr)) {
+            return motionEventObtain;
         }
         Log.e(TAG, "Could not initialize MotionEvent");
-        obtain.recycle();
+        motionEventObtain.recycle();
         return null;
     }
 
@@ -509,7 +509,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
 
     @Deprecated
     public static MotionEvent obtain(long j, long j2, int i, int i2, int[] iArr, PointerCoords[] pointerCoordsArr, int i3, float f, float f2, int i4, int i5, int i6, int i7) {
-        MotionEvent obtain;
+        MotionEvent motionEventObtain;
         synchronized (gSharedTempLock) {
             ensureSharedTempPointerCapacity(i2);
             PointerProperties[] pointerPropertiesArr = gSharedTempPointerProperties;
@@ -517,9 +517,9 @@ public final class MotionEvent extends InputEvent implements Parcelable {
                 pointerPropertiesArr[i8].clear();
                 pointerPropertiesArr[i8].id = iArr[i8];
             }
-            obtain = obtain(j, j2, i, i2, pointerPropertiesArr, pointerCoordsArr, i3, 0, f, f2, i4, i5, i6, i7);
+            motionEventObtain = obtain(j, j2, i, i2, pointerPropertiesArr, pointerCoordsArr, i3, 0, f, f2, i4, i5, i6, i7);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     public static MotionEvent obtain(long j, long j2, int i, float f, float f2, float f3, float f4, int i2, float f5, float f6, int i3, int i4) {
@@ -527,7 +527,7 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public static MotionEvent obtain(long j, long j2, int i, float f, float f2, float f3, float f4, int i2, float f5, float f6, int i3, int i4, int i5, int i6) {
-        MotionEvent obtain = obtain();
+        MotionEvent motionEventObtain = obtain();
         synchronized (gSharedTempLock) {
             ensureSharedTempPointerCapacity(1);
             PointerProperties[] pointerPropertiesArr = gSharedTempPointerProperties;
@@ -539,9 +539,9 @@ public final class MotionEvent extends InputEvent implements Parcelable {
             pointerCoordsArr[0].y = f2;
             pointerCoordsArr[0].pressure = f3;
             pointerCoordsArr[0].size = f4;
-            obtain.initialize(i3, i5, i6, i, 0, i4, i2, 0, 0, 0.0f, 0.0f, f5, f6, j * 1000000, j2 * 1000000, 1, pointerPropertiesArr, pointerCoordsArr);
+            motionEventObtain.initialize(i3, i5, i6, i, 0, i4, i2, 0, 0, 0.0f, 0.0f, f5, f6, j * 1000000, j2 * 1000000, 1, pointerPropertiesArr, pointerCoordsArr);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     @Deprecated
@@ -557,30 +557,30 @@ public final class MotionEvent extends InputEvent implements Parcelable {
         if (motionEvent == null) {
             throw new IllegalArgumentException("other motion event must not be null");
         }
-        MotionEvent obtain = obtain();
-        obtain.mNativePtr = nativeCopy(obtain.mNativePtr, motionEvent.mNativePtr, true);
+        MotionEvent motionEventObtain = obtain();
+        motionEventObtain.mNativePtr = nativeCopy(motionEventObtain.mNativePtr, motionEvent.mNativePtr, true);
         if (motionEvent.shouldApplyCompatSandbox()) {
-            obtain.setCompatSandboxScale(motionEvent.mCompatSandboxXOffset, motionEvent.mCompatSandboxYOffset, motionEvent.mCompatSandboxScale);
+            motionEventObtain.setCompatSandboxScale(motionEvent.mCompatSandboxXOffset, motionEvent.mCompatSandboxYOffset, motionEvent.mCompatSandboxScale);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     public static MotionEvent obtainNoHistory(MotionEvent motionEvent) {
         if (motionEvent == null) {
             throw new IllegalArgumentException("other motion event must not be null");
         }
-        MotionEvent obtain = obtain();
-        obtain.mNativePtr = nativeCopy(obtain.mNativePtr, motionEvent.mNativePtr, false);
+        MotionEvent motionEventObtain = obtain();
+        motionEventObtain.mNativePtr = nativeCopy(motionEventObtain.mNativePtr, motionEvent.mNativePtr, false);
         if (motionEvent.shouldApplyCompatSandbox()) {
-            obtain.setCompatSandboxScale(motionEvent.mCompatSandboxXOffset, motionEvent.mCompatSandboxYOffset, motionEvent.mCompatSandboxScale);
+            motionEventObtain.setCompatSandboxScale(motionEvent.mCompatSandboxXOffset, motionEvent.mCompatSandboxYOffset, motionEvent.mCompatSandboxScale);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     private boolean initialize(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, float f, float f2, float f3, float f4, long j, long j2, int i10, PointerProperties[] pointerPropertiesArr, PointerCoords[] pointerCoordsArr) {
-        long nativeInitialize = nativeInitialize(this.mNativePtr, i, i2, i3, i4, i4 == 3 ? i5 | 32 : i5, i6, i7, i8, i9, f, f2, f3, f4, j, j2, i10, pointerPropertiesArr, pointerCoordsArr);
-        this.mNativePtr = nativeInitialize;
-        if (nativeInitialize == 0) {
+        long jNativeInitialize = nativeInitialize(this.mNativePtr, i, i2, i3, i4, i4 == 3 ? i5 | 32 : i5, i6, i7, i8, i9, f, f2, f3, f4, j, j2, i10, pointerPropertiesArr, pointerCoordsArr);
+        this.mNativePtr = jNativeInitialize;
+        if (jNativeInitialize == 0) {
             return false;
         }
         updateCursorPosition();
@@ -1126,31 +1126,31 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public final boolean addBatch(MotionEvent motionEvent) {
-        int nativeGetPointerCount;
-        int nativeGetAction = nativeGetAction(this.mNativePtr);
-        if ((nativeGetAction != 2 && nativeGetAction != 7) || nativeGetAction != nativeGetAction(motionEvent.mNativePtr) || nativeGetDeviceId(this.mNativePtr) != nativeGetDeviceId(motionEvent.mNativePtr) || nativeGetSource(this.mNativePtr) != nativeGetSource(motionEvent.mNativePtr) || nativeGetDisplayId(this.mNativePtr) != nativeGetDisplayId(motionEvent.mNativePtr) || nativeGetFlags(this.mNativePtr) != nativeGetFlags(motionEvent.mNativePtr) || nativeGetClassification(this.mNativePtr) != nativeGetClassification(motionEvent.mNativePtr) || (nativeGetPointerCount = nativeGetPointerCount(this.mNativePtr)) != nativeGetPointerCount(motionEvent.mNativePtr)) {
+        int iNativeGetPointerCount;
+        int iNativeGetAction = nativeGetAction(this.mNativePtr);
+        if ((iNativeGetAction != 2 && iNativeGetAction != 7) || iNativeGetAction != nativeGetAction(motionEvent.mNativePtr) || nativeGetDeviceId(this.mNativePtr) != nativeGetDeviceId(motionEvent.mNativePtr) || nativeGetSource(this.mNativePtr) != nativeGetSource(motionEvent.mNativePtr) || nativeGetDisplayId(this.mNativePtr) != nativeGetDisplayId(motionEvent.mNativePtr) || nativeGetFlags(this.mNativePtr) != nativeGetFlags(motionEvent.mNativePtr) || nativeGetClassification(this.mNativePtr) != nativeGetClassification(motionEvent.mNativePtr) || (iNativeGetPointerCount = nativeGetPointerCount(this.mNativePtr)) != nativeGetPointerCount(motionEvent.mNativePtr)) {
             return false;
         }
         synchronized (gSharedTempLock) {
-            ensureSharedTempPointerCapacity(Math.max(nativeGetPointerCount, 2));
+            ensureSharedTempPointerCapacity(Math.max(iNativeGetPointerCount, 2));
             PointerProperties[] pointerPropertiesArr = gSharedTempPointerProperties;
             PointerCoords[] pointerCoordsArr = gSharedTempPointerCoords;
-            for (int i = 0; i < nativeGetPointerCount; i++) {
+            for (int i = 0; i < iNativeGetPointerCount; i++) {
                 nativeGetPointerProperties(this.mNativePtr, i, pointerPropertiesArr[0]);
                 nativeGetPointerProperties(motionEvent.mNativePtr, i, pointerPropertiesArr[1]);
                 if (!pointerPropertiesArr[0].equals(pointerPropertiesArr[1])) {
                     return false;
                 }
             }
-            int nativeGetMetaState = nativeGetMetaState(motionEvent.mNativePtr);
-            int nativeGetHistorySize = nativeGetHistorySize(motionEvent.mNativePtr);
+            int iNativeGetMetaState = nativeGetMetaState(motionEvent.mNativePtr);
+            int iNativeGetHistorySize = nativeGetHistorySize(motionEvent.mNativePtr);
             int i2 = 0;
-            while (i2 <= nativeGetHistorySize) {
-                int i3 = i2 == nativeGetHistorySize ? Integer.MIN_VALUE : i2;
-                for (int i4 = 0; i4 < nativeGetPointerCount; i4++) {
+            while (i2 <= iNativeGetHistorySize) {
+                int i3 = i2 == iNativeGetHistorySize ? Integer.MIN_VALUE : i2;
+                for (int i4 = 0; i4 < iNativeGetPointerCount; i4++) {
                     nativeGetPointerCoords(motionEvent.mNativePtr, i4, i3, pointerCoordsArr[i4]);
                 }
-                nativeAddBatch(this.mNativePtr, nativeGetEventTimeNanos(motionEvent.mNativePtr, i3), pointerCoordsArr, nativeGetMetaState);
+                nativeAddBatch(this.mNativePtr, nativeGetEventTimeNanos(motionEvent.mNativePtr, i3), pointerCoordsArr, iNativeGetMetaState);
                 i2++;
             }
             return true;
@@ -1158,11 +1158,11 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public final boolean isWithinBoundsNoHistory(float f, float f2, float f3, float f4) {
-        int nativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
-        for (int i = 0; i < nativeGetPointerCount; i++) {
-            float nativeGetAxisValue = nativeGetAxisValue(this.mNativePtr, 0, i, Integer.MIN_VALUE);
-            float nativeGetAxisValue2 = nativeGetAxisValue(this.mNativePtr, 1, i, Integer.MIN_VALUE);
-            if (nativeGetAxisValue < f || nativeGetAxisValue > f3 || nativeGetAxisValue2 < f2 || nativeGetAxisValue2 > f4) {
+        int iNativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
+        for (int i = 0; i < iNativeGetPointerCount; i++) {
+            float fNativeGetAxisValue = nativeGetAxisValue(this.mNativePtr, 0, i, Integer.MIN_VALUE);
+            float fNativeGetAxisValue2 = nativeGetAxisValue(this.mNativePtr, 1, i, Integer.MIN_VALUE);
+            if (fNativeGetAxisValue < f || fNativeGetAxisValue > f3 || fNativeGetAxisValue2 < f2 || fNativeGetAxisValue2 > f4) {
                 return false;
             }
         }
@@ -1170,13 +1170,13 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public final MotionEvent clampNoHistory(float f, float f2, float f3, float f4) {
-        MotionEvent obtain = obtain();
+        MotionEvent motionEventObtain = obtain();
         synchronized (gSharedTempLock) {
-            int nativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
-            ensureSharedTempPointerCapacity(nativeGetPointerCount);
+            int iNativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
+            ensureSharedTempPointerCapacity(iNativeGetPointerCount);
             PointerProperties[] pointerPropertiesArr = gSharedTempPointerProperties;
             PointerCoords[] pointerCoordsArr = gSharedTempPointerCoords;
-            for (int i = 0; i < nativeGetPointerCount; i++) {
+            for (int i = 0; i < iNativeGetPointerCount; i++) {
                 nativeGetPointerProperties(this.mNativePtr, i, pointerPropertiesArr[i]);
                 nativeGetPointerCoords(this.mNativePtr, i, Integer.MIN_VALUE, pointerCoordsArr[i]);
                 PointerCoords pointerCoords = pointerCoordsArr[i];
@@ -1184,18 +1184,18 @@ public final class MotionEvent extends InputEvent implements Parcelable {
                 PointerCoords pointerCoords2 = pointerCoordsArr[i];
                 pointerCoords2.y = clamp(pointerCoords2.y, f2, f4);
             }
-            obtain.initialize(nativeGetDeviceId(this.mNativePtr), nativeGetSource(this.mNativePtr), nativeGetDisplayId(this.mNativePtr), nativeGetAction(this.mNativePtr), nativeGetFlags(this.mNativePtr), nativeGetEdgeFlags(this.mNativePtr), nativeGetMetaState(this.mNativePtr), nativeGetButtonState(this.mNativePtr), nativeGetClassification(this.mNativePtr), nativeGetRawXOffset(this.mNativePtr), nativeGetRawYOffset(this.mNativePtr), nativeGetXPrecision(this.mNativePtr), nativeGetYPrecision(this.mNativePtr), nativeGetDownTimeNanos(this.mNativePtr), nativeGetEventTimeNanos(this.mNativePtr, Integer.MIN_VALUE), nativeGetPointerCount, pointerPropertiesArr, pointerCoordsArr);
+            motionEventObtain.initialize(nativeGetDeviceId(this.mNativePtr), nativeGetSource(this.mNativePtr), nativeGetDisplayId(this.mNativePtr), nativeGetAction(this.mNativePtr), nativeGetFlags(this.mNativePtr), nativeGetEdgeFlags(this.mNativePtr), nativeGetMetaState(this.mNativePtr), nativeGetButtonState(this.mNativePtr), nativeGetClassification(this.mNativePtr), nativeGetRawXOffset(this.mNativePtr), nativeGetRawYOffset(this.mNativePtr), nativeGetXPrecision(this.mNativePtr), nativeGetYPrecision(this.mNativePtr), nativeGetDownTimeNanos(this.mNativePtr), nativeGetEventTimeNanos(this.mNativePtr, Integer.MIN_VALUE), iNativeGetPointerCount, pointerPropertiesArr, pointerCoordsArr);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     public final int getPointerIdBits() {
-        int nativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
-        int i = 0;
-        for (int i2 = 0; i2 < nativeGetPointerCount; i2++) {
-            i |= 1 << nativeGetPointerId(this.mNativePtr, i2);
+        int iNativeGetPointerCount = nativeGetPointerCount(this.mNativePtr);
+        int iNativeGetPointerId = 0;
+        for (int i = 0; i < iNativeGetPointerCount; i++) {
+            iNativeGetPointerId |= 1 << nativeGetPointerId(this.mNativePtr, i);
         }
-        return i;
+        return iNativeGetPointerId;
     }
 
     public final MotionEvent split(int i) {
@@ -1205,12 +1205,12 @@ public final class MotionEvent extends InputEvent implements Parcelable {
         if ((getPointerIdBits() & i) != i) {
             throw new IllegalArgumentException("idBits must be a non-empty subset of the pointer IDs from this MotionEvent, got idBits: " + String.format("0x%x", Integer.valueOf(i)) + " for " + this);
         }
-        MotionEvent obtain = obtain();
-        obtain.mNativePtr = nativeSplit(obtain.mNativePtr, this.mNativePtr, i);
+        MotionEvent motionEventObtain = obtain();
+        motionEventObtain.mNativePtr = nativeSplit(motionEventObtain.mNativePtr, this.mNativePtr, i);
         if (shouldApplyCompatSandbox()) {
-            obtain.setCompatSandboxScale(this.mCompatSandboxXOffset, this.mCompatSandboxYOffset, this.mCompatSandboxScale);
+            motionEventObtain.setCompatSandboxScale(this.mCompatSandboxXOffset, this.mCompatSandboxYOffset, this.mCompatSandboxScale);
         }
-        return obtain;
+        return motionEventObtain;
     }
 
     private void updateCursorPosition() {
@@ -1219,14 +1219,14 @@ public final class MotionEvent extends InputEvent implements Parcelable {
             return;
         }
         int pointerCount = getPointerCount();
-        float f = 0.0f;
-        float f2 = 0.0f;
+        float x = 0.0f;
+        float y = 0.0f;
         for (int i = 0; i < pointerCount; i++) {
-            f += getX(i);
-            f2 += getY(i);
+            x += getX(i);
+            y += getY(i);
         }
-        float f3 = pointerCount;
-        setCursorPosition(f / f3, f2 / f3);
+        float f = pointerCount;
+        setCursorPosition(x / f, y / f);
     }
 
     public String toString() {
@@ -1317,17 +1317,17 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public static String axisToString(int i) {
-        String nativeAxisToString = nativeAxisToString(i);
-        if (nativeAxisToString == null) {
+        String strNativeAxisToString = nativeAxisToString(i);
+        if (strNativeAxisToString == null) {
             return Integer.toString(i);
         }
-        return LABEL_PREFIX + nativeAxisToString;
+        return LABEL_PREFIX + strNativeAxisToString;
     }
 
     public static int axisFromString(String str) {
-        int nativeAxisFromString;
-        if (str.startsWith(LABEL_PREFIX) && (nativeAxisFromString = nativeAxisFromString((str = str.substring(5)))) >= 0) {
-            return nativeAxisFromString;
+        int iNativeAxisFromString;
+        if (str.startsWith(LABEL_PREFIX) && (iNativeAxisFromString = nativeAxisFromString((str = str.substring(5)))) >= 0) {
+            return iNativeAxisFromString;
         }
         try {
             return Integer.parseInt(str, 10);
@@ -1412,9 +1412,9 @@ public final class MotionEvent extends InputEvent implements Parcelable {
     }
 
     public static MotionEvent createFromParcelBody(Parcel parcel) {
-        MotionEvent obtain = obtain();
-        obtain.mNativePtr = nativeReadFromParcel(obtain.mNativePtr, parcel);
-        return obtain;
+        MotionEvent motionEventObtain = obtain();
+        motionEventObtain.mNativePtr = nativeReadFromParcel(motionEventObtain.mNativePtr, parcel);
+        return motionEventObtain;
     }
 
     @Override // android.view.InputEvent
@@ -1508,13 +1508,13 @@ public final class MotionEvent extends InputEvent implements Parcelable {
             this.mPackedAxisBits = j;
             if (j != 0) {
                 float[] fArr = pointerCoords.mPackedAxisValues;
-                int bitCount = Long.bitCount(j);
+                int iBitCount = Long.bitCount(j);
                 float[] fArr2 = this.mPackedAxisValues;
-                if (fArr2 == null || bitCount > fArr2.length) {
+                if (fArr2 == null || iBitCount > fArr2.length) {
                     fArr2 = new float[fArr.length];
                     this.mPackedAxisValues = fArr2;
                 }
-                System.arraycopy(fArr, 0, fArr2, 0, bitCount);
+                System.arraycopy(fArr, 0, fArr2, 0, iBitCount);
             }
             this.x = pointerCoords.x;
             this.y = pointerCoords.y;
@@ -1616,27 +1616,27 @@ public final class MotionEvent extends InputEvent implements Parcelable {
                         }
                         long j = this.mPackedAxisBits;
                         long j2 = (-9223372036854775808) >>> i;
-                        int bitCount = Long.bitCount((~((-1) >>> i)) & j);
+                        int iBitCount = Long.bitCount((~((-1) >>> i)) & j);
                         float[] fArr = this.mPackedAxisValues;
                         if ((j & j2) == 0) {
                             if (fArr == null) {
                                 fArr = new float[8];
                                 this.mPackedAxisValues = fArr;
                             } else {
-                                int bitCount2 = Long.bitCount(j);
-                                if (bitCount2 >= fArr.length) {
-                                    float[] fArr2 = new float[bitCount2 * 2];
-                                    System.arraycopy(fArr, 0, fArr2, 0, bitCount);
-                                    System.arraycopy(fArr, bitCount, fArr2, bitCount + 1, bitCount2 - bitCount);
+                                int iBitCount2 = Long.bitCount(j);
+                                if (iBitCount2 >= fArr.length) {
+                                    float[] fArr2 = new float[iBitCount2 * 2];
+                                    System.arraycopy(fArr, 0, fArr2, 0, iBitCount);
+                                    System.arraycopy(fArr, iBitCount, fArr2, iBitCount + 1, iBitCount2 - iBitCount);
                                     this.mPackedAxisValues = fArr2;
                                     fArr = fArr2;
-                                } else if (bitCount != bitCount2) {
-                                    System.arraycopy(fArr, bitCount, fArr, bitCount + 1, bitCount2 - bitCount);
+                                } else if (iBitCount != iBitCount2) {
+                                    System.arraycopy(fArr, iBitCount, fArr, iBitCount + 1, iBitCount2 - iBitCount);
                                 }
                             }
                             this.mPackedAxisBits = j | j2;
                         }
-                        fArr[bitCount] = f;
+                        fArr[iBitCount] = f;
                         return;
                 }
             }

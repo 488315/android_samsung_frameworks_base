@@ -6,7 +6,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VisualStabilityCoordinatorLogger {
     public static final int $stable = 8;
@@ -29,15 +28,15 @@ public final class VisualStabilityCoordinatorLogger {
 
     public final void logAllowancesChanged(boolean z, boolean z2, boolean z3, boolean z4, String str, boolean z5, boolean z6) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("VisualStability", LogLevel.DEBUG, new VisualStabilityCoordinatorLogger$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("VisualStability", LogLevel.DEBUG, new VisualStabilityCoordinatorLogger$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool2 = z2;
         logMessageImpl.bool3 = z3;
         logMessageImpl.bool4 = z4;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = String.valueOf(z5);
         logMessageImpl.str3 = String.valueOf(z6);
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

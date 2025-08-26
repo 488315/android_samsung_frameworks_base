@@ -1,12 +1,14 @@
 package androidx.compose.foundation.gestures;
 
+import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher;
 import androidx.compose.ui.unit.Velocity;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollingLogic$onScrollStopped$performFling$1 extends SuspendLambda implements Function2 {
     /* synthetic */ long J$0;
@@ -29,104 +31,87 @@ final class ScrollingLogic$onScrollStopped$performFling$1 extends SuspendLambda 
 
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
-        return ((ScrollingLogic$onScrollStopped$performFling$1) create(Velocity.m876boximpl(((Velocity) obj).packedValue), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        return ((ScrollingLogic$onScrollStopped$performFling$1) create(Velocity.m878boximpl(((Velocity) obj).packedValue), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x007b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x007b, code lost:
     
         if (r0 != r6) goto L23;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r14) {
-        /*
-            r13 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r6 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r0 = r13.label
-            r1 = 3
-            r2 = 2
-            r3 = 1
-            if (r0 == 0) goto L33
-            if (r0 == r3) goto L2c
-            if (r0 == r2) goto L23
-            if (r0 != r1) goto L1b
-            long r0 = r13.J$1
-            long r2 = r13.J$0
-            kotlin.ResultKt.throwOnFailure(r14)
-            r7 = r2
-            r3 = r0
-            r0 = r14
-            goto L7e
-        L1b:
-            java.lang.IllegalStateException r0 = new java.lang.IllegalStateException
-            java.lang.String r1 = "call to 'resume' before 'invoke' with coroutine"
-            r0.<init>(r1)
-            throw r0
-        L23:
-            long r2 = r13.J$1
-            long r7 = r13.J$0
-            kotlin.ResultKt.throwOnFailure(r14)
-            r0 = r14
-            goto L62
-        L2c:
-            long r3 = r13.J$0
-            kotlin.ResultKt.throwOnFailure(r14)
-            r0 = r14
-            goto L48
-        L33:
-            kotlin.ResultKt.throwOnFailure(r14)
-            long r7 = r13.J$0
-            androidx.compose.foundation.gestures.ScrollingLogic r0 = r13.this$0
-            androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher r0 = r0.nestedScrollDispatcher
-            r13.J$0 = r7
-            r13.label = r3
-            java.lang.Object r0 = r0.m582dispatchPreFlingQWom1Mo(r7, r13)
-            if (r0 != r6) goto L47
-            goto L7d
-        L47:
-            r3 = r7
-        L48:
-            androidx.compose.ui.unit.Velocity r0 = (androidx.compose.ui.unit.Velocity) r0
-            long r7 = r0.packedValue
-            long r7 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r3, r7)
-            androidx.compose.foundation.gestures.ScrollingLogic r0 = r13.this$0
-            r13.J$0 = r3
-            r13.J$1 = r7
-            r13.label = r2
-            java.lang.Object r0 = r0.m81doFlingAnimationQWom1Mo(r7, r13)
-            if (r0 != r6) goto L5f
-            goto L7d
-        L5f:
-            r11 = r7
-            r7 = r3
-            r2 = r11
-        L62:
-            androidx.compose.ui.unit.Velocity r0 = (androidx.compose.ui.unit.Velocity) r0
-            long r9 = r0.packedValue
-            androidx.compose.foundation.gestures.ScrollingLogic r0 = r13.this$0
-            androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher r0 = r0.nestedScrollDispatcher
-            long r2 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r2, r9)
-            r13.J$0 = r7
-            r13.J$1 = r9
-            r13.label = r1
-            r5 = r13
-            r1 = r2
-            r3 = r9
-            java.lang.Object r0 = r0.m580dispatchPostFlingRZ2iAVY(r1, r3, r5)
-            if (r0 != r6) goto L7e
-        L7d:
-            return r6
-        L7e:
-            androidx.compose.ui.unit.Velocity r0 = (androidx.compose.ui.unit.Velocity) r0
-            long r0 = r0.packedValue
-            long r0 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r3, r0)
-            long r0 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r7, r0)
-            androidx.compose.ui.unit.Velocity r0 = androidx.compose.ui.unit.Velocity.m876boximpl(r0)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.ScrollingLogic$onScrollStopped$performFling$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        Object objM584dispatchPreFlingQWom1Mo;
+        long j;
+        Object objM82doFlingAnimationQWom1Mo;
+        long j2;
+        long j3;
+        long j4;
+        Object objM582dispatchPostFlingRZ2iAVY;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            long j5 = this.J$0;
+            NestedScrollDispatcher nestedScrollDispatcher = this.this$0.nestedScrollDispatcher;
+            this.J$0 = j5;
+            this.label = 1;
+            objM584dispatchPreFlingQWom1Mo = nestedScrollDispatcher.m584dispatchPreFlingQWom1Mo(j5, this);
+            if (objM584dispatchPreFlingQWom1Mo != coroutineSingletons) {
+                j = j5;
+            }
+            return coroutineSingletons;
+        }
+        if (i == 1) {
+            j = this.J$0;
+            ResultKt.throwOnFailure(obj);
+            objM584dispatchPreFlingQWom1Mo = obj;
+        } else {
+            if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                long j6 = this.J$1;
+                long j7 = this.J$0;
+                ResultKt.throwOnFailure(obj);
+                j2 = j7;
+                j4 = j6;
+                objM582dispatchPostFlingRZ2iAVY = obj;
+                return Velocity.m878boximpl(Velocity.m882minusAH228Gc(j2, Velocity.m882minusAH228Gc(j4, ((Velocity) objM582dispatchPostFlingRZ2iAVY).packedValue)));
+            }
+            j3 = this.J$1;
+            j2 = this.J$0;
+            ResultKt.throwOnFailure(obj);
+            objM82doFlingAnimationQWom1Mo = obj;
+            long j8 = ((Velocity) objM82doFlingAnimationQWom1Mo).packedValue;
+            NestedScrollDispatcher nestedScrollDispatcher2 = this.this$0.nestedScrollDispatcher;
+            long jM882minusAH228Gc = Velocity.m882minusAH228Gc(j3, j8);
+            this.J$0 = j2;
+            this.J$1 = j8;
+            this.label = 3;
+            j4 = j8;
+            objM582dispatchPostFlingRZ2iAVY = nestedScrollDispatcher2.m582dispatchPostFlingRZ2iAVY(jM882minusAH228Gc, j4, this);
+        }
+        long jM882minusAH228Gc2 = Velocity.m882minusAH228Gc(j, ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue);
+        ScrollingLogic scrollingLogic = this.this$0;
+        this.J$0 = j;
+        this.J$1 = jM882minusAH228Gc2;
+        this.label = 2;
+        objM82doFlingAnimationQWom1Mo = scrollingLogic.m82doFlingAnimationQWom1Mo(jM882minusAH228Gc2, this);
+        if (objM82doFlingAnimationQWom1Mo != coroutineSingletons) {
+            j2 = j;
+            j3 = jM882minusAH228Gc2;
+            long j82 = ((Velocity) objM82doFlingAnimationQWom1Mo).packedValue;
+            NestedScrollDispatcher nestedScrollDispatcher22 = this.this$0.nestedScrollDispatcher;
+            long jM882minusAH228Gc3 = Velocity.m882minusAH228Gc(j3, j82);
+            this.J$0 = j2;
+            this.J$1 = j82;
+            this.label = 3;
+            j4 = j82;
+            objM582dispatchPostFlingRZ2iAVY = nestedScrollDispatcher22.m582dispatchPostFlingRZ2iAVY(jM882minusAH228Gc3, j4, this);
+        }
+        return coroutineSingletons;
     }
 }

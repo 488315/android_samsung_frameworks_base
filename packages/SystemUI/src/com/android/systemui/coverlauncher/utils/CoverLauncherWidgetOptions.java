@@ -4,7 +4,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverLauncherWidgetOptions {
     public String appIconPkgOption;
@@ -27,9 +26,9 @@ public final class CoverLauncherWidgetOptions {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.visibleOption) * 31;
+        int iHashCode = Boolean.hashCode(this.visibleOption) * 31;
         String str = this.appIconPkgOption;
-        return Integer.hashCode(this.uiModeOption) + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+        return Integer.hashCode(this.uiModeOption) + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31);
     }
 
     public final String toString() {

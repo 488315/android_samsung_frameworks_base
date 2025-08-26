@@ -1,6 +1,9 @@
 package com.sec.ims;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
@@ -18,19 +21,59 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcManager {
+    private static final String INTENT_ACTION_IMSSERVICE_CLASS = "com.sec.internal.ims.imsservice.ImsService";
+    private static final String INTENT_ACTION_IMSSERVICE_PACKAGE = "com.sec.imsservice";
     static final String LOG_TAG = "CmcManager";
     private static final String SERVICE_NAME = "secims";
     private final ArrayMap<ICmcCallEventListener, String> mCmcCallEventListeners;
     private final ArrayMap<ICmcDialogListener, String> mCmcDialogListeners;
     private final ArrayMap<IImsRegistrationListener, String> mCmcRegListeners;
+    private final CmcServiceConnection mCmcServiceConnection;
     private final Context mContext;
     private ConnectionListener mListener;
     private int mPhoneId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    class CmcServiceConnection implements ServiceConnection {
+        private boolean bind;
+        private IImsService service;
+
+        public /* synthetic */ CmcServiceConnection(CmcManager cmcManager, int i) {
+            this();
+        }
+
+        public boolean getBind() {
+            return this.bind;
+        }
+
+        public IImsService getService() {
+            return this.service;
+        }
+
+        @Override // android.content.ServiceConnection
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Log.i(CmcManager.LOG_TAG, "connected : " + componentName);
+            IImsService iImsServiceAsInterface = IImsService.Stub.asInterface(iBinder);
+            this.service = iImsServiceAsInterface;
+            this.bind = iImsServiceAsInterface != null;
+            CmcManager.this.onConnectService(iImsServiceAsInterface);
+        }
+
+        @Override // android.content.ServiceConnection
+        public void onServiceDisconnected(ComponentName componentName) {
+            Log.i(CmcManager.LOG_TAG, "disconnected : " + componentName);
+            this.service = null;
+            this.bind = false;
+            CmcManager.this.onDisconnectService();
+        }
+
+        private CmcServiceConnection() {
+            this.service = null;
+            this.bind = false;
+        }
+    }
+
     public interface ConnectionListener {
         void onConnected();
 
@@ -43,8 +86,20 @@ public class CmcManager {
         this.mCmcRegListeners = new ArrayMap<>();
         this.mCmcCallEventListeners = new ArrayMap<>();
         this.mCmcDialogListeners = new ArrayMap<>();
+        this.mCmcServiceConnection = new CmcServiceConnection(this, 0);
         this.mContext = null;
         this.mListener = null;
+    }
+
+    private void bindImsService() {
+        if (this.mContext == null) {
+            Log.i(LOG_TAG, "bind imsservice failed. context is null");
+            return;
+        }
+        Log.i(LOG_TAG, "bindImsService bind:" + this.mCmcServiceConnection.getBind());
+        Intent intent = new Intent();
+        intent.setClassName("com.sec.imsservice", INTENT_ACTION_IMSSERVICE_CLASS);
+        this.mContext.bindService(intent, this.mCmcServiceConnection, 3);
     }
 
     private CmcCallCmdResult getCmcCallCmdResult(int i, int i2) {
@@ -52,10 +107,16 @@ public class CmcManager {
     }
 
     private IImsService getImsService() {
-        return IImsService.Stub.asInterface(getSystemService(SERVICE_NAME));
+        IImsService service = this.mCmcServiceConnection.getService();
+        if (service != null) {
+            return service;
+        }
+        IImsService iImsServiceAsInterface = IImsService.Stub.asInterface(getSystemService(SERVICE_NAME));
+        Log.i(LOG_TAG, "imsService : " + iImsServiceAsInterface);
+        return iImsServiceAsInterface;
     }
 
-    private IBinder getSystemService(String str) {
+    private IBinder getSystemService(String str) throws IllegalAccessException, NoSuchMethodException, ClassNotFoundException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             Class<?> cls = Class.forName("android.os.ServiceManager");
             Method method = cls.getMethod("getService", String.class);
@@ -63,9 +124,9 @@ public class CmcManager {
                 Log.i(LOG_TAG, "Failed to reflect method getService");
                 return null;
             }
-            Object invoke = method.invoke(cls, str);
-            if (invoke != null) {
-                return (IBinder) invoke;
+            Object objInvoke = method.invoke(cls, str);
+            if (objInvoke != null) {
+                return (IBinder) objInvoke;
             }
             Log.i(LOG_TAG, "Failed to getService " + str);
             return null;
@@ -84,12 +145,21 @@ public class CmcManager {
         }
     }
 
-    private void onConnectService(IImsService iImsService) {
+    /* JADX INFO: Access modifiers changed from: private */
+    public void onConnectService(IImsService iImsService) {
         if (this.mListener == null || iImsService == null) {
             return;
         }
         registerPreviousListeners(iImsService);
         this.mListener.onConnected();
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void onDisconnectService() {
+        ConnectionListener connectionListener = this.mListener;
+        if (connectionListener != null) {
+            connectionListener.onDisconnected();
+        }
     }
 
     private void registerPreviousListeners(IImsService iImsService) {
@@ -98,21 +168,21 @@ public class CmcManager {
                 Log.i(LOG_TAG, "registerPreviousListeners:  mCmcRegListeners:" + this.mCmcRegListeners.size() + " mCmcCallEventListeners:" + this.mCmcCallEventListeners.size() + " mCmcDialogListeners:" + this.mCmcDialogListeners.size());
                 try {
                     for (IImsRegistrationListener iImsRegistrationListener : this.mCmcRegListeners.keySet()) {
-                        String registerCmcRegistrationListenerForSlot = iImsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
-                        if (!TextUtils.isEmpty(registerCmcRegistrationListenerForSlot)) {
-                            this.mCmcRegListeners.put(iImsRegistrationListener, registerCmcRegistrationListenerForSlot);
+                        String strRegisterCmcRegistrationListenerForSlot = iImsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
+                        if (!TextUtils.isEmpty(strRegisterCmcRegistrationListenerForSlot)) {
+                            this.mCmcRegListeners.put(iImsRegistrationListener, strRegisterCmcRegistrationListenerForSlot);
                         }
                     }
                     for (ICmcCallEventListener iCmcCallEventListener : this.mCmcCallEventListeners.keySet()) {
-                        String registerCmcCallEventListenerForSlot = iImsService.registerCmcCallEventListenerForSlot(this.mPhoneId, iCmcCallEventListener);
-                        if (!TextUtils.isEmpty(registerCmcCallEventListenerForSlot)) {
-                            this.mCmcCallEventListeners.put(iCmcCallEventListener, registerCmcCallEventListenerForSlot);
+                        String strRegisterCmcCallEventListenerForSlot = iImsService.registerCmcCallEventListenerForSlot(this.mPhoneId, iCmcCallEventListener);
+                        if (!TextUtils.isEmpty(strRegisterCmcCallEventListenerForSlot)) {
+                            this.mCmcCallEventListeners.put(iCmcCallEventListener, strRegisterCmcCallEventListenerForSlot);
                         }
                     }
                     for (ICmcDialogListener iCmcDialogListener : this.mCmcDialogListeners.keySet()) {
-                        String registerCmcDialogListenerByToken = iImsService.registerCmcDialogListenerByToken(this.mPhoneId, iCmcDialogListener);
-                        if (!TextUtils.isEmpty(registerCmcDialogListenerByToken)) {
-                            this.mCmcDialogListeners.put(iCmcDialogListener, registerCmcDialogListenerByToken);
+                        String strRegisterCmcDialogListenerByToken = iImsService.registerCmcDialogListenerByToken(this.mPhoneId, iCmcDialogListener);
+                        if (!TextUtils.isEmpty(strRegisterCmcDialogListenerByToken)) {
+                            this.mCmcDialogListeners.put(iCmcDialogListener, strRegisterCmcDialogListenerByToken);
                         }
                     }
                 } catch (RemoteException e) {
@@ -261,7 +331,7 @@ public class CmcManager {
     }
 
     public void connectService() {
-        onConnectService(getImsService());
+        bindImsService();
     }
 
     public boolean isCmcEmergencyCallSupported() {
@@ -322,9 +392,9 @@ public class CmcManager {
             return;
         }
         try {
-            String registerCmcCallEventListenerForSlot = imsService.registerCmcCallEventListenerForSlot(this.mPhoneId, iCmcCallEventListener);
-            if (!TextUtils.isEmpty(registerCmcCallEventListenerForSlot)) {
-                this.mCmcCallEventListeners.put(iCmcCallEventListener, registerCmcCallEventListenerForSlot);
+            String strRegisterCmcCallEventListenerForSlot = imsService.registerCmcCallEventListenerForSlot(this.mPhoneId, iCmcCallEventListener);
+            if (!TextUtils.isEmpty(strRegisterCmcCallEventListenerForSlot)) {
+                this.mCmcCallEventListeners.put(iCmcCallEventListener, strRegisterCmcCallEventListenerForSlot);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -344,9 +414,9 @@ public class CmcManager {
             return;
         }
         try {
-            String registerCmcDialogListenerByToken = imsService.registerCmcDialogListenerByToken(this.mPhoneId, iCmcDialogListener);
-            if (!TextUtils.isEmpty(registerCmcDialogListenerByToken)) {
-                this.mCmcDialogListeners.put(iCmcDialogListener, registerCmcDialogListenerByToken);
+            String strRegisterCmcDialogListenerByToken = imsService.registerCmcDialogListenerByToken(this.mPhoneId, iCmcDialogListener);
+            if (!TextUtils.isEmpty(strRegisterCmcDialogListenerByToken)) {
+                this.mCmcDialogListeners.put(iCmcDialogListener, strRegisterCmcDialogListenerByToken);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -366,9 +436,9 @@ public class CmcManager {
             return;
         }
         try {
-            String registerCmcRegistrationListenerForSlot = imsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
-            if (!TextUtils.isEmpty(registerCmcRegistrationListenerForSlot)) {
-                this.mCmcRegListeners.put(iImsRegistrationListener, registerCmcRegistrationListenerForSlot);
+            String strRegisterCmcRegistrationListenerForSlot = imsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
+            if (!TextUtils.isEmpty(strRegisterCmcRegistrationListenerForSlot)) {
+                this.mCmcRegListeners.put(iImsRegistrationListener, strRegisterCmcRegistrationListenerForSlot);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -381,11 +451,11 @@ public class CmcManager {
             Log.e("CmcManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mCmcCallEventListeners.remove(iCmcCallEventListener);
+        String strRemove = this.mCmcCallEventListeners.remove(iCmcCallEventListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterCmcCallEventListenerForSlot(this.mPhoneId, remove);
+                imsService.unregisterCmcCallEventListenerForSlot(this.mPhoneId, strRemove);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -400,11 +470,11 @@ public class CmcManager {
             Log.e("CmcManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mCmcDialogListeners.remove(iCmcDialogListener);
+        String strRemove = this.mCmcDialogListeners.remove(iCmcDialogListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterCmcDialogListenerByToken(this.mPhoneId, remove);
+                imsService.unregisterCmcDialogListenerByToken(this.mPhoneId, strRemove);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -419,11 +489,11 @@ public class CmcManager {
             Log.e("CmcManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mCmcRegListeners.remove(iImsRegistrationListener);
+        String strRemove = this.mCmcRegListeners.remove(iImsRegistrationListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterCmcRegistrationListenerForSlot(remove, this.mPhoneId);
+                imsService.unregisterCmcRegistrationListenerForSlot(strRemove, this.mPhoneId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -470,6 +540,7 @@ public class CmcManager {
         this.mCmcRegListeners = new ArrayMap<>();
         this.mCmcCallEventListeners = new ArrayMap<>();
         this.mCmcDialogListeners = new ArrayMap<>();
+        this.mCmcServiceConnection = new CmcServiceConnection(this, 0);
         this.mContext = context;
         this.mListener = connectionListener;
         this.mPhoneId = i;

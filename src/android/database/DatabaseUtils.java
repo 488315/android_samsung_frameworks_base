@@ -105,35 +105,35 @@ public class DatabaseUtils {
     }
 
     public static final void readExceptionFromParcel(Parcel parcel) {
-        int readExceptionCode = parcel.readExceptionCode();
-        if (readExceptionCode == 0) {
+        int exceptionCode = parcel.readExceptionCode();
+        if (exceptionCode == 0) {
             return;
         }
-        readExceptionFromParcel(parcel, parcel.readString(), readExceptionCode);
+        readExceptionFromParcel(parcel, parcel.readString(), exceptionCode);
     }
 
     public static void readExceptionWithFileNotFoundExceptionFromParcel(Parcel parcel) throws FileNotFoundException {
-        int readExceptionCode = parcel.readExceptionCode();
-        if (readExceptionCode == 0) {
+        int exceptionCode = parcel.readExceptionCode();
+        if (exceptionCode == 0) {
             return;
         }
-        String readString = parcel.readString();
-        if (readExceptionCode == 1) {
-            throw new FileNotFoundException(readString);
+        String string = parcel.readString();
+        if (exceptionCode == 1) {
+            throw new FileNotFoundException(string);
         }
-        readExceptionFromParcel(parcel, readString, readExceptionCode);
+        readExceptionFromParcel(parcel, string, exceptionCode);
     }
 
     public static void readExceptionWithOperationApplicationExceptionFromParcel(Parcel parcel) throws OperationApplicationException {
-        int readExceptionCode = parcel.readExceptionCode();
-        if (readExceptionCode == 0) {
+        int exceptionCode = parcel.readExceptionCode();
+        if (exceptionCode == 0) {
             return;
         }
-        String readString = parcel.readString();
-        if (readExceptionCode == 10) {
-            throw new OperationApplicationException(readString);
+        String string = parcel.readString();
+        if (exceptionCode == 10) {
+            throw new OperationApplicationException(string);
         }
-        readExceptionFromParcel(parcel, readString, readExceptionCode);
+        readExceptionFromParcel(parcel, string, exceptionCode);
     }
 
     private static final void readExceptionFromParcel(Parcel parcel, String str, int i) {
@@ -164,18 +164,18 @@ public class DatabaseUtils {
     }
 
     public static long executeInsert(SQLiteDatabase sQLiteDatabase, String str, Object[] objArr) throws SQLException {
-        SQLiteStatement compileStatement = sQLiteDatabase.compileStatement(str);
+        SQLiteStatement sQLiteStatementCompileStatement = sQLiteDatabase.compileStatement(str);
         try {
-            bindArgs(compileStatement, objArr);
-            long executeInsert = compileStatement.executeInsert();
-            if (compileStatement != null) {
-                compileStatement.close();
+            bindArgs(sQLiteStatementCompileStatement, objArr);
+            long jExecuteInsert = sQLiteStatementCompileStatement.executeInsert();
+            if (sQLiteStatementCompileStatement != null) {
+                sQLiteStatementCompileStatement.close();
             }
-            return executeInsert;
+            return jExecuteInsert;
         } catch (Throwable th) {
-            if (compileStatement != null) {
+            if (sQLiteStatementCompileStatement != null) {
                 try {
-                    compileStatement.close();
+                    sQLiteStatementCompileStatement.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -185,18 +185,18 @@ public class DatabaseUtils {
     }
 
     public static int executeUpdateDelete(SQLiteDatabase sQLiteDatabase, String str, Object[] objArr) throws SQLException {
-        SQLiteStatement compileStatement = sQLiteDatabase.compileStatement(str);
+        SQLiteStatement sQLiteStatementCompileStatement = sQLiteDatabase.compileStatement(str);
         try {
-            bindArgs(compileStatement, objArr);
-            int executeUpdateDelete = compileStatement.executeUpdateDelete();
-            if (compileStatement != null) {
-                compileStatement.close();
+            bindArgs(sQLiteStatementCompileStatement, objArr);
+            int iExecuteUpdateDelete = sQLiteStatementCompileStatement.executeUpdateDelete();
+            if (sQLiteStatementCompileStatement != null) {
+                sQLiteStatementCompileStatement.close();
             }
-            return executeUpdateDelete;
+            return iExecuteUpdateDelete;
         } catch (Throwable th) {
-            if (compileStatement != null) {
+            if (sQLiteStatementCompileStatement != null) {
                 try {
-                    compileStatement.close();
+                    sQLiteStatementCompileStatement.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -258,7 +258,7 @@ public class DatabaseUtils {
     }
 
     public static String bindSelection(String str, Object... objArr) {
-        char c;
+        char cCharAt;
         if (str == null) {
             return null;
         }
@@ -269,30 +269,29 @@ public class DatabaseUtils {
         StringBuilder sb = new StringBuilder(length);
         int i = 0;
         int i2 = 0;
-        char c2 = ' ';
+        char c = ' ';
         while (i < length) {
             int i3 = i + 1;
-            char charAt = str.charAt(i);
-            if (charAt == '?') {
+            char cCharAt2 = str.charAt(i);
+            if (cCharAt2 == '?') {
                 i = i3;
                 while (true) {
-                    if (i < length) {
-                        c = str.charAt(i);
-                        if (c < '0' || c > '9') {
-                            break;
-                        }
-                        i++;
-                    } else {
-                        c = ' ';
+                    if (i >= length) {
+                        cCharAt = ' ';
                         break;
                     }
+                    cCharAt = str.charAt(i);
+                    if (cCharAt < '0' || cCharAt > '9') {
+                        break;
+                    }
+                    i++;
                 }
                 if (i3 != i) {
                     i2 = Integer.parseInt(str.substring(i3, i)) - 1;
                 }
                 int i4 = i2 + 1;
                 Object obj = objArr[i2];
-                if (c2 != ' ' && c2 != '=') {
+                if (c != ' ' && c != '=') {
                     sb.append(' ');
                 }
                 int typeOfObject = getTypeOfObject(obj);
@@ -314,13 +313,13 @@ public class DatabaseUtils {
                         sb.append(DateFormat.QUOTE);
                     }
                 }
-                if (c != ' ') {
+                if (cCharAt != ' ') {
                     sb.append(' ');
                 }
                 i2 = i4;
             } else {
-                sb.append(charAt);
-                c2 = charAt;
+                sb.append(cCharAt2);
+                c = cCharAt2;
                 i = i3;
             }
         }
@@ -359,110 +358,88 @@ public class DatabaseUtils {
         return ((obj instanceof Long) || (obj instanceof Integer) || (obj instanceof Short) || (obj instanceof Byte)) ? 1 : 3;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0079, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x0079, code lost:
     
         r6 = r6 + 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x007f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:36:0x007f, code lost:
     
         if (r5.moveToNext() != false) goto L42;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void cursorFillWindow(android.database.Cursor r5, int r6, android.database.CursorWindow r7) {
-        /*
-            if (r6 < 0) goto L84
-            int r0 = r5.getCount()
-            if (r6 < r0) goto La
-            goto L84
-        La:
-            int r0 = r5.getPosition()
-            int r1 = r5.getColumnCount()
-            r7.clear()
-            r7.setStartPosition(r6)
-            r7.setNumColumns(r1)
-            boolean r2 = r5.moveToPosition(r6)
-            if (r2 == 0) goto L81
-        L21:
-            boolean r2 = r7.allocRow()
-            if (r2 != 0) goto L28
-            goto L81
-        L28:
-            r2 = 0
-        L29:
-            if (r2 >= r1) goto L79
-            int r3 = r5.getType(r2)
-            if (r3 == 0) goto L6c
-            r4 = 1
-            if (r3 == r4) goto L63
-            r4 = 2
-            if (r3 == r4) goto L5a
-            r4 = 4
-            if (r3 == r4) goto L4a
-            java.lang.String r3 = r5.getString(r2)
-            if (r3 == 0) goto L45
-            boolean r3 = r7.putString(r3, r6, r2)
-            goto L70
-        L45:
-            boolean r3 = r7.putNull(r6, r2)
-            goto L70
-        L4a:
-            byte[] r3 = r5.getBlob(r2)
-            if (r3 == 0) goto L55
-            boolean r3 = r7.putBlob(r3, r6, r2)
-            goto L70
-        L55:
-            boolean r3 = r7.putNull(r6, r2)
-            goto L70
-        L5a:
-            double r3 = r5.getDouble(r2)
-            boolean r3 = r7.putDouble(r3, r6, r2)
-            goto L70
-        L63:
-            long r3 = r5.getLong(r2)
-            boolean r3 = r7.putLong(r3, r6, r2)
-            goto L70
-        L6c:
-            boolean r3 = r7.putNull(r6, r2)
-        L70:
-            if (r3 != 0) goto L76
-            r7.freeLastRow()
-            goto L81
-        L76:
-            int r2 = r2 + 1
-            goto L29
-        L79:
-            int r6 = r6 + 1
-            boolean r2 = r5.moveToNext()
-            if (r2 != 0) goto L21
-        L81:
-            r5.moveToPosition(r0)
-        L84:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.DatabaseUtils.cursorFillWindow(android.database.Cursor, int, android.database.CursorWindow):void");
+    public static void cursorFillWindow(Cursor cursor, int i, CursorWindow cursorWindow) {
+        boolean zPutNull;
+        if (i < 0 || i >= cursor.getCount()) {
+            return;
+        }
+        int position = cursor.getPosition();
+        int columnCount = cursor.getColumnCount();
+        cursorWindow.clear();
+        cursorWindow.setStartPosition(i);
+        cursorWindow.setNumColumns(columnCount);
+        if (cursor.moveToPosition(i)) {
+            loop0: while (true) {
+                if (!cursorWindow.allocRow()) {
+                    break;
+                }
+                int i2 = 0;
+                while (true) {
+                    if (i2 >= columnCount) {
+                        break;
+                    }
+                    int type = cursor.getType(i2);
+                    if (type == 0) {
+                        zPutNull = cursorWindow.putNull(i, i2);
+                    } else if (type == 1) {
+                        zPutNull = cursorWindow.putLong(cursor.getLong(i2), i, i2);
+                    } else if (type == 2) {
+                        zPutNull = cursorWindow.putDouble(cursor.getDouble(i2), i, i2);
+                    } else if (type == 4) {
+                        byte[] blob = cursor.getBlob(i2);
+                        if (blob != null) {
+                            zPutNull = cursorWindow.putBlob(blob, i, i2);
+                        } else {
+                            zPutNull = cursorWindow.putNull(i, i2);
+                        }
+                    } else {
+                        String string = cursor.getString(i2);
+                        if (string != null) {
+                            zPutNull = cursorWindow.putString(string, i, i2);
+                        } else {
+                            zPutNull = cursorWindow.putNull(i, i2);
+                        }
+                    }
+                    if (!zPutNull) {
+                        cursorWindow.freeLastRow();
+                        break loop0;
+                    }
+                    i2++;
+                }
+            }
+        }
+        cursor.moveToPosition(position);
     }
 
     public static void appendEscapedSQLString(StringBuilder sb, String str) {
         sb.append(DateFormat.QUOTE);
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (Character.isHighSurrogate(charAt)) {
+            char cCharAt = str.charAt(i);
+            if (Character.isHighSurrogate(cCharAt)) {
                 if (i != length - 1) {
                     int i2 = i + 1;
                     if (Character.isLowSurrogate(str.charAt(i2))) {
-                        sb.append(charAt);
+                        sb.append(cCharAt);
                         sb.append(str.charAt(i2));
                     }
                 }
-            } else if (!Character.isLowSurrogate(charAt)) {
-                if (charAt == '\'') {
+            } else if (!Character.isLowSurrogate(cCharAt)) {
+                if (cCharAt == '\'') {
                     sb.append(DateFormat.QUOTE);
                 }
-                sb.append(charAt);
+                sb.append(cCharAt);
             }
         }
         sb.append(DateFormat.QUOTE);
@@ -587,37 +564,37 @@ public class DatabaseUtils {
     }
 
     public static void dumpCurrentRow(Cursor cursor, PrintStream printStream) {
-        String str;
+        String string;
         String[] columnNames = cursor.getColumnNames();
         printStream.println("" + cursor.getPosition() + " {");
         int length = columnNames.length;
         for (int i = 0; i < length; i++) {
             try {
-                str = cursor.getString(i);
+                string = cursor.getString(i);
             } catch (SQLiteException unused) {
-                str = "<unprintable>";
+                string = "<unprintable>";
             }
-            printStream.println("   " + columnNames[i] + '=' + str);
+            printStream.println("   " + columnNames[i] + '=' + string);
         }
         printStream.println("}");
     }
 
     public static void dumpCurrentRow(Cursor cursor, StringBuilder sb) {
-        String str;
+        String string;
         String[] columnNames = cursor.getColumnNames();
         sb.append(cursor.getPosition());
         sb.append(" {\n");
         int length = columnNames.length;
         for (int i = 0; i < length; i++) {
             try {
-                str = cursor.getString(i);
+                string = cursor.getString(i);
             } catch (SQLiteException unused) {
-                str = "<unprintable>";
+                string = "<unprintable>";
             }
             sb.append("   ");
             sb.append(columnNames[i]);
             sb.append('=');
-            sb.append(str);
+            sb.append(string);
             sb.append('\n');
         }
         sb.append(ShaderAssembler.SHADER_MAIN_CODE_END);
@@ -721,12 +698,12 @@ public class DatabaseUtils {
         return longForQuery(sQLiteDatabase, sb.toString(), null) == 0;
     }
 
-    public static long longForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) {
-        SQLiteStatement compileStatement = sQLiteDatabase.compileStatement(str);
+    public static long longForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) throws SQLException {
+        SQLiteStatement sQLiteStatementCompileStatement = sQLiteDatabase.compileStatement(str);
         try {
-            return longForQuery(compileStatement, strArr);
+            return longForQuery(sQLiteStatementCompileStatement, strArr);
         } finally {
-            compileStatement.close();
+            sQLiteStatementCompileStatement.close();
         }
     }
 
@@ -735,12 +712,12 @@ public class DatabaseUtils {
         return sQLiteStatement.simpleQueryForLong();
     }
 
-    public static String stringForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) {
-        SQLiteStatement compileStatement = sQLiteDatabase.compileStatement(str);
+    public static String stringForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) throws SQLException {
+        SQLiteStatement sQLiteStatementCompileStatement = sQLiteDatabase.compileStatement(str);
         try {
-            return stringForQuery(compileStatement, strArr);
+            return stringForQuery(sQLiteStatementCompileStatement, strArr);
         } finally {
-            compileStatement.close();
+            sQLiteStatementCompileStatement.close();
         }
     }
 
@@ -749,12 +726,12 @@ public class DatabaseUtils {
         return sQLiteStatement.simpleQueryForString();
     }
 
-    public static ParcelFileDescriptor blobFileDescriptorForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) {
-        SQLiteStatement compileStatement = sQLiteDatabase.compileStatement(str);
+    public static ParcelFileDescriptor blobFileDescriptorForQuery(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) throws SQLException {
+        SQLiteStatement sQLiteStatementCompileStatement = sQLiteDatabase.compileStatement(str);
         try {
-            return blobFileDescriptorForQuery(compileStatement, strArr);
+            return blobFileDescriptorForQuery(sQLiteStatementCompileStatement, strArr);
         } finally {
-            compileStatement.close();
+            sQLiteStatementCompileStatement.close();
         }
     }
 
@@ -835,14 +812,14 @@ public class DatabaseUtils {
             sb.append(" (");
             StringBuilder sb2 = new StringBuilder(128);
             sb2.append("VALUES (");
-            Cursor cursor = null;
+            Cursor cursorRawQuery = null;
             try {
-                cursor = this.mDb.rawQuery("PRAGMA table_info(" + this.mTableName + NavigationBarInflaterView.KEY_CODE_END, null);
-                this.mColumns = new HashMap<>(cursor.getCount());
+                cursorRawQuery = this.mDb.rawQuery("PRAGMA table_info(" + this.mTableName + NavigationBarInflaterView.KEY_CODE_END, null);
+                this.mColumns = new HashMap<>(cursorRawQuery.getCount());
                 int i = 1;
-                while (cursor.moveToNext()) {
-                    String string = cursor.getString(1);
-                    String string2 = cursor.getString(4);
+                while (cursorRawQuery.moveToNext()) {
+                    String string = cursorRawQuery.getString(1);
+                    String string2 = cursorRawQuery.getString(4);
                     this.mColumns.put(string, Integer.valueOf(i));
                     sb.append("'");
                     sb.append(string);
@@ -854,15 +831,15 @@ public class DatabaseUtils {
                         sb2.append(string2);
                         sb2.append(NavigationBarInflaterView.KEY_CODE_END);
                     }
-                    sb.append(i == cursor.getCount() ? ") " : ", ");
-                    sb2.append(i == cursor.getCount() ? ");" : ", ");
+                    sb.append(i == cursorRawQuery.getCount() ? ") " : ", ");
+                    sb2.append(i == cursorRawQuery.getCount() ? ");" : ", ");
                     i++;
                 }
                 sb.append((CharSequence) sb2);
                 this.mInsertSQL = sb.toString();
             } finally {
-                if (cursor != null) {
-                    cursor.close();
+                if (cursorRawQuery != null) {
+                    cursorRawQuery.close();
                 }
             }
         }
@@ -895,9 +872,9 @@ public class DatabaseUtils {
                     for (Map.Entry<String, Object> entry : contentValues.valueSet()) {
                         DatabaseUtils.bindObjectToProgram(statement, getColumnIndex(entry.getKey()), entry.getValue());
                     }
-                    long executeInsert = statement.executeInsert();
+                    long jExecuteInsert = statement.executeInsert();
                     this.mDb.setTransactionSuccessful();
-                    return executeInsert;
+                    return jExecuteInsert;
                 } catch (SQLException e) {
                     Log.e(DatabaseUtils.TAG, "Error inserting " + contentValues + " into table  " + this.mTableName, e);
                     this.mDb.endTransaction();
@@ -908,7 +885,7 @@ public class DatabaseUtils {
             }
         }
 
-        public int getColumnIndex(String str) {
+        public int getColumnIndex(String str) throws SQLException {
             getStatement(false);
             Integer num = this.mColumns.get(str);
             if (num == null) {
@@ -979,13 +956,13 @@ public class DatabaseUtils {
             }
         }
 
-        public void prepareForInsert() {
+        public void prepareForInsert() throws SQLException {
             SQLiteStatement statement = getStatement(false);
             this.mPreparedStatement = statement;
             statement.clearBindings();
         }
 
-        public void prepareForReplace() {
+        public void prepareForReplace() throws SQLException {
             SQLiteStatement statement = getStatement(true);
             this.mPreparedStatement = statement;
             statement.clearBindings();
@@ -1011,50 +988,50 @@ public class DatabaseUtils {
         }
     }
 
-    public static void createDbFromSqlStatements(Context context, String str, int i, String str2) {
-        SQLiteDatabase openOrCreateDatabase = context.openOrCreateDatabase(str, 0, null);
+    public static void createDbFromSqlStatements(Context context, String str, int i, String str2) throws SQLException {
+        SQLiteDatabase sQLiteDatabaseOpenOrCreateDatabase = context.openOrCreateDatabase(str, 0, null);
         for (String str3 : TextUtils.split(str2, ";\n")) {
             if (!TextUtils.isEmpty(str3)) {
-                openOrCreateDatabase.execSQL(str3);
+                sQLiteDatabaseOpenOrCreateDatabase.execSQL(str3);
             }
         }
-        openOrCreateDatabase.setVersion(i);
-        openOrCreateDatabase.close();
+        sQLiteDatabaseOpenOrCreateDatabase.setVersion(i);
+        sQLiteDatabaseOpenOrCreateDatabase.close();
     }
 
     private static int getSqlStatementPrefixOffset(String str) {
-        int indexOf;
+        int iIndexOf;
         int length = str.length() - 2;
         if (length < 0) {
             return -1;
         }
-        int i = 0;
-        while (i < length) {
-            char charAt = str.charAt(i);
-            if (charAt > ' ') {
-                if (charAt == '-') {
-                    if (str.charAt(i + 1) == '-') {
-                        i = str.indexOf(10, i + 2);
-                        if (i < 0) {
+        int iIndexOf2 = 0;
+        while (iIndexOf2 < length) {
+            char cCharAt = str.charAt(iIndexOf2);
+            if (cCharAt > ' ') {
+                if (cCharAt == '-') {
+                    if (str.charAt(iIndexOf2 + 1) == '-') {
+                        iIndexOf2 = str.indexOf(10, iIndexOf2 + 2);
+                        if (iIndexOf2 < 0) {
                             return -1;
                         }
                     }
-                } else if (charAt == '/') {
-                    int i2 = i + 1;
-                    if (str.charAt(i2) == '*') {
+                } else if (cCharAt == '/') {
+                    int i = iIndexOf2 + 1;
+                    if (str.charAt(i) == '*') {
                         do {
-                            indexOf = str.indexOf(42, i2 + 1);
-                            if (indexOf < 0) {
+                            iIndexOf = str.indexOf(42, i + 1);
+                            if (iIndexOf < 0) {
                                 return -1;
                             }
-                            i2 = indexOf + 1;
-                        } while (str.charAt(i2) != '/');
-                        i = indexOf + 2;
+                            i = iIndexOf + 1;
+                        } while (str.charAt(i) != '/');
+                        iIndexOf2 = iIndexOf + 2;
                     }
                 }
-                return i;
+                return iIndexOf2;
             }
-            i++;
+            iIndexOf2++;
         }
         return -1;
     }
@@ -1143,13 +1120,13 @@ public class DatabaseUtils {
     public static String escapeForLike(String str) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '%') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '%') {
                 sb.append('\\');
-            } else if (charAt == '_') {
+            } else if (cCharAt == '_') {
                 sb.append('\\');
             }
-            sb.append(charAt);
+            sb.append(cCharAt);
         }
         return sb.toString();
     }

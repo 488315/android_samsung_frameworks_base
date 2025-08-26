@@ -17,7 +17,6 @@ import com.google.common.collect.HashBiMap.View.AnonymousClass1;
 import java.util.ArrayList;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AmbientVolumeLayout extends LinearLayout implements AmbientVolumeUi {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -158,15 +157,15 @@ public class AmbientVolumeLayout extends LinearLayout implements AmbientVolumeUi
 
     public final void updateVolumeLevel() {
         int volumeLevel;
-        int i;
+        int volumeLevel2;
         if (this.mExpanded) {
             volumeLevel = getVolumeLevel(0);
-            i = getVolumeLevel(1);
+            volumeLevel2 = getVolumeLevel(1);
         } else {
             volumeLevel = getVolumeLevel(999);
-            i = volumeLevel;
+            volumeLevel2 = volumeLevel;
         }
-        this.mVolumeLevel = Math.min(Math.max((volumeLevel * 5) + i, 0), 24);
+        this.mVolumeLevel = Math.min(Math.max((volumeLevel * 5) + volumeLevel2, 0), 24);
         updateVolumeIcon();
     }
 

@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SceneTransitions {
     public static final int $stable;
@@ -26,7 +25,6 @@ public final class SceneTransitions {
     public final Map transitionCache = new LinkedHashMap();
     public final List transitionSpecs;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,10 +47,10 @@ public final class SceneTransitions {
 
     public final TransitionSpecImpl findSpec(final ContentKey contentKey, final ContentKey contentKey2, TransitionKey transitionKey) {
         final int i = 0;
-        TransitionSpecImpl transition = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
+        TransitionSpecImpl transitionSpecImplTransition = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 ContentKey contentKey3 = contentKey2;
                 ContentKey contentKey4 = contentKey;
@@ -72,31 +70,31 @@ public final class SceneTransitions {
                         return Boolean.valueOf(z);
                     case 2:
                         SceneTransitions.Companion companion3 = SceneTransitions.Companion;
-                        boolean areEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey5 = transitionSpecImpl.to;
-                        if ((areEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                     default:
                         SceneTransitions.Companion companion4 = SceneTransitions.Companion;
-                        boolean areEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey6 = transitionSpecImpl.to;
-                        if ((areEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                 }
             }
         });
-        if (transition != null) {
-            return transition;
+        if (transitionSpecImplTransition != null) {
+            return transitionSpecImplTransition;
         }
         final int i2 = 1;
-        final TransitionSpecImpl transition2 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
+        final TransitionSpecImpl transitionSpecImplTransition2 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 ContentKey contentKey3 = contentKey;
                 ContentKey contentKey4 = contentKey2;
@@ -116,30 +114,30 @@ public final class SceneTransitions {
                         return Boolean.valueOf(z);
                     case 2:
                         SceneTransitions.Companion companion3 = SceneTransitions.Companion;
-                        boolean areEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey5 = transitionSpecImpl.to;
-                        if ((areEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                     default:
                         SceneTransitions.Companion companion4 = SceneTransitions.Companion;
-                        boolean areEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey6 = transitionSpecImpl.to;
-                        if ((areEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                 }
             }
         });
-        if (transition2 != null) {
+        if (transitionSpecImplTransition2 != null) {
             Function1 function1 = new Function1() { // from class: com.android.compose.animation.scene.TransitionSpecImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     TransformationRange transformationRange;
-                    TransformationSpecImpl transformationSpecImpl = (TransformationSpecImpl) TransitionSpecImpl.this.transformationSpec.mo779invoke((TransitionState.Transition) obj);
+                    TransformationSpecImpl transformationSpecImpl = (TransformationSpecImpl) transitionSpecImplTransition2.transformationSpec.mo781invoke((TransitionState.Transition) obj);
                     AnimationSpec animationSpec = transformationSpecImpl.progressSpec;
                     List<TransformationMatcher> list = transformationSpecImpl.transformationMatchers;
                     ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
@@ -159,13 +157,13 @@ public final class SceneTransitions {
                     return new TransformationSpecImpl(animationSpec, transformationSpecImpl.distance, arrayList);
                 }
             };
-            return new TransitionSpecImpl(transition2.key, transition2.to, transition2.from, transition2.cuj, transition2.reversePreviewTransformationSpec, transition2.previewTransformationSpec, function1);
+            return new TransitionSpecImpl(transitionSpecImplTransition2.key, transitionSpecImplTransition2.to, transitionSpecImplTransition2.from, transitionSpecImplTransition2.cuj, transitionSpecImplTransition2.reversePreviewTransformationSpec, transitionSpecImplTransition2.previewTransformationSpec, function1);
         }
         final int i3 = 2;
-        TransitionSpecImpl transition3 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
+        TransitionSpecImpl transitionSpecImplTransition3 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 ContentKey contentKey3 = contentKey2;
                 ContentKey contentKey4 = contentKey;
@@ -185,31 +183,31 @@ public final class SceneTransitions {
                         return Boolean.valueOf(z);
                     case 2:
                         SceneTransitions.Companion companion3 = SceneTransitions.Companion;
-                        boolean areEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey5 = transitionSpecImpl.to;
-                        if ((areEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                     default:
                         SceneTransitions.Companion companion4 = SceneTransitions.Companion;
-                        boolean areEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey6 = transitionSpecImpl.to;
-                        if ((areEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                 }
             }
         });
-        if (transition3 != null) {
-            return transition3;
+        if (transitionSpecImplTransition3 != null) {
+            return transitionSpecImplTransition3;
         }
         final int i4 = 3;
-        final TransitionSpecImpl transition4 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
+        final TransitionSpecImpl transitionSpecImplTransition4 = transition(contentKey, contentKey2, transitionKey, new Function1() { // from class: com.android.compose.animation.scene.SceneTransitions$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 ContentKey contentKey3 = contentKey;
                 ContentKey contentKey4 = contentKey2;
@@ -229,30 +227,30 @@ public final class SceneTransitions {
                         return Boolean.valueOf(z);
                     case 2:
                         SceneTransitions.Companion companion3 = SceneTransitions.Companion;
-                        boolean areEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey5 = transitionSpecImpl.to;
-                        if ((areEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual && contentKey5 == null) || (Intrinsics.areEqual(contentKey5, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                     default:
                         SceneTransitions.Companion companion4 = SceneTransitions.Companion;
-                        boolean areEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
+                        boolean zAreEqual2 = Intrinsics.areEqual(transitionSpecImpl.from, contentKey4);
                         ContentKey contentKey6 = transitionSpecImpl.to;
-                        if ((areEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
+                        if ((zAreEqual2 && contentKey6 == null) || (Intrinsics.areEqual(contentKey6, contentKey3) && transitionSpecImpl.from == null)) {
                             z = true;
                         }
                         return Boolean.valueOf(z);
                 }
             }
         });
-        if (transition4 != null) {
+        if (transitionSpecImplTransition4 != null) {
             Function1 function12 = new Function1() { // from class: com.android.compose.animation.scene.TransitionSpecImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     TransformationRange transformationRange;
-                    TransformationSpecImpl transformationSpecImpl = (TransformationSpecImpl) TransitionSpecImpl.this.transformationSpec.mo779invoke((TransitionState.Transition) obj);
+                    TransformationSpecImpl transformationSpecImpl = (TransformationSpecImpl) transitionSpecImplTransition4.transformationSpec.mo781invoke((TransitionState.Transition) obj);
                     AnimationSpec animationSpec = transformationSpecImpl.progressSpec;
                     List<TransformationMatcher> list = transformationSpecImpl.transformationMatchers;
                     ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
@@ -272,7 +270,7 @@ public final class SceneTransitions {
                     return new TransformationSpecImpl(animationSpec, transformationSpecImpl.distance, arrayList);
                 }
             };
-            return new TransitionSpecImpl(transition4.key, transition4.to, transition4.from, transition4.cuj, transition4.reversePreviewTransformationSpec, transition4.previewTransformationSpec, function12);
+            return new TransitionSpecImpl(transitionSpecImplTransition4.key, transitionSpecImplTransition4.to, transitionSpecImplTransition4.from, transitionSpecImplTransition4.cuj, transitionSpecImplTransition4.reversePreviewTransformationSpec, transitionSpecImplTransition4.previewTransformationSpec, function12);
         }
         if (transitionKey != null) {
             return findSpec(contentKey, contentKey2, null);
@@ -287,7 +285,7 @@ public final class SceneTransitions {
         TransitionSpecImpl transitionSpecImpl = null;
         for (int i = 0; i < size; i++) {
             TransitionSpecImpl transitionSpecImpl2 = (TransitionSpecImpl) list.get(i);
-            if (Intrinsics.areEqual(transitionSpecImpl2.key, transitionKey) && ((Boolean) function1.mo779invoke(transitionSpecImpl2)).booleanValue()) {
+            if (Intrinsics.areEqual(transitionSpecImpl2.key, transitionKey) && ((Boolean) function1.mo781invoke(transitionSpecImpl2)).booleanValue()) {
                 if (transitionSpecImpl != null) {
                     throw new IllegalStateException(("Found multiple transition specs for transition " + contentKey + " => " + contentKey2).toString());
                 }

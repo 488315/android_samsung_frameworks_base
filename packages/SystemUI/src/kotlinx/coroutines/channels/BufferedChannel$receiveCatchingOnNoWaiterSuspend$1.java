@@ -4,7 +4,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BufferedChannel$receiveCatchingOnNoWaiterSuspend$1 extends ContinuationImpl {
     int I$0;
@@ -25,7 +24,7 @@ final class BufferedChannel$receiveCatchingOnNoWaiterSuspend$1 extends Continuat
     public final Object invokeSuspend(Object obj) {
         this.result = obj;
         this.label |= Integer.MIN_VALUE;
-        Object m3454receiveCatchingOnNoWaiterSuspendGKJJFZk = this.this$0.m3454receiveCatchingOnNoWaiterSuspendGKJJFZk(null, 0, 0L, this);
-        return m3454receiveCatchingOnNoWaiterSuspendGKJJFZk == CoroutineSingletons.COROUTINE_SUSPENDED ? m3454receiveCatchingOnNoWaiterSuspendGKJJFZk : ChannelResult.m3457boximpl(m3454receiveCatchingOnNoWaiterSuspendGKJJFZk);
+        Object objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk = this.this$0.m3474receiveCatchingOnNoWaiterSuspendGKJJFZk(null, 0, 0L, this);
+        return objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk == CoroutineSingletons.COROUTINE_SUSPENDED ? objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk : ChannelResult.m3477boximpl(objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk);
     }
 }

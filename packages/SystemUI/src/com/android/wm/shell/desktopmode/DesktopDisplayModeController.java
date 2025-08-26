@@ -5,7 +5,9 @@ import android.app.WindowConfiguration;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.IWindowManager;
+import android.view.InputDevice;
 import android.window.DesktopExperienceFlags;
 import android.window.DisplayAreaInfo;
 import android.window.WindowContainerToken;
@@ -18,6 +20,7 @@ import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.desktopmode.desktopwallpaperactivity.DesktopWallpaperActivityTokenProvider;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.desktopmode.DesktopState;
+import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
@@ -25,7 +28,6 @@ import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopDisplayModeController {
     public final Context context;
@@ -37,7 +39,6 @@ public final class DesktopDisplayModeController {
     public final Transitions transitions;
     public final IWindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,17 +64,17 @@ public final class DesktopDisplayModeController {
         InputManager.InputDeviceListener inputDeviceListener = new InputManager.InputDeviceListener() { // from class: com.android.wm.shell.desktopmode.DesktopDisplayModeController$inputDeviceListener$1
             @Override // android.hardware.input.InputManager.InputDeviceListener
             public final void onInputDeviceAdded(int i) {
-                DesktopDisplayModeController.this.updateDefaultDisplayWindowingMode();
+                this.this$0.updateDefaultDisplayWindowingMode();
             }
 
             @Override // android.hardware.input.InputManager.InputDeviceListener
             public final void onInputDeviceChanged(int i) {
-                DesktopDisplayModeController.this.updateDefaultDisplayWindowingMode();
+                this.this$0.updateDefaultDisplayWindowingMode();
             }
 
             @Override // android.hardware.input.InputManager.InputDeviceListener
             public final void onInputDeviceRemoved(int i) {
-                DesktopDisplayModeController.this.updateDefaultDisplayWindowingMode();
+                this.this$0.updateDefaultDisplayWindowingMode();
             }
         };
         if (DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH.isTrue()) {
@@ -81,130 +82,75 @@ public final class DesktopDisplayModeController {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x005d, code lost:
-    
-        if (android.provider.Settings.Global.getInt(r8.context.getContentResolver(), "force_desktop_mode_on_external_displays", 0) != 0) goto L22;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0077  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getTargetWindowingModeForDefaultDisplay() {
-        /*
-            r8 = this;
-            com.android.wm.shell.shared.desktopmode.DesktopState r0 = r8.desktopState
-            com.android.wm.shell.shared.desktopmode.DesktopStateImpl r0 = (com.android.wm.shell.shared.desktopmode.DesktopStateImpl) r0
-            r1 = 0
-            boolean r2 = r0.isDesktopModeSupportedOnDisplay(r1)
-            if (r2 == 0) goto Lc8
-            android.window.DesktopExperienceFlags r2 = android.window.DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT
-            boolean r2 = r2.isTrue()
-            com.android.wm.shell.RootTaskDisplayAreaOrganizer r3 = r8.rootTaskDisplayAreaOrganizer
-            if (r2 == 0) goto L51
-            int[] r2 = r3.getDisplayIds()
-            java.util.ArrayList r4 = new java.util.ArrayList
-            r4.<init>()
-            int r5 = r2.length
-            r6 = r1
-        L20:
-            if (r6 >= r5) goto L30
-            r7 = r2[r6]
-            if (r7 == 0) goto L2d
-            java.lang.Integer r7 = java.lang.Integer.valueOf(r7)
-            r4.add(r7)
-        L2d:
-            int r6 = r6 + 1
-            goto L20
-        L30:
-            boolean r2 = r4.isEmpty()
-            if (r2 == 0) goto L37
-            goto L6f
-        L37:
-            int r2 = r4.size()
-            r5 = r1
-        L3c:
-            if (r5 >= r2) goto L6f
-            java.lang.Object r6 = r4.get(r5)
-            int r5 = r5 + 1
-            java.lang.Number r6 = (java.lang.Number) r6
-            int r6 = r6.intValue()
-            boolean r6 = r0.isDesktopModeSupportedOnDisplay(r6)
-            if (r6 == 0) goto L3c
-            goto L5f
-        L51:
-            android.content.Context r0 = r8.context
-            android.content.ContentResolver r0 = r0.getContentResolver()
-            java.lang.String r2 = "force_desktop_mode_on_external_displays"
-            int r0 = android.provider.Settings.Global.getInt(r0, r2, r1)
-            if (r0 == 0) goto L6f
-        L5f:
-            int[] r0 = r3.getDisplayIds()
-            int r2 = r0.length
-            r3 = r1
-        L65:
-            if (r3 >= r2) goto L6f
-            r4 = r0[r3]
-            if (r4 == 0) goto L6c
-            goto Lc0
-        L6c:
-            int r3 = r3 + 1
-            goto L65
-        L6f:
-            android.window.DesktopExperienceFlags r0 = android.window.DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH
-            boolean r0 = r0.isTrue()
-            if (r0 == 0) goto Lc8
-            android.hardware.input.InputManager r0 = r8.inputManager
-            int[] r0 = r0.getInputDeviceIds()
-            int r2 = r0.length
-            r3 = r1
-        L7f:
-            if (r3 >= r2) goto Lc8
-            r4 = r0[r3]
-            android.hardware.input.InputManager r5 = r8.inputManager
-            android.view.InputDevice r4 = r5.getInputDevice(r4)
-            if (r4 == 0) goto Lc5
-            r5 = 1048584(0x100008, float:1.469379E-39)
-            boolean r5 = r4.supportsSource(r5)
-            if (r5 == 0) goto Lc5
-            boolean r4 = r4.isEnabled()
-            if (r4 == 0) goto Lc5
-            android.hardware.input.InputManager r0 = r8.inputManager
-            int[] r0 = r0.getInputDeviceIds()
-            int r2 = r0.length
-            r3 = r1
-        La2:
-            if (r3 >= r2) goto Lc8
-            r4 = r0[r3]
-            android.hardware.input.InputManager r5 = r8.inputManager
-            android.view.InputDevice r4 = r5.getInputDevice(r4)
-            if (r4 == 0) goto Lc2
-            boolean r5 = r4.isVirtual()
-            if (r5 != 0) goto Lc2
-            boolean r5 = r4.isFullKeyboard()
-            if (r5 == 0) goto Lc2
-            boolean r4 = r4.isEnabled()
-            if (r4 == 0) goto Lc2
-        Lc0:
-            r8 = 5
-            return r8
-        Lc2:
-            int r3 = r3 + 1
-            goto La2
-        Lc5:
-            int r3 = r3 + 1
-            goto L7f
-        Lc8:
-            android.window.DesktopExperienceFlags r0 = android.window.DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH
-            boolean r0 = r0.isTrue()
-            if (r0 == 0) goto Ld2
-            r8 = 1
-            return r8
-        Ld2:
-            android.view.IWindowManager r8 = r8.windowManager
-            int r8 = r8.getWindowingMode(r1)
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopDisplayModeController.getTargetWindowingModeForDefaultDisplay():int");
+        DesktopStateImpl desktopStateImpl = (DesktopStateImpl) this.desktopState;
+        if (desktopStateImpl.isDesktopModeSupportedOnDisplay(0)) {
+            boolean zIsTrue = DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue();
+            RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer = this.rootTaskDisplayAreaOrganizer;
+            if (zIsTrue) {
+                int[] displayIds = rootTaskDisplayAreaOrganizer.getDisplayIds();
+                ArrayList arrayList = new ArrayList();
+                for (int i : displayIds) {
+                    if (i != 0) {
+                        arrayList.add(Integer.valueOf(i));
+                    }
+                }
+                if (!arrayList.isEmpty()) {
+                    int size = arrayList.size();
+                    int i2 = 0;
+                    while (i2 < size) {
+                        Object obj = arrayList.get(i2);
+                        i2++;
+                        if (desktopStateImpl.isDesktopModeSupportedOnDisplay(((Number) obj).intValue())) {
+                            int[] displayIds2 = rootTaskDisplayAreaOrganizer.getDisplayIds();
+                            for (int i3 : displayIds2) {
+                                if (i3 != 0) {
+                                    return 5;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH.isTrue()) {
+                    int[] inputDeviceIds = this.inputManager.getInputDeviceIds();
+                    int length = inputDeviceIds.length;
+                    int i4 = 0;
+                    while (true) {
+                        if (i4 >= length) {
+                            break;
+                        }
+                        InputDevice inputDevice = this.inputManager.getInputDevice(inputDeviceIds[i4]);
+                        if (inputDevice != null && inputDevice.supportsSource(1048584) && inputDevice.isEnabled()) {
+                            for (int i5 : this.inputManager.getInputDeviceIds()) {
+                                InputDevice inputDevice2 = this.inputManager.getInputDevice(i5);
+                                if (inputDevice2 != null && !inputDevice2.isVirtual() && inputDevice2.isFullKeyboard() && inputDevice2.isEnabled()) {
+                                    return 5;
+                                }
+                            }
+                        } else {
+                            i4++;
+                        }
+                    }
+                }
+            } else {
+                if (Settings.Global.getInt(this.context.getContentResolver(), "force_desktop_mode_on_external_displays", 0) != 0) {
+                    int[] displayIds22 = rootTaskDisplayAreaOrganizer.getDisplayIds();
+                    while (i < r2) {
+                    }
+                }
+                if (DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH.isTrue()) {
+                }
+            }
+        }
+        if (DesktopExperienceFlags.FORM_FACTOR_BASED_DESKTOP_FIRST_SWITCH.isTrue()) {
+            return 1;
+        }
+        return this.windowManager.getWindowingMode(0);
     }
 
     public final void updateDefaultDisplayWindowingMode() {
@@ -224,8 +170,8 @@ public final class DesktopDisplayModeController {
         }
         Object[] objArr = {Integer.valueOf(i), WindowConfiguration.windowingModeToString(windowingMode), WindowConfiguration.windowingModeToString(i2)};
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopDisplayModeController", objArr);
-        ProtoLog.v(shellProtoLogGroup, "%s: Changing display#%d's windowing mode from %s to %s", m.list.toArray(new Object[m.list.size()]));
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopDisplayModeController", objArr);
+        ProtoLog.v(shellProtoLogGroup, "%s: Changing display#%d's windowing mode from %s to %s", spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
         windowContainerTransaction.setWindowingMode(displayAreaInfo.token, i2);
         ArrayList runningTasks = this.shellTaskOrganizer.getRunningTasks(i);

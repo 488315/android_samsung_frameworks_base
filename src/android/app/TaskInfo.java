@@ -26,18 +26,23 @@ public class TaskInfo {
     public Uri capturedLink;
     public long capturedLinkTimestamp;
     public int defaultMinSize;
+    public int desktopDefaultMinSize;
     public Rect displayCutoutInsets;
     public int displayId;
     public int effectiveUid;
     public boolean hasConfigChanged;
+    public boolean hasNoTopWindow;
     public boolean hasWallpaper;
     public boolean isActivityStackTransparent;
     public boolean isAliasManaged;
     public boolean isAllowedSeamlessRotation;
     public boolean isCaptionHiddenRequested;
     public boolean isCoverLauncherWidgetTask;
+    public boolean isDisplayCutoutHide;
     public boolean isFocused;
     public boolean isForceHidden;
+    public boolean isFullSizeWindow;
+    public boolean isGameToolsOverlayVisible;
     public boolean isKeepScreenOn;
     public boolean isLaunchedFromAppsCoverLauncher;
     public boolean isLaunchedFromHomeSwipe;
@@ -72,6 +77,7 @@ public class TaskInfo {
     public PictureInPictureParams pictureInPictureParams;
     public Point positionInParent;
     public ComponentName realActivity;
+    public boolean requestFullscreenMode;
     public int requestedVisibleTypes;
     public int resizeMode;
     public String rootAffinity;
@@ -93,6 +99,7 @@ public class TaskInfo {
     public final Configuration configuration = new Configuration();
     public ArrayList<IBinder> launchCookies = new ArrayList<>();
     public AppCompatTaskInfo appCompatTaskInfo = AppCompatTaskInfo.create();
+    public boolean isHandleImmersive = false;
     public boolean isAiKeyRemoveAppTask = false;
 
     TaskInfo() {
@@ -183,8 +190,8 @@ public class TaskInfo {
         if (CoreRune.MW_CAPTION_HANDLE_KEEP_SCREEN_ON && this.isKeepScreenOn != taskInfo.isKeepScreenOn) {
             return false;
         }
-        if (!CoreRune.MW_CAPTION_FULL_SCREEN || this.isTopFullScreenWindow == taskInfo.isTopFullScreenWindow) {
-            return (!CoreRune.MW_CAPTION_CUTOUT || Objects.equals(this.safeCutoutInsets, taskInfo.safeCutoutInsets)) && this.activatableDeskRoot == taskInfo.activatableDeskRoot && this.topActivityType == taskInfo.topActivityType && this.isResizeable == taskInfo.isResizeable && this.supportsMultiWindow == taskInfo.supportsMultiWindow && this.displayAreaFeatureId == taskInfo.displayAreaFeatureId && Objects.equals(this.positionInParent, taskInfo.positionInParent) && Objects.equals(this.pictureInPictureParams, taskInfo.pictureInPictureParams) && Objects.equals(Boolean.valueOf(this.shouldDockBigOverlays), Boolean.valueOf(taskInfo.shouldDockBigOverlays)) && Objects.equals(this.displayCutoutInsets, taskInfo.displayCutoutInsets) && getWindowingMode() == taskInfo.getWindowingMode() && this.configuration.uiMode == taskInfo.configuration.uiMode && Objects.equals(this.taskDescription, taskInfo.taskDescription) && this.isFocused == taskInfo.isFocused && this.isVisible == taskInfo.isVisible && this.isVisibleRequested == taskInfo.isVisibleRequested && this.isTopActivityNoDisplay == taskInfo.isTopActivityNoDisplay && this.isSleeping == taskInfo.isSleeping && Objects.equals(this.mTopActivityLocusId, taskInfo.mTopActivityLocusId) && this.parentTaskId == taskInfo.parentTaskId && Objects.equals(this.topActivity, taskInfo.topActivity) && this.isTopActivityTransparent == taskInfo.isTopActivityTransparent && this.isActivityStackTransparent == taskInfo.isActivityStackTransparent && Objects.equals(this.lastNonFullscreenBounds, taskInfo.lastNonFullscreenBounds) && Objects.equals(this.capturedLink, taskInfo.capturedLink) && this.capturedLinkTimestamp == taskInfo.capturedLinkTimestamp && this.requestedVisibleTypes == taskInfo.requestedVisibleTypes && this.topActivityRequestOpenInBrowserEducationTimestamp == taskInfo.topActivityRequestOpenInBrowserEducationTimestamp && this.appCompatTaskInfo.equalsForTaskOrganizer(taskInfo.appCompatTaskInfo) && Objects.equals(this.topActivityMainWindowFrame, taskInfo.topActivityMainWindowFrame);
+        if (!CoreRune.MW_CAPTION_FULL_SCREEN || (this.isTopFullScreenWindow == taskInfo.isTopFullScreenWindow && this.isGameToolsOverlayVisible == taskInfo.isGameToolsOverlayVisible && this.isFullSizeWindow == taskInfo.isFullSizeWindow && this.isHandleImmersive == taskInfo.isHandleImmersive)) {
+            return (!CoreRune.MW_CAPTION_CUTOUT || (Objects.equals(this.safeCutoutInsets, taskInfo.safeCutoutInsets) && Objects.equals(Boolean.valueOf(this.isDisplayCutoutHide), Boolean.valueOf(taskInfo.isDisplayCutoutHide)))) && this.activatableDeskRoot == taskInfo.activatableDeskRoot && this.topActivityType == taskInfo.topActivityType && this.isResizeable == taskInfo.isResizeable && this.supportsMultiWindow == taskInfo.supportsMultiWindow && this.displayAreaFeatureId == taskInfo.displayAreaFeatureId && Objects.equals(this.positionInParent, taskInfo.positionInParent) && Objects.equals(this.pictureInPictureParams, taskInfo.pictureInPictureParams) && Objects.equals(Boolean.valueOf(this.shouldDockBigOverlays), Boolean.valueOf(taskInfo.shouldDockBigOverlays)) && Objects.equals(this.displayCutoutInsets, taskInfo.displayCutoutInsets) && getWindowingMode() == taskInfo.getWindowingMode() && this.configuration.uiMode == taskInfo.configuration.uiMode && Objects.equals(this.taskDescription, taskInfo.taskDescription) && this.isFocused == taskInfo.isFocused && this.isVisible == taskInfo.isVisible && this.isVisibleRequested == taskInfo.isVisibleRequested && this.isTopActivityNoDisplay == taskInfo.isTopActivityNoDisplay && this.isSleeping == taskInfo.isSleeping && Objects.equals(this.mTopActivityLocusId, taskInfo.mTopActivityLocusId) && this.parentTaskId == taskInfo.parentTaskId && Objects.equals(this.topActivity, taskInfo.topActivity) && this.isTopActivityTransparent == taskInfo.isTopActivityTransparent && this.isActivityStackTransparent == taskInfo.isActivityStackTransparent && Objects.equals(this.lastNonFullscreenBounds, taskInfo.lastNonFullscreenBounds) && Objects.equals(this.capturedLink, taskInfo.capturedLink) && this.capturedLinkTimestamp == taskInfo.capturedLinkTimestamp && this.requestedVisibleTypes == taskInfo.requestedVisibleTypes && this.topActivityRequestOpenInBrowserEducationTimestamp == taskInfo.topActivityRequestOpenInBrowserEducationTimestamp && this.appCompatTaskInfo.equalsForTaskOrganizer(taskInfo.appCompatTaskInfo) && Objects.equals(this.topActivityMainWindowFrame, taskInfo.topActivityMainWindowFrame);
         }
         return false;
     }
@@ -193,8 +200,8 @@ public class TaskInfo {
         if (taskInfo == null) {
             return false;
         }
-        boolean hasCompatUI = this.appCompatTaskInfo.hasCompatUI();
-        return this.displayId == taskInfo.displayId && this.taskId == taskInfo.taskId && this.isTopActivityTransparent == taskInfo.isTopActivityTransparent && this.appCompatTaskInfo.equalsForCompatUi(taskInfo.appCompatTaskInfo) && (!hasCompatUI || this.configuration.windowConfiguration.getBounds().equals(taskInfo.configuration.windowConfiguration.getBounds())) && ((!hasCompatUI || this.configuration.getLayoutDirection() == taskInfo.configuration.getLayoutDirection()) && ((!hasCompatUI || this.configuration.uiMode == taskInfo.configuration.uiMode) && (!hasCompatUI || this.isVisible == taskInfo.isVisible)));
+        boolean zHasCompatUI = this.appCompatTaskInfo.hasCompatUI();
+        return this.displayId == taskInfo.displayId && this.taskId == taskInfo.taskId && this.isTopActivityTransparent == taskInfo.isTopActivityTransparent && this.appCompatTaskInfo.equalsForCompatUi(taskInfo.appCompatTaskInfo) && (!zHasCompatUI || this.configuration.windowConfiguration.getBounds().equals(taskInfo.configuration.windowConfiguration.getBounds())) && ((!zHasCompatUI || this.configuration.getLayoutDirection() == taskInfo.configuration.getLayoutDirection()) && ((!zHasCompatUI || this.configuration.uiMode == taskInfo.configuration.uiMode) && (!zHasCompatUI || this.isVisible == taskInfo.isVisible)));
     }
 
     void readTaskFromParcel(Parcel parcel) {
@@ -226,6 +233,7 @@ public class TaskInfo {
         this.minWidth = parcel.readInt();
         this.minHeight = parcel.readInt();
         this.defaultMinSize = parcel.readInt();
+        this.desktopDefaultMinSize = parcel.readInt();
         parcel.readBinderList(this.launchCookies);
         this.positionInParent = (Point) parcel.readTypedObject(Point.CREATOR);
         this.parentTaskId = parcel.readInt();
@@ -279,11 +287,17 @@ public class TaskInfo {
         }
         if (CoreRune.MW_CAPTION_FULL_SCREEN) {
             this.isTopFullScreenWindow = parcel.readBoolean();
+            this.isGameToolsOverlayVisible = parcel.readBoolean();
+            this.isFullSizeWindow = parcel.readBoolean();
+            this.isHandleImmersive = parcel.readBoolean();
         }
         if (CoreRune.MW_CAPTION_CUTOUT) {
             this.safeCutoutInsets = (Rect) parcel.readTypedObject(Rect.CREATOR);
+            this.isDisplayCutoutHide = parcel.readBoolean();
         }
         this.activatableDeskRoot = parcel.readBoolean();
+        this.hasNoTopWindow = parcel.readBoolean();
+        this.requestFullscreenMode = parcel.readBoolean();
     }
 
     public void writeTaskToParcel(Parcel parcel, int i) {
@@ -315,6 +329,7 @@ public class TaskInfo {
         parcel.writeInt(this.minWidth);
         parcel.writeInt(this.minHeight);
         parcel.writeInt(this.defaultMinSize);
+        parcel.writeInt(this.desktopDefaultMinSize);
         parcel.writeBinderList(this.launchCookies);
         parcel.writeTypedObject(this.positionInParent, i);
         parcel.writeInt(this.parentTaskId);
@@ -368,11 +383,17 @@ public class TaskInfo {
         }
         if (CoreRune.MW_CAPTION_FULL_SCREEN) {
             parcel.writeBoolean(this.isTopFullScreenWindow);
+            parcel.writeBoolean(this.isGameToolsOverlayVisible);
+            parcel.writeBoolean(this.isFullSizeWindow);
+            parcel.writeBoolean(this.isHandleImmersive);
         }
         if (CoreRune.MW_CAPTION_CUTOUT) {
             parcel.writeTypedObject(this.safeCutoutInsets, i);
+            parcel.writeBoolean(this.isDisplayCutoutHide);
         }
         parcel.writeBoolean(this.activatableDeskRoot);
+        parcel.writeBoolean(this.hasNoTopWindow);
+        parcel.writeBoolean(this.requestFullscreenMode);
     }
 
     public String toString() {
@@ -416,6 +437,8 @@ public class TaskInfo {
         sb.append(this.maxHeight);
         sb.append(" defaultMinSize=");
         sb.append(this.defaultMinSize);
+        sb.append(" desktopDefaultMinSize=");
+        sb.append(this.desktopDefaultMinSize);
         sb.append(" token=");
         sb.append(this.token);
         sb.append(" topActivityType=");
@@ -506,8 +529,13 @@ public class TaskInfo {
         sb.append(this.isLaunchedFromHomeSwipe ? " isLaunchedFromHomeSwipe=true" : "");
         sb.append(this.isKeepScreenOn ? " isKeepScreenOn=true" : "");
         sb.append(this.isTopFullScreenWindow ? " isTopFullScreenWindow=true" : "");
+        sb.append(this.isGameToolsOverlayVisible ? " isGameToolsOverlayVisible=true" : "");
+        sb.append(this.isFullSizeWindow ? " isFullSizeWindow=true" : "");
+        sb.append(this.isHandleImmersive ? "isHandleImmersive=true" : "");
         sb.append(" safeCutoutInsets=");
         sb.append(this.safeCutoutInsets);
+        sb.append(this.isDisplayCutoutHide ? " isDisplayCutoutHide=true" : "");
+        sb.append(this.requestFullscreenMode ? " exitDesktopByLaunchingFullscreenMode=true" : "");
         sb.append("}");
         return sb.toString();
     }

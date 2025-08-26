@@ -107,9 +107,9 @@ public class TaskSnapshot implements Parcelable {
         this.mCaptureTime = SystemClock.elapsedRealtimeNanos();
         this.mTopActivityComponent = ComponentName.readFromParcel(parcel);
         this.mSnapshot = (HardwareBuffer) parcel.readTypedObject(HardwareBuffer.CREATOR);
-        int readInt = parcel.readInt();
-        if (readInt >= 0 && readInt < ColorSpace.Named.values().length) {
-            colorSpace = ColorSpace.get(ColorSpace.Named.values()[readInt]);
+        int i = parcel.readInt();
+        if (i >= 0 && i < ColorSpace.Named.values().length) {
+            colorSpace = ColorSpace.get(ColorSpace.Named.values()[i]);
         } else {
             colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
         }

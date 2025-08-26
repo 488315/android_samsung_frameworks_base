@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.tuner.TunerService;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BatteryPreference extends DropDownPreference implements TunerService.Tunable {
     public final String mBattery;
@@ -23,7 +22,7 @@ public class BatteryPreference extends DropDownPreference implements TunerServic
 
     public BatteryPreference(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        this.mBattery = context.getString(17043259);
+        this.mBattery = context.getString(17043263);
         this.mEntryValues = new CharSequence[]{"percent", "default", "disabled"};
     }
 
@@ -62,9 +61,9 @@ public class BatteryPreference extends DropDownPreference implements TunerServic
 
     @Override // androidx.preference.Preference
     public final void persistString(String str) {
-        boolean equals = "percent".equals(str);
-        MetricsLogger.action(this.mContext, IKnoxCustomManager.Stub.TRANSACTION_setFavoriteApp, equals);
-        Settings.System.putInt(this.mContext.getContentResolver(), "status_bar_show_battery_percent", equals ? 1 : 0);
+        boolean zEquals = "percent".equals(str);
+        MetricsLogger.action(this.mContext, IKnoxCustomManager.Stub.TRANSACTION_setFavoriteApp, zEquals);
+        Settings.System.putInt(this.mContext.getContentResolver(), "status_bar_show_battery_percent", zEquals ? 1 : 0);
         if ("disabled".equals(str)) {
             this.mHideList.add(this.mBattery);
         } else {

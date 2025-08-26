@@ -17,7 +17,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MainSwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -27,7 +26,6 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
     public final List mSwitchChangeListeners;
     public final TextView mTextView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: com.android.settingslib.widget.MainSwitchBar.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -144,17 +142,17 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
         this(context, attributeSet, i, 0);
     }
 
-    public MainSwitchBar(Context context, AttributeSet attributeSet, int i, int i2) {
+    public MainSwitchBar(Context context, AttributeSet attributeSet, int i, int i2) throws Exception {
         super(context, attributeSet, i, i2);
         ArrayList arrayList = new ArrayList();
         this.mSwitchChangeListeners = arrayList;
-        boolean isExpressiveTheme = SettingsThemeHelper.isExpressiveTheme(context);
-        LayoutInflater.from(context).inflate(isExpressiveTheme ? R.layout.settingslib_expressive_main_switch_bar : R.layout.settingslib_main_switch_bar, this);
+        boolean zIsExpressiveTheme = SettingsThemeHelper.isExpressiveTheme(context);
+        LayoutInflater.from(context).inflate(zIsExpressiveTheme ? R.layout.settingslib_expressive_main_switch_bar : R.layout.settingslib_main_switch_bar, this);
         setFocusable(true);
         setClickable(true);
         this.mFrameView = findViewById(R.id.frame);
         this.mTextView = (TextView) findViewById(R.id.switch_text);
-        if (isExpressiveTheme) {
+        if (zIsExpressiveTheme) {
             this.mSummaryView = (TextView) findViewById(R.id.switch_summary);
         }
         CompoundButton compoundButton = (CompoundButton) findViewById(android.R.id.switch_widget);
@@ -162,7 +160,7 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() { // from class: com.android.settingslib.widget.MainSwitchBar$$ExternalSyntheticLambda0
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
             public final void onCheckedChanged(CompoundButton compoundButton2, boolean z) {
-                MainSwitchBar mainSwitchBar = MainSwitchBar.this;
+                MainSwitchBar mainSwitchBar = this.f$0;
                 int i3 = MainSwitchBar.$r8$clinit;
                 CompoundButton compoundButton3 = mainSwitchBar.mSwitch;
                 if (compoundButton3 != null) {
@@ -178,21 +176,21 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
             compoundButton.setOnCheckedChangeListener(this);
         }
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, 0, 0);
-            CharSequence text = obtainStyledAttributes.getText(4);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, 0, 0);
+            CharSequence text = typedArrayObtainStyledAttributes.getText(4);
             TextView textView = this.mTextView;
             if (textView != null) {
                 textView.setText(text);
             }
-            if (isExpressiveTheme) {
-                CharSequence text2 = obtainStyledAttributes.getText(7);
+            if (zIsExpressiveTheme) {
+                CharSequence text2 = typedArrayObtainStyledAttributes.getText(7);
                 TextView textView2 = this.mSummaryView;
                 if (textView2 != null) {
                     textView2.setText(text2);
                     this.mSummaryView.setVisibility(TextUtils.isEmpty(text2) ? 8 : 0);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 }

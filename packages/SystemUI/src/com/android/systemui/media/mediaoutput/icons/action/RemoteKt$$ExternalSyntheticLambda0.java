@@ -13,7 +13,6 @@ import com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$$Ex
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class RemoteKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -29,23 +28,23 @@ public final /* synthetic */ class RemoteKt$$ExternalSyntheticLambda0 implements
         int i2 = StrokeJoin.Round;
         PathFillType.Companion.getClass();
         int i3 = PathFillType.EvenOdd;
-        PathBuilder m = ExpandMoreKt$$ExternalSyntheticOutline0.m(15.7921f, 22.0f, 8.2092f, 22.0f);
-        m.curveTo(6.7129f, 22.0f, 5.5f, 20.756f, 5.5f, 19.2227f);
-        m.lineTo(5.5f, 4.7773f);
-        m.curveTo(5.5f, 3.244f, 6.7129f, 2.0f, 8.2092f, 2.0f);
-        m.lineTo(15.7921f, 2.0f);
-        m.curveTo(17.2884f, 2.0f, 18.5f, 3.244f, 18.5f, 4.7773f);
-        m.lineTo(18.5f, 19.2227f);
-        m.curveTo(18.5f, 20.756f, 17.2884f, 22.0f, 15.7921f, 22.0f);
-        m.close();
-        builder.m565addPathoIyEayM("", m._nodes, i3, solidColor, 1.0f, solidColor2, 1.0f, 1.7857144f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM = ExpandMoreKt$$ExternalSyntheticOutline0.m(15.7921f, 22.0f, 8.2092f, 22.0f);
+        pathBuilderM.curveTo(6.7129f, 22.0f, 5.5f, 20.756f, 5.5f, 19.2227f);
+        pathBuilderM.lineTo(5.5f, 4.7773f);
+        pathBuilderM.curveTo(5.5f, 3.244f, 6.7129f, 2.0f, 8.2092f, 2.0f);
+        pathBuilderM.lineTo(15.7921f, 2.0f);
+        pathBuilderM.curveTo(17.2884f, 2.0f, 18.5f, 3.244f, 18.5f, 4.7773f);
+        pathBuilderM.lineTo(18.5f, 19.2227f);
+        pathBuilderM.curveTo(18.5f, 20.756f, 17.2884f, 22.0f, 15.7921f, 22.0f);
+        pathBuilderM.close();
+        builder.m567addPathoIyEayM("", pathBuilderM._nodes, i3, solidColor, 1.0f, solidColor2, 1.0f, 1.7857144f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
         SolidColor solidColor3 = new SolidColor(ColorKt.Color(0), null);
         SolidColor solidColor4 = new SolidColor(ColorKt.Color(4278190080L), null);
-        PathBuilder m2 = ShortcutHelperKt$$ExternalSyntheticOutline0.m(9.2607f, 8.1429f);
-        m2.arcToRelative(2.7857f, 2.8571f, 5.5714f, false);
-        m2.arcToRelative(2.7857f, 2.8571f, -5.5714f, false);
-        m2.close();
-        builder.m565addPathoIyEayM("", m2._nodes, i3, solidColor3, 1.0f, solidColor4, 1.0f, 1.4285715f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM2 = ShortcutHelperKt$$ExternalSyntheticOutline0.m(9.2607f, 8.1429f);
+        pathBuilderM2.arcToRelative(2.7857f, 2.8571f, 5.5714f, false);
+        pathBuilderM2.arcToRelative(2.7857f, 2.8571f, -5.5714f, false);
+        pathBuilderM2.close();
+        builder.m567addPathoIyEayM("", pathBuilderM2._nodes, i3, solidColor3, 1.0f, solidColor4, 1.0f, 1.4285715f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         SolidColor solidColor5 = new SolidColor(ColorKt.Color(4278190080L), null);
         SolidColor solidColor6 = new SolidColor(ColorKt.Color(0), null);
         PathBuilder pathBuilder = new PathBuilder();
@@ -70,7 +69,7 @@ public final /* synthetic */ class RemoteKt$$ExternalSyntheticLambda0 implements
         pathBuilder.curveTo(15.25f, 18.5948f, 14.7053f, 19.1548f, 14.0319f, 19.1548f);
         pathBuilder.curveTo(13.3585f, 19.1548f, 12.8138f, 18.5948f, 12.8138f, 17.9054f);
         pathBuilder.close();
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor5, 1.0f, solidColor6, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, 0, solidColor5, 1.0f, solidColor6, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

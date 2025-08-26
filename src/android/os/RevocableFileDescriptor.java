@@ -38,16 +38,16 @@ public class RevocableFileDescriptor {
             while (i2 < i) {
                 try {
                     bArr2 = bArr;
-                } catch (InterruptedIOException e) {
-                    e = e;
-                    bArr2 = bArr;
-                }
-                try {
-                    return i2 + Os.pread(RevocableFileDescriptor.this.mInner, bArr2, i2, i - i2, i2 + j);
+                    try {
+                        return i2 + Os.pread(RevocableFileDescriptor.this.mInner, bArr2, i2, i - i2, i2 + j);
+                    } catch (InterruptedIOException e) {
+                        e = e;
+                        i2 += e.bytesTransferred;
+                        bArr = bArr2;
+                    }
                 } catch (InterruptedIOException e2) {
                     e = e2;
-                    i2 += e.bytesTransferred;
-                    bArr = bArr2;
+                    bArr2 = bArr;
                 }
             }
             return i2;
@@ -61,16 +61,16 @@ public class RevocableFileDescriptor {
             while (i2 < i) {
                 try {
                     bArr2 = bArr;
-                } catch (InterruptedIOException e) {
-                    e = e;
-                    bArr2 = bArr;
-                }
-                try {
-                    return i2 + Os.pwrite(RevocableFileDescriptor.this.mInner, bArr2, i2, i - i2, i2 + j);
+                    try {
+                        return i2 + Os.pwrite(RevocableFileDescriptor.this.mInner, bArr2, i2, i - i2, i2 + j);
+                    } catch (InterruptedIOException e) {
+                        e = e;
+                        i2 += e.bytesTransferred;
+                        bArr = bArr2;
+                    }
                 } catch (InterruptedIOException e2) {
                     e = e2;
-                    i2 += e.bytesTransferred;
-                    bArr = bArr2;
+                    bArr2 = bArr;
                 }
             }
             return i2;

@@ -87,6 +87,7 @@ import androidx.compose.ui.input.pointer.PointerInputEvent;
 import androidx.compose.ui.input.pointer.PointerInputEventData;
 import androidx.compose.ui.input.pointer.PointerInputEventProcessor;
 import androidx.compose.ui.input.pointer.PointerKeyboardModifiers;
+import androidx.compose.ui.input.pointer.PointerType;
 import androidx.compose.ui.input.rotary.RotaryInputModifierKt;
 import androidx.compose.ui.input.rotary.RotaryInputModifierNode;
 import androidx.compose.ui.input.rotary.RotaryScrollEvent;
@@ -96,6 +97,7 @@ import androidx.compose.ui.modifier.ModifierLocalManager;
 import androidx.compose.ui.node.DelegatableNodeKt;
 import androidx.compose.ui.node.DelegatingNode;
 import androidx.compose.ui.node.DepthSortedSetsForDifferentPasses;
+import androidx.compose.ui.node.HitTestResult;
 import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.LayoutNodeDrawScope;
 import androidx.compose.ui.node.LayoutNodeLayoutDelegate;
@@ -109,11 +111,18 @@ import androidx.compose.ui.node.OwnedLayer;
 import androidx.compose.ui.node.Owner;
 import androidx.compose.ui.node.OwnerSnapshotObserver;
 import androidx.compose.ui.platform.AndroidComposeView;
+import androidx.compose.ui.platform.WrappedComposition;
 import androidx.compose.ui.scrollcapture.ScrollCapture;
 import androidx.compose.ui.semantics.EmptySemanticsElement;
 import androidx.compose.ui.semantics.EmptySemanticsModifier;
+import androidx.compose.ui.semantics.SemanticsConfiguration;
+import androidx.compose.ui.semantics.SemanticsNode;
+import androidx.compose.ui.semantics.SemanticsNodeKt;
 import androidx.compose.ui.semantics.SemanticsOwner;
+import androidx.compose.ui.semantics.SemanticsProperties;
 import androidx.compose.ui.spatial.RectManager;
+import androidx.compose.ui.spatial.RectManagerKt;
+import androidx.compose.ui.spatial.ThrottledCallbacks;
 import androidx.compose.ui.text.TextRange;
 import androidx.compose.ui.text.font.FontFamilyResolver_androidKt;
 import androidx.compose.ui.text.input.ImeAction;
@@ -132,8 +141,10 @@ import androidx.compose.ui.unit.AndroidDensity_androidKt;
 import androidx.compose.ui.unit.Constraints;
 import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.IntOffset;
+import androidx.compose.ui.unit.IntOffsetKt;
 import androidx.compose.ui.unit.IntSize;
 import androidx.compose.ui.unit.LayoutDirection;
+import androidx.compose.ui.viewinterop.AndroidViewHolder;
 import androidx.core.view.ViewCompat;
 import androidx.emoji2.text.EmojiCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -145,17 +156,23 @@ import androidx.savedstate.ViewTreeSavedStateRegistryOwner;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import kotlin.KotlinNothingValueException;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.NotImplementedError;
+import kotlin.ResultKt;
 import kotlin.ULong;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
@@ -164,8 +181,8 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.MutablePropertyReference0Impl;
 import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
+import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidComposeView extends ViewGroup implements Owner, ViewRootForTest, MatrixPositionCalculator, DefaultLifecycleObserver {
     public static final Companion Companion = new Companion(null);
@@ -250,13 +267,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     public long windowPosition;
     public final float[] windowToViewMatrix;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
-        public static final boolean access$getIsShowingLayoutBounds(Companion companion) {
+        public static final boolean access$getIsShowingLayoutBounds(Companion companion) throws ClassNotFoundException {
             companion.getClass();
             try {
                 if (AndroidComposeView.systemPropertiesClass == null) {
@@ -265,8 +281,8 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                     AndroidComposeView.getBooleanMethod = cls.getDeclaredMethod("getBoolean", String.class, Boolean.TYPE);
                 }
                 Method method = AndroidComposeView.getBooleanMethod;
-                Object invoke = method != null ? method.invoke(null, "debug.layout", Boolean.FALSE) : null;
-                Boolean bool = invoke instanceof Boolean ? (Boolean) invoke : null;
+                Object objInvoke = method != null ? method.invoke(null, "debug.layout", Boolean.FALSE) : null;
+                Boolean bool = objInvoke instanceof Boolean ? (Boolean) objInvoke : null;
                 if (bool != null) {
                     return bool.booleanValue();
                 }
@@ -280,7 +296,6 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewTreeOwners {
         public final LifecycleOwner lifecycleOwner;
         public final SavedStateRegistryOwner savedStateRegistryOwner;
@@ -291,30 +306,48 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         }
     }
 
+    /* renamed from: androidx.compose.ui.platform.AndroidComposeView$textInputSession$1, reason: invalid class name and case insensitive filesystem */
+    final class C07531 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C07531(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AndroidComposeView.this.textInputSession(null, this);
+        }
+    }
+
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v40, types: [androidx.compose.ui.platform.AndroidComposeView$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r0v41, types: [androidx.compose.ui.platform.AndroidComposeView$$ExternalSyntheticLambda1] */
     /* JADX WARN: Type inference failed for: r0v42, types: [androidx.compose.ui.platform.AndroidComposeView$$ExternalSyntheticLambda2] */
     /* JADX WARN: Type inference failed for: r0v63, types: [androidx.compose.ui.platform.AndroidComposeView$resendMotionEventRunnable$1] */
     public AndroidComposeView(Context context, CoroutineContext coroutineContext) {
-        super(context);
         int i;
+        super(context);
         int i2 = 0;
         Offset.Companion.getClass();
         this.lastDownPointerPosition = Offset.Unspecified;
         int i3 = 1;
         this.superclassInitComplete = true;
-        byte b = 0;
-        byte b2 = 0;
+        Object[] objArr = 0;
+        Object[] objArr2 = 0;
         this.sharedDrawScope = new LayoutNodeDrawScope(null, i3, 0 == true ? 1 : 0);
-        MutableState mutableStateOf = SnapshotStateKt.mutableStateOf(AndroidDensity_androidKt.Density(context), SnapshotStateKt.referentialEqualityPolicy());
-        this.density$delegate = mutableStateOf;
+        MutableState mutableStateMutableStateOf = SnapshotStateKt.mutableStateOf(AndroidDensity_androidKt.Density(context), SnapshotStateKt.referentialEqualityPolicy());
+        this.density$delegate = mutableStateMutableStateOf;
         EmptySemanticsModifier emptySemanticsModifier = new EmptySemanticsModifier();
         EmptySemanticsElement emptySemanticsElement = new EmptySemanticsElement(emptySemanticsModifier);
         ModifierNodeElement<BringIntoViewOnScreenResponderNode> modifierNodeElement = new ModifierNodeElement<BringIntoViewOnScreenResponderNode>() { // from class: androidx.compose.ui.platform.AndroidComposeView$bringIntoViewNode$1
             @Override // androidx.compose.ui.node.ModifierNodeElement
             public final Modifier.Node create() {
-                return new BringIntoViewOnScreenResponderNode(AndroidComposeView.this);
+                return new BringIntoViewOnScreenResponderNode(this.this$0);
             }
 
             public final boolean equals(Object obj) {
@@ -322,12 +355,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             }
 
             public final int hashCode() {
-                return AndroidComposeView.this.hashCode();
+                return this.this$0.hashCode();
             }
 
             @Override // androidx.compose.ui.node.ModifierNodeElement
             public final void update(Modifier.Node node) {
-                ((BringIntoViewOnScreenResponderNode) node).view = AndroidComposeView.this;
+                ((BringIntoViewOnScreenResponderNode) node).view = this.this$0;
             }
         };
         FocusOwnerImpl focusOwnerImpl = new FocusOwnerImpl(new AndroidComposeView$focusOwner$1(this), new AndroidComposeView$focusOwner$2(this), new AndroidComposeView$focusOwner$3(this), new AndroidComposeView$focusOwner$4(this), new AndroidComposeView$focusOwner$5(this), new MutablePropertyReference0Impl(this) { // from class: androidx.compose.ui.platform.AndroidComposeView$focusOwner$6
@@ -349,27 +382,27 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         this.dragAndDropManager = androidDragAndDropManager;
         this._windowInfo = new LazyWindowInfo();
         Modifier.Companion companion = Modifier.Companion;
-        Modifier onKeyEvent = KeyInputModifierKt.onKeyEvent(companion, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1
+        Modifier modifierOnKeyEvent = KeyInputModifierKt.onKeyEvent(companion, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                final FocusDirection focusDirection;
+            public final Object mo781invoke(Object obj) {
+                final FocusDirection focusDirectionM368boximpl;
                 int i4;
                 KeyEvent keyEvent = ((androidx.compose.ui.input.key.KeyEvent) obj).nativeKeyEvent;
-                AndroidComposeView.this.getClass();
-                long m578getKeyZmokQxo = KeyEvent_androidKt.m578getKeyZmokQxo(keyEvent);
+                this.this$0.getClass();
+                long jM580getKeyZmokQxo = KeyEvent_androidKt.m580getKeyZmokQxo(keyEvent);
                 Key.Companion.getClass();
-                if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.NavigatePrevious)) {
+                if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.NavigatePrevious)) {
                     FocusDirection.Companion.getClass();
-                    focusDirection = FocusDirection.m366boximpl(FocusDirection.Previous);
-                } else if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.NavigateNext)) {
+                    focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Previous);
+                } else if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.NavigateNext)) {
                     FocusDirection.Companion.getClass();
-                    focusDirection = FocusDirection.m366boximpl(FocusDirection.Next);
-                } else if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.Tab)) {
+                    focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Next);
+                } else if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.Tab)) {
                     if (keyEvent.isShiftPressed()) {
                         FocusDirection.Companion.getClass();
                         i4 = FocusDirection.Previous;
@@ -377,105 +410,105 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                         FocusDirection.Companion.getClass();
                         i4 = FocusDirection.Next;
                     }
-                    focusDirection = FocusDirection.m366boximpl(i4);
-                } else if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.DirectionRight)) {
+                    focusDirectionM368boximpl = FocusDirection.m368boximpl(i4);
+                } else if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.DirectionRight)) {
                     FocusDirection.Companion.getClass();
-                    focusDirection = FocusDirection.m366boximpl(FocusDirection.Right);
-                } else if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.DirectionLeft)) {
+                    focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Right);
+                } else if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.DirectionLeft)) {
                     FocusDirection.Companion.getClass();
-                    focusDirection = FocusDirection.m366boximpl(FocusDirection.Left);
+                    focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Left);
                 } else {
-                    if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.DirectionUp) ? true : Key.m576equalsimpl0(m578getKeyZmokQxo, Key.PageUp)) {
+                    if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.DirectionUp) ? true : Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.PageUp)) {
                         FocusDirection.Companion.getClass();
-                        focusDirection = FocusDirection.m366boximpl(FocusDirection.Up);
+                        focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Up);
                     } else {
-                        if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.DirectionDown) ? true : Key.m576equalsimpl0(m578getKeyZmokQxo, Key.PageDown)) {
+                        if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.DirectionDown) ? true : Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.PageDown)) {
                             FocusDirection.Companion.getClass();
-                            focusDirection = FocusDirection.m366boximpl(FocusDirection.Down);
+                            focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Down);
                         } else {
-                            if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.DirectionCenter) ? true : Key.m576equalsimpl0(m578getKeyZmokQxo, Key.Enter) ? true : Key.m576equalsimpl0(m578getKeyZmokQxo, Key.NumPadEnter)) {
+                            if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.DirectionCenter) ? true : Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.Enter) ? true : Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.NumPadEnter)) {
                                 FocusDirection.Companion.getClass();
-                                focusDirection = FocusDirection.m366boximpl(FocusDirection.Enter);
+                                focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Enter);
                             } else {
-                                if (Key.m576equalsimpl0(m578getKeyZmokQxo, Key.Back) ? true : Key.m576equalsimpl0(m578getKeyZmokQxo, Key.Escape)) {
+                                if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.Back) ? true : Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.Escape)) {
                                     FocusDirection.Companion.getClass();
-                                    focusDirection = FocusDirection.m366boximpl(FocusDirection.Exit);
+                                    focusDirectionM368boximpl = FocusDirection.m368boximpl(FocusDirection.Exit);
                                 } else {
-                                    focusDirection = null;
+                                    focusDirectionM368boximpl = null;
                                 }
                             }
                         }
                     }
                 }
-                if (focusDirection != null) {
-                    int m579getTypeZmokQxo = KeyEvent_androidKt.m579getTypeZmokQxo(keyEvent);
+                if (focusDirectionM368boximpl != null) {
+                    int iM581getTypeZmokQxo = KeyEvent_androidKt.m581getTypeZmokQxo(keyEvent);
                     KeyEventType.Companion.getClass();
-                    if (m579getTypeZmokQxo == KeyEventType.KeyDown) {
-                        int i5 = focusDirection.value;
-                        Integer m368toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(i5);
-                        if (ComposeUiFlags.isViewFocusFixEnabled && AndroidComposeView.this.hasFocus() && m368toAndroidFocusDirection3ESFkO8 != null && AndroidComposeView.this.m695onMoveFocusInChildren3ESFkO8(i5)) {
+                    if (iM581getTypeZmokQxo == KeyEventType.KeyDown) {
+                        int i5 = focusDirectionM368boximpl.value;
+                        Integer numM370toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(i5);
+                        if (ComposeUiFlags.isViewFocusFixEnabled && this.this$0.hasFocus() && numM370toAndroidFocusDirection3ESFkO8 != null && this.this$0.m697onMoveFocusInChildren3ESFkO8(i5)) {
                             return Boolean.TRUE;
                         }
-                        Rect onFetchFocusRect = AndroidComposeView.this.onFetchFocusRect();
-                        Boolean m372focusSearchULY8qGw = AndroidComposeView.this.focusOwner.m372focusSearchULY8qGw(i5, onFetchFocusRect, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1$focusWasMovedOrCancelled$1
+                        Rect rectOnFetchFocusRect = this.this$0.onFetchFocusRect();
+                        Boolean boolM374focusSearchULY8qGw = this.this$0.focusOwner.m374focusSearchULY8qGw(i5, rectOnFetchFocusRect, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1$focusWasMovedOrCancelled$1
                             {
                                 super(1);
                             }
 
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
-                                return Boolean.valueOf(((FocusTargetNode) obj2).m378requestFocus3ESFkO8(FocusDirection.this.value));
+                            public final Object mo781invoke(Object obj2) {
+                                return Boolean.valueOf(((FocusTargetNode) obj2).m380requestFocus3ESFkO8(focusDirectionM368boximpl.value));
                             }
                         });
-                        if (m372focusSearchULY8qGw != null ? m372focusSearchULY8qGw.booleanValue() : true) {
+                        if (boolM374focusSearchULY8qGw != null ? boolM374focusSearchULY8qGw.booleanValue() : true) {
                             return Boolean.TRUE;
                         }
-                        if (!FocusOwnerImplKt.m375is1dFocusSearch3ESFkO8(i5)) {
+                        if (!FocusOwnerImplKt.m377is1dFocusSearch3ESFkO8(i5)) {
                             return Boolean.FALSE;
                         }
-                        if (m368toAndroidFocusDirection3ESFkO8 != null) {
-                            View findNextNonChildView = AndroidComposeView.this.findNextNonChildView(m368toAndroidFocusDirection3ESFkO8.intValue());
-                            if (Intrinsics.areEqual(findNextNonChildView, AndroidComposeView.this)) {
-                                findNextNonChildView = null;
+                        if (numM370toAndroidFocusDirection3ESFkO8 != null) {
+                            View viewFindNextNonChildView = this.this$0.findNextNonChildView(numM370toAndroidFocusDirection3ESFkO8.intValue());
+                            if (Intrinsics.areEqual(viewFindNextNonChildView, this.this$0)) {
+                                viewFindNextNonChildView = null;
                             }
-                            if (findNextNonChildView != null) {
-                                android.graphics.Rect androidRect = onFetchFocusRect != null ? RectHelper_androidKt.toAndroidRect(onFetchFocusRect) : null;
+                            if (viewFindNextNonChildView != null) {
+                                android.graphics.Rect androidRect = rectOnFetchFocusRect != null ? RectHelper_androidKt.toAndroidRect(rectOnFetchFocusRect) : null;
                                 if (androidRect == null) {
                                     throw new IllegalStateException("Invalid rect");
                                 }
-                                ViewGroup viewGroup = (ViewGroup) AndroidComposeView.this.getRootView();
-                                viewGroup.offsetDescendantRectToMyCoords(AndroidComposeView.this, androidRect);
-                                viewGroup.offsetRectIntoDescendantCoords(findNextNonChildView, androidRect);
-                                if (FocusInteropUtils_androidKt.requestInteropFocus(findNextNonChildView, m368toAndroidFocusDirection3ESFkO8, androidRect)) {
+                                ViewGroup viewGroup = (ViewGroup) this.this$0.getRootView();
+                                viewGroup.offsetDescendantRectToMyCoords(this.this$0, androidRect);
+                                viewGroup.offsetRectIntoDescendantCoords(viewFindNextNonChildView, androidRect);
+                                if (FocusInteropUtils_androidKt.requestInteropFocus(viewFindNextNonChildView, numM370toAndroidFocusDirection3ESFkO8, androidRect)) {
                                     return Boolean.TRUE;
                                 }
                             }
                         }
-                        if (!AndroidComposeView.this.focusOwner.m370clearFocusI7lrPNg(i5, false, false)) {
+                        if (!this.this$0.focusOwner.m372clearFocusI7lrPNg(i5, false, false)) {
                             return Boolean.TRUE;
                         }
-                        Boolean m372focusSearchULY8qGw2 = AndroidComposeView.this.focusOwner.m372focusSearchULY8qGw(i5, null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1.1
+                        Boolean boolM374focusSearchULY8qGw2 = this.this$0.focusOwner.m374focusSearchULY8qGw(i5, null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$keyInputModifier$1.1
                             {
                                 super(1);
                             }
 
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
-                                return Boolean.valueOf(((FocusTargetNode) obj2).m378requestFocus3ESFkO8(FocusDirection.this.value));
+                            public final Object mo781invoke(Object obj2) {
+                                return Boolean.valueOf(((FocusTargetNode) obj2).m380requestFocus3ESFkO8(focusDirectionM368boximpl.value));
                             }
                         });
-                        return Boolean.valueOf(m372focusSearchULY8qGw2 != null ? m372focusSearchULY8qGw2.booleanValue() : true);
+                        return Boolean.valueOf(boolM374focusSearchULY8qGw2 != null ? boolM374focusSearchULY8qGw2.booleanValue() : true);
                     }
                 }
                 return Boolean.FALSE;
             }
         });
-        Modifier onRotaryScrollEvent = RotaryInputModifierKt.onRotaryScrollEvent(companion, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$rotaryInputModifier$1
+        Modifier modifierOnRotaryScrollEvent = RotaryInputModifierKt.onRotaryScrollEvent(companion, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$rotaryInputModifier$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Boolean.FALSE;
             }
         });
@@ -484,15 +517,15 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         this.viewConfiguration = androidViewConfiguration;
         LayoutNode layoutNode = new LayoutNode(false, 0, 3, null);
         layoutNode.setMeasurePolicy(RootMeasurePolicy.INSTANCE);
-        layoutNode.setDensity$1((Density) ((SnapshotMutableStateImpl) mutableStateOf).getValue());
+        layoutNode.setDensity$1((Density) ((SnapshotMutableStateImpl) mutableStateMutableStateOf).getValue());
         layoutNode.setViewConfiguration(androidViewConfiguration);
-        layoutNode.setModifier(emptySemanticsElement.then(onRotaryScrollEvent).then(onKeyEvent).then(focusOwnerImpl.modifier).then(androidDragAndDropManager.modifier).then(modifierNodeElement));
+        layoutNode.setModifier(emptySemanticsElement.then(modifierOnRotaryScrollEvent).then(modifierOnKeyEvent).then(focusOwnerImpl.modifier).then(androidDragAndDropManager.modifier).then(modifierNodeElement));
         this.root = layoutNode;
-        MutableIntObjectMap mutableIntObjectMapOf = IntObjectMapKt.mutableIntObjectMapOf();
-        this.layoutNodes = mutableIntObjectMapOf;
-        RectManager rectManager = new RectManager(mutableIntObjectMapOf);
+        MutableIntObjectMap mutableIntObjectMapMutableIntObjectMapOf = IntObjectMapKt.mutableIntObjectMapOf();
+        this.layoutNodes = mutableIntObjectMapMutableIntObjectMapOf;
+        RectManager rectManager = new RectManager(mutableIntObjectMapMutableIntObjectMapOf);
         this.rectManager = rectManager;
-        SemanticsOwner semanticsOwner = new SemanticsOwner(layoutNode, emptySemanticsModifier, mutableIntObjectMapOf);
+        SemanticsOwner semanticsOwner = new SemanticsOwner(layoutNode, emptySemanticsModifier, mutableIntObjectMapMutableIntObjectMapOf);
         this.semanticsOwner = semanticsOwner;
         AndroidComposeViewAccessibilityDelegateCompat androidComposeViewAccessibilityDelegateCompat = new AndroidComposeViewAccessibilityDelegateCompat(this);
         this.composeAccessibilityDelegate = androidComposeViewAccessibilityDelegateCompat;
@@ -508,7 +541,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         this.configurationChangeObserver = new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$configurationChangeObserver$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Unit.INSTANCE;
             }
         };
@@ -528,13 +561,13 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Function0 function0 = (Function0) obj;
-                Handler handler = AndroidComposeView.this.getHandler();
+                Handler handler = this.this$0.getHandler();
                 if ((handler != null ? handler.getLooper() : null) == Looper.myLooper()) {
                     function0.invoke();
                 } else {
-                    Handler handler2 = AndroidComposeView.this.getHandler();
+                    Handler handler2 = this.this$0.getHandler();
                     if (handler2 != null) {
                         handler2.post(new AndroidComposeView$$ExternalSyntheticLambda3(function0, 1));
                     }
@@ -547,9 +580,9 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         IntOffset.Companion companion2 = IntOffset.Companion;
         this.globalPosition = (j & 4294967295L) | (j << 32);
         this.tmpPositionArray = new int[]{0, 0};
-        this.tmpMatrix = Matrix.m481constructorimpl$default();
-        this.viewToWindowMatrix = Matrix.m481constructorimpl$default();
-        this.windowToViewMatrix = Matrix.m481constructorimpl$default();
+        this.tmpMatrix = Matrix.m483constructorimpl$default();
+        this.viewToWindowMatrix = Matrix.m483constructorimpl$default();
+        this.windowToViewMatrix = Matrix.m483constructorimpl$default();
         this.lastMatrixRecalculationAnimationTime = -1L;
         this.windowPosition = Offset.Infinite;
         this.isRenderNodeCompatible = true;
@@ -561,13 +594,13 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return (AndroidComposeView.ViewTreeOwners) ((SnapshotMutableStateImpl) AndroidComposeView.this._viewTreeOwners$delegate).getValue();
+                return (AndroidComposeView.ViewTreeOwners) ((SnapshotMutableStateImpl) this.this$0._viewTreeOwners$delegate).getValue();
             }
         });
         this.globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: androidx.compose.ui.platform.AndroidComposeView$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                AndroidComposeView androidComposeView = AndroidComposeView.this;
+                AndroidComposeView androidComposeView = this.f$0;
                 AndroidComposeView.Companion companion3 = AndroidComposeView.Companion;
                 androidComposeView.updatePositionCacheAndDispatch();
             }
@@ -575,7 +608,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         this.scrollChangedListener = new ViewTreeObserver.OnScrollChangedListener() { // from class: androidx.compose.ui.platform.AndroidComposeView$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnScrollChangedListener
             public final void onScrollChanged() {
-                AndroidComposeView androidComposeView = AndroidComposeView.this;
+                AndroidComposeView androidComposeView = this.f$0;
                 AndroidComposeView.Companion companion3 = AndroidComposeView.Companion;
                 androidComposeView.updatePositionCacheAndDispatch();
             }
@@ -584,7 +617,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             @Override // android.view.ViewTreeObserver.OnTouchModeChangeListener
             public final void onTouchModeChanged(boolean z) {
                 int i4;
-                InputModeManagerImpl inputModeManagerImpl = AndroidComposeView.this._inputModeManager;
+                InputModeManagerImpl inputModeManagerImpl = this.f$0._inputModeManager;
                 if (z) {
                     InputMode.Companion.getClass();
                     i4 = InputMode.Touch;
@@ -592,7 +625,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                     InputMode.Companion.getClass();
                     i4 = InputMode.Keyboard;
                 }
-                ((SnapshotMutableStateImpl) inputModeManagerImpl.inputMode$delegate).setValue(InputMode.m572boximpl(i4));
+                ((SnapshotMutableStateImpl) inputModeManagerImpl.inputMode$delegate).setValue(InputMode.m574boximpl(i4));
             }
         };
         TextInputServiceAndroid textInputServiceAndroid = new TextInputServiceAndroid(this, this);
@@ -605,8 +638,8 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         this.fontLoader = new AndroidFontResourceLoader(context);
         this.fontFamilyResolver$delegate = SnapshotStateKt.mutableStateOf(FontFamilyResolver_androidKt.createFontFamilyResolver(context), SnapshotStateKt.referentialEqualityPolicy());
         this.currentFontWeightAdjustment = context.getResources().getConfiguration().fontWeightAdjustment;
-        int m = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(context);
-        LayoutDirection layoutDirection = m != 0 ? m != 1 ? null : LayoutDirection.Rtl : LayoutDirection.Ltr;
+        int iM = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(context);
+        LayoutDirection layoutDirection = iM != 0 ? iM != 1 ? null : LayoutDirection.Rtl : LayoutDirection.Ltr;
         this.layoutDirection$delegate = SnapshotStateKt.mutableStateOf$default(layoutDirection == null ? LayoutDirection.Ltr : layoutDirection);
         this.hapticFeedBack = new PlatformHapticFeedback(this);
         if (isInTouchMode()) {
@@ -623,21 +656,21 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i4 = ((InputMode) obj).value;
                 InputMode.Companion.getClass();
-                return Boolean.valueOf(i4 == InputMode.Touch ? AndroidComposeView.this.isInTouchMode() : i4 == InputMode.Keyboard ? AndroidComposeView.this.isInTouchMode() ? AndroidComposeView.this.requestFocusFromTouch() : true : false);
+                return Boolean.valueOf(i4 == InputMode.Touch ? this.this$0.isInTouchMode() : i4 == InputMode.Keyboard ? this.this$0.isInTouchMode() ? this.this$0.requestFocusFromTouch() : true : false);
             }
-        }, b2 == true ? 1 : 0);
+        }, objArr2 == true ? 1 : 0);
         this.modifierLocalManager = new ModifierLocalManager(this);
         this.textToolbar = new AndroidTextToolbar(this);
         this.layerCache = new WeakCache();
-        this.endApplyChangesListeners = new MutableObjectList(i2, i3, b == true ? 1 : 0);
+        this.endApplyChangesListeners = new MutableObjectList(i2, i3, objArr == true ? 1 : 0);
         this.resendMotionEventRunnable = new Runnable() { // from class: androidx.compose.ui.platform.AndroidComposeView$resendMotionEventRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                AndroidComposeView.this.removeCallbacks(this);
-                MotionEvent motionEvent = AndroidComposeView.this.previousMotionEvent;
+                this.this$0.removeCallbacks(this);
+                MotionEvent motionEvent = this.this$0.previousMotionEvent;
                 if (motionEvent != null) {
                     boolean z = motionEvent.getToolType(0) == 3;
                     int actionMasked = motionEvent.getActionMasked();
@@ -652,7 +685,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                     if (actionMasked != 7 && actionMasked != 9) {
                         i4 = 2;
                     }
-                    AndroidComposeView androidComposeView = AndroidComposeView.this;
+                    AndroidComposeView androidComposeView = this.this$0;
                     androidComposeView.sendSimulatedEvent(motionEvent, i4, androidComposeView.relayoutTime, false);
                 }
             }
@@ -666,10 +699,10 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int actionMasked;
-                MotionEvent motionEvent = AndroidComposeView.this.previousMotionEvent;
+                MotionEvent motionEvent = this.this$0.previousMotionEvent;
                 if (motionEvent != null && ((actionMasked = motionEvent.getActionMasked()) == 7 || actionMasked == 9)) {
-                    AndroidComposeView.this.relayoutTime = SystemClock.uptimeMillis();
-                    AndroidComposeView androidComposeView = AndroidComposeView.this;
+                    this.this$0.relayoutTime = SystemClock.uptimeMillis();
+                    AndroidComposeView androidComposeView = this.this$0;
                     androidComposeView.post(androidComposeView.resendMotionEventRunnable);
                 }
                 return Unit.INSTANCE;
@@ -708,12 +741,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: access$onRequestFocusForOwner-7o62pno, reason: not valid java name */
-    public static final boolean m689access$onRequestFocusForOwner7o62pno(AndroidComposeView androidComposeView, FocusDirection focusDirection, Rect rect) {
-        Integer m368toAndroidFocusDirection3ESFkO8;
+    public static final boolean m691access$onRequestFocusForOwner7o62pno(AndroidComposeView androidComposeView, FocusDirection focusDirection, Rect rect) {
+        Integer numM370toAndroidFocusDirection3ESFkO8;
         if (androidComposeView.isFocused() || androidComposeView.hasFocus()) {
             return true;
         }
-        return super.requestFocus((focusDirection == null || (m368toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(focusDirection.value)) == null) ? 130 : m368toAndroidFocusDirection3ESFkO8.intValue(), rect != null ? RectHelper_androidKt.toAndroidRect(rect) : null);
+        return super.requestFocus((focusDirection == null || (numM370toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(focusDirection.value)) == null) ? 130 : numM370toAndroidFocusDirection3ESFkO8.intValue(), rect != null ? RectHelper_androidKt.toAndroidRect(rect) : null);
     }
 
     public static void clearChildInvalidObservations(ViewGroup viewGroup) {
@@ -729,7 +762,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: convertMeasureSpec-I7RO_PI, reason: not valid java name */
-    public static long m690convertMeasureSpecI7RO_PI(int i) {
+    public static long m692convertMeasureSpecI7RO_PI(int i) {
         int mode = View.MeasureSpec.getMode(i);
         int size = View.MeasureSpec.getSize(i);
         if (mode == Integer.MIN_VALUE) {
@@ -789,14 +822,14 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             }
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                int keyAt = sparseArray.keyAt(i);
-                AutofillValue autofillValue = (AutofillValue) sparseArray.get(keyAt);
+                int iKeyAt = sparseArray.keyAt(i);
+                AutofillValue autofillValue = (AutofillValue) sparseArray.get(iKeyAt);
                 AutofillApi26Helper.INSTANCE.getClass();
                 if (autofillValue.isText()) {
-                    String obj = autofillValue.getTextValue().toString();
-                    AutofillNode autofillNode = (AutofillNode) ((LinkedHashMap) autofillTree.children).get(Integer.valueOf(keyAt));
+                    String string = autofillValue.getTextValue().toString();
+                    AutofillNode autofillNode = (AutofillNode) ((LinkedHashMap) autofillTree.children).get(Integer.valueOf(iKeyAt));
                     if (autofillNode != null && (function1 = autofillNode.onFill) != null) {
-                        function1.mo779invoke(obj);
+                        function1.mo781invoke(string);
                         Unit unit = Unit.INSTANCE;
                     }
                 } else {
@@ -816,12 +849,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     @Override // android.view.View
     public final boolean canScrollHorizontally(int i) {
-        return this.composeAccessibilityDelegate.m699canScroll0AR0LA0$ui_release(this.lastDownPointerPosition, i, false);
+        return this.composeAccessibilityDelegate.m701canScroll0AR0LA0$ui_release(this.lastDownPointerPosition, i, false);
     }
 
     @Override // android.view.View
     public final boolean canScrollVertically(int i) {
-        return this.composeAccessibilityDelegate.m699canScroll0AR0LA0$ui_release(this.lastDownPointerPosition, i, true);
+        return this.composeAccessibilityDelegate.m701canScroll0AR0LA0$ui_release(this.lastDownPointerPosition, i, true);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -847,10 +880,10 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         }
         ViewLayer.Companion.getClass();
         if (ViewLayer.shouldUseDispatchDraw) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.clipRect(0.0f, 0.0f, 0.0f, 0.0f);
             super.dispatchDraw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
         ((ArrayList) this.dirtyLayers).clear();
         this.isDrawingContent = false;
@@ -935,7 +968,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         RotaryInputModifierNode rotaryInputModifierNode;
         int size;
         NodeChain nodeChain;
-        DelegatingNode delegatingNode;
+        DelegatingNode delegatingNodeAccess$pop;
         NodeChain nodeChain2;
         if (this.hoverExitReceived) {
             removeCallbacks(this.sendHoverExitEvent);
@@ -952,7 +985,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             return super.dispatchGenericMotionEvent(motionEvent);
         }
         if (!motionEvent.isFromSource(4194304)) {
-            return (m691handleMotionEvent8iAsVTc(motionEvent) & 1) != 0;
+            return (m693handleMotionEvent8iAsVTc(motionEvent) & 1) != 0;
         }
         android.view.ViewConfiguration viewConfiguration = android.view.ViewConfiguration.get(getContext());
         float f = -motionEvent.getAxisValue(26);
@@ -969,75 +1002,73 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean dispatchGenericMotionEvent;
-                dispatchGenericMotionEvent = super/*android.view.ViewGroup*/.dispatchGenericMotionEvent(motionEvent);
-                return Boolean.valueOf(dispatchGenericMotionEvent);
+                return Boolean.valueOf(super/*android.view.ViewGroup*/.dispatchGenericMotionEvent(motionEvent));
             }
         };
         if (focusOwnerImpl.focusInvalidationManager.hasPendingInvalidation()) {
             System.out.println((Object) "FocusRelatedWarning: Dispatching rotary event while the focus system is invalidated.");
             return false;
         }
-        FocusTargetNode findActiveFocusNode = FocusTraversalKt.findActiveFocusNode(focusOwnerImpl.rootFocusNode);
-        if (findActiveFocusNode != null) {
-            if (!findActiveFocusNode.node.isAttached) {
+        FocusTargetNode focusTargetNodeFindActiveFocusNode = FocusTraversalKt.findActiveFocusNode(focusOwnerImpl.rootFocusNode);
+        if (focusTargetNodeFindActiveFocusNode != null) {
+            if (!focusTargetNodeFindActiveFocusNode.node.isAttached) {
                 InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
             }
-            Modifier.Node node = findActiveFocusNode.node;
-            LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(findActiveFocusNode);
+            Modifier.Node node = focusTargetNodeFindActiveFocusNode.node;
+            LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNodeFindActiveFocusNode);
             loop0: while (true) {
-                if (requireLayoutNode == null) {
-                    delegatingNode = 0;
+                if (layoutNodeRequireLayoutNode == null) {
+                    delegatingNodeAccess$pop = 0;
                     break;
                 }
-                if ((requireLayoutNode.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+                if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                     while (node != null) {
                         if ((node.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
-                            ?? r8 = 0;
-                            delegatingNode = node;
-                            while (delegatingNode != 0) {
-                                if (delegatingNode instanceof RotaryInputModifierNode) {
+                            ?? mutableVector = 0;
+                            delegatingNodeAccess$pop = node;
+                            while (delegatingNodeAccess$pop != 0) {
+                                if (delegatingNodeAccess$pop instanceof RotaryInputModifierNode) {
                                     break loop0;
                                 }
-                                if ((delegatingNode.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node2 = delegatingNode.delegate;
+                                if ((delegatingNodeAccess$pop.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node2 = delegatingNodeAccess$pop.delegate;
                                     int i = 0;
-                                    delegatingNode = delegatingNode;
-                                    r8 = r8;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node2 != null) {
                                         if ((node2.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                                             i++;
-                                            r8 = r8;
+                                            mutableVector = mutableVector;
                                             if (i == 1) {
-                                                delegatingNode = node2;
+                                                delegatingNodeAccess$pop = node2;
                                             } else {
-                                                if (r8 == 0) {
-                                                    r8 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r8.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r8.add(node2);
+                                                mutableVector.add(node2);
                                             }
                                         }
                                         node2 = node2.child;
-                                        delegatingNode = delegatingNode;
-                                        r8 = r8;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i == 1) {
                                     }
                                 }
-                                delegatingNode = DelegatableNodeKt.access$pop(r8);
+                                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                             }
                         }
                         node = node.parent;
                     }
                 }
-                requireLayoutNode = requireLayoutNode.getParent$ui_release();
-                node = (requireLayoutNode == null || (nodeChain2 = requireLayoutNode.nodes) == null) ? null : nodeChain2.tail;
+                layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+                node = (layoutNodeRequireLayoutNode == null || (nodeChain2 = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain2.tail;
             }
-            rotaryInputModifierNode = (RotaryInputModifierNode) delegatingNode;
+            rotaryInputModifierNode = (RotaryInputModifierNode) delegatingNodeAccess$pop;
         } else {
             rotaryInputModifierNode = null;
         }
@@ -1047,50 +1078,50 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
             }
             Modifier.Node node4 = node3.node.parent;
-            LayoutNode requireLayoutNode2 = DelegatableNodeKt.requireLayoutNode(rotaryInputModifierNode);
+            LayoutNode layoutNodeRequireLayoutNode2 = DelegatableNodeKt.requireLayoutNode(rotaryInputModifierNode);
             ArrayList arrayList = null;
-            while (requireLayoutNode2 != null) {
-                if ((requireLayoutNode2.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+            while (layoutNodeRequireLayoutNode2 != null) {
+                if ((layoutNodeRequireLayoutNode2.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                     while (node4 != null) {
                         if ((node4.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
-                            Modifier.Node node5 = node4;
-                            MutableVector mutableVector = null;
-                            while (node5 != null) {
-                                if (node5 instanceof RotaryInputModifierNode) {
+                            Modifier.Node nodeAccess$pop = node4;
+                            MutableVector mutableVector2 = null;
+                            while (nodeAccess$pop != null) {
+                                if (nodeAccess$pop instanceof RotaryInputModifierNode) {
                                     if (arrayList == null) {
                                         arrayList = new ArrayList();
                                     }
-                                    arrayList.add(node5);
-                                } else if ((node5.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (node5 instanceof DelegatingNode)) {
+                                    arrayList.add(nodeAccess$pop);
+                                } else if ((nodeAccess$pop.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                     int i2 = 0;
-                                    for (Modifier.Node node6 = ((DelegatingNode) node5).delegate; node6 != null; node6 = node6.child) {
-                                        if ((node6.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+                                    for (Modifier.Node node5 = ((DelegatingNode) nodeAccess$pop).delegate; node5 != null; node5 = node5.child) {
+                                        if ((node5.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                                             i2++;
                                             if (i2 == 1) {
-                                                node5 = node6;
+                                                nodeAccess$pop = node5;
                                             } else {
-                                                if (mutableVector == null) {
-                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector2 == null) {
+                                                    mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (node5 != null) {
-                                                    mutableVector.add(node5);
-                                                    node5 = null;
+                                                if (nodeAccess$pop != null) {
+                                                    mutableVector2.add(nodeAccess$pop);
+                                                    nodeAccess$pop = null;
                                                 }
-                                                mutableVector.add(node6);
+                                                mutableVector2.add(node5);
                                             }
                                         }
                                     }
                                     if (i2 == 1) {
                                     }
                                 }
-                                node5 = DelegatableNodeKt.access$pop(mutableVector);
+                                nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                             }
                         }
                         node4 = node4.parent;
                     }
                 }
-                requireLayoutNode2 = requireLayoutNode2.getParent$ui_release();
-                node4 = (requireLayoutNode2 == null || (nodeChain = requireLayoutNode2.nodes) == null) ? null : nodeChain.tail;
+                layoutNodeRequireLayoutNode2 = layoutNodeRequireLayoutNode2.getParent$ui_release();
+                node4 = (layoutNodeRequireLayoutNode2 == null || (nodeChain = layoutNodeRequireLayoutNode2.nodes) == null) ? null : nodeChain.tail;
             }
             if (arrayList != null && arrayList.size() - 1 >= 0) {
                 while (true) {
@@ -1104,83 +1135,83 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                     size = i3;
                 }
             }
-            DelegatingNode delegatingNode2 = node3.node;
-            ?? r6 = 0;
+            DelegatingNode delegatingNodeAccess$pop2 = node3.node;
+            ?? mutableVector3 = 0;
             while (true) {
-                if (delegatingNode2 != 0) {
-                    if (delegatingNode2 instanceof RotaryInputModifierNode) {
-                        if (((RotaryInputModifierNode) delegatingNode2).onPreRotaryScrollEvent(rotaryScrollEvent)) {
+                if (delegatingNodeAccess$pop2 != 0) {
+                    if (delegatingNodeAccess$pop2 instanceof RotaryInputModifierNode) {
+                        if (((RotaryInputModifierNode) delegatingNodeAccess$pop2).onPreRotaryScrollEvent(rotaryScrollEvent)) {
                             break;
                         }
-                    } else if ((delegatingNode2.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNode2 instanceof DelegatingNode)) {
-                        Modifier.Node node7 = delegatingNode2.delegate;
+                    } else if ((delegatingNodeAccess$pop2.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNodeAccess$pop2 instanceof DelegatingNode)) {
+                        Modifier.Node node6 = delegatingNodeAccess$pop2.delegate;
                         int i4 = 0;
-                        r6 = r6;
-                        delegatingNode2 = delegatingNode2;
-                        while (node7 != null) {
-                            if ((node7.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+                        mutableVector3 = mutableVector3;
+                        delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
+                        while (node6 != null) {
+                            if ((node6.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                                 i4++;
-                                r6 = r6;
+                                mutableVector3 = mutableVector3;
                                 if (i4 == 1) {
-                                    delegatingNode2 = node7;
+                                    delegatingNodeAccess$pop2 = node6;
                                 } else {
-                                    if (r6 == 0) {
-                                        r6 = new MutableVector(new Modifier.Node[16], 0);
+                                    if (mutableVector3 == 0) {
+                                        mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
                                     }
-                                    if (delegatingNode2 != 0) {
-                                        r6.add(delegatingNode2);
-                                        delegatingNode2 = 0;
+                                    if (delegatingNodeAccess$pop2 != 0) {
+                                        mutableVector3.add(delegatingNodeAccess$pop2);
+                                        delegatingNodeAccess$pop2 = 0;
                                     }
-                                    r6.add(node7);
+                                    mutableVector3.add(node6);
                                 }
                             }
-                            node7 = node7.child;
-                            r6 = r6;
-                            delegatingNode2 = delegatingNode2;
+                            node6 = node6.child;
+                            mutableVector3 = mutableVector3;
+                            delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
                         }
                         if (i4 == 1) {
                         }
                     }
-                    delegatingNode2 = DelegatableNodeKt.access$pop(r6);
+                    delegatingNodeAccess$pop2 = DelegatableNodeKt.access$pop(mutableVector3);
                 } else if (!((Boolean) function0.invoke()).booleanValue()) {
-                    DelegatingNode delegatingNode3 = node3.node;
-                    ?? r14 = 0;
+                    DelegatingNode delegatingNodeAccess$pop3 = node3.node;
+                    ?? mutableVector4 = 0;
                     while (true) {
-                        if (delegatingNode3 != 0) {
-                            if (delegatingNode3 instanceof RotaryInputModifierNode) {
-                                if (((RotaryInputModifierNode) delegatingNode3).onRotaryScrollEvent(rotaryScrollEvent)) {
+                        if (delegatingNodeAccess$pop3 != 0) {
+                            if (delegatingNodeAccess$pop3 instanceof RotaryInputModifierNode) {
+                                if (((RotaryInputModifierNode) delegatingNodeAccess$pop3).onRotaryScrollEvent(rotaryScrollEvent)) {
                                     break;
                                 }
-                            } else if ((delegatingNode3.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNode3 instanceof DelegatingNode)) {
-                                Modifier.Node node8 = delegatingNode3.delegate;
+                            } else if ((delegatingNodeAccess$pop3.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && (delegatingNodeAccess$pop3 instanceof DelegatingNode)) {
+                                Modifier.Node node7 = delegatingNodeAccess$pop3.delegate;
                                 int i5 = 0;
-                                delegatingNode3 = delegatingNode3;
-                                r14 = r14;
-                                while (node8 != null) {
-                                    if ((node8.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+                                delegatingNodeAccess$pop3 = delegatingNodeAccess$pop3;
+                                mutableVector4 = mutableVector4;
+                                while (node7 != null) {
+                                    if ((node7.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
                                         i5++;
-                                        r14 = r14;
+                                        mutableVector4 = mutableVector4;
                                         if (i5 == 1) {
-                                            delegatingNode3 = node8;
+                                            delegatingNodeAccess$pop3 = node7;
                                         } else {
-                                            if (r14 == 0) {
-                                                r14 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector4 == 0) {
+                                                mutableVector4 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode3 != 0) {
-                                                r14.add(delegatingNode3);
-                                                delegatingNode3 = 0;
+                                            if (delegatingNodeAccess$pop3 != 0) {
+                                                mutableVector4.add(delegatingNodeAccess$pop3);
+                                                delegatingNodeAccess$pop3 = 0;
                                             }
-                                            r14.add(node8);
+                                            mutableVector4.add(node7);
                                         }
                                     }
-                                    node8 = node8.child;
-                                    delegatingNode3 = delegatingNode3;
-                                    r14 = r14;
+                                    node7 = node7.child;
+                                    delegatingNodeAccess$pop3 = delegatingNodeAccess$pop3;
+                                    mutableVector4 = mutableVector4;
                                 }
                                 if (i5 == 1) {
                                 }
                             }
-                            delegatingNode3 = DelegatableNodeKt.access$pop(r14);
+                            delegatingNodeAccess$pop3 = DelegatableNodeKt.access$pop(mutableVector4);
                         } else if (arrayList != null) {
                             int size2 = arrayList.size();
                             for (int i6 = 0; i6 < size2; i6++) {
@@ -1194,28 +1225,98 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x0150, code lost:
-    
-        if (isPositionChanged(r19) == false) goto L73;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x0153  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean dispatchHoverEvent(android.view.MotionEvent r19) {
-        /*
-            Method dump skipped, instructions count: 348
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.AndroidComposeView.dispatchHoverEvent(android.view.MotionEvent):boolean");
+    public final boolean dispatchHoverEvent(MotionEvent motionEvent) {
+        int i;
+        if (this.hoverExitReceived) {
+            removeCallbacks(this.sendHoverExitEvent);
+            this.sendHoverExitEvent.run();
+        }
+        if (!isBadMotionEvent(motionEvent) && isAttachedToWindow()) {
+            AndroidComposeViewAccessibilityDelegateCompat androidComposeViewAccessibilityDelegateCompat = this.composeAccessibilityDelegate;
+            if (androidComposeViewAccessibilityDelegateCompat.accessibilityManager.isEnabled() && androidComposeViewAccessibilityDelegateCompat.accessibilityManager.isTouchExplorationEnabled()) {
+                int action = motionEvent.getAction();
+                AndroidComposeView androidComposeView = androidComposeViewAccessibilityDelegateCompat.view;
+                if (action == 7 || action == 9) {
+                    float x = motionEvent.getX();
+                    float y = motionEvent.getY();
+                    androidComposeView.measureAndLayout(true);
+                    HitTestResult hitTestResult = new HitTestResult();
+                    LayoutNode layoutNode = androidComposeView.root;
+                    long jFloatToRawIntBits = (Float.floatToRawIntBits(x) << 32) | (Float.floatToRawIntBits(y) & 4294967295L);
+                    Offset.Companion companion = Offset.Companion;
+                    LayoutNode.Companion companion2 = LayoutNode.Companion;
+                    PointerType.Companion.getClass();
+                    layoutNode.m643hitTestSemantics6fMxITs$ui_release(jFloatToRawIntBits, hitTestResult, true);
+                    for (int i2 = hitTestResult.values._size - 1; -1 < i2; i2--) {
+                        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode((Modifier.Node) hitTestResult.values.get(i2));
+                        if (((AndroidViewHolder) androidComposeView.getAndroidViewsHandler$ui_release().layoutNodeToHolder.get(layoutNodeRequireLayoutNode)) != null) {
+                            break;
+                        }
+                        if (layoutNodeRequireLayoutNode.nodes.m665hasH91voCI$ui_release(8)) {
+                            int iSemanticsNodeIdToAccessibilityVirtualNodeId = androidComposeViewAccessibilityDelegateCompat.semanticsNodeIdToAccessibilityVirtualNodeId(layoutNodeRequireLayoutNode.semanticsId);
+                            SemanticsNode SemanticsNode = SemanticsNodeKt.SemanticsNode(layoutNodeRequireLayoutNode, false);
+                            if (SemanticsUtils_androidKt.isImportantForAccessibility(SemanticsNode)) {
+                                SemanticsConfiguration config = SemanticsNode.getConfig();
+                                SemanticsProperties.INSTANCE.getClass();
+                                if (!config.props.containsKey(SemanticsProperties.LinkTestMarker)) {
+                                    i = iSemanticsNodeIdToAccessibilityVirtualNodeId;
+                                    break;
+                                }
+                            } else {
+                                continue;
+                            }
+                        }
+                    }
+                    i = Integer.MIN_VALUE;
+                    androidComposeView.getAndroidViewsHandler$ui_release().dispatchGenericMotionEvent(motionEvent);
+                    int i3 = androidComposeViewAccessibilityDelegateCompat.hoveredVirtualViewId;
+                    if (i3 != i) {
+                        androidComposeViewAccessibilityDelegateCompat.hoveredVirtualViewId = i;
+                        AndroidComposeViewAccessibilityDelegateCompat.sendEventForVirtualView$default(androidComposeViewAccessibilityDelegateCompat, i, 128, null, 12);
+                        AndroidComposeViewAccessibilityDelegateCompat.sendEventForVirtualView$default(androidComposeViewAccessibilityDelegateCompat, i3, 256, null, 12);
+                    }
+                } else if (action == 10) {
+                    int i4 = androidComposeViewAccessibilityDelegateCompat.hoveredVirtualViewId;
+                    if (i4 == Integer.MIN_VALUE) {
+                        androidComposeView.getAndroidViewsHandler$ui_release().dispatchGenericMotionEvent(motionEvent);
+                    } else if (i4 != Integer.MIN_VALUE) {
+                        androidComposeViewAccessibilityDelegateCompat.hoveredVirtualViewId = Integer.MIN_VALUE;
+                        AndroidComposeViewAccessibilityDelegateCompat.sendEventForVirtualView$default(androidComposeViewAccessibilityDelegateCompat, Integer.MIN_VALUE, 128, null, 12);
+                        AndroidComposeViewAccessibilityDelegateCompat.sendEventForVirtualView$default(androidComposeViewAccessibilityDelegateCompat, i4, 256, null, 12);
+                    }
+                }
+            }
+            int actionMasked = motionEvent.getActionMasked();
+            if (actionMasked != 7) {
+                if (actionMasked == 10 && isInBounds(motionEvent)) {
+                    if (motionEvent.getToolType(0) != 3 || motionEvent.getButtonState() == 0) {
+                        MotionEvent motionEvent2 = this.previousMotionEvent;
+                        if (motionEvent2 != null) {
+                            motionEvent2.recycle();
+                        }
+                        this.previousMotionEvent = MotionEvent.obtainNoHistory(motionEvent);
+                        this.hoverExitReceived = true;
+                        postDelayed(this.sendHoverExitEvent, 8L);
+                        return false;
+                    }
+                } else if ((m693handleMotionEvent8iAsVTc(motionEvent) & 1) != 0) {
+                    return true;
+                }
+            } else if (isPositionChanged(motionEvent)) {
+            }
+        }
+        return false;
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchKeyEvent(final KeyEvent keyEvent) {
-        boolean m371dispatchKeyEventYhN2O0w;
         if (!isFocused()) {
-            return this.focusOwner.m371dispatchKeyEventYhN2O0w(keyEvent, new Function0() { // from class: androidx.compose.ui.platform.AndroidComposeView$dispatchKeyEvent$1
+            return this.focusOwner.m373dispatchKeyEventYhN2O0w(keyEvent, new Function0() { // from class: androidx.compose.ui.platform.AndroidComposeView.dispatchKeyEvent.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
@@ -1223,9 +1324,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    boolean dispatchKeyEvent;
-                    dispatchKeyEvent = super/*android.view.ViewGroup*/.dispatchKeyEvent(keyEvent);
-                    return Boolean.valueOf(dispatchKeyEvent);
+                    return Boolean.valueOf(AndroidComposeView.super.dispatchKeyEvent(keyEvent));
                 }
             });
         }
@@ -1233,17 +1332,19 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         int metaState = keyEvent.getMetaState();
         lazyWindowInfo.getClass();
         WindowInfoImpl.Companion.getClass();
-        ((SnapshotMutableStateImpl) WindowInfoImpl.GlobalKeyboardModifiers).setValue(PointerKeyboardModifiers.m596boximpl(metaState));
-        m371dispatchKeyEventYhN2O0w = this.focusOwner.m371dispatchKeyEventYhN2O0w(keyEvent, new Function0() { // from class: androidx.compose.ui.focus.FocusOwner$dispatchKeyEvent$1
+        ((SnapshotMutableStateImpl) WindowInfoImpl.GlobalKeyboardModifiers).setValue(PointerKeyboardModifiers.m598boximpl(metaState));
+        return this.focusOwner.m373dispatchKeyEventYhN2O0w(keyEvent, new Function0() { // from class: androidx.compose.ui.focus.FocusOwner$dispatchKeyEvent$1
             @Override // kotlin.jvm.functions.Function0
             public final /* bridge */ /* synthetic */ Object invoke() {
                 return Boolean.FALSE;
             }
-        });
-        return m371dispatchKeyEventYhN2O0w || super.dispatchKeyEvent(keyEvent);
+        }) || super.dispatchKeyEvent(keyEvent);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:110:0x0150  */
+    /* JADX WARN: Removed duplicated region for block: B:172:0x0202 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:217:0x0197 A[SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r0v11 */
     /* JADX WARN: Type inference failed for: r0v12, types: [androidx.compose.ui.Modifier$Node] */
     /* JADX WARN: Type inference failed for: r0v13, types: [java.lang.Object] */
@@ -1313,77 +1414,81 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     /* JADX WARN: Type inference failed for: r9v38 */
     /* JADX WARN: Type inference failed for: r9v39 */
     @Override // android.view.ViewGroup, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean dispatchKeyEventPreIme(KeyEvent keyEvent) {
         SoftKeyboardInterceptionModifierNode softKeyboardInterceptionModifierNode;
+        DelegatingNode delegatingNodeAccess$pop;
         int size;
         NodeChain nodeChain;
-        DelegatingNode delegatingNode;
+        DelegatingNode delegatingNodeAccess$pop2;
         NodeChain nodeChain2;
         if (isFocused()) {
             FocusOwnerImpl focusOwnerImpl = this.focusOwner;
             if (focusOwnerImpl.focusInvalidationManager.hasPendingInvalidation()) {
                 System.out.println((Object) "FocusRelatedWarning: Dispatching intercepted soft keyboard event while the focus system is invalidated.");
             } else {
-                FocusTargetNode findActiveFocusNode = FocusTraversalKt.findActiveFocusNode(focusOwnerImpl.rootFocusNode);
-                if (findActiveFocusNode != null) {
-                    if (!findActiveFocusNode.node.isAttached) {
+                FocusTargetNode focusTargetNodeFindActiveFocusNode = FocusTraversalKt.findActiveFocusNode(focusOwnerImpl.rootFocusNode);
+                if (focusTargetNodeFindActiveFocusNode != null) {
+                    if (!focusTargetNodeFindActiveFocusNode.node.isAttached) {
                         InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
                     }
-                    Modifier.Node node = findActiveFocusNode.node;
-                    LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(findActiveFocusNode);
+                    Modifier.Node node = focusTargetNodeFindActiveFocusNode.node;
+                    LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNodeFindActiveFocusNode);
                     loop0: while (true) {
-                        if (requireLayoutNode == null) {
-                            delegatingNode = 0;
+                        if (layoutNodeRequireLayoutNode == null) {
+                            delegatingNodeAccess$pop2 = 0;
                             break;
                         }
-                        if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 131072) != 0) {
+                        if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 131072) != 0) {
                             while (node != null) {
                                 if ((node.kindSet & 131072) != 0) {
-                                    ?? r9 = 0;
-                                    delegatingNode = node;
-                                    while (delegatingNode != 0) {
-                                        if (delegatingNode instanceof SoftKeyboardInterceptionModifierNode) {
+                                    ?? mutableVector = 0;
+                                    delegatingNodeAccess$pop2 = node;
+                                    while (delegatingNodeAccess$pop2 != 0) {
+                                        if (delegatingNodeAccess$pop2 instanceof SoftKeyboardInterceptionModifierNode) {
                                             break loop0;
                                         }
-                                        if ((delegatingNode.kindSet & 131072) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                            Modifier.Node node2 = delegatingNode.delegate;
+                                        if ((delegatingNodeAccess$pop2.kindSet & 131072) != 0 && (delegatingNodeAccess$pop2 instanceof DelegatingNode)) {
+                                            Modifier.Node node2 = delegatingNodeAccess$pop2.delegate;
                                             int i = 0;
-                                            delegatingNode = delegatingNode;
-                                            r9 = r9;
+                                            delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
+                                            mutableVector = mutableVector;
                                             while (node2 != null) {
                                                 if ((node2.kindSet & 131072) != 0) {
                                                     i++;
-                                                    r9 = r9;
+                                                    mutableVector = mutableVector;
                                                     if (i == 1) {
-                                                        delegatingNode = node2;
+                                                        delegatingNodeAccess$pop2 = node2;
                                                     } else {
-                                                        if (r9 == 0) {
-                                                            r9 = new MutableVector(new Modifier.Node[16], 0);
+                                                        if (mutableVector == 0) {
+                                                            mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                         }
-                                                        if (delegatingNode != 0) {
-                                                            r9.add(delegatingNode);
-                                                            delegatingNode = 0;
+                                                        if (delegatingNodeAccess$pop2 != 0) {
+                                                            mutableVector.add(delegatingNodeAccess$pop2);
+                                                            delegatingNodeAccess$pop2 = 0;
                                                         }
-                                                        r9.add(node2);
+                                                        mutableVector.add(node2);
                                                     }
                                                 }
                                                 node2 = node2.child;
-                                                delegatingNode = delegatingNode;
-                                                r9 = r9;
+                                                delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
+                                                mutableVector = mutableVector;
                                             }
                                             if (i == 1) {
                                             }
                                         }
-                                        delegatingNode = DelegatableNodeKt.access$pop(r9);
+                                        delegatingNodeAccess$pop2 = DelegatableNodeKt.access$pop(mutableVector);
                                     }
                                 }
                                 node = node.parent;
                             }
                         }
-                        requireLayoutNode = requireLayoutNode.getParent$ui_release();
-                        node = (requireLayoutNode == null || (nodeChain2 = requireLayoutNode.nodes) == null) ? null : nodeChain2.tail;
+                        layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+                        node = (layoutNodeRequireLayoutNode == null || (nodeChain2 = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain2.tail;
                     }
-                    softKeyboardInterceptionModifierNode = (SoftKeyboardInterceptionModifierNode) delegatingNode;
+                    softKeyboardInterceptionModifierNode = (SoftKeyboardInterceptionModifierNode) delegatingNodeAccess$pop2;
                 } else {
                     softKeyboardInterceptionModifierNode = null;
                 }
@@ -1393,155 +1498,168 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                         InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
                     }
                     Modifier.Node node4 = node3.node.parent;
-                    LayoutNode requireLayoutNode2 = DelegatableNodeKt.requireLayoutNode(softKeyboardInterceptionModifierNode);
+                    LayoutNode layoutNodeRequireLayoutNode2 = DelegatableNodeKt.requireLayoutNode(softKeyboardInterceptionModifierNode);
                     ArrayList arrayList = null;
-                    while (requireLayoutNode2 != null) {
-                        if ((requireLayoutNode2.nodes.head.aggregateChildKindSet & 131072) != 0) {
+                    while (layoutNodeRequireLayoutNode2 != null) {
+                        if ((layoutNodeRequireLayoutNode2.nodes.head.aggregateChildKindSet & 131072) != 0) {
                             while (node4 != null) {
                                 if ((node4.kindSet & 131072) != 0) {
-                                    Modifier.Node node5 = node4;
-                                    MutableVector mutableVector = null;
-                                    while (node5 != null) {
-                                        if (node5 instanceof SoftKeyboardInterceptionModifierNode) {
+                                    Modifier.Node nodeAccess$pop = node4;
+                                    MutableVector mutableVector2 = null;
+                                    while (nodeAccess$pop != null) {
+                                        if (nodeAccess$pop instanceof SoftKeyboardInterceptionModifierNode) {
                                             if (arrayList == null) {
                                                 arrayList = new ArrayList();
                                             }
-                                            arrayList.add(node5);
-                                        } else if ((node5.kindSet & 131072) != 0 && (node5 instanceof DelegatingNode)) {
+                                            arrayList.add(nodeAccess$pop);
+                                        } else if ((nodeAccess$pop.kindSet & 131072) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                             int i2 = 0;
-                                            for (Modifier.Node node6 = ((DelegatingNode) node5).delegate; node6 != null; node6 = node6.child) {
-                                                if ((node6.kindSet & 131072) != 0) {
+                                            for (Modifier.Node node5 = ((DelegatingNode) nodeAccess$pop).delegate; node5 != null; node5 = node5.child) {
+                                                if ((node5.kindSet & 131072) != 0) {
                                                     i2++;
                                                     if (i2 == 1) {
-                                                        node5 = node6;
+                                                        nodeAccess$pop = node5;
                                                     } else {
-                                                        if (mutableVector == null) {
-                                                            mutableVector = new MutableVector(new Modifier.Node[16], 0);
+                                                        if (mutableVector2 == null) {
+                                                            mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                                         }
-                                                        if (node5 != null) {
-                                                            mutableVector.add(node5);
-                                                            node5 = null;
+                                                        if (nodeAccess$pop != null) {
+                                                            mutableVector2.add(nodeAccess$pop);
+                                                            nodeAccess$pop = null;
                                                         }
-                                                        mutableVector.add(node6);
+                                                        mutableVector2.add(node5);
                                                     }
                                                 }
                                             }
                                             if (i2 == 1) {
                                             }
                                         }
-                                        node5 = DelegatableNodeKt.access$pop(mutableVector);
+                                        nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                                     }
                                 }
                                 node4 = node4.parent;
                             }
                         }
-                        requireLayoutNode2 = requireLayoutNode2.getParent$ui_release();
-                        node4 = (requireLayoutNode2 == null || (nodeChain = requireLayoutNode2.nodes) == null) ? null : nodeChain.tail;
+                        layoutNodeRequireLayoutNode2 = layoutNodeRequireLayoutNode2.getParent$ui_release();
+                        node4 = (layoutNodeRequireLayoutNode2 == null || (nodeChain = layoutNodeRequireLayoutNode2.nodes) == null) ? null : nodeChain.tail;
                     }
-                    if (arrayList != null && arrayList.size() - 1 >= 0) {
+                    if (arrayList == null || arrayList.size() - 1 < 0) {
+                        delegatingNodeAccess$pop = node3.node;
+                        ?? mutableVector3 = 0;
                         while (true) {
-                            int i3 = size - 1;
-                            if (((SoftKeyboardInterceptionModifierNode) arrayList.get(size)).mo574onPreInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
-                                break;
-                            }
-                            if (i3 < 0) {
-                                break;
-                            }
-                            size = i3;
-                        }
-                    }
-                    DelegatingNode delegatingNode2 = node3.node;
-                    ?? r7 = 0;
-                    while (true) {
-                        if (delegatingNode2 != 0) {
-                            if (delegatingNode2 instanceof SoftKeyboardInterceptionModifierNode) {
-                                if (((SoftKeyboardInterceptionModifierNode) delegatingNode2).mo574onPreInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
-                                    break;
-                                }
-                            } else if ((delegatingNode2.kindSet & 131072) != 0 && (delegatingNode2 instanceof DelegatingNode)) {
-                                Modifier.Node node7 = delegatingNode2.delegate;
-                                int i4 = 0;
-                                delegatingNode2 = delegatingNode2;
-                                r7 = r7;
-                                while (node7 != null) {
-                                    if ((node7.kindSet & 131072) != 0) {
-                                        i4++;
-                                        r7 = r7;
-                                        if (i4 == 1) {
-                                            delegatingNode2 = node7;
-                                        } else {
-                                            if (r7 == 0) {
-                                                r7 = new MutableVector(new Modifier.Node[16], 0);
-                                            }
-                                            if (delegatingNode2 != 0) {
-                                                r7.add(delegatingNode2);
-                                                delegatingNode2 = 0;
-                                            }
-                                            r7.add(node7);
-                                        }
+                            if (delegatingNodeAccess$pop == 0) {
+                                if (delegatingNodeAccess$pop instanceof SoftKeyboardInterceptionModifierNode) {
+                                    if (((SoftKeyboardInterceptionModifierNode) delegatingNodeAccess$pop).mo576onPreInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
+                                        break;
                                     }
-                                    node7 = node7.child;
-                                    delegatingNode2 = delegatingNode2;
-                                    r7 = r7;
-                                }
-                                if (i4 == 1) {
-                                }
-                            }
-                            delegatingNode2 = DelegatableNodeKt.access$pop(r7);
-                        } else {
-                            DelegatingNode delegatingNode3 = node3.node;
-                            ?? r3 = 0;
-                            while (true) {
-                                if (delegatingNode3 != 0) {
-                                    if (delegatingNode3 instanceof SoftKeyboardInterceptionModifierNode) {
-                                        if (((SoftKeyboardInterceptionModifierNode) delegatingNode3).mo573onInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
-                                            break;
-                                        }
-                                    } else if ((delegatingNode3.kindSet & 131072) != 0 && (delegatingNode3 instanceof DelegatingNode)) {
-                                        Modifier.Node node8 = delegatingNode3.delegate;
-                                        int i5 = 0;
-                                        delegatingNode3 = delegatingNode3;
-                                        r3 = r3;
-                                        while (node8 != null) {
-                                            if ((node8.kindSet & 131072) != 0) {
-                                                i5++;
-                                                r3 = r3;
-                                                if (i5 == 1) {
-                                                    delegatingNode3 = node8;
-                                                } else {
-                                                    if (r3 == 0) {
-                                                        r3 = new MutableVector(new Modifier.Node[16], 0);
-                                                    }
-                                                    if (delegatingNode3 != 0) {
-                                                        r3.add(delegatingNode3);
-                                                        delegatingNode3 = 0;
-                                                    }
-                                                    r3.add(node8);
+                                } else if ((delegatingNodeAccess$pop.kindSet & 131072) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node6 = delegatingNodeAccess$pop.delegate;
+                                    int i3 = 0;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector3 = mutableVector3;
+                                    while (node6 != null) {
+                                        if ((node6.kindSet & 131072) != 0) {
+                                            i3++;
+                                            mutableVector3 = mutableVector3;
+                                            if (i3 == 1) {
+                                                delegatingNodeAccess$pop = node6;
+                                            } else {
+                                                if (mutableVector3 == 0) {
+                                                    mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
                                                 }
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector3.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
+                                                }
+                                                mutableVector3.add(node6);
                                             }
-                                            node8 = node8.child;
-                                            delegatingNode3 = delegatingNode3;
-                                            r3 = r3;
                                         }
-                                        if (i5 == 1) {
-                                        }
+                                        node6 = node6.child;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector3 = mutableVector3;
                                     }
-                                    delegatingNode3 = DelegatableNodeKt.access$pop(r3);
-                                } else if (arrayList != null) {
-                                    int size2 = arrayList.size();
-                                    for (int i6 = 0; i6 < size2; i6++) {
-                                        if (((SoftKeyboardInterceptionModifierNode) arrayList.get(i6)).mo573onInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
-                                            break;
+                                    if (i3 == 1) {
+                                    }
+                                }
+                                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector3);
+                            } else {
+                                DelegatingNode delegatingNodeAccess$pop3 = node3.node;
+                                ?? mutableVector4 = 0;
+                                while (true) {
+                                    if (delegatingNodeAccess$pop3 != 0) {
+                                        if (delegatingNodeAccess$pop3 instanceof SoftKeyboardInterceptionModifierNode) {
+                                            if (((SoftKeyboardInterceptionModifierNode) delegatingNodeAccess$pop3).mo575onInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
+                                                break;
+                                            }
+                                        } else if ((delegatingNodeAccess$pop3.kindSet & 131072) != 0 && (delegatingNodeAccess$pop3 instanceof DelegatingNode)) {
+                                            Modifier.Node node7 = delegatingNodeAccess$pop3.delegate;
+                                            int i4 = 0;
+                                            delegatingNodeAccess$pop3 = delegatingNodeAccess$pop3;
+                                            mutableVector4 = mutableVector4;
+                                            while (node7 != null) {
+                                                if ((node7.kindSet & 131072) != 0) {
+                                                    i4++;
+                                                    mutableVector4 = mutableVector4;
+                                                    if (i4 == 1) {
+                                                        delegatingNodeAccess$pop3 = node7;
+                                                    } else {
+                                                        if (mutableVector4 == 0) {
+                                                            mutableVector4 = new MutableVector(new Modifier.Node[16], 0);
+                                                        }
+                                                        if (delegatingNodeAccess$pop3 != 0) {
+                                                            mutableVector4.add(delegatingNodeAccess$pop3);
+                                                            delegatingNodeAccess$pop3 = 0;
+                                                        }
+                                                        mutableVector4.add(node7);
+                                                    }
+                                                }
+                                                node7 = node7.child;
+                                                delegatingNodeAccess$pop3 = delegatingNodeAccess$pop3;
+                                                mutableVector4 = mutableVector4;
+                                            }
+                                            if (i4 == 1) {
+                                            }
+                                        }
+                                        delegatingNodeAccess$pop3 = DelegatableNodeKt.access$pop(mutableVector4);
+                                    } else if (arrayList != null) {
+                                        int size2 = arrayList.size();
+                                        for (int i5 = 0; i5 < size2; i5++) {
+                                            if (((SoftKeyboardInterceptionModifierNode) arrayList.get(i5)).mo575onInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
+                                                break;
+                                            }
                                         }
                                     }
                                 }
+                            }
+                        }
+                    } else {
+                        while (true) {
+                            int i6 = size - 1;
+                            if (((SoftKeyboardInterceptionModifierNode) arrayList.get(size)).mo576onPreInterceptKeyBeforeSoftKeyboardZmokQxo(keyEvent)) {
+                                break;
+                            }
+                            if (i6 < 0) {
+                                break;
+                            }
+                            size = i6;
+                        }
+                        delegatingNodeAccess$pop = node3.node;
+                        ?? mutableVector32 = 0;
+                        while (true) {
+                            if (delegatingNodeAccess$pop == 0) {
                             }
                         }
                     }
                 }
             }
+            if (!super.dispatchKeyEventPreIme(keyEvent)) {
+                break;
+            }
+            return false;
         }
-        return super.dispatchKeyEventPreIme(keyEvent);
+        if (!super.dispatchKeyEventPreIme(keyEvent)) {
+        }
+        return true;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -1557,11 +1675,11 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             }
         }
         if (!isBadMotionEvent(motionEvent) && isAttachedToWindow() && (motionEvent.getActionMasked() != 2 || isPositionChanged(motionEvent))) {
-            int m691handleMotionEvent8iAsVTc = m691handleMotionEvent8iAsVTc(motionEvent);
-            if ((m691handleMotionEvent8iAsVTc & 2) != 0) {
+            int iM693handleMotionEvent8iAsVTc = m693handleMotionEvent8iAsVTc(motionEvent);
+            if ((iM693handleMotionEvent8iAsVTc & 2) != 0) {
                 getParent().requestDisallowInterceptTouchEvent(true);
             }
-            if ((m691handleMotionEvent8iAsVTc & 1) != 0) {
+            if ((iM693handleMotionEvent8iAsVTc & 1) != 0) {
                 return true;
             }
         }
@@ -1573,31 +1691,31 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         FocusFinderCompat focusFinderCompat = FocusFinderCompat.FocusFinderThreadLocal.get();
         focusFinderCompat.getClass();
         FocusFinderCompat focusFinderCompat2 = focusFinderCompat;
-        View view = this;
-        while (view != null) {
-            view = focusFinderCompat2.findNextFocus(i, view, (ViewGroup) getRootView());
-            if (view != null) {
+        View viewFindNextFocus = this;
+        while (viewFindNextFocus != null) {
+            viewFindNextFocus = focusFinderCompat2.findNextFocus(i, viewFindNextFocus, (ViewGroup) getRootView());
+            if (viewFindNextFocus != null) {
                 Function1 function1 = AndroidComposeView_androidKt.platformTextInputServiceInterceptor;
-                if (!view.equals(this)) {
-                    for (ViewParent parent = view.getParent(); parent != null; parent = parent.getParent()) {
+                if (!viewFindNextFocus.equals(this)) {
+                    for (ViewParent parent = viewFindNextFocus.getParent(); parent != null; parent = parent.getParent()) {
                         if (parent == this) {
                             break;
                         }
                     }
                 }
-                return view;
+                return viewFindNextFocus;
             }
         }
         return null;
     }
 
-    public final View findViewByAccessibilityIdTraversal(int i) {
+    public final View findViewByAccessibilityIdTraversal(int i) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             Method declaredMethod = Class.forName("android.view.View").getDeclaredMethod("findViewByAccessibilityIdTraversal", Integer.TYPE);
             declaredMethod.setAccessible(true);
-            Object invoke = declaredMethod.invoke(this, Integer.valueOf(i));
-            if (invoke instanceof View) {
-                return (View) invoke;
+            Object objInvoke = declaredMethod.invoke(this, Integer.valueOf(i));
+            if (objInvoke instanceof View) {
+                return (View) objInvoke;
             }
         } catch (NoSuchMethodException unused) {
         }
@@ -1607,7 +1725,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     /* JADX WARN: Multi-variable type inference failed */
     @Override // android.view.ViewGroup, android.view.ViewParent
     public final View focusSearch(View view, int i) {
-        Rect calculateBoundingRectRelativeTo;
+        Rect rectCalculateBoundingRectRelativeTo;
         int i2;
         if (view == null || this.measureAndLayoutDelegate.duringMeasureLayout) {
             return super.focusSearch(view, i);
@@ -1615,15 +1733,15 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         FocusFinderCompat.Companion.getClass();
         FocusFinderCompat focusFinderCompat = FocusFinderCompat.FocusFinderThreadLocal.get();
         focusFinderCompat.getClass();
-        View findNextFocus = focusFinderCompat.findNextFocus(i, view, this);
+        View viewFindNextFocus = focusFinderCompat.findNextFocus(i, view, this);
         if (view == this) {
-            FocusTargetNode findActiveFocusNode = FocusTraversalKt.findActiveFocusNode(this.focusOwner.rootFocusNode);
-            calculateBoundingRectRelativeTo = findActiveFocusNode != null ? FocusTraversalKt.focusRect(findActiveFocusNode) : null;
-            if (calculateBoundingRectRelativeTo == null) {
-                calculateBoundingRectRelativeTo = FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(view, this);
+            FocusTargetNode focusTargetNodeFindActiveFocusNode = FocusTraversalKt.findActiveFocusNode(this.focusOwner.rootFocusNode);
+            rectCalculateBoundingRectRelativeTo = focusTargetNodeFindActiveFocusNode != null ? FocusTraversalKt.focusRect(focusTargetNodeFindActiveFocusNode) : null;
+            if (rectCalculateBoundingRectRelativeTo == null) {
+                rectCalculateBoundingRectRelativeTo = FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(view, this);
             }
         } else {
-            calculateBoundingRectRelativeTo = FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(view, this);
+            rectCalculateBoundingRectRelativeTo = FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(view, this);
         }
         FocusDirection focusDirection = FocusInteropUtils_androidKt.toFocusDirection(i);
         if (focusDirection != null) {
@@ -1633,7 +1751,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             i2 = FocusDirection.Down;
         }
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-        if (this.focusOwner.m372focusSearchULY8qGw(i2, calculateBoundingRectRelativeTo, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$focusSearch$searchResult$1
+        if (this.focusOwner.m374focusSearchULY8qGw(i2, rectCalculateBoundingRectRelativeTo, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$focusSearch$searchResult$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -1642,26 +1760,26 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             /* JADX WARN: Type inference failed for: r1v1, types: [T, androidx.compose.ui.focus.FocusTargetNode] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ref$ObjectRef.element = (FocusTargetNode) obj;
                 return Boolean.TRUE;
             }
         }) != null) {
             if (ref$ObjectRef.element != 0) {
-                if (findNextFocus != null) {
-                    if (FocusOwnerImplKt.m375is1dFocusSearch3ESFkO8(i2)) {
+                if (viewFindNextFocus != null) {
+                    if (FocusOwnerImplKt.m377is1dFocusSearch3ESFkO8(i2)) {
                         return super.focusSearch(view, i);
                     }
                     T t = ref$ObjectRef.element;
                     t.getClass();
-                    if (TwoDimensionalFocusSearchKt.m388isBetterCandidateI7lrPNg(FocusTraversalKt.focusRect((FocusTargetNode) t), FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(findNextFocus, this), calculateBoundingRectRelativeTo, i2)) {
+                    if (TwoDimensionalFocusSearchKt.m390isBetterCandidateI7lrPNg(FocusTraversalKt.focusRect((FocusTargetNode) t), FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(viewFindNextFocus, this), rectCalculateBoundingRectRelativeTo, i2)) {
                     }
                 }
                 return this;
             }
-            if (findNextFocus == null) {
+            if (viewFindNextFocus == null) {
             }
-            return findNextFocus;
+            return viewFindNextFocus;
         }
         return view;
     }
@@ -1685,12 +1803,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     @Override // android.view.View
     public final void getFocusedRect(android.graphics.Rect rect) {
         Unit unit;
-        Rect onFetchFocusRect = onFetchFocusRect();
-        if (onFetchFocusRect != null) {
-            rect.left = Math.round(onFetchFocusRect.left);
-            rect.top = Math.round(onFetchFocusRect.top);
-            rect.right = Math.round(onFetchFocusRect.right);
-            rect.bottom = Math.round(onFetchFocusRect.bottom);
+        Rect rectOnFetchFocusRect = onFetchFocusRect();
+        if (rectOnFetchFocusRect != null) {
+            rect.left = Math.round(rectOnFetchFocusRect.left);
+            rect.top = Math.round(rectOnFetchFocusRect.top);
+            rect.right = Math.round(rectOnFetchFocusRect.right);
+            rect.bottom = Math.round(rectOnFetchFocusRect.bottom);
             unit = Unit.INSTANCE;
         } else {
             unit = null;
@@ -1709,18 +1827,76 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         return (ViewTreeOwners) this.viewTreeOwners$delegate.getValue();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004a A[Catch: all -> 0x0029, TryCatch #1 {all -> 0x0029, blocks: (B:5:0x0016, B:7:0x001f, B:12:0x0030, B:14:0x003a, B:19:0x004a, B:22:0x0071, B:23:0x0051, B:29:0x005d, B:32:0x0065, B:34:0x0076, B:42:0x0089, B:44:0x008f, B:46:0x009c, B:47:0x009f, B:49:0x00a3, B:51:0x00a9, B:53:0x00ad, B:54:0x00b3, B:56:0x00b9, B:59:0x00c1, B:60:0x00cf, B:62:0x00d5, B:64:0x00db, B:66:0x00e1, B:67:0x00e7, B:69:0x00eb, B:70:0x00ef, B:75:0x0102, B:77:0x0106, B:78:0x010d, B:84:0x011d, B:85:0x0129, B:91:0x0134), top: B:4:0x0016, outer: #0 }] */
     /* renamed from: handleMotionEvent-8iAsVTc, reason: not valid java name */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final int m691handleMotionEvent8iAsVTc(android.view.MotionEvent r16) {
-        /*
-            Method dump skipped, instructions count: 333
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.AndroidComposeView.m691handleMotionEvent8iAsVTc(android.view.MotionEvent):int");
+    public final int m693handleMotionEvent8iAsVTc(MotionEvent motionEvent) {
+        int actionMasked;
+        removeCallbacks(this.resendMotionEventRunnable);
+        try {
+            recalculateWindowPosition(motionEvent);
+            boolean z = true;
+            this.forceUseMatrixCache = true;
+            measureAndLayout(false);
+            Trace.beginSection("AndroidOwner:onTouch");
+            try {
+                int actionMasked2 = motionEvent.getActionMasked();
+                MotionEvent motionEvent2 = this.previousMotionEvent;
+                boolean z2 = motionEvent2 != null && motionEvent2.getToolType(0) == 3;
+                if (motionEvent2 != null) {
+                    if ((motionEvent2.getSource() == motionEvent.getSource() && motionEvent2.getToolType(0) == motionEvent.getToolType(0)) ? false : true) {
+                        if (motionEvent2.getButtonState() != 0 || (actionMasked = motionEvent2.getActionMasked()) == 0 || actionMasked == 2 || actionMasked == 6) {
+                            this.pointerInputEventProcessor.processCancel();
+                        } else if (motionEvent2.getActionMasked() != 10 && z2) {
+                            sendSimulatedEvent(motionEvent2, 10, motionEvent2.getEventTime(), true);
+                        }
+                    }
+                }
+                boolean z3 = motionEvent.getToolType(0) == 3;
+                if (!z2 && z3 && actionMasked2 != 3 && actionMasked2 != 9 && isInBounds(motionEvent)) {
+                    sendSimulatedEvent(motionEvent, 9, motionEvent.getEventTime(), true);
+                }
+                if (motionEvent2 != null) {
+                    motionEvent2.recycle();
+                }
+                MotionEvent motionEvent3 = this.previousMotionEvent;
+                if (motionEvent3 != null && motionEvent3.getAction() == 10) {
+                    MotionEvent motionEvent4 = this.previousMotionEvent;
+                    int pointerId = motionEvent4 != null ? motionEvent4.getPointerId(0) : -1;
+                    if (motionEvent.getAction() == 9 && motionEvent.getHistorySize() == 0) {
+                        if (pointerId >= 0) {
+                            MotionEventAdapter motionEventAdapter = this.motionEventAdapter;
+                            motionEventAdapter.activeHoverIds.delete(pointerId);
+                            motionEventAdapter.motionEventToComposePointerIdMap.delete(pointerId);
+                        }
+                    } else if (motionEvent.getAction() == 0 && motionEvent.getHistorySize() == 0) {
+                        MotionEvent motionEvent5 = this.previousMotionEvent;
+                        float x = motionEvent5 != null ? motionEvent5.getX() : Float.NaN;
+                        MotionEvent motionEvent6 = this.previousMotionEvent;
+                        boolean z4 = (x == motionEvent.getX() && (motionEvent6 != null ? motionEvent6.getY() : Float.NaN) == motionEvent.getY()) ? false : true;
+                        MotionEvent motionEvent7 = this.previousMotionEvent;
+                        if ((motionEvent7 != null ? motionEvent7.getEventTime() : -1L) == motionEvent.getEventTime()) {
+                            z = false;
+                        }
+                        if (z4 || z) {
+                            if (pointerId >= 0) {
+                                MotionEventAdapter motionEventAdapter2 = this.motionEventAdapter;
+                                motionEventAdapter2.activeHoverIds.delete(pointerId);
+                                motionEventAdapter2.motionEventToComposePointerIdMap.delete(pointerId);
+                            }
+                            this.pointerInputEventProcessor.hitPathTracker.root.children.clear();
+                        }
+                    }
+                }
+                this.previousMotionEvent = MotionEvent.obtainNoHistory(motionEvent);
+                int iM699sendMotionEvent8iAsVTc = m699sendMotionEvent8iAsVTc(motionEvent);
+                Trace.endSection();
+                return iM699sendMotionEvent8iAsVTc;
+            } catch (Throwable th) {
+                Trace.endSection();
+                throw th;
+            }
+        } finally {
+            this.forceUseMatrixCache = false;
+        }
     }
 
     public final void invalidateLayoutNodeMeasurement(LayoutNode layoutNode) {
@@ -1745,58 +1921,58 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: localToScreen-58bKbWc, reason: not valid java name */
-    public final void m692localToScreen58bKbWc(float[] fArr) {
+    public final void m694localToScreen58bKbWc(float[] fArr) {
         recalculateWindowPosition();
-        Matrix.m487timesAssign58bKbWc(fArr, this.viewToWindowMatrix);
-        float intBitsToFloat = Float.intBitsToFloat((int) (this.windowPosition >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (this.windowPosition & 4294967295L));
+        Matrix.m489timesAssign58bKbWc(fArr, this.viewToWindowMatrix);
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (this.windowPosition >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (this.windowPosition & 4294967295L));
         float[] fArr2 = this.tmpMatrix;
         Function1 function1 = AndroidComposeView_androidKt.platformTextInputServiceInterceptor;
-        Matrix.m484resetimpl(fArr2);
-        Matrix.m488translateimpl(intBitsToFloat, intBitsToFloat2, fArr2);
-        float m700dotp89u6pk = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 0, fArr, 0);
-        float m700dotp89u6pk2 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 0, fArr, 1);
-        float m700dotp89u6pk3 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 0, fArr, 2);
-        float m700dotp89u6pk4 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 0, fArr, 3);
-        float m700dotp89u6pk5 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 1, fArr, 0);
-        float m700dotp89u6pk6 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 1, fArr, 1);
-        float m700dotp89u6pk7 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 1, fArr, 2);
-        float m700dotp89u6pk8 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 1, fArr, 3);
-        float m700dotp89u6pk9 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 2, fArr, 0);
-        float m700dotp89u6pk10 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 2, fArr, 1);
-        float m700dotp89u6pk11 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 2, fArr, 2);
-        float m700dotp89u6pk12 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 2, fArr, 3);
-        float m700dotp89u6pk13 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 3, fArr, 0);
-        float m700dotp89u6pk14 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 3, fArr, 1);
-        float m700dotp89u6pk15 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 3, fArr, 2);
-        float m700dotp89u6pk16 = AndroidComposeView_androidKt.m700dotp89u6pk(fArr2, 3, fArr, 3);
-        fArr[0] = m700dotp89u6pk;
-        fArr[1] = m700dotp89u6pk2;
-        fArr[2] = m700dotp89u6pk3;
-        fArr[3] = m700dotp89u6pk4;
-        fArr[4] = m700dotp89u6pk5;
-        fArr[5] = m700dotp89u6pk6;
-        fArr[6] = m700dotp89u6pk7;
-        fArr[7] = m700dotp89u6pk8;
-        fArr[8] = m700dotp89u6pk9;
-        fArr[9] = m700dotp89u6pk10;
-        fArr[10] = m700dotp89u6pk11;
-        fArr[11] = m700dotp89u6pk12;
-        fArr[12] = m700dotp89u6pk13;
-        fArr[13] = m700dotp89u6pk14;
-        fArr[14] = m700dotp89u6pk15;
-        fArr[15] = m700dotp89u6pk16;
+        Matrix.m486resetimpl(fArr2);
+        Matrix.m490translateimpl(fIntBitsToFloat, fIntBitsToFloat2, fArr2);
+        float fM702dotp89u6pk = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 0, fArr, 0);
+        float fM702dotp89u6pk2 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 0, fArr, 1);
+        float fM702dotp89u6pk3 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 0, fArr, 2);
+        float fM702dotp89u6pk4 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 0, fArr, 3);
+        float fM702dotp89u6pk5 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 1, fArr, 0);
+        float fM702dotp89u6pk6 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 1, fArr, 1);
+        float fM702dotp89u6pk7 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 1, fArr, 2);
+        float fM702dotp89u6pk8 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 1, fArr, 3);
+        float fM702dotp89u6pk9 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 2, fArr, 0);
+        float fM702dotp89u6pk10 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 2, fArr, 1);
+        float fM702dotp89u6pk11 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 2, fArr, 2);
+        float fM702dotp89u6pk12 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 2, fArr, 3);
+        float fM702dotp89u6pk13 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 3, fArr, 0);
+        float fM702dotp89u6pk14 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 3, fArr, 1);
+        float fM702dotp89u6pk15 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 3, fArr, 2);
+        float fM702dotp89u6pk16 = AndroidComposeView_androidKt.m702dotp89u6pk(fArr2, 3, fArr, 3);
+        fArr[0] = fM702dotp89u6pk;
+        fArr[1] = fM702dotp89u6pk2;
+        fArr[2] = fM702dotp89u6pk3;
+        fArr[3] = fM702dotp89u6pk4;
+        fArr[4] = fM702dotp89u6pk5;
+        fArr[5] = fM702dotp89u6pk6;
+        fArr[6] = fM702dotp89u6pk7;
+        fArr[7] = fM702dotp89u6pk8;
+        fArr[8] = fM702dotp89u6pk9;
+        fArr[9] = fM702dotp89u6pk10;
+        fArr[10] = fM702dotp89u6pk11;
+        fArr[11] = fM702dotp89u6pk12;
+        fArr[12] = fM702dotp89u6pk13;
+        fArr[13] = fM702dotp89u6pk14;
+        fArr[14] = fM702dotp89u6pk15;
+        fArr[15] = fM702dotp89u6pk16;
     }
 
     /* renamed from: localToScreen-MK-Hz9U, reason: not valid java name */
-    public final long m693localToScreenMKHz9U(long j) {
+    public final long m695localToScreenMKHz9U(long j) {
         recalculateWindowPosition();
-        long m482mapMKHz9U = Matrix.m482mapMKHz9U(j, this.viewToWindowMatrix);
-        float intBitsToFloat = Float.intBitsToFloat((int) (this.windowPosition >> 32)) + Float.intBitsToFloat((int) (m482mapMKHz9U >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (this.windowPosition & 4294967295L)) + Float.intBitsToFloat((int) (m482mapMKHz9U & 4294967295L));
-        long floatToRawIntBits = (Float.floatToRawIntBits(intBitsToFloat) << 32) | (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L);
+        long jM484mapMKHz9U = Matrix.m484mapMKHz9U(j, this.viewToWindowMatrix);
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (this.windowPosition >> 32)) + Float.intBitsToFloat((int) (jM484mapMKHz9U >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (this.windowPosition & 4294967295L)) + Float.intBitsToFloat((int) (jM484mapMKHz9U & 4294967295L));
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fIntBitsToFloat) << 32) | (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     public final void measureAndLayout(boolean z) {
@@ -1825,10 +2001,10 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: measureAndLayout-0kLqBqw, reason: not valid java name */
-    public final void m694measureAndLayout0kLqBqw(LayoutNode layoutNode, long j) {
+    public final void m696measureAndLayout0kLqBqw(LayoutNode layoutNode, long j) {
         Trace.beginSection("AndroidOwner:measureAndLayout");
         try {
-            this.measureAndLayoutDelegate.m657measureAndLayout0kLqBqw(layoutNode, j);
+            this.measureAndLayoutDelegate.m659measureAndLayout0kLqBqw(layoutNode, j);
             if (!this.measureAndLayoutDelegate.relayoutNodes.isNotEmpty()) {
                 this.measureAndLayoutDelegate.dispatchOnPositionedCallbacks(false);
                 if (this.isPendingInteropViewLayoutChangeDispatch) {
@@ -1862,12 +2038,12 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             this.dirtyLayers.add(ownedLayer);
             return;
         }
-        List list2 = this.postponedDirtyLayers;
-        if (list2 == null) {
-            list2 = new ArrayList();
-            this.postponedDirtyLayers = list2;
+        List arrayList = this.postponedDirtyLayers;
+        if (arrayList == null) {
+            arrayList = new ArrayList();
+            this.postponedDirtyLayers = arrayList;
         }
-        list2.add(ownedLayer);
+        arrayList.add(ownedLayer);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -1880,26 +2056,22 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         super.onAttachedToWindow();
         ((SnapshotMutableStateImpl) this._windowInfo.isWindowFocused$delegate).setValue(Boolean.valueOf(hasWindowFocus()));
         LazyWindowInfo lazyWindowInfo = this._windowInfo;
-        new Function0() { // from class: androidx.compose.ui.platform.AndroidComposeView$onAttachedToWindow$1
-            {
-                super(0);
-            }
-
+        new Function0() { // from class: androidx.compose.ui.platform.AndroidComposeView.onAttachedToWindow.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 Activity activity;
-                long round;
+                long jRound;
                 Context context = AndroidComposeView.this.getContext();
-                Context context2 = context;
+                Context baseContext = context;
                 while (true) {
-                    if (!(context2 instanceof Activity)) {
-                        if (!(context2 instanceof ContextWrapper)) {
+                    if (!(baseContext instanceof Activity)) {
+                        if (!(baseContext instanceof ContextWrapper)) {
                             activity = null;
                             break;
                         }
-                        context2 = ((ContextWrapper) context2).getBaseContext();
+                        baseContext = ((ContextWrapper) baseContext).getBaseContext();
                     } else {
-                        activity = (Activity) context2;
+                        activity = (Activity) baseContext;
                         break;
                     }
                 }
@@ -1907,14 +2079,14 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                     BoundsHelper.Companion.getClass();
                     BoundsHelperApi30Impl.INSTANCE.getClass();
                     android.graphics.Rect bounds = ((WindowManager) activity.getSystemService(WindowManager.class)).getCurrentWindowMetrics().getBounds();
-                    round = (bounds.height() & 4294967295L) | (bounds.width() << 32);
+                    jRound = (bounds.height() & 4294967295L) | (bounds.width() << 32);
                     IntSize.Companion companion = IntSize.Companion;
                 } else {
                     Configuration configuration = context.getResources().getConfiguration();
-                    round = (Math.round(configuration.screenHeightDp * r7) & 4294967295L) | (Math.round(configuration.screenWidthDp * context.getResources().getDisplayMetrics().density) << 32);
+                    jRound = (Math.round(configuration.screenHeightDp * r7) & 4294967295L) | (Math.round(configuration.screenWidthDp * context.getResources().getDisplayMetrics().density) << 32);
                     IntSize.Companion companion2 = IntSize.Companion;
                 }
-                return IntSize.m859boximpl(round);
+                return IntSize.m861boximpl(jRound);
             }
         };
         lazyWindowInfo.getClass();
@@ -1952,7 +2124,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             ((SnapshotMutableStateImpl) this._viewTreeOwners$delegate).setValue(viewTreeOwners2);
             Function1 function1 = this.onViewTreeOwnersAvailable;
             if (function1 != null) {
-                ((WrappedComposition$setContent$1) function1).mo779invoke(viewTreeOwners2);
+                ((WrappedComposition.AnonymousClass1) function1).mo781invoke(viewTreeOwners2);
             }
             this.onViewTreeOwnersAvailable = null;
         }
@@ -1964,7 +2136,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             InputMode.Companion.getClass();
             i = InputMode.Keyboard;
         }
-        ((SnapshotMutableStateImpl) inputModeManagerImpl.inputMode$delegate).setValue(InputMode.m572boximpl(i));
+        ((SnapshotMutableStateImpl) inputModeManagerImpl.inputMode$delegate).setValue(InputMode.m574boximpl(i));
         ViewTreeOwners viewTreeOwners3 = getViewTreeOwners();
         if (viewTreeOwners3 != null && (lifecycleOwner2 = viewTreeOwners3.lifecycleOwner) != null) {
             lifecycle2 = lifecycleOwner2.getLifecycle();
@@ -1987,11 +2159,11 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     @Override // android.view.View
     public final boolean onCheckIsTextEditor() {
-        AndroidPlatformTextInputSession androidPlatformTextInputSession = (AndroidPlatformTextInputSession) SessionMutex.m353getCurrentSessionimpl(this.textInputSessionMutex);
+        AndroidPlatformTextInputSession androidPlatformTextInputSession = (AndroidPlatformTextInputSession) SessionMutex.m354getCurrentSessionimpl(this.textInputSessionMutex);
         if (androidPlatformTextInputSession == null) {
             return this.legacyTextInputServiceAndroid.editorHasFocus;
         }
-        InputMethodSession inputMethodSession = (InputMethodSession) SessionMutex.m353getCurrentSessionimpl(androidPlatformTextInputSession.methodSessionMutex);
+        InputMethodSession inputMethodSession = (InputMethodSession) SessionMutex.m354getCurrentSessionimpl(androidPlatformTextInputSession.methodSessionMutex);
         return inputMethodSession != null && (inputMethodSession.disposed ^ true);
     }
 
@@ -2005,13 +2177,13 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             this.currentFontWeightAdjustment = i;
             ((SnapshotMutableStateImpl) this.fontFamilyResolver$delegate).setValue(FontFamilyResolver_androidKt.createFontFamilyResolver(getContext()));
         }
-        this.configurationChangeObserver.mo779invoke(configuration);
+        this.configurationChangeObserver.mo781invoke(configuration);
     }
 
     @Override // android.view.View
     public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
         String str;
-        AndroidPlatformTextInputSession androidPlatformTextInputSession = (AndroidPlatformTextInputSession) SessionMutex.m353getCurrentSessionimpl(this.textInputSessionMutex);
+        AndroidPlatformTextInputSession androidPlatformTextInputSession = (AndroidPlatformTextInputSession) SessionMutex.m354getCurrentSessionimpl(this.textInputSessionMutex);
         if (androidPlatformTextInputSession == null) {
             TextInputServiceAndroid textInputServiceAndroid = this.legacyTextInputServiceAndroid;
             if (textInputServiceAndroid.editorHasFocus) {
@@ -2110,7 +2282,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 return recordingInputConnection;
             }
         } else {
-            final InputMethodSession inputMethodSession = (InputMethodSession) SessionMutex.m353getCurrentSessionimpl(androidPlatformTextInputSession.methodSessionMutex);
+            final InputMethodSession inputMethodSession = (InputMethodSession) SessionMutex.m354getCurrentSessionimpl(androidPlatformTextInputSession.methodSessionMutex);
             if (inputMethodSession != null) {
                 synchronized (inputMethodSession.lock) {
                     if (inputMethodSession.disposed) {
@@ -2123,10 +2295,10 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             NullableInputConnectionWrapper nullableInputConnectionWrapper = (NullableInputConnectionWrapper) obj;
                             nullableInputConnectionWrapper.disposeDelegate();
-                            MutableVector mutableVector = InputMethodSession.this.connections;
+                            MutableVector mutableVector = inputMethodSession.connections;
                             Object[] objArr = mutableVector.content;
                             int i9 = mutableVector.size;
                             int i10 = 0;
@@ -2141,9 +2313,9 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                                 i10++;
                             }
                             if (i10 >= 0) {
-                                InputMethodSession.this.connections.removeAt(i10);
+                                inputMethodSession.connections.removeAt(i10);
                             }
-                            InputMethodSession inputMethodSession2 = InputMethodSession.this;
+                            InputMethodSession inputMethodSession2 = inputMethodSession;
                             if (inputMethodSession2.connections.size == 0) {
                                 inputMethodSession2.onAllConnectionsClosed.invoke();
                             }
@@ -2230,15 +2402,15 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     public final Rect onFetchFocusRect() {
         if (isFocused()) {
-            FocusTargetNode findActiveFocusNode = FocusTraversalKt.findActiveFocusNode(this.focusOwner.rootFocusNode);
-            if (findActiveFocusNode != null) {
-                return FocusTraversalKt.focusRect(findActiveFocusNode);
+            FocusTargetNode focusTargetNodeFindActiveFocusNode = FocusTraversalKt.findActiveFocusNode(this.focusOwner.rootFocusNode);
+            if (focusTargetNodeFindActiveFocusNode != null) {
+                return FocusTraversalKt.focusRect(focusTargetNodeFindActiveFocusNode);
             }
             return null;
         }
-        View findFocus = findFocus();
-        if (findFocus != null) {
-            return FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(findFocus, this);
+        View viewFindFocus = findFocus();
+        if (viewFindFocus != null) {
+            return FocusInteropUtils_androidKt.calculateBoundingRectRelativeTo(viewFindFocus, this);
         }
         return null;
     }
@@ -2290,7 +2462,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         AndroidContentCaptureManager androidContentCaptureManager = this.contentCaptureManager;
         androidContentCaptureManager.currentSemanticsNodesInvalidated = true;
         if (androidContentCaptureManager.isEnabled$ui_release()) {
-            androidContentCaptureManager.boundsUpdateChannel.mo3456trySendJP2dKIU(Unit.INSTANCE);
+            androidContentCaptureManager.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
         }
     }
 
@@ -2301,19 +2473,19 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             if (!isAttachedToWindow()) {
                 invalidateLayoutNodeMeasurement(this.root);
             }
-            long m690convertMeasureSpecI7RO_PI = m690convertMeasureSpecI7RO_PI(i);
+            long jM692convertMeasureSpecI7RO_PI = m692convertMeasureSpecI7RO_PI(i);
             int i3 = ULong.$r8$clinit;
-            long m690convertMeasureSpecI7RO_PI2 = m690convertMeasureSpecI7RO_PI(i2);
+            long jM692convertMeasureSpecI7RO_PI2 = m692convertMeasureSpecI7RO_PI(i2);
             Constraints.Companion.getClass();
-            long m825fitPrioritizingHeightZbe2FdA = Constraints.Companion.m825fitPrioritizingHeightZbe2FdA((int) (m690convertMeasureSpecI7RO_PI >>> 32), (int) (m690convertMeasureSpecI7RO_PI & 4294967295L), (int) (m690convertMeasureSpecI7RO_PI2 >>> 32), (int) (4294967295L & m690convertMeasureSpecI7RO_PI2));
+            long jM827fitPrioritizingHeightZbe2FdA = Constraints.Companion.m827fitPrioritizingHeightZbe2FdA((int) (jM692convertMeasureSpecI7RO_PI >>> 32), (int) (jM692convertMeasureSpecI7RO_PI & 4294967295L), (int) (jM692convertMeasureSpecI7RO_PI2 >>> 32), (int) (4294967295L & jM692convertMeasureSpecI7RO_PI2));
             Constraints constraints = this.onMeasureConstraints;
             if (constraints == null) {
-                this.onMeasureConstraints = Constraints.m813boximpl(m825fitPrioritizingHeightZbe2FdA);
+                this.onMeasureConstraints = Constraints.m815boximpl(jM827fitPrioritizingHeightZbe2FdA);
                 this.wasMeasuredWithMultipleConstraints = false;
-            } else if (!Constraints.m815equalsimpl0(constraints.value, m825fitPrioritizingHeightZbe2FdA)) {
+            } else if (!Constraints.m817equalsimpl0(constraints.value, jM827fitPrioritizingHeightZbe2FdA)) {
                 this.wasMeasuredWithMultipleConstraints = true;
             }
-            this.measureAndLayoutDelegate.m658updateRootConstraintsBRTryo0(m825fitPrioritizingHeightZbe2FdA);
+            this.measureAndLayoutDelegate.m660updateRootConstraintsBRTryo0(jM827fitPrioritizingHeightZbe2FdA);
             this.measureAndLayoutDelegate.measureOnly();
             MeasurePassDelegate measurePassDelegate = this.root.layoutDelegate.measurePassDelegate;
             setMeasuredDimension(measurePassDelegate.width, measurePassDelegate.height);
@@ -2327,45 +2499,45 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: onMoveFocusInChildren-3ESFkO8, reason: not valid java name */
-    public final boolean m695onMoveFocusInChildren3ESFkO8(int i) {
+    public final boolean m697onMoveFocusInChildren3ESFkO8(int i) {
         AndroidViewsHandler androidViewsHandler;
-        View view;
+        View viewFindNextFocus;
         android.graphics.Rect androidRect = null;
         if (!ComposeUiFlags.isViewFocusFixEnabled) {
             FocusDirection.Companion.getClass();
             if (i == FocusDirection.Enter || i == FocusDirection.Exit) {
                 return false;
             }
-            Integer m368toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(i);
-            if (m368toAndroidFocusDirection3ESFkO8 == null) {
+            Integer numM370toAndroidFocusDirection3ESFkO8 = FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(i);
+            if (numM370toAndroidFocusDirection3ESFkO8 == null) {
                 throw new IllegalStateException("Invalid focus direction");
             }
-            int intValue = m368toAndroidFocusDirection3ESFkO8.intValue();
-            Rect onFetchFocusRect = onFetchFocusRect();
-            android.graphics.Rect androidRect2 = onFetchFocusRect != null ? RectHelper_androidKt.toAndroidRect(onFetchFocusRect) : null;
+            int iIntValue = numM370toAndroidFocusDirection3ESFkO8.intValue();
+            Rect rectOnFetchFocusRect = onFetchFocusRect();
+            android.graphics.Rect androidRect2 = rectOnFetchFocusRect != null ? RectHelper_androidKt.toAndroidRect(rectOnFetchFocusRect) : null;
             FocusFinderCompat.Companion.getClass();
             FocusFinderCompat focusFinderCompat = FocusFinderCompat.FocusFinderThreadLocal.get();
             focusFinderCompat.getClass();
             FocusFinderCompat focusFinderCompat2 = focusFinderCompat;
             if (androidRect2 == null) {
-                view = focusFinderCompat2.findNextFocus(intValue, findFocus(), this);
+                viewFindNextFocus = focusFinderCompat2.findNextFocus(iIntValue, findFocus(), this);
             } else {
                 focusFinderCompat2.cachedFocusedRect.set(androidRect2);
                 android.graphics.Rect rect = focusFinderCompat2.cachedFocusedRect;
                 ArrayList<View> arrayList = focusFinderCompat2.tmpList;
                 try {
                     arrayList.clear();
-                    addFocusables(arrayList, intValue, isInTouchMode() ? 1 : 0);
-                    View findNextFocus = arrayList.isEmpty() ? null : focusFinderCompat2.findNextFocus(intValue, rect, null, this, arrayList);
+                    addFocusables(arrayList, iIntValue, isInTouchMode() ? 1 : 0);
+                    View viewFindNextFocus2 = arrayList.isEmpty() ? null : focusFinderCompat2.findNextFocus(iIntValue, rect, null, this, arrayList);
                     arrayList.clear();
-                    view = findNextFocus;
+                    viewFindNextFocus = viewFindNextFocus2;
                 } catch (Throwable th) {
                     arrayList.clear();
                     throw th;
                 }
             }
-            if (view != null) {
-                return FocusInteropUtils_androidKt.requestInteropFocus(view, Integer.valueOf(intValue), androidRect2);
+            if (viewFindNextFocus != null) {
+                return FocusInteropUtils_androidKt.requestInteropFocus(viewFindNextFocus, Integer.valueOf(iIntValue), androidRect2);
             }
             return false;
         }
@@ -2373,40 +2545,40 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         if (i == FocusDirection.Enter || i == FocusDirection.Exit || !hasFocus() || (androidViewsHandler = this._androidViewsHandler) == null) {
             return false;
         }
-        Integer m368toAndroidFocusDirection3ESFkO82 = FocusInteropUtils_androidKt.m368toAndroidFocusDirection3ESFkO8(i);
-        if (m368toAndroidFocusDirection3ESFkO82 == null) {
+        Integer numM370toAndroidFocusDirection3ESFkO82 = FocusInteropUtils_androidKt.m370toAndroidFocusDirection3ESFkO8(i);
+        if (numM370toAndroidFocusDirection3ESFkO82 == null) {
             throw new IllegalStateException("Invalid focus direction");
         }
-        int intValue2 = m368toAndroidFocusDirection3ESFkO82.intValue();
+        int iIntValue2 = numM370toAndroidFocusDirection3ESFkO82.intValue();
         ViewGroup viewGroup = (ViewGroup) getRootView();
-        View findFocus = viewGroup.findFocus();
-        if (findFocus == null) {
+        View viewFindFocus = viewGroup.findFocus();
+        if (viewFindFocus == null) {
             throw new IllegalStateException("view hasFocus but root can't find it");
         }
         FocusFinderCompat.Companion.getClass();
         FocusFinderCompat focusFinderCompat3 = FocusFinderCompat.FocusFinderThreadLocal.get();
         focusFinderCompat3.getClass();
-        View findNextFocus2 = focusFinderCompat3.findNextFocus(intValue2, findFocus, viewGroup);
-        if (!FocusOwnerImplKt.m375is1dFocusSearch3ESFkO8(i) || !androidViewsHandler.hasFocus()) {
-            Rect onFetchFocusRect2 = onFetchFocusRect();
-            androidRect = onFetchFocusRect2 != null ? RectHelper_androidKt.toAndroidRect(onFetchFocusRect2) : null;
-            if (findNextFocus2 != null && androidRect != null) {
+        View viewFindNextFocus3 = focusFinderCompat3.findNextFocus(iIntValue2, viewFindFocus, viewGroup);
+        if (!FocusOwnerImplKt.m377is1dFocusSearch3ESFkO8(i) || !androidViewsHandler.hasFocus()) {
+            Rect rectOnFetchFocusRect2 = onFetchFocusRect();
+            androidRect = rectOnFetchFocusRect2 != null ? RectHelper_androidKt.toAndroidRect(rectOnFetchFocusRect2) : null;
+            if (viewFindNextFocus3 != null && androidRect != null) {
                 viewGroup.offsetDescendantRectToMyCoords(this, androidRect);
-                viewGroup.offsetRectIntoDescendantCoords(findNextFocus2, androidRect);
+                viewGroup.offsetRectIntoDescendantCoords(viewFindNextFocus3, androidRect);
             }
         }
-        if (findNextFocus2 == null || findNextFocus2 == findFocus) {
+        if (viewFindNextFocus3 == null || viewFindNextFocus3 == viewFindFocus) {
             return false;
         }
         View focusedChild = androidViewsHandler.getFocusedChild();
-        ViewParent parent = findNextFocus2.getParent();
+        ViewParent parent = viewFindNextFocus3.getParent();
         while (parent != null && parent != focusedChild) {
             parent = parent.getParent();
         }
         if (parent == null) {
             return false;
         }
-        return FocusInteropUtils_androidKt.requestInteropFocus(findNextFocus2, Integer.valueOf(intValue2), androidRect);
+        return FocusInteropUtils_androidKt.requestInteropFocus(viewFindNextFocus3, Integer.valueOf(iIntValue2), androidRect);
     }
 
     @Override // android.view.View
@@ -2453,9 +2625,9 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 if (layoutNode.isDeactivated) {
                     return;
                 }
-                boolean areEqual = Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE);
+                boolean zAreEqual = Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE);
                 DepthSortedSetsForDifferentPasses depthSortedSetsForDifferentPasses = measureAndLayoutDelegate.relayoutNodes;
-                if ((areEqual || (layoutNodeLayoutDelegate.lookaheadMeasurePending && (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || !((lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate) == null || (lookaheadAlignmentLines = lookaheadPassDelegate.alignmentLines) == null || !lookaheadAlignmentLines.getRequired$ui_release())))) && ((parent$ui_release = layoutNode.getParent$ui_release()) == null || !parent$ui_release.layoutDelegate.lookaheadMeasurePending)) {
+                if ((zAreEqual || (layoutNodeLayoutDelegate.lookaheadMeasurePending && (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || !((lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate) == null || (lookaheadAlignmentLines = lookaheadPassDelegate.alignmentLines) == null || !lookaheadAlignmentLines.getRequired$ui_release())))) && ((parent$ui_release = layoutNode.getParent$ui_release()) == null || !parent$ui_release.layoutDelegate.lookaheadMeasurePending)) {
                     depthSortedSetsForDifferentPasses.add(layoutNode, true);
                 } else if ((layoutNode.isPlaced() || (layoutNode.getMeasurePending$ui_release() && MeasureAndLayoutDelegate.getMeasureAffectsParent(layoutNode))) && ((parent$ui_release2 = layoutNode.getParent$ui_release()) == null || !parent$ui_release2.getMeasurePending$ui_release())) {
                     depthSortedSetsForDifferentPasses.add(layoutNode, false);
@@ -2524,9 +2696,9 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 return;
             }
             LayoutNode parent$ui_release2 = layoutNode.getParent$ui_release();
-            boolean areEqual = Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE);
+            boolean zAreEqual = Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE);
             DepthSortedSetsForDifferentPasses depthSortedSetsForDifferentPasses = measureAndLayoutDelegate2.relayoutNodes;
-            if (areEqual && ((parent$ui_release2 == null || !parent$ui_release2.layoutDelegate.lookaheadMeasurePending) && (parent$ui_release2 == null || !parent$ui_release2.layoutDelegate.lookaheadLayoutPending))) {
+            if (zAreEqual && ((parent$ui_release2 == null || !parent$ui_release2.layoutDelegate.lookaheadMeasurePending) && (parent$ui_release2 == null || !parent$ui_release2.layoutDelegate.lookaheadLayoutPending))) {
                 depthSortedSetsForDifferentPasses.add(layoutNode, true);
             } else if (layoutNode.isPlaced() && ((parent$ui_release2 == null || !parent$ui_release2.getLayoutPending$ui_release()) && (parent$ui_release2 == null || !parent$ui_release2.getMeasurePending$ui_release()))) {
                 depthSortedSetsForDifferentPasses.add(layoutNode, false);
@@ -2600,14 +2772,14 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     @Override // android.view.View
     public final void onWindowFocusChanged(boolean z) {
-        boolean access$getIsShowingLayoutBounds;
+        boolean zAccess$getIsShowingLayoutBounds;
         ((SnapshotMutableStateImpl) this._windowInfo.isWindowFocused$delegate).setValue(Boolean.valueOf(z));
         this.keyboardModifiersRequireUpdate = true;
         super.onWindowFocusChanged(z);
-        if (!z || this.showLayoutBounds == (access$getIsShowingLayoutBounds = Companion.access$getIsShowingLayoutBounds(Companion))) {
+        if (!z || this.showLayoutBounds == (zAccess$getIsShowingLayoutBounds = Companion.access$getIsShowingLayoutBounds(Companion))) {
             return;
         }
-        this.showLayoutBounds = access$getIsShowingLayoutBounds;
+        this.showLayoutBounds = zAccess$getIsShowingLayoutBounds;
         invalidateLayers(this.root);
     }
 
@@ -2615,11 +2787,11 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         if (this.forceUseMatrixCache) {
             return;
         }
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-        if (currentAnimationTimeMillis != this.lastMatrixRecalculationAnimationTime) {
-            this.lastMatrixRecalculationAnimationTime = currentAnimationTimeMillis;
-            this.matrixToWindow.mo701calculateMatrixToWindowEL8BTi8(this, this.viewToWindowMatrix);
-            InvertMatrixKt.m704invertToJiSxe2E(this.viewToWindowMatrix, this.windowToViewMatrix);
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        if (jCurrentAnimationTimeMillis != this.lastMatrixRecalculationAnimationTime) {
+            this.lastMatrixRecalculationAnimationTime = jCurrentAnimationTimeMillis;
+            this.matrixToWindow.mo703calculateMatrixToWindowEL8BTi8(this, this.viewToWindowMatrix);
+            InvertMatrixKt.m706invertToJiSxe2E(this.viewToWindowMatrix, this.windowToViewMatrix);
             ViewParent parent = getParent();
             View view = this;
             while (parent instanceof ViewGroup) {
@@ -2639,19 +2811,19 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     public final void recycle$ui_release(OwnedLayer ownedLayer) {
-        Reference poll;
+        Reference referencePoll;
         MutableVector mutableVector;
         if (this.viewLayersContainer != null) {
             ViewLayer.Companion.getClass();
         }
         WeakCache weakCache = this.layerCache;
         do {
-            poll = weakCache.referenceQueue.poll();
+            referencePoll = weakCache.referenceQueue.poll();
             mutableVector = weakCache.values;
-            if (poll != null) {
-                mutableVector.remove(poll);
+            if (referencePoll != null) {
+                mutableVector.remove(referencePoll);
             }
-        } while (poll != null);
+        } while (referencePoll != null);
         mutableVector.add(new WeakReference(ownedLayer, weakCache.referenceQueue));
         this.dirtyLayers.remove(ownedLayer);
     }
@@ -2666,7 +2838,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     @Override // android.view.ViewGroup, android.view.View
     public final boolean requestFocus(int i, android.graphics.Rect rect) {
         final int i2;
-        View findNextNonChildView;
+        View viewFindNextNonChildView;
         final int i3;
         if (ComposeUiFlags.isViewFocusFixEnabled) {
             if (!isFocused()) {
@@ -2678,9 +2850,9 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                         FocusDirection.Companion.getClass();
                         i2 = FocusDirection.Enter;
                     }
-                    if (!hasFocus() || !m695onMoveFocusInChildren3ESFkO8(i2)) {
+                    if (!hasFocus() || !m697onMoveFocusInChildren3ESFkO8(i2)) {
                         final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
-                        Boolean m372focusSearchULY8qGw = this.focusOwner.m372focusSearchULY8qGw(i2, rect != null ? RectHelper_androidKt.toComposeRect(rect) : null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$requestFocus$focusSearchResult$1
+                        Boolean boolM374focusSearchULY8qGw = this.focusOwner.m374focusSearchULY8qGw(i2, rect != null ? RectHelper_androidKt.toComposeRect(rect) : null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$requestFocus$focusSearchResult$1
                             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(1);
@@ -2688,15 +2860,15 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
-                                Ref$BooleanRef.this.element = true;
-                                return Boolean.valueOf(((FocusTargetNode) obj).m378requestFocus3ESFkO8(i2));
+                            public final Object mo781invoke(Object obj) {
+                                ref$BooleanRef.element = true;
+                                return Boolean.valueOf(((FocusTargetNode) obj).m380requestFocus3ESFkO8(i2));
                             }
                         });
-                        if (m372focusSearchULY8qGw != null) {
-                            if (!m372focusSearchULY8qGw.booleanValue()) {
+                        if (boolM374focusSearchULY8qGw != null) {
+                            if (!boolM374focusSearchULY8qGw.booleanValue()) {
                                 if (!ref$BooleanRef.element) {
-                                    if ((rect == null || hasFocus() || !Intrinsics.areEqual(this.focusOwner.m372focusSearchULY8qGw(i2, null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$requestFocus$altFocus$1
+                                    if ((rect == null || hasFocus() || !Intrinsics.areEqual(this.focusOwner.m374focusSearchULY8qGw(i2, null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$requestFocus$altFocus$1
                                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                         {
                                             super(1);
@@ -2704,14 +2876,14 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
                                         @Override // kotlin.jvm.functions.Function1
                                         /* renamed from: invoke */
-                                        public final Object mo779invoke(Object obj) {
-                                            return Boolean.valueOf(((FocusTargetNode) obj).m378requestFocus3ESFkO8(i2));
+                                        public final Object mo781invoke(Object obj) {
+                                            return Boolean.valueOf(((FocusTargetNode) obj).m380requestFocus3ESFkO8(i2));
                                         }
-                                    }), Boolean.TRUE)) && (findNextNonChildView = findNextNonChildView(i)) != null && findNextNonChildView != this) {
+                                    }), Boolean.TRUE)) && (viewFindNextNonChildView = findNextNonChildView(i)) != null && viewFindNextNonChildView != this) {
                                         this.processingRequestFocusForNextNonChildView = true;
-                                        boolean requestFocus = findNextNonChildView.requestFocus(i);
+                                        boolean zRequestFocus = viewFindNextNonChildView.requestFocus(i);
                                         this.processingRequestFocusForNextNonChildView = false;
-                                        return requestFocus;
+                                        return zRequestFocus;
                                     }
                                 }
                             }
@@ -2731,7 +2903,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 FocusDirection.Companion.getClass();
                 i3 = FocusDirection.Enter;
             }
-            return Intrinsics.areEqual(this.focusOwner.m372focusSearchULY8qGw(i3, rect != null ? RectHelper_androidKt.toComposeRect(rect) : null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView$requestFocus$1
+            return Intrinsics.areEqual(this.focusOwner.m374focusSearchULY8qGw(i3, rect != null ? RectHelper_androidKt.toComposeRect(rect) : null, new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView.requestFocus.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
@@ -2739,8 +2911,8 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    return Boolean.valueOf(((FocusTargetNode) obj).m378requestFocus3ESFkO8(i3));
+                public final Object mo781invoke(Object obj) {
+                    return Boolean.valueOf(((FocusTargetNode) obj).m380requestFocus3ESFkO8(i3));
                 }
             }), Boolean.TRUE);
         }
@@ -2759,7 +2931,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                         break;
                     }
                     long j = parent$ui_release.nodes.innerCoordinator.measurementConstraints;
-                    if (Constraints.m819getHasFixedWidthimpl(j) && Constraints.m818getHasFixedHeightimpl(j)) {
+                    if (Constraints.m821getHasFixedWidthimpl(j) && Constraints.m820getHasFixedHeightimpl(j)) {
                         break;
                     }
                 }
@@ -2778,18 +2950,18 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
     }
 
     /* renamed from: screenToLocal-MK-Hz9U, reason: not valid java name */
-    public final long m696screenToLocalMKHz9U(long j) {
+    public final long m698screenToLocalMKHz9U(long j) {
         recalculateWindowPosition();
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) - Float.intBitsToFloat((int) (this.windowPosition >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - Float.intBitsToFloat((int) (this.windowPosition & 4294967295L));
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) - Float.intBitsToFloat((int) (this.windowPosition >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - Float.intBitsToFloat((int) (this.windowPosition & 4294967295L));
         float[] fArr = this.windowToViewMatrix;
-        long floatToRawIntBits = (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(fIntBitsToFloat) << 32);
         Offset.Companion companion = Offset.Companion;
-        return Matrix.m482mapMKHz9U(floatToRawIntBits, fArr);
+        return Matrix.m484mapMKHz9U(jFloatToRawIntBits, fArr);
     }
 
     /* renamed from: sendMotionEvent-8iAsVTc, reason: not valid java name */
-    public final int m697sendMotionEvent8iAsVTc(MotionEvent motionEvent) {
+    public final int m699sendMotionEvent8iAsVTc(MotionEvent motionEvent) {
         Object obj;
         if (this.keyboardModifiersRequireUpdate) {
             this.keyboardModifiersRequireUpdate = false;
@@ -2797,14 +2969,14 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
             int metaState = motionEvent.getMetaState();
             lazyWindowInfo.getClass();
             WindowInfoImpl.Companion.getClass();
-            ((SnapshotMutableStateImpl) WindowInfoImpl.GlobalKeyboardModifiers).setValue(PointerKeyboardModifiers.m596boximpl(metaState));
+            ((SnapshotMutableStateImpl) WindowInfoImpl.GlobalKeyboardModifiers).setValue(PointerKeyboardModifiers.m598boximpl(metaState));
         }
-        PointerInputEvent convertToPointerInputEvent$ui_release = this.motionEventAdapter.convertToPointerInputEvent$ui_release(this, motionEvent);
-        if (convertToPointerInputEvent$ui_release == null) {
+        PointerInputEvent pointerInputEventConvertToPointerInputEvent$ui_release = this.motionEventAdapter.convertToPointerInputEvent$ui_release(this, motionEvent);
+        if (pointerInputEventConvertToPointerInputEvent$ui_release == null) {
             this.pointerInputEventProcessor.processCancel();
             return 0;
         }
-        List list = convertToPointerInputEvent$ui_release.pointers;
+        List list = pointerInputEventConvertToPointerInputEvent$ui_release.pointers;
         int size = list.size() - 1;
         if (size >= 0) {
             while (true) {
@@ -2818,72 +2990,74 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
                 }
                 size = i;
             }
+            obj = null;
+        } else {
+            obj = null;
         }
-        obj = null;
         PointerInputEventData pointerInputEventData = (PointerInputEventData) obj;
         if (pointerInputEventData != null) {
             this.lastDownPointerPosition = pointerInputEventData.position;
         }
-        int m593processBIzXfog = this.pointerInputEventProcessor.m593processBIzXfog(convertToPointerInputEvent$ui_release, this, isInBounds(motionEvent));
+        int iM595processBIzXfog = this.pointerInputEventProcessor.m595processBIzXfog(pointerInputEventConvertToPointerInputEvent$ui_release, this, isInBounds(motionEvent));
         int actionMasked = motionEvent.getActionMasked();
-        if ((actionMasked != 0 && actionMasked != 5) || (m593processBIzXfog & 1) != 0) {
-            return m593processBIzXfog;
+        if ((actionMasked != 0 && actionMasked != 5) || (iM595processBIzXfog & 1) != 0) {
+            return iM595processBIzXfog;
         }
         MotionEventAdapter motionEventAdapter = this.motionEventAdapter;
         int pointerId = motionEvent.getPointerId(motionEvent.getActionIndex());
         motionEventAdapter.activeHoverIds.delete(pointerId);
         motionEventAdapter.motionEventToComposePointerIdMap.delete(pointerId);
-        return m593processBIzXfog;
+        return iM595processBIzXfog;
     }
 
     public final void sendSimulatedEvent(MotionEvent motionEvent, int i, long j, boolean z) {
         int i2 = 1;
         int actionMasked = motionEvent.getActionMasked();
-        int i3 = -1;
+        int actionIndex = -1;
         if (actionMasked != 1) {
             if (actionMasked == 6) {
-                i3 = motionEvent.getActionIndex();
+                actionIndex = motionEvent.getActionIndex();
             }
         } else if (i != 9 && i != 10) {
-            i3 = 0;
+            actionIndex = 0;
         }
-        int pointerCount = motionEvent.getPointerCount() - (i3 >= 0 ? 1 : 0);
+        int pointerCount = motionEvent.getPointerCount() - (actionIndex >= 0 ? 1 : 0);
         if (pointerCount == 0) {
             return;
         }
         MotionEvent.PointerProperties[] pointerPropertiesArr = new MotionEvent.PointerProperties[pointerCount];
-        for (int i4 = 0; i4 < pointerCount; i4++) {
-            pointerPropertiesArr[i4] = new MotionEvent.PointerProperties();
+        for (int i3 = 0; i3 < pointerCount; i3++) {
+            pointerPropertiesArr[i3] = new MotionEvent.PointerProperties();
         }
         MotionEvent.PointerCoords[] pointerCoordsArr = new MotionEvent.PointerCoords[pointerCount];
-        for (int i5 = 0; i5 < pointerCount; i5++) {
-            pointerCoordsArr[i5] = new MotionEvent.PointerCoords();
+        for (int i4 = 0; i4 < pointerCount; i4++) {
+            pointerCoordsArr[i4] = new MotionEvent.PointerCoords();
         }
-        int i6 = 0;
-        while (i6 < pointerCount) {
-            int i7 = ((i3 < 0 || i6 < i3) ? 0 : i2) + i6;
-            motionEvent.getPointerProperties(i7, pointerPropertiesArr[i6]);
-            MotionEvent.PointerCoords pointerCoords = pointerCoordsArr[i6];
-            motionEvent.getPointerCoords(i7, pointerCoords);
+        int i5 = 0;
+        while (i5 < pointerCount) {
+            int i6 = ((actionIndex < 0 || i5 < actionIndex) ? 0 : i2) + i5;
+            motionEvent.getPointerProperties(i6, pointerPropertiesArr[i5]);
+            MotionEvent.PointerCoords pointerCoords = pointerCoordsArr[i5];
+            motionEvent.getPointerCoords(i6, pointerCoords);
             float f = pointerCoords.x;
             float f2 = pointerCoords.y;
-            long floatToRawIntBits = Float.floatToRawIntBits(f);
-            int floatToRawIntBits2 = Float.floatToRawIntBits(f2);
-            int i8 = i2;
-            long j2 = (floatToRawIntBits2 & 4294967295L) | (floatToRawIntBits << 32);
+            long jFloatToRawIntBits = Float.floatToRawIntBits(f);
+            int iFloatToRawIntBits = Float.floatToRawIntBits(f2);
+            int i7 = i2;
+            long j2 = (iFloatToRawIntBits & 4294967295L) | (jFloatToRawIntBits << 32);
             Offset.Companion companion = Offset.Companion;
-            long m693localToScreenMKHz9U = m693localToScreenMKHz9U(j2);
-            pointerCoords.x = Float.intBitsToFloat((int) (m693localToScreenMKHz9U >> 32));
-            pointerCoords.y = Float.intBitsToFloat((int) (m693localToScreenMKHz9U & 4294967295L));
-            i6 += i8;
-            i2 = i8;
+            long jM695localToScreenMKHz9U = m695localToScreenMKHz9U(j2);
+            pointerCoords.x = Float.intBitsToFloat((int) (jM695localToScreenMKHz9U >> 32));
+            pointerCoords.y = Float.intBitsToFloat((int) (jM695localToScreenMKHz9U & 4294967295L));
+            i5 += i7;
+            i2 = i7;
             pointerCount = pointerCount;
         }
-        MotionEvent obtain = MotionEvent.obtain(motionEvent.getDownTime() == motionEvent.getEventTime() ? j : motionEvent.getDownTime(), j, i, pointerCount, pointerPropertiesArr, pointerCoordsArr, motionEvent.getMetaState(), z ? 0 : motionEvent.getButtonState(), motionEvent.getXPrecision(), motionEvent.getYPrecision(), motionEvent.getDeviceId(), motionEvent.getEdgeFlags(), motionEvent.getSource(), motionEvent.getFlags());
-        PointerInputEvent convertToPointerInputEvent$ui_release = this.motionEventAdapter.convertToPointerInputEvent$ui_release(this, obtain);
-        convertToPointerInputEvent$ui_release.getClass();
-        this.pointerInputEventProcessor.m593processBIzXfog(convertToPointerInputEvent$ui_release, this, true);
-        obtain.recycle();
+        MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent.getDownTime() == motionEvent.getEventTime() ? j : motionEvent.getDownTime(), j, i, pointerCount, pointerPropertiesArr, pointerCoordsArr, motionEvent.getMetaState(), z ? 0 : motionEvent.getButtonState(), motionEvent.getXPrecision(), motionEvent.getYPrecision(), motionEvent.getDeviceId(), motionEvent.getEdgeFlags(), motionEvent.getSource(), motionEvent.getFlags());
+        PointerInputEvent pointerInputEventConvertToPointerInputEvent$ui_release = this.motionEventAdapter.convertToPointerInputEvent$ui_release(this, motionEventObtain);
+        pointerInputEventConvertToPointerInputEvent$ui_release.getClass();
+        this.pointerInputEventProcessor.m595processBIzXfog(pointerInputEventConvertToPointerInputEvent$ui_release, this, true);
+        motionEventObtain.recycle();
     }
 
     @Override // android.view.ViewGroup
@@ -2891,166 +3065,100 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final kotlin.coroutines.intrinsics.CoroutineSingletons textInputSession(kotlin.jvm.functions.Function2 r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof androidx.compose.ui.platform.AndroidComposeView$textInputSession$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            androidx.compose.ui.platform.AndroidComposeView$textInputSession$1 r0 = (androidx.compose.ui.platform.AndroidComposeView$textInputSession$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.ui.platform.AndroidComposeView$textInputSession$1 r0 = new androidx.compose.ui.platform.AndroidComposeView$textInputSession$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L42
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.util.concurrent.atomic.AtomicReference r6 = r4.textInputSessionMutex
-            androidx.compose.ui.platform.AndroidComposeView$textInputSession$2 r2 = new androidx.compose.ui.platform.AndroidComposeView$textInputSession$2
-            r2.<init>()
-            r0.label = r3
-            java.lang.Object r4 = androidx.compose.ui.SessionMutex.m354withSessionCancellingPreviousimpl(r6, r2, r5, r0)
-            if (r4 != r1) goto L42
-            return r1
-        L42:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.AndroidComposeView.textInputSession(kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):kotlin.coroutines.intrinsics.CoroutineSingletons");
+    public final CoroutineSingletons textInputSession(Function2 function2, ContinuationImpl continuationImpl) {
+        C07531 c07531;
+        if (continuationImpl instanceof C07531) {
+            c07531 = (C07531) continuationImpl;
+            int i = c07531.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c07531.label = i - Integer.MIN_VALUE;
+            } else {
+                c07531 = new C07531(continuationImpl);
+            }
+        }
+        Object obj = c07531.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c07531.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            AtomicReference atomicReference = this.textInputSessionMutex;
+            Function1 function1 = new Function1() { // from class: androidx.compose.ui.platform.AndroidComposeView.textInputSession.2
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj2) {
+                    AndroidComposeView androidComposeView = AndroidComposeView.this;
+                    return new AndroidPlatformTextInputSession(androidComposeView, androidComposeView.textInputService, (CoroutineScope) obj2);
+                }
+            };
+            c07531.label = 1;
+            if (SessionMutex.m355withSessionCancellingPreviousimpl(atomicReference, function1, function2, c07531) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0092  */
-    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x006f  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updatePositionCacheAndDispatch() {
-        /*
-            r13 = this;
-            int[] r0 = r13.tmpPositionArray
-            r13.getLocationOnScreen(r0)
-            long r0 = r13.globalPosition
-            androidx.compose.ui.unit.IntOffset$Companion r2 = androidx.compose.ui.unit.IntOffset.Companion
-            r2 = 32
-            long r3 = r0 >> r2
-            int r3 = (int) r3
-            r4 = 4294967295(0xffffffff, double:2.1219957905E-314)
-            long r0 = r0 & r4
-            int r0 = (int) r0
-            int[] r1 = r13.tmpPositionArray
-            r6 = 0
-            r7 = r1[r6]
-            r8 = 1
-            if (r3 != r7) goto L29
-            r9 = r1[r8]
-            if (r0 != r9) goto L29
-            long r9 = r13.lastMatrixRecalculationAnimationTime
-            r11 = 0
-            int r9 = (r9 > r11 ? 1 : (r9 == r11 ? 0 : -1))
-            if (r9 >= 0) goto L44
-        L29:
-            r1 = r1[r8]
-            long r9 = (long) r7
-            long r9 = r9 << r2
-            long r1 = (long) r1
-            long r1 = r1 & r4
-            long r1 = r1 | r9
-            r13.globalPosition = r1
-            r1 = 2147483647(0x7fffffff, float:NaN)
-            if (r3 == r1) goto L44
-            if (r0 == r1) goto L44
-            androidx.compose.ui.node.LayoutNode r0 = r13.root
-            androidx.compose.ui.node.LayoutNodeLayoutDelegate r0 = r0.layoutDelegate
-            androidx.compose.ui.node.MeasurePassDelegate r0 = r0.measurePassDelegate
-            r0.notifyChildrenUsingCoordinatesWhilePlacing()
-            r0 = r8
-            goto L45
-        L44:
-            r0 = r6
-        L45:
-            r13.recalculateWindowPosition()
-            androidx.compose.ui.spatial.RectManager r1 = r13.rectManager
-            long r2 = r13.globalPosition
-            long r4 = r13.windowPosition
-            long r4 = androidx.compose.ui.unit.IntOffsetKt.m854roundk4lQ0M(r4)
-            float[] r7 = r13.viewToWindowMatrix
-            r1.getClass()
-            int r9 = androidx.compose.ui.spatial.RectManagerKt.m721access$analyzeComponents58bKbWc(r7)
-            r9 = r9 & 2
-            if (r9 != 0) goto L60
-            goto L61
-        L60:
-            r7 = 0
-        L61:
-            androidx.compose.ui.spatial.ThrottledCallbacks r9 = r1.throttledCallbacks
-            long r10 = r9.windowOffset
-            boolean r10 = androidx.compose.ui.unit.IntOffset.m849equalsimpl0(r4, r10)
-            if (r10 != 0) goto L6f
-            r9.windowOffset = r4
-            r4 = r8
-            goto L70
-        L6f:
-            r4 = r6
-        L70:
-            long r10 = r9.screenOffset
-            boolean r5 = androidx.compose.ui.unit.IntOffset.m849equalsimpl0(r2, r10)
-            if (r5 != 0) goto L7b
-            r9.screenOffset = r2
-            r4 = r8
-        L7b:
-            if (r7 == 0) goto L80
-            r9.viewToWindowMatrix = r7
-            r4 = r8
-        L80:
-            if (r4 != 0) goto L86
-            boolean r2 = r1.isScreenOrWindowDirty
-            if (r2 == 0) goto L87
-        L86:
-            r6 = r8
-        L87:
-            r1.isScreenOrWindowDirty = r6
-            androidx.compose.ui.node.MeasureAndLayoutDelegate r1 = r13.measureAndLayoutDelegate
-            r1.dispatchOnPositionedCallbacks(r0)
-            boolean r0 = androidx.compose.ui.ComposeUiFlags.isRectTrackingEnabled
-            if (r0 == 0) goto L97
-            androidx.compose.ui.spatial.RectManager r13 = r13.rectManager
-            r13.dispatchCallbacks()
-        L97:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.AndroidComposeView.updatePositionCacheAndDispatch():void");
+        boolean z;
+        boolean z2;
+        getLocationOnScreen(this.tmpPositionArray);
+        long j = this.globalPosition;
+        IntOffset.Companion companion = IntOffset.Companion;
+        int i = (int) (j >> 32);
+        int i2 = (int) (j & 4294967295L);
+        int[] iArr = this.tmpPositionArray;
+        int i3 = iArr[0];
+        if (i != i3 || i2 != iArr[1] || this.lastMatrixRecalculationAnimationTime < 0) {
+            this.globalPosition = (iArr[1] & 4294967295L) | (i3 << 32);
+            if (i == Integer.MAX_VALUE || i2 == Integer.MAX_VALUE) {
+                z = false;
+            } else {
+                this.root.layoutDelegate.measurePassDelegate.notifyChildrenUsingCoordinatesWhilePlacing();
+                z = true;
+            }
+        }
+        recalculateWindowPosition();
+        RectManager rectManager = this.rectManager;
+        long j2 = this.globalPosition;
+        long jM856roundk4lQ0M = IntOffsetKt.m856roundk4lQ0M(this.windowPosition);
+        float[] fArr = this.viewToWindowMatrix;
+        rectManager.getClass();
+        if ((RectManagerKt.m723access$analyzeComponents58bKbWc(fArr) & 2) != 0) {
+            fArr = null;
+        }
+        ThrottledCallbacks throttledCallbacks = rectManager.throttledCallbacks;
+        if (IntOffset.m851equalsimpl0(jM856roundk4lQ0M, throttledCallbacks.windowOffset)) {
+            z2 = false;
+        } else {
+            throttledCallbacks.windowOffset = jM856roundk4lQ0M;
+            z2 = true;
+        }
+        if (!IntOffset.m851equalsimpl0(j2, throttledCallbacks.screenOffset)) {
+            throttledCallbacks.screenOffset = j2;
+            z2 = true;
+        }
+        if (fArr != null) {
+            throttledCallbacks.viewToWindowMatrix = fArr;
+            z2 = true;
+        }
+        rectManager.isScreenOrWindowDirty = z2 || rectManager.isScreenOrWindowDirty;
+        this.measureAndLayoutDelegate.dispatchOnPositionedCallbacks(z);
+        if (ComposeUiFlags.isRectTrackingEnabled) {
+            this.rectManager.dispatchCallbacks();
+        }
     }
 
     @Override // android.view.ViewGroup
@@ -3065,11 +3173,11 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     @Override // android.view.ViewGroup
     public final void addView(View view, int i, int i2) {
-        ViewGroup.LayoutParams generateDefaultLayoutParams = generateDefaultLayoutParams();
-        generateDefaultLayoutParams.width = i;
-        generateDefaultLayoutParams.height = i2;
+        ViewGroup.LayoutParams layoutParamsGenerateDefaultLayoutParams = generateDefaultLayoutParams();
+        layoutParamsGenerateDefaultLayoutParams.width = i;
+        layoutParamsGenerateDefaultLayoutParams.height = i2;
         Unit unit = Unit.INSTANCE;
-        addViewInLayout(view, -1, generateDefaultLayoutParams, true);
+        addViewInLayout(view, -1, layoutParamsGenerateDefaultLayoutParams, true);
     }
 
     @Override // android.view.ViewGroup
@@ -3084,16 +3192,16 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
 
     public final void recalculateWindowPosition(MotionEvent motionEvent) {
         this.lastMatrixRecalculationAnimationTime = AnimationUtils.currentAnimationTimeMillis();
-        this.matrixToWindow.mo701calculateMatrixToWindowEL8BTi8(this, this.viewToWindowMatrix);
-        InvertMatrixKt.m704invertToJiSxe2E(this.viewToWindowMatrix, this.windowToViewMatrix);
+        this.matrixToWindow.mo703calculateMatrixToWindowEL8BTi8(this, this.viewToWindowMatrix);
+        InvertMatrixKt.m706invertToJiSxe2E(this.viewToWindowMatrix, this.windowToViewMatrix);
         float[] fArr = this.viewToWindowMatrix;
         float x = motionEvent.getX();
         float y = motionEvent.getY();
-        long floatToRawIntBits = (Float.floatToRawIntBits(y) & 4294967295L) | (Float.floatToRawIntBits(x) << 32);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(y) & 4294967295L) | (Float.floatToRawIntBits(x) << 32);
         Offset.Companion companion = Offset.Companion;
-        long m482mapMKHz9U = Matrix.m482mapMKHz9U(floatToRawIntBits, fArr);
-        float rawX = motionEvent.getRawX() - Float.intBitsToFloat((int) (m482mapMKHz9U >> 32));
-        float rawY = motionEvent.getRawY() - Float.intBitsToFloat((int) (m482mapMKHz9U & 4294967295L));
+        long jM484mapMKHz9U = Matrix.m484mapMKHz9U(jFloatToRawIntBits, fArr);
+        float rawX = motionEvent.getRawX() - Float.intBitsToFloat((int) (jM484mapMKHz9U >> 32));
+        float rawY = motionEvent.getRawY() - Float.intBitsToFloat((int) (jM484mapMKHz9U & 4294967295L));
         this.windowPosition = (Float.floatToRawIntBits(rawX) << 32) | (Float.floatToRawIntBits(rawY) & 4294967295L);
     }
 

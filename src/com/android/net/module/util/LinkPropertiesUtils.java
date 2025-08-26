@@ -52,17 +52,17 @@ public final class LinkPropertiesUtils {
         public final List<T> updated = new ArrayList();
 
         public CompareOrUpdateResult(Collection<T> collection, Collection<T> collection2, Function<T, K> function) {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             if (collection != null) {
                 for (T t : collection) {
-                    hashMap.put(function.apply(t), t);
+                    map.put(function.apply(t), t);
                 }
             }
             if (collection2 != null) {
                 for (T t2 : collection2) {
-                    Object remove = hashMap.remove(function.apply(t2));
-                    if (remove != null) {
-                        if (!remove.equals(t2)) {
+                    Object objRemove = map.remove(function.apply(t2));
+                    if (objRemove != null) {
+                        if (!objRemove.equals(t2)) {
                             this.updated.add(t2);
                         }
                     } else {
@@ -70,7 +70,7 @@ public final class LinkPropertiesUtils {
                     }
                 }
             }
-            this.removed.addAll(hashMap.values());
+            this.removed.addAll(map.values());
         }
 
         public String toString() {

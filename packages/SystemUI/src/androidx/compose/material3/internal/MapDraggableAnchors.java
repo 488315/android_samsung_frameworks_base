@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MapDraggableAnchors<T> implements DraggableAnchors<T> {
     public final Map anchors;
@@ -20,13 +19,13 @@ final class MapDraggableAnchors<T> implements DraggableAnchors<T> {
         if (it.hasNext()) {
             next = it.next();
             if (it.hasNext()) {
-                float abs = Math.abs(f - ((Number) ((Map.Entry) next).getValue()).floatValue());
+                float fAbs = Math.abs(f - ((Number) ((Map.Entry) next).getValue()).floatValue());
                 do {
                     T next2 = it.next();
-                    float abs2 = Math.abs(f - ((Number) ((Map.Entry) next2).getValue()).floatValue());
-                    if (Float.compare(abs, abs2) > 0) {
+                    float fAbs2 = Math.abs(f - ((Number) ((Map.Entry) next2).getValue()).floatValue());
+                    if (Float.compare(fAbs, fAbs2) > 0) {
                         next = next2;
-                        abs = abs2;
+                        fAbs = fAbs2;
                     }
                 } while (it.hasNext());
             }
@@ -61,19 +60,19 @@ final class MapDraggableAnchors<T> implements DraggableAnchors<T> {
 
     @Override // androidx.compose.material3.internal.DraggableAnchors
     public final float minAnchor() {
-        Float valueOf;
+        Float fValueOf;
         Iterator<T> it = this.anchors.values().iterator();
         if (it.hasNext()) {
-            float floatValue = ((Number) it.next()).floatValue();
+            float fFloatValue = ((Number) it.next()).floatValue();
             while (it.hasNext()) {
-                floatValue = Math.min(floatValue, ((Number) it.next()).floatValue());
+                fFloatValue = Math.min(fFloatValue, ((Number) it.next()).floatValue());
             }
-            valueOf = Float.valueOf(floatValue);
+            fValueOf = Float.valueOf(fFloatValue);
         } else {
-            valueOf = null;
+            fValueOf = null;
         }
-        if (valueOf != null) {
-            return valueOf.floatValue();
+        if (fValueOf != null) {
+            return fValueOf.floatValue();
         }
         return Float.NaN;
     }
@@ -97,15 +96,15 @@ final class MapDraggableAnchors<T> implements DraggableAnchors<T> {
         if (it.hasNext()) {
             next = it.next();
             if (it.hasNext()) {
-                float floatValue = ((Number) ((Map.Entry) next).getValue()).floatValue();
-                float f2 = z ? floatValue - f : f - floatValue;
+                float fFloatValue = ((Number) ((Map.Entry) next).getValue()).floatValue();
+                float f2 = z ? fFloatValue - f : f - fFloatValue;
                 if (f2 < 0.0f) {
                     f2 = Float.POSITIVE_INFINITY;
                 }
                 do {
                     T next2 = it.next();
-                    float floatValue2 = ((Number) ((Map.Entry) next2).getValue()).floatValue();
-                    float f3 = z ? floatValue2 - f : f - floatValue2;
+                    float fFloatValue2 = ((Number) ((Map.Entry) next2).getValue()).floatValue();
+                    float f3 = z ? fFloatValue2 - f : f - fFloatValue2;
                     if (f3 < 0.0f) {
                         f3 = Float.POSITIVE_INFINITY;
                     }

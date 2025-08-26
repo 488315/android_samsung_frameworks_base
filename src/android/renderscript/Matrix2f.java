@@ -44,13 +44,13 @@ public class Matrix2f {
 
     public void loadRotate(float f) {
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
         float[] fArr = this.mMat;
-        fArr[0] = cos;
-        fArr[1] = -sin;
-        fArr[2] = sin;
-        fArr[3] = cos;
+        fArr[0] = fCos;
+        fArr[1] = -fSin;
+        fArr[2] = fSin;
+        fArr[3] = fCos;
     }
 
     public void loadScale(float f, float f2) {

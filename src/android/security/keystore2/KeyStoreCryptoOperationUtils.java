@@ -25,7 +25,7 @@ abstract class KeyStoreCryptoOperationUtils {
     private KeyStoreCryptoOperationUtils() {
     }
 
-    public static boolean canUserAuthorizationSucceed(AndroidKeyStoreKey androidKeyStoreKey) {
+    public static boolean canUserAuthorizationSucceed(AndroidKeyStoreKey androidKeyStoreKey) throws IllegalStateException {
         ArrayList arrayList = new ArrayList();
         for (Authorization authorization : androidKeyStoreKey.getAuthorizations()) {
             if (authorization.keyParameter.tag == -1610612234) {

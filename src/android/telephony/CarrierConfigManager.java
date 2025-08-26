@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.SemSystemProperties;
+import android.os.SystemProperties;
 import android.service.carrier.CarrierIdentifier;
 import android.telecom.TelecomManager;
 import android.telephony.data.ApnSetting;
@@ -2467,7 +2468,7 @@ public class CarrierConfigManager {
     }
 
     public static PersistableBundle getCarrierConfigSubset(Context context, int i, String... strArr) {
-        PersistableBundle persistableBundle;
+        PersistableBundle configForSubId;
         if (TelephonyFeatures.IS_WIFI_ONLY) {
             return getDefaultConfig();
         }
@@ -2476,15 +2477,15 @@ public class CarrierConfigManager {
             return new PersistableBundle();
         }
         try {
-            persistableBundle = carrierConfigManager.getConfigForSubId(i, strArr);
+            configForSubId = carrierConfigManager.getConfigForSubId(i, strArr);
         } catch (RuntimeException unused) {
             com.android.telephony.Rlog.w(TAG, "CarrierConfigLoader is not available.");
-            persistableBundle = null;
+            configForSubId = null;
         }
-        return persistableBundle != null ? persistableBundle : new PersistableBundle();
+        return configForSubId != null ? configForSubId : new PersistableBundle();
     }
 
-    public boolean overrideCarrierConfigFromCarrierFeature(int i) {
+    public boolean overrideCarrierConfigFromCarrierFeature(int i) throws XmlPullParserException {
         int subscriptionId = SubscriptionManager.getSubscriptionId(i);
         if (!SubscriptionManager.isValidSubscriptionId(subscriptionId)) {
             com.android.telephony.Rlog.d(TAG, "overrideCarrierConfigFromCarrierFeature subId is not valid, subId: " + subscriptionId);
@@ -2517,9 +2518,9 @@ public class CarrierConfigManager {
                 com.android.telephony.Rlog.d(TAG, "carrierIdentifier: " + carrierIdentifierForPhoneId);
                 try {
                     ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(string2.getBytes());
-                    XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-                    newPullParser.setInput(byteArrayInputStream, null);
-                    persistableBundle = readConfigFromXml(newPullParser, carrierIdentifierForPhoneId, "");
+                    XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+                    xmlPullParserNewPullParser.setInput(byteArrayInputStream, null);
+                    persistableBundle = readConfigFromXml(xmlPullParserNewPullParser, carrierIdentifierForPhoneId, "");
                 } catch (IOException | XmlPullParserException e) {
                     com.android.telephony.Rlog.e(TAG, "overrideCarrierConfigFromCarrierFeature XML parsing failed: " + e);
                     return false;
@@ -2542,27 +2543,27 @@ public class CarrierConfigManager {
     }
 
     private CarrierIdentifier getCarrierIdentifierForPhoneId(int i) {
-        String str;
-        String str2;
-        TelephonyManager createForSubscriptionId = ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)).createForSubscriptionId(SubscriptionManager.getSubscriptionId(i));
-        String subscriberId = createForSubscriptionId.getSubscriberId();
-        String groupIdLevel1 = createForSubscriptionId.getGroupIdLevel1();
-        String groupIdLevel2 = createForSubscriptionId.getGroupIdLevel2();
-        String simOperatorNameForPhone = createForSubscriptionId.getSimOperatorNameForPhone(i);
-        String simOperatorNumericForPhone = createForSubscriptionId.getSimOperatorNumericForPhone(i);
-        int simCarrierId = createForSubscriptionId.getSimCarrierId();
-        int simSpecificCarrierId = createForSubscriptionId.getSimSpecificCarrierId();
+        String strSubstring;
+        String strSubstring2;
+        TelephonyManager telephonyManagerCreateForSubscriptionId = ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)).createForSubscriptionId(SubscriptionManager.getSubscriptionId(i));
+        String subscriberId = telephonyManagerCreateForSubscriptionId.getSubscriberId();
+        String groupIdLevel1 = telephonyManagerCreateForSubscriptionId.getGroupIdLevel1();
+        String groupIdLevel2 = telephonyManagerCreateForSubscriptionId.getGroupIdLevel2();
+        String simOperatorNameForPhone = telephonyManagerCreateForSubscriptionId.getSimOperatorNameForPhone(i);
+        String simOperatorNumericForPhone = telephonyManagerCreateForSubscriptionId.getSimOperatorNumericForPhone(i);
+        int simCarrierId = telephonyManagerCreateForSubscriptionId.getSimCarrierId();
+        int simSpecificCarrierId = telephonyManagerCreateForSubscriptionId.getSimSpecificCarrierId();
         if (simOperatorNumericForPhone != null && simOperatorNumericForPhone.length() >= 3) {
-            str = simOperatorNumericForPhone.substring(0, 3);
-            str2 = simOperatorNumericForPhone.substring(3);
+            strSubstring = simOperatorNumericForPhone.substring(0, 3);
+            strSubstring2 = simOperatorNumericForPhone.substring(3);
         } else {
-            str = "";
-            str2 = str;
+            strSubstring = "";
+            strSubstring2 = strSubstring;
         }
-        return new CarrierIdentifier(str, str2, simOperatorNameForPhone, subscriberId, groupIdLevel1, groupIdLevel2, simCarrierId, simSpecificCarrierId);
+        return new CarrierIdentifier(strSubstring, strSubstring2, simOperatorNameForPhone, subscriberId, groupIdLevel1, groupIdLevel2, simCarrierId, simSpecificCarrierId);
     }
 
-    private PersistableBundle readConfigFromXml(XmlPullParser xmlPullParser, CarrierIdentifier carrierIdentifier, String str) throws IOException, XmlPullParserException {
+    private PersistableBundle readConfigFromXml(XmlPullParser xmlPullParser, CarrierIdentifier carrierIdentifier, String str) throws XmlPullParserException, IOException {
         PersistableBundle persistableBundle = new PersistableBundle();
         if (xmlPullParser != null) {
             while (true) {
@@ -2578,44 +2579,82 @@ public class CarrierConfigManager {
         return persistableBundle;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x0100, code lost:
-    
-        if (matchOnImsi(r6, r11) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x010e, code lost:
-    
-        if (r6.equalsIgnoreCase(r11.getGid2()) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x011b, code lost:
-    
-        if (r6.equalsIgnoreCase(r11.getGid1()) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x0124, code lost:
-    
-        if (matchOnSP(r6, r11) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:64:0x0136, code lost:
-    
-        if (r6.equals(r11.getMnc()) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x0143, code lost:
-    
-        if (r6.equals(r11.getMcc()) == false) goto L62;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x015a, code lost:
-    
-        if (java.lang.Integer.parseInt(r6) != r11.getSpecificCarrierId()) goto L62;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00ef  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean checkFilters(org.xmlpull.v1.XmlPullParser r10, android.service.carrier.CarrierIdentifier r11, java.lang.String r12) {
-        /*
-            Method dump skipped, instructions count: 458
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.CarrierConfigManager.checkFilters(org.xmlpull.v1.XmlPullParser, android.service.carrier.CarrierIdentifier, java.lang.String):boolean");
+    private boolean checkFilters(XmlPullParser xmlPullParser, CarrierIdentifier carrierIdentifier, String str) {
+        String attributeName;
+        String attributeValue;
+        String str2 = SystemProperties.get("ro.boot.product.vendor.sku", "");
+        String str3 = SystemProperties.get("ro.boot.product.hardware.sku", "");
+        int i = 0;
+        while (true) {
+            boolean zEqualsIgnoreCase = true;
+            if (i >= xmlPullParser.getAttributeCount()) {
+                return true;
+            }
+            attributeName = xmlPullParser.getAttributeName(i);
+            attributeValue = xmlPullParser.getAttributeValue(i);
+            attributeName.hashCode();
+            switch (attributeName) {
+                case "device":
+                    zEqualsIgnoreCase = attributeValue.equalsIgnoreCase(Build.DEVICE);
+                    break;
+                case "vendorSku":
+                    zEqualsIgnoreCase = attributeValue.equalsIgnoreCase(str2);
+                    break;
+                case "hardwareSku":
+                    zEqualsIgnoreCase = attributeValue.equalsIgnoreCase(str3);
+                    break;
+                case "cid":
+                    if (carrierIdentifier != null && Integer.parseInt(attributeValue) != carrierIdentifier.getCarrierId() && Integer.parseInt(attributeValue) != carrierIdentifier.getSpecificCarrierId()) {
+                        zEqualsIgnoreCase = false;
+                        break;
+                    }
+                    break;
+                case "mcc":
+                    if (carrierIdentifier != null && !attributeValue.equals(carrierIdentifier.getMcc())) {
+                    }
+                    break;
+                case "mnc":
+                    if (carrierIdentifier != null && !attributeValue.equals(carrierIdentifier.getMnc())) {
+                    }
+                    break;
+                case "sku":
+                    zEqualsIgnoreCase = attributeValue.equalsIgnoreCase(str);
+                    break;
+                case "spn":
+                    if (carrierIdentifier != null && !matchOnSP(attributeValue, carrierIdentifier)) {
+                    }
+                    break;
+                case "gid1":
+                    if (carrierIdentifier != null && !attributeValue.equalsIgnoreCase(carrierIdentifier.getGid1())) {
+                    }
+                    break;
+                case "gid2":
+                    if (carrierIdentifier != null && !attributeValue.equalsIgnoreCase(carrierIdentifier.getGid2())) {
+                    }
+                    break;
+                case "imsi":
+                    if (carrierIdentifier != null && !matchOnImsi(attributeValue, carrierIdentifier)) {
+                    }
+                    break;
+                case "name":
+                    break;
+                case "board":
+                    zEqualsIgnoreCase = attributeValue.equalsIgnoreCase(Build.BOARD);
+                    break;
+                default:
+                    com.android.telephony.Rlog.e(TAG, "Unknown attribute " + attributeName + "=" + attributeValue);
+                    zEqualsIgnoreCase = false;
+                    break;
+            }
+            if (!zEqualsIgnoreCase) {
+                return false;
+            }
+            i++;
+        }
     }
 
     private boolean matchOnImsi(String str, CarrierIdentifier carrierIdentifier) {

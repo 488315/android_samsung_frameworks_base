@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PreferenceViewHolder extends RecyclerView.ViewHolder {
     public final Drawable mBackground;
@@ -43,10 +42,10 @@ public class PreferenceViewHolder extends RecyclerView.ViewHolder {
         if (view != null) {
             return view;
         }
-        View findViewById = this.itemView.findViewById(i);
-        if (findViewById != null) {
-            this.mCachedViews.put(i, findViewById);
+        View viewFindViewById = this.itemView.findViewById(i);
+        if (viewFindViewById != null) {
+            this.mCachedViews.put(i, viewFindViewById);
         }
-        return findViewById;
+        return viewFindViewById;
     }
 }

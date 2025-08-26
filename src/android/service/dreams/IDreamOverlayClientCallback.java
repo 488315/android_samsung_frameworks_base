@@ -45,9 +45,9 @@ public interface IDreamOverlayClientCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDreamOverlayClientCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDreamOverlayClientCallback)) {
-                return (IDreamOverlayClientCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDreamOverlayClientCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDreamOverlayClientCallback)) {
+                return (IDreamOverlayClientCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IDreamOverlayClientCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IDreamOverlayClient asInterface = IDreamOverlayClient.Stub.asInterface(parcel.readStrongBinder());
+                IDreamOverlayClient iDreamOverlayClientAsInterface = IDreamOverlayClient.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onDreamOverlayClient(asInterface);
+                onDreamOverlayClient(iDreamOverlayClientAsInterface);
                 parcel2.writeNoException();
                 return true;
             }
@@ -101,16 +101,16 @@ public interface IDreamOverlayClientCallback extends IInterface {
 
             @Override // android.service.dreams.IDreamOverlayClientCallback
             public void onDreamOverlayClient(IDreamOverlayClient iDreamOverlayClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDreamOverlayClientCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDreamOverlayClient);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDreamOverlayClientCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDreamOverlayClient);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

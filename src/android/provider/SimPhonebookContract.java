@@ -60,11 +60,11 @@ public final class SimPhonebookContract {
 
         public static int getEncodedNameLength(ContentResolver contentResolver, String str) {
             Objects.requireNonNull(str);
-            Bundle call = contentResolver.call(SimPhonebookContract.AUTHORITY, GET_ENCODED_NAME_LENGTH_METHOD_NAME, str, (Bundle) null);
-            if (call == null || !call.containsKey(EXTRA_ENCODED_NAME_LENGTH)) {
+            Bundle bundleCall = contentResolver.call(SimPhonebookContract.AUTHORITY, GET_ENCODED_NAME_LENGTH_METHOD_NAME, str, (Bundle) null);
+            if (bundleCall == null || !bundleCall.containsKey(EXTRA_ENCODED_NAME_LENGTH)) {
                 throw new IllegalStateException("Provider malfunction: no length was returned.");
             }
-            int i = call.getInt(EXTRA_ENCODED_NAME_LENGTH, -1);
+            int i = bundleCall.getInt(EXTRA_ENCODED_NAME_LENGTH, -1);
             if (i >= 0 || i == -1) {
                 return i;
             }

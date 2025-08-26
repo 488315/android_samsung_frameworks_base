@@ -45,9 +45,9 @@ public interface IWindowSurfaceInfoCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWindowSurfaceInfoCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWindowSurfaceInfoCallback)) {
-                return (IWindowSurfaceInfoCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWindowSurfaceInfoCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWindowSurfaceInfoCallback)) {
+                return (IWindowSurfaceInfoCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface IWindowSurfaceInfoCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 SurfaceControl surfaceControl = (SurfaceControl) parcel.readTypedObject(SurfaceControl.CREATOR);
                 parcel.enforceNoDataAvail();
-                provideWindowSurfaceInfo(readInt, readInt2, surfaceControl);
+                provideWindowSurfaceInfo(i3, i4, surfaceControl);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,15 +102,15 @@ public interface IWindowSurfaceInfoCallback extends IInterface {
 
             @Override // android.view.accessibility.IWindowSurfaceInfoCallback
             public void provideWindowSurfaceInfo(int i, int i2, SurfaceControl surfaceControl) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWindowSurfaceInfoCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(surfaceControl, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWindowSurfaceInfoCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(surfaceControl, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

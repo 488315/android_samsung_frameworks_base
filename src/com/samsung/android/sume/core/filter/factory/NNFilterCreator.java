@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class NNFilterCreator implements MediaFilterCreator {
     @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
     public MediaFilter newFilter(MediaFilterFactory mediaFilterFactory, MFDescriptor mFDescriptor, MediaFilter mediaFilter) {
-        MediaFilter newFilter;
+        MediaFilter mediaFilterNewFilter;
         final NNDescriptor nNDescriptor = (NNDescriptor) mFDescriptor;
         List list = (List) nNDescriptor.getNNFWProfiles().stream().map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
@@ -35,20 +35,20 @@ public class NNFilterCreator implements MediaFilterCreator {
         }).flatMap(new ContentProtectionEventProcessor$$ExternalSyntheticLambda8()).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return NNFilterCreator.lambda$newFilter$0(NNDescriptor.this, (NNFWProfile) obj);
+                return NNFilterCreator.lambda$newFilter$0(nNDescriptor, (NNFWProfile) obj);
             }
         }).collect(Collectors.toList());
         Def.require(!list.isEmpty());
         if (list.size() == 1) {
-            newFilter = new SyncFilter(mediaFilterFactory.newFilter((MFDescriptor) list.get(0)));
+            mediaFilterNewFilter = new SyncFilter(mediaFilterFactory.newFilter((MFDescriptor) list.get(0)));
         } else {
-            newFilter = mediaFilterFactory.newFilter(new ParallelDescriptor(ParallelFilter.Type.DNC, list));
+            mediaFilterNewFilter = mediaFilterFactory.newFilter(new ParallelDescriptor(ParallelFilter.Type.DNC, list));
         }
         ImgpDescriptor imgpDescriptor = new ImgpDescriptor(ImgpType.ANY);
         ImgpDescriptor imgpDescriptor2 = new ImgpDescriptor(ImgpType.ANY);
         imgpDescriptor.setLatestPluginsOrder(true);
         imgpDescriptor2.setLatestPluginsOrder(true);
-        MediaFilter newFilter2 = mediaFilterFactory.newFilter(PluginDecorateFilter.class, nNDescriptor, ImgpFilter.of(newFilter, mediaFilterFactory.newFilter(imgpDescriptor), mediaFilterFactory.newFilter(imgpDescriptor2)));
+        MediaFilter mediaFilterNewFilter2 = mediaFilterFactory.newFilter(PluginDecorateFilter.class, nNDescriptor, ImgpFilter.of(mediaFilterNewFilter, mediaFilterFactory.newFilter(imgpDescriptor), mediaFilterFactory.newFilter(imgpDescriptor2)));
         ((MutableMediaFormat) Objects.requireNonNull(nNDescriptor.getInputFormat())).set(nNDescriptor.getOption().asInputOption());
         ((MutableMediaFormat) Objects.requireNonNull(nNDescriptor.getOutputFormat())).set(nNDescriptor.getOption().asOutputOption());
         imgpDescriptor.setOption(nNDescriptor.getOption());
@@ -57,10 +57,10 @@ public class NNFilterCreator implements MediaFilterCreator {
         if (nNDescriptor.getTargetFormat() != null) {
             imgpDescriptor2.setFormat(nNDescriptor.getTargetFormat().deepCopy2());
             imgpDescriptor2.setKeepFilterDatatype(true);
-            return newFilter2;
+            return mediaFilterNewFilter2;
         }
         imgpDescriptor2.setFormat(nNDescriptor.getOutputFormat());
-        return newFilter2;
+        return mediaFilterNewFilter2;
     }
 
     static /* synthetic */ MFDescriptorHolder lambda$newFilter$0(NNDescriptor nNDescriptor, NNFWProfile nNFWProfile) {

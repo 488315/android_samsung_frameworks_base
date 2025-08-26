@@ -15,7 +15,6 @@ import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class NotifCoordinatorsImpl implements NotifCoordinators {
@@ -26,7 +25,6 @@ public final class NotifCoordinatorsImpl implements NotifCoordinators {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -107,9 +105,9 @@ public final class NotifCoordinatorsImpl implements NotifCoordinators {
         arrayList2.add(insignificantCoordinator);
         arrayList3.add(insignificantCoordinator.getInsignificantSectioner());
         arrayList3.add(rankingCoordinator.getMinimizedSectioner());
-        Set singleton = Collections.singleton(rankingCoordinator.getMinimizedSectioner());
+        Set setSingleton = Collections.singleton(rankingCoordinator.getMinimizedSectioner());
         sectionStyleProvider.getClass();
-        sectionStyleProvider.lowPrioritySections = CollectionsKt___CollectionsKt.toSet(singleton);
+        sectionStyleProvider.lowPrioritySections = CollectionsKt___CollectionsKt.toSet(setSingleton);
         sectionStyleProvider.silentSections = CollectionsKt___CollectionsKt.toSet(Collections.singleton(insignificantCoordinator.getInsignificantSectioner()));
     }
 

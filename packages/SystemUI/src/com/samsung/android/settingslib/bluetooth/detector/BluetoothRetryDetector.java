@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.util.Log;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BluetoothRetryDetector {
     public FailCase mFailCase;
     public final boolean mIsForRestored;
     public final HashMap mRestoredDeviceList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum FailCase {
         /* JADX INFO: Fake field, exist only in values array */
         SCANNING_FAILURE(2),

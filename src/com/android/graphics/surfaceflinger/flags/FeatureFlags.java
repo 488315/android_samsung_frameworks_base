@@ -108,6 +108,8 @@ public interface FeatureFlags {
 
     boolean stableEdidIds();
 
+    boolean stopLayer();
+
     boolean syncedResolutionSwitch();
 
     boolean trueHdrScreenshots();

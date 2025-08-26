@@ -16,7 +16,6 @@ import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQuickTileChunkLayoutBarTouchHelper {
     public boolean actionDownStartInChunkBar;
@@ -43,7 +42,7 @@ public final class SecQuickTileChunkLayoutBarTouchHelper {
             if (i != 16) {
                 return super.performAccessibilityAction(view, i, bundle);
             }
-            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper = SecQuickTileChunkLayoutBarTouchHelper.this.expandHelper;
+            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper = this.this$0.expandHelper;
             if (tileChunkLayoutBarExpandHelper == null) {
                 return true;
             }
@@ -71,12 +70,12 @@ public final class SecQuickTileChunkLayoutBarTouchHelper {
     }
 
     public final int preparePointerIndex(MotionEvent motionEvent) {
-        Integer valueOf = Integer.valueOf(motionEvent.findPointerIndex(this.trackingPointerSupplier.getAsInt()));
-        if (valueOf.intValue() < 0) {
-            valueOf = null;
+        Integer numValueOf = Integer.valueOf(motionEvent.findPointerIndex(this.trackingPointerSupplier.getAsInt()));
+        if (numValueOf.intValue() < 0) {
+            numValueOf = null;
         }
-        if (valueOf != null) {
-            return valueOf.intValue();
+        if (numValueOf != null) {
+            return numValueOf.intValue();
         }
         this.trackingPointerConsumer.accept(motionEvent.getPointerId(0));
         return 0;

@@ -23,7 +23,6 @@ import com.samsung.android.nexus.video.BuildConfig;
 import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskViewTaskController implements ShellTaskOrganizer.TaskListener {
     public Rect mCaptionInsets;
@@ -79,7 +78,7 @@ public class TaskViewTaskController implements ShellTaskOrganizer.TaskListener {
         printWriter.println(str + this);
     }
 
-    public final void finalize() {
+    public final void finalize() throws Throwable {
         try {
             CloseGuard closeGuard = this.mGuard;
             if (closeGuard != null) {
@@ -149,7 +148,7 @@ public class TaskViewTaskController implements ShellTaskOrganizer.TaskListener {
             @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
             public final void runWithTransaction(SurfaceControl.Transaction transaction) {
                 ActivityManager.RunningTaskInfo runningTaskInfo2 = runningTaskInfo;
-                TaskView taskView = TaskViewTaskController.this.mTaskViewBase;
+                TaskView taskView = this.f$0.mTaskViewBase;
                 if (taskView.mTaskViewController.isUsingShellTransitions()) {
                     return;
                 }
@@ -167,7 +166,7 @@ public class TaskViewTaskController implements ShellTaskOrganizer.TaskListener {
             this.mListenerExecutor.execute(new Runnable() { // from class: com.android.wm.shell.taskview.TaskViewTaskController$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskViewTaskController taskViewTaskController = TaskViewTaskController.this;
+                    TaskViewTaskController taskViewTaskController = this.f$0;
                     taskViewTaskController.mListener.onTaskCreated(i, componentName);
                 }
             });
@@ -261,7 +260,7 @@ public class TaskViewTaskController implements ShellTaskOrganizer.TaskListener {
             syncTransactionQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.taskview.TaskViewTaskController$$ExternalSyntheticLambda9
                 @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
                 public final void runWithTransaction(SurfaceControl.Transaction transaction) {
-                    TaskViewTaskController taskViewTaskController = TaskViewTaskController.this;
+                    TaskViewTaskController taskViewTaskController = this.f$0;
                     taskViewTaskController.mListenerExecutor.execute(new TaskViewTaskController$$ExternalSyntheticLambda4(taskViewTaskController, i, 2));
                 }
             });

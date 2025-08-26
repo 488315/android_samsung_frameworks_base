@@ -8,7 +8,6 @@ import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.wallet.ui.WalletActivity;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class QuickAccessWalletController$$ExternalSyntheticLambda3 implements QuickAccessWalletClient.WalletPendingIntentCallback {
     public final /* synthetic */ QuickAccessWalletController f$0;
@@ -34,11 +33,11 @@ public final /* synthetic */ class QuickAccessWalletController$$ExternalSyntheti
             activityStarter.postStartActivityDismissingKeyguard(pendingIntent, controller);
             return;
         }
-        Intent createWalletIntent = !z ? quickAccessWalletController.mQuickAccessWalletClient.createWalletIntent() : null;
-        if (createWalletIntent == null) {
-            createWalletIntent = new Intent(quickAccessWalletController.mContext, (Class<?>) WalletActivity.class).setAction("android.intent.action.VIEW");
+        Intent intentCreateWalletIntent = !z ? quickAccessWalletController.mQuickAccessWalletClient.createWalletIntent() : null;
+        if (intentCreateWalletIntent == null) {
+            intentCreateWalletIntent = new Intent(quickAccessWalletController.mContext, (Class<?>) WalletActivity.class).setAction("android.intent.action.VIEW");
         }
-        Intent intent = createWalletIntent;
+        Intent intent = intentCreateWalletIntent;
         UserHandle user = quickAccessWalletController.mQuickAccessWalletClient.getUser();
         if (z) {
             activityStarter.startActivity(intent, true, controller, true);

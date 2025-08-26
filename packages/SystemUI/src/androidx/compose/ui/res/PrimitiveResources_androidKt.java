@@ -9,7 +9,6 @@ import androidx.compose.ui.platform.CompositionLocalsKt;
 import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PrimitiveResources_androidKt {
     public static final float dimensionResource(int i, Composer composer) {
@@ -25,7 +24,7 @@ public abstract class PrimitiveResources_androidKt {
         return dimension;
     }
 
-    public static final int integerResource(int i, Composer composer) {
+    public static final int integerResource(int i, Composer composer) throws Resources.NotFoundException {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.ui.res.integerResource (PrimitiveResources.android.kt:36)");
         }

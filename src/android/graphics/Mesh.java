@@ -44,22 +44,22 @@ public class Mesh {
         if (i != 0 && i != 1) {
             throw new IllegalArgumentException("Invalid value passed in for mode parameter");
         }
-        long nativeMake = nativeMake(meshSpecification.mNativeMeshSpec, i, buffer, buffer.isDirect(), i2, buffer.position(), rectF.left, rectF.top, rectF.right, rectF.bottom);
-        if (nativeMake == 0) {
+        long jNativeMake = nativeMake(meshSpecification.mNativeMeshSpec, i, buffer, buffer.isDirect(), i2, buffer.position(), rectF.left, rectF.top, rectF.right, rectF.bottom);
+        if (jNativeMake == 0) {
             throw new IllegalArgumentException("Mesh construction failed.");
         }
-        meshSetup(nativeMake, false);
+        meshSetup(jNativeMake, false);
     }
 
     public Mesh(MeshSpecification meshSpecification, int i, Buffer buffer, int i2, ShortBuffer shortBuffer, RectF rectF) {
         if (i != 0 && i != 1) {
             throw new IllegalArgumentException("Invalid value passed in for mode parameter");
         }
-        long nativeMakeIndexed = nativeMakeIndexed(meshSpecification.mNativeMeshSpec, i, buffer, buffer.isDirect(), i2, buffer.position(), shortBuffer, shortBuffer.isDirect(), shortBuffer.capacity(), shortBuffer.position(), rectF.left, rectF.top, rectF.right, rectF.bottom);
-        if (nativeMakeIndexed == 0) {
+        long jNativeMakeIndexed = nativeMakeIndexed(meshSpecification.mNativeMeshSpec, i, buffer, buffer.isDirect(), i2, buffer.position(), shortBuffer, shortBuffer.isDirect(), shortBuffer.capacity(), shortBuffer.position(), rectF.left, rectF.top, rectF.right, rectF.bottom);
+        if (jNativeMakeIndexed == 0) {
             throw new IllegalArgumentException("Mesh construction failed.");
         }
-        meshSetup(nativeMakeIndexed, true);
+        meshSetup(jNativeMakeIndexed, true);
     }
 
     public void setColorUniform(String str, int i) {

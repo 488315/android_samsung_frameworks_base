@@ -129,7 +129,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsDialogLite implements DialogInterface.OnDismissListener, DialogInterface.OnShowListener, ConfigurationController.ConfigurationListener, GlobalActionsPanelPlugin.Callbacks, LifecycleOwner {
     static final String GLOBAL_ACTION_KEY_POWER = "power";
@@ -204,7 +203,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Action {
         View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater);
 
@@ -225,7 +223,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         boolean showBeforeProvisioning();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ActionsDialogLite extends SystemUIDialog implements DialogInterface, ColorExtractor.OnColorsChangedListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final MyAdapter mAdapter;
@@ -256,7 +253,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public float mWindowDimAmount;
 
         /* renamed from: -$$Nest$mopenShadeAndDismiss, reason: not valid java name */
-        public static void m2565$$Nest$mopenShadeAndDismiss(ActionsDialogLite actionsDialogLite) {
+        public static void m2582$$Nest$mopenShadeAndDismiss(ActionsDialogLite actionsDialogLite) {
             actionsDialogLite.mUiEventLogger.log(GlobalActionsEvent.GA_CLOSE_TAP_OUTSIDE);
             if (((KeyguardStateControllerImpl) actionsDialogLite.mKeyguardStateController).mShowing) {
                 ((BaseShadeControllerImpl) actionsDialogLite.mShadeController).animateExpandQs();
@@ -273,7 +270,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             this.mOnBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda3
                 @Override // android.window.OnBackInvokedCallback
                 public final void onBackInvoked() {
-                    GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = GlobalActionsDialogLite.ActionsDialogLite.this;
+                    GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = this.f$0;
                     int i2 = GlobalActionsDialogLite.ActionsDialogLite.$r8$clinit;
                     actionsDialogLite.mUiEventLogger.log(GlobalActionsDialogLite.GlobalActionsEvent.GA_CLOSE_BACK);
                     actionsDialogLite.dismiss();
@@ -295,7 +292,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     if (y > ((StatusBarWindowControllerImpl) actionsDialogLite.mStatusBarWindowController).mBarHeight) {
                         return false;
                     }
-                    ActionsDialogLite.m2565$$Nest$mopenShadeAndDismiss(actionsDialogLite);
+                    ActionsDialogLite.m2582$$Nest$mopenShadeAndDismiss(actionsDialogLite);
                     return true;
                 }
 
@@ -309,7 +306,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     if (y > ((StatusBarWindowControllerImpl) actionsDialogLite.mStatusBarWindowController).mBarHeight) {
                         return false;
                     }
-                    ActionsDialogLite.m2565$$Nest$mopenShadeAndDismiss(actionsDialogLite);
+                    ActionsDialogLite.m2582$$Nest$mopenShadeAndDismiss(actionsDialogLite);
                     return true;
                 }
 
@@ -401,7 +398,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             multiListLayout.getListView().setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.ActionsDialogLite.2
                 @Override // android.view.View.AccessibilityDelegate
                 public final boolean dispatchPopulateAccessibilityEvent(View view, AccessibilityEvent accessibilityEvent) {
-                    accessibilityEvent.getText().add(ActionsDialogLite.this.mContext.getString(android.R.string.miniresolver_sms_information));
+                    accessibilityEvent.getText().add(ActionsDialogLite.this.mContext.getString(android.R.string.miniresolver_switch_to_work));
                     return true;
                 }
             });
@@ -414,24 +411,24 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             viewGroup3.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view, MotionEvent motionEvent) {
-                    GlobalActionsDialogLite.ActionsDialogLite.this.mGestureDetector.onTouchEvent(motionEvent);
+                    this.f$0.mGestureDetector.onTouchEvent(motionEvent);
                     return view.onTouchEvent(motionEvent);
                 }
             });
-            View findViewById = findViewById(R.id.global_actions_overflow_button);
-            if (findViewById != null) {
+            View viewFindViewById = findViewById(R.id.global_actions_overflow_button);
+            if (viewFindViewById != null) {
                 if (this.mOverflowAdapter.getCount() > 0) {
-                    findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda2
+                    viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda2
                         /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda6] */
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view) {
-                            final GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = GlobalActionsDialogLite.ActionsDialogLite.this;
+                            final GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = this.f$0;
                             int i = GlobalActionsDialogLite.ActionsDialogLite.$r8$clinit;
                             GlobalActionsPopupMenu globalActionsPopupMenu = new GlobalActionsPopupMenu(new ContextThemeWrapper(actionsDialogLite.mContext, R.style.Control_ListPopupWindow), false);
                             globalActionsPopupMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda5
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view2, int i2, long j) {
-                                    GlobalActionsDialogLite.MyOverflowAdapter myOverflowAdapter = GlobalActionsDialogLite.ActionsDialogLite.this.mOverflowAdapter;
+                                    GlobalActionsDialogLite.MyOverflowAdapter myOverflowAdapter = actionsDialogLite.mOverflowAdapter;
                                     GlobalActionsDialogLite.Action action = GlobalActionsDialogLite.this.mOverflowItems.get(i2);
                                     if (action instanceof GlobalActionsDialogLite.SilentModeTriStateAction) {
                                         return;
@@ -449,7 +446,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                             globalActionsPopupMenu.mOnItemLongClickListener = new AdapterView.OnItemLongClickListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda6
                                 @Override // android.widget.AdapterView.OnItemLongClickListener
                                 public final boolean onItemLongClick(AdapterView adapterView, View view2, int i2, long j) {
-                                    GlobalActionsDialogLite.MyOverflowAdapter myOverflowAdapter = GlobalActionsDialogLite.ActionsDialogLite.this.mOverflowAdapter;
+                                    GlobalActionsDialogLite.MyOverflowAdapter myOverflowAdapter = actionsDialogLite.mOverflowAdapter;
                                     GlobalActionsDialogLite.Action action = GlobalActionsDialogLite.this.mOverflowItems.get(i2);
                                     if (!(action instanceof GlobalActionsDialogLite.LongPressAction)) {
                                         return false;
@@ -474,7 +471,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     layoutParams.setMarginEnd(0);
                     this.mGlobalActionsLayout.setLayoutParams(layoutParams);
                 } else {
-                    findViewById.setVisibility(8);
+                    viewFindViewById.setVisibility(8);
                     LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) this.mGlobalActionsLayout.getLayoutParams();
                     layoutParams2.setMarginEnd(this.mContext.getResources().getDimensionPixelSize(R.dimen.global_actions_side_margin));
                     this.mGlobalActionsLayout.setLayoutParams(layoutParams2);
@@ -487,15 +484,15 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             boolean userHasTrust = this.mKeyguardUpdateMonitor.getUserHasTrust(selectedUserId);
             if (this.mKeyguardShowing && userHasTrust) {
                 this.mLockPatternUtils.requireCredentialEntry(selectedUserId);
-                final View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.global_actions_toast, this.mContainer, false);
+                final View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.global_actions_toast, this.mContainer, false);
                 final int recommendedTimeoutMillis = ((AccessibilityManager) getContext().getSystemService("accessibility")).getRecommendedTimeoutMillis(3500, 2);
-                inflate.setVisibility(0);
-                inflate.setAlpha(0.0f);
-                this.mContainer.addView(inflate);
-                inflate.animate().alpha(1.0f).setDuration(333L).setListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.ActionsDialogLite.3
+                viewInflate.setVisibility(0);
+                viewInflate.setAlpha(0.0f);
+                this.mContainer.addView(viewInflate);
+                viewInflate.animate().alpha(1.0f).setDuration(333L).setListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.ActionsDialogLite.3
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        inflate.animate().alpha(0.0f).setDuration(333L).setStartDelay(recommendedTimeoutMillis).setListener(null);
+                        viewInflate.animate().alpha(0.0f).setDuration(333L).setStartDelay(recommendedTimeoutMillis).setListener(null);
                     }
                 });
             }
@@ -547,35 +544,35 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
 
         public final void startAnimation(final boolean z, final GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda4 globalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda4) {
             float dimension;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
             Resources resources = getContext().getResources();
             if (z) {
-                dimension = resources.getDimension(17105838);
-                ofFloat.setInterpolator(Interpolators.STANDARD);
-                ofFloat.setDuration(resources.getInteger(android.R.integer.config_bluetooth_tx_cur_ma));
-            } else {
                 dimension = resources.getDimension(17105839);
-                ofFloat.setInterpolator(Interpolators.STANDARD_ACCELERATE);
-                ofFloat.setDuration(resources.getInteger(android.R.integer.config_brightness_ramp_rate_fast));
+                valueAnimatorOfFloat.setInterpolator(Interpolators.STANDARD);
+                valueAnimatorOfFloat.setDuration(resources.getInteger(android.R.integer.config_bluetooth_tx_cur_ma));
+            } else {
+                dimension = resources.getDimension(17105840);
+                valueAnimatorOfFloat.setInterpolator(Interpolators.STANDARD_ACCELERATE);
+                valueAnimatorOfFloat.setDuration(resources.getInteger(android.R.integer.config_brightness_ramp_rate_fast));
             }
             final float f = dimension;
             final Window window = getWindow();
             final int rotation = window.getWindowManager().getDefaultDisplay().getRotation();
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda7
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite$ActionsDialogLite$$ExternalSyntheticLambda7
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = GlobalActionsDialogLite.ActionsDialogLite.this;
+                    GlobalActionsDialogLite.ActionsDialogLite actionsDialogLite = this.f$0;
                     boolean z2 = z;
                     Window window2 = window;
                     float f2 = f;
                     int i = rotation;
                     int i2 = GlobalActionsDialogLite.ActionsDialogLite.$r8$clinit;
                     actionsDialogLite.getClass();
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    float f3 = z2 ? floatValue : 1.0f - floatValue;
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    float f3 = z2 ? fFloatValue : 1.0f - fFloatValue;
                     actionsDialogLite.mGlobalActionsLayout.setAlpha(f3);
                     window2.setDimAmount(actionsDialogLite.mWindowDimAmount * f3);
-                    float f4 = z2 ? (1.0f - floatValue) * f2 : f2 * floatValue;
+                    float f4 = z2 ? (1.0f - fFloatValue) * f2 : f2 * fFloatValue;
                     if (i == 0) {
                         actionsDialogLite.mGlobalActionsLayout.setTranslationX(f4);
                         return;
@@ -592,7 +589,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     }
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.ActionsDialogLite.4
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.ActionsDialogLite.4
                 public int mPreviousLayerType;
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -610,7 +607,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     ActionsDialogLite.this.mGlobalActionsLayout.setLayerType(2, null);
                 }
             });
-            ofFloat.start();
+            valueAnimatorOfFloat.start();
         }
 
         @Override // com.android.systemui.statusbar.phone.SystemUIDialog
@@ -638,10 +635,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AirplaneModeAction extends ToggleAction {
         public AirplaneModeAction() {
-            super(GlobalActionsDialogLite.this, android.R.drawable.ic_media_route_connected_light_11_mtrl, android.R.drawable.ic_media_route_connected_light_13_mtrl, android.R.string.miniresolver_use_personal_browser, android.R.string.miniresolver_switch_to_work, android.R.string.miniresolver_switch);
+            super(GlobalActionsDialogLite.this, android.R.drawable.ic_media_route_connected_light_11_mtrl, android.R.drawable.ic_media_route_connected_light_13_mtrl, android.R.string.minute, android.R.string.miniresolver_use_work_browser, android.R.string.miniresolver_use_personal_browser);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.ToggleAction
@@ -658,7 +654,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public final void onToggle(boolean z) {
             GlobalActionsDialogLite globalActionsDialogLite = GlobalActionsDialogLite.this;
             if (!globalActionsDialogLite.mHasTelephony || !((Boolean) TelephonyProperties.in_ecm_mode().orElse(Boolean.FALSE)).booleanValue()) {
-                GlobalActionsDialogLite.m2564$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, z);
+                GlobalActionsDialogLite.m2581$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, z);
                 return;
             }
             globalActionsDialogLite.mIsWaitingForEcmExit = true;
@@ -673,7 +669,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class BugReportAction extends SinglePressAction implements LongPressAction {
         public BugReportAction() {
             super(android.R.drawable.ic_media_route_connected_light_15_mtrl, android.R.string.config_mediaProjectionPermissionDialogComponent);
@@ -734,7 +729,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CurrentUserProvider {
         public boolean mFetched;
         public UserInfo mUserInfo;
@@ -757,27 +751,26 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class EmergencyAction extends SinglePressAction {
         public EmergencyAction(int i, int i2) {
             super(i, i2);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.SinglePressAction, com.android.systemui.globalactions.GlobalActionsDialogLite.Action
-        public final View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-            View create = super.create(context, view, viewGroup, layoutInflater);
+        public final View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) throws Resources.NotFoundException {
+            View viewCreate = super.create(context, view, viewGroup, layoutInflater);
             GlobalActionsDialogLite.this.getClass();
             int color = context.getResources().getColor(R.color.global_actions_lite_text);
             int color2 = context.getResources().getColor(R.color.global_actions_lite_emergency_icon);
             int color3 = context.getResources().getColor(R.color.global_actions_lite_emergency_background);
-            TextView textView = (TextView) create.findViewById(android.R.id.message);
+            TextView textView = (TextView) viewCreate.findViewById(android.R.id.message);
             textView.setTextColor(color);
             textView.setSelected(true);
-            ImageView imageView = (ImageView) create.findViewById(android.R.id.icon);
+            ImageView imageView = (ImageView) viewCreate.findViewById(android.R.id.icon);
             imageView.getDrawable().setTint(color2);
             imageView.setBackgroundTintList(ColorStateList.valueOf(color3));
-            create.setBackgroundTintList(ColorStateList.valueOf(color3));
-            return create;
+            viewCreate.setBackgroundTintList(ColorStateList.valueOf(color3));
+            return viewCreate;
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -786,10 +779,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmergencyAffordanceAction extends EmergencyAction {
         public EmergencyAffordanceAction() {
-            super(android.R.drawable.highlight_disabled, android.R.string.menu_ctrl_shortcut_label);
+            super(android.R.drawable.highlight_disabled, android.R.string.menu_enter_shortcut_label);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -798,7 +790,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class EmergencyDialerAction extends EmergencyAction {
         public /* synthetic */ EmergencyDialerAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -811,19 +802,18 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             globalActionsDialogLite.mUiEventLogger.log(GlobalActionsEvent.GA_EMERGENCY_DIALER_PRESS);
             if (globalActionsDialogLite.mTelecomManager != null) {
                 globalActionsDialogLite.mShadeController.cancelExpansionAndCollapseShade();
-                Intent createLaunchEmergencyDialerIntent = globalActionsDialogLite.mTelecomManager.createLaunchEmergencyDialerIntent(null);
-                createLaunchEmergencyDialerIntent.addFlags(343932928);
-                createLaunchEmergencyDialerIntent.putExtra(EmergencyDialerConstants.EXTRA_ENTRY_TYPE, 2);
-                globalActionsDialogLite.mContext.startActivityAsUser(createLaunchEmergencyDialerIntent, ((UserTrackerImpl) globalActionsDialogLite.mUserTracker).getUserHandle());
+                Intent intentCreateLaunchEmergencyDialerIntent = globalActionsDialogLite.mTelecomManager.createLaunchEmergencyDialerIntent(null);
+                intentCreateLaunchEmergencyDialerIntent.addFlags(343932928);
+                intentCreateLaunchEmergencyDialerIntent.putExtra(EmergencyDialerConstants.EXTRA_ENTRY_TYPE, 2);
+                globalActionsDialogLite.mContext.startActivityAsUser(intentCreateLaunchEmergencyDialerIntent, ((UserTrackerImpl) globalActionsDialogLite.mUserTracker).getUserHandle());
             }
         }
 
         private EmergencyDialerAction() {
-            super(R.drawable.ic_emergency_star, android.R.string.menu_ctrl_shortcut_label);
+            super(R.drawable.ic_emergency_star, android.R.string.menu_enter_shortcut_label);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum GlobalActionsEvent implements UiEventLogger.UiEventEnum {
         GA_POWER_MENU_OPEN(337),
         GA_POWER_MENU_CLOSE(471),
@@ -863,10 +853,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class LockDownAction extends SinglePressAction {
         public LockDownAction() {
-            super(android.R.drawable.ic_media_route_connected_light_18_mtrl, android.R.string.mic_access_off_toast);
+            super(android.R.drawable.ic_media_route_connected_light_18_mtrl, android.R.string.midnight);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -888,7 +877,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LogoutAction extends SinglePressAction {
         public /* synthetic */ LogoutAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -905,16 +893,14 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
 
         private LogoutAction() {
-            super(android.R.drawable.ic_media_route_connecting_holo_light, android.R.string.midnight);
+            super(android.R.drawable.ic_media_route_connecting_holo_light, android.R.string.mime_type_audio);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface LongPressAction extends Action {
         boolean onLongPress();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyAdapter extends MultiListLayout.MultiListAdapter {
         public MyAdapter() {
         }
@@ -959,12 +945,12 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public final View getView(int i, View view, ViewGroup viewGroup) {
             Action item = getItem(i);
             Context context = GlobalActionsDialogLite.this.mContext;
-            View create = item.create(context, view, viewGroup, LayoutInflater.from(context));
-            create.setOnClickListener(new GlobalActionsDialogLite$MyAdapter$$ExternalSyntheticLambda0(this, i));
+            View viewCreate = item.create(context, view, viewGroup, LayoutInflater.from(context));
+            viewCreate.setOnClickListener(new GlobalActionsDialogLite$MyAdapter$$ExternalSyntheticLambda0(this, i));
             if (item instanceof LongPressAction) {
-                create.setOnLongClickListener(new GlobalActionsDialogLite$MyAdapter$$ExternalSyntheticLambda1(this, i));
+                viewCreate.setOnLongClickListener(new GlobalActionsDialogLite$MyAdapter$$ExternalSyntheticLambda1(this, i));
             }
-            return create;
+            return viewCreate;
         }
 
         @Override // android.widget.BaseAdapter, android.widget.ListAdapter
@@ -990,16 +976,15 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     i2++;
                 }
             }
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "position ", " out of range of showable actions, filtered count=");
-            m.append(getCount());
-            m.append(", keyguardshowing=false, provisioned=");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "position ", " out of range of showable actions, filtered count=");
+            sbM.append(getCount());
+            sbM.append(", keyguardshowing=false, provisioned=");
             GlobalActionsDialogLite.this.getClass();
-            m.append(GlobalActionsDialogLite.this.mDeviceProvisioned);
-            throw new IllegalArgumentException(m.toString());
+            sbM.append(GlobalActionsDialogLite.this.mDeviceProvisioned);
+            throw new IllegalArgumentException(sbM.toString());
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyOverflowAdapter extends BaseAdapter {
         public MyOverflowAdapter() {
         }
@@ -1039,7 +1024,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyPowerOptionsAdapter extends BaseAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -1089,7 +1073,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PowerOptionsAction extends SinglePressAction {
         public /* synthetic */ PowerOptionsAction(GlobalActionsDialogLite globalActionsDialogLite, int i) {
             this();
@@ -1125,14 +1108,13 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
 
         private PowerOptionsAction() {
-            super(R.drawable.ic_settings_power, android.R.string.mime_type_compressed_ext);
+            super(R.drawable.ic_settings_power, android.R.string.mime_type_document_ext);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class RestartAction extends SinglePressAction implements LongPressAction {
         public RestartAction() {
-            super(android.R.drawable.jog_dial_bg, android.R.string.mime_type_generic_ext);
+            super(android.R.drawable.jog_dial_bg, android.R.string.mime_type_image_ext);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.LongPressAction
@@ -1165,10 +1147,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ScreenshotAction extends SinglePressAction {
         public ScreenshotAction() {
-            super(android.R.drawable.jog_tab_bar_left_end_confirm_gray, android.R.string.mime_type_image_ext);
+            super(android.R.drawable.jog_tab_bar_left_end_confirm_gray, android.R.string.mime_type_presentation_ext);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -1195,10 +1176,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ShutDownAction extends SinglePressAction implements LongPressAction {
         public ShutDownAction() {
-            super(android.R.drawable.ic_lock_power_off, android.R.string.mime_type_audio);
+            super(android.R.drawable.ic_lock_power_off, android.R.string.mime_type_compressed);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.LongPressAction
@@ -1231,10 +1211,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SilentModeToggleAction extends ToggleAction {
         public SilentModeToggleAction() {
-            super(GlobalActionsDialogLite.this, android.R.drawable.ic_doc_compressed, android.R.drawable.ic_doc_codes, android.R.string.miniresolver_private_space_messages_information, android.R.string.miniresolver_call, android.R.string.mime_type_video_ext);
+            super(GlobalActionsDialogLite.this, android.R.drawable.ic_doc_compressed, android.R.drawable.ic_doc_codes, android.R.string.miniresolver_sms_information, android.R.string.miniresolver_call_information, android.R.string.miniresolver_call_in_work);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.ToggleAction
@@ -1253,10 +1232,9 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class StandbyAction extends SinglePressAction {
         public StandbyAction() {
-            super(android.R.drawable.jog_tab_right_sound_off, android.R.string.miniresolver_call_in_work);
+            super(android.R.drawable.jog_tab_right_sound_off, android.R.string.miniresolver_open_in_personal);
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -1270,7 +1248,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SystemUpdateAction extends SinglePressAction {
         public SystemUpdateAction() {
             super(R.drawable.ic_system_update, R.string.system_update_settings_list_item_title);
@@ -1291,7 +1268,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ToggleAction implements Action {
         public final int mDisabledIconResid;
         public final int mDisabledStatusMessageResId;
@@ -1312,25 +1288,25 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
         public final View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-            View inflate = layoutInflater.inflate(R.layout.global_actions_grid_item_v2, viewGroup, false);
-            ViewGroup.LayoutParams layoutParams = inflate.getLayoutParams();
+            View viewInflate = layoutInflater.inflate(R.layout.global_actions_grid_item_v2, viewGroup, false);
+            ViewGroup.LayoutParams layoutParams = viewInflate.getLayoutParams();
             layoutParams.width = -2;
-            inflate.setLayoutParams(layoutParams);
-            ImageView imageView = (ImageView) inflate.findViewById(android.R.id.icon);
-            TextView textView = (TextView) inflate.findViewById(android.R.id.message);
-            boolean isEnabled = isEnabled();
+            viewInflate.setLayoutParams(layoutParams);
+            ImageView imageView = (ImageView) viewInflate.findViewById(android.R.id.icon);
+            TextView textView = (TextView) viewInflate.findViewById(android.R.id.message);
+            boolean zIsEnabled = isEnabled();
             if (textView != null) {
                 textView.setText(getMessageResId());
-                textView.setEnabled(isEnabled);
+                textView.setEnabled(zIsEnabled);
                 textView.setSelected(true);
             }
             if (imageView != null) {
                 ToggleState toggleState = this.mState;
                 imageView.setImageDrawable(context.getDrawable((toggleState == ToggleState.On || toggleState == ToggleState.TurningOn) ? this.mEnabledIconResId : this.mDisabledIconResid));
-                imageView.setEnabled(isEnabled);
+                imageView.setEnabled(zIsEnabled);
             }
-            inflate.setEnabled(isEnabled);
-            return inflate;
+            viewInflate.setEnabled(zIsEnabled);
+            return viewInflate;
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -1369,7 +1345,6 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public abstract void onToggle(boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ToggleState {
         Off(false),
         TurningOn(true),
@@ -1388,7 +1363,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
     }
 
     /* renamed from: -$$Nest$mchangeAirplaneModeSystemSetting, reason: not valid java name */
-    public static void m2564$$Nest$mchangeAirplaneModeSystemSetting(GlobalActionsDialogLite globalActionsDialogLite, boolean z) {
+    public static void m2581$$Nest$mchangeAirplaneModeSystemSetting(GlobalActionsDialogLite globalActionsDialogLite, boolean z) {
         globalActionsDialogLite.mGlobalSettings.putInt(SettingsHelper.INDEX_AIRPLANE_MODE_ON, z ? 1 : 0);
         Intent intent = new Intent("android.intent.action.AIRPLANE_MODE");
         intent.addFlags(VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS);
@@ -1405,7 +1380,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
     /* JADX WARN: Type inference failed for: r6v7, types: [android.content.BroadcastReceiver, com.android.systemui.globalactions.GlobalActionsDialogLite$7] */
     /* JADX WARN: Type inference failed for: r7v1, types: [com.android.systemui.globalactions.GlobalActionsDialogLite$8, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r8v0, types: [android.database.ContentObserver, com.android.systemui.globalactions.GlobalActionsDialogLite$9] */
-    public GlobalActionsDialogLite(Context context, GlobalActions.GlobalActionsManager globalActionsManager, AudioManager audioManager, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, TelephonyListenerManager telephonyListenerManager, GlobalSettings globalSettings, SecureSettings secureSettings, VibratorHelper vibratorHelper, Resources resources, ConfigurationController configurationController, ActivityStarter activityStarter, UserTracker userTracker, KeyguardStateController keyguardStateController, UserManager userManager, TrustManager trustManager, IActivityManager iActivityManager, TelecomManager telecomManager, MetricsLogger metricsLogger, SysuiColorExtractor sysuiColorExtractor, IStatusBarService iStatusBarService, LightBarController lightBarController, NotificationShadeWindowController notificationShadeWindowController, StatusBarWindowControllerStore statusBarWindowControllerStore, IWindowManager iWindowManager, Executor executor, UiEventLogger uiEventLogger, RingerModeTracker ringerModeTracker, Handler handler, PackageManager packageManager, ShadeController shadeController, KeyguardUpdateMonitor keyguardUpdateMonitor, DialogTransitionAnimator dialogTransitionAnimator, SelectedUserInteractor selectedUserInteractor, UserLogoutInteractor userLogoutInteractor, GlobalActionsInteractor globalActionsInteractor, Lazy lazy, PowerManager powerManager) {
+    public GlobalActionsDialogLite(Context context, GlobalActions.GlobalActionsManager globalActionsManager, AudioManager audioManager, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, TelephonyListenerManager telephonyListenerManager, GlobalSettings globalSettings, SecureSettings secureSettings, VibratorHelper vibratorHelper, Resources resources, ConfigurationController configurationController, ActivityStarter activityStarter, UserTracker userTracker, KeyguardStateController keyguardStateController, UserManager userManager, TrustManager trustManager, IActivityManager iActivityManager, TelecomManager telecomManager, MetricsLogger metricsLogger, SysuiColorExtractor sysuiColorExtractor, IStatusBarService iStatusBarService, LightBarController lightBarController, NotificationShadeWindowController notificationShadeWindowController, StatusBarWindowControllerStore statusBarWindowControllerStore, IWindowManager iWindowManager, Executor executor, UiEventLogger uiEventLogger, RingerModeTracker ringerModeTracker, Handler handler, PackageManager packageManager, ShadeController shadeController, KeyguardUpdateMonitor keyguardUpdateMonitor, DialogTransitionAnimator dialogTransitionAnimator, SelectedUserInteractor selectedUserInteractor, UserLogoutInteractor userLogoutInteractor, GlobalActionsInteractor globalActionsInteractor, Lazy lazy, PowerManager powerManager) throws Resources.NotFoundException {
         ?? r6 = new BroadcastReceiver() { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.7
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
@@ -1426,7 +1401,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                 GlobalActionsDialogLite globalActionsDialogLite = GlobalActionsDialogLite.this;
                 if (globalActionsDialogLite.mIsWaitingForEcmExit) {
                     globalActionsDialogLite.mIsWaitingForEcmExit = false;
-                    GlobalActionsDialogLite.m2564$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, true);
+                    GlobalActionsDialogLite.m2581$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, true);
                 }
             }
         };
@@ -1553,6 +1528,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void createActionItems() {
         int i;
         UserInfo userInfo;
@@ -1604,15 +1580,15 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                                         z2 = z;
                                     }
                                     String str2 = userInfo3.iconPath;
-                                    Drawable createFromPath = str2 != null ? Drawable.createFromPath(str2) : null;
+                                    Drawable drawableCreateFromPath = str2 != null ? Drawable.createFromPath(str2) : null;
                                     UserInfo userInfo4 = userInfo2;
                                     String str3 = userInfo3.name;
                                     if (str3 == null) {
                                         str3 = "Primary";
                                     }
-                                    String concat = str3.concat(z2 ? " ✔" : "");
+                                    String strConcat = str3.concat(z2 ? " ✔" : "");
                                     userInfo = userInfo4;
-                                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.ic_popup_sync_1, createFromPath, concat) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.6
+                                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.ic_popup_sync_1, drawableCreateFromPath, strConcat) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.6
                                         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
                                         public final void onPress() {
                                             try {
@@ -1636,7 +1612,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                         }
                     }
                 } else if ("settings".equals(str)) {
-                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.jog_tab_bar_left_unlock, android.R.string.mime_type_video) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.3
+                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.jog_tab_bar_left_unlock, android.R.string.miniresolver_call) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.3
                         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
                         public final void onPress() {
                             Intent intent = new Intent("android.settings.SETTINGS");
@@ -1654,7 +1630,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                         addIfShouldShowAction(arrayList, new LockDownAction());
                     }
                 } else if ("voiceassist".equals(str)) {
-                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.list_section_header_holo_dark, android.R.string.miniresolver_private_space_phone_information) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.5
+                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.list_section_header_holo_dark, android.R.string.miniresolver_switch) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.5
                         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
                         public final void onPress() {
                             Intent intent = new Intent("android.intent.action.VOICE_ASSIST");
@@ -1668,7 +1644,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                         }
                     });
                 } else if ("assist".equals(str)) {
-                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.ic_corp_badge_off, android.R.string.mediasize_na_junior_legal) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.4
+                    addIfShouldShowAction(arrayList, new SinglePressAction(android.R.drawable.ic_corp_badge_off, android.R.string.mediasize_na_legal) { // from class: com.android.systemui.globalactions.GlobalActionsDialogLite.4
                         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
                         public final void onPress() {
                             Intent intent = new Intent("android.intent.action.ASSIST");
@@ -1707,13 +1683,13 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
             z = false;
         }
         if (arrayList.contains(shutDownAction) && arrayList.contains(restartAction) && arrayList.size() > getMaxShownPowerItems()) {
-            int min = Math.min(arrayList.indexOf(restartAction), arrayList.indexOf(shutDownAction));
+            int iMin = Math.min(arrayList.indexOf(restartAction), arrayList.indexOf(shutDownAction));
             arrayList.remove(shutDownAction);
             arrayList.remove(restartAction);
             this.mPowerItems.add(shutDownAction);
             this.mPowerItems.add(restartAction);
             i = 0;
-            arrayList.add(min, new PowerOptionsAction(this, i));
+            arrayList.add(iMin, new PowerOptionsAction(this, i));
         } else {
             i = 0;
         }
@@ -1750,7 +1726,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
     }
 
     public String[] getDefaultActions() {
-        return this.mResources.getStringArray(android.R.array.vendor_disallowed_apps_managed_device);
+        return this.mResources.getStringArray(android.R.array.vendor_disallowed_apps_managed_profile);
     }
 
     @Override // androidx.lifecycle.LifecycleOwner
@@ -1758,7 +1734,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         return this.mLifecycle;
     }
 
-    public int getMaxShownPowerItems() {
+    public int getMaxShownPowerItems() throws Resources.NotFoundException {
         return this.mResources.getInteger(R.integer.power_menu_lite_max_rows) * this.mResources.getInteger(R.integer.power_menu_lite_max_columns);
     }
 
@@ -1916,17 +1892,16 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         attributes.layoutInDisplayCutoutMode = 3;
         this.mDialog.getWindow().setAttributes(attributes);
         this.mDialog.getWindow().addFlags(131072);
-        DialogTransitionAnimator.Controller dialogTransitionController = expandable != null ? expandable.dialogTransitionController(new DialogCuj(58, "global_actions")) : null;
+        DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable != null ? expandable.dialogTransitionController(new DialogCuj(58, "global_actions")) : null;
         ((UserTrackerImpl) this.mUserTracker).addCallback(this.mOnUserSwitched, this.mBackgroundExecutor);
-        if (dialogTransitionController != null) {
-            this.mDialogTransitionAnimator.show(this.mDialog, dialogTransitionController, false);
+        if (controllerDialogTransitionController != null) {
+            this.mDialogTransitionAnimator.show(this.mDialog, controllerDialogTransitionController, false);
         } else {
             this.mDialog.show();
         }
         this.mWindowManagerFuncs.onGlobalActionsShown();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     abstract class SinglePressAction implements Action {
         public final Drawable mIcon;
         public final int mIconResId;
@@ -1945,20 +1920,20 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
         public View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
             GlobalActionsDialogLite.this.getClass();
-            View inflate = layoutInflater.inflate(R.layout.global_actions_grid_item_lite, viewGroup, false);
-            inflate.setId(View.generateViewId());
-            this.mIconView = (ImageView) inflate.findViewById(android.R.id.icon);
-            TextView textView = (TextView) inflate.findViewById(android.R.id.message);
+            View viewInflate = layoutInflater.inflate(R.layout.global_actions_grid_item_lite, viewGroup, false);
+            viewInflate.setId(View.generateViewId());
+            this.mIconView = (ImageView) viewInflate.findViewById(android.R.id.icon);
+            TextView textView = (TextView) viewInflate.findViewById(android.R.id.message);
             textView.setSelected(true);
             this.mIconView.setImageDrawable(getIcon(context));
             this.mIconView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             CharSequence charSequence = this.mMessage;
             if (charSequence != null) {
                 textView.setText(charSequence);
-                return inflate;
+                return viewInflate;
             }
             textView.setText(this.mMessageResId);
-            return inflate;
+            return viewInflate;
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
@@ -1990,9 +1965,8 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SilentModeTriStateAction implements Action, View.OnClickListener {
-        public static final int[] ITEM_IDS = {android.R.id.rotate, android.R.id.round, android.R.id.row};
+        public static final int[] ITEM_IDS = {android.R.id.round, android.R.id.row, android.R.id.rowTypeId};
         public final AudioManager mAudioManager;
         public final Handler mHandler;
 
@@ -2003,17 +1977,17 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action
         public final View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-            View inflate = layoutInflater.inflate(android.R.layout.keyboard_key_preview, viewGroup, false);
+            View viewInflate = layoutInflater.inflate(android.R.layout.keyboard_key_preview, viewGroup, false);
             int ringerMode = this.mAudioManager.getRingerMode();
             int i = 0;
             while (i < 3) {
-                View findViewById = inflate.findViewById(ITEM_IDS[i]);
-                findViewById.setSelected(ringerMode == i);
-                findViewById.setTag(Integer.valueOf(i));
-                findViewById.setOnClickListener(this);
+                View viewFindViewById = viewInflate.findViewById(ITEM_IDS[i]);
+                viewFindViewById.setSelected(ringerMode == i);
+                viewFindViewById.setTag(Integer.valueOf(i));
+                viewFindViewById.setOnClickListener(this);
                 i++;
             }
-            return inflate;
+            return viewInflate;
         }
 
         @Override // com.android.systemui.globalactions.GlobalActionsDialogLite.Action

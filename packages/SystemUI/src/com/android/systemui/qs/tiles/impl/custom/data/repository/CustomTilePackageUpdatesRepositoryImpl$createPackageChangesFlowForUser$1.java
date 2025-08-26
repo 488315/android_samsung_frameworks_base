@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ UserHandle $user;
@@ -54,7 +53,7 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
             final ?? r4 = new BroadcastReceiver() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1$receiver$1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context, Intent intent) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     CoroutineTracingKt.launchTraced$default(producerScope2, null, null, new CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1$receiver$1$onReceive$1(producerScope2, intent, null), 7);
                 }
             };
@@ -66,7 +65,7 @@ final class CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUs
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTilePackageUpdatesRepositoryImpl$createPackageChangesFlowForUser$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    CustomTilePackageUpdatesRepositoryImpl.this.context.unregisterReceiver(r4);
+                    customTilePackageUpdatesRepositoryImpl.context.unregisterReceiver(r4);
                     return Unit.INSTANCE;
                 }
             };

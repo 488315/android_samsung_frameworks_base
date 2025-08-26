@@ -54,6 +54,8 @@ public interface FeatureFlags {
 
     boolean subscriptionsChangedListenerThread();
 
+    boolean updateIsInEmergencyBeforeOnRegister();
+
     boolean updateMinLocationRequestInterval();
 
     boolean useLegacyNtpTime();

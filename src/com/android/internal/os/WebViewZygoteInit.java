@@ -3,6 +3,7 @@ package com.android.internal.os;
 import android.app.LoadedApk;
 import android.content.pm.ApplicationInfo;
 import android.net.LocalSocket;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.webkit.WebViewFactory;
 import android.webkit.WebViewFactoryProvider;
@@ -47,7 +48,7 @@ class WebViewZygoteInit {
         }
 
         @Override // com.android.internal.os.ZygoteConnection
-        protected void handlePreloadApp(ApplicationInfo applicationInfo) {
+        protected void handlePreloadApp(ApplicationInfo applicationInfo) throws NoSuchMethodException, SecurityException, IOException {
             Log.i(WebViewZygoteInit.TAG, "Beginning application preload for " + applicationInfo.packageName);
             doPreload(new LoadedApk(null, applicationInfo, null, null, false, true, false).getClassLoader(), WebViewFactory.getWebViewLibrary(applicationInfo));
             Zygote.allowAppFilesAcrossFork(applicationInfo);
@@ -55,7 +56,7 @@ class WebViewZygoteInit {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        private void doPreload(ClassLoader classLoader, String str) {
+        private void doPreload(ClassLoader classLoader, String str) throws NoSuchMethodException, SecurityException, IOException {
             WebViewLibraryLoader.loadNativeLibrary(classLoader, str);
             int i = 0;
             i = 0;
@@ -68,11 +69,11 @@ class WebViewZygoteInit {
                     Log.e(WebViewZygoteInit.TAG, "Unexpected return type: preloadInZygote must return boolean");
                 } else {
                     Class[] clsArr2 = new Class[0];
-                    boolean booleanValue = ((Boolean) webViewProviderClass.getMethod("preloadInZygote", null).invoke(null, null)).booleanValue();
-                    i = booleanValue;
-                    if (booleanValue == 0) {
+                    boolean zBooleanValue = ((Boolean) webViewProviderClass.getMethod("preloadInZygote", null).invoke(null, null)).booleanValue();
+                    i = zBooleanValue;
+                    if (zBooleanValue == 0) {
                         Log.e(WebViewZygoteInit.TAG, "preloadInZygote returned false");
-                        i = booleanValue;
+                        i = zBooleanValue;
                     }
                 }
             } catch (ReflectiveOperationException e) {
@@ -86,7 +87,7 @@ class WebViewZygoteInit {
         }
     }
 
-    public static void main(String[] strArr) {
+    public static void main(String[] strArr) throws NumberFormatException, ErrnoException {
         Log.i(TAG, "Starting WebViewZygoteInit");
         ChildZygoteInit.runZygoteServer(new WebViewZygoteServer(), strArr);
     }

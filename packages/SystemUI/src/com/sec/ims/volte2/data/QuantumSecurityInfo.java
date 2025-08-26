@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.sec.ims.util.IMSLog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class QuantumSecurityInfo implements Parcelable {
     public static final Parcelable.Creator<QuantumSecurityInfo> CREATOR = new Parcelable.Creator<QuantumSecurityInfo>() { // from class: com.sec.ims.volte2.data.QuantumSecurityInfo.1
@@ -30,28 +29,24 @@ public class QuantumSecurityInfo implements Parcelable {
     private String mRemoteTelNum;
     private String mSessionKey;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_AUTH_STATUS {
         public static final int AUTH_STATUS_FAIL = 1;
         public static final int AUTH_STATUS_INVALID = -1;
         public static final int AUTH_STATUS_SUCCESS = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_CALL_DIRECTION {
         public static final int CALL_DIR_CALLEE = 1;
         public static final int CALL_DIR_CALLER = 0;
         public static final int CALL_DIR_INVALID = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_CRYPTO_MODE {
         public static final int CRYPTO_MODE_INVALID = 0;
         public static final int CRYPTO_MODE_SM4_CBC = 2;
         public static final int CRYPTO_MODE_SM4_ECB = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_ENCRYPT_STATUS {
         public static final int DISABLED = 4;
         public static final int ENABLED = 3;
@@ -60,7 +55,6 @@ public class QuantumSecurityInfo implements Parcelable {
         public static final int PROGRESS = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_KEY_STATUS {
         public static final int KEY_STATUS_EXCEPTION = 352;
         public static final int KEY_STATUS_FAIL_TO_GET_KEY = 353;
@@ -68,7 +62,6 @@ public class QuantumSecurityInfo implements Parcelable {
         public static final int KEY_STATUS_SUCCESS = 351;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_LOGIN_STATUS {
         public static final int LOGIN_STATUS_CHANGE_LOGIN_FAIL = 404;
         public static final int LOGIN_STATUS_GET_CHANGE_FAIL = 401;
@@ -79,7 +72,6 @@ public class QuantumSecurityInfo implements Parcelable {
         public static final int LOGIN_STATUS_TOKEN_STORAGE_FAIL = 405;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_PEER_PROFILE_STATUS {
         public static final int PEER_PROFILE_STATUS_EXCEPTION = 403;
         public static final int PEER_PROFILE_STATUS_INVALID = -1;
@@ -87,7 +79,6 @@ public class QuantumSecurityInfo implements Parcelable {
         public static final int PEER_PROFILE_STATUS_SUCCESS = 401;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QUANTUM_VOLTE_STATUS {
         public static final int VOLTE_STATUS_ERROR = 1;
         public static final int VOLTE_STATUS_INVALID = -1;

@@ -43,18 +43,14 @@ public class NoAppsAvailableEmptyStateProvider implements AbstractMultiProfilePa
                 string = ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_NO_PERSONAL_APPS, new Supplier() { // from class: com.android.internal.app.NoAppsAvailableEmptyStateProvider$$ExternalSyntheticLambda0
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        String lambda$getEmptyState$0;
-                        lambda$getEmptyState$0 = NoAppsAvailableEmptyStateProvider.this.lambda$getEmptyState$0();
-                        return lambda$getEmptyState$0;
+                        return this.f$0.lambda$getEmptyState$0();
                     }
                 });
             } else {
                 string = ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_NO_WORK_APPS, new Supplier() { // from class: com.android.internal.app.NoAppsAvailableEmptyStateProvider$$ExternalSyntheticLambda1
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        String lambda$getEmptyState$1;
-                        lambda$getEmptyState$1 = NoAppsAvailableEmptyStateProvider.this.lambda$getEmptyState$1();
-                        return lambda$getEmptyState$1;
+                        return this.f$0.lambda$getEmptyState$1();
                     }
                 });
             }

@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConfigurationControllerExtKt$onDensityOrFontScaleChanged$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConfigurationController $this_onDensityOrFontScaleChanged;
@@ -47,7 +46,7 @@ final class ConfigurationControllerExtKt$onDensityOrFontScaleChanged$1 extends S
             ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.policy.ConfigurationControllerExtKt$onDensityOrFontScaleChanged$1$listener$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onDensityOrFontScaleChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             ((ConfigurationControllerImpl) this.$this_onDensityOrFontScaleChanged).addCallback(configurationListener);

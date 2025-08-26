@@ -299,21 +299,15 @@ public class MaintenanceModeUtils {
 
     static void configureLayout(Activity activity, Resources resources, Configuration configuration, boolean z, boolean z2, int i, int i2, int i3) {
         boolean z3 = true;
-        int i4 = 0;
+        int dimensionPixelSize = 0;
         boolean z4 = configuration.orientation == 2;
         if (z) {
             activity.setContentView(i);
-        } else {
-            if (z2) {
-                if (configuration.semDisplayDeviceType == 5) {
-                    configureLayoutConsideringFullScreen(activity, z4, i, i2);
-                } else {
-                    configureLayoutConsideringFullScreen(activity, false, i, i2);
-                }
-            } else {
-                configureLayoutConsideringFullScreen(activity, z4, i, i2);
-            }
+        } else if (!z2 || configuration.semDisplayDeviceType == 5) {
+            configureLayoutConsideringFullScreen(activity, z4, i, i2);
             z3 = false;
+        } else {
+            configureLayoutConsideringFullScreen(activity, false, i, i2);
         }
         activity.findViewById(R.id.maintenance_mode_outermost_container).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeUtils$$ExternalSyntheticLambda0
             @Override // android.view.View.OnApplyWindowInsetsListener
@@ -323,21 +317,21 @@ public class MaintenanceModeUtils {
         });
         setSystemBarsAppearanceIfNeeded(activity);
         if (z3) {
-            int width = activity.getWindowManager().getCurrentWindowMetrics().getBounds().width();
-            int height = activity.getWindowManager().getCurrentWindowMetrics().getBounds().height();
-            int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_large);
-            int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_middle);
-            int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_height_middle);
-            if (width >= dimensionPixelSize) {
-                i4 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_page_max_width);
-            } else if (width >= dimensionPixelSize2 && height > dimensionPixelSize3) {
-                i4 = (int) (width * MAX_PAGE_WIDTH_PERCENT);
+            int iWidth = activity.getWindowManager().getCurrentWindowMetrics().getBounds().width();
+            int iHeight = activity.getWindowManager().getCurrentWindowMetrics().getBounds().height();
+            int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_large);
+            int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_middle);
+            int dimensionPixelSize4 = resources.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_height_middle);
+            if (iWidth >= dimensionPixelSize2) {
+                dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.maintenance_mode_page_max_width);
+            } else if (iWidth >= dimensionPixelSize3 && iHeight > dimensionPixelSize4) {
+                dimensionPixelSize = (int) (iWidth * MAX_PAGE_WIDTH_PERCENT);
             }
-            if (i4 > 0) {
-                View findViewById = activity.findViewById(i3);
-                ViewGroup.LayoutParams layoutParams = findViewById.getLayoutParams();
-                layoutParams.width = i4;
-                findViewById.setLayoutParams(layoutParams);
+            if (dimensionPixelSize > 0) {
+                View viewFindViewById = activity.findViewById(i3);
+                ViewGroup.LayoutParams layoutParams = viewFindViewById.getLayoutParams();
+                layoutParams.width = dimensionPixelSize;
+                viewFindViewById.setLayoutParams(layoutParams);
             }
         }
     }
@@ -386,12 +380,12 @@ public class MaintenanceModeUtils {
     }
 
     static void startCloudActivity(Context context) {
-        Bundle callCloudProvider = callCloudProvider(context, true);
-        if (callCloudProvider == null) {
+        Bundle bundleCallCloudProvider = callCloudProvider(context, true);
+        if (bundleCallCloudProvider == null) {
             return;
         }
         try {
-            Intent intent = (Intent) callCloudProvider.getParcelable(PROVIDER_CLOUD_RESPONSE_KEY_TARGET_INTENT, Intent.class);
+            Intent intent = (Intent) bundleCallCloudProvider.getParcelable(PROVIDER_CLOUD_RESPONSE_KEY_TARGET_INTENT, Intent.class);
             if (intent == null) {
                 Log.i(TAG, "Failed to start SCloud: targetIntent is null");
             } else {
@@ -448,8 +442,8 @@ public class MaintenanceModeUtils {
             Log.i(TAG, "SCloud is not installed");
             return new CloudInfo(false, 30, null);
         }
-        Bundle callCloudProvider = callCloudProvider(context, false);
-        return new CloudInfo(isCloudBackupSupported(callCloudProvider), getCloudBackupRetentionPeriod(callCloudProvider), getCloudBackupIntroDescription(callCloudProvider));
+        Bundle bundleCallCloudProvider = callCloudProvider(context, false);
+        return new CloudInfo(isCloudBackupSupported(bundleCallCloudProvider), getCloudBackupRetentionPeriod(bundleCallCloudProvider), getCloudBackupIntroDescription(bundleCallCloudProvider));
     }
 
     private static boolean isCloudBackupSupported(Bundle bundle) {
@@ -500,11 +494,11 @@ public class MaintenanceModeUtils {
     }
 
     static String getCloudBackupStatus(Context context) {
-        Bundle callCloudProvider = callCloudProvider(context, true);
-        if (callCloudProvider == null) {
+        Bundle bundleCallCloudProvider = callCloudProvider(context, true);
+        if (bundleCallCloudProvider == null) {
             return PROVIDER_CALL_FAILED;
         }
-        String string = callCloudProvider.getString("status");
+        String string = bundleCallCloudProvider.getString("status");
         Log.i(TAG, "Cloud backup status: " + string);
         return string != null ? string : PROVIDER_CALL_FAILED;
     }
@@ -527,14 +521,14 @@ public class MaintenanceModeUtils {
     private static Bundle callCloudProvider(Context context, boolean z) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(PROVIDER_CLOUD_EXTRA_IS_SKIP_CHECK_SUPPORT, z);
-        Bundle call = call(context, PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER, PROVIDER_CLOUD_METHOD_CTB_SUPPORT, PROVIDER_CLOUD_ARGUMENT_MAINTENANCE, bundle);
-        if (call == null) {
+        Bundle bundleCall = call(context, PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER, PROVIDER_CLOUD_METHOD_CTB_SUPPORT, PROVIDER_CLOUD_ARGUMENT_MAINTENANCE, bundle);
+        if (bundleCall == null) {
             Log.i(TAG, "Failed to call: Response is null");
             return null;
         }
-        String string = call.getString(PROVIDER_CLOUD_RESPONSE_KEY_FAIL_REASON);
+        String string = bundleCall.getString(PROVIDER_CLOUD_RESPONSE_KEY_FAIL_REASON);
         if (string == null) {
-            return call;
+            return bundleCall;
         }
         Log.i(TAG, "Failed to call, failReason: " + string);
         return null;

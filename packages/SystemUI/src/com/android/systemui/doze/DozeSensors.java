@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeSensors {
     public static final UiEventLogger UI_EVENT_LOGGER = new UiEventLoggerImpl();
@@ -69,11 +68,9 @@ public class DozeSensors {
     public boolean mUdfpsEnrolled;
     public final WakeLock mWakeLock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DozeSensorsUiEvent implements UiEventLogger.UiEventEnum {
         ACTION_AMBIENT_GESTURE_PICKUP(459);
 
@@ -88,7 +85,6 @@ public class DozeSensors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PluginSensor extends TriggerSensor implements SensorManagerPlugin.SensorEventListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final long mDebounce;
@@ -107,19 +103,19 @@ public class DozeSensors {
             LogLevel logLevel = LogLevel.DEBUG;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             DozeSensors dozeSensors = DozeSensors.this;
             dozeSensors.mHandler.post(dozeSensors.mWakeLock.wrap(new Runnable() { // from class: com.android.systemui.doze.DozeSensors$PluginSensor$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DozeSensors.PluginSensor pluginSensor = DozeSensors.PluginSensor.this;
+                    DozeSensors.PluginSensor pluginSensor = this.f$0;
                     SensorManagerPlugin.SensorEvent sensorEvent2 = sensorEvent;
                     int i2 = DozeSensors.PluginSensor.$r8$clinit;
-                    long uptimeMillis = SystemClock.uptimeMillis();
+                    long jUptimeMillis = SystemClock.uptimeMillis();
                     DozeSensors dozeSensors2 = DozeSensors.this;
-                    if (uptimeMillis < dozeSensors2.mDebounceFrom + pluginSensor.mDebounce) {
+                    if (jUptimeMillis < dozeSensors2.mDebounceFrom + pluginSensor.mDebounce) {
                         dozeSensors2.mDozeLog.traceSensorEventDropped(pluginSensor.mPulseReason, "debounce");
                     } else {
                         ((DozeTriggers$$ExternalSyntheticLambda2) dozeSensors2.mSensorCallback).f$0.onSensor(pluginSensor.mPulseReason, -1.0f, -1.0f, sensorEvent2.getValues());
@@ -162,7 +158,6 @@ public class DozeSensors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class TriggerSensor extends TriggerEventListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public boolean mConfigured;
@@ -206,16 +201,20 @@ public class DozeSensors {
             LogLevel logLevel = LogLevel.DEBUG;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             DozeSensors dozeSensors = DozeSensors.this;
             dozeSensors.mHandler.post(dozeSensors.mWakeLock.wrap(new Runnable() { // from class: com.android.systemui.doze.DozeSensors$TriggerSensor$$ExternalSyntheticLambda0
+                /* JADX WARN: Removed duplicated region for block: B:12:0x002e  */
                 @Override // java.lang.Runnable
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final void run() {
                     float f;
                     float f2;
-                    DozeSensors.TriggerSensor triggerSensor = DozeSensors.TriggerSensor.this;
+                    DozeSensors.TriggerSensor triggerSensor = this.f$0;
                     Sensor sensor2 = sensor;
                     TriggerEvent triggerEvent2 = triggerEvent;
                     if (sensor2 != null) {
@@ -230,18 +229,16 @@ public class DozeSensors {
                         if (fArr.length >= 2) {
                             f = fArr[0];
                             f2 = fArr[1];
-                            ((DozeTriggers$$ExternalSyntheticLambda2) DozeSensors.this.mSensorCallback).f$0.onSensor(triggerSensor.mPulseReason, f, f2, triggerEvent2.values);
-                            if (triggerSensor.mRegistered && triggerSensor.mImmediatelyReRegister) {
-                                triggerSensor.updateListening();
-                                return;
-                            }
+                        } else {
+                            f = -1.0f;
+                            f2 = -1.0f;
                         }
                     }
-                    f = -1.0f;
-                    f2 = -1.0f;
                     ((DozeTriggers$$ExternalSyntheticLambda2) DozeSensors.this.mSensorCallback).f$0.onSensor(triggerSensor.mPulseReason, f, f2, triggerEvent2.values);
-                    if (triggerSensor.mRegistered) {
+                    if (triggerSensor.mRegistered || !triggerSensor.mImmediatelyReRegister) {
+                        return;
                     }
+                    triggerSensor.updateListening();
                 }
             }));
         }
@@ -272,19 +269,19 @@ public class DozeSensors {
             }
             if (!this.mRequested || (!enabledBySetting() && !this.mIgnoresSetting)) {
                 if (this.mRegistered) {
-                    boolean cancelTriggerSensor = DozeSensors.this.mSensorManager.cancelTriggerSensor(this, sensor);
+                    boolean zCancelTriggerSensor = DozeSensors.this.mSensorManager.cancelTriggerSensor(this, sensor);
                     DozeLog dozeLog = DozeSensors.this.mDozeLog;
-                    String sensor2 = sensor.toString();
+                    String string = sensor.toString();
                     DozeLogger dozeLogger = dozeLog.mLogger;
                     dozeLogger.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(17);
                     LogBuffer logBuffer = dozeLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                    logMessageImpl.str1 = sensor2;
-                    logMessageImpl.bool1 = cancelTriggerSensor;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                    logMessageImpl.str1 = string;
+                    logMessageImpl.bool1 = zCancelTriggerSensor;
+                    logBuffer.commit(logMessageObtain);
                     this.mRegistered = false;
                     return;
                 }
@@ -292,31 +289,31 @@ public class DozeSensors {
             }
             if (this.mRegistered) {
                 DozeLog dozeLog2 = DozeSensors.this.mDozeLog;
-                String sensor3 = sensor.toString();
+                String string2 = sensor.toString();
                 DozeLogger dozeLogger2 = dozeLog2.mLogger;
                 dozeLogger2.getClass();
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda02 = new DozeLogger$$ExternalSyntheticLambda0(25);
                 LogBuffer logBuffer2 = dozeLogger2.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("DozeLog", logLevel2, dozeLogger$$ExternalSyntheticLambda02, null);
-                ((LogMessageImpl) obtain2).str1 = sensor3;
-                logBuffer2.commit(obtain2);
+                LogMessage logMessageObtain2 = logBuffer2.obtain("DozeLog", logLevel2, dozeLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain2).str1 = string2;
+                logBuffer2.commit(logMessageObtain2);
                 return;
             }
             this.mRegistered = DozeSensors.this.mSensorManager.requestTriggerSensor(this, sensor);
             DozeLog dozeLog3 = DozeSensors.this.mDozeLog;
-            String sensor4 = sensor.toString();
+            String string3 = sensor.toString();
             boolean z = this.mRegistered;
             DozeLogger dozeLogger3 = dozeLog3.mLogger;
             dozeLogger3.getClass();
             LogLevel logLevel3 = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda03 = new DozeLogger$$ExternalSyntheticLambda0(24);
             LogBuffer logBuffer3 = dozeLogger3.buffer;
-            LogMessage obtain3 = logBuffer3.obtain("DozeLog", logLevel3, dozeLogger$$ExternalSyntheticLambda03, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain3;
-            logMessageImpl2.str1 = sensor4;
+            LogMessage logMessageObtain3 = logBuffer3.obtain("DozeLog", logLevel3, dozeLogger$$ExternalSyntheticLambda03, null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
+            logMessageImpl2.str1 = string3;
             logMessageImpl2.bool1 = z;
-            logBuffer3.commit(obtain3);
+            logBuffer3.commit(logMessageObtain3);
         }
 
         public TriggerSensor(DozeSensors dozeSensors, Sensor sensor, String str, boolean z, boolean z2, int i, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8) {
@@ -343,7 +340,7 @@ public class DozeSensors {
     /* JADX WARN: Type inference failed for: r4v1, types: [com.android.systemui.doze.DozeSensors$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.biometrics.AuthController$Callback, com.android.systemui.doze.DozeSensors$2] */
     /* JADX WARN: Type inference failed for: r5v0, types: [com.android.systemui.doze.DozeSensors$1] */
-    public DozeSensors(Resources resources, AsyncSensorManager asyncSensorManager, DozeParameters dozeParameters, AmbientDisplayConfiguration ambientDisplayConfiguration, WakeLock wakeLock, Callback callback, Consumer<Boolean> consumer, DozeLog dozeLog, ProximitySensor proximitySensor, SecureSettings secureSettings, AuthController authController, DevicePostureController devicePostureController, SelectedUserInteractor selectedUserInteractor) {
+    public DozeSensors(Resources resources, AsyncSensorManager asyncSensorManager, DozeParameters dozeParameters, AmbientDisplayConfiguration ambientDisplayConfiguration, WakeLock wakeLock, Callback callback, Consumer<Boolean> consumer, DozeLog dozeLog, ProximitySensor proximitySensor, SecureSettings secureSettings, AuthController authController, DevicePostureController devicePostureController, SelectedUserInteractor selectedUserInteractor) throws Resources.NotFoundException {
         boolean z;
         Handler handler = new Handler();
         this.mHandler = handler;
@@ -360,7 +357,7 @@ public class DozeSensors {
         this.mDevicePostureCallback = new DevicePostureController.Callback() { // from class: com.android.systemui.doze.DozeSensors$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
             public final void onPostureChanged(int i) {
-                DozeSensors dozeSensors = DozeSensors.this;
+                DozeSensors dozeSensors = this.f$0;
                 if (dozeSensors.mDevicePosture == i) {
                     return;
                 }
@@ -377,20 +374,20 @@ public class DozeSensors {
                                 triggerSensor.mPosture = i2;
                             } else {
                                 if (triggerSensor.mRegistered) {
-                                    boolean cancelTriggerSensor = DozeSensors.this.mSensorManager.cancelTriggerSensor(triggerSensor, sensor);
+                                    boolean zCancelTriggerSensor = DozeSensors.this.mSensorManager.cancelTriggerSensor(triggerSensor, sensor);
                                     DozeLog dozeLog2 = DozeSensors.this.mDozeLog;
-                                    String sensor3 = sensor.toString();
+                                    String string = sensor.toString();
                                     DozeLogger dozeLogger = dozeLog2.mLogger;
                                     dozeLogger.getClass();
                                     LogLevel logLevel = LogLevel.INFO;
                                     DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(2);
                                     LogBuffer logBuffer = dozeLogger.buffer;
-                                    LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
-                                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                                    logMessageImpl.str1 = sensor3;
-                                    logMessageImpl.bool1 = cancelTriggerSensor;
+                                    LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+                                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                                    logMessageImpl.str1 = string;
+                                    logMessageImpl.bool1 = zCancelTriggerSensor;
                                     logMessageImpl.str2 = "posture changed";
-                                    logBuffer.commit(obtain);
+                                    logBuffer.commit(logMessageObtain);
                                     triggerSensor.mRegistered = false;
                                 }
                                 triggerSensor.mPosture = i2;
@@ -425,17 +422,17 @@ public class DozeSensors {
                 for (TriggerSensor triggerSensor : dozeSensors.mTriggerSensors) {
                     int i = triggerSensor.mPulseReason;
                     if (11 == i) {
-                        r8 = dozeSensors.mUdfpsEnrolled && dozeSensors.mConfig.quickPickupSensorEnabled(selectedUserInteractor2.getSelectedUserId());
-                        if (triggerSensor.mConfigured != r8) {
-                            triggerSensor.mConfigured = r8;
+                        z = dozeSensors.mUdfpsEnrolled && dozeSensors.mConfig.quickPickupSensorEnabled(selectedUserInteractor2.getSelectedUserId());
+                        if (triggerSensor.mConfigured != z) {
+                            triggerSensor.mConfigured = z;
                             triggerSensor.updateListening();
                         }
                     } else if (10 == i) {
                         if (!dozeSensors.mUdfpsEnrolled || (!dozeSensors.mConfig.alwaysOnEnabled(selectedUserInteractor2.getSelectedUserId()) && !dozeSensors.mScreenOffUdfpsEnabled)) {
-                            r8 = false;
+                            z = false;
                         }
-                        if (triggerSensor.mConfigured != r8) {
-                            triggerSensor.mConfigured = r8;
+                        if (triggerSensor.mConfigured != z) {
+                            triggerSensor.mConfigured = z;
                             triggerSensor.updateListening();
                         }
                     }
@@ -465,15 +462,15 @@ public class DozeSensors {
         TriggerSensor triggerSensor = new TriggerSensor(this, asyncSensorManager.getDefaultSensor(17), null, SystemProperties.getBoolean("doze.pulse.sigmotion", dozeParameters.mResources.getBoolean(R.bool.doze_pulse_on_significant_motion)), 2, false, false);
         TriggerSensor triggerSensor2 = new TriggerSensor(this, asyncSensorManager.getDefaultSensor(25), "doze_pulse_on_pick_up", resources.getBoolean(android.R.bool.config_eap_sim_based_auth_supported), ambientDisplayConfiguration.dozePickupSensorAvailable(), 3, false, false, false, false, true, false);
         TriggerSensor triggerSensor3 = new TriggerSensor(this, findSensor(asyncSensorManager, ambientDisplayConfiguration.doubleTapSensorType(), null), "doze_pulse_on_double_tap", true, 4, dozeParameters.mResources.getBoolean(R.bool.doze_double_tap_reports_touch_coordinates), true);
-        String[] tapSensorTypeMapping = ambientDisplayConfiguration.tapSensorTypeMapping();
+        String[] strArrTapSensorTypeMapping = ambientDisplayConfiguration.tapSensorTypeMapping();
         Sensor[] sensorArr = new Sensor[5];
-        HashMap hashMap = new HashMap();
-        for (int i = 0; i < tapSensorTypeMapping.length; i++) {
-            String str = tapSensorTypeMapping[i];
-            if (!hashMap.containsKey(str)) {
-                hashMap.put(str, findSensor(this.mSensorManager, str, null));
+        HashMap map = new HashMap();
+        for (int i = 0; i < strArrTapSensorTypeMapping.length; i++) {
+            String str = strArrTapSensorTypeMapping[i];
+            if (!map.containsKey(str)) {
+                map.put(str, findSensor(this.mSensorManager, str, null));
             }
-            sensorArr[i] = (Sensor) hashMap.get(str);
+            sensorArr[i] = (Sensor) map.get(str);
         }
         int i2 = this.mDevicePosture;
         int[] intArray = dozeParameters.mResources.getIntArray(R.array.doze_single_tap_uses_prox_posture_mapping);
@@ -489,7 +486,7 @@ public class DozeSensors {
         this.mProximitySensor.register(new ThresholdSensor.Listener() { // from class: com.android.systemui.doze.DozeSensors$$ExternalSyntheticLambda1
             @Override // com.android.systemui.util.sensors.ThresholdSensor.Listener
             public final void onThresholdCrossed(ThresholdSensorEvent thresholdSensorEvent) {
-                DozeSensors dozeSensors = DozeSensors.this;
+                DozeSensors dozeSensors = this.f$0;
                 if (thresholdSensorEvent != null) {
                     dozeSensors.mProxCallback.accept(Boolean.valueOf(!thresholdSensorEvent.getBelow()));
                 } else {
@@ -502,14 +499,14 @@ public class DozeSensors {
     }
 
     public static Sensor findSensor(SensorManager sensorManager, String str, String str2) {
-        boolean isEmpty = TextUtils.isEmpty(str2);
-        boolean isEmpty2 = TextUtils.isEmpty(str);
-        if (isEmpty && isEmpty2) {
+        boolean zIsEmpty = TextUtils.isEmpty(str2);
+        boolean zIsEmpty2 = TextUtils.isEmpty(str);
+        if (zIsEmpty && zIsEmpty2) {
             return null;
         }
         for (Sensor sensor : sensorManager.getSensorList(-1)) {
-            if (isEmpty || str2.equals(sensor.getName())) {
-                if (isEmpty2 || str.equals(sensor.getStringType())) {
+            if (zIsEmpty || str2.equals(sensor.getName())) {
+                if (zIsEmpty2 || str.equals(sensor.getStringType())) {
                     return sensor;
                 }
             }

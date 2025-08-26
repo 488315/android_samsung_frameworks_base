@@ -7,7 +7,6 @@ import com.samsung.android.sdk.moneta.basicdomain.entity.Person$$ExternalSynthet
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Person implements Parcelable {
     public static final Parcelable.Creator<Person> CREATOR = new Creator();
@@ -17,7 +16,6 @@ public final class Person implements Parcelable {
     private final Long personId;
     private final List<String> relationships;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -120,11 +118,11 @@ public final class Person implements Parcelable {
     }
 
     public int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.relationships, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.relationships, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31);
         Long l = this.contactId;
-        int hashCode = (m + (l == null ? 0 : l.hashCode())) * 31;
+        int iHashCode = (iM + (l == null ? 0 : l.hashCode())) * 31;
         Long l2 = this.personId;
-        return hashCode + (l2 != null ? l2.hashCode() : 0);
+        return iHashCode + (l2 != null ? l2.hashCode() : 0);
     }
 
     public String toString() {

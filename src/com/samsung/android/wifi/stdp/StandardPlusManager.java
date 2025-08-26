@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 import com.samsung.android.wifi.stdp.IStandardPlusCallback;
-import com.samsung.android.wifi.stdp.StandardPlusManager;
 
 /* loaded from: classes6.dex */
 public class StandardPlusManager {
@@ -39,7 +38,7 @@ public class StandardPlusManager {
                 this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.stdp.StandardPlusManager$StandardPlusCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        StandardPlusManager.StandardPlusCallbackProxy.this.lambda$onEvent$0(i);
+                        this.f$0.lambda$onEvent$0(i);
                     }
                 });
             }

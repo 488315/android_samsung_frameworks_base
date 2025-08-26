@@ -37,7 +37,6 @@ import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SamsungBatteryMeterDrawable extends Drawable {
     public static final float BATTERY_BACKGROUND_ALPHA;
@@ -82,7 +81,6 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
     public final int MAX_LEVEL = 100;
     public int iconTint = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,8 +99,8 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
     }
 
     /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.battery.SamsungBatteryMeterDrawable$postInvalidateHandler$1] */
-    public SamsungBatteryMeterDrawable(Context context) {
-        TypedArray typedArray;
+    public SamsungBatteryMeterDrawable(Context context) throws Throwable {
+        TypedArray typedArrayObtainTypedArray;
         int length;
         this.context = context;
         this.mAccessibilityManager = AccessibilityManager.getInstance(context);
@@ -127,7 +125,7 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
                 if (message.what == SamsungBatteryMeterDrawable.MSG_POST_INVALIDATE) {
-                    SamsungBatteryMeterDrawable samsungBatteryMeterDrawable = SamsungBatteryMeterDrawable.this;
+                    SamsungBatteryMeterDrawable samsungBatteryMeterDrawable = this.this$0;
                     if (samsungBatteryMeterDrawable.flagBlinkingNeeded) {
                         samsungBatteryMeterDrawable.flagDrawIcon = !samsungBatteryMeterDrawable.flagDrawIcon;
                     }
@@ -136,22 +134,22 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
             }
         };
         Resources resources = context.getResources();
-        TypedArray typedArray2 = null;
+        TypedArray typedArray = null;
         try {
-            TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.batterymeter_color_levels);
+            TypedArray typedArrayObtainTypedArray2 = resources.obtainTypedArray(R.array.batterymeter_color_levels);
             try {
-                typedArray = resources.obtainTypedArray(R.array.batterymeter_color_values);
-                if (obtainTypedArray != null) {
+                typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.batterymeter_color_values);
+                if (typedArrayObtainTypedArray2 != null) {
                     try {
-                        length = obtainTypedArray.length();
+                        length = typedArrayObtainTypedArray2.length();
                     } catch (Throwable th) {
                         th = th;
-                        typedArray2 = obtainTypedArray;
-                        if (typedArray2 != null) {
-                            typedArray2.recycle();
-                        }
+                        typedArray = typedArrayObtainTypedArray2;
                         if (typedArray != null) {
                             typedArray.recycle();
+                        }
+                        if (typedArrayObtainTypedArray != null) {
+                            typedArrayObtainTypedArray.recycle();
                         }
                         throw th;
                     }
@@ -162,20 +160,20 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
                 for (int i = 0; i < length; i++) {
                     int[] iArr = this.colors;
                     int i2 = i * 2;
-                    (iArr == null ? null : iArr)[i2] = obtainTypedArray != null ? obtainTypedArray.getInt(i, 0) : 0;
-                    if (typedArray == null || typedArray.getType(i) != 2) {
+                    (iArr == null ? null : iArr)[i2] = typedArrayObtainTypedArray2 != null ? typedArrayObtainTypedArray2.getInt(i, 0) : 0;
+                    if (typedArrayObtainTypedArray == null || typedArrayObtainTypedArray.getType(i) != 2) {
                         int[] iArr2 = this.colors;
-                        (iArr2 == null ? null : iArr2)[i2 + 1] = typedArray != null ? typedArray.getColor(i, 0) : 0;
+                        (iArr2 == null ? null : iArr2)[i2 + 1] = typedArrayObtainTypedArray != null ? typedArrayObtainTypedArray.getColor(i, 0) : 0;
                     } else {
                         int[] iArr3 = this.colors;
-                        (iArr3 == null ? null : iArr3)[i2 + 1] = Utils.getColorAttrDefaultColor(this.context, typedArray.getThemeAttributeId(i, 0), 0);
+                        (iArr3 == null ? null : iArr3)[i2 + 1] = Utils.getColorAttrDefaultColor(this.context, typedArrayObtainTypedArray.getThemeAttributeId(i, 0), 0);
                     }
                 }
-                if (obtainTypedArray != null) {
-                    obtainTypedArray.recycle();
+                if (typedArrayObtainTypedArray2 != null) {
+                    typedArrayObtainTypedArray2.recycle();
                 }
-                if (typedArray != null) {
-                    typedArray.recycle();
+                if (typedArrayObtainTypedArray != null) {
+                    typedArrayObtainTypedArray.recycle();
                 }
                 Resources resources2 = this.context.getResources();
                 int color = resources2.getColor(R.color.status_bar_battery_frame_light_color, null);
@@ -203,16 +201,16 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
                 Paint paint4 = this.roundedRectPaint;
                 paint4.setAntiAlias(true);
                 paint4.setColor(-1);
-                Typeface create = Typeface.create(Typeface.create("sec", 0), KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED, false);
+                Typeface typefaceCreate = Typeface.create(Typeface.create("sec", 0), KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED, false);
                 Paint paint5 = this.textPaint;
                 paint5.setAntiAlias(true);
                 Paint.Align align = Paint.Align.CENTER;
                 paint5.setTextAlign(align);
                 paint5.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-                paint5.setTypeface(create);
+                paint5.setTypeface(typefaceCreate);
                 paint5.setTextSize(this.fontSize);
                 Paint paint6 = this.warningTextPaint;
-                paint6.setTypeface(create);
+                paint6.setTypeface(typefaceCreate);
                 paint6.setTextAlign(align);
                 paint6.setTextSize(this.fontSize);
                 int[] iArr4 = this.colors;
@@ -222,11 +220,11 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
                 resizeDrawable();
             } catch (Throwable th2) {
                 th = th2;
-                typedArray = null;
+                typedArrayObtainTypedArray = null;
             }
         } catch (Throwable th3) {
             th = th3;
-            typedArray = null;
+            typedArrayObtainTypedArray = null;
         }
     }
 
@@ -235,7 +233,7 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public final void draw(Canvas canvas) {
+    public final void draw(Canvas canvas) throws Resources.NotFoundException {
         boolean z;
         int i;
         int i2;
@@ -269,8 +267,8 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
         int i7 = this.intrinsicWidth;
         int i8 = this.intrinsicHeight;
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
-        Bitmap createBitmap = Bitmap.createBitmap(i7, i8, config);
-        Canvas canvas2 = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i7, i8, config);
+        Canvas canvas2 = new Canvas(bitmapCreateBitmap);
         int i9 = (int) (this.intrinsicWidth * (i6 >= 96 ? 1.0f : i6 <= 4 ? 0.0f : i6 / 100.0f));
         boolean z3 = i6 <= 4 && !shouldDrawIcon();
         this.showWarningText = z3;
@@ -353,46 +351,46 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
             canvas2.restore();
         }
         if (this.showPercentSetting) {
-            String valueOf = String.valueOf(i6);
+            String strValueOf = String.valueOf(i6);
             Paint paint2 = this.textPaint;
-            Rect textBounds = getTextBounds(valueOf);
-            this.textMeasuredWidth = paint2.measureText(valueOf);
-            float height = (textBounds.height() / 2.0f) + (this.intrinsicHeight / 2.0f);
+            Rect textBounds = getTextBounds(strValueOf);
+            this.textMeasuredWidth = paint2.measureText(strValueOf);
+            float fHeight = (textBounds.height() / 2.0f) + (this.intrinsicHeight / 2.0f);
             int i13 = textBounds.bottom;
-            float f12 = (height - i13) - (i13 != 0 ? 0.0f : 1.0f);
+            float f12 = (fHeight - i13) - (i13 != 0 ? 0.0f : 1.0f);
             float textOriginX = getTextOriginX(textBounds);
-            boolean isHighContrastTextEnabled = this.mAccessibilityManager.isHighContrastTextEnabled();
-            if (isHighContrastTextEnabled) {
+            boolean zIsHighContrastTextEnabled = this.mAccessibilityManager.isHighContrastTextEnabled();
+            if (zIsHighContrastTextEnabled) {
                 ThreadedRenderer.setHighContrastText(false);
             }
             Locale locale = this.context.getResources().getConfiguration().locale;
             NumberFormat numberFormat = NumberFormat.getInstance(locale);
             if (Intrinsics.areEqual(locale.toString(), "my_MM")) {
-                canvas2.drawText(valueOf, textOriginX, f12, paint2);
+                canvas2.drawText(strValueOf, textOriginX, f12, paint2);
             } else {
-                canvas2.drawText(numberFormat.format(Integer.valueOf(Integer.parseInt(valueOf))), textOriginX, f12, paint2);
+                canvas2.drawText(numberFormat.format(Integer.valueOf(Integer.parseInt(strValueOf))), textOriginX, f12, paint2);
             }
-            if (isHighContrastTextEnabled) {
+            if (zIsHighContrastTextEnabled) {
                 ThreadedRenderer.setHighContrastText(true);
             }
         }
         if (shouldDrawIcon() || this.showWarningText) {
             Drawable drawable = this.flagBlinkingNeeded ? this.showPercentSetting ? this.context.getResources().getDrawable(R.drawable.stat_sys_power_saving_mode, null) : this.context.getResources().getDrawable(R.drawable.stat_sys_power_saving_mode_percentage_off, null) : isBatteryProtectionWorking() ? this.showPercentSetting ? this.context.getResources().getDrawable(R.drawable.stat_sys_battery_protection, null) : this.context.getResources().getDrawable(R.drawable.stat_sys_battery_protection_percentage_off, null) : this.batteryState.shouldShowChargingIcon() ? this.showPercentSetting ? this.context.getResources().getDrawable(R.drawable.stat_sys_battery_charging, null) : this.context.getResources().getDrawable(R.drawable.stat_sys_battery_charging_percentage_off, null) : this.showWarningText ? this.showPercentSetting ? this.context.getResources().getDrawable(R.drawable.stat_sys_battery_warning, null) : this.context.getResources().getDrawable(R.drawable.stat_sys_battery_warning_percentage_off, null) : this.showPercentSetting ? this.context.getResources().getDrawable(R.drawable.stat_sys_power_saving_mode, null) : this.context.getResources().getDrawable(R.drawable.stat_sys_power_saving_mode_percentage_off, null);
-            Bitmap createBitmap2 = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), config);
-            Canvas canvas3 = new Canvas(createBitmap2);
+            Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), config);
+            Canvas canvas3 = new Canvas(bitmapCreateBitmap2);
             canvas3.save();
             drawable.setBounds(0, 0, canvas3.getWidth(), canvas3.getHeight());
             drawable.draw(canvas3);
             canvas3.restore();
             Rect chargingIconBounds = getChargingIconBounds();
-            Bitmap createScaledBitmap = Bitmap.createScaledBitmap(createBitmap2, chargingIconBounds.width(), chargingIconBounds.height(), false);
+            Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapCreateBitmap2, chargingIconBounds.width(), chargingIconBounds.height(), false);
             if (this.showWarningText) {
-                canvas2.drawBitmap(createScaledBitmap, chargingIconBounds.left, chargingIconBounds.top, this.warningTextPaint);
+                canvas2.drawBitmap(bitmapCreateScaledBitmap, chargingIconBounds.left, chargingIconBounds.top, this.warningTextPaint);
             } else {
-                canvas2.drawBitmap(createScaledBitmap, chargingIconBounds.left, chargingIconBounds.top, this.textPaint);
+                canvas2.drawBitmap(bitmapCreateScaledBitmap, chargingIconBounds.left, chargingIconBounds.top, this.textPaint);
             }
         }
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.context.getResources(), createBitmap);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.context.getResources(), bitmapCreateBitmap);
         Paint paint3 = new Paint();
         paint3.setAntiAlias(true);
         paint3.setFilterBitmap(true);
@@ -476,7 +474,7 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
         return rect;
     }
 
-    public final float getTextOriginX(Rect rect) {
+    public final float getTextOriginX(Rect rect) throws Resources.NotFoundException {
         int i;
         boolean z = this.showPercentSetting;
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.drawable_icon_width_battery_percent_on);
@@ -493,9 +491,9 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
 
     public final boolean isBatteryProtectionWorking() {
         try {
-            Intent registerReceiver = this.context.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
-            int intExtra = registerReceiver != null ? registerReceiver.getIntExtra("protection", 0) : 0;
-            int intExtra2 = registerReceiver != null ? registerReceiver.getIntExtra("misc_event", 0) : 0;
+            Intent intentRegisterReceiver = this.context.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
+            int intExtra = intentRegisterReceiver != null ? intentRegisterReceiver.getIntExtra("protection", 0) : 0;
+            int intExtra2 = intentRegisterReceiver != null ? intentRegisterReceiver.getIntExtra("misc_event", 0) : 0;
             if (intExtra == 0) {
                 return BatteryProtectionUtils.isProtectedFullyByMaximum(intExtra2);
             }
@@ -555,13 +553,13 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
     }
 
     public final void postInvalidate() {
-        unscheduleSelf(new Runnable() { // from class: com.android.systemui.battery.SamsungBatteryMeterDrawable$postInvalidate$1
+        unscheduleSelf(new Runnable() { // from class: com.android.systemui.battery.SamsungBatteryMeterDrawable.postInvalidate.1
             @Override // java.lang.Runnable
             public final void run() {
                 SamsungBatteryMeterDrawable.this.invalidateSelf();
             }
         });
-        scheduleSelf(new Runnable() { // from class: com.android.systemui.battery.SamsungBatteryMeterDrawable$postInvalidate$2
+        scheduleSelf(new Runnable() { // from class: com.android.systemui.battery.SamsungBatteryMeterDrawable.postInvalidate.2
             @Override // java.lang.Runnable
             public final void run() {
                 SamsungBatteryMeterDrawable.this.invalidateSelf();
@@ -569,7 +567,7 @@ public final class SamsungBatteryMeterDrawable extends Drawable {
         }, 0L);
     }
 
-    public final void resizeDrawable() {
+    public final void resizeDrawable() throws Resources.NotFoundException {
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(getBatteryWidthLevelBased());
         this.intrinsicWidth = dimensionPixelSize;
         int i = this.height;

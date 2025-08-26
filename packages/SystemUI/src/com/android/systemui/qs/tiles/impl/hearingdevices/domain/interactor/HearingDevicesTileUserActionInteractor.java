@@ -14,7 +14,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HearingDevicesTileUserActionInteractor implements QSTileUserActionInteractor {
     public final HearingDevicesDialogManager hearingDevicesDialogManager;
@@ -30,12 +29,12 @@ public final class HearingDevicesTileUserActionInteractor implements QSTileUserA
     }
 
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
-    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) throws Throwable {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
-            Object withContext = BuildersKt.withContext(this.mainContext, new HearingDevicesTileUserActionInteractor$handleInput$2$1(this, qSTileInput, null), continuation);
-            if (withContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                return withContext;
+            Object objWithContext = BuildersKt.withContext(this.mainContext, new HearingDevicesTileUserActionInteractor$handleInput$2$1(this, qSTileInput, null), continuation);
+            if (objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                return objWithContext;
             }
         } else if (qSTileUserAction instanceof QSTileUserAction.LongClick) {
             QSTileIntentUserInputHandler.handle$default(this.qsTileIntentUserActionHandler, ((QSTileUserAction.LongClick) qSTileUserAction).expandable, new Intent("android.settings.HEARING_DEVICES_SETTINGS").setPackage(this.settingsPackageRepository.getSettingsPackageName()));

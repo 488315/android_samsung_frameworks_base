@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PowerRepositoryImpl$isInteractive$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BroadcastDispatcher $dispatcher;
@@ -56,19 +55,19 @@ final class PowerRepositoryImpl$isInteractive$1 extends SuspendLambda implements
             final ?? r4 = new BroadcastReceiver() { // from class: com.android.systemui.power.data.repository.PowerRepositoryImpl$isInteractive$1$receiver$1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context, Intent intent) {
-                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, ProducerScope.this, Boolean.valueOf(powerRepositoryImpl.manager.isInteractive()), "PowerRepository");
+                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Boolean.valueOf(powerRepositoryImpl.manager.isInteractive()), "PowerRepository");
                 }
             };
             BroadcastDispatcher broadcastDispatcher = this.$dispatcher;
-            IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF");
+            IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF");
             Unit unit = Unit.INSTANCE;
-            BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, r4, m, null, null, 0, null, 60);
+            BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, r4, intentFilterM, null, null, 0, null, 60);
             ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Boolean.valueOf(this.this$0.manager.isInteractive()), "PowerRepository");
             final BroadcastDispatcher broadcastDispatcher2 = this.$dispatcher;
             Function0 function0 = new Function0() { // from class: com.android.systemui.power.data.repository.PowerRepositoryImpl$isInteractive$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    BroadcastDispatcher.this.unregisterReceiver(r4);
+                    broadcastDispatcher2.unregisterReceiver(r4);
                     return Unit.INSTANCE;
                 }
             };

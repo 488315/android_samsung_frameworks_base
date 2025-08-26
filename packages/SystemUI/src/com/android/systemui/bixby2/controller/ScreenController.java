@@ -34,6 +34,7 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.bixby2.CommandActionResponse;
+import com.android.systemui.bixby2.actionresult.ActionResults;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.qp.SubroomBrightnessSettingsView;
@@ -51,8 +52,10 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import dagger.Lazy;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ScreenController {
     private static final String ACTION_BIXBY_STATE = "com.samsung.android.bixby.intent.action.CLIENT_VIEW_STATE_UPDATED";
@@ -94,7 +97,6 @@ public class ScreenController {
     private int mTryCount;
     private IWindowManager mWinodwManagerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ScreenScrollRunnable implements Runnable {
         private final Context mContext;
         private int mDuration;
@@ -190,7 +192,7 @@ public class ScreenController {
         return point;
     }
 
-    private CommandActionResponse getScreenshotResponse(Context context) {
+    private CommandActionResponse getScreenshotResponse(Context context) throws InterruptedException {
         if (!isSupportedBixby3(context)) {
             return new CommandActionResponse(1, "success");
         }
@@ -218,11 +220,11 @@ public class ScreenController {
         pointerCoords.pressure = i == 1 ? 0.0f : 1.0f;
         pointerCoords.size = 1.0f;
         pointerCoordsArr[0] = pointerCoords;
-        MotionEvent obtain = MotionEvent.obtain(j, j, i, 1, pointerPropertiesArr, pointerCoordsArr, 0, 0, 1.0f, 1.0f, 4, 0, 0, Build.VERSION.SEM_PLATFORM_INT < 120000 ? Integer.MIN_VALUE : 8388608);
-        obtain.setSource(PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL);
-        obtain.setFlags(8388608);
-        ((InputManager) context.getSystemService("input")).semInjectInputEvent(obtain, 0);
-        obtain.recycle();
+        MotionEvent motionEventObtain = MotionEvent.obtain(j, j, i, 1, pointerPropertiesArr, pointerCoordsArr, 0, 0, 1.0f, 1.0f, 4, 0, 0, Build.VERSION.SEM_PLATFORM_INT < 120000 ? Integer.MIN_VALUE : 8388608);
+        motionEventObtain.setSource(PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL);
+        motionEventObtain.setFlags(8388608);
+        ((InputManager) context.getSystemService("input")).semInjectInputEvent(motionEventObtain, 0);
+        motionEventObtain.recycle();
     }
 
     private boolean isDesktopMode() {
@@ -280,11 +282,11 @@ public class ScreenController {
                 i3 = displaySizeInPixels.y;
             }
             float f5 = i3 / 2.0f;
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             ScreenController screenController = this;
-            screenController.injectMotionEvent(context, f2, f5, uptimeMillis, 0);
+            screenController.injectMotionEvent(context, f2, f5, jUptimeMillis, 0);
             float f6 = f2;
-            long j = uptimeMillis + i;
+            long j = jUptimeMillis + i;
             if (i2 < 5) {
                 f4 = f5 + f;
                 f3 = f6;
@@ -292,14 +294,14 @@ public class ScreenController {
                 f3 = f6 + f;
                 f4 = f5;
             }
-            long j2 = uptimeMillis;
-            while (j2 < j) {
-                float f7 = (j2 - uptimeMillis) / i;
-                screenController.injectMotionEvent(context, screenController.lerp(f6, f3, f7), screenController.lerp(f5, f4, f7), j2, 2);
-                j2 = SystemClock.uptimeMillis();
+            long jUptimeMillis2 = jUptimeMillis;
+            while (jUptimeMillis2 < j) {
+                float f7 = (jUptimeMillis2 - jUptimeMillis) / i;
+                screenController.injectMotionEvent(context, screenController.lerp(f6, f3, f7), screenController.lerp(f5, f4, f7), jUptimeMillis2, 2);
+                jUptimeMillis2 = SystemClock.uptimeMillis();
                 screenController = this;
             }
-            injectMotionEvent(context, f3, f4, j2, 1);
+            injectMotionEvent(context, f3, f4, jUptimeMillis2, 1);
         } catch (Exception e) {
             e.getMessage();
             e.printStackTrace();
@@ -310,7 +312,7 @@ public class ScreenController {
     public void sendBackKey(final int i) {
         new Thread(new Runnable() { // from class: com.android.systemui.bixby2.controller.ScreenController.3
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws InterruptedException {
                 try {
                     Thread.sleep(1000L);
                     ScreenController.this.mInstrumentation.sendKeySync(new KeyEvent(0L, 0L, 0, 4, 0, 0, -1, 0, 72, 0, i));
@@ -346,7 +348,7 @@ public class ScreenController {
     private void startSubHomeActivity(Context context) {
         new Thread(new Runnable() { // from class: com.android.systemui.bixby2.controller.ScreenController.1
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws InterruptedException {
                 try {
                     Thread.sleep(1500L);
                     ScreenController.this.mInstrumentation.sendKeySync(new KeyEvent(0L, 0L, 0, 3, 0, 0, -1, 0, 72, 0, 1));
@@ -359,13 +361,13 @@ public class ScreenController {
     }
 
     public void closePanelScreen(Context context) {
-        final IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+        final IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
         if (isPanelBarExpanded(context)) {
             this.mBrightnessHandler.postDelayed(new Runnable(this) { // from class: com.android.systemui.bixby2.controller.ScreenController.4
                 @Override // java.lang.Runnable
                 public void run() {
                     try {
-                        IStatusBarService iStatusBarService = asInterface;
+                        IStatusBarService iStatusBarService = iStatusBarServiceAsInterface;
                         if (iStatusBarService != null) {
                             iStatusBarService.collapsePanels();
                         }
@@ -378,17 +380,17 @@ public class ScreenController {
     }
 
     public int[] getBrightnessBarInfo(Context context) {
-        int i;
-        int i2;
+        int progress;
+        int keyProgressIncrement;
         SeekBar brightnessSeekBar = (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && isFolderClosed()) ? ((SubroomBrightnessSettingsView) ((SubscreenQsPanelController) Dependency.sDependency.getDependencyInner(SubscreenQsPanelController.class)).getSubRoomQuickPanel().mMainView.findViewById(R.id.subroom_brightness_settings)).mSeekBar : getBrightnessSeekBar();
         if (brightnessSeekBar != null) {
-            i = ((brightnessSeekBar.getProgress() - brightnessSeekBar.getMin()) * 100) / (brightnessSeekBar.getMax() - brightnessSeekBar.getMin());
-            i2 = (brightnessSeekBar.getKeyProgressIncrement() * 100) / (brightnessSeekBar.getMax() - brightnessSeekBar.getMin());
+            progress = ((brightnessSeekBar.getProgress() - brightnessSeekBar.getMin()) * 100) / (brightnessSeekBar.getMax() - brightnessSeekBar.getMin());
+            keyProgressIncrement = (brightnessSeekBar.getKeyProgressIncrement() * 100) / (brightnessSeekBar.getMax() - brightnessSeekBar.getMin());
         } else {
-            i = 50;
-            i2 = 5;
+            progress = 50;
+            keyProgressIncrement = 5;
         }
-        return new int[]{i, i2};
+        return new int[]{progress, keyProgressIncrement};
     }
 
     public void goToHomeScreen(Context context) {
@@ -421,7 +423,7 @@ public class ScreenController {
         } else {
             new Thread(new Runnable() { // from class: com.android.systemui.bixby2.controller.ScreenController.2
                 @Override // java.lang.Runnable
-                public void run() {
+                public void run() throws InterruptedException {
                     try {
                         Thread.sleep(1000L);
                         ScreenController.this.sendBackKey(0);
@@ -433,148 +435,104 @@ public class ScreenController {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a2  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00a7  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0047  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0089  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x008d  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0096  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00a2  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00a7  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void screenScroll(android.content.Context r8, java.lang.String r9) {
-        /*
-            r7 = this;
-            java.lang.String r0 = "direction"
-            java.lang.String r1 = "level"
-            r2 = 0
-            if (r9 == 0) goto L3d
-            org.json.JSONArray r3 = new org.json.JSONArray     // Catch: org.json.JSONException -> L37
-            r3.<init>(r9)     // Catch: org.json.JSONException -> L37
-            r9 = 0
-            r4 = r2
-        Le:
-            int r5 = r3.length()     // Catch: org.json.JSONException -> L25
-            if (r9 >= r5) goto L34
-            java.lang.Object r5 = r3.get(r9)     // Catch: org.json.JSONException -> L25
-            org.json.JSONObject r5 = (org.json.JSONObject) r5     // Catch: org.json.JSONException -> L25
-            boolean r6 = r5.has(r1)     // Catch: org.json.JSONException -> L25
-            if (r6 == 0) goto L27
-            java.lang.String r2 = r5.getString(r1)     // Catch: org.json.JSONException -> L25
-            goto L27
-        L25:
-            r9 = move-exception
-            goto L39
-        L27:
-            boolean r6 = r5.has(r0)     // Catch: org.json.JSONException -> L25
-            if (r6 == 0) goto L31
-            java.lang.String r4 = r5.getString(r0)     // Catch: org.json.JSONException -> L25
-        L31:
-            int r9 = r9 + 1
-            goto Le
-        L34:
-            r9 = r2
-            r2 = r4
-            goto L3e
-        L37:
-            r9 = move-exception
-            r4 = r2
-        L39:
-            r9.printStackTrace()
-            goto L34
-        L3d:
-            r9 = r2
-        L3e:
-            java.lang.String r0 = "up"
-            boolean r0 = r0.equals(r2)
-            if (r0 == 0) goto L49
-            r0 = 1
-            goto L66
-        L49:
-            java.lang.String r0 = "down"
-            boolean r0 = r0.equals(r2)
-            if (r0 == 0) goto L53
-            r0 = 2
-            goto L66
-        L53:
-            java.lang.String r0 = "left"
-            boolean r0 = r0.equals(r2)
-            if (r0 == 0) goto L5d
-            r0 = 5
-            goto L66
-        L5d:
-            java.lang.String r0 = "right"
-            boolean r0 = r0.equals(r2)
-            if (r0 == 0) goto Lab
-            r0 = 6
-        L66:
-            java.lang.String r1 = "max"
-            boolean r9 = r1.equals(r9)
-            if (r9 == 0) goto L70
-            int r0 = r0 + 2
-        L70:
-            android.graphics.Point r9 = r7.getDisplaySizeInPixels(r8)
-            int r9 = r9.y
-            float r9 = (float) r9
-            r1 = 1058642330(0x3f19999a, float:0.6)
-            float r9 = r9 * r1
-            r1 = 1209810944(0x481c4000, float:160000.0)
-            r2 = -937672704(0xffffffffc81c4000, float:-160000.0)
-            r3 = 400(0x190, float:5.6E-43)
-            r4 = 1000(0x3e8, float:1.401E-42)
-            switch(r0) {
-                case 1: goto La7;
-                case 2: goto La2;
-                case 3: goto L9e;
-                case 4: goto L9a;
-                case 5: goto L96;
-                case 6: goto L91;
-                case 7: goto L8d;
-                case 8: goto L89;
-                default: goto L88;
+    public void screenScroll(Context context, String str) throws JSONException {
+        String string;
+        String str2;
+        int i;
+        String string2 = null;
+        if (str != null) {
+            try {
+                JSONArray jSONArray = new JSONArray(str);
+                string = null;
+                for (int i2 = 0; i2 < jSONArray.length(); i2++) {
+                    try {
+                        JSONObject jSONObject = (JSONObject) jSONArray.get(i2);
+                        if (jSONObject.has(ActionResults.RESULT_SET_VOLUME_SUCCESS)) {
+                            string2 = jSONObject.getString(ActionResults.RESULT_SET_VOLUME_SUCCESS);
+                        }
+                        if (jSONObject.has("direction")) {
+                            string = jSONObject.getString("direction");
+                        }
+                    } catch (JSONException e) {
+                        e = e;
+                        e.printStackTrace();
+                        str2 = string2;
+                        string2 = string;
+                        if (!"up".equals(string2)) {
+                        }
+                        if ("max".equals(str2)) {
+                        }
+                        float f = getDisplaySizeInPixels(context).y * 0.6f;
+                        switch (i) {
+                        }
+                    }
+                }
+            } catch (JSONException e2) {
+                e = e2;
+                string = null;
             }
-        L88:
-            goto Laa
-        L89:
-            r7.startScreenScrollRunnable(r8, r2, r4, r0)
-            goto Laa
-        L8d:
-            r7.startScreenScrollRunnable(r8, r1, r4, r0)
-            goto Laa
-        L91:
-            float r9 = -r9
-            r7.startScreenScrollRunnable(r8, r9, r3, r0)
-            goto Laa
-        L96:
-            r7.startScreenScrollRunnable(r8, r9, r3, r0)
-            goto Laa
-        L9a:
-            r7.startScreenScrollRunnable(r8, r2, r4, r0)
-            goto Laa
-        L9e:
-            r7.startScreenScrollRunnable(r8, r1, r4, r0)
-            goto Laa
-        La2:
-            float r9 = -r9
-            r7.startScreenScrollRunnable(r8, r9, r3, r0)
-            goto Laa
-        La7:
-            r7.startScreenScrollRunnable(r8, r9, r3, r0)
-        Laa:
-            return
-        Lab:
-            java.lang.String r7 = "ScreenController"
-            java.lang.String r8 = "No valid direction"
-            android.util.Log.w(r7, r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bixby2.controller.ScreenController.screenScroll(android.content.Context, java.lang.String):void");
+            str2 = string2;
+            string2 = string;
+        } else {
+            str2 = null;
+        }
+        if (!"up".equals(string2)) {
+            i = 1;
+        } else if ("down".equals(string2)) {
+            i = 2;
+        } else if ("left".equals(string2)) {
+            i = 5;
+        } else {
+            if (!"right".equals(string2)) {
+                Log.w(TAG, "No valid direction");
+                return;
+            }
+            i = 6;
+        }
+        if ("max".equals(str2)) {
+            i += 2;
+        }
+        float f2 = getDisplaySizeInPixels(context).y * 0.6f;
+        switch (i) {
+            case 1:
+                startScreenScrollRunnable(context, f2, 400, i);
+                break;
+            case 2:
+                startScreenScrollRunnable(context, -f2, 400, i);
+                break;
+            case 3:
+                startScreenScrollRunnable(context, 160000.0f, 1000, i);
+                break;
+            case 4:
+                startScreenScrollRunnable(context, -160000.0f, 1000, i);
+                break;
+            case 5:
+                startScreenScrollRunnable(context, f2, 400, i);
+                break;
+            case 6:
+                startScreenScrollRunnable(context, -f2, 400, i);
+                break;
+            case 7:
+                startScreenScrollRunnable(context, 160000.0f, 1000, i);
+                break;
+            case 8:
+                startScreenScrollRunnable(context, -160000.0f, 1000, i);
+                break;
+        }
     }
 
     public CommandActionResponse setAutoBrightnessCover(Context context, boolean z) {
@@ -599,14 +557,14 @@ public class ScreenController {
         try {
             int max = (((brightnessSeekBar.getMax() - brightnessSeekBar.getMin()) * i) / 100) + brightnessSeekBar.getMin();
             Log.d(TAG, "setBrightness - current = " + brightnessSeekBar.getProgress() + " new value = " + max + " level = " + i);
-            final int constrain = MathUtils.constrain(max, brightnessSeekBar.getMin(), brightnessSeekBar.getMax());
-            if (constrain == brightnessSeekBar.getProgress()) {
+            final int iConstrain = MathUtils.constrain(max, brightnessSeekBar.getMin(), brightnessSeekBar.getMax());
+            if (iConstrain == brightnessSeekBar.getProgress()) {
                 return new CommandActionResponse(2, "already_set");
             }
-            final IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
-            if (asInterface != null) {
+            final IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+            if (iStatusBarServiceAsInterface != null) {
                 try {
-                    asInterface.expandSettingsPanel((String) null);
+                    iStatusBarServiceAsInterface.expandSettingsPanel((String) null);
                 } catch (RemoteException e) {
                     Log.e(TAG, "expand panel RemoteException ", e);
                 }
@@ -615,11 +573,11 @@ public class ScreenController {
                 @Override // java.lang.Runnable
                 public void run() {
                     if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && ScreenController.this.isFolderClosed()) {
-                        brightnessSeekBar.setProgress(constrain);
+                        brightnessSeekBar.setProgress(iConstrain);
                         return;
                     }
                     BrightnessMirrorController brightnessMirrorController = ScreenController.this.mBrightnessMirrorController;
-                    int i2 = constrain;
+                    int i2 = iConstrain;
                     for (int i3 = 0; i3 < brightnessMirrorController.mBrightnessMirrorListeners.size(); i3++) {
                         BrightnessBar.this.mBrightnessSliderController.setValue(i2);
                     }
@@ -629,7 +587,7 @@ public class ScreenController {
                 @Override // java.lang.Runnable
                 public void run() {
                     try {
-                        IStatusBarService iStatusBarService = asInterface;
+                        IStatusBarService iStatusBarService = iStatusBarServiceAsInterface;
                         if (iStatusBarService != null) {
                             iStatusBarService.collapsePanels();
                         }

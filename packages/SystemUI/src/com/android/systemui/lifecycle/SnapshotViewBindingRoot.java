@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SnapshotViewBindingRoot {
     public final Choreographer choreographer;
@@ -24,9 +23,9 @@ public final class SnapshotViewBindingRoot {
         @Override // android.view.Choreographer.FrameCallback
         public final void doFrame(long j) {
             try {
-                SnapshotViewBindingRoot.access$bindInvalidatedBindings(SnapshotViewBindingRoot.this);
+                SnapshotViewBindingRoot.access$bindInvalidatedBindings(this.this$0);
             } finally {
-                SnapshotViewBindingRoot.this.isFrameScheduled = false;
+                this.this$0.isFrameScheduled = false;
             }
         }
     };
@@ -46,19 +45,19 @@ public final class SnapshotViewBindingRoot {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i) {
                     case 0:
                         final Function0 function0 = (Function0) obj;
-                        Looper myLooper = Looper.myLooper();
+                        Looper looperMyLooper = Looper.myLooper();
                         SnapshotViewBindingRoot snapshotViewBindingRoot = this.f$0;
-                        if (myLooper == snapshotViewBindingRoot.handler.getLooper()) {
+                        if (looperMyLooper == snapshotViewBindingRoot.handler.getLooper()) {
                             function0.invoke();
                         } else {
                             snapshotViewBindingRoot.handler.post(new Runnable() { // from class: com.android.systemui.lifecycle.SnapshotViewBindingKt$sam$java_lang_Runnable$0
                                 @Override // java.lang.Runnable
                                 public final /* synthetic */ void run() {
-                                    Function0.this.invoke();
+                                    function0.invoke();
                                 }
                             });
                         }
@@ -85,19 +84,19 @@ public final class SnapshotViewBindingRoot {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i2) {
                     case 0:
                         final Function0 function0 = (Function0) obj;
-                        Looper myLooper = Looper.myLooper();
+                        Looper looperMyLooper = Looper.myLooper();
                         SnapshotViewBindingRoot snapshotViewBindingRoot = this.f$0;
-                        if (myLooper == snapshotViewBindingRoot.handler.getLooper()) {
+                        if (looperMyLooper == snapshotViewBindingRoot.handler.getLooper()) {
                             function0.invoke();
                         } else {
                             snapshotViewBindingRoot.handler.post(new Runnable() { // from class: com.android.systemui.lifecycle.SnapshotViewBindingKt$sam$java_lang_Runnable$0
                                 @Override // java.lang.Runnable
                                 public final /* synthetic */ void run() {
-                                    Function0.this.invoke();
+                                    function0.invoke();
                                 }
                             });
                         }
@@ -116,14 +115,18 @@ public final class SnapshotViewBindingRoot {
         };
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0077  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final void access$bindInvalidatedBindings(SnapshotViewBindingRoot snapshotViewBindingRoot) {
         int i;
         SnapshotViewBindingRoot snapshotViewBindingRoot2 = snapshotViewBindingRoot;
         snapshotViewBindingRoot2.getClass();
         Snapshot.Companion.getClass();
-        MutableSnapshot takeMutableSnapshot = Snapshot.Companion.takeMutableSnapshot(null, null);
+        MutableSnapshot mutableSnapshotTakeMutableSnapshot = Snapshot.Companion.takeMutableSnapshot(null, null);
         try {
-            Snapshot makeCurrent = takeMutableSnapshot.makeCurrent();
+            Snapshot snapshotMakeCurrent = mutableSnapshotTakeMutableSnapshot.makeCurrent();
             try {
                 MutableScatterSet mutableScatterSet = snapshotViewBindingRoot2.invalidatedBindings;
                 Object[] objArr = mutableScatterSet.elements;
@@ -143,20 +146,20 @@ public final class SnapshotViewBindingRoot {
                                     SnapshotViewBinding snapshotViewBinding = (SnapshotViewBinding) objArr[i6];
                                     try {
                                         i = i3;
-                                    } catch (Throwable th) {
-                                        th = th;
-                                        i = i3;
-                                    }
-                                    try {
-                                        snapshotViewBindingRoot2.observer.observeReads(snapshotViewBinding, snapshotViewBindingRoot2.onBindingChanged, snapshotViewBinding.performBind);
+                                        try {
+                                            snapshotViewBindingRoot2.observer.observeReads(snapshotViewBinding, snapshotViewBindingRoot2.onBindingChanged, snapshotViewBinding.performBind);
+                                        } catch (Throwable th) {
+                                            th = th;
+                                            snapshotViewBinding.onError.mo781invoke(th);
+                                            mutableScatterSet.removeElementAt(i6);
+                                            j >>= i;
+                                            i5++;
+                                            snapshotViewBindingRoot2 = snapshotViewBindingRoot;
+                                            i3 = i;
+                                        }
                                     } catch (Throwable th2) {
                                         th = th2;
-                                        snapshotViewBinding.onError.mo779invoke(th);
-                                        mutableScatterSet.removeElementAt(i6);
-                                        j >>= i;
-                                        i5++;
-                                        snapshotViewBindingRoot2 = snapshotViewBindingRoot;
-                                        i3 = i;
+                                        i = i3;
                                     }
                                     mutableScatterSet.removeElementAt(i6);
                                 } else {
@@ -170,19 +173,19 @@ public final class SnapshotViewBindingRoot {
                             if (i4 != i3) {
                                 break;
                             }
+                            if (i2 == length) {
+                                break;
+                            }
+                            i2++;
+                            snapshotViewBindingRoot2 = snapshotViewBindingRoot;
                         }
-                        if (i2 == length) {
-                            break;
-                        }
-                        i2++;
-                        snapshotViewBindingRoot2 = snapshotViewBindingRoot;
                     }
                 }
                 Unit unit = Unit.INSTANCE;
-                Snapshot.restoreCurrent(makeCurrent);
-                takeMutableSnapshot.apply().check();
+                Snapshot.restoreCurrent(snapshotMakeCurrent);
+                mutableSnapshotTakeMutableSnapshot.apply().check();
             } catch (Throwable th3) {
-                Snapshot.restoreCurrent(makeCurrent);
+                Snapshot.restoreCurrent(snapshotMakeCurrent);
                 throw th3;
             }
         } finally {

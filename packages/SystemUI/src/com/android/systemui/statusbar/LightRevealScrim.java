@@ -12,27 +12,27 @@ import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.os.Trace;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import com.android.app.tracing.coroutines.TrackTracer;
 import com.android.keyguard.logging.ScrimLogger;
 import com.android.systemui.LsRune;
 import com.android.systemui.shade.TouchLogger;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda1;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda2;
 import com.android.systemui.statusbar.phone.SecLsScrimControlHelper;
 import com.android.systemui.util.ColorUtilKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LightRevealScrim extends View {
     public final Paint dimPaint;
     public final Paint gradientPaint;
     public float interpolatedRevealAmount;
     public boolean isScrimOpaque;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda1 isScrimOpaqueChangedListener;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda2 isScrimOpaqueChangedListener;
     public final String logString;
     public float revealAmount;
     public float revealDimGradientEndColorAlpha;
@@ -49,108 +49,64 @@ public final class LightRevealScrim extends View {
         this(context, null, null, null, 14, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0037, code lost:
-    
-        if (r9 == null) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x005e, code lost:
-    
-        if (r8 == null) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0046  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0069  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x008e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void leaveLog$default(com.android.systemui.statusbar.LightRevealScrim r6, java.lang.Integer r7, java.lang.Float r8, java.lang.Float r9, int r10) {
-        /*
-            r0 = r10 & 1
-            r1 = 0
-            if (r0 == 0) goto L6
-            r7 = r1
-        L6:
-            r0 = r10 & 2
-            if (r0 == 0) goto Lb
-            r8 = r1
-        Lb:
-            r10 = r10 & 4
-            if (r10 == 0) goto L10
-            r9 = r1
-        L10:
-            com.android.systemui.statusbar.LightRevealEffect r10 = r6.revealEffect
-            boolean r0 = r6.isScrimOpaque
-            java.lang.String r1 = ")"
-            java.lang.String r2 = " -> "
-            java.lang.String r3 = "("
-            if (r9 == 0) goto L39
-            float r9 = r9.floatValue()
-            float r4 = r6.revealAmount
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            r5.<init>(r3)
-            r5.append(r9)
-            r5.append(r2)
-            r5.append(r4)
-            r5.append(r1)
-            java.lang.String r9 = r5.toString()
-            if (r9 != 0) goto L3f
-        L39:
-            float r9 = r6.revealAmount
-            java.lang.Float r9 = java.lang.Float.valueOf(r9)
-        L3f:
-            if (r8 == 0) goto L60
-            float r8 = r8.floatValue()
-            float r4 = r6.getAlpha()
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            r5.<init>(r3)
-            r5.append(r8)
-            r5.append(r2)
-            r5.append(r4)
-            r5.append(r1)
-            java.lang.String r8 = r5.toString()
-            if (r8 != 0) goto L68
-        L60:
-            float r8 = r6.getAlpha()
-            java.lang.Float r8 = java.lang.Float.valueOf(r8)
-        L68:
-            if (r7 == 0) goto L78
-            int r7 = r7.intValue()
-            int r4 = r6.getVisibility()
-            java.lang.String r7 = androidx.compose.runtime.collection.MutableVectorKt$$ExternalSyntheticOutline0.m(r7, r4, r3, r2, r1)
-            if (r7 != 0) goto L80
-        L78:
-            int r6 = r6.getVisibility()
-            java.lang.Integer r7 = java.lang.Integer.valueOf(r6)
-        L80:
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r1 = "updateLightReveal revealEffect="
-            r6.<init>(r1)
-            r6.append(r10)
-            java.lang.String r10 = ", opaque="
-            r6.append(r10)
-            r6.append(r0)
-            java.lang.String r10 = " revealAmount="
-            r6.append(r10)
-            r6.append(r9)
-            java.lang.String r9 = " alpha="
-            r6.append(r9)
-            r6.append(r8)
-            java.lang.String r8 = " vis="
-            r6.append(r8)
-            r6.append(r7)
-            java.lang.String r6 = r6.toString()
-            java.lang.String r7 = "ScrimController"
-            android.util.Log.d(r7, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.LightRevealScrim.leaveLog$default(com.android.systemui.statusbar.LightRevealScrim, java.lang.Integer, java.lang.Float, java.lang.Float, int):void");
+    public static void leaveLog$default(LightRevealScrim lightRevealScrim, Integer num, Float f, Float f2, Integer num2, Float f3, Float f4, int i) {
+        Object objValueOf;
+        Object objValueOf2;
+        Object objValueOf3;
+        if ((i & 1) != 0) {
+            num = null;
+        }
+        if ((i & 2) != 0) {
+            f = null;
+        }
+        if ((i & 4) != 0) {
+            f2 = null;
+        }
+        if ((i & 8) != 0) {
+            num2 = null;
+        }
+        if ((i & 16) != 0) {
+            f3 = null;
+        }
+        if ((i & 32) != 0) {
+            f4 = null;
+        }
+        LightRevealEffect lightRevealEffect = lightRevealScrim.revealEffect;
+        boolean z = lightRevealScrim.isScrimOpaque;
+        if (f2 != null) {
+            objValueOf = "(" + f2.floatValue() + " -> " + f4 + ")";
+            if (objValueOf == null) {
+                objValueOf = Float.valueOf(lightRevealScrim.revealAmount);
+            }
+        }
+        if (f != null) {
+            objValueOf2 = "(" + f.floatValue() + " -> " + f3 + ")";
+            if (objValueOf2 == null) {
+                objValueOf2 = Float.valueOf(lightRevealScrim.getAlpha());
+            }
+        }
+        if (num != null) {
+            objValueOf3 = "(" + num.intValue() + " -> " + num2 + ")";
+            if (objValueOf3 == null) {
+                objValueOf3 = Integer.valueOf(lightRevealScrim.getVisibility());
+            }
+        }
+        Log.d("ScrimController", "updateLightReveal revealEffect=" + lightRevealEffect + ", opaque=" + z + " revealAmount=" + objValueOf + " alpha=" + objValueOf2 + " vis=" + objValueOf3);
     }
 
     @Override // android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         TouchLogger.Companion companion = TouchLogger.Companion;
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "LightRevealScrim", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "LightRevealScrim", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // android.view.View
@@ -187,20 +143,28 @@ public final class LightRevealScrim extends View {
         getMeasuredHeight();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000c  */
     @Override // android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setAlpha(float f) {
+        LightRevealScrim lightRevealScrim;
         if (LsRune.AOD_LIGHT_REVEAL) {
             float alpha = getAlpha();
-            if (alpha != f) {
-                leaveLog$default(this, null, Float.valueOf(alpha), null, 5);
+            if (alpha == f) {
+                lightRevealScrim = this;
+            } else {
+                lightRevealScrim = this;
+                leaveLog$default(lightRevealScrim, null, Float.valueOf(alpha), null, null, Float.valueOf(f), null, 45);
             }
         }
         super.setAlpha(f);
-        ScrimLogger scrimLogger = this.scrimLogger;
+        ScrimLogger scrimLogger = lightRevealScrim.scrimLogger;
         if (scrimLogger != null) {
-            scrimLogger.d("LightRevealScrim", "alpha", f + " on " + this.logString);
+            scrimLogger.d("LightRevealScrim", "alpha", f + " on " + lightRevealScrim.logString);
         }
-        updateScrimOpaque();
+        lightRevealScrim.updateScrimOpaque();
     }
 
     public final void setPaintColorFilter() {
@@ -211,28 +175,32 @@ public final class LightRevealScrim extends View {
     }
 
     public final void setRevealAmount(float f) {
+        LightRevealScrim lightRevealScrim;
         ScrimLogger scrimLogger;
         float f2 = this.revealAmount;
         if (f2 == f) {
             return;
         }
         if (LsRune.AOD_LIGHT_REVEAL && (SecLsScrimControlHelper.DEBUG || f == 0.0f || f == 1.0f || f2 == 0.0f || f2 == 1.0f)) {
-            leaveLog$default(this, null, null, Float.valueOf(f2), 3);
+            lightRevealScrim = this;
+            leaveLog$default(lightRevealScrim, null, null, Float.valueOf(f2), null, null, Float.valueOf(f), 27);
+        } else {
+            lightRevealScrim = this;
         }
-        this.revealAmount = f;
-        if ((f <= 0.0f || f >= 1.0f) && (scrimLogger = this.scrimLogger) != null) {
-            scrimLogger.d("LightRevealScrim", "revealAmount", f + " on " + this.logString);
+        lightRevealScrim.revealAmount = f;
+        if ((f <= 0.0f || f >= 1.0f) && (scrimLogger = lightRevealScrim.scrimLogger) != null) {
+            scrimLogger.d("LightRevealScrim", "revealAmount", f + " on " + lightRevealScrim.logString);
         }
-        this.revealEffect.setRevealAmountOnScrim(f, this);
-        updateScrimOpaque();
+        lightRevealScrim.revealEffect.setRevealAmountOnScrim(f, lightRevealScrim);
+        lightRevealScrim.updateScrimOpaque();
         TrackTracer.Companion companion = TrackTracer.Companion;
-        int i = (int) (this.revealAmount * 100);
+        int i = (int) (lightRevealScrim.revealAmount * 100);
         if (Trace.isEnabled()) {
-            String str = "light_reveal_amount " + this.logString;
+            String str = "light_reveal_amount " + lightRevealScrim.logString;
             companion.getClass();
             TrackTracer.Companion.instantForGroup(i, "scrim", str);
         }
-        invalidate();
+        lightRevealScrim.invalidate();
     }
 
     public final void setRevealEffect(LightRevealEffect lightRevealEffect) {
@@ -268,25 +236,29 @@ public final class LightRevealScrim extends View {
 
     @Override // android.view.View
     public final void setVisibility(int i) {
+        LightRevealScrim lightRevealScrim;
         int visibility;
-        if (LsRune.AOD_LIGHT_REVEAL && (visibility = getVisibility()) != i) {
-            leaveLog$default(this, Integer.valueOf(visibility), null, null, 6);
+        if (!LsRune.AOD_LIGHT_REVEAL || (visibility = getVisibility()) == i) {
+            lightRevealScrim = this;
+        } else {
+            lightRevealScrim = this;
+            leaveLog$default(lightRevealScrim, Integer.valueOf(visibility), null, null, Integer.valueOf(i), null, null, 54);
         }
         super.setVisibility(i);
-        ScrimLogger scrimLogger = this.scrimLogger;
+        ScrimLogger scrimLogger = lightRevealScrim.scrimLogger;
         if (scrimLogger != null) {
-            scrimLogger.d("LightRevealScrim", "visibility", i + " on " + this.logString);
+            scrimLogger.d("LightRevealScrim", "visibility", i + " on " + lightRevealScrim.logString);
         }
-        updateScrimOpaque();
+        lightRevealScrim.updateScrimOpaque();
     }
 
     public final void updateScrimOpaque() {
         boolean z = this.revealAmount == 0.0f && getAlpha() == 1.0f && getVisibility() == 0;
         if (this.isScrimOpaque != z) {
             this.isScrimOpaque = z;
-            CentralSurfacesImpl$$ExternalSyntheticLambda1 centralSurfacesImpl$$ExternalSyntheticLambda1 = this.isScrimOpaqueChangedListener;
-            if (centralSurfacesImpl$$ExternalSyntheticLambda1 != null) {
-                centralSurfacesImpl$$ExternalSyntheticLambda1.accept(Boolean.valueOf(z));
+            CentralSurfacesImpl$$ExternalSyntheticLambda2 centralSurfacesImpl$$ExternalSyntheticLambda2 = this.isScrimOpaqueChangedListener;
+            if (centralSurfacesImpl$$ExternalSyntheticLambda2 != null) {
+                centralSurfacesImpl$$ExternalSyntheticLambda2.accept(Boolean.valueOf(z));
             }
             ScrimLogger scrimLogger = this.scrimLogger;
             if (scrimLogger != null) {

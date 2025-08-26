@@ -10,12 +10,10 @@ import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
-import com.android.systemui.aiagent.AiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.samsung.android.sesl.transparentvideo.VideoRenderModel;
 import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
+import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer$$ExternalSyntheticLambda2;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
@@ -26,7 +24,6 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TransparentVideoView extends TextureView {
     public static final Configs DefaultConfig;
@@ -36,7 +33,6 @@ public class TransparentVideoView extends TextureView {
     public Object mediaSource;
     public VideoRenderModel model;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -70,79 +66,44 @@ public class TransparentVideoView extends TextureView {
         return false;
     }
 
-    public final void load(AssetFileDescriptor assetFileDescriptor, Configs configs, AiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1 aiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1, Function1 function1) {
-        StandaloneCoroutine standaloneCoroutine;
+    public final void load(AssetFileDescriptor assetFileDescriptor, Configs configs, Runnable runnable, Function1 function1) {
+        StandaloneCoroutine mediaInternal;
         if (configs == null) {
             configs = DefaultConfig;
         }
         this.mediaSource = assetFileDescriptor;
         this.configs = configs;
-        Log.i("TransparentVideoView", "Load requested. source=" + assetFileDescriptor + ", onLoaded=" + aiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1 + ", onCompletion=null, config=" + configs);
+        Log.i("TransparentVideoView", "Load requested. source=" + assetFileDescriptor + ", onLoaded=" + runnable + ", onCompletion=null, config=" + configs);
         VideoRenderModel videoRenderModel = this.model;
         if (videoRenderModel != null) {
-            Log.i("VideoRenderModel", "Stop requested. (state=" + videoRenderModel.state + ")");
-            if (videoRenderModel.state == VideoRenderModel.State.RUNNING) {
-                BasicMediaPlayer basicMediaPlayer = videoRenderModel.mediaPlayer;
-                if (basicMediaPlayer != null) {
-                    basicMediaPlayer.pause();
-                }
-                videoRenderModel.state = VideoRenderModel.State.READY;
-            }
+            videoRenderModel.stop();
             videoRenderModel.release();
         }
-        Context context = getContext();
-        float f = this.configs.reinforcedEdgeAmount;
-        ContextScope contextScope = this.coroutineScope;
-        context.getClass();
-        final VideoRenderModel videoRenderModel2 = new VideoRenderModel(context, this, f, aiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1, null, contextScope, function1, null, 128, null);
+        VideoRenderModel videoRenderModel2 = new VideoRenderModel(getContext(), this, this.configs.reinforcedEdgeAmount, runnable, null, this.coroutineScope, function1, null, 128, null);
         this.model = videoRenderModel2;
         Object obj = this.mediaSource;
         if (obj instanceof AssetFileDescriptor) {
-            final AssetFileDescriptor assetFileDescriptor2 = (AssetFileDescriptor) obj;
-            standaloneCoroutine = videoRenderModel2.setMediaInternal(new VideoRenderModel$setMedia$3(assetFileDescriptor2, null), new Function0() { // from class: com.samsung.android.sesl.transparentvideo.VideoRenderModel$setMedia$4
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                {
-                    super(0);
-                }
-
-                @Override // kotlin.jvm.functions.Function0
-                public final Object invoke() {
-                    VideoRenderModel.this.getClass();
-                    Log.i("VideoRenderModel", "Media set. assetFd=" + assetFileDescriptor2);
-                    return Unit.INSTANCE;
-                }
-            });
+            AssetFileDescriptor assetFileDescriptor2 = (AssetFileDescriptor) obj;
+            mediaInternal = videoRenderModel2.setMediaInternal(new VideoRenderModel$setMedia$3(assetFileDescriptor2, null), new VideoRenderModel$$ExternalSyntheticLambda2(videoRenderModel2, assetFileDescriptor2));
         } else if (obj instanceof Uri) {
-            final Uri uri = (Uri) obj;
-            standaloneCoroutine = videoRenderModel2.setMediaInternal(new VideoRenderModel$setMedia$1(videoRenderModel2, uri, null), new Function0() { // from class: com.samsung.android.sesl.transparentvideo.VideoRenderModel$setMedia$2
-                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                {
-                    super(0);
-                }
-
-                @Override // kotlin.jvm.functions.Function0
-                public final Object invoke() {
-                    VideoRenderModel.this.getClass();
-                    Log.i("VideoRenderModel", "Media set. uri=" + uri);
-                    return Unit.INSTANCE;
-                }
-            });
+            Uri uri = (Uri) obj;
+            mediaInternal = videoRenderModel2.setMediaInternal(new VideoRenderModel$setMedia$1(videoRenderModel2, uri, null), new VideoRenderModel$$ExternalSyntheticLambda2(videoRenderModel2, uri));
         } else {
             Log.e("TransparentVideoView", "Invalid media source: " + obj);
-            standaloneCoroutine = null;
+            mediaInternal = null;
         }
-        StandaloneCoroutine standaloneCoroutine2 = this.loadingJob;
-        if (standaloneCoroutine2 != null) {
-            standaloneCoroutine2.cancel(null);
+        StandaloneCoroutine standaloneCoroutine = this.loadingJob;
+        if (standaloneCoroutine != null) {
+            standaloneCoroutine.cancel(null);
         }
-        this.loadingJob = standaloneCoroutine;
+        this.loadingJob = mediaInternal;
         if (this.mediaSource == null) {
             return;
         }
         boolean z = this.configs.isLooping;
-        BasicMediaPlayer basicMediaPlayer2 = videoRenderModel2.mediaPlayer;
-        if (basicMediaPlayer2 != null) {
-            basicMediaPlayer2.mediaPlayer.setLooping(z);
+        BasicMediaPlayer basicMediaPlayer = videoRenderModel2.mediaPlayer;
+        if (basicMediaPlayer != null) {
+            basicMediaPlayer.mediaPlayer.setLooping(z);
         }
         AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Looping set to ", "VideoRenderModel", z);
     }
@@ -193,11 +154,19 @@ public class TransparentVideoView extends TextureView {
             }
             BasicMediaPlayer basicMediaPlayer = videoRenderModel.mediaPlayer;
             if (basicMediaPlayer != null) {
-                basicMediaPlayer.pause();
+                basicMediaPlayer.runOnPrepared(new BasicMediaPlayer$$ExternalSyntheticLambda2(basicMediaPlayer, 7));
             }
             VideoRenderModel.State state2 = VideoRenderModel.State.PAUSED;
             videoRenderModel.state = state2;
             Log.i("VideoRenderModel", "Paused. (state=" + state2 + ")");
+        }
+    }
+
+    public final void play() {
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Play requested. isRunning=", "TransparentVideoView", isRunning());
+        VideoRenderModel videoRenderModel = this.model;
+        if (videoRenderModel != null) {
+            videoRenderModel.play();
         }
     }
 
@@ -216,7 +185,14 @@ public class TransparentVideoView extends TextureView {
         this.mediaSource = null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final void stop() {
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Stop requested. isRunning=", "TransparentVideoView", isRunning());
+        VideoRenderModel videoRenderModel = this.model;
+        if (videoRenderModel != null) {
+            videoRenderModel.stop();
+        }
+    }
+
     public final class Configs {
         public final boolean isLooping;
         public final float reinforcedEdgeAmount;
@@ -240,9 +216,9 @@ public class TransparentVideoView extends TextureView {
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.reinforcedEdgeAmount) * 31, 31, this.isLooping);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.reinforcedEdgeAmount) * 31, 31, this.isLooping);
             Bitmap bitmap = this.thumbnail;
-            return m + (bitmap == null ? 0 : bitmap.hashCode());
+            return iM + (bitmap == null ? 0 : bitmap.hashCode());
         }
 
         public final String toString() {

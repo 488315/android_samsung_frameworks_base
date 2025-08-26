@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentSender;
-import android.credentials.CredentialManager;
 import android.credentials.IClearCredentialStateCallback;
 import android.credentials.ICreateCredentialCallback;
 import android.credentials.IGetCandidateCredentialsCallback;
@@ -51,6 +50,7 @@ public final class CredentialManager {
         this.mService = iCredentialManager;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void getCandidateCredentials(GetCredentialRequest getCredentialRequest, String str, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<GetCandidateCredentialsResponse, GetCandidateCredentialsException> outcomeReceiver, IBinder iBinder) {
         Objects.requireNonNull(getCredentialRequest, "request must not be null");
         Objects.requireNonNull(str, "callingPackage must not be null");
@@ -60,18 +60,19 @@ public final class CredentialManager {
             Log.w(TAG, "getCandidateCredentials already canceled");
             return;
         }
-        ICancellationSignal iCancellationSignal = null;
+        ICancellationSignal candidateCredentials = null;
         try {
-            iCancellationSignal = this.mService.getCandidateCredentials(getCredentialRequest, new GetCandidateCredentialsTransport(executor, outcomeReceiver), iBinder, str);
+            candidateCredentials = this.mService.getCandidateCredentials(getCredentialRequest, new GetCandidateCredentialsTransport(executor, outcomeReceiver), iBinder, str);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (cancellationSignal == null || iCancellationSignal == null) {
+        if (cancellationSignal == null || candidateCredentials == null) {
             return;
         }
-        cancellationSignal.setRemote(iCancellationSignal);
+        cancellationSignal.setRemote(candidateCredentials);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void getCredential(Context context, GetCredentialRequest getCredentialRequest, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<GetCredentialResponse, GetCredentialException> outcomeReceiver) {
         Objects.requireNonNull(getCredentialRequest, "request must not be null");
         Objects.requireNonNull(context, "context must not be null");
@@ -81,16 +82,16 @@ public final class CredentialManager {
             Log.w(TAG, "getCredential already canceled");
             return;
         }
-        ICancellationSignal iCancellationSignal = null;
+        ICancellationSignal iCancellationSignalExecuteGetCredential = null;
         try {
-            iCancellationSignal = this.mService.executeGetCredential(getCredentialRequest, new GetCredentialTransport(context, executor, outcomeReceiver), this.mContext.getOpPackageName());
+            iCancellationSignalExecuteGetCredential = this.mService.executeGetCredential(getCredentialRequest, new GetCredentialTransport(context, executor, outcomeReceiver), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (cancellationSignal == null || iCancellationSignal == null) {
+        if (cancellationSignal == null || iCancellationSignalExecuteGetCredential == null) {
             return;
         }
-        cancellationSignal.setRemote(iCancellationSignal);
+        cancellationSignal.setRemote(iCancellationSignalExecuteGetCredential);
     }
 
     public void getCredential(Context context, PrepareGetCredentialResponse.PendingGetCredentialHandle pendingGetCredentialHandle, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<GetCredentialResponse, GetCredentialException> outcomeReceiver) {
@@ -105,6 +106,7 @@ public final class CredentialManager {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void prepareGetCredential(GetCredentialRequest getCredentialRequest, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<PrepareGetCredentialResponse, GetCredentialException> outcomeReceiver) {
         Objects.requireNonNull(getCredentialRequest, "request must not be null");
         Objects.requireNonNull(executor, "executor must not be null");
@@ -113,20 +115,21 @@ public final class CredentialManager {
             Log.w(TAG, "prepareGetCredential already canceled");
             return;
         }
-        ICancellationSignal iCancellationSignal = null;
-        byte b = 0;
+        ICancellationSignal iCancellationSignalExecutePrepareGetCredential = null;
+        Object[] objArr = 0;
         GetCredentialTransportPendingUseCase getCredentialTransportPendingUseCase = new GetCredentialTransportPendingUseCase();
         try {
-            iCancellationSignal = this.mService.executePrepareGetCredential(getCredentialRequest, new PrepareGetCredentialTransport(executor, outcomeReceiver, getCredentialTransportPendingUseCase), getCredentialTransportPendingUseCase, this.mContext.getOpPackageName());
+            iCancellationSignalExecutePrepareGetCredential = this.mService.executePrepareGetCredential(getCredentialRequest, new PrepareGetCredentialTransport(executor, outcomeReceiver, getCredentialTransportPendingUseCase), getCredentialTransportPendingUseCase, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (cancellationSignal == null || iCancellationSignal == null) {
+        if (cancellationSignal == null || iCancellationSignalExecutePrepareGetCredential == null) {
             return;
         }
-        cancellationSignal.setRemote(iCancellationSignal);
+        cancellationSignal.setRemote(iCancellationSignalExecutePrepareGetCredential);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void createCredential(Context context, CreateCredentialRequest createCredentialRequest, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<CreateCredentialResponse, CreateCredentialException> outcomeReceiver) {
         Objects.requireNonNull(createCredentialRequest, "request must not be null");
         Objects.requireNonNull(context, "context must not be null");
@@ -136,18 +139,19 @@ public final class CredentialManager {
             Log.w(TAG, "createCredential already canceled");
             return;
         }
-        ICancellationSignal iCancellationSignal = null;
+        ICancellationSignal iCancellationSignalExecuteCreateCredential = null;
         try {
-            iCancellationSignal = this.mService.executeCreateCredential(createCredentialRequest, new CreateCredentialTransport(context, executor, outcomeReceiver), this.mContext.getOpPackageName());
+            iCancellationSignalExecuteCreateCredential = this.mService.executeCreateCredential(createCredentialRequest, new CreateCredentialTransport(context, executor, outcomeReceiver), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (cancellationSignal == null || iCancellationSignal == null) {
+        if (cancellationSignal == null || iCancellationSignalExecuteCreateCredential == null) {
             return;
         }
-        cancellationSignal.setRemote(iCancellationSignal);
+        cancellationSignal.setRemote(iCancellationSignalExecuteCreateCredential);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void clearCredentialState(ClearCredentialStateRequest clearCredentialStateRequest, CancellationSignal cancellationSignal, Executor executor, OutcomeReceiver<Void, ClearCredentialStateException> outcomeReceiver) {
         Objects.requireNonNull(clearCredentialStateRequest, "request must not be null");
         Objects.requireNonNull(executor, "executor must not be null");
@@ -156,16 +160,16 @@ public final class CredentialManager {
             Log.w(TAG, "clearCredentialState already canceled");
             return;
         }
-        ICancellationSignal iCancellationSignal = null;
+        ICancellationSignal iCancellationSignalClearCredentialState = null;
         try {
-            iCancellationSignal = this.mService.clearCredentialState(clearCredentialStateRequest, new ClearCredentialStateTransport(executor, outcomeReceiver), this.mContext.getOpPackageName());
+            iCancellationSignalClearCredentialState = this.mService.clearCredentialState(clearCredentialStateRequest, new ClearCredentialStateTransport(executor, outcomeReceiver), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (cancellationSignal == null || iCancellationSignal == null) {
+        if (cancellationSignal == null || iCancellationSignalClearCredentialState == null) {
             return;
         }
-        cancellationSignal.setRemote(iCancellationSignal);
+        cancellationSignal.setRemote(iCancellationSignalClearCredentialState);
     }
 
     public void setEnabledProviders(List<String> list, List<String> list2, int i, Executor executor, OutcomeReceiver<Void, SetEnabledProvidersException> outcomeReceiver) {
@@ -266,16 +270,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IPrepareGetCredentialCallback
         public void onResponse(final PrepareGetCredentialResponseInternal prepareGetCredentialResponseInternal) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$PrepareGetCredentialTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.PrepareGetCredentialTransport.this.lambda$onResponse$0(prepareGetCredentialResponseInternal);
+                        this.f$0.lambda$onResponse$0(prepareGetCredentialResponseInternal);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -286,16 +290,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IPrepareGetCredentialCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$PrepareGetCredentialTransport$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.PrepareGetCredentialTransport.this.lambda$onError$1(str, str2);
+                        this.f$0.lambda$onError$1(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -333,12 +337,12 @@ public final class CredentialManager {
         @Override // android.credentials.IGetCredentialCallback
         public void onResponse(GetCredentialResponse getCredentialResponse) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mCallback.onResponse(getCredentialResponse);
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.d(CredentialManager.TAG, "Unexpected onResponse call before the show invocation");
@@ -347,12 +351,12 @@ public final class CredentialManager {
         @Override // android.credentials.IGetCredentialCallback
         public void onError(String str, String str2) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mCallback.onError(str, str2);
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.d(CredentialManager.TAG, "Unexpected onError call before the show invocation");
@@ -371,16 +375,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IGetCandidateCredentialsCallback
         public void onResponse(final GetCandidateCredentialsResponse getCandidateCredentialsResponse) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$GetCandidateCredentialsTransport$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.GetCandidateCredentialsTransport.this.lambda$onResponse$0(getCandidateCredentialsResponse);
+                        this.f$0.lambda$onResponse$0(getCandidateCredentialsResponse);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -391,16 +395,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IGetCandidateCredentialsCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$GetCandidateCredentialsTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.GetCandidateCredentialsTransport.this.lambda$onError$1(str, str2);
+                        this.f$0.lambda$onError$1(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -428,16 +432,16 @@ public final class CredentialManager {
                 this.mContext.startIntentSender(pendingIntent.getIntentSender(), null, 0, 0, 0, CredentialManager.OPTIONS_SENDER_BAL_OPTIN);
             } catch (IntentSender.SendIntentException e) {
                 Log.e(CredentialManager.TAG, "startIntentSender() failed for intent:" + pendingIntent.getIntentSender(), e);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CredentialManager.GetCredentialTransport.this.lambda$onPendingIntent$0();
+                            this.f$0.lambda$onPendingIntent$0();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -449,16 +453,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IGetCredentialCallback
         public void onResponse(final GetCredentialResponse getCredentialResponse) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.GetCredentialTransport.this.lambda$onResponse$1(getCredentialResponse);
+                        this.f$0.lambda$onResponse$1(getCredentialResponse);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -469,16 +473,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.IGetCredentialCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$GetCredentialTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.GetCredentialTransport.this.lambda$onError$2(str, str2);
+                        this.f$0.lambda$onError$2(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -506,16 +510,16 @@ public final class CredentialManager {
                 this.mContext.startIntentSender(pendingIntent.getIntentSender(), null, 0, 0, 0, CredentialManager.OPTIONS_SENDER_BAL_OPTIN);
             } catch (IntentSender.SendIntentException e) {
                 Log.e(CredentialManager.TAG, "startIntentSender() failed for intent:" + pendingIntent.getIntentSender(), e);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$CreateCredentialTransport$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CredentialManager.CreateCredentialTransport.this.lambda$onPendingIntent$0();
+                            this.f$0.lambda$onPendingIntent$0();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -527,16 +531,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.ICreateCredentialCallback
         public void onResponse(final CreateCredentialResponse createCredentialResponse) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$CreateCredentialTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.CreateCredentialTransport.this.lambda$onResponse$1(createCredentialResponse);
+                        this.f$0.lambda$onResponse$1(createCredentialResponse);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -547,16 +551,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.ICreateCredentialCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$CreateCredentialTransport$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.CreateCredentialTransport.this.lambda$onError$2(str, str2);
+                        this.f$0.lambda$onError$2(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -578,26 +582,26 @@ public final class CredentialManager {
 
         @Override // android.credentials.IClearCredentialStateCallback
         public void onSuccess() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mCallback.onResult(null);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.credentials.IClearCredentialStateCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$ClearCredentialStateTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.ClearCredentialStateTransport.this.lambda$onError$0(str, str2);
+                        this.f$0.lambda$onError$0(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -618,16 +622,16 @@ public final class CredentialManager {
         }
 
         public void onResponse(final Void r5) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$SetEnabledProvidersTransport$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.SetEnabledProvidersTransport.this.lambda$onResponse$0(r5);
+                        this.f$0.lambda$onResponse$0(r5);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -638,16 +642,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.ISetEnabledProvidersCallback
         public void onResponse() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$SetEnabledProvidersTransport$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.SetEnabledProvidersTransport.this.lambda$onResponse$1();
+                        this.f$0.lambda$onResponse$1();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -658,16 +662,16 @@ public final class CredentialManager {
 
         @Override // android.credentials.ISetEnabledProvidersCallback
         public void onError(final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.credentials.CredentialManager$SetEnabledProvidersTransport$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CredentialManager.SetEnabledProvidersTransport.this.lambda$onError$2(str, str2);
+                        this.f$0.lambda$onError$2(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

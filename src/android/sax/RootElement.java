@@ -95,9 +95,9 @@ public class RootElement extends Element {
                 }
                 StringBuilder sb = this.bodyBuilder;
                 if (sb != null) {
-                    String sb2 = sb.toString();
+                    String string = sb.toString();
                     this.bodyBuilder = null;
-                    element.endTextElementListener.end(sb2);
+                    element.endTextElementListener.end(string);
                 }
                 this.current = element.parent;
             }

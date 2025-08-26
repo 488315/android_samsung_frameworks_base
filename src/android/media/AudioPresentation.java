@@ -3,6 +3,7 @@ package android.media;
 import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -94,11 +95,11 @@ public final class AudioPresentation implements Parcelable {
     }
 
     public Map<Locale, String> getLabels() {
-        HashMap hashMap = new HashMap(this.mLabels.size());
+        HashMap map = new HashMap(this.mLabels.size());
         for (Map.Entry<ULocale, String> entry : this.mLabels.entrySet()) {
-            hashMap.put(entry.getKey().toLocale(), entry.getValue());
+            map.put(entry.getKey().toLocale(), entry.getValue());
         }
-        return hashMap;
+        return map;
     }
 
     private Map<ULocale, String> getULabels() {
@@ -222,7 +223,7 @@ public final class AudioPresentation implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(getPresentationId());
         parcel.writeInt(getProgramId());
         parcel.writeSerializable(getULocale());

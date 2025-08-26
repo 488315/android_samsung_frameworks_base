@@ -9,14 +9,12 @@ import android.util.Log;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ControlPanelService extends Service {
     public boolean mIsNightMode;
     public final int mType = -1;
     public final ControlPanelServiceBinder mBinder = new ControlPanelServiceBinder(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ControlPanelServiceBinder extends Binder {
         public ControlPanelServiceBinder(ControlPanelService controlPanelService) {
         }
@@ -30,11 +28,11 @@ public class ControlPanelService extends Service {
     @Override // android.app.Service, android.content.ComponentCallbacks
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        boolean isNightModeActive = configuration.isNightModeActive();
+        boolean zIsNightModeActive = configuration.isNightModeActive();
         if (this.mType != 2) {
-            this.mIsNightMode = isNightModeActive;
+            this.mIsNightMode = zIsNightModeActive;
         } else {
-            if (this.mIsNightMode == isNightModeActive) {
+            if (this.mIsNightMode == zIsNightModeActive) {
                 throw null;
             }
             throw null;

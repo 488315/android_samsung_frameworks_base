@@ -9,9 +9,10 @@ import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
 import com.android.systemui.R;
 import com.android.systemui.bixby2.actionresult.ActionResults;
+import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScreenRecordDrawable extends DrawableWrapper {
     public Drawable mFillDrawable;
@@ -49,9 +50,9 @@ public class ScreenRecordDrawable extends DrawableWrapper {
             this.mIconDrawable.setBounds(new Rect(bounds.centerX() - this.mIconRadius, bounds.centerY() - this.mIconRadius, bounds.centerX() + this.mIconRadius, bounds.centerY() + this.mIconRadius));
             this.mIconDrawable.draw(canvas);
         } else {
-            String valueOf = String.valueOf(i);
-            this.mPaint.getTextBounds(valueOf, 0, valueOf.length(), new Rect());
-            canvas.drawText(valueOf, bounds.centerX(), (r2.height() / 2) + bounds.centerY(), this.mPaint);
+            String strValueOf = String.valueOf(i);
+            this.mPaint.getTextBounds(strValueOf, 0, strValueOf.length(), new Rect());
+            canvas.drawText(strValueOf, bounds.centerX(), (r2.height() / 2) + bounds.centerY(), this.mPaint);
         }
     }
 
@@ -75,7 +76,7 @@ public class ScreenRecordDrawable extends DrawableWrapper {
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) {
+    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         setDrawable(resources.getDrawable(R.drawable.ic_screen_record_background, theme).mutate());
         this.mFillDrawable = resources.getDrawable(R.drawable.ic_screen_record_background, theme).mutate();

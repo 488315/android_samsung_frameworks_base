@@ -131,11 +131,11 @@ public class CharacterSets {
         NAME_TO_MIBENUM_MAP = new HashMap<>();
         int length = iArr.length - 1;
         for (int i = 0; i <= length; i++) {
-            HashMap<Integer, String> hashMap = MIBENUM_TO_NAME_MAP;
+            HashMap<Integer, String> map = MIBENUM_TO_NAME_MAP;
             int[] iArr2 = MIBENUM_NUMBERS;
-            Integer valueOf = Integer.valueOf(iArr2[i]);
+            Integer numValueOf = Integer.valueOf(iArr2[i]);
             String[] strArr = MIME_NAMES;
-            hashMap.put(valueOf, strArr[i]);
+            map.put(numValueOf, strArr[i]);
             NAME_TO_MIBENUM_MAP.put(strArr[i], Integer.valueOf(iArr2[i]));
         }
     }

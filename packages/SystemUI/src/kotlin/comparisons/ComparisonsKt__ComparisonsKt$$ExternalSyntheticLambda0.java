@@ -3,7 +3,6 @@ package kotlin.comparisons;
 import java.util.Comparator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class ComparisonsKt__ComparisonsKt$$ExternalSyntheticLambda0 implements Comparator {
     public final /* synthetic */ int $r8$classId;
@@ -21,9 +20,9 @@ public final /* synthetic */ class ComparisonsKt__ComparisonsKt$$ExternalSynthet
         switch (i) {
             case 0:
                 for (Function1 function1 : (Function1[]) obj3) {
-                    int compareValues = ComparisonsKt__ComparisonsKt.compareValues((Comparable) function1.mo779invoke(obj), (Comparable) function1.mo779invoke(obj2));
-                    if (compareValues != 0) {
-                        return compareValues;
+                    int iCompareValues = ComparisonsKt__ComparisonsKt.compareValues((Comparable) function1.mo781invoke(obj), (Comparable) function1.mo781invoke(obj2));
+                    if (iCompareValues != 0) {
+                        return iCompareValues;
                     }
                 }
                 return 0;

@@ -12,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherDialogCoordinator$startHandlingDialogDismissRequests$1 extends SuspendLambda implements Function2 {
     int label;
@@ -45,7 +44,7 @@ final class UserSwitcherDialogCoordinator$startHandlingDialogDismissRequests$1 e
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.user.ui.dialog.UserSwitcherDialogCoordinator$startHandlingDialogDismissRequests$1.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    UserSwitcherDialogCoordinator userSwitcherDialogCoordinator2 = UserSwitcherDialogCoordinator.this;
+                    UserSwitcherDialogCoordinator userSwitcherDialogCoordinator2 = userSwitcherDialogCoordinator;
                     Dialog dialog = userSwitcherDialogCoordinator2.currentDialog;
                     if (dialog != null && dialog.isShowing()) {
                         dialog.cancel();

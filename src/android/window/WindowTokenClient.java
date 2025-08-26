@@ -50,7 +50,7 @@ public class WindowTokenClient extends Binder {
         this.mHandler.post(PooledLambda.obtainRunnable(new TriConsumer() { // from class: android.window.WindowTokenClient$$ExternalSyntheticLambda0
             @Override // com.android.internal.util.function.TriConsumer
             public final void accept(Object obj, Object obj2, Object obj3) {
-                WindowTokenClient.this.onConfigurationChanged((Configuration) obj, ((Integer) obj2).intValue(), ((Boolean) obj3).booleanValue());
+                this.f$0.onConfigurationChanged((Configuration) obj, ((Integer) obj2).intValue(), ((Boolean) obj3).booleanValue());
             }
         }, configuration, Integer.valueOf(i), true).recycleOnUse());
     }
@@ -75,41 +75,41 @@ public class WindowTokenClient extends Binder {
 
     /* JADX WARN: Multi-variable type inference failed */
     public void onConfigurationChangedInner(Context context, Configuration configuration, int i, boolean z) {
-        boolean isDifferentDisplay;
-        boolean shouldUpdateResources;
-        int diffPublicOnly;
+        boolean zIsDifferentDisplay;
+        boolean zShouldUpdateResources;
+        int iDiffPublicOnly;
         Configuration configuration2;
         CompatibilityInfo.applyOverrideIfNeeded(configuration);
         synchronized (this.mConfiguration) {
-            isDifferentDisplay = ConfigurationHelper.isDifferentDisplay(context.getDisplayId(), i);
-            shouldUpdateResources = ConfigurationHelper.shouldUpdateResources(this, this.mConfiguration, configuration, configuration, isDifferentDisplay, null);
-            diffPublicOnly = this.mConfiguration.diffPublicOnly(configuration);
+            zIsDifferentDisplay = ConfigurationHelper.isDifferentDisplay(context.getDisplayId(), i);
+            zShouldUpdateResources = ConfigurationHelper.shouldUpdateResources(this, this.mConfiguration, configuration, configuration, zIsDifferentDisplay, null);
+            iDiffPublicOnly = this.mConfiguration.diffPublicOnly(configuration);
             configuration2 = this.mShouldDumpConfigForIme ? new Configuration(this.mConfiguration) : null;
-            if (shouldUpdateResources) {
+            if (zShouldUpdateResources) {
                 this.mConfiguration.setTo(configuration);
             }
         }
-        if (!shouldUpdateResources && this.mShouldDumpConfigForIme) {
+        if (!zShouldUpdateResources && this.mShouldDumpConfigForIme) {
             Log.d(TAG, "Configuration not dispatch to IME because configuration is up to date. Current config=" + context.getResources().getConfiguration() + ", reported config=" + configuration2 + ", updated config=" + configuration + ", updated display ID=" + i);
         }
-        if (isDifferentDisplay) {
+        if (zIsDifferentDisplay) {
             context.updateDisplay(i);
         }
-        if (shouldUpdateResources) {
+        if (zShouldUpdateResources) {
             this.mResourcesManager.updateResourcesForActivity(this, configuration, i);
             if (z && (context instanceof ConfigurationDispatcher)) {
                 ConfigurationDispatcher configurationDispatcher = (ConfigurationDispatcher) context;
-                if (configurationDispatcher.shouldReportPrivateChanges() || diffPublicOnly != 0) {
+                if (configurationDispatcher.shouldReportPrivateChanges() || iDiffPublicOnly != 0) {
                     configurationDispatcher.dispatchConfigurationChanged(configuration);
                 }
             }
-            ConfigurationHelper.freeTextLayoutCachesIfNeeded(diffPublicOnly);
+            ConfigurationHelper.freeTextLayoutCachesIfNeeded(iDiffPublicOnly);
             if (this.mShouldDumpConfigForIme) {
                 if (!z) {
                     Log.d(TAG, "Only apply configuration update to Resources because shouldReportConfigChange is false. context=" + context + ", config=" + context.getResources().getConfiguration() + ", display ID=" + context.getDisplayId() + ShaderAssembler.NEWLINE + Debug.getCallers(5));
                     return;
                 }
-                if (diffPublicOnly == 0) {
+                if (iDiffPublicOnly == 0) {
                     Log.d(TAG, "Configuration not dispatch to IME because configuration has no  public difference with updated config.  Current config=" + context.getResources().getConfiguration() + ", reported config=" + configuration2 + ", updated config=" + configuration + ", display ID=" + context.getDisplayId());
                 }
             }

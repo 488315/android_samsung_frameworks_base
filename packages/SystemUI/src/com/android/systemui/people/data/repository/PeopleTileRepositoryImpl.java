@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PeopleTileRepositoryImpl implements PeopleTileRepository {
     public final PeopleSpaceWidgetManager peopleSpaceWidgetManager;
@@ -27,10 +26,10 @@ public final class PeopleTileRepositoryImpl implements PeopleTileRepository {
 
     public static PeopleTileModel toModel(PeopleSpaceTile peopleSpaceTile) {
         PeopleTileKey peopleTileKey = new PeopleTileKey(peopleSpaceTile);
-        String obj = peopleSpaceTile.getUserName().toString();
+        String string = peopleSpaceTile.getUserName().toString();
         Icon userIcon = peopleSpaceTile.getUserIcon();
         Pattern pattern = PeopleTileViewHelper.DOUBLE_EXCLAMATION_PATTERN;
-        return new PeopleTileModel(peopleTileKey, obj, userIcon, peopleSpaceTile.getStatuses() != null && peopleSpaceTile.getStatuses().stream().anyMatch(new PeopleTileViewHelper$$ExternalSyntheticLambda0(2)), peopleSpaceTile.isImportantConversation(), PeopleTileViewHelper.isDndBlockingTileData(peopleSpaceTile));
+        return new PeopleTileModel(peopleTileKey, string, userIcon, peopleSpaceTile.getStatuses() != null && peopleSpaceTile.getStatuses().stream().anyMatch(new PeopleTileViewHelper$$ExternalSyntheticLambda0(2)), peopleSpaceTile.isImportantConversation(), PeopleTileViewHelper.isDndBlockingTileData(peopleSpaceTile));
     }
 
     public final List priorityTiles() {

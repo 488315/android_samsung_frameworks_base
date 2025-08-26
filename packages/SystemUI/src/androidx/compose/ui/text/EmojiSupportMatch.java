@@ -2,7 +2,6 @@ package androidx.compose.ui.text;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiSupportMatch {
     public final int value;
@@ -10,7 +9,6 @@ public final class EmojiSupportMatch {
     public static final int None = 1;
     public static final int All = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -25,12 +23,12 @@ public final class EmojiSupportMatch {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ EmojiSupportMatch m729boximpl(int i) {
+    public static final /* synthetic */ EmojiSupportMatch m731boximpl(int i) {
         return new EmojiSupportMatch(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m730toStringimpl(int i) {
+    public static String m732toStringimpl(int i) {
         if (i == 0) {
             return "EmojiSupportMatch.Default";
         }
@@ -55,6 +53,6 @@ public final class EmojiSupportMatch {
     }
 
     public final String toString() {
-        return m730toStringimpl(this.value);
+        return m732toStringimpl(this.value);
     }
 }

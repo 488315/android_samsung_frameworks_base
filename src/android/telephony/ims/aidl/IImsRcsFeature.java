@@ -118,9 +118,9 @@ public interface IImsRcsFeature extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsRcsFeature.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsRcsFeature)) {
-                return (IImsRcsFeature) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsRcsFeature.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsRcsFeature)) {
+                return (IImsRcsFeature) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -168,9 +168,9 @@ public interface IImsRcsFeature extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int queryCapabilityStatus = queryCapabilityStatus();
+                    int iQueryCapabilityStatus = queryCapabilityStatus();
                     parcel2.writeNoException();
-                    parcel2.writeInt(queryCapabilityStatus);
+                    parcel2.writeInt(iQueryCapabilityStatus);
                     return true;
                 case 2:
                     int featureState = getFeatureState();
@@ -178,51 +178,51 @@ public interface IImsRcsFeature extends IInterface {
                     parcel2.writeInt(featureState);
                     return true;
                 case 3:
-                    IImsCapabilityCallback asInterface = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addCapabilityCallback(asInterface);
+                    addCapabilityCallback(iImsCapabilityCallbackAsInterface);
                     return true;
                 case 4:
-                    IImsCapabilityCallback asInterface2 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface2 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeCapabilityCallback(asInterface2);
+                    removeCapabilityCallback(iImsCapabilityCallbackAsInterface2);
                     return true;
                 case 5:
                     CapabilityChangeRequest capabilityChangeRequest = (CapabilityChangeRequest) parcel.readTypedObject(CapabilityChangeRequest.CREATOR);
-                    IImsCapabilityCallback asInterface3 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface3 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    changeCapabilitiesConfiguration(capabilityChangeRequest, asInterface3);
+                    changeCapabilitiesConfiguration(capabilityChangeRequest, iImsCapabilityCallbackAsInterface3);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IImsCapabilityCallback asInterface4 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface4 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    queryCapabilityConfiguration(readInt, readInt2, asInterface4);
+                    queryCapabilityConfiguration(i3, i4, iImsCapabilityCallbackAsInterface4);
                     return true;
                 case 7:
-                    ICapabilityExchangeEventListener asInterface5 = ICapabilityExchangeEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    ICapabilityExchangeEventListener iCapabilityExchangeEventListenerAsInterface = ICapabilityExchangeEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setCapabilityExchangeEventListener(asInterface5);
+                    setCapabilityExchangeEventListener(iCapabilityExchangeEventListenerAsInterface);
                     return true;
                 case 8:
-                    String readString = parcel.readString();
-                    IPublishResponseCallback asInterface6 = IPublishResponseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    IPublishResponseCallback iPublishResponseCallbackAsInterface = IPublishResponseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    publishCapabilities(readString, asInterface6);
+                    publishCapabilities(string, iPublishResponseCallbackAsInterface);
                     return true;
                 case 9:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(Uri.CREATOR);
-                    ISubscribeResponseCallback asInterface7 = ISubscribeResponseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(Uri.CREATOR);
+                    ISubscribeResponseCallback iSubscribeResponseCallbackAsInterface = ISubscribeResponseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    subscribeForCapabilities(createTypedArrayList, asInterface7);
+                    subscribeForCapabilities(arrayListCreateTypedArrayList, iSubscribeResponseCallbackAsInterface);
                     return true;
                 case 10:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    IOptionsResponseCallback asInterface8 = IOptionsResponseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    IOptionsResponseCallback iOptionsResponseCallbackAsInterface = IOptionsResponseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendOptionsCapabilityRequest(uri, createStringArrayList, asInterface8);
+                    sendOptionsCapabilityRequest(uri, arrayListCreateStringArrayList, iOptionsResponseCallbackAsInterface);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -247,134 +247,134 @@ public interface IImsRcsFeature extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public int queryCapabilityStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public int getFeatureState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void addCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void removeCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void changeCapabilitiesConfiguration(CapabilityChangeRequest capabilityChangeRequest, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeTypedObject(capabilityChangeRequest, 0);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(capabilityChangeRequest, 0);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void queryCapabilityConfiguration(int i, int i2, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void setCapabilityExchangeEventListener(ICapabilityExchangeEventListener iCapabilityExchangeEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCapabilityExchangeEventListener);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCapabilityExchangeEventListener);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void publishCapabilities(String str, IPublishResponseCallback iPublishResponseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPublishResponseCallback);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPublishResponseCallback);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void subscribeForCapabilities(List<Uri> list, ISubscribeResponseCallback iSubscribeResponseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iSubscribeResponseCallback);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iSubscribeResponseCallback);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsFeature
             public void sendOptionsCapabilityRequest(Uri uri, List<String> list, IOptionsResponseCallback iOptionsResponseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iOptionsResponseCallback);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRcsFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iOptionsResponseCallback);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

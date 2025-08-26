@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WalletContextualSuggestionsController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -30,7 +29,6 @@ public final class WalletContextualSuggestionsController {
     public final ReadonlyStateFlow contextualSuggestionsCardIds;
     public final QuickAccessWalletController walletController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,21 +43,21 @@ public final class WalletContextualSuggestionsController {
     }
 
     public WalletContextualSuggestionsController(CoroutineScope coroutineScope, QuickAccessWalletController quickAccessWalletController, BroadcastDispatcher broadcastDispatcher, FeatureFlags featureFlags) {
-        ReadonlyStateFlow asStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow;
         this.applicationCoroutineScope = coroutineScope;
         this.walletController = quickAccessWalletController;
         if (((FeatureFlagsClassicRelease) featureFlags).isEnabled(Flags.ENABLE_WALLET_CONTEXTUAL_LOYALTY_CARDS)) {
             FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.transformLatest(BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.intent.action.SCREEN_ON"), null, 14), new WalletContextualSuggestionsController$special$$inlined$flatMapLatest$1(null, this)), new WalletContextualSuggestionsController$allWalletCards$2(this, null));
             SharingStarted.Companion.getClass();
-            asStateFlow = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.Eagerly, EmptyList.INSTANCE);
+            readonlyStateFlowAsStateFlow = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.Eagerly, EmptyList.INSTANCE);
         } else {
-            asStateFlow = FlowKt.asStateFlow(StateFlowKt.MutableStateFlow(EmptyList.INSTANCE));
+            readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(StateFlowKt.MutableStateFlow(EmptyList.INSTANCE));
         }
-        this.allWalletCards = asStateFlow;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(EmptySet.INSTANCE);
-        this._suggestionCardIds = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow2 = FlowKt.asStateFlow(MutableStateFlow);
-        this.contextualSuggestionsCardIds = asStateFlow2;
-        FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(asStateFlow, asStateFlow2, new WalletContextualSuggestionsController$contextualSuggestionCards$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), EmptyList.INSTANCE);
+        this.allWalletCards = readonlyStateFlowAsStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(EmptySet.INSTANCE);
+        this._suggestionCardIds = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow2 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.contextualSuggestionsCardIds = readonlyStateFlowAsStateFlow2;
+        FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowAsStateFlow, readonlyStateFlowAsStateFlow2, new WalletContextualSuggestionsController$contextualSuggestionCards$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), EmptyList.INSTANCE);
     }
 }

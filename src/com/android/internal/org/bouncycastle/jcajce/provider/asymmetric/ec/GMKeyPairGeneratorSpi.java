@@ -129,9 +129,9 @@ public abstract class GMKeyPairGeneratorSpi extends KeyPairGenerator {
             if (!this.initialised) {
                 initialize(this.strength, new SecureRandom());
             }
-            AsymmetricCipherKeyPair generateKeyPair = this.engine.generateKeyPair();
-            ECPublicKeyParameters eCPublicKeyParameters = (ECPublicKeyParameters) generateKeyPair.getPublic();
-            ECPrivateKeyParameters eCPrivateKeyParameters = (ECPrivateKeyParameters) generateKeyPair.getPrivate();
+            AsymmetricCipherKeyPair asymmetricCipherKeyPairGenerateKeyPair = this.engine.generateKeyPair();
+            ECPublicKeyParameters eCPublicKeyParameters = (ECPublicKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPublic();
+            ECPrivateKeyParameters eCPrivateKeyParameters = (ECPrivateKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPrivate();
             Object obj = this.ecParams;
             if (obj instanceof ECParameterSpec) {
                 ECParameterSpec eCParameterSpec = (ECParameterSpec) obj;
@@ -155,8 +155,8 @@ public abstract class GMKeyPairGeneratorSpi extends KeyPairGenerator {
             if ((eCParameterSpec instanceof ECNamedCurveSpec) && (domainParametersFromName = ECUtils.getDomainParametersFromName(((ECNamedCurveSpec) eCParameterSpec).getName(), this.configuration)) != null) {
                 return createKeyGenParamsJCE(domainParametersFromName, secureRandom);
             }
-            ECCurve convertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
-            return new ECKeyGenerationParameters(new ECDomainParameters(convertCurve, EC5Util.convertPoint(convertCurve, eCParameterSpec.getGenerator()), eCParameterSpec.getOrder(), BigInteger.valueOf(eCParameterSpec.getCofactor())), secureRandom);
+            ECCurve eCCurveConvertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
+            return new ECKeyGenerationParameters(new ECDomainParameters(eCCurveConvertCurve, EC5Util.convertPoint(eCCurveConvertCurve, eCParameterSpec.getGenerator()), eCParameterSpec.getOrder(), BigInteger.valueOf(eCParameterSpec.getCofactor())), secureRandom);
         }
 
         protected ECKeyGenerationParameters createKeyGenParamsJCE(X9ECParameters x9ECParameters, SecureRandom secureRandom) {

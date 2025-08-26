@@ -1,6 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +14,19 @@ public class SemLocalePickerItemView extends LinearLayout {
     public static final int LOCALE_PICKER_TYPE_ITEM = 1;
     int mItemType;
 
-    public SemLocalePickerItemView(Context context, int i, LayoutInflater layoutInflater) {
+    public SemLocalePickerItemView(Context context, int i, LayoutInflater layoutInflater) throws Resources.NotFoundException {
         super(context);
         this.mItemType = i;
         init(layoutInflater);
     }
 
-    private void init(LayoutInflater layoutInflater) {
-        View inflate;
+    private void init(LayoutInflater layoutInflater) throws Resources.NotFoundException {
+        View viewInflate;
         if (this.mItemType == 0) {
-            inflate = layoutInflater.inflate(R.layout.sem_language_picker_section_header_category, (ViewGroup) this, false);
+            viewInflate = layoutInflater.inflate(R.layout.sem_language_picker_section_header_category, (ViewGroup) this, false);
         } else {
-            inflate = layoutInflater.inflate(R.layout.language_picker_item, (ViewGroup) this, false);
+            viewInflate = layoutInflater.inflate(R.layout.language_picker_item, (ViewGroup) this, false);
         }
-        addView(inflate);
+        addView(viewInflate);
     }
 }

@@ -1,6 +1,5 @@
 package com.android.systemui;
 
-import android.R;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutView {
     public static final Companion Companion = new Companion(null);
@@ -52,7 +50,6 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
     public boolean showScanningAnim;
     public final StatusBarStateController statusBarStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -82,33 +79,33 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
         this.rimProgress = 0.5f;
         this.rimRect = new RectF();
         this.cameraProtectionColor = -16777216;
-        this.faceScanningAnimColor = context.getColor(R.color.secondary_text_material_dark);
+        this.faceScanningAnimColor = context.getColor(android.R.color.secondary_text_material_dark);
         setVisibility(4);
     }
 
     public final ValueAnimator createRimDisappearAnimator(float f, long j, TimeInterpolator timeInterpolator) {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.rimProgress, f);
-        ofFloat.setDuration(j);
-        ofFloat.setInterpolator(timeInterpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createRimDisappearAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.rimProgress, f);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setInterpolator(timeInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createRimDisappearAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                FaceScanningOverlay faceScanningOverlay = this.$tmp0;
                 FaceScanningOverlay.Companion companion = FaceScanningOverlay.Companion;
                 faceScanningOverlay.getClass();
                 faceScanningOverlay.rimProgress = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 faceScanningOverlay.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$createRimDisappearAnimator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$createRimDisappearAnimator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                FaceScanningOverlay faceScanningOverlay = this.this$0;
                 faceScanningOverlay.rimProgress = 0.5f;
                 faceScanningOverlay.invalidate();
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     @Override // com.android.systemui.DisplayCutoutBaseView
@@ -136,14 +133,14 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
 
     @Override // com.android.systemui.DisplayCutoutBaseView
     public final void dump(PrintWriter printWriter) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
-        asIndenting.println("FaceScanningOverlay:");
-        super.dump(asIndenting);
-        asIndenting.println("rimProgress=" + this.rimProgress);
-        asIndenting.println("rimRect=" + this.rimRect);
-        asIndenting.println("this=" + this);
-        asIndenting.decreaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.println("FaceScanningOverlay:");
+        super.dump(indentingPrintWriterAsIndenting);
+        indentingPrintWriterAsIndenting.println("rimProgress=" + this.rimProgress);
+        indentingPrintWriterAsIndenting.println("rimRect=" + this.rimRect);
+        indentingPrintWriterAsIndenting.println("this=" + this);
+        indentingPrintWriterAsIndenting.decreaseIndent();
     }
 
     @Override // com.android.systemui.DisplayCutoutBaseView
@@ -156,22 +153,22 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
             return;
         }
         ScreenDecorationsLogger screenDecorationsLogger = this.logger;
-        boolean isFaceDetectionRunning = this.keyguardUpdateMonitor.isFaceDetectionRunning();
-        boolean isShowing = this.authController.isShowing();
+        boolean zIsFaceDetectionRunning = this.keyguardUpdateMonitor.isFaceDetectionRunning();
+        boolean zIsShowing = this.authController.isShowing();
         boolean z4 = this.showScanningAnim;
         screenDecorationsLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = screenDecorationsLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = String.valueOf(z3);
-        logMessageImpl.bool1 = isFaceDetectionRunning;
-        logMessageImpl.bool2 = isShowing;
+        logMessageImpl.bool1 = zIsFaceDetectionRunning;
+        logMessageImpl.bool2 = zIsShowing;
         logMessageImpl.str2 = String.valueOf(isFaceAuthenticated);
         logMessageImpl.bool3 = z;
         logMessageImpl.bool4 = z4;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.showScanningAnim = z3;
         updateProtectionBoundingPath();
         if (this.showScanningAnim) {
@@ -182,24 +179,24 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
         if (animatorSet2 != null) {
             animatorSet2.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.cameraProtectionProgress, this.showScanningAnim ? 1.0f : 0.5f);
-        ofFloat.setStartDelay(this.showScanningAnim ? 0L : isFaceAuthenticated ? 400L : 200L);
-        ofFloat.setDuration(this.showScanningAnim ? 250L : isFaceAuthenticated ? 500L : 300L);
-        ofFloat.setInterpolator(this.showScanningAnim ? Interpolators.STANDARD_ACCELERATE : isFaceAuthenticated ? Interpolators.STANDARD : Interpolators.STANDARD_DECELERATE);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$cameraProtectionAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.cameraProtectionProgress, this.showScanningAnim ? 1.0f : 0.5f);
+        valueAnimatorOfFloat.setStartDelay(this.showScanningAnim ? 0L : isFaceAuthenticated ? 400L : 200L);
+        valueAnimatorOfFloat.setDuration(this.showScanningAnim ? 250L : isFaceAuthenticated ? 500L : 300L);
+        valueAnimatorOfFloat.setInterpolator(this.showScanningAnim ? Interpolators.STANDARD_ACCELERATE : isFaceAuthenticated ? Interpolators.STANDARD : Interpolators.STANDARD_DECELERATE);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$cameraProtectionAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                FaceScanningOverlay faceScanningOverlay = this.$tmp0;
                 FaceScanningOverlay.Companion companion = FaceScanningOverlay.Companion;
                 faceScanningOverlay.getClass();
                 faceScanningOverlay.cameraProtectionProgress = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 faceScanningOverlay.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$cameraProtectionAnimator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$cameraProtectionAnimator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                FaceScanningOverlay faceScanningOverlay = this.this$0;
                 if (faceScanningOverlay.showScanningAnim) {
                     return;
                 }
@@ -214,53 +211,53 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
         });
         if (this.showScanningAnim) {
             animatorSet = new AnimatorSet();
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 1.125f);
-            ofFloat2.setDuration(250L);
-            ofFloat2.setInterpolator(Interpolators.STANDARD_DECELERATE);
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createRimAppearAnimator$1$1
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 1.125f);
+            valueAnimatorOfFloat2.setDuration(250L);
+            valueAnimatorOfFloat2.setInterpolator(Interpolators.STANDARD_DECELERATE);
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createRimAppearAnimator$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                    FaceScanningOverlay faceScanningOverlay = this.$tmp0;
                     FaceScanningOverlay.Companion companion = FaceScanningOverlay.Companion;
                     faceScanningOverlay.getClass();
                     faceScanningOverlay.rimProgress = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                     faceScanningOverlay.invalidate();
                 }
             });
-            animatorSet.playSequentially(ofFloat, ofFloat2);
+            animatorSet.playSequentially(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         } else {
             if (isFaceAuthenticated) {
                 AnimatorSet animatorSet3 = new AnimatorSet();
-                ValueAnimator ofInt = ValueAnimator.ofInt(255, 0);
-                ofInt.setDuration(400L);
-                ofInt.setInterpolator(Interpolators.LINEAR);
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createSuccessOpacityAnimator$1$1
+                ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(255, 0);
+                valueAnimatorOfInt.setDuration(400L);
+                valueAnimatorOfInt.setInterpolator(Interpolators.LINEAR);
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.FaceScanningOverlay$createSuccessOpacityAnimator$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                        FaceScanningOverlay faceScanningOverlay = this.$tmp0;
                         faceScanningOverlay.rimPaint.setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
                         faceScanningOverlay.invalidate();
                     }
                 });
-                ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$createSuccessOpacityAnimator$1$2
+                valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$createSuccessOpacityAnimator$1$2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        FaceScanningOverlay.this.rimPaint.setAlpha(255);
-                        FaceScanningOverlay.this.invalidate();
+                        this.this$0.rimPaint.setAlpha(255);
+                        this.this$0.invalidate();
                     }
                 });
-                animatorSet3.playTogether(createRimDisappearAnimator(1.25f, 400L, Interpolators.STANDARD_DECELERATE), ofInt);
+                animatorSet3.playTogether(createRimDisappearAnimator(1.25f, 400L, Interpolators.STANDARD_DECELERATE), valueAnimatorOfInt);
                 AnimatorSet animatorSet4 = new AnimatorSet();
-                animatorSet4.playTogether(animatorSet3, ofFloat);
+                animatorSet4.playTogether(animatorSet3, valueAnimatorOfFloat);
                 animatorSet = animatorSet4;
             } else {
                 animatorSet = new AnimatorSet();
-                animatorSet.playTogether(createRimDisappearAnimator(1.0f, 200L, Interpolators.STANDARD), ofFloat);
+                animatorSet.playTogether(createRimDisappearAnimator(1.0f, 200L, Interpolators.STANDARD), valueAnimatorOfFloat);
             }
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.FaceScanningOverlay$faceScanningRimAnimator$1$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    FaceScanningOverlay faceScanningOverlay = FaceScanningOverlay.this;
+                    FaceScanningOverlay faceScanningOverlay = this.this$0;
                     faceScanningOverlay.rimAnimator = null;
                     if (faceScanningOverlay.showScanningAnim) {
                         return;
@@ -287,8 +284,8 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
         Rect rect = this.mTotalBounds;
         RectF rectF = this.rimRect;
         rect.union((int) rectF.left, (int) rectF.top, (int) rectF.right, (int) rectF.bottom);
-        int resolveSizeAndState = View.resolveSizeAndState(this.mTotalBounds.width(), i, 0);
-        int resolveSizeAndState2 = View.resolveSizeAndState(this.mTotalBounds.height(), i2, 0);
+        int iResolveSizeAndState = View.resolveSizeAndState(this.mTotalBounds.width(), i, 0);
+        int iResolveSizeAndState2 = View.resolveSizeAndState(this.mTotalBounds.height(), i2, 0);
         this.logger.boundingRect(this.rimRect, "onMeasure: Face scanning animation");
         ScreenDecorationsLogger screenDecorationsLogger = this.logger;
         Rect rect2 = this.mBoundingRect;
@@ -303,15 +300,15 @@ public final class FaceScanningOverlay extends ScreenDecorations.DisplayCutoutVi
         LogLevel logLevel = LogLevel.DEBUG;
         ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = screenDecorationsLogger3.logBuffer;
-        LogMessage obtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
         long j = i;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.long1 = j;
         logMessageImpl.long2 = i2;
-        logMessageImpl.int1 = resolveSizeAndState;
-        logMessageImpl.int2 = resolveSizeAndState2;
-        logBuffer.commit(obtain);
-        setMeasuredDimension(resolveSizeAndState, resolveSizeAndState2);
+        logMessageImpl.int1 = iResolveSizeAndState;
+        logMessageImpl.int2 = iResolveSizeAndState2;
+        logBuffer.commit(logMessageObtain);
+        setMeasuredDimension(iResolveSizeAndState, iResolveSizeAndState2);
     }
 
     @Override // com.android.systemui.ScreenDecorations.DisplayCutoutView

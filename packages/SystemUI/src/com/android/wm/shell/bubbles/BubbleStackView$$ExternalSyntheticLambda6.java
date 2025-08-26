@@ -3,7 +3,6 @@ package com.android.wm.shell.bubbles;
 import android.view.View;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda6 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -42,7 +41,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda6 imp
                 bubbleStackView.mBubbleData.setExpanded(true);
                 break;
             default:
-                BubbleStackView.m3215$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(bubbleStackView);
+                BubbleStackView.m3232$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(bubbleStackView);
                 break;
         }
     }

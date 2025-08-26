@@ -3,6 +3,7 @@ package com.android.internal.view;
 import android.graphics.Rect;
 import android.os.CancellationSignal;
 import android.util.MathUtils;
+import android.view.View;
 import android.webkit.WebView;
 import com.android.internal.view.ScrollCaptureViewHelper;
 import java.util.function.Consumer;
@@ -16,8 +17,8 @@ public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
     private final Rect mWebViewBounds = new Rect();
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(WebView webView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(webView, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(View view, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
+        onScrollRequested((WebView) view, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -31,8 +32,7 @@ public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
         this.mOriginScrollY = webView.getScrollY();
     }
 
-    /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(WebView webView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
+    public void onScrollRequested(WebView webView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
         int scrollY = webView.getScrollY() - this.mOriginScrollY;
         ScrollCaptureViewHelper.ScrollResult scrollResult = new ScrollCaptureViewHelper.ScrollResult();
         scrollResult.requestedArea = new Rect(rect2);
@@ -44,10 +44,10 @@ public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
         }
         this.mRequestWebViewLocal.set(rect2);
         this.mRequestWebViewLocal.offset(0, -scrollY);
-        int constrain = MathUtils.constrain(this.mRequestWebViewLocal.centerY() - this.mWebViewBounds.centerY(), Math.min(0, -webView.getScrollY()), Math.max(0, (((int) (webView.getContentHeight() * webView.getScale())) - webView.getHeight()) - webView.getScrollY()));
-        webView.scrollBy(this.mOriginScrollX, constrain);
+        int iConstrain = MathUtils.constrain(this.mRequestWebViewLocal.centerY() - this.mWebViewBounds.centerY(), Math.min(0, -webView.getScrollY()), Math.max(0, (((int) (webView.getContentHeight() * webView.getScale())) - webView.getHeight()) - webView.getScrollY()));
+        webView.scrollBy(this.mOriginScrollX, iConstrain);
         int scrollY2 = webView.getScrollY() - this.mOriginScrollY;
-        this.mRequestWebViewLocal.offset(0, -constrain);
+        this.mRequestWebViewLocal.offset(0, -iConstrain);
         scrollResult.scrollDelta = scrollY2;
         if (this.mRequestWebViewLocal.intersect(this.mWebViewBounds)) {
             scrollResult.availableArea = new Rect(this.mRequestWebViewLocal);

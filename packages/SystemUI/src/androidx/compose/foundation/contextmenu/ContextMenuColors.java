@@ -6,7 +6,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContextMenuColors {
     public final long backgroundColor;
@@ -28,7 +27,7 @@ public final class ContextMenuColors {
         }
         ContextMenuColors contextMenuColors = (ContextMenuColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.backgroundColor, contextMenuColors.backgroundColor) && ULong.m3427equalsimpl0(this.textColor, contextMenuColors.textColor) && ULong.m3427equalsimpl0(this.iconColor, contextMenuColors.iconColor) && ULong.m3427equalsimpl0(this.disabledTextColor, contextMenuColors.disabledTextColor) && ULong.m3427equalsimpl0(this.disabledIconColor, contextMenuColors.disabledIconColor);
+        return ULong.m3447equalsimpl0(this.backgroundColor, contextMenuColors.backgroundColor) && ULong.m3447equalsimpl0(this.textColor, contextMenuColors.textColor) && ULong.m3447equalsimpl0(this.iconColor, contextMenuColors.iconColor) && ULong.m3447equalsimpl0(this.disabledTextColor, contextMenuColors.disabledTextColor) && ULong.m3447equalsimpl0(this.disabledIconColor, contextMenuColors.disabledIconColor);
     }
 
     public final int hashCode() {
@@ -43,7 +42,7 @@ public final class ContextMenuColors {
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.textColor, ", iconColor=", sb);
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.iconColor, ", disabledTextColor=", sb);
         OverscrollConfiguration$$ExternalSyntheticOutline0.m(this.disabledTextColor, ", disabledIconColor=", sb);
-        sb.append((Object) Color.m462toStringimpl(this.disabledIconColor));
+        sb.append((Object) Color.m464toStringimpl(this.disabledIconColor));
         sb.append(')');
         return sb.toString();
     }

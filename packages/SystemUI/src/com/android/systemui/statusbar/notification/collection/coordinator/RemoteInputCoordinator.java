@@ -31,7 +31,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class RemoteInputCoordinator implements Coordinator, Dumpable {
@@ -47,25 +46,9 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     private final SmartReplyController mSmartReplyController;
     private final SmartReplyHistoryExtender mSmartReplyHistoryExtender;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteInputActiveExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public RemoteInputActiveExtender() {
-            /*
-                r3 = this;
-                com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.this = r4
-                boolean r0 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinatorKt.access$getDEBUG()
-                android.os.Handler r4 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.access$getMMainHandler$p(r4)
-                java.lang.String r1 = "RemoteInputCoordinator"
-                java.lang.String r2 = "RemoteInputActive"
-                r3.<init>(r1, r2, r0, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.RemoteInputActiveExtender.<init>(com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator):void");
+            super("RemoteInputCoordinator", "RemoteInputActive", RemoteInputCoordinatorKt.getDEBUG(), RemoteInputCoordinator.this.mMainHandler);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -75,25 +58,9 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteInputHistoryExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public RemoteInputHistoryExtender() {
-            /*
-                r3 = this;
-                com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.this = r4
-                boolean r0 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinatorKt.access$getDEBUG()
-                android.os.Handler r4 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.access$getMMainHandler$p(r4)
-                java.lang.String r1 = "RemoteInputCoordinator"
-                java.lang.String r2 = "RemoteInputHistory"
-                r3.<init>(r1, r2, r0, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.RemoteInputHistoryExtender.<init>(com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator):void");
+            super("RemoteInputCoordinator", "RemoteInputHistory", RemoteInputCoordinatorKt.getDEBUG(), RemoteInputCoordinator.this.mMainHandler);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -104,11 +71,11 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
             if (TextUtils.isEmpty(charSequence)) {
                 charSequence = notificationEntry.remoteInputTextWhenReset;
             }
-            StatusBarNotification rebuildWithRemoteInputInserted = remoteInputNotificationRebuilder.rebuildWithRemoteInputInserted(notificationEntry, charSequence, false, notificationEntry.remoteInputMimeType, notificationEntry.remoteInputUri);
+            StatusBarNotification statusBarNotificationRebuildWithRemoteInputInserted = remoteInputNotificationRebuilder.rebuildWithRemoteInputInserted(notificationEntry, charSequence, false, notificationEntry.remoteInputMimeType, notificationEntry.remoteInputUri);
             notificationEntry.lastRemoteInputSent = -2000L;
             notificationEntry.remoteInputTextWhenReset = null;
             InternalNotifUpdater internalNotifUpdater = RemoteInputCoordinator.this.mNotifUpdater;
-            ((NotifCollection$$ExternalSyntheticLambda0) (internalNotifUpdater != null ? internalNotifUpdater : null)).onInternalNotificationUpdate("Extending lifetime of notification with remote input", rebuildWithRemoteInputInserted);
+            ((NotifCollection$$ExternalSyntheticLambda0) (internalNotifUpdater != null ? internalNotifUpdater : null)).onInternalNotificationUpdate("Extending lifetime of notification with remote input", statusBarNotificationRebuildWithRemoteInputInserted);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -122,25 +89,9 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SmartReplyHistoryExtender extends SelfTrackingLifetimeExtender {
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public SmartReplyHistoryExtender() {
-            /*
-                r3 = this;
-                com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.this = r4
-                boolean r0 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinatorKt.access$getDEBUG()
-                android.os.Handler r4 = com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.access$getMMainHandler$p(r4)
-                java.lang.String r1 = "RemoteInputCoordinator"
-                java.lang.String r2 = "SmartReplyHistory"
-                r3.<init>(r1, r2, r0, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.SmartReplyHistoryExtender.<init>(com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator):void");
+            super("RemoteInputCoordinator", "SmartReplyHistory", RemoteInputCoordinatorKt.getDEBUG(), RemoteInputCoordinator.this.mMainHandler);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -150,13 +101,13 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
         public void onStartedLifetimeExtension(NotificationEntry notificationEntry) {
-            StatusBarNotification rebuildWithRemoteInputInserted = RemoteInputCoordinator.this.mRebuilder.rebuildWithRemoteInputInserted(notificationEntry, null, false, null, null);
+            StatusBarNotification statusBarNotificationRebuildWithRemoteInputInserted = RemoteInputCoordinator.this.mRebuilder.rebuildWithRemoteInputInserted(notificationEntry, null, false, null, null);
             RemoteInputCoordinator.this.mSmartReplyController.stopSending(notificationEntry);
             InternalNotifUpdater internalNotifUpdater = RemoteInputCoordinator.this.mNotifUpdater;
             if (internalNotifUpdater == null) {
                 internalNotifUpdater = null;
             }
-            ((NotifCollection$$ExternalSyntheticLambda0) internalNotifUpdater).onInternalNotificationUpdate("Extending lifetime of notification with smart reply", rebuildWithRemoteInputInserted);
+            ((NotifCollection$$ExternalSyntheticLambda0) internalNotifUpdater).onInternalNotificationUpdate("Extending lifetime of notification with smart reply", statusBarNotificationRebuildWithRemoteInputInserted);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.SelfTrackingLifetimeExtender
@@ -175,26 +126,24 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
         this.mNotificationRemoteInputManager = notificationRemoteInputManager;
         this.mMainHandler = handler;
         this.mSmartReplyController = smartReplyController;
-        RemoteInputHistoryExtender remoteInputHistoryExtender = new RemoteInputHistoryExtender(this);
+        RemoteInputHistoryExtender remoteInputHistoryExtender = new RemoteInputHistoryExtender();
         this.mRemoteInputHistoryExtender = remoteInputHistoryExtender;
-        SmartReplyHistoryExtender smartReplyHistoryExtender = new SmartReplyHistoryExtender(this);
+        SmartReplyHistoryExtender smartReplyHistoryExtender = new SmartReplyHistoryExtender();
         this.mSmartReplyHistoryExtender = smartReplyHistoryExtender;
-        RemoteInputActiveExtender remoteInputActiveExtender = new RemoteInputActiveExtender(this);
+        RemoteInputActiveExtender remoteInputActiveExtender = new RemoteInputActiveExtender();
         this.mRemoteInputActiveExtender = remoteInputActiveExtender;
         this.mRemoteInputLifetimeExtenders = Arrays.asList(remoteInputHistoryExtender, smartReplyHistoryExtender, remoteInputActiveExtender);
         dumpManager.registerDumpable(this);
         this.mCollectionListener = new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator$mCollectionListener$1
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
             public void onEntryRemoved(NotificationEntry notificationEntry, int i) {
-                boolean debug;
                 NotificationRemoteInputManager notificationRemoteInputManager2;
                 RemoteInputController remoteInputController;
-                debug = RemoteInputCoordinatorKt.getDEBUG();
-                if (debug) {
+                if (RemoteInputCoordinatorKt.getDEBUG()) {
                     KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("mCollectionListener.onEntryRemoved(entry=", notificationEntry.mKey, ")", "RemoteInputCoordinator");
                 }
-                RemoteInputCoordinator.this.mSmartReplyController.stopSending(notificationEntry);
-                if ((i == 1 || i == 2) && (remoteInputController = (notificationRemoteInputManager2 = RemoteInputCoordinator.this.mNotificationRemoteInputManager).mRemoteInputController) != null && remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, null)) {
+                this.this$0.mSmartReplyController.stopSending(notificationEntry);
+                if ((i == 1 || i == 2) && (remoteInputController = (notificationRemoteInputManager2 = this.this$0.mNotificationRemoteInputManager).mRemoteInputController) != null && remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, null)) {
                     notificationEntry.mRemoteEditImeVisible = false;
                     notificationRemoteInputManager2.mRemoteInputController.removeRemoteInput(notificationEntry, null, "RemoteInputManager#cleanUpRemoteInputForUserRemoval");
                 }
@@ -206,13 +155,11 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
             public void onEntryUpdated(NotificationEntry notificationEntry, UpdateSource updateSource) {
-                boolean debug;
-                debug = RemoteInputCoordinatorKt.getDEBUG();
-                if (debug) {
+                if (RemoteInputCoordinatorKt.getDEBUG()) {
                     Log.d("RemoteInputCoordinator", "mCollectionListener.onEntryUpdated(entry=" + notificationEntry.mKey + ", source=" + updateSource + ")");
                 }
                 if (updateSource != UpdateSource.SystemUi) {
-                    RemoteInputCoordinator.this.mSmartReplyController.stopSending(notificationEntry);
+                    this.this$0.mSmartReplyController.stopSending(notificationEntry);
                 }
             }
 
@@ -249,17 +196,15 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void onSmartReplySent(NotificationEntry notificationEntry, CharSequence charSequence) {
-        boolean debug;
-        debug = RemoteInputCoordinatorKt.getDEBUG();
-        if (debug) {
+        if (RemoteInputCoordinatorKt.getDEBUG()) {
             KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("onSmartReplySent(entry=", notificationEntry.mKey, ")", "RemoteInputCoordinator");
         }
-        StatusBarNotification rebuildWithRemoteInputInserted = this.mRebuilder.rebuildWithRemoteInputInserted(notificationEntry, charSequence, true, null, null);
+        StatusBarNotification statusBarNotificationRebuildWithRemoteInputInserted = this.mRebuilder.rebuildWithRemoteInputInserted(notificationEntry, charSequence, true, null, null);
         InternalNotifUpdater internalNotifUpdater = this.mNotifUpdater;
         if (internalNotifUpdater == null) {
             internalNotifUpdater = null;
         }
-        ((NotifCollection$$ExternalSyntheticLambda0) internalNotifUpdater).onInternalNotificationUpdate("Adding smart reply spinner for sent", rebuildWithRemoteInputInserted);
+        ((NotifCollection$$ExternalSyntheticLambda0) internalNotifUpdater).onInternalNotificationUpdate("Adding smart reply spinner for sent", statusBarNotificationRebuildWithRemoteInputInserted);
         this.mRemoteInputActiveExtender.endLifetimeExtensionAfterDelay(notificationEntry.mKey, 500L);
     }
 
@@ -321,25 +266,21 @@ public final class RemoteInputCoordinator implements Coordinator, Dumpable {
     }
 
     public void onRemoteInputSent(NotificationEntry notificationEntry) {
-        boolean debug;
-        debug = RemoteInputCoordinatorKt.getDEBUG();
-        if (debug) {
+        if (RemoteInputCoordinatorKt.getDEBUG()) {
             KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("onRemoteInputSent(entry=", notificationEntry.mKey, ")", "RemoteInputCoordinator");
         }
         this.mRemoteInputActiveExtender.endLifetimeExtensionAfterDelay(notificationEntry.mKey, 500L);
     }
 
     public void releaseNotificationIfKeptForRemoteInputHistory(String str) {
-        boolean debug;
-        debug = RemoteInputCoordinatorKt.getDEBUG();
-        if (debug) {
+        if (RemoteInputCoordinatorKt.getDEBUG()) {
             KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("releaseNotificationIfKeptForRemoteInputHistory(entry=", str, ")", "RemoteInputCoordinator");
         }
         this.mRemoteInputActiveExtender.endLifetimeExtensionAfterDelay(str, 200L);
     }
 
     public void setRemoteInputController(RemoteInputController remoteInputController) {
-        this.mSmartReplyController.mCallback = new SmartReplyController.Callback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator$setRemoteInputController$1
+        this.mSmartReplyController.mCallback = new SmartReplyController.Callback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RemoteInputCoordinator.setRemoteInputController.1
             @Override // com.android.systemui.statusbar.SmartReplyController.Callback
             public final void onSmartReplySent(NotificationEntry notificationEntry, CharSequence charSequence) {
                 RemoteInputCoordinator.this.onSmartReplySent(notificationEntry, charSequence);

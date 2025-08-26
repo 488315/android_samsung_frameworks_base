@@ -6,7 +6,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsCallInfo implements Parcelable {
     public static final Parcelable.Creator<ImsCallInfo> CREATOR = new Parcelable.Creator<ImsCallInfo>() { // from class: com.sec.ims.volte2.data.ImsCallInfo.1
@@ -40,14 +39,12 @@ public class ImsCallInfo implements Parcelable {
     private int mVideoNGbrBearerState;
     private int mVoiceBearerState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BearerState {
         public static final int BEARER_STATE_CLOSED = 3;
         public static final int BEARER_STATE_ESTABLISHED = 1;
         public static final int BEARER_STATE_MODIFIED = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallType {
         public static final int CALL_TYPE_AUDIO = 1;
         public static final int CALL_TYPE_AUDIO_CONFERENCE = 5;
@@ -66,7 +63,6 @@ public class ImsCallInfo implements Parcelable {
         public static final int CALL_TYPE_VIDEO_SHARE_TX = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Direction {
         public static final int DIRECTION_MO = 0;
         public static final int DIRECTION_MT = 1;
@@ -75,7 +71,6 @@ public class ImsCallInfo implements Parcelable {
         public static final int DIRECTION_UNKNOWN = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Qci {
         public static final int QCI_AUDIO = 1;
         public static final int QCI_VIDEO_GBR = 2;
@@ -83,7 +78,6 @@ public class ImsCallInfo implements Parcelable {
         public static final int QCI_VIDEO_NGBR_7 = 7;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Radio {
         public static final int RADIO_IWLAN = 18;
         public static final int RADIO_LTE = 14;
@@ -213,26 +207,26 @@ public class ImsCallInfo implements Parcelable {
     }
 
     public String toString() {
-        String m = ReorderTile$$ExternalSyntheticOutline0.m(this.mCallId, "], callType: [", new StringBuilder("callId: ["));
+        String strM = ReorderTile$$ExternalSyntheticOutline0.m(this.mCallId, "], callType: [", new StringBuilder("callId: ["));
         int i = this.mCallType;
-        String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i != 1 ? i != 2 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "CALL_TYPE_VIDEO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "CALL_TYPE_VOICE"), "], Direction: [");
+        String strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i != 1 ? i != 2 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "CALL_TYPE_VIDEO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "CALL_TYPE_VOICE"), "], Direction: [");
         int i2 = this.mDirection;
-        StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "PULLED_MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "PULLED_MO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "MO"), "], isDowngradedVideoCall : [");
-        m3.append(this.mIsDowngradedVideoCall);
-        m3.append("], isDowngradedAtEstablish : [");
-        m3.append(this.mIsDowngradedAtEstablish);
-        m3.append("], VoiceBearerState : [");
-        m3.append(this.mVoiceBearerState);
-        m3.append("], VideoBearerState : [");
-        m3.append(this.mVideoBearerState);
-        m3.append("], VideoNGbrBearerState : [");
-        m3.append(this.mVideoNGbrBearerState);
-        m3.append("], isConferenceCall : [");
-        m3.append(this.mIsConferenceCall);
-        m3.append("], mIsSamsungMdmnCall : [");
-        m3.append(this.mIsSamsungMdmnCall);
-        m3.append("], mRatInfo : [");
-        return ReorderTile$$ExternalSyntheticOutline0.m(this.mRatInfo, "]", m3);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "PULLED_MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "PULLED_MO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "MO"), "], isDowngradedVideoCall : [");
+        sbM.append(this.mIsDowngradedVideoCall);
+        sbM.append("], isDowngradedAtEstablish : [");
+        sbM.append(this.mIsDowngradedAtEstablish);
+        sbM.append("], VoiceBearerState : [");
+        sbM.append(this.mVoiceBearerState);
+        sbM.append("], VideoBearerState : [");
+        sbM.append(this.mVideoBearerState);
+        sbM.append("], VideoNGbrBearerState : [");
+        sbM.append(this.mVideoNGbrBearerState);
+        sbM.append("], isConferenceCall : [");
+        sbM.append(this.mIsConferenceCall);
+        sbM.append("], mIsSamsungMdmnCall : [");
+        sbM.append(this.mIsSamsungMdmnCall);
+        sbM.append("], mRatInfo : [");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.mRatInfo, "]", sbM);
     }
 
     @Override // android.os.Parcelable

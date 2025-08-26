@@ -253,43 +253,43 @@ public final class FrontendCapabilities implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, (FrontendAnalogCapabilities) parcel.readTypedObject(FrontendAnalogCapabilities.CREATOR));
+                _set(i, (FrontendAnalogCapabilities) parcel.readTypedObject(FrontendAnalogCapabilities.CREATOR));
                 return;
             case 1:
-                _set(readInt, (FrontendAtscCapabilities) parcel.readTypedObject(FrontendAtscCapabilities.CREATOR));
+                _set(i, (FrontendAtscCapabilities) parcel.readTypedObject(FrontendAtscCapabilities.CREATOR));
                 return;
             case 2:
-                _set(readInt, (FrontendAtsc3Capabilities) parcel.readTypedObject(FrontendAtsc3Capabilities.CREATOR));
+                _set(i, (FrontendAtsc3Capabilities) parcel.readTypedObject(FrontendAtsc3Capabilities.CREATOR));
                 return;
             case 3:
-                _set(readInt, (FrontendDtmbCapabilities) parcel.readTypedObject(FrontendDtmbCapabilities.CREATOR));
+                _set(i, (FrontendDtmbCapabilities) parcel.readTypedObject(FrontendDtmbCapabilities.CREATOR));
                 return;
             case 4:
-                _set(readInt, (FrontendDvbsCapabilities) parcel.readTypedObject(FrontendDvbsCapabilities.CREATOR));
+                _set(i, (FrontendDvbsCapabilities) parcel.readTypedObject(FrontendDvbsCapabilities.CREATOR));
                 return;
             case 5:
-                _set(readInt, (FrontendDvbcCapabilities) parcel.readTypedObject(FrontendDvbcCapabilities.CREATOR));
+                _set(i, (FrontendDvbcCapabilities) parcel.readTypedObject(FrontendDvbcCapabilities.CREATOR));
                 return;
             case 6:
-                _set(readInt, (FrontendDvbtCapabilities) parcel.readTypedObject(FrontendDvbtCapabilities.CREATOR));
+                _set(i, (FrontendDvbtCapabilities) parcel.readTypedObject(FrontendDvbtCapabilities.CREATOR));
                 return;
             case 7:
-                _set(readInt, (FrontendIsdbsCapabilities) parcel.readTypedObject(FrontendIsdbsCapabilities.CREATOR));
+                _set(i, (FrontendIsdbsCapabilities) parcel.readTypedObject(FrontendIsdbsCapabilities.CREATOR));
                 return;
             case 8:
-                _set(readInt, (FrontendIsdbs3Capabilities) parcel.readTypedObject(FrontendIsdbs3Capabilities.CREATOR));
+                _set(i, (FrontendIsdbs3Capabilities) parcel.readTypedObject(FrontendIsdbs3Capabilities.CREATOR));
                 return;
             case 9:
-                _set(readInt, (FrontendIsdbtCapabilities) parcel.readTypedObject(FrontendIsdbtCapabilities.CREATOR));
+                _set(i, (FrontendIsdbtCapabilities) parcel.readTypedObject(FrontendIsdbtCapabilities.CREATOR));
                 return;
             case 10:
-                _set(readInt, (FrontendIptvCapabilities) parcel.readTypedObject(FrontendIptvCapabilities.CREATOR));
+                _set(i, (FrontendIptvCapabilities) parcel.readTypedObject(FrontendIptvCapabilities.CREATOR));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

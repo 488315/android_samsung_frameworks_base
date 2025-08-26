@@ -1,6 +1,7 @@
 package com.android.systemui.controls.management.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewTreeObserver;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0;
+import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.controls.ControlInterface;
 import com.android.systemui.controls.ControlStatus;
@@ -18,17 +20,20 @@ import com.android.systemui.controls.management.model.SecElementWrapper;
 import com.android.systemui.controls.management.model.SecStructureNameWrapper;
 import com.android.systemui.controls.management.model.SecZoneNameWrapper;
 import com.android.systemui.controls.management.model.VerticalPaddingWrapper;
+import com.android.systemui.controls.ui.util.LayoutUtil;
+import com.android.systemui.controls.ui.util.SpanInfo;
 import com.android.systemui.controls.ui.util.SpanManager;
 import com.android.systemui.controls.util.ControlsUtil;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StatelessControlAdapter extends RecyclerView.Adapter {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +43,6 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
     public final SpanManager spanManager;
     public final StatelessControlAdapter$spanSizeLookup$1 spanSizeLookup;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,14 +52,13 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SecMarginItemDecorator extends RecyclerView.ItemDecoration {
         public final int basicTextViewFocusedStrokeWidth;
         public final int itemBottomMargin;
         public final int structureStartMarginResize;
         public final int zoneSideMarginResize;
 
-        public SecMarginItemDecorator(Context context) {
+        public SecMarginItemDecorator(Context context) throws Resources.NotFoundException {
             int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.control_list_horizontal_margin) - context.getResources().getDimensionPixelSize(R.dimen.control_base_item_side_margin);
             int dimensionPixelSize2 = context.getResources().getDimensionPixelSize(R.dimen.basic_interaction_side_margin);
             this.basicTextViewFocusedStrokeWidth = context.getResources().getDimensionPixelSize(R.dimen.accessibility_focus_highlight_stroke_width);
@@ -73,13 +76,13 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                 return;
             }
             RecyclerView.Adapter adapter = recyclerView.mAdapter;
-            Integer valueOf = adapter != null ? Integer.valueOf(adapter.getItemViewType(childAdapterPosition)) : null;
+            Integer numValueOf = adapter != null ? Integer.valueOf(adapter.getItemViewType(childAdapterPosition)) : null;
             boolean z = false;
             rect.top = 0;
             rect.left = 0;
             rect.right = 0;
             rect.bottom = 0;
-            if ((valueOf != null && valueOf.intValue() == 1) || (valueOf != null && valueOf.intValue() == 103)) {
+            if ((numValueOf != null && numValueOf.intValue() == 1) || (numValueOf != null && numValueOf.intValue() == 103)) {
                 z = true;
             }
             int i = this.itemBottomMargin;
@@ -88,18 +91,18 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                 return;
             }
             int i2 = this.zoneSideMarginResize;
-            if (valueOf != null && valueOf.intValue() == 101) {
+            if (numValueOf != null && numValueOf.intValue() == 101) {
                 rect.left = this.structureStartMarginResize;
                 rect.right = i2;
-            } else if (valueOf != null && valueOf.intValue() == 0) {
+            } else if (numValueOf != null && numValueOf.intValue() == 0) {
                 int i3 = i2 - this.basicTextViewFocusedStrokeWidth;
                 rect.left = i3;
                 rect.right = i3;
             }
             if (childAdapterPosition > 0) {
                 RecyclerView.Adapter adapter2 = recyclerView.mAdapter;
-                Integer valueOf2 = adapter2 != null ? Integer.valueOf(adapter2.getItemViewType(childAdapterPosition - 1)) : null;
-                if ((valueOf2 != null && valueOf2.intValue() == 1) || (valueOf2 != null && valueOf2.intValue() == 103)) {
+                Integer numValueOf2 = adapter2 != null ? Integer.valueOf(adapter2.getItemViewType(childAdapterPosition - 1)) : null;
+                if ((numValueOf2 != null && numValueOf2.intValue() == 1) || (numValueOf2 != null && numValueOf2.intValue() == 103)) {
                     rect.top = -i;
                 }
             }
@@ -110,85 +113,46 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
         new Companion(null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x008f  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0042  */
     /* JADX WARN: Type inference failed for: r11v4, types: [com.android.systemui.controls.management.adapter.StatelessControlAdapter$spanSizeLookup$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public StatelessControlAdapter(android.content.Context r11, com.android.systemui.controls.ui.util.LayoutUtil r12, com.android.systemui.controls.util.ControlsUtil r13, int r14) {
-        /*
-            r10 = this;
-            r10.<init>()
-            r10.controlsUtil = r13
-            r10.currentUserId = r14
-            com.android.systemui.controls.ui.util.SpanManager r14 = new com.android.systemui.controls.ui.util.SpanManager
-            r14.<init>(r12)
-            java.util.Map r12 = r14.spanInfos
-            r0 = 0
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r0)
-            com.android.systemui.controls.ui.util.SpanInfo r2 = new com.android.systemui.controls.ui.util.SpanInfo
-            r3 = 3
-            r4 = 0
-            r2.<init>(r0, r0, r3, r4)
-            r12.put(r1, r2)
-            java.util.Map r12 = r14.spanInfos
-            r1 = 1
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            com.android.systemui.controls.ui.util.SpanInfo r2 = new com.android.systemui.controls.ui.util.SpanInfo
-            boolean r5 = com.android.systemui.BasicRune.CONTROLS_SAMSUNG_STYLE_FOLD
-            r6 = 2131169418(0x7f07108a, float:1.7953166E38)
-            r7 = 2131165800(0x7f070268, float:1.7945827E38)
-            if (r5 == 0) goto L42
-            r13.getClass()
-            boolean r8 = com.android.systemui.controls.util.ControlsUtil.isFoldDelta(r11)
-            if (r8 == 0) goto L42
-            android.content.res.Resources r8 = r11.getResources()
-            int r8 = r8.getDimensionPixelSize(r7)
-            goto L4a
-        L42:
-            android.content.res.Resources r8 = r11.getResources()
-            int r8 = r8.getDimensionPixelSize(r6)
-        L4a:
-            r9 = 2
-            r2.<init>(r8, r0, r9, r4)
-            r12.put(r1, r2)
-            java.util.Map r12 = r14.spanInfos
-            r1 = 101(0x65, float:1.42E-43)
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            com.android.systemui.controls.ui.util.SpanInfo r2 = new com.android.systemui.controls.ui.util.SpanInfo
-            r2.<init>(r0, r0, r3, r4)
-            r12.put(r1, r2)
-            java.util.Map r12 = r14.spanInfos
-            r1 = 102(0x66, float:1.43E-43)
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            com.android.systemui.controls.ui.util.SpanInfo r2 = new com.android.systemui.controls.ui.util.SpanInfo
-            r2.<init>(r0, r0, r3, r4)
-            r12.put(r1, r2)
-            java.util.Map r12 = r14.spanInfos
-            r1 = 103(0x67, float:1.44E-43)
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            com.android.systemui.controls.ui.util.SpanInfo r2 = new com.android.systemui.controls.ui.util.SpanInfo
-            if (r5 == 0) goto L8f
-            r13.getClass()
-            boolean r13 = com.android.systemui.controls.util.ControlsUtil.isFoldDelta(r11)
-            if (r13 == 0) goto L8f
-            android.content.res.Resources r11 = r11.getResources()
-            int r11 = r11.getDimensionPixelSize(r7)
-            goto L97
-        L8f:
-            android.content.res.Resources r11 = r11.getResources()
-            int r11 = r11.getDimensionPixelSize(r6)
-        L97:
-            r2.<init>(r11, r0, r9, r4)
-            r12.put(r1, r2)
-            r10.spanManager = r14
-            com.android.systemui.controls.management.adapter.StatelessControlAdapter$spanSizeLookup$1 r11 = new com.android.systemui.controls.management.adapter.StatelessControlAdapter$spanSizeLookup$1
-            r11.<init>()
-            r10.spanSizeLookup = r11
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.management.adapter.StatelessControlAdapter.<init>(android.content.Context, com.android.systemui.controls.ui.util.LayoutUtil, com.android.systemui.controls.util.ControlsUtil, int):void");
+    public StatelessControlAdapter(Context context, LayoutUtil layoutUtil, ControlsUtil controlsUtil, int i) {
+        int dimensionPixelSize;
+        int dimensionPixelSize2;
+        this.controlsUtil = controlsUtil;
+        this.currentUserId = i;
+        SpanManager spanManager = new SpanManager(layoutUtil);
+        spanManager.spanInfos.put(0, new SpanInfo(0, 0, 3, null));
+        Map map = spanManager.spanInfos;
+        boolean z = BasicRune.CONTROLS_SAMSUNG_STYLE_FOLD;
+        if (z) {
+            controlsUtil.getClass();
+            dimensionPixelSize = ControlsUtil.isFoldDelta(context) ? context.getResources().getDimensionPixelSize(R.dimen.control_base_item_size_fold) : context.getResources().getDimensionPixelSize(R.dimen.sec_control_base_item_size);
+        }
+        map.put(1, new SpanInfo(dimensionPixelSize, 0, 2, null));
+        spanManager.spanInfos.put(101, new SpanInfo(0, 0, 3, null));
+        spanManager.spanInfos.put(102, new SpanInfo(0, 0, 3, null));
+        Map map2 = spanManager.spanInfos;
+        if (z) {
+            controlsUtil.getClass();
+            dimensionPixelSize2 = ControlsUtil.isFoldDelta(context) ? context.getResources().getDimensionPixelSize(R.dimen.control_base_item_size_fold) : context.getResources().getDimensionPixelSize(R.dimen.sec_control_base_item_size);
+        }
+        map2.put(103, new SpanInfo(dimensionPixelSize2, 0, 2, null));
+        this.spanManager = spanManager;
+        this.spanSizeLookup = new GridLayoutManager.SpanSizeLookup() { // from class: com.android.systemui.controls.management.adapter.StatelessControlAdapter$spanSizeLookup$1
+            @Override // androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+            public final int getSpanSize(int i2) {
+                StatelessControlAdapter statelessControlAdapter = this.this$0;
+                SpanInfo spanInfo = (SpanInfo) ((LinkedHashMap) statelessControlAdapter.spanManager.spanInfos).get(Integer.valueOf(statelessControlAdapter.getItemViewType(i2)));
+                if (spanInfo != null) {
+                    return spanInfo.span;
+                }
+                return 0;
+            }
+        };
     }
 
     public static final View onCreateViewHolder$inflate(ViewGroup viewGroup, int i) {
@@ -240,12 +204,12 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final void onAttachedToRecyclerView(final RecyclerView recyclerView) {
         if (recyclerView.getMeasuredWidth() == 0) {
-            recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.controls.management.adapter.StatelessControlAdapter$onAttachedToRecyclerView$1
+            recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.controls.management.adapter.StatelessControlAdapter.onAttachedToRecyclerView.1
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
                 public final void onGlobalLayout() {
-                    RecyclerView.this.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     StatelessControlAdapter statelessControlAdapter = this;
-                    RecyclerView recyclerView2 = RecyclerView.this;
+                    RecyclerView recyclerView2 = recyclerView;
                     int i = StatelessControlAdapter.$r8$clinit;
                     statelessControlAdapter.attachedToRecyclerView$1(recyclerView2);
                 }
@@ -286,18 +250,18 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                     Object obj4;
                     int i4 = i3;
                     String str = (String) obj;
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                     switch (i4) {
                         case 0:
                             AllControlsModel allControlsModel = this.f$0.model;
                             if (allControlsModel != null) {
-                                allControlsModel.changeFavoriteStatus(str, booleanValue);
+                                allControlsModel.changeFavoriteStatus(str, zBooleanValue);
                             }
                             break;
                         case 1:
                             AllControlsModel allControlsModel2 = this.f$0.model;
                             if (allControlsModel2 != null) {
-                                allControlsModel2.changeFavoriteStatus(str, booleanValue);
+                                allControlsModel2.changeFavoriteStatus(str, zBooleanValue);
                             }
                             break;
                         default:
@@ -318,7 +282,7 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                     }
                                 }
                                 SecStructureNameWrapper secStructureNameWrapper = (SecStructureNameWrapper) obj3;
-                                if (secStructureNameWrapper != null && booleanValue != secStructureNameWrapper.favorite) {
+                                if (secStructureNameWrapper != null && zBooleanValue != secStructureNameWrapper.favorite) {
                                     for (ControlStatus controlStatus : allControlsModel3.controls) {
                                         ArrayList arrayList2 = (ArrayList) allControlsModel3.elements;
                                         int size2 = arrayList2.size();
@@ -334,13 +298,13 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                                 obj4 = null;
                                             }
                                         }
-                                        allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, booleanValue);
+                                        allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, zBooleanValue);
                                     }
-                                    secStructureNameWrapper.favorite = booleanValue;
-                                    int indexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
+                                    secStructureNameWrapper.favorite = zBooleanValue;
+                                    int iIndexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
                                     StatelessControlAdapter statelessControlAdapter = allControlsModel3.adapter;
                                     if (statelessControlAdapter != null) {
-                                        statelessControlAdapter.notifyItemChanged(indexOf, new Object());
+                                        statelessControlAdapter.notifyItemChanged(iIndexOf, new Object());
                                     }
                                 }
                             }
@@ -366,18 +330,18 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                         Object obj4;
                         int i42 = i4;
                         String str = (String) obj;
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                         switch (i42) {
                             case 0:
                                 AllControlsModel allControlsModel = this.f$0.model;
                                 if (allControlsModel != null) {
-                                    allControlsModel.changeFavoriteStatus(str, booleanValue);
+                                    allControlsModel.changeFavoriteStatus(str, zBooleanValue);
                                 }
                                 break;
                             case 1:
                                 AllControlsModel allControlsModel2 = this.f$0.model;
                                 if (allControlsModel2 != null) {
-                                    allControlsModel2.changeFavoriteStatus(str, booleanValue);
+                                    allControlsModel2.changeFavoriteStatus(str, zBooleanValue);
                                 }
                                 break;
                             default:
@@ -398,7 +362,7 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                         }
                                     }
                                     SecStructureNameWrapper secStructureNameWrapper = (SecStructureNameWrapper) obj3;
-                                    if (secStructureNameWrapper != null && booleanValue != secStructureNameWrapper.favorite) {
+                                    if (secStructureNameWrapper != null && zBooleanValue != secStructureNameWrapper.favorite) {
                                         for (ControlStatus controlStatus : allControlsModel3.controls) {
                                             ArrayList arrayList2 = (ArrayList) allControlsModel3.elements;
                                             int size2 = arrayList2.size();
@@ -414,13 +378,13 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                                     obj4 = null;
                                                 }
                                             }
-                                            allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, booleanValue);
+                                            allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, zBooleanValue);
                                         }
-                                        secStructureNameWrapper.favorite = booleanValue;
-                                        int indexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
+                                        secStructureNameWrapper.favorite = zBooleanValue;
+                                        int iIndexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
                                         StatelessControlAdapter statelessControlAdapter = allControlsModel3.adapter;
                                         if (statelessControlAdapter != null) {
-                                            statelessControlAdapter.notifyItemChanged(indexOf, new Object());
+                                            statelessControlAdapter.notifyItemChanged(iIndexOf, new Object());
                                         }
                                     }
                                 }
@@ -446,18 +410,18 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                         Object obj4;
                         int i42 = i5;
                         String str = (String) obj;
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                         switch (i42) {
                             case 0:
                                 AllControlsModel allControlsModel = this.f$0.model;
                                 if (allControlsModel != null) {
-                                    allControlsModel.changeFavoriteStatus(str, booleanValue);
+                                    allControlsModel.changeFavoriteStatus(str, zBooleanValue);
                                 }
                                 break;
                             case 1:
                                 AllControlsModel allControlsModel2 = this.f$0.model;
                                 if (allControlsModel2 != null) {
-                                    allControlsModel2.changeFavoriteStatus(str, booleanValue);
+                                    allControlsModel2.changeFavoriteStatus(str, zBooleanValue);
                                 }
                                 break;
                             default:
@@ -478,7 +442,7 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                         }
                                     }
                                     SecStructureNameWrapper secStructureNameWrapper = (SecStructureNameWrapper) obj3;
-                                    if (secStructureNameWrapper != null && booleanValue != secStructureNameWrapper.favorite) {
+                                    if (secStructureNameWrapper != null && zBooleanValue != secStructureNameWrapper.favorite) {
                                         for (ControlStatus controlStatus : allControlsModel3.controls) {
                                             ArrayList arrayList2 = (ArrayList) allControlsModel3.elements;
                                             int size2 = arrayList2.size();
@@ -494,13 +458,13 @@ public final class StatelessControlAdapter extends RecyclerView.Adapter {
                                                     obj4 = null;
                                                 }
                                             }
-                                            allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, booleanValue);
+                                            allControlsModel3.setControlFavoriteStatus((SecControlStatusWrapper) obj4, zBooleanValue);
                                         }
-                                        secStructureNameWrapper.favorite = booleanValue;
-                                        int indexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
+                                        secStructureNameWrapper.favorite = zBooleanValue;
+                                        int iIndexOf = ((ArrayList) allControlsModel3.elements).indexOf(secStructureNameWrapper);
                                         StatelessControlAdapter statelessControlAdapter = allControlsModel3.adapter;
                                         if (statelessControlAdapter != null) {
-                                            statelessControlAdapter.notifyItemChanged(indexOf, new Object());
+                                            statelessControlAdapter.notifyItemChanged(iIndexOf, new Object());
                                         }
                                     }
                                 }

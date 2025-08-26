@@ -127,9 +127,9 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
     public WindowDecorActionBar(Activity activity) {
         this.mActivity = activity;
         View decorView = activity.getWindow().getDecorView();
-        boolean hasFeature = this.mActivity.getWindow().hasFeature(9);
+        boolean zHasFeature = this.mActivity.getWindow().hasFeature(9);
         init(decorView);
-        if (hasFeature) {
+        if (zHasFeature) {
             return;
         }
         this.mContentView = decorView.findViewById(16908290);
@@ -161,22 +161,22 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
         }
         this.mContext = decorToolbar.getContext();
         this.mContextDisplayMode = this.mDecorToolbar.isSplit() ? 1 : 0;
-        byte b = (this.mDecorToolbar.getDisplayOptions() & 4) != 0;
-        if (b != false) {
+        Object[] objArr = (this.mDecorToolbar.getDisplayOptions() & 4) != 0;
+        if (objArr != false) {
             this.mDisplayHomeAsUpSet = true;
         }
         ActionBarPolicy actionBarPolicy = ActionBarPolicy.get(this.mContext);
-        setHomeButtonEnabled(actionBarPolicy.enableHomeButtonByDefault() || b == true);
+        setHomeButtonEnabled(actionBarPolicy.enableHomeButtonByDefault() || objArr == true);
         setHasEmbeddedTabs(actionBarPolicy.hasEmbeddedTabs());
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
-        if (obtainStyledAttributes.getBoolean(21, false)) {
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        if (typedArrayObtainStyledAttributes.getBoolean(21, false)) {
             setHideOnContentScrollEnabled(true);
         }
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(20, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(20, 0);
         if (dimensionPixelSize != 0) {
             setElevation(dimensionPixelSize);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -549,9 +549,9 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
         TabImpl tabImpl = this.mSelectedTab;
         int position = tabImpl != null ? tabImpl.getPosition() : this.mSavedTabPosition;
         this.mTabScrollView.removeTabAt(i);
-        TabImpl remove = this.mTabs.remove(i);
-        if (remove != null) {
-            remove.setPosition(-1);
+        TabImpl tabImplRemove = this.mTabs.remove(i);
+        if (tabImplRemove != null) {
+            tabImplRemove.setPosition(-1);
         }
         int size = this.mTabs.size();
         for (int i2 = i; i2 < size; i2++) {
@@ -568,27 +568,27 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
             this.mSavedTabPosition = tab != null ? tab.getPosition() : -1;
             return;
         }
-        FragmentTransaction disallowAddToBackStack = this.mDecorToolbar.getViewGroup().isInEditMode() ? null : this.mActivity.getFragmentManager().beginTransaction().disallowAddToBackStack();
+        FragmentTransaction fragmentTransactionDisallowAddToBackStack = this.mDecorToolbar.getViewGroup().isInEditMode() ? null : this.mActivity.getFragmentManager().beginTransaction().disallowAddToBackStack();
         TabImpl tabImpl = this.mSelectedTab;
         if (tabImpl != tab) {
             this.mTabScrollView.setTabSelected(tab != null ? tab.getPosition() : -1);
             TabImpl tabImpl2 = this.mSelectedTab;
             if (tabImpl2 != null) {
-                tabImpl2.getCallback().onTabUnselected(this.mSelectedTab, disallowAddToBackStack);
+                tabImpl2.getCallback().onTabUnselected(this.mSelectedTab, fragmentTransactionDisallowAddToBackStack);
             }
             TabImpl tabImpl3 = (TabImpl) tab;
             this.mSelectedTab = tabImpl3;
             if (tabImpl3 != null) {
-                tabImpl3.getCallback().onTabSelected(this.mSelectedTab, disallowAddToBackStack);
+                tabImpl3.getCallback().onTabSelected(this.mSelectedTab, fragmentTransactionDisallowAddToBackStack);
             }
         } else if (tabImpl != null) {
-            tabImpl.getCallback().onTabReselected(this.mSelectedTab, disallowAddToBackStack);
+            tabImpl.getCallback().onTabReselected(this.mSelectedTab, fragmentTransactionDisallowAddToBackStack);
             this.mTabScrollView.animateToTab(tab.getPosition());
         }
-        if (disallowAddToBackStack == null || disallowAddToBackStack.isEmpty()) {
+        if (fragmentTransactionDisallowAddToBackStack == null || fragmentTransactionDisallowAddToBackStack.isEmpty()) {
             return;
         }
-        disallowAddToBackStack.commit();
+        fragmentTransactionDisallowAddToBackStack.commit();
     }
 
     @Override // android.app.ActionBar
@@ -722,17 +722,17 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
             }
             this.mContainerView.setTranslationY(f);
             AnimatorSet animatorSet = new AnimatorSet();
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mContainerView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, 0.0f);
-            ofFloat.addUpdateListener(this.mUpdateListener);
-            AnimatorSet.Builder play = animatorSet.play(ofFloat);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mContainerView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, 0.0f);
+            objectAnimatorOfFloat.addUpdateListener(this.mUpdateListener);
+            AnimatorSet.Builder builderPlay = animatorSet.play(objectAnimatorOfFloat);
             if (this.mContentAnimations && (view2 = this.mContentView) != null) {
-                play.with(ObjectAnimator.ofFloat(view2, View.TRANSLATION_Y, f, 0.0f));
+                builderPlay.with(ObjectAnimator.ofFloat(view2, View.TRANSLATION_Y, f, 0.0f));
             }
             ActionBarContainer actionBarContainer = this.mSplitView;
             if (actionBarContainer != null && this.mContextDisplayMode == 1) {
                 actionBarContainer.setTranslationY(actionBarContainer.getHeight());
                 this.mSplitView.setVisibility(0);
-                play.with(ObjectAnimator.ofFloat(this.mSplitView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, 0.0f));
+                builderPlay.with(ObjectAnimator.ofFloat(this.mSplitView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, 0.0f));
             }
             animatorSet.setInterpolator(AnimationUtils.loadInterpolator(this.mContext, 17563651));
             animatorSet.setDuration(250L);
@@ -774,16 +774,16 @@ public class WindowDecorActionBar extends ActionBar implements ActionBarOverlayL
                 this.mContainerView.getLocationInWindow(new int[]{0, 0});
                 f -= r10[1];
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mContainerView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, f);
-            ofFloat.addUpdateListener(this.mUpdateListener);
-            AnimatorSet.Builder play = animatorSet.play(ofFloat);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mContainerView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, f);
+            objectAnimatorOfFloat.addUpdateListener(this.mUpdateListener);
+            AnimatorSet.Builder builderPlay = animatorSet.play(objectAnimatorOfFloat);
             if (this.mContentAnimations && (view = this.mContentView) != null) {
-                play.with(ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0.0f, f));
+                builderPlay.with(ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0.0f, f));
             }
             ActionBarContainer actionBarContainer = this.mSplitView;
             if (actionBarContainer != null && actionBarContainer.getVisibility() == 0) {
                 this.mSplitView.setAlpha(1.0f);
-                play.with(ObjectAnimator.ofFloat(this.mSplitView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, this.mSplitView.getHeight()));
+                builderPlay.with(ObjectAnimator.ofFloat(this.mSplitView, (Property<ActionBarContainer, Float>) View.TRANSLATION_Y, this.mSplitView.getHeight()));
             }
             animatorSet.setInterpolator(AnimationUtils.loadInterpolator(this.mContext, 17563650));
             animatorSet.setDuration(250L);

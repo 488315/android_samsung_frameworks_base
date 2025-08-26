@@ -18,7 +18,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PreviewLifecycleObserver implements Handler.Callback, IBinder.DeathRecipient {
     public boolean isDestroyedOrDestroying;
@@ -27,7 +26,6 @@ public final class PreviewLifecycleObserver implements Handler.Callback, IBinder
     public KeyguardPreviewRenderer renderer;
     public final CoroutineScope scope;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,7 +50,7 @@ public final class PreviewLifecycleObserver implements Handler.Callback, IBinder
     public final void binderDied() {
         Function1 function1 = this.onDestroy;
         if (function1 != null) {
-            function1.mo779invoke(this);
+            function1.mo781invoke(this);
         }
     }
 
@@ -82,7 +80,7 @@ public final class PreviewLifecycleObserver implements Handler.Callback, IBinder
                 keyguardPreviewRenderer.mainHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$hideSmartspace$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        View view = KeyguardPreviewRenderer.this.smartSpaceView;
+                        View view = keyguardPreviewRenderer.smartSpaceView;
                         if (view != null) {
                             view.setVisibility(z ? 4 : 0);
                         }
@@ -115,7 +113,7 @@ public final class PreviewLifecycleObserver implements Handler.Callback, IBinder
                 }
             } else {
                 if (i != 1988) {
-                    function1.mo779invoke(this);
+                    function1.mo781invoke(this);
                     return true;
                 }
                 String string4 = message.getData().getString("slot_id");

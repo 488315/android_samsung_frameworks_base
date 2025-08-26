@@ -398,10 +398,10 @@ public final class ImsCallProfile implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        Bundle maybeCleanseExtras = maybeCleanseExtras(this.mCallExtras);
+        Bundle bundleMaybeCleanseExtras = maybeCleanseExtras(this.mCallExtras);
         parcel.writeInt(this.mServiceType);
         parcel.writeInt(this.mCallType);
-        parcel.writeBundle(maybeCleanseExtras);
+        parcel.writeBundle(bundleMaybeCleanseExtras);
         parcel.writeParcelable(this.mMediaProfile, 0);
         parcel.writeInt(this.mEmergencyServiceCategories);
         parcel.writeStringList(this.mEmergencyUrns);
@@ -475,16 +475,16 @@ public final class ImsCallProfile implements Parcelable {
     }
 
     public static int getCallTypeFromVideoState(int i) {
-        boolean isVideoStateSet = isVideoStateSet(i, 1);
-        boolean isVideoStateSet2 = isVideoStateSet(i, 2);
+        boolean zIsVideoStateSet = isVideoStateSet(i, 1);
+        boolean zIsVideoStateSet2 = isVideoStateSet(i, 2);
         if (isVideoStateSet(i, 4)) {
             return 7;
         }
-        if (isVideoStateSet && !isVideoStateSet2) {
+        if (zIsVideoStateSet && !zIsVideoStateSet2) {
             return 5;
         }
-        if (isVideoStateSet || !isVideoStateSet2) {
-            return (isVideoStateSet && isVideoStateSet2) ? 4 : 2;
+        if (zIsVideoStateSet || !zIsVideoStateSet2) {
+            return (zIsVideoStateSet && zIsVideoStateSet2) ? 4 : 2;
         }
         return 6;
     }
@@ -506,12 +506,12 @@ public final class ImsCallProfile implements Parcelable {
             return null;
         }
         int size = bundle.size();
-        Bundle filterValues = TelephonyUtils.filterValues(bundle);
-        int size2 = filterValues.size();
+        Bundle bundleFilterValues = TelephonyUtils.filterValues(bundle);
+        int size2 = bundleFilterValues.size();
         if (size != size2) {
             Log.i(TAG, "maybeCleanseExtras: " + (size - size2) + " extra values were removed - only primitive types and system parcelables are permitted.");
         }
-        return filterValues;
+        return bundleFilterValues;
     }
 
     public void setEmergencyCallInfo(EmergencyNumber emergencyNumber, boolean z) {

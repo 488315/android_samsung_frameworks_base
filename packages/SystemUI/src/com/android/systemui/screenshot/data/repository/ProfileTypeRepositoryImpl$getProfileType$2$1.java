@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ProfileTypeRepositoryImpl$getProfileType$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $userId;
@@ -48,12 +47,10 @@ final class ProfileTypeRepositoryImpl$getProfileType$2$1 extends SuspendLambda i
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        if (this.this$0.userManager.isManagedProfile(this.$userId)) {
+        if (!this.this$0.userManager.isManagedProfile(this.$userId) && SemPersonaManager.isSecureFolderId(this.$userId)) {
             ProfileType profileType = ProfileType.NONE;
-        } else if (SemPersonaManager.isSecureFolderId(this.$userId)) {
-            ProfileType profileType2 = ProfileType.NONE;
         } else {
-            ProfileType profileType3 = ProfileType.NONE;
+            ProfileType profileType2 = ProfileType.NONE;
         }
         String str = this.this$0.userManager.getUserInfo(this.$userId).userType;
         if (str != null) {

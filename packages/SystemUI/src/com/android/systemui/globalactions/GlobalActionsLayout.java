@@ -12,7 +12,6 @@ import com.android.systemui.MultiListLayout;
 import com.android.systemui.util.leak.RotationUtils;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class GlobalActionsLayout extends MultiListLayout {
     public boolean mBackgroundsSet;
@@ -77,9 +76,9 @@ public abstract class GlobalActionsLayout extends MultiListLayout {
         ViewGroup separatedView = getSeparatedView();
         ViewGroup listView = getListView();
         for (int i = 0; i < this.mAdapter.getCount(); i++) {
-            boolean shouldBeSeparated = this.mAdapter.shouldBeSeparated(i);
-            View view = shouldBeSeparated ? this.mAdapter.getView(i, null, separatedView) : this.mAdapter.getView(i, null, listView);
-            if (shouldBeSeparated) {
+            boolean zShouldBeSeparated = this.mAdapter.shouldBeSeparated(i);
+            View view = zShouldBeSeparated ? this.mAdapter.getView(i, null, separatedView) : this.mAdapter.getView(i, null, listView);
+            if (zShouldBeSeparated) {
                 ViewGroup separatedView2 = getSeparatedView();
                 if (separatedView2 != null) {
                     separatedView2.addView(view);

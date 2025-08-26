@@ -124,14 +124,14 @@ public class TransitionAnimation extends Animation<Float> {
     }
 
     public void checkValidItem(final Item item) throws Exception {
-        boolean anyMatch = Arrays.stream(new ItemType[]{ItemType.IMAGE, ItemType.VIDEO, ItemType.COLOR, ItemType.PORTRAIT_VIDEO}).anyMatch(new Predicate() { // from class: com.samsung.vekit.Animation.TransitionAnimation$$ExternalSyntheticLambda0
+        boolean zAnyMatch = Arrays.stream(new ItemType[]{ItemType.IMAGE, ItemType.VIDEO, ItemType.COLOR, ItemType.PORTRAIT_VIDEO}).anyMatch(new Predicate() { // from class: com.samsung.vekit.Animation.TransitionAnimation$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return TransitionAnimation.lambda$checkValidItem$0(Item.this, (ItemType) obj);
+                return TransitionAnimation.lambda$checkValidItem$0(item, (ItemType) obj);
             }
         });
         boolean z = item.getParent().getLayerType() == LayerType.MEDIA;
-        if (!anyMatch || !z) {
+        if (!zAnyMatch || !z) {
             throw new Exception("isInvalidElement : please set correct Items to TransitionAnimation.");
         }
     }

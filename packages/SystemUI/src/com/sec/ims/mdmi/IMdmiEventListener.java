@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IMdmiEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.mdmi.IMdmiEventListener";
 
     void onE911StatsUpdated(long j, long j2, long j3, long j4, long j5, double d, double d2, double d3) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMdmiEventListener {
         static final int TRANSACTION_onE911StatsUpdated = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IMdmiEventListener {
             private IBinder mRemote;
 
@@ -36,23 +33,23 @@ public interface IMdmiEventListener extends IInterface {
 
             @Override // com.sec.ims.mdmi.IMdmiEventListener
             public void onE911StatsUpdated(long j, long j2, long j3, long j4, long j5, double d, double d2, double d3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMdmiEventListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeLong(j3);
-                    obtain.writeLong(j4);
-                    obtain.writeLong(j5);
-                    obtain.writeDouble(d);
-                    obtain.writeDouble(d2);
-                    obtain.writeDouble(d3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMdmiEventListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeLong(j3);
+                    parcelObtain.writeLong(j4);
+                    parcelObtain.writeLong(j5);
+                    parcelObtain.writeDouble(d);
+                    parcelObtain.writeDouble(d2);
+                    parcelObtain.writeDouble(d3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -65,8 +62,8 @@ public interface IMdmiEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMdmiEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IMdmiEventListener)) ? new Proxy(iBinder) : (IMdmiEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMdmiEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMdmiEventListener)) ? new Proxy(iBinder) : (IMdmiEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -85,16 +82,16 @@ public interface IMdmiEventListener extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            long readLong = parcel3.readLong();
-            long readLong2 = parcel3.readLong();
-            long readLong3 = parcel3.readLong();
-            long readLong4 = parcel3.readLong();
-            long readLong5 = parcel3.readLong();
-            double readDouble = parcel3.readDouble();
-            double readDouble2 = parcel3.readDouble();
-            double readDouble3 = parcel3.readDouble();
+            long j = parcel3.readLong();
+            long j2 = parcel3.readLong();
+            long j3 = parcel3.readLong();
+            long j4 = parcel3.readLong();
+            long j5 = parcel3.readLong();
+            double d = parcel3.readDouble();
+            double d2 = parcel3.readDouble();
+            double d3 = parcel3.readDouble();
             parcel3.enforceNoDataAvail();
-            onE911StatsUpdated(readLong, readLong2, readLong3, readLong4, readLong5, readDouble, readDouble2, readDouble3);
+            onE911StatsUpdated(j, j2, j3, j4, j5, d, d2, d3);
             parcel2.writeNoException();
             return true;
         }
@@ -105,7 +102,6 @@ public interface IMdmiEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IMdmiEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

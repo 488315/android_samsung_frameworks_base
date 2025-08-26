@@ -1,6 +1,5 @@
 package androidx.constraintlayout.core.motion.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SpringStopEngine implements StopEngine {
     public float mLastTime;
@@ -19,10 +18,10 @@ public class SpringStopEngine implements StopEngine {
         if (d > 0.0d) {
             double d2 = this.mStiffness;
             double d3 = this.mDamping;
-            int sqrt = (int) ((9.0d / ((Math.sqrt(d2 / this.mMass) * d) * 4.0d)) + 1.0d);
-            double d4 = d / sqrt;
+            int iSqrt = (int) ((9.0d / ((Math.sqrt(d2 / this.mMass) * d) * 4.0d)) + 1.0d);
+            double d4 = d / iSqrt;
             int i = 0;
-            while (i < sqrt) {
+            while (i < iSqrt) {
                 float f2 = this.mPos;
                 double d5 = f2;
                 double d6 = this.mTargetPos;

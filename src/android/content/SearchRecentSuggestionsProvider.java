@@ -2,6 +2,7 @@ package android.content;
 
 import android.app.SearchManager;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
@@ -39,7 +40,7 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
-        public void onCreate(SQLiteDatabase sQLiteDatabase) {
+        public void onCreate(SQLiteDatabase sQLiteDatabase) throws SQLException {
             StringBuilder sb = new StringBuilder("CREATE TABLE suggestions (_id INTEGER PRIMARY KEY,display1 TEXT UNIQUE ON CONFLICT REPLACE");
             if ((this.mNewVersion & 2) != 0) {
                 sb.append(",display2 TEXT");
@@ -49,7 +50,7 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
-        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
+        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) throws SQLException {
             Log.w(SearchRecentSuggestionsProvider.TAG, "Upgrading database from version " + i + " to " + i2 + ", which will destroy all old data");
             sQLiteDatabase.execSQL("DROP TABLE IF EXISTS suggestions");
             onCreate(sQLiteDatabase);
@@ -83,9 +84,9 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
             throw new IllegalArgumentException("Unknown Uri");
         }
         if (uri.getPathSegments().get(0).equals("suggestions")) {
-            int delete = writableDatabase.delete("suggestions", str, strArr);
+            int iDelete = writableDatabase.delete("suggestions", str, strArr);
             getContext().getContentResolver().notifyChange(uri, null);
-            return delete;
+            return iDelete;
         }
         throw new IllegalArgumentException("Unknown Uri");
     }
@@ -107,62 +108,35 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         throw new IllegalArgumentException("Unknown Uri");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0055  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0055  */
     @Override // android.content.ContentProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.net.Uri insert(android.net.Uri r9, android.content.ContentValues r10) {
-        /*
-            r8 = this;
-            android.database.sqlite.SQLiteOpenHelper r0 = r8.mOpenHelper
-            android.database.sqlite.SQLiteDatabase r0 = r0.getWritableDatabase()
-            java.util.List r1 = r9.getPathSegments()
-            int r1 = r1.size()
-            java.lang.String r2 = "Unknown Uri"
-            r3 = 1
-            if (r1 < r3) goto L5b
-            java.util.List r9 = r9.getPathSegments()
-            r4 = 0
-            java.lang.Object r9 = r9.get(r4)
-            java.lang.String r9 = (java.lang.String) r9
-            java.lang.String r4 = "suggestions"
-            boolean r9 = r9.equals(r4)
-            r5 = 0
-            r7 = 0
-            if (r9 == 0) goto L42
-            if (r1 != r3) goto L42
-            java.lang.String r9 = "query"
-            long r9 = r0.insert(r4, r9, r10)
-            int r0 = (r9 > r5 ? 1 : (r9 == r5 ? 0 : -1))
-            if (r0 <= 0) goto L44
-            android.net.Uri r0 = r8.mSuggestionsUri
-            java.lang.String r1 = java.lang.String.valueOf(r9)
-            android.net.Uri r0 = android.net.Uri.withAppendedPath(r0, r1)
-            goto L45
-        L42:
-            r9 = -1
-        L44:
-            r0 = r7
-        L45:
-            int r9 = (r9 > r5 ? 1 : (r9 == r5 ? 0 : -1))
-            if (r9 < 0) goto L55
-            android.content.Context r8 = r8.getContext()
-            android.content.ContentResolver r8 = r8.getContentResolver()
-            r8.notifyChange(r0, r7)
-            return r0
-        L55:
-            java.lang.IllegalArgumentException r8 = new java.lang.IllegalArgumentException
-            r8.<init>(r2)
-            throw r8
-        L5b:
-            java.lang.IllegalArgumentException r8 = new java.lang.IllegalArgumentException
-            r8.<init>(r2)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.SearchRecentSuggestionsProvider.insert(android.net.Uri, android.content.ContentValues):android.net.Uri");
+    public Uri insert(Uri uri, ContentValues contentValues) {
+        long jInsert;
+        Uri uriWithAppendedPath;
+        SQLiteDatabase writableDatabase = this.mOpenHelper.getWritableDatabase();
+        int size = uri.getPathSegments().size();
+        if (size < 1) {
+            throw new IllegalArgumentException("Unknown Uri");
+        }
+        if (uri.getPathSegments().get(0).equals("suggestions") && size == 1) {
+            jInsert = writableDatabase.insert("suggestions", "query", contentValues);
+            if (jInsert > 0) {
+                uriWithAppendedPath = Uri.withAppendedPath(this.mSuggestionsUri, String.valueOf(jInsert));
+            }
+            if (jInsert >= 0) {
+                throw new IllegalArgumentException("Unknown Uri");
+            }
+            getContext().getContentResolver().notifyChange(uriWithAppendedPath, null);
+            return uriWithAppendedPath;
+        }
+        jInsert = -1;
+        uriWithAppendedPath = null;
+        if (jInsert >= 0) {
+        }
     }
 
     @Override // android.content.ContentProvider
@@ -196,9 +170,9 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
                 str3 = this.mSuggestSuggestionClause;
                 strArr4 = strArr3;
             }
-            Cursor query = readableDatabase.query("suggestions", this.mSuggestionProjection, str3, strArr4, null, null, "date DESC", null);
-            query.setNotificationUri(getContext().getContentResolver(), uri);
-            return query;
+            Cursor cursorQuery = readableDatabase.query("suggestions", this.mSuggestionProjection, str3, strArr4, null, null, "date DESC", null);
+            cursorQuery.setNotificationUri(getContext().getContentResolver(), uri);
+            return cursorQuery;
         }
         int size = uri.getPathSegments().size();
         if (size != 1 && size != 2) {
@@ -227,9 +201,9 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
             sb.append(str);
             sb.append(')');
         }
-        Cursor query2 = readableDatabase.query(str5, strArr5, sb.toString(), strArr2, null, null, str2, null);
-        query2.setNotificationUri(getContext().getContentResolver(), uri);
-        return query2;
+        Cursor cursorQuery2 = readableDatabase.query(str5, strArr5, sb.toString(), strArr2, null, null, str2, null);
+        cursorQuery2.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursorQuery2;
     }
 
     @Override // android.content.ContentProvider

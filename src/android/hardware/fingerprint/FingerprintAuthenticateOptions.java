@@ -199,23 +199,23 @@ public final class FingerprintAuthenticateOptions implements AuthenticateOptions
     }
 
     FingerprintAuthenticateOptions(Parcel parcel) {
-        int readInt = parcel.readInt();
-        boolean z = (readInt & 4) != 0;
-        boolean z2 = (readInt & 128) != 0;
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        String readString = parcel.readString();
-        String readString2 = (readInt & 32) == 0 ? null : parcel.readString();
-        AuthenticateReason.Vendor vendor2 = (readInt & 64) == 0 ? null : (AuthenticateReason.Vendor) parcel.readTypedObject(AuthenticateReason.Vendor.CREATOR);
-        this.mUserId = readInt2;
-        this.mSensorId = readInt3;
+        int i = parcel.readInt();
+        boolean z = (i & 4) != 0;
+        boolean z2 = (i & 128) != 0;
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        String string = parcel.readString();
+        String string2 = (i & 32) == 0 ? null : parcel.readString();
+        AuthenticateReason.Vendor vendor2 = (i & 64) == 0 ? null : (AuthenticateReason.Vendor) parcel.readTypedObject(AuthenticateReason.Vendor.CREATOR);
+        this.mUserId = i2;
+        this.mSensorId = i3;
         this.mIgnoreEnrollmentState = z;
-        this.mDisplayState = readInt4;
-        AnnotationValidations.validate((Class<? extends Annotation>) AuthenticateOptions.DisplayState.class, (Annotation) null, readInt4);
-        this.mOpPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mAttributionTag = readString2;
+        this.mDisplayState = i4;
+        AnnotationValidations.validate((Class<? extends Annotation>) AuthenticateOptions.DisplayState.class, (Annotation) null, i4);
+        this.mOpPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mAttributionTag = string2;
         this.mVendorReason = vendor2;
         this.mIsMandatoryBiometrics = z2;
     }

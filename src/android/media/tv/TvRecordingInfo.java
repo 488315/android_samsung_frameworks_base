@@ -187,7 +187,7 @@ public final class TvRecordingInfo implements Parcelable {
         arrayList.forEach(new Consumer() { // from class: android.media.tv.TvRecordingInfo$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                TvRecordingInfo.this.lambda$new$1((String) obj);
+                this.f$0.lambda$new$1((String) obj);
             }
         });
         this.mRecordingUri = Uri.parse(parcel.readString());

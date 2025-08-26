@@ -53,9 +53,9 @@ public interface IInputMethodInfoChangeListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputMethodInfoChangeListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMethodInfoChangeListener)) {
-                return (IInputMethodInfoChangeListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputMethodInfoChangeListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMethodInfoChangeListener)) {
+                return (IInputMethodInfoChangeListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,10 +85,10 @@ public interface IInputMethodInfoChangeListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRemoteInputConnection asInterface = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteInputConnection iRemoteInputConnectionAsInterface = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
                 EditorInfo editorInfo = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onInputInfoChanged(asInterface, editorInfo);
+                onInputInfoChanged(iRemoteInputConnectionAsInterface, editorInfo);
             } else if (i == 2) {
                 onKeyboardClosed();
             } else {
@@ -115,25 +115,25 @@ public interface IInputMethodInfoChangeListener extends IInterface {
 
             @Override // com.samsung.android.content.smartclip.IInputMethodInfoChangeListener
             public void onInputInfoChanged(IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodInfoChangeListener.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteInputConnection);
-                    obtain.writeTypedObject(editorInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodInfoChangeListener.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteInputConnection);
+                    parcelObtain.writeTypedObject(editorInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.IInputMethodInfoChangeListener
             public void onKeyboardClosed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodInfoChangeListener.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodInfoChangeListener.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

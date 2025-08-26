@@ -16,13 +16,11 @@ import com.android.systemui.shared.recents.model.ThumbnailData;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskStackChangeListeners {
     public static final TaskStackChangeListeners INSTANCE = new TaskStackChangeListeners();
     public final Impl mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl extends TaskStackListener implements Handler.Callback {
         public final Handler mHandler;
         public boolean mRegistered;
@@ -63,11 +61,11 @@ public class TaskStackChangeListeners {
                     } else if (i == 2) {
                         Trace.beginSection("onTaskSnapshotChanged");
                         TaskSnapshot taskSnapshot = (TaskSnapshot) message.obj;
-                        ThumbnailData fromSnapshot = ThumbnailData.fromSnapshot(taskSnapshot);
+                        ThumbnailData thumbnailDataFromSnapshot = ThumbnailData.fromSnapshot(taskSnapshot);
                         for (int size2 = ((ArrayList) this.mTaskStackListeners).size() - 1; size2 >= 0; size2--) {
                             ((TaskStackChangeListener) ((ArrayList) this.mTaskStackListeners).get(size2)).getClass();
                         }
-                        Bitmap bitmap = fromSnapshot.thumbnail;
+                        Bitmap bitmap = thumbnailDataFromSnapshot.thumbnail;
                         if (bitmap != null) {
                             bitmap.recycle();
                         }
@@ -241,13 +239,13 @@ public class TaskStackChangeListeners {
         }
 
         public final void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = runningTaskInfo;
-            obtain.argi1 = z ? 1 : 0;
-            obtain.argi2 = z2 ? 1 : 0;
-            obtain.argi3 = z3 ? 1 : 0;
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = runningTaskInfo;
+            someArgsObtain.argi1 = z ? 1 : 0;
+            someArgsObtain.argi2 = z2 ? 1 : 0;
+            someArgsObtain.argi3 = z3 ? 1 : 0;
             this.mHandler.removeMessages(4);
-            this.mHandler.obtainMessage(4, obtain).sendToTarget();
+            this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
         }
 
         public final void onActivityRotation(int i) {
@@ -332,12 +330,12 @@ public class TaskStackChangeListeners {
         }
 
         public final void removeListener(TaskStackChangeListener taskStackChangeListener) {
-            boolean isEmpty;
+            boolean zIsEmpty;
             synchronized (this.mTaskStackListeners) {
                 ((ArrayList) this.mTaskStackListeners).remove(taskStackChangeListener);
-                isEmpty = ((ArrayList) this.mTaskStackListeners).isEmpty();
+                zIsEmpty = ((ArrayList) this.mTaskStackListeners).isEmpty();
             }
-            if (isEmpty && this.mRegistered) {
+            if (zIsEmpty && this.mRegistered) {
                 try {
                     ActivityTaskManager.getService().unregisterTaskStackListener(this);
                     this.mRegistered = false;
@@ -365,7 +363,6 @@ public class TaskStackChangeListeners {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PinnedActivityInfo {
         public final String mPackageName;
         public final int mTaskId;
@@ -376,7 +373,6 @@ public class TaskStackChangeListeners {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TestSyncHandler extends Handler {
         public Impl mCb;
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.android.systemui.navigationbar.views.NavigationBarView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ButtonDispatcher {
     public NavigationBarView.AnonymousClass1 mAccessibilityDelegate;
@@ -29,7 +28,7 @@ public class ButtonDispatcher {
     public final ButtonDispatcher$$ExternalSyntheticLambda0 mAlphaListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.navigationbar.views.buttons.ButtonDispatcher$$ExternalSyntheticLambda0
         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-            ButtonDispatcher.this.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue(), false);
+            this.f$0.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue(), false);
         }
     };
     public final AnonymousClass1 mFadeListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.navigationbar.views.buttons.ButtonDispatcher.1

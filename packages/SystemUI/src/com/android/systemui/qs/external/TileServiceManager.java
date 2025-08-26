@@ -12,13 +12,13 @@ import android.os.RemoteException;
 import android.os.SemSystemProperties;
 import android.provider.DeviceConfig;
 import android.util.Log;
+import com.android.systemui.qs.external.TileLifecycleManager;
 import com.android.systemui.qs.pipeline.data.repository.CustomTileAddedRepository;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileServiceManager {
     static final String PREFS_FILE = "CustomTileModes";
@@ -46,29 +46,9 @@ public class TileServiceManager {
     public boolean mWaitingUnlock;
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TileServiceManager(com.android.systemui.qs.external.TileServices r7, android.os.Handler r8, android.content.ComponentName r9, com.android.systemui.settings.UserTracker r10, com.android.systemui.qs.external.TileLifecycleManager.Factory r11, com.android.systemui.qs.pipeline.data.repository.CustomTileAddedRepository r12) {
-        /*
-            r6 = this;
-            android.content.Intent r0 = new android.content.Intent
-            java.lang.String r1 = "android.service.quicksettings.action.QS_TILE"
-            r0.<init>(r1)
-            android.content.Intent r9 = r0.setComponent(r9)
-            r3 = r10
-            com.android.systemui.settings.UserTrackerImpl r3 = (com.android.systemui.settings.UserTrackerImpl) r3
-            android.os.UserHandle r10 = r3.getUserHandle()
-            com.android.systemui.qs.external.TileLifecycleManager r5 = r11.create(r9, r10)
-            r0 = r6
-            r1 = r7
-            r2 = r8
-            r4 = r12
-            r0.<init>(r1, r2, r3, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.external.TileServiceManager.<init>(com.android.systemui.qs.external.TileServices, android.os.Handler, android.content.ComponentName, com.android.systemui.settings.UserTracker, com.android.systemui.qs.external.TileLifecycleManager$Factory, com.android.systemui.qs.pipeline.data.repository.CustomTileAddedRepository):void");
+    public TileServiceManager(TileServices tileServices, Handler handler, ComponentName componentName, UserTracker userTracker, TileLifecycleManager.Factory factory, CustomTileAddedRepository customTileAddedRepository) {
+        UserTrackerImpl userTrackerImpl = (UserTrackerImpl) userTracker;
+        this(tileServices, handler, userTrackerImpl, customTileAddedRepository, factory.create(new Intent("android.service.quicksettings.action.QS_TILE").setComponent(componentName), userTrackerImpl.getUserHandle()));
     }
 
     public final void bindService() {

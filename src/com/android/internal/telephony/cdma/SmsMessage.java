@@ -70,7 +70,7 @@ public class SmsMessage extends SmsMessageBase {
         return SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90;
     }
 
-    public SmsMessage(SmsAddress smsAddress, SmsEnvelope smsEnvelope) {
+    public SmsMessage(SmsAddress smsAddress, SmsEnvelope smsEnvelope) throws IOException {
         this.mOriginatingAddress = smsAddress;
         this.mEnvelope = smsEnvelope;
         createPdu();
@@ -93,21 +93,16 @@ public class SmsMessage extends SmsMessageBase {
                 return null;
             }
             smsMessage.mStatusOnIcc = b & 7;
-            if (smsMessage.mStatusOnIcc != 1 && smsMessage.mStatusOnIcc != 3) {
+            if (smsMessage.mStatusOnIcc == 1 || smsMessage.mStatusOnIcc == 3) {
+                smsMessage.mMti = 0;
+            } else {
                 smsMessage.mMti = 1;
-                int i2 = bArr[1] & 255;
-                Rlog.d(LOG_TAG, "msg[" + i + "]statusOnIcc: " + smsMessage.mStatusOnIcc + " size:" + i2);
-                byte[] bArr2 = new byte[i2];
-                System.arraycopy(bArr, 2, bArr2, 0, i2);
-                smsMessage.parsePduFromEfRecord(bArr2);
-                return smsMessage;
             }
-            smsMessage.mMti = 0;
-            int i22 = bArr[1] & 255;
-            Rlog.d(LOG_TAG, "msg[" + i + "]statusOnIcc: " + smsMessage.mStatusOnIcc + " size:" + i22);
-            byte[] bArr22 = new byte[i22];
-            System.arraycopy(bArr, 2, bArr22, 0, i22);
-            smsMessage.parsePduFromEfRecord(bArr22);
+            int i2 = bArr[1] & 255;
+            Rlog.d(LOG_TAG, "msg[" + i + "]statusOnIcc: " + smsMessage.mStatusOnIcc + " size:" + i2);
+            byte[] bArr2 = new byte[i2];
+            System.arraycopy(bArr, 2, bArr2, 0, i2);
+            smsMessage.parsePduFromEfRecord(bArr2);
             return smsMessage;
         } catch (RuntimeException e) {
             Rlog.e(LOG_TAG, "SMS PDU parsing failed: ", e);
@@ -229,8 +224,8 @@ public class SmsMessage extends SmsMessageBase {
         return this.mMti;
     }
 
-    private void parsePdu(byte[] bArr) {
-        int readUnsignedByte;
+    private void parsePdu(byte[] bArr) throws IOException {
+        int unsignedByte;
         DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
         SmsEnvelope smsEnvelope = new SmsEnvelope();
         CdmaSmsAddress cdmaSmsAddress = new CdmaSmsAddress();
@@ -243,28 +238,28 @@ public class SmsMessage extends SmsMessageBase {
             cdmaSmsAddress.numberMode = dataInputStream.readByte();
             cdmaSmsAddress.ton = dataInputStream.readByte();
             cdmaSmsAddress.numberPlan = dataInputStream.readByte();
-            readUnsignedByte = dataInputStream.readUnsignedByte();
-            cdmaSmsAddress.numberOfDigits = readUnsignedByte;
+            unsignedByte = dataInputStream.readUnsignedByte();
+            cdmaSmsAddress.numberOfDigits = unsignedByte;
         } catch (IOException e) {
             throw new RuntimeException("createFromPdu: conversion from byte array to object failed: " + e, e);
         } catch (Exception e2) {
             Rlog.e(LOG_TAG, "createFromPdu: conversion from byte array to object failed: " + e2);
         }
-        if (readUnsignedByte > bArr.length) {
-            throw new RuntimeException("createFromPdu: Invalid pdu, addr.numberOfDigits " + readUnsignedByte + " > pdu len " + bArr.length);
+        if (unsignedByte > bArr.length) {
+            throw new RuntimeException("createFromPdu: Invalid pdu, addr.numberOfDigits " + unsignedByte + " > pdu len " + bArr.length);
         }
-        cdmaSmsAddress.origBytes = new byte[readUnsignedByte];
-        dataInputStream.read(cdmaSmsAddress.origBytes, 0, readUnsignedByte);
+        cdmaSmsAddress.origBytes = new byte[unsignedByte];
+        dataInputStream.read(cdmaSmsAddress.origBytes, 0, unsignedByte);
         smsEnvelope.bearerReply = dataInputStream.readInt();
         smsEnvelope.replySeqNo = dataInputStream.readByte();
         smsEnvelope.errorClass = dataInputStream.readByte();
         smsEnvelope.causeCode = dataInputStream.readByte();
-        int readInt = dataInputStream.readInt();
-        if (readInt > bArr.length) {
-            throw new RuntimeException("createFromPdu: Invalid pdu, bearerDataLength " + readInt + " > pdu len " + bArr.length);
+        int i = dataInputStream.readInt();
+        if (i > bArr.length) {
+            throw new RuntimeException("createFromPdu: Invalid pdu, bearerDataLength " + i + " > pdu len " + bArr.length);
         }
-        smsEnvelope.bearerData = new byte[readInt];
-        dataInputStream.read(smsEnvelope.bearerData, 0, readInt);
+        smsEnvelope.bearerData = new byte[i];
+        dataInputStream.read(smsEnvelope.bearerData, 0, i);
         dataInputStream.close();
         this.mOriginatingAddress = cdmaSmsAddress;
         smsEnvelope.origAddress = cdmaSmsAddress;
@@ -279,7 +274,7 @@ public class SmsMessage extends SmsMessageBase {
         smsEnvelope.origAddress = this.mBearerData.callbackNumber;
     }
 
-    private void parsePduFromEfRecord(byte[] bArr) {
+    private void parsePduFromEfRecord(byte[] bArr) throws Exception {
         int i;
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
@@ -289,11 +284,11 @@ public class SmsMessage extends SmsMessageBase {
         try {
             smsEnvelope.messageType = dataInputStream.readByte();
             while (dataInputStream.available() > 0) {
-                byte readByte = dataInputStream.readByte();
-                int readUnsignedByte = dataInputStream.readUnsignedByte();
-                byte[] bArr2 = new byte[readUnsignedByte];
+                byte b = dataInputStream.readByte();
+                int unsignedByte = dataInputStream.readUnsignedByte();
+                byte[] bArr2 = new byte[unsignedByte];
                 int i2 = 0;
-                switch (readByte) {
+                switch (b) {
                     case 0:
                         smsEnvelope.teleService = dataInputStream.readUnsignedShort();
                         Rlog.i(LOG_TAG, "teleservice = " + smsEnvelope.teleService);
@@ -303,7 +298,7 @@ public class SmsMessage extends SmsMessageBase {
                         break;
                     case 2:
                     case 4:
-                        dataInputStream.read(bArr2, 0, readUnsignedByte);
+                        dataInputStream.read(bArr2, 0, unsignedByte);
                         BitwiseInputStream bitwiseInputStream = new BitwiseInputStream(bArr2);
                         cdmaSmsAddress.digitMode = bitwiseInputStream.read(1);
                         cdmaSmsAddress.numberMode = bitwiseInputStream.read(1);
@@ -338,7 +333,7 @@ public class SmsMessage extends SmsMessageBase {
                         }
                         cdmaSmsAddress.origBytes = bArr3;
                         Rlog.pii(LOG_TAG, "Addr=" + cdmaSmsAddress.toString());
-                        if (readByte == 2) {
+                        if (b == 2) {
                             smsEnvelope.origAddress = cdmaSmsAddress;
                             this.mOriginatingAddress = cdmaSmsAddress;
                             break;
@@ -349,18 +344,18 @@ public class SmsMessage extends SmsMessageBase {
                         }
                     case 3:
                     case 5:
-                        dataInputStream.read(bArr2, 0, readUnsignedByte);
+                        dataInputStream.read(bArr2, 0, unsignedByte);
                         BitwiseInputStream bitwiseInputStream2 = new BitwiseInputStream(bArr2);
                         cdmaSmsSubaddress.type = bitwiseInputStream2.read(3);
                         cdmaSmsSubaddress.odd = bitwiseInputStream2.readByteArray(1)[0];
-                        int read = bitwiseInputStream2.read(8);
-                        byte[] bArr4 = new byte[read];
-                        while (i2 < read) {
+                        int i4 = bitwiseInputStream2.read(8);
+                        byte[] bArr4 = new byte[i4];
+                        while (i2 < i4) {
                             bArr4[i2] = convertDtmfToAscii((byte) (bitwiseInputStream2.read(4) & 255));
                             i2++;
                         }
                         cdmaSmsSubaddress.origBytes = bArr4;
-                        if (readByte == 3) {
+                        if (b == 3) {
                             smsEnvelope.origSubaddress = cdmaSmsSubaddress;
                             break;
                         } else {
@@ -368,11 +363,11 @@ public class SmsMessage extends SmsMessageBase {
                             break;
                         }
                     case 6:
-                        dataInputStream.read(bArr2, 0, readUnsignedByte);
+                        dataInputStream.read(bArr2, 0, unsignedByte);
                         smsEnvelope.bearerReply = new BitwiseInputStream(bArr2).read(6);
                         break;
                     case 7:
-                        dataInputStream.read(bArr2, 0, readUnsignedByte);
+                        dataInputStream.read(bArr2, 0, unsignedByte);
                         BitwiseInputStream bitwiseInputStream3 = new BitwiseInputStream(bArr2);
                         smsEnvelope.replySeqNo = bitwiseInputStream3.readByteArray(6)[0];
                         smsEnvelope.errorClass = bitwiseInputStream3.readByteArray(2)[0];
@@ -383,11 +378,11 @@ public class SmsMessage extends SmsMessageBase {
                             break;
                         }
                     case 8:
-                        dataInputStream.read(bArr2, 0, readUnsignedByte);
+                        dataInputStream.read(bArr2, 0, unsignedByte);
                         smsEnvelope.bearerData = bArr2;
                         break;
                     default:
-                        throw new Exception("unsupported parameterId (" + ((int) readByte) + NavigationBarInflaterView.KEY_CODE_END);
+                        throw new Exception("unsupported parameterId (" + ((int) b) + NavigationBarInflaterView.KEY_CODE_END);
                 }
             }
             byteArrayInputStream.close();
@@ -412,9 +407,9 @@ public class SmsMessage extends SmsMessageBase {
                 return false;
             }
             this.mBearerData.messageType = bitwiseInputStream.read(4);
-            int read = (bitwiseInputStream.read(8) << 8) | bitwiseInputStream.read(8);
-            this.mBearerData.messageId = read;
-            this.mMessageRef = read;
+            int i = (bitwiseInputStream.read(8) << 8) | bitwiseInputStream.read(8);
+            this.mBearerData.messageId = i;
+            this.mMessageRef = i;
             this.mBearerData.hasUserDataHeader = bitwiseInputStream.read(1) == 1;
             if (this.mBearerData.hasUserDataHeader) {
                 Rlog.e(LOG_TAG, "Invalid FDEA WDP Header Message Identifier HEADER_IND");
@@ -425,19 +420,19 @@ public class SmsMessage extends SmsMessageBase {
                 Rlog.e(LOG_TAG, "Invalid FDEA WDP Header User Data SUBPARAMETER_ID");
                 return false;
             }
-            int read2 = bitwiseInputStream.read(8) * 8;
+            int i2 = bitwiseInputStream.read(8) * 8;
             this.mBearerData.userData.msgEncoding = bitwiseInputStream.read(5);
             if (this.mBearerData.userData.msgEncoding != 0) {
                 Rlog.e(LOG_TAG, "Invalid FDEA WDP Header User Data MSG_ENCODING");
                 return false;
             }
             this.mBearerData.userData.numFields = bitwiseInputStream.read(8);
-            int i = read2 - 13;
-            int i2 = this.mBearerData.userData.numFields * 8;
-            if (i2 < i) {
-                i = i2;
+            int i3 = i2 - 13;
+            int i4 = this.mBearerData.userData.numFields * 8;
+            if (i4 < i3) {
+                i3 = i4;
             }
-            this.mBearerData.userData.payload = bitwiseInputStream.readByteArray(i);
+            this.mBearerData.userData.payload = bitwiseInputStream.readByteArray(i3);
             this.mUserData = this.mBearerData.userData.payload;
             return true;
         } catch (BitwiseInputStream.AccessException e) {
@@ -537,9 +532,9 @@ public class SmsMessage extends SmsMessageBase {
                 String str = new String(smsAddress.origBytes);
                 if (!TextUtils.isEmpty(str) && str.startsWith("00852")) {
                     Rlog.d(LOG_TAG, "receive sms from HK number Before Address= ".concat(str));
-                    String substring = str.substring(2);
+                    String strSubstring = str.substring(2);
                     smsAddress.address = "+";
-                    smsAddress.address += substring;
+                    smsAddress.address += strSubstring;
                     Rlog.d(LOG_TAG, "After Address Replacement = " + smsAddress.address);
                     return;
                 }
@@ -557,10 +552,10 @@ public class SmsMessage extends SmsMessageBase {
             smsAddress.address = new String(smsAddress.origBytes);
             return;
         }
-        String orElse = TelephonyProperties.operator_idp_string().orElse(null);
+        String strOrElse = TelephonyProperties.operator_idp_string().orElse(null);
         smsAddress.address = new String(smsAddress.origBytes);
-        if (!TextUtils.isEmpty(orElse) && smsAddress.address.startsWith(orElse)) {
-            smsAddress.address = "+" + smsAddress.address.substring(orElse.length());
+        if (!TextUtils.isEmpty(strOrElse) && smsAddress.address.startsWith(strOrElse)) {
+            smsAddress.address = "+" + smsAddress.address.substring(strOrElse.length());
         } else if (smsAddress.ton == 1 && !TextUtils.isEmpty(smsAddress.address) && smsAddress.address.charAt(0) != '+') {
             smsAddress.address = "+" + smsAddress.address;
         }
@@ -568,18 +563,18 @@ public class SmsMessage extends SmsMessageBase {
     }
 
     public SmsCbMessage parseBroadcastSms(String str, int i, int i2) {
-        BearerData decode = BearerData.decode(this.mEnvelope.bearerData, this.mEnvelope.serviceCategory);
-        if (decode == null) {
+        BearerData bearerDataDecode = BearerData.decode(this.mEnvelope.bearerData, this.mEnvelope.serviceCategory);
+        if (bearerDataDecode == null) {
             Rlog.w(LOG_TAG, "BearerData.decode() returned null");
             return null;
         }
-        if (decode.userData != null) {
-            this.mReceivedEncodingType = decode.userData.msgEncoding;
+        if (bearerDataDecode.userData != null) {
+            this.mReceivedEncodingType = bearerDataDecode.userData.msgEncoding;
         }
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
             Rlog.d(LOG_TAG, "MT raw BearerData = " + HexDump.toHexString(this.mEnvelope.bearerData));
         }
-        return new SmsCbMessage(2, 1, decode.messageId, new SmsCbLocation(str), this.mEnvelope.serviceCategory, decode.getLanguage(), decode.userData.payloadStr, decode.priority, null, decode.cmasWarningInfo, i, i2);
+        return new SmsCbMessage(2, 1, bearerDataDecode.messageId, new SmsCbLocation(str), this.mEnvelope.serviceCategory, bearerDataDecode.getLanguage(), bearerDataDecode.userData.payloadStr, bearerDataDecode.priority, null, bearerDataDecode.cmasWarningInfo, i, i2);
     }
 
     public byte[] getEnvelopeBearerData() {
@@ -599,34 +594,32 @@ public class SmsMessage extends SmsMessageBase {
     }
 
     public static synchronized int getNextMessageId() {
-        int intValue;
-        synchronized (SmsMessage.class) {
-            intValue = TelephonyProperties.cdma_msg_id().orElse(1).intValue();
-            int i = (intValue % 65535) + 1;
-            try {
-                TelephonyProperties.cdma_msg_id(Integer.valueOf(i));
-                if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
-                    Rlog.d(LOG_TAG, "next persist.radio.cdma.msgid = " + i);
-                    Rlog.d(LOG_TAG, "readback gets " + TelephonyProperties.cdma_msg_id().orElse(1));
-                }
-            } catch (RuntimeException e) {
-                Rlog.e(LOG_TAG, "set nextMessage ID failed: " + e);
+        int iIntValue;
+        iIntValue = TelephonyProperties.cdma_msg_id().orElse(1).intValue();
+        int i = (iIntValue % 65535) + 1;
+        try {
+            TelephonyProperties.cdma_msg_id(Integer.valueOf(i));
+            if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
+                Rlog.d(LOG_TAG, "next persist.radio.cdma.msgid = " + i);
+                Rlog.d(LOG_TAG, "readback gets " + TelephonyProperties.cdma_msg_id().orElse(1));
             }
+        } catch (RuntimeException e) {
+            Rlog.e(LOG_TAG, "set nextMessage ID failed: " + e);
         }
-        return intValue;
+        return iIntValue;
     }
 
     private static SubmitPdu privateGetSubmitPdu(String str, boolean z, UserData userData) {
         return privateGetSubmitPdu(str, z, userData, -1);
     }
 
-    private static SubmitPdu privateGetSubmitPdu(String str, boolean z, UserData userData, int i) {
+    private static SubmitPdu privateGetSubmitPdu(String str, boolean z, UserData userData, int i) throws IOException {
         if (str == null || str.length() == 0) {
             Log.e(LOG_TAG, "privateGetSubmitPdu - destAddrStr is invalid");
             return null;
         }
-        CdmaSmsAddress parse = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeForSms(str));
-        if (parse == null) {
+        CdmaSmsAddress cdmaSmsAddress = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeForSms(str));
+        if (cdmaSmsAddress == null) {
             return null;
         }
         BearerData bearerData = new BearerData();
@@ -641,38 +634,38 @@ public class SmsMessage extends SmsMessageBase {
             bearerData.priority = i;
         }
         bearerData.userData = userData;
-        byte[] encode = BearerData.encode(bearerData);
-        if (encode == null) {
+        byte[] bArrEncode = BearerData.encode(bearerData);
+        if (bArrEncode == null) {
             return null;
         }
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
             Rlog.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
-            Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encode) + "'");
+            Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(bArrEncode) + "'");
         }
         int i2 = (!bearerData.hasUserDataHeader || userData.msgEncoding == 2) ? 4098 : 4101;
         SmsEnvelope smsEnvelope = new SmsEnvelope();
         smsEnvelope.messageType = 0;
         smsEnvelope.teleService = i2;
-        smsEnvelope.destAddress = parse;
+        smsEnvelope.destAddress = cdmaSmsAddress;
         smsEnvelope.bearerReply = 1;
-        smsEnvelope.bearerData = encode;
+        smsEnvelope.bearerData = bArrEncode;
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100);
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             dataOutputStream.writeInt(smsEnvelope.teleService);
             dataOutputStream.writeInt(0);
             dataOutputStream.writeInt(0);
-            dataOutputStream.write(parse.digitMode);
-            dataOutputStream.write(parse.numberMode);
-            dataOutputStream.write(parse.ton);
-            dataOutputStream.write(parse.numberPlan);
-            dataOutputStream.write(parse.numberOfDigits);
-            dataOutputStream.write(parse.origBytes, 0, parse.origBytes.length);
+            dataOutputStream.write(cdmaSmsAddress.digitMode);
+            dataOutputStream.write(cdmaSmsAddress.numberMode);
+            dataOutputStream.write(cdmaSmsAddress.ton);
+            dataOutputStream.write(cdmaSmsAddress.numberPlan);
+            dataOutputStream.write(cdmaSmsAddress.numberOfDigits);
+            dataOutputStream.write(cdmaSmsAddress.origBytes, 0, cdmaSmsAddress.origBytes.length);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
-            dataOutputStream.write(encode.length);
-            dataOutputStream.write(encode, 0, encode.length);
+            dataOutputStream.write(bArrEncode.length);
+            dataOutputStream.write(bArrEncode, 0, bArrEncode.length);
             dataOutputStream.close();
             SubmitPdu submitPdu = new SubmitPdu();
             submitPdu.encodedMessage = byteArrayOutputStream.toByteArray();
@@ -685,8 +678,8 @@ public class SmsMessage extends SmsMessageBase {
     }
 
     public static SubmitPdu getDeliverPdu(String str, String str2, long j) {
-        CdmaSmsAddress parse;
-        if (str == null || str2 == null || (parse = CdmaSmsAddress.parse(str)) == null) {
+        CdmaSmsAddress cdmaSmsAddress;
+        if (str == null || str2 == null || (cdmaSmsAddress = CdmaSmsAddress.parse(str)) == null) {
             return null;
         }
         BearerData bearerData = new BearerData();
@@ -699,8 +692,8 @@ public class SmsMessage extends SmsMessageBase {
         bearerData.userData = new UserData();
         bearerData.userData.payloadStr = str2;
         bearerData.msgCenterTimeStamp = BearerData.TimeStamp.fromMillis(j);
-        byte[] encode = BearerData.encode(bearerData);
-        if (encode == null) {
+        byte[] bArrEncode = BearerData.encode(bearerData);
+        if (bArrEncode == null) {
             return null;
         }
         try {
@@ -709,17 +702,17 @@ public class SmsMessage extends SmsMessageBase {
             dataOutputStream.writeInt(4098);
             dataOutputStream.writeInt(0);
             dataOutputStream.writeInt(0);
-            dataOutputStream.write(parse.digitMode);
-            dataOutputStream.write(parse.numberMode);
-            dataOutputStream.write(parse.ton);
-            dataOutputStream.write(parse.numberPlan);
-            dataOutputStream.write(parse.numberOfDigits);
-            dataOutputStream.write(parse.origBytes, 0, parse.origBytes.length);
+            dataOutputStream.write(cdmaSmsAddress.digitMode);
+            dataOutputStream.write(cdmaSmsAddress.numberMode);
+            dataOutputStream.write(cdmaSmsAddress.ton);
+            dataOutputStream.write(cdmaSmsAddress.numberPlan);
+            dataOutputStream.write(cdmaSmsAddress.numberOfDigits);
+            dataOutputStream.write(cdmaSmsAddress.origBytes, 0, cdmaSmsAddress.origBytes.length);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
-            dataOutputStream.write(encode.length);
-            dataOutputStream.write(encode, 0, encode.length);
+            dataOutputStream.write(bArrEncode.length);
+            dataOutputStream.write(bArrEncode, 0, bArrEncode.length);
             dataOutputStream.close();
             SubmitPdu submitPdu = new SubmitPdu();
             submitPdu.encodedMessage = byteArrayOutputStream.toByteArray();
@@ -731,7 +724,7 @@ public class SmsMessage extends SmsMessageBase {
         }
     }
 
-    public void createPdu() {
+    public void createPdu() throws IOException {
         SmsEnvelope smsEnvelope = this.mEnvelope;
         CdmaSmsAddress cdmaSmsAddress = smsEnvelope.origAddress;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100);
@@ -832,7 +825,7 @@ public class SmsMessage extends SmsMessageBase {
         return this.mEnvelope.bearerData;
     }
 
-    public static SmsMessage newFromParcel(Parcel parcel) {
+    public static SmsMessage newFromParcel(Parcel parcel) throws IOException {
         SmsMessage smsMessage = new SmsMessage();
         SmsEnvelope smsEnvelope = new SmsEnvelope();
         CdmaSmsAddress cdmaSmsAddress = new CdmaSmsAddress();
@@ -846,40 +839,40 @@ public class SmsMessage extends SmsMessageBase {
             smsEnvelope.messageType = 0;
         }
         smsEnvelope.serviceCategory = parcel.readInt();
-        int readInt = parcel.readInt();
-        cdmaSmsAddress.digitMode = (byte) (readInt & 255);
+        int i = parcel.readInt();
+        cdmaSmsAddress.digitMode = (byte) (i & 255);
         cdmaSmsAddress.numberMode = (byte) (parcel.readInt() & 255);
         cdmaSmsAddress.ton = parcel.readInt();
         cdmaSmsAddress.numberPlan = (byte) (parcel.readInt() & 255);
-        int readByte = parcel.readByte();
-        cdmaSmsAddress.numberOfDigits = readByte;
-        byte[] bArr = new byte[readByte];
-        for (int i = 0; i < readByte; i++) {
-            byte readByte2 = parcel.readByte();
-            bArr[i] = readByte2;
-            if (readInt == 0) {
-                bArr[i] = convertDtmfToAscii(readByte2);
+        int i2 = parcel.readByte();
+        cdmaSmsAddress.numberOfDigits = i2;
+        byte[] bArr = new byte[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
+            byte b = parcel.readByte();
+            bArr[i3] = b;
+            if (i == 0) {
+                bArr[i3] = convertDtmfToAscii(b);
             }
         }
         cdmaSmsAddress.origBytes = bArr;
         cdmaSmsSubaddress.type = parcel.readInt();
         cdmaSmsSubaddress.odd = parcel.readByte();
-        int readByte3 = parcel.readByte();
-        if (readByte3 < 0) {
-            readByte3 = 0;
+        int i4 = parcel.readByte();
+        if (i4 < 0) {
+            i4 = 0;
         }
-        byte[] bArr2 = new byte[readByte3];
-        for (int i2 = 0; i2 < readByte3; i2++) {
-            bArr2[i2] = parcel.readByte();
+        byte[] bArr2 = new byte[i4];
+        for (int i5 = 0; i5 < i4; i5++) {
+            bArr2[i5] = parcel.readByte();
         }
         cdmaSmsSubaddress.origBytes = bArr2;
-        int readInt2 = parcel.readInt();
-        if (readInt2 < 0) {
-            readInt2 = 0;
+        int i6 = parcel.readInt();
+        if (i6 < 0) {
+            i6 = 0;
         }
-        byte[] bArr3 = new byte[readInt2];
-        for (int i3 = 0; i3 < readInt2; i3++) {
-            bArr3[i3] = parcel.readByte();
+        byte[] bArr3 = new byte[i6];
+        for (int i7 = 0; i7 < i6; i7++) {
+            bArr3[i7] = parcel.readByte();
         }
         smsEnvelope.bearerData = bArr3;
         smsEnvelope.origAddress = cdmaSmsAddress;
@@ -963,9 +956,9 @@ public class SmsMessage extends SmsMessageBase {
         return this.mIsCtcFota;
     }
 
-    private static SubmitPdu privateGetSubmitPdu(int i, String str, boolean z, UserData userData, String str2, int i2) {
-        CdmaSmsAddress parse = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(str, 1, 1));
-        if (parse == null) {
+    private static SubmitPdu privateGetSubmitPdu(int i, String str, boolean z, UserData userData, String str2, int i2) throws IOException {
+        CdmaSmsAddress cdmaSmsAddress = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(str, 1, 1));
+        if (cdmaSmsAddress == null) {
             return null;
         }
         BearerData bearerData = new BearerData();
@@ -977,9 +970,9 @@ public class SmsMessage extends SmsMessageBase {
         bearerData.reportReq = false;
         if (str2 != null && str2.length() > 0) {
             Rlog.d(LOG_TAG, "callback number is set: " + str2);
-            CdmaSmsAddress parse2 = CdmaSmsAddress.parse(str2);
-            if (parse2 != null) {
-                bearerData.callbackNumber = parse2;
+            CdmaSmsAddress cdmaSmsAddress2 = CdmaSmsAddress.parse(str2);
+            if (cdmaSmsAddress2 != null) {
+                bearerData.callbackNumber = cdmaSmsAddress2;
             }
         }
         if (i2 == 2) {
@@ -992,40 +985,40 @@ public class SmsMessage extends SmsMessageBase {
             bearerData.language = 64;
         }
         bearerData.userData = userData;
-        byte[] encode = BearerData.encode(bearerData);
+        byte[] bArrEncode = BearerData.encode(bearerData);
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
             Rlog.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
-            if (encode != null) {
-                Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encode) + "'");
+            if (bArrEncode != null) {
+                Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(bArrEncode) + "'");
             }
         }
-        if (encode == null) {
+        if (bArrEncode == null) {
             return null;
         }
         int i3 = bearerData.hasUserDataHeader ? 4101 : 4098;
         SmsEnvelope smsEnvelope = new SmsEnvelope();
         smsEnvelope.messageType = 0;
         smsEnvelope.teleService = i3;
-        smsEnvelope.destAddress = parse;
+        smsEnvelope.destAddress = cdmaSmsAddress;
         smsEnvelope.bearerReply = 1;
-        smsEnvelope.bearerData = encode;
+        smsEnvelope.bearerData = bArrEncode;
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100);
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             dataOutputStream.writeInt(smsEnvelope.teleService);
             dataOutputStream.writeInt(0);
             dataOutputStream.writeInt(0);
-            dataOutputStream.write(parse.digitMode);
-            dataOutputStream.write(parse.numberMode);
-            dataOutputStream.write(parse.ton);
-            dataOutputStream.write(parse.numberPlan);
-            dataOutputStream.write(parse.numberOfDigits);
-            dataOutputStream.write(parse.origBytes, 0, parse.origBytes.length);
+            dataOutputStream.write(cdmaSmsAddress.digitMode);
+            dataOutputStream.write(cdmaSmsAddress.numberMode);
+            dataOutputStream.write(cdmaSmsAddress.ton);
+            dataOutputStream.write(cdmaSmsAddress.numberPlan);
+            dataOutputStream.write(cdmaSmsAddress.numberOfDigits);
+            dataOutputStream.write(cdmaSmsAddress.origBytes, 0, cdmaSmsAddress.origBytes.length);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
-            dataOutputStream.write(encode.length);
-            dataOutputStream.write(encode, 0, encode.length);
+            dataOutputStream.write(bArrEncode.length);
+            dataOutputStream.write(bArrEncode, 0, bArrEncode.length);
             dataOutputStream.close();
             SubmitPdu submitPdu = new SubmitPdu();
             submitPdu.encodedMessage = byteArrayOutputStream.toByteArray();
@@ -1037,9 +1030,9 @@ public class SmsMessage extends SmsMessageBase {
         }
     }
 
-    public static SubmitPdu getDomainChangeNotification(byte b, String str) {
-        CdmaSmsAddress parse = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(str, 1, 1));
-        if (parse == null) {
+    public static SubmitPdu getDomainChangeNotification(byte b, String str) throws IOException {
+        CdmaSmsAddress cdmaSmsAddress = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(str, 1, 1));
+        if (cdmaSmsAddress == null) {
             return null;
         }
         BearerData bearerData = new BearerData();
@@ -1059,47 +1052,47 @@ public class SmsMessage extends SmsMessageBase {
         userData.payload[1] = (byte) (bearerData.messageId % 256);
         userData.payload[2] = 8;
         userData.payload[3] = b;
-        long currentTimeMillis = System.currentTimeMillis();
-        Calendar.getInstance().setTimeInMillis(currentTimeMillis);
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        Calendar.getInstance().setTimeInMillis(jCurrentTimeMillis);
         long j = ((r10.get(1) - 1900) * 31556926) + (r10.get(2) * 2629743) + (r10.get(5) * 86400) + (r10.get(10) * 3600) + (r10.get(12) * 60) + r10.get(13);
         userData.payload[7] = (byte) (j & 255);
         userData.payload[6] = (byte) ((j >> 8) & 255);
         userData.payload[5] = (byte) ((j >> 16) & 255);
         userData.payload[4] = (byte) ((j >> 24) & 255);
         bearerData.userData = userData;
-        byte[] encode = BearerData.encode(bearerData);
+        byte[] bArrEncode = BearerData.encode(bearerData);
         if (Log.isLoggable(LOGGABLE_TAG, 2)) {
             Log.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
-            if (encode != null) {
-                Log.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encode) + "'");
+            if (bArrEncode != null) {
+                Log.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(bArrEncode) + "'");
             }
         }
-        if (encode == null) {
+        if (bArrEncode == null) {
             return null;
         }
         SmsEnvelope smsEnvelope = new SmsEnvelope();
         smsEnvelope.messageType = 0;
         smsEnvelope.teleService = 4242;
-        smsEnvelope.destAddress = parse;
+        smsEnvelope.destAddress = cdmaSmsAddress;
         smsEnvelope.bearerReply = 1;
-        smsEnvelope.bearerData = encode;
+        smsEnvelope.bearerData = bArrEncode;
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100);
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             dataOutputStream.writeInt(smsEnvelope.teleService);
             dataOutputStream.writeInt(0);
             dataOutputStream.writeInt(0);
-            dataOutputStream.write(parse.digitMode);
-            dataOutputStream.write(parse.numberMode);
-            dataOutputStream.write(parse.ton);
-            dataOutputStream.write(parse.numberPlan);
-            dataOutputStream.write(parse.numberOfDigits);
-            dataOutputStream.write(parse.origBytes, 0, parse.origBytes.length);
+            dataOutputStream.write(cdmaSmsAddress.digitMode);
+            dataOutputStream.write(cdmaSmsAddress.numberMode);
+            dataOutputStream.write(cdmaSmsAddress.ton);
+            dataOutputStream.write(cdmaSmsAddress.numberPlan);
+            dataOutputStream.write(cdmaSmsAddress.numberOfDigits);
+            dataOutputStream.write(cdmaSmsAddress.origBytes, 0, cdmaSmsAddress.origBytes.length);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
             dataOutputStream.write(0);
-            dataOutputStream.write(encode.length);
-            dataOutputStream.write(encode, 0, encode.length);
+            dataOutputStream.write(bArrEncode.length);
+            dataOutputStream.write(bArrEncode, 0, bArrEncode.length);
             dataOutputStream.close();
             SubmitPdu submitPdu = new SubmitPdu();
             submitPdu.encodedMessage = byteArrayOutputStream.toByteArray();

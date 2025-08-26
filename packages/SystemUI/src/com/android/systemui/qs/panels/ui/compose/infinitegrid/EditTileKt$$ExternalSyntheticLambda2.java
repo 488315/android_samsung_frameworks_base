@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda2 implements Function2 {
     public final /* synthetic */ int $r8$classId = 0;
@@ -31,17 +30,17 @@ public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda2 implemen
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(3073);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(3073);
                 Function1 function1 = this.f$2;
                 Modifier modifier = (Modifier) this.f$3;
-                EditTileKt.CurrentTilesGridHeader(this.f$0, this.f$1, function1, modifier, (Composer) obj, updateChangedFlags);
+                EditTileKt.CurrentTilesGridHeader(this.f$0, this.f$1, function1, modifier, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 TileSpec tileSpec = (TileSpec) obj;
                 if (((Boolean) obj2).booleanValue()) {
-                    this.f$2.mo779invoke(tileSpec);
+                    this.f$2.mo781invoke(tileSpec);
                 } else {
-                    ((Function1) this.f$3).mo779invoke(this.f$0.tileSpecs());
+                    ((Function1) this.f$3).mo781invoke(this.f$0.tileSpecs());
                     this.f$1.setSelection(tileSpec);
                 }
                 break;

@@ -33,9 +33,9 @@ public final class CompatibilityOverridesToRemoveConfig implements Parcelable {
     }
 
     private CompatibilityOverridesToRemoveConfig(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.changeIds = new HashSet();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.changeIds.add(Long.valueOf(parcel.readLong()));
         }
     }

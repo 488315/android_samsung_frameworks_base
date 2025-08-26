@@ -32,7 +32,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CustomBulletSpan implements LeadingMarginSpan {
     public final float alpha;
@@ -53,9 +52,9 @@ public final class CustomBulletSpan implements LeadingMarginSpan {
         this.alpha = f4;
         this.drawStyle = drawStyle;
         this.density = density;
-        int roundToInt = MathKt__MathJVMKt.roundToInt(f + f3);
-        this.minimumRequiredIndent = roundToInt;
-        this.diff = MathKt__MathJVMKt.roundToInt(f5) - roundToInt;
+        int iRoundToInt = MathKt__MathJVMKt.roundToInt(f + f3);
+        this.minimumRequiredIndent = iRoundToInt;
+        this.diff = MathKt__MathJVMKt.roundToInt(f5) - iRoundToInt;
     }
 
     @Override // android.text.style.LeadingMarginSpan
@@ -74,7 +73,7 @@ public final class CustomBulletSpan implements LeadingMarginSpan {
         }
         Paint.Style style = paint.getStyle();
         DrawStyle drawStyle = this.drawStyle;
-        Integer num = null;
+        Integer numValueOf = null;
         if (Intrinsics.areEqual(drawStyle, Fill.INSTANCE)) {
             paint.setStyle(Paint.Style.FILL);
         } else if (drawStyle instanceof Stroke) {
@@ -82,12 +81,12 @@ public final class CustomBulletSpan implements LeadingMarginSpan {
             Stroke stroke = (Stroke) drawStyle;
             paint.setStrokeWidth(stroke.width);
             paint.setStrokeMiter(stroke.miter);
-            paint.setStrokeCap(DrawStyleSpan_androidKt.m789toAndroidCapBeK7IIE(stroke.cap));
-            paint.setStrokeJoin(DrawStyleSpan_androidKt.m790toAndroidJoinWw9F2mQ(stroke.join));
+            paint.setStrokeCap(DrawStyleSpan_androidKt.m791toAndroidCapBeK7IIE(stroke.cap));
+            paint.setStrokeJoin(DrawStyleSpan_androidKt.m792toAndroidJoinWw9F2mQ(stroke.join));
             PathEffect pathEffect = stroke.pathEffect;
             paint.setPathEffect(pathEffect != null ? ((AndroidPathEffect) pathEffect).nativePathEffect : null);
         }
-        final long floatToRawIntBits = (Float.floatToRawIntBits(this.bulletWidthPx) << 32) | (Float.floatToRawIntBits(this.bulletHeightPx) & 4294967295L);
+        final long jFloatToRawIntBits = (Float.floatToRawIntBits(this.bulletWidthPx) << 32) | (Float.floatToRawIntBits(this.bulletHeightPx) & 4294967295L);
         Size.Companion companion = Size.Companion;
         Brush brush = this.brush;
         float f2 = this.alpha;
@@ -99,40 +98,40 @@ public final class CustomBulletSpan implements LeadingMarginSpan {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                CustomBulletSpan customBulletSpan = CustomBulletSpan.this;
-                Outline mo40createOutlinePq9zytI = customBulletSpan.shape.mo40createOutlinePq9zytI(floatToRawIntBits, i2 > 0 ? LayoutDirection.Ltr : LayoutDirection.Rtl, customBulletSpan.density);
+                CustomBulletSpan customBulletSpan = this.this$0;
+                Outline outlineMo41createOutlinePq9zytI = customBulletSpan.shape.mo41createOutlinePq9zytI(jFloatToRawIntBits, i2 > 0 ? LayoutDirection.Ltr : LayoutDirection.Rtl, customBulletSpan.density);
                 Canvas canvas2 = canvas;
                 Paint paint2 = paint;
                 float f3 = i9;
                 float f4 = f;
                 int i10 = i2;
-                if (mo40createOutlinePq9zytI instanceof Outline.Generic) {
+                if (outlineMo41createOutlinePq9zytI instanceof Outline.Generic) {
                     canvas2.save();
-                    Rect bounds = mo40createOutlinePq9zytI.getBounds();
+                    Rect bounds = outlineMo41createOutlinePq9zytI.getBounds();
                     canvas2.translate(f3, f4 - ((bounds.bottom - bounds.top) / 2.0f));
-                    Path path = ((Outline.Generic) mo40createOutlinePq9zytI).path;
+                    Path path = ((Outline.Generic) outlineMo41createOutlinePq9zytI).path;
                     if (!(path instanceof AndroidPath)) {
                         throw new UnsupportedOperationException("Unable to obtain android.graphics.Path");
                     }
                     canvas2.drawPath(((AndroidPath) path).internalPath, paint2);
                     canvas2.restore();
-                } else if (mo40createOutlinePq9zytI instanceof Outline.Rounded) {
-                    Outline.Rounded rounded = (Outline.Rounded) mo40createOutlinePq9zytI;
-                    boolean isSimple = RoundRectKt.isSimple(rounded.roundRect);
+                } else if (outlineMo41createOutlinePq9zytI instanceof Outline.Rounded) {
+                    Outline.Rounded rounded = (Outline.Rounded) outlineMo41createOutlinePq9zytI;
+                    boolean zIsSimple = RoundRectKt.isSimple(rounded.roundRect);
                     RoundRect roundRect = rounded.roundRect;
-                    if (isSimple) {
-                        float intBitsToFloat = Float.intBitsToFloat((int) (roundRect.topLeftCornerRadius >> 32));
-                        canvas2.drawRoundRect(f3, f4 - (roundRect.getHeight() / 2.0f), (roundRect.getWidth() * i10) + f3, (roundRect.getHeight() / 2.0f) + f4, intBitsToFloat, intBitsToFloat, paint2);
+                    if (zIsSimple) {
+                        float fIntBitsToFloat = Float.intBitsToFloat((int) (roundRect.topLeftCornerRadius >> 32));
+                        canvas2.drawRoundRect(f3, f4 - (roundRect.getHeight() / 2.0f), (roundRect.getWidth() * i10) + f3, (roundRect.getHeight() / 2.0f) + f4, fIntBitsToFloat, fIntBitsToFloat, paint2);
                     } else {
-                        AndroidPath Path = AndroidPath_androidKt.Path();
-                        Path.addRoundRect$default(Path, roundRect);
+                        AndroidPath androidPathPath = AndroidPath_androidKt.Path();
+                        Path.addRoundRect$default(androidPathPath, roundRect);
                         canvas2.save();
                         canvas2.translate(f3, f4 - (roundRect.getHeight() / 2.0f));
-                        canvas2.drawPath(Path.internalPath, paint2);
+                        canvas2.drawPath(androidPathPath.internalPath, paint2);
                         canvas2.restore();
                     }
-                } else if (mo40createOutlinePq9zytI instanceof Outline.Rectangle) {
-                    Rect rect = ((Outline.Rectangle) mo40createOutlinePq9zytI).rect;
+                } else if (outlineMo41createOutlinePq9zytI instanceof Outline.Rectangle) {
+                    Rect rect = ((Outline.Rectangle) outlineMo41createOutlinePq9zytI).rect;
                     float f5 = (rect.bottom - rect.top) / 2.0f;
                     canvas2.drawRect(f3, f4 - f5, DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.right, rect.left, i10, f3), f4 + f5, paint2);
                 }
@@ -141,36 +140,36 @@ public final class CustomBulletSpan implements LeadingMarginSpan {
         };
         if (brush == null) {
             if (!Float.isNaN(f2)) {
-                num = Integer.valueOf(paint.getAlpha());
+                numValueOf = Integer.valueOf(paint.getAlpha());
                 paint.setAlpha((int) Math.rint(f2 * 255.0f));
             }
             function0.invoke();
-            if (num != null) {
-                paint.setAlpha(num.intValue());
+            if (numValueOf != null) {
+                paint.setAlpha(numValueOf.intValue());
             }
         } else if (brush instanceof SolidColor) {
             int color = paint.getColor();
             if (!Float.isNaN(f2)) {
-                num = Integer.valueOf(paint.getAlpha());
+                numValueOf = Integer.valueOf(paint.getAlpha());
                 paint.setAlpha((int) Math.rint(f2 * 255.0f));
             }
-            paint.setColor(ColorKt.m467toArgb8_81llA(((SolidColor) brush).value));
+            paint.setColor(ColorKt.m469toArgb8_81llA(((SolidColor) brush).value));
             function0.invoke();
             paint.setColor(color);
-            if (num != null) {
-                paint.setAlpha(num.intValue());
+            if (numValueOf != null) {
+                paint.setAlpha(numValueOf.intValue());
             }
         } else if (brush instanceof ShaderBrush) {
             Shader shader = paint.getShader();
             if (!Float.isNaN(f2)) {
-                num = Integer.valueOf(paint.getAlpha());
+                numValueOf = Integer.valueOf(paint.getAlpha());
                 paint.setAlpha((int) Math.rint(f2 * 255.0f));
             }
-            paint.setShader(((ShaderBrush) brush).mo451createShaderuvyYCjk(floatToRawIntBits));
+            paint.setShader(((ShaderBrush) brush).mo453createShaderuvyYCjk(jFloatToRawIntBits));
             function0.invoke();
             paint.setShader(shader);
-            if (num != null) {
-                paint.setAlpha(num.intValue());
+            if (numValueOf != null) {
+                paint.setAlpha(numValueOf.intValue());
             }
         }
         paint.setStyle(style);

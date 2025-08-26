@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogSliderViewModel {
     public final Context context;
@@ -42,7 +41,6 @@ public final class VolumeDialogSliderViewModel {
     public final VolumeDialogVisibilityInteractor visibilityInteractor;
     public final VolumeDialogSliderIconProvider volumeDialogSliderIconProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogSliderViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int I$0;
@@ -95,11 +93,11 @@ public final class VolumeDialogSliderViewModel {
                 this.I$0 = 9;
                 this.I$1 = 0;
                 this.label = 1;
-                Object first = FlowKt.first(flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1, this);
-                if (first == coroutineSingletons) {
+                Object objFirst = FlowKt.first(flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1, this);
+                if (objFirst == coroutineSingletons) {
                     return coroutineSingletons;
                 }
-                obj = first;
+                obj = objFirst;
                 volumeUpdate = volumeUpdate2;
                 i = 9;
                 i2 = 0;
@@ -122,7 +120,6 @@ public final class VolumeDialogSliderViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeUpdate {
         public final int newVolumeLevel;
         public final long timestampMillis;
@@ -162,14 +159,14 @@ public final class VolumeDialogSliderViewModel {
         this.systemClock = systemClock;
         this.logger = volumeDialogLogger;
         this.uiEventLogger = uiEventLogger;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.userVolumeUpdates = MutableStateFlow;
-        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(volumeDialogSliderInteractor.slider, MutableStateFlow, new VolumeDialogSliderViewModel$model$1(this, null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.userVolumeUpdates = stateFlowImplMutableStateFlow;
+        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(volumeDialogSliderInteractor.slider, stateFlowImplMutableStateFlow, new VolumeDialogSliderViewModel$model$1(this, null));
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
         FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, startedEagerly, null));
         this.model = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1;
         this.state = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(FlowKt.stateIn(FlowKt.combine(volumeDialogSliderInteractor.isDisabledByZenMode, flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1, FlowKt.transformLatest(flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1, new VolumeDialogSliderViewModel$special$$inlined$flatMapLatest$1(null, this)), new VolumeDialogSliderViewModel$state$2(this, null)), coroutineScope, startedEagerly, null));
-        FlowKt.launchIn(FlowKt.mapLatest(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow), new AnonymousClass1(null)), coroutineScope);
+        FlowKt.launchIn(FlowKt.mapLatest(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow), new AnonymousClass1(null)), coroutineScope);
     }
 }

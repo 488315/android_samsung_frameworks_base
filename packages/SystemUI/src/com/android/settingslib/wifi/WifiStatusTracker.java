@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WifiStatusTracker {
     public static final SimpleDateFormat SSDF = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
@@ -58,7 +57,6 @@ public class WifiStatusTracker {
     public String statusLabel;
     public int subId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.wifi.WifiStatusTracker$1, reason: invalid class name */
     public class AnonymousClass1 extends ConnectivityManager.NetworkCallback {
         public AnonymousClass1(int i) {
@@ -92,7 +90,7 @@ public class WifiStatusTracker {
                 ((HashSet) WifiStatusTracker.this.mNetworks).add(Integer.valueOf(network.getNetId()));
             }
             WifiStatusTracker.this.mPrimaryNetworkId = network.getNetId();
-            WifiStatusTracker.m993$$Nest$mupdateWifiInfo(WifiStatusTracker.this, mainOrUnderlyingWifiInfo);
+            WifiStatusTracker.m995$$Nest$mupdateWifiInfo(WifiStatusTracker.this, mainOrUnderlyingWifiInfo);
             WifiStatusTracker.this.updateStatusLabel();
             WifiStatusTracker.this.mMainThreadHandler.post(new WifiStatusTracker$1$$ExternalSyntheticLambda0(this, 0));
         }
@@ -112,13 +110,12 @@ public class WifiStatusTracker {
             if (netId != wifiStatusTracker2.mPrimaryNetworkId) {
                 return;
             }
-            WifiStatusTracker.m993$$Nest$mupdateWifiInfo(wifiStatusTracker2, null);
+            WifiStatusTracker.m995$$Nest$mupdateWifiInfo(wifiStatusTracker2, null);
             WifiStatusTracker.this.updateStatusLabel();
             WifiStatusTracker.this.mMainThreadHandler.post(new WifiStatusTracker$1$$ExternalSyntheticLambda0(this, 1));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.wifi.WifiStatusTracker$2, reason: invalid class name */
     public class AnonymousClass2 extends ConnectivityManager.NetworkCallback {
         public AnonymousClass2(int i) {
@@ -148,7 +145,6 @@ public class WifiStatusTracker {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.wifi.WifiStatusTracker$3, reason: invalid class name */
     public class AnonymousClass3 extends WifiNetworkScoreCache.CacheListener {
         public AnonymousClass3(Handler handler) {
@@ -164,7 +160,7 @@ public class WifiStatusTracker {
     }
 
     /* renamed from: -$$Nest$mupdateWifiInfo, reason: not valid java name */
-    public static void m993$$Nest$mupdateWifiInfo(WifiStatusTracker wifiStatusTracker, WifiInfo wifiInfo) {
+    public static void m995$$Nest$mupdateWifiInfo(WifiStatusTracker wifiStatusTracker, WifiInfo wifiInfo) {
         wifiStatusTracker.updateWifiState();
         wifiStatusTracker.connected = wifiInfo != null;
         wifiStatusTracker.mWifiInfo = wifiInfo;
@@ -183,9 +179,9 @@ public class WifiStatusTracker {
             wifiStatusTracker.isCarrierMerged = wifiStatusTracker.mWifiInfo.isCarrierMerged();
             wifiStatusTracker.subId = wifiStatusTracker.mWifiInfo.getSubscriptionId();
             wifiStatusTracker.updateRssi(wifiStatusTracker.mWifiInfo.getRssi());
-            NetworkKey createFromWifiInfo = NetworkKey.createFromWifiInfo(wifiStatusTracker.mWifiInfo);
-            if (wifiStatusTracker.mWifiNetworkScoreCache.getScoredNetwork(createFromWifiInfo) == null) {
-                wifiStatusTracker.mNetworkScoreManager.requestScores(new NetworkKey[]{createFromWifiInfo});
+            NetworkKey networkKeyCreateFromWifiInfo = NetworkKey.createFromWifiInfo(wifiStatusTracker.mWifiInfo);
+            if (wifiStatusTracker.mWifiNetworkScoreCache.getScoredNetwork(networkKeyCreateFromWifiInfo) == null) {
+                wifiStatusTracker.mNetworkScoreManager.requestScores(new NetworkKey[]{networkKeyCreateFromWifiInfo});
             }
         }
     }
@@ -199,10 +195,7 @@ public class WifiStatusTracker {
             return null;
         }
         WifiInfo mainWifiInfo = getMainWifiInfo(networkCapabilities);
-        if (mainWifiInfo != null) {
-            return mainWifiInfo;
-        }
-        if (!networkCapabilities.hasTransport(0)) {
+        if (mainWifiInfo != null || !networkCapabilities.hasTransport(0)) {
             return mainWifiInfo;
         }
         List underlyingNetworks = networkCapabilities.getUnderlyingNetworks();
@@ -288,8 +281,8 @@ public class WifiStatusTracker {
             Context context = this.mContext;
             int i = this.rssi;
             int i2 = AccessPoint.$r8$clinit;
-            int calculateBadge = scoredNetwork.calculateBadge(i);
-            speedLabel = AccessPoint.getSpeedLabel(calculateBadge >= 5 ? calculateBadge < 7 ? 5 : calculateBadge < 15 ? 10 : calculateBadge < 25 ? 20 : 30 : 0, context);
+            int iCalculateBadge = scoredNetwork.calculateBadge(i);
+            speedLabel = AccessPoint.getSpeedLabel(iCalculateBadge >= 5 ? iCalculateBadge < 7 ? 5 : iCalculateBadge < 15 ? 10 : iCalculateBadge < 25 ? 20 : 30 : 0, context);
         }
         this.statusLabel = speedLabel;
     }

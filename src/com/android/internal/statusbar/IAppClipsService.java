@@ -53,9 +53,9 @@ public interface IAppClipsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppClipsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppClipsService)) {
-                return (IAppClipsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppClipsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppClipsService)) {
+                return (IAppClipsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,17 +85,17 @@ public interface IAppClipsService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean canLaunchCaptureContentActivityForNote = canLaunchCaptureContentActivityForNote(readInt);
+                boolean zCanLaunchCaptureContentActivityForNote = canLaunchCaptureContentActivityForNote(i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(canLaunchCaptureContentActivityForNote);
+                parcel2.writeBoolean(zCanLaunchCaptureContentActivityForNote);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int canLaunchCaptureContentActivityForNoteInternal = canLaunchCaptureContentActivityForNoteInternal(readInt2);
+                int iCanLaunchCaptureContentActivityForNoteInternal = canLaunchCaptureContentActivityForNoteInternal(i4);
                 parcel2.writeNoException();
-                parcel2.writeInt(canLaunchCaptureContentActivityForNoteInternal);
+                parcel2.writeInt(iCanLaunchCaptureContentActivityForNoteInternal);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -120,33 +120,33 @@ public interface IAppClipsService extends IInterface {
 
             @Override // com.android.internal.statusbar.IAppClipsService
             public boolean canLaunchCaptureContentActivityForNote(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppClipsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAppClipsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IAppClipsService
             public int canLaunchCaptureContentActivityForNoteInternal(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppClipsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAppClipsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

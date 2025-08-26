@@ -11,7 +11,6 @@ import dagger.internal.Providers;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginsModule_ProvidePluginInstanceManagerFactoryFactory implements Provider {
     private final Provider contextProvider;
@@ -39,9 +38,9 @@ public final class PluginsModule_ProvidePluginInstanceManagerFactoryFactory impl
     }
 
     public static PluginActionManager.Factory providePluginInstanceManagerFactory(Context context, PackageManager packageManager, Executor executor, Executor executor2, NotificationManager notificationManager, PluginEnabler pluginEnabler, List<String> list, PluginInstance.Factory factory) {
-        PluginActionManager.Factory providePluginInstanceManagerFactory = PluginsModule.providePluginInstanceManagerFactory(context, packageManager, executor, executor2, notificationManager, pluginEnabler, list, factory);
-        providePluginInstanceManagerFactory.getClass();
-        return providePluginInstanceManagerFactory;
+        PluginActionManager.Factory factoryProvidePluginInstanceManagerFactory = PluginsModule.providePluginInstanceManagerFactory(context, packageManager, executor, executor2, notificationManager, pluginEnabler, list, factory);
+        factoryProvidePluginInstanceManagerFactory.getClass();
+        return factoryProvidePluginInstanceManagerFactory;
     }
 
     public static PluginsModule_ProvidePluginInstanceManagerFactoryFactory create(Provider provider, Provider provider2, Provider provider3, Provider provider4, Provider provider5, Provider provider6, Provider provider7, Provider provider8) {

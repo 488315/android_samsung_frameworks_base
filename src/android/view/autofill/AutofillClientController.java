@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewRootImpl;
 import android.view.WindowManagerGlobal;
 import android.view.autofill.AutofillManager;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,8 +113,8 @@ public final class AutofillClientController implements AutofillManager.AutofillC
     private void forResume() {
         View currentFocus;
         enableAutofillCompatibilityIfNeeded();
-        boolean isRelayoutFixEnabled = isRelayoutFixEnabled();
-        if (isRelayoutFixEnabled) {
+        boolean zIsRelayoutFixEnabled = isRelayoutFixEnabled();
+        if (zIsRelayoutFixEnabled) {
             if (getAutofillManager().shouldRetryFill()) {
                 if (Helper.sVerbose) {
                     Log.v(TAG, "forResume(): Autofill potential relayout. Retrying fill.");
@@ -126,7 +127,7 @@ public final class AutofillClientController implements AutofillManager.AutofillC
         if (!this.mAutoFillResetNeeded || this.mAutoFillIgnoreFirstResumePause || (currentFocus = this.mActivity.getCurrentFocus()) == null || !currentFocus.canNotifyAutofillEnterExitEvent()) {
             return;
         }
-        if (isRelayoutFixEnabled && getAutofillManager().isAuthenticationPending()) {
+        if (zIsRelayoutFixEnabled && getAutofillManager().isAuthenticationPending()) {
             if (Helper.sVerbose) {
                 Log.v(TAG, "forResume(): ignoring focus due to auth pending");
             }
@@ -297,12 +298,12 @@ public final class AutofillClientController implements AutofillManager.AutofillC
             if (autofillId == null) {
                 zArr[i] = false;
             } else {
-                View autofillClientFindViewByAutofillIdTraversal = autofillClientFindViewByAutofillIdTraversal(autofillId);
-                if (autofillClientFindViewByAutofillIdTraversal != null) {
+                View viewAutofillClientFindViewByAutofillIdTraversal = autofillClientFindViewByAutofillIdTraversal(autofillId);
+                if (viewAutofillClientFindViewByAutofillIdTraversal != null) {
                     if (!autofillId.isVirtualInt()) {
-                        zArr[i] = autofillClientFindViewByAutofillIdTraversal.isVisibleToUser();
+                        zArr[i] = viewAutofillClientFindViewByAutofillIdTraversal.isVisibleToUser();
                     } else {
-                        zArr[i] = autofillClientFindViewByAutofillIdTraversal.isVisibleToUserForAutofill(autofillId.getVirtualChildIntId());
+                        zArr[i] = viewAutofillClientFindViewByAutofillIdTraversal.isVisibleToUserForAutofill(autofillId.getVirtualChildIntId());
                     }
                 }
             }
@@ -315,12 +316,12 @@ public final class AutofillClientController implements AutofillManager.AutofillC
 
     @Override // android.view.autofill.AutofillManager.AutofillClient
     public View autofillClientFindViewByAccessibilityIdTraversal(int i, int i2) {
-        View findViewByAccessibilityIdTraversal;
+        View viewFindViewByAccessibilityIdTraversal;
         ArrayList<ViewRootImpl> rootViews = WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
         for (int i3 = 0; i3 < rootViews.size(); i3++) {
             View view = rootViews.get(i3).getView();
-            if (view != null && view.getAccessibilityWindowId() == i2 && (findViewByAccessibilityIdTraversal = view.findViewByAccessibilityIdTraversal(i)) != null) {
-                return findViewByAccessibilityIdTraversal;
+            if (view != null && view.getAccessibilityWindowId() == i2 && (viewFindViewByAccessibilityIdTraversal = view.findViewByAccessibilityIdTraversal(i)) != null) {
+                return viewFindViewByAccessibilityIdTraversal;
             }
         }
         return null;
@@ -328,15 +329,15 @@ public final class AutofillClientController implements AutofillManager.AutofillC
 
     @Override // android.view.autofill.AutofillManager.AutofillClient
     public View autofillClientFindViewByAutofillIdTraversal(AutofillId autofillId) {
-        View findViewByAutofillIdTraversal;
+        View viewFindViewByAutofillIdTraversal;
         if (autofillId == null) {
             return null;
         }
         ArrayList<ViewRootImpl> rootViews = WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
         for (int i = 0; i < rootViews.size(); i++) {
             View view = rootViews.get(i).getView();
-            if (view != null && (findViewByAutofillIdTraversal = view.findViewByAutofillIdTraversal(autofillId.getViewId())) != null) {
-                return findViewByAutofillIdTraversal;
+            if (view != null && (viewFindViewByAutofillIdTraversal = view.findViewByAutofillIdTraversal(autofillId.getViewId())) != null) {
+                return viewFindViewByAutofillIdTraversal;
             }
         }
         return null;
@@ -393,16 +394,16 @@ public final class AutofillClientController implements AutofillManager.AutofillC
 
     @Override // android.view.autofill.AutofillManager.AutofillClient
     public boolean autofillClientRequestShowFillUi(View view, int i, int i2, Rect rect, IAutofillWindowPresenter iAutofillWindowPresenter) {
-        boolean isShowing;
+        boolean zIsShowing;
         AutofillPopupWindow autofillPopupWindow = this.mAutofillPopupWindow;
         if (autofillPopupWindow == null) {
             this.mAutofillPopupWindow = new AutofillPopupWindow(iAutofillWindowPresenter);
-            isShowing = false;
+            zIsShowing = false;
         } else {
-            isShowing = autofillPopupWindow.isShowing();
+            zIsShowing = autofillPopupWindow.isShowing();
         }
         this.mAutofillPopupWindow.update(view, 0, 0, i, i2, rect);
-        return !isShowing && this.mAutofillPopupWindow.isShowing();
+        return !zIsShowing && this.mAutofillPopupWindow.isShowing();
     }
 
     @Override // android.view.autofill.AutofillManager.AutofillClient
@@ -429,19 +430,19 @@ public final class AutofillClientController implements AutofillManager.AutofillC
     }
 
     @Override // android.view.autofill.AutofillManager.AutofillClient
-    public void autofillClientAuthenticate(int i, IntentSender intentSender, Intent intent, boolean z) {
+    public void autofillClientAuthenticate(int i, IntentSender intentSender, Intent intent, boolean z) throws IOException {
         IntentSender intentSender2;
         try {
             intentSender2 = intentSender;
-        } catch (IntentSender.SendIntentException e) {
-            e = e;
-            intentSender2 = intentSender;
-        }
-        try {
-            this.mActivity.startIntentSenderForResult(intentSender2, AUTO_FILL_AUTH_WHO_PREFIX, i, intent, 0, 0, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
+            try {
+                this.mActivity.startIntentSenderForResult(intentSender2, AUTO_FILL_AUTH_WHO_PREFIX, i, intent, 0, 0, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
+            } catch (IntentSender.SendIntentException e) {
+                e = e;
+                Log.e(TAG, "authenticate() failed for intent:" + intentSender2, e);
+            }
         } catch (IntentSender.SendIntentException e2) {
             e = e2;
-            Log.e(TAG, "authenticate() failed for intent:" + intentSender2, e);
+            intentSender2 = intentSender;
         }
     }
 

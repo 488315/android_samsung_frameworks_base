@@ -436,11 +436,11 @@ public class LauncherApps {
     public LauncherActivityInfo resolveActivity(Intent intent, UserHandle userHandle) {
         logErrorForInvalidProfileAccess(userHandle);
         try {
-            LauncherActivityInfoInternal resolveLauncherActivityInternal = this.mService.resolveLauncherActivityInternal(this.mContext.getPackageName(), intent.getComponent(), userHandle);
-            if (resolveLauncherActivityInternal == null) {
+            LauncherActivityInfoInternal launcherActivityInfoInternalResolveLauncherActivityInternal = this.mService.resolveLauncherActivityInternal(this.mContext.getPackageName(), intent.getComponent(), userHandle);
+            if (launcherActivityInfoInternalResolveLauncherActivityInternal == null) {
                 return null;
             }
-            return new LauncherActivityInfo(this.mContext, resolveLauncherActivityInternal);
+            return new LauncherActivityInfo(this.mContext, launcherActivityInfoInternalResolveLauncherActivityInternal);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -783,15 +783,15 @@ public class LauncherApps {
             return null;
         }
         try {
-            Bitmap decodeFileDescriptor = BitmapFactory.decodeFileDescriptor(parcelFileDescriptor.getFileDescriptor());
-            if (decodeFileDescriptor == null) {
+            Bitmap bitmapDecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(parcelFileDescriptor.getFileDescriptor());
+            if (bitmapDecodeFileDescriptor == null) {
                 try {
                     parcelFileDescriptor.close();
                 } catch (IOException unused) {
                 }
                 return null;
             }
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), decodeFileDescriptor);
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapDecodeFileDescriptor);
             if (z) {
                 return new AdaptiveIconDrawable((Drawable) null, bitmapDrawable);
             }
@@ -815,8 +815,8 @@ public class LauncherApps {
                 return null;
             }
             try {
-                Bitmap decodeFileDescriptor = BitmapFactory.decodeFileDescriptor(shortcutIconFd.getFileDescriptor());
-                if (decodeFileDescriptor == null) {
+                Bitmap bitmapDecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(shortcutIconFd.getFileDescriptor());
+                if (bitmapDecodeFileDescriptor == null) {
                     try {
                         shortcutIconFd.close();
                     } catch (IOException unused) {
@@ -824,14 +824,14 @@ public class LauncherApps {
                     return null;
                 }
                 if (shortcutInfo.hasAdaptiveBitmap()) {
-                    return Icon.createWithAdaptiveBitmap(decodeFileDescriptor);
+                    return Icon.createWithAdaptiveBitmap(bitmapDecodeFileDescriptor);
                 }
-                Icon createWithBitmap = Icon.createWithBitmap(decodeFileDescriptor);
+                Icon iconCreateWithBitmap = Icon.createWithBitmap(bitmapDecodeFileDescriptor);
                 try {
                     shortcutIconFd.close();
                 } catch (IOException unused2) {
                 }
-                return createWithBitmap;
+                return iconCreateWithBitmap;
             } finally {
                 try {
                     shortcutIconFd.close();
@@ -951,9 +951,9 @@ public class LauncherApps {
     }
 
     private void removeCallbackLocked(Callback callback) {
-        int findCallbackLocked = findCallbackLocked(callback);
-        if (findCallbackLocked >= 0) {
-            this.mCallbacks.remove(findCallbackLocked);
+        int iFindCallbackLocked = findCallbackLocked(callback);
+        if (iFindCallbackLocked >= 0) {
+            this.mCallbacks.remove(iFindCallbackLocked);
         }
     }
 

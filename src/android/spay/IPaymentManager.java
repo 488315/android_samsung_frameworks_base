@@ -53,9 +53,9 @@ public interface IPaymentManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPaymentManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPaymentManager)) {
-                return (IPaymentManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPaymentManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPaymentManager)) {
+                return (IPaymentManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,9 +87,9 @@ public interface IPaymentManager extends IInterface {
             if (i == 1) {
                 PaymentTZServiceConfig paymentTZServiceConfig = (PaymentTZServiceConfig) parcel.readTypedObject(PaymentTZServiceConfig.CREATOR);
                 parcel.enforceNoDataAvail();
-                PaymentTZServiceCommnInfo registerSPayFW = registerSPayFW(paymentTZServiceConfig);
+                PaymentTZServiceCommnInfo paymentTZServiceCommnInfoRegisterSPayFW = registerSPayFW(paymentTZServiceConfig);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(registerSPayFW, 1);
+                parcel2.writeTypedObject(paymentTZServiceCommnInfoRegisterSPayFW, 1);
             } else if (i == 2) {
                 byte[] measurementFile = getMeasurementFile();
                 parcel2.writeNoException();
@@ -118,32 +118,32 @@ public interface IPaymentManager extends IInterface {
 
             @Override // android.spay.IPaymentManager
             public PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig paymentTZServiceConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPaymentManager.DESCRIPTOR);
-                    obtain.writeTypedObject(paymentTZServiceConfig, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PaymentTZServiceCommnInfo) obtain2.readTypedObject(PaymentTZServiceCommnInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPaymentManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(paymentTZServiceConfig, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PaymentTZServiceCommnInfo) parcelObtain2.readTypedObject(PaymentTZServiceCommnInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.spay.IPaymentManager
             public byte[] getMeasurementFile() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPaymentManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IPaymentManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

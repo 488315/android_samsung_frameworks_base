@@ -12,6 +12,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.os.BatteryStatsHistory;
+import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -135,24 +136,24 @@ public final class PowerStats {
         }
 
         public static Descriptor readSummaryFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int i = (readInt & 255) >>> PowerStats.PARCEL_FORMAT_VERSION_SHIFT;
-            if (i != 2) {
-                Slog.w(PowerStats.TAG, "Cannot read PowerStats from Parcel - the parcel format version has changed from " + i + " to 2");
+            int i = parcel.readInt();
+            int i2 = (i & 255) >>> PowerStats.PARCEL_FORMAT_VERSION_SHIFT;
+            if (i2 != 2) {
+                Slog.w(PowerStats.TAG, "Cannot read PowerStats from Parcel - the parcel format version has changed from " + i2 + " to 2");
                 return null;
             }
-            int i2 = (65280 & readInt) >>> PowerStats.STATS_ARRAY_LENGTH_SHIFT;
-            int i3 = (16711680 & readInt) >>> PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT;
-            int i4 = (readInt & (-16777216)) >>> PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT;
-            int readInt2 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt3 = parcel.readInt();
-            SparseArray sparseArray = new SparseArray(readInt3);
-            while (readInt3 > 0) {
+            int i3 = (65280 & i) >>> PowerStats.STATS_ARRAY_LENGTH_SHIFT;
+            int i4 = (16711680 & i) >>> PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT;
+            int i5 = (i & (-16777216)) >>> PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT;
+            int i6 = parcel.readInt();
+            String string = parcel.readString();
+            int i7 = parcel.readInt();
+            SparseArray sparseArray = new SparseArray(i7);
+            while (i7 > 0) {
                 sparseArray.put(parcel.readInt(), parcel.readString());
-                readInt3--;
+                i7--;
             }
-            return new Descriptor(readInt2, readString, i2, sparseArray, i3, i4, parcel.readPersistableBundle());
+            return new Descriptor(i6, string, i3, sparseArray, i4, i5, parcel.readPersistableBundle());
         }
 
         public boolean equals(Object obj) {
@@ -201,137 +202,77 @@ public final class PowerStats {
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Code restructure failed: missing block: B:40:0x0049, code lost:
-        
-            if (r0.equals(com.android.internal.os.PowerStats.Descriptor.XML_TAG_DESCRIPTOR) == false) goto L13;
-         */
+        /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+        /* JADX WARN: Removed duplicated region for block: B:13:0x0037  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static com.android.internal.os.PowerStats.Descriptor createFromXml(com.android.modules.utils.TypedXmlPullParser r15) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-            /*
-                android.util.SparseArray r3 = new android.util.SparseArray
-                r3.<init>()
-                int r0 = r15.getEventType()
-                r1 = -1
-                r2 = 0
-                r4 = 0
-                r8 = r1
-                r7 = r2
-                r9 = r7
-                r5 = r4
-                r6 = r5
-                r10 = r6
-                r4 = r3
-                r3 = r10
-            L14:
-                r11 = 1
-                if (r0 == r11) goto L95
-                r12 = 3
-                java.lang.String r13 = "descriptor"
-                if (r0 != r12) goto L26
-                java.lang.String r12 = r15.getName()
-                boolean r12 = r12.equals(r13)
-                if (r12 != 0) goto L95
-            L26:
-                r12 = 2
-                if (r0 != r12) goto L90
-                java.lang.String r0 = r15.getName()
-                r0.hashCode()
-                int r14 = r0.hashCode()
-                switch(r14) {
-                    case -1289032093: goto L4c;
-                    case -748366993: goto L45;
-                    case 109757585: goto L39;
-                    default: goto L37;
+        public static Descriptor createFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
+            SparseArray sparseArray = new SparseArray();
+            int eventType = typedXmlPullParser.getEventType();
+            int attributeInt = -1;
+            String attributeValue = null;
+            PersistableBundle persistableBundleRestoreFromXml = null;
+            int attributeInt2 = 0;
+            int attributeInt3 = 0;
+            int attributeInt4 = 0;
+            while (true) {
+                boolean z = true;
+                if (eventType != 1 && (eventType != 3 || !typedXmlPullParser.getName().equals(XML_TAG_DESCRIPTOR))) {
+                    if (eventType == 2) {
+                        String name = typedXmlPullParser.getName();
+                        name.hashCode();
+                        switch (name.hashCode()) {
+                            case -1289032093:
+                                if (!name.equals("extras")) {
+                                    z = -1;
+                                    break;
+                                } else {
+                                    z = false;
+                                    break;
+                                }
+                            case -748366993:
+                                if (!name.equals(XML_TAG_DESCRIPTOR)) {
+                                }
+                                break;
+                            case 109757585:
+                                if (name.equals("state")) {
+                                    z = 2;
+                                    break;
+                                }
+                                break;
+                        }
+                        switch (z) {
+                            case false:
+                                persistableBundleRestoreFromXml = PersistableBundle.restoreFromXml(typedXmlPullParser);
+                                break;
+                            case true:
+                                attributeInt = typedXmlPullParser.getAttributeInt(null, "id");
+                                attributeValue = typedXmlPullParser.getAttributeValue(null, "name");
+                                attributeInt4 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_STATS_ARRAY_LENGTH);
+                                attributeInt2 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_STATE_STATS_ARRAY_LENGTH);
+                                attributeInt3 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_UID_STATS_ARRAY_LENGTH);
+                                break;
+                            case true:
+                                sparseArray.put(typedXmlPullParser.getAttributeInt(null, "key"), typedXmlPullParser.getAttributeValue(null, "label"));
+                                break;
+                        }
+                    }
+                    eventType = typedXmlPullParser.next();
                 }
-            L37:
-                r11 = r8
-                goto L56
-            L39:
-                java.lang.String r11 = "state"
-                boolean r0 = r0.equals(r11)
-                if (r0 != 0) goto L43
-                goto L37
-            L43:
-                r11 = r12
-                goto L56
-            L45:
-                boolean r0 = r0.equals(r13)
-                if (r0 != 0) goto L56
-                goto L37
-            L4c:
-                java.lang.String r11 = "extras"
-                boolean r0 = r0.equals(r11)
-                if (r0 != 0) goto L55
-                goto L37
-            L55:
-                r11 = r10
-            L56:
-                switch(r11) {
-                    case 0: goto L8c;
-                    case 1: goto L6a;
-                    case 2: goto L5a;
-                    default: goto L59;
-                }
-            L59:
-                goto L90
-            L5a:
-                java.lang.String r0 = "key"
-                int r0 = r15.getAttributeInt(r9, r0)
-                java.lang.String r11 = "label"
-                java.lang.String r11 = r15.getAttributeValue(r9, r11)
-                r4.put(r0, r11)
-                goto L90
-            L6a:
-                java.lang.String r0 = "id"
-                int r1 = r15.getAttributeInt(r9, r0)
-                java.lang.String r0 = "name"
-                java.lang.String r2 = r15.getAttributeValue(r9, r0)
-                java.lang.String r0 = "stats-array-length"
-                int r3 = r15.getAttributeInt(r9, r0)
-                java.lang.String r0 = "state-stats-array-length"
-                int r5 = r15.getAttributeInt(r9, r0)
-                java.lang.String r0 = "uid-stats-array-length"
-                int r6 = r15.getAttributeInt(r9, r0)
-                goto L90
-            L8c:
-                android.os.PersistableBundle r7 = android.os.PersistableBundle.restoreFromXml(r15)
-            L90:
-                int r0 = r15.next()
-                goto L14
-            L95:
-                if (r1 != r8) goto L98
-                return r9
-            L98:
-                r15 = 1000(0x3e8, float:1.401E-42)
-                if (r1 < r15) goto La2
-                com.android.internal.os.PowerStats$Descriptor r0 = new com.android.internal.os.PowerStats$Descriptor
-                r0.<init>(r1, r2, r3, r4, r5, r6, r7)
-                return r0
-            La2:
-                r2 = r3
-                r15 = 20
-                if (r1 >= r15) goto Lb1
-                com.android.internal.os.PowerStats$Descriptor r0 = new com.android.internal.os.PowerStats$Descriptor
-                r3 = r4
-                r4 = r5
-                r5 = r6
-                r6 = r7
-                r0.<init>(r1, r2, r3, r4, r5, r6)
-                return r0
-            Lb1:
-                java.lang.StringBuilder r15 = new java.lang.StringBuilder
-                java.lang.String r0 = "Unrecognized power component: "
-                r15.<init>(r0)
-                r15.append(r1)
-                java.lang.String r15 = r15.toString()
-                java.lang.String r0 = "PowerStats"
-                android.util.Slog.e(r0, r15)
-                return r9
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.PowerStats.Descriptor.createFromXml(com.android.modules.utils.TypedXmlPullParser):com.android.internal.os.PowerStats$Descriptor");
+            }
+            if (attributeInt == -1) {
+                return null;
+            }
+            if (attributeInt >= 1000) {
+                return new Descriptor(attributeInt, attributeValue, attributeInt4, sparseArray, attributeInt2, attributeInt3, persistableBundleRestoreFromXml);
+            }
+            int i = attributeInt4;
+            if (attributeInt < 20) {
+                return new Descriptor(attributeInt, i, sparseArray, attributeInt2, attributeInt3, persistableBundleRestoreFromXml);
+            }
+            Slog.e(PowerStats.TAG, "Unrecognized power component: " + attributeInt);
+            return null;
         }
 
         public int hashCode() {
@@ -365,9 +306,9 @@ public final class PowerStats {
     }
 
     public void writeToParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
-        int dataPosition2 = parcel.dataPosition();
+        int iDataPosition2 = parcel.dataPosition();
         parcel.writeInt(this.descriptor.powerComponentId);
         parcel.writeLong(this.durationMs);
         VARINT_PARCELER.writeLongArray(parcel, this.stats);
@@ -383,29 +324,29 @@ public final class PowerStats {
             parcel.writeInt(this.uidStats.keyAt(i2));
             VARINT_PARCELER.writeLongArray(parcel, this.uidStats.valueAt(i2));
         }
-        int dataPosition3 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition3 - dataPosition2);
-        parcel.setDataPosition(dataPosition3);
+        int iDataPosition3 = parcel.dataPosition();
+        parcel.setDataPosition(iDataPosition);
+        parcel.writeInt(iDataPosition3 - iDataPosition2);
+        parcel.setDataPosition(iDataPosition3);
     }
 
     public static PowerStats readFromParcel(Parcel parcel, DescriptorRegistry descriptorRegistry) {
-        int readInt = parcel.readInt();
-        int dataPosition = parcel.dataPosition();
-        int i = dataPosition + readInt;
+        int i = parcel.readInt();
+        int iDataPosition = parcel.dataPosition();
+        int i2 = iDataPosition + i;
         try {
-            int readInt2 = parcel.readInt();
-            Descriptor descriptor = descriptorRegistry.get(readInt2);
+            int i3 = parcel.readInt();
+            Descriptor descriptor = descriptorRegistry.get(i3);
             if (descriptor == null) {
-                Slog.e(TAG, "Unsupported PowerStats for power component ID: " + readInt2);
-                if (i <= parcel.dataPosition()) {
+                Slog.e(TAG, "Unsupported PowerStats for power component ID: " + i3);
+                if (i2 <= parcel.dataPosition()) {
                     return null;
                 }
-                if (i < parcel.dataSize()) {
-                    parcel.setDataPosition(i);
+                if (i2 < parcel.dataSize()) {
+                    parcel.setDataPosition(i2);
                     return null;
                 }
-                throw new IndexOutOfBoundsException("PowerStats end position: " + i + " is outside the parcel bounds: " + parcel.dataSize());
+                throw new IndexOutOfBoundsException("PowerStats end position: " + i2 + " is outside the parcel bounds: " + parcel.dataSize());
             }
             PowerStats powerStats = new PowerStats(descriptor);
             powerStats.durationMs = parcel.readLong();
@@ -413,46 +354,46 @@ public final class PowerStats {
             powerStats.stats = jArr;
             VARINT_PARCELER.readLongArray(parcel, jArr);
             if (descriptor.stateStatsArrayLength != 0) {
-                int readInt3 = parcel.readInt();
-                for (int i2 = 0; i2 < readInt3; i2++) {
-                    int readInt4 = parcel.readInt();
+                int i4 = parcel.readInt();
+                for (int i5 = 0; i5 < i4; i5++) {
+                    int i6 = parcel.readInt();
                     long[] jArr2 = new long[descriptor.stateStatsArrayLength];
                     VARINT_PARCELER.readLongArray(parcel, jArr2);
-                    powerStats.stateStats.put(readInt4, jArr2);
+                    powerStats.stateStats.put(i6, jArr2);
                 }
             }
-            int readInt5 = parcel.readInt();
-            for (int i3 = 0; i3 < readInt5; i3++) {
-                int readInt6 = parcel.readInt();
+            int i7 = parcel.readInt();
+            for (int i8 = 0; i8 < i7; i8++) {
+                int i9 = parcel.readInt();
                 long[] jArr3 = new long[descriptor.uidStatsArrayLength];
                 VARINT_PARCELER.readLongArray(parcel, jArr3);
-                powerStats.uidStats.put(readInt6, jArr3);
+                powerStats.uidStats.put(i9, jArr3);
             }
-            if (parcel.dataPosition() == i) {
-                if (i <= parcel.dataPosition()) {
+            if (parcel.dataPosition() == i2) {
+                if (i2 <= parcel.dataPosition()) {
                     return powerStats;
                 }
-                if (i < parcel.dataSize()) {
-                    parcel.setDataPosition(i);
+                if (i2 < parcel.dataSize()) {
+                    parcel.setDataPosition(i2);
                     return powerStats;
                 }
-                throw new IndexOutOfBoundsException("PowerStats end position: " + i + " is outside the parcel bounds: " + parcel.dataSize());
+                throw new IndexOutOfBoundsException("PowerStats end position: " + i2 + " is outside the parcel bounds: " + parcel.dataSize());
             }
-            Slog.e(TAG, "Corrupted PowerStats parcel. Expected length: " + readInt + ", actual length: " + (parcel.dataPosition() - dataPosition));
-            if (i <= parcel.dataPosition()) {
+            Slog.e(TAG, "Corrupted PowerStats parcel. Expected length: " + i + ", actual length: " + (parcel.dataPosition() - iDataPosition));
+            if (i2 <= parcel.dataPosition()) {
                 return null;
             }
-            if (i < parcel.dataSize()) {
-                parcel.setDataPosition(i);
+            if (i2 < parcel.dataSize()) {
+                parcel.setDataPosition(i2);
                 return null;
             }
-            throw new IndexOutOfBoundsException("PowerStats end position: " + i + " is outside the parcel bounds: " + parcel.dataSize());
+            throw new IndexOutOfBoundsException("PowerStats end position: " + i2 + " is outside the parcel bounds: " + parcel.dataSize());
         } catch (Throwable th) {
-            if (i > parcel.dataPosition()) {
-                if (i >= parcel.dataSize()) {
-                    throw new IndexOutOfBoundsException("PowerStats end position: " + i + " is outside the parcel bounds: " + parcel.dataSize());
+            if (i2 > parcel.dataPosition()) {
+                if (i2 >= parcel.dataSize()) {
+                    throw new IndexOutOfBoundsException("PowerStats end position: " + i2 + " is outside the parcel bounds: " + parcel.dataSize());
                 }
-                parcel.setDataPosition(i);
+                parcel.setDataPosition(i2);
             }
             throw th;
         }
@@ -505,12 +446,12 @@ public final class PowerStats {
         }
         PowerStatsFormatter uidStatsFormatter = this.descriptor.getUidStatsFormatter();
         for (int i2 = 0; i2 < this.uidStats.size(); i2++) {
-            String format = uidStatsFormatter.format(this.uidStats.valueAt(i2));
-            if (!format.isBlank()) {
+            String str = uidStatsFormatter.format(this.uidStats.valueAt(i2));
+            if (!str.isBlank()) {
                 indentingPrintWriter.print("UID ");
                 indentingPrintWriter.print(UserHandle.formatUid(this.uidStats.keyAt(i2)));
                 indentingPrintWriter.print(": ");
-                indentingPrintWriter.print(format);
+                indentingPrintWriter.print(str);
                 indentingPrintWriter.println();
             }
         }
@@ -551,30 +492,30 @@ public final class PowerStats {
             }
             ArrayList arrayList = new ArrayList();
             Matcher matcher = SECTION_PATTERN.matcher(str);
-            for (int i = 0; i < str.length(); i = matcher.end()) {
-                if (!matcher.find() || matcher.start() != i) {
+            for (int iEnd = 0; iEnd < str.length(); iEnd = matcher.end()) {
+                if (!matcher.find() || matcher.start() != iEnd) {
                     Slog.wtf(PowerStats.TAG, "Bad power stats format '" + str + "'");
                     return null;
                 }
                 Section section = new Section();
                 section.label = matcher.group(1);
                 section.position = Integer.parseUnsignedInt(matcher.group(2));
-                String group = matcher.group(GnssSignalType.CODE_TYPE_L);
-                if (group != null) {
-                    section.length = Integer.parseUnsignedInt(group);
+                String strGroup = matcher.group(GnssSignalType.CODE_TYPE_L);
+                if (strGroup != null) {
+                    section.length = Integer.parseUnsignedInt(strGroup);
                 } else {
                     section.length = 1;
                 }
-                String group2 = matcher.group("F");
-                if (group2 != null) {
-                    for (int i2 = 0; i2 < group2.length(); i2++) {
-                        char charAt = group2.charAt(i2);
-                        if (charAt == '?') {
+                String strGroup2 = matcher.group("F");
+                if (strGroup2 != null) {
+                    for (int i = 0; i < strGroup2.length(); i++) {
+                        char cCharAt = strGroup2.charAt(i);
+                        if (cCharAt == '?') {
                             section.optional = true;
-                        } else if (charAt == 'p') {
+                        } else if (cCharAt == 'p') {
                             section.typePower = true;
                         } else {
-                            Slog.e(PowerStats.TAG, "Unsupported format option '" + charAt + "' in " + str);
+                            Slog.e(PowerStats.TAG, "Unsupported format option '" + cCharAt + "' in " + str);
                         }
                     }
                 }
@@ -583,41 +524,61 @@ public final class PowerStats {
             return arrayList;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:21:0x003e  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0052  */
+        /* JADX WARN: Removed duplicated region for block: B:28:0x005c  */
+        /* JADX WARN: Removed duplicated region for block: B:37:0x008a  */
+        /* JADX WARN: Removed duplicated region for block: B:44:0x008f A[SYNTHETIC] */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private String format(List<Section> list, long[] jArr) {
+            int i;
             if (list == null) {
                 return Arrays.toString(jArr);
             }
             StringBuilder sb = new StringBuilder();
             int size = list.size();
-            for (int i = 0; i < size; i++) {
-                Section section = list.get(i);
+            for (int i2 = 0; i2 < size; i2++) {
+                Section section = list.get(i2);
                 if (section.length != 0) {
                     if (section.optional) {
-                        for (int i2 = 0; i2 < section.length; i2++) {
-                            if (jArr[section.position + i2] == 0) {
+                        for (int i3 = 0; i3 < section.length; i3++) {
+                            if (jArr[section.position + i3] != 0) {
+                                if (!sb.isEmpty()) {
+                                    sb.append(' ');
+                                }
+                                sb.append(section.label);
+                                sb.append(": ");
+                                if (section.length != 1) {
+                                    sb.append('[');
+                                }
+                                for (i = 0; i < section.length; i++) {
+                                    if (i != 0) {
+                                        sb.append(", ");
+                                    }
+                                    if (section.typePower) {
+                                        sb.append(BatteryStats.formatCharge(jArr[section.position + i] * NANO_TO_MILLI_MULTIPLIER));
+                                    } else {
+                                        sb.append(jArr[section.position + i]);
+                                    }
+                                }
+                                if (section.length == 1) {
+                                    sb.append(']');
+                                }
                             }
                         }
-                    }
-                    if (!sb.isEmpty()) {
-                        sb.append(' ');
-                    }
-                    sb.append(section.label);
-                    sb.append(": ");
-                    if (section.length != 1) {
-                        sb.append('[');
-                    }
-                    for (int i3 = 0; i3 < section.length; i3++) {
-                        if (i3 != 0) {
-                            sb.append(", ");
+                    } else {
+                        if (!sb.isEmpty()) {
                         }
-                        if (section.typePower) {
-                            sb.append(BatteryStats.formatCharge(jArr[section.position + i3] * NANO_TO_MILLI_MULTIPLIER));
-                        } else {
-                            sb.append(jArr[section.position + i3]);
+                        sb.append(section.label);
+                        sb.append(": ");
+                        if (section.length != 1) {
                         }
-                    }
-                    if (section.length != 1) {
-                        sb.append(']');
+                        while (i < section.length) {
+                        }
+                        if (section.length == 1) {
+                        }
                     }
                 }
             }

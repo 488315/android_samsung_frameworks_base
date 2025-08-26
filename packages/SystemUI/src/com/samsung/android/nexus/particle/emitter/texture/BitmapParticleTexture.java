@@ -6,7 +6,6 @@ import android.util.Log;
 import android.util.LruCache;
 import com.samsung.android.nexus.particle.emitter.texture.BitmapCache;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BitmapParticleTexture extends ParticleTexture {
     public Bitmap mBitmap;
@@ -23,9 +22,9 @@ public class BitmapParticleTexture extends ParticleTexture {
         if (bitmapLoader == null) {
             throw new IllegalArgumentException("null loader");
         }
-        int max = Math.max(0, bitmapLoader.retainCount - 1);
-        bitmapLoader.retainCount = max;
-        if (max == 0) {
+        int iMax = Math.max(0, bitmapLoader.retainCount - 1);
+        bitmapLoader.retainCount = iMax;
+        if (iMax == 0) {
             Log.w("BitmapCache", "release: clear cache :" + bitmapLoader);
             BitmapCache.sLruCache.remove(Integer.valueOf(bitmapLoader.id));
         }

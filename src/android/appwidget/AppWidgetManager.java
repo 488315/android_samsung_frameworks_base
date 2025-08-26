@@ -3,7 +3,6 @@ package android.appwidget;
 import android.app.IServiceConnection;
 import android.app.PendingIntent;
 import android.app.usage.UsageStatsManager;
-import android.appwidget.AppWidgetManager;
 import android.appwidget.flags.Flags;
 import android.content.ComponentName;
 import android.content.Context;
@@ -38,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -128,7 +128,7 @@ public class AppWidgetManager {
         BackgroundThread.getExecutor().execute(new Runnable() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                AppWidgetManager.this.lambda$new$3();
+                this.f$0.lambda$new$3();
             }
         });
     }
@@ -144,9 +144,7 @@ public class AppWidgetManager {
             }).map(new Function() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda3
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    ComponentName componentName;
-                    componentName = ((AppWidgetProviderInfo) obj).provider;
-                    return componentName;
+                    return ((AppWidgetProviderInfo) obj).provider;
                 }
             }).filter(new Predicate() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda4
                 @Override // java.util.function.Predicate
@@ -187,8 +185,8 @@ public class AppWidgetManager {
                 final RemoteViews remoteViews2 = new RemoteViews(remoteViews);
                 Runnable runnable = new Runnable() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        AppWidgetManager.this.lambda$tryAdapterConversion$4(remoteViews2, remoteExceptionIgnoringConsumer, str);
+                    public final void run() throws ExecutionException, InterruptedException {
+                        this.f$0.lambda$tryAdapterConversion$4(remoteViews2, remoteExceptionIgnoringConsumer, str);
                     }
                 };
                 if (Looper.getMainLooper() == Looper.myLooper()) {
@@ -208,7 +206,7 @@ public class AppWidgetManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$tryAdapterConversion$4(RemoteViews remoteViews, FunctionalUtils.RemoteExceptionIgnoringConsumer remoteExceptionIgnoringConsumer, String str) {
+    public /* synthetic */ void lambda$tryAdapterConversion$4(RemoteViews remoteViews, FunctionalUtils.RemoteExceptionIgnoringConsumer remoteExceptionIgnoringConsumer, String str) throws ExecutionException, InterruptedException {
         try {
             remoteViews.collectAllIntents(this.mMaxBitmapMemory, this.mServiceCollectionCache).get();
             remoteExceptionIgnoringConsumer.acceptOrThrow(remoteViews);
@@ -224,8 +222,8 @@ public class AppWidgetManager {
         Log.i(TAG, "updateAppWidget() appWidgetIds = " + Arrays.toString(iArr));
         tryAdapterConversion(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda11
             @Override // com.android.internal.util.FunctionalUtils.RemoteExceptionIgnoringConsumer
-            public final void acceptOrThrow(Object obj) {
-                AppWidgetManager.this.lambda$updateAppWidget$5(iArr, (RemoteViews) obj);
+            public final void acceptOrThrow(Object obj) throws RemoteException {
+                this.f$0.lambda$updateAppWidget$5(iArr, (RemoteViews) obj);
             }
         }, remoteViews, "Error updating app widget views in background");
     }
@@ -298,8 +296,8 @@ public class AppWidgetManager {
         Log.i(TAG, "partiallyUpdateAppWidget() appWidgetIds = " + Arrays.toString(iArr));
         tryAdapterConversion(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda10
             @Override // com.android.internal.util.FunctionalUtils.RemoteExceptionIgnoringConsumer
-            public final void acceptOrThrow(Object obj) {
-                AppWidgetManager.this.lambda$partiallyUpdateAppWidget$6(iArr, (RemoteViews) obj);
+            public final void acceptOrThrow(Object obj) throws RemoteException {
+                this.f$0.lambda$partiallyUpdateAppWidget$6(iArr, (RemoteViews) obj);
             }
         }, remoteViews, "Error partially updating app widget views in background");
     }
@@ -322,8 +320,8 @@ public class AppWidgetManager {
         }
         tryAdapterConversion(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda6
             @Override // com.android.internal.util.FunctionalUtils.RemoteExceptionIgnoringConsumer
-            public final void acceptOrThrow(Object obj) {
-                AppWidgetManager.this.lambda$updateAppWidget$7(componentName, (RemoteViews) obj);
+            public final void acceptOrThrow(Object obj) throws RemoteException {
+                this.f$0.lambda$updateAppWidget$7(componentName, (RemoteViews) obj);
             }
         }, remoteViews, "Error updating app widget view using provider in background");
     }
@@ -356,7 +354,7 @@ public class AppWidgetManager {
                 createUpdateExecutorIfNull().execute(new Runnable() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppWidgetManager.this.lambda$notifyAppWidgetViewDataChanged$8(iArr, i);
+                        this.f$0.lambda$notifyAppWidgetViewDataChanged$8(iArr, i);
                     }
                 });
                 return;
@@ -382,7 +380,7 @@ public class AppWidgetManager {
                 arrayList.add(CompletableFuture.runAsync(new Runnable() { // from class: android.appwidget.AppWidgetManager$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppWidgetManager.this.lambda$notifyCollectionWidgetChange$9(i2, i);
+                        this.f$0.lambda$notifyCollectionWidgetChange$9(i2, i);
                     }
                 }));
             }
@@ -731,7 +729,7 @@ public class AppWidgetManager {
             this.mHandler.post(new Runnable() { // from class: android.appwidget.AppWidgetManager$ServiceCollectionCache$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppWidgetManager.ServiceCollectionCache.this.lambda$connectAndConsume$0(intent, consumer, executor);
+                    this.f$0.lambda$connectAndConsume$0(intent, consumer, executor);
                 }
             });
         }
@@ -742,9 +740,7 @@ public class AppWidgetManager {
             this.mActiveConnections.computeIfAbsent(new Intent.FilterComparison(intent), new Function() { // from class: android.appwidget.AppWidgetManager$ServiceCollectionCache$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    AppWidgetManager.ServiceCollectionCache.ConnectionTask lambda$connectAndConsumeInner$1;
-                    lambda$connectAndConsumeInner$1 = AppWidgetManager.ServiceCollectionCache.this.lambda$connectAndConsumeInner$1((Intent.FilterComparison) obj);
-                    return lambda$connectAndConsumeInner$1;
+                    return this.f$0.lambda$connectAndConsumeInner$1((Intent.FilterComparison) obj);
                 }
             }).add(consumer, executor);
         }
@@ -760,7 +756,7 @@ public class AppWidgetManager {
             private final Runnable mDestroyAfterTimeout = new Runnable() { // from class: android.appwidget.AppWidgetManager$ServiceCollectionCache$ConnectionTask$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppWidgetManager.ServiceCollectionCache.ConnectionTask.this.onDestroyTimeout();
+                    this.f$0.onDestroyTimeout();
                 }
             };
             private final ArrayDeque<Pair<Consumer<IBinder>, Executor>> mTaskQueue = new ArrayDeque<>();
@@ -774,10 +770,10 @@ public class AppWidgetManager {
                 try {
                     Context context = ServiceCollectionCache.this.mContext;
                     Intent intent = filterComparison.getIntent();
-                    Context.BindServiceFlags of = Context.BindServiceFlags.of(1L);
+                    Context.BindServiceFlags bindServiceFlagsOf = Context.BindServiceFlags.of(1L);
                     Handler handler = ServiceCollectionCache.this.mHandler;
                     Objects.requireNonNull(handler);
-                    context.bindService(intent, of, new AppWidgetManager$ServiceCollectionCache$ConnectionTask$$ExternalSyntheticLambda1(handler), this);
+                    context.bindService(intent, bindServiceFlagsOf, new AppWidgetManager$ServiceCollectionCache$ConnectionTask$$ExternalSyntheticLambda1(handler), this);
                 } catch (Exception e) {
                     Log.e(AppWidgetManager.TAG, "Error connecting to service in connection cache", e);
                 }
@@ -804,13 +800,13 @@ public class AppWidgetManager {
             /* JADX INFO: Access modifiers changed from: private */
             public void handleNext() {
                 ServiceCollectionCache.this.mHandler.removeCallbacks(this.mDestroyAfterTimeout);
-                final Pair<Consumer<IBinder>, Executor> pollFirst = this.mTaskQueue.pollFirst();
-                if (pollFirst != null) {
+                final Pair<Consumer<IBinder>, Executor> pairPollFirst = this.mTaskQueue.pollFirst();
+                if (pairPollFirst != null) {
                     this.mOnDestroyTimeout = false;
-                    pollFirst.second.execute(new Runnable() { // from class: android.appwidget.AppWidgetManager$ServiceCollectionCache$ConnectionTask$$ExternalSyntheticLambda3
+                    pairPollFirst.second.execute(new Runnable() { // from class: android.appwidget.AppWidgetManager$ServiceCollectionCache$ConnectionTask$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AppWidgetManager.ServiceCollectionCache.ConnectionTask.this.lambda$handleNext$0(pollFirst);
+                            this.f$0.lambda$handleNext$0(pairPollFirst);
                         }
                     });
                 } else {

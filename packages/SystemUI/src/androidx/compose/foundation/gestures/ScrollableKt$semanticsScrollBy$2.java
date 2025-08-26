@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$FloatRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollableKt$semanticsScrollBy$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $offset;
@@ -46,7 +45,7 @@ final class ScrollableKt$semanticsScrollBy$2 extends SuspendLambda implements Fu
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final NestedScrollScope nestedScrollScope = (NestedScrollScope) this.L$0;
-            float m84toFloatk4lQ0M = this.$this_semanticsScrollBy.m84toFloatk4lQ0M(this.$offset);
+            float fM85toFloatk4lQ0M = this.$this_semanticsScrollBy.m85toFloatk4lQ0M(this.$offset);
             final Ref$FloatRef ref$FloatRef = this.$previousValue;
             final ScrollingLogic scrollingLogic = this.$this_semanticsScrollBy;
             Function2 function2 = new Function2() { // from class: androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$2.1
@@ -57,21 +56,21 @@ final class ScrollableKt$semanticsScrollBy$2 extends SuspendLambda implements Fu
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
-                    float floatValue = ((Number) obj2).floatValue();
+                    float fFloatValue = ((Number) obj2).floatValue();
                     ((Number) obj3).floatValue();
-                    float f = floatValue - Ref$FloatRef.this.element;
+                    float f = fFloatValue - ref$FloatRef.element;
                     ScrollingLogic scrollingLogic2 = scrollingLogic;
                     NestedScrollScope nestedScrollScope2 = nestedScrollScope;
-                    long m85toOffsettuRUvjQ = scrollingLogic2.m85toOffsettuRUvjQ(scrollingLogic2.reverseIfNeeded(f));
+                    long jM86toOffsettuRUvjQ = scrollingLogic2.m86toOffsettuRUvjQ(scrollingLogic2.reverseIfNeeded(f));
                     NestedScrollSource.Companion.getClass();
                     int i2 = NestedScrollSource.UserInput;
                     ScrollingLogic scrollingLogic3 = ((ScrollingLogic$nestedScrollScope$1) nestedScrollScope2).this$0;
-                    Ref$FloatRef.this.element += scrollingLogic2.reverseIfNeeded(scrollingLogic2.m84toFloatk4lQ0M(ScrollingLogic.m80access$performScroll3eAAhYA(scrollingLogic3, scrollingLogic3.outerStateScope, m85toOffsettuRUvjQ, i2)));
+                    ref$FloatRef.element += scrollingLogic2.reverseIfNeeded(scrollingLogic2.m85toFloatk4lQ0M(ScrollingLogic.m81access$performScroll3eAAhYA(scrollingLogic3, scrollingLogic3.outerStateScope, jM86toOffsettuRUvjQ, i2)));
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (SuspendAnimationKt.animate$default(m84toFloatk4lQ0M, null, function2, this, 12) == coroutineSingletons) {
+            if (SuspendAnimationKt.animate$default(fM85toFloatk4lQ0M, null, function2, this, 12) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

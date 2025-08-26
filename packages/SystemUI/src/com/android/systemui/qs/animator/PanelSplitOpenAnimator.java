@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.picker3.widget.SeslColorSpectrumView$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
@@ -26,12 +25,10 @@ import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final BarOrderInteractor barOrderInteractor;
     public QSAnimView blurParent;
-    public QSAnimView blurView;
     public TouchAnimator blurViewAnimator;
     public TouchAnimator buttonAnimator;
     public QSAnimView buttonContainer;
@@ -44,11 +41,12 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final HeadsUpManager headsUpManager;
     public boolean inPinnedMode;
     public QSAnimView largeShadowView;
-    public QSAnimView lessBlurView;
+    public View mumButton;
     public float openPosition;
     public float overExpansionAmount;
     public final float overExpansionMaxAmount;
     public TouchAnimator panelBarAnimator;
+    public View qsButtonsContainer;
     public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
     public QSAnimView smallShadowView;
     public final QSAnimViewProvider viewProvider;
@@ -56,7 +54,7 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
         public final void onHeadsUpPinnedModeChanged(boolean z) {
             EmergencyButtonController$$ExternalSyntheticOutline0.m("onHeadsUpPinnedModeChanged: ", "PanelSplitOpenAnimator", z);
-            PanelSplitOpenAnimator.this.inPinnedMode = z;
+            this.this$0.inPinnedMode = z;
             SecPanelSplitHelper.Companion.getClass();
         }
     };
@@ -66,7 +64,6 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final float buttonYDiff = 50.0f;
     public float xDiff = 100.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,6 +86,7 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         this.secQsUiDisplayModeInteractor = secQsUiDisplayModeInteractor;
         this.overExpansionMaxAmount = context.getResources().getDimension(R.dimen.panel_overshoot_amount) * 1.5f;
         this.inPinnedMode = ((HeadsUpManagerImpl) headsUpManager).mHasPinnedNotification;
+        SecQsUiDisplayModeInteractor.FoldState foldState = SecQsUiDisplayModeInteractor.FoldState.FOLD;
     }
 
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
@@ -139,20 +137,14 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         this.panelBarViews.clear();
         QSAnimView qSAnimView5 = this.blurParent;
         if (qSAnimView5 != null) {
-            qSAnimView5.setScaleX(1.0f);
-            qSAnimView5.setScaleY(1.0f);
             qSAnimView5.setTranslationY(0.0f);
         }
         QSAnimView qSAnimView6 = this.largeShadowView;
         if (qSAnimView6 != null) {
-            qSAnimView6.setScaleX(1.0f);
-            qSAnimView6.setScaleY(1.0f);
             qSAnimView6.setTranslationY(0.0f);
         }
         QSAnimView qSAnimView7 = this.smallShadowView;
         if (qSAnimView7 != null) {
-            qSAnimView7.setScaleX(1.0f);
-            qSAnimView7.setScaleY(1.0f);
             qSAnimView7.setTranslationY(0.0f);
         }
         ArrayList bars = getBars();
@@ -170,10 +162,11 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         this.header = null;
         this.clockDateContainer = null;
         this.buttonContainer = null;
-        this.blurView = null;
-        this.lessBlurView = null;
+        this.qsButtonsContainer = null;
+        this.mumButton = null;
         this.largeShadowView = null;
         this.smallShadowView = null;
+        this.blurParent = null;
     }
 
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase, com.android.systemui.logging.PanelScreenShotLogger.LogProvider
@@ -186,9 +179,9 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     }
 
     public final ArrayList getBars() {
-        boolean isTablet = this.secQsUiDisplayModeInteractor.isTablet();
+        boolean zIsTablet = this.secQsUiDisplayModeInteractor.isTablet();
         BarOrderInteractor barOrderInteractor = this.barOrderInteractor;
-        return isTablet ? barOrderInteractor.getBarViewsByOrder() : this.context.getResources().getConfiguration().orientation == 2 ? barOrderInteractor.landscapeBars : barOrderInteractor.getBarViewsByOrder();
+        return zIsTablet ? barOrderInteractor.getShowingBarByOrder() : this.context.getResources().getConfiguration().orientation == 2 ? barOrderInteractor.landscapeBars : barOrderInteractor.getShowingBarByOrder();
     }
 
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
@@ -287,7 +280,7 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     public final void setPosition$1(float f) {
         boolean z = this.mUserChanged;
         this.mUserChanged = false;
-        boolean isThereNoView = isThereNoView();
+        boolean zIsThereNoView = isThereNoView();
         boolean z2 = QsAnimatorState.isSliding;
         float f2 = this.overExpansionAmount;
         StringBuilder sb = new StringBuilder("setPosition : ");
@@ -295,10 +288,24 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         sb.append(" // ");
         sb.append(!z);
         sb.append(" ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, isThereNoView, " ", z2, " ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, zIsThereNoView, " ", z2, " ");
         SeslColorSpectrumView$$ExternalSyntheticOutline0.m(f2, "PanelSplitOpenAnimator", sb);
+        float measuredWidth = 0.0f;
         if (!z && (isThereNoView() || QsAnimatorState.isSliding || QsAnimatorState.isDetailShowing || QsAnimatorState.isDetailPopupShowing || (this.openPosition == 1.0f && this.overExpansionAmount > 0.0f))) {
             Log.d("PanelSplitOpenAnimator", "setPosition : " + f + ", forced return!!");
+            QSAnimView qSAnimView = this.blurParent;
+            if (qSAnimView != null) {
+                qSAnimView.setTranslationY(0.0f);
+            }
+            QSAnimView qSAnimView2 = this.largeShadowView;
+            if (qSAnimView2 != null) {
+                qSAnimView2.setTranslationY(0.0f);
+            }
+            QSAnimView qSAnimView3 = this.smallShadowView;
+            if (qSAnimView3 != null) {
+                qSAnimView3.setTranslationY(0.0f);
+                return;
+            }
             return;
         }
         this.openPosition = f;
@@ -326,10 +333,19 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         if (touchAnimator6 != null) {
             touchAnimator6.setPosition(f);
         }
+        View view = this.qsButtonsContainer;
+        if (view != null) {
+            View view2 = this.mumButton;
+            if (view2 != null && view2.getVisibility() == 0) {
+                measuredWidth = (this.mumButton != null ? r0.getMeasuredWidth() : 0) * (MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.context) != 1 ? -1.0f : 1.0f);
+            }
+            view.setTranslationX(measuredWidth);
+        }
     }
 
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
     public final void setQs(QS qs) {
+        View view;
         if (qs == null) {
             destroyQSViews();
             return;
@@ -341,10 +357,13 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         this.clockDateContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_CLOCK_DATE_PARENT);
         this.buttonContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_BUTTON_CONTAINER);
         this.blurParent = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.BLUR_PARENT);
-        this.blurView = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.BLUR_VIEW);
-        this.lessBlurView = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.LESS_BLUR_VIEW);
         this.largeShadowView = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.LARGE_SHADOW_VIEW);
         this.smallShadowView = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SMALL_SHADOW_VIEW);
+        QSAnimView qSAnimView = this.buttonContainer;
+        if (qSAnimView != null && (view = qSAnimView.getView()) != null) {
+            this.qsButtonsContainer = view.findViewById(R.id.qs_buttons_container);
+            this.mumButton = view.findViewById(R.id.mum_button_container);
+        }
         QSImpl qSImpl = this.mQs;
         if (qSImpl != null) {
             qSImpl.getView();
@@ -380,6 +399,7 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
     public final void updateAnimators() {
         float f;
+        float f2;
         View view;
         if (super.isThereNoView()) {
             return;
@@ -391,93 +411,63 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         Log.d("PanelSplitOpenAnimator", "updateAnimators");
         SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = this.secQsUiDisplayModeInteractor;
         this.xDiff = secQsUiDisplayModeInteractor.isTablet() ? 0.0f : 100.0f;
-        float f2 = secQsUiDisplayModeInteractor.isTablet() ? 0.5f : 0.0f;
-        boolean isTablet = secQsUiDisplayModeInteractor.isTablet();
-        float f3 = this.buttonYDiff;
-        float f4 = this.barYDiff;
-        float f5 = isTablet ? 0.0f : f4 - f3;
+        float f3 = secQsUiDisplayModeInteractor.isTablet() ? 0.5f : 0.0f;
+        boolean zIsTablet = secQsUiDisplayModeInteractor.isTablet();
+        float f4 = this.buttonYDiff;
+        float f5 = this.barYDiff;
+        float f6 = zIsTablet ? 0.0f : f5 - f4;
         QSAnimView qSAnimView = this.header;
         if (qSAnimView != null) {
             TouchAnimator.Builder builder = new TouchAnimator.Builder();
             builder.addFloat(qSAnimView, "alpha", 0.0f, 1.0f);
-            builder.addFloat(qSAnimView, "translationY", -f3, 0.0f);
+            builder.addFloat(qSAnimView, "translationY", -f4, 0.0f);
             this.headerAnimator = builder.build();
         }
         QSAnimView qSAnimView2 = this.clockDateContainer;
         if (qSAnimView2 != null) {
             TouchAnimator.Builder builder2 = new TouchAnimator.Builder();
-            f = 1.0f;
+            f = 0.0f;
             builder2.addFloat(qSAnimView2, "alpha", 0.0f, 1.0f);
+            f2 = 1.0f;
             builder2.addFloat(qSAnimView2, "translationX", MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.context) == 1 ? this.xDiff : -this.xDiff, 0.0f);
-            builder2.addFloat(qSAnimView2, "translationY", f5, 0.0f);
+            builder2.addFloat(qSAnimView2, "translationY", f6, 0.0f);
             builder2.addFloat(qSAnimView2, "scaleX", 0.8f, 1.0f);
             builder2.addFloat(qSAnimView2, "scaleY", 0.8f, 1.0f);
-            builder2.mStartDelay = f2;
+            builder2.mStartDelay = f3;
             this.clockDateAnimator = builder2.build();
         } else {
-            f = 1.0f;
+            f = 0.0f;
+            f2 = 1.0f;
         }
         QSAnimView qSAnimView3 = this.buttonContainer;
         if (qSAnimView3 != null) {
             TouchAnimator.Builder builder3 = new TouchAnimator.Builder();
             builder3.addFloat(qSAnimView3, "alpha", 0.0f, 1.0f);
-            builder3.addFloat(qSAnimView3, "translationX", MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.context) == 1 ? -this.xDiff : this.xDiff, 0.0f);
-            builder3.addFloat(qSAnimView3, "translationY", f5, 0.0f);
+            builder3.addFloat(qSAnimView3, "translationX", MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.context) == 1 ? -this.xDiff : this.xDiff, f);
+            builder3.addFloat(qSAnimView3, "translationY", f6, f);
             builder3.addFloat(qSAnimView3, "scaleX", 0.8f, 1.0f);
             builder3.addFloat(qSAnimView3, "scaleY", 0.8f, 1.0f);
-            builder3.mStartDelay = f2;
+            builder3.mStartDelay = f3;
             this.buttonAnimator = builder3.build();
         }
         QSImpl qSImpl = this.mQs;
         if (qSImpl != null && (view = qSImpl.getView()) != null) {
             TouchAnimator.Builder builder4 = new TouchAnimator.Builder();
-            builder4.addFloat(view, "translationY", -f4, 0.0f);
+            builder4.addFloat(view, "translationY", -f5, f);
             this.containerViewAnimator = builder4.build();
         }
-        QSAnimView qSAnimView4 = this.blurView;
-        float f6 = this.SCALE_DOWN_RATIO;
-        if (qSAnimView4 != null && this.largeShadowView != null && this.smallShadowView != null && this.lessBlurView != null) {
-            QSAnimView qSAnimView5 = this.blurParent;
-            if (qSAnimView5 != null) {
-                qSAnimView5.setPivotY(0.0f);
-            }
-            QSAnimView qSAnimView6 = this.blurParent;
-            if (qSAnimView6 != null) {
-                qSAnimView6.setPivotX((qSAnimView6.getView() != null ? r7.getWidth() : 2) / 2.0f);
-            }
-            QSAnimView qSAnimView7 = this.largeShadowView;
-            if (qSAnimView7 != null) {
-                qSAnimView7.setPivotY(0.0f);
-            }
-            QSAnimView qSAnimView8 = this.largeShadowView;
-            if (qSAnimView8 != null) {
-                qSAnimView8.setPivotX((qSAnimView8.getView() != null ? r7.getWidth() : 2) / 2.0f);
-            }
-            QSAnimView qSAnimView9 = this.smallShadowView;
-            if (qSAnimView9 != null) {
-                qSAnimView9.setPivotY(0.0f);
-            }
-            QSAnimView qSAnimView10 = this.smallShadowView;
-            if (qSAnimView10 != null) {
-                qSAnimView10.setPivotX((qSAnimView10.getView() != null ? r7.getWidth() : 2) / 2.0f);
-            }
+        if (this.blurParent != null && this.largeShadowView != null && this.smallShadowView != null) {
             TouchAnimator.Builder builder5 = new TouchAnimator.Builder();
-            builder5.addFloat(this.blurParent, "scaleX", f6, f);
-            builder5.addFloat(this.blurParent, "scaleY", f6, f);
             builder5.addFloat(this.blurParent, "translationY", -50.0f, 0.0f);
             builder5.addFloat(this.largeShadowView, "translationY", -50.0f, 0.0f);
-            builder5.addFloat(this.largeShadowView, "scaleX", f6, f);
-            builder5.addFloat(this.largeShadowView, "scaleY", f6, f);
             builder5.addFloat(this.smallShadowView, "translationY", -50.0f, 0.0f);
-            builder5.addFloat(this.smallShadowView, "scaleX", f6, f);
-            builder5.addFloat(this.smallShadowView, "scaleY", f6, f);
             builder5.mStartDelay = 0.5f;
             this.blurViewAnimator = builder5.build();
         }
         this.panelBarViews.clear();
-        for (QSAnimView qSAnimView11 : this.viewProvider.getBars()) {
-            if (qSAnimView11 != null) {
-                this.panelBarViews.add(qSAnimView11);
+        for (QSAnimView qSAnimView4 : this.viewProvider.getBars()) {
+            if (qSAnimView4 != null) {
+                this.panelBarViews.add(qSAnimView4);
             }
         }
         TouchAnimator.Builder builder6 = new TouchAnimator.Builder();
@@ -487,10 +477,11 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            QSAnimView qSAnimView12 = (QSAnimView) obj;
-            builder6.addFloat(qSAnimView12, "alpha", 0.0f, 1.0f);
-            builder6.addFloat(qSAnimView12, "scaleX", f6, f);
-            builder6.addFloat(qSAnimView12, "scaleY", f6, f);
+            QSAnimView qSAnimView5 = (QSAnimView) obj;
+            builder6.addFloat(qSAnimView5, "alpha", 0.0f, 1.0f);
+            float f7 = this.SCALE_DOWN_RATIO;
+            builder6.addFloat(qSAnimView5, "scaleX", f7, f2);
+            builder6.addFloat(qSAnimView5, "scaleY", f7, f2);
             builder6.mStartDelay = 0.5f;
             builder6.build();
         }
@@ -503,18 +494,13 @@ public final class PanelSplitOpenAnimator extends SecQSImplAnimatorBase {
         while (i3 < size2) {
             Object obj2 = bars.get(i3);
             i3++;
-            View findViewWithTag = ((View) obj2).findViewWithTag("expand_anim");
-            if (findViewWithTag != null) {
-                if (findViewWithTag.getHeight() <= 0 && !(findViewWithTag instanceof ConstraintLayout)) {
-                    findViewWithTag = null;
-                }
-                if (findViewWithTag != null) {
-                    i2++;
-                    int i4 = i2 * 5;
-                    TouchAnimator.Builder builder7 = new TouchAnimator.Builder();
-                    builder7.addFloat(findViewWithTag, "translationY", 0.0f, ((i4 * i2) - i4) + 20);
-                    this.overExpansionBarAnimators.add(builder7.build());
-                }
+            View viewFindViewWithTag = ((View) obj2).findViewWithTag("expand_anim");
+            if (viewFindViewWithTag != null) {
+                i2++;
+                int i4 = i2 * 5;
+                TouchAnimator.Builder builder7 = new TouchAnimator.Builder();
+                builder7.addFloat(viewFindViewWithTag, "translationY", f, ((i4 * i2) - i4) + 20);
+                this.overExpansionBarAnimators.add(builder7.build());
             }
         }
     }

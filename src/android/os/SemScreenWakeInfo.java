@@ -61,7 +61,7 @@ public class SemScreenWakeInfo implements Cloneable, Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemScreenWakeInfo m3617clone() {
+    public SemScreenWakeInfo m3624clone() {
         try {
             return (SemScreenWakeInfo) super.clone();
         } catch (CloneNotSupportedException unused) {

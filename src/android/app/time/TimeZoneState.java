@@ -48,24 +48,24 @@ public final class TimeZoneState implements Parcelable {
     }
 
     public static TimeZoneState parseCommandLineArgs(ShellCommand shellCommand) {
-        String str = null;
-        Boolean bool = null;
+        String nextArgRequired = null;
+        Boolean boolValueOf = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg == null) {
-                if (str == null) {
+                if (nextArgRequired == null) {
                     throw new IllegalArgumentException("No zoneId specified.");
                 }
-                if (bool == null) {
+                if (boolValueOf == null) {
                     throw new IllegalArgumentException("No userShouldConfirmId specified.");
                 }
-                return new TimeZoneState(str, bool.booleanValue());
+                return new TimeZoneState(nextArgRequired, boolValueOf.booleanValue());
             }
             nextArg.hashCode();
             if (nextArg.equals("--user_should_confirm_id")) {
-                bool = Boolean.valueOf(Boolean.parseBoolean(shellCommand.getNextArgRequired()));
+                boolValueOf = Boolean.valueOf(Boolean.parseBoolean(shellCommand.getNextArgRequired()));
             } else if (nextArg.equals("--zone_id")) {
-                str = shellCommand.getNextArgRequired();
+                nextArgRequired = shellCommand.getNextArgRequired();
             } else {
                 throw new IllegalArgumentException("Unknown option: " + nextArg);
             }

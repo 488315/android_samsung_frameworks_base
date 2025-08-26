@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone.ongoingactivity.animation;
 
 import android.animation.TimeInterpolator;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.transition.ChangeBounds;
@@ -26,7 +27,6 @@ import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController;
-import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$collapseAnimation$2;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.Pair;
@@ -35,13 +35,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ViewPropertyCapture extends Transition {
     public final View targetView;
     public ViewPropertyObserver viewPropertyObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -51,7 +49,6 @@ public final class ViewPropertyCapture extends Transition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ViewPropertyObserver {
     }
 
@@ -82,7 +79,7 @@ public final class ViewPropertyCapture extends Transition {
             Log.d("{OngoingExpandedPipController}", "onReceiveEndScreenViewBound");
             final float f = i;
             final float f2 = i2;
-            final OngoingCardController ongoingCardController = ((OngoingCardController$collapseAnimation$2) viewPropertyObserver).this$0;
+            final OngoingCardController ongoingCardController = OngoingCardController.this;
             ongoingCardController.getClass();
             Log.d("{OngoingExpandedPipController}", "postCollapseAnimation");
             ongoingCardController.mainUIHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$postCollapseAnimation$1
@@ -91,33 +88,34 @@ public final class ViewPropertyCapture extends Transition {
                 /* JADX WARN: Type inference failed for: r4v4 */
                 /* JADX WARN: Type inference failed for: r4v5, types: [boolean, int] */
                 @Override // java.lang.Runnable
-                public final void run() {
-                    int alpha;
+                public final void run() throws Exception {
+                    IndicatorScaleGardener.ScaleModel latestScaleModel;
+                    int iAlpha;
                     Log.d("{OngoingExpandedPipController}", "mainUIHandler.post ");
-                    final OngoingCardController ongoingCardController2 = OngoingCardController.this;
+                    final OngoingCardController ongoingCardController2 = ongoingCardController;
                     final CardStackView cardStackView = ongoingCardController2.mCardStackView;
                     final float f3 = f;
                     final float f4 = f2;
                     final int i3 = right;
                     final Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$postCollapseAnimation$1.1
                         @Override // java.lang.Runnable
-                        public final void run() {
+                        public final void run() throws Resources.NotFoundException {
                             Log.d("{OngoingExpandedPipController}", "collapseAnimation.startRunnable");
-                            final OngoingCardController ongoingCardController3 = OngoingCardController.this;
+                            final OngoingCardController ongoingCardController3 = ongoingCardController2;
                             ongoingCardController3.mainUIHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController.postCollapseAnimation.1.1.1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    OngoingCardController.this.onChangeCapsuleVisibility(0, null);
-                                    OngoingCardController.this.mCardStackView.setVisibility(4);
+                                    ongoingCardController3.onChangeCapsuleVisibility(0, null);
+                                    ongoingCardController3.mCardStackView.setVisibility(4);
                                 }
                             }, 600L);
-                            OngoingCardController ongoingCardController4 = OngoingCardController.this;
+                            OngoingCardController ongoingCardController4 = ongoingCardController2;
                             float f5 = f3;
                             float f6 = f4;
                             float f7 = i3;
-                            View findViewById = ongoingCardController4.mExpandedView.findViewById(R.id.ongoing_card_background);
-                            findViewById.getClass();
-                            OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 = new OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0(OngoingCardController.this, 1);
+                            View viewFindViewById = ongoingCardController4.mExpandedView.findViewById(R.id.ongoing_card_background);
+                            viewFindViewById.getClass();
+                            OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 = new OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0(ongoingCardController2, 1);
                             PointF cardStackLocationOnScreen = ongoingCardController4.getCardStackLocationOnScreen();
                             PointF pointF = new PointF();
                             pointF.x = f5;
@@ -139,7 +137,7 @@ public final class ViewPropertyCapture extends Transition {
                             float f10 = pointF.x;
                             float f11 = pointF.y;
                             CardStackView.Companion.getClass();
-                            ongoingCardController4.startAnimation(findViewById, f8, f9, f10, f11, CardStackView.collapseRootInterpolator, 600L, ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0);
+                            ongoingCardController4.startAnimation(viewFindViewById, f8, f9, f10, f11, CardStackView.collapseRootInterpolator, 600L, ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0);
                             ArrayList arrayList = ongoingCardController4.onStateEventListeners;
                             int size = arrayList.size();
                             while (i4 < size) {
@@ -152,13 +150,13 @@ public final class ViewPropertyCapture extends Transition {
                             }
                         }
                     };
-                    final OngoingCardController ongoingCardController3 = OngoingCardController.this;
+                    final OngoingCardController ongoingCardController3 = ongoingCardController;
                     final Runnable runnable2 = new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$postCollapseAnimation$1.2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OngoingCardController.this.mExpandedView.setOnTouchListener(null);
-                            OngoingCardController.this.mExpandedView.setOnKeyListener(null);
-                            OngoingCardController.this.onAllowStateChanged(false);
+                            ongoingCardController3.mExpandedView.setOnTouchListener(null);
+                            ongoingCardController3.mExpandedView.setOnKeyListener(null);
+                            ongoingCardController3.onAllowStateChanged(false);
                         }
                     };
                     int i4 = right;
@@ -220,14 +218,15 @@ public final class ViewPropertyCapture extends Transition {
                         OngoingActivityDataHelper.INSTANCE.getClass();
                         CopyOnWriteArrayList copyOnWriteArrayList = OngoingActivityDataHelper.mOngoingActivityLists;
                         int i11 = (copyOnWriteArrayList.size() == 0 || OngoingActivityDataHelper.getDataByIndex(r4).mExpandedChipView == null) ? r4 : i6;
-                        if (cardStackView.getChildCount() > i6 && i8 == cardStackView.getTopViewIndex() && i11 != 0 && (alpha = Color.alpha(chipBg)) < 255) {
-                            chipBg = Color.argb((int) (alpha * 0.75f), Color.red(chipBg), Color.green(chipBg), Color.blue(chipBg));
+                        if (cardStackView.getChildCount() > i6 && i8 == cardStackView.getTopViewIndex() && i11 != 0 && (iAlpha = Color.alpha(chipBg)) < 255) {
+                            chipBg = Color.argb((int) (iAlpha * 0.75f), Color.red(chipBg), Color.green(chipBg), Color.blue(chipBg));
                         }
                         cardStackView.colorTransition(chipBg, i8, r4);
                         final Ref$IntRef ref$IntRef = new Ref$IntRef();
                         ref$IntRef.element = cardStackView.pendingWidth;
                         if (cardStackView.getChildCount() > i6) {
-                            ref$IntRef.element = cardStackView.pendingWidth - cardStackView.getContext().getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_layer_offset);
+                            IndicatorScaleGardener indicatorScaleGardener = cardStackView.indicatorScaleGardener;
+                            ref$IntRef.element = cardStackView.pendingWidth - ((int) Math.ceil(cardStackView.getContext().getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_layer_offset) * ((indicatorScaleGardener == null || (latestScaleModel = indicatorScaleGardener.getLatestScaleModel(cardStackView.getContext())) == null) ? 1.0f : latestScaleModel.ratio)));
                         }
                         ViewGroup sceneRoot = scene.getSceneRoot();
                         if (sceneRoot != null && i8 != cardStackView.getTopViewIndex()) {
@@ -237,11 +236,11 @@ public final class ViewPropertyCapture extends Transition {
                             sceneRoot.setX(0.0f);
                             sceneRoot.setY(0.0f);
                         }
-                        View findViewById = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
-                        if (findViewById != null && (findViewById instanceof ViewGroup)) {
-                            View findViewById2 = findViewById.findViewById(R.id.dummy_capsule_item_noti_expanded_info);
-                            findViewById2.getClass();
-                            FrameLayout frameLayout = (FrameLayout) findViewById2;
+                        View viewFindViewById = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
+                        if (viewFindViewById != null && (viewFindViewById instanceof ViewGroup)) {
+                            View viewFindViewById2 = viewFindViewById.findViewById(R.id.dummy_capsule_item_noti_expanded_info);
+                            viewFindViewById2.getClass();
+                            FrameLayout frameLayout = (FrameLayout) viewFindViewById2;
                             if (frameLayout.getChildCount() > 0) {
                                 View childAt = frameLayout.getChildAt(r4);
                                 if (!(childAt instanceof Chronometer) && (childAt instanceof TextView)) {
@@ -257,17 +256,17 @@ public final class ViewPropertyCapture extends Transition {
                                 }
                             }
                         }
-                        View findViewById3 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
-                        findViewById3.getClass();
-                        CardStackView.changeLayoutSize(findViewById3, ref$IntRef.element, cardStackView.pendingHeight);
+                        View viewFindViewById3 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
+                        viewFindViewById3.getClass();
+                        CardStackView.changeLayoutSize(viewFindViewById3, ref$IntRef.element, cardStackView.pendingHeight);
                         scene.setEnterAction(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$collapseAnimation$2$3
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                IndicatorScaleGardener.ScaleModel latestScaleModel;
-                                ViewPropertyAnimator translationY;
-                                ViewPropertyAnimator scaleX;
-                                ViewPropertyAnimator scaleY;
-                                ViewPropertyAnimator alpha2;
+                            public final void run() throws Resources.NotFoundException {
+                                IndicatorScaleGardener.ScaleModel latestScaleModel2;
+                                ViewPropertyAnimator viewPropertyAnimatorTranslationY;
+                                ViewPropertyAnimator viewPropertyAnimatorScaleX;
+                                ViewPropertyAnimator viewPropertyAnimatorScaleY;
+                                ViewPropertyAnimator viewPropertyAnimatorAlpha;
                                 ViewPropertyAnimator duration;
                                 ViewGroup viewGroup2 = (ViewGroup) scene.getSceneRoot().findViewById(R.id.stack_expand_contents);
                                 if (viewGroup2 != null) {
@@ -280,8 +279,8 @@ public final class ViewPropertyCapture extends Transition {
                                     Ref$IntRef ref$IntRef2 = ref$IntRef;
                                     CardStackView.Companion companion = CardStackView.Companion;
                                     if (i12 != cardStackView2.getTopViewIndex()) {
-                                        ViewPropertyAnimator animate = viewGroup3.animate();
-                                        if (animate != null && (translationY = animate.translationY(0.0f)) != null && (scaleX = translationY.scaleX(1.0f)) != null && (scaleY = scaleX.scaleY(1.0f)) != null && (alpha2 = scaleY.alpha(0.4f)) != null && (duration = alpha2.setDuration(300L)) != null) {
+                                        ViewPropertyAnimator viewPropertyAnimatorAnimate = viewGroup3.animate();
+                                        if (viewPropertyAnimatorAnimate != null && (viewPropertyAnimatorTranslationY = viewPropertyAnimatorAnimate.translationY(0.0f)) != null && (viewPropertyAnimatorScaleX = viewPropertyAnimatorTranslationY.scaleX(1.0f)) != null && (viewPropertyAnimatorScaleY = viewPropertyAnimatorScaleX.scaleY(1.0f)) != null && (viewPropertyAnimatorAlpha = viewPropertyAnimatorScaleY.alpha(0.4f)) != null && (duration = viewPropertyAnimatorAlpha.setDuration(300L)) != null) {
                                             CardStackView.Companion.getClass();
                                             ViewPropertyAnimator interpolator = duration.setInterpolator(CardStackView.expandContentsAlphaInterpolator);
                                             if (interpolator != null) {
@@ -294,50 +293,50 @@ public final class ViewPropertyCapture extends Transition {
                                     }
                                     viewGroup3.setElevation(0.0f);
                                 }
-                                View findViewById4 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
-                                findViewById4.getClass();
+                                View viewFindViewById4 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
+                                viewFindViewById4.getClass();
                                 int i13 = i8;
                                 CardStackView cardStackView3 = cardStackView;
                                 CardStackView.Companion companion2 = CardStackView.Companion;
                                 if (i13 == cardStackView3.getTopViewIndex()) {
-                                    findViewById4.setVisibility(0);
+                                    viewFindViewById4.setVisibility(0);
                                 } else {
-                                    findViewById4.setVisibility(4);
+                                    viewFindViewById4.setVisibility(4);
                                 }
-                                SpringAnimation springAnimation = new SpringAnimation(findViewById4, DynamicAnimation.SCALE_X, 1.0f);
+                                SpringAnimation springAnimation = new SpringAnimation(viewFindViewById4, DynamicAnimation.SCALE_X, 1.0f);
                                 springAnimation.mSpring.setStiffness(200.0f);
                                 springAnimation.mSpring.setDampingRatio(0.8131728f);
                                 springAnimation.start();
-                                SpringAnimation springAnimation2 = new SpringAnimation(findViewById4, DynamicAnimation.SCALE_Y, 1.0f);
+                                SpringAnimation springAnimation2 = new SpringAnimation(viewFindViewById4, DynamicAnimation.SCALE_Y, 1.0f);
                                 springAnimation2.mSpring.setStiffness(200.0f);
                                 springAnimation2.mSpring.setDampingRatio(0.8131728f);
                                 springAnimation2.start();
-                                CardStackView.changeLayoutMargin(findViewById4, 0);
-                                View findViewById5 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_item_top_layout);
-                                findViewById5.getClass();
-                                View findViewById6 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_item_noti_expanded_info);
-                                findViewById6.getClass();
-                                View findViewById7 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_remote_container);
-                                findViewById7.getClass();
-                                View findViewById8 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
-                                findViewById8.getClass();
+                                CardStackView.changeLayoutMargin(viewFindViewById4, 0);
+                                View viewFindViewById5 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_item_top_layout);
+                                viewFindViewById5.getClass();
+                                View viewFindViewById6 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_item_noti_expanded_info);
+                                viewFindViewById6.getClass();
+                                View viewFindViewById7 = scene.getSceneRoot().findViewById(R.id.dummy_capsule_remote_container);
+                                viewFindViewById7.getClass();
+                                View viewFindViewById8 = scene.getSceneRoot().findViewById(R.id.pip_dummy_chip_layout);
+                                viewFindViewById8.getClass();
                                 CardStackView cardStackView4 = cardStackView;
-                                IndicatorScaleGardener indicatorScaleGardener = cardStackView4.indicatorScaleGardener;
-                                if (ref$IntRef.element <= MathKt__MathJVMKt.roundToInt(cardStackView.getContext().getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_min_width) * ((indicatorScaleGardener == null || (latestScaleModel = indicatorScaleGardener.getLatestScaleModel(cardStackView4.getContext())) == null) ? 1 : Float.valueOf(latestScaleModel.ratio)).floatValue())) {
+                                IndicatorScaleGardener indicatorScaleGardener2 = cardStackView4.indicatorScaleGardener;
+                                if (ref$IntRef.element <= MathKt__MathJVMKt.roundToInt(cardStackView.getContext().getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_min_width) * ((indicatorScaleGardener2 == null || (latestScaleModel2 = indicatorScaleGardener2.getLatestScaleModel(cardStackView4.getContext())) == null) ? 1 : Float.valueOf(latestScaleModel2.ratio)).floatValue())) {
                                     int dimensionPixelSize = cardStackView.getContext().getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_padding_side);
-                                    findViewById5.setPadding(dimensionPixelSize, 0, dimensionPixelSize, 0);
-                                    FrameLayout frameLayout2 = (FrameLayout) findViewById6;
+                                    viewFindViewById5.setPadding(dimensionPixelSize, 0, dimensionPixelSize, 0);
+                                    FrameLayout frameLayout2 = (FrameLayout) viewFindViewById6;
                                     frameLayout2.removeAllViews();
-                                    FrameLayout frameLayout3 = (FrameLayout) findViewById7;
+                                    FrameLayout frameLayout3 = (FrameLayout) viewFindViewById7;
                                     if (frameLayout3.getChildCount() > 0) {
                                         frameLayout3.removeAllViews();
-                                        findViewById5.setVisibility(0);
+                                        viewFindViewById5.setVisibility(0);
                                     }
                                     frameLayout2.setVisibility(8);
                                 }
-                                ViewPropertyAnimator alpha3 = findViewById8.animate().alpha(1.0f);
+                                ViewPropertyAnimator viewPropertyAnimatorAlpha2 = viewFindViewById8.animate().alpha(1.0f);
                                 CardStackView.Companion.getClass();
-                                alpha3.setInterpolator(CardStackView.alphaInterpolator).setDuration(200L).start();
+                                viewPropertyAnimatorAlpha2.setInterpolator(CardStackView.alphaInterpolator).setDuration(200L).start();
                             }
                         });
                         cardStackView.isRunningCollapseAnimation = true;

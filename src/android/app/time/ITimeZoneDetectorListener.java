@@ -44,9 +44,9 @@ public interface ITimeZoneDetectorListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITimeZoneDetectorListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITimeZoneDetectorListener)) {
-                return (ITimeZoneDetectorListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITimeZoneDetectorListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITimeZoneDetectorListener)) {
+                return (ITimeZoneDetectorListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface ITimeZoneDetectorListener extends IInterface {
 
             @Override // android.app.time.ITimeZoneDetectorListener
             public void onChange() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

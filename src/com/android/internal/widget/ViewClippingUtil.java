@@ -25,21 +25,21 @@ public class ViewClippingUtil {
                 arraySet = new ArraySet();
                 viewGroup.setTagInternal(16908938, arraySet);
             }
-            Boolean bool = (Boolean) viewGroup.getTag(16908939);
-            if (bool == null) {
-                bool = Boolean.valueOf(viewGroup.getClipChildren());
-                viewGroup.setTagInternal(16908939, bool);
+            Boolean boolValueOf = (Boolean) viewGroup.getTag(16908939);
+            if (boolValueOf == null) {
+                boolValueOf = Boolean.valueOf(viewGroup.getClipChildren());
+                viewGroup.setTagInternal(16908939, boolValueOf);
             }
-            Boolean bool2 = (Boolean) viewGroup.getTag(16908941);
-            if (bool2 == null) {
-                bool2 = Boolean.valueOf(viewGroup.getClipToPadding());
-                viewGroup.setTagInternal(16908941, bool2);
+            Boolean boolValueOf2 = (Boolean) viewGroup.getTag(16908941);
+            if (boolValueOf2 == null) {
+                boolValueOf2 = Boolean.valueOf(viewGroup.getClipToPadding());
+                viewGroup.setTagInternal(16908941, boolValueOf2);
             }
             if (!z) {
                 arraySet.remove(view);
                 if (arraySet.isEmpty()) {
-                    viewGroup.setClipChildren(bool.booleanValue());
-                    viewGroup.setClipToPadding(bool2.booleanValue());
+                    viewGroup.setClipChildren(boolValueOf.booleanValue());
+                    viewGroup.setClipToPadding(boolValueOf2.booleanValue());
                     viewGroup.setTagInternal(16908938, null);
                     clippingParameters.onClippingStateChanged(viewGroup, true);
                 }

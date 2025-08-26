@@ -138,7 +138,7 @@ public final class DES {
 
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseSecretKeyFactory, javax.crypto.SecretKeyFactorySpi
         protected SecretKey engineGenerateSecret(KeySpec keySpec) throws InvalidKeySpecException {
-            CipherParameters makePBEMacParameters;
+            CipherParameters cipherParametersMakePBEMacParameters;
             KeyParameter keyParameter;
             if (keySpec instanceof PBEKeySpec) {
                 PBEKeySpec pBEKeySpec = (PBEKeySpec) keySpec;
@@ -146,11 +146,11 @@ public final class DES {
                     return new BCPBEKey(this.algName, this.algOid, this.scheme, this.digest, this.keySize, this.ivSize, pBEKeySpec, null);
                 }
                 if (this.forCipher) {
-                    makePBEMacParameters = PBE.Util.makePBEParameters(pBEKeySpec, this.scheme, this.digest, this.keySize, this.ivSize);
+                    cipherParametersMakePBEMacParameters = PBE.Util.makePBEParameters(pBEKeySpec, this.scheme, this.digest, this.keySize, this.ivSize);
                 } else {
-                    makePBEMacParameters = PBE.Util.makePBEMacParameters(pBEKeySpec, this.scheme, this.digest, this.keySize);
+                    cipherParametersMakePBEMacParameters = PBE.Util.makePBEMacParameters(pBEKeySpec, this.scheme, this.digest, this.keySize);
                 }
-                CipherParameters cipherParameters = makePBEMacParameters;
+                CipherParameters cipherParameters = cipherParametersMakePBEMacParameters;
                 if (cipherParameters instanceof ParametersWithIV) {
                     keyParameter = (KeyParameter) ((ParametersWithIV) cipherParameters).getParameters();
                 } else {

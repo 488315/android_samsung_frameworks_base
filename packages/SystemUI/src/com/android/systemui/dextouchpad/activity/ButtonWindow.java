@@ -1,5 +1,6 @@
 package com.android.systemui.dextouchpad.activity;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -11,7 +12,6 @@ import com.android.systemui.dextouchpad.data.TouchpadButtonItems;
 import com.android.systemui.dextouchpad.util.Features;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ButtonWindow extends FloatingWindow {
     public final AlphaAnimation mAlphaAnimation;
@@ -21,7 +21,6 @@ public class ButtonWindow extends FloatingWindow {
     public final AtomicBoolean mSpenNotSupportedToastBlocked;
     public final int mToastResId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnGestureListener {
         void onDoubleTap();
     }
@@ -58,17 +57,17 @@ public class ButtonWindow extends FloatingWindow {
                     }
 
                     @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
-                    public final boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+                    public final boolean onSingleTapConfirmed(MotionEvent motionEvent) throws Resources.NotFoundException {
                         final ButtonWindow buttonWindow = ButtonWindow.this;
-                        final Toast makeText = Toast.makeText(buttonWindow.mActivity, buttonWindow.mToastResId, 1);
-                        makeText.addCallback(new Toast.Callback() { // from class: com.android.systemui.dextouchpad.activity.ButtonWindow.2
+                        final Toast toastMakeText = Toast.makeText(buttonWindow.mActivity, buttonWindow.mToastResId, 1);
+                        toastMakeText.addCallback(new Toast.Callback() { // from class: com.android.systemui.dextouchpad.activity.ButtonWindow.2
                             @Override // android.widget.Toast.Callback
                             public final void onToastHidden() {
                                 ButtonWindow.this.mSpenNotSupportedToastBlocked.set(false);
-                                makeText.removeCallback(this);
+                                toastMakeText.removeCallback(this);
                             }
                         });
-                        makeText.show();
+                        toastMakeText.show();
                         if (Features.DEBUG) {
                             Log.d("DexTouchpadButtonWindow", "Button clicked by Single Tap.");
                         }

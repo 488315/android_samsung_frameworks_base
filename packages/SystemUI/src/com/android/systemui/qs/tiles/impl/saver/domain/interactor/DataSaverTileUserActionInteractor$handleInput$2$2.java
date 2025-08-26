@@ -17,7 +17,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DataSaverTileUserActionInteractor$handleInput$2$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ QSTileInput $this_with;
@@ -43,7 +42,7 @@ final class DataSaverTileUserActionInteractor$handleInput$2$2 extends SuspendLam
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        DialogTransitionAnimator.Controller dialogTransitionController;
+        DialogTransitionAnimator.Controller controllerDialogTransitionController;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -52,14 +51,14 @@ final class DataSaverTileUserActionInteractor$handleInput$2$2 extends SuspendLam
         DataSaverTileUserActionInteractor dataSaverTileUserActionInteractor = this.this$0;
         DataSaverDialogDelegate dataSaverDialogDelegate = new DataSaverDialogDelegate(dataSaverTileUserActionInteractor.systemUIDialogFactory, dataSaverTileUserActionInteractor.contextInteractor, dataSaverTileUserActionInteractor.backgroundContext, dataSaverTileUserActionInteractor.dataSaverController, dataSaverTileUserActionInteractor.sharedPreferences);
         DataSaverTileUserActionInteractor dataSaverTileUserActionInteractor2 = this.this$0;
-        SystemUIDialog create = dataSaverTileUserActionInteractor2.systemUIDialogFactory.create(dataSaverDialogDelegate, ((ShadeDialogContextInteractorImpl) dataSaverTileUserActionInteractor2.contextInteractor).getContext());
+        SystemUIDialog systemUIDialogCreate = dataSaverTileUserActionInteractor2.systemUIDialogFactory.create(dataSaverDialogDelegate, ((ShadeDialogContextInteractorImpl) dataSaverTileUserActionInteractor2.contextInteractor).getContext());
         Expandable expandable = ((QSTileUserAction.Click) this.$this_with.action).expandable;
-        if (expandable == null || (dialogTransitionController = expandable.dialogTransitionController(new DialogCuj(58, "start_data_saver"))) == null) {
-            create.show();
+        if (expandable == null || (controllerDialogTransitionController = expandable.dialogTransitionController(new DialogCuj(58, "start_data_saver"))) == null) {
+            systemUIDialogCreate.show();
         } else {
             DialogTransitionAnimator dialogTransitionAnimator = this.this$0.dialogTransitionAnimator;
             TransitionAnimator.Timings timings = DialogTransitionAnimator.TIMINGS;
-            dialogTransitionAnimator.show(create, dialogTransitionController, false);
+            dialogTransitionAnimator.show(systemUIDialogCreate, controllerDialogTransitionController, false);
         }
         return Unit.INSTANCE;
     }

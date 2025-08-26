@@ -17,24 +17,24 @@ public class BERBitString extends ASN1BitString {
             return aSN1BitStringArr[0].contents;
         }
         int i = length - 1;
-        int i2 = 0;
-        for (int i3 = 0; i3 < i; i3++) {
-            byte[] bArr = aSN1BitStringArr[i3].contents;
+        int length2 = 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            byte[] bArr = aSN1BitStringArr[i2].contents;
             if (bArr[0] != 0) {
                 throw new IllegalArgumentException("only the last nested bitstring can have padding");
             }
-            i2 += bArr.length - 1;
+            length2 += bArr.length - 1;
         }
         byte[] bArr2 = aSN1BitStringArr[i].contents;
         byte b = bArr2[0];
-        byte[] bArr3 = new byte[i2 + bArr2.length];
+        byte[] bArr3 = new byte[length2 + bArr2.length];
         bArr3[0] = b;
-        int i4 = 1;
+        int i3 = 1;
         for (ASN1BitString aSN1BitString : aSN1BitStringArr) {
             byte[] bArr4 = aSN1BitString.contents;
-            int length2 = bArr4.length - 1;
-            System.arraycopy(bArr4, 1, bArr3, i4, length2);
-            i4 += length2;
+            int length3 = bArr4.length - 1;
+            System.arraycopy(bArr4, 1, bArr3, i3, length3);
+            i3 += length3;
         }
         return bArr3;
     }
@@ -89,24 +89,24 @@ public class BERBitString extends ASN1BitString {
         if (!encodeConstructed()) {
             return DLBitString.encodedLength(z, this.contents.length);
         }
-        int i = z ? 4 : 3;
+        int iEncodedLength = z ? 4 : 3;
         if (this.elements == null) {
             if (this.contents.length < 2) {
-                return i;
+                return iEncodedLength;
             }
             int length = this.contents.length - 2;
-            int i2 = this.segmentLimit;
-            int i3 = length / (i2 - 1);
-            return i + (DLBitString.encodedLength(true, i2) * i3) + DLBitString.encodedLength(true, this.contents.length - (i3 * (this.segmentLimit - 1)));
+            int i = this.segmentLimit;
+            int i2 = length / (i - 1);
+            return iEncodedLength + (DLBitString.encodedLength(true, i) * i2) + DLBitString.encodedLength(true, this.contents.length - (i2 * (this.segmentLimit - 1)));
         }
-        int i4 = 0;
+        int i3 = 0;
         while (true) {
             ASN1BitString[] aSN1BitStringArr = this.elements;
-            if (i4 >= aSN1BitStringArr.length) {
-                return i;
+            if (i3 >= aSN1BitStringArr.length) {
+                return iEncodedLength;
             }
-            i += aSN1BitStringArr[i4].encodedLength(true);
-            i4++;
+            iEncodedLength += aSN1BitStringArr[i3].encodedLength(true);
+            i3++;
         }
     }
 
@@ -122,19 +122,21 @@ public class BERBitString extends ASN1BitString {
         ASN1BitString[] aSN1BitStringArr = this.elements;
         if (aSN1BitStringArr != null) {
             aSN1OutputStream.writePrimitives(aSN1BitStringArr);
-        } else if (this.contents.length >= 2) {
-            byte b = this.contents[0];
-            int length = this.contents.length;
-            int i = length - 1;
-            int i2 = this.segmentLimit - 1;
-            while (i > i2) {
-                ASN1OutputStream aSN1OutputStream3 = aSN1OutputStream;
-                DLBitString.encode(aSN1OutputStream3, true, (byte) 0, this.contents, length - i, i2);
-                i -= i2;
-                aSN1OutputStream = aSN1OutputStream3;
+        } else {
+            if (this.contents.length >= 2) {
+                byte b = this.contents[0];
+                int length = this.contents.length;
+                int i = length - 1;
+                int i2 = this.segmentLimit - 1;
+                while (i > i2) {
+                    ASN1OutputStream aSN1OutputStream3 = aSN1OutputStream;
+                    DLBitString.encode(aSN1OutputStream3, true, (byte) 0, this.contents, length - i, i2);
+                    i -= i2;
+                    aSN1OutputStream = aSN1OutputStream3;
+                }
+                aSN1OutputStream2 = aSN1OutputStream;
+                DLBitString.encode(aSN1OutputStream2, true, b, this.contents, length - i, i);
             }
-            aSN1OutputStream2 = aSN1OutputStream;
-            DLBitString.encode(aSN1OutputStream2, true, b, this.contents, length - i, i);
             aSN1OutputStream2.write(0);
             aSN1OutputStream2.write(0);
         }

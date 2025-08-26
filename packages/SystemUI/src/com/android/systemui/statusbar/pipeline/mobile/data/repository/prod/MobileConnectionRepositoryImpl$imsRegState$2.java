@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryImpl$imsRegState$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ MobileInputLogger $logger;
@@ -55,13 +54,13 @@ final class MobileConnectionRepositoryImpl$imsRegState$2 extends SuspendLambda i
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(10);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = imsRegState.voWifiRegState;
         logMessageImpl.bool2 = imsRegState.voLTERegState;
         logMessageImpl.bool3 = imsRegState.ePDGRegState;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

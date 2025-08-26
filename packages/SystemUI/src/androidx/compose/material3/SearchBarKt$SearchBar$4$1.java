@@ -24,7 +24,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Animatable<Float, AnimationVector1D> $animationProgress;
@@ -37,7 +36,6 @@ final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2
     /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.material3.SearchBarKt$SearchBar$4$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function1 {
         final /* synthetic */ Animatable<Float, AnimationVector1D> $animationProgress;
@@ -49,7 +47,6 @@ final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2
         final /* synthetic */ Flow $progress;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: androidx.compose.material3.SearchBarKt$SearchBar$4$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ Animatable<Float, AnimationVector1D> $animationProgress;
@@ -125,7 +122,7 @@ final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return ((AnonymousClass1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
         }
 
@@ -153,8 +150,8 @@ final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2
                             PredictiveBack predictiveBack = PredictiveBack.INSTANCE;
                             float f = backEventCompat.progress;
                             predictiveBack.getClass();
-                            Object snapTo = animatable.snapTo(new Float(1 - BackHandlerKt.PredictiveBackEasing.transform(f)), continuation);
-                            return snapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? snapTo : Unit.INSTANCE;
+                            Object objSnapTo = animatable.snapTo(new Float(1 - BackHandlerKt.PredictiveBackEasing.transform(f)), continuation);
+                            return objSnapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? objSnapTo : Unit.INSTANCE;
                         }
                     };
                     this.label = 1;
@@ -168,7 +165,7 @@ final class SearchBarKt$SearchBar$4$1 extends SuspendLambda implements Function2
                     ResultKt.throwOnFailure(obj);
                 }
                 ((SnapshotMutableFloatStateImpl) this.$finalBackProgress).setFloatValue(((Number) this.$animationProgress.internalState.getValue()).floatValue());
-                this.$onExpandedChange.mo779invoke(Boolean.FALSE);
+                this.$onExpandedChange.mo781invoke(Boolean.FALSE);
             } catch (CancellationException unused) {
                 BuildersKt.launch$default(this.$coroutineScope, null, null, new AnonymousClass2(this.$animationProgress, this.$finalBackProgress, this.$firstBackEvent, this.$currentBackEvent, null), 3);
             }

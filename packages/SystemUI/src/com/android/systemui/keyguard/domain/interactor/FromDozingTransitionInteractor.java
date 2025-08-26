@@ -4,10 +4,12 @@ import android.animation.ValueAnimator;
 import android.app.DreamManager;
 import com.android.app.animation.Interpolators;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.bouncer.data.repository.KeyguardBouncerRepository;
 import com.android.systemui.communal.domain.interactor.CommunalInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSceneInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryInteractor;
+import com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl;
 import com.android.systemui.keyguard.data.repository.KeyguardTransitionRepository;
 import com.android.systemui.keyguard.shared.model.KeyguardState;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
@@ -18,7 +20,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FromDozingTransitionInteractor extends TransitionInteractor {
     public static final Companion Companion = new Companion(null);
@@ -35,11 +36,12 @@ public final class FromDozingTransitionInteractor extends TransitionInteractor {
     public final DeviceEntryInteractor deviceEntryInteractor;
     public final DreamManager dreamManager;
     public final InternalKeyguardTransitionInteractor internalTransitionInteractor;
+    public final KeyguardBouncerRepository keyguardBouncerRepository;
+    public final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl;
     public final CoroutineScope scope;
     public final KeyguardTransitionRepository transitionRepository;
     public final KeyguardWakeDirectlyToGoneInteractor wakeToGoneInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,7 +51,6 @@ public final class FromDozingTransitionInteractor extends TransitionInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -96,8 +97,10 @@ public final class FromDozingTransitionInteractor extends TransitionInteractor {
         TO_PRIMARY_BOUNCER_DURATION = duration;
     }
 
-    public FromDozingTransitionInteractor(KeyguardTransitionRepository keyguardTransitionRepository, InternalKeyguardTransitionInteractor internalKeyguardTransitionInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, KeyguardInteractor keyguardInteractor, PowerInteractor powerInteractor, CommunalInteractor communalInteractor, CommunalSettingsInteractor communalSettingsInteractor, CommunalSceneInteractor communalSceneInteractor, KeyguardOcclusionInteractor keyguardOcclusionInteractor, DeviceEntryInteractor deviceEntryInteractor, KeyguardWakeDirectlyToGoneInteractor keyguardWakeDirectlyToGoneInteractor, DreamManager dreamManager) {
+    public FromDozingTransitionInteractor(KeyguardBouncerRepository keyguardBouncerRepository, KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl, KeyguardTransitionRepository keyguardTransitionRepository, InternalKeyguardTransitionInteractor internalKeyguardTransitionInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, CoroutineDispatcher coroutineDispatcher2, KeyguardInteractor keyguardInteractor, PowerInteractor powerInteractor, CommunalInteractor communalInteractor, CommunalSettingsInteractor communalSettingsInteractor, CommunalSceneInteractor communalSceneInteractor, KeyguardOcclusionInteractor keyguardOcclusionInteractor, DeviceEntryInteractor deviceEntryInteractor, KeyguardWakeDirectlyToGoneInteractor keyguardWakeDirectlyToGoneInteractor, DreamManager dreamManager) {
         super(KeyguardState.DOZING, keyguardTransitionInteractor, coroutineDispatcher2, coroutineDispatcher, powerInteractor, keyguardOcclusionInteractor, keyguardInteractor, null);
+        this.keyguardBouncerRepository = keyguardBouncerRepository;
+        this.keyguardViewMediatorHelperImpl = keyguardViewMediatorHelperImpl;
         this.transitionRepository = keyguardTransitionRepository;
         this.internalTransitionInteractor = internalKeyguardTransitionInteractor;
         this.scope = coroutineScope;
@@ -142,7 +145,7 @@ public final class FromDozingTransitionInteractor extends TransitionInteractor {
                 j = DEFAULT_DURATION;
                 break;
         }
-        valueAnimator.setDuration(Duration.m3437getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(j));
         return valueAnimator;
     }
 

@@ -27,6 +27,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyStoreException;
 import java.security.KeyStoreSpi;
@@ -108,13 +110,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             this.certChain = certificateArr;
             byte[] bArr = new byte[20];
             BcKeyStoreSpi.this.random.nextBytes(bArr);
-            int nextInt = (BcKeyStoreSpi.this.random.nextInt() & 1023) + 1024;
+            int iNextInt = (BcKeyStoreSpi.this.random.nextInt() & 1023) + 1024;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             dataOutputStream.writeInt(20);
             dataOutputStream.write(bArr);
-            dataOutputStream.writeInt(nextInt);
-            DataOutputStream dataOutputStream2 = new DataOutputStream(new CipherOutputStream(dataOutputStream, BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, cArr, bArr, nextInt)));
+            dataOutputStream.writeInt(iNextInt);
+            DataOutputStream dataOutputStream2 = new DataOutputStream(new CipherOutputStream(dataOutputStream, BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, cArr, bArr, iNextInt)));
             BcKeyStoreSpi.this.encodeKey(key, dataOutputStream2);
             dataOutputStream2.close();
             this.obj = byteArrayOutputStream.toByteArray();
@@ -149,8 +151,8 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             return this.obj;
         }
 
-        Object getObject(char[] cArr) throws NoSuchAlgorithmException, UnrecoverableKeyException {
-            Key decodeKey;
+        Object getObject(char[] cArr) throws UnrecoverableKeyException, NoSuchAlgorithmException, IOException {
+            Key keyDecodeKey;
             if (cArr == null || cArr.length == 0) {
                 Object obj = this.obj;
                 if (obj instanceof Key) {
@@ -168,27 +170,27 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                         DataInputStream dataInputStream2 = new DataInputStream(new ByteArrayInputStream((byte[]) this.obj));
                         byte[] bArr2 = new byte[dataInputStream2.readInt()];
                         dataInputStream2.readFully(bArr2);
-                        int readInt = dataInputStream2.readInt();
+                        int i = dataInputStream2.readInt();
                         try {
-                            decodeKey = BcKeyStoreSpi.this.decodeKey(new DataInputStream(new CipherInputStream(dataInputStream2, BcKeyStoreSpi.this.makePBECipher("BrokenPBEWithSHAAnd3-KeyTripleDES-CBC", 2, cArr, bArr2, readInt))));
+                            keyDecodeKey = BcKeyStoreSpi.this.decodeKey(new DataInputStream(new CipherInputStream(dataInputStream2, BcKeyStoreSpi.this.makePBECipher("BrokenPBEWithSHAAnd3-KeyTripleDES-CBC", 2, cArr, bArr2, i))));
                         } catch (Exception unused2) {
                             DataInputStream dataInputStream3 = new DataInputStream(new ByteArrayInputStream((byte[]) this.obj));
                             bArr2 = new byte[dataInputStream3.readInt()];
                             dataInputStream3.readFully(bArr2);
-                            readInt = dataInputStream3.readInt();
-                            decodeKey = BcKeyStoreSpi.this.decodeKey(new DataInputStream(new CipherInputStream(dataInputStream3, BcKeyStoreSpi.this.makePBECipher("OldPBEWithSHAAnd3-KeyTripleDES-CBC", 2, cArr, bArr2, readInt))));
+                            i = dataInputStream3.readInt();
+                            keyDecodeKey = BcKeyStoreSpi.this.decodeKey(new DataInputStream(new CipherInputStream(dataInputStream3, BcKeyStoreSpi.this.makePBECipher("OldPBEWithSHAAnd3-KeyTripleDES-CBC", 2, cArr, bArr2, i))));
                         }
-                        if (decodeKey != null) {
+                        if (keyDecodeKey != null) {
                             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
                             dataOutputStream.writeInt(bArr2.length);
                             dataOutputStream.write(bArr2);
-                            dataOutputStream.writeInt(readInt);
-                            DataOutputStream dataOutputStream2 = new DataOutputStream(new CipherOutputStream(dataOutputStream, BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, cArr, bArr2, readInt)));
-                            BcKeyStoreSpi.this.encodeKey(decodeKey, dataOutputStream2);
+                            dataOutputStream.writeInt(i);
+                            DataOutputStream dataOutputStream2 = new DataOutputStream(new CipherOutputStream(dataOutputStream, BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, cArr, bArr2, i)));
+                            BcKeyStoreSpi.this.encodeKey(keyDecodeKey, dataOutputStream2);
                             dataOutputStream2.close();
                             this.obj = byteArrayOutputStream.toByteArray();
-                            return decodeKey;
+                            return keyDecodeKey;
                         }
                         throw new UnrecoverableKeyException("no match");
                     }
@@ -208,7 +210,7 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         }
     }
 
-    private void encodeCertificate(Certificate certificate, DataOutputStream dataOutputStream) throws IOException {
+    private void encodeCertificate(Certificate certificate, DataOutputStream dataOutputStream) throws IOException, CertificateEncodingException {
         try {
             byte[] encoded = certificate.getEncoded();
             dataOutputStream.writeUTF(certificate.getType());
@@ -220,11 +222,11 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     }
 
     private Certificate decodeCertificate(DataInputStream dataInputStream) throws IOException {
-        String readUTF = dataInputStream.readUTF();
+        String utf = dataInputStream.readUTF();
         byte[] bArr = new byte[dataInputStream.readInt()];
         dataInputStream.readFully(bArr);
         try {
-            return this.helper.createCertificateFactory(readUTF).generateCertificate(new ByteArrayInputStream(bArr));
+            return this.helper.createCertificateFactory(utf).generateCertificate(new ByteArrayInputStream(bArr));
         } catch (NoSuchProviderException e) {
             throw new IOException(e.toString());
         } catch (CertificateException e2) {
@@ -254,45 +256,45 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     /* JADX INFO: Access modifiers changed from: private */
     public Key decodeKey(DataInputStream dataInputStream) throws IOException {
         KeySpec pKCS8EncodedKeySpec;
-        int read = dataInputStream.read();
-        String readUTF = dataInputStream.readUTF();
-        String readUTF2 = dataInputStream.readUTF();
+        int i = dataInputStream.read();
+        String utf = dataInputStream.readUTF();
+        String utf2 = dataInputStream.readUTF();
         byte[] bArr = new byte[dataInputStream.readInt()];
         dataInputStream.readFully(bArr);
-        if (readUTF.equals("PKCS#8") || readUTF.equals("PKCS8")) {
+        if (utf.equals("PKCS#8") || utf.equals("PKCS8")) {
             pKCS8EncodedKeySpec = new PKCS8EncodedKeySpec(bArr);
-        } else if (readUTF.equals("X.509") || readUTF.equals("X509")) {
+        } else if (utf.equals("X.509") || utf.equals("X509")) {
             pKCS8EncodedKeySpec = new X509EncodedKeySpec(bArr);
         } else {
-            if (readUTF.equals("RAW")) {
-                return new SecretKeySpec(bArr, readUTF2);
+            if (utf.equals("RAW")) {
+                return new SecretKeySpec(bArr, utf2);
             }
-            throw new IOException("Key format " + readUTF + " not recognised!");
+            throw new IOException("Key format " + utf + " not recognised!");
         }
         try {
-            if (read == 0) {
+            if (i == 0) {
                 return BouncyCastleProvider.getPrivateKey(PrivateKeyInfo.getInstance(bArr));
             }
-            if (read == 1) {
+            if (i == 1) {
                 return BouncyCastleProvider.getPublicKey(SubjectPublicKeyInfo.getInstance(bArr));
             }
-            if (read == 2) {
-                return this.helper.createSecretKeyFactory(readUTF2).generateSecret(pKCS8EncodedKeySpec);
+            if (i == 2) {
+                return this.helper.createSecretKeyFactory(utf2).generateSecret(pKCS8EncodedKeySpec);
             }
-            throw new IOException("Key type " + read + " not recognised!");
+            throw new IOException("Key type " + i + " not recognised!");
         } catch (Exception e) {
             throw new IOException("Exception creating key: " + e.toString());
         }
     }
 
-    protected Cipher makePBECipher(String str, int i, char[] cArr, byte[] bArr, int i2) throws IOException {
+    protected Cipher makePBECipher(String str, int i, char[] cArr, byte[] bArr, int i2) throws InvalidKeyException, IOException, InvalidAlgorithmParameterException {
         try {
             PBEKeySpec pBEKeySpec = new PBEKeySpec(cArr);
-            SecretKeyFactory createSecretKeyFactory = this.helper.createSecretKeyFactory(str);
+            SecretKeyFactory secretKeyFactoryCreateSecretKeyFactory = this.helper.createSecretKeyFactory(str);
             PBEParameterSpec pBEParameterSpec = new PBEParameterSpec(bArr, i2);
-            Cipher createCipher = this.helper.createCipher(str);
-            createCipher.init(i, createSecretKeyFactory.generateSecret(pBEKeySpec), pBEParameterSpec);
-            return createCipher;
+            Cipher cipherCreateCipher = this.helper.createCipher(str);
+            cipherCreateCipher.init(i, secretKeyFactoryCreateSecretKeyFactory.generateSecret(pBEKeySpec), pBEParameterSpec);
+            return cipherCreateCipher;
         } catch (Exception e) {
             throw new IOException("Error initialising store of key store: " + e);
         }
@@ -339,9 +341,9 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
 
     @Override // java.security.KeyStoreSpi
     public String engineGetCertificateAlias(Certificate certificate) {
-        Enumeration elements = this.table.elements();
-        while (elements.hasMoreElements()) {
-            StoreEntry storeEntry = (StoreEntry) elements.nextElement();
+        Enumeration enumerationElements = this.table.elements();
+        while (enumerationElements.hasMoreElements()) {
+            StoreEntry storeEntry = (StoreEntry) enumerationElements.nextElement();
             if (storeEntry.getObject() instanceof Certificate) {
                 if (((Certificate) storeEntry.getObject()).equals(certificate)) {
                     return storeEntry.getAlias();
@@ -436,48 +438,48 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         Certificate[] certificateArr;
         BcKeyStoreSpi bcKeyStoreSpi;
         DataInputStream dataInputStream = new DataInputStream(inputStream);
-        int read = dataInputStream.read();
-        while (read > 0) {
-            String readUTF = dataInputStream.readUTF();
+        int i = dataInputStream.read();
+        while (i > 0) {
+            String utf = dataInputStream.readUTF();
             Date date = new Date(dataInputStream.readLong());
-            int readInt = dataInputStream.readInt();
-            if (readInt != 0) {
-                certificateArr = new Certificate[readInt];
-                for (int i = 0; i != readInt; i++) {
-                    certificateArr[i] = this.decodeCertificate(dataInputStream);
+            int i2 = dataInputStream.readInt();
+            if (i2 != 0) {
+                certificateArr = new Certificate[i2];
+                for (int i3 = 0; i3 != i2; i3++) {
+                    certificateArr[i3] = this.decodeCertificate(dataInputStream);
                 }
             } else {
                 certificateArr = null;
             }
             Certificate[] certificateArr2 = certificateArr;
-            if (read == 1) {
+            if (i == 1) {
                 bcKeyStoreSpi = this;
-                bcKeyStoreSpi.table.put(readUTF, bcKeyStoreSpi.new StoreEntry(readUTF, date, 1, bcKeyStoreSpi.decodeCertificate(dataInputStream)));
-            } else if (read == 2) {
+                bcKeyStoreSpi.table.put(utf, bcKeyStoreSpi.new StoreEntry(utf, date, 1, bcKeyStoreSpi.decodeCertificate(dataInputStream)));
+            } else if (i == 2) {
                 bcKeyStoreSpi = this;
-                bcKeyStoreSpi.table.put(readUTF, bcKeyStoreSpi.new StoreEntry(readUTF, date, 2, bcKeyStoreSpi.decodeKey(dataInputStream), certificateArr2));
-            } else if (read == 3 || read == 4) {
+                bcKeyStoreSpi.table.put(utf, bcKeyStoreSpi.new StoreEntry(utf, date, 2, bcKeyStoreSpi.decodeKey(dataInputStream), certificateArr2));
+            } else if (i == 3 || i == 4) {
                 byte[] bArr = new byte[dataInputStream.readInt()];
                 dataInputStream.readFully(bArr);
                 Hashtable hashtable = this.table;
                 BcKeyStoreSpi bcKeyStoreSpi2 = this;
-                StoreEntry storeEntry = bcKeyStoreSpi2.new StoreEntry(readUTF, date, read, bArr, certificateArr2);
+                StoreEntry storeEntry = bcKeyStoreSpi2.new StoreEntry(utf, date, i, bArr, certificateArr2);
                 bcKeyStoreSpi = bcKeyStoreSpi2;
-                hashtable.put(readUTF, storeEntry);
+                hashtable.put(utf, storeEntry);
             } else {
                 throw new IOException("Unknown object type in store.");
             }
-            read = dataInputStream.read();
+            i = dataInputStream.read();
             this = bcKeyStoreSpi;
         }
     }
 
-    protected void saveStore(OutputStream outputStream) throws IOException {
-        Enumeration elements = this.table.elements();
+    protected void saveStore(OutputStream outputStream) throws IOException, CertificateEncodingException {
+        Enumeration enumerationElements = this.table.elements();
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         while (true) {
-            if (elements.hasMoreElements()) {
-                StoreEntry storeEntry = (StoreEntry) elements.nextElement();
+            if (enumerationElements.hasMoreElements()) {
+                StoreEntry storeEntry = (StoreEntry) enumerationElements.nextElement();
                 dataOutputStream.write(storeEntry.getType());
                 dataOutputStream.writeUTF(storeEntry.getAlias());
                 dataOutputStream.writeLong(storeEntry.getDate().getTime());
@@ -511,35 +513,35 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
 
     @Override // java.security.KeyStoreSpi
     public void engineLoad(InputStream inputStream, char[] cArr) throws IOException {
-        CipherParameters generateDerivedMacParameters;
+        CipherParameters cipherParametersGenerateDerivedMacParameters;
         this.table.clear();
         if (inputStream == null) {
             return;
         }
         DataInputStream dataInputStream = new DataInputStream(inputStream);
-        int readInt = dataInputStream.readInt();
-        if (readInt != 2 && readInt != 0 && readInt != 1) {
+        int i = dataInputStream.readInt();
+        if (i != 2 && i != 0 && i != 1) {
             throw new IOException("Wrong version of key store.");
         }
-        int readInt2 = dataInputStream.readInt();
-        if (readInt2 <= 0) {
+        int i2 = dataInputStream.readInt();
+        if (i2 <= 0) {
             throw new IOException("Invalid salt detected");
         }
-        byte[] bArr = new byte[readInt2];
+        byte[] bArr = new byte[i2];
         dataInputStream.readFully(bArr);
-        int readInt3 = dataInputStream.readInt();
+        int i3 = dataInputStream.readInt();
         HMac hMac = new HMac(new SHA1Digest());
         if (cArr != null && cArr.length != 0) {
-            byte[] PKCS12PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(cArr);
+            byte[] bArrPKCS12PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(cArr);
             PKCS12ParametersGenerator pKCS12ParametersGenerator = new PKCS12ParametersGenerator(new SHA1Digest());
-            pKCS12ParametersGenerator.init(PKCS12PasswordToBytes, bArr, readInt3);
-            if (readInt != 2) {
-                generateDerivedMacParameters = pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize());
+            pKCS12ParametersGenerator.init(bArrPKCS12PasswordToBytes, bArr, i3);
+            if (i != 2) {
+                cipherParametersGenerateDerivedMacParameters = pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize());
             } else {
-                generateDerivedMacParameters = pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize() * 8);
+                cipherParametersGenerateDerivedMacParameters = pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize() * 8);
             }
-            Arrays.fill(PKCS12PasswordToBytes, (byte) 0);
-            hMac.init(generateDerivedMacParameters);
+            Arrays.fill(bArrPKCS12PasswordToBytes, (byte) 0);
+            hMac.init(cipherParametersGenerateDerivedMacParameters);
             loadStore(new MacInputStream(dataInputStream, hMac));
             byte[] bArr2 = new byte[hMac.getMacSize()];
             hMac.doFinal(bArr2, 0);
@@ -556,27 +558,27 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException {
+    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, CertificateEncodingException {
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         byte[] bArr = new byte[20];
-        int nextInt = (this.random.nextInt() & 1023) + 1024;
+        int iNextInt = (this.random.nextInt() & 1023) + 1024;
         this.random.nextBytes(bArr);
         dataOutputStream.writeInt(this.version);
         dataOutputStream.writeInt(20);
         dataOutputStream.write(bArr);
-        dataOutputStream.writeInt(nextInt);
+        dataOutputStream.writeInt(iNextInt);
         HMac hMac = new HMac(new SHA1Digest());
         MacOutputStream macOutputStream = new MacOutputStream(hMac);
         PKCS12ParametersGenerator pKCS12ParametersGenerator = new PKCS12ParametersGenerator(new SHA1Digest());
-        byte[] PKCS12PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(cArr);
-        pKCS12ParametersGenerator.init(PKCS12PasswordToBytes, bArr, nextInt);
+        byte[] bArrPKCS12PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(cArr);
+        pKCS12ParametersGenerator.init(bArrPKCS12PasswordToBytes, bArr, iNextInt);
         if (this.version < 2) {
             hMac.init(pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize()));
         } else {
             hMac.init(pKCS12ParametersGenerator.generateDerivedMacParameters(hMac.getMacSize() * 8));
         }
-        for (int i = 0; i != PKCS12PasswordToBytes.length; i++) {
-            PKCS12PasswordToBytes[i] = 0;
+        for (int i = 0; i != bArrPKCS12PasswordToBytes.length; i++) {
+            bArrPKCS12PasswordToBytes[i] = 0;
         }
         saveStore(new TeeOutputStream(dataOutputStream, macOutputStream));
         byte[] bArr2 = new byte[hMac.getMacSize()];
@@ -591,13 +593,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             throw new NullPointerException("input stream must not be null");
         }
         DataInputStream dataInputStream = new DataInputStream(inputStream);
-        int readInt = dataInputStream.readInt();
-        if (readInt != 2 && readInt != 0 && readInt != 1) {
+        int i = dataInputStream.readInt();
+        if (i != 2 && i != 0 && i != 1) {
             return false;
         }
-        int readInt2 = dataInputStream.readInt();
-        byte[] bArr = new byte[readInt2];
-        return readInt2 == 20;
+        int i2 = dataInputStream.readInt();
+        byte[] bArr = new byte[i2];
+        return i2 == 20;
     }
 
     public static class BouncyCastleStore extends BcKeyStoreSpi {
@@ -613,26 +615,26 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                 return;
             }
             DataInputStream dataInputStream = new DataInputStream(inputStream);
-            int readInt = dataInputStream.readInt();
-            if (readInt != 2 && readInt != 0 && readInt != 1) {
+            int i = dataInputStream.readInt();
+            if (i != 2 && i != 0 && i != 1) {
                 throw new IOException("Wrong version of key store.");
             }
-            int readInt2 = dataInputStream.readInt();
-            byte[] bArr = new byte[readInt2];
-            if (readInt2 != 20) {
+            int i2 = dataInputStream.readInt();
+            byte[] bArr = new byte[i2];
+            if (i2 != 20) {
                 throw new IOException("Key store corrupted.");
             }
             dataInputStream.readFully(bArr);
-            int readInt3 = dataInputStream.readInt();
-            if (readInt3 < 0 || readInt3 > 65536) {
+            int i3 = dataInputStream.readInt();
+            if (i3 < 0 || i3 > 65536) {
                 throw new IOException("Key store corrupted.");
             }
-            if (readInt == 0) {
+            if (i == 0) {
                 str = "OldPBEWithSHAAndTwofish-CBC";
             } else {
                 str = BcKeyStoreSpi.STORE_CIPHER;
             }
-            CipherInputStream cipherInputStream = new CipherInputStream(dataInputStream, makePBECipher(str, 2, cArr, bArr, readInt3));
+            CipherInputStream cipherInputStream = new CipherInputStream(dataInputStream, makePBECipher(str, 2, cArr, bArr, i3));
             SHA1Digest sHA1Digest = new SHA1Digest();
             loadStore(new DigestInputStream(cipherInputStream, sHA1Digest));
             byte[] bArr2 = new byte[sHA1Digest.getDigestSize()];
@@ -650,13 +652,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         public void engineStore(OutputStream outputStream, char[] cArr) throws IOException {
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
             byte[] bArr = new byte[20];
-            int nextInt = (this.random.nextInt() & 1023) + 1024;
+            int iNextInt = (this.random.nextInt() & 1023) + 1024;
             this.random.nextBytes(bArr);
             dataOutputStream.writeInt(this.version);
             dataOutputStream.writeInt(20);
             dataOutputStream.write(bArr);
-            dataOutputStream.writeInt(nextInt);
-            CipherOutputStream cipherOutputStream = new CipherOutputStream(dataOutputStream, makePBECipher(BcKeyStoreSpi.STORE_CIPHER, 1, cArr, bArr, nextInt));
+            dataOutputStream.writeInt(iNextInt);
+            CipherOutputStream cipherOutputStream = new CipherOutputStream(dataOutputStream, makePBECipher(BcKeyStoreSpi.STORE_CIPHER, 1, cArr, bArr, iNextInt));
             DigestOutputStream digestOutputStream = new DigestOutputStream(new SHA1Digest());
             saveStore(new TeeOutputStream(cipherOutputStream, digestOutputStream));
             cipherOutputStream.write(digestOutputStream.getDigest());
@@ -669,13 +671,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                 throw new NullPointerException("input stream must not be null");
             }
             DataInputStream dataInputStream = new DataInputStream(inputStream);
-            int readInt = dataInputStream.readInt();
-            if (readInt != 2 && readInt != 0 && readInt != 1) {
+            int i = dataInputStream.readInt();
+            if (i != 2 && i != 0 && i != 1) {
                 return false;
             }
-            int readInt2 = dataInputStream.readInt();
-            byte[] bArr = new byte[readInt2];
-            return readInt2 == 20;
+            int i2 = dataInputStream.readInt();
+            byte[] bArr = new byte[i2];
+            return i2 == 20;
         }
     }
 

@@ -4,13 +4,11 @@ import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.knox.integrity.IEnhancedAttestationPolicyCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class EnhancedAttestationPolicyCallback {
     public static final String TAG = "EAPolicyCb";
     public EnhancedAttestationPolicyCallback acb = this;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class EaAttestationPolicyCallback extends IEnhancedAttestationPolicyCallback.Stub {
         public String mNonce;
 

@@ -789,6 +789,7 @@ public final class Manifest {
         public static final String HIGH_SAMPLING_RATE_SENSORS = "android.permission.HIGH_SAMPLING_RATE_SENSORS";
         public static final String HQM_NOTIFICATION_PERMISSION = "com.samsung.permission.HQM_NOTIFICATION_PERMISSION";
         public static final String HW_RESOURCE_SHARE = "com.samsung.android.permission.HW_RESOURCE_SHARE";
+        public static final String IAFD_FLUENCY_HWUI = "com.samsung.android.permission.IAFD_FLUENCY_HWUI";
 
         @SystemApi
         public static final String IMPORT_XR_ANCHOR = "android.permission.IMPORT_XR_ANCHOR";
@@ -1498,6 +1499,7 @@ public final class Manifest {
         public static final String PERSISTENT_ACTIVITY = "android.permission.PERSISTENT_ACTIVITY";
         public static final String PLM_SERVICE_ACCESS = "com.android.server.enterprise.plm.permission.PLM_SERVICE_ACCESS";
         public static final String POST_NOTIFICATIONS = "android.permission.POST_NOTIFICATIONS";
+        public static final String POST_PROMOTED_NOTIFICATIONS = "android.permission.POST_PROMOTED_NOTIFICATIONS";
 
         @SystemApi
         public static final String POWER_SAVER = "android.permission.POWER_SAVER";
@@ -1792,6 +1794,7 @@ public final class Manifest {
         public static final String REQUEST_PASSWORD_COMPLEXITY = "android.permission.REQUEST_PASSWORD_COMPLEXITY";
         public static final String REQUEST_PROCESS_FIDO = "com.samsung.android.permission.REQUEST_PROCESS_FIDO";
         public static final String REQUEST_UNIQUE_ID_ATTESTATION = "android.permission.REQUEST_UNIQUE_ID_ATTESTATION";
+        public static final String REQ_TRUSTED_TOUCH_OFF = "com.samsung.android.hardware.secinputdev.REQ_TRUSTED_TOUCH_OFF";
         public static final String RESERVED_FOR_TESTING_SIGNATURE = "android.permission.RESERVED_FOR_TESTING_SIGNATURE";
         public static final String RESET_APP_ERRORS = "android.permission.RESET_APP_ERRORS";
         public static final String RESET_FACE_LOCKOUT = "com.samsung.android.bio.face.permission.RESET_FACE_LOCKOUT";

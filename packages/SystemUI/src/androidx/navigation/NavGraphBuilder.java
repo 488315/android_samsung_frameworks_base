@@ -14,7 +14,6 @@ import kotlin.reflect.KClass;
 import kotlin.reflect.KType;
 import kotlinx.serialization.SerializersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NavGraphBuilder extends NavDestinationBuilder {
     public final List destinations;
@@ -69,7 +68,7 @@ public class NavGraphBuilder extends NavDestinationBuilder {
                 }
             }
         }
-        final Object obj2 = this.startDestinationObject;
+        Object obj2 = this.startDestinationObject;
         KClass kClass = this.startDestinationClass;
         String str3 = this.startDestinationRoute;
         int i3 = this.startDestinationId;
@@ -87,7 +86,7 @@ public class NavGraphBuilder extends NavDestinationBuilder {
             navGraph.setStartDestination(SerializersKt.serializer(kClass), new Function1() { // from class: androidx.navigation.NavGraphBuilder$build$1$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj3) {
+                public final Object mo781invoke(Object obj3) {
                     String str4 = ((NavDestination) obj3).route;
                     str4.getClass();
                     return str4;
@@ -96,21 +95,24 @@ public class NavGraphBuilder extends NavDestinationBuilder {
             return navGraph;
         }
         if (obj2 != null) {
-            navGraph.setStartDestination(SerializersKt.serializer(Reflection.getOrCreateKotlinClass(obj2.getClass())), new Function1() { // from class: androidx.navigation.NavGraph$setStartDestination$2
+            navGraph.setStartDestination(SerializersKt.serializer(Reflection.getOrCreateKotlinClass(obj2.getClass())), new Function1() { // from class: androidx.navigation.NavGraph.setStartDestination.2
+                final /* synthetic */ Object $startDestRoute;
+
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                {
+                public AnonymousClass2(Object obj22) {
                     super(1);
+                    obj = obj22;
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj3) {
+                public final Object mo781invoke(Object obj3) {
                     Map map = MapsKt__MapsKt.toMap(((NavDestination) obj3)._arguments);
                     LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(map.size()));
                     for (Map.Entry entry : map.entrySet()) {
                         linkedHashMap.put(entry.getKey(), ((NavArgument) entry.getValue()).type);
                     }
-                    return RouteSerializerKt.generateRouteWithArgs(obj2, linkedHashMap);
+                    return RouteSerializerKt.generateRouteWithArgs(obj, linkedHashMap);
                 }
             });
             return navGraph;

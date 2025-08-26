@@ -102,18 +102,18 @@ public final class ServiceState {
             if (!this.mStarted && this.mBoundState == -1 && this.mExecState == -1 && this.mForegroundState == -1) {
                 return;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             if (this.mStarted) {
-                setStarted(false, 0, uptimeMillis);
+                setStarted(false, 0, jUptimeMillis);
             }
             if (this.mBoundState != -1) {
-                setBound(false, 0, uptimeMillis);
+                setBound(false, 0, jUptimeMillis);
             }
             if (this.mExecState != -1) {
-                setExecuting(false, 0, uptimeMillis);
+                setExecuting(false, 0, jUptimeMillis);
             }
             if (this.mForegroundState != -1) {
-                setForeground(false, 0, uptimeMillis);
+                setForeground(false, 0, jUptimeMillis);
             }
         }
     }
@@ -122,30 +122,30 @@ public final class ServiceState {
         if (this.mOwner == obj) {
             this.mProc.decActiveServices(this.mName);
             if (this.mStarted || this.mBoundState != -1 || this.mExecState != -1 || this.mForegroundState != -1) {
-                long uptimeMillis = SystemClock.uptimeMillis();
+                long jUptimeMillis = SystemClock.uptimeMillis();
                 if (this.mStarted) {
                     if (!z) {
                         Slog.wtfStack("ProcessStats", "Service owner " + obj + " cleared while started: pkg=" + this.mPackage + " service=" + this.mName + " proc=" + this.mProc);
                     }
-                    setStarted(false, 0, uptimeMillis);
+                    setStarted(false, 0, jUptimeMillis);
                 }
                 if (this.mBoundState != -1) {
                     if (!z) {
                         Slog.wtfStack("ProcessStats", "Service owner " + obj + " cleared while bound: pkg=" + this.mPackage + " service=" + this.mName + " proc=" + this.mProc);
                     }
-                    setBound(false, 0, uptimeMillis);
+                    setBound(false, 0, jUptimeMillis);
                 }
                 if (this.mExecState != -1) {
                     if (!z) {
                         Slog.wtfStack("ProcessStats", "Service owner " + obj + " cleared while exec: pkg=" + this.mPackage + " service=" + this.mName + " proc=" + this.mProc);
                     }
-                    setExecuting(false, 0, uptimeMillis);
+                    setExecuting(false, 0, jUptimeMillis);
                 }
                 if (this.mForegroundState != -1) {
                     if (!z) {
                         Slog.wtfStack("ProcessStats", "Service owner " + obj + " cleared while foreground: pkg=" + this.mPackage + " service=" + this.mName + " proc=" + this.mProc);
                     }
-                    setForeground(false, 0, uptimeMillis);
+                    setForeground(false, 0, jUptimeMillis);
                 }
             }
             this.mOwner = null;
@@ -274,13 +274,13 @@ public final class ServiceState {
             }
             this.mStartedState = i3;
             this.mStartedStartTime = j;
-            ProcessState pullFixedProc = this.mProc.pullFixedProc(this.mPackage);
-            this.mProc = pullFixedProc;
+            ProcessState processStatePullFixedProc = this.mProc.pullFixedProc(this.mPackage);
+            this.mProc = processStatePullFixedProc;
             if (z != z2) {
                 if (z2) {
-                    pullFixedProc.incStartedServices(i, j, this.mName);
+                    processStatePullFixedProc.incStartedServices(i, j, this.mName);
                 } else {
-                    pullFixedProc.decStartedServices(i, j, this.mName);
+                    processStatePullFixedProc.decStartedServices(i, j, this.mName);
                 }
             }
             updateRunning(i, j);
@@ -377,18 +377,18 @@ public final class ServiceState {
                 dumpTime(printWriter, str2, i2, i3, j, j2);
                 return;
             }
-            long dumpTimeInternal = dumpTimeInternal(null, null, i2, i3, j, j2, true);
+            long jDumpTimeInternal = dumpTimeInternal(null, null, i2, i3, j, j2, true);
             printWriter.print(str);
             printWriter.print(str3);
             printWriter.print(str4);
             printWriter.print(" count ");
             printWriter.print(i);
             printWriter.print(" / time ");
-            boolean z2 = dumpTimeInternal < 0;
+            boolean z2 = jDumpTimeInternal < 0;
             if (z2) {
-                dumpTimeInternal = -dumpTimeInternal;
+                jDumpTimeInternal = -jDumpTimeInternal;
             }
-            DumpUtils.printPercent(printWriter, dumpTimeInternal / j3);
+            DumpUtils.printPercent(printWriter, jDumpTimeInternal / j3);
             if (z2) {
                 printWriter.print(" (running)");
             }
@@ -489,14 +489,14 @@ public final class ServiceState {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, long j2) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mName);
         writeTypeToProto(protoOutputStream, 2246267895810L, 1, 0, this.mRunCount, this.mRunState, this.mRunStartTime, j2);
         writeTypeToProto(protoOutputStream, 2246267895810L, 2, 1, this.mStartedCount, this.mStartedState, this.mStartedStartTime, j2);
         writeTypeToProto(protoOutputStream, 2246267895810L, 3, 4, this.mForegroundCount, this.mForegroundState, this.mForegroundStartTime, j2);
         writeTypeToProto(protoOutputStream, 2246267895810L, 4, 2, this.mBoundCount, this.mBoundState, this.mBoundStartTime, j2);
         writeTypeToProto(protoOutputStream, 2246267895810L, 5, 3, this.mExecCount, this.mExecState, this.mExecStartTime, j2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void writeTypeToProto(ProtoOutputStream protoOutputStream, long j, int i, int i2, int i3, int i4, long j2, long j3) {
@@ -506,7 +506,7 @@ public final class ServiceState {
         if (i3 <= 0) {
             return;
         }
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream2.write(1159641169921L, i);
         protoOutputStream2.write(1120986464258L, i3);
         int keyCount = this.mDurations.getKeyCount();
@@ -527,25 +527,25 @@ public final class ServiceState {
                     z = true;
                 }
                 boolean z2 = z;
-                long start2 = protoOutputStream2.start(2246267895811L);
+                long jStart2 = protoOutputStream2.start(2246267895811L);
                 i5 = keyCount;
                 i6 = i7;
                 DumpUtils.printProcStateAdjTagProto(protoOutputStream2, 1159641169921L, 1159641169922L, i9);
                 protoOutputStream2.write(1112396529667L, value);
-                protoOutputStream2.end(start2);
+                protoOutputStream2.end(jStart2);
                 z = z2;
             }
             i7 = i6 + 1;
             keyCount = i5;
         }
         if (!z && i4 != -1) {
-            long start3 = protoOutputStream2.start(2246267895811L);
+            long jStart3 = protoOutputStream2.start(2246267895811L);
             DumpUtils.printProcStateAdjTagProto(protoOutputStream, 1159641169921L, 1159641169922L, i4);
             protoOutputStream2 = protoOutputStream;
             protoOutputStream2.write(1112396529667L, j3 - j2);
-            protoOutputStream2.end(start3);
+            protoOutputStream2.end(jStart3);
         }
-        protoOutputStream2.end(start);
+        protoOutputStream2.end(jStart);
     }
 
     public String toString() {

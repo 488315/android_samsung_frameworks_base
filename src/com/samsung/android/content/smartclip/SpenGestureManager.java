@@ -39,9 +39,9 @@ public class SpenGestureManager {
 
     private synchronized ISpenGestureService getService() {
         if (this.mService == null) {
-            ISpenGestureService asInterface = ISpenGestureService.Stub.asInterface(ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
-            this.mService = asInterface;
-            if (asInterface == null) {
+            ISpenGestureService iSpenGestureServiceAsInterface = ISpenGestureService.Stub.asInterface(ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
+            this.mService = iSpenGestureServiceAsInterface;
+            if (iSpenGestureServiceAsInterface == null) {
                 SemLog.w("SpenGestureManager", "warning: no SpenGestureManager");
             }
         }

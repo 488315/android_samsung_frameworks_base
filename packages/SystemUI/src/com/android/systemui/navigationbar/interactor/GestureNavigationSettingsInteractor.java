@@ -7,7 +7,6 @@ import com.android.internal.policy.GestureNavigationSettingsObserver;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$5;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GestureNavigationSettingsInteractor {
     public int bottomInsets;
@@ -22,7 +21,7 @@ public final class GestureNavigationSettingsInteractor {
         GestureNavigationSettingsObserver gestureNavigationSettingsObserver = new GestureNavigationSettingsObserver(context.getMainThreadHandler(), handler, context, new Runnable() { // from class: com.android.systemui.navigationbar.interactor.GestureNavigationSettingsInteractor$observer$1
             @Override // java.lang.Runnable
             public final void run() {
-                GestureNavigationSettingsInteractor.this.onNavigationSettingsChanged();
+                this.$tmp0.onNavigationSettingsChanged();
             }
         });
         this.observer = gestureNavigationSettingsObserver;
@@ -31,12 +30,12 @@ public final class GestureNavigationSettingsInteractor {
     }
 
     public final void onNavigationSettingsChanged() {
-        boolean areNavigationButtonForcedVisible = this.observer.areNavigationButtonForcedVisible();
-        Log.i("GestureNavigationSettingsInteractor", "onNavigationSettingsChanged buttonForcedVisible " + this.buttonForcedVisible + " -> " + areNavigationButtonForcedVisible);
-        this.buttonForcedVisible = areNavigationButtonForcedVisible;
+        boolean zAreNavigationButtonForcedVisible = this.observer.areNavigationButtonForcedVisible();
+        Log.i("GestureNavigationSettingsInteractor", "onNavigationSettingsChanged buttonForcedVisible " + this.buttonForcedVisible + " -> " + zAreNavigationButtonForcedVisible);
+        this.buttonForcedVisible = zAreNavigationButtonForcedVisible;
         NavBarStoreImpl$initInteractor$5 navBarStoreImpl$initInteractor$5 = this.forcedVisibleCallback;
         if (navBarStoreImpl$initInteractor$5 != null) {
-            navBarStoreImpl$initInteractor$5.accept(Boolean.valueOf(!areNavigationButtonForcedVisible));
+            navBarStoreImpl$initInteractor$5.accept(Boolean.valueOf(!zAreNavigationButtonForcedVisible));
         }
         int bottomSensitivity = this.observer.getBottomSensitivity(this.context.getResources());
         if (this.bottomInsets != bottomSensitivity) {

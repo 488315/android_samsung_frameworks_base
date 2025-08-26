@@ -62,7 +62,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DragDownHelper implements Gefingerpoken {
     public final Context context;
@@ -93,7 +92,6 @@ public final class DragDownHelper implements Gefingerpoken {
     public float touchSlop;
     public final VelocityTracker velocityTracker = VelocityTracker.obtain();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -135,45 +133,45 @@ public final class DragDownHelper implements Gefingerpoken {
             f3 = 0.0f;
         }
         float f4 = lockscreenShadeTransitionController.dragDownAmount;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f4, f3);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f4, f3);
         final float f5 = lockscreenShadeTransitionController.overDragAmount;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper$animateToMaxDragDown$animator$1$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper$animateToMaxDragDown$animator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DragDownHelper.this.dragDownCallback.setDragDownAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                this.this$0.dragDownCallback.setDragDownAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Float) valueAnimator.getAnimatedValue()).floatValue());
                 float f6 = f2;
                 if (f6 > 0.0f || (f3 == 0.0f && f5 != 0.0f)) {
-                    DragDownHelper.this.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(MathUtils.lerp(f5, DragDownHelper.this.dragDownCallback.panelFlingOvershootAmount * f6, ((PathInterpolator) Interpolators.FAST_OUT_SLOW_IN).getInterpolation(((Float) valueAnimator.getAnimatedValue()).floatValue())));
+                    this.this$0.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(MathUtils.lerp(f5, this.this$0.dragDownCallback.panelFlingOvershootAmount * f6, ((PathInterpolator) Interpolators.FAST_OUT_SLOW_IN).getInterpolation(((Float) valueAnimator.getAnimatedValue()).floatValue())));
                 }
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper$animateToMaxDragDown$animator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper$animateToMaxDragDown$animator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                DragDownHelper dragDownHelper = DragDownHelper.this;
+                DragDownHelper dragDownHelper = this.this$0;
                 dragDownHelper.maxDragDownAnimator = null;
                 if (z) {
                     LockscreenShadeTransitionController lockscreenShadeTransitionController2 = dragDownHelper.dragDownCallback;
                     if (lockscreenShadeTransitionController2.overDragAmount > 0.0f && lockscreenShadeTransitionController2.isOverDraggingAllowed()) {
-                        DragDownHelper.this.springBack$1();
+                        this.this$0.springBack$1();
                         return;
                     }
                 }
-                DragDownHelper.this.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0.0f);
+                this.this$0.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0.0f);
                 if (z) {
-                    DragDownHelper.this.onFinishDraggingDown();
+                    this.this$0.onFinishDraggingDown();
                 } else {
-                    DragDownHelper.this.stopDragging();
+                    this.this$0.stopDragging();
                 }
             }
         });
         if (f == 0.0f) {
-            ofFloat.setDuration(300L);
+            valueAnimatorOfFloat.setDuration(300L);
         } else {
-            this.flingAnimationUtils.apply(ofFloat, f4, z ? f3 : 0.0f, f, lockscreenShadeTransitionController.qS != null ? r12.getDesiredHeight() : DeviceState.getScreenHeight(this.context));
+            this.flingAnimationUtils.apply(valueAnimatorOfFloat, f4, z ? f3 : 0.0f, f, lockscreenShadeTransitionController.qS != null ? r12.getDesiredHeight() : DeviceState.getScreenHeight(this.context));
         }
-        ofFloat.start();
-        this.maxDragDownAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.maxDragDownAnimator = valueAnimatorOfFloat;
     }
 
     public final void cancelChildExpansion(final ExpandableView expandableView, long j) {
@@ -185,16 +183,16 @@ public final class DragDownHelper implements Gefingerpoken {
             anonymousClass11.setUserLockedChild(expandableView, false);
             return;
         }
-        ValueAnimator ofInt = ValueAnimator.ofInt(expandableView.mActualHeight, expandableView.getCollapsedHeight());
-        ofInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-        ofInt.setDuration(j);
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper$cancelChildExpansion$1
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(expandableView.mActualHeight, expandableView.getCollapsedHeight());
+        valueAnimatorOfInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfInt.setDuration(j);
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper.cancelChildExpansion.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                ExpandableView.this.setActualHeight(((Integer) valueAnimator.getAnimatedValue()).intValue(), true);
+                expandableView.setActualHeight(((Integer) valueAnimator.getAnimatedValue()).intValue(), true);
             }
         });
-        ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper$cancelChildExpansion$2
+        valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper.cancelChildExpansion.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 NotificationStackScrollLayout.AnonymousClass11 anonymousClass112 = DragDownHelper.this.expandCallback;
@@ -204,7 +202,7 @@ public final class DragDownHelper implements Gefingerpoken {
                 anonymousClass112.setUserLockedChild(expandableView, false);
             }
         });
-        ofInt.start();
+        valueAnimatorOfInt.start();
     }
 
     public final void captureStartingChild$1(float f, float f2) {
@@ -238,10 +236,10 @@ public final class DragDownHelper implements Gefingerpoken {
         final ExpandableView expandableView = this.startingChild;
         int i = (int) f;
         final LockscreenShadeTransitionController lockscreenShadeTransitionController = this.dragDownCallback;
-        boolean canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core = lockscreenShadeTransitionController.canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+        boolean zCanDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core = lockscreenShadeTransitionController.canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
         String str4 = "no entry";
         LSShadeTransitionLogger lSShadeTransitionLogger = lockscreenShadeTransitionController.logger;
-        if (canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core) {
+        if (zCanDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core) {
             LockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1 lockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1 = new LockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1(lockscreenShadeTransitionController);
             NotificationStackScrollLayoutController notificationStackScrollLayoutController = lockscreenShadeTransitionController.nsslController;
             if (notificationStackScrollLayoutController == null) {
@@ -252,18 +250,18 @@ public final class DragDownHelper implements Gefingerpoken {
                 LogLevel logLevel = LogLevel.INFO;
                 LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda0 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer = lSShadeTransitionLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
+                LogMessage logMessageObtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
                 ExpandableNotificationRow expandableNotificationRow = expandableView instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) expandableView : null;
                 if (expandableNotificationRow != null && (str3 = expandableNotificationRow.mLoggingKey) != null) {
                     str4 = str3;
                 }
-                ((LogMessageImpl) obtain).str1 = str4;
-                logBuffer.commit(obtain);
+                ((LogMessageImpl) logMessageObtain).str1 = str4;
+                logBuffer.commit(logMessageObtain);
                 ((StatusBarStateControllerImpl) lockscreenShadeTransitionController.statusBarStateController).setLeaveOpenOnKeyguardHide(true);
                 lockscreenShadeTransitionController.activityStarter.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$onDraggedDown$1
                     @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                     public final boolean onDismiss() {
-                        LockscreenShadeTransitionController.this.nextHideKeyguardNeedsNoAnimation = true;
+                        lockscreenShadeTransitionController.nextHideKeyguardNeedsNoAnimation = true;
                         return false;
                     }
                 }, lockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1, false);
@@ -272,28 +270,28 @@ public final class DragDownHelper implements Gefingerpoken {
                 LogLevel logLevel2 = LogLevel.INFO;
                 LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda02 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer2 = lSShadeTransitionLogger.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("LockscreenShadeTransitionController", logLevel2, lSShadeTransitionLogger$$ExternalSyntheticLambda02, null);
+                LogMessage logMessageObtain2 = logBuffer2.obtain("LockscreenShadeTransitionController", logLevel2, lSShadeTransitionLogger$$ExternalSyntheticLambda02, null);
                 ExpandableNotificationRow expandableNotificationRow2 = expandableView instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) expandableView : null;
                 if (expandableNotificationRow2 != null && (str2 = expandableNotificationRow2.mLoggingKey) != null) {
                     str4 = str2;
                 }
-                ((LogMessageImpl) obtain2).str1 = str4;
-                logBuffer2.commit(obtain2);
+                ((LogMessageImpl) logMessageObtain2).str1 = str4;
+                logBuffer2.commit(logMessageObtain2);
                 lSShadeTransitionLogger.lockscreenGestureLogger.write(187, (int) (i / lSShadeTransitionLogger.displayMetrics.density), 0);
                 new UiEventLoggerImpl().log(LockscreenGestureLogger.LockscreenUiEvent.LOCKSCREEN_PULL_SHADE_OPEN);
                 if (!lockscreenShadeTransitionController.ambientState.mDozing || expandableView != null) {
                     lockscreenShadeTransitionController.goToLockedShadeInternal(expandableView, new Function1() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             View view = expandableView;
-                            long longValue = ((Long) obj).longValue();
+                            long jLongValue = ((Long) obj).longValue();
                             LockscreenShadeTransitionController.Companion companion = LockscreenShadeTransitionController.Companion;
                             if (view instanceof ExpandableNotificationRow) {
                                 ((ExpandableNotificationRow) view).onExpandedByGesture(true);
                             }
                             LockscreenShadeTransitionController lockscreenShadeTransitionController2 = lockscreenShadeTransitionController;
-                            ((ShadeLockscreenInteractor) lockscreenShadeTransitionController2.shadeLockscreenInteractorLazy.get()).transitionToExpandedShade(longValue, lockscreenShadeTransitionController2.ambientState.isNeedsToExpandLocksNoti());
+                            ((ShadeLockscreenInteractor) lockscreenShadeTransitionController2.shadeLockscreenInteractorLazy.get()).transitionToExpandedShade(jLongValue, lockscreenShadeTransitionController2.ambientState.isNeedsToExpandLocksNoti());
                             ArrayList arrayList = (ArrayList) lockscreenShadeTransitionController2.callbacks;
                             int size = arrayList.size();
                             int i2 = 0;
@@ -301,7 +299,7 @@ public final class DragDownHelper implements Gefingerpoken {
                                 Object obj2 = arrayList.get(i2);
                                 i2++;
                                 LockscreenShadeTransitionController.Callback callback = (LockscreenShadeTransitionController.Callback) obj2;
-                                callback.setTransitionToFullShadeAmount(0.0f, true, longValue);
+                                callback.setTransitionToFullShadeAmount(0.0f, true, jLongValue);
                                 callback.setTransitionToFullShadeAmount(0.0f);
                             }
                             lockscreenShadeTransitionController2.forceApplyAmount = true;
@@ -324,13 +322,13 @@ public final class DragDownHelper implements Gefingerpoken {
             LogLevel logLevel3 = LogLevel.INFO;
             LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda03 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer3 = lSShadeTransitionLogger.buffer;
-            LogMessage obtain3 = logBuffer3.obtain("LockscreenShadeTransitionController", logLevel3, lSShadeTransitionLogger$$ExternalSyntheticLambda03, null);
+            LogMessage logMessageObtain3 = logBuffer3.obtain("LockscreenShadeTransitionController", logLevel3, lSShadeTransitionLogger$$ExternalSyntheticLambda03, null);
             ExpandableNotificationRow expandableNotificationRow3 = expandableView instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) expandableView : null;
             if (expandableNotificationRow3 != null && (str = expandableNotificationRow3.mLoggingKey) != null) {
                 str4 = str;
             }
-            ((LogMessageImpl) obtain3).str1 = str4;
-            logBuffer3.commit(obtain3);
+            ((LogMessageImpl) logMessageObtain3).str1 = str4;
+            logBuffer3.commit(logMessageObtain3);
             lockscreenShadeTransitionController.setDragDownAmountAnimated(0.0f, 0L, null);
         }
         ArrayList arrayList = (ArrayList) lockscreenShadeTransitionController.callbacks;
@@ -428,9 +426,9 @@ public final class DragDownHelper implements Gefingerpoken {
                             NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "shouldQSDownInLockScreen x, displayWidthOfDivider = ", ", return RIGHT", "SecPanelSplitHelper");
                             direction = PanelSlideEventHandler.Direction.RIGHT;
                         } else {
-                            boolean isReversed = panelSlideEventHandler.secPanelSplitHelper.isReversed();
-                            Log.d("SecPanelSplitHelper", "shouldQSDownInLockScreen else, isReversed? " + isReversed + ", return " + (isReversed ? "LEFT" : "UNDECIDED"));
-                            direction = isReversed ? PanelSlideEventHandler.Direction.LEFT : PanelSlideEventHandler.Direction.UNDECIDED;
+                            boolean zIsReversed = panelSlideEventHandler.secPanelSplitHelper.isReversed();
+                            Log.d("SecPanelSplitHelper", "shouldQSDownInLockScreen else, isReversed? " + zIsReversed + ", return " + (zIsReversed ? "LEFT" : "UNDECIDED"));
+                            direction = zIsReversed ? PanelSlideEventHandler.Direction.LEFT : PanelSlideEventHandler.Direction.UNDECIDED;
                         }
                     }
                 }
@@ -469,8 +467,8 @@ public final class DragDownHelper implements Gefingerpoken {
                 }
                 float f3 = this.initialTouchX;
                 if (((StatusBarStateController) Dependency.sDependency.getDependencyInner(StatusBarStateController.class)).getState() == 1) {
-                    float abs = (float) Math.abs(f);
-                    if (f < 0.0f && abs > f2 && abs > Math.abs(x - f3)) {
+                    float fAbs = (float) Math.abs(f);
+                    if (f < 0.0f && fAbs > f2 && fAbs > Math.abs(x - f3)) {
                         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.notificationStackScrollLayoutController;
                         if (notificationStackScrollLayoutController == null) {
                             notificationStackScrollLayoutController = null;
@@ -510,26 +508,26 @@ public final class DragDownHelper implements Gefingerpoken {
     }
 
     public final void springBack$1() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.dragDownCallback.overDragAmount, 0.0f);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper$springBack$animator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.dragDownCallback.overDragAmount, 0.0f);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.DragDownHelper$springBack$animator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DragDownHelper.this.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                this.this$0.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper$springBack$animator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.DragDownHelper$springBack$animator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                DragDownHelper.this.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0.0f);
-                DragDownHelper dragDownHelper = DragDownHelper.this;
+                this.this$0.dragDownCallback.setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0.0f);
+                DragDownHelper dragDownHelper = this.this$0;
                 dragDownHelper.overDragDownAnimator = null;
                 dragDownHelper.onFinishDraggingDown();
             }
         });
-        ofFloat.setDuration(250L);
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-        ofFloat.start();
-        this.overDragDownAnimator = ofFloat;
+        valueAnimatorOfFloat.setDuration(250L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfFloat.start();
+        this.overDragDownAnimator = valueAnimatorOfFloat;
     }
 
     public final void stopDragging() {

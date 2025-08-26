@@ -16,7 +16,7 @@ public class LoudnessEnhancer extends AudioEffect {
         void onParameterChange(LoudnessEnhancer loudnessEnhancer, int i, int i2);
     }
 
-    public LoudnessEnhancer(int i) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public LoudnessEnhancer(int i) throws RuntimeException {
         super(EFFECT_TYPE_LOUDNESS_ENHANCER, EFFECT_TYPE_NULL, 0, i);
         this.mParamListener = null;
         this.mBaseParamListener = null;
@@ -26,7 +26,7 @@ public class LoudnessEnhancer extends AudioEffect {
         }
     }
 
-    public LoudnessEnhancer(int i, int i2) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public LoudnessEnhancer(int i, int i2) throws RuntimeException {
         super(EFFECT_TYPE_LOUDNESS_ENHANCER, EFFECT_TYPE_NULL, i, i2);
         this.mParamListener = null;
         this.mBaseParamListener = null;
@@ -36,11 +36,11 @@ public class LoudnessEnhancer extends AudioEffect {
         }
     }
 
-    public void setTargetGain(int i) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setTargetGain(int i) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(0, i));
     }
 
-    public float getTargetGain() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public float getTargetGain() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(getParameter(0, new int[1]));
         return r0[0];
     }
@@ -59,12 +59,12 @@ public class LoudnessEnhancer extends AudioEffect {
                 onParameterChangeListener = LoudnessEnhancer.this.mParamListener != null ? LoudnessEnhancer.this.mParamListener : null;
             }
             if (onParameterChangeListener != null) {
-                int byteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
-                int byteArrayToInt2 = bArr2.length == 4 ? AudioEffect.byteArrayToInt(bArr2, 0) : Integer.MIN_VALUE;
-                if (byteArrayToInt == -1 || byteArrayToInt2 == Integer.MIN_VALUE) {
+                int iByteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
+                int iByteArrayToInt2 = bArr2.length == 4 ? AudioEffect.byteArrayToInt(bArr2, 0) : Integer.MIN_VALUE;
+                if (iByteArrayToInt == -1 || iByteArrayToInt2 == Integer.MIN_VALUE) {
                     return;
                 }
-                onParameterChangeListener.onParameterChange(LoudnessEnhancer.this, byteArrayToInt, byteArrayToInt2);
+                onParameterChangeListener.onParameterChange(LoudnessEnhancer.this, iByteArrayToInt, iByteArrayToInt2);
             }
         }
     }
@@ -91,18 +91,18 @@ public class LoudnessEnhancer extends AudioEffect {
             if (stringTokenizer.countTokens() != 3) {
                 throw new IllegalArgumentException("settings: " + str);
             }
-            String nextToken = stringTokenizer.nextToken();
-            if (!nextToken.equals(LoudnessEnhancer.TAG)) {
-                throw new IllegalArgumentException("invalid settings for LoudnessEnhancer: " + nextToken);
+            String strNextToken = stringTokenizer.nextToken();
+            if (!strNextToken.equals(LoudnessEnhancer.TAG)) {
+                throw new IllegalArgumentException("invalid settings for LoudnessEnhancer: " + strNextToken);
             }
             try {
-                String nextToken2 = stringTokenizer.nextToken();
-                if (!nextToken2.equals("targetGainmB")) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken2);
+                String strNextToken2 = stringTokenizer.nextToken();
+                if (!strNextToken2.equals("targetGainmB")) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken2);
                 }
                 this.targetGainmB = Integer.parseInt(stringTokenizer.nextToken());
             } catch (NumberFormatException unused) {
-                throw new IllegalArgumentException("invalid value for key: " + nextToken);
+                throw new IllegalArgumentException("invalid value for key: " + strNextToken);
             }
         }
 
@@ -111,7 +111,7 @@ public class LoudnessEnhancer extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         Settings settings = new Settings();
         int[] iArr = new int[1];
         checkStatus(getParameter(0, iArr));
@@ -119,7 +119,7 @@ public class LoudnessEnhancer extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(0, settings.targetGainmB));
     }
 }

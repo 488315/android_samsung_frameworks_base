@@ -6,10 +6,7 @@ import android.text.Layout;
 /* loaded from: classes4.dex */
 public class AndroidBidi {
     public static int bidi(int i, char[] cArr, byte[] bArr) {
-        if (cArr == null) {
-            throw null;
-        }
-        if (bArr == null) {
+        if (cArr == null || bArr == null) {
             throw null;
         }
         int length = cArr.length;

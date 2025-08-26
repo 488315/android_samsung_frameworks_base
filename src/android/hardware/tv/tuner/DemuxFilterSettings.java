@@ -147,25 +147,25 @@ public final class DemuxFilterSettings implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, (DemuxTsFilterSettings) parcel.readTypedObject(DemuxTsFilterSettings.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, (DemuxTsFilterSettings) parcel.readTypedObject(DemuxTsFilterSettings.CREATOR));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (DemuxMmtpFilterSettings) parcel.readTypedObject(DemuxMmtpFilterSettings.CREATOR));
+        if (i == 1) {
+            _set(i, (DemuxMmtpFilterSettings) parcel.readTypedObject(DemuxMmtpFilterSettings.CREATOR));
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, (DemuxIpFilterSettings) parcel.readTypedObject(DemuxIpFilterSettings.CREATOR));
+        if (i == 2) {
+            _set(i, (DemuxIpFilterSettings) parcel.readTypedObject(DemuxIpFilterSettings.CREATOR));
             return;
         }
-        if (readInt == 3) {
-            _set(readInt, (DemuxTlvFilterSettings) parcel.readTypedObject(DemuxTlvFilterSettings.CREATOR));
-        } else if (readInt == 4) {
-            _set(readInt, (DemuxAlpFilterSettings) parcel.readTypedObject(DemuxAlpFilterSettings.CREATOR));
+        if (i == 3) {
+            _set(i, (DemuxTlvFilterSettings) parcel.readTypedObject(DemuxTlvFilterSettings.CREATOR));
+        } else if (i == 4) {
+            _set(i, (DemuxAlpFilterSettings) parcel.readTypedObject(DemuxAlpFilterSettings.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

@@ -18,19 +18,16 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeEventLogger {
     public static final Companion Companion = new Companion(null);
     public final Random random = new SecureRandom();
     public final AtomicInteger currentSessionId = new AtomicInteger(0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class EnterReason {
             public static final /* synthetic */ EnterReason[] $VALUES;
             public static final EnterReason APP_FREEFORM_INTENT;
@@ -84,7 +81,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ExitReason {
             public static final /* synthetic */ ExitReason[] $VALUES;
             public static final ExitReason APP_HANDLE_MENU_BUTTON_EXIT;
@@ -141,7 +137,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class FocusReason {
             public static final /* synthetic */ FocusReason[] $VALUES;
             public static final FocusReason UNKNOWN;
@@ -174,7 +169,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class InputMethod {
             public static final /* synthetic */ InputMethod[] $VALUES;
             public static final InputMethod KEYBOARD;
@@ -222,7 +216,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MinimizeReason {
             public static final /* synthetic */ MinimizeReason[] $VALUES;
             public static final MinimizeReason HOME_ACTION;
@@ -267,7 +260,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ResizeTrigger {
             public static final /* synthetic */ ResizeTrigger[] $VALUES;
             public static final ResizeTrigger CORNER;
@@ -333,7 +325,6 @@ public final class DesktopModeEventLogger {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class UnminimizeReason {
             public static final /* synthetic */ UnminimizeReason[] $VALUES;
             public static final UnminimizeReason ALT_TAB;
@@ -394,7 +385,6 @@ public final class DesktopModeEventLogger {
         private Companion() {
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TaskSizeUpdate {
             public final Integer displayArea;
             public final InputMethod inputMethod;
@@ -427,11 +417,11 @@ public final class DesktopModeEventLogger {
 
             public final int hashCode() {
                 ResizeTrigger resizeTrigger = this.resizeTrigger;
-                int hashCode = (resizeTrigger == null ? 0 : resizeTrigger.hashCode()) * 31;
+                int iHashCode = (resizeTrigger == null ? 0 : resizeTrigger.hashCode()) * 31;
                 InputMethod inputMethod = this.inputMethod;
-                int m = ReorderTile$$ExternalSyntheticOutline0.m(this.taskWidth, ReorderTile$$ExternalSyntheticOutline0.m(this.taskHeight, ReorderTile$$ExternalSyntheticOutline0.m(this.uid, ReorderTile$$ExternalSyntheticOutline0.m(this.instanceId, (hashCode + (inputMethod == null ? 0 : inputMethod.hashCode())) * 31, 31), 31), 31), 31);
+                int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.taskWidth, ReorderTile$$ExternalSyntheticOutline0.m(this.taskHeight, ReorderTile$$ExternalSyntheticOutline0.m(this.uid, ReorderTile$$ExternalSyntheticOutline0.m(this.instanceId, (iHashCode + (inputMethod == null ? 0 : inputMethod.hashCode())) * 31, 31), 31), 31), 31);
                 Integer num = this.displayArea;
-                return m + (num != null ? num.hashCode() : 0);
+                return iM + (num != null ? num.hashCode() : 0);
             }
 
             public final String toString() {
@@ -443,7 +433,6 @@ public final class DesktopModeEventLogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TaskUpdate {
             public final FocusReason focusReason;
             public final int instanceId;
@@ -481,13 +470,13 @@ public final class DesktopModeEventLogger {
             }
 
             public final int hashCode() {
-                int m = ReorderTile$$ExternalSyntheticOutline0.m(this.taskY, ReorderTile$$ExternalSyntheticOutline0.m(this.taskX, ReorderTile$$ExternalSyntheticOutline0.m(this.taskWidth, ReorderTile$$ExternalSyntheticOutline0.m(this.taskHeight, ReorderTile$$ExternalSyntheticOutline0.m(this.uid, Integer.hashCode(this.instanceId) * 31, 31), 31), 31), 31), 31);
+                int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.taskY, ReorderTile$$ExternalSyntheticOutline0.m(this.taskX, ReorderTile$$ExternalSyntheticOutline0.m(this.taskWidth, ReorderTile$$ExternalSyntheticOutline0.m(this.taskHeight, ReorderTile$$ExternalSyntheticOutline0.m(this.uid, Integer.hashCode(this.instanceId) * 31, 31), 31), 31), 31), 31);
                 MinimizeReason minimizeReason = this.minimizeReason;
-                int hashCode = (m + (minimizeReason == null ? 0 : minimizeReason.hashCode())) * 31;
+                int iHashCode = (iM + (minimizeReason == null ? 0 : minimizeReason.hashCode())) * 31;
                 UnminimizeReason unminimizeReason = this.unminimizeReason;
-                int m2 = ReorderTile$$ExternalSyntheticOutline0.m(this.visibleTaskCount, (hashCode + (unminimizeReason == null ? 0 : unminimizeReason.hashCode())) * 31, 31);
+                int iM2 = ReorderTile$$ExternalSyntheticOutline0.m(this.visibleTaskCount, (iHashCode + (unminimizeReason == null ? 0 : unminimizeReason.hashCode())) * 31, 31);
                 FocusReason focusReason = this.focusReason;
-                return m2 + (focusReason != null ? focusReason.hashCode() : 0);
+                return iM2 + (focusReason != null ? focusReason.hashCode() : 0);
             }
 
             public final String toString() {
@@ -513,20 +502,20 @@ public final class DesktopModeEventLogger {
     }
 
     public static Companion.TaskSizeUpdate createTaskSizeUpdate(Companion.ResizeTrigger resizeTrigger, Companion.InputMethod inputMethod, ActivityManager.RunningTaskInfo runningTaskInfo, Integer num, Integer num2, DisplayController displayController, Size size) {
-        Integer num3;
+        Integer numValueOf;
         DisplayLayout displayLayout;
         runningTaskInfo.configuration.windowConfiguration.getBounds();
-        int intValue = num2.intValue();
-        int intValue2 = num.intValue();
+        int iIntValue = num2.intValue();
+        int iIntValue2 = num.intValue();
         if (size != null) {
-            num3 = Integer.valueOf(size.getWidth() * size.getHeight());
+            numValueOf = Integer.valueOf(size.getWidth() * size.getHeight());
         } else {
-            num3 = null;
+            numValueOf = null;
             if (displayController != null && (displayLayout = displayController.getDisplayLayout(runningTaskInfo.displayId)) != null) {
-                num3 = Integer.valueOf(displayLayout.mHeight * displayLayout.mWidth);
+                numValueOf = Integer.valueOf(displayLayout.mHeight * displayLayout.mWidth);
             }
         }
-        return new Companion.TaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo.taskId, runningTaskInfo.effectiveUid, intValue, intValue2, num3);
+        return new Companion.TaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo.taskId, runningTaskInfo.effectiveUid, iIntValue, iIntValue2, numValueOf);
     }
 
     public static void logTaskSizeUpdated(int i, int i2, Companion.TaskSizeUpdate taskSizeUpdate) {
@@ -571,9 +560,9 @@ public final class DesktopModeEventLogger {
                 ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: No session id found for logging end of task resizing", new Object[0]);
                 return;
             }
-            Companion.TaskSizeUpdate createTaskSizeUpdate = createTaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo, num, num2, displayController, size);
-            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task resize is ending, session: %s, taskSizeUpdate: %s", new Object[]{Integer.valueOf(i), createTaskSizeUpdate});
-            logTaskSizeUpdated(2, i, createTaskSizeUpdate);
+            Companion.TaskSizeUpdate taskSizeUpdateCreateTaskSizeUpdate = createTaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo, num, num2, displayController, size);
+            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task resize is ending, session: %s, taskSizeUpdate: %s", new Object[]{Integer.valueOf(i), taskSizeUpdateCreateTaskSizeUpdate});
+            logTaskSizeUpdated(2, i, taskSizeUpdateCreateTaskSizeUpdate);
         }
     }
 
@@ -584,9 +573,9 @@ public final class DesktopModeEventLogger {
                 ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: No session id found for logging start of task resizing", new Object[0]);
                 return;
             }
-            Companion.TaskSizeUpdate createTaskSizeUpdate = createTaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo, num, num2, displayController, size);
-            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task resize is starting, session: %s, taskSizeUpdate: %s", new Object[]{Integer.valueOf(i), createTaskSizeUpdate});
-            logTaskSizeUpdated(1, i, createTaskSizeUpdate);
+            Companion.TaskSizeUpdate taskSizeUpdateCreateTaskSizeUpdate = createTaskSizeUpdate(resizeTrigger, inputMethod, runningTaskInfo, num, num2, displayController, size);
+            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task resize is starting, session: %s, taskSizeUpdate: %s", new Object[]{Integer.valueOf(i), taskSizeUpdateCreateTaskSizeUpdate});
+            logTaskSizeUpdated(1, i, taskSizeUpdateCreateTaskSizeUpdate);
         }
     }
 

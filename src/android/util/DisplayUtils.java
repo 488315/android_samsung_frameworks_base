@@ -23,10 +23,10 @@ public class DisplayUtils {
     public static Display.Mode getMaximumResolutionDisplayMode(Display.Mode[] modeArr) {
         Display.Mode mode = null;
         if (modeArr != null && modeArr.length != 0) {
-            int i = 0;
+            int physicalWidth = 0;
             for (Display.Mode mode2 : modeArr) {
-                if (mode2.getPhysicalWidth() > i) {
-                    i = mode2.getPhysicalWidth();
+                if (mode2.getPhysicalWidth() > physicalWidth) {
+                    physicalWidth = mode2.getPhysicalWidth();
                     mode = mode2;
                 }
             }

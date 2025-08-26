@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.WindowManager;
+import android.window.TransitionInfo;
 import java.util.Iterator;
 
 /* loaded from: classes5.dex */
@@ -173,7 +174,7 @@ public final class TransitionFilter implements Parcelable {
             this.mActivityType = 0;
             this.mMustBeIndependent = true;
             this.mNot = false;
-            Boolean bool = null;
+            Boolean boolValueOf = null;
             this.mModes = null;
             this.mFlags = 0;
             this.mMustBeTask = false;
@@ -190,145 +191,79 @@ public final class TransitionFilter implements Parcelable {
             this.mOrder = parcel.readInt();
             this.mTopActivity = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             this.mLaunchCookie = parcel.readStrongBinder();
-            int readInt = parcel.readInt();
-            if (readInt != 0) {
-                bool = Boolean.valueOf(readInt == 2);
+            int i = parcel.readInt();
+            if (i != 0) {
+                boolValueOf = Boolean.valueOf(i == 2);
             }
-            this.mCustomAnimation = bool;
+            this.mCustomAnimation = boolValueOf;
             this.mTaskFragmentToken = parcel.readStrongBinder();
             this.mWindowingMode = parcel.readInt();
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:38:0x00e4, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:81:0x00e4, code lost:
         
             continue;
          */
+        /* JADX WARN: Removed duplicated region for block: B:68:0x00ce  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        boolean matches(android.window.TransitionInfo r8) {
-            /*
-                r7 = this;
-                java.util.List r0 = r8.getChanges()
-                int r0 = r0.size()
-                r1 = 1
-                int r0 = r0 - r1
-            La:
-                r2 = 0
-                if (r0 < 0) goto Le9
-                java.util.List r3 = r8.getChanges()
-                java.lang.Object r3 = r3.get(r0)
-                android.window.TransitionInfo$Change r3 = (android.window.TransitionInfo.Change) r3
-                android.os.IBinder r4 = r7.mTaskFragmentToken
-                if (r4 == 0) goto L27
-                android.os.IBinder r5 = r3.getTaskFragmentToken()
-                boolean r4 = r4.equals(r5)
-                if (r4 != 0) goto L27
-                goto Le4
-            L27:
-                boolean r4 = r7.mMustBeIndependent
-                if (r4 == 0) goto L33
-                boolean r4 = android.window.TransitionInfo.isIndependent(r3, r8)
-                if (r4 != 0) goto L33
-                goto Le4
-            L33:
-                int r4 = r7.mOrder
-                if (r4 != r1) goto L3b
-                if (r0 <= 0) goto L3b
-                goto Le4
-            L3b:
-                int r4 = r7.mActivityType
-                if (r4 == 0) goto L53
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                if (r4 == 0) goto Le4
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                int r4 = r4.getActivityType()
-                int r5 = r7.mActivityType
-                if (r4 == r5) goto L53
-                goto Le4
-            L53:
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                android.content.ComponentName r5 = r3.getActivityComponent()
-                boolean r4 = r7.matchesTopActivity(r4, r5)
-                if (r4 != 0) goto L63
-                goto Le4
-            L63:
-                int[] r4 = r7.mModes
-                if (r4 == 0) goto L79
-                r4 = r2
-            L68:
-                int[] r5 = r7.mModes
-                int r6 = r5.length
-                if (r4 >= r6) goto Le4
-                r5 = r5[r4]
-                int r6 = r3.getMode()
-                if (r5 != r6) goto L76
-                goto L79
-            L76:
-                int r4 = r4 + 1
-                goto L68
-            L79:
-                int r4 = r3.getFlags()
-                int r5 = r7.mFlags
-                r4 = r4 & r5
-                if (r4 == r5) goto L83
-                goto Le4
-            L83:
-                boolean r4 = r7.mMustBeTask
-                if (r4 == 0) goto L8e
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                if (r4 != 0) goto L8e
-                goto Le4
-            L8e:
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                boolean r4 = r7.matchesCookie(r4)
-                if (r4 != 0) goto L99
-                goto Le4
-            L99:
-                java.lang.Boolean r4 = r7.mCustomAnimation
-                if (r4 == 0) goto Lce
-                android.app.ActivityManager$RunningTaskInfo r4 = r3.getTaskInfo()
-                if (r4 != 0) goto La9
-                android.content.ComponentName r4 = r3.getActivityComponent()
-                if (r4 == 0) goto Lce
-            La9:
-                android.window.TransitionInfo$AnimationOptions r4 = r3.getAnimationOptions()
-                if (r4 == 0) goto Lc5
-                android.app.ActivityManager$RunningTaskInfo r5 = r3.getTaskInfo()
-                if (r5 == 0) goto Lbb
-                boolean r4 = r4.getOverrideTaskTransition()
-                if (r4 == 0) goto Lbc
-            Lbb:
-                r2 = r1
-            Lbc:
-                java.lang.Boolean r4 = r7.mCustomAnimation
-                boolean r4 = r4.booleanValue()
-                if (r4 == r2) goto Lce
-                goto Le4
-            Lc5:
-                java.lang.Boolean r2 = r7.mCustomAnimation
-                boolean r2 = r2.booleanValue()
-                if (r2 == 0) goto Lce
-                goto Le4
-            Lce:
-                int r2 = r7.mWindowingMode
-                if (r2 == 0) goto Le8
-                android.app.ActivityManager$RunningTaskInfo r2 = r3.getTaskInfo()
-                if (r2 == 0) goto Le4
-                android.app.ActivityManager$RunningTaskInfo r2 = r3.getTaskInfo()
-                int r2 = r2.getWindowingMode()
-                int r3 = r7.mWindowingMode
-                if (r2 == r3) goto Le8
-            Le4:
-                int r0 = r0 + (-1)
-                goto La
-            Le8:
-                return r1
-            Le9:
-                return r2
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.window.TransitionFilter.Requirement.matches(android.window.TransitionInfo):boolean");
+        boolean matches(TransitionInfo transitionInfo) {
+            int flags;
+            int i;
+            int size = transitionInfo.getChanges().size() - 1;
+            while (true) {
+                if (size < 0) {
+                    return false;
+                }
+                TransitionInfo.Change change = transitionInfo.getChanges().get(size);
+                IBinder iBinder = this.mTaskFragmentToken;
+                if ((iBinder == null || iBinder.equals(change.getTaskFragmentToken())) && ((!this.mMustBeIndependent || TransitionInfo.isIndependent(change, transitionInfo)) && ((this.mOrder != 1 || size <= 0) && ((this.mActivityType == 0 || (change.getTaskInfo() != null && change.getTaskInfo().getActivityType() == this.mActivityType)) && matchesTopActivity(change.getTaskInfo(), change.getActivityComponent()))))) {
+                    if (this.mModes != null) {
+                        int i2 = 0;
+                        while (true) {
+                            int[] iArr = this.mModes;
+                            if (i2 >= iArr.length) {
+                                break;
+                            }
+                            if (iArr[i2] == change.getMode()) {
+                                break;
+                            }
+                            i2++;
+                        }
+                        flags = change.getFlags();
+                        i = this.mFlags;
+                        if ((flags & i) != i && ((!this.mMustBeTask || change.getTaskInfo() != null) && matchesCookie(change.getTaskInfo()))) {
+                            if (this.mCustomAnimation == null && (change.getTaskInfo() != null || change.getActivityComponent() != null)) {
+                                TransitionInfo.AnimationOptions animationOptions = change.getAnimationOptions();
+                                if (animationOptions != null) {
+                                    if (this.mCustomAnimation.booleanValue() != (change.getTaskInfo() == null || animationOptions.getOverrideTaskTransition())) {
+                                        continue;
+                                    }
+                                } else if (this.mCustomAnimation.booleanValue()) {
+                                    continue;
+                                }
+                            } else if (this.mWindowingMode == 0 || (change.getTaskInfo() != null && change.getTaskInfo().getWindowingMode() == this.mWindowingMode)) {
+                                break;
+                            }
+                        }
+                    } else {
+                        flags = change.getFlags();
+                        i = this.mFlags;
+                        if ((flags & i) != i) {
+                            continue;
+                        } else if (this.mCustomAnimation == null) {
+                            if (this.mWindowingMode == 0) {
+                                break;
+                            }
+                            break;
+                            break;
+                        }
+                    }
+                }
+                size--;
+            }
+            return true;
         }
 
         private boolean matchesTopActivity(ActivityManager.RunningTaskInfo runningTaskInfo, ComponentName componentName) {

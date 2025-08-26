@@ -16,9 +16,9 @@ public class MidiEventScheduler extends EventScheduler {
 
         @Override // android.media.midi.MidiReceiver
         public void onSend(byte[] bArr, int i, int i2, long j) throws IOException {
-            MidiEvent createScheduledEvent = MidiEventScheduler.this.createScheduledEvent(bArr, i, i2, j);
-            if (createScheduledEvent != null) {
-                MidiEventScheduler.this.add(createScheduledEvent);
+            MidiEvent midiEventCreateScheduledEvent = MidiEventScheduler.this.createScheduledEvent(bArr, i, i2, j);
+            if (midiEventCreateScheduledEvent != null) {
+                MidiEventScheduler.this.add(midiEventCreateScheduledEvent);
             }
         }
 

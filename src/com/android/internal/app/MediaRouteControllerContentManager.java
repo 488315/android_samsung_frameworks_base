@@ -1,6 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -154,14 +155,14 @@ public class MediaRouteControllerContentManager {
         return this.mRoute.getVolumeHandling() == 1;
     }
 
-    private Drawable obtainMediaRouteButtonDrawable() {
+    private Drawable obtainMediaRouteButtonDrawable() throws Resources.NotFoundException {
         TypedValue typedValue = new TypedValue();
         if (!this.mContext.getTheme().resolveAttribute(16843693, typedValue, true)) {
             return null;
         }
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(typedValue.data, new int[]{R.attr.externalRouteEnabledDrawable});
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(typedValue.data, new int[]{R.attr.externalRouteEnabledDrawable});
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
+        typedArrayObtainStyledAttributes.recycle();
         return drawable;
     }
 

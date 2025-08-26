@@ -22,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QuickQSHostAdapter implements QSHost {
     public final Map callbacksMap = new LinkedHashMap();
@@ -31,7 +30,6 @@ public final class QuickQSHostAdapter implements QSHost {
     public final CoroutineScope scope;
     public final TileFeatureChecker tileFeatureChecker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,7 +53,7 @@ public final class QuickQSHostAdapter implements QSHost {
 
     @Override // com.android.systemui.qs.QSHost
     public final void addCallback(QSHost.Callback callback) {
-        StandaloneCoroutine launch$default = BuildersKt.launch$default(this.scope, null, null, new QuickQSHostAdapter$addCallback$job$1(this, callback, null), 3);
+        StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default(this.scope, null, null, new QuickQSHostAdapter$addCallback$job$1(this, callback, null), 3);
         synchronized (this.callbacksMap) {
         }
     }

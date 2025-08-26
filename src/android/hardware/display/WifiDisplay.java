@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,8 +45,8 @@ public final class WifiDisplay implements Parcelable {
             wifiDisplay.setFlags(parcel.readInt());
             wifiDisplay.setMode(parcel.readInt());
             wifiDisplay.setDeviceInfo(parcel.readInt());
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
                 wifiDisplay.addParameter(parcel.readString(), (String) parcel.readValue(String.class.getClassLoader()));
             }
             return wifiDisplay;
@@ -270,7 +271,7 @@ public final class WifiDisplay implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mDeviceAddress);
         parcel.writeString(this.mDeviceName);
         parcel.writeString(this.mDeviceAlias);

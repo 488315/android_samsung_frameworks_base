@@ -16,15 +16,15 @@ class EntropyDaemon implements Runnable {
     }
 
     @Override // java.lang.Runnable
-    public void run() {
-        Runnable poll;
+    public void run() throws InterruptedException {
+        Runnable runnablePoll;
         while (!Thread.currentThread().isInterrupted()) {
             synchronized (this.tasks) {
-                poll = this.tasks.poll();
+                runnablePoll = this.tasks.poll();
             }
-            if (poll != null) {
+            if (runnablePoll != null) {
                 try {
-                    poll.run();
+                    runnablePoll.run();
                 } catch (Throwable unused) {
                 }
             } else {

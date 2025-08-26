@@ -66,9 +66,9 @@ public interface ISpellCheckerSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpellCheckerSession)) {
-                return (ISpellCheckerSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpellCheckerSession)) {
+                return (ISpellCheckerSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,15 +105,15 @@ public interface ISpellCheckerSession extends IInterface {
             }
             if (i == 1) {
                 TextInfo[] textInfoArr = (TextInfo[]) parcel.createTypedArray(TextInfo.CREATOR);
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onGetSuggestionsMultiple(textInfoArr, readInt, readBoolean);
+                onGetSuggestionsMultiple(textInfoArr, i3, z);
             } else if (i == 2) {
                 TextInfo[] textInfoArr2 = (TextInfo[]) parcel.createTypedArray(TextInfo.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGetSentenceSuggestionsMultiple(textInfoArr2, readInt2);
+                onGetSentenceSuggestionsMultiple(textInfoArr2, i4);
             } else if (i == 3) {
                 onCancel();
             } else if (i == 4) {
@@ -142,50 +142,50 @@ public interface ISpellCheckerSession extends IInterface {
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
             public void onGetSuggestionsMultiple(TextInfo[] textInfoArr, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(textInfoArr, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(textInfoArr, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
             public void onGetSentenceSuggestionsMultiple(TextInfo[] textInfoArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(textInfoArr, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(textInfoArr, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
             public void onCancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
             public void onClose() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,7 +6,6 @@ import kotlinx.atomicfu.AtomicInt;
 import kotlinx.atomicfu.TraceBase;
 import kotlinx.coroutines.NotCompleted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class Segment extends ConcurrentLinkedListNode implements NotCompleted {
     public final AtomicInt cleanedAndPointers;
@@ -21,13 +20,13 @@ public abstract class Segment extends ConcurrentLinkedListNode implements NotCom
     public final boolean decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host() {
         AtomicInt atomicInt = this.cleanedAndPointers;
         atomicInt.getClass();
-        int addAndGet = AtomicInt.FU.addAndGet(atomicInt, -65536);
+        int iAddAndGet = AtomicInt.FU.addAndGet(atomicInt, -65536);
         TraceBase.None none = TraceBase.None.INSTANCE;
         TraceBase traceBase = atomicInt.trace;
         if (traceBase != none) {
             traceBase.getClass();
         }
-        return addAndGet == getNumberOfSlots() && getNext() != null;
+        return iAddAndGet == getNumberOfSlots() && getNext() != null;
     }
 
     public abstract int getNumberOfSlots();

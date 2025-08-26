@@ -85,7 +85,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsUiControllerImpl implements ControlsUiController, SecControlsUiController, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -146,7 +145,6 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     public final UserTracker userTracker;
     public List verificationStructureInfos;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -210,15 +208,15 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         this.controlsPanelCallback = new SecControlsUiControllerImpl$controlsPanelCallback$1(this);
         this.openAppButtonClickListener = new View.OnClickListener() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$openAppButtonClickListener$1
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
-                SecControlsUiControllerImpl.this.saLogger.sendEvent(SALogger.Event.LaunchSmartThings.INSTANCE);
+            public final void onClick(View view) throws PendingIntent.CanceledException {
+                this.this$0.saLogger.sendEvent(SALogger.Event.LaunchSmartThings.INSTANCE);
                 try {
-                    if (SecControlsUiControllerImpl.this.controlsUtil.isSecureLocked()) {
-                        final SecControlsUiControllerImpl secControlsUiControllerImpl = SecControlsUiControllerImpl.this;
+                    if (this.this$0.controlsUtil.isSecureLocked()) {
+                        final SecControlsUiControllerImpl secControlsUiControllerImpl = this.this$0;
                         secControlsUiControllerImpl.activityStarter.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$openAppButtonClickListener$1.1
                             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
-                            public final boolean onDismiss() {
-                                PendingIntent pendingIntent = SecControlsUiControllerImpl.this.launchingPendingIntent;
+                            public final boolean onDismiss() throws PendingIntent.CanceledException {
+                                PendingIntent pendingIntent = secControlsUiControllerImpl.launchingPendingIntent;
                                 if (pendingIntent == null) {
                                     return true;
                                 }
@@ -231,7 +229,7 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                             }
                         }, true);
                     } else {
-                        PendingIntent pendingIntent = SecControlsUiControllerImpl.this.launchingPendingIntent;
+                        PendingIntent pendingIntent = this.this$0.launchingPendingIntent;
                         if (pendingIntent != null) {
                             pendingIntent.send();
                         }
@@ -246,19 +244,19 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     }
 
     public static final ControlsServiceInfo access$getComponent(SecControlsUiControllerImpl secControlsUiControllerImpl, ComponentInfo componentInfo) {
-        Object obj;
+        Object next;
         Iterator it = secControlsUiControllerImpl.serviceInfos.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((ControlsServiceInfo) obj).serviceInfo.applicationInfo.packageName, componentInfo.componentName.getPackageName())) {
+            next = it.next();
+            if (Intrinsics.areEqual(((ControlsServiceInfo) next).serviceInfo.applicationInfo.packageName, componentInfo.componentName.getPackageName())) {
                 break;
             }
         }
-        return (ControlsServiceInfo) obj;
+        return (ControlsServiceInfo) next;
     }
 
     public static final void access$listAdjustmentIfNeeded(SecControlsUiControllerImpl secControlsUiControllerImpl, List list) {
@@ -326,11 +324,11 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
             }
             LogWrapper logWrapper = secControlsUiControllerImpl.logWrapper;
             if (mainControlModel == null && (!arrayList4.isEmpty() || !arrayList5.isEmpty())) {
-                int indexOf = !arrayList4.isEmpty() ? ((ArrayList) secControlsUiControllerImpl.models).indexOf(arrayList4.get(0)) : ((ArrayList) secControlsUiControllerImpl.models).indexOf(arrayList5.get(0));
-                ((ArrayList) secControlsUiControllerImpl.models).add(indexOf, new MainControlModel(String.valueOf(charSequence), null, false, 4, null));
+                int iIndexOf = !arrayList4.isEmpty() ? ((ArrayList) secControlsUiControllerImpl.models).indexOf(arrayList4.get(0)) : ((ArrayList) secControlsUiControllerImpl.models).indexOf(arrayList5.get(0));
+                ((ArrayList) secControlsUiControllerImpl.models).add(iIndexOf, new MainControlModel(String.valueOf(charSequence), null, false, 4, null));
                 StatefulControlAdapter statefulControlAdapter = secControlsUiControllerImpl.controlAdapter;
                 if (statefulControlAdapter != null) {
-                    statefulControlAdapter.notifyItemInserted(indexOf);
+                    statefulControlAdapter.notifyItemInserted(iIndexOf);
                 }
                 List list3 = secControlsUiControllerImpl.models;
                 ArrayList arrayList6 = new ArrayList();
@@ -353,14 +351,14 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                     ControlWithState controlWithState = ((MainControlModel) obj7).controlWithState;
                     arrayList8.add((controlWithState == null || (controlInfo = controlWithState.ci) == null) ? null : controlInfo.controlTitle);
                 }
-                logWrapper.dp("SecControlsUiControllerImpl", "listAdjustmentIfNeeded-notifyItemInserted: structureName=" + ((Object) charSequence) + ", index=" + indexOf + ", models=" + arrayList8);
+                logWrapper.dp("SecControlsUiControllerImpl", "listAdjustmentIfNeeded-notifyItemInserted: structureName=" + ((Object) charSequence) + ", index=" + iIndexOf + ", models=" + arrayList8);
             }
             if (mainControlModel != null && arrayList4.isEmpty() && arrayList5.isEmpty()) {
-                int indexOf2 = ((ArrayList) secControlsUiControllerImpl.models).indexOf(mainControlModel);
-                ((ArrayList) secControlsUiControllerImpl.models).remove(indexOf2);
+                int iIndexOf2 = ((ArrayList) secControlsUiControllerImpl.models).indexOf(mainControlModel);
+                ((ArrayList) secControlsUiControllerImpl.models).remove(iIndexOf2);
                 StatefulControlAdapter statefulControlAdapter2 = secControlsUiControllerImpl.controlAdapter;
                 if (statefulControlAdapter2 != null) {
-                    statefulControlAdapter2.notifyItemRemoved(indexOf2);
+                    statefulControlAdapter2.notifyItemRemoved(iIndexOf2);
                 }
                 logWrapper.dp("SecControlsUiControllerImpl", "listAdjustmentIfNeeded-notifyItemRemoved: structureName=" + ((Object) charSequence));
             }
@@ -462,14 +460,14 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println("SecControlsUiControllerImpl:");
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        if (asIndenting != null) {
-            asIndenting.increaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        if (indentingPrintWriterAsIndenting != null) {
+            indentingPrintWriterAsIndenting.increaseIndent();
         }
-        asIndenting.println("hidden: " + this.hidden);
-        asIndenting.println("selectedItem: " + this.selectedItem);
-        asIndenting.println("setting: " + ((ControlsSettingsRepositoryImpl) this.controlsSettingsRepository).allowActionOnTrivialControlsInLockscreen.$$delegate_0.getValue());
-        asIndenting.decreaseIndent();
+        indentingPrintWriterAsIndenting.println("hidden: " + this.hidden);
+        indentingPrintWriterAsIndenting.println("selectedItem: " + this.selectedItem);
+        indentingPrintWriterAsIndenting.println("setting: " + ((ControlsSettingsRepositoryImpl) this.controlsSettingsRepository).allowActionOnTrivialControlsInLockscreen.$$delegate_0.getValue());
+        indentingPrintWriterAsIndenting.decreaseIndent();
     }
 
     public final List getPanelServiceInfos() {
@@ -484,16 +482,15 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     }
 
     public final SelectedItem getPreferredComponentSelectedItem(List list) {
-        SelectedComponentRepository.SelectedComponent selectedComponent;
         ComponentName componentName;
+        Object next;
         Object obj;
-        Object obj2;
         if (((ArrayList) list).isEmpty()) {
             SelectedItem.Companion.getClass();
             return SelectedItem.EMPTY_SELECTION_COMPONENT;
         }
         SecSelectedComponentRepository secSelectedComponentRepository = this.secSelectedComponentRepository;
-        selectedComponent = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
+        SelectedComponentRepository.SelectedComponent selectedComponent = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
         if (selectedComponent == null || (componentName = selectedComponent.componentName) == null) {
             ComponentInfo.Companion.getClass();
             componentName = ComponentInfo.EMPTY_COMPONENT;
@@ -501,15 +498,15 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         Iterator it = list.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(componentName, ((ComponentInfo) obj).componentName)) {
+            next = it.next();
+            if (Intrinsics.areEqual(componentName, ((ComponentInfo) next).componentName)) {
                 break;
             }
         }
-        ComponentInfo componentInfo = (ComponentInfo) obj;
+        ComponentInfo componentInfo = (ComponentInfo) next;
         if (componentInfo == null && (componentInfo = (ComponentInfo) CollectionsKt___CollectionsKt.firstOrNull(list)) == null) {
             SelectedItem.Companion.getClass();
             return SelectedItem.EMPTY_SELECTION_COMPONENT;
@@ -524,16 +521,16 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         int i = 0;
         while (true) {
             if (i >= size) {
-                obj2 = null;
+                obj = null;
                 break;
             }
-            obj2 = arrayList.get(i);
+            obj = arrayList.get(i);
             i++;
-            if (Intrinsics.areEqual(componentInfo.componentName, ((ControlsServiceInfo) obj2).componentName)) {
+            if (Intrinsics.areEqual(componentInfo.componentName, ((ControlsServiceInfo) obj).componentName)) {
                 break;
             }
         }
-        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) obj2;
+        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) obj;
         if ((controlsServiceInfo != null ? controlsServiceInfo.panelActivity : null) != null) {
             SelectedItem.PanelItem panelItem2 = new SelectedItem.PanelItem(controlsServiceInfo.loadLabel(), componentInfo.componentName);
             ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).setSelectedComponent(new SelectedComponentRepository.SelectedComponent(panelItem2));
@@ -545,19 +542,19 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     }
 
     public final List<StructureInfo> getStructureInfosByUI(ComponentName componentName) {
-        Object obj;
+        Object next;
         Iterator it = getPanelServiceInfos().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((ControlsServiceInfo) obj).serviceInfo.applicationInfo.packageName, componentName.getPackageName())) {
+            next = it.next();
+            if (Intrinsics.areEqual(((ControlsServiceInfo) next).serviceInfo.applicationInfo.packageName, componentName.getPackageName())) {
                 break;
             }
         }
-        if (((ControlsServiceInfo) obj) != null) {
+        if (((ControlsServiceInfo) next) != null) {
             StructureInfo structureInfo = new StructureInfo(componentName, "", EmptyList.INSTANCE, false, 8, null);
             structureInfo.active = true;
             Unit unit = Unit.INSTANCE;
@@ -565,9 +562,9 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         }
         List list = this.models;
         ArrayList arrayList = new ArrayList();
-        for (Object obj2 : list) {
-            if (obj2 instanceof MainControlModel) {
-                arrayList.add(obj2);
+        for (Object obj : list) {
+            if (obj instanceof MainControlModel) {
+                arrayList.add(obj);
             }
         }
         ArrayList arrayList2 = new ArrayList();
@@ -575,46 +572,46 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         int i = 0;
         int i2 = 0;
         while (i2 < size) {
-            Object obj3 = arrayList.get(i2);
+            Object obj2 = arrayList.get(i2);
             i2++;
-            MainControlModel mainControlModel = (MainControlModel) obj3;
+            MainControlModel mainControlModel = (MainControlModel) obj2;
             if (mainControlModel.getType() == MainModel.Type.CONTROL || mainControlModel.getType() == MainModel.Type.SMALL_CONTROL) {
-                arrayList2.add(obj3);
+                arrayList2.add(obj2);
             }
         }
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         int size2 = arrayList2.size();
         while (i < size2) {
-            Object obj4 = arrayList2.get(i);
+            Object obj3 = arrayList2.get(i);
             i++;
-            String str = ((MainControlModel) obj4).structure;
-            Object obj5 = linkedHashMap.get(str);
-            if (obj5 == null) {
-                obj5 = new ArrayList();
-                linkedHashMap.put(str, obj5);
+            String str = ((MainControlModel) obj3).structure;
+            Object arrayList3 = linkedHashMap.get(str);
+            if (arrayList3 == null) {
+                arrayList3 = new ArrayList();
+                linkedHashMap.put(str, arrayList3);
             }
-            ((List) obj5).add(obj4);
+            ((List) arrayList3).add(obj3);
         }
-        ArrayList arrayList3 = new ArrayList();
+        ArrayList arrayList4 = new ArrayList();
         for (Map.Entry entry : linkedHashMap.entrySet()) {
             String str2 = (String) entry.getKey();
             List list2 = (List) entry.getValue();
-            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+            ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
             Iterator it2 = list2.iterator();
             while (it2.hasNext()) {
                 ControlWithState controlWithState = ((MainControlModel) it2.next()).controlWithState;
                 controlWithState.getClass();
-                arrayList4.add(controlWithState.ci);
+                arrayList5.add(controlWithState.ci);
             }
-            StructureInfo structureInfo2 = new StructureInfo(componentName, str2, new ArrayList(arrayList4), false, 8, null);
+            StructureInfo structureInfo2 = new StructureInfo(componentName, str2, new ArrayList(arrayList5), false, 8, null);
             structureInfo2.active = true;
-            arrayList3.add(structureInfo2);
+            arrayList4.add(structureInfo2);
         }
-        return arrayList3;
+        return arrayList4;
     }
 
     public final void hide(ViewGroup viewGroup) {
-        Boolean bool;
+        Boolean boolValueOf;
         if (!Intrinsics.areEqual(viewGroup, this.parent)) {
             Log.d("SecControlsUiControllerImpl", "hide parent is diff");
             return;
@@ -641,11 +638,11 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
         Context context = controlActionCoordinatorImpl.activityContext;
         Activity activity = context instanceof Activity ? (Activity) context : null;
         if (activity != null) {
-            bool = Boolean.valueOf(activity.isFinishing() || activity.isDestroyed());
+            boolValueOf = Boolean.valueOf(activity.isFinishing() || activity.isDestroyed());
         } else {
-            bool = null;
+            boolValueOf = null;
         }
-        if (Intrinsics.areEqual(bool, Boolean.TRUE)) {
+        if (Intrinsics.areEqual(boolValueOf, Boolean.TRUE)) {
             controlActionCoordinatorImpl.dialog = null;
         } else {
             DetailDialog detailDialog = controlActionCoordinatorImpl.dialog;
@@ -740,7 +737,7 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
     public final void notifyItemChanged(final int i, final MainControlModel mainControlModel) {
         ToggleRangeBehavior.Companion.getClass();
         if (ToggleRangeBehavior.inProgress) {
-            this.uiExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$notifyItemChanged$1
+            this.uiExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl.notifyItemChanged.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     SecControlsUiControllerImpl secControlsUiControllerImpl = SecControlsUiControllerImpl.this;
@@ -889,13 +886,13 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                     Object obj7 = arrayList6.get(i5);
                     i5 += i;
                     StructureInfo structureInfo = (StructureInfo) obj7;
-                    String obj8 = structureInfo.structure.toString();
+                    String string = structureInfo.structure.toString();
                     List list7 = componentInfo.structureInfos;
                     List list8 = list5;
                     StructureInfo structureInfo2 = (StructureInfo) (list7.size() == i ? list7.get(0) : null);
-                    arrayList5.add(new MainControlModel(obj8, null, structureInfo2 != null ? TextUtils.isEmpty(structureInfo2.structure) : false));
+                    arrayList5.add(new MainControlModel(string, null, structureInfo2 != null ? TextUtils.isEmpty(structureInfo2.structure) : false));
                     for (Iterator it2 = structureInfo.controls.iterator(); it2.hasNext(); it2 = it2) {
-                        arrayList5.add(new MainControlModel(obj8, new ControlWithState(structureInfo.componentName, (ControlInfo) it2.next(), null), false, 4, null));
+                        arrayList5.add(new MainControlModel(string, new ControlWithState(structureInfo.componentName, (ControlInfo) it2.next(), null), false, 4, null));
                         i = i;
                     }
                     list5 = list8;
@@ -906,10 +903,10 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                 int size5 = arrayList8.size();
                 int i7 = 0;
                 while (i7 < size5) {
-                    Object obj9 = arrayList8.get(i7);
+                    Object obj8 = arrayList8.get(i7);
                     i7++;
-                    if (obj9 instanceof MainControlModel) {
-                        arrayList7.add(obj9);
+                    if (obj8 instanceof MainControlModel) {
+                        arrayList7.add(obj8);
                     }
                 }
                 Log.d("SecControlsUiControllerImpl", "updateModels forcedUpdate = " + z + ", " + arrayList7 + " > " + arrayList5);
@@ -917,9 +914,9 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                 int size6 = arrayList7.size();
                 int i8 = 0;
                 while (i8 < size6) {
-                    Object obj10 = arrayList7.get(i8);
+                    Object obj9 = arrayList7.get(i8);
                     i8++;
-                    ControlWithState controlWithState = ((MainControlModel) obj10).controlWithState;
+                    ControlWithState controlWithState = ((MainControlModel) obj9).controlWithState;
                     String str = (controlWithState == null || (controlInfo2 = controlWithState.ci) == null) ? null : controlInfo2.controlId;
                     if (str != null) {
                         arrayList9.add(str);
@@ -929,9 +926,9 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                 int size7 = arrayList5.size();
                 int i9 = 0;
                 while (i9 < size7) {
-                    Object obj11 = arrayList5.get(i9);
+                    Object obj10 = arrayList5.get(i9);
                     i9++;
-                    ControlWithState controlWithState2 = ((MainControlModel) obj11).controlWithState;
+                    ControlWithState controlWithState2 = ((MainControlModel) obj10).controlWithState;
                     String str2 = (controlWithState2 == null || (controlInfo = controlWithState2.ci) == null) ? null : controlInfo.controlId;
                     if (str2 != null) {
                         arrayList10.add(str2);
@@ -941,13 +938,13 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                     arrayList8.clear();
                     this.panelPendingIntent = null;
                     arrayList8.add(mainComponentModel);
-                    ControlsServiceInfo isPanelComponent = isPanelComponent(componentInfo);
-                    if ((isPanelComponent != null ? isPanelComponent.panelActivity : null) != null) {
-                        boolean booleanValue = ((Boolean) ((ControlsSettingsRepositoryImpl) this.controlsSettingsRepository).allowActionOnTrivialControlsInLockscreen.$$delegate_0.getValue()).booleanValue();
+                    ControlsServiceInfo controlsServiceInfoIsPanelComponent = isPanelComponent(componentInfo);
+                    if ((controlsServiceInfoIsPanelComponent != null ? controlsServiceInfoIsPanelComponent.panelActivity : null) != null) {
+                        boolean zBooleanValue = ((Boolean) ((ControlsSettingsRepositoryImpl) this.controlsSettingsRepository).allowActionOnTrivialControlsInLockscreen.$$delegate_0.getValue()).booleanValue();
                         Context context = this.context;
                         Intent intent = new Intent();
-                        intent.setComponent(isPanelComponent.panelActivity);
-                        intent.putExtra("android.service.controls.extra.LOCKSCREEN_ALLOW_TRIVIAL_CONTROLS", booleanValue);
+                        intent.setComponent(controlsServiceInfoIsPanelComponent.panelActivity);
+                        intent.putExtra("android.service.controls.extra.LOCKSCREEN_ALLOW_TRIVIAL_CONTROLS", zBooleanValue);
                         intent.putExtra("android.service.controls.extra.CONTROLS_SURFACE", 0);
                         Unit unit = Unit.INSTANCE;
                         PendingIntent activityAsUser = PendingIntent.getActivityAsUser(context, 0, intent, 201326592, ActivityOptions.makeBasic().setPendingIntentCreatorBackgroundActivityStartMode(i6).toBundle(), ((UserTrackerImpl) this.userTracker).getUserHandle());
@@ -981,9 +978,9 @@ public final class SecControlsUiControllerImpl implements ControlsUiController, 
                     structureInfo3.active = true;
                     Unit unit2 = Unit.INSTANCE;
                     ((ControlsControllerImpl) secControlsController).subscribeToFavorites(new ComponentInfo(componentName2, CollectionsKt__CollectionsKt.mutableListOf(structureInfo3)));
-                    ControlsProviderLifecycleManager retrieveLifecycleManager = ((ControlsBindingControllerImpl) ((ControlsControllerImpl) ((ControlsController) this.controlsController.get())).bindingController).retrieveLifecycleManager(selectedItem.getComponentName());
-                    retrieveLifecycleManager.getClass();
-                    retrieveLifecycleManager.executor.execute(new ControlsProviderLifecycleManager$bindService$1(retrieveLifecycleManager, true, true));
+                    ControlsProviderLifecycleManager controlsProviderLifecycleManagerRetrieveLifecycleManager = ((ControlsBindingControllerImpl) ((ControlsControllerImpl) ((ControlsController) this.controlsController.get())).bindingController).retrieveLifecycleManager(selectedItem.getComponentName());
+                    controlsProviderLifecycleManagerRetrieveLifecycleManager.getClass();
+                    controlsProviderLifecycleManagerRetrieveLifecycleManager.executor.execute(new ControlsProviderLifecycleManager$bindService$1(controlsProviderLifecycleManagerRetrieveLifecycleManager, true, true));
                     this.selectedItem = new SelectedItem.PanelItem(selectedItem.getName(), componentInfo.componentName);
                 }
                 Log.d("SecControlsUiControllerImpl", "update selectedItem = " + this.selectedItem);

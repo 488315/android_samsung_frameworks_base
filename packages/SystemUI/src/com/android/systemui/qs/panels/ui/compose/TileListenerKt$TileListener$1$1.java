@@ -1,15 +1,20 @@
 package com.android.systemui.qs.panels.ui.compose;
 
+import androidx.compose.runtime.SnapshotStateKt;
 import com.android.systemui.qs.panels.ui.viewmodel.TileViewModel;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TileListenerKt$TileListener$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $listeningEnabled;
@@ -34,88 +39,85 @@ final class TileListenerKt$TileListener$1$1 extends SuspendLambda implements Fun
         return ((TileListenerKt$TileListener$1$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0071 A[LOOP:1: B:18:0x006b->B:20:0x0071, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x004e A[LOOP:0: B:18:0x0048->B:20:0x004e, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0071 A[LOOP:1: B:27:0x006b->B:29:0x0071, LOOP_END] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-        /*
-            r7 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r7.label
-            r2 = 0
-            r3 = 1
-            if (r1 == 0) goto L1a
-            if (r1 != r3) goto L12
-            java.lang.Object r0 = r7.L$0
-            kotlin.ResultKt.throwOnFailure(r8)     // Catch: java.lang.Throwable -> L10
-            goto L40
-        L10:
-            r8 = move-exception
-            goto L63
-        L12:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L1a:
-            kotlin.ResultKt.throwOnFailure(r8)
-            java.lang.Object r8 = new java.lang.Object
-            r8.<init>()
-            kotlin.jvm.functions.Function0 r1 = r7.$listeningEnabled     // Catch: java.lang.Throwable -> L61
-            com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1$$ExternalSyntheticLambda0 r4 = new com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1$$ExternalSyntheticLambda0     // Catch: java.lang.Throwable -> L61
-            r4.<init>()     // Catch: java.lang.Throwable -> L61
-            kotlinx.coroutines.flow.SafeFlow r1 = androidx.compose.runtime.SnapshotStateKt.snapshotFlow(r4)     // Catch: java.lang.Throwable -> L61
-            com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1$2 r4 = new com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1$2     // Catch: java.lang.Throwable -> L61
-            java.util.List<com.android.systemui.qs.panels.ui.viewmodel.TileViewModel> r5 = r7.$tiles     // Catch: java.lang.Throwable -> L61
-            r4.<init>()     // Catch: java.lang.Throwable -> L61
-            r7.L$0 = r8     // Catch: java.lang.Throwable -> L61
-            r7.label = r3     // Catch: java.lang.Throwable -> L61
-            java.lang.Object r1 = r1.collect(r4, r7)     // Catch: java.lang.Throwable -> L61
-            if (r1 != r0) goto L3f
-            return r0
-        L3f:
-            r0 = r8
-        L40:
-            java.util.List<com.android.systemui.qs.panels.ui.viewmodel.TileViewModel> r7 = r7.$tiles
-            java.lang.Iterable r7 = (java.lang.Iterable) r7
-            java.util.Iterator r7 = r7.iterator()
-        L48:
-            boolean r8 = r7.hasNext()
-            if (r8 == 0) goto L5a
-            java.lang.Object r8 = r7.next()
-            com.android.systemui.qs.panels.ui.viewmodel.TileViewModel r8 = (com.android.systemui.qs.panels.ui.viewmodel.TileViewModel) r8
-            com.android.systemui.plugins.qs.QSTile r8 = r8.tile
-            r8.setListening(r0, r2)
-            goto L48
-        L5a:
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        L5d:
-            r6 = r0
-            r0 = r8
-            r8 = r6
-            goto L63
-        L61:
-            r0 = move-exception
-            goto L5d
-        L63:
-            java.util.List<com.android.systemui.qs.panels.ui.viewmodel.TileViewModel> r7 = r7.$tiles
-            java.lang.Iterable r7 = (java.lang.Iterable) r7
-            java.util.Iterator r7 = r7.iterator()
-        L6b:
-            boolean r1 = r7.hasNext()
-            if (r1 == 0) goto L7d
-            java.lang.Object r1 = r7.next()
-            com.android.systemui.qs.panels.ui.viewmodel.TileViewModel r1 = (com.android.systemui.qs.panels.ui.viewmodel.TileViewModel) r1
-            com.android.systemui.plugins.qs.QSTile r1 = r1.tile
-            r1.setListening(r0, r2)
-            goto L6b
-        L7d:
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        Object obj2;
+        Throwable th;
+        Iterator<T> it;
+        Iterator<T> it2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i != 0) {
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            obj2 = this.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+                it2 = this.$tiles.iterator();
+                while (it2.hasNext()) {
+                    ((TileViewModel) it2.next()).tile.setListening(obj2, false);
+                }
+                return Unit.INSTANCE;
+            } catch (Throwable th2) {
+                th = th2;
+                it = this.$tiles.iterator();
+                while (it.hasNext()) {
+                    ((TileViewModel) it.next()).tile.setListening(obj2, false);
+                }
+                throw th;
+            }
+        }
+        ResultKt.throwOnFailure(obj);
+        final Object obj3 = new Object();
+        try {
+            final Function0 function0 = this.$listeningEnabled;
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1$$ExternalSyntheticLambda0
+                @Override // kotlin.jvm.functions.Function0
+                public final Object invoke() {
+                    Boolean bool = (Boolean) function0.invoke();
+                    bool.booleanValue();
+                    return bool;
+                }
+            });
+            final List<TileViewModel> list = this.$tiles;
+            FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.panels.ui.compose.TileListenerKt$TileListener$1$1.2
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj4, Continuation continuation) {
+                    boolean zBooleanValue = ((Boolean) obj4).booleanValue();
+                    for (TileViewModel tileViewModel : list) {
+                        Object obj5 = obj3;
+                        if (zBooleanValue) {
+                            tileViewModel.tile.setListening(obj5, true);
+                        } else {
+                            tileViewModel.tile.setListening(obj5, false);
+                        }
+                    }
+                    return Unit.INSTANCE;
+                }
+            };
+            this.L$0 = obj3;
+            this.label = 1;
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            obj2 = obj3;
+            it2 = this.$tiles.iterator();
+            while (it2.hasNext()) {
+            }
+            return Unit.INSTANCE;
+        } catch (Throwable th3) {
+            obj2 = obj3;
+            th = th3;
+            it = this.$tiles.iterator();
+            while (it.hasNext()) {
+            }
+            throw th;
+        }
     }
 }

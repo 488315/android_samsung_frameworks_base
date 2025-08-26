@@ -78,9 +78,9 @@ public interface IRestoreSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRestoreSession)) {
-                return (IRestoreSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRestoreSession)) {
+                return (IRestoreSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,37 +119,37 @@ public interface IRestoreSession extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRestoreObserver asInterface = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
-                IBackupManagerMonitor asInterface2 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                IRestoreObserver iRestoreObserverAsInterface = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                IBackupManagerMonitor iBackupManagerMonitorAsInterface = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int availableRestoreSets = getAvailableRestoreSets(asInterface, asInterface2);
+                int availableRestoreSets = getAvailableRestoreSets(iRestoreObserverAsInterface, iBackupManagerMonitorAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(availableRestoreSets);
             } else if (i == 2) {
-                long readLong = parcel.readLong();
-                IRestoreObserver asInterface3 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
-                IBackupManagerMonitor asInterface4 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                long j = parcel.readLong();
+                IRestoreObserver iRestoreObserverAsInterface2 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                IBackupManagerMonitor iBackupManagerMonitorAsInterface2 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int restoreAll = restoreAll(readLong, asInterface3, asInterface4);
+                int iRestoreAll = restoreAll(j, iRestoreObserverAsInterface2, iBackupManagerMonitorAsInterface2);
                 parcel2.writeNoException();
-                parcel2.writeInt(restoreAll);
+                parcel2.writeInt(iRestoreAll);
             } else if (i == 3) {
-                long readLong2 = parcel.readLong();
-                IRestoreObserver asInterface5 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
-                String[] createStringArray = parcel.createStringArray();
-                IBackupManagerMonitor asInterface6 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                long j2 = parcel.readLong();
+                IRestoreObserver iRestoreObserverAsInterface3 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                IBackupManagerMonitor iBackupManagerMonitorAsInterface3 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int restorePackages = restorePackages(readLong2, asInterface5, createStringArray, asInterface6);
+                int iRestorePackages = restorePackages(j2, iRestoreObserverAsInterface3, strArrCreateStringArray, iBackupManagerMonitorAsInterface3);
                 parcel2.writeNoException();
-                parcel2.writeInt(restorePackages);
+                parcel2.writeInt(iRestorePackages);
             } else if (i == 4) {
-                String readString = parcel.readString();
-                IRestoreObserver asInterface7 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
-                IBackupManagerMonitor asInterface8 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IRestoreObserver iRestoreObserverAsInterface4 = IRestoreObserver.Stub.asInterface(parcel.readStrongBinder());
+                IBackupManagerMonitor iBackupManagerMonitorAsInterface4 = IBackupManagerMonitor.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int restorePackage = restorePackage(readString, asInterface7, asInterface8);
+                int iRestorePackage = restorePackage(string, iRestoreObserverAsInterface4, iBackupManagerMonitorAsInterface4);
                 parcel2.writeNoException();
-                parcel2.writeInt(restorePackage);
+                parcel2.writeInt(iRestorePackage);
             } else if (i == 5) {
                 endRestoreSession();
                 parcel2.writeNoException();
@@ -177,87 +177,87 @@ public interface IRestoreSession extends IInterface {
 
             @Override // android.app.backup.IRestoreSession
             public int getAvailableRestoreSets(IRestoreObserver iRestoreObserver, IBackupManagerMonitor iBackupManagerMonitor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRestoreObserver);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRestoreObserver);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreSession
             public int restoreAll(long j, IRestoreObserver iRestoreObserver, IBackupManagerMonitor iBackupManagerMonitor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iRestoreObserver);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iRestoreObserver);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreSession
             public int restorePackages(long j, IRestoreObserver iRestoreObserver, String[] strArr, IBackupManagerMonitor iBackupManagerMonitor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iRestoreObserver);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iRestoreObserver);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreSession
             public int restorePackage(String str, IRestoreObserver iRestoreObserver, IBackupManagerMonitor iBackupManagerMonitor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iRestoreObserver);
-                    obtain.writeStrongInterface(iBackupManagerMonitor);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iRestoreObserver);
+                    parcelObtain.writeStrongInterface(iBackupManagerMonitor);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreSession
             public void endRestoreSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

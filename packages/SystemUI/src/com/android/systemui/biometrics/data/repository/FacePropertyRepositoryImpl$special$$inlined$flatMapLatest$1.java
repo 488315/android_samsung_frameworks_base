@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ConfigurationRepository $configurationRepository$inlined;
@@ -42,22 +41,22 @@ public final class FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1 e
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             if (((FaceSensorInfo) this.L$1) == null) {
-                combine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+                flowCombine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
             } else {
                 FacePropertyRepositoryImpl facePropertyRepositoryImpl = this.this$0;
                 ReadonlyStateFlow readonlyStateFlow = facePropertyRepositoryImpl.defaultSensorLocation;
                 DisplayStateRepositoryImpl displayStateRepositoryImpl = (DisplayStateRepositoryImpl) this.$displayStateRepository$inlined;
-                combine = FlowKt.combine(readonlyStateFlow, displayStateRepositoryImpl.currentRotation, displayStateRepositoryImpl.currentDisplaySize, ((ConfigurationRepositoryImpl) this.$configurationRepository$inlined).scaleForResolution, new FacePropertyRepositoryImpl$sensorLocation$1$1(facePropertyRepositoryImpl, null));
+                flowCombine = FlowKt.combine(readonlyStateFlow, displayStateRepositoryImpl.currentRotation, displayStateRepositoryImpl.currentDisplaySize, ((ConfigurationRepositoryImpl) this.$configurationRepository$inlined).scaleForResolution, new FacePropertyRepositoryImpl$sensorLocation$1$1(facePropertyRepositoryImpl, null));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

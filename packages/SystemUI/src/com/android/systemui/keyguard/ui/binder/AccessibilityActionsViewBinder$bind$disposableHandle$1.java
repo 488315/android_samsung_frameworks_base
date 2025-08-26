@@ -24,7 +24,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ View $view;
@@ -32,7 +31,6 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.AccessibilityActionsViewBinder$bind$disposableHandle$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ View $view;
@@ -40,15 +38,14 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AccessibilityActionsViewBinder$bind$disposableHandle$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01201 extends SuspendLambda implements Function2 {
+        final class C02261 extends SuspendLambda implements Function2 {
             final /* synthetic */ View $view;
             final /* synthetic */ AccessibilityActionsViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01201(AccessibilityActionsViewModel accessibilityActionsViewModel, View view, Continuation continuation) {
+            public C02261(AccessibilityActionsViewModel accessibilityActionsViewModel, View view, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = accessibilityActionsViewModel;
                 this.$view = view;
@@ -56,12 +53,12 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01201(this.$viewModel, this.$view, continuation);
+                return new C02261(this.$viewModel, this.$view, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01201) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02261) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -93,7 +90,6 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AccessibilityActionsViewBinder$bind$disposableHandle$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ View $view;
@@ -129,7 +125,7 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.AccessibilityActionsViewBinder.bind.disposableHandle.1.1.2.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            final boolean booleanValue = ((Boolean) obj2).booleanValue();
+                            final boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                             View view2 = view;
                             final View view3 = view;
                             final AccessibilityActionsViewModel accessibilityActionsViewModel2 = accessibilityActionsViewModel;
@@ -137,7 +133,7 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
                                 @Override // android.view.View.AccessibilityDelegate
                                 public final void onInitializeAccessibilityNodeInfo(View view4, AccessibilityNodeInfo accessibilityNodeInfo) {
                                     super.onInitializeAccessibilityNodeInfo(view4, accessibilityNodeInfo);
-                                    if (booleanValue) {
+                                    if (zBooleanValue) {
                                         accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.accessibility_action_open_communal_hub, view3.getResources().getString(R.string.accessibility_action_open_communal_hub)));
                                     }
                                 }
@@ -201,7 +197,7 @@ final class AccessibilityActionsViewBinder$bind$disposableHandle$1 extends Suspe
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             View view = this.$view;
             view.setContentDescription(view.getResources().getString(R.string.accessibility_desc_lock_screen));
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01201(this.$viewModel, this.$view, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02261(this.$viewModel, this.$view, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$viewModel, this.$view, null), 7);
             return Unit.INSTANCE;
         }

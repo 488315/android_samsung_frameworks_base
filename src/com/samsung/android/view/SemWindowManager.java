@@ -1,5 +1,6 @@
 package com.samsung.android.view;
 
+import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.devicestate.DeviceStateManagerGlobal;
+import android.hardware.devicestate.DeviceStateRequest;
+import android.hardware.display.IDisplayManager;
+import android.os.Binder;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -15,7 +20,10 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.DisplayUtils;
 import android.util.Log;
+import android.view.Display;
+import android.view.DisplayInfo;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import com.samsung.android.rune.CoreRune;
@@ -87,6 +95,7 @@ public class SemWindowManager {
     private static SemWindowManager sInstance;
     private final IWindowManager mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
     private final WindowManagerGlobal mGlobal = WindowManagerGlobal.getInstance();
+    private final IDisplayManager mDisplayManager = IDisplayManager.Stub.asInterface(ServiceManager.getService(Context.DISPLAY_SERVICE));
     private final DeviceStateManagerGlobal mDeviceStateManagerGlobal = DeviceStateManagerGlobal.getInstance();
 
     @Deprecated
@@ -114,14 +123,10 @@ public class SemWindowManager {
     }
 
     public static synchronized SemWindowManager getInstance() {
-        SemWindowManager semWindowManager;
-        synchronized (SemWindowManager.class) {
-            if (sInstance == null) {
-                sInstance = new SemWindowManager();
-            }
-            semWindowManager = sInstance;
+        if (sInstance == null) {
+            sInstance = new SemWindowManager();
         }
-        return semWindowManager;
+        return sInstance;
     }
 
     @Deprecated(forRemoval = true, since = "16.0")
@@ -171,6 +176,12 @@ public class SemWindowManager {
     public void getInitialDisplaySize(Point point) {
         try {
             this.mWindowManager.getInitialDisplaySize(0, point);
+            DisplayInfo displayInfo = this.mDisplayManager.getDisplayInfo(0);
+            if (displayInfo != null) {
+                Display.Mode maximumResolutionDisplayMode = DisplayUtils.getMaximumResolutionDisplayMode(displayInfo.supportedModes);
+                point.x = maximumResolutionDisplayMode == null ? point.x : maximumResolutionDisplayMode.getPhysicalWidth();
+                point.y = maximumResolutionDisplayMode == null ? point.y : maximumResolutionDisplayMode.getPhysicalHeight();
+            }
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to getInitialDisplaySize", e);
         }
@@ -257,87 +268,45 @@ public class SemWindowManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setForcedDefaultDisplayDevice(int r6) {
-        /*
-            r5 = this;
-            java.lang.String r0 = "SemWindowManager"
-            if (r6 < 0) goto L8f
-            r1 = 7
-            if (r6 <= r1) goto L9
-            goto L8f
-        L9:
-            int r2 = android.os.Binder.getCallingPid()
-            if (r6 != 0) goto L27
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r3 = "setForcedDefaultDisplayDevice main, callingPid="
-            r1.<init>(r3)
-            r1.append(r2)
-            java.lang.String r1 = r1.toString()
-            android.util.Log.d(r0, r1)
-            android.hardware.devicestate.DeviceStateManagerGlobal r1 = r5.mDeviceStateManagerGlobal
-            r1.cancelStateRequest()
-            goto L62
-        L27:
-            r3 = 5
-            if (r6 != r3) goto L34
-            r1 = 0
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = android.hardware.devicestate.DeviceStateRequest.newBuilder(r1)
-            android.hardware.devicestate.DeviceStateRequest r1 = r1.build()
-            goto L63
-        L34:
-            r4 = 6
-            if (r6 != r4) goto L40
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = android.hardware.devicestate.DeviceStateRequest.newBuilder(r3)
-            android.hardware.devicestate.DeviceStateRequest r1 = r1.build()
-            goto L63
-        L40:
-            r3 = 4
-            if (r6 != r3) goto L50
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = android.hardware.devicestate.DeviceStateRequest.newBuilder(r3)
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = r1.setFlags(r3)
-            android.hardware.devicestate.DeviceStateRequest r1 = r1.build()
-            goto L63
-        L50:
-            if (r6 != r1) goto L62
-            r1 = 1
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = android.hardware.devicestate.DeviceStateRequest.newBuilder(r1)
-            r3 = 8
-            android.hardware.devicestate.DeviceStateRequest$Builder r1 = r1.setFlags(r3)
-            android.hardware.devicestate.DeviceStateRequest r1 = r1.build()
-            goto L63
-        L62:
-            r1 = 0
-        L63:
-            if (r1 == 0) goto L8e
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r4 = "setForcedDefaultDisplayDevice "
-            r3.<init>(r4)
-            r3.append(r6)
-            java.lang.String r6 = ", callingPid="
-            r3.append(r6)
-            r3.append(r2)
-            java.lang.String r6 = r3.toString()
-            android.util.Log.d(r0, r6)
-            android.hardware.devicestate.DeviceStateManagerGlobal r6 = r5.mDeviceStateManagerGlobal
-            android.app.PendingIntent$$ExternalSyntheticLambda0 r0 = new android.app.PendingIntent$$ExternalSyntheticLambda0
-            r0.<init>()
-            com.samsung.android.view.SemWindowManager$1 r3 = new com.samsung.android.view.SemWindowManager$1
-            r3.<init>(r5)
-            r6.requestState(r1, r0, r3)
-        L8e:
-            return
-        L8f:
-            java.lang.String r5 = "displayDeviceType is wrong"
-            android.util.Log.e(r0, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.view.SemWindowManager.setForcedDefaultDisplayDevice(int):void");
+    public void setForcedDefaultDisplayDevice(int i) {
+        DeviceStateRequest deviceStateRequestBuild;
+        if (i < 0 || i > 7) {
+            Log.e(TAG, "displayDeviceType is wrong");
+            return;
+        }
+        final int callingPid = Binder.getCallingPid();
+        if (i != 0) {
+            if (i == 5) {
+                deviceStateRequestBuild = DeviceStateRequest.newBuilder(0).build();
+            } else if (i == 6) {
+                deviceStateRequestBuild = DeviceStateRequest.newBuilder(5).build();
+            } else if (i == 4) {
+                deviceStateRequestBuild = DeviceStateRequest.newBuilder(4).setFlags(4).build();
+            } else if (i == 7) {
+                deviceStateRequestBuild = DeviceStateRequest.newBuilder(1).setFlags(8).build();
+            }
+            if (deviceStateRequestBuild == null) {
+                Log.d(TAG, "setForcedDefaultDisplayDevice " + i + ", callingPid=" + callingPid);
+                this.mDeviceStateManagerGlobal.requestState(deviceStateRequestBuild, new PendingIntent$$ExternalSyntheticLambda0(), new DeviceStateRequest.Callback(this) { // from class: com.samsung.android.view.SemWindowManager.1
+                    @Override // android.hardware.devicestate.DeviceStateRequest.Callback
+                    public void onRequestCanceled(DeviceStateRequest deviceStateRequest) {
+                        Log.d(SemWindowManager.TAG, "onRequestCanceled,  pid=" + callingPid + " Callers=" + Debug.getCallers(5));
+                    }
+                });
+                return;
+            }
+            return;
+        }
+        Log.d(TAG, "setForcedDefaultDisplayDevice main, callingPid=" + callingPid);
+        this.mDeviceStateManagerGlobal.cancelStateRequest();
+        deviceStateRequestBuild = null;
+        if (deviceStateRequestBuild == null) {
+        }
     }
 
     public int getFullScreenAppsSupportMode() {
@@ -461,9 +430,9 @@ public class SemWindowManager {
 
     public Bitmap screenshot(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2, int i5, boolean z3) {
         try {
-            ScreenshotResult takeScreenshotToTargetWindow = this.mWindowManager.takeScreenshotToTargetWindow(i, i2, z, rect, i3, i4, z2, z3);
-            if (takeScreenshotToTargetWindow != null) {
-                return takeScreenshotToTargetWindow.getCapturedBitmap();
+            ScreenshotResult screenshotResultTakeScreenshotToTargetWindow = this.mWindowManager.takeScreenshotToTargetWindow(i, i2, z, rect, i3, i4, z2, z3);
+            if (screenshotResultTakeScreenshotToTargetWindow != null) {
+                return screenshotResultTakeScreenshotToTargetWindow.getCapturedBitmap();
             }
             return null;
         } catch (RemoteException e) {

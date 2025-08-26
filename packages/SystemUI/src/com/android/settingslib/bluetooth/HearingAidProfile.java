@@ -10,7 +10,6 @@ import android.util.Log;
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingAidProfile implements LocalBluetoothProfile {
     public final BluetoothAdapter mBluetoothAdapter;
@@ -20,7 +19,6 @@ public class HearingAidProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothHearingAid mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HearingAidServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ HearingAidServiceListener(HearingAidProfile hearingAidProfile, int i) {
             this();
@@ -32,15 +30,15 @@ public class HearingAidProfile implements LocalBluetoothProfile {
             HearingAidProfile.this.mService = bluetoothHearingAid;
             List<BluetoothDevice> connectedDevices = bluetoothHearingAid.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
-                BluetoothDevice remove = connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = HearingAidProfile.this.mDeviceManager.findDevice(remove);
-                if (findDevice == null) {
-                    Log.d("HearingAidProfile", "HearingAidProfile found new device: " + remove);
+                BluetoothDevice bluetoothDeviceRemove = connectedDevices.remove(0);
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = HearingAidProfile.this.mDeviceManager.findDevice(bluetoothDeviceRemove);
+                if (cachedBluetoothDeviceFindDevice == null) {
+                    Log.d("HearingAidProfile", "HearingAidProfile found new device: " + bluetoothDeviceRemove);
                     HearingAidProfile hearingAidProfile = HearingAidProfile.this;
-                    findDevice = hearingAidProfile.mDeviceManager.addDevice(hearingAidProfile.mProfileManager, remove);
+                    cachedBluetoothDeviceFindDevice = hearingAidProfile.mDeviceManager.addDevice(hearingAidProfile.mProfileManager, bluetoothDeviceRemove);
                 }
-                findDevice.onProfileStateChanged(HearingAidProfile.this, 2);
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.onProfileStateChanged(HearingAidProfile.this, 2);
+                cachedBluetoothDeviceFindDevice.refresh();
             }
             CachedBluetoothDeviceManager cachedBluetoothDeviceManager = HearingAidProfile.this.mDeviceManager;
             synchronized (cachedBluetoothDeviceManager) {

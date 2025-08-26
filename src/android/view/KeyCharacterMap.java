@@ -190,9 +190,9 @@ public class KeyCharacterMap implements Parcelable {
         if (parcel == null) {
             throw new IllegalArgumentException("parcel must not be null");
         }
-        long nativeReadFromParcel = nativeReadFromParcel(parcel);
-        this.mPtr = nativeReadFromParcel;
-        if (nativeReadFromParcel == 0) {
+        long jNativeReadFromParcel = nativeReadFromParcel(parcel);
+        this.mPtr = jNativeReadFromParcel;
+        if (jNativeReadFromParcel == 0) {
             throw new RuntimeException("Could not read KeyCharacterMap from parcel.");
         }
     }
@@ -223,9 +223,9 @@ public class KeyCharacterMap implements Parcelable {
     }
 
     public static KeyCharacterMap load(String str, String str2) {
-        KeyCharacterMap load = load(-1);
-        load.applyOverlay(str, str2);
-        return load;
+        KeyCharacterMap keyCharacterMapLoad = load(-1);
+        keyCharacterMapLoad.applyOverlay(str, str2);
+        return keyCharacterMapLoad;
     }
 
     private void applyOverlay(String str, String str2) {
@@ -233,27 +233,27 @@ public class KeyCharacterMap implements Parcelable {
     }
 
     public int getMappedKeyOrDefault(int i, int i2) {
-        int nativeGetMappedKey = nativeGetMappedKey(this.mPtr, i);
-        return nativeGetMappedKey == 0 ? i2 : nativeGetMappedKey;
+        int iNativeGetMappedKey = nativeGetMappedKey(this.mPtr, i);
+        return iNativeGetMappedKey == 0 ? i2 : iNativeGetMappedKey;
     }
 
     public int get(int i, int i2) {
-        char nativeGetCharacter = nativeGetCharacter(this.mPtr, i, KeyEvent.normalizeMetaState(i2));
-        int i3 = sCombiningToAccent.get(nativeGetCharacter);
-        return i3 != 0 ? Integer.MIN_VALUE | i3 : nativeGetCharacter;
+        char cNativeGetCharacter = nativeGetCharacter(this.mPtr, i, KeyEvent.normalizeMetaState(i2));
+        int i3 = sCombiningToAccent.get(cNativeGetCharacter);
+        return i3 != 0 ? Integer.MIN_VALUE | i3 : cNativeGetCharacter;
     }
 
     public FallbackAction getFallbackAction(int i, int i2) {
-        FallbackAction obtain = FallbackAction.obtain();
-        if (nativeGetFallbackAction(this.mPtr, i, KeyEvent.normalizeMetaState(i2), obtain)) {
+        FallbackAction fallbackActionObtain = FallbackAction.obtain();
+        if (nativeGetFallbackAction(this.mPtr, i, KeyEvent.normalizeMetaState(i2), fallbackActionObtain)) {
             if (Flags.removeFallbackModifiers()) {
-                obtain.metaState = 0;
-                return obtain;
+                fallbackActionObtain.metaState = 0;
+                return fallbackActionObtain;
             }
-            obtain.metaState = KeyEvent.normalizeMetaState(obtain.metaState);
-            return obtain;
+            fallbackActionObtain.metaState = KeyEvent.normalizeMetaState(fallbackActionObtain.metaState);
+            return fallbackActionObtain;
         }
-        obtain.recycle();
+        fallbackActionObtain.recycle();
         return null;
     }
 
@@ -294,10 +294,10 @@ public class KeyCharacterMap implements Parcelable {
                 sb.setLength(0);
                 sb.append((char) i2);
                 sb.append((char) i4);
-                String normalize = Normalizer.normalize(sb, Normalizer.Form.NFC);
-                int codePointAt = normalize.codePointCount(0, normalize.length()) == 1 ? normalize.codePointAt(0) : 0;
-                sparseIntArray.put(i5, codePointAt);
-                i3 = codePointAt;
+                String strNormalize = Normalizer.normalize(sb, Normalizer.Form.NFC);
+                int iCodePointAt = strNormalize.codePointCount(0, strNormalize.length()) == 1 ? strNormalize.codePointAt(0) : 0;
+                sparseIntArray.put(i5, iCodePointAt);
+                i3 = iCodePointAt;
             }
         }
         return i3;
@@ -312,11 +312,11 @@ public class KeyCharacterMap implements Parcelable {
         if (keyData.meta.length < 4) {
             throw new IndexOutOfBoundsException("results.meta.length must be >= 4");
         }
-        char nativeGetDisplayLabel = nativeGetDisplayLabel(this.mPtr, i);
-        if (nativeGetDisplayLabel == 0) {
+        char cNativeGetDisplayLabel = nativeGetDisplayLabel(this.mPtr, i);
+        if (cNativeGetDisplayLabel == 0) {
             return false;
         }
-        keyData.displayLabel = nativeGetDisplayLabel;
+        keyData.displayLabel = cNativeGetDisplayLabel;
         keyData.number = nativeGetNumber(this.mPtr, i);
         keyData.meta[0] = nativeGetCharacter(this.mPtr, i, 0);
         keyData.meta[1] = nativeGetCharacter(this.mPtr, i, 1);

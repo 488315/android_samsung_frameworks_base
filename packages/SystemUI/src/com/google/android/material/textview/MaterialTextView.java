@@ -12,61 +12,60 @@ import com.google.android.material.resources.MaterialAttributes;
 import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialTextView extends AppCompatTextView {
     public MaterialTextView(Context context) {
         this(context, null);
     }
 
-    public final void initialize(AttributeSet attributeSet, int i, int i2) {
+    public final void initialize(AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         Context context = getContext();
         if (MaterialAttributes.resolveBoolean(context, R.attr.textAppearanceLineHeightEnabled, true)) {
             Resources.Theme theme = context.getTheme();
             int[] iArr = R$styleable.MaterialTextView;
-            TypedArray obtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, iArr, i, i2);
+            TypedArray typedArrayObtainStyledAttributes = theme.obtainStyledAttributes(attributeSet, iArr, i, i2);
             int[] iArr2 = {1, 2};
-            int i3 = -1;
-            for (int i4 = 0; i4 < 2 && i3 < 0; i4++) {
-                i3 = MaterialResources.getDimensionPixelSize(context, obtainStyledAttributes, iArr2[i4], -1);
+            int dimensionPixelSize = -1;
+            for (int i3 = 0; i3 < 2 && dimensionPixelSize < 0; i3++) {
+                dimensionPixelSize = MaterialResources.getDimensionPixelSize(context, typedArrayObtainStyledAttributes, iArr2[i3], -1);
             }
-            obtainStyledAttributes.recycle();
-            if (i3 != -1) {
+            typedArrayObtainStyledAttributes.recycle();
+            if (dimensionPixelSize != -1) {
                 return;
             }
-            TypedArray obtainStyledAttributes2 = theme.obtainStyledAttributes(attributeSet, iArr, i, i2);
-            int resourceId = obtainStyledAttributes2.getResourceId(0, -1);
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = theme.obtainStyledAttributes(attributeSet, iArr, i, i2);
+            int resourceId = typedArrayObtainStyledAttributes2.getResourceId(0, -1);
+            typedArrayObtainStyledAttributes2.recycle();
             if (resourceId != -1) {
-                TypedArray obtainStyledAttributes3 = theme.obtainStyledAttributes(resourceId, R$styleable.MaterialTextAppearance);
+                TypedArray typedArrayObtainStyledAttributes3 = theme.obtainStyledAttributes(resourceId, R$styleable.MaterialTextAppearance);
                 Context context2 = getContext();
                 int[] iArr3 = {1, 2};
-                int i5 = -1;
-                for (int i6 = 0; i6 < 2 && i5 < 0; i6++) {
-                    i5 = MaterialResources.getDimensionPixelSize(context2, obtainStyledAttributes3, iArr3[i6], -1);
+                int dimensionPixelSize2 = -1;
+                for (int i4 = 0; i4 < 2 && dimensionPixelSize2 < 0; i4++) {
+                    dimensionPixelSize2 = MaterialResources.getDimensionPixelSize(context2, typedArrayObtainStyledAttributes3, iArr3[i4], -1);
                 }
-                obtainStyledAttributes3.recycle();
-                if (i5 >= 0) {
-                    TextViewCompat.setLineHeight(this, i5);
+                typedArrayObtainStyledAttributes3.recycle();
+                if (dimensionPixelSize2 >= 0) {
+                    TextViewCompat.setLineHeight(this, dimensionPixelSize2);
                 }
             }
         }
     }
 
     @Override // androidx.appcompat.widget.AppCompatTextView, android.widget.TextView
-    public final void setTextAppearance(Context context, int i) {
+    public final void setTextAppearance(Context context, int i) throws Resources.NotFoundException {
         super.setTextAppearance(context, i);
         if (MaterialAttributes.resolveBoolean(context, R.attr.textAppearanceLineHeightEnabled, true)) {
-            TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(i, R$styleable.MaterialTextAppearance);
+            TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(i, R$styleable.MaterialTextAppearance);
             Context context2 = getContext();
             int[] iArr = {1, 2};
-            int i2 = -1;
-            for (int i3 = 0; i3 < 2 && i2 < 0; i3++) {
-                i2 = MaterialResources.getDimensionPixelSize(context2, obtainStyledAttributes, iArr[i3], -1);
+            int dimensionPixelSize = -1;
+            for (int i2 = 0; i2 < 2 && dimensionPixelSize < 0; i2++) {
+                dimensionPixelSize = MaterialResources.getDimensionPixelSize(context2, typedArrayObtainStyledAttributes, iArr[i2], -1);
             }
-            obtainStyledAttributes.recycle();
-            if (i2 >= 0) {
-                TextViewCompat.setLineHeight(this, i2);
+            typedArrayObtainStyledAttributes.recycle();
+            if (dimensionPixelSize >= 0) {
+                TextViewCompat.setLineHeight(this, dimensionPixelSize);
             }
         }
     }
@@ -75,13 +74,13 @@ public class MaterialTextView extends AppCompatTextView {
         this(context, attributeSet, android.R.attr.textViewStyle);
     }
 
-    public MaterialTextView(Context context, AttributeSet attributeSet, int i) {
+    public MaterialTextView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, 0), attributeSet, i);
         initialize(attributeSet, i, 0);
     }
 
     @Deprecated
-    public MaterialTextView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public MaterialTextView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, i2), attributeSet, i);
         initialize(attributeSet, i, i2);
     }

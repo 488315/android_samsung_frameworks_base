@@ -42,7 +42,7 @@ public class GbaService extends Service {
         }
 
         @Override // android.os.Handler
-        public void handleMessage(Message message) {
+        public void handleMessage(Message message) throws RuntimeException {
             if (message.what != 1) {
                 return;
             }
@@ -54,7 +54,7 @@ public class GbaService extends Service {
         }
     }
 
-    public void onAuthenticationRequest(int i, int i2, int i3, Uri uri, byte[] bArr, boolean z) {
+    public void onAuthenticationRequest(int i, int i2, int i3, Uri uri, byte[] bArr, boolean z) throws RuntimeException {
         reportAuthenticationFailure(i2, 1);
     }
 

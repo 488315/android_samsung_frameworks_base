@@ -9,14 +9,12 @@ import android.os.Parcelable;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface INeuralTranslationService extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static Object m3312$$Nest$smreadTypedObject(Parcel parcel, Parcelable.Creator creator) {
+        public static Object m3330$$Nest$smreadTypedObject(Parcel parcel, Parcelable.Creator creator) {
             if (parcel.readInt() != 0) {
                 return creator.createFromParcel(parcel);
             }
@@ -24,7 +22,7 @@ public interface INeuralTranslationService extends IInterface {
         }
 
         /* renamed from: -$$Nest$smwriteTypedList, reason: not valid java name */
-        public static void m3313$$Nest$smwriteTypedList(Parcel parcel, List list) {
+        public static void m3331$$Nest$smwriteTypedList(Parcel parcel, List list) {
             if (list == null) {
                 parcel.writeInt(-1);
                 return;
@@ -75,11 +73,9 @@ public interface INeuralTranslationService extends IInterface {
 
     void translate();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements INeuralTranslationService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements INeuralTranslationService {
             public final IBinder mRemote;
 
@@ -94,47 +90,47 @@ public interface INeuralTranslationService extends IInterface {
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService
             public final Map getLanguageDirectionStateMap() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService
             public final String identifyLanguage(Bundle bundle) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
-                    obtain.writeInt(1);
-                    bundle.writeToParcel(obtain, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
+                    parcelObtain.writeInt(1);
+                    bundle.writeToParcel(parcelObtain, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService
             public final void refresh() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -158,15 +154,15 @@ public interface INeuralTranslationService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    final IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationCallback");
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof INeuralTranslationCallback$Stub$Proxy)) {
-                            new IInterface(readStrongBinder) { // from class: com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationCallback$Stub$Proxy
+                    final IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder != null) {
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationCallback");
+                        if (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof INeuralTranslationCallback$Stub$Proxy)) {
+                            new IInterface(strongBinder) { // from class: com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationCallback$Stub$Proxy
                                 public final IBinder mRemote;
 
                                 {
-                                    this.mRemote = readStrongBinder;
+                                    this.mRemote = strongBinder;
                                 }
 
                                 @Override // android.os.IInterface
@@ -199,14 +195,14 @@ public interface INeuralTranslationService extends IInterface {
                     parcel2.writeStringList(targetLanguageList);
                     return true;
                 case 7:
-                    boolean isAvailableDirection = isAvailableDirection();
+                    boolean zIsAvailableDirection = isAvailableDirection();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isAvailableDirection ? 1 : 0);
+                    parcel2.writeInt(zIsAvailableDirection ? 1 : 0);
                     return true;
                 case 8:
-                    String identifyLanguage = identifyLanguage((Bundle) _Parcel.m3312$$Nest$smreadTypedObject(parcel, Bundle.CREATOR));
+                    String strIdentifyLanguage = identifyLanguage((Bundle) _Parcel.m3330$$Nest$smreadTypedObject(parcel, Bundle.CREATOR));
                     parcel2.writeNoException();
-                    parcel2.writeString(identifyLanguage);
+                    parcel2.writeString(strIdentifyLanguage);
                     return true;
                 case 9:
                     Map languageDirectionStateMap = getLanguageDirectionStateMap();
@@ -221,27 +217,27 @@ public interface INeuralTranslationService extends IInterface {
                     parcel2.writeString(resourcePackPackageName);
                     return true;
                 case 11:
-                    List<String> identifyLanguageWithList = identifyLanguageWithList();
+                    List<String> listIdentifyLanguageWithList = identifyLanguageWithList();
                     parcel2.writeNoException();
-                    parcel2.writeStringList(identifyLanguageWithList);
+                    parcel2.writeStringList(listIdentifyLanguageWithList);
                     return true;
                 case 12:
-                    List identifyLanguageAndGetCandidate = identifyLanguageAndGetCandidate();
+                    List listIdentifyLanguageAndGetCandidate = identifyLanguageAndGetCandidate();
                     parcel2.writeNoException();
-                    _Parcel.m3313$$Nest$smwriteTypedList(parcel2, identifyLanguageAndGetCandidate);
+                    _Parcel.m3331$$Nest$smwriteTypedList(parcel2, listIdentifyLanguageAndGetCandidate);
                     return true;
                 case 13:
-                    String identifyLanguagePackCode = identifyLanguagePackCode();
+                    String strIdentifyLanguagePackCode = identifyLanguagePackCode();
                     parcel2.writeNoException();
-                    parcel2.writeString(identifyLanguagePackCode);
+                    parcel2.writeString(strIdentifyLanguagePackCode);
                     return true;
                 case 14:
                     parcel.readString();
                     parcel.readString();
                     parcel.readInt();
-                    List chunkText = chunkText();
+                    List listChunkText = chunkText();
                     parcel2.writeNoException();
-                    _Parcel.m3313$$Nest$smwriteTypedList(parcel2, chunkText);
+                    _Parcel.m3331$$Nest$smwriteTypedList(parcel2, listChunkText);
                     return true;
                 case 15:
                     parcel.readString();
@@ -251,9 +247,9 @@ public interface INeuralTranslationService extends IInterface {
                 case 16:
                     parcel.readString();
                     parcel.readString();
-                    boolean isTaggedTranslationSupported = isTaggedTranslationSupported();
+                    boolean zIsTaggedTranslationSupported = isTaggedTranslationSupported();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isTaggedTranslationSupported ? 1 : 0);
+                    parcel2.writeInt(zIsTaggedTranslationSupported ? 1 : 0);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

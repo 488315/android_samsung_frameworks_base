@@ -84,13 +84,8 @@ public final class CellSignalStrengthGsm extends CellSignalStrength implements P
     public void updateLevel(PersistableBundle persistableBundle, ServiceState serviceState) {
         int[] intArray;
         int i = 4;
-        if (persistableBundle == null) {
+        if (persistableBundle == null || (intArray = persistableBundle.getIntArray(CarrierConfigManager.KEY_GSM_RSSI_THRESHOLDS_INT_ARRAY)) == null || intArray.length != 4) {
             intArray = sRssiThresholds;
-        } else {
-            intArray = persistableBundle.getIntArray(CarrierConfigManager.KEY_GSM_RSSI_THRESHOLDS_INT_ARRAY);
-            if (intArray == null || intArray.length != 4) {
-                intArray = sRssiThresholds;
-            }
         }
         int i2 = this.mRssi;
         if (i2 < -113 || i2 > -51) {

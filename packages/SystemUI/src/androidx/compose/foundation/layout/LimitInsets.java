@@ -6,7 +6,6 @@ import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LimitInsets implements WindowInsets {
     public final WindowInsets insets;
@@ -85,13 +84,13 @@ final class LimitInsets implements WindowInsets {
     }
 
     public final int hashCode() {
-        int hashCode = this.insets.hashCode() * 31;
+        int iHashCode = this.insets.hashCode() * 31;
         WindowInsetsSides.Companion companion = WindowInsetsSides.Companion;
-        return Integer.hashCode(this.sides) + hashCode;
+        return Integer.hashCode(this.sides) + iHashCode;
     }
 
     public final String toString() {
-        return "(" + this.insets + " only " + ((Object) WindowInsetsSides.m149toStringimpl(this.sides)) + ')';
+        return "(" + this.insets + " only " + ((Object) WindowInsetsSides.m150toStringimpl(this.sides)) + ')';
     }
 
     private LimitInsets(WindowInsets windowInsets, int i) {

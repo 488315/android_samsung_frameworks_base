@@ -66,11 +66,11 @@ public class TrustAgentService extends Service {
                     return;
                 case 2:
                     ConfigurationData configurationData = (ConfigurationData) message.obj;
-                    boolean onConfigure = TrustAgentService.this.onConfigure(configurationData.options);
+                    boolean zOnConfigure = TrustAgentService.this.onConfigure(configurationData.options);
                     if (configurationData.token != null) {
                         try {
                             synchronized (TrustAgentService.this.mLock) {
-                                TrustAgentService.this.mCallback.onConfigureCompleted(onConfigure, configurationData.token);
+                                TrustAgentService.this.mCallback.onConfigureCompleted(zOnConfigure, configurationData.token);
                             }
                             return;
                         } catch (RemoteException unused) {
@@ -205,7 +205,7 @@ public class TrustAgentService extends Service {
             androidFuture.thenAccept(new Consumer() { // from class: android.service.trust.TrustAgentService$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    TrustAgentService.this.lambda$grantTrust$1(consumer, (GrantTrustResult) obj);
+                    this.f$0.lambda$grantTrust$1(consumer, (GrantTrustResult) obj);
                 }
             });
             ITrustAgentServiceCallback iTrustAgentServiceCallback = this.mCallback;
@@ -254,6 +254,10 @@ public class TrustAgentService extends Service {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0016 A[Catch: all -> 0x0018, DONT_GENERATE, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0007, B:8:0x000d, B:10:0x0011, B:11:0x0016), top: B:18:0x0003, inners: #0 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setManagingTrust(boolean z) {
         synchronized (this.mLock) {
             if (this.mManagingTrust != z) {
@@ -412,7 +416,11 @@ public class TrustAgentService extends Service {
             TrustAgentService.this.mHandler.obtainMessage(5).sendToTarget();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:11:0x0033 A[Catch: all -> 0x0044, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x0014, B:9:0x002b, B:11:0x0033, B:12:0x0042, B:8:0x0024), top: B:17:0x0007, inners: #1 }] */
         @Override // android.service.trust.ITrustAgentService
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public void setCallback(ITrustAgentServiceCallback iTrustAgentServiceCallback) {
             synchronized (TrustAgentService.this.mLock) {
                 TrustAgentService.this.mCallback = iTrustAgentServiceCallback;
@@ -422,37 +430,38 @@ public class TrustAgentService extends Service {
                     } catch (RemoteException unused) {
                         TrustAgentService.this.onError("calling setManagingTrust()");
                     }
-                }
-                if (TrustAgentService.this.mPendingGrantTrustTask != null) {
-                    TrustAgentService.this.mPendingGrantTrustTask.run();
-                    TrustAgentService.this.mPendingGrantTrustTask = null;
+                    if (TrustAgentService.this.mPendingGrantTrustTask != null) {
+                        TrustAgentService.this.mPendingGrantTrustTask.run();
+                        TrustAgentService.this.mPendingGrantTrustTask = null;
+                    }
+                } else if (TrustAgentService.this.mPendingGrantTrustTask != null) {
                 }
             }
         }
 
         @Override // android.service.trust.ITrustAgentService
         public void onEscrowTokenAdded(byte[] bArr, long j, UserHandle userHandle) {
-            Message obtainMessage = TrustAgentService.this.mHandler.obtainMessage(7);
-            obtainMessage.getData().putByteArray("token", bArr);
-            obtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
-            obtainMessage.getData().putParcelable("user_handle", userHandle);
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = TrustAgentService.this.mHandler.obtainMessage(7);
+            messageObtainMessage.getData().putByteArray("token", bArr);
+            messageObtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
+            messageObtainMessage.getData().putParcelable("user_handle", userHandle);
+            messageObtainMessage.sendToTarget();
         }
 
         @Override // android.service.trust.ITrustAgentService
         public void onTokenStateReceived(long j, int i) {
-            Message obtainMessage = TrustAgentService.this.mHandler.obtainMessage(8);
-            obtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
-            obtainMessage.getData().putInt(TrustAgentService.EXTRA_TOKEN_STATE, i);
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = TrustAgentService.this.mHandler.obtainMessage(8);
+            messageObtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
+            messageObtainMessage.getData().putInt(TrustAgentService.EXTRA_TOKEN_STATE, i);
+            messageObtainMessage.sendToTarget();
         }
 
         @Override // android.service.trust.ITrustAgentService
         public void onEscrowTokenRemoved(long j, boolean z) {
-            Message obtainMessage = TrustAgentService.this.mHandler.obtainMessage(9);
-            obtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
-            obtainMessage.getData().putBoolean(TrustAgentService.EXTRA_TOKEN_REMOVED_RESULT, z);
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = TrustAgentService.this.mHandler.obtainMessage(9);
+            messageObtainMessage.getData().putLong(TrustAgentService.EXTRA_TOKEN_HANDLE, j);
+            messageObtainMessage.getData().putBoolean(TrustAgentService.EXTRA_TOKEN_REMOVED_RESULT, z);
+            messageObtainMessage.sendToTarget();
         }
     }
 }

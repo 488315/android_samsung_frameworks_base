@@ -88,9 +88,9 @@ public interface IAmbientContextManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAmbientContextManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAmbientContextManager)) {
-                return (IAmbientContextManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAmbientContextManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAmbientContextManager)) {
+                return (IAmbientContextManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -137,28 +137,28 @@ public interface IAmbientContextManager extends IInterface {
                 parcel2.writeNoException();
             } else if (i == 2) {
                 AmbientContextEventRequest ambientContextEventRequest2 = (AmbientContextEventRequest) parcel.readTypedObject(AmbientContextEventRequest.CREATOR);
-                String readString = parcel.readString();
-                IAmbientContextObserver asInterface = IAmbientContextObserver.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IAmbientContextObserver iAmbientContextObserverAsInterface = IAmbientContextObserver.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerObserverWithCallback(ambientContextEventRequest2, readString, asInterface);
+                registerObserverWithCallback(ambientContextEventRequest2, string, iAmbientContextObserverAsInterface);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                unregisterObserver(readString2);
+                unregisterObserver(string2);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int[] createIntArray = parcel.createIntArray();
-                String readString3 = parcel.readString();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                String string3 = parcel.readString();
                 RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                queryServiceStatus(createIntArray, readString3, remoteCallback2);
+                queryServiceStatus(iArrCreateIntArray, string3, remoteCallback2);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                int[] createIntArray2 = parcel.createIntArray();
-                String readString4 = parcel.readString();
+                int[] iArrCreateIntArray2 = parcel.createIntArray();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                startConsentActivity(createIntArray2, readString4);
+                startConsentActivity(iArrCreateIntArray2, string4);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -184,83 +184,83 @@ public interface IAmbientContextManager extends IInterface {
 
             @Override // android.app.ambientcontext.IAmbientContextManager
             public void registerObserver(AmbientContextEventRequest ambientContextEventRequest, PendingIntent pendingIntent, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientContextEventRequest, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientContextEventRequest, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ambientcontext.IAmbientContextManager
             public void registerObserverWithCallback(AmbientContextEventRequest ambientContextEventRequest, String str, IAmbientContextObserver iAmbientContextObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientContextEventRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iAmbientContextObserver);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientContextEventRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iAmbientContextObserver);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ambientcontext.IAmbientContextManager
             public void unregisterObserver(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ambientcontext.IAmbientContextManager
             public void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ambientcontext.IAmbientContextManager
             public void startConsentActivity(int[] iArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAmbientContextManager.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

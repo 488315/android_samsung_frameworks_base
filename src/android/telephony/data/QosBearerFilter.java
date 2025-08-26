@@ -3,6 +3,7 @@ package android.telephony.data;
 import android.net.LinkAddress;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -194,7 +195,7 @@ public final class QosBearerFilter implements Parcelable {
         return false;
     }
 
-    private QosBearerFilter(Parcel parcel) {
+    private QosBearerFilter(Parcel parcel) throws ClassNotFoundException, IOException {
         ArrayList arrayList = new ArrayList();
         this.localAddresses = arrayList;
         parcel.readList(arrayList, LinkAddress.class.getClassLoader(), LinkAddress.class);

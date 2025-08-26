@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTileDataInteractor$dataFlow$3 extends SuspendLambda implements Function5 {
     final /* synthetic */ UserHandle $user;
@@ -36,9 +35,9 @@ final class CustomTileDataInteractor$dataFlow$3 extends SuspendLambda implements
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        int intValue = ((Number) obj2).intValue();
+        int iIntValue = ((Number) obj2).intValue();
         CustomTileDataInteractor$dataFlow$3 customTileDataInteractor$dataFlow$3 = new CustomTileDataInteractor$dataFlow$3(this.this$0, this.$user, (Continuation) obj5);
-        customTileDataInteractor$dataFlow$3.I$0 = intValue;
+        customTileDataInteractor$dataFlow$3.I$0 = iIntValue;
         customTileDataInteractor$dataFlow$3.L$0 = (Tile) obj3;
         customTileDataInteractor$dataFlow$3.L$1 = (CustomTileDefaults.Result) obj4;
         return customTileDataInteractor$dataFlow$3.invokeSuspend(Unit.INSTANCE);
@@ -61,7 +60,7 @@ final class CustomTileDataInteractor$dataFlow$3 extends SuspendLambda implements
             CustomTileDefaults.Result result = (CustomTileDefaults.Result) this.L$1;
             CustomTileDataInteractor customTileDataInteractor = this.this$0;
             componentName = customTileDataInteractor.tileSpec.componentName;
-            boolean hasPendingBind = customTileDataInteractor.serviceInteractor.getTileServiceManager().hasPendingBind();
+            boolean zHasPendingBind = customTileDataInteractor.serviceInteractor.getTileServiceManager().hasPendingBind();
             CharSequence charSequence2 = result.label;
             Icon icon2 = result.icon;
             CustomTileInteractor customTileInteractor = this.this$0.customTileInteractor;
@@ -70,16 +69,16 @@ final class CustomTileDataInteractor$dataFlow$3 extends SuspendLambda implements
             this.L$2 = charSequence2;
             this.L$3 = icon2;
             this.I$0 = i;
-            this.Z$0 = hasPendingBind;
+            this.Z$0 = zHasPendingBind;
             this.label = 1;
-            Object isTileToggleable = ((CustomTileRepositoryImpl) customTileInteractor.customTileRepository).isTileToggleable(this);
-            if (isTileToggleable == coroutineSingletons) {
+            Object objIsTileToggleable = ((CustomTileRepositoryImpl) customTileInteractor.customTileRepository).isTileToggleable(this);
+            if (objIsTileToggleable == coroutineSingletons) {
                 return coroutineSingletons;
             }
             icon = icon2;
-            obj = isTileToggleable;
+            obj = objIsTileToggleable;
             charSequence = charSequence2;
-            z = hasPendingBind;
+            z = zHasPendingBind;
         } else {
             if (i2 != 1) {
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");

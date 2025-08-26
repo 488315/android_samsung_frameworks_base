@@ -65,9 +65,9 @@ public interface IContainerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContainerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContainerService)) {
-                return (IContainerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContainerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContainerService)) {
+                return (IContainerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,15 +97,15 @@ public interface IContainerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
-                String readString4 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
+                boolean z = parcel.readBoolean();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String copyPackageToContainer = copyPackageToContainer(readString, readString2, readString3, readBoolean, readString4);
+                String strCopyPackageToContainer = copyPackageToContainer(string, string2, string3, z, string4);
                 parcel2.writeNoException();
-                parcel2.writeString(copyPackageToContainer);
+                parcel2.writeString(strCopyPackageToContainer);
             } else if (i == 2) {
                 doForceGC();
                 parcel2.writeNoException();
@@ -133,35 +133,35 @@ public interface IContainerService extends IInterface {
 
             @Override // com.samsung.android.core.pm.containerservice.IContainerService
             public String copyPackageToContainer(String str, String str2, String str3, boolean z, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.pm.containerservice.IContainerService
             public void doForceGC() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Function3 {
     final /* synthetic */ CoroutineScope $applicationScope;
@@ -42,7 +41,6 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ CoroutineScope $applicationScope;
@@ -54,16 +52,15 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01441 extends SuspendLambda implements Function2 {
+        final class C02521 extends SuspendLambda implements Function2 {
             final /* synthetic */ TouchHandlingView $touchHandlingView;
             final /* synthetic */ DeviceEntryIconView $view;
             final /* synthetic */ DeviceEntryIconViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01441(DeviceEntryIconViewModel deviceEntryIconViewModel, TouchHandlingView touchHandlingView, DeviceEntryIconView deviceEntryIconView, Continuation continuation) {
+            public C02521(DeviceEntryIconViewModel deviceEntryIconViewModel, TouchHandlingView touchHandlingView, DeviceEntryIconView deviceEntryIconView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = deviceEntryIconViewModel;
                 this.$touchHandlingView = touchHandlingView;
@@ -72,12 +69,12 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01441(this.$viewModel, this.$touchHandlingView, this.$view, continuation);
+                return new C02521(this.$viewModel, this.$touchHandlingView, this.$view, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01441) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02521) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -92,9 +89,9 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder.bind.3.1.1.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            boolean booleanValue = ((Boolean) obj2).booleanValue();
-                            TouchHandlingView.this.setVisibility(!booleanValue ? 4 : 0);
-                            deviceEntryIconView.setClickable(booleanValue);
+                            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                            touchHandlingView.setVisibility(!zBooleanValue ? 4 : 0);
+                            deviceEntryIconView.setClickable(zBooleanValue);
                             return Unit.INSTANCE;
                         }
                     };
@@ -112,7 +109,6 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ TouchHandlingView $touchHandlingView;
@@ -147,7 +143,7 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder.bind.3.1.2.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            TouchHandlingView.this.getInteractionHandler().isLongPressHandlingEnabled = ((Boolean) obj2).booleanValue();
+                            touchHandlingView.getInteractionHandler().isLongPressHandlingEnabled = ((Boolean) obj2).booleanValue();
                             return Unit.INSTANCE;
                         }
                     };
@@ -165,7 +161,6 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ TouchHandlingView $touchHandlingView;
@@ -204,9 +199,9 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             Function0 function0;
-                            boolean booleanValue = ((Boolean) obj2).booleanValue();
+                            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                             final DeviceEntryIconView deviceEntryIconView2 = deviceEntryIconView;
-                            if (booleanValue) {
+                            if (zBooleanValue) {
                                 final int i2 = 0;
                                 function0 = new Function0() { // from class: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$3$1$$ExternalSyntheticLambda0
                                     @Override // kotlin.jvm.functions.Function0
@@ -233,7 +228,7 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                                     }
                                 };
                             }
-                            TouchHandlingView.this.getInteractionHandler().longPressDuration = function0;
+                            touchHandlingView.getInteractionHandler().longPressDuration = function0;
                             return Unit.INSTANCE;
                         }
                     };
@@ -251,7 +246,6 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ CoroutineScope $applicationScope;
@@ -297,7 +291,7 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             DeviceEntryIconView.AccessibilityHintType accessibilityHintType = (DeviceEntryIconView.AccessibilityHintType) obj2;
-                            DeviceEntryIconView deviceEntryIconView2 = DeviceEntryIconView.this;
+                            DeviceEntryIconView deviceEntryIconView2 = deviceEntryIconView;
                             deviceEntryIconView2.accessibilityHintType = accessibilityHintType;
                             if (accessibilityHintType != DeviceEntryIconView.AccessibilityHintType.NONE) {
                                 deviceEntryIconView2.setOnClickListener(new View.OnClickListener(accessibilityHintType, mSDLPlayer, vibratorHelper, deviceEntryIconView2, coroutineScope, deviceEntryIconViewModel) { // from class: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder.bind.3.1.4.1.1
@@ -306,15 +300,14 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                                     public final /* synthetic */ DeviceEntryIconView $view;
                                     public final /* synthetic */ DeviceEntryIconViewModel $viewModel;
 
-                                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                                     /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$3$1$4$1$1$1, reason: invalid class name and collision with other inner class name */
-                                    final class C01501 extends SuspendLambda implements Function2 {
+                                    final class C02581 extends SuspendLambda implements Function2 {
                                         final /* synthetic */ DeviceEntryIconView $view;
                                         final /* synthetic */ DeviceEntryIconViewModel $viewModel;
                                         int label;
 
                                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                                        public C01501(DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, Continuation continuation) {
+                                        public C02581(DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, Continuation continuation) {
                                             super(2, continuation);
                                             this.$view = deviceEntryIconView;
                                             this.$viewModel = deviceEntryIconViewModel;
@@ -322,16 +315,16 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
 
                                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                                         public final Continuation create(Object obj, Continuation continuation) {
-                                            return new C01501(this.$view, this.$viewModel, continuation);
+                                            return new C02581(this.$view, this.$viewModel, continuation);
                                         }
 
                                         @Override // kotlin.jvm.functions.Function2
                                         public final Object invoke(Object obj, Object obj2) {
-                                            return ((C01501) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                                            return ((C02581) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                                         }
 
                                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-                                        public final Object invokeSuspend(Object obj) {
+                                        public final Object invokeSuspend(Object obj) throws Throwable {
                                             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
                                             int i = this.label;
                                             if (i == 0) {
@@ -343,12 +336,12 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                                                 ((StatusBarKeyguardViewManager) ((KeyguardViewController) deviceEntryIconViewModel.keyguardViewController.get())).showPrimaryBouncer("DeviceEntryIconViewModel#onUserInteraction", true);
                                                 SharedFlowImpl sharedFlowImpl = deviceEntryIconViewModel.deviceEntrySourceInteractor._attemptEnterDeviceFromDeviceEntryIcon;
                                                 Object obj2 = Unit.INSTANCE;
-                                                Object emit = sharedFlowImpl.emit(obj2, this);
-                                                if (emit != coroutineSingletons) {
-                                                    emit = obj2;
+                                                Object objEmit = sharedFlowImpl.emit(obj2, this);
+                                                if (objEmit != coroutineSingletons) {
+                                                    objEmit = obj2;
                                                 }
-                                                if (emit == coroutineSingletons) {
-                                                    obj2 = emit;
+                                                if (objEmit == coroutineSingletons) {
+                                                    obj2 = objEmit;
                                                 }
                                                 if (obj2 == coroutineSingletons) {
                                                     return coroutineSingletons;
@@ -364,10 +357,10 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                                     }
 
                                     {
-                                        this.$vibratorHelper = r3;
+                                        this.$vibratorHelper = vibratorHelper;
                                         this.$view = deviceEntryIconView2;
-                                        this.$applicationScope = r5;
-                                        this.$viewModel = r6;
+                                        this.$applicationScope = coroutineScope;
+                                        this.$viewModel = deviceEntryIconViewModel;
                                     }
 
                                     @Override // android.view.View.OnClickListener
@@ -376,7 +369,7 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
                                         DeviceEntryIconView deviceEntryIconView3 = this.$view;
                                         vibratorHelper2.getClass();
                                         deviceEntryIconView3.performHapticFeedback(16);
-                                        CoroutineTracingKt.launchTraced$default(this.$applicationScope, null, null, new C01501(this.$view, this.$viewModel, null), 7);
+                                        CoroutineTracingKt.launchTraced$default(this.$applicationScope, null, null, new C02581(this.$view, this.$viewModel, null), 7);
                                     }
                                 });
                             } else {
@@ -430,7 +423,7 @@ final class DeviceEntryIconViewBinder$bind$3 extends SuspendLambda implements Fu
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01441(this.$viewModel, this.$touchHandlingView, this.$view, null), 6);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02521(this.$viewModel, this.$touchHandlingView, this.$view, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$viewModel, this.$touchHandlingView, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$touchHandlingView, this.$view, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(this.$viewModel, this.$view, this.$msdlPlayer, this.$vibratorHelper, this.$applicationScope, null), 6);

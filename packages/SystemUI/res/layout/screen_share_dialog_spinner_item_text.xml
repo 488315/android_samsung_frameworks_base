@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <TextView android:textAppearance="?android:textAppearanceMedium" android:textColor="@color/menu_item_text" android:ellipsize="marquee" android:id="@android:id/text1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
-    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@android:color/profile_badge_1" android:ellipsize="marquee" android:id="@android:id/text2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@android:color/materialColorTextPrimaryInverse" android:ellipsize="marquee" android:id="@android:id/text2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
 </LinearLayout>

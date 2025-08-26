@@ -1,6 +1,13 @@
 package com.android.systemui.settings.brightness;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,12 +24,15 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.settings.brightness.ToggleSlider;
 import com.android.systemui.settings.brightness.ui.BrightnessWarningToast;
 import com.android.systemui.statusbar.VibratorHelper;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
+import com.android.systemui.statusbar.policy.SecBrightnessMirrorController;
+import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.util.time.SystemClock;
 import com.google.android.msdl.domain.MSDLPlayer;
+import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessSliderController extends ViewController implements ToggleSlider {
     public final ActivityStarter mActivityStarter;
@@ -37,7 +47,6 @@ public class BrightnessSliderController extends ViewController implements Toggle
     public boolean mTracking;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessSliderController$1, reason: invalid class name */
     public class AnonymousClass1 implements Gefingerpoken {
         public AnonymousClass1() {
@@ -54,7 +63,6 @@ public class BrightnessSliderController extends ViewController implements Toggle
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BrightnessSliderControllerFactory implements Factory {
         public final ActivityStarter mActivityStarter;
         public final BrightnessWarningToast mBrightnessWarningToast;
@@ -82,7 +90,6 @@ public class BrightnessSliderController extends ViewController implements Toggle
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
@@ -91,24 +98,159 @@ public class BrightnessSliderController extends ViewController implements Toggle
         super(brightnessSliderView);
         this.mOnInterceptListener = new AnonymousClass1();
         ?? r1 = new SeekBar.OnSeekBarChangeListener() { // from class: com.android.systemui.settings.brightness.BrightnessSliderController.2
-            /* JADX WARN: Code restructure failed: missing block: B:57:0x014b, code lost:
-            
-                if (((r0 == null || (r0 = r0.getThumb()) == null) ? 0 : r0.getAlpha()) == 255) goto L58;
-             */
-            /* JADX WARN: Removed duplicated region for block: B:61:0x0155  */
-            /* JADX WARN: Removed duplicated region for block: B:64:0x0165  */
-            /* JADX WARN: Removed duplicated region for block: B:69:0x0159  */
+            /* JADX WARN: Removed duplicated region for block: B:55:0x013f  */
+            /* JADX WARN: Removed duplicated region for block: B:58:0x0147  */
+            /* JADX WARN: Removed duplicated region for block: B:59:0x014b  */
+            /* JADX WARN: Removed duplicated region for block: B:62:0x0157  */
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onProgressChanged(android.widget.SeekBar r6, int r7, boolean r8) {
-                /*
-                    Method dump skipped, instructions count: 392
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.settings.brightness.BrightnessSliderController.AnonymousClass2.onProgressChanged(android.widget.SeekBar, int, boolean):void");
+            public final void onProgressChanged(SeekBar seekBar, int i, boolean z) throws Resources.NotFoundException {
+                ToggleSeekBar toggleSeekBar;
+                Drawable thumb;
+                BrightnessSliderController brightnessSliderController = BrightnessSliderController.this;
+                ToggleSlider.Listener listener = brightnessSliderController.mListener;
+                boolean z2 = false;
+                if (listener != null) {
+                    ((BrightnessController) listener).onChanged(i, brightnessSliderController.mTracking, false);
+                }
+                BrightnessSliderController brightnessSliderController2 = BrightnessSliderController.this;
+                final SecBrightnessSliderController secBrightnessSliderController = brightnessSliderController2.mSecBrightnessSliderController;
+                if (secBrightnessSliderController != null) {
+                    int max = ((BrightnessSliderView) ((ViewController) brightnessSliderController2).mView).mSlider.getMax();
+                    boolean z3 = secBrightnessSliderController.isAdaptiveBrightness;
+                    BrightnessSliderView brightnessSliderView2 = secBrightnessSliderController.view;
+                    if (!z3 && secBrightnessSliderController.highBrightnessDialogEnabled && z) {
+                        SecBrightnessSliderView secBrightnessSliderView = brightnessSliderView2.mSecBrightnessSliderView;
+                        secBrightnessSliderView.getClass();
+                        if (secBrightnessSliderView.dualSeekBarThreshold <= i) {
+                            if (brightnessSliderView2.mSecBrightnessSliderView != null) {
+                                Ref$IntRef ref$IntRef = new Ref$IntRef();
+                                ref$IntRef.element = 255;
+                                Context context = brightnessSliderView2.getContext();
+                                int integer = context.getResources().getInteger(android.R.integer.device_idle_light_idle_to_init_flex_ms);
+                                PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
+                                Integer numValueOf = powerManager != null ? Integer.valueOf(powerManager.getMaximumScreenBrightnessSetting()) : null;
+                                numValueOf.getClass();
+                                int iIntValue = numValueOf.intValue();
+                                ref$IntRef.element = iIntValue;
+                                if (secBrightnessSliderController.highBrightnessDialog != null) {
+                                    return;
+                                }
+                                if (integer <= iIntValue) {
+                                    SystemUIDialog systemUIDialog = new SystemUIDialog(brightnessSliderView2.getContext(), R.style.Theme_SystemUI_Dialog_Alert);
+                                    secBrightnessSliderController.highBrightnessDialog = systemUIDialog;
+                                    systemUIDialog.setMessage(brightnessSliderView2.getContext().getResources().getString(R.string.sec_brightness_using_high_brightness_dialog_message));
+                                    systemUIDialog.setPositiveButton(R.string.sec_brightness_using_high_brightness_dialog_ok_button, null);
+                                    systemUIDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$showUsingHighBrightnessDialog$3$1
+                                        @Override // android.content.DialogInterface.OnDismissListener
+                                        public final void onDismiss(DialogInterface dialogInterface) {
+                                            SecBrightnessSliderController secBrightnessSliderController2 = secBrightnessSliderController;
+                                            secBrightnessSliderController2.highBrightnessDialog = null;
+                                            secBrightnessSliderController2.highBrightnessDialogEnabled = false;
+                                            BrightnessSliderView brightnessSliderView3 = secBrightnessSliderController2.view;
+                                            SecBrightnessSliderView secBrightnessSliderView2 = brightnessSliderView3.mSecBrightnessSliderView;
+                                            if (secBrightnessSliderView2 != null) {
+                                                brightnessSliderView3.mSlider.setProgress(secBrightnessSliderView2.dualSeekBarThreshold + 1);
+                                            }
+                                            Settings.System.semPutIntForUser(secBrightnessSliderController.view.getContext().getContentResolver(), SettingsHelper.INDEX_MAX_BRIGHTNESS_DIALOG_SHOWN, 1, -2);
+                                        }
+                                    });
+                                    systemUIDialog.show();
+                                    return;
+                                }
+                                SystemUIDialog systemUIDialog2 = new SystemUIDialog(brightnessSliderView2.getContext(), R.style.Theme_SystemUI_Dialog_Alert);
+                                secBrightnessSliderController.highBrightnessDialog = systemUIDialog2;
+                                systemUIDialog2.setMessage(brightnessSliderView2.getContext().getResources().getString(R.string.sec_brightness_using_high_brightness_dialog_message_support_hbm));
+                                systemUIDialog2.setTitle(brightnessSliderView2.getContext().getResources().getString(R.string.sec_brightness_using_high_brightness_dialog_title));
+                                systemUIDialog2.setPositiveButton(R.string.sec_brightness_using_high_brightness_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$showUsingHighBrightnessDialog$2$1
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public final void onClick(DialogInterface dialogInterface, int i2) {
+                                        Settings.System.semPutIntForUser(secBrightnessSliderController.view.getContext().getContentResolver(), "screen_brightness_mode", 1, -2);
+                                    }
+                                });
+                                systemUIDialog2.setNegativeButton(R.string.sec_brightness_using_high_brightness_dialog_negative_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$showUsingHighBrightnessDialog$2$2
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public final void onClick(DialogInterface dialogInterface, int i2) {
+                                    }
+                                });
+                                systemUIDialog2.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$showUsingHighBrightnessDialog$2$3
+                                    @Override // android.content.DialogInterface.OnDismissListener
+                                    public final void onDismiss(DialogInterface dialogInterface) {
+                                        BrightnessSliderView brightnessSliderView3;
+                                        SecBrightnessSliderView secBrightnessSliderView2;
+                                        SecBrightnessSliderController secBrightnessSliderController2 = secBrightnessSliderController;
+                                        secBrightnessSliderController2.highBrightnessDialog = null;
+                                        secBrightnessSliderController2.highBrightnessDialogEnabled = false;
+                                        if (!secBrightnessSliderController2.isAdaptiveBrightness && (secBrightnessSliderView2 = (brightnessSliderView3 = secBrightnessSliderController2.view).mSecBrightnessSliderView) != null) {
+                                            brightnessSliderView3.mSlider.setProgress(secBrightnessSliderView2.dualSeekBarThreshold + 1);
+                                        }
+                                        Settings.System.semPutIntForUser(secBrightnessSliderController.view.getContext().getContentResolver(), SettingsHelper.INDEX_MAX_BRIGHTNESS_DIALOG_SHOWN, 1, -2);
+                                    }
+                                });
+                                systemUIDialog2.show();
+                                return;
+                            }
+                            return;
+                        }
+                        SystemUIDialog systemUIDialog3 = secBrightnessSliderController.highBrightnessDialog;
+                        if (systemUIDialog3 != null) {
+                            if (systemUIDialog3.isShowing()) {
+                                systemUIDialog3.dismiss();
+                            }
+                            SecBrightnessMirrorController secBrightnessMirrorController = secBrightnessSliderController.secBrightnessMirrorController;
+                            if (secBrightnessMirrorController != null) {
+                                secBrightnessMirrorController.showMirror();
+                                secBrightnessMirrorController.setLocationAndSize(brightnessSliderView2);
+                            }
+                        }
+                    }
+                    if (secBrightnessSliderController.secBrightnessMirrorController != null && (i == max || i == 0)) {
+                        brightnessSliderView2.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(41));
+                    }
+                    SecBrightnessSliderView secBrightnessSliderView2 = brightnessSliderView2.mSecBrightnessSliderView;
+                    if (secBrightnessSliderView2 != null) {
+                        if (secBrightnessSliderView2.dualSeekBarThreshold <= i) {
+                            z2 = true;
+                            secBrightnessSliderView2.setDualSeekBarResources(z2);
+                            int i2 = secBrightnessSliderController.thumbThreshold;
+                            int i3 = i >= i2 ? (i * 10000) / i2 : 10000;
+                            toggleSeekBar = (ToggleSeekBar) secBrightnessSliderView2.sliderSupplier.get();
+                            if (toggleSeekBar != null) {
+                                Drawable thumb2 = toggleSeekBar.getThumb();
+                                ScaleDrawable scaleDrawable = thumb2 instanceof ScaleDrawable ? (ScaleDrawable) thumb2 : null;
+                                if (scaleDrawable != null) {
+                                    scaleDrawable.setLevel(i3);
+                                }
+                            }
+                        } else {
+                            if (i < secBrightnessSliderController.thumbThreshold) {
+                                ToggleSeekBar slider = secBrightnessSliderView2.getSlider();
+                                if (((slider == null || (thumb = slider.getThumb()) == null) ? 0 : thumb.getAlpha()) == 255) {
+                                }
+                            }
+                            secBrightnessSliderView2.setDualSeekBarResources(z2);
+                            int i22 = secBrightnessSliderController.thumbThreshold;
+                            if (i >= i22) {
+                            }
+                            toggleSeekBar = (ToggleSeekBar) secBrightnessSliderView2.sliderSupplier.get();
+                            if (toggleSeekBar != null) {
+                            }
+                        }
+                    }
+                    SecBrightnessMirrorController secBrightnessMirrorController2 = secBrightnessSliderController.secBrightnessMirrorController;
+                    if (secBrightnessMirrorController2 != null) {
+                        BrightnessSliderController brightnessSliderController3 = secBrightnessMirrorController2.toggleSliderController;
+                        if (brightnessSliderController3 != null) {
+                            brightnessSliderController3.setValue(i);
+                        }
+                        BrightnessAnimationIcon brightnessAnimationIcon = secBrightnessMirrorController2.brightnessIcon;
+                        if (brightnessAnimationIcon != null) {
+                            brightnessAnimationIcon.play(i, max);
+                        }
+                    }
+                }
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -192,11 +334,11 @@ public class BrightnessSliderController extends ViewController implements Toggle
         if (this.mMirror == null) {
             return ((BrightnessSliderView) this.mView).dispatchTouchEvent(motionEvent);
         }
-        MotionEvent copy = motionEvent.copy();
+        MotionEvent motionEventCopy = motionEvent.copy();
         ToggleSlider toggleSlider = this.mMirror;
-        boolean mirrorTouchEvent = toggleSlider != null ? toggleSlider.mirrorTouchEvent(copy) : false;
-        copy.recycle();
-        return mirrorTouchEvent;
+        boolean zMirrorTouchEvent = toggleSlider != null ? toggleSlider.mirrorTouchEvent(motionEventCopy) : false;
+        motionEventCopy.recycle();
+        return zMirrorTouchEvent;
     }
 
     @Override // com.android.systemui.util.ViewController

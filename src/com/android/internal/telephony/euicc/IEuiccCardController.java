@@ -220,9 +220,9 @@ public interface IEuiccCardController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEuiccCardController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEuiccCardController)) {
-                return (IEuiccCardController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEuiccCardController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEuiccCardController)) {
+                return (IEuiccCardController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -296,193 +296,193 @@ public interface IEuiccCardController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    IGetAllProfilesCallback asInterface = IGetAllProfilesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    IGetAllProfilesCallback iGetAllProfilesCallbackAsInterface = IGetAllProfilesCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getAllProfiles(readString, readString2, asInterface);
+                    getAllProfiles(string, string2, iGetAllProfilesCallbackAsInterface);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    IGetProfileCallback asInterface2 = IGetProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    IGetProfileCallback iGetProfileCallbackAsInterface = IGetProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getProfile(readString3, readString4, readString5, asInterface2);
+                    getProfile(string3, string4, string5, iGetProfileCallbackAsInterface);
                     return true;
                 case 3:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    IGetProfileCallback asInterface3 = IGetProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    IGetProfileCallback iGetProfileCallbackAsInterface2 = IGetProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEnabledProfile(readString6, readString7, readInt, asInterface3);
+                    getEnabledProfile(string6, string7, i3, iGetProfileCallbackAsInterface2);
                     return true;
                 case 4:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    IDisableProfileCallback asInterface4 = IDisableProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    IDisableProfileCallback iDisableProfileCallbackAsInterface = IDisableProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    disableProfile(readString8, readString9, readString10, readBoolean, asInterface4);
+                    disableProfile(string8, string9, string10, z, iDisableProfileCallbackAsInterface);
                     return true;
                 case 5:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    ISwitchToProfileCallback asInterface5 = ISwitchToProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    ISwitchToProfileCallback iSwitchToProfileCallbackAsInterface = ISwitchToProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    switchToProfile(readString11, readString12, readString13, readInt2, readBoolean2, asInterface5);
+                    switchToProfile(string11, string12, string13, i4, z2, iSwitchToProfileCallbackAsInterface);
                     return true;
                 case 6:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
-                    ISetNicknameCallback asInterface6 = ISetNicknameCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
+                    ISetNicknameCallback iSetNicknameCallbackAsInterface = ISetNicknameCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setNickname(readString14, readString15, readString16, readString17, asInterface6);
+                    setNickname(string14, string15, string16, string17, iSetNicknameCallbackAsInterface);
                     return true;
                 case 7:
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
-                    IDeleteProfileCallback asInterface7 = IDeleteProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
+                    IDeleteProfileCallback iDeleteProfileCallbackAsInterface = IDeleteProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deleteProfile(readString18, readString19, readString20, asInterface7);
+                    deleteProfile(string18, string19, string20, iDeleteProfileCallbackAsInterface);
                     return true;
                 case 8:
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    IResetMemoryCallback asInterface8 = IResetMemoryCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    IResetMemoryCallback iResetMemoryCallbackAsInterface = IResetMemoryCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    resetMemory(readString21, readString22, readInt3, asInterface8);
+                    resetMemory(string21, string22, i5, iResetMemoryCallbackAsInterface);
                     return true;
                 case 9:
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
-                    IGetDefaultSmdpAddressCallback asInterface9 = IGetDefaultSmdpAddressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
+                    IGetDefaultSmdpAddressCallback iGetDefaultSmdpAddressCallbackAsInterface = IGetDefaultSmdpAddressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getDefaultSmdpAddress(readString23, readString24, asInterface9);
+                    getDefaultSmdpAddress(string23, string24, iGetDefaultSmdpAddressCallbackAsInterface);
                     return true;
                 case 10:
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
-                    IGetSmdsAddressCallback asInterface10 = IGetSmdsAddressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
+                    IGetSmdsAddressCallback iGetSmdsAddressCallbackAsInterface = IGetSmdsAddressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getSmdsAddress(readString25, readString26, asInterface10);
+                    getSmdsAddress(string25, string26, iGetSmdsAddressCallbackAsInterface);
                     return true;
                 case 11:
-                    String readString27 = parcel.readString();
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
-                    ISetDefaultSmdpAddressCallback asInterface11 = ISetDefaultSmdpAddressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string27 = parcel.readString();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
+                    ISetDefaultSmdpAddressCallback iSetDefaultSmdpAddressCallbackAsInterface = ISetDefaultSmdpAddressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setDefaultSmdpAddress(readString27, readString28, readString29, asInterface11);
+                    setDefaultSmdpAddress(string27, string28, string29, iSetDefaultSmdpAddressCallbackAsInterface);
                     return true;
                 case 12:
-                    String readString30 = parcel.readString();
-                    String readString31 = parcel.readString();
-                    IGetRulesAuthTableCallback asInterface12 = IGetRulesAuthTableCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string30 = parcel.readString();
+                    String string31 = parcel.readString();
+                    IGetRulesAuthTableCallback iGetRulesAuthTableCallbackAsInterface = IGetRulesAuthTableCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getRulesAuthTable(readString30, readString31, asInterface12);
+                    getRulesAuthTable(string30, string31, iGetRulesAuthTableCallbackAsInterface);
                     return true;
                 case 13:
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
-                    IGetEuiccChallengeCallback asInterface13 = IGetEuiccChallengeCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
+                    IGetEuiccChallengeCallback iGetEuiccChallengeCallbackAsInterface = IGetEuiccChallengeCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEuiccChallenge(readString32, readString33, asInterface13);
+                    getEuiccChallenge(string32, string33, iGetEuiccChallengeCallbackAsInterface);
                     return true;
                 case 14:
-                    String readString34 = parcel.readString();
-                    String readString35 = parcel.readString();
-                    IGetEuiccInfo1Callback asInterface14 = IGetEuiccInfo1Callback.Stub.asInterface(parcel.readStrongBinder());
+                    String string34 = parcel.readString();
+                    String string35 = parcel.readString();
+                    IGetEuiccInfo1Callback iGetEuiccInfo1CallbackAsInterface = IGetEuiccInfo1Callback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEuiccInfo1(readString34, readString35, asInterface14);
+                    getEuiccInfo1(string34, string35, iGetEuiccInfo1CallbackAsInterface);
                     return true;
                 case 15:
-                    String readString36 = parcel.readString();
-                    String readString37 = parcel.readString();
-                    IGetEuiccInfo2Callback asInterface15 = IGetEuiccInfo2Callback.Stub.asInterface(parcel.readStrongBinder());
+                    String string36 = parcel.readString();
+                    String string37 = parcel.readString();
+                    IGetEuiccInfo2Callback iGetEuiccInfo2CallbackAsInterface = IGetEuiccInfo2Callback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEuiccInfo2(readString36, readString37, asInterface15);
+                    getEuiccInfo2(string36, string37, iGetEuiccInfo2CallbackAsInterface);
                     return true;
                 case 16:
-                    String readString38 = parcel.readString();
-                    String readString39 = parcel.readString();
-                    String readString40 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    IAuthenticateServerCallback asInterface16 = IAuthenticateServerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string38 = parcel.readString();
+                    String string39 = parcel.readString();
+                    String string40 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    IAuthenticateServerCallback iAuthenticateServerCallbackAsInterface = IAuthenticateServerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    authenticateServer(readString38, readString39, readString40, createByteArray, createByteArray2, createByteArray3, createByteArray4, asInterface16);
+                    authenticateServer(string38, string39, string40, bArrCreateByteArray, bArrCreateByteArray2, bArrCreateByteArray3, bArrCreateByteArray4, iAuthenticateServerCallbackAsInterface);
                     return true;
                 case 17:
-                    String readString41 = parcel.readString();
-                    String readString42 = parcel.readString();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    byte[] createByteArray7 = parcel.createByteArray();
-                    byte[] createByteArray8 = parcel.createByteArray();
-                    IPrepareDownloadCallback asInterface17 = IPrepareDownloadCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string41 = parcel.readString();
+                    String string42 = parcel.readString();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
+                    IPrepareDownloadCallback iPrepareDownloadCallbackAsInterface = IPrepareDownloadCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    prepareDownload(readString41, readString42, createByteArray5, createByteArray6, createByteArray7, createByteArray8, asInterface17);
+                    prepareDownload(string41, string42, bArrCreateByteArray5, bArrCreateByteArray6, bArrCreateByteArray7, bArrCreateByteArray8, iPrepareDownloadCallbackAsInterface);
                     return true;
                 case 18:
-                    String readString43 = parcel.readString();
-                    String readString44 = parcel.readString();
-                    byte[] createByteArray9 = parcel.createByteArray();
-                    ILoadBoundProfilePackageCallback asInterface18 = ILoadBoundProfilePackageCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string43 = parcel.readString();
+                    String string44 = parcel.readString();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
+                    ILoadBoundProfilePackageCallback iLoadBoundProfilePackageCallbackAsInterface = ILoadBoundProfilePackageCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    loadBoundProfilePackage(readString43, readString44, createByteArray9, asInterface18);
+                    loadBoundProfilePackage(string43, string44, bArrCreateByteArray9, iLoadBoundProfilePackageCallbackAsInterface);
                     return true;
                 case 19:
-                    String readString45 = parcel.readString();
-                    String readString46 = parcel.readString();
-                    byte[] createByteArray10 = parcel.createByteArray();
-                    int readInt4 = parcel.readInt();
-                    ICancelSessionCallback asInterface19 = ICancelSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string45 = parcel.readString();
+                    String string46 = parcel.readString();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
+                    int i6 = parcel.readInt();
+                    ICancelSessionCallback iCancelSessionCallbackAsInterface = ICancelSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    cancelSession(readString45, readString46, createByteArray10, readInt4, asInterface19);
+                    cancelSession(string45, string46, bArrCreateByteArray10, i6, iCancelSessionCallbackAsInterface);
                     return true;
                 case 20:
-                    String readString47 = parcel.readString();
-                    String readString48 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    IListNotificationsCallback asInterface20 = IListNotificationsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string47 = parcel.readString();
+                    String string48 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    IListNotificationsCallback iListNotificationsCallbackAsInterface = IListNotificationsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    listNotifications(readString47, readString48, readInt5, asInterface20);
+                    listNotifications(string47, string48, i7, iListNotificationsCallbackAsInterface);
                     return true;
                 case 21:
-                    String readString49 = parcel.readString();
-                    String readString50 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    IRetrieveNotificationListCallback asInterface21 = IRetrieveNotificationListCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string49 = parcel.readString();
+                    String string50 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    IRetrieveNotificationListCallback iRetrieveNotificationListCallbackAsInterface = IRetrieveNotificationListCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    retrieveNotificationList(readString49, readString50, readInt6, asInterface21);
+                    retrieveNotificationList(string49, string50, i8, iRetrieveNotificationListCallbackAsInterface);
                     return true;
                 case 22:
-                    String readString51 = parcel.readString();
-                    String readString52 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    IRetrieveNotificationCallback asInterface22 = IRetrieveNotificationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string51 = parcel.readString();
+                    String string52 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    IRetrieveNotificationCallback iRetrieveNotificationCallbackAsInterface = IRetrieveNotificationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    retrieveNotification(readString51, readString52, readInt7, asInterface22);
+                    retrieveNotification(string51, string52, i9, iRetrieveNotificationCallbackAsInterface);
                     return true;
                 case 23:
-                    String readString53 = parcel.readString();
-                    String readString54 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    IRemoveNotificationFromListCallback asInterface23 = IRemoveNotificationFromListCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string53 = parcel.readString();
+                    String string54 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    IRemoveNotificationFromListCallback iRemoveNotificationFromListCallbackAsInterface = IRemoveNotificationFromListCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeNotificationFromList(readString53, readString54, readInt8, asInterface23);
+                    removeNotificationFromList(string53, string54, i10, iRemoveNotificationFromListCallbackAsInterface);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -507,351 +507,351 @@ public interface IEuiccCardController extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getAllProfiles(String str, String str2, IGetAllProfilesCallback iGetAllProfilesCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetAllProfilesCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetAllProfilesCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getProfile(String str, String str2, String str3, IGetProfileCallback iGetProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStrongInterface(iGetProfileCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStrongInterface(iGetProfileCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getEnabledProfile(String str, String str2, int i, IGetProfileCallback iGetProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetProfileCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetProfileCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void disableProfile(String str, String str2, String str3, boolean z, IDisableProfileCallback iDisableProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iDisableProfileCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iDisableProfileCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void switchToProfile(String str, String str2, String str3, int i, boolean z, ISwitchToProfileCallback iSwitchToProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iSwitchToProfileCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iSwitchToProfileCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void setNickname(String str, String str2, String str3, String str4, ISetNicknameCallback iSetNicknameCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeStrongInterface(iSetNicknameCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeStrongInterface(iSetNicknameCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void deleteProfile(String str, String str2, String str3, IDeleteProfileCallback iDeleteProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStrongInterface(iDeleteProfileCallback);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStrongInterface(iDeleteProfileCallback);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void resetMemory(String str, String str2, int i, IResetMemoryCallback iResetMemoryCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iResetMemoryCallback);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iResetMemoryCallback);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getDefaultSmdpAddress(String str, String str2, IGetDefaultSmdpAddressCallback iGetDefaultSmdpAddressCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetDefaultSmdpAddressCallback);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetDefaultSmdpAddressCallback);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getSmdsAddress(String str, String str2, IGetSmdsAddressCallback iGetSmdsAddressCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetSmdsAddressCallback);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetSmdsAddressCallback);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void setDefaultSmdpAddress(String str, String str2, String str3, ISetDefaultSmdpAddressCallback iSetDefaultSmdpAddressCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStrongInterface(iSetDefaultSmdpAddressCallback);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStrongInterface(iSetDefaultSmdpAddressCallback);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getRulesAuthTable(String str, String str2, IGetRulesAuthTableCallback iGetRulesAuthTableCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetRulesAuthTableCallback);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetRulesAuthTableCallback);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getEuiccChallenge(String str, String str2, IGetEuiccChallengeCallback iGetEuiccChallengeCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetEuiccChallengeCallback);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetEuiccChallengeCallback);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getEuiccInfo1(String str, String str2, IGetEuiccInfo1Callback iGetEuiccInfo1Callback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetEuiccInfo1Callback);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetEuiccInfo1Callback);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void getEuiccInfo2(String str, String str2, IGetEuiccInfo2Callback iGetEuiccInfo2Callback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iGetEuiccInfo2Callback);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iGetEuiccInfo2Callback);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void authenticateServer(String str, String str2, String str3, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, IAuthenticateServerCallback iAuthenticateServerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeByteArray(bArr4);
-                    obtain.writeStrongInterface(iAuthenticateServerCallback);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeByteArray(bArr4);
+                    parcelObtain.writeStrongInterface(iAuthenticateServerCallback);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void prepareDownload(String str, String str2, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, IPrepareDownloadCallback iPrepareDownloadCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeByteArray(bArr4);
-                    obtain.writeStrongInterface(iPrepareDownloadCallback);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeByteArray(bArr4);
+                    parcelObtain.writeStrongInterface(iPrepareDownloadCallback);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void loadBoundProfilePackage(String str, String str2, byte[] bArr, ILoadBoundProfilePackageCallback iLoadBoundProfilePackageCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeStrongInterface(iLoadBoundProfilePackageCallback);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeStrongInterface(iLoadBoundProfilePackageCallback);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void cancelSession(String str, String str2, byte[] bArr, int i, ICancelSessionCallback iCancelSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iCancelSessionCallback);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iCancelSessionCallback);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void listNotifications(String str, String str2, int i, IListNotificationsCallback iListNotificationsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iListNotificationsCallback);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iListNotificationsCallback);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void retrieveNotificationList(String str, String str2, int i, IRetrieveNotificationListCallback iRetrieveNotificationListCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRetrieveNotificationListCallback);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRetrieveNotificationListCallback);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void retrieveNotification(String str, String str2, int i, IRetrieveNotificationCallback iRetrieveNotificationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRetrieveNotificationCallback);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRetrieveNotificationCallback);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccCardController
             public void removeNotificationFromList(String str, String str2, int i, IRemoveNotificationFromListCallback iRemoveNotificationFromListCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoveNotificationFromListCallback);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccCardController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoveNotificationFromListCallback);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

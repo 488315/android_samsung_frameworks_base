@@ -10,12 +10,10 @@ import java.util.function.Consumer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WallpaperFilter {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProcessingRange {
         public int length;
         public int start;
@@ -47,22 +45,22 @@ public class WallpaperFilter {
         }
         float f = imageFilterParams.mBlurRadius;
         if (0.0f < f) {
-            int round = Math.round(f);
+            int iRound = Math.round(f);
             int width = bitmap.getWidth();
             int height = bitmap.getHeight();
             Log.i("WallpaperFilter", "applyStackBlur : " + width + " x " + height);
-            applyFilterOnMultiThread("StackBlur1", new ProcessingRange(height), new WallpaperFilter$$ExternalSyntheticLambda0(this, bitmap, round, 0));
-            applyFilterOnMultiThread("StackBlur2", new ProcessingRange(width), new WallpaperFilter$$ExternalSyntheticLambda0(this, bitmap, round, 1));
+            applyFilterOnMultiThread("StackBlur1", new ProcessingRange(height), new WallpaperFilter$$ExternalSyntheticLambda0(this, bitmap, iRound, 0));
+            applyFilterOnMultiThread("StackBlur2", new ProcessingRange(width), new WallpaperFilter$$ExternalSyntheticLambda0(this, bitmap, iRound, 1));
         }
         float f2 = imageFilterParams.mNoiseValue;
         if (0.0f < f2) {
-            final int[] nativeCreateGaussianNoiseSamples = nativeCreateGaussianNoiseSamples(f2, PluginLockInstancePolicy.DISABLED_BY_MODE);
+            final int[] iArrNativeCreateGaussianNoiseSamples = nativeCreateGaussianNoiseSamples(f2, PluginLockInstancePolicy.DISABLED_BY_MODE);
             applyFilterOnMultiThread("GaussianNoise", new ProcessingRange(bitmap.getHeight()), new Consumer() { // from class: com.samsung.android.wallpaper.imageprocessing.WallpaperFilter$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WallpaperFilter wallpaperFilter = WallpaperFilter.this;
+                    WallpaperFilter wallpaperFilter = this.f$0;
                     Bitmap bitmap2 = bitmap;
-                    int[] iArr = nativeCreateGaussianNoiseSamples;
+                    int[] iArr = iArrNativeCreateGaussianNoiseSamples;
                     WallpaperFilter.ProcessingRange processingRange = (WallpaperFilter.ProcessingRange) obj;
                     int i = WallpaperFilter.$r8$clinit;
                     wallpaperFilter.getClass();
@@ -87,7 +85,7 @@ public class WallpaperFilter {
             final int i4 = (i3 + 3) / 4;
             final int i5 = 0;
             while (i5 < 4) {
-                final long elapsedRealtime = SystemClock.elapsedRealtime();
+                final long jElapsedRealtime = SystemClock.elapsedRealtime();
                 WallpaperFilter wallpaperFilter = this;
                 final String str2 = str;
                 final Consumer consumer2 = consumer;
@@ -101,7 +99,7 @@ public class WallpaperFilter {
                         if (i7 >= i9 - 1) {
                             i6 = i3 - ((i9 - 1) * i6);
                         }
-                        long elapsedRealtime2 = SystemClock.elapsedRealtime();
+                        long jElapsedRealtime2 = SystemClock.elapsedRealtime();
                         ProcessingRange processingRange2 = new ProcessingRange(i3);
                         processingRange2.start = i8;
                         processingRange2.length = i6;
@@ -110,7 +108,7 @@ public class WallpaperFilter {
                         consumer2.accept(processingRange2);
                         synchronized (zArr) {
                             try {
-                                Log.i("WallpaperFilter", "applyFilterOnMultiThread[" + str2 + "] : tid " + i5 + " finished. startDelay=" + (elapsedRealtime2 - elapsedRealtime) + ", pureJniDur=" + (SystemClock.elapsedRealtime() - elapsedRealtime2));
+                                Log.i("WallpaperFilter", "applyFilterOnMultiThread[" + str2 + "] : tid " + i5 + " finished. startDelay=" + (jElapsedRealtime2 - jElapsedRealtime) + ", pureJniDur=" + (SystemClock.elapsedRealtime() - jElapsedRealtime2));
                                 zArr[i5] = true;
                                 int i11 = 0;
                                 while (true) {
@@ -148,7 +146,6 @@ public class WallpaperFilter {
 
     public native void nativeStackBlur(Bitmap bitmap, int i, int i2, int i3, int i4);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImageFilterParams {
         public final float mBlurRadius;
         public final float mHighlightAmount;

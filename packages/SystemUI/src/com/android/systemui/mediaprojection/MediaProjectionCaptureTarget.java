@@ -6,14 +6,12 @@ import android.os.Parcelable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionCaptureTarget implements Parcelable {
     public static final CREATOR CREATOR = new CREATOR(null);
     public final ActivityOptions.LaunchCookie launchCookie;
     public final int taskId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CREATOR implements Parcelable.Creator {
         public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
             this();

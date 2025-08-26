@@ -10,14 +10,12 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenRecordingAdapter extends ArrayAdapter {
     public final LinearLayout mSelectedInternal;
     public final LinearLayout mSelectedMic;
     public final LinearLayout mSelectedMicAndInternal;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenrecord.ScreenRecordingAdapter$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$screenrecord$ScreenRecordingAudioSource;

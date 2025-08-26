@@ -1,6 +1,5 @@
 package com.android.keyguard;
 
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
@@ -15,11 +14,12 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.ViewController;
+import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardContinuityLockscreenAffordanceController extends ViewController {
     public LinearLayout mContinuityLayout;
+    public SystemUITextView mContinuitytextView;
     public boolean mForceIsDismissible;
     public final AnonymousClass1 mKeyguardStateCallback;
     public final KeyguardStateController mKeyguardStateController;
@@ -29,7 +29,6 @@ public class KeyguardContinuityLockscreenAffordanceController extends ViewContro
     public final AnonymousClass2 mStatusBarStateListener;
     public BaseKeyguardCallback mUpdateMonitorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardContinuityLockscreenAffordanceController$2, reason: invalid class name */
     public class AnonymousClass2 implements StatusBarStateController.StateListener {
         public AnonymousClass2() {
@@ -45,16 +44,13 @@ public class KeyguardContinuityLockscreenAffordanceController extends ViewContro
                 ((KeyguardContinuityLockscreenAffordanceArea) ((ViewController) keyguardContinuityLockscreenAffordanceController).mView).post(new Runnable() { // from class: com.android.keyguard.KeyguardContinuityLockscreenAffordanceController$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        View view;
-                        view = ((ViewController) KeyguardContinuityLockscreenAffordanceController.this).mView;
-                        ((KeyguardContinuityLockscreenAffordanceArea) view).mContinuityLottieView.playAnimation();
+                        ((KeyguardContinuityLockscreenAffordanceArea) ((ViewController) KeyguardContinuityLockscreenAffordanceController.this).mView).mContinuityLottieView.playAnimation();
                     }
                 });
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseKeyguardCallback extends KeyguardUpdateMonitorCallback {
         public BaseKeyguardCallback() {
         }
@@ -124,9 +120,9 @@ public class KeyguardContinuityLockscreenAffordanceController extends ViewContro
     public final void updateLayout$6() {
         int rotation = DeviceState.shouldEnableKeyguardScreenRotation(getContext()) ? DeviceState.getRotation(getResources().getConfiguration().windowConfiguration.getRotation()) : 0;
         ListPopupWindow$$ExternalSyntheticOutline0.m(rotation, "updateLayout() : ", "KeyguardContinuityLockscreenAffordanceController");
-        LinearLayout linearLayout = (LinearLayout) ((KeyguardContinuityLockscreenAffordanceArea) this.mView).findViewById(R.id.keyguard_indication_continuity_vi_view);
-        this.mContinuityLayout = linearLayout;
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) linearLayout.getLayoutParams();
+        this.mContinuityLayout = (LinearLayout) ((KeyguardContinuityLockscreenAffordanceArea) this.mView).findViewById(R.id.keyguard_indication_continuity_vi_view);
+        this.mContinuitytextView = (SystemUITextView) ((KeyguardContinuityLockscreenAffordanceArea) this.mView).findViewById(R.id.keyguard_indication_continuity_vi_text_view);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) this.mContinuityLayout.getLayoutParams();
         if (rotation == 0 || rotation == 2) {
             layoutParams.gravity = 81;
             layoutParams.setMargins(0, 0, 0, (int) (DeviceState.getDisplayHeight(getContext()) * 0.2d));
@@ -138,5 +134,6 @@ public class KeyguardContinuityLockscreenAffordanceController extends ViewContro
             layoutParams.setMargins((int) (DeviceState.getDisplayHeight(getContext()) * 0.058d), 0, 0, 0);
         }
         this.mContinuityLayout.setLayoutParams(layoutParams);
+        this.mContinuitytextView.setText(getResources().getString(R.string.kg_continuity_lockscreen_affordance_text));
     }
 }

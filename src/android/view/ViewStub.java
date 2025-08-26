@@ -1,6 +1,7 @@
 package android.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -49,12 +50,12 @@ public final class ViewStub extends View {
 
     public ViewStub(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewStub, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.ViewStub, attributeSet, obtainStyledAttributes, i, i2);
-        this.mInflatedId = obtainStyledAttributes.getResourceId(2, -1);
-        this.mLayoutResource = obtainStyledAttributes.getResourceId(1, 0);
-        this.mID = obtainStyledAttributes.getResourceId(0, -1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewStub, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.ViewStub, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mInflatedId = typedArrayObtainStyledAttributes.getResourceId(2, -1);
+        this.mLayoutResource = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        this.mID = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
         setVisibility(8);
         setWillNotDraw(true);
     }
@@ -125,28 +126,28 @@ public final class ViewStub extends View {
         return null;
     }
 
-    private View inflateViewNoAdd(ViewGroup viewGroup) {
-        LayoutInflater layoutInflater = this.mInflater;
-        if (layoutInflater == null) {
-            layoutInflater = LayoutInflater.from(this.mContext);
+    private View inflateViewNoAdd(ViewGroup viewGroup) throws Resources.NotFoundException {
+        LayoutInflater layoutInflaterFrom = this.mInflater;
+        if (layoutInflaterFrom == null) {
+            layoutInflaterFrom = LayoutInflater.from(this.mContext);
         }
-        View inflate = layoutInflater.inflate(this.mLayoutResource, viewGroup, false);
+        View viewInflate = layoutInflaterFrom.inflate(this.mLayoutResource, viewGroup, false);
         int i = this.mInflatedId;
         if (i != -1) {
-            inflate.setId(i);
+            viewInflate.setId(i);
         }
-        return inflate;
+        return viewInflate;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void replaceSelfWithView(View view, ViewGroup viewGroup) {
-        int indexOfChild = viewGroup.indexOfChild(this);
+    public void replaceSelfWithView(View view, ViewGroup viewGroup) throws Resources.NotFoundException {
+        int iIndexOfChild = viewGroup.indexOfChild(this);
         viewGroup.removeViewInLayout(this);
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         if (layoutParams != null) {
-            viewGroup.addView(view, indexOfChild, layoutParams);
+            viewGroup.addView(view, iIndexOfChild, layoutParams);
         } else {
-            viewGroup.addView(view, indexOfChild);
+            viewGroup.addView(view, iIndexOfChild);
         }
     }
 
@@ -155,14 +156,14 @@ public final class ViewStub extends View {
         if (parent != null && (parent instanceof ViewGroup)) {
             if (this.mLayoutResource != 0) {
                 ViewGroup viewGroup = (ViewGroup) parent;
-                View inflateViewNoAdd = inflateViewNoAdd(viewGroup);
-                replaceSelfWithView(inflateViewNoAdd, viewGroup);
-                this.mInflatedViewRef = new WeakReference<>(inflateViewNoAdd);
+                View viewInflateViewNoAdd = inflateViewNoAdd(viewGroup);
+                replaceSelfWithView(viewInflateViewNoAdd, viewGroup);
+                this.mInflatedViewRef = new WeakReference<>(viewInflateViewNoAdd);
                 OnInflateListener onInflateListener = this.mInflateListener;
                 if (onInflateListener != null) {
-                    onInflateListener.onInflate(this, inflateViewNoAdd);
+                    onInflateListener.onInflate(this, viewInflateViewNoAdd);
                 }
-                return inflateViewNoAdd;
+                return viewInflateViewNoAdd;
             }
             throw new IllegalArgumentException("ViewStub must have a valid layoutResource");
         }
@@ -181,7 +182,7 @@ public final class ViewStub extends View {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws Resources.NotFoundException {
             ViewStub viewStub = ViewStub.this;
             viewStub.replaceSelfWithView(this.view, (ViewGroup) viewStub.getParent());
         }

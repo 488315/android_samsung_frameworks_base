@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
@@ -92,9 +93,9 @@ public final class MediaSession {
         CallbackStub callbackStub = new CallbackStub(this);
         this.mCbStub = callbackStub;
         try {
-            ISession createSession = ((MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE)).createSession(callbackStub, str, bundle);
-            this.mBinder = createSession;
-            Token token = new Token(Process.myUid(), createSession.getController());
+            ISession iSessionCreateSession = ((MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE)).createSession(callbackStub, str, bundle);
+            this.mBinder = iSessionCreateSession;
+            Token token = new Token(Process.myUid(), iSessionCreateSession.getController());
             this.mSessionToken = token;
             this.mController = new MediaController(context, token);
         } catch (RemoteException e) {
@@ -248,19 +249,19 @@ public final class MediaSession {
     }
 
     public void setMetadata(MediaMetadata mediaMetadata) {
-        int i;
-        MediaDescription mediaDescription;
+        int size;
+        MediaDescription description;
         if (mediaMetadata != null) {
             mediaMetadata = new MediaMetadata.Builder(mediaMetadata).setBitmapDimensionLimit(this.mMaxBitmapSize).build();
-            r0 = mediaMetadata.containsKey(MediaMetadata.METADATA_KEY_DURATION) ? mediaMetadata.getLong(MediaMetadata.METADATA_KEY_DURATION) : -1L;
-            i = mediaMetadata.size();
-            mediaDescription = mediaMetadata.getDescription();
+            j = mediaMetadata.containsKey(MediaMetadata.METADATA_KEY_DURATION) ? mediaMetadata.getLong(MediaMetadata.METADATA_KEY_DURATION) : -1L;
+            size = mediaMetadata.size();
+            description = mediaMetadata.getDescription();
         } else {
-            i = 0;
-            mediaDescription = null;
+            size = 0;
+            description = null;
         }
         try {
-            this.mBinder.setMetadata(mediaMetadata, r0, "size=" + i + ", description=" + mediaDescription);
+            this.mBinder.setMetadata(mediaMetadata, j, "size=" + size + ", description=" + description);
         } catch (RemoteException e) {
             Log.wtf(TAG, "Dead object in setPlaybackState.", e);
         }
@@ -270,8 +271,11 @@ public final class MediaSession {
         try {
             if (list == null) {
                 this.mBinder.resetQueue();
-            } else {
-                ParcelableListBinder.send(this.mBinder.getBinderForSetQueue(), list);
+                return;
+            }
+            IBinder binderForSetQueue = this.mBinder.getBinderForSetQueue();
+            if (binderForSetQueue != null) {
+                ParcelableListBinder.send(binderForSetQueue, list);
             }
         } catch (RemoteException e) {
             Log.wtf("Dead object in setQueue.", e);
@@ -335,48 +339,49 @@ public final class MediaSession {
         return this.mCallback.mCurrentControllerInfo.getPackageName();
     }
 
-    static boolean hasCustomParcelable(Bundle bundle) {
+    static boolean hasCustomParcelable(Bundle bundle) throws Throwable {
+        Parcel parcelObtain;
         if (bundle == null) {
             return false;
         }
         Parcel parcel = null;
         try {
             try {
-                Parcel obtain = Parcel.obtain();
-                try {
-                    obtain.writeBundle(bundle);
-                    obtain.setDataPosition(0);
-                    Bundle readBundle = obtain.readBundle(null);
-                    Iterator<String> it = readBundle.keySet().iterator();
-                    while (it.hasNext()) {
-                        readBundle.get(it.next());
-                    }
-                    if (obtain != null) {
-                        obtain.recycle();
-                    }
-                    return false;
-                } catch (BadParcelableException e) {
-                    e = e;
-                    parcel = obtain;
-                    Log.d(TAG, "Custom parcelable in bundle.", e);
-                    if (parcel == null) {
-                        return true;
-                    }
-                    parcel.recycle();
-                    return true;
-                } catch (Throwable th) {
-                    th = th;
-                    parcel = obtain;
-                    if (parcel != null) {
-                        parcel.recycle();
-                    }
-                    throw th;
-                }
-            } catch (BadParcelableException e2) {
-                e = e2;
+                parcelObtain = Parcel.obtain();
+            } catch (Throwable th) {
+                th = th;
             }
+        } catch (BadParcelableException e) {
+            e = e;
+        }
+        try {
+            parcelObtain.writeBundle(bundle);
+            parcelObtain.setDataPosition(0);
+            Bundle bundle2 = parcelObtain.readBundle(null);
+            Iterator<String> it = bundle2.keySet().iterator();
+            while (it.hasNext()) {
+                bundle2.get(it.next());
+            }
+            if (parcelObtain != null) {
+                parcelObtain.recycle();
+            }
+            return false;
+        } catch (BadParcelableException e2) {
+            e = e2;
+            parcel = parcelObtain;
+            Log.d(TAG, "Custom parcelable in bundle.", e);
+            if (parcel == null) {
+                return true;
+            }
+            parcel.recycle();
+            return true;
         } catch (Throwable th2) {
             th = th2;
+            parcel = parcelObtain;
+            if (parcel != null) {
+                parcel.recycle();
+            }
+            throw th;
         }
     }
 
@@ -1042,13 +1047,13 @@ public final class MediaSession {
         }
 
         void post(MediaSessionManager.RemoteUserInfo remoteUserInfo, int i, Object obj, Bundle bundle, long j) {
-            Message obtainMessage = obtainMessage(i, Pair.create(remoteUserInfo, obj));
-            obtainMessage.setAsynchronous(true);
-            obtainMessage.setData(bundle);
+            Message messageObtainMessage = obtainMessage(i, Pair.create(remoteUserInfo, obj));
+            messageObtainMessage.setAsynchronous(true);
+            messageObtainMessage.setData(bundle);
             if (j > 0) {
-                sendMessageDelayed(obtainMessage, j);
+                sendMessageDelayed(messageObtainMessage, j);
             } else {
-                sendMessage(obtainMessage);
+                sendMessage(messageObtainMessage);
             }
         }
 

@@ -110,9 +110,9 @@ public class NinePatch {
     }
 
     public final Region getTransparentRegion(Rect rect) {
-        long nativeGetTransparentRegion = nativeGetTransparentRegion(this.mBitmap.getNativeInstance(), this.mNativeChunk, rect);
-        if (nativeGetTransparentRegion != 0) {
-            return new Region(nativeGetTransparentRegion);
+        long jNativeGetTransparentRegion = nativeGetTransparentRegion(this.mBitmap.getNativeInstance(), this.mNativeChunk, rect);
+        if (jNativeGetTransparentRegion != 0) {
+            return new Region(jNativeGetTransparentRegion);
         }
         return null;
     }

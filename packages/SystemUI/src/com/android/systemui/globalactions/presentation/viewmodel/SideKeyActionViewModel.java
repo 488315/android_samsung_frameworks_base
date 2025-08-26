@@ -12,7 +12,6 @@ import com.samsung.android.globalactions.util.KeyGuardManagerWrapper;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SideKeyActionViewModel implements ActionViewModel {
     public final ActivityStarterWrapper mActivityStarterWrapper;

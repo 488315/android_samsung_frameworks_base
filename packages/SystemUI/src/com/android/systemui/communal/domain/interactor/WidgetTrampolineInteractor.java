@@ -1,17 +1,51 @@
 package com.android.systemui.communal.domain.interactor;
 
+import android.app.ActivityManager;
 import android.app.DreamManager;
+import android.os.UserHandle;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.compose.animation.scene.SceneKey;
+import com.android.systemui.common.usagestats.data.model.UsageStatsQuery;
+import com.android.systemui.common.usagestats.data.repository.UsageStatsRepositoryImpl;
 import com.android.systemui.common.usagestats.domain.UsageStatsInteractor;
+import com.android.systemui.common.usagestats.shared.model.ActivityEventModel;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import com.android.systemui.keyguard.shared.model.KeyguardState;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.core.Logger;
 import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.scene.shared.model.Scenes;
+import com.android.systemui.settings.UserTrackerImpl;
+import com.android.systemui.shared.system.TaskStackChangeListener;
 import com.android.systemui.shared.system.TaskStackChangeListeners;
+import com.android.systemui.util.kotlin.SuspendKt;
 import com.android.systemui.util.time.SystemClock;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.EmptyList;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.time.Duration;
+import kotlin.time.DurationKt;
+import kotlin.time.DurationUnit;
+import kotlinx.coroutines.CancellableContinuation;
+import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.TimeoutCancellationException;
+import kotlinx.coroutines.TimeoutKt;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WidgetTrampolineInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -24,13 +58,261 @@ public final class WidgetTrampolineInteractor {
     public final TaskStackChangeListeners taskStackChangeListeners;
     public final UsageStatsInteractor usageStatsInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return WidgetTrampolineInteractor.this.waitForActivityStartAndDismissKeyguard(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1, reason: invalid class name and case insensitive filesystem */
+    final class C08371 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C08371(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            WidgetTrampolineInteractor widgetTrampolineInteractor = WidgetTrampolineInteractor.this;
+            int i = WidgetTrampolineInteractor.$r8$clinit;
+            return widgetTrampolineInteractor.waitForActivityStartWhileOnHub(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2, reason: invalid class name and case insensitive filesystem */
+    final class C08382 extends SuspendLambda implements Function2 {
+        final /* synthetic */ long $startTime;
+        int label;
+
+        /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function1 {
+            int label;
+            final /* synthetic */ WidgetTrampolineInteractor this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(WidgetTrampolineInteractor widgetTrampolineInteractor, Continuation continuation) {
+                super(1, continuation);
+                this.this$0 = widgetTrampolineInteractor;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                return ((AnonymousClass1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            /* JADX WARN: Multi-variable type inference failed */
+            /* JADX WARN: Type inference failed for: r3v2, types: [com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForNewForegroundTask$2$listener$1, com.android.systemui.shared.system.TaskStackChangeListener] */
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final WidgetTrampolineInteractor widgetTrampolineInteractor = this.this$0;
+                    this.label = 1;
+                    int i2 = WidgetTrampolineInteractor.$r8$clinit;
+                    widgetTrampolineInteractor.getClass();
+                    final CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(this), 1);
+                    cancellableContinuationImpl.initCancellability();
+                    final ?? r3 = new TaskStackChangeListener() { // from class: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForNewForegroundTask$2$listener$1
+                        @Override // com.android.systemui.shared.system.TaskStackChangeListener
+                        public final void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) {
+                            CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
+                            if (cancellableContinuation.isCompleted()) {
+                                return;
+                            }
+                            cancellableContinuation.resume(Unit.INSTANCE, (Function1) null);
+                        }
+                    };
+                    widgetTrampolineInteractor.taskStackChangeListeners.registerTaskStackListener(r3);
+                    cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForNewForegroundTask$2$1
+                        @Override // kotlin.jvm.functions.Function1
+                        /* renamed from: invoke */
+                        public final Object mo781invoke(Object obj2) {
+                            widgetTrampolineInteractor.taskStackChangeListeners.unregisterTaskStackListener(r3);
+                            return Unit.INSTANCE;
+                        }
+                    });
+                    Object result = cancellableContinuationImpl.getResult();
+                    if (result != coroutineSingletons) {
+                        result = Unit.INSTANCE;
+                    }
+                    if (result == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Boolean.TRUE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2$2, reason: invalid class name and collision with other inner class name */
+        final class C01662 extends SuspendLambda implements Function1 {
+            final /* synthetic */ long $startTime;
+            int label;
+            final /* synthetic */ WidgetTrampolineInteractor this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C01662(WidgetTrampolineInteractor widgetTrampolineInteractor, long j, Continuation continuation) {
+                super(1, continuation);
+                this.this$0 = widgetTrampolineInteractor;
+                this.$startTime = j;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Continuation continuation) {
+                return new C01662(this.this$0, this.$startTime, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                return ((C01662) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i != 0) {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    return obj;
+                }
+                ResultKt.throwOnFailure(obj);
+                WidgetTrampolineInteractor widgetTrampolineInteractor = this.this$0;
+                long j = this.$startTime;
+                this.label = 1;
+                Object objAccess$waitForActivityStartByPolling = WidgetTrampolineInteractor.access$waitForActivityStartByPolling(widgetTrampolineInteractor, j, this);
+                return objAccess$waitForActivityStartByPolling == coroutineSingletons ? coroutineSingletons : objAccess$waitForActivityStartByPolling;
+            }
+        }
+
+        /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2$3, reason: invalid class name */
+        final class AnonymousClass3 extends SuspendLambda implements Function1 {
+            int label;
+            final /* synthetic */ WidgetTrampolineInteractor this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass3(WidgetTrampolineInteractor widgetTrampolineInteractor, Continuation continuation) {
+                super(1, continuation);
+                this.this$0 = widgetTrampolineInteractor;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Continuation continuation) {
+                return new AnonymousClass3(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                return ((AnonymousClass3) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    WidgetTrampolineInteractor widgetTrampolineInteractor = this.this$0;
+                    this.label = 1;
+                    int i2 = WidgetTrampolineInteractor.$r8$clinit;
+                    widgetTrampolineInteractor.getClass();
+                    SceneKey sceneKey = Scenes.Communal;
+                    Object objCollect = new FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1(widgetTrampolineInteractor.keyguardTransitionInteractor.isFinishedIn(KeyguardState.GLANCEABLE_HUB), new WidgetTrampolineInteractor$waitForTransitionAwayFromHub$2(null)).collect(new FlowCollector() { // from class: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForTransitionAwayFromHub$3
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            ((Boolean) obj2).booleanValue();
+                            return Unit.INSTANCE;
+                        }
+                    }, this);
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
+                    }
+                    if (objCollect == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Boolean.FALSE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08382(long j, Continuation continuation) {
+            super(2, continuation);
+            this.$startTime = j;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return WidgetTrampolineInteractor.this.new C08382(this.$startTime, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08382) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i != 0) {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return obj;
+            }
+            ResultKt.throwOnFailure(obj);
+            Function1[] function1Arr = {new AnonymousClass1(WidgetTrampolineInteractor.this, null), new C01662(WidgetTrampolineInteractor.this, this.$startTime, null), new AnonymousClass3(WidgetTrampolineInteractor.this, null)};
+            this.label = 1;
+            Object objRace = SuspendKt.race(function1Arr, this);
+            return objRace == coroutineSingletons ? coroutineSingletons : objRace;
         }
     }
 
@@ -49,257 +331,230 @@ public final class WidgetTrampolineInteractor {
         this.logger = new Logger(logBuffer, "WidgetTrampolineInteractor");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00bd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x00bd, code lost:
     
-        if (kotlinx.coroutines.DelayKt.m3449delayVtjQ1oo(r5, r0) != r1) goto L13;
+        if (kotlinx.coroutines.DelayKt.m3469delayVtjQ1oo(r5, r0) != r1) goto L13;
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x00bd -> B:11:0x0032). Please report as a decompilation issue!!! */
+    /* JADX WARN: Path cross not found for [B:27:0x0086, B:30:0x0090], limit reached: 41 */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x007c  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:38:0x00bd -> B:13:0x0032). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$waitForActivityStartByPolling(com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor r12, long r13, kotlin.coroutines.jvm.internal.ContinuationImpl r15) {
-        /*
-            r12.getClass()
-            boolean r0 = r15 instanceof com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartByPolling$1
-            if (r0 == 0) goto L16
-            r0 = r15
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartByPolling$1 r0 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartByPolling$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartByPolling$1 r0 = new com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartByPolling$1
-            r0.<init>(r12, r15)
-        L1b:
-            java.lang.Object r15 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L47
-            if (r2 == r4) goto L3d
-            if (r2 != r3) goto L35
-            long r12 = r0.J$0
-            java.lang.Object r14 = r0.L$0
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor r14 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor) r14
-            kotlin.ResultKt.throwOnFailure(r15)
-        L32:
-            r7 = r12
-            r12 = r14
-            goto L4b
-        L35:
-            java.lang.IllegalStateException r12 = new java.lang.IllegalStateException
-            java.lang.String r13 = "call to 'resume' before 'invoke' with coroutine"
-            r12.<init>(r13)
-            throw r12
-        L3d:
-            long r12 = r0.J$0
-            java.lang.Object r14 = r0.L$0
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor r14 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor) r14
-            kotlin.ResultKt.throwOnFailure(r15)
-            goto L7e
-        L47:
-            kotlin.ResultKt.throwOnFailure(r15)
-            r7 = r13
-        L4b:
-            com.android.systemui.common.usagestats.domain.UsageStatsInteractor r13 = r12.usageStatsInteractor
-            r0.L$0 = r12
-            r0.J$0 = r7
-            r0.label = r4
-            com.android.systemui.util.time.SystemClock r14 = r13.systemClock
-            long r9 = r14.currentTimeMillis()
-            android.os.UserHandle r14 = android.os.UserHandle.CURRENT
-            kotlin.collections.EmptyList r11 = kotlin.collections.EmptyList.INSTANCE
-            boolean r15 = kotlin.jvm.internal.Intrinsics.areEqual(r14, r14)
-            if (r15 == 0) goto L6b
-            com.android.systemui.settings.UserTracker r14 = r13.userTracker
-            com.android.systemui.settings.UserTrackerImpl r14 = (com.android.systemui.settings.UserTrackerImpl) r14
-            android.os.UserHandle r14 = r14.getUserHandle()
-        L6b:
-            r6 = r14
-            com.android.systemui.common.usagestats.data.model.UsageStatsQuery r5 = new com.android.systemui.common.usagestats.data.model.UsageStatsQuery
-            r5.<init>(r6, r7, r9, r11)
-            com.android.systemui.common.usagestats.data.repository.UsageStatsRepository r13 = r13.repository
-            com.android.systemui.common.usagestats.data.repository.UsageStatsRepositoryImpl r13 = (com.android.systemui.common.usagestats.data.repository.UsageStatsRepositoryImpl) r13
-            java.lang.Object r15 = r13.queryActivityEvents(r5, r0)
-            if (r15 != r1) goto L7c
-            goto Lbf
-        L7c:
-            r14 = r12
-            r12 = r7
-        L7e:
-            java.util.List r15 = (java.util.List) r15
-            java.lang.Iterable r15 = (java.lang.Iterable) r15
-            boolean r2 = r15 instanceof java.util.Collection
-            if (r2 == 0) goto L90
-            r2 = r15
-            java.util.Collection r2 = (java.util.Collection) r2
-            boolean r2 = r2.isEmpty()
-            if (r2 == 0) goto L90
-            goto La9
-        L90:
-            java.util.Iterator r15 = r15.iterator()
-        L94:
-            boolean r2 = r15.hasNext()
-            if (r2 == 0) goto La9
-            java.lang.Object r2 = r15.next()
-            com.android.systemui.common.usagestats.shared.model.ActivityEventModel r2 = (com.android.systemui.common.usagestats.shared.model.ActivityEventModel) r2
-            com.android.systemui.common.usagestats.shared.model.ActivityEventModel$Lifecycle r2 = r2.lifecycle
-            com.android.systemui.common.usagestats.shared.model.ActivityEventModel$Lifecycle r5 = com.android.systemui.common.usagestats.shared.model.ActivityEventModel.Lifecycle.RESUMED
-            if (r2 != r5) goto L94
-            java.lang.Boolean r12 = java.lang.Boolean.TRUE
-            return r12
-        La9:
-            kotlin.time.Duration$Companion r15 = kotlin.time.Duration.Companion
-            r15 = 200(0xc8, float:2.8E-43)
-            kotlin.time.DurationUnit r2 = kotlin.time.DurationUnit.MILLISECONDS
-            long r5 = kotlin.time.DurationKt.toDuration(r15, r2)
-            r0.L$0 = r14
-            r0.J$0 = r12
-            r0.label = r3
-            java.lang.Object r15 = kotlinx.coroutines.DelayKt.m3449delayVtjQ1oo(r5, r0)
-            if (r15 != r1) goto L32
-        Lbf:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor.access$waitForActivityStartByPolling(com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor, long, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$waitForActivityStartByPolling(WidgetTrampolineInteractor widgetTrampolineInteractor, long j, ContinuationImpl continuationImpl) {
+        WidgetTrampolineInteractor$waitForActivityStartByPolling$1 widgetTrampolineInteractor$waitForActivityStartByPolling$1;
+        long j2;
+        WidgetTrampolineInteractor widgetTrampolineInteractor2;
+        long j3;
+        List list;
+        Iterator it;
+        UserHandle userHandle;
+        widgetTrampolineInteractor.getClass();
+        if (continuationImpl instanceof WidgetTrampolineInteractor$waitForActivityStartByPolling$1) {
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1 = (WidgetTrampolineInteractor$waitForActivityStartByPolling$1) continuationImpl;
+            int i = widgetTrampolineInteractor$waitForActivityStartByPolling$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                widgetTrampolineInteractor$waitForActivityStartByPolling$1.label = i - Integer.MIN_VALUE;
+            } else {
+                widgetTrampolineInteractor$waitForActivityStartByPolling$1 = new WidgetTrampolineInteractor$waitForActivityStartByPolling$1(widgetTrampolineInteractor, continuationImpl);
+            }
+        }
+        Object objQueryActivityEvents = widgetTrampolineInteractor$waitForActivityStartByPolling$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = widgetTrampolineInteractor$waitForActivityStartByPolling$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objQueryActivityEvents);
+            j2 = j;
+            UsageStatsInteractor usageStatsInteractor = widgetTrampolineInteractor.usageStatsInteractor;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0 = widgetTrampolineInteractor;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0 = j2;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.label = 1;
+            long jCurrentTimeMillis = usageStatsInteractor.systemClock.currentTimeMillis();
+            userHandle = UserHandle.CURRENT;
+            EmptyList emptyList = EmptyList.INSTANCE;
+            if (Intrinsics.areEqual(userHandle, userHandle)) {
+            }
+            objQueryActivityEvents = ((UsageStatsRepositoryImpl) usageStatsInteractor.repository).queryActivityEvents(new UsageStatsQuery(userHandle, j2, jCurrentTimeMillis, emptyList), widgetTrampolineInteractor$waitForActivityStartByPolling$1);
+            if (objQueryActivityEvents != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            j3 = widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0;
+            widgetTrampolineInteractor2 = (WidgetTrampolineInteractor) widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0;
+            ResultKt.throwOnFailure(objQueryActivityEvents);
+            j2 = j3;
+            widgetTrampolineInteractor = widgetTrampolineInteractor2;
+            UsageStatsInteractor usageStatsInteractor2 = widgetTrampolineInteractor.usageStatsInteractor;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0 = widgetTrampolineInteractor;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0 = j2;
+            widgetTrampolineInteractor$waitForActivityStartByPolling$1.label = 1;
+            long jCurrentTimeMillis2 = usageStatsInteractor2.systemClock.currentTimeMillis();
+            userHandle = UserHandle.CURRENT;
+            EmptyList emptyList2 = EmptyList.INSTANCE;
+            if (Intrinsics.areEqual(userHandle, userHandle)) {
+                userHandle = ((UserTrackerImpl) usageStatsInteractor2.userTracker).getUserHandle();
+            }
+            objQueryActivityEvents = ((UsageStatsRepositoryImpl) usageStatsInteractor2.repository).queryActivityEvents(new UsageStatsQuery(userHandle, j2, jCurrentTimeMillis2, emptyList2), widgetTrampolineInteractor$waitForActivityStartByPolling$1);
+            if (objQueryActivityEvents != coroutineSingletons) {
+                widgetTrampolineInteractor2 = widgetTrampolineInteractor;
+                j3 = j2;
+                list = (List) objQueryActivityEvents;
+                if ((list instanceof Collection) || !list.isEmpty()) {
+                    it = list.iterator();
+                    while (it.hasNext()) {
+                        if (((ActivityEventModel) it.next()).lifecycle == ActivityEventModel.Lifecycle.RESUMED) {
+                            return Boolean.TRUE;
+                        }
+                    }
+                }
+                Duration.Companion companion = Duration.Companion;
+                long duration = DurationKt.toDuration(200, DurationUnit.MILLISECONDS);
+                widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0 = widgetTrampolineInteractor2;
+                widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0 = j3;
+                widgetTrampolineInteractor$waitForActivityStartByPolling$1.label = 2;
+            }
+            return coroutineSingletons;
+        }
+        j3 = widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0;
+        widgetTrampolineInteractor2 = (WidgetTrampolineInteractor) widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0;
+        ResultKt.throwOnFailure(objQueryActivityEvents);
+        list = (List) objQueryActivityEvents;
+        if (list instanceof Collection) {
+        }
+        it = list.iterator();
+        while (it.hasNext()) {
+        }
+        Duration.Companion companion2 = Duration.Companion;
+        long duration2 = DurationKt.toDuration(200, DurationUnit.MILLISECONDS);
+        widgetTrampolineInteractor$waitForActivityStartByPolling$1.L$0 = widgetTrampolineInteractor2;
+        widgetTrampolineInteractor$waitForActivityStartByPolling$1.J$0 = j3;
+        widgetTrampolineInteractor$waitForActivityStartByPolling$1.label = 2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object waitForActivityStartAndDismissKeyguard(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1 r0 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1 r0 = new com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor r4 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L41
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r5)
-            r0.L$0 = r4
-            r0.label = r3
-            java.lang.Object r5 = r4.waitForActivityStartWhileOnHub(r0)
-            if (r5 != r1) goto L41
-            return r1
-        L41:
-            java.lang.Boolean r5 = (java.lang.Boolean) r5
-            boolean r5 = r5.booleanValue()
-            if (r5 == 0) goto L5d
-            com.android.systemui.log.core.Logger r5 = r4.logger
-            java.lang.String r0 = "Detected trampoline, requesting unlock"
-            r1 = 0
-            r2 = 2
-            com.android.systemui.log.core.Logger.d$default(r5, r0, r1, r2, r1)
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$2 r5 = new com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$2
-            r5.<init>()
-            r0 = 0
-            com.android.systemui.plugins.ActivityStarter r4 = r4.activityStarter
-            r4.dismissKeyguardThenExecute(r5, r1, r0)
-        L5d:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor.waitForActivityStartAndDismissKeyguard(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object waitForActivityStartAndDismissKeyguard(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objWaitForActivityStartWhileOnHub = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWaitForActivityStartWhileOnHub);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objWaitForActivityStartWhileOnHub = waitForActivityStartWhileOnHub(anonymousClass1);
+            if (objWaitForActivityStartWhileOnHub == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (WidgetTrampolineInteractor) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(objWaitForActivityStartWhileOnHub);
+        }
+        if (((Boolean) objWaitForActivityStartWhileOnHub).booleanValue()) {
+            Logger.d$default(this.logger, "Detected trampoline, requesting unlock", null, 2, null);
+            this.activityStarter.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor.waitForActivityStartAndDismissKeyguard.2
+
+                /* renamed from: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartAndDismissKeyguard$2$1, reason: invalid class name */
+                final class AnonymousClass1 extends SuspendLambda implements Function2 {
+                    int label;
+                    final /* synthetic */ WidgetTrampolineInteractor this$0;
+
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    public AnonymousClass1(WidgetTrampolineInteractor widgetTrampolineInteractor, Continuation continuation) {
+                        super(2, continuation);
+                        this.this$0 = widgetTrampolineInteractor;
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Continuation create(Object obj, Continuation continuation) {
+                        return new AnonymousClass1(this.this$0, continuation);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function2
+                    public final Object invoke(Object obj, Object obj2) {
+                        return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        if (this.label != 0) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                        this.this$0.dreamManager.stopDream();
+                        return Unit.INSTANCE;
+                    }
+                }
+
+                @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
+                public final boolean onDismiss() {
+                    WidgetTrampolineInteractor widgetTrampolineInteractor = WidgetTrampolineInteractor.this;
+                    CoroutineTracingKt.launchTraced$default(widgetTrampolineInteractor.bgScope, null, null, new AnonymousClass1(widgetTrampolineInteractor, null), 7);
+                    return false;
+                }
+            }, null, false);
+        }
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object waitForActivityStartWhileOnHub(kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r8 = this;
-            boolean r0 = r9 instanceof com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1 r0 = (com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1 r0 = new com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$1
-            r0.<init>(r8, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r9)     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            return r9
-        L27:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r9)
-            com.android.systemui.util.time.SystemClock r9 = r8.systemClock
-            long r4 = r9.currentTimeMillis()
-            kotlin.time.Duration$Companion r9 = kotlin.time.Duration.Companion     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            kotlin.time.DurationUnit r9 = kotlin.time.DurationUnit.SECONDS     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            long r6 = kotlin.time.DurationKt.toDuration(r3, r9)     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2 r9 = new com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor$waitForActivityStartWhileOnHub$2     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            r2 = 0
-            r9.<init>(r8, r4, r2)     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            r0.label = r3     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            java.lang.Object r8 = kotlinx.coroutines.TimeoutKt.m3451withTimeoutKLykuaI(r6, r9, r0)     // Catch: kotlinx.coroutines.TimeoutCancellationException -> L50
-            if (r8 != r1) goto L4f
-            return r1
-        L4f:
-            return r8
-        L50:
-            java.lang.Boolean r8 = java.lang.Boolean.FALSE
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.domain.interactor.WidgetTrampolineInteractor.waitForActivityStartWhileOnHub(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object waitForActivityStartWhileOnHub(ContinuationImpl continuationImpl) {
+        C08371 c08371;
+        if (continuationImpl instanceof C08371) {
+            c08371 = (C08371) continuationImpl;
+            int i = c08371.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08371.label = i - Integer.MIN_VALUE;
+            } else {
+                c08371 = new C08371(continuationImpl);
+            }
+        }
+        Object obj = c08371.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08371.label;
+        try {
+            if (i2 != 0) {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return obj;
+            }
+            ResultKt.throwOnFailure(obj);
+            long jCurrentTimeMillis = this.systemClock.currentTimeMillis();
+            Duration.Companion companion = Duration.Companion;
+            long duration = DurationKt.toDuration(1, DurationUnit.SECONDS);
+            C08382 c08382 = new C08382(jCurrentTimeMillis, null);
+            c08371.label = 1;
+            Object objM3471withTimeoutKLykuaI = TimeoutKt.m3471withTimeoutKLykuaI(duration, c08382, c08371);
+            return objM3471withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3471withTimeoutKLykuaI;
+        } catch (TimeoutCancellationException unused) {
+            return Boolean.FALSE;
+        }
     }
 }

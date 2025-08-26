@@ -11,7 +11,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.systemui.R;
 import com.android.systemui.dextouchpad.data.GuideItems;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TouchpadViewPagerAdapter extends PagerAdapter {
     public final GuideItems itemList;
@@ -38,9 +37,9 @@ public class TouchpadViewPagerAdapter extends PagerAdapter {
 
     @Override // androidx.viewpager.widget.PagerAdapter
     public final Object instantiateItem(ViewPager viewPager, int i) {
-        View inflate = ((LayoutInflater) this.mContext.getSystemService("layout_inflater")).inflate(R.layout.dialog_touchpad_gesture_internal_content, (ViewGroup) null);
-        this.tv_title = (TextView) inflate.findViewById(R.id.title);
-        this.tv_content = (TextView) inflate.findViewById(R.id.content_text);
+        View viewInflate = ((LayoutInflater) this.mContext.getSystemService("layout_inflater")).inflate(R.layout.dialog_touchpad_gesture_internal_content, (ViewGroup) null);
+        this.tv_title = (TextView) viewInflate.findViewById(R.id.title);
+        this.tv_content = (TextView) viewInflate.findViewById(R.id.content_text);
         TextView textView = this.tv_title;
         GuideItems guideItems = this.itemList;
         textView.setText(((GuideItems.ItemInfo) guideItems.mItemList.get(i)).mTitle);
@@ -52,7 +51,7 @@ public class TouchpadViewPagerAdapter extends PagerAdapter {
             this.tv_title.setTextColor(-16777216);
             this.tv_content.setTextColor(-16777216);
         }
-        LottieAnimationView lottieAnimationView = (LottieAnimationView) inflate.findViewById(R.id.content_image);
+        LottieAnimationView lottieAnimationView = (LottieAnimationView) viewInflate.findViewById(R.id.content_image);
         if (((GuideItems.ItemInfo) guideItems.mItemList.get(i)).mIsAnimation) {
             lottieAnimationView.setAnimation(((GuideItems.ItemInfo) guideItems.mItemList.get(i)).mView);
             lottieAnimationView.enableMergePathsForKitKatAndAbove(true);
@@ -61,8 +60,8 @@ public class TouchpadViewPagerAdapter extends PagerAdapter {
         } else {
             lottieAnimationView.setImageResource(((GuideItems.ItemInfo) guideItems.mItemList.get(i)).mView);
         }
-        viewPager.addView(inflate);
-        return inflate;
+        viewPager.addView(viewInflate);
+        return viewInflate;
     }
 
     @Override // androidx.viewpager.widget.PagerAdapter

@@ -1,6 +1,7 @@
 package androidx.preference;
 
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PreferenceGroupAdapter extends RecyclerView.Adapter {
     public List mAccessibilityPositionTable;
@@ -45,7 +45,6 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
     public int mParentWidth = 0;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PreferenceResourceDescriptor {
         public final String mClassName;
         public final boolean mIsDotVisibled;
@@ -217,9 +216,9 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final int getItemViewType(int i) {
         PreferenceResourceDescriptor preferenceResourceDescriptor = new PreferenceResourceDescriptor(getItem(i));
-        int indexOf = this.mPreferenceResourceDescriptors.indexOf(preferenceResourceDescriptor);
-        if (indexOf != -1) {
-            return indexOf;
+        int iIndexOf = this.mPreferenceResourceDescriptors.indexOf(preferenceResourceDescriptor);
+        if (iIndexOf != -1) {
+            return iIndexOf;
         }
         int size = this.mPreferenceResourceDescriptors.size();
         this.mPreferenceResourceDescriptors.add(preferenceResourceDescriptor);
@@ -227,7 +226,7 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
         int dimensionPixelSize;
         int paddingEnd;
         PreferenceViewHolder preferenceViewHolder = (PreferenceViewHolder) viewHolder;
@@ -257,10 +256,10 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
             switchPreference.mWidth = width;
             switchPreference.onBindViewHolder(preferenceViewHolder);
             View view2 = preferenceViewHolder.itemView;
-            View findViewById = view2.findViewById(R.id.widget_frame);
-            View findViewById2 = view2.findViewById(android.R.id.widget_frame);
-            View findViewById3 = view2.findViewById(R.id.switch_widget);
-            View findViewById4 = view2.findViewById(android.R.id.switch_widget);
+            View viewFindViewById = view2.findViewById(R.id.widget_frame);
+            View viewFindViewById2 = view2.findViewById(android.R.id.widget_frame);
+            View viewFindViewById3 = view2.findViewById(R.id.switch_widget);
+            View viewFindViewById4 = view2.findViewById(android.R.id.switch_widget);
             Configuration configuration = switchPreference.mContext.getResources().getConfiguration();
             int i2 = configuration.screenWidthDp;
             int i3 = ((i2 > 320 || configuration.fontScale < 1.1f) && (i2 >= 411 || configuration.fontScale < 1.3f)) ? 2 : 1;
@@ -268,42 +267,42 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
                 if (switchPreference.mIsLargeLayout != i3) {
                     switchPreference.mIsLargeLayout = i3;
                     TextView textView2 = (TextView) view2.findViewById(android.R.id.title);
-                    findViewById2.setVisibility(0);
-                    findViewById.setVisibility(8);
+                    viewFindViewById2.setVisibility(0);
+                    viewFindViewById.setVisibility(8);
                     textView2.requestLayout();
                 }
-                switchPreference.syncSwitchView(findViewById4);
+                switchPreference.syncSwitchView(viewFindViewById4);
                 return;
             }
             switchPreference.mIsLargeLayout = i3;
             TextView textView3 = (TextView) view2.findViewById(android.R.id.title);
-            float measureText = textView3.getPaint().measureText(textView3.getText().toString());
+            float fMeasureText = textView3.getPaint().measureText(textView3.getText().toString());
             TextView textView4 = (TextView) view2.findViewById(android.R.id.summary);
-            float measureText2 = textView4.getVisibility() == 8 ? 0.0f : textView4.getPaint().measureText(textView4.getText().toString());
+            float fMeasureText2 = textView4.getVisibility() == 8 ? 0.0f : textView4.getPaint().measureText(textView4.getText().toString());
             float paddingEnd2 = ((switchPreference.mWidth - view2.getPaddingEnd()) - view2.getPaddingStart()) - switchPreference.mContext.getResources().getDimensionPixelSize(R.dimen.sesl_preference_item_switch_size);
-            if (measureText >= paddingEnd2 || measureText2 >= paddingEnd2) {
-                findViewById.setVisibility(0);
-                findViewById2.setVisibility(8);
+            if (fMeasureText >= paddingEnd2 || fMeasureText2 >= paddingEnd2) {
+                viewFindViewById.setVisibility(0);
+                viewFindViewById2.setVisibility(8);
                 textView3.requestLayout();
-                SwitchCompat switchCompat = (SwitchCompat) findViewById3;
+                SwitchCompat switchCompat = (SwitchCompat) viewFindViewById3;
                 if (!switchCompat.canHapticFeedback(switchPreference.mChecked) && switchPreference.mChecked != switchCompat.isChecked() && view2.hasWindowFocus() && SeslViewReflector.isVisibleToUser(view2) && !view2.isTemporarilyDetached()) {
                     switchCompat.performHapticFeedback(SeslHapticFeedbackConstantsReflector.semGetVibrationIndex(27));
                 }
-                switchPreference.syncSwitchView(findViewById3);
-                SwitchCompat switchCompat2 = (SwitchCompat) findViewById4;
+                switchPreference.syncSwitchView(viewFindViewById3);
+                SwitchCompat switchCompat2 = (SwitchCompat) viewFindViewById4;
                 switchCompat2.setOnCheckedChangeListener(null);
                 switchCompat2.setCheckedWithoutAnimation(switchPreference.mChecked);
                 return;
             }
-            findViewById2.setVisibility(0);
-            findViewById.setVisibility(8);
+            viewFindViewById2.setVisibility(0);
+            viewFindViewById.setVisibility(8);
             textView3.requestLayout();
-            SwitchCompat switchCompat3 = (SwitchCompat) findViewById4;
+            SwitchCompat switchCompat3 = (SwitchCompat) viewFindViewById4;
             if (!switchCompat3.canHapticFeedback(switchPreference.mChecked) && switchPreference.mChecked != switchCompat3.isChecked() && view2.hasWindowFocus() && SeslViewReflector.isVisibleToUser(view2) && !view2.isTemporarilyDetached()) {
                 switchCompat3.performHapticFeedback(SeslHapticFeedbackConstantsReflector.semGetVibrationIndex(27));
             }
-            switchPreference.syncSwitchView(findViewById4);
-            SwitchCompat switchCompat4 = (SwitchCompat) findViewById3;
+            switchPreference.syncSwitchView(viewFindViewById4);
+            SwitchCompat switchCompat4 = (SwitchCompat) viewFindViewById3;
             switchCompat4.setOnCheckedChangeListener(null);
             switchCompat4.setCheckedWithoutAnimation(switchPreference.mChecked);
             return;
@@ -316,10 +315,10 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
         switchPreferenceCompat.mWidth = width;
         switchPreferenceCompat.onBindViewHolder(preferenceViewHolder);
         View view3 = preferenceViewHolder.itemView;
-        View findViewById5 = view3.findViewById(R.id.widget_frame);
-        View findViewById6 = view3.findViewById(android.R.id.widget_frame);
-        View findViewById7 = view3.findViewById(R.id.switch_widget);
-        View findViewById8 = view3.findViewById(android.R.id.switch_widget);
+        View viewFindViewById5 = view3.findViewById(R.id.widget_frame);
+        View viewFindViewById6 = view3.findViewById(android.R.id.widget_frame);
+        View viewFindViewById7 = view3.findViewById(R.id.switch_widget);
+        View viewFindViewById8 = view3.findViewById(android.R.id.switch_widget);
         Configuration configuration2 = switchPreferenceCompat.mContext.getResources().getConfiguration();
         int i4 = configuration2.screenWidthDp;
         int i5 = ((i4 > 320 || configuration2.fontScale < 1.1f) && (i4 >= 411 || configuration2.fontScale < 1.3f)) ? 2 : 1;
@@ -327,49 +326,49 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
             if (switchPreferenceCompat.mIsLargeLayout != i5) {
                 switchPreferenceCompat.mIsLargeLayout = i5;
                 TextView textView5 = (TextView) view3.findViewById(android.R.id.title);
-                findViewById6.setVisibility(0);
-                findViewById5.setVisibility(8);
+                viewFindViewById6.setVisibility(0);
+                viewFindViewById5.setVisibility(8);
                 textView5.requestLayout();
             }
-            switchPreferenceCompat.syncSwitchView$1(findViewById8);
+            switchPreferenceCompat.syncSwitchView$1(viewFindViewById8);
             return;
         }
         switchPreferenceCompat.mIsLargeLayout = i5;
         TextView textView6 = (TextView) view3.findViewById(android.R.id.title);
-        float measureText3 = textView6.getPaint().measureText(textView6.getText().toString());
+        float fMeasureText3 = textView6.getPaint().measureText(textView6.getText().toString());
         TextView textView7 = (TextView) view3.findViewById(android.R.id.summary);
-        float measureText4 = textView7.getVisibility() == 8 ? 0.0f : textView7.getPaint().measureText(textView7.getText().toString());
+        float fMeasureText4 = textView7.getVisibility() == 8 ? 0.0f : textView7.getPaint().measureText(textView7.getText().toString());
         if (switchPreferenceCompat instanceof SeslSwitchPreferenceScreen) {
             dimensionPixelSize = switchPreferenceCompat.mContext.getResources().getDimensionPixelSize(R.dimen.sesl_preference_screen_item_switch_size);
-            paddingEnd = findViewById6.getPaddingEnd();
+            paddingEnd = viewFindViewById6.getPaddingEnd();
         } else {
             dimensionPixelSize = switchPreferenceCompat.mContext.getResources().getDimensionPixelSize(R.dimen.sesl_preference_item_switch_size);
-            paddingEnd = findViewById6.getPaddingEnd();
+            paddingEnd = viewFindViewById6.getPaddingEnd();
         }
         float paddingEnd3 = ((switchPreferenceCompat.mWidth - view3.getPaddingEnd()) - view3.getPaddingStart()) - (paddingEnd + dimensionPixelSize);
-        if (measureText3 >= paddingEnd3 || measureText4 >= paddingEnd3) {
-            findViewById5.setVisibility(0);
-            findViewById6.setVisibility(8);
+        if (fMeasureText3 >= paddingEnd3 || fMeasureText4 >= paddingEnd3) {
+            viewFindViewById5.setVisibility(0);
+            viewFindViewById6.setVisibility(8);
             textView6.requestLayout();
-            SwitchCompat switchCompat5 = (SwitchCompat) findViewById7;
+            SwitchCompat switchCompat5 = (SwitchCompat) viewFindViewById7;
             if (!switchCompat5.canHapticFeedback(switchPreferenceCompat.mChecked) && switchPreferenceCompat.mChecked != switchCompat5.isChecked() && view3.hasWindowFocus() && SeslViewReflector.isVisibleToUser(view3) && !view3.isTemporarilyDetached()) {
                 switchCompat5.performHapticFeedback(SeslHapticFeedbackConstantsReflector.semGetVibrationIndex(27));
             }
-            switchPreferenceCompat.syncSwitchView$1(findViewById7);
-            SwitchCompat switchCompat6 = (SwitchCompat) findViewById8;
+            switchPreferenceCompat.syncSwitchView$1(viewFindViewById7);
+            SwitchCompat switchCompat6 = (SwitchCompat) viewFindViewById8;
             switchCompat6.setOnCheckedChangeListener(null);
             switchCompat6.setCheckedWithoutAnimation(switchPreferenceCompat.mChecked);
             return;
         }
-        findViewById6.setVisibility(0);
-        findViewById5.setVisibility(8);
+        viewFindViewById6.setVisibility(0);
+        viewFindViewById5.setVisibility(8);
         textView6.requestLayout();
-        SwitchCompat switchCompat7 = (SwitchCompat) findViewById8;
+        SwitchCompat switchCompat7 = (SwitchCompat) viewFindViewById8;
         if (!switchCompat7.canHapticFeedback(switchPreferenceCompat.mChecked) && switchPreferenceCompat.mChecked != switchCompat7.isChecked() && view3.hasWindowFocus() && SeslViewReflector.isVisibleToUser(view3) && !view3.isTemporarilyDetached()) {
             switchCompat7.performHapticFeedback(SeslHapticFeedbackConstantsReflector.semGetVibrationIndex(27));
         }
-        switchPreferenceCompat.syncSwitchView$1(findViewById8);
-        SwitchCompat switchCompat8 = (SwitchCompat) findViewById7;
+        switchPreferenceCompat.syncSwitchView$1(viewFindViewById8);
+        SwitchCompat switchCompat8 = (SwitchCompat) viewFindViewById7;
         switchCompat8.setOnCheckedChangeListener(null);
         switchCompat8.setCheckedWithoutAnimation(switchPreferenceCompat.mChecked);
     }
@@ -377,27 +376,27 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         PreferenceResourceDescriptor preferenceResourceDescriptor = (PreferenceResourceDescriptor) this.mPreferenceResourceDescriptors.get(i);
-        LayoutInflater from = LayoutInflater.from(viewGroup.getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(viewGroup.getContext());
         this.mParent = viewGroup;
-        View inflate = from.inflate(preferenceResourceDescriptor.mLayoutResId, viewGroup, false);
-        ViewGroup viewGroup2 = (ViewGroup) inflate.findViewById(android.R.id.widget_frame);
+        View viewInflate = layoutInflaterFrom.inflate(preferenceResourceDescriptor.mLayoutResId, viewGroup, false);
+        ViewGroup viewGroup2 = (ViewGroup) viewInflate.findViewById(android.R.id.widget_frame);
         if (viewGroup2 != null) {
             int i2 = preferenceResourceDescriptor.mWidgetLayoutResId;
             if (i2 != 0) {
-                from.inflate(i2, viewGroup2);
+                layoutInflaterFrom.inflate(i2, viewGroup2);
             } else {
                 viewGroup2.setVisibility(8);
             }
         }
-        View findViewById = inflate.findViewById(R.id.badge_frame);
-        if (findViewById != null) {
+        View viewFindViewById = viewInflate.findViewById(R.id.badge_frame);
+        if (viewFindViewById != null) {
             if (preferenceResourceDescriptor.mIsDotVisibled) {
-                findViewById.setVisibility(0);
+                viewFindViewById.setVisibility(0);
             } else {
-                findViewById.setVisibility(8);
+                viewFindViewById.setVisibility(8);
             }
         }
-        return new PreferenceViewHolder(inflate);
+        return new PreferenceViewHolder(viewInflate);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -453,7 +452,7 @@ public class PreferenceGroupAdapter extends RecyclerView.Adapter {
             }
             arrayList3.add(Integer.valueOf(Math.max(i3, 0)));
         }
-        if (arrayList3.size() > 0 && ((Integer) AlertController$$ExternalSyntheticOutline0.m(arrayList3, 1)).intValue() >= ((ArrayList) this.mVisiblePreferences).size()) {
+        if (arrayList3.size() > 0 && ((Integer) AlertController$$ExternalSyntheticOutline0.m(1, arrayList3)).intValue() >= ((ArrayList) this.mVisiblePreferences).size()) {
             Log.w("PreferenceGroupAdapter", "accessibilityPosition over visible size | last " + arrayList3.get(arrayList3.size() - 1) + " vsize " + ((ArrayList) this.mVisiblePreferences).size());
             for (int i5 = 0; i5 < arrayList3.size(); i5++) {
                 arrayList3.set(i5, Integer.valueOf(i5));

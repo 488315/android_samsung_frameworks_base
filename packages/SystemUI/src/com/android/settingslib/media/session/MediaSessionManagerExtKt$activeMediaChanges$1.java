@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MediaSessionManagerExtKt$activeMediaChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MediaSessionManager $this_activeMediaChanges;
@@ -52,7 +51,6 @@ final class MediaSessionManagerExtKt$activeMediaChanges$1 extends SuspendLambda 
             final ProducerScope producerScope = (ProducerScope) this.L$0;
             MediaSessionManager.OnActiveSessionsChangedListener onActiveSessionsChangedListener = new MediaSessionManager.OnActiveSessionsChangedListener() { // from class: com.android.settingslib.media.session.MediaSessionManagerExtKt$activeMediaChanges$1$listener$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.settingslib.media.session.MediaSessionManagerExtKt$activeMediaChanges$1$listener$1$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ ProducerScope $$this$callbackFlow;
@@ -100,7 +98,7 @@ final class MediaSessionManagerExtKt$activeMediaChanges$1 extends SuspendLambda 
 
                 @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
                 public final void onActiveSessionsChanged(List list) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new AnonymousClass1(producerScope2, list, null), 3);
                 }
             };

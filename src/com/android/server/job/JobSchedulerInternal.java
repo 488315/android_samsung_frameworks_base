@@ -65,18 +65,18 @@ public interface JobSchedulerInternal {
         }
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-            long start = protoOutputStream.start(j);
-            long start2 = protoOutputStream.start(1146756268033L);
+            long jStart = protoOutputStream.start(j);
+            long jStart2 = protoOutputStream.start(1146756268033L);
             protoOutputStream.write(1120986464257L, this.countAllJobsLoaded);
             protoOutputStream.write(1120986464258L, this.countSystemServerJobsLoaded);
             protoOutputStream.write(1120986464259L, this.countSystemSyncManagerJobsLoaded);
-            protoOutputStream.end(start2);
-            long start3 = protoOutputStream.start(1146756268034L);
+            protoOutputStream.end(jStart2);
+            long jStart3 = protoOutputStream.start(1146756268034L);
             protoOutputStream.write(1120986464257L, this.countAllJobsSaved);
             protoOutputStream.write(1120986464258L, this.countSystemServerJobsSaved);
             protoOutputStream.write(1120986464259L, this.countSystemSyncManagerJobsSaved);
-            protoOutputStream.end(start3);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart3);
+            protoOutputStream.end(jStart);
         }
     }
 }

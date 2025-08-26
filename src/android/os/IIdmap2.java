@@ -112,9 +112,9 @@ public interface IIdmap2 extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIdmap2.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIdmap2)) {
-                return (IIdmap2) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIdmap2.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIdmap2)) {
+                return (IIdmap2) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -162,85 +162,85 @@ public interface IIdmap2 extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String idmapPath = getIdmapPath(readString, readInt);
+                    String idmapPath = getIdmapPath(string, i3);
                     parcel2.writeNoException();
                     parcel2.writeString(idmapPath);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeIdmap = removeIdmap(readString2, readInt2);
+                    boolean zRemoveIdmap = removeIdmap(string2, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeIdmap);
+                    parcel2.writeBoolean(zRemoveIdmap);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     OverlayConstraint[] overlayConstraintArr = (OverlayConstraint[]) parcel.createTypedArray(OverlayConstraint.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean verifyIdmap = verifyIdmap(readString3, readString4, readString5, readInt3, readBoolean, readInt4, overlayConstraintArr);
+                    boolean zVerifyIdmap = verifyIdmap(string3, string4, string5, i5, z, i6, overlayConstraintArr);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(verifyIdmap);
+                    parcel2.writeBoolean(zVerifyIdmap);
                     return true;
                 case 4:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt6 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
                     OverlayConstraint[] overlayConstraintArr2 = (OverlayConstraint[]) parcel.createTypedArray(OverlayConstraint.CREATOR);
                     parcel.enforceNoDataAvail();
-                    String createIdmap = createIdmap(readString6, readString7, readString8, readInt5, readBoolean2, readInt6, overlayConstraintArr2);
+                    String strCreateIdmap = createIdmap(string6, string7, string8, i7, z2, i8, overlayConstraintArr2);
                     parcel2.writeNoException();
-                    parcel2.writeString(createIdmap);
+                    parcel2.writeString(strCreateIdmap);
                     return true;
                 case 5:
                     FabricatedOverlayInternal fabricatedOverlayInternal = (FabricatedOverlayInternal) parcel.readTypedObject(FabricatedOverlayInternal.CREATOR);
                     parcel.enforceNoDataAvail();
-                    FabricatedOverlayInfo createFabricatedOverlay = createFabricatedOverlay(fabricatedOverlayInternal);
+                    FabricatedOverlayInfo fabricatedOverlayInfoCreateFabricatedOverlay = createFabricatedOverlay(fabricatedOverlayInternal);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createFabricatedOverlay, 1);
+                    parcel2.writeTypedObject(fabricatedOverlayInfoCreateFabricatedOverlay, 1);
                     return true;
                 case 6:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteFabricatedOverlay = deleteFabricatedOverlay(readString9);
+                    boolean zDeleteFabricatedOverlay = deleteFabricatedOverlay(string9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteFabricatedOverlay);
+                    parcel2.writeBoolean(zDeleteFabricatedOverlay);
                     return true;
                 case 7:
-                    int acquireFabricatedOverlayIterator = acquireFabricatedOverlayIterator();
+                    int iAcquireFabricatedOverlayIterator = acquireFabricatedOverlayIterator();
                     parcel2.writeNoException();
-                    parcel2.writeInt(acquireFabricatedOverlayIterator);
+                    parcel2.writeInt(iAcquireFabricatedOverlayIterator);
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    releaseFabricatedOverlayIterator(readInt7);
+                    releaseFabricatedOverlayIterator(i9);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<FabricatedOverlayInfo> nextFabricatedOverlayInfos = nextFabricatedOverlayInfos(readInt8);
+                    List<FabricatedOverlayInfo> listNextFabricatedOverlayInfos = nextFabricatedOverlayInfos(i10);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(nextFabricatedOverlayInfos, 1);
+                    parcel2.writeTypedList(listNextFabricatedOverlayInfos, 1);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String dumpIdmap = dumpIdmap(readString10);
+                    String strDumpIdmap = dumpIdmap(string10);
                     parcel2.writeNoException();
-                    parcel2.writeString(dumpIdmap);
+                    parcel2.writeString(strDumpIdmap);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -265,173 +265,173 @@ public interface IIdmap2 extends IInterface {
 
             @Override // android.os.IIdmap2
             public String getIdmapPath(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public boolean removeIdmap(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public boolean verifyIdmap(String str, String str2, String str3, int i, boolean z, int i2, OverlayConstraint[] overlayConstraintArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedArray(overlayConstraintArr, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedArray(overlayConstraintArr, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public String createIdmap(String str, String str2, String str3, int i, boolean z, int i2, OverlayConstraint[] overlayConstraintArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedArray(overlayConstraintArr, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedArray(overlayConstraintArr, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal fabricatedOverlayInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeTypedObject(fabricatedOverlayInternal, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FabricatedOverlayInfo) obtain2.readTypedObject(FabricatedOverlayInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fabricatedOverlayInternal, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FabricatedOverlayInfo) parcelObtain2.readTypedObject(FabricatedOverlayInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public boolean deleteFabricatedOverlay(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public int acquireFabricatedOverlayIterator() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public void releaseFabricatedOverlayIterator(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public List<FabricatedOverlayInfo> nextFabricatedOverlayInfos(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(FabricatedOverlayInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(FabricatedOverlayInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIdmap2
             public String dumpIdmap(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IIdmap2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

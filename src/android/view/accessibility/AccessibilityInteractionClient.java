@@ -234,10 +234,10 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 }
                 return window;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 AccessibilityWindowInfo window2 = connection.getWindow(i2);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 if (shouldTraceClient()) {
                     logTraceClient(connection, "getWindow", "connectionId=" + i + ";accessibilityWindowId=" + i2 + ";bypassCache=" + z);
                 }
@@ -249,7 +249,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 }
                 return window2;
             } catch (Throwable th) {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 throw th;
             }
         } catch (RemoteException e) {
@@ -278,22 +278,22 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                     }
                     return windowsOnAllDisplays;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    long uptimeMillis = SystemClock.uptimeMillis();
+                    long jUptimeMillis = SystemClock.uptimeMillis();
                     AccessibilityWindowInfo.WindowListSparseArray windows = connection.getWindows();
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     if (shouldTraceClient()) {
                         logTraceClient(connection, "getWindows", "connectionId=" + i);
                     }
                     if (windows != null) {
                         if (cache != null) {
-                            cache.setWindowsOnAllDisplays(windows, uptimeMillis);
+                            cache.setWindowsOnAllDisplays(windows, jUptimeMillis);
                         }
                         return windows;
                     }
                 } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     throw th;
                 }
             }
@@ -309,7 +309,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             if (connection == null) {
                 return null;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 List<AccessibilityWindowInfo> windowsMainDisplay = connection.getWindowsMainDisplay(0);
                 if (windowsMainDisplay != null) {
@@ -317,7 +317,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 }
                 return null;
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         } catch (RemoteException e) {
             Log.e("AccessibilityInteractionClient", "Error while calling remote getWindowsOnMainDisplays", e);
@@ -326,39 +326,110 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
     }
 
     public AccessibilityNodeInfo findAccessibilityNodeInfoByAccessibilityId(int i, IBinder iBinder, long j, boolean z, int i2, Bundle bundle) {
-        int i3;
+        int windowIdForLeashToken;
         if (iBinder == null) {
             return null;
         }
         try {
             IAccessibilityServiceConnection connection = getConnection(i);
-            i3 = connection != null ? connection.getWindowIdForLeashToken(iBinder) : -1;
+            windowIdForLeashToken = connection != null ? connection.getWindowIdForLeashToken(iBinder) : -1;
         } catch (RemoteException e) {
             Log.e("AccessibilityInteractionClient", "Error while calling remote getWindowIdForLeashToken", e);
-            i3 = -1;
+            windowIdForLeashToken = -1;
         }
-        if (i3 == -1) {
+        if (windowIdForLeashToken == -1) {
             return null;
         }
-        return findAccessibilityNodeInfoByAccessibilityId(i, i3, j, z, i2, bundle);
+        return findAccessibilityNodeInfoByAccessibilityId(i, windowIdForLeashToken, j, z, i2, bundle);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x006c, code lost:
-    
-        if (r15.isEnabled() == false) goto L17;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0084 A[Catch: RemoteException -> 0x0175, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x0175, blocks: (B:3:0x000e, B:7:0x0022, B:9:0x0028, B:11:0x002e, B:13:0x0034, B:16:0x0068, B:18:0x0070, B:20:0x0074, B:22:0x007a, B:23:0x007c, B:25:0x0084, B:28:0x0098, B:29:0x00d9, B:32:0x00f1, B:36:0x00fe, B:38:0x0108, B:39:0x0123, B:41:0x0128, B:43:0x012e, B:47:0x0136, B:49:0x0140, B:50:0x015b, B:53:0x0161, B:54:0x0164, B:59:0x0169, B:60:0x016c, B:62:0x016d, B:63:0x0174, B:64:0x006e, B:31:0x00dd), top: B:2:0x000e, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x016d A[Catch: RemoteException -> 0x0175, TryCatch #1 {RemoteException -> 0x0175, blocks: (B:3:0x000e, B:7:0x0022, B:9:0x0028, B:11:0x002e, B:13:0x0034, B:16:0x0068, B:18:0x0070, B:20:0x0074, B:22:0x007a, B:23:0x007c, B:25:0x0084, B:28:0x0098, B:29:0x00d9, B:32:0x00f1, B:36:0x00fe, B:38:0x0108, B:39:0x0123, B:41:0x0128, B:43:0x012e, B:47:0x0136, B:49:0x0140, B:50:0x015b, B:53:0x0161, B:54:0x0164, B:59:0x0169, B:60:0x016c, B:62:0x016d, B:63:0x0174, B:64:0x006e, B:31:0x00dd), top: B:2:0x000e, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x006e A[Catch: RemoteException -> 0x0175, TryCatch #1 {RemoteException -> 0x0175, blocks: (B:3:0x000e, B:7:0x0022, B:9:0x0028, B:11:0x002e, B:13:0x0034, B:15:0x0068, B:18:0x0070, B:20:0x0074, B:22:0x007a, B:23:0x007c, B:25:0x0084, B:28:0x0098, B:30:0x00d9, B:32:0x00f1, B:36:0x00fe, B:38:0x0108, B:39:0x0123, B:41:0x0128, B:43:0x012e, B:45:0x0136, B:47:0x0140, B:48:0x015b, B:51:0x0161, B:52:0x0164, B:55:0x0169, B:56:0x016c, B:57:0x016d, B:58:0x0174, B:17:0x006e, B:31:0x00dd), top: B:65:0x000e, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.view.accessibility.AccessibilityNodeInfo findAccessibilityNodeInfoByAccessibilityId(int r19, int r20, long r21, boolean r23, int r24, android.os.Bundle r25) {
-        /*
-            Method dump skipped, instructions count: 383
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.AccessibilityInteractionClient.findAccessibilityNodeInfoByAccessibilityId(int, int, long, boolean, int, android.os.Bundle):android.view.accessibility.AccessibilityNodeInfo");
+    public AccessibilityNodeInfo findAccessibilityNodeInfoByAccessibilityId(int i, int i2, long j, boolean z, int i3, Bundle bundle) {
+        String str;
+        int i4;
+        AccessibilityInteractionClient accessibilityInteractionClient;
+        IAccessibilityServiceConnection iAccessibilityServiceConnection;
+        int i5 = i3;
+        try {
+            IAccessibilityServiceConnection connection = getConnection(i);
+            if (connection == null) {
+                return null;
+            }
+            if (z) {
+                i5 &= -64;
+            } else {
+                AccessibilityCache cache = getCache(i);
+                if (cache != null) {
+                    AccessibilityNodeInfo node = cache.getNode(i2, j);
+                    if (node != null) {
+                        if (shouldTraceClient()) {
+                            logTraceClient(connection, "findAccessibilityNodeInfoByAccessibilityId cache", "connectionId=" + i + ";accessibilityWindowId=" + i2 + ";accessibilityNodeId=" + j + ";bypassCache=" + z + ";prefetchFlags=" + i5 + ";arguments=" + bundle);
+                        }
+                        return node;
+                    }
+                    if (!cache.isEnabled()) {
+                    }
+                }
+            }
+            if ((i5 & 63) != 0 && isWindowScrolling(i2)) {
+                i5 &= -64;
+            }
+            int i6 = i5 & 28;
+            if ((i6 & (i6 - 1)) != 0) {
+                throw new IllegalArgumentException("There can be no more than one descendant prefetching strategy");
+            }
+            int andIncrement = this.mInteractionIdCounter.getAndIncrement();
+            if (shouldTraceClient()) {
+                accessibilityInteractionClient = this;
+                str = "findAccessibilityNodeInfoByAccessibilityId";
+                i4 = i5;
+                iAccessibilityServiceConnection = connection;
+                accessibilityInteractionClient.logTraceClient(iAccessibilityServiceConnection, str, "InteractionId:" + andIncrement + "connectionId=" + i + ";accessibilityWindowId=" + i2 + ";accessibilityNodeId=" + j + ";bypassCache=" + z + ";prefetchFlags=" + i5 + ";arguments=" + bundle);
+            } else {
+                str = "findAccessibilityNodeInfoByAccessibilityId";
+                i4 = i5;
+                accessibilityInteractionClient = this;
+                iAccessibilityServiceConnection = connection;
+            }
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
+            try {
+                AccessibilityInteractionClient accessibilityInteractionClient2 = accessibilityInteractionClient;
+                int i7 = i4;
+                String str2 = str;
+                String[] strArrFindAccessibilityNodeInfoByAccessibilityId = iAccessibilityServiceConnection.findAccessibilityNodeInfoByAccessibilityId(i2, j, andIncrement, accessibilityInteractionClient2, i7, Thread.currentThread().getId(), bundle);
+                if (strArrFindAccessibilityNodeInfoByAccessibilityId == null) {
+                    return null;
+                }
+                if ((i7 & 32) != 0) {
+                    List<AccessibilityNodeInfo> findAccessibilityNodeInfosResultAndClear = accessibilityInteractionClient2.getFindAccessibilityNodeInfosResultAndClear(andIncrement);
+                    if (accessibilityInteractionClient2.shouldTraceCallback()) {
+                        accessibilityInteractionClient2.logTraceCallback(iAccessibilityServiceConnection, str2, "InteractionId:" + andIncrement + ";connectionId=" + i + ";Result: " + findAccessibilityNodeInfosResultAndClear);
+                    }
+                    accessibilityInteractionClient2.finalizeAndCacheAccessibilityNodeInfos(findAccessibilityNodeInfosResultAndClear, i, z, strArrFindAccessibilityNodeInfoByAccessibilityId);
+                    if (findAccessibilityNodeInfosResultAndClear == null || findAccessibilityNodeInfosResultAndClear.isEmpty()) {
+                        return null;
+                    }
+                    return findAccessibilityNodeInfosResultAndClear.get(0);
+                }
+                AccessibilityNodeInfo findAccessibilityNodeInfoResultAndClear = accessibilityInteractionClient2.getFindAccessibilityNodeInfoResultAndClear(andIncrement);
+                if (accessibilityInteractionClient2.shouldTraceCallback()) {
+                    accessibilityInteractionClient2.logTraceCallback(iAccessibilityServiceConnection, str2, "InteractionId:" + andIncrement + ";connectionId=" + i + ";Result: " + findAccessibilityNodeInfoResultAndClear);
+                }
+                if ((i7 & 63) != 0 && findAccessibilityNodeInfoResultAndClear != null) {
+                    accessibilityInteractionClient2.setInteractionWaitingForPrefetchResult(andIncrement, i, strArrFindAccessibilityNodeInfoByAccessibilityId);
+                }
+                accessibilityInteractionClient2.finalizeAndCacheAccessibilityNodeInfo(findAccessibilityNodeInfoResultAndClear, i, z, strArrFindAccessibilityNodeInfoByAccessibilityId);
+                return findAccessibilityNodeInfoResultAndClear;
+            } finally {
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+            }
+        } catch (RemoteException e) {
+            Log.e("AccessibilityInteractionClient", "Error while calling remote findAccessibilityNodeInfoByAccessibilityId", e);
+            return null;
+        }
     }
 
     private void setInteractionWaitingForPrefetchResult(int i, int i2, String[] strArr) {
@@ -381,7 +452,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             IAccessibilityServiceConnection connection = getConnection(i);
             if (connection != null) {
                 int andIncrement = this.mInteractionIdCounter.getAndIncrement();
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (shouldTraceClient()) {
                         StringBuilder sb = new StringBuilder("InteractionId=");
@@ -403,19 +474,19 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                         j2 = j;
                         str2 = str;
                     }
-                    String[] findAccessibilityNodeInfosByViewId = connection.findAccessibilityNodeInfosByViewId(i3, j2, str2, andIncrement, this, Thread.currentThread().getId());
-                    if (findAccessibilityNodeInfosByViewId != null) {
+                    String[] strArrFindAccessibilityNodeInfosByViewId = connection.findAccessibilityNodeInfosByViewId(i3, j2, str2, andIncrement, this, Thread.currentThread().getId());
+                    if (strArrFindAccessibilityNodeInfosByViewId != null) {
                         List<AccessibilityNodeInfo> findAccessibilityNodeInfosResultAndClear = getFindAccessibilityNodeInfosResultAndClear(andIncrement);
                         if (shouldTraceCallback()) {
                             logTraceCallback(connection, "findAccessibilityNodeInfosByViewId", "InteractionId=" + andIncrement + ";connectionId=" + i + ":Result: " + findAccessibilityNodeInfosResultAndClear);
                         }
                         if (findAccessibilityNodeInfosResultAndClear != null) {
-                            finalizeAndCacheAccessibilityNodeInfos(findAccessibilityNodeInfosResultAndClear, i, false, findAccessibilityNodeInfosByViewId);
+                            finalizeAndCacheAccessibilityNodeInfos(findAccessibilityNodeInfosResultAndClear, i, false, strArrFindAccessibilityNodeInfosByViewId);
                             return findAccessibilityNodeInfosResultAndClear;
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         } catch (RemoteException e) {
@@ -433,7 +504,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 executor.execute(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AccessibilityService.TakeScreenshotCallback.this.onFailure(1);
+                        takeScreenshotCallback.onFailure(1);
                     }
                 });
             }
@@ -441,30 +512,30 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 executor.execute(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AccessibilityService.TakeScreenshotCallback.this.onFailure(1);
+                        takeScreenshotCallback.onFailure(1);
                     }
                 });
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 final int andIncrement = this.mInteractionIdCounter.getAndIncrement();
                 this.mTakeScreenshotOfWindowCallbacks.put(andIncrement, Pair.create(executor, takeScreenshotCallback));
                 connection.takeScreenshotOfWindow(i2, andIncrement, new ScreenCapture.ScreenCaptureListener((ObjIntConsumer<ScreenCapture.ScreenshotHardwareBuffer>) new ObjIntConsumer() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda2
                     @Override // java.util.function.ObjIntConsumer
                     public final void accept(Object obj, int i3) {
-                        AccessibilityInteractionClient.this.lambda$takeScreenshotOfWindow$1(andIncrement, (ScreenCapture.ScreenshotHardwareBuffer) obj, i3);
+                        this.f$0.lambda$takeScreenshotOfWindow$1(andIncrement, (ScreenCapture.ScreenshotHardwareBuffer) obj, i3);
                     }
                 }), this);
                 this.mMainHandler.postDelayed(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AccessibilityInteractionClient.this.lambda$takeScreenshotOfWindow$2(andIncrement);
+                        this.f$0.lambda$takeScreenshotOfWindow$2(andIncrement);
                     }
                 }, TIMEOUT_INTERACTION_MILLIS);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             } catch (Throwable th) {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 throw th;
             }
         }
@@ -516,21 +587,21 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                     j2 = j;
                     str2 = str;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    String[] findAccessibilityNodeInfosByText = connection.findAccessibilityNodeInfosByText(i3, j2, str2, andIncrement, this, Thread.currentThread().getId());
-                    if (findAccessibilityNodeInfosByText != null) {
+                    String[] strArrFindAccessibilityNodeInfosByText = connection.findAccessibilityNodeInfosByText(i3, j2, str2, andIncrement, this, Thread.currentThread().getId());
+                    if (strArrFindAccessibilityNodeInfosByText != null) {
                         List<AccessibilityNodeInfo> findAccessibilityNodeInfosResultAndClear = getFindAccessibilityNodeInfosResultAndClear(andIncrement);
                         if (shouldTraceCallback()) {
                             logTraceCallback(connection, "findAccessibilityNodeInfosByText", "InteractionId=" + andIncrement + ";connectionId=" + i + ";Result: " + findAccessibilityNodeInfosResultAndClear);
                         }
                         if (findAccessibilityNodeInfosResultAndClear != null) {
-                            finalizeAndCacheAccessibilityNodeInfos(findAccessibilityNodeInfosResultAndClear, i, false, findAccessibilityNodeInfosByText);
+                            finalizeAndCacheAccessibilityNodeInfos(findAccessibilityNodeInfosResultAndClear, i, false, strArrFindAccessibilityNodeInfosByText);
                             return findAccessibilityNodeInfosResultAndClear;
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         } catch (RemoteException e) {
@@ -554,20 +625,20 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             if (shouldTraceClient()) {
                 logTraceClient(connection, "findFocus", "InteractionId:" + andIncrement + "connectionId=" + i + ";accessibilityWindowId=" + i2 + ";accessibilityNodeId=" + j + ";focusType=" + i3);
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                String[] findFocus = connection.findFocus(i2, j, i3, andIncrement, this, Thread.currentThread().getId());
-                if (findFocus == null) {
+                String[] strArrFindFocus = connection.findFocus(i2, j, i3, andIncrement, this, Thread.currentThread().getId());
+                if (strArrFindFocus == null) {
                     return null;
                 }
                 AccessibilityNodeInfo findAccessibilityNodeInfoResultAndClear = getFindAccessibilityNodeInfoResultAndClear(andIncrement);
                 if (shouldTraceCallback()) {
                     logTraceCallback(connection, "findFocus", "InteractionId=" + andIncrement + ";connectionId=" + i + ";Result:" + findAccessibilityNodeInfoResultAndClear);
                 }
-                finalizeAndCacheAccessibilityNodeInfo(findAccessibilityNodeInfoResultAndClear, i, false, findFocus);
+                finalizeAndCacheAccessibilityNodeInfo(findAccessibilityNodeInfoResultAndClear, i, false, strArrFindFocus);
                 return findAccessibilityNodeInfoResultAndClear;
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         } catch (RemoteException e) {
             Log.w("AccessibilityInteractionClient", "Error while calling remote findFocus", e);
@@ -605,20 +676,20 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 j2 = j;
                 i5 = i3;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                String[] focusSearch = connection.focusSearch(i4, j2, i5, andIncrement, this, Thread.currentThread().getId());
-                if (focusSearch == null) {
+                String[] strArrFocusSearch = connection.focusSearch(i4, j2, i5, andIncrement, this, Thread.currentThread().getId());
+                if (strArrFocusSearch == null) {
                     return null;
                 }
                 AccessibilityNodeInfo findAccessibilityNodeInfoResultAndClear = getFindAccessibilityNodeInfoResultAndClear(andIncrement);
-                finalizeAndCacheAccessibilityNodeInfo(findAccessibilityNodeInfoResultAndClear, i, false, focusSearch);
+                finalizeAndCacheAccessibilityNodeInfo(findAccessibilityNodeInfoResultAndClear, i, false, strArrFocusSearch);
                 if (shouldTraceCallback()) {
                     logTraceCallback(connection, "focusSearch", "InteractionId=" + andIncrement + ";connectionId=" + i + ";Result:" + findAccessibilityNodeInfoResultAndClear);
                 }
                 return findAccessibilityNodeInfoResultAndClear;
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         } catch (RemoteException e) {
             Log.w("AccessibilityInteractionClient", "Error while calling remote accessibilityFocusSearch", e);
@@ -661,7 +732,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 i5 = i3;
                 bundle2 = bundle;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (!connection.performAccessibilityAction(i4, j2, i5, bundle2, andIncrement, this, Thread.currentThread().getId())) {
                     return false;
@@ -672,7 +743,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 }
                 return performAccessibilityActionResultAndClear;
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         } catch (RemoteException e) {
             Log.w("AccessibilityInteractionClient", "Error while calling remote performAccessibilityAction", e);
@@ -836,7 +907,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 executor.execute(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AccessibilityService.TakeScreenshotCallback.this.onSuccess(screenshotResult);
+                        takeScreenshotCallback.onSuccess(screenshotResult);
                     }
                 });
                 this.mTakeScreenshotOfWindowCallbacks.remove(i);
@@ -854,7 +925,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
                 executor.execute(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AccessibilityService.TakeScreenshotCallback.this.onFailure(i);
+                        takeScreenshotCallback.onFailure(i);
                     }
                 });
                 this.mTakeScreenshotOfWindowCallbacks.remove(i2);
@@ -869,8 +940,8 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
         this.mPerformAccessibilityActionResult = false;
     }
 
-    private boolean waitForResultTimedLocked(int i) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+    private boolean waitForResultTimedLocked(int i) throws InterruptedException {
+        long jUptimeMillis = SystemClock.uptimeMillis();
         while (true) {
             try {
                 Message sameProcessMessageAndClear = getSameProcessMessageAndClear();
@@ -885,11 +956,11 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             if (this.mInteractionId > i) {
                 return false;
             }
-            long uptimeMillis2 = TIMEOUT_INTERACTION_MILLIS - (SystemClock.uptimeMillis() - uptimeMillis);
-            if (uptimeMillis2 <= 0) {
+            long jUptimeMillis2 = TIMEOUT_INTERACTION_MILLIS - (SystemClock.uptimeMillis() - jUptimeMillis);
+            if (jUptimeMillis2 <= 0) {
                 return false;
             }
-            this.mInstanceLock.wait(uptimeMillis2);
+            this.mInstanceLock.wait(jUptimeMillis2);
         }
     }
 
@@ -1058,7 +1129,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             this.mMainHandler.postDelayed(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInteractionClient.this.lambda$attachAccessibilityOverlayToWindow$7(andIncrement);
+                    this.f$0.lambda$attachAccessibilityOverlayToWindow$7(andIncrement);
                 }
             }, TIMEOUT_INTERACTION_MILLIS);
         }
@@ -1096,7 +1167,7 @@ public final class AccessibilityInteractionClient extends IAccessibilityInteract
             this.mMainHandler.postDelayed(new Runnable() { // from class: android.view.accessibility.AccessibilityInteractionClient$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInteractionClient.this.lambda$attachAccessibilityOverlayToDisplay$9(andIncrement);
+                    this.f$0.lambda$attachAccessibilityOverlayToDisplay$9(andIncrement);
                 }
             }, TIMEOUT_INTERACTION_MILLIS);
         }

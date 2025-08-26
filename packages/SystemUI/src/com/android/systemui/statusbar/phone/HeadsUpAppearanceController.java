@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HeadsUpAppearanceController extends ViewController implements OnHeadsUpChangedListener, DarkIconDispatcher.DarkReceiver, NotificationWakeUpCoordinator.WakeUpListener {
     public static final SourceType$Companion$from$1 HEADS_UP = SourceType.from("HeadsUp");
@@ -83,17 +82,17 @@ public class HeadsUpAppearanceController extends ViewController implements OnHea
         this.mSetExpandedHeight = new BiConsumer() { // from class: com.android.systemui.statusbar.phone.HeadsUpAppearanceController$$ExternalSyntheticLambda5
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                HeadsUpAppearanceController headsUpAppearanceController = HeadsUpAppearanceController.this;
-                float floatValue = ((Float) obj).floatValue();
-                float floatValue2 = ((Float) obj2).floatValue();
-                boolean z = floatValue != headsUpAppearanceController.mExpandedHeight;
-                boolean isExpanded$1 = headsUpAppearanceController.isExpanded$1();
-                headsUpAppearanceController.mExpandedHeight = floatValue;
-                headsUpAppearanceController.mAppearFraction = floatValue2;
+                HeadsUpAppearanceController headsUpAppearanceController = this.f$0;
+                float fFloatValue = ((Float) obj).floatValue();
+                float fFloatValue2 = ((Float) obj2).floatValue();
+                boolean z = fFloatValue != headsUpAppearanceController.mExpandedHeight;
+                boolean zIsExpanded$1 = headsUpAppearanceController.isExpanded$1();
+                headsUpAppearanceController.mExpandedHeight = fFloatValue;
+                headsUpAppearanceController.mAppearFraction = fFloatValue2;
                 if (z) {
                     ((HeadsUpManagerImpl) headsUpAppearanceController.mHeadsUpManager).getAllEntries().forEach(new HeadsUpAppearanceController$$ExternalSyntheticLambda0(headsUpAppearanceController, 4));
                 }
-                if (headsUpAppearanceController.isExpanded$1() != isExpanded$1) {
+                if (headsUpAppearanceController.isExpanded$1() != zIsExpanded$1) {
                     headsUpAppearanceController.updatePinnedStatus();
                 }
             }
@@ -335,18 +334,18 @@ public class HeadsUpAppearanceController extends ViewController implements OnHea
 
     public final void updateHeadsUpAndPulsingRoundness(ExpandableNotificationRow expandableNotificationRow) {
         boolean z = expandableNotificationRow == this.mTrackedChild;
-        boolean isPinned = expandableNotificationRow.mPinnedStatus.isPinned();
+        boolean zIsPinned = expandableNotificationRow.mPinnedStatus.isPinned();
         SourceType$Companion$from$1 sourceType$Companion$from$1 = HEADS_UP;
-        if (isPinned || expandableNotificationRow.mHeadsupDisappearRunning || z) {
-            float saturate = MathUtils.saturate(1.0f - this.mAppearFraction);
-            expandableNotificationRow.requestRoundness(saturate, saturate, sourceType$Companion$from$1, expandableNotificationRow.getRoundableState().targetView.isShown());
+        if (zIsPinned || expandableNotificationRow.mHeadsupDisappearRunning || z) {
+            float fSaturate = MathUtils.saturate(1.0f - this.mAppearFraction);
+            expandableNotificationRow.requestRoundness(fSaturate, fSaturate, sourceType$Companion$from$1, expandableNotificationRow.getRoundableState().targetView.isShown());
         } else {
             expandableNotificationRow.requestRoundnessReset(sourceType$Companion$from$1);
         }
         if (this.mNotificationRoundnessManager.mRoundForPulsingViews) {
-            boolean showingPulsing = expandableNotificationRow.showingPulsing();
+            boolean zShowingPulsing = expandableNotificationRow.showingPulsing();
             SourceType$Companion$from$1 sourceType$Companion$from$12 = PULSING;
-            if (showingPulsing) {
+            if (zShowingPulsing) {
                 expandableNotificationRow.requestRoundness(1.0f, 1.0f, sourceType$Companion$from$12, expandableNotificationRow.getRoundableState().targetView.isShown());
             } else {
                 expandableNotificationRow.requestRoundnessReset(sourceType$Companion$from$12);
@@ -365,68 +364,38 @@ public class HeadsUpAppearanceController extends ViewController implements OnHea
         ViewClippingUtil.setClippingDeactivated(this.mView, !z, this.mParentClippingParams);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x004d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updatePinnedStatus() {
-        /*
-            r5 = this;
-            int r0 = com.android.systemui.statusbar.headsup.shared.StatusBarNoHunBehavior.$r8$clinit
-            boolean r0 = r5.shouldHeadsUpStatusBarBeVisible()
-            r1 = 0
-            if (r0 == 0) goto L16
-            com.android.systemui.statusbar.notification.headsup.HeadsUpManager r0 = r5.mHeadsUpManager
-            com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl r0 = (com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl) r0
-            com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$HeadsUpEntry r0 = r0.getTopHeadsUpEntry()
-            if (r0 == 0) goto L16
-            com.android.systemui.statusbar.notification.collection.NotificationEntry r0 = r0.mEntry
-            goto L17
-        L16:
-            r0 = r1
-        L17:
-            T extends android.view.View r2 = r5.mView
-            com.android.systemui.statusbar.HeadsUpStatusBarView r2 = (com.android.systemui.statusbar.HeadsUpStatusBarView) r2
-            com.android.systemui.statusbar.notification.collection.NotificationEntry r3 = r2.mShowingEntry
-            r2.setEntry(r0)
-            if (r0 == r3) goto L56
-            r2 = 0
-            if (r0 != 0) goto L31
-            com.android.systemui.statusbar.notification.headsup.PinnedStatus r3 = com.android.systemui.statusbar.notification.headsup.PinnedStatus.NotPinned
-            r5.setPinnedStatus(r3)
-            boolean r3 = r5.isExpanded$1()
-        L2e:
-            r3 = r3 ^ 1
-            goto L45
-        L31:
-            if (r3 != 0) goto L44
-            com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r3 = r0.row
-            if (r3 == 0) goto L3a
-            com.android.systemui.statusbar.notification.headsup.PinnedStatus r3 = r3.mPinnedStatus
-            goto L3c
-        L3a:
-            com.android.systemui.statusbar.notification.headsup.PinnedStatus r3 = com.android.systemui.statusbar.notification.headsup.PinnedStatus.NotPinned
-        L3c:
-            r5.setPinnedStatus(r3)
-            boolean r3 = r5.isExpanded$1()
-            goto L2e
-        L44:
-            r3 = r2
-        L45:
-            int r4 = com.android.systemui.statusbar.notification.shared.NotificationIconContainerRefactor.$r8$clinit
-            r5.updateIsolatedIconLocation(r2)
-            if (r0 != 0) goto L4d
-            goto L51
-        L4d:
-            com.android.systemui.statusbar.notification.icon.IconPack r0 = r0.mIcons
-            com.android.systemui.statusbar.StatusBarIconView r1 = r0.mStatusBarIcon
-        L51:
-            com.android.systemui.statusbar.phone.NotificationIconAreaController r5 = r5.mNotificationIconAreaController
-            r5.showIconIsolated(r1, r3)
-        L56:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.HeadsUpAppearanceController.updatePinnedStatus():void");
+        boolean z;
+        boolean zIsExpanded$1;
+        HeadsUpManagerImpl.HeadsUpEntry topHeadsUpEntry;
+        int i = StatusBarNoHunBehavior.$r8$clinit;
+        NotificationEntry notificationEntry = (!shouldHeadsUpStatusBarBeVisible() || (topHeadsUpEntry = ((HeadsUpManagerImpl) this.mHeadsUpManager).getTopHeadsUpEntry()) == null) ? null : topHeadsUpEntry.mEntry;
+        HeadsUpStatusBarView headsUpStatusBarView = (HeadsUpStatusBarView) this.mView;
+        NotificationEntry notificationEntry2 = headsUpStatusBarView.mShowingEntry;
+        headsUpStatusBarView.setEntry(notificationEntry);
+        if (notificationEntry != notificationEntry2) {
+            if (notificationEntry == null) {
+                setPinnedStatus(PinnedStatus.NotPinned);
+                zIsExpanded$1 = isExpanded$1();
+            } else {
+                if (notificationEntry2 != null) {
+                    z = false;
+                    int i2 = NotificationIconContainerRefactor.$r8$clinit;
+                    updateIsolatedIconLocation(false);
+                    this.mNotificationIconAreaController.showIconIsolated(notificationEntry != null ? notificationEntry.mIcons.mStatusBarIcon : null, z);
+                }
+                ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
+                setPinnedStatus(expandableNotificationRow != null ? expandableNotificationRow.mPinnedStatus : PinnedStatus.NotPinned);
+                zIsExpanded$1 = isExpanded$1();
+            }
+            z = !zIsExpanded$1;
+            int i22 = NotificationIconContainerRefactor.$r8$clinit;
+            updateIsolatedIconLocation(false);
+            this.mNotificationIconAreaController.showIconIsolated(notificationEntry != null ? notificationEntry.mIcons.mStatusBarIcon : null, z);
+        }
     }
 }

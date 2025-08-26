@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class StreamingTextView extends EditText {
     public static final Pattern SPLIT_PATTERN = null;

@@ -17,11 +17,13 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.sharedconnectivity.app.HotspotNetwork;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.NetworkRegistrationInfo;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -29,6 +31,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,7 +53,6 @@ import com.android.settingslib.wifi.WifiUtils;
 import com.android.settingslib.wifi.dpp.WifiDppIntentHelper;
 import com.android.systemui.R;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsClassicRelease;
@@ -85,7 +88,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InternetDetailsContentController implements AccessPointController.AccessPointCallback {
     static final long SHORT_DURATION_TIMEOUT = 4000;
@@ -164,7 +166,7 @@ public class InternetDetailsContentController implements AccessPointController.A
             String action = intent.getAction();
             if (!"android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED".equals(action)) {
                 if ("android.net.wifi.supplicant.CONNECTION_CHANGE".equals(action)) {
-                    InternetDetailsContentController.m2909$$Nest$mupdateListener(InternetDetailsContentController.this);
+                    InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
                 }
             } else {
                 if (InternetDetailsContentController.DEBUG) {
@@ -172,12 +174,11 @@ public class InternetDetailsContentController implements AccessPointController.A
                 }
                 InternetDetailsContentController.this.mConfig = MobileMappings.Config.readConfig(context);
                 InternetDetailsContentController.this.refreshHasActiveSubIdOnDds();
-                InternetDetailsContentController.m2909$$Nest$mupdateListener(InternetDetailsContentController.this);
+                InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
             }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$1DisplayInfo, reason: invalid class name */
     public class C1DisplayInfo {
         public final CharSequence originalName;
@@ -190,7 +191,6 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectedWifiInternetMonitor implements WifiEntry.WifiEntryCallback {
         public WifiEntry mWifiEntry;
 
@@ -228,7 +228,6 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataConnectivityListener extends ConnectivityManager.NetworkCallback {
         public /* synthetic */ DataConnectivityListener(InternetDetailsContentController internetDetailsContentController, int i) {
             this();
@@ -261,7 +260,6 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface InternetDialogCallback {
         void dismissDialog();
 
@@ -292,7 +290,6 @@ public class InternetDetailsContentController implements AccessPointController.A
         void onWifiScan(boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InternetOnSubscriptionChangedListener extends SubscriptionManager.OnSubscriptionsChangedListener {
         public InternetOnSubscriptionChangedListener() {
         }
@@ -302,11 +299,10 @@ public class InternetDetailsContentController implements AccessPointController.A
             InternetDetailsContentController internetDetailsContentController = InternetDetailsContentController.this;
             Drawable drawable = InternetDetailsContentController.EMPTY_DRAWABLE;
             internetDetailsContentController.refreshHasActiveSubIdOnDds();
-            InternetDetailsContentController.m2909$$Nest$mupdateListener(InternetDetailsContentController.this);
+            InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InternetTelephonyCallback extends TelephonyCallback implements TelephonyCallback.DataEnabledListener, TelephonyCallback.DataConnectionStateListener, TelephonyCallback.DisplayInfoListener, TelephonyCallback.ServiceStateListener, TelephonyCallback.SignalStrengthsListener, TelephonyCallback.UserMobileDataStateListener, TelephonyCallback.CarrierNetworkListener {
         public final int mSubId;
 
@@ -379,7 +375,6 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WifiEntryConnectCallback implements WifiEntry.ConnectCallback {
         public final ActivityStarter mActivityStarter;
         public final InternetDetailsContentController mInternetDetailsContentController;
@@ -392,7 +387,7 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
 
         @Override // com.android.wifitrackerlib.WifiEntry.ConnectCallback
-        public final void onConnectResult(int i) {
+        public final void onConnectResult(int i) throws Resources.NotFoundException {
             boolean z = InternetDetailsContentController.DEBUG;
             if (z) {
                 ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onConnectResult ", "InternetDetailsContentController");
@@ -420,7 +415,7 @@ public class InternetDetailsContentController implements AccessPointController.A
     }
 
     /* renamed from: -$$Nest$mupdateListener, reason: not valid java name */
-    public static void m2909$$Nest$mupdateListener(InternetDetailsContentController internetDetailsContentController) {
+    public static void m2926$$Nest$mupdateListener(InternetDetailsContentController internetDetailsContentController) {
         internetDetailsContentController.getClass();
         int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         int i = internetDetailsContentController.mDefaultDataSubId;
@@ -520,13 +515,17 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
         int subscriptionId = activeSubscriptionInfo.getSubscriptionId();
         if (this.mSubIdTelephonyManagerMap.get(Integer.valueOf(subscriptionId)) == null) {
-            TelephonyManager createForSubscriptionId = this.mTelephonyManager.createForSubscriptionId(subscriptionId);
-            registerInternetTelephonyCallback(createForSubscriptionId, subscriptionId);
-            this.mSubIdTelephonyManagerMap.put(Integer.valueOf(subscriptionId), createForSubscriptionId);
+            TelephonyManager telephonyManagerCreateForSubscriptionId = this.mTelephonyManager.createForSubscriptionId(subscriptionId);
+            registerInternetTelephonyCallback(telephonyManagerCreateForSubscriptionId, subscriptionId);
+            this.mSubIdTelephonyManagerMap.put(Integer.valueOf(subscriptionId), telephonyManagerCreateForSubscriptionId);
         }
         return subscriptionId;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0054  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Intent getConfiguratorQrCodeGeneratorIntentOrNull(WifiEntry wifiEntry) {
         WifiConfiguration wifiConfiguration;
         String str;
@@ -538,18 +537,11 @@ public class InternetDetailsContentController implements AccessPointController.A
         intent.setAction("android.settings.WIFI_DPP_CONFIGURATOR_AUTH_QR_CODE_GENERATOR");
         intent.addFlags(335544320);
         WifiManager wifiManager = this.mWifiManager;
-        String removeFirstAndLastDoubleQuotes = WifiDppIntentHelper.removeFirstAndLastDoubleQuotes(wifiConfiguration.SSID);
+        String strRemoveFirstAndLastDoubleQuotes = WifiDppIntentHelper.removeFirstAndLastDoubleQuotes(wifiConfiguration.SSID);
         if (wifiConfiguration.allowedKeyManagement.get(8)) {
             str = WifiPolicy.SECURITY_TYPE_SAE;
-        } else {
-            if (!wifiConfiguration.allowedKeyManagement.get(9)) {
-                if (wifiConfiguration.allowedKeyManagement.get(1) || wifiConfiguration.allowedKeyManagement.get(4)) {
-                    str = "WPA";
-                } else if (wifiConfiguration.wepKeys[0] != null) {
-                    str = "WEP";
-                }
-            }
-            str = "nopass";
+        } else if (!wifiConfiguration.allowedKeyManagement.get(9)) {
+            str = (wifiConfiguration.allowedKeyManagement.get(1) || wifiConfiguration.allowedKeyManagement.get(4)) ? "WPA" : wifiConfiguration.wepKeys[0] == null ? "nopass" : "WEP";
         }
         Iterator it = wifiManager.getPrivilegedConfiguredNetworks().iterator();
         while (true) {
@@ -562,15 +554,15 @@ public class InternetDetailsContentController implements AccessPointController.A
                 str2 = (wifiConfiguration.allowedKeyManagement.get(0) && wifiConfiguration.allowedAuthAlgorithms.get(1)) ? wifiConfiguration2.wepKeys[wifiConfiguration2.wepTxKeyIndex] : wifiConfiguration2.preSharedKey;
             }
         }
-        String removeFirstAndLastDoubleQuotes2 = WifiDppIntentHelper.removeFirstAndLastDoubleQuotes(str2);
-        if (!TextUtils.isEmpty(removeFirstAndLastDoubleQuotes)) {
-            intent.putExtra("ssid", removeFirstAndLastDoubleQuotes);
+        String strRemoveFirstAndLastDoubleQuotes2 = WifiDppIntentHelper.removeFirstAndLastDoubleQuotes(str2);
+        if (!TextUtils.isEmpty(strRemoveFirstAndLastDoubleQuotes)) {
+            intent.putExtra("ssid", strRemoveFirstAndLastDoubleQuotes);
         }
         if (!TextUtils.isEmpty(str)) {
             intent.putExtra("security", str);
         }
-        if (!TextUtils.isEmpty(removeFirstAndLastDoubleQuotes2)) {
-            intent.putExtra("preSharedKey", removeFirstAndLastDoubleQuotes2);
+        if (!TextUtils.isEmpty(strRemoveFirstAndLastDoubleQuotes2)) {
+            intent.putExtra("preSharedKey", strRemoveFirstAndLastDoubleQuotes2);
         }
         intent.putExtra("hiddenSsid", wifiConfiguration.hiddenSSID);
         return intent;
@@ -580,19 +572,19 @@ public class InternetDetailsContentController implements AccessPointController.A
         return isAirplaneModeEnabled() ? this.mContext.getText(R.string.airplane_mode) : this.mContext.getText(R.string.quick_settings_internet_label);
     }
 
-    public final String getMobileNetworkSummary(int i) {
+    public final String getMobileNetworkSummary(int i) throws Resources.NotFoundException {
         Context context = this.mContext;
         MobileMappings.Config config = this.mConfig;
         TelephonyDisplayInfo orDefault = this.mSubIdTelephonyDisplayInfoMap.getOrDefault(Integer.valueOf(i), DEFAULT_TELEPHONY_DISPLAY_INFO);
-        String num = orDefault.getOverrideNetworkType() == 0 ? Integer.toString(orDefault.getNetworkType()) : MobileMappings.toDisplayIconKey(orDefault.getOverrideNetworkType());
+        String string = orDefault.getOverrideNetworkType() == 0 ? Integer.toString(orDefault.getNetworkType()) : MobileMappings.toDisplayIconKey(orDefault.getOverrideNetworkType());
         MobileMappings.mapIconSets(config);
-        String str = "";
-        if (((HashMap) MobileMappings.mapIconSets(config)).get(num) != null) {
-            SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = (SignalIcon$MobileIconGroup) ((HashMap) MobileMappings.mapIconSets(config)).get(num);
+        String string2 = "";
+        if (((HashMap) MobileMappings.mapIconSets(config)).get(string) != null) {
+            SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = (SignalIcon$MobileIconGroup) ((HashMap) MobileMappings.mapIconSets(config)).get(string);
             Objects.requireNonNull(signalIcon$MobileIconGroup);
             int i2 = isCarrierNetworkActive() ? TelephonyIcons.CARRIER_MERGED_WIFI.dataContentDescription : this.mCarrierNetworkChangeMode ? TelephonyIcons.CARRIER_NETWORK_CHANGE.dataContentDescription : signalIcon$MobileIconGroup.dataContentDescription;
             if (i2 != 0) {
-                str = SubscriptionManager.getResourcesForSubId(context, i).getString(i2);
+                string2 = SubscriptionManager.getResourcesForSubId(context, i).getString(i2);
             }
         } else if (DEBUG) {
             Log.d("InternetDetailsContentController", "The description of network type is empty.");
@@ -604,9 +596,9 @@ public class InternetDetailsContentController implements AccessPointController.A
         boolean z = i == this.mDefaultDataSubId;
         boolean z2 = getActiveAutoSwitchNonDdsSubId() != -1;
         if (activeNetworkIsCellular() || isCarrierNetworkActive()) {
-            return context2.getString(R.string.preference_summary_default_combination, context2.getString(z ? z2 ? R.string.mobile_data_poor_connection : R.string.mobile_data_connection_active : R.string.mobile_data_temp_connection_active), str);
+            return context2.getString(R.string.preference_summary_default_combination, context2.getString(z ? z2 ? R.string.mobile_data_poor_connection : R.string.mobile_data_connection_active : R.string.mobile_data_temp_connection_active), string2);
         }
-        return !isDataStateInService(i) ? context2.getString(R.string.mobile_data_no_connection) : str;
+        return !isDataStateInService(i) ? context2.getString(R.string.mobile_data_no_connection) : string2;
     }
 
     public final CharSequence getMobileNetworkTitle(int i) {
@@ -614,13 +606,13 @@ public class InternetDetailsContentController implements AccessPointController.A
         Supplier supplier = new Supplier() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                InternetDetailsContentController internetDetailsContentController = InternetDetailsContentController.this;
+                InternetDetailsContentController internetDetailsContentController = this.f$0;
                 return internetDetailsContentController.mKeyguardUpdateMonitor.getFilteredSubscriptionInfo().stream().filter(new InternetDetailsContentController$$ExternalSyntheticLambda10()).map(new InternetDetailsContentController$$ExternalSyntheticLambda5(internetDetailsContentController, 1));
             }
         };
         final HashSet hashSet = new HashSet();
         final int i2 = 0;
-        Stream filter = ((Stream) supplier.get()).filter(new Predicate() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda1
+        Stream streamFilter = ((Stream) supplier.get()).filter(new Predicate() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 int i3 = i2;
@@ -637,7 +629,7 @@ public class InternetDetailsContentController implements AccessPointController.A
             }
         });
         final int i3 = 0;
-        final Set set = (Set) filter.map(new Function() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda2
+        final Set set = (Set) streamFilter.map(new Function() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 InternetDetailsContentController.C1DisplayInfo c1DisplayInfo = (InternetDetailsContentController.C1DisplayInfo) obj;
@@ -661,140 +653,72 @@ public class InternetDetailsContentController implements AccessPointController.A
         final int i4 = 1;
         final int i5 = 1;
         Stream map = ((Stream) supplier.get()).map(new Function() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda9
-            /* JADX WARN: Removed duplicated region for block: B:10:0x0040  */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0059  */
-            /* JADX WARN: Removed duplicated region for block: B:18:0x005e  */
-            /* JADX WARN: Removed duplicated region for block: B:20:0x0051  */
+            /* JADX WARN: Removed duplicated region for block: B:9:0x0033  */
             @Override // java.util.function.Function
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final java.lang.Object apply(java.lang.Object r3) {
-                /*
-                    r2 = this;
-                    java.util.Set r0 = r1
-                    android.content.Context r2 = r2
-                    com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$1DisplayInfo r3 = (com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.C1DisplayInfo) r3
-                    android.graphics.drawable.Drawable r1 = com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.EMPTY_DRAWABLE
-                    java.lang.CharSequence r1 = r3.originalName
-                    boolean r0 = r0.contains(r1)
-                    if (r0 == 0) goto L77
-                    android.telephony.SubscriptionInfo r0 = r3.subscriptionInfo
-                    if (r0 == 0) goto L33
-                    java.lang.Class<android.telephony.TelephonyManager> r1 = android.telephony.TelephonyManager.class
-                    java.lang.Object r2 = r2.getSystemService(r1)
-                    android.telephony.TelephonyManager r2 = (android.telephony.TelephonyManager) r2
-                    int r0 = r0.getSubscriptionId()
-                    android.telephony.TelephonyManager r2 = r2.createForSubscriptionId(r0)
-                    java.lang.String r2 = r2.getLine1Number()
-                    boolean r0 = android.text.TextUtils.isEmpty(r2)
-                    if (r0 != 0) goto L33
-                    java.lang.String r2 = android.telephony.PhoneNumberUtils.formatNumber(r2)
-                    goto L34
-                L33:
-                    r2 = 0
-                L34:
-                    android.text.BidiFormatter r0 = android.text.BidiFormatter.getInstance()
-                    android.text.TextDirectionHeuristic r1 = android.text.TextDirectionHeuristics.LTR
-                    java.lang.String r2 = r0.unicodeWrap(r2, r1)
-                    if (r2 == 0) goto L51
-                    int r0 = r2.length()
-                    r1 = 4
-                    if (r0 <= r1) goto L53
-                    int r0 = r2.length()
-                    int r0 = r0 - r1
-                    java.lang.String r2 = r2.substring(r0)
-                    goto L53
-                L51:
-                    java.lang.String r2 = ""
-                L53:
-                    boolean r0 = android.text.TextUtils.isEmpty(r2)
-                    if (r0 == 0) goto L5e
-                    java.lang.CharSequence r2 = r3.originalName
-                    r3.uniqueName = r2
-                    return r3
-                L5e:
-                    java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                    r0.<init>()
-                    java.lang.CharSequence r1 = r3.originalName
-                    r0.append(r1)
-                    java.lang.String r1 = " "
-                    r0.append(r1)
-                    r0.append(r2)
-                    java.lang.String r2 = r0.toString()
-                    r3.uniqueName = r2
-                    return r3
-                L77:
-                    java.lang.CharSequence r2 = r3.originalName
-                    r3.uniqueName = r2
-                    return r3
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda9.apply(java.lang.Object):java.lang.Object");
+            public final Object apply(Object obj) {
+                String number;
+                Set set2 = set;
+                Context context2 = context;
+                InternetDetailsContentController.C1DisplayInfo c1DisplayInfo = (InternetDetailsContentController.C1DisplayInfo) obj;
+                Drawable drawable = InternetDetailsContentController.EMPTY_DRAWABLE;
+                if (!set2.contains(c1DisplayInfo.originalName)) {
+                    c1DisplayInfo.uniqueName = c1DisplayInfo.originalName;
+                    return c1DisplayInfo;
+                }
+                SubscriptionInfo subscriptionInfo = c1DisplayInfo.subscriptionInfo;
+                if (subscriptionInfo != null) {
+                    String line1Number = ((TelephonyManager) context2.getSystemService(TelephonyManager.class)).createForSubscriptionId(subscriptionInfo.getSubscriptionId()).getLine1Number();
+                    number = !TextUtils.isEmpty(line1Number) ? PhoneNumberUtils.formatNumber(line1Number) : null;
+                }
+                String strUnicodeWrap = BidiFormatter.getInstance().unicodeWrap(number, TextDirectionHeuristics.LTR);
+                if (strUnicodeWrap == null) {
+                    strUnicodeWrap = "";
+                } else if (strUnicodeWrap.length() > 4) {
+                    strUnicodeWrap = strUnicodeWrap.substring(strUnicodeWrap.length() - 4);
+                }
+                if (TextUtils.isEmpty(strUnicodeWrap)) {
+                    c1DisplayInfo.uniqueName = c1DisplayInfo.originalName;
+                    return c1DisplayInfo;
+                }
+                c1DisplayInfo.uniqueName = ((Object) c1DisplayInfo.originalName) + " " + strUnicodeWrap;
+                return c1DisplayInfo;
             }
         }).map(new InternetDetailsContentController$$ExternalSyntheticLambda5((Set) ((Stream) supplier.get()).map(new Function() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda9
+            /* JADX WARN: Removed duplicated region for block: B:9:0x0033  */
             @Override // java.util.function.Function
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object apply(Object obj) {
-                /*
-                    this = this;
-                    java.util.Set r0 = r1
-                    android.content.Context r2 = r2
-                    com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$1DisplayInfo r3 = (com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.C1DisplayInfo) r3
-                    android.graphics.drawable.Drawable r1 = com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.EMPTY_DRAWABLE
-                    java.lang.CharSequence r1 = r3.originalName
-                    boolean r0 = r0.contains(r1)
-                    if (r0 == 0) goto L77
-                    android.telephony.SubscriptionInfo r0 = r3.subscriptionInfo
-                    if (r0 == 0) goto L33
-                    java.lang.Class<android.telephony.TelephonyManager> r1 = android.telephony.TelephonyManager.class
-                    java.lang.Object r2 = r2.getSystemService(r1)
-                    android.telephony.TelephonyManager r2 = (android.telephony.TelephonyManager) r2
-                    int r0 = r0.getSubscriptionId()
-                    android.telephony.TelephonyManager r2 = r2.createForSubscriptionId(r0)
-                    java.lang.String r2 = r2.getLine1Number()
-                    boolean r0 = android.text.TextUtils.isEmpty(r2)
-                    if (r0 != 0) goto L33
-                    java.lang.String r2 = android.telephony.PhoneNumberUtils.formatNumber(r2)
-                    goto L34
-                L33:
-                    r2 = 0
-                L34:
-                    android.text.BidiFormatter r0 = android.text.BidiFormatter.getInstance()
-                    android.text.TextDirectionHeuristic r1 = android.text.TextDirectionHeuristics.LTR
-                    java.lang.String r2 = r0.unicodeWrap(r2, r1)
-                    if (r2 == 0) goto L51
-                    int r0 = r2.length()
-                    r1 = 4
-                    if (r0 <= r1) goto L53
-                    int r0 = r2.length()
-                    int r0 = r0 - r1
-                    java.lang.String r2 = r2.substring(r0)
-                    goto L53
-                L51:
-                    java.lang.String r2 = ""
-                L53:
-                    boolean r0 = android.text.TextUtils.isEmpty(r2)
-                    if (r0 == 0) goto L5e
-                    java.lang.CharSequence r2 = r3.originalName
-                    r3.uniqueName = r2
-                    return r3
-                L5e:
-                    java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                    r0.<init>()
-                    java.lang.CharSequence r1 = r3.originalName
-                    r0.append(r1)
-                    java.lang.String r1 = " "
-                    r0.append(r1)
-                    r0.append(r2)
-                    java.lang.String r2 = r0.toString()
-                    r3.uniqueName = r2
-                    return r3
-                L77:
-                    java.lang.CharSequence r2 = r3.originalName
-                    r3.uniqueName = r2
-                    return r3
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda9.apply(java.lang.Object):java.lang.Object");
+                String number;
+                Set set2 = set;
+                Context context2 = context;
+                InternetDetailsContentController.C1DisplayInfo c1DisplayInfo = (InternetDetailsContentController.C1DisplayInfo) obj;
+                Drawable drawable = InternetDetailsContentController.EMPTY_DRAWABLE;
+                if (!set2.contains(c1DisplayInfo.originalName)) {
+                    c1DisplayInfo.uniqueName = c1DisplayInfo.originalName;
+                    return c1DisplayInfo;
+                }
+                SubscriptionInfo subscriptionInfo = c1DisplayInfo.subscriptionInfo;
+                if (subscriptionInfo != null) {
+                    String line1Number = ((TelephonyManager) context2.getSystemService(TelephonyManager.class)).createForSubscriptionId(subscriptionInfo.getSubscriptionId()).getLine1Number();
+                    number = !TextUtils.isEmpty(line1Number) ? PhoneNumberUtils.formatNumber(line1Number) : null;
+                }
+                String strUnicodeWrap = BidiFormatter.getInstance().unicodeWrap(number, TextDirectionHeuristics.LTR);
+                if (strUnicodeWrap == null) {
+                    strUnicodeWrap = "";
+                } else if (strUnicodeWrap.length() > 4) {
+                    strUnicodeWrap = strUnicodeWrap.substring(strUnicodeWrap.length() - 4);
+                }
+                if (TextUtils.isEmpty(strUnicodeWrap)) {
+                    c1DisplayInfo.uniqueName = c1DisplayInfo.originalName;
+                    return c1DisplayInfo;
+                }
+                c1DisplayInfo.uniqueName = ((Object) c1DisplayInfo.originalName) + " " + strUnicodeWrap;
+                return c1DisplayInfo;
             }
         }).filter(new Predicate() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
@@ -888,14 +812,14 @@ public class InternetDetailsContentController implements AccessPointController.A
                 Log.d("InternetDetailsContentController", "TelephonyManager is null");
                 return drawable;
             }
-            boolean isCarrierNetworkActive = isCarrierNetworkActive();
-            if (isDataStateInService(i) || isVoiceStateInService(i) || isCarrierNetworkActive) {
+            boolean zIsCarrierNetworkActive = isCarrierNetworkActive();
+            if (isDataStateInService(i) || isVoiceStateInService(i) || zIsCarrierNetworkActive) {
                 AtomicReference atomicReference = new AtomicReference();
-                atomicReference.set(getSignalStrengthDrawableWithLevel(i, isCarrierNetworkActive));
+                atomicReference.set(getSignalStrengthDrawableWithLevel(i, zIsCarrierNetworkActive));
                 drawable = (Drawable) atomicReference.get();
             }
             int colorAttrDefaultColor = Utils.getColorAttrDefaultColor(this.mContext, android.R.attr.textColorTertiary, 0);
-            if (activeNetworkIsCellular() || isCarrierNetworkActive) {
+            if (activeNetworkIsCellular() || zIsCarrierNetworkActive) {
                 colorAttrDefaultColor = this.mContext.getColor(R.color.connected_network_primary_color);
             }
             drawable.setTint(colorAttrDefaultColor);
@@ -906,7 +830,7 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    public final Drawable getSignalStrengthDrawableWithLevel(int i, boolean z) {
+    public final Drawable getSignalStrengthDrawableWithLevel(int i, boolean z) throws Resources.NotFoundException {
         int state;
         int level;
         SignalStrength signalStrength = this.mSubIdTelephonyManagerMap.getOrDefault(Integer.valueOf(i), this.mTelephonyManager).getSignalStrength();
@@ -978,9 +902,9 @@ public class InternetDetailsContentController implements AccessPointController.A
         if (this.mCanConfigWifi && z) {
             return this.mContext.getText(SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS);
         }
-        boolean isCarrierNetworkActive = isCarrierNetworkActive();
+        boolean zIsCarrierNetworkActive = isCarrierNetworkActive();
         int i = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
-        if (isCarrierNetworkActive) {
+        if (zIsCarrierNetworkActive) {
             return this.mContext.getText(i);
         }
         if (z3) {
@@ -1016,15 +940,19 @@ public class InternetDetailsContentController implements AccessPointController.A
         return this.mContext.getText(i2);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:27:0x003f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Drawable getWifiDrawable(WifiEntry wifiEntry) {
         int i;
-        int i2 = 0;
+        int length = 0;
         if (!(wifiEntry instanceof HotspotNetworkEntry)) {
             if (wifiEntry.getLevel() == -1) {
                 return null;
             }
             WifiUtils.InternetIconInjector internetIconInjector = this.mWifiIconInjector;
-            boolean shouldShowXLevelIcon = wifiEntry.shouldShowXLevelIcon();
+            boolean zShouldShowXLevelIcon = wifiEntry.shouldShowXLevelIcon();
             int level = wifiEntry.getLevel();
             Context context = internetIconInjector.context;
             WifiUtils.Companion.getClass();
@@ -1034,35 +962,33 @@ public class InternetDetailsContentController implements AccessPointController.A
                 int[] iArr = WifiUtils.WIFI_PIE;
                 if (level >= iArr.length) {
                     ClockEventController$$ExternalSyntheticOutline0.m(level, "Wi-Fi level is out of range! level:", "WifiUtils");
-                    i2 = iArr.length - 1;
+                    length = iArr.length - 1;
                 } else {
-                    i2 = level;
+                    length = level;
                 }
             }
-            return context.getDrawable(shouldShowXLevelIcon ? WifiUtils.NO_INTERNET_WIFI_PIE[i2] : WifiUtils.WIFI_PIE[i2]);
+            return context.getDrawable(zShouldShowXLevelIcon ? WifiUtils.NO_INTERNET_WIFI_PIE[length] : WifiUtils.WIFI_PIE[length]);
         }
         HotspotNetworkEntry hotspotNetworkEntry = (HotspotNetworkEntry) wifiEntry;
         synchronized (hotspotNetworkEntry) {
             HotspotNetwork hotspotNetwork = hotspotNetworkEntry.mHotspotNetworkData;
             if (hotspotNetwork != null) {
-                i2 = hotspotNetwork.getNetworkProviderInfo().getDeviceType();
+                length = hotspotNetwork.getNetworkProviderInfo().getDeviceType();
             }
         }
         Context context2 = this.mContext;
         WifiUtils.Companion.getClass();
-        if (i2 != 1) {
-            if (i2 == 2) {
-                i = R.drawable.ic_hotspot_tablet;
-            } else if (i2 == 3) {
-                i = R.drawable.ic_hotspot_laptop;
-            } else if (i2 == 4) {
-                i = R.drawable.ic_hotspot_watch;
-            } else if (i2 == 5) {
-                i = R.drawable.ic_hotspot_auto;
-            }
-            return context2.getDrawable(i);
+        if (length == 1) {
+            i = R.drawable.ic_hotspot_phone;
+        } else if (length == 2) {
+            i = R.drawable.ic_hotspot_tablet;
+        } else if (length == 3) {
+            i = R.drawable.ic_hotspot_laptop;
+        } else if (length == 4) {
+            i = R.drawable.ic_hotspot_watch;
+        } else if (length == 5) {
+            i = R.drawable.ic_hotspot_auto;
         }
-        i = R.drawable.ic_hotspot_phone;
         return context2.getDrawable(i);
     }
 
@@ -1119,19 +1045,19 @@ public class InternetDetailsContentController implements AccessPointController.A
         }
     }
 
-    public final void makeOverlayToast(int i) {
+    public final void makeOverlayToast(int i) throws Resources.NotFoundException {
         Resources resources = this.mContext.getResources();
         Context context = this.mContext;
-        final SystemUIToast createToast = this.mToastFactory.createToast(context, context, resources.getString(i), this.mContext.getPackageName(), UserHandle.myUserId(), resources.getConfiguration().orientation);
-        final View view = createToast.mToastView;
+        final SystemUIToast systemUIToastCreateToast = this.mToastFactory.createToast(context, context, resources.getString(i), this.mContext.getPackageName(), UserHandle.myUserId(), resources.getConfiguration().orientation);
+        final View view = systemUIToastCreateToast.mToastView;
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.height = -2;
         layoutParams.width = -2;
         layoutParams.format = -3;
         layoutParams.type = 2017;
         layoutParams.flags = 152;
-        layoutParams.y = createToast.getYOffset().intValue();
-        int absoluteGravity = Gravity.getAbsoluteGravity(createToast.getGravity().intValue(), resources.getConfiguration().getLayoutDirection());
+        layoutParams.y = systemUIToastCreateToast.getYOffset().intValue();
+        int absoluteGravity = Gravity.getAbsoluteGravity(systemUIToastCreateToast.getGravity().intValue(), resources.getConfiguration().getLayoutDirection());
         layoutParams.gravity = absoluteGravity;
         if ((absoluteGravity & 7) == 7) {
             layoutParams.horizontalWeight = 1.0f;
@@ -1140,14 +1066,16 @@ public class InternetDetailsContentController implements AccessPointController.A
             layoutParams.verticalWeight = 1.0f;
         }
         this.mWindowManager.addView(view, layoutParams);
-        Animator animator = createToast.mInAnimator;
+        Animator animator = systemUIToastCreateToast.mInAnimator;
+        Log.i("InternetDetailsContentController", "makeOverlayToast inAnimator = " + animator + ",toastView = " + view);
         if (animator != null) {
             animator.start();
         }
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.3
             @Override // java.lang.Runnable
             public final void run() {
-                Animator animator2 = createToast.mOutAnimator;
+                Animator animator2 = systemUIToastCreateToast.mOutAnimator;
+                Log.i("InternetDetailsContentController", "makeOverlayToast outAnimator = " + animator2 + ", toastView = " + view);
                 if (animator2 != null) {
                     animator2.start();
                     animator2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.3.1
@@ -1157,6 +1085,9 @@ public class InternetDetailsContentController implements AccessPointController.A
                             InternetDetailsContentController.this.mWindowManager.removeViewImmediate(view);
                         }
                     });
+                } else if (view != null) {
+                    Log.i("InternetDetailsContentController", "makeOverlayToast: " + Debug.getCallers(5));
+                    InternetDetailsContentController.this.mWindowManager.removeViewImmediate(view);
                 }
             }
         }, SHORT_DURATION_TIMEOUT);
@@ -1284,7 +1215,7 @@ public class InternetDetailsContentController implements AccessPointController.A
             this.mWorkerHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsContentController$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InternetDetailsContentController internetDetailsContentController = InternetDetailsContentController.this;
+                    InternetDetailsContentController internetDetailsContentController = this.f$0;
                     int i2 = i;
                     boolean z3 = z;
                     if (internetDetailsContentController.mCarrierConfigTracker.getCarrierProvisionsWifiMergedNetworksBool(i2)) {
@@ -1312,11 +1243,11 @@ public class InternetDetailsContentController implements AccessPointController.A
         InternetDialogCallback internetDialogCallback;
         DialogTransitionAnimator dialogTransitionAnimator = this.mDialogTransitionAnimator;
         dialogTransitionAnimator.getClass();
-        DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
-        if (createActivityTransitionController$default == null && (internetDialogCallback = this.mCallback) != null) {
+        DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
+        if (anonymousClass1CreateActivityTransitionController$default == null && (internetDialogCallback = this.mCallback) != null) {
             internetDialogCallback.dismissDialog();
         }
-        this.mActivityStarter.postStartActivityDismissingKeyguard(intent, 0, createActivityTransitionController$default);
+        this.mActivityStarter.postStartActivityDismissingKeyguard(intent, 0, anonymousClass1CreateActivityTransitionController$default);
     }
 
     @Override // com.android.systemui.statusbar.connectivity.AccessPointController.AccessPointCallback

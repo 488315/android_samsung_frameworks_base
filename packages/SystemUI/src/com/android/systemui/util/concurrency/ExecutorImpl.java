@@ -6,13 +6,11 @@ import android.os.Message;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExecutorImpl implements DelayableExecutor {
     private static final int MSG_EXECUTE_RUNNABLE = 0;
     private final Handler mHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ExecutionToken implements Runnable {
         public final Runnable runnable;
 
@@ -34,9 +32,7 @@ public class ExecutorImpl implements DelayableExecutor {
         this.mHandler = new Handler(looper, new Handler.Callback() { // from class: com.android.systemui.util.concurrency.ExecutorImpl$$ExternalSyntheticLambda0
             @Override // android.os.Handler.Callback
             public final boolean handleMessage(Message message) {
-                boolean onHandleMessage;
-                onHandleMessage = ExecutorImpl.this.onHandleMessage(message);
-                return onHandleMessage;
+                return this.f$0.onHandleMessage(message);
             }
         });
     }

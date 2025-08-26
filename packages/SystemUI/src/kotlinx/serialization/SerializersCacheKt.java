@@ -18,7 +18,6 @@ import kotlinx.serialization.internal.ParametrizedSerializerCache;
 import kotlinx.serialization.internal.SerializerCache;
 import kotlinx.serialization.modules.SerializersModuleKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SerializersCacheKt {
     public static final ParametrizedSerializerCache PARAMETRIZED_SERIALIZERS_CACHE;
@@ -31,25 +30,25 @@ public abstract class SerializersCacheKt {
         Function1 function1 = new Function1() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KClass kClass = (KClass) obj;
                 switch (i) {
                     case 0:
-                        KSerializer serializerOrNull = SerializersKt.serializerOrNull(kClass);
-                        if (serializerOrNull != null) {
-                            return serializerOrNull;
+                        KSerializer kSerializerSerializerOrNull = SerializersKt.serializerOrNull(kClass);
+                        if (kSerializerSerializerOrNull != null) {
+                            return kSerializerSerializerOrNull;
                         }
                         if (((ClassBasedDeclarationContainer) kClass).getJClass().isInterface()) {
                             return new PolymorphicSerializer(kClass);
                         }
                         return null;
                     default:
-                        KSerializer serializerOrNull2 = SerializersKt.serializerOrNull(kClass);
-                        if (serializerOrNull2 == null) {
-                            serializerOrNull2 = ((ClassBasedDeclarationContainer) kClass).getJClass().isInterface() ? new PolymorphicSerializer(kClass) : null;
+                        KSerializer kSerializerSerializerOrNull2 = SerializersKt.serializerOrNull(kClass);
+                        if (kSerializerSerializerOrNull2 == null) {
+                            kSerializerSerializerOrNull2 = ((ClassBasedDeclarationContainer) kClass).getJClass().isInterface() ? new PolymorphicSerializer(kClass) : null;
                         }
-                        if (serializerOrNull2 != null) {
-                            return serializerOrNull2.getDescriptor().isNullable() ? serializerOrNull2 : new NullableSerializer(serializerOrNull2);
+                        if (kSerializerSerializerOrNull2 != null) {
+                            return kSerializerSerializerOrNull2.getDescriptor().isNullable() ? kSerializerSerializerOrNull2 : new NullableSerializer(kSerializerSerializerOrNull2);
                         }
                         return null;
                 }
@@ -61,25 +60,25 @@ public abstract class SerializersCacheKt {
         Function1 function12 = new Function1() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KClass kClass = (KClass) obj;
                 switch (i2) {
                     case 0:
-                        KSerializer serializerOrNull = SerializersKt.serializerOrNull(kClass);
-                        if (serializerOrNull != null) {
-                            return serializerOrNull;
+                        KSerializer kSerializerSerializerOrNull = SerializersKt.serializerOrNull(kClass);
+                        if (kSerializerSerializerOrNull != null) {
+                            return kSerializerSerializerOrNull;
                         }
                         if (((ClassBasedDeclarationContainer) kClass).getJClass().isInterface()) {
                             return new PolymorphicSerializer(kClass);
                         }
                         return null;
                     default:
-                        KSerializer serializerOrNull2 = SerializersKt.serializerOrNull(kClass);
-                        if (serializerOrNull2 == null) {
-                            serializerOrNull2 = ((ClassBasedDeclarationContainer) kClass).getJClass().isInterface() ? new PolymorphicSerializer(kClass) : null;
+                        KSerializer kSerializerSerializerOrNull2 = SerializersKt.serializerOrNull(kClass);
+                        if (kSerializerSerializerOrNull2 == null) {
+                            kSerializerSerializerOrNull2 = ((ClassBasedDeclarationContainer) kClass).getJClass().isInterface() ? new PolymorphicSerializer(kClass) : null;
                         }
-                        if (serializerOrNull2 != null) {
-                            return serializerOrNull2.getDescriptor().isNullable() ? serializerOrNull2 : new NullableSerializer(serializerOrNull2);
+                        if (kSerializerSerializerOrNull2 != null) {
+                            return kSerializerSerializerOrNull2.getDescriptor().isNullable() ? kSerializerSerializerOrNull2 : new NullableSerializer(kSerializerSerializerOrNull2);
                         }
                         return null;
                 }
@@ -94,10 +93,10 @@ public abstract class SerializersCacheKt {
                 final List list = (List) obj2;
                 switch (i3) {
                     case 0:
-                        List serializersForParameters = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
-                        serializersForParameters.getClass();
+                        List listSerializersForParameters = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
+                        listSerializersForParameters.getClass();
                         final int i4 = 0;
-                        return SerializersKt.parametrizedSerializerOrNull(kClass, serializersForParameters, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
+                        return SerializersKt.parametrizedSerializerOrNull(kClass, listSerializersForParameters, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 int i5 = i4;
@@ -108,10 +107,10 @@ public abstract class SerializersCacheKt {
                             }
                         });
                     default:
-                        List serializersForParameters2 = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
-                        serializersForParameters2.getClass();
+                        List listSerializersForParameters2 = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
+                        listSerializersForParameters2.getClass();
                         final int i5 = 1;
-                        KSerializer parametrizedSerializerOrNull = SerializersKt.parametrizedSerializerOrNull(kClass, serializersForParameters2, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
+                        KSerializer kSerializerParametrizedSerializerOrNull = SerializersKt.parametrizedSerializerOrNull(kClass, listSerializersForParameters2, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 int i52 = i5;
@@ -121,8 +120,8 @@ public abstract class SerializersCacheKt {
                                 return ((KTypeWrapper) ((KType) list2.get(0))).getClassifier();
                             }
                         });
-                        if (parametrizedSerializerOrNull != null) {
-                            return parametrizedSerializerOrNull.getDescriptor().isNullable() ? parametrizedSerializerOrNull : new NullableSerializer(parametrizedSerializerOrNull);
+                        if (kSerializerParametrizedSerializerOrNull != null) {
+                            return kSerializerParametrizedSerializerOrNull.getDescriptor().isNullable() ? kSerializerParametrizedSerializerOrNull : new NullableSerializer(kSerializerParametrizedSerializerOrNull);
                         }
                         return null;
                 }
@@ -137,10 +136,10 @@ public abstract class SerializersCacheKt {
                 final List list = (List) obj2;
                 switch (i4) {
                     case 0:
-                        List serializersForParameters = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
-                        serializersForParameters.getClass();
+                        List listSerializersForParameters = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
+                        listSerializersForParameters.getClass();
                         final int i42 = 0;
-                        return SerializersKt.parametrizedSerializerOrNull(kClass, serializersForParameters, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
+                        return SerializersKt.parametrizedSerializerOrNull(kClass, listSerializersForParameters, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 int i52 = i42;
@@ -151,10 +150,10 @@ public abstract class SerializersCacheKt {
                             }
                         });
                     default:
-                        List serializersForParameters2 = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
-                        serializersForParameters2.getClass();
+                        List listSerializersForParameters2 = SerializersKt.serializersForParameters(SerializersModuleKt.EmptySerializersModule, list, true);
+                        listSerializersForParameters2.getClass();
                         final int i5 = 1;
-                        KSerializer parametrizedSerializerOrNull = SerializersKt.parametrizedSerializerOrNull(kClass, serializersForParameters2, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
+                        KSerializer kSerializerParametrizedSerializerOrNull = SerializersKt.parametrizedSerializerOrNull(kClass, listSerializersForParameters2, new Function0() { // from class: kotlinx.serialization.SerializersCacheKt$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 int i52 = i5;
@@ -164,8 +163,8 @@ public abstract class SerializersCacheKt {
                                 return ((KTypeWrapper) ((KType) list2.get(0))).getClassifier();
                             }
                         });
-                        if (parametrizedSerializerOrNull != null) {
-                            return parametrizedSerializerOrNull.getDescriptor().isNullable() ? parametrizedSerializerOrNull : new NullableSerializer(parametrizedSerializerOrNull);
+                        if (kSerializerParametrizedSerializerOrNull != null) {
+                            return kSerializerParametrizedSerializerOrNull.getDescriptor().isNullable() ? kSerializerParametrizedSerializerOrNull : new NullableSerializer(kSerializerParametrizedSerializerOrNull);
                         }
                         return null;
                 }

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FragmentContainerView extends FrameLayout {
     public View.OnApplyWindowInsetsListener applyWindowInsetsListener;
@@ -30,7 +29,6 @@ public final class FragmentContainerView extends FrameLayout {
     public boolean drawDisappearingViewsFirst;
     public final List transitioningFragmentViews;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api20Impl {
         public static final Api20Impl INSTANCE = new Api20Impl();
 
@@ -60,21 +58,21 @@ public final class FragmentContainerView extends FrameLayout {
 
     @Override // android.view.ViewGroup, android.view.View
     public final WindowInsets dispatchApplyWindowInsets(WindowInsets windowInsets) {
-        WindowInsetsCompat onApplyWindowInsets;
+        WindowInsetsCompat windowInsetsCompatOnApplyWindowInsets;
         WindowInsetsCompat windowInsetsCompat = WindowInsetsCompat.toWindowInsetsCompat(null, windowInsets);
         View.OnApplyWindowInsetsListener onApplyWindowInsetsListener = this.applyWindowInsetsListener;
         if (onApplyWindowInsetsListener != null) {
             Api20Impl api20Impl = Api20Impl.INSTANCE;
             onApplyWindowInsetsListener.getClass();
             api20Impl.getClass();
-            onApplyWindowInsets = WindowInsetsCompat.toWindowInsetsCompat(null, onApplyWindowInsetsListener.onApplyWindowInsets(this, windowInsets));
+            windowInsetsCompatOnApplyWindowInsets = WindowInsetsCompat.toWindowInsetsCompat(null, onApplyWindowInsetsListener.onApplyWindowInsets(this, windowInsets));
         } else {
-            onApplyWindowInsets = ViewCompat.onApplyWindowInsets(windowInsetsCompat, this);
+            windowInsetsCompatOnApplyWindowInsets = ViewCompat.onApplyWindowInsets(windowInsetsCompat, this);
         }
-        if (!onApplyWindowInsets.mImpl.isConsumed()) {
+        if (!windowInsetsCompatOnApplyWindowInsets.mImpl.isConsumed()) {
             int childCount = getChildCount();
             for (int i = 0; i < childCount; i++) {
-                ViewCompat.dispatchApplyWindowInsets(onApplyWindowInsets, getChildAt(i));
+                ViewCompat.dispatchApplyWindowInsets(windowInsetsCompatOnApplyWindowInsets, getChildAt(i));
             }
         }
         return windowInsets;
@@ -187,21 +185,21 @@ public final class FragmentContainerView extends FrameLayout {
     }
 
     public FragmentContainerView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
         String str;
+        super(context, attributeSet, i);
         this.disappearingFragmentChildren = new ArrayList();
         this.transitioningFragmentViews = new ArrayList();
         this.drawDisappearingViewsFirst = true;
         if (attributeSet != null) {
             String classAttribute = attributeSet.getClassAttribute();
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.FragmentContainerView, 0, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.FragmentContainerView, 0, 0);
             if (classAttribute == null) {
-                classAttribute = obtainStyledAttributes.getString(0);
+                classAttribute = typedArrayObtainStyledAttributes.getString(0);
                 str = "android:name";
             } else {
                 str = "class";
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             if (classAttribute == null || isInEditMode()) {
                 return;
             }
@@ -210,39 +208,39 @@ public final class FragmentContainerView extends FrameLayout {
     }
 
     public FragmentContainerView(Context context, AttributeSet attributeSet, FragmentManager fragmentManager) {
-        super(context, attributeSet);
         View view;
+        super(context, attributeSet);
         this.disappearingFragmentChildren = new ArrayList();
         this.transitioningFragmentViews = new ArrayList();
         this.drawDisappearingViewsFirst = true;
         String classAttribute = attributeSet.getClassAttribute();
         int i = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.FragmentContainerView, 0, 0);
-        classAttribute = classAttribute == null ? obtainStyledAttributes.getString(0) : classAttribute;
-        String string = obtainStyledAttributes.getString(1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.FragmentContainerView, 0, 0);
+        classAttribute = classAttribute == null ? typedArrayObtainStyledAttributes.getString(0) : classAttribute;
+        String string = typedArrayObtainStyledAttributes.getString(1);
+        typedArrayObtainStyledAttributes.recycle();
         int id = getId();
-        Fragment findFragmentById = fragmentManager.findFragmentById(id);
-        if (classAttribute != null && findFragmentById == null) {
+        Fragment fragmentFindFragmentById = fragmentManager.findFragmentById(id);
+        if (classAttribute != null && fragmentFindFragmentById == null) {
             if (id == -1) {
                 throw new IllegalStateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("FragmentContainerView must have an android:id to add Fragment ", classAttribute, string != null ? " with tag ".concat(string) : ""));
             }
-            Fragment instantiate = fragmentManager.getFragmentFactory().instantiate(context.getClassLoader(), classAttribute);
-            instantiate.mFragmentId = id;
-            instantiate.mContainerId = id;
-            instantiate.mTag = string;
-            instantiate.mFragmentManager = fragmentManager;
+            Fragment fragmentInstantiate = fragmentManager.getFragmentFactory().instantiate(context.getClassLoader(), classAttribute);
+            fragmentInstantiate.mFragmentId = id;
+            fragmentInstantiate.mContainerId = id;
+            fragmentInstantiate.mTag = string;
+            fragmentInstantiate.mFragmentManager = fragmentManager;
             FragmentHostCallback fragmentHostCallback = fragmentManager.mHost;
-            instantiate.mHost = fragmentHostCallback;
-            instantiate.mCalled = true;
+            fragmentInstantiate.mHost = fragmentHostCallback;
+            fragmentInstantiate.mCalled = true;
             if ((fragmentHostCallback == null ? null : fragmentHostCallback.activity) != null) {
-                instantiate.mCalled = true;
+                fragmentInstantiate.mCalled = true;
             }
             BackStackRecord backStackRecord = new BackStackRecord(fragmentManager);
             backStackRecord.mReorderingAllowed = true;
-            instantiate.mContainer = this;
-            instantiate.mInDynamicContainer = true;
-            backStackRecord.doAddOp(getId(), instantiate, string, 1);
+            fragmentInstantiate.mContainer = this;
+            fragmentInstantiate.mInDynamicContainer = true;
+            backStackRecord.doAddOp(getId(), fragmentInstantiate, string, 1);
             if (!backStackRecord.mAddToBackStack) {
                 backStackRecord.mAllowAddToBackStack = false;
                 FragmentManager fragmentManager2 = backStackRecord.mManager;

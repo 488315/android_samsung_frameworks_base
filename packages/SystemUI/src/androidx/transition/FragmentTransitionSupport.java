@@ -15,7 +15,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentTransitionSupport extends FragmentTransitionImpl {
     @Override // androidx.fragment.app.FragmentTransitionImpl
@@ -76,7 +75,7 @@ public class FragmentTransitionSupport extends FragmentTransitionImpl {
     @Override // androidx.fragment.app.FragmentTransitionImpl
     public final Object cloneTransition(Object obj) {
         if (obj != null) {
-            return ((Transition) obj).mo898clone();
+            return ((Transition) obj).mo900clone();
         }
         return null;
     }
@@ -92,9 +91,9 @@ public class FragmentTransitionSupport extends FragmentTransitionImpl {
             throw new IllegalArgumentException("The Transition must support seeking.");
         }
         arrayList.add(viewGroup);
-        Transition mo898clone = transition.mo898clone();
+        Transition transitionMo900clone = transition.mo900clone();
         TransitionSet transitionSet = new TransitionSet();
-        transitionSet.addTransition(mo898clone);
+        transitionSet.addTransition(transitionMo900clone);
         TransitionManager.sceneChangeSetup(transitionSet, viewGroup);
         viewGroup.setTag(R.id.transition_current_scene, null);
         TransitionManager.MultiListener multiListener = new TransitionManager.MultiListener(transitionSet, viewGroup);
@@ -268,11 +267,11 @@ public class FragmentTransitionSupport extends FragmentTransitionImpl {
                     seekController.mCurrentPlayTime = j2;
                 }
             }
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
             VelocityTracker1D velocityTracker1D = seekController.mVelocityTracker;
             int i = (velocityTracker1D.mIndex + 1) % 20;
             velocityTracker1D.mIndex = i;
-            velocityTracker1D.mTimeSamples[i] = currentAnimationTimeMillis;
+            velocityTracker1D.mTimeSamples[i] = jCurrentAnimationTimeMillis;
             velocityTracker1D.mDataSamples[i] = j2;
         }
     }
@@ -328,11 +327,11 @@ public class FragmentTransitionSupport extends FragmentTransitionImpl {
 
     @Override // androidx.fragment.app.FragmentTransitionImpl
     public final boolean isSeekingSupported(Object obj) {
-        boolean isSeekingSupported = ((Transition) obj).isSeekingSupported();
-        if (!isSeekingSupported) {
+        boolean zIsSeekingSupported = ((Transition) obj).isSeekingSupported();
+        if (!zIsSeekingSupported) {
             Objects.toString(obj);
         }
-        return isSeekingSupported;
+        return zIsSeekingSupported;
     }
 
     @Override // androidx.fragment.app.FragmentTransitionImpl
@@ -342,7 +341,7 @@ public class FragmentTransitionSupport extends FragmentTransitionImpl {
             @Override // androidx.core.os.CancellationSignal.OnCancelListener
             public final void onCancel() {
                 Runnable runnable2 = runnable;
-                DefaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda0 defaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda02 = DefaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda0.this;
+                DefaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda0 defaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda02 = defaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda0;
                 if (defaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda02 != null) {
                     defaultSpecialEffectsController$TransitionEffect$$ExternalSyntheticLambda02.run();
                 } else {

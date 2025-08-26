@@ -13,14 +13,12 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableVector<T> implements RandomAccess {
     public Object[] content;
     public List list;
     public int size;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class MutableVectorList<T> implements List<T>, KMutableList {
         public final MutableVector vector;
 
@@ -185,7 +183,6 @@ public final class MutableVector<T> implements RandomAccess {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SubList<T> implements List<T>, KMutableList {
         public int end;
         public final List list;
@@ -398,7 +395,6 @@ public final class MutableVector<T> implements RandomAccess {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class VectorListIterator<T> implements ListIterator<T>, KMappedMarker {
         public int index;
         public final List list;
@@ -542,11 +538,11 @@ public final class MutableVector<T> implements RandomAccess {
     }
 
     public final boolean remove(Object obj) {
-        int indexOf = indexOf(obj);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf < 0) {
             return false;
         }
-        removeAt(indexOf);
+        removeAt(iIndexOf);
         return true;
     }
 

@@ -2,6 +2,7 @@ package com.android.systemui.aibrief.ui;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BriefNowBarCoverView extends BriefNowBarBaseView {
     public static final int $stable = 8;
@@ -28,6 +28,7 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
     private final Lazy starIcon$delegate;
     private final Lazy subText$delegate;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BriefNowBarCoverView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -82,16 +83,16 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
     /* JADX INFO: Access modifiers changed from: private */
     public final void translationAnimation() {
         final TextView mainText = getMainText();
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(mainText.getTranslationY(), 0.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(BriefNowBarBaseView.Companion.getTRANSLATION_INTERPOLATOR());
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarCoverView$translationAnimation$1$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(mainText.getTranslationY(), 0.0f);
+        valueAnimatorOfFloat.setDuration(150L);
+        valueAnimatorOfFloat.setInterpolator(BriefNowBarBaseView.Companion.getTRANSLATION_INTERPOLATOR());
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarCoverView$translationAnimation$1$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                mainText.setTranslationY(((Float) ofFloat.getAnimatedValue()).floatValue());
+                mainText.setTranslationY(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     @Override // com.android.systemui.aibrief.ui.BriefNowBarBaseView
@@ -148,7 +149,7 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
     }
 
     @Override // com.android.systemui.aibrief.ui.BriefNowBarBaseView
-    public void updateNowBarResources() {
+    public void updateNowBarResources() throws Resources.NotFoundException {
         ViewGroup.LayoutParams layoutParams;
         ViewGroup.LayoutParams layoutParams2;
         FontSizeUtils.updateFontSize(getMainText(), R.dimen.ai_brief_cover_main_text_size);
@@ -198,29 +199,19 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextView mainText_delegate$lambda$0;
-                TextView subText_delegate$lambda$1;
-                ImageView icon_delegate$lambda$2;
-                FrameLayout iconContainer_delegate$lambda$3;
-                LottieAnimationView starIcon_delegate$lambda$4;
                 int i2 = i;
                 BriefNowBarCoverView briefNowBarCoverView = this.f$0;
                 switch (i2) {
                     case 0:
-                        mainText_delegate$lambda$0 = BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
-                        return mainText_delegate$lambda$0;
+                        return BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
                     case 1:
-                        subText_delegate$lambda$1 = BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
-                        return subText_delegate$lambda$1;
+                        return BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
                     case 2:
-                        icon_delegate$lambda$2 = BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
-                        return icon_delegate$lambda$2;
+                        return BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
                     case 3:
-                        iconContainer_delegate$lambda$3 = BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
-                        return iconContainer_delegate$lambda$3;
+                        return BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
                     default:
-                        starIcon_delegate$lambda$4 = BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
-                        return starIcon_delegate$lambda$4;
+                        return BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
                 }
             }
         });
@@ -234,29 +225,19 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextView mainText_delegate$lambda$0;
-                TextView subText_delegate$lambda$1;
-                ImageView icon_delegate$lambda$2;
-                FrameLayout iconContainer_delegate$lambda$3;
-                LottieAnimationView starIcon_delegate$lambda$4;
                 int i22 = i2;
                 BriefNowBarCoverView briefNowBarCoverView = this.f$0;
                 switch (i22) {
                     case 0:
-                        mainText_delegate$lambda$0 = BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
-                        return mainText_delegate$lambda$0;
+                        return BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
                     case 1:
-                        subText_delegate$lambda$1 = BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
-                        return subText_delegate$lambda$1;
+                        return BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
                     case 2:
-                        icon_delegate$lambda$2 = BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
-                        return icon_delegate$lambda$2;
+                        return BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
                     case 3:
-                        iconContainer_delegate$lambda$3 = BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
-                        return iconContainer_delegate$lambda$3;
+                        return BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
                     default:
-                        starIcon_delegate$lambda$4 = BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
-                        return starIcon_delegate$lambda$4;
+                        return BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
                 }
             }
         });
@@ -270,29 +251,19 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextView mainText_delegate$lambda$0;
-                TextView subText_delegate$lambda$1;
-                ImageView icon_delegate$lambda$2;
-                FrameLayout iconContainer_delegate$lambda$3;
-                LottieAnimationView starIcon_delegate$lambda$4;
                 int i22 = i3;
                 BriefNowBarCoverView briefNowBarCoverView = this.f$0;
                 switch (i22) {
                     case 0:
-                        mainText_delegate$lambda$0 = BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
-                        return mainText_delegate$lambda$0;
+                        return BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
                     case 1:
-                        subText_delegate$lambda$1 = BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
-                        return subText_delegate$lambda$1;
+                        return BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
                     case 2:
-                        icon_delegate$lambda$2 = BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
-                        return icon_delegate$lambda$2;
+                        return BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
                     case 3:
-                        iconContainer_delegate$lambda$3 = BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
-                        return iconContainer_delegate$lambda$3;
+                        return BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
                     default:
-                        starIcon_delegate$lambda$4 = BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
-                        return starIcon_delegate$lambda$4;
+                        return BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
                 }
             }
         });
@@ -306,29 +277,19 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextView mainText_delegate$lambda$0;
-                TextView subText_delegate$lambda$1;
-                ImageView icon_delegate$lambda$2;
-                FrameLayout iconContainer_delegate$lambda$3;
-                LottieAnimationView starIcon_delegate$lambda$4;
                 int i22 = i4;
                 BriefNowBarCoverView briefNowBarCoverView = this.f$0;
                 switch (i22) {
                     case 0:
-                        mainText_delegate$lambda$0 = BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
-                        return mainText_delegate$lambda$0;
+                        return BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
                     case 1:
-                        subText_delegate$lambda$1 = BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
-                        return subText_delegate$lambda$1;
+                        return BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
                     case 2:
-                        icon_delegate$lambda$2 = BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
-                        return icon_delegate$lambda$2;
+                        return BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
                     case 3:
-                        iconContainer_delegate$lambda$3 = BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
-                        return iconContainer_delegate$lambda$3;
+                        return BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
                     default:
-                        starIcon_delegate$lambda$4 = BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
-                        return starIcon_delegate$lambda$4;
+                        return BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
                 }
             }
         });
@@ -342,29 +303,19 @@ public final class BriefNowBarCoverView extends BriefNowBarBaseView {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextView mainText_delegate$lambda$0;
-                TextView subText_delegate$lambda$1;
-                ImageView icon_delegate$lambda$2;
-                FrameLayout iconContainer_delegate$lambda$3;
-                LottieAnimationView starIcon_delegate$lambda$4;
                 int i22 = i5;
                 BriefNowBarCoverView briefNowBarCoverView = this.f$0;
                 switch (i22) {
                     case 0:
-                        mainText_delegate$lambda$0 = BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
-                        return mainText_delegate$lambda$0;
+                        return BriefNowBarCoverView.mainText_delegate$lambda$0(briefNowBarCoverView);
                     case 1:
-                        subText_delegate$lambda$1 = BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
-                        return subText_delegate$lambda$1;
+                        return BriefNowBarCoverView.subText_delegate$lambda$1(briefNowBarCoverView);
                     case 2:
-                        icon_delegate$lambda$2 = BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
-                        return icon_delegate$lambda$2;
+                        return BriefNowBarCoverView.icon_delegate$lambda$2(briefNowBarCoverView);
                     case 3:
-                        iconContainer_delegate$lambda$3 = BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
-                        return iconContainer_delegate$lambda$3;
+                        return BriefNowBarCoverView.iconContainer_delegate$lambda$3(briefNowBarCoverView);
                     default:
-                        starIcon_delegate$lambda$4 = BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
-                        return starIcon_delegate$lambda$4;
+                        return BriefNowBarCoverView.starIcon_delegate$lambda$4(briefNowBarCoverView);
                 }
             }
         });

@@ -9,7 +9,6 @@ import com.android.wm.shell.common.pip.PipPerfHintController;
 import com.android.wm.shell.common.pip.PipPinchResizingAlgorithm;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipPinchToResizeHandler {
     public final PhonePipMenuController mPhonePipMenuController;
@@ -57,7 +56,7 @@ public class PipPinchToResizeHandler {
                 pipResizeGestureHandler.mPipHighPerfSession = pipPerfHintController.startSession(new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipResizeGestureHandler$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        PipResizeGestureHandler.this.getClass();
+                        pipResizeGestureHandler.getClass();
                     }
                 }, "onPinchResize");
             }
@@ -82,9 +81,9 @@ public class PipPinchToResizeHandler {
             }
         }
         if (pipResizeGestureHandler.mThresholdCrossed) {
-            float calculateBoundsAndAngle = this.mPinchResizingAlgorithm.calculateBoundsAndAngle(pointF, pointF2, pointF3, pointF4, point, point2, rect, rect2);
-            pipResizeGestureHandler.mAngle = calculateBoundsAndAngle;
-            this.mPipScheduler.scheduleUserResizePip(rect2, calculateBoundsAndAngle);
+            float fCalculateBoundsAndAngle = this.mPinchResizingAlgorithm.calculateBoundsAndAngle(pointF, pointF2, pointF3, pointF4, point, point2, rect, rect2);
+            pipResizeGestureHandler.mAngle = fCalculateBoundsAndAngle;
+            this.mPipScheduler.scheduleUserResizePip(rect2, fCalculateBoundsAndAngle);
             pipBoundsState.setHasUserResizedPip();
         }
     }

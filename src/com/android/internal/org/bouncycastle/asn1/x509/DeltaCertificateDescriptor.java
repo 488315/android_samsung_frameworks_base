@@ -116,9 +116,9 @@ public class DeltaCertificateDescriptor extends ASN1Object {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
         Enumeration objects = aSN1Sequence.getObjects();
         aSN1EncodableVector.add((ASN1Encodable) objects.nextElement());
-        Object nextElement = objects.nextElement();
+        Object objNextElement = objects.nextElement();
         while (true) {
-            aSN1Encodable = (ASN1Encodable) nextElement;
+            aSN1Encodable = (ASN1Encodable) objNextElement;
             if (!(aSN1Encodable instanceof ASN1TaggedObject)) {
                 break;
             }
@@ -139,20 +139,20 @@ public class DeltaCertificateDescriptor extends ASN1Object {
             } else if (!AlgorithmIdentifier.getInstance(aSN1TaggedObject, false).equals(algorithmIdentifier)) {
                 aSN1EncodableVector.add(aSN1Encodable);
             }
-            nextElement = objects.nextElement();
+            objNextElement = objects.nextElement();
         }
         aSN1EncodableVector.add(aSN1Encodable);
-        Object nextElement2 = objects.nextElement();
+        Object objNextElement2 = objects.nextElement();
         while (true) {
-            ASN1Encodable aSN1Encodable2 = (ASN1Encodable) nextElement2;
+            ASN1Encodable aSN1Encodable2 = (ASN1Encodable) objNextElement2;
             if (aSN1Encodable2 instanceof ASN1TaggedObject) {
                 ASN1TaggedObject aSN1TaggedObject2 = ASN1TaggedObject.getInstance(aSN1Encodable2);
                 if (aSN1TaggedObject2.getTagNo() == 4) {
                     Extensions extensions2 = Extensions.getInstance(aSN1TaggedObject2, false);
                     ExtensionsGenerator extensionsGenerator = new ExtensionsGenerator();
-                    Enumeration oids = extensions2.oids();
-                    while (oids.hasMoreElements()) {
-                        Extension extension = extensions2.getExtension((ASN1ObjectIdentifier) oids.nextElement());
+                    Enumeration enumerationOids = extensions2.oids();
+                    while (enumerationOids.hasMoreElements()) {
+                        Extension extension = extensions2.getExtension((ASN1ObjectIdentifier) enumerationOids.nextElement());
                         Extension extension2 = extensions.getExtension(extension.getExtnId());
                         if (extension2 != null && !extension.equals(extension2)) {
                             extensionsGenerator.addExtension(extension);
@@ -162,7 +162,7 @@ public class DeltaCertificateDescriptor extends ASN1Object {
                         aSN1EncodableVector.add(new DERTaggedObject(false, 4, (ASN1Encodable) extensionsGenerator.generate()));
                     }
                 }
-                nextElement2 = objects.nextElement();
+                objNextElement2 = objects.nextElement();
             } else {
                 aSN1EncodableVector.add(aSN1Encodable2);
                 return new DeltaCertificateDescriptor(new DERSequence(aSN1EncodableVector));

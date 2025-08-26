@@ -23,54 +23,54 @@ public class GeofenceHardwareService extends Service {
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public int[] getMonitoringTypes() {
+        public int[] getMonitoringTypes() throws SecurityException {
             super.getMonitoringTypes_enforcePermission();
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.getMonitoringTypes();
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public int getStatusOfMonitoringType(int i) {
+        public int getStatusOfMonitoringType(int i) throws SecurityException {
             super.getStatusOfMonitoringType_enforcePermission();
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.getStatusOfMonitoringType(i);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean addCircularFence(int i, GeofenceHardwareRequestParcelable geofenceHardwareRequestParcelable, IGeofenceHardwareCallback iGeofenceHardwareCallback) {
+        public boolean addCircularFence(int i, GeofenceHardwareRequestParcelable geofenceHardwareRequestParcelable, IGeofenceHardwareCallback iGeofenceHardwareCallback) throws SecurityException {
             super.addCircularFence_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.addCircularFence(i, geofenceHardwareRequestParcelable, iGeofenceHardwareCallback);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean removeGeofence(int i, int i2) {
+        public boolean removeGeofence(int i, int i2) throws SecurityException {
             super.removeGeofence_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i2);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.removeGeofence(i, i2);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean pauseGeofence(int i, int i2) {
+        public boolean pauseGeofence(int i, int i2) throws SecurityException {
             super.pauseGeofence_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i2);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.pauseGeofence(i, i2);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean resumeGeofence(int i, int i2, int i3) {
+        public boolean resumeGeofence(int i, int i2, int i3) throws SecurityException {
             super.resumeGeofence_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i2);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.resumeGeofence(i, i2, i3);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean registerForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) {
+        public boolean registerForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) throws SecurityException {
             super.registerForMonitorStateChangeCallback_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.registerForMonitorStateChangeCallback(i, iGeofenceHardwareMonitorCallback);
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean unregisterForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) {
+        public boolean unregisterForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) throws SecurityException {
             super.unregisterForMonitorStateChangeCallback_enforcePermission();
             GeofenceHardwareService.this.checkPermission(Binder.getCallingPid(), Binder.getCallingUid(), i);
             return GeofenceHardwareService.this.mGeofenceHardwareImpl.unregisterForMonitorStateChangeCallback(i, iGeofenceHardwareMonitorCallback);

@@ -27,24 +27,24 @@ public class AppSearchShortcutPerson extends GenericDocument {
     }
 
     public static AppSearchShortcutPerson instance(Person person) {
-        String uuid;
+        String string;
         Objects.requireNonNull(person);
         if (person.getUri() != null) {
-            uuid = person.getUri();
+            string = person.getUri();
         } else {
-            uuid = UUID.randomUUID().toString();
+            string = UUID.randomUUID().toString();
         }
-        return new Builder(uuid).setName(person.getName()).setKey(person.getKey()).setIsBot(person.isBot()).setIsImportant(person.isImportant()).setIcon(transformToByteArray(person.getIcon())).build();
+        return new Builder(string).setName(person.getName()).setKey(person.getKey()).setIsBot(person.isBot()).setIsImportant(person.isImportant()).setIcon(transformToByteArray(person.getIcon())).build();
     }
 
     public Person toPerson() {
-        String str;
+        String strDecode;
         try {
-            str = UriCodec.decode(getId(), false, StandardCharsets.UTF_8, true);
+            strDecode = UriCodec.decode(getId(), false, StandardCharsets.UTF_8, true);
         } catch (IllegalArgumentException unused) {
-            str = null;
+            strDecode = null;
         }
-        return new Person.Builder().setName(getPropertyString("name")).setUri(str).setKey(getPropertyString("key")).setBot(getPropertyBoolean(KEY_IS_BOT)).setImportant(getPropertyBoolean(KEY_IS_IMPORTANT)).setIcon(transformToIcon(getPropertyBytes("icon"))).build();
+        return new Person.Builder().setName(getPropertyString("name")).setUri(strDecode).setKey(getPropertyString("key")).setBot(getPropertyBoolean(KEY_IS_BOT)).setImportant(getPropertyBoolean(KEY_IS_IMPORTANT)).setIcon(transformToIcon(getPropertyBytes("icon"))).build();
     }
 
     public static class Builder extends GenericDocument.Builder<Builder> {
@@ -89,7 +89,7 @@ public class AppSearchShortcutPerson extends GenericDocument {
         }
     }
 
-    private static byte[] transformToByteArray(Icon icon) {
+    private static byte[] transformToByteArray(Icon icon) throws IOException {
         if (icon == null) {
             return null;
         }
@@ -107,16 +107,16 @@ public class AppSearchShortcutPerson extends GenericDocument {
         }
     }
 
-    private Icon transformToIcon(byte[] bArr) {
+    private Icon transformToIcon(byte[] bArr) throws IOException {
         if (bArr == null) {
             return null;
         }
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             try {
-                Icon createFromStream = Icon.createFromStream(byteArrayInputStream);
+                Icon iconCreateFromStream = Icon.createFromStream(byteArrayInputStream);
                 byteArrayInputStream.close();
-                return createFromStream;
+                return iconCreateFromStream;
             } finally {
             }
         } catch (IOException unused) {

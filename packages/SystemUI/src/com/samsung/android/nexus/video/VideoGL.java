@@ -20,7 +20,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class VideoGL {
     public static final float DEFAULT_HSV_HUE = 0.0f;
@@ -87,7 +86,6 @@ public class VideoGL {
     private int muSTMatrixHandle;
     private int muTransparencyHandle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class VideoFrameController {
         static final boolean DEBUG = false;
         static final int UPDATE_COUNT_LIMIT = 1000000;
@@ -148,15 +146,15 @@ public class VideoGL {
             Log.i(TAG, "Object size is null. So cannot apply the size.");
             return;
         }
-        float abs = Math.abs(rectF.width());
-        float abs2 = Math.abs(this.mObjectRect.height());
+        float fAbs = Math.abs(rectF.width());
+        float fAbs2 = Math.abs(this.mObjectRect.height());
         if (i == 0) {
-            float f3 = (f - abs) / 2.0f;
+            float f3 = (f - fAbs) / 2.0f;
             RectF rectF2 = this.mObjectRect;
             rectF2.left -= f3;
             rectF2.top += f3;
             rectF2.right += f3;
-            rectF2.bottom -= (f2 - abs2) / 2.0f;
+            rectF2.bottom -= (f2 - fAbs2) / 2.0f;
         } else {
             RectF rectF3 = this.mObjectRect;
             rectF3.right = rectF3.left + f;
@@ -180,13 +178,13 @@ public class VideoGL {
             return;
         }
         this.mObjectHalfWidth = Math.abs(rectF.width()) / 2.0f;
-        float abs = Math.abs(this.mObjectRect.height()) / 2.0f;
-        this.mObjectHalfHeight = abs;
+        float fAbs = Math.abs(this.mObjectRect.height()) / 2.0f;
+        this.mObjectHalfHeight = fAbs;
         float f = this.mObjectHalfWidth;
-        this.mObjectLeftTop = new float[]{-f, abs, 0.0f, 0.0f};
-        this.mObjectRightTop = new float[]{f, abs, 0.0f, 0.0f};
-        this.mObjectLeftBottom = new float[]{-f, -abs, 0.0f, 0.0f};
-        this.mObjectRightBottom = new float[]{f, -abs, 0.0f, 0.0f};
+        this.mObjectLeftTop = new float[]{-f, fAbs, 0.0f, 0.0f};
+        this.mObjectRightTop = new float[]{f, fAbs, 0.0f, 0.0f};
+        this.mObjectLeftBottom = new float[]{-f, -fAbs, 0.0f, 0.0f};
+        this.mObjectRightBottom = new float[]{f, -fAbs, 0.0f, 0.0f};
         PointF pointF = this.mObjectCenter;
         RectF rectF2 = this.mObjectRect;
         pointF.x = (rectF2.left + rectF2.right) / 2.0f;
@@ -226,7 +224,7 @@ public class VideoGL {
         surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() { // from class: com.samsung.android.nexus.video.VideoGL$$ExternalSyntheticLambda0
             @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
             public final void onFrameAvailable(SurfaceTexture surfaceTexture2) {
-                VideoGL.this.lambda$createVideoSurface$0(surfaceTexture2);
+                this.f$0.lambda$createVideoSurface$0(surfaceTexture2);
             }
         });
         this.mSurface = new Surface(this.mSurfaceTexture);
@@ -248,9 +246,9 @@ public class VideoGL {
     }
 
     private void initElements() {
-        FloatBuffer asFloatBuffer = ByteBuffer.allocateDirect(this.mTriangleVerticesData.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
-        this.mVertices = asFloatBuffer;
-        asFloatBuffer.put(this.mTriangleVerticesData).position(0);
+        FloatBuffer floatBufferAsFloatBuffer = ByteBuffer.allocateDirect(this.mTriangleVerticesData.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+        this.mVertices = floatBufferAsFloatBuffer;
+        floatBufferAsFloatBuffer.put(this.mTriangleVerticesData).position(0);
         this.mShader = new Shader(this.mContext, R.raw.video_vert_shader, R.raw.video_frag_shader);
         Matrix.setIdentityM(this.mSTMatrix, 0);
     }
@@ -433,14 +431,14 @@ public class VideoGL {
         String str = TAG;
         Log.i(str, "Set bounds : " + rectF);
         this.mBoundRect = new RectF(rectF);
-        float abs = Math.abs(rectF.width());
-        float abs2 = Math.abs(rectF.height());
-        if (abs == 0.0f || abs2 == 0.0f) {
+        float fAbs = Math.abs(rectF.width());
+        float fAbs2 = Math.abs(rectF.height());
+        if (fAbs == 0.0f || fAbs2 == 0.0f) {
             Log.e(str, "Cannot set bound. Size is wrong. bounds : " + rectF);
         } else {
-            float f = abs2 / 2.0f;
-            float f2 = -(abs / 2.0f);
-            setObjectRect(new RectF(f2, f, abs + f2, f - abs2));
+            float f = fAbs2 / 2.0f;
+            float f2 = -(fAbs / 2.0f);
+            setObjectRect(new RectF(f2, f, fAbs + f2, f - fAbs2));
             calculateBoundsOffset();
         }
     }

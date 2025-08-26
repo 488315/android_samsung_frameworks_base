@@ -52,9 +52,9 @@ public interface IProcessResultImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProcessResultImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProcessResultImpl)) {
-                return (IProcessResultImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProcessResultImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProcessResultImpl)) {
+                return (IProcessResultImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,15 +84,15 @@ public interface IProcessResultImpl extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCaptureCompleted(readLong, cameraMetadataNative);
+                onCaptureCompleted(j, cameraMetadataNative);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCaptureProcessProgressed(readInt);
+                onCaptureProcessProgressed(i3);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -118,32 +118,32 @@ public interface IProcessResultImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IProcessResultImpl
             public void onCaptureCompleted(long j, CameraMetadataNative cameraMetadataNative) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessResultImpl.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProcessResultImpl.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IProcessResultImpl
             public void onCaptureProcessProgressed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessResultImpl.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProcessResultImpl.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

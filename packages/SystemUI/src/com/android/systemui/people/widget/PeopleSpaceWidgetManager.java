@@ -83,7 +83,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleSpaceWidgetManager implements Dumpable {
     public static final Map mListeners = new HashMap();
@@ -119,7 +118,6 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$3, reason: invalid class name */
     public class AnonymousClass3 extends BroadcastReceiver {
         public AnonymousClass3() {
@@ -131,7 +129,6 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$4, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass4 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$people$widget$PeopleBackupHelper$SharedFileEntryType;
@@ -158,7 +155,6 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileConversationListener implements PeopleManager.ConversationListener {
         public TileConversationListener() {
         }
@@ -207,7 +203,7 @@ public class PeopleSpaceWidgetManager implements Dumpable {
             if (tileFromPersistentStorage == null) {
                 return;
             }
-            final PeopleSpaceTile augmentTileFromNotificationEntryManager = augmentTileFromNotificationEntryManager(tileFromPersistentStorage, Optional.of(Integer.valueOf(i)));
+            final PeopleSpaceTile peopleSpaceTileAugmentTileFromNotificationEntryManager = augmentTileFromNotificationEntryManager(tileFromPersistentStorage, Optional.of(Integer.valueOf(i)));
             synchronized (this.mLock) {
                 keyFromStorageByWidgetId = getKeyFromStorageByWidgetId(i);
             }
@@ -217,20 +213,20 @@ public class PeopleSpaceWidgetManager implements Dumpable {
                 this.mUiEventLogger.log(PeopleSpaceUtils.PeopleSpaceWidgetEvent.PEOPLE_SPACE_WIDGET_ADDED);
             }
             synchronized (this.mLock) {
-                PeopleSpaceUtils.setSharedPreferencesStorageForTile(this.mContext, peopleTileKey, i, augmentTileFromNotificationEntryManager.getContactUri(), this.mBackupManager);
+                PeopleSpaceUtils.setSharedPreferencesStorageForTile(this.mContext, peopleTileKey, i, peopleSpaceTileAugmentTileFromNotificationEntryManager.getContactUri(), this.mBackupManager);
             }
             registerConversationListenerIfNeeded(i, peopleTileKey);
             try {
-                this.mLauncherApps.cacheShortcuts(augmentTileFromNotificationEntryManager.getPackageName(), Collections.singletonList(augmentTileFromNotificationEntryManager.getId()), augmentTileFromNotificationEntryManager.getUserHandle(), 2);
+                this.mLauncherApps.cacheShortcuts(peopleSpaceTileAugmentTileFromNotificationEntryManager.getPackageName(), Collections.singletonList(peopleSpaceTileAugmentTileFromNotificationEntryManager.getId()), peopleSpaceTileAugmentTileFromNotificationEntryManager.getUserHandle(), 2);
             } catch (Exception e) {
                 Log.w("PeopleSpaceWidgetMgr", "failed to cache shortcut for widget " + i, e);
             }
             this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.people.widget.PeopleSpaceWidgetManager$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = PeopleSpaceWidgetManager.this;
+                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = this.f$0;
                     int i2 = i;
-                    PeopleSpaceTile peopleSpaceTile = augmentTileFromNotificationEntryManager;
+                    PeopleSpaceTile peopleSpaceTile = peopleSpaceTileAugmentTileFromNotificationEntryManager;
                     Map map = PeopleSpaceWidgetManager.mListeners;
                     peopleSpaceWidgetManager.updateAppWidgetOptionsAndView(i2, peopleSpaceTile);
                 }
@@ -274,26 +270,26 @@ public class PeopleSpaceWidgetManager implements Dumpable {
             }).collect(Collectors.toList());
             arrayList.isEmpty();
         }
-        Set set = (Set) map.get(peopleTileKey);
-        if (set == null) {
-            set = new HashSet();
+        Set hashSet = (Set) map.get(peopleTileKey);
+        if (hashSet == null) {
+            hashSet = new HashSet();
         }
-        if (set.isEmpty() && arrayList.isEmpty()) {
+        if (hashSet.isEmpty() && arrayList.isEmpty()) {
             return PeopleSpaceUtils.removeNotificationFields(peopleSpaceTile);
         }
-        set.addAll(arrayList);
+        hashSet.addAll(arrayList);
         PeopleTileKey peopleTileKey3 = PeopleSpaceUtils.EMPTY_KEY;
-        Iterator it = set.iterator();
-        int i = 0;
+        Iterator it = hashSet.iterator();
+        int size = 0;
         while (it.hasNext()) {
             Notification notification2 = ((NotificationEntry) it.next()).mSbn.getNotification();
             if (!NotificationHelper.isMissedCall(notification2) && (messagingStyleMessages = NotificationHelper.getMessagingStyleMessages(notification2)) != null) {
-                i = messagingStyleMessages.size() + i;
+                size = messagingStyleMessages.size() + size;
             }
         }
         NotificationHelper.AnonymousClass1 anonymousClass1 = NotificationHelper.notificationEntryComparator;
-        CharSequence charSequence = null;
-        NotificationEntry notificationEntry = set.isEmpty() ? null : (NotificationEntry) set.stream().filter(new NotificationHelper$$ExternalSyntheticLambda0()).sorted(NotificationHelper.notificationEntryComparator).findFirst().orElse(null);
+        CharSequence name = null;
+        NotificationEntry notificationEntry = hashSet.isEmpty() ? null : (NotificationEntry) hashSet.stream().filter(new NotificationHelper$$ExternalSyntheticLambda0()).sorted(NotificationHelper.notificationEntryComparator).findFirst().orElse(null);
         Context context = this.mContext;
         BackupManager backupManager = this.mBackupManager;
         if (notificationEntry == null || notificationEntry.mSbn.getNotification() == null) {
@@ -304,22 +300,22 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         PeopleSpaceTile.Builder builder = peopleSpaceTile.toBuilder();
         String contactUri = NotificationHelper.getContactUri(statusBarNotification);
         if (optional.isPresent() && peopleSpaceTile.getContactUri() == null && !TextUtils.isEmpty(contactUri)) {
-            Uri parse = Uri.parse(contactUri);
-            PeopleSpaceUtils.setSharedPreferencesStorageForTile(context, new PeopleTileKey(peopleSpaceTile), ((Integer) optional.get()).intValue(), parse, backupManager);
-            builder.setContactUri(parse);
+            Uri uri = Uri.parse(contactUri);
+            PeopleSpaceUtils.setSharedPreferencesStorageForTile(context, new PeopleTileKey(peopleSpaceTile), ((Integer) optional.get()).intValue(), uri, backupManager);
+            builder.setContactUri(uri);
         }
-        boolean isMissedCall = NotificationHelper.isMissedCall(notification3);
+        boolean zIsMissedCall = NotificationHelper.isMissedCall(notification3);
         List<Notification.MessagingStyle.Message> messagingStyleMessages2 = NotificationHelper.getMessagingStyleMessages(notification3);
-        if (!isMissedCall && ArrayUtils.isEmpty(messagingStyleMessages2)) {
+        if (!zIsMissedCall && ArrayUtils.isEmpty(messagingStyleMessages2)) {
             return PeopleSpaceUtils.removeNotificationFields(builder.build());
         }
         Notification.MessagingStyle.Message message = messagingStyleMessages2 != null ? messagingStyleMessages2.get(0) : null;
-        CharSequence text = (!isMissedCall || ((message == null || TextUtils.isEmpty(message.getText())) ? false : true)) ? message.getText() : context.getString(R.string.missed_call);
+        CharSequence text = (!zIsMissedCall || ((message == null || TextUtils.isEmpty(message.getText())) ? false : true)) ? message.getText() : context.getString(R.string.missed_call);
         Uri dataUri = (message == null || !MessagingMessage.hasImage(message)) ? null : message.getDataUri();
         if (notification3.extras.getBoolean("android.isGroupConversation", false) && (senderPerson = message.getSenderPerson()) != null) {
-            charSequence = senderPerson.getName();
+            name = senderPerson.getName();
         }
-        return builder.setLastInteractionTimestamp(statusBarNotification.getPostTime()).setNotificationKey(statusBarNotification.getKey()).setNotificationCategory(notification3.category).setNotificationContent(text).setNotificationSender(charSequence).setNotificationDataUri(dataUri).setMessagesCount(i).build();
+        return builder.setLastInteractionTimestamp(statusBarNotification.getPostTime()).setNotificationKey(statusBarNotification.getKey()).setNotificationCategory(notification3.category).setNotificationContent(text).setNotificationSender(name).setNotificationDataUri(dataUri).setMessagesCount(size).build();
     }
 
     public final void deleteWidgets(int[] iArr) {
@@ -428,63 +424,48 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         return new HashSet();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0041  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x002b  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0032  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0041  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getNotificationPolicyState() {
-        /*
-            r4 = this;
-            android.app.NotificationManager r0 = r4.mNotificationManager
-            android.app.NotificationManager$Policy r0 = r0.getNotificationPolicy()
-            int r1 = r0.suppressedVisualEffects
-            boolean r1 = android.app.NotificationManager.Policy.areAllVisualEffectsSuppressed(r1)
-            r2 = 1
-            if (r1 != 0) goto L10
-            return r2
-        L10:
-            android.app.NotificationManager r4 = r4.mNotificationManager
-            int r4 = r4.getCurrentInterruptionFilter()
-            if (r4 == r2) goto L45
-            r1 = 2
-            if (r4 == r1) goto L1c
-            goto L44
-        L1c:
-            boolean r4 = r0.allowConversations()
-            if (r4 == 0) goto L2b
-            int r4 = r0.priorityConversationSenders
-            if (r4 != r2) goto L27
-            return r2
-        L27:
-            if (r4 != r1) goto L2b
-            r4 = 4
-            goto L2c
-        L2b:
-            r4 = 0
-        L2c:
-            boolean r3 = r0.allowMessages()
-            if (r3 == 0) goto L41
-            int r0 = r0.allowMessagesFrom()
-            if (r0 == r2) goto L3e
-            if (r0 == r1) goto L3b
-            return r2
-        L3b:
-            r4 = r4 | 8
-            return r4
-        L3e:
-            r4 = r4 | 16
-            return r4
-        L41:
-            if (r4 == 0) goto L44
-            return r4
-        L44:
-            return r1
-        L45:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.widget.PeopleSpaceWidgetManager.getNotificationPolicyState():int");
+        int currentInterruptionFilter;
+        int i;
+        NotificationManager.Policy notificationPolicy = this.mNotificationManager.getNotificationPolicy();
+        if (!NotificationManager.Policy.areAllVisualEffectsSuppressed(notificationPolicy.suppressedVisualEffects) || (currentInterruptionFilter = this.mNotificationManager.getCurrentInterruptionFilter()) == 1) {
+            return 1;
+        }
+        if (currentInterruptionFilter == 2) {
+            if (notificationPolicy.allowConversations()) {
+                int i2 = notificationPolicy.priorityConversationSenders;
+                if (i2 == 1) {
+                    return 1;
+                }
+                if (i2 == 2) {
+                    i = 4;
+                }
+                if (!notificationPolicy.allowMessages()) {
+                }
+            } else {
+                i = 0;
+                if (!notificationPolicy.allowMessages()) {
+                    int iAllowMessagesFrom = notificationPolicy.allowMessagesFrom();
+                    if (iAllowMessagesFrom == 1) {
+                        return i | 16;
+                    }
+                    if (iAllowMessagesFrom != 2) {
+                        return 1;
+                    }
+                    return i | 8;
+                }
+                if (i != 0) {
+                    return i;
+                }
+            }
+        }
+        return 2;
     }
 
     public final boolean getPackageSuspended(PeopleSpaceTile peopleSpaceTile) {
@@ -496,65 +477,36 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x003d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x003d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.widget.RemoteViews getPreview(java.lang.String r4, android.os.UserHandle r5, java.lang.String r6, android.os.Bundle r7) {
-        /*
-            r3 = this;
-            r0 = 0
-            android.app.people.IPeopleManager r1 = r3.mIPeopleManager     // Catch: java.lang.Exception -> L52
-            int r5 = r5.getIdentifier()     // Catch: java.lang.Exception -> L52
-            android.app.people.ConversationChannel r4 = r1.getConversation(r6, r5, r4)     // Catch: java.lang.Exception -> L52
-            android.content.pm.LauncherApps r5 = r3.mLauncherApps     // Catch: java.lang.Exception -> L52
-            com.android.systemui.people.widget.PeopleTileKey r6 = com.android.systemui.people.PeopleSpaceUtils.EMPTY_KEY     // Catch: java.lang.Exception -> L52
-            java.lang.String r6 = "PeopleSpaceUtils"
-            r1 = 0
-            if (r4 != 0) goto L1b
-            java.lang.String r4 = "ConversationChannel is null"
-            android.util.Log.i(r6, r4)     // Catch: java.lang.Exception -> L52
-        L19:
-            r4 = r0
-            goto L3b
-        L1b:
-            android.app.people.PeopleSpaceTile$Builder r2 = new android.app.people.PeopleSpaceTile$Builder     // Catch: java.lang.Exception -> L52
-            r2.<init>(r4, r5)     // Catch: java.lang.Exception -> L52
-            android.app.people.PeopleSpaceTile r4 = r2.build()     // Catch: java.lang.Exception -> L52
-            if (r4 == 0) goto L32
-            java.lang.CharSequence r5 = r4.getUserName()     // Catch: java.lang.Exception -> L52
-            boolean r5 = android.text.TextUtils.isEmpty(r5)     // Catch: java.lang.Exception -> L52
-            if (r5 != 0) goto L32
-            r5 = 1
-            goto L33
-        L32:
-            r5 = r1
-        L33:
-            if (r5 != 0) goto L3b
-            java.lang.String r4 = "PeopleSpaceTile is not valid"
-            android.util.Log.i(r6, r4)     // Catch: java.lang.Exception -> L52
-            goto L19
-        L3b:
-            if (r4 != 0) goto L3e
-            return r0
-        L3e:
-            java.util.Optional r5 = java.util.Optional.empty()
-            android.app.people.PeopleSpaceTile r4 = r3.augmentTileFromNotificationEntryManager(r4, r5)
-            android.content.Context r3 = r3.mContext
-            com.android.systemui.people.widget.PeopleTileKey r5 = new com.android.systemui.people.widget.PeopleTileKey
-            r5.<init>(r4)
-            android.widget.RemoteViews r3 = com.android.systemui.people.PeopleTileViewHelper.createRemoteViews(r3, r4, r1, r7, r5)
-            return r3
-        L52:
-            r3 = move-exception
-            java.lang.String r4 = "PeopleSpaceWidgetMgr"
-            java.lang.String r5 = "failed to get conversation or tile"
-            android.util.Log.w(r4, r5, r3)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.widget.PeopleSpaceWidgetManager.getPreview(java.lang.String, android.os.UserHandle, java.lang.String, android.os.Bundle):android.widget.RemoteViews");
+    public final RemoteViews getPreview(String str, UserHandle userHandle, String str2, Bundle bundle) {
+        PeopleSpaceTile peopleSpaceTileBuild;
+        try {
+            ConversationChannel conversation = this.mIPeopleManager.getConversation(str2, userHandle.getIdentifier(), str);
+            LauncherApps launcherApps = this.mLauncherApps;
+            PeopleTileKey peopleTileKey = PeopleSpaceUtils.EMPTY_KEY;
+            if (conversation != null) {
+                peopleSpaceTileBuild = new PeopleSpaceTile.Builder(conversation, launcherApps).build();
+                if (!((peopleSpaceTileBuild == null || TextUtils.isEmpty(peopleSpaceTileBuild.getUserName())) ? false : true)) {
+                    Log.i("PeopleSpaceUtils", "PeopleSpaceTile is not valid");
+                }
+                if (peopleSpaceTileBuild != null) {
+                    return null;
+                }
+                PeopleSpaceTile peopleSpaceTileAugmentTileFromNotificationEntryManager = augmentTileFromNotificationEntryManager(peopleSpaceTileBuild, Optional.empty());
+                return PeopleTileViewHelper.createRemoteViews(this.mContext, peopleSpaceTileAugmentTileFromNotificationEntryManager, 0, bundle, new PeopleTileKey(peopleSpaceTileAugmentTileFromNotificationEntryManager));
+            }
+            Log.i("PeopleSpaceUtils", "ConversationChannel is null");
+            peopleSpaceTileBuild = null;
+            if (peopleSpaceTileBuild != null) {
+            }
+        } catch (Exception e) {
+            Log.w("PeopleSpaceWidgetMgr", "failed to get conversation or tile", e);
+            return null;
+        }
     }
 
     public final PeopleSpaceTile getTileForExistingWidget(int i) {
@@ -607,85 +559,29 @@ public class PeopleSpaceWidgetManager implements Dumpable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x005e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final PeopleSpaceTile getTileWithCurrentState(PeopleSpaceTile peopleSpaceTile, String str) {
-        char c;
-        PeopleSpaceTile.Builder builder = peopleSpaceTile.toBuilder();
-        switch (str.hashCode()) {
-            case -1238404651:
-                if (str.equals("android.intent.action.MANAGED_PROFILE_UNAVAILABLE")) {
-                    c = 4;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1001645458:
-                if (str.equals("android.intent.action.PACKAGES_SUSPENDED")) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -864107122:
-                if (str.equals("android.intent.action.MANAGED_PROFILE_AVAILABLE")) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -19011148:
-                if (str.equals("android.intent.action.LOCALE_CHANGED")) {
-                    c = 6;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 798292259:
-                if (str.equals(PopupUIUtil.ACTION_BOOT_COMPLETED)) {
-                    c = 7;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 833559602:
-                if (str.equals("android.intent.action.USER_UNLOCKED")) {
-                    c = 5;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 1290767157:
-                if (str.equals("android.intent.action.PACKAGES_UNSUSPENDED")) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 2106958107:
-                if (str.equals("android.app.action.INTERRUPTION_FILTER_CHANGED")) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
+        PeopleSpaceTile.Builder builder;
+        builder = peopleSpaceTile.toBuilder();
+        switch (str) {
+            case "android.app.action.INTERRUPTION_FILTER_CHANGED":
                 builder.setNotificationPolicyState(getNotificationPolicyState());
                 break;
-            case 1:
-            case 2:
+            case "android.intent.action.PACKAGES_SUSPENDED":
+            case "android.intent.action.PACKAGES_UNSUSPENDED":
                 builder.setIsPackageSuspended(getPackageSuspended(peopleSpaceTile));
                 break;
-            case 3:
-            case 4:
-            case 5:
+            case "android.intent.action.MANAGED_PROFILE_AVAILABLE":
+            case "android.intent.action.MANAGED_PROFILE_UNAVAILABLE":
+            case "android.intent.action.USER_UNLOCKED":
                 builder.setIsUserQuieted(peopleSpaceTile.getUserHandle() != null && this.mUserManager.isQuietModeEnabled(peopleSpaceTile.getUserHandle()));
                 break;
-            case 6:
+            case "android.intent.action.LOCALE_CHANGED":
                 break;
+            case "android.intent.action.BOOT_COMPLETED":
             default:
                 builder.setIsUserQuieted(peopleSpaceTile.getUserHandle() != null && this.mUserManager.isQuietModeEnabled(peopleSpaceTile.getUserHandle())).setIsPackageSuspended(getPackageSuspended(peopleSpaceTile)).setNotificationPolicyState(getNotificationPolicyState());
                 break;
@@ -752,14 +648,14 @@ public class PeopleSpaceWidgetManager implements Dumpable {
     }
 
     public final void updateSingleConversationWidgets(final int[] iArr) {
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         for (int i : iArr) {
             PeopleSpaceTile tileForExistingWidget = getTileForExistingWidget(i);
             if (tileForExistingWidget == null) {
                 ClockEventController$$ExternalSyntheticOutline0.m(i, "Matching conversation not found for widget ", "PeopleSpaceWidgetMgr");
             }
             updateAppWidgetOptionsAndView(i, tileForExistingWidget);
-            hashMap.put(Integer.valueOf(i), tileForExistingWidget);
+            map.put(Integer.valueOf(i), tileForExistingWidget);
             if (tileForExistingWidget != null) {
                 registerConversationListenerIfNeeded(i, new PeopleTileKey(tileForExistingWidget));
             }
@@ -769,8 +665,8 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         final PeopleSpaceWidgetManager peopleSpaceWidgetManager = this.mManager;
         ThreadUtils.postOnBackgroundThread(new Runnable() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
-            public final void run() {
-                PeopleSpaceUtils.getDataFromContacts(context, peopleSpaceWidgetManager, hashMap, iArr);
+            public final void run() throws Throwable {
+                PeopleSpaceUtils.getDataFromContacts(context, peopleSpaceWidgetManager, map, iArr);
             }
         });
     }
@@ -793,9 +689,9 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         if (label != null) {
             builder.setUserName(label);
         }
-        Icon convertDrawableToIcon = PeopleSpaceTile.convertDrawableToIcon(this.mLauncherApps.getShortcutIconDrawable(shortcutInfo, 0));
-        if (convertDrawableToIcon != null) {
-            builder.setUserIcon(convertDrawableToIcon);
+        Icon iconConvertDrawableToIcon = PeopleSpaceTile.convertDrawableToIcon(this.mLauncherApps.getShortcutIconDrawable(shortcutInfo, 0));
+        if (iconConvertDrawableToIcon != null) {
+            builder.setUserIcon(iconConvertDrawableToIcon);
         }
         NotificationChannel notificationChannel = conversationChannel.getNotificationChannel();
         if (notificationChannel != null) {
@@ -810,33 +706,33 @@ public class PeopleSpaceWidgetManager implements Dumpable {
             return;
         }
         try {
-            final Map groupConversationNotifications = groupConversationNotifications(collection);
+            final Map mapGroupConversationNotifications = groupConversationNotifications(collection);
             ((Map) set.stream().map(new PeopleSpaceWidgetManager$$ExternalSyntheticLambda1(3)).collect(Collectors.toMap(Function.identity(), new Function() { // from class: com.android.systemui.people.widget.PeopleSpaceWidgetManager$$ExternalSyntheticLambda14
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = PeopleSpaceWidgetManager.this;
-                    Map map = groupConversationNotifications;
+                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = this.f$0;
+                    Map map = mapGroupConversationNotifications;
                     Integer num = (Integer) obj;
                     Map map2 = PeopleSpaceWidgetManager.mListeners;
                     peopleSpaceWidgetManager.getClass();
-                    int intValue = num.intValue();
-                    PeopleSpaceTile tileForExistingWidget = peopleSpaceWidgetManager.getTileForExistingWidget(intValue);
+                    int iIntValue = num.intValue();
+                    PeopleSpaceTile tileForExistingWidget = peopleSpaceWidgetManager.getTileForExistingWidget(iIntValue);
                     if (tileForExistingWidget != null) {
-                        return Optional.ofNullable(peopleSpaceWidgetManager.augmentTileFromNotifications(tileForExistingWidget, new PeopleTileKey(tileForExistingWidget), peopleSpaceWidgetManager.mSharedPrefs.getString(String.valueOf(intValue), null), map, Optional.of(num)));
+                        return Optional.ofNullable(peopleSpaceWidgetManager.augmentTileFromNotifications(tileForExistingWidget, new PeopleTileKey(tileForExistingWidget), peopleSpaceWidgetManager.mSharedPrefs.getString(String.valueOf(iIntValue), null), map, Optional.of(num)));
                     }
-                    Log.w("PeopleSpaceWidgetMgr", "Null tile for existing widget " + intValue + ", skipping update.");
+                    Log.w("PeopleSpaceWidgetMgr", "Null tile for existing widget " + iIntValue + ", skipping update.");
                     return Optional.empty();
                 }
             }))).forEach(new BiConsumer() { // from class: com.android.systemui.people.widget.PeopleSpaceWidgetManager$$ExternalSyntheticLambda15
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = PeopleSpaceWidgetManager.this;
+                    PeopleSpaceWidgetManager peopleSpaceWidgetManager = this.f$0;
                     Optional optional = (Optional) obj2;
                     Map map = PeopleSpaceWidgetManager.mListeners;
                     peopleSpaceWidgetManager.getClass();
-                    int intValue = ((Integer) obj).intValue();
+                    int iIntValue = ((Integer) obj).intValue();
                     if (optional.isPresent()) {
-                        peopleSpaceWidgetManager.updateAppWidgetOptionsAndView(intValue, (PeopleSpaceTile) optional.get());
+                        peopleSpaceWidgetManager.updateAppWidgetOptionsAndView(iIntValue, (PeopleSpaceTile) optional.get());
                     }
                 }
             });
@@ -879,7 +775,6 @@ public class PeopleSpaceWidgetManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.people.widget.PeopleSpaceWidgetManager$2, reason: invalid class name */
     public class AnonymousClass2 implements NotificationListener.NotificationHandler {
         public AnonymousClass2() {

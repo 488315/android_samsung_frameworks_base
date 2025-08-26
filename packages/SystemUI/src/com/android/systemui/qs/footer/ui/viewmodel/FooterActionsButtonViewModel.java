@@ -5,7 +5,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FooterActionsButtonViewModel {
     public final int backgroundColor;
@@ -34,9 +33,9 @@ public final class FooterActionsButtonViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = (this.icon.hashCode() + (Integer.hashCode(this.id) * 31)) * 31;
+        int iHashCode = (this.icon.hashCode() + (Integer.hashCode(this.id) * 31)) * 31;
         Integer num = this.iconTint;
-        return this.onClick.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.backgroundColor, (hashCode + (num == null ? 0 : num.hashCode())) * 31, 31);
+        return this.onClick.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.backgroundColor, (iHashCode + (num == null ? 0 : num.hashCode())) * 31, 31);
     }
 
     public final String toString() {

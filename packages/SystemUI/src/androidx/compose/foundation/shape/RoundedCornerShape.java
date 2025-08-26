@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Outline;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoundedCornerShape extends CornerBasedShape {
     public RoundedCornerShape(CornerSize cornerSize, CornerSize cornerSize2, CornerSize cornerSize3, CornerSize cornerSize4) {
@@ -22,21 +21,21 @@ public final class RoundedCornerShape extends CornerBasedShape {
 
     @Override // androidx.compose.foundation.shape.CornerBasedShape
     /* renamed from: createOutline-LjSzlW0 */
-    public final Outline mo183createOutlineLjSzlW0(long j, float f, float f2, float f3, float f4, LayoutDirection layoutDirection) {
+    public final Outline mo184createOutlineLjSzlW0(long j, float f, float f2, float f3, float f4, LayoutDirection layoutDirection) {
         if (f + f2 + f3 + f4 == 0.0f) {
-            return new Outline.Rectangle(SizeKt.m421toRectuvyYCjk(j));
+            return new Outline.Rectangle(SizeKt.m423toRectuvyYCjk(j));
         }
-        Rect m421toRectuvyYCjk = SizeKt.m421toRectuvyYCjk(j);
+        Rect rectM423toRectuvyYCjk = SizeKt.m423toRectuvyYCjk(j);
         LayoutDirection layoutDirection2 = LayoutDirection.Ltr;
         float f5 = layoutDirection == layoutDirection2 ? f : f2;
-        long floatToRawIntBits = (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(f5) & 4294967295L);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(f5) & 4294967295L);
         CornerRadius.Companion companion = CornerRadius.Companion;
         float f6 = layoutDirection == layoutDirection2 ? f2 : f;
-        long floatToRawIntBits2 = (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(f6) & 4294967295L);
+        long jFloatToRawIntBits2 = (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(f6) & 4294967295L);
         float f7 = layoutDirection == layoutDirection2 ? f3 : f4;
-        long floatToRawIntBits3 = (Float.floatToRawIntBits(f7) << 32) | (Float.floatToRawIntBits(f7) & 4294967295L);
+        long jFloatToRawIntBits3 = (Float.floatToRawIntBits(f7) << 32) | (Float.floatToRawIntBits(f7) & 4294967295L);
         float f8 = layoutDirection == layoutDirection2 ? f4 : f3;
-        return new Outline.Rounded(new RoundRect(m421toRectuvyYCjk.left, m421toRectuvyYCjk.top, m421toRectuvyYCjk.right, m421toRectuvyYCjk.bottom, floatToRawIntBits, floatToRawIntBits2, floatToRawIntBits3, (Float.floatToRawIntBits(f8) << 32) | (Float.floatToRawIntBits(f8) & 4294967295L), null));
+        return new Outline.Rounded(new RoundRect(rectM423toRectuvyYCjk.left, rectM423toRectuvyYCjk.top, rectM423toRectuvyYCjk.right, rectM423toRectuvyYCjk.bottom, jFloatToRawIntBits, jFloatToRawIntBits2, jFloatToRawIntBits3, (Float.floatToRawIntBits(f8) << 32) | (Float.floatToRawIntBits(f8) & 4294967295L), null));
     }
 
     public final boolean equals(Object obj) {

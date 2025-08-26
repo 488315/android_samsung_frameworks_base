@@ -1,6 +1,7 @@
 package com.samsung.android.knox.sdp;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Binder;
@@ -19,7 +20,6 @@ import com.samsung.android.knox.sdp.core.SdpException;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SdpDatabase {
     private static final String CLASS_NAME = "SdpDatabase";
@@ -43,10 +43,10 @@ public class SdpDatabase {
     }
 
     private void enforcePermission() throws SdpException {
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-        if (asInterface != null) {
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        if (iDarManagerServiceAsInterface != null) {
             try {
-                if (asInterface.isLicensed() == 0) {
+                if (iDarManagerServiceAsInterface.isLicensed() == 0) {
                 } else {
                     throw new SdpException(-9);
                 }
@@ -64,18 +64,18 @@ public class SdpDatabase {
     }
 
     private String formSensitivePolicy(String str, String str2, String str3) throws Exception {
-        String formSensitiveColumnStmt = formSensitiveColumnStmt(this.mEngineId, str2, str3);
-        if (formSensitiveColumnStmt == null) {
+        String strFormSensitiveColumnStmt = formSensitiveColumnStmt(this.mEngineId, str2, str3);
+        if (strFormSensitiveColumnStmt == null) {
             return null;
         }
-        return MotionLayout$$ExternalSyntheticOutline0.m("pragma ", str == null ? "" : str.concat("."), "set_sensitive_columns(\"", formSensitiveColumnStmt, "\");");
+        return MotionLayout$$ExternalSyntheticOutline0.m("pragma ", str == null ? "" : str.concat("."), "set_sensitive_columns(\"", strFormSensitiveColumnStmt, "\");");
     }
 
     private SdpEngineInfo getEngineInfo(String str) {
         try {
-            IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-            if (asInterface != null) {
-                return asInterface.getEngineInfo(str);
+            IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+            if (iDarManagerServiceAsInterface != null) {
+                return iDarManagerServiceAsInterface.getEngineInfo(str);
             }
             return null;
         } catch (RemoteException e) {
@@ -85,7 +85,7 @@ public class SdpDatabase {
     }
 
     public boolean isSensitive(SQLiteDatabase sQLiteDatabase, String str, String str2, String str3) {
-        String concat;
+        String strConcat;
         boolean z = false;
         if (sQLiteDatabase == null) {
             Log.d("SdpDatabase", "isSensitive :: invalid DB");
@@ -95,34 +95,34 @@ public class SdpDatabase {
             ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("isSensitive :: invalid engine "), this.mAlias, "SdpDatabase");
             return false;
         }
-        Cursor cursor = null;
+        Cursor cursorRawQuery = null;
         if (str == null) {
-            concat = "";
+            strConcat = "";
         } else {
             try {
                 try {
-                    concat = str.concat(".");
+                    strConcat = str.concat(".");
                 } catch (SQLiteException e) {
                     e.printStackTrace();
-                    if (!cursor.isClosed()) {
-                        cursor.close();
+                    if (!cursorRawQuery.isClosed()) {
+                        cursorRawQuery.close();
                     }
                     return false;
                 }
             } finally {
-                if (!cursor.isClosed()) {
-                    cursor.close();
+                if (!cursorRawQuery.isClosed()) {
+                    cursorRawQuery.close();
                 }
             }
         }
-        cursor = sQLiteDatabase.rawQuery("pragma " + concat + "get_sensitive_columns(" + str2 + ")", null);
-        if (cursor.moveToFirst()) {
+        cursorRawQuery = sQLiteDatabase.rawQuery("pragma " + strConcat + "get_sensitive_columns(" + str2 + ")", null);
+        if (cursorRawQuery.moveToFirst()) {
             while (true) {
-                if (str3.equals(cursor.getString(0))) {
+                if (str3.equals(cursorRawQuery.getString(0))) {
                     z = true;
                     break;
                 }
-                if (!cursor.moveToNext()) {
+                if (!cursorRawQuery.moveToNext()) {
                     break;
                 }
             }
@@ -130,7 +130,7 @@ public class SdpDatabase {
         return z;
     }
 
-    public boolean setSensitive(SQLiteDatabase sQLiteDatabase, String str, String str2, List<String> list) throws SdpException {
+    public boolean setSensitive(SQLiteDatabase sQLiteDatabase, String str, String str2, List<String> list) throws SdpException, SQLException {
         EnterpriseLicenseManager.log(this.mContextInfo, "SdpDatabase.setSensitive");
         StringBuilder sb = new StringBuilder();
         if (sQLiteDatabase == null) {
@@ -159,12 +159,12 @@ public class SdpDatabase {
                 return false;
             }
             sQLiteDatabase.execSQL(formSensitivePolicy(str, str2, sb.toString()));
-            Cursor rawQuery = sQLiteDatabase.rawQuery("select count(*) from " + str2, null);
-            if (rawQuery.moveToFirst() && rawQuery.getInt(0) > 0) {
+            Cursor cursorRawQuery = sQLiteDatabase.rawQuery("select count(*) from " + str2, null);
+            if (cursorRawQuery.moveToFirst() && cursorRawQuery.getInt(0) > 0) {
                 sQLiteDatabase.execSQL("VACUUM");
             }
-            if (!rawQuery.isClosed()) {
-                rawQuery.close();
+            if (!cursorRawQuery.isClosed()) {
+                cursorRawQuery.close();
             }
             sQLiteDatabase.setSdpDatabase();
             return true;
@@ -177,7 +177,7 @@ public class SdpDatabase {
         }
     }
 
-    public boolean updateStateToDB(SQLiteDatabase sQLiteDatabase, String str, int i) {
+    public boolean updateStateToDB(SQLiteDatabase sQLiteDatabase, String str, int i) throws InterruptedException, SQLException {
         if (sQLiteDatabase == null) {
             Log.d("SdpDatabase", "updateStateToDB :: invalid DB");
             return false;
@@ -188,41 +188,41 @@ public class SdpDatabase {
             return false;
         }
         if (engineInfo.getState() != i) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateStateToDB :: invalid state : ", " (current stat : ");
-            m.append(engineInfo.getState());
-            m.append(")");
-            Log.d("SdpDatabase", m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateStateToDB :: invalid state : ", " (current stat : ");
+            sbM.append(engineInfo.getState());
+            sbM.append(")");
+            Log.d("SdpDatabase", sbM.toString());
             return false;
         }
         Cursor cursor = null;
         try {
             Log.d("SdpDatabase", "updateSDPStateToDB called with dbalias = " + str + " sdpState = " + i);
-            String concat = str == null ? "" : str.concat(".");
+            String strConcat = str == null ? "" : str.concat(".");
             if (i == 1) {
-                sQLiteDatabase.execSQL("pragma " + concat + "sdp_locked;");
+                sQLiteDatabase.execSQL("pragma " + strConcat + "sdp_locked;");
             } else if (i == 2) {
-                sQLiteDatabase.execSQL("pragma " + concat + "sdp_unlocked;");
-                Cursor cursor2 = null;
+                sQLiteDatabase.execSQL("pragma " + strConcat + "sdp_unlocked;");
+                Cursor cursorRawQuery = null;
                 int i2 = 1;
                 while (i2 > 0) {
                     try {
                         Log.d("SdpDatabase", "calling next : pragma runoneconvert  in sdpState = " + i);
-                        cursor2 = sQLiteDatabase.rawQuery("pragma " + concat + "sdp_run_one_convert", null);
-                        if (cursor2 != null && cursor2.getCount() != 0) {
-                            if (cursor2.moveToFirst()) {
-                                i2 = cursor2.getInt(0);
+                        cursorRawQuery = sQLiteDatabase.rawQuery("pragma " + strConcat + "sdp_run_one_convert", null);
+                        if (cursorRawQuery != null && cursorRawQuery.getCount() != 0) {
+                            if (cursorRawQuery.moveToFirst()) {
+                                i2 = cursorRawQuery.getInt(0);
                             }
                             Thread.sleep(30L);
-                            cursor2.close();
+                            cursorRawQuery.close();
                         }
                         Log.d("SdpDatabase", "Cursor is null or there are no rows after query...");
-                        if (cursor2 != null) {
-                            cursor2.close();
+                        if (cursorRawQuery != null) {
+                            cursorRawQuery.close();
                         }
                         Log.d("SdpDatabase", "DONE calling all pragma runoneconvert  in sdpState = " + i);
                     } catch (Exception e) {
                         e = e;
-                        cursor = cursor2;
+                        cursor = cursorRawQuery;
                         e.printStackTrace();
                         if (cursor != null) {
                             cursor.close();

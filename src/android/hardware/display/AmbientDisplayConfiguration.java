@@ -1,6 +1,7 @@
 package android.hardware.display;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -58,7 +59,7 @@ public class AmbientDisplayConfiguration {
         return boolSettingDefaultOn(Settings.Secure.DOZE_TAP_SCREEN_GESTURE, i) && tapSensorAvailable();
     }
 
-    public boolean tapSensorAvailable() {
+    public boolean tapSensorAvailable() throws Resources.NotFoundException {
         for (String str : tapSensorTypeMapping()) {
             if (!TextUtils.isEmpty(str)) {
                 return true;
@@ -106,7 +107,7 @@ public class AmbientDisplayConfiguration {
         return this.mContext.getResources().getString(R.string.config_dozeDoubleTapSensorType);
     }
 
-    public String[] tapSensorTypeMapping() {
+    public String[] tapSensorTypeMapping() throws Resources.NotFoundException {
         String[] stringArray = this.mContext.getResources().getStringArray(R.array.config_dozeTapSensorPostureMapping);
         return ArrayUtils.isEmpty(stringArray) ? new String[]{this.mContext.getResources().getString(R.string.config_dozeTapSensorType)} : stringArray;
     }

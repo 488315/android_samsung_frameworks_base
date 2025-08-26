@@ -5,14 +5,12 @@ import android.os.Parcelable;
 import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EventCategory implements Parcelable {
     public static final Parcelable.Creator<EventCategory> CREATOR = new Creator();
     private final int categoryId;
     private final String categoryName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {

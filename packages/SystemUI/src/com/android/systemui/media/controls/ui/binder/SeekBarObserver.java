@@ -15,7 +15,6 @@ import com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SeekBarObserver implements Observer {
     public static final int RESET_ANIMATION_DURATION_MS;
@@ -30,7 +29,6 @@ public class SeekBarObserver implements Observer {
     public final TraceStateLogger listeningStateLogger = new TraceStateLogger("SeekBarObserver#listening", false, false, false, 14, null);
     public boolean animationEnabled = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,11 +73,11 @@ public class SeekBarObserver implements Observer {
         SeekBar seekBar = this.holder.seekBar;
         int progress = seekBar.getProgress();
         int i2 = RESET_ANIMATION_DURATION_MS;
-        ObjectAnimator ofInt = ObjectAnimator.ofInt(seekBar, "progress", progress, i + i2);
-        ofInt.setAutoCancel(true);
-        ofInt.setDuration(i2);
-        ofInt.setInterpolator(Interpolators.EMPHASIZED);
-        return ofInt;
+        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(seekBar, "progress", progress, i + i2);
+        objectAnimatorOfInt.setAutoCancel(true);
+        objectAnimatorOfInt.setDuration(i2);
+        objectAnimatorOfInt.setInterpolator(Interpolators.EMPHASIZED);
+        return objectAnimatorOfInt;
     }
 
     @Override // androidx.lifecycle.Observer
@@ -136,22 +134,22 @@ public class SeekBarObserver implements Observer {
         }
         Integer num = progress.elapsedTime;
         if (num != null) {
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             if (!z4) {
                 Animator animator = this.seekBarResetAnimator;
                 if (!(animator != null ? animator.isRunning() : false)) {
                     int i4 = RESET_ANIMATION_THRESHOLD_MS;
-                    if (intValue > i4 || mediaViewHolder.seekBar.getProgress() <= i4) {
-                        mediaViewHolder.seekBar.setProgress(intValue);
+                    if (iIntValue > i4 || mediaViewHolder.seekBar.getProgress() <= i4) {
+                        mediaViewHolder.seekBar.setProgress(iIntValue);
                     } else {
-                        Animator buildResetAnimator = buildResetAnimator(intValue);
-                        buildResetAnimator.start();
-                        this.seekBarResetAnimator = buildResetAnimator;
+                        Animator animatorBuildResetAnimator = buildResetAnimator(iIntValue);
+                        animatorBuildResetAnimator.start();
+                        this.seekBarResetAnimator = animatorBuildResetAnimator;
                     }
                 }
             }
             if (z4) {
-                mediaViewHolder.scrubbingElapsedTimeView.setText(DateUtils.formatElapsedTime(intValue / 1000));
+                mediaViewHolder.scrubbingElapsedTimeView.setText(DateUtils.formatElapsedTime(iIntValue / 1000));
             }
         }
     }

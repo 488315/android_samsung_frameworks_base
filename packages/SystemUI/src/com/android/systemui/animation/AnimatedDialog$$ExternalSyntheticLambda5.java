@@ -5,7 +5,6 @@ import com.android.systemui.animation.AnimatedDialog;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AnimatedDialog$$ExternalSyntheticLambda5 implements Function0 {
     public final /* synthetic */ int $r8$classId = 1;
@@ -33,9 +32,9 @@ public final /* synthetic */ class AnimatedDialog$$ExternalSyntheticLambda5 impl
                 animatedDialog.synchronizeNextDraw(new AnimatedDialog$$ExternalSyntheticLambda5(this.f$1, animatedDialog));
                 break;
             default:
-                this.f$1.mo779invoke(Boolean.TRUE);
+                this.f$1.mo781invoke(Boolean.TRUE);
                 AnimatedDialog animatedDialog2 = this.f$0;
-                animatedDialog2.onDialogDismissed.mo779invoke(animatedDialog2);
+                animatedDialog2.onDialogDismissed.mo781invoke(animatedDialog2);
                 break;
         }
         return Unit.INSTANCE;

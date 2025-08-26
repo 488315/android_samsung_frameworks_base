@@ -19,7 +19,6 @@ import com.android.systemui.shared.navigationbar.KeyButtonRipple;
 import com.android.systemui.shared.rotation.FloatingRotationButtonPositionCalculator;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FloatingRotationButton {
     public AnimatedVectorDrawable mAnimatedDrawable;
@@ -83,13 +82,13 @@ public class FloatingRotationButton {
         layoutParams.setFitInsetsTypes(0);
         int rotation = this.mWindowManager.getDefaultDisplay().getRotation();
         this.mDisplayRotation = rotation;
-        FloatingRotationButtonPositionCalculator.Position calculatePosition = this.mPositionCalculator.calculatePosition(rotation, this.mIsTaskbarVisible, this.mIsTaskbarStashed);
-        this.mPosition = calculatePosition;
+        FloatingRotationButtonPositionCalculator.Position positionCalculatePosition = this.mPositionCalculator.calculatePosition(rotation, this.mIsTaskbarVisible, this.mIsTaskbarStashed);
+        this.mPosition = positionCalculatePosition;
         if (BasicRuneWrapper.NAVBAR_ENABLED) {
             RotationUtil.Companion.getClass();
             i = RotationUtil.floatingButtonPosition;
         } else {
-            i = calculatePosition.gravity;
+            i = positionCalculatePosition.gravity;
         }
         layoutParams.gravity = i;
         FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) this.mKeyButtonView.getLayoutParams();

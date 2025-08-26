@@ -91,16 +91,16 @@ public final class RippleAnimationSession {
     }
 
     private void exitSoftware() {
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.5f, 1.0f);
-        ofFloat.setDuration(375L);
-        ofFloat.setStartDelay(computeDelay());
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda0
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.5f, 1.0f);
+        valueAnimatorOfFloat.setDuration(375L);
+        valueAnimatorOfFloat.setStartDelay(computeDelay());
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleAnimationSession.this.lambda$exitSoftware$0(ofFloat, valueAnimator);
+                this.f$0.lambda$exitSoftware$0(valueAnimatorOfFloat, valueAnimator);
             }
         });
-        ofFloat.addListener(new AnimatorListener(this) { // from class: android.graphics.drawable.RippleAnimationSession.1
+        valueAnimatorOfFloat.addListener(new AnimatorListener(this) { // from class: android.graphics.drawable.RippleAnimationSession.1
             @Override // android.graphics.drawable.RippleAnimationSession.AnimatorListener, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {
                 super.onAnimationEnd(animator);
@@ -111,14 +111,14 @@ public final class RippleAnimationSession {
                 if (consumer != null) {
                     consumer.accept(RippleAnimationSession.this);
                 }
-                if (RippleAnimationSession.this.mCurrentAnimation == ofFloat) {
+                if (RippleAnimationSession.this.mCurrentAnimation == valueAnimatorOfFloat) {
                     RippleAnimationSession.this.mCurrentAnimation = null;
                 }
             }
         });
-        ofFloat.setInterpolator(LINEAR_INTERPOLATOR);
-        ofFloat.start();
-        this.mCurrentAnimation = ofFloat;
+        valueAnimatorOfFloat.setInterpolator(LINEAR_INTERPOLATOR);
+        valueAnimatorOfFloat.start();
+        this.mCurrentAnimation = valueAnimatorOfFloat;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -202,22 +202,22 @@ public final class RippleAnimationSession {
     }
 
     private void enterSoftware() {
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 0.5f);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 0.5f);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleAnimationSession.this.lambda$enterSoftware$1(ofFloat, valueAnimator);
+                this.f$0.lambda$enterSoftware$1(valueAnimatorOfFloat, valueAnimator);
             }
         });
-        final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(this.mStartTime, r2 + 32);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda2
+        final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(this.mStartTime, r2 + 32);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleAnimationSession$$ExternalSyntheticLambda2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleAnimationSession.this.lambda$enterSoftware$2(ofFloat2, valueAnimator);
+                this.f$0.lambda$enterSoftware$2(valueAnimatorOfFloat2, valueAnimator);
             }
         });
-        startAnimation(ofFloat, ofFloat2);
-        this.mCurrentAnimation = ofFloat;
+        startAnimation(valueAnimatorOfFloat, valueAnimatorOfFloat2);
+        this.mCurrentAnimation = valueAnimatorOfFloat;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

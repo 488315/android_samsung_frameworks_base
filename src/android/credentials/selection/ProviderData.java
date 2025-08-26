@@ -25,9 +25,9 @@ public abstract class ProviderData implements Parcelable {
     }
 
     protected ProviderData(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        this.mProviderFlattenedComponentName = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
+        String string8 = parcel.readString8();
+        this.mProviderFlattenedComponentName = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
     }
 
     @Override // android.os.Parcelable

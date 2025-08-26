@@ -711,9 +711,9 @@ public interface IFingerprintService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFingerprintService)) {
-                return (IFingerprintService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFingerprintService)) {
+                return (IFingerprintService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -911,268 +911,268 @@ public interface IFingerprintService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    ITestSessionCallback asInterface = ITestSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    ITestSessionCallback iTestSessionCallbackAsInterface = ITestSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ITestSession createTestSession = createTestSession(readInt, asInterface, readString);
+                    ITestSession iTestSessionCreateTestSession = createTestSession(i3, iTestSessionCallbackAsInterface, string);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createTestSession);
+                    parcel2.writeStrongInterface(iTestSessionCreateTestSession);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    byte[] dumpSensorServiceStateProto = dumpSensorServiceStateProto(readInt2, readBoolean);
+                    byte[] bArrDumpSensorServiceStateProto = dumpSensorServiceStateProto(i4, z);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(dumpSensorServiceStateProto);
+                    parcel2.writeByteArray(bArrDumpSensorServiceStateProto);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<FingerprintSensorPropertiesInternal> sensorPropertiesInternal = getSensorPropertiesInternal(readString2);
+                    List<FingerprintSensorPropertiesInternal> sensorPropertiesInternal = getSensorPropertiesInternal(string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(sensorPropertiesInternal, 1);
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    FingerprintSensorPropertiesInternal sensorProperties = getSensorProperties(readInt3, readString3);
+                    FingerprintSensorPropertiesInternal sensorProperties = getSensorProperties(i5, string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sensorProperties, 1);
                     return true;
                 case 5:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    long readLong = parcel.readLong();
-                    IFingerprintServiceReceiver asInterface2 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    long j = parcel.readLong();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
                     FingerprintAuthenticateOptions fingerprintAuthenticateOptions = (FingerprintAuthenticateOptions) parcel.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long authenticate = authenticate(readStrongBinder, readLong, asInterface2, fingerprintAuthenticateOptions);
+                    long jAuthenticate = authenticate(strongBinder, j, iFingerprintServiceReceiverAsInterface, fingerprintAuthenticateOptions);
                     parcel2.writeNoException();
-                    parcel2.writeLong(authenticate);
+                    parcel2.writeLong(jAuthenticate);
                     return true;
                 case 6:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    IFingerprintServiceReceiver asInterface3 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface2 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
                     FingerprintAuthenticateOptions fingerprintAuthenticateOptions2 = (FingerprintAuthenticateOptions) parcel.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long detectFingerprint = detectFingerprint(readStrongBinder2, asInterface3, fingerprintAuthenticateOptions2);
+                    long jDetectFingerprint = detectFingerprint(strongBinder2, iFingerprintServiceReceiverAsInterface2, fingerprintAuthenticateOptions2);
                     parcel2.writeNoException();
-                    parcel2.writeLong(detectFingerprint);
+                    parcel2.writeLong(jDetectFingerprint);
                     return true;
                 case 7:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    long readLong2 = parcel.readLong();
-                    IBiometricSensorReceiver asInterface4 = IBiometricSensorReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    long j2 = parcel.readLong();
+                    IBiometricSensorReceiver iBiometricSensorReceiverAsInterface = IBiometricSensorReceiver.Stub.asInterface(parcel.readStrongBinder());
                     FingerprintAuthenticateOptions fingerprintAuthenticateOptions3 = (FingerprintAuthenticateOptions) parcel.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
-                    long readLong3 = parcel.readLong();
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    long j3 = parcel.readLong();
+                    int i6 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    prepareForAuthentication(readStrongBinder3, readLong2, asInterface4, fingerprintAuthenticateOptions3, readLong3, readInt4, readBoolean2, readBoolean3);
+                    prepareForAuthentication(strongBinder3, j2, iBiometricSensorReceiverAsInterface, fingerprintAuthenticateOptions3, j3, i6, z2, z3);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startPreparedClient(readInt5, readInt6);
+                    startPreparedClient(i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    long readLong4 = parcel.readLong();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelAuthentication(readStrongBinder4, readString4, readString5, readLong4);
+                    cancelAuthentication(strongBinder4, string4, string5, j4);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    String readString6 = parcel.readString();
-                    long readLong5 = parcel.readLong();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    String string6 = parcel.readString();
+                    long j5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelFingerprintDetect(readStrongBinder5, readString6, readLong5);
+                    cancelFingerprintDetect(strongBinder5, string6, j5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt7 = parcel.readInt();
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    String readString7 = parcel.readString();
-                    long readLong6 = parcel.readLong();
+                    int i9 = parcel.readInt();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    String string7 = parcel.readString();
+                    long j6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelAuthenticationFromService(readInt7, readStrongBinder6, readString7, readLong6);
+                    cancelAuthenticationFromService(i9, strongBinder6, string7, j6);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt8 = parcel.readInt();
-                    IFingerprintServiceReceiver asInterface5 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString8 = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i10 = parcel.readInt();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface3 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string8 = parcel.readString();
+                    int i11 = parcel.readInt();
                     FingerprintEnrollOptions fingerprintEnrollOptions = (FingerprintEnrollOptions) parcel.readTypedObject(FingerprintEnrollOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long enroll = enroll(readStrongBinder7, createByteArray, readInt8, asInterface5, readString8, readInt9, fingerprintEnrollOptions);
+                    long jEnroll = enroll(strongBinder7, bArrCreateByteArray, i10, iFingerprintServiceReceiverAsInterface3, string8, i11, fingerprintEnrollOptions);
                     parcel2.writeNoException();
-                    parcel2.writeLong(enroll);
+                    parcel2.writeLong(jEnroll);
                     return true;
                 case 13:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
-                    long readLong7 = parcel.readLong();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
+                    long j7 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancelEnrollment(readStrongBinder8, readLong7);
+                    cancelEnrollment(strongBinder8, j7);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    IFingerprintServiceReceiver asInterface6 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString9 = parcel.readString();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface4 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    remove(readStrongBinder9, readInt10, readInt11, asInterface6, readString9);
+                    remove(strongBinder9, i12, i13, iFingerprintServiceReceiverAsInterface4, string9);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
-                    int readInt12 = parcel.readInt();
-                    IFingerprintServiceReceiver asInterface7 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString10 = parcel.readString();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
+                    int i14 = parcel.readInt();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface5 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeAll(readStrongBinder10, readInt12, asInterface7, readString10);
+                    removeAll(strongBinder10, i14, iFingerprintServiceReceiverAsInterface5, string10);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    String readString11 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    rename(readInt13, readInt14, readString11);
+                    rename(i15, i16, string11);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    int readInt15 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<Fingerprint> enrolledFingerprints = getEnrolledFingerprints(readInt15, readString12, readString13);
+                    List<Fingerprint> enrolledFingerprints = getEnrolledFingerprints(i17, string12, string13);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(enrolledFingerprints, 1);
                     return true;
                 case 18:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isHardwareDetectedDeprecated = isHardwareDetectedDeprecated(readString14, readString15);
+                    boolean zIsHardwareDetectedDeprecated = isHardwareDetectedDeprecated(string14, string15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHardwareDetectedDeprecated);
+                    parcel2.writeBoolean(zIsHardwareDetectedDeprecated);
                     return true;
                 case 19:
-                    int readInt16 = parcel.readInt();
-                    String readString16 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isHardwareDetected = isHardwareDetected(readInt16, readString16);
+                    boolean zIsHardwareDetected = isHardwareDetected(i18, string16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHardwareDetected);
+                    parcel2.writeBoolean(zIsHardwareDetected);
                     return true;
                 case 20:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    IFingerprintServiceReceiver asInterface8 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString17 = parcel.readString();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface6 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    generateChallenge(readStrongBinder11, readInt17, readInt18, asInterface8, readString17);
+                    generateChallenge(strongBinder11, i19, i20, iFingerprintServiceReceiverAsInterface6, string17);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    String readString18 = parcel.readString();
-                    long readLong8 = parcel.readLong();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    long j8 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    revokeChallenge(readStrongBinder12, readInt19, readInt20, readString18, readLong8);
+                    revokeChallenge(strongBinder12, i21, i22, string18, j8);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt21 = parcel.readInt();
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasEnrolledFingerprintsDeprecated = hasEnrolledFingerprintsDeprecated(readInt21, readString19, readString20);
+                    boolean zHasEnrolledFingerprintsDeprecated = hasEnrolledFingerprintsDeprecated(i23, string19, string20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasEnrolledFingerprintsDeprecated);
+                    parcel2.writeBoolean(zHasEnrolledFingerprintsDeprecated);
                     return true;
                 case 23:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    String readString21 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasEnrolledFingerprints = hasEnrolledFingerprints(readInt22, readInt23, readString21);
+                    boolean zHasEnrolledFingerprints = hasEnrolledFingerprints(i24, i25, string21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasEnrolledFingerprints);
+                    parcel2.writeBoolean(zHasEnrolledFingerprints);
                     return true;
                 case 24:
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int lockoutModeForUser = getLockoutModeForUser(readInt24, readInt25);
+                    int lockoutModeForUser = getLockoutModeForUser(i26, i27);
                     parcel2.writeNoException();
                     parcel2.writeInt(lockoutModeForUser);
                     return true;
                 case 25:
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
-                    IInvalidationCallback asInterface9 = IInvalidationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    IInvalidationCallback iInvalidationCallbackAsInterface = IInvalidationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    invalidateAuthenticatorId(readInt26, readInt27, asInterface9);
+                    invalidateAuthenticatorId(i28, i29, iInvalidationCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long authenticatorId = getAuthenticatorId(readInt28, readInt29);
+                    long authenticatorId = getAuthenticatorId(i30, i31);
                     parcel2.writeNoException();
                     parcel2.writeLong(authenticatorId);
                     return true;
                 case 27:
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    String readString22 = parcel.readString();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetLockout(readStrongBinder13, readInt30, readInt31, createByteArray2, readString22);
+                    resetLockout(strongBinder13, i32, i33, bArrCreateByteArray2, string22);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    IBiometricServiceLockoutResetCallback asInterface10 = IBiometricServiceLockoutResetCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString23 = parcel.readString();
+                    IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallbackAsInterface = IBiometricServiceLockoutResetCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addLockoutResetCallback(asInterface10, readString23);
+                    addLockoutResetCallback(iBiometricServiceLockoutResetCallbackAsInterface, string23);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    boolean isClientActive = isClientActive();
+                    boolean zIsClientActive = isClientActive();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClientActive);
+                    parcel2.writeBoolean(zIsClientActive);
                     return true;
                 case 30:
-                    IFingerprintClientActiveCallback asInterface11 = IFingerprintClientActiveCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFingerprintClientActiveCallback iFingerprintClientActiveCallbackAsInterface = IFingerprintClientActiveCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addClientActiveCallback(asInterface11);
+                    addClientActiveCallback(iFingerprintClientActiveCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    IFingerprintClientActiveCallback asInterface12 = IFingerprintClientActiveCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFingerprintClientActiveCallback iFingerprintClientActiveCallbackAsInterface2 = IFingerprintClientActiveCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeClientActiveCallback(asInterface12);
+                    removeClientActiveCallback(iFingerprintClientActiveCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 32:
@@ -1182,65 +1182,65 @@ public interface IFingerprintService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    IFingerprintAuthenticatorsRegisteredCallback asInterface13 = IFingerprintAuthenticatorsRegisteredCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFingerprintAuthenticatorsRegisteredCallback iFingerprintAuthenticatorsRegisteredCallbackAsInterface = IFingerprintAuthenticatorsRegisteredCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addAuthenticatorsRegisteredCallback(asInterface13);
+                    addAuthenticatorsRegisteredCallback(iFingerprintAuthenticatorsRegisteredCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    long readLong9 = parcel.readLong();
-                    int readInt32 = parcel.readInt();
+                    long j9 = parcel.readLong();
+                    int i34 = parcel.readInt();
                     PointerContext pointerContext = (PointerContext) parcel.readTypedObject(PointerContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPointerDown(readLong9, readInt32, pointerContext);
+                    onPointerDown(j9, i34, pointerContext);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    long readLong10 = parcel.readLong();
-                    int readInt33 = parcel.readInt();
+                    long j10 = parcel.readLong();
+                    int i35 = parcel.readInt();
                     PointerContext pointerContext2 = (PointerContext) parcel.readTypedObject(PointerContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPointerUp(readLong10, readInt33, pointerContext2);
+                    onPointerUp(j10, i35, pointerContext2);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    int readInt34 = parcel.readInt();
-                    long readLong11 = parcel.readLong();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    long j11 = parcel.readLong();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onUdfpsUiEvent(readInt34, readLong11, readInt35);
+                    onUdfpsUiEvent(i36, j11, i37);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    long readLong12 = parcel.readLong();
-                    int readInt36 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    long j12 = parcel.readLong();
+                    int i38 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setIgnoreDisplayTouches(readLong12, readInt36, readBoolean4);
+                    setIgnoreDisplayTouches(j12, i38, z4);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    IUdfpsOverlayController asInterface14 = IUdfpsOverlayController.Stub.asInterface(parcel.readStrongBinder());
+                    IUdfpsOverlayController iUdfpsOverlayControllerAsInterface = IUdfpsOverlayController.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setUdfpsOverlayController(asInterface14);
+                    setUdfpsOverlayController(iUdfpsOverlayControllerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    AuthenticationStateListener asInterface15 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    AuthenticationStateListener authenticationStateListenerAsInterface = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAuthenticationStateListener(asInterface15);
+                    registerAuthenticationStateListener(authenticationStateListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    AuthenticationStateListener asInterface16 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    AuthenticationStateListener authenticationStateListenerAsInterface2 = AuthenticationStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAuthenticationStateListener(asInterface16);
+                    unregisterAuthenticationStateListener(authenticationStateListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    IBiometricStateListener asInterface17 = IBiometricStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    IBiometricStateListener iBiometricStateListenerAsInterface = IBiometricStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerBiometricStateListener(asInterface17);
+                    registerBiometricStateListener(iBiometricStateListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 42:
@@ -1250,212 +1250,212 @@ public interface IFingerprintService extends IInterface {
                     scheduleWatchdog();
                     return true;
                 case 44:
-                    IBinder readStrongBinder14 = parcel.readStrongBinder();
-                    long readLong13 = parcel.readLong();
-                    IFingerprintServiceReceiver asInterface18 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder14 = parcel.readStrongBinder();
+                    long j13 = parcel.readLong();
+                    IFingerprintServiceReceiver iFingerprintServiceReceiverAsInterface7 = IFingerprintServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
                     FingerprintAuthenticateOptions fingerprintAuthenticateOptions4 = (FingerprintAuthenticateOptions) parcel.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long semAuthenticate = semAuthenticate(readStrongBinder14, readLong13, asInterface18, fingerprintAuthenticateOptions4, bundle);
+                    long jSemAuthenticate = semAuthenticate(strongBinder14, j13, iFingerprintServiceReceiverAsInterface7, fingerprintAuthenticateOptions4, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeLong(semAuthenticate);
+                    parcel2.writeLong(jSemAuthenticate);
                     return true;
                 case 45:
-                    int semGetMaxEnrollmentNumber = semGetMaxEnrollmentNumber();
+                    int iSemGetMaxEnrollmentNumber = semGetMaxEnrollmentNumber();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetMaxEnrollmentNumber);
+                    parcel2.writeInt(iSemGetMaxEnrollmentNumber);
                     return true;
                 case 46:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean semHasFeature = semHasFeature(readInt37);
+                    boolean zSemHasFeature = semHasFeature(i39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semHasFeature);
+                    parcel2.writeBoolean(zSemHasFeature);
                     return true;
                 case 47:
                     semForceCBGE();
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    boolean semIsEnrollSession = semIsEnrollSession();
+                    boolean zSemIsEnrollSession = semIsEnrollSession();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semIsEnrollSession);
+                    parcel2.writeBoolean(zSemIsEnrollSession);
                     return true;
                 case 49:
-                    boolean semIsTemplateDbCorrupted = semIsTemplateDbCorrupted();
+                    boolean zSemIsTemplateDbCorrupted = semIsTemplateDbCorrupted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semIsTemplateDbCorrupted);
+                    parcel2.writeBoolean(zSemIsTemplateDbCorrupted);
                     return true;
                 case 50:
-                    int semGetSensorStatus = semGetSensorStatus();
+                    int iSemGetSensorStatus = semGetSensorStatus();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetSensorStatus);
+                    parcel2.writeInt(iSemGetSensorStatus);
                     return true;
                 case 51:
-                    boolean semPauseEnroll = semPauseEnroll();
+                    boolean zSemPauseEnroll = semPauseEnroll();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semPauseEnroll);
+                    parcel2.writeBoolean(zSemPauseEnroll);
                     return true;
                 case 52:
-                    boolean semResumeEnroll = semResumeEnroll();
+                    boolean zSemResumeEnroll = semResumeEnroll();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semResumeEnroll);
+                    parcel2.writeBoolean(zSemResumeEnroll);
                     return true;
                 case 53:
-                    boolean semOpenSession = semOpenSession();
+                    boolean zSemOpenSession = semOpenSession();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semOpenSession);
+                    parcel2.writeBoolean(zSemOpenSession);
                     return true;
                 case 54:
-                    String semGetSensorInfo = semGetSensorInfo();
+                    String strSemGetSensorInfo = semGetSensorInfo();
                     parcel2.writeNoException();
-                    parcel2.writeString(semGetSensorInfo);
+                    parcel2.writeString(strSemGetSensorInfo);
                     return true;
                 case 55:
-                    String[] semGetUserIdList = semGetUserIdList();
+                    String[] strArrSemGetUserIdList = semGetUserIdList();
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(semGetUserIdList);
+                    parcel2.writeStringArray(strArrSemGetUserIdList);
                     return true;
                 case 56:
-                    String semGetDaemonVersion = semGetDaemonVersion();
+                    String strSemGetDaemonVersion = semGetDaemonVersion();
                     parcel2.writeNoException();
-                    parcel2.writeString(semGetDaemonVersion);
+                    parcel2.writeString(strSemGetDaemonVersion);
                     return true;
                 case 57:
-                    IBinder readStrongBinder15 = parcel.readStrongBinder();
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
-                    ISemFingerprintRequestCallback asInterface19 = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder15 = parcel.readStrongBinder();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    ISemFingerprintRequestCallback iSemFingerprintRequestCallbackAsInterface = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int semRunSensorTest = semRunSensorTest(readStrongBinder15, readInt38, readInt39, asInterface19);
+                    int iSemRunSensorTest = semRunSensorTest(strongBinder15, i40, i41, iSemFingerprintRequestCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semRunSensorTest);
+                    parcel2.writeInt(iSemRunSensorTest);
                     return true;
                 case 58:
-                    int readInt40 = parcel.readInt();
-                    if (readInt40 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt40);
+                    int i42 = parcel.readInt();
+                    if (i42 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i42);
                     }
-                    byte[] bArr = readInt40 < 0 ? null : new byte[readInt40];
+                    byte[] bArr = i42 < 0 ? null : new byte[i42];
                     parcel.enforceNoDataAvail();
-                    int semGetSensorTestResult = semGetSensorTestResult(bArr);
+                    int iSemGetSensorTestResult = semGetSensorTestResult(bArr);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetSensorTestResult);
+                    parcel2.writeInt(iSemGetSensorTestResult);
                     parcel2.writeByteArray(bArr);
                     return true;
                 case 59:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int semSetScreenStatus = semSetScreenStatus(readInt41);
+                    int iSemSetScreenStatus = semSetScreenStatus(i43);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semSetScreenStatus);
+                    parcel2.writeInt(iSemSetScreenStatus);
                     return true;
                 case 60:
-                    int readInt42 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int semShowBouncerScreen = semShowBouncerScreen(readInt42);
+                    int iSemShowBouncerScreen = semShowBouncerScreen(i44);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semShowBouncerScreen);
+                    parcel2.writeInt(iSemShowBouncerScreen);
                     return true;
                 case 61:
-                    IBinder readStrongBinder16 = parcel.readStrongBinder();
-                    String readString24 = parcel.readString();
+                    IBinder strongBinder16 = parcel.readStrongBinder();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IBinder semAddMaskView = semAddMaskView(readStrongBinder16, readString24);
+                    IBinder iBinderSemAddMaskView = semAddMaskView(strongBinder16, string24);
                     parcel2.writeNoException();
-                    parcel2.writeStrongBinder(semAddMaskView);
+                    parcel2.writeStrongBinder(iBinderSemAddMaskView);
                     return true;
                 case 62:
-                    IBinder readStrongBinder17 = parcel.readStrongBinder();
-                    String readString25 = parcel.readString();
+                    IBinder strongBinder17 = parcel.readStrongBinder();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int semRemoveMaskView = semRemoveMaskView(readStrongBinder17, readString25);
+                    int iSemRemoveMaskView = semRemoveMaskView(strongBinder17, string25);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semRemoveMaskView);
+                    parcel2.writeInt(iSemRemoveMaskView);
                     return true;
                 case 63:
-                    IBinder readStrongBinder18 = parcel.readStrongBinder();
-                    ISemFingerprintAodController asInterface20 = ISemFingerprintAodController.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder18 = parcel.readStrongBinder();
+                    ISemFingerprintAodController iSemFingerprintAodControllerAsInterface = ISemFingerprintAodController.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    semRegisterAodController(readStrongBinder18, asInterface20);
+                    semRegisterAodController(strongBinder18, iSemFingerprintAodControllerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 64:
-                    IBinder readStrongBinder19 = parcel.readStrongBinder();
+                    IBinder strongBinder19 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    semUnregisterAodController(readStrongBinder19);
+                    semUnregisterAodController(strongBinder19);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    int readInt43 = parcel.readInt();
-                    int readInt44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     Point point = (Point) parcel.readTypedObject(Point.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Rect semGetSensorAreaInDisplay = semGetSensorAreaInDisplay(readInt43, readInt44, point);
+                    Rect rectSemGetSensorAreaInDisplay = semGetSensorAreaInDisplay(i45, i46, point);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(semGetSensorAreaInDisplay, 1);
+                    parcel2.writeTypedObject(rectSemGetSensorAreaInDisplay, 1);
                     return true;
                 case 66:
                     semShowUdfpsIcon();
                     parcel2.writeNoException();
                     return true;
                 case 67:
-                    int semGetIconBottomMargin = semGetIconBottomMargin();
+                    int iSemGetIconBottomMargin = semGetIconBottomMargin();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetIconBottomMargin);
+                    parcel2.writeInt(iSemGetIconBottomMargin);
                     return true;
                 case 68:
-                    int readInt45 = parcel.readInt();
-                    int readInt46 = parcel.readInt();
+                    int i47 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    semMoveSensorIconInDisplay(readInt45, readInt46);
+                    semMoveSensorIconInDisplay(i47, i48);
                     parcel2.writeNoException();
                     return true;
                 case 69:
-                    int semGetSecurityLevel = semGetSecurityLevel();
+                    int iSemGetSecurityLevel = semGetSecurityLevel();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetSecurityLevel);
+                    parcel2.writeInt(iSemGetSecurityLevel);
                     return true;
                 case 70:
-                    String semGetTrustAppVersion = semGetTrustAppVersion();
+                    String strSemGetTrustAppVersion = semGetTrustAppVersion();
                     parcel2.writeNoException();
-                    parcel2.writeString(semGetTrustAppVersion);
+                    parcel2.writeString(strSemGetTrustAppVersion);
                     return true;
                 case 71:
-                    String readString26 = parcel.readString();
-                    ISemFingerprintRequestCallback asInterface21 = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString27 = parcel.readString();
+                    String string26 = parcel.readString();
+                    ISemFingerprintRequestCallback iSemFingerprintRequestCallbackAsInterface2 = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    semUpdateTrustApp(readString26, asInterface21, readString27);
+                    semUpdateTrustApp(string26, iSemFingerprintRequestCallbackAsInterface2, string27);
                     parcel2.writeNoException();
                     return true;
                 case 72:
-                    int readInt47 = parcel.readInt();
-                    int readInt48 = parcel.readInt();
-                    long readLong14 = parcel.readLong();
-                    String readString28 = parcel.readString();
+                    int i49 = parcel.readInt();
+                    int i50 = parcel.readInt();
+                    long j14 = parcel.readLong();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int semBioSysUiRequest = semBioSysUiRequest(readInt47, readInt48, readLong14, readString28);
+                    int iSemBioSysUiRequest = semBioSysUiRequest(i49, i50, j14, string28);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semBioSysUiRequest);
+                    parcel2.writeInt(iSemBioSysUiRequest);
                     return true;
                 case 73:
-                    ISemBiometricSysUiDisplayStateCallback asInterface22 = ISemBiometricSysUiDisplayStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISemBiometricSysUiDisplayStateCallback iSemBiometricSysUiDisplayStateCallbackAsInterface = ISemBiometricSysUiDisplayStateCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int semRegisterDisplayStateCallback = semRegisterDisplayStateCallback(asInterface22);
+                    int iSemRegisterDisplayStateCallback = semRegisterDisplayStateCallback(iSemBiometricSysUiDisplayStateCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semRegisterDisplayStateCallback);
+                    parcel2.writeInt(iSemRegisterDisplayStateCallback);
                     return true;
                 case 74:
                     semUnregisterDisplayStateCallback();
                     parcel2.writeNoException();
                     return true;
                 case 75:
-                    ISemBiometricSysUiDisplayBrightnessCallback asInterface23 = ISemBiometricSysUiDisplayBrightnessCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISemBiometricSysUiDisplayBrightnessCallback iSemBiometricSysUiDisplayBrightnessCallbackAsInterface = ISemBiometricSysUiDisplayBrightnessCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int semRegisterDisplayBrightnessCallback = semRegisterDisplayBrightnessCallback(asInterface23);
+                    int iSemRegisterDisplayBrightnessCallback = semRegisterDisplayBrightnessCallback(iSemBiometricSysUiDisplayBrightnessCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semRegisterDisplayBrightnessCallback);
+                    parcel2.writeInt(iSemRegisterDisplayBrightnessCallback);
                     return true;
                 case 76:
                     semUnregisterDisplayBrightnessCallback();
@@ -1469,78 +1469,78 @@ public interface IFingerprintService extends IInterface {
                     parcel2.writeTypedObject(bundle2, 1);
                     return true;
                 case 78:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semSetFodStrictMode(readBoolean5);
+                    semSetFodStrictMode(z5);
                     parcel2.writeNoException();
                     return true;
                 case 79:
-                    IBinder readStrongBinder20 = parcel.readStrongBinder();
-                    int readInt49 = parcel.readInt();
-                    String readString29 = parcel.readString();
+                    IBinder strongBinder20 = parcel.readStrongBinder();
+                    int i51 = parcel.readInt();
+                    String string29 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int semSetCalibrationMode = semSetCalibrationMode(readStrongBinder20, readInt49, readString29);
+                    int iSemSetCalibrationMode = semSetCalibrationMode(strongBinder20, i51, string29);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semSetCalibrationMode);
+                    parcel2.writeInt(iSemSetCalibrationMode);
                     return true;
                 case 80:
                     byte[] bArr2 = null;
-                    int readInt50 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    int readInt51 = parcel.readInt();
-                    if (readInt51 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt51);
+                    int i52 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    int i53 = parcel.readInt();
+                    if (i53 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i53);
                     }
-                    if (readInt51 >= 0) {
-                        bArr2 = new byte[readInt51];
+                    if (i53 >= 0) {
+                        bArr2 = new byte[i53];
                     }
-                    String readString30 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int semProcessFido = semProcessFido(readInt50, createByteArray3, bArr2, readString30);
+                    int iSemProcessFido = semProcessFido(i52, bArrCreateByteArray3, bArr2, string30);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semProcessFido);
+                    parcel2.writeInt(iSemProcessFido);
                     parcel2.writeByteArray(bArr2);
                     return true;
                 case 81:
-                    int readInt52 = parcel.readInt();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int semGetRemainingLockoutTime = semGetRemainingLockoutTime(readInt52);
+                    int iSemGetRemainingLockoutTime = semGetRemainingLockoutTime(i54);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetRemainingLockoutTime);
+                    parcel2.writeInt(iSemGetRemainingLockoutTime);
                     return true;
                 case 82:
-                    boolean semCanChangeDeviceColorMode = semCanChangeDeviceColorMode();
+                    boolean zSemCanChangeDeviceColorMode = semCanChangeDeviceColorMode();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semCanChangeDeviceColorMode);
+                    parcel2.writeBoolean(zSemCanChangeDeviceColorMode);
                     return true;
                 case 83:
-                    int readInt53 = parcel.readInt();
-                    String readString31 = parcel.readString();
+                    int i55 = parcel.readInt();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    semSetFlagForIFAA(readInt53, readString31);
+                    semSetFlagForIFAA(i55, string31);
                     parcel2.writeNoException();
                     return true;
                 case 84:
-                    IBinder readStrongBinder21 = parcel.readStrongBinder();
+                    IBinder strongBinder21 = parcel.readStrongBinder();
                     byte[] bArr3 = null;
-                    int readInt54 = parcel.readInt();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    int readInt55 = parcel.readInt();
-                    if (readInt55 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt55);
+                    int i56 = parcel.readInt();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    int i57 = parcel.readInt();
+                    if (i57 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i57);
                     }
-                    if (readInt55 >= 0) {
-                        bArr3 = new byte[readInt55];
+                    if (i57 >= 0) {
+                        bArr3 = new byte[i57];
                     }
                     byte[] bArr4 = bArr3;
-                    int readInt56 = parcel.readInt();
-                    int readInt57 = parcel.readInt();
-                    String readString32 = parcel.readString();
-                    ISemFingerprintRequestCallback asInterface24 = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i58 = parcel.readInt();
+                    int i59 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    ISemFingerprintRequestCallback iSemFingerprintRequestCallbackAsInterface3 = ISemFingerprintRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int semRequest = semRequest(readStrongBinder21, readInt54, createByteArray4, bArr4, readInt56, readInt57, readString32, asInterface24);
+                    int iSemRequest = semRequest(strongBinder21, i56, bArrCreateByteArray4, bArr4, i58, i59, string32, iSemFingerprintRequestCallbackAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(semRequest);
+                    parcel2.writeInt(iSemRequest);
                     parcel2.writeByteArray(bArr4);
                     return true;
                 case 85:
@@ -1569,1403 +1569,1403 @@ public interface IFingerprintService extends IInterface {
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iTestSessionCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITestSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iTestSessionCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITestSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public byte[] dumpSensorServiceStateProto(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public FingerprintSensorPropertiesInternal getSensorProperties(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FingerprintSensorPropertiesInternal) obtain2.readTypedObject(FingerprintSensorPropertiesInternal.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FingerprintSensorPropertiesInternal) parcelObtain2.readTypedObject(FingerprintSensorPropertiesInternal.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public long authenticate(IBinder iBinder, long j, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public long detectFingerprint(IBinder iBinder, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void prepareForAuthentication(IBinder iBinder, long j, IBiometricSensorReceiver iBiometricSensorReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, long j2, int i, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iBiometricSensorReceiver);
-                    obtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iBiometricSensorReceiver);
+                    parcelObtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void startPreparedClient(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void cancelAuthentication(IBinder iBinder, String str, String str2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void cancelFingerprintDetect(IBinder iBinder, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void cancelAuthenticationFromService(int i, IBinder iBinder, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public long enroll(IBinder iBinder, byte[] bArr, int i, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str, int i2, FingerprintEnrollOptions fingerprintEnrollOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(fingerprintEnrollOptions, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(fingerprintEnrollOptions, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void cancelEnrollment(IBinder iBinder, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void remove(IBinder iBinder, int i, int i2, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void removeAll(IBinder iBinder, int i, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void rename(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public List<Fingerprint> getEnrolledFingerprints(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Fingerprint.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Fingerprint.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean isHardwareDetectedDeprecated(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean isHardwareDetected(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void generateChallenge(IBinder iBinder, int i, int i2, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void revokeChallenge(IBinder iBinder, int i, int i2, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean hasEnrolledFingerprintsDeprecated(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean hasEnrolledFingerprints(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int getLockoutModeForUser(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void invalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iInvalidationCallback);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iInvalidationCallback);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public long getAuthenticatorId(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void resetLockout(IBinder iBinder, int i, int i2, byte[] bArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void addLockoutResetCallback(IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBiometricServiceLockoutResetCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBiometricServiceLockoutResetCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean isClientActive() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void addClientActiveCallback(IFingerprintClientActiveCallback iFingerprintClientActiveCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFingerprintClientActiveCallback);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFingerprintClientActiveCallback);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void removeClientActiveCallback(IFingerprintClientActiveCallback iFingerprintClientActiveCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFingerprintClientActiveCallback);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFingerprintClientActiveCallback);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void registerAuthenticators(FingerprintSensorConfigurations fingerprintSensorConfigurations) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fingerprintSensorConfigurations, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fingerprintSensorConfigurations, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void addAuthenticatorsRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback iFingerprintAuthenticatorsRegisteredCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFingerprintAuthenticatorsRegisteredCallback);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFingerprintAuthenticatorsRegisteredCallback);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void onPointerDown(long j, int i, PointerContext pointerContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pointerContext, 0);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pointerContext, 0);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void onPointerUp(long j, int i, PointerContext pointerContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pointerContext, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pointerContext, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void onUdfpsUiEvent(int i, long j, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void setIgnoreDisplayTouches(long j, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void setUdfpsOverlayController(IUdfpsOverlayController iUdfpsOverlayController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUdfpsOverlayController);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUdfpsOverlayController);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(authenticationStateListener);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(authenticationStateListener);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(authenticationStateListener);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(authenticationStateListener);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBiometricStateListener);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBiometricStateListener);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void onPowerPressed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void scheduleWatchdog() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public long semAuthenticate(IBinder iBinder, long j, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iFingerprintServiceReceiver);
-                    obtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iFingerprintServiceReceiver);
+                    parcelObtain.writeTypedObject(fingerprintAuthenticateOptions, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetMaxEnrollmentNumber() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semHasFeature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semForceCBGE() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semIsEnrollSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semIsTemplateDbCorrupted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetSensorStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semPauseEnroll() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semResumeEnroll() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semOpenSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public String semGetSensorInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public String[] semGetUserIdList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public String semGetDaemonVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semRunSensorTest(IBinder iBinder, int i, int i2, ISemFingerprintRequestCallback iSemFingerprintRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iSemFingerprintRequestCallback);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iSemFingerprintRequestCallback);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetSensorTestResult(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(bArr.length);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(bArr.length);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semSetScreenStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semShowBouncerScreen(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public IBinder semAddMaskView(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semRemoveMaskView(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semRegisterAodController(IBinder iBinder, ISemFingerprintAodController iSemFingerprintAodController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iSemFingerprintAodController);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iSemFingerprintAodController);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semUnregisterAodController(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public Rect semGetSensorAreaInDisplay(int i, int i2, Point point) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(point, 0);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Rect) obtain2.readTypedObject(Rect.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(point, 0);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Rect) parcelObtain2.readTypedObject(Rect.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semShowUdfpsIcon() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetIconBottomMargin() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semMoveSensorIconInDisplay(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetSecurityLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public String semGetTrustAppVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semUpdateTrustApp(String str, ISemFingerprintRequestCallback iSemFingerprintRequestCallback, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSemFingerprintRequestCallback);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSemFingerprintRequestCallback);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semBioSysUiRequest(int i, int i2, long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback iSemBiometricSysUiDisplayStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemBiometricSysUiDisplayStateCallback);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemBiometricSysUiDisplayStateCallback);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semUnregisterDisplayStateCallback() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semRegisterDisplayBrightnessCallback(ISemBiometricSysUiDisplayBrightnessCallback iSemBiometricSysUiDisplayBrightnessCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemBiometricSysUiDisplayBrightnessCallback);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemBiometricSysUiDisplayBrightnessCallback);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semUnregisterDisplayBrightnessCallback() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semGetSensorData(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semSetFodStrictMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semSetCalibrationMode(IBinder iBinder, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semProcessFido(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(bArr2.length);
-                    obtain.writeString(str);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(bArr2.length);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semGetRemainingLockoutTime(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public boolean semCanChangeDeviceColorMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void semSetFlagForIFAA(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public int semRequest(IBinder iBinder, int i, byte[] bArr, byte[] bArr2, int i2, int i3, String str, ISemFingerprintRequestCallback iSemFingerprintRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(bArr2.length);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSemFingerprintRequestCallback);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(bArr2.length);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSemFingerprintRequestCallback);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i4 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i4;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
             public void onPowerSinglePressed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(85, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(85, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

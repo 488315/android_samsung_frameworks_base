@@ -5,7 +5,6 @@ import android.view.SurfaceControl;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MultiSurfaceLetterboxController$$ExternalSyntheticLambda2 implements Function1 {
     public final /* synthetic */ int $r8$classId = 0;
@@ -23,7 +22,7 @@ public final /* synthetic */ class MultiSurfaceLetterboxController$$ExternalSynt
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         Object obj2 = this.f$3;
         MultiSurfaceLetterboxController multiSurfaceLetterboxController = this.f$0;
         Object obj3 = this.f$2;

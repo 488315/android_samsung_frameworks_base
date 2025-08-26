@@ -9,7 +9,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserRecord {
     public final RestrictedLockUtils.EnforcedAdmin enforcedAdmin;
@@ -24,7 +23,6 @@ public final class UserRecord {
     public final boolean isSwitchToEnabled;
     public final Bitmap picture;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,11 +53,11 @@ public final class UserRecord {
 
     public final int hashCode() {
         UserInfo userInfo = this.info;
-        int hashCode = (userInfo == null ? 0 : userInfo.hashCode()) * 31;
+        int iHashCode = (userInfo == null ? 0 : userInfo.hashCode()) * 31;
         Bitmap bitmap = this.picture;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (bitmap == null ? 0 : bitmap.hashCode())) * 31, 31, this.isGuest), 31, this.isCurrent), 31, this.isAddUser), 31, this.isRestricted), 31, this.isSwitchToEnabled), 31, this.isAddSupervisedUser), 31, this.isSignOut);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (bitmap == null ? 0 : bitmap.hashCode())) * 31, 31, this.isGuest), 31, this.isCurrent), 31, this.isAddUser), 31, this.isRestricted), 31, this.isSwitchToEnabled), 31, this.isAddSupervisedUser), 31, this.isSignOut);
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin = this.enforcedAdmin;
-        return Boolean.hashCode(this.isManageUsers) + ((m + (enforcedAdmin != null ? enforcedAdmin.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.isManageUsers) + ((iM + (enforcedAdmin != null ? enforcedAdmin.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

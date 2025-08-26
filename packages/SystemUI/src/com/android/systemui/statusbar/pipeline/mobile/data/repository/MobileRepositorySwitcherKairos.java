@@ -45,10 +45,8 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileRepositorySwitcherKairos implements MobileConnectionsRepositoryKairos, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -71,11 +69,9 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
     public final MobileConnectionsRepositoryKairosImpl realRepository;
     public final StateInit subscriptions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Module {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -93,72 +89,72 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
         this.isDemoMode = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i) {
                     case 0:
                         DemoModeController demoModeController2 = (DemoModeController) demoModeController;
-                        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcherKairos$isDemoMode$1$1(demoModeController2, null));
+                        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcherKairos$isDemoMode$1$1(demoModeController2, null));
                         demoModeController2.getClass();
                         Boolean bool = Boolean.FALSE;
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, conflatedCallbackFlow), bool);
+                        return buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, flowConflatedCallbackFlow), bool);
                     default:
                         final MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos = (MobileRepositorySwitcherKairos) demoModeController;
                         return ((BuildScopeImpl) buildScope).mapLatestBuild(mobileRepositorySwitcherKairos.isDemoMode, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda17
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 BuildScope buildScope2 = (BuildScope) obj2;
-                                boolean booleanValue = ((Boolean) obj3).booleanValue();
-                                MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos2 = MobileRepositorySwitcherKairos.this;
-                                if (!booleanValue) {
+                                boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                                MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos2 = mobileRepositorySwitcherKairos;
+                                if (!zBooleanValue) {
                                     return mobileRepositorySwitcherKairos2.realRepository;
                                 }
-                                DemoMobileConnectionsRepositoryKairos create = new MobileRepositorySwitcherKairos$activeRepo$1$1$1(mobileRepositorySwitcherKairos2).this$0.demoRepositoryFactory.create();
-                                create.activate(buildScope2);
-                                return create;
+                                DemoMobileConnectionsRepositoryKairos demoMobileConnectionsRepositoryKairosCreate = new MobileRepositorySwitcherKairos$activeRepo$1$1$1(mobileRepositorySwitcherKairos2).this$0.demoRepositoryFactory.create();
+                                demoMobileConnectionsRepositoryKairosCreate.activate(buildScope2);
+                                return demoMobileConnectionsRepositoryKairosCreate;
                             }
                         });
                 }
             }
         });
         final int i2 = 1;
-        State buildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda0
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
                         DemoModeController demoModeController2 = (DemoModeController) this;
-                        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcherKairos$isDemoMode$1$1(demoModeController2, null));
+                        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcherKairos$isDemoMode$1$1(demoModeController2, null));
                         demoModeController2.getClass();
                         Boolean bool = Boolean.FALSE;
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, conflatedCallbackFlow), bool);
+                        return buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, flowConflatedCallbackFlow), bool);
                     default:
                         final MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos = (MobileRepositorySwitcherKairos) this;
                         return ((BuildScopeImpl) buildScope).mapLatestBuild(mobileRepositorySwitcherKairos.isDemoMode, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda17
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 BuildScope buildScope2 = (BuildScope) obj2;
-                                boolean booleanValue = ((Boolean) obj3).booleanValue();
-                                MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos2 = MobileRepositorySwitcherKairos.this;
-                                if (!booleanValue) {
+                                boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                                MobileRepositorySwitcherKairos mobileRepositorySwitcherKairos2 = mobileRepositorySwitcherKairos;
+                                if (!zBooleanValue) {
                                     return mobileRepositorySwitcherKairos2.realRepository;
                                 }
-                                DemoMobileConnectionsRepositoryKairos create = new MobileRepositorySwitcherKairos$activeRepo$1$1$1(mobileRepositorySwitcherKairos2).this$0.demoRepositoryFactory.create();
-                                create.activate(buildScope2);
-                                return create;
+                                DemoMobileConnectionsRepositoryKairos demoMobileConnectionsRepositoryKairosCreate = new MobileRepositorySwitcherKairos$activeRepo$1$1$1(mobileRepositorySwitcherKairos2).this$0.demoRepositoryFactory.create();
+                                demoMobileConnectionsRepositoryKairosCreate.activate(buildScope2);
+                                return demoMobileConnectionsRepositoryKairosCreate;
                             }
                         });
                 }
             }
         });
         final int i3 = 14;
-        StateInit map = StateKt.map(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        StateInit map = StateKt.map(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -196,11 +192,11 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
                 }
             }
         });
-        final EventsInit mapNotNull = EventsKt.mapNotNull(EventsKt.map(StateKt.getChanges(map), new StateKt$$ExternalSyntheticLambda8(map, 0)), new SwitchKt$$ExternalSyntheticLambda0(0));
+        final EventsInit eventsInitMapNotNull = EventsKt.mapNotNull(EventsKt.map(StateKt.getChanges(map), new StateKt$$ExternalSyntheticLambda8(map, 0)), new SwitchKt$$ExternalSyntheticLambda0(0));
         final StateInit map2 = StateKt.map(map, new Function2() { // from class: com.android.systemui.kairos.SwitchKt$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                Events[] eventsArr = {EventsInit.this, new EventsInit(new Init("patches", new IncrementalKt$$ExternalSyntheticLambda4((Incremental) obj2, 0)))};
+                Events[] eventsArr = {eventsInitMapNotNull, new EventsInit(new Init("patches", new IncrementalKt$$ExternalSyntheticLambda4((Incremental) obj2, 0)))};
                 final SwitchKt$$ExternalSyntheticLambda0 switchKt$$ExternalSyntheticLambda0 = new SwitchKt$$ExternalSyntheticLambda0(1);
                 return EventsKt.map(MergeKt.merge((Events[]) Arrays.copyOf(eventsArr, 2)), new Function2() { // from class: com.android.systemui.kairos.MergeKt$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function2
@@ -211,7 +207,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
                         }
                         Object next = it.next();
                         while (it.hasNext()) {
-                            next = SwitchKt$$ExternalSyntheticLambda0.this.invoke(next, it.next());
+                            next = switchKt$$ExternalSyntheticLambda0.invoke(next, it.next());
                         }
                         return next;
                     }
@@ -222,52 +218,52 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
         final EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.SwitchKt$switchEventsPromptly$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = ((StateImpl) map2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).changes.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((StateImpl) map2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).changes.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, switchKt$$ExternalSyntheticLambda3), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         };
         final EventsInit eventsInit = new EventsInit(new Init(null, new InitKt$constInit$1(new MuxPromptKt$switchPromptImplSingle$$inlined$mapImpl$1(MuxPromptKt$switchPromptImplSingle$2.INSTANCE, new MuxLifecycle(new MuxLifecycleState.Inactive(new MuxPromptActivator(null, new Function1() { // from class: com.android.systemui.kairos.SwitchKt$switchEventsPromptly$$inlined$switchPromptImplSingle$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 EvalScope evalScope = (EvalScope) obj;
-                return new Single((EventsImpl) EventsKt.getInit((Events) ((StateImpl) State.this.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).connect(evalScope)).getEntries();
+                return new Single((EventsImpl) EventsKt.getInit((Events) ((StateImpl) map2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).connect(evalScope)).getEntries();
             }
         }, new SingletonMapK.Factory(), new Function1() { // from class: com.android.systemui.kairos.SwitchKt$switchEventsPromptly$$inlined$switchPromptImplSingle$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final MuxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1 muxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1 = MuxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1.INSTANCE;
-                final EventsImpl eventsImpl2 = EventsImpl.this;
+                final EventsImpl eventsImpl2 = eventsImpl;
                 return new EventsImpl() { // from class: com.android.systemui.kairos.SwitchKt$switchEventsPromptly$$inlined$switchPromptImplSingle$2.1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = eventsImpl2.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = eventsImpl2.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 };
             }
         })))))));
-        final StateInit flatMap = StateKt.flatMap(map, new StateKt$$ExternalSyntheticLambda7());
+        final StateInit stateInitFlatMap = StateKt.flatMap(map, new StateKt$$ExternalSyntheticLambda7());
         this.mobileConnectionsBySubId = new IncrementalInit(new Init("switchIncremental", new Function1() { // from class: com.android.systemui.kairos.SwitchKt$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NetworkScope networkScope = (NetworkScope) obj;
-                StateImpl stateImpl = (StateImpl) StateInit.this.init.connect(networkScope);
+                StateImpl stateImpl = (StateImpl) stateInitFlatMap.init.connect(networkScope);
                 return new IncrementalImpl("switchIncremental", "switchIncremental", stateImpl.changes, (EventsImpl) EventsKt.getInit(eventsInit).connect(networkScope), stateImpl.store);
             }
         }));
         final int i4 = 1;
-        this.subscriptions = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.subscriptions = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -306,7 +302,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i5 = 2;
-        this.activeMobileDataSubscriptionId = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.activeMobileDataSubscriptionId = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -345,7 +341,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i6 = 3;
-        this.activeMobileDataRepository = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.activeMobileDataRepository = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -384,7 +380,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i7 = 4;
-        this.activeSubChangedInGroupEvent = SwitchKt.switchEvents(StateKt.map(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.activeSubChangedInGroupEvent = SwitchKt.switchEvents(StateKt.map(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -423,7 +419,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         }));
         final int i8 = 5;
-        this.defaultDataSubRatConfig = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.defaultDataSubRatConfig = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -462,7 +458,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i9 = 6;
-        this.defaultMobileIconMapping = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.defaultMobileIconMapping = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -501,7 +497,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i10 = 7;
-        this.defaultMobileIconGroup = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.defaultMobileIconGroup = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -540,7 +536,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i11 = 0;
-        this.isDeviceEmergencyCallCapable = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.isDeviceEmergencyCallCapable = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -579,7 +575,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i12 = 8;
-        this.isAnySimSecure = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.isAnySimSecure = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -618,7 +614,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i13 = 9;
-        this.defaultDataSubId = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.defaultDataSubId = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -657,7 +653,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i14 = 10;
-        this.mobileIsDefault = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.mobileIsDefault = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -696,7 +692,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i15 = 11;
-        this.hasCarrierMergedConnection = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.hasCarrierMergedConnection = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -735,7 +731,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i16 = 12;
-        this.defaultConnectionIsValidated = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.defaultConnectionIsValidated = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;
@@ -774,7 +770,7 @@ public final class MobileRepositorySwitcherKairos implements MobileConnectionsRe
             }
         });
         final int i17 = 13;
-        this.isInEcmMode = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
+        this.isInEcmMode = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos = (MobileConnectionsRepositoryKairos) obj2;

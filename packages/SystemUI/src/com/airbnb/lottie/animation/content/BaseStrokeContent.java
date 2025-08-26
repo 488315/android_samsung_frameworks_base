@@ -29,7 +29,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseStrokeContent implements BaseKeyframeAnimation.AnimationListener, KeyPathElementContent, DrawingContent {
     public BaseKeyframeAnimation blurAnimation;
@@ -50,7 +49,6 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
     public final RectF rect = new RectF();
     public final List pathGroups = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PathGroup {
         public final List paths;
         public final TrimPathContent trimPath;
@@ -102,9 +100,9 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
             floatKeyframeAnimation2.addUpdateListener(this);
         }
         if (baseLayer.getBlurEffect() != null) {
-            BaseKeyframeAnimation createAnimation = baseLayer.getBlurEffect().blurriness.createAnimation();
-            this.blurAnimation = createAnimation;
-            createAnimation.addUpdateListener(this);
+            BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = baseLayer.getBlurEffect().blurriness.createAnimation();
+            this.blurAnimation = baseKeyframeAnimationCreateAnimation;
+            baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
             baseLayer.addAnimation(this.blurAnimation);
         }
         if (baseLayer.getDropShadowEffect() != null) {
@@ -175,7 +173,11 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:80:0x023e  */
     @Override // com.airbnb.lottie.animation.content.DrawingContent
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void draw(Canvas canvas, Matrix matrix, int i) {
         int i2;
         BlurMaskFilter blurMaskFilter;
@@ -211,13 +213,13 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
                 if (i4 >= size) {
                     break;
                 }
-                float floatValue = ((Float) ((BaseKeyframeAnimation) ((ArrayList) this.dashPatternAnimations).get(i4)).getValue()).floatValue();
-                fArr[i4] = floatValue;
+                float fFloatValue = ((Float) ((BaseKeyframeAnimation) ((ArrayList) this.dashPatternAnimations).get(i4)).getValue()).floatValue();
+                fArr[i4] = fFloatValue;
                 if (i4 % 2 == 0) {
-                    if (floatValue < 1.0f) {
+                    if (fFloatValue < 1.0f) {
                         fArr[i4] = 1.0f;
                     }
-                } else if (floatValue < 0.1f) {
+                } else if (fFloatValue < 0.1f) {
                     fArr[i4] = 0.1f;
                 }
                 fArr[i4] = fArr[i4] * scale;
@@ -232,22 +234,22 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
         }
         BaseKeyframeAnimation baseKeyframeAnimation = this.blurAnimation;
         if (baseKeyframeAnimation != null) {
-            float floatValue2 = ((Float) baseKeyframeAnimation.getValue()).floatValue();
-            if (floatValue2 == 0.0f) {
+            float fFloatValue2 = ((Float) baseKeyframeAnimation.getValue()).floatValue();
+            if (fFloatValue2 == 0.0f) {
                 lPaint.setMaskFilter(null);
-            } else if (floatValue2 != this.blurMaskFilterRadius) {
+            } else if (fFloatValue2 != this.blurMaskFilterRadius) {
                 BaseLayer baseLayer = this.layer;
-                if (baseLayer.blurMaskFilterRadius == floatValue2) {
+                if (baseLayer.blurMaskFilterRadius == fFloatValue2) {
                     blurMaskFilter = baseLayer.blurMaskFilter;
                 } else {
-                    BlurMaskFilter blurMaskFilter2 = new BlurMaskFilter(floatValue2 / 2.0f, BlurMaskFilter.Blur.NORMAL);
+                    BlurMaskFilter blurMaskFilter2 = new BlurMaskFilter(fFloatValue2 / 2.0f, BlurMaskFilter.Blur.NORMAL);
                     baseLayer.blurMaskFilter = blurMaskFilter2;
-                    baseLayer.blurMaskFilterRadius = floatValue2;
+                    baseLayer.blurMaskFilterRadius = fFloatValue2;
                     blurMaskFilter = blurMaskFilter2;
                 }
                 lPaint.setMaskFilter(blurMaskFilter);
             }
-            this.blurMaskFilterRadius = floatValue2;
+            this.blurMaskFilterRadius = fFloatValue2;
         }
         DropShadowKeyframeAnimation dropShadowKeyframeAnimation = this.dropShadowAnimation;
         if (dropShadowKeyframeAnimation != null) {
@@ -262,18 +264,18 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
                     this.path.addPath(((PathContent) ((ArrayList) pathGroup.paths).get(size2)).getPath(), matrix);
                 }
                 TrimPathContent trimPathContent = pathGroup.trimPath;
-                float floatValue3 = ((Float) trimPathContent.startAnimation.getValue()).floatValue() / f;
-                float floatValue4 = ((Float) trimPathContent.endAnimation.getValue()).floatValue() / f;
-                float floatValue5 = ((Float) trimPathContent.offsetAnimation.getValue()).floatValue() / 360.0f;
-                if (floatValue3 >= 0.01f || floatValue4 <= 0.99f) {
+                float fFloatValue3 = ((Float) trimPathContent.startAnimation.getValue()).floatValue() / f;
+                float fFloatValue4 = ((Float) trimPathContent.endAnimation.getValue()).floatValue() / f;
+                float fFloatValue5 = ((Float) trimPathContent.offsetAnimation.getValue()).floatValue() / 360.0f;
+                if (fFloatValue3 >= 0.01f || fFloatValue4 <= 0.99f) {
                     this.pm.setPath(this.path, z);
                     float length = this.pm.getLength();
                     while (this.pm.nextContour()) {
                         length += this.pm.getLength();
                     }
-                    float f3 = floatValue5 * length;
-                    float f4 = (floatValue3 * length) + f3;
-                    float min = Math.min((floatValue4 * length) + f3, (f4 + length) - f2);
+                    float f3 = fFloatValue5 * length;
+                    float f4 = (fFloatValue3 * length) + f3;
+                    float fMin = Math.min((fFloatValue4 * length) + f3, (f4 + length) - f2);
                     int size3 = ((ArrayList) pathGroup.paths).size() - i3;
                     float f5 = 0.0f;
                     while (size3 >= 0) {
@@ -282,24 +284,20 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
                         this.trimPathPath.transform(matrix);
                         this.pm.setPath(this.trimPathPath, z);
                         float length2 = this.pm.getLength();
-                        if (min > length) {
-                            float f6 = min - length;
-                            if (f6 < f5 + length2 && f5 < f6) {
-                                Utils.applyTrimPathIfNeeded(this.trimPathPath, f4 > length ? (f4 - length) / length2 : 0.0f, Math.min(f6 / length2, f2), 0.0f);
-                                canvas.drawPath(this.trimPathPath, lPaint);
-                                f5 += length2;
-                                size3--;
-                                i3 = i6;
-                                z = false;
-                                f2 = 1.0f;
-                            }
-                        }
-                        float f7 = f5 + length2;
-                        if (f7 >= f4 && f5 <= min) {
-                            if (f7 > min || f4 >= f5) {
-                                Utils.applyTrimPathIfNeeded(this.trimPathPath, f4 < f5 ? 0.0f : (f4 - f5) / length2, min > f7 ? 1.0f : (min - f5) / length2, 0.0f);
-                                canvas.drawPath(this.trimPathPath, lPaint);
+                        if (fMin > length) {
+                            float f6 = fMin - length;
+                            if (f6 >= f5 + length2 || f5 >= f6) {
+                                float f7 = f5 + length2;
+                                if (f7 >= f4 && f5 <= fMin) {
+                                    if (f7 > fMin || f4 >= f5) {
+                                        Utils.applyTrimPathIfNeeded(this.trimPathPath, f4 < f5 ? 0.0f : (f4 - f5) / length2, fMin > f7 ? 1.0f : (fMin - f5) / length2, 0.0f);
+                                        canvas.drawPath(this.trimPathPath, lPaint);
+                                    } else {
+                                        canvas.drawPath(this.trimPathPath, lPaint);
+                                    }
+                                }
                             } else {
+                                Utils.applyTrimPathIfNeeded(this.trimPathPath, f4 > length ? (f4 - length) / length2 : 0.0f, Math.min(f6 / length2, f2), 0.0f);
                                 canvas.drawPath(this.trimPathPath, lPaint);
                             }
                         }
@@ -357,7 +355,11 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
         MiscUtils.resolveKeyPath(keyPath, i, list, keyPath2, this);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0055  */
     @Override // com.airbnb.lottie.animation.content.Content
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setContents(List list, List list2) {
         ArrayList arrayList = (ArrayList) list;
         TrimPathContent trimPathContent = null;
@@ -384,13 +386,12 @@ public abstract class BaseStrokeContent implements BaseKeyframeAnimation.Animati
                     }
                     pathGroup = new PathGroup(trimPathContent3);
                     trimPathContent3.addListener(this);
+                } else if (content2 instanceof PathContent) {
+                    if (pathGroup == null) {
+                        pathGroup = new PathGroup(trimPathContent);
+                    }
+                    ((ArrayList) pathGroup.paths).add((PathContent) content2);
                 }
-            }
-            if (content2 instanceof PathContent) {
-                if (pathGroup == null) {
-                    pathGroup = new PathGroup(trimPathContent);
-                }
-                ((ArrayList) pathGroup.paths).add((PathContent) content2);
             }
         }
         if (pathGroup != null) {

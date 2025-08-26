@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.ChannelAsFlow;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onCompletion$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OnBackInstance$job$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ OnBackPressedCallback $callback;
@@ -22,7 +21,6 @@ final class OnBackInstance$job$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ OnBackInstance this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.activity.compose.OnBackInstance$job$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         final /* synthetic */ Ref$BooleanRef $completed;

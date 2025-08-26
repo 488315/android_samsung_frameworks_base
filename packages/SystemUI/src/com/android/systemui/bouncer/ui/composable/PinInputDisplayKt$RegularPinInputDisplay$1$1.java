@@ -5,22 +5,30 @@ import com.android.systemui.bouncer.ui.viewmodel.EntryToken;
 import com.android.systemui.bouncer.ui.viewmodel.PinBouncerViewModel;
 import com.android.systemui.bouncer.ui.viewmodel.PinInputViewModel;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import kotlin.KotlinNothingValueException;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__MutableCollectionsJVMKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PinInputDisplayKt$RegularPinInputDisplay$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ PinInputRow $pinInputRow;
@@ -28,7 +36,6 @@ final class PinInputDisplayKt$RegularPinInputDisplay$1$1 extends SuspendLambda i
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.ui.composable.PinInputDisplayKt$RegularPinInputDisplay$1$1$1, reason: invalid class name */
     public final class AnonymousClass1 implements FlowCollector {
         public final /* synthetic */ CoroutineScope $$this$LaunchedEffect;
@@ -42,19 +49,106 @@ final class PinInputDisplayKt$RegularPinInputDisplay$1$1 extends SuspendLambda i
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x003e  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object emit(com.android.systemui.bouncer.ui.viewmodel.PinInputViewModel r18, kotlin.coroutines.Continuation r19) {
-            /*
-                Method dump skipped, instructions count: 341
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.composable.PinInputDisplayKt$RegularPinInputDisplay$1$1.AnonymousClass1.emit(com.android.systemui.bouncer.ui.viewmodel.PinInputViewModel, kotlin.coroutines.Continuation):java.lang.Object");
+        public final Object emit(PinInputViewModel pinInputViewModel, Continuation continuation) {
+            PinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1 pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1;
+            CoroutineScope coroutineScope;
+            T t;
+            AnonymousClass1 anonymousClass1 = this;
+            if (continuation instanceof PinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1) {
+                pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1 = (PinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1) continuation;
+                int i = pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1 = new PinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1(anonymousClass1, continuation);
+                }
+            }
+            Object obj = pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                Ref$ObjectRef ref$ObjectRef = anonymousClass1.$currentClearAll;
+                List digits = pinInputViewModel.getDigits((EntryToken.ClearAll) ref$ObjectRef.element);
+                PinInputRow pinInputRow = anonymousClass1.$pinInputRow;
+                pinInputRow.getClass();
+                List list = digits;
+                SnapshotStateList snapshotStateList = pinInputRow.entries;
+                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(snapshotStateList, 10));
+                ListIterator listIterator = snapshotStateList.listIterator();
+                while (listIterator.hasNext()) {
+                    arrayList.add(((PinInputEntry) listIterator.next()).digit);
+                }
+                List list2 = CollectionsKt___CollectionsKt.toList(CollectionsKt___CollectionsKt.minus((Iterable) list, (Iterable) CollectionsKt___CollectionsKt.toSet(arrayList)));
+                ArrayList arrayList2 = new ArrayList();
+                ListIterator listIterator2 = snapshotStateList.listIterator();
+                while (listIterator2.hasNext()) {
+                    Object next = listIterator2.next();
+                    PinInputEntry pinInputEntry = (PinInputEntry) next;
+                    if ((list instanceof Collection) && list.isEmpty()) {
+                        arrayList2.add(next);
+                    } else {
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            if (Intrinsics.areEqual(pinInputEntry.digit, (EntryToken.Digit) it.next())) {
+                                break;
+                            }
+                        }
+                        arrayList2.add(next);
+                    }
+                }
+                List list3 = CollectionsKt___CollectionsKt.toList(arrayList2);
+                List list4 = list2;
+                ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list4, 10));
+                Iterator it2 = list4.iterator();
+                while (true) {
+                    boolean zHasNext = it2.hasNext();
+                    coroutineScope = anonymousClass1.$$this$LaunchedEffect;
+                    if (!zHasNext) {
+                        break;
+                    }
+                    PinInputEntry pinInputEntry2 = new PinInputEntry((EntryToken.Digit) it2.next(), pinInputRow.shapeAnimations);
+                    BuildersKt.launch$default(coroutineScope, null, null, new PinInputRow$updateDigits$1$1$1(pinInputEntry2, null), 3);
+                    arrayList3.add(pinInputEntry2);
+                }
+                snapshotStateList.addAll(arrayList3);
+                Iterator it3 = list3.iterator();
+                while (it3.hasNext()) {
+                    BuildersKt.launch$default(coroutineScope, null, null, new PinInputRow$updateDigits$2$1((PinInputEntry) it3.next(), null), 3);
+                }
+                CollectionsKt__MutableCollectionsJVMKt.sortWith(snapshotStateList, new Comparator() { // from class: com.android.systemui.bouncer.ui.composable.PinInputRow$updateDigits$$inlined$compareBy$1
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj2, Object obj3) {
+                        return ComparisonsKt__ComparisonsKt.compareValues(((PinInputEntry) obj2).digit, ((PinInputEntry) obj3).digit);
+                    }
+                });
+                EntryToken.ClearAll clearAllMostRecentClearAll = pinInputViewModel.mostRecentClearAll();
+                if (!Intrinsics.areEqual(ref$ObjectRef.element, clearAllMostRecentClearAll)) {
+                    pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.L$0 = anonymousClass1;
+                    pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.L$1 = clearAllMostRecentClearAll;
+                    pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.label = 1;
+                    t = clearAllMostRecentClearAll;
+                    if (CoroutineScopeKt.coroutineScope(new PinInputRow$playClearAllAnimation$2(pinInputRow, null), pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            EntryToken.ClearAll clearAll = (EntryToken.ClearAll) pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.L$1;
+            AnonymousClass1 anonymousClass12 = (AnonymousClass1) pinInputDisplayKt$RegularPinInputDisplay$1$1$1$emit$1.L$0;
+            ResultKt.throwOnFailure(obj);
+            t = clearAll;
+            anonymousClass1 = anonymousClass12;
+            anonymousClass1.$currentClearAll.element = t;
+            return Unit.INSTANCE;
         }
     }
 
@@ -90,8 +184,8 @@ final class PinInputDisplayKt$RegularPinInputDisplay$1$1 extends SuspendLambda i
             Object value = this.$viewModel.pinInput.getValue();
             PinInputRow pinInputRow = this.$pinInputRow;
             PinInputViewModel pinInputViewModel = (PinInputViewModel) value;
-            ?? mostRecentClearAll = pinInputViewModel.mostRecentClearAll();
-            List digits = pinInputViewModel.getDigits(mostRecentClearAll);
+            ?? MostRecentClearAll = pinInputViewModel.mostRecentClearAll();
+            List digits = pinInputViewModel.getDigits(MostRecentClearAll);
             SnapshotStateList snapshotStateList = pinInputRow.entries;
             snapshotStateList.clear();
             List list = digits;
@@ -101,7 +195,7 @@ final class PinInputDisplayKt$RegularPinInputDisplay$1$1 extends SuspendLambda i
                 arrayList.add(new PinInputEntry((EntryToken.Digit) it.next(), pinInputRow.shapeAnimations));
             }
             snapshotStateList.addAll(arrayList);
-            ref$ObjectRef.element = mostRecentClearAll;
+            ref$ObjectRef.element = MostRecentClearAll;
             StateFlowImpl stateFlowImpl = this.$viewModel.pinInput;
             AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.$pinInputRow, ref$ObjectRef, coroutineScope);
             this.label = 1;

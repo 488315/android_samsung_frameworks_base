@@ -48,9 +48,9 @@ public class GLTextureSource extends Filter {
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
         if (this.mFrame == null) {
-            Frame newBoundFrame = filterContext.getFrameManager().newBoundFrame(ImageFormat.create(this.mWidth, this.mHeight, 3, 3), 100, this.mTexId);
-            this.mFrame = newBoundFrame;
-            newBoundFrame.setTimestamp(this.mTimestamp);
+            Frame frameNewBoundFrame = filterContext.getFrameManager().newBoundFrame(ImageFormat.create(this.mWidth, this.mHeight, 3, 3), 100, this.mTexId);
+            this.mFrame = frameNewBoundFrame;
+            frameNewBoundFrame.setTimestamp(this.mTimestamp);
         }
         pushOutput("frame", this.mFrame);
         if (this.mRepeatFrame) {

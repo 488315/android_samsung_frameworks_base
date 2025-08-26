@@ -254,43 +254,43 @@ public final class FrontendSettings implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, (FrontendAnalogSettings) parcel.readTypedObject(FrontendAnalogSettings.CREATOR));
+                _set(i, (FrontendAnalogSettings) parcel.readTypedObject(FrontendAnalogSettings.CREATOR));
                 return;
             case 1:
-                _set(readInt, (FrontendAtscSettings) parcel.readTypedObject(FrontendAtscSettings.CREATOR));
+                _set(i, (FrontendAtscSettings) parcel.readTypedObject(FrontendAtscSettings.CREATOR));
                 return;
             case 2:
-                _set(readInt, (FrontendAtsc3Settings) parcel.readTypedObject(FrontendAtsc3Settings.CREATOR));
+                _set(i, (FrontendAtsc3Settings) parcel.readTypedObject(FrontendAtsc3Settings.CREATOR));
                 return;
             case 3:
-                _set(readInt, (FrontendDvbsSettings) parcel.readTypedObject(FrontendDvbsSettings.CREATOR));
+                _set(i, (FrontendDvbsSettings) parcel.readTypedObject(FrontendDvbsSettings.CREATOR));
                 return;
             case 4:
-                _set(readInt, (FrontendDvbcSettings) parcel.readTypedObject(FrontendDvbcSettings.CREATOR));
+                _set(i, (FrontendDvbcSettings) parcel.readTypedObject(FrontendDvbcSettings.CREATOR));
                 return;
             case 5:
-                _set(readInt, (FrontendDvbtSettings) parcel.readTypedObject(FrontendDvbtSettings.CREATOR));
+                _set(i, (FrontendDvbtSettings) parcel.readTypedObject(FrontendDvbtSettings.CREATOR));
                 return;
             case 6:
-                _set(readInt, (FrontendIsdbsSettings) parcel.readTypedObject(FrontendIsdbsSettings.CREATOR));
+                _set(i, (FrontendIsdbsSettings) parcel.readTypedObject(FrontendIsdbsSettings.CREATOR));
                 return;
             case 7:
-                _set(readInt, (FrontendIsdbs3Settings) parcel.readTypedObject(FrontendIsdbs3Settings.CREATOR));
+                _set(i, (FrontendIsdbs3Settings) parcel.readTypedObject(FrontendIsdbs3Settings.CREATOR));
                 return;
             case 8:
-                _set(readInt, (FrontendIsdbtSettings) parcel.readTypedObject(FrontendIsdbtSettings.CREATOR));
+                _set(i, (FrontendIsdbtSettings) parcel.readTypedObject(FrontendIsdbtSettings.CREATOR));
                 return;
             case 9:
-                _set(readInt, (FrontendDtmbSettings) parcel.readTypedObject(FrontendDtmbSettings.CREATOR));
+                _set(i, (FrontendDtmbSettings) parcel.readTypedObject(FrontendDtmbSettings.CREATOR));
                 return;
             case 10:
-                _set(readInt, (FrontendIptvSettings) parcel.readTypedObject(FrontendIptvSettings.CREATOR));
+                _set(i, (FrontendIptvSettings) parcel.readTypedObject(FrontendIptvSettings.CREATOR));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

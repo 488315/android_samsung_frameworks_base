@@ -8,7 +8,6 @@ import com.android.systemui.animation.LaunchableViewDelegate;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AlphaOptimizedFrameLayout extends FrameLayout implements LaunchableView {
     public final LaunchableViewDelegate mLaunchableViewDelegate;
@@ -23,8 +22,8 @@ public class AlphaOptimizedFrameLayout extends FrameLayout implements Launchable
         this.mLaunchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.AlphaOptimizedFrameLayout$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(AlphaOptimizedFrameLayout.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(this.f$0, (Integer) obj);
             }
         });
     }
@@ -49,8 +48,8 @@ public class AlphaOptimizedFrameLayout extends FrameLayout implements Launchable
         this.mLaunchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.AlphaOptimizedFrameLayout$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(AlphaOptimizedFrameLayout.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(this.f$0, (Integer) obj);
             }
         });
     }
@@ -60,8 +59,8 @@ public class AlphaOptimizedFrameLayout extends FrameLayout implements Launchable
         this.mLaunchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.AlphaOptimizedFrameLayout$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(AlphaOptimizedFrameLayout.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(this.f$0, (Integer) obj);
             }
         });
     }
@@ -71,8 +70,8 @@ public class AlphaOptimizedFrameLayout extends FrameLayout implements Launchable
         this.mLaunchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.AlphaOptimizedFrameLayout$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(AlphaOptimizedFrameLayout.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return AlphaOptimizedFrameLayout.$r8$lambda$rAl_2oS5ZJUxCdwum8_jgd2txzs(this.f$0, (Integer) obj);
             }
         });
     }

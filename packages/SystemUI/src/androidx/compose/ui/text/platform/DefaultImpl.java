@@ -5,7 +5,6 @@ import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.State;
 import androidx.emoji2.text.EmojiCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultImpl implements EmojiCompatStatusDelegate {
     public State loadState;
@@ -19,7 +18,7 @@ final class DefaultImpl implements EmojiCompatStatusDelegate {
         if (emojiCompat.getLoadState() == 1) {
             return new ImmutableBool(true);
         }
-        final MutableState mutableStateOf$default = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
+        final MutableState mutableStateMutableStateOf$default = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
         emojiCompat.registerInitCallback(new EmojiCompat.InitCallback() { // from class: androidx.compose.ui.text.platform.DefaultImpl$getFontLoadState$initCallback$1
             @Override // androidx.emoji2.text.EmojiCompat.InitCallback
             public final void onFailed() {
@@ -28,10 +27,10 @@ final class DefaultImpl implements EmojiCompatStatusDelegate {
 
             @Override // androidx.emoji2.text.EmojiCompat.InitCallback
             public final void onInitialized() {
-                mutableStateOf$default.setValue(Boolean.TRUE);
+                mutableStateMutableStateOf$default.setValue(Boolean.TRUE);
                 this.loadState = new ImmutableBool(true);
             }
         });
-        return mutableStateOf$default;
+        return mutableStateMutableStateOf$default;
     }
 }

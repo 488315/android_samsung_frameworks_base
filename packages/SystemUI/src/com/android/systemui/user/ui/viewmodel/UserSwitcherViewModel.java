@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitcherViewModel {
     public final StateFlowImpl _isMenuVisible;
@@ -38,19 +37,19 @@ public final class UserSwitcherViewModel {
         this.users = userSwitcherViewModel$special$$inlined$map$2;
         this.maximumUserColumns = new UserSwitcherViewModel$special$$inlined$map$3(userSwitcherViewModel$special$$inlined$map$2, this);
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isMenuVisible = MutableStateFlow;
-        this.isMenuVisible = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isMenuVisible = stateFlowImplMutableStateFlow;
+        this.isMenuVisible = stateFlowImplMutableStateFlow;
         UserSwitcherViewModel$special$$inlined$map$4 userSwitcherViewModel$special$$inlined$map$4 = new UserSwitcherViewModel$special$$inlined$map$4(userSwitcherInteractor.getActions(), this);
         this.menu = userSwitcherViewModel$special$$inlined$map$4;
         this.isOpenMenuButtonVisible = new UserSwitcherViewModel$special$$inlined$map$5(userSwitcherViewModel$special$$inlined$map$4);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this.hasCancelButtonBeenClicked = MutableStateFlow2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
-        this.isFinishRequiredDueToExecutedAction = MutableStateFlow3;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
-        this.userSwitched = MutableStateFlow4;
-        this.isFinishRequested = FlowKt.combine(MutableStateFlow2, MutableStateFlow3, MutableStateFlow4, new UserSwitcherViewModel$createFinishRequestedFlow$1(null));
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this.hasCancelButtonBeenClicked = stateFlowImplMutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
+        this.isFinishRequiredDueToExecutedAction = stateFlowImplMutableStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
+        this.userSwitched = stateFlowImplMutableStateFlow4;
+        this.isFinishRequested = FlowKt.combine(stateFlowImplMutableStateFlow2, stateFlowImplMutableStateFlow3, stateFlowImplMutableStateFlow4, new UserSwitcherViewModel$createFinishRequestedFlow$1(null));
     }
 
     public static final UserViewModel access$toViewModel(UserSwitcherViewModel userSwitcherViewModel, UserModel userModel) {

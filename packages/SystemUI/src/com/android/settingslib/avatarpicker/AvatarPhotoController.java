@@ -19,7 +19,6 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AvatarPhotoController {
     public final AvatarUi mAvatarUi;
@@ -30,7 +29,6 @@ public class AvatarPhotoController {
     public final Uri mPreCropPictureUri;
     public final Uri mTakePictureUri;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.avatarpicker.AvatarPhotoController$1, reason: invalid class name */
     public class AnonymousClass1 implements FutureCallback {
         public final /* synthetic */ boolean val$delayBeforeCrop;
@@ -68,11 +66,9 @@ public class AvatarPhotoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AvatarUi {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AvatarUiImpl implements AvatarUi {
         public final AvatarPickerActivity mActivity;
 
@@ -81,11 +77,9 @@ public class AvatarPhotoController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ContextInjector {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContextInjectorImpl implements ContextInjector {
         public final Context mContext;
         public final String mFileAuthority;
@@ -119,9 +113,9 @@ public class AvatarPhotoController {
     }
 
     public final void copyAndCropPhoto(Uri uri, boolean z) {
-        ListenableFuture submit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit((Callable) new AvatarPhotoController$$ExternalSyntheticLambda0(this, uri, 0));
+        ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit((Callable) new AvatarPhotoController$$ExternalSyntheticLambda0(this, uri, 0));
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(z);
-        submit.addListener(new Futures.CallbackListener(submit, anonymousClass1), ((ContextInjectorImpl) this.mContextInjector).mContext.getMainExecutor());
+        listenableFutureSubmit.addListener(new Futures.CallbackListener(listenableFutureSubmit, anonymousClass1), ((ContextInjectorImpl) this.mContextInjector).mContext.getMainExecutor());
     }
 
     public final void cropPhoto(Uri uri) {
@@ -143,20 +137,20 @@ public class AvatarPhotoController {
         try {
             StrictMode.disableDeathOnFileUriExposure();
             AvatarPickerActivity avatarPickerActivity = ((AvatarUiImpl) this.mAvatarUi).mActivity;
-            List<ResolveInfo> queryIntentActivities = avatarPickerActivity.getPackageManager().queryIntentActivities(intent, 1048576);
-            if (queryIntentActivities.isEmpty()) {
+            List<ResolveInfo> listQueryIntentActivities = avatarPickerActivity.getPackageManager().queryIntentActivities(intent, 1048576);
+            if (listQueryIntentActivities.isEmpty()) {
                 Log.w("AvatarPhotoController", "No system package activity could be found for code 1003");
                 z = false;
             } else {
-                intent.setPackage(queryIntentActivities.get(0).activityInfo.packageName);
+                intent.setPackage(listQueryIntentActivities.get(0).activityInfo.packageName);
                 avatarPickerActivity.startActivityForResult(intent, 1003);
             }
             if (z) {
                 return;
             }
             StrictMode.enableDeathOnFileUriExposure();
-            ListenableFuture submit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit((Callable) new AvatarPhotoController$$ExternalSyntheticLambda0(this, uri, 1));
-            submit.addListener(new Futures.CallbackListener(submit, new FutureCallback() { // from class: com.android.settingslib.avatarpicker.AvatarPhotoController.2
+            ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit((Callable) new AvatarPhotoController$$ExternalSyntheticLambda0(this, uri, 1));
+            listenableFutureSubmit.addListener(new Futures.CallbackListener(listenableFutureSubmit, new FutureCallback() { // from class: com.android.settingslib.avatarpicker.AvatarPhotoController.2
                 @Override // com.google.common.util.concurrent.FutureCallback
                 public final void onFailure(Throwable th) {
                     Log.e("AvatarPhotoController", "Error performing internal crop", th);

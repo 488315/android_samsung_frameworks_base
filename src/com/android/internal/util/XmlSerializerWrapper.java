@@ -15,7 +15,7 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setFeature(String str, boolean z) {
+    public void setFeature(String str, boolean z) throws IllegalStateException, IllegalArgumentException {
         this.mWrapped.setFeature(str, z);
     }
 
@@ -25,7 +25,7 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setProperty(String str, Object obj) {
+    public void setProperty(String str, Object obj) throws IllegalStateException, IllegalArgumentException {
         this.mWrapped.setProperty(str, obj);
     }
 
@@ -35,27 +35,27 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setOutput(OutputStream outputStream, String str) throws IOException {
+    public void setOutput(OutputStream outputStream, String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.setOutput(outputStream, str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setOutput(Writer writer) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void setOutput(Writer writer) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.setOutput(writer);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void startDocument(String str, Boolean bool) throws IOException {
+    public void startDocument(String str, Boolean bool) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.startDocument(str, bool);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void endDocument() throws IOException {
+    public void endDocument() throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.endDocument();
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setPrefix(String str, String str2) throws IOException {
+    public void setPrefix(String str, String str2) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.setPrefix(str, str2);
     }
 
@@ -105,32 +105,32 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void cdsect(String str) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void cdsect(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.cdsect(str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void entityRef(String str) throws IOException {
+    public void entityRef(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.entityRef(str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void processingInstruction(String str) throws IOException {
+    public void processingInstruction(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.processingInstruction(str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void comment(String str) throws IOException {
+    public void comment(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.comment(str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void docdecl(String str) throws IOException {
+    public void docdecl(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.docdecl(str);
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void ignorableWhitespace(String str) throws IOException {
+    public void ignorableWhitespace(String str) throws IllegalStateException, IOException, IllegalArgumentException {
         this.mWrapped.ignorableWhitespace(str);
     }
 

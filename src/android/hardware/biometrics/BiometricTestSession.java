@@ -54,10 +54,10 @@ public class BiometricTestSession implements AutoCloseable {
         Iterator<SensorProperties> it = list.iterator();
         while (it.hasNext()) {
             int sensorId = it.next().getSensorId();
-            ITestSession createTestSession = testSessionProvider.createTestSession(context, sensorId, new TestSessionCallbackIml(sensorId));
-            this.mTestSessionsForAllSensors.add(createTestSession);
+            ITestSession iTestSessionCreateTestSession = testSessionProvider.createTestSession(context, sensorId, new TestSessionCallbackIml(sensorId));
+            this.mTestSessionsForAllSensors.add(iTestSessionCreateTestSession);
             if (sensorId == i) {
-                this.mTestSession = createTestSession;
+                this.mTestSession = iTestSessionCreateTestSession;
             }
         }
         this.mTestedUsers = new ArraySet<>();
@@ -127,7 +127,7 @@ public class BiometricTestSession implements AutoCloseable {
         }
     }
 
-    public void cleanupInternalState(int i) {
+    public void cleanupInternalState(int i) throws InterruptedException {
         try {
             if (this.mUsersCleaningUp.contains(Integer.valueOf(i))) {
                 Log.w(getTag(), "Cleanup already in progress for user: " + i);
@@ -151,7 +151,7 @@ public class BiometricTestSession implements AutoCloseable {
     }
 
     @Override // java.lang.AutoCloseable
-    public void close() {
+    public void close() throws InterruptedException {
         Log.d(getTag(), "Close, mTestedUsers size; " + this.mTestedUsers.size());
         if (!this.mTestedUsers.isEmpty()) {
             Iterator<Integer> it = this.mTestedUsers.iterator();

@@ -7,14 +7,12 @@ import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.InsetDrawable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RoundedCornerProgressDrawable extends InsetDrawable {
     public static final int $stable = 0;
     public static final Companion Companion = new Companion(null);
     private static final int MAX_LEVEL = 10000;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,7 +22,6 @@ public final class RoundedCornerProgressDrawable extends InsetDrawable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class RoundedCornerState extends Drawable.ConstantState {
         private final Drawable.ConstantState wrappedState;
 
@@ -53,6 +50,7 @@ public final class RoundedCornerProgressDrawable extends InsetDrawable {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public RoundedCornerProgressDrawable() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -92,10 +90,10 @@ public final class RoundedCornerProgressDrawable extends InsetDrawable {
         Drawable drawable = getDrawable();
         Rect bounds = drawable != null ? drawable.getBounds() : null;
         bounds.getClass();
-        int width = (((getBounds().width() - getBounds().height()) * i) / 10000) + getBounds().height();
+        int iWidth = (((getBounds().width() - getBounds().height()) * i) / 10000) + getBounds().height();
         Drawable drawable2 = getDrawable();
         if (drawable2 != null) {
-            drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + width, bounds.bottom);
+            drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + iWidth, bounds.bottom);
         }
         return super.onLevelChange(i);
     }

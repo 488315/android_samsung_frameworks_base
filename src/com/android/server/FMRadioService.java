@@ -5,10 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.input.InputManager;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.tv.interactive.TvInteractiveAppService;
 import android.os.Binder;
@@ -19,6 +22,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.SemSystemProperties;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -304,10 +308,10 @@ public class FMRadioService extends IFMPlayer.Stub {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleAvrcpMode() {
-        int semGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
+        int iSemGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
         boolean z = Settings.Secure.getInt(this.mContext.getContentResolver(), "bluetooth_avc_mode", 1) == 1;
         this.mAvrcpMode = z;
-        if (semGetRadioOutputPath == 8) {
+        if (iSemGetRadioOutputPath == 8) {
             if (z && FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
                 log("Avrcp mode enabled!!!");
                 if (this.volumeLock) {
@@ -372,7 +376,7 @@ public class FMRadioService extends IFMPlayer.Stub {
         }
 
         @Override // android.os.Handler
-        public void handleMessage(Message message) {
+        public void handleMessage(Message message) throws InterruptedException {
             FMRadioService.log("mAudioFocusHandler:mHandler(g.what=" + message.what + ") is called");
             int i = message.what;
             if (i == -3 || i == -2 || i == -1 || i == 1) {
@@ -392,7 +396,7 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void responedFocusEvent(int i) {
+    public void responedFocusEvent(int i) throws InterruptedException {
         if (i == -3) {
             if (isOn()) {
                 if (this.volumeLock) {
@@ -665,11 +669,11 @@ public class FMRadioService extends IFMPlayer.Stub {
             }
             return;
         }
-        String[] split = string.split(",");
-        switch (split.length) {
+        String[] strArrSplit = string.split(",");
+        switch (strArrSplit.length) {
             case 1:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
-                    this.mSnr_th = Integer.parseInt(split[0]);
+                    this.mSnr_th = Integer.parseInt(strArrSplit[0]);
                     this.mIsSupportSoftmute = FMRadioServiceFeature.FEATURE_SUPPORT_SOFTMUTE;
                     this.mSoftmutePath = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SOFTMUTE_PATH");
                     this.mAlgo_type = 1;
@@ -684,24 +688,24 @@ public class FMRadioService extends IFMPlayer.Stub {
                     this.mgoodChrmssi_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_GOODCH_RMSSITH"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 5 || FMRadioServiceFeature.CHIP_VENDOR == 10) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
                     this.mRichwave_seekDC = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_RICHWAVE_SEEK_DC"));
                     this.mRichwave_seekQA = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_RICHWAVE_SEEK_QA"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
                     this.mFreqOffset_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SPRD_FREQ_OFFSET"));
                     this.mNoisePwr_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SPRD_NOISE_PWR"));
                     this.mPilotPwr_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SPRD_PILOT_PWR"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
                     this.mSlsi_ifcount1 = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SLSI_IFCOUNT1"));
                     this.mSlsi_ifcount2 = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SLSI_IFCOUNT2"));
                     this.mSlsi_blendcoeff = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SLSI_BLENDCOEF"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
                     if (!"".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_CHIPVOLUME"))) {
                         this.mMtkSupportSetChipVolume = true;
                         this.mMtkChipVolume = Integer.parseInt(r1);
@@ -716,8 +720,8 @@ public class FMRadioService extends IFMPlayer.Stub {
                 break;
             case 2:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
-                    this.mSnr_th = Integer.parseInt(split[0]);
-                    this.mCnt_th = Integer.parseInt(split[1]);
+                    this.mSnr_th = Integer.parseInt(strArrSplit[0]);
+                    this.mCnt_th = Integer.parseInt(strArrSplit[1]);
                     this.mIsSupportSoftmute = FMRadioServiceFeature.FEATURE_SUPPORT_SOFTMUTE;
                     this.mSoftmutePath = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SOFTMUTE_PATH");
                     this.mAlgo_type = 1;
@@ -731,8 +735,8 @@ public class FMRadioService extends IFMPlayer.Stub {
                     this.mgoodChrmssi_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_GOODCH_RMSSITH"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mMtk_seeksmg = Integer.parseInt(split[1]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mMtk_seeksmg = Integer.parseInt(strArrSplit[1]);
                     if (!"".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_CHIPVOLUME"))) {
                         this.mMtkSupportSetChipVolume = true;
                         this.mMtkChipVolume = Integer.parseInt(r1);
@@ -746,20 +750,20 @@ public class FMRadioService extends IFMPlayer.Stub {
                 break;
             case 3:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 5 || FMRadioServiceFeature.CHIP_VENDOR == 10) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mRichwave_seekDC = Integer.parseInt(split[1]);
-                    this.mRichwave_seekQA = Integer.parseInt(split[2]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mRichwave_seekDC = Integer.parseInt(strArrSplit[1]);
+                    this.mRichwave_seekQA = Integer.parseInt(strArrSplit[2]);
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSlsi_ifcount1 = Integer.parseInt(split[1]);
-                    this.mSlsi_ifcount2 = Integer.parseInt(split[2]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSlsi_ifcount1 = Integer.parseInt(strArrSplit[1]);
+                    this.mSlsi_ifcount2 = Integer.parseInt(strArrSplit[2]);
                     this.mSlsi_blendcoeff = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SLSI_BLENDCOEF"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mMtk_seeksmg = Integer.parseInt(split[1]);
-                    this.mMtk_seekdesenserssi = Integer.parseInt(split[2]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mMtk_seeksmg = Integer.parseInt(strArrSplit[1]);
+                    this.mMtk_seekdesenserssi = Integer.parseInt(strArrSplit[2]);
                     if (!"".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_CHIPVOLUME"))) {
                         this.mMtkSupportSetChipVolume = true;
                         this.mMtkChipVolume = Integer.parseInt(r1);
@@ -769,9 +773,9 @@ public class FMRadioService extends IFMPlayer.Stub {
                     this.mMtk_blendpamd_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_BLENDPAMD_TH"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
-                    this.mSnr_th = Integer.parseInt(split[0]);
-                    this.mIsSupportSoftmute = Boolean.parseBoolean(split[1]);
-                    this.mSoftmutePath = split[2];
+                    this.mSnr_th = Integer.parseInt(strArrSplit[0]);
+                    this.mIsSupportSoftmute = Boolean.parseBoolean(strArrSplit[1]);
+                    this.mSoftmutePath = strArrSplit[2];
                     this.mAlgo_type = 1;
                     this.mSnr_th_2 = -2;
                     this.mRssi_th = this.mQualcomm_rmssi_firststate;
@@ -787,10 +791,10 @@ public class FMRadioService extends IFMPlayer.Stub {
                 break;
             case 4:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSnr_th_2 = Integer.parseInt(split[1]);
-                    this.mSnr_th = Integer.parseInt(split[2]);
-                    this.mAlgo_type = Integer.parseInt(split[3]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSnr_th_2 = Integer.parseInt(strArrSplit[1]);
+                    this.mSnr_th = Integer.parseInt(strArrSplit[2]);
+                    this.mAlgo_type = Integer.parseInt(strArrSplit[3]);
                     this.mIsSupportSoftmute = FMRadioServiceFeature.FEATURE_SUPPORT_SOFTMUTE;
                     this.mSoftmutePath = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SOFTMUTE_PATH");
                     this.mCnt_th = this.mQualcomm_onchannel;
@@ -802,22 +806,22 @@ public class FMRadioService extends IFMPlayer.Stub {
                     this.mgoodChrmssi_th = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_GOODCH_RMSSITH"));
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mFreqOffset_th = Integer.parseInt(split[1]);
-                    this.mNoisePwr_th = Integer.parseInt(split[2]);
-                    this.mPilotPwr_th = Integer.parseInt(split[3]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mFreqOffset_th = Integer.parseInt(strArrSplit[1]);
+                    this.mNoisePwr_th = Integer.parseInt(strArrSplit[2]);
+                    this.mPilotPwr_th = Integer.parseInt(strArrSplit[3]);
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSlsi_ifcount1 = Integer.parseInt(split[1]);
-                    this.mSlsi_ifcount2 = Integer.parseInt(split[2]);
-                    this.mSlsi_blendcoeff = Integer.parseInt(split[3]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSlsi_ifcount1 = Integer.parseInt(strArrSplit[1]);
+                    this.mSlsi_ifcount2 = Integer.parseInt(strArrSplit[2]);
+                    this.mSlsi_blendcoeff = Integer.parseInt(strArrSplit[3]);
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mMtk_seeksmg = Integer.parseInt(split[1]);
-                    this.mMtk_seekdesenserssi = Integer.parseInt(split[2]);
-                    this.mSoftmute_th = Integer.parseInt(split[3]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mMtk_seeksmg = Integer.parseInt(strArrSplit[1]);
+                    this.mMtk_seekdesenserssi = Integer.parseInt(strArrSplit[2]);
+                    this.mSoftmute_th = Integer.parseInt(strArrSplit[3]);
                     if (!"".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_CHIPVOLUME"))) {
                         this.mMtkSupportSetChipVolume = true;
                         this.mMtkChipVolume = Integer.parseInt(r1);
@@ -829,11 +833,11 @@ public class FMRadioService extends IFMPlayer.Stub {
                 break;
             case 5:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSnr_th_2 = Integer.parseInt(split[1]);
-                    this.mSnr_th = Integer.parseInt(split[2]);
-                    this.mAlgo_type = Integer.parseInt(split[3]);
-                    this.mgoodChrmssi_th = Integer.parseInt(split[4]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSnr_th_2 = Integer.parseInt(strArrSplit[1]);
+                    this.mSnr_th = Integer.parseInt(strArrSplit[2]);
+                    this.mAlgo_type = Integer.parseInt(strArrSplit[3]);
+                    this.mgoodChrmssi_th = Integer.parseInt(strArrSplit[4]);
                     this.mIsSupportSoftmute = FMRadioServiceFeature.FEATURE_SUPPORT_SOFTMUTE;
                     this.mSoftmutePath = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_SOFTMUTE_PATH");
                     this.mCnt_th = this.mQualcomm_onchannel;
@@ -844,39 +848,39 @@ public class FMRadioService extends IFMPlayer.Stub {
                     this.mAfRmssisampleCnt_th = this.mQualcomm_af_rmssisamplecnt;
                     break;
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSlsi_ifcount1 = Integer.parseInt(split[1]);
-                    this.mSlsi_ifcount2 = Integer.parseInt(split[2]);
-                    this.mSlsi_blendcoeff = Integer.parseInt(split[3]);
-                    this.mSlsi_softmutecoeff = Integer.parseInt(split[4]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSlsi_ifcount1 = Integer.parseInt(strArrSplit[1]);
+                    this.mSlsi_ifcount2 = Integer.parseInt(strArrSplit[2]);
+                    this.mSlsi_blendcoeff = Integer.parseInt(strArrSplit[3]);
+                    this.mSlsi_softmutecoeff = Integer.parseInt(strArrSplit[4]);
                     break;
                 }
                 break;
             case 6:
                 if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mMtk_seeksmg = Integer.parseInt(split[1]);
-                    this.mMtk_seekdesenserssi = Integer.parseInt(split[2]);
-                    this.mSoftmute_th = Integer.parseInt(split[3]);
-                    this.mMtk_blendrssi_th = Integer.parseInt(split[4]);
-                    this.mMtk_blendpamd_th = Integer.parseInt(split[5]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mMtk_seeksmg = Integer.parseInt(strArrSplit[1]);
+                    this.mMtk_seekdesenserssi = Integer.parseInt(strArrSplit[2]);
+                    this.mSoftmute_th = Integer.parseInt(strArrSplit[3]);
+                    this.mMtk_blendrssi_th = Integer.parseInt(strArrSplit[4]);
+                    this.mMtk_blendpamd_th = Integer.parseInt(strArrSplit[5]);
                     if (!"".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_CHIPVOLUME"))) {
                         this.mMtkSupportSetChipVolume = true;
                         this.mMtkChipVolume = Integer.parseInt(r1);
                         break;
                     }
                 } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    this.mRssi_th = Integer.parseInt(split[0]);
-                    this.mSlsi_ifcount1 = Integer.parseInt(split[1]);
-                    this.mSlsi_ifcount2 = Integer.parseInt(split[2]);
-                    this.mSlsi_blendcoeff = Integer.parseInt(split[3]);
-                    this.mSlsi_softmutecoeff = Integer.parseInt(split[4]);
-                    this.mSlsi_softstereoblendref = Integer.parseInt(split[5]);
+                    this.mRssi_th = Integer.parseInt(strArrSplit[0]);
+                    this.mSlsi_ifcount1 = Integer.parseInt(strArrSplit[1]);
+                    this.mSlsi_ifcount2 = Integer.parseInt(strArrSplit[2]);
+                    this.mSlsi_blendcoeff = Integer.parseInt(strArrSplit[3]);
+                    this.mSlsi_softmutecoeff = Integer.parseInt(strArrSplit[4]);
+                    this.mSlsi_softstereoblendref = Integer.parseInt(strArrSplit[5]);
                     break;
                 }
                 break;
             default:
-                log("Tuning value size: " + split.length);
+                log("Tuning value size: " + strArrSplit.length);
                 break;
         }
     }
@@ -1004,10 +1008,10 @@ public class FMRadioService extends IFMPlayer.Stub {
                                 }
                                 FMRadioService.this.setVolume(intExtra2);
                             } else {
-                                int semGetRadioOutputPath = FMRadioService.this.mAudioManager.semGetRadioOutputPath();
+                                int iSemGetRadioOutputPath = FMRadioService.this.mAudioManager.semGetRadioOutputPath();
                                 FMRadioService fMRadioService = FMRadioService.this;
                                 fMRadioService.mAvrcpMode = Settings.Secure.getInt(fMRadioService.mContext.getContentResolver(), "bluetooth_avc_mode", 1) == 1;
-                                if (FMRadioService.this.mAvrcpMode && semGetRadioOutputPath == 8 && FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
+                                if (FMRadioService.this.mAvrcpMode && iSemGetRadioOutputPath == 8 && FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
                                     FMRadioService.log("mAvrcpMode = true set chip volume 15");
                                     FMRadioService.this.mPlayerNative.setVolume(15L);
                                 }
@@ -1028,7 +1032,7 @@ public class FMRadioService extends IFMPlayer.Stub {
         };
         this.mReceiver = new BroadcastReceiver() { // from class: com.android.server.FMRadioService.3
             @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
+            public void onReceive(Context context2, Intent intent) throws InterruptedException {
                 FMRadioService.log("Headset action : " + intent.getAction());
                 if ((intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED) || intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) && FMRadioService.this.mIsExternalChipset) {
                     UsbDevice usbDevice = (UsbDevice) intent.getParcelableExtra("device");
@@ -1254,9 +1258,9 @@ public class FMRadioService extends IFMPlayer.Stub {
                 }
                 if (FMRadioService.this.mNeedToResumeFM && !FMRadioService.this.isOn() && FMRadioService.this.mNeedResumeToFreq != -2 && !FMRadioService.this.mIsForcestop && this.mIsPhoneCallRinging) {
                     if (FMRadioService.this.on(false)) {
-                        int semGetRadioOutputPath = FMRadioService.this.mAudioManager.semGetRadioOutputPath();
-                        FMRadioService.log("onCallStateChanged() :: CALL_STATE_IDLE setPath() = " + semGetRadioOutputPath);
-                        FMRadioService.this.mAudioManager.semSetRadioOutputPath(semGetRadioOutputPath);
+                        int iSemGetRadioOutputPath = FMRadioService.this.mAudioManager.semGetRadioOutputPath();
+                        FMRadioService.log("onCallStateChanged() :: CALL_STATE_IDLE setPath() = " + iSemGetRadioOutputPath);
+                        FMRadioService.this.mAudioManager.semSetRadioOutputPath(iSemGetRadioOutputPath);
                         if (FMRadioService.this.mIsTransientPaused) {
                             FMRadioService.this.mResumeVol = r8.mAudioManager.getStreamVolume(AudioManager.semGetStreamType(1));
                             FMRadioService.log("slowly increase the volume till :" + FMRadioService.this.mResumeVol);
@@ -1323,7 +1327,7 @@ public class FMRadioService extends IFMPlayer.Stub {
         };
         this.mAudioFocusListener = new AudioManager.OnAudioFocusChangeListener() { // from class: com.android.server.FMRadioService.9
             @Override // android.media.AudioManager.OnAudioFocusChangeListener
-            public void onAudioFocusChange(int i) {
+            public void onAudioFocusChange(int i) throws InterruptedException {
                 FMRadioService.log("onAudioFocusChange : " + i);
                 if (FMRadioService.this.volumeLock && (i == -1 || i == -2)) {
                     FMRadioService.this.mRecFinishNotified = true;
@@ -1359,9 +1363,9 @@ public class FMRadioService extends IFMPlayer.Stub {
                 if (i != 1 || !FMRadioService.this.mAudioFocusHandler.hasMessages(-2)) {
                     FMRadioService.this.clearMessageQueue();
                 }
-                Message obtain = Message.obtain();
-                obtain.what = i;
-                FMRadioService.this.mAudioFocusHandler.sendMessage(obtain);
+                Message messageObtain = Message.obtain();
+                messageObtain.what = i;
+                FMRadioService.this.mAudioFocusHandler.sendMessage(messageObtain);
                 if (FMRadioService.DEBUGGABLE) {
                     FMRadioService.log("OnAudioFocusChangeListener switch off mAudioFocusListener :" + i + " stored freq:" + FMRadioService.this.mNeedResumeToFreq);
                 }
@@ -1611,8 +1615,8 @@ public class FMRadioService extends IFMPlayer.Stub {
         IntentFilter intentFilter2 = new IntentFilter("android.media.VOLUME_CHANGED_ACTION");
         intentFilter2.setPriority(999);
         context.registerReceiver(this.mVolumeEventReceiver, intentFilter2, 4);
-        context.registerReceiver(this.mVolumeEventReceiver, new IntentFilter(ACTION_VOLUME_LOCK), 4);
-        context.registerReceiver(this.mVolumeEventReceiver, new IntentFilter(ACTION_VOLUME_UNLOCK), 4);
+        context.registerReceiver(this.mVolumeEventReceiver, new IntentFilter(ACTION_VOLUME_LOCK), 2);
+        context.registerReceiver(this.mVolumeEventReceiver, new IntentFilter(ACTION_VOLUME_UNLOCK), 2);
         this.mAirPlaneEnabled = Settings.Global.getInt(this.mContext.getContentResolver(), "airplane_mode_on", 0) != 0;
         log("mAirPlaneEnabled flag :" + this.mAirPlaneEnabled);
         context.registerReceiver(this.mReceiver, new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED));
@@ -1736,44 +1740,44 @@ public class FMRadioService extends IFMPlayer.Stub {
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     public long seekUp() {
-        long seekUp;
+        long jSeekUp;
         if (!isValidPackage()) {
             return -1L;
         }
         this.mIsSeeking = true;
         mute(true);
         if (this.mIsExternalChipset) {
-            long seekUp2 = this.mPlayerExternalChipset.seekUp();
-            this.mExtSeekFreq = seekUp2;
-            seekUp = seekUp2 * 10;
+            long jSeekUp2 = this.mPlayerExternalChipset.seekUp();
+            this.mExtSeekFreq = jSeekUp2;
+            jSeekUp = jSeekUp2 * 10;
         } else {
-            seekUp = this.mPlayerNative.seekUp();
+            jSeekUp = this.mPlayerNative.seekUp();
         }
         mute(false);
         this.mIsSeeking = false;
-        notifyEvent(7, Long.valueOf(seekUp));
-        return seekUp;
+        notifyEvent(7, Long.valueOf(jSeekUp));
+        return jSeekUp;
     }
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     public long seekDown() {
-        long seekDown;
+        long jSeekDown;
         if (!isValidPackage()) {
             return -1L;
         }
         this.mIsSeeking = true;
         mute(true);
         if (this.mIsExternalChipset) {
-            long seekDown2 = this.mPlayerExternalChipset.seekDown();
-            this.mExtSeekFreq = seekDown2;
-            seekDown = seekDown2 * 10;
+            long jSeekDown2 = this.mPlayerExternalChipset.seekDown();
+            this.mExtSeekFreq = jSeekDown2;
+            jSeekDown = jSeekDown2 * 10;
         } else {
-            seekDown = this.mPlayerNative.seekDown();
+            jSeekDown = this.mPlayerNative.seekDown();
         }
         mute(false);
         this.mIsSeeking = false;
-        notifyEvent(7, Long.valueOf(seekDown));
-        return seekDown;
+        notifyEvent(7, Long.valueOf(jSeekDown));
+        return jSeekDown;
     }
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
@@ -1841,21 +1845,74 @@ public class FMRadioService extends IFMPlayer.Stub {
         remove(iFMEventListener);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0022, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:13:0x0022, code lost:
     
         if (r9.mTelephonyManager.getCallStateForSubscription() == 2) goto L14;
      */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public synchronized boolean on_in_testmode() {
-        /*
-            Method dump skipped, instructions count: 222
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.on_in_testmode():boolean");
+        if (!isFactoryBinary) {
+            log("on_in_testmode is called with normal binary. This function is only for Factory binary. So just return");
+            return false;
+        }
+        try {
+            if (this.mTelephonyManager.getCallStateForSubscription() != 1) {
+            }
+            return false;
+        } catch (Exception e) {
+            Log.e("FMRadioService", "Exception in getCallStateForSubscription() : " + e);
+        }
+        if (this.mIsOn) {
+            return true;
+        }
+        try {
+            if (this.mIsExternalChipset) {
+                if (this.mAudioManager.semGetRadioOutputPath() == 2) {
+                    this.mPlayerExternalChipset.setRecordMode(true);
+                    this.mIsOn = this.mPlayerExternalChipset.isOn();
+                } else {
+                    this.mIsOn = this.mPlayerExternalChipset.on();
+                }
+            } else {
+                if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                    if (this.mPlayerNative.preInitialize() > 0) {
+                        setFMAudioPath(true);
+                    } else {
+                        log("FM preInitialize() failed");
+                        return false;
+                    }
+                }
+                this.mIsOn = this.mPlayerNative.on() > 0;
+            }
+            if (this.mIsOn) {
+                setSoftmute(false);
+                this.mIsTestMode = true;
+                notifyEvent(5, null);
+                mute(false);
+                setFMAudioPath(true);
+                log("on_in_testmode Turning on FM radio");
+                return true;
+            }
+            if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                setFMAudioPath(false);
+            }
+            this.mIsFMAudioPathOn = false;
+            this.mIsOn = false;
+            releaseWakeLock();
+            return false;
+        } catch (Exception e2) {
+            if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                setFMAudioPath(false);
+            }
+            this.mIsFMAudioPathOn = false;
+            this.mIsOn = false;
+            Log.e("FMRadioService", "Exception in on_in_testmode() : " + e2);
+            releaseWakeLock();
+            return false;
+        }
     }
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
@@ -1880,23 +1937,250 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:168:0x00c0, code lost:
-    
-        if (r11.mIsTransientPaused == false) goto L57;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x040b A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0131 A[Catch: Exception -> 0x0455, all -> 0x0490, TryCatch #4 {Exception -> 0x0455, blocks: (B:167:0x00be, B:165:0x0109, B:58:0x0115, B:60:0x011e, B:62:0x0129, B:64:0x0131, B:66:0x0150, B:67:0x0166, B:69:0x0186, B:72:0x018d, B:74:0x0191, B:75:0x01ab, B:79:0x01e8, B:80:0x0209, B:83:0x01f1, B:84:0x020d, B:87:0x015e, B:88:0x0211, B:90:0x0217, B:92:0x0221, B:94:0x022e, B:95:0x0262, B:96:0x024e, B:97:0x026d, B:100:0x0276, B:102:0x0280, B:104:0x0291, B:107:0x0296, B:109:0x029e, B:111:0x02c5, B:113:0x02c9, B:116:0x02cf, B:118:0x02d3, B:121:0x02db, B:123:0x02e0, B:124:0x03d9, B:128:0x040d, B:129:0x042e, B:132:0x0416, B:133:0x0432, B:136:0x02fe, B:138:0x0303, B:140:0x032c, B:141:0x0331, B:143:0x0337, B:144:0x033e, B:146:0x0344, B:148:0x037a, B:149:0x0382, B:150:0x038c, B:151:0x03a2, B:152:0x02a2, B:154:0x02a6, B:156:0x02b2, B:157:0x02bc, B:158:0x0436, B:160:0x043a, B:161:0x043d, B:50:0x00c2, B:52:0x00c8, B:54:0x00ce), top: B:166:0x00be, outer: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0211 A[Catch: Exception -> 0x0455, all -> 0x0490, TRY_ENTER, TryCatch #4 {Exception -> 0x0455, blocks: (B:167:0x00be, B:165:0x0109, B:58:0x0115, B:60:0x011e, B:62:0x0129, B:64:0x0131, B:66:0x0150, B:67:0x0166, B:69:0x0186, B:72:0x018d, B:74:0x0191, B:75:0x01ab, B:79:0x01e8, B:80:0x0209, B:83:0x01f1, B:84:0x020d, B:87:0x015e, B:88:0x0211, B:90:0x0217, B:92:0x0221, B:94:0x022e, B:95:0x0262, B:96:0x024e, B:97:0x026d, B:100:0x0276, B:102:0x0280, B:104:0x0291, B:107:0x0296, B:109:0x029e, B:111:0x02c5, B:113:0x02c9, B:116:0x02cf, B:118:0x02d3, B:121:0x02db, B:123:0x02e0, B:124:0x03d9, B:128:0x040d, B:129:0x042e, B:132:0x0416, B:133:0x0432, B:136:0x02fe, B:138:0x0303, B:140:0x032c, B:141:0x0331, B:143:0x0337, B:144:0x033e, B:146:0x0344, B:148:0x037a, B:149:0x0382, B:150:0x038c, B:151:0x03a2, B:152:0x02a2, B:154:0x02a6, B:156:0x02b2, B:157:0x02bc, B:158:0x0436, B:160:0x043a, B:161:0x043d, B:50:0x00c2, B:52:0x00c8, B:54:0x00ce), top: B:166:0x00be, outer: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x00c2 A[Catch: Exception -> 0x0455, all -> 0x0490, TryCatch #4 {Exception -> 0x0455, blocks: (B:55:0x00be, B:62:0x0109, B:66:0x0115, B:68:0x011e, B:69:0x0129, B:71:0x0131, B:73:0x0150, B:75:0x0166, B:77:0x0186, B:80:0x018d, B:82:0x0191, B:83:0x01ab, B:86:0x01e8, B:90:0x0209, B:89:0x01f1, B:91:0x020d, B:74:0x015e, B:94:0x0211, B:96:0x0217, B:98:0x0221, B:100:0x022e, B:102:0x0262, B:101:0x024e, B:103:0x026d, B:106:0x0276, B:108:0x0280, B:110:0x0291, B:113:0x0296, B:115:0x029e, B:123:0x02c5, B:125:0x02c9, B:128:0x02cf, B:130:0x02d3, B:133:0x02db, B:135:0x02e0, B:152:0x03d9, B:155:0x040d, B:159:0x042e, B:158:0x0416, B:160:0x0432, B:136:0x02fe, B:138:0x0303, B:140:0x032c, B:141:0x0331, B:143:0x0337, B:144:0x033e, B:146:0x0344, B:148:0x037a, B:149:0x0382, B:150:0x038c, B:151:0x03a2, B:117:0x02a2, B:119:0x02a6, B:121:0x02b2, B:122:0x02bc, B:163:0x0436, B:165:0x043a, B:166:0x043d, B:57:0x00c2, B:59:0x00c8, B:61:0x00ce), top: B:188:0x00be, outer: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x0109 A[Catch: Exception -> 0x0455, all -> 0x0490, TryCatch #4 {Exception -> 0x0455, blocks: (B:55:0x00be, B:62:0x0109, B:66:0x0115, B:68:0x011e, B:69:0x0129, B:71:0x0131, B:73:0x0150, B:75:0x0166, B:77:0x0186, B:80:0x018d, B:82:0x0191, B:83:0x01ab, B:86:0x01e8, B:90:0x0209, B:89:0x01f1, B:91:0x020d, B:74:0x015e, B:94:0x0211, B:96:0x0217, B:98:0x0221, B:100:0x022e, B:102:0x0262, B:101:0x024e, B:103:0x026d, B:106:0x0276, B:108:0x0280, B:110:0x0291, B:113:0x0296, B:115:0x029e, B:123:0x02c5, B:125:0x02c9, B:128:0x02cf, B:130:0x02d3, B:133:0x02db, B:135:0x02e0, B:152:0x03d9, B:155:0x040d, B:159:0x042e, B:158:0x0416, B:160:0x0432, B:136:0x02fe, B:138:0x0303, B:140:0x032c, B:141:0x0331, B:143:0x0337, B:144:0x033e, B:146:0x0344, B:148:0x037a, B:149:0x0382, B:150:0x038c, B:151:0x03a2, B:117:0x02a2, B:119:0x02a6, B:121:0x02b2, B:122:0x02bc, B:163:0x0436, B:165:0x043a, B:166:0x043d, B:57:0x00c2, B:59:0x00c8, B:61:0x00ce), top: B:188:0x00be, outer: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public synchronized boolean on(boolean r12) {
-        /*
-            Method dump skipped, instructions count: 1171
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.on(boolean):boolean");
+    public synchronized boolean on(boolean z) {
+        log("on");
+        if (this.SURVEY_MODE_ENABLE) {
+            String str = getContext().getPackageManager().getPackagesForUid(Binder.getCallingUid())[0];
+            String str2 = "";
+            if (!"com.sec.android.app.fm".equals(str)) {
+                try {
+                    str2 = this.mContext.getPackageManager().getPackageInfo(str, 0).versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.e("FMRadioService", "NameNotFoundException: " + e);
+                }
+                SamsungAnalyticsRunnable samsungAnalyticsRunnable = new SamsungAnalyticsRunnable(str, str2);
+                this.mSamsungAnalyticsRunnable = samsungAnalyticsRunnable;
+                this.mHandlerSA.post(samsungAnalyticsRunnable);
+            }
+        }
+        log("SamsungAnalytics survey mode is not enable");
+        if (this.mIsHeadsetPlugged && !this.mOnProgress) {
+            if (this.mIsTvOutPlugged) {
+                return false;
+            }
+            if (this.mAirPlaneEnabled) {
+                return false;
+            }
+            registerBatteryListener();
+            if (this.mIsBatteryLow) {
+                return false;
+            }
+            try {
+            } catch (Exception e2) {
+                Log.e("FMRadioService", "Exception in getCallStateForSubscription() : " + e2);
+            }
+            if ((this.mTelephonyManager.getCallStateForSubscription() == 1 && !isDNDEnable()) || this.mTelephonyManager.getCallStateForSubscription() == 2) {
+                if (this.mIsTransientPaused) {
+                    this.mNeedToResumeFM = true;
+                }
+                return false;
+            }
+            if (this.alarmTTSPlay) {
+                return false;
+            }
+            if (this.mIsOn) {
+                return true;
+            }
+            if (!z) {
+                try {
+                    if (!this.mIsTransientPaused) {
+                        if (!isFmTestApp() && !isCTSTestApp()) {
+                            log("AudioFocusListener registered");
+                            this.mAudioManager.requestAudioFocus(new AudioFocusRequest.Builder(1).setAudioAttributes(new AudioAttributes.Builder().setLegacyStreamType(AudioManager.semGetStreamType(1)).semAddAudioTag("FM_RADIO").semAddAudioTag("NO_FADEOUT_FROM_AUDIOFOCUS").build()).setOnAudioFocusChangeListener(this.mAudioFocusListener).build());
+                        } else {
+                            log("AudioFocusListener : skip the requestAudioFocus");
+                        }
+                    }
+                } catch (Exception e3) {
+                    Log.e("FMRadioService", "Exception in on() : " + e3);
+                    if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                        setFMAudioPath(false);
+                    }
+                    this.mIsOn = false;
+                    this.mOnProgress = false;
+                    this.mIsFMAudioPathOn = false;
+                    log("on is failed by exception :: remove audiofocus ");
+                    this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
+                    releaseWakeLock();
+                    unRegisterBatteryListener();
+                    return false;
+                }
+            }
+            for (int i = 0; i < 50 && SemSystemProperties.getInt("service.media.dmb", 0) > 0; i++) {
+                log("DMB enabled - waiting for DMB is closed");
+                wait(50L);
+            }
+            this.mOnProgress = true;
+            if (this.mIsExternalChipset) {
+                log("on() mIsExternalChipset " + this.mIsExternalChipset);
+                if (this.mAudioManager.semGetRadioOutputPath() == 2) {
+                    this.mPlayerExternalChipset.setRecordMode(true);
+                    this.mIsOn = this.mPlayerExternalChipset.isOn();
+                } else {
+                    this.mIsOn = this.mPlayerExternalChipset.on();
+                }
+                wait(20L);
+                log("on state mPlayerExternalChipset " + this.mIsOn);
+                if (!this.mIsOn) {
+                    setFMAudioPath(false);
+                    this.mOnProgress = false;
+                    return false;
+                }
+                if (FMRadioServiceFeature.CHIP_VENDOR == 5) {
+                    log("ext chip scan parameters setting");
+                    this.mPlayerExternalChipset.setRssiThreshold(this.mRssi_th);
+                    this.mPlayerExternalChipset.setSeekDC(this.mRichwave_seekDC);
+                    this.mPlayerExternalChipset.setSeekQA(this.mRichwave_seekQA);
+                }
+                this.mPlayerExternalChipset.setBand(this.mBand);
+                this.mPlayerExternalChipset.setChannelSpacing(this.mChannelSpacing);
+                wait(50L);
+                setFMAudioPath(true);
+                this.mOnProgress = false;
+                notifyEvent(5, null);
+                registerBikeModeObserver();
+                registerAvrcpModeObserver();
+                registerAlarmListener();
+                registerAllSoundOffListener();
+                registerDNDStatusChangedListener();
+                registerTelephonyListener();
+                InputManager inputManager = (InputManager) this.mContext.getSystemService("input");
+                boolean z2 = this.mIsOn;
+                if (z2 != this.mIsSetWakeKey && inputManager != null) {
+                    try {
+                        inputManager.semSetWakeKeyDynamically("com.sec.android.app.fm", z2, VOLUME_UP_DOWN);
+                    } catch (SecurityException e4) {
+                        log("Exception in semSetWakeKeyDynamically(): " + e4.toString());
+                    }
+                    this.mIsSetWakeKey = this.mIsOn;
+                }
+                this.mIsForcestop = false;
+                return true;
+            }
+            if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                if (this.mPlayerNative.preInitialize() > 0) {
+                    setFMAudioPath(true);
+                    int iSemGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
+                    if (DEBUGGABLE) {
+                        log("OnAudioFocusChangeListener switch on mNeedResumeToFreq:" + this.mNeedResumeToFreq + "setOutputPath = " + iSemGetRadioOutputPath);
+                    } else {
+                        log("OnAudioFocusChangeListener switch setOutputPath = " + iSemGetRadioOutputPath);
+                    }
+                    this.mAudioManager.semSetRadioOutputPath(iSemGetRadioOutputPath);
+                    wait(200L);
+                } else {
+                    log("FM preInitialize() failed");
+                    this.mOnProgress = false;
+                    return false;
+                }
+            }
+            if (this.mPlayerNative.on() > 0) {
+                log("on returned from native");
+                this.mOnProgress = false;
+                this.mIsOn = true;
+                mute(true);
+                if (!this.mIsHeadsetPlugged) {
+                    offInternal(2, true);
+                    return false;
+                }
+                notifyEvent(5, null);
+                if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                    if (this.mIsSupportSoftmute && isPathSupportSoftmute(this.mAudioManager.semGetRadioOutputPath())) {
+                        log("set softmute : true");
+                        setSoftmute(true);
+                    } else {
+                        log("set softmute : false");
+                        setSoftmute(false);
+                    }
+                }
+                if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                    setSINRThreshold(this.mSnr_th);
+                    setSearchAlgoType(this.mAlgo_type);
+                    setSINRFirstStage(this.mSnr_th_2);
+                    setRMSSIFirstStage(this.mRssi_th);
+                    setOnChannelThreshold(this.mCnt_th);
+                    setOffChannelThreshold(this.mCnt_th_2);
+                    setSINRSamples(this.mRssi_th_2);
+                    setCFOTh12(this.mCf0_th12);
+                    setAFRMSSIThreshold(this.mAfRmssith_th);
+                    setAFRMSSISamples(this.mAfRmssisampleCnt_th);
+                    setGoodChannelRMSSIThreshold(this.mgoodChrmssi_th);
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 5 || FMRadioServiceFeature.CHIP_VENDOR == 10) {
+                    this.mPlayerNative.setRSSI_th(this.mRssi_th);
+                    this.mPlayerNative.setSeekDC(this.mRichwave_seekDC);
+                    this.mPlayerNative.setSeekQA(this.mRichwave_seekQA);
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
+                    this.mPlayerNative.setRSSI_th(this.mRssi_th);
+                    this.mPlayerNative.setFrequencyOffsetThreshold(this.mFreqOffset_th);
+                    this.mPlayerNative.setNoisePowerThreshold(this.mNoisePwr_th);
+                    this.mPlayerNative.setPilotPowerThreshold(this.mPilotPwr_th);
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                    this.mPlayerNative.setRSSI_th(this.mRssi_th);
+                    this.mPlayerNative.setIFCount1(this.mSlsi_ifcount1);
+                    this.mPlayerNative.setIFCount2(this.mSlsi_ifcount2);
+                    this.mPlayerNative.setStereo();
+                    this.mPlayerNative.setSoftStereoBlendCoeff(this.mSlsi_blendcoeff);
+                    long j = this.mSlsi_softmutecoeff;
+                    if (j != -1) {
+                        this.mPlayerNative.setSoftMuteCoeff(j);
+                    }
+                    long j2 = this.mSlsi_softstereoblendref;
+                    if (j2 != 0) {
+                        this.mPlayerNative.setSoftStereoBlendRef(j2);
+                    }
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
+                    this.mPlayerNative.setSeekRSSI(this.mRssi_th);
+                    this.mPlayerNative.setSeekDesenseRSSI(this.mMtk_seekdesenserssi);
+                    this.mPlayerNative.setSeekSMG(this.mMtk_seeksmg);
+                    this.mPlayerNative.setSoftmute_th(this.mSoftmute_th);
+                    this.mPlayerNative.setBlendRSSI_th(this.mMtk_blendrssi_th);
+                    this.mPlayerNative.setBlendPAMD_th(this.mMtk_blendpamd_th);
+                    this.mPlayerNative.setATJ(this.mMtk_ATJ_config);
+                    if (this.mMtkSupportSetChipVolume) {
+                        this.mPlayerNative.setVolume(this.mMtkChipVolume);
+                    }
+                } else {
+                    setSignalSetting(this.mRssi_th, this.mSnr_th, this.mCnt_th);
+                }
+                setBand(this.mBand);
+                setChannelSpacing(this.mChannelSpacing);
+                setDEConstant(this.mDEConstant);
+                registerBikeModeObserver();
+                registerAvrcpModeObserver();
+                registerAlarmListener();
+                registerAllSoundOffListener();
+                registerDNDStatusChangedListener();
+                registerTelephonyListener();
+                InputManager inputManager2 = (InputManager) this.mContext.getSystemService("input");
+                boolean z3 = this.mIsOn;
+                if (z3 != this.mIsSetWakeKey && inputManager2 != null) {
+                    try {
+                        inputManager2.semSetWakeKeyDynamically("com.sec.android.app.fm", z3, VOLUME_UP_DOWN);
+                    } catch (SecurityException e5) {
+                        log("Exception in semSetWakeKeyDynamically(): " + e5.toString());
+                    }
+                    this.mIsSetWakeKey = this.mIsOn;
+                }
+                this.mIsForcestop = false;
+                return true;
+            }
+            if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                setFMAudioPath(false);
+            }
+            this.mOnProgress = false;
+            this.mIsFMAudioPathOn = false;
+            this.mIsOn = false;
+            log("on is failed :: remove audiofocus ");
+            this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
+            releaseWakeLock();
+            return false;
+        }
+        return false;
     }
 
     private void registerTelephonyListener() {
@@ -1904,14 +2188,14 @@ public class FMRadioService extends IFMPlayer.Stub {
             log("listner already registered");
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mTelephonyManager.listen(this.mPhoneListener, 32);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             this.mIsPhoneStateListenerRegistered = true;
             log("registering telephony listener..");
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -1921,14 +2205,14 @@ public class FMRadioService extends IFMPlayer.Stub {
             log("listner is not registered");
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mTelephonyManager.listen(this.mPhoneListener, 0);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             this.mIsPhoneStateListenerRegistered = false;
             log("unRegisterTelephonyListener ..");
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -1943,129 +2227,70 @@ public class FMRadioService extends IFMPlayer.Stub {
         log("OMC changed reciever registered");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:45:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00b5 A[Catch: NullPointerException -> 0x00b9, TRY_LEAVE, TryCatch #0 {NullPointerException -> 0x00b9, blocks: (B:19:0x0052, B:21:0x0056, B:23:0x005f, B:25:0x0063, B:26:0x0069, B:27:0x0085, B:29:0x008d, B:32:0x0094, B:35:0x009b, B:37:0x009f, B:40:0x00a3, B:42:0x00a7, B:46:0x00ab, B:48:0x00b5, B:54:0x0071, B:56:0x0075, B:57:0x007c, B:59:0x0080), top: B:18:0x0052 }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0071 A[Catch: NullPointerException -> 0x00b9, TryCatch #0 {NullPointerException -> 0x00b9, blocks: (B:21:0x0052, B:23:0x0056, B:25:0x005f, B:27:0x0063, B:28:0x0069, B:35:0x0085, B:37:0x008d, B:40:0x0094, B:43:0x009b, B:45:0x009f, B:47:0x00a3, B:49:0x00a7, B:51:0x00ab, B:53:0x00b5, B:29:0x0071, B:31:0x0075, B:32:0x007c, B:34:0x0080), top: B:58:0x0052 }] */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setVolume(long r9) {
-        /*
-            r8 = this;
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "set chipset Volume : "
-            r0.<init>(r1)
-            r0.append(r9)
-            java.lang.String r0 = r0.toString()
-            log(r0)
-            boolean r0 = r8.mIsOn
-            if (r0 != 0) goto L18
-            goto Lcd
-        L18:
-            boolean r0 = r8.mScanProgress
-            if (r0 == 0) goto L23
-            java.lang.String r8 = "setVolume :: unset on ScanProgress"
-            log(r8)
-            return
-        L23:
-            r0 = 0
-            int r0 = (r9 > r0 ? 1 : (r9 == r0 ? 0 : -1))
-            if (r0 < 0) goto Lcd
-            r1 = 15
-            int r3 = (r9 > r1 ? 1 : (r9 == r1 ? 0 : -1))
-            if (r3 <= 0) goto L31
-            goto Lcd
-        L31:
-            android.media.AudioManager r3 = r8.mAudioManager
-            int r3 = r3.semGetRadioOutputPath()
-            android.content.Context r4 = r8.mContext
-            android.content.ContentResolver r4 = r4.getContentResolver()
-            java.lang.String r5 = "bluetooth_avc_mode"
-            r6 = 1
-            int r4 = android.provider.Settings.Secure.getInt(r4, r5, r6)
-            r5 = 0
-            if (r4 != r6) goto L49
-            r4 = r6
-            goto L4a
-        L49:
-            r4 = r5
-        L4a:
-            r8.mAvrcpMode = r4
-            r7 = 8
-            if (r4 == 0) goto L71
-            if (r3 != r7) goto L71
-            boolean r3 = com.android.server.FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME     // Catch: java.lang.NullPointerException -> Lb9
-            if (r3 == 0) goto L71
-            java.lang.String r3 = "Avrcp on"
-            log(r3)     // Catch: java.lang.NullPointerException -> Lb9
-            boolean r3 = r8.isRecording     // Catch: java.lang.NullPointerException -> Lb9
-            if (r3 != 0) goto L85
-            boolean r3 = r8.mIsExternalChipset     // Catch: java.lang.NullPointerException -> Lb9
-            if (r3 != 0) goto L69
-            com.android.server.FMPlayerNativeBase r3 = r8.mPlayerNative     // Catch: java.lang.NullPointerException -> Lb9
-            r3.setVolume(r1)     // Catch: java.lang.NullPointerException -> Lb9
-            goto L85
-        L69:
-            com.android.server.PlayerExternalChipsetBase r1 = r8.mPlayerExternalChipset     // Catch: java.lang.NullPointerException -> Lb9
-            r2 = 15
-            r1.setVolume(r2)     // Catch: java.lang.NullPointerException -> Lb9
-            goto L85
-        L71:
-            boolean r1 = r8.mIsExternalChipset     // Catch: java.lang.NullPointerException -> Lb9
-            if (r1 == 0) goto L7c
-            int r1 = (int) r9     // Catch: java.lang.NullPointerException -> Lb9
-            com.android.server.PlayerExternalChipsetBase r2 = r8.mPlayerExternalChipset     // Catch: java.lang.NullPointerException -> Lb9
-            r2.setVolume(r1)     // Catch: java.lang.NullPointerException -> Lb9
-            goto L85
-        L7c:
-            int r1 = com.android.server.FMRadioServiceFeature.CHIP_VENDOR     // Catch: java.lang.NullPointerException -> Lb9
-            if (r1 == r7) goto L85
-            com.android.server.FMPlayerNativeBase r1 = r8.mPlayerNative     // Catch: java.lang.NullPointerException -> Lb9
-            r1.setVolume(r9)     // Catch: java.lang.NullPointerException -> Lb9
-        L85:
-            r8.mResumeVol = r9     // Catch: java.lang.NullPointerException -> Lb9
-            boolean r9 = r8.isAllSoundOff()     // Catch: java.lang.NullPointerException -> Lb9
-            if (r9 != 0) goto Lab
-            boolean r9 = r8.isDNDEnable()     // Catch: java.lang.NullPointerException -> Lb9
-            if (r9 == 0) goto L94
-            goto Lab
-        L94:
-            int r9 = com.android.server.FMRadioServiceFeature.CHIP_VENDOR     // Catch: java.lang.NullPointerException -> Lb9
-            r10 = 3
-            if (r9 == r10) goto Lcd
-            if (r0 > 0) goto La3
-            boolean r9 = r8.mIsMute     // Catch: java.lang.NullPointerException -> Lb9
-            if (r9 != 0) goto Lcd
-            r8.mute(r6)     // Catch: java.lang.NullPointerException -> Lb9
-            return
-        La3:
-            boolean r9 = r8.mIsMute     // Catch: java.lang.NullPointerException -> Lb9
-            if (r9 == 0) goto Lcd
-            r8.mute(r5)     // Catch: java.lang.NullPointerException -> Lb9
-            return
-        Lab:
-            java.lang.String r9 = "setVolume :: AllSoundOff or DND is enabled. So FMRadio is muted."
-            log(r9)     // Catch: java.lang.NullPointerException -> Lb9
-            boolean r9 = r8.mIsMute     // Catch: java.lang.NullPointerException -> Lb9
-            if (r9 != 0) goto Lcd
-            r8.mute(r6)     // Catch: java.lang.NullPointerException -> Lb9
-            return
-        Lb9:
-            r8 = move-exception
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r10 = "NullPointerException in setVolume() : "
-            r9.<init>(r10)
-            r9.append(r8)
-            java.lang.String r8 = r9.toString()
-            java.lang.String r9 = "FMRadioService"
-            android.util.Log.e(r9, r8)
-        Lcd:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.setVolume(long):void");
+    public void setVolume(long j) {
+        log("set chipset Volume : " + j);
+        if (this.mIsOn) {
+            if (this.mScanProgress) {
+                log("setVolume :: unset on ScanProgress");
+                return;
+            }
+            if (j < 0 || j > 15) {
+                return;
+            }
+            int iSemGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
+            boolean z = Settings.Secure.getInt(this.mContext.getContentResolver(), "bluetooth_avc_mode", 1) == 1;
+            this.mAvrcpMode = z;
+            if (z && iSemGetRadioOutputPath == 8) {
+                try {
+                    if (FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
+                        log("Avrcp on");
+                        if (!this.isRecording) {
+                            if (!this.mIsExternalChipset) {
+                                this.mPlayerNative.setVolume(15L);
+                            } else {
+                                this.mPlayerExternalChipset.setVolume(15);
+                            }
+                        }
+                    }
+                } catch (NullPointerException e) {
+                    Log.e("FMRadioService", "NullPointerException in setVolume() : " + e);
+                    return;
+                }
+            } else if (this.mIsExternalChipset) {
+                this.mPlayerExternalChipset.setVolume((int) j);
+            } else if (FMRadioServiceFeature.CHIP_VENDOR != 8) {
+                this.mPlayerNative.setVolume(j);
+            }
+            this.mResumeVol = j;
+            if (!isAllSoundOff() && !isDNDEnable()) {
+                if (FMRadioServiceFeature.CHIP_VENDOR != 3) {
+                    if (j <= 0) {
+                        if (this.mIsMute) {
+                            return;
+                        }
+                        mute(true);
+                        return;
+                    } else {
+                        if (this.mIsMute) {
+                            mute(false);
+                            return;
+                        }
+                        return;
+                    }
+                }
+                return;
+            }
+            log("setVolume :: AllSoundOff or DND is enabled. So FMRadio is muted.");
+            if (this.mIsMute) {
+                return;
+            }
+            mute(true);
+        }
     }
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
@@ -2076,8 +2301,12 @@ public class FMRadioService extends IFMPlayer.Stub {
         return this.mPlayerNative.getVolume();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00ba  */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-    public void setSpeakerOn(boolean z) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void setSpeakerOn(boolean z) throws InterruptedException {
         log("setSpeakerOn : " + z);
         if (this.mIsExternalChipset) {
             if (isOn()) {
@@ -2119,9 +2348,10 @@ public class FMRadioService extends IFMPlayer.Stub {
                     log("set softmute : true");
                     setSoftmute(true);
                 }
+            } else {
+                log("set softmute : false");
+                setSoftmute(false);
             }
-            log("set softmute : false");
-            setSoftmute(false);
         }
         if (z) {
             if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
@@ -2155,10 +2385,10 @@ public class FMRadioService extends IFMPlayer.Stub {
         if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
             this.mAudioManager.setParameters(str);
         }
-        int semGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
+        int iSemGetRadioOutputPath = this.mAudioManager.semGetRadioOutputPath();
         boolean z2 = Settings.Secure.getInt(this.mContext.getContentResolver(), "bluetooth_avc_mode", 1) == 1;
         this.mAvrcpMode = z2;
-        if (z2 && semGetRadioOutputPath == 8 && FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
+        if (z2 && iSemGetRadioOutputPath == 8 && FMRadioServiceFeature.FEATURE_USE_CHIPSET_VOLUME) {
             log(" setRecordMode avrcp on");
             if (this.isRecording) {
                 this.mPlayerNative.setVolume(11L);
@@ -2176,26 +2406,26 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     private void releaseWakeLock() {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (this.mWakeLock.isHeld()) {
                 this.mWakeLock.release();
                 log("Lock is released");
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     private void acquireWakeLock() {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (!this.mWakeLock.isHeld()) {
                 this.mWakeLock.acquire();
                 log("Lock is held");
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -2205,6 +2435,11 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0044  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x0055 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public synchronized boolean offInternal(int i, boolean z) {
         if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
             cancelSeek();
@@ -2213,96 +2448,100 @@ public class FMRadioService extends IFMPlayer.Stub {
             } catch (InterruptedException e) {
                 Log.e("FMRadioService", "InterruptedException in wait() : " + e);
             }
+            log("offInternal :: reasonCode=" + i);
+            this.mIsTransientDuck = false;
+            try {
+                if (this.mIsOn) {
+                    if (z) {
+                        log("offInternal :: remove audiofocus ");
+                        this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
+                    }
+                    return true;
+                }
+                try {
+                    this.mOffProgress = true;
+                    if (this.FEATURE_INDIRECT_MODE || this.mIsExternalChipset || FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                        mute(true);
+                        setDelay(10L);
+                    }
+                    this.mIsTransientPaused = !z;
+                    if (this.volumeLock && !this.mRecFinishNotified) {
+                        notifyEvent(17, null);
+                    } else if (this.mRecFinishNotified) {
+                        this.mRecFinishNotified = false;
+                    }
+                    if (FMRadioServiceFeature.CHIP_VENDOR != 7) {
+                        setFMAudioPath(false);
+                    }
+                    log("offInternal Turning off FM radio");
+                    if (this.mIsExternalChipset) {
+                        if (this.mRDSEnable) {
+                            this.mPlayerExternalChipset.setRdsEnable(false);
+                        }
+                        this.mPlayerExternalChipset.stopNotifyThread(false);
+                        if (this.mIsHeadsetPlugged) {
+                            log("off external chip set" + this.mPlayerExternalChipset.off());
+                            if (i == 11) {
+                                this.mIsOn = false;
+                            }
+                            wait(200L);
+                        }
+                    }
+                    if (!this.mIsExternalChipset) {
+                        this.mPlayerNative.off();
+                    }
+                    if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                        setFMAudioPath(false);
+                    }
+                    this.mOffProgress = false;
+                    this.mIsOn = false;
+                    log("off returned from native");
+                    this.mRDSEnable = false;
+                    this.mAFEnable = false;
+                    this.mIsMute = false;
+                    this.mIsSkipTunigVal = false;
+                    unregisterBikeModeObserver();
+                    unregisterAvrcpModeObserver();
+                    if (!this.mIsTestMode) {
+                        unRegisterBatteryListener();
+                        if (!this.alarmTTSPlay) {
+                            unregisterAlarmListener();
+                        }
+                        unregisterAllSoundOffListener();
+                        unregisterDNDStatusChangedListener();
+                    }
+                    this.mIsTestMode = false;
+                    if (z) {
+                        this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
+                        unRegisterTelephonyListener();
+                    }
+                    notifyEvent(6, Integer.valueOf(i));
+                    if (!this.mIsForcestop) {
+                        sendFMOFFBroadcast();
+                    }
+                    InputManager inputManager = (InputManager) this.mContext.getSystemService("input");
+                    boolean z2 = this.mIsOn;
+                    if (z2 != this.mIsSetWakeKey && inputManager != null) {
+                        try {
+                            inputManager.semSetWakeKeyDynamically("com.sec.android.app.fm", z2, VOLUME_UP_DOWN);
+                        } catch (SecurityException e2) {
+                            log("Exception in semSetWakeKeyDynamically(): " + e2.toString());
+                        }
+                        this.mIsSetWakeKey = this.mIsOn;
+                    }
+                    return true;
+                } catch (Exception e3) {
+                    Log.e("FMRadioService", "Exception in offInternal() : " + e3);
+                    this.mOffProgress = false;
+                    return false;
+                }
+            } finally {
+                releaseWakeLock();
+            }
         }
         log("offInternal :: reasonCode=" + i);
         this.mIsTransientDuck = false;
-        try {
-            if (!this.mIsOn) {
-                if (z) {
-                    log("offInternal :: remove audiofocus ");
-                    this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
-                }
-                return true;
-            }
-            try {
-                this.mOffProgress = true;
-                if (this.FEATURE_INDIRECT_MODE || this.mIsExternalChipset || FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    mute(true);
-                    setDelay(10L);
-                }
-                this.mIsTransientPaused = !z;
-                if (this.volumeLock && !this.mRecFinishNotified) {
-                    notifyEvent(17, null);
-                } else if (this.mRecFinishNotified) {
-                    this.mRecFinishNotified = false;
-                }
-                if (FMRadioServiceFeature.CHIP_VENDOR != 7) {
-                    setFMAudioPath(false);
-                }
-                log("offInternal Turning off FM radio");
-                if (this.mIsExternalChipset) {
-                    if (this.mRDSEnable) {
-                        this.mPlayerExternalChipset.setRdsEnable(false);
-                    }
-                    this.mPlayerExternalChipset.stopNotifyThread(false);
-                    if (this.mIsHeadsetPlugged) {
-                        log("off external chip set" + this.mPlayerExternalChipset.off());
-                        if (i == 11) {
-                            this.mIsOn = false;
-                        }
-                        wait(200L);
-                    }
-                }
-                if (!this.mIsExternalChipset) {
-                    this.mPlayerNative.off();
-                }
-                if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
-                    setFMAudioPath(false);
-                }
-                this.mOffProgress = false;
-                this.mIsOn = false;
-                log("off returned from native");
-                this.mRDSEnable = false;
-                this.mAFEnable = false;
-                this.mIsMute = false;
-                this.mIsSkipTunigVal = false;
-                unregisterBikeModeObserver();
-                unregisterAvrcpModeObserver();
-                if (!this.mIsTestMode) {
-                    unRegisterBatteryListener();
-                    if (!this.alarmTTSPlay) {
-                        unregisterAlarmListener();
-                    }
-                    unregisterAllSoundOffListener();
-                    unregisterDNDStatusChangedListener();
-                }
-                this.mIsTestMode = false;
-                if (z) {
-                    this.mAudioManager.abandonAudioFocus(this.mAudioFocusListener);
-                    unRegisterTelephonyListener();
-                }
-                notifyEvent(6, Integer.valueOf(i));
-                if (!this.mIsForcestop) {
-                    sendFMOFFBroadcast();
-                }
-                InputManager inputManager = (InputManager) this.mContext.getSystemService("input");
-                boolean z2 = this.mIsOn;
-                if (z2 != this.mIsSetWakeKey && inputManager != null) {
-                    try {
-                        inputManager.semSetWakeKeyDynamically("com.sec.android.app.fm", z2, VOLUME_UP_DOWN);
-                    } catch (SecurityException e2) {
-                        log("Exception in semSetWakeKeyDynamically(): " + e2.toString());
-                    }
-                    this.mIsSetWakeKey = this.mIsOn;
-                }
-                return true;
-            } catch (Exception e3) {
-                Log.e("FMRadioService", "Exception in offInternal() : " + e3);
-                this.mOffProgress = false;
-                return false;
-            }
-        } finally {
-            releaseWakeLock();
+        if (this.mIsOn) {
         }
     }
 
@@ -2601,11 +2840,11 @@ public class FMRadioService extends IFMPlayer.Stub {
                     log("Notifying listener:" + size);
                     switch (i) {
                         case 1:
-                            long longValue = obj != null ? ((Long) obj).longValue() : 0L;
+                            long jLongValue = obj != null ? ((Long) obj).longValue() : 0L;
                             if (DEBUGGABLE) {
-                                log("notifying :EVENT_CHANNEL_FOUND to : listener -->" + size + " : with freq:" + longValue + "-->" + this.mListeners.get(size).mListener.asBinder());
+                                log("notifying :EVENT_CHANNEL_FOUND to : listener -->" + size + " : with freq:" + jLongValue + "-->" + this.mListeners.get(size).mListener.asBinder());
                             }
-                            this.mListeners.get(size).mListener.onChannelFound(longValue);
+                            this.mListeners.get(size).mListener.onChannelFound(jLongValue);
                             continue;
                         case 2:
                             log("notifying :EVENT_SCAN_STARTED to : listener -->" + size + " :" + this.mListeners.get(size).mListener.asBinder());
@@ -2613,18 +2852,18 @@ public class FMRadioService extends IFMPlayer.Stub {
                             continue;
                         case 3:
                             if (obj != null) {
-                                long[] convertToPrimitives = convertToPrimitives((Long[]) obj);
-                                log("notifying :EVENT_SCAN_FINISHED to : listener -->" + size + " : with data array:" + (convertToPrimitives != null ? convertToPrimitives.length : 0) + "-->" + this.mListeners.get(size).mListener.asBinder());
-                                this.mListeners.get(size).mListener.onScanFinished(convertToPrimitives);
+                                long[] jArrConvertToPrimitives = convertToPrimitives((Long[]) obj);
+                                log("notifying :EVENT_SCAN_FINISHED to : listener -->" + size + " : with data array:" + (jArrConvertToPrimitives != null ? jArrConvertToPrimitives.length : 0) + "-->" + this.mListeners.get(size).mListener.asBinder());
+                                this.mListeners.get(size).mListener.onScanFinished(jArrConvertToPrimitives);
                                 continue;
                             } else {
                                 log("notifying : EVENT_SCAN_FINISHED : data is null !!!");
                             }
                         case 4:
                             if (obj != null) {
-                                long[] convertToPrimitives2 = convertToPrimitives((Long[]) obj);
-                                log("notifying :EVENT_SCAN_STOPPED to : listener -->" + size + " : with data array:" + (convertToPrimitives2 != null ? convertToPrimitives2.length : 0) + "-->" + this.mListeners.get(size).mListener.asBinder());
-                                this.mListeners.get(size).mListener.onScanStopped(convertToPrimitives2);
+                                long[] jArrConvertToPrimitives2 = convertToPrimitives((Long[]) obj);
+                                log("notifying :EVENT_SCAN_STOPPED to : listener -->" + size + " : with data array:" + (jArrConvertToPrimitives2 != null ? jArrConvertToPrimitives2.length : 0) + "-->" + this.mListeners.get(size).mListener.asBinder());
+                                this.mListeners.get(size).mListener.onScanStopped(jArrConvertToPrimitives2);
                                 continue;
                             } else {
                                 log("notifying : EVENT_SCAN_STOPPED : data is null !!!");
@@ -2639,12 +2878,12 @@ public class FMRadioService extends IFMPlayer.Stub {
                             continue;
                         case 7:
                             if (obj != null) {
-                                long longValue2 = ((Long) obj).longValue();
-                                curFreq = longValue2;
+                                long jLongValue2 = ((Long) obj).longValue();
+                                curFreq = jLongValue2;
                                 if (DEBUGGABLE) {
-                                    log("notifying :EVENT_TUNE to : listener -->" + size + " : with data array:" + longValue2 + "-->" + this.mListeners.get(size).mListener.asBinder());
+                                    log("notifying :EVENT_TUNE to : listener -->" + size + " : with data array:" + jLongValue2 + "-->" + this.mListeners.get(size).mListener.asBinder());
                                 }
-                                this.mListeners.get(size).mListener.onTuned(longValue2);
+                                this.mListeners.get(size).mListener.onTuned(jLongValue2);
                                 continue;
                             } else {
                                 log("notifying : EVENT_TUNE : data is null !!!");
@@ -3172,211 +3411,628 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:164:0x0243, code lost:
-    
-        if (r17.equals(com.android.server.FMRadioService.PARAMETER_OFF_CHANNEL_TH) == false) goto L125;
-     */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:125:0x01ca  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x012d  */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setIntegerTunningParameter(java.lang.String r17, int r18) {
-        /*
-            Method dump skipped, instructions count: 1016
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.setIntegerTunningParameter(java.lang.String, int):void");
+    public void setIntegerTunningParameter(String str, int i) {
+        if (isValidPackage()) {
+            log("setIntegerTunningParameter:  parameterName- " + str + "  value:- " + i);
+            if (str == null) {
+                log("setIntegerTunningParameter:  parameterName is null. So do nothing");
+            }
+            str.hashCode();
+            switch (str) {
+                case "RSSI_th":
+                    setRSSI_th(i);
+                    break;
+                case "SNR_th":
+                    setSNR_th(i);
+                    break;
+                case "SkipTuningValue":
+                    SkipTuning_Value();
+                    break;
+                case "Cnt_th":
+                    setCnt_th(i);
+                    break;
+                default:
+                    if (FMRadioServiceFeature.CHIP_VENDOR == 5 || FMRadioServiceFeature.CHIP_VENDOR == 10) {
+                        str.hashCode();
+                        if (!str.equals(PARAMETER_SEEK_DC)) {
+                            if (str.equals(PARAMETER_SEEK_QA)) {
+                                setSeekQA(i);
+                                break;
+                            } else {
+                                log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                                break;
+                            }
+                        } else {
+                            setSeekDC(i);
+                            break;
+                        }
+                    } else {
+                        char c = 6;
+                        if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                            str.hashCode();
+                            switch (str.hashCode()) {
+                                case -2006318336:
+                                    if (!str.equals(PARAMETER_AFRMSSI_SAMPLES)) {
+                                        c = 65535;
+                                        break;
+                                    } else {
+                                        c = 0;
+                                        break;
+                                    }
+                                case -1620552413:
+                                    if (str.equals(PARAMETER_GOOD_CH_RMSSI_TH)) {
+                                        c = 1;
+                                        break;
+                                    }
+                                    break;
+                                case -1471559147:
+                                    if (str.equals(PARAMETER_SEARCH_ALGO_TYPE)) {
+                                        c = 2;
+                                        break;
+                                    }
+                                    break;
+                                case -1395228053:
+                                    if (str.equals(PARAMETER_BLEND_SINR)) {
+                                        c = 3;
+                                        break;
+                                    }
+                                    break;
+                                case -1271273368:
+                                    if (str.equals(PARAMETER_SINR_FIRST_STAGE)) {
+                                        c = 4;
+                                        break;
+                                    }
+                                    break;
+                                case -1237360035:
+                                    if (str.equals(PARAMETER_SECOND_CNT_TH)) {
+                                        c = 5;
+                                        break;
+                                    }
+                                    break;
+                                case -1075284457:
+                                    if (!str.equals(PARAMETER_OFF_CHANNEL_TH)) {
+                                    }
+                                    break;
+                                case -728425457:
+                                    if (str.equals(PARAMETER_SECOND_RSSI_TH)) {
+                                        c = 7;
+                                        break;
+                                    }
+                                    break;
+                                case -303196099:
+                                    if (str.equals(PARAMETER_BLEND_RMSSI)) {
+                                        c = '\b';
+                                        break;
+                                    }
+                                    break;
+                                case 612887239:
+                                    if (str.equals(PARAMETER_ON_CHANNEL_TH)) {
+                                        c = '\t';
+                                        break;
+                                    }
+                                    break;
+                                case 879837199:
+                                    if (str.equals(PARAMETER_SINR_SAMPLES)) {
+                                        c = '\n';
+                                        break;
+                                    }
+                                    break;
+                                case 1051458289:
+                                    if (str.equals(PARAMETER_SINR_TH)) {
+                                        c = 11;
+                                        break;
+                                    }
+                                    break;
+                                case 1412807169:
+                                    if (str.equals(PARAMETER_CFO_TH)) {
+                                        c = '\f';
+                                        break;
+                                    }
+                                    break;
+                                case 1569063695:
+                                    if (str.equals(PARAMETER_SECOND_SNR_TH)) {
+                                        c = '\r';
+                                        break;
+                                    }
+                                    break;
+                                case 1826319004:
+                                    if (str.equals(PARAMETER_RMSSI_FIRST_STAGE)) {
+                                        c = 14;
+                                        break;
+                                    }
+                                    break;
+                                case 2004862370:
+                                    if (str.equals(PARAMETER_AFRMSSI_TH)) {
+                                        c = 15;
+                                        break;
+                                    }
+                                    break;
+                            }
+                            switch (c) {
+                                case 0:
+                                    setAFRMSSISamples(i);
+                                    break;
+                                case 1:
+                                    setGoodChannelRMSSIThreshold(i);
+                                    break;
+                                case 2:
+                                    setSearchAlgoType(i);
+                                    break;
+                                case 3:
+                                    setBlendSinr(i);
+                                    break;
+                                case 4:
+                                    setSINRFirstStage(i);
+                                    break;
+                                case 5:
+                                    setCnt_th_2(i);
+                                    break;
+                                case 6:
+                                    if (!this.mIsExternalChipset) {
+                                        this.mPlayerNative.setOffChannelThreshold(i);
+                                        break;
+                                    }
+                                    break;
+                                case 7:
+                                    setRSSI_th_2(i);
+                                    break;
+                                case '\b':
+                                    setBlendRmssi(i);
+                                    break;
+                                case '\t':
+                                    setOnChannelThreshold(i);
+                                    break;
+                                case '\n':
+                                    setSINRSamples(i);
+                                    break;
+                                case 11:
+                                    setSINRThreshold(i);
+                                    break;
+                                case '\f':
+                                    setCFOTh12(i);
+                                    break;
+                                case '\r':
+                                    setSNR_th_2(i);
+                                    break;
+                                case 14:
+                                    setRMSSIFirstStage(i);
+                                    break;
+                                case 15:
+                                    setAFRMSSIThreshold(i);
+                                    break;
+                                default:
+                                    log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                                    break;
+                            }
+                        } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
+                            str.hashCode();
+                            switch (str) {
+                                case "NoisePower_th":
+                                    setNoisePowerThreshold(i);
+                                    break;
+                                case "PilotPower_th":
+                                    setPilotPowerThreshold(i);
+                                    break;
+                                case "FrequencyOffset_th":
+                                    setFrequencyOffsetThreshold(i);
+                                    break;
+                                default:
+                                    log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                                    break;
+                            }
+                        } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                            str.hashCode();
+                            if (!str.equals(PARAMETER_IF_COUNT_1)) {
+                                if (str.equals(PARAMETER_IF_COUNT_2)) {
+                                    setIFCount2(i);
+                                    break;
+                                } else {
+                                    log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                                    break;
+                                }
+                            } else {
+                                setIFCount1(i);
+                                break;
+                            }
+                        } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
+                            str.hashCode();
+                            switch (str) {
+                                case "SeekDesenseRSSI":
+                                    setSeekDesenseRSSI(i);
+                                    break;
+                                case "Softmute_th":
+                                    setSoftmute_th(i);
+                                    break;
+                                case "SeekSMG":
+                                    setSeekSMG(i);
+                                    break;
+                                case "BlendRSSI_th":
+                                    setBlendRSSI_th(i);
+                                    break;
+                                case "ATJCofig":
+                                    setATJ(i);
+                                    break;
+                                case "BlendPAMD_th":
+                                    setBlendPAMD_th(i);
+                                    break;
+                                default:
+                                    log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                                    break;
+                            }
+                        } else {
+                            log("setIntegerTunningParameter() : this parameter is not support yet - " + str + " chipvendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:169:0x025b, code lost:
-    
-        if (r17.equals(com.android.server.FMRadioService.PARAMETER_SEARCH_ALGO_TYPE) == false) goto L116;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0087, code lost:
-    
-        if (r17.equals(com.android.server.FMRadioService.PARAMETER_FREQUENCY_OFFSET_TH) == false) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:82:0x0139, code lost:
-    
-        if (r17.equals(com.android.server.FMRadioService.PARAMETER_SEEK_SMG) == false) goto L73;
-     */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x01b3  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x007f  */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x0110  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0029  */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int getIntegerTunningParameter(java.lang.String r17, int r18) {
-        /*
-            Method dump skipped, instructions count: 998
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.getIntegerTunningParameter(java.lang.String, int):int");
+    public int getIntegerTunningParameter(String str, int i) {
+        char c;
+        log("getIntegerTunningParameter: parameterName- " + str);
+        if (str == null) {
+            log("getIntegerTunningParameter:  parameterName is null. So do nothing");
+            return i;
+        }
+        str.hashCode();
+        c = 2;
+        switch (str) {
+            case "RSSI_th":
+                break;
+            case "SNR_th":
+                break;
+            case "Cnt_th":
+                break;
+            default:
+                if (FMRadioServiceFeature.CHIP_VENDOR == 5 || FMRadioServiceFeature.CHIP_VENDOR == 10) {
+                    str.hashCode();
+                    if (!str.equals(PARAMETER_SEEK_DC)) {
+                        if (!str.equals(PARAMETER_SEEK_QA)) {
+                            log("getIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                    str.hashCode();
+                    switch (str.hashCode()) {
+                        case -2006318336:
+                            if (!str.equals(PARAMETER_AFRMSSI_SAMPLES)) {
+                                c = 65535;
+                                break;
+                            } else {
+                                c = 0;
+                                break;
+                            }
+                        case -1620552413:
+                            if (str.equals(PARAMETER_GOOD_CH_RMSSI_TH)) {
+                                c = 1;
+                                break;
+                            }
+                            break;
+                        case -1471559147:
+                            if (!str.equals(PARAMETER_SEARCH_ALGO_TYPE)) {
+                            }
+                            break;
+                        case -1395228053:
+                            if (str.equals(PARAMETER_BLEND_SINR)) {
+                                c = 3;
+                                break;
+                            }
+                            break;
+                        case -1271273368:
+                            if (str.equals(PARAMETER_SINR_FIRST_STAGE)) {
+                                c = 4;
+                                break;
+                            }
+                            break;
+                        case -1237360035:
+                            if (str.equals(PARAMETER_SECOND_CNT_TH)) {
+                                c = 5;
+                                break;
+                            }
+                            break;
+                        case -1075284457:
+                            if (str.equals(PARAMETER_OFF_CHANNEL_TH)) {
+                                c = 6;
+                                break;
+                            }
+                            break;
+                        case -728425457:
+                            if (str.equals(PARAMETER_SECOND_RSSI_TH)) {
+                                c = 7;
+                                break;
+                            }
+                            break;
+                        case -303196099:
+                            if (str.equals(PARAMETER_BLEND_RMSSI)) {
+                                c = '\b';
+                                break;
+                            }
+                            break;
+                        case 612887239:
+                            if (str.equals(PARAMETER_ON_CHANNEL_TH)) {
+                                c = '\t';
+                                break;
+                            }
+                            break;
+                        case 879837199:
+                            if (str.equals(PARAMETER_SINR_SAMPLES)) {
+                                c = '\n';
+                                break;
+                            }
+                            break;
+                        case 1051458289:
+                            if (str.equals(PARAMETER_SINR_TH)) {
+                                c = 11;
+                                break;
+                            }
+                            break;
+                        case 1412807169:
+                            if (str.equals(PARAMETER_CFO_TH)) {
+                                c = '\f';
+                                break;
+                            }
+                            break;
+                        case 1569063695:
+                            if (str.equals(PARAMETER_SECOND_SNR_TH)) {
+                                c = '\r';
+                                break;
+                            }
+                            break;
+                        case 1826319004:
+                            if (str.equals(PARAMETER_RMSSI_FIRST_STAGE)) {
+                                c = 14;
+                                break;
+                            }
+                            break;
+                        case 2004862370:
+                            if (str.equals(PARAMETER_AFRMSSI_TH)) {
+                                c = 15;
+                                break;
+                            }
+                            break;
+                    }
+                    switch (c) {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        case '\b':
+                            break;
+                        case '\t':
+                            break;
+                        case '\n':
+                            break;
+                        case 11:
+                            break;
+                        case '\f':
+                            break;
+                        case '\r':
+                            break;
+                        case 14:
+                            break;
+                        case 15:
+                            break;
+                        default:
+                            log("getIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                    }
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
+                    str.hashCode();
+                    switch (str.hashCode()) {
+                        case -2033938168:
+                            if (!str.equals(PARAMETER_NOISE_POWER_TH)) {
+                                c = 65535;
+                                break;
+                            } else {
+                                c = 0;
+                                break;
+                            }
+                        case -752119130:
+                            if (str.equals(PARAMETER_PILOT_POWER_TH)) {
+                                c = 1;
+                                break;
+                            }
+                            break;
+                        case 68091844:
+                            if (!str.equals(PARAMETER_FREQUENCY_OFFSET_TH)) {
+                            }
+                            break;
+                    }
+                    switch (c) {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            log("getIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                    }
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                    str.hashCode();
+                    if (!str.equals(PARAMETER_IF_COUNT_1)) {
+                        if (!str.equals(PARAMETER_IF_COUNT_2)) {
+                            log("getIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                } else if (FMRadioServiceFeature.CHIP_VENDOR == 8) {
+                    str.hashCode();
+                    switch (str.hashCode()) {
+                        case -1731989524:
+                            if (!str.equals(PARAMETER_SEEK_DESENSE_RSSI)) {
+                                c = 65535;
+                                break;
+                            } else {
+                                c = 0;
+                                break;
+                            }
+                        case -1416966448:
+                            if (str.equals(PARAMETER_SOFTMUTE_TH)) {
+                                c = 1;
+                                break;
+                            }
+                            break;
+                        case -658516075:
+                            if (!str.equals(PARAMETER_SEEK_SMG)) {
+                            }
+                            break;
+                        case -88842741:
+                            if (str.equals(PARAMETER_BLEND_RSSI_TH)) {
+                                c = 3;
+                                break;
+                            }
+                            break;
+                        case 1038261217:
+                            if (str.equals(PARAMETER_ATJ_CONFIG)) {
+                                c = 4;
+                                break;
+                            }
+                            break;
+                        case 1910102394:
+                            if (str.equals(PARAMETER_BLEND_PAMD_TH)) {
+                                c = 5;
+                                break;
+                            }
+                            break;
+                    }
+                    switch (c) {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        default:
+                            log("setIntegerTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                            break;
+                    }
+                } else {
+                    log("getIntegerTunningParameter() : this parameter is not support yet - " + str + " chipvendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                    break;
+                }
+                break;
+        }
+        return i;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x009c, code lost:
-    
-        if (r9.equals(com.android.server.FMRadioService.PARAMETER_SOFTMUTE_COEFF) == false) goto L34;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0038  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0094  */
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setLongTunningParameter(java.lang.String r9, long r10) {
-        /*
-            r8 = this;
-            boolean r0 = r8.isValidPackage()
-            if (r0 != 0) goto L8
-            goto Lda
-        L8:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "long setLongTunningParameter: parameterName - "
-            r0.<init>(r1)
-            r0.append(r9)
-            java.lang.String r1 = "  value: "
-            r0.append(r1)
-            r0.append(r10)
-            java.lang.String r0 = r0.toString()
-            log(r0)
-            if (r9 != 0) goto L2a
-            java.lang.String r8 = "setLongTunningParameter:  parameterName is null. So do nothing"
-            log(r8)
-            return
-        L2a:
-            r9.hashCode()
-            int r0 = r9.hashCode()
-            r1 = 2
-            r2 = 1
-            r3 = 0
-            r4 = -1
-            switch(r0) {
-                case -1141489851: goto L50;
-                case -658516033: goto L45;
-                case 1060814575: goto L3a;
-                default: goto L38;
+    public void setLongTunningParameter(String str, long j) {
+        if (isValidPackage()) {
+            log("long setLongTunningParameter: parameterName - " + str + "  value: " + j);
+            if (str == null) {
+                log("setLongTunningParameter:  parameterName is null. So do nothing");
             }
-        L38:
-            r0 = r4
-            goto L5a
-        L3a:
-            java.lang.String r0 = "SeekRSSI"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto L43
-            goto L38
-        L43:
-            r0 = r1
-            goto L5a
-        L45:
-            java.lang.String r0 = "SeekSNR"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto L4e
-            goto L38
-        L4e:
-            r0 = r2
-            goto L5a
-        L50:
-            java.lang.String r0 = "DEConstant"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto L59
-            goto L38
-        L59:
-            r0 = r3
-        L5a:
-            java.lang.String r5 = " for chip vendor - "
-            java.lang.String r6 = "setLongTunningParameter() : invalid parameterName - "
-            switch(r0) {
-                case 0: goto L82;
-                case 1: goto L7e;
-                case 2: goto L7a;
-                default: goto L62;
+            str.hashCode();
+            char c = 2;
+            switch (str) {
+                case "DEConstant":
+                    setDEConstant(j);
+                    break;
+                case "SeekSNR":
+                    setSeekSNR(j);
+                    break;
+                case "SeekRSSI":
+                    setSeekRSSI(j);
+                    break;
+                default:
+                    log("setLongTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                    break;
             }
-        L62:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r6)
-            r0.append(r9)
-            r0.append(r5)
-            int r7 = com.android.server.FMRadioServiceFeature.CHIP_VENDOR
-            r0.append(r7)
-            java.lang.String r0 = r0.toString()
-            log(r0)
-            goto L85
-        L7a:
-            r8.setSeekRSSI(r10)
-            goto L85
-        L7e:
-            r8.setSeekSNR(r10)
-            goto L85
-        L82:
-            r8.setDEConstant(r10)
-        L85:
-            int r0 = com.android.server.FMRadioServiceFeature.CHIP_VENDOR
-            r7 = 7
-            if (r0 != r7) goto Lda
-            r9.hashCode()
-            int r0 = r9.hashCode()
-            switch(r0) {
-                case -681786198: goto Laa;
-                case 1746788740: goto L9f;
-                case 1777837110: goto L96;
-                default: goto L94;
+            if (FMRadioServiceFeature.CHIP_VENDOR == 7) {
+                str.hashCode();
+                switch (str.hashCode()) {
+                    case -681786198:
+                        if (!str.equals(PARAMETER_SOFT_STEREO_BLEND_COEFF)) {
+                            c = 65535;
+                            break;
+                        } else {
+                            c = 0;
+                            break;
+                        }
+                    case 1746788740:
+                        if (str.equals(PARAMETER_SOFT_STEREO_BLEND_REF)) {
+                            c = 1;
+                            break;
+                        }
+                        break;
+                    case 1777837110:
+                        if (!str.equals(PARAMETER_SOFTMUTE_COEFF)) {
+                        }
+                        break;
+                }
+                switch (c) {
+                    case 0:
+                        setSoftStereoBlendCoeff(j);
+                        break;
+                    case 1:
+                        setSoftStereoBlendRef(j);
+                        break;
+                    case 2:
+                        setSoftMuteCoeff(j);
+                        break;
+                    default:
+                        log("setLongTunningParameter() : invalid parameterName - " + str + " for chip vendor - " + FMRadioServiceFeature.CHIP_VENDOR);
+                        break;
+                }
             }
-        L94:
-            r1 = r4
-            goto Lb4
-        L96:
-            java.lang.String r0 = "SoftMuteCoeff"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto Lb4
-            goto L94
-        L9f:
-            java.lang.String r0 = "SoftStereoBlendRef"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto La8
-            goto L94
-        La8:
-            r1 = r2
-            goto Lb4
-        Laa:
-            java.lang.String r0 = "SoftStereoBlendCoeff"
-            boolean r0 = r9.equals(r0)
-            if (r0 != 0) goto Lb3
-            goto L94
-        Lb3:
-            r1 = r3
-        Lb4:
-            switch(r1) {
-                case 0: goto Ld7;
-                case 1: goto Ld3;
-                case 2: goto Lcf;
-                default: goto Lb7;
-            }
-        Lb7:
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            r8.<init>(r6)
-            r8.append(r9)
-            r8.append(r5)
-            int r9 = com.android.server.FMRadioServiceFeature.CHIP_VENDOR
-            r8.append(r9)
-            java.lang.String r8 = r8.toString()
-            log(r8)
-            return
-        Lcf:
-            r8.setSoftMuteCoeff(r10)
-            return
-        Ld3:
-            r8.setSoftStereoBlendRef(r10)
-            return
-        Ld7:
-            r8.setSoftStereoBlendCoeff(r10)
-        Lda:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.setLongTunningParameter(java.lang.String, long):void");
+        }
     }
 
     @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
@@ -3506,7 +4162,7 @@ public class FMRadioService extends IFMPlayer.Stub {
         ScanThread() {
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:75:0x01c7, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:93:0x01c7, code lost:
         
             r1 = r26.this$0;
             r1.notifyEvent(3, r1.mScanChannelList.toArray(new java.lang.Long[0]));
@@ -3514,48 +4170,209 @@ public class FMRadioService extends IFMPlayer.Stub {
          */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private void doScan() throws java.lang.InterruptedException {
-            /*
-                Method dump skipped, instructions count: 791
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.ScanThread.doScan():void");
+        private void doScan() throws InterruptedException {
+            long j;
+            long j2;
+            long j3;
+            long j4 = 90000;
+            long j5 = 108000;
+            long j6 = 87500;
+            if (FMRadioService.this.mIsExternalChipset) {
+                if (FMRadioService.this.mBand == 0) {
+                    FMRadioService.this.mPlayerExternalChipset.tune(8750);
+                }
+                if (FMRadioService.this.mBand == 1 || FMRadioService.this.mBand == 2) {
+                    FMRadioService.this.mPlayerExternalChipset.tune(7600);
+                }
+                if (FMRadioService.this.mBand == 3) {
+                    FMRadioService.this.mPlayerExternalChipset.tune(6400);
+                }
+            } else if (FMRadioServiceFeature.CHIP_VENDOR == 6) {
+                if (FMRadioService.this.mBand == 3) {
+                    FMRadioService.this.mPlayerNative.tune(90000L);
+                } else {
+                    FMRadioService.this.mPlayerNative.tune(108000L);
+                }
+            } else if (FMRadioService.this.mBand == 1) {
+                FMRadioService.this.mPlayerNative.tune(87500L);
+            } else {
+                FMRadioService.this.mPlayerNative.tune(76000L);
+            }
+            if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9 || FMRadioService.this.mIsExternalChipset) {
+                FMRadioService.this.mPreviousFoundFreq = 0L;
+                FMRadioService.this.mCurrentFoundFreq = 0L;
+            }
+            if (FMRadioService.this.mWaitPidDuringScanning && !FMRadioService.this.mIsExternalChipset) {
+                FMRadioService.this.mPlayerNative.setScanning(true);
+            }
+            while (true) {
+                if (!FMRadioService.this.mScanProgress) {
+                    break;
+                }
+                long j7 = j4;
+                long jSearchAll = FMRadioService.this.searchAll();
+                if (FMRadioService.DEBUGGABLE) {
+                    j = j5;
+                    FMRadioService.log("Found channel :" + jSearchAll);
+                } else {
+                    j = j5;
+                }
+                if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9 || FMRadioService.this.mIsExternalChipset) {
+                    j2 = 20;
+                } else {
+                    j2 = 20;
+                    if (FMRadioService.this.mScanChannelList.contains(Long.valueOf(jSearchAll))) {
+                        if (FMRadioService.DEBUGGABLE) {
+                            FMRadioService.log("Duplicate channel :" + jSearchAll);
+                        }
+                        FMRadioService fMRadioService = FMRadioService.this;
+                        fMRadioService.notifyEvent(3, fMRadioService.mScanChannelList.toArray(new Long[0]));
+                        Thread.sleep(20L);
+                    }
+                }
+                if (jSearchAll > 0) {
+                    if (FMRadioService.this.mScanFreq <= 0) {
+                        FMRadioService.this.mScanFreq = jSearchAll;
+                    }
+                    if (FMRadioServiceFeature.CHIP_VENDOR == 4 || FMRadioServiceFeature.CHIP_VENDOR == 9 || FMRadioService.this.mIsExternalChipset) {
+                        j3 = j6;
+                        FMRadioService.this.mCurrentFoundFreq = jSearchAll;
+                        if (FMRadioService.DEBUGGABLE) {
+                            FMRadioService.log("scanning current and prev freq:" + FMRadioService.this.mCurrentFoundFreq + ", " + FMRadioService.this.mPreviousFoundFreq);
+                        }
+                        if (FMRadioService.this.mPreviousFoundFreq >= FMRadioService.this.mCurrentFoundFreq) {
+                            FMRadioService.log("scanning finish");
+                            if (FMRadioService.this.mCurrentFoundFreq == j3) {
+                                FMRadioService.this.mScanChannelList.add(Long.valueOf(jSearchAll));
+                                FMRadioService.this.notifyEvent(1, Long.valueOf(jSearchAll));
+                            }
+                            if (FMRadioService.this.mIsExternalChipset) {
+                                FMRadioService.this.mPlayerExternalChipset.stopNotifyThread(true);
+                            }
+                            FMRadioService fMRadioService2 = FMRadioService.this;
+                            fMRadioService2.notifyEvent(3, fMRadioService2.mScanChannelList.toArray(new Long[0]));
+                            Thread.sleep(j2);
+                        } else {
+                            if (FMRadioService.this.mScanProgress) {
+                                FMRadioService.log("scanning found channel");
+                                FMRadioService fMRadioService3 = FMRadioService.this;
+                                fMRadioService3.mPreviousFoundFreq = fMRadioService3.mCurrentFoundFreq;
+                                FMRadioService.this.mScanChannelList.add(Long.valueOf(jSearchAll));
+                                FMRadioService.this.notifyEvent(1, Long.valueOf(jSearchAll));
+                                if (FMRadioService.this.mWaitPidDuringScanning && FMRadioService.this.mScanThread != null) {
+                                    synchronized (FMRadioService.this.mScanThread) {
+                                        FMRadioService.this.mScanThread.wait(250L);
+                                    }
+                                }
+                            } else {
+                                continue;
+                            }
+                            j4 = j7;
+                            j5 = j;
+                            j6 = j3;
+                        }
+                    } else {
+                        if (FMRadioService.this.mScanProgress) {
+                            j3 = j6;
+                            FMRadioService.this.mScanChannelList.add(Long.valueOf(jSearchAll));
+                            FMRadioService.this.notifyEvent(1, Long.valueOf(jSearchAll));
+                            if (FMRadioService.this.mWaitPidDuringScanning && FMRadioService.this.mScanThread != null) {
+                                synchronized (FMRadioService.this.mScanThread) {
+                                    FMRadioService.this.mScanThread.wait(250L);
+                                }
+                            }
+                        } else {
+                            j3 = j6;
+                        }
+                        if (((FMRadioService.this.mBand == 1 || FMRadioService.this.mBand == 2) && jSearchAll == j) || (FMRadioService.this.mBand == 3 && jSearchAll == j7)) {
+                            break;
+                        }
+                        j4 = j7;
+                        j5 = j;
+                        j6 = j3;
+                    }
+                } else {
+                    FMRadioService.log("Testmode Skipp value : " + FMRadioService.this.mIsSkipTunigVal);
+                    if (FMRadioService.this.mIsExternalChipset) {
+                        FMRadioService.this.mPlayerExternalChipset.stopNotifyThread(true);
+                    }
+                    FMRadioService fMRadioService4 = FMRadioService.this;
+                    fMRadioService4.notifyEvent(3, fMRadioService4.mScanChannelList.toArray(new Long[0]));
+                    Thread.sleep(j2);
+                }
+            }
+            if (!FMRadioService.this.mWaitPidDuringScanning || FMRadioService.this.mIsExternalChipset) {
+                return;
+            }
+            FMRadioService.this.mPlayerNative.setScanning(false);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:26:0x0128, code lost:
-        
-            if (r3.isHeld() != false) goto L41;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:27:0x0155, code lost:
-        
-            com.android.server.FMRadioService.log("Scanning Thread work is done...");
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:28:0x015a, code lost:
-        
-            return;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:30:0x014f, code lost:
-        
-            r3.release();
-            com.android.server.FMRadioService.log("Scan thread released the dimmed screen lock");
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:42:0x014d, code lost:
-        
-            if (r3.isHeld() == false) goto L42;
-         */
         @Override // java.lang.Thread, java.lang.Runnable
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public void run() {
-            /*
-                Method dump skipped, instructions count: 370
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.FMRadioService.ScanThread.run():void");
+            PowerManager.WakeLock wakeLockNewWakeLock = FMRadioService.this.mPowerManager.newWakeLock(536870913, "FMRadio Service Scan Thread");
+            wakeLockNewWakeLock.acquire();
+            FMRadioService.log("Scan thread gets the dimmed screen lock");
+            try {
+                try {
+                    FMRadioService.log("Scanning Thread started...");
+                    FMRadioService.this.notifyEvent(2, null);
+                    if (FMRadioServiceFeature.CHIP_VENDOR == 9) {
+                        if (FMRadioService.this.isUnMuteRadio()) {
+                            FMRadioService.this.mAudioManager.setParameters(FMRadioService.audioMute);
+                        }
+                    } else if (FMRadioService.this.mIsExternalChipset) {
+                        FMRadioService.this.mPlayerExternalChipset.muteOn();
+                    } else {
+                        FMRadioService.this.setFMAudioPath(false);
+                    }
+                    FMRadioService.log("Scanning Thread started... - Turning off FM");
+                    FMRadioService fMRadioService = FMRadioService.this;
+                    fMRadioService.mScanFreq = fMRadioService.getCurrentChannel();
+                    if (FMRadioService.this.mScanChannelList == null) {
+                        FMRadioService.this.mScanChannelList = new ArrayList();
+                    } else {
+                        FMRadioService.this.mScanChannelList.clear();
+                    }
+                    if (FMRadioService.this.mIsSkipTunigVal && !FMRadioService.this.mIsExternalChipset) {
+                        FMRadioService fMRadioService2 = FMRadioService.this;
+                        fMRadioService2.setSignalSetting(fMRadioService2.mRssi_th, FMRadioService.this.mSnr_th, FMRadioService.this.mCnt_th);
+                        FMRadioService.log("first scan no block channel with " + FMRadioService.this.mRssi_th + FMRadioService.this.mSnr_th + FMRadioService.this.mCnt_th);
+                    }
+                    if (!FMRadioService.this.mIsExternalChipset || FMRadioService.this.mPlayerExternalChipset.startNotifyThread(true)) {
+                        doScan();
+                    } else {
+                        if (FMRadioService.this.mScanChannelList == null) {
+                            FMRadioService.this.mScanChannelList = new ArrayList();
+                        } else {
+                            FMRadioService.this.mScanChannelList.clear();
+                        }
+                        FMRadioService fMRadioService3 = FMRadioService.this;
+                        fMRadioService3.notifyEvent(3, fMRadioService3.mScanChannelList.toArray(new Long[0]));
+                    }
+                    FMRadioService.this.mScanProgress = false;
+                    FMRadioService.this.mScanThread = null;
+                } catch (Exception e) {
+                    Log.e("FMRadioService", "Exception in run() : " + e);
+                    FMRadioService.this.mScanProgress = false;
+                    FMRadioService.this.mScanThread = null;
+                    if (wakeLockNewWakeLock.isHeld()) {
+                    }
+                }
+                if (wakeLockNewWakeLock.isHeld()) {
+                    wakeLockNewWakeLock.release();
+                    FMRadioService.log("Scan thread released the dimmed screen lock");
+                }
+                FMRadioService.log("Scanning Thread work is done...");
+            } catch (Throwable th) {
+                FMRadioService.this.mScanProgress = false;
+                FMRadioService.this.mScanThread = null;
+                if (wakeLockNewWakeLock.isHeld()) {
+                    wakeLockNewWakeLock.release();
+                    FMRadioService.log("Scan thread released the dimmed screen lock");
+                }
+                throw th;
+            }
         }
     }
 
@@ -3625,7 +4442,7 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void setDelay(long j) {
+    public void setDelay(long j) throws InterruptedException {
         try {
             Thread.sleep(j);
         } catch (InterruptedException e) {
@@ -3667,7 +4484,7 @@ public class FMRadioService extends IFMPlayer.Stub {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void sendInfoSamsungAnalytics(String str, String str2) {
+    public void sendInfoSamsungAnalytics(String str, String str2) throws JSONException {
         log("sendInfoSamsungAnalytics ,packageName : " + str + ", version : " + str2);
         Bundle bundle = new Bundle();
         bundle.putString(SemShareConstants.DMA_SURVEY_FEATURE_TRACKING_ID, SA_TRACKING_ID);

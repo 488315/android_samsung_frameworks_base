@@ -144,12 +144,12 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
             X9ECParameters x9ECParameters = X9ECParameters.getInstance(x962Parameters.getParameters());
             this.ecSpec = new ECParameterSpec(EC5Util.convertCurve(x9ECParameters.getCurve(), x9ECParameters.getSeed()), EC5Util.convertPoint(x9ECParameters.getG()), x9ECParameters.getN(), x9ECParameters.getH().intValue());
         }
-        ASN1Encodable parsePrivateKey = privateKeyInfo.parsePrivateKey();
-        if (parsePrivateKey instanceof ASN1Integer) {
-            this.d = ASN1Integer.getInstance(parsePrivateKey).getValue();
+        ASN1Encodable privateKey = privateKeyInfo.parsePrivateKey();
+        if (privateKey instanceof ASN1Integer) {
+            this.d = ASN1Integer.getInstance(privateKey).getValue();
             return;
         }
-        com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey eCPrivateKey = com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(parsePrivateKey);
+        com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey eCPrivateKey = com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(privateKey);
         this.d = eCPrivateKey.getKey();
         this.publicKey = eCPrivateKey.getPublicKey();
     }
@@ -179,8 +179,8 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
         } else if (eCParameterSpec == null) {
             x962Parameters = new X962Parameters((ASN1Null) DERNull.INSTANCE);
         } else {
-            ECCurve convertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
-            x962Parameters = new X962Parameters(new X9ECParameters(convertCurve, new X9ECPoint(EC5Util.convertPoint(convertCurve, this.ecSpec.getGenerator()), this.withCompression), this.ecSpec.getOrder(), BigInteger.valueOf(this.ecSpec.getCofactor()), this.ecSpec.getCurve().getSeed()));
+            ECCurve eCCurveConvertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
+            x962Parameters = new X962Parameters(new X9ECParameters(eCCurveConvertCurve, new X9ECPoint(EC5Util.convertPoint(eCCurveConvertCurve, this.ecSpec.getGenerator()), this.withCompression), this.ecSpec.getOrder(), BigInteger.valueOf(this.ecSpec.getCofactor()), this.ecSpec.getCurve().getSeed()));
         }
         ECParameterSpec eCParameterSpec2 = this.ecSpec;
         if (eCParameterSpec2 == null) {
@@ -266,9 +266,9 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("EC Private Key");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(lineSeparator);
-        stringBuffer.append("             S: ").append(this.d.toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(strLineSeparator);
+        stringBuffer.append("             S: ").append(this.d.toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 

@@ -134,11 +134,11 @@ public final class TvInputHardwareInfo implements Parcelable {
     }
 
     public Builder toBuilder() {
-        Builder cableConnectionStatus = new Builder().deviceId(this.mDeviceId).type(this.mType).audioType(this.mAudioType).audioAddress(this.mAudioAddress).cableConnectionStatus(this.mCableConnectionStatus);
+        Builder builderCableConnectionStatus = new Builder().deviceId(this.mDeviceId).type(this.mType).audioType(this.mAudioType).audioAddress(this.mAudioAddress).cableConnectionStatus(this.mCableConnectionStatus);
         if (this.mType == 9) {
-            cableConnectionStatus.hdmiPortId(this.mHdmiPortId);
+            builderCableConnectionStatus.hdmiPortId(this.mHdmiPortId);
         }
-        return cableConnectionStatus;
+        return builderCableConnectionStatus;
     }
 
     public static final class Builder {

@@ -12,7 +12,6 @@ import androidx.dynamicanimation.animation.SpringForce;
 import com.android.systemui.volume.store.StoreInteractor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelMotion {
     public static final PathInterpolator HIDE_INTERPOLATOR;
@@ -24,7 +23,6 @@ public final class VolumePanelMotion {
     public SpringAnimation singleShowSpringAnimation;
     public final StoreInteractor storeInteractor = new StoreInteractor(null, null, 3, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +41,7 @@ public final class VolumePanelMotion {
 
     public static SpringAnimation getSeekBarKeyDownAnimation(final View view) {
         SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.SCALE_X);
-        springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$getSeekBarKeyDownAnimation$1
+        springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion.getSeekBarKeyDownAnimation.1
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 view.setScaleY(f);
@@ -58,7 +56,7 @@ public final class VolumePanelMotion {
 
     public static SpringAnimation getSeekBarKeyUpAnimation(final View view) {
         SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.SCALE_X);
-        springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$getSeekBarKeyUpAnimation$1
+        springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion.getSeekBarKeyUpAnimation.1
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 view.setScaleY(f);
@@ -102,15 +100,15 @@ public final class VolumePanelMotion {
     }
 
     public static AnimatorSet getSettingButtonRotateAnimation(View view, boolean z) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "rotation", view.getRotation(), z ? 0.0f : -90.0f);
-        ofFloat.setDuration(400L);
-        ofFloat.setInterpolator(SETTING_BUTTON_ROTATION_INTERPOLATOR);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "alpha", view.getAlpha(), z ? 1.0f : 0.0f);
-        ofFloat2.setDuration(100L);
-        ofFloat2.setInterpolator(new LinearInterpolator());
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "rotation", view.getRotation(), z ? 0.0f : -90.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.setInterpolator(SETTING_BUTTON_ROTATION_INTERPOLATOR);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "alpha", view.getAlpha(), z ? 1.0f : 0.0f);
+        objectAnimatorOfFloat2.setDuration(100L);
+        objectAnimatorOfFloat2.setInterpolator(new LinearInterpolator());
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setStartDelay(z ? 50 : 0);
         return animatorSet;
     }

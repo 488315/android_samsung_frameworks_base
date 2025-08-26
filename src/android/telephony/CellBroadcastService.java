@@ -15,6 +15,7 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -52,8 +53,8 @@ public abstract class CellBroadcastService extends Service {
 
         /* JADX WARN: Incorrect type for immutable var: ssa=byte, code=byte[], for r3v11, types: [byte] */
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:110:0x01fc  */
-        /* JADX WARN: Removed duplicated region for block: B:120:0x020b A[ORIG_RETURN, RETURN] */
+        /* JADX WARN: Removed duplicated region for block: B:101:0x01fc  */
+        /* JADX WARN: Removed duplicated region for block: B:107:0x020b A[ORIG_RETURN, RETURN] */
         /* JADX WARN: Type inference failed for: r2v28 */
         /* JADX WARN: Type inference failed for: r2v8, types: [byte[]] */
         /* JADX WARN: Type inference failed for: r3v12 */
@@ -72,14 +73,183 @@ public abstract class CellBroadcastService extends Service {
         @Override // android.telephony.ICellBroadcastService
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void handleGsmCellBroadcastSms(int r18, byte[] r19) {
-            /*
-                Method dump skipped, instructions count: 530
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.telephony.CellBroadcastService.ICellBroadcastServiceWrapper.handleGsmCellBroadcastSms(int, byte[]):void");
+        public void handleGsmCellBroadcastSms(int i, byte[] bArr) {
+            byte[] bArr2;
+            int i2;
+            int i3;
+            byte[] bArr3;
+            int i4 = ((bArr[1] & 255) << 8) | (bArr[0] & 255);
+            byte[] bArr4 = new byte[i4];
+            ?? r4 = 4;
+            System.arraycopy(bArr, 4, bArr4, 0, i4);
+            SmsCbHeader smsCbHeaderCreateSmsCbHeader = CellBroadcastService.this.createSmsCbHeader(bArr4);
+            com.android.telephony.Rlog.d(CellBroadcastService.TAG, "header=" + smsCbHeaderCreateSmsCbHeader);
+            if (smsCbHeaderCreateSmsCbHeader == null) {
+                return;
+            }
+            int numberOfPages = smsCbHeaderCreateSmsCbHeader.getNumberOfPages();
+            if (numberOfPages == 1) {
+                if (smsCbHeaderCreateSmsCbHeader.isUmtsFormat()) {
+                    bArr3 = bArr4;
+                    i3 = i;
+                } else {
+                    try {
+                        com.android.telephony.Rlog.i(CellBroadcastService.TAG, "Single page. Not UMTS format");
+                        byte[] bArr5 = bArr[3];
+                        int i5 = (bArr5 & 255) << 8;
+                        byte b = bArr[2];
+                        int i6 = i5 | (b & 255);
+                        try {
+                            if (i6 > 0) {
+                                int i7 = i6 + 2;
+                                try {
+                                    byte[] bArr6 = new byte[i7];
+                                    bArr6[0] = b;
+                                    bArr6[1] = bArr5;
+                                    System.arraycopy(bArr, i4 + 4, bArr6, 2, i6);
+                                    CellBroadcastService.this.convertGsmToUmts(bArr4, bArr6, i4, i7, i);
+                                    return;
+                                } catch (IndexOutOfBoundsException e) {
+                                    e = e;
+                                    bArr5 = bArr4;
+                                    i2 = i;
+                                    bArr2 = bArr5;
+                                    com.android.telephony.Rlog.e(CellBroadcastService.TAG, "Error in decoding SMS CB pdu " + e.toString());
+                                    CellBroadcastService.this.onGsmCellBroadcastSms(i2, bArr2);
+                                    return;
+                                }
+                            }
+                            bArr5 = bArr4;
+                            if (smsCbHeaderCreateSmsCbHeader.getServiceCategory() == 4400) {
+                                CellBroadcastService.this.convertGsmToUmts(bArr5, null, i4, 0, i);
+                                return;
+                            }
+                            if (smsCbHeaderCreateSmsCbHeader.getEtwsInfo() != null && i4 > 56) {
+                                com.android.telephony.Rlog.i(CellBroadcastService.TAG, "Remove padding bit and convert GSM to UMTS.");
+                                int i8 = i4 - 1;
+                                while (i8 >= 0 && bArr5[i8] == 0) {
+                                    i8--;
+                                    i4--;
+                                }
+                                i2 = i;
+                                try {
+                                    CellBroadcastService.this.convertGsmToUmts(bArr5, null, i4, 0, i2);
+                                    return;
+                                } catch (IndexOutOfBoundsException e2) {
+                                    e = e2;
+                                    bArr2 = bArr5;
+                                    com.android.telephony.Rlog.e(CellBroadcastService.TAG, "Error in decoding SMS CB pdu " + e.toString());
+                                    CellBroadcastService.this.onGsmCellBroadcastSms(i2, bArr2);
+                                    return;
+                                }
+                            }
+                            i3 = i;
+                            bArr3 = bArr5;
+                        } catch (IndexOutOfBoundsException e3) {
+                            e = e3;
+                        }
+                    } catch (IndexOutOfBoundsException e4) {
+                        e = e4;
+                        bArr2 = bArr4;
+                        i2 = i;
+                    }
+                }
+                com.android.telephony.Rlog.d(CellBroadcastService.TAG, "Converting is not needed");
+                CellBroadcastService.this.onGsmCellBroadcastSms(i3, bArr3);
+                return;
+            }
+            int i9 = i;
+            if (numberOfPages > 1) {
+                SmsCbConcatInfo smsCbConcatInfo = new SmsCbConcatInfo(smsCbHeaderCreateSmsCbHeader, System.currentTimeMillis(), i9);
+                byte[][] bArr7 = (byte[][]) CellBroadcastService.this.mSmsCbPageMap.get(smsCbConcatInfo);
+                if (bArr7 == null) {
+                    bArr7 = new byte[numberOfPages][];
+                    CellBroadcastService.this.mSmsCbPageMap.put(smsCbConcatInfo, bArr7);
+                }
+                com.android.telephony.Rlog.d(CellBroadcastService.TAG, "pdus size=" + bArr7.length);
+                bArr7[smsCbHeaderCreateSmsCbHeader.getPageIndex() + (-1)] = bArr4;
+                for (byte[] bArr8 : bArr7) {
+                    if (bArr8 == null) {
+                        com.android.telephony.Rlog.d(CellBroadcastService.TAG, "still missing pdu");
+                        return;
+                    }
+                }
+                try {
+                    CellBroadcastService.this.mSmsCbPageMap.remove(smsCbConcatInfo);
+                    Iterator it = CellBroadcastService.this.mSmsCbPageMap.keySet().iterator();
+                    while (it.hasNext()) {
+                        if (((SmsCbConcatInfo) it.next()).overTime()) {
+                            com.android.telephony.Rlog.d(CellBroadcastService.TAG, "Remove saved message over 5min");
+                            it.remove();
+                        }
+                    }
+                    int i10 = ((bArr[3] & 255) << 8) | (bArr[2] & 255);
+                    try {
+                        if (i10 > 0) {
+                            try {
+                                com.android.telephony.Rlog.i(CellBroadcastService.TAG, "WAC included in GSM format multipage");
+                                int i11 = i10 + 2;
+                                byte[] bArr9 = new byte[i11];
+                                bArr9[0] = bArr[2];
+                                bArr9[1] = bArr[3];
+                                System.arraycopy(bArr, 4 + i4, bArr9, 2, i10);
+                                CellBroadcastService.this.convertGsmToUmtsForMultiPage(numberOfPages, bArr7, bArr9, i11, i9);
+                                return;
+                            } catch (RuntimeException e5) {
+                                e = e5;
+                                r4 = bArr7;
+                                i9 = i;
+                                com.android.telephony.Rlog.e(CellBroadcastService.TAG, "Error in decoding SMS CB pdu" + e.toString());
+                                if (r4 == 0) {
+                                    for (?? r2 : r4) {
+                                        if (r2 != 0) {
+                                            CellBroadcastService.this.onGsmCellBroadcastSms(i9, r2);
+                                        }
+                                    }
+                                    return;
+                                }
+                                return;
+                            }
+                        }
+                        r4 = bArr7;
+                        try {
+                            if (smsCbHeaderCreateSmsCbHeader.getEtwsInfo() != null) {
+                                com.android.telephony.Rlog.i(CellBroadcastService.TAG, "Remove padding bit and convert GSM to UMTS for multipage.");
+                                int i12 = numberOfPages - 1;
+                                byte[] bArr10 = r4[i12];
+                                int length = bArr10.length;
+                                int length2 = bArr10.length - 1;
+                                while (length2 >= 0 && bArr10[length2] == 0) {
+                                    length2--;
+                                    length--;
+                                }
+                                byte[] bArr11 = new byte[length];
+                                System.arraycopy(bArr10, 0, bArr11, 0, length);
+                                r4[i12] = bArr11;
+                                CellBroadcastService.this.convertGsmToUmtsForMultiPage(numberOfPages, r4, null, 0, i);
+                                return;
+                            }
+                            com.android.telephony.Rlog.i(CellBroadcastService.TAG, "No WAC. Deliver CB without converting.");
+                            for (?? r0 : r4) {
+                                CellBroadcastService.this.onGsmCellBroadcastSms(i, r0);
+                            }
+                        } catch (RuntimeException e6) {
+                            e = e6;
+                            com.android.telephony.Rlog.e(CellBroadcastService.TAG, "Error in decoding SMS CB pdu" + e.toString());
+                            if (r4 == 0) {
+                            }
+                        }
+                    } catch (RuntimeException e7) {
+                        e = e7;
+                    }
+                } catch (RuntimeException e8) {
+                    e = e8;
+                    r4 = bArr7;
+                }
+            } else {
+                CellBroadcastService.this.onGsmCellBroadcastSms(i9, bArr4);
+            }
         }
 
         @Override // android.telephony.ICellBroadcastService
@@ -92,7 +262,7 @@ public abstract class CellBroadcastService extends Service {
             CellBroadcastService.this.onCdmaScpMessage(i, list, str, new Consumer() { // from class: android.telephony.CellBroadcastService$ICellBroadcastServiceWrapper$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    RemoteCallback.this.sendResult((Bundle) obj);
+                    remoteCallback.sendResult((Bundle) obj);
                 }
             });
         }

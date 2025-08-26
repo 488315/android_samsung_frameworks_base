@@ -27,7 +27,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyLayoutKt {
     public static final void LazyLayout(final Function0 function0, final Modifier modifier, final LazyLayoutPrefetchState lazyLayoutPrefetchState, final Function2 function2, Composer composer, final int i, final int i2) {
@@ -68,8 +67,8 @@ public abstract class LazyLayoutKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.compose.foundation.lazy.layout.LazyLayout (LazyLayout.kt:52)");
             }
-            final MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function0, composerImpl);
-            LazySaveableStateHolderKt.LazySaveableStateHolderProvider(ComposableLambdaKt.rememberComposableLambda(-1488997347, new Function3() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1
+            final MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function0, composerImpl);
+            LazySaveableStateHolderKt.LazySaveableStateHolderProvider(ComposableLambdaKt.rememberComposableLambda(-1488997347, new Function3() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt.LazyLayout.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 /* JADX WARN: Multi-variable type inference failed */
                 {
@@ -78,20 +77,20 @@ public abstract class LazyLayoutKt {
 
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
-                    Modifier modifier2;
+                    Modifier modifierThen;
                     SaveableStateHolder saveableStateHolder = (SaveableStateHolder) obj;
                     Composer composer2 = (Composer) obj2;
                     ((Number) obj3).intValue();
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.foundation.lazy.layout.LazyLayout.<anonymous> (LazyLayout.kt:56)");
                     }
-                    final State<Function0> state = rememberUpdatedState;
+                    final State<Function0> state = mutableStateRememberUpdatedState;
                     ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                    Object rememberedValue = composerImpl2.rememberedValue();
+                    Object objRememberedValue = composerImpl2.rememberedValue();
                     Composer.Companion.getClass();
                     Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-                    if (rememberedValue == composer$Companion$Empty$1) {
-                        rememberedValue = new LazyLayoutItemContentFactory(saveableStateHolder, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$itemContentFactory$1$1
+                    if (objRememberedValue == composer$Companion$Empty$1) {
+                        objRememberedValue = new LazyLayoutItemContentFactory(saveableStateHolder, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$itemContentFactory$1$1
                             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             /* JADX WARN: Multi-variable type inference failed */
                             {
@@ -103,18 +102,18 @@ public abstract class LazyLayoutKt {
                                 return (LazyLayoutItemProvider) ((Function0) state.getValue()).invoke();
                             }
                         });
-                        composerImpl2.updateRememberedValue(rememberedValue);
+                        composerImpl2.updateRememberedValue(objRememberedValue);
                     }
-                    final LazyLayoutItemContentFactory lazyLayoutItemContentFactory = (LazyLayoutItemContentFactory) rememberedValue;
-                    Object rememberedValue2 = composerImpl2.rememberedValue();
-                    if (rememberedValue2 == composer$Companion$Empty$1) {
-                        rememberedValue2 = new SubcomposeLayoutState(new LazyLayoutItemReusePolicy(lazyLayoutItemContentFactory));
-                        composerImpl2.updateRememberedValue(rememberedValue2);
+                    final LazyLayoutItemContentFactory lazyLayoutItemContentFactory = (LazyLayoutItemContentFactory) objRememberedValue;
+                    Object objRememberedValue2 = composerImpl2.rememberedValue();
+                    if (objRememberedValue2 == composer$Companion$Empty$1) {
+                        objRememberedValue2 = new SubcomposeLayoutState(new LazyLayoutItemReusePolicy(lazyLayoutItemContentFactory));
+                        composerImpl2.updateRememberedValue(objRememberedValue2);
                     }
-                    final SubcomposeLayoutState subcomposeLayoutState = (SubcomposeLayoutState) rememberedValue2;
-                    if (LazyLayoutPrefetchState.this != null) {
+                    final SubcomposeLayoutState subcomposeLayoutState = (SubcomposeLayoutState) objRememberedValue2;
+                    if (lazyLayoutPrefetchState != null) {
                         composerImpl2.startReplaceGroup(204281539);
-                        final PrefetchScheduler prefetchScheduler = LazyLayoutPrefetchState.this.prefetchScheduler;
+                        final PrefetchScheduler prefetchScheduler = lazyLayoutPrefetchState.prefetchScheduler;
                         if (prefetchScheduler == null) {
                             composerImpl2.startReplaceGroup(6591363);
                             PrefetchScheduler_androidKt$RobolectricImpl$1 prefetchScheduler_androidKt$RobolectricImpl$1 = PrefetchScheduler_androidKt.RobolectricImpl;
@@ -128,14 +127,14 @@ public abstract class LazyLayoutKt {
                             } else {
                                 composerImpl2.startReplaceGroup(1213968648);
                                 View view = (View) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalView);
-                                boolean changed = composerImpl2.changed(view);
-                                Object rememberedValue3 = composerImpl2.rememberedValue();
-                                if (changed || rememberedValue3 == composer$Companion$Empty$1) {
-                                    rememberedValue3 = new AndroidPrefetchScheduler(view);
-                                    composerImpl2.updateRememberedValue(rememberedValue3);
+                                boolean zChanged = composerImpl2.changed(view);
+                                Object objRememberedValue3 = composerImpl2.rememberedValue();
+                                if (zChanged || objRememberedValue3 == composer$Companion$Empty$1) {
+                                    objRememberedValue3 = new AndroidPrefetchScheduler(view);
+                                    composerImpl2.updateRememberedValue(objRememberedValue3);
                                 }
                                 composerImpl2.end(false);
-                                prefetchScheduler = (AndroidPrefetchScheduler) rememberedValue3;
+                                prefetchScheduler = (AndroidPrefetchScheduler) objRememberedValue3;
                             }
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
@@ -144,13 +143,13 @@ public abstract class LazyLayoutKt {
                             composerImpl2.startReplaceGroup(6590278);
                         }
                         composerImpl2.end(false);
-                        LazyLayoutPrefetchState lazyLayoutPrefetchState2 = LazyLayoutPrefetchState.this;
+                        LazyLayoutPrefetchState lazyLayoutPrefetchState2 = lazyLayoutPrefetchState;
                         Object[] objArr = {lazyLayoutPrefetchState2, lazyLayoutItemContentFactory, subcomposeLayoutState, prefetchScheduler};
-                        boolean changed2 = composerImpl2.changed(lazyLayoutPrefetchState2) | composerImpl2.changedInstance(lazyLayoutItemContentFactory) | composerImpl2.changedInstance(subcomposeLayoutState) | composerImpl2.changedInstance(prefetchScheduler);
-                        final LazyLayoutPrefetchState lazyLayoutPrefetchState3 = LazyLayoutPrefetchState.this;
-                        Object rememberedValue4 = composerImpl2.rememberedValue();
-                        if (changed2 || rememberedValue4 == composer$Companion$Empty$1) {
-                            rememberedValue4 = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$1$1
+                        boolean zChanged2 = composerImpl2.changed(lazyLayoutPrefetchState2) | composerImpl2.changedInstance(lazyLayoutItemContentFactory) | composerImpl2.changedInstance(subcomposeLayoutState) | composerImpl2.changedInstance(prefetchScheduler);
+                        final LazyLayoutPrefetchState lazyLayoutPrefetchState3 = lazyLayoutPrefetchState;
+                        Object objRememberedValue4 = composerImpl2.rememberedValue();
+                        if (zChanged2 || objRememberedValue4 == composer$Companion$Empty$1) {
+                            objRememberedValue4 = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$1$1
                                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                 {
                                     super(1);
@@ -158,36 +157,36 @@ public abstract class LazyLayoutKt {
 
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj4) {
-                                    LazyLayoutPrefetchState.this.prefetchHandleProvider = new PrefetchHandleProvider(lazyLayoutItemContentFactory, subcomposeLayoutState, prefetchScheduler);
-                                    final LazyLayoutPrefetchState lazyLayoutPrefetchState4 = LazyLayoutPrefetchState.this;
+                                public final Object mo781invoke(Object obj4) {
+                                    lazyLayoutPrefetchState3.prefetchHandleProvider = new PrefetchHandleProvider(lazyLayoutItemContentFactory, subcomposeLayoutState, prefetchScheduler);
+                                    final LazyLayoutPrefetchState lazyLayoutPrefetchState4 = lazyLayoutPrefetchState3;
                                     return new DisposableEffectResult() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$1$1$invoke$$inlined$onDispose$1
                                         @Override // androidx.compose.runtime.DisposableEffectResult
                                         public final void dispose() {
-                                            LazyLayoutPrefetchState.this.prefetchHandleProvider = null;
+                                            lazyLayoutPrefetchState4.prefetchHandleProvider = null;
                                         }
                                     };
                                 }
                             };
-                            composerImpl2.updateRememberedValue(rememberedValue4);
+                            composerImpl2.updateRememberedValue(objRememberedValue4);
                         }
-                        EffectsKt.DisposableEffect(objArr, (Function1) rememberedValue4, (Composer) composerImpl2);
+                        EffectsKt.DisposableEffect(objArr, (Function1) objRememberedValue4, (Composer) composerImpl2);
                         composerImpl2.end(false);
                     } else {
                         composerImpl2.startReplaceGroup(204710145);
                         composerImpl2.end(false);
                     }
-                    Modifier modifier3 = modifier;
-                    LazyLayoutPrefetchState lazyLayoutPrefetchState4 = LazyLayoutPrefetchState.this;
+                    Modifier modifier2 = modifier;
+                    LazyLayoutPrefetchState lazyLayoutPrefetchState4 = lazyLayoutPrefetchState;
                     int i6 = LazyLayoutPrefetchStateKt.$r8$clinit;
-                    if (lazyLayoutPrefetchState4 == null || (modifier2 = modifier3.then(new TraversablePrefetchStateModifierElement(lazyLayoutPrefetchState4))) == null) {
-                        modifier2 = modifier3;
+                    if (lazyLayoutPrefetchState4 == null || (modifierThen = modifier2.then(new TraversablePrefetchStateModifierElement(lazyLayoutPrefetchState4))) == null) {
+                        modifierThen = modifier2;
                     }
-                    boolean changed3 = composerImpl2.changed(lazyLayoutItemContentFactory) | composerImpl2.changed(function2);
+                    boolean zChanged3 = composerImpl2.changed(lazyLayoutItemContentFactory) | composerImpl2.changed(function2);
                     final Function2 function22 = function2;
-                    Object rememberedValue5 = composerImpl2.rememberedValue();
-                    if (changed3 || rememberedValue5 == composer$Companion$Empty$1) {
-                        rememberedValue5 = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$2$1
+                    Object objRememberedValue5 = composerImpl2.rememberedValue();
+                    if (zChanged3 || objRememberedValue5 == composer$Companion$Empty$1) {
+                        objRememberedValue5 = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$1$2$1
                             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             {
                                 super(2);
@@ -196,12 +195,12 @@ public abstract class LazyLayoutKt {
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj4, Object obj5) {
                                 long j = ((Constraints) obj5).value;
-                                return (MeasureResult) function22.invoke(new LazyLayoutMeasureScopeImpl(LazyLayoutItemContentFactory.this, (SubcomposeMeasureScope) obj4), Constraints.m813boximpl(j));
+                                return (MeasureResult) function22.invoke(new LazyLayoutMeasureScopeImpl(lazyLayoutItemContentFactory, (SubcomposeMeasureScope) obj4), Constraints.m815boximpl(j));
                             }
                         };
-                        composerImpl2.updateRememberedValue(rememberedValue5);
+                        composerImpl2.updateRememberedValue(objRememberedValue5);
                     }
-                    SubcomposeLayoutKt.SubcomposeLayout(subcomposeLayoutState, modifier2, (Function2) rememberedValue5, composerImpl2, 8, 0);
+                    SubcomposeLayoutKt.SubcomposeLayout(subcomposeLayoutState, modifierThen, (Function2) objRememberedValue5, composerImpl2, 8, 0);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -216,9 +215,9 @@ public abstract class LazyLayoutKt {
         }
         final Modifier modifier2 = modifier;
         final LazyLayoutPrefetchState lazyLayoutPrefetchState2 = lazyLayoutPrefetchState;
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutKt.LazyLayout.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -227,7 +226,7 @@ public abstract class LazyLayoutKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    LazyLayoutKt.LazyLayout(Function0.this, modifier2, lazyLayoutPrefetchState2, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
+                    LazyLayoutKt.LazyLayout(function0, modifier2, lazyLayoutPrefetchState2, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
                     return Unit.INSTANCE;
                 }
             };

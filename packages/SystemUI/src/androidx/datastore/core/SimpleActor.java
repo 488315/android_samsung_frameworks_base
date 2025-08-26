@@ -9,7 +9,6 @@ import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SimpleActor {
     public final Function2 consumeMessage;
@@ -25,17 +24,17 @@ public final class SimpleActor {
             job.invokeOnCompletion(new Function1() { // from class: androidx.datastore.core.SimpleActor$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     Throwable th = (Throwable) obj;
-                    Function1.this.mo779invoke(th);
+                    function1.mo781invoke(th);
                     BufferedChannel bufferedChannel = this.messageQueue;
                     bufferedChannel.closeOrCancelImpl(th, false);
                     while (true) {
-                        Object m3459getOrNullimpl = ChannelResult.m3459getOrNullimpl(bufferedChannel.mo3455tryReceivePtdJZtk());
-                        if (m3459getOrNullimpl == null) {
+                        Object objM3479getOrNullimpl = ChannelResult.m3479getOrNullimpl(bufferedChannel.mo3475tryReceivePtdJZtk());
+                        if (objM3479getOrNullimpl == null) {
                             return Unit.INSTANCE;
                         }
-                        function2.invoke(m3459getOrNullimpl, th);
+                        function2.invoke(objM3479getOrNullimpl, th);
                     }
                 }
             });

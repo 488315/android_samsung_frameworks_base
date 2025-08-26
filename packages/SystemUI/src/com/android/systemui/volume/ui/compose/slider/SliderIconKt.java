@@ -29,7 +29,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class SliderIconKt {
     public static final void SliderIcon(final ComposableLambdaImpl composableLambdaImpl, boolean z, final Modifier.Companion companion, Composer composer, final int i) {
@@ -47,11 +46,11 @@ public abstract class SliderIconKt {
             }
             Alignment.Companion.getClass();
             BiasAlignment biasAlignment = Alignment.Companion.Center;
-            Modifier fillMaxSize = SizeKt.fillMaxSize(companion, 1.0f);
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
+            Modifier modifierFillMaxSize = SizeKt.fillMaxSize(companion, 1.0f);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, fillMaxSize);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierFillMaxSize);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -64,13 +63,13 @@ public abstract class SliderIconKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             final BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             z2 = z;
             AnimatedVisibilityKt.AnimatedVisibility(z2, null, EnterExitTransitionKt.fadeIn$default(AnimationSpecKt.tween$default(100, 33, null, 4), 2), EnterExitTransitionKt.fadeOut$default(AnimationSpecKt.tween$default(50, 0, null, 6), 2), null, ComposableLambdaKt.rememberComposableLambda(-513573419, new Function3() { // from class: com.android.systemui.volume.ui.compose.slider.SliderIconKt$SliderIcon$1$1
@@ -81,7 +80,7 @@ public abstract class SliderIconKt {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.volume.ui.compose.slider.SliderIcon.<anonymous>.<anonymous> (SliderIcon.kt:41)");
                     }
-                    Function3.this.invoke(boxScopeInstance, composer2, 0);
+                    composableLambdaImpl.invoke(boxScopeInstance, composer2, 0);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -93,17 +92,17 @@ public abstract class SliderIconKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(z2, companion, i) { // from class: com.android.systemui.volume.ui.compose.slider.SliderIconKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(z2, companion, i) { // from class: com.android.systemui.volume.ui.compose.slider.SliderIconKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ boolean f$1;
                 public final /* synthetic */ Modifier.Companion f$2;
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(7);
-                    SliderIconKt.SliderIcon(ComposableLambdaImpl.this, this.f$1, this.f$2, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(7);
+                    SliderIconKt.SliderIcon(this.f$0, this.f$1, this.f$2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

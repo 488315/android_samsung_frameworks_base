@@ -55,9 +55,9 @@ public interface IGraphicsStats extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGraphicsStats)) {
-                return (IGraphicsStats) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGraphicsStats)) {
+                return (IGraphicsStats) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,18 +87,18 @@ public interface IGraphicsStats extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IGraphicsStatsCallback asInterface = IGraphicsStatsCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IGraphicsStatsCallback iGraphicsStatsCallbackAsInterface = IGraphicsStatsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ParcelFileDescriptor requestBufferForProcess = requestBufferForProcess(readString, asInterface);
+                ParcelFileDescriptor parcelFileDescriptorRequestBufferForProcess = requestBufferForProcess(string, iGraphicsStatsCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(requestBufferForProcess, 1);
+                parcel2.writeTypedObject(parcelFileDescriptorRequestBufferForProcess, 1);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int requestRenderEngineFor = requestRenderEngineFor(readString2);
+                int iRequestRenderEngineFor = requestRenderEngineFor(string2);
                 parcel2.writeNoException();
-                parcel2.writeInt(requestRenderEngineFor);
+                parcel2.writeInt(iRequestRenderEngineFor);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -123,34 +123,34 @@ public interface IGraphicsStats extends IInterface {
 
             @Override // android.view.IGraphicsStats
             public ParcelFileDescriptor requestBufferForProcess(String str, IGraphicsStatsCallback iGraphicsStatsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iGraphicsStatsCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iGraphicsStatsCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IGraphicsStats
             public int requestRenderEngineFor(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

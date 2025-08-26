@@ -13,7 +13,6 @@ import com.samsung.android.knox.KnoxInternalFeature;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.log.IAuditLog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AuditLog {
     public static final String ACTION_AUDIT_CRITICAL_SIZE = "com.samsung.android.knox.intent.action.AUDIT_CRITICAL_SIZE";
@@ -46,10 +45,10 @@ public class AuditLog {
 
     public static void a(int i, boolean z, int i2, String str, String str2) {
         EnterpriseLicenseManager.log(new ContextInfo(Binder.getCallingUid()), "AuditLog.a");
-        IAuditLog asInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
-        if (asInterface != null) {
+        IAuditLog iAuditLogAsInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
+        if (iAuditLogAsInterface != null) {
             try {
-                asInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 1));
+                iAuditLogAsInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 1));
             } catch (RemoteException unused) {
                 Log.w(TAG, "Access to auditLogger not allowed");
             }
@@ -58,10 +57,10 @@ public class AuditLog {
 
     public static void c(int i, boolean z, int i2, String str, String str2) {
         EnterpriseLicenseManager.log(new ContextInfo(Binder.getCallingUid()), "AuditLog.c");
-        IAuditLog asInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
-        if (asInterface != null) {
+        IAuditLog iAuditLogAsInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
+        if (iAuditLogAsInterface != null) {
             try {
-                asInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 2));
+                iAuditLogAsInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 2));
             } catch (RemoteException unused) {
                 Log.w(TAG, "Access to auditLogger not allowed");
             }
@@ -74,10 +73,10 @@ public class AuditLog {
 
     public static void e(int i, boolean z, int i2, String str, String str2) {
         EnterpriseLicenseManager.log(new ContextInfo(Binder.getCallingUid()), "AuditLog.e");
-        IAuditLog asInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
-        if (asInterface != null) {
+        IAuditLog iAuditLogAsInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
+        if (iAuditLogAsInterface != null) {
             try {
-                asInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 3));
+                iAuditLogAsInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 3));
             } catch (RemoteException unused) {
                 Log.d(TAG, "Access to auditLogger not allowed");
             }
@@ -101,10 +100,10 @@ public class AuditLog {
 
     public static void n(int i, boolean z, int i2, String str, String str2) {
         EnterpriseLicenseManager.log(new ContextInfo(Binder.getCallingUid()), "AuditLog.n");
-        IAuditLog asInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
-        if (asInterface != null) {
+        IAuditLog iAuditLogAsInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
+        if (iAuditLogAsInterface != null) {
             try {
-                asInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 5));
+                iAuditLogAsInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 5));
             } catch (RemoteException unused) {
                 Log.d(TAG, "Access to auditLogger not allowed");
             }
@@ -113,10 +112,10 @@ public class AuditLog {
 
     public static void w(int i, boolean z, int i2, String str, String str2) {
         EnterpriseLicenseManager.log(new ContextInfo(Binder.getCallingUid()), "AuditLog.w");
-        IAuditLog asInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
-        if (asInterface != null) {
+        IAuditLog iAuditLogAsInterface = IAuditLog.Stub.asInterface(ServiceManager.getService("auditlog"));
+        if (iAuditLogAsInterface != null) {
             try {
-                asInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 4));
+                iAuditLogAsInterface.logEventForLegacyComponents(i2, new LegacyEvent(-1, str, Integer.valueOf(i), str2, null, Boolean.valueOf(z), 4));
             } catch (RemoteException unused) {
                 Log.d(TAG, "Access to auditLogger not allowed");
             }

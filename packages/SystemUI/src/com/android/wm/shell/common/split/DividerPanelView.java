@@ -2,6 +2,7 @@ package com.android.wm.shell.common.split;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -24,7 +25,6 @@ import com.airbnb.lottie.value.SimpleLottieValueCallback;
 import com.android.systemui.R;
 import java.lang.reflect.Field;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DividerPanelView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -43,23 +43,23 @@ public class DividerPanelView extends LinearLayout {
 
     public final void createLottieTask(final LottieAnimationView lottieAnimationView, final String str) {
         Slog.d("DividerPanelView", "createLottieTask: asset=".concat(str));
-        final LottieTask fromAsset = LottieCompositionFactory.fromAsset(getContext(), str);
-        fromAsset.addListener(new LottieListener() { // from class: com.android.wm.shell.common.split.DividerPanelView$$ExternalSyntheticLambda0
+        final LottieTask lottieTaskFromAsset = LottieCompositionFactory.fromAsset(getContext(), str);
+        lottieTaskFromAsset.addListener(new LottieListener() { // from class: com.android.wm.shell.common.split.DividerPanelView$$ExternalSyntheticLambda0
             @Override // com.airbnb.lottie.LottieListener
             public final void onResult(Object obj) {
                 final LottieComposition lottieComposition = (LottieComposition) obj;
                 int i = DividerPanelView.$r8$clinit;
-                final DividerPanelView dividerPanelView = DividerPanelView.this;
+                final DividerPanelView dividerPanelView = this.f$0;
                 dividerPanelView.getClass();
                 final String str2 = str;
                 Slog.d("DividerPanelView", "createLottieTask: onResult, asset=".concat(str2));
                 Handler handler = dividerPanelView.mHandler;
-                final LottieTask lottieTask = fromAsset;
+                final LottieTask lottieTask = lottieTaskFromAsset;
                 final LottieAnimationView lottieAnimationView2 = lottieAnimationView;
                 handler.post(new Runnable() { // from class: com.android.wm.shell.common.split.DividerPanelView$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        DividerPanelView dividerPanelView2 = DividerPanelView.this;
+                    public final void run() throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
+                        DividerPanelView dividerPanelView2 = dividerPanelView;
                         LottieTask lottieTask2 = lottieTask;
                         String str3 = str2;
                         LottieAnimationView lottieAnimationView3 = lottieAnimationView2;
@@ -79,7 +79,7 @@ public class DividerPanelView extends LinearLayout {
                 });
             }
         });
-        fromAsset.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.common.split.DividerPanelView$$ExternalSyntheticLambda1
+        lottieTaskFromAsset.addFailureListener(new LottieListener() { // from class: com.android.wm.shell.common.split.DividerPanelView$$ExternalSyntheticLambda1
             @Override // com.airbnb.lottie.LottieListener
             public final void onResult(Object obj) {
                 int i = DividerPanelView.$r8$clinit;
@@ -95,7 +95,7 @@ public class DividerPanelView extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mContainer = (LinearLayout) findViewById(R.id.divider_panel_container);
         this.mRotatingIcon = (LottieAnimationView) findViewById(R.id.rotating_icon);
@@ -104,10 +104,10 @@ public class DividerPanelView extends LinearLayout {
         this.mChangeLayoutIcon = (LottieAnimationView) findViewById(R.id.change_layout_icon);
         int color = this.mContext.getResources().getColor(R.color.mw_divider_panel_button_color_bg);
         this.mContainer.semSetBlurInfo(new SemBlurInfo.Builder(0).setRadius(125).setBackgroundColor(Color.argb(204, Color.red(color), Color.green(color), Color.blue(color))).setBackgroundCornerRadius(this.mContext.getResources().getDimensionPixelSize(R.dimen.mw_divider_panel_buttons_radius)).build());
-        boolean isNightModeActive = this.mContext.getResources().getConfiguration().isNightModeActive();
+        boolean zIsNightModeActive = this.mContext.getResources().getConfiguration().isNightModeActive();
         if (Settings.System.getInt(this.mContext.getContentResolver(), "wallpapertheme_state", 0) == 1) {
             this.mColorTintList = this.mContext.getResources().getColorStateList(17171431, null);
-        } else if (isNightModeActive) {
+        } else if (zIsNightModeActive) {
             this.mColorTintList = this.mContext.getResources().getColorStateList(R.color.mw_caption_button_icon_color_dark, null);
         } else {
             this.mColorTintList = this.mContext.getResources().getColorStateList(R.color.mw_caption_button_icon_color_light, null);

@@ -592,6 +592,7 @@
     <string name="call_notification_screening_text">正在過濾來電</string>
     <string name="camera_restrict">安全性政策可防止相機的使用。</string>
     <string name="can_not_install_app">無法安裝應用程式。未優化應用程式以在 %s 中使用。</string>
+    <string name="can_not_open_searcle_on_the_external_display">無法在連接的顯示器上開啟 [一圈即搜]。</string>
     <string name="can_not_open_searcle_on_the_lockscreen">無法在鎖定螢幕上開啟 [一圈即搜]。</string>
     <string name="cannot_open_app_concentration_mode">無法開啟應用程式</string>
     <string name="capability_desc_canCaptureFingerprintGestures">可以擷取在裝置指紋感應器上執行的手勢。</string>
@@ -673,6 +674,7 @@
     <string name="common_secure_boot_nwlock_notification_text">不支援此 SIM 卡。</string>
     <string name="common_secure_boot_nwlock_notification_title">已插入的 SIM 卡無效</string>
     <string name="compat_restart_education_text">若此應用程式顯示不正確，請嘗試將其關閉，然後重新開啟。</string>
+    <string name="compat_restart_menu_education_text">若此應用程式顯示不正確，請從 [更多] 功能表中將其重新啟動。</string>
     <string name="concurrent_display_notification_active_content">「%1$s」正在使用雙螢幕顯示內容</string>
     <string name="concurrent_display_notification_active_title">已開啟雙螢幕功能</string>
     <string name="concurrent_display_notification_name">雙螢幕</string>
@@ -2916,7 +2918,7 @@
     <string name="satellite_notification_manual_title">要使用衛星訊息嗎？</string>
     <string name="satellite_notification_open_message">開啟「訊息」</string>
     <string name="satellite_notification_summary">你可在沒有流動/Wi-Fi 網絡的情況下收發訊息</string>
-    <string name="satellite_notification_summary_with_data">你可透過衛星傳送和接收訊息，以及使用有限數據</string>
+    <string name="satellite_notification_summary_with_data">你可透過衛星收發訊息和使用指定應用程式</string>
     <string name="satellite_notification_title">已自動連線至衛星</string>
     <string name="satellite_sos_available_notification_summary">在沒有流動網絡或 Wi-Fi 網絡的情況下，你可向緊急服務收發訊息，但你必須將「Google 訊息」設定為預設訊息應用程式。</string>
     <string name="satellite_sos_available_notification_title">「緊急衛星連接」現已推出</string>

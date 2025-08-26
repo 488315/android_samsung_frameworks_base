@@ -47,7 +47,6 @@ import com.android.systemui.widget.SystemUIButton;
 import com.android.systemui.widget.SystemUITextView;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewController {
     public final SystemUIButton mCallButton;
@@ -62,7 +61,7 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
     public final SystemUITextView mOwnerMessage;
     public final KeyguardUpdateMonitorCallback mUpdateCallback;
 
-    public static void $r8$lambda$1VSAFBvQGcSRZrvKolaNJsKzoQE(KeyguardFMMViewController keyguardFMMViewController) {
+    public static void $r8$lambda$1VSAFBvQGcSRZrvKolaNJsKzoQE(KeyguardFMMViewController keyguardFMMViewController) throws Resources.NotFoundException {
         LinearLayout linearLayout = (LinearLayout) ((KeyguardFMMView) keyguardFMMViewController.mView).findViewById(R.id.fmm_message);
         LinearLayout linearLayout2 = (LinearLayout) ((KeyguardFMMView) keyguardFMMViewController.mView).findViewById(R.id.fmm_phone);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
@@ -76,16 +75,16 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
         }
         linearLayout.setLayoutParams(layoutParams);
         linearLayout2.setLayoutParams(layoutParams2);
-        boolean isLandscapePolicyAllowed = keyguardFMMViewController.isLandscapePolicyAllowed();
+        boolean zIsLandscapePolicyAllowed = keyguardFMMViewController.isLandscapePolicyAllowed();
         Resources resources = keyguardFMMViewController.getResources();
         LinearLayout linearLayout3 = keyguardFMMViewController.mMessageArea;
         if (linearLayout3 != null) {
             LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) linearLayout3.getLayoutParams();
             layoutParams3.topMargin = resources.getDimensionPixelSize(R.dimen.kg_biometric_view_height) + SecurityUtils.getLockIconTopMargin(keyguardFMMViewController.getContext());
-            layoutParams3.weight = isLandscapePolicyAllowed ? 0.0f : 1.0f;
-            keyguardFMMViewController.mMessageArea.setGravity(isLandscapePolicyAllowed ? 49 : 17);
+            layoutParams3.weight = zIsLandscapePolicyAllowed ? 0.0f : 1.0f;
+            keyguardFMMViewController.mMessageArea.setGravity(zIsLandscapePolicyAllowed ? 49 : 17);
             int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
-            if (isLandscapePolicyAllowed) {
+            if (zIsLandscapePolicyAllowed) {
                 keyguardFMMViewController.mMessageArea.setPadding(0, 0, dimensionPixelSize, 0);
             }
             keyguardFMMViewController.mMessageArea.setLayoutParams(layoutParams3);
@@ -99,7 +98,7 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
     }
 
     /* renamed from: $r8$lambda$51-rHf8MBSE3E33VJ61TtShVzqs, reason: not valid java name */
-    public static /* synthetic */ void m952$r8$lambda$51rHf8MBSE3E33VJ61TtShVzqs(KeyguardFMMViewController keyguardFMMViewController, int i, byte[] bArr, boolean z, int i2) {
+    public static /* synthetic */ void m954$r8$lambda$51rHf8MBSE3E33VJ61TtShVzqs(KeyguardFMMViewController keyguardFMMViewController, int i, byte[] bArr, boolean z, int i2) {
         ((KeyguardFMMView) keyguardFMMViewController.mView).setPasswordEntryInputEnabled(true);
         keyguardFMMViewController.mPendingLockCheck = null;
         keyguardFMMViewController.onPasswordChecked(i, i2, z, true);
@@ -113,11 +112,11 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.keyguard.KeyguardFMMViewController$2] */
+    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardFMMViewController$2] */
     public KeyguardFMMViewController(KeyguardFMMView keyguardFMMView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, EmergencyButtonController emergencyButtonController, FalsingCollector falsingCollector, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier, InputManager inputManager) {
         super(keyguardFMMView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, emergencyButtonController, falsingCollector, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor, bouncerHapticPlayer, userActivityNotifier, inputManager);
         this.mHandler = new Handler(Looper.getMainLooper());
-        this.mOrientation = 1;
+        this.mOrientation = 0;
         this.mUpdateCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.KeyguardFMMViewController.1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onRemoteLockInfoChanged() {
@@ -149,9 +148,9 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
             systemUITextView.setSelected(true);
         }
         setFMMInfo();
-        View findViewById = ((KeyguardFMMView) this.mView).findViewById(R.id.key_enter);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(new KeyguardFMMViewController$$ExternalSyntheticLambda4(this, 1));
+        View viewFindViewById = ((KeyguardFMMView) this.mView).findViewById(R.id.key_enter);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(new KeyguardFMMViewController$$ExternalSyntheticLambda4(this, 1));
         }
         updateDrawableTint();
         updateFMMLayout();
@@ -162,15 +161,19 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
         return R.id.keyguard_fmm_view;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0095  */
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onPasswordChecked(int i, int i2, boolean z, boolean z2) {
-        long j;
+        long lockoutAttemptDeadline;
         KeyguardSecMessageAreaController keyguardSecMessageAreaController;
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onPasswordChecked ", i2, " / ", z, " / ");
-        m.append(z2);
-        m.append(" / ");
-        m.append(i);
-        Log.d("KeyguardFMMView", m.toString());
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onPasswordChecked ", i2, " / ", z, " / ");
+        sbM.append(z2);
+        sbM.append(" / ");
+        sbM.append(i);
+        Log.d("KeyguardFMMView", sbM.toString());
         if (z) {
             this.mLockPatternUtils.saveRemoteLockPassword(0, (byte[]) null, i);
             Intent intent = new Intent("com.samsung.Keyguard.UNLOCK_FMM_ALERT");
@@ -184,26 +187,19 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
                 KeyguardUnlockInfo.setUnlockTriggerByRemoteLock(0);
                 getKeyguardSecurityCallback().dismiss(true, i, this.mSecurityMode);
             }
-        } else {
-            if (z2) {
-                this.mKeyguardUpdateMonitor.addFailedFMMUnlockAttempt(i);
-                int failedFMMUnlockAttempt = this.mKeyguardUpdateMonitor.getFailedFMMUnlockAttempt(i);
-                if ((failedFMMUnlockAttempt == 5 || failedFMMUnlockAttempt > 9) && !((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isDeviceDisabledForMaxFailedAttempt()) {
-                    j = this.mKeyguardUpdateMonitor.setLockoutAttemptDeadline(i, PluginLockInstancePolicy.DISABLED_BY_SUB_USER);
-                    handleAttemptLockout(j);
-                    if (j == 0 && (keyguardSecMessageAreaController = this.mMessageAreaController) != null) {
-                        Resources resources = getResources();
-                        ((KeyguardFMMView) this.mView).getClass();
-                        keyguardSecMessageAreaController.setMessage(resources.getString(R.string.kg_incorrect_pin), false);
-                        keyguardSecMessageAreaController.displayFailedAnimation();
-                    }
-                }
+        } else if (z2) {
+            this.mKeyguardUpdateMonitor.addFailedFMMUnlockAttempt(i);
+            int failedFMMUnlockAttempt = this.mKeyguardUpdateMonitor.getFailedFMMUnlockAttempt(i);
+            if ((failedFMMUnlockAttempt == 5 || failedFMMUnlockAttempt > 9) && !((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isDeviceDisabledForMaxFailedAttempt()) {
+                lockoutAttemptDeadline = this.mKeyguardUpdateMonitor.setLockoutAttemptDeadline(i, PluginLockInstancePolicy.DISABLED_BY_SUB_USER);
+                handleAttemptLockout(lockoutAttemptDeadline);
+            } else {
+                lockoutAttemptDeadline = 0;
             }
-            j = 0;
-            if (j == 0) {
-                Resources resources2 = getResources();
+            if (lockoutAttemptDeadline == 0 && (keyguardSecMessageAreaController = this.mMessageAreaController) != null) {
+                Resources resources = getResources();
                 ((KeyguardFMMView) this.mView).getClass();
-                keyguardSecMessageAreaController.setMessage(resources2.getString(R.string.kg_incorrect_pin), false);
+                keyguardSecMessageAreaController.setMessage(resources.getString(R.string.kg_incorrect_pin), false);
                 keyguardSecMessageAreaController.displayFailedAnimation();
             }
         }
@@ -289,7 +285,7 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
             this.mCallButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticLambda3
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    KeyguardFMMViewController keyguardFMMViewController = KeyguardFMMViewController.this;
+                    KeyguardFMMViewController keyguardFMMViewController = this.f$0;
                     String str = fMMPhone;
                     keyguardFMMViewController.getClass();
                     Intent intent = new Intent("android.intent.action.CALL_PRIVILEGED", Uri.fromParts("tel", str, null));
@@ -313,10 +309,10 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
         if (this.mCallButton == null) {
             return;
         }
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
         for (Drawable drawable : this.mCallButton.getCompoundDrawables()) {
             if (drawable != null) {
-                drawable.setColorFilter(isWhiteKeyguardWallpaper ? getResources().getColor(R.color.kg_fmm_drawable_tint_white_bg) : getResources().getColor(R.color.kg_fmm_drawable_tint), PorterDuff.Mode.SRC_IN);
+                drawable.setColorFilter(zIsWhiteKeyguardWallpaper ? getResources().getColor(R.color.kg_fmm_drawable_tint_white_bg) : getResources().getColor(R.color.kg_fmm_drawable_tint), PorterDuff.Mode.SRC_IN);
             }
         }
     }
@@ -324,8 +320,8 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
     public final void updateFMMLayout() {
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
-            public final void run() {
-                KeyguardFMMViewController.$r8$lambda$1VSAFBvQGcSRZrvKolaNJsKzoQE(KeyguardFMMViewController.this);
+            public final void run() throws Resources.NotFoundException {
+                KeyguardFMMViewController.$r8$lambda$1VSAFBvQGcSRZrvKolaNJsKzoQE(this.f$0);
             }
         }, 100L);
     }
@@ -349,7 +345,7 @@ public class KeyguardFMMViewController extends KeyguardSecPinBasedInputViewContr
         if (passwordText.length > 3) {
             this.mPendingLockCheck = LockPatternChecker.checkRemoteLockPassword(this.mLockPatternUtils, 0, passwordText, selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticLambda1
                 public final void onChecked(boolean z, int i) {
-                    KeyguardFMMViewController.m952$r8$lambda$51rHf8MBSE3E33VJ61TtShVzqs(KeyguardFMMViewController.this, selectedUserId, passwordText, z, i);
+                    KeyguardFMMViewController.m954$r8$lambda$51rHf8MBSE3E33VJ61TtShVzqs(this.f$0, selectedUserId, passwordText, z, i);
                 }
             });
             return;

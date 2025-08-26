@@ -14,7 +14,6 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat$Action;
 import androidx.core.graphics.drawable.IconCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationCompat$CallStyle extends NotificationCompat$Style {
     public Integer mAnswerButtonColor;
@@ -28,7 +27,6 @@ public class NotificationCompat$CallStyle extends NotificationCompat$Style {
     public IconCompat mVerificationIcon;
     public CharSequence mVerificationText;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api31Impl {
         private Api31Impl() {
         }
@@ -99,37 +97,37 @@ public class NotificationCompat$CallStyle extends NotificationCompat$Style {
 
     @Override // androidx.core.app.NotificationCompat$Style
     public final void apply(NotificationCompatBuilder notificationCompatBuilder) {
-        Notification.CallStyle forIncomingCall;
+        Notification.CallStyle callStyleForIncomingCall;
         int i = this.mCallType;
         if (i == 1) {
-            forIncomingCall = Api31Impl.forIncomingCall(this.mPerson.toAndroidPerson(), this.mDeclineIntent, this.mAnswerIntent);
+            callStyleForIncomingCall = Api31Impl.forIncomingCall(this.mPerson.toAndroidPerson(), this.mDeclineIntent, this.mAnswerIntent);
         } else if (i == 2) {
-            forIncomingCall = Api31Impl.forOngoingCall(this.mPerson.toAndroidPerson(), this.mHangUpIntent);
+            callStyleForIncomingCall = Api31Impl.forOngoingCall(this.mPerson.toAndroidPerson(), this.mHangUpIntent);
         } else if (i != 3) {
             if (Log.isLoggable("NotifCompat", 3)) {
                 Log.d("NotifCompat", "Unrecognized call type in CallStyle: " + String.valueOf(this.mCallType));
             }
-            forIncomingCall = null;
+            callStyleForIncomingCall = null;
         } else {
-            forIncomingCall = Api31Impl.forScreeningCall(this.mPerson.toAndroidPerson(), this.mHangUpIntent, this.mAnswerIntent);
+            callStyleForIncomingCall = Api31Impl.forScreeningCall(this.mPerson.toAndroidPerson(), this.mHangUpIntent, this.mAnswerIntent);
         }
-        if (forIncomingCall != null) {
-            forIncomingCall.setBuilder(notificationCompatBuilder.mBuilder);
+        if (callStyleForIncomingCall != null) {
+            callStyleForIncomingCall.setBuilder(notificationCompatBuilder.mBuilder);
             Integer num = this.mAnswerButtonColor;
             if (num != null) {
-                Api31Impl.setAnswerButtonColorHint(forIncomingCall, num.intValue());
+                Api31Impl.setAnswerButtonColorHint(callStyleForIncomingCall, num.intValue());
             }
             Integer num2 = this.mDeclineButtonColor;
             if (num2 != null) {
-                Api31Impl.setDeclineButtonColorHint(forIncomingCall, num2.intValue());
+                Api31Impl.setDeclineButtonColorHint(callStyleForIncomingCall, num2.intValue());
             }
-            Api31Impl.setVerificationText(forIncomingCall, this.mVerificationText);
+            Api31Impl.setVerificationText(callStyleForIncomingCall, this.mVerificationText);
             IconCompat iconCompat = this.mVerificationIcon;
             if (iconCompat != null) {
                 Context context = this.mBuilder.mContext;
-                Api31Impl.setVerificationIcon(forIncomingCall, iconCompat.toIcon$1());
+                Api31Impl.setVerificationIcon(callStyleForIncomingCall, iconCompat.toIcon$1());
             }
-            Api31Impl.setIsVideo(forIncomingCall, this.mIsVideo);
+            Api31Impl.setIsVideo(callStyleForIncomingCall, this.mIsVideo);
         }
     }
 
@@ -145,9 +143,9 @@ public class NotificationCompat$CallStyle extends NotificationCompat$Style {
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         spannableStringBuilder.append((CharSequence) this.mBuilder.mContext.getResources().getString(i2));
         spannableStringBuilder.setSpan(new ForegroundColorSpan(num.intValue()), 0, spannableStringBuilder.length(), 18);
-        NotificationCompat$Action build = new NotificationCompat$Action.Builder(IconCompat.createWithResource(i, this.mBuilder.mContext), spannableStringBuilder, pendingIntent).build();
-        build.mExtras.putBoolean("key_action_priority", true);
-        return build;
+        NotificationCompat$Action notificationCompat$ActionBuild = new NotificationCompat$Action.Builder(IconCompat.createWithResource(i, this.mBuilder.mContext), spannableStringBuilder, pendingIntent).build();
+        notificationCompat$ActionBuild.mExtras.putBoolean("key_action_priority", true);
+        return notificationCompat$ActionBuild;
     }
 
     @Override // androidx.core.app.NotificationCompat$Style
@@ -191,7 +189,6 @@ public class NotificationCompat$CallStyle extends NotificationCompat$Style {
         throw new IllegalArgumentException("person must have a non-empty a name");
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api23Impl {
         private Api23Impl() {
         }
@@ -201,7 +198,6 @@ public class NotificationCompat$CallStyle extends NotificationCompat$Style {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api28Impl {
         private Api28Impl() {
         }

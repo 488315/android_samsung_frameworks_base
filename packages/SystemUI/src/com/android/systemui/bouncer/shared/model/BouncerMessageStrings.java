@@ -7,7 +7,6 @@ import com.android.systemui.authentication.shared.model.AuthenticationMethodMode
 import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerMessageStrings {
     public static final BouncerMessageStrings INSTANCE = new BouncerMessageStrings();
@@ -17,24 +16,24 @@ public final class BouncerMessageStrings {
     }
 
     public static Pair authRequiredAfterAdaptiveAuthRequest(AuthenticationMethodModel authenticationMethodModel, boolean z) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_prompt_after_adaptive_auth_lock);
-        if (areEqual) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), valueOf);
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_prompt_after_adaptive_auth_lock);
+        if (zAreEqual) {
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), numValueOf);
         }
         return EmptyMessage;
     }
 
     public static Pair authRequiredAfterAdminLockdown(AuthenticationMethodModel authenticationMethodModel) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_prompt_after_dpm_lock);
-        return areEqual ? new Pair(Integer.valueOf(R.string.kg_none_pattern_none_instructions), valueOf) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(Integer.valueOf(R.string.kg_none_password_none_instructions), valueOf) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(Integer.valueOf(R.string.kg_none_pin_none_instructions), valueOf) : EmptyMessage;
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_prompt_after_dpm_lock);
+        return zAreEqual ? new Pair(Integer.valueOf(R.string.kg_none_pattern_none_instructions), numValueOf) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(Integer.valueOf(R.string.kg_none_password_none_instructions), numValueOf) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(Integer.valueOf(R.string.kg_none_pin_none_instructions), numValueOf) : EmptyMessage;
     }
 
     public static Pair authRequiredAfterPrimaryAuthTimeout(AuthenticationMethodModel authenticationMethodModel) {
@@ -85,50 +84,50 @@ public final class BouncerMessageStrings {
     }
 
     public static Pair faceLockedOut(AuthenticationMethodModel authenticationMethodModel, boolean z) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_face_locked_out);
-        if (areEqual) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), valueOf);
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_face_locked_out);
+        if (zAreEqual) {
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), numValueOf);
         }
         return EmptyMessage;
     }
 
     public static Pair incorrectFaceInput(AuthenticationMethodModel authenticationMethodModel, boolean z) {
-        Integer valueOf = Integer.valueOf(R.string.bouncer_face_not_recognized);
+        Integer numValueOf = Integer.valueOf(R.string.bouncer_face_not_recognized);
         if (z) {
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE)) {
-                return new Pair(Integer.valueOf(R.string.kg_unlock_with_pattern_or_fp), valueOf);
+                return new Pair(Integer.valueOf(R.string.kg_unlock_with_pattern_or_fp), numValueOf);
             }
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-                return new Pair(Integer.valueOf(R.string.kg_unlock_with_password_or_fp), valueOf);
+                return new Pair(Integer.valueOf(R.string.kg_unlock_with_password_or_fp), numValueOf);
             }
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-                return new Pair(Integer.valueOf(R.string.kg_unlock_with_pin_or_fp), valueOf);
+                return new Pair(Integer.valueOf(R.string.kg_unlock_with_pin_or_fp), numValueOf);
             }
         } else {
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE)) {
-                return new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pattern));
+                return new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pattern));
             }
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-                return new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_password));
+                return new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_password));
             }
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-                return new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pin));
+                return new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pin));
             }
         }
         return EmptyMessage;
     }
 
     public static Pair incorrectFingerprintInput(AuthenticationMethodModel authenticationMethodModel) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_fp_not_recognized);
-        return areEqual ? new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pattern)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_password)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(valueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pin)) : EmptyMessage;
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_fp_not_recognized);
+        return zAreEqual ? new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pattern)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_password)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(numValueOf, Integer.valueOf(R.string.kg_bio_try_again_or_pin)) : EmptyMessage;
     }
 
     public static Pair incorrectSecurityInput(AuthenticationMethodModel authenticationMethodModel, boolean z) {
@@ -137,24 +136,24 @@ public final class BouncerMessageStrings {
     }
 
     public static Pair nonStrongAuthTimeout(AuthenticationMethodModel authenticationMethodModel, boolean z) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_prompt_auth_timeout);
-        if (areEqual) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), valueOf);
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_prompt_auth_timeout);
+        if (zAreEqual) {
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), numValueOf);
         }
         return EmptyMessage;
     }
 
     public static Pair primaryAuthLockedOut(AuthenticationMethodModel authenticationMethodModel) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_too_many_failed_attempts_countdown);
-        return areEqual ? new Pair(valueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_pattern)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(valueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_password)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(valueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_pin)) : EmptyMessage;
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_too_many_failed_attempts_countdown);
+        return zAreEqual ? new Pair(numValueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_pattern)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE) ? new Pair(numValueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_password)) : Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE) ? new Pair(numValueOf, Integer.valueOf(R.string.kg_primary_auth_locked_out_pin)) : EmptyMessage;
     }
 
     public static Bundle setSubSecurityMessage(int i) {
@@ -167,16 +166,16 @@ public final class BouncerMessageStrings {
     }
 
     public static Pair trustAgentDisabled(AuthenticationMethodModel authenticationMethodModel, boolean z) {
-        boolean areEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
-        Integer valueOf = Integer.valueOf(R.string.kg_trust_agent_disabled);
-        if (areEqual) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), valueOf);
+        boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+        Integer numValueOf = Integer.valueOf(R.string.kg_trust_agent_disabled);
+        if (zAreEqual) {
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pattern_or_fp : R.string.kg_none_pattern_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_password_or_fp : R.string.kg_none_password_none_instructions), numValueOf);
         }
         if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
-            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), valueOf);
+            return new Pair(Integer.valueOf(z ? R.string.kg_unlock_with_pin_or_fp : R.string.kg_none_pin_none_instructions), numValueOf);
         }
         return EmptyMessage;
     }

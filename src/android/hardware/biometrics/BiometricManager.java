@@ -130,9 +130,7 @@ public class BiometricManager {
             return new BiometricTestSession(this.mContext, getSensorProperties(), i, new BiometricTestSession.TestSessionProvider() { // from class: android.hardware.biometrics.BiometricManager$$ExternalSyntheticLambda0
                 @Override // android.hardware.biometrics.BiometricTestSession.TestSessionProvider
                 public final ITestSession createTestSession(Context context, int i2, ITestSessionCallback iTestSessionCallback) {
-                    ITestSession lambda$createTestSession$0;
-                    lambda$createTestSession$0 = BiometricManager.this.lambda$createTestSession$0(context, i2, iTestSessionCallback);
-                    return lambda$createTestSession$0;
+                    return this.f$0.lambda$createTestSession$0(context, i2, iTestSessionCallback);
                 }
             });
         } catch (RemoteException e) {
@@ -155,16 +153,16 @@ public class BiometricManager {
 
     @Deprecated
     public int canAuthenticate() {
-        int canAuthenticate = canAuthenticate(this.mContext.getUserId(), 255);
-        FrameworkStatsLog.write(354, false, 0, canAuthenticate);
+        int iCanAuthenticate = canAuthenticate(this.mContext.getUserId(), 255);
+        FrameworkStatsLog.write(354, false, 0, iCanAuthenticate);
         FrameworkStatsLog.write(356, 4, this.mContext.getApplicationInfo().uid, this.mContext.getApplicationInfo().targetSdkVersion);
-        return canAuthenticate;
+        return iCanAuthenticate;
     }
 
     public int canAuthenticate(int i) {
-        int canAuthenticate = canAuthenticate(this.mContext.getUserId(), i);
-        FrameworkStatsLog.write(354, true, i, canAuthenticate);
-        return canAuthenticate;
+        int iCanAuthenticate = canAuthenticate(this.mContext.getUserId(), i);
+        FrameworkStatsLog.write(354, true, i, iCanAuthenticate);
+        return iCanAuthenticate;
     }
 
     public int canAuthenticate(int i, int i2) {

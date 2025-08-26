@@ -68,7 +68,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BaseSlider extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -141,7 +140,6 @@ public abstract class BaseSlider extends View {
     public ArrayList values;
     public int widgetHeight;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityEventSender implements Runnable {
         public int virtualViewId;
 
@@ -155,7 +153,6 @@ public abstract class BaseSlider extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityHelper extends ExploreByTouchHelper {
         public final BaseSlider slider;
         public final Rect virtualViewBounds;
@@ -210,20 +207,20 @@ public abstract class BaseSlider extends View {
                 return true;
             }
             int i4 = BaseSlider.$r8$clinit;
-            float f2 = baseSlider.stepSize;
-            if (f2 == 0.0f) {
-                f2 = 1.0f;
+            float fRound = baseSlider.stepSize;
+            if (fRound == 0.0f) {
+                fRound = 1.0f;
             }
-            if ((baseSlider.valueTo - baseSlider.valueFrom) / f2 > 20) {
-                f2 *= Math.round(r1 / r4);
+            if ((baseSlider.valueTo - baseSlider.valueFrom) / fRound > 20) {
+                fRound *= Math.round(r1 / r4);
             }
             if (i2 == 8192) {
-                f2 = -f2;
+                fRound = -fRound;
             }
             if (baseSlider.isRtl()) {
-                f2 = -f2;
+                fRound = -fRound;
             }
-            if (!baseSlider.snapThumbToValue(MathUtils.clamp(((Float) ((ArrayList) baseSlider.getValues()).get(i)).floatValue() + f2, baseSlider.valueFrom, baseSlider.valueTo), i)) {
+            if (!baseSlider.snapThumbToValue(MathUtils.clamp(((Float) ((ArrayList) baseSlider.getValues()).get(i)).floatValue() + fRound, baseSlider.valueFrom, baseSlider.valueTo), i)) {
                 return false;
             }
             baseSlider.updateHaloHotspot();
@@ -238,38 +235,37 @@ public abstract class BaseSlider extends View {
             BaseSlider baseSlider = this.slider;
             ArrayList arrayList = (ArrayList) baseSlider.getValues();
             Float f = (Float) arrayList.get(i);
-            float floatValue = f.floatValue();
+            float fFloatValue = f.floatValue();
             float f2 = baseSlider.valueFrom;
             float f3 = baseSlider.valueTo;
             if (baseSlider.isEnabled()) {
-                if (floatValue > f2) {
+                if (fFloatValue > f2) {
                     accessibilityNodeInfoCompat.addAction(8192);
                 }
-                if (floatValue < f3) {
+                if (fFloatValue < f3) {
                     accessibilityNodeInfoCompat.addAction(4096);
                 }
             }
-            accessibilityNodeInfoCompat.mInfo.setRangeInfo((AccessibilityNodeInfo.RangeInfo) new AccessibilityNodeInfoCompat.RangeInfoCompat(AccessibilityNodeInfo.RangeInfo.obtain(1, f2, f3, floatValue)).mInfo);
+            accessibilityNodeInfoCompat.mInfo.setRangeInfo((AccessibilityNodeInfo.RangeInfo) new AccessibilityNodeInfoCompat.RangeInfoCompat(AccessibilityNodeInfo.RangeInfo.obtain(1, f2, f3, fFloatValue)).mInfo);
             accessibilityNodeInfoCompat.setClassName(SeekBar.class.getName());
             StringBuilder sb = new StringBuilder();
             if (baseSlider.getContentDescription() != null) {
                 sb.append(baseSlider.getContentDescription());
                 sb.append(",");
             }
-            String format = String.format(((float) ((int) floatValue)) == floatValue ? "%.0f" : "%.2f", f);
+            String str = String.format(((float) ((int) fFloatValue)) == fFloatValue ? "%.0f" : "%.2f", f);
             String string = baseSlider.getContext().getString(R.string.material_slider_value);
             if (arrayList.size() > 1) {
                 string = i == ((ArrayList) baseSlider.getValues()).size() - 1 ? baseSlider.getContext().getString(R.string.material_slider_range_end) : i == 0 ? baseSlider.getContext().getString(R.string.material_slider_range_start) : "";
             }
             Locale locale = Locale.US;
-            sb.append(string + ", " + format);
+            sb.append(string + ", " + str);
             accessibilityNodeInfoCompat.setContentDescription(sb.toString());
             baseSlider.updateBoundsForVirtualViewId(i, this.virtualViewBounds);
             accessibilityNodeInfoCompat.setBoundsInParent(this.virtualViewBounds);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum FullCornerDirection {
         /* JADX INFO: Fake field, exist only in values array */
         BOTH,
@@ -278,7 +274,6 @@ public abstract class BaseSlider extends View {
         NONE
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliderState extends View.BaseSavedState {
         public static final Parcelable.Creator<SliderState> CREATOR = new Parcelable.Creator() { // from class: com.google.android.material.slider.BaseSlider.SliderState.1
             @Override // android.os.Parcelable.Creator
@@ -333,8 +328,8 @@ public abstract class BaseSlider extends View {
         if (intrinsicWidth == -1 && intrinsicHeight == -1) {
             drawable.setBounds(0, 0, this.thumbWidth, this.thumbHeight);
         } else {
-            float max = Math.max(this.thumbWidth, this.thumbHeight) / Math.max(intrinsicWidth, intrinsicHeight);
-            drawable.setBounds(0, 0, (int) (intrinsicWidth * max), (int) (intrinsicHeight * max));
+            float fMax = Math.max(this.thumbWidth, this.thumbHeight) / Math.max(intrinsicWidth, intrinsicHeight);
+            drawable.setBounds(0, 0, (int) (intrinsicWidth * fMax), (int) (intrinsicHeight * fMax));
         }
     }
 
@@ -345,28 +340,28 @@ public abstract class BaseSlider extends View {
     }
 
     public final ValueAnimator createLabelAnimator(boolean z) {
-        int resolveThemeDuration;
-        TimeInterpolator resolveThemeInterpolator;
-        float f = z ? 0.0f : 1.0f;
+        int iResolveThemeDuration;
+        TimeInterpolator timeInterpolatorResolveThemeInterpolator;
+        float fFloatValue = z ? 0.0f : 1.0f;
         ValueAnimator valueAnimator = z ? this.labelsOutAnimator : this.labelsInAnimator;
         if (valueAnimator != null && valueAnimator.isRunning()) {
-            f = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+            fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
             valueAnimator.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, z ? 1.0f : 0.0f);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(fFloatValue, z ? 1.0f : 0.0f);
         if (z) {
-            resolveThemeDuration = MotionUtils.resolveThemeDuration(getContext(), R.attr.motionDurationMedium4, 83);
-            resolveThemeInterpolator = MotionUtils.resolveThemeInterpolator(getContext(), R.attr.motionEasingEmphasizedInterpolator, AnimationUtils.DECELERATE_INTERPOLATOR);
+            iResolveThemeDuration = MotionUtils.resolveThemeDuration(getContext(), R.attr.motionDurationMedium4, 83);
+            timeInterpolatorResolveThemeInterpolator = MotionUtils.resolveThemeInterpolator(getContext(), R.attr.motionEasingEmphasizedInterpolator, AnimationUtils.DECELERATE_INTERPOLATOR);
         } else {
-            resolveThemeDuration = MotionUtils.resolveThemeDuration(getContext(), R.attr.motionDurationShort3, 117);
-            resolveThemeInterpolator = MotionUtils.resolveThemeInterpolator(getContext(), R.attr.motionEasingEmphasizedAccelerateInterpolator, AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR);
+            iResolveThemeDuration = MotionUtils.resolveThemeDuration(getContext(), R.attr.motionDurationShort3, 117);
+            timeInterpolatorResolveThemeInterpolator = MotionUtils.resolveThemeInterpolator(getContext(), R.attr.motionEasingEmphasizedAccelerateInterpolator, AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR);
         }
-        ofFloat.setDuration(resolveThemeDuration);
-        ofFloat.setInterpolator(resolveThemeInterpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.slider.BaseSlider.1
+        valueAnimatorOfFloat.setDuration(iResolveThemeDuration);
+        valueAnimatorOfFloat.setInterpolator(timeInterpolatorResolveThemeInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.slider.BaseSlider.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                float fFloatValue2 = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
                 ArrayList arrayList = (ArrayList) BaseSlider.this.labels;
                 int size = arrayList.size();
                 int i = 0;
@@ -375,9 +370,9 @@ public abstract class BaseSlider extends View {
                     i++;
                     TooltipDrawable tooltipDrawable = (TooltipDrawable) obj;
                     tooltipDrawable.tooltipPivotY = 1.2f;
-                    tooltipDrawable.tooltipScaleX = floatValue;
-                    tooltipDrawable.tooltipScaleY = floatValue;
-                    tooltipDrawable.labelOpacity = AnimationUtils.lerp(0.0f, 1.0f, 0.19f, 1.0f, floatValue);
+                    tooltipDrawable.tooltipScaleX = fFloatValue2;
+                    tooltipDrawable.tooltipScaleY = fFloatValue2;
+                    tooltipDrawable.labelOpacity = AnimationUtils.lerp(0.0f, 1.0f, 0.19f, 1.0f, fFloatValue2);
                     tooltipDrawable.invalidateSelf();
                 }
                 BaseSlider baseSlider = BaseSlider.this;
@@ -385,7 +380,7 @@ public abstract class BaseSlider extends View {
                 baseSlider.postInvalidateOnAnimation();
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     @Override // android.view.View
@@ -429,10 +424,10 @@ public abstract class BaseSlider extends View {
     public final void ensureLabelsAdded() {
         if (!this.labelsAreAnimatedIn) {
             this.labelsAreAnimatedIn = true;
-            ValueAnimator createLabelAnimator = createLabelAnimator(true);
-            this.labelsInAnimator = createLabelAnimator;
+            ValueAnimator valueAnimatorCreateLabelAnimator = createLabelAnimator(true);
+            this.labelsInAnimator = valueAnimatorCreateLabelAnimator;
             this.labelsOutAnimator = null;
-            createLabelAnimator.start();
+            valueAnimatorCreateLabelAnimator.start();
         }
         Iterator it = ((ArrayList) this.labels).iterator();
         for (int i = 0; i < this.values.size() && it.hasNext(); i++) {
@@ -449,10 +444,10 @@ public abstract class BaseSlider extends View {
     public final void ensureLabelsRemoved() {
         if (this.labelsAreAnimatedIn) {
             this.labelsAreAnimatedIn = false;
-            ValueAnimator createLabelAnimator = createLabelAnimator(false);
-            this.labelsOutAnimator = createLabelAnimator;
+            ValueAnimator valueAnimatorCreateLabelAnimator = createLabelAnimator(false);
+            this.labelsOutAnimator = valueAnimatorCreateLabelAnimator;
             this.labelsInAnimator = null;
-            createLabelAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.slider.BaseSlider.2
+            valueAnimatorCreateLabelAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.slider.BaseSlider.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     super.onAnimationEnd(animator);
@@ -486,14 +481,14 @@ public abstract class BaseSlider extends View {
     }
 
     public final float[] getActiveRange() {
-        float floatValue = ((Float) this.values.get(0)).floatValue();
-        float floatValue2 = ((Float) AlertController$$ExternalSyntheticOutline0.m(this.values, 1)).floatValue();
+        float fFloatValue = ((Float) this.values.get(0)).floatValue();
+        float fFloatValue2 = ((Float) AlertController$$ExternalSyntheticOutline0.m(1, this.values)).floatValue();
         if (this.values.size() == 1) {
-            floatValue = this.valueFrom;
+            fFloatValue = this.valueFrom;
         }
-        float normalizeValue = normalizeValue(floatValue);
-        float normalizeValue2 = normalizeValue(floatValue2);
-        return isRtl() ? new float[]{normalizeValue2, normalizeValue} : new float[]{normalizeValue, normalizeValue2};
+        float fNormalizeValue = normalizeValue(fFloatValue);
+        float fNormalizeValue2 = normalizeValue(fFloatValue2);
+        return isRtl() ? new float[]{fNormalizeValue2, fNormalizeValue} : new float[]{fNormalizeValue, fNormalizeValue2};
     }
 
     public final int getColorForState(ColorStateList colorStateList) {
@@ -526,13 +521,13 @@ public abstract class BaseSlider extends View {
             return;
         }
         validateConfigurationIfDirty();
-        int min = Math.min((int) (((this.valueTo - this.valueFrom) / this.stepSize) + 1.0f), (this.trackWidth / this.minTickSpacing) + 1);
+        int iMin = Math.min((int) (((this.valueTo - this.valueFrom) / this.stepSize) + 1.0f), (this.trackWidth / this.minTickSpacing) + 1);
         float[] fArr = this.ticksCoordinates;
-        if (fArr == null || fArr.length != min * 2) {
-            this.ticksCoordinates = new float[min * 2];
+        if (fArr == null || fArr.length != iMin * 2) {
+            this.ticksCoordinates = new float[iMin * 2];
         }
-        float f = this.trackWidth / (min - 1);
-        for (int i = 0; i < min * 2; i += 2) {
+        float f = this.trackWidth / (iMin - 1);
+        for (int i = 0; i < iMin * 2; i += 2) {
             float[] fArr2 = this.ticksCoordinates;
             fArr2[i] = ((i / 2.0f) * f) + this.trackSidePadding;
             fArr2[i + 1] = calculateTrackCenter();
@@ -629,19 +624,174 @@ public abstract class BaseSlider extends View {
         super.onDetachedFromWindow();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0174  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0188 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x0188 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0174  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onDraw(android.graphics.Canvas r18) {
-        /*
-            Method dump skipped, instructions count: 730
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.slider.BaseSlider.onDraw(android.graphics.Canvas):void");
+    public final void onDraw(Canvas canvas) {
+        int i;
+        float f;
+        BaseSlider baseSlider = this;
+        Canvas canvas2 = canvas;
+        if (baseSlider.dirtyConfig) {
+            baseSlider.validateConfigurationIfDirty();
+            baseSlider.maybeCalculateTicksCoordinates();
+        }
+        super.onDraw(canvas);
+        int iCalculateTrackCenter = baseSlider.calculateTrackCenter();
+        int i2 = 0;
+        float fFloatValue = ((Float) baseSlider.values.get(0)).floatValue();
+        float fFloatValue2 = ((Float) AlertController$$ExternalSyntheticOutline0.m(1, baseSlider.values)).floatValue();
+        if (fFloatValue2 < baseSlider.valueTo || (baseSlider.values.size() > 1 && fFloatValue > baseSlider.valueFrom)) {
+            int i3 = baseSlider.trackWidth;
+            float[] activeRange = baseSlider.getActiveRange();
+            float f2 = i3;
+            float f3 = (activeRange[1] * f2) + baseSlider.trackSidePadding;
+            if (f3 < r3 + i3) {
+                int i4 = baseSlider.thumbTrackGapSize;
+                if (i4 > 0) {
+                    float f4 = f3 + i4;
+                    float f5 = iCalculateTrackCenter;
+                    float f6 = baseSlider.trackHeight / 2.0f;
+                    baseSlider.trackRect.set(f4, f5 - f6, r3 + i3 + f6, f6 + f5);
+                    baseSlider.updateTrack(canvas2, baseSlider.inactiveTrackPaint, baseSlider.trackRect, FullCornerDirection.RIGHT);
+                } else {
+                    baseSlider.inactiveTrackPaint.setStyle(Paint.Style.STROKE);
+                    baseSlider.inactiveTrackPaint.setStrokeCap(Paint.Cap.ROUND);
+                    float f7 = iCalculateTrackCenter;
+                    canvas2.drawLine(f3, f7, baseSlider.trackSidePadding + i3, f7, baseSlider.inactiveTrackPaint);
+                }
+            }
+            int i5 = baseSlider.trackSidePadding;
+            float f8 = i5;
+            float f9 = (activeRange[0] * f2) + f8;
+            if (f9 > f8) {
+                int i6 = baseSlider.thumbTrackGapSize;
+                if (i6 > 0) {
+                    float f10 = baseSlider.trackHeight / 2.0f;
+                    float f11 = iCalculateTrackCenter;
+                    baseSlider.trackRect.set(i5 - f10, f11 - f10, f9 - i6, f10 + f11);
+                    baseSlider.updateTrack(canvas2, baseSlider.inactiveTrackPaint, baseSlider.trackRect, FullCornerDirection.LEFT);
+                } else {
+                    baseSlider.inactiveTrackPaint.setStyle(Paint.Style.STROKE);
+                    baseSlider.inactiveTrackPaint.setStrokeCap(Paint.Cap.ROUND);
+                    float f12 = iCalculateTrackCenter;
+                    canvas2.drawLine(baseSlider.trackSidePadding, f12, f9, f12, baseSlider.inactiveTrackPaint);
+                }
+            }
+        }
+        if (fFloatValue2 > baseSlider.valueFrom) {
+            int i7 = baseSlider.trackWidth;
+            float[] activeRange2 = baseSlider.getActiveRange();
+            float f13 = baseSlider.trackSidePadding;
+            float f14 = i7;
+            float fValueToX = (activeRange2[1] * f14) + f13;
+            float fValueToX2 = (activeRange2[0] * f14) + f13;
+            if (baseSlider.thumbTrackGapSize > 0) {
+                FullCornerDirection fullCornerDirection = FullCornerDirection.NONE;
+                if (baseSlider.values.size() == 1) {
+                    fullCornerDirection = baseSlider.isRtl() ? FullCornerDirection.RIGHT : FullCornerDirection.LEFT;
+                }
+                for (int i8 = 0; i8 < baseSlider.values.size(); i8++) {
+                    if (baseSlider.values.size() > 1) {
+                        if (i8 > 0) {
+                            fValueToX2 = baseSlider.valueToX(((Float) baseSlider.values.get(i8 - 1)).floatValue());
+                        }
+                        fValueToX = baseSlider.valueToX(((Float) baseSlider.values.get(i8)).floatValue());
+                        if (baseSlider.isRtl()) {
+                            fValueToX = fValueToX2;
+                            fValueToX2 = fValueToX;
+                        }
+                    }
+                    int iOrdinal = fullCornerDirection.ordinal();
+                    if (iOrdinal != 1) {
+                        if (iOrdinal == 2) {
+                            fValueToX2 += baseSlider.thumbTrackGapSize;
+                            fValueToX = (baseSlider.trackHeight / 2.0f) + fValueToX;
+                        } else if (iOrdinal == 3) {
+                            f = baseSlider.thumbTrackGapSize;
+                            fValueToX2 += f;
+                        }
+                        if (fValueToX2 >= fValueToX) {
+                            float f15 = iCalculateTrackCenter;
+                            float f16 = baseSlider.trackHeight / 2.0f;
+                            baseSlider.trackRect.set(fValueToX2, f15 - f16, fValueToX, f16 + f15);
+                            baseSlider.updateTrack(canvas2, baseSlider.activeTrackPaint, baseSlider.trackRect, fullCornerDirection);
+                        }
+                    } else {
+                        fValueToX2 -= baseSlider.trackHeight / 2.0f;
+                        f = baseSlider.thumbTrackGapSize;
+                    }
+                    fValueToX -= f;
+                    if (fValueToX2 >= fValueToX) {
+                    }
+                }
+            } else {
+                baseSlider.activeTrackPaint.setStyle(Paint.Style.STROKE);
+                baseSlider.activeTrackPaint.setStrokeCap(Paint.Cap.ROUND);
+                float f17 = iCalculateTrackCenter;
+                canvas2.drawLine(fValueToX2, f17, fValueToX, f17, baseSlider.activeTrackPaint);
+            }
+        }
+        if (baseSlider.tickVisible && baseSlider.stepSize > 0.0f) {
+            float[] activeRange3 = baseSlider.getActiveRange();
+            int iCeil = (int) Math.ceil(((baseSlider.ticksCoordinates.length / 2.0f) - 1.0f) * activeRange3[0]);
+            int iFloor = (int) Math.floor(((baseSlider.ticksCoordinates.length / 2.0f) - 1.0f) * activeRange3[1]);
+            if (iCeil > 0) {
+                canvas2.drawPoints(baseSlider.ticksCoordinates, 0, iCeil * 2, baseSlider.inactiveTicksPaint);
+            }
+            if (iCeil <= iFloor) {
+                canvas2.drawPoints(baseSlider.ticksCoordinates, iCeil * 2, ((iFloor - iCeil) + 1) * 2, baseSlider.activeTicksPaint);
+            }
+            int i9 = (iFloor + 1) * 2;
+            float[] fArr = baseSlider.ticksCoordinates;
+            if (i9 < fArr.length) {
+                canvas2.drawPoints(fArr, i9, fArr.length - i9, baseSlider.inactiveTicksPaint);
+            }
+        }
+        if (baseSlider.trackStopIndicatorSize > 0) {
+            if (baseSlider.values.size() >= 1) {
+                float fFloatValue3 = ((Float) AlertController$$ExternalSyntheticOutline0.m(1, baseSlider.values)).floatValue();
+                float f18 = baseSlider.valueTo;
+                if (fFloatValue3 < f18) {
+                    canvas2.drawPoint(baseSlider.valueToX(f18), iCalculateTrackCenter, baseSlider.stopIndicatorPaint);
+                }
+            }
+            if (baseSlider.values.size() > 1) {
+                float fFloatValue4 = ((Float) baseSlider.values.get(0)).floatValue();
+                float f19 = baseSlider.valueFrom;
+                if (fFloatValue4 > f19) {
+                    canvas2.drawPoint(baseSlider.valueToX(f19), iCalculateTrackCenter, baseSlider.stopIndicatorPaint);
+                }
+            }
+        }
+        if ((baseSlider.thumbIsPressed || baseSlider.isFocused()) && baseSlider.isEnabled()) {
+            int i10 = baseSlider.trackWidth;
+            if (baseSlider.shouldDrawCompatHalo()) {
+                canvas2.drawCircle((int) ((baseSlider.normalizeValue(((Float) baseSlider.values.get(baseSlider.focusedThumbIdx)).floatValue()) * i10) + baseSlider.trackSidePadding), iCalculateTrackCenter, baseSlider.haloRadius, baseSlider.haloPaint);
+            }
+        }
+        baseSlider.updateLabels();
+        int i11 = baseSlider.trackWidth;
+        while (i2 < baseSlider.values.size()) {
+            float fFloatValue5 = ((Float) baseSlider.values.get(i2)).floatValue();
+            if (i2 < baseSlider.customThumbDrawablesForValues.size()) {
+                i = iCalculateTrackCenter;
+                baseSlider.drawThumbDrawable(canvas2, i11, i, fFloatValue5, (Drawable) baseSlider.customThumbDrawablesForValues.get(i2));
+            } else {
+                i = iCalculateTrackCenter;
+                if (!baseSlider.isEnabled()) {
+                    canvas2.drawCircle((baseSlider.normalizeValue(fFloatValue5) * i11) + baseSlider.trackSidePadding, i, baseSlider.thumbWidth / 2, baseSlider.thumbPaint);
+                }
+                baseSlider.drawThumbDrawable(canvas2, i11, i, fFloatValue5, baseSlider.defaultThumbDrawable);
+            }
+            i2++;
+            baseSlider = this;
+            canvas2 = canvas;
+            iCalculateTrackCenter = i;
+        }
     }
 
     @Override // android.view.View
@@ -664,7 +814,12 @@ public abstract class BaseSlider extends View {
         this.accessibilityHelper.requestKeyboardFocusForVirtualView(this.focusedThumbIdx);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0047  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x004d  */
     @Override // android.view.View, android.view.KeyEvent.Callback
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onKeyDown(int i, KeyEvent keyEvent) {
         if (!isEnabled()) {
             return super.onKeyDown(i, keyEvent);
@@ -672,70 +827,66 @@ public abstract class BaseSlider extends View {
         if (this.values.size() == 1) {
             this.activeThumbIdx = 0;
         }
-        Float f = null;
-        Boolean valueOf = null;
+        Float fValueOf = null;
+        Boolean boolValueOf = null;
         if (this.activeThumbIdx == -1) {
-            if (i != 61) {
-                if (i != 66) {
-                    if (i != 81) {
-                        if (i == 69) {
-                            moveFocus(-1);
-                            valueOf = Boolean.TRUE;
-                        } else if (i != 70) {
-                            switch (i) {
-                                case 21:
-                                    moveFocusInAbsoluteDirection(-1);
-                                    valueOf = Boolean.TRUE;
-                                    break;
-                                case 22:
-                                    moveFocusInAbsoluteDirection(1);
-                                    valueOf = Boolean.TRUE;
-                                    break;
-                            }
-                        }
-                    }
-                    moveFocus(1);
-                    valueOf = Boolean.TRUE;
-                }
+            if (i == 61) {
+                boolValueOf = keyEvent.hasNoModifiers() ? Boolean.valueOf(moveFocus(1)) : keyEvent.isShiftPressed() ? Boolean.valueOf(moveFocus(-1)) : Boolean.FALSE;
+            } else if (i == 66) {
                 this.activeThumbIdx = this.focusedThumbIdx;
                 postInvalidate();
-                valueOf = Boolean.TRUE;
-            } else {
-                valueOf = keyEvent.hasNoModifiers() ? Boolean.valueOf(moveFocus(1)) : keyEvent.isShiftPressed() ? Boolean.valueOf(moveFocus(-1)) : Boolean.FALSE;
+                boolValueOf = Boolean.TRUE;
+            } else if (i == 81) {
+                moveFocus(1);
+                boolValueOf = Boolean.TRUE;
+            } else if (i == 69) {
+                moveFocus(-1);
+                boolValueOf = Boolean.TRUE;
+            } else if (i != 70) {
+                switch (i) {
+                    case 21:
+                        moveFocusInAbsoluteDirection(-1);
+                        boolValueOf = Boolean.TRUE;
+                        break;
+                    case 22:
+                        moveFocusInAbsoluteDirection(1);
+                        boolValueOf = Boolean.TRUE;
+                        break;
+                }
             }
-            return valueOf != null ? valueOf.booleanValue() : super.onKeyDown(i, keyEvent);
+            return boolValueOf != null ? boolValueOf.booleanValue() : super.onKeyDown(i, keyEvent);
         }
-        boolean isLongPress = this.isLongPress | keyEvent.isLongPress();
-        this.isLongPress = isLongPress;
-        if (isLongPress) {
-            float f2 = this.stepSize;
-            r10 = f2 != 0.0f ? f2 : 1.0f;
-            if ((this.valueTo - this.valueFrom) / r10 > 20) {
-                r10 *= Math.round(r0 / r11);
+        boolean zIsLongPress = this.isLongPress | keyEvent.isLongPress();
+        this.isLongPress = zIsLongPress;
+        if (zIsLongPress) {
+            float f = this.stepSize;
+            fRound = f != 0.0f ? f : 1.0f;
+            if ((this.valueTo - this.valueFrom) / fRound > 20) {
+                fRound *= Math.round(r0 / r11);
             }
         } else {
-            float f3 = this.stepSize;
-            if (f3 != 0.0f) {
-                r10 = f3;
+            float f2 = this.stepSize;
+            if (f2 != 0.0f) {
+                fRound = f2;
             }
         }
         if (i == 21) {
             if (!isRtl()) {
-                r10 = -r10;
+                fRound = -fRound;
             }
-            f = Float.valueOf(r10);
+            fValueOf = Float.valueOf(fRound);
         } else if (i == 22) {
             if (isRtl()) {
-                r10 = -r10;
+                fRound = -fRound;
             }
-            f = Float.valueOf(r10);
+            fValueOf = Float.valueOf(fRound);
         } else if (i == 69) {
-            f = Float.valueOf(-r10);
+            fValueOf = Float.valueOf(-fRound);
         } else if (i == 70 || i == 81) {
-            f = Float.valueOf(r10);
+            fValueOf = Float.valueOf(fRound);
         }
-        if (f != null) {
-            if (snapThumbToValue(f.floatValue() + ((Float) this.values.get(this.activeThumbIdx)).floatValue(), this.activeThumbIdx)) {
+        if (fValueOf != null) {
+            if (snapThumbToValue(fValueOf.floatValue() + ((Float) this.values.get(this.activeThumbIdx)).floatValue(), this.activeThumbIdx)) {
                 updateHaloHotspot();
                 postInvalidate();
             }
@@ -815,21 +966,97 @@ public abstract class BaseSlider extends View {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0033, code lost:
-    
-        if (r2 != 3) goto L64;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x006f  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onTouchEvent(android.view.MotionEvent r6) {
-        /*
-            Method dump skipped, instructions count: 331
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.slider.BaseSlider.onTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onTouchEvent(MotionEvent motionEvent) {
+        int i;
+        int i2 = 0;
+        if (isEnabled()) {
+            float x = motionEvent.getX();
+            float f = (x - this.trackSidePadding) / this.trackWidth;
+            this.touchPosition = f;
+            float fMax = Math.max(0.0f, f);
+            this.touchPosition = fMax;
+            this.touchPosition = Math.min(1.0f, fMax);
+            int actionMasked = motionEvent.getActionMasked();
+            if (actionMasked == 0) {
+                this.touchDownX = x;
+                if (!isPotentialVerticalScroll(motionEvent)) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                    if (pickActiveThumb()) {
+                        requestFocus();
+                        this.thumbIsPressed = true;
+                        snapTouchPosition();
+                        updateHaloHotspot();
+                        int i3 = this.thumbTrackGapSize;
+                        if (i3 > 0) {
+                            int i4 = this.thumbWidth;
+                            this.defaultThumbWidth = i4;
+                            this.defaultThumbTrackGapSize = i3;
+                            int iRound = Math.round(i4 * 0.5f);
+                            int i5 = this.thumbWidth - iRound;
+                            setThumbWidth(iRound);
+                            int i6 = this.thumbTrackGapSize;
+                            int i7 = i6 - (i5 / 2);
+                            if (i6 != i7) {
+                                this.thumbTrackGapSize = i7;
+                                invalidate();
+                            }
+                        }
+                        invalidate();
+                        onStartTrackingTouch();
+                    }
+                }
+            } else if (actionMasked == 1) {
+                this.thumbIsPressed = false;
+                MotionEvent motionEvent2 = this.lastEvent;
+                if (motionEvent2 != null && motionEvent2.getActionMasked() == 0 && Math.abs(this.lastEvent.getX() - motionEvent.getX()) <= this.scaledTouchSlop && Math.abs(this.lastEvent.getY() - motionEvent.getY()) <= this.scaledTouchSlop && pickActiveThumb()) {
+                    onStartTrackingTouch();
+                }
+                if (this.activeThumbIdx != -1) {
+                    snapTouchPosition();
+                    updateHaloHotspot();
+                    if (this.thumbTrackGapSize > 0 && (i = this.defaultThumbWidth) != -1 && this.defaultThumbTrackGapSize != -1) {
+                        setThumbWidth(i);
+                        int i8 = this.defaultThumbTrackGapSize;
+                        if (this.thumbTrackGapSize != i8) {
+                            this.thumbTrackGapSize = i8;
+                            invalidate();
+                        }
+                    }
+                    this.activeThumbIdx = -1;
+                    ArrayList arrayList = (ArrayList) this.touchListeners;
+                    int size = arrayList.size();
+                    while (i2 < size) {
+                        Object obj = arrayList.get(i2);
+                        i2++;
+                        ((Slider.OnSliderTouchListener) obj).onStopTrackingTouch(this);
+                    }
+                }
+                invalidate();
+            } else if (actionMasked == 2) {
+                if (!this.thumbIsPressed) {
+                    if (!isPotentialVerticalScroll(motionEvent) || Math.abs(x - this.touchDownX) >= this.scaledTouchSlop) {
+                        getParent().requestDisallowInterceptTouchEvent(true);
+                        onStartTrackingTouch();
+                    }
+                }
+                if (pickActiveThumb()) {
+                    this.thumbIsPressed = true;
+                    snapTouchPosition();
+                    updateHaloHotspot();
+                    invalidate();
+                }
+            } else if (actionMasked == 3) {
+            }
+            setPressed(this.thumbIsPressed);
+            this.lastEvent = MotionEvent.obtain(motionEvent);
+            return true;
+        }
+        return false;
     }
 
     @Override // android.view.View
@@ -862,24 +1089,24 @@ public abstract class BaseSlider extends View {
         }
         float f2 = this.valueTo;
         float f3 = this.valueFrom;
-        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, f, f3);
-        float valueToX = valueToX(m$1);
+        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, f, f3);
+        float fValueToX = valueToX(fM$1);
         this.activeThumbIdx = 0;
-        float abs = Math.abs(((Float) this.values.get(0)).floatValue() - m$1);
+        float fAbs = Math.abs(((Float) this.values.get(0)).floatValue() - fM$1);
         for (int i = 1; i < this.values.size(); i++) {
-            float abs2 = Math.abs(((Float) this.values.get(i)).floatValue() - m$1);
-            float valueToX2 = valueToX(((Float) this.values.get(i)).floatValue());
-            if (Float.compare(abs2, abs) > 0) {
+            float fAbs2 = Math.abs(((Float) this.values.get(i)).floatValue() - fM$1);
+            float fValueToX2 = valueToX(((Float) this.values.get(i)).floatValue());
+            if (Float.compare(fAbs2, fAbs) > 0) {
                 break;
             }
-            boolean z = !isRtl() ? valueToX2 - valueToX >= 0.0f : valueToX2 - valueToX <= 0.0f;
-            if (Float.compare(abs2, abs) < 0) {
+            boolean z = !isRtl() ? fValueToX2 - fValueToX >= 0.0f : fValueToX2 - fValueToX <= 0.0f;
+            if (Float.compare(fAbs2, fAbs) < 0) {
                 this.activeThumbIdx = i;
             } else {
-                if (Float.compare(abs2, abs) != 0) {
+                if (Float.compare(fAbs2, fAbs) != 0) {
                     continue;
                 } else {
-                    if (Math.abs(valueToX2 - valueToX) < this.scaledTouchSlop) {
+                    if (Math.abs(fValueToX2 - fValueToX) < this.scaledTouchSlop) {
                         this.activeThumbIdx = -1;
                         return false;
                     }
@@ -888,7 +1115,7 @@ public abstract class BaseSlider extends View {
                     }
                 }
             }
-            abs = abs2;
+            fAbs = fAbs2;
         }
         return this.activeThumbIdx != -1;
     }
@@ -923,26 +1150,26 @@ public abstract class BaseSlider extends View {
         RelativeCornerSize relativeCornerSize = ShapeAppearanceModel.PILL;
         ShapeAppearanceModel.Builder builder = new ShapeAppearanceModel.Builder();
         float f = this.thumbWidth / 2.0f;
-        CornerTreatment createCornerTreatment = MaterialShapeUtils.createCornerTreatment(0);
-        builder.topLeftCorner = createCornerTreatment;
-        float compatCornerTreatmentSize = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(createCornerTreatment);
-        if (compatCornerTreatmentSize != -1.0f) {
-            builder.setTopLeftCornerSize(compatCornerTreatmentSize);
+        CornerTreatment cornerTreatmentCreateCornerTreatment = MaterialShapeUtils.createCornerTreatment(0);
+        builder.topLeftCorner = cornerTreatmentCreateCornerTreatment;
+        float fCompatCornerTreatmentSize = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(cornerTreatmentCreateCornerTreatment);
+        if (fCompatCornerTreatmentSize != -1.0f) {
+            builder.setTopLeftCornerSize(fCompatCornerTreatmentSize);
         }
-        builder.topRightCorner = createCornerTreatment;
-        float compatCornerTreatmentSize2 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(createCornerTreatment);
-        if (compatCornerTreatmentSize2 != -1.0f) {
-            builder.setTopRightCornerSize(compatCornerTreatmentSize2);
+        builder.topRightCorner = cornerTreatmentCreateCornerTreatment;
+        float fCompatCornerTreatmentSize2 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(cornerTreatmentCreateCornerTreatment);
+        if (fCompatCornerTreatmentSize2 != -1.0f) {
+            builder.setTopRightCornerSize(fCompatCornerTreatmentSize2);
         }
-        builder.bottomRightCorner = createCornerTreatment;
-        float compatCornerTreatmentSize3 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(createCornerTreatment);
-        if (compatCornerTreatmentSize3 != -1.0f) {
-            builder.setBottomRightCornerSize(compatCornerTreatmentSize3);
+        builder.bottomRightCorner = cornerTreatmentCreateCornerTreatment;
+        float fCompatCornerTreatmentSize3 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(cornerTreatmentCreateCornerTreatment);
+        if (fCompatCornerTreatmentSize3 != -1.0f) {
+            builder.setBottomRightCornerSize(fCompatCornerTreatmentSize3);
         }
-        builder.bottomLeftCorner = createCornerTreatment;
-        float compatCornerTreatmentSize4 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(createCornerTreatment);
-        if (compatCornerTreatmentSize4 != -1.0f) {
-            builder.setBottomLeftCornerSize(compatCornerTreatmentSize4);
+        builder.bottomLeftCorner = cornerTreatmentCreateCornerTreatment;
+        float fCompatCornerTreatmentSize4 = ShapeAppearanceModel.Builder.compatCornerTreatmentSize(cornerTreatmentCreateCornerTreatment);
+        if (fCompatCornerTreatmentSize4 != -1.0f) {
+            builder.setBottomLeftCornerSize(fCompatCornerTreatmentSize4);
         }
         builder.setAllCornerSizes(f);
         materialShapeDrawable.setShapeAppearanceModel(builder.build());
@@ -974,15 +1201,15 @@ public abstract class BaseSlider extends View {
     }
 
     public final void setValueForLabel(TooltipDrawable tooltipDrawable, float f) {
-        String format = String.format(((float) ((int) f)) == f ? "%.0f" : "%.2f", Float.valueOf(f));
-        if (!TextUtils.equals(tooltipDrawable.text, format)) {
-            tooltipDrawable.text = format;
+        String str = String.format(((float) ((int) f)) == f ? "%.0f" : "%.2f", Float.valueOf(f));
+        if (!TextUtils.equals(tooltipDrawable.text, str)) {
+            tooltipDrawable.text = str;
             tooltipDrawable.textDrawableHelper.textSizeDirty = true;
             tooltipDrawable.invalidateSelf();
         }
-        int normalizeValue = (this.trackSidePadding + ((int) (normalizeValue(f) * this.trackWidth))) - (tooltipDrawable.getIntrinsicWidth() / 2);
-        int calculateTrackCenter = calculateTrackCenter() - ((this.thumbHeight / 2) + this.labelPadding);
-        tooltipDrawable.setBounds(normalizeValue, calculateTrackCenter - tooltipDrawable.getIntrinsicHeight(), tooltipDrawable.getIntrinsicWidth() + normalizeValue, calculateTrackCenter);
+        int iNormalizeValue = (this.trackSidePadding + ((int) (normalizeValue(f) * this.trackWidth))) - (tooltipDrawable.getIntrinsicWidth() / 2);
+        int iCalculateTrackCenter = calculateTrackCenter() - ((this.thumbHeight / 2) + this.labelPadding);
+        tooltipDrawable.setBounds(iNormalizeValue, iCalculateTrackCenter - tooltipDrawable.getIntrinsicHeight(), tooltipDrawable.getIntrinsicWidth() + iNormalizeValue, iCalculateTrackCenter);
         Rect rect = new Rect(tooltipDrawable.getBounds());
         DescendantOffsetUtils.offsetDescendantRect(ViewUtils.getContentView(this), this, rect);
         tooltipDrawable.setBounds(rect);
@@ -1010,8 +1237,8 @@ public abstract class BaseSlider extends View {
         this.focusedThumbIdx = 0;
         updateHaloHotspot();
         if (((ArrayList) this.labels).size() > this.values.size()) {
-            List<TooltipDrawable> subList = ((ArrayList) this.labels).subList(this.values.size(), ((ArrayList) this.labels).size());
-            for (TooltipDrawable tooltipDrawable : subList) {
+            List<TooltipDrawable> listSubList = ((ArrayList) this.labels).subList(this.values.size(), ((ArrayList) this.labels).size());
+            for (TooltipDrawable tooltipDrawable : listSubList) {
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
                 if (isAttachedToWindow()) {
                     ViewGroup contentView2 = ViewUtils.getContentView(this);
@@ -1027,18 +1254,18 @@ public abstract class BaseSlider extends View {
                     }
                 }
             }
-            subList.clear();
+            listSubList.clear();
         }
         while (((ArrayList) this.labels).size() < this.values.size()) {
-            TooltipDrawable createFromAttributes = TooltipDrawable.createFromAttributes(this.labelStyle, getContext());
-            ((ArrayList) this.labels).add(createFromAttributes);
+            TooltipDrawable tooltipDrawableCreateFromAttributes = TooltipDrawable.createFromAttributes(this.labelStyle, getContext());
+            ((ArrayList) this.labels).add(tooltipDrawableCreateFromAttributes);
             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
             if (isAttachedToWindow() && (contentView = ViewUtils.getContentView(this)) != null) {
                 int[] iArr = new int[2];
                 contentView.getLocationOnScreen(iArr);
-                createFromAttributes.locationOnScreenX = iArr[0];
-                contentView.getWindowVisibleDisplayFrame(createFromAttributes.displayFrame);
-                contentView.addOnLayoutChangeListener(createFromAttributes.attachedViewLayoutChangeListener);
+                tooltipDrawableCreateFromAttributes.locationOnScreenX = iArr[0];
+                contentView.getWindowVisibleDisplayFrame(tooltipDrawableCreateFromAttributes.displayFrame);
+                contentView.addOnLayoutChangeListener(tooltipDrawableCreateFromAttributes.attachedViewLayoutChangeListener);
             }
         }
         int i = ((ArrayList) this.labels).size() == 1 ? 0 : 1;
@@ -1108,27 +1335,27 @@ public abstract class BaseSlider extends View {
     }
 
     public final void snapTouchPosition() {
-        double d;
+        double dRound;
         float f = this.touchPosition;
         float f2 = this.stepSize;
         if (f2 > 0.0f) {
-            d = Math.round(f * r1) / ((int) ((this.valueTo - this.valueFrom) / f2));
+            dRound = Math.round(f * r1) / ((int) ((this.valueTo - this.valueFrom) / f2));
         } else {
-            d = f;
+            dRound = f;
         }
         if (isRtl()) {
-            d = 1.0d - d;
+            dRound = 1.0d - dRound;
         }
         float f3 = this.valueTo;
-        snapThumbToValue((float) ((d * (f3 - r1)) + this.valueFrom), this.activeThumbIdx);
+        snapThumbToValue((float) ((dRound * (f3 - r1)) + this.valueFrom), this.activeThumbIdx);
     }
 
     public final void updateBoundsForVirtualViewId(int i, Rect rect) {
-        int normalizeValue = this.trackSidePadding + ((int) (normalizeValue(((Float) ((ArrayList) getValues()).get(i)).floatValue()) * this.trackWidth));
-        int calculateTrackCenter = calculateTrackCenter();
-        int max = Math.max(this.thumbWidth / 2, this.minTouchTargetSize / 2);
-        int max2 = Math.max(this.thumbHeight / 2, this.minTouchTargetSize / 2);
-        rect.set(normalizeValue - max, calculateTrackCenter - max2, normalizeValue + max, calculateTrackCenter + max2);
+        int iNormalizeValue = this.trackSidePadding + ((int) (normalizeValue(((Float) ((ArrayList) getValues()).get(i)).floatValue()) * this.trackWidth));
+        int iCalculateTrackCenter = calculateTrackCenter();
+        int iMax = Math.max(this.thumbWidth / 2, this.minTouchTargetSize / 2);
+        int iMax2 = Math.max(this.thumbHeight / 2, this.minTouchTargetSize / 2);
+        rect.set(iNormalizeValue - iMax, iCalculateTrackCenter - iMax2, iNormalizeValue + iMax, iCalculateTrackCenter + iMax2);
     }
 
     public final void updateHaloHotspot() {
@@ -1137,10 +1364,10 @@ public abstract class BaseSlider extends View {
         }
         Drawable background = getBackground();
         if (background instanceof RippleDrawable) {
-            int normalizeValue = (int) ((normalizeValue(((Float) this.values.get(this.focusedThumbIdx)).floatValue()) * this.trackWidth) + this.trackSidePadding);
-            int calculateTrackCenter = calculateTrackCenter();
+            int iNormalizeValue = (int) ((normalizeValue(((Float) this.values.get(this.focusedThumbIdx)).floatValue()) * this.trackWidth) + this.trackSidePadding);
+            int iCalculateTrackCenter = calculateTrackCenter();
             int i = this.haloRadius;
-            background.setHotspotBounds(normalizeValue - i, calculateTrackCenter - i, normalizeValue + i, calculateTrackCenter + i);
+            background.setHotspotBounds(iNormalizeValue - i, iCalculateTrackCenter - i, iNormalizeValue + i, iCalculateTrackCenter + i);
         }
     }
 
@@ -1173,135 +1400,77 @@ public abstract class BaseSlider extends View {
         ensureLabelsRemoved();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateTrack(android.graphics.Canvas r9, android.graphics.Paint r10, android.graphics.RectF r11, com.google.android.material.slider.BaseSlider.FullCornerDirection r12) {
-        /*
-            r8 = this;
-            r0 = 3
-            r1 = 1
-            r2 = 2
-            int r3 = r8.trackHeight
-            float r4 = (float) r3
-            r5 = 1073741824(0x40000000, float:2.0)
-            float r4 = r4 / r5
-            float r3 = (float) r3
-            float r3 = r3 / r5
-            int r6 = r12.ordinal()
-            if (r6 == r1) goto L1f
-            if (r6 == r2) goto L1b
-            if (r6 == r0) goto L16
-            goto L22
-        L16:
-            int r3 = r8.trackInsideCornerSize
-            float r4 = (float) r3
-        L19:
-            float r3 = (float) r3
-            goto L22
-        L1b:
-            int r4 = r8.trackInsideCornerSize
-            float r4 = (float) r4
-            goto L22
-        L1f:
-            int r3 = r8.trackInsideCornerSize
-            goto L19
-        L22:
-            android.graphics.Paint$Style r6 = android.graphics.Paint.Style.FILL
-            r10.setStyle(r6)
-            android.graphics.Paint$Cap r6 = android.graphics.Paint.Cap.BUTT
-            r10.setStrokeCap(r6)
-            r10.setAntiAlias(r1)
-            android.graphics.Path r6 = r8.trackPath
-            r6.reset()
-            float r6 = r11.width()
-            float r7 = r4 + r3
-            int r6 = (r6 > r7 ? 1 : (r6 == r7 ? 0 : -1))
-            if (r6 < 0) goto L64
-            android.graphics.Path r12 = r8.trackPath
-            r5 = 8
-            float[] r5 = new float[r5]
-            r6 = 0
-            r5[r6] = r4
-            r5[r1] = r4
-            r5[r2] = r3
-            r5[r0] = r3
-            r0 = 4
-            r5[r0] = r3
-            r0 = 5
-            r5[r0] = r3
-            r0 = 6
-            r5[r0] = r4
-            r0 = 7
-            r5[r0] = r4
-            android.graphics.Path$Direction r0 = android.graphics.Path.Direction.CW
-            r12.addRoundRect(r11, r5, r0)
-            android.graphics.Path r8 = r8.trackPath
-            r9.drawPath(r8, r10)
-            return
-        L64:
-            float r0 = java.lang.Math.min(r4, r3)
-            float r3 = java.lang.Math.max(r4, r3)
-            r9.save()
-            android.graphics.Path r4 = r8.trackPath
-            android.graphics.Path$Direction r6 = android.graphics.Path.Direction.CW
-            r4.addRoundRect(r11, r0, r0, r6)
-            android.graphics.Path r0 = r8.trackPath
-            r9.clipPath(r0)
-            int r12 = r12.ordinal()
-            if (r12 == r1) goto La6
-            if (r12 == r2) goto L97
-            android.graphics.RectF r12 = r8.cornerRect
-            float r0 = r11.centerX()
-            float r0 = r0 - r3
-            float r1 = r11.top
-            float r2 = r11.centerX()
-            float r2 = r2 + r3
-            float r11 = r11.bottom
-            r12.set(r0, r1, r2, r11)
-            goto Lb3
-        L97:
-            android.graphics.RectF r12 = r8.cornerRect
-            float r0 = r11.right
-            float r5 = r5 * r3
-            float r1 = r0 - r5
-            float r2 = r11.top
-            float r11 = r11.bottom
-            r12.set(r1, r2, r0, r11)
-            goto Lb3
-        La6:
-            android.graphics.RectF r12 = r8.cornerRect
-            float r0 = r11.left
-            float r1 = r11.top
-            float r5 = r5 * r3
-            float r5 = r5 + r0
-            float r11 = r11.bottom
-            r12.set(r0, r1, r5, r11)
-        Lb3:
-            android.graphics.RectF r8 = r8.cornerRect
-            r9.drawRoundRect(r8, r3, r3, r10)
-            r9.restore()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.slider.BaseSlider.updateTrack(android.graphics.Canvas, android.graphics.Paint, android.graphics.RectF, com.google.android.material.slider.BaseSlider$FullCornerDirection):void");
+    public final void updateTrack(Canvas canvas, Paint paint, RectF rectF, FullCornerDirection fullCornerDirection) {
+        int i;
+        int i2 = this.trackHeight;
+        float f = i2 / 2.0f;
+        float f2 = i2 / 2.0f;
+        int iOrdinal = fullCornerDirection.ordinal();
+        if (iOrdinal != 1) {
+            if (iOrdinal == 2) {
+                f = this.trackInsideCornerSize;
+            } else if (iOrdinal == 3) {
+                i = this.trackInsideCornerSize;
+                f = i;
+            }
+            paint.setStyle(Paint.Style.FILL);
+            paint.setStrokeCap(Paint.Cap.BUTT);
+            paint.setAntiAlias(true);
+            this.trackPath.reset();
+            if (rectF.width() < f + f2) {
+                this.trackPath.addRoundRect(rectF, new float[]{f, f, f2, f2, f2, f2, f, f}, Path.Direction.CW);
+                canvas.drawPath(this.trackPath, paint);
+                return;
+            }
+            float fMin = Math.min(f, f2);
+            float fMax = Math.max(f, f2);
+            canvas.save();
+            this.trackPath.addRoundRect(rectF, fMin, fMin, Path.Direction.CW);
+            canvas.clipPath(this.trackPath);
+            int iOrdinal2 = fullCornerDirection.ordinal();
+            if (iOrdinal2 == 1) {
+                RectF rectF2 = this.cornerRect;
+                float f3 = rectF.left;
+                rectF2.set(f3, rectF.top, (2.0f * fMax) + f3, rectF.bottom);
+            } else if (iOrdinal2 != 2) {
+                this.cornerRect.set(rectF.centerX() - fMax, rectF.top, rectF.centerX() + fMax, rectF.bottom);
+            } else {
+                RectF rectF3 = this.cornerRect;
+                float f4 = rectF.right;
+                rectF3.set(f4 - (2.0f * fMax), rectF.top, f4, rectF.bottom);
+            }
+            canvas.drawRoundRect(this.cornerRect, fMax, fMax, paint);
+            canvas.restore();
+            return;
+        }
+        i = this.trackInsideCornerSize;
+        f2 = i;
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setAntiAlias(true);
+        this.trackPath.reset();
+        if (rectF.width() < f + f2) {
+        }
     }
 
     public final void updateWidgetLayout() {
         boolean z;
-        int max = Math.max(this.minWidgetHeight, Math.max(this.trackHeight + getPaddingBottom() + getPaddingTop(), getPaddingBottom() + getPaddingTop() + this.thumbHeight));
+        int iMax = Math.max(this.minWidgetHeight, Math.max(this.trackHeight + getPaddingBottom() + getPaddingTop(), getPaddingBottom() + getPaddingTop() + this.thumbHeight));
         boolean z2 = false;
-        if (max == this.widgetHeight) {
+        if (iMax == this.widgetHeight) {
             z = false;
         } else {
-            this.widgetHeight = max;
+            this.widgetHeight = iMax;
             z = true;
         }
-        int max2 = Math.max(Math.max(Math.max((this.thumbWidth / 2) - this.defaultThumbRadius, 0), Math.max((this.trackHeight - this.defaultTrackHeight) / 2, 0)), Math.max(Math.max(this.tickActiveRadius - this.defaultTickActiveRadius, 0), Math.max(this.tickInactiveRadius - this.defaultTickInactiveRadius, 0))) + this.minTrackSidePadding;
-        if (this.trackSidePadding != max2) {
-            this.trackSidePadding = max2;
+        int iMax2 = Math.max(Math.max(Math.max((this.thumbWidth / 2) - this.defaultThumbRadius, 0), Math.max((this.trackHeight - this.defaultTrackHeight) / 2, 0)), Math.max(Math.max(this.tickActiveRadius - this.defaultTickActiveRadius, 0), Math.max(this.tickInactiveRadius - this.defaultTickInactiveRadius, 0))) + this.minTrackSidePadding;
+        if (this.trackSidePadding != iMax2) {
+            this.trackSidePadding = iMax2;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             if (isLaidOut()) {
                 this.trackWidth = Math.max(getWidth() - (this.trackSidePadding * 2), 0);
@@ -1374,8 +1543,8 @@ public abstract class BaseSlider extends View {
         BigDecimal bigDecimal = new BigDecimal(Float.toString(f));
         BigDecimal bigDecimal2 = new BigDecimal(Float.toString(this.valueFrom));
         MathContext mathContext = MathContext.DECIMAL64;
-        double doubleValue = new BigDecimal(Double.toString(bigDecimal.subtract(bigDecimal2, mathContext).doubleValue())).divide(new BigDecimal(Float.toString(this.stepSize)), mathContext).doubleValue();
-        return Math.abs(((double) Math.round(doubleValue)) - doubleValue) < 1.0E-4d;
+        double dDoubleValue = new BigDecimal(Double.toString(bigDecimal.subtract(bigDecimal2, mathContext).doubleValue())).divide(new BigDecimal(Float.toString(this.stepSize)), mathContext).doubleValue();
+        return Math.abs(((double) Math.round(dDoubleValue)) - dDoubleValue) < 1.0E-4d;
     }
 
     public final float valueToX(float f) {
@@ -1387,7 +1556,7 @@ public abstract class BaseSlider extends View {
     }
 
     /* JADX WARN: Type inference failed for: r1v9, types: [com.google.android.material.slider.BaseSlider$$ExternalSyntheticLambda0] */
-    public BaseSlider(Context context, AttributeSet attributeSet, int i) {
+    public BaseSlider(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, R.style.Widget_MaterialComponents_Slider), attributeSet, i);
         this.labels = new ArrayList();
         this.changeListeners = new ArrayList();
@@ -1412,7 +1581,7 @@ public abstract class BaseSlider extends View {
         this.onScrollChangedListener = new ViewTreeObserver.OnScrollChangedListener() { // from class: com.google.android.material.slider.BaseSlider$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnScrollChangedListener
             public final void onScrollChanged() {
-                BaseSlider baseSlider = BaseSlider.this;
+                BaseSlider baseSlider = this.f$0;
                 int i2 = BaseSlider.$r8$clinit;
                 baseSlider.updateLabels();
             }
@@ -1456,67 +1625,67 @@ public abstract class BaseSlider extends View {
         int[] iArr = R$styleable.Slider;
         ThemeEnforcement.checkCompatibleTheme(context2, attributeSet, i, R.style.Widget_MaterialComponents_Slider);
         ThemeEnforcement.checkTextAppearance(context2, attributeSet, iArr, i, R.style.Widget_MaterialComponents_Slider, new int[0]);
-        TypedArray obtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, iArr, i, R.style.Widget_MaterialComponents_Slider);
-        this.labelStyle = obtainStyledAttributes.getResourceId(8, R.style.Widget_MaterialComponents_Tooltip);
-        this.valueFrom = obtainStyledAttributes.getFloat(3, 0.0f);
-        this.valueTo = obtainStyledAttributes.getFloat(4, 1.0f);
+        TypedArray typedArrayObtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, iArr, i, R.style.Widget_MaterialComponents_Slider);
+        this.labelStyle = typedArrayObtainStyledAttributes.getResourceId(8, R.style.Widget_MaterialComponents_Tooltip);
+        this.valueFrom = typedArrayObtainStyledAttributes.getFloat(3, 0.0f);
+        this.valueTo = typedArrayObtainStyledAttributes.getFloat(4, 1.0f);
         setValues(Float.valueOf(this.valueFrom));
-        this.stepSize = obtainStyledAttributes.getFloat(2, 0.0f);
-        this.minTouchTargetSize = (int) Math.ceil(obtainStyledAttributes.getDimension(9, (float) Math.ceil(ViewUtils.dpToPx(48, getContext()))));
-        boolean hasValue = obtainStyledAttributes.hasValue(24);
-        int i2 = hasValue ? 24 : 26;
-        int i3 = hasValue ? 24 : 25;
-        ColorStateList colorStateList = MaterialResources.getColorStateList(context2, obtainStyledAttributes, i2);
+        this.stepSize = typedArrayObtainStyledAttributes.getFloat(2, 0.0f);
+        this.minTouchTargetSize = (int) Math.ceil(typedArrayObtainStyledAttributes.getDimension(9, (float) Math.ceil(ViewUtils.dpToPx(48, getContext()))));
+        boolean zHasValue = typedArrayObtainStyledAttributes.hasValue(24);
+        int i2 = zHasValue ? 24 : 26;
+        int i3 = zHasValue ? 24 : 25;
+        ColorStateList colorStateList = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, i2);
         setTrackInactiveTintList(colorStateList == null ? ResourcesCompat.getColorStateList(R.color.material_slider_inactive_track_color, context2.getTheme(), context2.getResources()) : colorStateList);
-        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context2, obtainStyledAttributes, i3);
+        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, i3);
         setTrackActiveTintList(colorStateList2 == null ? ResourcesCompat.getColorStateList(R.color.material_slider_active_track_color, context2.getTheme(), context2.getResources()) : colorStateList2);
-        materialShapeDrawable.setFillColor(MaterialResources.getColorStateList(context2, obtainStyledAttributes, 10));
-        if (obtainStyledAttributes.hasValue(14)) {
-            materialShapeDrawable.setStrokeColor(MaterialResources.getColorStateList(context2, obtainStyledAttributes, 14));
+        materialShapeDrawable.setFillColor(MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 10));
+        if (typedArrayObtainStyledAttributes.hasValue(14)) {
+            materialShapeDrawable.setStrokeColor(MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 14));
             postInvalidate();
         }
-        materialShapeDrawable.drawableState.strokeWidth = obtainStyledAttributes.getDimension(15, 0.0f);
+        materialShapeDrawable.drawableState.strokeWidth = typedArrayObtainStyledAttributes.getDimension(15, 0.0f);
         materialShapeDrawable.invalidateSelf();
         postInvalidate();
-        ColorStateList colorStateList3 = MaterialResources.getColorStateList(context2, obtainStyledAttributes, 5);
+        ColorStateList colorStateList3 = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 5);
         setHaloTintList(colorStateList3 == null ? ResourcesCompat.getColorStateList(R.color.material_slider_halo_color, context2.getTheme(), context2.getResources()) : colorStateList3);
-        this.tickVisible = obtainStyledAttributes.getBoolean(23, true);
-        boolean hasValue2 = obtainStyledAttributes.hasValue(18);
-        int i4 = hasValue2 ? 18 : 20;
-        int i5 = hasValue2 ? 18 : 19;
-        ColorStateList colorStateList4 = MaterialResources.getColorStateList(context2, obtainStyledAttributes, i4);
+        this.tickVisible = typedArrayObtainStyledAttributes.getBoolean(23, true);
+        boolean zHasValue2 = typedArrayObtainStyledAttributes.hasValue(18);
+        int i4 = zHasValue2 ? 18 : 20;
+        int i5 = zHasValue2 ? 18 : 19;
+        ColorStateList colorStateList4 = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, i4);
         colorStateList4 = colorStateList4 == null ? ResourcesCompat.getColorStateList(R.color.material_slider_inactive_tick_marks_color, context2.getTheme(), context2.getResources()) : colorStateList4;
         if (!colorStateList4.equals(this.tickColorInactive)) {
             this.tickColorInactive = colorStateList4;
             paint3.setColor(getColorForState(colorStateList4));
             invalidate();
         }
-        ColorStateList colorStateList5 = MaterialResources.getColorStateList(context2, obtainStyledAttributes, i5);
+        ColorStateList colorStateList5 = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, i5);
         colorStateList5 = colorStateList5 == null ? ResourcesCompat.getColorStateList(R.color.material_slider_active_tick_marks_color, context2.getTheme(), context2.getResources()) : colorStateList5;
         if (!colorStateList5.equals(this.tickColorActive)) {
             this.tickColorActive = colorStateList5;
             paint4.setColor(getColorForState(colorStateList5));
             invalidate();
         }
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(16, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(16, 0);
         if (this.thumbTrackGapSize != dimensionPixelSize) {
             this.thumbTrackGapSize = dimensionPixelSize;
             invalidate();
         }
-        int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(29, 0);
+        int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(29, 0);
         if (this.trackStopIndicatorSize != dimensionPixelSize2) {
             this.trackStopIndicatorSize = dimensionPixelSize2;
             paint5.setStrokeWidth(dimensionPixelSize2);
             invalidate();
         }
-        int dimensionPixelSize3 = obtainStyledAttributes.getDimensionPixelSize(28, 0);
+        int dimensionPixelSize3 = typedArrayObtainStyledAttributes.getDimensionPixelSize(28, 0);
         if (this.trackInsideCornerSize != dimensionPixelSize3) {
             this.trackInsideCornerSize = dimensionPixelSize3;
             invalidate();
         }
-        int dimensionPixelSize4 = obtainStyledAttributes.getDimensionPixelSize(13, 0) * 2;
-        int dimensionPixelSize5 = obtainStyledAttributes.getDimensionPixelSize(17, dimensionPixelSize4);
-        int dimensionPixelSize6 = obtainStyledAttributes.getDimensionPixelSize(12, dimensionPixelSize4);
+        int dimensionPixelSize4 = typedArrayObtainStyledAttributes.getDimensionPixelSize(13, 0) * 2;
+        int dimensionPixelSize5 = typedArrayObtainStyledAttributes.getDimensionPixelSize(17, dimensionPixelSize4);
+        int dimensionPixelSize6 = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, dimensionPixelSize4);
         setThumbWidth(dimensionPixelSize5);
         if (dimensionPixelSize6 != this.thumbHeight) {
             this.thumbHeight = dimensionPixelSize6;
@@ -1527,7 +1696,7 @@ public abstract class BaseSlider extends View {
             }
             updateWidgetLayout();
         }
-        int dimensionPixelSize7 = obtainStyledAttributes.getDimensionPixelSize(6, 0);
+        int dimensionPixelSize7 = typedArrayObtainStyledAttributes.getDimensionPixelSize(6, 0);
         if (dimensionPixelSize7 != this.haloRadius) {
             this.haloRadius = dimensionPixelSize7;
             Drawable background = getBackground();
@@ -1537,35 +1706,35 @@ public abstract class BaseSlider extends View {
                 postInvalidate();
             }
         }
-        this.defaultThumbDrawable.setElevation(obtainStyledAttributes.getDimension(11, 0.0f));
-        int dimensionPixelSize8 = obtainStyledAttributes.getDimensionPixelSize(27, 0);
+        this.defaultThumbDrawable.setElevation(typedArrayObtainStyledAttributes.getDimension(11, 0.0f));
+        int dimensionPixelSize8 = typedArrayObtainStyledAttributes.getDimensionPixelSize(27, 0);
         if (this.trackHeight != dimensionPixelSize8) {
             this.trackHeight = dimensionPixelSize8;
             this.inactiveTrackPaint.setStrokeWidth(dimensionPixelSize8);
             this.activeTrackPaint.setStrokeWidth(this.trackHeight);
             updateWidgetLayout();
         }
-        int dimensionPixelSize9 = obtainStyledAttributes.getDimensionPixelSize(21, this.trackStopIndicatorSize / 2);
+        int dimensionPixelSize9 = typedArrayObtainStyledAttributes.getDimensionPixelSize(21, this.trackStopIndicatorSize / 2);
         if (this.tickActiveRadius != dimensionPixelSize9) {
             this.tickActiveRadius = dimensionPixelSize9;
             this.activeTicksPaint.setStrokeWidth(dimensionPixelSize9 * 2);
             updateWidgetLayout();
         }
-        int dimensionPixelSize10 = obtainStyledAttributes.getDimensionPixelSize(22, this.trackStopIndicatorSize / 2);
+        int dimensionPixelSize10 = typedArrayObtainStyledAttributes.getDimensionPixelSize(22, this.trackStopIndicatorSize / 2);
         if (this.tickInactiveRadius != dimensionPixelSize10) {
             this.tickInactiveRadius = dimensionPixelSize10;
             this.inactiveTicksPaint.setStrokeWidth(dimensionPixelSize10 * 2);
             updateWidgetLayout();
         }
-        int i6 = obtainStyledAttributes.getInt(7, 0);
+        int i6 = typedArrayObtainStyledAttributes.getInt(7, 0);
         if (this.labelBehavior != i6) {
             this.labelBehavior = i6;
             requestLayout();
         }
-        if (!obtainStyledAttributes.getBoolean(0, true)) {
+        if (!typedArrayObtainStyledAttributes.getBoolean(0, true)) {
             setEnabled(false);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setFocusable(true);
         setClickable(true);
         this.defaultThumbDrawable.setShadowCompatibilityMode(2);

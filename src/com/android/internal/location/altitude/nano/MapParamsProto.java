@@ -73,47 +73,47 @@ public final class MapParamsProto extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         int i = this.mapS2Level;
         if (i != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
         }
         int i2 = this.cacheTileS2Level;
         if (i2 != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
         }
         int i3 = this.diskTileS2Level;
         if (i3 != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
         }
         if (Double.doubleToLongBits(this.modelAMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(4, this.modelAMeters);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(4, this.modelAMeters);
         }
         if (Double.doubleToLongBits(this.modelBMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(5, this.modelBMeters);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeDoubleSize(5, this.modelBMeters);
         }
-        return Double.doubleToLongBits(this.modelRmseMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? computeSerializedSize + CodedOutputByteBufferNano.computeDoubleSize(6, this.modelRmseMeters) : computeSerializedSize;
+        return Double.doubleToLongBits(this.modelRmseMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? iComputeSerializedSize + CodedOutputByteBufferNano.computeDoubleSize(6, this.modelRmseMeters) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public MapParamsProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 8) {
+            if (tag == 8) {
                 this.mapS2Level = codedInputByteBufferNano.readInt32();
-            } else if (readTag == 16) {
+            } else if (tag == 16) {
                 this.cacheTileS2Level = codedInputByteBufferNano.readInt32();
-            } else if (readTag == 24) {
+            } else if (tag == 24) {
                 this.diskTileS2Level = codedInputByteBufferNano.readInt32();
-            } else if (readTag == 33) {
+            } else if (tag == 33) {
                 this.modelAMeters = codedInputByteBufferNano.readDouble();
-            } else if (readTag == 41) {
+            } else if (tag == 41) {
                 this.modelBMeters = codedInputByteBufferNano.readDouble();
-            } else if (readTag != 49) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 49) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

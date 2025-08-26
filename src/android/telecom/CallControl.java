@@ -8,7 +8,6 @@ import android.os.OutcomeReceiver;
 import android.os.ParcelUuid;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
-import android.telecom.CallControl;
 import android.text.TextUtils;
 import com.android.internal.telecom.ICallControl;
 import com.android.internal.telephony.SemRILConstants;
@@ -142,25 +141,25 @@ public final class CallControl {
         protected void onReceiveResult(int i, final Bundle bundle) {
             Log.d(CallControl.TAG, "%s: oRR: resultCode=[%s]", this.mCallingMethod, Integer.valueOf(i));
             super.onReceiveResult(i, bundle);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (i == 0) {
                     this.mExecutor.execute(new Runnable() { // from class: android.telecom.CallControl$CallControlResultReceiver$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CallControl.CallControlResultReceiver.this.lambda$onReceiveResult$0();
+                            this.f$0.lambda$onReceiveResult$0();
                         }
                     });
                 } else {
                     this.mExecutor.execute(new Runnable() { // from class: android.telecom.CallControl$CallControlResultReceiver$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CallControl.CallControlResultReceiver.this.lambda$onReceiveResult$1(bundle);
+                            this.f$0.lambda$onReceiveResult$1(bundle);
                         }
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

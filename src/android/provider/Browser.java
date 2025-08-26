@@ -102,9 +102,9 @@ public class Browser {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, str);
         try {
-            Intent createChooser = Intent.createChooser(intent, str2);
-            createChooser.setFlags(268435456);
-            context.startActivity(createChooser);
+            Intent intentCreateChooser = Intent.createChooser(intent, str2);
+            intentCreateChooser.setFlags(268435456);
+            context.startActivity(intentCreateChooser);
         } catch (ActivityNotFoundException unused) {
         }
     }

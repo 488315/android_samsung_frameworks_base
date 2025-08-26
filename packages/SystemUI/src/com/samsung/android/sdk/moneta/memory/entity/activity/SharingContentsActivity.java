@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SharingContentsActivity extends Activity {
     public static final Parcelable.Creator<SharingContentsActivity> CREATOR = new Creator();
@@ -26,33 +25,32 @@ public final class SharingContentsActivity extends Activity {
     private final long sharedTime;
     private final MobileApplication sharedToApp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             ArrayList arrayList;
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList arrayList2 = new ArrayList(readInt);
-            int i = 0;
-            while (i != readInt) {
-                i = Engram$Creator$$ExternalSyntheticOutline0.m(SharingContentsActivity.class, parcel, arrayList2, i, 1);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList arrayList2 = new ArrayList(i);
+            int iM = 0;
+            while (iM != i) {
+                iM = Engram$Creator$$ExternalSyntheticOutline0.m(SharingContentsActivity.class, parcel, arrayList2, iM, 1);
             }
-            long readLong = parcel.readLong();
-            String readString2 = parcel.readString();
+            long j = parcel.readLong();
+            String string2 = parcel.readString();
             Parcelable.Creator<MobileApplication> creator = MobileApplication.CREATOR;
-            MobileApplication createFromParcel = creator.createFromParcel(parcel);
-            MobileApplication createFromParcel2 = creator.createFromParcel(parcel);
+            MobileApplication mobileApplicationCreateFromParcel = creator.createFromParcel(parcel);
+            MobileApplication mobileApplicationCreateFromParcel2 = creator.createFromParcel(parcel);
             if (parcel.readInt() == 0) {
                 arrayList = null;
             } else {
-                int readInt2 = parcel.readInt();
-                arrayList = new ArrayList(readInt2);
-                for (int i2 = 0; i2 != readInt2; i2++) {
+                int i2 = parcel.readInt();
+                arrayList = new ArrayList(i2);
+                for (int i3 = 0; i3 != i2; i3++) {
                     arrayList.add(Person.CREATOR.createFromParcel(parcel));
                 }
             }
-            return new SharingContentsActivity(readString, arrayList2, readLong, readString2, createFromParcel, createFromParcel2, arrayList);
+            return new SharingContentsActivity(string, arrayList2, j, string2, mobileApplicationCreateFromParcel, mobileApplicationCreateFromParcel2, arrayList);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -178,9 +176,9 @@ public final class SharingContentsActivity extends Activity {
     }
 
     public int hashCode() {
-        int hashCode = (this.sharedFromApp.hashCode() + ((this.sharedToApp.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contents, this.id.hashCode() * 31, 31), 31, this.sharedTime), 31, this.recipientName)) * 31)) * 31;
+        int iHashCode = (this.sharedFromApp.hashCode() + ((this.sharedToApp.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contents, this.id.hashCode() * 31, 31), 31, this.sharedTime), 31, this.recipientName)) * 31)) * 31;
         List<Person> list = this.sharedPerson;
-        return hashCode + (list == null ? 0 : list.hashCode());
+        return iHashCode + (list == null ? 0 : list.hashCode());
     }
 
     public String toString() {
@@ -190,9 +188,9 @@ public final class SharingContentsActivity extends Activity {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
-        while (m.hasNext()) {
-            parcel.writeParcelable((Parcelable) m.next(), i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
+        while (itM.hasNext()) {
+            parcel.writeParcelable((Parcelable) itM.next(), i);
         }
         parcel.writeLong(this.sharedTime);
         parcel.writeString(this.recipientName);

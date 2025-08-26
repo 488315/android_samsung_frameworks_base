@@ -14,7 +14,6 @@ import android.view.animation.TranslateAnimation;
 import android.window.TransitionInfo;
 import com.android.wm.shell.transition.change.ChangeTransitionSpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PopOverChangeTransitionSpec extends ChangeTransitionSpec {
     @Override // com.android.wm.shell.transition.change.ChangeTransitionSpec
@@ -56,9 +55,9 @@ public class PopOverChangeTransitionSpec extends ChangeTransitionSpec {
         animationAttributePolicy.getClass();
         alphaAnimation.setStartOffset((long) (f2 * ChangeTransitionSpec.AnimationAttributePolicy.SNAPSHOT_ALPHA_ANIM_START_OFFSET));
         alphaAnimation.setInterpolator(new LinearInterpolator());
-        float width = 1.0f / (this.mStartBounds.width() / this.mEndBounds.width());
-        float height = 1.0f / (this.mStartBounds.height() / this.mEndBounds.height());
-        ScaleAnimation scaleAnimation = new ScaleAnimation(width, width, height, height);
+        float fWidth = 1.0f / (this.mStartBounds.width() / this.mEndBounds.width());
+        float fHeight = 1.0f / (this.mStartBounds.height() / this.mEndBounds.height());
+        ScaleAnimation scaleAnimation = new ScaleAnimation(fWidth, fWidth, fHeight, fHeight);
         scaleAnimation.setDuration(animationDuration);
         scaleAnimation.setInterpolator(animationAttributePolicy.mDefaultInterpolator);
         AnimationSet animationSet = new AnimationSet(false);

@@ -7,7 +7,6 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class RelativeTouchListener implements View.OnTouchListener {
     public boolean movedEnough;
@@ -41,7 +40,7 @@ public abstract class RelativeTouchListener implements View.OnTouchListener {
                 this.performedLongClick = false;
                 Handler handler = view.getHandler();
                 if (handler != null) {
-                    handler.postDelayed(new Runnable() { // from class: com.android.wm.shell.shared.bubbles.RelativeTouchListener$onTouch$1
+                    handler.postDelayed(new Runnable() { // from class: com.android.wm.shell.shared.bubbles.RelativeTouchListener.onTouch.1
                         @Override // java.lang.Runnable
                         public final void run() {
                             if (view.isLongClickable()) {

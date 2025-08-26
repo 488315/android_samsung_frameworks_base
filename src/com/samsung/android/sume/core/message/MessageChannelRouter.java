@@ -60,7 +60,7 @@ public class MessageChannelRouter {
         return new MessagePublisher(new Function() { // from class: com.samsung.android.sume.core.message.MessageChannelRouter$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MessageChannelRouter.this.queryMessageChannel(((Integer) obj).intValue());
+                return this.f$0.queryMessageChannel(((Integer) obj).intValue());
             }
         });
     }
@@ -75,9 +75,7 @@ public class MessageChannelRouter {
         List<MessageChannel> list = (List) Stream.concat((Stream) Optional.ofNullable(this.messageSubscribers.get(Integer.valueOf(i))).map(new ContentProtectionEventProcessor$$ExternalSyntheticLambda8()).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.message.MessageChannelRouter$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                Stream of;
-                of = Stream.of((Object[]) new MessageChannel[0]);
-                return of;
+                return Stream.of((Object[]) new MessageChannel[0]);
             }
         }), this.eventListener.stream()).collect(Collectors.toList());
         Log.d(str, "messageChannels: " + Arrays.toString(list.toArray()));
@@ -107,7 +105,7 @@ public class MessageChannelRouter {
             Map map = (Map) arrayList.stream().collect(Collectors.partitioningBy(new Predicate() { // from class: com.samsung.android.sume.core.message.MessageChannelRouter$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return MessageChannelRouter.this.m9591xbafa26ef((Message) obj);
+                    return this.f$0.m9604xbafa26ef((Message) obj);
                 }
             }));
             if (map.containsKey(false)) {
@@ -119,7 +117,7 @@ public class MessageChannelRouter {
                     list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessageChannelRouter$$ExternalSyntheticLambda3
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            ((MessageChannel) obj).send(Message.this);
+                            ((MessageChannel) obj).send(message);
                         }
                     });
                 }
@@ -128,7 +126,7 @@ public class MessageChannelRouter {
     }
 
     /* renamed from: lambda$addMessageSubscriber$1$com-samsung-android-sume-core-message-MessageChannelRouter, reason: not valid java name */
-    /* synthetic */ boolean m9591xbafa26ef(Message message) {
+    /* synthetic */ boolean m9604xbafa26ef(Message message) {
         return this.messageSubscribers.containsKey(Integer.valueOf(message.getCode()));
     }
 
@@ -136,7 +134,7 @@ public class MessageChannelRouter {
         this.messageSubscribers.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.message.MessageChannelRouter$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                ((List) obj2).remove(MessageSubscriber.this);
+                ((List) obj2).remove(messageSubscriber);
             }
         });
     }

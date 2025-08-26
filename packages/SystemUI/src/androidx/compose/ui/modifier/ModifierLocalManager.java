@@ -15,7 +15,6 @@ import java.util.Set;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ModifierLocalManager {
     public boolean invalidated;
@@ -73,11 +72,11 @@ public final class ModifierLocalManager {
             if ((node4.aggregateChildKindSet & 32) != 0) {
                 for (Modifier.Node node5 = node4; node5 != null; node5 = node5.child) {
                     if ((node5.kindSet & 32) != 0) {
-                        DelegatingNode delegatingNode = node5;
-                        ?? r6 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof ModifierLocalModifierNode) {
-                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node5;
+                        ?? mutableVector2 = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof ModifierLocalModifierNode) {
+                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNodeAccess$pop;
                                 if (modifierLocalModifierNode instanceof BackwardsCompatNode) {
                                     BackwardsCompatNode backwardsCompatNode = (BackwardsCompatNode) modifierLocalModifierNode;
                                     if ((backwardsCompatNode.element instanceof ModifierLocalConsumer) && backwardsCompatNode.readValues.contains(modifierLocal)) {
@@ -87,36 +86,36 @@ public final class ModifierLocalManager {
                                 if (modifierLocalModifierNode.getProvidedValues().contains$ui_release(modifierLocal)) {
                                     break;
                                 }
-                            } else if ((delegatingNode.kindSet & 32) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node6 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 32) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node6 = delegatingNodeAccess$pop.delegate;
                                 int i2 = 0;
-                                delegatingNode = delegatingNode;
-                                r6 = r6;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector2 = mutableVector2;
                                 while (node6 != null) {
                                     if ((node6.kindSet & 32) != 0) {
                                         i2++;
-                                        r6 = r6;
+                                        mutableVector2 = mutableVector2;
                                         if (i2 == 1) {
-                                            delegatingNode = node6;
+                                            delegatingNodeAccess$pop = node6;
                                         } else {
-                                            if (r6 == 0) {
-                                                r6 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector2 == 0) {
+                                                mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r6.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector2.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r6.add(node6);
+                                            mutableVector2.add(node6);
                                         }
                                     }
                                     node6 = node6.child;
-                                    delegatingNode = delegatingNode;
-                                    r6 = r6;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector2 = mutableVector2;
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r6);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                         }
                     }
                 }
@@ -130,11 +129,7 @@ public final class ModifierLocalManager {
             return;
         }
         this.invalidated = true;
-        ((AndroidComposeView) this.owner).registerOnEndApplyChangesListener(new Function0() { // from class: androidx.compose.ui.modifier.ModifierLocalManager$invalidate$1
-            {
-                super(0);
-            }
-
+        ((AndroidComposeView) this.owner).registerOnEndApplyChangesListener(new Function0() { // from class: androidx.compose.ui.modifier.ModifierLocalManager.invalidate.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 MutableVector mutableVector;

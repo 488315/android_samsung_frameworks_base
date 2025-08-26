@@ -5,12 +5,10 @@ import androidx.compose.ui.graphics.Color;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslColorPrimitiveTokens implements SeslColorSchemeKeyTokens {
     public final long color;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +35,7 @@ public final class SeslColorPrimitiveTokens implements SeslColorSchemeKeyTokens 
         }
         long j = ((SeslColorPrimitiveTokens) obj).color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.color, j);
+        return ULong.m3447equalsimpl0(this.color, j);
     }
 
     public final int hashCode() {
@@ -47,7 +45,7 @@ public final class SeslColorPrimitiveTokens implements SeslColorSchemeKeyTokens 
     }
 
     public final String toString() {
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("SeslColorPrimitiveTokens(color=", Color.m462toStringimpl(this.color), ")");
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("SeslColorPrimitiveTokens(color=", Color.m464toStringimpl(this.color), ")");
     }
 
     private SeslColorPrimitiveTokens(long j) {

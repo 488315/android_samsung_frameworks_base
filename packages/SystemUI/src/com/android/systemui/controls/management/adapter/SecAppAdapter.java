@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageItemInfo;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecAppAdapter extends RecyclerView.Adapter {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -56,7 +56,6 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
     public final SALogger saLogger;
     public final Function1 switchCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,7 +65,6 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SecHolder extends RecyclerView.ViewHolder {
         public final LinearLayout appInfoContainer;
         public final View badge;
@@ -109,23 +107,23 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
     }
 
     public static final void access$updateAuthorizedPanels(SecAppAdapter secAppAdapter, String str, boolean z) {
-        Object obj;
+        Object next;
         AuthorizedPanelsRepositoryImpl authorizedPanelsRepositoryImpl = (AuthorizedPanelsRepositoryImpl) secAppAdapter.authorizedPanelsRepository;
         Set<String> stringSet = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle()).getStringSet("authorized_panels", EmptySet.INSTANCE);
         stringSet.getClass();
         Iterator<T> it = stringSet.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (Intrinsics.areEqual((String) obj, str)) {
+                next = it.next();
+                if (Intrinsics.areEqual((String) next, str)) {
                     break;
                 }
             }
         }
-        String str2 = (String) obj;
+        String str2 = (String) next;
         boolean z2 = false;
         if (str2 != null && str2.length() > 0) {
             z2 = true;
@@ -138,11 +136,11 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
         if (z || !z2) {
             return;
         }
-        Set singleton = Collections.singleton(str);
-        SharedPreferences instantiateSharedPrefs = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle());
-        Set<String> stringSet2 = instantiateSharedPrefs.getStringSet("authorized_panels", EmptySet.INSTANCE);
+        Set setSingleton = Collections.singleton(str);
+        SharedPreferences sharedPreferencesInstantiateSharedPrefs = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle());
+        Set<String> stringSet2 = sharedPreferencesInstantiateSharedPrefs.getStringSet("authorized_panels", EmptySet.INSTANCE);
         stringSet2.getClass();
-        instantiateSharedPrefs.edit().putStringSet("authorized_panels", SetsKt___SetsKt.minus((Set) stringSet2, (Iterable) singleton)).apply();
+        sharedPreferencesInstantiateSharedPrefs.edit().putStringSet("authorized_panels", SetsKt___SetsKt.minus((Set) stringSet2, (Iterable) setSingleton)).apply();
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -150,6 +148,10 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
         return this.listOfServices.size();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x003c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int getTotalFavoriteAndActiveAppCount() {
         List list = this.listOfServices;
         ArrayList arrayList = new ArrayList();
@@ -157,12 +159,11 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
             ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) obj;
             ComponentName componentName = controlsServiceInfo.componentName;
             SecFavoritesRenderer secFavoritesRenderer = this.favoritesRenderer;
-            if (((Number) secFavoritesRenderer.favoriteFunction.mo779invoke(componentName)).intValue() > 0) {
-                if (((Boolean) secFavoritesRenderer.getActiveFlag.mo779invoke(controlsServiceInfo.componentName)).booleanValue()) {
-                    arrayList.add(obj);
+            if (((Number) secFavoritesRenderer.favoriteFunction.mo781invoke(componentName)).intValue() > 0) {
+                if (!((Boolean) secFavoritesRenderer.getActiveFlag.mo781invoke(controlsServiceInfo.componentName)).booleanValue()) {
+                    if (controlsServiceInfo.panelActivity != null) {
+                    }
                 }
-            }
-            if (controlsServiceInfo.panelActivity != null) {
                 arrayList.add(obj);
             }
         }
@@ -170,8 +171,8 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
-        String str;
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) throws Resources.NotFoundException {
+        String string;
         final SecHolder secHolder = (SecHolder) viewHolder;
         final ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) this.listOfServices.get(i);
         secHolder.icon.setImageDrawable(controlsServiceInfo.loadIcon());
@@ -179,26 +180,26 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
         final boolean z = controlsServiceInfo.panelActivity != null;
         SecFavoritesRenderer secFavoritesRenderer = secHolder.favRenderer;
         if (z) {
-            str = null;
+            string = null;
         } else {
-            int intValue = ((Number) secFavoritesRenderer.favoriteFunction.mo779invoke(controlsServiceInfo.componentName)).intValue();
-            if (intValue != 0) {
-                str = secFavoritesRenderer.resources.getQuantityString(com.android.systemui.R.plurals.controls_item_number_of_favorites, intValue, Integer.valueOf(intValue));
-                str.getClass();
+            int iIntValue = ((Number) secFavoritesRenderer.favoriteFunction.mo781invoke(controlsServiceInfo.componentName)).intValue();
+            if (iIntValue != 0) {
+                string = secFavoritesRenderer.resources.getQuantityString(com.android.systemui.R.plurals.controls_item_number_of_favorites, iIntValue, Integer.valueOf(iIntValue));
+                string.getClass();
             } else {
-                str = secFavoritesRenderer.resources.getString(com.android.systemui.R.string.controls_no_items_favorites);
-                str.getClass();
+                string = secFavoritesRenderer.resources.getString(com.android.systemui.R.string.controls_no_items_favorites);
+                string.getClass();
             }
         }
-        secHolder.favorites.setText(str);
+        secHolder.favorites.setText(string);
         secHolder.favorites.setVisibility(0);
-        CharSequence loadLabel = controlsServiceInfo.loadLabel();
+        CharSequence charSequenceLoadLabel = controlsServiceInfo.loadLabel();
         SwitchCompat switchCompat = secHolder.onOff;
-        switchCompat.setContentDescription(loadLabel);
-        switchCompat.setEnabled(((Number) secFavoritesRenderer.favoriteFunction.mo779invoke(controlsServiceInfo.componentName)).intValue() > 0 || z);
-        boolean isEnabled = switchCompat.isEnabled();
+        switchCompat.setContentDescription(charSequenceLoadLabel);
+        switchCompat.setEnabled(((Number) secFavoritesRenderer.favoriteFunction.mo781invoke(controlsServiceInfo.componentName)).intValue() > 0 || z);
+        boolean zIsEnabled = switchCompat.isEnabled();
         Function1 function1 = secFavoritesRenderer.getActiveFlag;
-        switchCompat.setChecked(isEnabled && ((Boolean) function1.mo779invoke(controlsServiceInfo.componentName)).booleanValue());
+        switchCompat.setChecked(zIsEnabled && ((Boolean) function1.mo781invoke(controlsServiceInfo.componentName)).booleanValue());
         Log.d("SecAppAdapter", "bindData isPanelType = " + z);
         final SecAppAdapter secAppAdapter = SecAppAdapter.this;
         if (z) {
@@ -208,28 +209,28 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
             secHolder.favorites.setVisibility(8);
         }
         if (!z) {
-            if (((Number) secFavoritesRenderer.favoriteFunction.mo779invoke(controlsServiceInfo.componentName)).intValue() == 0 && ((Boolean) function1.mo779invoke(controlsServiceInfo.componentName)).booleanValue()) {
+            if (((Number) secFavoritesRenderer.favoriteFunction.mo781invoke(controlsServiceInfo.componentName)).intValue() == 0 && ((Boolean) function1.mo781invoke(controlsServiceInfo.componentName)).booleanValue()) {
                 secFavoritesRenderer.setActiveFlag.invoke(controlsServiceInfo.componentName, Boolean.FALSE);
             }
         }
         secHolder.onOffLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.adapter.SecAppAdapter$SecHolder$bindData$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                if (!SecAppAdapter.SecHolder.this.onOff.isEnabled()) {
-                    SecAppAdapter.SecHolder.this.itemView.performClick();
+                if (!secHolder.onOff.isEnabled()) {
+                    secHolder.itemView.performClick();
                     return;
                 }
-                boolean z2 = !SecAppAdapter.SecHolder.this.onOff.isChecked();
-                SecAppAdapter.SecHolder.this.onOff.setChecked(z2);
+                boolean z2 = !secHolder.onOff.isChecked();
+                secHolder.onOff.setChecked(z2);
                 if (z) {
                     SecAppAdapter.access$updateAuthorizedPanels(secAppAdapter, controlsServiceInfo.componentName.getPackageName(), z2);
-                    SecAppAdapter.SecHolder.this.favRenderer.setActivePanelFlag.invoke(controlsServiceInfo.componentName, Boolean.valueOf(z2));
+                    secHolder.favRenderer.setActivePanelFlag.invoke(controlsServiceInfo.componentName, Boolean.valueOf(z2));
                 } else {
-                    SecAppAdapter.SecHolder.this.favRenderer.setActiveFlag.invoke(controlsServiceInfo.componentName, Boolean.valueOf(z2));
+                    secHolder.favRenderer.setActiveFlag.invoke(controlsServiceInfo.componentName, Boolean.valueOf(z2));
                 }
-                SecAppAdapter.SecHolder secHolder2 = SecAppAdapter.SecHolder.this;
-                secHolder2.switchCallback.mo779invoke(secHolder2.title.getText().toString());
-                SecAppAdapter.SecHolder secHolder3 = SecAppAdapter.SecHolder.this;
+                SecAppAdapter.SecHolder secHolder2 = secHolder;
+                secHolder2.switchCallback.mo781invoke(secHolder2.title.getText().toString());
+                SecAppAdapter.SecHolder secHolder3 = secHolder;
                 (secHolder3.isOOBE ? new SALogger.Event.ChooseAppOnOff(z2) : new SALogger.Event.ChooseAppOnOffOnManageApps(z2)).sendEvent(secHolder3.saLogger.systemUIAnalyticsWrapper);
             }
         });
@@ -242,10 +243,10 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
             view.setVisibility(8);
         }
         badgeProviderImpl.setDescription(controlsServiceInfo.componentName, secHolder.itemView, ((Object) secHolder.title.getText()) + ", " + ((Object) secHolder.favorites.getText()));
-        secHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.adapter.SecAppAdapter$onBindViewHolder$1
+        secHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.adapter.SecAppAdapter.onBindViewHolder.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                String str2;
+                String strFlattenToString;
                 if (((ControlsServiceInfo) SecAppAdapter.this.listOfServices.get(i)).panelActivity != null) {
                     SwitchCompat switchCompat2 = (SwitchCompat) secHolder.itemView.requireViewById(com.android.systemui.R.id.on_off_switch);
                     boolean z2 = !switchCompat2.isChecked();
@@ -260,12 +261,12 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
                     ControlsServiceInfo controlsServiceInfo2 = (ControlsServiceInfo) secAppAdapter4.listOfServices.get(i);
                     ComponentName componentName2 = controlsServiceInfo2.componentName;
                     if (componentName2 != null) {
-                        str2 = componentName2.flattenToString();
+                        strFlattenToString = componentName2.flattenToString();
                     } else {
                         PackageItemInfo packageItemInfo = controlsServiceInfo2.packageItemInfo;
-                        str2 = packageItemInfo != null ? packageItemInfo.packageName : null;
+                        strFlattenToString = packageItemInfo != null ? packageItemInfo.packageName : null;
                     }
-                    function12.mo779invoke(ComponentName.unflattenFromString(str2));
+                    function12.mo781invoke(ComponentName.unflattenFromString(strFlattenToString));
                 }
                 SecAppAdapter secAppAdapter5 = SecAppAdapter.this;
                 secAppAdapter5.saLogger.sendEvent(secAppAdapter5.isOOBE ? SALogger.Event.TapAppList.INSTANCE : SALogger.Event.TapAppListOnManageApps.INSTANCE);
@@ -301,19 +302,19 @@ public final class SecAppAdapter extends RecyclerView.Adapter {
                 executor3.execute(new Runnable() { // from class: com.android.systemui.controls.management.adapter.SecAppAdapter$callback$1$onServicesUpdated$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecAppAdapter secAppAdapter2 = SecAppAdapter.this;
+                        SecAppAdapter secAppAdapter2 = secAppAdapter;
                         ControlsUtil controlsUtil2 = secAppAdapter2.controlsUtil;
                         Context context2 = secAppAdapter2.context;
                         List list2 = list;
                         controlsUtil2.getClass();
                         secAppAdapter2.listOfServices = ControlsUtil.getListOfServices(context2, list2);
-                        ListPopupWindow$$ExternalSyntheticOutline0.m(SecAppAdapter.this.listOfServices.size(), "onServiceUpdated listOfServices = ", "SecAppAdapter");
+                        ListPopupWindow$$ExternalSyntheticOutline0.m(secAppAdapter.listOfServices.size(), "onServiceUpdated listOfServices = ", "SecAppAdapter");
                         Executor executor5 = executor4;
-                        final SecAppAdapter secAppAdapter3 = SecAppAdapter.this;
+                        final SecAppAdapter secAppAdapter3 = secAppAdapter;
                         executor5.execute(new Runnable() { // from class: com.android.systemui.controls.management.adapter.SecAppAdapter$callback$1$onServicesUpdated$1.1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                SecAppAdapter.this.notifyDataSetChanged();
+                                secAppAdapter3.notifyDataSetChanged();
                             }
                         });
                     }

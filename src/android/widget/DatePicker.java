@@ -166,12 +166,12 @@ public class DatePicker extends FrameLayout {
         if (getImportantForAutofill() == 0) {
             setImportantForAutofill(1);
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.DatePicker, attributeSet, obtainStyledAttributes, i, i2);
-        boolean z = obtainStyledAttributes.getBoolean(17, false);
-        int i3 = obtainStyledAttributes.getInt(16, 1);
-        int i4 = obtainStyledAttributes.getInt(3, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.DatePicker, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(17, false);
+        int i3 = typedArrayObtainStyledAttributes.getInt(16, 1);
+        int i4 = typedArrayObtainStyledAttributes.getInt(3, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (i3 == 2 && z) {
             this.mMode = context.getResources().getInteger(R.integer.date_picker_mode);
         } else {
@@ -188,7 +188,7 @@ public class DatePicker extends FrameLayout {
         this.mDelegate.setAutoFillChangeListener(new OnDateChangedListener() { // from class: android.widget.DatePicker$$ExternalSyntheticLambda0
             @Override // android.widget.DatePicker.OnDateChangedListener
             public final void onDateChanged(DatePicker datePicker, int i5, int i6, int i7) {
-                DatePicker.this.lambda$new$0(context, datePicker, i5, i6, i7);
+                this.f$0.lambda$new$0(context, datePicker, i5, i6, i7);
             }
         });
     }
@@ -405,11 +405,11 @@ public class DatePicker extends FrameLayout {
 
         @Override // android.widget.DatePicker.DatePickerDelegate
         public final AutofillValue getAutofillValue() {
-            long j = this.mAutofilledValue;
-            if (j == 0) {
-                j = this.mCurrentDate.getTimeInMillis();
+            long timeInMillis = this.mAutofilledValue;
+            if (timeInMillis == 0) {
+                timeInMillis = this.mCurrentDate.getTimeInMillis();
             }
-            return AutofillValue.forDate(j);
+            return AutofillValue.forDate(timeInMillis);
         }
 
         protected void resetAutofilledValue() {

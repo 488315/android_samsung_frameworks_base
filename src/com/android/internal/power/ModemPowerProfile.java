@@ -101,7 +101,7 @@ public class ModemPowerProfile {
         sparseArray4.put(262144, "MMWAVE");
     }
 
-    public void parseFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public void parseFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         String name;
         int depth = xmlPullParser.getDepth();
         while (XmlUtils.nextElementWithin(xmlPullParser, depth)) {
@@ -132,7 +132,7 @@ public class ModemPowerProfile {
         }
     }
 
-    private void parseActivePowerConstantsFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    private void parseActivePowerConstantsFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         try {
             int typeFromAttribute = getTypeFromAttribute(xmlPullParser, ATTR_RAT, MODEM_RAT_TYPE_NAMES);
             int typeFromAttribute2 = typeFromAttribute == 2097152 ? getTypeFromAttribute(xmlPullParser, ATTR_NR_FREQUENCY, MODEM_NR_FREQUENCY_RANGE_NAMES) : 0;
@@ -145,13 +145,13 @@ public class ModemPowerProfile {
                         setPowerConstant(536870912 | typeFromAttribute | typeFromAttribute2, xmlPullParser.getText());
                     }
                 } else if (name.equals(TAG_TRANSMIT)) {
-                    int readIntAttribute = XmlUtils.readIntAttribute(xmlPullParser, "level", -1);
+                    int intAttribute = XmlUtils.readIntAttribute(xmlPullParser, "level", -1);
                     if (xmlPullParser.next() == 4) {
                         String text = xmlPullParser.getText();
-                        if (readIntAttribute < 0 || readIntAttribute >= 5) {
-                            Slog.e(TAG, "Unexpected tx level: " + readIntAttribute + ". Must be between 0 and 4");
+                        if (intAttribute < 0 || intAttribute >= 5) {
+                            Slog.e(TAG, "Unexpected tx level: " + intAttribute + ". Must be between 0 and 4");
                         } else {
-                            setPowerConstant(MODEM_TX_LEVEL_MAP[readIntAttribute] | 805306368 | typeFromAttribute | typeFromAttribute2, text);
+                            setPowerConstant(MODEM_TX_LEVEL_MAP[intAttribute] | 805306368 | typeFromAttribute | typeFromAttribute2, text);
                         }
                     }
                 } else {
@@ -164,14 +164,14 @@ public class ModemPowerProfile {
     }
 
     private static int getTypeFromAttribute(XmlPullParser xmlPullParser, String str, SparseArray<String> sparseArray) {
-        String readStringAttribute = XmlUtils.readStringAttribute(xmlPullParser, str);
-        if (readStringAttribute == null) {
+        String stringAttribute = XmlUtils.readStringAttribute(xmlPullParser, str);
+        if (stringAttribute == null) {
             return 0;
         }
         int size = sparseArray.size();
         int i = -1;
         for (int i2 = 0; i2 < size; i2++) {
-            if (readStringAttribute.equals(sparseArray.valueAt(i2))) {
+            if (stringAttribute.equals(sparseArray.valueAt(i2))) {
                 i = i2;
             }
         }
@@ -180,7 +180,7 @@ public class ModemPowerProfile {
             for (int i3 = 0; i3 < size; i3++) {
                 strArr[i3] = sparseArray.valueAt(i3);
             }
-            throw new IllegalArgumentException("Unexpected " + str + " value : " + readStringAttribute + ". Acceptable values are " + Arrays.toString(strArr));
+            throw new IllegalArgumentException("Unexpected " + str + " value : " + stringAttribute + ". Acceptable values are " + Arrays.toString(strArr));
         }
         return sparseArray.keyAt(i);
     }

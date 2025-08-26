@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.app.SemWallpaperColors;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.net.Uri;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.telephony.PinResult;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -19,7 +22,9 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.collection.MutableVectorKt$$ExternalSyntheticOutline0;
+import com.android.internal.telephony.ISemTelephony;
 import com.android.internal.util.LatencyTracker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardMessageAreaController;
@@ -29,7 +34,6 @@ import com.android.keyguard.KeyguardSimPukViewController;
 import com.android.keyguard.domain.interactor.KeyguardKeyboardInteractor;
 import com.android.systemui.CscRune;
 import com.android.systemui.Dependency;
-import com.android.systemui.FontSizeUtils;
 import com.android.systemui.LsRune;
 import com.android.systemui.R;
 import com.android.systemui.aibrief.ui.BriefViewController;
@@ -50,7 +54,6 @@ import com.android.systemui.widget.SystemUITextView;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecSimPukViewController extends KeyguardSimPukViewController {
     public AlertDialog mCarrierDialog;
@@ -66,14 +69,13 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
     public final SystemUITextView mSimCardName;
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecSimPukViewController$2, reason: invalid class name */
     class AnonymousClass2 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass2() {
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-        public final void onSimStateChanged(int i, int i2, int i3) {
+        public final void onSimStateChanged(int i, int i2, int i3) throws Resources.NotFoundException {
             Log.i("KeyguardSecSimPukViewController", MutableVectorKt$$ExternalSyntheticOutline0.m(i, i3, "onSimStateChanged(subId=", ",state=", ")"));
             KeyguardSecSimPukViewController keyguardSecSimPukViewController = KeyguardSecSimPukViewController.this;
             KeyguardSecurityCallback keyguardSecurityCallback = keyguardSecSimPukViewController.getKeyguardSecurityCallback();
@@ -137,7 +139,6 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecSimPukViewController$3, reason: invalid class name */
     public class AnonymousClass3 extends KeyguardSimPukViewController.CheckSimPuk {
         public AnonymousClass3(String str, String str2, int i) {
@@ -148,13 +149,10 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         public final void onSimLockChangedResponse(final PinResult pinResult) {
             ((KeyguardSecSimPukView) ((ViewController) KeyguardSecSimPukViewController.this).mView).post(new Runnable() { // from class: com.android.keyguard.KeyguardSecSimPukViewController$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    View view;
-                    View view2;
-                    KeyguardSecSimPukViewController.AnonymousClass3 anonymousClass3 = KeyguardSecSimPukViewController.AnonymousClass3.this;
+                public final void run() throws Resources.NotFoundException {
+                    KeyguardSecSimPukViewController.AnonymousClass3 anonymousClass3 = this.f$0;
                     PinResult pinResult2 = pinResult;
-                    view = ((ViewController) KeyguardSecSimPukViewController.this).mView;
-                    ((KeyguardSecSimPukView) view).resetPasswordText(true, pinResult2.getResult() != 0);
+                    ((KeyguardSecSimPukView) ((ViewController) KeyguardSecSimPukViewController.this).mView).resetPasswordText(true, pinResult2.getResult() != 0);
                     KeyguardSecSimPukViewController.this.setEnabledKeypad(true);
                     KeyguardSecSimPukViewController.this.mOkButton.setVisibility(0);
                     KeyguardSecSimPukViewController.this.mProgressBar.setVisibility(8);
@@ -171,9 +169,9 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
                                 builder.setMessage(string);
                                 builder.setCancelable(false);
                                 builder.setNeutralButton(R.string.ok, (DialogInterface.OnClickListener) null);
-                                AlertDialog create = builder.create();
-                                keyguardSecSimPukViewController.mCarrierDialog = create;
-                                Window window = create.getWindow();
+                                AlertDialog alertDialogCreate = builder.create();
+                                keyguardSecSimPukViewController.mCarrierDialog = alertDialogCreate;
+                                Window window = alertDialogCreate.getWindow();
                                 Objects.requireNonNull(window);
                                 window.setType(2009);
                             } else {
@@ -189,12 +187,11 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
                         if (pinResult2.getResult() == 1) {
                             KeyguardSecSimPukViewController keyguardSecSimPukViewController2 = KeyguardSecSimPukViewController.this;
                             KeyguardSecMessageAreaController keyguardSecMessageAreaController = keyguardSecSimPukViewController2.mMessageAreaController;
-                            view2 = ((ViewController) keyguardSecSimPukViewController2).mView;
-                            KeyguardSecSimPukView keyguardSecSimPukView = (KeyguardSecSimPukView) view2;
+                            KeyguardSecSimPukView keyguardSecSimPukView = (KeyguardSecSimPukView) ((ViewController) keyguardSecSimPukViewController2).mView;
                             int attemptsRemaining = pinResult2.getAttemptsRemaining();
                             keyguardSecSimPukView.getClass();
-                            boolean isESimEmbedded = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isESimEmbedded();
-                            String string2 = attemptsRemaining == 0 ? keyguardSecSimPukView.getContext().getString(R.string.kg_password_wrong_puk_code_dead) : attemptsRemaining > 1 ? (!CscRune.SECURITY_LGU_USIM_TEXT || isESimEmbedded) ? CscRune.SECURITY_KOR_USIM_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_kor_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), Integer.valueOf(attemptsRemaining)) : CscRune.SECURITY_USE_CDMA_CARD_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_ctc_sim_puk_remaining_attempts, Integer.valueOf(attemptsRemaining)) : keyguardSecSimPukView.getContext().getString(R.string.kg_sim_puk_remaining_attempts, Integer.valueOf(attemptsRemaining)) : keyguardSecSimPukView.getContext().getString(R.string.kg_lgu_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), 10) : attemptsRemaining == 1 ? (!CscRune.SECURITY_LGU_USIM_TEXT || isESimEmbedded) ? CscRune.SECURITY_KOR_USIM_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_kor_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), Integer.valueOf(attemptsRemaining)) : CscRune.SECURITY_USE_CDMA_CARD_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_ctc_sim_puk_remaining_1_attempt) : keyguardSecSimPukView.getContext().getString(R.string.kg_sim_puk_remaining_1_attempt) : keyguardSecSimPukView.getContext().getString(R.string.kg_lgu_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), 10) : keyguardSecSimPukView.getContext().getString(R.string.kg_password_puk_failed);
+                            boolean zIsESimEmbedded = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isESimEmbedded();
+                            String string2 = attemptsRemaining == 0 ? keyguardSecSimPukView.getContext().getString(R.string.kg_password_wrong_puk_code_dead) : attemptsRemaining > 1 ? (!CscRune.SECURITY_LGU_USIM_TEXT || zIsESimEmbedded) ? CscRune.SECURITY_KOR_USIM_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_kor_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), Integer.valueOf(attemptsRemaining)) : CscRune.SECURITY_USE_CDMA_CARD_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_ctc_sim_puk_remaining_attempts, Integer.valueOf(attemptsRemaining)) : keyguardSecSimPukView.getContext().getString(R.string.kg_sim_puk_remaining_attempts, Integer.valueOf(attemptsRemaining)) : keyguardSecSimPukView.getContext().getString(R.string.kg_lgu_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), 10) : attemptsRemaining == 1 ? (!CscRune.SECURITY_LGU_USIM_TEXT || zIsESimEmbedded) ? CscRune.SECURITY_KOR_USIM_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_kor_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), Integer.valueOf(attemptsRemaining)) : CscRune.SECURITY_USE_CDMA_CARD_TEXT ? keyguardSecSimPukView.getContext().getString(R.string.kg_ctc_sim_puk_remaining_1_attempt) : keyguardSecSimPukView.getContext().getString(R.string.kg_sim_puk_remaining_1_attempt) : keyguardSecSimPukView.getContext().getString(R.string.kg_lgu_sim_puk_remaining_attempts, Integer.valueOf(10 - attemptsRemaining), 10) : keyguardSecSimPukView.getContext().getString(R.string.kg_password_puk_failed);
                             KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(attemptsRemaining, "getPukPasswordErrorMessage: attemptsRemaining=", " displayMessage=", string2, "KeyguardSimPukView");
                             keyguardSecMessageAreaController.setMessage(string2, false);
                         } else {
@@ -210,7 +207,6 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SecStateMachine extends KeyguardSimPukViewController.StateMachine {
         public /* synthetic */ SecStateMachine(KeyguardSecSimPukViewController keyguardSecSimPukViewController, int i) {
             this();
@@ -300,12 +296,12 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         this.mSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.keyguard.KeyguardSecSimPukViewController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                KeyguardSecSimPukViewController.this.updateSimIconImage$1();
+                this.f$0.updateSimIconImage$1();
             }
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardSecSimPukViewController.1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 boolean z;
                 KeyguardSecSimPukViewController keyguardSecSimPukViewController = KeyguardSecSimPukViewController.this;
                 int i = keyguardSecSimPukViewController.mOrientation;
@@ -326,11 +322,6 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
                 if (z2) {
                     keyguardSecSimPukViewController.resetState();
                 }
-            }
-
-            @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDensityOrFontScaleChanged() {
-                FontSizeUtils.updateFontSize(KeyguardSecSimPukViewController.this.mSimCardName, R.dimen.kg_sim_pin_name_font_size, 0.8f, 1.0f);
             }
         };
         this.mSettingsValueList = new Uri[]{Settings.System.getUriFor(SettingsHelper.INDEX_EMERGENCY_MODE), Settings.Global.getUriFor(SettingsHelper.INDEX_SIM_SELECT_NAME_1), Settings.Global.getUriFor(SettingsHelper.INDEX_SIM_SELECT_NAME_2)};
@@ -407,7 +398,7 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
     }
 
     @Override // com.android.keyguard.KeyguardSimPukViewController, com.android.keyguard.KeyguardSecPinBasedInputViewController, com.android.keyguard.KeyguardPinBasedInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
-    public final void resetState() {
+    public final void resetState() throws Resources.NotFoundException {
         super.resetState();
         showDefaultMessage();
         if (this.mSimImageView != null) {
@@ -417,27 +408,83 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
     }
 
     public final void setSimInfoViewVisibility$1(int i) {
-        View findViewById = ((KeyguardSecSimPukView) this.mView).findViewById(R.id.keyguard_sec_sim_info_view_container);
-        if (findViewById != null) {
-            findViewById.setVisibility(i);
+        View viewFindViewById = ((KeyguardSecSimPukView) this.mView).findViewById(R.id.keyguard_sec_sim_info_view_container);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(i);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0140  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00f8  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00ec  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x0140  */
     @Override // com.android.keyguard.KeyguardSimPukViewController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void showDefaultMessage() {
-        /*
-            Method dump skipped, instructions count: 360
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecSimPukViewController.showDefaultMessage():void");
+    public final void showDefaultMessage() throws Resources.NotFoundException {
+        String string;
+        String iccId;
+        KeyguardSecMessageAreaController keyguardSecMessageAreaController;
+        ISemTelephony iSemTelephonyAsInterface;
+        TooltipPopup$$ExternalSyntheticOutline0.m(this.mSubId, "KeyguardSecSimPukViewController", new StringBuilder("showDefaultMessage subId="));
+        if (!SubscriptionManager.isValidSubscriptionId(this.mSubId)) {
+            TooltipPopup$$ExternalSyntheticOutline0.m(this.mSubId, "KeyguardSecSimPukViewController", new StringBuilder("showDefaultMessage isValidSubscriptionId failed !!!  subid:"));
+        } else {
+            if (SecurityUtils.getSimSlotNum(this.mSubId) == -1) {
+                Log.d("KeyguardSecSimPukViewController", "showDefaultMessage - skip update");
+                return;
+            }
+            int i = this.mSubId;
+            try {
+                iSemTelephonyAsInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+            } catch (Exception e) {
+                KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("Exception: ", e, "KeyguardSecSimPukViewController");
+            }
+            int simPukRetryForSubscriber = iSemTelephonyAsInterface != null ? iSemTelephonyAsInterface.getSimPukRetryForSubscriber(i) : 0;
+            Log.i("KeyguardSecSimPukViewController", "getSimPukLockInfoResult(): num_of_retry is " + simPukRetryForSubscriber);
+            Resources resources = getResources();
+            if (simPukRetryForSubscriber == -1) {
+                if (CscRune.SECURITY_KTT_USIM_TEXT) {
+                    string = resources.getString(R.string.kg_kt_sim_puk_instructions);
+                } else if (CscRune.SECURITY_KOR_USIM_TEXT) {
+                    string = resources.getString(R.string.kg_kor_sim_puk_instructions);
+                } else if (CscRune.SECURITY_USE_CDMA_CARD_TEXT) {
+                    string = resources.getString(R.string.kg_ctc_sim_puk_instructions);
+                } else {
+                    SubscriptionInfo subscriptionInfoForSubId = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).getSubscriptionInfoForSubId(this.mSubId);
+                    string = (subscriptionInfoForSubId == null || (iccId = subscriptionInfoForSubId.getIccId()) == null || !iccId.startsWith("894101")) ? resources.getString(R.string.kg_sim_puk_instructions) : resources.getString(R.string.kg_swisscom_sim_puk_instructions);
+                }
+                keyguardSecMessageAreaController = this.mMessageAreaController;
+                if (keyguardSecMessageAreaController != null) {
+                    PasswordTextView passwordTextView = this.mPasswordEntry;
+                    if (passwordTextView != null && ((SecPasswordTextView) passwordTextView).mText.length() > 0) {
+                        return;
+                    } else {
+                        keyguardSecMessageAreaController.setMessage(string, false);
+                    }
+                }
+            } else {
+                if (simPukRetryForSubscriber != 1) {
+                    if (simPukRetryForSubscriber != 10) {
+                        if (CscRune.SECURITY_KOR_USIM_TEXT) {
+                            string = resources.getString(R.string.kg_kor_sim_puk_instructions) + " " + resources.getString(R.string.kg_sim_pin_remaining_attempts, Integer.valueOf(simPukRetryForSubscriber));
+                        } else {
+                            string = CscRune.SECURITY_USE_CDMA_CARD_TEXT ? resources.getString(R.string.kg_ctc_sim_puk_remaining_attempts, Integer.valueOf(simPukRetryForSubscriber)) : resources.getString(R.string.kg_sim_puk_remaining_attempts, Integer.valueOf(simPukRetryForSubscriber));
+                        }
+                    }
+                } else if (CscRune.SECURITY_KOR_USIM_TEXT) {
+                    string = resources.getString(R.string.kg_kor_sim_puk_instructions) + " " + resources.getString(R.string.kg_sim_pin_remaining_1_attempt);
+                } else {
+                    string = CscRune.SECURITY_USE_CDMA_CARD_TEXT ? resources.getString(R.string.kg_ctc_sim_puk_remaining_1_attempt) : resources.getString(R.string.kg_sim_puk_remaining_1_attempt);
+                }
+                keyguardSecMessageAreaController = this.mMessageAreaController;
+                if (keyguardSecMessageAreaController != null) {
+                }
+            }
+        }
+        PasswordTextView passwordTextView2 = this.mPasswordEntry;
+        if (passwordTextView2 != null) {
+            passwordTextView2.requestFocus();
+        }
     }
 
     public final void updateESimLayout$1() {
@@ -476,6 +523,10 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         ImageView imageView = this.mSimImageView;
         if (imageView instanceof SystemUIImageView) {
             SystemUIImageView systemUIImageView = (SystemUIImageView) imageView;
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) systemUIImageView.getLayoutParams();
+            marginLayoutParams.width = getResources().getDimensionPixelSize(R.dimen.kg_sim_pin_icon_size);
+            marginLayoutParams.height = getResources().getDimensionPixelSize(R.dimen.kg_sim_pin_icon_size);
+            systemUIImageView.setLayoutParams(marginLayoutParams);
             if (LsRune.SECURITY_ESIM && DeviceState.isESIM(getContext(), simSlotNum) && ((KeyguardSimPukViewController) this).mKeyguardUpdateMonitor.isESimEmbedded()) {
                 Log.d("KeyguardSecSimPukViewController", "this is e-SIM");
                 KeyguardSecESimArea keyguardSecESimArea = this.mESimSkipArea;
@@ -506,12 +557,15 @@ public class KeyguardSecSimPukViewController extends KeyguardSimPukViewControlle
         }
         if (this.mSimCardName != null) {
             SystemUITextView systemUITextView = this.mSimCardName;
+            ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) systemUITextView.getLayoutParams();
+            marginLayoutParams2.height = getResources().getDimensionPixelSize(R.dimen.kg_sim_pin_icon_size);
+            systemUITextView.setLayoutParams(marginLayoutParams2);
             String string = Settings.Global.getString(getContext().getContentResolver(), simSlotNum == 0 ? SettingsHelper.INDEX_SIM_SELECT_NAME_1 : SettingsHelper.INDEX_SIM_SELECT_NAME_2);
-            boolean isEmpty = TextUtils.isEmpty(string);
-            if (!isEmpty) {
+            boolean zIsEmpty = TextUtils.isEmpty(string);
+            if (!zIsEmpty) {
                 systemUITextView.setText(string);
             }
-            systemUITextView.setVisibility(isEmpty ? 8 : 0);
+            systemUITextView.setVisibility(zIsEmpty ? 8 : 0);
         }
     }
 

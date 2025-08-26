@@ -103,14 +103,14 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
 
     static float hueMove(float f, int i) {
         int length;
-        int findRange = findRange(f);
-        float findRatio = findRatio(f, findRange);
-        if (findRatio > 0.5f) {
-            length = (findRange + i) % (range.length - 1);
+        int iFindRange = findRange(f);
+        float fFindRatio = findRatio(f, iFindRange);
+        if (fFindRatio > 0.5f) {
+            length = (iFindRange + i) % (range.length - 1);
         } else {
-            length = (findRange - i) % (range.length - 1);
+            length = (iFindRange - i) % (range.length - 1);
         }
-        return getHue(length, findRatio);
+        return getHue(length, fFindRatio);
     }
 
     static boolean isGrayImage(float[][] fArr) {
@@ -300,10 +300,10 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
 
     public float getExpressiveHue(float f, int i) {
         float f2;
-        float findRatio = findRatio(f, findRange(f));
+        float fFindRatio = findRatio(f, findRange(f));
         int[] iArr = range;
-        float hue = getHue((((r0 - 5) + iArr.length) - 1) % (iArr.length - 1), findRatio);
-        float hue2 = getHue((((r0 - (-5)) + iArr.length) - 1) % (iArr.length - 1), findRatio);
+        float hue = getHue((((r0 - 5) + iArr.length) - 1) % (iArr.length - 1), fFindRatio);
+        float hue2 = getHue((((r0 - (-5)) + iArr.length) - 1) % (iArr.length - 1), fFindRatio);
         Log.v(TAG, "getExpressiveHue : leftHue = " + hue + " rightHue = " + hue2 + " C" + (i + 1) + " case");
         if (hue > hue2) {
             Log.v(TAG, "getExpressiveHue : leftHue(" + hue + ") > c1, c2, c3, c4 > rightHue(" + hue2 + NavigationBarInflaterView.KEY_CODE_END);

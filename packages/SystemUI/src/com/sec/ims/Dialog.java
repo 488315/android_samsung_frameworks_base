@@ -9,7 +9,6 @@ import com.sec.ims.util.IMSLog;
 import com.sec.ims.util.ImsUri;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Dialog implements Parcelable {
     public static final int CALL_STATE_ACTIVE = 1;
@@ -83,12 +82,12 @@ public class Dialog implements Parcelable {
     }
 
     private String getMsisdn(String str) {
-        ImsUri parse = ImsUri.parse(str);
-        if (parse == null) {
+        ImsUri imsUri = ImsUri.parse(str);
+        if (imsUri == null) {
             return "";
         }
-        String msisdn = parse.getMsisdn();
-        return msisdn == null ? parse.getUser() : msisdn;
+        String msisdn = imsUri.getMsisdn();
+        return msisdn == null ? imsUri.getUser() : msisdn;
     }
 
     @Override // android.os.Parcelable
@@ -229,26 +228,26 @@ public class Dialog implements Parcelable {
     }
 
     public String toXmlString() {
-        String m;
-        String m2;
+        String strM;
+        String strM2;
         if (TextUtils.isEmpty(this.mLocalDispName)) {
-            m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t<identity>"), this.mDeviceId, "</identity>\n");
+            strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t<identity>"), this.mDeviceId, "</identity>\n");
         } else {
             StringBuilder sb = new StringBuilder("\t\t\t<identity display-name=\"");
             sb.append(this.mLocalDispName);
             sb.append("\">");
-            m = TransitionKt$$ExternalSyntheticOutline0.m(sb, this.mDeviceId, "</identity>\n");
+            strM = TransitionKt$$ExternalSyntheticOutline0.m(sb, this.mDeviceId, "</identity>\n");
         }
         if (TextUtils.isEmpty(this.mRemoteDispName)) {
-            m2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t<identity>"), this.mRemoteUri, "</identity>\n");
+            strM2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t<identity>"), this.mRemoteUri, "</identity>\n");
         } else {
             StringBuilder sb2 = new StringBuilder("\t\t\t<identity display-name=\"");
             sb2.append(this.mRemoteDispName);
             sb2.append("\">");
-            m2 = TransitionKt$$ExternalSyntheticOutline0.m(sb2, this.mRemoteUri, "</identity>\n");
+            strM2 = TransitionKt$$ExternalSyntheticOutline0.m(sb2, this.mRemoteUri, "</identity>\n");
         }
-        String m3 = this.mAudioDirection > 0 ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\t\t\t<mediaAttributes>\n", this.mAudioDirection > 0 ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t\t<mediaType>audio</mediaType>\n\t\t\t\t<mediaDirection>"), convertMediaDirection(this.mAudioDirection), "</mediaDirection>\n") : "", "\t\t\t</mediaAttributes>\n") : "";
-        String m4 = this.mVideoDirection > 0 ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\t\t\t<mediaAttributes>\n", this.mVideoDirection > 0 ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t\t<mediaType>video</mediaType>\n\t\t\t\t<mediaDirection>"), convertMediaDirection(this.mVideoDirection), "</mediaDirection>\n") : "", "\t\t\t</mediaAttributes>\n") : "";
+        String strM3 = this.mAudioDirection > 0 ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\t\t\t<mediaAttributes>\n", this.mAudioDirection > 0 ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t\t<mediaType>audio</mediaType>\n\t\t\t\t<mediaDirection>"), convertMediaDirection(this.mAudioDirection), "</mediaDirection>\n") : "", "\t\t\t</mediaAttributes>\n") : "";
+        String strM4 = this.mVideoDirection > 0 ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("\t\t\t<mediaAttributes>\n", this.mVideoDirection > 0 ? TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("\t\t\t\t<mediaType>video</mediaType>\n\t\t\t\t<mediaDirection>"), convertMediaDirection(this.mVideoDirection), "</mediaDirection>\n") : "", "\t\t\t</mediaAttributes>\n") : "";
         String str = this.mCallState != 2 ? "yes" : "no";
         StringBuilder sb3 = new StringBuilder("\t<dialog id=\"");
         sb3.append(this.mSipCallId);
@@ -263,9 +262,9 @@ public class Dialog implements Parcelable {
         sb3.append("\">\n\t\t<sa:exclusive>");
         sb3.append(this.mIsExclusive);
         sb3.append("</sa:exclusive>\n\t\t<state>");
-        MoveResult$$ExternalSyntheticOutline0.m(sb3, convertState(this.mState), "</state>\n\t\t<local>\n", m, "\t\t\t<target uri=\"");
+        MoveResult$$ExternalSyntheticOutline0.m(sb3, convertState(this.mState), "</state>\n\t\t<local>\n", strM, "\t\t\t<target uri=\"");
         MoveResult$$ExternalSyntheticOutline0.m(sb3, this.mLocalUri, "\">\n\t\t\t\t<param pname=\"+sip.rendering\" pval=\"", str, "\"/>\n\t\t\t</target>\n");
-        MoveResult$$ExternalSyntheticOutline0.m(sb3, m3, m4, "\t\t</local>\n\t\t<remote>\n", m2);
+        MoveResult$$ExternalSyntheticOutline0.m(sb3, strM3, strM4, "\t\t</local>\n\t\t<remote>\n", strM2);
         sb3.append("\t\t</remote>\n\t\t<calltype>");
         sb3.append(this.mCallType);
         sb3.append("</calltype>\n\t\t<callslot>");

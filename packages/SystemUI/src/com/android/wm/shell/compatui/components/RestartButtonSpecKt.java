@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class RestartButtonSpecKt {
     public static final CompatUISpec RestartButtonSpec;
@@ -71,9 +70,9 @@ public abstract class RestartButtonSpecKt {
                             throw new ClassCastException();
                         }
                         view.setVisibility(0);
-                        View findViewById = view.findViewById(R.id.size_compat_restart_button);
-                        if (findViewById != null) {
-                            findViewById.setVisibility(0);
+                        View viewFindViewById = view.findViewById(R.id.size_compat_restart_button);
+                        if (viewFindViewById != null) {
+                            viewFindViewById.setVisibility(0);
                         }
                         return Unit.INSTANCE;
                     default:
@@ -95,9 +94,9 @@ public abstract class RestartButtonSpecKt {
                             throw new ClassCastException();
                         }
                         view.setVisibility(0);
-                        View findViewById = view.findViewById(R.id.size_compat_restart_button);
-                        if (findViewById != null) {
-                            findViewById.setVisibility(0);
+                        View viewFindViewById = view.findViewById(R.id.size_compat_restart_button);
+                        if (viewFindViewById != null) {
+                            viewFindViewById.setVisibility(0);
                         }
                         return Unit.INSTANCE;
                     default:

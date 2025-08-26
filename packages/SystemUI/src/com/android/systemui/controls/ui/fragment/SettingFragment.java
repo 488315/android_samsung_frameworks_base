@@ -1,5 +1,6 @@
 package com.android.systemui.controls.ui.fragment;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -19,7 +20,6 @@ import com.android.systemui.controls.util.SALogger;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SettingFragment extends PreferenceFragmentCompat {
     public SwitchPreferenceCompat controlDevicePreference;
@@ -27,7 +27,6 @@ public final class SettingFragment extends PreferenceFragmentCompat {
     public PreferenceScreen screen;
     public SwitchPreferenceCompat showDevicePreference;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,19 +45,19 @@ public final class SettingFragment extends PreferenceFragmentCompat {
     }
 
     @Override // androidx.preference.PreferenceFragmentCompat
-    public final void onCreatePreferences(String str) {
+    public final void onCreatePreferences(String str) throws Resources.NotFoundException {
         PreferenceManager preferenceManager = this.mPreferenceManager;
         if (preferenceManager == null) {
             throw new RuntimeException("This should be called after super.onCreate.");
         }
-        PreferenceScreen inflateFromResource = preferenceManager.inflateFromResource(requireContext(), R.xml.preference_setting, this.mPreferenceManager.mPreferenceScreen);
+        PreferenceScreen preferenceScreenInflateFromResource = preferenceManager.inflateFromResource(requireContext(), R.xml.preference_setting, this.mPreferenceManager.mPreferenceScreen);
         PreferenceManager preferenceManager2 = this.mPreferenceManager;
         PreferenceScreen preferenceScreen = preferenceManager2.mPreferenceScreen;
-        if (inflateFromResource != preferenceScreen) {
+        if (preferenceScreenInflateFromResource != preferenceScreen) {
             if (preferenceScreen != null) {
                 preferenceScreen.onDetached();
             }
-            preferenceManager2.mPreferenceScreen = inflateFromResource;
+            preferenceManager2.mPreferenceScreen = preferenceScreenInflateFromResource;
             this.mHavePrefs = true;
             if (this.mInitDone && !hasMessages(1)) {
                 obtainMessage(1).sendToTarget();
@@ -91,7 +90,7 @@ public final class SettingFragment extends PreferenceFragmentCompat {
         switchPreferenceCompat3.mOnClickListener = new Preference.OnPreferenceClickListener() { // from class: com.android.systemui.controls.ui.fragment.SettingFragment$onCreatePreferences$1$1
             @Override // androidx.preference.Preference.OnPreferenceClickListener
             public final void onPreferenceClick(Preference preference) {
-                SettingFragment settingFragment = SettingFragment.this;
+                SettingFragment settingFragment = this.this$0;
                 SALogger sALogger = settingFragment.saLogger;
                 SwitchPreferenceCompat switchPreferenceCompat4 = switchPreferenceCompat3;
                 new SALogger.Event.SettingsShowDevicesOnOff(switchPreferenceCompat4.mChecked).sendEvent(sALogger.systemUIAnalyticsWrapper);
@@ -108,7 +107,7 @@ public final class SettingFragment extends PreferenceFragmentCompat {
         switchPreferenceCompat5.mOnClickListener = new Preference.OnPreferenceClickListener() { // from class: com.android.systemui.controls.ui.fragment.SettingFragment$onCreatePreferences$2$1
             @Override // androidx.preference.Preference.OnPreferenceClickListener
             public final void onPreferenceClick(Preference preference) {
-                SALogger sALogger = SettingFragment.this.saLogger;
+                SALogger sALogger = this.this$0.saLogger;
                 SwitchPreferenceCompat switchPreferenceCompat6 = switchPreferenceCompat5;
                 new SALogger.Event.SettingsControlDevicesOnOff(switchPreferenceCompat6.mChecked).sendEvent(sALogger.systemUIAnalyticsWrapper);
                 Settings.Secure.putInt(switchPreferenceCompat6.mContext.getContentResolver(), "lockscreen_allow_trivial_controls", switchPreferenceCompat6.mChecked ? 1 : 0);
@@ -118,7 +117,7 @@ public final class SettingFragment extends PreferenceFragmentCompat {
     }
 
     @Override // androidx.preference.PreferenceFragmentCompat, androidx.fragment.app.Fragment
-    public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
+    public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) throws Resources.NotFoundException {
         ActionBar supportActionBar;
         FragmentActivity activity = getActivity();
         AppCompatActivity appCompatActivity = activity instanceof AppCompatActivity ? (AppCompatActivity) activity : null;
@@ -128,9 +127,9 @@ public final class SettingFragment extends PreferenceFragmentCompat {
             appCompatActivity.setTitle(string);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
-        View onCreateView = super.onCreateView(layoutInflater, viewGroup, bundle);
-        onCreateView.setBackgroundColor(onCreateView.getContext().getColor(R.color.control_settings_activity_background));
-        return onCreateView;
+        View viewOnCreateView = super.onCreateView(layoutInflater, viewGroup, bundle);
+        viewOnCreateView.setBackgroundColor(viewOnCreateView.getContext().getColor(R.color.control_settings_activity_background));
+        return viewOnCreateView;
     }
 
     @Override // androidx.fragment.app.Fragment

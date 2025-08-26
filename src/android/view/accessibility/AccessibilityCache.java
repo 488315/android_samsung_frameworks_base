@@ -81,12 +81,12 @@ public class AccessibilityCache {
             }
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                List<AccessibilityWindowInfo> valueAt = sparseArray.valueAt(i);
-                if (valueAt != null) {
-                    int keyAt = sparseArray.keyAt(i);
-                    int size2 = valueAt.size();
+                List<AccessibilityWindowInfo> listValueAt = sparseArray.valueAt(i);
+                if (listValueAt != null) {
+                    int iKeyAt = sparseArray.keyAt(i);
+                    int size2 = listValueAt.size();
                     for (int i2 = 0; i2 < size2; i2++) {
-                        addWindowByDisplayLocked(keyAt, valueAt.get(i2));
+                        addWindowByDisplayLocked(iKeyAt, listValueAt.get(i2));
                     }
                 }
             }
@@ -118,19 +118,137 @@ public class AccessibilityCache {
         sparseArray.put(accessibilityWindowInfo.getId(), new AccessibilityWindowInfo(accessibilityWindowInfo));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:29:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x012f  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0147  */
+    /* JADX WARN: Removed duplicated region for block: B:73:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void onAccessibilityEvent(android.view.accessibility.AccessibilityEvent r12) {
-        /*
-            Method dump skipped, instructions count: 380
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.AccessibilityCache.onAccessibilityEvent(android.view.accessibility.AccessibilityEvent):void");
+    public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
+        synchronized (this.mLock) {
+            if (!this.mEnabled) {
+                if (DEBUG) {
+                    Log.i(LOG_TAG, "Cache is disabled");
+                }
+                return;
+            }
+            boolean z = DEBUG;
+            if (z) {
+                Log.i(LOG_TAG, "onAccessibilityEvent(" + accessibilityEvent + NavigationBarInflaterView.KEY_CODE_END);
+            }
+            AccessibilityNodeInfo accessibilityNodeInfoRemoveCachedNodeLocked = null;
+            switch (accessibilityEvent.getEventType()) {
+                case 1:
+                case 4:
+                case 16:
+                case 8192:
+                    accessibilityNodeInfoRemoveCachedNodeLocked = removeCachedNodeLocked(accessibilityEvent.getWindowId(), accessibilityEvent.getSourceNodeId());
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                        if (z) {
+                            Log.i(LOG_TAG, "Refreshing and re-adding cached node.");
+                        }
+                        if (this.mAccessibilityNodeRefresher.refreshNode(accessibilityNodeInfoRemoveCachedNodeLocked, true)) {
+                            add(accessibilityNodeInfoRemoveCachedNodeLocked);
+                        }
+                    }
+                    if (CHECK_INTEGRITY) {
+                        checkIntegrity();
+                        return;
+                    }
+                    return;
+                case 8:
+                    if (this.mInputFocus != 2147483647L) {
+                        removeCachedNodeLocked(accessibilityEvent.getWindowId(), this.mInputFocus);
+                    }
+                    this.mInputFocus = accessibilityEvent.getSourceNodeId();
+                    this.mInputFocusWindow = accessibilityEvent.getWindowId();
+                    accessibilityNodeInfoRemoveCachedNodeLocked = removeCachedNodeLocked(accessibilityEvent.getWindowId(), this.mInputFocus);
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 32:
+                    this.mValidWindowCacheTimeStamp = accessibilityEvent.getEventTime();
+                    if (accessibilityEvent.getContentChangeTypes() == 0 && accessibilityEvent.getClassName() != null) {
+                        this.mWindowIdToEventSourceClassName.put(accessibilityEvent.getWindowId(), accessibilityEvent.getClassName().toString());
+                    }
+                    clear();
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 2048:
+                    synchronized (this.mLock) {
+                        int windowId = accessibilityEvent.getWindowId();
+                        long sourceNodeId = accessibilityEvent.getSourceNodeId();
+                        if ((accessibilityEvent.getContentChangeTypes() & 1) != 0) {
+                            clearSubTreeLocked(windowId, sourceNodeId);
+                        } else {
+                            accessibilityNodeInfoRemoveCachedNodeLocked = removeCachedNodeLocked(windowId, sourceNodeId);
+                        }
+                    }
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 4096:
+                    clearSubTreeLocked(accessibilityEvent.getWindowId(), accessibilityEvent.getSourceNodeId());
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 32768:
+                    long j = this.mAccessibilityFocus;
+                    if (j != 2147483647L) {
+                        removeCachedNodeLocked(this.mAccessibilityFocusedWindow, j);
+                    }
+                    this.mAccessibilityFocus = accessibilityEvent.getSourceNodeId();
+                    int windowId2 = accessibilityEvent.getWindowId();
+                    this.mAccessibilityFocusedWindow = windowId2;
+                    accessibilityNodeInfoRemoveCachedNodeLocked = removeCachedNodeLocked(windowId2, this.mAccessibilityFocus);
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 65536:
+                    if (this.mAccessibilityFocus == accessibilityEvent.getSourceNodeId() && this.mAccessibilityFocusedWindow == accessibilityEvent.getWindowId()) {
+                        accessibilityNodeInfoRemoveCachedNodeLocked = removeCachedNodeLocked(this.mAccessibilityFocusedWindow, this.mAccessibilityFocus);
+                        this.mAccessibilityFocus = 2147483647L;
+                        this.mAccessibilityFocusedWindow = -1;
+                    }
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                case 4194304:
+                    this.mValidWindowCacheTimeStamp = accessibilityEvent.getEventTime();
+                    if (accessibilityEvent.getWindowChanges() == 2) {
+                        this.mWindowIdToEventSourceClassName.remove(accessibilityEvent.getWindowId());
+                    }
+                    if (accessibilityEvent.getWindowChanges() == 128) {
+                        clearWindowCacheLocked();
+                    } else {
+                        clear();
+                    }
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+                default:
+                    if (accessibilityNodeInfoRemoveCachedNodeLocked != null) {
+                    }
+                    if (CHECK_INTEGRITY) {
+                    }
+                    break;
+            }
+        }
     }
 
     private AccessibilityNodeInfo removeCachedNodeLocked(int i, long j) {
@@ -208,14 +326,14 @@ public class AccessibilityCache {
                 return null;
             }
             for (int i = 0; i < size2; i++) {
-                int keyAt = this.mWindowCacheByDisplay.keyAt(i);
-                SparseArray<AccessibilityWindowInfo> valueAt = this.mWindowCacheByDisplay.valueAt(i);
-                if (valueAt != null && (size = valueAt.size()) > 0) {
+                int iKeyAt = this.mWindowCacheByDisplay.keyAt(i);
+                SparseArray<AccessibilityWindowInfo> sparseArrayValueAt = this.mWindowCacheByDisplay.valueAt(i);
+                if (sparseArrayValueAt != null && (size = sparseArrayValueAt.size()) > 0) {
                     SparseArray<AccessibilityWindowInfo> sparseArray2 = this.mTempWindowArray;
                     sparseArray2.clear();
                     for (int i2 = 0; i2 < size; i2++) {
-                        AccessibilityWindowInfo valueAt2 = valueAt.valueAt(i2);
-                        sparseArray2.put(valueAt2.getLayer(), valueAt2);
+                        AccessibilityWindowInfo accessibilityWindowInfoValueAt = sparseArrayValueAt.valueAt(i2);
+                        sparseArray2.put(accessibilityWindowInfoValueAt.getLayer(), accessibilityWindowInfoValueAt);
                     }
                     int size3 = sparseArray2.size();
                     ArrayList arrayList = new ArrayList(size3);
@@ -223,7 +341,7 @@ public class AccessibilityCache {
                         arrayList.add(new AccessibilityWindowInfo(sparseArray2.valueAt(i3)));
                         sparseArray2.removeAt(i3);
                     }
-                    sparseArray.put(keyAt, arrayList);
+                    sparseArray.put(iKeyAt, arrayList);
                 }
             }
             return sparseArray;
@@ -241,8 +359,8 @@ public class AccessibilityCache {
             }
             int size = this.mWindowCacheByDisplay.size();
             for (int i2 = 0; i2 < size; i2++) {
-                SparseArray<AccessibilityWindowInfo> valueAt = this.mWindowCacheByDisplay.valueAt(i2);
-                if (valueAt != null && (accessibilityWindowInfo = valueAt.get(i)) != null) {
+                SparseArray<AccessibilityWindowInfo> sparseArrayValueAt = this.mWindowCacheByDisplay.valueAt(i2);
+                if (sparseArrayValueAt != null && (accessibilityWindowInfo = sparseArrayValueAt.get(i)) != null) {
                     return new AccessibilityWindowInfo(accessibilityWindowInfo);
                 }
             }
@@ -334,12 +452,12 @@ public class AccessibilityCache {
         int size = this.mWindowCacheByDisplay.size();
         if (size > 0) {
             for (int i = size - 1; i >= 0; i--) {
-                int keyAt = this.mWindowCacheByDisplay.keyAt(i);
-                SparseArray<AccessibilityWindowInfo> sparseArray = this.mWindowCacheByDisplay.get(keyAt);
+                int iKeyAt = this.mWindowCacheByDisplay.keyAt(i);
+                SparseArray<AccessibilityWindowInfo> sparseArray = this.mWindowCacheByDisplay.get(iKeyAt);
                 if (sparseArray != null) {
                     sparseArray.clear();
                 }
-                this.mWindowCacheByDisplay.remove(keyAt);
+                this.mWindowCacheByDisplay.remove(iKeyAt);
             }
         }
         this.mIsAllWindowsCached = false;
@@ -481,23 +599,23 @@ public class AccessibilityCache {
                 AccessibilityWindowInfo accessibilityWindowInfo = null;
                 AccessibilityWindowInfo accessibilityWindowInfo2 = null;
                 for (int i = 0; i < size; i++) {
-                    SparseArray<AccessibilityWindowInfo> valueAt = accessibilityCache.mWindowCacheByDisplay.valueAt(i);
-                    if (valueAt != null) {
-                        int size2 = valueAt.size();
+                    SparseArray<AccessibilityWindowInfo> sparseArrayValueAt = accessibilityCache.mWindowCacheByDisplay.valueAt(i);
+                    if (sparseArrayValueAt != null) {
+                        int size2 = sparseArrayValueAt.size();
                         for (int i2 = 0; i2 < size2; i2++) {
-                            AccessibilityWindowInfo valueAt2 = valueAt.valueAt(i2);
-                            if (valueAt2.isActive()) {
+                            AccessibilityWindowInfo accessibilityWindowInfoValueAt = sparseArrayValueAt.valueAt(i2);
+                            if (accessibilityWindowInfoValueAt.isActive()) {
                                 if (accessibilityWindowInfo != null) {
-                                    Log.e(LOG_TAG, "Duplicate active window:" + valueAt2);
+                                    Log.e(LOG_TAG, "Duplicate active window:" + accessibilityWindowInfoValueAt);
                                 } else {
-                                    accessibilityWindowInfo = valueAt2;
+                                    accessibilityWindowInfo = accessibilityWindowInfoValueAt;
                                 }
                             }
-                            if (valueAt2.isFocused()) {
+                            if (accessibilityWindowInfoValueAt.isFocused()) {
                                 if (accessibilityWindowInfo2 != null) {
-                                    Log.e(LOG_TAG, "Duplicate focused window:" + valueAt2);
+                                    Log.e(LOG_TAG, "Duplicate focused window:" + accessibilityWindowInfoValueAt);
                                 } else {
-                                    accessibilityWindowInfo2 = valueAt2;
+                                    accessibilityWindowInfo2 = accessibilityWindowInfoValueAt;
                                 }
                             }
                         }
@@ -507,56 +625,56 @@ public class AccessibilityCache {
                 AccessibilityNodeInfo accessibilityNodeInfo3 = null;
                 int i3 = 0;
                 while (i3 < size3) {
-                    LongSparseArray<AccessibilityNodeInfo> valueAt3 = accessibilityCache.mNodeCache.valueAt(i3);
-                    if (valueAt3.size() > 0) {
+                    LongSparseArray<AccessibilityNodeInfo> longSparseArrayValueAt = accessibilityCache.mNodeCache.valueAt(i3);
+                    if (longSparseArrayValueAt.size() > 0) {
                         ArraySet arraySet = new ArraySet();
-                        int keyAt = accessibilityCache.mNodeCache.keyAt(i3);
-                        int size4 = valueAt3.size();
+                        int iKeyAt = accessibilityCache.mNodeCache.keyAt(i3);
+                        int size4 = longSparseArrayValueAt.size();
                         for (int i4 = 0; i4 < size4; i4++) {
-                            AccessibilityNodeInfo valueAt4 = valueAt3.valueAt(i4);
-                            if (!arraySet.add(valueAt4)) {
-                                Log.e(LOG_TAG, "Duplicate node: " + valueAt4 + " in window:" + keyAt);
+                            AccessibilityNodeInfo accessibilityNodeInfoValueAt = longSparseArrayValueAt.valueAt(i4);
+                            if (!arraySet.add(accessibilityNodeInfoValueAt)) {
+                                Log.e(LOG_TAG, "Duplicate node: " + accessibilityNodeInfoValueAt + " in window:" + iKeyAt);
                             } else {
-                                if (valueAt4.isAccessibilityFocused()) {
+                                if (accessibilityNodeInfoValueAt.isAccessibilityFocused()) {
                                     if (accessibilityNodeInfo2 != null) {
-                                        Log.e(LOG_TAG, "Duplicate accessibility focus:" + valueAt4 + " in window:" + keyAt);
+                                        Log.e(LOG_TAG, "Duplicate accessibility focus:" + accessibilityNodeInfoValueAt + " in window:" + iKeyAt);
                                     } else {
-                                        accessibilityNodeInfo2 = valueAt4;
+                                        accessibilityNodeInfo2 = accessibilityNodeInfoValueAt;
                                     }
                                 }
-                                if (valueAt4.isFocused()) {
+                                if (accessibilityNodeInfoValueAt.isFocused()) {
                                     if (accessibilityNodeInfo3 != null) {
-                                        Log.e(LOG_TAG, "Duplicate input focus: " + valueAt4 + " in window:" + keyAt);
+                                        Log.e(LOG_TAG, "Duplicate input focus: " + accessibilityNodeInfoValueAt + " in window:" + iKeyAt);
                                     } else {
-                                        accessibilityNodeInfo3 = valueAt4;
+                                        accessibilityNodeInfo3 = accessibilityNodeInfoValueAt;
                                     }
                                 }
-                                AccessibilityNodeInfo accessibilityNodeInfo4 = valueAt3.get(valueAt4.getParentNodeId());
+                                AccessibilityNodeInfo accessibilityNodeInfo4 = longSparseArrayValueAt.get(accessibilityNodeInfoValueAt.getParentNodeId());
                                 if (accessibilityNodeInfo4 != null) {
                                     int childCount = accessibilityNodeInfo4.getChildCount();
                                     int i5 = 0;
                                     while (true) {
                                         if (i5 < childCount) {
                                             accessibilityNodeInfo = accessibilityNodeInfo3;
-                                            if (valueAt3.get(accessibilityNodeInfo4.getChildId(i5)) == valueAt4) {
+                                            if (longSparseArrayValueAt.get(accessibilityNodeInfo4.getChildId(i5)) == accessibilityNodeInfoValueAt) {
                                                 break;
                                             }
                                             i5++;
                                             accessibilityNodeInfo3 = accessibilityNodeInfo;
                                         } else {
                                             accessibilityNodeInfo = accessibilityNodeInfo3;
-                                            Log.e(LOG_TAG, "Invalid parent-child relation between parent: " + accessibilityNodeInfo4 + " and child: " + valueAt4);
+                                            Log.e(LOG_TAG, "Invalid parent-child relation between parent: " + accessibilityNodeInfo4 + " and child: " + accessibilityNodeInfoValueAt);
                                             break;
                                         }
                                     }
                                 } else {
                                     accessibilityNodeInfo = accessibilityNodeInfo3;
                                 }
-                                int childCount2 = valueAt4.getChildCount();
+                                int childCount2 = accessibilityNodeInfoValueAt.getChildCount();
                                 for (int i6 = 0; i6 < childCount2; i6++) {
-                                    AccessibilityNodeInfo accessibilityNodeInfo5 = valueAt3.get(valueAt4.getChildId(i6));
-                                    if (accessibilityNodeInfo5 != null && valueAt3.get(accessibilityNodeInfo5.getParentNodeId()) != valueAt4) {
-                                        Log.e(LOG_TAG, "Invalid child-parent relation between child: " + valueAt4 + " and parent: " + accessibilityNodeInfo4);
+                                    AccessibilityNodeInfo accessibilityNodeInfo5 = longSparseArrayValueAt.get(accessibilityNodeInfoValueAt.getChildId(i6));
+                                    if (accessibilityNodeInfo5 != null && longSparseArrayValueAt.get(accessibilityNodeInfo5.getParentNodeId()) != accessibilityNodeInfoValueAt) {
+                                        Log.e(LOG_TAG, "Invalid child-parent relation between child: " + accessibilityNodeInfoValueAt + " and parent: " + accessibilityNodeInfo4);
                                     }
                                 }
                                 accessibilityNodeInfo3 = accessibilityNodeInfo;

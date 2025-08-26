@@ -6,14 +6,12 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogcatOnlyMessageBuffer implements MessageBuffer {
     private boolean isObtained;
     private final LogMessageImpl singleMessage;
     private final LogLevel targetLogLevel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -63,7 +61,7 @@ public final class LogcatOnlyMessageBuffer implements MessageBuffer {
                 throw new UnsupportedOperationException("Message has not been obtained. Call order is incorrect.");
             }
             if (logMessage.getLevel().compareTo(this.targetLogLevel) >= 0) {
-                String str = (String) logMessage.getMessagePrinter().mo779invoke(logMessage);
+                String str = (String) logMessage.getMessagePrinter().mo781invoke(logMessage);
                 switch (WhenMappings.$EnumSwitchMapping$0[logMessage.getLevel().ordinal()]) {
                     case 1:
                         logMessage.getTag();

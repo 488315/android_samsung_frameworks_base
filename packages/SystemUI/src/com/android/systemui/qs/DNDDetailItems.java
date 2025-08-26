@@ -3,6 +3,7 @@ package com.android.systemui.qs;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -27,7 +28,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DNDDetailItems extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +42,6 @@ public class DNDDetailItems extends FrameLayout {
     public String mSelectedMenu;
     public String mTag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Adapter extends BaseAdapter {
         public /* synthetic */ Adapter(DNDDetailItems dNDDetailItems, int i) {
             this();
@@ -68,7 +67,7 @@ public class DNDDetailItems extends FrameLayout {
         }
 
         @Override // android.widget.Adapter
-        public final View getView(int i, View view, ViewGroup viewGroup) {
+        public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             DNDDetailItems dNDDetailItems = DNDDetailItems.this;
             final Item item = dNDDetailItems.mItems[i];
             if (view == null) {
@@ -95,7 +94,7 @@ public class DNDDetailItems extends FrameLayout {
             }
             checkedTextView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.DNDDetailItems.Adapter.1
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view2) {
+                public final void onClick(View view2) throws Resources.NotFoundException {
                     TextView textView2;
                     Callback callback = DNDDetailItems.this.mCallback;
                     if (callback != null) {
@@ -125,16 +124,16 @@ public class DNDDetailItems extends FrameLayout {
                             ((ZenModeControllerImpl) zenModeController).setZen(0, null, str);
                             dndTile.mDndMenuSummary = "";
                         } else if (i4 == 1 || i4 == 2 || i4 == 3) {
-                            int pow = DndTile.mZenOneHourSession * ((int) Math.pow(2.0d, i4 - 1));
+                            int iPow = DndTile.mZenOneHourSession * ((int) Math.pow(2.0d, i4 - 1));
                             Calendar calendar = Calendar.getInstance();
-                            long j = (calendar.get(11) * 60) + calendar.get(12) + pow;
+                            long j = (calendar.get(11) * 60) + calendar.get(12) + iPow;
                             if (j >= 1440) {
                                 dndTile.mDndMenuSummary = dndTile.mContext.getString(R.string.sec_dnd_detail_on_until_time_tomorrow, DndTile.getStringFromMillis(dndTile.mContext, j - 1440));
                             } else {
                                 dndTile.mDndMenuSummary = dndTile.mContext.getString(R.string.sec_dnd_detail_on_until_time_today, DndTile.getStringFromMillis(dndTile.mContext, j));
                             }
-                            ((ZenModeControllerImpl) zenModeController).setZen(1, ZenModeConfig.toTimeCondition(dndTile.mContext, pow, ActivityManager.getCurrentUser(), true).id, str);
-                            Settings.Secure.putInt(dndTile.mContext.getContentResolver(), "zen_duration", pow);
+                            ((ZenModeControllerImpl) zenModeController).setZen(1, ZenModeConfig.toTimeCondition(dndTile.mContext, iPow, ActivityManager.getCurrentUser(), true).id, str);
+                            Settings.Secure.putInt(dndTile.mContext.getContentResolver(), "zen_duration", iPow);
                             dndTile.mLastDndDurationSelected = dndTile.mDndMenuSelectedItem;
                         } else if (i4 == 4 || i4 == 5) {
                             ((ZenModeControllerImpl) zenModeController).setZen(1, null, str);
@@ -156,7 +155,7 @@ public class DNDDetailItems extends FrameLayout {
                             int i6 = SecQSDetailController.$r8$clinit;
                             SecQSDetailController secQSDetailController2 = secQSDetailController$dndSummaryCallback$1.this$0;
                             if (secQSDetailController2.isDNDTile()) {
-                                ViewGroup viewGroup2 = secQSDetailController2.detailExtendedSummarContainer;
+                                ViewGroup viewGroup2 = secQSDetailController2.detailExtendedSummaryContainer;
                                 if ((viewGroup2 != null ? Integer.valueOf(viewGroup2.getVisibility()) : null) != 0 || (textView2 = secQSDetailController2.detailExtendedSummary) == null) {
                                     return;
                                 }
@@ -174,11 +173,9 @@ public class DNDDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -186,41 +183,40 @@ public class DNDDetailItems extends FrameLayout {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            int i;
-            int i2 = message.what;
+            int length;
+            int i = message.what;
             DNDDetailItems dNDDetailItems = DNDDetailItems.this;
-            if (i2 == 1) {
+            if (i == 1) {
                 Item[] itemArr = (Item[]) message.obj;
                 if (itemArr != null) {
-                    int i3 = DNDDetailItems.$r8$clinit;
+                    int i2 = DNDDetailItems.$r8$clinit;
                     dNDDetailItems.getClass();
-                    i = itemArr.length;
+                    length = itemArr.length;
                 } else {
-                    i = 0;
+                    length = 0;
                 }
-                dNDDetailItems.mItemList.setVisibility(i != 0 ? 0 : 8);
+                dNDDetailItems.mItemList.setVisibility(length != 0 ? 0 : 8);
                 dNDDetailItems.mItems = itemArr;
                 dNDDetailItems.mAdapter.notifyDataSetChanged();
                 return;
             }
-            if (i2 == 2) {
+            if (i == 2) {
                 dNDDetailItems.mCallback = (Callback) message.obj;
                 return;
             }
-            if (i2 == 3) {
+            if (i == 3) {
                 boolean z = message.arg1 != 0;
                 if (dNDDetailItems.mItemsVisible == z) {
                     return;
                 }
                 dNDDetailItems.mItemsVisible = z;
-                for (int i4 = 0; i4 < dNDDetailItems.mItemList.getChildCount(); i4++) {
-                    dNDDetailItems.mItemList.getChildAt(i4).setVisibility(dNDDetailItems.mItemVisible[i4] == 1 ? 0 : 8);
+                for (int i3 = 0; i3 < dNDDetailItems.mItemList.getChildCount(); i3++) {
+                    dNDDetailItems.mItemList.getChildAt(i3).setVisibility(dNDDetailItems.mItemVisible[i3] == 1 ? 0 : 8);
                 }
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Item {
         public String line1;
         public CheckedTextView ctv = null;

@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TriStateToggleableElement extends ModifierNodeElement<TriStateToggleableNode> {
     public final boolean enabled;
@@ -43,13 +42,13 @@ final class TriStateToggleableElement extends ModifierNodeElement<TriStateToggle
     }
 
     public final int hashCode() {
-        int hashCode = this.state.hashCode() * 31;
+        int iHashCode = this.state.hashCode() * 31;
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode2 = (hashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
         IndicationNodeFactory indicationNodeFactory = this.indicationNodeFactory;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
         Role role = this.role;
-        return this.onClick.hashCode() + ((m + (role != null ? Integer.hashCode(role.value) : 0)) * 31);
+        return this.onClick.hashCode() + ((iM + (role != null ? Integer.hashCode(role.value) : 0)) * 31);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

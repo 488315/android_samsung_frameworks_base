@@ -94,9 +94,9 @@ public abstract class AbstractResolverComparator implements Comparator<ResolverA
         this.mContentType = intent.getType();
         getContentAnnotations(intent);
         for (UserHandle userHandle : list) {
-            Context createContextAsUser = context.createContextAsUser(userHandle, 0);
-            this.mPmMap.put(userHandle, createContextAsUser.getPackageManager());
-            this.mUsmMap.put(userHandle, (UsageStatsManager) createContextAsUser.getSystemService(Context.USAGE_STATS_SERVICE));
+            Context contextCreateContextAsUser = context.createContextAsUser(userHandle, 0);
+            this.mPmMap.put(userHandle, contextCreateContextAsUser.getPackageManager());
+            this.mUsmMap.put(userHandle, (UsageStatsManager) contextCreateContextAsUser.getSystemService(Context.USAGE_STATS_SERVICE));
         }
         this.mAzComparator = new AzInfoComparator(this, context);
     }
@@ -141,15 +141,15 @@ public abstract class AbstractResolverComparator implements Comparator<ResolverA
 
     @Override // java.util.Comparator
     public final int compare(ResolverActivity.ResolvedComponentInfo resolvedComponentInfo, ResolverActivity.ResolvedComponentInfo resolvedComponentInfo2) {
-        boolean isSpecificUriMatch;
+        boolean zIsSpecificUriMatch;
         ResolveInfo resolveInfoAt = resolvedComponentInfo.getResolveInfoAt(0);
         ResolveInfo resolveInfoAt2 = resolvedComponentInfo2.getResolveInfoAt(0);
-        boolean isFixedAtTop = resolvedComponentInfo.isFixedAtTop();
-        boolean isFixedAtTop2 = resolvedComponentInfo2.isFixedAtTop();
-        if (isFixedAtTop && !isFixedAtTop2) {
+        boolean zIsFixedAtTop = resolvedComponentInfo.isFixedAtTop();
+        boolean zIsFixedAtTop2 = resolvedComponentInfo2.isFixedAtTop();
+        if (zIsFixedAtTop && !zIsFixedAtTop2) {
             return -1;
         }
-        if (!isFixedAtTop && isFixedAtTop2) {
+        if (!zIsFixedAtTop && zIsFixedAtTop2) {
             return 1;
         }
         if (resolveInfoAt.targetUserId != -2) {
@@ -158,18 +158,18 @@ public abstract class AbstractResolverComparator implements Comparator<ResolverA
         if (resolveInfoAt2.targetUserId != -2) {
             return -1;
         }
-        if (this.mHttp && (isSpecificUriMatch = ResolverActivity.isSpecificUriMatch(resolveInfoAt.match)) != ResolverActivity.isSpecificUriMatch(resolveInfoAt2.match)) {
-            return isSpecificUriMatch ? -1 : 1;
+        if (this.mHttp && (zIsSpecificUriMatch = ResolverActivity.isSpecificUriMatch(resolveInfoAt.match)) != ResolverActivity.isSpecificUriMatch(resolveInfoAt2.match)) {
+            return zIsSpecificUriMatch ? -1 : 1;
         }
-        boolean isPinned = resolvedComponentInfo.isPinned();
-        boolean isPinned2 = resolvedComponentInfo2.isPinned();
-        if (isPinned && !isPinned2) {
+        boolean zIsPinned = resolvedComponentInfo.isPinned();
+        boolean zIsPinned2 = resolvedComponentInfo2.isPinned();
+        if (zIsPinned && !zIsPinned2) {
             return -1;
         }
-        if (!isPinned && isPinned2) {
+        if (!zIsPinned && zIsPinned2) {
             return 1;
         }
-        if (isPinned && isPinned2) {
+        if (zIsPinned && zIsPinned2) {
             return this.mAzComparator.compare(resolvedComponentInfo.getResolveInfoAt(0), resolvedComponentInfo2.getResolveInfoAt(0));
         }
         return compare(resolveInfoAt, resolveInfoAt2);

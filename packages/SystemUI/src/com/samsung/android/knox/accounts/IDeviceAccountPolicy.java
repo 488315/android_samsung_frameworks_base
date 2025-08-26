@@ -9,12 +9,10 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDeviceAccountPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.accounts.IDeviceAccountPolicy";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IDeviceAccountPolicy {
         @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
         public boolean addAccountsToAdditionBlackList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
@@ -162,7 +160,6 @@ public interface IDeviceAccountPolicy extends IInterface {
 
     boolean removeAccountsFromRemovalWhiteList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDeviceAccountPolicy {
         public static final int TRANSACTION_addAccountsToAdditionBlackList = 12;
         public static final int TRANSACTION_addAccountsToAdditionWhiteList = 16;
@@ -185,7 +182,6 @@ public interface IDeviceAccountPolicy extends IInterface {
         public static final int TRANSACTION_removeAccountsFromRemovalBlackList = 3;
         public static final int TRANSACTION_removeAccountsFromRemovalWhiteList = 7;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IDeviceAccountPolicy {
             public IBinder mRemote;
 
@@ -195,73 +191,73 @@ public interface IDeviceAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean addAccountsToAdditionBlackList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean addAccountsToAdditionWhiteList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean addAccountsToRemovalBlackList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean addAccountsToRemovalWhiteList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -272,137 +268,137 @@ public interface IDeviceAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean clearAccountsFromAdditionBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean clearAccountsFromAdditionWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean clearAccountsFromRemovalBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean clearAccountsFromRemovalWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public List<AccountControlInfo> getAccountsFromAdditionBlackLists(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccountControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccountControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public List<AccountControlInfo> getAccountsFromAdditionWhiteLists(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccountControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccountControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public List<AccountControlInfo> getAccountsFromRemovalBlackLists(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccountControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccountControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public List<AccountControlInfo> getAccountsFromRemovalWhiteLists(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccountControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccountControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -412,143 +408,143 @@ public interface IDeviceAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public List<String> getSupportedAccountTypes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean isAccountAdditionAllowed(String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean isAccountRemovalAllowed(String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean isAccountRemovalAllowedAsUser(String str, String str2, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean removeAccountsFromAdditionBlackList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean removeAccountsFromAdditionWhiteList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean removeAccountsFromRemovalBlackList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IDeviceAccountPolicy
             public boolean removeAccountsFromRemovalWhiteList(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -561,8 +557,8 @@ public interface IDeviceAccountPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceAccountPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IDeviceAccountPolicy)) ? new Proxy(iBinder) : (IDeviceAccountPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceAccountPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDeviceAccountPolicy)) ? new Proxy(iBinder) : (IDeviceAccountPolicy) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -637,167 +633,167 @@ public interface IDeviceAccountPolicy extends IInterface {
                     return true;
                 case 2:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountsToRemovalBlackList = addAccountsToRemovalBlackList(contextInfo, readString, createStringArrayList);
+                    boolean zAddAccountsToRemovalBlackList = addAccountsToRemovalBlackList(contextInfo, string, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountsToRemovalBlackList);
+                    parcel2.writeBoolean(zAddAccountsToRemovalBlackList);
                     return true;
                 case 3:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString2 = parcel.readString();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    String string2 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAccountsFromRemovalBlackList = removeAccountsFromRemovalBlackList(contextInfo2, readString2, createStringArrayList2);
+                    boolean zRemoveAccountsFromRemovalBlackList = removeAccountsFromRemovalBlackList(contextInfo2, string2, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAccountsFromRemovalBlackList);
+                    parcel2.writeBoolean(zRemoveAccountsFromRemovalBlackList);
                     return true;
                 case 4:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<AccountControlInfo> accountsFromRemovalBlackLists = getAccountsFromRemovalBlackLists(contextInfo3, readString3);
+                    List<AccountControlInfo> accountsFromRemovalBlackLists = getAccountsFromRemovalBlackLists(contextInfo3, string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(accountsFromRemovalBlackLists, 1);
                     return true;
                 case 5:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearAccountsFromRemovalBlackList = clearAccountsFromRemovalBlackList(contextInfo4, readString4);
+                    boolean zClearAccountsFromRemovalBlackList = clearAccountsFromRemovalBlackList(contextInfo4, string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearAccountsFromRemovalBlackList);
+                    parcel2.writeBoolean(zClearAccountsFromRemovalBlackList);
                     return true;
                 case 6:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString5 = parcel.readString();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    String string5 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountsToRemovalWhiteList = addAccountsToRemovalWhiteList(contextInfo5, readString5, createStringArrayList3);
+                    boolean zAddAccountsToRemovalWhiteList = addAccountsToRemovalWhiteList(contextInfo5, string5, arrayListCreateStringArrayList3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountsToRemovalWhiteList);
+                    parcel2.writeBoolean(zAddAccountsToRemovalWhiteList);
                     return true;
                 case 7:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString6 = parcel.readString();
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
+                    String string6 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAccountsFromRemovalWhiteList = removeAccountsFromRemovalWhiteList(contextInfo6, readString6, createStringArrayList4);
+                    boolean zRemoveAccountsFromRemovalWhiteList = removeAccountsFromRemovalWhiteList(contextInfo6, string6, arrayListCreateStringArrayList4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAccountsFromRemovalWhiteList);
+                    parcel2.writeBoolean(zRemoveAccountsFromRemovalWhiteList);
                     return true;
                 case 8:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<AccountControlInfo> accountsFromRemovalWhiteLists = getAccountsFromRemovalWhiteLists(contextInfo7, readString7);
+                    List<AccountControlInfo> accountsFromRemovalWhiteLists = getAccountsFromRemovalWhiteLists(contextInfo7, string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(accountsFromRemovalWhiteLists, 1);
                     return true;
                 case 9:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearAccountsFromRemovalWhiteList = clearAccountsFromRemovalWhiteList(contextInfo8, readString8);
+                    boolean zClearAccountsFromRemovalWhiteList = clearAccountsFromRemovalWhiteList(contextInfo8, string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearAccountsFromRemovalWhiteList);
+                    parcel2.writeBoolean(zClearAccountsFromRemovalWhiteList);
                     return true;
                 case 10:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAccountRemovalAllowed = isAccountRemovalAllowed(readString9, readString10, readBoolean);
+                    boolean zIsAccountRemovalAllowed = isAccountRemovalAllowed(string9, string10, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAccountRemovalAllowed);
+                    parcel2.writeBoolean(zIsAccountRemovalAllowed);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt = parcel.readInt();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAccountRemovalAllowedAsUser = isAccountRemovalAllowedAsUser(readString11, readString12, readBoolean2, readInt);
+                    boolean zIsAccountRemovalAllowedAsUser = isAccountRemovalAllowedAsUser(string11, string12, z2, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAccountRemovalAllowedAsUser);
+                    parcel2.writeBoolean(zIsAccountRemovalAllowedAsUser);
                     return true;
                 case 12:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString13 = parcel.readString();
-                    ArrayList<String> createStringArrayList5 = parcel.createStringArrayList();
+                    String string13 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList5 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountsToAdditionBlackList = addAccountsToAdditionBlackList(contextInfo9, readString13, createStringArrayList5);
+                    boolean zAddAccountsToAdditionBlackList = addAccountsToAdditionBlackList(contextInfo9, string13, arrayListCreateStringArrayList5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountsToAdditionBlackList);
+                    parcel2.writeBoolean(zAddAccountsToAdditionBlackList);
                     return true;
                 case 13:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString14 = parcel.readString();
-                    ArrayList<String> createStringArrayList6 = parcel.createStringArrayList();
+                    String string14 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList6 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAccountsFromAdditionBlackList = removeAccountsFromAdditionBlackList(contextInfo10, readString14, createStringArrayList6);
+                    boolean zRemoveAccountsFromAdditionBlackList = removeAccountsFromAdditionBlackList(contextInfo10, string14, arrayListCreateStringArrayList6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAccountsFromAdditionBlackList);
+                    parcel2.writeBoolean(zRemoveAccountsFromAdditionBlackList);
                     return true;
                 case 14:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<AccountControlInfo> accountsFromAdditionBlackLists = getAccountsFromAdditionBlackLists(contextInfo11, readString15);
+                    List<AccountControlInfo> accountsFromAdditionBlackLists = getAccountsFromAdditionBlackLists(contextInfo11, string15);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(accountsFromAdditionBlackLists, 1);
                     return true;
                 case 15:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearAccountsFromAdditionBlackList = clearAccountsFromAdditionBlackList(contextInfo12, readString16);
+                    boolean zClearAccountsFromAdditionBlackList = clearAccountsFromAdditionBlackList(contextInfo12, string16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearAccountsFromAdditionBlackList);
+                    parcel2.writeBoolean(zClearAccountsFromAdditionBlackList);
                     return true;
                 case 16:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString17 = parcel.readString();
-                    ArrayList<String> createStringArrayList7 = parcel.createStringArrayList();
+                    String string17 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList7 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountsToAdditionWhiteList = addAccountsToAdditionWhiteList(contextInfo13, readString17, createStringArrayList7);
+                    boolean zAddAccountsToAdditionWhiteList = addAccountsToAdditionWhiteList(contextInfo13, string17, arrayListCreateStringArrayList7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountsToAdditionWhiteList);
+                    parcel2.writeBoolean(zAddAccountsToAdditionWhiteList);
                     return true;
                 case 17:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString18 = parcel.readString();
-                    ArrayList<String> createStringArrayList8 = parcel.createStringArrayList();
+                    String string18 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList8 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAccountsFromAdditionWhiteList = removeAccountsFromAdditionWhiteList(contextInfo14, readString18, createStringArrayList8);
+                    boolean zRemoveAccountsFromAdditionWhiteList = removeAccountsFromAdditionWhiteList(contextInfo14, string18, arrayListCreateStringArrayList8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAccountsFromAdditionWhiteList);
+                    parcel2.writeBoolean(zRemoveAccountsFromAdditionWhiteList);
                     return true;
                 case 18:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<AccountControlInfo> accountsFromAdditionWhiteLists = getAccountsFromAdditionWhiteLists(contextInfo15, readString19);
+                    List<AccountControlInfo> accountsFromAdditionWhiteLists = getAccountsFromAdditionWhiteLists(contextInfo15, string19);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(accountsFromAdditionWhiteLists, 1);
                     return true;
                 case 19:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearAccountsFromAdditionWhiteList = clearAccountsFromAdditionWhiteList(contextInfo16, readString20);
+                    boolean zClearAccountsFromAdditionWhiteList = clearAccountsFromAdditionWhiteList(contextInfo16, string20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearAccountsFromAdditionWhiteList);
+                    parcel2.writeBoolean(zClearAccountsFromAdditionWhiteList);
                     return true;
                 case 20:
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAccountAdditionAllowed = isAccountAdditionAllowed(readString21, readString22, readBoolean3);
+                    boolean zIsAccountAdditionAllowed = isAccountAdditionAllowed(string21, string22, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAccountAdditionAllowed);
+                    parcel2.writeBoolean(zIsAccountAdditionAllowed);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

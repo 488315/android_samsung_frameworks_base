@@ -176,13 +176,13 @@ public final class PhysicalChannelConfig {
 
         public static final ArrayList<Band> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Band> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Band band = new Band();
-                band.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 8);
+                band.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 8);
                 arrayList.add(band);
             }
             return arrayList;
@@ -279,13 +279,13 @@ public final class PhysicalChannelConfig {
 
     public static final ArrayList<PhysicalChannelConfig> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<PhysicalChannelConfig> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             PhysicalChannelConfig physicalChannelConfig = new PhysicalChannelConfig();
-            physicalChannelConfig.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 56);
+            physicalChannelConfig.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 56);
             arrayList.add(physicalChannelConfig);
         }
         return arrayList;
@@ -299,10 +299,10 @@ public final class PhysicalChannelConfig {
         this.cellBandwidthDownlinkKhz = hwBlob.getInt32(16 + j);
         this.cellBandwidthUplinkKhz = hwBlob.getInt32(20 + j);
         int int32 = hwBlob.getInt32(32 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 24, true);
         this.contextIds.clear();
         for (int i = 0; i < int32; i++) {
-            this.contextIds.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+            this.contextIds.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
         }
         this.physicalCellId = hwBlob.getInt32(40 + j);
         this.band.readEmbeddedFromParcel(hwParcel, hwBlob, j + 44);

@@ -72,9 +72,9 @@ public class SemHEIFRegionDecoder {
         }
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         try {
-            SemHEIFRegionDecoder newInstance = newInstance(fileInputStream, z);
+            SemHEIFRegionDecoder semHEIFRegionDecoderNewInstance = newInstance(fileInputStream, z);
             fileInputStream.close();
-            return newInstance;
+            return semHEIFRegionDecoderNewInstance;
         } catch (Throwable th) {
             try {
                 fileInputStream.close();
@@ -89,9 +89,9 @@ public class SemHEIFRegionDecoder {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[8192];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr, 0, read);
+            int i = inputStream.read(bArr);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr, 0, i);
             } else {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 byteArrayOutputStream.close();
@@ -116,9 +116,9 @@ public class SemHEIFRegionDecoder {
                     i = 1;
                 }
                 options.inSampleSize = i;
-                int width = ((rect.width() + i) - 1) / i;
-                int height = ((rect.height() + i) - 1) / i;
-                if (options.inBitmap != null && (options.inBitmap.getWidth() != width || options.inBitmap.getHeight() != height)) {
+                int iWidth = ((rect.width() + i) - 1) / i;
+                int iHeight = ((rect.height() + i) - 1) / i;
+                if (options.inBitmap != null && (options.inBitmap.getWidth() != iWidth || options.inBitmap.getHeight() != iHeight)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return options.inBitmap;
                 }
@@ -134,9 +134,9 @@ public class SemHEIFRegionDecoder {
             if (i > 0) {
                 return i;
             }
-            int nativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
-            this.mWidth = nativeGetWidth;
-            return nativeGetWidth;
+            int iNativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
+            this.mWidth = iNativeGetWidth;
+            return iNativeGetWidth;
         }
     }
 
@@ -147,9 +147,9 @@ public class SemHEIFRegionDecoder {
             if (i > 0) {
                 return i;
             }
-            int nativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
-            this.mHeight = nativeGetHeight;
-            return nativeGetHeight;
+            int iNativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
+            this.mHeight = iNativeGetHeight;
+            return iNativeGetHeight;
         }
     }
 

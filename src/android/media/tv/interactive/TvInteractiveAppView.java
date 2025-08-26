@@ -12,7 +12,6 @@ import android.media.tv.TvRecordingInfo;
 import android.media.tv.TvTrackInfo;
 import android.media.tv.TvView;
 import android.media.tv.interactive.TvInteractiveAppManager;
-import android.media.tv.interactive.TvInteractiveAppView;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
@@ -168,7 +167,7 @@ public class TvInteractiveAppView extends ViewGroup {
         this(context, attributeSet, 0);
     }
 
-    public TvInteractiveAppView(Context context, AttributeSet attributeSet, int i) {
+    public TvInteractiveAppView(Context context, AttributeSet attributeSet, int i) throws Throwable {
         super(context, attributeSet, i);
         this.mHandler = new Handler();
         this.mCallbackLock = new Object();
@@ -273,7 +272,7 @@ public class TvInteractiveAppView extends ViewGroup {
     }
 
     @Override // android.view.View
-    public void onVisibilityChanged(View view, int i) {
+    public void onVisibilityChanged(View view, int i) throws Throwable {
         super.onVisibilityChanged(view, i);
         this.mSurfaceView.setVisibility(i);
         if (i == 0) {
@@ -283,7 +282,7 @@ public class TvInteractiveAppView extends ViewGroup {
         }
     }
 
-    public void setZOrderMediaOverlay(boolean z) {
+    public void setZOrderMediaOverlay(boolean z) throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.setZOrderOnTop(false);
@@ -291,7 +290,7 @@ public class TvInteractiveAppView extends ViewGroup {
         }
     }
 
-    public void setZOrderOnTop(boolean z) {
+    public void setZOrderOnTop(boolean z) throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.setZOrderMediaOverlay(false);
@@ -299,7 +298,7 @@ public class TvInteractiveAppView extends ViewGroup {
         }
     }
 
-    private void resetSurfaceView() {
+    private void resetSurfaceView() throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.getHolder().removeCallback(this.mSurfaceHolderCallback);
@@ -308,7 +307,7 @@ public class TvInteractiveAppView extends ViewGroup {
         this.mSurface = null;
         SurfaceView surfaceView2 = new SurfaceView(getContext(), this.mAttrs, this.mDefStyleAttr) { // from class: android.media.tv.interactive.TvInteractiveAppView.2
             @Override // android.view.SurfaceView
-            protected void updateSurface() {
+            protected void updateSurface() throws Throwable {
                 super.updateSurface();
                 TvInteractiveAppView.this.relayoutSessionMediaView();
             }
@@ -322,7 +321,7 @@ public class TvInteractiveAppView extends ViewGroup {
         addView(this.mSurfaceView);
     }
 
-    public void reset() {
+    public void reset() throws Throwable {
         resetInternal();
     }
 
@@ -414,8 +413,8 @@ public class TvInteractiveAppView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        KeyEvent copy = keyEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        KeyEvent keyEventCopy = keyEvent.copy();
+        return this.mSession.dispatchInputEvent(keyEventCopy, keyEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     public void prepareInteractiveApp(String str, int i) {
@@ -637,7 +636,7 @@ public class TvInteractiveAppView extends ViewGroup {
         }
     }
 
-    private void resetInternal() {
+    private void resetInternal() throws Throwable {
         this.mSessionCallback = null;
         if (this.mSession != null) {
             setSessionSurface(null);
@@ -771,7 +770,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onCommandRequest$0(str, bundle);
+                            this.f$0.lambda$onCommandRequest$0(str, bundle);
                         }
                     });
                 }
@@ -798,7 +797,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onTimeShiftCommandRequest$1(str, bundle);
+                            this.f$0.lambda$onTimeShiftCommandRequest$1(str, bundle);
                         }
                     });
                 }
@@ -825,7 +824,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda8
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onSessionStateChanged$2(i, i2);
+                            this.f$0.lambda$onSessionStateChanged$2(i, i2);
                         }
                     });
                 }
@@ -852,7 +851,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda10
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onBiInteractiveAppCreated$3(uri, str);
+                            this.f$0.lambda$onBiInteractiveAppCreated$3(uri, str);
                         }
                     });
                 }
@@ -888,7 +887,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda9
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onSetVideoBounds$4(rect);
+                            this.f$0.lambda$onSetVideoBounds$4(rect);
                         }
                     });
                 }
@@ -915,7 +914,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentVideoBounds$5();
+                            this.f$0.lambda$onRequestCurrentVideoBounds$5();
                         }
                     });
                 }
@@ -942,7 +941,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentChannelUri$6();
+                            this.f$0.lambda$onRequestCurrentChannelUri$6();
                         }
                     });
                 }
@@ -969,7 +968,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentChannelLcn$7();
+                            this.f$0.lambda$onRequestCurrentChannelLcn$7();
                         }
                     });
                 }
@@ -996,7 +995,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestStreamVolume$8();
+                            this.f$0.lambda$onRequestStreamVolume$8();
                         }
                     });
                 }
@@ -1023,7 +1022,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestTrackInfoList$9();
+                            this.f$0.lambda$onRequestTrackInfoList$9();
                         }
                     });
                 }
@@ -1050,7 +1049,7 @@ public class TvInteractiveAppView extends ViewGroup {
                     TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda7
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestSelectedTrackInfo$10();
+                            this.f$0.lambda$onRequestSelectedTrackInfo$10();
                         }
                     });
                 }

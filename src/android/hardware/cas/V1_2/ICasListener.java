@@ -61,9 +61,9 @@ public interface ICasListener extends android.hardware.cas.V1_1.ICasListener {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ICasListener)) {
-            return (ICasListener) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof ICasListener)) {
+            return (ICasListener) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -238,13 +238,13 @@ public interface ICasListener extends android.hardware.cas.V1_1.ICasListener {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -420,9 +420,9 @@ public interface ICasListener extends android.hardware.cas.V1_1.ICasListener {
             switch (i) {
                 case 256067662:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    ArrayList<String> interfaceChain = interfaceChain();
+                    ArrayList<String> arrayListInterfaceChain = interfaceChain();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(interfaceChain);
+                    hwParcel2.writeStringVector(arrayListInterfaceChain);
                     hwParcel2.send();
                     return;
                 case 256131655:
@@ -433,9 +433,9 @@ public interface ICasListener extends android.hardware.cas.V1_1.ICasListener {
                     return;
                 case 256136003:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    String interfaceDescriptor = interfaceDescriptor();
+                    String strInterfaceDescriptor = interfaceDescriptor();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeString(interfaceDescriptor);
+                    hwParcel2.writeString(strInterfaceDescriptor);
                     hwParcel2.send();
                     return;
                 case 256398152:

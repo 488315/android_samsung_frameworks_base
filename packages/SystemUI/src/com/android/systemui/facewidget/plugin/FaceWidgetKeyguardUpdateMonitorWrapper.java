@@ -13,14 +13,12 @@ import com.samsung.android.cover.CoverState;
 import java.util.HashMap;
 import java.util.TimeZone;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetKeyguardUpdateMonitorWrapper implements PluginKeyguardUpdateMonitor {
     public final HashMap mCallbackWrapperMap = new HashMap();
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final SelectedUserInteractor mSelectedUserInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class FaceWidgetKeyguardUpdateMonitorCallbackWrapper extends KeyguardUpdateMonitorCallback {
         public final PluginKeyguardUpdateMonitorCallback mCallback;
 

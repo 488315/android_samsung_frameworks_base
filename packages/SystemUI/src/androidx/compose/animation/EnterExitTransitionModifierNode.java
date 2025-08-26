@@ -27,7 +27,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassThroughIntrinsics {
     public Alignment currentAlignment;
@@ -43,7 +42,6 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
     public final Function1 slideSpec;
     public Transition transition;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -82,18 +80,18 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Transition.Segment segment = (Transition.Segment) obj;
                 EnterExitState enterExitState = EnterExitState.PreEnter;
                 EnterExitState enterExitState2 = EnterExitState.Visible;
                 Object obj2 = null;
                 if (segment.isTransitioningTo(enterExitState, enterExitState2)) {
-                    ChangeSize changeSize = EnterExitTransitionModifierNode.this.enter.getData$animation().changeSize;
+                    ChangeSize changeSize = this.this$0.enter.getData$animation().changeSize;
                     if (changeSize != null) {
                         obj2 = changeSize.animationSpec;
                     }
                 } else if (segment.isTransitioningTo(enterExitState2, EnterExitState.PostExit)) {
-                    ChangeSize changeSize2 = EnterExitTransitionModifierNode.this.exit.getData$animation().changeSize;
+                    ChangeSize changeSize2 = this.this$0.exit.getData$animation().changeSize;
                     if (changeSize2 != null) {
                         obj2 = changeSize2.animationSpec;
                     }
@@ -110,20 +108,20 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 FiniteAnimationSpec finiteAnimationSpec;
                 FiniteAnimationSpec finiteAnimationSpec2;
                 Transition.Segment segment = (Transition.Segment) obj;
                 EnterExitState enterExitState = EnterExitState.PreEnter;
                 EnterExitState enterExitState2 = EnterExitState.Visible;
                 if (segment.isTransitioningTo(enterExitState, enterExitState2)) {
-                    Slide slide = EnterExitTransitionModifierNode.this.enter.getData$animation().slide;
+                    Slide slide = this.this$0.enter.getData$animation().slide;
                     return (slide == null || (finiteAnimationSpec2 = slide.animationSpec) == null) ? EnterExitTransitionKt.DefaultOffsetAnimationSpec : finiteAnimationSpec2;
                 }
                 if (!segment.isTransitioningTo(enterExitState2, EnterExitState.PostExit)) {
                     return EnterExitTransitionKt.DefaultOffsetAnimationSpec;
                 }
-                Slide slide2 = EnterExitTransitionModifierNode.this.exit.getData$animation().slide;
+                Slide slide2 = this.this$0.exit.getData$animation().slide;
                 return (slide2 == null || (finiteAnimationSpec = slide2.animationSpec) == null) ? EnterExitTransitionKt.DefaultOffsetAnimationSpec : finiteAnimationSpec;
             }
         };
@@ -154,16 +152,17 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00c5  */
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
-        MeasureResult layout$1;
-        final TransformOrigin m501boximpl;
+        final TransformOrigin transformOriginM503boximpl;
         long j2;
         char c;
         long j3;
-        MeasureResult layout$12;
-        MeasureResult layout$13;
         if (this.transition.transitionState.getCurrentState() == ((SnapshotMutableStateImpl) this.transition.targetState$delegate).getValue()) {
             this.currentAlignment = null;
         } else if (this.currentAlignment == null) {
@@ -175,39 +174,37 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
             this.currentAlignment = alignment;
         }
         if (measureScope.isLookingAhead()) {
-            final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(j);
-            long j4 = (mo608measureBRTryo0.width << 32) | (mo608measureBRTryo0.height & 4294967295L);
+            final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(j);
+            long j4 = (placeableMo610measureBRTryo0.width << 32) | (placeableMo610measureBRTryo0.height & 4294967295L);
             IntSize.Companion companion = IntSize.Companion;
             this.lookaheadSize = j4;
-            layout$13 = measureScope.layout$1((int) (j4 >> 32), (int) (j4 & 4294967295L), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$1
+            return measureScope.layout$1((int) (j4 >> 32), (int) (j4 & 4294967295L), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$1
                 {
                     super(1);
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    ((Placeable.PlacementScope) obj).place(Placeable.this, 0, 0, 0.0f);
+                public final Object mo781invoke(Object obj) {
+                    ((Placeable.PlacementScope) obj).place(placeableMo610measureBRTryo0, 0, 0, 0.0f);
                     return Unit.INSTANCE;
                 }
             });
-            return layout$13;
         }
         if (!((Boolean) this.isEnabled.invoke()).booleanValue()) {
-            final Placeable mo608measureBRTryo02 = measurable.mo608measureBRTryo0(j);
-            layout$1 = measureScope.layout$1(mo608measureBRTryo02.width, mo608measureBRTryo02.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$3$1
+            final Placeable placeableMo610measureBRTryo02 = measurable.mo610measureBRTryo0(j);
+            return measureScope.layout$1(placeableMo610measureBRTryo02.width, placeableMo610measureBRTryo02.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$3$1
                 {
                     super(1);
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    ((Placeable.PlacementScope) obj).place(Placeable.this, 0, 0, 0.0f);
+                public final Object mo781invoke(Object obj) {
+                    ((Placeable.PlacementScope) obj).place(placeableMo610measureBRTryo02, 0, 0, 0.0f);
                     return Unit.INSTANCE;
                 }
             });
-            return layout$1;
         }
         EnterExitTransitionKt$$ExternalSyntheticLambda0 enterExitTransitionKt$$ExternalSyntheticLambda0 = (EnterExitTransitionKt$$ExternalSyntheticLambda0) this.graphicsLayerBlock;
         enterExitTransitionKt$$ExternalSyntheticLambda0.getClass();
@@ -215,7 +212,7 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
         final EnterTransition enterTransition = enterExitTransitionKt$$ExternalSyntheticLambda0.f$3;
         Transition.DeferredAnimation deferredAnimation = enterExitTransitionKt$$ExternalSyntheticLambda0.f$0;
         final ExitTransition exitTransition = enterExitTransitionKt$$ExternalSyntheticLambda0.f$4;
-        final Transition.DeferredAnimation.DeferredAnimationData animate = deferredAnimation != null ? deferredAnimation.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$1
+        final Transition.DeferredAnimation.DeferredAnimationData deferredAnimationDataAnimate = deferredAnimation != null ? deferredAnimation.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -223,14 +220,14 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 FiniteAnimationSpec finiteAnimationSpec;
                 FiniteAnimationSpec finiteAnimationSpec2;
                 Transition.Segment segment = (Transition.Segment) obj;
                 EnterExitState enterExitState = EnterExitState.PreEnter;
                 EnterExitState enterExitState2 = EnterExitState.Visible;
                 if (segment.isTransitioningTo(enterExitState, enterExitState2)) {
-                    Fade fade = EnterTransition.this.getData$animation().fade;
+                    Fade fade = enterTransition.getData$animation().fade;
                     return (fade == null || (finiteAnimationSpec2 = fade.animationSpec) == null) ? EnterExitTransitionKt.DefaultAlphaAndScaleSpring : finiteAnimationSpec2;
                 }
                 if (!segment.isTransitioningTo(enterExitState2, EnterExitState.PostExit)) {
@@ -241,7 +238,6 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
             }
         }, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$alpha$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -270,12 +266,12 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i = WhenMappings.$EnumSwitchMapping$0[((EnterExitState) obj).ordinal()];
                 float f = 1.0f;
                 if (i != 1) {
                     if (i == 2) {
-                        Fade fade = EnterTransition.this.getData$animation().fade;
+                        Fade fade = enterTransition.getData$animation().fade;
                         if (fade != null) {
                             f = fade.alpha;
                         }
@@ -293,7 +289,7 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
             }
         }) : null;
         Transition.DeferredAnimation deferredAnimation2 = enterExitTransitionKt$$ExternalSyntheticLambda0.f$1;
-        final Transition.DeferredAnimation.DeferredAnimationData animate2 = deferredAnimation2 != null ? deferredAnimation2.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$1
+        final Transition.DeferredAnimation.DeferredAnimationData deferredAnimationDataAnimate2 = deferredAnimation2 != null ? deferredAnimation2.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -301,14 +297,14 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 FiniteAnimationSpec finiteAnimationSpec;
                 FiniteAnimationSpec finiteAnimationSpec2;
                 Transition.Segment segment = (Transition.Segment) obj;
                 EnterExitState enterExitState = EnterExitState.PreEnter;
                 EnterExitState enterExitState2 = EnterExitState.Visible;
                 if (segment.isTransitioningTo(enterExitState, enterExitState2)) {
-                    Scale scale = EnterTransition.this.getData$animation().scale;
+                    Scale scale = enterTransition.getData$animation().scale;
                     return (scale == null || (finiteAnimationSpec2 = scale.animationSpec) == null) ? EnterExitTransitionKt.DefaultAlphaAndScaleSpring : finiteAnimationSpec2;
                 }
                 if (!segment.isTransitioningTo(enterExitState2, EnterExitState.PostExit)) {
@@ -319,7 +315,6 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
             }
         }, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$scale$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -348,12 +343,12 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i = WhenMappings.$EnumSwitchMapping$0[((EnterExitState) obj).ordinal()];
                 float f = 1.0f;
                 if (i != 1) {
                     if (i == 2) {
-                        Scale scale = EnterTransition.this.getData$animation().scale;
+                        Scale scale = enterTransition.getData$animation().scale;
                         if (scale != null) {
                             f = scale.scale;
                         }
@@ -372,27 +367,22 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
         }) : null;
         if (enterExitTransitionKt$$ExternalSyntheticLambda0.f$2.transitionState.getCurrentState() == EnterExitState.PreEnter) {
             Scale scale = enterTransition.getData$animation().scale;
-            if (scale != null || (scale = exitTransition.getData$animation().scale) != null) {
-                m501boximpl = TransformOrigin.m501boximpl(scale.transformOrigin);
-            }
-            m501boximpl = null;
+            transformOriginM503boximpl = (scale == null && (scale = exitTransition.getData$animation().scale) == null) ? null : TransformOrigin.m503boximpl(scale.transformOrigin);
         } else {
             Scale scale2 = exitTransition.getData$animation().scale;
             if (scale2 != null || (scale2 = enterTransition.getData$animation().scale) != null) {
-                m501boximpl = TransformOrigin.m501boximpl(scale2.transformOrigin);
+                transformOriginM503boximpl = TransformOrigin.m503boximpl(scale2.transformOrigin);
             }
-            m501boximpl = null;
         }
         Transition.DeferredAnimation deferredAnimation3 = enterExitTransitionKt$$ExternalSyntheticLambda0.f$5;
-        final Transition.DeferredAnimation.DeferredAnimationData animate3 = deferredAnimation3 != null ? deferredAnimation3.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$1
+        final Transition.DeferredAnimation.DeferredAnimationData deferredAnimationDataAnimate3 = deferredAnimation3 != null ? deferredAnimation3.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7);
             }
         }, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$transformOrigin$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -421,14 +411,14 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                TransformOrigin transformOrigin;
+            public final Object mo781invoke(Object obj) {
+                TransformOrigin transformOriginM503boximpl2;
                 long j5;
                 long j6;
                 long j7;
                 int i = WhenMappings.$EnumSwitchMapping$0[((EnterExitState) obj).ordinal()];
                 if (i != 1) {
-                    transformOrigin = null;
+                    transformOriginM503boximpl2 = null;
                     if (i == 2) {
                         Scale scale3 = enterTransition.getData$animation().scale;
                         if (scale3 != null) {
@@ -439,7 +429,7 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
                                 j6 = scale4.transformOrigin;
                             }
                         }
-                        transformOrigin = TransformOrigin.m501boximpl(j6);
+                        transformOriginM503boximpl2 = TransformOrigin.m503boximpl(j6);
                     } else {
                         if (i != 3) {
                             throw new NoWhenBranchMatchedException();
@@ -453,18 +443,18 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
                                 j7 = scale6.transformOrigin;
                             }
                         }
-                        transformOrigin = TransformOrigin.m501boximpl(j7);
+                        transformOriginM503boximpl2 = TransformOrigin.m503boximpl(j7);
                     }
                 } else {
-                    transformOrigin = TransformOrigin.this;
+                    transformOriginM503boximpl2 = transformOriginM503boximpl;
                 }
-                if (transformOrigin != null) {
-                    j5 = transformOrigin.packedValue;
+                if (transformOriginM503boximpl2 != null) {
+                    j5 = transformOriginM503boximpl2.packedValue;
                 } else {
                     TransformOrigin.Companion.getClass();
                     j5 = TransformOrigin.Center;
                 }
-                return TransformOrigin.m501boximpl(j5);
+                return TransformOrigin.m503boximpl(j5);
             }
         }) : null;
         final Function1 function1 = new Function1() { // from class: androidx.compose.animation.EnterExitTransitionKt$createGraphicsLayerBlock$1$1$block$1
@@ -475,32 +465,32 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j5;
                 GraphicsLayerScope graphicsLayerScope = (GraphicsLayerScope) obj;
-                State<Float> state = animate;
+                State<Float> state = deferredAnimationDataAnimate;
                 ReusableGraphicsLayerScope reusableGraphicsLayerScope = (ReusableGraphicsLayerScope) graphicsLayerScope;
                 reusableGraphicsLayerScope.setAlpha(state != null ? ((Number) state.getValue()).floatValue() : 1.0f);
-                State<Float> state2 = animate2;
+                State<Float> state2 = deferredAnimationDataAnimate2;
                 reusableGraphicsLayerScope.setScaleX(state2 != null ? ((Number) state2.getValue()).floatValue() : 1.0f);
-                State<Float> state3 = animate2;
+                State<Float> state3 = deferredAnimationDataAnimate2;
                 reusableGraphicsLayerScope.setScaleY(state3 != null ? ((Number) state3.getValue()).floatValue() : 1.0f);
-                State<TransformOrigin> state4 = animate3;
+                State<TransformOrigin> state4 = deferredAnimationDataAnimate3;
                 if (state4 != null) {
                     j5 = ((TransformOrigin) state4.getValue()).packedValue;
                 } else {
                     TransformOrigin.Companion.getClass();
                     j5 = TransformOrigin.Center;
                 }
-                reusableGraphicsLayerScope.m496setTransformOrigin__ExYCQ(j5);
+                reusableGraphicsLayerScope.m498setTransformOrigin__ExYCQ(j5);
                 return Unit.INSTANCE;
             }
         };
-        final Placeable mo608measureBRTryo03 = measurable.mo608measureBRTryo0(j);
-        long j5 = (mo608measureBRTryo03.width << 32) | (mo608measureBRTryo03.height & 4294967295L);
-        final long j6 = !IntSize.m861equalsimpl0(this.lookaheadSize, AnimationModifierKt.InvalidSize) ? this.lookaheadSize : j5;
+        final Placeable placeableMo610measureBRTryo03 = measurable.mo610measureBRTryo0(j);
+        long j5 = (placeableMo610measureBRTryo03.width << 32) | (placeableMo610measureBRTryo03.height & 4294967295L);
+        final long j6 = !IntSize.m863equalsimpl0(this.lookaheadSize, AnimationModifierKt.InvalidSize) ? this.lookaheadSize : j5;
         Transition.DeferredAnimation deferredAnimation4 = this.sizeAnimation;
-        Transition.DeferredAnimation.DeferredAnimationData animate4 = deferredAnimation4 != null ? deferredAnimation4.animate(this.sizeTransitionSpec, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$animSize$1
+        Transition.DeferredAnimation.DeferredAnimationData deferredAnimationDataAnimate4 = deferredAnimation4 != null ? deferredAnimation4.animate(this.sizeTransitionSpec, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$animSize$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -508,10 +498,10 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Function1 function12;
                 Function1 function13;
-                EnterExitTransitionModifierNode enterExitTransitionModifierNode = EnterExitTransitionModifierNode.this;
+                EnterExitTransitionModifierNode enterExitTransitionModifierNode = this.this$0;
                 long j7 = j6;
                 enterExitTransitionModifierNode.getClass();
                 int i = EnterExitTransitionModifierNode.WhenMappings.$EnumSwitchMapping$0[((EnterExitState) obj).ordinal()];
@@ -519,7 +509,7 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
                     if (i == 2) {
                         ChangeSize changeSize = enterExitTransitionModifierNode.enter.getData$animation().changeSize;
                         if (changeSize != null && (function12 = changeSize.size) != null) {
-                            j7 = ((IntSize) function12.mo779invoke(IntSize.m859boximpl(j7))).packedValue;
+                            j7 = ((IntSize) function12.mo781invoke(IntSize.m861boximpl(j7))).packedValue;
                         }
                     } else {
                         if (i != 3) {
@@ -527,24 +517,24 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
                         }
                         ChangeSize changeSize2 = enterExitTransitionModifierNode.exit.getData$animation().changeSize;
                         if (changeSize2 != null && (function13 = changeSize2.size) != null) {
-                            j7 = ((IntSize) function13.mo779invoke(IntSize.m859boximpl(j7))).packedValue;
+                            j7 = ((IntSize) function13.mo781invoke(IntSize.m861boximpl(j7))).packedValue;
                         }
                     }
                 }
-                return IntSize.m859boximpl(j7);
+                return IntSize.m861boximpl(j7);
             }
         }) : null;
-        if (animate4 != null) {
-            j5 = ((IntSize) animate4.getValue()).packedValue;
+        if (deferredAnimationDataAnimate4 != null) {
+            j5 = ((IntSize) deferredAnimationDataAnimate4.getValue()).packedValue;
         }
-        long m829constrain4WqzIAM = ConstraintsKt.m829constrain4WqzIAM(j, j5);
+        long jM831constrain4WqzIAM = ConstraintsKt.m831constrain4WqzIAM(j, j5);
         Transition.DeferredAnimation deferredAnimation5 = this.offsetAnimation;
-        long j7 = 0;
+        long jMo353alignKFBX0sM = 0;
         if (deferredAnimation5 != null) {
             j2 = ((IntOffset) deferredAnimation5.animate(new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$offsetDelta$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     return EnterExitTransitionKt.DefaultOffsetAnimationSpec;
                 }
             }, new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$offsetDelta$2
@@ -555,43 +545,33 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
+                    int i;
                     EnterExitState enterExitState = (EnterExitState) obj;
-                    EnterExitTransitionModifierNode enterExitTransitionModifierNode = EnterExitTransitionModifierNode.this;
-                    long j8 = j6;
-                    long j9 = 0;
-                    if (enterExitTransitionModifierNode.currentAlignment == null) {
-                        IntOffset.Companion.getClass();
-                    } else if (enterExitTransitionModifierNode.getAlignment() == null) {
-                        IntOffset.Companion.getClass();
-                    } else if (Intrinsics.areEqual(enterExitTransitionModifierNode.currentAlignment, enterExitTransitionModifierNode.getAlignment())) {
+                    EnterExitTransitionModifierNode enterExitTransitionModifierNode = this.this$0;
+                    long j7 = j6;
+                    long jM852minusqkQi6aY = 0;
+                    if (enterExitTransitionModifierNode.currentAlignment == null || enterExitTransitionModifierNode.getAlignment() == null || Intrinsics.areEqual(enterExitTransitionModifierNode.currentAlignment, enterExitTransitionModifierNode.getAlignment()) || (i = EnterExitTransitionModifierNode.WhenMappings.$EnumSwitchMapping$0[enterExitState.ordinal()]) == 1 || i == 2) {
                         IntOffset.Companion.getClass();
                     } else {
-                        int i = EnterExitTransitionModifierNode.WhenMappings.$EnumSwitchMapping$0[enterExitState.ordinal()];
-                        if (i == 1) {
-                            IntOffset.Companion.getClass();
-                        } else if (i == 2) {
-                            IntOffset.Companion.getClass();
+                        if (i != 3) {
+                            throw new NoWhenBranchMatchedException();
+                        }
+                        ChangeSize changeSize = enterExitTransitionModifierNode.exit.getData$animation().changeSize;
+                        if (changeSize != null) {
+                            long j8 = ((IntSize) changeSize.size.mo781invoke(IntSize.m861boximpl(j7))).packedValue;
+                            Alignment alignment2 = enterExitTransitionModifierNode.getAlignment();
+                            alignment2.getClass();
+                            LayoutDirection layoutDirection = LayoutDirection.Ltr;
+                            long jMo353alignKFBX0sM2 = alignment2.mo353alignKFBX0sM(j7, j8, layoutDirection);
+                            Alignment alignment3 = enterExitTransitionModifierNode.currentAlignment;
+                            alignment3.getClass();
+                            jM852minusqkQi6aY = IntOffset.m852minusqkQi6aY(jMo353alignKFBX0sM2, alignment3.mo353alignKFBX0sM(j7, j8, layoutDirection));
                         } else {
-                            if (i != 3) {
-                                throw new NoWhenBranchMatchedException();
-                            }
-                            ChangeSize changeSize = enterExitTransitionModifierNode.exit.getData$animation().changeSize;
-                            if (changeSize != null) {
-                                long j10 = ((IntSize) changeSize.size.mo779invoke(IntSize.m859boximpl(j8))).packedValue;
-                                Alignment alignment2 = enterExitTransitionModifierNode.getAlignment();
-                                alignment2.getClass();
-                                LayoutDirection layoutDirection = LayoutDirection.Ltr;
-                                long mo352alignKFBX0sM = alignment2.mo352alignKFBX0sM(j8, j10, layoutDirection);
-                                Alignment alignment3 = enterExitTransitionModifierNode.currentAlignment;
-                                alignment3.getClass();
-                                j9 = IntOffset.m850minusqkQi6aY(mo352alignKFBX0sM, alignment3.mo352alignKFBX0sM(j8, j10, layoutDirection));
-                            } else {
-                                IntOffset.Companion.getClass();
-                            }
+                            IntOffset.Companion.getClass();
                         }
                     }
-                    return IntOffset.m847boximpl(j9);
+                    return IntOffset.m849boximpl(jM852minusqkQi6aY);
                 }
             }).getValue()).packedValue;
         } else {
@@ -609,41 +589,41 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
+                    long j7;
                     long j8;
-                    long j9;
                     Function1 function12;
                     Function1 function13;
                     EnterExitState enterExitState = (EnterExitState) obj;
-                    EnterExitTransitionModifierNode enterExitTransitionModifierNode = EnterExitTransitionModifierNode.this;
-                    long j10 = j6;
+                    EnterExitTransitionModifierNode enterExitTransitionModifierNode = this.this$0;
+                    long j9 = j6;
                     Slide slide = enterExitTransitionModifierNode.enter.getData$animation().slide;
-                    long j11 = 0;
+                    long j10 = 0;
                     if (slide == null || (function13 = slide.slideOffset) == null) {
                         IntOffset.Companion.getClass();
-                        j8 = 0;
+                        j7 = 0;
                     } else {
-                        j8 = ((IntOffset) function13.mo779invoke(IntSize.m859boximpl(j10))).packedValue;
+                        j7 = ((IntOffset) function13.mo781invoke(IntSize.m861boximpl(j9))).packedValue;
                     }
                     Slide slide2 = enterExitTransitionModifierNode.exit.getData$animation().slide;
                     if (slide2 == null || (function12 = slide2.slideOffset) == null) {
                         IntOffset.Companion.getClass();
-                        j9 = 0;
+                        j8 = 0;
                     } else {
-                        j9 = ((IntOffset) function12.mo779invoke(IntSize.m859boximpl(j10))).packedValue;
+                        j8 = ((IntOffset) function12.mo781invoke(IntSize.m861boximpl(j9))).packedValue;
                     }
                     int i = EnterExitTransitionModifierNode.WhenMappings.$EnumSwitchMapping$0[enterExitState.ordinal()];
                     if (i == 1) {
                         IntOffset.Companion.getClass();
                     } else if (i == 2) {
-                        j11 = j8;
+                        j10 = j7;
                     } else {
                         if (i != 3) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        j11 = j9;
+                        j10 = j8;
                     }
-                    return IntOffset.m847boximpl(j11);
+                    return IntOffset.m849boximpl(j10);
                 }
             }).getValue()).packedValue;
         } else {
@@ -653,13 +633,13 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
         }
         Alignment alignment2 = this.currentAlignment;
         if (alignment2 != null) {
-            j7 = alignment2.mo352alignKFBX0sM(j6, m829constrain4WqzIAM, LayoutDirection.Ltr);
+            jMo353alignKFBX0sM = alignment2.mo353alignKFBX0sM(j6, jM831constrain4WqzIAM, LayoutDirection.Ltr);
         } else {
             IntOffset.Companion.getClass();
         }
-        final long m851plusqkQi6aY = IntOffset.m851plusqkQi6aY(j7, j3);
-        final long j8 = j2;
-        layout$12 = measureScope.layout$1((int) (m829constrain4WqzIAM >> c), (int) (m829constrain4WqzIAM & 4294967295L), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$2
+        final long jM853plusqkQi6aY = IntOffset.m853plusqkQi6aY(jMo353alignKFBX0sM, j3);
+        final long j7 = j2;
+        return measureScope.layout$1((int) (jM831constrain4WqzIAM >> c), (int) (jM831constrain4WqzIAM & 4294967295L), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.animation.EnterExitTransitionModifierNode$measure$2
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -667,20 +647,19 @@ final class EnterExitTransitionModifierNode extends LayoutModifierNodeWithPassTh
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
-                Placeable placeable = Placeable.this;
-                long j9 = m851plusqkQi6aY;
+                Placeable placeable = placeableMo610measureBRTryo03;
+                long j8 = jM853plusqkQi6aY;
                 IntOffset.Companion companion2 = IntOffset.Companion;
-                long j10 = j8;
+                long j9 = j7;
                 Function1 function12 = function1;
                 placementScope.getClass();
                 Placeable.PlacementScope.access$handleMotionFrameOfReferencePlacement(placementScope, placeable);
-                placeable.mo609placeAtf8xVGno(IntOffset.m851plusqkQi6aY(((((int) (j9 >> 32)) + ((int) (j10 >> 32))) << 32) | ((((int) (j9 & 4294967295L)) + ((int) (j10 & 4294967295L))) & 4294967295L), placeable.apparentToRealOffset), 0.0f, function12);
+                placeable.mo611placeAtf8xVGno(IntOffset.m853plusqkQi6aY(((((int) (j8 >> 32)) + ((int) (j9 >> 32))) << 32) | ((((int) (j8 & 4294967295L)) + ((int) (j9 & 4294967295L))) & 4294967295L), placeable.apparentToRealOffset), 0.0f, function12);
                 return Unit.INSTANCE;
             }
         });
-        return layout$12;
     }
 
     @Override // androidx.compose.ui.Modifier.Node

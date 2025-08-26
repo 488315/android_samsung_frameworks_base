@@ -8,12 +8,10 @@ import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IApnSettingsPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.apn.IApnSettingsPolicy";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IApnSettingsPolicy {
         @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
         public long addUpdateApn(ContextInfo contextInfo, boolean z, ApnSettings apnSettings) throws RemoteException {
@@ -63,7 +61,6 @@ public interface IApnSettingsPolicy extends IInterface {
 
     boolean setPreferredApn(ContextInfo contextInfo, long j) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IApnSettingsPolicy {
         public static final int TRANSACTION_addUpdateApn = 5;
         public static final int TRANSACTION_deleteApn = 2;
@@ -72,7 +69,6 @@ public interface IApnSettingsPolicy extends IInterface {
         public static final int TRANSACTION_getPreferredApn = 6;
         public static final int TRANSACTION_setPreferredApn = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IApnSettingsPolicy {
             public IBinder mRemote;
 
@@ -82,19 +78,19 @@ public interface IApnSettingsPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public long addUpdateApn(ContextInfo contextInfo, boolean z, ApnSettings apnSettings) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(apnSettings, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(apnSettings, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -105,52 +101,52 @@ public interface IApnSettingsPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public boolean deleteApn(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public List<ApnSettings> getApnList(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ApnSettings.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ApnSettings.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public ApnSettings getApnSettings(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ApnSettings) obtain2.readTypedObject(ApnSettings.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ApnSettings) parcelObtain2.readTypedObject(ApnSettings.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -160,34 +156,34 @@ public interface IApnSettingsPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public ApnSettings getPreferredApn(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ApnSettings) obtain2.readTypedObject(ApnSettings.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ApnSettings) parcelObtain2.readTypedObject(ApnSettings.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.apn.IApnSettingsPolicy
             public boolean setPreferredApn(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApnSettingsPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -200,8 +196,8 @@ public interface IApnSettingsPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApnSettingsPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IApnSettingsPolicy)) ? new Proxy(iBinder) : (IApnSettingsPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApnSettingsPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IApnSettingsPolicy)) ? new Proxy(iBinder) : (IApnSettingsPolicy) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -216,44 +212,44 @@ public interface IApnSettingsPolicy extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean preferredApn = setPreferredApn(contextInfo, readLong);
+                    boolean preferredApn = setPreferredApn(contextInfo, j);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(preferredApn);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean deleteApn = deleteApn(contextInfo2, readLong2);
+                    boolean zDeleteApn = deleteApn(contextInfo2, j2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteApn);
+                    parcel2.writeBoolean(zDeleteApn);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<ApnSettings> apnList = getApnList(contextInfo3, readInt);
+                    List<ApnSettings> apnList = getApnList(contextInfo3, i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(apnList, 1);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    ApnSettings apnSettings = getApnSettings(contextInfo4, readLong3);
+                    ApnSettings apnSettings = getApnSettings(contextInfo4, j3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(apnSettings, 1);
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     ApnSettings apnSettings2 = (ApnSettings) parcel.readTypedObject(ApnSettings.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long addUpdateApn = addUpdateApn(contextInfo5, readBoolean, apnSettings2);
+                    long jAddUpdateApn = addUpdateApn(contextInfo5, z, apnSettings2);
                     parcel2.writeNoException();
-                    parcel2.writeLong(addUpdateApn);
+                    parcel2.writeLong(jAddUpdateApn);
                     return true;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);

@@ -38,20 +38,20 @@ public final class SemDlnaDevice implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SemDlnaDevice createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            String readString4 = parcel.readString();
-            String readString5 = parcel.readString();
-            String readString6 = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            String string4 = parcel.readString();
+            String string5 = parcel.readString();
+            String string6 = parcel.readString();
+            int i = parcel.readInt();
             boolean z = parcel.readInt() != 0;
-            String readString7 = parcel.readString();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            SemDlnaDevice semDlnaDevice = new SemDlnaDevice(readString, readString2, readString3, readString4, readString5, readString6, readInt, z, readString7);
-            semDlnaDevice.setDlnaSupportTypes(readInt2);
-            semDlnaDevice.setConnectionState(readInt3);
+            String string7 = parcel.readString();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            SemDlnaDevice semDlnaDevice = new SemDlnaDevice(string, string2, string3, string4, string5, string6, i, z, string7);
+            semDlnaDevice.setDlnaSupportTypes(i2);
+            semDlnaDevice.setConnectionState(i3);
             return semDlnaDevice;
         }
 
@@ -163,19 +163,19 @@ public final class SemDlnaDevice implements Parcelable {
         this.mDlnaSupportTypes = i;
     }
 
-    private static String getMacAddrFromArpTable(String str) {
+    private static String getMacAddrFromArpTable(String str) throws Throwable {
         if (str == null) {
             return "";
         }
-        String replace = str.replace("/", "");
+        String strReplace = str.replace("/", "");
         BufferedReader bufferedReader = null;
         try {
             try {
                 BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(new FileInputStream("/proc/net/arp"), StandardCharsets.UTF_8));
                 while (true) {
                     try {
-                        String readLine = bufferedReader2.readLine();
-                        if (readLine == null) {
+                        String line = bufferedReader2.readLine();
+                        if (line == null) {
                             bufferedReader2.close();
                             try {
                                 bufferedReader2.close();
@@ -185,18 +185,18 @@ public final class SemDlnaDevice implements Parcelable {
                                 return "";
                             }
                         }
-                        String[] split = readLine.split(" +");
-                        if (split != null && split.length >= 4 && replace.equals(split[0])) {
-                            String str2 = split[3];
+                        String[] strArrSplit = line.split(" +");
+                        if (strArrSplit != null && strArrSplit.length >= 4 && strReplace.equals(strArrSplit[0])) {
+                            String str2 = strArrSplit[3];
                             if (str2.matches("..:..:..:..:..:..")) {
-                                String trim = str2.trim();
+                                String strTrim = str2.trim();
                                 bufferedReader2.close();
                                 try {
                                     bufferedReader2.close();
-                                    return trim;
+                                    return strTrim;
                                 } catch (Exception e2) {
                                     Log.e(TAG, "getMacAddrFromArpTable br.close() IOE" + e2.toString());
-                                    return trim;
+                                    return strTrim;
                                 }
                             }
                         }
@@ -225,11 +225,11 @@ public final class SemDlnaDevice implements Parcelable {
                         throw th;
                     }
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (Exception e6) {
+                e = e6;
             }
-        } catch (Exception e6) {
-            e = e6;
+        } catch (Throwable th2) {
+            th = th2;
         }
     }
 

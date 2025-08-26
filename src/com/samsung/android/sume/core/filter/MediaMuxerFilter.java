@@ -85,8 +85,9 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.sume.core.message.MessageConsumer
-    public boolean onMessageReceived(Message message) throws UnsupportedOperationException {
+    public boolean onMessageReceived(Message message) throws Throwable {
         DiskCache diskCache;
+        FileInputStream fileInputStream;
         int code = message.getCode();
         if (code != 3) {
             if (code == 4) {
@@ -95,7 +96,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                 Def.require(fileDescriptor != null);
                 String str = TAG;
                 Log.d(str, "outputFd size: " + Def.getFileSize(this.outputFd));
-                FileInputStream fileInputStream = null;
+                FileInputStream fileInputStream2 = null;
                 String str2 = (String) Optional.ofNullable((String) message.get(Message.KEY_CACHE_ID)).map(new Function() { // from class: com.samsung.android.sume.core.filter.MediaMuxerFilter$$ExternalSyntheticLambda1
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
@@ -110,42 +111,42 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                         try {
                             try {
                                 try {
-                                    FileInputStream fileInputStream2 = new FileInputStream(file);
-                                    try {
-                                        feedExistFramesToBufferChannel(fileInputStream2.getFD());
-                                        fileInputStream2.close();
-                                    } catch (IOException e) {
-                                        e = e;
-                                        fileInputStream = fileInputStream2;
-                                        e.printStackTrace();
-                                        if (fileInputStream != null) {
-                                            fileInputStream.close();
-                                        }
-                                        this.muxer = new MediaMuxer(this.outputFd, 0);
-                                        this.contentsFormat = MediaFormat.mutableImageOf(new Object[0]);
-                                        this.contentId = ((Integer) message.get(Message.KEY_CONTENTS_ID)).intValue();
-                                        this.readyToStart.release(this.receiveChannelCount - ((Integer) message.get("track-count", 0)).intValue());
-                                        return true;
-                                    } catch (Throwable th) {
-                                        th = th;
-                                        fileInputStream = fileInputStream2;
-                                        if (fileInputStream != null) {
-                                            try {
-                                                fileInputStream.close();
-                                            } catch (IOException e2) {
-                                                e2.printStackTrace();
-                                            }
-                                        }
-                                        throw th;
-                                    }
-                                } catch (Throwable th2) {
-                                    th = th2;
+                                    fileInputStream = new FileInputStream(file);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (IOException e3) {
-                                e = e3;
+                            } catch (IOException e2) {
+                                e = e2;
                             }
-                        } catch (IOException e4) {
-                            e4.printStackTrace();
+                        } catch (Throwable th) {
+                            th = th;
+                        }
+                        try {
+                            feedExistFramesToBufferChannel(fileInputStream.getFD());
+                            fileInputStream.close();
+                        } catch (IOException e3) {
+                            e = e3;
+                            fileInputStream2 = fileInputStream;
+                            e.printStackTrace();
+                            if (fileInputStream2 != null) {
+                                fileInputStream2.close();
+                            }
+                            this.muxer = new MediaMuxer(this.outputFd, 0);
+                            this.contentsFormat = MediaFormat.mutableImageOf(new Object[0]);
+                            this.contentId = ((Integer) message.get(Message.KEY_CONTENTS_ID)).intValue();
+                            this.readyToStart.release(this.receiveChannelCount - ((Integer) message.get("track-count", 0)).intValue());
+                            return true;
+                        } catch (Throwable th2) {
+                            th = th2;
+                            fileInputStream2 = fileInputStream;
+                            if (fileInputStream2 != null) {
+                                try {
+                                    fileInputStream2.close();
+                                } catch (IOException e4) {
+                                    e4.printStackTrace();
+                                }
+                            }
+                            throw th;
                         }
                     } else {
                         Log.d(str, "no cache exist: " + this.cacheId);
@@ -183,9 +184,9 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
             if (mediaFormat.containsKey("height")) {
                 this.contentsFormat.setRows(mediaFormat.getInteger("height"));
             }
-            int addTrack = this.muxer.addTrack(mediaFormat);
-            this.trackIndexMap.put(mediaType, new Pair<>(mediaFormat.getString("mime"), Integer.valueOf(addTrack)));
-            message.reply("track-idx", Integer.valueOf(addTrack));
+            int iAddTrack = this.muxer.addTrack(mediaFormat);
+            this.trackIndexMap.put(mediaType, new Pair<>(mediaFormat.getString("mime"), Integer.valueOf(iAddTrack)));
+            message.reply("track-idx", Integer.valueOf(iAddTrack));
             this.readyToStart.release();
         }
         return true;
@@ -202,7 +203,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
             IntStream.range(0, mediaExtractor.getTrackCount()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.filter.MediaMuxerFilter$$ExternalSyntheticLambda0
                 @Override // java.util.function.IntConsumer
                 public final void accept(int i) {
-                    MediaMuxerFilter.this.m9542x6750d1fc(mediaExtractor, i);
+                    this.f$0.m9555x6750d1fc(mediaExtractor, i);
                 }
             });
         } catch (IOException | IllegalStateException e) {
@@ -213,11 +214,11 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
     }
 
     /* renamed from: lambda$feedExistFramesToBufferChannel$0$com-samsung-android-sume-core-filter-MediaMuxerFilter, reason: not valid java name */
-    /* synthetic */ void m9542x6750d1fc(MediaExtractor mediaExtractor, int i) {
+    /* synthetic */ void m9555x6750d1fc(MediaExtractor mediaExtractor, int i) {
         String string = mediaExtractor.getTrackFormat(i).getString("mime");
         MediaType mediaType = string.startsWith("video") ? MediaType.RAW_VIDEO : MediaType.RAW_AUDIO;
-        BufferChannel apply = this.receiveChannelQuery.apply(mediaType);
-        if (apply == null) {
+        BufferChannel bufferChannelApply = this.receiveChannelQuery.apply(mediaType);
+        if (bufferChannelApply == null) {
             Log.w(TAG, "no given buffer-channel for " + mediaType);
             return;
         }
@@ -229,20 +230,20 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                 mediaExtractor.unselectTrack(i);
                 return;
             }
-            ByteBuffer allocateDirect = ByteBuffer.allocateDirect(sampleSize);
-            allocateDirect.order(ByteOrder.nativeOrder());
-            Def.check(sampleSize == mediaExtractor.readSampleData(allocateDirect, 0));
-            MediaBuffer of = MediaBuffer.of(mediaType, allocateDirect);
+            ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(sampleSize);
+            byteBufferAllocateDirect.order(ByteOrder.nativeOrder());
+            Def.check(sampleSize == mediaExtractor.readSampleData(byteBufferAllocateDirect, 0));
+            MediaBuffer mediaBufferOf = MediaBuffer.of(mediaType, byteBufferAllocateDirect);
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
             bufferInfo.size = sampleSize;
             bufferInfo.presentationTimeUs = mediaExtractor.getSampleTime();
             if ((mediaExtractor.getSampleFlags() & 1) != 0) {
                 bufferInfo.flags |= 1;
             }
-            of.setExtra("buffer-info", bufferInfo);
+            mediaBufferOf.setExtra("buffer-info", bufferInfo);
             mediaExtractor.advance();
             Log.d(TAG, "push to buffer-channel[" + string + "]: " + bufferInfo.presentationTimeUs + "[us]");
-            apply.send(of);
+            bufferChannelApply.send(mediaBufferOf);
         }
     }
 
@@ -275,7 +276,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
             this.trackIndexMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaMuxerFilter$$ExternalSyntheticLambda3
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    MediaMuxerFilter.this.m9544x97443e46(arrayList, (MediaType) obj, (Pair) obj2);
+                    this.f$0.m9557x97443e46(arrayList, (MediaType) obj, (Pair) obj2);
                 }
             });
             for (Future future : arrayList) {
@@ -299,7 +300,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                     this.diskCache.put(this.cacheId, new Function() { // from class: com.samsung.android.sume.core.filter.MediaMuxerFilter$$ExternalSyntheticLambda4
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return MediaMuxerFilter.this.m9545xc0989387((File) obj);
+                            return this.f$0.m9558xc0989387((File) obj);
                         }
                     });
                 } else {
@@ -315,13 +316,13 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                 this.muxer = null;
                 Log.d(str, "muxer released");
             }
-            MediaBuffer of = MediaBuffer.of(this.contentsFormat, this.outputFd);
-            of.setExtra(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId));
+            MediaBuffer mediaBufferOf = MediaBuffer.of(this.contentsFormat, this.outputFd);
+            mediaBufferOf.setExtra(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId));
             String str3 = this.cacheId;
             if (str3 != null) {
-                of.setExtra(Message.KEY_CACHE_ID, str3);
+                mediaBufferOf.setExtra(Message.KEY_CACHE_ID, str3);
             }
-            mutableMediaBuffer.put(of);
+            mutableMediaBuffer.put(mediaBufferOf);
             return mutableMediaBuffer;
         } catch (Throwable th) {
             MediaMuxer mediaMuxer4 = this.muxer;
@@ -335,33 +336,33 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
     }
 
     /* renamed from: lambda$run$2$com-samsung-android-sume-core-filter-MediaMuxerFilter, reason: not valid java name */
-    /* synthetic */ void m9544x97443e46(List list, final MediaType mediaType, final Pair pair) {
+    /* synthetic */ void m9557x97443e46(List list, final MediaType mediaType, final Pair pair) {
         list.add(this.threadPool.submit(new Callable() { // from class: com.samsung.android.sume.core.filter.MediaMuxerFilter$$ExternalSyntheticLambda2
             @Override // java.util.concurrent.Callable
             public final Object call() {
-                return MediaMuxerFilter.this.m9543x6defe905(pair, mediaType);
+                return this.f$0.m9556x6defe905(pair, mediaType);
             }
         }));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: lambda$run$1$com-samsung-android-sume-core-filter-MediaMuxerFilter, reason: not valid java name */
-    /* synthetic */ Boolean m9543x6defe905(Pair pair, MediaType mediaType) throws Exception {
+    /* synthetic */ Boolean m9556x6defe905(Pair pair, MediaType mediaType) throws Exception {
         boolean z;
         int i;
         MediaBuffer mediaBuffer;
         String str = (String) pair.first;
-        int intValue = ((Integer) pair.second).intValue();
+        int iIntValue = ((Integer) pair.second).intValue();
         String str2 = "[enc: " + str + NavigationBarInflaterView.SIZE_MOD_END;
-        BufferChannel apply = this.receiveChannelQuery.apply(mediaType);
+        BufferChannel bufferChannelApply = this.receiveChannelQuery.apply(mediaType);
         int i2 = 0;
         long j = 0;
         boolean z2 = false;
         int i3 = 0;
         while (!z2) {
             this.cvPause.block();
-            MediaBuffer receive = apply.receive();
-            MediaCodec.BufferInfo bufferInfo = (MediaCodec.BufferInfo) receive.getExtra("buffer-info");
+            MediaBuffer mediaBufferReceive = bufferChannelApply.receive();
+            MediaCodec.BufferInfo bufferInfo = (MediaCodec.BufferInfo) mediaBufferReceive.getExtra("buffer-info");
             if ((bufferInfo.flags & 2) != 0) {
                 bufferInfo.size = i2;
             }
@@ -372,21 +373,21 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                 z = z2;
             }
             if (bufferInfo.size != 0) {
-                ByteBuffer byteBuffer = (ByteBuffer) receive.getTypedData(ByteBuffer.class);
+                ByteBuffer byteBuffer = (ByteBuffer) mediaBufferReceive.getTypedData(ByteBuffer.class);
                 byteBuffer.position(bufferInfo.offset);
                 byteBuffer.limit(bufferInfo.offset + bufferInfo.size);
                 String str3 = TAG;
                 StringBuilder sb = new StringBuilder("write data[#");
-                sb.append(intValue);
+                sb.append(iIntValue);
                 sb.append("] from ");
                 sb.append(str2);
                 sb.append(": ");
-                mediaBuffer = receive;
+                mediaBuffer = mediaBufferReceive;
                 sb.append(bufferInfo.presentationTimeUs);
                 sb.append(XmlTags.ATTR_USER_ID);
                 Log.d(str3, sb.toString());
                 try {
-                    this.muxer.writeSampleData(intValue, byteBuffer, bufferInfo);
+                    this.muxer.writeSampleData(iIntValue, byteBuffer, bufferInfo);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -406,7 +407,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
                 }
             } else {
                 i = i2;
-                mediaBuffer = receive;
+                mediaBuffer = mediaBufferReceive;
             }
             mediaBuffer.release();
             z2 = z;
@@ -421,7 +422,7 @@ public class MediaMuxerFilter implements MediaFilter, MediaInputStreamFilter {
     }
 
     /* renamed from: lambda$run$3$com-samsung-android-sume-core-filter-MediaMuxerFilter, reason: not valid java name */
-    /* synthetic */ Boolean m9545xc0989387(File file) {
+    /* synthetic */ Boolean m9558xc0989387(File file) throws ErrnoException {
         try {
             Os.sendfile(new FileOutputStream(file).getFD(), this.outputFd, new Int64Ref(0L), Def.getFileSize(this.outputFd));
             return true;

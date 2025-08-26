@@ -68,7 +68,7 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<T> typeReference, int i) {
+    public boolean isTypeMappingSupported(TypeReference<T> typeReference, int i) throws NoSuchMethodException, SecurityException {
         if ((i == 1 || i == 0) && (typeReference.getType() instanceof Class)) {
             Class cls = (Class) typeReference.getType();
             if (cls.isEnum()) {
@@ -95,8 +95,8 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
     /* JADX INFO: Access modifiers changed from: private */
     public static <T extends Enum<T>> int getEnumValue(T t) {
         int[] iArr = sEnumValues.get(t.getClass());
-        int ordinal = t.ordinal();
-        return iArr != null ? iArr[ordinal] : ordinal;
+        int iOrdinal = t.ordinal();
+        return iArr != null ? iArr[iOrdinal] : iOrdinal;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

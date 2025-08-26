@@ -93,9 +93,9 @@ public interface AuthenticationStateListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(AuthenticationStateListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof AuthenticationStateListener)) {
-                return (AuthenticationStateListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(AuthenticationStateListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof AuthenticationStateListener)) {
+                return (AuthenticationStateListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -194,85 +194,85 @@ public interface AuthenticationStateListener extends IInterface {
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationAcquired(AuthenticationAcquiredInfo authenticationAcquiredInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationAcquiredInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationAcquiredInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationError(AuthenticationErrorInfo authenticationErrorInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationErrorInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationErrorInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationFailed(AuthenticationFailedInfo authenticationFailedInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationFailedInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationFailedInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationHelp(AuthenticationHelpInfo authenticationHelpInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationHelpInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationHelpInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationStarted(AuthenticationStartedInfo authenticationStartedInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationStartedInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationStartedInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationStopped(AuthenticationStoppedInfo authenticationStoppedInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationStoppedInfo, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationStoppedInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
             public void onAuthenticationSucceeded(AuthenticationSucceededInfo authenticationSucceededInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
-                    obtain.writeTypedObject(authenticationSucceededInfo, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authenticationSucceededInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

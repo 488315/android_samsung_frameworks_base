@@ -25,7 +25,6 @@ import kotlin.time.Duration;
 import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeMoveToDisplayTransitionHandler implements Transitions.TransitionHandler {
     public static final long ANIM_DURATION;
@@ -34,7 +33,6 @@ public final class DesktopModeMoveToDisplayTransitionHandler implements Transiti
     public final InteractionJankMonitor interactionJankMonitor;
     public final Handler shellMainHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,19 +92,19 @@ public final class DesktopModeMoveToDisplayTransitionHandler implements Transiti
             Object obj3 = arrayList.get(i);
             i++;
             final TransitionInfo.Change change3 = (TransitionInfo.Change) obj3;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.setDuration(Duration.m3437getInWholeMillisecondsimpl(ANIM_DURATION));
-            ofFloat.setInterpolator(Interpolators.LINEAR);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeMoveToDisplayTransitionHandler$startAnimation$1$1$1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.setDuration(Duration.m3457getInWholeMillisecondsimpl(ANIM_DURATION));
+            valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeMoveToDisplayTransitionHandler$startAnimation$1$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    DesktopModeMoveToDisplayTransitionHandler.this.animationTransaction.setAlpha(change3.getLeash(), ((Float) valueAnimator.getAnimatedValue()).floatValue()).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
+                    this.this$0.animationTransaction.setAlpha(change3.getLeash(), ((Float) valueAnimator.getAnimatedValue()).floatValue()).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
                 }
             });
-            arrayList2.add(ofFloat);
+            arrayList2.add(valueAnimatorOfFloat);
         }
         animatorSet.playTogether(arrayList2);
-        animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeMoveToDisplayTransitionHandler$startAnimation$2
+        animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeMoveToDisplayTransitionHandler.startAnimation.2
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
                 transaction2.apply();

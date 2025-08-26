@@ -83,16 +83,16 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     static /* synthetic */ void lambda$triggerClientDump$0(String str, InputMethodManager inputMethodManager, byte[] bArr, TracingContext tracingContext) {
-        ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-        newTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
-        long start = newTracePacket.start(1146756268144L);
-        long start2 = newTracePacket.start(1146756268033L);
-        newTracePacket.write(1138166333442L, str);
-        long start3 = newTracePacket.start(1146756268035L);
-        inputMethodManager.dumpDebug(newTracePacket, bArr);
-        newTracePacket.end(start3);
-        newTracePacket.end(start2);
-        newTracePacket.end(start);
+        ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+        protoOutputStreamNewTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
+        long jStart = protoOutputStreamNewTracePacket.start(1146756268144L);
+        long jStart2 = protoOutputStreamNewTracePacket.start(1146756268033L);
+        protoOutputStreamNewTracePacket.write(1138166333442L, str);
+        long jStart3 = protoOutputStreamNewTracePacket.start(1146756268035L);
+        inputMethodManager.dumpDebug(protoOutputStreamNewTracePacket, bArr);
+        protoOutputStreamNewTracePacket.end(jStart3);
+        protoOutputStreamNewTracePacket.end(jStart2);
+        protoOutputStreamNewTracePacket.end(jStart);
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
@@ -116,14 +116,14 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     static /* synthetic */ void lambda$triggerServiceDump$1(String str, ImeTracing.ServiceDumper serviceDumper, byte[] bArr, TracingContext tracingContext) {
-        ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-        newTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
-        long start = newTracePacket.start(1146756268144L);
-        long start2 = newTracePacket.start(1146756268034L);
-        newTracePacket.write(1138166333442L, str);
-        serviceDumper.dumpToProto(newTracePacket, bArr);
-        newTracePacket.end(start2);
-        newTracePacket.end(start);
+        ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+        protoOutputStreamNewTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
+        long jStart = protoOutputStreamNewTracePacket.start(1146756268144L);
+        long jStart2 = protoOutputStreamNewTracePacket.start(1146756268034L);
+        protoOutputStreamNewTracePacket.write(1138166333442L, str);
+        serviceDumper.dumpToProto(protoOutputStreamNewTracePacket, bArr);
+        protoOutputStreamNewTracePacket.end(jStart2);
+        protoOutputStreamNewTracePacket.end(jStart);
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
@@ -147,14 +147,14 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     static /* synthetic */ void lambda$triggerManagerServiceDump$2(String str, ImeTracing.ServiceDumper serviceDumper, TracingContext tracingContext) {
-        ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-        newTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
-        long start = newTracePacket.start(1146756268144L);
-        long start2 = newTracePacket.start(1146756268035L);
-        newTracePacket.write(1138166333442L, str);
-        serviceDumper.dumpToProto(newTracePacket, null);
-        newTracePacket.end(start2);
-        newTracePacket.end(start);
+        ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+        protoOutputStreamNewTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
+        long jStart = protoOutputStreamNewTracePacket.start(1146756268144L);
+        long jStart2 = protoOutputStreamNewTracePacket.start(1146756268035L);
+        protoOutputStreamNewTracePacket.write(1138166333442L, str);
+        serviceDumper.dumpToProto(protoOutputStreamNewTracePacket, null);
+        protoOutputStreamNewTracePacket.end(jStart2);
+        protoOutputStreamNewTracePacket.end(jStart);
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing

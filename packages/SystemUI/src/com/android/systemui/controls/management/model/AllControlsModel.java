@@ -23,7 +23,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMutableMap;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AllControlsModel {
     public StatelessControlAdapter adapter;
@@ -36,7 +35,6 @@ public final class AllControlsModel {
     public final boolean needCategoryHeader;
     public final Resources resources;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OrderedMap implements Map, KMutableMap {
         public final Map map;
         public final List orderedKeys = new ArrayList();
@@ -96,11 +94,11 @@ public final class AllControlsModel {
 
         @Override // java.util.Map
         public final Object remove(Object obj) {
-            Object remove = this.map.remove(obj);
-            if (remove != null) {
+            Object objRemove = this.map.remove(obj);
+            if (objRemove != null) {
                 ((ArrayList) this.orderedKeys).remove(obj);
             }
-            return remove;
+            return objRemove;
         }
 
         @Override // java.util.Map
@@ -114,7 +112,7 @@ public final class AllControlsModel {
         }
     }
 
-    public AllControlsModel(Resources resources, CharSequence charSequence, List<ControlStatus> list, List<String> list2, CharSequence charSequence2, boolean z, StructureModel.StructureModelCallback structureModelCallback) {
+    public AllControlsModel(Resources resources, CharSequence charSequence, List<ControlStatus> list, List<String> list2, CharSequence charSequence2, boolean z, StructureModel.StructureModelCallback structureModelCallback) throws Resources.NotFoundException {
         this.resources = resources;
         this.categoryHeader = charSequence;
         this.controls = list;
@@ -145,11 +143,11 @@ public final class AllControlsModel {
             arrayList4.add(((ControlStatus) it2.next()).control.getControlId());
         }
         List list5 = this.favoriteIds;
-        List sorted = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(arrayList4));
-        List sorted2 = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(list5));
+        List listSorted = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(arrayList4));
+        List listSorted2 = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(list5));
         boolean z2 = true;
         int i = 0;
-        boolean z3 = sorted.size() == sorted2.size() && sorted.containsAll(sorted2);
+        boolean z3 = listSorted.size() == listSorted2.size() && listSorted.containsAll(listSorted2);
         this.resources.getString(R.string.sec_controls_removed);
         ArrayList arrayList5 = new ArrayList();
         for (Object obj2 : list4) {
@@ -157,9 +155,9 @@ public final class AllControlsModel {
                 arrayList5.add(obj2);
             }
         }
-        boolean areEqual = Intrinsics.areEqual(list3, arrayList5);
+        boolean zAreEqual = Intrinsics.areEqual(list3, arrayList5);
         arrayList2.add(new SecStructureNameWrapper(this.categoryHeader, z3, TextUtils.isEmpty(this.categoryHeader) ? this.emptyStructureZoneString : this.categoryHeader, this.needCategoryHeader));
-        if (areEqual) {
+        if (zAreEqual) {
             ArrayList arrayList6 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList5, 10));
             int size = arrayList5.size();
             while (i < size) {
@@ -174,20 +172,20 @@ public final class AllControlsModel {
             for (Object obj4 : list4) {
                 String zone = ((ControlStatus) obj4).control.getZone();
                 zone = zone == null ? "" : zone;
-                Object obj5 = orderedMap.map.get(zone);
-                if (obj5 == null) {
-                    obj5 = new ArrayList();
-                    orderedMap.put(zone, obj5);
+                Object arrayList7 = orderedMap.map.get(zone);
+                if (arrayList7 == null) {
+                    arrayList7 = new ArrayList();
+                    orderedMap.put(zone, arrayList7);
                 }
-                ((List) obj5).add(obj4);
+                ((List) arrayList7).add(obj4);
             }
-            ArrayList arrayList7 = (ArrayList) orderedMap.orderedKeys;
-            int size2 = arrayList7.size();
+            ArrayList arrayList8 = (ArrayList) orderedMap.orderedKeys;
+            int size2 = arrayList8.size();
             int i2 = 0;
             while (i2 < size2) {
-                Object obj6 = arrayList7.get(i2);
+                Object obj5 = arrayList8.get(i2);
                 i2++;
-                CharSequence charSequence3 = (CharSequence) obj6;
+                CharSequence charSequence3 = (CharSequence) obj5;
                 TransformingSequence transformingSequence = new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1((Iterable) MapsKt__MapsKt.getValue(charSequence3, orderedMap)), new AllControlsModel$$ExternalSyntheticLambda0());
                 if (TextUtils.isEmpty(charSequence3)) {
                     CollectionsKt__MutableCollectionsKt.addAll(arrayList3, transformingSequence);
@@ -203,16 +201,16 @@ public final class AllControlsModel {
                 }
             }
             if (!arrayList3.isEmpty()) {
-                ArrayList arrayList8 = new ArrayList();
+                ArrayList arrayList9 = new ArrayList();
                 int size3 = arrayList2.size();
                 while (i < size3) {
-                    Object obj7 = arrayList2.get(i);
+                    Object obj6 = arrayList2.get(i);
                     i++;
-                    if (obj7 instanceof SecZoneNameWrapper) {
-                        arrayList8.add(obj7);
+                    if (obj6 instanceof SecZoneNameWrapper) {
+                        arrayList9.add(obj6);
                     }
                 }
-                if (!arrayList8.isEmpty()) {
+                if (!arrayList9.isEmpty()) {
                     arrayList2.add(new SecZoneNameWrapper(this.emptyStructureZoneString));
                 }
                 arrayList2.addAll(arrayList3);
@@ -261,46 +259,48 @@ public final class AllControlsModel {
         }
         SecStructureNameWrapper secStructureNameWrapper = (SecStructureNameWrapper) obj;
         if (secStructureNameWrapper != null) {
-            int indexOf = ((ArrayList) this.elements).indexOf(secStructureNameWrapper);
-            int i3 = indexOf + 1;
+            int iIndexOf = ((ArrayList) this.elements).indexOf(secStructureNameWrapper);
+            int i3 = iIndexOf + 1;
             Iterator it = CollectionsKt___CollectionsKt.drop(this.elements, i3).iterator();
-            int i4 = 0;
+            int size3 = 0;
             while (true) {
                 if (!it.hasNext()) {
-                    i4 = -1;
+                    size3 = -1;
                     break;
                 } else if (((SecElementWrapper) it.next()) instanceof SecStructureNameWrapper) {
                     break;
                 } else {
-                    i4++;
+                    size3++;
                 }
             }
-            if (i4 == -1) {
-                i4 = ((ArrayList) this.elements).size();
+            if (size3 == -1) {
+                size3 = ((ArrayList) this.elements).size();
             }
-            List take = CollectionsKt___CollectionsKt.take(CollectionsKt___CollectionsKt.drop(this.elements, i3), i4 - i3);
+            List listTake = CollectionsKt___CollectionsKt.take(CollectionsKt___CollectionsKt.drop(this.elements, i3), size3 - i3);
             ArrayList arrayList3 = new ArrayList();
-            for (Object obj4 : take) {
+            for (Object obj4 : listTake) {
                 if (obj4 instanceof SecControlStatusWrapper) {
                     arrayList3.add(obj4);
                 }
             }
-            if (!arrayList3.isEmpty()) {
-                int size3 = arrayList3.size();
-                int i5 = 0;
-                while (i5 < size3) {
-                    Object obj5 = arrayList3.get(i5);
-                    i5++;
+            if (arrayList3.isEmpty()) {
+                z2 = true;
+            } else {
+                int size4 = arrayList3.size();
+                int i4 = 0;
+                while (i4 < size4) {
+                    Object obj5 = arrayList3.get(i4);
+                    i4++;
                     if (!((SecControlStatusWrapper) obj5).controlStatus.favorite) {
                         break;
                     }
                 }
+                z2 = true;
             }
-            z2 = true;
             secStructureNameWrapper.favorite = z2;
             StatelessControlAdapter statelessControlAdapter = this.adapter;
             if (statelessControlAdapter != null) {
-                statelessControlAdapter.notifyItemChanged(indexOf, new Object());
+                statelessControlAdapter.notifyItemChanged(iIndexOf, new Object());
             }
         }
     }
@@ -324,10 +324,10 @@ public final class AllControlsModel {
         }
         this.favoriteControlChangedCallback.onControlInfoChange(new ControlInfoForStructure(structure, secControlStatusWrapper.getControlId(), z));
         controlStatus.favorite = z;
-        int indexOf = ((ArrayList) this.elements).indexOf(secControlStatusWrapper);
+        int iIndexOf = ((ArrayList) this.elements).indexOf(secControlStatusWrapper);
         StatelessControlAdapter statelessControlAdapter = this.adapter;
         if (statelessControlAdapter != null) {
-            statelessControlAdapter.notifyItemChanged(indexOf, new Object());
+            statelessControlAdapter.notifyItemChanged(iIndexOf, new Object());
         }
     }
 }

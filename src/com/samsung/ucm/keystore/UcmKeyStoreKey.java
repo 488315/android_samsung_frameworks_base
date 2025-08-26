@@ -33,9 +33,9 @@ public class UcmKeyStoreKey implements Key {
 
     public int hashCode() {
         String str = this.mAlgorithm;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         String str2 = this.mAlias;
-        return hashCode + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode + (str2 != null ? str2.hashCode() : 0);
     }
 
     public boolean equals(Object obj) {

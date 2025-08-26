@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone.ongoingactivity;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,7 +20,6 @@ import com.android.systemui.statusbar.notification.SubscreenNotificationControll
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingSeekBarCreator {
     public final Parcelable[] bundle;
@@ -30,8 +30,8 @@ public final class OngoingSeekBarCreator {
     public final int progressColor;
     public final List segments;
 
-    public OngoingSeekBarCreator(Context context, Parcelable[] parcelableArr, float f, Icon icon, int i) {
-        Drawable loadDrawable;
+    public OngoingSeekBarCreator(Context context, Parcelable[] parcelableArr, float f, Icon icon, int i) throws Resources.NotFoundException {
+        Drawable drawableLoadDrawable;
         this.context = context;
         this.bundle = parcelableArr;
         this.progress = f;
@@ -43,14 +43,14 @@ public final class OngoingSeekBarCreator {
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_progress_thumb_size);
         if (icon != null) {
             try {
-                loadDrawable = icon.loadDrawable(context);
+                drawableLoadDrawable = icon.loadDrawable(context);
             } catch (IllegalStateException unused) {
                 this.car = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.re);
             }
         } else {
-            loadDrawable = null;
+            drawableLoadDrawable = null;
         }
-        Bitmap bitmap = Utils.toBitmap(loadDrawable);
+        Bitmap bitmap = Utils.toBitmap(drawableLoadDrawable);
         this.car = bitmap == null ? BitmapFactory.decodeResource(context.getResources(), R.drawable.re) : bitmap;
         Bitmap bitmap2 = this.car;
         bitmap2.getClass();
@@ -81,7 +81,7 @@ public final class OngoingSeekBarCreator {
         }
     }
 
-    public final Bitmap makeImage(OngoingType ongoingType) {
+    public final Bitmap makeImage(OngoingType ongoingType) throws Resources.NotFoundException {
         int ongoingCardWidth;
         TintedProgressSegment tintedProgressSegment;
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_progress_thumb_size);
@@ -103,44 +103,44 @@ public final class OngoingSeekBarCreator {
         }
         int dimensionPixelSize2 = (ongoingCardWidth - this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_progress_start_margin)) - this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_content_end_margin);
         int dimensionPixelSize3 = this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_content_upper_progress_height);
-        Bitmap createBitmap = Bitmap.createBitmap(dimensionPixelSize2, dimensionPixelSize3, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
-        canvas.drawBitmap(createBitmap, 0.0f, 0.0f, (Paint) null);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(dimensionPixelSize2, dimensionPixelSize3, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        canvas.drawBitmap(bitmapCreateBitmap, 0.0f, 0.0f, (Paint) null);
         float f = dimensionPixelSize3 / 2;
         int size = ((ArrayList) this.segments).size() - 1;
         List list = this.segments;
         if (list != null && (tintedProgressSegment = (TintedProgressSegment) ((ArrayList) list).get(size)) != null) {
             float f2 = dimensionPixelSize2;
             float f3 = tintedProgressSegment.width;
-            float f4 = f2 - (f2 * f3);
+            float strokeWidth = f2 - (f2 * f3);
             if (f3 == 1.0f) {
-                f4 = this.paint.getStrokeWidth() / 2;
+                strokeWidth = this.paint.getStrokeWidth() / 2;
             }
             this.paint.setStrokeCap(Paint.Cap.ROUND);
             this.paint.setColor(tintedProgressSegment.color);
-            canvas.drawLine(f4, f, f2 - (this.paint.getStrokeWidth() / 2), f, this.paint);
+            canvas.drawLine(strokeWidth, f, f2 - (this.paint.getStrokeWidth() / 2), f, this.paint);
         }
         List list2 = this.segments;
         if (list2 != null) {
             ArrayList arrayList = (ArrayList) list2;
             int size2 = arrayList.size();
             int i = 0;
-            float f5 = 0.0f;
+            float f4 = 0.0f;
             int i2 = 0;
             while (i < size2) {
                 int i3 = i + 1;
                 TintedProgressSegment tintedProgressSegment2 = (TintedProgressSegment) arrayList.get(i);
                 if (i2 != size) {
-                    float f6 = dimensionPixelSize2 * tintedProgressSegment2.width;
+                    float f5 = dimensionPixelSize2 * tintedProgressSegment2.width;
                     if (i2 == 0) {
                         this.paint.setStrokeCap(Paint.Cap.ROUND);
                     } else {
                         this.paint.setStrokeCap(Paint.Cap.BUTT);
                     }
                     this.paint.setColor(tintedProgressSegment2.color);
-                    float strokeWidth = i2 == 0 ? this.paint.getStrokeWidth() / 2 : f5;
-                    f5 += f6;
-                    canvas.drawLine(strokeWidth, f, f5, f, this.paint);
+                    float strokeWidth2 = i2 == 0 ? this.paint.getStrokeWidth() / 2 : f4;
+                    f4 += f5;
+                    canvas.drawLine(strokeWidth2, f, f4, f, this.paint);
                     i2++;
                 }
                 i = i3;
@@ -148,27 +148,26 @@ public final class OngoingSeekBarCreator {
         }
         this.paint.setStrokeCap(Paint.Cap.ROUND);
         Paint paint = this.paint;
-        int i4 = this.progressColor;
-        if (i4 == 0) {
-            i4 = this.context.getColor(R.color.ongoing_activity_expand_progress_gray_bg_color);
+        int color = this.progressColor;
+        if (color == 0) {
+            color = this.context.getColor(R.color.ongoing_activity_expand_progress_gray_bg_color);
         }
-        paint.setColor(i4);
+        paint.setColor(color);
         this.paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        float f7 = dimensionPixelSize2;
-        float f8 = (this.progress / 100.0f) * f7;
-        float f9 = 2;
-        canvas.drawLine(this.paint.getStrokeWidth() / f9, f, f8, f, this.paint);
+        float f6 = dimensionPixelSize2;
+        float f7 = (this.progress / 100.0f) * f6;
+        float f8 = 2;
+        canvas.drawLine(this.paint.getStrokeWidth() / f8, f, f7, f, this.paint);
         this.car.getClass();
         float height = f - (r6.getHeight() / 2);
-        float f10 = dimensionPixelSize / 2;
-        float strokeWidth2 = f8 < f10 ? this.paint.getStrokeWidth() / f9 : f8 + f10 >= f7 ? dimensionPixelSize2 - dimensionPixelSize : f8 - f10;
+        float f9 = dimensionPixelSize / 2;
+        float strokeWidth3 = f7 < f9 ? this.paint.getStrokeWidth() / f8 : f7 + f9 >= f6 ? dimensionPixelSize2 - dimensionPixelSize : f7 - f9;
         Bitmap bitmap = this.car;
         bitmap.getClass();
-        canvas.drawBitmap(bitmap, strokeWidth2, height, (Paint) null);
-        return createBitmap;
+        canvas.drawBitmap(bitmap, strokeWidth3, height, (Paint) null);
+        return bitmapCreateBitmap;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TintedProgressSegment {
         public final int color;
         public final float width;

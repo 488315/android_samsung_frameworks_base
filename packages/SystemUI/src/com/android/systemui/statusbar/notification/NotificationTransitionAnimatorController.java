@@ -27,7 +27,6 @@ import com.android.systemui.statusbar.notification.stack.NotificationStackScroll
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationTransitionAnimatorController implements ActivityTransitionAnimator.Controller {
     public final HeadsUpManager headsUpManager;
@@ -35,13 +34,12 @@ public final class NotificationTransitionAnimatorController implements ActivityT
     public final InteractionJankMonitor jankMonitor;
 
     /* renamed from: notification, reason: collision with root package name */
-    public final ExpandableNotificationRow f134notification;
+    public final ExpandableNotificationRow f135notification;
     public final String notificationKey;
     public final NotificationLaunchAnimationInteractor notificationLaunchAnimationInteractor;
     public final NotificationListContainer notificationListContainer;
     public final Runnable onFinishAnimationCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,16 +57,16 @@ public final class NotificationTransitionAnimatorController implements ActivityT
         this.notificationLaunchAnimationInteractor = notificationLaunchAnimationInteractor;
         this.notificationListContainer = notificationListContainer;
         this.headsUpManager = headsUpManager;
-        this.f134notification = expandableNotificationRow;
+        this.f135notification = expandableNotificationRow;
         this.jankMonitor = interactionJankMonitor;
         this.onFinishAnimationCallback = runnable;
         this.notificationKey = expandableNotificationRow.getKey();
     }
 
     public final void applyParams(LaunchAnimationParameters launchAnimationParameters) {
-        int i;
+        int iMin;
         boolean z = true;
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         if (launchAnimationParameters == null) {
             ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow.mNotificationParent;
             if (expandableNotificationRow2 != null) {
@@ -84,8 +82,8 @@ public final class NotificationTransitionAnimatorController implements ActivityT
                 float f = launchAnimationParameters.linearProgress;
                 companion.getClass();
                 PathInterpolator pathInterpolator = (PathInterpolator) interpolator;
-                float lerp = MathUtils.lerp(launchAnimationParameters.startTranslationZ, expandableNotificationRow.mNotificationLaunchHeight, pathInterpolator.getInterpolation(TransitionAnimator.Companion.getProgress(timings, f, 0L, 50L)));
-                expandableNotificationRow.setTranslationZ(lerp);
+                float fLerp = MathUtils.lerp(launchAnimationParameters.startTranslationZ, expandableNotificationRow.mNotificationLaunchHeight, pathInterpolator.getInterpolation(TransitionAnimator.Companion.getProgress(timings, f, 0L, 50L)));
+                expandableNotificationRow.setTranslationZ(fLerp);
                 float width = launchAnimationParameters.getWidth() - expandableNotificationRow.getWidth();
                 expandableNotificationRow.mExtraWidthForClipping = width;
                 expandableNotificationRow.invalidate();
@@ -93,42 +91,42 @@ public final class NotificationTransitionAnimatorController implements ActivityT
                     float f2 = launchAnimationParameters.linearProgress;
                     companion.getClass();
                     float interpolation = pathInterpolator.getInterpolation(TransitionAnimator.Companion.getProgress(timings, f2, 0L, 100L));
-                    int i2 = launchAnimationParameters.startNotificationTop;
-                    i = (int) Math.min(MathUtils.lerp(i2, launchAnimationParameters.top, interpolation), i2);
+                    int i = launchAnimationParameters.startNotificationTop;
+                    iMin = (int) Math.min(MathUtils.lerp(i, launchAnimationParameters.top, interpolation), i);
                 } else {
-                    i = launchAnimationParameters.top;
+                    iMin = launchAnimationParameters.top;
                 }
-                int i3 = launchAnimationParameters.bottom - i;
-                expandableNotificationRow.setActualHeight(i3, true);
-                int i4 = launchAnimationParameters.notificationParentTop;
-                int i5 = i - i4;
-                int i6 = launchAnimationParameters.startClipTopAmount;
-                int lerp2 = (int) MathUtils.lerp(i6, 0, launchAnimationParameters.progress);
+                int i2 = launchAnimationParameters.bottom - iMin;
+                expandableNotificationRow.setActualHeight(i2, true);
+                int i3 = launchAnimationParameters.notificationParentTop;
+                int i4 = iMin - i3;
+                int i5 = launchAnimationParameters.startClipTopAmount;
+                int iLerp = (int) MathUtils.lerp(i5, 0, launchAnimationParameters.progress);
                 ExpandableNotificationRow expandableNotificationRow3 = expandableNotificationRow.mNotificationParent;
                 if (expandableNotificationRow3 != null) {
                     float translationY = expandableNotificationRow3.getTranslationY();
-                    i5 -= (int) translationY;
-                    expandableNotificationRow.mNotificationParent.setTranslationZ(lerp);
-                    expandableNotificationRow.mNotificationParent.setClipTopAmount(Math.min(launchAnimationParameters.parentStartClipTopAmount, lerp2 + i5));
+                    i4 -= (int) translationY;
+                    expandableNotificationRow.mNotificationParent.setTranslationZ(fLerp);
+                    expandableNotificationRow.mNotificationParent.setClipTopAmount(Math.min(launchAnimationParameters.parentStartClipTopAmount, iLerp + i4));
                     ExpandableNotificationRow expandableNotificationRow4 = expandableNotificationRow.mNotificationParent;
                     expandableNotificationRow4.mExtraWidthForClipping = width;
                     expandableNotificationRow4.invalidate();
-                    float f3 = launchAnimationParameters.bottom - i4;
+                    float f3 = launchAnimationParameters.bottom - i3;
                     ExpandableNotificationRow expandableNotificationRow5 = expandableNotificationRow.mNotificationParent;
-                    int max = (int) (Math.max(f3, (expandableNotificationRow5.mActualHeight + translationY) - expandableNotificationRow5.mClipBottomAmount) - Math.min(launchAnimationParameters.top - i4, translationY));
+                    int iMax = (int) (Math.max(f3, (expandableNotificationRow5.mActualHeight + translationY) - expandableNotificationRow5.mClipBottomAmount) - Math.min(launchAnimationParameters.top - i3, translationY));
                     ExpandableNotificationRow expandableNotificationRow6 = expandableNotificationRow.mNotificationParent;
-                    expandableNotificationRow6.mMinimumHeightForClipping = max;
+                    expandableNotificationRow6.mMinimumHeightForClipping = iMax;
                     expandableNotificationRow6.updateClipping$1();
                     expandableNotificationRow6.invalidate();
-                } else if (i6 != 0) {
-                    expandableNotificationRow.setClipTopAmount(lerp2);
+                } else if (i5 != 0) {
+                    expandableNotificationRow.setClipTopAmount(iLerp);
                 }
-                expandableNotificationRow.setTranslationY(i5);
+                expandableNotificationRow.setTranslationY(i4);
                 expandableNotificationRow.setTranslationX(launchAnimationParameters.getCenterX() - (((expandableNotificationRow.getWidth() / 2.0f) + expandableNotificationRow.getLocationOnScreen()[0]) - expandableNotificationRow.getTranslationX()));
                 expandableNotificationRow.invalidateOutline();
                 NotificationBackgroundView notificationBackgroundView = expandableNotificationRow.mBackgroundNormal;
                 int width2 = launchAnimationParameters.getWidth();
-                notificationBackgroundView.mExpandAnimationHeight = i3;
+                notificationBackgroundView.mExpandAnimationHeight = i2;
                 notificationBackgroundView.mExpandAnimationWidth = width2;
                 notificationBackgroundView.invalidate();
             } else if (expandableNotificationRow.getVisibility() == 0) {
@@ -155,8 +153,8 @@ public final class NotificationTransitionAnimatorController implements ActivityT
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final TransitionAnimator.State createAnimatorState() {
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
-        int max = Math.max(0, expandableNotificationRow.mActualHeight - expandableNotificationRow.mClipBottomAmount);
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
+        int iMax = Math.max(0, expandableNotificationRow.mActualHeight - expandableNotificationRow.mClipBottomAmount);
         int[] locationOnScreen = expandableNotificationRow.getLocationOnScreen();
         NotificationStackScrollLayoutController.NotificationListContainerImpl notificationListContainerImpl = (NotificationStackScrollLayoutController.NotificationListContainerImpl) this.notificationListContainer;
         int height = NotificationStackScrollLayoutController.this.mView.mIsExpanded ? ((ShadeHeaderController) Dependency.sDependency.getDependencyInner(ShadeHeaderController.class)).header.getHeight() : 0;
@@ -167,7 +165,7 @@ public final class NotificationTransitionAnimatorController implements ActivityT
         }
         int i3 = i + i2;
         float f = i2 > 0 ? 0.0f : expandableNotificationRow.getRoundableState().topRoundness * expandableNotificationRow.getRoundableState().maxRadius;
-        int i4 = locationOnScreen[1] + max;
+        int i4 = locationOnScreen[1] + iMax;
         int i5 = locationOnScreen[0];
         LaunchAnimationParameters launchAnimationParameters = new LaunchAnimationParameters(i3, i4, i5, expandableNotificationRow.getWidth() + i5, f, expandableNotificationRow.getRoundableState().maxRadius * expandableNotificationRow.getRoundableState().bottomRoundness);
         launchAnimationParameters.startTranslationZ = expandableNotificationRow.getTranslationZ();
@@ -194,7 +192,7 @@ public final class NotificationTransitionAnimatorController implements ActivityT
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final ViewGroup getTransitionContainer() {
-        return (ViewGroup) this.f134notification.getRootView();
+        return (ViewGroup) this.f135notification.getRootView();
     }
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -209,7 +207,7 @@ public final class NotificationTransitionAnimatorController implements ActivityT
             Log.d("NotificationLaunchAnimatorController", str);
         }
         this.notificationLaunchAnimationInteractor.setIsLaunchAnimationRunning(z);
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         expandableNotificationRow.getClass();
         int i = NotificationBundleUi.$r8$clinit;
         expandableNotificationRow.getEntryLegacy().mExpandAnimationRunning = z;
@@ -229,7 +227,7 @@ public final class NotificationTransitionAnimatorController implements ActivityT
             Log.d("NotificationLaunchAnimatorController", "onLaunchAnimationCancelled()");
         }
         this.notificationLaunchAnimationInteractor.setIsLaunchAnimationRunning(false);
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         expandableNotificationRow.getClass();
         int i = NotificationBundleUi.$r8$clinit;
         expandableNotificationRow.getEntryLegacy().mExpandAnimationRunning = false;
@@ -243,7 +241,7 @@ public final class NotificationTransitionAnimatorController implements ActivityT
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final void onTransitionAnimationEnd(boolean z) {
         boolean z2 = ActivityTransitionAnimator.DEBUG_TRANSITION_ANIMATION;
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         if (z2) {
             MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onLaunchAnimationEnd()", expandableNotificationRow.getKey(), "NotificationLaunchAnimatorController");
         }
@@ -271,14 +269,14 @@ public final class NotificationTransitionAnimatorController implements ActivityT
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final void onTransitionAnimationStart(boolean z) {
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         expandableNotificationRow.setExpandAnimationRunning(true);
         ((NotificationStackScrollLayoutController.NotificationListContainerImpl) this.notificationListContainer).setExpandingNotification(expandableNotificationRow);
         this.jankMonitor.begin(expandableNotificationRow, 16);
     }
 
     public final void removeHun(String str, boolean z) {
-        ExpandableNotificationRow expandableNotificationRow = this.f134notification;
+        ExpandableNotificationRow expandableNotificationRow = this.f135notification;
         PipelineEntry pipelineEntry = expandableNotificationRow.getEntryLegacy().mAttachState.parent;
         GroupEntry groupEntry = pipelineEntry instanceof GroupEntry ? (GroupEntry) pipelineEntry : null;
         NotificationEntry notificationEntry = groupEntry != null ? groupEntry.mSummary : null;

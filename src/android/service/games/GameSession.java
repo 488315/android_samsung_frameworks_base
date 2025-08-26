@@ -147,12 +147,12 @@ public abstract class GameSession {
         if (lifecycleState2 == lifecycleState) {
             return;
         }
-        int ordinal = lifecycleState2.ordinal();
-        if (ordinal != 0) {
-            if (ordinal != 1) {
-                if (ordinal != 2) {
-                    if (ordinal != 3) {
-                        if (ordinal == 4) {
+        int iOrdinal = lifecycleState2.ordinal();
+        if (iOrdinal != 0) {
+            if (iOrdinal != 1) {
+                if (iOrdinal != 2) {
+                    if (iOrdinal != 3) {
+                        if (iOrdinal == 4) {
                             return;
                         }
                     } else if (lifecycleState == LifecycleState.TASK_FOCUSED) {
@@ -225,16 +225,16 @@ public abstract class GameSession {
         if (this.mGameSessionController == null) {
             throw new IllegalStateException("Can not call before onCreate()");
         }
-        AndroidFuture whenCompleteAsync = new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda2
+        AndroidFuture androidFutureWhenCompleteAsync = new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda2
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                GameSession.this.lambda$takeScreenshot$0(screenshotCallback, (GameScreenshotResult) obj, (Throwable) obj2);
+                this.f$0.lambda$takeScreenshot$0(screenshotCallback, (GameScreenshotResult) obj, (Throwable) obj2);
             }
         }, executor);
         try {
-            this.mGameSessionController.takeScreenshot(this.mTaskId, whenCompleteAsync);
+            this.mGameSessionController.takeScreenshot(this.mTaskId, androidFutureWhenCompleteAsync);
         } catch (RemoteException e) {
-            whenCompleteAsync.completeExceptionally(e);
+            androidFutureWhenCompleteAsync.completeExceptionally(e);
         }
     }
 
@@ -262,20 +262,20 @@ public abstract class GameSession {
         Objects.requireNonNull(intent);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(gameSessionActivityCallback);
-        Intent createIntent = GameSessionTrampolineActivity.createIntent(intent, bundle, new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda0
+        Intent intentCreateIntent = GameSessionTrampolineActivity.createIntent(intent, bundle, new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                GameSession.lambda$startActivityFromGameSessionForResult$1(GameSessionActivityCallback.this, (GameSessionActivityResult) obj, (Throwable) obj2);
+                GameSession.lambda$startActivityFromGameSessionForResult$1(gameSessionActivityCallback, (GameSessionActivityResult) obj, (Throwable) obj2);
             }
         }, executor));
-        createIntent.collectExtraIntentKeys();
+        intentCreateIntent.collectExtraIntentKeys();
         try {
-            Instrumentation.checkStartActivityResult(ActivityTaskManager.getService().startActivityFromGameSession(this.mContext.getIApplicationThread(), this.mContext.getPackageName(), TAG, Binder.getCallingPid(), Binder.getCallingUid(), createIntent, this.mTaskId, UserHandle.myUserId()), createIntent);
+            Instrumentation.checkStartActivityResult(ActivityTaskManager.getService().startActivityFromGameSession(this.mContext.getIApplicationThread(), this.mContext.getPackageName(), TAG, Binder.getCallingPid(), Binder.getCallingUid(), intentCreateIntent, this.mTaskId, UserHandle.myUserId()), intentCreateIntent);
         } catch (Throwable th) {
             executor.execute(new Runnable() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GameSessionActivityCallback.this.onActivityStartFailed(th);
+                    gameSessionActivityCallback.onActivityStartFailed(th);
                 }
             });
         }

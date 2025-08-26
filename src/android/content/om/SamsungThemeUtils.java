@@ -27,14 +27,14 @@ public class SamsungThemeUtils {
         ArrayList arrayList = new ArrayList();
         for (String str : strArr) {
             if (str != null) {
-                boolean startsWith = str.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE);
-                if (startsWith && hasAllowPostfixforCover(str)) {
+                boolean zStartsWith = str.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE);
+                if (zStartsWith && hasAllowPostfixforCover(str)) {
                     return strArr;
                 }
-                if (startsWith && hasAllowSystemUIforCover(str)) {
+                if (zStartsWith && hasAllowSystemUIforCover(str)) {
                     return removeOnlySystemUIOverlay(strArr);
                 }
-                if (!startsWith) {
+                if (!zStartsWith) {
                     arrayList.add(str);
                 }
             }

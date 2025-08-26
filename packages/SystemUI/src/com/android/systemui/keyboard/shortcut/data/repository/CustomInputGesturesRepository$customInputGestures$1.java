@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomInputGesturesRepository$customInputGestures$1 extends SuspendLambda implements Function2 {
     int label;
@@ -36,7 +35,7 @@ final class CustomInputGesturesRepository$customInputGestures$1 extends SuspendL
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        List list;
+        List customInputGestures;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -45,12 +44,12 @@ final class CustomInputGesturesRepository$customInputGestures$1 extends SuspendL
         CustomInputGesturesRepository customInputGesturesRepository = this.this$0;
         customInputGesturesRepository.getClass();
         if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-            list = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-            list.getClass();
+            customInputGestures = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+            customInputGestures.getClass();
         } else {
-            list = EmptyList.INSTANCE;
+            customInputGestures = EmptyList.INSTANCE;
         }
-        customInputGesturesRepository._customInputGesture.setValue(list);
+        customInputGesturesRepository._customInputGesture.setValue(customInputGestures);
         return Unit.INSTANCE;
     }
 }

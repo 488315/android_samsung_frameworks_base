@@ -12,11 +12,14 @@ import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0
 import com.android.systemui.wallpaper.theme.view.FrameImageView;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ViewParser extends BaseParser {
+    /* JADX WARN: Removed duplicated region for block: B:22:0x009d  */
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
-    public final void parseAttribute(ParserData parserData) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void parseAttribute(ParserData parserData) throws Resources.NotFoundException {
         XmlPullParser xmlPullParser;
         XmlPullParser xmlPullParser2;
         int i;
@@ -46,12 +49,12 @@ public class ViewParser extends BaseParser {
         boolean z = parserData.mIsScaled;
         String lowerCase = xmlPullParser.getAttributeValue(3).toLowerCase();
         String lowerCase2 = xmlPullParser.getAttributeValue(4).toLowerCase();
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("parseAttribute: [", lowerCase, " , ", lowerCase2, "] , [");
-        m.append(parserData.mPackageWidth);
-        m.append(" , ");
-        m.append(parserData.mPackageHeight);
-        m.append("]");
-        Log.d("ViewParser", m.toString());
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("parseAttribute: [", lowerCase, " , ", lowerCase2, "] , [");
+        sbM.append(parserData.mPackageWidth);
+        sbM.append(" , ");
+        sbM.append(parserData.mPackageHeight);
+        sbM.append("]");
+        Log.d("ViewParser", sbM.toString());
         int i2 = 0;
         boolean z2 = Math.abs(Float.parseFloat(lowerCase) - parserData.mPackageWidth) < 1.0f && Math.abs(Float.parseFloat(lowerCase2) - parserData.mPackageHeight) < 1.0f;
         EmergencyButtonController$$ExternalSyntheticOutline0.m("parseAttribute: isWallpaperView : ", "ViewParser", z2);
@@ -59,7 +62,10 @@ public class ViewParser extends BaseParser {
         while (i2 < attributeCount) {
             String attributeName = xmlPullParser.getAttributeName(i2);
             String lowerCase3 = xmlPullParser.getAttributeValue(i2).toLowerCase();
-            if (!TextUtils.isEmpty(attributeName) && !TextUtils.isEmpty(lowerCase3)) {
+            if (TextUtils.isEmpty(attributeName) || TextUtils.isEmpty(lowerCase3)) {
+                xmlPullParser2 = xmlPullParser;
+                i = attributeCount;
+            } else {
                 Log.d("ViewParser", MotionLayout$$ExternalSyntheticOutline0.m("", attributeName, "=\"", lowerCase3, "\" "));
                 if (attributeName.equalsIgnoreCase("img")) {
                     Resources resources = parserData.mApkResources;
@@ -78,11 +84,11 @@ public class ViewParser extends BaseParser {
                             float f5 = intrinsicWidth;
                             float f6 = intrinsicHeight;
                             float f7 = f5 * f4 > f3 * f6 ? f4 / f6 : f3 / f5;
-                            float round = Math.round((f3 - (f5 * f7)) * 0.5f);
-                            float round2 = Math.round((f4 - (f6 * f7)) * 0.5f);
+                            float fRound = Math.round((f3 - (f5 * f7)) * 0.5f);
+                            float fRound2 = Math.round((f4 - (f6 * f7)) * 0.5f);
                             parserData.mScaledRatio = f7;
-                            parserData.mScaledDx = round;
-                            parserData.mScaledDy = round2;
+                            parserData.mScaledDx = fRound;
+                            parserData.mScaledDy = fRound2;
                             xmlPullParser2 = xmlPullParser;
                             parserData.mIsScaled = true;
                             i = attributeCount;
@@ -91,8 +97,8 @@ public class ViewParser extends BaseParser {
                             Log.d("ViewParser", "viewWidth = " + f3);
                             Log.d("ViewParser", "viewHeight = " + f4);
                             Log.d("ViewParser", "scaledRatio = " + f7);
-                            Log.d("ViewParser", "scaledDx = " + round);
-                            Log.d("ViewParser", "scaledDy = " + round2);
+                            Log.d("ViewParser", "scaledDx = " + fRound);
+                            Log.d("ViewParser", "scaledDy = " + fRound2);
                         }
                         if (z2) {
                             frameImageView2.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -124,12 +130,7 @@ public class ViewParser extends BaseParser {
                         frameImageView2.setScaleY(parserData.getDevicePixelY(Float.parseFloat(lowerCase3)));
                     }
                 }
-                i2++;
-                xmlPullParser = xmlPullParser2;
-                attributeCount = i;
             }
-            xmlPullParser2 = xmlPullParser;
-            i = attributeCount;
             i2++;
             xmlPullParser = xmlPullParser2;
             attributeCount = i;

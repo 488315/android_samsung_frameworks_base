@@ -11,7 +11,6 @@ import android.util.Property;
 import android.view.View;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TranslationAnimationCreator {
     private TranslationAnimationCreator() {
@@ -25,8 +24,8 @@ public class TranslationAnimationCreator {
             f = (r2[0] - i) + translationX;
             f5 = (r2[1] - i2) + translationY;
         }
-        int round = Math.round(f - translationX) + i;
-        int round2 = Math.round(f5 - translationY) + i2;
+        int iRound = Math.round(f - translationX) + i;
+        int iRound2 = Math.round(f5 - translationY) + i2;
         view.setTranslationX(f);
         view.setTranslationY(f5);
         if (f == f3 && f5 == f4) {
@@ -35,16 +34,15 @@ public class TranslationAnimationCreator {
         Path path = new Path();
         path.moveTo(f, f5);
         path.lineTo(f3, f4);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, (Property<View, Float>) View.TRANSLATION_Y, path);
-        TransitionPositionListener transitionPositionListener = new TransitionPositionListener(view, transitionValues.view, round, round2, translationX, translationY);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, (Property<View, Float>) View.TRANSLATION_Y, path);
+        TransitionPositionListener transitionPositionListener = new TransitionPositionListener(view, transitionValues.view, iRound, iRound2, translationX, translationY);
         fadeAndShortSlide.addListener(transitionPositionListener);
-        ofFloat.addListener(transitionPositionListener);
-        ofFloat.addPauseListener(transitionPositionListener);
-        ofFloat.setInterpolator(timeInterpolator);
-        return ofFloat;
+        objectAnimatorOfFloat.addListener(transitionPositionListener);
+        objectAnimatorOfFloat.addPauseListener(transitionPositionListener);
+        objectAnimatorOfFloat.setInterpolator(timeInterpolator);
+        return objectAnimatorOfFloat;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TransitionPositionListener extends AnimatorListenerAdapter implements Transition.TransitionListener {
         public final View mMovingView;
         public float mPausedX;

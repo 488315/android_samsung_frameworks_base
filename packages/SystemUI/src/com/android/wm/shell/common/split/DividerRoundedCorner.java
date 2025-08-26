@@ -20,7 +20,6 @@ import com.android.systemui.R;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DividerRoundedCorner extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public class DividerRoundedCorner extends View {
     public InvertedRoundedCornerDrawInfo mTopLeftCorner;
     public InvertedRoundedCornerDrawInfo mTopRightCorner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InvertedRoundedCornerDrawInfo {
         public final int mCornerPosition;
         public final int mDeviceRadius;
@@ -43,23 +41,23 @@ public class DividerRoundedCorner extends View {
         public int mRadius;
 
         /* renamed from: -$$Nest$mcalculateStartPos, reason: not valid java name */
-        public static void m3221$$Nest$mcalculateStartPos(InvertedRoundedCornerDrawInfo invertedRoundedCornerDrawInfo, Point point) {
+        public static void m3238$$Nest$mcalculateStartPos(InvertedRoundedCornerDrawInfo invertedRoundedCornerDrawInfo, Point point) {
             DividerRoundedCorner dividerRoundedCorner = DividerRoundedCorner.this;
             boolean z = dividerRoundedCorner.mIsLeftRightSplit;
             int i = invertedRoundedCornerDrawInfo.mCornerPosition;
-            int i2 = 0;
+            int width = 0;
             if (z) {
                 point.x = (i == 0 || i == 3) ? (dividerRoundedCorner.getWidth() / 2) + (dividerRoundedCorner.mDividerWidth / 2) : ((dividerRoundedCorner.getWidth() / 2) - (dividerRoundedCorner.mDividerWidth / 2)) - invertedRoundedCornerDrawInfo.mRadius;
                 if (i != 0 && i != 1) {
-                    i2 = dividerRoundedCorner.getHeight() - invertedRoundedCornerDrawInfo.mRadius;
+                    width = dividerRoundedCorner.getHeight() - invertedRoundedCornerDrawInfo.mRadius;
                 }
-                point.y = i2;
+                point.y = width;
                 return;
             }
             if (i != 0 && i != 3) {
-                i2 = dividerRoundedCorner.getWidth() - invertedRoundedCornerDrawInfo.mRadius;
+                width = dividerRoundedCorner.getWidth() - invertedRoundedCornerDrawInfo.mRadius;
             }
-            point.x = i2;
+            point.x = width;
             point.y = (i == 0 || i == 1) ? (dividerRoundedCorner.mDividerWidth / 2) + (dividerRoundedCorner.getHeight() / 2) : ((dividerRoundedCorner.getHeight() / 2) - (dividerRoundedCorner.mDividerWidth / 2)) - invertedRoundedCornerDrawInfo.mRadius;
         }
 
@@ -95,23 +93,23 @@ public class DividerRoundedCorner extends View {
         this.mDividerWidth = getResources().getDimensionPixelSize(CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD ? R.dimen.split_divider_bar_width_fold : R.dimen.split_divider_bar_width);
         Paint paint = new Paint();
         this.mDividerBarBackground = paint;
-        paint.setColor(getResources().getColor(17171594, null));
+        paint.setColor(getResources().getColor(17171593, null));
         paint.setFlags(1);
         paint.setStyle(Paint.Style.FILL);
         if (CoreRune.MW_MULTI_SPLIT) {
             paint.setColor(0);
         }
         if (CoreRune.MW_MULTI_SPLIT_DIVIDER) {
-            TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.DividerHandleView, 0, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.DividerHandleView, 0, 0);
             try {
-                if (obtainStyledAttributes.getInt(0, 0) == 0) {
+                if (typedArrayObtainStyledAttributes.getInt(0, 0) == 0) {
                     int i = getResources().getConfiguration().orientation;
                 } else {
-                    obtainStyledAttributes.getBoolean(1, true);
+                    typedArrayObtainStyledAttributes.getBoolean(1, true);
                 }
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
             } catch (Throwable th) {
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 throw th;
             }
         }
@@ -119,10 +117,10 @@ public class DividerRoundedCorner extends View {
 
     public static void createTmpPath(InvertedRoundedCornerDrawInfo invertedRoundedCornerDrawInfo, float f, float f2) {
         float f3 = invertedRoundedCornerDrawInfo.mDeviceRadius;
-        int m$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f, f3, f2, f3);
+        int iM$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f, f3, f2, f3);
         Path path = new Path();
         Path path2 = new Path();
-        float f4 = m$1;
+        float f4 = iM$1;
         Path.Direction direction = Path.Direction.CW;
         path2.addRect(0.0f, 0.0f, f4, f4, direction);
         Path path3 = new Path();
@@ -130,7 +128,7 @@ public class DividerRoundedCorner extends View {
         path3.addCircle(i == 0 || i == 3 ? f4 : 0.0f, (i == 0 || i == 1) ? f4 : 0.0f, f4, direction);
         path.op(path2, path3, Path.Op.DIFFERENCE);
         invertedRoundedCornerDrawInfo.mPath.set(path);
-        invertedRoundedCornerDrawInfo.mRadius = m$1;
+        invertedRoundedCornerDrawInfo.mRadius = iM$1;
     }
 
     @Override // android.view.View
@@ -144,35 +142,35 @@ public class DividerRoundedCorner extends View {
         DisplayInfo displayInfo = new DisplayInfo();
         getDisplay().getDisplayInfo(displayInfo);
         int roundedCornerRadius = MultiWindowUtils.getRoundedCornerRadius(((View) this).mContext);
-        RoundedCorners fromRadii = RoundedCorners.fromRadii(new Pair(Integer.valueOf(roundedCornerRadius), Integer.valueOf(roundedCornerRadius)), displayInfo.logicalWidth, displayInfo.logicalHeight);
-        this.mTopLeftCorner = new InvertedRoundedCornerDrawInfo(0, fromRadii);
-        this.mTopRightCorner = new InvertedRoundedCornerDrawInfo(1, fromRadii);
-        this.mBottomLeftCorner = new InvertedRoundedCornerDrawInfo(3, fromRadii);
-        this.mBottomRightCorner = new InvertedRoundedCornerDrawInfo(2, fromRadii);
+        RoundedCorners roundedCornersFromRadii = RoundedCorners.fromRadii(new Pair(Integer.valueOf(roundedCornerRadius), Integer.valueOf(roundedCornerRadius)), displayInfo.logicalWidth, displayInfo.logicalHeight);
+        this.mTopLeftCorner = new InvertedRoundedCornerDrawInfo(0, roundedCornersFromRadii);
+        this.mTopRightCorner = new InvertedRoundedCornerDrawInfo(1, roundedCornersFromRadii);
+        this.mBottomLeftCorner = new InvertedRoundedCornerDrawInfo(3, roundedCornersFromRadii);
+        this.mBottomRightCorner = new InvertedRoundedCornerDrawInfo(2, roundedCornersFromRadii);
     }
 
     @Override // android.view.View
     public final void onDraw(Canvas canvas) {
         canvas.save();
-        InvertedRoundedCornerDrawInfo.m3221$$Nest$mcalculateStartPos(this.mTopLeftCorner, this.mStartPos);
+        InvertedRoundedCornerDrawInfo.m3238$$Nest$mcalculateStartPos(this.mTopLeftCorner, this.mStartPos);
         Point point = this.mStartPos;
         canvas.translate(point.x, point.y);
         canvas.drawPath(this.mTopLeftCorner.mPath, this.mDividerBarBackground);
         Point point2 = this.mStartPos;
         canvas.translate(-point2.x, -point2.y);
-        InvertedRoundedCornerDrawInfo.m3221$$Nest$mcalculateStartPos(this.mTopRightCorner, this.mStartPos);
+        InvertedRoundedCornerDrawInfo.m3238$$Nest$mcalculateStartPos(this.mTopRightCorner, this.mStartPos);
         Point point3 = this.mStartPos;
         canvas.translate(point3.x, point3.y);
         canvas.drawPath(this.mTopRightCorner.mPath, this.mDividerBarBackground);
         Point point4 = this.mStartPos;
         canvas.translate(-point4.x, -point4.y);
-        InvertedRoundedCornerDrawInfo.m3221$$Nest$mcalculateStartPos(this.mBottomLeftCorner, this.mStartPos);
+        InvertedRoundedCornerDrawInfo.m3238$$Nest$mcalculateStartPos(this.mBottomLeftCorner, this.mStartPos);
         Point point5 = this.mStartPos;
         canvas.translate(point5.x, point5.y);
         canvas.drawPath(this.mBottomLeftCorner.mPath, this.mDividerBarBackground);
         Point point6 = this.mStartPos;
         canvas.translate(-point6.x, -point6.y);
-        InvertedRoundedCornerDrawInfo.m3221$$Nest$mcalculateStartPos(this.mBottomRightCorner, this.mStartPos);
+        InvertedRoundedCornerDrawInfo.m3238$$Nest$mcalculateStartPos(this.mBottomRightCorner, this.mStartPos);
         Point point7 = this.mStartPos;
         canvas.translate(point7.x, point7.y);
         canvas.drawPath(this.mBottomRightCorner.mPath, this.mDividerBarBackground);
@@ -187,20 +185,20 @@ public class DividerRoundedCorner extends View {
                 valueAnimator.end();
             }
             final float roundedCornerRadius = MultiWindowUtils.getRoundedCornerRadius(((View) this).mContext);
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mRadiusAnimator = ofFloat;
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerRoundedCorner$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mRadiusAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.DividerRoundedCorner$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    DividerRoundedCorner dividerRoundedCorner = DividerRoundedCorner.this;
+                    DividerRoundedCorner dividerRoundedCorner = this.f$0;
                     float f = roundedCornerRadius;
                     int i = DividerRoundedCorner.$r8$clinit;
                     dividerRoundedCorner.getClass();
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mTopLeftCorner, f, floatValue);
-                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mTopRightCorner, f, floatValue);
-                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mBottomLeftCorner, f, floatValue);
-                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mBottomRightCorner, f, floatValue);
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mTopLeftCorner, f, fFloatValue);
+                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mTopRightCorner, f, fFloatValue);
+                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mBottomLeftCorner, f, fFloatValue);
+                    DividerRoundedCorner.createTmpPath(dividerRoundedCorner.mBottomRightCorner, f, fFloatValue);
                     dividerRoundedCorner.invalidate();
                 }
             });

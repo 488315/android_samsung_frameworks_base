@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PipUtils {
     public static final PipUtils INSTANCE = new PipUtils();
@@ -26,23 +25,23 @@ public final class PipUtils {
     }
 
     public static final Rect getEnterPipWithOverlaySrcRectHint(Rect rect, float f) {
-        int i;
-        int i2;
-        float width = rect.width() / rect.height();
-        int i3 = rect.left;
-        int i4 = rect.top;
-        if (width < f) {
-            i = rect.width();
-            i2 = MathKt__MathJVMKt.roundToInt(i / f);
-            i4 = rect.top + ((rect.height() - i2) / 2);
+        int iWidth;
+        int iRoundToInt;
+        float fWidth = rect.width() / rect.height();
+        int iWidth2 = rect.left;
+        int iHeight = rect.top;
+        if (fWidth < f) {
+            iWidth = rect.width();
+            iRoundToInt = MathKt__MathJVMKt.roundToInt(iWidth / f);
+            iHeight = rect.top + ((rect.height() - iRoundToInt) / 2);
         } else {
-            int height = rect.height();
-            int roundToInt = MathKt__MathJVMKt.roundToInt(height * f);
-            i3 = rect.left + ((rect.width() - roundToInt) / 2);
-            i = roundToInt;
-            i2 = height;
+            int iHeight2 = rect.height();
+            int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(iHeight2 * f);
+            iWidth2 = rect.left + ((rect.width() - iRoundToInt2) / 2);
+            iWidth = iRoundToInt2;
+            iRoundToInt = iHeight2;
         }
-        return new Rect(i3, i4, i + i3, i2 + i4);
+        return new Rect(iWidth2, iHeight, iWidth + iWidth2, iRoundToInt + iHeight);
     }
 
     public static final TaskSnapshot getTaskSnapshot(int i) {
@@ -66,9 +65,9 @@ public final class PipUtils {
                 if (!(rootTaskInfo.childTaskIds.length == 0) && rootTaskInfo.childTaskNames.length - 1 >= 0) {
                     while (true) {
                         int i = length - 1;
-                        ComponentName unflattenFromString = ComponentName.unflattenFromString(rootTaskInfo.childTaskNames[length]);
-                        if (unflattenFromString != null && !Intrinsics.areEqual(unflattenFromString.getPackageName(), packageName)) {
-                            return new Pair(unflattenFromString, Integer.valueOf(rootTaskInfo.childTaskUserIds[length]));
+                        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(rootTaskInfo.childTaskNames[length]);
+                        if (componentNameUnflattenFromString != null && !Intrinsics.areEqual(componentNameUnflattenFromString.getPackageName(), packageName)) {
+                            return new Pair(componentNameUnflattenFromString, Integer.valueOf(rootTaskInfo.childTaskUserIds[length]));
                         }
                         if (i < 0) {
                             break;

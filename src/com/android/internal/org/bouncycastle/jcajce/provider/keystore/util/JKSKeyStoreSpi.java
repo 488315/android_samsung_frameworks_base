@@ -60,10 +60,10 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
         } else {
             dataInputStream = new DataInputStream(inputStream);
         }
-        int readInt = dataInputStream.readInt();
-        int readInt2 = dataInputStream.readInt();
-        if (readInt == -17957139) {
-            return readInt2 == 1 || readInt2 == 2;
+        int i = dataInputStream.readInt();
+        int i2 = dataInputStream.readInt();
+        if (i == -17957139) {
+            return i2 == 1 || i2 == 2;
         }
         return false;
     }
@@ -112,23 +112,23 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
 
     @Override // java.security.KeyStoreSpi
     public Enumeration<String> engineAliases() {
-        Enumeration<String> keys;
+        Enumeration<String> enumerationKeys;
         synchronized (this.certificateEntries) {
-            keys = this.certificateEntries.keys();
+            enumerationKeys = this.certificateEntries.keys();
         }
-        return keys;
+        return enumerationKeys;
     }
 
     @Override // java.security.KeyStoreSpi
     public boolean engineContainsAlias(String str) {
-        boolean containsKey;
+        boolean zContainsKey;
         if (str == null) {
             throw new NullPointerException("alias value is null");
         }
         synchronized (this.certificateEntries) {
-            containsKey = this.certificateEntries.containsKey(str);
+            zContainsKey = this.certificateEntries.containsKey(str);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     @Override // java.security.KeyStoreSpi
@@ -138,11 +138,11 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
 
     @Override // java.security.KeyStoreSpi
     public boolean engineIsCertificateEntry(String str) {
-        boolean containsKey;
+        boolean zContainsKey;
         synchronized (this.certificateEntries) {
-            containsKey = this.certificateEntries.containsKey(str);
+            zContainsKey = this.certificateEntries.containsKey(str);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     @Override // java.security.KeyStoreSpi
@@ -158,12 +158,12 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(OutputStream outputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         throw new IOException(NOT_IMPLEMENTED_MESSAGE);
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException {
         if (loadStoreParameter == null) {
             engineLoad(null, null);
         } else if (loadStoreParameter instanceof BCLoadStoreParameter) {
@@ -174,61 +174,61 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineLoad(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         Hashtable hashtable;
         if (inputStream == null) {
             return;
         }
-        ErasableByteStream validateStream = validateStream(inputStream, cArr);
+        ErasableByteStream erasableByteStreamValidateStream = validateStream(inputStream, cArr);
         synchronized (this.certificateEntries) {
             try {
-                DataInputStream dataInputStream = new DataInputStream(validateStream);
-                int readInt = dataInputStream.readInt();
-                int readInt2 = dataInputStream.readInt();
-                if (readInt == -17957139) {
-                    CertificateFactory certificateFactory = null;
-                    int i = 2;
-                    if (readInt2 == 1) {
+                DataInputStream dataInputStream = new DataInputStream(erasableByteStreamValidateStream);
+                int i = dataInputStream.readInt();
+                int i2 = dataInputStream.readInt();
+                if (i == -17957139) {
+                    CertificateFactory certificateFactoryCreateCertFactory = null;
+                    int i3 = 2;
+                    if (i2 == 1) {
                         hashtable = null;
-                        certificateFactory = createCertFactory("X.509");
-                    } else if (readInt2 == 2) {
+                        certificateFactoryCreateCertFactory = createCertFactory("X.509");
+                    } else if (i2 == 2) {
                         hashtable = new Hashtable();
                     } else {
                         throw new IllegalStateException("unable to discern store version");
                     }
-                    int readInt3 = dataInputStream.readInt();
-                    int i2 = 0;
-                    while (i2 < readInt3) {
-                        int readInt4 = dataInputStream.readInt();
-                        if (readInt4 == 1) {
+                    int i4 = dataInputStream.readInt();
+                    int i5 = 0;
+                    while (i5 < i4) {
+                        int i6 = dataInputStream.readInt();
+                        if (i6 == 1) {
                             throw new IOException(NOT_IMPLEMENTED_MESSAGE);
                         }
-                        if (readInt4 == i) {
-                            String readUTF = dataInputStream.readUTF();
+                        if (i6 == i3) {
+                            String utf = dataInputStream.readUTF();
                             Date date = new Date(dataInputStream.readLong());
-                            if (readInt2 == i) {
-                                String readUTF2 = dataInputStream.readUTF();
-                                if (hashtable.containsKey(readUTF2)) {
-                                    certificateFactory = (CertificateFactory) hashtable.get(readUTF2);
+                            if (i2 == i3) {
+                                String utf2 = dataInputStream.readUTF();
+                                if (hashtable.containsKey(utf2)) {
+                                    certificateFactoryCreateCertFactory = (CertificateFactory) hashtable.get(utf2);
                                 } else {
-                                    CertificateFactory createCertFactory = createCertFactory(readUTF2);
-                                    hashtable.put(readUTF2, createCertFactory);
-                                    certificateFactory = createCertFactory;
+                                    CertificateFactory certificateFactoryCreateCertFactory2 = createCertFactory(utf2);
+                                    hashtable.put(utf2, certificateFactoryCreateCertFactory2);
+                                    certificateFactoryCreateCertFactory = certificateFactoryCreateCertFactory2;
                                 }
                             }
-                            int readInt5 = dataInputStream.readInt();
-                            byte[] bArr = new byte[readInt5];
+                            int i7 = dataInputStream.readInt();
+                            byte[] bArr = new byte[i7];
                             dataInputStream.readFully(bArr);
-                            ErasableByteStream erasableByteStream = new ErasableByteStream(bArr, 0, readInt5);
+                            ErasableByteStream erasableByteStream = new ErasableByteStream(bArr, 0, i7);
                             try {
-                                Certificate generateCertificate = certificateFactory.generateCertificate(erasableByteStream);
+                                Certificate certificateGenerateCertificate = certificateFactoryCreateCertFactory.generateCertificate(erasableByteStream);
                                 if (erasableByteStream.available() != 0) {
                                     throw new IOException("password incorrect or store tampered with");
                                 }
                                 erasableByteStream.erase();
-                                this.certificateEntries.put(readUTF, new BCJKSTrustedCertEntry(date, generateCertificate));
-                                i2++;
-                                i = 2;
+                                this.certificateEntries.put(utf, new BCJKSTrustedCertEntry(date, certificateGenerateCertificate));
+                                i5++;
+                                i3 = 2;
                             } catch (Throwable th) {
                                 erasableByteStream.erase();
                                 throw th;
@@ -238,11 +238,11 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
                         }
                     }
                 }
-                if (validateStream.available() != 0) {
+                if (erasableByteStreamValidateStream.available() != 0) {
                     throw new IOException("password incorrect or store tampered with");
                 }
             } finally {
-                validateStream.erase();
+                erasableByteStreamValidateStream.erase();
             }
         }
     }
@@ -269,22 +269,22 @@ public class JKSKeyStoreSpi extends KeyStoreSpi {
 
     private ErasableByteStream validateStream(InputStream inputStream, char[] cArr) throws IOException {
         Digest digest = DigestFactory.getDigest("SHA-1");
-        byte[] readAll = Streams.readAll(inputStream);
+        byte[] all = Streams.readAll(inputStream);
         if (cArr != null) {
             addPassword(digest, cArr);
-            digest.update(readAll, 0, readAll.length - digest.getDigestSize());
+            digest.update(all, 0, all.length - digest.getDigestSize());
             int digestSize = digest.getDigestSize();
             byte[] bArr = new byte[digestSize];
             digest.doFinal(bArr, 0);
             byte[] bArr2 = new byte[digestSize];
-            System.arraycopy(readAll, readAll.length - digestSize, bArr2, 0, digestSize);
+            System.arraycopy(all, all.length - digestSize, bArr2, 0, digestSize);
             if (!Arrays.constantTimeAreEqual(bArr, bArr2)) {
-                Arrays.fill(readAll, (byte) 0);
+                Arrays.fill(all, (byte) 0);
                 throw new IOException("password incorrect or store tampered with");
             }
-            return new ErasableByteStream(readAll, 0, readAll.length - digestSize);
+            return new ErasableByteStream(all, 0, all.length - digestSize);
         }
-        return new ErasableByteStream(readAll, 0, readAll.length - digest.getDigestSize());
+        return new ErasableByteStream(all, 0, all.length - digest.getDigestSize());
     }
 
     private static final class BCJKSTrustedCertEntry {

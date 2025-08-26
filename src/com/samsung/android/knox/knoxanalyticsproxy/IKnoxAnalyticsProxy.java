@@ -44,9 +44,9 @@ public interface IKnoxAnalyticsProxy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxAnalyticsProxy.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKnoxAnalyticsProxy)) {
-                return (IKnoxAnalyticsProxy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxAnalyticsProxy.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKnoxAnalyticsProxy)) {
+                return (IKnoxAnalyticsProxy) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,16 +100,16 @@ public interface IKnoxAnalyticsProxy extends IInterface {
 
             @Override // com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy
             public void log(KnoxAnalyticsData knoxAnalyticsData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxAnalyticsProxy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxAnalyticsData, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxAnalyticsProxy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxAnalyticsData, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

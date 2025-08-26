@@ -49,7 +49,7 @@ public final class SemSdCardEncryptionPolicy implements Parcelable, Cloneable, C
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemSdCardEncryptionPolicy m9474clone() {
+    public SemSdCardEncryptionPolicy m9487clone() {
         return new SemSdCardEncryptionPolicy(this.mIsPolicy, this.mEncryptState, this.mCurrentUUID);
     }
 
@@ -73,20 +73,20 @@ public final class SemSdCardEncryptionPolicy implements Parcelable, Cloneable, C
         this.mIsPolicy = i;
     }
 
-    public static SemSdCardEncryptionPolicy unflattenFromString(int i, String str) {
+    public static SemSdCardEncryptionPolicy unflattenFromString(int i, String str) throws NumberFormatException {
         String str2;
         int i2;
-        String[] split = str.split(" ");
+        String[] strArrSplit = str.split(" ");
         try {
-            str2 = split[0];
-        } catch (Exception unused) {
-            str2 = null;
-        }
-        try {
-            i2 = Integer.parseInt(split[1]);
+            str2 = strArrSplit[0];
+            try {
+                i2 = Integer.parseInt(strArrSplit[1]);
+            } catch (Exception unused) {
+                i2 = 3;
+                return new SemSdCardEncryptionPolicy(i, i2, str2);
+            }
         } catch (Exception unused2) {
-            i2 = 3;
-            return new SemSdCardEncryptionPolicy(i, i2, str2);
+            str2 = null;
         }
         return new SemSdCardEncryptionPolicy(i, i2, str2);
     }

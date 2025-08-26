@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SplitAttributes {
     public static final String TAG;
@@ -19,7 +18,6 @@ public final class SplitAttributes {
     public final LayoutDirection layoutDirection;
     public final SplitType splitType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public SplitType splitType = SplitType.SPLIT_TYPE_EQUAL;
         public LayoutDirection layoutDirection = LayoutDirection.LOCALE;
@@ -27,7 +25,6 @@ public final class SplitAttributes {
         public DividerAttributes dividerAttributes = DividerAttributes.NO_DIVIDER;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +34,6 @@ public final class SplitAttributes {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LayoutDirection {
         public static final LayoutDirection BOTTOM_TO_TOP;
         public static final LayoutDirection LEFT_TO_RIGHT;
@@ -46,7 +42,6 @@ public final class SplitAttributes {
         public static final LayoutDirection TOP_TO_BOTTOM;
         public final String description;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -74,7 +69,6 @@ public final class SplitAttributes {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SplitType {
         public final String description;
         public final float value;
@@ -83,7 +77,6 @@ public final class SplitAttributes {
         public static final SplitType SPLIT_TYPE_EQUAL = Companion.ratio(0.5f);
         public static final SplitType SPLIT_TYPE_HINGE = new SplitType("hinge", -1.0f);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -93,12 +86,12 @@ public final class SplitAttributes {
             /* JADX WARN: Type inference failed for: r2v2, types: [androidx.window.core.FailedSpecification] */
             public static SplitType ratio(final float f) {
                 SpecificationComputer.Companion companion = SpecificationComputer.Companion;
-                Float valueOf = Float.valueOf(f);
+                Float fValueOf = Float.valueOf(f);
                 String str = SplitAttributes.TAG;
                 VerificationMode verificationMode = VerificationMode.STRICT;
                 AndroidLogger androidLogger = AndroidLogger.INSTANCE;
                 companion.getClass();
-                ValidSpecification validSpecification = new ValidSpecification(valueOf, str, verificationMode, androidLogger);
+                ValidSpecification validSpecification = new ValidSpecification(fValueOf, str, verificationMode, androidLogger);
                 if (!((Boolean) new Function1() { // from class: androidx.window.embedding.SplitAttributes$SplitType$Companion$ratio$checkedRatio$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
@@ -107,18 +100,18 @@ public final class SplitAttributes {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         ((Number) obj).floatValue();
                         double d = f;
                         return Boolean.valueOf(0.0d <= d && d <= 1.0d && ArraysKt___ArraysKt.indexOf(new Float[]{Float.valueOf(0.0f), Float.valueOf(1.0f)}, Float.valueOf(f)) < 0);
                     }
-                }.mo779invoke(validSpecification.value)).booleanValue()) {
+                }.mo781invoke(validSpecification.value)).booleanValue()) {
                     validSpecification = new FailedSpecification(validSpecification.value, validSpecification.tag, "Ratio must be in range (0.0, 1.0). Use SplitType.expandContainers() instead of 0 or 1.", validSpecification.logger, validSpecification.verificationMode);
                 }
-                Object compute = validSpecification.compute();
-                compute.getClass();
-                float floatValue = ((Number) compute).floatValue();
-                return new SplitType("ratio:" + floatValue, floatValue);
+                Object objCompute = validSpecification.compute();
+                objCompute.getClass();
+                float fFloatValue = ((Number) objCompute).floatValue();
+                return new SplitType("ratio:" + fFloatValue, fFloatValue);
             }
 
             private Companion() {

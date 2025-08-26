@@ -80,7 +80,6 @@ import kotlin.collections.SetsKt___SetsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsControllerImpl implements Dumpable, ControlsController, SecControlsController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -109,7 +108,6 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
     public final List seedingCallbacks = new ArrayList();
     public final List autoAddList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -154,16 +152,16 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
         ?? r8 = new BroadcastReceiver() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$restoreFinishedReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                if (intent.getIntExtra("android.intent.extra.USER_ID", -10000) == ControlsControllerImpl.this.currentUser.getIdentifier()) {
-                    final ControlsControllerImpl controlsControllerImpl = ControlsControllerImpl.this;
+                if (intent.getIntExtra("android.intent.extra.USER_ID", -10000) == this.this$0.currentUser.getIdentifier()) {
+                    final ControlsControllerImpl controlsControllerImpl = this.this$0;
                     controlsControllerImpl.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$restoreFinishedReceiver$1$onReceive$1
                         @Override // java.lang.Runnable
                         public final void run() {
                             Log.d("ControlsControllerImpl", "Restore finished, storing auxiliary favorites");
-                            ControlsControllerImpl.this.auxiliaryPersistenceWrapper.initialize();
-                            ControlsControllerImpl controlsControllerImpl2 = ControlsControllerImpl.this;
+                            controlsControllerImpl.auxiliaryPersistenceWrapper.initialize();
+                            ControlsControllerImpl controlsControllerImpl2 = controlsControllerImpl;
                             controlsControllerImpl2.persistenceWrapper.storeFavorites(controlsControllerImpl2.auxiliaryPersistenceWrapper.favorites);
-                            ControlsControllerImpl.this.resetFavorites();
+                            controlsControllerImpl.resetFavorites();
                         }
                     });
                 }
@@ -176,28 +174,27 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             }
 
             public final void onChange(boolean z, Collection collection, int i, int i2) {
-                ControlsControllerImpl controlsControllerImpl = ControlsControllerImpl.this;
+                ControlsControllerImpl controlsControllerImpl = this.this$0;
                 if (controlsControllerImpl.userChanging || i2 != controlsControllerImpl.currentUser.getIdentifier()) {
                     return;
                 }
-                ControlsControllerImpl.this.resetFavorites();
+                this.this$0.resetFavorites();
             }
         };
         ControlsListingController.ControlsListingCallback controlsListingCallback = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$listingCallback$1
             @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
             public final void onServicesUpdated(final List list) {
                 int size = ((ArrayList) list).size();
-                final ControlsControllerImpl controlsControllerImpl = ControlsControllerImpl.this;
+                final ControlsControllerImpl controlsControllerImpl = this.this$0;
                 int identifier = controlsControllerImpl.currentUser.getIdentifier();
                 int userId = ((UserTrackerImpl) controlsControllerImpl.userTracker).getUserId();
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(size, identifier, "onServicesUpdated serviceInfos.size = ", ", currentUserId = ", ", userTracker = ");
-                m.append(userId);
-                Log.d("ControlsControllerImpl", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(size, identifier, "onServicesUpdated serviceInfos.size = ", ", currentUserId = ", ", userTracker = ");
+                sbM.append(userId);
+                Log.d("ControlsControllerImpl", sbM.toString());
                 controlsControllerImpl.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$listingCallback$1$onServicesUpdated$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SelectedComponentRepository.SelectedComponent selectedComponent;
-                        if (ControlsControllerImpl.this.currentUser.getIdentifier() != ((UserTrackerImpl) ControlsControllerImpl.this.userTracker).getUserId()) {
+                        if (controlsControllerImpl.currentUser.getIdentifier() != ((UserTrackerImpl) controlsControllerImpl.userTracker).getUserId()) {
                             Log.d("ControlsControllerImpl", "onServiceUpdate user diff, update skipped");
                             return;
                         }
@@ -220,10 +217,10 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                             arrayList2.add(((StructureInfo) obj).componentName);
                         }
                         Set set2 = CollectionsKt___CollectionsKt.toSet(arrayList2);
-                        BadgeProviderImpl badgeProviderImpl = (BadgeProviderImpl) ControlsControllerImpl.this.badgeProvider;
-                        boolean isEmpty = badgeProviderImpl.badgeRequiredSet.isEmpty();
+                        BadgeProviderImpl badgeProviderImpl = (BadgeProviderImpl) controlsControllerImpl.badgeProvider;
+                        boolean zIsEmpty = badgeProviderImpl.badgeRequiredSet.isEmpty();
                         BadgeProviderImpl.Companion companion = BadgeProviderImpl.Companion;
-                        if (isEmpty && badgeProviderImpl.badgeNotRequiredSet.isEmpty() && !set2.isEmpty()) {
+                        if (zIsEmpty && badgeProviderImpl.badgeNotRequiredSet.isEmpty() && !set2.isEmpty()) {
                             Set set3 = badgeProviderImpl.badgeNotRequiredSet;
                             companion.getClass();
                             set3.addAll(BadgeProviderImpl.Companion.toPackagesSet(set2));
@@ -232,23 +229,23 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         Set packagesSet = BadgeProviderImpl.Companion.toPackagesSet(set);
                         Set set4 = badgeProviderImpl.badgeRequiredSet;
                         Set set5 = packagesSet;
-                        Set subtract = CollectionsKt___CollectionsKt.subtract(set4, set5);
-                        if (subtract.isEmpty()) {
-                            subtract = null;
+                        Set setSubtract = CollectionsKt___CollectionsKt.subtract(set4, set5);
+                        if (setSubtract.isEmpty()) {
+                            setSubtract = null;
                         }
-                        if (subtract != null) {
-                            set4.removeAll(subtract);
+                        if (setSubtract != null) {
+                            set4.removeAll(setSubtract);
                         }
                         Set set6 = badgeProviderImpl.badgeNotRequiredSet;
-                        Set subtract2 = CollectionsKt___CollectionsKt.subtract(set6, set5);
-                        if (subtract2.isEmpty()) {
-                            subtract2 = null;
+                        Set setSubtract2 = CollectionsKt___CollectionsKt.subtract(set6, set5);
+                        if (setSubtract2.isEmpty()) {
+                            setSubtract2 = null;
                         }
-                        if (subtract2 != null) {
-                            set6.removeAll(subtract2);
+                        if (setSubtract2 != null) {
+                            set6.removeAll(setSubtract2);
                         }
-                        Set subtract3 = CollectionsKt___CollectionsKt.subtract(CollectionsKt___CollectionsKt.subtract(BadgeProviderImpl.Companion.toPackagesSet(set), badgeProviderImpl.badgeRequiredSet), badgeProviderImpl.badgeNotRequiredSet);
-                        Set set7 = subtract3.isEmpty() ? null : subtract3;
+                        Set setSubtract3 = CollectionsKt___CollectionsKt.subtract(CollectionsKt___CollectionsKt.subtract(BadgeProviderImpl.Companion.toPackagesSet(set), badgeProviderImpl.badgeRequiredSet), badgeProviderImpl.badgeNotRequiredSet);
+                        Set set7 = setSubtract3.isEmpty() ? null : setSubtract3;
                         if (set7 != null) {
                             badgeProviderImpl.badgeRequiredSet.addAll(set7);
                         }
@@ -256,7 +253,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         BadgeProviderImpl.onServicesUpdated$flush(badgeProviderImpl, badgeProviderImpl.badgeRequiredSet, "ControlsBadgeRequired", "badgeRequiredSet");
                         BadgeProviderImpl.onServicesUpdated$flush(badgeProviderImpl, badgeProviderImpl.badgeNotRequiredSet, "ControlsBadgeNotRequired", "badgeNotRequiredSet");
                         List<ControlsServiceInfo> list3 = list;
-                        ControlsControllerImpl controlsControllerImpl2 = ControlsControllerImpl.this;
+                        ControlsControllerImpl controlsControllerImpl2 = controlsControllerImpl;
                         for (ControlsServiceInfo controlsServiceInfo : list3) {
                             Favorites favorites = Favorites.INSTANCE;
                             ComponentName componentName = controlsServiceInfo.componentName;
@@ -273,8 +270,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                                 }
                                 if (((BadgeProviderImpl) controlsControllerImpl2.badgeProvider).badgeRequiredSet.contains(controlsServiceInfo.componentName.getPackageName())) {
                                     SecSelectedComponentRepository secSelectedComponentRepository2 = controlsControllerImpl2.secSelectedComponentRepository;
-                                    selectedComponent = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository2).getSelectedComponent(UserHandle.CURRENT);
-                                    if (selectedComponent == null) {
+                                    if (((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository2).getSelectedComponent(UserHandle.CURRENT) == null) {
                                         ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository2).setSelectedComponent(new SelectedComponentRepository.SelectedComponent(new SelectedItem.PanelItem(controlsServiceInfo.loadLabel(), controlsServiceInfo.componentName)));
                                     }
                                     controlsControllerImpl2.setActivePanelFlag(controlsServiceInfo.componentName, true);
@@ -285,7 +281,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                                 }
                             }
                         }
-                        ControlsControllerImpl controlsControllerImpl3 = ControlsControllerImpl.this;
+                        ControlsControllerImpl controlsControllerImpl3 = controlsControllerImpl;
                         SharedPreferences sharedPreferences$1 = ((UserFileManagerImpl) controlsControllerImpl3.userFileManager).getSharedPreferences$1(((UserTrackerImpl) controlsControllerImpl3.userTracker).getUserId(), SystemUIAnalytics.CONTROL_PREF_NAME);
                         Set<String> stringSet = sharedPreferences$1.getStringSet("SeedingCompleted", new LinkedHashSet());
                         Set set8 = set;
@@ -296,10 +292,10 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         }
                         sharedPreferences$1.edit().putStringSet("SeedingCompleted", stringSet != null ? CollectionsKt___CollectionsKt.intersect(stringSet, CollectionsKt___CollectionsKt.toSet(arrayList4)) : EmptySet.INSTANCE).apply();
                         Set set9 = set2;
-                        Set<ComponentName> subtract4 = CollectionsKt___CollectionsKt.subtract(set9, set8);
-                        ControlsControllerImpl controlsControllerImpl4 = ControlsControllerImpl.this;
+                        Set<ComponentName> setSubtract4 = CollectionsKt___CollectionsKt.subtract(set9, set8);
+                        ControlsControllerImpl controlsControllerImpl4 = controlsControllerImpl;
                         boolean z = false;
-                        for (final ComponentName componentName2 : subtract4) {
+                        for (final ComponentName componentName2 : setSubtract4) {
                             Favorites favorites2 = Favorites.INSTANCE;
                             componentName2.getClass();
                             favorites2.getClass();
@@ -309,7 +305,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                             controlsBindingControllerImpl.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$onComponentRemoved$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    ControlsBindingControllerImpl controlsBindingControllerImpl2 = ControlsBindingControllerImpl.this;
+                                    ControlsBindingControllerImpl controlsBindingControllerImpl2 = controlsBindingControllerImpl;
                                     ControlsProviderLifecycleManager controlsProviderLifecycleManager = controlsBindingControllerImpl2.currentProvider;
                                     if (controlsProviderLifecycleManager != null) {
                                         if (Intrinsics.areEqual(controlsProviderLifecycleManager.componentName, componentName2)) {
@@ -320,10 +316,10 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                             });
                             z = true;
                         }
-                        if (!ControlsControllerImpl.this.auxiliaryPersistenceWrapper.favorites.isEmpty()) {
-                            Set<ComponentName> subtract5 = CollectionsKt___CollectionsKt.subtract(set8, set9);
-                            ControlsControllerImpl controlsControllerImpl5 = ControlsControllerImpl.this;
-                            for (ComponentName componentName3 : subtract5) {
+                        if (!controlsControllerImpl.auxiliaryPersistenceWrapper.favorites.isEmpty()) {
+                            Set<ComponentName> setSubtract5 = CollectionsKt___CollectionsKt.subtract(set8, set9);
+                            ControlsControllerImpl controlsControllerImpl5 = controlsControllerImpl;
+                            for (ComponentName componentName3 : setSubtract5) {
                                 AuxiliaryPersistenceWrapper auxiliaryPersistenceWrapper = controlsControllerImpl5.auxiliaryPersistenceWrapper;
                                 componentName3.getClass();
                                 List<StructureInfo> cachedFavoritesAndRemoveFor = auxiliaryPersistenceWrapper.getCachedFavoritesAndRemoveFor(componentName3);
@@ -335,9 +331,9 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                                     z = true;
                                 }
                             }
-                            Set<ComponentName> intersect = CollectionsKt___CollectionsKt.intersect(set8, set9);
-                            ControlsControllerImpl controlsControllerImpl6 = ControlsControllerImpl.this;
-                            for (ComponentName componentName4 : intersect) {
+                            Set<ComponentName> setIntersect = CollectionsKt___CollectionsKt.intersect(set8, set9);
+                            ControlsControllerImpl controlsControllerImpl6 = controlsControllerImpl;
+                            for (ComponentName componentName4 : setIntersect) {
                                 AuxiliaryPersistenceWrapper auxiliaryPersistenceWrapper2 = controlsControllerImpl6.auxiliaryPersistenceWrapper;
                                 componentName4.getClass();
                                 auxiliaryPersistenceWrapper2.getCachedFavoritesAndRemoveFor(componentName4);
@@ -345,7 +341,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         }
                         if (z) {
                             Log.d("ControlsControllerImpl", "Detected change in available services, storing updated favorites");
-                            ControlsFavoritePersistenceWrapper controlsFavoritePersistenceWrapper = ControlsControllerImpl.this.persistenceWrapper;
+                            ControlsFavoritePersistenceWrapper controlsFavoritePersistenceWrapper = controlsControllerImpl.persistenceWrapper;
                             Favorites.INSTANCE.getClass();
                             controlsFavoritePersistenceWrapper.storeFavorites(Favorites.getAllStructures());
                         }
@@ -369,7 +365,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             this.userChanging = false;
             return;
         }
-        this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$changeUser$1
+        this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.changeUser.1
             @Override // java.lang.Runnable
             public final void run() {
                 ControlsControllerImpl controlsControllerImpl = ControlsControllerImpl.this;
@@ -458,22 +454,22 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             Object obj2 = arrayList.get(i);
             i++;
             ComponentName componentName = ((StructureInfo) obj2).componentName;
-            Object obj3 = linkedHashMap.get(componentName);
-            if (obj3 == null) {
-                obj3 = new ArrayList();
-                linkedHashMap.put(componentName, obj3);
+            Object arrayList3 = linkedHashMap.get(componentName);
+            if (arrayList3 == null) {
+                arrayList3 = new ArrayList();
+                linkedHashMap.put(componentName, arrayList3);
             }
-            ((List) obj3).add(obj2);
+            ((List) arrayList3).add(obj2);
         }
         ((ArrayList) this.autoAddList).clear();
         Favorites.INSTANCE.getClass();
         Log.d("ControlsControllerImpl", "getActiveFavoritesComponent getFavorites = " + Favorites.getAllStructures());
         Log.d("ControlsControllerImpl", "getActiveFavoritesComponent activeFavoriteStructureInfos = " + arrayList + ", favoriteComponentInfos = " + linkedHashMap);
-        ArrayList arrayList3 = new ArrayList(linkedHashMap.size());
+        ArrayList arrayList4 = new ArrayList(linkedHashMap.size());
         for (Map.Entry entry : linkedHashMap.entrySet()) {
-            arrayList3.add(new ComponentInfo((ComponentName) entry.getKey(), (List) entry.getValue()));
+            arrayList4.add(new ComponentInfo((ComponentName) entry.getKey(), (List) entry.getValue()));
         }
-        return arrayList3;
+        return arrayList4;
     }
 
     @Override // com.android.systemui.util.UserAwareController
@@ -482,7 +478,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
     }
 
     public final void loadForComponent(ComponentName componentName, Consumer consumer, Consumer consumer2, Consumer consumer3) {
-        final ControlsControllerImpl controlsControllerImpl;
+        ControlsControllerImpl controlsControllerImpl;
         final ComponentName componentName2;
         final Consumer consumer4;
         final Consumer consumer5;
@@ -500,7 +496,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                 consumer4 = consumer;
                 consumer5 = consumer2;
                 consumer6 = consumer3;
-                controlsControllerImpl.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$loadForComponent$3
+                controlsControllerImpl.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.loadForComponent.3
                     @Override // java.lang.Runnable
                     public final void run() {
                         ControlsControllerImpl.this.loadForComponent(componentName2, consumer4, consumer5, consumer6);
@@ -516,7 +512,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             EmptyList emptyList = EmptyList.INSTANCE;
             consumer4.accept(new ControlsControllerKt$createLoadDataObject$1(emptyList, emptyList, true));
         }
-        ControlsBindingController.LoadCallback loadCallback = new ControlsBindingController.LoadCallback() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$loadForComponent$4
+        ControlsBindingController.LoadCallback loadCallback = new ControlsBindingController.LoadCallback() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.loadForComponent.4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 final List list = (List) obj;
@@ -558,7 +554,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         while (it.hasNext()) {
                             arrayList3.add(((Control) it.next()).getControlId());
                         }
-                        Set minus = SetsKt___SetsKt.minus(set, (Iterable) arrayList3);
+                        Set setMinus = SetsKt___SetsKt.minus(set, (Iterable) arrayList3);
                         List<Control> list5 = list;
                         ComponentName componentName6 = componentName3;
                         ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list5, 10));
@@ -574,7 +570,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         ComponentName componentName8 = componentName3;
                         for (StructureInfo structureInfo : structuresForComponent) {
                             for (ControlInfo controlInfo : structureInfo.controls) {
-                                if (minus.contains(controlInfo.controlId)) {
+                                if (setMinus.contains(controlInfo.controlId)) {
                                     arrayList5.add(controlsControllerImpl4.createRemovedStatus(componentName8, controlInfo, structureInfo.structure, true));
                                 }
                             }
@@ -629,7 +625,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                 });
             }
         };
-        final Consumer consumer7 = new Consumer() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$loadForComponent$5
+        final Consumer consumer7 = new Consumer() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.loadForComponent.5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 consumer6.accept((ControlsProviderInfo) obj);
@@ -649,28 +645,28 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                 }
             }
         };
-        final ControlsProviderLifecycleManager retrieveLifecycleManager = controlsBindingControllerImpl.retrieveLifecycleManager(componentName2);
-        retrieveLifecycleManager.getClass();
-        retrieveLifecycleManager.onLoadCanceller = retrieveLifecycleManager.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$maybeBindAndLoad$2
+        final ControlsProviderLifecycleManager controlsProviderLifecycleManagerRetrieveLifecycleManager = controlsBindingControllerImpl.retrieveLifecycleManager(componentName2);
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.getClass();
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.onLoadCanceller = controlsProviderLifecycleManagerRetrieveLifecycleManager.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$maybeBindAndLoad$2
             @Override // java.lang.Runnable
             public final void run() {
-                ControlsProviderLifecycleManager controlsProviderLifecycleManager = ControlsProviderLifecycleManager.this;
+                ControlsProviderLifecycleManager controlsProviderLifecycleManager = controlsProviderLifecycleManagerRetrieveLifecycleManager;
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("Timeout waiting onLoad for ", controlsProviderLifecycleManager.componentName, controlsProviderLifecycleManager.TAG);
-                loadSubscriber2.onError(ControlsProviderLifecycleManager.this.token, "Timeout waiting onLoad");
-                ControlsProviderLifecycleManager.this.unbindService();
+                loadSubscriber2.onError(controlsProviderLifecycleManagerRetrieveLifecycleManager.token, "Timeout waiting onLoad");
+                controlsProviderLifecycleManagerRetrieveLifecycleManager.unbindService();
             }
         }, 20L, TimeUnit.SECONDS);
-        retrieveLifecycleManager.invokeOrQueue(new ControlsProviderLifecycleManager.Load(retrieveLifecycleManager, loadSubscriber2, stub));
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.invokeOrQueue(new ControlsProviderLifecycleManager.Load(controlsProviderLifecycleManagerRetrieveLifecycleManager, loadSubscriber2, stub));
         consumer5.accept(new ControlsBindingControllerImpl$LoadSubscriber$loadCancel$1(loadSubscriber2));
     }
 
     public final void replaceFavoritesForComponent(final ComponentInfo componentInfo, final boolean z) {
         if (confirmAvailability()) {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$replaceFavoritesForComponent$1
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.replaceFavoritesForComponent.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     Favorites favorites = Favorites.INSTANCE;
-                    ComponentInfo componentInfo2 = ComponentInfo.this;
+                    ComponentInfo componentInfo2 = componentInfo;
                     boolean z2 = z;
                     favorites.getClass();
                     LinkedHashMap linkedHashMap = new LinkedHashMap(Favorites.favMap);
@@ -681,11 +677,11 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                     }
                     int size = Favorites.favMap.size();
                     Map map = Favorites.favMap;
-                    StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("replaceControls isUpdateFlag = ", size, ", favMap.size = ", z2, ", favMap = ");
-                    m.append(map);
-                    Log.d("Favorites", m.toString());
+                    StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("replaceControls isUpdateFlag = ", size, ", favMap.size = ", z2, ", favMap = ");
+                    sbM.append(map);
+                    Log.d("Favorites", sbM.toString());
                     if (!((ArrayList) this.autoAddList).isEmpty()) {
-                        Favorites.addFavorites(ComponentInfo.this.componentName, new ArrayList(this.autoAddList));
+                        Favorites.addFavorites(componentInfo.componentName, new ArrayList(this.autoAddList));
                     }
                     this.persistenceWrapper.storeFavorites(Favorites.getAllStructures());
                 }
@@ -696,30 +692,30 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
     public final void resetFavorites() {
         Favorites.INSTANCE.getClass();
         Favorites.favMap = MapsKt__MapsKt.emptyMap();
-        List readFavorites = this.persistenceWrapper.readFavorites();
+        List favorites = this.persistenceWrapper.readFavorites();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Object obj : readFavorites) {
+        for (Object obj : favorites) {
             ComponentName componentName = ((StructureInfo) obj).componentName;
-            Object obj2 = linkedHashMap.get(componentName);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(componentName, obj2);
+            Object arrayList = linkedHashMap.get(componentName);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(componentName, arrayList);
             }
-            ((List) obj2).add(obj);
+            ((List) arrayList).add(obj);
         }
         Favorites.favMap = linkedHashMap;
         Favorites.INSTANCE.getClass();
         List allStructures = Favorites.getAllStructures();
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(allStructures, 10));
-        ArrayList arrayList2 = (ArrayList) allStructures;
-        int size = arrayList2.size();
+        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(allStructures, 10));
+        ArrayList arrayList3 = (ArrayList) allStructures;
+        int size = arrayList3.size();
         int i = 0;
         while (i < size) {
-            Object obj3 = arrayList2.get(i);
+            Object obj2 = arrayList3.get(i);
             i++;
-            arrayList.add(((StructureInfo) obj3).componentName.getPackageName());
+            arrayList2.add(((StructureInfo) obj2).componentName.getPackageName());
         }
-        ((AuthorizedPanelsRepositoryImpl) this.authorizedPanelsRepository).addAuthorizedPanels(CollectionsKt___CollectionsKt.toSet(arrayList));
+        ((AuthorizedPanelsRepositoryImpl) this.authorizedPanelsRepository).addAuthorizedPanels(CollectionsKt___CollectionsKt.toSet(arrayList2));
     }
 
     public final void seedFavoritesForComponents(final List list, final Consumer consumer) {
@@ -730,7 +726,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             this.seedingInProgress = true;
             startSeeding(list, consumer, false);
         } else if (this.userChanging) {
-            this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$seedFavoritesForComponents$1
+            this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.seedFavoritesForComponents.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     ControlsControllerImpl.this.seedFavoritesForComponents(list, consumer);
@@ -748,9 +744,9 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
         ComponentName componentName2;
         Favorites.INSTANCE.getClass();
         LinkedHashMap linkedHashMap = new LinkedHashMap(Favorites.favMap);
-        List list = (List) linkedHashMap.get(componentName);
-        if (list != null) {
-            Iterator it = list.iterator();
+        List listSingletonList = (List) linkedHashMap.get(componentName);
+        if (listSingletonList != null) {
+            Iterator it = listSingletonList.iterator();
             while (it.hasNext()) {
                 ((StructureInfo) it.next()).active = z;
             }
@@ -759,9 +755,9 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             componentName2 = componentName;
             StructureInfo structureInfo = new StructureInfo(componentName2, "", EmptyList.INSTANCE, false, 8, null);
             structureInfo.active = z;
-            list = Collections.singletonList(structureInfo);
+            listSingletonList = Collections.singletonList(structureInfo);
         }
-        linkedHashMap.put(componentName2, list);
+        linkedHashMap.put(componentName2, listSingletonList);
         Favorites.favMap = linkedHashMap;
         Log.d("Favorites", "setActivePanelFlag = " + linkedHashMap.get(componentName2) + ", active = " + z);
     }
@@ -785,8 +781,8 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
         Log.d("ControlsControllerImpl", Log.getStackTraceString(new Exception("get stacks")));
         final ComponentName componentName = (ComponentName) list.get(0);
         NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("Beginning request to seed favorites for: ", componentName, "ControlsControllerImpl");
-        final List drop = CollectionsKt___CollectionsKt.drop(list, 1);
-        ControlsBindingController.LoadCallback loadCallback = new ControlsBindingController.LoadCallback() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$startSeeding$1
+        final List listDrop = CollectionsKt___CollectionsKt.drop(list, 1);
+        ControlsBindingController.LoadCallback loadCallback = new ControlsBindingController.LoadCallback() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl.startSeeding.1
             @Override // java.util.function.Consumer
             public final void accept(Object obj2) {
                 final List list2 = (List) obj2;
@@ -794,7 +790,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                 DelayableExecutor delayableExecutor = controlsControllerImpl.executor;
                 final Consumer consumer2 = consumer;
                 final ComponentName componentName2 = componentName;
-                final List list3 = drop;
+                final List list3 = listDrop;
                 final boolean z3 = z;
                 delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$startSeeding$1$accept$1
                     @Override // java.lang.Runnable
@@ -805,23 +801,23 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                             if (structure == null) {
                                 structure = "";
                             }
-                            List list4 = (List) arrayMap.get(structure);
-                            if (list4 == null) {
-                                list4 = new ArrayList();
+                            List arrayList2 = (List) arrayMap.get(structure);
+                            if (arrayList2 == null) {
+                                arrayList2 = new ArrayList();
                             }
-                            if (list4.size() < 6) {
-                                list4.add(new ControlInfo(control.getControlId(), control.getTitle(), control.getSubtitle(), control.getDeviceType(), 0, 16, null));
-                                arrayMap.put(structure, list4);
+                            if (arrayList2.size() < 6) {
+                                arrayList2.add(new ControlInfo(control.getControlId(), control.getTitle(), control.getSubtitle(), control.getDeviceType(), 0, 16, null));
+                                arrayMap.put(structure, arrayList2);
                             }
                         }
                         ComponentName componentName3 = componentName2;
                         for (Map.Entry entry : arrayMap.entrySet()) {
                             CharSequence charSequence = (CharSequence) entry.getKey();
-                            List list5 = (List) entry.getValue();
+                            List list4 = (List) entry.getValue();
                             Favorites favorites = Favorites.INSTANCE;
                             charSequence.getClass();
-                            list5.getClass();
-                            StructureInfo structureInfo = new StructureInfo(componentName3, charSequence, list5, false, 8, null);
+                            list4.getClass();
+                            StructureInfo structureInfo = new StructureInfo(componentName3, charSequence, list4, false, 8, null);
                             favorites.getClass();
                             Favorites.replaceControls(structureInfo);
                         }
@@ -841,7 +837,7 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                 DelayableExecutor delayableExecutor = controlsControllerImpl.executor;
                 final Consumer consumer2 = consumer;
                 final ComponentName componentName2 = componentName;
-                final List list2 = drop;
+                final List list2 = listDrop;
                 delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$startSeeding$1$error$1
                     @Override // java.lang.Runnable
                     public final void run() {
@@ -862,18 +858,18 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
         }
         final ControlsBindingControllerImpl.LoadSubscriber loadSubscriber2 = controlsBindingControllerImpl.new LoadSubscriber(loadCallback, 36L);
         controlsBindingControllerImpl.loadSubscriber = loadSubscriber2;
-        final ControlsProviderLifecycleManager retrieveLifecycleManager = controlsBindingControllerImpl.retrieveLifecycleManager(componentName);
-        retrieveLifecycleManager.getClass();
-        retrieveLifecycleManager.onLoadCanceller = retrieveLifecycleManager.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$maybeBindAndLoadSuggested$1
+        final ControlsProviderLifecycleManager controlsProviderLifecycleManagerRetrieveLifecycleManager = controlsBindingControllerImpl.retrieveLifecycleManager(componentName);
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.getClass();
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.onLoadCanceller = controlsProviderLifecycleManagerRetrieveLifecycleManager.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$maybeBindAndLoadSuggested$1
             @Override // java.lang.Runnable
             public final void run() {
-                ControlsProviderLifecycleManager controlsProviderLifecycleManager = ControlsProviderLifecycleManager.this;
+                ControlsProviderLifecycleManager controlsProviderLifecycleManager = controlsProviderLifecycleManagerRetrieveLifecycleManager;
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m("Timeout waiting onLoadSuggested for ", controlsProviderLifecycleManager.componentName, controlsProviderLifecycleManager.TAG);
-                loadSubscriber2.onError(ControlsProviderLifecycleManager.this.token, "Timeout waiting onLoadSuggested");
-                ControlsProviderLifecycleManager.this.unbindService();
+                loadSubscriber2.onError(controlsProviderLifecycleManagerRetrieveLifecycleManager.token, "Timeout waiting onLoadSuggested");
+                controlsProviderLifecycleManagerRetrieveLifecycleManager.unbindService();
             }
         }, 20L, TimeUnit.SECONDS);
-        retrieveLifecycleManager.invokeOrQueue(retrieveLifecycleManager.new Suggest(loadSubscriber2));
+        controlsProviderLifecycleManagerRetrieveLifecycleManager.invokeOrQueue(controlsProviderLifecycleManagerRetrieveLifecycleManager.new Suggest(loadSubscriber2));
     }
 
     public final void subscribeToFavorites(ComponentInfo componentInfo) {
@@ -886,24 +882,24 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             secControlsUiControllerImpl.uiExecutor.execute(new SecControlsUiControllerImpl$updateLaunchingAppButton$1(secControlsUiControllerImpl, null));
             String packageName = componentName.getPackageName();
             this.controlsUtil.getClass();
-            boolean equals = "com.samsung.android.oneconnect".equals(packageName);
+            boolean zEquals = "com.samsung.android.oneconnect".equals(packageName);
             SecControlsBindingController secControlsBindingController = this.secBindingController;
-            if (equals) {
+            if (zEquals) {
                 final Consumer consumer = new Consumer() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$loadControlsProviderInfo$1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         ControlsProviderInfo controlsProviderInfo = (ControlsProviderInfo) obj;
                         controlsProviderInfo.getAutoRemove();
-                        ControlsControllerImpl.this.isAutoRemove = controlsProviderInfo.getAutoRemove();
+                        this.this$0.isAutoRemove = controlsProviderInfo.getAutoRemove();
                         Objects.toString(controlsProviderInfo.getAppIntent().getIntent());
-                        SecControlsUiController secControlsUiController = ControlsControllerImpl.this.secUiController;
+                        SecControlsUiController secControlsUiController = this.this$0.secUiController;
                         PendingIntent appIntent = controlsProviderInfo.getAppIntent();
                         SecControlsUiControllerImpl secControlsUiControllerImpl2 = (SecControlsUiControllerImpl) secControlsUiController;
                         secControlsUiControllerImpl2.getClass();
                         secControlsUiControllerImpl2.uiExecutor.execute(new SecControlsUiControllerImpl$updateLaunchingAppButton$1(secControlsUiControllerImpl2, appIntent));
                     }
                 };
-                ControlsProviderLifecycleManager retrieveLifecycleManager = ((ControlsBindingControllerImpl) secControlsBindingController).retrieveLifecycleManager(componentName);
+                ControlsProviderLifecycleManager controlsProviderLifecycleManagerRetrieveLifecycleManager = ((ControlsBindingControllerImpl) secControlsBindingController).retrieveLifecycleManager(componentName);
                 IControlsProviderInfoSubscriber.Stub stub = new IControlsProviderInfoSubscriber.Stub() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$loadControlsProviderInfo$ps$1
                     public final void onNext(IBinder iBinder, ControlsProviderInfo controlsProviderInfo) {
                         if (controlsProviderInfo != null) {
@@ -911,13 +907,13 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
                         }
                     }
                 };
-                retrieveLifecycleManager.getClass();
-                retrieveLifecycleManager.invokeOrQueue(retrieveLifecycleManager.new LoadProviderInfo(stub));
+                controlsProviderLifecycleManagerRetrieveLifecycleManager.getClass();
+                controlsProviderLifecycleManagerRetrieveLifecycleManager.invokeOrQueue(controlsProviderLifecycleManagerRetrieveLifecycleManager.new LoadProviderInfo(stub));
             }
             ControlsBindingControllerImpl controlsBindingControllerImpl = (ControlsBindingControllerImpl) secControlsBindingController;
             controlsBindingControllerImpl.unsubscribe();
-            ControlsProviderLifecycleManager retrieveLifecycleManager2 = controlsBindingControllerImpl.retrieveLifecycleManager(componentInfo.componentName);
-            StatefulControlSubscriber statefulControlSubscriber = new StatefulControlSubscriber((ControlsController) controlsBindingControllerImpl.lazyController.get(), retrieveLifecycleManager2, controlsBindingControllerImpl.backgroundExecutor, 100000L);
+            ControlsProviderLifecycleManager controlsProviderLifecycleManagerRetrieveLifecycleManager2 = controlsBindingControllerImpl.retrieveLifecycleManager(componentInfo.componentName);
+            StatefulControlSubscriber statefulControlSubscriber = new StatefulControlSubscriber((ControlsController) controlsBindingControllerImpl.lazyController.get(), controlsProviderLifecycleManagerRetrieveLifecycleManager2, controlsBindingControllerImpl.backgroundExecutor, 100000L);
             controlsBindingControllerImpl.statefulControlSubscriber = statefulControlSubscriber;
             List list = componentInfo.structureInfos;
             ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
@@ -925,17 +921,17 @@ public final class ControlsControllerImpl implements Dumpable, ControlsControlle
             while (it.hasNext()) {
                 arrayList.add(((StructureInfo) it.next()).controls);
             }
-            List flatten = CollectionsKt__IterablesKt.flatten(arrayList);
-            ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(flatten, 10));
-            ArrayList arrayList3 = (ArrayList) flatten;
+            List listFlatten = CollectionsKt__IterablesKt.flatten(arrayList);
+            ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listFlatten, 10));
+            ArrayList arrayList3 = (ArrayList) listFlatten;
             int size = arrayList3.size();
             while (i < size) {
                 Object obj = arrayList3.get(i);
                 i++;
                 arrayList2.add(((ControlInfo) obj).controlId);
             }
-            retrieveLifecycleManager2.getClass();
-            retrieveLifecycleManager2.invokeOrQueue(retrieveLifecycleManager2.new Subscribe(arrayList2, statefulControlSubscriber));
+            controlsProviderLifecycleManagerRetrieveLifecycleManager2.getClass();
+            controlsProviderLifecycleManagerRetrieveLifecycleManager2.invokeOrQueue(controlsProviderLifecycleManagerRetrieveLifecycleManager2.new Subscribe(arrayList2, statefulControlSubscriber));
         }
     }
 

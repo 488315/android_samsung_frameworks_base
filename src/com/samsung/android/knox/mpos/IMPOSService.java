@@ -62,9 +62,9 @@ public interface IMPOSService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMPOSService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMPOSService)) {
-                return (IMPOSService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMPOSService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMPOSService)) {
+                return (IMPOSService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,28 +97,28 @@ public interface IMPOSService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 MposTZServiceConfig mposTZServiceConfig = (MposTZServiceConfig) parcel.readTypedObject(MposTZServiceConfig.CREATOR);
                 parcel.enforceNoDataAvail();
-                boolean loadTa = loadTa(readInt, parcelFileDescriptor, readLong, readLong2, mposTZServiceConfig);
+                boolean zLoadTa = loadTa(i3, parcelFileDescriptor, j, j2, mposTZServiceConfig);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(loadTa);
+                parcel2.writeBoolean(zLoadTa);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean unloadTa = unloadTa(readInt2);
+                boolean zUnloadTa = unloadTa(i4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(unloadTa);
+                parcel2.writeBoolean(zUnloadTa);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 TACommandRequest tACommandRequest = (TACommandRequest) parcel.readTypedObject(TACommandRequest.CREATOR);
                 parcel.enforceNoDataAvail();
-                TACommandResponse processTACommand = processTACommand(readInt3, tACommandRequest);
+                TACommandResponse tACommandResponseProcessTACommand = processTACommand(i5, tACommandRequest);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(processTACommand, 1);
+                parcel2.writeTypedObject(tACommandResponseProcessTACommand, 1);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -143,54 +143,54 @@ public interface IMPOSService extends IInterface {
 
             @Override // com.samsung.android.knox.mpos.IMPOSService
             public boolean loadTa(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2, MposTZServiceConfig mposTZServiceConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(mposTZServiceConfig, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(mposTZServiceConfig, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mpos.IMPOSService
             public boolean unloadTa(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mpos.IMPOSService
             public TACommandResponse processTACommand(int i, TACommandRequest tACommandRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(tACommandRequest, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TACommandResponse) obtain2.readTypedObject(TACommandResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMPOSService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(tACommandRequest, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TACommandResponse) parcelObtain2.readTypedObject(TACommandResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

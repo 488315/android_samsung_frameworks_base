@@ -9,7 +9,6 @@ import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CsipSetCoordinatorProfile implements LocalBluetoothProfile {
     public final CachedBluetoothDeviceManager mDeviceManager;
@@ -17,7 +16,6 @@ public class CsipSetCoordinatorProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothCsipSetCoordinator mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CoordinatedSetServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ CoordinatedSetServiceListener(CsipSetCoordinatorProfile csipSetCoordinatorProfile, int i) {
             this();
@@ -30,14 +28,14 @@ public class CsipSetCoordinatorProfile implements LocalBluetoothProfile {
             CsipSetCoordinatorProfile.this.mService = bluetoothCsipSetCoordinator;
             List<BluetoothDevice> connectedDevices = bluetoothCsipSetCoordinator.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
-                BluetoothDevice remove = connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = CsipSetCoordinatorProfile.this.mDeviceManager.findDevice(remove);
-                if (findDevice == null) {
-                    Log.d("CsipSetCoordinatorProfile", "CsipSetCoordinatorProfile found new device: " + remove);
-                    findDevice = CsipSetCoordinatorProfile.this.mDeviceManager.addDevice(remove);
+                BluetoothDevice bluetoothDeviceRemove = connectedDevices.remove(0);
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = CsipSetCoordinatorProfile.this.mDeviceManager.findDevice(bluetoothDeviceRemove);
+                if (cachedBluetoothDeviceFindDevice == null) {
+                    Log.d("CsipSetCoordinatorProfile", "CsipSetCoordinatorProfile found new device: " + bluetoothDeviceRemove);
+                    cachedBluetoothDeviceFindDevice = CsipSetCoordinatorProfile.this.mDeviceManager.addDevice(bluetoothDeviceRemove);
                 }
-                findDevice.onProfileStateChanged(CsipSetCoordinatorProfile.this, 2);
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.onProfileStateChanged(CsipSetCoordinatorProfile.this, 2);
+                cachedBluetoothDeviceFindDevice.refresh();
             }
             CachedBluetoothDeviceManager cachedBluetoothDeviceManager = CsipSetCoordinatorProfile.this.mDeviceManager;
             synchronized (cachedBluetoothDeviceManager) {

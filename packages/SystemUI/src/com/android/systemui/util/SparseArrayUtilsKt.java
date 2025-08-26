@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.Sequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SparseArrayUtilsKt {
     public static final <T> Map<Integer, T> asMap(SparseArray<T> sparseArray) {
@@ -19,22 +18,22 @@ public final class SparseArrayUtilsKt {
     public static final <T> SparseArray<T> associateByToSparseArray(T[] tArr, Function1 function1) {
         SparseArray<T> sparseArray = new SparseArray<>(tArr.length);
         for (T t : tArr) {
-            sparseArray.put(((Number) function1.mo779invoke(t)).intValue(), t);
+            sparseArray.put(((Number) function1.mo781invoke(t)).intValue(), t);
         }
         return sparseArray;
     }
 
     public static final <T, R> SparseArray<R> foldToSparseArray(Grouping grouping, R r, int i, Function2 function2) {
         SparseArray sparseArray = i < 0 ? new SparseArray() : new SparseArray(i);
-        Iterator sourceIterator = grouping.sourceIterator();
-        while (sourceIterator.hasNext()) {
-            Object next = sourceIterator.next();
-            int intValue = ((Number) grouping.keyOf(next)).intValue();
-            Object obj = sparseArray.get(intValue);
+        Iterator itSourceIterator = grouping.sourceIterator();
+        while (itSourceIterator.hasNext()) {
+            Object next = itSourceIterator.next();
+            int iIntValue = ((Number) grouping.keyOf(next)).intValue();
+            Object obj = sparseArray.get(iIntValue);
             if (obj == null) {
                 obj = r;
             }
-            sparseArray.put(intValue, function2.invoke(obj, next));
+            sparseArray.put(iIntValue, function2.invoke(obj, next));
         }
         return sparseArray;
     }
@@ -44,15 +43,15 @@ public final class SparseArrayUtilsKt {
             i = -1;
         }
         SparseArray sparseArray = i < 0 ? new SparseArray() : new SparseArray(i);
-        Iterator sourceIterator = grouping.sourceIterator();
-        while (sourceIterator.hasNext()) {
-            Object next = sourceIterator.next();
-            int intValue = ((Number) grouping.keyOf(next)).intValue();
-            Object obj3 = sparseArray.get(intValue);
+        Iterator itSourceIterator = grouping.sourceIterator();
+        while (itSourceIterator.hasNext()) {
+            Object next = itSourceIterator.next();
+            int iIntValue = ((Number) grouping.keyOf(next)).intValue();
+            Object obj3 = sparseArray.get(iIntValue);
             if (obj3 == null) {
                 obj3 = obj;
             }
-            sparseArray.put(intValue, function2.invoke(obj3, next));
+            sparseArray.put(iIntValue, function2.invoke(obj3, next));
         }
         return sparseArray;
     }

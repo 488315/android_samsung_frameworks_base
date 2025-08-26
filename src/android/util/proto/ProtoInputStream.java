@@ -128,9 +128,9 @@ public final class ProtoInputStream extends ProtoStream {
         checkPacked(j);
         if (((int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32)) == 1) {
             assertWireType(1);
-            double longBitsToDouble = Double.longBitsToDouble(readFixed64());
+            double dLongBitsToDouble = Double.longBitsToDouble(readFixed64());
             this.mState = (byte) (this.mState & (-2));
-            return longBitsToDouble;
+            return dLongBitsToDouble;
         }
         throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") cannot be read as a double" + dumpDebugData());
     }
@@ -141,70 +141,68 @@ public final class ProtoInputStream extends ProtoStream {
         checkPacked(j);
         if (((int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32)) == 2) {
             assertWireType(5);
-            float intBitsToFloat = Float.intBitsToFloat(readFixed32());
+            float fIntBitsToFloat = Float.intBitsToFloat(readFixed32());
             this.mState = (byte) (this.mState & (-2));
-            return intBitsToFloat;
+            return fIntBitsToFloat;
         }
         throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") is not a float" + dumpDebugData());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x005a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public int readInt(long j) throws IOException {
-        int readVarint;
+        int varint;
         assertFreshData();
         assertFieldNumber(j);
         checkPacked(j);
         int i = (int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32);
-        if (i != 5) {
-            if (i != 7) {
-                if (i == 17) {
-                    assertWireType(0);
-                    readVarint = decodeZigZag32((int) readVarint());
-                    this.mState = (byte) (this.mState & (-2));
-                    return readVarint;
-                }
-                switch (i) {
-                    case 13:
-                    case 14:
-                        break;
-                    case 15:
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") is not an int" + dumpDebugData());
-                }
-                this.mState = (byte) (this.mState & (-2));
-                return readVarint;
-            }
+        if (i == 5) {
+            assertWireType(0);
+            varint = (int) readVarint();
+        } else if (i == 7) {
             assertWireType(5);
-            readVarint = readFixed32();
-            this.mState = (byte) (this.mState & (-2));
-            return readVarint;
+            varint = readFixed32();
+        } else if (i == 17) {
+            assertWireType(0);
+            varint = decodeZigZag32((int) readVarint());
+        } else {
+            switch (i) {
+                case 13:
+                case 14:
+                    break;
+                case 15:
+                    break;
+                default:
+                    throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") is not an int" + dumpDebugData());
+            }
         }
-        assertWireType(0);
-        readVarint = (int) readVarint();
         this.mState = (byte) (this.mState & (-2));
-        return readVarint;
+        return varint;
     }
 
     public long readLong(long j) throws IOException {
-        long readVarint;
+        long varint;
         assertFreshData();
         assertFieldNumber(j);
         checkPacked(j);
         int i = (int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32);
         if (i == 3 || i == 4) {
             assertWireType(0);
-            readVarint = readVarint();
+            varint = readVarint();
         } else if (i == 6 || i == 16) {
             assertWireType(1);
-            readVarint = readFixed64();
+            varint = readFixed64();
         } else if (i == 18) {
             assertWireType(0);
-            readVarint = decodeZigZag64(readVarint());
+            varint = decodeZigZag64(readVarint());
         } else {
             throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") is not an long" + dumpDebugData());
         }
         this.mState = (byte) (this.mState & (-2));
-        return readVarint;
+        return varint;
     }
 
     public boolean readBoolean(long j) throws IOException {
@@ -225,9 +223,9 @@ public final class ProtoInputStream extends ProtoStream {
         assertFieldNumber(j);
         if (((int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32)) == 9) {
             assertWireType(2);
-            String readRawString = readRawString((int) readVarint());
+            String rawString = readRawString((int) readVarint());
             this.mState = (byte) (this.mState & (-2));
-            return readRawString;
+            return rawString;
         }
         throw new IllegalArgumentException("Requested field id(" + getFieldIdString(j) + ") is not an string" + dumpDebugData());
     }
@@ -238,9 +236,9 @@ public final class ProtoInputStream extends ProtoStream {
         int i = (int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32);
         if (i == 11 || i == 12) {
             assertWireType(2);
-            byte[] readRawBytes = readRawBytes((int) readVarint());
+            byte[] rawBytes = readRawBytes((int) readVarint());
             this.mState = (byte) (this.mState & (-2));
-            return readRawBytes;
+            return rawBytes;
         }
         throw new IllegalArgumentException("Requested field type (" + getFieldIdString(j) + ") cannot be read as raw bytes" + dumpDebugData());
     }
@@ -249,18 +247,18 @@ public final class ProtoInputStream extends ProtoStream {
         assertFreshData();
         assertFieldNumber(j);
         assertWireType(2);
-        int readVarint = (int) readVarint();
+        int varint = (int) readVarint();
         if (this.mExpectedObjectTokenStack == null) {
             this.mExpectedObjectTokenStack = new LongArray();
         }
         int i = this.mDepth + 1;
         this.mDepth = i;
         if (i == this.mExpectedObjectTokenStack.size()) {
-            this.mExpectedObjectTokenStack.add(makeToken(0, (j & 2199023255552L) == 2199023255552L, this.mDepth, (int) j, getOffset() + readVarint));
+            this.mExpectedObjectTokenStack.add(makeToken(0, (j & 2199023255552L) == 2199023255552L, this.mDepth, (int) j, getOffset() + varint));
         } else {
             LongArray longArray = this.mExpectedObjectTokenStack;
             int i2 = this.mDepth;
-            longArray.set(i2, makeToken(0, (j & 2199023255552L) == 2199023255552L, i2, (int) j, getOffset() + readVarint));
+            longArray.set(i2, makeToken(0, (j & 2199023255552L) == 2199023255552L, i2, (int) j, getOffset() + varint));
         }
         int i3 = this.mDepth;
         if (i3 > 0 && getOffsetFromToken(this.mExpectedObjectTokenStack.get(i3)) > getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth - 1))) {
@@ -287,9 +285,9 @@ public final class ProtoInputStream extends ProtoStream {
             this.mFieldNumber = -1;
             return;
         }
-        int readVarint = (int) readVarint();
-        this.mFieldNumber = readVarint >>> 3;
-        this.mWireType = readVarint & 7;
+        int varint = (int) readVarint();
+        this.mFieldNumber = varint >>> 3;
+        this.mWireType = varint & 7;
         this.mState = (byte) (this.mState | 1);
     }
 
@@ -436,9 +434,9 @@ public final class ProtoInputStream extends ProtoStream {
         this.mOffset = i3;
         this.mDiscardedBytes += i2;
         if (i3 >= this.mBufferSize) {
-            int skip = (int) inputStream.skip((i3 / r1) * r1);
-            this.mDiscardedBytes += skip;
-            this.mOffset -= skip;
+            int iSkip = (int) inputStream.skip((i3 / r1) * r1);
+            this.mDiscardedBytes += iSkip;
+            this.mOffset -= iSkip;
         }
         this.mEnd = this.mStream.read(this.mBuffer);
     }
@@ -479,23 +477,23 @@ public final class ProtoInputStream extends ProtoStream {
 
     private void checkPacked(long j) throws IOException {
         if (this.mWireType == 2) {
-            int readVarint = (int) readVarint();
-            this.mPackedEnd = getOffset() + readVarint;
+            int varint = (int) readVarint();
+            this.mPackedEnd = getOffset() + varint;
             this.mState = (byte) (2 | this.mState);
             switch ((int) ((ProtoStream.FIELD_TYPE_MASK & j) >>> 32)) {
                 case 1:
                 case 6:
                 case 16:
-                    if (readVarint % 8 != 0) {
-                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") packed length " + readVarint + " is not aligned for fixed64" + dumpDebugData());
+                    if (varint % 8 != 0) {
+                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") packed length " + varint + " is not aligned for fixed64" + dumpDebugData());
                     }
                     this.mWireType = 1;
                     return;
                 case 2:
                 case 7:
                 case 15:
-                    if (readVarint % 4 != 0) {
-                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") packed length " + readVarint + " is not aligned for fixed32" + dumpDebugData());
+                    if (varint % 4 != 0) {
+                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(j) + ") packed length " + varint + " is not aligned for fixed32" + dumpDebugData());
                     }
                     this.mWireType = 5;
                     return;

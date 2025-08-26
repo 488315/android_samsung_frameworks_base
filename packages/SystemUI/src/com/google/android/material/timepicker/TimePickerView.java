@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.chip.Chip;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class TimePickerView extends ConstraintLayout {
     public static final /* synthetic */ int $r8$clinit = 0;

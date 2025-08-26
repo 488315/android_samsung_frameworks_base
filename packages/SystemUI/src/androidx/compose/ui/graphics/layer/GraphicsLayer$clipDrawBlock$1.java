@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class GraphicsLayer$clipDrawBlock$1 extends Lambda implements Function1 {
     final /* synthetic */ GraphicsLayer this$0;
@@ -24,7 +23,7 @@ final class GraphicsLayer$clipDrawBlock$1 extends Lambda implements Function1 {
     /* JADX WARN: Type inference failed for: r6v4, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.Lambda] */
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         DrawScope drawScope = (DrawScope) obj;
         GraphicsLayer graphicsLayer = this.this$0;
         Path path = graphicsLayer.outlinePath;
@@ -33,16 +32,16 @@ final class GraphicsLayer$clipDrawBlock$1 extends Lambda implements Function1 {
             ClipOp.Companion.getClass();
             int i = ClipOp.Intersect;
             CanvasDrawScope$drawContext$1 drawContext = drawScope.getDrawContext();
-            long m526getSizeNHjbRc = drawContext.m526getSizeNHjbRc();
+            long jM528getSizeNHjbRc = drawContext.m528getSizeNHjbRc();
             drawContext.getCanvas().save();
             try {
-                ((CanvasDrawScope$drawContext$1) drawContext.transform.$this_asDrawTransform).getCanvas().mo423clipPathmtrdDE(path, i);
-                r6.mo779invoke(drawScope);
+                ((CanvasDrawScope$drawContext$1) drawContext.transform.$this_asDrawTransform).getCanvas().mo425clipPathmtrdDE(path, i);
+                r6.mo781invoke(drawScope);
             } finally {
-                BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+                BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
             }
         } else {
-            graphicsLayer.drawBlock.mo779invoke(drawScope);
+            graphicsLayer.drawBlock.mo781invoke(drawScope);
         }
         return Unit.INSTANCE;
     }

@@ -15,7 +15,7 @@ public class FallbackCategoryProvider {
     private static final String TAG = "FallbackCategoryProvider";
     private static final ArrayMap<String, Integer> sFallbacks = new ArrayMap<>();
 
-    public static void loadFallbacks() {
+    public static void loadFallbacks() throws IOException {
         sFallbacks.clear();
         if (SystemProperties.getBoolean("fw.ignore_fb_categories", false)) {
             Log.d(TAG, "Ignoring fallback categories");
@@ -27,12 +27,12 @@ public class FallbackCategoryProvider {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new Resources(assetManager, null, null).openRawResource(R.raw.fallback_categories)));
             while (true) {
                 try {
-                    String readLine = bufferedReader.readLine();
-                    if (readLine != null) {
-                        if (readLine.charAt(0) != '#') {
-                            String[] split = readLine.split(",");
-                            if (split.length == 2) {
-                                sFallbacks.put(split[0], Integer.valueOf(Integer.parseInt(split[1])));
+                    String line = bufferedReader.readLine();
+                    if (line != null) {
+                        if (line.charAt(0) != '#') {
+                            String[] strArrSplit = line.split(",");
+                            if (strArrSplit.length == 2) {
+                                sFallbacks.put(strArrSplit[0], Integer.valueOf(Integer.parseInt(strArrSplit[1])));
                             }
                         }
                     } else {

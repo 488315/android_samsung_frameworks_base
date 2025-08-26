@@ -6,7 +6,7 @@
         <shape>
             <size android:height="@dimen/volume_dialog_track_width" />
             <corners android:radius="@dimen/volume_dialog_panel_width_half" />
-            <solid android:color="@android:color/search_url_text_pressed" />
+            <solid android:color="@android:color/micro_text_light" />
         </shape>
     </item>
     <item android:gravity="fill_horizontal|center" android:id="@android:id/progress">

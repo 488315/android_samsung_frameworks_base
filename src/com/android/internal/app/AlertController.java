@@ -102,16 +102,16 @@ public class AlertController {
     private final View.OnClickListener mButtonHandler = new View.OnClickListener() { // from class: com.android.internal.app.AlertController.1
         @Override // android.view.View.OnClickListener
         public void onClick(View view) {
-            Message obtain;
+            Message messageObtain;
             if (view == AlertController.this.mButtonPositive && AlertController.this.mButtonPositiveMessage != null) {
-                obtain = Message.obtain(AlertController.this.mButtonPositiveMessage);
+                messageObtain = Message.obtain(AlertController.this.mButtonPositiveMessage);
             } else if (view == AlertController.this.mButtonNegative && AlertController.this.mButtonNegativeMessage != null) {
-                obtain = Message.obtain(AlertController.this.mButtonNegativeMessage);
+                messageObtain = Message.obtain(AlertController.this.mButtonNegativeMessage);
             } else {
-                obtain = (view != AlertController.this.mButtonNeutral || AlertController.this.mButtonNeutralMessage == null) ? null : Message.obtain(AlertController.this.mButtonNeutralMessage);
+                messageObtain = (view != AlertController.this.mButtonNeutral || AlertController.this.mButtonNeutralMessage == null) ? null : Message.obtain(AlertController.this.mButtonNeutralMessage);
             }
-            if (obtain != null) {
-                obtain.sendToTarget();
+            if (messageObtain != null) {
+                messageObtain.sendToTarget();
             }
             AlertController.this.mHandler.obtainMessage(1, AlertController.this.mDialogInterface).sendToTarget();
         }
@@ -146,9 +146,9 @@ public class AlertController {
     }
 
     public static final AlertController create(Context context, DialogInterface dialogInterface, Window window) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 16974371);
-        int i = obtainStyledAttributes.getInt(12, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 16974371);
+        int i = typedArrayObtainStyledAttributes.getInt(12, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (i == 1) {
             return new MicroAlertController(context, dialogInterface, window);
         }
@@ -171,22 +171,22 @@ public class AlertController {
             this.mThemeIsDeviceDefaultDark = typedValue2.data != 0;
         }
         this.mLastOrientation = context.getResources().getConfiguration().orientation;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.AlertDialog, getAlertDialogDefStyleAttr(context), getAlertDialogDefStyleRes());
-        this.mAlertDialogLayout = obtainStyledAttributes.getResourceId(10, R.layout.alert_dialog);
-        this.mButtonPanelSideLayout = obtainStyledAttributes.getResourceId(11, 0);
-        this.mListLayout = obtainStyledAttributes.getResourceId(15, R.layout.select_dialog);
-        this.mMultiChoiceItemLayout = obtainStyledAttributes.getResourceId(16, 17367059);
-        this.mSingleChoiceItemLayout = obtainStyledAttributes.getResourceId(21, 17367058);
-        this.mListItemLayout = obtainStyledAttributes.getResourceId(14, 17367057);
-        this.mShowTitle = obtainStyledAttributes.getBoolean(20, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.AlertDialog, getAlertDialogDefStyleAttr(context), getAlertDialogDefStyleRes());
+        this.mAlertDialogLayout = typedArrayObtainStyledAttributes.getResourceId(10, R.layout.alert_dialog);
+        this.mButtonPanelSideLayout = typedArrayObtainStyledAttributes.getResourceId(11, 0);
+        this.mListLayout = typedArrayObtainStyledAttributes.getResourceId(15, R.layout.select_dialog);
+        this.mMultiChoiceItemLayout = typedArrayObtainStyledAttributes.getResourceId(16, 17367059);
+        this.mSingleChoiceItemLayout = typedArrayObtainStyledAttributes.getResourceId(21, 17367058);
+        this.mListItemLayout = typedArrayObtainStyledAttributes.getResourceId(14, 17367057);
+        this.mShowTitle = typedArrayObtainStyledAttributes.getBoolean(20, true);
+        typedArrayObtainStyledAttributes.recycle();
         window.requestFeature(1);
     }
 
     private int getAlertDialogDefStyleAttr(Context context) {
-        boolean useWearMaterial3Style = useWearMaterial3Style(context);
-        sUseWearMaterial3Style = useWearMaterial3Style;
-        return useWearMaterial3Style ? 0 : 16842845;
+        boolean zUseWearMaterial3Style = useWearMaterial3Style(context);
+        sUseWearMaterial3Style = zUseWearMaterial3Style;
+        return zUseWearMaterial3Style ? 0 : 16842845;
     }
 
     private int getAlertDialogDefStyleRes() {
@@ -343,7 +343,7 @@ public class AlertController {
         if (imageView != null) {
             if (drawable != null) {
                 imageView.setVisibility(0);
-                this.mIconView.lambda$setImageURIAsync$2(drawable);
+                this.mIconView.setImageDrawable(drawable);
             } else {
                 imageView.setVisibility(8);
             }
@@ -407,80 +407,80 @@ public class AlertController {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private void setupView() {
+    private void setupView() throws Resources.NotFoundException {
         View view;
         ViewGroup viewGroup;
         boolean z;
         View view2;
         boolean z2;
-        View findViewById;
-        View findViewById2;
-        View findViewById3;
-        final View findViewById4 = this.mWindow.findViewById(R.id.parentPanel);
-        View findViewById5 = this.mWindow.findViewById(R.id.middlePanel);
+        View viewFindViewById;
+        View viewFindViewById2;
+        View viewFindViewById3;
+        final View viewFindViewById4 = this.mWindow.findViewById(R.id.parentPanel);
+        View viewFindViewById5 = this.mWindow.findViewById(R.id.middlePanel);
         if (this.mThemeIsDeviceDefault) {
-            findViewById4.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.internal.app.AlertController$$ExternalSyntheticLambda2
+            viewFindViewById4.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.internal.app.AlertController$$ExternalSyntheticLambda2
                 @Override // android.view.View.OnLayoutChangeListener
                 public final void onLayoutChange(View view3, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                    AlertController.this.lambda$setupView$1(findViewById4, view3, i, i2, i3, i4, i5, i6, i7, i8);
+                    this.f$0.lambda$setupView$1(viewFindViewById4, view3, i, i2, i3, i4, i5, i6, i7, i8);
                 }
             });
         }
-        View findViewById6 = findViewById4.findViewById(R.id.topPanel);
-        View findViewById7 = findViewById4.findViewById(R.id.contentPanel);
-        View findViewById8 = findViewById4.findViewById(R.id.buttonPanel);
-        ViewGroup viewGroup2 = (ViewGroup) findViewById4.findViewById(R.id.customPanel);
+        View viewFindViewById6 = viewFindViewById4.findViewById(R.id.topPanel);
+        View viewFindViewById7 = viewFindViewById4.findViewById(R.id.contentPanel);
+        View viewFindViewById8 = viewFindViewById4.findViewById(R.id.buttonPanel);
+        ViewGroup viewGroup2 = (ViewGroup) viewFindViewById4.findViewById(R.id.customPanel);
         setupCustomContent(viewGroup2);
-        View findViewById9 = viewGroup2.findViewById(R.id.topPanel);
-        View findViewById10 = viewGroup2.findViewById(R.id.contentPanel);
-        View findViewById11 = viewGroup2.findViewById(R.id.buttonPanel);
-        ViewGroup resolvePanel = resolvePanel(findViewById9, findViewById6);
-        ViewGroup resolvePanel2 = resolvePanel(findViewById10, findViewById7);
-        ViewGroup resolvePanel3 = resolvePanel(findViewById11, findViewById8);
-        setupContent(resolvePanel2);
-        setupButtons(resolvePanel3);
-        setupTitle(resolvePanel);
+        View viewFindViewById9 = viewGroup2.findViewById(R.id.topPanel);
+        View viewFindViewById10 = viewGroup2.findViewById(R.id.contentPanel);
+        View viewFindViewById11 = viewGroup2.findViewById(R.id.buttonPanel);
+        ViewGroup viewGroupResolvePanel = resolvePanel(viewFindViewById9, viewFindViewById6);
+        ViewGroup viewGroupResolvePanel2 = resolvePanel(viewFindViewById10, viewFindViewById7);
+        ViewGroup viewGroupResolvePanel3 = resolvePanel(viewFindViewById11, viewFindViewById8);
+        setupContent(viewGroupResolvePanel2);
+        setupButtons(viewGroupResolvePanel3);
+        setupTitle(viewGroupResolvePanel);
         if (viewGroup2 == null || viewGroup2.getVisibility() == 8) {
-            view = findViewById7;
+            view = viewFindViewById7;
             viewGroup = viewGroup2;
             z = false;
         } else {
-            view = findViewById7;
+            view = viewFindViewById7;
             viewGroup = viewGroup2;
             z = true;
         }
-        boolean z3 = (resolvePanel == null || resolvePanel.getVisibility() == 8) ? 0 : 1;
-        if (resolvePanel3 == null || resolvePanel3.getVisibility() == 8) {
+        boolean z3 = (viewGroupResolvePanel == null || viewGroupResolvePanel.getVisibility() == 8) ? 0 : 1;
+        if (viewGroupResolvePanel3 == null || viewGroupResolvePanel3.getVisibility() == 8) {
             view2 = view;
             z2 = false;
         } else {
             view2 = view;
             z2 = true;
         }
-        boolean z4 = (findViewById6 == null || findViewById6.getVisibility() == 8) ? false : true;
+        boolean z4 = (viewFindViewById6 == null || viewFindViewById6.getVisibility() == 8) ? false : true;
         boolean z5 = (view2 == null || view2.getVisibility() == 8) ? false : true;
         View view3 = this.mCustomTitleView;
         boolean z6 = (view3 == null || view3.getVisibility() == 8) ? false : true;
         if (this.mThemeIsDeviceDefault) {
             if ((z && !z4 && !z5) || z6) {
-                semAdjustParentPanelPadding(findViewById5);
+                semAdjustParentPanelPadding(viewFindViewById5);
             }
             if (z && z4 && !z5) {
-                semAdjustTopPanelPadding(findViewById4);
+                semAdjustTopPanelPadding(viewFindViewById4);
             }
             if (!z && z3 != 0 && this.mIsItemChoiceLayout) {
-                semAdjustContentPanelPadding(resolvePanel2);
+                semAdjustContentPanelPadding(viewGroupResolvePanel2);
             }
         }
-        if (!findViewById4.isInTouchMode()) {
-            if (!requestFocusForContent(z ? viewGroup : resolvePanel2)) {
+        if (!viewFindViewById4.isInTouchMode()) {
+            if (!requestFocusForContent(z ? viewGroup : viewGroupResolvePanel2)) {
                 requestFocusForDefaultButton();
             }
         }
         sHasPaddingBottomInCustom = z && this.mThemeIsDeviceDefault;
         if (!z2) {
-            if (resolvePanel2 != null && (findViewById3 = resolvePanel2.findViewById(R.id.textSpacerNoButtons)) != null) {
-                findViewById3.setVisibility(0);
+            if (viewGroupResolvePanel2 != null && (viewFindViewById3 = viewGroupResolvePanel2.findViewById(R.id.textSpacerNoButtons)) != null) {
+                viewFindViewById3.setVisibility(0);
             }
             this.mWindow.setCloseOnTouchOutsideIfNotSet(true);
         }
@@ -493,18 +493,18 @@ public class AlertController {
                 scrollView.setClipToPadding(true);
             }
             if (this.mMessage != null || this.mListView != null || z) {
-                findViewById2 = !z ? resolvePanel.findViewById(R.id.titleDividerNoCustom) : null;
-                if (findViewById2 == null) {
-                    findViewById2 = resolvePanel.findViewById(R.id.titleDivider);
+                viewFindViewById2 = !z ? viewGroupResolvePanel.findViewById(R.id.titleDividerNoCustom) : null;
+                if (viewFindViewById2 == null) {
+                    viewFindViewById2 = viewGroupResolvePanel.findViewById(R.id.titleDivider);
                 }
             } else {
-                findViewById2 = resolvePanel.findViewById(R.id.titleDividerTop);
+                viewFindViewById2 = viewGroupResolvePanel.findViewById(R.id.titleDividerTop);
             }
-            if (findViewById2 != null) {
-                findViewById2.setVisibility(0);
+            if (viewFindViewById2 != null) {
+                viewFindViewById2.setVisibility(0);
             }
-        } else if (resolvePanel2 != null && (findViewById = resolvePanel2.findViewById(R.id.textSpacerNoTitle)) != null) {
-            findViewById.setVisibility(0);
+        } else if (viewGroupResolvePanel2 != null && (viewFindViewById = viewGroupResolvePanel2.findViewById(R.id.textSpacerNoTitle)) != null) {
+            viewFindViewById.setVisibility(0);
         }
         ListView listView = this.mListView;
         if (listView instanceof RecycleListView) {
@@ -518,9 +518,9 @@ public class AlertController {
             if (view4 != null) {
                 int i = (z2 ? 2 : 0) | z3;
                 if (this.mIsItemChoiceLayout) {
-                    View findViewById12 = this.mWindow.findViewById(R.id.sem_scrollIndicatorUp);
-                    if (findViewById12 != null && z3 != 0) {
-                        findViewById12.setVisibility(0);
+                    View viewFindViewById12 = this.mWindow.findViewById(R.id.sem_scrollIndicatorUp);
+                    if (viewFindViewById12 != null && z3 != 0) {
+                        viewFindViewById12.setVisibility(0);
                     }
                     view4.setScrollIndicators(i, 2);
                 } else {
@@ -528,8 +528,8 @@ public class AlertController {
                 }
             }
         }
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
-        setBackground(obtainStyledAttributes, resolvePanel, resolvePanel2, viewGroup, resolvePanel3, z3, z, z2);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
+        setBackground(typedArrayObtainStyledAttributes, viewGroupResolvePanel, viewGroupResolvePanel2, viewGroup, viewGroupResolvePanel3, z3, z, z2);
         if (this.mThemeIsDeviceDefault && this.mWindow.getAttributes().type != 2011) {
             this.mWindow.setElevation(this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_alert_dialog_window_elevation));
         }
@@ -539,14 +539,14 @@ public class AlertController {
             View decorView = this.mWindow.getDecorView();
             boolean z8 = decorView == null || decorView.getBackground() == null || drawable.getConstantState() == null || drawable.getConstantState().equals(decorView.getBackground().getConstantState());
             boolean z9 = Settings.System.getString(this.mContext.getContentResolver(), "current_sec_active_themepackage") != null;
-            if (findViewById4 != null && CoreRune.FW_WINDOW_BLUR_SUPPORTED && z7 && !z9 && this.mWindow.getAttributes().type != 2011 && z8) {
-                if (findViewById5 != null && findViewById5.getBackground() == null && this.mThemeIsDeviceDefaultDark) {
-                    findViewById5.setBackground(this.mContext.getResources().getDrawable(R.drawable.tw_dialog_middle_panel_background_material));
+            if (viewFindViewById4 != null && CoreRune.FW_WINDOW_BLUR_SUPPORTED && z7 && !z9 && this.mWindow.getAttributes().type != 2011 && z8) {
+                if (viewFindViewById5 != null && viewFindViewById5.getBackground() == null && this.mThemeIsDeviceDefaultDark) {
+                    viewFindViewById5.setBackground(this.mContext.getResources().getDrawable(R.drawable.tw_dialog_middle_panel_background_material));
                 }
-                this.mBlurEffect.setWindowBlur(findViewById4, this.mContext.getColor(R.color.sem_dialog_panel_bg_color_blur), this.mContext.getResources().getDimension(R.dimen.sem_dialog_background_corner_radius));
+                this.mBlurEffect.setWindowBlur(viewFindViewById4, this.mContext.getColor(R.color.sem_dialog_panel_bg_color_blur), this.mContext.getResources().getDimension(R.dimen.sem_dialog_background_corner_radius));
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -554,7 +554,7 @@ public class AlertController {
         view2.post(new Runnable() { // from class: com.android.internal.app.AlertController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AlertController.this.lambda$setupView$0(view);
+                this.f$0.lambda$setupView$0(view);
             }
         });
     }
@@ -591,17 +591,17 @@ public class AlertController {
     }
 
     private void setupCustomContent(ViewGroup viewGroup) {
-        View view = this.mView;
-        if (view == null) {
-            view = this.mViewLayoutResId != 0 ? LayoutInflater.from(this.mContext).inflate(this.mViewLayoutResId, viewGroup, false) : null;
+        View viewInflate = this.mView;
+        if (viewInflate == null) {
+            viewInflate = this.mViewLayoutResId != 0 ? LayoutInflater.from(this.mContext).inflate(this.mViewLayoutResId, viewGroup, false) : null;
         }
-        boolean z = view != null;
-        if (!z || !canTextInput(view)) {
+        boolean z = viewInflate != null;
+        if (!z || !canTextInput(viewInflate)) {
             this.mWindow.setFlags(131072, 131072);
         }
         if (z) {
             FrameLayout frameLayout = (FrameLayout) this.mWindow.findViewById(16908331);
-            frameLayout.addView(view, new ViewGroup.LayoutParams(-1, -1));
+            frameLayout.addView(viewInflate, new ViewGroup.LayoutParams(-1, -1));
             if (this.mViewSpacingSpecified) {
                 frameLayout.setPadding(this.mViewSpacingLeft, this.mViewSpacingTop, this.mViewSpacingRight, this.mViewSpacingBottom);
             }
@@ -633,7 +633,7 @@ public class AlertController {
             }
             Drawable drawable = this.mIcon;
             if (drawable != null) {
-                this.mIconView.lambda$setImageURIAsync$2(drawable);
+                this.mIconView.setImageDrawable(drawable);
                 return;
             } else {
                 this.mTitleView.setPadding(this.mIconView.getPaddingLeft(), this.mIconView.getPaddingTop(), this.mIconView.getPaddingRight(), this.mIconView.getPaddingBottom());
@@ -646,7 +646,7 @@ public class AlertController {
         viewGroup.setVisibility(8);
     }
 
-    protected void setupContent(ViewGroup viewGroup) {
+    protected void setupContent(ViewGroup viewGroup) throws Resources.NotFoundException {
         ScrollView scrollView = (ScrollView) viewGroup.findViewById(R.id.scrollView);
         this.mScrollView = scrollView;
         scrollView.setFocusable(false);
@@ -674,9 +674,9 @@ public class AlertController {
         this.mScrollView.removeView(this.mMessageView);
         if (this.mListView != null) {
             ViewGroup viewGroup2 = (ViewGroup) this.mScrollView.getParent();
-            int indexOfChild = viewGroup2.indexOfChild(this.mScrollView);
-            viewGroup2.removeViewAt(indexOfChild);
-            viewGroup2.addView(this.mListView, indexOfChild, new ViewGroup.LayoutParams(-1, -1));
+            int iIndexOfChild = viewGroup2.indexOfChild(this.mScrollView);
+            viewGroup2.removeViewAt(iIndexOfChild);
+            viewGroup2.addView(this.mListView, iIndexOfChild, new ViewGroup.LayoutParams(-1, -1));
             return;
         }
         viewGroup.setVisibility(8);
@@ -691,7 +691,7 @@ public class AlertController {
         }
     }
 
-    protected void setupButtons(ViewGroup viewGroup) {
+    protected void setupButtons(ViewGroup viewGroup) throws Resources.NotFoundException {
         int i;
         boolean z = Settings.System.getInt(this.mContext.getContentResolver(), "show_button_background", 0) == 1;
         Button button = (Button) viewGroup.findViewById(16908313);
@@ -752,16 +752,16 @@ public class AlertController {
             viewGroup.setVisibility(8);
         }
         if (this.mThemeIsDeviceDefault) {
-            View findViewById = this.mWindow.findViewById(R.id.sem_divider1);
-            View findViewById2 = this.mWindow.findViewById(R.id.sem_divider2);
+            View viewFindViewById = this.mWindow.findViewById(R.id.sem_divider1);
+            View viewFindViewById2 = this.mWindow.findViewById(R.id.sem_divider2);
             boolean z2 = this.mButtonNeutral.getVisibility() == 0;
             boolean z3 = this.mButtonPositive.getVisibility() == 0;
             boolean z4 = this.mButtonNegative.getVisibility() == 0;
-            if (findViewById2 != null && ((z2 && z3) || (z2 && z4))) {
-                findViewById2.setVisibility(0);
+            if (viewFindViewById2 != null && ((z2 && z3) || (z2 && z4))) {
+                viewFindViewById2.setVisibility(0);
             }
-            if (findViewById != null && z3 && z4) {
-                findViewById.setVisibility(0);
+            if (viewFindViewById != null && z3 && z4) {
+                viewFindViewById.setVisibility(0);
             }
         }
     }
@@ -771,13 +771,13 @@ public class AlertController {
         layoutParams.gravity = 1;
         layoutParams.weight = 0.5f;
         button.setLayoutParams(layoutParams);
-        View findViewById = this.mWindow.findViewById(R.id.leftSpacer);
-        if (findViewById != null) {
-            findViewById.setVisibility(0);
+        View viewFindViewById = this.mWindow.findViewById(R.id.leftSpacer);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(0);
         }
-        View findViewById2 = this.mWindow.findViewById(R.id.rightSpacer);
-        if (findViewById2 != null) {
-            findViewById2.setVisibility(0);
+        View viewFindViewById2 = this.mWindow.findViewById(R.id.rightSpacer);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setVisibility(0);
         }
     }
 
@@ -905,39 +905,39 @@ public class AlertController {
     }
 
     private void semSetupPaddings() {
-        View findViewById = this.mWindow.findViewById(R.id.parentPanel);
-        View findViewById2 = this.mWindow.findViewById(R.id.middlePanel);
-        View findViewById3 = findViewById.findViewById(R.id.title_template);
-        View findViewById4 = findViewById.findViewById(R.id.scrollView);
-        View findViewById5 = findViewById.findViewById(R.id.sem_buttonBarLayout);
-        View findViewById6 = findViewById.findViewById(R.id.contentPanel);
+        View viewFindViewById = this.mWindow.findViewById(R.id.parentPanel);
+        View viewFindViewById2 = this.mWindow.findViewById(R.id.middlePanel);
+        View viewFindViewById3 = viewFindViewById.findViewById(R.id.title_template);
+        View viewFindViewById4 = viewFindViewById.findViewById(R.id.scrollView);
+        View viewFindViewById5 = viewFindViewById.findViewById(R.id.sem_buttonBarLayout);
+        View viewFindViewById6 = viewFindViewById.findViewById(R.id.contentPanel);
         Resources resources = this.mContext.getResources();
-        ViewGroup viewGroup = (ViewGroup) findViewById.findViewById(R.id.customPanel);
-        View findViewById7 = findViewById.findViewById(R.id.topPanel);
+        ViewGroup viewGroup = (ViewGroup) viewFindViewById.findViewById(R.id.customPanel);
+        View viewFindViewById7 = viewFindViewById.findViewById(R.id.topPanel);
         boolean z = (viewGroup == null || viewGroup.getVisibility() == 8) ? false : true;
-        boolean z2 = (findViewById7 == null || findViewById7.getVisibility() == 8) ? false : true;
-        boolean z3 = (findViewById6 == null || findViewById6.getVisibility() == 8) ? false : true;
+        boolean z2 = (viewFindViewById7 == null || viewFindViewById7.getVisibility() == 8) ? false : true;
+        boolean z3 = (viewFindViewById6 == null || viewFindViewById6.getVisibility() == 8) ? false : true;
         View view = this.mCustomTitleView;
         boolean z4 = (view == null || view.getVisibility() == 8) ? false : true;
-        if (findViewById2 != null) {
+        if (viewFindViewById2 != null) {
             if ((z && !z2 && !z3) || z4) {
-                findViewById2.setPadding(0, 0, 0, 0);
+                viewFindViewById2.setPadding(0, 0, 0, 0);
             } else {
-                findViewById2.setPadding(0, resources.getDimensionPixelSize(R.dimen.sem_dialog_title_padding_top), 0, 0);
+                viewFindViewById2.setPadding(0, resources.getDimensionPixelSize(R.dimen.sem_dialog_title_padding_top), 0, 0);
             }
         }
-        if (findViewById3 != null) {
+        if (viewFindViewById3 != null) {
             if (z && z2 && !z3) {
-                findViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0);
+                viewFindViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0);
             } else {
-                findViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), resources.getDimensionPixelSize(R.dimen.sem_dialog_title_padding_bottom));
+                viewFindViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal), resources.getDimensionPixelSize(R.dimen.sem_dialog_title_padding_bottom));
             }
         }
-        if (findViewById4 != null) {
-            findViewById4.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_scroll_padding_start), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_scroll_padding_end), resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_padding_bottom));
+        if (viewFindViewById4 != null) {
+            viewFindViewById4.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_scroll_padding_start), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_scroll_padding_end), resources.getDimensionPixelSize(R.dimen.sem_dialog_body_text_padding_bottom));
         }
-        if (findViewById5 != null) {
-            findViewById5.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_horizontal), resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_bottom));
+        if (viewFindViewById5 != null) {
+            viewFindViewById5.setPadding(resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_horizontal), 0, resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_horizontal), resources.getDimensionPixelSize(R.dimen.sem_dialog_button_bar_padding_bottom));
         }
     }
 
@@ -947,21 +947,21 @@ public class AlertController {
         }
     }
 
-    private void semAdjustTopPanelPadding(View view) {
+    private void semAdjustTopPanelPadding(View view) throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_dialog_padding_horizontal);
         view.findViewById(R.id.title_template).setPadding(dimensionPixelSize, 0, dimensionPixelSize, 0);
     }
 
-    private void semAdjustContentPanelPadding(View view) {
+    private void semAdjustContentPanelPadding(View view) throws Resources.NotFoundException {
         view.setPadding(view.getPaddingStart(), this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_select_dialog_padding_top_item_material), view.getPaddingRight(), view.getPaddingBottom());
     }
 
-    private void semSetupButtonsPadding() {
+    private void semSetupButtonsPadding() throws Resources.NotFoundException {
         final int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_dialog_button_text_size);
         Arrays.asList(this.mButtonPositive, this.mButtonNegative, this.mButtonNeutral).forEach(new Consumer() { // from class: com.android.internal.app.AlertController$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AlertController.this.lambda$semSetupButtonsPadding$2(dimensionPixelSize, (Button) obj);
+                this.f$0.lambda$semSetupButtonsPadding$2(dimensionPixelSize, (Button) obj);
             }
         });
     }
@@ -999,9 +999,9 @@ public class AlertController {
         public RecycleListView(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.mRecycleOnMeasure = true;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RecycleListView);
-            this.mPaddingBottomNoButtons = obtainStyledAttributes.getDimensionPixelOffset(0, -1);
-            this.mPaddingTopNoTitle = obtainStyledAttributes.getDimensionPixelOffset(1, -1);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RecycleListView);
+            this.mPaddingBottomNoButtons = typedArrayObtainStyledAttributes.getDimensionPixelOffset(0, -1);
+            this.mPaddingTopNoTitle = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, -1);
         }
 
         public void setHasDecor(boolean z, boolean z2) {
@@ -1139,11 +1139,11 @@ public class AlertController {
 
         private void createListView(final AlertController alertController) {
             int i;
-            ListAdapter listAdapter;
+            ListAdapter checkedItemAdapter;
             final RecycleListView recycleListView = (RecycleListView) this.mInflater.inflate(alertController.mListLayout, (ViewGroup) null);
             if (this.mIsMultiChoice) {
                 if (this.mCursor == null) {
-                    listAdapter = new ArrayAdapter<CharSequence>(this.mContext, alertController.mMultiChoiceItemLayout, 16908308, this.mItems) { // from class: com.android.internal.app.AlertController.AlertParams.1
+                    checkedItemAdapter = new ArrayAdapter<CharSequence>(this.mContext, alertController.mMultiChoiceItemLayout, 16908308, this.mItems) { // from class: com.android.internal.app.AlertController.AlertParams.1
                         @Override // android.widget.ArrayAdapter, android.widget.Adapter
                         public View getView(int i2, View view, ViewGroup viewGroup) {
                             View view2 = super.getView(i2, view, viewGroup);
@@ -1155,7 +1155,7 @@ public class AlertController {
                     };
                     recycleListView = recycleListView;
                 } else {
-                    listAdapter = new CursorAdapter(this.mContext, this.mCursor, false) { // from class: com.android.internal.app.AlertController.AlertParams.2
+                    checkedItemAdapter = new CursorAdapter(this.mContext, this.mCursor, false) { // from class: com.android.internal.app.AlertController.AlertParams.2
                         private final int mIsCheckedIndex;
                         private final int mLabelIndex;
 
@@ -1188,11 +1188,11 @@ public class AlertController {
                 }
                 int i2 = i;
                 if (this.mCursor != null) {
-                    listAdapter = new SimpleCursorAdapter(this.mContext, i2, this.mCursor, new String[]{this.mLabelColumn}, new int[]{16908308});
+                    checkedItemAdapter = new SimpleCursorAdapter(this.mContext, i2, this.mCursor, new String[]{this.mLabelColumn}, new int[]{16908308});
                 } else {
-                    listAdapter = this.mAdapter;
-                    if (listAdapter == null) {
-                        listAdapter = new CheckedItemAdapter(this.mContext, i2, 16908308, this.mItems);
+                    checkedItemAdapter = this.mAdapter;
+                    if (checkedItemAdapter == null) {
+                        checkedItemAdapter = new CheckedItemAdapter(this.mContext, i2, 16908308, this.mItems);
                     }
                 }
             }
@@ -1200,7 +1200,7 @@ public class AlertController {
             if (onPrepareListViewListener != null) {
                 onPrepareListViewListener.onPrepareListView(recycleListView);
             }
-            alertController.mAdapter = listAdapter;
+            alertController.mAdapter = checkedItemAdapter;
             alertController.mCheckedItem = this.mCheckedItem;
             if (this.mOnClickListener != null) {
                 recycleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.internal.app.AlertController.AlertParams.3

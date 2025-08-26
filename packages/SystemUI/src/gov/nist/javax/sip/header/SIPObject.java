@@ -4,7 +4,6 @@ import gov.nist.core.GenericObject;
 import gov.nist.core.InternalErrorHandler;
 import java.lang.reflect.Field;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SIPObject extends GenericObject {
     @Override // gov.nist.core.GenericObject
@@ -19,14 +18,14 @@ public abstract class SIPObject extends GenericObject {
             return false;
         }
         SIPObject sIPObject = (SIPObject) obj;
-        Class<?> cls = getClass();
-        Class<?> cls2 = obj.getClass();
+        Class<?> superclass = getClass();
+        Class<?> superclass2 = obj.getClass();
         while (true) {
-            Field[] declaredFields = cls.getDeclaredFields();
-            if (!cls2.equals(cls)) {
+            Field[] declaredFields = superclass.getDeclaredFields();
+            if (!superclass2.equals(superclass)) {
                 return false;
             }
-            Field[] declaredFields2 = cls2.getDeclaredFields();
+            Field[] declaredFields2 = superclass2.getDeclaredFields();
             for (int i = 0; i < declaredFields.length; i++) {
                 Field field = declaredFields[i];
                 Field field2 = declaredFields2[i];
@@ -37,32 +36,32 @@ public abstract class SIPObject extends GenericObject {
                     if (name.compareTo("stringRepresentation") != 0 && name.compareTo("indentation") != 0) {
                         try {
                             if (type.isPrimitive()) {
-                                String cls3 = type.toString();
-                                if (cls3.compareTo("int") == 0) {
+                                String string = type.toString();
+                                if (string.compareTo("int") == 0) {
                                     if (field.getInt(this) != field2.getInt(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("short") == 0) {
+                                } else if (string.compareTo("short") == 0) {
                                     if (field.getShort(this) != field2.getShort(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("char") == 0) {
+                                } else if (string.compareTo("char") == 0) {
                                     if (field.getChar(this) != field2.getChar(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("long") == 0) {
+                                } else if (string.compareTo("long") == 0) {
                                     if (field.getLong(this) != field2.getLong(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("boolean") == 0) {
+                                } else if (string.compareTo("boolean") == 0) {
                                     if (field.getBoolean(this) != field2.getBoolean(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("double") == 0) {
+                                } else if (string.compareTo("double") == 0) {
                                     if (field.getDouble(this) != field2.getDouble(sIPObject)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("float") == 0 && field.getFloat(this) != field2.getFloat(sIPObject)) {
+                                } else if (string.compareTo("float") == 0 && field.getFloat(this) != field2.getFloat(sIPObject)) {
                                     return false;
                                 }
                             } else if (field2.get(sIPObject) != field.get(this)) {
@@ -83,11 +82,11 @@ public abstract class SIPObject extends GenericObject {
                     }
                 }
             }
-            if (cls.equals(SIPObject.class)) {
+            if (superclass.equals(SIPObject.class)) {
                 return true;
             }
-            cls = cls.getSuperclass();
-            cls2 = cls2.getSuperclass();
+            superclass = superclass.getSuperclass();
+            superclass2 = superclass2.getSuperclass();
         }
     }
 

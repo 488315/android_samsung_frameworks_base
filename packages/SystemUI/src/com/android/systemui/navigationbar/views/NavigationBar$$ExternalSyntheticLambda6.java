@@ -10,7 +10,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import com.samsung.android.systemui.multistar.MultiStarManager;
 import com.samsung.systemui.splugins.multistar.PluginMultiStar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class NavigationBar$$ExternalSyntheticLambda6 implements View.OnLongClickListener {
     public final /* synthetic */ int $r8$classId;

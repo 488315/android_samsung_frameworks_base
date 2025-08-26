@@ -19,7 +19,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ListBuilder<E> extends AbstractMutableList implements List<E>, RandomAccess, Serializable {
     public static final ListBuilder Empty;
@@ -27,7 +26,6 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
     private boolean isReadOnly;
     private int length;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BuilderSubList<E> extends AbstractMutableList implements List<E>, RandomAccess, Serializable {
         private E[] backing;
         private int length;
@@ -35,7 +33,6 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         private final BuilderSubList<E> parent;
         private final ListBuilder<E> root;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Itr implements ListIterator, KMappedMarker {
             public int expectedModCount;
             public int index;
@@ -143,7 +140,7 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
             ((AbstractList) this).modCount = ((AbstractList) listBuilder).modCount;
         }
 
-        private final Object writeReplace() {
+        private final Object writeReplace() throws NotSerializableException {
             if (((ListBuilder) this.root).isReadOnly) {
                 return new SerializedCollection(this, 0);
             }
@@ -248,12 +245,12 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
             E[] eArr = this.backing;
             int i = this.offset;
             int i2 = this.length;
-            int i3 = 1;
-            for (int i4 = 0; i4 < i2; i4++) {
-                E e = eArr[i + i4];
-                i3 = (i3 * 31) + (e != null ? e.hashCode() : 0);
+            int iHashCode = 1;
+            for (int i3 = 0; i3 < i2; i3++) {
+                E e = eArr[i + i3];
+                iHashCode = (iHashCode * 31) + (e != null ? e.hashCode() : 0);
             }
-            return i3;
+            return iHashCode;
         }
 
         @Override // java.util.AbstractList, java.util.List
@@ -298,11 +295,11 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         public final boolean remove(Object obj) {
             checkIsMutable();
             checkForComodification$4();
-            int indexOf = indexOf(obj);
-            if (indexOf >= 0) {
-                removeAt(indexOf);
+            int iIndexOf = indexOf(obj);
+            if (iIndexOf >= 0) {
+                removeAt(iIndexOf);
             }
-            return indexOf >= 0;
+            return iIndexOf >= 0;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
@@ -324,18 +321,18 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         }
 
         public final Object removeAtInternal(int i) {
-            Object removeAtInternal$1;
+            Object objRemoveAtInternal$1;
             ((java.util.AbstractList) this).modCount++;
             BuilderSubList<E> builderSubList = this.parent;
             if (builderSubList != null) {
-                removeAtInternal$1 = builderSubList.removeAtInternal(i);
+                objRemoveAtInternal$1 = builderSubList.removeAtInternal(i);
             } else {
                 ListBuilder<E> listBuilder = this.root;
                 ListBuilder listBuilder2 = ListBuilder.Empty;
-                removeAtInternal$1 = listBuilder.removeAtInternal$1(i);
+                objRemoveAtInternal$1 = listBuilder.removeAtInternal$1(i);
             }
             this.length--;
-            return removeAtInternal$1;
+            return objRemoveAtInternal$1;
         }
 
         public final void removeRangeInternal(int i, int i2) {
@@ -361,20 +358,20 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         }
 
         public final int retainOrRemoveAllInternal(boolean z, Collection collection, int i, int i2) {
-            int retainOrRemoveAllInternal$1;
+            int iRetainOrRemoveAllInternal$1;
             BuilderSubList<E> builderSubList = this.parent;
             if (builderSubList != null) {
-                retainOrRemoveAllInternal$1 = builderSubList.retainOrRemoveAllInternal(z, collection, i, i2);
+                iRetainOrRemoveAllInternal$1 = builderSubList.retainOrRemoveAllInternal(z, collection, i, i2);
             } else {
                 ListBuilder<E> listBuilder = this.root;
                 ListBuilder listBuilder2 = ListBuilder.Empty;
-                retainOrRemoveAllInternal$1 = listBuilder.retainOrRemoveAllInternal$1(z, collection, i, i2);
+                iRetainOrRemoveAllInternal$1 = listBuilder.retainOrRemoveAllInternal$1(z, collection, i, i2);
             }
-            if (retainOrRemoveAllInternal$1 > 0) {
+            if (iRetainOrRemoveAllInternal$1 > 0) {
                 ((java.util.AbstractList) this).modCount++;
             }
-            this.length -= retainOrRemoveAllInternal$1;
-            return retainOrRemoveAllInternal$1;
+            this.length -= iRetainOrRemoveAllInternal$1;
+            return iRetainOrRemoveAllInternal$1;
         }
 
         @Override // java.util.AbstractList, java.util.List
@@ -472,7 +469,6 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -482,7 +478,6 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Itr implements ListIterator, KMappedMarker {
         public int expectedModCount;
         public int index;
@@ -592,7 +587,7 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
         this(0, 1, null);
     }
 
-    private final Object writeReplace() {
+    private final Object writeReplace() throws NotSerializableException {
         if (this.isReadOnly) {
             return new SerializedCollection(this, 0);
         }
@@ -678,12 +673,12 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
     public final int hashCode() {
         E[] eArr = this.backing;
         int i = this.length;
-        int i2 = 1;
-        for (int i3 = 0; i3 < i; i3++) {
-            E e = eArr[i3];
-            i2 = (i2 * 31) + (e != null ? e.hashCode() : 0);
+        int iHashCode = 1;
+        for (int i2 = 0; i2 < i; i2++) {
+            E e = eArr[i2];
+            iHashCode = (iHashCode * 31) + (e != null ? e.hashCode() : 0);
         }
-        return i2;
+        return iHashCode;
     }
 
     @Override // java.util.AbstractList, java.util.List
@@ -741,11 +736,11 @@ public final class ListBuilder<E> extends AbstractMutableList implements List<E>
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
     public final boolean remove(Object obj) {
         checkIsMutable$1();
-        int indexOf = indexOf(obj);
-        if (indexOf >= 0) {
-            removeAt(indexOf);
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf >= 0) {
+            removeAt(iIndexOf);
         }
-        return indexOf >= 0;
+        return iIndexOf >= 0;
     }
 
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.List

@@ -21,8 +21,8 @@ public class BlockedAppStreamingActivity extends AlertActivity {
         super.onCreate(bundle);
         Intent intent = getIntent();
         ActivityInfo activityInfo = (ActivityInfo) intent.getParcelableExtra(EXTRA_BLOCKED_ACTIVITY_INFO, ActivityInfo.class);
-        CharSequence loadLabel = activityInfo != null ? activityInfo.loadLabel(getPackageManager()) : null;
-        if (TextUtils.isEmpty(loadLabel)) {
+        CharSequence charSequenceLoadLabel = activityInfo != null ? activityInfo.loadLabel(getPackageManager()) : null;
+        if (TextUtils.isEmpty(charSequenceLoadLabel)) {
             Slog.wtf(TAG, "Invalid activity info: " + activityInfo);
             finish();
             return;
@@ -42,7 +42,7 @@ public class BlockedAppStreamingActivity extends AlertActivity {
                 this.mAlertParams.mMessage = getString(R.string.app_streaming_blocked_message, charSequenceExtra);
             }
         } else {
-            this.mAlertParams.mMessage = getString(R.string.app_blocked_message, loadLabel);
+            this.mAlertParams.mMessage = getString(R.string.app_blocked_message, charSequenceLoadLabel);
         }
         this.mAlertParams.mPositiveButtonText = getString(17039370);
         setupAlert();

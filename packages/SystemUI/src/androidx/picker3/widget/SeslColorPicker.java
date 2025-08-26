@@ -47,7 +47,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslColorPicker extends LinearLayout {
     public static int RECENT_COLOR_SLOT_COUNT = 6;
@@ -96,7 +95,6 @@ public class SeslColorPicker extends LinearLayout {
     public boolean mfromSaturationSeekbar;
     public boolean mfromSpectrumTouch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.picker3.widget.SeslColorPicker$5, reason: invalid class name */
     public class AnonymousClass5 {
         public AnonymousClass5() {
@@ -126,7 +124,6 @@ public class SeslColorPicker extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.picker3.widget.SeslColorPicker$6, reason: invalid class name */
     public class AnonymousClass6 {
         public AnonymousClass6() {
@@ -157,7 +154,6 @@ public class SeslColorPicker extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PickedColor {
         public Integer mColor = null;
         public int mAlpha = 255;
@@ -166,7 +162,7 @@ public class SeslColorPicker extends LinearLayout {
 
     /* JADX WARN: Type inference failed for: r5v0, types: [androidx.picker3.widget.SeslColorPicker$4] */
     /* JADX WARN: Type inference failed for: r5v1, types: [androidx.picker3.widget.SeslColorPicker$17] */
-    public SeslColorPicker(Context context, AttributeSet attributeSet) {
+    public SeslColorPicker(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         int[] iArr = {320, 360, 411};
         int i = 0;
@@ -231,13 +227,13 @@ public class SeslColorPicker extends LinearLayout {
                         SeslColorPicker seslColorPicker2 = SeslColorPicker.this;
                         seslColorPicker2.mIsInputFromUser = true;
                         Integer num = (Integer) seslColorPicker2.mRecentColorValues.get(i2);
-                        int intValue = num.intValue();
+                        int iIntValue = num.intValue();
                         PickedColor pickedColor = SeslColorPicker.this.mPickedColor;
                         pickedColor.mColor = num;
                         pickedColor.mAlpha = Color.alpha(num.intValue());
                         Color.colorToHSV(pickedColor.mColor.intValue(), pickedColor.mHsv);
-                        SeslColorPicker.this.mapColorOnColorWheel(intValue);
-                        SeslColorPicker.this.updateHexAndRGBValues(intValue);
+                        SeslColorPicker.this.mapColorOnColorWheel(iIntValue);
+                        SeslColorPicker.this.updateHexAndRGBValues(iIntValue);
                         SeslGradientColorSeekBar seslGradientColorSeekBar = SeslColorPicker.this.mGradientColorSeekBar;
                         if (seslGradientColorSeekBar != null) {
                             int progress = seslGradientColorSeekBar.getProgress();
@@ -246,7 +242,7 @@ public class SeslColorPicker extends LinearLayout {
                         }
                         EdgeLightingStyleActivity.AnonymousClass9 anonymousClass9 = SeslColorPicker.this.mOnColorChangedListener;
                         if (anonymousClass9 != null) {
-                            anonymousClass9.onColorChanged(intValue);
+                            anonymousClass9.onColorChanged(iIntValue);
                         }
                         childAt.setSelected(!childAt.isSelected());
                     } else {
@@ -323,12 +319,12 @@ public class SeslColorPicker extends LinearLayout {
         this.mTabLayoutContainer.addOnTabSelectedListener$1(this.mOnTabSelectListener);
         this.mColorPickerOpacityEditText.addTextChangedListener(new TextWatcher() { // from class: androidx.picker3.widget.SeslColorPicker.1
             @Override // android.text.TextWatcher
-            public final void afterTextChanged(Editable editable) {
+            public final void afterTextChanged(Editable editable) throws NumberFormatException {
                 try {
-                    int parseInt = Integer.parseInt(editable.toString());
+                    int i5 = Integer.parseInt(editable.toString());
                     if (SeslColorPicker.this.mColorPickerOpacityEditText.getText().toString().startsWith("0") && SeslColorPicker.this.mColorPickerOpacityEditText.getText().length() > 1) {
                         SeslColorPicker.this.mColorPickerOpacityEditText.setText("" + Integer.parseInt(SeslColorPicker.this.mColorPickerOpacityEditText.getText().toString()));
-                    } else if (parseInt > 100) {
+                    } else if (i5 > 100) {
                         SeslColorPicker.this.mColorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", 100));
                     }
                 } catch (NumberFormatException e) {
@@ -340,14 +336,14 @@ public class SeslColorPicker extends LinearLayout {
 
             @Override // android.text.TextWatcher
             public final void onTextChanged(CharSequence charSequence, int i5, int i6, int i7) {
-                int intValue;
-                if (SeslColorPicker.this.mOpacitySeekBar == null || charSequence.toString().trim().length() <= 0 || (intValue = Integer.valueOf(charSequence.toString()).intValue()) > 100) {
+                int iIntValue;
+                if (SeslColorPicker.this.mOpacitySeekBar == null || charSequence.toString().trim().length() <= 0 || (iIntValue = Integer.valueOf(charSequence.toString()).intValue()) > 100) {
                     return;
                 }
                 SeslColorPicker seslColorPicker = SeslColorPicker.this;
                 if (seslColorPicker.mIsInputFromUser) {
                     seslColorPicker.mColorPickerOpacityEditText.setTag(0);
-                    SeslColorPicker.this.mOpacitySeekBar.setProgress((intValue * 255) / 100);
+                    SeslColorPicker.this.mOpacitySeekBar.setProgress((iIntValue * 255) / 100);
                 }
             }
 
@@ -420,24 +416,24 @@ public class SeslColorPicker extends LinearLayout {
                     fArr[2] = progress;
                     pickedColor.mColor = Integer.valueOf(Color.HSVToColor(pickedColor.mAlpha, fArr));
                 }
-                int intValue = SeslColorPicker.this.mPickedColor.mColor.intValue();
+                int iIntValue = SeslColorPicker.this.mPickedColor.mColor.intValue();
                 SeslColorPicker seslColorPicker5 = SeslColorPicker.this;
                 if (seslColorPicker5.mfromEditText) {
-                    seslColorPicker5.updateHexAndRGBValues(intValue);
+                    seslColorPicker5.updateHexAndRGBValues(iIntValue);
                     SeslColorPicker.this.mfromEditText = false;
                 }
                 GradientDrawable gradientDrawable2 = SeslColorPicker.this.mSelectedColorBackground;
                 if (gradientDrawable2 != null) {
-                    gradientDrawable2.setColor(intValue);
+                    gradientDrawable2.setColor(iIntValue);
                 }
                 SeslColorPicker seslColorPicker6 = SeslColorPicker.this;
                 SeslOpacitySeekBar seslOpacitySeekBar = seslColorPicker6.mOpacitySeekBar;
                 if (seslOpacitySeekBar != null) {
-                    seslOpacitySeekBar.changeColorBase(intValue, seslColorPicker6.mPickedColor.mAlpha);
+                    seslOpacitySeekBar.changeColorBase(iIntValue, seslColorPicker6.mPickedColor.mAlpha);
                 }
                 EdgeLightingStyleActivity.AnonymousClass9 anonymousClass9 = SeslColorPicker.this.mOnColorChangedListener;
                 if (anonymousClass9 != null) {
-                    anonymousClass9.onColorChanged(intValue);
+                    anonymousClass9.onColorChanged(iIntValue);
                 }
             }
 
@@ -507,7 +503,7 @@ public class SeslColorPicker extends LinearLayout {
         this.mEyeDropperView.setOnClickListener(new View.OnClickListener() { // from class: androidx.picker3.widget.SeslColorPicker$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SeslColorPicker seslColorPicker = SeslColorPicker.this;
+                SeslColorPicker seslColorPicker = this.f$0;
                 SeslColorPickerDialog$$ExternalSyntheticLambda0 seslColorPickerDialog$$ExternalSyntheticLambda0 = seslColorPicker.mOnEyeDropperListener;
                 if (seslColorPickerDialog$$ExternalSyntheticLambda0 != null) {
                     Context context2 = seslColorPickerDialog$$ExternalSyntheticLambda0.f$1;
@@ -549,17 +545,17 @@ public class SeslColorPicker extends LinearLayout {
             public final void onTextChanged(CharSequence charSequence, int i6, int i7, int i8) {
                 int length = charSequence.toString().trim().length();
                 if (length > 0 && length == 6) {
-                    int parseColor = Color.parseColor("#" + charSequence.toString());
-                    if (!SeslColorPicker.this.mColorPickerRedEditText.getText().toString().trim().equalsIgnoreCase("" + Color.red(parseColor))) {
-                        SeslColorPicker.this.mColorPickerRedEditText.setText("" + Color.red(parseColor));
+                    int color3 = Color.parseColor("#" + charSequence.toString());
+                    if (!SeslColorPicker.this.mColorPickerRedEditText.getText().toString().trim().equalsIgnoreCase("" + Color.red(color3))) {
+                        SeslColorPicker.this.mColorPickerRedEditText.setText("" + Color.red(color3));
                     }
-                    if (!SeslColorPicker.this.mColorPickerGreenEditText.getText().toString().trim().equalsIgnoreCase("" + Color.green(parseColor))) {
-                        SeslColorPicker.this.mColorPickerGreenEditText.setText("" + Color.green(parseColor));
+                    if (!SeslColorPicker.this.mColorPickerGreenEditText.getText().toString().trim().equalsIgnoreCase("" + Color.green(color3))) {
+                        SeslColorPicker.this.mColorPickerGreenEditText.setText("" + Color.green(color3));
                     }
-                    if (SeslColorPicker.this.mColorPickerBlueEditText.getText().toString().trim().equalsIgnoreCase("" + Color.blue(parseColor))) {
+                    if (SeslColorPicker.this.mColorPickerBlueEditText.getText().toString().trim().equalsIgnoreCase("" + Color.blue(color3))) {
                         return;
                     }
-                    SeslColorPicker.this.mColorPickerBlueEditText.setText("" + Color.blue(parseColor));
+                    SeslColorPicker.this.mColorPickerBlueEditText.setText("" + Color.blue(color3));
                 }
             }
 
@@ -617,24 +613,24 @@ public class SeslColorPicker extends LinearLayout {
                 }
 
                 @Override // android.text.TextWatcher
-                public final void onTextChanged(CharSequence charSequence, int i7, int i8, int i9) {
-                    String charSequence2 = charSequence.toString();
-                    if (charSequence2.equalsIgnoreCase(SeslColorPicker.this.beforeValue) || charSequence2.trim().length() <= 0) {
+                public final void onTextChanged(CharSequence charSequence, int i7, int i8, int i9) throws NumberFormatException {
+                    String string = charSequence.toString();
+                    if (string.equalsIgnoreCase(SeslColorPicker.this.beforeValue) || string.trim().length() <= 0) {
                         return;
                     }
                     SeslColorPicker seslColorPicker = SeslColorPicker.this;
-                    int intValue = ((Integer.valueOf(seslColorPicker.mColorPickerRedEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerRedEditText.getText().toString().trim() : "0").intValue() & 255) << 16) | ((seslColorPicker.mOpacitySeekBar.getProgress() & 255) << 24) | ((Integer.valueOf(seslColorPicker.mColorPickerGreenEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerGreenEditText.getText().toString().trim() : "0").intValue() & 255) << 8) | (Integer.valueOf(seslColorPicker.mColorPickerBlueEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerBlueEditText.getText().toString().trim() : "0").intValue() & 255);
-                    String format = String.format("%08x", Integer.valueOf(intValue));
-                    String substring = format.substring(2, format.length());
-                    seslColorPicker.mColorPickerHexEditText.setText("" + substring.toUpperCase());
+                    int iIntValue = ((Integer.valueOf(seslColorPicker.mColorPickerRedEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerRedEditText.getText().toString().trim() : "0").intValue() & 255) << 16) | ((seslColorPicker.mOpacitySeekBar.getProgress() & 255) << 24) | ((Integer.valueOf(seslColorPicker.mColorPickerGreenEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerGreenEditText.getText().toString().trim() : "0").intValue() & 255) << 8) | (Integer.valueOf(seslColorPicker.mColorPickerBlueEditText.getText().toString().trim().length() > 0 ? seslColorPicker.mColorPickerBlueEditText.getText().toString().trim() : "0").intValue() & 255);
+                    String str = String.format("%08x", Integer.valueOf(iIntValue));
+                    String strSubstring = str.substring(2, str.length());
+                    seslColorPicker.mColorPickerHexEditText.setText("" + strSubstring.toUpperCase());
                     EditText editText2 = seslColorPicker.mColorPickerHexEditText;
                     editText2.setSelection(editText2.getText().length());
                     if (!seslColorPicker.mfromSaturationSeekbar && !seslColorPicker.mfromSpectrumTouch) {
-                        seslColorPicker.mapColorOnColorWheel(intValue);
+                        seslColorPicker.mapColorOnColorWheel(iIntValue);
                     }
                     EdgeLightingStyleActivity.AnonymousClass9 anonymousClass9 = seslColorPicker.mOnColorChangedListener;
                     if (anonymousClass9 != null) {
-                        anonymousClass9.onColorChanged(intValue);
+                        anonymousClass9.onColorChanged(iIntValue);
                     }
                 }
             });
@@ -675,15 +671,15 @@ public class SeslColorPicker extends LinearLayout {
         this.mColorSpectrumView.mListener = new AnonymousClass6();
         this.mColorPickerSaturationEditText.addTextChangedListener(new TextWatcher() { // from class: androidx.picker3.widget.SeslColorPicker.7
             @Override // android.text.TextWatcher
-            public final void afterTextChanged(Editable editable) {
+            public final void afterTextChanged(Editable editable) throws NumberFormatException {
                 if (SeslColorPicker.this.mTextFromRGB) {
                     return;
                 }
                 try {
-                    int parseInt = Integer.parseInt(editable.toString());
+                    int i = Integer.parseInt(editable.toString());
                     if (SeslColorPicker.this.mColorPickerSaturationEditText.getText().toString().startsWith("0") && SeslColorPicker.this.mColorPickerSaturationEditText.getText().length() > 1) {
                         SeslColorPicker.this.mColorPickerSaturationEditText.setText("" + Integer.parseInt(SeslColorPicker.this.mColorPickerSaturationEditText.getText().toString()));
-                    } else if (parseInt > 100) {
+                    } else if (i > 100) {
                         SeslColorPicker.this.mColorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", 100));
                     }
                 } catch (NumberFormatException e) {
@@ -703,13 +699,13 @@ public class SeslColorPicker extends LinearLayout {
                     if (seslColorPicker.mGradientColorSeekBar == null || charSequence.toString().trim().length() <= 0) {
                         return;
                     }
-                    int intValue = Integer.valueOf(charSequence.toString()).intValue();
+                    int iIntValue = Integer.valueOf(charSequence.toString()).intValue();
                     SeslColorPicker seslColorPicker2 = SeslColorPicker.this;
                     seslColorPicker2.mfromEditText = true;
                     seslColorPicker2.mFlagVar = false;
-                    if (intValue <= 100) {
+                    if (iIntValue <= 100) {
                         seslColorPicker2.mColorPickerSaturationEditText.setTag(0);
-                        SeslColorPicker.this.mGradientColorSeekBar.setProgress(intValue);
+                        SeslColorPicker.this.mGradientColorSeekBar.setProgress(iIntValue);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -871,16 +867,16 @@ public class SeslColorPicker extends LinearLayout {
             pickedColor5.mColor = Integer.valueOf(Color.HSVToColor(i2, pickedColor5.mHsv));
         }
         if (this.mOpacitySeekBar != null) {
-            int ceil = (int) Math.ceil((r7.getProgress() * 100) / 255.0f);
-            this.mColorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", Integer.valueOf(ceil)));
-            this.mColorPickerOpacityEditText.setSelection(String.valueOf(ceil).length());
+            int iCeil = (int) Math.ceil((r7.getProgress() * 100) / 255.0f);
+            this.mColorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", Integer.valueOf(iCeil)));
+            this.mColorPickerOpacityEditText.setSelection(String.valueOf(iCeil).length());
         }
     }
 
     public final void setCurrentColorViewDescription(int i, int i2) {
-        StringBuilder sb;
+        StringBuilder itemDescription$2;
+        StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-        StringBuilder sb3 = new StringBuilder();
         SeslColorSwatchView seslColorSwatchView = this.mColorSwatchView;
         if (seslColorSwatchView != null) {
             Point cursorIndexAt = seslColorSwatchView.getCursorIndexAt(i);
@@ -889,27 +885,27 @@ public class SeslColorPicker extends LinearLayout {
                 int i3 = cursorIndexAt.x;
                 StringBuilder[] sbArr2 = sbArr[i3];
                 int i4 = cursorIndexAt.y;
-                sb3 = sbArr2[i4];
-                if (sb3 == null) {
+                sb2 = sbArr2[i4];
+                if (sb2 == null) {
                     int i5 = SeslColorSwatchView.SeslColorSwatchViewTouchHelper.$r8$clinit;
-                    sb = seslColorSwatchView.mTouchHelper.getItemDescription$2((i4 * 11) + i3);
+                    itemDescription$2 = seslColorSwatchView.mTouchHelper.getItemDescription$2((i4 * 11) + i3);
                 }
             } else {
-                sb = null;
+                itemDescription$2 = null;
             }
-            sb3 = sb;
+            sb2 = itemDescription$2;
         }
-        if (sb3 != null) {
-            sb2.append(", ");
-            sb2.append((CharSequence) sb3);
+        if (sb2 != null) {
+            sb.append(", ");
+            sb.append((CharSequence) sb2);
         }
         if (i2 == 0) {
-            sb2.insert(0, this.mResources.getString(R.string.sesl_color_picker_current));
+            sb.insert(0, this.mResources.getString(R.string.sesl_color_picker_current));
         } else {
             if (i2 != 1) {
                 return;
             }
-            sb2.insert(0, this.mResources.getString(R.string.sesl_color_picker_new));
+            sb.insert(0, this.mResources.getString(R.string.sesl_color_picker_new));
         }
     }
 
@@ -950,9 +946,9 @@ public class SeslColorPicker extends LinearLayout {
             if (seslGradientColorSeekBar != null) {
                 int progress2 = seslGradientColorSeekBar.getProgress();
                 SeslGradientColorSeekBar seslGradientColorSeekBar2 = this.mGradientColorSeekBar;
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 if (seslGradientColorSeekBar2.mProgressDrawable != null) {
-                    int alphaComponent = ColorUtils.setAlphaComponent(intValue, 255);
+                    int alphaComponent = ColorUtils.setAlphaComponent(iIntValue, 255);
                     if (String.format("%08x", Integer.valueOf(alphaComponent)).substring(2).equals(seslGradientColorSeekBar2.getResources().getString(R.string.sesl_color_black_000000))) {
                         seslGradientColorSeekBar2.mColors[1] = Color.parseColor("#" + seslGradientColorSeekBar2.getResources().getString(R.string.sesl_color_white_ffffff));
                     } else {
@@ -976,15 +972,15 @@ public class SeslColorPicker extends LinearLayout {
 
     public final void updateHexAndRGBValues(int i) {
         if (i != 0) {
-            String format = String.format("%08x", Integer.valueOf(i));
-            String substring = format.substring(2, format.length());
-            this.mColorPickerHexEditText.setText("" + substring.toUpperCase());
+            String str = String.format("%08x", Integer.valueOf(i));
+            String strSubstring = str.substring(2, str.length());
+            this.mColorPickerHexEditText.setText("" + strSubstring.toUpperCase());
             EditText editText = this.mColorPickerHexEditText;
             editText.setSelection(editText.getText().length());
-            int parseColor = Color.parseColor("#".concat(substring));
-            this.mColorPickerRedEditText.setText("" + Color.red(parseColor));
-            this.mColorPickerBlueEditText.setText("" + Color.blue(parseColor));
-            this.mColorPickerGreenEditText.setText("" + Color.green(parseColor));
+            int color = Color.parseColor("#".concat(strSubstring));
+            this.mColorPickerRedEditText.setText("" + Color.red(color));
+            this.mColorPickerBlueEditText.setText("" + Color.blue(color));
+            this.mColorPickerGreenEditText.setText("" + Color.green(color));
         }
     }
 
@@ -1000,16 +996,16 @@ public class SeslColorPicker extends LinearLayout {
             View childAt = this.mRecentColorListLayout.getChildAt(i);
             if (i < size) {
                 Integer num = (Integer) this.mRecentColorValues.get(i);
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 setImageColor(childAt, num);
                 float[] fArr = new float[3];
-                Color.colorToHSV(intValue, fArr);
-                int round = Math.round(fArr[0]);
-                int round2 = Math.round(fArr[1] * 100.0f);
-                int round3 = Math.round(fArr[2] * 100.0f);
-                int i2 = (int) (round3 / (fArr[1] + 1.0f));
+                Color.colorToHSV(iIntValue, fArr);
+                int iRound = Math.round(fArr[0]);
+                int iRound2 = Math.round(fArr[1] * 100.0f);
+                int iRound3 = Math.round(fArr[2] * 100.0f);
+                int i2 = (int) (iRound3 / (fArr[1] + 1.0f));
                 StringBuilder sb = new StringBuilder();
-                sb.append((CharSequence) this.mColorSpectrumView.getTalkbackDescription(round, round2, round3, i2));
+                sb.append((CharSequence) this.mColorSpectrumView.getTalkbackDescription(iRound, iRound2, iRound3, i2));
                 sb.insert(0, this.mColorDescription[i] + ", ");
                 childAt.setContentDescription(sb);
                 childAt.setFocusable(true);
@@ -1018,25 +1014,25 @@ public class SeslColorPicker extends LinearLayout {
         }
         Integer num2 = this.mRecentColorInfo.mCurrentColor;
         if (num2 != null) {
-            int intValue2 = num2.intValue();
-            this.mCurrentColorBackground.setColor(intValue2);
-            setCurrentColorViewDescription(intValue2, 0);
-            this.mSelectedColorBackground.setColor(intValue2);
-            mapColorOnColorWheel(intValue2);
+            int iIntValue2 = num2.intValue();
+            this.mCurrentColorBackground.setColor(iIntValue2);
+            setCurrentColorViewDescription(iIntValue2, 0);
+            this.mSelectedColorBackground.setColor(iIntValue2);
+            mapColorOnColorWheel(iIntValue2);
             updateHexAndRGBValues(this.mCurrentColorBackground.getColor().getDefaultColor());
         } else if (size != 0) {
-            int intValue3 = ((Integer) this.mRecentColorValues.get(0)).intValue();
-            this.mCurrentColorBackground.setColor(intValue3);
-            setCurrentColorViewDescription(intValue3, 0);
-            this.mSelectedColorBackground.setColor(intValue3);
-            mapColorOnColorWheel(intValue3);
+            int iIntValue3 = ((Integer) this.mRecentColorValues.get(0)).intValue();
+            this.mCurrentColorBackground.setColor(iIntValue3);
+            setCurrentColorViewDescription(iIntValue3, 0);
+            this.mSelectedColorBackground.setColor(iIntValue3);
+            mapColorOnColorWheel(iIntValue3);
             updateHexAndRGBValues(this.mCurrentColorBackground.getColor().getDefaultColor());
         }
         Integer num3 = this.mRecentColorInfo.mNewColor;
         if (num3 != null) {
-            int intValue4 = num3.intValue();
-            this.mSelectedColorBackground.setColor(intValue4);
-            mapColorOnColorWheel(intValue4);
+            int iIntValue4 = num3.intValue();
+            this.mSelectedColorBackground.setColor(iIntValue4);
+            mapColorOnColorWheel(iIntValue4);
             updateHexAndRGBValues(this.mSelectedColorBackground.getColor().getDefaultColor());
         }
     }

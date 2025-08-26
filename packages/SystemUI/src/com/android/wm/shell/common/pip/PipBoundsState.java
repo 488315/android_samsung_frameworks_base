@@ -1,9 +1,11 @@
 package com.android.wm.shell.common.pip;
 
 import android.app.ActivityTaskManager;
+import android.app.PictureInPictureParams;
 import android.app.PictureInPictureUiState;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Debug;
@@ -37,7 +39,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipBoundsState {
     public float mAspectRatio;
@@ -79,12 +80,10 @@ public class PipBoundsState {
     public final List mOnPipComponentChangedListeners = new ArrayList();
     public final Rect mStashInsetBounds = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LauncherState {
         public int mAppIconSizePx;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MotionBoundsState {
         public final Rect mBoundsInMotion = new Rect();
         public final Rect mAnimatingToBounds = new Rect();
@@ -98,12 +97,10 @@ public class PipBoundsState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnPipComponentChangedListener {
         void onPipComponentChanged();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class PipReentryState {
         public final float mBoundsScale;
         public final float mSnapFraction;
@@ -123,7 +120,7 @@ public class PipBoundsState {
         addPipExclusionBoundsChangeCallback(new Consumer() { // from class: com.android.wm.shell.common.pip.PipBoundsState$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                PipBoundsState.this.mBoundsScale = Math.min(r1.mBounds.width() / r1.mMaxSize.x, 1.0f);
+                this.f$0.mBoundsScale = Math.min(r1.mBounds.width() / r1.mMaxSize.x, 1.0f);
             }
         });
     }
@@ -141,35 +138,35 @@ public class PipBoundsState {
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  PipBoundsState", "    mBounds=");
-        m.append(this.mBounds);
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  PipBoundsState", "    mBounds=");
+        sbM.append(this.mBounds);
+        printWriter.println(sbM.toString());
         printWriter.println("    mNormalBounds=" + this.mNormalBounds);
         printWriter.println("    mExpandedBounds=" + this.mExpandedBounds);
         printWriter.println("    mMovementBounds=" + this.mMovementBounds);
         printWriter.println("    mNormalMovementBounds=" + this.mNormalMovementBounds);
         printWriter.println("    mExpandedMovementBounds=" + this.mExpandedMovementBounds);
         printWriter.println("    mLastPipComponentName=" + this.mLastPipComponentName);
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mAspectRatio="), this.mAspectRatio, printWriter, "    mStashedState="), this.mStashedState, printWriter, "    mStashOffset="), this.mStashOffset, printWriter, "    mIsImeShowing="), this.mIsImeShowing, printWriter, "    mImeHeight=");
-        m2.append(this.mImeHeight);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mAspectRatio="), this.mAspectRatio, printWriter, "    mStashedState="), this.mStashedState, printWriter, "    mStashOffset="), this.mStashOffset, printWriter, "    mIsImeShowing="), this.mIsImeShowing, printWriter, "    mImeHeight=");
+        sbM2.append(this.mImeHeight);
+        printWriter.println(sbM2.toString());
         printWriter.println("    mIsShelfShowing=false");
         printWriter.println("    mShelfHeight=0");
-        StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mHasUserMovedPip="), this.mHasUserMovedPip, printWriter, "    mHasUserResizedPip="), this.mHasUserResizedPip, printWriter, "    mMinSize=");
-        m3.append(this.mMinSize);
-        printWriter.println(m3.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mHasUserMovedPip="), this.mHasUserMovedPip, printWriter, "    mHasUserResizedPip="), this.mHasUserResizedPip, printWriter, "    mMinSize=");
+        sbM3.append(this.mMinSize);
+        printWriter.println(sbM3.toString());
         printWriter.println("    mMaxSize=" + this.mMaxSize);
-        StringBuilder m4 = MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mBoundsScale"), this.mBoundsScale, printWriter, "    mRestrictedKeepClearAreas=");
-        m4.append(this.mRestrictedKeepClearAreas);
-        printWriter.println(m4.toString());
+        StringBuilder sbM4 = MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mBoundsScale"), this.mBoundsScale, printWriter, "    mRestrictedKeepClearAreas=");
+        sbM4.append(this.mRestrictedKeepClearAreas);
+        printWriter.println(sbM4.toString());
         printWriter.println("    mUnrestrictedKeepClearAreas=" + this.mUnrestrictedKeepClearAreas);
         PipReentryState pipReentryState = this.mPipReentryState;
         if (pipReentryState == null) {
             printWriter.println("    mPipReentryState=null");
         } else {
-            StringBuilder m5 = MagnificationImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    PipBoundsState$PipReentryState", "      mBoundsScale="), pipReentryState.mBoundsScale, printWriter, "      mSnapFraction=");
-            m5.append(pipReentryState.mSnapFraction);
-            printWriter.println(m5.toString());
+            StringBuilder sbM5 = MagnificationImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    PipBoundsState$PipReentryState", "      mBoundsScale="), pipReentryState.mBoundsScale, printWriter, "      mSnapFraction=");
+            sbM5.append(pipReentryState.mSnapFraction);
+            printWriter.println(sbM5.toString());
         }
         LauncherState launcherState = this.mLauncherState;
         launcherState.getClass();
@@ -199,12 +196,12 @@ public class PipBoundsState {
         PipDisplayLayoutState pipDisplayLayoutState = this.mPipDisplayLayoutState;
         Rect rect = pipDisplayLayoutState.getDisplayLayout().mStableInsets;
         DisplayLayout displayLayout = pipDisplayLayoutState.getDisplayLayout();
-        int navigationBarPosition = DisplayLayout.navigationBarPosition(this.mContext.getResources(), displayLayout.mWidth, displayLayout.mHeight, displayLayout.mRotation);
+        int iNavigationBarPosition = DisplayLayout.navigationBarPosition(this.mContext.getResources(), displayLayout.mWidth, displayLayout.mHeight, displayLayout.mRotation);
         int i = Settings.System.getInt(pipEdgePanelSupport.mContext.getContentResolver(), "active_edge_area", 1);
         this.mStashInsetBounds.setEmpty();
-        if (navigationBarPosition == 1 || i == 0) {
+        if (iNavigationBarPosition == 1 || i == 0) {
             this.mStashInsetBounds.left = rect.left;
-        } else if (navigationBarPosition == 2 || i == 1) {
+        } else if (iNavigationBarPosition == 2 || i == 1) {
             this.mStashInsetBounds.right = rect.right;
         }
         return this.mStashInsetBounds;
@@ -271,55 +268,29 @@ public class PipBoundsState {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setBoundsStateForEntry(android.content.ComponentName r1, android.content.pm.ActivityInfo r2, android.app.PictureInPictureParams r3, com.android.wm.shell.common.pip.PipBoundsAlgorithm r4) {
-        /*
-            r0 = this;
-            r0.setLastPipComponentName(r1)
-            if (r3 == 0) goto L13
-            r4.getClass()
-            boolean r1 = r3.hasSetAspectRatio()
-            if (r1 == 0) goto L13
-            float r1 = r3.getAspectRatioFloat()
-            goto L15
-        L13:
-            float r1 = r4.mDefaultAspectRatio
-        L15:
-            r0.setAspectRatio(r1)
-            android.util.Size r1 = r4.getMinimalSize(r2)
-            r0.setOverrideMinSize(r1)
-            com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda3 r0 = r0.mOnPipTaskAppearedCallback
-            if (r0 == 0) goto L26
-            r0.run()
-        L26:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.pip.PipBoundsState.setBoundsStateForEntry(android.content.ComponentName, android.content.pm.ActivityInfo, android.app.PictureInPictureParams, com.android.wm.shell.common.pip.PipBoundsAlgorithm):void");
+    public final void setBoundsStateForEntry(ComponentName componentName, ActivityInfo activityInfo, PictureInPictureParams pictureInPictureParams, PipBoundsAlgorithm pipBoundsAlgorithm) {
+        float aspectRatioFloat;
+        setLastPipComponentName(componentName);
+        if (pictureInPictureParams != null) {
+            pipBoundsAlgorithm.getClass();
+            aspectRatioFloat = pictureInPictureParams.hasSetAspectRatio() ? pictureInPictureParams.getAspectRatioFloat() : pipBoundsAlgorithm.mDefaultAspectRatio;
+        }
+        setAspectRatio(aspectRatioFloat);
+        setOverrideMinSize(pipBoundsAlgorithm.getMinimalSize(activityInfo));
+        PipController$$ExternalSyntheticLambda3 pipController$$ExternalSyntheticLambda3 = this.mOnPipTaskAppearedCallback;
+        if (pipController$$ExternalSyntheticLambda3 != null) {
+            pipController$$ExternalSyntheticLambda3.run();
+        }
     }
 
     public final void setHasUserResizedPip() {
         this.mHasUserResizedPip = true;
         if (this.mIsImeShowing) {
             this.mRestoreBounds.setEmpty();
-        }
-    }
-
-    public final void setImeVisibility(int i, boolean z) {
-        this.mIsImeShowing = z;
-        this.mImeHeight = i;
-        if (z) {
-            if (this.mHasUserResizedPip || this.mHasUserMovedPip || getBounds().width() <= this.mNormalBounds.width() || getBounds().height() <= this.mNormalBounds.height()) {
-                this.mRestoreBounds.set(getBounds());
-                return;
-            }
-            int i2 = getBounds().right;
-            int i3 = getBounds().bottom;
-            this.mRestoreBounds.set(i2 - this.mNormalBounds.width(), i3 - this.mNormalBounds.height(), i2, i3);
         }
     }
 
@@ -366,9 +337,9 @@ public class PipBoundsState {
             }
         }
         PhoneSizeSpecSource phoneSizeSpecSource = (PhoneSizeSpecSource) sizeSpecSource;
-        boolean equals = Objects.equals(size, phoneSizeSpecSource.getOverrideMinSize());
+        boolean zEquals = Objects.equals(size, phoneSizeSpecSource.getOverrideMinSize());
         phoneSizeSpecSource.mOverrideMinSize = size;
-        if (equals || (pipController$$ExternalSyntheticLambda3 = this.mOnMinimalSizeChangeCallback) == null) {
+        if (zEquals || (pipController$$ExternalSyntheticLambda3 = this.mOnMinimalSizeChangeCallback) == null) {
             return;
         }
         pipController$$ExternalSyntheticLambda3.run();

@@ -239,12 +239,12 @@ public final class TvTrackInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int hash = Objects.hash(this.mId, Integer.valueOf(this.mType), this.mLanguage, this.mDescription);
+        int iHash = Objects.hash(this.mId, Integer.valueOf(this.mType), this.mLanguage, this.mDescription);
         int i = this.mType;
         if (i == 0) {
-            return Objects.hash(Integer.valueOf(hash), Integer.valueOf(this.mAudioChannelCount), Integer.valueOf(this.mAudioSampleRate));
+            return Objects.hash(Integer.valueOf(iHash), Integer.valueOf(this.mAudioChannelCount), Integer.valueOf(this.mAudioSampleRate));
         }
-        return i == 1 ? Objects.hash(Integer.valueOf(hash), Integer.valueOf(this.mVideoWidth), Integer.valueOf(this.mVideoHeight), Float.valueOf(this.mVideoFrameRate), Float.valueOf(this.mVideoPixelAspectRatio)) : hash;
+        return i == 1 ? Objects.hash(Integer.valueOf(iHash), Integer.valueOf(this.mVideoWidth), Integer.valueOf(this.mVideoHeight), Float.valueOf(this.mVideoFrameRate), Float.valueOf(this.mVideoPixelAspectRatio)) : iHash;
     }
 
     public static final class Builder {

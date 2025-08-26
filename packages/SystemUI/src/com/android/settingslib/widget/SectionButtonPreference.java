@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.google.android.material.button.MaterialButton;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SectionButtonPreference extends Preference {
     public MaterialButton button;
@@ -24,8 +23,8 @@ public final class SectionButtonPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedAbove = false;
         preferenceViewHolder.mDividerAllowedBelow = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.settingslib_section_button);
-        MaterialButton materialButton = findViewById instanceof MaterialButton ? (MaterialButton) findViewById : null;
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.settingslib_section_button);
+        MaterialButton materialButton = viewFindViewById instanceof MaterialButton ? (MaterialButton) viewFindViewById : null;
         this.button = materialButton;
         if (materialButton != null) {
             materialButton.setText(this.mTitle);
@@ -34,10 +33,10 @@ public final class SectionButtonPreference extends Preference {
             materialButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.SectionButtonPreference$onBindViewHolder$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    BannerMessagePreferenceGroup$$ExternalSyntheticLambda0 bannerMessagePreferenceGroup$$ExternalSyntheticLambda0 = SectionButtonPreference.this.clickListener;
+                    BannerMessagePreferenceGroup$$ExternalSyntheticLambda0 bannerMessagePreferenceGroup$$ExternalSyntheticLambda0 = this.this$0.clickListener;
                     if (bannerMessagePreferenceGroup$$ExternalSyntheticLambda0 != null) {
                         view.getClass();
-                        bannerMessagePreferenceGroup$$ExternalSyntheticLambda0.mo779invoke(view);
+                        bannerMessagePreferenceGroup$$ExternalSyntheticLambda0.mo781invoke(view);
                     }
                 }
             });

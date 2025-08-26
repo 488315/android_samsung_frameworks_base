@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MainFragment extends Fragment {
     public BadgeObserver badgeObserver;
@@ -63,7 +63,6 @@ public final class MainFragment extends Fragment {
     public final SALogger saLogger;
     public View view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -125,7 +124,7 @@ public final class MainFragment extends Fragment {
     }
 
     @Override // androidx.fragment.app.Fragment
-    public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
+    public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) throws Resources.NotFoundException {
         Log.d("MainFragment", "onCreateView");
         this.view = layoutInflater.inflate(R.layout.fragment_controls_main, viewGroup, false);
         onConfigChanged();
@@ -197,7 +196,7 @@ public final class MainFragment extends Fragment {
     /* JADX WARN: Type inference failed for: r3v5, types: [T, android.content.Intent] */
     @Override // androidx.fragment.app.Fragment
     public final boolean onOptionsItemSelected(MenuItem menuItem) {
-        Object obj;
+        Object next;
         ComponentName componentName;
         Log.d("MainFragment", "onOptionsItemSelected item = " + menuItem);
         int itemId = menuItem.getItemId();
@@ -225,15 +224,15 @@ public final class MainFragment extends Fragment {
             Iterator it = statefulControlAdapter.models.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (((MainModel) obj) instanceof MainComponentModel) {
+                next = it.next();
+                if (((MainModel) next) instanceof MainComponentModel) {
                     break;
                 }
             }
-            MainModel mainModel = (MainModel) obj;
+            MainModel mainModel = (MainModel) next;
             if (mainModel != null && (componentName = ((MainComponentModel) mainModel).selected) != null) {
                 ?? intent = new Intent(statefulControlAdapter.context, (Class<?>) SecControlsFavoritingActivity.class);
                 intent.putExtra("extra_app_label", ((ControlsListingControllerImpl) this.listingController).getAppLabel(componentName));

@@ -36,18 +36,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleSpaceUtils {
     public static final PeopleTileKey EMPTY_KEY = new PeopleTileKey("", -1, "");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NotificationAction {
         POSTED,
         REMOVED
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum PeopleSpaceWidgetEvent implements UiEventLogger.UiEventEnum {
         PEOPLE_SPACE_WIDGET_DELETED(666),
         PEOPLE_SPACE_WIDGET_ADDED(667),
@@ -74,34 +71,34 @@ public class PeopleSpaceUtils {
                 return bitmapDrawable.getBitmap();
             }
         }
-        Bitmap createBitmap = (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) ? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) : Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) ? Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888) : Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static List<String> getContactLookupKeysWithBirthdaysToday(Context context) {
         ArrayList arrayList = new ArrayList(1);
-        String format = new SimpleDateFormat("MM-dd").format(new Date());
-        Cursor cursor = null;
+        String str = new SimpleDateFormat("MM-dd").format(new Date());
+        Cursor cursorQuery = null;
         try {
             try {
-                cursor = context.getContentResolver().query(ContactsContract.Data.CONTENT_URI, new String[]{"lookup", "data1"}, "mimetype= ? AND data2=3 AND (substr(data1,6) = ? OR substr(data1,3) = ? )", new String[]{"vnd.android.cursor.item/contact_event", format, format}, null);
-                while (cursor != null) {
-                    if (!cursor.moveToNext()) {
+                cursorQuery = context.getContentResolver().query(ContactsContract.Data.CONTENT_URI, new String[]{"lookup", "data1"}, "mimetype= ? AND data2=3 AND (substr(data1,6) = ? OR substr(data1,3) = ? )", new String[]{"vnd.android.cursor.item/contact_event", str, str}, null);
+                while (cursorQuery != null) {
+                    if (!cursorQuery.moveToNext()) {
                         break;
                     }
-                    arrayList.add(cursor.getString(cursor.getColumnIndex("lookup")));
+                    arrayList.add(cursorQuery.getString(cursorQuery.getColumnIndex("lookup")));
                 }
-                if (cursor != null) {
-                    cursor.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                     return arrayList;
                 }
             } catch (SQLException e) {
                 Log.e("PeopleSpaceUtils", "Failed to query birthdays", e);
-                if (cursor != null) {
-                    cursor.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
             }
             return arrayList;
@@ -109,7 +106,7 @@ public class PeopleSpaceUtils {
         }
     }
 
-    public static void getDataFromContacts(Context context, PeopleSpaceWidgetManager peopleSpaceWidgetManager, Map<Integer, PeopleSpaceTile> map, int[] iArr) {
+    public static void getDataFromContacts(Context context, PeopleSpaceWidgetManager peopleSpaceWidgetManager, Map<Integer, PeopleSpaceTile> map, int[] iArr) throws Throwable {
         if (iArr.length == 0) {
             return;
         }
@@ -122,48 +119,48 @@ public class PeopleSpaceUtils {
                 Cursor cursor = null;
                 try {
                     try {
-                        Cursor query = context.getContentResolver().query(peopleSpaceTile.getContactUri(), null, null, null, null);
-                        while (query != null) {
+                        Cursor cursorQuery = context.getContentResolver().query(peopleSpaceTile.getContactUri(), null, null, null, null);
+                        while (cursorQuery != null) {
                             try {
-                                if (!query.moveToNext()) {
+                                if (!cursorQuery.moveToNext()) {
                                     break;
                                 }
-                                String string = query.getString(query.getColumnIndex("lookup"));
-                                int columnIndex = query.getColumnIndex("starred");
-                                float f = 0.5f;
-                                if (columnIndex >= 0 && query.getInt(columnIndex) != 0) {
-                                    f = Math.max(0.5f, 1.0f);
+                                String string = cursorQuery.getString(cursorQuery.getColumnIndex("lookup"));
+                                int columnIndex = cursorQuery.getColumnIndex("starred");
+                                float fMax = 0.5f;
+                                if (columnIndex >= 0 && cursorQuery.getInt(columnIndex) != 0) {
+                                    fMax = Math.max(0.5f, 1.0f);
                                 }
-                                float f2 = f;
+                                float f = fMax;
                                 if (string.isEmpty() || !contactLookupKeysWithBirthdaysToday.contains(string)) {
-                                    updateTileContactFields(peopleSpaceWidgetManager, context, peopleSpaceTile, i, f2, null);
+                                    updateTileContactFields(peopleSpaceWidgetManager, context, peopleSpaceTile, i, f, null);
                                 } else {
-                                    updateTileContactFields(peopleSpaceWidgetManager, context, peopleSpaceTile, i, f2, context.getString(R.string.birthday_status));
+                                    updateTileContactFields(peopleSpaceWidgetManager, context, peopleSpaceTile, i, f, context.getString(R.string.birthday_status));
                                 }
                             } catch (SQLException e) {
                                 e = e;
-                                cursor = query;
+                                cursor = cursorQuery;
                                 Log.e("PeopleSpaceUtils", "Failed to query contact", e);
                                 if (cursor != null) {
                                     cursor.close();
                                 }
                             } catch (Throwable th) {
                                 th = th;
-                                cursor = query;
+                                cursor = cursorQuery;
                                 if (cursor != null) {
                                     cursor.close();
                                 }
                                 throw th;
                             }
                         }
-                        if (query != null) {
-                            query.close();
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
-                    } catch (Throwable th2) {
-                        th = th2;
+                    } catch (SQLException e2) {
+                        e = e2;
                     }
-                } catch (SQLException e2) {
-                    e = e2;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
             }
         }
@@ -194,7 +191,7 @@ public class PeopleSpaceUtils {
         }).map(new Function() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Long l;
+                Long lValueOf;
                 int i3 = i2;
                 Object obj2 = launcherApps;
                 switch (i3) {
@@ -208,17 +205,17 @@ public class PeopleSpaceUtils {
                         PeopleTileKey peopleTileKey2 = PeopleSpaceUtils.EMPTY_KEY;
                         PeopleSpaceTile.Builder builder = peopleSpaceTile.toBuilder();
                         try {
-                            l = Long.valueOf(iPeopleManager2.getLastInteraction(peopleSpaceTile.getPackageName(), peopleSpaceTile.getUserHandle().getIdentifier(), peopleSpaceTile.getId()));
+                            lValueOf = Long.valueOf(iPeopleManager2.getLastInteraction(peopleSpaceTile.getPackageName(), peopleSpaceTile.getUserHandle().getIdentifier(), peopleSpaceTile.getId()));
                         } catch (Exception e) {
                             Log.e("PeopleSpaceUtils", "Couldn't retrieve last interaction time", e);
-                            l = 0L;
+                            lValueOf = 0L;
                         }
-                        return builder.setLastInteractionTimestamp(l.longValue()).build();
+                        return builder.setLastInteractionTimestamp(lValueOf.longValue()).build();
                 }
             }
         });
         final int i3 = 1;
-        Stream filter = map.filter(new Predicate() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda3
+        Stream streamFilter = map.filter(new Predicate() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 switch (i3) {
@@ -232,10 +229,10 @@ public class PeopleSpaceUtils {
             }
         });
         final int i4 = 1;
-        return (List) filter.map(new Function() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda5
+        return (List) streamFilter.map(new Function() { // from class: com.android.systemui.people.PeopleSpaceUtils$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Long l;
+                Long lValueOf;
                 int i32 = i4;
                 Object obj2 = iPeopleManager;
                 switch (i32) {
@@ -249,12 +246,12 @@ public class PeopleSpaceUtils {
                         PeopleTileKey peopleTileKey2 = PeopleSpaceUtils.EMPTY_KEY;
                         PeopleSpaceTile.Builder builder = peopleSpaceTile.toBuilder();
                         try {
-                            l = Long.valueOf(iPeopleManager2.getLastInteraction(peopleSpaceTile.getPackageName(), peopleSpaceTile.getUserHandle().getIdentifier(), peopleSpaceTile.getId()));
+                            lValueOf = Long.valueOf(iPeopleManager2.getLastInteraction(peopleSpaceTile.getPackageName(), peopleSpaceTile.getUserHandle().getIdentifier(), peopleSpaceTile.getId()));
                         } catch (Exception e) {
                             Log.e("PeopleSpaceUtils", "Couldn't retrieve last interaction time", e);
-                            l = 0L;
+                            lValueOf = 0L;
                         }
-                        return builder.setLastInteractionTimestamp(l.longValue()).build();
+                        return builder.setLastInteractionTimestamp(lValueOf.longValue()).build();
                 }
             }
         }).sorted(new PeopleSpaceUtils$$ExternalSyntheticLambda8()).collect(Collectors.toList());
@@ -270,21 +267,21 @@ public class PeopleSpaceUtils {
 
     public static void removeSharedPreferencesStorageForTile(Context context, PeopleTileKey peopleTileKey, int i, String str) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PreferenceManager.getDefaultSharedPreferencesName(context), 0);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.remove(String.valueOf(i));
-        String peopleTileKey2 = peopleTileKey.toString();
-        HashSet hashSet = new HashSet(sharedPreferences.getStringSet(peopleTileKey2, new HashSet()));
+        SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+        editorEdit.remove(String.valueOf(i));
+        String string = peopleTileKey.toString();
+        HashSet hashSet = new HashSet(sharedPreferences.getStringSet(string, new HashSet()));
         hashSet.remove(String.valueOf(i));
-        edit.putStringSet(peopleTileKey2, hashSet);
+        editorEdit.putStringSet(string, hashSet);
         HashSet hashSet2 = new HashSet(sharedPreferences.getStringSet(str, new HashSet()));
         hashSet2.remove(String.valueOf(i));
-        edit.putStringSet(str, hashSet2);
-        edit.apply();
-        SharedPreferences.Editor edit2 = context.getSharedPreferences(String.valueOf(i), 0).edit();
-        edit2.remove("package_name");
-        edit2.remove(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-        edit2.remove("shortcut_id");
-        edit2.apply();
+        editorEdit.putStringSet(str, hashSet2);
+        editorEdit.apply();
+        SharedPreferences.Editor editorEdit2 = context.getSharedPreferences(String.valueOf(i), 0).edit();
+        editorEdit2.remove("package_name");
+        editorEdit2.remove(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
+        editorEdit2.remove("shortcut_id");
+        editorEdit2.apply();
     }
 
     public static void setSharedPreferencesStorageForTile(Context context, PeopleTileKey peopleTileKey, int i, Uri uri, BackupManager backupManager) {
@@ -294,19 +291,19 @@ public class PeopleSpaceUtils {
         }
         SharedPreferencesHelper.setPeopleTileKey(context.getSharedPreferences(String.valueOf(i), 0), peopleTileKey);
         SharedPreferences sharedPreferences = context.getSharedPreferences(PreferenceManager.getDefaultSharedPreferencesName(context), 0);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        String uri2 = uri == null ? "" : uri.toString();
-        edit.putString(String.valueOf(i), uri2);
-        String peopleTileKey2 = peopleTileKey.toString();
-        HashSet hashSet = new HashSet(sharedPreferences.getStringSet(peopleTileKey2, new HashSet()));
+        SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+        String string = uri == null ? "" : uri.toString();
+        editorEdit.putString(String.valueOf(i), string);
+        String string2 = peopleTileKey.toString();
+        HashSet hashSet = new HashSet(sharedPreferences.getStringSet(string2, new HashSet()));
         hashSet.add(String.valueOf(i));
-        edit.putStringSet(peopleTileKey2, hashSet);
-        if (!TextUtils.isEmpty(uri2)) {
-            HashSet hashSet2 = new HashSet(sharedPreferences.getStringSet(uri2, new HashSet()));
+        editorEdit.putStringSet(string2, hashSet);
+        if (!TextUtils.isEmpty(string)) {
+            HashSet hashSet2 = new HashSet(sharedPreferences.getStringSet(string, new HashSet()));
             hashSet2.add(String.valueOf(i));
-            edit.putStringSet(uri2, hashSet2);
+            editorEdit.putStringSet(string, hashSet2);
         }
-        edit.apply();
+        editorEdit.apply();
         backupManager.dataChanged();
     }
 

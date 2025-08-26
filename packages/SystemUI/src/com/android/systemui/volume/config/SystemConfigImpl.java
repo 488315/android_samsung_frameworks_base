@@ -6,7 +6,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Result;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SystemConfigImpl {
     public final Context context;
@@ -15,7 +14,7 @@ public final class SystemConfigImpl {
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
             Object failure;
-            SystemConfigImpl systemConfigImpl = SystemConfigImpl.this;
+            SystemConfigImpl systemConfigImpl = this.f$0;
             try {
                 int i = Result.$r8$clinit;
                 int identifier = systemConfigImpl.context.getResources().getIdentifier("config_mainBuiltInDisplayCutout", "string", "android");

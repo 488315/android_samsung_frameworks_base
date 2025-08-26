@@ -78,9 +78,9 @@ public interface IControlsProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IControlsProvider.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IControlsProvider)) {
-                return (IControlsProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IControlsProvider.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IControlsProvider)) {
+                return (IControlsProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,28 +119,28 @@ public interface IControlsProvider extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IControlsSubscriber asInterface = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
+                IControlsSubscriber iControlsSubscriberAsInterface = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                load(asInterface);
+                load(iControlsSubscriberAsInterface);
             } else if (i == 2) {
-                IControlsSubscriber asInterface2 = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
+                IControlsSubscriber iControlsSubscriberAsInterface2 = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                loadSuggested(asInterface2);
+                loadSuggested(iControlsSubscriberAsInterface2);
             } else if (i == 3) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                IControlsSubscriber asInterface3 = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                IControlsSubscriber iControlsSubscriberAsInterface3 = IControlsSubscriber.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                subscribe(createStringArrayList, asInterface3);
+                subscribe(arrayListCreateStringArrayList, iControlsSubscriberAsInterface3);
             } else if (i == 4) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 ControlActionWrapper controlActionWrapper = (ControlActionWrapper) parcel.readTypedObject(ControlActionWrapper.CREATOR);
-                IControlsActionCallback asInterface4 = IControlsActionCallback.Stub.asInterface(parcel.readStrongBinder());
+                IControlsActionCallback iControlsActionCallbackAsInterface = IControlsActionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                action(readString, controlActionWrapper, asInterface4);
+                action(string, controlActionWrapper, iControlsActionCallbackAsInterface);
             } else if (i == 5) {
-                IControlsProviderInfoSubscriber asInterface5 = IControlsProviderInfoSubscriber.Stub.asInterface(parcel.readStrongBinder());
+                IControlsProviderInfoSubscriber iControlsProviderInfoSubscriberAsInterface = IControlsProviderInfoSubscriber.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                loadControlsProviderInfo(asInterface5);
+                loadControlsProviderInfo(iControlsProviderInfoSubscriberAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -165,64 +165,64 @@ public interface IControlsProvider extends IInterface {
 
             @Override // android.service.controls.IControlsProvider
             public void load(IControlsSubscriber iControlsSubscriber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iControlsSubscriber);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iControlsSubscriber);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsProvider
             public void loadSuggested(IControlsSubscriber iControlsSubscriber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iControlsSubscriber);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iControlsSubscriber);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsProvider
             public void subscribe(List<String> list, IControlsSubscriber iControlsSubscriber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iControlsSubscriber);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iControlsSubscriber);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsProvider
             public void action(String str, ControlActionWrapper controlActionWrapper, IControlsActionCallback iControlsActionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(controlActionWrapper, 0);
-                    obtain.writeStrongInterface(iControlsActionCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(controlActionWrapper, 0);
+                    parcelObtain.writeStrongInterface(iControlsActionCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsProvider
             public void loadControlsProviderInfo(IControlsProviderInfoSubscriber iControlsProviderInfoSubscriber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iControlsProviderInfoSubscriber);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iControlsProviderInfoSubscriber);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

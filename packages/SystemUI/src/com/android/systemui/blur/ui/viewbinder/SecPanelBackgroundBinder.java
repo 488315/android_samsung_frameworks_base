@@ -10,13 +10,16 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.RepeatOnLifecycleKt;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
+import com.android.systemui.QpRune;
 import com.android.systemui.R;
+import com.android.systemui.blur.SecQSBlurShadowView;
 import com.android.systemui.blur.di.SecPanelBackgroundBinding;
 import com.android.systemui.blur.ui.viewmodel.SecPanelBackgroundViewModel;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.logging.PanelScreenShotLogger;
 import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.statusbar.phone.SecPanelBackground;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.ArrayList;
 import kotlin.KotlinNothingValueException;
 import kotlin.ResultKt;
@@ -36,47 +39,44 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding, PanelScreenShotLogger.LogProvider {
     public static final String TAG;
+    public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
     public final NotificationShadeWindowView shadeWindowView;
     public final SecPanelBackground view;
     public final SecPanelBackgroundViewModel viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00571 extends SuspendLambda implements Function2 {
+        final class C01101 extends SuspendLambda implements Function2 {
             private /* synthetic */ Object L$0;
             int label;
             final /* synthetic */ SecPanelBackgroundBinder this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder$1$1$1, reason: invalid class name and collision with other inner class name */
-            final class C00581 extends SuspendLambda implements Function2 {
+            final class C01111 extends SuspendLambda implements Function2 {
                 int label;
                 final /* synthetic */ SecPanelBackgroundBinder this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C00581(SecPanelBackgroundBinder secPanelBackgroundBinder, Continuation continuation) {
+                public C01111(SecPanelBackgroundBinder secPanelBackgroundBinder, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secPanelBackgroundBinder;
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    return new C00581(this.this$0, continuation);
+                    return new C01111(this.this$0, continuation);
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C00581) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C01111) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -85,16 +85,24 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                     int i = this.label;
                     if (i == 0) {
                         ResultKt.throwOnFailure(obj);
-                        ReadonlyStateFlow readonlyStateFlow = this.this$0.viewModel.maxAlpha;
-                        C00591 c00591 = new FlowCollector() { // from class: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder.1.1.1.1
+                        final SecPanelBackgroundBinder secPanelBackgroundBinder = this.this$0;
+                        ReadonlyStateFlow readonlyStateFlow = secPanelBackgroundBinder.viewModel.maxAlpha;
+                        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder.1.1.1.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                Log.d("SecPanelBackgroundBinder", "maxAlpha = " + ((Number) obj2).floatValue());
+                                float fFloatValue = ((Number) obj2).floatValue();
+                                Log.d("SecPanelBackgroundBinder", "maxAlpha = " + fFloatValue);
+                                SecPanelBackgroundBinder secPanelBackgroundBinder2 = secPanelBackgroundBinder;
+                                secPanelBackgroundBinder2.view.mMaxAlpha = fFloatValue;
+                                SecPanelBackground secPanelBackground = (SecPanelBackground) secPanelBackgroundBinder2.shadeWindowView.findViewById(R.id.qs_new_blur_background);
+                                if (secPanelBackground != null) {
+                                    secPanelBackground.mMaxAlpha = fFloatValue;
+                                }
                                 return Unit.INSTANCE;
                             }
                         };
                         this.label = 1;
-                        if (readonlyStateFlow.$$delegate_0.collect(c00591, this) == coroutineSingletons) {
+                        if (readonlyStateFlow.$$delegate_0.collect(flowCollector, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {
@@ -107,7 +115,6 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder$1$1$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 int label;
@@ -140,17 +147,32 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder.1.1.2.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                boolean booleanValue = ((Boolean) obj2).booleanValue();
-                                EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldShow = ", "SecPanelBackgroundBinder", booleanValue);
+                                boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                                EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldShow = ", "SecPanelBackgroundBinder", zBooleanValue);
                                 String str = SecPanelBackgroundBinder.TAG;
-                                SecPanelBackgroundBinder secPanelBackgroundBinder2 = SecPanelBackgroundBinder.this;
+                                SecPanelBackgroundBinder secPanelBackgroundBinder2 = secPanelBackgroundBinder;
                                 secPanelBackgroundBinder2.getClass();
-                                secPanelBackgroundBinder2.view.setVisibility(booleanValue ? 0 : 8);
-                                SecPanelBackground secPanelBackground = (SecPanelBackground) secPanelBackgroundBinder2.shadeWindowView.findViewById(R.id.qs_new_blur_background);
+                                secPanelBackgroundBinder2.view.setVisibility(zBooleanValue ? 0 : 8);
+                                NotificationShadeWindowView notificationShadeWindowView = secPanelBackgroundBinder2.shadeWindowView;
+                                SecPanelBackground secPanelBackground = (SecPanelBackground) notificationShadeWindowView.findViewById(R.id.qs_new_blur_background);
                                 if (secPanelBackground != null) {
-                                    secPanelBackground.setVisibility(booleanValue ? 0 : 8);
+                                    secPanelBackground.setVisibility(zBooleanValue ? 0 : 8);
                                 }
-                                Log.d("SecPanelBackgroundBinder", "DIM visibility = ".concat(booleanValue ? "VISIBLE" : "GONE"));
+                                SecQSBlurShadowView secQSBlurShadowView = (SecQSBlurShadowView) notificationShadeWindowView.findViewById(R.id.qs_large_shadow_view);
+                                if (secQSBlurShadowView != null) {
+                                    secQSBlurShadowView.enabled = !zBooleanValue;
+                                    if (zBooleanValue) {
+                                        secQSBlurShadowView.setAlpha(0.0f);
+                                    }
+                                }
+                                SecQSBlurShadowView secQSBlurShadowView2 = (SecQSBlurShadowView) notificationShadeWindowView.findViewById(R.id.qs_small_shadow_view);
+                                if (secQSBlurShadowView2 != null) {
+                                    secQSBlurShadowView2.enabled = !zBooleanValue;
+                                    if (zBooleanValue) {
+                                        secQSBlurShadowView2.setAlpha(0.0f);
+                                    }
+                                }
+                                Log.d("SecPanelBackgroundBinder", "DIM visibility = ".concat(zBooleanValue ? "VISIBLE" : "GONE"));
                                 return Unit.INSTANCE;
                             }
                         };
@@ -168,7 +190,6 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder$1$1$3, reason: invalid class name */
             final class AnonymousClass3 extends SuspendLambda implements Function2 {
                 int label;
@@ -203,7 +224,7 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                             public final Object emit(Object obj2, Continuation continuation) {
                                 EmergencyButtonController$$ExternalSyntheticOutline0.m("updateBackgroundColor = ", "SecPanelBackgroundBinder", ((Boolean) obj2).booleanValue());
                                 String str = SecPanelBackgroundBinder.TAG;
-                                SecPanelBackgroundBinder.this.updateBackgroundColor();
+                                secPanelBackgroundBinder.updateBackgroundColor();
                                 return Unit.INSTANCE;
                             }
                         };
@@ -223,21 +244,21 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
             }
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00571(SecPanelBackgroundBinder secPanelBackgroundBinder, Continuation continuation) {
+            public C01101(SecPanelBackgroundBinder secPanelBackgroundBinder, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = secPanelBackgroundBinder;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C00571 c00571 = new C00571(this.this$0, continuation);
-                c00571.L$0 = obj;
-                return c00571;
+                C01101 c01101 = new C01101(this.this$0, continuation);
+                c01101.L$0 = obj;
+                return c01101;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00571) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01101) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -248,7 +269,7 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                 }
                 ResultKt.throwOnFailure(obj);
                 CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-                BuildersKt.launch$default(coroutineScope, null, null, new C00581(this.this$0, null), 3);
+                BuildersKt.launch$default(coroutineScope, null, null, new C01111(this.this$0, null), 3);
                 BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(this.this$0, null), 3);
                 BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass3(this.this$0, null), 3);
                 return Unit.INSTANCE;
@@ -274,9 +295,9 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
                 ResultKt.throwOnFailure(obj);
                 LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C00571 c00571 = new C00571(SecPanelBackgroundBinder.this, null);
+                C01101 c01101 = new C01101(SecPanelBackgroundBinder.this, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c00571, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c01101, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -289,7 +310,6 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -306,9 +326,10 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
         TAG = simpleName;
     }
 
-    public SecPanelBackgroundBinder(NotificationShadeWindowView notificationShadeWindowView, SecPanelBackground secPanelBackground, SecPanelBackgroundViewModel.Factory factory) {
+    public SecPanelBackgroundBinder(NotificationShadeWindowView notificationShadeWindowView, SecPanelBackground secPanelBackground, SecPanelBackgroundViewModel.Factory factory, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor) {
         this.shadeWindowView = notificationShadeWindowView;
         this.view = secPanelBackground;
+        this.secQsUiDisplayModeInteractor = secQsUiDisplayModeInteractor;
         this.viewModel = factory.create();
         RepeatWhenAttachedKt.repeatWhenAttached(secPanelBackground, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
         secPanelBackground.animate().translationY(0.0f).setDuration(200L).start();
@@ -322,24 +343,20 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
         SecPanelBackground secPanelBackground = this.view;
         int color = secPanelBackground.getContext().getColor(R.color.open_theme_qp_bg_color);
         arrayList.add(TAG + " ============================================= ");
-        float maxAlpha = getMaxAlpha();
+        float fFloatValue = ((Number) this.viewModel.maxAlpha.$$delegate_0.getValue()).floatValue();
         float alpha = secPanelBackground.getAlpha();
         int visibility = secPanelBackground.getVisibility();
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("  mMaxAlpha = ", maxAlpha, "  currentAlpha =  ", alpha, "  visibility =  ");
-        m.append(visibility);
-        arrayList.add(m.toString());
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("  mMaxAlpha = ", fFloatValue, "  currentAlpha =  ", alpha, "  visibility =  ");
+        sbM.append(visibility);
+        arrayList.add(sbM.toString());
         arrayList.add(MotionLayout$$ExternalSyntheticOutline0.m("  DIM color = 0x ", Integer.toHexString(color), " , BOX color = 0x ", Integer.toHexString(secPanelBackground.getContext().getColor(R.color.qs_tile_container_bg)), " "));
         arrayList.add("============================================================== ");
         return arrayList;
     }
 
-    public final float getMaxAlpha() {
-        return ((Number) this.viewModel.maxAlpha.$$delegate_0.getValue()).floatValue();
-    }
-
     public final void updateBackgroundColor() {
         SecPanelBackground secPanelBackground = this.view;
-        int color = secPanelBackground.getContext().getColor(R.color.open_theme_qp_bg_color);
+        int color = secPanelBackground.getContext().getColor((QpRune.QUICK_PANEL_BLUR_MASSIVE && this.secQsUiDisplayModeInteractor.isTablet()) ? (secPanelBackground.getContext().getResources().getConfiguration().uiMode & 32) != 0 ? R.color.tablet_massive_qp_bg_dark_color : R.color.tablet_massive_qp_bg_color : R.color.open_theme_qp_bg_color);
         int i = (color >> 16) & 255;
         int i2 = (color >> 8) & 255;
         int i3 = color & 255;
@@ -348,8 +365,8 @@ public final class SecPanelBackgroundBinder implements SecPanelBackgroundBinding
         if (secPanelBackground2 != null) {
             ((GradientDrawable) secPanelBackground2.getBackground()).setColor(Color.rgb(i, i2, i3));
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "DIM color = ", " ", " ");
-        m.append(i3);
-        Log.d(TAG, m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "DIM color = ", " ", " ");
+        sbM.append(i3);
+        Log.d(TAG, sbM.toString());
     }
 }

@@ -381,7 +381,7 @@ public abstract class ContentCaptureService extends Service {
         }
         FlushMetrics flushMetrics = new FlushMetrics();
         int i4 = 0;
-        ComponentName componentName = null;
+        ComponentName activityComponent = null;
         int i5 = 0;
         ContentCaptureSessionId contentCaptureSessionId = null;
         while (i4 < list.size()) {
@@ -394,7 +394,7 @@ public abstract class ContentCaptureService extends Service {
                     if (i4 != 0) {
                         i3 = i2;
                         ContentCaptureOptions contentCaptureOptions3 = contentCaptureOptions;
-                        writeFlushMetrics(sessionId, componentName, flushMetrics, contentCaptureOptions3, i3);
+                        writeFlushMetrics(sessionId, activityComponent, flushMetrics, contentCaptureOptions3, i3);
                         contentCaptureOptions2 = contentCaptureOptions3;
                         flushMetrics.reset();
                     } else {
@@ -408,8 +408,8 @@ public abstract class ContentCaptureService extends Service {
                     contentCaptureOptions2 = contentCaptureOptions;
                 }
                 ContentCaptureContext contentCaptureContext = contentCaptureEvent.getContentCaptureContext();
-                if (componentName == null && contentCaptureContext != null) {
-                    componentName = contentCaptureContext.getActivityComponent();
+                if (activityComponent == null && contentCaptureContext != null) {
+                    activityComponent = contentCaptureContext.getActivityComponent();
                 }
                 int type = contentCaptureEvent.getType();
                 if (type == -2) {
@@ -442,7 +442,7 @@ public abstract class ContentCaptureService extends Service {
             contentCaptureOptions = contentCaptureOptions2;
             i2 = i3;
         }
-        writeFlushMetrics(i5, componentName, flushMetrics, contentCaptureOptions, i2);
+        writeFlushMetrics(i5, activityComponent, flushMetrics, contentCaptureOptions, i2);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -460,7 +460,7 @@ public abstract class ContentCaptureService extends Service {
         list.forEach(new Consumer() { // from class: android.service.contentcapture.ContentCaptureService$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ContentCaptureService.this.lambda$handleOnLoginDetected$0(contentCaptureSessionId, (ContentCaptureEvent) obj);
+                this.f$0.lambda$handleOnLoginDetected$0(contentCaptureSessionId, (ContentCaptureEvent) obj);
             }
         });
         lambda$handleOnLoginDetected$0(contentCaptureSessionId, new ContentCaptureEvent(sessionId, 8));
@@ -541,10 +541,10 @@ public abstract class ContentCaptureService extends Service {
             return true;
         }
         Log.e(TAG, "invalid call from UID " + i + ": session " + parentSessionId + " belongs to " + i2);
-        long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis - this.mLastCallerMismatchLog > this.mCallerMismatchTimeout) {
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (jCurrentTimeMillis - this.mLastCallerMismatchLog > this.mCallerMismatchTimeout) {
             FrameworkStatsLog.write(206, getPackageManager().getNameForUid(i2), getPackageManager().getNameForUid(i));
-            this.mLastCallerMismatchLog = currentTimeMillis;
+            this.mLastCallerMismatchLog = jCurrentTimeMillis;
         }
         return false;
     }
@@ -597,7 +597,7 @@ public abstract class ContentCaptureService extends Service {
                 executeAdapterMethodLocked(new Consumer() { // from class: android.service.contentcapture.ContentCaptureService$DataShareReadAdapterDelegate$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ((DataShareReadAdapter) obj).onStart(ParcelFileDescriptor.this);
+                        ((DataShareReadAdapter) obj).onStart(parcelFileDescriptor);
                     }
                 }, "onStart");
             }
@@ -635,7 +635,7 @@ public abstract class ContentCaptureService extends Service {
                 Slog.w(ContentCaptureService.TAG, "Can't execute " + str + "(), references are null");
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.service.contentcapture.ContentCaptureService$DataShareReadAdapterDelegate$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
@@ -644,7 +644,7 @@ public abstract class ContentCaptureService extends Service {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

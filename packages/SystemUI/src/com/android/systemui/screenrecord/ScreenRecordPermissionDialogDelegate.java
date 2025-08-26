@@ -17,7 +17,6 @@ import com.android.systemui.screenrecord.ScreenRecordPermissionViewBinder;
 import com.android.systemui.settings.UserContextProvider;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProjectionPermissionDialogDelegate implements SystemUIDialog.Delegate {
     public final ActivityStarter activityStarter;
@@ -32,7 +31,6 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
     public final int theme;
     public final UserContextProvider userContextProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ScreenRecordPermissionDialogDelegate create(RecordingController recordingController, UserHandle userHandle, int i, Runnable runnable);
     }
@@ -69,7 +67,7 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
         super.onCreate((AlertDialog) systemUIDialog, bundle);
         setDialogTitle(R.string.screenrecord_permission_dialog_title);
         systemUIDialog.setTitle(R.string.screenrecord_title);
-        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionDialogDelegate$onCreate$1
+        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionDialogDelegate.onCreate.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 BaseMediaProjectionPermissionViewBinder baseMediaProjectionPermissionViewBinder = ScreenRecordPermissionDialogDelegate.this.viewBinder;
@@ -92,10 +90,10 @@ public final class ScreenRecordPermissionDialogDelegate extends BaseMediaProject
             textView = null;
         }
         textView.setOnClickListener(new BaseMediaProjectionPermissionViewBinder$setStartButtonOnClickListener$1(baseMediaProjectionPermissionViewBinder, onClickListener));
-        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionDialogDelegate$onCreate$2
+        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionDialogDelegate.onCreate.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SystemUIDialog.this.dismiss();
+                systemUIDialog.dismiss();
             }
         };
         TextView textView2 = this.cancelButton;

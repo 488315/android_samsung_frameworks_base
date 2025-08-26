@@ -19,7 +19,6 @@ import kotlinx.serialization.descriptors.SerialDescriptorKt$special$$inlined$Ite
 import kotlinx.serialization.descriptors.SerialKind;
 import kotlinx.serialization.descriptors.StructureKind;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EnumDescriptor extends PluginGeneratedSerialDescriptor {
     public final Lazy elementDescriptors$delegate;
@@ -34,18 +33,18 @@ public final class EnumDescriptor extends PluginGeneratedSerialDescriptor {
                 int i2 = i;
                 SerialDescriptor[] serialDescriptorArr = new SerialDescriptor[i2];
                 for (int i3 = 0; i3 < i2; i3++) {
-                    String m = MutablePreferences$$ExternalSyntheticOutline0.m(new StringBuilder(), str, ".", this.names[i3]);
+                    String strM = MutablePreferences$$ExternalSyntheticOutline0.m(new StringBuilder(), str, ".", this.names[i3]);
                     StructureKind.OBJECT object = StructureKind.OBJECT.INSTANCE;
                     SerialDescriptor[] serialDescriptorArr2 = new SerialDescriptor[0];
-                    if (StringsKt__StringsKt.isBlank(m)) {
+                    if (StringsKt__StringsKt.isBlank(strM)) {
                         throw new IllegalArgumentException("Blank serial names are prohibited");
                     }
                     if (Intrinsics.areEqual(object, StructureKind.CLASS.INSTANCE)) {
                         throw new IllegalArgumentException("For StructureKind.CLASS please use 'buildClassSerialDescriptor' instead");
                     }
-                    ClassSerialDescriptorBuilder classSerialDescriptorBuilder = new ClassSerialDescriptorBuilder(m);
+                    ClassSerialDescriptorBuilder classSerialDescriptorBuilder = new ClassSerialDescriptorBuilder(strM);
                     Unit unit = Unit.INSTANCE;
-                    serialDescriptorArr[i3] = new SerialDescriptorImpl(m, object, ((ArrayList) classSerialDescriptorBuilder.elementNames).size(), ArraysKt___ArraysKt.toList(serialDescriptorArr2), classSerialDescriptorBuilder);
+                    serialDescriptorArr[i3] = new SerialDescriptorImpl(strM, object, ((ArrayList) classSerialDescriptorBuilder.elementNames).size(), ArraysKt___ArraysKt.toList(serialDescriptorArr2), classSerialDescriptorBuilder);
                 }
                 return serialDescriptorArr;
             }
@@ -79,15 +78,15 @@ public final class EnumDescriptor extends PluginGeneratedSerialDescriptor {
 
     @Override // kotlinx.serialization.internal.PluginGeneratedSerialDescriptor
     public final int hashCode() {
-        int hashCode = this.serialName.hashCode();
+        int iHashCode = this.serialName.hashCode();
         Iterator it = new SerialDescriptorKt$special$$inlined$Iterable$2(this).iterator();
-        int i = 1;
+        int iHashCode2 = 1;
         while (it.hasNext()) {
-            int i2 = i * 31;
+            int i = iHashCode2 * 31;
             String str = (String) it.next();
-            i = i2 + (str != null ? str.hashCode() : 0);
+            iHashCode2 = i + (str != null ? str.hashCode() : 0);
         }
-        return (hashCode * 31) + i;
+        return (iHashCode * 31) + iHashCode2;
     }
 
     @Override // kotlinx.serialization.internal.PluginGeneratedSerialDescriptor

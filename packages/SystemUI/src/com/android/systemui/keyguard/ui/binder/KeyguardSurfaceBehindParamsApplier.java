@@ -22,7 +22,6 @@ import java.util.concurrent.Executor;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSurfaceBehindParamsApplier {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public final class KeyguardSurfaceBehindParamsApplier {
     public final Matrix matrix = new Matrix();
     public final float[] tmpFloat = new float[9];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -64,14 +62,14 @@ public final class KeyguardSurfaceBehindParamsApplier {
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 int i = KeyguardSurfaceBehindParamsApplier.$r8$clinit;
-                KeyguardSurfaceBehindParamsApplier.this.applyToSurfaceBehind();
+                this.this$0.applyToSurfaceBehind();
             }
         });
         springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$translateYSpring$1$3
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
                 try {
-                    KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = KeyguardSurfaceBehindParamsApplier.this;
+                    KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = this.this$0;
                     int i = KeyguardSurfaceBehindParamsApplier.$r8$clinit;
                     keyguardSurfaceBehindParamsApplier.updateIsAnimatingSurface();
                 } catch (NullPointerException e) {
@@ -80,25 +78,25 @@ public final class KeyguardSurfaceBehindParamsApplier {
             }
         });
         this.translateYSpring = springAnimation;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(Interpolators.ALPHA_IN);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$alphaAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(150L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.ALPHA_IN);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$alphaAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardSurfaceBehindParamsApplier.this.animatedAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                KeyguardSurfaceBehindParamsApplier.this.applyToSurfaceBehind();
+                this.this$0.animatedAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                this.this$0.applyToSurfaceBehind();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$alphaAnimator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$alphaAnimator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = KeyguardSurfaceBehindParamsApplier.this;
+                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = this.this$0;
                 int i = KeyguardSurfaceBehindParamsApplier.$r8$clinit;
                 keyguardSurfaceBehindParamsApplier.updateIsAnimatingSurface();
             }
         });
-        this.alphaAnimator = ofFloat;
+        this.alphaAnimator = valueAnimatorOfFloat;
         this.viewParams = new KeyguardSurfaceBehindModel(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 31, null);
     }
 
@@ -111,21 +109,21 @@ public final class KeyguardSurfaceBehindParamsApplier {
         this.executor.execute(new Runnable() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardSurfaceBehindParamsApplier$applyToSurfaceBehind$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = KeyguardSurfaceBehindParamsApplier.this;
+                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier = this.this$0;
                 if (keyguardSurfaceBehindParamsApplier.surfaceBehind == null) {
                     Log.d("KeyguardUnlock", "Attempting to modify params of surface that isn't animating. Ignoring.");
-                    KeyguardSurfaceBehindParamsApplier.this.matrix.set(Matrix.IDENTITY_MATRIX);
+                    this.this$0.matrix.set(Matrix.IDENTITY_MATRIX);
                     return;
                 }
                 float f = keyguardSurfaceBehindParamsApplier.translateYSpring.mRunning ? keyguardSurfaceBehindParamsApplier.animatedTranslationY.mValue : keyguardSurfaceBehindParamsApplier.viewParams.translationY;
-                float f2 = keyguardSurfaceBehindParamsApplier.alphaAnimator.isRunning() ? KeyguardSurfaceBehindParamsApplier.this.animatedAlpha : KeyguardSurfaceBehindParamsApplier.this.viewParams.alpha;
-                View view = KeyguardSurfaceBehindParamsApplier.this.keyguardViewController.getViewRootImpl().getView();
+                float f2 = keyguardSurfaceBehindParamsApplier.alphaAnimator.isRunning() ? this.this$0.animatedAlpha : this.this$0.viewParams.alpha;
+                View view = this.this$0.keyguardViewController.getViewRootImpl().getView();
                 if ((view != null && view.getVisibility() == 0) || !surfaceControl.isValid()) {
-                    KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier2 = KeyguardSurfaceBehindParamsApplier.this;
+                    KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier2 = this.this$0;
                     keyguardSurfaceBehindParamsApplier2.getClass();
                     SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier = new SyncRtSurfaceTransactionApplier(keyguardSurfaceBehindParamsApplier2.keyguardViewController.getViewRootImpl().getView());
                     SyncRtSurfaceTransactionApplier.SurfaceParams.Builder builder = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(surfaceControl);
-                    Matrix matrix = KeyguardSurfaceBehindParamsApplier.this.matrix;
+                    Matrix matrix = this.this$0.matrix;
                     matrix.setTranslate(0.0f, f);
                     Unit unit = Unit.INSTANCE;
                     syncRtSurfaceTransactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{builder.withMatrix(matrix).withAlpha(f2).build()});
@@ -133,7 +131,7 @@ public final class KeyguardSurfaceBehindParamsApplier {
                 }
                 SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
                 SurfaceControl surfaceControl2 = surfaceControl;
-                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier3 = KeyguardSurfaceBehindParamsApplier.this;
+                KeyguardSurfaceBehindParamsApplier keyguardSurfaceBehindParamsApplier3 = this.this$0;
                 Matrix matrix2 = keyguardSurfaceBehindParamsApplier3.matrix;
                 matrix2.setTranslate(0.0f, f);
                 Unit unit2 = Unit.INSTANCE;

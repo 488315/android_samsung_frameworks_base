@@ -29,7 +29,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class TemporaryViewDisplayController implements CoreStartable {
     public final AccessibilityManager accessibilityManager;
@@ -49,7 +48,6 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
     public final WakeLock.Builder wakeLockBuilder;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplayInfo {
         public Runnable cancelViewTimeout;
         public TemporaryViewInfo info;
@@ -66,7 +64,6 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
         void onInfoPermanentlyRemoved(String str, String str2);
     }
@@ -98,12 +95,12 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         this.displayScaleListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.temporarydisplay.TemporaryViewDisplayController$displayScaleListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onDensityOrFontScaleChanged() {
-                TemporaryViewDisplayController.access$reinflateView(TemporaryViewDisplayController.this);
+                TemporaryViewDisplayController.access$reinflateView(this.this$0);
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onThemeChanged() {
-                TemporaryViewDisplayController.access$reinflateView(TemporaryViewDisplayController.this);
+                TemporaryViewDisplayController.access$reinflateView(this.this$0);
             }
         };
     }
@@ -128,75 +125,76 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         temporaryViewDisplayController$removeViewFromWindow$1.run();
     }
 
-    public final synchronized void displayView(TemporaryViewInfo temporaryViewInfo) {
+    public final synchronized void displayView(TemporaryViewInfo temporaryViewInfo) throws Throwable {
         Throwable th;
         TemporaryViewDisplayController temporaryViewDisplayController;
         try {
-        } catch (Throwable th2) {
-            th = th2;
-        }
-        try {
-            int recommendedTimeoutMillis = this.accessibilityManager.getRecommendedTimeoutMillis(temporaryViewInfo.getTimeoutMs(), 7);
-            long j = recommendedTimeoutMillis;
-            long currentTimeMillis = this.systemClock.currentTimeMillis() + j;
             try {
-                int i = 0;
+                int recommendedTimeoutMillis = this.accessibilityManager.getRecommendedTimeoutMillis(temporaryViewInfo.getTimeoutMs(), 7);
+                long j = recommendedTimeoutMillis;
+                long jCurrentTimeMillis = this.systemClock.currentTimeMillis() + j;
                 try {
-                    DisplayInfo displayInfo = (DisplayInfo) CollectionsKt___CollectionsKt.getOrNull(0, this.activeViews);
-                    if (displayInfo != null) {
-                        try {
-                            if (Intrinsics.areEqual(displayInfo.info.getId(), temporaryViewInfo.getId())) {
-                                ViewGroup viewGroup = displayInfo.view;
-                                if (viewGroup == null) {
-                                    throw new IllegalStateException("First item in activeViews list must have a valid view");
-                                }
-                                this.logger.logViewUpdate(temporaryViewInfo);
-                                displayInfo.info = temporaryViewInfo;
-                                displayInfo.timeExpirationMillis = currentTimeMillis;
-                                Runnable executeDelayed = this.mainExecutor.executeDelayed(new TemporaryViewDisplayController$updateTimeout$cancelViewTimeout$1(this, displayInfo), j);
-                                Runnable runnable = displayInfo.cancelViewTimeout;
-                                if (runnable != null) {
-                                    runnable.run();
-                                }
-                                displayInfo.cancelViewTimeout = executeDelayed;
-                                updateView(temporaryViewInfo, viewGroup);
-                            }
-                        } catch (Throwable th3) {
-                            th = th3;
-                            temporaryViewDisplayController = this;
-                            throw th;
-                        }
-                    }
-                    temporaryViewDisplayController = this;
-                    DisplayInfo displayInfo2 = new DisplayInfo(temporaryViewDisplayController, null, temporaryViewInfo, currentTimeMillis, null, null);
+                    int i = 0;
                     try {
-                        if (displayInfo == null) {
+                        DisplayInfo displayInfo = (DisplayInfo) CollectionsKt___CollectionsKt.getOrNull(0, this.activeViews);
+                        if (displayInfo != null) {
                             try {
-                                ((ConfigurationControllerImpl) temporaryViewDisplayController.configurationController).addCallback(temporaryViewDisplayController.displayScaleListener);
-                                ((ArrayList) temporaryViewDisplayController.activeViews).add(displayInfo2);
-                                temporaryViewDisplayController.showNewView(displayInfo2, recommendedTimeoutMillis);
-                                return;
-                            } catch (Throwable th4) {
-                                th = th4;
-                                th = th;
+                                if (Intrinsics.areEqual(displayInfo.info.getId(), temporaryViewInfo.getId())) {
+                                    ViewGroup viewGroup = displayInfo.view;
+                                    if (viewGroup == null) {
+                                        throw new IllegalStateException("First item in activeViews list must have a valid view");
+                                    }
+                                    this.logger.logViewUpdate(temporaryViewInfo);
+                                    displayInfo.info = temporaryViewInfo;
+                                    displayInfo.timeExpirationMillis = jCurrentTimeMillis;
+                                    Runnable runnableExecuteDelayed = this.mainExecutor.executeDelayed(new TemporaryViewDisplayController$updateTimeout$cancelViewTimeout$1(this, displayInfo), j);
+                                    Runnable runnable = displayInfo.cancelViewTimeout;
+                                    if (runnable != null) {
+                                        runnable.run();
+                                    }
+                                    displayInfo.cancelViewTimeout = runnableExecuteDelayed;
+                                    updateView(temporaryViewInfo, viewGroup);
+                                }
+                            } catch (Throwable th2) {
+                                th = th2;
+                                temporaryViewDisplayController = this;
                                 throw th;
                             }
                         }
-                        if (displayInfo.info.getPriority().compareTo(temporaryViewInfo.getPriority()) <= 0) {
-                            temporaryViewDisplayController.hideView(displayInfo);
-                            temporaryViewDisplayController.removeFromActivesIfNeeded(displayInfo2.info.getId());
-                            ((ArrayList) temporaryViewDisplayController.activeViews).add(0, displayInfo2);
-                            temporaryViewDisplayController.showNewView(displayInfo2, recommendedTimeoutMillis);
-                            return;
+                        temporaryViewDisplayController = this;
+                        DisplayInfo displayInfo2 = new DisplayInfo(temporaryViewDisplayController, null, temporaryViewInfo, jCurrentTimeMillis, null, null);
+                        try {
+                            if (displayInfo == null) {
+                                try {
+                                    ((ConfigurationControllerImpl) temporaryViewDisplayController.configurationController).addCallback(temporaryViewDisplayController.displayScaleListener);
+                                    ((ArrayList) temporaryViewDisplayController.activeViews).add(displayInfo2);
+                                    temporaryViewDisplayController.showNewView(displayInfo2, recommendedTimeoutMillis);
+                                    return;
+                                } catch (Throwable th3) {
+                                    th = th3;
+                                    th = th;
+                                    throw th;
+                                }
+                            }
+                            if (displayInfo.info.getPriority().compareTo(temporaryViewInfo.getPriority()) <= 0) {
+                                temporaryViewDisplayController.hideView(displayInfo);
+                                temporaryViewDisplayController.removeFromActivesIfNeeded(displayInfo2.info.getId());
+                                ((ArrayList) temporaryViewDisplayController.activeViews).add(0, displayInfo2);
+                                temporaryViewDisplayController.showNewView(displayInfo2, recommendedTimeoutMillis);
+                                return;
+                            }
+                            temporaryViewDisplayController.logger.logViewAdditionDelayed(temporaryViewInfo);
+                            temporaryViewDisplayController.removeFromActivesIfNeeded(temporaryViewInfo.getId());
+                            while (i < ((ArrayList) temporaryViewDisplayController.activeViews).size() && ((DisplayInfo) ((ArrayList) temporaryViewDisplayController.activeViews).get(i)).info.getPriority().compareTo(temporaryViewInfo.getPriority()) > 0) {
+                                i++;
+                            }
+                            ((ArrayList) temporaryViewDisplayController.activeViews).add(i, displayInfo2);
+                        } catch (Throwable th4) {
+                            th = th4;
                         }
-                        temporaryViewDisplayController.logger.logViewAdditionDelayed(temporaryViewInfo);
-                        temporaryViewDisplayController.removeFromActivesIfNeeded(temporaryViewInfo.getId());
-                        while (i < ((ArrayList) temporaryViewDisplayController.activeViews).size() && ((DisplayInfo) ((ArrayList) temporaryViewDisplayController.activeViews).get(i)).info.getPriority().compareTo(temporaryViewInfo.getPriority()) > 0) {
-                            i++;
-                        }
-                        ((ArrayList) temporaryViewDisplayController.activeViews).add(i, displayInfo2);
                     } catch (Throwable th5) {
                         th = th5;
+                        temporaryViewDisplayController = this;
                     }
                 } catch (Throwable th6) {
                     th = th6;
@@ -205,12 +203,11 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
             } catch (Throwable th7) {
                 th = th7;
                 temporaryViewDisplayController = this;
+                th = th;
+                throw th;
             }
         } catch (Throwable th8) {
             th = th8;
-            temporaryViewDisplayController = this;
-            th = th;
-            throw th;
         }
     }
 
@@ -249,12 +246,12 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         LogLevel logLevel = LogLevel.DEBUG;
         TemporaryViewLogger$$ExternalSyntheticLambda0 temporaryViewLogger$$ExternalSyntheticLambda0 = new TemporaryViewLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = temporaryViewLogger.buffer;
-        LogMessage obtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = temporaryViewInfo.getId();
         logMessageImpl.str2 = temporaryViewInfo.getWindowTitle();
         logMessageImpl.str3 = temporaryViewInfo.getPriority().name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         ViewGroup viewGroup = displayInfo.view;
         if (viewGroup == null) {
             temporaryViewLogger.logViewRemovalIgnored(displayInfo.info.getId(), "View is null");
@@ -280,14 +277,14 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         LogLevel logLevel = LogLevel.DEBUG;
         TemporaryViewLogger$$ExternalSyntheticLambda0 temporaryViewLogger$$ExternalSyntheticLambda0 = new TemporaryViewLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = temporaryViewLogger.buffer;
-        LogMessage obtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = temporaryViewInfo2.getId();
         logMessageImpl.str2 = temporaryViewInfo2.getWindowTitle();
         logMessageImpl.str3 = viewGroup.getClass().getName();
         TemporaryViewLogger.Companion.getClass();
         logMessageImpl.int1 = System.identityHashCode(viewGroup);
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.windowManager.addView(viewGroup, layoutParams);
         animateViewIn$frameworks__base__packages__SystemUI__android_common__SystemUI_core(viewGroup);
     }
@@ -362,10 +359,10 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
             LogLevel logLevel = LogLevel.DEBUG;
             TemporaryViewLogger$$ExternalSyntheticLambda0 temporaryViewLogger$$ExternalSyntheticLambda0 = new TemporaryViewLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = temporaryViewLogger.buffer;
-            LogMessage obtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = str2;
-            ((LogMessageImpl) obtain).str2 = str;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = str2;
+            ((LogMessageImpl) logMessageObtain).str2 = str;
+            logBuffer.commit(logMessageObtain);
             ArrayList arrayList = (ArrayList) this.activeViews;
             int size = arrayList.size();
             int i = 0;
@@ -429,24 +426,24 @@ public abstract class TemporaryViewDisplayController implements CoreStartable {
         LogLevel logLevel = LogLevel.DEBUG;
         TemporaryViewLogger$$ExternalSyntheticLambda0 temporaryViewLogger$$ExternalSyntheticLambda0 = new TemporaryViewLogger$$ExternalSyntheticLambda0(10);
         LogBuffer logBuffer = temporaryViewLogger.buffer;
-        LogMessage obtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(temporaryViewLogger.tag, logLevel, temporaryViewLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = temporaryViewInfo.getId();
         logMessageImpl.str2 = temporaryViewInfo.getWindowTitle();
         logMessageImpl.str3 = temporaryViewInfo.getPriority().name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.tempViewUiEventLogger.logger.log(TemporaryViewUiEvent.TEMPORARY_VIEW_ADDED, displayInfo.info.getInstanceId());
-        boolean isScreenOn = this.powerManager.isScreenOn();
+        boolean zIsScreenOn = this.powerManager.isScreenOn();
         WakeLock.Builder builder = this.wakeLockBuilder;
-        WakeLock build = !isScreenOn ? builder.setTag(displayInfo.info.getWindowTitle()).setLevelsAndFlags(268435482).build() : builder.setTag(displayInfo.info.getWindowTitle()).setLevelsAndFlags(10).build();
-        displayInfo.wakeLock = build;
-        build.acquire(displayInfo.info.getWakeReason());
-        Runnable executeDelayed = this.mainExecutor.executeDelayed(new TemporaryViewDisplayController$updateTimeout$cancelViewTimeout$1(this, displayInfo), i);
+        WakeLock wakeLockBuild = !zIsScreenOn ? builder.setTag(displayInfo.info.getWindowTitle()).setLevelsAndFlags(268435482).build() : builder.setTag(displayInfo.info.getWindowTitle()).setLevelsAndFlags(10).build();
+        displayInfo.wakeLock = wakeLockBuild;
+        wakeLockBuild.acquire(displayInfo.info.getWakeReason());
+        Runnable runnableExecuteDelayed = this.mainExecutor.executeDelayed(new TemporaryViewDisplayController$updateTimeout$cancelViewTimeout$1(this, displayInfo), i);
         Runnable runnable = displayInfo.cancelViewTimeout;
         if (runnable != null) {
             runnable.run();
         }
-        displayInfo.cancelViewTimeout = executeDelayed;
+        displayInfo.cancelViewTimeout = runnableExecuteDelayed;
         inflateAndUpdateView(displayInfo);
     }
 

@@ -12,7 +12,6 @@ import android.telephony.ims.aidl.ISipDelegateMessageCallback;
 import android.telephony.ims.aidl.ISipDelegateStateCallback;
 import android.telephony.ims.aidl.ISipTransport;
 import android.telephony.ims.aidl.SipDelegateAidlWrapper;
-import android.telephony.ims.stub.SipTransportImplBase;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +43,7 @@ public class SipTransportImplBase {
             SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$0();
+                    this.f$0.lambda$binderDied$0();
                 }
             });
         }
@@ -59,7 +58,7 @@ public class SipTransportImplBase {
             SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$1(iBinder);
+                    this.f$0.lambda$binderDied$1(iBinder);
                 }
             });
         }
@@ -72,16 +71,16 @@ public class SipTransportImplBase {
 
         @Override // android.telephony.ims.aidl.ISipTransport
         public void createSipDelegate(final int i, final DelegateRequest delegateRequest, final ISipDelegateStateCallback iSipDelegateStateCallback, final ISipDelegateMessageCallback iSipDelegateMessageCallback) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipTransportImplBase.AnonymousClass2.this.lambda$createSipDelegate$0(i, delegateRequest, iSipDelegateStateCallback, iSipDelegateMessageCallback);
+                        this.f$0.lambda$createSipDelegate$0(i, delegateRequest, iSipDelegateStateCallback, iSipDelegateMessageCallback);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -92,16 +91,16 @@ public class SipTransportImplBase {
 
         @Override // android.telephony.ims.aidl.ISipTransport
         public void destroySipDelegate(final ISipDelegate iSipDelegate, final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipTransportImplBase.AnonymousClass2.this.lambda$destroySipDelegate$1(iSipDelegate, i);
+                        this.f$0.lambda$destroySipDelegate$1(iSipDelegate, i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -139,23 +138,23 @@ public class SipTransportImplBase {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void destroySipDelegateInternal(ISipDelegate iSipDelegate, int i) {
-        SipDelegateAidlWrapper sipDelegateAidlWrapper;
+        SipDelegateAidlWrapper next;
         Iterator<SipDelegateAidlWrapper> it = this.mDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                sipDelegateAidlWrapper = null;
+                next = null;
                 break;
             } else {
-                sipDelegateAidlWrapper = it.next();
-                if (Objects.equals(iSipDelegate, sipDelegateAidlWrapper.getDelegateBinder())) {
+                next = it.next();
+                if (Objects.equals(iSipDelegate, next.getDelegateBinder())) {
                     break;
                 }
             }
         }
-        if (sipDelegateAidlWrapper != null) {
-            unlinkDeathRecipient(sipDelegateAidlWrapper);
-            this.mDelegates.remove(sipDelegateAidlWrapper);
-            destroySipDelegate(sipDelegateAidlWrapper.getDelegate(), i);
+        if (next != null) {
+            unlinkDeathRecipient(next);
+            this.mDelegates.remove(next);
+            destroySipDelegate(next.getDelegate(), i);
         } else {
             Log.w(LOG_TAG, "destroySipDelegateInternal, could not findSipDelegate corresponding to " + iSipDelegate);
         }

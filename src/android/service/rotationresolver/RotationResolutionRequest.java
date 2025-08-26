@@ -87,18 +87,18 @@ public final class RotationResolutionRequest implements Parcelable {
 
     RotationResolutionRequest(Parcel parcel) {
         boolean z = (parcel.readByte() & 8) != 0;
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        long readLong = parcel.readLong();
-        this.mForegroundPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mCurrentRotation = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, readInt);
-        this.mProposedRotation = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, readInt2);
+        String string = parcel.readString();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        long j = parcel.readLong();
+        this.mForegroundPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mCurrentRotation = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, i);
+        this.mProposedRotation = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, i2);
         this.mShouldUseCamera = z;
-        this.mTimeoutMillis = readLong;
-        AnnotationValidations.validate((Class<? extends Annotation>) DurationMillisLong.class, (Annotation) null, readLong);
+        this.mTimeoutMillis = j;
+        AnnotationValidations.validate((Class<? extends Annotation>) DurationMillisLong.class, (Annotation) null, j);
     }
 }

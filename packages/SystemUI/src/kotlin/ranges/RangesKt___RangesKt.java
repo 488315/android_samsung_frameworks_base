@@ -3,7 +3,6 @@ package kotlin.ranges;
 import androidx.compose.runtime.snapshots.SnapshotStateObserver$$ExternalSyntheticOutline0;
 import kotlin.ranges.IntProgression;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RangesKt___RangesKt extends RangesKt__RangesKt {
     public static int coerceIn(int i, int i2, int i3) {
@@ -24,9 +23,9 @@ public class RangesKt___RangesKt extends RangesKt__RangesKt {
 
     public static IntProgression step(IntRange intRange, int i) {
         boolean z = i > 0;
-        Integer valueOf = Integer.valueOf(i);
+        Integer numValueOf = Integer.valueOf(i);
         if (!z) {
-            throw new IllegalArgumentException("Step must be positive, was: " + valueOf + '.');
+            throw new IllegalArgumentException("Step must be positive, was: " + numValueOf + '.');
         }
         IntProgression.Companion companion = IntProgression.Companion;
         int i2 = intRange.first;
@@ -50,10 +49,10 @@ public class RangesKt___RangesKt extends RangesKt__RangesKt {
         if (j2 <= j3) {
             return j < j2 ? j2 : j > j3 ? j3 : j;
         }
-        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Cannot coerce value to an empty range: maximum ", j3, " is less than minimum ");
-        m.append(j2);
-        m.append('.');
-        throw new IllegalArgumentException(m.toString());
+        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Cannot coerce value to an empty range: maximum ", j3, " is less than minimum ");
+        sbM.append(j2);
+        sbM.append('.');
+        throw new IllegalArgumentException(sbM.toString());
     }
 
     public static float coerceIn(float f, float f2, float f3) {

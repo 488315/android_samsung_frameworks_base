@@ -13,7 +13,6 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HeadsetProfile implements LocalBluetoothProfile {
     public final BluetoothAdapter mBluetoothAdapter;
@@ -22,7 +21,6 @@ public final class HeadsetProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothHeadset mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeadsetServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ HeadsetServiceListener(HeadsetProfile headsetProfile, int i) {
             this();
@@ -39,16 +37,16 @@ public final class HeadsetProfile implements LocalBluetoothProfile {
             List<BluetoothDevice> connectedDevices = bluetoothHeadset.getConnectedDevices();
             if (connectedDevices != null && !connectedDevices.isEmpty()) {
                 for (BluetoothDevice bluetoothDevice : connectedDevices) {
-                    CachedBluetoothDevice findDevice = HeadsetProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                    if (findDevice == null) {
+                    CachedBluetoothDevice cachedBluetoothDeviceFindDevice = HeadsetProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                    if (cachedBluetoothDeviceFindDevice == null) {
                         Log.d("HeadsetProfile", "HeadsetProfile found new device: " + bluetoothDevice);
                         HeadsetProfile headsetProfile = HeadsetProfile.this;
-                        findDevice = headsetProfile.mDeviceManager.addDevice(headsetProfile.mProfileManager, bluetoothDevice);
+                        cachedBluetoothDeviceFindDevice = headsetProfile.mDeviceManager.addDevice(headsetProfile.mProfileManager, bluetoothDevice);
                     }
-                    if (findDevice != null) {
-                        Log.d("HeadsetProfile", "Update cached device : " + findDevice.getNameForLog());
-                        findDevice.onProfileStateChanged(HeadsetProfile.this, 2);
-                        findDevice.refresh();
+                    if (cachedBluetoothDeviceFindDevice != null) {
+                        Log.d("HeadsetProfile", "Update cached device : " + cachedBluetoothDeviceFindDevice.getNameForLog());
+                        cachedBluetoothDeviceFindDevice.onProfileStateChanged(HeadsetProfile.this, 2);
+                        cachedBluetoothDeviceFindDevice.refresh();
                     } else {
                         Log.d("HeadsetProfile", "Bluetooth device is null");
                     }

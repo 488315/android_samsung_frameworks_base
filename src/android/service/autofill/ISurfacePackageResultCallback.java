@@ -45,9 +45,9 @@ public interface ISurfacePackageResultCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISurfacePackageResultCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfacePackageResultCallback)) {
-                return (ISurfacePackageResultCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISurfacePackageResultCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISurfacePackageResultCallback)) {
+                return (ISurfacePackageResultCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface ISurfacePackageResultCallback extends IInterface {
 
             @Override // android.service.autofill.ISurfacePackageResultCallback
             public void onResult(SurfaceControlViewHost.SurfacePackage surfacePackage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfacePackageResultCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(surfacePackage, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfacePackageResultCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surfacePackage, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

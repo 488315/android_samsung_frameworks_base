@@ -101,10 +101,10 @@ public class TextFromFloat extends Operation implements VariableSupport, Seriali
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        float readFloat = wireBuffer.readFloat();
-        int readInt2 = wireBuffer.readInt();
-        list.add(new TextFromFloat(readInt, readFloat, (short) ((readInt2 >> 16) & 65535), (short) (readInt2 & 65535), wireBuffer.readInt()));
+        int i = wireBuffer.readInt();
+        float f = wireBuffer.readFloat();
+        int i2 = wireBuffer.readInt();
+        list.add(new TextFromFloat(i, f, (short) ((i2 >> 16) & 65535), (short) (i2 & 65535), wireBuffer.readInt()));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

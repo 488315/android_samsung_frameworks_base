@@ -1,6 +1,7 @@
 package com.android.systemui.navigationbar.bandaid.pack;
 
 import android.R;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Point;
 import com.android.systemui.BasicRune;
@@ -33,7 +34,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StableLayoutPack implements BandAidPack {
     public final List allBands;
@@ -68,7 +68,7 @@ public final class StableLayoutPack implements BandAidPack {
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
-                Ref$BooleanRef ref$BooleanRef2 = Ref$BooleanRef.this;
+                Ref$BooleanRef ref$BooleanRef2 = ref$BooleanRef;
                 EventTypeFactory.EventType.OnNavBarConfigChanged onNavBarConfigChanged = (EventTypeFactory.EventType.OnNavBarConfigChanged) kit.event;
                 ref$BooleanRef2.element = false;
                 NavBarStates navBarStates = kit.states;
@@ -80,9 +80,9 @@ public final class StableLayoutPack implements BandAidPack {
         };
         builder.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$1$2
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                Ref$BooleanRef ref$BooleanRef2 = Ref$BooleanRef.this;
+                Ref$BooleanRef ref$BooleanRef2 = ref$BooleanRef;
                 NavBarStore navBarStore2 = navBarStore;
                 if (ref$BooleanRef2.element) {
                     NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore2;
@@ -94,18 +94,18 @@ public final class StableLayoutPack implements BandAidPack {
                 }
             }
         };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
-        m.runeDependency = BasicRune.NAVBAR_KNOX_MONITOR;
-        m.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_NAVBAR_ATTACHED_TO_WINDOW;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
-        m.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
-        m.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m.priority = 0;
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$3$1
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        builderM.runeDependency = BasicRune.NAVBAR_KNOX_MONITOR;
+        builderM.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_NAVBAR_ATTACHED_TO_WINDOW;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
+        builderM.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
+        builderM.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM.priority = 0;
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$3$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStore navBarStore2 = NavBarStore.this;
+                NavBarStore navBarStore2 = navBarStore;
                 if (((NavBarStateManagerImpl) kit.manager).states.layoutChangedBeforeAttached) {
                     ((NavBarStoreImpl) navBarStore2).apply(kit, new NavBarStoreAction.ReinflateNavBar(null, 1, null));
                 }
@@ -113,12 +113,12 @@ public final class StableLayoutPack implements BandAidPack {
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m2 = ColorPack$$ExternalSyntheticOutline0.m(m, arrayList);
-        m2.runeDependency = z;
-        m2.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_INFLATE_LAYOUT_ID;
-        m2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetInflateLayoutID.class);
-        m2.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
-        m2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$5$1
+        Band.Builder builderM2 = ColorPack$$ExternalSyntheticOutline0.m(builderM, arrayList);
+        builderM2.runeDependency = z;
+        builderM2.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_INFLATE_LAYOUT_ID;
+        builderM2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetInflateLayoutID.class);
+        builderM2.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
+        builderM2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$5$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
@@ -131,28 +131,28 @@ public final class StableLayoutPack implements BandAidPack {
                 return Integer.valueOf(verticalLayoutID);
             }
         };
-        Band.Builder m3 = ColorPack$$ExternalSyntheticOutline0.m(m2, arrayList);
-        m3.runeDependency = z;
-        m3.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_DEFAULT_LAYOUT;
-        m3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetDefaultLayout.class);
-        m3.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
-        m3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$7$1
+        Band.Builder builderM3 = ColorPack$$ExternalSyntheticOutline0.m(builderM2, arrayList);
+        builderM3.runeDependency = z;
+        builderM3.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_DEFAULT_LAYOUT;
+        builderM3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetDefaultLayout.class);
+        builderM3.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
+        builderM3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$7$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) ((Band.Kit) obj).manager;
                 return navBarStateManagerImpl.isGestureMode() ? navBarStateManagerImpl.getGesturalLayout(navBarStateManagerImpl.isBottomGestureMode(true)) : navBarStateManagerImpl.getDefaultLayout();
             }
         };
-        Band.Builder m4 = ColorPack$$ExternalSyntheticOutline0.m(m3, arrayList);
-        m4.runeDependency = z;
-        m4.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_INFLATE_NAVBAR;
-        m4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetInflateButtonWidth.class);
-        m4.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
-        m4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$9$1
+        Band.Builder builderM4 = ColorPack$$ExternalSyntheticOutline0.m(builderM3, arrayList);
+        builderM4.runeDependency = z;
+        builderM4.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_INFLATE_NAVBAR;
+        builderM4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetInflateButtonWidth.class);
+        builderM4.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
+        builderM4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$9$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
-                StableLayoutPack stableLayoutPack = StableLayoutPack.this;
+                StableLayoutPack stableLayoutPack = this.this$0;
                 EventTypeFactory.EventType.GetInflateButtonWidth getInflateButtonWidth = (EventTypeFactory.EventType.GetInflateButtonWidth) kit.event;
                 int i2 = kit.displayId;
                 NavBarStateManager navBarStateManager = kit.manager;
@@ -186,9 +186,9 @@ public final class StableLayoutPack implements BandAidPack {
                     }
                 }
                 String str7 = getInflateButtonWidth.buttonSpec;
-                boolean contains = ((ArrayList) stableLayoutPack.mMainKeyList).contains(str7);
+                boolean zContains = ((ArrayList) stableLayoutPack.mMainKeyList).contains(str7);
                 boolean z3 = getInflateButtonWidth.landscape;
-                if (!contains) {
+                if (!zContains) {
                     SamsungNavigationBarInflaterView.Companion.getClass();
                     if (!str7.startsWith(SamsungNavigationBarInflaterView.navkey)) {
                         ArrayList arrayList2 = (ArrayList) stableLayoutPack.mExtraKeyList;
@@ -213,12 +213,12 @@ public final class StableLayoutPack implements BandAidPack {
                 return Integer.valueOf(((NavBarStateManagerImpl) navBarStateManager).getButtonWidth(z3));
             }
         };
-        Band.Builder m5 = ColorPack$$ExternalSyntheticOutline0.m(m4, arrayList);
-        m5.runeDependency = z;
-        m5.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_BAR_LAYOUT_PARAMS;
-        m5.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetBarLayoutParams.class);
-        m5.targetModules = Collections.singletonList(NavigationBar.class);
-        m5.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$11$1
+        Band.Builder builderM5 = ColorPack$$ExternalSyntheticOutline0.m(builderM4, arrayList);
+        builderM5.runeDependency = z;
+        builderM5.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_BAR_LAYOUT_PARAMS;
+        builderM5.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetBarLayoutParams.class);
+        builderM5.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM5.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$11$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
@@ -227,80 +227,80 @@ public final class StableLayoutPack implements BandAidPack {
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) kit.manager;
                 int barWidth = navBarStateManagerImpl.shouldShowSUWStyle() ? -1 : navBarStateManagerImpl.navBarLayoutParams.getBarWidth(navBarStateManagerImpl.states.canMove, i2);
                 int i3 = getBarLayoutParams.rotation;
-                return new NavBarStoreAction.NavBarLayoutInfo(barWidth, navBarStateManagerImpl.getNavBarHeight(i3), navBarStateManagerImpl.shouldShowSUWStyle() ? navBarStateManagerImpl.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size) : navBarStateManagerImpl.navBarLayoutParams.getBarInsetHeight(navBarStateManagerImpl.states.canMove, i3), navBarStateManagerImpl.shouldShowSUWStyle() ? -1 : navBarStateManagerImpl.navBarLayoutParams.getBarInsetWidth(navBarStateManagerImpl.states.canMove, i3), navBarStateManagerImpl.shouldShowSUWStyle() ? 80 : navBarStateManagerImpl.navBarLayoutParams.getBarGravity(navBarStateManagerImpl.states.canMove, i3));
+                return new NavBarStoreAction.NavBarLayoutInfo(barWidth, navBarStateManagerImpl.getNavBarHeight(i3), navBarStateManagerImpl.shouldShowSUWStyle() ? navBarStateManagerImpl.context.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size) : navBarStateManagerImpl.navBarLayoutParams.getBarInsetHeight(navBarStateManagerImpl.states.canMove, i3), navBarStateManagerImpl.shouldShowSUWStyle() ? -1 : navBarStateManagerImpl.navBarLayoutParams.getBarInsetWidth(navBarStateManagerImpl.states.canMove, i3), navBarStateManagerImpl.shouldShowSUWStyle() ? 80 : navBarStateManagerImpl.navBarLayoutParams.getBarGravity(navBarStateManagerImpl.states.canMove, i3));
             }
         };
-        Band.Builder m6 = ColorPack$$ExternalSyntheticOutline0.m(m5, arrayList);
-        m6.runeDependency = z;
-        m6.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_INFLATE_NAVBAR_SIDE_PADDING;
-        m6.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarSidePadding.class);
-        m6.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
-        m6.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$13$1
+        Band.Builder builderM6 = ColorPack$$ExternalSyntheticOutline0.m(builderM5, arrayList);
+        builderM6.runeDependency = z;
+        builderM6.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_INFLATE_NAVBAR_SIDE_PADDING;
+        builderM6.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarSidePadding.class);
+        builderM6.targetModules = Collections.singletonList(SamsungNavigationBarInflaterView.class);
+        builderM6.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$13$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
                 NavBarStateManager navBarStateManager = kit.manager;
-                boolean isSideAndBottomGestureMode$default = NavBarStateManager.isSideAndBottomGestureMode$default(navBarStateManager);
+                boolean zIsSideAndBottomGestureMode$default = NavBarStateManager.isSideAndBottomGestureMode$default(navBarStateManager);
                 boolean z2 = ((EventTypeFactory.EventType.GetNavBarSidePadding) kit.event).landscape;
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) navBarStateManager;
                 LayoutProvider layoutProvider = navBarStateManagerImpl.states.layoutProvider;
                 layoutProvider.getClass();
-                int spaceSidePadding = layoutProvider.getSpaceSidePadding(navBarStateManagerImpl.states.displaySize, z2, isSideAndBottomGestureMode$default);
+                int spaceSidePadding = layoutProvider.getSpaceSidePadding(navBarStateManagerImpl.states.displaySize, z2, zIsSideAndBottomGestureMode$default);
                 navBarStateManagerImpl.logNavBarStates(Integer.valueOf(spaceSidePadding), "getNavBarSidePadding");
                 return Integer.valueOf(spaceSidePadding);
             }
         };
-        Band.Builder m7 = ColorPack$$ExternalSyntheticOutline0.m(m6, arrayList);
-        m7.runeDependency = z;
-        m7.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_BAR_LAYOUT_PARAMS_CHANGED;
-        m7.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnBarLayoutParamsProviderChanged.class);
-        m7.targetModules = Collections.singletonList(NavBarStoreImpl.class);
-        m7.moduleDependencies = Collections.singletonList(NavigationBar.class);
-        m7.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$15$1
+        Band.Builder builderM7 = ColorPack$$ExternalSyntheticOutline0.m(builderM6, arrayList);
+        builderM7.runeDependency = z;
+        builderM7.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_BAR_LAYOUT_PARAMS_CHANGED;
+        builderM7.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnBarLayoutParamsProviderChanged.class);
+        builderM7.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builderM7.moduleDependencies = Collections.singletonList(NavigationBar.class);
+        builderM7.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$15$1
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((NavBarStoreImpl) NavBarStore.this).apply((Band.Kit) obj, new NavBarStoreAction.UpdateNavBarLayoutParams(null, 1, null));
+            public final void accept(Object obj) throws Resources.NotFoundException {
+                ((NavBarStoreImpl) navBarStore).apply((Band.Kit) obj, new NavBarStoreAction.UpdateNavBarLayoutParams(null, 1, null));
             }
         };
-        Band.Builder m8 = ColorPack$$ExternalSyntheticOutline0.m(m7, arrayList);
-        m8.runeDependency = z;
-        m8.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_BUTTON_TO_HIDE_KEYBOARD_CHANGED;
-        m8.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnButtonToHideKeyboardChanged.class);
-        m8.targetModules = Collections.singletonList(NavBarStoreImpl.class);
-        m8.moduleDependencies = Collections.singletonList(NavigationBar.class);
-        m8.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$17$1
+        Band.Builder builderM8 = ColorPack$$ExternalSyntheticOutline0.m(builderM7, arrayList);
+        builderM8.runeDependency = z;
+        builderM8.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_BUTTON_TO_HIDE_KEYBOARD_CHANGED;
+        builderM8.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnButtonToHideKeyboardChanged.class);
+        builderM8.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builderM8.moduleDependencies = Collections.singletonList(NavigationBar.class);
+        builderM8.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$17$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+            public final Object apply(Object obj) throws Resources.NotFoundException {
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply((Band.Kit) obj, new NavBarStoreAction.UpdateNavBarLayoutParams(null, 1, null));
                 return navBarStoreImpl;
             }
         };
-        Band.Builder m9 = ColorPack$$ExternalSyntheticOutline0.m(m8, arrayList);
-        m9.runeDependency = z;
-        m9.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_NAVBAR_INSETS;
-        m9.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarInsets.class);
-        m9.targetModules = Collections.singletonList(NavigationBar.class);
-        m9.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$19$1
+        Band.Builder builderM9 = ColorPack$$ExternalSyntheticOutline0.m(builderM8, arrayList);
+        builderM9.runeDependency = z;
+        builderM9.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_NAVBAR_INSETS;
+        builderM9.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarInsets.class);
+        builderM9.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM9.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$19$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
                 int i2 = ((EventTypeFactory.EventType.GetNavBarInsets) kit.event).insetHeight;
-                Insets of = i2 != -1 ? Insets.of(0, 0, 0, i2) : null;
+                Insets insetsOf = i2 != -1 ? Insets.of(0, 0, 0, i2) : null;
                 EventTypeFactory.EventType.GetNavBarInsets getNavBarInsets = (EventTypeFactory.EventType.GetNavBarInsets) kit.event;
                 if (getNavBarInsets.insetWidth == -1 || !((NavBarStateManagerImpl) kit.manager).isBottomGestureMode(false)) {
-                    return of;
+                    return insetsOf;
                 }
                 int i3 = getNavBarInsets.rotation;
-                return i3 == 1 ? Insets.of(0, 0, getNavBarInsets.insetWidth, 0) : i3 == 3 ? Insets.of(getNavBarInsets.insetWidth, 0, 0, 0) : of;
+                return i3 == 1 ? Insets.of(0, 0, getNavBarInsets.insetWidth, 0) : i3 == 3 ? Insets.of(getNavBarInsets.insetWidth, 0, 0, 0) : insetsOf;
             }
         };
-        Band.Builder m10 = ColorPack$$ExternalSyntheticOutline0.m(m9, arrayList);
-        m10.runeDependency = z;
-        m10.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_IME_INSETS;
-        m10.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetImeInsets.class);
-        m10.targetModules = Collections.singletonList(NavigationBar.class);
-        m10.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$21$1
+        Band.Builder builderM10 = ColorPack$$ExternalSyntheticOutline0.m(builderM9, arrayList);
+        builderM10.runeDependency = z;
+        builderM10.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_IME_INSETS;
+        builderM10.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetImeInsets.class);
+        builderM10.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM10.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$21$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
@@ -326,18 +326,18 @@ public final class StableLayoutPack implements BandAidPack {
                 return Insets.of(0, 0, 0, getImeInsets.insetHeight);
             }
         };
-        Band.Builder m11 = ColorPack$$ExternalSyntheticOutline0.m(m10, arrayList);
-        m11.runeDependency = z;
-        m11.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_MANDATORY_INSETS;
-        m11.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetMandatoryInsets.class);
-        m11.targetModules = Collections.singletonList(NavigationBar.class);
-        m11.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$23$1
+        Band.Builder builderM11 = ColorPack$$ExternalSyntheticOutline0.m(builderM10, arrayList);
+        builderM11.runeDependency = z;
+        builderM11.bandAidDependency = BandAid.STABLE_LAYOUT_PACK_GET_MANDATORY_INSETS;
+        builderM11.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetMandatoryInsets.class);
+        builderM11.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM11.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.StableLayoutPack$23$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) kit.manager;
                 GestureNavigationSettingsInteractor gestureNavigationSettingsInteractor = (GestureNavigationSettingsInteractor) navBarStateManagerImpl.interactorFactory.get(GestureNavigationSettingsInteractor.class);
-                int dimensionPixelSize = gestureNavigationSettingsInteractor != null ? gestureNavigationSettingsInteractor.bottomInsets : navBarStateManagerImpl.context.getResources().getDimensionPixelSize(R.dimen.seekbar_thumb_exclusion_max_size);
+                int dimensionPixelSize = gestureNavigationSettingsInteractor != null ? gestureNavigationSettingsInteractor.bottomInsets : navBarStateManagerImpl.context.getResources().getDimensionPixelSize(R.dimen.seekbar_track_background_height_material);
                 if (!navBarStateManagerImpl.isGestureMode()) {
                     return null;
                 }
@@ -360,7 +360,7 @@ public final class StableLayoutPack implements BandAidPack {
                 return Insets.of(0, 0, 0, dimensionPixelSize);
             }
         };
-        arrayList.add(m11.build());
+        arrayList.add(builderM11.build());
     }
 
     @Override // com.android.systemui.navigationbar.bandaid.BandAidPack

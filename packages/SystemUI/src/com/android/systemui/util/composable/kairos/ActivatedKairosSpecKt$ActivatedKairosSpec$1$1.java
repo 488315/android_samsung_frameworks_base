@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ActivatedKairosSpecKt$ActivatedKairosSpec$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $buildSpec;
@@ -36,7 +35,7 @@ final class ActivatedKairosSpecKt$ActivatedKairosSpec$1$1 extends SuspendLambda 
     public static final Object invokeSuspend$lambda$0(Function1 function1, MutableState mutableState, Object obj, BuildScope buildScope) {
         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
         buildScopeImpl.getClass();
-        return BuildScopeKt.launchEffect(buildScope, new ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1(function1.mo779invoke(buildScopeImpl), mutableState, obj, null));
+        return BuildScopeKt.launchEffect(buildScope, new ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$1$1(function1.mo781invoke(buildScopeImpl), mutableState, obj, null));
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -57,10 +56,8 @@ final class ActivatedKairosSpecKt$ActivatedKairosSpec$1$1 extends SuspendLambda 
             Function1 function12 = new Function1() { // from class: com.android.systemui.util.composable.kairos.ActivatedKairosSpecKt$ActivatedKairosSpec$1$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj3) {
-                    Object invokeSuspend$lambda$0;
-                    invokeSuspend$lambda$0 = ActivatedKairosSpecKt$ActivatedKairosSpec$1$1.invokeSuspend$lambda$0(Function1.this, mutableState, obj2, (BuildScope) obj3);
-                    return invokeSuspend$lambda$0;
+                public final Object mo781invoke(Object obj3) {
+                    return ActivatedKairosSpecKt$ActivatedKairosSpec$1$1.invokeSuspend$lambda$0(function1, mutableState, obj2, (BuildScope) obj3);
                 }
             };
             this.label = 1;

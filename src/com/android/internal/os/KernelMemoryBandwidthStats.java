@@ -19,15 +19,25 @@ public class KernelMemoryBandwidthStats {
     private boolean mStatsDoNotExist = false;
 
     public void updateStats() {
-        BufferedReader bufferedReader;
         if (this.mStatsDoNotExist) {
             return;
         }
-        long uptimeMillis = SystemClock.uptimeMillis();
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             try {
-                bufferedReader = new BufferedReader(new FileReader(mSysfsFile));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(mSysfsFile));
+                try {
+                    parseStats(bufferedReader);
+                    bufferedReader.close();
+                } catch (Throwable th) {
+                    try {
+                        bufferedReader.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
+                    }
+                    throw th;
+                }
             } catch (FileNotFoundException unused) {
                 Slog.w(TAG, "No kernel memory bandwidth stats available");
                 this.mBandwidthEntries.clear();
@@ -36,24 +46,13 @@ public class KernelMemoryBandwidthStats {
                 Slog.e(TAG, "Failed to read memory bandwidth: " + e.getMessage());
                 this.mBandwidthEntries.clear();
             }
-            try {
-                parseStats(bufferedReader);
-                bufferedReader.close();
-                StrictMode.setThreadPolicy(allowThreadDiskReads);
-                long uptimeMillis2 = SystemClock.uptimeMillis() - uptimeMillis;
-                if (uptimeMillis2 > 100) {
-                    Slog.w(TAG, "Reading memory bandwidth file took " + uptimeMillis2 + "ms");
-                }
-            } catch (Throwable th) {
-                try {
-                    bufferedReader.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
+            long jUptimeMillis2 = SystemClock.uptimeMillis() - jUptimeMillis;
+            if (jUptimeMillis2 > 100) {
+                Slog.w(TAG, "Reading memory bandwidth file took " + jUptimeMillis2 + "ms");
             }
         } catch (Throwable th3) {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             throw th3;
         }
     }
@@ -62,19 +61,19 @@ public class KernelMemoryBandwidthStats {
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(' ');
         this.mBandwidthEntries.clear();
         while (true) {
-            String readLine = bufferedReader.readLine();
-            if (readLine == null) {
+            String line = bufferedReader.readLine();
+            if (line == null) {
                 return;
             }
-            simpleStringSplitter.setString(readLine);
+            simpleStringSplitter.setString(line);
             simpleStringSplitter.next();
             int i = 0;
             do {
                 long j = i;
-                int indexOfKey = this.mBandwidthEntries.indexOfKey(j);
-                if (indexOfKey >= 0) {
+                int iIndexOfKey = this.mBandwidthEntries.indexOfKey(j);
+                if (iIndexOfKey >= 0) {
                     LongSparseLongArray longSparseLongArray = this.mBandwidthEntries;
-                    longSparseLongArray.put(j, longSparseLongArray.valueAt(indexOfKey) + (Long.parseLong(simpleStringSplitter.next()) / 1000000));
+                    longSparseLongArray.put(j, longSparseLongArray.valueAt(iIndexOfKey) + (Long.parseLong(simpleStringSplitter.next()) / 1000000));
                 } else {
                     this.mBandwidthEntries.put(j, Long.parseLong(simpleStringSplitter.next()) / 1000000);
                 }

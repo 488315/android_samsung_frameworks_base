@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImSessionListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.im.IImSessionListener";
 
     void onImSessionEstablished(boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImSessionListener {
         static final int TRANSACTION_onImSessionEstablished = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImSessionListener {
             private IBinder mRemote;
 
@@ -36,13 +33,13 @@ public interface IImSessionListener extends IInterface {
 
             @Override // com.sec.ims.im.IImSessionListener
             public void onImSessionEstablished(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImSessionListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImSessionListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -55,8 +52,8 @@ public interface IImSessionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImSessionListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImSessionListener)) ? new Proxy(iBinder) : (IImSessionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImSessionListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImSessionListener)) ? new Proxy(iBinder) : (IImSessionListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -71,9 +68,9 @@ public interface IImSessionListener extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            onImSessionEstablished(readBoolean);
+            onImSessionEstablished(z);
             return true;
         }
 
@@ -83,7 +80,6 @@ public interface IImSessionListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImSessionListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

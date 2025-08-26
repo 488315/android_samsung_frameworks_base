@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HeadsUpNotificationInteractor$canShowHeadsUp$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -23,14 +22,14 @@ final class HeadsUpNotificationInteractor$canShowHeadsUp$1 extends SuspendLambda
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
         HeadsUpNotificationInteractor$canShowHeadsUp$1 headsUpNotificationInteractor$canShowHeadsUp$1 = new HeadsUpNotificationInteractor$canShowHeadsUp$1((Continuation) obj5);
-        headsUpNotificationInteractor$canShowHeadsUp$1.Z$0 = booleanValue;
-        headsUpNotificationInteractor$canShowHeadsUp$1.Z$1 = booleanValue2;
+        headsUpNotificationInteractor$canShowHeadsUp$1.Z$0 = zBooleanValue;
+        headsUpNotificationInteractor$canShowHeadsUp$1.Z$1 = zBooleanValue2;
         headsUpNotificationInteractor$canShowHeadsUp$1.L$0 = (KeyguardState) obj3;
-        headsUpNotificationInteractor$canShowHeadsUp$1.Z$2 = booleanValue3;
+        headsUpNotificationInteractor$canShowHeadsUp$1.Z$2 = zBooleanValue3;
         return headsUpNotificationInteractor$canShowHeadsUp$1.invokeSuspend(Unit.INSTANCE);
     }
 

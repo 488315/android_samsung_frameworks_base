@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogSliderViewBinderKt$VolumeDialogSlider$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableInteractionSource $interactionSource;
@@ -54,12 +53,10 @@ final class VolumeDialogSliderViewBinderKt$VolumeDialogSlider$1$1 extends Suspen
                 public final Object emit(Object obj2, Continuation continuation) {
                     Interaction interaction = (Interaction) obj2;
                     boolean z = interaction instanceof DragInteraction$Start;
-                    VolumeDialogSliderViewModel volumeDialogSliderViewModel2 = VolumeDialogSliderViewModel.this;
+                    VolumeDialogSliderViewModel volumeDialogSliderViewModel2 = volumeDialogSliderViewModel;
                     if (z) {
                         volumeDialogSliderViewModel2.uiEventLogger.log(VolumeDialogUiEvent.VOLUME_DIALOG_SLIDER_STARTED_TRACKING_TOUCH);
-                    } else if (interaction instanceof DragInteraction$Cancel) {
-                        volumeDialogSliderViewModel2.uiEventLogger.log(VolumeDialogUiEvent.VOLUME_DIALOG_SLIDER_STOPPED_TRACKING_TOUCH);
-                    } else if (interaction instanceof DragInteraction$Stop) {
+                    } else if ((interaction instanceof DragInteraction$Cancel) || (interaction instanceof DragInteraction$Stop)) {
                         volumeDialogSliderViewModel2.uiEventLogger.log(VolumeDialogUiEvent.VOLUME_DIALOG_SLIDER_STOPPED_TRACKING_TOUCH);
                     }
                     return Unit.INSTANCE;

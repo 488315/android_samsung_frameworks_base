@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcCallCmdInfo implements Parcelable {
     public static final Parcelable.Creator<CmcCallCmdInfo> CREATOR = new Parcelable.Creator<CmcCallCmdInfo>() { // from class: com.sec.ims.cmc.CmcCallCmdInfo.1
@@ -24,7 +23,6 @@ public class CmcCallCmdInfo implements Parcelable {
     private int mExternalCallSlotAtPd;
     private String mPulledDialogId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         protected String mPulledDialogId = "";
         protected int mExternalCallSlotAtPd = -1;

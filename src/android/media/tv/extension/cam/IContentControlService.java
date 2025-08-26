@@ -61,9 +61,9 @@ public interface IContentControlService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IContentControlService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentControlService)) {
-                return (IContentControlService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IContentControlService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentControlService)) {
+                return (IContentControlService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,20 +96,20 @@ public interface IContentControlService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICamDrmInfoListener asInterface = ICamDrmInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamDrmInfoListener iCamDrmInfoListenerAsInterface = ICamDrmInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addCamDrmInfoListener(asInterface);
+                addCamDrmInfoListener(iCamDrmInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ICamDrmInfoListener asInterface2 = ICamDrmInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamDrmInfoListener iCamDrmInfoListenerAsInterface2 = ICamDrmInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeCamDrmInfoListener(asInterface2);
+                removeCamDrmInfoListener(iCamDrmInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = new Bundle();
                 parcel.enforceNoDataAvail();
-                int camDrmInfo = getCamDrmInfo(readInt, bundle);
+                int camDrmInfo = getCamDrmInfo(i3, bundle);
                 parcel2.writeNoException();
                 parcel2.writeInt(camDrmInfo);
                 parcel2.writeTypedObject(bundle, 1);
@@ -137,51 +137,51 @@ public interface IContentControlService extends IInterface {
 
             @Override // android.media.tv.extension.cam.IContentControlService
             public void addCamDrmInfoListener(ICamDrmInfoListener iCamDrmInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
-                    obtain.writeStrongInterface(iCamDrmInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
+                    parcelObtain.writeStrongInterface(iCamDrmInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.IContentControlService
             public void removeCamDrmInfoListener(ICamDrmInfoListener iCamDrmInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
-                    obtain.writeStrongInterface(iCamDrmInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
+                    parcelObtain.writeStrongInterface(iCamDrmInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.IContentControlService
             public int getCamDrmInfo(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IContentControlService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -4,18 +4,25 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Xml;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -26,8 +33,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSBackupRestoreManager {
     public static Cipher mCipher;
@@ -36,7 +43,6 @@ public class QSBackupRestoreManager {
     public static String mSecurityPassword;
     public final LinkedHashMap mQSBnRMap = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         boolean isValidDB();
 
@@ -45,7 +51,6 @@ public class QSBackupRestoreManager {
         void onRestore(String str);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ERR_CODE {
         SUCCESS(0),
         UNKNOWN_ERROR(1),
@@ -66,7 +71,6 @@ public class QSBackupRestoreManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class QSBnRReceiver extends BroadcastReceiver {
         public Thread mBackupThread;
 
@@ -97,10 +101,10 @@ public class QSBackupRestoreManager {
                                     qSBackupRestoreManager.getClass();
                                     Log.d("QSBackupRestoreManager", "start restore basePath=" + str + " source=" + str2);
                                     ERR_CODE err_code = ERR_CODE.SUCCESS;
-                                    String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/");
+                                    String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/");
                                     try {
                                         QSBackupRestoreManager.streamCrypt(str3);
-                                        if (qSBackupRestoreManager.loadRestoreFile(QSBackupRestoreManager.decrypt(i2, m))) {
+                                        if (qSBackupRestoreManager.loadRestoreFile(QSBackupRestoreManager.decrypt(i2, strM))) {
                                             i = 0;
                                         } else {
                                             err_code = ERR_CODE.INVALID_DATA;
@@ -120,7 +124,7 @@ public class QSBackupRestoreManager {
                     if (intExtra != 2) {
                         Thread thread = new Thread(new Runnable(this) { // from class: com.android.systemui.qs.QSBackupRestoreManager.QSBnRReceiver.1
                             @Override // java.lang.Runnable
-                            public final void run() {
+                            public final void run() throws Throwable {
                                 QSBackupRestoreManager qSBackupRestoreManager = (QSBackupRestoreManager) Dependency.sDependency.getDependencyInner(QSBackupRestoreManager.class);
                                 Context context2 = context;
                                 String str = stringExtra;
@@ -130,15 +134,15 @@ public class QSBackupRestoreManager {
                                 qSBackupRestoreManager.getClass();
                                 Log.d("QSBackupRestoreManager", "start backup basePath=" + str + " source=" + str2);
                                 ERR_CODE err_code = ERR_CODE.SUCCESS;
-                                String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/");
+                                String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/");
                                 try {
                                     QSBackupRestoreManager.streamCrypt(str3);
-                                    int createBackupFile = qSBackupRestoreManager.createBackupFile(i, m);
-                                    Log.d("QSBackupRestoreManager", "resultCode=" + createBackupFile);
-                                    if (createBackupFile == 1) {
+                                    int iCreateBackupFile = qSBackupRestoreManager.createBackupFile(i, strM);
+                                    Log.d("QSBackupRestoreManager", "resultCode=" + iCreateBackupFile);
+                                    if (iCreateBackupFile == 1) {
                                         err_code = ERR_CODE.INVALID_DATA;
                                     }
-                                    QSBackupRestoreManager.sendResponse(context2, "com.samsung.android.intent.action.RESPONSE_BACKUP_QUICKPANEL2", createBackupFile, err_code, str2, "");
+                                    QSBackupRestoreManager.sendResponse(context2, "com.samsung.android.intent.action.RESPONSE_BACKUP_QUICKPANEL2", iCreateBackupFile, err_code, str2, "");
                                 } catch (Exception e) {
                                     QSBackupRestoreManager.sendResponse(context2, "com.samsung.android.intent.action.RESPONSE_BACKUP_QUICKPANEL2", 1, ERR_CODE.INVALID_DATA, str2, "");
                                     e.printStackTrace();
@@ -167,19 +171,11 @@ public class QSBackupRestoreManager {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00cf, code lost:
-    
-        if (r3 != 0) goto L60;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00b8, code lost:
-    
-        r3.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00b6, code lost:
-    
-        if (r3 != 0) goto L60;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00b8 A[PHI: r2 r3 r10
+      0x00b8: PHI (r2v10 ??) = (r2v8 ??), (r2v11 ??) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]
+      0x00b8: PHI (r3v8 ??) = (r3v6 ??), (r3v9 ??) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]
+      0x00b8: PHI (r10v7 java.io.InputStream) = (r10v5 java.io.InputStream), (r10v8 java.io.InputStream) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]] */
     /* JADX WARN: Type inference failed for: r2v10 */
     /* JADX WARN: Type inference failed for: r2v11, types: [java.io.OutputStream] */
     /* JADX WARN: Type inference failed for: r2v14 */
@@ -218,17 +214,147 @@ public class QSBackupRestoreManager {
     /* JADX WARN: Type inference failed for: r3v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.io.File decrypt(int r9, java.lang.String r10) {
-        /*
-            Method dump skipped, instructions count: 227
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.QSBackupRestoreManager.decrypt(int, java.lang.String):java.io.File");
+    public static File decrypt(int i, String str) throws Throwable {
+        OutputStream outputStream;
+        InputStream inputStream;
+        File file = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/decrypt_quickpanel.xml"));
+        ?? fileInputStream = "/encrypt_quickpanel.xml";
+        ?? file2 = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/encrypt_quickpanel.xml"));
+        InputStream inputStream2 = null;
+        try {
+            try {
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (IOException e) {
+            e = e;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Exception e2) {
+            e = e2;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Throwable th2) {
+            th = th2;
+            file2 = 0;
+            fileInputStream = 0;
+        }
+        if (!file2.exists()) {
+            Log.e("QSBackupRestoreManager", "decrypt: file is not found.encrypt_quickpanel.xml");
+            return null;
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        if (file2.length() > 0) {
+            fileInputStream = new FileInputStream((File) file2);
+            try {
+                InputStream inputStreamDecryptStream = decryptStream(fileInputStream, i);
+                try {
+                    file2 = new FileOutputStream(file);
+                    try {
+                        byte[] bArr = new byte[1024];
+                        while (true) {
+                            int i2 = inputStreamDecryptStream.read(bArr, 0, 1024);
+                            if (i2 == -1) {
+                                break;
+                            }
+                            file2.write(bArr, 0, i2);
+                        }
+                        inputStream2 = inputStreamDecryptStream;
+                        outputStream = file2;
+                        inputStream = fileInputStream;
+                    } catch (IOException e3) {
+                        inputStream2 = inputStreamDecryptStream;
+                        e = e3;
+                        file2 = file2;
+                        fileInputStream = fileInputStream;
+                        Log.d("QSBackupRestoreManager", e.toString());
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                            fileInputStream.close();
+                        }
+                        return file;
+                    } catch (Exception e4) {
+                        inputStream2 = inputStreamDecryptStream;
+                        e = e4;
+                        file2 = file2;
+                        fileInputStream = fileInputStream;
+                        Log.d("QSBackupRestoreManager", e.toString());
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                        }
+                        return file;
+                    } catch (Throwable th3) {
+                        inputStream2 = inputStreamDecryptStream;
+                        th = th3;
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                            fileInputStream.close();
+                        }
+                        throw th;
+                    }
+                } catch (IOException e5) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e5;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Exception e6) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e6;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Throwable th4) {
+                    file2 = 0;
+                    inputStream2 = inputStreamDecryptStream;
+                    th = th4;
+                }
+            } catch (IOException e7) {
+                e = e7;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Exception e8) {
+                e = e8;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Throwable th5) {
+                th = th5;
+                file2 = 0;
+            }
+        } else {
+            outputStream = null;
+            inputStream = null;
+        }
+        if (inputStream2 != null) {
+            inputStream2.close();
+        }
+        if (outputStream != null) {
+            outputStream.close();
+        }
+        if (inputStream != null) {
+            inputStream.close();
+            return file;
+        }
+        return file;
     }
 
-    public static InputStream decryptStream(InputStream inputStream, int i) {
+    public static InputStream decryptStream(InputStream inputStream, int i) throws IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArr = new byte[mCipher.getBlockSize()];
         inputStream.read(bArr);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(bArr);
@@ -244,23 +370,11 @@ public class QSBackupRestoreManager {
         return new CipherInputStream(inputStream, mCipher);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00a8, code lost:
-    
-        if (r1 != 0) goto L51;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x0091, code lost:
-    
-        r1.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00ab, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x008f, code lost:
-    
-        if (r1 != 0) goto L51;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x0091 A[PHI: r1 r7 r8
+      0x0091: PHI (r1v8 ??) = (r1v6 ??), (r1v9 ??) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r7v6 java.io.FileInputStream) = (r7v4 java.io.FileInputStream), (r7v7 java.io.FileInputStream) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r8v8 ??) = (r8v6 ??), (r8v9 ??) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]] */
     /* JADX WARN: Type inference failed for: r1v0, types: [java.io.File] */
     /* JADX WARN: Type inference failed for: r1v1 */
     /* JADX WARN: Type inference failed for: r1v10 */
@@ -293,17 +407,142 @@ public class QSBackupRestoreManager {
     /* JADX WARN: Type inference failed for: r8v9, types: [java.io.OutputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void encrypt(java.io.File r6, java.lang.String r7, int r8) {
-        /*
-            Method dump skipped, instructions count: 188
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.QSBackupRestoreManager.encrypt(java.io.File, java.lang.String, int):void");
+    public static void encrypt(File file, String str, int i) throws Throwable {
+        OutputStream outputStream;
+        FileOutputStream fileOutputStream;
+        OutputStream outputStream2;
+        FileOutputStream fileOutputStream2;
+        OutputStream outputStream3;
+        FileOutputStream fileOutputStream3;
+        ?? file2 = new File(str);
+        FileInputStream fileInputStream = null;
+        outputStreamEncryptStream = null;
+        outputStreamEncryptStream = null;
+        OutputStream outputStreamEncryptStream = null;
+        FileInputStream fileInputStream2 = null;
+        fileInputStream = null;
+        fileInputStream = null;
+        fileInputStream = null;
+        try {
+            try {
+                if (!file2.exists()) {
+                    file2.createNewFile();
+                }
+                if (file.length() > 0) {
+                    FileInputStream fileInputStream3 = new FileInputStream(file);
+                    try {
+                        FileOutputStream fileOutputStream4 = new FileOutputStream((File) file2);
+                        try {
+                            outputStreamEncryptStream = encryptStream(fileOutputStream4, i);
+                            byte[] bArr = new byte[1024];
+                            while (true) {
+                                int i2 = fileInputStream3.read(bArr, 0, 1024);
+                                if (i2 == -1) {
+                                    break;
+                                } else {
+                                    outputStreamEncryptStream.write(bArr, 0, i2);
+                                }
+                            }
+                            fileOutputStream = fileOutputStream4;
+                            outputStream = outputStreamEncryptStream;
+                            fileInputStream2 = fileInputStream3;
+                        } catch (IOException e) {
+                            fileOutputStream3 = fileOutputStream4;
+                            e = e;
+                            outputStream3 = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            file2 = fileOutputStream3;
+                            i = outputStream3;
+                            Log.d("QSBackupRestoreManager", e.toString());
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                                file2.close();
+                            }
+                            return;
+                        } catch (Exception e2) {
+                            fileOutputStream2 = fileOutputStream4;
+                            e = e2;
+                            outputStream2 = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            file2 = fileOutputStream2;
+                            i = outputStream2;
+                            Log.d("QSBackupRestoreManager", e.toString());
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                            }
+                            return;
+                        } catch (Throwable th) {
+                            file2 = fileOutputStream4;
+                            th = th;
+                            i = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                                file2.close();
+                            }
+                            throw th;
+                        }
+                    } catch (IOException e3) {
+                        e = e3;
+                        outputStream3 = null;
+                        fileOutputStream3 = null;
+                    } catch (Exception e4) {
+                        e = e4;
+                        outputStream2 = null;
+                        fileOutputStream2 = null;
+                    } catch (Throwable th2) {
+                        th = th2;
+                        i = 0;
+                        file2 = 0;
+                    }
+                } else {
+                    outputStream = null;
+                    fileOutputStream = null;
+                }
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            } catch (Throwable th3) {
+                th = th3;
+            }
+        } catch (IOException e5) {
+            e = e5;
+            i = 0;
+            file2 = 0;
+        } catch (Exception e6) {
+            e = e6;
+            i = 0;
+            file2 = 0;
+        } catch (Throwable th4) {
+            th = th4;
+            i = 0;
+            file2 = 0;
+        }
     }
 
-    public static OutputStream encryptStream(OutputStream outputStream, int i) {
+    public static OutputStream encryptStream(OutputStream outputStream, int i) throws IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArr = new byte[mCipher.getBlockSize()];
         new SecureRandom().nextBytes(bArr);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(bArr);
@@ -325,7 +564,7 @@ public class QSBackupRestoreManager {
         return new SecretKeySpec(SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new PBEKeySpec(mSecurityPassword.toCharArray(), mSalt, 1000, 256)).getEncoded(), "AES");
     }
 
-    public static SecretKeySpec generateSHA256SecretKey() {
+    public static SecretKeySpec generateSHA256SecretKey() throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(mSecurityPassword.getBytes("UTF-8"));
         byte[] bArr = new byte[16];
@@ -334,10 +573,10 @@ public class QSBackupRestoreManager {
     }
 
     public static void sendResponse(Context context, String str, int i, ERR_CODE err_code, String str2, String str3) {
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, " action=", str, " resultCode=", " errorCode=");
-        m888m.append(err_code);
-        m888m.append(" requiredSize=0");
-        Log.d("QSBackupRestoreManager", m888m.toString());
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, " action=", str, " resultCode=", " errorCode=");
+        sbM890m.append(err_code);
+        sbM890m.append(" requiredSize=0");
+        Log.d("QSBackupRestoreManager", sbM890m.toString());
         Intent intent = new Intent();
         intent.setAction(str);
         intent.putExtra("RESULT", i);
@@ -351,7 +590,7 @@ public class QSBackupRestoreManager {
         Log.d("QSBackupRestoreManager", "sendBroadcast. ");
     }
 
-    public static void streamCrypt(String str) {
+    public static void streamCrypt(String str) throws NoSuchAlgorithmException {
         mSecurityPassword = str;
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(mSecurityPassword.getBytes("UTF-8"));
@@ -368,111 +607,231 @@ public class QSBackupRestoreManager {
         this.mQSBnRMap.put(str, callback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x016e  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x01a0  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0175  */
+    /* JADX WARN: Can't wrap try/catch for region: R(22:0|2|(3:80|3|(1:5))|9|(1:11)|12|(1:14)|(2:73|15)|19|(3:78|68|20)|(6:82|21|(4:24|(4:27|(4:29|(1:31)|36|86)(1:87)|37|25)|85|22)|84|38|39)|77|49|(1:51)(1:52)|70|53|54|57|(1:59)|60|61|(1:(0))) */
+    /* JADX WARN: Code restructure failed: missing block: B:55:0x0196, code lost:
+    
+        r0 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:56:0x0197, code lost:
+    
+        r0.printStackTrace();
+     */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x016e  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0175  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x01a0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int createBackupFile(int r17, java.lang.String r18) {
-        /*
-            Method dump skipped, instructions count: 436
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.QSBackupRestoreManager.createBackupFile(int, java.lang.String):int");
-    }
-
-    public final boolean loadRestoreFile(File file) {
-        String name;
-        Log.d("QSBackupRestoreManager", " filename=" + file);
-        FileInputStream fileInputStream = null;
+    public final int createBackupFile(int i, String str) throws Throwable {
+        int i2;
+        Throwable th;
+        FileWriter fileWriter;
+        Log.d("QSBackupRestoreManager", "create backup file basePath=" + str);
+        try {
+            File file = new File(str + "quickpanel.xml");
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("QSBackupRestoreManager", "basePath=" + str);
+        File file2 = new File(str);
+        if (!file2.exists()) {
+            Log.i("QSBackupRestoreManager", file2.mkdir() + "folder created last");
+        }
+        File file3 = new File(file2.getPath() + "/quickpanel.xml");
+        if (file3.exists()) {
+            file3.delete();
+        }
+        try {
+            file3.createNewFile();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        Log.i("QSBackupRestoreManager", "filePath=" + file3.getPath());
+        Log.i("QSBackupRestoreManager", "generateResultXML file = " + file3);
+        XmlSerializer xmlSerializerNewSerializer = Xml.newSerializer();
+        int i3 = 0;
+        FileWriter fileWriter2 = null;
         try {
             try {
                 try {
-                    FileInputStream fileInputStream2 = new FileInputStream(file);
-                    try {
-                        XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-                        newPullParser.setInput(fileInputStream2, "UTF-8");
-                        for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.next()) {
-                            if (eventType == 0) {
-                                newPullParser.getName();
-                            } else if (eventType == 2) {
-                                String name2 = newPullParser.getName();
-                                if (this.mQSBnRMap.containsKey(name2)) {
-                                    Callback callback = (Callback) this.mQSBnRMap.get(name2);
-                                    newPullParser.next();
-                                    callback.onRestore(newPullParser.getName() + "::" + newPullParser.nextText());
-                                }
-                            } else if (eventType == 3 && (name = newPullParser.getName()) != null) {
-                                Log.d("QSBackupRestoreManager", "END_TAG : " + name);
-                            }
-                        }
-                        try {
-                            fileInputStream2.close();
-                            return true;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return true;
-                        }
-                    } catch (IOException e2) {
-                        e = e2;
-                        fileInputStream = fileInputStream2;
-                        e.printStackTrace();
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return false;
-                    } catch (IllegalArgumentException e3) {
-                        e = e3;
-                        fileInputStream = fileInputStream2;
-                        e.printStackTrace();
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return false;
-                    } catch (IllegalStateException e4) {
-                        e = e4;
-                        fileInputStream = fileInputStream2;
-                        e.printStackTrace();
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return false;
-                    } catch (XmlPullParserException e5) {
-                        e = e5;
-                        fileInputStream = fileInputStream2;
-                        e.printStackTrace();
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return false;
-                    } catch (Throwable th) {
-                        th = th;
-                        fileInputStream = fileInputStream2;
-                        if (fileInputStream != null) {
-                            try {
-                                fileInputStream.close();
-                            } catch (IOException e6) {
-                                e6.printStackTrace();
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (IOException e7) {
-                    e = e7;
-                } catch (IllegalArgumentException e8) {
-                    e = e8;
-                } catch (IllegalStateException e9) {
-                    e = e9;
-                } catch (XmlPullParserException e10) {
-                    e = e10;
+                    fileWriter = new FileWriter(file3);
+                } catch (IOException e3) {
+                    e = e3;
                 }
             } catch (Throwable th2) {
                 th = th2;
             }
-        } catch (IOException e11) {
-            e11.printStackTrace();
+        } catch (IOException e4) {
+            e4.printStackTrace();
+        }
+        try {
+            xmlSerializerNewSerializer.setOutput(fileWriter);
+            xmlSerializerNewSerializer.startDocument("UTF-8", Boolean.TRUE);
+            xmlSerializerNewSerializer.startTag("", "quickpanel");
+            for (Map.Entry entry : this.mQSBnRMap.entrySet()) {
+                String str2 = (String) entry.getKey();
+                Callback callback = (Callback) entry.getValue();
+                String[] strArrSplit = callback.onBackup(callback.isValidDB()).split("::");
+                int i4 = 0;
+                while (i4 < strArrSplit.length) {
+                    if (strArrSplit[i4].equals("TAG")) {
+                        xmlSerializerNewSerializer.startTag("", str2);
+                        int i5 = i4 + 1;
+                        xmlSerializerNewSerializer.startTag("", strArrSplit[i5]);
+                        i4 += 2;
+                        String str3 = strArrSplit[i4];
+                        if (str3 == null) {
+                            str3 = "null";
+                        }
+                        xmlSerializerNewSerializer.text(str3);
+                        xmlSerializerNewSerializer.endTag("", strArrSplit[i5]);
+                        xmlSerializerNewSerializer.endTag("", str2);
+                    }
+                    i4++;
+                }
+            }
+            xmlSerializerNewSerializer.endTag("", "quickpanel");
+            xmlSerializerNewSerializer.endDocument();
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e5) {
+            e = e5;
+            fileWriter2 = fileWriter;
+            e.printStackTrace();
+            if (fileWriter2 != null) {
+                fileWriter2.flush();
+                fileWriter2.close();
+            }
+            if (file3.length() > 0) {
+            }
+            encrypt(file3, str + "/encrypt_quickpanel.xml", i);
+            i3 = i2;
+            if (file3.exists()) {
+            }
+            return i3 ^ 1;
+        } catch (Throwable th3) {
+            th = th3;
+            fileWriter2 = fileWriter;
+            if (fileWriter2 == null) {
+                throw th;
+            }
+            try {
+                fileWriter2.flush();
+                fileWriter2.close();
+                throw th;
+            } catch (IOException e6) {
+                e6.printStackTrace();
+                throw th;
+            }
+        }
+        if (file3.length() > 0) {
+            Log.e("QSBackupRestoreManager", "Backup file size error");
+            i2 = 0;
+        } else {
+            i2 = 1;
+        }
+        encrypt(file3, str + "/encrypt_quickpanel.xml", i);
+        i3 = i2;
+        if (file3.exists()) {
+            file3.delete();
+        }
+        return i3 ^ 1;
+    }
+
+    public final boolean loadRestoreFile(File file) throws Throwable {
+        FileInputStream fileInputStream;
+        String name;
+        Log.d("QSBackupRestoreManager", " filename=" + file);
+        FileInputStream fileInputStream2 = null;
+        try {
+            try {
+                try {
+                    fileInputStream = new FileInputStream(file);
+                } catch (Throwable th) {
+                    th = th;
+                }
+            } catch (IOException e) {
+                e = e;
+            } catch (IllegalArgumentException e2) {
+                e = e2;
+            } catch (IllegalStateException e3) {
+                e = e3;
+            } catch (XmlPullParserException e4) {
+                e = e4;
+            }
+        } catch (IOException e5) {
+            e5.printStackTrace();
+        }
+        try {
+            XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+            xmlPullParserNewPullParser.setInput(fileInputStream, "UTF-8");
+            for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.next()) {
+                if (eventType == 0) {
+                    xmlPullParserNewPullParser.getName();
+                } else if (eventType == 2) {
+                    String name2 = xmlPullParserNewPullParser.getName();
+                    if (this.mQSBnRMap.containsKey(name2)) {
+                        Callback callback = (Callback) this.mQSBnRMap.get(name2);
+                        xmlPullParserNewPullParser.next();
+                        callback.onRestore(xmlPullParserNewPullParser.getName() + "::" + xmlPullParserNewPullParser.nextText());
+                    }
+                } else if (eventType == 3 && (name = xmlPullParserNewPullParser.getName()) != null) {
+                    Log.d("QSBackupRestoreManager", "END_TAG : " + name);
+                }
+            }
+            try {
+                fileInputStream.close();
+                return true;
+            } catch (IOException e6) {
+                e6.printStackTrace();
+                return true;
+            }
+        } catch (IOException e7) {
+            e = e7;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return false;
+        } catch (IllegalArgumentException e8) {
+            e = e8;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return false;
+        } catch (IllegalStateException e9) {
+            e = e9;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return false;
+        } catch (XmlPullParserException e10) {
+            e = e10;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return false;
+        } catch (Throwable th2) {
+            th = th2;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e11) {
+                    e11.printStackTrace();
+                }
+            }
+            throw th;
         }
     }
 

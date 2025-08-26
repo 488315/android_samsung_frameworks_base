@@ -19,7 +19,6 @@ import androidx.core.graphics.PathParser;
 import com.android.systemui.R;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslRoundedCorner {
     public final SeslRoundedChunkingDrawable mBottomLeftRound;
@@ -35,7 +34,6 @@ public class SeslRoundedCorner {
     public final SeslRoundedChunkingDrawable mTopRightRound;
     public final int mTopRightRoundColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeslRoundedChunkingDrawable extends Drawable {
         public final float mAngle;
         public ColorFilter mColorFilter;
@@ -72,31 +70,31 @@ public class SeslRoundedCorner {
             } else {
                 float f2 = i / 2.0f;
                 float f3 = i2 / 2.0f;
-                float min = Math.min(f2, f3);
-                float min2 = Math.min(Math.max(f, 0.0f), min);
-                float f4 = min2 / min;
-                float min3 = f4 > 0.5f ? 1.0f - (Math.min(1.0f, (f4 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
-                float min4 = ((double) f4) > 0.6d ? 1.0f + (Math.min(1.0f, (f4 - 0.6f) / 0.3f) * 0.042454004f) : 1.0f;
+                float fMin = Math.min(f2, f3);
+                float fMin2 = Math.min(Math.max(f, 0.0f), fMin);
+                float f4 = fMin2 / fMin;
+                float fMin3 = f4 > 0.5f ? 1.0f - (Math.min(1.0f, (f4 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
+                float fMin4 = ((double) f4) > 0.6d ? 1.0f + (Math.min(1.0f, (f4 - 0.6f) / 0.3f) * 0.042454004f) : 1.0f;
                 if (z || this.mPathDataNodes == null) {
-                    float f5 = (f2 / min2) * 100.0f;
+                    float f5 = (f2 / fMin2) * 100.0f;
                     Locale locale = Locale.ENGLISH;
-                    float f6 = min3 * 128.19f;
-                    String format = String.format(locale, "L %f %f ", Float.valueOf(0.0f), Float.valueOf(Math.min((f3 / min2) * 100.0f, f6)));
-                    float f7 = min4 * 83.62f;
-                    String format2 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(0.0f), Float.valueOf(f7), Float.valueOf(4.64f), Float.valueOf(67.45f), Float.valueOf(13.36f), Float.valueOf(51.16f));
-                    String format3 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(22.07f), Float.valueOf(34.86f), Float.valueOf(34.86f), Float.valueOf(22.07f), Float.valueOf(51.16f), Float.valueOf(13.36f));
-                    String format4 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(67.45f), Float.valueOf(4.64f), Float.valueOf(f7), Float.valueOf(0.0f), Float.valueOf(Math.min(f5, f6)), Float.valueOf(0.0f));
-                    String format5 = String.format(locale, "L %f %f ", Float.valueOf(Math.min(f5, f6)), Float.valueOf(0.0f));
-                    StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("M 0 0 ", format, format2, format3, format4);
-                    m.append(format5);
-                    m.append("Z");
-                    this.mPathDataNodes = PathParser.createNodesFromPathData(m.toString());
+                    float f6 = fMin3 * 128.19f;
+                    String str = String.format(locale, "L %f %f ", Float.valueOf(0.0f), Float.valueOf(Math.min((f3 / fMin2) * 100.0f, f6)));
+                    float f7 = fMin4 * 83.62f;
+                    String str2 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(0.0f), Float.valueOf(f7), Float.valueOf(4.64f), Float.valueOf(67.45f), Float.valueOf(13.36f), Float.valueOf(51.16f));
+                    String str3 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(22.07f), Float.valueOf(34.86f), Float.valueOf(34.86f), Float.valueOf(22.07f), Float.valueOf(51.16f), Float.valueOf(13.36f));
+                    String str4 = String.format(locale, "C %f %f %f %f %f %f ", Float.valueOf(67.45f), Float.valueOf(4.64f), Float.valueOf(f7), Float.valueOf(0.0f), Float.valueOf(Math.min(f5, f6)), Float.valueOf(0.0f));
+                    String str5 = String.format(locale, "L %f %f ", Float.valueOf(Math.min(f5, f6)), Float.valueOf(0.0f));
+                    StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("M 0 0 ", str, str2, str3, str4);
+                    sbM.append(str5);
+                    sbM.append("Z");
+                    this.mPathDataNodes = PathParser.createNodesFromPathData(sbM.toString());
                 }
                 this.mPath.reset();
                 PathParser.nodesToPath(this.mPathDataNodes, this.mPath);
                 path = this.mPath;
                 Matrix matrix = new Matrix();
-                float f8 = min2 / 100.0f;
+                float f8 = fMin2 / 100.0f;
                 matrix.setScale(f8, f8);
                 path.transform(matrix);
                 Rect bounds = getBounds();
@@ -215,35 +213,35 @@ public class SeslRoundedCorner {
         this.mRoundedCornerMode = i;
     }
 
-    public SeslRoundedCorner(Context context, boolean z) {
+    public SeslRoundedCorner(Context context, boolean z) throws Resources.NotFoundException {
+        int color;
         int i;
         int i2;
-        int i3;
         this.mRoundedCornerBounds = new Rect();
         this.mInsets = null;
         Resources resources = context.getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.sesl_rounded_corner_radius);
         this.mRoundRadius = dimensionPixelSize;
-        boolean isLightTheme = SeslMisc.isLightTheme(context);
+        boolean zIsLightTheme = SeslMisc.isLightTheme(context);
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.roundedCornerColor, typedValue, true);
-        int i4 = typedValue.resourceId;
-        if (i4 <= 0 || (i3 = typedValue.type) < 28 || i3 > 31) {
-            i = typedValue.data;
-            if (i <= 0 || (i2 = typedValue.type) < 28 || i2 > 31) {
-                i = resources.getColor(!isLightTheme ? R.color.sesl_round_and_bgcolor_dark : R.color.sesl_round_and_bgcolor_light);
+        int i3 = typedValue.resourceId;
+        if (i3 <= 0 || (i2 = typedValue.type) < 28 || i2 > 31) {
+            color = typedValue.data;
+            if (color <= 0 || (i = typedValue.type) < 28 || i > 31) {
+                color = resources.getColor(!zIsLightTheme ? R.color.sesl_round_and_bgcolor_dark : R.color.sesl_round_and_bgcolor_light);
             }
         } else {
-            i = resources.getColor(i4);
+            color = resources.getColor(i3);
         }
-        this.mBottomRightRoundColor = i;
-        this.mBottomLeftRoundColor = i;
-        this.mTopRightRoundColor = i;
-        this.mTopLeftRoundColor = i;
+        this.mBottomRightRoundColor = color;
+        this.mBottomLeftRoundColor = color;
+        this.mTopRightRoundColor = color;
+        this.mTopLeftRoundColor = color;
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(-1);
-        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(i, PorterDuff.Mode.SRC_IN);
+        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
         SeslRoundedChunkingDrawable seslRoundedChunkingDrawable = new SeslRoundedChunkingDrawable(dimensionPixelSize, paint, 0.0f);
         this.mTopLeftRound = seslRoundedChunkingDrawable;
         seslRoundedChunkingDrawable.mColorFilter = porterDuffColorFilter;

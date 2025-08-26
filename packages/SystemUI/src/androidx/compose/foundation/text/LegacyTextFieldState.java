@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LegacyTextFieldState {
     public LayoutCoordinates _layoutCoordinates;
@@ -53,7 +52,7 @@ public final class LegacyTextFieldState {
         this.keyboardController = softwareKeyboardController;
         Boolean bool = Boolean.FALSE;
         this.hasFocus$delegate = SnapshotStateKt.mutableStateOf$default(bool);
-        this.minHeightForSingleLineField$delegate = SnapshotStateKt.mutableStateOf$default(Dp.m835boximpl(0));
+        this.minHeightForSingleLineField$delegate = SnapshotStateKt.mutableStateOf$default(Dp.m837boximpl(0));
         this.layoutResultState = SnapshotStateKt.mutableStateOf$default(null);
         this.handleState$delegate = SnapshotStateKt.mutableStateOf$default(HandleState.None);
         this.showFloatingToolbar$delegate = SnapshotStateKt.mutableStateOf$default(bool);
@@ -68,7 +67,7 @@ public final class LegacyTextFieldState {
         this.onValueChangeOriginal = new Function1() { // from class: androidx.compose.foundation.text.LegacyTextFieldState$onValueChangeOriginal$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Unit.INSTANCE;
             }
         };
@@ -79,8 +78,8 @@ public final class LegacyTextFieldState {
         this.selectionBackgroundColor = Color.Unspecified;
         TextRange.Companion.getClass();
         long j = TextRange.Zero;
-        this.selectionPreviewHighlightRange$delegate = SnapshotStateKt.mutableStateOf$default(TextRange.m745boximpl(j));
-        this.deletionPreviewHighlightRange$delegate = SnapshotStateKt.mutableStateOf$default(TextRange.m745boximpl(j));
+        this.selectionPreviewHighlightRange$delegate = SnapshotStateKt.mutableStateOf$default(TextRange.m747boximpl(j));
+        this.deletionPreviewHighlightRange$delegate = SnapshotStateKt.mutableStateOf$default(TextRange.m747boximpl(j));
     }
 
     public final HandleState getHandleState() {

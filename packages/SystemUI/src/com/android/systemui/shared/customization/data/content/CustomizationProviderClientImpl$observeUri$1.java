@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Uri $uri;
@@ -56,7 +55,7 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
 
                 @Override // android.database.ContentObserver
                 public final void onChange(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.context.getContentResolver().registerContentObserver(this.$uri, true, r1);
@@ -64,7 +63,7 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
             Function0 function0 = new Function0() { // from class: com.android.systemui.shared.customization.data.content.CustomizationProviderClientImpl$observeUri$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    CustomizationProviderClientImpl.this.context.getContentResolver().unregisterContentObserver(r1);
+                    customizationProviderClientImpl.context.getContentResolver().unregisterContentObserver(r1);
                     return Unit.INSTANCE;
                 }
             };

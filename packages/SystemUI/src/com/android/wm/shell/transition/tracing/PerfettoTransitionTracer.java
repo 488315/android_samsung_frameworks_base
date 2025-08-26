@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PerfettoTransitionTracer {
     public final AtomicInteger mActiveTraces;
@@ -43,19 +42,19 @@ public class PerfettoTransitionTracer {
                         final PerfettoTransitionTracer perfettoTransitionTracer = (PerfettoTransitionTracer) obj;
                         perfettoTransitionTracer.mDataSource.trace(new TraceFunction() { // from class: com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda5
                             public final void trace(TracingContext tracingContext) {
-                                PerfettoTransitionTracer perfettoTransitionTracer2 = PerfettoTransitionTracer.this;
+                                PerfettoTransitionTracer perfettoTransitionTracer2 = perfettoTransitionTracer;
                                 perfettoTransitionTracer2.getClass();
-                                ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                                long start = newTracePacket.start(1146756268129L);
+                                ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                                long jStart = protoOutputStreamNewTracePacket.start(1146756268129L);
                                 for (Map.Entry entry : ((HashMap) perfettoTransitionTracer2.mHandlerMapping).entrySet()) {
                                     String str = (String) entry.getKey();
-                                    int intValue = ((Integer) entry.getValue()).intValue();
-                                    long start2 = newTracePacket.start(2246267895809L);
-                                    newTracePacket.write(1120986464257L, intValue);
-                                    newTracePacket.write(1138166333442L, str);
-                                    newTracePacket.end(start2);
+                                    int iIntValue = ((Integer) entry.getValue()).intValue();
+                                    long jStart2 = protoOutputStreamNewTracePacket.start(2246267895809L);
+                                    protoOutputStreamNewTracePacket.write(1120986464257L, iIntValue);
+                                    protoOutputStreamNewTracePacket.write(1138166333442L, str);
+                                    protoOutputStreamNewTracePacket.end(jStart2);
                                 }
-                                newTracePacket.end(start);
+                                protoOutputStreamNewTracePacket.end(jStart);
                             }
                         });
                         break;
@@ -77,19 +76,19 @@ public class PerfettoTransitionTracer {
                         final PerfettoTransitionTracer perfettoTransitionTracer = (PerfettoTransitionTracer) obj;
                         perfettoTransitionTracer.mDataSource.trace(new TraceFunction() { // from class: com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda5
                             public final void trace(TracingContext tracingContext) {
-                                PerfettoTransitionTracer perfettoTransitionTracer2 = PerfettoTransitionTracer.this;
+                                PerfettoTransitionTracer perfettoTransitionTracer2 = perfettoTransitionTracer;
                                 perfettoTransitionTracer2.getClass();
-                                ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                                long start = newTracePacket.start(1146756268129L);
+                                ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                                long jStart = protoOutputStreamNewTracePacket.start(1146756268129L);
                                 for (Map.Entry entry : ((HashMap) perfettoTransitionTracer2.mHandlerMapping).entrySet()) {
                                     String str = (String) entry.getKey();
-                                    int intValue = ((Integer) entry.getValue()).intValue();
-                                    long start2 = newTracePacket.start(2246267895809L);
-                                    newTracePacket.write(1120986464257L, intValue);
-                                    newTracePacket.write(1138166333442L, str);
-                                    newTracePacket.end(start2);
+                                    int iIntValue = ((Integer) entry.getValue()).intValue();
+                                    long jStart2 = protoOutputStreamNewTracePacket.start(2246267895809L);
+                                    protoOutputStreamNewTracePacket.write(1120986464257L, iIntValue);
+                                    protoOutputStreamNewTracePacket.write(1138166333442L, str);
+                                    protoOutputStreamNewTracePacket.end(jStart2);
                                 }
-                                newTracePacket.end(start);
+                                protoOutputStreamNewTracePacket.end(jStart);
                             }
                         });
                         break;
@@ -111,19 +110,19 @@ public class PerfettoTransitionTracer {
                         final PerfettoTransitionTracer perfettoTransitionTracer = (PerfettoTransitionTracer) obj;
                         perfettoTransitionTracer.mDataSource.trace(new TraceFunction() { // from class: com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda5
                             public final void trace(TracingContext tracingContext) {
-                                PerfettoTransitionTracer perfettoTransitionTracer2 = PerfettoTransitionTracer.this;
+                                PerfettoTransitionTracer perfettoTransitionTracer2 = perfettoTransitionTracer;
                                 perfettoTransitionTracer2.getClass();
-                                ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                                long start = newTracePacket.start(1146756268129L);
+                                ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                                long jStart = protoOutputStreamNewTracePacket.start(1146756268129L);
                                 for (Map.Entry entry : ((HashMap) perfettoTransitionTracer2.mHandlerMapping).entrySet()) {
                                     String str = (String) entry.getKey();
-                                    int intValue = ((Integer) entry.getValue()).intValue();
-                                    long start2 = newTracePacket.start(2246267895809L);
-                                    newTracePacket.write(1120986464257L, intValue);
-                                    newTracePacket.write(1138166333442L, str);
-                                    newTracePacket.end(start2);
+                                    int iIntValue = ((Integer) entry.getValue()).intValue();
+                                    long jStart2 = protoOutputStreamNewTracePacket.start(2246267895809L);
+                                    protoOutputStreamNewTracePacket.write(1120986464257L, iIntValue);
+                                    protoOutputStreamNewTracePacket.write(1138166333442L, str);
+                                    protoOutputStreamNewTracePacket.end(jStart2);
                                 }
-                                newTracePacket.end(start);
+                                protoOutputStreamNewTracePacket.end(jStart);
                             }
                         });
                         break;
@@ -142,29 +141,29 @@ public class PerfettoTransitionTracer {
             try {
                 this.mDataSource.trace(new TraceFunction() { // from class: com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda6
                     public final void trace(TracingContext tracingContext) {
-                        int i2;
-                        PerfettoTransitionTracer perfettoTransitionTracer = PerfettoTransitionTracer.this;
+                        int iIntValue;
+                        PerfettoTransitionTracer perfettoTransitionTracer = this.f$0;
                         Transitions.TransitionHandler transitionHandler2 = transitionHandler;
-                        int i3 = i;
+                        int i2 = i;
                         synchronized (perfettoTransitionTracer.mHandlerMapping) {
                             try {
                                 if (((HashMap) perfettoTransitionTracer.mHandlerMapping).containsKey(transitionHandler2.getClass().getName())) {
-                                    i2 = ((Integer) ((HashMap) perfettoTransitionTracer.mHandlerMapping).get(transitionHandler2.getClass().getName())).intValue();
+                                    iIntValue = ((Integer) ((HashMap) perfettoTransitionTracer.mHandlerMapping).get(transitionHandler2.getClass().getName())).intValue();
                                 } else {
                                     int size = ((HashMap) perfettoTransitionTracer.mHandlerMapping).size() + 1;
                                     ((HashMap) perfettoTransitionTracer.mHandlerMapping).put(transitionHandler2.getClass().getName(), Integer.valueOf(size));
-                                    i2 = size;
+                                    iIntValue = size;
                                 }
                             } catch (Throwable th) {
                                 throw th;
                             }
                         }
-                        ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                        long start = newTracePacket.start(1146756268128L);
-                        newTracePacket.write(1120986464257L, i3);
-                        newTracePacket.write(1112396529668L, SystemClock.elapsedRealtimeNanos());
-                        newTracePacket.write(1120986464268L, i2);
-                        newTracePacket.end(start);
+                        ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                        long jStart = protoOutputStreamNewTracePacket.start(1146756268128L);
+                        protoOutputStreamNewTracePacket.write(1120986464257L, i2);
+                        protoOutputStreamNewTracePacket.write(1112396529668L, SystemClock.elapsedRealtimeNanos());
+                        protoOutputStreamNewTracePacket.write(1120986464268L, iIntValue);
+                        protoOutputStreamNewTracePacket.end(jStart);
                     }
                 });
             } finally {

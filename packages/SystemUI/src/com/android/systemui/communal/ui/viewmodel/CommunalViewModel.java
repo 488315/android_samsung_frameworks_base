@@ -2,10 +2,14 @@ package com.android.systemui.communal.ui.viewmodel;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.compose.animation.scene.SceneKey;
+import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
+import com.android.systemui.communal.data.repository.CommunalPrefsRepositoryImpl;
 import com.android.systemui.communal.domain.interactor.CommunalInteractor;
+import com.android.systemui.communal.domain.interactor.CommunalPrefsInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSceneInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalTutorialInteractor;
@@ -25,6 +29,7 @@ import com.android.systemui.media.controls.ui.controller.MediaCarouselController
 import com.android.systemui.media.controls.ui.view.MediaHost;
 import com.android.systemui.media.controls.ui.view.MediaHost$$ExternalSyntheticLambda0;
 import com.android.systemui.scene.shared.model.Scenes;
+import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import com.android.systemui.statusbar.KeyguardIndicationController;
@@ -34,14 +39,19 @@ import com.android.systemui.utils.coroutines.flow.LatestConflatedKt;
 import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -55,7 +65,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalViewModel extends BaseCommunalViewModel {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -89,13 +98,176 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
     public final Lazy swipeToHubEnabled$delegate;
     public final ReadonlyStateFlow touchesAllowed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$isEmptyState$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        /* synthetic */ boolean Z$0;
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = CommunalViewModel.this.new AnonymousClass2(continuation);
+            anonymousClass2.Z$0 = ((Boolean) obj).booleanValue();
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            Boolean bool = (Boolean) obj;
+            bool.booleanValue();
+            return ((AnonymousClass2) create(bool, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            Logger.d$default(CommunalViewModel.this.logger, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isEmptyState: ", this.Z$0), null, 2, null);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$isFocusable$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function4 {
+        /* synthetic */ boolean Z$0;
+        /* synthetic */ boolean Z$1;
+        /* synthetic */ boolean Z$2;
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(4, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function4
+        public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+            boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+            AnonymousClass1 anonymousClass1 = new AnonymousClass1((Continuation) obj4);
+            anonymousClass1.Z$0 = zBooleanValue;
+            anonymousClass1.Z$1 = zBooleanValue2;
+            anonymousClass1.Z$2 = zBooleanValue3;
+            return anonymousClass1.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Boolean.valueOf(this.Z$0 && this.Z$1 && !this.Z$2);
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$onDismissCtaTile$1, reason: invalid class name and case insensitive filesystem */
+    final class C08431 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C08431(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return CommunalViewModel.this.new C08431(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08431) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CommunalInteractor communalInteractor = CommunalViewModel.this.communalInteractor;
+                this.label = 1;
+                CommunalPrefsInteractor communalPrefsInteractor = communalInteractor.communalPrefsInteractor;
+                Object booleanKeyValueForUser = ((CommunalPrefsRepositoryImpl) communalPrefsInteractor.repository).setBooleanKeyValueForUser(((UserTrackerImpl) communalPrefsInteractor.userTracker).getUserInfo(), "cta_dismissed", "Dismissed CTA tile", this);
+                if (booleanKeyValueForUser != coroutineSingletons) {
+                    booleanKeyValueForUser = Unit.INSTANCE;
+                }
+                if (booleanKeyValueForUser != coroutineSingletons) {
+                    booleanKeyValueForUser = Unit.INSTANCE;
+                }
+                if (booleanKeyValueForUser != coroutineSingletons) {
+                    booleanKeyValueForUser = Unit.INSTANCE;
+                }
+                if (booleanKeyValueForUser == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            CommunalViewModel communalViewModel = CommunalViewModel.this;
+            PopupType.CtaTile ctaTile = PopupType.CtaTile.INSTANCE;
+            int i2 = CommunalViewModel.$r8$clinit;
+            communalViewModel.setCurrentPopupType(ctaTile);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$setCurrentPopupType$1, reason: invalid class name and case insensitive filesystem */
+    final class C08441 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C08441(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return CommunalViewModel.this.new C08441(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08441) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                this.label = 1;
+                if (DelayKt.delay(12000L, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            CommunalViewModel communalViewModel = CommunalViewModel.this;
+            int i2 = CommunalViewModel.$r8$clinit;
+            communalViewModel.setCurrentPopupType(null);
+            return Unit.INSTANCE;
         }
     }
 
@@ -125,7 +297,6 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
         final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = communalInteractor.widgetContent;
         this.isEmptyState = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -152,80 +323,60 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.util.List r5 = (java.util.List) r5
-                        boolean r5 = r5.isEmpty()
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((List) obj).isEmpty());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }), new CommunalViewModel$isEmptyState$2(this, null));
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this._currentPopup = MutableStateFlow;
-        this.currentPopup = FlowKt.asStateFlow(MutableStateFlow);
+        }), new AnonymousClass2(null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this._currentPopup = stateFlowImplMutableStateFlow;
+        this.currentPopup = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         ShadeInteractorImpl shadeInteractorImpl = (ShadeInteractorImpl) shadeInteractor;
-        this.isFocusable = FlowKt.distinctUntilChanged(FlowKt.combine(FlowKt.distinctUntilChanged(keyguardTransitionInteractor.isFinishedIn$1(keyguardState)), communalInteractor.isIdleOnCommunal, shadeInteractorImpl.isAnyFullyExpanded, new CommunalViewModel$isFocusable$1(null)));
+        this.isFocusable = FlowKt.distinctUntilChanged(FlowKt.combine(FlowKt.distinctUntilChanged(keyguardTransitionInteractor.isFinishedIn$1(keyguardState)), communalInteractor.isIdleOnCommunal, shadeInteractorImpl.isAnyFullyExpanded, new AnonymousClass1(null)));
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._isEnableWidgetDialogShowing = MutableStateFlow2;
-        this.isEnableWidgetDialogShowing = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
-        this._isEnableWorkProfileDialogShowing = MutableStateFlow3;
-        this.isEnableWorkProfileDialogShowing = FlowKt.asStateFlow(MutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._isEnableWidgetDialogShowing = stateFlowImplMutableStateFlow2;
+        this.isEnableWidgetDialogShowing = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
+        this._isEnableWorkProfileDialogShowing = stateFlowImplMutableStateFlow3;
+        this.isEnableWorkProfileDialogShowing = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.isUiBlurred = StateFlowKt.MutableStateFlow(bool);
         this.blurRadiusPx = blurConfig.maxBlurRadiusPx;
         mediaHost.setExpansion(1.0f);
@@ -254,20 +405,20 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
             }
         }
         mediaHost.init(4);
-        Flow not = booleanFlowOperators.not(shadeInteractorImpl.isAnyFullyExpanded);
+        Flow flowNot = booleanFlowOperators.not(shadeInteractorImpl.isAnyFullyExpanded);
         SharingStarted.Companion.getClass();
-        this.touchesAllowed = FlowKt.stateIn(not, coroutineScope2, SharingStarted.Companion.Eagerly, bool);
+        this.touchesAllowed = FlowKt.stateIn(flowNot, coroutineScope2, SharingStarted.Companion.Eagerly, bool);
         this.communalBackground = communalSettingsInteractor.communalBackground;
         this.swipeToHubEnabled$delegate = LazyKt__LazyJVMKt.lazy(new Function0(keyguardTransitionInteractor) { // from class: com.android.systemui.communal.ui.viewmodel.CommunalViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = CommunalViewModel.$r8$clinit;
-                CommunalViewModel communalViewModel = CommunalViewModel.this;
+                CommunalViewModel communalViewModel = this.f$0;
                 CommunalSettingsInteractor communalSettingsInteractor2 = communalViewModel.communalSettingsInteractor;
                 communalSettingsInteractor2.isV2FlagEnabled();
-                StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(Boolean.valueOf(communalViewModel.swipeToHub));
+                StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(Boolean.valueOf(communalViewModel.swipeToHub));
                 communalSettingsInteractor2.isV2FlagEnabled();
-                return MutableStateFlow4;
+                return stateFlowImplMutableStateFlow4;
             }
         });
         this.swipeFromHubInLandscape = communalSceneInteractor.willRotateToPortrait;
@@ -295,7 +446,7 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
 
     @Override // com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel
     public final void onDismissCtaTile() {
-        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new CommunalViewModel$onDismissCtaTile$1(this, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new C08431(null), 7);
     }
 
     @Override // com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel
@@ -314,7 +465,7 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
     }
 
     @Override // com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel
-    public final void onOpenWidgetEditor(boolean z) {
+    public final void onOpenWidgetEditor(boolean z) throws Resources.NotFoundException {
         int i = this.currentScrollIndex;
         int i2 = this.currentScrollOffset;
         CommunalInteractor communalInteractor = super.communalInteractor;
@@ -325,9 +476,9 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
         communalSceneInteractor._editModeState.setValue(EditModeState.STARTING);
         EditWidgetsActivityStarterImpl editWidgetsActivityStarterImpl = (EditWidgetsActivityStarterImpl) communalInteractor2.editWidgetsActivityStarter;
         editWidgetsActivityStarterImpl.getClass();
-        Intent addFlags = new Intent(editWidgetsActivityStarterImpl.applicationContext, (Class<?>) EditWidgetsActivity.class).addFlags(268468224);
-        addFlags.putExtra("open_widget_picker_on_start", z);
-        editWidgetsActivityStarterImpl.activityStarter.startActivityDismissingKeyguard(addFlags, true, true, editWidgetsActivityStarterImpl.applicationContext.getResources().getString(R.string.unlock_reason_to_customize_widgets));
+        Intent intentAddFlags = new Intent(editWidgetsActivityStarterImpl.applicationContext, (Class<?>) EditWidgetsActivity.class).addFlags(268468224);
+        intentAddFlags.putExtra("open_widget_picker_on_start", z);
+        editWidgetsActivityStarterImpl.activityStarter.startActivityDismissingKeyguard(intentAddFlags, true, true, editWidgetsActivityStarterImpl.applicationContext.getResources().getString(R.string.unlock_reason_to_customize_widgets));
     }
 
     @Override // com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel
@@ -342,10 +493,10 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
 
     @Override // com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel
     public final void onTapWidget(int i, ComponentName componentName) {
-        String flattenToString = componentName.flattenToString();
+        String strFlattenToString = componentName.flattenToString();
         CommunalMetricsLogger communalMetricsLogger = this.metricsLogger;
-        if (communalMetricsLogger.isLoggable(flattenToString)) {
-            ((CommunalStatsLogProxyImpl) communalMetricsLogger.statsLogProxy).writeCommunalHubWidgetEventReported(3, i, 0, flattenToString);
+        if (communalMetricsLogger.isLoggable(strFlattenToString)) {
+            ((CommunalStatsLogProxyImpl) communalMetricsLogger.statsLogProxy).writeCommunalHubWidgetEventReported(3, i, 0, strFlattenToString);
         }
     }
 
@@ -358,7 +509,7 @@ public final class CommunalViewModel extends BaseCommunalViewModel {
         if (popupType == null) {
             this.delayedHideCurrentPopupJob = null;
         } else {
-            this.delayedHideCurrentPopupJob = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new CommunalViewModel$setCurrentPopupType$1(this, null), 7);
+            this.delayedHideCurrentPopupJob = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new C08441(null), 7);
         }
     }
 }

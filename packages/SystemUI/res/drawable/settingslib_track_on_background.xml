@@ -3,6 +3,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <padding android:left="@dimen/settingslib_switch_thumb_margin" android:right="@dimen/settingslib_switch_thumb_margin" />
-    <solid android:color="@android:color/secondary_material_settings_light" />
+    <solid android:color="@android:color/notification_action_list_background_color" />
     <corners android:radius="@dimen/settingslib_switch_track_radius" />
 </shape>

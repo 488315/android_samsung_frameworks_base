@@ -2,7 +2,6 @@ package android.app;
 
 import android.annotation.SystemApi;
 import android.app.ActivityManager;
-import android.app.HomeVisibilityListener;
 import android.app.IProcessObserver;
 import android.content.Context;
 import android.os.Binder;
@@ -15,13 +14,13 @@ import java.util.concurrent.Executor;
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes.dex */
 public abstract class HomeVisibilityListener {
+    private static final boolean DBG = Log.isLoggable("HomeVisibilityListener", 3);
+    private static final String TAG = "HomeVisibilityListener";
     private ActivityTaskManager mActivityTaskManager;
     private Executor mExecutor;
     boolean mIsHomeActivityVisible;
     private int mMaxScanTasksForHomeVisibility;
     IProcessObserver.Stub mObserver = new AnonymousClass1();
-    private static final String TAG = "HomeVisibilityListener";
-    private static final boolean DBG = Log.isLoggable(TAG, 3);
 
     public abstract void onHomeVisibilityChanged(boolean z);
 
@@ -56,13 +55,13 @@ public abstract class HomeVisibilityListener {
         }
 
         private void refreshHomeVisibility() {
-            boolean isHomeActivityVisible = HomeVisibilityListener.this.isHomeActivityVisible();
-            if (HomeVisibilityListener.this.mIsHomeActivityVisible != isHomeActivityVisible) {
-                HomeVisibilityListener.this.mIsHomeActivityVisible = isHomeActivityVisible;
+            boolean zIsHomeActivityVisible = HomeVisibilityListener.this.isHomeActivityVisible();
+            if (HomeVisibilityListener.this.mIsHomeActivityVisible != zIsHomeActivityVisible) {
+                HomeVisibilityListener.this.mIsHomeActivityVisible = zIsHomeActivityVisible;
                 Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.app.HomeVisibilityListener$1$$ExternalSyntheticLambda0
                     @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                    public final void runOrThrow() {
-                        HomeVisibilityListener.AnonymousClass1.this.lambda$refreshHomeVisibility$1();
+                    public final void runOrThrow() throws Exception {
+                        this.f$0.lambda$refreshHomeVisibility$1();
                     }
                 });
             }
@@ -73,7 +72,7 @@ public abstract class HomeVisibilityListener {
             HomeVisibilityListener.this.mExecutor.execute(new Runnable() { // from class: android.app.HomeVisibilityListener$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    HomeVisibilityListener.AnonymousClass1.this.lambda$refreshHomeVisibility$0();
+                    this.f$0.lambda$refreshHomeVisibility$0();
                 }
             });
         }

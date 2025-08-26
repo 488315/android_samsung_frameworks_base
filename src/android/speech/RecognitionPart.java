@@ -165,18 +165,18 @@ public final class RecognitionPart implements Parcelable {
     }
 
     RecognitionPart(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        String readString = parcel.readString();
-        String readString2 = (readByte & 2) == 0 ? null : parcel.readString();
-        long readLong = parcel.readLong();
-        int readInt = parcel.readInt();
-        this.mRawText = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mFormattedText = readString2;
-        this.mTimestampMillis = readLong;
-        this.mConfidenceLevel = readInt;
-        if (readInt != 0 && readInt != 1 && readInt != 2 && readInt != 3 && readInt != 4 && readInt != 5) {
-            throw new IllegalArgumentException("confidenceLevel was " + readInt + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0), CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2), CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4), CONFIDENCE_LEVEL_HIGH(5)");
+        byte b = parcel.readByte();
+        String string = parcel.readString();
+        String string2 = (b & 2) == 0 ? null : parcel.readString();
+        long j = parcel.readLong();
+        int i = parcel.readInt();
+        this.mRawText = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mFormattedText = string2;
+        this.mTimestampMillis = j;
+        this.mConfidenceLevel = i;
+        if (i != 0 && i != 1 && i != 2 && i != 3 && i != 4 && i != 5) {
+            throw new IllegalArgumentException("confidenceLevel was " + i + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0), CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2), CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4), CONFIDENCE_LEVEL_HIGH(5)");
         }
         onConstructed();
     }

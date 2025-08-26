@@ -76,6 +76,7 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.google.gson.Gson;
 import com.samsung.android.cover.CoverState;
+import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 import com.samsung.android.sdk.cover.ScoverManager;
 import com.samsung.systemui.splugins.SPluginListener;
 import com.samsung.systemui.splugins.SPluginManager;
@@ -86,7 +87,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListener<PluginLock> {
     private static final String FACE_WIDGET = "face_widget";
@@ -310,30 +310,30 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
                 Log.d(TAG, "getDynamicLockData() listener: " + state);
                 if (state != null) {
                     if (state instanceof NotificationPanelViewController) {
-                        Bundle onUiInfoRequested = state.onUiInfoRequested(false);
-                        if (onUiInfoRequested != null) {
-                            bundle = onUiInfoRequested;
+                        Bundle bundleOnUiInfoRequested = state.onUiInfoRequested(false);
+                        if (bundleOnUiInfoRequested != null) {
+                            bundle = bundleOnUiInfoRequested;
                         }
-                        Bundle onUiInfoRequested2 = state.onUiInfoRequested(true);
-                        if (onUiInfoRequested2 != null) {
-                            bundle4 = onUiInfoRequested2;
+                        Bundle bundleOnUiInfoRequested2 = state.onUiInfoRequested(true);
+                        if (bundleOnUiInfoRequested2 != null) {
+                            bundle4 = bundleOnUiInfoRequested2;
                         }
                         Log.d(TAG, "getDynamicLockData() bottom: " + bundle);
                         Log.d(TAG, "getDynamicLockData() bottom_land: " + bundle4);
                     } else if (state instanceof FaceWidgetPluginLockManagerWrapper.FaceWidgetLockStarStateCallbackWrapper) {
-                        Bundle onUiInfoRequested3 = state.onUiInfoRequested(true);
-                        if (onUiInfoRequested3 != null) {
-                            bundle2 = onUiInfoRequested3;
+                        Bundle bundleOnUiInfoRequested3 = state.onUiInfoRequested(true);
+                        if (bundleOnUiInfoRequested3 != null) {
+                            bundle2 = bundleOnUiInfoRequested3;
                         }
                         Log.d(TAG, "getDynamicLockData() faceWidget: " + bundle2);
                     } else if (state instanceof SecLockIconViewController) {
-                        Bundle onUiInfoRequested4 = state.onUiInfoRequested(false);
-                        if (onUiInfoRequested4 != null) {
-                            bundle3 = onUiInfoRequested4;
+                        Bundle bundleOnUiInfoRequested4 = state.onUiInfoRequested(false);
+                        if (bundleOnUiInfoRequested4 != null) {
+                            bundle3 = bundleOnUiInfoRequested4;
                         }
-                        Bundle onUiInfoRequested5 = state.onUiInfoRequested(true);
-                        if (onUiInfoRequested5 != null) {
-                            bundle5 = onUiInfoRequested5;
+                        Bundle bundleOnUiInfoRequested5 = state.onUiInfoRequested(true);
+                        if (bundleOnUiInfoRequested5 != null) {
+                            bundle5 = bundleOnUiInfoRequested5;
                         }
                         Log.d(TAG, "getDynamicLockData() lockIcon: " + bundle3);
                         Log.d(TAG, "getDynamicLockData() lockIcon_land: " + bundle5);
@@ -426,21 +426,63 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x004d, code lost:
-    
-        if (r9.equals(com.android.systemui.pluginlock.PluginLockMediatorImpl.FACE_WIDGET) == false) goto L14;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x002f  */
     @Override // com.android.systemui.pluginlock.PluginLockMediator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String getLockStarItemLocationInfo(java.lang.String r9) {
-        /*
-            Method dump skipped, instructions count: 342
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockMediatorImpl.getLockStarItemLocationInfo(java.lang.String):java.lang.String");
+    public String getLockStarItemLocationInfo(String str) {
+        int iIntValue;
+        int iIntValue2;
+        boolean z = false;
+        if (this.mCurrentDynamicLockData == null || str == null || str.isEmpty()) {
+            Log.d(TAG, "getLockStarItemLocationInfo Data: " + this.mCurrentDynamicLockData + ", group: " + str);
+            return SignalSeverity.NONE;
+        }
+        boolean z2 = this.mContext.getResources().getConfiguration().orientation == 2;
+        switch (str.hashCode()) {
+            case -1481109914:
+                if (!str.equals(FACE_WIDGET)) {
+                    z = -1;
+                    break;
+                }
+                break;
+            case 339679582:
+                if (str.equals(NOTIFICATION_ICON_ONLY)) {
+                    z = true;
+                    break;
+                }
+                break;
+            case 1824376660:
+                if (str.equals(INDICATION_TEXT)) {
+                    z = 2;
+                    break;
+                }
+                break;
+        }
+        switch (z) {
+            case false:
+                return this.mCurrentDynamicLockData.getServiceBoxData() != null ? z2 ? getItemLocation(this.mCurrentDynamicLockData.getServiceBoxData().getTopYLand().intValue()) : getItemLocation(this.mCurrentDynamicLockData.getServiceBoxData().getTopY().intValue()) : "top";
+            case true:
+                return (this.mCurrentDynamicLockData.getNotificationData() == null || this.mCurrentDynamicLockData.getNotificationData().getNotiType().intValue() != 2) ? "top" : z2 ? getItemLocation(this.mCurrentDynamicLockData.getNotificationData().getIconOnlyData().getTopYLand().intValue()) : getItemLocation(this.mCurrentDynamicLockData.getNotificationData().getIconOnlyData().getTopY().intValue());
+            case true:
+                if (this.mCurrentDynamicLockData.getIndicationData() == null) {
+                    return "bottom";
+                }
+                int i = ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).getRealSize().y;
+                IndicationData.HelpTextData helpTextData = this.mCurrentDynamicLockData.getIndicationData().getHelpTextData();
+                if (z2) {
+                    iIntValue = i - helpTextData.getHeight().intValue();
+                    iIntValue2 = helpTextData.getPaddingBottomLand().intValue();
+                } else {
+                    iIntValue = i - helpTextData.getHeight().intValue();
+                    iIntValue2 = helpTextData.getPaddingBottom().intValue();
+                }
+                return getItemLocation(iIntValue - iIntValue2);
+            default:
+                return SignalSeverity.NONE;
+        }
     }
 
     @Override // com.android.systemui.pluginlock.PluginLockMediator
@@ -548,6 +590,13 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
     }
 
     @Override // com.android.systemui.pluginlock.PluginLockMediator
+    public void onBackPressed() {
+        if (this.mIsWallpaperPaused) {
+            sendWallpaperCommand(false);
+        }
+    }
+
+    @Override // com.android.systemui.pluginlock.PluginLockMediator
     public void onBarStateChanged(int i) {
         this.mBarState = i;
         if (this.mBasicListener != null) {
@@ -635,11 +684,11 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
     @Override // com.android.systemui.pluginlock.PluginLockMediator
     public void onViewModeChanged(int i) {
         PluginLockListener.State state;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onViewModeChanged mode: ", ", mStateListenerList.size(): ");
-        m.append(this.mStateListenerList.size());
-        m.append(", mViewMode:");
-        m.append(this.mViewMode);
-        LogUtil.d(TAG, m.toString(), new Object[0]);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onViewModeChanged mode: ", ", mStateListenerList.size(): ");
+        sbM.append(this.mStateListenerList.size());
+        sbM.append(", mViewMode:");
+        sbM.append(this.mViewMode);
+        LogUtil.d(TAG, sbM.toString(), new Object[0]);
         if (this.mViewMode == i) {
             return;
         }
@@ -762,7 +811,7 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
 
     @Override // com.android.systemui.pluginlock.PluginLockMediator
     public void requestDismissKeyguard(Intent intent) {
-        boolean z;
+        boolean zIsNoUnlockNeed;
         PluginLockListener.State state;
         PluginLockListener.State state2;
         if (intent != null) {
@@ -772,18 +821,18 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
             ComponentName component = intent.getComponent();
             int i = 0;
             if (component != null) {
-                z = false;
+                zIsNoUnlockNeed = false;
                 for (int i2 = 0; i2 < this.mStateListenerList.size(); i2++) {
                     WeakReference<PluginLockListener.State> weakReference = this.mStateListenerList.get(i2);
                     if (weakReference != null && (state2 = weakReference.get()) != null && (state2 instanceof NotificationPanelViewController)) {
-                        z = state2.isNoUnlockNeed(component.getPackageName());
+                        zIsNoUnlockNeed = state2.isNoUnlockNeed(component.getPackageName());
                     }
                 }
             } else {
-                z = false;
+                zIsNoUnlockNeed = false;
             }
-            LogUtil.d(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("requestDismissKeyguard isNoUnlockNeedApp: ", z), new Object[0]);
-            if (z) {
+            LogUtil.d(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("requestDismissKeyguard isNoUnlockNeedApp: ", zIsNoUnlockNeed), new Object[0]);
+            if (zIsNoUnlockNeed) {
                 while (i < this.mStateListenerList.size()) {
                     WeakReference<PluginLockListener.State> weakReference2 = this.mStateListenerList.get(i);
                     if (weakReference2 != null) {
@@ -1037,7 +1086,7 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
                 this.mHandler.post(new Runnable() { // from class: com.android.systemui.pluginlock.PluginLockMediatorImpl$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PluginLockMediatorImpl.this.lambda$setLockscreenTimer$1(j);
+                        this.f$0.lambda$setLockscreenTimer$1(j);
                     }
                 });
             }
@@ -1322,55 +1371,51 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
         setPluginWallpaper(i, i2, i3, str, null);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x003c  */
     @Override // com.android.systemui.pluginlock.PluginLockMediator
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setPluginWallpaperHint(int i, String str) {
-        final SemWallpaperColors semWallpaperColors;
-        if (str != null) {
-            if (str.equals("white")) {
-                SemWallpaperColors.Builder builder = new SemWallpaperColors.Builder();
-                builder.setColorType(0);
-                semWallpaperColors = builder.build();
-            } else if (str.equals("black")) {
-                SemWallpaperColors.Builder builder2 = new SemWallpaperColors.Builder();
-                builder2.setColorType(1);
-                semWallpaperColors = builder2.build();
-            } else if (!str.equals("")) {
-                semWallpaperColors = SemWallpaperColors.fromXml(str);
-            }
-            if ((!LsRune.WALLPAPER_SUB_WATCHFACE || LsRune.WALLPAPER_VIRTUAL_DISPLAY) && isHomeWallpaperRequired(1) && this.mHomeWallpaper.getCurrentScreen() == 1) {
-                if (!LsRune.WALLPAPER_VIRTUAL_DISPLAY && !this.mIsCoverAttached) {
-                    Log.w(TAG, "setPluginWallpaperHint() cover is not attached");
-                    return;
-                } else {
-                    this.mHomeWallpaper.setWallpaperHints(semWallpaperColors);
-                    this.mHomeWallpaper.updateHint();
-                }
-            }
-            this.mLockWallpaper.setWallpaperHints(semWallpaperColors);
-            this.mLockWallpaper.updateHint();
-            if (this.mViewMode != 1 || this.mWindowListener == null) {
-                return;
-            }
-            if (Looper.myLooper() == Looper.getMainLooper()) {
-                this.mWindowListener.onViewModePageChanged(semWallpaperColors);
+        final SemWallpaperColors semWallpaperColorsFromXml;
+        if (str == null) {
+            semWallpaperColorsFromXml = null;
+        } else if (str.equals("white")) {
+            SemWallpaperColors.Builder builder = new SemWallpaperColors.Builder();
+            builder.setColorType(0);
+            semWallpaperColorsFromXml = builder.build();
+        } else if (str.equals("black")) {
+            SemWallpaperColors.Builder builder2 = new SemWallpaperColors.Builder();
+            builder2.setColorType(1);
+            semWallpaperColorsFromXml = builder2.build();
+        } else if (!str.equals("")) {
+            semWallpaperColorsFromXml = SemWallpaperColors.fromXml(str);
+        }
+        if ((LsRune.WALLPAPER_SUB_WATCHFACE || LsRune.WALLPAPER_VIRTUAL_DISPLAY) && isHomeWallpaperRequired(1) && this.mHomeWallpaper.getCurrentScreen() == 1) {
+            if (LsRune.WALLPAPER_VIRTUAL_DISPLAY && !this.mIsCoverAttached) {
+                Log.w(TAG, "setPluginWallpaperHint() cover is not attached");
                 return;
             } else {
-                this.mHandler.post(new Runnable() { // from class: com.android.systemui.pluginlock.PluginLockMediatorImpl$$ExternalSyntheticLambda6
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PluginLockMediatorImpl.this.lambda$setPluginWallpaperHint$7(semWallpaperColors);
-                    }
-                });
+                this.mHomeWallpaper.setWallpaperHints(semWallpaperColorsFromXml);
+                this.mHomeWallpaper.updateHint();
                 return;
             }
         }
-        semWallpaperColors = null;
-        if (LsRune.WALLPAPER_SUB_WATCHFACE) {
+        this.mLockWallpaper.setWallpaperHints(semWallpaperColorsFromXml);
+        this.mLockWallpaper.updateHint();
+        if (this.mViewMode != 1 || this.mWindowListener == null) {
+            return;
         }
-        if (!LsRune.WALLPAPER_VIRTUAL_DISPLAY) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            this.mWindowListener.onViewModePageChanged(semWallpaperColorsFromXml);
+        } else {
+            this.mHandler.post(new Runnable() { // from class: com.android.systemui.pluginlock.PluginLockMediatorImpl$$ExternalSyntheticLambda6
+                @Override // java.lang.Runnable
+                public final void run() {
+                    this.f$0.lambda$setPluginWallpaperHint$7(semWallpaperColorsFromXml);
+                }
+            });
         }
-        this.mHomeWallpaper.setWallpaperHints(semWallpaperColors);
-        this.mHomeWallpaper.updateHint();
     }
 
     @Override // com.android.systemui.pluginlock.PluginLockMediator
@@ -1410,7 +1455,6 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.pluginlock.PluginLockMediatorImpl$2, reason: invalid class name */
     class AnonymousClass2 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass2() {
@@ -1445,9 +1489,9 @@ public class PluginLockMediatorImpl implements PluginLockMediator, SPluginListen
             if (i == 4) {
                 PluginLockMediatorImpl.this.onEventReceived(KeyguardSecPatternView$$ExternalSyntheticOutline0.m("action", PluginLock.ACTION_LID_SWITCH));
             }
-            boolean isLockScreenEnabled = PluginLockMediatorImpl.this.isLockScreenEnabled();
-            if (PluginLockMediatorImpl.this.mIsLockScreenEnabled != isLockScreenEnabled) {
-                PluginLockMediatorImpl.this.mIsLockScreenEnabled = isLockScreenEnabled;
+            boolean zIsLockScreenEnabled = PluginLockMediatorImpl.this.isLockScreenEnabled();
+            if (PluginLockMediatorImpl.this.mIsLockScreenEnabled != zIsLockScreenEnabled) {
+                PluginLockMediatorImpl.this.mIsLockScreenEnabled = zIsLockScreenEnabled;
                 Bundle bundle = new Bundle();
                 bundle.putString("action", PluginLock.ACTION_LOCK_STYLE_CHANGED);
                 bundle.putBoolean("value", PluginLockMediatorImpl.this.mIsLockScreenEnabled);

@@ -11,7 +11,6 @@ import com.samsung.android.nexus.particle.emitter.World;
 import com.samsung.android.nexus.particle.emitter.texture.BitmapCache;
 import com.samsung.android.nexus.particle.emitter.texture.BitmapParticleTexture;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EmitterParticleLayer extends BaseParticleLayer {
     public final World mWorld;
@@ -27,9 +26,9 @@ public class EmitterParticleLayer extends BaseParticleLayer {
 
     @Override // com.samsung.android.nexus.particle.BaseParticleLayer
     public final void drawOnCanvas(Canvas canvas) {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         World world = this.mWorld;
-        world.step(elapsedRealtime);
+        world.step(jElapsedRealtime);
         world.draw(canvas);
     }
 
@@ -92,9 +91,9 @@ public class EmitterParticleLayer extends BaseParticleLayer {
 
     @Override // com.samsung.android.nexus.particle.BaseParticleLayer, com.samsung.android.nexus.base.layer.BaseLayer
     public final void onVisibilityChanged(Boolean bool) {
-        boolean booleanValue = bool.booleanValue();
+        boolean zBooleanValue = bool.booleanValue();
         World world = this.mWorld;
-        if (booleanValue) {
+        if (zBooleanValue) {
             world.resume();
         } else {
             if (world.mIsPaused) {

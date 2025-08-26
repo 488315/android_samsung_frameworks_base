@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class StatusBarRemoteInputCallback$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -53,14 +52,14 @@ public final /* synthetic */ class StatusBarRemoteInputCallback$$ExternalSynthet
                         expandableNotificationRow.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarRemoteInputCallback$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                final StatusBarRemoteInputCallback statusBarRemoteInputCallback2 = StatusBarRemoteInputCallback.this;
+                                final StatusBarRemoteInputCallback statusBarRemoteInputCallback2 = statusBarRemoteInputCallback;
                                 final NotificationStackScrollLayout notificationStackScrollLayout2 = notificationStackScrollLayout;
                                 ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow;
                                 statusBarRemoteInputCallback2.getClass();
                                 Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarRemoteInputCallback$$ExternalSyntheticLambda4
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        StatusBarRemoteInputCallback statusBarRemoteInputCallback3 = StatusBarRemoteInputCallback.this;
+                                        StatusBarRemoteInputCallback statusBarRemoteInputCallback3 = statusBarRemoteInputCallback2;
                                         NotificationStackScrollLayout notificationStackScrollLayout3 = notificationStackScrollLayout2;
                                         statusBarRemoteInputCallback3.mPendingWorkRemoteInputView.callOnClick();
                                         statusBarRemoteInputCallback3.mPendingWorkRemoteInputView = null;

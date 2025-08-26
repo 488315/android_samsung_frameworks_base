@@ -36,7 +36,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxZtService {
     public static final String SERVICE_NAME_KNOXZT = "knoxzt";
@@ -46,7 +45,6 @@ public class KnoxZtService {
     public final ConcurrentHashMap<IMonitoringListener, IServiceMonitoringListener> mMonitoringListeners = new ConcurrentHashMap<>();
     public Set<RegisteredMonitoringListener> mRegisteredMonitoringListenerSet = new HashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Chunk {
         public String data;
         public int sequenceNumber;
@@ -57,7 +55,6 @@ public class KnoxZtService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class RegisteredMonitoringListener {
         public IMonitoringListener listener;
         public Bundle options;
@@ -99,7 +96,6 @@ public class KnoxZtService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ZtfwReceiver extends BroadcastReceiver {
         public /* synthetic */ ZtfwReceiver(KnoxZtService knoxZtService, int i) {
             this();
@@ -126,17 +122,17 @@ public class KnoxZtService {
     public String ackSignal(long[] jArr) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> ackSignal");
-        String ackSignal = getService().ackSignal(jArr);
+        String strAckSignal = getService().ackSignal(jArr);
         Log.i(str, "<= ackSignal");
-        return ackSignal;
+        return strAckSignal;
     }
 
     public boolean attestKey(String str, byte[] bArr) {
         String str2 = TAG;
         Log.i(str2, "=> attestKey");
-        boolean attestKey = this.mKeyAttestationHelper.attestKey(str, bArr, true);
+        boolean zAttestKey = this.mKeyAttestationHelper.attestKey(str, bArr, true);
         Log.i(str2, "<= attestKey");
-        return attestKey;
+        return zAttestKey;
     }
 
     public int getAppIdStatus(X509Certificate x509Certificate, Context context) throws RemoteException {
@@ -222,9 +218,9 @@ public class KnoxZtService {
             if (z && !file.isFile()) {
                 throw new IOException("Only normal file is supported for IPC");
             }
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
             Log.d(TAG, "Succeeded to get pfd : " + str);
-            return open;
+            return parcelFileDescriptorOpen;
         } catch (Throwable th) {
             Log.d(TAG, "Failed to get pfd : " + str + ", reason : " + th);
             return null;
@@ -266,9 +262,9 @@ public class KnoxZtService {
     public final IKnoxZtService getService() {
         try {
             Class<?> cls = Class.forName("android.os.ServiceManager");
-            Object invoke = cls.getMethod("getService", String.class).invoke(cls, SERVICE_NAME_KNOXZT);
-            if (invoke != null) {
-                return IKnoxZtService.Stub.asInterface((IBinder) invoke);
+            Object objInvoke = cls.getMethod("getService", String.class).invoke(cls, SERVICE_NAME_KNOXZT);
+            if (objInvoke != null) {
+                return IKnoxZtService.Stub.asInterface((IBinder) objInvoke);
             }
             throw new RuntimeException("failed to find knoxzt service");
         } catch (Throwable th) {
@@ -293,7 +289,7 @@ public class KnoxZtService {
     public int provisionCert(CertProvisionProfile certProvisionProfile, final ICertProvisionListener iCertProvisionListener) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> provisionCert");
-        int provisionCert = getService().provisionCert(getParcelableProfile(certProvisionProfile), new IServiceCertProvisionListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.1
+        int iProvisionCert = getService().provisionCert(getParcelableProfile(certProvisionProfile), new IServiceCertProvisionListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.1
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public boolean attestKey(String str2, byte[] bArr) {
                 return KnoxZtService.this.mKeyAttestationHelper.attestKey(str2, bArr, true);
@@ -332,33 +328,33 @@ public class KnoxZtService {
             }
         });
         Log.i(str, "<= provisionCert");
-        return provisionCert;
+        return iProvisionCert;
     }
 
     public int queryAllSignals(final IChunkedStringCallback iChunkedStringCallback) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> queryAllSignals");
-        int queryAllSignals = getService().queryAllSignals(new IChunkedAidlInterface.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.5
+        int iQueryAllSignals = getService().queryAllSignals(new IChunkedAidlInterface.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.5
             @Override // com.samsung.android.knox.zt.service.IChunkedAidlInterface
             public void sendChunk(String str2, int i, boolean z) {
                 iChunkedStringCallback.sendChunk(str2, i, z);
             }
         });
         Log.i(str, "<= queryAllSignals");
-        return queryAllSignals;
+        return iQueryAllSignals;
     }
 
     public int querySignals(String str, final IChunkedStringCallback iChunkedStringCallback) throws RemoteException {
         String str2 = TAG;
         Log.i(str2, "=> querySignals");
-        int querySignals = getService().querySignals(str, new IChunkedAidlInterface.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.6
+        int iQuerySignals = getService().querySignals(str, new IChunkedAidlInterface.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.6
             @Override // com.samsung.android.knox.zt.service.IChunkedAidlInterface
             public void sendChunk(String str3, int i, boolean z) {
                 iChunkedStringCallback.sendChunk(str3, i, z);
             }
         });
         Log.i(str2, "<= querySignals");
-        return querySignals;
+        return iQuerySignals;
     }
 
     public final void restartTracingIfNecessary() {
@@ -388,7 +384,7 @@ public class KnoxZtService {
     public int startMonitoringDomains(List<String> list, List<String> list2, final IMonitoringListener iMonitoringListener) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> startMonitoringDomains");
-        int startMonitoringDomains = getService().startMonitoringDomains(list, list2, new IServiceMonitoringListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.3
+        int iStartMonitoringDomains = getService().startMonitoringDomains(list, list2, new IServiceMonitoringListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.3
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public int checkUrlReputation(String str2) throws RemoteException {
                 return -1;
@@ -417,7 +413,7 @@ public class KnoxZtService {
             }
         });
         Log.i(str, "<= startMonitoringDomains");
-        return startMonitoringDomains;
+        return iStartMonitoringDomains;
     }
 
     public int startMonitoringFiles(List<String> list, List<String> list2, final IMonitoringListener iMonitoringListener) throws RemoteException {
@@ -437,7 +433,7 @@ public class KnoxZtService {
                 }
             }
         }
-        int startMonitoringFiles = getService().startMonitoringFiles(list, arrayList, new IServiceMonitoringListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.2
+        int iStartMonitoringFiles = getService().startMonitoringFiles(list, arrayList, new IServiceMonitoringListener.Stub() { // from class: com.samsung.android.knox.zt.service.KnoxZtService.2
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public int checkUrlReputation(String str2) throws RemoteException {
                 return -1;
@@ -466,15 +462,15 @@ public class KnoxZtService {
             }
         });
         Log.i(TAG, "<= startMonitoringFiles");
-        return startMonitoringFiles;
+        return iStartMonitoringFiles;
     }
 
     public int startMonitoringSignals(SignalMonitoringListener signalMonitoringListener) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> startMonitoringSignals");
-        int startTracing = startTracing(9, null, signalMonitoringListener);
+        int iStartTracing = startTracing(9, null, signalMonitoringListener);
         Log.i(str, "<= startMonitoringSignals");
-        return startTracing;
+        return iStartTracing;
     }
 
     public synchronized int startTracing(int i, Bundle bundle, final IMonitoringListener iMonitoringListener) throws RemoteException {
@@ -519,37 +515,37 @@ public class KnoxZtService {
             public void onUnauthorizedAccessDetected(int i2, int i3, int i4, long j, int i5, int i6, String str2, String str3) {
             }
         };
-        int startTracing = getService().startTracing(i, bundle, stub);
+        int iStartTracing = getService().startTracing(i, bundle, stub);
         if (supportMultipleListeners(i)) {
             this.mMonitoringListeners.put(iMonitoringListener, stub);
         }
         this.mRegisteredMonitoringListenerSet.add(new RegisteredMonitoringListener(i, bundle, iMonitoringListener));
         Log.i(str, "<= startTracing");
-        return startTracing;
+        return iStartTracing;
     }
 
     public int stopMonitoringDomains() throws RemoteException {
         String str = TAG;
         Log.i(str, "=> stopMonitoringDomains");
-        int stopMonitoringDomains = getService().stopMonitoringDomains();
+        int iStopMonitoringDomains = getService().stopMonitoringDomains();
         Log.i(str, "<= stopMonitoringDomains");
-        return stopMonitoringDomains;
+        return iStopMonitoringDomains;
     }
 
     public int stopMonitoringFiles() throws RemoteException {
         String str = TAG;
         Log.i(str, "=> stopMonitoringFiles");
-        int stopMonitoringFiles = getService().stopMonitoringFiles();
+        int iStopMonitoringFiles = getService().stopMonitoringFiles();
         Log.i(str, "<= stopMonitoringFiles");
-        return stopMonitoringFiles;
+        return iStopMonitoringFiles;
     }
 
     public int stopMonitoringSignals(SignalMonitoringListener signalMonitoringListener) throws RemoteException {
         String str = TAG;
         Log.i(str, "=> stopMonitoringSignals");
-        int stopTracing = stopTracing(9, signalMonitoringListener);
+        int iStopTracing = stopTracing(9, signalMonitoringListener);
         Log.i(str, "<= stopMonitoringSignals");
-        return stopTracing;
+        return iStopTracing;
     }
 
     public synchronized int stopTracing(int i, IMonitoringListener iMonitoringListener) throws RemoteException {
@@ -579,9 +575,9 @@ public class KnoxZtService {
                 }
             }
         }
-        int stopTracing = getService().stopTracing(i, iServiceMonitoringListener);
+        int iStopTracing = getService().stopTracing(i, iServiceMonitoringListener);
         Log.i(TAG, "<= stopTracing");
-        return stopTracing;
+        return iStopTracing;
     }
 
     public final boolean supportMultipleListeners(int i) {

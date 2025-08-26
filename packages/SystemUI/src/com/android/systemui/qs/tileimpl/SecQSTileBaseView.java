@@ -35,7 +35,6 @@ import com.android.systemui.qs.SecQSPanelResourcePicker;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSTileBaseView extends QSTileView implements LaunchableView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -64,7 +63,6 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
     public String mTileSpec;
     public boolean mTileState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -79,7 +77,7 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
     }
 
     /* renamed from: $r8$lambda$8PEmPle3qwT-ZBfqDAlQpjAmlGM, reason: not valid java name */
-    public static /* synthetic */ Unit m2900$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(SecQSTileBaseView secQSTileBaseView, Integer num) {
+    public static /* synthetic */ Unit m2917$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(SecQSTileBaseView secQSTileBaseView, Integer num) {
         super.setVisibility(num.intValue());
         return Unit.INSTANCE;
     }
@@ -231,7 +229,7 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
         }, new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.SecQSTileBaseView$$ExternalSyntheticLambda3
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSTile qSTile2 = QSTile.this;
+                QSTile qSTile2 = qSTile;
                 Expandable$Companion$fromView$1 expandable$Companion$fromView$12 = expandable$Companion$fromView$1;
                 int i3 = SecQSTileBaseView.$r8$clinit;
                 qSTile2.longClick(expandable$Companion$fromView$12);
@@ -242,9 +240,9 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
     }
 
     public final Drawable newTileBackground() {
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackgroundBorderless});
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackgroundBorderless});
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
+        typedArrayObtainStyledAttributes.recycle();
         return drawable;
     }
 
@@ -349,8 +347,8 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
         this.mDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.qs.tileimpl.SecQSTileBaseView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return SecQSTileBaseView.m2900$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(SecQSTileBaseView.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return SecQSTileBaseView.m2917$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(this.f$0, (Integer) obj);
             }
         });
         SecQSPanelResourcePicker secQSPanelResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
@@ -383,10 +381,10 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
         frameLayout.setClipChildren(false);
         frameLayout.setClipToPadding(false);
         frameLayout.setFocusable(false);
-        Drawable newTileBackground = newTileBackground();
-        this.mTileBackground = newTileBackground;
-        if (newTileBackground instanceof RippleDrawable) {
-            RippleDrawable rippleDrawable = (RippleDrawable) newTileBackground;
+        Drawable drawableNewTileBackground = newTileBackground();
+        this.mTileBackground = drawableNewTileBackground;
+        if (drawableNewTileBackground instanceof RippleDrawable) {
+            RippleDrawable rippleDrawable = (RippleDrawable) drawableNewTileBackground;
             rippleDrawable.setColor(ColorStateList.valueOf(((LinearLayout) this).mContext.getColor(R.color.sec_qs_ripple_background)));
             this.mRipple = rippleDrawable;
             if (getWidth() != 0) {
@@ -394,7 +392,7 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
             }
         }
         setImportantForAccessibility(2);
-        this.mIcon.setBackground(newTileBackground);
+        this.mIcon.setBackground(drawableNewTileBackground);
         this.mIcon.setFocusable(true);
         setFocusable(false);
         this.mColorActive = ((LinearLayout) this).mContext.getColor(R.color.qs_tile_round_background_on);

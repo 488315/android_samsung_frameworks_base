@@ -166,9 +166,9 @@ public interface IVibratorManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVibratorManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVibratorManagerService)) {
-                return (IVibratorManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVibratorManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVibratorManagerService)) {
+                return (IVibratorManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -236,106 +236,106 @@ public interface IVibratorManagerService extends IInterface {
                     parcel2.writeInt(capabilities);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VibratorInfo vibratorInfo = getVibratorInfo(readInt);
+                    VibratorInfo vibratorInfo = getVibratorInfo(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vibratorInfo, 1);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVibrating = isVibrating(readInt2);
+                    boolean zIsVibrating = isVibrating(i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVibrating);
+                    parcel2.writeBoolean(zIsVibrating);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
-                    IVibratorStateListener asInterface = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    IVibratorStateListener iVibratorStateListenerAsInterface = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerVibratorStateListener = registerVibratorStateListener(readInt3, asInterface);
+                    boolean zRegisterVibratorStateListener = registerVibratorStateListener(i5, iVibratorStateListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerVibratorStateListener);
+                    parcel2.writeBoolean(zRegisterVibratorStateListener);
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
-                    IVibratorStateListener asInterface2 = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    IVibratorStateListener iVibratorStateListenerAsInterface2 = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterVibratorStateListener = unregisterVibratorStateListener(readInt4, asInterface2);
+                    boolean zUnregisterVibratorStateListener = unregisterVibratorStateListener(i6, iVibratorStateListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterVibratorStateListener);
+                    parcel2.writeBoolean(zUnregisterVibratorStateListener);
                     return true;
                 case 7:
-                    int readInt5 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i8 = parcel.readInt();
                     CombinedVibration combinedVibration = (CombinedVibration) parcel.readTypedObject(CombinedVibration.CREATOR);
                     VibrationAttributes vibrationAttributes = (VibrationAttributes) parcel.readTypedObject(VibrationAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean alwaysOnEffect = setAlwaysOnEffect(readInt5, readString, readInt6, combinedVibration, vibrationAttributes);
+                    boolean alwaysOnEffect = setAlwaysOnEffect(i7, string, i8, combinedVibration, vibrationAttributes);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(alwaysOnEffect);
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    String string2 = parcel.readString();
                     CombinedVibration combinedVibration2 = (CombinedVibration) parcel.readTypedObject(CombinedVibration.CREATOR);
                     VibrationAttributes vibrationAttributes2 = (VibrationAttributes) parcel.readTypedObject(VibrationAttributes.CREATOR);
-                    String readString3 = parcel.readString();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    String string3 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    vibrate(readInt7, readInt8, readString2, combinedVibration2, vibrationAttributes2, readString3, readStrongBinder);
+                    vibrate(i9, i10, string2, combinedVibration2, vibrationAttributes2, string3, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt9 = parcel.readInt();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    int i11 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    cancelVibrate(readInt9, readStrongBinder2);
+                    cancelVibrate(i11, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    int readInt12 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    performHapticFeedback(readInt10, readInt11, readString4, readInt12, readString5, readInt13, readInt14);
+                    performHapticFeedback(i12, i13, string4, i14, string5, i15, i16);
                     return true;
                 case 11:
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    String readString6 = parcel.readString();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    performHapticFeedbackForInputDevice(readInt15, readInt16, readString6, readInt17, readInt18, readInt19, readString7, readInt20, readInt21);
+                    performHapticFeedbackForInputDevice(i17, i18, string6, i19, i20, i21, string7, i22, i23);
                     return true;
                 case 12:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    String readString8 = parcel.readString();
-                    int[] createIntArray = parcel.createIntArray();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     VibrationAttributes vibrationAttributes3 = (VibrationAttributes) parcel.readTypedObject(VibrationAttributes.CREATOR);
-                    String readString9 = parcel.readString();
-                    IVibrationSessionCallback asInterface3 = IVibrationSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string9 = parcel.readString();
+                    IVibrationSessionCallback iVibrationSessionCallbackAsInterface = IVibrationSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal startVendorVibrationSession = startVendorVibrationSession(readInt22, readInt23, readString8, createIntArray, vibrationAttributes3, readString9, asInterface3);
+                    ICancellationSignal iCancellationSignalStartVendorVibrationSession = startVendorVibrationSession(i24, i25, string8, iArrCreateIntArray, vibrationAttributes3, string9, iVibrationSessionCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(startVendorVibrationSession);
+                    parcel2.writeStrongInterface(iCancellationSignalStartVendorVibrationSession);
                     return true;
                 case 13:
-                    int semGetNumberOfSupportedPatterns = semGetNumberOfSupportedPatterns();
+                    int iSemGetNumberOfSupportedPatterns = semGetNumberOfSupportedPatterns();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetNumberOfSupportedPatterns);
+                    parcel2.writeInt(iSemGetNumberOfSupportedPatterns);
                     return true;
                 case 14:
                     int supportedVibratorGroup = getSupportedVibratorGroup();
@@ -345,9 +345,9 @@ public interface IVibratorManagerService extends IInterface {
                 case 15:
                     VibrationDebugInfo vibrationDebugInfo = (VibrationDebugInfo) parcel.readTypedObject(VibrationDebugInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    String executeVibrationDebugCommand = executeVibrationDebugCommand(vibrationDebugInfo);
+                    String strExecuteVibrationDebugCommand = executeVibrationDebugCommand(vibrationDebugInfo);
                     parcel2.writeNoException();
-                    parcel2.writeString(executeVibrationDebugCommand);
+                    parcel2.writeString(strExecuteVibrationDebugCommand);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -372,260 +372,260 @@ public interface IVibratorManagerService extends IInterface {
 
             @Override // android.os.IVibratorManagerService
             public int[] getVibratorIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public int getCapabilities() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public VibratorInfo getVibratorInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VibratorInfo) obtain2.readTypedObject(VibratorInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VibratorInfo) parcelObtain2.readTypedObject(VibratorInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public boolean isVibrating(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVibratorStateListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVibratorStateListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVibratorStateListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVibratorStateListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public boolean setAlwaysOnEffect(int i, String str, int i2, CombinedVibration combinedVibration, VibrationAttributes vibrationAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(combinedVibration, 0);
-                    obtain.writeTypedObject(vibrationAttributes, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(combinedVibration, 0);
+                    parcelObtain.writeTypedObject(vibrationAttributes, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public void vibrate(int i, int i2, String str, CombinedVibration combinedVibration, VibrationAttributes vibrationAttributes, String str2, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(combinedVibration, 0);
-                    obtain.writeTypedObject(vibrationAttributes, 0);
-                    obtain.writeString(str2);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(combinedVibration, 0);
+                    parcelObtain.writeTypedObject(vibrationAttributes, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public void cancelVibrate(int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public void performHapticFeedback(int i, int i2, String str, int i3, String str2, int i4, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public void performHapticFeedbackForInputDevice(int i, int i2, String str, int i3, int i4, int i5, String str2, int i6, int i7) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i6);
-                    obtain.writeInt(i7);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeInt(i7);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public ICancellationSignal startVendorVibrationSession(int i, int i2, String str, int[] iArr, VibrationAttributes vibrationAttributes, String str2, IVibrationSessionCallback iVibrationSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedObject(vibrationAttributes, 0);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iVibrationSessionCallback);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedObject(vibrationAttributes, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iVibrationSessionCallback);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public int semGetNumberOfSupportedPatterns() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public int getSupportedVibratorGroup() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVibratorManagerService
             public String executeVibrationDebugCommand(VibrationDebugInfo vibrationDebugInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(vibrationDebugInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(vibrationDebugInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

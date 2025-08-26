@@ -73,9 +73,9 @@ public class AppearanceRegion implements Parcelable {
     }
 
     protected AppearanceRegion(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-        this.mAppearance = readInt;
+        this.mAppearance = i;
         this.mBounds = rect;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rect);
     }

@@ -45,14 +45,14 @@ public class ToggleButton extends CompoundButton {
 
     public ToggleButton(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ToggleButton, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.ToggleButton, attributeSet, obtainStyledAttributes, i, i2);
-        this.mTextOn = obtainStyledAttributes.getText(1);
-        this.mTextOff = obtainStyledAttributes.getText(2);
-        this.mDisabledAlpha = obtainStyledAttributes.getFloat(0, 0.5f);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ToggleButton, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.ToggleButton, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mTextOn = typedArrayObtainStyledAttributes.getText(1);
+        this.mTextOff = typedArrayObtainStyledAttributes.getText(2);
+        this.mDisabledAlpha = typedArrayObtainStyledAttributes.getFloat(0, 0.5f);
         syncTextState();
         setDefaultStateDescription();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public ToggleButton(Context context, AttributeSet attributeSet, int i) {
@@ -76,11 +76,11 @@ public class ToggleButton extends CompoundButton {
     private void syncTextState() {
         CharSequence charSequence;
         CharSequence charSequence2;
-        boolean isChecked = isChecked();
-        if (isChecked && (charSequence2 = this.mTextOn) != null) {
+        boolean zIsChecked = isChecked();
+        if (zIsChecked && (charSequence2 = this.mTextOn) != null) {
             lambda$setTextAsync$0(charSequence2);
         } else {
-            if (isChecked || (charSequence = this.mTextOff) == null) {
+            if (zIsChecked || (charSequence = this.mTextOff) == null) {
                 return;
             }
             lambda$setTextAsync$0(charSequence);

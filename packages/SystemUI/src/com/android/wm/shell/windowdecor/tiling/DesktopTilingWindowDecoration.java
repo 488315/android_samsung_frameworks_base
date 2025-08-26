@@ -1,19 +1,28 @@
 package com.android.wm.shell.windowdecor.tiling;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.SurfaceControl;
 import android.view.SurfaceControlViewHost;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.window.DesktopModeFlags;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowContainerTransaction;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.wm.shell.RootTaskDisplayAreaOrganizer;
@@ -39,6 +48,8 @@ import com.android.wm.shell.windowdecor.DragResizeWindowGeometry;
 import com.android.wm.shell.windowdecor.ResizeVeil;
 import com.android.wm.shell.windowdecor.common.WindowDecorTaskResourceLoader;
 import com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration;
+import com.samsung.android.core.CoreSaLogger;
+import com.samsung.android.rune.CoreRune;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -49,7 +60,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.MainCoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTilingWindowDecoration implements Transitions.TransitionHandler, ShellTaskOrganizer.FocusListener, ShellTaskOrganizer.TaskVanishedListener, DragPositioningCallbackUtility.DragEventListener, Transitions.TransitionObserver, FocusTransitionListener {
     public static final String TAG;
@@ -66,6 +76,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
     public boolean isDarkMode;
     public boolean isResizing;
     public boolean isTilingManagerInitialised;
+    public int lastFocusedTiledTaskId;
     public AppResizingHelper leftTaskResizingHelper;
     public final MainCoroutineDispatcher mainDispatcher;
     public final ShellExecutor mainExecutor;
@@ -79,7 +90,6 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
     public final Supplier transactionSupplier;
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppResizingHelper {
         public final CoroutineScope bgScope;
         public final Rect bounds;
@@ -120,7 +130,6 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -130,7 +139,6 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -172,6 +180,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
         this.mainExecutor = shellExecutor;
         this.desktopState = desktopState;
         this.transactionSupplier = supplier;
+        this.lastFocusedTiledTaskId = -1;
     }
 
     public final boolean allTiledTasksVisible() {
@@ -187,7 +196,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
     public final Rect getSnapBounds(DesktopTasksController.SnapPosition snapPosition) {
         int i;
         int dimensionPixelSize;
-        int m;
+        int iM;
         DisplayController displayController = this.displayController;
         int i2 = this.displayId;
         DisplayLayout displayLayout = displayController.getDisplayLayout(i2);
@@ -199,24 +208,24 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
             return new Rect();
         }
         Rect rect = new Rect();
-        displayLayout.getStableBounds(rect, false);
+        displayLayout.getStableBoundsByInsetsVisibility(rect);
         AppResizingHelper appResizingHelper = this.leftTaskResizingHelper;
         AppResizingHelper appResizingHelper2 = this.rightTaskResizingHelper;
-        int width = rect.width() / 2;
+        int iWidth = rect.width() / 2;
         int i3 = WhenMappings.$EnumSwitchMapping$0[snapPosition.ordinal()];
         if (i3 != 1) {
             if (i3 != 2) {
                 throw new NoWhenBranchMatchedException();
             }
             if (appResizingHelper == null) {
-                m = (displayContext.getResources().getDimensionPixelSize(R.dimen.split_divider_bar_width) / 2) + (rect.right - width);
+                iM = (displayContext.getResources().getDimensionPixelSize(R.dimen.split_divider_bar_width) / 2) + (rect.right - iWidth);
             } else {
-                m = StrongAuthPopup$$ExternalSyntheticOutline0.m(displayContext, R.dimen.split_divider_bar_width, appResizingHelper.bounds.right);
+                iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(displayContext, R.dimen.split_divider_bar_width, appResizingHelper.bounds.right);
             }
-            return new Rect(m, rect.top, rect.right, rect.bottom);
+            return new Rect(iM, rect.top, rect.right, rect.bottom);
         }
         if (appResizingHelper2 == null) {
-            i = rect.left + width;
+            i = rect.left + iWidth;
             dimensionPixelSize = displayContext.getResources().getDimensionPixelSize(R.dimen.split_divider_bar_width) / 2;
         } else {
             i = appResizingHelper2.bounds.left;
@@ -228,6 +237,151 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final WindowContainerTransaction handleRequest(IBinder iBinder, TransitionRequestInfo transitionRequestInfo) {
         return null;
+    }
+
+    public final void initTilingForDisplayIfNeeded(boolean z, Configuration configuration) {
+        DesktopModeWindowDecoration desktopModeWindowDecoration;
+        DesktopModeWindowDecoration desktopModeWindowDecoration2;
+        final DesktopTilingDividerWindowManager desktopTilingDividerWindowManager;
+        AppResizingHelper appResizingHelper;
+        DesktopModeWindowDecoration desktopModeWindowDecoration3;
+        final SurfaceControl surfaceControl;
+        ActivityManager.RunningTaskInfo runningTaskInfo;
+        DesktopModeWindowDecoration desktopModeWindowDecoration4;
+        Rect rect;
+        Rect rect2;
+        Rect rect3;
+        String packageName;
+        if (this.leftTaskResizingHelper == null || this.rightTaskResizingHelper == null) {
+            if (z) {
+                this.shellTaskOrganizer.addTaskVanishedListener(this);
+                return;
+            }
+            return;
+        }
+        if (!this.isTilingManagerInitialised) {
+            DisplayController displayController = this.displayController;
+            int i = this.displayId;
+            DisplayLayout displayLayout = displayController.getDisplayLayout(i);
+            SurfaceControl.Builder builder = new SurfaceControl.Builder();
+            this.rootTdaOrganizer.attachToDisplayArea(i, builder);
+            SurfaceControl surfaceControlBuild = builder.setName("Tiling Divider").setContainerLayer().build();
+            Context displayContext = displayController.getDisplayContext(i);
+            String packageName2 = null;
+            if (displayContext == null) {
+                desktopTilingDividerWindowManager = null;
+            } else {
+                if (displayLayout != null) {
+                    Rect rect4 = new Rect();
+                    displayLayout.getStableBounds(rect4, false);
+                    AppResizingHelper appResizingHelper2 = this.leftTaskResizingHelper;
+                    if (appResizingHelper2 == null || (rect2 = appResizingHelper2.bounds) == null) {
+                        rect = new Rect();
+                    } else {
+                        int i2 = rect2.right;
+                        AppResizingHelper appResizingHelper3 = this.rightTaskResizingHelper;
+                        rect = (appResizingHelper3 == null || (rect3 = appResizingHelper3.bounds) == null) ? new Rect() : new Rect(i2, rect4.top, rect3.left, rect4.bottom);
+                    }
+                    this.dividerBounds = rect;
+                    Supplier supplier = this.transactionSupplier;
+                    Rect rect5 = this.dividerBounds;
+                    desktopTilingDividerWindowManager = new DesktopTilingDividerWindowManager(configuration, TAG, surfaceControlBuild, this.syncQueue, this, supplier, rect5 == null ? null : rect5, displayContext, this.isDarkMode);
+                } else {
+                    desktopTilingDividerWindowManager = null;
+                }
+                AppResizingHelper appResizingHelper4 = this.leftTaskResizingHelper;
+                if (appResizingHelper4 == null || (runningTaskInfo = appResizingHelper4.taskInfo) == null || this.lastFocusedTiledTaskId != runningTaskInfo.taskId ? !((appResizingHelper = this.rightTaskResizingHelper) == null || (desktopModeWindowDecoration3 = appResizingHelper.desktopModeWindowDecoration) == null || (surfaceControl = desktopModeWindowDecoration3.mTaskSurface) == null) : !((desktopModeWindowDecoration4 = appResizingHelper4.desktopModeWindowDecoration) == null || (surfaceControl = desktopModeWindowDecoration4.mTaskSurface) == null)) {
+                    if (desktopTilingDividerWindowManager != null) {
+                        Context context = desktopTilingDividerWindowManager.displayContext;
+                        SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(context, context.getDisplay(), desktopTilingDividerWindowManager, "DesktopTilingManager");
+                        TilingDividerView tilingDividerView = (TilingDividerView) LayoutInflater.from(desktopTilingDividerWindowManager.displayContext).inflate(R.layout.mw_desktop_mode_tile_divider, (ViewGroup) null);
+                        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams((desktopTilingDividerWindowManager.maxRoundedCornerRadius * 2) + desktopTilingDividerWindowManager.dividerBounds.width(), desktopTilingDividerWindowManager.dividerBounds.height(), 2034, 537133096, -3);
+                        layoutParams.token = new Binder();
+                        layoutParams.setTitle(desktopTilingDividerWindowManager.windowName);
+                        layoutParams.privateFlags |= 536870976;
+                        surfaceControlViewHost.setView(tilingDividerView, layoutParams);
+                        Rect rect6 = new Rect();
+                        rect6.set(desktopTilingDividerWindowManager.dividerBounds);
+                        tilingDividerView.setup(desktopTilingDividerWindowManager, rect6, desktopTilingDividerWindowManager.handleRegionSize, desktopTilingDividerWindowManager.isDarkMode);
+                        final SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) desktopTilingDividerWindowManager.transactionSupplier.get();
+                        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                        valueAnimatorOfFloat.setDuration(300L);
+                        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.tiling.DesktopTilingDividerWindowManager$generateViewHost$dividerAnimator$1$1
+                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                if (desktopTilingDividerWindowManager.leash.isValid()) {
+                                    transaction.setAlpha(desktopTilingDividerWindowManager.leash, ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue()).apply();
+                                }
+                            }
+                        });
+                        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.tiling.DesktopTilingDividerWindowManager$generateViewHost$dividerAnimator$1$2
+                            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                            public final void onAnimationEnd(Animator animator) {
+                                if (desktopTilingDividerWindowManager.leash.isValid()) {
+                                    transaction.setAlpha(desktopTilingDividerWindowManager.leash, 1.0f).apply();
+                                    desktopTilingDividerWindowManager.dividerShown = true;
+                                }
+                            }
+
+                            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                            public final void onAnimationStart(Animator animator) {
+                                SurfaceControl.Transaction relativeLayer = transaction.setRelativeLayer(desktopTilingDividerWindowManager.leash, surfaceControl, 1);
+                                DesktopTilingDividerWindowManager desktopTilingDividerWindowManager2 = desktopTilingDividerWindowManager;
+                                SurfaceControl surfaceControl2 = desktopTilingDividerWindowManager2.leash;
+                                Rect rect7 = desktopTilingDividerWindowManager2.dividerBounds;
+                                relativeLayer.setPosition(surfaceControl2, rect7.left - desktopTilingDividerWindowManager2.maxRoundedCornerRadius, rect7.top).setAlpha(desktopTilingDividerWindowManager.leash, 0.0f).show(desktopTilingDividerWindowManager.leash).apply();
+                            }
+                        });
+                        valueAnimatorOfFloat.start();
+                        desktopTilingDividerWindowManager.viewHost = surfaceControlViewHost;
+                        desktopTilingDividerWindowManager.tilingDividerView = tilingDividerView;
+                        desktopTilingDividerWindowManager.updateTouchRegion();
+                        tilingDividerView.addOnLayoutChangeListener(desktopTilingDividerWindowManager);
+                    }
+                }
+            }
+            this.desktopTilingDividerWindowManager = desktopTilingDividerWindowManager;
+            this.isTilingManagerInitialised = true;
+            this.focusTransitionObserver.setLocalFocusTransitionListener(this, this.mainExecutor);
+            if (CoreRune.MW_SA_LOGGING) {
+                AppResizingHelper appResizingHelper5 = this.leftTaskResizingHelper;
+                ActivityManager.RunningTaskInfo runningTaskInfo2 = appResizingHelper5 != null ? appResizingHelper5.taskInfo : null;
+                if ((runningTaskInfo2 != null ? runningTaskInfo2.topActivity : null) != null) {
+                    ComponentName componentName = runningTaskInfo2.topActivity;
+                    packageName = componentName != null ? componentName.getPackageName() : null;
+                } else {
+                    packageName = "";
+                }
+                AppResizingHelper appResizingHelper6 = this.rightTaskResizingHelper;
+                ActivityManager.RunningTaskInfo runningTaskInfo3 = appResizingHelper6 != null ? appResizingHelper6.taskInfo : null;
+                if ((runningTaskInfo3 != null ? runningTaskInfo3.topActivity : null) != null) {
+                    ComponentName componentName2 = runningTaskInfo3.topActivity;
+                    if (componentName2 != null) {
+                        packageName2 = componentName2.getPackageName();
+                    }
+                } else {
+                    packageName2 = "";
+                }
+                CoreSaLogger.logForAdvanced("3108", AbstractResolvableFuture$$ExternalSyntheticOutline0.m(packageName, ",", packageName2), i == 0 ? 1 : 2);
+            }
+        }
+        AppResizingHelper appResizingHelper7 = this.leftTaskResizingHelper;
+        if (appResizingHelper7 != null) {
+            appResizingHelper7.initIfNeeded();
+        }
+        AppResizingHelper appResizingHelper8 = this.rightTaskResizingHelper;
+        if (appResizingHelper8 != null) {
+            appResizingHelper8.initIfNeeded();
+        }
+        AppResizingHelper appResizingHelper9 = this.leftTaskResizingHelper;
+        if (appResizingHelper9 != null && (desktopModeWindowDecoration2 = appResizingHelper9.desktopModeWindowDecoration) != null) {
+            desktopModeWindowDecoration2.updateDisabledResizingEdge(DragResizeWindowGeometry.DisabledEdge.RIGHT, false);
+        }
+        AppResizingHelper appResizingHelper10 = this.rightTaskResizingHelper;
+        if (appResizingHelper10 == null || (desktopModeWindowDecoration = appResizingHelper10.desktopModeWindowDecoration) == null) {
+            return;
+        }
+        desktopModeWindowDecoration.updateDisabledResizingEdge(DragResizeWindowGeometry.DisabledEdge.LEFT, false);
     }
 
     public final boolean moveTiledPairToFront(int i, boolean z) {
@@ -246,6 +400,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
             AppResizingHelper appResizingHelper5 = this.leftTaskResizingHelper;
             if ((appResizingHelper5 != null && (runningTaskInfo4 = appResizingHelper5.taskInfo) != null && i == runningTaskInfo4.taskId) || ((appResizingHelper3 = this.rightTaskResizingHelper) != null && (runningTaskInfo = appResizingHelper3.taskInfo) != null && i == runningTaskInfo.taskId)) {
                 SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) this.transactionSupplier.get();
+                this.lastFocusedTiledTaskId = i;
                 AppResizingHelper appResizingHelper6 = this.leftTaskResizingHelper;
                 if (appResizingHelper6 != null && (runningTaskInfo3 = appResizingHelper6.taskInfo) != null && i == runningTaskInfo3.taskId && (desktopTilingDividerWindowManager2 = this.desktopTilingDividerWindowManager) != null) {
                     transaction.setRelativeLayer(desktopTilingDividerWindowManager2.leash, appResizingHelper.desktopModeWindowDecoration.mTaskSurface, 1);
@@ -258,11 +413,11 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
                 AppResizingHelper appResizingHelper8 = this.leftTaskResizingHelper;
                 if (appResizingHelper8 != null && (appResizingHelper4 = this.rightTaskResizingHelper) != null) {
                     if (z2) {
-                        windowContainerTransaction.reorder(appResizingHelper4.taskInfo.token, true);
-                        windowContainerTransaction.reorder(appResizingHelper8.taskInfo.token, true);
+                        windowContainerTransaction.reorder(appResizingHelper4.taskInfo.token, true, true);
+                        windowContainerTransaction.reorder(appResizingHelper8.taskInfo.token, true, true);
                     } else {
-                        windowContainerTransaction.reorder(appResizingHelper8.taskInfo.token, true);
-                        windowContainerTransaction.reorder(appResizingHelper4.taskInfo.token, true);
+                        windowContainerTransaction.reorder(appResizingHelper8.taskInfo.token, true, true);
+                        windowContainerTransaction.reorder(appResizingHelper4.taskInfo.token, true, true);
                     }
                 }
                 this.transitions.startTransition(3, windowContainerTransaction, null);
@@ -288,16 +443,16 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
                 Rect rect4 = appResizingHelper.bounds;
                 Rect rect5 = new Rect(rect3.left, rect3.top, rect.left, rect3.bottom);
                 Rect rect6 = new Rect(rect.right, rect4.top, rect4.right, rect4.bottom);
-                int width = rect5.width();
-                int width2 = rect3.width();
+                int iWidth = rect5.width();
+                int iWidth2 = rect3.width();
                 AppResizingHelper appResizingHelper3 = this.leftTaskResizingHelper;
                 DesktopModeWindowDecoration desktopModeWindowDecoration = appResizingHelper3 != null ? appResizingHelper3.desktopModeWindowDecoration : null;
                 DesktopStateImpl desktopStateImpl = (DesktopStateImpl) this.desktopState;
-                if (!DragPositioningCallbackUtility.isExceedingWidthConstraint(width, width2, rect2, this.displayController, desktopModeWindowDecoration, desktopStateImpl.canEnterDesktopMode, true)) {
-                    int width3 = rect6.width();
-                    int width4 = rect4.width();
+                if (!DragPositioningCallbackUtility.isExceedingWidthConstraint(iWidth, iWidth2, rect2, this.displayController, desktopModeWindowDecoration, desktopStateImpl.canEnterDesktopMode, true)) {
+                    int iWidth3 = rect6.width();
+                    int iWidth4 = rect4.width();
                     AppResizingHelper appResizingHelper4 = this.rightTaskResizingHelper;
-                    if (!DragPositioningCallbackUtility.isExceedingWidthConstraint(width3, width4, rect2, this.displayController, appResizingHelper4 != null ? appResizingHelper4.desktopModeWindowDecoration : null, desktopStateImpl.canEnterDesktopMode, true)) {
+                    if (!DragPositioningCallbackUtility.isExceedingWidthConstraint(iWidth3, iWidth4, rect2, this.displayController, appResizingHelper4 != null ? appResizingHelper4.desktopModeWindowDecoration : null, desktopStateImpl.canEnterDesktopMode, true)) {
                         appResizingHelper2.newBounds.set(rect5);
                         appResizingHelper.newBounds.set(rect6);
                         if (this.isResizing) {
@@ -362,7 +517,9 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
 
     @Override // com.android.wm.shell.shared.FocusTransitionListener
     public final void onFocusedTaskChanged(int i, boolean z, boolean z2) {
-        moveTiledPairToFront(i, z);
+        if (z2) {
+            moveTiledPairToFront(i, z);
+        }
     }
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskVanishedListener
@@ -419,9 +576,9 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
                                 }
                                 z = z || !((appResizingHelper2 = this.leftTaskResizingHelper) == null || (runningTaskInfo3 = appResizingHelper2.taskInfo) == null || taskInfo2.taskId != runningTaskInfo3.taskId);
                                 if (!z2 && ((appResizingHelper = this.rightTaskResizingHelper) == null || (runningTaskInfo2 = appResizingHelper.taskInfo) == null || taskInfo2.taskId != runningTaskInfo2.taskId)) {
-                                    r2 = false;
+                                    z = false;
                                 }
-                                z2 = r2;
+                                z2 = z;
                             }
                         } else {
                             removeTaskIfTiled(taskInfo2.taskId, true, taskInfo2.getWindowingMode() == 1);
@@ -467,16 +624,16 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
         DesktopRepository current = desktopUserRepositories.getCurrent();
         AppResizingHelper appResizingHelper = this.leftTaskResizingHelper;
         int i2 = this.displayId;
-        Integer num = null;
+        Integer numValueOf = null;
         if (appResizingHelper != null && (runningTaskInfo3 = appResizingHelper.taskInfo) != null && i == runningTaskInfo3.taskId) {
             DesktopRepository current2 = desktopUserRepositories.getCurrent();
-            DesktopRepository.logD("removeLeftTiledTask for displayId=%d", Integer.valueOf(i2));
+            current2.logD("removeLeftTiledTask for displayId=%d", Integer.valueOf(i2));
             DesktopRepository.DesktopData desktopData = current2.desktopData;
             DesktopRepository.Desk defaultDesk = desktopData.getDefaultDesk(i2);
             if (defaultDesk == null) {
                 throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Expected desk in display: ").toString());
             }
-            DesktopRepository.logD("removeLeftTiledTaskToDesk for displayId=%d", Integer.valueOf(i2));
+            current2.logD("removeLeftTiledTaskToDesk for displayId=%d", Integer.valueOf(i2));
             int i3 = defaultDesk.deskId;
             DesktopRepository.Desk desk = desktopData.getDesk(i3);
             if (desk == null) {
@@ -490,7 +647,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
             this.leftTaskResizingHelper = null;
             AppResizingHelper appResizingHelper2 = this.rightTaskResizingHelper;
             if (appResizingHelper2 != null && (runningTaskInfo4 = appResizingHelper2.taskInfo) != null) {
-                num = Integer.valueOf(runningTaskInfo4.taskId);
+                numValueOf = Integer.valueOf(runningTaskInfo4.taskId);
             }
             final int i4 = 0;
             Function0 function0 = new Function0(this) { // from class: com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration$$ExternalSyntheticLambda0
@@ -521,7 +678,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
                     return Unit.INSTANCE;
                 }
             };
-            if (num == null || !current.isVisibleTask(num.intValue())) {
+            if (numValueOf == null || !current.isVisibleTask(numValueOf.intValue())) {
                 AppResizingHelper appResizingHelper3 = this.rightTaskResizingHelper;
                 if (appResizingHelper3 != null) {
                     appResizingHelper3.visibilityCallback = function0;
@@ -537,13 +694,13 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
             return;
         }
         DesktopRepository current3 = desktopUserRepositories.getCurrent();
-        DesktopRepository.logD("removeRightTiledTask for displayId=%d", Integer.valueOf(i2));
+        current3.logD("removeRightTiledTask for displayId=%d", Integer.valueOf(i2));
         DesktopRepository.DesktopData desktopData2 = current3.desktopData;
         DesktopRepository.Desk defaultDesk2 = desktopData2.getDefaultDesk(i2);
         if (defaultDesk2 == null) {
             throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Expected desk in display: ").toString());
         }
-        DesktopRepository.logD("removeRightTiledTaskFromDesk for displayId=%d", Integer.valueOf(i2));
+        current3.logD("removeRightTiledTaskFromDesk for displayId=%d", Integer.valueOf(i2));
         int i5 = defaultDesk2.deskId;
         DesktopRepository.Desk desk2 = desktopData2.getDesk(i5);
         if (desk2 == null) {
@@ -557,7 +714,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
         this.rightTaskResizingHelper = null;
         AppResizingHelper appResizingHelper5 = this.leftTaskResizingHelper;
         if (appResizingHelper5 != null && (runningTaskInfo2 = appResizingHelper5.taskInfo) != null) {
-            num = Integer.valueOf(runningTaskInfo2.taskId);
+            numValueOf = Integer.valueOf(runningTaskInfo2.taskId);
         }
         final int i6 = 1;
         Function0 function02 = new Function0(this) { // from class: com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration$$ExternalSyntheticLambda0
@@ -588,7 +745,7 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
                 return Unit.INSTANCE;
             }
         };
-        if (num == null || !current.isVisibleTask(num.intValue())) {
+        if (numValueOf == null || !current.isVisibleTask(numValueOf.intValue())) {
             AppResizingHelper appResizingHelper6 = this.leftTaskResizingHelper;
             if (appResizingHelper6 != null) {
                 appResizingHelper6.visibilityCallback = function02;
@@ -628,11 +785,11 @@ public final class DesktopTilingWindowDecoration implements Transitions.Transiti
             TransitionInfo.Change change = (TransitionInfo.Change) it.next();
             change.getClass();
             ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
-            Integer valueOf = taskInfo != null ? Integer.valueOf(taskInfo.taskId) : null;
+            Integer numValueOf = taskInfo != null ? Integer.valueOf(taskInfo.taskId) : null;
             int i = appResizingHelper2.taskInfo.taskId;
-            if (valueOf == null || valueOf.intValue() != i) {
+            if (numValueOf == null || numValueOf.intValue() != i) {
                 int i2 = appResizingHelper.taskInfo.taskId;
-                if (valueOf == null || valueOf.intValue() != i2) {
+                if (numValueOf == null || numValueOf.intValue() != i2) {
                     Log.d(TAG, "startAnimation: skip non-tiled change=" + change);
                 }
             }

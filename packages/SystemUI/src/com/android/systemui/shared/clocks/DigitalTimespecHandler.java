@@ -9,7 +9,6 @@ import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DigitalTimespecHandler extends TimespecHandler {
     public DateFormat contentDescriptionFormat;
@@ -18,7 +17,6 @@ public final class DigitalTimespecHandler extends TimespecHandler {
     public final String timeFormat;
     public final DigitalTimespec timespec;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,6 @@ public final class DigitalTimespecHandler extends TimespecHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -64,9 +61,9 @@ public final class DigitalTimespecHandler extends TimespecHandler {
 
     public final void applyPattern() {
         String str = this.timeFormat;
-        String replace$default = StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(str, "hh", "h"), "h", "HH");
+        String strReplace$default = StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(str, "hh", "h"), "h", "HH");
         if (this.is24Hr) {
-            str = replace$default;
+            str = strReplace$default;
         }
         ((SimpleDateFormat) this.dateFormat).applyPattern(str);
         DateFormat dateFormat = this.contentDescriptionFormat;
@@ -94,8 +91,8 @@ public final class DigitalTimespecHandler extends TimespecHandler {
     }
 
     public DigitalTimespecHandler(DigitalTimespec digitalTimespec, String str, Calendar calendar) {
-        super(calendar);
         DateFormat instanceForSkeleton;
+        super(calendar);
         this.timespec = digitalTimespec;
         this.timeFormat = str;
         Locale locale = Locale.getDefault();

@@ -46,9 +46,9 @@ public interface INativeSpatializerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INativeSpatializerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INativeSpatializerCallback)) {
-                return (INativeSpatializerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INativeSpatializerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INativeSpatializerCallback)) {
+                return (INativeSpatializerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -63,13 +63,13 @@ public interface INativeSpatializerCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte readByte = parcel.readByte();
+                byte b = parcel.readByte();
                 parcel.enforceNoDataAvail();
-                onLevelChanged(readByte);
+                onLevelChanged(b);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onOutputChanged(readInt);
+                onOutputChanged(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -94,25 +94,25 @@ public interface INativeSpatializerCallback extends IInterface {
 
             @Override // android.media.INativeSpatializerCallback
             public void onLevelChanged(byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INativeSpatializerCallback.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INativeSpatializerCallback.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.INativeSpatializerCallback
             public void onOutputChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INativeSpatializerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INativeSpatializerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

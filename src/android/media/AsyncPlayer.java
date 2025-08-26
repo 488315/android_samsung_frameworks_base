@@ -50,9 +50,9 @@ public class AsyncPlayer {
                 mediaPlayer2.release();
             }
             this.mPlayer = mediaPlayer;
-            long uptimeMillis = SystemClock.uptimeMillis() - command.requestTime;
-            if (uptimeMillis > 1000) {
-                Log.w(this.mTag, "Notification sound delayed by " + uptimeMillis + "msecs");
+            long jUptimeMillis = SystemClock.uptimeMillis() - command.requestTime;
+            if (jUptimeMillis > 1000) {
+                Log.w(this.mTag, "Notification sound delayed by " + jUptimeMillis + "msecs");
             }
         } catch (Exception e) {
             Log.w(this.mTag, "error loading sound for " + command.uri, e);
@@ -65,7 +65,7 @@ public class AsyncPlayer {
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public void run() {
+        public void run() throws IllegalStateException {
             Command command;
             while (true) {
                 synchronized (AsyncPlayer.this.mCmdQueue) {
@@ -76,9 +76,9 @@ public class AsyncPlayer {
                     AsyncPlayer.this.startSound(command);
                 } else if (i == 2) {
                     if (AsyncPlayer.this.mPlayer != null) {
-                        long uptimeMillis = SystemClock.uptimeMillis() - command.requestTime;
-                        if (uptimeMillis > 1000) {
-                            Log.w(AsyncPlayer.this.mTag, "Notification stop delayed by " + uptimeMillis + "msecs");
+                        long jUptimeMillis = SystemClock.uptimeMillis() - command.requestTime;
+                        if (jUptimeMillis > 1000) {
+                            Log.w(AsyncPlayer.this.mTag, "Notification stop delayed by " + jUptimeMillis + "msecs");
                         }
                         AsyncPlayer.this.mPlayer.stop();
                         AsyncPlayer.this.mPlayer.release();
@@ -106,7 +106,7 @@ public class AsyncPlayer {
         }
     }
 
-    public void play(Context context, Uri uri, boolean z, int i) {
+    public void play(Context context, Uri uri, boolean z, int i) throws IllegalArgumentException {
         PlayerBase.deprecateStreamTypeForPlayback(i, "AsyncPlayer", "play()");
         if (context == null || uri == null) {
             return;

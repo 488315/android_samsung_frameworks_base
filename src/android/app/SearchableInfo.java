@@ -163,41 +163,41 @@ public final class SearchableInfo implements Parcelable {
     }
 
     private SearchableInfo(Context context, AttributeSet attributeSet, ComponentName componentName) {
-        ProviderInfo resolveContentProvider;
+        ProviderInfo providerInfoResolveContentProvider;
         String str = null;
         this.mSearchActivity = componentName;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Searchable);
-        this.mSearchMode = obtainStyledAttributes.getInt(3, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Searchable);
+        this.mSearchMode = typedArrayObtainStyledAttributes.getInt(3, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         this.mLabelId = resourceId;
-        this.mHintId = obtainStyledAttributes.getResourceId(2, 0);
-        this.mIconId = obtainStyledAttributes.getResourceId(1, 0);
-        this.mSearchButtonText = obtainStyledAttributes.getResourceId(9, 0);
-        this.mSearchInputType = obtainStyledAttributes.getInt(10, 1);
+        this.mHintId = typedArrayObtainStyledAttributes.getResourceId(2, 0);
+        this.mIconId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        this.mSearchButtonText = typedArrayObtainStyledAttributes.getResourceId(9, 0);
+        this.mSearchInputType = typedArrayObtainStyledAttributes.getInt(10, 1);
         if (new TypedValue().data != 0) {
-            this.mSearchImeOptions = obtainStyledAttributes.getInt(16, 33554435);
+            this.mSearchImeOptions = typedArrayObtainStyledAttributes.getInt(16, 33554435);
         } else {
-            this.mSearchImeOptions = obtainStyledAttributes.getInt(16, 2);
+            this.mSearchImeOptions = typedArrayObtainStyledAttributes.getInt(16, 2);
         }
-        this.mIncludeInGlobalSearch = obtainStyledAttributes.getBoolean(18, false);
-        this.mQueryAfterZeroResults = obtainStyledAttributes.getBoolean(19, false);
-        this.mAutoUrlDetect = obtainStyledAttributes.getBoolean(21, false);
-        this.mSettingsDescriptionId = obtainStyledAttributes.getResourceId(20, 0);
-        String string = obtainStyledAttributes.getString(4);
+        this.mIncludeInGlobalSearch = typedArrayObtainStyledAttributes.getBoolean(18, false);
+        this.mQueryAfterZeroResults = typedArrayObtainStyledAttributes.getBoolean(19, false);
+        this.mAutoUrlDetect = typedArrayObtainStyledAttributes.getBoolean(21, false);
+        this.mSettingsDescriptionId = typedArrayObtainStyledAttributes.getResourceId(20, 0);
+        String string = typedArrayObtainStyledAttributes.getString(4);
         this.mSuggestAuthority = string;
-        this.mSuggestPath = obtainStyledAttributes.getString(5);
-        this.mSuggestSelection = obtainStyledAttributes.getString(6);
-        this.mSuggestIntentAction = obtainStyledAttributes.getString(7);
-        this.mSuggestIntentData = obtainStyledAttributes.getString(8);
-        this.mSuggestThreshold = obtainStyledAttributes.getInt(17, 0);
-        this.mVoiceSearchMode = obtainStyledAttributes.getInt(11, 0);
-        this.mVoiceLanguageModeId = obtainStyledAttributes.getResourceId(12, 0);
-        this.mVoicePromptTextId = obtainStyledAttributes.getResourceId(13, 0);
-        this.mVoiceLanguageId = obtainStyledAttributes.getResourceId(14, 0);
-        this.mVoiceMaxResults = obtainStyledAttributes.getInt(15, 0);
-        obtainStyledAttributes.recycle();
-        if (string != null && (resolveContentProvider = context.getPackageManager().resolveContentProvider(string, 268435456)) != null) {
-            str = resolveContentProvider.packageName;
+        this.mSuggestPath = typedArrayObtainStyledAttributes.getString(5);
+        this.mSuggestSelection = typedArrayObtainStyledAttributes.getString(6);
+        this.mSuggestIntentAction = typedArrayObtainStyledAttributes.getString(7);
+        this.mSuggestIntentData = typedArrayObtainStyledAttributes.getString(8);
+        this.mSuggestThreshold = typedArrayObtainStyledAttributes.getInt(17, 0);
+        this.mVoiceSearchMode = typedArrayObtainStyledAttributes.getInt(11, 0);
+        this.mVoiceLanguageModeId = typedArrayObtainStyledAttributes.getResourceId(12, 0);
+        this.mVoicePromptTextId = typedArrayObtainStyledAttributes.getResourceId(13, 0);
+        this.mVoiceLanguageId = typedArrayObtainStyledAttributes.getResourceId(14, 0);
+        this.mVoiceMaxResults = typedArrayObtainStyledAttributes.getInt(15, 0);
+        typedArrayObtainStyledAttributes.recycle();
+        if (string != null && (providerInfoResolveContentProvider = context.getPackageManager().resolveContentProvider(string, 268435456)) != null) {
+            str = providerInfoResolveContentProvider.packageName;
         }
         this.mSuggestProviderPackage = str;
         if (resourceId == 0) {
@@ -230,16 +230,16 @@ public final class SearchableInfo implements Parcelable {
         }
 
         ActionKeyInfo(Context context, AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SearchableActionKey);
-            int i = obtainStyledAttributes.getInt(0, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SearchableActionKey);
+            int i = typedArrayObtainStyledAttributes.getInt(0, 0);
             this.mKeyCode = i;
-            String string = obtainStyledAttributes.getString(1);
+            String string = typedArrayObtainStyledAttributes.getString(1);
             this.mQueryActionMsg = string;
-            String string2 = obtainStyledAttributes.getString(2);
+            String string2 = typedArrayObtainStyledAttributes.getString(2);
             this.mSuggestActionMsg = string2;
-            String string3 = obtainStyledAttributes.getString(3);
+            String string3 = typedArrayObtainStyledAttributes.getString(3);
             this.mSuggestActionMsgColumn = string3;
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             if (i == 0) {
                 throw new IllegalArgumentException("No keycode.");
             }
@@ -281,11 +281,11 @@ public final class SearchableInfo implements Parcelable {
     }
 
     public ActionKeyInfo findActionKey(int i) {
-        HashMap<Integer, ActionKeyInfo> hashMap = this.mActionKeys;
-        if (hashMap == null) {
+        HashMap<Integer, ActionKeyInfo> map = this.mActionKeys;
+        if (map == null) {
             return null;
         }
-        return hashMap.get(Integer.valueOf(i));
+        return map.get(Integer.valueOf(i));
     }
 
     private void addActionKey(ActionKeyInfo actionKeyInfo) {
@@ -295,15 +295,15 @@ public final class SearchableInfo implements Parcelable {
         this.mActionKeys.put(Integer.valueOf(actionKeyInfo.getKeyCode()), actionKeyInfo);
     }
 
-    public static SearchableInfo getActivityMetaData(Context context, ActivityInfo activityInfo, int i) {
+    public static SearchableInfo getActivityMetaData(Context context, ActivityInfo activityInfo, int i) throws XmlPullParserException, IOException {
         try {
-            Context createPackageContextAsUser = context.createPackageContextAsUser("system", 0, new UserHandle(i));
-            XmlResourceParser loadXmlMetaData = activityInfo.loadXmlMetaData(createPackageContextAsUser.getPackageManager(), MD_LABEL_SEARCHABLE);
-            if (loadXmlMetaData == null) {
+            Context contextCreatePackageContextAsUser = context.createPackageContextAsUser("system", 0, new UserHandle(i));
+            XmlResourceParser xmlResourceParserLoadXmlMetaData = activityInfo.loadXmlMetaData(contextCreatePackageContextAsUser.getPackageManager(), MD_LABEL_SEARCHABLE);
+            if (xmlResourceParserLoadXmlMetaData == null) {
                 return null;
             }
-            SearchableInfo activityMetaData = getActivityMetaData(createPackageContextAsUser, loadXmlMetaData, new ComponentName(activityInfo.packageName, activityInfo.name));
-            loadXmlMetaData.close();
+            SearchableInfo activityMetaData = getActivityMetaData(contextCreatePackageContextAsUser, xmlResourceParserLoadXmlMetaData, new ComponentName(activityInfo.packageName, activityInfo.name));
+            xmlResourceParserLoadXmlMetaData.close();
             return activityMetaData;
         } catch (PackageManager.NameNotFoundException unused) {
             Log.e(LOG_TAG, "Couldn't create package context for user " + i);
@@ -311,9 +311,9 @@ public final class SearchableInfo implements Parcelable {
         }
     }
 
-    private static SearchableInfo getActivityMetaData(Context context, XmlPullParser xmlPullParser, ComponentName componentName) {
-        Context createActivityContext = createActivityContext(context, componentName);
-        if (createActivityContext == null) {
+    private static SearchableInfo getActivityMetaData(Context context, XmlPullParser xmlPullParser, ComponentName componentName) throws XmlPullParserException, IOException {
+        Context contextCreateActivityContext = createActivityContext(context, componentName);
+        if (contextCreateActivityContext == null) {
             return null;
         }
         try {
@@ -322,10 +322,10 @@ public final class SearchableInfo implements Parcelable {
             while (next != 1) {
                 if (next == 2) {
                     if (xmlPullParser.getName().equals("searchable")) {
-                        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
-                        if (asAttributeSet != null) {
+                        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
+                        if (attributeSetAsAttributeSet != null) {
                             try {
-                                searchableInfo = new SearchableInfo(createActivityContext, asAttributeSet, componentName);
+                                searchableInfo = new SearchableInfo(contextCreateActivityContext, attributeSetAsAttributeSet, componentName);
                             } catch (IllegalArgumentException e) {
                                 Log.w(LOG_TAG, "Invalid searchable metadata for " + componentName.flattenToShortString() + ": " + e.getMessage());
                                 return null;
@@ -339,10 +339,10 @@ public final class SearchableInfo implements Parcelable {
                         if (searchableInfo == null) {
                             return null;
                         }
-                        AttributeSet asAttributeSet2 = Xml.asAttributeSet(xmlPullParser);
-                        if (asAttributeSet2 != null) {
+                        AttributeSet attributeSetAsAttributeSet2 = Xml.asAttributeSet(xmlPullParser);
+                        if (attributeSetAsAttributeSet2 != null) {
                             try {
-                                searchableInfo.addActionKey(new ActionKeyInfo(createActivityContext, asAttributeSet2));
+                                searchableInfo.addActionKey(new ActionKeyInfo(contextCreateActivityContext, attributeSetAsAttributeSet2));
                             } catch (IllegalArgumentException e2) {
                                 Log.w(LOG_TAG, "Invalid action key for " + componentName.flattenToShortString() + ": " + e2.getMessage());
                                 return null;
@@ -447,7 +447,7 @@ public final class SearchableInfo implements Parcelable {
         this.mSuggestIntentAction = parcel.readString();
         this.mSuggestIntentData = parcel.readString();
         this.mSuggestThreshold = parcel.readInt();
-        for (int readInt = parcel.readInt(); readInt > 0; readInt--) {
+        for (int i = parcel.readInt(); i > 0; i--) {
             addActionKey(new ActionKeyInfo(parcel));
         }
         this.mSuggestProviderPackage = parcel.readString();
@@ -478,11 +478,11 @@ public final class SearchableInfo implements Parcelable {
         parcel.writeString(this.mSuggestIntentAction);
         parcel.writeString(this.mSuggestIntentData);
         parcel.writeInt(this.mSuggestThreshold);
-        HashMap<Integer, ActionKeyInfo> hashMap = this.mActionKeys;
-        if (hashMap == null) {
+        HashMap<Integer, ActionKeyInfo> map = this.mActionKeys;
+        if (map == null) {
             parcel.writeInt(0);
         } else {
-            parcel.writeInt(hashMap.size());
+            parcel.writeInt(map.size());
             Iterator<ActionKeyInfo> it = this.mActionKeys.values().iterator();
             while (it.hasNext()) {
                 it.next().writeToParcel(parcel, i);

@@ -2,7 +2,6 @@ package com.android.systemui.statusbar.layout;
 
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxBackgroundProvider$fetchBackgroundColorInfo$1 implements Runnable {
     public final /* synthetic */ LetterboxBackgroundProvider this$0;

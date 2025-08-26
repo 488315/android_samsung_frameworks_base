@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PropertyValuesHolder implements Cloneable {
     public static final Class[] DOUBLE_VARIANTS;
@@ -61,7 +60,7 @@ public class PropertyValuesHolder implements Cloneable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final Method getPropertyFunction(Class cls, String str, Class cls2) {
+    public final Method getPropertyFunction(Class cls, String str, Class cls2) throws NoSuchMethodException, SecurityException {
         String methodName = getMethodName(str, this.mPropertyName);
         Method method = null;
         if (cls2 == null) {
@@ -79,12 +78,12 @@ public class PropertyValuesHolder implements Cloneable {
                         this.mValueType = cls3;
                         return method2;
                     } catch (NoSuchMethodException unused2) {
-                        method = cls.getDeclaredMethod(methodName, clsArr);
-                        method.setAccessible(true);
-                        this.mValueType = cls3;
-                        return method;
                     }
                 } catch (NoSuchMethodException unused3) {
+                    method = cls.getDeclaredMethod(methodName, clsArr);
+                    method.setAccessible(true);
+                    this.mValueType = cls3;
+                    return method;
                 }
             }
         }
@@ -111,77 +110,37 @@ public class PropertyValuesHolder implements Cloneable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x0029, code lost:
-    
-        if (java.lang.Float.isNaN(r9[0]) != false) goto L14;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setFloatValues(float... r9) {
-        /*
-            r8 = this;
-            java.lang.Class r0 = java.lang.Float.TYPE
-            r8.mValueType = r0
-            int r0 = r9.length
-            r1 = 2
-            int r1 = java.lang.Math.max(r0, r1)
-            androidx.core.animation.Keyframe$FloatKeyframe[] r1 = new androidx.core.animation.Keyframe.FloatKeyframe[r1]
-            r2 = 1
-            r3 = 0
-            r4 = 0
-            if (r0 != r2) goto L2e
-            androidx.core.animation.Keyframe$FloatKeyframe r0 = new androidx.core.animation.Keyframe$FloatKeyframe
-            r0.<init>(r3)
-            r1[r4] = r0
-            r0 = r9[r4]
-            androidx.core.animation.Keyframe$FloatKeyframe r3 = new androidx.core.animation.Keyframe$FloatKeyframe
-            r5 = 1065353216(0x3f800000, float:1.0)
-            r3.<init>(r5, r0)
-            r1[r2] = r3
-            r9 = r9[r4]
-            boolean r9 = java.lang.Float.isNaN(r9)
-            if (r9 == 0) goto L2c
-            goto L54
-        L2c:
-            r2 = r4
-            goto L54
-        L2e:
-            r5 = r9[r4]
-            androidx.core.animation.Keyframe$FloatKeyframe r6 = new androidx.core.animation.Keyframe$FloatKeyframe
-            r6.<init>(r3, r5)
-            r1[r4] = r6
-            r3 = r2
-        L38:
-            if (r3 >= r0) goto L2c
-            float r5 = (float) r3
-            int r6 = r0 + (-1)
-            float r6 = (float) r6
-            float r5 = r5 / r6
-            r6 = r9[r3]
-            androidx.core.animation.Keyframe$FloatKeyframe r7 = new androidx.core.animation.Keyframe$FloatKeyframe
-            r7.<init>(r5, r6)
-            r1[r3] = r7
-            r5 = r9[r3]
-            boolean r5 = java.lang.Float.isNaN(r5)
-            if (r5 == 0) goto L51
-            r4 = r2
-        L51:
-            int r3 = r3 + 1
-            goto L38
-        L54:
-            if (r2 == 0) goto L5d
-            java.lang.String r9 = "Animator"
-            java.lang.String r0 = "Bad value (NaN) in float animator"
-            android.util.Log.w(r9, r0)
-        L5d:
-            androidx.core.animation.FloatKeyframeSet r9 = new androidx.core.animation.FloatKeyframeSet
-            r9.<init>(r1)
-            r8.mKeyframes = r9
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.core.animation.PropertyValuesHolder.setFloatValues(float[]):void");
+    public void setFloatValues(float... fArr) {
+        this.mValueType = Float.TYPE;
+        int length = fArr.length;
+        Keyframe.FloatKeyframe[] floatKeyframeArr = new Keyframe.FloatKeyframe[Math.max(length, 2)];
+        boolean z = true;
+        boolean z2 = false;
+        if (length == 1) {
+            floatKeyframeArr[0] = new Keyframe.FloatKeyframe(0.0f);
+            floatKeyframeArr[1] = new Keyframe.FloatKeyframe(1.0f, fArr[0]);
+            if (!Float.isNaN(fArr[0])) {
+            }
+            if (z) {
+                Log.w("Animator", "Bad value (NaN) in float animator");
+            }
+            this.mKeyframes = new FloatKeyframeSet(floatKeyframeArr);
+        }
+        floatKeyframeArr[0] = new Keyframe.FloatKeyframe(0.0f, fArr[0]);
+        for (int i = 1; i < length; i++) {
+            floatKeyframeArr[i] = new Keyframe.FloatKeyframe(i / (length - 1), fArr[i]);
+            if (Float.isNaN(fArr[i])) {
+                z2 = true;
+            }
+        }
+        z = z2;
+        if (z) {
+        }
+        this.mKeyframes = new FloatKeyframeSet(floatKeyframeArr);
     }
 
     public void setIntValues(int... iArr) {
@@ -204,41 +163,40 @@ public class PropertyValuesHolder implements Cloneable {
         this.mProperty = property;
     }
 
-    public final Method setupSetterOrGetter(Class cls, HashMap hashMap, String str, Class cls2) {
-        Method method;
-        boolean z;
-        synchronized (hashMap) {
+    public final Method setupSetterOrGetter(Class cls, HashMap map, String str, Class cls2) {
+        Method propertyFunction;
+        boolean zContainsKey;
+        synchronized (map) {
             try {
-                HashMap hashMap2 = (HashMap) hashMap.get(cls);
-                method = null;
-                if (hashMap2 != null) {
-                    z = hashMap2.containsKey(this.mPropertyName);
-                    if (z) {
-                        method = (Method) hashMap2.get(this.mPropertyName);
+                HashMap map2 = (HashMap) map.get(cls);
+                propertyFunction = null;
+                if (map2 != null) {
+                    zContainsKey = map2.containsKey(this.mPropertyName);
+                    if (zContainsKey) {
+                        propertyFunction = (Method) map2.get(this.mPropertyName);
                     }
                 } else {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (!z) {
-                    method = getPropertyFunction(cls, str, cls2);
-                    if (hashMap2 == null) {
-                        hashMap2 = new HashMap();
-                        hashMap.put(cls, hashMap2);
+                if (!zContainsKey) {
+                    propertyFunction = getPropertyFunction(cls, str, cls2);
+                    if (map2 == null) {
+                        map2 = new HashMap();
+                        map.put(cls, map2);
                     }
-                    hashMap2.put(this.mPropertyName, method);
+                    map2.put(this.mPropertyName, propertyFunction);
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return method;
+        return propertyFunction;
     }
 
     public final String toString() {
         return this.mPropertyName + ": " + this.mKeyframes.toString();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FloatPropertyValuesHolder extends PropertyValuesHolder {
         public float mFloatAnimatedValue;
         public Keyframes.FloatKeyframes mFloatKeyframes;
@@ -258,8 +216,8 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // androidx.core.animation.PropertyValuesHolder
         /* renamed from: clone */
-        public final PropertyValuesHolder mo895clone() {
-            FloatPropertyValuesHolder floatPropertyValuesHolder = (FloatPropertyValuesHolder) super.mo895clone();
+        public final PropertyValuesHolder mo897clone() {
+            FloatPropertyValuesHolder floatPropertyValuesHolder = (FloatPropertyValuesHolder) super.mo897clone();
             floatPropertyValuesHolder.mFloatKeyframes = (Keyframes.FloatKeyframes) floatPropertyValuesHolder.mKeyframes;
             return floatPropertyValuesHolder;
         }
@@ -270,7 +228,7 @@ public class PropertyValuesHolder implements Cloneable {
         }
 
         @Override // androidx.core.animation.PropertyValuesHolder
-        public final void setAnimatedValue(Object obj) {
+        public final void setAnimatedValue(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             FloatProperty floatProperty = this.mFloatProperty;
             if (floatProperty != null) {
                 floatProperty.setValue();
@@ -310,8 +268,8 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // androidx.core.animation.PropertyValuesHolder
         /* renamed from: clone */
-        public final Object mo895clone() {
-            FloatPropertyValuesHolder floatPropertyValuesHolder = (FloatPropertyValuesHolder) super.mo895clone();
+        public final Object mo897clone() {
+            FloatPropertyValuesHolder floatPropertyValuesHolder = (FloatPropertyValuesHolder) super.mo897clone();
             floatPropertyValuesHolder.mFloatKeyframes = (Keyframes.FloatKeyframes) floatPropertyValuesHolder.mKeyframes;
             return floatPropertyValuesHolder;
         }
@@ -340,7 +298,6 @@ public class PropertyValuesHolder implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntPropertyValuesHolder extends PropertyValuesHolder {
         public int mIntAnimatedValue;
         public Keyframes.IntKeyframes mIntKeyframes;
@@ -360,8 +317,8 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // androidx.core.animation.PropertyValuesHolder
         /* renamed from: clone */
-        public final PropertyValuesHolder mo895clone() {
-            IntPropertyValuesHolder intPropertyValuesHolder = (IntPropertyValuesHolder) super.mo895clone();
+        public final PropertyValuesHolder mo897clone() {
+            IntPropertyValuesHolder intPropertyValuesHolder = (IntPropertyValuesHolder) super.mo897clone();
             intPropertyValuesHolder.mIntKeyframes = (Keyframes.IntKeyframes) intPropertyValuesHolder.mKeyframes;
             return intPropertyValuesHolder;
         }
@@ -372,7 +329,7 @@ public class PropertyValuesHolder implements Cloneable {
         }
 
         @Override // androidx.core.animation.PropertyValuesHolder
-        public final void setAnimatedValue(Object obj) {
+        public final void setAnimatedValue(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             IntProperty intProperty = this.mIntProperty;
             if (intProperty != null) {
                 intProperty.setValue(obj, this.mIntAnimatedValue);
@@ -410,8 +367,8 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // androidx.core.animation.PropertyValuesHolder
         /* renamed from: clone */
-        public final Object mo895clone() {
-            IntPropertyValuesHolder intPropertyValuesHolder = (IntPropertyValuesHolder) super.mo895clone();
+        public final Object mo897clone() {
+            IntPropertyValuesHolder intPropertyValuesHolder = (IntPropertyValuesHolder) super.mo897clone();
             intPropertyValuesHolder.mIntKeyframes = (Keyframes.IntKeyframes) intPropertyValuesHolder.mKeyframes;
             return intPropertyValuesHolder;
         }
@@ -442,12 +399,12 @@ public class PropertyValuesHolder implements Cloneable {
 
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public PropertyValuesHolder mo895clone() {
+    public PropertyValuesHolder mo897clone() {
         try {
             PropertyValuesHolder propertyValuesHolder = (PropertyValuesHolder) super.clone();
             propertyValuesHolder.mPropertyName = this.mPropertyName;
             propertyValuesHolder.mProperty = this.mProperty;
-            propertyValuesHolder.mKeyframes = this.mKeyframes.mo892clone();
+            propertyValuesHolder.mKeyframes = this.mKeyframes.mo894clone();
             propertyValuesHolder.mEvaluator = this.mEvaluator;
             return propertyValuesHolder;
         } catch (CloneNotSupportedException unused) {

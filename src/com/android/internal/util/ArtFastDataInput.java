@@ -42,17 +42,17 @@ public class ArtFastDataInput extends FastDataInput {
 
     @Override // com.android.modules.utils.FastDataInput, java.io.DataInput
     public String readUTF() throws IOException {
-        int readUnsignedShort = readUnsignedShort();
-        if (this.mBufferCap > readUnsignedShort) {
-            if (this.mBufferLim - this.mBufferPos < readUnsignedShort) {
-                fill(readUnsignedShort);
+        int unsignedShort = readUnsignedShort();
+        if (this.mBufferCap > unsignedShort) {
+            if (this.mBufferLim - this.mBufferPos < unsignedShort) {
+                fill(unsignedShort);
             }
-            String fromModifiedUtf8Bytes = CharsetUtils.fromModifiedUtf8Bytes(this.mBufferPtr, this.mBufferPos, readUnsignedShort);
-            this.mBufferPos += readUnsignedShort;
-            return fromModifiedUtf8Bytes;
+            String strFromModifiedUtf8Bytes = CharsetUtils.fromModifiedUtf8Bytes(this.mBufferPtr, this.mBufferPos, unsignedShort);
+            this.mBufferPos += unsignedShort;
+            return strFromModifiedUtf8Bytes;
         }
-        byte[] bArr = (byte[]) sRuntime.newNonMovableArray(Byte.TYPE, readUnsignedShort + 1);
-        readFully(bArr, 0, readUnsignedShort);
-        return CharsetUtils.fromModifiedUtf8Bytes(sRuntime.addressOf(bArr), 0, readUnsignedShort);
+        byte[] bArr = (byte[]) sRuntime.newNonMovableArray(Byte.TYPE, unsignedShort + 1);
+        readFully(bArr, 0, unsignedShort);
+        return CharsetUtils.fromModifiedUtf8Bytes(sRuntime.addressOf(bArr), 0, unsignedShort);
     }
 }

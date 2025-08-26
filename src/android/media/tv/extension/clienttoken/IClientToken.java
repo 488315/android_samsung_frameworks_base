@@ -45,9 +45,9 @@ public interface IClientToken extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.clienttoken.IClientToken");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClientToken)) {
-                return (IClientToken) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.clienttoken.IClientToken");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClientToken)) {
+                return (IClientToken) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IClientToken extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String generateClientToken = generateClientToken();
+                String strGenerateClientToken = generateClientToken();
                 parcel2.writeNoException();
-                parcel2.writeString(generateClientToken);
+                parcel2.writeString(strGenerateClientToken);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,16 +100,16 @@ public interface IClientToken extends IInterface {
 
             @Override // android.media.tv.extension.clienttoken.IClientToken
             public String generateClientToken() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.clienttoken.IClientToken");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.clienttoken.IClientToken");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

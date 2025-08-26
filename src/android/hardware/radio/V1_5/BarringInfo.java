@@ -439,13 +439,13 @@ public final class BarringInfo {
 
             public static final ArrayList<Conditional> readVectorFromParcel(HwParcel hwParcel) {
                 ArrayList<Conditional> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     Conditional conditional = new Conditional();
-                    conditional.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 12);
+                    conditional.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 12);
                     arrayList.add(conditional);
                 }
                 return arrayList;
@@ -581,13 +581,13 @@ public final class BarringInfo {
 
         public static final ArrayList<BarringTypeSpecificInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<BarringTypeSpecificInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 BarringTypeSpecificInfo barringTypeSpecificInfo = new BarringTypeSpecificInfo();
-                barringTypeSpecificInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+                barringTypeSpecificInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
                 arrayList.add(barringTypeSpecificInfo);
             }
             return arrayList;
@@ -668,13 +668,13 @@ public final class BarringInfo {
 
     public static final ArrayList<BarringInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<BarringInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             BarringInfo barringInfo = new BarringInfo();
-            barringInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            barringInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(barringInfo);
         }
         return arrayList;

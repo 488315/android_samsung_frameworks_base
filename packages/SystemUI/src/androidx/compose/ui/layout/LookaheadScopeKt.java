@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LookaheadScopeKt {
     public static final Function2 defaultPlacementApproachInProgress = new Function2() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$defaultPlacementApproachInProgress$1
@@ -26,6 +25,7 @@ public abstract class LookaheadScopeKt {
         }
     };
 
+    /* JADX WARN: Multi-variable type inference failed */
     public static final void LookaheadScope(final Function3 function3, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -40,16 +40,16 @@ public abstract class LookaheadScopeKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.compose.ui.layout.LookaheadScope (LookaheadScope.kt:48)");
             }
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Function0 function0 = null;
-            byte b = 0;
-            if (rememberedValue == Composer.Companion.Empty) {
-                rememberedValue = new LookaheadScopeImpl(function0, i3, b == true ? 1 : 0);
-                composerImpl.updateRememberedValue(rememberedValue);
+            Object[] objArr = 0;
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = new LookaheadScopeImpl(function0, i3, objArr == true ? 1 : 0);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            Object obj = (LookaheadScopeImpl) rememberedValue;
-            LookaheadScopeKt$LookaheadScope$1 lookaheadScopeKt$LookaheadScope$1 = new Function0() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$1
+            Object obj = (LookaheadScopeImpl) objRememberedValue;
+            AnonymousClass1 anonymousClass1 = new Function0() { // from class: androidx.compose.ui.layout.LookaheadScopeKt.LookaheadScope.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     return new LayoutNode(true, 0, 2, null);
@@ -61,19 +61,19 @@ public abstract class LookaheadScopeKt {
             }
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
-                composerImpl.createNode(lookaheadScopeKt$LookaheadScope$1);
+                composerImpl.createNode(anonymousClass1);
             } else {
                 composerImpl.useNode();
             }
-            Updater.m335initimpl(composerImpl, new Function1() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$2$1
+            Updater.m336initimpl(composerImpl, new Function1() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$2$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     ((LayoutNode) obj2).isVirtualLookaheadRoot = true;
                     return Unit.INSTANCE;
                 }
             });
-            Updater.m336setimpl(composerImpl, obj, new Function2() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$2$2
+            Updater.m337setimpl(composerImpl, obj, new Function2() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$2$2
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
                     final LayoutNode layoutNode = (LayoutNode) obj2;
@@ -84,7 +84,7 @@ public abstract class LookaheadScopeKt {
 
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
-                            LayoutNode parent$ui_release = LayoutNode.this.getParent$ui_release();
+                            LayoutNode parent$ui_release = layoutNode.getParent$ui_release();
                             parent$ui_release.getClass();
                             InnerNodeCoordinator innerNodeCoordinator = parent$ui_release.nodes.innerCoordinator;
                             innerNodeCoordinator.getClass();
@@ -102,9 +102,9 @@ public abstract class LookaheadScopeKt {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.ui.layout.LookaheadScopeKt$LookaheadScope$4
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.ui.layout.LookaheadScopeKt.LookaheadScope.4
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -113,7 +113,7 @@ public abstract class LookaheadScopeKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
                     ((Number) obj3).intValue();
-                    LookaheadScopeKt.LookaheadScope(Function3.this, (Composer) obj2, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    LookaheadScopeKt.LookaheadScope(function3, (Composer) obj2, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };

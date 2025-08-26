@@ -116,6 +116,7 @@
     <string name="callControlNotAllowed">IDS_SIM_POP_NOTALLOWEDBYSIM</string>
     <string name="callControlSSModification">IDS_SIM_POP_SEND_MODIFIED_SS_BY_SIM</string>
     <string name="can_not_install_app">DREAM_KNOX_TPOP_CANT_INSTALL_APP_APP_NOT_OPTIMIZED_FOR_USE_WITH_PS %s</string>
+    <string name="can_not_open_searcle_on_the_external_display">DREAM_HS_BODY_CANT_OPEN_CIRCLE_TO_SEARCH_ON_A_CONNECTED_DISPLAY</string>
     <string name="can_not_open_searcle_on_the_lockscreen">DREAM_HS_BODY_CANT_OPEN_CIRCLE_TO_SEARCH_ON_THE_LOCK_SCREEN</string>
     <string name="cannot_open_app_concentration_mode">DREAM_KNOX_HEADER_CANT_OPEN_APP</string>
     <string name="charging_connected_via_usb">IDS_USB_TPOP_CHARGING_CONNECTED_DEVICE_VIA_USB_ING</string>
@@ -125,6 +126,7 @@
     <string name="common_secure_boot_nwlock_notification_text">IDS_SIM_BODY_THIS_SIM_CARD_IS_NOT_SUPPORTED</string>
     <string name="common_secure_boot_nwlock_notification_title">IDS_SIM_HEADER_INVALID_SIM_CARD_INSERTED_US</string>
     <string name="compat_restart_education_text">DREAM_MW_BODY_IF_THIS_APP_IS_DISPLAYED_INCORRECTLY_TRY_CLOSING_IT_AND_OPENING_IT_AGAIN</string>
+    <string name="compat_restart_menu_education_text">DREAM_MW_BODY_IF_THIS_APP_IS_DISPLAYED_INCORRECTLY_RESTART_IT_FROM_THE_MORE_MENU</string>
     <string name="cooldown_mode_toast_v2_phone">DREAM_BAT_TPOP_CANT_OPEN_PS_PHONE_OVERHEATING %s</string>
     <string name="cooldown_mode_toast_v2_tablet">DREAM_BAT_TPOP_CANT_OPEN_PS_TABLET_OVERHEATING %s</string>
     <string name="copy_and_paste_toolbar">DREAM_IME_TBOPT_COPY_AND_PASTE_TOOLBAR</string>

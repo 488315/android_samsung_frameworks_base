@@ -6,7 +6,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardQuickAffordancePickerRepresentation {
     public final Intent actionIntent;
@@ -41,15 +40,15 @@ public final class KeyguardQuickAffordancePickerRepresentation {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.iconResourceId, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31), 31, this.isEnabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.iconResourceId, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31), 31, this.isEnabled);
         String str = this.explanation;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.actionText;
-        int hashCode2 = (hashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
         Intent intent = this.actionIntent;
-        int hashCode3 = (hashCode2 + (intent == null ? 0 : intent.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (intent == null ? 0 : intent.hashCode())) * 31;
         Intent intent2 = this.configureIntent;
-        return hashCode3 + (intent2 != null ? intent2.hashCode() : 0);
+        return iHashCode3 + (intent2 != null ? intent2.hashCode() : 0);
     }
 
     public final String toString() {

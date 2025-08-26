@@ -3,7 +3,6 @@ package kotlinx.coroutines.internal;
 import kotlinx.atomicfu.AtomicFU;
 import kotlinx.atomicfu.AtomicRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LockFreeTaskQueue {
     public final AtomicRef _cur;
@@ -16,13 +15,13 @@ public class LockFreeTaskQueue {
         AtomicRef atomicRef = this._cur;
         while (true) {
             LockFreeTaskQueueCore lockFreeTaskQueueCore = (LockFreeTaskQueueCore) atomicRef.value;
-            int addLast = lockFreeTaskQueueCore.addLast(obj);
-            if (addLast == 0) {
+            int iAddLast = lockFreeTaskQueueCore.addLast(obj);
+            if (iAddLast == 0) {
                 return true;
             }
-            if (addLast == 1) {
+            if (iAddLast == 1) {
                 this._cur.compareAndSet(lockFreeTaskQueueCore, lockFreeTaskQueueCore.next());
-            } else if (addLast == 2) {
+            } else if (iAddLast == 2) {
                 return false;
             }
         }
@@ -37,9 +36,9 @@ public class LockFreeTaskQueue {
         AtomicRef atomicRef = this._cur;
         while (true) {
             LockFreeTaskQueueCore lockFreeTaskQueueCore = (LockFreeTaskQueueCore) atomicRef.value;
-            Object removeFirstOrNull = lockFreeTaskQueueCore.removeFirstOrNull();
-            if (removeFirstOrNull != LockFreeTaskQueueCore.REMOVE_FROZEN) {
-                return removeFirstOrNull;
+            Object objRemoveFirstOrNull = lockFreeTaskQueueCore.removeFirstOrNull();
+            if (objRemoveFirstOrNull != LockFreeTaskQueueCore.REMOVE_FROZEN) {
+                return objRemoveFirstOrNull;
             }
             this._cur.compareAndSet(lockFreeTaskQueueCore, lockFreeTaskQueueCore.next());
         }

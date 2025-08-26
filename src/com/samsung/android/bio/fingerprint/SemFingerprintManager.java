@@ -3,6 +3,7 @@ package com.samsung.android.bio.fingerprint;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintAuthenticateOptions;
@@ -198,7 +199,7 @@ public class SemFingerprintManager {
         }
 
         @Override // android.os.Handler
-        public void handleMessage(Message message) {
+        public void handleMessage(Message message) throws Resources.NotFoundException {
             Slog.i(SemFingerprintManager.TAG, "handleMessage = " + message.what + ", " + message.arg1 + ", " + message.arg2);
             switch (message.what) {
                 case 100:
@@ -353,14 +354,14 @@ public class SemFingerprintManager {
             long opId = cryptoObject != null ? cryptoObject.getOpId() : 0L;
             Bundle bundle2 = bundle == null ? new Bundle() : bundle;
             setExtraInfo(this.mContext, bundle2);
-            final long semAuthenticate = this.mService.semAuthenticate(this.mToken, opId, this.mServiceReceiver, new FingerprintAuthenticateOptions.Builder().setSensorId(-1).setUserId(i).setOpPackageName(this.mContext.getOpPackageName()).setAttributionTag(this.mContext.getAttributionTag()).build(), bundle2);
-            if (semAuthenticate < 0) {
+            final long jSemAuthenticate = this.mService.semAuthenticate(this.mToken, opId, this.mServiceReceiver, new FingerprintAuthenticateOptions.Builder().setSensorId(-1).setUserId(i).setOpPackageName(this.mContext.getOpPackageName()).setAttributionTag(this.mContext.getAttributionTag()).build(), bundle2);
+            if (jSemAuthenticate < 0) {
                 this.mHandler.obtainMessage(103, 5, 0, FingerprintManager.getErrorString(this.mContext, 5, 0)).sendToTarget();
             }
             cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda1
                 @Override // android.os.CancellationSignal.OnCancelListener
                 public final void onCancel() {
-                    SemFingerprintManager.this.lambda$authenticate$0(semAuthenticate);
+                    this.f$0.lambda$authenticate$0(jSemAuthenticate);
                 }
             });
         } catch (RemoteException e) {
@@ -400,17 +401,17 @@ public class SemFingerprintManager {
     }
 
     public static void setExtraInfo(Context context, Bundle bundle) {
-        int i;
+        int displayId;
         if (bundle == null) {
             return;
         }
         try {
-            i = context.getDisplayId();
+            displayId = context.getDisplayId();
         } catch (Exception e) {
             Slog.w(TAG, "setExtraInfo: " + e.getMessage());
-            i = 0;
+            displayId = 0;
         }
-        bundle.putInt(EXTRA_KEY_DISPLAY_ID, i);
+        bundle.putInt(EXTRA_KEY_DISPLAY_ID, displayId);
         if (context instanceof Activity) {
             bundle.putInt(EXTRA_KEY_TASK_ID, ((Activity) context).getTaskId());
         }
@@ -424,10 +425,10 @@ public class SemFingerprintManager {
     }
 
     public static int getMaxTemplateNumberFromSPF() {
-        String[] split = "google_touch_display_ultrasonic".split(",");
-        int length = split.length;
+        String[] strArrSplit = "google_touch_display_ultrasonic".split(",");
+        int length = strArrSplit.length;
         for (int i = 0; i < length; i++) {
-            String str = split[i];
+            String str = strArrSplit[i];
             if (str.startsWith("settings=")) {
                 try {
                     return Integer.parseInt(str.substring(9));
@@ -471,7 +472,7 @@ public class SemFingerprintManager {
         this.mHandler.post(new Runnable() { // from class: com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SemFingerprintManager.this.lambda$handleDefaultError$1(authenticationCallback);
+                this.f$0.lambda$handleDefaultError$1(authenticationCallback);
             }
         });
     }
@@ -501,20 +502,20 @@ public class SemFingerprintManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void sendAcquiredResult(int i, int i2) {
+    public void sendAcquiredResult(int i, int i2) throws Resources.NotFoundException {
         if (this.mAuthenticationCallback != null) {
             String acquiredString = FingerprintManager.getAcquiredString(this.mContext, i, i2);
-            int convertAcquiredCode = convertAcquiredCode(i);
+            int iConvertAcquiredCode = convertAcquiredCode(i);
             if (i == 6) {
                 if (acquiredString == null) {
                     i = i2;
                 }
-                convertAcquiredCode = i;
+                iConvertAcquiredCode = i;
             }
             if (acquiredString == null) {
-                this.mAuthenticationCallback.onAuthenticationAcquired(convertAcquiredCode);
+                this.mAuthenticationCallback.onAuthenticationAcquired(iConvertAcquiredCode);
             } else {
-                this.mAuthenticationCallback.onAuthenticationHelp(convertAcquiredCode, acquiredString);
+                this.mAuthenticationCallback.onAuthenticationHelp(iConvertAcquiredCode, acquiredString);
             }
         }
     }

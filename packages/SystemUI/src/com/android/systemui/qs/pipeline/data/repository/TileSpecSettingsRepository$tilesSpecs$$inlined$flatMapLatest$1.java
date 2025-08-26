@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Flow $realTiles$inlined;
@@ -38,7 +37,7 @@ public final class TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -46,12 +45,12 @@ public final class TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             if (((Boolean) this.L$1).booleanValue()) {
                 this.this$0.logger.logUsingRetailTiles();
-                flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2((List) this.this$0.retailModeTiles$delegate.getValue());
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2((List) this.this$0.retailModeTiles$delegate.getValue());
             } else {
-                flow = this.$realTiles$inlined;
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = this.$realTiles$inlined;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

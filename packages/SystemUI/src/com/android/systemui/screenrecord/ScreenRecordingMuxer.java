@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenRecordingMuxer {
     public final ArrayMap mExtractorIndexToMuxerIndex = new ArrayMap();
@@ -29,21 +28,21 @@ public class ScreenRecordingMuxer {
         ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("out: ", str, " , in: "), strArr[0], "ScreenRecordingMuxer");
     }
 
-    public final void mux() {
+    public final void mux() throws IOException {
         MediaMuxer mediaMuxer = new MediaMuxer(this.mOutFile, this.mFormat);
         int i = 0;
         for (String str : this.mFiles) {
             MediaExtractor mediaExtractor = new MediaExtractor();
             try {
                 mediaExtractor.setDataSource(str);
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, " track count: ");
-                m.append(mediaExtractor.getTrackCount());
-                Log.d("ScreenRecordingMuxer", m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, " track count: ");
+                sbM.append(mediaExtractor.getTrackCount());
+                Log.d("ScreenRecordingMuxer", sbM.toString());
                 this.mExtractors.add(mediaExtractor);
                 for (int i2 = 0; i2 < mediaExtractor.getTrackCount(); i2++) {
-                    int addTrack = mediaMuxer.addTrack(mediaExtractor.getTrackFormat(i2));
+                    int iAddTrack = mediaMuxer.addTrack(mediaExtractor.getTrackFormat(i2));
                     Log.d("ScreenRecordingMuxer", "created extractor format" + mediaExtractor.getTrackFormat(i2).toString());
-                    this.mExtractorIndexToMuxerIndex.put(Pair.create(mediaExtractor, Integer.valueOf(i2)), Integer.valueOf(addTrack));
+                    this.mExtractorIndexToMuxerIndex.put(Pair.create(mediaExtractor, Integer.valueOf(i2)), Integer.valueOf(iAddTrack));
                 }
             } catch (IOException e) {
                 Log.e("ScreenRecordingMuxer", "error creating extractor: " + str);
@@ -54,20 +53,20 @@ public class ScreenRecordingMuxer {
         for (Pair pair : this.mExtractorIndexToMuxerIndex.keySet()) {
             MediaExtractor mediaExtractor2 = (MediaExtractor) pair.first;
             mediaExtractor2.selectTrack(((Integer) pair.second).intValue());
-            int intValue = ((Integer) this.mExtractorIndexToMuxerIndex.get(pair)).intValue();
+            int iIntValue = ((Integer) this.mExtractorIndexToMuxerIndex.get(pair)).intValue();
             Log.d("ScreenRecordingMuxer", "track format: " + mediaExtractor2.getTrackFormat(((Integer) pair.second).intValue()));
             mediaExtractor2.seekTo(0L, 2);
-            ByteBuffer allocate = ByteBuffer.allocate(4194304);
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4194304);
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
             while (true) {
-                int readSampleData = mediaExtractor2.readSampleData(allocate, allocate.arrayOffset());
-                bufferInfo.size = readSampleData;
-                if (readSampleData < 0) {
+                int sampleData = mediaExtractor2.readSampleData(byteBufferAllocate, byteBufferAllocate.arrayOffset());
+                bufferInfo.size = sampleData;
+                if (sampleData < 0) {
                     break;
                 }
                 bufferInfo.presentationTimeUs = mediaExtractor2.getSampleTime();
                 bufferInfo.flags = mediaExtractor2.getSampleFlags();
-                mediaMuxer.writeSampleData(intValue, allocate, bufferInfo);
+                mediaMuxer.writeSampleData(iIntValue, byteBufferAllocate, bufferInfo);
                 mediaExtractor2.advance();
             }
         }

@@ -19,9 +19,7 @@ public class ChangeReporter {
     private static final Function<Integer, Set<ChangeReport>> NEW_CHANGE_REPORT_SET = new Function() { // from class: com.android.internal.compat.ChangeReporter$$ExternalSyntheticLambda0
         @Override // java.util.function.Function
         public final Object apply(Object obj) {
-            Set synchronizedSet;
-            synchronizedSet = Collections.synchronizedSet(new HashSet());
-            return synchronizedSet;
+            return Collections.synchronizedSet(new HashSet());
         }
     };
     public static final int SOURCE_APP_PROCESS = 1;
@@ -83,8 +81,8 @@ public class ChangeReporter {
         int i3;
         long j2;
         int i4;
-        boolean checkAndSetIsAlreadyReported = checkAndSetIsAlreadyReported(i, new ChangeReport(j, i2));
-        if (shouldWriteToStatsLog(z, checkAndSetIsAlreadyReported)) {
+        boolean zCheckAndSetIsAlreadyReported = checkAndSetIsAlreadyReported(i, new ChangeReport(j, i2));
+        if (shouldWriteToStatsLog(z, zCheckAndSetIsAlreadyReported)) {
             i3 = i;
             j2 = j;
             i4 = i2;
@@ -94,7 +92,7 @@ public class ChangeReporter {
             j2 = j;
             i4 = i2;
         }
-        if (shouldWriteToDebug(checkAndSetIsAlreadyReported, i4, z2)) {
+        if (shouldWriteToDebug(zCheckAndSetIsAlreadyReported, i4, z2)) {
             debugLog(i3, j2, i4);
         }
     }
@@ -133,11 +131,11 @@ public class ChangeReporter {
     }
 
     private boolean checkAndSetIsAlreadyReported(int i, ChangeReport changeReport) {
-        boolean isAlreadyReported = isAlreadyReported(i, changeReport);
-        if (!isAlreadyReported) {
+        boolean zIsAlreadyReported = isAlreadyReported(i, changeReport);
+        if (!zIsAlreadyReported) {
             markAsReported(i, changeReport);
         }
-        return isAlreadyReported;
+        return zIsAlreadyReported;
     }
 
     private boolean isAlreadyReported(int i, ChangeReport changeReport) {
@@ -157,11 +155,11 @@ public class ChangeReporter {
     }
 
     private void debugLog(int i, long j, int i2) {
-        String formatSimple = TextUtils.formatSimple("Compat change id reported: %d; UID %d; state: %s", Long.valueOf(j), Integer.valueOf(i), stateToString(i2));
+        String simple = TextUtils.formatSimple("Compat change id reported: %d; UID %d; state: %s", Long.valueOf(j), Integer.valueOf(i), stateToString(i2));
         if (this.mSource == 2) {
-            Slog.d(TAG, formatSimple);
+            Slog.d(TAG, simple);
         } else {
-            Log.d(TAG, formatSimple);
+            Log.d(TAG, simple);
         }
     }
 

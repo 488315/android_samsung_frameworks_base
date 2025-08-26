@@ -40,9 +40,9 @@ public interface ITipsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITipsManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITipsManager)) {
-                return (ITipsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITipsManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITipsManager)) {
+                return (ITipsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

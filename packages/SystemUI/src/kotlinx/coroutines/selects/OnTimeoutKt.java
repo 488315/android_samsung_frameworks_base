@@ -4,7 +4,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.TypeIntrinsics;
 import kotlinx.coroutines.selects.SelectImplementation.ClauseData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class OnTimeoutKt {
     public static final void onTimeout(SelectImplementation selectImplementation, long j, Function1 function1) {

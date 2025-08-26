@@ -8,7 +8,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PDF417HighLevelEncoder {
     public static final byte[] MIXED;
@@ -17,7 +16,6 @@ public final class PDF417HighLevelEncoder {
     public static final byte[] PUNCTUATION = new byte[128];
     public static final Charset DEFAULT_ENCODING = StandardCharsets.ISO_8859_1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$zxing$pdf417$encoder$Compaction;
@@ -40,7 +38,6 @@ public final class PDF417HighLevelEncoder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoECIInput implements ECIInput {
         public final String input;
 
@@ -150,13 +147,13 @@ public final class PDF417HighLevelEncoder {
         }
     }
 
-    public static void encodeMultiECIBinary(int i, int i2, int i3, ECIInput eCIInput, StringBuilder sb) {
-        int min = Math.min(i2 + i, eCIInput.length());
+    public static void encodeMultiECIBinary(int i, int i2, int i3, ECIInput eCIInput, StringBuilder sb) throws WriterException {
+        int iMin = Math.min(i2 + i, eCIInput.length());
         int i4 = i;
         while (true) {
-            if (i4 >= min || !eCIInput.isECI(i4)) {
+            if (i4 >= iMin || !eCIInput.isECI(i4)) {
                 int i5 = i4;
-                while (i5 < min && !eCIInput.isECI(i5)) {
+                while (i5 < iMin && !eCIInput.isECI(i5)) {
                     i5++;
                 }
                 int i6 = i5 - i4;
@@ -178,42 +175,138 @@ public final class PDF417HighLevelEncoder {
 
     public static void encodeNumeric(ECIInput eCIInput, int i, int i2, StringBuilder sb) {
         StringBuilder sb2 = new StringBuilder((i2 / 3) + 1);
-        BigInteger valueOf = BigInteger.valueOf(900L);
-        BigInteger valueOf2 = BigInteger.valueOf(0L);
+        BigInteger bigIntegerValueOf = BigInteger.valueOf(900L);
+        BigInteger bigIntegerValueOf2 = BigInteger.valueOf(0L);
         int i3 = 0;
         while (i3 < i2) {
             sb2.setLength(0);
-            int min = Math.min(44, i2 - i3);
+            int iMin = Math.min(44, i2 - i3);
             StringBuilder sb3 = new StringBuilder("1");
             int i4 = i + i3;
-            sb3.append((Object) eCIInput.subSequence(i4, i4 + min));
+            sb3.append((Object) eCIInput.subSequence(i4, i4 + iMin));
             BigInteger bigInteger = new BigInteger(sb3.toString());
             do {
-                sb2.append((char) bigInteger.mod(valueOf).intValue());
-                bigInteger = bigInteger.divide(valueOf);
-            } while (!bigInteger.equals(valueOf2));
+                sb2.append((char) bigInteger.mod(bigIntegerValueOf).intValue());
+                bigInteger = bigInteger.divide(bigIntegerValueOf);
+            } while (!bigInteger.equals(bigIntegerValueOf2));
             for (int length = sb2.length() - 1; length >= 0; length--) {
                 sb.append(sb2.charAt(length));
             }
-            i3 += min;
+            i3 += iMin;
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00fb A[EDGE_INSN: B:24:0x00fb->B:25:0x00fb BREAK  A[LOOP:0: B:2:0x000e->B:19:0x000e], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x000e A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x000e A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x00fb A[EDGE_INSN: B:83:0x00fb->B:62:0x00fb BREAK  A[LOOP:0: B:3:0x000e->B:101:0x000e], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int encodeText(int r17, int r18, int r19, com.google.zxing.common.ECIInput r20, java.lang.StringBuilder r21) {
-        /*
-            Method dump skipped, instructions count: 299
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder.encodeText(int, int, int, com.google.zxing.common.ECIInput, java.lang.StringBuilder):int");
+    public static int encodeText(int i, int i2, int i3, ECIInput eCIInput, StringBuilder sb) throws WriterException {
+        char cCharAt;
+        StringBuilder sb2 = new StringBuilder(i2);
+        int i4 = i3;
+        int i5 = 0;
+        while (true) {
+            int i6 = i + i5;
+            if (eCIInput.isECI(i6)) {
+                encodingECI(sb, eCIInput.getECIValue(i6));
+                i5++;
+            } else {
+                char cCharAt2 = eCIInput.charAt(i6);
+                byte[] bArr = PUNCTUATION;
+                byte[] bArr2 = MIXED;
+                if (i4 != 0) {
+                    if (i4 != 1) {
+                        if (i4 != 2) {
+                            byte b = bArr[cCharAt2];
+                            if (b != -1) {
+                                sb2.append((char) b);
+                            } else {
+                                sb2.append((char) 29);
+                                i4 = 0;
+                            }
+                        } else {
+                            byte b2 = bArr2[cCharAt2];
+                            if (b2 != -1) {
+                                sb2.append((char) b2);
+                            } else if (isAlphaUpper(cCharAt2)) {
+                                sb2.append((char) 28);
+                                i4 = 0;
+                            } else if (isAlphaLower(cCharAt2)) {
+                                sb2.append((char) 27);
+                                i4 = 1;
+                            } else {
+                                int i7 = i6 + 1;
+                                if (i7 >= i2 || eCIInput.isECI(i7) || bArr[eCIInput.charAt(i7)] == -1) {
+                                    sb2.append((char) 29);
+                                    sb2.append((char) bArr[cCharAt2]);
+                                } else {
+                                    sb2.append((char) 25);
+                                    i4 = 3;
+                                }
+                            }
+                        }
+                    } else if (isAlphaLower(cCharAt2)) {
+                        if (cCharAt2 == ' ') {
+                            sb2.append((char) 26);
+                        } else {
+                            sb2.append((char) (cCharAt2 - 'a'));
+                        }
+                    } else if (isAlphaUpper(cCharAt2)) {
+                        sb2.append((char) 27);
+                        sb2.append((char) (cCharAt2 - 'A'));
+                    } else if (bArr2[cCharAt2] != -1) {
+                        sb2.append((char) 28);
+                        i4 = 2;
+                    } else {
+                        sb2.append((char) 29);
+                        sb2.append((char) bArr[cCharAt2]);
+                    }
+                    i5++;
+                    if (i5 < i2) {
+                        break;
+                    }
+                } else {
+                    if (isAlphaUpper(cCharAt2)) {
+                        if (cCharAt2 == ' ') {
+                            sb2.append((char) 26);
+                        } else {
+                            sb2.append((char) (cCharAt2 - 'A'));
+                        }
+                    } else if (isAlphaLower(cCharAt2)) {
+                        sb2.append((char) 27);
+                        i4 = 1;
+                    } else if (bArr2[cCharAt2] != -1) {
+                        sb2.append((char) 28);
+                        i4 = 2;
+                    } else {
+                        sb2.append((char) 29);
+                        sb2.append((char) bArr[cCharAt2]);
+                    }
+                    i5++;
+                    if (i5 < i2) {
+                    }
+                }
+            }
+        }
+        int length = sb2.length();
+        char c = 0;
+        for (int i8 = 0; i8 < length; i8++) {
+            if (i8 % 2 != 0) {
+                cCharAt = (char) (sb2.charAt(i8) + (c * 30));
+                sb.append(cCharAt);
+            } else {
+                cCharAt = sb2.charAt(i8);
+            }
+            c = cCharAt;
+        }
+        if (length % 2 != 0) {
+            sb.append((char) ((c * 30) + 29));
+        }
+        return i4;
     }
 
-    public static void encodingECI(StringBuilder sb, int i) {
+    public static void encodingECI(StringBuilder sb, int i) throws WriterException {
         if (i >= 0 && i < 900) {
             sb.append((char) 927);
             sb.append((char) i);

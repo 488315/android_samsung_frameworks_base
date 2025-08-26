@@ -13,13 +13,11 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ImmutableList<E> extends ImmutableCollection<E> implements List<E>, RandomAccess {
     public static final Itr EMPTY_ITR = new Itr(RegularImmutableList.EMPTY, 0);
     private static final long serialVersionUID = -889275714;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends ImmutableCollection.ArrayBasedBuilder {
         public Builder() {
             this(4);
@@ -40,12 +38,11 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
         }
 
         /* renamed from: add, reason: collision with other method in class */
-        public final void m3267add(Object obj) {
+        public final void m3285add(Object obj) {
             super.add(obj);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Itr extends AbstractIndexedListIterator {
         public final ImmutableList list;
 
@@ -60,7 +57,6 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SerializedForm implements Serializable {
         private static final long serialVersionUID = 0;
         final Object[] elements;
@@ -74,7 +70,6 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SubList extends ImmutableList<Object> {
         public final transient int length;
         public final transient int offset;
@@ -150,11 +145,11 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
             if (!(collection instanceof ImmutableCollection)) {
                 return construct(collection.toArray());
             }
-            ImmutableList asList = ((ImmutableCollection) collection).asList();
-            if (!asList.isPartialView()) {
-                return asList;
+            ImmutableList immutableListAsList = ((ImmutableCollection) collection).asList();
+            if (!immutableListAsList.isPartialView()) {
+                return immutableListAsList;
             }
-            Object[] array = asList.toArray(ImmutableCollection.EMPTY_ARRAY);
+            Object[] array = immutableListAsList.toArray(ImmutableCollection.EMPTY_ARRAY);
             return asImmutableList(array.length, array);
         }
         Iterator it = iterable.iterator();
@@ -166,7 +161,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
             return of(next);
         }
         Builder builder = new Builder();
-        builder.m3267add(next);
+        builder.m3285add(next);
         while (it.hasNext()) {
             builder.add(it.next());
         }

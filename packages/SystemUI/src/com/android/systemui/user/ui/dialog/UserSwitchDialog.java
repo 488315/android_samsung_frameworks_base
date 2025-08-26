@@ -12,7 +12,6 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.qs.PseudoGridView;
@@ -21,13 +20,11 @@ import com.android.systemui.qs.tiles.UserDetailView;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitchDialog extends SystemUIDialog {
     public static final Intent USER_SETTINGS_INTENT;
     public static final Intent USER_SETTINGS_KT_TWO_PHONE_INTENT;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +45,7 @@ public final class UserSwitchDialog extends SystemUIDialog {
         SystemUIDialog.setShowForAllUsers(this);
         setCanceledOnTouchOutside(true);
         setTitle(R.string.qs_user_switch_dialog_title);
-        setPositiveButton(R.string.quick_settings_done, new DialogInterface.OnClickListener() { // from class: com.android.systemui.user.ui.dialog.UserSwitchDialog.1
+        setPositiveButton(R.string.sec_quick_settings_done, new DialogInterface.OnClickListener() { // from class: com.android.systemui.user.ui.dialog.UserSwitchDialog.1
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
                 uiEventLogger.log(QSUserSwitcherEvent.QS_USER_DETAIL_CLOSE);
@@ -57,24 +54,24 @@ public final class UserSwitchDialog extends SystemUIDialog {
         setButton(-3, R.string.quick_settings_more_user_settings, new DialogInterface.OnClickListener() { // from class: com.android.systemui.user.ui.dialog.UserSwitchDialog.2
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                if (FalsingManager.this.isFalseTap(1)) {
+                if (falsingManager.isFalseTap(1)) {
                     return;
                 }
                 uiEventLogger.log(QSUserSwitcherEvent.QS_USER_MORE_SETTINGS);
-                DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, this.getButton(-3));
-                if (createActivityTransitionController$default == null) {
+                DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, this.getButton(-3));
+                if (anonymousClass1CreateActivityTransitionController$default == null) {
                     this.dismiss();
                 }
-                activityStarter.postStartActivityDismissingKeyguard((QpRune.QUICK_MUM_TWO_PHONE && UserManager.supportsMultipleUsers()) ? UserSwitchDialog.USER_SETTINGS_KT_TWO_PHONE_INTENT : UserSwitchDialog.USER_SETTINGS_INTENT, 0, createActivityTransitionController$default);
+                activityStarter.postStartActivityDismissingKeyguard((QpRune.QUICK_MUM_TWO_PHONE && UserManager.supportsMultipleUsers()) ? UserSwitchDialog.USER_SETTINGS_KT_TWO_PHONE_INTENT : UserSwitchDialog.USER_SETTINGS_INTENT, 0, anonymousClass1CreateActivityTransitionController$default);
             }
         }, false);
         Window window = getWindow();
         if (window != null) {
             window.setGravity(81);
         }
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sec_qs_user_dialog_content, (ViewGroup) null);
-        setView(inflate);
-        ViewGroup viewGroup = (ViewGroup) inflate.findViewById(R.id.grid);
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sec_qs_user_dialog_content, (ViewGroup) null);
+        setView(viewInflate);
+        ViewGroup viewGroup = (ViewGroup) viewInflate.findViewById(R.id.grid);
         adapter.getClass();
         PseudoGridView.ViewGroupAdapterBridge.link(viewGroup, adapter);
         adapter.mDialogShower = new DialogShowerImpl(this, dialogTransitionAnimator);

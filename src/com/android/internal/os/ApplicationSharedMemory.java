@@ -58,12 +58,12 @@ public class ApplicationSharedMemory implements AutoCloseable {
     }
 
     public static ApplicationSharedMemory create() {
-        int nativeCreate = nativeCreate();
+        int iNativeCreate = nativeCreate();
         FileDescriptor fileDescriptor = new FileDescriptor();
-        fileDescriptor.setInt$(nativeCreate);
-        long nativeMap = nativeMap(nativeCreate, true);
-        nativeInit(nativeMap);
-        return new ApplicationSharedMemory(fileDescriptor, true, nativeMap);
+        fileDescriptor.setInt$(iNativeCreate);
+        long jNativeMap = nativeMap(iNativeCreate, true);
+        nativeInit(jNativeMap);
+        return new ApplicationSharedMemory(fileDescriptor, true, jNativeMap);
     }
 
     public static ApplicationSharedMemory fromFileDescriptor(FileDescriptor fileDescriptor, boolean z) {
@@ -100,9 +100,9 @@ public class ApplicationSharedMemory implements AutoCloseable {
 
     public long getLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis() throws DateTimeException {
         checkMapped();
-        long nativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis = nativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis(this.mPtr);
-        if (nativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis != -1) {
-            return nativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis;
+        long jNativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis = nativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis(this.mPtr);
+        if (jNativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis != -1) {
+            return jNativeGetLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis;
         }
         throw new DateTimeException("No network time available");
     }

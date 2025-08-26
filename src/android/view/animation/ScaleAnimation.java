@@ -45,54 +45,54 @@ public class ScaleAnimation extends Animation {
         this.mPivotXValue = 0.0f;
         this.mPivotYValue = 0.0f;
         this.mResources = context.getResources();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ScaleAnimation);
-        TypedValue peekValue = obtainStyledAttributes.peekValue(2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ScaleAnimation);
+        TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes.peekValue(2);
         this.mFromX = 0.0f;
-        if (peekValue != null) {
-            if (peekValue.type == 4) {
-                this.mFromX = peekValue.getFloat();
+        if (typedValuePeekValue != null) {
+            if (typedValuePeekValue.type == 4) {
+                this.mFromX = typedValuePeekValue.getFloat();
             } else {
-                this.mFromXType = peekValue.type;
-                this.mFromXData = peekValue.data;
+                this.mFromXType = typedValuePeekValue.type;
+                this.mFromXData = typedValuePeekValue.data;
             }
         }
-        TypedValue peekValue2 = obtainStyledAttributes.peekValue(3);
+        TypedValue typedValuePeekValue2 = typedArrayObtainStyledAttributes.peekValue(3);
         this.mToX = 0.0f;
-        if (peekValue2 != null) {
-            if (peekValue2.type == 4) {
-                this.mToX = peekValue2.getFloat();
+        if (typedValuePeekValue2 != null) {
+            if (typedValuePeekValue2.type == 4) {
+                this.mToX = typedValuePeekValue2.getFloat();
             } else {
-                this.mToXType = peekValue2.type;
-                this.mToXData = peekValue2.data;
+                this.mToXType = typedValuePeekValue2.type;
+                this.mToXData = typedValuePeekValue2.data;
             }
         }
-        TypedValue peekValue3 = obtainStyledAttributes.peekValue(4);
+        TypedValue typedValuePeekValue3 = typedArrayObtainStyledAttributes.peekValue(4);
         this.mFromY = 0.0f;
-        if (peekValue3 != null) {
-            if (peekValue3.type == 4) {
-                this.mFromY = peekValue3.getFloat();
+        if (typedValuePeekValue3 != null) {
+            if (typedValuePeekValue3.type == 4) {
+                this.mFromY = typedValuePeekValue3.getFloat();
             } else {
-                this.mFromYType = peekValue3.type;
-                this.mFromYData = peekValue3.data;
+                this.mFromYType = typedValuePeekValue3.type;
+                this.mFromYData = typedValuePeekValue3.data;
             }
         }
-        TypedValue peekValue4 = obtainStyledAttributes.peekValue(5);
+        TypedValue typedValuePeekValue4 = typedArrayObtainStyledAttributes.peekValue(5);
         this.mToY = 0.0f;
-        if (peekValue4 != null) {
-            if (peekValue4.type == 4) {
-                this.mToY = peekValue4.getFloat();
+        if (typedValuePeekValue4 != null) {
+            if (typedValuePeekValue4.type == 4) {
+                this.mToY = typedValuePeekValue4.getFloat();
             } else {
-                this.mToYType = peekValue4.type;
-                this.mToYData = peekValue4.data;
+                this.mToYType = typedValuePeekValue4.type;
+                this.mToYData = typedValuePeekValue4.data;
             }
         }
-        Animation.Description parseValue = Animation.Description.parseValue(obtainStyledAttributes.peekValue(0), context);
-        this.mPivotXType = parseValue.type;
-        this.mPivotXValue = parseValue.value;
-        Animation.Description parseValue2 = Animation.Description.parseValue(obtainStyledAttributes.peekValue(1), context);
-        this.mPivotYType = parseValue2.type;
-        this.mPivotYValue = parseValue2.value;
-        obtainStyledAttributes.recycle();
+        Animation.Description value = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(0), context);
+        this.mPivotXType = value.type;
+        this.mPivotXValue = value.value;
+        Animation.Description value2 = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(1), context);
+        this.mPivotYType = value2.type;
+        this.mPivotYValue = value2.value;
+        typedArrayObtainStyledAttributes.recycle();
         initializePivotPoint();
     }
 
@@ -184,19 +184,19 @@ public class ScaleAnimation extends Animation {
     }
 
     float resolveScale(float f, int i, int i2, int i3, int i4) {
-        float complexToDimension;
+        float fComplexToDimension;
         if (i == 6) {
-            complexToDimension = TypedValue.complexToFraction(i2, i3, i4);
+            fComplexToDimension = TypedValue.complexToFraction(i2, i3, i4);
         } else {
             if (i != 5) {
                 return f;
             }
-            complexToDimension = TypedValue.complexToDimension(i2, this.mResources.getDisplayMetrics());
+            fComplexToDimension = TypedValue.complexToDimension(i2, this.mResources.getDisplayMetrics());
         }
         if (i3 == 0) {
             return 1.0f;
         }
-        return complexToDimension / i3;
+        return fComplexToDimension / i3;
     }
 
     @Override // android.view.animation.Animation

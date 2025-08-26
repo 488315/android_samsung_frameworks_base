@@ -19,7 +19,6 @@ import java.util.Set;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaViewHolder {
     public static final Companion Companion = new Companion(null);
@@ -54,7 +53,6 @@ public final class MediaViewHolder {
     public final TextView titleText;
     public final TurbulenceNoiseView turbulenceNoiseView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,27 +63,27 @@ public final class MediaViewHolder {
     }
 
     static {
-        Integer valueOf = Integer.valueOf(R.id.icon);
-        Integer valueOf2 = Integer.valueOf(R.id.app_name);
-        Integer valueOf3 = Integer.valueOf(R.id.header_title);
-        Integer valueOf4 = Integer.valueOf(R.id.header_artist);
-        Integer valueOf5 = Integer.valueOf(R.id.media_explicit_indicator);
-        Integer valueOf6 = Integer.valueOf(R.id.media_seamless);
-        Integer valueOf7 = Integer.valueOf(R.id.media_progress_bar);
-        Integer valueOf8 = Integer.valueOf(R.id.actionPlayPause);
-        Integer valueOf9 = Integer.valueOf(R.id.actionNext);
-        Integer valueOf10 = Integer.valueOf(R.id.actionPrev);
-        Integer valueOf11 = Integer.valueOf(R.id.action0);
-        Integer valueOf12 = Integer.valueOf(R.id.action1);
-        Integer valueOf13 = Integer.valueOf(R.id.action2);
-        Integer valueOf14 = Integer.valueOf(R.id.action3);
-        Integer valueOf15 = Integer.valueOf(R.id.action4);
-        Integer valueOf16 = Integer.valueOf(R.id.media_scrubbing_elapsed_time);
-        Integer valueOf17 = Integer.valueOf(R.id.media_scrubbing_total_time);
-        controlsIds = ArraysKt___ArraysKt.toSet(new Integer[]{valueOf, valueOf2, valueOf3, valueOf4, valueOf5, valueOf6, valueOf7, valueOf8, valueOf9, valueOf10, valueOf11, valueOf12, valueOf13, valueOf14, valueOf15, valueOf, valueOf16, valueOf17});
-        genericButtonIds = ArraysKt___ArraysKt.toSet(new Integer[]{valueOf11, valueOf12, valueOf13, valueOf14, valueOf15});
-        expandedBottomActionIds = ArraysKt___ArraysKt.toSet(new Integer[]{valueOf7, valueOf10, valueOf9, valueOf11, valueOf12, valueOf13, valueOf14, valueOf15, valueOf16, valueOf17});
-        detailIds = ArraysKt___ArraysKt.toSet(new Integer[]{valueOf3, valueOf4, valueOf5, valueOf8});
+        Integer numValueOf = Integer.valueOf(R.id.icon);
+        Integer numValueOf2 = Integer.valueOf(R.id.app_name);
+        Integer numValueOf3 = Integer.valueOf(R.id.header_title);
+        Integer numValueOf4 = Integer.valueOf(R.id.header_artist);
+        Integer numValueOf5 = Integer.valueOf(R.id.media_explicit_indicator);
+        Integer numValueOf6 = Integer.valueOf(R.id.media_seamless);
+        Integer numValueOf7 = Integer.valueOf(R.id.media_progress_bar);
+        Integer numValueOf8 = Integer.valueOf(R.id.actionPlayPause);
+        Integer numValueOf9 = Integer.valueOf(R.id.actionNext);
+        Integer numValueOf10 = Integer.valueOf(R.id.actionPrev);
+        Integer numValueOf11 = Integer.valueOf(R.id.action0);
+        Integer numValueOf12 = Integer.valueOf(R.id.action1);
+        Integer numValueOf13 = Integer.valueOf(R.id.action2);
+        Integer numValueOf14 = Integer.valueOf(R.id.action3);
+        Integer numValueOf15 = Integer.valueOf(R.id.action4);
+        Integer numValueOf16 = Integer.valueOf(R.id.media_scrubbing_elapsed_time);
+        Integer numValueOf17 = Integer.valueOf(R.id.media_scrubbing_total_time);
+        controlsIds = ArraysKt___ArraysKt.toSet(new Integer[]{numValueOf, numValueOf2, numValueOf3, numValueOf4, numValueOf5, numValueOf6, numValueOf7, numValueOf8, numValueOf9, numValueOf10, numValueOf11, numValueOf12, numValueOf13, numValueOf14, numValueOf15, numValueOf, numValueOf16, numValueOf17});
+        genericButtonIds = ArraysKt___ArraysKt.toSet(new Integer[]{numValueOf11, numValueOf12, numValueOf13, numValueOf14, numValueOf15});
+        expandedBottomActionIds = ArraysKt___ArraysKt.toSet(new Integer[]{numValueOf7, numValueOf10, numValueOf9, numValueOf11, numValueOf12, numValueOf13, numValueOf14, numValueOf15, numValueOf16, numValueOf17});
+        detailIds = ArraysKt___ArraysKt.toSet(new Integer[]{numValueOf3, numValueOf4, numValueOf5, numValueOf8});
         backgroundIds = ArraysKt___ArraysKt.toSet(new Integer[]{Integer.valueOf(R.id.album_art), Integer.valueOf(R.id.turbulence_noise_view), Integer.valueOf(R.id.loading_effect_view), Integer.valueOf(R.id.touch_ripple_view)});
         Typeface.create("variable-headline-small", 0);
         Typeface.create("variable-title-medium", 0);
@@ -158,7 +156,7 @@ public final class MediaViewHolder {
             handler.postDelayed(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.GutsViewHolder$marquee$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GutsViewHolder.this.gutsText.setSelected(z);
+                    gutsViewHolder.gutsText.setSelected(z);
                 }
             }, j);
         }

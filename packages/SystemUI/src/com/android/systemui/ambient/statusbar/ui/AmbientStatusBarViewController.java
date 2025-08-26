@@ -43,7 +43,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AmbientStatusBarViewController extends ViewController {
     public final AlarmManager mAlarmManager;
@@ -76,7 +75,7 @@ public class AmbientStatusBarViewController extends ViewController {
     public final ZenModeController mZenModeController;
 
     /* renamed from: $r8$lambda$58bl0PfQY-4gnoAw786XPvbTz9k, reason: not valid java name */
-    public static void m1009$r8$lambda$58bl0PfQY4gnoAw786XPvbTz9k(AmbientStatusBarViewController ambientStatusBarViewController, List list) {
+    public static void m1011$r8$lambda$58bl0PfQY4gnoAw786XPvbTz9k(AmbientStatusBarViewController ambientStatusBarViewController, List list) {
         ((ArrayList) ambientStatusBarViewController.mExtraStatusBarItems).clear();
         ((ArrayList) ambientStatusBarViewController.mExtraStatusBarItems).addAll(list);
         final AmbientStatusBarView ambientStatusBarView = (AmbientStatusBarView) ambientStatusBarViewController.mView;
@@ -85,7 +84,7 @@ public class AmbientStatusBarViewController extends ViewController {
         list2.forEach(new Consumer() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarView$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AmbientStatusBarView ambientStatusBarView2 = AmbientStatusBarView.this;
+                AmbientStatusBarView ambientStatusBarView2 = ambientStatusBarView;
                 View view = (View) obj;
                 int i = AmbientStatusBarView.$r8$clinit;
                 ambientStatusBarView2.getClass();
@@ -134,10 +133,10 @@ public class AmbientStatusBarViewController extends ViewController {
             }
             DreamLogger dreamLogger = ambientStatusBarViewController.mLogger;
             dreamLogger.getClass();
-            LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(2), null);
-            obtain.setBool1(z);
-            obtain.setStr1(str2);
-            dreamLogger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(2), null);
+            logMessageObtain.setBool1(z);
+            logMessageObtain.setStr1(str2);
+            dreamLogger.getBuffer().commit(logMessageObtain);
             AmbientStatusBarView ambientStatusBarView = (AmbientStatusBarView) ambientStatusBarViewController.mView;
             View view = (View) ((HashMap) ambientStatusBarView.mStatusIcons).get(Integer.valueOf(i));
             if (view == null) {
@@ -176,7 +175,7 @@ public class AmbientStatusBarViewController extends ViewController {
         this.mEntryAnimationsFinished = false;
         this.mDreamOverlayStateCallback = new DreamOverlayStateController.Callback() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController.1
             @Override // com.android.systemui.dreams.DreamOverlayStateController.Callback
-            public final void onStateChanged() {
+            public final void onStateChanged() throws Resources.NotFoundException {
                 AmbientStatusBarViewController ambientStatusBarViewController = AmbientStatusBarViewController.this;
                 ambientStatusBarViewController.mEntryAnimationsFinished = ambientStatusBarViewController.mDreamOverlayStateController.containsState(4);
                 ambientStatusBarViewController.updateVisibility$5();
@@ -185,19 +184,19 @@ public class AmbientStatusBarViewController extends ViewController {
         };
         this.mSensorCallback = new IndividualSensorPrivacyController.Callback() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.policy.IndividualSensorPrivacyController.Callback
-            public final void onSensorBlockedChanged(int i, boolean z) {
-                AmbientStatusBarViewController.this.updateMicCameraBlockedStatusIcon();
+            public final void onSensorBlockedChanged(int i, boolean z) throws Resources.NotFoundException {
+                this.f$0.updateMicCameraBlockedStatusIcon();
             }
         };
         this.mNextAlarmCallback = new NextAlarmController.NextAlarmChangeCallback() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.statusbar.policy.NextAlarmController.NextAlarmChangeCallback
-            public final void onNextAlarmChanged(AlarmManager.AlarmClockInfo alarmClockInfo) {
-                AmbientStatusBarViewController.this.updateAlarmStatusIcon();
+            public final void onNextAlarmChanged(AlarmManager.AlarmClockInfo alarmClockInfo) throws Resources.NotFoundException {
+                this.f$0.updateAlarmStatusIcon();
             }
         };
         this.mZenModeCallback = new ZenModeController.Callback() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController.2
             @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
-            public final void onZenChanged(int i) {
+            public final void onZenChanged(int i) throws Resources.NotFoundException {
                 AmbientStatusBarViewController ambientStatusBarViewController = AmbientStatusBarViewController.this;
                 ambientStatusBarViewController.showIcon(6, R.string.priority_mode_dream_overlay_content_description, ((ZenModeControllerImpl) ambientStatusBarViewController.mZenModeController).mZenMode != 0);
             }
@@ -207,12 +206,12 @@ public class AmbientStatusBarViewController extends ViewController {
         this.mStatusBarWindowStateListener = new StatusBarWindowStateListener() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda4
             @Override // com.android.systemui.statusbar.window.StatusBarWindowStateListener
             public final void onStatusBarWindowStateChanged(int i) {
-                final AmbientStatusBarViewController ambientStatusBarViewController = AmbientStatusBarViewController.this;
+                final AmbientStatusBarViewController ambientStatusBarViewController = this.f$0;
                 if (ambientStatusBarViewController.mIsAttached && ambientStatusBarViewController.mEntryAnimationsFinished) {
                     ambientStatusBarViewController.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda13
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AmbientStatusBarViewController.this.updateVisibility$5();
+                            ambientStatusBarViewController.updateVisibility$5();
                         }
                     });
                 }
@@ -220,8 +219,8 @@ public class AmbientStatusBarViewController extends ViewController {
         };
         this.mPrivacyItemControllerCallback = new PrivacyItemController.Callback() { // from class: com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController$$ExternalSyntheticLambda5
             @Override // com.android.systemui.privacy.PrivacyItemController.Callback
-            public final void onPrivacyItemsChanged(List list) {
-                AmbientStatusBarViewController ambientStatusBarViewController = AmbientStatusBarViewController.this;
+            public final void onPrivacyItemsChanged(List list) throws Resources.NotFoundException {
+                AmbientStatusBarViewController ambientStatusBarViewController = this.f$0;
                 ambientStatusBarViewController.getClass();
                 ambientStatusBarViewController.showIcon(8, R.string.location_active_dream_overlay_content_description, list.stream().anyMatch(new AmbientStatusBarViewController$$ExternalSyntheticLambda11()));
             }
@@ -259,7 +258,7 @@ public class AmbientStatusBarViewController extends ViewController {
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         this.mIsAttached = true;
         JavaAdapterKt.collectFlow(this.mView, ((WifiInteractorImpl) this.mWifiInteractor).wifiNetwork, new AmbientStatusBarViewController$$ExternalSyntheticLambda6(this, 1));
         JavaAdapterKt.collectFlow(this.mView, this.mCommunalSceneInteractor.isCommunalVisible, new AmbientStatusBarViewController$$ExternalSyntheticLambda6(this, 2));
@@ -306,29 +305,29 @@ public class AmbientStatusBarViewController extends ViewController {
         ((AmbientStatusBarView) this.mView).setTranslationY(f);
     }
 
-    public final void showIcon(int i, int i2, boolean z) {
+    public final void showIcon(int i, int i2, boolean z) throws Resources.NotFoundException {
         this.mMainExecutor.execute(new AmbientStatusBarViewController$$ExternalSyntheticLambda10(this, z, i, this.mResources.getString(i2)));
     }
 
-    public final void updateAlarmStatusIcon() {
-        String str;
+    public final void updateAlarmStatusIcon() throws Resources.NotFoundException {
+        String string;
         AlarmManager.AlarmClockInfo nextAlarmClock = this.mAlarmManager.getNextAlarmClock(((UserTrackerImpl) this.mUserTracker).getUserId());
         boolean z = nextAlarmClock != null && nextAlarmClock.getTriggerTime() > 0;
         if (z) {
-            str = this.mResources.getString(R.string.accessibility_quick_settings_alarm, DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), this.mDateFormatUtil.is24HourFormat() ? "EHm" : "Ehma"), nextAlarmClock.getTriggerTime()).toString());
+            string = this.mResources.getString(R.string.accessibility_quick_settings_alarm, DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), this.mDateFormatUtil.is24HourFormat() ? "EHm" : "Ehma"), nextAlarmClock.getTriggerTime()).toString());
         } else {
-            str = null;
+            string = null;
         }
-        this.mMainExecutor.execute(new AmbientStatusBarViewController$$ExternalSyntheticLambda10(this, z, 2, str));
+        this.mMainExecutor.execute(new AmbientStatusBarViewController$$ExternalSyntheticLambda10(this, z, 2, string));
     }
 
-    public final void updateMicCameraBlockedStatusIcon() {
+    public final void updateMicCameraBlockedStatusIcon() throws Resources.NotFoundException {
         IndividualSensorPrivacyController individualSensorPrivacyController = this.mSensorPrivacyController;
-        boolean isSensorBlocked = ((IndividualSensorPrivacyControllerImpl) individualSensorPrivacyController).isSensorBlocked(1);
-        boolean isSensorBlocked2 = ((IndividualSensorPrivacyControllerImpl) individualSensorPrivacyController).isSensorBlocked(2);
-        showIcon(3, R.string.camera_blocked_dream_overlay_content_description, !isSensorBlocked && isSensorBlocked2);
-        showIcon(4, R.string.microphone_blocked_dream_overlay_content_description, isSensorBlocked && !isSensorBlocked2);
-        showIcon(5, R.string.camera_and_microphone_blocked_dream_overlay_content_description, isSensorBlocked && isSensorBlocked2);
+        boolean zIsSensorBlocked = ((IndividualSensorPrivacyControllerImpl) individualSensorPrivacyController).isSensorBlocked(1);
+        boolean zIsSensorBlocked2 = ((IndividualSensorPrivacyControllerImpl) individualSensorPrivacyController).isSensorBlocked(2);
+        showIcon(3, R.string.camera_blocked_dream_overlay_content_description, !zIsSensorBlocked && zIsSensorBlocked2);
+        showIcon(4, R.string.microphone_blocked_dream_overlay_content_description, zIsSensorBlocked && !zIsSensorBlocked2);
+        showIcon(5, R.string.camera_and_microphone_blocked_dream_overlay_content_description, zIsSensorBlocked && zIsSensorBlocked2);
     }
 
     public final void updateVisibility$5() {
@@ -342,7 +341,7 @@ public class AmbientStatusBarViewController extends ViewController {
         dreamOverlayStateController.setDreamOverlayStatusBarVisible(i == 0);
     }
 
-    public void updateWifiUnavailableStatusIcon(boolean z) {
+    public void updateWifiUnavailableStatusIcon(boolean z) throws Resources.NotFoundException {
         showIcon(1, R.string.wifi_unavailable_dream_overlay_content_description, !z);
     }
 }

@@ -43,11 +43,11 @@ public class DLSet extends ASN1Set {
     private int getContentsLength() throws IOException {
         if (this.contentsLength < 0) {
             int length = this.elements.length;
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += this.elements[i2].toASN1Primitive().toDLObject().encodedLength(true);
+            int iEncodedLength = 0;
+            for (int i = 0; i < length; i++) {
+                iEncodedLength += this.elements[i].toASN1Primitive().toDLObject().encodedLength(true);
             }
-            this.contentsLength = i;
+            this.contentsLength = iEncodedLength;
         }
         return this.contentsLength;
     }
@@ -72,14 +72,14 @@ public class DLSet extends ASN1Set {
             return;
         }
         ASN1Primitive[] aSN1PrimitiveArr = new ASN1Primitive[length];
-        int i2 = 0;
-        for (int i3 = 0; i3 < length; i3++) {
-            ASN1Primitive dLObject = this.elements[i3].toASN1Primitive().toDLObject();
-            aSN1PrimitiveArr[i3] = dLObject;
-            i2 += dLObject.encodedLength(true);
+        int iEncodedLength = 0;
+        for (int i2 = 0; i2 < length; i2++) {
+            ASN1Primitive dLObject = this.elements[i2].toASN1Primitive().toDLObject();
+            aSN1PrimitiveArr[i2] = dLObject;
+            iEncodedLength += dLObject.encodedLength(true);
         }
-        this.contentsLength = i2;
-        aSN1OutputStream.writeDL(i2);
+        this.contentsLength = iEncodedLength;
+        aSN1OutputStream.writeDL(iEncodedLength);
         while (i < length) {
             dLSubStream.writePrimitive(aSN1PrimitiveArr[i], true);
             i++;

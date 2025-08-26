@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaCardKt$ProgressArea$1$3$positionText$2$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ MutableFloatState $livePosition$delegate;
@@ -29,11 +28,11 @@ final class MediaCardKt$ProgressArea$1$3$positionText$2$1 extends SuspendLambda 
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        long longValue = ((Number) obj).longValue();
-        long longValue2 = ((Number) obj2).longValue();
+        long jLongValue = ((Number) obj).longValue();
+        long jLongValue2 = ((Number) obj2).longValue();
         MediaCardKt$ProgressArea$1$3$positionText$2$1 mediaCardKt$ProgressArea$1$3$positionText$2$1 = new MediaCardKt$ProgressArea$1$3$positionText$2$1(this.$seekTo$delegate, this.$livePosition$delegate, (Continuation) obj3);
-        mediaCardKt$ProgressArea$1$3$positionText$2$1.J$0 = longValue;
-        mediaCardKt$ProgressArea$1$3$positionText$2$1.J$1 = longValue2;
+        mediaCardKt$ProgressArea$1$3$positionText$2$1.J$0 = jLongValue;
+        mediaCardKt$ProgressArea$1$3$positionText$2$1.J$1 = jLongValue2;
         return mediaCardKt$ProgressArea$1$3$positionText$2$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -45,10 +44,10 @@ final class MediaCardKt$ProgressArea$1$3$positionText$2$1 extends SuspendLambda 
         }
         ResultKt.throwOnFailure(obj);
         long j = this.J$0;
-        long j2 = this.J$1;
+        long jRoundToLong = this.J$1;
         if (((Boolean) this.$seekTo$delegate.getValue()).booleanValue()) {
-            j2 = MathKt__MathJVMKt.roundToLong(((SnapshotMutableFloatStateImpl) this.$livePosition$delegate).getFloatValue() * j);
+            jRoundToLong = MathKt__MathJVMKt.roundToLong(((SnapshotMutableFloatStateImpl) this.$livePosition$delegate).getFloatValue() * j);
         }
-        return new Long(j2);
+        return new Long(jRoundToLong);
     }
 }

@@ -3,7 +3,6 @@ package androidx.constraintlayout.core.motion.utils;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class StepCurve extends Easing {
     public final MonotonicCurveFit mCurveFit;
@@ -11,24 +10,24 @@ public class StepCurve extends Easing {
     public StepCurve(String str) {
         this.mStr = str;
         double[] dArr = new double[str.length() / 2];
-        int indexOf = str.indexOf(40) + 1;
-        int indexOf2 = str.indexOf(44, indexOf);
+        int iIndexOf = str.indexOf(40) + 1;
+        int iIndexOf2 = str.indexOf(44, iIndexOf);
         int i = 0;
-        while (indexOf2 != -1) {
-            dArr[i] = Double.parseDouble(str.substring(indexOf, indexOf2).trim());
-            indexOf = indexOf2 + 1;
-            indexOf2 = str.indexOf(44, indexOf);
+        while (iIndexOf2 != -1) {
+            dArr[i] = Double.parseDouble(str.substring(iIndexOf, iIndexOf2).trim());
+            iIndexOf = iIndexOf2 + 1;
+            iIndexOf2 = str.indexOf(44, iIndexOf);
             i++;
         }
-        dArr[i] = Double.parseDouble(str.substring(indexOf, str.indexOf(41, indexOf)).trim());
-        double[] copyOf = Arrays.copyOf(dArr, i + 1);
-        int length = (copyOf.length * 3) - 2;
-        int length2 = copyOf.length - 1;
+        dArr[i] = Double.parseDouble(str.substring(iIndexOf, str.indexOf(41, iIndexOf)).trim());
+        double[] dArrCopyOf = Arrays.copyOf(dArr, i + 1);
+        int length = (dArrCopyOf.length * 3) - 2;
+        int length2 = dArrCopyOf.length - 1;
         double d = 1.0d / length2;
         double[][] dArr2 = (double[][]) Array.newInstance((Class<?>) Double.TYPE, length, 1);
         double[] dArr3 = new double[length];
-        for (int i2 = 0; i2 < copyOf.length; i2++) {
-            double d2 = copyOf[i2];
+        for (int i2 = 0; i2 < dArrCopyOf.length; i2++) {
+            double d2 = dArrCopyOf[i2];
             int i3 = i2 + length2;
             dArr2[i3][0] = d2;
             double d3 = i2 * d;

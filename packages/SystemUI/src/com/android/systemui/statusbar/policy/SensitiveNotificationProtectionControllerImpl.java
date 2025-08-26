@@ -23,7 +23,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
-import com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl;
 import com.android.systemui.util.Assert;
 import com.android.systemui.util.ListenerSet;
 import com.android.systemui.util.settings.GlobalSettings;
@@ -33,7 +32,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SensitiveNotificationProtectionControllerImpl implements SensitiveNotificationProtectionController {
     public SensitiveNotificatioMediaProjectionSession mActiveMediaProjectionSession;
@@ -49,7 +47,6 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
     public ArraySet mNotificationProtectionExemptByRolePackages = new ArraySet();
     public boolean mDisableScreenShareProtections = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$3, reason: invalid class name */
     public class AnonymousClass3 extends ExecutorContentObserver {
         public final /* synthetic */ Handler val$mainHandler;
@@ -74,7 +71,6 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RoleHolder {
         public final String mPackageName;
         public final UserHandle mUserHandle;
@@ -99,7 +95,6 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SensitiveNotificatioMediaProjectionSession {
         public final boolean mExempt;
         public final int mProjectionAppUid;
@@ -117,33 +112,33 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
     public SensitiveNotificationProtectionControllerImpl(final Context context, GlobalSettings globalSettings, MediaProjectionManager mediaProjectionManager, final IActivityManager iActivityManager, PackageManager packageManager, final TelephonyManager telephonyManager, RoleManager roleManager, final Handler handler, Executor executor, SensitiveNotificationProtectionControllerLogger sensitiveNotificationProtectionControllerLogger) {
         MediaProjectionManager.Callback callback = new MediaProjectionManager.Callback() { // from class: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl.1
             public final void onStart(MediaProjectionInfo mediaProjectionInfo) {
-                int i;
+                int packageUidAsUser;
                 Trace.beginSection("SNPC.onProjectionStart");
                 try {
                     SensitiveNotificationProtectionControllerImpl.this.updateProjectionStateAndNotifyListeners(mediaProjectionInfo);
                     SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl = SensitiveNotificationProtectionControllerImpl.this;
                     SensitiveNotificationProtectionControllerLogger sensitiveNotificationProtectionControllerLogger2 = sensitiveNotificationProtectionControllerImpl.mLogger;
-                    boolean isSensitiveStateActive = sensitiveNotificationProtectionControllerImpl.isSensitiveStateActive();
+                    boolean zIsSensitiveStateActive = sensitiveNotificationProtectionControllerImpl.isSensitiveStateActive();
                     String packageName = mediaProjectionInfo.getPackageName();
                     sensitiveNotificationProtectionControllerLogger2.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     SensitiveNotificationProtectionControllerLogger$$ExternalSyntheticLambda0 sensitiveNotificationProtectionControllerLogger$$ExternalSyntheticLambda0 = new SensitiveNotificationProtectionControllerLogger$$ExternalSyntheticLambda0(1);
                     LogBuffer logBuffer = sensitiveNotificationProtectionControllerLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("SNPC", logLevel, sensitiveNotificationProtectionControllerLogger$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).bool1 = isSensitiveStateActive;
-                    ((LogMessageImpl) obtain).str1 = packageName;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("SNPC", logLevel, sensitiveNotificationProtectionControllerLogger$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).bool1 = zIsSensitiveStateActive;
+                    ((LogMessageImpl) logMessageObtain).str1 = packageName;
+                    logBuffer.commit(logMessageObtain);
                     try {
-                        i = SensitiveNotificationProtectionControllerImpl.this.mPackageManager.getPackageUidAsUser(mediaProjectionInfo.getPackageName(), mediaProjectionInfo.getUserHandle().getIdentifier());
+                        packageUidAsUser = SensitiveNotificationProtectionControllerImpl.this.mPackageManager.getPackageUidAsUser(mediaProjectionInfo.getPackageName(), mediaProjectionInfo.getUserHandle().getIdentifier());
                     } catch (PackageManager.NameNotFoundException unused) {
                         Log.w("SNPC", "Package " + mediaProjectionInfo.getPackageName() + " not found");
-                        i = -1;
+                        packageUidAsUser = -1;
                     }
                     SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl2 = SensitiveNotificationProtectionControllerImpl.this;
-                    long nextLong = new Random().nextLong();
+                    long jNextLong = new Random().nextLong();
                     boolean z = !SensitiveNotificationProtectionControllerImpl.this.isSensitiveStateActive();
                     sensitiveNotificationProtectionControllerImpl2.getClass();
-                    SensitiveNotificatioMediaProjectionSession sensitiveNotificatioMediaProjectionSession = new SensitiveNotificatioMediaProjectionSession(nextLong, i, z);
+                    SensitiveNotificatioMediaProjectionSession sensitiveNotificatioMediaProjectionSession = new SensitiveNotificatioMediaProjectionSession(jNextLong, packageUidAsUser, z);
                     sensitiveNotificationProtectionControllerImpl2.mActiveMediaProjectionSession = sensitiveNotificatioMediaProjectionSession;
                     FrameworkStatsLog.write(830, sensitiveNotificatioMediaProjectionSession.mSessionId, sensitiveNotificatioMediaProjectionSession.mProjectionAppUid, sensitiveNotificatioMediaProjectionSession.mExempt, 1, 1);
                 } finally {
@@ -195,13 +190,13 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
         executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SensitiveNotificationProtectionControllerImpl.AnonymousClass3.this.onChange(true);
+                anonymousClass3.onChange(true);
             }
         });
         executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                final SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl = SensitiveNotificationProtectionControllerImpl.this;
+                final SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl = this.f$0;
                 Context context2 = context;
                 IActivityManager iActivityManager2 = iActivityManager;
                 TelephonyManager telephonyManager2 = telephonyManager;
@@ -225,7 +220,7 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
                 handler2.post(new Runnable() { // from class: com.android.systemui.statusbar.policy.SensitiveNotificationProtectionControllerImpl$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl2 = SensitiveNotificationProtectionControllerImpl.this;
+                        SensitiveNotificationProtectionControllerImpl sensitiveNotificationProtectionControllerImpl2 = sensitiveNotificationProtectionControllerImpl;
                         ArraySet arraySet3 = arraySet;
                         ArraySet arraySet4 = arraySet2;
                         sensitiveNotificationProtectionControllerImpl2.getClass();
@@ -267,34 +262,37 @@ public class SensitiveNotificationProtectionControllerImpl implements SensitiveN
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0063  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateProjectionStateAndNotifyListeners(MediaProjectionInfo mediaProjectionInfo) {
         Assert.isMainThread();
-        boolean isSensitiveStateActive = isSensitiveStateActive();
+        boolean zIsSensitiveStateActive = isSensitiveStateActive();
         if (this.mDisableScreenShareProtections) {
             Log.w("SNPC", "Screen share protections disabled");
-        } else if (mediaProjectionInfo == null || !this.mSessionProtectionExemptPackages.contains(mediaProjectionInfo.getPackageName())) {
-            if (mediaProjectionInfo != null) {
-                if (this.mPackageManager.checkPermission("android.permission.RECORD_SENSITIVE_CONTENT", mediaProjectionInfo.getPackageName()) == 0) {
-                    Log.w("SNPC", "Screen share protections exempt for package " + mediaProjectionInfo.getPackageName() + " via permission");
-                }
-            }
-            if (mediaProjectionInfo == null || !this.mNotificationProtectionExemptByRolePackages.contains(new RoleHolder(mediaProjectionInfo.getPackageName(), mediaProjectionInfo.getUserHandle()))) {
-                if (mediaProjectionInfo != null && mediaProjectionInfo.getLaunchCookie() != null) {
-                    Log.w("SNPC", "Screen share protections exempt for single app screenshare");
+        } else {
+            if (mediaProjectionInfo == null || !this.mSessionProtectionExemptPackages.contains(mediaProjectionInfo.getPackageName())) {
+                if (mediaProjectionInfo != null) {
+                    if (this.mPackageManager.checkPermission("android.permission.RECORD_SENSITIVE_CONTENT", mediaProjectionInfo.getPackageName()) == 0) {
+                        Log.w("SNPC", "Screen share protections exempt for package " + mediaProjectionInfo.getPackageName() + " via permission");
+                    } else if (mediaProjectionInfo != null && this.mNotificationProtectionExemptByRolePackages.contains(new RoleHolder(mediaProjectionInfo.getPackageName(), mediaProjectionInfo.getUserHandle()))) {
+                        Log.w("SNPC", "Screen share protections exempt for package " + mediaProjectionInfo.getPackageName() + " via role(s) held");
+                    } else if (mediaProjectionInfo != null && mediaProjectionInfo.getLaunchCookie() != null) {
+                        Log.w("SNPC", "Screen share protections exempt for single app screenshare");
+                    }
                 }
                 this.mProjection = mediaProjectionInfo;
-                if (!isSensitiveStateActive || isSensitiveStateActive()) {
+                if (!zIsSensitiveStateActive || isSensitiveStateActive()) {
                     this.mListeners.forEach(new AppLockNotificationControllerImpl$$ExternalSyntheticLambda1());
                 }
                 return;
             }
-            Log.w("SNPC", "Screen share protections exempt for package " + mediaProjectionInfo.getPackageName() + " via role(s) held");
-        } else {
             Log.w("SNPC", "Screen share protections exempt for package " + mediaProjectionInfo.getPackageName());
         }
         mediaProjectionInfo = null;
         this.mProjection = mediaProjectionInfo;
-        if (isSensitiveStateActive) {
+        if (zIsSensitiveStateActive) {
         }
         this.mListeners.forEach(new AppLockNotificationControllerImpl$$ExternalSyntheticLambda1());
     }

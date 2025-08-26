@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecTileLayout {
     public final IntSupplier cellHeightSupplier;
@@ -26,7 +25,6 @@ public final class SecTileLayout {
     public final IntSupplier rowsSupplier;
     public final IntSupplier sidePaddingSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Counter {
         public int column;
         public final int columns;

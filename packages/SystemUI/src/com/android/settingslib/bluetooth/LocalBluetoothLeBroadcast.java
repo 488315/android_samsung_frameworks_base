@@ -27,7 +27,9 @@ import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardCarrierViewController$2$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,10 +38,10 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
     public static final Uri[] SETTINGS_URIS = {Settings.Secure.getUriFor("bluetooth_le_broadcast_name"), Settings.Secure.getUriFor("bluetooth_le_broadcast_program_info"), Settings.Secure.getUriFor("bluetooth_le_broadcast_code"), Settings.Secure.getUriFor("bluetooth_le_broadcast_app_source_name"), Settings.Secure.getUriFor("bluetooth_le_broadcast_improve_compatibility")};
@@ -68,7 +70,6 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
     public final ConcurrentHashMap mCachedBroadcastCallbackExecutorMap = new ConcurrentHashMap();
     public final Set mLocalSinksPendingSourceRemoval = new HashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast$1, reason: invalid class name */
     public class AnonymousClass1 implements BluetoothProfile.ServiceListener {
         public AnonymousClass1() {
@@ -145,7 +146,7 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
                     localBluetoothLeBroadcast.mProfileManager.callServiceDisconnectedListeners();
                     LocalBluetoothLeBroadcast localBluetoothLeBroadcast2 = LocalBluetoothLeBroadcast.this;
                     localBluetoothLeBroadcast2.mIsBroadcastProfileReady = false;
-                    LocalBluetoothLeBroadcast.m973$$Nest$mnotifyBroadcastStateChange(localBluetoothLeBroadcast2, 2);
+                    LocalBluetoothLeBroadcast.m975$$Nest$mnotifyBroadcastStateChange(localBluetoothLeBroadcast2, 2);
                     LocalBluetoothLeBroadcast localBluetoothLeBroadcast3 = LocalBluetoothLeBroadcast.this;
                     localBluetoothLeBroadcast3.unregisterServiceCallBack(localBluetoothLeBroadcast3.mBroadcastCallback);
                     LocalBluetoothLeBroadcast.this.mCachedBroadcastCallbackExecutorMap.clear();
@@ -181,7 +182,6 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BroadcastSettingsObserver extends ContentObserver {
         public BroadcastSettingsObserver(Handler handler) {
             super(handler);
@@ -197,7 +197,7 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
     }
 
     /* renamed from: -$$Nest$mnotifyBroadcastStateChange, reason: not valid java name */
-    public static void m973$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast localBluetoothLeBroadcast, int i) {
+    public static void m975$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast localBluetoothLeBroadcast, int i) {
         String packageName = localBluetoothLeBroadcast.mContext.getPackageName();
         if (!packageName.equals(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG) && !packageName.equals("com.android.systemui")) {
             Log.d("LocalBluetoothLeBroadcast", "Skip notifyBroadcastStateChange, not triggered by Settings or SystemUI.");
@@ -244,7 +244,7 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
                 localBluetoothLeBroadcast.setLatestBroadcastId(i2);
                 LocalBluetoothLeBroadcast localBluetoothLeBroadcast2 = LocalBluetoothLeBroadcast.this;
                 localBluetoothLeBroadcast2.setAppSourceName(localBluetoothLeBroadcast2.mNewAppSourceName, true);
-                LocalBluetoothLeBroadcast.m973$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast.this, 1);
+                LocalBluetoothLeBroadcast.m975$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast.this, 1);
             }
 
             public final void onBroadcastStopFailed(int i) {
@@ -253,7 +253,7 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
 
             public final void onBroadcastStopped(int i, int i2) {
                 SuggestionsAdapter$$ExternalSyntheticOutline0.m(i, i2, "onBroadcastStopped(), reason = ", ", broadcastId = ", "LocalBluetoothLeBroadcast");
-                LocalBluetoothLeBroadcast.m973$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast.this, 2);
+                LocalBluetoothLeBroadcast.m975$$Nest$mnotifyBroadcastStateChange(LocalBluetoothLeBroadcast.this, 2);
                 LocalBluetoothLeBroadcast localBluetoothLeBroadcast = LocalBluetoothLeBroadcast.this;
                 localBluetoothLeBroadcast.getClass();
                 Log.d("LocalBluetoothLeBroadcast", "resetCacheInfo:");
@@ -398,7 +398,7 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
             this.mBluetoothLeBroadcastMetadata = (BluetoothLeBroadcastMetadata) this.mServiceBroadcast.getAllBroadcastMetadata().stream().filter(new Predicate() { // from class: com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    LocalBluetoothLeBroadcast localBluetoothLeBroadcast = LocalBluetoothLeBroadcast.this;
+                    LocalBluetoothLeBroadcast localBluetoothLeBroadcast = this.f$0;
                     Uri[] uriArr = LocalBluetoothLeBroadcast.SETTINGS_URIS;
                     localBluetoothLeBroadcast.getClass();
                     return ((BluetoothLeBroadcastMetadata) obj).getBroadcastId() == localBluetoothLeBroadcast.mBroadcastId;
@@ -541,13 +541,13 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
         String str2 = this.mProgramInfo;
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("startBroadcast: language = null ,programInfo = ", str2, "LocalBluetoothLeBroadcast");
         byte[] bArr = null;
-        BluetoothLeAudioContentMetadata build = this.mBuilder.setLanguage((String) null).setProgramInfo(str2).build();
+        BluetoothLeAudioContentMetadata bluetoothLeAudioContentMetadataBuild = this.mBuilder.setLanguage((String) null).setProgramInfo(str2).build();
         BluetoothLeBroadcast bluetoothLeBroadcast = this.mServiceBroadcast;
         byte[] bArr2 = this.mBroadcastCode;
         if (bArr2 != null && bArr2.length > 0) {
             bArr = bArr2;
         }
-        bluetoothLeBroadcast.startBroadcast(build, bArr);
+        bluetoothLeBroadcast.startBroadcast(bluetoothLeAudioContentMetadataBuild, bArr);
     }
 
     public final String toString() {
@@ -585,19 +585,74 @@ public class LocalBluetoothLeBroadcast implements LocalBluetoothProfile {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0106  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c7 A[LOOP:0: B:38:0x00c5->B:39:0x00c7, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x00ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateBroadcastInfoFromContentProvider() {
-        /*
-            Method dump skipped, instructions count: 271
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.updateBroadcastInfoFromContentProvider():void");
+        boolean z;
+        byte[] bytes;
+        ContentResolver contentResolver = this.mContentResolver;
+        if (contentResolver == null) {
+            Log.d("LocalBluetoothLeBroadcast", "updateBroadcastInfoFromContentProvider: mContentResolver is null");
+            return;
+        }
+        String string = Settings.Secure.getString(contentResolver, "bluetooth_le_broadcast_program_info");
+        if (string == null) {
+            int iNextInt = ThreadLocalRandom.current().nextInt(1000, 9999);
+            String name = BluetoothAdapter.getDefaultAdapter().getName();
+            StringBuilder sb = new StringBuilder();
+            if (name.length() >= 27) {
+                name = name.substring(0, 27);
+            }
+            sb.append(name);
+            sb.append("_");
+            sb.append(iNextInt);
+            string = sb.toString();
+        }
+        setProgramInfo(string, false);
+        String string2 = Settings.Secure.getString(this.mContentResolver, "bluetooth_le_broadcast_name");
+        if (string2 == null) {
+            int iNextInt2 = ThreadLocalRandom.current().nextInt(1000, 9999);
+            String name2 = BluetoothAdapter.getDefaultAdapter().getName();
+            StringBuilder sb2 = new StringBuilder();
+            if (name2.length() >= 27) {
+                name2 = name2.substring(0, 27);
+            }
+            sb2.append(name2);
+            sb2.append("_");
+            sb2.append(iNextInt2);
+            string2 = sb2.toString();
+        }
+        setBroadcastName(string2, false);
+        String string3 = Settings.Secure.getString(this.mContentResolver, "bluetooth_le_broadcast_code");
+        if (string3 != null) {
+            Charset charset = StandardCharsets.UTF_8;
+            if (string3.getBytes(charset).length < 4 || string3.getBytes(charset).length > 16) {
+                Log.e("LocalBluetoothLeBroadcast", "updateBroadcastInfoFromContentProvider: wrong pref broadcast code");
+                z = true;
+            } else {
+                z = false;
+            }
+        }
+        if (string3 == null || z) {
+            SecureRandom secureRandom = new SecureRandom();
+            StringBuilder sb3 = new StringBuilder(16);
+            for (int i = 0; i < 16; i++) {
+                sb3.append("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?/".charAt(secureRandom.nextInt(89)));
+            }
+            bytes = sb3.toString().getBytes(StandardCharsets.UTF_8);
+        } else {
+            bytes = string3.getBytes(StandardCharsets.UTF_8);
+        }
+        setBroadcastCode(z, bytes);
+        setAppSourceName(Settings.Secure.getString(this.mContentResolver, "bluetooth_le_broadcast_app_source_name"), false);
+        String string4 = Settings.Secure.getString(this.mContentResolver, "bluetooth_le_broadcast_improve_compatibility");
+        boolean zEquals = string4 != null ? string4.equals("1") : false;
+        if (this.mImproveCompatibility == zEquals) {
+            Log.d("LocalBluetoothLeBroadcast", "setImproveCompatibility: improveCompatibility is not changed");
+        } else {
+            this.mImproveCompatibility = zEquals;
+        }
     }
 }

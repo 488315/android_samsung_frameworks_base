@@ -8,9 +8,9 @@ public final class GraphicsProtos {
     }
 
     public static void dumpPointProto(Point point, ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, point.x);
         protoOutputStream.write(1120986464258L, point.y);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

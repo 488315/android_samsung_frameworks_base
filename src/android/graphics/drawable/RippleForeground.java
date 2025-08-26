@@ -206,11 +206,11 @@ class RippleForeground extends RippleComponent {
     }
 
     private long computeFadeOutDelay() {
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mEnterStartedAtMillis;
-        if (currentAnimationTimeMillis <= 0 || currentAnimationTimeMillis >= 225) {
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mEnterStartedAtMillis;
+        if (jCurrentAnimationTimeMillis <= 0 || jCurrentAnimationTimeMillis >= 225) {
             return 0L;
         }
-        return 225 - currentAnimationTimeMillis;
+        return 225 - jCurrentAnimationTimeMillis;
     }
 
     private void startSoftwareEnter() {
@@ -218,32 +218,32 @@ class RippleForeground extends RippleComponent {
             this.mRunningSwAnimators.get(i).cancel();
         }
         this.mRunningSwAnimators.clear();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, TWEEN_RADIUS, 1.0f);
-        ofFloat.setDuration(225L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, TWEEN_RADIUS, 1.0f);
+        objectAnimatorOfFloat.setDuration(225L);
         TimeInterpolator timeInterpolator = DECELERATE_INTERPOLATOR;
-        ofFloat.setInterpolator(timeInterpolator);
-        ofFloat.start();
-        this.mRunningSwAnimators.add(ofFloat);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, TWEEN_ORIGIN, 1.0f);
-        ofFloat2.setDuration(225L);
-        ofFloat2.setInterpolator(timeInterpolator);
-        ofFloat2.start();
-        this.mRunningSwAnimators.add(ofFloat2);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this, OPACITY, 1.0f);
-        ofFloat3.setDuration(75L);
-        ofFloat3.setInterpolator(LINEAR_INTERPOLATOR);
-        ofFloat3.start();
-        this.mRunningSwAnimators.add(ofFloat3);
+        objectAnimatorOfFloat.setInterpolator(timeInterpolator);
+        objectAnimatorOfFloat.start();
+        this.mRunningSwAnimators.add(objectAnimatorOfFloat);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, TWEEN_ORIGIN, 1.0f);
+        objectAnimatorOfFloat2.setDuration(225L);
+        objectAnimatorOfFloat2.setInterpolator(timeInterpolator);
+        objectAnimatorOfFloat2.start();
+        this.mRunningSwAnimators.add(objectAnimatorOfFloat2);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this, OPACITY, 1.0f);
+        objectAnimatorOfFloat3.setDuration(75L);
+        objectAnimatorOfFloat3.setInterpolator(LINEAR_INTERPOLATOR);
+        objectAnimatorOfFloat3.start();
+        this.mRunningSwAnimators.add(objectAnimatorOfFloat3);
     }
 
     private void startSoftwareExit() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, OPACITY, 0.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(LINEAR_INTERPOLATOR);
-        ofFloat.addListener(this.mAnimationListener);
-        ofFloat.setStartDelay(computeFadeOutDelay());
-        ofFloat.start();
-        this.mRunningSwAnimators.add(ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, OPACITY, 0.0f);
+        objectAnimatorOfFloat.setDuration(150L);
+        objectAnimatorOfFloat.setInterpolator(LINEAR_INTERPOLATOR);
+        objectAnimatorOfFloat.addListener(this.mAnimationListener);
+        objectAnimatorOfFloat.setStartDelay(computeFadeOutDelay());
+        objectAnimatorOfFloat.start();
+        this.mRunningSwAnimators.add(objectAnimatorOfFloat);
     }
 
     private void startHardwareEnter() {
@@ -323,16 +323,16 @@ class RippleForeground extends RippleComponent {
     }
 
     private void clampStartingPosition() {
-        float exactCenterX = this.mBounds.exactCenterX();
-        float exactCenterY = this.mBounds.exactCenterY();
-        float f = this.mStartingX - exactCenterX;
-        float f2 = this.mStartingY - exactCenterY;
+        float fExactCenterX = this.mBounds.exactCenterX();
+        float fExactCenterY = this.mBounds.exactCenterY();
+        float f = this.mStartingX - fExactCenterX;
+        float f2 = this.mStartingY - fExactCenterY;
         float f3 = this.mTargetRadius - this.mStartRadius;
         if ((f * f) + (f2 * f2) > f3 * f3) {
-            double atan2 = Math.atan2(f2, f);
+            double dAtan2 = Math.atan2(f2, f);
             double d = f3;
-            this.mClampedStartingX = exactCenterX + ((float) (Math.cos(atan2) * d));
-            this.mClampedStartingY = exactCenterY + ((float) (Math.sin(atan2) * d));
+            this.mClampedStartingX = fExactCenterX + ((float) (Math.cos(dAtan2) * d));
+            this.mClampedStartingY = fExactCenterY + ((float) (Math.sin(dAtan2) * d));
             return;
         }
         this.mClampedStartingX = this.mStartingX;

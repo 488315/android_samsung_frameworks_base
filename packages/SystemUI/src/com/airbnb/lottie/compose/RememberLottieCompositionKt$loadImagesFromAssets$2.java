@@ -20,7 +20,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class RememberLottieCompositionKt$loadImagesFromAssets$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ LottieComposition $composition;
@@ -47,7 +46,7 @@ final class RememberLottieCompositionKt$loadImagesFromAssets$2 extends SuspendLa
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws IOException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -58,11 +57,11 @@ final class RememberLottieCompositionKt$loadImagesFromAssets$2 extends SuspendLa
             String str = lottieImageAsset.fileName;
             if (bitmap == null && str.startsWith("data:") && StringsKt__StringsKt.indexOf$default(str, "base64,", 0, false, 6) > 0) {
                 try {
-                    byte[] decode = Base64.decode(str.substring(StringsKt__StringsKt.indexOf$default(str, ',', 0, 6) + 1), 0);
+                    byte[] bArrDecode = Base64.decode(str.substring(StringsKt__StringsKt.indexOf$default(str, ',', 0, 6) + 1), 0);
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inScaled = true;
                     options.inDensity = 160;
-                    lottieImageAsset.bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length, options);
+                    lottieImageAsset.bitmap = BitmapFactory.decodeByteArray(bArrDecode, 0, bArrDecode.length, options);
                 } catch (IllegalArgumentException e) {
                     Logger.warning("data URL did not have correct base64 format.", e);
                 }
@@ -71,12 +70,12 @@ final class RememberLottieCompositionKt$loadImagesFromAssets$2 extends SuspendLa
             String str2 = this.$imageAssetsFolder;
             if (lottieImageAsset.bitmap == null && str2 != null) {
                 try {
-                    InputStream open = context.getAssets().open(str2 + ((Object) str));
+                    InputStream inputStreamOpen = context.getAssets().open(str2 + ((Object) str));
                     try {
                         BitmapFactory.Options options2 = new BitmapFactory.Options();
                         options2.inScaled = true;
                         options2.inDensity = 160;
-                        lottieImageAsset.bitmap = Utils.resizeBitmapIfNeeded(BitmapFactory.decodeStream(open, null, options2), lottieImageAsset.width, lottieImageAsset.height);
+                        lottieImageAsset.bitmap = Utils.resizeBitmapIfNeeded(BitmapFactory.decodeStream(inputStreamOpen, null, options2), lottieImageAsset.width, lottieImageAsset.height);
                     } catch (IllegalArgumentException e2) {
                         Logger.warning("Unable to decode image.", e2);
                     }

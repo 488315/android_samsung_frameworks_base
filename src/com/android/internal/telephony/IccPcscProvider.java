@@ -45,19 +45,19 @@ public class IccPcscProvider {
     private boolean isInitiated;
     private int mPhoneId;
 
-    public IccPcscProvider() {
+    public IccPcscProvider() throws IOException {
         this.isInitiated = false;
         this.mPhoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultSubscriptionId());
         pscsPowerup();
     }
 
-    public IccPcscProvider(int i) {
+    public IccPcscProvider(int i) throws IOException {
         this.isInitiated = false;
         this.mPhoneId = i;
         pscsPowerup();
     }
 
-    private void pscsPowerup() {
+    private void pscsPowerup() throws IOException {
         Log.d(mLogTag, "pscsPowerup");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
@@ -98,7 +98,7 @@ public class IccPcscProvider {
         Log.d(mLogTag, "pcscPowerdown");
     }
 
-    public int connect() {
+    public int connect() throws IOException {
         if (!this.isInitiated) {
             pscsPowerup();
             this.isInitiated = true;
@@ -107,7 +107,7 @@ public class IccPcscProvider {
         return connectToRIL();
     }
 
-    private int connectToRIL() {
+    private int connectToRIL() throws IOException {
         Log.d(mLogTag, "connectToRIL");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
@@ -121,10 +121,10 @@ public class IccPcscProvider {
             dataOutputStream.writeByte(0);
             dataOutputStream.writeByte(1);
             try {
-                int sendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), new byte[1], 4, this.mPhoneId);
+                int iSendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), new byte[1], 4, this.mPhoneId);
                 dataOutputStream.close();
                 byteArrayOutputStream.close();
-                return sendRequestToRIL;
+                return iSendRequestToRIL;
             } catch (Exception unused) {
                 Log.d(mLogTag, "Exception - connect");
                 try {
@@ -150,7 +150,7 @@ public class IccPcscProvider {
         return transmitToRIL(i, bArr, bArr2);
     }
 
-    private int transmitToRIL(int i, byte[] bArr, byte[] bArr2) {
+    private int transmitToRIL(int i, byte[] bArr, byte[] bArr2) throws IOException {
         Log.d(mLogTag, "transmitToRIL");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
@@ -163,10 +163,10 @@ public class IccPcscProvider {
                 dataOutputStream.writeByte(b);
             }
             try {
-                int sendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), bArr2, 6, this.mPhoneId);
+                int iSendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), bArr2, 6, this.mPhoneId);
                 dataOutputStream.close();
                 byteArrayOutputStream.close();
-                return sendRequestToRIL;
+                return iSendRequestToRIL;
             } catch (Exception e) {
                 try {
                     dataOutputStream.close();
@@ -187,7 +187,7 @@ public class IccPcscProvider {
         return disconnectFromRIL(i);
     }
 
-    private int disconnectFromRIL(int i) {
+    private int disconnectFromRIL(int i) throws IOException {
         Log.d(mLogTag, "disconnectFromRIL");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
@@ -200,10 +200,10 @@ public class IccPcscProvider {
             dataOutputStream.writeByte(128);
             dataOutputStream.writeByte(i);
             try {
-                int sendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), new byte[1], 5, this.mPhoneId);
+                int iSendRequestToRIL = getTelephonyService().sendRequestToRIL(byteArrayOutputStream.toByteArray(), new byte[1], 5, this.mPhoneId);
                 dataOutputStream.close();
                 byteArrayOutputStream.close();
-                return sendRequestToRIL;
+                return iSendRequestToRIL;
             } catch (Exception e) {
                 try {
                     dataOutputStream.close();
@@ -231,11 +231,11 @@ public class IccPcscProvider {
     }
 
     private ISemTelephony getTelephonyService() {
-        ISemTelephony asInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
-        if (asInterface == null) {
+        ISemTelephony iSemTelephonyAsInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+        if (iSemTelephonyAsInterface == null) {
             Log.w(mLogTag, "Unable to find ISemTelephony interface.");
         }
-        return asInterface;
+        return iSemTelephonyAsInterface;
     }
 
     private static String bytesToHexString(byte[] bArr) {

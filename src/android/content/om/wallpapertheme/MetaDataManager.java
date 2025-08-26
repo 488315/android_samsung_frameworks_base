@@ -40,7 +40,7 @@ public class MetaDataManager {
     private HashMap<String, Uid> mUidMap = new HashMap<>();
     private HashMap<String, String> mRpUidMap = new HashMap<>();
 
-    public void loadStaticMetadata(Context context) throws IOException, XmlPullParserException {
+    public void loadStaticMetadata(Context context) throws XmlPullParserException, IOException {
         clearMetadataInfo();
         new MetaData(context.getResources().getXml(18284660));
         for (int i : WallpaperThemeConstants.RES_METADATA_LIST) {
@@ -67,7 +67,7 @@ public class MetaDataManager {
 
     public int update(ApplicationInfo applicationInfo) {
         int i;
-        int intValue;
+        int iIntValue;
         int i2;
         int i3;
         int i4 = 0;
@@ -83,11 +83,11 @@ public class MetaDataManager {
             int i5 = 2;
             try {
                 if (obj instanceof String) {
-                    String[] split = ((String) obj).split(",\\s*");
-                    int length = split.length;
+                    String[] strArrSplit = ((String) obj).split(",\\s*");
+                    int length = strArrSplit.length;
                     int i6 = 0;
                     while (i6 < length) {
-                        String str2 = split[i6];
+                        String str2 = strArrSplit[i6];
                         int identifier = packageResources.getIdentifier(str2, "xml", str);
                         if (identifier <= 0) {
                             i2 = i4;
@@ -125,10 +125,10 @@ public class MetaDataManager {
                     }
                     return 1;
                 }
-                if (!(obj instanceof Integer) || (intValue = ((Integer) obj).intValue()) <= 0) {
+                if (!(obj instanceof Integer) || (iIntValue = ((Integer) obj).intValue()) <= 0) {
                     return 1;
                 }
-                MetaData metaData2 = new MetaData(packageResources.getXml(intValue));
+                MetaData metaData2 = new MetaData(packageResources.getXml(iIntValue));
                 Package currentPackage2 = metaData2.getCurrentPackage();
                 if (currentPackage2 != null && isAbnormalMetadataDetected(currentPackage2.getUidList())) {
                     removePackageList(currentPackage2.getPackageName());
@@ -157,36 +157,36 @@ public class MetaDataManager {
     }
 
     private boolean isAbnormalMetadataDetected(List<Uid> list) {
-        HashMap<String, Uid> hashMap = this.mUidMap;
+        HashMap<String, Uid> map = this.mUidMap;
         for (Uid uid : list) {
-            hashMap.put(uid.getUidValue(), uid);
+            map.put(uid.getUidValue(), uid);
         }
         Iterator<Uid> it = list.iterator();
         while (it.hasNext()) {
-            if (isRefUidCausesLoop(hashMap, it.next().getUidValue())) {
+            if (isRefUidCausesLoop(map, it.next().getUidValue())) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isRefUidCausesLoop(HashMap<String, Uid> hashMap, String str) {
+    private boolean isRefUidCausesLoop(HashMap<String, Uid> map, String str) {
         if (str == null) {
             return false;
         }
-        String virtualRefUid = getVirtualRefUid(hashMap, str);
+        String virtualRefUid = getVirtualRefUid(map, str);
         for (int i = 0; i < 20 && virtualRefUid != null; i++) {
             if (str.equals(virtualRefUid)) {
                 return true;
             }
-            virtualRefUid = getVirtualRefUid(hashMap, virtualRefUid);
+            virtualRefUid = getVirtualRefUid(map, virtualRefUid);
         }
         return false;
     }
 
-    public String getVirtualRefUid(HashMap<String, Uid> hashMap, String str) {
+    public String getVirtualRefUid(HashMap<String, Uid> map, String str) {
         String reference;
-        Uid uid = hashMap.get(str);
+        Uid uid = map.get(str);
         if (uid == null || (reference = uid.getReference()) == null || reference.isEmpty()) {
             return null;
         }
@@ -197,7 +197,7 @@ public class MetaDataManager {
         return this.mPackageList;
     }
 
-    public void writeLastPackageList() {
+    public void writeLastPackageList() throws IOException {
         File file = new File(WallpaperThemeConstants.RESID_TABLE_PATH);
         if (!file.exists()) {
             try {
@@ -233,8 +233,8 @@ public class MetaDataManager {
     public String getRefUid(String str) {
         Uid uid;
         String reference;
-        HashMap<String, Uid> hashMap = this.mUidMap;
-        if (hashMap == null || (uid = hashMap.get(str)) == null || (reference = uid.getReference()) == null || reference.isEmpty()) {
+        HashMap<String, Uid> map = this.mUidMap;
+        if (map == null || (uid = map.get(str)) == null || (reference = uid.getReference()) == null || reference.isEmpty()) {
             return null;
         }
         return reference;
@@ -258,15 +258,15 @@ public class MetaDataManager {
         if (str == null) {
             return;
         }
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (Map.Entry<String, Uid> entry : this.mUidMap.entrySet()) {
             if (entry.getKey() != null) {
                 if (entry.getKey().startsWith(str + NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
-                    hashMap.put(entry.getKey(), entry.getValue());
+                    map.put(entry.getKey(), entry.getValue());
                 }
             }
         }
-        Iterator it = hashMap.entrySet().iterator();
+        Iterator it = map.entrySet().iterator();
         while (it.hasNext()) {
             this.mUidMap.remove(((Map.Entry) it.next()).getKey());
         }

@@ -40,7 +40,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaTttSenderCoordinator implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -54,19 +53,18 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
     public final Map stateMap = new LinkedHashMap();
     public final MediaTttSenderCoordinator$commandQueueCallbacks$1 commandQueueCallbacks = new CommandQueue.Callbacks() { // from class: com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$commandQueueCallbacks$1
         @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
-        public final void updateMediaTapToTransferSenderDisplay(int i, MediaRoute2Info mediaRoute2Info, IUndoMediaTransferCallback iUndoMediaTransferCallback) {
-            MediaTttSenderCoordinator.access$updateMediaTapToTransferSenderDisplay(MediaTttSenderCoordinator.this, i, mediaRoute2Info, iUndoMediaTransferCallback);
+        public final void updateMediaTapToTransferSenderDisplay(int i, MediaRoute2Info mediaRoute2Info, IUndoMediaTransferCallback iUndoMediaTransferCallback) throws Throwable {
+            MediaTttSenderCoordinator.access$updateMediaTapToTransferSenderDisplay(this.this$0, i, mediaRoute2Info, iUndoMediaTransferCallback);
         }
     };
     public final MediaTttSenderCoordinator$displayListener$1 displayListener = new TemporaryViewDisplayController.Listener() { // from class: com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$displayListener$1
         @Override // com.android.systemui.temporarydisplay.TemporaryViewDisplayController.Listener
         public final void onInfoPermanentlyRemoved(String str, String str2) {
             int i = MediaTttSenderCoordinator.$r8$clinit;
-            MediaTttSenderCoordinator.this.removeIdFromStore(str, str2);
+            this.this$0.removeIdFromStore(str, str2);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -96,25 +94,25 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
         this.defaultTimeout = context.getResources().getInteger(R.integer.heads_up_notification_decay);
     }
 
-    public static final void access$updateMediaTapToTransferSenderDisplay(final MediaTttSenderCoordinator mediaTttSenderCoordinator, int i, final MediaRoute2Info mediaRoute2Info, final IUndoMediaTransferCallback iUndoMediaTransferCallback) {
-        String str;
-        InstanceId newInstanceId;
-        boolean isValidNextState;
+    public static final void access$updateMediaTapToTransferSenderDisplay(final MediaTttSenderCoordinator mediaTttSenderCoordinator, int i, final MediaRoute2Info mediaRoute2Info, final IUndoMediaTransferCallback iUndoMediaTransferCallback) throws Throwable {
+        String strName;
+        InstanceId instanceIdNewInstanceId;
+        boolean zIsValidNextState;
         InstanceId instanceId;
-        String name;
+        String strName2;
         int i2;
         mediaTttSenderCoordinator.getClass();
         ChipStateSender.Companion.getClass();
-        ChipbarEndItem chipbarEndItem = null;
+        ChipbarEndItem button = null;
         try {
         } catch (NoSuchElementException e) {
             Log.e("ChipStateSender", "Could not find requested state " + i, e);
-            r7 = null;
+            chipStateSender = null;
         }
         for (ChipStateSender chipStateSender : ChipStateSender.values()) {
             if (chipStateSender.getStateInt() == i) {
-                if (chipStateSender == null || (str = chipStateSender.name()) == null) {
-                    str = "Invalid";
+                if (chipStateSender == null || (strName = chipStateSender.name()) == null) {
+                    strName = "Invalid";
                 }
                 String id = mediaRoute2Info.getId();
                 String clientPackageName = mediaRoute2Info.getClientPackageName();
@@ -124,47 +122,47 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                 LogLevel logLevel = LogLevel.DEBUG;
                 MediaTttLoggerUtils$$ExternalSyntheticLambda0 mediaTttLoggerUtils$$ExternalSyntheticLambda0 = new MediaTttLoggerUtils$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer = mediaTttSenderLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("MediaTttSender", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                logMessageImpl.str1 = str;
+                LogMessage logMessageObtain = logBuffer.obtain("MediaTttSender", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = strName;
                 logMessageImpl.str2 = id;
                 logMessageImpl.str3 = clientPackageName;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 if (chipStateSender == null) {
-                    LogMessage obtain2 = logBuffer.obtain("MediaTttSender", LogLevel.ERROR, new MediaTttLoggerUtils$$ExternalSyntheticLambda0(0), null);
-                    ((LogMessageImpl) obtain2).int1 = i;
-                    logBuffer.commit(obtain2);
+                    LogMessage logMessageObtain2 = logBuffer.obtain("MediaTttSender", LogLevel.ERROR, new MediaTttLoggerUtils$$ExternalSyntheticLambda0(0), null);
+                    ((LogMessageImpl) logMessageObtain2).int1 = i;
+                    logBuffer.commit(logMessageObtain2);
                     return;
                 }
                 Pair pair = (Pair) ((LinkedHashMap) mediaTttSenderCoordinator.stateMap).get(mediaRoute2Info.getId());
                 ChipStateSender chipStateSender2 = pair != null ? (ChipStateSender) pair.getSecond() : null;
                 Pair pair2 = (Pair) ((LinkedHashMap) mediaTttSenderCoordinator.stateMap).get(mediaRoute2Info.getId());
                 ChipbarCoordinator chipbarCoordinator = mediaTttSenderCoordinator.chipbarCoordinator;
-                if (pair2 == null || (newInstanceId = (InstanceId) pair2.getFirst()) == null) {
-                    newInstanceId = chipbarCoordinator.tempViewUiEventLogger.instanceIdSequence.newInstanceId();
+                if (pair2 == null || (instanceIdNewInstanceId = (InstanceId) pair2.getFirst()) == null) {
+                    instanceIdNewInstanceId = chipbarCoordinator.tempViewUiEventLogger.instanceIdSequence.newInstanceId();
                 }
                 ChipStateSender.Companion companion = ChipStateSender.Companion;
                 companion.getClass();
                 if (chipStateSender2 == null) {
                     ((ChipStateSender.FAR_FROM_RECEIVER) ChipStateSender.FAR_FROM_RECEIVER).getClass();
-                    isValidNextState = ChipStateSender.Companion.access$stateIsStartOfSequence(companion, chipStateSender);
+                    zIsValidNextState = ChipStateSender.Companion.access$stateIsStartOfSequence(companion, chipStateSender);
                 } else {
-                    isValidNextState = chipStateSender2 == chipStateSender ? true : chipStateSender2.isValidNextState(chipStateSender);
+                    zIsValidNextState = chipStateSender2 == chipStateSender ? true : chipStateSender2.isValidNextState(chipStateSender);
                 }
-                String str2 = "FAR_FROM_RECEIVER";
-                if (!isValidNextState) {
-                    if (chipStateSender2 != null && (name = chipStateSender2.name()) != null) {
-                        str2 = name;
+                String str = "FAR_FROM_RECEIVER";
+                if (!zIsValidNextState) {
+                    if (chipStateSender2 != null && (strName2 = chipStateSender2.name()) != null) {
+                        str = strName2;
                     }
-                    String name2 = chipStateSender.name();
-                    LogMessage obtain3 = logBuffer.obtain("MediaTttSender", LogLevel.ERROR, new MediaTttSenderLogger$$ExternalSyntheticLambda0(2), null);
-                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain3;
-                    logMessageImpl2.str1 = str2;
-                    logMessageImpl2.str2 = name2;
-                    logBuffer.commit(obtain3);
+                    String strName3 = chipStateSender.name();
+                    LogMessage logMessageObtain3 = logBuffer.obtain("MediaTttSender", LogLevel.ERROR, new MediaTttSenderLogger$$ExternalSyntheticLambda0(2), null);
+                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
+                    logMessageImpl2.str1 = str;
+                    logMessageImpl2.str2 = strName3;
+                    logBuffer.commit(logMessageObtain3);
                     return;
                 }
-                mediaTttSenderCoordinator.uiEventLogger.logger.log(chipStateSender.getUiEvent(), newInstanceId);
+                mediaTttSenderCoordinator.uiEventLogger.logger.log(chipStateSender.getUiEvent(), instanceIdNewInstanceId);
                 if (chipStateSender == ChipStateSender.FAR_FROM_RECEIVER) {
                     if (chipStateSender2 == null) {
                         return;
@@ -174,19 +172,19 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                         chipbarCoordinator.removeView(mediaRoute2Info.getId(), "FAR_FROM_RECEIVER");
                         return;
                     }
-                    String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("transferStatus=", chipStateSender2.getTransferStatus().name());
-                    LogMessage obtain4 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(3), null);
-                    LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain4;
+                    String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("transferStatus=", chipStateSender2.getTransferStatus().name());
+                    LogMessage logMessageObtain4 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(3), null);
+                    LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain4;
                     logMessageImpl3.str1 = "FAR_FROM_RECEIVER";
-                    logMessageImpl3.str2 = m;
-                    logBuffer.commit(obtain4);
+                    logMessageImpl3.str2 = strM;
+                    logBuffer.commit(logMessageObtain4);
                     return;
                 }
-                mediaTttSenderCoordinator.stateMap.put(mediaRoute2Info.getId(), new Pair(newInstanceId, chipStateSender));
+                mediaTttSenderCoordinator.stateMap.put(mediaRoute2Info.getId(), new Pair(instanceIdNewInstanceId, chipStateSender));
                 Map map = mediaTttSenderCoordinator.stateMap;
-                LogMessage obtain5 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(1), null);
-                ((LogMessageImpl) obtain5).str1 = map.toString();
-                logBuffer.commit(obtain5);
+                LogMessage logMessageObtain5 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(1), null);
+                ((LogMessageImpl) logMessageObtain5).str1 = map.toString();
+                logBuffer.commit(logMessageObtain5);
                 chipbarCoordinator.listeners.add(mediaTttSenderCoordinator.displayListener);
                 Context context = mediaTttSenderCoordinator.context;
                 final String clientPackageName2 = mediaRoute2Info.getClientPackageName();
@@ -197,17 +195,17 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         int i3 = MediaTttSenderCoordinator.$r8$clinit;
-                        String str3 = clientPackageName2;
-                        if (str3 != null) {
+                        String str2 = clientPackageName2;
+                        if (str2 != null) {
                             MediaTttSenderLogger mediaTttSenderLogger2 = mediaTttSenderLogger;
                             mediaTttSenderLogger2.getClass();
                             MediaTttLoggerUtils.INSTANCE.getClass();
                             LogLevel logLevel2 = LogLevel.DEBUG;
                             MediaTttLoggerUtils$$ExternalSyntheticLambda0 mediaTttLoggerUtils$$ExternalSyntheticLambda02 = new MediaTttLoggerUtils$$ExternalSyntheticLambda0(1);
                             LogBuffer logBuffer2 = mediaTttSenderLogger2.buffer;
-                            LogMessage obtain6 = logBuffer2.obtain("MediaTttSender", logLevel2, mediaTttLoggerUtils$$ExternalSyntheticLambda02, null);
-                            ((LogMessageImpl) obtain6).str1 = str3;
-                            logBuffer2.commit(obtain6);
+                            LogMessage logMessageObtain6 = logBuffer2.obtain("MediaTttSender", logLevel2, mediaTttLoggerUtils$$ExternalSyntheticLambda02, null);
+                            ((LogMessageImpl) logMessageObtain6).str1 = str2;
+                            logBuffer2.commit(logMessageObtain6);
                         }
                         return Unit.INSTANCE;
                     }
@@ -228,9 +226,9 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                 SenderEndItem endItem = chipStateSender.getEndItem();
                 if (endItem != null) {
                     if (endItem instanceof SenderEndItem.Loading) {
-                        chipbarEndItem = ChipbarEndItem.Loading.INSTANCE;
+                        button = ChipbarEndItem.Loading.INSTANCE;
                     } else if (endItem instanceof SenderEndItem.Error) {
-                        chipbarEndItem = ChipbarEndItem.Error.INSTANCE;
+                        button = ChipbarEndItem.Error.INSTANCE;
                     } else {
                         if (!(endItem instanceof SenderEndItem.UndoButton)) {
                             throw new NoWhenBranchMatchedException();
@@ -238,12 +236,12 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                         if (iUndoMediaTransferCallback != null) {
                             final UiEventLogger.UiEventEnum uiEventEnum = ((SenderEndItem.UndoButton) chipStateSender.getEndItem()).uiEventOnClick;
                             final int i6 = ((SenderEndItem.UndoButton) chipStateSender.getEndItem()).newState;
-                            final InstanceId instanceId2 = newInstanceId;
+                            final InstanceId instanceId2 = instanceIdNewInstanceId;
                             instanceId = instanceId2;
-                            chipbarEndItem = new ChipbarEndItem.Button(new Text.Resource(R.string.media_transfer_undo), new View.OnClickListener() { // from class: com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$getUndoButton$onClickListener$1
+                            button = new ChipbarEndItem.Button(new Text.Resource(R.string.media_transfer_undo), new View.OnClickListener() { // from class: com.android.systemui.media.taptotransfer.sender.MediaTttSenderCoordinator$getUndoButton$onClickListener$1
                                 @Override // android.view.View.OnClickListener
-                                public final void onClick(View view) {
-                                    MediaTttSenderUiEventLogger mediaTttSenderUiEventLogger = MediaTttSenderCoordinator.this.uiEventLogger;
+                                public final void onClick(View view) throws Throwable {
+                                    MediaTttSenderUiEventLogger mediaTttSenderUiEventLogger = this.this$0.uiEventLogger;
                                     UiEventLogger.UiEventEnum uiEventEnum2 = uiEventEnum;
                                     InstanceId instanceId3 = instanceId2;
                                     mediaTttSenderUiEventLogger.getClass();
@@ -255,16 +253,16 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
                                         Log.w(simpleName, "Must pass an undo-specific UiEvent.");
                                     }
                                     iUndoMediaTransferCallback.onUndoTriggered();
-                                    MediaTttSenderCoordinator.access$updateMediaTapToTransferSenderDisplay(MediaTttSenderCoordinator.this, i6, mediaRoute2Info, null);
+                                    MediaTttSenderCoordinator.access$updateMediaTapToTransferSenderDisplay(this.this$0, i6, mediaRoute2Info, null);
                                 }
                             });
-                            chipbarCoordinator.displayView(new ChipbarInfo(tintedIcon, chipTextString, chipbarEndItem, chipStateSender.getTransferStatus().getVibrationEffect(), true, "Media Transfer Chip View (Sender)", "MEDIA_TRANSFER_ACTIVATED_SENDER", i5, mediaRoute2Info.getId(), ViewPriority.NORMAL, instanceId));
-                            return;
                         }
                     }
+                    instanceId = instanceIdNewInstanceId;
+                } else {
+                    instanceId = instanceIdNewInstanceId;
                 }
-                instanceId = newInstanceId;
-                chipbarCoordinator.displayView(new ChipbarInfo(tintedIcon, chipTextString, chipbarEndItem, chipStateSender.getTransferStatus().getVibrationEffect(), true, "Media Transfer Chip View (Sender)", "MEDIA_TRANSFER_ACTIVATED_SENDER", i5, mediaRoute2Info.getId(), ViewPriority.NORMAL, instanceId));
+                chipbarCoordinator.displayView(new ChipbarInfo(tintedIcon, chipTextString, button, chipStateSender.getTransferStatus().getVibrationEffect(), true, "Media Transfer Chip View (Sender)", "MEDIA_TRANSFER_ACTIVATED_SENDER", i5, mediaRoute2Info.getId(), ViewPriority.NORMAL, instanceId));
                 return;
             }
         }
@@ -283,16 +281,16 @@ public final class MediaTttSenderCoordinator implements CoreStartable {
         LogLevel logLevel = LogLevel.DEBUG;
         MediaTttSenderLogger$$ExternalSyntheticLambda0 mediaTttSenderLogger$$ExternalSyntheticLambda0 = new MediaTttSenderLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = mediaTttSenderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MediaTttSender", logLevel, mediaTttSenderLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MediaTttSender", logLevel, mediaTttSenderLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = str2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.stateMap.remove(str);
         Map map = this.stateMap;
-        LogMessage obtain2 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain2).str1 = map.toString();
-        logBuffer.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer.obtain("MediaTttSender", logLevel, new MediaTttSenderLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain2).str1 = map.toString();
+        logBuffer.commit(logMessageObtain2);
         if (this.stateMap.isEmpty()) {
             this.chipbarCoordinator.listeners.remove(this.displayListener);
         }

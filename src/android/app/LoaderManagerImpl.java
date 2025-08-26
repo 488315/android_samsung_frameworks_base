@@ -2,6 +2,7 @@ package android.app;
 
 import android.app.LoaderManager;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DebugUtils;
 import android.util.Log;
@@ -136,11 +137,11 @@ class LoaderManagerImpl extends LoaderManager {
             if (!this.mStarted || (loader = this.mLoader) == null || !this.mListenerRegistered) {
                 return false;
             }
-            boolean cancelLoad = loader.cancelLoad();
-            if (!cancelLoad) {
+            boolean zCancelLoad = loader.cancelLoad();
+            if (!zCancelLoad) {
                 onLoadCanceled(this.mLoader);
             }
-            return cancelLoad;
+            return zCancelLoad;
         }
 
         void destroy() {
@@ -219,7 +220,7 @@ class LoaderManagerImpl extends LoaderManager {
         }
 
         @Override // android.content.Loader.OnLoadCompleteListener
-        public void onLoadComplete(Loader<Object> loader, Object obj) {
+        public void onLoadComplete(Loader<Object> loader, Object obj) throws Resources.NotFoundException {
             if (LoaderManagerImpl.DEBUG) {
                 Log.v(LoaderManagerImpl.TAG, "onLoadComplete: " + this);
             }
@@ -376,9 +377,9 @@ class LoaderManagerImpl extends LoaderManager {
     private LoaderInfo createAndInstallLoader(int i, Bundle bundle, LoaderManager.LoaderCallbacks<Object> loaderCallbacks) {
         try {
             this.mCreatingLoader = true;
-            LoaderInfo createLoader = createLoader(i, bundle, loaderCallbacks);
-            installLoader(createLoader);
-            return createLoader;
+            LoaderInfo loaderInfoCreateLoader = createLoader(i, bundle, loaderCallbacks);
+            installLoader(loaderInfoCreateLoader);
+            return loaderInfoCreateLoader;
         } finally {
             this.mCreatingLoader = false;
         }
@@ -396,25 +397,25 @@ class LoaderManagerImpl extends LoaderManager {
         if (this.mCreatingLoader) {
             throw new IllegalStateException("Called while creating a loader");
         }
-        LoaderInfo loaderInfo = this.mLoaders.get(i);
+        LoaderInfo loaderInfoCreateAndInstallLoader = this.mLoaders.get(i);
         if (DEBUG) {
             Log.v(TAG, "initLoader in " + this + ": args=" + bundle);
         }
-        if (loaderInfo == null) {
-            loaderInfo = createAndInstallLoader(i, bundle, loaderCallbacks);
+        if (loaderInfoCreateAndInstallLoader == null) {
+            loaderInfoCreateAndInstallLoader = createAndInstallLoader(i, bundle, loaderCallbacks);
             if (DEBUG) {
-                Log.v(TAG, "  Created new loader " + loaderInfo);
+                Log.v(TAG, "  Created new loader " + loaderInfoCreateAndInstallLoader);
             }
         } else {
             if (DEBUG) {
-                Log.v(TAG, "  Re-using existing loader " + loaderInfo);
+                Log.v(TAG, "  Re-using existing loader " + loaderInfoCreateAndInstallLoader);
             }
-            loaderInfo.mCallbacks = loaderCallbacks;
+            loaderInfoCreateAndInstallLoader.mCallbacks = loaderCallbacks;
         }
-        if (loaderInfo.mHaveData && this.mStarted) {
-            loaderInfo.callOnLoadFinished(loaderInfo.mLoader, loaderInfo.mData);
+        if (loaderInfoCreateAndInstallLoader.mHaveData && this.mStarted) {
+            loaderInfoCreateAndInstallLoader.callOnLoadFinished(loaderInfoCreateAndInstallLoader.mLoader, loaderInfoCreateAndInstallLoader.mData);
         }
-        return (Loader<D>) loaderInfo.mLoader;
+        return (Loader<D>) loaderInfoCreateAndInstallLoader.mLoader;
     }
 
     @Override // android.app.LoaderManager
@@ -472,24 +473,24 @@ class LoaderManagerImpl extends LoaderManager {
     }
 
     @Override // android.app.LoaderManager
-    public void destroyLoader(int i) {
+    public void destroyLoader(int i) throws Resources.NotFoundException {
         if (this.mCreatingLoader) {
             throw new IllegalStateException("Called while creating a loader");
         }
         if (DEBUG) {
             Log.v(TAG, "destroyLoader in " + this + " of " + i);
         }
-        int indexOfKey = this.mLoaders.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            LoaderInfo valueAt = this.mLoaders.valueAt(indexOfKey);
-            this.mLoaders.removeAt(indexOfKey);
-            valueAt.destroy();
+        int iIndexOfKey = this.mLoaders.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            LoaderInfo loaderInfoValueAt = this.mLoaders.valueAt(iIndexOfKey);
+            this.mLoaders.removeAt(iIndexOfKey);
+            loaderInfoValueAt.destroy();
         }
-        int indexOfKey2 = this.mInactiveLoaders.indexOfKey(i);
-        if (indexOfKey2 >= 0) {
-            LoaderInfo valueAt2 = this.mInactiveLoaders.valueAt(indexOfKey2);
-            this.mInactiveLoaders.removeAt(indexOfKey2);
-            valueAt2.destroy();
+        int iIndexOfKey2 = this.mInactiveLoaders.indexOfKey(i);
+        if (iIndexOfKey2 >= 0) {
+            LoaderInfo loaderInfoValueAt2 = this.mInactiveLoaders.valueAt(iIndexOfKey2);
+            this.mInactiveLoaders.removeAt(iIndexOfKey2);
+            loaderInfoValueAt2.destroy();
         }
         if (this.mHost == null || hasRunningLoaders()) {
             return;
@@ -616,13 +617,13 @@ class LoaderManagerImpl extends LoaderManager {
             printWriter.println("Active Loaders:");
             String str2 = str + "    ";
             for (int i = 0; i < this.mLoaders.size(); i++) {
-                LoaderInfo valueAt = this.mLoaders.valueAt(i);
+                LoaderInfo loaderInfoValueAt = this.mLoaders.valueAt(i);
                 printWriter.print(str);
                 printWriter.print("  #");
                 printWriter.print(this.mLoaders.keyAt(i));
                 printWriter.print(": ");
-                printWriter.println(valueAt.toString());
-                valueAt.dump(str2, fileDescriptor, printWriter, strArr);
+                printWriter.println(loaderInfoValueAt.toString());
+                loaderInfoValueAt.dump(str2, fileDescriptor, printWriter, strArr);
             }
         }
         if (this.mInactiveLoaders.size() > 0) {
@@ -630,13 +631,13 @@ class LoaderManagerImpl extends LoaderManager {
             printWriter.println("Inactive Loaders:");
             String str3 = str + "    ";
             for (int i2 = 0; i2 < this.mInactiveLoaders.size(); i2++) {
-                LoaderInfo valueAt2 = this.mInactiveLoaders.valueAt(i2);
+                LoaderInfo loaderInfoValueAt2 = this.mInactiveLoaders.valueAt(i2);
                 printWriter.print(str);
                 printWriter.print("  #");
                 printWriter.print(this.mInactiveLoaders.keyAt(i2));
                 printWriter.print(": ");
-                printWriter.println(valueAt2.toString());
-                valueAt2.dump(str3, fileDescriptor, printWriter, strArr);
+                printWriter.println(loaderInfoValueAt2.toString());
+                loaderInfoValueAt2.dump(str3, fileDescriptor, printWriter, strArr);
             }
         }
     }
@@ -645,8 +646,8 @@ class LoaderManagerImpl extends LoaderManager {
         int size = this.mLoaders.size();
         boolean z = false;
         for (int i = 0; i < size; i++) {
-            LoaderInfo valueAt = this.mLoaders.valueAt(i);
-            z |= valueAt.mStarted && !valueAt.mDeliveredData;
+            LoaderInfo loaderInfoValueAt = this.mLoaders.valueAt(i);
+            z |= loaderInfoValueAt.mStarted && !loaderInfoValueAt.mDeliveredData;
         }
         return z;
     }

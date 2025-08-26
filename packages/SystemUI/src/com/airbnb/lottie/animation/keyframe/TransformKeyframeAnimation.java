@@ -16,7 +16,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import com.airbnb.lottie.value.ScaleXY;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TransformKeyframeAnimation {
     public BaseKeyframeAnimation anchorPoint;
@@ -246,35 +245,35 @@ public class TransformKeyframeAnimation {
         }
         BaseKeyframeAnimation baseKeyframeAnimation2 = this.rotation;
         if (baseKeyframeAnimation2 != null) {
-            float floatValue = baseKeyframeAnimation2 instanceof ValueCallbackKeyframeAnimation ? ((Float) baseKeyframeAnimation2.getValue()).floatValue() : ((FloatKeyframeAnimation) baseKeyframeAnimation2).getFloatValue();
-            if (floatValue != 0.0f) {
-                this.matrix.preRotate(floatValue);
+            float fFloatValue = baseKeyframeAnimation2 instanceof ValueCallbackKeyframeAnimation ? ((Float) baseKeyframeAnimation2.getValue()).floatValue() : ((FloatKeyframeAnimation) baseKeyframeAnimation2).getFloatValue();
+            if (fFloatValue != 0.0f) {
+                this.matrix.preRotate(fFloatValue);
             }
         }
         if (this.skew != null) {
-            float cos = this.skewAngle == null ? 0.0f : (float) Math.cos(Math.toRadians((-r3.getFloatValue()) + 90.0f));
-            float sin = this.skewAngle == null ? 1.0f : (float) Math.sin(Math.toRadians((-r5.getFloatValue()) + 90.0f));
-            float tan = (float) Math.tan(Math.toRadians(r0.getFloatValue()));
+            float fCos = this.skewAngle == null ? 0.0f : (float) Math.cos(Math.toRadians((-r3.getFloatValue()) + 90.0f));
+            float fSin = this.skewAngle == null ? 1.0f : (float) Math.sin(Math.toRadians((-r5.getFloatValue()) + 90.0f));
+            float fTan = (float) Math.tan(Math.toRadians(r0.getFloatValue()));
             clearSkewValues();
             float[] fArr = this.skewValues;
-            fArr[0] = cos;
-            fArr[1] = sin;
-            float f2 = -sin;
+            fArr[0] = fCos;
+            fArr[1] = fSin;
+            float f2 = -fSin;
             fArr[3] = f2;
-            fArr[4] = cos;
+            fArr[4] = fCos;
             fArr[8] = 1.0f;
             this.skewMatrix1.setValues(fArr);
             clearSkewValues();
             fArr[0] = 1.0f;
-            fArr[3] = tan;
+            fArr[3] = fTan;
             fArr[4] = 1.0f;
             fArr[8] = 1.0f;
             this.skewMatrix2.setValues(fArr);
             clearSkewValues();
-            fArr[0] = cos;
+            fArr[0] = fCos;
             fArr[1] = f2;
-            fArr[3] = sin;
-            fArr[4] = cos;
+            fArr[3] = fSin;
+            fArr[4] = fCos;
             fArr[8] = 1.0f;
             this.skewMatrix3.setValues(fArr);
             this.skewMatrix2.preConcat(this.skewMatrix1);
@@ -311,10 +310,10 @@ public class TransformKeyframeAnimation {
         }
         BaseKeyframeAnimation baseKeyframeAnimation3 = this.rotation;
         if (baseKeyframeAnimation3 != null) {
-            float floatValue = ((Float) baseKeyframeAnimation3.getValue()).floatValue();
+            float fFloatValue = ((Float) baseKeyframeAnimation3.getValue()).floatValue();
             BaseKeyframeAnimation baseKeyframeAnimation4 = this.anchorPoint;
             PointF pointF2 = baseKeyframeAnimation4 != null ? (PointF) baseKeyframeAnimation4.getValue() : null;
-            this.matrix.preRotate(floatValue * f, pointF2 == null ? 0.0f : pointF2.x, pointF2 != null ? pointF2.y : 0.0f);
+            this.matrix.preRotate(fFloatValue * f, pointF2 == null ? 0.0f : pointF2.x, pointF2 != null ? pointF2.y : 0.0f);
         }
         return this.matrix;
     }

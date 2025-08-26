@@ -6,7 +6,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LocaleInfo implements Parcelable {
     public static final Parcelable.Creator<LocaleInfo> CREATOR = new Parcelable.Creator<LocaleInfo>() { // from class: com.samsung.android.sivs.ai.sdkcommon.asr.LocaleInfo.1

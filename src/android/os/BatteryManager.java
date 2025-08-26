@@ -283,9 +283,9 @@ public class BatteryManager {
 
     public int getIntProperty(int i) {
         Context context;
-        long queryProperty = queryProperty(i);
-        if (queryProperty != Long.MIN_VALUE || (context = this.mContext) == null || context.getApplicationInfo().targetSdkVersion < 28) {
-            return (int) queryProperty;
+        long jQueryProperty = queryProperty(i);
+        if (jQueryProperty != Long.MIN_VALUE || (context = this.mContext) == null || context.getApplicationInfo().targetSdkVersion < 28) {
+            return (int) jQueryProperty;
         }
         return Integer.MIN_VALUE;
     }

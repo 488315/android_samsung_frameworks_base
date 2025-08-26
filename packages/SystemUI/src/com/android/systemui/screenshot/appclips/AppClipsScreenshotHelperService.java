@@ -10,12 +10,10 @@ import com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSynthe
 import com.android.wm.shell.bubbles.Bubbles;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AppClipsScreenshotHelperService extends Service {
     public final Optional mOptionalBubbles;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenshot.appclips.AppClipsScreenshotHelperService$1, reason: invalid class name */
     public class AnonymousClass1 extends IAppClipsScreenshotHelperService.Stub {
         public AnonymousClass1() {
@@ -28,9 +26,9 @@ public class AppClipsScreenshotHelperService extends Service {
             }
             BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) ((Bubbles) AppClipsScreenshotHelperService.this.mOptionalBubbles.get());
             bubblesImpl.getClass();
-            ScreenCapture.SynchronousScreenCaptureListener createSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
-            BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(bubblesImpl, i, createSyncCaptureListener));
-            ScreenCapture.ScreenshotHardwareBuffer buffer = createSyncCaptureListener.getBuffer();
+            ScreenCapture.SynchronousScreenCaptureListener synchronousScreenCaptureListenerCreateSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
+            BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(bubblesImpl, i, synchronousScreenCaptureListenerCreateSyncCaptureListener));
+            ScreenCapture.ScreenshotHardwareBuffer buffer = synchronousScreenCaptureListenerCreateSyncCaptureListener.getBuffer();
             if (buffer == null) {
                 return null;
             }

@@ -7,7 +7,6 @@ import android.util.Log;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.samsung.android.wifi.SemWifiManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WiFiManagerExt {
     public static final int SEC_COMMAND_ID_DELAY_DISCONNECT_TRANSITION = getIntFromField("SEC_COMMAND_ID_DELAY_DISCONNECT_TRANSITION", 81);

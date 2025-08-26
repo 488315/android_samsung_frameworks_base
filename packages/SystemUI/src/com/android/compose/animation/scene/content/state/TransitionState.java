@@ -13,7 +13,6 @@ import com.android.compose.animation.scene.SceneTransitionLayoutImpl;
 import com.android.compose.animation.scene.TransformationSpec;
 import com.android.compose.animation.scene.TransformationSpecImpl;
 import com.android.compose.animation.scene.TransitionKey;
-import com.android.compose.animation.scene.content.state.TransitionState;
 import java.util.Set;
 import kotlin.Unit;
 import kotlin.collections.EmptySet;
@@ -28,11 +27,9 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface TransitionState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Transition implements TransitionState {
         public CoroutineScope _coroutineScope;
         public Integer _cuj;
@@ -46,7 +43,6 @@ public interface TransitionState {
         public final ContentKey toContent;
         public TransformationSpecImpl transformationSpec;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class ChangeScene extends Transition {
             public final SceneKey fromScene;
             public final SceneKey toScene;
@@ -75,7 +71,6 @@ public interface TransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class OverlayTransition extends Transition {
             public final State currentOverlays$delegate;
 
@@ -104,13 +99,12 @@ public interface TransitionState {
                 this.currentOverlays$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.compose.animation.scene.content.state.TransitionState$Transition$OverlayTransition$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        return TransitionState.Transition.OverlayTransition.this.computeCurrentOverlays();
+                        return this.f$0.computeCurrentOverlays();
                     }
                 });
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class ReplaceOverlay extends OverlayTransition {
             public final OverlayKey fromOverlay;
             public final OverlayKey toOverlay;
@@ -123,9 +117,9 @@ public interface TransitionState {
             public final Set computeCurrentOverlays() {
                 OverlayKey effectivelyShownOverlay = getEffectivelyShownOverlay();
                 OverlayKey overlayKey = this.fromOverlay;
-                boolean areEqual = Intrinsics.areEqual(effectivelyShownOverlay, overlayKey);
+                boolean zAreEqual = Intrinsics.areEqual(effectivelyShownOverlay, overlayKey);
                 OverlayKey overlayKey2 = this.toOverlay;
-                if (areEqual) {
+                if (zAreEqual) {
                     SetBuilder setBuilder = new SetBuilder();
                     Set set = this.currentOverlaysWhenTransitionStarted;
                     setBuilder.addAll(set != null ? set : null);
@@ -160,7 +154,6 @@ public interface TransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class ShowOrHideOverlay extends OverlayTransition {
             public final SceneKey fromOrToScene;
             public final OverlayKey overlay;
@@ -171,9 +164,9 @@ public interface TransitionState {
 
             @Override // com.android.compose.animation.scene.content.state.TransitionState.Transition.OverlayTransition
             public final Set computeCurrentOverlays() {
-                boolean isEffectivelyShown = isEffectivelyShown();
+                boolean zIsEffectivelyShown = isEffectivelyShown();
                 OverlayKey overlayKey = this.overlay;
-                if (isEffectivelyShown) {
+                if (zIsEffectivelyShown) {
                     Set set = this.currentOverlaysWhenTransitionStarted;
                     return SetsKt___SetsKt.plus(set != null ? set : null, overlayKey);
                 }
@@ -232,13 +225,13 @@ public interface TransitionState {
             if (transition != null) {
                 return transition.interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(sceneTransitionLayoutImpl);
             }
-            Animatable animatable = this.interruptionDecay;
-            if (animatable == null) {
-                animatable = AnimatableKt.Animatable(1.0f, 0.001f);
-                BuildersKt.launch$default(sceneTransitionLayoutImpl.animationScope, null, null, new TransitionState$Transition$interruptionProgress$create$1(animatable, sceneTransitionLayoutImpl, null), 3);
-                this.interruptionDecay = animatable;
+            Animatable Animatable = this.interruptionDecay;
+            if (Animatable == null) {
+                Animatable = AnimatableKt.Animatable(1.0f, 0.001f);
+                BuildersKt.launch$default(sceneTransitionLayoutImpl.animationScope, null, null, new TransitionState$Transition$interruptionProgress$create$1(Animatable, sceneTransitionLayoutImpl, null), 3);
+                this.interruptionDecay = Animatable;
             }
-            return ((Number) ((SnapshotMutableStateImpl) animatable.internalState.value$delegate).getValue()).floatValue();
+            return ((Number) ((SnapshotMutableStateImpl) Animatable.internalState.value$delegate).getValue()).floatValue();
         }
 
         public boolean isInPreviewStage$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout() {
@@ -255,8 +248,8 @@ public interface TransitionState {
             if (this._coroutineScope != null) {
                 throw new IllegalStateException("A Transition can be started only once.");
             }
-            Object coroutineScope = CoroutineScopeKt.coroutineScope(new TransitionState$Transition$runInternal$3(this, null), continuation);
-            return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+            Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new TransitionState$Transition$runInternal$3(this, null), continuation);
+            return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
         }
 
         private Transition(ContentKey contentKey, ContentKey contentKey2, Transition transition) {
@@ -285,7 +278,6 @@ public interface TransitionState {
 
     SceneKey getCurrentScene();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Idle implements TransitionState {
         public final Set currentOverlays;
         public final SceneKey currentScene;

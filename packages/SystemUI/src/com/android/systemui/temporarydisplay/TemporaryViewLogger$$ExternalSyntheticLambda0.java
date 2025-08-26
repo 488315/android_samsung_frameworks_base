@@ -9,7 +9,6 @@ import com.android.systemui.temporarydisplay.TemporaryViewLogger;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class TemporaryViewLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +19,7 @@ public final /* synthetic */ class TemporaryViewLogger$$ExternalSyntheticLambda0
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -39,9 +38,9 @@ public final /* synthetic */ class TemporaryViewLogger$$ExternalSyntheticLambda0
                 String str2 = logMessage.getStr2();
                 String str3 = logMessage.getStr3();
                 String hexString = Integer.toHexString(logMessage.getInt1());
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Removing view from window manager", str, ". id=", str1, " window=");
-                MoveResult$$ExternalSyntheticOutline0.m(m, str2, " view=", str3, "(id=");
-                return TransitionKt$$ExternalSyntheticOutline0.m(m, hexString, ")");
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Removing view from window manager", str, ". id=", str1, " window=");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM, str2, " view=", str3, "(id=");
+                return TransitionKt$$ExternalSyntheticOutline0.m(sbM, hexString, ")");
             case 4:
                 TemporaryViewLogger.Companion companion5 = TemporaryViewLogger.Companion;
                 return "View's disappearance animation failed.";
@@ -50,33 +49,33 @@ public final /* synthetic */ class TemporaryViewLogger$$ExternalSyntheticLambda0
                 String str12 = logMessage.getStr1();
                 String str22 = logMessage.getStr2();
                 String str32 = logMessage.getStr3();
-                StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View timeout has already expired; removing. id=", str12, " window=", str22, " priority=");
-                m2.append(str32);
-                return m2.toString();
+                StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View timeout has already expired; removing. id=", str12, " window=", str22, " priority=");
+                sbM2.append(str32);
+                return sbM2.toString();
             case 6:
                 TemporaryViewLogger.Companion companion7 = TemporaryViewLogger.Companion;
                 String str13 = logMessage.getStr1();
                 String str23 = logMessage.getStr2();
                 String str33 = logMessage.getStr3();
-                StringBuilder m3 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("New view can't be displayed because higher priority view is currently displayed. New view id=", str13, " window=", str23, " priority=");
-                m3.append(str33);
-                return m3.toString();
+                StringBuilder sbM3 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("New view can't be displayed because higher priority view is currently displayed. New view id=", str13, " window=", str23, " priority=");
+                sbM3.append(str33);
+                return sbM3.toString();
             case 7:
                 TemporaryViewLogger.Companion companion8 = TemporaryViewLogger.Companion;
                 String str14 = logMessage.getStr1();
                 String str24 = logMessage.getStr2();
                 String str34 = logMessage.getStr3();
-                StringBuilder m4 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View hidden in favor of newer view. Hidden view id=", str14, " window=", str24, " priority=");
-                m4.append(str34);
-                return m4.toString();
+                StringBuilder sbM4 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View hidden in favor of newer view. Hidden view id=", str14, " window=", str24, " priority=");
+                sbM4.append(str34);
+                return sbM4.toString();
             case 8:
                 TemporaryViewLogger.Companion companion9 = TemporaryViewLogger.Companion;
                 String str15 = logMessage.getStr1();
                 String str25 = logMessage.getStr2();
                 String str35 = logMessage.getStr3();
-                StringBuilder m5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Existing view updated with new data. id=", str15, " window=", str25, " priority=");
-                m5.append(str35);
-                return m5.toString();
+                StringBuilder sbM5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Existing view updated with new data. id=", str15, " window=", str25, " priority=");
+                sbM5.append(str35);
+                return sbM5.toString();
             case 9:
                 TemporaryViewLogger.Companion companion10 = TemporaryViewLogger.Companion;
                 return AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Removal of view with id=", logMessage.getStr2(), " is ignored because ", logMessage.getStr1());
@@ -85,9 +84,9 @@ public final /* synthetic */ class TemporaryViewLogger$$ExternalSyntheticLambda0
                 String str16 = logMessage.getStr1();
                 String str26 = logMessage.getStr2();
                 String str36 = logMessage.getStr3();
-                StringBuilder m6 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View added. id=", str16, " window=", str26, " priority=");
-                m6.append(str36);
-                return m6.toString();
+                StringBuilder sbM6 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("View added. id=", str16, " window=", str26, " priority=");
+                sbM6.append(str36);
+                return sbM6.toString();
         }
     }
 }

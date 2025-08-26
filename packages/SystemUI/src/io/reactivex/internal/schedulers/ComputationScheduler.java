@@ -12,7 +12,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ComputationScheduler extends Scheduler {
     public static final int MAX_THREADS;
@@ -21,7 +20,6 @@ public final class ComputationScheduler extends Scheduler {
     public static final RxThreadFactory THREAD_FACTORY;
     public final AtomicReference pool;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FixedSchedulerPool {
         public final int cores;
         public final PoolWorker[] eventLoops;
@@ -36,7 +34,6 @@ public final class ComputationScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PoolWorker extends NewThreadWorker {
         public PoolWorker(ThreadFactory threadFactory) {
             super(threadFactory);
@@ -44,12 +41,12 @@ public final class ComputationScheduler extends Scheduler {
     }
 
     static {
-        int availableProcessors = Runtime.getRuntime().availableProcessors();
-        int intValue = Integer.getInteger("rx2.computation-threads", 0).intValue();
-        if (intValue > 0 && intValue <= availableProcessors) {
-            availableProcessors = intValue;
+        int iAvailableProcessors = Runtime.getRuntime().availableProcessors();
+        int iIntValue = Integer.getInteger("rx2.computation-threads", 0).intValue();
+        if (iIntValue > 0 && iIntValue <= iAvailableProcessors) {
+            iAvailableProcessors = iIntValue;
         }
-        MAX_THREADS = availableProcessors;
+        MAX_THREADS = iAvailableProcessors;
         PoolWorker poolWorker = new PoolWorker(new RxThreadFactory("RxComputationShutdown"));
         SHUTDOWN_WORKER = poolWorker;
         poolWorker.dispose();
@@ -118,7 +115,6 @@ public final class ComputationScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EventLoopWorker extends Scheduler.Worker {
         public final ListCompositeDisposable both;
         public volatile boolean disposed;

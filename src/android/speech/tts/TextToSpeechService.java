@@ -111,10 +111,10 @@ public abstract class TextToSpeechService extends Service {
 
         @Override // android.speech.tts.ITextToSpeechService
         public String[] getFeaturesForLanguage(String str, String str2, String str3) {
-            Set<String> onGetFeaturesForLanguage = TextToSpeechService.this.onGetFeaturesForLanguage(str, str2, str3);
-            if (onGetFeaturesForLanguage != null) {
-                String[] strArr = new String[onGetFeaturesForLanguage.size()];
-                onGetFeaturesForLanguage.toArray(strArr);
+            Set<String> setOnGetFeaturesForLanguage = TextToSpeechService.this.onGetFeaturesForLanguage(str, str2, str3);
+            if (setOnGetFeaturesForLanguage != null) {
+                String[] strArr = new String[setOnGetFeaturesForLanguage.size()];
+                setOnGetFeaturesForLanguage.toArray(strArr);
                 return strArr;
             }
             return new String[0];
@@ -125,13 +125,13 @@ public abstract class TextToSpeechService extends Service {
             if (!checkNonNull(str)) {
                 return -1;
             }
-            int onIsLanguageAvailable = TextToSpeechService.this.onIsLanguageAvailable(str, str2, str3);
-            if (onIsLanguageAvailable == 0 || onIsLanguageAvailable == 1 || onIsLanguageAvailable == 2) {
+            int iOnIsLanguageAvailable = TextToSpeechService.this.onIsLanguageAvailable(str, str2, str3);
+            if (iOnIsLanguageAvailable == 0 || iOnIsLanguageAvailable == 1 || iOnIsLanguageAvailable == 2) {
                 if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, TextToSpeechService.this.new LoadLanguageItem(iBinder, Binder.getCallingUid(), Binder.getCallingPid(), str, str2, str3)) != 0) {
                     return -1;
                 }
             }
-            return onIsLanguageAvailable;
+            return iOnIsLanguageAvailable;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
@@ -144,13 +144,13 @@ public abstract class TextToSpeechService extends Service {
             if (!checkNonNull(str)) {
                 return -1;
             }
-            int onIsValidVoiceName = TextToSpeechService.this.onIsValidVoiceName(str);
-            if (onIsValidVoiceName == 0) {
+            int iOnIsValidVoiceName = TextToSpeechService.this.onIsValidVoiceName(str);
+            if (iOnIsValidVoiceName == 0) {
                 if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, TextToSpeechService.this.new LoadVoiceItem(iBinder, Binder.getCallingUid(), Binder.getCallingPid(), str)) != 0) {
                     return -1;
                 }
             }
-            return onIsValidVoiceName;
+            return iOnIsValidVoiceName;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
@@ -158,8 +158,8 @@ public abstract class TextToSpeechService extends Service {
             if (!checkNonNull(str)) {
                 return null;
             }
-            int onIsLanguageAvailable = TextToSpeechService.this.onIsLanguageAvailable(str, str2, str3);
-            if (onIsLanguageAvailable == 0 || onIsLanguageAvailable == 1 || onIsLanguageAvailable == 2) {
+            int iOnIsLanguageAvailable = TextToSpeechService.this.onIsLanguageAvailable(str, str2, str3);
+            if (iOnIsLanguageAvailable == 0 || iOnIsLanguageAvailable == 1 || iOnIsLanguageAvailable == 2) {
                 return TextToSpeechService.this.onGetDefaultVoiceNameFor(str, str2, str3);
             }
             return null;
@@ -268,13 +268,13 @@ public abstract class TextToSpeechService extends Service {
 
     public String onGetDefaultVoiceNameFor(String str, String str2, String str3) {
         Locale locale;
-        int onIsLanguageAvailable = onIsLanguageAvailable(str, str2, str3);
-        if (onIsLanguageAvailable == 0) {
+        int iOnIsLanguageAvailable = onIsLanguageAvailable(str, str2, str3);
+        if (iOnIsLanguageAvailable == 0) {
             locale = new Locale(str);
-        } else if (onIsLanguageAvailable == 1) {
+        } else if (iOnIsLanguageAvailable == 1) {
             locale = new Locale(str, str2);
         } else {
-            if (onIsLanguageAvailable != 2) {
+            if (iOnIsLanguageAvailable != 2) {
                 return null;
             }
             locale = new Locale(str, str2, str3);
@@ -287,15 +287,15 @@ public abstract class TextToSpeechService extends Service {
     }
 
     public int onLoadVoice(String str) {
-        Locale forLanguageTag = Locale.forLanguageTag(str);
-        if (forLanguageTag == null) {
+        Locale localeForLanguageTag = Locale.forLanguageTag(str);
+        if (localeForLanguageTag == null) {
             return -1;
         }
         try {
-            if (onIsLanguageAvailable(forLanguageTag.getISO3Language(), forLanguageTag.getISO3Country(), forLanguageTag.getVariant()) != getExpectedLanguageAvailableStatus(forLanguageTag)) {
+            if (onIsLanguageAvailable(localeForLanguageTag.getISO3Language(), localeForLanguageTag.getISO3Country(), localeForLanguageTag.getVariant()) != getExpectedLanguageAvailableStatus(localeForLanguageTag)) {
                 return -1;
             }
-            onLoadLanguage(forLanguageTag.getISO3Language(), forLanguageTag.getISO3Country(), forLanguageTag.getVariant());
+            onLoadLanguage(localeForLanguageTag.getISO3Language(), localeForLanguageTag.getISO3Country(), localeForLanguageTag.getVariant());
             return 0;
         } catch (MissingResourceException unused) {
             return -1;
@@ -303,12 +303,12 @@ public abstract class TextToSpeechService extends Service {
     }
 
     public int onIsValidVoiceName(String str) {
-        Locale forLanguageTag = Locale.forLanguageTag(str);
-        if (forLanguageTag == null) {
+        Locale localeForLanguageTag = Locale.forLanguageTag(str);
+        if (localeForLanguageTag == null) {
             return -1;
         }
         try {
-            return onIsLanguageAvailable(forLanguageTag.getISO3Language(), forLanguageTag.getISO3Country(), forLanguageTag.getVariant()) != getExpectedLanguageAvailableStatus(forLanguageTag) ? -1 : 0;
+            return onIsLanguageAvailable(localeForLanguageTag.getISO3Language(), localeForLanguageTag.getISO3Country(), localeForLanguageTag.getVariant()) != getExpectedLanguageAvailableStatus(localeForLanguageTag) ? -1 : 0;
         } catch (MissingResourceException unused) {
             return -1;
         }
@@ -412,6 +412,8 @@ public abstract class TextToSpeechService extends Service {
                 if (isFlushed(speechItem)) {
                     return false;
                 }
+                this.mCurrentSpeechItem = speechItem;
+                return true;
             }
             this.mCurrentSpeechItem = speechItem;
             return true;
@@ -441,9 +443,9 @@ public abstract class TextToSpeechService extends Service {
 
         public void quit() {
             getLooper().quit();
-            SpeechItem removeCurrentSpeechItem = removeCurrentSpeechItem();
-            if (removeCurrentSpeechItem != null) {
-                removeCurrentSpeechItem.stop();
+            SpeechItem speechItemRemoveCurrentSpeechItem = removeCurrentSpeechItem();
+            if (speechItemRemoveCurrentSpeechItem != null) {
+                speechItemRemoveCurrentSpeechItem.stop();
             }
         }
 
@@ -461,7 +463,7 @@ public abstract class TextToSpeechService extends Service {
             } else if (i == 2) {
                 stopAll();
             }
-            Message obtain = Message.obtain(this, new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.1
+            Message messageObtain = Message.obtain(this, new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.1
                 @Override // java.lang.Runnable
                 public void run() {
                     if (SynthHandler.this.setCurrentSpeechItem(speechItem)) {
@@ -472,8 +474,8 @@ public abstract class TextToSpeechService extends Service {
                     }
                 }
             });
-            obtain.obj = speechItem.getCallerIdentity();
-            if (sendMessage(obtain)) {
+            messageObtain.obj = speechItem.getCallerIdentity();
+            if (sendMessage(messageObtain)) {
                 try {
                     int callerUid = speechItem.getCallerUid();
                     if (TextToSpeechService.this.mTTSList.contains(Integer.valueOf(callerUid))) {
@@ -499,9 +501,9 @@ public abstract class TextToSpeechService extends Service {
                 return -1;
             }
             startFlushingSpeechItems(obj);
-            SpeechItem maybeRemoveCurrentSpeechItem = maybeRemoveCurrentSpeechItem(obj);
-            if (maybeRemoveCurrentSpeechItem != null) {
-                maybeRemoveCurrentSpeechItem.stop();
+            SpeechItem speechItemMaybeRemoveCurrentSpeechItem = maybeRemoveCurrentSpeechItem(obj);
+            if (speechItemMaybeRemoveCurrentSpeechItem != null) {
+                speechItemMaybeRemoveCurrentSpeechItem.stop();
             }
             TextToSpeechService.this.mAudioPlaybackHandler.stopForApp(obj);
             sendMessage(Message.obtain(this, new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.2
@@ -515,9 +517,9 @@ public abstract class TextToSpeechService extends Service {
 
         public int stopAll() {
             startFlushingSpeechItems(null);
-            SpeechItem removeCurrentSpeechItem = removeCurrentSpeechItem();
-            if (removeCurrentSpeechItem != null) {
-                removeCurrentSpeechItem.stop();
+            SpeechItem speechItemRemoveCurrentSpeechItem = removeCurrentSpeechItem();
+            if (speechItemRemoveCurrentSpeechItem != null) {
+                speechItemRemoveCurrentSpeechItem.stop();
             }
             TextToSpeechService.this.mAudioPlaybackHandler.stop();
             sendMessage(Message.obtain(this, new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.3
@@ -554,11 +556,11 @@ public abstract class TextToSpeechService extends Service {
             if (bundle == null) {
                 return new AudioOutputParams();
             }
-            AudioAttributes audioAttributes = (AudioAttributes) bundle.getParcelable(TextToSpeech.Engine.KEY_PARAM_AUDIO_ATTRIBUTES, AudioAttributes.class);
-            if (audioAttributes == null) {
-                audioAttributes = new AudioAttributes.Builder().setLegacyStreamType(bundle.getInt(TextToSpeech.Engine.KEY_PARAM_STREAM, 3)).setContentType(z ? 1 : 4).build();
+            AudioAttributes audioAttributesBuild = (AudioAttributes) bundle.getParcelable(TextToSpeech.Engine.KEY_PARAM_AUDIO_ATTRIBUTES, AudioAttributes.class);
+            if (audioAttributesBuild == null) {
+                audioAttributesBuild = new AudioAttributes.Builder().setLegacyStreamType(bundle.getInt(TextToSpeech.Engine.KEY_PARAM_STREAM, 3)).setContentType(z ? 1 : 4).build();
             }
-            return new AudioOutputParams(bundle.getInt("sessionId", 0), bundle.getFloat("volume", 1.0f), bundle.getFloat(TextToSpeech.Engine.KEY_PARAM_PAN, 0.0f), audioAttributes);
+            return new AudioOutputParams(bundle.getInt("sessionId", 0), bundle.getFloat("volume", 1.0f), bundle.getFloat(TextToSpeech.Engine.KEY_PARAM_PAN, 0.0f), audioAttributesBuild);
         }
     }
 
@@ -774,13 +776,13 @@ public abstract class TextToSpeechService extends Service {
                 if (isStopped()) {
                     return;
                 }
-                AbstractSynthesisCallback createSynthesisCallback = createSynthesisCallback();
-                this.mSynthesisCallback = createSynthesisCallback;
-                TextToSpeechService.this.onSynthesizeText(this.mSynthesisRequest, createSynthesisCallback);
-                if (!createSynthesisCallback.hasStarted() || createSynthesisCallback.hasFinished()) {
+                AbstractSynthesisCallback abstractSynthesisCallbackCreateSynthesisCallback = createSynthesisCallback();
+                this.mSynthesisCallback = abstractSynthesisCallbackCreateSynthesisCallback;
+                TextToSpeechService.this.onSynthesizeText(this.mSynthesisRequest, abstractSynthesisCallbackCreateSynthesisCallback);
+                if (!abstractSynthesisCallbackCreateSynthesisCallback.hasStarted() || abstractSynthesisCallbackCreateSynthesisCallback.hasFinished()) {
                     return;
                 }
-                createSynthesisCallback.done();
+                abstractSynthesisCallbackCreateSynthesisCallback.done();
             }
         }
 
@@ -844,7 +846,7 @@ public abstract class TextToSpeechService extends Service {
         }
 
         @Override // android.speech.tts.TextToSpeechService.SynthesisSpeechItem, android.speech.tts.TextToSpeechService.SpeechItem
-        protected void playImpl() {
+        protected void playImpl() throws IOException {
             super.playImpl();
             try {
                 this.mFileOutputStream.close();
@@ -984,16 +986,16 @@ public abstract class TextToSpeechService extends Service {
         }
 
         public void setCallback(IBinder iBinder, ITextToSpeechCallback iTextToSpeechCallback) {
-            ITextToSpeechCallback remove;
+            ITextToSpeechCallback iTextToSpeechCallbackRemove;
             synchronized (this.mCallerToCallback) {
                 if (iTextToSpeechCallback != null) {
                     register(iTextToSpeechCallback, iBinder);
-                    remove = this.mCallerToCallback.put(iBinder, iTextToSpeechCallback);
+                    iTextToSpeechCallbackRemove = this.mCallerToCallback.put(iBinder, iTextToSpeechCallback);
                 } else {
-                    remove = this.mCallerToCallback.remove(iBinder);
+                    iTextToSpeechCallbackRemove = this.mCallerToCallback.remove(iBinder);
                 }
-                if (remove != null && remove != iTextToSpeechCallback) {
-                    unregister(remove);
+                if (iTextToSpeechCallbackRemove != null && iTextToSpeechCallbackRemove != iTextToSpeechCallback) {
+                    unregister(iTextToSpeechCallbackRemove);
                 }
             }
         }

@@ -16,7 +16,7 @@ public class ImeAwareEditText extends EditText {
         this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
     }
@@ -26,7 +26,7 @@ public class ImeAwareEditText extends EditText {
         this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
     }
@@ -36,7 +36,7 @@ public class ImeAwareEditText extends EditText {
         this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
     }
@@ -46,19 +46,19 @@ public class ImeAwareEditText extends EditText {
         this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
     }
 
     @Override // android.widget.TextView, android.view.View
     public InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
         if (this.mHasPendingShowSoftInputRequest) {
             removeCallbacks(this.mRunShowSoftInputIfNecessary);
             post(this.mRunShowSoftInputIfNecessary);
         }
-        return onCreateInputConnection;
+        return inputConnectionOnCreateInputConnection;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

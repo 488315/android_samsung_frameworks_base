@@ -46,9 +46,9 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentProtectionAllowlistCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentProtectionAllowlistCallback)) {
-                return (IContentProtectionAllowlistCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentProtectionAllowlistCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentProtectionAllowlistCallback)) {
+                return (IContentProtectionAllowlistCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                setAllowlist(createStringArrayList);
+                setAllowlist(arrayListCreateStringArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
 
             @Override // android.service.contentcapture.IContentProtectionAllowlistCallback
             public void setAllowlist(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentProtectionAllowlistCallback.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentProtectionAllowlistCallback.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

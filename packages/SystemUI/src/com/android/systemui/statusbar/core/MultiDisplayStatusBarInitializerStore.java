@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.statusbar.window.StatusBarWindowControllerStore;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiDisplayStatusBarInitializerStore extends StatusBarPerDisplayStoreImpl implements StatusBarInitializerStore {
     public final DarkIconDispatcherStore darkIconDispatcherStore;
@@ -46,7 +45,7 @@ public final class MultiDisplayStatusBarInitializerStore extends StatusBarPerDis
         if (statusBarWindowController == null || (statusBarModePerDisplayRepository = (StatusBarModePerDisplayRepository) this.statusBarModeRepositoryStore.forDisplay(i)) == null || (statusBarConfigurationController = (StatusBarConfigurationController) this.statusBarConfigurationControllerStore.forDisplay(i)) == null || (darkIconDispatcher = (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) this.darkIconDispatcherStore).forDisplay(i)) == null) {
             return null;
         }
-        return ((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass120) this.factory).create(statusBarWindowController, statusBarModePerDisplayRepository, statusBarConfigurationController, darkIconDispatcher);
+        return ((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass121) this.factory).create(statusBarWindowController, statusBarModePerDisplayRepository, statusBarConfigurationController, darkIconDispatcher);
     }
 
     @Override // com.android.systemui.display.data.repository.PerDisplayStoreImpl

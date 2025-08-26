@@ -37,13 +37,13 @@ public final class CoolingDevice {
 
     public static final ArrayList<CoolingDevice> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CoolingDevice> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CoolingDevice coolingDevice = new CoolingDevice();
-            coolingDevice.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            coolingDevice.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(coolingDevice);
         }
         return arrayList;

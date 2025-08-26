@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class RefreshNeuralTranslatorRunnable extends TaskRunnable {
     public final NeuralTranslationServiceExecutor neuralTranslationServiceExecutor;
@@ -26,15 +25,15 @@ class RefreshNeuralTranslatorRunnable extends TaskRunnable {
             proxy.refresh();
             Map languageDirectionStateMap = proxy.getLanguageDirectionStateMap();
             TaskCompletionSource taskCompletionSource = this.mSource;
-            final HashMap hashMap = new HashMap();
+            final HashMap map = new HashMap();
             languageDirectionStateMap.entrySet().forEach(new Consumer() { // from class: com.samsung.android.sdk.scs.ai.translation.LanguageDirectionStateMapper$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     Map.Entry entry = (Map.Entry) obj;
-                    ((HashMap) hashMap).put((LanguageDirection) entry.getKey(), LanguageDirectionState.from(((Integer) entry.getValue()).intValue()));
+                    ((HashMap) map).put((LanguageDirection) entry.getKey(), LanguageDirectionState.from(((Integer) entry.getValue()).intValue()));
                 }
             });
-            taskCompletionSource.setResult(hashMap);
+            taskCompletionSource.setResult(map);
         } catch (RemoteException e) {
             Log.e("ScsApi@NeuralTranslator", "RefreshNeuralTranslatorRunnable -- Exception: " + e);
             e.printStackTrace();

@@ -28,9 +28,9 @@ public class WireBuffer {
         int i3 = i2 + i;
         int i4 = this.mMaxSize;
         if (i3 >= i4) {
-            int max = Math.max(i4 * 2, i2 + i);
-            this.mMaxSize = max;
-            this.mBuffer = Arrays.copyOf(this.mBuffer, max);
+            int iMax = Math.max(i4 * 2, i2 + i);
+            this.mMaxSize = iMax;
+            this.mBuffer = Arrays.copyOf(this.mBuffer, iMax);
         }
     }
 
@@ -174,24 +174,24 @@ public class WireBuffer {
     }
 
     public byte[] readBuffer() {
-        int readInt = readInt();
+        int i = readInt();
         byte[] bArr = this.mBuffer;
-        int i = this.mIndex;
-        byte[] copyOfRange = Arrays.copyOfRange(bArr, i, i + readInt);
-        this.mIndex += readInt;
-        return copyOfRange;
+        int i2 = this.mIndex;
+        byte[] bArrCopyOfRange = Arrays.copyOfRange(bArr, i2, i2 + i);
+        this.mIndex += i;
+        return bArrCopyOfRange;
     }
 
     public byte[] readBuffer(int i) {
-        int readInt = readInt();
-        if (readInt < 0 || readInt > i) {
-            throw new RuntimeException("attempt read a buff of invalid size 0 <= " + readInt + " > " + i);
+        int i2 = readInt();
+        if (i2 < 0 || i2 > i) {
+            throw new RuntimeException("attempt read a buff of invalid size 0 <= " + i2 + " > " + i);
         }
         byte[] bArr = this.mBuffer;
-        int i2 = this.mIndex;
-        byte[] copyOfRange = Arrays.copyOfRange(bArr, i2, i2 + readInt);
-        this.mIndex += readInt;
-        return copyOfRange;
+        int i3 = this.mIndex;
+        byte[] bArrCopyOfRange = Arrays.copyOfRange(bArr, i3, i3 + i2);
+        this.mIndex += i2;
+        return bArrCopyOfRange;
     }
 
     public String readUTF8() {

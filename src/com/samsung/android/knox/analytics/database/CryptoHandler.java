@@ -76,7 +76,7 @@ class CryptoHandler {
         }
     }
 
-    private KeyStore getKeyStore() {
+    private KeyStore getKeyStore() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         try {
             KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
             keyStore.load(null);
@@ -96,7 +96,7 @@ class CryptoHandler {
         }
     }
 
-    String decrypt(byte[] bArr, boolean z) throws UnsupportedEncodingException, GeneralSecurityException {
+    String decrypt(byte[] bArr, boolean z) throws GeneralSecurityException, UnsupportedEncodingException {
         Log.d(TAG, "decrypt(): isLegacyKey = " + z);
         try {
             return decryptInternal(bArr, z, false);
@@ -117,7 +117,7 @@ class CryptoHandler {
         }
     }
 
-    private String decryptInternal(byte[] bArr, boolean z, boolean z2) throws UnsupportedEncodingException, GeneralSecurityException, DeadObjectException, KeyStoreConnectException {
+    private String decryptInternal(byte[] bArr, boolean z, boolean z2) throws KeyStoreConnectException, GeneralSecurityException, UnsupportedEncodingException, DeadObjectException {
         Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
         int length = bArr.length - 12;
         byte[] bArr2 = new byte[length];
@@ -250,7 +250,7 @@ class CryptoHandler {
         return null;
     }
 
-    byte[] encryptBulkInternal(List<String> list) throws GeneralSecurityException, UnsupportedEncodingException, IOException {
+    byte[] encryptBulkInternal(List<String> list) throws GeneralSecurityException, IOException {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
         cipher.init(1, getCBCKey());
         byte[] iv = cipher.getIV();
@@ -259,9 +259,9 @@ class CryptoHandler {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Iterator<String> it = list.iterator();
         while (it.hasNext()) {
-            byte[] update = cipher.update(it.next().getBytes("UTF-8"));
-            if (update != null) {
-                byteArrayOutputStream.write(update);
+            byte[] bArrUpdate = cipher.update(it.next().getBytes("UTF-8"));
+            if (bArrUpdate != null) {
+                byteArrayOutputStream.write(bArrUpdate);
             }
         }
         byteArrayOutputStream.write(cipher.doFinal());
@@ -275,45 +275,45 @@ class CryptoHandler {
         byte[] iv = cipher.getIV();
         byte[] bArr2 = new byte[16];
         System.arraycopy(iv, 0, bArr2, 0, iv.length);
-        byte[] doFinal = cipher.doFinal(bArr);
-        byte[] bArr3 = new byte[doFinal.length + 16];
-        System.arraycopy(doFinal, 0, bArr3, 0, doFinal.length);
-        System.arraycopy(bArr2, 0, bArr3, doFinal.length, 16);
+        byte[] bArrDoFinal = cipher.doFinal(bArr);
+        byte[] bArr3 = new byte[bArrDoFinal.length + 16];
+        System.arraycopy(bArrDoFinal, 0, bArr3, 0, bArrDoFinal.length);
+        System.arraycopy(bArr2, 0, bArr3, bArrDoFinal.length, 16);
         return bArr3;
     }
 
-    private byte[] encryptInternal(String str, boolean z) throws UnsupportedEncodingException, GeneralSecurityException, DeadObjectException, KeyStoreConnectException {
+    private byte[] encryptInternal(String str, boolean z) throws KeyStoreConnectException, GeneralSecurityException, UnsupportedEncodingException, DeadObjectException {
         Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
         cipher.init(1, getGCMKey(false, z));
         byte[] iv = cipher.getIV();
         byte[] bArr = new byte[12];
         System.arraycopy(iv, 0, bArr, 0, iv.length);
-        byte[] doFinal = cipher.doFinal(str.getBytes("UTF-8"));
-        byte[] bArr2 = new byte[doFinal.length + 12];
-        System.arraycopy(doFinal, 0, bArr2, 0, doFinal.length);
-        System.arraycopy(bArr, 0, bArr2, doFinal.length, 12);
+        byte[] bArrDoFinal = cipher.doFinal(str.getBytes("UTF-8"));
+        byte[] bArr2 = new byte[bArrDoFinal.length + 12];
+        System.arraycopy(bArrDoFinal, 0, bArr2, 0, bArrDoFinal.length);
+        System.arraycopy(bArr, 0, bArr2, bArrDoFinal.length, 12);
         return bArr2;
     }
 
-    private void generateCBCKeyInternal() throws IOException, GeneralSecurityException {
+    private void generateCBCKeyInternal() throws GeneralSecurityException, IOException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(new SecureRandom());
-        SecretKey generateKey = keyGenerator.generateKey();
+        SecretKey secretKeyGenerateKey = keyGenerator.generateKey();
         KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
         keyStore.load(null);
-        keyStore.setEntry("synthetic_password_knox.analytics.service.compression.cryptokey", new KeyStore.SecretKeyEntry(generateKey), new KeyProtection.Builder(3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).setCriticalToDeviceEncryption(true).build());
+        keyStore.setEntry("synthetic_password_knox.analytics.service.compression.cryptokey", new KeyStore.SecretKeyEntry(secretKeyGenerateKey), new KeyProtection.Builder(3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).setCriticalToDeviceEncryption(true).build());
     }
 
-    private void generateGCMKeyInternal() throws IOException, GeneralSecurityException {
+    private void generateGCMKeyInternal() throws GeneralSecurityException, IOException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(new SecureRandom());
-        SecretKey generateKey = keyGenerator.generateKey();
+        SecretKey secretKeyGenerateKey = keyGenerator.generateKey();
         KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
         keyStore.load(null);
-        keyStore.setEntry("synthetic_password_knox.analytics.service.cryptokey", new KeyStore.SecretKeyEntry(generateKey), new KeyProtection.Builder(3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setCriticalToDeviceEncryption(true).build());
+        keyStore.setEntry("synthetic_password_knox.analytics.service.cryptokey", new KeyStore.SecretKeyEntry(secretKeyGenerateKey), new KeyProtection.Builder(3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setCriticalToDeviceEncryption(true).build());
     }
 
-    boolean generateGCMKey() {
+    boolean generateGCMKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         Log.d(TAG, "generateGCMKey()");
         KeyStore keyStore = getKeyStore();
         if (keyStore == null) {
@@ -334,7 +334,7 @@ class CryptoHandler {
         }
     }
 
-    void generateCBCKey() {
+    void generateCBCKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         KeyStore keyStore = getKeyStore();
         if (keyStore != null) {
             try {
@@ -350,7 +350,7 @@ class CryptoHandler {
         }
     }
 
-    private SecretKey getCBCKey() throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
+    private SecretKey getCBCKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, UnrecoverableEntryException {
         KeyStore keyStore = getKeyStore();
         if (keyStore == null) {
             return null;
@@ -367,7 +367,7 @@ class CryptoHandler {
         return secretKeyEntry.getSecretKey();
     }
 
-    private SecretKey getGCMKey(boolean z, boolean z2) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
+    private SecretKey getGCMKey(boolean z, boolean z2) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableEntryException {
         SecretKey secretKey = z ? this.mLegacyKeyCache : this.mKeyCache;
         if (secretKey != null && !z2) {
             return secretKey;
@@ -383,7 +383,7 @@ class CryptoHandler {
         }
     }
 
-    private SecretKey getKeyStoreKey(boolean z) throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
+    private SecretKey getKeyStoreKey(boolean z) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, UnrecoverableEntryException {
         KeyStore keyStore = getKeyStore();
         String str = z ? "com.samsung.android.knox.analytics.service.cryptokey" : "synthetic_password_knox.analytics.service.cryptokey";
         String str2 = str.equals("com.samsung.android.knox.analytics.service.cryptokey") ? "legacy key" : "key";
@@ -403,7 +403,7 @@ class CryptoHandler {
         return secretKeyEntry.getSecretKey();
     }
 
-    boolean isGCMKeyGenerated() {
+    boolean isGCMKeyGenerated() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         KeyStore keyStore = getKeyStore();
         if (keyStore == null) {
             return false;
@@ -417,7 +417,7 @@ class CryptoHandler {
         }
     }
 
-    void deleteAnalyticsLegacyKey() {
+    void deleteAnalyticsLegacyKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         String str = TAG;
         Log.d(str, "deleteAnalyticsLegacyKey()");
         if (this.mLegacyKeyCache == null) {

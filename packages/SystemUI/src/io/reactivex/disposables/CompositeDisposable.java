@@ -8,7 +8,6 @@ import io.reactivex.internal.util.ExceptionHelper;
 import io.reactivex.internal.util.OpenHashSet;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CompositeDisposable implements Disposable, DisposableContainer {
     public volatile boolean disposed;
@@ -56,8 +55,8 @@ public final class CompositeDisposable implements Disposable, DisposableContaine
                 if (openHashSet != null) {
                     Object[] objArr = openHashSet.keys;
                     int i2 = openHashSet.mask;
-                    int hashCode = disposable.hashCode() * (-1640531527);
-                    int i3 = (hashCode ^ (hashCode >>> 16)) & i2;
+                    int iHashCode = disposable.hashCode() * (-1640531527);
+                    int i3 = (iHashCode ^ (iHashCode >>> 16)) & i2;
                     Object obj2 = objArr[i3];
                     if (obj2 != null) {
                         if (obj2.equals(disposable)) {

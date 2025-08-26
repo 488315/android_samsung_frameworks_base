@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneDataSourceDelegator implements SceneDataSource {
     public final ReadonlyStateFlow currentOverlays;
@@ -25,12 +24,12 @@ public final class SceneDataSourceDelegator implements SceneDataSource {
     public SceneDataSourceDelegator(CoroutineScope coroutineScope, SceneContainerConfig sceneContainerConfig) {
         NoOpSceneDataSource noOpSceneDataSource = new NoOpSceneDataSource(sceneContainerConfig.initialSceneKey);
         this.noOpDelegate = noOpSceneDataSource;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(noOpSceneDataSource);
-        this.delegateMutable = MutableStateFlow;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(MutableStateFlow, new SceneDataSourceDelegator$special$$inlined$flatMapLatest$1(null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(noOpSceneDataSource);
+        this.delegateMutable = stateFlowImplMutableStateFlow;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(stateFlowImplMutableStateFlow, new SceneDataSourceDelegator$special$$inlined$flatMapLatest$1(null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        this.currentScene = FlowKt.stateIn(transformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), sceneContainerConfig.initialSceneKey);
-        this.currentOverlays = FlowKt.stateIn(FlowKt.transformLatest(MutableStateFlow, new SceneDataSourceDelegator$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), EmptySet.INSTANCE);
+        this.currentScene = FlowKt.stateIn(channelFlowTransformLatestTransformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), sceneContainerConfig.initialSceneKey);
+        this.currentOverlays = FlowKt.stateIn(FlowKt.transformLatest(stateFlowImplMutableStateFlow, new SceneDataSourceDelegator$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), EmptySet.INSTANCE);
     }
 
     @Override // com.android.systemui.scene.shared.model.SceneDataSource
@@ -81,7 +80,6 @@ public final class SceneDataSourceDelegator implements SceneDataSource {
         ((SceneDataSource) this.delegateMutable.getValue()).snapToScene(sceneKey);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoOpSceneDataSource implements SceneDataSource {
         public final ReadonlyStateFlow currentOverlays = FlowKt.asStateFlow(StateFlowKt.MutableStateFlow(EmptySet.INSTANCE));
         public final ReadonlyStateFlow currentScene;

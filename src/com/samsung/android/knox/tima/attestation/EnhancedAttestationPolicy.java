@@ -60,24 +60,18 @@ public class EnhancedAttestationPolicy {
     }
 
     static synchronized EnhancedAttestationPolicy getInstance(Context context) {
-        synchronized (EnhancedAttestationPolicy.class) {
-            if (context == null) {
-                Log.e(TAG, "context is null");
-                return null;
-            }
-            if (mEaPolicy == null) {
-                mEaPolicy = new EnhancedAttestationPolicy(context);
-            }
-            return mEaPolicy;
+        if (context == null) {
+            Log.e(TAG, "context is null");
+            return null;
         }
+        if (mEaPolicy == null) {
+            mEaPolicy = new EnhancedAttestationPolicy(context);
+        }
+        return mEaPolicy;
     }
 
     static synchronized EnhancedAttestationPolicy getInstance() {
-        EnhancedAttestationPolicy enhancedAttestationPolicy;
-        synchronized (EnhancedAttestationPolicy.class) {
-            enhancedAttestationPolicy = mEaPolicy;
-        }
-        return enhancedAttestationPolicy;
+        return mEaPolicy;
     }
 
     private EnhancedAttestationPolicy(Context context) {
@@ -180,24 +174,24 @@ public class EnhancedAttestationPolicy {
             Intent intent = new Intent();
             intent.setClassName(EA_PACKAGE_NAME, EA_PACKAGE_CLASS);
             intent.setAction(EA_BIND_ACTION);
-            boolean bindServiceAsUser = this.mContext.bindServiceAsUser(intent, this.conn, 1, Process.myUserHandle());
-            Log.i(TAG, "bind service:" + bindServiceAsUser);
-            return bindServiceAsUser;
+            boolean zBindServiceAsUser = this.mContext.bindServiceAsUser(intent, this.conn, 1, Process.myUserHandle());
+            Log.i(TAG, "bind service:" + zBindServiceAsUser);
+            return zBindServiceAsUser;
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handlePendingRequest() {
-        HashMap hashMap;
+        HashMap map;
         if (getTrackMapSize() < 1) {
             return;
         }
         synchronized (EnhancedAttestationPolicy.class) {
-            hashMap = new HashMap(this.mTrackOpsHash);
+            map = new HashMap(this.mTrackOpsHash);
             clearTrackMap();
             this.mProcessPendingRequest = true;
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
+        for (Map.Entry entry : map.entrySet()) {
             String str = (String) entry.getKey();
             RequestInfo requestInfo = (RequestInfo) entry.getValue();
             Log.d(TAG, "process pending request: nonce len: " + str.length());

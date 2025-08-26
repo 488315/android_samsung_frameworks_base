@@ -84,9 +84,9 @@ public class ContextHubClient implements Closeable {
             contextHubTransaction.setResponse(new ContextHubTransaction.Response<>(9, null));
             return contextHubTransaction;
         }
-        int doSendMessageToNanoApp = doSendMessageToNanoApp(nanoAppMessage, ContextHubTransactionHelper.createTransactionCallback(contextHubTransaction));
-        if (doSendMessageToNanoApp != 0) {
-            contextHubTransaction.setResponse(new ContextHubTransaction.Response<>(doSendMessageToNanoApp, null));
+        int iDoSendMessageToNanoApp = doSendMessageToNanoApp(nanoAppMessage, ContextHubTransactionHelper.createTransactionCallback(contextHubTransaction));
+        if (iDoSendMessageToNanoApp != 0) {
+            contextHubTransaction.setResponse(new ContextHubTransaction.Response<>(iDoSendMessageToNanoApp, null));
         }
         return contextHubTransaction;
     }
@@ -141,7 +141,7 @@ public class ContextHubClient implements Closeable {
         }
     }
 
-    private void waitForClientProxy() {
+    private void waitForClientProxy() throws InterruptedException {
         while (this.mClientProxy == null) {
             try {
                 wait();

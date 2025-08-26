@@ -14,6 +14,7 @@ import com.android.systemui.wallpaper.provider.ProviderCallDispatcher;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.samsung.android.wallpaper.live.sdk.data.RunningStateOptions;
 import com.samsung.android.wallpaper.live.sdk.data.RunningStateResults;
+import com.samsung.android.wallpaper.live.sdk.provider.call.GetBackgroundRegion$Params;
 import com.samsung.android.wallpaper.live.sdk.provider.call.GetEngineRunningState$Params;
 import com.samsung.android.wallpaper.live.sdk.provider.call.GetScreenshot$Params;
 import com.samsung.android.wallpaper.live.sdk.provider.call.GetThumbnail;
@@ -21,23 +22,23 @@ import com.samsung.android.wallpaper.live.sdk.service.LiveWallpaperEngineManager
 import com.samsung.android.wallpaper.live.sdk.service.LiveWallpaperService;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkCommonUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkLog;
+import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class LiveWallpaperProvider extends ContentProvider {
     public static final boolean DEBUG = !SemSystemProperties.getBoolean("ro.product_ship", true);
     public LiveWallpaperProviderCallDispatcher mCallDispatcher;
 
     @Override // android.content.ContentProvider
-    public final Bundle call(String str, String str2, final Bundle bundle) {
-        ProviderCallResult onGetScreenshot;
+    public final Bundle call(String str, String str2, final Bundle bundle) throws IOException {
+        ProviderCallResult providerCallResultOnGetScreenshot;
         int callingUid = Binder.getCallingUid();
         boolean z = DEBUG;
         if (z) {
-            StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(callingUid, "dispatchCall : caller=", ", ", str, ", extras=[");
-            m.append(SdkCommonUtils.dumpBundleToString(bundle));
-            m.append("]");
-            SdkLog.d("LiveWallpaperProvider", m.toString());
+            StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(callingUid, "dispatchCall : caller=", ", ", str, ", extras=[");
+            sbM.append(SdkCommonUtils.dumpBundleToString(bundle));
+            sbM.append("]");
+            SdkLog.d("LiveWallpaperProvider", sbM.toString());
         } else if (callingUid != 1000) {
             SdkLog.d("LiveWallpaperProvider", "dispatchCall : caller=" + callingUid + ", " + str);
         } else {
@@ -69,27 +70,17 @@ public abstract class LiveWallpaperProvider extends ContentProvider {
                             bundle.getBundle("external_params");
                         }
                     };
-                    onGetScreenshot = null;
+                    providerCallResultOnGetScreenshot = null;
                     break;
                 case "capture_surface":
                 case "get_screenshot":
-                    onGetScreenshot = liveWallpaperProviderCallDispatcher.onGetScreenshot(context, new GetScreenshot$Params(bundle));
+                    providerCallResultOnGetScreenshot = liveWallpaperProviderCallDispatcher.onGetScreenshot(context, new GetScreenshot$Params(bundle));
                     break;
                 case "get_background_region":
-                    new ProviderCallParams(bundle) { // from class: com.samsung.android.wallpaper.live.sdk.provider.call.GetBackgroundRegion$Params
-                        {
-                            super(bundle);
-                            bundle.getInt("which");
-                            bundle.getInt("source_which");
-                            bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID);
-                            bundle.getString("wallpaper_service_class_name");
-                            bundle.getInt("rotation", 0);
-                        }
-                    };
-                    onGetScreenshot = null;
+                    providerCallResultOnGetScreenshot = liveWallpaperProviderCallDispatcher.onGetBackgroundRegion(context, new GetBackgroundRegion$Params(bundle));
                     break;
                 case "get_thumbnail":
-                    onGetScreenshot = liveWallpaperProviderCallDispatcher.onGetThumbnail(context, new GetThumbnail.Params(bundle));
+                    providerCallResultOnGetScreenshot = liveWallpaperProviderCallDispatcher.onGetThumbnail(context, new GetThumbnail.Params(bundle));
                     break;
                 case "get_thumbnail_by_backup_id":
                     new ProviderCallParams(bundle) { // from class: com.samsung.android.wallpaper.live.sdk.provider.call.GetThumbnailByBackupId$Params
@@ -101,19 +92,19 @@ public abstract class LiveWallpaperProvider extends ContentProvider {
                             bundle.getBundle("service_settings");
                         }
                     };
-                    onGetScreenshot = null;
+                    providerCallResultOnGetScreenshot = null;
                     break;
                 case "get_engine_running_state":
                     int i = new GetEngineRunningState$Params(bundle).which;
                     LiveWallpaperService.BaseEngine engine = LiveWallpaperEngineManager.getInstance(context).getEngine(i);
                     if (engine != null) {
-                        RunningStateResults onGetRunningState = engine.onGetRunningState(new RunningStateOptions());
-                        final Bundle bundle3 = onGetRunningState != null ? onGetRunningState.mExtras : null;
+                        RunningStateResults runningStateResultsOnGetRunningState = engine.onGetRunningState(new RunningStateOptions());
+                        final Bundle bundle3 = runningStateResultsOnGetRunningState != null ? runningStateResultsOnGetRunningState.mExtras : null;
                         StringBuilder sb = new StringBuilder("onGetEngineRunningState : exist=");
                         sb.append((bundle3 == null || bundle3.isEmpty()) ? false : true);
                         SdkLog.i("LiveWallpaperProviderCallDispatcher", sb.toString());
                         if (bundle3 != null) {
-                            onGetScreenshot = new ProviderCallResult(bundle3) { // from class: com.samsung.android.wallpaper.live.sdk.provider.call.GetEngineRunningState$Result
+                            providerCallResultOnGetScreenshot = new ProviderCallResult(bundle3) { // from class: com.samsung.android.wallpaper.live.sdk.provider.call.GetEngineRunningState$Result
                                 public final Bundle mRunningState;
 
                                 {
@@ -134,22 +125,22 @@ public abstract class LiveWallpaperProvider extends ContentProvider {
                     } else {
                         SdkLog.i("LiveWallpaperProviderCallDispatcher", "onGetEngineRunningState : engine is null. which=" + i);
                     }
-                    onGetScreenshot = null;
+                    providerCallResultOnGetScreenshot = null;
                     break;
                 default:
                     SdkLog.d("LiveWallpaperProviderCallDispatcher", "provider call method is not available = ".concat(str));
-                    onGetScreenshot = null;
+                    providerCallResultOnGetScreenshot = null;
                     break;
             }
-            if (onGetScreenshot != null) {
-                bundle2 = onGetScreenshot.toBundle();
+            if (providerCallResultOnGetScreenshot != null) {
+                bundle2 = providerCallResultOnGetScreenshot.toBundle();
             }
         }
         if (z) {
-            StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("dispatchCall : ", str, ", result=[");
-            m2.append(SdkCommonUtils.dumpBundleToString(bundle2));
-            m2.append("]");
-            SdkLog.d("LiveWallpaperProvider", m2.toString());
+            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("dispatchCall : ", str, ", result=[");
+            sbM2.append(SdkCommonUtils.dumpBundleToString(bundle2));
+            sbM2.append("]");
+            SdkLog.d("LiveWallpaperProvider", sbM2.toString());
         }
         return bundle2;
     }

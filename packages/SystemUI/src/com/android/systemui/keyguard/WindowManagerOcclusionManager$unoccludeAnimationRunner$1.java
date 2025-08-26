@@ -18,7 +18,6 @@ import com.android.systemui.keyguard.domain.interactor.KeyguardOcclusionInteract
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WindowManagerOcclusionManager$unoccludeAnimationRunner$1 extends IRemoteAnimationRunner.Stub {
     public final /* synthetic */ Executor $executor;
@@ -39,7 +38,7 @@ public final class WindowManagerOcclusionManager$unoccludeAnimationRunner$1 exte
         this.this$0.context.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationCancelled$1
             @Override // java.lang.Runnable
             public final void run() {
-                ValueAnimator valueAnimator = WindowManagerOcclusionManager$unoccludeAnimationRunner$1.this.unoccludeAnimator;
+                ValueAnimator valueAnimator = this.this$0.unoccludeAnimator;
                 if (valueAnimator != null) {
                     valueAnimator.cancel();
                 }
@@ -76,43 +75,43 @@ public final class WindowManagerOcclusionManager$unoccludeAnimationRunner$1 exte
         executor.execute(new Runnable() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$2
             @Override // java.lang.Runnable
             public final void run() {
-                ValueAnimator valueAnimator = WindowManagerOcclusionManager$unoccludeAnimationRunner$1.this.unoccludeAnimator;
+                ValueAnimator valueAnimator = this.this$0.unoccludeAnimator;
                 if (valueAnimator != null) {
                     valueAnimator.cancel();
                 }
-                WindowManagerOcclusionManager$unoccludeAnimationRunner$1 windowManagerOcclusionManager$unoccludeAnimationRunner$1 = WindowManagerOcclusionManager$unoccludeAnimationRunner$1.this;
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                WindowManagerOcclusionManager$unoccludeAnimationRunner$1 windowManagerOcclusionManager$unoccludeAnimationRunner$1 = this.this$0;
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
                 final RemoteAnimationTarget remoteAnimationTarget3 = remoteAnimationTarget2;
-                final WindowManagerOcclusionManager$unoccludeAnimationRunner$1 windowManagerOcclusionManager$unoccludeAnimationRunner$12 = WindowManagerOcclusionManager$unoccludeAnimationRunner$1.this;
+                final WindowManagerOcclusionManager$unoccludeAnimationRunner$1 windowManagerOcclusionManager$unoccludeAnimationRunner$12 = this.this$0;
                 final WindowManagerOcclusionManager windowManagerOcclusionManager3 = windowManagerOcclusionManager2;
                 final SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier2 = syncRtSurfaceTransactionApplier;
-                ofFloat.setDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend);
-                ofFloat.setInterpolator(Interpolators.TOUCH_RESPONSE);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$2$1$1
+                valueAnimatorOfFloat.setDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend);
+                valueAnimatorOfFloat.setInterpolator(Interpolators.TOUCH_RESPONSE);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$2$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                        windowManagerOcclusionManager$unoccludeAnimationRunner$12.unoccludeMatrix.setTranslate(0.0f, (1.0f - floatValue) * remoteAnimationTarget3.screenSpaceBounds.height() * 0.1f);
-                        syncRtSurfaceTransactionApplier2.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget3.leash).withAlpha(floatValue).withMatrix(windowManagerOcclusionManager$unoccludeAnimationRunner$12.unoccludeMatrix).withCornerRadius(windowManagerOcclusionManager3.windowCornerRadius).build()});
+                        float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                        windowManagerOcclusionManager$unoccludeAnimationRunner$12.unoccludeMatrix.setTranslate(0.0f, (1.0f - fFloatValue) * remoteAnimationTarget3.screenSpaceBounds.height() * 0.1f);
+                        syncRtSurfaceTransactionApplier2.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget3.leash).withAlpha(fFloatValue).withMatrix(windowManagerOcclusionManager$unoccludeAnimationRunner$12.unoccludeMatrix).withCornerRadius(windowManagerOcclusionManager3.windowCornerRadius).build()});
                     }
                 });
-                ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$2$1$2
+                valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$2$1$2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         try {
-                            WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$1 windowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$12 = WindowManagerOcclusionManager.this.unoccludeAnimationFinishedCallback;
+                            WindowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$1 windowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$12 = windowManagerOcclusionManager3.unoccludeAnimationFinishedCallback;
                             if (windowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$12 != null) {
                                 windowManagerOcclusionManager$unoccludeAnimationRunner$1$onAnimationStart$12.onAnimationFinished();
                             }
                             windowManagerOcclusionManager$unoccludeAnimationRunner$12.unoccludeAnimator = null;
-                            WindowManagerOcclusionManager.this.interactionJankMonitor.end(64);
+                            windowManagerOcclusionManager3.interactionJankMonitor.end(64);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
                     }
                 });
-                ofFloat.start();
-                windowManagerOcclusionManager$unoccludeAnimationRunner$1.unoccludeAnimator = ofFloat;
+                valueAnimatorOfFloat.start();
+                windowManagerOcclusionManager$unoccludeAnimationRunner$1.unoccludeAnimator = valueAnimatorOfFloat;
             }
         });
     }

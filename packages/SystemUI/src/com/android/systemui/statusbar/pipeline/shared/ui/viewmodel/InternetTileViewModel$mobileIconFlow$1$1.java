@@ -18,7 +18,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class InternetTileViewModel$mobileIconFlow$1$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -62,8 +61,8 @@ final class InternetTileViewModel$mobileIconFlow$1$1 extends SuspendLambda imple
             ContentDescription contentDescription = satellite.icon.contentDescription;
             Context context = this.this$0.context;
             companion.getClass();
-            String loadContentDescription = ContentDescription.Companion.loadContentDescription(contentDescription, context);
-            return new InternetTileModel.Active(loadContentDescription, null, new Integer(satellite.icon.res), null, new ContentDescription.Loaded(loadContentDescription), new ContentDescription.Loaded(this.this$0.internetLabel), 10, null);
+            String strLoadContentDescription = ContentDescription.Companion.loadContentDescription(contentDescription, context);
+            return new InternetTileModel.Active(strLoadContentDescription, null, new Integer(satellite.icon.res), null, new ContentDescription.Loaded(strLoadContentDescription), new ContentDescription.Loaded(this.this$0.internetLabel), 10, null);
         }
         InternetTileViewModel internetTileViewModel = this.this$0;
         CharSequence name = networkNameModel.getName();

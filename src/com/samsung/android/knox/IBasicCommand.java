@@ -53,9 +53,9 @@ public interface IBasicCommand extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBasicCommand.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBasicCommand)) {
-                return (IBasicCommand) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBasicCommand.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBasicCommand)) {
+                return (IBasicCommand) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,13 +87,13 @@ public interface IBasicCommand extends IInterface {
             if (i == 1) {
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle sendCmd = sendCmd(bundle);
+                Bundle bundleSendCmd = sendCmd(bundle);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(sendCmd, 1);
+                parcel2.writeTypedObject(bundleSendCmd, 1);
             } else if (i == 2) {
-                IBasicCommand asInterface = asInterface(parcel.readStrongBinder());
+                IBasicCommand iBasicCommandAsInterface = asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setCaller(asInterface);
+                setCaller(iBasicCommandAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -119,32 +119,32 @@ public interface IBasicCommand extends IInterface {
 
             @Override // com.samsung.android.knox.IBasicCommand
             public Bundle sendCmd(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBasicCommand.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBasicCommand.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.IBasicCommand
             public void setCaller(IBasicCommand iBasicCommand) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBasicCommand.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBasicCommand);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBasicCommand.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBasicCommand);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

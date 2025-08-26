@@ -10,7 +10,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.channels.BufferedChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2 extends SuspendLambda implements Function2 {
     int label;
@@ -46,7 +45,7 @@ final class MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelt
         ResultKt.throwOnFailure(obj);
         BufferedChannel bufferedChannel = this.this$0.channel;
         this.label = 1;
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new MouseWheelScrollingLogic$busyReceive$2(bufferedChannel, null), this);
-        return coroutineScope == coroutineSingletons ? coroutineSingletons : coroutineScope;
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new MouseWheelScrollingLogic$busyReceive$2(bufferedChannel, null), this);
+        return objCoroutineScope == coroutineSingletons ? coroutineSingletons : objCoroutineScope;
     }
 }

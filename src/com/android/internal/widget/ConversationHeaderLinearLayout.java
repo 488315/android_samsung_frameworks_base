@@ -25,44 +25,44 @@ public class ConversationHeaderLinearLayout extends LinearLayout {
 
     private int calculateTotalChildLength() {
         int childCount = getChildCount();
-        int i = 0;
-        for (int i2 = 0; i2 < childCount; i2++) {
-            View childAt = getChildAt(i2);
+        int measuredWidth = 0;
+        for (int i = 0; i < childCount; i++) {
+            View childAt = getChildAt(i);
             if (childAt != null && childAt.getVisibility() != 8) {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
-                i += childAt.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin;
+                measuredWidth += childAt.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin;
             }
         }
-        return i + getPaddingLeft() + getPaddingRight();
+        return measuredWidth + getPaddingLeft() + getPaddingRight();
     }
 
     @Override // android.widget.LinearLayout, android.view.View
     protected void onMeasure(int i, int i2) {
         super.onMeasure(i, i2);
-        int calculateTotalChildLength = calculateTotalChildLength() - getMeasuredWidth();
-        if (calculateTotalChildLength <= 0) {
+        int iCalculateTotalChildLength = calculateTotalChildLength() - getMeasuredWidth();
+        if (iCalculateTotalChildLength <= 0) {
             return;
         }
         int childCount = getChildCount();
         ArrayList arrayList = null;
-        float f = 0.0f;
+        float fMax = 0.0f;
         for (int i3 = 0; i3 < childCount; i3++) {
             View childAt = getChildAt(i3);
             if (childAt != null && childAt.getVisibility() != 8) {
-                float f2 = ((LinearLayout.LayoutParams) childAt.getLayoutParams()).weight;
-                if (f2 != 0.0f && childAt.getMeasuredWidth() != 0) {
+                float f = ((LinearLayout.LayoutParams) childAt.getLayoutParams()).weight;
+                if (f != 0.0f && childAt.getMeasuredWidth() != 0) {
                     if (arrayList == null) {
                         arrayList = new ArrayList(childCount);
                     }
                     arrayList.add(new ViewInfo(childAt));
-                    f += Math.max(0.0f, f2);
+                    fMax += Math.max(0.0f, f);
                 }
             }
         }
         if (arrayList == null || arrayList.isEmpty()) {
             return;
         }
-        balanceViewWidths(arrayList, f, calculateTotalChildLength);
+        balanceViewWidths(arrayList, fMax, iCalculateTotalChildLength);
         remeasureChangedChildren(arrayList);
     }
 

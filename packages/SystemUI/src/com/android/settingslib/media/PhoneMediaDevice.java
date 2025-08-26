@@ -28,22 +28,27 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PhoneMediaDevice extends MediaDevice {
     public static CachedBluetoothCastDevice sCachedBluetoothCastDevice;
     public static String sDisplayDeviceName;
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x009a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public PhoneMediaDevice(Context context, MediaRoute2Info mediaRoute2Info, RouteListingPreference.Item item) {
-        super(context, mediaRoute2Info, item);
         CachedBluetoothCastDevice cachedBluetoothCastDevice;
         SemWifiDisplay activeDisplay;
         LocalBluetoothManager localBluetoothManager;
         AudioCastProfile audioCastProfile;
+        super(context, mediaRoute2Info, item);
         new DeviceIconUtil(this.mContext);
         initDeviceRecord();
         LocalBluetoothManager localBluetoothManager2 = LocalBluetoothManager.getInstance(context, BluetoothUtils.mOnInitCallback);
-        if (SemBluetoothCastAdapter.isBluetoothCastSupported() && localBluetoothManager2 != null) {
+        if (!SemBluetoothCastAdapter.isBluetoothCastSupported() || localBluetoothManager2 == null) {
+            cachedBluetoothCastDevice = null;
+        } else {
             ArrayList arrayList = (ArrayList) localBluetoothManager2.mCachedCastDeviceManager.getCachedCastDevicesCopy();
             if (!arrayList.isEmpty()) {
                 int size = arrayList.size();
@@ -60,9 +65,9 @@ public class PhoneMediaDevice extends MediaDevice {
                         }
                     }
                 }
+                cachedBluetoothCastDevice = null;
             }
         }
-        cachedBluetoothCastDevice = null;
         sCachedBluetoothCastDevice = cachedBluetoothCastDevice;
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
         if (displayManager == null || displayManager.semGetWifiDisplayStatus() == null || (activeDisplay = displayManager.semGetWifiDisplayStatus().getActiveDisplay()) == null) {
@@ -157,14 +162,19 @@ public class PhoneMediaDevice extends MediaDevice {
         return this.mRouteInfo.getId();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00e1  */
     @Override // com.android.settingslib.media.MediaDevice
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final String getName() {
         String mediaTransferThisDeviceName;
         HdmiPortInfo hdmiPortInfo;
         String displayName;
         Context context = this.mContext;
         MediaRoute2Info mediaRoute2Info = this.mRouteInfo;
-        boolean hasSystemFeature = context.getPackageManager().hasSystemFeature("android.software.leanback");
+        boolean zHasSystemFeature = context.getPackageManager().hasSystemFeature("android.software.leanback");
         int type = mediaRoute2Info.getType();
         if (type == 2) {
             mediaTransferThisDeviceName = getMediaTransferThisDeviceName(context);
@@ -174,29 +184,31 @@ public class PhoneMediaDevice extends MediaDevice {
             mediaTransferThisDeviceName = context.getString(R.string.media_transfer_analog_line_name);
         } else if (type == 6) {
             mediaTransferThisDeviceName = context.getString(R.string.media_transfer_digital_line_name);
-        } else if (type != 19) {
-            if (type != 22) {
-                if (type != 25) {
-                    if (type != 29) {
-                        switch (type) {
-                            case 9:
-                                mediaTransferThisDeviceName = mediaRoute2Info.getName();
-                                break;
-                            case 10:
-                                break;
-                            case 11:
-                            case 12:
-                                break;
-                            case 13:
-                                mediaTransferThisDeviceName = mediaRoute2Info.getName();
-                                break;
-                            default:
-                                mediaTransferThisDeviceName = getMediaTransferThisDeviceName(context);
-                                break;
-                        }
-                    }
-                    if (hasSystemFeature) {
-                        String str = null;
+        } else if (type == 19) {
+            mediaTransferThisDeviceName = context.getString(R.string.media_transfer_aux_line_name);
+        } else if (type == 22) {
+            mediaTransferThisDeviceName = context.getString(R.string.media_transfer_wired_headphone_name);
+        } else if (type == 25) {
+            mediaTransferThisDeviceName = mediaRoute2Info.getName();
+            CachedBluetoothCastDevice cachedBluetoothCastDevice = sCachedBluetoothCastDevice;
+            if (cachedBluetoothCastDevice != null) {
+                mediaTransferThisDeviceName = cachedBluetoothCastDevice.getName();
+            }
+            String str = sDisplayDeviceName;
+            if (str != null) {
+                mediaTransferThisDeviceName = str.contains("DeX") ? "PC" : sDisplayDeviceName;
+            }
+        } else if (type != 29) {
+            switch (type) {
+                case 9:
+                    mediaTransferThisDeviceName = mediaRoute2Info.getName();
+                    break;
+                case 10:
+                    if (!zHasSystemFeature) {
+                        mediaTransferThisDeviceName = context.getString(R.string.media_transfer_external_device_name);
+                        break;
+                    } else {
+                        String str2 = null;
                         if (context.checkCallingOrSelfPermission("android.permission.HDMI_CEC") == 0) {
                             HdmiControlManager hdmiControlManager = (HdmiControlManager) context.getSystemService(HdmiControlManager.class);
                             Iterator it = hdmiControlManager.getPortInfo().iterator();
@@ -215,7 +227,7 @@ public class PhoneMediaDevice extends MediaDevice {
                                     if (it2.hasNext()) {
                                         HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) it2.next();
                                         if (hdmiDeviceInfo.getPortId() == hdmiPortInfo.getId() && (displayName = hdmiDeviceInfo.getDisplayName()) != null && !displayName.isEmpty()) {
-                                            str = displayName;
+                                            str2 = displayName;
                                         }
                                     }
                                 }
@@ -223,25 +235,25 @@ public class PhoneMediaDevice extends MediaDevice {
                         } else {
                             Log.w("PhoneMediaDevice", "Could not get HDMI device name, android.permission.HDMI_CEC denied");
                         }
-                        mediaTransferThisDeviceName = str != null ? str : context.getString(R.string.tv_media_transfer_arc_fallback_title);
-                    } else {
-                        mediaTransferThisDeviceName = context.getString(R.string.media_transfer_external_device_name);
+                        if (str2 == null) {
+                            mediaTransferThisDeviceName = context.getString(R.string.tv_media_transfer_arc_fallback_title);
+                            break;
+                        } else {
+                            mediaTransferThisDeviceName = str2;
+                            break;
+                        }
                     }
-                } else {
+                    break;
+                case 11:
+                case 12:
+                    break;
+                case 13:
                     mediaTransferThisDeviceName = mediaRoute2Info.getName();
-                    CachedBluetoothCastDevice cachedBluetoothCastDevice = sCachedBluetoothCastDevice;
-                    if (cachedBluetoothCastDevice != null) {
-                        mediaTransferThisDeviceName = cachedBluetoothCastDevice.getName();
-                    }
-                    String str2 = sDisplayDeviceName;
-                    if (str2 != null) {
-                        mediaTransferThisDeviceName = str2.contains("DeX") ? "PC" : sDisplayDeviceName;
-                    }
-                }
+                    break;
+                default:
+                    mediaTransferThisDeviceName = getMediaTransferThisDeviceName(context);
+                    break;
             }
-            mediaTransferThisDeviceName = context.getString(R.string.media_transfer_wired_headphone_name);
-        } else {
-            mediaTransferThisDeviceName = context.getString(R.string.media_transfer_aux_line_name);
         }
         return mediaTransferThisDeviceName.toString();
     }

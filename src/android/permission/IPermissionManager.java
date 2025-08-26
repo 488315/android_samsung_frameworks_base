@@ -318,9 +318,9 @@ public interface IPermissionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPermissionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPermissionManager)) {
-                return (IPermissionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPermissionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPermissionManager)) {
+                return (IPermissionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -414,167 +414,167 @@ public interface IPermissionManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice allPermissionGroups = getAllPermissionGroups(readInt);
+                    ParceledListSlice allPermissionGroups = getAllPermissionGroups(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(allPermissionGroups, 1);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PermissionGroupInfo permissionGroupInfo = getPermissionGroupInfo(readString, readInt2);
+                    PermissionGroupInfo permissionGroupInfo = getPermissionGroupInfo(string, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(permissionGroupInfo, 1);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PermissionInfo permissionInfo = getPermissionInfo(readString2, readString3, readInt3);
+                    PermissionInfo permissionInfo = getPermissionInfo(string2, string3, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(permissionInfo, 1);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryPermissionsByGroup = queryPermissionsByGroup(readString4, readInt4);
+                    ParceledListSlice parceledListSliceQueryPermissionsByGroup = queryPermissionsByGroup(string4, i6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryPermissionsByGroup, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryPermissionsByGroup, 1);
                     return true;
                 case 5:
                     PermissionInfo permissionInfo2 = (PermissionInfo) parcel.readTypedObject(PermissionInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean addPermission = addPermission(permissionInfo2, readBoolean);
+                    boolean zAddPermission = addPermission(permissionInfo2, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPermission);
+                    parcel2.writeBoolean(zAddPermission);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removePermission(readString5);
+                    removePermission(string5);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int permissionFlags = getPermissionFlags(readString6, readString7, readString8, readInt5);
+                    int permissionFlags = getPermissionFlags(string6, string7, string8, i7);
                     parcel2.writeNoException();
                     parcel2.writeInt(permissionFlags);
                     return true;
                 case 8:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    String readString11 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    String string11 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updatePermissionFlags(readString9, readString10, readInt6, readInt7, readBoolean2, readString11, readInt8);
+                    updatePermissionFlags(string9, string10, i8, i9, z2, string11, i10);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updatePermissionFlagsForAllApps(readInt9, readInt10, readInt11);
+                    updatePermissionFlagsForAllApps(i11, i12, i13);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    IOnPermissionsChangeListener asInterface = IOnPermissionsChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOnPermissionsChangeListener iOnPermissionsChangeListenerAsInterface = IOnPermissionsChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnPermissionsChangeListener(asInterface);
+                    addOnPermissionsChangeListener(iOnPermissionsChangeListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IOnPermissionsChangeListener asInterface2 = IOnPermissionsChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOnPermissionsChangeListener iOnPermissionsChangeListenerAsInterface2 = IOnPermissionsChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeOnPermissionsChangeListener(asInterface2);
+                    removeOnPermissionsChangeListener(iOnPermissionsChangeListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString12 = parcel.readString();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> allowlistedRestrictedPermissions = getAllowlistedRestrictedPermissions(readString12, readInt12, readInt13);
+                    List<String> allowlistedRestrictedPermissions = getAllowlistedRestrictedPermissions(string12, i14, i15);
                     parcel2.writeNoException();
                     parcel2.writeStringList(allowlistedRestrictedPermissions);
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean addAllowlistedRestrictedPermission = addAllowlistedRestrictedPermission(readString13, readString14, readInt14, readInt15);
+                    boolean zAddAllowlistedRestrictedPermission = addAllowlistedRestrictedPermission(string13, string14, i16, i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAllowlistedRestrictedPermission);
+                    parcel2.writeBoolean(zAddAllowlistedRestrictedPermission);
                     return true;
                 case 14:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeAllowlistedRestrictedPermission = removeAllowlistedRestrictedPermission(readString15, readString16, readInt16, readInt17);
+                    boolean zRemoveAllowlistedRestrictedPermission = removeAllowlistedRestrictedPermission(string15, string16, i18, i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAllowlistedRestrictedPermission);
+                    parcel2.writeBoolean(zRemoveAllowlistedRestrictedPermission);
                     return true;
                 case 15:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    int readInt18 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantRuntimePermission(readString17, readString18, readString19, readInt18);
+                    grantRuntimePermission(string17, string18, string19, i20);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    int readInt19 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    int i21 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    revokeRuntimePermission(readString20, readString21, readString22, readInt19, readString23);
+                    revokeRuntimePermission(string20, string21, string22, i21, string23);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    String readString24 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string24 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    revokePostNotificationPermissionWithoutKillForTest(readString24, readInt20);
+                    revokePostNotificationPermissionWithoutKillForTest(string24, i22);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean shouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale(readString25, readString26, readInt21, readInt22);
+                    boolean zShouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale(string25, string26, i23, i24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldShowRequestPermissionRationale);
+                    parcel2.writeBoolean(zShouldShowRequestPermissionRationale);
                     return true;
                 case 19:
-                    String readString27 = parcel.readString();
-                    String readString28 = parcel.readString();
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
+                    String string27 = parcel.readString();
+                    String string28 = parcel.readString();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPermissionRevokedByPolicy = isPermissionRevokedByPolicy(readString27, readString28, readInt23, readInt24);
+                    boolean zIsPermissionRevokedByPolicy = isPermissionRevokedByPolicy(string27, string28, i25, i26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPermissionRevokedByPolicy);
+                    parcel2.writeBoolean(zIsPermissionRevokedByPolicy);
                     return true;
                 case 20:
                     List<SplitPermissionInfoParcelable> splitPermissions = getSplitPermissions();
@@ -582,99 +582,99 @@ public interface IPermissionManager extends IInterface {
                     parcel2.writeTypedList(splitPermissions, 1);
                     return true;
                 case 21:
-                    String readString29 = parcel.readString();
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
+                    String string29 = parcel.readString();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    startOneTimePermissionSession(readString29, readInt25, readInt26, readLong, readLong2);
+                    startOneTimePermissionSession(string29, i27, i28, j, j2);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    String readString30 = parcel.readString();
-                    int readInt27 = parcel.readInt();
+                    String string30 = parcel.readString();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopOneTimePermissionSession(readString30, readInt27);
+                    stopOneTimePermissionSession(string30, i29);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> autoRevokeExemptionRequestedPackages = getAutoRevokeExemptionRequestedPackages(readInt28);
+                    List<String> autoRevokeExemptionRequestedPackages = getAutoRevokeExemptionRequestedPackages(i30);
                     parcel2.writeNoException();
                     parcel2.writeStringList(autoRevokeExemptionRequestedPackages);
                     return true;
                 case 24:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> autoRevokeExemptionGrantedPackages = getAutoRevokeExemptionGrantedPackages(readInt29);
+                    List<String> autoRevokeExemptionGrantedPackages = getAutoRevokeExemptionGrantedPackages(i31);
                     parcel2.writeNoException();
                     parcel2.writeStringList(autoRevokeExemptionGrantedPackages);
                     return true;
                 case 25:
-                    String readString31 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt30 = parcel.readInt();
+                    String string31 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean autoRevokeExempted = setAutoRevokeExempted(readString31, readBoolean3, readInt30);
+                    boolean autoRevokeExempted = setAutoRevokeExempted(string31, z3, i32);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(autoRevokeExempted);
                     return true;
                 case 26:
-                    String readString32 = parcel.readString();
-                    int readInt31 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAutoRevokeExempted = isAutoRevokeExempted(readString32, readInt31);
+                    boolean zIsAutoRevokeExempted = isAutoRevokeExempted(string32, i33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAutoRevokeExempted);
+                    parcel2.writeBoolean(zIsAutoRevokeExempted);
                     return true;
                 case 27:
                     AttributionSourceState attributionSourceState = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IBinder registerAttributionSource = registerAttributionSource(attributionSourceState);
+                    IBinder iBinderRegisterAttributionSource = registerAttributionSource(attributionSourceState);
                     parcel2.writeNoException();
-                    parcel2.writeStrongBinder(registerAttributionSource);
+                    parcel2.writeStrongBinder(iBinderRegisterAttributionSource);
                     return true;
                 case 28:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int registeredAttributionSourceCount = getRegisteredAttributionSourceCount(readInt32);
+                    int registeredAttributionSourceCount = getRegisteredAttributionSourceCount(i34);
                     parcel2.writeNoException();
                     parcel2.writeInt(registeredAttributionSourceCount);
                     return true;
                 case 29:
                     AttributionSourceState attributionSourceState2 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isRegisteredAttributionSource = isRegisteredAttributionSource(attributionSourceState2);
+                    boolean zIsRegisteredAttributionSource = isRegisteredAttributionSource(attributionSourceState2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRegisteredAttributionSource);
+                    parcel2.writeBoolean(zIsRegisteredAttributionSource);
                     return true;
                 case 30:
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
-                    String readString35 = parcel.readString();
-                    int readInt33 = parcel.readInt();
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
+                    String string35 = parcel.readString();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkPermission = checkPermission(readString33, readString34, readString35, readInt33);
+                    int iCheckPermission = checkPermission(string33, string34, string35, i35);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkPermission);
+                    parcel2.writeInt(iCheckPermission);
                     return true;
                 case 31:
-                    int readInt34 = parcel.readInt();
-                    String readString36 = parcel.readString();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    String string36 = parcel.readString();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkUidPermission = checkUidPermission(readInt34, readString36, readInt35);
+                    int iCheckUidPermission = checkUidPermission(i36, string36, i37);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkUidPermission);
+                    parcel2.writeInt(iCheckUidPermission);
                     return true;
                 case 32:
-                    String readString37 = parcel.readString();
-                    String readString38 = parcel.readString();
-                    int readInt36 = parcel.readInt();
+                    String string37 = parcel.readString();
+                    String string38 = parcel.readString();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Map<String, PermissionManager.PermissionState> allPermissionStates = getAllPermissionStates(readString37, readString38, readInt36);
+                    Map<String, PermissionManager.PermissionState> allPermissionStates = getAllPermissionStates(string37, string38, i38);
                     parcel2.writeNoException();
                     if (allPermissionStates == null) {
                         parcel2.writeInt(-1);
@@ -683,17 +683,17 @@ public interface IPermissionManager extends IInterface {
                         allPermissionStates.forEach(new BiConsumer() { // from class: android.permission.IPermissionManager$Stub$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IPermissionManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (PermissionManager.PermissionState) obj2);
+                                IPermissionManager.Stub.lambda$onTransact$0(parcel2, (String) obj, (PermissionManager.PermissionState) obj2);
                             }
                         });
                     }
                     return true;
                 case 33:
-                    String readString39 = parcel.readString();
-                    String readString40 = parcel.readString();
-                    int readInt37 = parcel.readInt();
+                    String string39 = parcel.readString();
+                    String string40 = parcel.readString();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int permissionRequestState = getPermissionRequestState(readString39, readString40, readInt37);
+                    int permissionRequestState = getPermissionRequestState(string39, string40, i39);
                     parcel2.writeNoException();
                     parcel2.writeInt(permissionRequestState);
                     return true;
@@ -726,581 +726,582 @@ public interface IPermissionManager extends IInterface {
 
             @Override // android.permission.IPermissionManager
             public ParceledListSlice getAllPermissionGroups(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public PermissionGroupInfo getPermissionGroupInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PermissionGroupInfo) obtain2.readTypedObject(PermissionGroupInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PermissionGroupInfo) parcelObtain2.readTypedObject(PermissionGroupInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public PermissionInfo getPermissionInfo(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PermissionInfo) obtain2.readTypedObject(PermissionInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PermissionInfo) parcelObtain2.readTypedObject(PermissionInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public ParceledListSlice queryPermissionsByGroup(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean addPermission(PermissionInfo permissionInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(permissionInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(permissionInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void removePermission(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public int getPermissionFlags(String str, String str2, String str3, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void updatePermissionFlags(String str, String str2, int i, int i2, boolean z, String str3, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void updatePermissionFlagsForAllApps(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void addOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnPermissionsChangeListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnPermissionsChangeListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void removeOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnPermissionsChangeListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnPermissionsChangeListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public List<String> getAllowlistedRestrictedPermissions(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean addAllowlistedRestrictedPermission(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean removeAllowlistedRestrictedPermission(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void grantRuntimePermission(String str, String str2, String str3, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void revokeRuntimePermission(String str, String str2, String str3, int i, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void revokePostNotificationPermissionWithoutKillForTest(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean shouldShowRequestPermissionRationale(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean isPermissionRevokedByPolicy(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public List<SplitPermissionInfoParcelable> getSplitPermissions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SplitPermissionInfoParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SplitPermissionInfoParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void startOneTimePermissionSession(String str, int i, int i2, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public void stopOneTimePermissionSession(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public List<String> getAutoRevokeExemptionRequestedPackages(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public List<String> getAutoRevokeExemptionGrantedPackages(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean setAutoRevokeExempted(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean isAutoRevokeExempted(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public IBinder registerAttributionSource(AttributionSourceState attributionSourceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public int getRegisteredAttributionSourceCount(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public boolean isRegisteredAttributionSource(AttributionSourceState attributionSourceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public int checkPermission(String str, String str2, String str3, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public int checkUidPermission(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public Map<String, PermissionManager.PermissionState> getAllPermissionStates(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                final Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                final Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    final HashMap hashMap = readInt < 0 ? null : new HashMap();
-                    IntStream.range(0, readInt).forEach(new IntConsumer() { // from class: android.permission.IPermissionManager$Stub$Proxy$$ExternalSyntheticLambda0
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    final HashMap map = i2 < 0 ? null : new HashMap();
+                    IntStream.range(0, i2).forEach(new IntConsumer() { // from class: android.permission.IPermissionManager$Stub$Proxy$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i2) {
-                            hashMap.put(r0.readString(), (PermissionManager.PermissionState) Parcel.this.readTypedObject(PermissionManager.PermissionState.CREATOR));
+                        public final void accept(int i3) {
+                            Parcel parcel = parcelObtain2;
+                            map.put(parcel.readString(), (PermissionManager.PermissionState) parcel.readTypedObject(PermissionManager.PermissionState.CREATOR));
                         }
                     });
-                    return hashMap;
+                    return map;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionManager
             public int getPermissionRequestState(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

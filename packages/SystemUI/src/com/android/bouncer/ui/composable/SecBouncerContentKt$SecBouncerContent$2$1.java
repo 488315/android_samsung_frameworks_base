@@ -9,7 +9,6 @@ import com.android.systemui.flags.RefactorFlagUtils;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class SecBouncerContentKt$SecBouncerContent$2$1 extends FunctionReferenceImpl implements Function1 {
     public SecBouncerContentKt$SecBouncerContent$2$1(Object obj) {
@@ -18,7 +17,7 @@ final /* synthetic */ class SecBouncerContentKt$SecBouncerContent$2$1 extends Fu
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         KeyEvent keyEvent = ((androidx.compose.ui.input.key.KeyEvent) obj).nativeKeyEvent;
         BouncerOverlayContentViewModel bouncerOverlayContentViewModel = (BouncerOverlayContentViewModel) this.receiver;
         bouncerOverlayContentViewModel.keyguardMediaKeyInteractor.getClass();
@@ -28,6 +27,6 @@ final /* synthetic */ class SecBouncerContentKt$SecBouncerContent$2$1 extends Fu
         refactorFlagUtils.getClass();
         RefactorFlagUtils.assertOnEngBuild("New code path expects SceneContainerFlag || ComposeBouncerFlag to be enabled.");
         AuthMethodBouncerViewModel authMethodBouncerViewModel = (AuthMethodBouncerViewModel) bouncerOverlayContentViewModel.authMethodViewModel.$$delegate_0.getValue();
-        return Boolean.valueOf(authMethodBouncerViewModel != null ? authMethodBouncerViewModel.mo1056onKeyEventuiMRsoQ(KeyEvent_androidKt.m579getTypeZmokQxo(keyEvent), keyEvent.getKeyCode()) : false);
+        return Boolean.valueOf(authMethodBouncerViewModel != null ? authMethodBouncerViewModel.mo1058onKeyEventuiMRsoQ(KeyEvent_androidKt.m581getTypeZmokQxo(keyEvent), keyEvent.getKeyCode()) : false);
     }
 }

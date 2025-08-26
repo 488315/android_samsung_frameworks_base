@@ -7,7 +7,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.properties.ReadOnlyProperty;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class Flag implements ReadOnlyProperty, Describable {
     public final String description;
@@ -54,9 +53,9 @@ public final class Flag implements ReadOnlyProperty, Describable {
 
     public final int hashCode() {
         String str = this.shortName;
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((str == null ? 0 : str.hashCode()) * 31, 31, this.longName);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((str == null ? 0 : str.hashCode()) * 31, 31, this.longName);
         String str2 = this.description;
-        return m + (str2 != null ? str2.hashCode() : 0);
+        return iM + (str2 != null ? str2.hashCode() : 0);
     }
 
     public final String toString() {

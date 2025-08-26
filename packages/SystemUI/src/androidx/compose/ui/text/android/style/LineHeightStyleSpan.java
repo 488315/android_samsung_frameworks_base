@@ -3,7 +3,6 @@ package androidx.compose.ui.text.android.style;
 import android.graphics.Paint;
 import androidx.compose.ui.text.internal.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LineHeightStyleSpan implements android.text.style.LineHeightSpan {
     public final int endIndex;
@@ -47,18 +46,18 @@ public final class LineHeightStyleSpan implements android.text.style.LineHeightS
             return;
         }
         if (this.firstAscent == Integer.MIN_VALUE) {
-            int ceil = (int) Math.ceil(this.lineHeight);
-            int i7 = ceil - (i5 - i6);
+            int iCeil = (int) Math.ceil(this.lineHeight);
+            int i7 = iCeil - (i5 - i6);
             if (!this.preserveMinimumHeight || i7 > 0) {
-                float f = this.topRatio;
-                if (f == -1.0f) {
-                    f = Math.abs(fontMetricsInt.ascent) / (fontMetricsInt.descent - fontMetricsInt.ascent);
+                float fAbs = this.topRatio;
+                if (fAbs == -1.0f) {
+                    fAbs = Math.abs(fontMetricsInt.ascent) / (fontMetricsInt.descent - fontMetricsInt.ascent);
                 }
-                int ceil2 = (int) (i7 <= 0 ? Math.ceil(i7 * f) : Math.ceil((1.0f - f) * i7));
+                int iCeil2 = (int) (i7 <= 0 ? Math.ceil(i7 * fAbs) : Math.ceil((1.0f - fAbs) * i7));
                 int i8 = fontMetricsInt.descent;
-                int i9 = ceil2 + i8;
+                int i9 = iCeil2 + i8;
                 this.descent = i9;
-                int i10 = i9 - ceil;
+                int i10 = i9 - iCeil;
                 this.ascent = i10;
                 if (this.trimFirstLineTop) {
                     i10 = fontMetricsInt.ascent;

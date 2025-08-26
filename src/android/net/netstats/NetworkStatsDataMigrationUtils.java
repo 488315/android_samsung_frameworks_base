@@ -150,48 +150,48 @@ public class NetworkStatsDataMigrationUtils {
     }
 
     public static void readPlatformCollection(NetworkStatsCollection.Builder builder, DataInput dataInput) throws IOException {
-        int readInt = dataInput.readInt();
-        if (readInt != FILE_MAGIC) {
-            throw new ProtocolException("unexpected magic: " + readInt);
+        int i = dataInput.readInt();
+        if (i != FILE_MAGIC) {
+            throw new ProtocolException("unexpected magic: " + i);
         }
-        int readInt2 = dataInput.readInt();
-        if (readInt2 == 16) {
-            int readInt3 = dataInput.readInt();
-            for (int i = 0; i < readInt3; i++) {
-                Set<NetworkIdentity> readPlatformNetworkIdentitySet = readPlatformNetworkIdentitySet(dataInput);
-                int readInt4 = dataInput.readInt();
-                for (int i2 = 0; i2 < readInt4; i2++) {
-                    builder.addEntry(new NetworkStatsCollection.Key(readPlatformNetworkIdentitySet, dataInput.readInt(), dataInput.readInt(), dataInput.readInt()), readPlatformHistory(dataInput));
+        int i2 = dataInput.readInt();
+        if (i2 == 16) {
+            int i3 = dataInput.readInt();
+            for (int i4 = 0; i4 < i3; i4++) {
+                Set<NetworkIdentity> platformNetworkIdentitySet = readPlatformNetworkIdentitySet(dataInput);
+                int i5 = dataInput.readInt();
+                for (int i6 = 0; i6 < i5; i6++) {
+                    builder.addEntry(new NetworkStatsCollection.Key(platformNetworkIdentitySet, dataInput.readInt(), dataInput.readInt(), dataInput.readInt()), readPlatformHistory(dataInput));
                 }
             }
             return;
         }
-        throw new ProtocolException("unexpected version: " + readInt2);
+        throw new ProtocolException("unexpected version: " + i2);
     }
 
     private static long[] readFullLongArray(DataInput dataInput) throws IOException {
-        int readInt = dataInput.readInt();
-        if (readInt < 0) {
+        int i = dataInput.readInt();
+        if (i < 0) {
             throw new ProtocolException("negative array size");
         }
-        long[] jArr = new long[readInt];
-        for (int i = 0; i < readInt; i++) {
-            jArr[i] = dataInput.readLong();
+        long[] jArr = new long[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            jArr[i2] = dataInput.readLong();
         }
         return jArr;
     }
 
     private static long[] readVarLongArray(DataInput dataInput) throws IOException {
-        int readInt = dataInput.readInt();
-        if (readInt == -1) {
+        int i = dataInput.readInt();
+        if (i == -1) {
             return null;
         }
-        if (readInt < 0) {
+        if (i < 0) {
             throw new ProtocolException("negative array size");
         }
-        long[] jArr = new long[readInt];
-        for (int i = 0; i < readInt; i++) {
-            jArr[i] = readVarLong(dataInput);
+        long[] jArr = new long[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            jArr[i2] = readVarLong(dataInput);
         }
         return jArr;
     }
@@ -215,75 +215,75 @@ public class NetworkStatsDataMigrationUtils {
     }
 
     private static NetworkStatsHistory readPlatformHistory(DataInput dataInput) throws IOException {
-        long readLong;
-        long[] readFullLongArray;
-        long[] jArr;
-        long[] readFullLongArray2;
-        long[] jArr2;
-        long[] jArr3;
+        long j;
+        long[] fullLongArray;
+        long[] varLongArray;
+        long[] fullLongArray2;
+        long[] varLongArray2;
+        long[] varLongArray3;
         int length;
-        long[] jArr4;
-        long[] jArr5;
-        long[] jArr6 = new long[0];
-        int readInt = dataInput.readInt();
-        if (readInt == 1) {
-            readLong = dataInput.readLong();
-            long[] readFullLongArray3 = readFullLongArray(dataInput);
-            readFullLongArray = readFullLongArray(dataInput);
-            jArr = new long[readFullLongArray3.length];
-            readFullLongArray2 = readFullLongArray(dataInput);
-            jArr2 = new long[readFullLongArray3.length];
-            jArr3 = new long[readFullLongArray3.length];
-            length = readFullLongArray3.length;
-            jArr4 = jArr6;
-            jArr5 = readFullLongArray3;
-        } else if (readInt == 2 || readInt == 3) {
-            readLong = dataInput.readLong();
-            jArr5 = readVarLongArray(dataInput);
-            if (readInt >= 3) {
-                jArr4 = readVarLongArray(dataInput);
+        long[] varLongArray4;
+        long[] varLongArray5;
+        long[] jArr = new long[0];
+        int i = dataInput.readInt();
+        if (i == 1) {
+            j = dataInput.readLong();
+            long[] fullLongArray3 = readFullLongArray(dataInput);
+            fullLongArray = readFullLongArray(dataInput);
+            varLongArray = new long[fullLongArray3.length];
+            fullLongArray2 = readFullLongArray(dataInput);
+            varLongArray2 = new long[fullLongArray3.length];
+            varLongArray3 = new long[fullLongArray3.length];
+            length = fullLongArray3.length;
+            varLongArray4 = jArr;
+            varLongArray5 = fullLongArray3;
+        } else if (i == 2 || i == 3) {
+            j = dataInput.readLong();
+            varLongArray5 = readVarLongArray(dataInput);
+            if (i >= 3) {
+                varLongArray4 = readVarLongArray(dataInput);
             } else {
-                jArr4 = new long[jArr5.length];
+                varLongArray4 = new long[varLongArray5.length];
             }
-            readFullLongArray = readVarLongArray(dataInput);
-            jArr = readVarLongArray(dataInput);
-            readFullLongArray2 = readVarLongArray(dataInput);
-            jArr2 = readVarLongArray(dataInput);
-            jArr3 = readVarLongArray(dataInput);
-            length = jArr5.length;
+            fullLongArray = readVarLongArray(dataInput);
+            varLongArray = readVarLongArray(dataInput);
+            fullLongArray2 = readVarLongArray(dataInput);
+            varLongArray2 = readVarLongArray(dataInput);
+            varLongArray3 = readVarLongArray(dataInput);
+            length = varLongArray5.length;
         } else {
-            throw new ProtocolException("unexpected version: " + readInt);
+            throw new ProtocolException("unexpected version: " + i);
         }
-        NetworkStatsHistory.Builder builder = new NetworkStatsHistory.Builder(readLong, length);
-        for (int i = 0; i < length; i++) {
-            builder.addEntry(new NetworkStatsHistory.Entry(jArr5[i], jArr4[i], readFullLongArray[i], jArr[i], readFullLongArray2[i], jArr2[i], jArr3[i]));
+        NetworkStatsHistory.Builder builder = new NetworkStatsHistory.Builder(j, length);
+        for (int i2 = 0; i2 < length; i2++) {
+            builder.addEntry(new NetworkStatsHistory.Entry(varLongArray5[i2], varLongArray4[i2], fullLongArray[i2], varLongArray[i2], fullLongArray2[i2], varLongArray2[i2], varLongArray3[i2]));
         }
         return builder.build();
     }
 
     private static Set<NetworkIdentity> readPlatformNetworkIdentitySet(DataInput dataInput) throws IOException {
         boolean z;
-        int readInt = dataInput.readInt();
-        int readInt2 = dataInput.readInt();
+        int i = dataInput.readInt();
+        int i2 = dataInput.readInt();
         HashSet hashSet = new HashSet();
-        for (int i = 0; i < readInt2; i++) {
-            if (readInt <= 1) {
+        for (int i3 = 0; i3 < i2; i3++) {
+            if (i <= 1) {
                 dataInput.readInt();
             }
-            int readInt3 = dataInput.readInt();
-            int readInt4 = dataInput.readInt();
-            String readOptionalString = readOptionalString(dataInput);
-            String readOptionalString2 = readInt >= 3 ? readOptionalString(dataInput) : null;
-            boolean readBoolean = readInt >= 2 ? dataInput.readBoolean() : false;
-            if (readInt >= 4) {
+            int i4 = dataInput.readInt();
+            int i5 = dataInput.readInt();
+            String optionalString = readOptionalString(dataInput);
+            String optionalString2 = i >= 3 ? readOptionalString(dataInput) : null;
+            boolean z2 = i >= 2 ? dataInput.readBoolean() : false;
+            if (i >= 4) {
                 z = dataInput.readBoolean();
             } else {
-                z = readInt3 == 0;
+                z = i4 == 0;
             }
-            boolean readBoolean2 = readInt >= 5 ? dataInput.readBoolean() : true;
-            NetworkIdentity.Builder subId = new NetworkIdentity.Builder().setType(getCollapsedLegacyType(readInt3)).setSubscriberId(readOptionalString).setWifiNetworkKey(readOptionalString2).setRoaming(readBoolean).setMetered(z).setDefaultNetwork(readBoolean2).setOemManaged(readInt >= 6 ? dataInput.readInt() : 0).setSubId(readInt >= 7 ? dataInput.readInt() : -1);
-            if (readInt3 == 0 && readInt4 != -1) {
-                subId.setRatType(readInt4);
+            boolean z3 = i >= 5 ? dataInput.readBoolean() : true;
+            NetworkIdentity.Builder subId = new NetworkIdentity.Builder().setType(getCollapsedLegacyType(i4)).setSubscriberId(optionalString).setWifiNetworkKey(optionalString2).setRoaming(z2).setMetered(z).setDefaultNetwork(z3).setOemManaged(i >= 6 ? dataInput.readInt() : 0).setSubId(i >= 7 ? dataInput.readInt() : -1);
+            if (i4 == 0 && i5 != -1) {
+                subId.setRatType(i5);
             }
             hashSet.add(subId.build());
         }
@@ -301,29 +301,29 @@ public class NetworkStatsDataMigrationUtils {
 
     public static void readLegacyUid(NetworkStatsCollection.Builder builder, DataInput dataInput, boolean z) throws IOException {
         try {
-            int readInt = dataInput.readInt();
-            if (readInt != FILE_MAGIC) {
-                throw new ProtocolException("unexpected magic: " + readInt);
+            int i = dataInput.readInt();
+            if (i != FILE_MAGIC) {
+                throw new ProtocolException("unexpected magic: " + i);
             }
-            int readInt2 = dataInput.readInt();
-            if (readInt2 == 1 || readInt2 == 2) {
+            int i2 = dataInput.readInt();
+            if (i2 == 1 || i2 == 2) {
                 return;
             }
-            if (readInt2 != 3 && readInt2 != 4) {
-                throw new ProtocolException("unknown version: " + readInt2);
+            if (i2 != 3 && i2 != 4) {
+                throw new ProtocolException("unknown version: " + i2);
             }
-            int readInt3 = dataInput.readInt();
-            for (int i = 0; i < readInt3; i++) {
-                Set<NetworkIdentity> readPlatformNetworkIdentitySet = readPlatformNetworkIdentitySet(dataInput);
-                int readInt4 = dataInput.readInt();
-                for (int i2 = 0; i2 < readInt4; i2++) {
-                    int readInt5 = dataInput.readInt();
-                    int readInt6 = readInt2 >= 4 ? dataInput.readInt() : 0;
-                    int readInt7 = dataInput.readInt();
-                    NetworkStatsCollection.Key key = new NetworkStatsCollection.Key(readPlatformNetworkIdentitySet, readInt5, readInt6, readInt7);
-                    NetworkStatsHistory readPlatformHistory = readPlatformHistory(dataInput);
-                    if ((readInt7 == 0) != z) {
-                        builder.addEntry(key, readPlatformHistory);
+            int i3 = dataInput.readInt();
+            for (int i4 = 0; i4 < i3; i4++) {
+                Set<NetworkIdentity> platformNetworkIdentitySet = readPlatformNetworkIdentitySet(dataInput);
+                int i5 = dataInput.readInt();
+                for (int i6 = 0; i6 < i5; i6++) {
+                    int i7 = dataInput.readInt();
+                    int i8 = i2 >= 4 ? dataInput.readInt() : 0;
+                    int i9 = dataInput.readInt();
+                    NetworkStatsCollection.Key key = new NetworkStatsCollection.Key(platformNetworkIdentitySet, i7, i8, i9);
+                    NetworkStatsHistory platformHistory = readPlatformHistory(dataInput);
+                    if ((i9 == 0) != z) {
+                        builder.addEntry(key, platformHistory);
                     }
                 }
             }

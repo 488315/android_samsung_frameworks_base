@@ -87,9 +87,9 @@ public class StateListAnimator implements Cloneable {
             int size = this.mTuples.size();
             for (int i = 0; i < size; i++) {
                 Tuple tuple = this.mTuples.get(i);
-                Animator mo76clone = tuple.mAnimator.mo76clone();
-                mo76clone.removeListener(this.mAnimatorListener);
-                stateListAnimator.addState(tuple.mSpecs, mo76clone);
+                Animator animatorMo76clone = tuple.mAnimator.mo76clone();
+                animatorMo76clone.removeListener(this.mAnimatorListener);
+                stateListAnimator.addState(tuple.mSpecs, animatorMo76clone);
             }
             stateListAnimator.setChangingConfigurations(getChangingConfigurations());
             return stateListAnimator;
@@ -206,9 +206,9 @@ public class StateListAnimator implements Cloneable {
         @Override // android.content.res.ConstantState
         /* renamed from: newInstance */
         public StateListAnimator newInstance2() {
-            StateListAnimator m125clone = this.mAnimator.m125clone();
-            m125clone.mConstantState = this;
-            return m125clone;
+            StateListAnimator stateListAnimatorM125clone = this.mAnimator.m125clone();
+            stateListAnimatorM125clone.mConstantState = this;
+            return stateListAnimatorM125clone;
         }
     }
 }

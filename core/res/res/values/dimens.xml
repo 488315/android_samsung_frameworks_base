@@ -387,6 +387,7 @@
     <dimen name="default_magnifier_width">100.0dip</dimen>
     <item type="dimen" name="default_magnifier_zoom">1.25</item>
     <dimen name="default_minimal_size_resizable_task">220.0dip</dimen>
+    <dimen name="desktop_default_minimal_size_resizable_task">304.0dip</dimen>
     <dimen name="desktop_view_default_header_height">40.0dip</dimen>
     <dimen name="dex_decor_task_offset_height">40.0dip</dimen>
     <dimen name="dex_decor_task_offset_width">40.0dip</dimen>
@@ -756,7 +757,7 @@
     <dimen name="notification_expand_button_margin_end">16.0dip</dimen>
     <dimen name="notification_expand_button_margin_start">4.0dip</dimen>
     <dimen name="notification_expand_button_margin_top">6.0dip</dimen>
-    <dimen name="notification_expand_button_pill_height">24.0dip</dimen>
+    <dimen name="notification_expand_button_pill_height">24.0sp</dimen>
     <dimen name="notification_feedback_size">20.0dip</dimen>
     <dimen name="notification_gray_scale_size_limit">96.0dip</dimen>
     <dimen name="notification_grayscale_icon_max_size">256.0dip</dimen>

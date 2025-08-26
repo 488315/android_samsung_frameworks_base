@@ -11,7 +11,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MediaSdkSupportServiceClient {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -21,7 +20,6 @@ public final class MediaSdkSupportServiceClient {
     public IMediaOutputService mediaSdkSupportService;
     public final MediaSdkSupportServiceClient$serviceConnection$1 serviceConnection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,7 @@ public final class MediaSdkSupportServiceClient {
             public final void onNullBinding(ComponentName componentName) {
                 DLog.Companion.getClass();
                 DLog.Companion.i("MediaSdkSupportServiceClient", "onNullBinding", "ComponentName: " + componentName);
-                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = MediaSdkSupportServiceClient.this;
+                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = this.this$0;
                 int i = MediaSdkSupportServiceClient.$r8$clinit;
                 mediaSdkSupportServiceClient.emitMediaSdkServiceDisconnectedState();
             }
@@ -54,16 +52,16 @@ public final class MediaSdkSupportServiceClient {
             @Override // android.content.ServiceConnection
             public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 IMediaOutputService proxy;
-                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = MediaSdkSupportServiceClient.this;
+                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = this.this$0;
                 int i = IMediaOutputService.Stub.$r8$clinit;
                 if (iBinder == null) {
                     proxy = null;
                 } else {
-                    IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IMediaOutputService)) ? new IMediaOutputService.Stub.Proxy(iBinder) : (IMediaOutputService) queryLocalInterface;
+                    IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMediaOutputService)) ? new IMediaOutputService.Stub.Proxy(iBinder) : (IMediaOutputService) iInterfaceQueryLocalInterface;
                 }
                 mediaSdkSupportServiceClient.mediaSdkSupportService = proxy;
-                MediaSdkSupportServiceClient.this._serviceConnectedStateFlow.updateState(null, Boolean.TRUE);
+                this.this$0._serviceConnectedStateFlow.updateState(null, Boolean.TRUE);
                 DLog.Companion.getClass();
                 DLog.Companion.i("MediaSdkSupportServiceClient", "onServiceConnected", "ServiceConnectedEmitted: true | Version: 1.0.1.17 | Build type: release | isDebug: false");
             }
@@ -72,7 +70,7 @@ public final class MediaSdkSupportServiceClient {
             public final void onServiceDisconnected(ComponentName componentName) {
                 DLog.Companion.getClass();
                 DLog.Companion.i("MediaSdkSupportServiceClient", "onServiceDisconnected", "ComponentName: " + componentName);
-                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = MediaSdkSupportServiceClient.this;
+                MediaSdkSupportServiceClient mediaSdkSupportServiceClient = this.this$0;
                 int i = MediaSdkSupportServiceClient.$r8$clinit;
                 mediaSdkSupportServiceClient.emitMediaSdkServiceDisconnectedState();
             }

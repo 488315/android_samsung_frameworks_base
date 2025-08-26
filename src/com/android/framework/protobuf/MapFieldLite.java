@@ -120,11 +120,11 @@ public final class MapFieldLite<K, V> extends LinkedHashMap<K, V> {
     }
 
     static <K, V> int calculateHashCodeForMap(Map<K, V> map) {
-        int i = 0;
+        int iCalculateHashCodeForObject = 0;
         for (Map.Entry<K, V> entry : map.entrySet()) {
-            i += calculateHashCodeForObject(entry.getValue()) ^ calculateHashCodeForObject(entry.getKey());
+            iCalculateHashCodeForObject += calculateHashCodeForObject(entry.getValue()) ^ calculateHashCodeForObject(entry.getKey());
         }
-        return i;
+        return iCalculateHashCodeForObject;
     }
 
     @Override // java.util.AbstractMap, java.util.Map

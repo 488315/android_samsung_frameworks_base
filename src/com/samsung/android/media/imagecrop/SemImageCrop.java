@@ -75,9 +75,9 @@ public class SemImageCrop {
             return null;
         }
         SemCroppedImageInfo semCroppedImageInfo = new SemCroppedImageInfo(byteBuffer.limit() * 3);
-        int nativeProcess = nativeProcess(byteBuffer, byteBuffer.limit(), semCroppedImageInfo, rect.left, rect.top, rect.right, rect.bottom);
-        Log.d(TAG, "outLength : " + nativeProcess);
-        semCroppedImageInfo.reAllocInJavaBuffer(nativeProcess);
+        int iNativeProcess = nativeProcess(byteBuffer, byteBuffer.limit(), semCroppedImageInfo, rect.left, rect.top, rect.right, rect.bottom);
+        Log.d(TAG, "outLength : " + iNativeProcess);
+        semCroppedImageInfo.reAllocInJavaBuffer(iNativeProcess);
         if (semCroppedImageInfo.getWidth() > 0 && semCroppedImageInfo.getHeight() > 0) {
             return semCroppedImageInfo;
         }
@@ -85,8 +85,8 @@ public class SemImageCrop {
         return null;
     }
 
-    public SemCroppedImageInfo crop(FileDescriptor fileDescriptor, Rect rect) {
-        SemCroppedImageInfo semCroppedImageInfo = null;
+    public SemCroppedImageInfo crop(FileDescriptor fileDescriptor, Rect rect) throws IOException {
+        SemCroppedImageInfo semCroppedImageInfoCrop = null;
         if (fileDescriptor == null) {
             Log.e(TAG, "fd is null!");
             return null;
@@ -103,22 +103,22 @@ public class SemImageCrop {
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             try {
                 FileChannel channel = fileInputStream.getChannel();
-                ByteBuffer allocNativeBuffer = NativeBuffer.allocNativeBuffer(channel.size());
+                ByteBuffer byteBufferAllocNativeBuffer = NativeBuffer.allocNativeBuffer(channel.size());
                 int i = 0;
-                while (allocNativeBuffer.hasRemaining()) {
-                    i += channel.read(allocNativeBuffer);
+                while (byteBufferAllocNativeBuffer.hasRemaining()) {
+                    i += channel.read(byteBufferAllocNativeBuffer);
                     Log.d(TAG, "read : " + i);
                 }
                 channel.close();
-                semCroppedImageInfo = crop(allocNativeBuffer, rect);
-                NativeBuffer.freeNativeBuffer(allocNativeBuffer);
+                semCroppedImageInfoCrop = crop(byteBufferAllocNativeBuffer, rect);
+                NativeBuffer.freeNativeBuffer(byteBufferAllocNativeBuffer);
                 fileInputStream.close();
-                return semCroppedImageInfo;
+                return semCroppedImageInfoCrop;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return semCroppedImageInfo;
+            return semCroppedImageInfoCrop;
         }
     }
 

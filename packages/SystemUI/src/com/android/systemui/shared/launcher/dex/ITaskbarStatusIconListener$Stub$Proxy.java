@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ITaskbarStatusIconListener$Stub$Proxy implements IInterface {
     public final IBinder mRemote;
@@ -19,14 +18,14 @@ public class ITaskbarStatusIconListener$Stub$Proxy implements IInterface {
     }
 
     public final void setAirplaneMode(boolean z, int i) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
         try {
-            obtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
-            obtain.writeBoolean(z);
-            obtain.writeInt(i);
-            this.mRemote.transact(3, obtain, null, 1);
+            parcelObtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
+            parcelObtain.writeBoolean(z);
+            parcelObtain.writeInt(i);
+            this.mRemote.transact(3, parcelObtain, null, 1);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

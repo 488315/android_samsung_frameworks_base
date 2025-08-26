@@ -18,6 +18,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.InvalidParameterSpecException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
@@ -78,13 +79,13 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected AlgorithmParameters engineGetParameters() {
+    protected AlgorithmParameters engineGetParameters() throws InvalidParameterSpecException {
         if (this.engineParams == null) {
             if (this.pbeSpec != null) {
                 try {
-                    AlgorithmParameters createParametersInstance = createParametersInstance(this.pbeAlgorithm);
-                    createParametersInstance.init(this.pbeSpec);
-                    return createParametersInstance;
+                    AlgorithmParameters algorithmParametersCreateParametersInstance = createParametersInstance(this.pbeAlgorithm);
+                    algorithmParametersCreateParametersInstance.init(this.pbeSpec);
+                    return algorithmParametersCreateParametersInstance;
                 } catch (Exception unused) {
                     return null;
                 }
@@ -99,8 +100,8 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
                 } else if (algorithmName.startsWith("Grain")) {
                     algorithmName = "Grainv1";
                 } else if (algorithmName.startsWith("HC")) {
-                    int indexOf = algorithmName.indexOf(45);
-                    algorithmName = algorithmName.substring(0, indexOf) + algorithmName.substring(indexOf + 1);
+                    int iIndexOf = algorithmName.indexOf(45);
+                    algorithmName = algorithmName.substring(0, iIndexOf) + algorithmName.substring(iIndexOf + 1);
                 }
                 try {
                     this.engineParams = createParametersInstance(algorithmName);
@@ -131,7 +132,7 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
     protected void engineInit(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
-        CipherParameters cipherParameters;
+        CipherParameters cipherParametersMakePBEParameters;
         CipherParameters keyParameter;
         this.pbeSpec = null;
         this.pbeAlgorithm = null;
@@ -147,7 +148,7 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
                 PKCS12KeyWithParameters pKCS12KeyWithParameters = (PKCS12KeyWithParameters) pKCS12Key;
                 this.pbeSpec = new PBEParameterSpec(pKCS12KeyWithParameters.getSalt(), pKCS12KeyWithParameters.getIterationCount());
             }
-            cipherParameters = PBE.Util.makePBEParameters(pKCS12Key.getEncoded(), 2, this.digest, this.keySizeInBits, this.ivLength * 8, this.pbeSpec, this.cipher.getAlgorithmName());
+            cipherParametersMakePBEParameters = PBE.Util.makePBEParameters(pKCS12Key.getEncoded(), 2, this.digest, this.keySizeInBits, this.ivLength * 8, this.pbeSpec, this.cipher.getAlgorithmName());
         } else {
             if (key instanceof BCPBEKey) {
                 BCPBEKey bCPBEKey = (BCPBEKey) key;
@@ -160,9 +161,9 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
                     keyParameter = bCPBEKey.getParam();
                     this.pbeSpec = new PBEParameterSpec(bCPBEKey.getSalt(), bCPBEKey.getIterationCount());
                 } else if (algorithmParameterSpec instanceof PBEParameterSpec) {
-                    CipherParameters makePBEParameters = PBE.Util.makePBEParameters(bCPBEKey, algorithmParameterSpec, this.cipher.getAlgorithmName());
+                    CipherParameters cipherParametersMakePBEParameters2 = PBE.Util.makePBEParameters(bCPBEKey, algorithmParameterSpec, this.cipher.getAlgorithmName());
                     this.pbeSpec = (PBEParameterSpec) algorithmParameterSpec;
-                    keyParameter = makePBEParameters;
+                    keyParameter = cipherParametersMakePBEParameters2;
                 } else {
                     throw new InvalidAlgorithmParameterException("PBE requires PBE parameters to be set.");
                 }
@@ -177,22 +178,22 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
             } else if (algorithmParameterSpec instanceof IvParameterSpec) {
                 ParametersWithIV parametersWithIV = new ParametersWithIV(new KeyParameter(key.getEncoded()), ((IvParameterSpec) algorithmParameterSpec).getIV());
                 this.ivParam = parametersWithIV;
-                cipherParameters = parametersWithIV;
+                cipherParametersMakePBEParameters = parametersWithIV;
             } else {
                 throw new InvalidAlgorithmParameterException("unknown parameter type.");
             }
-            cipherParameters = keyParameter;
+            cipherParametersMakePBEParameters = keyParameter;
         }
-        if (this.ivLength != 0 && !(cipherParameters instanceof ParametersWithIV)) {
+        if (this.ivLength != 0 && !(cipherParametersMakePBEParameters instanceof ParametersWithIV)) {
             if (secureRandom == null) {
                 secureRandom = CryptoServicesRegistrar.getSecureRandom();
             }
             if (i == 1 || i == 3) {
                 byte[] bArr = new byte[this.ivLength];
                 secureRandom.nextBytes(bArr);
-                ParametersWithIV parametersWithIV2 = new ParametersWithIV(cipherParameters, bArr);
+                ParametersWithIV parametersWithIV2 = new ParametersWithIV(cipherParametersMakePBEParameters, bArr);
                 this.ivParam = parametersWithIV2;
-                cipherParameters = parametersWithIV2;
+                cipherParametersMakePBEParameters = parametersWithIV2;
             } else {
                 throw new InvalidAlgorithmParameterException("no IV set when one expected");
             }
@@ -206,10 +207,10 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
                         }
                     }
                 }
-                this.cipher.init(false, cipherParameters);
+                this.cipher.init(false, cipherParametersMakePBEParameters);
                 return;
             }
-            this.cipher.init(true, cipherParameters);
+            this.cipher.init(true, cipherParametersMakePBEParameters);
         } catch (Exception e) {
             throw new InvalidKeyException(e.getMessage());
         }
@@ -217,16 +218,16 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
     protected void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
-        AlgorithmParameterSpec algorithmParameterSpec;
+        AlgorithmParameterSpec algorithmParameterSpecExtractSpec;
         if (algorithmParameters != null) {
-            algorithmParameterSpec = SpecUtil.extractSpec(algorithmParameters, this.availableSpecs);
-            if (algorithmParameterSpec == null) {
+            algorithmParameterSpecExtractSpec = SpecUtil.extractSpec(algorithmParameters, this.availableSpecs);
+            if (algorithmParameterSpecExtractSpec == null) {
                 throw new InvalidAlgorithmParameterException("can't handle parameter " + algorithmParameters.toString());
             }
         } else {
-            algorithmParameterSpec = null;
+            algorithmParameterSpecExtractSpec = null;
         }
-        engineInit(i, key, algorithmParameterSpec, secureRandom);
+        engineInit(i, key, algorithmParameterSpecExtractSpec, secureRandom);
         this.engineParams = algorithmParameters;
     }
 
@@ -240,7 +241,7 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected byte[] engineUpdate(byte[] bArr, int i, int i2) {
+    protected byte[] engineUpdate(byte[] bArr, int i, int i2) throws DataLengthException {
         byte[] bArr2 = new byte[i2];
         this.cipher.processBytes(bArr, i, i2, bArr2, 0);
         return bArr2;
@@ -260,18 +261,18 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) {
+    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) throws DataLengthException {
         if (i2 != 0) {
-            byte[] engineUpdate = engineUpdate(bArr, i, i2);
+            byte[] bArrEngineUpdate = engineUpdate(bArr, i, i2);
             this.cipher.reset();
-            return engineUpdate;
+            return bArrEngineUpdate;
         }
         this.cipher.reset();
         return new byte[0];
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws ShortBufferException {
+    protected int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException, ShortBufferException {
         int i4;
         if (i3 + i2 > bArr2.length) {
             throw new ShortBufferException("output buffer too short for input.");

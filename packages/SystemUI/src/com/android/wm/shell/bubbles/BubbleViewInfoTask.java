@@ -25,7 +25,6 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleViewInfoTask {
     public final BubbleBadgeIconFactory mBadgeIconFactory;
@@ -45,7 +44,6 @@ public class BubbleViewInfoTask {
     public final AtomicBoolean mCancelled = new AtomicBoolean();
     public final AtomicBoolean mFinished = new AtomicBoolean();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BubbleViewInfo {
         public String appName;
         public Bitmap badgeBitmap;
@@ -66,14 +64,14 @@ public class BubbleViewInfoTask {
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[1]) {
                     ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_BUBBLES, 8082017669105793175L, 0, String.valueOf(bubble.mKey));
                 }
-                LayoutInflater from = LayoutInflater.from(context);
-                BadgedImageView badgedImageView = (BadgedImageView) from.inflate(R.layout.bubble_view, (ViewGroup) bubbleStackView, false);
+                LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+                BadgedImageView badgedImageView = (BadgedImageView) layoutInflaterFrom.inflate(R.layout.bubble_view, (ViewGroup) bubbleStackView, false);
                 bubbleViewInfo.imageView = badgedImageView;
                 badgedImageView.initialize(bubblePositioner);
                 bubbleViewInfo.taskView = bubble.getOrCreateBubbleTaskView(bubbleTaskViewFactory);
-                bubbleViewInfo.expandedView = (BubbleExpandedView) from.inflate(R.layout.bubble_expanded_view, (ViewGroup) bubbleStackView, false);
+                bubbleViewInfo.expandedView = (BubbleExpandedView) layoutInflaterFrom.inflate(R.layout.bubble_expanded_view, (ViewGroup) bubbleStackView, false);
             }
-            if (!BubbleViewInfoTask.m3217$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+            if (!BubbleViewInfoTask.m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
                 return null;
             }
             Bubble.FlyoutMessage flyoutMessage = bubble.mFlyoutMessage;
@@ -85,14 +83,13 @@ public class BubbleViewInfoTask {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onBubbleViewsReady(Bubble bubble);
     }
 
     /* renamed from: -$$Nest$smpopulateCommonInfo, reason: not valid java name */
-    public static boolean m3217$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) {
-        Drawable drawable;
+    public static boolean m3234$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws PackageManager.NameNotFoundException {
+        Drawable bubbleDrawable;
         ShortcutInfo shortcutInfo = bubble.mShortcutInfo;
         if (shortcutInfo != null) {
             bubbleViewInfo.shortcutInfo = shortcutInfo;
@@ -109,13 +106,13 @@ public class BubbleViewInfoTask {
                 ShortcutInfo shortcutInfo2 = bubbleViewInfo.shortcutInfo;
                 Icon icon = bubble.mIcon;
                 bubbleIconFactory.getClass();
-                drawable = BubbleIconFactory.getBubbleDrawable(context, shortcutInfo2, icon);
+                bubbleDrawable = BubbleIconFactory.getBubbleDrawable(context, shortcutInfo2, icon);
             } catch (Exception unused) {
                 Log.w("Bubbles", "Exception creating icon for the bubble: " + bubble.mKey);
-                drawable = null;
+                bubbleDrawable = null;
             }
-            if (drawable != null) {
-                applicationIcon = drawable;
+            if (bubbleDrawable != null) {
+                applicationIcon = bubbleDrawable;
             }
             Bitmap bitmap = bubbleBadgeIconFactory.getBadgeBitmap(userBadgedIcon).icon;
             bubbleViewInfo.badgeBitmap = bitmap;
@@ -124,12 +121,12 @@ public class BubbleViewInfoTask {
             }
             bubbleViewInfo.rawBadgeBitmap = bitmap;
             bubbleViewInfo.bubbleBitmap = bubbleIconFactory.createIconBitmap(bubbleIconFactory.getCircledBubble(applicationIcon, false)).icon;
-            Path createPathFromPathData = PathParser.createPathFromPathData(context.getResources().getString(android.R.string.eventTypeAnniversary));
+            Path pathCreatePathFromPathData = PathParser.createPathFromPathData(context.getResources().getString(android.R.string.eventTypeCustom));
             Matrix matrix = new Matrix();
             float f = new float[1][0];
             matrix.setScale(f, f, 50.0f, 50.0f);
-            createPathFromPathData.transform(matrix);
-            bubbleViewInfo.dotPath = createPathFromPathData;
+            pathCreatePathFromPathData.transform(matrix);
+            bubbleViewInfo.dotPath = pathCreatePathFromPathData;
             bubbleViewInfo.dotColor = context.getResources().getColor(R.color.sec_bubble_badge_color, null);
             return true;
         } catch (PackageManager.NameNotFoundException unused2) {
@@ -178,7 +175,7 @@ public class BubbleViewInfoTask {
             bubbleViewInfo.taskView = bubble.getOrCreateBubbleTaskView(bubbleTaskViewFactory);
             bubbleViewInfo.bubbleBarExpandedView = (BubbleBarExpandedView) LayoutInflater.from(context).inflate(R.layout.bubble_bar_expanded_view, (ViewGroup) bubbleBarLayerView, false);
         }
-        if (!m3217$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, this.mIconFactory, this.mBadgeIconFactory)) {
+        if (!m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, this.mIconFactory, this.mBadgeIconFactory)) {
             return null;
         }
         bubbleViewInfo.flyoutMessage = bubble.mFlyoutMessage;

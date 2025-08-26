@@ -19,7 +19,6 @@ import kotlin.Triple;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverMusicCapsuleController {
     public final Bundle bundle;
@@ -28,7 +27,6 @@ public final class CoverMusicCapsuleController {
     public final BooleanSupplier isPlayerCoverPlayedSupplier;
     public final SubScreenManager subScreenManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,14 +43,14 @@ public final class CoverMusicCapsuleController {
     public CoverMusicCapsuleController(Context context, SubScreenManager subScreenManager, BooleanSupplier booleanSupplier) {
         this.subScreenManager = subScreenManager;
         this.isPlayerCoverPlayedSupplier = booleanSupplier;
-        Bundle m = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("com.samsung.android.widgetComponentName", "com.samsung.android.app.aodservice/MusicTile");
-        this.bundle = m;
+        Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("com.samsung.android.widgetComponentName", "com.samsung.android.app.aodservice/MusicTile");
+        this.bundle = bundleM;
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.sec_media_capsule);
         this.capsule = remoteViews;
         Log.d("CoverMusicCapsuleController", "capsule created");
-        m.putBoolean("visible", true);
-        m.putParcelable("capsule_layout", remoteViews);
-        m.putString("capsule_priority", SignalSeverity.LOW);
+        bundleM.putBoolean("visible", true);
+        bundleM.putParcelable("capsule_layout", remoteViews);
+        bundleM.putString("capsule_priority", SignalSeverity.LOW);
         updateCapsule();
     }
 
@@ -76,22 +74,22 @@ public final class CoverMusicCapsuleController {
         }
         RemoteViews remoteViews = this.capsule;
         Triple triple = playbackState.getState() == 3 ? new Triple(0, 8, Boolean.TRUE) : new Triple(8, 0, Boolean.FALSE);
-        int intValue = ((Number) triple.component1()).intValue();
-        int intValue2 = ((Number) triple.component2()).intValue();
-        boolean booleanValue = ((Boolean) triple.component3()).booleanValue();
+        int iIntValue = ((Number) triple.component1()).intValue();
+        int iIntValue2 = ((Number) triple.component2()).intValue();
+        boolean zBooleanValue = ((Boolean) triple.component3()).booleanValue();
         Triple triple2 = this.isLiveStreaming ? new Triple(8, 8, 0) : (playbackState.getPlaybackSpeed() == 1.0f || playbackState.getPlaybackSpeed() == 0.0f) ? new Triple(0, 8, 8) : new Triple(8, 0, 8);
-        int intValue3 = ((Number) triple2.component1()).intValue();
-        int intValue4 = ((Number) triple2.component2()).intValue();
-        int intValue5 = ((Number) triple2.component3()).intValue();
-        long elapsedRealtime = SystemClock.elapsedRealtime() - playbackState.getPosition();
-        remoteViews.setViewVisibility(R.id.sec_media_capsule_equalizer_ongoing, intValue);
-        remoteViews.setViewVisibility(R.id.sec_media_capsule_equalizer_stop, intValue2);
-        remoteViews.setViewVisibility(R.id.sec_media_capsule_elapsed_time, intValue3);
-        remoteViews.setViewVisibility(R.id.sec_media_capsule_playing_speed, intValue4);
-        remoteViews.setViewVisibility(R.id.sec_media_capsule_live_streaming_icon, intValue5);
+        int iIntValue3 = ((Number) triple2.component1()).intValue();
+        int iIntValue4 = ((Number) triple2.component2()).intValue();
+        int iIntValue5 = ((Number) triple2.component3()).intValue();
+        long jElapsedRealtime = SystemClock.elapsedRealtime() - playbackState.getPosition();
+        remoteViews.setViewVisibility(R.id.sec_media_capsule_equalizer_ongoing, iIntValue);
+        remoteViews.setViewVisibility(R.id.sec_media_capsule_equalizer_stop, iIntValue2);
+        remoteViews.setViewVisibility(R.id.sec_media_capsule_elapsed_time, iIntValue3);
+        remoteViews.setViewVisibility(R.id.sec_media_capsule_playing_speed, iIntValue4);
+        remoteViews.setViewVisibility(R.id.sec_media_capsule_live_streaming_icon, iIntValue5);
         int i = StringCompanionObject.$r8$clinit;
         remoteViews.setTextViewText(R.id.sec_media_capsule_playing_speed, String.format("x%.2f", Arrays.copyOf(new Object[]{Float.valueOf(playbackState.getPlaybackSpeed())}, 1)));
-        remoteViews.setChronometer(R.id.sec_media_capsule_elapsed_time, elapsedRealtime, null, booleanValue);
+        remoteViews.setChronometer(R.id.sec_media_capsule_elapsed_time, jElapsedRealtime, null, zBooleanValue);
         Bundle bundle = this.bundle;
         String str = playbackState.getState() == 3 ? SystemUIAnalytics.QPNE_VID_NORMAL : SignalSeverity.LOW;
         bundle.putParcelable("capsule_layout", this.capsule);

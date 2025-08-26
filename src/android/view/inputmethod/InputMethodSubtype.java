@@ -242,24 +242,24 @@ public final class InputMethodSubtype implements Parcelable {
     InputMethodSubtype(Parcel parcel) {
         this.mLock = new Object();
         this.mSubtypeNameResId = parcel.readInt();
-        String createFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-        this.mSubtypeNameOverride = createFromParcel == null ? "" : createFromParcel;
+        String strCreateFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+        this.mSubtypeNameOverride = strCreateFromParcel == null ? "" : strCreateFromParcel;
         this.mLayoutLabelResId = parcel.readInt();
-        String createFromParcel2 = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-        this.mLayoutLabelNonLocalized = createFromParcel2 == null ? "" : createFromParcel2;
-        String readString8 = parcel.readString8();
-        this.mPkLanguageTag = readString8 == null ? "" : readString8;
-        String readString82 = parcel.readString8();
-        this.mPkLayoutType = readString82 == null ? "" : readString82;
+        String strCreateFromParcel2 = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+        this.mLayoutLabelNonLocalized = strCreateFromParcel2 == null ? "" : strCreateFromParcel2;
+        String string8 = parcel.readString8();
+        this.mPkLanguageTag = string8 == null ? "" : string8;
+        String string82 = parcel.readString8();
+        this.mPkLayoutType = string82 == null ? "" : string82;
         this.mSubtypeIconResId = parcel.readInt();
-        String readString = parcel.readString();
-        this.mSubtypeLocale = readString == null ? "" : readString;
-        String readString2 = parcel.readString();
-        this.mSubtypeLanguageTag = readString2 == null ? "" : readString2;
-        String readString3 = parcel.readString();
-        this.mSubtypeMode = readString3 == null ? "" : readString3;
-        String readString4 = parcel.readString();
-        this.mSubtypeExtraValue = readString4 != null ? readString4 : "";
+        String string = parcel.readString();
+        this.mSubtypeLocale = string == null ? "" : string;
+        String string2 = parcel.readString();
+        this.mSubtypeLanguageTag = string2 == null ? "" : string2;
+        String string3 = parcel.readString();
+        this.mSubtypeMode = string3 == null ? "" : string3;
+        String string4 = parcel.readString();
+        this.mSubtypeExtraValue = string4 != null ? string4 : "";
         this.mIsAuxiliary = parcel.readInt() == 1;
         this.mOverridesImplicitlyEnabledSubtype = parcel.readInt() == 1;
         this.mSubtypeHashCode = parcel.readInt();
@@ -324,26 +324,24 @@ public final class InputMethodSubtype implements Parcelable {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0022  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public String getCanonicalizedLanguageTag() {
-        String str;
-        String str2 = this.mCachedCanonicalizedLanguageTag;
-        if (str2 != null) {
-            return str2;
+        String languageTag;
+        String str = this.mCachedCanonicalizedLanguageTag;
+        if (str != null) {
+            return str;
         }
         Locale localeObject = getLocaleObject();
         if (localeObject != null) {
-            String languageTag = localeObject.toLanguageTag();
-            if (!TextUtils.isEmpty(languageTag)) {
-                str = ULocale.createCanonical(ULocale.forLanguageTag(languageTag)).toLanguageTag();
-                String emptyIfNull = TextUtils.emptyIfNull(str);
-                this.mCachedCanonicalizedLanguageTag = emptyIfNull;
-                return emptyIfNull;
-            }
+            String languageTag2 = localeObject.toLanguageTag();
+            languageTag = !TextUtils.isEmpty(languageTag2) ? ULocale.createCanonical(ULocale.forLanguageTag(languageTag2)).toLanguageTag() : null;
         }
-        str = null;
-        String emptyIfNull2 = TextUtils.emptyIfNull(str);
-        this.mCachedCanonicalizedLanguageTag = emptyIfNull2;
-        return emptyIfNull2;
+        String strEmptyIfNull = TextUtils.emptyIfNull(languageTag);
+        this.mCachedCanonicalizedLanguageTag = strEmptyIfNull;
+        return strEmptyIfNull;
     }
 
     public boolean isSuitableForPhysicalKeyboardLayoutMapping() {
@@ -386,13 +384,13 @@ public final class InputMethodSubtype implements Parcelable {
         if (TextUtils.isEmpty(text)) {
             return "";
         }
-        String charSequence = text.toString();
+        String string = text.toString();
         if (containsExtraValueKey(EXTRA_KEY_UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME)) {
             localeDisplayName = getExtraValueOf(EXTRA_KEY_UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME);
         } else {
-            if (TextUtils.equals(charSequence, "%s")) {
+            if (TextUtils.equals(string, "%s")) {
                 displayContext = DisplayContext.CAPITALIZATION_FOR_UI_LIST_OR_MENU;
-            } else if (charSequence.startsWith("%s")) {
+            } else if (string.startsWith("%s")) {
                 displayContext = DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE;
             } else {
                 displayContext = DisplayContext.CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE;
@@ -403,7 +401,7 @@ public final class InputMethodSubtype implements Parcelable {
             localeDisplayName = "";
         }
         try {
-            return String.format(charSequence, localeDisplayName);
+            return String.format(string, localeDisplayName);
         } catch (IllegalFormatException e) {
             Slog.w(TAG, "Found illegal format in subtype name(" + ((Object) text) + "): " + e);
             return "";
@@ -443,24 +441,24 @@ public final class InputMethodSubtype implements Parcelable {
 
     private HashMap<String, String> getExtraValueHashMap() {
         synchronized (this) {
-            HashMap<String, String> hashMap = this.mExtraValueHashMapCache;
-            if (hashMap != null) {
-                return hashMap;
+            HashMap<String, String> map = this.mExtraValueHashMapCache;
+            if (map != null) {
+                return map;
             }
-            HashMap<String, String> hashMap2 = new HashMap<>();
+            HashMap<String, String> map2 = new HashMap<>();
             for (String str : this.mSubtypeExtraValue.split(",")) {
-                String[] split = str.split(EXTRA_VALUE_KEY_VALUE_SEPARATOR);
-                if (split.length == 1) {
-                    hashMap2.put(split[0], null);
-                } else if (split.length > 1) {
-                    if (split.length > 2) {
+                String[] strArrSplit = str.split(EXTRA_VALUE_KEY_VALUE_SEPARATOR);
+                if (strArrSplit.length == 1) {
+                    map2.put(strArrSplit[0], null);
+                } else if (strArrSplit.length > 1) {
+                    if (strArrSplit.length > 2) {
                         Slog.w(TAG, "ExtraValue has two or more '='s");
                     }
-                    hashMap2.put(split[0], split[1]);
+                    map2.put(strArrSplit[0], strArrSplit[1]);
                 }
             }
-            this.mExtraValueHashMapCache = hashMap2;
-            return hashMap2;
+            this.mExtraValueHashMapCache = map2;
+            return map2;
         }
     }
 

@@ -55,7 +55,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityFloatingMenuView extends FrameLayout implements RecyclerView.OnItemTouchListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -116,7 +115,6 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
     public final VibratorHelper mVibratorHelper;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public AnonymousClass1() {
@@ -126,10 +124,10 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         public final void onAnimationEnd(Animator animator) {
             AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
             Position position = accessibilityFloatingMenuView.mPosition;
-            float transformCurrentPercentageXToEdge = accessibilityFloatingMenuView.transformCurrentPercentageXToEdge();
-            float calculateCurrentPercentageY = AccessibilityFloatingMenuView.this.calculateCurrentPercentageY();
-            position.mPercentageX = transformCurrentPercentageXToEdge;
-            position.mPercentageY = calculateCurrentPercentageY;
+            float fTransformCurrentPercentageXToEdge = accessibilityFloatingMenuView.transformCurrentPercentageXToEdge();
+            float fCalculateCurrentPercentageY = AccessibilityFloatingMenuView.this.calculateCurrentPercentageY();
+            position.mPercentageX = fTransformCurrentPercentageXToEdge;
+            position.mPercentageY = fCalculateCurrentPercentageY;
             AccessibilityFloatingMenuView accessibilityFloatingMenuView2 = AccessibilityFloatingMenuView.this;
             Position position2 = accessibilityFloatingMenuView2.mPosition;
             accessibilityFloatingMenuView2.mAlignment = position2.mPercentageX < 0.5f ? 0 : 1;
@@ -160,20 +158,20 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
     }
 
     /* renamed from: $r8$lambda$hLzvQrXylWYdGjLfT3JG-YixoX0, reason: not valid java name */
-    public static void m1002$r8$lambda$hLzvQrXylWYdGjLfT3JGYixoX0(AccessibilityFloatingMenuView accessibilityFloatingMenuView, int i, int i2, ValueAnimator valueAnimator) {
-        float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+    public static void m1004$r8$lambda$hLzvQrXylWYdGjLfT3JGYixoX0(AccessibilityFloatingMenuView accessibilityFloatingMenuView, int i, int i2, ValueAnimator valueAnimator) {
+        float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
         if (accessibilityFloatingMenuView.mIsHideHandle) {
-            float f = 1.0f - floatValue;
+            float f = 1.0f - fFloatValue;
             WindowManager.LayoutParams layoutParams = accessibilityFloatingMenuView.mHideHandleLayoutParams;
-            layoutParams.x = (int) ((i * floatValue) + (layoutParams.x * f));
-            layoutParams.y = (int) ((floatValue * i2) + (f * layoutParams.y));
+            layoutParams.x = (int) ((i * fFloatValue) + (layoutParams.x * f));
+            layoutParams.y = (int) ((fFloatValue * i2) + (f * layoutParams.y));
             accessibilityFloatingMenuView.updateViewLayout(layoutParams);
             return;
         }
-        float f2 = 1.0f - floatValue;
+        float f2 = 1.0f - fFloatValue;
         WindowManager.LayoutParams layoutParams2 = accessibilityFloatingMenuView.mCurrentLayoutParams;
-        layoutParams2.x = (int) ((i * floatValue) + (layoutParams2.x * f2));
-        layoutParams2.y = (int) ((floatValue * i2) + (f2 * layoutParams2.y));
+        layoutParams2.x = (int) ((i * fFloatValue) + (layoutParams2.x * f2));
+        layoutParams2.y = (int) ((fFloatValue * i2) + (f2 * layoutParams2.y));
         accessibilityFloatingMenuView.updateViewLayout(layoutParams2);
     }
 
@@ -181,9 +179,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda3] */
     /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$4] */
     /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$5] */
-    public AccessibilityFloatingMenuView(Context context, Position position, WindowManager windowManager, HearingAidDeviceManager hearingAidDeviceManager, MenuViewModel menuViewModel) {
-        super(context);
+    public AccessibilityFloatingMenuView(Context context, Position position, WindowManager windowManager, HearingAidDeviceManager hearingAidDeviceManager, MenuViewModel menuViewModel) throws Resources.NotFoundException {
         Display display;
+        super(context);
         final int i = 0;
         this.mIsHideHandle = false;
         this.mHideHandleWidth = 0;
@@ -205,9 +203,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                 switch (i2) {
                     case 0:
                         final AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
-                        final int intValue = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
-                        final int intValue2 = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
-                        if (intValue2 >= 0) {
+                        final int iIntValue = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
+                        final int iIntValue2 = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
+                        if (iIntValue2 >= 0) {
                             final int i3 = 1;
                             accessibilityFloatingMenuView.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
@@ -215,8 +213,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                     switch (i3) {
                                         case 0:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView2 = accessibilityFloatingMenuView;
-                                            int i4 = intValue;
-                                            int i5 = intValue2;
+                                            int i4 = iIntValue;
+                                            int i5 = iIntValue2;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter = accessibilityFloatingMenuView2.mAdapter;
                                             accessibilityTargetAdapter.mHearingDeviceStatus = i4;
                                             if (i5 >= 0) {
@@ -226,8 +224,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                             break;
                                         default:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView3 = accessibilityFloatingMenuView;
-                                            int i6 = intValue;
-                                            int i7 = intValue2;
+                                            int i6 = iIntValue;
+                                            int i7 = iIntValue2;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter2 = accessibilityFloatingMenuView3.mAdapter;
                                             accessibilityTargetAdapter2.mHearingDeviceStatus = i6;
                                             if (i7 >= 0) {
@@ -243,9 +241,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                         break;
                     default:
                         final AccessibilityFloatingMenuView accessibilityFloatingMenuView2 = this.f$0;
-                        final int intValue3 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
-                        final int intValue4 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
-                        if (intValue4 >= 0) {
+                        final int iIntValue3 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
+                        final int iIntValue4 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
+                        if (iIntValue4 >= 0) {
                             final int i4 = 0;
                             accessibilityFloatingMenuView2.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
@@ -253,8 +251,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                     switch (i4) {
                                         case 0:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView22 = accessibilityFloatingMenuView2;
-                                            int i42 = intValue3;
-                                            int i5 = intValue4;
+                                            int i42 = iIntValue3;
+                                            int i5 = iIntValue4;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter = accessibilityFloatingMenuView22.mAdapter;
                                             accessibilityTargetAdapter.mHearingDeviceStatus = i42;
                                             if (i5 >= 0) {
@@ -264,8 +262,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                             break;
                                         default:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView3 = accessibilityFloatingMenuView2;
-                                            int i6 = intValue3;
-                                            int i7 = intValue4;
+                                            int i6 = iIntValue3;
+                                            int i7 = iIntValue4;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter2 = accessibilityFloatingMenuView3.mAdapter;
                                             accessibilityTargetAdapter2.mHearingDeviceStatus = i6;
                                             if (i7 >= 0) {
@@ -297,9 +295,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                 switch (i22) {
                     case 0:
                         final AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
-                        final int intValue = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
-                        final int intValue2 = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
-                        if (intValue2 >= 0) {
+                        final int iIntValue = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
+                        final int iIntValue2 = ((Integer) accessibilityFloatingMenuView.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
+                        if (iIntValue2 >= 0) {
                             final int i3 = 1;
                             accessibilityFloatingMenuView.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
@@ -307,8 +305,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                     switch (i3) {
                                         case 0:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView22 = accessibilityFloatingMenuView;
-                                            int i42 = intValue;
-                                            int i5 = intValue2;
+                                            int i42 = iIntValue;
+                                            int i5 = iIntValue2;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter = accessibilityFloatingMenuView22.mAdapter;
                                             accessibilityTargetAdapter.mHearingDeviceStatus = i42;
                                             if (i5 >= 0) {
@@ -318,8 +316,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                             break;
                                         default:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView3 = accessibilityFloatingMenuView;
-                                            int i6 = intValue;
-                                            int i7 = intValue2;
+                                            int i6 = iIntValue;
+                                            int i7 = iIntValue2;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter2 = accessibilityFloatingMenuView3.mAdapter;
                                             accessibilityTargetAdapter2.mHearingDeviceStatus = i6;
                                             if (i7 >= 0) {
@@ -335,9 +333,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                         break;
                     default:
                         final AccessibilityFloatingMenuView accessibilityFloatingMenuView2 = this.f$0;
-                        final int intValue3 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
-                        final int intValue4 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
-                        if (intValue4 >= 0) {
+                        final int iIntValue3 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceStatusData.getValue()).intValue();
+                        final int iIntValue4 = ((Integer) accessibilityFloatingMenuView2.mMenuViewModel.mHearingDeviceTargetIndex.getValue()).intValue();
+                        if (iIntValue4 >= 0) {
                             final int i4 = 0;
                             accessibilityFloatingMenuView2.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
@@ -345,8 +343,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                     switch (i4) {
                                         case 0:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView22 = accessibilityFloatingMenuView2;
-                                            int i42 = intValue3;
-                                            int i5 = intValue4;
+                                            int i42 = iIntValue3;
+                                            int i5 = iIntValue4;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter = accessibilityFloatingMenuView22.mAdapter;
                                             accessibilityTargetAdapter.mHearingDeviceStatus = i42;
                                             if (i5 >= 0) {
@@ -356,8 +354,8 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
                                             break;
                                         default:
                                             AccessibilityFloatingMenuView accessibilityFloatingMenuView3 = accessibilityFloatingMenuView2;
-                                            int i6 = intValue3;
-                                            int i7 = intValue4;
+                                            int i6 = iIntValue3;
+                                            int i7 = iIntValue4;
                                             AccessibilityTargetAdapter accessibilityTargetAdapter2 = accessibilityFloatingMenuView3.mAdapter;
                                             accessibilityTargetAdapter2.mHearingDeviceStatus = i6;
                                             if (i7 >= 0) {
@@ -489,9 +487,9 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         this.mIsHideHandle = Settings.Secure.getInt(this.mContext.getContentResolver(), "accessibility_floating_menu_icon_type", 0) == 9;
         this.mLastConfiguration = new Configuration(getResources().getConfiguration());
         this.mAdapter = new AccessibilityTargetAdapter(this.mTargets);
-        Looper myLooper = Looper.myLooper();
-        Objects.requireNonNull(myLooper, "looper must not be null");
-        this.mUiHandler = new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        Objects.requireNonNull(looperMyLooper, "looper must not be null");
+        this.mUiHandler = new Handler(looperMyLooper);
         this.mPosition = position;
         int i4 = position.mPercentageX < 0.5f ? 0 : 1;
         this.mAlignment = i4;
@@ -507,23 +505,23 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         layoutParams.accessibilityTitle = getResources().getString(R.string.accessibility_floating_button);
         layoutParams.setTitle("AccessibilityFloatingMenuView");
         this.mCurrentLayoutParams = layoutParams;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, this.mFadeOutValue);
-        this.mFadeOutAnimator = ofFloat;
-        ofFloat.setDuration(1000L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda5
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, this.mFadeOutValue);
+        this.mFadeOutAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(1000L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda5
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
+                AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
                 int i5 = AccessibilityFloatingMenuView.$r8$clinit;
                 accessibilityFloatingMenuView.getClass();
                 accessibilityFloatingMenuView.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mDragAnimator = ofFloat2;
-        ofFloat2.setDuration(150L);
-        ofFloat2.setInterpolator(new OvershootInterpolator());
-        ofFloat2.addListener(new AnonymousClass1());
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mDragAnimator = valueAnimatorOfFloat2;
+        valueAnimatorOfFloat2.setDuration(150L);
+        valueAnimatorOfFloat2.setInterpolator(new OvershootInterpolator());
+        valueAnimatorOfFloat2.addListener(new AnonymousClass1());
         initListView();
         this.mVibratorHelper = (VibratorHelper) Dependency.sDependency.getDependencyInner(VibratorHelper.class);
         this.mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView.2
@@ -674,7 +672,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
 
     public final int getNavigationBarHeight() {
         if (getResources().getBoolean(android.R.bool.config_swipeDisambiguation)) {
-            return getResources().getDimensionPixelSize(android.R.dimen.seekbar_track_progress_height_material);
+            return getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material);
         }
         return 0;
     }
@@ -749,7 +747,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         addView(this.mListView);
     }
 
-    public final boolean isEdgeArea() {
+    public final boolean isEdgeArea() throws Resources.NotFoundException {
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.accessibility_floating_edge_area);
         int rotation = this.mWindowManager.getDefaultDisplay().getRotation();
         if (this.mIsHideHandle) {
@@ -772,7 +770,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         this.mLastConfiguration.setTo(configuration);
         if ((configuration.diff(this.mLastConfiguration) & 4) != 0) {
@@ -801,21 +799,158 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         setSystemGestureExclusion();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0038, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0038, code lost:
     
         if ((android.util.MathUtils.sq(r0 - r7.mDownY) + android.util.MathUtils.sq(r8 - r9)) > r7.mSquareScaledTouchSlop) goto L14;
      */
     @Override // androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onInterceptTouchEvent(androidx.recyclerview.widget.RecyclerView r8, android.view.MotionEvent r9) {
-        /*
-            Method dump skipped, instructions count: 583
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView.onInterceptTouchEvent(androidx.recyclerview.widget.RecyclerView, android.view.MotionEvent):boolean");
+    public final boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) throws Resources.NotFoundException {
+        int rawX = (int) motionEvent.getRawX();
+        int rawY = (int) motionEvent.getRawY();
+        this.mGestureDetector.onTouchEvent(motionEvent);
+        int action = motionEvent.getAction();
+        int i = 1;
+        if (action == 0) {
+            fadeIn();
+            this.mDownX = rawX;
+            this.mDownY = rawY;
+            Prefs.putBoolean(getContext(), "AccessibilityFloatingMenuArea", true);
+            updateDisplaySizeWith(this.mWindowManager.getCurrentWindowMetrics());
+            if (this.mIsHideHandle) {
+                WindowManager.LayoutParams layoutParams = this.mHideHandleLayoutParams;
+                this.mRelativeToPointerDownX = layoutParams.x - this.mDownX;
+                this.mRelativeToPointerDownY = layoutParams.y - this.mDownY;
+                if (!this.mIsRepeatVibrations) {
+                    this.mIsRepeatVibrations = true;
+                    VibratorHelper vibratorHelper = this.mVibratorHelper;
+                    if (vibratorHelper == null || !vibratorHelper.isSupportDCMotorHapticFeedback()) {
+                        this.mListView.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
+                    } else {
+                        this.mVibratorHelper.vibrateButton();
+                    }
+                }
+            } else {
+                WindowManager.LayoutParams layoutParams2 = this.mCurrentLayoutParams;
+                this.mRelativeToPointerDownX = layoutParams2.x - this.mDownX;
+                this.mRelativeToPointerDownY = layoutParams2.y - this.mDownY;
+            }
+            this.mListView.animate().translationX(0.0f);
+            return false;
+        }
+        if (action != 1) {
+            if (action == 2) {
+                if (!this.mIsDragging) {
+                    int i2 = this.mDownX;
+                }
+                if (!this.mIsDragging) {
+                    this.mIsDragging = true;
+                    setRadius(this.mRadius, 1);
+                    setInset(0, 0);
+                }
+                int i3 = this.mAlignment;
+                int i4 = this.mDownX;
+                if ((i3 != 1 || rawX <= i4) && (i3 != 0 || i4 <= rawX)) {
+                    i = 0;
+                }
+                this.mTemporaryShapeType = i;
+                int i5 = rawX + this.mRelativeToPointerDownX;
+                int i6 = rawY + this.mRelativeToPointerDownY;
+                if (this.mIsLongClicked) {
+                    this.mIsLongClicked = false;
+                }
+                EditTooltipView editTooltipView = this.mEditTooltipView;
+                if (editTooltipView != null && editTooltipView.isShown()) {
+                    this.mEditTooltipView.hide();
+                }
+                if (this.mIsHideHandle) {
+                    this.mHideHandleLayoutParams.x = MathUtils.constrain(i5, getMinWindowXForHandle(), getMaxWindowXForHandle());
+                    this.mHideHandleLayoutParams.y = MathUtils.constrain(i6, 0, this.mDisplayHeight - this.mHideHandleHeight);
+                    updateViewLayout(this.mHideHandleLayoutParams);
+                    return false;
+                }
+                this.mCurrentLayoutParams.x = MathUtils.constrain(i5, getMinWindowX(), getMaxWindowX());
+                this.mCurrentLayoutParams.y = MathUtils.constrain(i6, 0, getMaxWindowY());
+                updateViewLayout(this.mCurrentLayoutParams);
+                return false;
+            }
+            return false;
+        }
+        if (this.mIsLongClicked) {
+            this.mIsLongClicked = false;
+            return true;
+        }
+        this.mIsRepeatVibrations = false;
+        Position position = this.mPosition;
+        float fTransformCurrentPercentageXToEdge = transformCurrentPercentageXToEdge();
+        float fCalculateCurrentPercentageY = calculateCurrentPercentageY();
+        position.mPercentageX = fTransformCurrentPercentageXToEdge;
+        position.mPercentageY = fCalculateCurrentPercentageY;
+        Prefs.putString(getContext(), "AccessibilityFloatingMenuPosition", this.mPosition.toString());
+        int i7 = this.mPosition.mPercentageX < 0.5f ? 0 : 1;
+        this.mAlignment = i7;
+        int i8 = i7 == 1 ? 0 : 2;
+        this.mRadiusType = i8;
+        boolean z = this.mIsHideHandle;
+        if (z && !this.mIsDragging) {
+            showFloatingButton(i8, false);
+        } else if (this.mIsDragging) {
+            this.mIsDragging = false;
+            if (z) {
+                if (isEdgeArea()) {
+                    int minWindowXForHandle = getMinWindowXForHandle();
+                    int maxWindowXForHandle = getMaxWindowXForHandle();
+                    WindowManager.LayoutParams layoutParams3 = this.mHideHandleLayoutParams;
+                    if (layoutParams3.x > (minWindowXForHandle + maxWindowXForHandle) / 2) {
+                        minWindowXForHandle = maxWindowXForHandle;
+                    }
+                    snapToLocation(minWindowXForHandle, layoutParams3.y);
+                } else {
+                    showFloatingButton(1, true);
+                }
+            } else if (isEdgeArea()) {
+                int minWindowX = getMinWindowX();
+                int maxWindowX = getMaxWindowX();
+                WindowManager.LayoutParams layoutParams4 = this.mCurrentLayoutParams;
+                if (layoutParams4.x > (minWindowX + maxWindowX) / 2) {
+                    minWindowX = maxWindowX;
+                }
+                snapToLocation(minWindowX, layoutParams4.y);
+            }
+            if (!this.mIsHideHandle && isEdgeArea()) {
+                int layoutWidth = getLayoutWidth();
+                int rotation = this.mWindowManager.getDefaultDisplay().getRotation();
+                int dimensionPixelSize = getResources().getDimensionPixelSize(17106379);
+                if (rotation == 1 && !isTablet()) {
+                    layoutWidth += dimensionPixelSize;
+                } else if (offsetForLeftNaviBar()) {
+                    layoutWidth += this.mNavigationBarHeight;
+                }
+                int i9 = this.mDownX;
+                if (i9 <= layoutWidth || i9 >= getMaxWindowX()) {
+                    int layoutWidth2 = getLayoutWidth() / 2;
+                    int i10 = this.mAlignment;
+                    if ((i10 == 1 && rawX - this.mDownX > layoutWidth2) || (i10 == 0 && this.mDownX - rawX > layoutWidth2)) {
+                        if (Math.abs(this.mDownY - rawY) < getLayoutWidth() / 2) {
+                            this.mIsSwipeForHandle = true;
+                            removeView(this.mListView);
+                            updateHideHandle(rawY);
+                            this.mListView.announceForAccessibility(getContext().getString(R.string.accessibility_floating_button_minimized));
+                        }
+                    }
+                }
+            }
+            setShapeType(this.mTemporaryShapeType);
+            return true;
+        }
+        if (this.mShapeType == 0) {
+            fadeOut();
+            return false;
+        }
+        setShapeType(0);
+        return true;
     }
 
     public final void onTargetFeaturesChanged(List list) {
@@ -866,7 +1001,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         setOnTouchListener(i == 0 ? null : new View.OnTouchListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
+                AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
                 int i2 = AccessibilityFloatingMenuView.$r8$clinit;
                 accessibilityFloatingMenuView.getClass();
                 int action = motionEvent.getAction();
@@ -923,7 +1058,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         post(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
+                AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
                 accessibilityFloatingMenuView.setSystemGestureExclusionRects(accessibilityFloatingMenuView.mIsShowing ? Collections.singletonList(rect) : Collections.EMPTY_LIST);
             }
         });
@@ -938,7 +1073,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda11
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
+                AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
                 WindowMetrics currentWindowMetrics = accessibilityFloatingMenuView.mWindowManager.getCurrentWindowMetrics();
                 if (!currentWindowMetrics.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout()).toRect().equals(accessibilityFloatingMenuView.mDisplayInsetsRect)) {
                     accessibilityFloatingMenuView.updateDisplaySizeWith(currentWindowMetrics);
@@ -1016,7 +1151,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         this.mDragAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                AccessibilityFloatingMenuView.m1002$r8$lambda$hLzvQrXylWYdGjLfT3JGYixoX0(AccessibilityFloatingMenuView.this, i, i2, valueAnimator);
+                AccessibilityFloatingMenuView.m1004$r8$lambda$hLzvQrXylWYdGjLfT3JGYixoX0(this.f$0, i, i2, valueAnimator);
             }
         });
         this.mDragAnimator.start();
@@ -1035,7 +1170,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         return ((double) (f / ((float) maxWindowX))) < 0.5d ? 0.0f : 1.0f;
     }
 
-    public final void updateDimensions() {
+    public final void updateDimensions() throws Resources.NotFoundException {
         Resources resources = getResources();
         updateDisplaySizeWith(this.mWindowManager.getCurrentWindowMetrics());
         this.mMargin = resources.getDimensionPixelSize(R.dimen.accessibility_floating_menu_margin);
@@ -1086,7 +1221,7 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         this.mListView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView$$ExternalSyntheticLambda6
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                AccessibilityFloatingMenuView accessibilityFloatingMenuView = AccessibilityFloatingMenuView.this;
+                AccessibilityFloatingMenuView accessibilityFloatingMenuView = this.f$0;
                 accessibilityFloatingMenuView.showFloatingButton(accessibilityFloatingMenuView.mRadiusType, false);
             }
         });
@@ -1104,10 +1239,10 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         if (this.mIsSwipeForHandle) {
             this.mHideHandleLayoutParams.y = this.mHandleFirstPositionY;
             Position position2 = this.mPosition;
-            float transformCurrentPercentageXToEdge = transformCurrentPercentageXToEdge();
-            float calculateCurrentPercentageY = calculateCurrentPercentageY();
-            position2.mPercentageX = transformCurrentPercentageXToEdge;
-            position2.mPercentageY = calculateCurrentPercentageY;
+            float fTransformCurrentPercentageXToEdge = transformCurrentPercentageXToEdge();
+            float fCalculateCurrentPercentageY = calculateCurrentPercentageY();
+            position2.mPercentageX = fTransformCurrentPercentageXToEdge;
+            position2.mPercentageY = fCalculateCurrentPercentageY;
             this.mIsSwipeForHandle = false;
         } else {
             this.mHideHandleLayoutParams.y = Math.max(0, ((int) (position.mPercentageY * (this.mDisplayHeight - this.mHideHandleHeight))) - getInterval());
@@ -1115,54 +1250,29 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         updateViewLayout(this.mHideHandleLayoutParams);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0027, code lost:
-    
-        if (r6 == 9) goto L11;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0029  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateItemViewDimensionsWith(int r6) {
-        /*
-            r5 = this;
-            android.content.res.Resources r0 = r5.getResources()
-            if (r6 != 0) goto La
-            r1 = 2131165259(0x7f07004b, float:1.794473E38)
-            goto Ld
-        La:
-            r1 = 2131165240(0x7f070038, float:1.7944692E38)
-        Ld:
-            int r1 = r0.getDimensionPixelSize(r1)
-            r5.mPadding = r1
-            boolean r1 = com.android.internal.accessibility.util.AccessibilityUtils.isFoldedLargeCoverScreen()
-            r2 = 2131165247(0x7f07003f, float:1.7944706E38)
-            r3 = 2131165261(0x7f07004d, float:1.7944734E38)
-            r4 = 9
-            if (r1 == 0) goto L2b
-            if (r6 != 0) goto L27
-            r2 = 2131165257(0x7f070049, float:1.7944726E38)
-            goto L34
-        L27:
-            if (r6 != r4) goto L34
-        L29:
-            r2 = r3
-            goto L34
-        L2b:
-            if (r6 != 0) goto L2e
-            goto L29
-        L2e:
-            if (r6 != r4) goto L31
-            goto L34
-        L31:
-            r2 = 2131165242(0x7f07003a, float:1.7944696E38)
-        L34:
-            int r6 = r0.getDimensionPixelSize(r2)
-            r5.mIconWidth = r6
-            r5.mIconHeight = r6
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView.updateItemViewDimensionsWith(int):void");
+    public final void updateItemViewDimensionsWith(int i) throws Resources.NotFoundException {
+        Resources resources = getResources();
+        this.mPadding = resources.getDimensionPixelSize(i == 0 ? R.dimen.accessibility_floating_menu_small_padding : R.dimen.accessibility_floating_menu_large_padding);
+        boolean zIsFoldedLargeCoverScreen = AccessibilityUtils.isFoldedLargeCoverScreen();
+        int i2 = R.dimen.accessibility_floating_menu_medium_width_height;
+        if (zIsFoldedLargeCoverScreen) {
+            if (i == 0) {
+                i2 = R.dimen.accessibility_floating_menu_small_for_cover_width_height;
+            } else if (i == 9) {
+                i2 = R.dimen.accessibility_floating_menu_small_width_height;
+            }
+        } else if (i != 0) {
+            if (i != 9) {
+                i2 = R.dimen.accessibility_floating_menu_large_width_height;
+            }
+        }
+        int dimensionPixelSize = resources.getDimensionPixelSize(i2);
+        this.mIconWidth = dimensionPixelSize;
+        this.mIconHeight = dimensionPixelSize;
     }
 
     public final void updateLocationWith(Position position) {
@@ -1183,47 +1293,28 @@ public class AccessibilityFloatingMenuView extends FrameLayout implements Recycl
         this.mUiHandler.removeCallbacksAndMessages(null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0018, code lost:
-    
-        if (r6 == 9) goto L7;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateRadiusWith(int r6, int r7) {
-        /*
-            r5 = this;
-            android.content.res.Resources r0 = r5.getResources()
-            boolean r1 = com.android.internal.accessibility.util.AccessibilityUtils.isFoldedLargeCoverScreen()
-            r2 = 2131165246(0x7f07003e, float:1.7944704E38)
-            r3 = 2131165258(0x7f07004a, float:1.7944728E38)
-            r4 = 9
-            if (r1 == 0) goto L1c
-            if (r6 != 0) goto L18
-            r2 = 2131165256(0x7f070048, float:1.7944724E38)
-            goto L25
-        L18:
-            if (r6 != r4) goto L25
-        L1a:
-            r2 = r3
-            goto L25
-        L1c:
-            if (r6 != 0) goto L1f
-            goto L1a
-        L1f:
-            if (r6 != r4) goto L22
-            goto L25
-        L22:
-            r2 = 2131165239(0x7f070037, float:1.794469E38)
-        L25:
-            int r6 = r0.getDimensionPixelSize(r2)
-            float r6 = (float) r6
-            r5.mRadius = r6
-            r5.setRadius(r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuView.updateRadiusWith(int, int):void");
+    public final void updateRadiusWith(int i, int i2) {
+        Resources resources = getResources();
+        boolean zIsFoldedLargeCoverScreen = AccessibilityUtils.isFoldedLargeCoverScreen();
+        int i3 = R.dimen.accessibility_floating_menu_medium_radius;
+        if (zIsFoldedLargeCoverScreen) {
+            if (i == 0) {
+                i3 = R.dimen.accessibility_floating_menu_small_for_cover_screen_radius;
+            } else if (i == 9) {
+                i3 = R.dimen.accessibility_floating_menu_small_multiple_radius;
+            }
+        } else if (i != 0) {
+            if (i != 9) {
+                i3 = R.dimen.accessibility_floating_menu_large_multiple_radius;
+            }
+        }
+        float dimensionPixelSize = resources.getDimensionPixelSize(i3);
+        this.mRadius = dimensionPixelSize;
+        setRadius(dimensionPixelSize, i2);
     }
 
     public final void updateViewLayout(final WindowManager.LayoutParams layoutParams) {

@@ -3,7 +3,6 @@ package androidx.compose.ui.text.input;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import androidx.compose.ui.text.internal.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DeleteSurroundingTextCommand implements EditCommand {
     public final int lengthAfterCursor;
@@ -22,20 +21,20 @@ public final class DeleteSurroundingTextCommand implements EditCommand {
     public final void applyTo(EditingBuffer editingBuffer) {
         int i = editingBuffer.selectionEnd;
         int i2 = this.lengthAfterCursor;
-        int i3 = i + i2;
-        int i4 = (i ^ i3) & (i2 ^ i3);
+        int length = i + i2;
+        int i3 = (i ^ length) & (i2 ^ length);
         PartialGapBuffer partialGapBuffer = editingBuffer.gapBuffer;
-        if (i4 < 0) {
-            i3 = partialGapBuffer.getLength();
+        if (i3 < 0) {
+            length = partialGapBuffer.getLength();
         }
-        editingBuffer.delete$ui_text_release(editingBuffer.selectionEnd, Math.min(i3, partialGapBuffer.getLength()));
-        int i5 = editingBuffer.selectionStart;
-        int i6 = this.lengthBeforeCursor;
-        int i7 = i5 - i6;
-        if (((i6 ^ i5) & (i5 ^ i7)) < 0) {
-            i7 = 0;
+        editingBuffer.delete$ui_text_release(editingBuffer.selectionEnd, Math.min(length, partialGapBuffer.getLength()));
+        int i4 = editingBuffer.selectionStart;
+        int i5 = this.lengthBeforeCursor;
+        int i6 = i4 - i5;
+        if (((i5 ^ i4) & (i4 ^ i6)) < 0) {
+            i6 = 0;
         }
-        editingBuffer.delete$ui_text_release(Math.max(0, i7), editingBuffer.selectionStart);
+        editingBuffer.delete$ui_text_release(Math.max(0, i6), editingBuffer.selectionStart);
     }
 
     public final boolean equals(Object obj) {

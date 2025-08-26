@@ -5,7 +5,6 @@ import androidx.leanback.widget.Grid;
 import androidx.leanback.widget.GridLayoutManager;
 import androidx.recyclerview.widget.GapWorker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SingleRow extends Grid {
     public final Grid.Location mTmpLocation = new Grid.Location(0);
@@ -16,42 +15,42 @@ public class SingleRow extends Grid {
 
     @Override // androidx.leanback.widget.Grid
     public final boolean appendVisibleItems(int i, boolean z) {
-        int min;
-        int i2;
+        int iMin;
+        int size;
         if (this.mProvider.getCount() == 0 || (!z && checkAppendOverLimit(i))) {
             return false;
         }
-        int i3 = this.mLastVisibleIndex;
-        if (i3 >= 0) {
-            min = i3 + 1;
+        int i2 = this.mLastVisibleIndex;
+        if (i2 >= 0) {
+            iMin = i2 + 1;
         } else {
-            int i4 = this.mStartIndex;
-            min = i4 != -1 ? Math.min(i4, this.mProvider.getCount() - 1) : 0;
+            int i3 = this.mStartIndex;
+            iMin = i3 != -1 ? Math.min(i3, this.mProvider.getCount() - 1) : 0;
         }
         boolean z2 = false;
-        while (min < this.mProvider.getCount()) {
+        while (iMin < this.mProvider.getCount()) {
             GridLayoutManager.AnonymousClass2 anonymousClass2 = this.mProvider;
             Object[] objArr = this.mTmpItem;
-            int createItem = anonymousClass2.createItem(min, true, objArr, false);
+            int iCreateItem = anonymousClass2.createItem(iMin, true, objArr, false);
             if (this.mFirstVisibleIndex < 0 || this.mLastVisibleIndex < 0) {
-                i2 = this.mReversedFlow ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-                this.mFirstVisibleIndex = min;
-                this.mLastVisibleIndex = min;
+                size = this.mReversedFlow ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                this.mFirstVisibleIndex = iMin;
+                this.mLastVisibleIndex = iMin;
             } else {
                 if (this.mReversedFlow) {
-                    int i5 = min - 1;
-                    i2 = (this.mProvider.getEdge(i5) - this.mProvider.getSize(i5)) - this.mSpacing;
+                    int i4 = iMin - 1;
+                    size = (this.mProvider.getEdge(i4) - this.mProvider.getSize(i4)) - this.mSpacing;
                 } else {
-                    int i6 = min - 1;
-                    i2 = this.mSpacing + this.mProvider.getSize(i6) + this.mProvider.getEdge(i6);
+                    int i5 = iMin - 1;
+                    size = this.mSpacing + this.mProvider.getSize(i5) + this.mProvider.getEdge(i5);
                 }
-                this.mLastVisibleIndex = min;
+                this.mLastVisibleIndex = iMin;
             }
-            this.mProvider.addItem(createItem, 0, i2, objArr[0]);
+            this.mProvider.addItem(iCreateItem, 0, size, objArr[0]);
             if (z || checkAppendOverLimit(i)) {
                 return true;
             }
-            min++;
+            iMin++;
             z2 = true;
         }
         return z2;
@@ -140,25 +139,25 @@ public class SingleRow extends Grid {
 
     @Override // androidx.leanback.widget.Grid
     public final boolean prependVisibleItems(int i, boolean z) {
-        int i2;
+        int edge;
         if (this.mProvider.getCount() == 0 || (!z && checkPrependOverLimit(i))) {
             return false;
         }
-        int i3 = GridLayoutManager.this.mPositionDeltaInPreLayout;
+        int i2 = GridLayoutManager.this.mPositionDeltaInPreLayout;
         boolean z2 = false;
-        for (int startIndexForPrepend = getStartIndexForPrepend(); startIndexForPrepend >= i3; startIndexForPrepend--) {
+        for (int startIndexForPrepend = getStartIndexForPrepend(); startIndexForPrepend >= i2; startIndexForPrepend--) {
             GridLayoutManager.AnonymousClass2 anonymousClass2 = this.mProvider;
             Object[] objArr = this.mTmpItem;
-            int createItem = anonymousClass2.createItem(startIndexForPrepend, false, objArr, false);
+            int iCreateItem = anonymousClass2.createItem(startIndexForPrepend, false, objArr, false);
             if (this.mFirstVisibleIndex < 0 || this.mLastVisibleIndex < 0) {
-                i2 = this.mReversedFlow ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                edge = this.mReversedFlow ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 this.mFirstVisibleIndex = startIndexForPrepend;
                 this.mLastVisibleIndex = startIndexForPrepend;
             } else {
-                i2 = this.mReversedFlow ? this.mProvider.getEdge(startIndexForPrepend + 1) + this.mSpacing + createItem : (this.mProvider.getEdge(startIndexForPrepend + 1) - this.mSpacing) - createItem;
+                edge = this.mReversedFlow ? this.mProvider.getEdge(startIndexForPrepend + 1) + this.mSpacing + iCreateItem : (this.mProvider.getEdge(startIndexForPrepend + 1) - this.mSpacing) - iCreateItem;
                 this.mFirstVisibleIndex = startIndexForPrepend;
             }
-            this.mProvider.addItem(createItem, 0, i2, objArr[0]);
+            this.mProvider.addItem(iCreateItem, 0, edge, objArr[0]);
             z2 = true;
             if (z || checkPrependOverLimit(i)) {
                 break;

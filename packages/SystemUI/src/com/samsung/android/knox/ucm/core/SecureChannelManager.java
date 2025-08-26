@@ -8,7 +8,6 @@ import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.ucm.core.IUcmService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SecureChannelManager {
     public static final String BUNDLE_EXTRA_SCP_ENCRYPTION = "scp_encryption";
@@ -63,11 +62,11 @@ public class SecureChannelManager {
     }
 
     public static SecureChannelManager getInstance() {
-        IUcmService asInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
-        if (asInterface == null) {
+        IUcmService iUcmServiceAsInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+        if (iUcmServiceAsInterface == null) {
             return null;
         }
-        return new SecureChannelManager(asInterface);
+        return new SecureChannelManager(iUcmServiceAsInterface);
     }
 
     public ApduMessage createSecureChannel(int i, Bundle bundle) {

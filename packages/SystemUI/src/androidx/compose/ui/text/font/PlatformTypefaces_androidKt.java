@@ -9,7 +9,6 @@ import androidx.compose.ui.util.ListUtilsKt;
 import java.util.ArrayList;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PlatformTypefaces_androidKt {
     public static final android.graphics.Typeface setFontVariationSettings(android.graphics.Typeface typeface, FontVariation.Settings settings, Context context) {
@@ -35,7 +34,7 @@ public abstract class PlatformTypefaces_androidKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 FontVariation.Setting setting = (FontVariation.Setting) obj;
                 return "'" + setting.getAxisName() + "' " + setting.toVariationValue();
             }

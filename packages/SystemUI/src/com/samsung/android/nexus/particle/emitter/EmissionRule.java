@@ -9,7 +9,6 @@ import com.samsung.android.nexus.base.utils.range.LongRangeable;
 import com.samsung.android.nexus.particle.emitter.EmissionConfigType;
 import com.samsung.android.nexus.particle.emitter.FactorType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EmissionRule {
     public final int[] applyParentFactorCheckIndexList;

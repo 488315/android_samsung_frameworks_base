@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class TouchpadTutorialActivity$onCreate$1$1$1$1 extends FunctionReferenceImpl implements Function0 {
     public TouchpadTutorialActivity$onCreate$1$1$1$1(Object obj) {
@@ -26,9 +25,9 @@ final /* synthetic */ class TouchpadTutorialActivity$onCreate$1$1$1$1 extends Fu
         InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(3);
         LogLevel logLevel = LogLevel.INFO;
         LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = tutorialContext.getString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = tutorialContext.getString();
+        logBuffer.commit(logMessageObtain);
         touchpadTutorialActivity.finish();
         return Unit.INSTANCE;
     }

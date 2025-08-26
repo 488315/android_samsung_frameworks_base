@@ -231,104 +231,153 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
         onEndTransaction();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:77:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int getPositionForString(java.lang.String r15) {
-        /*
-            Method dump skipped, instructions count: 254
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.widget.SemAbstractIndexer.getPositionForString(java.lang.String):int");
+    private int getPositionForString(String str) {
+        int iAbs;
+        int iAbs2;
+        int i;
+        int i2;
+        SparseIntArray sparseIntArray = this.mAlphaMap;
+        int itemCount = getItemCount();
+        if (itemCount == 0 || this.mAlphabet == null) {
+            return 0;
+        }
+        if (str != null && str.length() != 0) {
+            char cCharAt = str.charAt(0);
+            int i3 = sparseIntArray.get(cCharAt, Integer.MIN_VALUE);
+            if (Integer.MIN_VALUE != i3) {
+                iAbs2 = Math.abs(i3);
+                iAbs = itemCount;
+            } else {
+                int iIndexOf = this.mAlphabet.toString().indexOf(cCharAt);
+                if (iIndexOf > 0) {
+                    int i4 = iIndexOf - 1;
+                    int iAbs3 = (cCharAt <= this.mAlphabet.charAt(i4) || (i2 = sparseIntArray.get(this.mAlphabet.charAt(i4), Integer.MIN_VALUE)) == Integer.MIN_VALUE) ? 0 : Math.abs(i2);
+                    if (iIndexOf < this.mAlphabet.length() - 1) {
+                        int i5 = iIndexOf + 1;
+                        iAbs = (cCharAt >= this.mAlphabet.charAt(i5) || (i = sparseIntArray.get(this.mAlphabet.charAt(i5), Integer.MIN_VALUE)) == Integer.MIN_VALUE) ? itemCount : Math.abs(i);
+                        iAbs2 = iAbs3;
+                    }
+                }
+            }
+            char cCharAt2 = str.charAt(0);
+            String str2 = cCharAt2 == '&' ? "!" : str;
+            if (cCharAt2 == 9733) {
+                int i6 = this.mProfileItemCount;
+                if (iAbs2 < i6) {
+                    iAbs2 = i6;
+                }
+            } else if (cCharAt2 == 55357) {
+                int i7 = this.mProfileItemCount;
+                int i8 = this.mFavoriteItemCount;
+                if (iAbs2 < i7 + i8) {
+                    iAbs2 = i7 + i8;
+                }
+            } else {
+                int i9 = this.mProfileItemCount;
+                int i10 = this.mFavoriteItemCount;
+                int i11 = this.mGroupItemCount;
+                if (iAbs2 < i9 + i10 + i11) {
+                    iAbs2 = i9 + i10 + i11;
+                }
+            }
+            int i12 = iAbs - this.mDigitItemCount;
+            if (cCharAt2 == '#') {
+                iAbs2 = i12;
+            }
+            int i13 = (i12 + iAbs2) / 2;
+            while (i13 >= iAbs2 && i13 < i12) {
+                String itemAt = getItemAt(i13);
+                if (itemAt != null && !itemAt.equals("")) {
+                    int iCompare = compare(itemAt, str2);
+                    if (cCharAt2 == 9733 || cCharAt2 == '&' || cCharAt2 == '#') {
+                        iCompare = 1;
+                    }
+                    if (iCompare == 0) {
+                        if (iAbs2 == i13) {
+                            break;
+                        }
+                    } else {
+                        if (iCompare < 0) {
+                            int i14 = i13 + 1;
+                            if (i14 >= itemCount) {
+                                break;
+                            }
+                            iAbs2 = i14;
+                        }
+                        i13 = (iAbs2 + i12) / 2;
+                    }
+                    i12 = i13;
+                    i13 = (iAbs2 + i12) / 2;
+                } else {
+                    if (i13 <= iAbs2) {
+                        break;
+                    }
+                    i13--;
+                }
+            }
+            itemCount = i13;
+            if (str.length() == 1) {
+                sparseIntArray.put(cCharAt, itemCount);
+            }
+        }
+        return itemCount;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0080 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006a A[EDGE_INSN: B:22:0x006a->B:16:0x006a BREAK  A[LOOP:1: B:9:0x0057->B:13:0x0067], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x005a  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0080 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x006a A[EDGE_INSN: B:28:0x006a->B:19:0x006a BREAK  A[LOOP:1: B:13:0x0057->B:18:0x0067], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void getBundleInfo() {
-        /*
-            r9 = this;
-            android.os.Bundle r0 = r9.mBundle
-            java.lang.String r1 = "indexscroll_index_titles"
-            java.lang.String[] r0 = r0.getStringArray(r1)
-            android.os.Bundle r1 = r9.mBundle
-            java.lang.String r2 = "indexscroll_index_counts"
-            int[] r1 = r1.getIntArray(r2)
-            int r2 = r9.mProfileItemCount
-            r3 = 0
-            r4 = r3
-            r5 = r4
-        L15:
-            int r6 = r9.mAlphabetLength
-            if (r4 >= r6) goto L83
-            java.lang.CharSequence r6 = r9.mAlphabet
-            char r6 = r6.charAt(r4)
-            int[] r7 = r9.mCachingValue
-            r7[r4] = r2
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r8 = "Get index info from bundle ("
-            r7.<init>(r8)
-            r7.append(r4)
-            java.lang.String r8 = ") : "
-            r7.append(r8)
-            r7.append(r6)
-            java.lang.String r8 = " = "
-            r7.append(r8)
-            r7.append(r2)
-            java.lang.String r7 = r7.toString()
-            java.lang.String r8 = "SemAbstractIndexer"
-            android.util.Log.d(r8, r7)
-            r7 = 9733(0x2605, float:1.3639E-41)
-            if (r6 != r7) goto L4e
-            int r7 = r9.mFavoriteItemCount
-        L4c:
-            int r2 = r2 + r7
-            goto L56
-        L4e:
-            r7 = 55357(0xd83d, float:7.7572E-41)
-            if (r6 != r7) goto L56
-            int r7 = r9.mGroupItemCount
-            goto L4c
-        L56:
-            r7 = r5
-        L57:
-            int r8 = r0.length
-            if (r7 >= r8) goto L6a
-            r8 = r0[r7]
-            char r8 = r8.charAt(r3)
-            if (r6 != r8) goto L67
-            r5 = r1[r7]
-            int r2 = r2 + r5
-            r5 = r7
-            goto L6a
-        L67:
-            int r7 = r7 + 1
-            goto L57
-        L6a:
-            java.lang.String r7 = "#"
-            char r7 = r7.charAt(r3)
-            if (r6 != r7) goto L80
-            int[] r6 = r9.mCachingValue
-            int r7 = r9.getItemCount()
-            int r8 = r9.mProfileItemCount
-            int r7 = r7 + r8
-            int r8 = r9.mDigitItemCount
-            int r7 = r7 - r8
-            r6[r4] = r7
-        L80:
-            int r4 = r4 + 1
-            goto L15
-        L83:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.widget.SemAbstractIndexer.getBundleInfo():void");
+        int i;
+        int i2;
+        String[] stringArray = this.mBundle.getStringArray("indexscroll_index_titles");
+        int[] intArray = this.mBundle.getIntArray("indexscroll_index_counts");
+        int i3 = this.mProfileItemCount;
+        int i4 = 0;
+        for (int i5 = 0; i5 < this.mAlphabetLength; i5++) {
+            char cCharAt = this.mAlphabet.charAt(i5);
+            this.mCachingValue[i5] = i3;
+            Log.d("SemAbstractIndexer", "Get index info from bundle (" + i5 + ") : " + cCharAt + " = " + i3);
+            if (cCharAt == 9733) {
+                i = this.mFavoriteItemCount;
+            } else {
+                if (cCharAt == 55357) {
+                    i = this.mGroupItemCount;
+                }
+                i2 = i4;
+                while (true) {
+                    if (i2 >= stringArray.length) {
+                        break;
+                    }
+                    if (cCharAt == stringArray[i2].charAt(0)) {
+                        i3 += intArray[i2];
+                        i4 = i2;
+                        break;
+                    }
+                    i2++;
+                }
+                if (cCharAt != "#".charAt(0)) {
+                    this.mCachingValue[i5] = (getItemCount() + this.mProfileItemCount) - this.mDigitItemCount;
+                }
+            }
+            i3 += i;
+            i2 = i4;
+            while (true) {
+                if (i2 >= stringArray.length) {
+                }
+                i2++;
+            }
+            if (cCharAt != "#".charAt(0)) {
+            }
+        }
     }
 
     @Override // android.database.DataSetObserver

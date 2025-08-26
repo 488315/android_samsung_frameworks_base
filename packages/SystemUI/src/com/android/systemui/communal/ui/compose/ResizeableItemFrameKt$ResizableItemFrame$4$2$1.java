@@ -14,14 +14,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ResizeableItemFrameKt$ResizableItemFrame$4$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Function1> $onResizeUpdated$delegate;
     final /* synthetic */ ResizeableItemFrameViewModel $viewModel;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.communal.ui.compose.ResizeableItemFrameKt$ResizableItemFrame$4$2$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ State<Function1> $onResizeUpdated$delegate;
@@ -54,7 +52,7 @@ final class ResizeableItemFrameKt$ResizableItemFrame$4$2$1 extends SuspendLambda
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            ((Function1) this.$onResizeUpdated$delegate.getValue()).mo779invoke((ResizeInfo) this.L$0);
+            ((Function1) this.$onResizeUpdated$delegate.getValue()).mo781invoke((ResizeInfo) this.L$0);
             return Unit.INSTANCE;
         }
     }

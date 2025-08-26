@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GutsViewModel {
     public final Drawable cancelTextBackground;
@@ -35,9 +34,9 @@ public final class GutsViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = (this.onDismissClicked.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.gutsText.hashCode() * 31, 31, this.isDismissEnabled)) * 31;
+        int iHashCode = (this.onDismissClicked.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.gutsText.hashCode() * 31, 31, this.isDismissEnabled)) * 31;
         Drawable drawable = this.cancelTextBackground;
-        return this.onSettingsClicked.hashCode() + ((hashCode + (drawable == null ? 0 : drawable.hashCode())) * 31);
+        return this.onSettingsClicked.hashCode() + ((iHashCode + (drawable == null ? 0 : drawable.hashCode())) * 31);
     }
 
     public final String toString() {

@@ -76,9 +76,9 @@ public interface ISoundTriggerDetectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerDetectionService)) {
-                return (ISoundTriggerDetectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundTriggerDetectionService)) {
+                return (ISoundTriggerDetectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,30 +119,30 @@ public interface ISoundTriggerDetectionService extends IInterface {
             if (i == 1) {
                 ParcelUuid parcelUuid = (ParcelUuid) parcel.readTypedObject(ParcelUuid.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                ISoundTriggerDetectionServiceClient asInterface = ISoundTriggerDetectionServiceClient.Stub.asInterface(parcel.readStrongBinder());
+                ISoundTriggerDetectionServiceClient iSoundTriggerDetectionServiceClientAsInterface = ISoundTriggerDetectionServiceClient.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setClient(parcelUuid, bundle, asInterface);
+                setClient(parcelUuid, bundle, iSoundTriggerDetectionServiceClientAsInterface);
             } else if (i == 2) {
                 ParcelUuid parcelUuid2 = (ParcelUuid) parcel.readTypedObject(ParcelUuid.CREATOR);
                 parcel.enforceNoDataAvail();
                 removeClient(parcelUuid2);
             } else if (i == 3) {
                 ParcelUuid parcelUuid3 = (ParcelUuid) parcel.readTypedObject(ParcelUuid.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 SoundTrigger.GenericRecognitionEvent genericRecognitionEvent = (SoundTrigger.GenericRecognitionEvent) parcel.readTypedObject(SoundTrigger.GenericRecognitionEvent.CREATOR);
                 parcel.enforceNoDataAvail();
-                onGenericRecognitionEvent(parcelUuid3, readInt, genericRecognitionEvent);
+                onGenericRecognitionEvent(parcelUuid3, i3, genericRecognitionEvent);
             } else if (i == 4) {
                 ParcelUuid parcelUuid4 = (ParcelUuid) parcel.readTypedObject(ParcelUuid.CREATOR);
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(parcelUuid4, readInt2, readInt3);
+                onError(parcelUuid4, i4, i5);
             } else if (i == 5) {
                 ParcelUuid parcelUuid5 = (ParcelUuid) parcel.readTypedObject(ParcelUuid.CREATOR);
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onStopOperation(parcelUuid5, readInt4);
+                onStopOperation(parcelUuid5, i6);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -167,68 +167,68 @@ public interface ISoundTriggerDetectionService extends IInterface {
 
             @Override // android.media.soundtrigger.ISoundTriggerDetectionService
             public void setClient(ParcelUuid parcelUuid, Bundle bundle, ISoundTriggerDetectionServiceClient iSoundTriggerDetectionServiceClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelUuid, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iSoundTriggerDetectionServiceClient);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelUuid, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iSoundTriggerDetectionServiceClient);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger.ISoundTriggerDetectionService
             public void removeClient(ParcelUuid parcelUuid) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelUuid, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelUuid, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger.ISoundTriggerDetectionService
             public void onGenericRecognitionEvent(ParcelUuid parcelUuid, int i, SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelUuid, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(genericRecognitionEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelUuid, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(genericRecognitionEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger.ISoundTriggerDetectionService
             public void onError(ParcelUuid parcelUuid, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelUuid, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelUuid, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger.ISoundTriggerDetectionService
             public void onStopOperation(ParcelUuid parcelUuid, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelUuid, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelUuid, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

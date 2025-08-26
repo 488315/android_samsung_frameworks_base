@@ -111,9 +111,7 @@ public class LocalePicker extends ListFragment {
             return (Predicate) LocalizationProperties.locale_filter().map(new Function() { // from class: com.android.internal.app.LocalePicker$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Predicate asPredicate;
-                    asPredicate = Pattern.compile((String) obj).asPredicate();
-                    return asPredicate;
+                    return Pattern.compile((String) obj).asPredicate();
                 }
             }).orElse(null);
         } catch (SecurityException e) {
@@ -138,7 +136,7 @@ public class LocalePicker extends ListFragment {
         final LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return new ArrayAdapter<LocaleInfo>(context, i, i2, allAssetLocales) { // from class: com.android.internal.app.LocalePicker.1
             @Override // android.widget.ArrayAdapter, android.widget.Adapter
-            public View getView(int i3, View view, ViewGroup viewGroup) {
+            public View getView(int i3, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                 TextView textView;
                 if (view == null) {
                     view = layoutInflater.inflate(i, viewGroup, false);
@@ -163,9 +161,9 @@ public class LocalePicker extends ListFragment {
     }
 
     private static String getDisplayName(Locale locale, String[] strArr, String[] strArr2) {
-        String locale2 = locale.toString();
+        String string = locale.toString();
         for (int i = 0; i < strArr.length; i++) {
-            if (strArr[i].equals(locale2)) {
+            if (strArr[i].equals(string)) {
                 return strArr2[i];
             }
         }

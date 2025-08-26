@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+/* loaded from: classes3.dex */
 public class MediaBrowserUtils {
     public static boolean areSameOptions(Bundle bundle, Bundle bundle2) {
         if (bundle == bundle2) {
@@ -52,13 +52,13 @@ public class MediaBrowserUtils {
             return list;
         }
         int i3 = i2 * i;
-        int i4 = i3 + i2;
+        int size = i3 + i2;
         if (i < 0 || i2 < 1 || i3 >= list.size()) {
             return Collections.EMPTY_LIST;
         }
-        if (i4 > list.size()) {
-            i4 = list.size();
+        if (size > list.size()) {
+            size = list.size();
         }
-        return list.subList(i3, i4);
+        return list.subList(i3, size);
     }
 }

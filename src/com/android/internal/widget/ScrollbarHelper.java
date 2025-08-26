@@ -9,21 +9,21 @@ class ScrollbarHelper {
     }
 
     static int computeScrollOffset(RecyclerView.State state, OrientationHelper orientationHelper, View view, View view2, RecyclerView.LayoutManager layoutManager, boolean z, boolean z2) {
-        int max;
+        int iMax;
         if (layoutManager.getChildCount() == 0 || state.getItemCount() == 0 || view == null || view2 == null) {
             return 0;
         }
-        int min = Math.min(layoutManager.getPosition(view), layoutManager.getPosition(view2));
-        int max2 = Math.max(layoutManager.getPosition(view), layoutManager.getPosition(view2));
+        int iMin = Math.min(layoutManager.getPosition(view), layoutManager.getPosition(view2));
+        int iMax2 = Math.max(layoutManager.getPosition(view), layoutManager.getPosition(view2));
         if (z2) {
-            max = Math.max(0, (state.getItemCount() - max2) - 1);
+            iMax = Math.max(0, (state.getItemCount() - iMax2) - 1);
         } else {
-            max = Math.max(0, min);
+            iMax = Math.max(0, iMin);
         }
         if (!z) {
-            return max;
+            return iMax;
         }
-        return Math.round((max * (Math.abs(orientationHelper.getDecoratedEnd(view2) - orientationHelper.getDecoratedStart(view)) / (Math.abs(layoutManager.getPosition(view) - layoutManager.getPosition(view2)) + 1))) + (orientationHelper.getStartAfterPadding() - orientationHelper.getDecoratedStart(view)));
+        return Math.round((iMax * (Math.abs(orientationHelper.getDecoratedEnd(view2) - orientationHelper.getDecoratedStart(view)) / (Math.abs(layoutManager.getPosition(view) - layoutManager.getPosition(view2)) + 1))) + (orientationHelper.getStartAfterPadding() - orientationHelper.getDecoratedStart(view)));
     }
 
     static int computeScrollExtent(RecyclerView.State state, OrientationHelper orientationHelper, View view, View view2, RecyclerView.LayoutManager layoutManager, boolean z) {

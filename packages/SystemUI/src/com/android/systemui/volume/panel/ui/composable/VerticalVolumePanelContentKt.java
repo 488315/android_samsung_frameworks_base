@@ -6,6 +6,7 @@ import androidx.compose.animation.AnimatedVisibilityKt;
 import androidx.compose.animation.EnterTransition;
 import androidx.compose.animation.ExitTransition;
 import androidx.compose.foundation.ScrollKt;
+import androidx.compose.foundation.ScrollState;
 import androidx.compose.foundation.ScrollingContainerKt;
 import androidx.compose.foundation.ScrollingLayoutElement;
 import androidx.compose.foundation.gestures.Orientation;
@@ -42,11 +43,9 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class VerticalVolumePanelContentKt {
-    public static final void VerticalVolumePanelContent(final VolumePanelComposeScope volumePanelComposeScope, final ComponentsLayout componentsLayout, final Modifier modifier, Composer composer, final int i) {
-        Modifier then;
+    public static final void VerticalVolumePanelContent(final VolumePanelComposeScope volumePanelComposeScope, final ComponentsLayout componentsLayout, final Modifier modifier, Composer composer, final int i) throws Throwable {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(2034105147);
         int i2 = (i & 6) == 0 ? (composerImpl.changed(volumePanelComposeScope) ? 4 : 2) | i : i;
@@ -62,16 +61,17 @@ public abstract class VerticalVolumePanelContentKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContent (VerticalVolumePanelContent.kt:38)");
             }
-            then = ScrollingContainerKt.scrollingContainer(modifier, r5, Orientation.Vertical, (r14 & 2) != 0, false, null, r5.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(ScrollKt.rememberScrollState(composerImpl), false, true));
+            ScrollState scrollStateRememberScrollState = ScrollKt.rememberScrollState(composerImpl);
+            Modifier modifierThen = ScrollingContainerKt.scrollingContainer(modifier, scrollStateRememberScrollState, Orientation.Vertical, (14 & 2) != 0, false, null, scrollStateRememberScrollState.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(scrollStateRememberScrollState, false, true));
             Arrangement arrangement = Arrangement.INSTANCE;
             Dp.Companion companion = Dp.Companion;
             arrangement.getClass();
-            Arrangement.SpacedAligned m91spacedBy0680j_4 = Arrangement.m91spacedBy0680j_4(20);
+            Arrangement.SpacedAligned spacedAlignedM92spacedBy0680j_4 = Arrangement.m92spacedBy0680j_4(20);
             Alignment.Companion.getClass();
-            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(m91spacedBy0680j_4, Alignment.Companion.Start, composerImpl, 6);
+            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(spacedAlignedM92spacedBy0680j_4, Alignment.Companion.Start, composerImpl, 6);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, then);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierThen);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -84,13 +84,13 @@ public abstract class VerticalVolumePanelContentKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, columnMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, columnMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
             composerImpl.startReplaceGroup(-1877304411);
             for (final ComponentState componentState : componentsLayout.headerComponents) {
@@ -102,7 +102,7 @@ public abstract class VerticalVolumePanelContentKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContent.<anonymous>.<anonymous> (VerticalVolumePanelContent.kt:45)");
                         }
-                        ((ComposeVolumePanelUiComponent) ComponentState.this.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
+                        ((ComposeVolumePanelUiComponent) componentState.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -121,7 +121,7 @@ public abstract class VerticalVolumePanelContentKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContent.<anonymous>.<anonymous> (VerticalVolumePanelContent.kt:50)");
                         }
-                        ((ComposeVolumePanelUiComponent) ComponentState.this.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
+                        ((ComposeVolumePanelUiComponent) componentState2.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -139,19 +139,19 @@ public abstract class VerticalVolumePanelContentKt {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContent.<anonymous>.<anonymous> (VerticalVolumePanelContent.kt:58)");
                     }
-                    Modifier wrapContentHeight$default = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(Modifier.Companion, 1.0f), 3);
+                    Modifier modifierWrapContentHeight$default = SizeKt.wrapContentHeight$default(SizeKt.fillMaxWidth(Modifier.Companion, 1.0f), 3);
                     Arrangement arrangement2 = Arrangement.INSTANCE;
-                    VolumePanelComposeScope volumePanelComposeScope2 = VolumePanelComposeScope.this;
+                    VolumePanelComposeScope volumePanelComposeScope2 = volumePanelComposeScope;
                     float f = volumePanelComposeScope2.state.isLargeScreen ? 28 : 20;
                     Dp.Companion companion2 = Dp.Companion;
                     arrangement2.getClass();
-                    Arrangement.SpacedAligned m91spacedBy0680j_42 = Arrangement.m91spacedBy0680j_4(f);
+                    Arrangement.SpacedAligned spacedAlignedM92spacedBy0680j_42 = Arrangement.m92spacedBy0680j_4(f);
                     Alignment.Companion.getClass();
-                    RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(m91spacedBy0680j_42, Alignment.Companion.Top, composer2, 0);
+                    RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(spacedAlignedM92spacedBy0680j_42, Alignment.Companion.Top, composer2, 0);
                     int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composer2);
                     ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                    PersistentCompositionLocalMap currentCompositionLocalScope2 = composerImpl2.currentCompositionLocalScope();
-                    Modifier materializeModifier2 = ComposedModifierKt.materializeModifier(composer2, wrapContentHeight$default);
+                    PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope2 = composerImpl2.currentCompositionLocalScope();
+                    Modifier modifierMaterializeModifier2 = ComposedModifierKt.materializeModifier(composer2, modifierWrapContentHeight$default);
                     ComposeUiNode.Companion.getClass();
                     Function0 function02 = ComposeUiNode.Companion.Constructor;
                     if (composerImpl2.applier == null) {
@@ -164,13 +164,13 @@ public abstract class VerticalVolumePanelContentKt {
                     } else {
                         composerImpl2.useNode();
                     }
-                    Updater.m336setimpl(composer2, rowMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-                    Updater.m336setimpl(composer2, currentCompositionLocalScope2, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                    Updater.m337setimpl(composer2, rowMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+                    Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope2, ComposeUiNode.Companion.SetResolvedCompositionLocals);
                     Function2 function22 = ComposeUiNode.Companion.SetCompositeKeyHash;
                     if (composerImpl2.inserting || !Intrinsics.areEqual(composerImpl2.rememberedValue(), Integer.valueOf(currentCompositeKeyHash2))) {
                         AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash2, composerImpl2, currentCompositeKeyHash2, function22);
                     }
-                    Updater.m336setimpl(composer2, materializeModifier2, ComposeUiNode.Companion.SetModifier);
+                    Updater.m337setimpl(composer2, modifierMaterializeModifier2, ComposeUiNode.Companion.SetModifier);
                     RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
                     int size = list.size();
                     int i3 = 0;
@@ -206,14 +206,14 @@ public abstract class VerticalVolumePanelContentKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.VerticalVolumePanelContentKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
-                public final Object invoke(Object obj, Object obj2) {
+                public final Object invoke(Object obj, Object obj2) throws Throwable {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    VerticalVolumePanelContentKt.VerticalVolumePanelContent(VolumePanelComposeScope.this, componentsLayout, modifier, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    VerticalVolumePanelContentKt.VerticalVolumePanelContent(volumePanelComposeScope, componentsLayout, modifier, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

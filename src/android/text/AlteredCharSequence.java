@@ -84,10 +84,10 @@ public class AlteredCharSequence implements CharSequence, GetChars {
     @Override // android.text.GetChars
     public void getChars(int i, int i2, char[] cArr, int i3) {
         TextUtils.getChars(this.mSource, i, i2, cArr, i3);
-        int max = Math.max(this.mStart, i);
-        int min = Math.min(this.mEnd, i2);
-        if (max > min) {
-            System.arraycopy(this.mChars, max - this.mStart, cArr, i3, min - max);
+        int iMax = Math.max(this.mStart, i);
+        int iMin = Math.min(this.mEnd, i2);
+        if (iMax > iMin) {
+            System.arraycopy(this.mChars, iMax - this.mStart, cArr, i3, iMin - iMax);
         }
     }
 

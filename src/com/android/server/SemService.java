@@ -11,26 +11,40 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import com.android.internal.midi.MidiConstants;
 import com.android.server.SemServiceAccessControl;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import com.samsung.android.service.SemService.ISemService;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -186,17 +200,15 @@ public final class SemService extends ISemService.Stub {
         if (isGRDMSupported()) {
             this.mSemServiceAccessControl.setGrdmAllowedPackages();
         }
-        readSkuProperty();
         if (chipVendor.contains("SKU")) {
-            if (TextUtils.isEmpty(this.skuChipName)) {
-                if (this.supportReeSpi) {
-                    this.supportReeSpi = false;
-                }
+            readSkuProperty();
+            if (this.skuChipName.contains("ese")) {
+                setDefaultCosNameProperty();
             } else {
-                setCosNameProperty();
+                this.supportReeSpi = false;
             }
         } else {
-            setCosNameProperty();
+            setDefaultCosNameProperty();
         }
         this.secureBuffer = new StringBuffer();
         this.connectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
@@ -223,37 +235,9 @@ public final class SemService extends ISemService.Stub {
         }
     }
 
-    private void setCosNameProperty() {
-        StringBuilder sb = new StringBuilder();
-        if (chipVendor.equals("MULTI")) {
-            if (this.skuChipName.equals("s3fwrn5")) {
-                sb.append("UT5.1_01000012");
-            } else if (this.skuChipName.equals("sn110t")) {
-                sb.append("JCOP5.3T_00353145");
-            } else if (this.skuChipName.equals("sn220t")) {
-                sb.append("JCOP6.2T_00354A4A");
-            } else {
-                Log.e(TAG, "Not supported skuChipName, " + this.skuChipName);
-                return;
-            }
-        } else {
-            sb.append(cosName);
-            if (cosName.equals("JCOP5.1F")) {
-                sb.append("_00354C52");
-            } else if (cosName.equals("JCOP6.2F")) {
-                sb.append("_0035544B");
-            } else if (cosName.equals("JCOP6.2P")) {
-                sb.append("_00505644_0051414C");
-            } else if (cosName.equals("JCOP7.0P")) {
-                sb.append("_004D4838");
-            } else if (!cosName.equals("UT8.2P")) {
-                return;
-            } else {
-                sb.append("_0B010001");
-            }
-        }
+    private void setDefaultCosNameProperty() {
         try {
-            SystemProperties.set("ro.security.ese.cosname", sb.toString());
+            SystemProperties.set("ro.security.ese.cosname.default", cosName);
         } catch (Exception unused) {
             Log.e(TAG, "failed to set sysProp: cosname");
         }
@@ -272,7 +256,7 @@ public final class SemService extends ISemService.Stub {
         return false;
     }
 
-    private boolean requestSpiUsage() {
+    private boolean requestSpiUsage() throws InterruptedException {
         for (int i = 1; i <= 15; i++) {
             synchronized (mLock) {
                 if (this.spiOpenPackageName == null) {
@@ -403,9 +387,9 @@ public final class SemService extends ISemService.Stub {
                 return null;
             }
             if (esea < 1024) {
-                byte[] copyOf = Arrays.copyOf(bArr, esea);
-                Log.d(TAG, "getESEA Return0 : ".concat(new String(copyOf, StandardCharsets.UTF_8)));
-                return new String(copyOf, StandardCharsets.UTF_8);
+                byte[] bArrCopyOf = Arrays.copyOf(bArr, esea);
+                Log.d(TAG, "getESEA Return0 : ".concat(new String(bArrCopyOf, StandardCharsets.UTF_8)));
+                return new String(bArrCopyOf, StandardCharsets.UTF_8);
             }
             Log.e(TAG, "data overflow");
             return null;
@@ -456,7 +440,7 @@ public final class SemService extends ISemService.Stub {
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int esek_certificate_check() {
-        int i;
+        int iEsekCertificateCheck;
         Log.i(TAG, "Start esek_certificate_check");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "esek_certificate_check Permission Error");
@@ -474,24 +458,24 @@ public final class SemService extends ISemService.Stub {
             return -10;
         }
         try {
-            i = esekCertificateCheck();
+            iEsekCertificateCheck = esekCertificateCheck();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i = -90;
+            iEsekCertificateCheck = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iEsekCertificateCheck = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iEsekCertificateCheck = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iEsekCertificateCheck;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int scp11_certificate_check() {
-        int i;
+        int iScp11CertificateCheck;
         Log.i(TAG, "Start scp11_certificate_check");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "scp11_certificate_check Permission Error");
@@ -509,24 +493,24 @@ public final class SemService extends ISemService.Stub {
             return -10;
         }
         try {
-            i = scp11CertificateCheck();
+            iScp11CertificateCheck = scp11CertificateCheck();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i = -90;
+            iScp11CertificateCheck = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iScp11CertificateCheck = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iScp11CertificateCheck = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iScp11CertificateCheck;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int handle_CCMScp11c(byte[] bArr, int i) {
-        int i2;
+        int iHandleCCMScp11c;
         Log.i(TAG, "Start handle_CCM11c");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "handle_CCMScp11c Permission Error");
@@ -538,19 +522,19 @@ public final class SemService extends ISemService.Stub {
         try {
         } catch (Exception e) {
             Log.e(TAG, "Failed to handle_CCM, " + e.toString());
-            i2 = -1;
+            iHandleCCMScp11c = -1;
             releaseSpiUsage();
-            return i2;
+            return iHandleCCMScp11c;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NoClassDef handle_CCM, " + e2.toString());
-            i2 = -1;
+            iHandleCCMScp11c = -1;
             releaseSpiUsage();
-            return i2;
+            return iHandleCCMScp11c;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "Unsatisfield handle_CCM, " + e3.toString());
-            i2 = -1;
+            iHandleCCMScp11c = -1;
             releaseSpiUsage();
-            return i2;
+            return iHandleCCMScp11c;
         }
         if (!parseScript(bArr, i)) {
             Log.e(TAG, "CCM script error");
@@ -562,15 +546,15 @@ public final class SemService extends ISemService.Stub {
         }
         Log.d(TAG, "BD Len " + this.bodyData.length);
         byte[] bArr2 = this.bodyData;
-        i2 = handleCCMScp11c(bArr2, bArr2.length);
+        iHandleCCMScp11c = handleCCMScp11c(bArr2, bArr2.length);
         releaseSpiUsage();
-        return i2;
+        return iHandleCCMScp11c;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public String[] handle_CCM(byte[] bArr, int i) {
         Log.i(TAG, "Start handle_CCM");
-        String[] strArr = null;
+        String[] strArrHandleCCM = null;
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "handle_CCM Permission Error");
             return null;
@@ -584,7 +568,7 @@ public final class SemService extends ISemService.Stub {
             return null;
         }
         try {
-            strArr = handleCCM(bArr, i);
+            strArrHandleCCM = handleCCM(bArr, i);
         } catch (Exception e) {
             Log.e(TAG, "Failed to handle_CCM, " + e.toString());
         } catch (NoClassDefFoundError e2) {
@@ -593,13 +577,13 @@ public final class SemService extends ISemService.Stub {
             Log.e(TAG, "Unsatisfield handle_CCM, " + e3.toString());
         }
         releaseSpiUsage();
-        return strArr;
+        return strArrHandleCCM;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public String[] handle_CCMCB(byte[] bArr, int i, byte[] bArr2, int i2) {
         Log.i(TAG, "Start handle_CCM");
-        String[] strArr = null;
+        String[] strArrHandleCCMCB = null;
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "handle_CCM Permission Error");
             return null;
@@ -613,7 +597,7 @@ public final class SemService extends ISemService.Stub {
             return null;
         }
         try {
-            strArr = handleCCMCB(bArr, i, bArr2, i2);
+            strArrHandleCCMCB = handleCCMCB(bArr, i, bArr2, i2);
         } catch (Exception e) {
             Log.e(TAG, "Failed to handle_CCM, " + e.toString());
         } catch (NoClassDefFoundError e2) {
@@ -622,12 +606,12 @@ public final class SemService extends ISemService.Stub {
             Log.e(TAG, "Unsatisfield handle_CCM, " + e3.toString());
         }
         releaseSpiUsage();
-        return strArr;
+        return strArrHandleCCMCB;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int isLccmSwp() {
-        int i;
+        int iJniIsLccmSwp;
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "isLccmSwp Permission Error");
             return -91;
@@ -641,19 +625,19 @@ public final class SemService extends ISemService.Stub {
             return -91;
         }
         try {
-            i = jniIsLccmSwp();
+            iJniIsLccmSwp = jniIsLccmSwp();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i = -90;
+            iJniIsLccmSwp = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iJniIsLccmSwp = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iJniIsLccmSwp = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iJniIsLccmSwp;
     }
 
     private boolean parseScript(byte[] bArr, int i) {
@@ -671,15 +655,15 @@ public final class SemService extends ISemService.Stub {
                     Log.e(TAG, "unknown tag");
                     return false;
                 }
-                int checkLength = SemServiceTools.checkLength(bArr, 1);
-                if (checkLength <= 0) {
+                int iCheckLength = SemServiceTools.checkLength(bArr, 1);
+                if (iCheckLength <= 0) {
                     Log.e(TAG, "not supported tag e0");
                     return false;
                 }
                 byte b = bArr[1];
                 int i2 = (b & 255) < 128 ? 2 : b == -127 ? 3 : b == -126 ? 4 : b == -125 ? 5 : 0;
-                int i3 = checkLength + i2;
-                Log.d(TAG, i3 + "," + checkLength + "," + i2);
+                int i3 = iCheckLength + i2;
+                Log.d(TAG, i3 + "," + iCheckLength + "," + i2);
                 if (i3 + 66 != i) {
                     Log.e(TAG, "data is inconsistency");
                     return false;
@@ -690,24 +674,24 @@ public final class SemService extends ISemService.Stub {
                 }
                 int i4 = i2 + 2;
                 int i5 = i2 + 3;
-                int checkLength2 = SemServiceTools.checkLength(bArr, i4) + i5;
-                Log.d(TAG, "Date : " + SemServiceTools.bytesToHex(Arrays.copyOfRange(bArr, i5, checkLength2)));
-                if (bArr[checkLength2] != -31) {
+                int iCheckLength2 = SemServiceTools.checkLength(bArr, i4) + i5;
+                Log.d(TAG, "Date : " + SemServiceTools.bytesToHex(Arrays.copyOfRange(bArr, i5, iCheckLength2)));
+                if (bArr[iCheckLength2] != -31) {
                     Log.e(TAG, "Tag 'E1' read error");
                     return false;
                 }
-                int i6 = checkLength2 + 1;
-                int i7 = checkLength2 + 2;
-                int checkLength3 = SemServiceTools.checkLength(bArr, i6);
+                int i6 = iCheckLength2 + 1;
+                int i7 = iCheckLength2 + 2;
+                int iCheckLength3 = SemServiceTools.checkLength(bArr, i6);
                 Log.i(TAG, "TC : " + ((int) bArr[i7]));
-                int i8 = i7 + checkLength3;
+                int i8 = i7 + iCheckLength3;
                 if (bArr[i8] != -30) {
                     Log.e(TAG, "Tag 'E2' read error");
                     return false;
                 }
                 int i9 = i8 + 1;
-                int checkLength4 = SemServiceTools.checkLength(bArr, i9);
-                if (checkLength4 <= 0) {
+                int iCheckLength4 = SemServiceTools.checkLength(bArr, i9);
+                if (iCheckLength4 <= 0) {
                     Log.e(TAG, "not supported tag e2");
                     return false;
                 }
@@ -721,7 +705,7 @@ public final class SemService extends ISemService.Stub {
                 } else if (b2 == -125) {
                     i8 += 5;
                 }
-                int i10 = checkLength4 + i8;
+                int i10 = iCheckLength4 + i8;
                 this.bodyData = Arrays.copyOfRange(bArr, i8, i10);
                 if (bArr[i10] != -22) {
                     Log.e(TAG, "Invalid script: No signature");
@@ -729,12 +713,12 @@ public final class SemService extends ISemService.Stub {
                 }
                 int i11 = i10 + 1;
                 int i12 = i10 + 2;
-                int checkLength5 = SemServiceTools.checkLength(bArr, i11);
-                if (checkLength5 <= 0) {
+                int iCheckLength5 = SemServiceTools.checkLength(bArr, i11);
+                if (iCheckLength5 <= 0) {
                     Log.e(TAG, "not supported tag ea");
                     return false;
                 }
-                int i13 = checkLength5 + i12;
+                int i13 = iCheckLength5 + i12;
                 if (i != i13) {
                     Log.e(TAG, "wrong length!");
                     return false;
@@ -756,7 +740,7 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int get_HQMMemory(byte[] bArr) {
         Log.i(TAG, "Start get_HQMMemory");
-        int i = 0;
+        int hQMMemory = 0;
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MHWParamPkgList)) {
             Log.e(TAG, "get_HQMMemory Permission Error");
             return 0;
@@ -773,7 +757,7 @@ public final class SemService extends ISemService.Stub {
             return -10;
         }
         try {
-            i = getHQMMemory(bArr);
+            hQMMemory = getHQMMemory(bArr);
         } catch (Exception e) {
             Log.e(TAG, "Failed to get_AttackCountCheck, " + e.toString());
         } catch (NoClassDefFoundError e2) {
@@ -782,11 +766,11 @@ public final class SemService extends ISemService.Stub {
             Log.e(TAG, "Unsatisfield get_AttackCountCheck, " + e3.toString());
         }
         releaseSpiUsage();
-        return i;
+        return hQMMemory;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
-    public int deactivate_Cards(int i, String[] strArr, int[] iArr, int i2) {
+    public int deactivate_Cards(int i, String[] strArr, int[] iArr, int i2) throws IOException {
         Log.i(TAG, "Start deactivate_Cards");
         byte[][] bArr = new byte[i2][];
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MSKMSCardPkgList)) {
@@ -804,21 +788,21 @@ public final class SemService extends ISemService.Stub {
         if (isShutdownRequested()) {
             return -10;
         }
-        int i3 = 0;
-        for (int i4 = 0; i4 < i2; i4++) {
+        int iDeactivateCards = 0;
+        for (int i3 = 0; i3 < i2; i3++) {
             try {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                new DataOutputStream(byteArrayOutputStream).writeUTF(strArr[i4]);
+                new DataOutputStream(byteArrayOutputStream).writeUTF(strArr[i3]);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
-                bArr[i4] = byteArray;
-                bArr[i4] = Arrays.copyOfRange(byteArray, 2, byteArray.length);
+                bArr[i3] = byteArray;
+                bArr[i3] = Arrays.copyOfRange(byteArray, 2, byteArray.length);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
-            Log.d(TAG, "Package Name : " + bArr[i4]);
+            Log.d(TAG, "Package Name : " + bArr[i3]);
         }
         try {
-            i3 = deactivateCards(i, bArr, iArr, i2);
+            iDeactivateCards = deactivateCards(i, bArr, iArr, i2);
         } catch (Exception e2) {
             Log.e(TAG, "Failed to deactivate_Cards, " + e2.toString());
         } catch (NoClassDefFoundError e3) {
@@ -827,12 +811,12 @@ public final class SemService extends ISemService.Stub {
             Log.e(TAG, "Unsatisfield deactivate_Cards, " + e4.toString());
         }
         releaseSpiUsage();
-        return i3;
+        return iDeactivateCards;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int deactivate_CardsAID(int i, int i2, String[] strArr, int[] iArr, int i3) {
-        int i4;
+        int iDeactivateCardsAID;
         Log.i(TAG, "Start deactivate_Cards");
         byte[][] bArr = new byte[i3][];
         byte[][] bArr2 = new byte[i3][];
@@ -855,40 +839,40 @@ public final class SemService extends ISemService.Stub {
             return -10;
         }
         Log.d(TAG, "A Size : " + i3);
+        int i4 = 0;
         int i5 = 0;
         int i6 = 0;
-        int i7 = 0;
-        for (int i8 = 0; i8 < i3; i8++) {
+        for (int i7 = 0; i7 < i3; i7++) {
             try {
-                String str = strArr[i8];
+                String str = strArr[i7];
                 if (str == null) {
                     Log.e(TAG, "element is null");
                 } else if (str.contains("*")) {
-                    String replaceAll = str.replaceAll("[*]", "");
-                    if (replaceAll != null) {
-                        byte[] hexToBytes = SemServiceTools.hexToBytes(replaceAll);
-                        bArr2[i6] = hexToBytes;
-                        if (hexToBytes != null) {
-                            iArr2[i6] = hexToBytes.length;
-                            i6++;
+                    String strReplaceAll = str.replaceAll("[*]", "");
+                    if (strReplaceAll != null) {
+                        byte[] bArrHexToBytes = SemServiceTools.hexToBytes(strReplaceAll);
+                        bArr2[i5] = bArrHexToBytes;
+                        if (bArrHexToBytes != null) {
+                            iArr2[i5] = bArrHexToBytes.length;
+                            i5++;
                         }
                     }
                 } else if (str.contains("#")) {
-                    String replaceAll2 = str.replaceAll("#", "");
-                    if (replaceAll2 != null) {
-                        byte[] hexToBytes2 = SemServiceTools.hexToBytes(replaceAll2);
-                        bArr3[i7] = hexToBytes2;
-                        if (hexToBytes2 != null) {
-                            iArr3[i7] = hexToBytes2.length;
-                            i7++;
+                    String strReplaceAll2 = str.replaceAll("#", "");
+                    if (strReplaceAll2 != null) {
+                        byte[] bArrHexToBytes2 = SemServiceTools.hexToBytes(strReplaceAll2);
+                        bArr3[i6] = bArrHexToBytes2;
+                        if (bArrHexToBytes2 != null) {
+                            iArr3[i6] = bArrHexToBytes2.length;
+                            i6++;
                         }
                     }
                 } else if (str != null) {
-                    byte[] hexToBytes3 = SemServiceTools.hexToBytes(str);
-                    bArr[i5] = hexToBytes3;
-                    if (hexToBytes3 != null) {
-                        iArr[i5] = hexToBytes3.length;
-                        i5++;
+                    byte[] bArrHexToBytes3 = SemServiceTools.hexToBytes(str);
+                    bArr[i4] = bArrHexToBytes3;
+                    if (bArrHexToBytes3 != null) {
+                        iArr[i4] = bArrHexToBytes3.length;
+                        i4++;
                     }
                 }
             } catch (NullPointerException e) {
@@ -899,25 +883,25 @@ public final class SemService extends ISemService.Stub {
         }
         try {
             Log.i(TAG, "DDA Start ");
-            i4 = deactivateCardsAID(i, i2, bArr, iArr, i5, bArr2, iArr2, i6, bArr3, iArr3, i7);
+            iDeactivateCardsAID = deactivateCardsAID(i, i2, bArr, iArr, i4, bArr2, iArr2, i5, bArr3, iArr3, i6);
         } catch (Exception e3) {
             Log.e(TAG, "Failed to deactivate_Cards, " + e3.toString());
-            i4 = 0;
+            iDeactivateCardsAID = 0;
             releaseSpiUsage();
-            return i4;
+            return iDeactivateCardsAID;
         } catch (NoClassDefFoundError e4) {
             Log.e(TAG, "NoClassDef deactivate_Cards, " + e4.toString());
-            i4 = 0;
+            iDeactivateCardsAID = 0;
             releaseSpiUsage();
-            return i4;
+            return iDeactivateCardsAID;
         } catch (UnsatisfiedLinkError e5) {
             Log.e(TAG, "Unsatisfield deactivate_Cards, " + e5.toString());
-            i4 = 0;
+            iDeactivateCardsAID = 0;
             releaseSpiUsage();
-            return i4;
+            return iDeactivateCardsAID;
         }
         releaseSpiUsage();
-        return i4;
+        return iDeactivateCardsAID;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -936,22 +920,22 @@ public final class SemService extends ISemService.Stub {
         if (isShutdownRequested()) {
             return -10;
         }
-        int i = -90;
+        int iESEFactoryReset = -90;
         try {
-            i = eSEFactoryReset();
+            iESEFactoryReset = eSEFactoryReset();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iESEFactoryReset = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iESEFactoryReset = -3;
         } catch (Error e4) {
             Log.e(TAG, "Error : " + e4);
         }
         releaseSpiUsage();
-        return i;
+        return iESEFactoryReset;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -970,22 +954,22 @@ public final class SemService extends ISemService.Stub {
         if (isShutdownRequested()) {
             return -10;
         }
-        int i = -90;
+        int iESELowFactoryReset = -90;
         try {
-            i = eSELowFactoryReset();
+            iESELowFactoryReset = eSELowFactoryReset();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iESELowFactoryReset = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iESELowFactoryReset = -3;
         } catch (Error e4) {
             Log.e(TAG, "Error : " + e4);
         }
         releaseSpiUsage();
-        return i;
+        return iESELowFactoryReset;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -1004,22 +988,22 @@ public final class SemService extends ISemService.Stub {
         if (isShutdownRequested()) {
             return -10;
         }
-        int i = -90;
+        int iESEFullFactoryReset = -90;
         try {
-            i = eSEFullFactoryReset();
+            iESEFullFactoryReset = eSEFullFactoryReset();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iESEFullFactoryReset = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iESEFullFactoryReset = -3;
         } catch (Error e4) {
             Log.e(TAG, "Error : " + e4);
         }
         releaseSpiUsage();
-        return i;
+        return iESEFullFactoryReset;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -1038,22 +1022,22 @@ public final class SemService extends ISemService.Stub {
         if (isShutdownRequested()) {
             return -10;
         }
-        int i2 = -90;
+        int iESEAidFactoryReset = -90;
         try {
-            i2 = eSEAidFactoryReset(bArr, i);
+            iESEAidFactoryReset = eSEAidFactoryReset(bArr, i);
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i2 = -2;
+            iESEAidFactoryReset = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i2 = -3;
+            iESEAidFactoryReset = -3;
         } catch (Error e4) {
             Log.e(TAG, "Error : " + e4);
         }
         releaseSpiUsage();
-        return i2;
+        return iESEAidFactoryReset;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -1127,19 +1111,19 @@ public final class SemService extends ISemService.Stub {
             releaseSpiUsage();
             return -91;
         }
-        int i3 = -92;
+        int iStartattestation = -92;
         try {
-            i3 = startattestation(bArr, i, bArr2, i2);
+            iStartattestation = startattestation(bArr, i, bArr2, i2);
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i3 = -90;
+            iStartattestation = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
         }
         releaseSpiUsage();
-        return i3;
+        return iStartattestation;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -1156,23 +1140,23 @@ public final class SemService extends ISemService.Stub {
             releaseSpiUsage();
             return -91;
         }
-        int i2 = -92;
+        int iContinueattestation = -92;
         try {
-            i2 = continueattestation(str, i, bArr);
+            iContinueattestation = continueattestation(str, i, bArr);
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i2 = -90;
+            iContinueattestation = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
         }
         releaseSpiUsage();
-        Log.i(TAG, "result : " + i2);
-        return i2;
+        Log.i(TAG, "result : " + iContinueattestation);
+        return iContinueattestation;
     }
 
-    private String encData(String str) {
+    private String encData(String str) throws BadPaddingException, NoSuchPaddingException, InvalidKeySpecException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeyException, IOException, InvalidAlgorithmParameterException {
         Log.i(TAG, "S-ED");
         byte[] bArr = new byte[300];
         byte[] bArr2 = new byte[300];
@@ -1184,9 +1168,9 @@ public final class SemService extends ISemService.Stub {
                 this.bytePublicKeySecurityLen = i;
                 this.bytePublicKeySKMSLen = i2;
                 this.bytePublicKeyDataSecurity = Arrays.copyOf(bArr, i);
-                byte[] copyOf = Arrays.copyOf(bArr2, this.bytePublicKeySKMSLen);
-                this.bytePublicKeyDataSKMS = copyOf;
-                if (copyOf != null && this.bytePublicKeyDataSecurity != null && this.bytePublicKeySecurityLen >= 1 && this.bytePublicKeySKMSLen >= 1) {
+                byte[] bArrCopyOf = Arrays.copyOf(bArr2, this.bytePublicKeySKMSLen);
+                this.bytePublicKeyDataSKMS = bArrCopyOf;
+                if (bArrCopyOf != null && this.bytePublicKeyDataSecurity != null && this.bytePublicKeySecurityLen >= 1 && this.bytePublicKeySKMSLen >= 1) {
                     Log.i(TAG, "GET DATA");
                 }
                 Log.e(TAG, "GET DATA FAIL");
@@ -1204,22 +1188,22 @@ public final class SemService extends ISemService.Stub {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
             cipher.init(1, secretKeySpec, ivParameterSpec);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            PublicKey generatePublic = keyFactory.generatePublic(new X509EncodedKeySpec(this.bytePublicKeyDataSecurity));
-            PublicKey generatePublic2 = keyFactory.generatePublic(new X509EncodedKeySpec(this.bytePublicKeyDataSKMS));
+            PublicKey publicKeyGeneratePublic = keyFactory.generatePublic(new X509EncodedKeySpec(this.bytePublicKeyDataSecurity));
+            PublicKey publicKeyGeneratePublic2 = keyFactory.generatePublic(new X509EncodedKeySpec(this.bytePublicKeyDataSKMS));
             byte[] bArr5 = new byte[48];
             System.arraycopy(ivParameterSpec.getIV(), 0, bArr5, 0, 16);
             System.arraycopy(secretKeySpec.getEncoded(), 0, bArr5, 16, 32);
             Cipher cipher2 = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
-            cipher2.init(1, generatePublic);
-            byte[] doFinal = cipher2.doFinal(bArr5);
+            cipher2.init(1, publicKeyGeneratePublic);
+            byte[] bArrDoFinal = cipher2.doFinal(bArr5);
             Cipher cipher3 = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
-            cipher3.init(1, generatePublic2);
-            byte[] doFinal2 = cipher3.doFinal(bArr5);
-            byte[] doFinal3 = cipher.doFinal(str.getBytes());
+            cipher3.init(1, publicKeyGeneratePublic2);
+            byte[] bArrDoFinal2 = cipher3.doFinal(bArr5);
+            byte[] bArrDoFinal3 = cipher.doFinal(str.getBytes());
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byteArrayOutputStream.write(doFinal);
-            byteArrayOutputStream.write(doFinal2);
-            byteArrayOutputStream.write(doFinal3);
+            byteArrayOutputStream.write(bArrDoFinal);
+            byteArrayOutputStream.write(bArrDoFinal2);
+            byteArrayOutputStream.write(bArrDoFinal3);
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             byteArrayOutputStream.close();
             return Base64.encodeToString(byteArray, 2);
@@ -1235,64 +1219,392 @@ public final class SemService extends ISemService.Stub {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00e8, code lost:
+    private String getSCRSActivationList() {
+        String str;
+        boolean z;
+        int i;
+        byte[] bArr = {0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 67, 82, 83, 0};
+        int i2 = 8;
+        byte[] bArr2 = {Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 0, 2, 79, 0, 0};
+        byte[] bArr3 = {Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 1, 2, 79, 0, 0};
+        int i3 = 9216;
+        byte[] bArr4 = new byte[9216];
+        String str2 = null;
+        try {
+            byte[] bArr5 = new byte[9216];
+            if (open_Spi(0) != 0) {
+                Log.i(TAG, "S-LOG SCRS Open Fail");
+                return null;
+            }
+            try {
+                int iSend_Data = send_Data(bArr, 14, bArr5, 0);
+                byte[] bArrCopyOf = Arrays.copyOf(bArr5, iSend_Data);
+                StringBuilder sb = new StringBuilder("Select SW : ");
+                int i4 = iSend_Data - 2;
+                sb.append(SemServiceTools.byteToHex(bArrCopyOf[i4]));
+                int i5 = iSend_Data - 1;
+                sb.append(SemServiceTools.byteToHex(bArrCopyOf[i5]));
+                Log.d(TAG, sb.toString());
+                if (iSend_Data >= 2 && bArrCopyOf[i4] == -112 && bArrCopyOf[i5] == 0) {
+                    int i6 = 0;
+                    i = 0;
+                    while (true) {
+                        if (i6 >= 10) {
+                            break;
+                        }
+                        byte[] bArr6 = new byte[i3];
+                        int iSend_Data2 = i6 == 0 ? send_Data(bArr2, i2, bArr6, 0) : send_Data(bArr3, i2, bArr6, 0);
+                        byte[] bArrCopyOf2 = Arrays.copyOf(bArr6, iSend_Data2);
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.append("SEND SW[");
+                        sb2.append(i6);
+                        sb2.append("] : ");
+                        int i7 = iSend_Data2 - 2;
+                        str = str2;
+                        try {
+                            sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i7]));
+                            int i8 = iSend_Data2 - 1;
+                            sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i8]));
+                            Log.i(TAG, sb2.toString());
+                            if (iSend_Data2 >= 2 && bArrCopyOf2[i7] == -112 && bArrCopyOf2[i8] == 0) {
+                                Log.i(TAG, "GET DATA FINISH");
+                                System.arraycopy(bArrCopyOf2, 0, bArr4, i, i7);
+                                i += i7;
+                                break;
+                            }
+                            if (iSend_Data2 < 2 || bArrCopyOf2[i7] != 99 || bArrCopyOf2[i8] != 16) {
+                                break;
+                            }
+                            Log.i(TAG, "GET DATA MORE");
+                            System.arraycopy(bArrCopyOf2, 0, bArr4, i, i7);
+                            i += i7;
+                            i6++;
+                            str2 = str;
+                            i2 = 8;
+                            i3 = 9216;
+                        } catch (Exception unused) {
+                            z = true;
+                            Log.e(TAG, "GET DATA EXCEPTION");
+                            if (z) {
+                                close_Spi(0);
+                            }
+                            return str;
+                        }
+                    }
+                    Log.e(TAG, "Send Error");
+                    close_Spi(0);
+                    return str;
+                }
+                i = 0;
+                close_Spi(0);
+                return SemServiceTools.bytesToHex(Arrays.copyOf(bArr4, i));
+            } catch (Exception unused2) {
+                str = str2;
+            }
+        } catch (Exception unused3) {
+            str = null;
+            z = false;
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:61:0x00fb  */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x0116  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private String getAccessRule() {
+        String str;
+        boolean z;
+        int i;
+        int iSend_Data;
+        byte[] bArr = {0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 65, 67, 76, 0};
+        int i2 = 5;
+        byte[] bArr2 = {Byte.MIN_VALUE, -54, -1, 64, 0};
+        byte[] bArr3 = {Byte.MIN_VALUE, -54, -1, SprAttributeBase.TYPE_DURATION, 0};
+        int i3 = 9216;
+        byte[] bArr4 = new byte[9216];
+        String str2 = null;
+        try {
+            byte[] bArr5 = new byte[9216];
+            if (open_Spi(0) != 0) {
+                Log.e(TAG, "S-LOG Open Fail");
+                return null;
+            }
+            z = true;
+            try {
+                int iSend_Data2 = send_Data(bArr, 14, bArr5, 0);
+                byte[] bArrCopyOf = Arrays.copyOf(bArr5, iSend_Data2);
+                if (iSend_Data2 >= 2 && bArrCopyOf[iSend_Data2 - 2] == -112 && bArrCopyOf[iSend_Data2 - 1] == 0) {
+                    int i4 = 0;
+                    i = 0;
+                    while (i4 < 50) {
+                        byte[] bArr6 = new byte[i3];
+                        if (i4 == 0) {
+                            try {
+                                iSend_Data = send_Data(bArr2, i2, bArr6, 0);
+                            } catch (Error e) {
+                                e = e;
+                                str = str2;
+                                Log.e(TAG, "GET DATA Error " + e);
+                                if (z) {
+                                }
+                                return str;
+                            } catch (Exception e2) {
+                                e = e2;
+                                str = str2;
+                                Log.e(TAG, "GET DATA EXCEPTION " + e);
+                                if (z) {
+                                }
+                                return str;
+                            }
+                        } else {
+                            iSend_Data = send_Data(bArr3, i2, bArr6, 0);
+                        }
+                        byte[] bArrCopyOf2 = Arrays.copyOf(bArr6, iSend_Data);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("SEND SW[");
+                        sb.append(i4);
+                        sb.append("] : ");
+                        int i5 = iSend_Data - 2;
+                        str = str2;
+                        try {
+                            sb.append(SemServiceTools.byteToHex(bArrCopyOf2[i5]));
+                            int i6 = iSend_Data - 1;
+                            sb.append(SemServiceTools.byteToHex(bArrCopyOf2[i6]));
+                            Log.i(TAG, sb.toString());
+                            if (iSend_Data >= 2 && bArrCopyOf2[i5] == 105 && bArrCopyOf2[i6] == -123) {
+                                break;
+                            }
+                            if (iSend_Data < 2 || bArrCopyOf2[i5] != -112 || bArrCopyOf2[i6] != 0) {
+                                Log.e(TAG, "Send Error");
+                                close_Spi(0);
+                                return str;
+                            }
+                            System.arraycopy(bArrCopyOf2, 0, bArr4, i, i5);
+                            i += i5;
+                            i4++;
+                            str2 = str;
+                            i2 = 5;
+                            i3 = 9216;
+                            z = true;
+                        } catch (Error e3) {
+                            e = e3;
+                            z = true;
+                            Log.e(TAG, "GET DATA Error " + e);
+                            if (z) {
+                                close_Spi(0);
+                            }
+                            return str;
+                        } catch (Exception e4) {
+                            e = e4;
+                            z = true;
+                            Log.e(TAG, "GET DATA EXCEPTION " + e);
+                            if (z) {
+                                close_Spi(0);
+                            }
+                            return str;
+                        }
+                    }
+                } else {
+                    i = 0;
+                }
+                close_Spi(0);
+                return SemServiceTools.bytesToHex(Arrays.copyOf(bArr4, i));
+            } catch (Error e5) {
+                e = e5;
+                str = str2;
+            } catch (Exception e6) {
+                e = e6;
+                str = str2;
+            }
+        } catch (Error e7) {
+            e = e7;
+            str = null;
+            z = false;
+        } catch (Exception e8) {
+            e = e8;
+            str = null;
+            z = false;
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:37:0x010f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public String appCheckLog() {
+        boolean z;
+        byte[] bArr = {0, -92, 4, 0, 16, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 2, 32, 32, 3, 1, 3, 1, 0, 0, 0, 0, 0, 17};
+        byte[] bArr2 = {0, -92, 4, 0, 12, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 8, SprAttributeBase.TYPE_SHADOW, -4, 0, 0, 0, 0, 0, 7};
+        try {
+            byte[] bArr3 = new byte[9216];
+            if (open_Spi(0) != 0) {
+                Log.e(TAG, "S-LOG Open Fail");
+                return null;
+            }
+            z = true;
+            try {
+                int iSend_Data = send_Data(bArr, 21, bArr3, 0);
+                byte[] bArrCopyOf = Arrays.copyOf(bArr3, iSend_Data);
+                StringBuilder sb = new StringBuilder("SW : ");
+                int i = iSend_Data - 2;
+                sb.append(SemServiceTools.byteToHex(bArrCopyOf[i]));
+                int i2 = iSend_Data - 1;
+                sb.append(SemServiceTools.byteToHex(bArrCopyOf[i2]));
+                Log.d(TAG, sb.toString());
+                if (iSend_Data >= 2 && bArrCopyOf[i] == -112 && bArrCopyOf[i2] == 0) {
+                    Log.i(TAG, "get mDL");
+                } else {
+                    Log.e(TAG, "Select Response Error");
+                }
+                byte[] bArr4 = new byte[9216];
+                int iSend_Data2 = send_Data(bArr2, 17, bArr4, 0);
+                byte[] bArrCopyOf2 = Arrays.copyOf(bArr4, iSend_Data2);
+                StringBuilder sb2 = new StringBuilder("SW : ");
+                int i3 = iSend_Data2 - 2;
+                sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i3]));
+                int i4 = iSend_Data2 - 1;
+                sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i4]));
+                Log.d(TAG, sb2.toString());
+                if (iSend_Data2 >= 2 && bArrCopyOf2[i3] == -112 && bArrCopyOf2[i4] == 0) {
+                    Log.i(TAG, "M Select Success");
+                } else {
+                    Log.e(TAG, "M Select Response Error");
+                }
+                String strBytesToHex = SemServiceTools.bytesToHex(bArrCopyOf2);
+                close_Spi(0);
+                return (("mDL : " + SemServiceTools.bytesToHex(bArrCopyOf)) + "\nMSG : ") + strBytesToHex;
+            } catch (Error e) {
+                e = e;
+                Log.e(TAG, "GET DATA Error " + e);
+                if (z) {
+                    this.close_Spi(0);
+                }
+                return null;
+            } catch (Exception e2) {
+                e = e2;
+                Log.e(TAG, "GET DATA EXCEPTION " + e);
+                if (z) {
+                }
+                return null;
+            }
+        } catch (Error e3) {
+            e = e3;
+            z = false;
+        } catch (Exception e4) {
+            e = e4;
+            z = false;
+        }
+    }
+
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x0109, code lost:
     
-        return r17;
+        close_Spi(0);
      */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private java.lang.String getSCRSActivationList() {
-        /*
-            Method dump skipped, instructions count: 298
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.getSCRSActivationList():java.lang.String");
-    }
-
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0116  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private java.lang.String getAccessRule() {
-        /*
-            Method dump skipped, instructions count: 309
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.getAccessRule():java.lang.String");
-    }
-
-    /* JADX WARN: Removed duplicated region for block: B:33:0x010f  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.lang.String appCheckLog() {
-        /*
-            Method dump skipped, instructions count: 305
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.appCheckLog():java.lang.String");
-    }
-
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x0108, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x010c, code lost:
     
-        return null;
+        r2 = android.util.Base64.encodeToString(java.util.Arrays.copyOf(r11, r3), 2);
+        android.util.Log.d(com.android.server.SemService.TAG, "SEMSVC[4] : " + r2);
      */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0140  */
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x0128, code lost:
+    
+        return r2;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:45:0x0138, code lost:
+    
+        r15 = false;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:48:0x0140, code lost:
+    
+        close_Spi(0);
+     */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0140  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String getEncodedDCKLog() {
-        /*
-            Method dump skipped, instructions count: 361
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.getEncodedDCKLog():java.lang.String");
+    private String getEncodedDCKLog() {
+        String str;
+        byte[] bArr = {0, -92, 4, 0, 13, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 8, 9, 67, 67, 67, 68, 75, 65, 118, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 0};
+        int i = 5;
+        byte[] bArr2 = {Byte.MIN_VALUE, -54, -97, 8, 0};
+        byte[] bArr3 = {Byte.MIN_VALUE, -8, 0, 0, 0};
+        byte[] bArr4 = {Byte.MIN_VALUE, -8, 1, 0, 0};
+        int i2 = 9216;
+        byte[] bArr5 = new byte[9216];
+        try {
+            byte[] bArr6 = new byte[9216];
+            if (open_Spi(0) != 0) {
+                Log.e(TAG, "S-LOG DCK Open Fail");
+                return null;
+            }
+            try {
+                int iSend_Data = send_Data(bArr, 19, bArr6, 0);
+                byte[] bArrCopyOf = Arrays.copyOf(bArr6, iSend_Data);
+                StringBuilder sb = new StringBuilder("Select SW : ");
+                int i3 = iSend_Data - 2;
+                str = null;
+                try {
+                    sb.append(SemServiceTools.byteToHex(bArrCopyOf[i3]));
+                    int i4 = iSend_Data - 1;
+                    sb.append(SemServiceTools.byteToHex(bArrCopyOf[i4]));
+                    Log.e(TAG, sb.toString());
+                    if (iSend_Data < 2 || bArrCopyOf[i3] != -112 || bArrCopyOf[i4] != 0) {
+                        Log.e(TAG, "Select Failed");
+                        close_Spi(0);
+                        return null;
+                    }
+                    byte[] bArr7 = new byte[9216];
+                    Log.d(TAG, "DCK Version : " + SemServiceTools.bytesToHex(Arrays.copyOf(bArr7, send_Data(bArr2, 5, bArr7, 0))));
+                    int i5 = 0;
+                    int i6 = 0;
+                    while (true) {
+                        if (i5 >= 65) {
+                            break;
+                        }
+                        byte[] bArr8 = new byte[i2];
+                        int iSend_Data2 = i5 == 0 ? send_Data(bArr3, i, bArr8, 0) : send_Data(bArr4, i, bArr8, 0);
+                        byte[] bArrCopyOf2 = Arrays.copyOf(bArr8, iSend_Data2);
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.append("SEND SW[");
+                        sb2.append(i5);
+                        sb2.append("] : ");
+                        int i7 = iSend_Data2 - 2;
+                        sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i7]));
+                        int i8 = iSend_Data2 - 1;
+                        sb2.append(SemServiceTools.byteToHex(bArrCopyOf2[i8]));
+                        Log.d(TAG, sb2.toString());
+                        if (iSend_Data2 >= 2 && bArrCopyOf2[i7] == -112 && bArrCopyOf2[i8] == 0) {
+                            Log.d(TAG, "GET DATA FINISH");
+                            System.arraycopy(bArrCopyOf2, 0, bArr5, i6, i7);
+                            i6 += i7;
+                            break;
+                        }
+                        if (iSend_Data2 < 2 || bArrCopyOf2[i7] != 99 || bArrCopyOf2[i8] != 16) {
+                            break;
+                        }
+                        Log.d(TAG, "GET DATA MORE");
+                        System.arraycopy(bArrCopyOf2, 0, bArr5, i6, i7);
+                        i6 += i7;
+                        i5++;
+                        i = 5;
+                        i2 = 9216;
+                    }
+                    Log.e(TAG, "Send Error");
+                    close_Spi(0);
+                    return null;
+                } catch (Exception unused) {
+                    boolean z = true;
+                    Log.e(TAG, "GET DATA EXCEPTION");
+                    if (z) {
+                    }
+                    return str;
+                }
+            } catch (Exception unused2) {
+                str = null;
+            }
+        } catch (Exception unused3) {
+            str = null;
+        }
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -1326,307 +1638,400 @@ public final class SemService extends ISemService.Stub {
             this.bytePublicKeySKMSLen = i2;
             this.bytePublicKeyDataSecurity = Arrays.copyOf(bArr, i);
             this.bytePublicKeyDataSKMS = Arrays.copyOf(bArr2, this.bytePublicKeySKMSLen);
-        } catch (Exception e) {
-            Log.e(TAG, "Exception : " + e);
-        } catch (NoClassDefFoundError e2) {
-            Log.e(TAG, "NCDF Exception : " + e2);
-        } catch (UnsatisfiedLinkError e3) {
-            Log.e(TAG, "USLE Exception : " + e3);
-        } catch (Error e4) {
-            Log.e(TAG, "Error : " + e4);
+        } catch (UnsatisfiedLinkError e) {
+            Log.e(TAG, "USLE Exception : " + e);
+        } catch (Error e2) {
+            Log.e(TAG, "Error : " + e2);
+        } catch (Exception e3) {
+            Log.e(TAG, "Exception : " + e3);
+        } catch (NoClassDefFoundError e4) {
+            Log.e(TAG, "NCDF Exception : " + e4);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x007a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x007a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String DCKLog() {
-        /*
-            r8 = this;
-            java.lang.String r0 = "Close Fail "
-            java.lang.String r1 = "Save Exception "
-            java.lang.String r2 = "DP :DK"
-            java.lang.String r3 = "SEC_ESE_Service"
-            android.util.Log.d(r3, r2)
-            java.lang.String r8 = r8.getEncodedDCKLog()
-            if (r8 == 0) goto L8f
-            r2 = 0
-            java.io.FileOutputStream r4 = new java.io.FileOutputStream     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            java.lang.String r5 = "/data/log/sse4"
-            r6 = 0
-            r4.<init>(r5, r6)     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            java.io.BufferedWriter r5 = new java.io.BufferedWriter     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            java.io.OutputStreamWriter r6 = new java.io.OutputStreamWriter     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            java.nio.charset.Charset r7 = java.nio.charset.StandardCharsets.UTF_8     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            r6.<init>(r4, r7)     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            r5.<init>(r6)     // Catch: java.lang.Throwable -> L4b java.lang.Exception -> L4d
-            r5.write(r8)     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            java.lang.String r2 = "\n"
-            r5.write(r2)     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            r5.flush()     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            java.lang.Runtime r2 = java.lang.Runtime.getRuntime()     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            java.lang.String r4 = "chmod a+r -R /data/log/sse4"
-            java.lang.Process r2 = r2.exec(r4)     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            r2.waitFor()     // Catch: java.lang.Exception -> L49 java.lang.Throwable -> L76
-            r5.close()     // Catch: java.io.IOException -> L42
-            return r8
-        L42:
-            r1 = move-exception
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            r2.<init>(r0)
-            goto L6b
-        L49:
-            r2 = move-exception
-            goto L50
-        L4b:
-            r8 = move-exception
-            goto L78
-        L4d:
-            r4 = move-exception
-            r5 = r2
-            r2 = r4
-        L50:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L76
-            r4.<init>(r1)     // Catch: java.lang.Throwable -> L76
-            r4.append(r2)     // Catch: java.lang.Throwable -> L76
-            java.lang.String r1 = r4.toString()     // Catch: java.lang.Throwable -> L76
-            android.util.Log.e(r3, r1)     // Catch: java.lang.Throwable -> L76
-            if (r5 == 0) goto L8f
-            r5.close()     // Catch: java.io.IOException -> L65
-            goto L8f
-        L65:
-            r1 = move-exception
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            r2.<init>(r0)
-        L6b:
-            r2.append(r1)
-            java.lang.String r0 = r2.toString()
-            android.util.Log.e(r3, r0)
-            goto L8f
-        L76:
-            r8 = move-exception
-            r2 = r5
-        L78:
-            if (r2 == 0) goto L8e
-            r2.close()     // Catch: java.io.IOException -> L7e
-            goto L8e
-        L7e:
-            r1 = move-exception
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            r2.<init>(r0)
-            r2.append(r1)
-            java.lang.String r0 = r2.toString()
-            android.util.Log.e(r3, r0)
-        L8e:
-            throw r8
-        L8f:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.DCKLog():java.lang.String");
+    public String DCKLog() throws Throwable {
+        BufferedWriter bufferedWriter;
+        Exception e;
+        StringBuilder sb;
+        String string = "Close Fail ";
+        Log.d(TAG, "DP :DK");
+        String encodedDCKLog = getEncodedDCKLog();
+        if (encodedDCKLog != null) {
+            BufferedWriter bufferedWriter2 = null;
+            try {
+                try {
+                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/data/log/sse4", false), StandardCharsets.UTF_8));
+                    try {
+                        bufferedWriter.write(encodedDCKLog);
+                        bufferedWriter.write(ShaderAssembler.NEWLINE);
+                        bufferedWriter.flush();
+                        Runtime.getRuntime().exec("chmod a+r -R /data/log/sse4").waitFor();
+                    } catch (Exception e2) {
+                        e = e2;
+                        Log.e(TAG, "Save Exception " + e);
+                        if (bufferedWriter != null) {
+                            try {
+                                bufferedWriter.close();
+                            } catch (IOException e3) {
+                                e = e3;
+                                sb = new StringBuilder("Close Fail ");
+                                sb.append(e);
+                                string = sb.toString();
+                                Log.e(TAG, string);
+                                return encodedDCKLog;
+                            }
+                        }
+                        return encodedDCKLog;
+                    }
+                    try {
+                        bufferedWriter.close();
+                        return encodedDCKLog;
+                    } catch (IOException e4) {
+                        e = e4;
+                        sb = new StringBuilder("Close Fail ");
+                        sb.append(e);
+                        string = sb.toString();
+                        Log.e(TAG, string);
+                        return encodedDCKLog;
+                    }
+                } catch (Throwable th) {
+                    th = th;
+                    bufferedWriter2 = bufferedWriter;
+                    if (bufferedWriter2 != null) {
+                        try {
+                            bufferedWriter2.close();
+                        } catch (IOException e5) {
+                            Log.e(TAG, string + e5);
+                        }
+                    }
+                    throw th;
+                }
+            } catch (Exception e6) {
+                bufferedWriter = null;
+                e = e6;
+            } catch (Throwable th2) {
+                th = th2;
+                if (bufferedWriter2 != null) {
+                }
+                throw th;
+            }
+        }
+        return encodedDCKLog;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x008f, code lost:
-    
-        if (r4 != null) goto L29;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0091, code lost:
-    
-        r4.destroy();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x00bd, code lost:
-    
-        android.util.Log.i(com.android.server.SemService.TAG, "Buffer Init");
-        r1 = r11.secureBuffer;
-        r1.delete(0, r1.length());
-        r11.secureBuffer.setLength(0);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x00d1, code lost:
-    
-        if (r2 == null) goto L43;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x00dc, code lost:
-    
-        if (r8 == null) goto L104;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00de, code lost:
-    
-        r8.flush();
-        r8.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00da, code lost:
-    
-        r11 = e;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x00e5, code lost:
-    
-        r1 = new java.lang.StringBuilder("Close Exception ");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x012a, code lost:
-    
-        r1.append(r11);
-        android.util.Log.e(com.android.server.SemService.TAG, r1.toString());
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0134, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:30:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x00d3, code lost:
-    
-        r2.flush();
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x00eb, code lost:
-    
-        r11 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0135, code lost:
-    
-        if (r2 != null) goto L99;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x0140, code lost:
-    
-        if (r8 != null) goto L74;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x0142, code lost:
-    
-        r8.flush();
-        r8.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x013e, code lost:
-    
-        r1 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x0149, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Close Exception " + r1);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x0158, code lost:
-    
-        throw r11;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x0137, code lost:
-    
-        r2.flush();
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00ed, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Buffer Error");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x00f2, code lost:
-    
-        if (r2 != null) goto L101;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x00fd, code lost:
-    
-        if (r8 != null) goto L55;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x00ff, code lost:
-    
-        r8.flush();
-        r8.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x00fb, code lost:
-    
-        r11 = e;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x0106, code lost:
-    
-        r1 = new java.lang.StringBuilder("Close Exception ");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00f4, code lost:
-    
-        r2.flush();
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x010c, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Buffer Exception");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:59:0x0111, code lost:
-    
-        if (r2 != null) goto L83;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x011c, code lost:
-    
-        if (r8 != null) goto L64;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:61:0x011e, code lost:
-    
-        r8.flush();
-        r8.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x011a, code lost:
-    
-        r11 = e;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0125, code lost:
-    
-        r1 = new java.lang.StringBuilder("Close Exception ");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:66:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:67:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x0113, code lost:
-    
-        r2.flush();
-        r2.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:75:0x00ba, code lost:
-    
-        if (r4 == null) goto L90;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x00a6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x015d  */
+    /* JADX WARN: Removed duplicated region for block: B:104:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0091 A[PHI: r2 r4 r8
+      0x0091: PHI (r2v5 java.io.FileOutputStream) = (r2v2 java.io.FileOutputStream), (r2v8 java.io.FileOutputStream) binds: [B:36:0x00ba, B:28:0x008f] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r4v7 java.lang.Process) = (r4v5 java.lang.Process), (r4v9 java.lang.Process) binds: [B:36:0x00ba, B:28:0x008f] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r8v5 java.io.BufferedWriter) = (r8v3 java.io.BufferedWriter), (r8v8 java.io.BufferedWriter) binds: [B:36:0x00ba, B:28:0x008f] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00de A[Catch: IOException -> 0x00da, TRY_LEAVE, TryCatch #1 {IOException -> 0x00da, blocks: (B:40:0x00d3, B:44:0x00de), top: B:85:0x00d3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x015d  */
+    /* JADX WARN: Removed duplicated region for block: B:85:0x00d3 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x00a6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.samsung.android.service.SemService.ISemService
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void stop_SLOG() {
-        /*
-            Method dump skipped, instructions count: 353
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.stop_SLOG():void");
+    public void stop_SLOG() throws Throwable {
+        FileOutputStream fileOutputStream;
+        Process processExec;
+        StringBuilder sb;
+        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+            Log.e(TAG, "Stop_SLOG Permission Error");
+            return;
+        }
+        String string = this.secureBuffer.toString();
+        BufferedWriter bufferedWriter = null;
+        bufferedWriter = null;
+        bufferedWriter = null;
+        bufferedWriter = null;
+        bufferedWriter = null;
+        Process process = null;
+        try {
+            try {
+                if (string != null) {
+                    String sLogPath = getSLogPath("/data/log/sse1", "/data/log/sse2");
+                    String strEncData = encData(string);
+                    Log.d(TAG, "DP : " + sLogPath);
+                    fileOutputStream = new FileOutputStream(sLogPath, true);
+                    try {
+                        BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+                        if (strEncData != null) {
+                            try {
+                                bufferedWriter2.write(strEncData);
+                            } catch (Exception e) {
+                                e = e;
+                                bufferedWriter = bufferedWriter2;
+                                processExec = null;
+                                Log.e(TAG, "Save Exception " + e);
+                                if (bufferedWriter != null) {
+                                }
+                                if (processExec != null) {
+                                }
+                                try {
+                                    Log.i(TAG, "Buffer Init");
+                                    StringBuffer stringBuffer = this.secureBuffer;
+                                    stringBuffer.delete(0, stringBuffer.length());
+                                    this.secureBuffer.setLength(0);
+                                    if (fileOutputStream != null) {
+                                    }
+                                    if (bufferedWriter != null) {
+                                    }
+                                } catch (Throwable th) {
+                                    if (fileOutputStream != null) {
+                                        try {
+                                            fileOutputStream.flush();
+                                            fileOutputStream.close();
+                                        } catch (IOException e2) {
+                                            Log.e(TAG, "Close Exception " + e2);
+                                            throw th;
+                                        }
+                                    }
+                                    if (bufferedWriter != null) {
+                                        bufferedWriter.flush();
+                                        bufferedWriter.close();
+                                    }
+                                    throw th;
+                                }
+                            }
+                        }
+                        bufferedWriter2.write(ShaderAssembler.NEWLINE);
+                        bufferedWriter2.flush();
+                        bufferedWriter2.close();
+                        Runtime runtime = Runtime.getRuntime();
+                        processExec = runtime.exec("chmod a+r -R /data/log/sse1");
+                        try {
+                            try {
+                                processExec.waitFor();
+                                processExec = runtime.exec("chmod a+r -R /data/log/sse2");
+                                processExec.waitFor();
+                            } catch (Exception e3) {
+                                e = e3;
+                                Log.e(TAG, "Save Exception " + e);
+                                if (bufferedWriter != null) {
+                                    try {
+                                        bufferedWriter.close();
+                                    } catch (IOException e4) {
+                                        Log.e(TAG, "Close Fail " + e4);
+                                    }
+                                }
+                                if (processExec != null) {
+                                }
+                                Log.i(TAG, "Buffer Init");
+                                StringBuffer stringBuffer2 = this.secureBuffer;
+                                stringBuffer2.delete(0, stringBuffer2.length());
+                                this.secureBuffer.setLength(0);
+                                if (fileOutputStream != null) {
+                                }
+                                if (bufferedWriter != null) {
+                                }
+                            }
+                        } catch (Throwable th2) {
+                            th = th2;
+                            process = processExec;
+                            if (process != null) {
+                            }
+                            throw th;
+                        }
+                    } catch (Exception e5) {
+                        e = e5;
+                        processExec = null;
+                    }
+                } else {
+                    Log.e(TAG, "LD Null Error");
+                    fileOutputStream = null;
+                    processExec = null;
+                }
+            } catch (Throwable th3) {
+                th = th3;
+                if (process != null) {
+                    process.destroy();
+                }
+                throw th;
+            }
+        } catch (Exception e6) {
+            e = e6;
+            fileOutputStream = null;
+            processExec = null;
+        }
+        if (processExec != null) {
+            processExec.destroy();
+        }
+        try {
+            Log.i(TAG, "Buffer Init");
+            StringBuffer stringBuffer22 = this.secureBuffer;
+            stringBuffer22.delete(0, stringBuffer22.length());
+            this.secureBuffer.setLength(0);
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (IOException e7) {
+                    e = e7;
+                    sb = new StringBuilder("Close Exception ");
+                    sb.append(e);
+                    Log.e(TAG, sb.toString());
+                    return;
+                }
+            }
+            if (bufferedWriter != null) {
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (Error unused) {
+            Log.e(TAG, "Buffer Error");
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (IOException e8) {
+                    e = e8;
+                    sb = new StringBuilder("Close Exception ");
+                    sb.append(e);
+                    Log.e(TAG, sb.toString());
+                    return;
+                }
+            }
+            if (bufferedWriter != null) {
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        } catch (Exception unused2) {
+            Log.e(TAG, "Buffer Exception");
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (IOException e9) {
+                    e = e9;
+                    sb = new StringBuilder("Close Exception ");
+                    sb.append(e);
+                    Log.e(TAG, sb.toString());
+                    return;
+                }
+            }
+            if (bufferedWriter != null) {
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e9 A[Catch: IOException -> 0x00e5, TRY_LEAVE, TryCatch #2 {IOException -> 0x00e5, blocks: (B:51:0x00de, B:44:0x00e9), top: B:50:0x00de }] */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00de A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00e9 A[Catch: IOException -> 0x00e5, TRY_LEAVE, TryCatch #2 {IOException -> 0x00e5, blocks: (B:48:0x00de, B:52:0x00e9), top: B:56:0x00de }] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00de A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.samsung.android.service.SemService.ISemService
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void agent_SLOG(java.lang.String r9) {
-        /*
-            Method dump skipped, instructions count: 256
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.agent_SLOG(java.lang.String):void");
+    public void agent_SLOG(String str) throws Throwable {
+        BufferedWriter bufferedWriter;
+        StringBuilder sb;
+        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+            Log.e(TAG, "Agent_SLOG Permission Error");
+            return;
+        }
+        try {
+            byte[] bArr = new byte[300];
+            byte[] bArr2 = new byte[300];
+            int i = getpkSecurity(bArr);
+            int i2 = getpkSKMS(bArr2);
+            this.bytePublicKeySecurityLen = i;
+            this.bytePublicKeySKMSLen = i2;
+            this.bytePublicKeyDataSecurity = Arrays.copyOf(bArr, i);
+            this.bytePublicKeyDataSKMS = Arrays.copyOf(bArr2, this.bytePublicKeySKMSLen);
+        } catch (Exception e) {
+            Log.e(TAG, "Get SL Key ex " + e);
+        }
+        String sLogPath = getSLogPath("/data/log/sse5", "/data/log/sse6");
+        FileOutputStream fileOutputStream = null;
+        try {
+            String strEncData = encData(str);
+            Log.d(TAG, "DP : " + sLogPath);
+            FileOutputStream fileOutputStream2 = new FileOutputStream(sLogPath, true);
+            try {
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream2, StandardCharsets.UTF_8));
+                if (strEncData != null) {
+                    try {
+                        bufferedWriter.write(strEncData);
+                    } catch (Exception e2) {
+                        e = e2;
+                        fileOutputStream = fileOutputStream2;
+                        try {
+                            Log.e(TAG, "ASLog ex " + e);
+                            if (fileOutputStream != null) {
+                                try {
+                                    fileOutputStream.flush();
+                                    fileOutputStream.close();
+                                } catch (IOException e3) {
+                                    e = e3;
+                                    sb = new StringBuilder("ASLog Ex ");
+                                    sb.append(e);
+                                    Log.e(TAG, sb.toString());
+                                }
+                            }
+                            if (bufferedWriter != null) {
+                                bufferedWriter.flush();
+                                bufferedWriter.close();
+                                return;
+                            }
+                            return;
+                        } catch (Throwable th) {
+                            th = th;
+                            if (fileOutputStream != null) {
+                                try {
+                                    fileOutputStream.flush();
+                                    fileOutputStream.close();
+                                } catch (IOException e4) {
+                                    Log.e(TAG, "ASLog Ex " + e4);
+                                    throw th;
+                                }
+                            }
+                            if (bufferedWriter != null) {
+                                bufferedWriter.flush();
+                                bufferedWriter.close();
+                            }
+                            throw th;
+                        }
+                    } catch (Throwable th2) {
+                        th = th2;
+                        fileOutputStream = fileOutputStream2;
+                        if (fileOutputStream != null) {
+                        }
+                        if (bufferedWriter != null) {
+                        }
+                        throw th;
+                    }
+                }
+                bufferedWriter.write(ShaderAssembler.NEWLINE);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                try {
+                    fileOutputStream2.flush();
+                    fileOutputStream2.close();
+                } catch (IOException e5) {
+                    e = e5;
+                    sb = new StringBuilder("ASLog Ex ");
+                    sb.append(e);
+                    Log.e(TAG, sb.toString());
+                }
+            } catch (Exception e6) {
+                e = e6;
+                bufferedWriter = null;
+            } catch (Throwable th3) {
+                th = th3;
+                bufferedWriter = null;
+            }
+        } catch (Exception e7) {
+            e = e7;
+            bufferedWriter = null;
+        } catch (Throwable th4) {
+            th = th4;
+            bufferedWriter = null;
+        }
     }
 
     public String getSLogPath(String str, String str2) {
@@ -1650,14 +2055,14 @@ public final class SemService extends ISemService.Stub {
     }
 
     @Override // android.os.Binder
-    protected void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    protected void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) throws Throwable {
         String str;
         String str2;
         String str3;
-        String str4;
-        String str5;
-        String str6;
-        String str7;
+        String fileBytes;
+        String fileBytes2;
+        String strEncData;
+        String strEncData2;
         try {
             if (SystemProperties.get("ro.security.ese.cosname", "").equals("")) {
                 printWriter.println("not support eSE device: can't dump");
@@ -1680,62 +2085,62 @@ public final class SemService extends ISemService.Stub {
                 String sCRSActivationList = getSCRSActivationList();
                 String accessRule = getAccessRule();
                 String cPLC14mode = getCPLC14mode();
-                String appCheckLog = appCheckLog();
+                String strAppCheckLog = appCheckLog();
                 String _esea = get_ESEA();
-                String str8 = get_DPDLog();
-                String DCKLog = DCKLog();
+                String str4 = get_DPDLog();
+                String strDCKLog = DCKLog();
                 str2 = TAG;
                 try {
                     if (this.supportEsek) {
                         str3 = packageName;
-                        str5 = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/esek_cert.dat", new String[0]));
-                        str4 = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/scp11_cert.dat", new String[0]));
+                        fileBytes2 = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/esek_cert.dat", new String[0]));
+                        fileBytes = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/scp11_cert.dat", new String[0]));
                     } else {
                         str3 = packageName;
-                        str4 = null;
-                        str5 = null;
+                        fileBytes = null;
+                        fileBytes2 = null;
                     }
                     start_SLOG();
-                    String encData = encData(sCRSActivationList);
-                    String encData2 = encData(accessRule);
-                    String encData3 = encData(appCheckLog);
-                    String encData4 = encData(cPLC14mode);
-                    String encData5 = encData(_esea);
+                    String strEncData3 = encData(sCRSActivationList);
+                    String strEncData4 = encData(accessRule);
+                    String strEncData5 = encData(strAppCheckLog);
+                    String strEncData6 = encData(cPLC14mode);
+                    String strEncData7 = encData(_esea);
                     if (this.supportEsek) {
-                        str7 = str5 != null ? encData(str5) : null;
-                        str6 = str4 != null ? encData(str4) : null;
+                        strEncData2 = fileBytes2 != null ? encData(fileBytes2) : null;
+                        strEncData = fileBytes != null ? encData(fileBytes) : null;
                     } else {
-                        str6 = null;
-                        str7 = null;
+                        strEncData = null;
+                        strEncData2 = null;
                     }
-                    String str9 = str6;
+                    String str5 = strEncData;
                     this.secureBuffer.append(sCRSActivationList + ShaderAssembler.NEWLINE);
-                    this.secureBuffer.append(encData2 + ShaderAssembler.NEWLINE);
-                    this.secureBuffer.append(appCheckLog + ShaderAssembler.NEWLINE);
+                    this.secureBuffer.append(strEncData4 + ShaderAssembler.NEWLINE);
+                    this.secureBuffer.append(strAppCheckLog + ShaderAssembler.NEWLINE);
                     this.secureBuffer.append(cPLC14mode + ShaderAssembler.NEWLINE);
                     this.secureBuffer.append(_esea + ShaderAssembler.NEWLINE);
                     stop_SLOG();
-                    stringBuffer.append(ShaderAssembler.NEWLINE + encData4);
-                    stringBuffer.append(ShaderAssembler.NEWLINE + encData);
-                    stringBuffer.append(ShaderAssembler.NEWLINE + encData2);
-                    stringBuffer.append(ShaderAssembler.NEWLINE + encData3);
-                    stringBuffer.append(ShaderAssembler.NEWLINE + encData5);
-                    stringBuffer.append("\nDPD : " + str8);
-                    if (DCKLog != null) {
+                    stringBuffer.append(ShaderAssembler.NEWLINE + strEncData6);
+                    stringBuffer.append(ShaderAssembler.NEWLINE + strEncData3);
+                    stringBuffer.append(ShaderAssembler.NEWLINE + strEncData4);
+                    stringBuffer.append(ShaderAssembler.NEWLINE + strEncData5);
+                    stringBuffer.append(ShaderAssembler.NEWLINE + strEncData7);
+                    stringBuffer.append("\nDPD : " + str4);
+                    if (strDCKLog != null) {
                         stringBuffer.append("\nSEMSVC[4]");
-                        stringBuffer.append(ShaderAssembler.NEWLINE + DCKLog);
+                        stringBuffer.append(ShaderAssembler.NEWLINE + strDCKLog);
                     }
                     if (this.supportEsek) {
-                        if (str7 != null) {
-                            stringBuffer.append("\nESEK_Cert : " + str7);
+                        if (strEncData2 != null) {
+                            stringBuffer.append("\nESEK_Cert : " + strEncData2);
                         }
-                        if (str9 != null) {
-                            stringBuffer.append("\nSCP11 Cert : " + str9);
+                        if (str5 != null) {
+                            stringBuffer.append("\nSCP11 Cert : " + str5);
                         }
                     }
-                    String str10 = str3;
-                    this.mSemServiceAccessControl.removeAllowedPackage(str10, SemServiceAccessControl.PackageList.MJavaPkgList);
-                    this.mSemServiceAccessControl.removeAllowedPackage(str10, SemServiceAccessControl.PackageList.MFactoryPkgList);
+                    String str6 = str3;
+                    this.mSemServiceAccessControl.removeAllowedPackage(str6, SemServiceAccessControl.PackageList.MJavaPkgList);
+                    this.mSemServiceAccessControl.removeAllowedPackage(str6, SemServiceAccessControl.PackageList.MFactoryPkgList);
                     printWriter.println(stringBuffer.toString());
                 } catch (Error e) {
                     e = e;
@@ -1825,15 +2230,15 @@ public final class SemService extends ISemService.Stub {
             return -200;
         }
         try {
-            int openSpi = openSpi(i);
-            if (openSpi != 0) {
+            int iOpenSpi = openSpi(i);
+            if (iOpenSpi != 0) {
                 releaseSpiUsage();
-                return openSpi;
+                return iOpenSpi;
             }
             if (i == 0) {
                 startSPITimer();
             }
-            return openSpi;
+            return iOpenSpi;
         } catch (Exception e) {
             Log.e(TAG, "Failed to open_Spi, " + e.toString());
             return -90;
@@ -1873,9 +2278,9 @@ public final class SemService extends ISemService.Stub {
                 return -3;
             }
         }
-        int synchronizedCloseSpi = synchronizedCloseSpi(i);
+        int iSynchronizedCloseSpi = synchronizedCloseSpi(i);
         releaseSpiUsage();
-        return synchronizedCloseSpi;
+        return iSynchronizedCloseSpi;
     }
 
     public synchronized int synchronizedCloseSpi(int i) {
@@ -1909,16 +2314,16 @@ public final class SemService extends ISemService.Stub {
                 return -3;
             }
         }
-        int sendData = sendData(bArr, i, bArr2, i2);
+        int iSendData = sendData(bArr, i, bArr2, i2);
         if (i2 == 0) {
             startSPITimer();
         }
-        return sendData;
+        return iSendData;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int check_SeState(byte[] bArr, byte[] bArr2) {
-        int i;
+        int iCheckSeStatus;
         Log.i(TAG, "Start checkSeState");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MScpKmPkgList)) {
             return -91;
@@ -1932,24 +2337,24 @@ public final class SemService extends ISemService.Stub {
             return -91;
         }
         try {
-            i = checkSeStatus(bArr, bArr2);
+            iCheckSeStatus = checkSeStatus(bArr, bArr2);
         } catch (Exception e) {
             Log.e(TAG, "Failed to check_SeState, " + e.toString());
-            i = -90;
+            iCheckSeStatus = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NoClassDef check_SeState, " + e2.toString());
-            i = -2;
+            iCheckSeStatus = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "Unsatisfield check_SeState, " + e3.toString());
-            i = -3;
+            iCheckSeStatus = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iCheckSeStatus;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int start_request_credentials(byte[] bArr, byte[] bArr2, String str, byte[] bArr3) {
-        int i;
+        int iStartRequestCredentials;
         Log.i(TAG, "Start start_request_credentials");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MScpKmPkgList)) {
             return -91;
@@ -1968,9 +2373,9 @@ public final class SemService extends ISemService.Stub {
                     byte[] scpkmTeeSigData = this.mSemServiceAccessControl.getScpkmTeeSigData();
                     byte[] scpkmTeeListData = this.mSemServiceAccessControl.getScpkmTeeListData();
                     if (scpkmTeeSigData != null && scpkmTeeListData != null) {
-                        int startRequestCredentialsList = startRequestCredentialsList(bArr, bArr2, str, scpkmTeeSigData, scpkmTeeListData, bArr3);
+                        int iStartRequestCredentialsList = startRequestCredentialsList(bArr, bArr2, str, scpkmTeeSigData, scpkmTeeListData, bArr3);
                         releaseSpiUsage();
-                        return startRequestCredentialsList;
+                        return iStartRequestCredentialsList;
                     }
                     Log.e(TAG, "Data Error");
                 } catch (Exception e) {
@@ -1981,19 +2386,19 @@ public final class SemService extends ISemService.Stub {
                     Log.e(TAG, "Get tList Unsatisfield " + e3);
                 }
             }
-            i = startRequestCredentials(bArr, bArr2, str, bArr3);
+            iStartRequestCredentials = startRequestCredentials(bArr, bArr2, str, bArr3);
         } catch (Exception e4) {
             Log.e(TAG, "Failed to start_request_credentials, " + e4.toString());
-            i = -90;
+            iStartRequestCredentials = -90;
         } catch (NoClassDefFoundError e5) {
             Log.e(TAG, "NoClassDef start_request_credentials, " + e5.toString());
-            i = -2;
+            iStartRequestCredentials = -2;
         } catch (UnsatisfiedLinkError e6) {
             Log.e(TAG, "Unsatisfield start_request_credentials, " + e6.toString());
-            i = -3;
+            iStartRequestCredentials = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iStartRequestCredentials;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -2014,7 +2419,7 @@ public final class SemService extends ISemService.Stub {
 
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized int grdm_get_session() {
-        int i;
+        int iGrdmGetSession;
         Log.i(TAG, "Start grdm_get_session");
         if (!isGRDMSupported()) {
             return -10;
@@ -2026,31 +2431,31 @@ public final class SemService extends ISemService.Stub {
             try {
                 try {
                     if (this.mIsOpened) {
-                        i = -11;
+                        iGrdmGetSession = -11;
                     } else {
-                        i = grdmGetSession();
-                        if (i == 1) {
+                        iGrdmGetSession = grdmGetSession();
+                        if (iGrdmGetSession == 1) {
                             this.mIsOpened = true;
                         }
                     }
-                } catch (NoClassDefFoundError e) {
-                    Log.e(TAG, "NoClassDef start_request_grdm, " + e.toString());
-                    i = -2;
+                } catch (UnsatisfiedLinkError e) {
+                    Log.e(TAG, "Unsatisfield start_request_grdm, " + e.toString());
+                    iGrdmGetSession = -3;
                 }
             } catch (Exception e2) {
                 Log.e(TAG, "Failed to start_request_grdm, " + e2.toString());
-                i = -90;
+                iGrdmGetSession = -90;
             }
-        } catch (UnsatisfiedLinkError e3) {
-            Log.e(TAG, "Unsatisfield start_request_grdm, " + e3.toString());
-            i = -3;
+        } catch (NoClassDefFoundError e3) {
+            Log.e(TAG, "NoClassDef start_request_grdm, " + e3.toString());
+            iGrdmGetSession = -2;
         }
-        return i;
+        return iGrdmGetSession;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized int grdm_request_key(int i, byte[] bArr) {
-        int i2;
+        int iGrdmRequestKey;
         Log.i(TAG, "Start grdm_request_key");
         if (!isGRDMSupported()) {
             return -10;
@@ -2060,24 +2465,24 @@ public final class SemService extends ISemService.Stub {
         }
         try {
             try {
-                i2 = grdmRequestKey(i, bArr);
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to grdm_request_key, " + e.toString());
-                i2 = -90;
-            } catch (UnsatisfiedLinkError e2) {
-                Log.e(TAG, "Unsatisfield grdm_request_key, " + e2.toString());
-                i2 = -3;
+                iGrdmRequestKey = grdmRequestKey(i, bArr);
+            } catch (NoClassDefFoundError e) {
+                Log.e(TAG, "NoClassDef grdm_request_key, " + e.toString());
+                iGrdmRequestKey = -2;
             }
-        } catch (NoClassDefFoundError e3) {
-            Log.e(TAG, "NoClassDef grdm_request_key, " + e3.toString());
-            i2 = -2;
+        } catch (Exception e2) {
+            Log.e(TAG, "Failed to grdm_request_key, " + e2.toString());
+            iGrdmRequestKey = -90;
+        } catch (UnsatisfiedLinkError e3) {
+            Log.e(TAG, "Unsatisfield grdm_request_key, " + e3.toString());
+            iGrdmRequestKey = -3;
         }
-        return i2;
+        return iGrdmRequestKey;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized int grdm_release_session() {
-        int i;
+        int iGrdmReleaseSession;
         Log.i(TAG, "Start grdm_release_session");
         if (!isGRDMSupported()) {
             return -10;
@@ -2087,27 +2492,27 @@ public final class SemService extends ISemService.Stub {
         }
         try {
             if (this.mIsOpened) {
-                i = grdmReleaseSession();
+                iGrdmReleaseSession = grdmReleaseSession();
                 this.mIsOpened = false;
             } else {
-                i = -12;
+                iGrdmReleaseSession = -12;
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to grdm_release_session, " + e.toString());
-            i = -90;
+            iGrdmReleaseSession = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NoClassDef grdm_release_session, " + e2.toString());
-            i = -2;
+            iGrdmReleaseSession = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "Unsatisfield grdm_release_session, " + e3.toString());
-            i = -3;
+            iGrdmReleaseSession = -3;
         }
-        return i;
+        return iGrdmReleaseSession;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized int grdm_get_attes_cert(int i, byte[] bArr) {
-        int i2;
+        int iGrdmGetAttesCert;
         Log.i(TAG, "Start grdm_get_attes_cert");
         if (!isGRDMSupported()) {
             return -10;
@@ -2117,19 +2522,19 @@ public final class SemService extends ISemService.Stub {
         }
         try {
             try {
-                i2 = grdmGetAttesCert(i, bArr);
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to grdm_get_attes_cert, " + e.toString());
-                i2 = -90;
-            } catch (UnsatisfiedLinkError e2) {
-                Log.e(TAG, "Unsatisfield grdm_get_attes_cert, " + e2.toString());
-                i2 = -3;
+                iGrdmGetAttesCert = grdmGetAttesCert(i, bArr);
+            } catch (NoClassDefFoundError e) {
+                Log.e(TAG, "NoClassDef grdm_get_attes_cert, " + e.toString());
+                iGrdmGetAttesCert = -2;
             }
-        } catch (NoClassDefFoundError e3) {
-            Log.e(TAG, "NoClassDef grdm_get_attes_cert, " + e3.toString());
-            i2 = -2;
+        } catch (Exception e2) {
+            Log.e(TAG, "Failed to grdm_get_attes_cert, " + e2.toString());
+            iGrdmGetAttesCert = -90;
+        } catch (UnsatisfiedLinkError e3) {
+            Log.e(TAG, "Unsatisfield grdm_get_attes_cert, " + e3.toString());
+            iGrdmGetAttesCert = -3;
         }
-        return i2;
+        return iGrdmGetAttesCert;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
@@ -2142,35 +2547,35 @@ public final class SemService extends ISemService.Stub {
             try {
                 try {
                     byte[] bArr = new byte[1000];
-                    int grdmCheckRestrictedMode = grdmCheckRestrictedMode(bArr);
-                    if (grdmCheckRestrictedMode <= 0) {
+                    int iGrdmCheckRestrictedMode = grdmCheckRestrictedMode(bArr);
+                    if (iGrdmCheckRestrictedMode <= 0) {
                         Log.e(TAG, "no data to be returned");
                         return null;
                     }
-                    if (grdmCheckRestrictedMode < 1000) {
-                        String str = new String(Arrays.copyOf(bArr, grdmCheckRestrictedMode), StandardCharsets.UTF_8);
+                    if (iGrdmCheckRestrictedMode < 1000) {
+                        String str = new String(Arrays.copyOf(bArr, iGrdmCheckRestrictedMode), StandardCharsets.UTF_8);
                         Log.i(TAG, "grdm_check_restricted_mode Return : ".concat(str));
                         return str;
                     }
                     Log.e(TAG, "data overflow");
                     return null;
-                } catch (NoClassDefFoundError e) {
-                    Log.e(TAG, "NoClassDef grdm_check_restricted_mode, " + e.toString());
+                } catch (UnsatisfiedLinkError e) {
+                    Log.e(TAG, "Unsatisfield grdm_check_restricted_mode, " + e.toString());
                     return null;
                 }
             } catch (Exception e2) {
                 Log.e(TAG, "Failed to grdm_check_restricted_mode, " + e2.toString());
                 return null;
             }
-        } catch (UnsatisfiedLinkError e3) {
-            Log.e(TAG, "Unsatisfield grdm_check_restricted_mode, " + e3.toString());
+        } catch (NoClassDefFoundError e3) {
+            Log.e(TAG, "NoClassDef grdm_check_restricted_mode, " + e3.toString());
             return null;
         }
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized int grdm_Check_Status() {
-        int i;
+        int iGrdmCheckStatusInfo;
         Log.i(TAG, "Start grdm_Check_Status");
         if (!isGRDMSupported()) {
             return -10;
@@ -2180,24 +2585,24 @@ public final class SemService extends ISemService.Stub {
         }
         try {
             try {
-                i = grdmCheckStatusInfo();
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to grdm_get_attes_cert, " + e.toString());
-                i = -90;
-            } catch (UnsatisfiedLinkError e2) {
-                Log.e(TAG, "Unsatisfield grdm_get_attes_cert, " + e2.toString());
-                i = -3;
+                iGrdmCheckStatusInfo = grdmCheckStatusInfo();
+            } catch (NoClassDefFoundError e) {
+                Log.e(TAG, "NoClassDef grdm_get_attes_cert, " + e.toString());
+                iGrdmCheckStatusInfo = -2;
             }
-        } catch (NoClassDefFoundError e3) {
-            Log.e(TAG, "NoClassDef grdm_get_attes_cert, " + e3.toString());
-            i = -2;
+        } catch (Exception e2) {
+            Log.e(TAG, "Failed to grdm_get_attes_cert, " + e2.toString());
+            iGrdmCheckStatusInfo = -90;
+        } catch (UnsatisfiedLinkError e3) {
+            Log.e(TAG, "Unsatisfield grdm_get_attes_cert, " + e3.toString());
+            iGrdmCheckStatusInfo = -3;
         }
-        return i;
+        return iGrdmCheckStatusInfo;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int openSpiDriver() {
-        int i;
+        int iOpenDriverSpi;
         Log.i(TAG, "openSpiDriver");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "openSpiDriver Permission Error");
@@ -2212,24 +2617,24 @@ public final class SemService extends ISemService.Stub {
             return -91;
         }
         try {
-            i = openDriverSpi();
+            iOpenDriverSpi = openDriverSpi();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i = -90;
+            iOpenDriverSpi = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iOpenDriverSpi = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iOpenDriverSpi = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iOpenDriverSpi;
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int closeSpiDriver() {
-        int i;
+        int iCloseDriverSpi;
         Log.i(TAG, "closeSpiDriver");
         if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "closeSpiDriver Permission Error");
@@ -2244,18 +2649,18 @@ public final class SemService extends ISemService.Stub {
             return -91;
         }
         try {
-            i = closeDriverSpi();
+            iCloseDriverSpi = closeDriverSpi();
         } catch (Exception e) {
             Log.e(TAG, "Exception : " + e);
-            i = -90;
+            iCloseDriverSpi = -90;
         } catch (NoClassDefFoundError e2) {
             Log.e(TAG, "NCDF Exception : " + e2);
-            i = -2;
+            iCloseDriverSpi = -2;
         } catch (UnsatisfiedLinkError e3) {
             Log.e(TAG, "USLE Exception : " + e3);
-            i = -3;
+            iCloseDriverSpi = -3;
         }
         releaseSpiUsage();
-        return i;
+        return iCloseDriverSpi;
     }
 }

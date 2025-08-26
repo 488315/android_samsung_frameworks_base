@@ -51,7 +51,7 @@ public class Tonal implements ExtractionType {
     }
 
     private boolean runTonalExtraction(WallpaperColors wallpaperColors, ColorExtractor.GradientColors gradientColors, ColorExtractor.GradientColors gradientColors2, ColorExtractor.GradientColors gradientColors3) {
-        int min;
+        int iMin;
         if (wallpaperColors == null) {
             return false;
         }
@@ -62,33 +62,33 @@ public class Tonal implements ExtractionType {
             return false;
         }
         int argb = mainColors.get(0).toArgb();
-        float[] fArr = {r5, 0.0f, 0.0f};
+        float[] fArr = {f, 0.0f, 0.0f};
         ColorUtils.RGBToHSL(Color.red(argb), Color.green(argb), Color.blue(argb), fArr);
         float f = fArr[0] / 360.0f;
-        TonalPalette findTonalPalette = findTonalPalette(f, fArr[1]);
-        if (findTonalPalette == null) {
+        TonalPalette tonalPaletteFindTonalPalette = findTonalPalette(f, fArr[1]);
+        if (tonalPaletteFindTonalPalette == null) {
             Log.w(TAG, "Could not find a tonal palette!");
             return false;
         }
-        int i = 2;
-        int bestFit = bestFit(findTonalPalette, fArr[0], fArr[1], fArr[2]);
-        if (bestFit == -1) {
+        int length = 2;
+        int iBestFit = bestFit(tonalPaletteFindTonalPalette, fArr[0], fArr[1], fArr[2]);
+        if (iBestFit == -1) {
             Log.w(TAG, "Could not find best fit!");
             return false;
         }
-        float[] fit = fit(findTonalPalette.h, fArr[0], bestFit, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY);
-        float[] fit2 = fit(findTonalPalette.s, fArr[1], bestFit, 0.0f, 1.0f);
-        float[] fit3 = fit(findTonalPalette.l, fArr[2], bestFit, 0.0f, 1.0f);
-        int[] colorPalette = getColorPalette(fit, fit2, fit3);
-        StringBuilder sb = new StringBuilder("Tonal Palette - index: " + bestFit + ". Main color: " + Integer.toHexString(getColorInt(bestFit, fit, fit2, fit3)) + "\nColors: ");
-        for (int i2 = 0; i2 < fit.length; i2++) {
-            sb.append(Integer.toHexString(getColorInt(i2, fit, fit2, fit3)));
-            if (i2 < fit.length - 1) {
+        float[] fArrFit = fit(tonalPaletteFindTonalPalette.h, fArr[0], iBestFit, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY);
+        float[] fArrFit2 = fit(tonalPaletteFindTonalPalette.s, fArr[1], iBestFit, 0.0f, 1.0f);
+        float[] fArrFit3 = fit(tonalPaletteFindTonalPalette.l, fArr[2], iBestFit, 0.0f, 1.0f);
+        int[] colorPalette = getColorPalette(fArrFit, fArrFit2, fArrFit3);
+        StringBuilder sb = new StringBuilder("Tonal Palette - index: " + iBestFit + ". Main color: " + Integer.toHexString(getColorInt(iBestFit, fArrFit, fArrFit2, fArrFit3)) + "\nColors: ");
+        for (int i = 0; i < fArrFit.length; i++) {
+            sb.append(Integer.toHexString(getColorInt(i, fArrFit, fArrFit2, fArrFit3)));
+            if (i < fArrFit.length - 1) {
                 sb.append(", ");
             }
         }
         Log.d(TAG, sb.toString());
-        int colorInt = getColorInt(bestFit, fit, fit2, fit3);
+        int colorInt = getColorInt(iBestFit, fArrFit, fArrFit2, fArrFit3);
         ColorUtils.colorToHSL(colorInt, this.mTmpHSL);
         float[] fArr2 = this.mTmpHSL;
         float f2 = fArr2[2];
@@ -105,20 +105,20 @@ public class Tonal implements ExtractionType {
         gradientColors.setSecondaryColor(colorInt);
         gradientColors.setColorPalette(colorPalette);
         if (z) {
-            min = fit.length - 1;
+            iMin = fArrFit.length - 1;
         } else {
-            min = bestFit < 2 ? 0 : Math.min(bestFit, 3);
+            iMin = iBestFit < 2 ? 0 : Math.min(iBestFit, 3);
         }
-        int colorInt2 = getColorInt(min, fit, fit2, fit3);
+        int colorInt2 = getColorInt(iMin, fArrFit, fArrFit2, fArrFit3);
         gradientColors2.setMainColor(colorInt2);
         gradientColors2.setSecondaryColor(colorInt2);
         gradientColors2.setColorPalette(colorPalette);
         if (z) {
-            i = fit.length - 1;
-        } else if (bestFit < 2) {
-            i = 0;
+            length = fArrFit.length - 1;
+        } else if (iBestFit < 2) {
+            length = 0;
         }
-        int colorInt3 = getColorInt(i, fit, fit2, fit3);
+        int colorInt3 = getColorInt(length, fArrFit, fArrFit2, fArrFit3);
         gradientColors3.setMainColor(colorInt3);
         gradientColors3.setSecondaryColor(colorInt3);
         gradientColors3.setColorPalette(colorPalette);
@@ -180,18 +180,18 @@ public class Tonal implements ExtractionType {
         int i = -1;
         float f4 = Float.POSITIVE_INFINITY;
         for (int i2 = 0; i2 < tonalPalette.h.length; i2++) {
-            float abs = (Math.abs(f - tonalPalette.h[i2]) * 1.0f) + (Math.abs(f2 - tonalPalette.s[i2]) * 1.0f) + (Math.abs(f3 - tonalPalette.l[i2]) * FIT_WEIGHT_L);
-            if (abs < f4) {
+            float fAbs = (Math.abs(f - tonalPalette.h[i2]) * 1.0f) + (Math.abs(f2 - tonalPalette.s[i2]) * 1.0f) + (Math.abs(f3 - tonalPalette.l[i2]) * FIT_WEIGHT_L);
+            if (fAbs < f4) {
                 i = i2;
-                f4 = abs;
+                f4 = fAbs;
             }
         }
         return i;
     }
 
     private TonalPalette findTonalPalette(float f, float f2) {
-        float fract;
-        float fract2;
+        float fFract;
+        float fFract2;
         float f3;
         if (f2 < 0.05f) {
             return this.mGreyPalette;
@@ -206,21 +206,19 @@ public class Tonal implements ExtractionType {
             }
             if (f > tonalPalette2.minHue || tonalPalette2.minHue - f >= f4) {
                 if (f >= tonalPalette2.maxHue && f - tonalPalette2.maxHue < f4) {
-                    fract2 = tonalPalette2.maxHue;
-                } else if (tonalPalette2.maxHue <= 1.0f || f < fract(tonalPalette2.maxHue) || f - fract(tonalPalette2.maxHue) >= f4) {
-                    if (tonalPalette2.minHue < 0.0f && f <= fract(tonalPalette2.minHue) && fract(tonalPalette2.minHue) - f < f4) {
-                        fract = fract(tonalPalette2.minHue);
-                    }
-                } else {
-                    fract2 = fract(tonalPalette2.maxHue);
+                    fFract2 = tonalPalette2.maxHue;
+                } else if (tonalPalette2.maxHue > 1.0f && f >= fract(tonalPalette2.maxHue) && f - fract(tonalPalette2.maxHue) < f4) {
+                    fFract2 = fract(tonalPalette2.maxHue);
+                } else if (tonalPalette2.minHue < 0.0f && f <= fract(tonalPalette2.minHue) && fract(tonalPalette2.minHue) - f < f4) {
+                    fFract = fract(tonalPalette2.minHue);
                 }
-                f3 = f - fract2;
+                f3 = f - fFract2;
                 f4 = f3;
                 tonalPalette = tonalPalette2;
             } else {
-                fract = tonalPalette2.minHue;
+                fFract = tonalPalette2.minHue;
             }
-            f3 = fract - f;
+            f3 = fFract - f;
             f4 = f3;
             tonalPalette = tonalPalette2;
         }
@@ -245,14 +243,14 @@ public class Tonal implements ExtractionType {
             this.h = fArr;
             this.s = fArr2;
             this.l = fArr3;
-            float f = Float.POSITIVE_INFINITY;
-            float f2 = Float.NEGATIVE_INFINITY;
-            for (float f3 : fArr) {
-                f = Math.min(f3, f);
-                f2 = Math.max(f3, f2);
+            float fMin = Float.POSITIVE_INFINITY;
+            float fMax = Float.NEGATIVE_INFINITY;
+            for (float f : fArr) {
+                fMin = Math.min(f, fMin);
+                fMax = Math.max(f, fMax);
             }
-            this.minHue = f;
-            this.maxHue = f2;
+            this.minHue = fMin;
+            this.maxHue = fMax;
         }
     }
 
@@ -272,7 +270,7 @@ public class Tonal implements ExtractionType {
         }
 
         public float[] getCenter() {
-            return new float[]{this.mHue.getLower().floatValue() + ((this.mHue.getUpper().floatValue() - this.mHue.getLower().floatValue()) / 2.0f), this.mSaturation.getLower().floatValue() + ((this.mSaturation.getUpper().floatValue() - this.mSaturation.getLower().floatValue()) / 2.0f), this.mLightness.getLower().floatValue() + ((this.mLightness.getUpper().floatValue() - this.mLightness.getLower().floatValue()) / 2.0f)};
+            return new float[]{((Float) this.mHue.getLower()).floatValue() + ((((Float) this.mHue.getUpper()).floatValue() - ((Float) this.mHue.getLower()).floatValue()) / 2.0f), ((Float) this.mSaturation.getLower()).floatValue() + ((((Float) this.mSaturation.getUpper()).floatValue() - ((Float) this.mSaturation.getLower()).floatValue()) / 2.0f), ((Float) this.mLightness.getLower()).floatValue() + ((((Float) this.mLightness.getUpper()).floatValue() - ((Float) this.mLightness.getLower()).floatValue()) / 2.0f)};
         }
 
         public String toString() {
@@ -283,7 +281,7 @@ public class Tonal implements ExtractionType {
     public static class ConfigParser {
         private final ArrayList<TonalPalette> mTonalPalettes = new ArrayList<>();
 
-        public ConfigParser(Context context) {
+        public ConfigParser(Context context) throws XmlPullParserException, IOException {
             try {
                 XmlResourceParser xml = context.getResources().getXml(R.xml.color_extraction);
                 for (int eventType = xml.getEventType(); eventType != 1; eventType = xml.next()) {
@@ -308,13 +306,13 @@ public class Tonal implements ExtractionType {
 
         private ColorRange readRange(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
             xmlPullParser.require(2, null, "range");
-            float[] readFloatArray = readFloatArray(xmlPullParser.getAttributeValue(null, "h"));
-            float[] readFloatArray2 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_SESSION));
-            float[] readFloatArray3 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_LEASEE));
-            if (readFloatArray == null || readFloatArray2 == null || readFloatArray3 == null) {
+            float[] floatArray = readFloatArray(xmlPullParser.getAttributeValue(null, "h"));
+            float[] floatArray2 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_SESSION));
+            float[] floatArray3 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_LEASEE));
+            if (floatArray == null || floatArray2 == null || floatArray3 == null) {
                 throw new XmlPullParserException("Incomplete range tag.", xmlPullParser, null);
             }
-            return new ColorRange(new Range(Float.valueOf(readFloatArray[0]), Float.valueOf(readFloatArray[1])), new Range(Float.valueOf(readFloatArray2[0]), Float.valueOf(readFloatArray2[1])), new Range(Float.valueOf(readFloatArray3[0]), Float.valueOf(readFloatArray3[1])));
+            return new ColorRange(new Range(Float.valueOf(floatArray[0]), Float.valueOf(floatArray[1])), new Range(Float.valueOf(floatArray2[0]), Float.valueOf(floatArray2[1])), new Range(Float.valueOf(floatArray3[0]), Float.valueOf(floatArray3[1])));
         }
 
         private void parsePalettes(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
@@ -334,20 +332,20 @@ public class Tonal implements ExtractionType {
 
         private TonalPalette readPalette(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
             xmlPullParser.require(2, null, "palette");
-            float[] readFloatArray = readFloatArray(xmlPullParser.getAttributeValue(null, "h"));
-            float[] readFloatArray2 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_SESSION));
-            float[] readFloatArray3 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_LEASEE));
-            if (readFloatArray == null || readFloatArray2 == null || readFloatArray3 == null) {
+            float[] floatArray = readFloatArray(xmlPullParser.getAttributeValue(null, "h"));
+            float[] floatArray2 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_SESSION));
+            float[] floatArray3 = readFloatArray(xmlPullParser.getAttributeValue(null, XmlTags.TAG_LEASEE));
+            if (floatArray == null || floatArray2 == null || floatArray3 == null) {
                 throw new XmlPullParserException("Incomplete range tag.", xmlPullParser, null);
             }
-            return new TonalPalette(readFloatArray, readFloatArray2, readFloatArray3);
+            return new TonalPalette(floatArray, floatArray2, floatArray3);
         }
 
-        private float[] readFloatArray(String str) throws IOException, XmlPullParserException {
-            String[] split = str.replaceAll(" ", "").replaceAll(ShaderAssembler.NEWLINE, "").split(",");
-            float[] fArr = new float[split.length];
-            for (int i = 0; i < split.length; i++) {
-                fArr[i] = Float.parseFloat(split[i]);
+        private float[] readFloatArray(String str) throws XmlPullParserException, IOException {
+            String[] strArrSplit = str.replaceAll(" ", "").replaceAll(ShaderAssembler.NEWLINE, "").split(",");
+            float[] fArr = new float[strArrSplit.length];
+            for (int i = 0; i < strArrSplit.length; i++) {
+                fArr[i] = Float.parseFloat(strArrSplit[i]);
             }
             return fArr;
         }

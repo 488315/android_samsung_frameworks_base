@@ -18,19 +18,16 @@ import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class IconButtonDefaults {
     public static final IconButtonDefaults INSTANCE = new IconButtonDefaults();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconButtonWidthOption {
         public static final Companion Companion = new Companion(null);
         public static final int Uniform = 1;
         public static final int Wide = 2;
         public final int value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -69,8 +66,7 @@ public final class IconButtonDefaults {
     }
 
     /* renamed from: defaultIconButtonColors-4WTKRHQ$material3_release, reason: not valid java name */
-    public static IconButtonColors m265defaultIconButtonColors4WTKRHQ$material3_release(ColorScheme colorScheme, long j) {
-        long Color;
+    public static IconButtonColors m266defaultIconButtonColors4WTKRHQ$material3_release(ColorScheme colorScheme, long j) {
         IconButtonColors iconButtonColors = colorScheme.defaultIconButtonColorsCached;
         if (iconButtonColors != null) {
             return iconButtonColors;
@@ -78,52 +74,47 @@ public final class IconButtonDefaults {
         Color.Companion.getClass();
         long j2 = Color.Transparent;
         StandardIconButtonTokens.INSTANCE.getClass();
-        Color = ColorKt.Color(Color.m461getRedimpl(j), Color.m460getGreenimpl(j), Color.m458getBlueimpl(j), StandardIconButtonTokens.DisabledOpacity, Color.m459getColorSpaceimpl(j));
-        IconButtonColors iconButtonColors2 = new IconButtonColors(j2, j, j2, Color, null);
+        IconButtonColors iconButtonColors2 = new IconButtonColors(j2, j, j2, ColorKt.Color(Color.m463getRedimpl(j), Color.m462getGreenimpl(j), Color.m460getBlueimpl(j), StandardIconButtonTokens.DisabledOpacity, Color.m461getColorSpaceimpl(j)), null);
         colorScheme.defaultIconButtonColorsCached = iconButtonColors2;
         return iconButtonColors2;
     }
 
     public static IconButtonColors getDefaultFilledIconButtonColors$material3_release(ColorScheme colorScheme) {
-        long Color;
-        long Color2;
         IconButtonColors iconButtonColors = colorScheme.defaultFilledIconButtonColorsCached;
         if (iconButtonColors != null) {
             return iconButtonColors;
         }
         FilledIconButtonTokens.INSTANCE.getClass();
-        long fromToken = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.ContainerColor);
-        long fromToken2 = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.Color);
-        Color = ColorKt.Color(Color.m461getRedimpl(r6), Color.m460getGreenimpl(r6), Color.m458getBlueimpl(r6), FilledIconButtonTokens.DisabledContainerOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.DisabledContainerColor)));
-        Color2 = ColorKt.Color(Color.m461getRedimpl(r8), Color.m460getGreenimpl(r8), Color.m458getBlueimpl(r8), FilledIconButtonTokens.DisabledOpacity, Color.m459getColorSpaceimpl(ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.DisabledColor)));
-        IconButtonColors iconButtonColors2 = new IconButtonColors(fromToken, fromToken2, Color, Color2, null);
+        long jFromToken = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.ContainerColor);
+        long jFromToken2 = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.Color);
+        long jFromToken3 = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.DisabledContainerColor);
+        long jColor = ColorKt.Color(Color.m463getRedimpl(jFromToken3), Color.m462getGreenimpl(jFromToken3), Color.m460getBlueimpl(jFromToken3), FilledIconButtonTokens.DisabledContainerOpacity, Color.m461getColorSpaceimpl(jFromToken3));
+        long jFromToken4 = ColorSchemeKt.fromToken(colorScheme, FilledIconButtonTokens.DisabledColor);
+        IconButtonColors iconButtonColors2 = new IconButtonColors(jFromToken, jFromToken2, jColor, ColorKt.Color(Color.m463getRedimpl(jFromToken4), Color.m462getGreenimpl(jFromToken4), Color.m460getBlueimpl(jFromToken4), FilledIconButtonTokens.DisabledOpacity, Color.m461getColorSpaceimpl(jFromToken4)), null);
         colorScheme.defaultFilledIconButtonColorsCached = iconButtonColors2;
         return iconButtonColors2;
     }
 
     public static IconButtonColors iconButtonColors(Composer composer) {
-        long Color;
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.IconButtonDefaults.iconButtonColors (IconButtonDefaults.kt:48)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
         long j = ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value;
         MaterialTheme.INSTANCE.getClass();
-        IconButtonColors m265defaultIconButtonColors4WTKRHQ$material3_release = m265defaultIconButtonColors4WTKRHQ$material3_release(MaterialTheme.getColorScheme(composerImpl), j);
-        if (!ULong.m3427equalsimpl0(m265defaultIconButtonColors4WTKRHQ$material3_release.contentColor, j)) {
+        IconButtonColors iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release = m266defaultIconButtonColors4WTKRHQ$material3_release(MaterialTheme.getColorScheme(composerImpl), j);
+        if (!ULong.m3447equalsimpl0(iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.contentColor, j)) {
             StandardIconButtonTokens.INSTANCE.getClass();
-            Color = ColorKt.Color(Color.m461getRedimpl(j), Color.m460getGreenimpl(j), Color.m458getBlueimpl(j), StandardIconButtonTokens.DisabledOpacity, Color.m459getColorSpaceimpl(j));
-            m265defaultIconButtonColors4WTKRHQ$material3_release = m265defaultIconButtonColors4WTKRHQ$material3_release.m264copyjRlVdoo(m265defaultIconButtonColors4WTKRHQ$material3_release.containerColor, j, m265defaultIconButtonColors4WTKRHQ$material3_release.disabledContainerColor, Color);
+            iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release = iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.m265copyjRlVdoo(iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.containerColor, j, iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.disabledContainerColor, ColorKt.Color(Color.m463getRedimpl(j), Color.m462getGreenimpl(j), Color.m460getBlueimpl(j), StandardIconButtonTokens.DisabledOpacity, Color.m461getColorSpaceimpl(j)));
         }
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m265defaultIconButtonColors4WTKRHQ$material3_release;
+        return iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release;
     }
 
     /* renamed from: iconButtonColors-ro_MJ88, reason: not valid java name */
-    public static IconButtonColors m266iconButtonColorsro_MJ88(long j, long j2, Composer composer, int i) {
-        long Color;
+    public static IconButtonColors m267iconButtonColorsro_MJ88(long j, long j2, Composer composer, int i) {
         if ((i & 1) != 0) {
             Color.Companion.getClass();
             j = Color.Unspecified;
@@ -132,20 +123,20 @@ public final class IconButtonDefaults {
         Color.Companion.getClass();
         long j4 = Color.Unspecified;
         StandardIconButtonTokens.INSTANCE.getClass();
-        Color = ColorKt.Color(Color.m461getRedimpl(j2), Color.m460getGreenimpl(j2), Color.m458getBlueimpl(j2), StandardIconButtonTokens.DisabledOpacity, Color.m459getColorSpaceimpl(j2));
+        long jColor = ColorKt.Color(Color.m463getRedimpl(j2), Color.m462getGreenimpl(j2), Color.m460getBlueimpl(j2), StandardIconButtonTokens.DisabledOpacity, Color.m461getColorSpaceimpl(j2));
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.IconButtonDefaults.iconButtonColors (IconButtonDefaults.kt:84)");
         }
         MaterialTheme.INSTANCE.getClass();
-        IconButtonColors m264copyjRlVdoo = m265defaultIconButtonColors4WTKRHQ$material3_release(MaterialTheme.getColorScheme(composer), ((Color) ((ComposerImpl) composer).consume(ContentColorKt.LocalContentColor)).value).m264copyjRlVdoo(j3, j2, j4, Color);
+        IconButtonColors iconButtonColorsM265copyjRlVdoo = m266defaultIconButtonColors4WTKRHQ$material3_release(MaterialTheme.getColorScheme(composer), ((Color) ((ComposerImpl) composer).consume(ContentColorKt.LocalContentColor)).value).m265copyjRlVdoo(j3, j2, j4, jColor);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m264copyjRlVdoo;
+        return iconButtonColorsM265copyjRlVdoo;
     }
 
     /* renamed from: smallContainerSize-N-wlBFI$default, reason: not valid java name */
-    public static long m267smallContainerSizeNwlBFI$default(IconButtonDefaults iconButtonDefaults) {
+    public static long m268smallContainerSizeNwlBFI$default(IconButtonDefaults iconButtonDefaults) {
         float f;
         IconButtonWidthOption.Companion companion = IconButtonWidthOption.Companion;
         companion.getClass();
@@ -163,6 +154,6 @@ public final class IconButtonDefaults {
             Dp.Companion companion3 = Dp.Companion;
         }
         SmallIconButtonTokens.INSTANCE.getClass();
-        return DpKt.m838DpSizeYgX7TsA(SmallIconButtonTokens.IconSize + f, SmallIconButtonTokens.ContainerHeight);
+        return DpKt.m840DpSizeYgX7TsA(SmallIconButtonTokens.IconSize + f, SmallIconButtonTokens.ContainerHeight);
     }
 }

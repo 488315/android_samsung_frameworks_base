@@ -61,9 +61,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssAntennaInfoCallback)) {
-            return (IGnssAntennaInfoCallback) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IGnssAntennaInfoCallback)) {
+            return (IGnssAntennaInfoCallback) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -127,13 +127,13 @@ public interface IGnssAntennaInfoCallback extends IBase {
 
         public static final ArrayList<Row> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Row> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Row row = new Row();
-                row.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+                row.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
                 arrayList.add(row);
             }
             return arrayList;
@@ -141,10 +141,10 @@ public interface IGnssAntennaInfoCallback extends IBase {
 
         public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
             int int32 = hwBlob.getInt32(8 + j);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, hwBlob.handle(), j, true);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, hwBlob.handle(), j, true);
             this.row.clear();
             for (int i = 0; i < int32; i++) {
-                this.row.add(Double.valueOf(readEmbeddedBuffer.getDouble(i * 8)));
+                this.row.add(Double.valueOf(embeddedBuffer.getDouble(i * 8)));
             }
         }
 
@@ -212,13 +212,13 @@ public interface IGnssAntennaInfoCallback extends IBase {
 
         public static final ArrayList<Coord> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Coord> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Coord coord = new Coord();
-                coord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+                coord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
                 arrayList.add(coord);
             }
             return arrayList;
@@ -295,13 +295,13 @@ public interface IGnssAntennaInfoCallback extends IBase {
 
         public static final ArrayList<GnssAntennaInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssAntennaInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssAntennaInfo gnssAntennaInfo = new GnssAntennaInfo();
-                gnssAntennaInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 120);
+                gnssAntennaInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 120);
                 arrayList.add(gnssAntennaInfo);
             }
             return arrayList;
@@ -311,35 +311,35 @@ public interface IGnssAntennaInfoCallback extends IBase {
             this.carrierFrequencyMHz = hwBlob.getDouble(j);
             this.phaseCenterOffsetCoordinateMillimeters.readEmbeddedFromParcel(hwParcel, hwBlob, 8 + j);
             int int32 = hwBlob.getInt32(64 + j);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 56, true);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 56, true);
             this.phaseCenterVariationCorrectionMillimeters.clear();
             for (int i = 0; i < int32; i++) {
                 Row row = new Row();
-                row.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+                row.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
                 this.phaseCenterVariationCorrectionMillimeters.add(row);
             }
             int int322 = hwBlob.getInt32(80 + j);
-            HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 72, true);
+            HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 72, true);
             this.phaseCenterVariationCorrectionUncertaintyMillimeters.clear();
             for (int i2 = 0; i2 < int322; i2++) {
                 Row row2 = new Row();
-                row2.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 16);
+                row2.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 16);
                 this.phaseCenterVariationCorrectionUncertaintyMillimeters.add(row2);
             }
             int int323 = hwBlob.getInt32(96 + j);
-            HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 88, true);
+            HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 88, true);
             this.signalGainCorrectionDbi.clear();
             for (int i3 = 0; i3 < int323; i3++) {
                 Row row3 = new Row();
-                row3.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer3, i3 * 16);
+                row3.readEmbeddedFromParcel(hwParcel, embeddedBuffer3, i3 * 16);
                 this.signalGainCorrectionDbi.add(row3);
             }
             int int324 = hwBlob.getInt32(j + 112);
-            HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 16, hwBlob.handle(), j + 104, true);
+            HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 16, hwBlob.handle(), j + 104, true);
             this.signalGainCorrectionUncertaintyDbi.clear();
             for (int i4 = 0; i4 < int324; i4++) {
                 Row row4 = new Row();
-                row4.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer4, i4 * 16);
+                row4.readEmbeddedFromParcel(hwParcel, embeddedBuffer4, i4 * 16);
                 this.signalGainCorrectionUncertaintyDbi.add(row4);
             }
         }
@@ -504,13 +504,13 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -671,9 +671,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
                     return;
                 case 256067662:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    ArrayList<String> interfaceChain = interfaceChain();
+                    ArrayList<String> arrayListInterfaceChain = interfaceChain();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(interfaceChain);
+                    hwParcel2.writeStringVector(arrayListInterfaceChain);
                     hwParcel2.send();
                     return;
                 case 256131655:
@@ -684,9 +684,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
                     return;
                 case 256136003:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    String interfaceDescriptor = interfaceDescriptor();
+                    String strInterfaceDescriptor = interfaceDescriptor();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeString(interfaceDescriptor);
+                    hwParcel2.writeString(strInterfaceDescriptor);
                     hwParcel2.send();
                     return;
                 case 256398152:

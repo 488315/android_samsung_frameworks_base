@@ -17,7 +17,7 @@ public class SQLiteException extends SQLException {
         super(str, th);
     }
 
-    private static void waitIfDeviceOnShutdown() {
+    private static void waitIfDeviceOnShutdown() throws InterruptedException {
         for (int i = 0; i < 2; i++) {
             if (SQLiteGlobal.isDeviceOnShutdown()) {
                 try {
@@ -30,12 +30,12 @@ public class SQLiteException extends SQLException {
     }
 
     protected int parseCode(int i, String str) {
-        int indexOf;
+        int iIndexOf;
         if (str != null) {
             try {
-                int indexOf2 = str.indexOf(NavigationBarInflaterView.SIZE_MOD_START);
-                if (indexOf2 > 0 && (indexOf = str.indexOf("])")) > 0) {
-                    return Integer.parseInt(str.substring(indexOf2 + 1, indexOf));
+                int iIndexOf2 = str.indexOf(NavigationBarInflaterView.SIZE_MOD_START);
+                if (iIndexOf2 > 0 && (iIndexOf = str.indexOf("])")) > 0) {
+                    return Integer.parseInt(str.substring(iIndexOf2 + 1, iIndexOf));
                 }
             } catch (Exception unused) {
             }

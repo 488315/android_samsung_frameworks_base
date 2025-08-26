@@ -50,7 +50,7 @@ public class NotificationMessagingUtil {
     }
 
     private boolean isDefaultMessagingApp(StatusBarNotification statusBarNotification) {
-        boolean equals;
+        boolean zEquals;
         int userId = statusBarNotification.getUserId();
         if (userId == -10000 || userId == -1) {
             return false;
@@ -59,9 +59,9 @@ public class NotificationMessagingUtil {
             if (this.mDefaultSmsApp.get(userId) == null) {
                 cacheDefaultSmsApp(userId);
             }
-            equals = Objects.equals(this.mDefaultSmsApp.get(userId), statusBarNotification.getPackageName());
+            zEquals = Objects.equals(this.mDefaultSmsApp.get(userId), statusBarNotification.getPackageName());
         }
-        return equals;
+        return zEquals;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

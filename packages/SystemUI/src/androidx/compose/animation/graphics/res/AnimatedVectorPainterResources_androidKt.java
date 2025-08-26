@@ -20,7 +20,6 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnimatedVectorPainterResources_androidKt {
     public static final VectorPainter rememberAnimatedVectorPainter(final AnimatedImageVector animatedImageVector, final boolean z, Composer composer) {
@@ -34,7 +33,7 @@ public abstract class AnimatedVectorPainterResources_androidKt {
         }
         ImageVector imageVector = animatedImageVector.imageVector;
         float f = imageVector.defaultWidth;
-        ComposableLambdaImpl rememberComposableLambda = ComposableLambdaKt.rememberComposableLambda(10512245, new Function4() { // from class: androidx.compose.animation.graphics.res.AnimatedVectorPainterResources_androidKt$rememberAnimatedVectorPainter$1
+        ComposableLambdaImpl composableLambdaImplRememberComposableLambda = ComposableLambdaKt.rememberComposableLambda(10512245, new Function4() { // from class: androidx.compose.animation.graphics.res.AnimatedVectorPainterResources_androidKt.rememberAnimatedVectorPainter.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(4);
@@ -45,13 +44,13 @@ public abstract class AnimatedVectorPainterResources_androidKt {
                 ((Number) obj).floatValue();
                 ((Number) obj2).floatValue();
                 Composer composer2 = (Composer) obj3;
-                int intValue = ((Number) obj4).intValue();
+                int iIntValue = ((Number) obj4).intValue();
                 ComposerImpl composerImpl = (ComposerImpl) composer2;
-                if (composerImpl.shouldExecute(intValue & 1, (intValue & 129) != 128)) {
+                if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 129) != 128)) {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter.<anonymous> (AnimatedVectorPainterResources.android.kt:67)");
                     }
-                    Transition updateTransition = TransitionKt.updateTransition(Boolean.valueOf(z), animatedImageVector.imageVector.name, composerImpl, 0, 0);
+                    Transition transitionUpdateTransition = TransitionKt.updateTransition(Boolean.valueOf(z), animatedImageVector.imageVector.name, composerImpl, 0, 0);
                     LinkedHashMap linkedHashMap = new LinkedHashMap();
                     composerImpl.startReplaceGroup(244958144);
                     AnimatedImageVector animatedImageVector2 = animatedImageVector;
@@ -65,14 +64,14 @@ public abstract class AnimatedVectorPainterResources_androidKt {
                             ComposerKt.traceEventStart("androidx.compose.animation.graphics.vector.Animator.createVectorConfig (Animator.kt:57)");
                         }
                         composerImpl.startReplaceGroup(-1031781866);
-                        Object rememberedValue = composerImpl.rememberedValue();
+                        Object objRememberedValue = composerImpl.rememberedValue();
                         Composer.Companion.getClass();
-                        if (rememberedValue == Composer.Companion.Empty) {
-                            rememberedValue = new StateVectorConfig();
-                            composerImpl.updateRememberedValue(rememberedValue);
+                        if (objRememberedValue == Composer.Companion.Empty) {
+                            objRememberedValue = new StateVectorConfig();
+                            composerImpl.updateRememberedValue(objRememberedValue);
                         }
-                        StateVectorConfig stateVectorConfig = (StateVectorConfig) rememberedValue;
-                        animator.Configure(updateTransition, stateVectorConfig, animatedImageVector2.totalDuration, composerImpl, 0);
+                        StateVectorConfig stateVectorConfig = (StateVectorConfig) objRememberedValue;
+                        animator.Configure(transitionUpdateTransition, stateVectorConfig, animatedImageVector2.totalDuration, composerImpl, 0);
                         composerImpl.end(false);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
@@ -159,13 +158,13 @@ public abstract class AnimatedVectorPainterResources_androidKt {
                 return Unit.INSTANCE;
             }
         }, composer);
-        VectorPainter m569rememberVectorPaintervIP8VLU = VectorPainterKt.m569rememberVectorPaintervIP8VLU(f, imageVector.defaultHeight, imageVector.viewportWidth, imageVector.viewportHeight, imageVector.name, imageVector.tintColor, imageVector.tintBlendMode, rememberComposableLambda, composer);
+        VectorPainter vectorPainterM571rememberVectorPaintervIP8VLU = VectorPainterKt.m571rememberVectorPaintervIP8VLU(f, imageVector.defaultHeight, imageVector.viewportWidth, imageVector.viewportHeight, imageVector.name, imageVector.tintColor, imageVector.tintBlendMode, composableLambdaImplRememberComposableLambda, composer);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m569rememberVectorPaintervIP8VLU;
+        return vectorPainterM571rememberVectorPaintervIP8VLU;
     }
 }

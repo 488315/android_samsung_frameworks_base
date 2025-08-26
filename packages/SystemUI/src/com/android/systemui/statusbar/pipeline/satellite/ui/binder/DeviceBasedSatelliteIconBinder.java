@@ -1,15 +1,181 @@
 package com.android.systemui.statusbar.pipeline.satellite.ui.binder;
 
+import android.widget.ImageView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwnerKt;
+import androidx.lifecycle.RepeatOnLifecycleKt;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.common.shared.model.Icon;
+import com.android.systemui.common.ui.binder.IconViewBinder;
 import com.android.systemui.statusbar.pipeline.satellite.ui.viewmodel.DeviceBasedSatelliteViewModel;
 import com.android.systemui.statusbar.pipeline.satellite.ui.viewmodel.DeviceBasedSatelliteViewModelImpl;
 import com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView;
 import com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarIconView$Companion$withDefaultBinding$2;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteIconBinder {
     public static final DeviceBasedSatelliteIconBinder INSTANCE = new DeviceBasedSatelliteIconBinder();
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.satellite.ui.binder.DeviceBasedSatelliteIconBinder$bind$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function3 {
+        final /* synthetic */ SingleBindableStatusBarIconView $view;
+        final /* synthetic */ DeviceBasedSatelliteViewModel $viewModel;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.statusbar.pipeline.satellite.ui.binder.DeviceBasedSatelliteIconBinder$bind$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            final /* synthetic */ LifecycleOwner $$this$withDefaultBinding;
+            final /* synthetic */ SingleBindableStatusBarIconView $view;
+            final /* synthetic */ DeviceBasedSatelliteViewModel $viewModel;
+            int label;
+
+            /* renamed from: com.android.systemui.statusbar.pipeline.satellite.ui.binder.DeviceBasedSatelliteIconBinder$bind$2$1$1, reason: invalid class name and collision with other inner class name */
+            final class C05681 extends SuspendLambda implements Function2 {
+                final /* synthetic */ SingleBindableStatusBarIconView $view;
+                final /* synthetic */ DeviceBasedSatelliteViewModel $viewModel;
+                int label;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public C05681(DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
+                    super(2, continuation);
+                    this.$viewModel = deviceBasedSatelliteViewModel;
+                    this.$view = singleBindableStatusBarIconView;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new C05681(this.$viewModel, this.$view, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((C05681) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        ReadonlyStateFlow readonlyStateFlow = ((DeviceBasedSatelliteViewModelImpl) this.$viewModel).icon;
+                        final SingleBindableStatusBarIconView singleBindableStatusBarIconView = this.$view;
+                        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.pipeline.satellite.ui.binder.DeviceBasedSatelliteIconBinder.bind.2.1.1.1
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            public final Object emit(Object obj2, Continuation continuation) {
+                                Icon icon = (Icon) obj2;
+                                SingleBindableStatusBarIconView singleBindableStatusBarIconView2 = singleBindableStatusBarIconView;
+                                if (icon == null) {
+                                    ImageView imageView = singleBindableStatusBarIconView2.iconView;
+                                    if (imageView == null) {
+                                        imageView = null;
+                                    }
+                                    imageView.setImageDrawable(null);
+                                } else {
+                                    IconViewBinder iconViewBinder = IconViewBinder.INSTANCE;
+                                    ImageView imageView2 = singleBindableStatusBarIconView2.iconView;
+                                    ImageView imageView3 = imageView2 != null ? imageView2 : null;
+                                    iconViewBinder.getClass();
+                                    IconViewBinder.bind(icon, imageView3);
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        this.label = 1;
+                        if (readonlyStateFlow.$$delegate_0.collect(flowCollector, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    throw new KotlinNothingValueException();
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(LifecycleOwner lifecycleOwner, DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
+                super(2, continuation);
+                this.$$this$withDefaultBinding = lifecycleOwner;
+                this.$viewModel = deviceBasedSatelliteViewModel;
+                this.$view = singleBindableStatusBarIconView;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.$$this$withDefaultBinding, this.$viewModel, this.$view, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    LifecycleOwner lifecycleOwner = this.$$this$withDefaultBinding;
+                    Lifecycle.State state = Lifecycle.State.STARTED;
+                    C05681 c05681 = new C05681(this.$viewModel, this.$view, null);
+                    this.label = 1;
+                    if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c05681, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(DeviceBasedSatelliteViewModel deviceBasedSatelliteViewModel, SingleBindableStatusBarIconView singleBindableStatusBarIconView, Continuation continuation) {
+            super(3, continuation);
+            this.$viewModel = deviceBasedSatelliteViewModel;
+            this.$view = singleBindableStatusBarIconView;
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.$viewModel, this.$view, (Continuation) obj3);
+            anonymousClass2.L$0 = (LifecycleOwner) obj;
+            return anonymousClass2.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
+            CoroutineTracingKt.launchTraced$default(LifecycleOwnerKt.getLifecycleScope(lifecycleOwner), null, null, new AnonymousClass1(lifecycleOwner, this.$viewModel, this.$view, null), 7);
+            return Unit.INSTANCE;
+        }
+    }
 
     private DeviceBasedSatelliteIconBinder() {
     }
@@ -21,11 +187,11 @@ public final class DeviceBasedSatelliteIconBinder {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 DeviceBasedSatelliteIconBinder deviceBasedSatelliteIconBinder = DeviceBasedSatelliteIconBinder.INSTANCE;
-                return Boolean.valueOf(((DeviceBasedSatelliteViewModelImpl) DeviceBasedSatelliteViewModel.this).icon.$$delegate_0.getValue() != null);
+                return Boolean.valueOf(((DeviceBasedSatelliteViewModelImpl) deviceBasedSatelliteViewModel).icon.$$delegate_0.getValue() != null);
             }
         };
-        DeviceBasedSatelliteIconBinder$bind$2 deviceBasedSatelliteIconBinder$bind$2 = new DeviceBasedSatelliteIconBinder$bind$2(deviceBasedSatelliteViewModel, singleBindableStatusBarIconView, null);
+        AnonymousClass2 anonymousClass2 = new AnonymousClass2(deviceBasedSatelliteViewModel, singleBindableStatusBarIconView, null);
         companion.getClass();
-        return SingleBindableStatusBarIconView.Companion.withDefaultBinding(singleBindableStatusBarIconView, r1, deviceBasedSatelliteIconBinder$bind$2);
+        return SingleBindableStatusBarIconView.Companion.withDefaultBinding(singleBindableStatusBarIconView, r1, anonymousClass2);
     }
 }

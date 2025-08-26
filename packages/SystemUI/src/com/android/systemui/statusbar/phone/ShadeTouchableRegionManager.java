@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeTouchableRegionManager implements Dumpable {
     public final AlternateBouncerInteractor mAlternateBouncerInteractor;
@@ -152,7 +151,7 @@ public final class ShadeTouchableRegionManager implements Dumpable {
         this.mAlternateBouncerInteractor = alternateBouncerInteractor;
         this.mOnComputeInternalInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.statusbar.phone.ShadeTouchableRegionManager$$ExternalSyntheticLambda4
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                ShadeTouchableRegionManager shadeTouchableRegionManager = ShadeTouchableRegionManager.this;
+                ShadeTouchableRegionManager shadeTouchableRegionManager = this.f$0;
                 if (shadeTouchableRegionManager.shouldMakeEntireScreenTouchable()) {
                     return;
                 }
@@ -204,7 +203,7 @@ public final class ShadeTouchableRegionManager implements Dumpable {
     }
 
     public final void initResources$1() {
-        this.mDisplayCutoutTouchableRegionSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_22);
+        this.mDisplayCutoutTouchableRegionSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_23);
         this.mStatusBarHeight = SystemBarUtils.getStatusBarHeight(this.mContext);
     }
 

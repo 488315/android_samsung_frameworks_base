@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class OngoingCallInteractor$createOngoingCallStateFlow$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -28,10 +27,10 @@ final class OngoingCallInteractor$createOngoingCallStateFlow$1 extends SuspendLa
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         OngoingCallInteractor$createOngoingCallStateFlow$1 ongoingCallInteractor$createOngoingCallStateFlow$1 = new OngoingCallInteractor$createOngoingCallStateFlow$1(this.this$0, (Continuation) obj3);
         ongoingCallInteractor$createOngoingCallStateFlow$1.L$0 = (ActiveNotificationModel) obj;
-        ongoingCallInteractor$createOngoingCallStateFlow$1.Z$0 = booleanValue;
+        ongoingCallInteractor$createOngoingCallStateFlow$1.Z$0 = zBooleanValue;
         return ongoingCallInteractor$createOngoingCallStateFlow$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -45,12 +44,12 @@ final class OngoingCallInteractor$createOngoingCallStateFlow$1 extends SuspendLa
         ActiveNotificationModel activeNotificationModel = (ActiveNotificationModel) this.L$0;
         boolean z = this.Z$0;
         Logger logger = this.this$0.logger;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new OngoingCallInteractor$$ExternalSyntheticLambda0(), null);
-        obtain.setInt1(activeNotificationModel.uid);
-        obtain.setLong1(activeNotificationModel.whenTime);
-        obtain.setBool1(activeNotificationModel.statusBarChipIconView != null);
-        obtain.setBool2(z);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new OngoingCallInteractor$$ExternalSyntheticLambda0(), null);
+        logMessageObtain.setInt1(activeNotificationModel.uid);
+        logMessageObtain.setLong1(activeNotificationModel.whenTime);
+        logMessageObtain.setBool1(activeNotificationModel.statusBarChipIconView != null);
+        logMessageObtain.setBool2(z);
+        logger.getBuffer().commit(logMessageObtain);
         return new OngoingCallModel.InCall(activeNotificationModel.whenTime, activeNotificationModel.statusBarChipIconView, activeNotificationModel.contentIntent, activeNotificationModel.key, activeNotificationModel.appName, activeNotificationModel.promotedContent, z, activeNotificationModel.instanceId);
     }
 }

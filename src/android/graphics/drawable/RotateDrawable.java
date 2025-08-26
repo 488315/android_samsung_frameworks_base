@@ -24,11 +24,11 @@ public class RotateDrawable extends DrawableWrapper {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.RotateDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.RotateDrawable);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -38,14 +38,14 @@ public class RotateDrawable extends DrawableWrapper {
         if (rotateState == null || rotateState.mThemeAttrs == null) {
             return;
         }
-        TypedArray resolveAttributes = theme.resolveAttributes(rotateState.mThemeAttrs, R.styleable.RotateDrawable);
+        TypedArray typedArrayResolveAttributes = theme.resolveAttributes(rotateState.mThemeAttrs, R.styleable.RotateDrawable);
         try {
-            updateStateFromTypedArray(resolveAttributes);
-            verifyRequiredAttributes(resolveAttributes);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            verifyRequiredAttributes(typedArrayResolveAttributes);
         } catch (XmlPullParserException e) {
             rethrowAsRuntimeException(e);
         } finally {
-            resolveAttributes.recycle();
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -65,14 +65,14 @@ public class RotateDrawable extends DrawableWrapper {
         rotateState.mChangingConfigurations |= typedArray.getChangingConfigurations();
         rotateState.mThemeAttrs = typedArray.extractThemeAttrs();
         if (typedArray.hasValue(4)) {
-            TypedValue peekValue = typedArray.peekValue(4);
-            rotateState.mPivotXRel = peekValue.type == 6;
-            rotateState.mPivotX = rotateState.mPivotXRel ? peekValue.getFraction(1.0f, 1.0f) : peekValue.getFloat();
+            TypedValue typedValuePeekValue = typedArray.peekValue(4);
+            rotateState.mPivotXRel = typedValuePeekValue.type == 6;
+            rotateState.mPivotX = rotateState.mPivotXRel ? typedValuePeekValue.getFraction(1.0f, 1.0f) : typedValuePeekValue.getFloat();
         }
         if (typedArray.hasValue(5)) {
-            TypedValue peekValue2 = typedArray.peekValue(5);
-            rotateState.mPivotYRel = peekValue2.type == 6;
-            rotateState.mPivotY = rotateState.mPivotYRel ? peekValue2.getFraction(1.0f, 1.0f) : peekValue2.getFloat();
+            TypedValue typedValuePeekValue2 = typedArray.peekValue(5);
+            rotateState.mPivotYRel = typedValuePeekValue2.type == 6;
+            rotateState.mPivotY = rotateState.mPivotYRel ? typedValuePeekValue2.getFraction(1.0f, 1.0f) : typedValuePeekValue2.getFloat();
         }
         rotateState.mFromDegrees = typedArray.getFloat(2, rotateState.mFromDegrees);
         rotateState.mToDegrees = typedArray.getFloat(3, rotateState.mToDegrees);
@@ -88,10 +88,10 @@ public class RotateDrawable extends DrawableWrapper {
         RotateState rotateState = this.mState;
         float f = rotateState.mPivotXRel ? i * rotateState.mPivotX : rotateState.mPivotX;
         float f2 = rotateState.mPivotYRel ? i2 * rotateState.mPivotY : rotateState.mPivotY;
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.rotate(rotateState.mCurrentDegrees, f + bounds.left, f2 + bounds.top);
         drawable.draw(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     public void setFromDegrees(float f) {

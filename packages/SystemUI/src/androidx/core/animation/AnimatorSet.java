@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimatorSet extends Animator implements AnimationHandler.AnimationFrameCallback {
     public static final AnonymousClass3 EVENT_COMPARATOR = new Comparator() { // from class: androidx.core.animation.AnimatorSet.3
@@ -58,7 +57,6 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
     public boolean mDependencyDirty = false;
     public boolean mStarted = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationEvent {
         public final int mEvent;
         public final Node mNode;
@@ -86,13 +84,12 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
 
         public final String toString() {
             int i = this.mEvent;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i == 0 ? NetworkAnalyticsConstants.DataPoints.OPEN_TIME : i == 1 ? "delay ended" : NetworkAnalyticsConstants.DataPoints.CLOSE_TIME, " ");
-            m.append(this.mNode.mAnimation.toString());
-            return m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i == 0 ? NetworkAnalyticsConstants.DataPoints.OPEN_TIME : i == 1 ? "delay ended" : NetworkAnalyticsConstants.DataPoints.CLOSE_TIME, " ");
+            sbM.append(this.mNode.mAnimation.toString());
+            return sbM.toString();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final Node mCurrentNode;
 
@@ -102,7 +99,6 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Node implements Cloneable {
         public Animator mAnimation;
         public ArrayList mParents;
@@ -149,10 +145,10 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public final Node m891clone() {
+        public final Node m893clone() {
             try {
                 Node node = (Node) super.clone();
-                node.mAnimation = this.mAnimation.mo890clone();
+                node.mAnimation = this.mAnimation.mo892clone();
                 if (this.mChildNodes != null) {
                     node.mChildNodes = new ArrayList(this.mChildNodes);
                 }
@@ -170,7 +166,6 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeekState {
         public long mPlayTime = -1;
         public boolean mSeekingInReverse = false;
@@ -192,10 +187,10 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
     }
 
     public AnimatorSet() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(0L);
-        this.mDelayAnim = ofFloat;
-        this.mRootNode = new Node(ofFloat);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(0L);
+        this.mDelayAnim = valueAnimatorOfFloat;
+        this.mRootNode = new Node(valueAnimatorOfFloat);
         this.mDuration = -1L;
         this.mInterpolator = null;
         this.mTotalDuration = 0L;
@@ -389,10 +384,10 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         this.mEvents.add(0, new AnimationEvent(this.mRootNode, 0));
         this.mEvents.add(1, new AnimationEvent(this.mRootNode, 1));
         this.mEvents.add(2, new AnimationEvent(this.mRootNode, 2));
-        if (((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(this.mEvents, 1)).mEvent == 0 || ((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(this.mEvents, 1)).mEvent == 1) {
+        if (((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(1, this.mEvents)).mEvent == 0 || ((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(1, this.mEvents)).mEvent == 1) {
             throw new UnsupportedOperationException("Something went wrong, the last event is not an end event");
         }
-        this.mTotalDuration = ((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(this.mEvents, 1)).getTime();
+        this.mTotalDuration = ((AnimationEvent) AlertController$$ExternalSyntheticOutline0.m(1, this.mEvents)).getTime();
     }
 
     @Override // androidx.core.animation.AnimationHandler.AnimationFrameCallback
@@ -427,9 +422,9 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         }
         if (this.mReversing || j >= this.mFirstFrame + ((long) (0 * 1.0f))) {
             long j3 = (long) ((j - this.mFirstFrame) / 1.0f);
-            int findLatestEventIdForTime = findLatestEventIdForTime(j3);
-            handleAnimationEvents(this.mLastEventId, findLatestEventIdForTime, j3);
-            this.mLastEventId = findLatestEventIdForTime;
+            int iFindLatestEventIdForTime = findLatestEventIdForTime(j3);
+            handleAnimationEvents(this.mLastEventId, iFindLatestEventIdForTime, j3);
+            this.mLastEventId = iFindLatestEventIdForTime;
             for (int i = 0; i < this.mPlayingSet.size(); i++) {
                 Node node = (Node) this.mPlayingSet.get(i);
                 if (!node.mEnded) {
@@ -462,40 +457,40 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         }
         if (this.mStarted) {
             if (this.mReversing) {
-                int i = this.mLastEventId;
-                if (i == -1) {
-                    i = this.mEvents.size();
+                int size = this.mLastEventId;
+                if (size == -1) {
+                    size = this.mEvents.size();
                 }
-                this.mLastEventId = i;
+                this.mLastEventId = size;
                 while (true) {
-                    int i2 = this.mLastEventId;
-                    if (i2 <= 0) {
+                    int i = this.mLastEventId;
+                    if (i <= 0) {
                         break;
                     }
-                    int i3 = i2 - 1;
-                    this.mLastEventId = i3;
-                    AnimationEvent animationEvent = (AnimationEvent) this.mEvents.get(i3);
+                    int i2 = i - 1;
+                    this.mLastEventId = i2;
+                    AnimationEvent animationEvent = (AnimationEvent) this.mEvents.get(i2);
                     Animator animator = animationEvent.mNode.mAnimation;
                     if (!((Node) this.mNodeMap.get(animator)).mEnded) {
-                        int i4 = animationEvent.mEvent;
-                        if (i4 == 2) {
+                        int i3 = animationEvent.mEvent;
+                        if (i3 == 2) {
                             animator.reverse();
-                        } else if (i4 == 1 && animator.isStarted()) {
+                        } else if (i3 == 1 && animator.isStarted()) {
                             animator.end();
                         }
                     }
                 }
             } else {
                 while (this.mLastEventId < this.mEvents.size() - 1) {
-                    int i5 = this.mLastEventId + 1;
-                    this.mLastEventId = i5;
-                    AnimationEvent animationEvent2 = (AnimationEvent) this.mEvents.get(i5);
+                    int i4 = this.mLastEventId + 1;
+                    this.mLastEventId = i4;
+                    AnimationEvent animationEvent2 = (AnimationEvent) this.mEvents.get(i4);
                     Animator animator2 = animationEvent2.mNode.mAnimation;
                     if (!((Node) this.mNodeMap.get(animator2)).mEnded) {
-                        int i6 = animationEvent2.mEvent;
-                        if (i6 == 0) {
+                        int i5 = animationEvent2.mEvent;
+                        if (i5 == 0) {
                             animator2.start();
-                        } else if (i6 == 2 && animator2.isStarted()) {
+                        } else if (i5 == 2 && animator2.isStarted()) {
                             animator2.end();
                         }
                     }
@@ -517,9 +512,9 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         this.mPlayingSet.clear();
         if (this.mSelfPulse) {
             AnimationHandler animationHandler = AnimationHandler.getInstance();
-            int indexOf = animationHandler.mAnimationCallbacks.indexOf(this);
-            if (indexOf >= 0) {
-                animationHandler.mAnimationCallbacks.set(indexOf, null);
+            int iIndexOf = animationHandler.mAnimationCallbacks.indexOf(this);
+            if (iIndexOf >= 0) {
+                animationHandler.mAnimationCallbacks.set(iIndexOf, null);
                 animationHandler.mListDirty = true;
             }
         }
@@ -763,15 +758,15 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
     }
 
     public final String toString() {
-        String str = "AnimatorSet@" + Integer.toHexString(hashCode()) + "{";
+        String string = "AnimatorSet@" + Integer.toHexString(hashCode()) + "{";
         int size = this.mNodes.size();
         for (int i = 0; i < size; i++) {
             Node node = (Node) this.mNodes.get(i);
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "\n    ");
-            m.append(node.mAnimation.toString());
-            str = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n    ");
+            sbM.append(node.mAnimation.toString());
+            string = sbM.toString();
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\n}");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, "\n}");
     }
 
     public final void updateAnimatorsDuration() {
@@ -805,13 +800,13 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         while (i < size) {
             Node node3 = (Node) node.mChildNodes.get(i);
             node3.mTotalDuration = node3.mAnimation.getTotalDuration();
-            int indexOf = arrayList.indexOf(node3);
-            if (indexOf >= 0) {
-                while (indexOf < arrayList.size()) {
-                    ((Node) arrayList.get(indexOf)).mLatestParent = null;
-                    ((Node) arrayList.get(indexOf)).mStartTime = -1L;
-                    ((Node) arrayList.get(indexOf)).mEndTime = -1L;
-                    indexOf++;
+            int iIndexOf = arrayList.indexOf(node3);
+            if (iIndexOf >= 0) {
+                while (iIndexOf < arrayList.size()) {
+                    ((Node) arrayList.get(iIndexOf)).mLatestParent = null;
+                    ((Node) arrayList.get(iIndexOf)).mStartTime = -1L;
+                    ((Node) arrayList.get(iIndexOf)).mEndTime = -1L;
+                    iIndexOf++;
                 }
                 node3.mStartTime = -1L;
                 node3.mEndTime = -1L;
@@ -857,8 +852,8 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
             throw new UnsupportedOperationException("Cannot reverse infinite AnimatorSet");
         }
         this.mReversing = z;
-        boolean isEmptySet = isEmptySet(this);
-        if (!isEmptySet) {
+        boolean zIsEmptySet = isEmptySet(this);
+        if (!zIsEmptySet) {
             for (int i2 = 1; i2 < this.mNodes.size(); i2++) {
                 ((Node) this.mNodes.get(i2)).mAnimation.addListener(this.mNoOpListener);
             }
@@ -894,14 +889,14 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
                 seekState3.updateSeekDirection(z3);
                 j = this.mSeekState.mPlayTime;
             }
-            int findLatestEventIdForTime = findLatestEventIdForTime(j);
-            handleAnimationEvents(-1, findLatestEventIdForTime, j);
+            int iFindLatestEventIdForTime = findLatestEventIdForTime(j);
+            handleAnimationEvents(-1, iFindLatestEventIdForTime, j);
             for (int size3 = this.mPlayingSet.size() - 1; size3 >= 0; size3--) {
                 if (((Node) this.mPlayingSet.get(size3)).mEnded) {
                     this.mPlayingSet.remove(size3);
                 }
             }
-            this.mLastEventId = findLatestEventIdForTime;
+            this.mLastEventId = iFindLatestEventIdForTime;
             if (this.mSelfPulse) {
                 Animator.addAnimationCallback(this);
             }
@@ -914,15 +909,15 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
                 ((Animator.AnimatorListener) arrayList2.get(i3)).onAnimationStart(this, z);
             }
         }
-        if (isEmptySet) {
+        if (zIsEmptySet) {
             end();
         }
     }
 
     @Override // androidx.core.animation.Animator
     /* renamed from: clone */
-    public final AnimatorSet mo890clone() {
-        final AnimatorSet animatorSet = (AnimatorSet) super.mo890clone();
+    public final AnimatorSet mo892clone() {
+        final AnimatorSet animatorSet = (AnimatorSet) super.mo892clone();
         int size = this.mNodes.size();
         animatorSet.mStarted = false;
         animatorSet.mFirstFrame = -1L;
@@ -946,37 +941,37 @@ public final class AnimatorSet extends Animator implements AnimationHandler.Anim
         };
         animatorSet.mReversing = false;
         animatorSet.mDependencyDirty = true;
-        HashMap hashMap = new HashMap(size);
+        HashMap map = new HashMap(size);
         for (int i = 0; i < size; i++) {
             Node node = (Node) this.mNodes.get(i);
-            Node m891clone = node.m891clone();
-            m891clone.mAnimation.removeListener(this.mNoOpListener);
-            hashMap.put(node, m891clone);
-            animatorSet.mNodes.add(m891clone);
-            animatorSet.mNodeMap.put(m891clone.mAnimation, m891clone);
+            Node nodeM893clone = node.m893clone();
+            nodeM893clone.mAnimation.removeListener(this.mNoOpListener);
+            map.put(node, nodeM893clone);
+            animatorSet.mNodes.add(nodeM893clone);
+            animatorSet.mNodeMap.put(nodeM893clone.mAnimation, nodeM893clone);
         }
-        Node node2 = (Node) hashMap.get(this.mRootNode);
+        Node node2 = (Node) map.get(this.mRootNode);
         animatorSet.mRootNode = node2;
         animatorSet.mDelayAnim = (ValueAnimator) node2.mAnimation;
         for (int i2 = 0; i2 < size; i2++) {
             Node node3 = (Node) this.mNodes.get(i2);
-            Node node4 = (Node) hashMap.get(node3);
+            Node node4 = (Node) map.get(node3);
             Node node5 = node3.mLatestParent;
-            node4.mLatestParent = node5 == null ? null : (Node) hashMap.get(node5);
+            node4.mLatestParent = node5 == null ? null : (Node) map.get(node5);
             ArrayList arrayList = node3.mChildNodes;
             int size2 = arrayList == null ? 0 : arrayList.size();
             for (int i3 = 0; i3 < size2; i3++) {
-                node4.mChildNodes.set(i3, (Node) hashMap.get(node3.mChildNodes.get(i3)));
+                node4.mChildNodes.set(i3, (Node) map.get(node3.mChildNodes.get(i3)));
             }
             ArrayList arrayList2 = node3.mSiblings;
             int size3 = arrayList2 == null ? 0 : arrayList2.size();
             for (int i4 = 0; i4 < size3; i4++) {
-                node4.mSiblings.set(i4, (Node) hashMap.get(node3.mSiblings.get(i4)));
+                node4.mSiblings.set(i4, (Node) map.get(node3.mSiblings.get(i4)));
             }
             ArrayList arrayList3 = node3.mParents;
             int size4 = arrayList3 == null ? 0 : arrayList3.size();
             for (int i5 = 0; i5 < size4; i5++) {
-                node4.mParents.set(i5, (Node) hashMap.get(node3.mParents.get(i5)));
+                node4.mParents.set(i5, (Node) map.get(node3.mParents.get(i5)));
             }
         }
         return animatorSet;

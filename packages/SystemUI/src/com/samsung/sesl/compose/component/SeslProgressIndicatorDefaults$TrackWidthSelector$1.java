@@ -10,7 +10,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslProgressIndicatorDefaults$TrackWidthSelector$1 implements Function2 {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,7 @@ public final class SeslProgressIndicatorDefaults$TrackWidthSelector$1 implements
         ComposerImpl composerImpl = (ComposerImpl) ((Composer) obj);
         composerImpl.startReplaceGroup(-1411302746);
         if (ComposerKt.isTraceInProgress()) {
-            ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslProgressIndicatorDefaults.TrackWidthSelector.<anonymous> (ProgressIndicator.kt:199)");
+            ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslProgressIndicatorDefaults.TrackWidthSelector.<anonymous> (ProgressIndicator.kt:261)");
         }
         float f = ((Configuration) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalConfiguration)).screenWidthDp;
         Dp.Companion companion = Dp.Companion;
@@ -34,6 +33,6 @@ public final class SeslProgressIndicatorDefaults$TrackWidthSelector$1 implements
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return Dp.m835boximpl(f2);
+        return Dp.m837boximpl(f2);
     }
 }

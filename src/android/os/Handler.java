@@ -58,12 +58,12 @@ public class Handler {
     }
 
     public Handler(Callback callback, boolean z) {
-        Looper myLooper = Looper.myLooper();
-        this.mLooper = myLooper;
-        if (myLooper == null) {
+        Looper looperMyLooper = Looper.myLooper();
+        this.mLooper = looperMyLooper;
+        if (looperMyLooper == null) {
             throw new RuntimeException("Can't create handler inside thread " + Thread.currentThread() + " that has not called Looper.prepare()");
         }
-        this.mQueue = myLooper.mQueue;
+        this.mQueue = looperMyLooper.mQueue;
         this.mCallback = callback;
         this.mAsynchronous = z;
         this.mIsShared = false;
@@ -211,15 +211,15 @@ public class Handler {
     }
 
     public final boolean sendEmptyMessageDelayed(int i, long j) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        return sendMessageDelayed(obtain, j);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        return sendMessageDelayed(messageObtain, j);
     }
 
     public final boolean sendEmptyMessageAtTime(int i, long j) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        return sendMessageAtTime(obtain, j);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        return sendMessageAtTime(messageObtain, j);
     }
 
     public final boolean sendMessageDelayed(Message message, long j) {
@@ -368,16 +368,16 @@ public class Handler {
     }
 
     private static Message getPostMessage(Runnable runnable) {
-        Message obtain = Message.obtain();
-        obtain.callback = runnable;
-        return obtain;
+        Message messageObtain = Message.obtain();
+        messageObtain.callback = runnable;
+        return messageObtain;
     }
 
     private static Message getPostMessage(Runnable runnable, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.obj = obj;
-        obtain.callback = runnable;
-        return obtain;
+        Message messageObtain = Message.obtain();
+        messageObtain.obj = obj;
+        messageObtain.callback = runnable;
+        return messageObtain;
     }
 
     private static void handleCallback(Message message) {
@@ -415,14 +415,14 @@ public class Handler {
             }
             synchronized (this) {
                 if (j > 0) {
-                    long uptimeMillis = SystemClock.uptimeMillis() + j;
+                    long jUptimeMillis = SystemClock.uptimeMillis() + j;
                     while (!this.mDone) {
-                        long uptimeMillis2 = uptimeMillis - SystemClock.uptimeMillis();
-                        if (uptimeMillis2 <= 0) {
+                        long jUptimeMillis2 = jUptimeMillis - SystemClock.uptimeMillis();
+                        if (jUptimeMillis2 <= 0) {
                             return false;
                         }
                         try {
-                            wait(uptimeMillis2);
+                            wait(jUptimeMillis2);
                         } catch (InterruptedException unused) {
                         }
                     }

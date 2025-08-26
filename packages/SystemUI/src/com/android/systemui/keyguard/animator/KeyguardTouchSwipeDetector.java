@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardTouchSwipeDetector extends KeyguardTouchBase {
     public final KeyguardTouchDymLockInjector mDynamicLockInjector;
@@ -131,7 +130,7 @@ public class KeyguardTouchSwipeDetector extends KeyguardTouchBase {
                 userActivityForMove(new Runnable() { // from class: com.android.systemui.keyguard.animator.KeyguardTouchSwipeDetector$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSwipeViewController keyguardSwipeViewController2 = KeyguardTouchSwipeDetector.this.mUnlockCallback;
+                        KeyguardSwipeViewController keyguardSwipeViewController2 = this.f$0.mUnlockCallback;
                         if (keyguardSwipeViewController2 != null) {
                             keyguardSwipeViewController2.callUserActivity();
                         }

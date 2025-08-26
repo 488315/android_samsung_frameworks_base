@@ -83,20 +83,20 @@ public final class CreateCredentialRequest implements Parcelable {
     }
 
     private CreateCredentialRequest(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        Bundle readBundle = parcel.readBundle();
-        Bundle readBundle2 = parcel.readBundle();
-        boolean readBoolean = parcel.readBoolean();
-        boolean readBoolean2 = parcel.readBoolean();
+        String string8 = parcel.readString8();
+        Bundle bundle = parcel.readBundle();
+        Bundle bundle2 = parcel.readBundle();
+        boolean z = parcel.readBoolean();
+        boolean z2 = parcel.readBoolean();
         this.mOrigin = parcel.readString8();
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mCredentialData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mCandidateQueryData = readBundle2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle2);
-        this.mIsSystemProviderRequired = readBoolean;
-        this.mAlwaysSendAppInfoToProvider = readBoolean2;
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mCredentialData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mCandidateQueryData = bundle2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle2);
+        this.mIsSystemProviderRequired = z;
+        this.mAlwaysSendAppInfoToProvider = z2;
     }
 
     public static final class Builder {

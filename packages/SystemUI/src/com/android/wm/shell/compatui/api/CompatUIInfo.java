@@ -4,7 +4,6 @@ import android.app.TaskInfo;
 import com.android.wm.shell.ShellTaskOrganizer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CompatUIInfo {
     public final ShellTaskOrganizer.TaskListener listener;
@@ -27,9 +26,9 @@ public final class CompatUIInfo {
     }
 
     public final int hashCode() {
-        int hashCode = this.taskInfo.hashCode() * 31;
+        int iHashCode = this.taskInfo.hashCode() * 31;
         ShellTaskOrganizer.TaskListener taskListener = this.listener;
-        return hashCode + (taskListener == null ? 0 : taskListener.hashCode());
+        return iHashCode + (taskListener == null ? 0 : taskListener.hashCode());
     }
 
     public final String toString() {

@@ -6,7 +6,7 @@
         <item>
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/ksh_button_corner_radius" />
-                <solid android:color="@android:color/secondary_text_nofocus" />
+                <solid android:color="@android:color/notification_secondary_text_color_current" />
             </shape>
         </item>
     </ripple>

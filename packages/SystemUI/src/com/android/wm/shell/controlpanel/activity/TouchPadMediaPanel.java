@@ -18,7 +18,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.controlpanel.utils.ControlPanelUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TouchPadMediaPanel {
     public final int displayX;
@@ -263,10 +262,10 @@ public class TouchPadMediaPanel {
             int size = sparseArray.size();
             ArrayList arrayList = new ArrayList();
             for (int i = 0; i < size; i++) {
-                int keyAt = sparseArray.keyAt(i);
-                long longValue = ((Long) sparseArray.valueAt(i)).longValue();
-                LinearLayout linearLayout = (LinearLayout) this.mFloatingPanelView.findViewById(keyAt);
-                long j = longValue & actions;
+                int iKeyAt = sparseArray.keyAt(i);
+                long jLongValue = ((Long) sparseArray.valueAt(i)).longValue();
+                LinearLayout linearLayout = (LinearLayout) this.mFloatingPanelView.findViewById(iKeyAt);
+                long j = jLongValue & actions;
                 linearLayout.setEnabled(j != 0);
                 if (j != 0) {
                     linearLayout.setAlpha(1.0f);

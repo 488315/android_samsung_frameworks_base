@@ -39,9 +39,9 @@ public interface IAmbientBacklightCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAmbientBacklightCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAmbientBacklightCallback)) {
-                return (IAmbientBacklightCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAmbientBacklightCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAmbientBacklightCallback)) {
+                return (IAmbientBacklightCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -82,13 +82,13 @@ public interface IAmbientBacklightCallback extends IInterface {
 
             @Override // android.media.quality.IAmbientBacklightCallback
             public void onAmbientBacklightEvent(AmbientBacklightEvent ambientBacklightEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientBacklightCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientBacklightEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientBacklightCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientBacklightEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -4,11 +4,9 @@ import com.android.systemui.common.shared.model.Icon;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface HoverBehavior {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Button implements HoverBehavior {
         public final Icon icon;
         public final Function0 onIconPressed;
@@ -38,7 +36,6 @@ public interface HoverBehavior {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class None implements HoverBehavior {
         public static final None INSTANCE = new None();
 

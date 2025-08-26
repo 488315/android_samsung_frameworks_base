@@ -54,9 +54,9 @@ public interface ITkgsInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ITkgsInfo");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITkgsInfo)) {
-                return (ITkgsInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ITkgsInfo");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITkgsInfo)) {
+                return (ITkgsInfo) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,15 +86,15 @@ public interface ITkgsInfo extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int prefServiceList = setPrefServiceList(readString);
+                int prefServiceList = setPrefServiceList(string);
                 parcel2.writeNoException();
                 parcel2.writeInt(prefServiceList);
             } else if (i == 2) {
-                ITkgsInfoListener asInterface = ITkgsInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ITkgsInfoListener iTkgsInfoListenerAsInterface = ITkgsInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int tkgsInfoListener = setTkgsInfoListener(asInterface);
+                int tkgsInfoListener = setTkgsInfoListener(iTkgsInfoListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(tkgsInfoListener);
             } else {
@@ -121,33 +121,33 @@ public interface ITkgsInfo extends IInterface {
 
             @Override // android.media.tv.extension.scan.ITkgsInfo
             public int setPrefServiceList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfo");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfo");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ITkgsInfo
             public int setTkgsInfoListener(ITkgsInfoListener iTkgsInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfo");
-                    obtain.writeStrongInterface(iTkgsInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfo");
+                    parcelObtain.writeStrongInterface(iTkgsInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -12,7 +12,7 @@
         <Space android:id="@id/mobile_roaming_space" android:visibility="gone" android:layout_width="@dimen/roaming_icon_start_padding" android:layout_height="fill_parent" />
         <FrameLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
             <com.android.systemui.statusbar.AnimatedImageView android:id="@id/mobile_signal" android:layout_width="wrap_content" android:layout_height="@dimen/status_bar_mobile_signal_size" android:adjustViewBounds="true" systemui:hasOverlappingRendering="false" />
-            <ImageView android:layout_gravity="start|center|top" android:id="@id/mobile_roaming" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/status_bar_mobile_roam_size" android:src="@drawable/stat_sys_roaming" android:adjustViewBounds="true" android:contentDescription="@string/data_connection_roaming" />
+            <ImageView android:layout_gravity="start|top" android:id="@id/mobile_roaming" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/status_bar_mobile_roam_size" android:src="@drawable/stat_sys_roaming" android:adjustViewBounds="true" android:contentDescription="@string/data_connection_roaming" />
         </FrameLayout>
     </com.android.keyguard.AlphaOptimizedLinearLayout>
 </merge>

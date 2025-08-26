@@ -10,14 +10,11 @@ import android.window.StartingWindowRemovalInfo;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.shared.TransactionPool;
 import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
-import com.android.wm.shell.startingsurface.WindowlessSplashWindowCreator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WindowlessSplashWindowCreator extends AbsSplashWindowCreator {
     public final TransactionPool mTransactionPool;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SplashWindowRecord extends StartingSurfaceDrawer.StartingWindowRecord {
         public SurfaceControl mChildSurface;
         public final long mCreateTime;
@@ -35,9 +32,9 @@ public class WindowlessSplashWindowCreator extends AbsSplashWindowCreator {
         public final void release() {
             if (this.mChildSurface != null) {
                 WindowlessSplashWindowCreator windowlessSplashWindowCreator = WindowlessSplashWindowCreator.this;
-                SurfaceControl.Transaction acquire = windowlessSplashWindowCreator.mTransactionPool.acquire();
-                acquire.remove(this.mChildSurface).apply();
-                windowlessSplashWindowCreator.mTransactionPool.release(acquire);
+                SurfaceControl.Transaction transactionAcquire = windowlessSplashWindowCreator.mTransactionPool.acquire();
+                transactionAcquire.remove(this.mChildSurface).apply();
+                windowlessSplashWindowCreator.mTransactionPool.release(transactionAcquire);
                 this.mChildSurface = null;
             }
             SurfaceControlViewHost surfaceControlViewHost = this.mViewHost;
@@ -56,7 +53,7 @@ public class WindowlessSplashWindowCreator extends AbsSplashWindowCreator {
             WindowlessSplashWindowCreator.this.mSplashscreenContentDrawer.applyExitAnimation(this.mSplashView, startingWindowRemovalInfo.windowAnimationLeash, startingWindowRemovalInfo.mainFrame, new Runnable() { // from class: com.android.wm.shell.startingsurface.WindowlessSplashWindowCreator$SplashWindowRecord$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowlessSplashWindowCreator.SplashWindowRecord.this.release();
+                    this.f$0.release();
                 }
             }, this.mCreateTime, 0.0f);
             return true;

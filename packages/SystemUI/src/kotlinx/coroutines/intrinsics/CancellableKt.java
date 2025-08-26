@@ -9,14 +9,13 @@ import kotlinx.coroutines.AbstractCoroutine;
 import kotlinx.coroutines.DispatchException;
 import kotlinx.coroutines.internal.DispatchedContinuationKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CancellableKt {
     public static final void startCoroutineCancellable(Function2 function2, AbstractCoroutine abstractCoroutine, AbstractCoroutine abstractCoroutine2) {
         try {
-            Continuation intercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(IntrinsicsKt__IntrinsicsJvmKt.createCoroutineUnintercepted(function2, abstractCoroutine, abstractCoroutine2));
+            Continuation continuationIntercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(IntrinsicsKt__IntrinsicsJvmKt.createCoroutineUnintercepted(function2, abstractCoroutine, abstractCoroutine2));
             int i = Result.$r8$clinit;
-            DispatchedContinuationKt.resumeCancellableWith(Unit.INSTANCE, intercepted);
+            DispatchedContinuationKt.resumeCancellableWith(Unit.INSTANCE, continuationIntercepted);
         } catch (Throwable th) {
             th = th;
             if (th instanceof DispatchException) {

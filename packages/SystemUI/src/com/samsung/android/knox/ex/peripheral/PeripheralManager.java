@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PeripheralManager {
     public static final int RESULT_CODE_FAIL_PERMISSION_ERROR = 3;
@@ -34,7 +33,6 @@ public class PeripheralManager {
     public final HashMap<PeripheralInfoListener, IInfoListener> mInfoListeners = new HashMap<>();
     public final HashMap<PeripheralStateListener, IStateListener> mStateListeners = new HashMap<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Temp {
         public static final String ACTION_REQUEST_VERSION = "com.samsung.android.knox.ex.peripheral.TEMP_ACTION_REQUEST_VERSION";
         public static final String ACTION_REQUEST_VERSION_RELAY = "com.samsung.android.knox.ex.peripheral.TEMP_ACTION_REQUEST_VERSION_RELAY";
@@ -70,14 +68,14 @@ public class PeripheralManager {
     public int beep(String str, int i, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter beep()");
-        int i2 = 1;
+        int iBeep = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i2 = service.beep(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.29
+                iBeep = service.beep(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.29
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i3, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i3, str3);
+                    public void onFail(int i2, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i2, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -93,21 +91,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i2, "Leave beep() with ", TAG);
-        return i2;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iBeep, "Leave beep() with ", TAG);
+        return iBeep;
     }
 
     public int check(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter check()");
-        int i = 1;
+        int iCheck = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.check(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.1
+                iCheck = service.check(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.1
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -123,21 +121,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave check() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iCheck, "Leave check() with ", TAG);
+        return iCheck;
     }
 
     public int clearMemory(String str, String str2, final PeripheralResultListener peripheralResultListener) {
         String str3 = TAG;
         Log.i(str3, "Enter clearMemory()");
-        int i = 1;
+        int iClearMemory = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.clearMemory(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.14
+                iClearMemory = service.clearMemory(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.14
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str4) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str4);
+                    public void onFail(int i, String str4) throws RemoteException {
+                        peripheralResultListener.onFail(i, str4);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -153,23 +151,23 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave clearMemory() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iClearMemory, "Leave clearMemory() with ", TAG);
+        return iClearMemory;
     }
 
     public int connectPeripheral(BluetoothDevice bluetoothDevice, final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter connectPeripheral()");
-        int i = 1;
+        int iConnectPeripheral = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(PeripheralConstants.Internal.INTERNAL_KEY_BLUETOOTH_DEVICE, bluetoothDevice);
-                i = service.connectPeripheral(bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.26
+                iConnectPeripheral = service.connectPeripheral(bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.26
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -185,18 +183,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave connectPeripheral() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iConnectPeripheral, "Leave connectPeripheral() with ", TAG);
+        return iConnectPeripheral;
     }
 
     public int disable() {
         String str = TAG;
         Log.i(str, "Enter disable()");
-        int i = 1;
+        int iDisable = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.disable();
+                iDisable = service.disable();
             } else {
                 Log.e(str, "disable getService failed!");
             }
@@ -205,21 +203,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave disable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisable, "Leave disable() with ", TAG);
+        return iDisable;
     }
 
     public int disconnectPeripheral(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter disconnectPeripheral()");
-        int i = 1;
+        int iDisconnectPeripheral = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.disconnectPeripheral(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.27
+                iDisconnectPeripheral = service.disconnectPeripheral(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.27
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -235,21 +233,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave disconnectPeripheral() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisconnectPeripheral, "Leave disconnectPeripheral() with ", TAG);
+        return iDisconnectPeripheral;
     }
 
     public int displayText(String str, String str2, int i, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str3 = TAG;
         Log.i(str3, "Enter displayText()");
-        int i2 = 1;
+        int iDisplayText = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i2 = service.displayText(str, str2, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.28
+                iDisplayText = service.displayText(str, str2, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.28
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i3, String str4) throws RemoteException {
-                        peripheralResultListener.onFail(i3, str4);
+                    public void onFail(int i2, String str4) throws RemoteException {
+                        peripheralResultListener.onFail(i2, str4);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -265,8 +263,8 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i2, "Leave displayText() with ", TAG);
-        return i2;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisplayText, "Leave displayText() with ", TAG);
+        return iDisplayText;
     }
 
     public int enable(Bundle bundle) {
@@ -276,14 +274,14 @@ public class PeripheralManager {
     public int getAvailablePeripherals(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter getAvailablePeripherals()");
-        int i = 1;
+        int availablePeripherals = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getAvailablePeripherals(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.4
+                availablePeripherals = service.getAvailablePeripherals(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.4
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -299,21 +297,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getAvailablePeripherals() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(availablePeripherals, "Leave getAvailablePeripherals() with ", TAG);
+        return availablePeripherals;
     }
 
     public int getBluetoothPeripherals(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter getBluetoothPeripherals()");
-        int i = 1;
+        int bluetoothPeripherals = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getBluetoothPeripherals(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.25
+                bluetoothPeripherals = service.getBluetoothPeripherals(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.25
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -329,21 +327,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getBluetoothPeripherals() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(bluetoothPeripherals, "Leave getBluetoothPeripherals() with ", TAG);
+        return bluetoothPeripherals;
     }
 
     public int getConfiguration(String str, List<String> list, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter getConfiguration()");
-        int i = 1;
+        int configuration = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getConfiguration(str, list, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.6
+                configuration = service.getConfiguration(str, list, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.6
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -359,21 +357,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getConfiguration() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(configuration, "Leave getConfiguration() with ", TAG);
+        return configuration;
     }
 
     public int getConnectionProfile(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter getConnectionProfile()");
-        int i = 1;
+        int connectionProfile = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getConnectionProfile(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.20
+                connectionProfile = service.getConnectionProfile(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.20
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -389,21 +387,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getConnectionProfile() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(connectionProfile, "Leave getConnectionProfile() with ", TAG);
+        return connectionProfile;
     }
 
     public int getInformation(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter getInformation()");
-        int i = 1;
+        int information = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getInformation(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.5
+                information = service.getInformation(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.5
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -419,21 +417,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getInformation() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(information, "Leave getInformation() with ", TAG);
+        return information;
     }
 
     public int getPairingBarcodeData(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter getPairingBarcodeData()");
-        int i = 1;
+        int pairingBarcodeData = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getPairingBarcodeData(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.23
+                pairingBarcodeData = service.getPairingBarcodeData(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.23
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -449,8 +447,8 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getPairingBarcodeData() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(pairingBarcodeData, "Leave getPairingBarcodeData() with ", TAG);
+        return pairingBarcodeData;
     }
 
     public List<String> getPluginsToSetup() {
@@ -480,14 +478,14 @@ public class PeripheralManager {
     public int getStoredData(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter getStoredData()");
-        int i = 1;
+        int storedData = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getStoredData(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.13
+                storedData = service.getStoredData(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.13
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -503,21 +501,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getStoredData() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(storedData, "Leave getStoredData() with ", TAG);
+        return storedData;
     }
 
     public int getSupportedPeripherals(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter getSupportedPeripherals()");
-        int i = 1;
+        int supportedPeripherals = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.getSupportedPeripherals(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.22
+                supportedPeripherals = service.getSupportedPeripherals(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.22
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -533,18 +531,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave getSupportedPeripherals() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(supportedPeripherals, "Leave getSupportedPeripherals() with ", TAG);
+        return supportedPeripherals;
     }
 
     public boolean isEnabled() {
         String str = TAG;
         Log.i(str, "Enter isEnabled()");
-        boolean z = false;
+        boolean zIsEnabled = false;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                z = service.isEnabled();
+                zIsEnabled = service.isEnabled();
             } else {
                 Log.e(str, "isEnabled getService failed!");
             }
@@ -553,18 +551,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, zIsEnabled);
+        return zIsEnabled;
     }
 
     public boolean isStarted() {
         String str = TAG;
         Log.i(str, "Enter isStarted()");
-        boolean z = false;
+        boolean zIsStarted = false;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                z = service.isStarted();
+                zIsStarted = service.isStarted();
             } else {
                 Log.e(str, "isStarted getService failed!");
             }
@@ -573,14 +571,14 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, zIsStarted);
+        return zIsStarted;
     }
 
     public int registerDataListener(final PeripheralDataListener peripheralDataListener) {
         String str = TAG;
         Log.i(str, "Enter registerDataListener()");
-        int i = 1;
+        int iRegisterDataListener = 1;
         try {
             IPeripheralService service = getService();
             if (service == null) {
@@ -593,13 +591,13 @@ public class PeripheralManager {
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IDataListener
-                    public void onFail(int i2, String str2) {
-                        peripheralDataListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) {
+                        peripheralDataListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IDataListener
-                    public void onReceive(int i2, Bundle bundle) {
-                        peripheralDataListener.onReceive(i2, bundle);
+                    public void onReceive(int i, Bundle bundle) {
+                        peripheralDataListener.onReceive(i, bundle);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IDataListener
@@ -607,21 +605,21 @@ public class PeripheralManager {
                         peripheralDataListener.onSuccess();
                     }
                 });
-                i = service.registerDataListener(this.mDataListeners.get(peripheralDataListener));
+                iRegisterDataListener = service.registerDataListener(this.mDataListeners.get(peripheralDataListener));
             }
         } catch (SecurityException e) {
             throw e;
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave registerDataListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iRegisterDataListener, "Leave registerDataListener() with ", TAG);
+        return iRegisterDataListener;
     }
 
     public int registerInfoListener(final PeripheralInfoListener peripheralInfoListener) {
         String str = TAG;
         Log.i(str, "Enter registerInfoListener()");
-        int i = 1;
+        int iRegisterInfoListener = 1;
         try {
             IPeripheralService service = getService();
             if (service == null) {
@@ -634,8 +632,8 @@ public class PeripheralManager {
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IInfoListener
-                    public void onFail(int i2, String str2) {
-                        peripheralInfoListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) {
+                        peripheralInfoListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IInfoListener
@@ -648,21 +646,21 @@ public class PeripheralManager {
                         peripheralInfoListener.onSuccess();
                     }
                 });
-                i = service.registerInfoListener(this.mInfoListeners.get(peripheralInfoListener));
+                iRegisterInfoListener = service.registerInfoListener(this.mInfoListeners.get(peripheralInfoListener));
             }
         } catch (SecurityException e) {
             throw e;
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave registerInfoListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iRegisterInfoListener, "Leave registerInfoListener() with ", TAG);
+        return iRegisterInfoListener;
     }
 
     public int registerStateListener(final PeripheralStateListener peripheralStateListener) {
         String str = TAG;
         Log.i(str, "Enter registerStateListener()");
-        int i = 1;
+        int iRegisterStateListener = 1;
         try {
             IPeripheralService service = getService();
             if (service == null) {
@@ -675,13 +673,13 @@ public class PeripheralManager {
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IStateListener
-                    public void onFail(int i2, String str2) {
-                        peripheralStateListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) {
+                        peripheralStateListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IStateListener
-                    public void onStateChange(int i2, Bundle bundle) {
-                        peripheralStateListener.onStateChange(i2, bundle);
+                    public void onStateChange(int i, Bundle bundle) {
+                        peripheralStateListener.onStateChange(i, bundle);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IStateListener
@@ -689,28 +687,28 @@ public class PeripheralManager {
                         peripheralStateListener.onSuccess();
                     }
                 });
-                i = service.registerStateListener(this.mStateListeners.get(peripheralStateListener));
+                iRegisterStateListener = service.registerStateListener(this.mStateListeners.get(peripheralStateListener));
             }
         } catch (SecurityException e) {
             throw e;
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave registerStateListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iRegisterStateListener, "Leave registerStateListener() with ", TAG);
+        return iRegisterStateListener;
     }
 
     public int resetPeripheral(String str, String str2, final PeripheralResultListener peripheralResultListener) {
         String str3 = TAG;
         Log.i(str3, "Enter resetPeripheral()");
-        int i = 1;
+        int iResetPeripheral = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.resetPeripheral(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.17
+                iResetPeripheral = service.resetPeripheral(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.17
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str4) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str4);
+                    public void onFail(int i, String str4) throws RemoteException {
+                        peripheralResultListener.onFail(i, str4);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -726,21 +724,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave resetPeripheral() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iResetPeripheral, "Leave resetPeripheral() with ", TAG);
+        return iResetPeripheral;
     }
 
     public int setConfiguration(String str, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter setConfiguration()");
-        int i = 1;
+        int configuration = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.setConfiguration(str, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.7
+                configuration = service.setConfiguration(str, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.7
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -756,21 +754,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave setConfiguration() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(configuration, "Leave setConfiguration() with ", TAG);
+        return configuration;
     }
 
     public int setConnectionProfile(String str, String str2, final PeripheralResultListener peripheralResultListener) {
         String str3 = TAG;
         Log.i(str3, "Enter setConnectionProfile()");
-        int i = 1;
+        int connectionProfile = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.setConnectionProfile(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.21
+                connectionProfile = service.setConnectionProfile(str, str2, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.21
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str4) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str4);
+                    public void onFail(int i, String str4) throws RemoteException {
+                        peripheralResultListener.onFail(i, str4);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -786,21 +784,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave setConnectionProfile() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(connectionProfile, "Leave setConnectionProfile() with ", TAG);
+        return connectionProfile;
     }
 
     public int start(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter start()");
-        int i = 1;
+        int iStart = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.start(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.2
+                iStart = service.start(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.2
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -816,21 +814,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave start() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStart, "Leave start() with ", TAG);
+        return iStart;
     }
 
     public int startAutoTriggerMode(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter startAutoTriggerMode()");
-        int i = 1;
+        int iStartAutoTriggerMode = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.startAutoTriggerMode(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.15
+                iStartAutoTriggerMode = service.startAutoTriggerMode(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.15
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -846,21 +844,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave startAutoTriggerMode() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStartAutoTriggerMode, "Leave startAutoTriggerMode() with ", TAG);
+        return iStartAutoTriggerMode;
     }
 
     public int startBarcodeScan(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter startBarcodeScan()");
-        int i = 1;
+        int iStartBarcodeScan = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.startBarcodeScan(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.11
+                iStartBarcodeScan = service.startBarcodeScan(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.11
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -876,21 +874,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave startBarcodeScan() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStartBarcodeScan, "Leave startBarcodeScan() with ", TAG);
+        return iStartBarcodeScan;
     }
 
     public int stop(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter stop()");
-        int i = 1;
+        int iStop = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.stop(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.3
+                iStop = service.stop(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.3
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -906,21 +904,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stop() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStop, "Leave stop() with ", TAG);
+        return iStop;
     }
 
     public int stopAutoTriggerMode(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter stopAutoTriggerMode()");
-        int i = 1;
+        int iStopAutoTriggerMode = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.stopAutoTriggerMode(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.16
+                iStopAutoTriggerMode = service.stopAutoTriggerMode(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.16
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -936,21 +934,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stopAutoTriggerMode() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStopAutoTriggerMode, "Leave stopAutoTriggerMode() with ", TAG);
+        return iStopAutoTriggerMode;
     }
 
     public int stopBarcodeScan(String str, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter stopBarcodeScan()");
-        int i = 1;
+        int iStopBarcodeScan = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.stopBarcodeScan(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.12
+                iStopBarcodeScan = service.stopBarcodeScan(str, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.12
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str3);
+                    public void onFail(int i, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -966,21 +964,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stopBarcodeScan() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStopBarcodeScan, "Leave stopBarcodeScan() with ", TAG);
+        return iStopBarcodeScan;
     }
 
     public int stopPairingPeripheral(final PeripheralResultListener peripheralResultListener) {
         String str = TAG;
         Log.i(str, "Enter stopPairingPeripheral()");
-        int i = 1;
+        int iStopPairingPeripheral = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.stopPairingPeripheral(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.24
+                iStopPairingPeripheral = service.stopPairingPeripheral(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.24
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i2, String str2) throws RemoteException {
-                        peripheralResultListener.onFail(i2, str2);
+                    public void onFail(int i, String str2) throws RemoteException {
+                        peripheralResultListener.onFail(i, str2);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -996,21 +994,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stopPairingPeripheral() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStopPairingPeripheral, "Leave stopPairingPeripheral() with ", TAG);
+        return iStopPairingPeripheral;
     }
 
     public int triggerVendorCommand(String str, int i, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter triggerVendorCommand()");
-        int i2 = 1;
+        int iTriggerVendorCommand = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i2 = service.triggerVendorCommand(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.18
+                iTriggerVendorCommand = service.triggerVendorCommand(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.18
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i3, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i3, str3);
+                    public void onFail(int i2, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i2, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -1026,18 +1024,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i2, "Leave triggerVendorCommand() with ", TAG);
-        return i2;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iTriggerVendorCommand, "Leave triggerVendorCommand() with ", TAG);
+        return iTriggerVendorCommand;
     }
 
     public int unregisterDataListener(PeripheralDataListener peripheralDataListener) {
         String str = TAG;
         Log.i(str, "Enter unregisterDataListener()");
-        int i = 1;
+        int iUnregisterDataListener = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.unregisterDataListener(this.mDataListeners.get(peripheralDataListener));
+                iUnregisterDataListener = service.unregisterDataListener(this.mDataListeners.get(peripheralDataListener));
                 this.mDataListeners.remove(peripheralDataListener);
             } else {
                 Log.e(str, "unregisterDataListener getService failed!");
@@ -1047,18 +1045,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave unregisterDataListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUnregisterDataListener, "Leave unregisterDataListener() with ", TAG);
+        return iUnregisterDataListener;
     }
 
     public int unregisterInfoListener(PeripheralInfoListener peripheralInfoListener) {
         String str = TAG;
         Log.i(str, "Enter unregisterInfoListener()");
-        int i = 1;
+        int iUnregisterInfoListener = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.unregisterInfoListener(this.mInfoListeners.get(peripheralInfoListener));
+                iUnregisterInfoListener = service.unregisterInfoListener(this.mInfoListeners.get(peripheralInfoListener));
                 this.mInfoListeners.remove(peripheralInfoListener);
             } else {
                 Log.e(str, "unregisterInfoListener getService failed!");
@@ -1068,18 +1066,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave unregisterInfoListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUnregisterInfoListener, "Leave unregisterInfoListener() with ", TAG);
+        return iUnregisterInfoListener;
     }
 
     public int unregisterStateListener(PeripheralStateListener peripheralStateListener) {
         String str = TAG;
         Log.i(str, "Enter unregisterStateListener()");
-        int i = 1;
+        int iUnregisterStateListener = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.unregisterStateListener(this.mStateListeners.get(peripheralStateListener));
+                iUnregisterStateListener = service.unregisterStateListener(this.mStateListeners.get(peripheralStateListener));
                 this.mStateListeners.remove(peripheralStateListener);
             } else {
                 Log.e(str, "unregisterStateListener getService failed!");
@@ -1089,21 +1087,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave unregisterStateListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUnregisterStateListener, "Leave unregisterStateListener() with ", TAG);
+        return iUnregisterStateListener;
     }
 
     public int updateFirmware(String str, byte[] bArr, int i, int i2, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter updateFirmware()");
-        int i3 = 1;
+        int iUpdateFirmware = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i3 = service.updateFirmware(str, bArr, i, i2, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.19
+                iUpdateFirmware = service.updateFirmware(str, bArr, i, i2, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.19
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i4, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i4, str3);
+                    public void onFail(int i3, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i3, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -1119,21 +1117,21 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i3, "Leave updateFirmware() with ", TAG);
-        return i3;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUpdateFirmware, "Leave updateFirmware() with ", TAG);
+        return iUpdateFirmware;
     }
 
     public int vibrate(String str, int i, Bundle bundle, final PeripheralResultListener peripheralResultListener) {
         String str2 = TAG;
         Log.i(str2, "Enter vibrate()");
-        int i2 = 1;
+        int iVibrate = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i2 = service.vibrate(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.30
+                iVibrate = service.vibrate(str, i, bundle, new IResultListener.Stub(this) { // from class: com.samsung.android.knox.ex.peripheral.PeripheralManager.30
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
-                    public void onFail(int i3, String str3) throws RemoteException {
-                        peripheralResultListener.onFail(i3, str3);
+                    public void onFail(int i2, String str3) throws RemoteException {
+                        peripheralResultListener.onFail(i2, str3);
                     }
 
                     @Override // com.samsung.android.knox.ex.peripheral.IResultListener
@@ -1149,18 +1147,18 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i2, "Leave vibrate() with ", TAG);
-        return i2;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iVibrate, "Leave vibrate() with ", TAG);
+        return iVibrate;
     }
 
     public int enable(Bundle bundle, boolean z) {
         String str = TAG;
         Log.i(str, "Enter enable()");
-        int i = 1;
+        int iEnable = 1;
         try {
             IPeripheralService service = getService();
             if (service != null) {
-                i = service.enable(bundle, z);
+                iEnable = service.enable(bundle, z);
             } else {
                 Log.e(str, "enable getService failed!");
             }
@@ -1169,7 +1167,7 @@ public class PeripheralManager {
         } catch (Exception e2) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave enable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iEnable, "Leave enable() with ", TAG);
+        return iEnable;
     }
 }

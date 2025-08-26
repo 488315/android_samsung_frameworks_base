@@ -4,7 +4,6 @@ import com.android.compose.animation.scene.content.state.TransitionState;
 import kotlin.Pair;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnimateOverlayKt {
     public static final void showOrHideOverlay(CoroutineScope coroutineScope, MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl, OverlayKey overlayKey, SceneKey sceneKey, boolean z, TransitionKey transitionKey, TransitionState.Transition.ShowOrHideOverlay showOrHideOverlay, boolean z2) {

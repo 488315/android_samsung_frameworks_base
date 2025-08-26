@@ -22,14 +22,14 @@ public class AttributeCertificateIssuer implements Selector {
     }
 
     public X500Name[] getNames() {
-        GeneralNames generalNames;
+        GeneralNames issuerName;
         ASN1Encodable aSN1Encodable = this.form;
         if (aSN1Encodable instanceof V2Form) {
-            generalNames = ((V2Form) aSN1Encodable).getIssuerName();
+            issuerName = ((V2Form) aSN1Encodable).getIssuerName();
         } else {
-            generalNames = (GeneralNames) aSN1Encodable;
+            issuerName = (GeneralNames) aSN1Encodable;
         }
-        GeneralName[] names = generalNames.getNames();
+        GeneralName[] names = issuerName.getNames();
         ArrayList arrayList = new ArrayList(names.length);
         for (int i = 0; i != names.length; i++) {
             if (names[i].getTagNo() == 4) {

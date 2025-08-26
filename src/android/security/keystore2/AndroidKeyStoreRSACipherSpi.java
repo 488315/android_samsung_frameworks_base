@@ -230,7 +230,7 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase, javax.crypto.CipherSpi
-        protected final AlgorithmParameters engineGetParameters() {
+        protected final AlgorithmParameters engineGetParameters() throws NoSuchAlgorithmException, InvalidParameterSpecException {
             OAEPParameterSpec oAEPParameterSpec = new OAEPParameterSpec(KeyProperties.Digest.fromKeymaster(this.mKeymasterDigest), MGF_ALGORITHM_MGF1, KeyProperties.Digest.fromKeymasterToMGF1ParameterSpec(this.mKeymasterMgf1Digest), PSource.PSpecified.DEFAULT);
             try {
                 AlgorithmParameters algorithmParameters = AlgorithmParameters.getInstance("OAEP");
@@ -360,59 +360,59 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         return "RSA/ECB/" + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0043  */
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected final void initKey(int i, Key key) throws InvalidKeyException {
-        AndroidKeyStoreKey androidKeyStoreKey;
         if (key == null) {
             throw new InvalidKeyException("Unsupported key: null");
         }
         if (!"RSA".equalsIgnoreCase(key.getAlgorithm())) {
             throw new InvalidKeyException("Unsupported key algorithm: " + key.getAlgorithm() + ". Only RSA supported");
         }
-        if (key instanceof AndroidKeyStorePrivateKey) {
-            androidKeyStoreKey = (AndroidKeyStoreKey) key;
-        } else if (key instanceof AndroidKeyStorePublicKey) {
-            androidKeyStoreKey = (AndroidKeyStoreKey) key;
-        } else {
-            throw new InvalidKeyException("Unsupported key type: " + key);
-        }
-        if (androidKeyStoreKey instanceof PrivateKey) {
-            if (i != 1) {
-                if (i != 2) {
+        if ((key instanceof AndroidKeyStorePrivateKey) || (key instanceof AndroidKeyStorePublicKey)) {
+            AndroidKeyStoreKey androidKeyStoreKey = (AndroidKeyStoreKey) key;
+            if (androidKeyStoreKey instanceof PrivateKey) {
+                if (i == 1) {
+                    if (!adjustConfigForEncryptingWithPrivateKey()) {
+                        throw new InvalidKeyException("RSA private keys cannot be used with " + opmodeToString(i) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA public keys supported for this mode");
+                    }
+                } else if (i != 2) {
                     if (i != 3) {
                         if (i != 4) {
                             throw new InvalidKeyException("RSA private keys cannot be used with opmode: " + i);
                         }
                     }
                 }
-            }
-            if (!adjustConfigForEncryptingWithPrivateKey()) {
-                throw new InvalidKeyException("RSA private keys cannot be used with " + opmodeToString(i) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA public keys supported for this mode");
-            }
-        } else if (i != 1) {
-            if (i != 2) {
-                if (i != 3) {
-                    if (i != 4) {
-                        throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(i));
+            } else if (i != 1) {
+                if (i != 2) {
+                    if (i != 3) {
+                        if (i != 4) {
+                            throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(i));
+                        }
                     }
                 }
+                throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(i) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA private keys supported for this opmode.");
             }
-            throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(i) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA private keys supported for this opmode.");
-        }
-        long j = -1;
-        for (Authorization authorization : androidKeyStoreKey.getAuthorizations()) {
-            if (authorization.keyParameter.tag == 805306371) {
-                j = KeyStore2ParameterUtils.getUnsignedInt(authorization);
+            long unsignedInt = -1;
+            for (Authorization authorization : androidKeyStoreKey.getAuthorizations()) {
+                if (authorization.keyParameter.tag == 805306371) {
+                    unsignedInt = KeyStore2ParameterUtils.getUnsignedInt(authorization);
+                }
             }
+            if (unsignedInt == -1) {
+                throw new InvalidKeyException("Size of key not known");
+            }
+            if (unsignedInt > 2147483647L) {
+                throw new InvalidKeyException("Key too large: " + unsignedInt + " bits");
+            }
+            this.mModulusSizeBytes = (int) ((unsignedInt + 7) / 8);
+            setKey(androidKeyStoreKey);
+            return;
         }
-        if (j == -1) {
-            throw new InvalidKeyException("Size of key not known");
-        }
-        if (j > 2147483647L) {
-            throw new InvalidKeyException("Key too large: " + j + " bits");
-        }
-        this.mModulusSizeBytes = (int) ((j + 7) / 8);
-        setKey(androidKeyStoreKey);
+        throw new InvalidKeyException("Unsupported key type: " + key);
     }
 
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase

@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     public final BrightnessBar mBrightnessBar;
@@ -26,12 +26,12 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     public BrightnessVolumeBar(Context context, BarFactory barFactory) {
         super(context);
         this.mLastConfigurationState = new ConfigurationState(Arrays.asList(ConfigurationState.ConfigurationField.ORIENTATION, ConfigurationState.ConfigurationField.SCREEN_HEIGHT_DP, ConfigurationState.ConfigurationField.DISPLAY_DEVICE_TYPE));
-        BarItemImpl createBarItem = barFactory.createBarItem(BarType.VOLUME);
-        createBarItem.mIsOnCollapsedState = false;
-        this.mVolumeBar = (VolumeBar) createBarItem;
-        BarItemImpl createBarItem2 = barFactory.createBarItem(BarType.BRIGHTNESS);
-        createBarItem2.mIsOnCollapsedState = false;
-        this.mBrightnessBar = (BrightnessBar) createBarItem2;
+        BarItemImpl barItemImplCreateBarItem = barFactory.createBarItem(BarType.VOLUME);
+        barItemImplCreateBarItem.mIsOnCollapsedState = false;
+        this.mVolumeBar = (VolumeBar) barItemImplCreateBarItem;
+        BarItemImpl barItemImplCreateBarItem2 = barFactory.createBarItem(BarType.BRIGHTNESS);
+        barItemImplCreateBarItem2.mIsOnCollapsedState = false;
+        this.mBrightnessBar = (BrightnessBar) barItemImplCreateBarItem2;
         this.mVolumeTileList = createTileList(R.string.sec_volume_bar_tiles_default, context);
         this.mBrightnessTileList = createTileList(R.string.sec_brightness_bar_tiles_default, context);
     }
@@ -78,10 +78,10 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, viewGroup, false);
-        this.mBarRootView = inflate;
-        inflate.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_no_ripple_background));
+    public final void inflateViews(ViewGroup viewGroup) throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        viewInflate.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_no_ripple_background));
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
         if (coloredBGHelper != null) {
             coloredBGHelper.addBarBackground(this.mBarRootView, false);
@@ -103,10 +103,10 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void makeCloneBar() {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, (ViewGroup) null);
-        this.mClonedBarView = inflate;
-        inflate.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_no_ripple_background));
+    public final void makeCloneBar() throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_brightness_media_deivces_bar_layout, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
+        viewInflate.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_no_ripple_background));
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
         if (coloredBGHelper != null) {
             coloredBGHelper.addBarBackground(this.mClonedBarView, false);
@@ -123,7 +123,7 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void onConfigChanged(Configuration configuration) {
+    public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
         if (this.mBarRootView == null) {
             return;
         }
@@ -182,7 +182,7 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void setUnderneathQqs(boolean z) {
+    public final void setUnderneathQqs(boolean z) throws Resources.NotFoundException {
         this.mIsUnderneathQqs = z;
         updateHeightMargins();
     }
@@ -194,11 +194,11 @@ public class BrightnessVolumeBar extends BarItemImpl implements TileHostable {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         updateLayout$3(this.mBarRootView);
     }
 
-    public final void updateLayout$3(View view) {
+    public final void updateLayout$3(View view) throws Resources.NotFoundException {
         if (view == null) {
             return;
         }

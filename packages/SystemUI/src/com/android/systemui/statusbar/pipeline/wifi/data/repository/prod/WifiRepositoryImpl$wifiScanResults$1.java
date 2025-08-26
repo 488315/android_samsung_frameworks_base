@@ -22,7 +22,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -58,21 +57,21 @@ final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implement
             WifiManager.ScanResultsCallback scanResultsCallback = new WifiManager.ScanResultsCallback() { // from class: com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiScanResults$1$callback$1
                 @Override // android.net.wifi.WifiManager.ScanResultsCallback
                 public final void onScanResultsAvailable() {
-                    WifiRepositoryImpl wifiRepositoryImpl2 = WifiRepositoryImpl.this;
+                    WifiRepositoryImpl wifiRepositoryImpl2 = wifiRepositoryImpl;
                     WifiRepositoryImpl.Companion companion = WifiRepositoryImpl.Companion;
                     wifiRepositoryImpl2.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
-                    WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(5);
+                    WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(6);
                     LogBuffer logBuffer = wifiRepositoryImpl2.inputLogger;
                     logBuffer.commit(logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null));
                     SendChannel sendChannel = producerScope;
-                    List<ScanResult> scanResults = WifiRepositoryImpl.this.wifiManager.getScanResults();
+                    List<ScanResult> scanResults = wifiRepositoryImpl.wifiManager.getScanResults();
                     ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(scanResults, 10));
                     Iterator<T> it = scanResults.iterator();
                     while (it.hasNext()) {
                         arrayList.add(new WifiScanEntry(((ScanResult) it.next()).SSID));
                     }
-                    ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(arrayList);
+                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(arrayList);
                 }
             };
             WifiRepositoryImpl wifiRepositoryImpl2 = this.this$0;

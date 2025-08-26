@@ -1,5 +1,11 @@
 package com.android.systemui.shade.data.repository;
 
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
@@ -11,7 +17,6 @@ import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeRepositoryImpl implements ShadeRepository {
     public final StateFlowImpl _isShadeLayoutWide;
@@ -42,7 +47,6 @@ public final class ShadeRepositoryImpl implements ShadeRepository {
     public final ReadonlyStateFlow qsExpansion;
     public final ReadonlyStateFlow udfpsTransitionToFullShadeProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,55 +56,98 @@ public final class ShadeRepositoryImpl implements ShadeRepository {
         }
     }
 
+    /* renamed from: com.android.systemui.shade.data.repository.ShadeRepositoryImpl$setCurrentFling$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ FlingInfo $info;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(FlingInfo flingInfo, Continuation continuation) {
+            super(2, continuation);
+            this.$info = flingInfo;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ShadeRepositoryImpl.this.new AnonymousClass1(this.$info, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SharedFlowImpl sharedFlowImpl = ShadeRepositoryImpl.this.currentFling;
+                FlingInfo flingInfo = this.$info;
+                this.label = 1;
+                if (sharedFlowImpl.emit(flingInfo, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
 
     public ShadeRepositoryImpl(CoroutineScope coroutineScope) {
         this.backgroundScope = coroutineScope;
-        Float valueOf = Float.valueOf(0.0f);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(valueOf);
-        this._qsExpansion = MutableStateFlow;
-        this.qsExpansion = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(valueOf);
-        this._lockscreenShadeExpansion = MutableStateFlow2;
-        this.lockscreenShadeExpansion = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(valueOf);
-        this._udfpsTransitionToFullShadeProgress = MutableStateFlow3;
-        this.udfpsTransitionToFullShadeProgress = FlowKt.asStateFlow(MutableStateFlow3);
+        Float fValueOf = Float.valueOf(0.0f);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(fValueOf);
+        this._qsExpansion = stateFlowImplMutableStateFlow;
+        this.qsExpansion = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._lockscreenShadeExpansion = stateFlowImplMutableStateFlow2;
+        this.lockscreenShadeExpansion = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._udfpsTransitionToFullShadeProgress = stateFlowImplMutableStateFlow3;
+        this.udfpsTransitionToFullShadeProgress = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.currentFling = SharedFlowKt.MutableSharedFlow$default(2, 0, BufferOverflow.DROP_OLDEST, 2);
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(valueOf);
-        this._legacyShadeExpansion = MutableStateFlow4;
-        this.legacyShadeExpansion = FlowKt.asStateFlow(MutableStateFlow4);
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._legacyShadeExpansion = stateFlowImplMutableStateFlow4;
+        this.legacyShadeExpansion = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyShadeTracking = MutableStateFlow5;
-        this.legacyShadeTracking = FlowKt.asStateFlow(MutableStateFlow5);
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyShadeTracking = stateFlowImplMutableStateFlow5;
+        this.legacyShadeTracking = FlowKt.asStateFlow(stateFlowImplMutableStateFlow5);
         this.legacyLockscreenShadeTracking = StateFlowKt.MutableStateFlow(bool);
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyQsTracking = MutableStateFlow6;
-        this.legacyQsTracking = FlowKt.asStateFlow(MutableStateFlow6);
-        StateFlowImpl MutableStateFlow7 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyExpandedOrAwaitingInputTransfer = MutableStateFlow7;
-        this.legacyExpandedOrAwaitingInputTransfer = FlowKt.asStateFlow(MutableStateFlow7);
-        StateFlowImpl MutableStateFlow8 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyIsQsExpanded = MutableStateFlow8;
-        this.legacyIsQsExpanded = FlowKt.asStateFlow(MutableStateFlow8);
-        StateFlowImpl MutableStateFlow9 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyExpandImmediate = MutableStateFlow9;
-        this.legacyExpandImmediate = FlowKt.asStateFlow(MutableStateFlow9);
-        StateFlowImpl MutableStateFlow10 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyQsFullscreen = MutableStateFlow10;
-        this.legacyQsFullscreen = FlowKt.asStateFlow(MutableStateFlow10);
-        StateFlowImpl MutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
-        this._isShadeLayoutWide = MutableStateFlow11;
-        this.isShadeLayoutWide = FlowKt.asStateFlow(MutableStateFlow11);
-        StateFlowImpl MutableStateFlow12 = StateFlowKt.MutableStateFlow(bool);
-        this._legacyIsClosing = MutableStateFlow12;
-        this.legacyIsClosing = FlowKt.asStateFlow(MutableStateFlow12);
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyQsTracking = stateFlowImplMutableStateFlow6;
+        this.legacyQsTracking = FlowKt.asStateFlow(stateFlowImplMutableStateFlow6);
+        StateFlowImpl stateFlowImplMutableStateFlow7 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyExpandedOrAwaitingInputTransfer = stateFlowImplMutableStateFlow7;
+        this.legacyExpandedOrAwaitingInputTransfer = FlowKt.asStateFlow(stateFlowImplMutableStateFlow7);
+        StateFlowImpl stateFlowImplMutableStateFlow8 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyIsQsExpanded = stateFlowImplMutableStateFlow8;
+        this.legacyIsQsExpanded = FlowKt.asStateFlow(stateFlowImplMutableStateFlow8);
+        StateFlowImpl stateFlowImplMutableStateFlow9 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyExpandImmediate = stateFlowImplMutableStateFlow9;
+        this.legacyExpandImmediate = FlowKt.asStateFlow(stateFlowImplMutableStateFlow9);
+        StateFlowImpl stateFlowImplMutableStateFlow10 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyQsFullscreen = stateFlowImplMutableStateFlow10;
+        this.legacyQsFullscreen = FlowKt.asStateFlow(stateFlowImplMutableStateFlow10);
+        StateFlowImpl stateFlowImplMutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
+        this._isShadeLayoutWide = stateFlowImplMutableStateFlow11;
+        this.isShadeLayoutWide = FlowKt.asStateFlow(stateFlowImplMutableStateFlow11);
+        StateFlowImpl stateFlowImplMutableStateFlow12 = StateFlowKt.MutableStateFlow(bool);
+        this._legacyIsClosing = stateFlowImplMutableStateFlow12;
+        this.legacyIsClosing = FlowKt.asStateFlow(stateFlowImplMutableStateFlow12);
     }
 
     public final void setCurrentFling(FlingInfo flingInfo) {
-        BuildersKt.launch$default(this.backgroundScope, null, null, new ShadeRepositoryImpl$setCurrentFling$1(this, flingInfo, null), 3);
+        BuildersKt.launch$default(this.backgroundScope, null, null, new AnonymousClass1(flingInfo, null), 3);
     }
 }

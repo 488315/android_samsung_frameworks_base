@@ -76,11 +76,11 @@ public final class AuthenticationStoppedInfo implements Parcelable {
 
     AuthenticationStoppedInfo(Parcel parcel) {
         BiometricSourceType biometricSourceType = (BiometricSourceType) parcel.readTypedObject(BiometricSourceType.CREATOR);
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mBiometricSourceType = biometricSourceType;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) biometricSourceType);
-        this.mRequestReason = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, readInt);
+        this.mRequestReason = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, i);
     }
 
     public static final class Builder {

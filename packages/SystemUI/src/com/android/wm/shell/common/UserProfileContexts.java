@@ -16,7 +16,6 @@ import java.util.ListIterator;
 import kotlin.collections.CollectionsKt__CollectionsJVMKt;
 import kotlin.collections.builders.ListBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserProfileContexts {
     public final Context baseContext;
@@ -36,7 +35,7 @@ public final class UserProfileContexts {
                 userProfileContexts.shellController.addUserChangeListener(new UserChangeListener() { // from class: com.android.wm.shell.common.UserProfileContexts$onInit$1
                     @Override // com.android.wm.shell.sysui.UserChangeListener
                     public final void onUserChanged(int i, Context context2) {
-                        UserProfileContexts userProfileContexts2 = UserProfileContexts.this;
+                        UserProfileContexts userProfileContexts2 = userProfileContexts;
                         userProfileContexts2.currentProfilesContext.clear();
                         userProfileContexts2.getClass();
                         userProfileContexts2.currentProfilesContext.put(i, context2);
@@ -48,7 +47,7 @@ public final class UserProfileContexts {
 
                     @Override // com.android.wm.shell.sysui.UserChangeListener
                     public final void onUserProfilesChanged(List list) {
-                        UserProfileContexts.this.updateProfilesContexts(list);
+                        userProfileContexts.updateProfilesContexts(list);
                     }
                 });
                 int currentUser = ActivityManager.getCurrentUser();
@@ -59,6 +58,16 @@ public final class UserProfileContexts {
         }, this);
     }
 
+    public final Context getOrCreate(int i) {
+        Context context = (Context) this.currentProfilesContext.get(i);
+        if (context != null) {
+            return context;
+        }
+        Context contextCreateContextAsUser = this.baseContext.createContextAsUser(UserHandle.of(i), 0);
+        this.currentProfilesContext.set(i, contextCreateContextAsUser);
+        return contextCreateContextAsUser;
+    }
+
     public final void updateProfilesContexts(List list) {
         Iterator it = list.iterator();
         while (it.hasNext()) {
@@ -67,24 +76,26 @@ public final class UserProfileContexts {
                 this.currentProfilesContext.put(userInfo.id, this.baseContext.createContextAsUser(userInfo.getUserHandle(), 0));
             }
         }
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         int size = this.currentProfilesContext.size();
         for (int i = 0; i < size; i++) {
-            int keyAt = this.currentProfilesContext.keyAt(i);
-            if (keyAt != this.shellUserId) {
+            int iKeyAt = this.currentProfilesContext.keyAt(i);
+            if (iKeyAt != this.shellUserId) {
                 List list2 = list;
-                if (!(list2 instanceof Collection) || !list2.isEmpty()) {
+                if ((list2 instanceof Collection) && list2.isEmpty()) {
+                    listBuilderCreateListBuilder.add(Integer.valueOf(iKeyAt));
+                } else {
                     Iterator it2 = list2.iterator();
                     while (it2.hasNext()) {
-                        if (((UserInfo) it2.next()).id == keyAt) {
+                        if (((UserInfo) it2.next()).id == iKeyAt) {
                             break;
                         }
                     }
+                    listBuilderCreateListBuilder.add(Integer.valueOf(iKeyAt));
                 }
-                createListBuilder.add(Integer.valueOf(keyAt));
             }
         }
-        ListIterator listIterator = createListBuilder.build().listIterator(0);
+        ListIterator listIterator = listBuilderCreateListBuilder.build().listIterator(0);
         while (true) {
             ListBuilder.Itr itr = (ListBuilder.Itr) listIterator;
             if (!itr.hasNext()) {

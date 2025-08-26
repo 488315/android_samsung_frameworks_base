@@ -2,7 +2,6 @@ package android.app.wallpapereffectsgeneration;
 
 import android.annotation.SystemApi;
 import android.app.wallpapereffectsgeneration.ICinematicEffectListener;
-import android.app.wallpapereffectsgeneration.WallpaperEffectsGenerationManager;
 import android.os.RemoteException;
 import java.util.concurrent.Executor;
 
@@ -48,7 +47,7 @@ public final class WallpaperEffectsGenerationManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.wallpapereffectsgeneration.WallpaperEffectsGenerationManager$CinematicEffectListenerWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperEffectsGenerationManager.CinematicEffectListenerWrapper.this.lambda$onCinematicEffectGenerated$0(cinematicEffectResponse);
+                    this.f$0.lambda$onCinematicEffectGenerated$0(cinematicEffectResponse);
                 }
             });
         }

@@ -9,7 +9,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor;
 import kotlinx.serialization.descriptors.SerialDescriptorImpl;
 import kotlinx.serialization.descriptors.SerialDescriptorsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PairSerializer extends KeyValueSerializer {
     public final SerialDescriptorImpl descriptor;
@@ -19,9 +18,9 @@ public final class PairSerializer extends KeyValueSerializer {
         this.descriptor = SerialDescriptorsKt.buildClassSerialDescriptor("kotlin.Pair", new SerialDescriptor[0], new Function1() { // from class: kotlinx.serialization.internal.PairSerializer$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ClassSerialDescriptorBuilder classSerialDescriptorBuilder = (ClassSerialDescriptorBuilder) obj;
-                ClassSerialDescriptorBuilder.element$default(classSerialDescriptorBuilder, "first", KSerializer.this.getDescriptor());
+                ClassSerialDescriptorBuilder.element$default(classSerialDescriptorBuilder, "first", kSerializer.getDescriptor());
                 ClassSerialDescriptorBuilder.element$default(classSerialDescriptorBuilder, "second", kSerializer2.getDescriptor());
                 return Unit.INSTANCE;
             }

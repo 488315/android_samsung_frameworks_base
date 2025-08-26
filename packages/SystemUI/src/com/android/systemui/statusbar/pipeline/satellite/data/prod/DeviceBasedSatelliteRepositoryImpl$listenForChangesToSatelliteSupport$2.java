@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$listenForChangesToSatelliteSupport$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -47,9 +46,9 @@ final class DeviceBasedSatelliteRepositoryImpl$listenForChangesToSatelliteSuppor
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$listenForChangesToSatelliteSupport$2.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
-                    DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl2 = DeviceBasedSatelliteRepositoryImpl.this;
-                    if (booleanValue) {
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                    DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl2 = deviceBasedSatelliteRepositoryImpl;
+                    if (zBooleanValue) {
                         deviceBasedSatelliteRepositoryImpl2.getSatelliteSupport().setValue(new SatelliteSupport.Supported(satelliteManager));
                     } else {
                         deviceBasedSatelliteRepositoryImpl2.getSatelliteSupport().setValue(SatelliteSupport.NotSupported.INSTANCE);

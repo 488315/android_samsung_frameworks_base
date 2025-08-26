@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTileUserActionInteractor$resolveIntent$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Intent $intent;
@@ -45,8 +44,8 @@ final class CustomTileUserActionInteractor$resolveIntent$2 extends SuspendLambda
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        ResolveInfo resolveActivityAsUser = this.this$0.context.getPackageManager().resolveActivityAsUser(this.$intent, 0, this.$user.getIdentifier());
-        ActivityInfo activityInfo = resolveActivityAsUser != null ? resolveActivityAsUser.activityInfo : null;
+        ResolveInfo resolveInfoResolveActivityAsUser = this.this$0.context.getPackageManager().resolveActivityAsUser(this.$intent, 0, this.$user.getIdentifier());
+        ActivityInfo activityInfo = resolveInfoResolveActivityAsUser != null ? resolveInfoResolveActivityAsUser.activityInfo : null;
         if (activityInfo == null) {
             return null;
         }

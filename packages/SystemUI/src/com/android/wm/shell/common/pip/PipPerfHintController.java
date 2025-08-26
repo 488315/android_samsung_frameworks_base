@@ -11,14 +11,12 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipPerfHintController {
     public final ShellExecutor mMainExecutor;
     public final PipDisplayLayoutState mPipDisplayLayoutState;
     public final SystemPerformanceHinter mSystemPerformanceHinter;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipHighPerfSession implements AutoCloseable {
         public static final Map sActiveSessions = new WeakHashMap();
         public final String mReason;
@@ -66,7 +64,7 @@ public class PipPerfHintController {
         ((HandlerExecutor) this.mMainExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.common.pip.PipPerfHintController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                PipPerfHintController.PipHighPerfSession pipHighPerfSession2 = PipPerfHintController.PipHighPerfSession.this;
+                PipPerfHintController.PipHighPerfSession pipHighPerfSession2 = pipHighPerfSession;
                 Consumer consumer2 = consumer;
                 if (((WeakHashMap) PipPerfHintController.PipHighPerfSession.sActiveSessions).containsKey(pipHighPerfSession2)) {
                     pipHighPerfSession2.close();

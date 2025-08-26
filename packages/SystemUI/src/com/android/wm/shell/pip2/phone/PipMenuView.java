@@ -10,6 +10,7 @@ import android.app.RemoteAction;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
@@ -22,7 +23,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import android.util.Pair;
 import android.util.Property;
 import android.view.IWindow;
-import android.view.IWindowSession;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,7 +33,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.window.InputTransferToken;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
 import com.android.wm.shell.common.HandlerExecutor;
@@ -50,7 +49,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipMenuView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -115,18 +113,18 @@ public class PipMenuView extends FrameLayout {
         Drawable drawable = ((FrameLayout) this).mContext.getDrawable(R.drawable.pip_menu_background);
         this.mBackgroundDrawable = drawable;
         drawable.setAlpha(0);
-        View findViewById = findViewById(R.id.background);
-        this.mViewRoot = findViewById;
-        findViewById.setBackground(drawable);
-        View findViewById2 = findViewById(R.id.menu_container);
-        this.mMenuContainer = findViewById2;
-        findViewById2.setAlpha(0.0f);
+        View viewFindViewById = findViewById(R.id.background);
+        this.mViewRoot = viewFindViewById;
+        viewFindViewById.setBackground(drawable);
+        View viewFindViewById2 = findViewById(R.id.menu_container);
+        this.mMenuContainer = viewFindViewById2;
+        viewFindViewById2.setAlpha(0.0f);
         this.mTopEndContainer = findViewById(R.id.top_end_container);
-        View findViewById3 = findViewById(R.id.settings);
-        this.mSettingsButton = findViewById3;
-        findViewById3.setAlpha(0.0f);
+        View viewFindViewById3 = findViewById(R.id.settings);
+        this.mSettingsButton = viewFindViewById3;
+        viewFindViewById3.setAlpha(0.0f);
         final int i = 0;
-        findViewById3.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda1
+        viewFindViewById3.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda1
             public final /* synthetic */ PipMenuView f$0;
 
             {
@@ -160,11 +158,11 @@ public class PipMenuView extends FrameLayout {
                 }
             }
         });
-        View findViewById4 = findViewById(R.id.dismiss);
-        this.mDismissButton = findViewById4;
-        findViewById4.setAlpha(0.0f);
+        View viewFindViewById4 = findViewById(R.id.dismiss);
+        this.mDismissButton = viewFindViewById4;
+        viewFindViewById4.setAlpha(0.0f);
         final int i2 = 1;
-        findViewById4.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda1
+        viewFindViewById4.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda1
             public final /* synthetic */ PipMenuView f$0;
 
             {
@@ -286,12 +284,12 @@ public class PipMenuView extends FrameLayout {
             this.mMenuContainerAnimator = new AnimatorSet();
             View view = this.mMenuContainer;
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), 0.0f);
-            ofFloat.addUpdateListener(this.mMenuBgUpdateListener);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), 0.0f);
+            objectAnimatorOfFloat.addUpdateListener(this.mMenuBgUpdateListener);
             View view2 = this.mSettingsButton;
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view2, (Property<View, Float>) property, view2.getAlpha(), 0.0f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view2, (Property<View, Float>) property, view2.getAlpha(), 0.0f);
             View view3 = this.mDismissButton;
-            this.mMenuContainerAnimator.playTogether(ofFloat, ofFloat2, ObjectAnimator.ofFloat(view3, (Property<View, Float>) property, view3.getAlpha(), 0.0f));
+            this.mMenuContainerAnimator.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, ObjectAnimator.ofFloat(view3, (Property<View, Float>) property, view3.getAlpha(), 0.0f));
             this.mMenuContainerAnimator.setInterpolator(Interpolators.ALPHA_OUT);
             AnimatorSet animatorSet = this.mMenuContainerAnimator;
             if (i == 0) {
@@ -335,7 +333,7 @@ public class PipMenuView extends FrameLayout {
         if (i != phonePipMenuController.mMenuState) {
             phonePipMenuController.mListeners.forEach(new Consumer() { // from class: com.android.wm.shell.pip2.phone.PhonePipMenuController$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
+                public final void accept(Object obj) throws Resources.NotFoundException {
                     int rotation;
                     int i2 = i;
                     boolean z2 = z;
@@ -364,7 +362,6 @@ public class PipMenuView extends FrameLayout {
             });
             PhonePipMenuController.AnonymousClass1 anonymousClass1 = phonePipMenuController.mMediaActionListener;
             PipMediaController pipMediaController = phonePipMenuController.mMediaController;
-            boolean z2 = true;
             if (i != 1) {
                 pipMediaController.getClass();
                 anonymousClass1.onMediaActionsChanged(EmptyList.INSTANCE);
@@ -373,13 +370,13 @@ public class PipMenuView extends FrameLayout {
                 pipMediaController.mActionListeners.add(anonymousClass1);
                 anonymousClass1.onMediaActionsChanged(pipMediaController.getMediaActions());
             }
+            boolean z2 = phonePipMenuController.mIsImeVisible;
+            boolean z3 = (z2 || i == 0) ? false : true;
+            if (z2) {
+                return;
+            }
             try {
-                IWindowSession windowSession = WindowManagerGlobal.getWindowSession();
-                InputTransferToken focusGrantToken = phonePipMenuController.mSystemWindows.getFocusGrantToken(phonePipMenuController.mPipMenuView);
-                if (i == 0) {
-                    z2 = false;
-                }
-                windowSession.grantEmbeddedWindowFocus((IWindow) null, focusGrantToken, z2);
+                WindowManagerGlobal.getWindowSession().grantEmbeddedWindowFocus((IWindow) null, phonePipMenuController.mSystemWindows.getFocusGrantToken(phonePipMenuController.mPipMenuView), z3);
             } catch (RemoteException e) {
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[4]) {
                     ProtoLogImpl_1771455215.e(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 8973160549888572099L, 0, "PhonePipMenuController", String.valueOf(e));
@@ -421,9 +418,9 @@ public class PipMenuView extends FrameLayout {
         } else {
             viewGroup2.setVisibility(0);
             if (this.mActionsGroup != null) {
-                LayoutInflater from = LayoutInflater.from(((FrameLayout) this).mContext);
+                LayoutInflater layoutInflaterFrom = LayoutInflater.from(((FrameLayout) this).mContext);
                 while (this.mActionsGroup.getChildCount() < ((ArrayList) this.mActions).size()) {
-                    this.mActionsGroup.addView((PipMenuActionView) from.inflate(R.layout.pip2_menu_action, (ViewGroup) this.mActionsGroup, false));
+                    this.mActionsGroup.addView((PipMenuActionView) layoutInflaterFrom.inflate(R.layout.pip2_menu_action, (ViewGroup) this.mActionsGroup, false));
                 }
                 int i2 = 0;
                 while (true) {
@@ -452,7 +449,7 @@ public class PipMenuView extends FrameLayout {
                         remoteAction.getIcon().loadDrawableAsync(((FrameLayout) this).mContext, new Icon.OnDrawableLoadedListener() { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda5
                             @Override // android.graphics.drawable.Icon.OnDrawableLoadedListener
                             public final void onDrawableLoaded(Drawable drawable) {
-                                PipMenuActionView pipMenuActionView2 = PipMenuActionView.this;
+                                PipMenuActionView pipMenuActionView2 = pipMenuActionView;
                                 int i5 = PipMenuView.$r8$clinit;
                                 if (drawable != null) {
                                     drawable.setTint(-1);
@@ -466,8 +463,8 @@ public class PipMenuView extends FrameLayout {
                     if (remoteAction.isEnabled()) {
                         pipMenuActionView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.pip2.phone.PipMenuView$$ExternalSyntheticLambda6
                             @Override // android.view.View.OnClickListener
-                            public final void onClick(View view) {
-                                PipMenuView pipMenuView = PipMenuView.this;
+                            public final void onClick(View view) throws PendingIntent.CanceledException {
+                                PipMenuView pipMenuView = this.f$0;
                                 RemoteAction remoteAction3 = remoteAction;
                                 boolean z3 = z2;
                                 int i5 = PipMenuView.$r8$clinit;

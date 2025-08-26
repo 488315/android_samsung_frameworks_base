@@ -4,15 +4,14 @@ import androidx.lifecycle.MediatorLiveData;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Transformations {
     public static final MediatorLiveData map(LiveData liveData, final Function1 function1) {
         final MediatorLiveData mediatorLiveData = new MediatorLiveData();
         if (liveData.isInitialized()) {
-            mediatorLiveData.setValue(function1.mo779invoke(liveData.getValue()));
+            mediatorLiveData.setValue(function1.mo781invoke(liveData.getValue()));
         }
-        Transformations$sam$androidx_lifecycle_Observer$0 transformations$sam$androidx_lifecycle_Observer$0 = new Transformations$sam$androidx_lifecycle_Observer$0(new Function1() { // from class: androidx.lifecycle.Transformations$map$1
+        Transformations$sam$androidx_lifecycle_Observer$0 transformations$sam$androidx_lifecycle_Observer$0 = new Transformations$sam$androidx_lifecycle_Observer$0(new Function1() { // from class: androidx.lifecycle.Transformations.map.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -20,8 +19,8 @@ public abstract class Transformations {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                MediatorLiveData.this.setValue(function1.mo779invoke(obj));
+            public final Object mo781invoke(Object obj) {
+                mediatorLiveData.setValue(function1.mo781invoke(obj));
                 return Unit.INSTANCE;
             }
         });

@@ -23,7 +23,6 @@ import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTilingDividerWindowManager extends WindowlessWindowManager implements View.OnLayoutChangeListener {
     public final Context displayContext;
@@ -40,7 +39,6 @@ public final class DesktopTilingDividerWindowManager extends WindowlessWindowMan
     public SurfaceControlViewHost viewHost;
     public final String windowName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -113,17 +111,17 @@ public final class DesktopTilingDividerWindowManager extends WindowlessWindowMan
         float f = this.maxRoundedCornerRadius;
         Path path = new Path();
         path.setFillType(Path.FillType.WINDING);
-        float height = rect2.height() / 2.0f;
-        float width = ((rect2.width() / 2.0f) + f) - (rect.width() / 2.0f);
-        float width2 = width + rect.width();
-        float width3 = height - (rect2.width() / 2.0f);
-        float width4 = width3 + rect2.width();
-        float height2 = height - (rect.height() / 2.0f);
-        float height3 = rect2.height() - f;
+        float fHeight = rect2.height() / 2.0f;
+        float fWidth = ((rect2.width() / 2.0f) + f) - (rect.width() / 2.0f);
+        float fWidth2 = fWidth + rect.width();
+        float fWidth3 = fHeight - (rect2.width() / 2.0f);
+        float fWidth4 = fWidth3 + rect2.width();
+        float fHeight2 = fHeight - (rect.height() / 2.0f);
+        float fHeight3 = rect2.height() - f;
         Path.Direction direction = Path.Direction.CCW;
-        path.addRect(width, height2, width2, height2 + rect.height(), direction);
-        path.addRect(width3, f, width4, height3, direction);
-        Rect rect3 = new Rect((int) width, (int) f, (int) width2, (int) height3);
+        path.addRect(fWidth, fHeight2, fWidth2, fHeight2 + rect.height(), direction);
+        path.addRect(fWidth3, f, fWidth4, fHeight3, direction);
+        Rect rect3 = new Rect((int) fWidth, (int) f, (int) fWidth2, (int) fHeight3);
         Region region = new Region();
         region.setPath(path, new Region(rect3));
         SurfaceControlViewHost surfaceControlViewHost = this.viewHost;

@@ -12,7 +12,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class GuidedActionEditText extends EditText {
     public final NoPaddingDrawable mNoPaddingDrawable;
@@ -67,7 +66,6 @@ public class GuidedActionEditText extends EditText {
         setBackground(noPaddingDrawable);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoPaddingDrawable extends Drawable {
         @Override // android.graphics.drawable.Drawable
         public final int getOpacity() {

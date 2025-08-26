@@ -2,10 +2,13 @@ package com.android.systemui.statusbar.phone;
 
 import android.app.ActivityManager;
 import android.app.AlarmManager;
+import android.app.AutomaticZenRule;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -23,8 +26,10 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import android.telecom.TelecomManager;
 import android.util.ArrayMap;
 import android.util.Log;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.lifecycle.Observer;
+import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
@@ -76,6 +81,7 @@ import com.android.systemui.statusbar.policy.ZenModeController;
 import com.android.systemui.statusbar.policy.ZenModeControllerImpl;
 import com.android.systemui.statusbar.policy.domain.interactor.ZenModeInteractor;
 import com.android.systemui.util.DeviceState;
+import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.RingerModeTracker;
 import com.android.systemui.util.kotlin.JavaAdapter;
 import com.android.systemui.util.time.DateFormatUtil;
@@ -88,13 +94,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, CommandQueue.Callbacks, RotationLockController.RotationLockControllerCallback, DataSaverController.Listener, ZenModeController.Callback, DeviceProvisionedController.DeviceProvisionedListener, KeyguardStateController.Callback, PrivacyItemController.Callback, LocationController.LocationChangeCallback, RecordingController.RecordingStateChangeCallback {
     public static final boolean DEBUG = Log.isLoggable("PhoneStatusBarPolicy", 3);
@@ -176,13 +182,22 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
     };
     public final AnonymousClass2 mZenControllerCallback = new ZenModeController.Callback() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy.2
         @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
+        public final void onConfigChanged(ZenModeConfig zenModeConfig) {
+            Log.d("PhoneStatusBarPolicy", "onConfigChanged");
+            boolean z = PhoneStatusBarPolicy.DEBUG;
+            PhoneStatusBarPolicy.this.updateVolumeZen();
+        }
+
+        @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
         public final void onConsolidatedPolicyChanged(NotificationManager.Policy policy) {
+            Log.d("PhoneStatusBarPolicy", "onConsolidatedPolicyChanged");
             boolean z = PhoneStatusBarPolicy.DEBUG;
             PhoneStatusBarPolicy.this.updateVolumeZen();
         }
 
         @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
         public final void onZenChanged(int i) {
+            Log.d("PhoneStatusBarPolicy", "onZenChanged");
             boolean z = PhoneStatusBarPolicy.DEBUG;
             PhoneStatusBarPolicy.this.updateVolumeZen();
         }
@@ -206,7 +221,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
     };
     public final AnonymousClass5 mCastCallback = new CastController.Callback() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy.5
         @Override // com.android.systemui.statusbar.policy.CastController.Callback
-        public final void onCastDevicesChanged() {
+        public final void onCastDevicesChanged() throws Resources.NotFoundException {
             PhoneStatusBarPolicy phoneStatusBarPolicy = PhoneStatusBarPolicy.this;
             ArrayList arrayList = (ArrayList) ((CastControllerImpl) phoneStatusBarPolicy.mCast).getCastDevices();
             int size = arrayList.size();
@@ -303,8 +318,8 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
                 case "com.android.systemui.action.dnd_off":
                     Bundle extras = intent.getExtras();
                     if (extras != null) {
-                        String[] split = context.getPackageManager().getNameForUid(extras.getInt(NetworkAnalyticsConstants.DataPoints.UID)).split(":");
-                        if (split.length != 0 && split[0].equals("android.uid.systemui")) {
+                        String[] strArrSplit = context.getPackageManager().getNameForUid(extras.getInt(NetworkAnalyticsConstants.DataPoints.UID)).split(":");
+                        if (strArrSplit.length != 0 && strArrSplit[0].equals("android.uid.systemui")) {
                             PhoneStatusBarPolicy.this.mNotificationManager.setZenMode(0, null, SubRoom.EXTRA_VALUE_NOTIFICATION, true);
                             break;
                         }
@@ -323,7 +338,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
     };
     public final AnonymousClass10 mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy.10
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onLocaleListChanged() {
+        public final void onLocaleListChanged() throws Resources.NotFoundException {
             final PhoneStatusBarPolicy phoneStatusBarPolicy = PhoneStatusBarPolicy.this;
             String string = phoneStatusBarPolicy.mResources.getString(R.string.status_bar_alarm);
             StatusBarIconControllerImpl statusBarIconControllerImpl = (StatusBarIconControllerImpl) phoneStatusBarPolicy.mIconController;
@@ -334,7 +349,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
             statusBarIconControllerImpl.setIconContentDescription(phoneStatusBarPolicy.mDevicePolicyManager.getResources().getString("SystemUi.STATUS_BAR_WORK_ICON_ACCESSIBILITY", new Supplier() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    return PhoneStatusBarPolicy.this.mResources.getString(R.string.accessibility_managed_profile);
+                    return phoneStatusBarPolicy.mResources.getString(R.string.accessibility_managed_profile);
                 }
             }), phoneStatusBarPolicy.mSlotManagedProfile);
             statusBarIconControllerImpl.setIconContentDescription(phoneStatusBarPolicy.mResources.getString(R.string.accessibility_data_saver_on), phoneStatusBarPolicy.mSlotDataSaver);
@@ -347,7 +362,6 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$11, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass11 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$privacy$PrivacyType;
@@ -370,7 +384,6 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$3, reason: invalid class name */
     class AnonymousClass3 implements UserTracker.Callback {
         public AnonymousClass3() {
@@ -387,7 +400,6 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$7, reason: invalid class name */
     public class AnonymousClass7 {
         public AnonymousClass7() {
@@ -435,26 +447,26 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         this.mJavaAdapter = javaAdapter;
         this.mConfigurationController = configurationController;
         this.mExt = phoneStatusBarPolicyExt;
-        this.mSlotCast = resources.getString(17043265);
-        this.mSlotConnectedDisplay = resources.getString(17043268);
-        this.mSlotHotspot = resources.getString(17043275);
-        this.mSlotBluetooth = resources.getString(17043260);
-        this.mSlotBluetoothConnected = resources.getString(17043261);
-        this.mSlotTty = resources.getString(17043302);
-        this.mSlotZen = resources.getString(17043306);
-        this.mSlotMute = resources.getString(17043286);
-        this.mSlotVibrate = resources.getString(17043303);
-        this.mSlotAlarmClock = resources.getString(17043258);
-        this.mSlotManagedProfile = resources.getString(17043281);
-        this.mSlotRotate = resources.getString(17043294);
-        this.mSlotHeadset = resources.getString(17043274);
-        this.mSlotDataSaver = resources.getString(17043270);
-        this.mSlotLocation = resources.getString(17043280);
-        this.mSlotMicrophone = resources.getString(17043282);
-        this.mSlotCamera = resources.getString(17043264);
-        this.mSlotSensorsOff = resources.getString(17043297);
-        this.mSlotScreenRecord = resources.getString(17043295);
-        this.mSlotBTTethering = resources.getString(17043262);
+        this.mSlotCast = resources.getString(17043269);
+        this.mSlotConnectedDisplay = resources.getString(17043272);
+        this.mSlotHotspot = resources.getString(17043279);
+        this.mSlotBluetooth = resources.getString(17043264);
+        this.mSlotBluetoothConnected = resources.getString(17043265);
+        this.mSlotTty = resources.getString(17043306);
+        this.mSlotZen = resources.getString(17043310);
+        this.mSlotMute = resources.getString(17043290);
+        this.mSlotVibrate = resources.getString(17043307);
+        this.mSlotAlarmClock = resources.getString(17043262);
+        this.mSlotManagedProfile = resources.getString(17043285);
+        this.mSlotRotate = resources.getString(17043298);
+        this.mSlotHeadset = resources.getString(17043278);
+        this.mSlotDataSaver = resources.getString(17043274);
+        this.mSlotLocation = resources.getString(17043284);
+        this.mSlotMicrophone = resources.getString(17043286);
+        this.mSlotCamera = resources.getString(17043268);
+        this.mSlotSensorsOff = resources.getString(17043301);
+        this.mSlotScreenRecord = resources.getString(17043299);
+        this.mSlotBTTethering = resources.getString(17043266);
         this.mDisplayId = i;
         this.mActivityManager = activityManager;
     }
@@ -476,19 +488,19 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    public final String getDndNowBarSummary(ZenModeConfig zenModeConfig, NotificationManager.Policy policy, boolean z) {
+    public final String getDndNowBarSummary(ZenModeConfig zenModeConfig, NotificationManager.Policy policy, boolean z) throws Resources.NotFoundException {
         String string;
         Uri uri;
         StringBuilder sb = new StringBuilder();
         ZenModeControllerImpl zenModeControllerImpl = (ZenModeControllerImpl) this.mZenController;
         Context context = zenModeControllerImpl.mContext;
-        String str = "";
+        String string2 = "";
         if (zenModeConfig == null || policy == null) {
             return "";
         }
         ZenModeConfig.ZenRule zenRule = zenModeConfig.manualRule;
         if (zenRule != null && zenRule.conditionId == null) {
-            str = this.mResources.getString(R.string.sec_noti_dnd_turned_on);
+            string2 = this.mResources.getString(R.string.sec_noti_dnd_turned_on);
         } else if (zenRule == null || (uri = zenRule.conditionId) == null || !ZenModeConfig.isValidCountdownConditionId(uri)) {
             ArrayMap arrayMap = zenModeConfig.automaticRules;
             if (arrayMap != null && !arrayMap.isEmpty()) {
@@ -502,30 +514,30 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
                     if (zenRule2.isAutomaticActive() && description != null && description.equals(zenRule2.name)) {
                         if (ZenModeConfig.isValidScheduleConditionId(zenRule2.conditionId)) {
                             long nextChangeTime = ZenModeConfig.toScheduleCalendar(zenRule2.conditionId).getNextChangeTime(System.currentTimeMillis());
-                            boolean isToday = ZenModeConfig.isToday(nextChangeTime);
-                            CharSequence formattedTime = ZenModeConfig.getFormattedTime(context, nextChangeTime, isToday, ((UserTrackerImpl) zenModeControllerImpl.mUserTracker).getUserId());
-                            string = isToday ? this.mResources.getString(R.string.sec_noti_dnd_on_until_today, formattedTime) : this.mResources.getString(R.string.sec_noti_dnd_on_until_tomorrow, formattedTime);
+                            boolean zIsToday = ZenModeConfig.isToday(nextChangeTime);
+                            CharSequence formattedTime = ZenModeConfig.getFormattedTime(context, nextChangeTime, zIsToday, ((UserTrackerImpl) zenModeControllerImpl.mUserTracker).getUserId());
+                            string = zIsToday ? this.mResources.getString(R.string.sec_noti_dnd_on_until_today, formattedTime) : this.mResources.getString(R.string.sec_noti_dnd_on_until_tomorrow, formattedTime);
                         } else {
                             string = this.mResources.getString(R.string.sec_noti_dnd_turned_on);
                         }
-                        str = string;
+                        string2 = string;
                         sb.append(zenRule2.pkg.equals("android") ? this.mResources.getString(R.string.sec_noti_dnd_turned_on_by_app_or_schedule, zenRule2.name) : this.mResources.getString(R.string.sec_noti_dnd_turned_on_by_app_and_schedule, getApplicationNameFromPackage(zenRule2.pkg.equals(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG) ? "com.samsung.android.app.routines" : zenRule2.pkg), zenRule2.name));
                         sb.append("\n");
                     }
                 }
             }
         } else {
-            long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(zenModeConfig.manualRule.conditionId);
-            boolean isToday2 = ZenModeConfig.isToday(tryParseCountdownConditionId);
-            CharSequence formattedTime2 = ZenModeConfig.getFormattedTime(context, tryParseCountdownConditionId, ZenModeConfig.isToday(tryParseCountdownConditionId), ((UserTrackerImpl) zenModeControllerImpl.mUserTracker).getUserId());
-            str = isToday2 ? this.mResources.getString(R.string.sec_noti_dnd_on_until_today, formattedTime2) : this.mResources.getString(R.string.sec_noti_dnd_on_until_tomorrow, formattedTime2);
-            String str2 = zenModeConfig.manualRule.enabler;
-            if (str2 != null) {
-                sb.append(this.mResources.getString(R.string.sec_noti_dnd_turned_on_by_app_or_schedule, getApplicationNameFromPackage(str2)) + "\n");
+            long jTryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(zenModeConfig.manualRule.conditionId);
+            boolean zIsToday2 = ZenModeConfig.isToday(jTryParseCountdownConditionId);
+            CharSequence formattedTime2 = ZenModeConfig.getFormattedTime(context, jTryParseCountdownConditionId, ZenModeConfig.isToday(jTryParseCountdownConditionId), ((UserTrackerImpl) zenModeControllerImpl.mUserTracker).getUserId());
+            string2 = zIsToday2 ? this.mResources.getString(R.string.sec_noti_dnd_on_until_today, formattedTime2) : this.mResources.getString(R.string.sec_noti_dnd_on_until_tomorrow, formattedTime2);
+            String str = zenModeConfig.manualRule.enabler;
+            if (str != null) {
+                sb.append(this.mResources.getString(R.string.sec_noti_dnd_turned_on_by_app_or_schedule, getApplicationNameFromPackage(str)) + "\n");
             }
         }
         if (z) {
-            return str;
+            return string2;
         }
         int i = policy.priorityCategories;
         boolean z2 = ((i & 8) == 0 && (i & 16) == 0) ? false : true;
@@ -542,9 +554,9 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
                 sb.append(this.mResources.getString(R.string.sec_noti_dnd_alert_muted));
             }
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "\n");
-        m.append(sb.toString());
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string2, "\n");
+        sbM.append(sb.toString());
+        return sbM.toString();
     }
 
     public final void init() {
@@ -562,7 +574,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         Observer observer = new Observer() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda4
             @Override // androidx.lifecycle.Observer
             public final void onChanged(Object obj) {
-                PhoneStatusBarPolicy phoneStatusBarPolicy = PhoneStatusBarPolicy.this;
+                PhoneStatusBarPolicy phoneStatusBarPolicy = this.f$0;
                 phoneStatusBarPolicy.mHandler.post(new PhoneStatusBarPolicy$$ExternalSyntheticLambda2(phoneStatusBarPolicy, 1));
             }
         };
@@ -659,7 +671,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         this.mJavaAdapter.alwaysCollectFlow(((ConnectedDisplayInteractorImpl) this.mConnectedDisplayInteractor).connectedDisplayState, new Consumer() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                PhoneStatusBarPolicy phoneStatusBarPolicy = PhoneStatusBarPolicy.this;
+                PhoneStatusBarPolicy phoneStatusBarPolicy = this.f$0;
                 ConnectedDisplayInteractor.State state = (ConnectedDisplayInteractor.State) obj;
                 boolean z2 = PhoneStatusBarPolicy.DEBUG;
                 phoneStatusBarPolicy.getClass();
@@ -678,7 +690,7 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
             statusBarIconControllerImpl11.mStatusBarIconList.mViewOnlySlots.forEach(new Consumer() { // from class: com.android.systemui.statusbar.phone.ui.StatusBarIconControllerImpl$$ExternalSyntheticLambda6
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    StatusBarIconControllerImpl statusBarIconControllerImpl12 = StatusBarIconControllerImpl.this;
+                    StatusBarIconControllerImpl statusBarIconControllerImpl12 = statusBarIconControllerImpl11;
                     String str2 = StatusBarIconControllerImpl.EXTERNAL_SLOT_SUFFIX;
                     statusBarIconControllerImpl12.getClass();
                     statusBarIconControllerImpl12.setIconVisibility(((StatusBarIconList.Slot) obj).mName, true);
@@ -712,9 +724,9 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         PhoneStatusBarPolicyExt phoneStatusBarPolicyExt = this.mExt;
         PhoneStatusBarPolicyExt$removeLocationIconRunnable$1 phoneStatusBarPolicyExt$removeLocationIconRunnable$1 = phoneStatusBarPolicyExt.removeLocationIconRunnable;
         Handler handler = phoneStatusBarPolicyExt.handler;
-        boolean hasCallbacks = handler.hasCallbacks(phoneStatusBarPolicyExt$removeLocationIconRunnable$1);
+        boolean zHasCallbacks = handler.hasCallbacks(phoneStatusBarPolicyExt$removeLocationIconRunnable$1);
         PhoneStatusBarPolicyExt$removeLocationIconRunnable$1 phoneStatusBarPolicyExt$removeLocationIconRunnable$12 = phoneStatusBarPolicyExt.removeLocationIconRunnable;
-        if (hasCallbacks) {
+        if (zHasCallbacks) {
             handler.removeCallbacks(phoneStatusBarPolicyExt$removeLocationIconRunnable$12);
         }
         PhoneStatusBarPolicyExt$turnOffTimeToEnsureLocationIconDisplay$1 phoneStatusBarPolicyExt$turnOffTimeToEnsureLocationIconDisplay$1 = phoneStatusBarPolicyExt.turnOffTimeToEnsureLocationIconDisplay;
@@ -763,12 +775,12 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         LogLevel logLevel = LogLevel.INFO;
         PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = privacyLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
         logMessageImpl.bool3 = z3;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     @Override // com.android.systemui.statusbar.policy.RotationLockController.RotationLockControllerCallback
@@ -792,40 +804,40 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
 
     @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
     public final void onUserSetupChanged() {
-        boolean isCurrentUserSetup = ((DeviceProvisionedControllerImpl) this.mProvisionedController).isCurrentUserSetup();
-        if (this.mCurrentUserSetup == isCurrentUserSetup) {
+        boolean zIsCurrentUserSetup = ((DeviceProvisionedControllerImpl) this.mProvisionedController).isCurrentUserSetup();
+        if (this.mCurrentUserSetup == zIsCurrentUserSetup) {
             return;
         }
-        this.mCurrentUserSetup = isCurrentUserSetup;
+        this.mCurrentUserSetup = zIsCurrentUserSetup;
         updateAlarm();
     }
 
     public final void updateAlarm() {
         List nextAlarmClocks = this.mAlarmManager.getNextAlarmClocks(-2);
         boolean z = false;
-        boolean anyMatch = (nextAlarmClocks == null || nextAlarmClocks.isEmpty()) ? false : nextAlarmClocks.stream().anyMatch(new Predicate() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda1
+        boolean zAnyMatch = (nextAlarmClocks == null || nextAlarmClocks.isEmpty()) ? false : nextAlarmClocks.stream().anyMatch(new Predicate() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                PhoneStatusBarPolicy phoneStatusBarPolicy = PhoneStatusBarPolicy.this;
+                boolean zEquals;
+                PhoneStatusBarPolicy phoneStatusBarPolicy = this.f$0;
                 boolean z2 = PhoneStatusBarPolicy.DEBUG;
                 phoneStatusBarPolicy.getClass();
                 PendingIntent showIntent = ((AlarmManager.AlarmClockInfo) obj).getShowIntent();
                 if (showIntent != null) {
                     String creatorPackage = showIntent.getCreatorPackage();
                     if ("com.sec.android.app.clockpackage".equals(creatorPackage)) {
-                        equals = showIntent.getIntent() != null ? !r3.getBooleanExtra("dontShowAlarmIcon", false) : true;
+                        zEquals = showIntent.getIntent() != null ? !r3.getBooleanExtra("dontShowAlarmIcon", false) : true;
                     } else {
-                        equals = "com.google.android.deskclock".equals(creatorPackage);
+                        zEquals = "com.google.android.deskclock".equals(creatorPackage);
                     }
-                    if (equals) {
+                    if (zEquals) {
                         return true;
                     }
                 }
                 return false;
             }
         });
-        if (this.mCurrentUserSetup && anyMatch) {
+        if (this.mCurrentUserSetup && zAnyMatch) {
             z = true;
         }
         ((StatusBarIconControllerImpl) this.mIconController).setIconVisibility(this.mSlotAlarmClock, z);
@@ -868,23 +880,107 @@ public class PhoneStatusBarPolicy implements SBluetoothController.SCallback, Com
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0198  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x01b1  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x01d7  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x01ef  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01fe  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01a9  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x00b3  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x01ea  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateVolumeZen() {
-        /*
-            Method dump skipped, instructions count: 545
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.PhoneStatusBarPolicy.updateVolumeZen():void");
+        boolean z;
+        String string;
+        int i;
+        boolean z2;
+        Log.d("PhoneStatusBarPolicy", "updateVolumeZen: NOTI_DND_ONGOING_ALERT");
+        Log.d("PhoneStatusBarPolicy", " updateVolumeZenTW");
+        Log.d("PhoneStatusBarPolicy", "updateVolumeZenTW: NOTI_DND_ONGOING_ALERTNOTI_DND_ONGOING_ALERTNOTI_DND_ONGOING_ALERT");
+        Context context = ((ZenModeControllerImpl) this.mZenController).mContext;
+        if (this.mNotificationManager == null) {
+            this.mNotificationManager = (NotificationManager) context.getSystemService(SubRoom.EXTRA_VALUE_NOTIFICATION);
+        }
+        ZenModeControllerImpl zenModeControllerImpl = (ZenModeControllerImpl) this.mZenController;
+        ZenModeConfig zenModeConfig = zenModeControllerImpl.mConfig;
+        int i2 = zenModeControllerImpl.mZenMode;
+        ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "zen:", "PhoneStatusBarPolicy");
+        boolean z3 = true;
+        boolean z4 = false;
+        if (i2 != 0) {
+            boolean z5 = false;
+            for (Map.Entry<String, AutomaticZenRule> entry : this.mNotificationManager.getAutomaticZenRules().entrySet()) {
+                AutomaticZenRule value = entry.getValue();
+                StringBuilder sb = new StringBuilder("rule=");
+                sb.append(value);
+                sb.append(", id=");
+                ExifInterface$$ExternalSyntheticOutline0.m(sb, entry.getKey(), "PhoneStatusBarPolicy");
+                int automaticZenRuleState = this.mNotificationManager.getAutomaticZenRuleState(entry.getKey());
+                String packageName = value.getOwner() == null ? value.getConfigurationActivity() == null ? "" : value.getConfigurationActivity().getPackageName() : value.getOwner().getPackageName();
+                if (automaticZenRuleState == 1 && ((HashSet) this.DND_MODE_PACKAGES).contains(packageName)) {
+                    z5 = true;
+                }
+            }
+            z = z5;
+        }
+        if (i2 == 0 || z) {
+            this.mNotificationManager.cancelAsUser("noti_DoNotDisturb", 1006831526, UserHandle.ALL);
+            Log.d("PhoneStatusBarPolicy", "ZenCanceled");
+        } else {
+            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(context, 0, new Intent().setComponent(new ComponentName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.Settings$ZenModeSettingsActivity")).setAction("android.intent.action.MAIN").setFlags(268468224), 201326592, null, UserHandle.CURRENT);
+            Intent intent = new Intent();
+            intent.setAction("com.android.systemui.action.dnd_off");
+            intent.putExtra(NetworkAnalyticsConstants.DataPoints.UID, context.getApplicationInfo().uid);
+            Notification.Builder builderAddAction = new Notification.Builder(context, NotificationChannels.ZEN_ONGOING).setContentTitle(this.mResources.getString(R.string.sec_noti_dnd_text)).setSmallIcon(R.drawable.stat_notify_dormant_mode).setOngoing(true).setShowWhen(false).setVisibility(1).setColor(-14979849).addAction(0, this.mResources.getString(R.string.sec_noti_dnd_turn_off), PendingIntent.getBroadcast(context, 0, intent, 335544320));
+            builderAddAction.setContentIntent(activityAsUser);
+            NotificationManager.Policy notificationPolicy = this.mNotificationManager.getNotificationPolicy();
+            builderAddAction.setContentText(getDndNowBarSummary(zenModeConfig, notificationPolicy, true));
+            Bundle bundle = new Bundle();
+            bundle.putInt("android.ongoingActivityNoti.actionType", 1);
+            bundle.putInt("android.ongoingActivityNoti.chipBgColor", -14979849);
+            bundle.putString("android.ongoingActivityNoti.description", getDndNowBarSummary(zenModeConfig, notificationPolicy, false));
+            bundle.putBoolean("android.showSmallIcon", true);
+            builderAddAction.setExtras(bundle);
+            Notification notificationBuild = builderAddAction.build();
+            notificationBuild.semPriority |= 10;
+            this.mNotificationManager.notifyAsUser("noti_DoNotDisturb", 1006831526, notificationBuild, UserHandle.ALL);
+            Log.d("PhoneStatusBarPolicy", "ZenNotifier");
+        }
+        if (((ZenModeControllerImpl) this.mZenController).mZenMode != 0) {
+            string = this.mResources.getString(R.string.noti_dnd_title);
+            Log.d("PhoneStatusBarPolicy", "ZenNotifier");
+            i = R.drawable.stat_sys_do_not_disturb_mode;
+            z2 = true;
+        } else {
+            Log.d("PhoneStatusBarPolicy", "ZenCanceled");
+            string = null;
+            i = 0;
+            z2 = false;
+        }
+        if (z2) {
+            ((StatusBarIconControllerImpl) this.mIconController).setIcon(string, this.mSlotZen, i);
+        }
+        if (z2 != this.mZenVisible) {
+            ((StatusBarIconControllerImpl) this.mIconController).setIconVisibility(this.mSlotZen, z2);
+            this.mZenVisible = z2;
+        }
+        Integer num = (Integer) this.mRingerModeTracker.getRingerModeInternal().getValue();
+        if (num == null) {
+            z3 = false;
+        } else if (num.intValue() != 1) {
+            if (num.intValue() == 0) {
+                z4 = true;
+                z3 = false;
+            }
+        }
+        if (z3 != this.mVibrateVisible) {
+            ((StatusBarIconControllerImpl) this.mIconController).setIconVisibility(this.mSlotVibrate, z3);
+            this.mVibrateVisible = z3;
+        }
+        if (z4 != this.mMuteVisible) {
+            ((StatusBarIconControllerImpl) this.mIconController).setIconVisibility(this.mSlotMute, z4);
+            this.mMuteVisible = z4;
+        }
+        StringBuilder sb2 = new StringBuilder("updateZen- mVibrateVisible: ");
+        sb2.append(this.mVibrateVisible);
+        sb2.append(", mMuteVisible: ");
+        KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb2, this.mMuteVisible, "PhoneStatusBarPolicy");
     }
 
     @Override // com.android.systemui.statusbar.policy.SBluetoothController.SCallback

@@ -9,11 +9,9 @@ import com.android.systemui.people.PeopleProvider;
 import com.android.systemui.plank.protocol.TestProtocolProvider;
 import com.android.systemui.statusbar.KeyguardSecAffordanceView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ReferenceSysUIComponent extends SysUIComponent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Builder extends SysUIComponent.Builder {
     }
 

@@ -56,9 +56,9 @@ public interface IAppFunctionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppFunctionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppFunctionManager)) {
-                return (IAppFunctionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppFunctionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppFunctionManager)) {
+                return (IAppFunctionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -89,19 +89,19 @@ public interface IAppFunctionManager extends IInterface {
             }
             if (i == 1) {
                 ExecuteAppFunctionAidlRequest executeAppFunctionAidlRequest = (ExecuteAppFunctionAidlRequest) parcel.readTypedObject(ExecuteAppFunctionAidlRequest.CREATOR);
-                IExecuteAppFunctionCallback asInterface = IExecuteAppFunctionCallback.Stub.asInterface(parcel.readStrongBinder());
+                IExecuteAppFunctionCallback iExecuteAppFunctionCallbackAsInterface = IExecuteAppFunctionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ICancellationSignal executeAppFunction = executeAppFunction(executeAppFunctionAidlRequest, asInterface);
+                ICancellationSignal iCancellationSignalExecuteAppFunction = executeAppFunction(executeAppFunctionAidlRequest, iExecuteAppFunctionCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(executeAppFunction);
+                parcel2.writeStrongInterface(iCancellationSignalExecuteAppFunction);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                int readInt = parcel.readInt();
-                IAppFunctionEnabledCallback asInterface2 = IAppFunctionEnabledCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IAppFunctionEnabledCallback iAppFunctionEnabledCallbackAsInterface = IAppFunctionEnabledCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setAppFunctionEnabled(readString, readString2, userHandle, readInt, asInterface2);
+                setAppFunctionEnabled(string, string2, userHandle, i3, iAppFunctionEnabledCallbackAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -127,37 +127,37 @@ public interface IAppFunctionManager extends IInterface {
 
             @Override // android.app.appfunctions.IAppFunctionManager
             public ICancellationSignal executeAppFunction(ExecuteAppFunctionAidlRequest executeAppFunctionAidlRequest, IExecuteAppFunctionCallback iExecuteAppFunctionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppFunctionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(executeAppFunctionAidlRequest, 0);
-                    obtain.writeStrongInterface(iExecuteAppFunctionCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IAppFunctionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(executeAppFunctionAidlRequest, 0);
+                    parcelObtain.writeStrongInterface(iExecuteAppFunctionCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.appfunctions.IAppFunctionManager
             public void setAppFunctionEnabled(String str, String str2, UserHandle userHandle, int i, IAppFunctionEnabledCallback iAppFunctionEnabledCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppFunctionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAppFunctionEnabledCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAppFunctionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAppFunctionEnabledCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

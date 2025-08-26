@@ -99,9 +99,7 @@ public class SemTelephonyRegistry extends ISemTelephonyRegistry.Stub {
             return ((Integer) Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingSupplier() { // from class: com.android.server.SemTelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingSupplier
                 public final Object getOrThrow() {
-                    Integer valueOf;
-                    valueOf = Integer.valueOf(DeviceConfig.getInt(PropertyInvalidatedCache.MODULE_TELEPHONY, TelephonyCallback.FLAG_PER_PID_REGISTRATION_LIMIT, 50));
-                    return valueOf;
+                    return Integer.valueOf(DeviceConfig.getInt(PropertyInvalidatedCache.MODULE_TELEPHONY, TelephonyCallback.FLAG_PER_PID_REGISTRATION_LIMIT, 50));
                 }
             })).intValue();
         }
@@ -110,9 +108,7 @@ public class SemTelephonyRegistry extends ISemTelephonyRegistry.Stub {
             return ((Boolean) Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingSupplier() { // from class: com.android.server.SemTelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingSupplier
                 public final Object getOrThrow() {
-                    Boolean valueOf;
-                    valueOf = Boolean.valueOf(CompatChanges.isChangeEnabled(TelephonyCallback.PHONE_STATE_LISTENER_LIMIT_CHANGE_ID, i));
-                    return valueOf;
+                    return Boolean.valueOf(CompatChanges.isChangeEnabled(TelephonyCallback.PHONE_STATE_LISTENER_LIMIT_CHANGE_ID, i));
                 }
             })).booleanValue();
         }
@@ -207,22 +203,22 @@ public class SemTelephonyRegistry extends ISemTelephonyRegistry.Stub {
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         if (checkSatellitePermission("addTiantongSatelliteChangeListener")) {
             synchronized (this.mRecords) {
-                Record add = add(iTiantongSatelliteChangeListener.asBinder(), Binder.getCallingUid(), Binder.getCallingPid(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
-                if (add == null) {
+                Record recordAdd = add(iTiantongSatelliteChangeListener.asBinder(), Binder.getCallingUid(), Binder.getCallingPid(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
+                if (recordAdd == null) {
                     loge("Can not create Record instance!");
                     return;
                 }
-                add.context = this.mContext;
-                add.tiantongSatelliteChangeListener = iTiantongSatelliteChangeListener;
-                add.callingPackage = str;
-                add.callingFeatureId = str2;
-                add.callerUid = Binder.getCallingUid();
-                add.callerPid = Binder.getCallingPid();
+                recordAdd.context = this.mContext;
+                recordAdd.tiantongSatelliteChangeListener = iTiantongSatelliteChangeListener;
+                recordAdd.callingPackage = str;
+                recordAdd.callingFeatureId = str2;
+                recordAdd.callerUid = Binder.getCallingUid();
+                recordAdd.callerPid = Binder.getCallingPid();
                 try {
-                    add.tiantongSatelliteChangeListener.onSemSatelliteServiceStateChanged(this.mLastSatPhoneId, this.mLastSatSubId, this.mSatServiceState);
-                    add.tiantongSatelliteChangeListener.onSemSatelliteSignalStrengthChanged(this.mLastSatPhoneId, this.mLastSatSubId, this.mSatSignalStrength);
+                    recordAdd.tiantongSatelliteChangeListener.onSemSatelliteServiceStateChanged(this.mLastSatPhoneId, this.mLastSatSubId, this.mSatServiceState);
+                    recordAdd.tiantongSatelliteChangeListener.onSemSatelliteSignalStrengthChanged(this.mLastSatPhoneId, this.mLastSatSubId, this.mSatSignalStrength);
                 } catch (RemoteException unused) {
-                    remove(add.binder);
+                    remove(recordAdd.binder);
                 }
             }
         }

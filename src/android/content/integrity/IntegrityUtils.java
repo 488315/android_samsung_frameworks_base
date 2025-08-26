@@ -12,8 +12,8 @@ public class IntegrityUtils {
         byte[] bArr = new byte[length];
         for (int i = 0; i < length; i++) {
             int i2 = i * 2;
-            char charAt = str.charAt(i2);
-            bArr[i] = (byte) (hexToDec(str.charAt(i2 + 1)) | (hexToDec(charAt) << 4));
+            char cCharAt = str.charAt(i2);
+            bArr[i] = (byte) (hexToDec(str.charAt(i2 + 1)) | (hexToDec(cCharAt) << 4));
         }
         return bArr;
     }

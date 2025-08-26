@@ -2,6 +2,7 @@ package com.android.wm.shell.bubbles;
 
 import android.content.Context;
 import android.content.pm.ShortcutInfo;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -14,7 +15,6 @@ import com.android.wm.shell.bubbles.BadgedImageView;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleOverflowAdapter extends RecyclerView.Adapter {
     public final List mBubbles;
@@ -22,7 +22,6 @@ public class BubbleOverflowAdapter extends RecyclerView.Adapter {
     public final BubblePositioner mPositioner;
     public final Consumer mPromoteBubbleFromOverflow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final BadgedImageView iconView;
         public final TextView textView;
@@ -49,7 +48,7 @@ public class BubbleOverflowAdapter extends RecyclerView.Adapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
         ViewHolder viewHolder2 = (ViewHolder) viewHolder;
         final Bubble bubble = (Bubble) this.mBubbles.get(i);
         viewHolder2.iconView.setRenderedBubble(bubble);
@@ -59,18 +58,18 @@ public class BubbleOverflowAdapter extends RecyclerView.Adapter {
         badgedImageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.BubbleOverflowAdapter$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                BubbleOverflowAdapter bubbleOverflowAdapter = BubbleOverflowAdapter.this;
+                BubbleOverflowAdapter bubbleOverflowAdapter = this.f$0;
                 Bubble bubble2 = bubble;
                 bubbleOverflowAdapter.mBubbles.remove(bubble2);
                 bubbleOverflowAdapter.notifyDataSetChanged();
                 bubbleOverflowAdapter.mPromoteBubbleFromOverflow.accept(bubble2);
             }
         });
-        String str = bubble.mTitle;
-        if (str == null) {
-            str = this.mContext.getResources().getString(R.string.notification_bubble_title);
+        String string = bubble.mTitle;
+        if (string == null) {
+            string = this.mContext.getResources().getString(R.string.notification_bubble_title);
         }
-        badgedImageView.setContentDescription(this.mContext.getResources().getString(R.string.bubble_content_description_single, str, bubble.mAppName));
+        badgedImageView.setContentDescription(this.mContext.getResources().getString(R.string.bubble_content_description_single, string, bubble.mAppName));
         badgedImageView.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.bubbles.BubbleOverflowAdapter.1
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {

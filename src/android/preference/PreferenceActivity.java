@@ -89,14 +89,14 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     private boolean mIsBackCallbackRegistered = false;
     private final OnBackInvokedCallback mOnBackInvokedCallback = new OnBackInvokedCallback() { // from class: android.preference.PreferenceActivity$$ExternalSyntheticLambda0
         @Override // android.window.OnBackInvokedCallback
-        public final void onBackInvoked() {
-            PreferenceActivity.this.onBackInvoked();
+        public final void onBackInvoked() throws Resources.NotFoundException {
+            this.f$0.onBackInvoked();
         }
     };
     private final FragmentManager.OnBackStackChangedListener mOnBackStackChangedListener = new FragmentManager.OnBackStackChangedListener() { // from class: android.preference.PreferenceActivity$$ExternalSyntheticLambda1
         @Override // android.app.FragmentManager.OnBackStackChangedListener
         public final void onBackStackChanged() {
-            PreferenceActivity.this.updateBackCallbackRegistrationState();
+            this.f$0.updateBackCallbackRegistrationState();
         }
     };
     private boolean mInsideOnCreate = false;
@@ -106,9 +106,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     private View.OnLayoutChangeListener mSplitBarLayoutChangeListner = null;
     private Handler mHandler = new Handler() { // from class: android.preference.PreferenceActivity.1
         @Override // android.os.Handler
-        public void handleMessage(Message message) {
+        public void handleMessage(Message message) throws Resources.NotFoundException, ClassNotFoundException {
             PreferenceActivity preferenceActivity;
-            Header findBestMatchingHeader;
+            Header headerFindBestMatchingHeader;
             int i = message.what;
             if (i == 1) {
                 PreferenceActivity.this.bindPreferences();
@@ -124,19 +124,19 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             if (PreferenceActivity.this.mAdapter instanceof BaseAdapter) {
                 ((BaseAdapter) PreferenceActivity.this.mAdapter).notifyDataSetChanged();
             }
-            Header onGetNewHeader = PreferenceActivity.this.onGetNewHeader();
-            if (onGetNewHeader != null && onGetNewHeader.fragment != null) {
-                Header findBestMatchingHeader2 = PreferenceActivity.this.findBestMatchingHeader(onGetNewHeader, arrayList);
-                if (findBestMatchingHeader2 == null || PreferenceActivity.this.mCurHeader != findBestMatchingHeader2) {
-                    PreferenceActivity.this.switchToHeader(onGetNewHeader);
+            Header headerOnGetNewHeader = PreferenceActivity.this.onGetNewHeader();
+            if (headerOnGetNewHeader != null && headerOnGetNewHeader.fragment != null) {
+                Header headerFindBestMatchingHeader2 = PreferenceActivity.this.findBestMatchingHeader(headerOnGetNewHeader, arrayList);
+                if (headerFindBestMatchingHeader2 == null || PreferenceActivity.this.mCurHeader != headerFindBestMatchingHeader2) {
+                    PreferenceActivity.this.switchToHeader(headerOnGetNewHeader);
                     return;
                 }
                 return;
             }
-            if (PreferenceActivity.this.mCurHeader == null || (findBestMatchingHeader = (preferenceActivity = PreferenceActivity.this).findBestMatchingHeader(preferenceActivity.mCurHeader, PreferenceActivity.this.mHeaders)) == null) {
+            if (PreferenceActivity.this.mCurHeader == null || (headerFindBestMatchingHeader = (preferenceActivity = PreferenceActivity.this).findBestMatchingHeader(preferenceActivity.mCurHeader, PreferenceActivity.this.mHeaders)) == null) {
                 return;
             }
-            PreferenceActivity.this.setSelectedHeader(findBestMatchingHeader);
+            PreferenceActivity.this.setSelectedHeader(headerFindBestMatchingHeader);
         }
     };
     private boolean mEnableSplitBar = true;
@@ -177,7 +177,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             HeaderViewHolder headerViewHolder;
             if (view == null) {
                 view = this.mInflater.inflate(this.mLayoutResId, viewGroup, false);
@@ -330,7 +330,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.app.Activity
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
+    public boolean onOptionsItemSelected(MenuItem menuItem) throws Resources.NotFoundException {
         if (menuItem.getItemId() == 16908332) {
             onBackPressed();
             return true;
@@ -339,18 +339,18 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException, ClassNotFoundException {
         Header header;
         super.onCreate(bundle);
         this.mInsideOnCreate = true;
-        TypedArray obtainStyledAttributes = obtainStyledAttributes(null, R.styleable.PreferenceActivity, R.attr.preferenceActivityStyle, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, R.layout.preference_list_content);
-        this.mPreferenceHeaderItemResId = obtainStyledAttributes.getResourceId(1, R.layout.preference_header_item);
-        this.mPreferenceHeaderRemoveEmptyIcon = obtainStyledAttributes.getBoolean(2, false);
+        TypedArray typedArrayObtainStyledAttributes = obtainStyledAttributes(null, R.styleable.PreferenceActivity, R.attr.preferenceActivityStyle, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, R.layout.preference_list_content);
+        this.mPreferenceHeaderItemResId = typedArrayObtainStyledAttributes.getResourceId(1, R.layout.preference_header_item);
+        this.mPreferenceHeaderRemoveEmptyIcon = typedArrayObtainStyledAttributes.getBoolean(2, false);
         TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true);
         this.mIsDeviceDefault = typedValue.data != 0;
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setContentView(resourceId);
         this.mListFooter = (FrameLayout) findViewById(R.id.list_footer);
         this.mPrefsContainer = (ViewGroup) findViewById(R.id.prefs_frame);
@@ -362,9 +362,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         int intExtra2 = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_SHORT_TITLE, 0);
         this.mActivityTitle = getTitle();
         if (this.mIsDeviceDefault && !this.mSinglePane) {
-            View findViewById = findViewById(R.id.prefs_split_bar);
-            this.mSplitBarView = findViewById;
-            if (findViewById != null) {
+            View viewFindViewById = findViewById(R.id.prefs_split_bar);
+            this.mSplitBarView = viewFindViewById;
+            if (viewFindViewById != null) {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mHeadersContainer.getLayoutParams();
                 LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) this.mPrefsContainer.getLayoutParams();
                 float f = layoutParams.weight + layoutParams2.weight;
@@ -377,10 +377,10 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
                 }
             }
         } else {
-            View findViewById2 = findViewById(R.id.prefs_split_bar);
-            this.mSplitBarView = findViewById2;
-            if (findViewById2 != null) {
-                findViewById2.setVisibility(8);
+            View viewFindViewById2 = findViewById(R.id.prefs_split_bar);
+            this.mSplitBarView = viewFindViewById2;
+            if (viewFindViewById2 != null) {
+                viewFindViewById2.setVisibility(8);
                 this.mSplitBarView = null;
             }
         }
@@ -522,7 +522,12 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             }
             this.mSplitBarView.addOnLayoutChangeListener(this.mSplitBarLayoutChangeListner);
             this.mSplitBarView.setOnTouchListener(new View.OnTouchListener() { // from class: android.preference.PreferenceActivity.6
+                /* JADX WARN: Removed duplicated region for block: B:28:0x00a6  */
+                /* JADX WARN: Removed duplicated region for block: B:50:0x0120  */
                 @Override // android.view.View.OnTouchListener
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (!PreferenceActivity.this.mEnableSplitBar) {
                         return false;
@@ -543,53 +548,49 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
                             float x2 = PreferenceActivity.this.mSplitBarView.getX();
                             float f3 = width;
                             float f4 = f3 / 2.0f;
-                            float f5 = x2 + f4;
-                            float f6 = x2 + x;
+                            float fApplyDimension = x2 + f4;
+                            float f5 = x2 + x;
                             if (PreferenceActivity.this.mIsDeviceDefault && PreferenceActivity.this.mIsRTL) {
                                 if (x > f3) {
-                                    float f7 = width2;
-                                    if (f6 <= f7) {
-                                        f5 += x - f3;
-                                        if (f5 / f7 > 0.8f) {
-                                            f5 = f7 - TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
+                                    float f6 = width2;
+                                    if (f5 <= f6) {
+                                        fApplyDimension += x - f3;
+                                        if (fApplyDimension / f6 > 0.8f) {
+                                            fApplyDimension = f6 - TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
                                         }
-                                        PreferenceActivity.this.mSplitBarView.setX(f5 - f4);
+                                        PreferenceActivity.this.mSplitBarView.setX(fApplyDimension - f4);
+                                        PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                                    } else if (x < 0.0f && f5 >= 0.0f) {
+                                        fApplyDimension += x;
+                                        float f7 = width2;
+                                        float f8 = fApplyDimension / f7;
+                                        if (f8 < 0.33999997f) {
+                                            fApplyDimension = f7 * 0.33999997f;
+                                        } else if (f8 > 0.8f) {
+                                            fApplyDimension = f7 - TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
+                                        }
+                                        PreferenceActivity.this.mSplitBarView.setX(fApplyDimension - f4);
                                         PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
                                     }
                                 }
-                                if (x < 0.0f && f6 >= 0.0f) {
-                                    f5 += x;
-                                    float f8 = width2;
-                                    float f9 = f5 / f8;
-                                    if (f9 < 0.33999997f) {
-                                        f5 = f8 * 0.33999997f;
-                                    } else if (f9 > 0.8f) {
-                                        f5 = f8 - TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
+                            } else if (x > f3) {
+                                float f9 = width2;
+                                if (f5 <= f9) {
+                                    fApplyDimension += x - f3;
+                                    float f10 = fApplyDimension / f9;
+                                    if (f10 > PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX) {
+                                        fApplyDimension = f9 * PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX;
+                                    } else if (f10 < 0.2f) {
+                                        fApplyDimension = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
                                     }
-                                    PreferenceActivity.this.mSplitBarView.setX(f5 - f4);
+                                    PreferenceActivity.this.mSplitBarView.setX(fApplyDimension - f4);
                                     PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
-                                }
-                            } else {
-                                if (x > f3) {
-                                    float f10 = width2;
-                                    if (f6 <= f10) {
-                                        f5 += x - f3;
-                                        float f11 = f5 / f10;
-                                        if (f11 > PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX) {
-                                            f5 = f10 * PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX;
-                                        } else if (f11 < 0.2f) {
-                                            f5 = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
-                                        }
-                                        PreferenceActivity.this.mSplitBarView.setX(f5 - f4);
-                                        PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                                } else if (x < 0.0f && f5 >= 0.0f) {
+                                    fApplyDimension += x;
+                                    if (fApplyDimension / width2 < 0.2f) {
+                                        fApplyDimension = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
                                     }
-                                }
-                                if (x < 0.0f && f6 >= 0.0f) {
-                                    f5 += x;
-                                    if (f5 / width2 < 0.2f) {
-                                        f5 = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, PreferenceActivity.this.getResources().getDisplayMetrics());
-                                    }
-                                    PreferenceActivity.this.mSplitBarView.setX(f5 - f4);
+                                    PreferenceActivity.this.mSplitBarView.setX(fApplyDimension - f4);
                                     PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
                                 }
                             }
@@ -597,10 +598,10 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
                                 PreferenceActivity.mUserUpdateSplit = true;
                                 LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) PreferenceActivity.this.mHeadersContainer.getLayoutParams();
                                 LinearLayout.LayoutParams layoutParams4 = (LinearLayout.LayoutParams) PreferenceActivity.this.mPrefsContainer.getLayoutParams();
-                                float f12 = layoutParams3.weight + layoutParams4.weight;
-                                float f13 = (f5 / width2) * f12;
-                                layoutParams3.weight = f13;
-                                layoutParams4.weight = f12 - f13;
+                                float f11 = layoutParams3.weight + layoutParams4.weight;
+                                float f12 = (fApplyDimension / width2) * f11;
+                                layoutParams3.weight = f12;
+                                layoutParams4.weight = f11 - f12;
                                 if (PreferenceActivity.this.mIsDeviceDefault) {
                                     if (PreferenceActivity.this.mIsRTL) {
                                         PreferenceActivity.this.mHeadersContainer.setLayoutParams(layoutParams4);
@@ -621,9 +622,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
                             childAt.requestLayout();
                         } else {
                             float x3 = PreferenceActivity.this.mPrefsContainer.getX() - (PreferenceActivity.this.mSplitBarView.getWidth() / 2.0f);
-                            float f14 = x3 >= 0.0f ? x3 : 0.0f;
+                            float f13 = x3 >= 0.0f ? x3 : 0.0f;
                             if (action != 3 || !PreferenceActivity.this.mIsDeviceDefault) {
-                                PreferenceActivity.this.mSplitBarView.setX(f14);
+                                PreferenceActivity.this.mSplitBarView.setX(f13);
                             }
                             PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
                             childAt.setVisibility(4);
@@ -637,7 +638,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.app.Activity
-    public void onBackPressed() {
+    public void onBackPressed() throws Resources.NotFoundException {
         onBackInvoked();
     }
 
@@ -660,7 +661,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void onBackInvoked() {
+    public void onBackInvoked() throws Resources.NotFoundException {
         if (WindowOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled(this) && getFragmentManager().getBackStackEntryCount() != 0) {
             getFragmentManager().popBackStackImmediate();
         } else if (this.mCurHeader != null && this.mSinglePane && getFragmentManager().getBackStackEntryCount() == 0 && getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT) == null) {
@@ -726,126 +727,127 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         this.mHandler.sendEmptyMessage(2);
     }
 
-    public void loadHeadersFromResource(int i, List<Header> list) {
+    public void loadHeadersFromResource(int i, List<Header> list) throws Throwable {
+        XmlResourceParser xml;
         int next;
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser xml = getResources().getXml(i);
-                try {
-                    AttributeSet asAttributeSet = Xml.asAttributeSet(xml);
-                    do {
-                        next = xml.next();
-                        if (next == 1) {
-                            break;
-                        }
-                    } while (next != 2);
-                    String name = xml.getName();
-                    if (!"preference-headers".equals(name)) {
-                        throw new RuntimeException("XML document must start with <preference-headers> tag; found" + name + " at " + xml.getPositionDescription());
-                    }
-                    int depth = xml.getDepth();
-                    Bundle bundle = null;
-                    while (true) {
-                        int next2 = xml.next();
-                        if (next2 == 1 || (next2 == 3 && xml.getDepth() <= depth)) {
-                            break;
-                        }
-                        if (next2 != 3 && next2 != 4) {
-                            if (Downloads.Impl.RequestHeaders.COLUMN_HEADER.equals(xml.getName())) {
-                                Header header = new Header();
-                                TypedArray obtainStyledAttributes = obtainStyledAttributes(asAttributeSet, R.styleable.PreferenceHeader);
-                                header.id = obtainStyledAttributes.getResourceId(1, -1);
-                                TypedValue peekValue = obtainStyledAttributes.peekValue(2);
-                                if (peekValue != null && peekValue.type == 3) {
-                                    if (peekValue.resourceId != 0) {
-                                        header.titleRes = peekValue.resourceId;
-                                    } else {
-                                        header.title = peekValue.string;
-                                    }
-                                }
-                                TypedValue peekValue2 = obtainStyledAttributes.peekValue(3);
-                                if (peekValue2 != null && peekValue2.type == 3) {
-                                    if (peekValue2.resourceId != 0) {
-                                        header.summaryRes = peekValue2.resourceId;
-                                    } else {
-                                        header.summary = peekValue2.string;
-                                    }
-                                }
-                                TypedValue peekValue3 = obtainStyledAttributes.peekValue(5);
-                                if (peekValue3 != null && peekValue3.type == 3) {
-                                    if (peekValue3.resourceId != 0) {
-                                        header.breadCrumbTitleRes = peekValue3.resourceId;
-                                    } else {
-                                        header.breadCrumbTitle = peekValue3.string;
-                                    }
-                                }
-                                TypedValue peekValue4 = obtainStyledAttributes.peekValue(6);
-                                if (peekValue4 != null && peekValue4.type == 3) {
-                                    if (peekValue4.resourceId != 0) {
-                                        header.breadCrumbShortTitleRes = peekValue4.resourceId;
-                                    } else {
-                                        header.breadCrumbShortTitle = peekValue4.string;
-                                    }
-                                }
-                                header.iconRes = obtainStyledAttributes.getResourceId(0, 0);
-                                header.fragment = obtainStyledAttributes.getString(4);
-                                obtainStyledAttributes.recycle();
-                                if (bundle == null) {
-                                    bundle = new Bundle();
-                                }
-                                int depth2 = xml.getDepth();
-                                while (true) {
-                                    int next3 = xml.next();
-                                    if (next3 == 1 || (next3 == 3 && xml.getDepth() <= depth2)) {
-                                        break;
-                                    }
-                                    if (next3 != 3 && next3 != 4) {
-                                        String name2 = xml.getName();
-                                        if (name2.equals(SemShareConstants.SURVEY_CONTENT_EXTRA)) {
-                                            getResources().parseBundleExtra(SemShareConstants.SURVEY_CONTENT_EXTRA, asAttributeSet, bundle);
-                                            XmlUtils.skipCurrentTag(xml);
-                                        } else if (name2.equals("intent")) {
-                                            header.intent = Intent.parseIntent(getResources(), xml, asAttributeSet);
-                                        } else {
-                                            XmlUtils.skipCurrentTag(xml);
-                                        }
-                                    }
-                                }
-                                if (bundle.size() > 0) {
-                                    header.fragmentArguments = bundle;
-                                    bundle = null;
-                                }
-                                list.add(header);
+                xml = getResources().getXml(i);
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (IOException e) {
+            e = e;
+        } catch (XmlPullParserException e2) {
+            e = e2;
+        }
+        try {
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xml);
+            do {
+                next = xml.next();
+                if (next == 1) {
+                    break;
+                }
+            } while (next != 2);
+            String name = xml.getName();
+            if (!"preference-headers".equals(name)) {
+                throw new RuntimeException("XML document must start with <preference-headers> tag; found" + name + " at " + xml.getPositionDescription());
+            }
+            int depth = xml.getDepth();
+            Bundle bundle = null;
+            while (true) {
+                int next2 = xml.next();
+                if (next2 == 1 || (next2 == 3 && xml.getDepth() <= depth)) {
+                    break;
+                }
+                if (next2 != 3 && next2 != 4) {
+                    if (Downloads.Impl.RequestHeaders.COLUMN_HEADER.equals(xml.getName())) {
+                        Header header = new Header();
+                        TypedArray typedArrayObtainStyledAttributes = obtainStyledAttributes(attributeSetAsAttributeSet, R.styleable.PreferenceHeader);
+                        header.id = typedArrayObtainStyledAttributes.getResourceId(1, -1);
+                        TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes.peekValue(2);
+                        if (typedValuePeekValue != null && typedValuePeekValue.type == 3) {
+                            if (typedValuePeekValue.resourceId != 0) {
+                                header.titleRes = typedValuePeekValue.resourceId;
                             } else {
-                                XmlUtils.skipCurrentTag(xml);
+                                header.title = typedValuePeekValue.string;
                             }
                         }
+                        TypedValue typedValuePeekValue2 = typedArrayObtainStyledAttributes.peekValue(3);
+                        if (typedValuePeekValue2 != null && typedValuePeekValue2.type == 3) {
+                            if (typedValuePeekValue2.resourceId != 0) {
+                                header.summaryRes = typedValuePeekValue2.resourceId;
+                            } else {
+                                header.summary = typedValuePeekValue2.string;
+                            }
+                        }
+                        TypedValue typedValuePeekValue3 = typedArrayObtainStyledAttributes.peekValue(5);
+                        if (typedValuePeekValue3 != null && typedValuePeekValue3.type == 3) {
+                            if (typedValuePeekValue3.resourceId != 0) {
+                                header.breadCrumbTitleRes = typedValuePeekValue3.resourceId;
+                            } else {
+                                header.breadCrumbTitle = typedValuePeekValue3.string;
+                            }
+                        }
+                        TypedValue typedValuePeekValue4 = typedArrayObtainStyledAttributes.peekValue(6);
+                        if (typedValuePeekValue4 != null && typedValuePeekValue4.type == 3) {
+                            if (typedValuePeekValue4.resourceId != 0) {
+                                header.breadCrumbShortTitleRes = typedValuePeekValue4.resourceId;
+                            } else {
+                                header.breadCrumbShortTitle = typedValuePeekValue4.string;
+                            }
+                        }
+                        header.iconRes = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+                        header.fragment = typedArrayObtainStyledAttributes.getString(4);
+                        typedArrayObtainStyledAttributes.recycle();
+                        if (bundle == null) {
+                            bundle = new Bundle();
+                        }
+                        int depth2 = xml.getDepth();
+                        while (true) {
+                            int next3 = xml.next();
+                            if (next3 == 1 || (next3 == 3 && xml.getDepth() <= depth2)) {
+                                break;
+                            }
+                            if (next3 != 3 && next3 != 4) {
+                                String name2 = xml.getName();
+                                if (name2.equals(SemShareConstants.SURVEY_CONTENT_EXTRA)) {
+                                    getResources().parseBundleExtra(SemShareConstants.SURVEY_CONTENT_EXTRA, attributeSetAsAttributeSet, bundle);
+                                    XmlUtils.skipCurrentTag(xml);
+                                } else if (name2.equals("intent")) {
+                                    header.intent = Intent.parseIntent(getResources(), xml, attributeSetAsAttributeSet);
+                                } else {
+                                    XmlUtils.skipCurrentTag(xml);
+                                }
+                            }
+                        }
+                        if (bundle.size() > 0) {
+                            header.fragmentArguments = bundle;
+                            bundle = null;
+                        }
+                        list.add(header);
+                    } else {
+                        XmlUtils.skipCurrentTag(xml);
                     }
-                    if (xml != null) {
-                        xml.close();
-                    }
-                } catch (IOException e) {
-                    e = e;
-                    throw new RuntimeException("Error parsing headers", e);
-                } catch (XmlPullParserException e2) {
-                    e = e2;
-                    throw new RuntimeException("Error parsing headers", e);
-                } catch (Throwable th) {
-                    th = th;
-                    xmlResourceParser = xml;
-                    if (xmlResourceParser != null) {
-                        xmlResourceParser.close();
-                    }
-                    throw th;
                 }
-            } catch (IOException e3) {
-                e = e3;
-            } catch (XmlPullParserException e4) {
-                e = e4;
             }
+            if (xml != null) {
+                xml.close();
+            }
+        } catch (IOException e3) {
+            e = e3;
+            throw new RuntimeException("Error parsing headers", e);
+        } catch (XmlPullParserException e4) {
+            e = e4;
+            throw new RuntimeException("Error parsing headers", e);
         } catch (Throwable th2) {
             th = th2;
+            xmlResourceParser = xml;
+            if (xmlResourceParser != null) {
+                xmlResourceParser.close();
+            }
+            throw th;
         }
     }
 
@@ -885,13 +887,13 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     @Override // android.app.Activity
     protected void onSaveInstanceState(Bundle bundle) {
         PreferenceScreen preferenceScreen;
-        int indexOf;
+        int iIndexOf;
         super.onSaveInstanceState(bundle);
         if (this.mHeaders.size() > 0) {
             bundle.putParcelableArrayList(HEADERS_TAG, this.mHeaders);
             Header header = this.mCurHeader;
-            if (header != null && (indexOf = this.mHeaders.indexOf(header)) >= 0) {
-                bundle.putInt(CUR_HEADER_TAG, indexOf);
+            if (header != null && (iIndexOf = this.mHeaders.indexOf(header)) >= 0) {
+                bundle.putInt(CUR_HEADER_TAG, iIndexOf);
             }
         }
         if (this.mPreferenceManager == null || (preferenceScreen = getPreferenceScreen()) == null) {
@@ -903,7 +905,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.app.ListActivity, android.app.Activity
-    protected void onRestoreInstanceState(Bundle bundle) {
+    protected void onRestoreInstanceState(Bundle bundle) throws Resources.NotFoundException {
         Header header;
         Bundle bundle2;
         PreferenceScreen preferenceScreen;
@@ -937,7 +939,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.app.ListActivity
-    protected void onListItemClick(ListView listView, View view, int i, long j) {
+    protected void onListItemClick(ListView listView, View view, int i, long j) throws Resources.NotFoundException, ClassNotFoundException {
         if (isResumed()) {
             super.onListItemClick(listView, view, i, j);
             if (this.mAdapter != null) {
@@ -949,7 +951,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         }
     }
 
-    public void onHeaderClick(Header header, int i) {
+    public void onHeaderClick(Header header, int i) throws Resources.NotFoundException, ClassNotFoundException {
         if (header.fragment != null) {
             switchToHeader(header);
         } else if (header.intent != null) {
@@ -973,15 +975,15 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     public void startWithFragment(String str, Bundle bundle, Fragment fragment, int i, int i2, int i3) {
-        Intent onBuildStartFragmentIntent = onBuildStartFragmentIntent(str, bundle, i2, i3);
+        Intent intentOnBuildStartFragmentIntent = onBuildStartFragmentIntent(str, bundle, i2, i3);
         if (fragment == null) {
-            startActivity(onBuildStartFragmentIntent);
+            startActivity(intentOnBuildStartFragmentIntent);
         } else {
-            fragment.startActivityForResult(onBuildStartFragmentIntent, i);
+            fragment.startActivityForResult(intentOnBuildStartFragmentIntent, i);
         }
     }
 
-    public void showBreadCrumbs(CharSequence charSequence, CharSequence charSequence2) {
+    public void showBreadCrumbs(CharSequence charSequence, CharSequence charSequence2) throws Resources.NotFoundException {
         if (this.mFragmentBreadCrumbs == null) {
             try {
                 FragmentBreadCrumbs fragmentBreadCrumbs = (FragmentBreadCrumbs) findViewById(16908310);
@@ -995,9 +997,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
                 }
                 if (this.mSinglePane) {
                     fragmentBreadCrumbs.setVisibility(8);
-                    View findViewById = findViewById(R.id.breadcrumb_section);
-                    if (findViewById != null) {
-                        findViewById.setVisibility(8);
+                    View viewFindViewById = findViewById(R.id.breadcrumb_section);
+                    if (viewFindViewById != null) {
+                        viewFindViewById.setVisibility(8);
                     }
                     setTitle(charSequence);
                 }
@@ -1016,18 +1018,18 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         }
     }
 
-    public void setParentTitle(CharSequence charSequence, CharSequence charSequence2, View.OnClickListener onClickListener) {
+    public void setParentTitle(CharSequence charSequence, CharSequence charSequence2, View.OnClickListener onClickListener) throws Resources.NotFoundException {
         FragmentBreadCrumbs fragmentBreadCrumbs = this.mFragmentBreadCrumbs;
         if (fragmentBreadCrumbs != null) {
             fragmentBreadCrumbs.setParentTitle(charSequence, charSequence2, onClickListener);
         }
     }
 
-    void setSelectedHeader(Header header) {
+    void setSelectedHeader(Header header) throws Resources.NotFoundException {
         this.mCurHeader = header;
-        int indexOf = this.mHeaders.indexOf(header);
-        if (indexOf >= 0) {
-            getListView().setItemChecked(indexOf, true);
+        int iIndexOf = this.mHeaders.indexOf(header);
+        if (iIndexOf >= 0) {
+            getListView().setItemChecked(iIndexOf, true);
         } else {
             getListView().clearChoices();
         }
@@ -1035,7 +1037,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         updateBackCallbackRegistrationState();
     }
 
-    void showBreadCrumbs(Header header) {
+    void showBreadCrumbs(Header header) throws Resources.NotFoundException {
         if (header != null) {
             CharSequence breadCrumbTitle = header.getBreadCrumbTitle(getResources());
             if (breadCrumbTitle == null) {
@@ -1050,25 +1052,25 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         showBreadCrumbs(getTitle(), null);
     }
 
-    private void switchToHeaderInner(String str, Bundle bundle) {
+    private void switchToHeaderInner(String str, Bundle bundle) throws ClassNotFoundException {
         getFragmentManager().popBackStack(BACK_STACK_PREFS, 1);
         if (!isValidFragment(str)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: " + str);
         }
-        Fragment instantiate = Fragment.instantiate(this, str, bundle);
-        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
+        Fragment fragmentInstantiate = Fragment.instantiate(this, str, bundle);
+        FragmentTransaction fragmentTransactionBeginTransaction = getFragmentManager().beginTransaction();
         if (!this.mInsideOnCreate) {
-            beginTransaction.setTransition(this.mSinglePane ? 0 : 4099);
+            fragmentTransactionBeginTransaction.setTransition(this.mSinglePane ? 0 : 4099);
         }
-        beginTransaction.replace(R.id.prefs, instantiate);
-        beginTransaction.commitAllowingStateLoss();
+        fragmentTransactionBeginTransaction.replace(R.id.prefs, fragmentInstantiate);
+        fragmentTransactionBeginTransaction.commitAllowingStateLoss();
         if (this.mSinglePane && this.mPrefsContainer.getVisibility() == 8) {
             this.mPrefsContainer.setVisibility(0);
             this.mHeadersContainer.setVisibility(8);
         }
     }
 
-    public void switchToHeader(String str, Bundle bundle) {
+    public void switchToHeader(String str, Bundle bundle) throws Resources.NotFoundException, ClassNotFoundException {
         Header header;
         int i = 0;
         while (true) {
@@ -1087,7 +1089,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         switchToHeaderInner(str, bundle);
     }
 
-    public void switchToHeader(Header header) {
+    public void switchToHeader(Header header) throws Resources.NotFoundException, ClassNotFoundException {
         if (this.mCurHeader == header) {
             getFragmentManager().popBackStack(BACK_STACK_PREFS, 1);
         } else {
@@ -1137,35 +1139,35 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     public void startPreferenceFragment(Fragment fragment, boolean z) {
-        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
-        beginTransaction.replace(R.id.prefs, fragment);
+        FragmentTransaction fragmentTransactionBeginTransaction = getFragmentManager().beginTransaction();
+        fragmentTransactionBeginTransaction.replace(R.id.prefs, fragment);
         if (z) {
-            beginTransaction.setTransition(4097);
-            beginTransaction.addToBackStack(BACK_STACK_PREFS);
+            fragmentTransactionBeginTransaction.setTransition(4097);
+            fragmentTransactionBeginTransaction.addToBackStack(BACK_STACK_PREFS);
         } else {
-            beginTransaction.setTransition(4099);
+            fragmentTransactionBeginTransaction.setTransition(4099);
         }
-        beginTransaction.commitAllowingStateLoss();
+        fragmentTransactionBeginTransaction.commitAllowingStateLoss();
     }
 
-    public void startPreferencePanel(String str, Bundle bundle, int i, CharSequence charSequence, Fragment fragment, int i2) {
-        Fragment instantiate = Fragment.instantiate(this, str, bundle);
+    public void startPreferencePanel(String str, Bundle bundle, int i, CharSequence charSequence, Fragment fragment, int i2) throws ClassNotFoundException {
+        Fragment fragmentInstantiate = Fragment.instantiate(this, str, bundle);
         if (fragment != null) {
-            instantiate.setTargetFragment(fragment, i2);
+            fragmentInstantiate.setTargetFragment(fragment, i2);
         }
-        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
-        beginTransaction.replace(R.id.prefs, instantiate);
+        FragmentTransaction fragmentTransactionBeginTransaction = getFragmentManager().beginTransaction();
+        fragmentTransactionBeginTransaction.replace(R.id.prefs, fragmentInstantiate);
         if (i != 0) {
-            beginTransaction.setBreadCrumbTitle(i);
+            fragmentTransactionBeginTransaction.setBreadCrumbTitle(i);
         } else if (charSequence != null) {
-            beginTransaction.setBreadCrumbTitle(charSequence);
+            fragmentTransactionBeginTransaction.setBreadCrumbTitle(charSequence);
         }
-        beginTransaction.setTransition(4097);
-        beginTransaction.addToBackStack(BACK_STACK_PREFS);
-        beginTransaction.commitAllowingStateLoss();
+        fragmentTransactionBeginTransaction.setTransition(4097);
+        fragmentTransactionBeginTransaction.addToBackStack(BACK_STACK_PREFS);
+        fragmentTransactionBeginTransaction.commitAllowingStateLoss();
     }
 
-    public void finishPreferencePanel(Fragment fragment, int i, Intent intent) {
+    public void finishPreferencePanel(Fragment fragment, int i, Intent intent) throws Resources.NotFoundException {
         onBackPressed();
         if (fragment == null || fragment.getTargetFragment() == null) {
             return;
@@ -1174,7 +1176,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     @Override // android.preference.PreferenceFragment.OnPreferenceStartFragmentCallback
-    public boolean onPreferenceStartFragment(PreferenceFragment preferenceFragment, Preference preference) {
+    public boolean onPreferenceStartFragment(PreferenceFragment preferenceFragment, Preference preference) throws ClassNotFoundException {
         startPreferencePanel(preference.getFragment(), preference.getExtras(), preference.getTitleRes(), preference.getTitle(), null, 0);
         return true;
     }

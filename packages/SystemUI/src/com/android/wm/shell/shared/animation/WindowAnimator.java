@@ -9,7 +9,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowAnimator {
     public static final WindowAnimator INSTANCE = new WindowAnimator();
@@ -29,7 +28,6 @@ public final class WindowAnimator {
         return pointF;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BoundsAnimationParams {
         public final long durationMs;
         public final float endOffsetYDp;

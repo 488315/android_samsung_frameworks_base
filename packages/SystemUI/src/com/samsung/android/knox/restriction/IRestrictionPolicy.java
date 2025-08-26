@@ -10,7 +10,6 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IRestrictionPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.restriction.IRestrictionPolicy";
@@ -361,7 +360,6 @@ public interface IRestrictionPolicy extends IInterface {
 
     void updateUserRestrictionsByKC(String str, boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRestrictionPolicy {
         public static final int TRANSACTION_addNewAdminActivationAppWhiteList = 120;
         public static final int TRANSACTION_allowActivationLock = 153;
@@ -537,7 +535,6 @@ public interface IRestrictionPolicy extends IInterface {
         public static final int TRANSACTION_systemReady = 141;
         public static final int TRANSACTION_updateUserRestrictionsByKC = 152;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IRestrictionPolicy {
             public IBinder mRemote;
 
@@ -547,665 +544,665 @@ public interface IRestrictionPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean addNewAdminActivationAppWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(120, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(120, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowActivationLock(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(153, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(153, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowAirplaneMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowAudioRecord(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowBackgroundProcessLimit(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowClipboardShare(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowDataSaving(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(135, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(135, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowDeveloperMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowFaceRecognitionEvenCameraBlocked(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(142, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(142, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowFactoryReset(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowFastEncryption(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowFirmwareAutoUpdate(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowFirmwareRecovery(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowGoogleAccountsAutoSync(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowGoogleCrashReport(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowIntelligenceOnlineProcessing(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(148, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(148, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowKillingActivitiesOnLeave(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowLocalContactStorage(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(144, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(144, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowLockScreenView(ContextInfo contextInfo, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowOTAUpgrade(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowPowerOff(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowPowerSavingMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(137, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(137, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSDCardMove(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(106, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(106, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSDCardWrite(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSVoice(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSafeMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowScreenPinning(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(127, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(127, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSettingsChanges(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowShareList(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowSmartClipMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(124, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(124, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowStatusBarExpansion(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowStopSystemApp(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowUsbHostStorage(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowUserMobileDataLimit(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowVideoRecord(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowVpn(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowWallpaperChange(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowWiFiSharing(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(172, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(172, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean allowWifiDirect(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -1216,202 +1213,202 @@ public interface IRestrictionPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean checkAdminActivationEnabled(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(164, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(164, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean checkIfRestrictionWasSetByKC(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(150, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(150, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean checkPackageSource(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(163, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(163, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean clearNewAdminActivationAppWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(119, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(119, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean disableConstrainedState(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(168, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(168, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean enableConstrainedState(ContextInfo contextInfo, String str, String str2, String str3, String str4, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(167, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(167, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean enableODETrustedBootVerification(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean enableWearablePolicy(ContextInfo contextInfo, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(128, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(128, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public List<String> getAllowedFOTAInfo(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(132, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(132, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public String getAllowedFOTAVersion(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(131, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(131, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public int getCCModeState(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(125, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(125, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public int getConstrainedState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    this.mRemote.transact(169, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    this.mRemote.transact(169, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -1421,2026 +1418,2026 @@ public interface IRestrictionPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public String getKcActionDisabledText() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    this.mRemote.transact(151, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    this.mRemote.transact(151, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public String getMultiSimPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    this.mRemote.transact(171, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    this.mRemote.transact(171, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public List<String> getNewAdminActivationAppWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(121, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(121, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public int getUsbExceptionList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    this.mRemote.transact(140, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    this.mRemote.transact(140, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isActivationLockAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(154, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(154, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isAirplaneModeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isAudioRecordAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isBackgroundDataEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isBackgroundProcessLimitAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isBackupAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isBluetoothTetheringEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isCCModeEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(162, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(162, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isCCModeSupported(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isCameraEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isCellularDataAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isClipboardAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isClipboardAllowedAsUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isClipboardShareAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isClipboardShareAllowedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isDataSavingAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    this.mRemote.transact(136, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    this.mRemote.transact(136, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isDeveloperModeAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isFaceRecognitionAllowedEvenCameraBlocked(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(143, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(143, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isFactoryResetAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isFastEncryptionAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isFirmwareAutoUpdateAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isFirmwareRecoveryAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isGoogleAccountsAutoSyncAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isGoogleAccountsAutoSyncAllowedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isGoogleCrashReportAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isGoogleCrashReportAllowedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isHeadphoneEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isHomeKeyEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isIntelligenceOnlineProcessingAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(149, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(149, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isIrisCameraEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(133, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(133, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isKillingActivitiesOnLeaveAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isKnoxDelegationEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(147, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(147, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isLocalContactStorageAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(145, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(145, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isLockScreenEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isLockScreenViewAllowed(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isMicrophoneEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isMicrophoneEnabledAsUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isMockLocationEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNewAdminActivationEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(118, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(118, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNewAdminInstallationEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(116, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(116, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNewAdminInstallationEnabledAsUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(165, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(165, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNonMarketAppAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNonTrustedAppInstallBlocked(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(155, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(155, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isNonTrustedAppInstallBlockedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(156, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(156, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isODETrustedBootVerificationEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(114, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(114, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isOTAUpgradeAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isPowerOffAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isPowerSavingModeAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(138, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(138, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSDCardMoveAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSDCardWriteAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSVoiceAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSVoiceAllowedAsUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSafeModeAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isScreenCaptureEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isScreenCaptureEnabledEx(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isScreenCaptureEnabledInternal(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isScreenPinningAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(126, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(126, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSdCardEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSettingsChangesAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSettingsChangesAllowedAsUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isShareListAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isShareListAllowedAsUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSmartClipModeAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(122, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(122, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isSmartClipModeAllowedInternal(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(123, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(123, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isStatusBarExpansionAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isStatusBarExpansionAllowedAsUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isStopSystemAppAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isTetheringEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbDebuggingEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbHostStorageAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbKiesAvailable(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(158, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(158, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbMassStorageEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(157, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(157, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbMediaPlayerAvailable(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUsbTetheringEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUseSecureKeypadEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isUserMobileDataLimitAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isVideoRecordAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isVpnAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isWallpaperChangeAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isWearablePolicyEnabled(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(129, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(129, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isWiFiSharingEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(173, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(173, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isWifiDirectAllowed(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean isWifiTetheringEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean preventNewAdminActivation(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(117, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(117, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean preventNewAdminInstallation(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setAllowNonMarketApps(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setAllowedFOTAVersion(ContextInfo contextInfo, String str, Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(130, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(130, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setBackgroundData(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setBackup(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setBluetoothTethering(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setCCMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setCCModeOnlyForCallerSystem(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setCamera(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setCellularData(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setClipboardEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setHeadphoneState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setHomeKeyState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setIrisCameraState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(134, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(134, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setKnoxDelegationEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(146, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(146, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setLockScreenState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setMicrophoneState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setMockLocation(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public void setMultiSimPolicy(ContextInfo contextInfo, int i, int i2, String[] strArr, String[] strArr2, String[] strArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    obtain.writeStringArray(strArr3);
-                    this.mRemote.transact(170, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    parcelObtain.writeStringArray(strArr3);
+                    this.mRemote.transact(170, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setNonTrustedAppInstallBlock(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(159, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(159, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setScreenCapture(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setSdCardState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setTethering(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbDebuggingEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbExceptionList(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(139, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(139, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbKiesAvailability(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(160, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(160, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbMassStorage(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(161, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(161, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbMediaPlayerAvailability(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUsbTethering(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setUseSecureKeypad(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public boolean setWifiTethering(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public void showRestrictionToast(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(166, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(166, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public void systemReady(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(141, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(141, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
             public void updateUserRestrictionsByKC(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(152, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRestrictionPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(152, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -3453,8 +3450,8 @@ public interface IRestrictionPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRestrictionPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IRestrictionPolicy)) ? new Proxy(iBinder) : (IRestrictionPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRestrictionPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IRestrictionPolicy)) ? new Proxy(iBinder) : (IRestrictionPolicy) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -3469,934 +3466,934 @@ public interface IRestrictionPolicy extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean camera = setCamera(contextInfo, readBoolean);
+                    boolean camera = setCamera(contextInfo, z);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(camera);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isCameraEnabled = isCameraEnabled(contextInfo2, readBoolean2);
+                    boolean zIsCameraEnabled = isCameraEnabled(contextInfo2, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCameraEnabled);
+                    parcel2.writeBoolean(zIsCameraEnabled);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean microphoneState = setMicrophoneState(contextInfo3, readBoolean3);
+                    boolean microphoneState = setMicrophoneState(contextInfo3, z3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(microphoneState);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isMicrophoneEnabled = isMicrophoneEnabled(contextInfo4, readBoolean4);
+                    boolean zIsMicrophoneEnabled = isMicrophoneEnabled(contextInfo4, z4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMicrophoneEnabled);
+                    parcel2.writeBoolean(zIsMicrophoneEnabled);
                     return true;
                 case 5:
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int readInt = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isMicrophoneEnabledAsUser = isMicrophoneEnabledAsUser(readBoolean5, readInt);
+                    boolean zIsMicrophoneEnabledAsUser = isMicrophoneEnabledAsUser(z5, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMicrophoneEnabledAsUser);
+                    parcel2.writeBoolean(zIsMicrophoneEnabledAsUser);
                     return true;
                 case 6:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean sdCardState = setSdCardState(contextInfo5, readBoolean6);
+                    boolean sdCardState = setSdCardState(contextInfo5, z6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(sdCardState);
                     return true;
                 case 7:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSdCardEnabled = isSdCardEnabled(contextInfo6);
+                    boolean zIsSdCardEnabled = isSdCardEnabled(contextInfo6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSdCardEnabled);
+                    parcel2.writeBoolean(zIsSdCardEnabled);
                     return true;
                 case 8:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean bluetoothTethering = setBluetoothTethering(contextInfo7, readBoolean7);
+                    boolean bluetoothTethering = setBluetoothTethering(contextInfo7, z7);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(bluetoothTethering);
                     return true;
                 case 9:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isBluetoothTetheringEnabled = isBluetoothTetheringEnabled(contextInfo8);
+                    boolean zIsBluetoothTetheringEnabled = isBluetoothTetheringEnabled(contextInfo8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothTetheringEnabled);
+                    parcel2.writeBoolean(zIsBluetoothTetheringEnabled);
                     return true;
                 case 10:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean usbTethering = setUsbTethering(contextInfo9, readBoolean8);
+                    boolean usbTethering = setUsbTethering(contextInfo9, z8);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbTethering);
                     return true;
                 case 11:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUsbTetheringEnabled = isUsbTetheringEnabled(contextInfo10);
+                    boolean zIsUsbTetheringEnabled = isUsbTetheringEnabled(contextInfo10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbTetheringEnabled);
+                    parcel2.writeBoolean(zIsUsbTetheringEnabled);
                     return true;
                 case 12:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean wifiTethering = setWifiTethering(contextInfo11, readBoolean9);
+                    boolean wifiTethering = setWifiTethering(contextInfo11, z9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(wifiTethering);
                     return true;
                 case 13:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isWifiTetheringEnabled = isWifiTetheringEnabled(contextInfo12);
+                    boolean zIsWifiTetheringEnabled = isWifiTetheringEnabled(contextInfo12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWifiTetheringEnabled);
+                    parcel2.writeBoolean(zIsWifiTetheringEnabled);
                     return true;
                 case 14:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean tethering = setTethering(contextInfo13, readBoolean10);
+                    boolean tethering = setTethering(contextInfo13, z10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(tethering);
                     return true;
                 case 15:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isTetheringEnabled = isTetheringEnabled(contextInfo14);
+                    boolean zIsTetheringEnabled = isTetheringEnabled(contextInfo14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTetheringEnabled);
+                    parcel2.writeBoolean(zIsTetheringEnabled);
                     return true;
                 case 16:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean11 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean usbDebuggingEnabled = setUsbDebuggingEnabled(contextInfo15, readBoolean11);
+                    boolean usbDebuggingEnabled = setUsbDebuggingEnabled(contextInfo15, z11);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbDebuggingEnabled);
                     return true;
                 case 17:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUsbDebuggingEnabled = isUsbDebuggingEnabled(contextInfo16);
+                    boolean zIsUsbDebuggingEnabled = isUsbDebuggingEnabled(contextInfo16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbDebuggingEnabled);
+                    parcel2.writeBoolean(zIsUsbDebuggingEnabled);
                     return true;
                 case 18:
                     ContextInfo contextInfo17 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean usbMediaPlayerAvailability = setUsbMediaPlayerAvailability(contextInfo17, readBoolean12);
+                    boolean usbMediaPlayerAvailability = setUsbMediaPlayerAvailability(contextInfo17, z12);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbMediaPlayerAvailability);
                     return true;
                 case 19:
                     ContextInfo contextInfo18 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbMediaPlayerAvailable = isUsbMediaPlayerAvailable(contextInfo18, readBoolean13);
+                    boolean zIsUsbMediaPlayerAvailable = isUsbMediaPlayerAvailable(contextInfo18, z13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbMediaPlayerAvailable);
+                    parcel2.writeBoolean(zIsUsbMediaPlayerAvailable);
                     return true;
                 case 20:
                     ContextInfo contextInfo19 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean screenCapture = setScreenCapture(contextInfo19, readBoolean14);
+                    boolean screenCapture = setScreenCapture(contextInfo19, z14);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(screenCapture);
                     return true;
                 case 21:
                     ContextInfo contextInfo20 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean15 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isScreenCaptureEnabled = isScreenCaptureEnabled(contextInfo20, readBoolean15);
+                    boolean zIsScreenCaptureEnabled = isScreenCaptureEnabled(contextInfo20, z15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenCaptureEnabled);
+                    parcel2.writeBoolean(zIsScreenCaptureEnabled);
                     return true;
                 case 22:
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean16 = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isScreenCaptureEnabledEx = isScreenCaptureEnabledEx(readInt2, readBoolean16);
+                    boolean zIsScreenCaptureEnabledEx = isScreenCaptureEnabledEx(i4, z16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenCaptureEnabledEx);
+                    parcel2.writeBoolean(zIsScreenCaptureEnabledEx);
                     return true;
                 case 23:
-                    boolean readBoolean17 = parcel.readBoolean();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isScreenCaptureEnabledInternal = isScreenCaptureEnabledInternal(readBoolean17);
+                    boolean zIsScreenCaptureEnabledInternal = isScreenCaptureEnabledInternal(z17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenCaptureEnabledInternal);
+                    parcel2.writeBoolean(zIsScreenCaptureEnabledInternal);
                     return true;
                 case 24:
                     ContextInfo contextInfo21 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean18 = parcel.readBoolean();
+                    boolean z18 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean mockLocation = setMockLocation(contextInfo21, readBoolean18);
+                    boolean mockLocation = setMockLocation(contextInfo21, z18);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(mockLocation);
                     return true;
                 case 25:
                     ContextInfo contextInfo22 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isMockLocationEnabled = isMockLocationEnabled(contextInfo22);
+                    boolean zIsMockLocationEnabled = isMockLocationEnabled(contextInfo22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMockLocationEnabled);
+                    parcel2.writeBoolean(zIsMockLocationEnabled);
                     return true;
                 case 26:
                     ContextInfo contextInfo23 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean19 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean backup = setBackup(contextInfo23, readBoolean19);
+                    boolean backup = setBackup(contextInfo23, z19);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(backup);
                     return true;
                 case 27:
                     ContextInfo contextInfo24 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean20 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isBackupAllowed = isBackupAllowed(contextInfo24, readBoolean20);
+                    boolean zIsBackupAllowed = isBackupAllowed(contextInfo24, z20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupAllowed);
+                    parcel2.writeBoolean(zIsBackupAllowed);
                     return true;
                 case 28:
                     ContextInfo contextInfo25 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean21 = parcel.readBoolean();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean clipboardEnabled = setClipboardEnabled(contextInfo25, readBoolean21);
+                    boolean clipboardEnabled = setClipboardEnabled(contextInfo25, z21);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(clipboardEnabled);
                     return true;
                 case 29:
                     ContextInfo contextInfo26 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean22 = parcel.readBoolean();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isClipboardAllowed = isClipboardAllowed(contextInfo26, readBoolean22);
+                    boolean zIsClipboardAllowed = isClipboardAllowed(contextInfo26, z22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardAllowed);
+                    parcel2.writeBoolean(zIsClipboardAllowed);
                     return true;
                 case 30:
-                    boolean readBoolean23 = parcel.readBoolean();
-                    int readInt3 = parcel.readInt();
+                    boolean z23 = parcel.readBoolean();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isClipboardAllowedAsUser = isClipboardAllowedAsUser(readBoolean23, readInt3);
+                    boolean zIsClipboardAllowedAsUser = isClipboardAllowedAsUser(z23, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardAllowedAsUser);
+                    parcel2.writeBoolean(zIsClipboardAllowedAsUser);
                     return true;
                 case 31:
                     ContextInfo contextInfo27 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean24 = parcel.readBoolean();
+                    boolean z24 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowFactoryReset = allowFactoryReset(contextInfo27, readBoolean24);
+                    boolean zAllowFactoryReset = allowFactoryReset(contextInfo27, z24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowFactoryReset);
+                    parcel2.writeBoolean(zAllowFactoryReset);
                     return true;
                 case 32:
                     ContextInfo contextInfo28 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isFactoryResetAllowed = isFactoryResetAllowed(contextInfo28);
+                    boolean zIsFactoryResetAllowed = isFactoryResetAllowed(contextInfo28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFactoryResetAllowed);
+                    parcel2.writeBoolean(zIsFactoryResetAllowed);
                     return true;
                 case 33:
                     ContextInfo contextInfo29 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean25 = parcel.readBoolean();
+                    boolean z25 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean homeKeyState = setHomeKeyState(contextInfo29, readBoolean25);
+                    boolean homeKeyState = setHomeKeyState(contextInfo29, z25);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(homeKeyState);
                     return true;
                 case 34:
                     ContextInfo contextInfo30 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean26 = parcel.readBoolean();
+                    boolean z26 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isHomeKeyEnabled = isHomeKeyEnabled(contextInfo30, readBoolean26);
+                    boolean zIsHomeKeyEnabled = isHomeKeyEnabled(contextInfo30, z26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHomeKeyEnabled);
+                    parcel2.writeBoolean(zIsHomeKeyEnabled);
                     return true;
                 case 35:
                     ContextInfo contextInfo31 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean27 = parcel.readBoolean();
+                    boolean z27 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean backgroundData = setBackgroundData(contextInfo31, readBoolean27);
+                    boolean backgroundData = setBackgroundData(contextInfo31, z27);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(backgroundData);
                     return true;
                 case 36:
                     ContextInfo contextInfo32 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isBackgroundDataEnabled = isBackgroundDataEnabled(contextInfo32);
+                    boolean zIsBackgroundDataEnabled = isBackgroundDataEnabled(contextInfo32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackgroundDataEnabled);
+                    parcel2.writeBoolean(zIsBackgroundDataEnabled);
                     return true;
                 case 37:
                     ContextInfo contextInfo33 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean28 = parcel.readBoolean();
+                    boolean z28 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean cellularData = setCellularData(contextInfo33, readBoolean28);
+                    boolean cellularData = setCellularData(contextInfo33, z28);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(cellularData);
                     return true;
                 case 38:
                     ContextInfo contextInfo34 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isCellularDataAllowed = isCellularDataAllowed(contextInfo34);
+                    boolean zIsCellularDataAllowed = isCellularDataAllowed(contextInfo34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCellularDataAllowed);
+                    parcel2.writeBoolean(zIsCellularDataAllowed);
                     return true;
                 case 39:
                     ContextInfo contextInfo35 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean29 = parcel.readBoolean();
+                    boolean z29 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSettingsChanges = allowSettingsChanges(contextInfo35, readBoolean29);
+                    boolean zAllowSettingsChanges = allowSettingsChanges(contextInfo35, z29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSettingsChanges);
+                    parcel2.writeBoolean(zAllowSettingsChanges);
                     return true;
                 case 40:
                     ContextInfo contextInfo36 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean30 = parcel.readBoolean();
+                    boolean z30 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isSettingsChangesAllowed = isSettingsChangesAllowed(contextInfo36, readBoolean30);
+                    boolean zIsSettingsChangesAllowed = isSettingsChangesAllowed(contextInfo36, z30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSettingsChangesAllowed);
+                    parcel2.writeBoolean(zIsSettingsChangesAllowed);
                     return true;
                 case 41:
-                    boolean readBoolean31 = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    boolean z31 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSettingsChangesAllowedAsUser = isSettingsChangesAllowedAsUser(readBoolean31, readInt4);
+                    boolean zIsSettingsChangesAllowedAsUser = isSettingsChangesAllowedAsUser(z31, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSettingsChangesAllowedAsUser);
+                    parcel2.writeBoolean(zIsSettingsChangesAllowedAsUser);
                     return true;
                 case 42:
                     ContextInfo contextInfo37 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean32 = parcel.readBoolean();
+                    boolean z32 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowNonMarketApps = setAllowNonMarketApps(contextInfo37, readBoolean32);
+                    boolean allowNonMarketApps = setAllowNonMarketApps(contextInfo37, z32);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(allowNonMarketApps);
                     return true;
                 case 43:
                     ContextInfo contextInfo38 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isNonMarketAppAllowed = isNonMarketAppAllowed(contextInfo38);
+                    boolean zIsNonMarketAppAllowed = isNonMarketAppAllowed(contextInfo38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNonMarketAppAllowed);
+                    parcel2.writeBoolean(zIsNonMarketAppAllowed);
                     return true;
                 case 44:
                     ContextInfo contextInfo39 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean33 = parcel.readBoolean();
+                    boolean z33 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowVpn = allowVpn(contextInfo39, readBoolean33);
+                    boolean zAllowVpn = allowVpn(contextInfo39, z33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowVpn);
+                    parcel2.writeBoolean(zAllowVpn);
                     return true;
                 case 45:
                     ContextInfo contextInfo40 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isVpnAllowed = isVpnAllowed(contextInfo40);
+                    boolean zIsVpnAllowed = isVpnAllowed(contextInfo40);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVpnAllowed);
+                    parcel2.writeBoolean(zIsVpnAllowed);
                     return true;
                 case 46:
                     ContextInfo contextInfo41 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean34 = parcel.readBoolean();
+                    boolean z34 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowOTAUpgrade = allowOTAUpgrade(contextInfo41, readBoolean34);
+                    boolean zAllowOTAUpgrade = allowOTAUpgrade(contextInfo41, z34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowOTAUpgrade);
+                    parcel2.writeBoolean(zAllowOTAUpgrade);
                     return true;
                 case 47:
                     ContextInfo contextInfo42 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isOTAUpgradeAllowed = isOTAUpgradeAllowed(contextInfo42);
+                    boolean zIsOTAUpgradeAllowed = isOTAUpgradeAllowed(contextInfo42);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOTAUpgradeAllowed);
+                    parcel2.writeBoolean(zIsOTAUpgradeAllowed);
                     return true;
                 case 48:
                     ContextInfo contextInfo43 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean35 = parcel.readBoolean();
+                    boolean z35 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSDCardWrite = allowSDCardWrite(contextInfo43, readBoolean35);
+                    boolean zAllowSDCardWrite = allowSDCardWrite(contextInfo43, z35);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSDCardWrite);
+                    parcel2.writeBoolean(zAllowSDCardWrite);
                     return true;
                 case 49:
                     ContextInfo contextInfo44 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSDCardWriteAllowed = isSDCardWriteAllowed(contextInfo44);
+                    boolean zIsSDCardWriteAllowed = isSDCardWriteAllowed(contextInfo44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSDCardWriteAllowed);
+                    parcel2.writeBoolean(zIsSDCardWriteAllowed);
                     return true;
                 case 50:
                     ContextInfo contextInfo45 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean36 = parcel.readBoolean();
+                    boolean z36 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowGoogleCrashReport = allowGoogleCrashReport(contextInfo45, readBoolean36);
+                    boolean zAllowGoogleCrashReport = allowGoogleCrashReport(contextInfo45, z36);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowGoogleCrashReport);
+                    parcel2.writeBoolean(zAllowGoogleCrashReport);
                     return true;
                 case 51:
                     ContextInfo contextInfo46 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isGoogleCrashReportAllowed = isGoogleCrashReportAllowed(contextInfo46);
+                    boolean zIsGoogleCrashReportAllowed = isGoogleCrashReportAllowed(contextInfo46);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGoogleCrashReportAllowed);
+                    parcel2.writeBoolean(zIsGoogleCrashReportAllowed);
                     return true;
                 case 52:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isGoogleCrashReportAllowedAsUser = isGoogleCrashReportAllowedAsUser(readInt5);
+                    boolean zIsGoogleCrashReportAllowedAsUser = isGoogleCrashReportAllowedAsUser(i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGoogleCrashReportAllowedAsUser);
+                    parcel2.writeBoolean(zIsGoogleCrashReportAllowedAsUser);
                     return true;
                 case 53:
                     ContextInfo contextInfo47 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean37 = parcel.readBoolean();
+                    boolean z37 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowWallpaperChange = allowWallpaperChange(contextInfo47, readBoolean37);
+                    boolean zAllowWallpaperChange = allowWallpaperChange(contextInfo47, z37);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowWallpaperChange);
+                    parcel2.writeBoolean(zAllowWallpaperChange);
                     return true;
                 case 54:
                     ContextInfo contextInfo48 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean38 = parcel.readBoolean();
+                    boolean z38 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isWallpaperChangeAllowed = isWallpaperChangeAllowed(contextInfo48, readBoolean38);
+                    boolean zIsWallpaperChangeAllowed = isWallpaperChangeAllowed(contextInfo48, z38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWallpaperChangeAllowed);
+                    parcel2.writeBoolean(zIsWallpaperChangeAllowed);
                     return true;
                 case 55:
                     ContextInfo contextInfo49 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean39 = parcel.readBoolean();
+                    boolean z39 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowStatusBarExpansion = allowStatusBarExpansion(contextInfo49, readBoolean39);
+                    boolean zAllowStatusBarExpansion = allowStatusBarExpansion(contextInfo49, z39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowStatusBarExpansion);
+                    parcel2.writeBoolean(zAllowStatusBarExpansion);
                     return true;
                 case 56:
                     ContextInfo contextInfo50 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean40 = parcel.readBoolean();
+                    boolean z40 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isStatusBarExpansionAllowed = isStatusBarExpansionAllowed(contextInfo50, readBoolean40);
+                    boolean zIsStatusBarExpansionAllowed = isStatusBarExpansionAllowed(contextInfo50, z40);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStatusBarExpansionAllowed);
+                    parcel2.writeBoolean(zIsStatusBarExpansionAllowed);
                     return true;
                 case 57:
                     ContextInfo contextInfo51 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean41 = parcel.readBoolean();
+                    boolean z41 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowPowerOff = allowPowerOff(contextInfo51, readBoolean41);
+                    boolean zAllowPowerOff = allowPowerOff(contextInfo51, z41);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowPowerOff);
+                    parcel2.writeBoolean(zAllowPowerOff);
                     return true;
                 case 58:
                     ContextInfo contextInfo52 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean42 = parcel.readBoolean();
+                    boolean z42 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isPowerOffAllowed = isPowerOffAllowed(contextInfo52, readBoolean42);
+                    boolean zIsPowerOffAllowed = isPowerOffAllowed(contextInfo52, z42);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPowerOffAllowed);
+                    parcel2.writeBoolean(zIsPowerOffAllowed);
                     return true;
                 case 59:
                     ContextInfo contextInfo53 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean43 = parcel.readBoolean();
+                    boolean z43 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowAudioRecord = allowAudioRecord(contextInfo53, readBoolean43);
+                    boolean zAllowAudioRecord = allowAudioRecord(contextInfo53, z43);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowAudioRecord);
+                    parcel2.writeBoolean(zAllowAudioRecord);
                     return true;
                 case 60:
                     ContextInfo contextInfo54 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean44 = parcel.readBoolean();
+                    boolean z44 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAudioRecordAllowed = isAudioRecordAllowed(contextInfo54, readBoolean44);
+                    boolean zIsAudioRecordAllowed = isAudioRecordAllowed(contextInfo54, z44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAudioRecordAllowed);
+                    parcel2.writeBoolean(zIsAudioRecordAllowed);
                     return true;
                 case 61:
                     ContextInfo contextInfo55 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean45 = parcel.readBoolean();
+                    boolean z45 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowVideoRecord = allowVideoRecord(contextInfo55, readBoolean45);
+                    boolean zAllowVideoRecord = allowVideoRecord(contextInfo55, z45);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowVideoRecord);
+                    parcel2.writeBoolean(zAllowVideoRecord);
                     return true;
                 case 62:
                     ContextInfo contextInfo56 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean46 = parcel.readBoolean();
+                    boolean z46 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isVideoRecordAllowed = isVideoRecordAllowed(contextInfo56, readBoolean46);
+                    boolean zIsVideoRecordAllowed = isVideoRecordAllowed(contextInfo56, z46);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVideoRecordAllowed);
+                    parcel2.writeBoolean(zIsVideoRecordAllowed);
                     return true;
                 case 63:
                     ContextInfo contextInfo57 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean47 = parcel.readBoolean();
+                    boolean z47 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowStopSystemApp = allowStopSystemApp(contextInfo57, readBoolean47);
+                    boolean zAllowStopSystemApp = allowStopSystemApp(contextInfo57, z47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowStopSystemApp);
+                    parcel2.writeBoolean(zAllowStopSystemApp);
                     return true;
                 case 64:
                     ContextInfo contextInfo58 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isStopSystemAppAllowed = isStopSystemAppAllowed(contextInfo58);
+                    boolean zIsStopSystemAppAllowed = isStopSystemAppAllowed(contextInfo58);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStopSystemAppAllowed);
+                    parcel2.writeBoolean(zIsStopSystemAppAllowed);
                     return true;
                 case 65:
                     ContextInfo contextInfo59 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean48 = parcel.readBoolean();
+                    boolean z48 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowWifiDirect = allowWifiDirect(contextInfo59, readBoolean48);
+                    boolean zAllowWifiDirect = allowWifiDirect(contextInfo59, z48);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowWifiDirect);
+                    parcel2.writeBoolean(zAllowWifiDirect);
                     return true;
                 case 66:
                     ContextInfo contextInfo60 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean49 = parcel.readBoolean();
+                    boolean z49 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isWifiDirectAllowed = isWifiDirectAllowed(contextInfo60, readBoolean49);
+                    boolean zIsWifiDirectAllowed = isWifiDirectAllowed(contextInfo60, z49);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWifiDirectAllowed);
+                    parcel2.writeBoolean(zIsWifiDirectAllowed);
                     return true;
                 case 67:
                     ContextInfo contextInfo61 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean50 = parcel.readBoolean();
+                    boolean z50 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowBackgroundProcessLimit = allowBackgroundProcessLimit(contextInfo61, readBoolean50);
+                    boolean zAllowBackgroundProcessLimit = allowBackgroundProcessLimit(contextInfo61, z50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowBackgroundProcessLimit);
+                    parcel2.writeBoolean(zAllowBackgroundProcessLimit);
                     return true;
                 case 68:
                     ContextInfo contextInfo62 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isBackgroundProcessLimitAllowed = isBackgroundProcessLimitAllowed(contextInfo62);
+                    boolean zIsBackgroundProcessLimitAllowed = isBackgroundProcessLimitAllowed(contextInfo62);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackgroundProcessLimitAllowed);
+                    parcel2.writeBoolean(zIsBackgroundProcessLimitAllowed);
                     return true;
                 case 69:
                     ContextInfo contextInfo63 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean51 = parcel.readBoolean();
+                    boolean z51 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowKillingActivitiesOnLeave = allowKillingActivitiesOnLeave(contextInfo63, readBoolean51);
+                    boolean zAllowKillingActivitiesOnLeave = allowKillingActivitiesOnLeave(contextInfo63, z51);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowKillingActivitiesOnLeave);
+                    parcel2.writeBoolean(zAllowKillingActivitiesOnLeave);
                     return true;
                 case 70:
                     ContextInfo contextInfo64 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isKillingActivitiesOnLeaveAllowed = isKillingActivitiesOnLeaveAllowed(contextInfo64);
+                    boolean zIsKillingActivitiesOnLeaveAllowed = isKillingActivitiesOnLeaveAllowed(contextInfo64);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKillingActivitiesOnLeaveAllowed);
+                    parcel2.writeBoolean(zIsKillingActivitiesOnLeaveAllowed);
                     return true;
                 case 71:
                     ContextInfo contextInfo65 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean52 = parcel.readBoolean();
+                    boolean z52 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowUserMobileDataLimit = allowUserMobileDataLimit(contextInfo65, readBoolean52);
+                    boolean zAllowUserMobileDataLimit = allowUserMobileDataLimit(contextInfo65, z52);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowUserMobileDataLimit);
+                    parcel2.writeBoolean(zAllowUserMobileDataLimit);
                     return true;
                 case 72:
                     ContextInfo contextInfo66 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUserMobileDataLimitAllowed = isUserMobileDataLimitAllowed(contextInfo66);
+                    boolean zIsUserMobileDataLimitAllowed = isUserMobileDataLimitAllowed(contextInfo66);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUserMobileDataLimitAllowed);
+                    parcel2.writeBoolean(zIsUserMobileDataLimitAllowed);
                     return true;
                 case 73:
                     ContextInfo contextInfo67 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean53 = parcel.readBoolean();
+                    boolean z53 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowClipboardShare = allowClipboardShare(contextInfo67, readBoolean53);
+                    boolean zAllowClipboardShare = allowClipboardShare(contextInfo67, z53);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowClipboardShare);
+                    parcel2.writeBoolean(zAllowClipboardShare);
                     return true;
                 case 74:
                     ContextInfo contextInfo68 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isClipboardShareAllowed = isClipboardShareAllowed(contextInfo68);
+                    boolean zIsClipboardShareAllowed = isClipboardShareAllowed(contextInfo68);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardShareAllowed);
+                    parcel2.writeBoolean(zIsClipboardShareAllowed);
                     return true;
                 case 75:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isClipboardShareAllowedAsUser = isClipboardShareAllowedAsUser(readInt6);
+                    boolean zIsClipboardShareAllowedAsUser = isClipboardShareAllowedAsUser(i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardShareAllowedAsUser);
+                    parcel2.writeBoolean(zIsClipboardShareAllowedAsUser);
                     return true;
                 case 76:
                     ContextInfo contextInfo69 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean54 = parcel.readBoolean();
+                    boolean z54 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSVoice = allowSVoice(contextInfo69, readBoolean54);
+                    boolean zAllowSVoice = allowSVoice(contextInfo69, z54);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSVoice);
+                    parcel2.writeBoolean(zAllowSVoice);
                     return true;
                 case 77:
                     ContextInfo contextInfo70 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean55 = parcel.readBoolean();
+                    boolean z55 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isSVoiceAllowed = isSVoiceAllowed(contextInfo70, readBoolean55);
+                    boolean zIsSVoiceAllowed = isSVoiceAllowed(contextInfo70, z55);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSVoiceAllowed);
+                    parcel2.writeBoolean(zIsSVoiceAllowed);
                     return true;
                 case 78:
-                    boolean readBoolean56 = parcel.readBoolean();
-                    int readInt7 = parcel.readInt();
+                    boolean z56 = parcel.readBoolean();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSVoiceAllowedAsUser = isSVoiceAllowedAsUser(readBoolean56, readInt7);
+                    boolean zIsSVoiceAllowedAsUser = isSVoiceAllowedAsUser(z56, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSVoiceAllowedAsUser);
+                    parcel2.writeBoolean(zIsSVoiceAllowedAsUser);
                     return true;
                 case 79:
                     ContextInfo contextInfo71 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean57 = parcel.readBoolean();
+                    boolean z57 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowUsbHostStorage = allowUsbHostStorage(contextInfo71, readBoolean57);
+                    boolean zAllowUsbHostStorage = allowUsbHostStorage(contextInfo71, z57);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowUsbHostStorage);
+                    parcel2.writeBoolean(zAllowUsbHostStorage);
                     return true;
                 case 80:
                     ContextInfo contextInfo72 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean58 = parcel.readBoolean();
+                    boolean z58 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbHostStorageAllowed = isUsbHostStorageAllowed(contextInfo72, readBoolean58);
+                    boolean zIsUsbHostStorageAllowed = isUsbHostStorageAllowed(contextInfo72, z58);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbHostStorageAllowed);
+                    parcel2.writeBoolean(zIsUsbHostStorageAllowed);
                     return true;
                 case 81:
                     ContextInfo contextInfo73 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean59 = parcel.readBoolean();
+                    boolean z59 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowShareList = allowShareList(contextInfo73, readBoolean59);
+                    boolean zAllowShareList = allowShareList(contextInfo73, z59);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowShareList);
+                    parcel2.writeBoolean(zAllowShareList);
                     return true;
                 case 82:
                     ContextInfo contextInfo74 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean60 = parcel.readBoolean();
+                    boolean z60 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isShareListAllowed = isShareListAllowed(contextInfo74, readBoolean60);
+                    boolean zIsShareListAllowed = isShareListAllowed(contextInfo74, z60);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isShareListAllowed);
+                    parcel2.writeBoolean(zIsShareListAllowed);
                     return true;
                 case 83:
-                    int readInt8 = parcel.readInt();
-                    boolean readBoolean61 = parcel.readBoolean();
+                    int i10 = parcel.readInt();
+                    boolean z61 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isShareListAllowedAsUser = isShareListAllowedAsUser(readInt8, readBoolean61);
+                    boolean zIsShareListAllowedAsUser = isShareListAllowedAsUser(i10, z61);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isShareListAllowedAsUser);
+                    parcel2.writeBoolean(zIsShareListAllowedAsUser);
                     return true;
                 case 84:
                     ContextInfo contextInfo75 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean62 = parcel.readBoolean();
+                    boolean z62 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean useSecureKeypad = setUseSecureKeypad(contextInfo75, readBoolean62);
+                    boolean useSecureKeypad = setUseSecureKeypad(contextInfo75, z62);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(useSecureKeypad);
                     return true;
                 case 85:
                     ContextInfo contextInfo76 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUseSecureKeypadEnabled = isUseSecureKeypadEnabled(contextInfo76);
+                    boolean zIsUseSecureKeypadEnabled = isUseSecureKeypadEnabled(contextInfo76);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUseSecureKeypadEnabled);
+                    parcel2.writeBoolean(zIsUseSecureKeypadEnabled);
                     return true;
                 case 86:
                     ContextInfo contextInfo77 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean63 = parcel.readBoolean();
+                    boolean z63 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSafeMode = allowSafeMode(contextInfo77, readBoolean63);
+                    boolean zAllowSafeMode = allowSafeMode(contextInfo77, z63);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSafeMode);
+                    parcel2.writeBoolean(zAllowSafeMode);
                     return true;
                 case 87:
                     ContextInfo contextInfo78 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSafeModeAllowed = isSafeModeAllowed(contextInfo78);
+                    boolean zIsSafeModeAllowed = isSafeModeAllowed(contextInfo78);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSafeModeAllowed);
+                    parcel2.writeBoolean(zIsSafeModeAllowed);
                     return true;
                 case 88:
                     ContextInfo contextInfo79 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt9 = parcel.readInt();
-                    boolean readBoolean64 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
+                    boolean z64 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowLockScreenView = allowLockScreenView(contextInfo79, readInt9, readBoolean64);
+                    boolean zAllowLockScreenView = allowLockScreenView(contextInfo79, i11, z64);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowLockScreenView);
+                    parcel2.writeBoolean(zAllowLockScreenView);
                     return true;
                 case 89:
                     ContextInfo contextInfo80 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isLockScreenViewAllowed = isLockScreenViewAllowed(contextInfo80, readInt10);
+                    boolean zIsLockScreenViewAllowed = isLockScreenViewAllowed(contextInfo80, i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLockScreenViewAllowed);
+                    parcel2.writeBoolean(zIsLockScreenViewAllowed);
                     return true;
                 case 90:
                     ContextInfo contextInfo81 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean65 = parcel.readBoolean();
+                    boolean z65 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean lockScreenState = setLockScreenState(contextInfo81, readBoolean65);
+                    boolean lockScreenState = setLockScreenState(contextInfo81, z65);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(lockScreenState);
                     return true;
                 case 91:
                     ContextInfo contextInfo82 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean66 = parcel.readBoolean();
+                    boolean z66 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isLockScreenEnabled = isLockScreenEnabled(contextInfo82, readBoolean66);
+                    boolean zIsLockScreenEnabled = isLockScreenEnabled(contextInfo82, z66);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLockScreenEnabled);
+                    parcel2.writeBoolean(zIsLockScreenEnabled);
                     return true;
                 case 92:
                     ContextInfo contextInfo83 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean67 = parcel.readBoolean();
+                    boolean z67 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowFirmwareRecovery = allowFirmwareRecovery(contextInfo83, readBoolean67);
+                    boolean zAllowFirmwareRecovery = allowFirmwareRecovery(contextInfo83, z67);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowFirmwareRecovery);
+                    parcel2.writeBoolean(zAllowFirmwareRecovery);
                     return true;
                 case 93:
                     ContextInfo contextInfo84 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean68 = parcel.readBoolean();
+                    boolean z68 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isFirmwareRecoveryAllowed = isFirmwareRecoveryAllowed(contextInfo84, readBoolean68);
+                    boolean zIsFirmwareRecoveryAllowed = isFirmwareRecoveryAllowed(contextInfo84, z68);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFirmwareRecoveryAllowed);
+                    parcel2.writeBoolean(zIsFirmwareRecoveryAllowed);
                     return true;
                 case 94:
-                    boolean readBoolean69 = parcel.readBoolean();
-                    int readInt11 = parcel.readInt();
+                    boolean z69 = parcel.readBoolean();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStatusBarExpansionAllowedAsUser = isStatusBarExpansionAllowedAsUser(readBoolean69, readInt11);
+                    boolean zIsStatusBarExpansionAllowedAsUser = isStatusBarExpansionAllowedAsUser(z69, i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStatusBarExpansionAllowedAsUser);
+                    parcel2.writeBoolean(zIsStatusBarExpansionAllowedAsUser);
                     return true;
                 case 95:
                     ContextInfo contextInfo85 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean70 = parcel.readBoolean();
+                    boolean z70 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowDeveloperMode = allowDeveloperMode(contextInfo85, readBoolean70);
+                    boolean zAllowDeveloperMode = allowDeveloperMode(contextInfo85, z70);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowDeveloperMode);
+                    parcel2.writeBoolean(zAllowDeveloperMode);
                     return true;
                 case 96:
                     ContextInfo contextInfo86 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean71 = parcel.readBoolean();
+                    boolean z71 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isDeveloperModeAllowed = isDeveloperModeAllowed(contextInfo86, readBoolean71);
+                    boolean zIsDeveloperModeAllowed = isDeveloperModeAllowed(contextInfo86, z71);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeveloperModeAllowed);
+                    parcel2.writeBoolean(zIsDeveloperModeAllowed);
                     return true;
                 case 97:
                     ContextInfo contextInfo87 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean72 = parcel.readBoolean();
+                    boolean z72 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowAirplaneMode = allowAirplaneMode(contextInfo87, readBoolean72);
+                    boolean zAllowAirplaneMode = allowAirplaneMode(contextInfo87, z72);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowAirplaneMode);
+                    parcel2.writeBoolean(zAllowAirplaneMode);
                     return true;
                 case 98:
-                    boolean readBoolean73 = parcel.readBoolean();
+                    boolean z73 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAirplaneModeAllowed = isAirplaneModeAllowed(readBoolean73);
+                    boolean zIsAirplaneModeAllowed = isAirplaneModeAllowed(z73);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAirplaneModeAllowed);
+                    parcel2.writeBoolean(zIsAirplaneModeAllowed);
                     return true;
                 case 99:
                     ContextInfo contextInfo88 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean74 = parcel.readBoolean();
+                    boolean z74 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowGoogleAccountsAutoSync = allowGoogleAccountsAutoSync(contextInfo88, readBoolean74);
+                    boolean zAllowGoogleAccountsAutoSync = allowGoogleAccountsAutoSync(contextInfo88, z74);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowGoogleAccountsAutoSync);
+                    parcel2.writeBoolean(zAllowGoogleAccountsAutoSync);
                     return true;
                 case 100:
                     ContextInfo contextInfo89 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isGoogleAccountsAutoSyncAllowed = isGoogleAccountsAutoSyncAllowed(contextInfo89);
+                    boolean zIsGoogleAccountsAutoSyncAllowed = isGoogleAccountsAutoSyncAllowed(contextInfo89);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGoogleAccountsAutoSyncAllowed);
+                    parcel2.writeBoolean(zIsGoogleAccountsAutoSyncAllowed);
                     return true;
                 case 101:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isGoogleAccountsAutoSyncAllowedAsUser = isGoogleAccountsAutoSyncAllowedAsUser(readInt12);
+                    boolean zIsGoogleAccountsAutoSyncAllowedAsUser = isGoogleAccountsAutoSyncAllowedAsUser(i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGoogleAccountsAutoSyncAllowedAsUser);
+                    parcel2.writeBoolean(zIsGoogleAccountsAutoSyncAllowedAsUser);
                     return true;
                 case 102:
                     ContextInfo contextInfo90 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean75 = parcel.readBoolean();
+                    boolean z75 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowFirmwareAutoUpdate = allowFirmwareAutoUpdate(contextInfo90, readBoolean75);
+                    boolean zAllowFirmwareAutoUpdate = allowFirmwareAutoUpdate(contextInfo90, z75);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowFirmwareAutoUpdate);
+                    parcel2.writeBoolean(zAllowFirmwareAutoUpdate);
                     return true;
                 case 103:
                     ContextInfo contextInfo91 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean76 = parcel.readBoolean();
+                    boolean z76 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isFirmwareAutoUpdateAllowed = isFirmwareAutoUpdateAllowed(contextInfo91, readBoolean76);
+                    boolean zIsFirmwareAutoUpdateAllowed = isFirmwareAutoUpdateAllowed(contextInfo91, z76);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFirmwareAutoUpdateAllowed);
+                    parcel2.writeBoolean(zIsFirmwareAutoUpdateAllowed);
                     return true;
                 case 104:
                     ContextInfo contextInfo92 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean77 = parcel.readBoolean();
+                    boolean z77 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean headphoneState = setHeadphoneState(contextInfo92, readBoolean77);
+                    boolean headphoneState = setHeadphoneState(contextInfo92, z77);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(headphoneState);
                     return true;
                 case 105:
                     ContextInfo contextInfo93 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean78 = parcel.readBoolean();
+                    boolean z78 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isHeadphoneEnabled = isHeadphoneEnabled(contextInfo93, readBoolean78);
+                    boolean zIsHeadphoneEnabled = isHeadphoneEnabled(contextInfo93, z78);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHeadphoneEnabled);
+                    parcel2.writeBoolean(zIsHeadphoneEnabled);
                     return true;
                 case 106:
                     ContextInfo contextInfo94 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean79 = parcel.readBoolean();
+                    boolean z79 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSDCardMove = allowSDCardMove(contextInfo94, readBoolean79);
+                    boolean zAllowSDCardMove = allowSDCardMove(contextInfo94, z79);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSDCardMove);
+                    parcel2.writeBoolean(zAllowSDCardMove);
                     return true;
                 case 107:
                     ContextInfo contextInfo95 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean80 = parcel.readBoolean();
+                    boolean z80 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isSDCardMoveAllowed = isSDCardMoveAllowed(contextInfo95, readBoolean80);
+                    boolean zIsSDCardMoveAllowed = isSDCardMoveAllowed(contextInfo95, z80);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSDCardMoveAllowed);
+                    parcel2.writeBoolean(zIsSDCardMoveAllowed);
                     return true;
                 case 108:
                     ContextInfo contextInfo96 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean81 = parcel.readBoolean();
+                    boolean z81 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowFastEncryption = allowFastEncryption(contextInfo96, readBoolean81);
+                    boolean zAllowFastEncryption = allowFastEncryption(contextInfo96, z81);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowFastEncryption);
+                    parcel2.writeBoolean(zAllowFastEncryption);
                     return true;
                 case 109:
                     ContextInfo contextInfo97 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean82 = parcel.readBoolean();
+                    boolean z82 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isFastEncryptionAllowed = isFastEncryptionAllowed(contextInfo97, readBoolean82);
+                    boolean zIsFastEncryptionAllowed = isFastEncryptionAllowed(contextInfo97, z82);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFastEncryptionAllowed);
+                    parcel2.writeBoolean(zIsFastEncryptionAllowed);
                     return true;
                 case 110:
                     ContextInfo contextInfo98 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean83 = parcel.readBoolean();
+                    boolean z83 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean cCMode = setCCMode(contextInfo98, readBoolean83);
+                    boolean cCMode = setCCMode(contextInfo98, z83);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(cCMode);
                     return true;
                 case 111:
                     ContextInfo contextInfo99 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean84 = parcel.readBoolean();
+                    boolean z84 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean cCModeOnlyForCallerSystem = setCCModeOnlyForCallerSystem(contextInfo99, readBoolean84);
+                    boolean cCModeOnlyForCallerSystem = setCCModeOnlyForCallerSystem(contextInfo99, z84);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(cCModeOnlyForCallerSystem);
                     return true;
                 case 112:
                     ContextInfo contextInfo100 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean85 = parcel.readBoolean();
+                    boolean z85 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isCCModeSupported = isCCModeSupported(contextInfo100, readBoolean85);
+                    boolean zIsCCModeSupported = isCCModeSupported(contextInfo100, z85);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCCModeSupported);
+                    parcel2.writeBoolean(zIsCCModeSupported);
                     return true;
                 case 113:
                     ContextInfo contextInfo101 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean86 = parcel.readBoolean();
+                    boolean z86 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableODETrustedBootVerification = enableODETrustedBootVerification(contextInfo101, readBoolean86);
+                    boolean zEnableODETrustedBootVerification = enableODETrustedBootVerification(contextInfo101, z86);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableODETrustedBootVerification);
+                    parcel2.writeBoolean(zEnableODETrustedBootVerification);
                     return true;
                 case 114:
                     ContextInfo contextInfo102 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isODETrustedBootVerificationEnabled = isODETrustedBootVerificationEnabled(contextInfo102);
+                    boolean zIsODETrustedBootVerificationEnabled = isODETrustedBootVerificationEnabled(contextInfo102);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isODETrustedBootVerificationEnabled);
+                    parcel2.writeBoolean(zIsODETrustedBootVerificationEnabled);
                     return true;
                 case 115:
                     ContextInfo contextInfo103 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean87 = parcel.readBoolean();
+                    boolean z87 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean preventNewAdminInstallation = preventNewAdminInstallation(contextInfo103, readBoolean87);
+                    boolean zPreventNewAdminInstallation = preventNewAdminInstallation(contextInfo103, z87);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(preventNewAdminInstallation);
+                    parcel2.writeBoolean(zPreventNewAdminInstallation);
                     return true;
                 case 116:
                     ContextInfo contextInfo104 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean88 = parcel.readBoolean();
+                    boolean z88 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isNewAdminInstallationEnabled = isNewAdminInstallationEnabled(contextInfo104, readBoolean88);
+                    boolean zIsNewAdminInstallationEnabled = isNewAdminInstallationEnabled(contextInfo104, z88);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNewAdminInstallationEnabled);
+                    parcel2.writeBoolean(zIsNewAdminInstallationEnabled);
                     return true;
                 case 117:
                     ContextInfo contextInfo105 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean89 = parcel.readBoolean();
+                    boolean z89 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean preventNewAdminActivation = preventNewAdminActivation(contextInfo105, readBoolean89);
+                    boolean zPreventNewAdminActivation = preventNewAdminActivation(contextInfo105, z89);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(preventNewAdminActivation);
+                    parcel2.writeBoolean(zPreventNewAdminActivation);
                     return true;
                 case 118:
                     ContextInfo contextInfo106 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean90 = parcel.readBoolean();
+                    boolean z90 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isNewAdminActivationEnabled = isNewAdminActivationEnabled(contextInfo106, readBoolean90);
+                    boolean zIsNewAdminActivationEnabled = isNewAdminActivationEnabled(contextInfo106, z90);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNewAdminActivationEnabled);
+                    parcel2.writeBoolean(zIsNewAdminActivationEnabled);
                     return true;
                 case 119:
                     ContextInfo contextInfo107 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearNewAdminActivationAppWhiteList = clearNewAdminActivationAppWhiteList(contextInfo107);
+                    boolean zClearNewAdminActivationAppWhiteList = clearNewAdminActivationAppWhiteList(contextInfo107);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearNewAdminActivationAppWhiteList);
+                    parcel2.writeBoolean(zClearNewAdminActivationAppWhiteList);
                     return true;
                 case 120:
                     ContextInfo contextInfo108 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addNewAdminActivationAppWhiteList = addNewAdminActivationAppWhiteList(contextInfo108, createStringArrayList);
+                    boolean zAddNewAdminActivationAppWhiteList = addNewAdminActivationAppWhiteList(contextInfo108, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addNewAdminActivationAppWhiteList);
+                    parcel2.writeBoolean(zAddNewAdminActivationAppWhiteList);
                     return true;
                 case 121:
                     ContextInfo contextInfo109 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -4408,24 +4405,24 @@ public interface IRestrictionPolicy extends IInterface {
                 case 122:
                     ContextInfo contextInfo110 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSmartClipModeAllowed = isSmartClipModeAllowed(contextInfo110);
+                    boolean zIsSmartClipModeAllowed = isSmartClipModeAllowed(contextInfo110);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSmartClipModeAllowed);
+                    parcel2.writeBoolean(zIsSmartClipModeAllowed);
                     return true;
                 case 123:
-                    boolean readBoolean91 = parcel.readBoolean();
+                    boolean z91 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isSmartClipModeAllowedInternal = isSmartClipModeAllowedInternal(readBoolean91);
+                    boolean zIsSmartClipModeAllowedInternal = isSmartClipModeAllowedInternal(z91);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSmartClipModeAllowedInternal);
+                    parcel2.writeBoolean(zIsSmartClipModeAllowedInternal);
                     return true;
                 case 124:
                     ContextInfo contextInfo111 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean92 = parcel.readBoolean();
+                    boolean z92 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowSmartClipMode = allowSmartClipMode(contextInfo111, readBoolean92);
+                    boolean zAllowSmartClipMode = allowSmartClipMode(contextInfo111, z92);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowSmartClipMode);
+                    parcel2.writeBoolean(zAllowSmartClipMode);
                     return true;
                 case 125:
                     ContextInfo contextInfo112 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -4437,42 +4434,42 @@ public interface IRestrictionPolicy extends IInterface {
                 case 126:
                     ContextInfo contextInfo113 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isScreenPinningAllowed = isScreenPinningAllowed(contextInfo113);
+                    boolean zIsScreenPinningAllowed = isScreenPinningAllowed(contextInfo113);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenPinningAllowed);
+                    parcel2.writeBoolean(zIsScreenPinningAllowed);
                     return true;
                 case 127:
                     ContextInfo contextInfo114 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean93 = parcel.readBoolean();
+                    boolean z93 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowScreenPinning = allowScreenPinning(contextInfo114, readBoolean93);
+                    boolean zAllowScreenPinning = allowScreenPinning(contextInfo114, z93);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowScreenPinning);
+                    parcel2.writeBoolean(zAllowScreenPinning);
                     return true;
                 case 128:
                     ContextInfo contextInfo115 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean94 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z94 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableWearablePolicy = enableWearablePolicy(contextInfo115, readInt13, readBoolean94);
+                    boolean zEnableWearablePolicy = enableWearablePolicy(contextInfo115, i15, z94);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableWearablePolicy);
+                    parcel2.writeBoolean(zEnableWearablePolicy);
                     return true;
                 case 129:
                     ContextInfo contextInfo116 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isWearablePolicyEnabled = isWearablePolicyEnabled(contextInfo116, readInt14);
+                    boolean zIsWearablePolicyEnabled = isWearablePolicyEnabled(contextInfo116, i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWearablePolicyEnabled);
+                    parcel2.writeBoolean(zIsWearablePolicyEnabled);
                     return true;
                 case 130:
                     ContextInfo contextInfo117 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean95 = parcel.readBoolean();
+                    boolean z95 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowedFOTAVersion = setAllowedFOTAVersion(contextInfo117, readString, bundle, readBoolean95);
+                    boolean allowedFOTAVersion = setAllowedFOTAVersion(contextInfo117, string, bundle, z95);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(allowedFOTAVersion);
                     return true;
@@ -4492,53 +4489,53 @@ public interface IRestrictionPolicy extends IInterface {
                     return true;
                 case 133:
                     ContextInfo contextInfo120 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean96 = parcel.readBoolean();
+                    boolean z96 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isIrisCameraEnabled = isIrisCameraEnabled(contextInfo120, readBoolean96);
+                    boolean zIsIrisCameraEnabled = isIrisCameraEnabled(contextInfo120, z96);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIrisCameraEnabled);
+                    parcel2.writeBoolean(zIsIrisCameraEnabled);
                     return true;
                 case 134:
                     ContextInfo contextInfo121 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean97 = parcel.readBoolean();
+                    boolean z97 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean irisCameraState = setIrisCameraState(contextInfo121, readBoolean97);
+                    boolean irisCameraState = setIrisCameraState(contextInfo121, z97);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(irisCameraState);
                     return true;
                 case 135:
                     ContextInfo contextInfo122 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean98 = parcel.readBoolean();
+                    boolean z98 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowDataSaving = allowDataSaving(contextInfo122, readBoolean98);
+                    boolean zAllowDataSaving = allowDataSaving(contextInfo122, z98);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowDataSaving);
+                    parcel2.writeBoolean(zAllowDataSaving);
                     return true;
                 case 136:
-                    boolean isDataSavingAllowed = isDataSavingAllowed();
+                    boolean zIsDataSavingAllowed = isDataSavingAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDataSavingAllowed);
+                    parcel2.writeBoolean(zIsDataSavingAllowed);
                     return true;
                 case 137:
                     ContextInfo contextInfo123 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean99 = parcel.readBoolean();
+                    boolean z99 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowPowerSavingMode = allowPowerSavingMode(contextInfo123, readBoolean99);
+                    boolean zAllowPowerSavingMode = allowPowerSavingMode(contextInfo123, z99);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowPowerSavingMode);
+                    parcel2.writeBoolean(zAllowPowerSavingMode);
                     return true;
                 case 138:
                     ContextInfo contextInfo124 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isPowerSavingModeAllowed = isPowerSavingModeAllowed(contextInfo124);
+                    boolean zIsPowerSavingModeAllowed = isPowerSavingModeAllowed(contextInfo124);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPowerSavingModeAllowed);
+                    parcel2.writeBoolean(zIsPowerSavingModeAllowed);
                     return true;
                 case 139:
                     ContextInfo contextInfo125 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean usbExceptionList = setUsbExceptionList(contextInfo125, readInt15);
+                    boolean usbExceptionList = setUsbExceptionList(contextInfo125, i17);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbExceptionList);
                     return true;
@@ -4548,77 +4545,77 @@ public interface IRestrictionPolicy extends IInterface {
                     parcel2.writeInt(usbExceptionList2);
                     return true;
                 case 141:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    systemReady(readInt16);
+                    systemReady(i18);
                     parcel2.writeNoException();
                     return true;
                 case 142:
                     ContextInfo contextInfo126 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean100 = parcel.readBoolean();
+                    boolean z100 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowFaceRecognitionEvenCameraBlocked = allowFaceRecognitionEvenCameraBlocked(contextInfo126, readBoolean100);
+                    boolean zAllowFaceRecognitionEvenCameraBlocked = allowFaceRecognitionEvenCameraBlocked(contextInfo126, z100);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowFaceRecognitionEvenCameraBlocked);
+                    parcel2.writeBoolean(zAllowFaceRecognitionEvenCameraBlocked);
                     return true;
                 case 143:
                     ContextInfo contextInfo127 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isFaceRecognitionAllowedEvenCameraBlocked = isFaceRecognitionAllowedEvenCameraBlocked(contextInfo127);
+                    boolean zIsFaceRecognitionAllowedEvenCameraBlocked = isFaceRecognitionAllowedEvenCameraBlocked(contextInfo127);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFaceRecognitionAllowedEvenCameraBlocked);
+                    parcel2.writeBoolean(zIsFaceRecognitionAllowedEvenCameraBlocked);
                     return true;
                 case 144:
                     ContextInfo contextInfo128 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean101 = parcel.readBoolean();
+                    boolean z101 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowLocalContactStorage = allowLocalContactStorage(contextInfo128, readBoolean101);
+                    boolean zAllowLocalContactStorage = allowLocalContactStorage(contextInfo128, z101);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowLocalContactStorage);
+                    parcel2.writeBoolean(zAllowLocalContactStorage);
                     return true;
                 case 145:
                     ContextInfo contextInfo129 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isLocalContactStorageAllowed = isLocalContactStorageAllowed(contextInfo129);
+                    boolean zIsLocalContactStorageAllowed = isLocalContactStorageAllowed(contextInfo129);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLocalContactStorageAllowed);
+                    parcel2.writeBoolean(zIsLocalContactStorageAllowed);
                     return true;
                 case 146:
                     ContextInfo contextInfo130 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean102 = parcel.readBoolean();
+                    boolean z102 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean knoxDelegationEnabled = setKnoxDelegationEnabled(contextInfo130, readBoolean102);
+                    boolean knoxDelegationEnabled = setKnoxDelegationEnabled(contextInfo130, z102);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(knoxDelegationEnabled);
                     return true;
                 case 147:
                     ContextInfo contextInfo131 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isKnoxDelegationEnabled = isKnoxDelegationEnabled(contextInfo131);
+                    boolean zIsKnoxDelegationEnabled = isKnoxDelegationEnabled(contextInfo131);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKnoxDelegationEnabled);
+                    parcel2.writeBoolean(zIsKnoxDelegationEnabled);
                     return true;
                 case 148:
                     ContextInfo contextInfo132 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean103 = parcel.readBoolean();
+                    boolean z103 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowIntelligenceOnlineProcessing = allowIntelligenceOnlineProcessing(contextInfo132, readBoolean103);
+                    boolean zAllowIntelligenceOnlineProcessing = allowIntelligenceOnlineProcessing(contextInfo132, z103);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowIntelligenceOnlineProcessing);
+                    parcel2.writeBoolean(zAllowIntelligenceOnlineProcessing);
                     return true;
                 case 149:
                     ContextInfo contextInfo133 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isIntelligenceOnlineProcessingAllowed = isIntelligenceOnlineProcessingAllowed(contextInfo133);
+                    boolean zIsIntelligenceOnlineProcessingAllowed = isIntelligenceOnlineProcessingAllowed(contextInfo133);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIntelligenceOnlineProcessingAllowed);
+                    parcel2.writeBoolean(zIsIntelligenceOnlineProcessingAllowed);
                     return true;
                 case 150:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfRestrictionWasSetByKC = checkIfRestrictionWasSetByKC(readString2);
+                    boolean zCheckIfRestrictionWasSetByKC = checkIfRestrictionWasSetByKC(string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfRestrictionWasSetByKC);
+                    parcel2.writeBoolean(zCheckIfRestrictionWasSetByKC);
                     return true;
                 case 151:
                     String kcActionDisabledText = getKcActionDisabledText();
@@ -4626,138 +4623,138 @@ public interface IRestrictionPolicy extends IInterface {
                     parcel2.writeString(kcActionDisabledText);
                     return true;
                 case 152:
-                    String readString3 = parcel.readString();
-                    boolean readBoolean104 = parcel.readBoolean();
+                    String string3 = parcel.readString();
+                    boolean z104 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    updateUserRestrictionsByKC(readString3, readBoolean104);
+                    updateUserRestrictionsByKC(string3, z104);
                     parcel2.writeNoException();
                     return true;
                 case 153:
                     ContextInfo contextInfo134 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean105 = parcel.readBoolean();
+                    boolean z105 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowActivationLock = allowActivationLock(contextInfo134, readBoolean105);
+                    boolean zAllowActivationLock = allowActivationLock(contextInfo134, z105);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowActivationLock);
+                    parcel2.writeBoolean(zAllowActivationLock);
                     return true;
                 case 154:
                     ContextInfo contextInfo135 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean106 = parcel.readBoolean();
+                    boolean z106 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isActivationLockAllowed = isActivationLockAllowed(contextInfo135, readBoolean106);
+                    boolean zIsActivationLockAllowed = isActivationLockAllowed(contextInfo135, z106);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isActivationLockAllowed);
+                    parcel2.writeBoolean(zIsActivationLockAllowed);
                     return true;
                 case 155:
                     ContextInfo contextInfo136 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isNonTrustedAppInstallBlocked = isNonTrustedAppInstallBlocked(contextInfo136);
+                    boolean zIsNonTrustedAppInstallBlocked = isNonTrustedAppInstallBlocked(contextInfo136);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNonTrustedAppInstallBlocked);
+                    parcel2.writeBoolean(zIsNonTrustedAppInstallBlocked);
                     return true;
                 case 156:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isNonTrustedAppInstallBlockedAsUser = isNonTrustedAppInstallBlockedAsUser(readInt17);
+                    boolean zIsNonTrustedAppInstallBlockedAsUser = isNonTrustedAppInstallBlockedAsUser(i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNonTrustedAppInstallBlockedAsUser);
+                    parcel2.writeBoolean(zIsNonTrustedAppInstallBlockedAsUser);
                     return true;
                 case 157:
                     ContextInfo contextInfo137 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean107 = parcel.readBoolean();
+                    boolean z107 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbMassStorageEnabled = isUsbMassStorageEnabled(contextInfo137, readBoolean107);
+                    boolean zIsUsbMassStorageEnabled = isUsbMassStorageEnabled(contextInfo137, z107);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbMassStorageEnabled);
+                    parcel2.writeBoolean(zIsUsbMassStorageEnabled);
                     return true;
                 case 158:
                     ContextInfo contextInfo138 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean108 = parcel.readBoolean();
+                    boolean z108 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbKiesAvailable = isUsbKiesAvailable(contextInfo138, readBoolean108);
+                    boolean zIsUsbKiesAvailable = isUsbKiesAvailable(contextInfo138, z108);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbKiesAvailable);
+                    parcel2.writeBoolean(zIsUsbKiesAvailable);
                     return true;
                 case 159:
                     ContextInfo contextInfo139 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean109 = parcel.readBoolean();
+                    boolean z109 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean nonTrustedAppInstallBlock = setNonTrustedAppInstallBlock(contextInfo139, readBoolean109);
+                    boolean nonTrustedAppInstallBlock = setNonTrustedAppInstallBlock(contextInfo139, z109);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(nonTrustedAppInstallBlock);
                     return true;
                 case 160:
                     ContextInfo contextInfo140 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean110 = parcel.readBoolean();
+                    boolean z110 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean usbKiesAvailability = setUsbKiesAvailability(contextInfo140, readBoolean110);
+                    boolean usbKiesAvailability = setUsbKiesAvailability(contextInfo140, z110);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbKiesAvailability);
                     return true;
                 case 161:
                     ContextInfo contextInfo141 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean111 = parcel.readBoolean();
+                    boolean z111 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean usbMassStorage = setUsbMassStorage(contextInfo141, readBoolean111);
+                    boolean usbMassStorage = setUsbMassStorage(contextInfo141, z111);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(usbMassStorage);
                     return true;
                 case 162:
                     ContextInfo contextInfo142 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean112 = parcel.readBoolean();
+                    boolean z112 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isCCModeEnabled = isCCModeEnabled(contextInfo142, readBoolean112);
+                    boolean zIsCCModeEnabled = isCCModeEnabled(contextInfo142, z112);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCCModeEnabled);
+                    parcel2.writeBoolean(zIsCCModeEnabled);
                     return true;
                 case 163:
-                    int readInt18 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkPackageSource = checkPackageSource(readInt18, readString4);
+                    boolean zCheckPackageSource = checkPackageSource(i20, string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkPackageSource);
+                    parcel2.writeBoolean(zCheckPackageSource);
                     return true;
                 case 164:
-                    int readInt19 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    int i21 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkAdminActivationEnabled = checkAdminActivationEnabled(readInt19, readString5);
+                    boolean zCheckAdminActivationEnabled = checkAdminActivationEnabled(i21, string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAdminActivationEnabled);
+                    parcel2.writeBoolean(zCheckAdminActivationEnabled);
                     return true;
                 case 165:
-                    int readInt20 = parcel.readInt();
-                    boolean readBoolean113 = parcel.readBoolean();
+                    int i22 = parcel.readInt();
+                    boolean z113 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isNewAdminInstallationEnabledAsUser = isNewAdminInstallationEnabledAsUser(readInt20, readBoolean113);
+                    boolean zIsNewAdminInstallationEnabledAsUser = isNewAdminInstallationEnabledAsUser(i22, z113);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNewAdminInstallationEnabledAsUser);
+                    parcel2.writeBoolean(zIsNewAdminInstallationEnabledAsUser);
                     return true;
                 case 166:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    showRestrictionToast(readString6);
+                    showRestrictionToast(string6);
                     parcel2.writeNoException();
                     return true;
                 case 167:
                     ContextInfo contextInfo143 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    int readInt21 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean enableConstrainedState = enableConstrainedState(contextInfo143, readString7, readString8, readString9, readString10, readInt21);
+                    boolean zEnableConstrainedState = enableConstrainedState(contextInfo143, string7, string8, string9, string10, i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableConstrainedState);
+                    parcel2.writeBoolean(zEnableConstrainedState);
                     return true;
                 case 168:
                     ContextInfo contextInfo144 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean disableConstrainedState = disableConstrainedState(contextInfo144);
+                    boolean zDisableConstrainedState = disableConstrainedState(contextInfo144);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableConstrainedState);
+                    parcel2.writeBoolean(zDisableConstrainedState);
                     return true;
                 case 169:
                     int constrainedState = getConstrainedState();
@@ -4766,13 +4763,13 @@ public interface IRestrictionPolicy extends IInterface {
                     return true;
                 case 170:
                     ContextInfo contextInfo145 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    String[] createStringArray2 = parcel.createStringArray();
-                    String[] createStringArray3 = parcel.createStringArray();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    setMultiSimPolicy(contextInfo145, readInt22, readInt23, createStringArray, createStringArray2, createStringArray3);
+                    setMultiSimPolicy(contextInfo145, i24, i25, strArrCreateStringArray, strArrCreateStringArray2, strArrCreateStringArray3);
                     parcel2.writeNoException();
                     return true;
                 case 171:
@@ -4782,18 +4779,18 @@ public interface IRestrictionPolicy extends IInterface {
                     return true;
                 case 172:
                     ContextInfo contextInfo146 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean114 = parcel.readBoolean();
+                    boolean z114 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowWiFiSharing = allowWiFiSharing(contextInfo146, readBoolean114);
+                    boolean zAllowWiFiSharing = allowWiFiSharing(contextInfo146, z114);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowWiFiSharing);
+                    parcel2.writeBoolean(zAllowWiFiSharing);
                     return true;
                 case 173:
                     ContextInfo contextInfo147 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isWiFiSharingEnabled = isWiFiSharingEnabled(contextInfo147);
+                    boolean zIsWiFiSharingEnabled = isWiFiSharingEnabled(contextInfo147);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWiFiSharingEnabled);
+                    parcel2.writeBoolean(zIsWiFiSharingEnabled);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -4806,7 +4803,6 @@ public interface IRestrictionPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IRestrictionPolicy {
         @Override // com.samsung.android.knox.restriction.IRestrictionPolicy
         public boolean addNewAdminActivationAppWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {

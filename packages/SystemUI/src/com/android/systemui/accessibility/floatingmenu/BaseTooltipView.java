@@ -23,7 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.systemui.recents.TriangleShape;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BaseTooltipView extends FrameLayout {
     public final AccessibilityFloatingMenuView mAnchorView;
@@ -50,9 +49,9 @@ public class BaseTooltipView extends FrameLayout {
         layoutParams.gravity = 8388659;
         layoutParams.setTitle("BaseTooltipView");
         this.mCurrentLayoutParams = layoutParams;
-        View inflate = LayoutInflater.from(getContext()).inflate(com.android.systemui.R.layout.sec_accessibility_floating_menu_tooltip, (ViewGroup) this, false);
-        this.mTextView = (TextView) inflate.findViewById(com.android.systemui.R.id.text);
-        addView(inflate);
+        View viewInflate = LayoutInflater.from(getContext()).inflate(com.android.systemui.R.layout.sec_accessibility_floating_menu_tooltip, (ViewGroup) this, false);
+        this.mTextView = (TextView) viewInflate.findViewById(com.android.systemui.R.id.text);
+        addView(viewInflate);
     }
 
     public final int getTextWidthWith(Rect rect) {
@@ -76,7 +75,7 @@ public class BaseTooltipView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         this.mAnchorView.onConfigurationChanged(configuration);
         updateTooltipView();
@@ -125,18 +124,18 @@ public class BaseTooltipView extends FrameLayout {
         gradientDrawable.setCornerRadius(this.mTextViewCornerRadius);
         gradientDrawable.setColor(getResources().getColor(com.android.systemui.R.color.accessibility_floating_menu_background));
         Rect windowLocationOnScreen = this.mAnchorView.getWindowLocationOnScreen();
-        boolean isAnchorViewOnLeft = isAnchorViewOnLeft(windowLocationOnScreen);
-        View findViewById = findViewById(isAnchorViewOnLeft ? com.android.systemui.R.id.arrow_left : com.android.systemui.R.id.arrow_right);
-        findViewById.setVisibility(0);
-        ViewGroup.LayoutParams layoutParams = findViewById.getLayoutParams();
-        ShapeDrawable shapeDrawable = new ShapeDrawable(TriangleShape.createHorizontal(layoutParams.width, layoutParams.height, isAnchorViewOnLeft));
+        boolean zIsAnchorViewOnLeft = isAnchorViewOnLeft(windowLocationOnScreen);
+        View viewFindViewById = findViewById(zIsAnchorViewOnLeft ? com.android.systemui.R.id.arrow_left : com.android.systemui.R.id.arrow_right);
+        viewFindViewById.setVisibility(0);
+        ViewGroup.LayoutParams layoutParams = viewFindViewById.getLayoutParams();
+        ShapeDrawable shapeDrawable = new ShapeDrawable(TriangleShape.createHorizontal(layoutParams.width, layoutParams.height, zIsAnchorViewOnLeft));
         Paint paint = shapeDrawable.getPaint();
         paint.setColor(getResources().getColor(com.android.systemui.R.color.accessibility_floating_menu_background));
         float f = layoutParams.width;
         float f2 = layoutParams.height;
         int i2 = TriangleStrokeShape.$r8$clinit;
         Path path = new Path();
-        if (isAnchorViewOnLeft) {
+        if (zIsAnchorViewOnLeft) {
             path.moveTo(f, f2);
             path.lineTo(0.0f, f2 / 2.0f);
             path.lineTo(f, 0.0f);
@@ -151,12 +150,12 @@ public class BaseTooltipView extends FrameLayout {
         paint2.setColor(getResources().getColor(com.android.systemui.R.color.accessibility_floating_menu_stroke));
         paint2.setStrokeWidth(getResources().getDimensionPixelSize(com.android.systemui.R.dimen.accessibility_floating_menu_stroke_width));
         paint.setPathEffect(new CornerPathEffect(this.mArrowCornerRadius));
-        findViewById.setBackground(new InstantInsetLayerDrawable(new Drawable[]{shapeDrawable, shapeDrawable2}));
-        RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams) findViewById.getLayoutParams();
+        viewFindViewById.setBackground(new InstantInsetLayerDrawable(new Drawable[]{shapeDrawable, shapeDrawable2}));
+        RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams) viewFindViewById.getLayoutParams();
         layoutParams2.width = this.mArrowWidth;
         layoutParams2.height = this.mArrowHeight;
-        layoutParams2.setMargins(isAnchorViewOnLeft ? 0 : this.mArrowMargin, 0, isAnchorViewOnLeft ? this.mArrowMargin : 0, 0);
-        findViewById.setLayoutParams(layoutParams2);
+        layoutParams2.setMargins(zIsAnchorViewOnLeft ? 0 : this.mArrowMargin, 0, zIsAnchorViewOnLeft ? this.mArrowMargin : 0, 0);
+        viewFindViewById.setLayoutParams(layoutParams2);
         ViewGroup.LayoutParams layoutParams3 = this.mTextView.getLayoutParams();
         if (isAnchorViewOnLeft(windowLocationOnScreen)) {
             int i3 = this.mScreenWidth - windowLocationOnScreen.right;
@@ -184,9 +183,9 @@ public class BaseTooltipView extends FrameLayout {
         } else {
             this.mCurrentLayoutParams.x = isAnchorViewOnLeft(windowLocationOnScreen) ? windowLocationOnScreen.right : windowLocationOnScreen.left - getWindowWidthWith(windowLocationOnScreen);
             WindowManager.LayoutParams layoutParams4 = this.mCurrentLayoutParams;
-            int centerY = windowLocationOnScreen.centerY();
+            int iCenterY = windowLocationOnScreen.centerY();
             this.mTextView.measure(View.MeasureSpec.makeMeasureSpec((((this.mScreenWidth - windowLocationOnScreen.width()) - this.mArrowWidth) - this.mArrowMargin) - this.mTextViewMargin, Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(0, 0));
-            layoutParams4.y = centerY - (this.mTextView.getMeasuredHeight() / 2);
+            layoutParams4.y = iCenterY - (this.mTextView.getMeasuredHeight() / 2);
         }
         if (this.mAnchorView.offsetForLeftNaviBar()) {
             WindowManager.LayoutParams layoutParams5 = this.mCurrentLayoutParams;

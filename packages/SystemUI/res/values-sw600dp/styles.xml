@@ -3,7 +3,7 @@
     <style name="TextAppearance.QS.UserSwitcher" parent="@style/TextAppearance.QS">
         <item name="android:textSize">@dimen/kg_user_switcher_text_size</item>
         <item name="android:textColor">?android:textColorSecondary</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="UserDetailView">
         <item name="numColumns">4</item>

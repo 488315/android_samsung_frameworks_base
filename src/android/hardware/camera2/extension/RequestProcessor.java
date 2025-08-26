@@ -6,7 +6,6 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.extension.IRequestCallback;
-import android.hardware.camera2.extension.RequestProcessor;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.impl.PhysicalCaptureResultInfo;
 import android.os.Binder;
@@ -109,9 +108,9 @@ public final class RequestProcessor {
         ArrayList arrayList = new ArrayList(1);
         arrayList.add(0, request);
         try {
-            int submit = this.mRequestProcessor.submit(Request.initializeParcelable(this.mVendorId, arrayList).get(0), new RequestCallbackImpl(arrayList, requestCallback, executor));
-            if (submit != -1) {
-                return submit;
+            int iSubmit = this.mRequestProcessor.submit(Request.initializeParcelable(this.mVendorId, arrayList).get(0), new RequestCallbackImpl(arrayList, requestCallback, executor));
+            if (iSubmit != -1) {
+                return iSubmit;
             }
             throw new CameraAccessException(3, "Failed to submit capture request");
         } catch (RemoteException e) {
@@ -121,9 +120,9 @@ public final class RequestProcessor {
 
     public int submitBurst(List<Request> list, Executor executor, RequestCallback requestCallback) throws CameraAccessException {
         try {
-            int submitBurst = this.mRequestProcessor.submitBurst(Request.initializeParcelable(this.mVendorId, list), new RequestCallbackImpl(list, requestCallback, executor));
-            if (submitBurst != -1) {
-                return submitBurst;
+            int iSubmitBurst = this.mRequestProcessor.submitBurst(Request.initializeParcelable(this.mVendorId, list), new RequestCallbackImpl(list, requestCallback, executor));
+            if (iSubmitBurst != -1) {
+                return iSubmitBurst;
             }
             throw new CameraAccessException(3, "Failed to submit burst request");
         } catch (RemoteException e) {
@@ -176,17 +175,17 @@ public final class RequestProcessor {
         @Override // android.hardware.camera2.extension.IRequestCallback
         public void onCaptureStarted(final int i, final long j, final long j2) {
             if (this.mRequests.get(i) != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureStarted$0(i, j, j2);
+                            this.f$0.lambda$onCaptureStarted$0(i, j, j2);
                         }
                     });
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.e(RequestProcessor.TAG, "Request id: " + i + " not found!");
@@ -201,17 +200,17 @@ public final class RequestProcessor {
         public void onCaptureProgressed(final int i, ParcelCaptureResult parcelCaptureResult) {
             if (this.mRequests.get(i) != null) {
                 final CaptureResult captureResult = new CaptureResult(parcelCaptureResult.cameraId, parcelCaptureResult.results, parcelCaptureResult.parent, parcelCaptureResult.sequenceId, parcelCaptureResult.frameNumber);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureProgressed$1(i, captureResult);
+                            this.f$0.lambda$onCaptureProgressed$1(i, captureResult);
                         }
                     });
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.e(RequestProcessor.TAG, "Request id: " + i + " not found!");
@@ -235,17 +234,17 @@ public final class RequestProcessor {
                     arrayList.add(new CaptureResult(parcelCaptureResult.cameraId, parcelCaptureResult.results, parcelCaptureResult.parent, parcelCaptureResult.sequenceId, parcelCaptureResult.frameNumber));
                 }
                 final TotalCaptureResult totalCaptureResult = new TotalCaptureResult(parcelTotalCaptureResult.logicalCameraId, parcelTotalCaptureResult.results, parcelTotalCaptureResult.parent, parcelTotalCaptureResult.sequenceId, parcelTotalCaptureResult.frameNumber, arrayList, parcelTotalCaptureResult.sessionId, physicalCaptureResultInfoArr2);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureCompleted$2(i, totalCaptureResult);
+                            this.f$0.lambda$onCaptureCompleted$2(i, totalCaptureResult);
                         }
                     });
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.e(RequestProcessor.TAG, "Request id: " + i + " not found!");
@@ -260,17 +259,17 @@ public final class RequestProcessor {
         public void onCaptureFailed(final int i, CaptureFailure captureFailure) {
             if (this.mRequests.get(i) != null) {
                 final android.hardware.camera2.CaptureFailure captureFailure2 = new android.hardware.camera2.CaptureFailure(captureFailure.request, captureFailure.reason, captureFailure.dropped, captureFailure.sequenceId, captureFailure.frameNumber, captureFailure.errorPhysicalCameraId);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureFailed$3(i, captureFailure2);
+                            this.f$0.lambda$onCaptureFailed$3(i, captureFailure2);
                         }
                     });
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.e(RequestProcessor.TAG, "Request id: " + i + " not found!");
@@ -284,17 +283,17 @@ public final class RequestProcessor {
         @Override // android.hardware.camera2.extension.IRequestCallback
         public void onCaptureBufferLost(final int i, final long j, final int i2) {
             if (this.mRequests.get(i) != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureBufferLost$4(i, j, i2);
+                            this.f$0.lambda$onCaptureBufferLost$4(i, j, i2);
                         }
                     });
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.e(RequestProcessor.TAG, "Request id: " + i + " not found!");
@@ -307,16 +306,16 @@ public final class RequestProcessor {
 
         @Override // android.hardware.camera2.extension.IRequestCallback
         public void onCaptureSequenceCompleted(final int i, final long j) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureSequenceCompleted$5(i, j);
+                        this.f$0.lambda$onCaptureSequenceCompleted$5(i, j);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -327,16 +326,16 @@ public final class RequestProcessor {
 
         @Override // android.hardware.camera2.extension.IRequestCallback
         public void onCaptureSequenceAborted(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.extension.RequestProcessor$RequestCallbackImpl$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RequestProcessor.RequestCallbackImpl.this.lambda$onCaptureSequenceAborted$6(i);
+                        this.f$0.lambda$onCaptureSequenceAborted$6(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

@@ -283,9 +283,9 @@ public final class MandatoryStreamCombination {
 
         private List<MandatoryStreamCombination> getAvailableMandatoryStreamCombinationsInternal(StreamCombinationTemplate[] streamCombinationTemplateArr, boolean z) {
             StreamCombinationTemplate[] streamCombinationTemplateArr2 = streamCombinationTemplateArr;
-            HashMap<Pair<SizeThreshold, Integer>, List<Size>> enumerateAvailableSizes = enumerateAvailableSizes();
+            HashMap<Pair<SizeThreshold, Integer>, List<Size>> mapEnumerateAvailableSizes = enumerateAvailableSizes();
             List<MandatoryStreamCombination> list = null;
-            if (enumerateAvailableSizes == null) {
+            if (mapEnumerateAvailableSizes == null) {
                 Log.e(MandatoryStreamCombination.TAG, "Available size enumeration failed!");
                 return null;
             }
@@ -303,8 +303,8 @@ public final class MandatoryStreamCombination {
                 while (i2 < length2) {
                     StreamTemplate streamTemplate = streamTemplateArr[i2];
                     List<MandatoryStreamCombination> list2 = list;
-                    List<Size> list3 = enumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat)));
-                    if (z && streamTemplate.mFormat == 54 && !new HashSet(enumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(35)))).equals(new HashSet(list3))) {
+                    List<Size> list3 = mapEnumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat)));
+                    if (z && streamTemplate.mFormat == 54 && !new HashSet(mapEnumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(35)))).equals(new HashSet(list3))) {
                         Log.e(MandatoryStreamCombination.TAG, "The supported 10-bit YUV sizes are different from the supported 8-bit YUV sizes!");
                         return list2;
                     }
@@ -353,8 +353,8 @@ public final class MandatoryStreamCombination {
             if (!isCapabilitySupported(19)) {
                 return null;
             }
-            HashMap<Pair<SizeThreshold, Integer>, List<Size>> enumerateAvailableSizes = enumerateAvailableSizes();
-            if (enumerateAvailableSizes == null) {
+            HashMap<Pair<SizeThreshold, Integer>, List<Size>> mapEnumerateAvailableSizes = enumerateAvailableSizes();
+            if (mapEnumerateAvailableSizes == null) {
                 Log.e(MandatoryStreamCombination.TAG, "Available size enumeration failed!");
                 return null;
             }
@@ -380,7 +380,7 @@ public final class MandatoryStreamCombination {
                     StreamTemplate streamTemplate = streamTemplateArr[i];
                     try {
                         int i2 = i;
-                        arrayList3.add(new MandatoryStreamInformation(enumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat))), streamTemplate.mFormat, streamTemplate.mSizeThreshold == SizeThreshold.MAXIMUM, false, false, false, streamTemplate.mStreamUseCase));
+                        arrayList3.add(new MandatoryStreamInformation(mapEnumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat))), streamTemplate.mFormat, streamTemplate.mSizeThreshold == SizeThreshold.MAXIMUM, false, false, false, streamTemplate.mStreamUseCase));
                         i = i2 + 1;
                     } catch (IllegalArgumentException unused) {
                         Log.e(MandatoryStreamCombination.TAG, "No available sizes found for format: " + streamTemplate.mFormat + " size threshold: " + streamTemplate.mSizeThreshold + " combination: " + streamCombinationTemplate.mDescription);
@@ -423,12 +423,12 @@ public final class MandatoryStreamCombination {
                 while (i2 < length2) {
                     StreamTemplate streamTemplate = streamTemplateArr[i2];
                     ArrayList arrayList3 = new ArrayList();
-                    int ordinal = streamTemplate.mSizeThreshold.ordinal();
-                    if (ordinal == 0) {
+                    int iOrdinal = streamTemplate.mSizeThreshold.ordinal();
+                    if (iOrdinal == 0) {
                         builder = this;
                         streamCombinationTemplateArr = streamCombinationTemplateArr2;
                         size = size2;
-                    } else if (ordinal != 5) {
+                    } else if (iOrdinal != 5) {
                         builder = this;
                         streamCombinationTemplateArr = streamCombinationTemplateArr2;
                         size = size3;
@@ -463,7 +463,7 @@ public final class MandatoryStreamCombination {
         }
 
         public List<MandatoryStreamCombination> getAvailableMandatoryMaximumResolutionStreamCombinations() {
-            int i;
+            int length;
             if (!isColorOutputSupported()) {
                 Log.v(MandatoryStreamCombination.TAG, "Device is not backward compatible!, no mandatory maximum res streams");
                 return null;
@@ -471,24 +471,24 @@ public final class MandatoryStreamCombination {
             ArrayList<StreamCombinationTemplate> arrayList = new ArrayList<>();
             arrayList.addAll(Arrays.asList(MandatoryStreamCombination.sUltraHighResolutionStreamCombinations));
             ArrayList<MandatoryStreamCombination> arrayList2 = new ArrayList<>();
-            boolean isRemosaicReprocessingSupported = isRemosaicReprocessingSupported();
+            boolean zIsRemosaicReprocessingSupported = isRemosaicReprocessingSupported();
             Size[] inputSizes = this.mStreamConfigMapMaximumResolution.getInputSizes(35);
             Size[] inputSizes2 = this.mStreamConfigMapMaximumResolution.getInputSizes(34);
-            if (isRemosaicReprocessingSupported) {
-                i = MandatoryStreamCombination.sUltraHighResolutionReprocStreamCombinations.length;
+            if (zIsRemosaicReprocessingSupported) {
+                length = MandatoryStreamCombination.sUltraHighResolutionReprocStreamCombinations.length;
                 arrayList.addAll(Arrays.asList(MandatoryStreamCombination.sUltraHighResolutionReprocStreamCombinations));
             } else {
-                i = 0;
+                length = 0;
             }
             if (inputSizes != null && inputSizes.length != 0) {
-                i += MandatoryStreamCombination.sUltraHighResolutionYUVReprocStreamCombinations.length;
+                length += MandatoryStreamCombination.sUltraHighResolutionYUVReprocStreamCombinations.length;
                 arrayList.addAll(Arrays.asList(MandatoryStreamCombination.sUltraHighResolutionYUVReprocStreamCombinations));
             }
             if (inputSizes2 != null && inputSizes2.length != 0) {
-                i += MandatoryStreamCombination.sUltraHighResolutionPRIVReprocStreamCombinations.length;
+                length += MandatoryStreamCombination.sUltraHighResolutionPRIVReprocStreamCombinations.length;
                 arrayList.addAll(Arrays.asList(MandatoryStreamCombination.sUltraHighResolutionPRIVReprocStreamCombinations));
             }
-            arrayList2.ensureCapacity(arrayList.size() + i);
+            arrayList2.ensureCapacity(arrayList.size() + length);
             fillUHMandatoryStreamCombinations(arrayList2, arrayList);
             return Collections.unmodifiableList(arrayList2);
         }
@@ -516,8 +516,8 @@ public final class MandatoryStreamCombination {
                 arrayList.add(new MandatoryStreamInformation(arrayList2, i2, false, true, true));
                 arrayList.add(new MandatoryStreamInformation(arrayList2, i2, false, false, true));
             }
-            HashMap<Pair<SizeThreshold, Integer>, List<Size>> enumerateAvailableSizes = enumerateAvailableSizes();
-            if (enumerateAvailableSizes == null) {
+            HashMap<Pair<SizeThreshold, Integer>, List<Size>> mapEnumerateAvailableSizes = enumerateAvailableSizes();
+            if (mapEnumerateAvailableSizes == null) {
                 Log.e(MandatoryStreamCombination.TAG, "Available size enumeration failed");
                 return null;
             }
@@ -546,13 +546,13 @@ public final class MandatoryStreamCombination {
                         Size[] highResolutionOutputSizes = streamConfigurationMap.getHighResolutionOutputSizes(i5);
                         Size maxSizeOrNull = getMaxSizeOrNull(outputSizes2);
                         Size maxSizeOrNull2 = getMaxSizeOrNull(highResolutionOutputSizes);
-                        Size size = maxSizeOrNull != null ? maxSizeOrNull : maxSizeOrNull2;
+                        Size maxSize = maxSizeOrNull != null ? maxSizeOrNull : maxSizeOrNull2;
                         if (maxSizeOrNull != null && maxSizeOrNull2 != null) {
-                            size = getMaxSize(maxSizeOrNull, maxSizeOrNull2);
+                            maxSize = getMaxSize(maxSizeOrNull, maxSizeOrNull2);
                         }
-                        arrayList4.add(size);
+                        arrayList4.add(maxSize);
                     } else if (i5 != 32) {
-                        arrayList4 = enumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(i5)));
+                        arrayList4 = mapEnumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(i5)));
                     } else {
                         list = arrayList3;
                         arrayList.add(new MandatoryStreamInformation(list, i5, z3, false, z2));
@@ -658,8 +658,8 @@ public final class MandatoryStreamCombination {
                 Log.e(MandatoryStreamCombination.TAG, "No available stream templates!");
                 return null;
             }
-            HashMap<Pair<SizeThreshold, Integer>, List<Size>> enumerateAvailableSizes = enumerateAvailableSizes();
-            if (enumerateAvailableSizes == null) {
+            HashMap<Pair<SizeThreshold, Integer>, List<Size>> mapEnumerateAvailableSizes = enumerateAvailableSizes();
+            if (mapEnumerateAvailableSizes == null) {
                 Log.e(MandatoryStreamCombination.TAG, "Available size enumeration failed!");
                 return null;
             }
@@ -715,7 +715,7 @@ public final class MandatoryStreamCombination {
                     } else {
                         size = size2;
                         list = list6;
-                        list2 = enumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat)));
+                        list2 = mapEnumerateAvailableSizes.get(new Pair(streamTemplate.mSizeThreshold, new Integer(streamTemplate.mFormat)));
                     }
                     try {
                         arrayList4.add(new MandatoryStreamInformation(list2, streamTemplate.mFormat, streamTemplate.mSizeThreshold == SizeThreshold.MAXIMUM));
@@ -763,7 +763,7 @@ public final class MandatoryStreamCombination {
                 Log.e(MandatoryStreamCombination.TAG, "Failed to find maximum recording size!");
                 return null;
             }
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             for (int i = 0; i < 5; i++) {
                 int i2 = iArr[i];
                 Integer num = new Integer(i2);
@@ -771,26 +771,26 @@ public final class MandatoryStreamCombination {
                 if (outputSizes == null) {
                     outputSizes = new Size[0];
                 }
-                hashMap.put(num, outputSizes);
+                map.put(num, outputSizes);
             }
-            List<Size> sizesWithinBound = getSizesWithinBound((Size[]) hashMap.get(new Integer(34)), this.kPreviewSizeBound);
+            List<Size> sizesWithinBound = getSizesWithinBound((Size[]) map.get(new Integer(34)), this.kPreviewSizeBound);
             if (sizesWithinBound == null || sizesWithinBound.isEmpty()) {
                 Log.e(MandatoryStreamCombination.TAG, "No preview sizes within preview size bound!");
                 return null;
             }
             Size maxPreviewSize = getMaxPreviewSize(getAscendingOrderSizes(sizesWithinBound, false));
-            HashMap<Pair<SizeThreshold, Integer>, List<Size>> hashMap2 = new HashMap<>();
+            HashMap<Pair<SizeThreshold, Integer>, List<Size>> map2 = new HashMap<>();
             for (int i3 = 0; i3 < 5; i3++) {
                 Integer num2 = new Integer(iArr[i3]);
-                Size[] sizeArr = (Size[]) hashMap.get(num2);
-                hashMap2.put(new Pair<>(SizeThreshold.VGA, num2), getSizesWithinBound(sizeArr, size));
-                hashMap2.put(new Pair<>(SizeThreshold.PREVIEW, num2), getSizesWithinBound(sizeArr, maxPreviewSize));
-                hashMap2.put(new Pair<>(SizeThreshold.RECORD, num2), getSizesWithinBound(sizeArr, maxCameraRecordingSize));
-                hashMap2.put(new Pair<>(SizeThreshold.MAXIMUM, num2), Arrays.asList(sizeArr));
-                hashMap2.put(new Pair<>(SizeThreshold.s720p, num2), getSizesWithinBound(sizeArr, size2));
-                hashMap2.put(new Pair<>(SizeThreshold.s1440p, num2), getSizesWithinBound(sizeArr, size3));
+                Size[] sizeArr = (Size[]) map.get(num2);
+                map2.put(new Pair<>(SizeThreshold.VGA, num2), getSizesWithinBound(sizeArr, size));
+                map2.put(new Pair<>(SizeThreshold.PREVIEW, num2), getSizesWithinBound(sizeArr, maxPreviewSize));
+                map2.put(new Pair<>(SizeThreshold.RECORD, num2), getSizesWithinBound(sizeArr, maxCameraRecordingSize));
+                map2.put(new Pair<>(SizeThreshold.MAXIMUM, num2), Arrays.asList(sizeArr));
+                map2.put(new Pair<>(SizeThreshold.s720p, num2), getSizesWithinBound(sizeArr, size2));
+                map2.put(new Pair<>(SizeThreshold.s1440p, num2), getSizesWithinBound(sizeArr, size3));
             }
-            return hashMap2;
+            return map2;
         }
 
         private static List<Size> getSizesWithinBound(Size[] sizeArr, Size size) {

@@ -5,7 +5,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VelocityTracker1D {
     public int index;
@@ -19,7 +18,6 @@ public final class VelocityTracker1D {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Strategy {
         public static final /* synthetic */ Strategy[] $VALUES;
         public static final Strategy Impulse;
@@ -47,7 +45,6 @@ public final class VelocityTracker1D {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -65,6 +62,7 @@ public final class VelocityTracker1D {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public VelocityTracker1D() {
         this(false, null, 3, 0 == true ? 1 : 0);
     }
@@ -90,7 +88,7 @@ public final class VelocityTracker1D {
         boolean z;
         int i2;
         float f;
-        float signum;
+        float fSignum;
         int i3 = this.index;
         DataPointAtTime[] dataPointAtTimeArr = this.samples;
         DataPointAtTime dataPointAtTime = dataPointAtTimeArr[i3];
@@ -118,9 +116,9 @@ public final class VelocityTracker1D {
                 float f2 = j - j2;
                 z = z2;
                 i2 = 1;
-                float abs = Math.abs(j2 - dataPointAtTime2.time);
+                float fAbs = Math.abs(j2 - dataPointAtTime2.time);
                 dataPointAtTime2 = (strategy == Strategy.Lsq2 || z) ? dataPointAtTime3 : dataPointAtTime;
-                if (f2 <= 100.0f && abs <= 40.0f) {
+                if (f2 <= 100.0f && fAbs <= 40.0f) {
                     fArr[i] = dataPointAtTime3.dataPoint;
                     fArr2[i] = -f2;
                     if (i3 == 0) {
@@ -147,16 +145,16 @@ public final class VelocityTracker1D {
                 float f5 = fArr2[i8];
                 if (f3 != f5) {
                     float f6 = (z ? -fArr[i8] : fArr[i7] - fArr[i8]) / (f3 - f5);
-                    float abs2 = (Math.abs(f6) * (f6 - (Math.signum(f4) * ((float) Math.sqrt(Math.abs(f4) * 2))))) + f4;
+                    float fAbs2 = (Math.abs(f6) * (f6 - (Math.signum(f4) * ((float) Math.sqrt(Math.abs(f4) * 2))))) + f4;
                     if (i7 == i6) {
-                        abs2 *= 0.5f;
+                        fAbs2 *= 0.5f;
                     }
-                    f4 = abs2;
+                    f4 = fAbs2;
                 }
                 i7--;
                 f3 = f5;
             }
-            signum = Math.signum(f4) * ((float) Math.sqrt(Math.abs(f4) * 2));
+            fSignum = Math.signum(f4) * ((float) Math.sqrt(Math.abs(f4) * 2));
         } else {
             if (i5 != 2) {
                 throw new NoWhenBranchMatchedException();
@@ -164,12 +162,12 @@ public final class VelocityTracker1D {
             try {
                 float[] fArr3 = this.reusableVelocityCoefficients;
                 VelocityTrackerKt.polyFitLeastSquares(fArr2, fArr, i4, fArr3);
-                signum = fArr3[i2];
+                fSignum = fArr3[i2];
             } catch (IllegalArgumentException unused) {
-                signum = f;
+                fSignum = f;
             }
         }
-        return signum * 1000;
+        return fSignum * 1000;
     }
 
     public VelocityTracker1D(boolean z, Strategy strategy) {
@@ -205,18 +203,18 @@ public final class VelocityTracker1D {
         if (f <= 0.0f) {
             InlineClassHelperKt.throwIllegalStateException("maximumVelocity should be a positive value. You specified=" + f);
         }
-        float calculateVelocity = calculateVelocity();
-        if (calculateVelocity == 0.0f || Float.isNaN(calculateVelocity)) {
+        float fCalculateVelocity = calculateVelocity();
+        if (fCalculateVelocity == 0.0f || Float.isNaN(fCalculateVelocity)) {
             return 0.0f;
         }
-        if (calculateVelocity <= 0.0f) {
+        if (fCalculateVelocity <= 0.0f) {
             float f2 = -f;
-            if (calculateVelocity < f2) {
+            if (fCalculateVelocity < f2) {
                 return f2;
             }
-        } else if (calculateVelocity > f) {
+        } else if (fCalculateVelocity > f) {
             return f;
         }
-        return calculateVelocity;
+        return fCalculateVelocity;
     }
 }

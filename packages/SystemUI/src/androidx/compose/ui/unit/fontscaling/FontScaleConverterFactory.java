@@ -6,7 +6,6 @@ import androidx.collection.internal.ContainerHelpersKt;
 import androidx.compose.ui.unit.InlineClassHelperKt;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FontScaleConverterFactory {
     public static final Object[] LookupTablesWriteLock;
@@ -35,65 +34,65 @@ public final class FontScaleConverterFactory {
     }
 
     public static FontScaleConverter forScale(float f) {
-        float keyAt;
-        FontScaleConverter fontScaleConverter;
+        float fKeyAt;
+        FontScaleConverter fontScaleConverterTable;
         if (f < 1.03f) {
             return null;
         }
         INSTANCE.getClass();
         int i = (int) (f * 100.0f);
-        FontScaleConverter fontScaleConverter2 = (FontScaleConverter) sLookupTables.get(i);
-        if (fontScaleConverter2 != null) {
-            return fontScaleConverter2;
+        FontScaleConverter fontScaleConverter = (FontScaleConverter) sLookupTables.get(i);
+        if (fontScaleConverter != null) {
+            return fontScaleConverter;
         }
         SparseArrayCompat sparseArrayCompat = sLookupTables;
         if (sparseArrayCompat.garbage) {
             SparseArrayCompatKt.access$gc(sparseArrayCompat);
         }
-        int binarySearch = ContainerHelpersKt.binarySearch(sparseArrayCompat.size, i, sparseArrayCompat.keys);
-        if (binarySearch >= 0) {
-            return (FontScaleConverter) sLookupTables.valueAt(binarySearch);
+        int iBinarySearch = ContainerHelpersKt.binarySearch(sparseArrayCompat.size, i, sparseArrayCompat.keys);
+        if (iBinarySearch >= 0) {
+            return (FontScaleConverter) sLookupTables.valueAt(iBinarySearch);
         }
-        int i2 = -(binarySearch + 1);
+        int i2 = -(iBinarySearch + 1);
         int i3 = i2 - 1;
         if (i2 >= sLookupTables.size()) {
-            FontScaleConverterTable fontScaleConverterTable = new FontScaleConverterTable(new float[]{1.0f}, new float[]{f});
-            put(f, fontScaleConverterTable);
-            return fontScaleConverterTable;
+            FontScaleConverterTable fontScaleConverterTable2 = new FontScaleConverterTable(new float[]{1.0f}, new float[]{f});
+            put(f, fontScaleConverterTable2);
+            return fontScaleConverterTable2;
         }
         if (i3 < 0) {
             float[] fArr = CommonFontSizes;
-            fontScaleConverter = new FontScaleConverterTable(fArr, fArr);
-            keyAt = 1.0f;
+            fontScaleConverterTable = new FontScaleConverterTable(fArr, fArr);
+            fKeyAt = 1.0f;
         } else {
-            keyAt = sLookupTables.keyAt(i3) / 100.0f;
-            fontScaleConverter = (FontScaleConverter) sLookupTables.valueAt(i3);
+            fKeyAt = sLookupTables.keyAt(i3) / 100.0f;
+            fontScaleConverterTable = (FontScaleConverter) sLookupTables.valueAt(i3);
         }
-        float keyAt2 = sLookupTables.keyAt(i2) / 100.0f;
+        float fKeyAt2 = sLookupTables.keyAt(i2) / 100.0f;
         MathUtils.INSTANCE.getClass();
-        float max = (Math.max(0.0f, Math.min(1.0f, keyAt == keyAt2 ? 0.0f : (f - keyAt) / (keyAt2 - keyAt))) * 1.0f) + 0.0f;
-        FontScaleConverter fontScaleConverter3 = (FontScaleConverter) sLookupTables.valueAt(i2);
+        float fMax = (Math.max(0.0f, Math.min(1.0f, fKeyAt == fKeyAt2 ? 0.0f : (f - fKeyAt) / (fKeyAt2 - fKeyAt))) * 1.0f) + 0.0f;
+        FontScaleConverter fontScaleConverter2 = (FontScaleConverter) sLookupTables.valueAt(i2);
         float[] fArr2 = CommonFontSizes;
         float[] fArr3 = new float[fArr2.length];
         int length = fArr2.length;
         for (int i4 = 0; i4 < length; i4++) {
             float f2 = fArr2[i4];
-            float convertSpToDp = fontScaleConverter.convertSpToDp(f2);
-            float convertSpToDp2 = fontScaleConverter3.convertSpToDp(f2);
+            float fConvertSpToDp = fontScaleConverterTable.convertSpToDp(f2);
+            float fConvertSpToDp2 = fontScaleConverter2.convertSpToDp(f2);
             MathUtils.INSTANCE.getClass();
-            fArr3[i4] = ((convertSpToDp2 - convertSpToDp) * max) + convertSpToDp;
+            fArr3[i4] = ((fConvertSpToDp2 - fConvertSpToDp) * fMax) + fConvertSpToDp;
         }
-        FontScaleConverterTable fontScaleConverterTable2 = new FontScaleConverterTable(fArr2, fArr3);
-        put(f, fontScaleConverterTable2);
-        return fontScaleConverterTable2;
+        FontScaleConverterTable fontScaleConverterTable3 = new FontScaleConverterTable(fArr2, fArr3);
+        put(f, fontScaleConverterTable3);
+        return fontScaleConverterTable3;
     }
 
     public static void put(float f, FontScaleConverterTable fontScaleConverterTable) {
         synchronized (LookupTablesWriteLock) {
-            SparseArrayCompat m2clone = sLookupTables.m2clone();
+            SparseArrayCompat sparseArrayCompatM2clone = sLookupTables.m2clone();
             INSTANCE.getClass();
-            m2clone.put((int) (f * 100.0f), fontScaleConverterTable);
-            sLookupTables = m2clone;
+            sparseArrayCompatM2clone.put((int) (f * 100.0f), fontScaleConverterTable);
+            sLookupTables = sparseArrayCompatM2clone;
             Unit unit = Unit.INSTANCE;
         }
     }

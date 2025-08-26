@@ -146,7 +146,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         if (!this.mMaxItemsSet) {
             this.mMaxItems = actionBarPolicy.getMaxActionButtons();
         }
-        int i = this.mWidthLimit;
+        int measuredWidth = this.mWidthLimit;
         if (this.mReserveOverflow) {
             if (this.mSemOverflowButton == null) {
                 if (this.mIsThemeDeviceDefaultFamily) {
@@ -156,33 +156,33 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
                     this.mOverflowButton = overflowMenuButton;
                     this.mSemOverflowButton = overflowMenuButton;
                     if (this.mPendingOverflowIconSet) {
-                        overflowMenuButton.lambda$setImageURIAsync$0(this.mPendingOverflowIcon);
+                        overflowMenuButton.lambda$setImageURIAsync$2(this.mPendingOverflowIcon);
                         this.mPendingOverflowIcon = null;
                         this.mPendingOverflowIconSet = false;
                     }
                 }
-                int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-                this.mSemOverflowButton.measure(makeMeasureSpec, makeMeasureSpec);
+                int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+                this.mSemOverflowButton.measure(iMakeMeasureSpec, iMakeMeasureSpec);
             }
-            i -= this.mSemOverflowButton.getMeasuredWidth();
+            measuredWidth -= this.mSemOverflowButton.getMeasuredWidth();
         } else {
             this.mOverflowButton = null;
             this.mSemOverflowButton = null;
         }
-        this.mActionItemWidthLimit = i;
+        this.mActionItemWidthLimit = measuredWidth;
         this.mMinCellSize = (int) (resources.getDisplayMetrics().density * 56.0f);
     }
 
     public void onConfigurationChanged(Configuration configuration) {
         View view;
         if (this.mSemOverflowButton != null) {
-            TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
-            this.mSemOverflowButton.setMinimumHeight(obtainStyledAttributes.getDimensionPixelSize(37, -1));
+            TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
+            this.mSemOverflowButton.setMinimumHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(37, -1));
             View view2 = this.mSemOverflowButton;
             if ((view2 instanceof SemOverflowMenuButtonContainer) && view2.getParent() == null) {
                 this.mSemOverflowButton.dispatchConfigurationChanged(configuration);
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         if (!this.mMaxItemsSet) {
             this.mMaxItems = ActionBarPolicy.get(this.mContext).getMaxActionButtons();
@@ -231,7 +231,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
                 ((SemOverflowMenuButtonContainer) view).setImageDrawable(drawable);
                 return;
             } else {
-                ((OverflowMenuButton) view).lambda$setImageURIAsync$0(drawable);
+                ((OverflowMenuButton) view).lambda$setImageURIAsync$2(drawable);
                 return;
             }
         }
@@ -315,38 +315,38 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
 
     /* JADX INFO: Access modifiers changed from: private */
     public void runItemAnimations() {
-        ObjectAnimator ofPropertyValuesHolder;
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder;
         int i = 0;
         while (true) {
-            float f = 1.0f;
+            float alpha = 1.0f;
             if (i >= this.mPreLayoutItems.size()) {
                 break;
             }
-            int keyAt = this.mPreLayoutItems.keyAt(i);
-            final MenuItemLayoutInfo menuItemLayoutInfo = this.mPreLayoutItems.get(keyAt);
-            int indexOfKey = this.mPostLayoutItems.indexOfKey(keyAt);
-            if (indexOfKey >= 0) {
-                MenuItemLayoutInfo valueAt = this.mPostLayoutItems.valueAt(indexOfKey);
-                PropertyValuesHolder ofFloat = menuItemLayoutInfo.left != valueAt.left ? PropertyValuesHolder.ofFloat(View.TRANSLATION_X, menuItemLayoutInfo.left - valueAt.left, 0.0f) : null;
-                PropertyValuesHolder ofFloat2 = menuItemLayoutInfo.top != valueAt.top ? PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, menuItemLayoutInfo.top - valueAt.top, 0.0f) : null;
-                if (ofFloat != null || ofFloat2 != null) {
+            int iKeyAt = this.mPreLayoutItems.keyAt(i);
+            final MenuItemLayoutInfo menuItemLayoutInfo = this.mPreLayoutItems.get(iKeyAt);
+            int iIndexOfKey = this.mPostLayoutItems.indexOfKey(iKeyAt);
+            if (iIndexOfKey >= 0) {
+                MenuItemLayoutInfo menuItemLayoutInfoValueAt = this.mPostLayoutItems.valueAt(iIndexOfKey);
+                PropertyValuesHolder propertyValuesHolderOfFloat = menuItemLayoutInfo.left != menuItemLayoutInfoValueAt.left ? PropertyValuesHolder.ofFloat(View.TRANSLATION_X, menuItemLayoutInfo.left - menuItemLayoutInfoValueAt.left, 0.0f) : null;
+                PropertyValuesHolder propertyValuesHolderOfFloat2 = menuItemLayoutInfo.top != menuItemLayoutInfoValueAt.top ? PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, menuItemLayoutInfo.top - menuItemLayoutInfoValueAt.top, 0.0f) : null;
+                if (propertyValuesHolderOfFloat != null || propertyValuesHolderOfFloat2 != null) {
                     for (int i2 = 0; i2 < this.mRunningItemAnimations.size(); i2++) {
                         ItemAnimationInfo itemAnimationInfo = this.mRunningItemAnimations.get(i2);
-                        if (itemAnimationInfo.id == keyAt && itemAnimationInfo.animType == 0) {
+                        if (itemAnimationInfo.id == iKeyAt && itemAnimationInfo.animType == 0) {
                             itemAnimationInfo.animator.cancel();
                         }
                     }
-                    if (ofFloat == null) {
-                        ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(valueAt.view, ofFloat2);
-                    } else if (ofFloat2 != null) {
-                        ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(valueAt.view, ofFloat, ofFloat2);
+                    if (propertyValuesHolderOfFloat == null) {
+                        objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(menuItemLayoutInfoValueAt.view, propertyValuesHolderOfFloat2);
+                    } else if (propertyValuesHolderOfFloat2 != null) {
+                        objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(menuItemLayoutInfoValueAt.view, propertyValuesHolderOfFloat, propertyValuesHolderOfFloat2);
                     } else {
-                        ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(valueAt.view, ofFloat);
+                        objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(menuItemLayoutInfoValueAt.view, propertyValuesHolderOfFloat);
                     }
-                    ofPropertyValuesHolder.setDuration(150L);
-                    ofPropertyValuesHolder.start();
-                    this.mRunningItemAnimations.add(new ItemAnimationInfo(keyAt, valueAt, ofPropertyValuesHolder, 0));
-                    ofPropertyValuesHolder.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.3
+                    objectAnimatorOfPropertyValuesHolder.setDuration(150L);
+                    objectAnimatorOfPropertyValuesHolder.start();
+                    this.mRunningItemAnimations.add(new ItemAnimationInfo(iKeyAt, menuItemLayoutInfoValueAt, objectAnimatorOfPropertyValuesHolder, 0));
+                    objectAnimatorOfPropertyValuesHolder.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.3
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public void onAnimationEnd(Animator animator) {
                             for (int i3 = 0; i3 < ActionMenuPresenter.this.mRunningItemAnimations.size(); i3++) {
@@ -358,21 +358,21 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
                         }
                     });
                 }
-                this.mPostLayoutItems.remove(keyAt);
+                this.mPostLayoutItems.remove(iKeyAt);
             } else {
                 for (int i3 = 0; i3 < this.mRunningItemAnimations.size(); i3++) {
                     ItemAnimationInfo itemAnimationInfo2 = this.mRunningItemAnimations.get(i3);
-                    if (itemAnimationInfo2.id == keyAt && itemAnimationInfo2.animType == 1) {
-                        f = itemAnimationInfo2.menuItemLayoutInfo.view.getAlpha();
+                    if (itemAnimationInfo2.id == iKeyAt && itemAnimationInfo2.animType == 1) {
+                        alpha = itemAnimationInfo2.menuItemLayoutInfo.view.getAlpha();
                         itemAnimationInfo2.animator.cancel();
                     }
                 }
-                ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(menuItemLayoutInfo.view, View.ALPHA, f, 0.0f);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(menuItemLayoutInfo.view, View.ALPHA, alpha, 0.0f);
                 ((ViewGroup) this.mMenuView).getOverlay().add(menuItemLayoutInfo.view);
-                ofFloat3.setDuration(150L);
-                ofFloat3.start();
-                this.mRunningItemAnimations.add(new ItemAnimationInfo(keyAt, menuItemLayoutInfo, ofFloat3, 2));
-                ofFloat3.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.4
+                objectAnimatorOfFloat.setDuration(150L);
+                objectAnimatorOfFloat.start();
+                this.mRunningItemAnimations.add(new ItemAnimationInfo(iKeyAt, menuItemLayoutInfo, objectAnimatorOfFloat, 2));
+                objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.4
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         int i4 = 0;
@@ -393,23 +393,23 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             i++;
         }
         for (int i4 = 0; i4 < this.mPostLayoutItems.size(); i4++) {
-            int keyAt2 = this.mPostLayoutItems.keyAt(i4);
-            int indexOfKey2 = this.mPostLayoutItems.indexOfKey(keyAt2);
-            if (indexOfKey2 >= 0) {
-                MenuItemLayoutInfo valueAt2 = this.mPostLayoutItems.valueAt(indexOfKey2);
-                float f2 = 0.0f;
+            int iKeyAt2 = this.mPostLayoutItems.keyAt(i4);
+            int iIndexOfKey2 = this.mPostLayoutItems.indexOfKey(iKeyAt2);
+            if (iIndexOfKey2 >= 0) {
+                MenuItemLayoutInfo menuItemLayoutInfoValueAt2 = this.mPostLayoutItems.valueAt(iIndexOfKey2);
+                float alpha2 = 0.0f;
                 for (int i5 = 0; i5 < this.mRunningItemAnimations.size(); i5++) {
                     ItemAnimationInfo itemAnimationInfo3 = this.mRunningItemAnimations.get(i5);
-                    if (itemAnimationInfo3.id == keyAt2 && itemAnimationInfo3.animType == 2) {
-                        f2 = itemAnimationInfo3.menuItemLayoutInfo.view.getAlpha();
+                    if (itemAnimationInfo3.id == iKeyAt2 && itemAnimationInfo3.animType == 2) {
+                        alpha2 = itemAnimationInfo3.menuItemLayoutInfo.view.getAlpha();
                         itemAnimationInfo3.animator.cancel();
                     }
                 }
-                ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(valueAt2.view, View.ALPHA, f2, 1.0f);
-                ofFloat4.start();
-                ofFloat4.setDuration(150L);
-                this.mRunningItemAnimations.add(new ItemAnimationInfo(keyAt2, valueAt2, ofFloat4, 1));
-                ofFloat4.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.5
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(menuItemLayoutInfoValueAt2.view, View.ALPHA, alpha2, 1.0f);
+                objectAnimatorOfFloat2.start();
+                objectAnimatorOfFloat2.setDuration(150L);
+                this.mRunningItemAnimations.add(new ItemAnimationInfo(iKeyAt2, menuItemLayoutInfoValueAt2, objectAnimatorOfFloat2, 1));
+                objectAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ActionMenuPresenter.5
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         for (int i6 = 0; i6 < ActionMenuPresenter.this.mRunningItemAnimations.size(); i6++) {
@@ -519,8 +519,8 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         while (subMenuBuilder2.getParentMenu() != this.mMenu) {
             subMenuBuilder2 = (SubMenuBuilder) subMenuBuilder2.getParentMenu();
         }
-        View findViewForItem = findViewForItem(subMenuBuilder2.getItem());
-        if (findViewForItem == null) {
+        View viewFindViewForItem = findViewForItem(subMenuBuilder2.getItem());
+        if (viewFindViewForItem == null) {
             return false;
         }
         this.mOpenSubMenuId = subMenuBuilder.getItem().getItemId();
@@ -537,7 +537,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             }
             i++;
         }
-        ActionButtonSubmenu actionButtonSubmenu = new ActionButtonSubmenu(this.mContext, subMenuBuilder, findViewForItem);
+        ActionButtonSubmenu actionButtonSubmenu = new ActionButtonSubmenu(this.mContext, subMenuBuilder, viewFindViewForItem);
         this.mActionButtonPopup = actionButtonSubmenu;
         actionButtonSubmenu.setForceShowIcon(z);
         this.mActionButtonPopup.show();
@@ -613,71 +613,71 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
 
     @Override // com.android.internal.view.menu.BaseMenuPresenter, com.android.internal.view.menu.MenuPresenter
     public boolean flagActionItems() {
-        ArrayList<MenuItemImpl> arrayList;
+        ArrayList<MenuItemImpl> visibleItems;
+        int size;
         int i;
-        int i2;
-        int i3;
+        int iMeasureChildForCells;
         boolean z;
-        int i4;
+        int i2;
         ActionMenuPresenter actionMenuPresenter = this;
         View view = null;
         boolean z2 = false;
         if (actionMenuPresenter.mMenu != null) {
-            arrayList = actionMenuPresenter.mMenu.getVisibleItems();
-            i = arrayList.size();
+            visibleItems = actionMenuPresenter.mMenu.getVisibleItems();
+            size = visibleItems.size();
         } else {
-            arrayList = null;
-            i = 0;
+            visibleItems = null;
+            size = 0;
         }
-        int i5 = actionMenuPresenter.mMaxItems;
-        int i6 = actionMenuPresenter.mActionItemWidthLimit;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int i3 = actionMenuPresenter.mMaxItems;
+        int i4 = actionMenuPresenter.mActionItemWidthLimit;
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
         ViewGroup viewGroup = (ViewGroup) actionMenuPresenter.mMenuView;
         boolean z3 = false;
-        int i7 = 0;
-        int i8 = 0;
-        for (int i9 = 0; i9 < i; i9++) {
-            MenuItemImpl menuItemImpl = arrayList.get(i9);
+        int i5 = 0;
+        int i6 = 0;
+        for (int i7 = 0; i7 < size; i7++) {
+            MenuItemImpl menuItemImpl = visibleItems.get(i7);
             if (menuItemImpl.requiresActionButton()) {
-                i7++;
+                i5++;
             } else if (menuItemImpl.requestsActionButton()) {
-                i8++;
+                i6++;
             } else {
                 z3 = true;
             }
             if (actionMenuPresenter.mExpandedActionViewsExclusive && menuItemImpl.isActionViewExpanded()) {
-                i5 = 0;
+                i3 = 0;
             }
         }
-        if (actionMenuPresenter.mReserveOverflow && (z3 || i8 + i7 > i5)) {
-            i5--;
+        if (actionMenuPresenter.mReserveOverflow && (z3 || i6 + i5 > i3)) {
+            i3--;
         }
-        int i10 = i5 - i7;
+        int i8 = i3 - i5;
         SparseBooleanArray sparseBooleanArray = actionMenuPresenter.mActionButtonGroups;
         sparseBooleanArray.clear();
         if (actionMenuPresenter.mStrictWidthLimit) {
-            int i11 = actionMenuPresenter.mMinCellSize;
-            i3 = i6 / i11;
-            i2 = i11 + ((i6 % i11) / i3);
+            int i9 = actionMenuPresenter.mMinCellSize;
+            iMeasureChildForCells = i4 / i9;
+            i = i9 + ((i4 % i9) / iMeasureChildForCells);
         } else {
-            i2 = 0;
-            i3 = 0;
+            i = 0;
+            iMeasureChildForCells = 0;
         }
-        int i12 = 0;
-        int i13 = 0;
-        while (i12 < i) {
-            MenuItemImpl menuItemImpl2 = arrayList.get(i12);
+        int i10 = 0;
+        int i11 = 0;
+        while (i10 < size) {
+            MenuItemImpl menuItemImpl2 = visibleItems.get(i10);
             if (menuItemImpl2.requiresActionButton()) {
                 View itemView = actionMenuPresenter.getItemView(menuItemImpl2, view, viewGroup);
                 if (actionMenuPresenter.mStrictWidthLimit) {
-                    i3 -= ActionMenuView.measureChildForCells(itemView, i2, i3, makeMeasureSpec, 0);
+                    iMeasureChildForCells -= ActionMenuView.measureChildForCells(itemView, i, iMeasureChildForCells, iMakeMeasureSpec, 0);
                 } else {
-                    itemView.measure(makeMeasureSpec, makeMeasureSpec);
+                    itemView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
                 }
                 int measuredWidth = itemView.getMeasuredWidth();
-                i6 -= measuredWidth;
-                if (i13 == 0) {
-                    i13 = measuredWidth;
+                i4 -= measuredWidth;
+                if (i11 == 0) {
+                    i11 = measuredWidth;
                 }
                 int groupId = menuItemImpl2.getGroupId();
                 if (groupId != 0) {
@@ -687,46 +687,46 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             } else {
                 menuItemImpl2.setIsActionButton(false);
             }
-            i12++;
+            i10++;
             view = null;
         }
-        int i14 = 0;
-        while (i14 < i) {
-            MenuItemImpl menuItemImpl3 = arrayList.get(i14);
+        int i12 = 0;
+        while (i12 < size) {
+            MenuItemImpl menuItemImpl3 = visibleItems.get(i12);
             if (menuItemImpl3.requestsActionButton()) {
                 int groupId2 = menuItemImpl3.getGroupId();
                 boolean z4 = sparseBooleanArray.get(groupId2);
-                boolean z5 = (i10 > 0 || z4) && i6 > 0 && (!actionMenuPresenter.mStrictWidthLimit || i3 > 0);
+                boolean z5 = (i8 > 0 || z4) && i4 > 0 && (!actionMenuPresenter.mStrictWidthLimit || iMeasureChildForCells > 0);
                 boolean z6 = z5;
-                i4 = i;
+                i2 = size;
                 if (z5) {
                     View itemView2 = actionMenuPresenter.getItemView(menuItemImpl3, null, viewGroup);
                     if (actionMenuPresenter.mStrictWidthLimit) {
-                        int measureChildForCells = ActionMenuView.measureChildForCells(itemView2, i2, i3, makeMeasureSpec, 0);
-                        i3 -= measureChildForCells;
-                        if (measureChildForCells == 0) {
+                        int iMeasureChildForCells2 = ActionMenuView.measureChildForCells(itemView2, i, iMeasureChildForCells, iMakeMeasureSpec, 0);
+                        iMeasureChildForCells -= iMeasureChildForCells2;
+                        if (iMeasureChildForCells2 == 0) {
                             z6 = false;
                         }
                     } else {
-                        itemView2.measure(makeMeasureSpec, makeMeasureSpec);
+                        itemView2.measure(iMakeMeasureSpec, iMakeMeasureSpec);
                     }
                     boolean z7 = z6;
                     int measuredWidth2 = itemView2.getMeasuredWidth();
-                    i6 -= measuredWidth2;
-                    if (i13 == 0) {
-                        i13 = measuredWidth2;
+                    i4 -= measuredWidth2;
+                    if (i11 == 0) {
+                        i11 = measuredWidth2;
                     }
-                    z5 = z7 & (!actionMenuPresenter.mStrictWidthLimit ? !actionMenuPresenter.mIsThemeDeviceDefaultFamily ? i6 + i13 > 0 : i6 >= 0 : i6 < 0);
+                    z5 = z7 & (!actionMenuPresenter.mStrictWidthLimit ? !actionMenuPresenter.mIsThemeDeviceDefaultFamily ? i4 + i11 > 0 : i4 >= 0 : i4 < 0);
                 }
                 if (z5 && groupId2 != 0) {
                     sparseBooleanArray.put(groupId2, true);
                 } else if (z4) {
                     sparseBooleanArray.put(groupId2, false);
-                    for (int i15 = 0; i15 < i14; i15++) {
-                        MenuItemImpl menuItemImpl4 = arrayList.get(i15);
+                    for (int i13 = 0; i13 < i12; i13++) {
+                        MenuItemImpl menuItemImpl4 = visibleItems.get(i13);
                         if (menuItemImpl4.getGroupId() == groupId2) {
                             if (menuItemImpl4.isActionButton()) {
-                                i10++;
+                                i8++;
                             }
                             menuItemImpl4.setIsActionButton(false);
                         }
@@ -734,16 +734,16 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
                 }
                 z = false;
                 if (z5) {
-                    i10--;
+                    i8--;
                 }
                 menuItemImpl3.setIsActionButton(z5);
             } else {
                 z = z2;
-                i4 = i;
+                i2 = size;
             }
-            i14++;
+            i12++;
             z2 = z;
-            i = i4;
+            size = i2;
             actionMenuPresenter = this;
         }
         return true;
@@ -764,12 +764,12 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
 
     @Override // com.android.internal.view.menu.MenuPresenter
     public void onRestoreInstanceState(Parcelable parcelable) {
-        MenuItem findItem;
+        MenuItem menuItemFindItem;
         SavedState savedState = (SavedState) parcelable;
-        if (savedState.openSubMenuId <= 0 || (findItem = this.mMenu.findItem(savedState.openSubMenuId)) == null) {
+        if (savedState.openSubMenuId <= 0 || (menuItemFindItem = this.mMenu.findItem(savedState.openSubMenuId)) == null) {
             return;
         }
-        onSubMenuSelected((SubMenuBuilder) findItem.getSubMenu());
+        onSubMenuSelected((SubMenuBuilder) menuItemFindItem.getSubMenu());
     }
 
     @Override // android.view.ActionProvider.SubUiVisibilityListener
@@ -869,10 +869,10 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
                 if (drawable != null && background != null) {
                     int width = getWidth();
                     int height = getHeight();
-                    int max = Math.max(width, height) / 2;
+                    int iMax = Math.max(width, height) / 2;
                     int paddingLeft = (width + (getPaddingLeft() - getPaddingRight())) / 2;
                     int paddingTop = (height + (getPaddingTop() - getPaddingBottom())) / 2;
-                    background.setHotspotBounds(paddingLeft - max, paddingTop - max, paddingLeft + max, paddingTop + max);
+                    background.setHotspotBounds(paddingLeft - iMax, paddingTop - iMax, paddingLeft + iMax, paddingTop + iMax);
                 }
             }
             return frame;
@@ -937,9 +937,9 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             if (layoutParams == null || this.mButtonView == null) {
                 return;
             }
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(36, -1);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(36, -1);
+            typedArrayObtainStyledAttributes.recycle();
             if (i > dimensionPixelSize) {
                 layoutParams.width = i;
             } else {
@@ -948,11 +948,15 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             setLayoutParams(layoutParams);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:12:0x004d  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         void invalidateBadgeText() {
-            String format;
+            String str;
             ActionMenuView actionMenuView = (ActionMenuView) ActionMenuPresenter.this.mMenuView;
-            int semGetSumOfDigitsInBadges = actionMenuView.semGetSumOfDigitsInBadges();
-            if (semGetSumOfDigitsInBadges == 0) {
+            int iSemGetSumOfDigitsInBadges = actionMenuView.semGetSumOfDigitsInBadges();
+            if (iSemGetSumOfDigitsInBadges == 0) {
                 this.mBadgeView.lambda$setTextAsync$0((CharSequence) null);
                 this.mBadgeView.setVisibility(8);
                 return;
@@ -960,25 +964,23 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             String overflowBadgeText = actionMenuView.getOverflowBadgeText();
             ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mBadgeView.getLayoutParams();
             if (overflowBadgeText != null) {
-                format = "";
-                if (!overflowBadgeText.equals("")) {
+                str = "";
+                if (overflowBadgeText.equals("")) {
+                    if (iSemGetSumOfDigitsInBadges > 99) {
+                        iSemGetSumOfDigitsInBadges = 99;
+                    }
+                    str = this.mNumberFormat.format(iSemGetSumOfDigitsInBadges);
+                    marginLayoutParams.height = (int) (this.mBadgeDefaultWidth + this.mBadgeAdditionalWidth);
+                    marginLayoutParams.width = (int) (this.mBadgeDefaultWidth + (str.length() * this.mBadgeAdditionalWidth));
+                    marginLayoutParams.setMarginEnd((int) getResources().getDimension(R.dimen.sem_menu_item_number_badge_end_margin));
+                    marginLayoutParams.topMargin = (int) getResources().getDimension(R.dimen.sem_menu_item_number_badge_top_margin);
+                } else {
                     marginLayoutParams.height = (int) getResources().getDimension(R.dimen.sem_menu_item_badge_size);
                     marginLayoutParams.width = (int) getResources().getDimension(R.dimen.sem_menu_item_badge_size);
-                    this.mBadgeView.setLayoutParams(marginLayoutParams);
-                    this.mBadgeView.lambda$setTextAsync$0(format);
-                    this.mBadgeView.setVisibility(0);
                 }
             }
-            if (semGetSumOfDigitsInBadges > 99) {
-                semGetSumOfDigitsInBadges = 99;
-            }
-            format = this.mNumberFormat.format(semGetSumOfDigitsInBadges);
-            marginLayoutParams.height = (int) (this.mBadgeDefaultWidth + this.mBadgeAdditionalWidth);
-            marginLayoutParams.width = (int) (this.mBadgeDefaultWidth + (format.length() * this.mBadgeAdditionalWidth));
-            marginLayoutParams.setMarginEnd((int) getResources().getDimension(R.dimen.sem_menu_item_number_badge_end_margin));
-            marginLayoutParams.topMargin = (int) getResources().getDimension(R.dimen.sem_menu_item_number_badge_top_margin);
             this.mBadgeView.setLayoutParams(marginLayoutParams);
-            this.mBadgeView.lambda$setTextAsync$0(format);
+            this.mBadgeView.lambda$setTextAsync$0(str);
             this.mBadgeView.setVisibility(0);
         }
 
@@ -1012,9 +1014,9 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         @Override // android.widget.TextView, android.view.View
         protected void onConfigurationChanged(Configuration configuration) {
             super.onConfigurationChanged(configuration);
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
-            setContentDescription(obtainStyledAttributes.getText(44));
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
+            setContentDescription(typedArrayObtainStyledAttributes.getText(44));
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         @Override // android.view.View
@@ -1028,12 +1030,12 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
     private class SemImageOverflowMenuButton extends SemOverflowMenuButton {
         public SemImageOverflowMenuButton(Context context) {
             super(ActionMenuPresenter.this, context);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.ImageView, 16843510, 0);
-            Drawable drawable = obtainStyledAttributes.getDrawable(0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.ImageView, 16843510, 0);
+            Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
             if (drawable != null) {
                 setImageDrawable(drawable);
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             setLongClickable(true);
             ActionMenuPresenter.this.mTooltipText = getTooltipText();
         }
@@ -1041,15 +1043,15 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         @Override // android.widget.ActionMenuPresenter.SemOverflowMenuButton, android.widget.TextView, android.view.View
         protected void onConfigurationChanged(Configuration configuration) {
             super.onConfigurationChanged(configuration);
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
-            setMinimumHeight(obtainStyledAttributes.getDimensionPixelSize(37, -1));
-            obtainStyledAttributes.recycle();
-            TypedArray obtainStyledAttributes2 = getContext().obtainStyledAttributes(null, R.styleable.ImageView, 16843510, 0);
-            Drawable drawable = obtainStyledAttributes2.getDrawable(0);
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
+            setMinimumHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(37, -1));
+            typedArrayObtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = getContext().obtainStyledAttributes(null, R.styleable.ImageView, 16843510, 0);
+            Drawable drawable = typedArrayObtainStyledAttributes2.getDrawable(0);
             if (drawable != null) {
                 setImageDrawable(drawable);
             }
-            obtainStyledAttributes2.recycle();
+            typedArrayObtainStyledAttributes2.recycle();
         }
 
         @Override // android.widget.ActionMenuPresenter.SemOverflowMenuButton
@@ -1096,7 +1098,7 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         }
 
         protected void setTooltipOffset() {
-            int i;
+            int navigationBarHeight;
             Context context = getContext();
             Resources resources = context.getResources();
             int[] iArr = new int[2];
@@ -1113,17 +1115,17 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             DisplayMetrics displayMetrics = new DisplayMetrics();
             defaultDisplay.getRealMetrics(displayMetrics);
             View view = ActionMenuPresenter.this.mMenuView != null ? (View) ((View) ActionMenuPresenter.this.mMenuView).getParent() : null;
-            int i2 = (!(view instanceof Toolbar) || view.getWidth() >= rect.right - rect.left) ? 0 : (iArr[0] - iArr2[0]) - rect.left;
-            int i3 = iArr2[1] + height;
+            int i = (!(view instanceof Toolbar) || view.getWidth() >= rect.right - rect.left) ? 0 : (iArr[0] - iArr2[0]) - rect.left;
+            int i2 = iArr2[1] + height;
             if (getLayoutDirection() == 0) {
-                i = (((rect.right - rect.left) - (iArr2[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) - i2;
+                navigationBarHeight = (((rect.right - rect.left) - (iArr2[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) - i;
                 if (checkNaviBarForLandscape()) {
-                    i += (int) ((getNavigationBarHeight() / resources.getDisplayMetrics().density) * displayMetrics.density);
+                    navigationBarHeight += (int) ((getNavigationBarHeight() / resources.getDisplayMetrics().density) * displayMetrics.density);
                 }
             } else {
-                i = iArr2[0] + paddingStart + ((paddingEnd - paddingStart) / 2);
+                navigationBarHeight = iArr2[0] + paddingStart + ((paddingEnd - paddingStart) / 2);
             }
-            setTooltipPosition(i, i3);
+            setTooltipPosition(navigationBarHeight, i2);
         }
 
         private boolean checkNaviBarForLandscape() {
@@ -1155,9 +1157,8 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             return ActionMenuPresenter.this.mNavigationBarHeight;
         }
 
-        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.widget.TextView, android.view.View
-        public boolean setFrame(int i, int i2, int i3, int i4) {
+        protected boolean setFrame(int i, int i2, int i3, int i4) {
             boolean frame = super.setFrame(i, i2, i3, i4);
             Drawable drawable = getDrawable();
             Drawable background = getBackground();
@@ -1185,19 +1186,19 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         void setImageDrawable(Drawable drawable) {
         }
 
-        public SemTextOverflowMenuButton(Context context) {
+        public SemTextOverflowMenuButton(Context context) throws Resources.NotFoundException {
             super(ActionMenuPresenter.this, context);
             this.mCurrentFontScale = 1.0f;
-            TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
-            int resourceId = obtainStyledAttributes.getResourceId(187, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(187, 0);
             setTextAppearance(resourceId);
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             lambda$setTextAsync$0(context.getResources().getString(R.string.more_item_label));
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
-            TypedValue peekValue = obtainStyledAttributes2.peekValue(0);
-            obtainStyledAttributes2.recycle();
-            if (peekValue != null) {
-                this.mDefaultTextSize = TypedValue.complexToFloat(peekValue.data);
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
+            TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes2.peekValue(0);
+            typedArrayObtainStyledAttributes2.recycle();
+            if (typedValuePeekValue != null) {
+                this.mDefaultTextSize = TypedValue.complexToFloat(typedValuePeekValue.data);
                 float f = context.getResources().getConfiguration().fontScale;
                 this.mCurrentFontScale = f;
                 if (f > 1.2f) {
@@ -1210,9 +1211,9 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
         @Override // android.widget.ActionMenuPresenter.SemOverflowMenuButton, android.widget.TextView, android.view.View
         protected void onConfigurationChanged(Configuration configuration) {
             super.onConfigurationChanged(configuration);
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
-            setMinimumHeight(obtainStyledAttributes.getDimensionPixelSize(37, -1));
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.View, 16843510, 0);
+            setMinimumHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(37, -1));
+            typedArrayObtainStyledAttributes.recycle();
             if (ActionMenuPresenter.this.mIsThemeDeviceDefaultFamily && configuration != null && configuration.fontScale != this.mCurrentFontScale) {
                 float f = configuration.fontScale;
                 this.mCurrentFontScale = f;

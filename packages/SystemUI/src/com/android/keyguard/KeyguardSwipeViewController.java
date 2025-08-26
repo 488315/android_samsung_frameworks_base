@@ -20,14 +20,12 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSwipeViewController extends KeyguardInputViewController implements KeyguardTouchSwipeCallback {
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass1 mConfigurationListener;
     public final KeyguardTouchSwipeDetector mSwipeDetector;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SwipeTouchListener implements Gefingerpoken {
         public SwipeTouchListener() {
         }

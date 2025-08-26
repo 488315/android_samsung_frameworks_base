@@ -6,7 +6,6 @@ import com.android.wm.shell.bubbles.BadgedImageView;
 import com.android.wm.shell.bubbles.Bubble;
 import com.android.wm.shell.bubbles.animation.StackAnimationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -60,7 +59,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda3 imp
                         Bubble.FlyoutMessage flyoutMessage2 = bubble2.mFlyoutMessage;
                         StackAnimationController stackAnimationController = bubbleStackView2.mStackAnimationController;
                         PointF pointF2 = stackAnimationController.mStackPosition;
-                        boolean isStackOnLeftSide = stackAnimationController.isStackOnLeftSide();
+                        boolean zIsStackOnLeftSide = stackAnimationController.isStackOnLeftSide();
                         BadgedImageView badgedImageView2 = bubble2.mIconView;
                         int i = badgedImageView2.mDotColor;
                         BubbleStackView$$ExternalSyntheticLambda3 bubbleStackView$$ExternalSyntheticLambda3 = bubbleStackView2.mAfterFlyoutHidden;
@@ -73,7 +72,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda3 imp
                         bubbleFlyoutView2.mNewDotRadius = f;
                         bubbleFlyoutView2.mNewDotSize = f * 2.0f;
                         bubbleFlyoutView2.updateFlyoutMessage(flyoutMessage2);
-                        bubbleFlyoutView2.mArrowPointingLeft = isStackOnLeftSide;
+                        bubbleFlyoutView2.mArrowPointingLeft = zIsStackOnLeftSide;
                         bubbleFlyoutView2.mDotColor = i;
                         bubbleFlyoutView2.mOnHide = bubbleStackView$$ExternalSyntheticLambda3;
                         bubbleFlyoutView2.mDotCenter = dotCenter2;

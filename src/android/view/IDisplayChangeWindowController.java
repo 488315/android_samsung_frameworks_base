@@ -46,9 +46,9 @@ public interface IDisplayChangeWindowController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayChangeWindowController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayChangeWindowController)) {
-                return (IDisplayChangeWindowController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayChangeWindowController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayChangeWindowController)) {
+                return (IDisplayChangeWindowController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,13 +75,13 @@ public interface IDisplayChangeWindowController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 DisplayAreaInfo displayAreaInfo = (DisplayAreaInfo) parcel.readTypedObject(DisplayAreaInfo.CREATOR);
-                IDisplayChangeWindowCallback asInterface = IDisplayChangeWindowCallback.Stub.asInterface(parcel.readStrongBinder());
+                IDisplayChangeWindowCallback iDisplayChangeWindowCallbackAsInterface = IDisplayChangeWindowCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onDisplayChange(readInt, readInt2, readInt3, displayAreaInfo, asInterface);
+                onDisplayChange(i3, i4, i5, displayAreaInfo, iDisplayChangeWindowCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -105,17 +105,17 @@ public interface IDisplayChangeWindowController extends IInterface {
 
             @Override // android.view.IDisplayChangeWindowController
             public void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, IDisplayChangeWindowCallback iDisplayChangeWindowCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayChangeWindowController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(displayAreaInfo, 0);
-                    obtain.writeStrongInterface(iDisplayChangeWindowCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayChangeWindowController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(displayAreaInfo, 0);
+                    parcelObtain.writeStrongInterface(iDisplayChangeWindowCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

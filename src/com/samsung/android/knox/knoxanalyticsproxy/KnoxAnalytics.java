@@ -26,7 +26,7 @@ public class KnoxAnalytics {
             }
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 mService.log(knoxAnalyticsData);
@@ -40,7 +40,7 @@ public class KnoxAnalytics {
                 }
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

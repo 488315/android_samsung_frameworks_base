@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.android.systemui.statusbar.notification.row.HybridNotificationView android:gravity="start|bottom|center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@android:dimen/text_size_small_material" android:paddingEnd="12.0dip"
+<com.android.systemui.statusbar.notification.row.HybridNotificationView android:gravity="start|bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@android:dimen/rounded_corner_radius" android:paddingEnd="12.0dip"
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textAppearance="@android:style/TextAppearance.Material.Menu.Inverse" android:id="@id/notification_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:paddingEnd="4.0dip" />
-    <TextView android:id="@id/notification_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:paddingEnd="4.0dip" style="@android:style/Widget.Leanback.TimePicker" />
+    <TextView android:textAppearance="@android:style/TextAppearance.Leanback.FormWizard.Small" android:id="@id/notification_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:paddingEnd="4.0dip" />
+    <TextView android:id="@id/notification_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:paddingEnd="4.0dip" style="@android:style/Widget.Holo.TextView.ListSeparator" />
 </com.android.systemui.statusbar.notification.row.HybridNotificationView>

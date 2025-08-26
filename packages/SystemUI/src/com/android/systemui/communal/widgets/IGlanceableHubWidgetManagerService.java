@@ -13,18 +13,15 @@ import android.os.UserHandle;
 import android.widget.RemoteViews;
 import com.android.systemui.communal.shared.model.CommunalWidgetContentModel;
 import com.android.systemui.communal.widgets.GlanceableHubWidgetManagerService;
-import com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.log.core.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface IGlanceableHubWidgetManagerService extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface IAppWidgetHostListener extends IInterface {
         void onUpdateProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo);
 
@@ -47,18 +44,14 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
     void updateWidgetOrder(int[] iArr, int[] iArr2);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface IConfigureWidgetCallback extends IInterface {
         void onConfigureWidget(int i, IResultReceiver iResultReceiver);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface IResultReceiver extends IInterface {
             void onResult(boolean z);
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract class Stub extends Binder implements IResultReceiver {
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 public class Proxy implements IResultReceiver {
                     public final IBinder mRemote;
 
@@ -73,16 +66,16 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
                     @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver
                     public final void onResult(boolean z) {
-                        Parcel obtain = Parcel.obtain(this.mRemote);
-                        Parcel obtain2 = Parcel.obtain();
+                        Parcel parcelObtain = Parcel.obtain(this.mRemote);
+                        Parcel parcelObtain2 = Parcel.obtain();
                         try {
-                            obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver");
-                            obtain.writeBoolean(z);
-                            this.mRemote.transact(1, obtain, obtain2, 0);
-                            obtain2.readException();
+                            parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver");
+                            parcelObtain.writeBoolean(z);
+                            this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                            parcelObtain2.readException();
                         } finally {
-                            obtain2.recycle();
-                            obtain.recycle();
+                            parcelObtain2.recycle();
+                            parcelObtain.recycle();
                         }
                     }
                 }
@@ -103,9 +96,9 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
                     if (i != 1) {
                         return super.onTransact(i, parcel, parcel2, i2);
                     }
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService$addWidgetInternal$configurator$1$1$resultReceiver$1) this).onResult(readBoolean);
+                    ((GlanceableHubWidgetManagerService$addWidgetInternal$configurator$1$1$resultReceiver$1) this).onResult(z);
                     parcel2.writeNoException();
                     return true;
                 }
@@ -117,10 +110,8 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class Stub extends Binder implements IConfigureWidgetCallback {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public class Proxy implements IConfigureWidgetCallback {
                 public final IBinder mRemote;
 
@@ -135,14 +126,14 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
                 @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback
                 public final void onConfigureWidget(int i, IResultReceiver iResultReceiver) {
-                    Parcel obtain = Parcel.obtain(this.mRemote);
+                    Parcel parcelObtain = Parcel.obtain(this.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback");
-                        obtain.writeInt(i);
-                        obtain.writeStrongInterface(iResultReceiver);
-                        this.mRemote.transact(1, obtain, null, 1);
+                        parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback");
+                        parcelObtain.writeInt(i);
+                        parcelObtain.writeStrongInterface(iResultReceiver);
+                        this.mRemote.transact(1, parcelObtain, null, 1);
                     } finally {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                     }
                 }
             }
@@ -164,16 +155,16 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
                 if (i != 1) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                int readInt = parcel.readInt();
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                if (readStrongBinder == null) {
+                int i3 = parcel.readInt();
+                IBinder strongBinder = parcel.readStrongBinder();
+                if (strongBinder == null) {
                     proxy = null;
                 } else {
-                    IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver");
-                    proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IResultReceiver)) ? new IResultReceiver.Stub.Proxy(readStrongBinder) : (IResultReceiver) queryLocalInterface;
+                    IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver");
+                    proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IResultReceiver)) ? new IResultReceiver.Stub.Proxy(strongBinder) : (IResultReceiver) iInterfaceQueryLocalInterface;
                 }
                 parcel.enforceNoDataAvail();
-                ((GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1) this).onConfigureWidget(readInt, proxy);
+                ((GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1) this).onConfigureWidget(i3, proxy);
                 return true;
             }
 
@@ -184,14 +175,11 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface IGlanceableHubWidgetsListener extends IInterface {
         void onWidgetsUpdated(List list);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class Stub extends Binder implements IGlanceableHubWidgetsListener {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public class Proxy implements IGlanceableHubWidgetsListener {
                 public final IBinder mRemote;
 
@@ -206,13 +194,13 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
                 @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener
                 public final void onWidgetsUpdated(List list) {
-                    Parcel obtain = Parcel.obtain(this.mRemote);
+                    Parcel parcelObtain = Parcel.obtain(this.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
-                        obtain.writeTypedList(list, 0);
-                        this.mRemote.transact(1, obtain, null, 1);
+                        parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
+                        parcelObtain.writeTypedList(list, 0);
+                        this.mRemote.transact(1, parcelObtain, null, 1);
                     } finally {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                     }
                 }
             }
@@ -233,9 +221,9 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
                 if (i != 1) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(CommunalWidgetContentModel.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CommunalWidgetContentModel.CREATOR);
                 parcel.enforceNoDataAvail();
-                ((GlanceableHubWidgetManager$widgets$1$callback$1) this).onWidgetsUpdated(createTypedArrayList);
+                ((GlanceableHubWidgetManager$widgets$1$callback$1) this).onWidgetsUpdated(arrayListCreateTypedArrayList);
                 return true;
             }
 
@@ -246,11 +234,9 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IGlanceableHubWidgetManagerService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IGlanceableHubWidgetManagerService {
             public final IBinder mRemote;
 
@@ -260,28 +246,28 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void addWidget(ComponentName componentName, UserHandle userHandle, int i, IConfigureWidgetCallback iConfigureWidgetCallback) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iConfigureWidgetCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iConfigureWidgetCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void addWidgetsListener(IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeStrongInterface(iGlanceableHubWidgetsListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeStrongInterface(iGlanceableHubWidgetsListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -292,53 +278,53 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void deleteWidget(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void removeWidgetsListener(IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeStrongInterface(iGlanceableHubWidgetsListener);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeStrongInterface(iGlanceableHubWidgetsListener);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void resizeWidget(int i, int i2, int[] iArr, int[] iArr2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
             public final void updateWidgetOrder(int[] iArr, int[] iArr2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -356,39 +342,39 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
                 parcel2.writeString("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
                 return true;
             }
-            IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener = null;
-            IConfigureWidgetCallback iConfigureWidgetCallback = null;
+            IGlanceableHubWidgetsListener proxy = null;
+            IConfigureWidgetCallback proxy2 = null;
             final IAppWidgetHostListener iAppWidgetHostListener = null;
-            IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener2 = null;
+            IGlanceableHubWidgetsListener proxy3 = null;
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
-                        iGlanceableHubWidgetsListener = (queryLocalInterface == null || !(queryLocalInterface instanceof IGlanceableHubWidgetsListener)) ? new IGlanceableHubWidgetsListener.Stub.Proxy(readStrongBinder) : (IGlanceableHubWidgetsListener) queryLocalInterface;
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder != null) {
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IGlanceableHubWidgetsListener)) ? new IGlanceableHubWidgetsListener.Stub.Proxy(strongBinder) : (IGlanceableHubWidgetsListener) iInterfaceQueryLocalInterface;
                     }
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).addWidgetsListener(iGlanceableHubWidgetsListener);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).addWidgetsListener(proxy);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    if (readStrongBinder2 != null) {
-                        IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
-                        iGlanceableHubWidgetsListener2 = (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IGlanceableHubWidgetsListener)) ? new IGlanceableHubWidgetsListener.Stub.Proxy(readStrongBinder2) : (IGlanceableHubWidgetsListener) queryLocalInterface2;
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    if (strongBinder2 != null) {
+                        IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener");
+                        proxy3 = (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IGlanceableHubWidgetsListener)) ? new IGlanceableHubWidgetsListener.Stub.Proxy(strongBinder2) : (IGlanceableHubWidgetsListener) iInterfaceQueryLocalInterface2;
                     }
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).removeWidgetsListener(iGlanceableHubWidgetsListener2);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).removeWidgetsListener(proxy3);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    final IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    if (readStrongBinder3 != null) {
-                        IInterface queryLocalInterface3 = readStrongBinder3.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
-                        iAppWidgetHostListener = (queryLocalInterface3 == null || !(queryLocalInterface3 instanceof IAppWidgetHostListener)) ? new IAppWidgetHostListener(readStrongBinder3) { // from class: com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService$IAppWidgetHostListener$Stub$Proxy
+                    int i3 = parcel.readInt();
+                    final IBinder strongBinder3 = parcel.readStrongBinder();
+                    if (strongBinder3 != null) {
+                        IInterface iInterfaceQueryLocalInterface3 = strongBinder3.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
+                        iAppWidgetHostListener = (iInterfaceQueryLocalInterface3 == null || !(iInterfaceQueryLocalInterface3 instanceof IAppWidgetHostListener)) ? new IAppWidgetHostListener(strongBinder3) { // from class: com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService$IAppWidgetHostListener$Stub$Proxy
                             public final IBinder mRemote;
 
                             {
-                                this.mRemote = readStrongBinder3;
+                                this.mRemote = strongBinder3;
                             }
 
                             @Override // android.os.IInterface
@@ -398,112 +384,112 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
 
                             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener
                             public final void onUpdateProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo) {
-                                Parcel obtain = Parcel.obtain(this.mRemote);
+                                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                                 try {
-                                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
-                                    obtain.writeTypedObject(appWidgetProviderInfo, 0);
-                                    this.mRemote.transact(1, obtain, null, 1);
+                                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
+                                    parcelObtain.writeTypedObject(appWidgetProviderInfo, 0);
+                                    this.mRemote.transact(1, parcelObtain, null, 1);
                                 } finally {
-                                    obtain.recycle();
+                                    parcelObtain.recycle();
                                 }
                             }
 
                             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener
-                            public final void onViewDataChanged(int i3) {
-                                Parcel obtain = Parcel.obtain(this.mRemote);
+                            public final void onViewDataChanged(int i4) {
+                                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                                 try {
-                                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
-                                    obtain.writeInt(i3);
-                                    this.mRemote.transact(4, obtain, null, 1);
+                                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
+                                    parcelObtain.writeInt(i4);
+                                    this.mRemote.transact(4, parcelObtain, null, 1);
                                 } finally {
-                                    obtain.recycle();
+                                    parcelObtain.recycle();
                                 }
                             }
 
                             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener
                             public final void updateAppWidget(RemoteViews remoteViews) {
-                                Parcel obtain = Parcel.obtain(this.mRemote);
+                                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                                 try {
-                                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
-                                    obtain.writeTypedObject(remoteViews, 0);
-                                    this.mRemote.transact(2, obtain, null, 1);
+                                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
+                                    parcelObtain.writeTypedObject(remoteViews, 0);
+                                    this.mRemote.transact(2, parcelObtain, null, 1);
                                 } finally {
-                                    obtain.recycle();
+                                    parcelObtain.recycle();
                                 }
                             }
 
                             @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener
-                            public final void updateAppWidgetDeferred(String str, int i3) {
-                                Parcel obtain = Parcel.obtain(this.mRemote);
+                            public final void updateAppWidgetDeferred(String str, int i4) {
+                                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                                 try {
-                                    obtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
-                                    obtain.writeString(str);
-                                    obtain.writeInt(i3);
-                                    this.mRemote.transact(3, obtain, null, 1);
+                                    parcelObtain.writeInterfaceToken("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IAppWidgetHostListener");
+                                    parcelObtain.writeString(str);
+                                    parcelObtain.writeInt(i4);
+                                    this.mRemote.transact(3, parcelObtain, null, 1);
                                 } finally {
-                                    obtain.recycle();
+                                    parcelObtain.recycle();
                                 }
                             }
-                        } : (IAppWidgetHostListener) queryLocalInterface3;
+                        } : (IAppWidgetHostListener) iInterfaceQueryLocalInterface3;
                     }
                     parcel.enforceNoDataAvail();
                     GlanceableHubWidgetManagerService.WidgetManagerServiceBinder widgetManagerServiceBinder = (GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this;
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         final GlanceableHubWidgetManagerService glanceableHubWidgetManagerService = GlanceableHubWidgetManagerService.this;
                         if (iAppWidgetHostListener != null) {
-                            glanceableHubWidgetManagerService.appWidgetHost.setListener(readInt, new AppWidgetHost.AppWidgetHostListener() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManagerService$createListener$1
+                            glanceableHubWidgetManagerService.appWidgetHost.setListener(i3, new AppWidgetHost.AppWidgetHostListener() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManagerService$createListener$1
                                 public final void onUpdateProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo) {
                                     try {
-                                        IGlanceableHubWidgetManagerService.IAppWidgetHostListener.this.onUpdateProviderInfo(appWidgetProviderInfo);
+                                        iAppWidgetHostListener.onUpdateProviderInfo(appWidgetProviderInfo);
                                     } catch (RemoteException e) {
                                         Logger logger = glanceableHubWidgetManagerService.logger;
                                         GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(4);
-                                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-                                        obtain.setStr1(e.getLocalizedMessage());
-                                        logger.getBuffer().commit(obtain);
+                                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+                                        logMessageObtain.setStr1(e.getLocalizedMessage());
+                                        logger.getBuffer().commit(logMessageObtain);
                                     }
                                 }
 
-                                public final void onViewDataChanged(int i3) {
+                                public final void onViewDataChanged(int i4) {
                                     try {
-                                        IGlanceableHubWidgetManagerService.IAppWidgetHostListener.this.onViewDataChanged(i3);
+                                        iAppWidgetHostListener.onViewDataChanged(i4);
                                     } catch (RemoteException e) {
                                         Logger logger = glanceableHubWidgetManagerService.logger;
                                         GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(5);
-                                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-                                        obtain.setStr1(e.getLocalizedMessage());
-                                        logger.getBuffer().commit(obtain);
+                                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+                                        logMessageObtain.setStr1(e.getLocalizedMessage());
+                                        logger.getBuffer().commit(logMessageObtain);
                                     }
                                 }
 
                                 public final void updateAppWidget(RemoteViews remoteViews) {
                                     try {
-                                        IGlanceableHubWidgetManagerService.IAppWidgetHostListener.this.updateAppWidget(remoteViews);
+                                        iAppWidgetHostListener.updateAppWidget(remoteViews);
                                     } catch (RemoteException e) {
                                         Logger logger = glanceableHubWidgetManagerService.logger;
                                         GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(3);
-                                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-                                        obtain.setStr1(e.getLocalizedMessage());
-                                        logger.getBuffer().commit(obtain);
+                                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+                                        logMessageObtain.setStr1(e.getLocalizedMessage());
+                                        logger.getBuffer().commit(logMessageObtain);
                                     }
                                 }
 
-                                public final void updateAppWidgetDeferred(String str, int i3) {
+                                public final void updateAppWidgetDeferred(String str, int i4) {
                                     try {
-                                        IGlanceableHubWidgetManagerService.IAppWidgetHostListener.this.updateAppWidgetDeferred(str, i3);
+                                        iAppWidgetHostListener.updateAppWidgetDeferred(str, i4);
                                     } catch (RemoteException e) {
                                         Logger logger = glanceableHubWidgetManagerService.logger;
                                         GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(6);
-                                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-                                        obtain.setStr1(e.getLocalizedMessage());
-                                        logger.getBuffer().commit(obtain);
+                                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+                                        logMessageObtain.setStr1(e.getLocalizedMessage());
+                                        logger.getBuffer().commit(logMessageObtain);
                                     }
                                 }
                             });
                             return true;
                         }
-                        int i3 = GlanceableHubWidgetManagerService.$r8$clinit;
+                        int i4 = GlanceableHubWidgetManagerService.$r8$clinit;
                         glanceableHubWidgetManagerService.getClass();
                         throw new IllegalStateException("Listener cannot be null");
                     } finally {
@@ -511,44 +497,44 @@ public interface IGlanceableHubWidgetManagerService extends IInterface {
                 case 4:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    if (readStrongBinder4 != null) {
-                        IInterface queryLocalInterface4 = readStrongBinder4.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback");
-                        iConfigureWidgetCallback = (queryLocalInterface4 == null || !(queryLocalInterface4 instanceof IConfigureWidgetCallback)) ? new IConfigureWidgetCallback.Stub.Proxy(readStrongBinder4) : (IConfigureWidgetCallback) queryLocalInterface4;
+                    int i5 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    if (strongBinder4 != null) {
+                        IInterface iInterfaceQueryLocalInterface4 = strongBinder4.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService.IConfigureWidgetCallback");
+                        proxy2 = (iInterfaceQueryLocalInterface4 == null || !(iInterfaceQueryLocalInterface4 instanceof IConfigureWidgetCallback)) ? new IConfigureWidgetCallback.Stub.Proxy(strongBinder4) : (IConfigureWidgetCallback) iInterfaceQueryLocalInterface4;
                     }
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).addWidget(componentName, userHandle, readInt2, iConfigureWidgetCallback);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).addWidget(componentName, userHandle, i5, proxy2);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).deleteWidget(readInt3);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).deleteWidget(i6);
                     return true;
                 case 6:
-                    int[] createIntArray = parcel.createIntArray();
-                    int[] createIntArray2 = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).updateWidgetOrder(createIntArray, createIntArray2);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).updateWidgetOrder(iArrCreateIntArray, iArrCreateIntArray2);
                     return true;
                 case 7:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int[] createIntArray3 = parcel.createIntArray();
-                    int[] createIntArray4 = parcel.createIntArray();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
+                    int[] iArrCreateIntArray4 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).resizeWidget(readInt4, readInt5, createIntArray3, createIntArray4);
+                    ((GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this).resizeWidget(i7, i8, iArrCreateIntArray3, iArrCreateIntArray4);
                     return true;
                 case 8:
-                    int readInt6 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
                     GlanceableHubWidgetManagerService.WidgetManagerServiceBinder widgetManagerServiceBinder2 = (GlanceableHubWidgetManagerService.WidgetManagerServiceBinder) this;
-                    long clearCallingIdentity2 = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity2 = Binder.clearCallingIdentity();
                     try {
-                        IntentSender access$getIntentSenderForConfigureActivityInternal = GlanceableHubWidgetManagerService.access$getIntentSenderForConfigureActivityInternal(GlanceableHubWidgetManagerService.this, readInt6);
-                        Binder.restoreCallingIdentity(clearCallingIdentity2);
+                        IntentSender intentSenderAccess$getIntentSenderForConfigureActivityInternal = GlanceableHubWidgetManagerService.access$getIntentSenderForConfigureActivityInternal(GlanceableHubWidgetManagerService.this, i9);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity2);
                         parcel2.writeNoException();
-                        parcel2.writeTypedObject(access$getIntentSenderForConfigureActivityInternal, 1);
+                        parcel2.writeTypedObject(intentSenderAccess$getIntentSenderForConfigureActivityInternal, 1);
                         return true;
                     } finally {
                     }

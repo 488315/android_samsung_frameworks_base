@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ServiceTuple {
     public static final String BASIC_STATUS_CLOSED = "closed";
@@ -30,9 +29,9 @@ public class ServiceTuple {
     public String version;
 
     static {
-        HashMap hashMap = new HashMap();
-        sServiceDescriptionMap = hashMap;
-        hashMap.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG), "StandaloneMsg");
+        HashMap map = new HashMap();
+        sServiceDescriptionMap = map;
+        map.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG), "StandaloneMsg");
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG_V1), "StandaloneMsg");
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_CHAT_SIMPLE_IM), "Session Mode Messaging");
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_CHAT_CPM), "Session Mode Messaging");
@@ -68,45 +67,45 @@ public class ServiceTuple {
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_MMTEL_CALL_COMPOSER), "MmtelCallComposer");
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_CANCEL_MESSAGE), "CancelMessage");
         sServiceDescriptionMap.put(Long.valueOf(Capabilities.FEATURE_EXTENDED_MESSAGING), "ExtendedMessaging");
-        HashMap hashMap2 = new HashMap();
-        sServiceTuples = hashMap2;
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG_V1), new ServiceTuple(Capabilities.FEATURE_STANDALONE_MSG_V1, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.sm", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG), new ServiceTuple(Capabilities.FEATURE_STANDALONE_MSG, "org.openmobilealliance:StandaloneMsg", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHAT_SIMPLE_IM), new ServiceTuple(Capabilities.FEATURE_CHAT_SIMPLE_IM, "org.openmobilealliance:IM-session", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHAT_CPM), new ServiceTuple(Capabilities.FEATURE_CHAT_CPM, "org.openmobilealliance:ChatSession", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_SF_GROUP_CHAT), new ServiceTuple(Capabilities.FEATURE_SF_GROUP_CHAT, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.fullsfgroupchat", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT), new ServiceTuple(Capabilities.FEATURE_FT, "org.openmobilealliance:File-Transfer", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_THUMBNAIL_V1), new ServiceTuple(Capabilities.FEATURE_FT_THUMBNAIL_V1, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftthumb", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_THUMBNAIL), new ServiceTuple(Capabilities.FEATURE_FT_THUMBNAIL, "org.openmobilealliance:File-Transfer-thumb", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_STORE), new ServiceTuple(Capabilities.FEATURE_FT_STORE, "org.openmobilealliance:File-Transfer", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_HTTP), new ServiceTuple(Capabilities.FEATURE_FT_HTTP, "org.openmobilealliance:File-Transfer-HTTP", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_HTTP_EXTRA), new ServiceTuple(Capabilities.FEATURE_FT_HTTP_EXTRA, "org.openmobilealliance:File-Transfer-HTTP-EXTRA", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_ISH), new ServiceTuple(Capabilities.FEATURE_ISH, "org.gsma.imageshare", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_VSH), new ServiceTuple(Capabilities.FEATURE_VSH, "org.gsma.videoshare", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_VSH_OUTSIDE_CALL), new ServiceTuple(Capabilities.FEATURE_VSH_OUTSIDE_CALL, "org.gsma.videoshare", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_SOCIAL_PRESENCE), new ServiceTuple(Capabilities.FEATURE_SOCIAL_PRESENCE, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.sp", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_PRESENCE_DISCOVERY), new ServiceTuple(Capabilities.FEATURE_PRESENCE_DISCOVERY, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.dp", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_MMTEL), new ServiceTuple(Capabilities.FEATURE_MMTEL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_FULL_DUPLEX));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_MMTEL_VIDEO), new ServiceTuple(Capabilities.FEATURE_MMTEL_VIDEO, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_IPCALL), new ServiceTuple(Capabilities.FEATURE_IPCALL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_FULL_DUPLEX));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_IPCALL_VIDEO), new ServiceTuple(Capabilities.FEATURE_IPCALL_VIDEO, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_IPCALL_VIDEO_ONLY), new ServiceTuple(Capabilities.FEATURE_IPCALL_VIDEO_ONLY, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall.ipvideocallonly", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PULL), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PULL, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopull", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PULL_FT), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PULL_FT, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopullft", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PUSH), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PUSH, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopush", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_STICKER), new ServiceTuple(Capabilities.FEATURE_STICKER, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.sticker", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_FT_VIA_SMS), new ServiceTuple(Capabilities.FEATURE_FT_VIA_SMS, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftsms", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_GEO_VIA_SMS), new ServiceTuple(Capabilities.FEATURE_GEO_VIA_SMS, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geosms", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_CHAT_SESSION), new ServiceTuple(Capabilities.FEATURE_CHATBOT_CHAT_SESSION, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_STANDALONE_MSG), new ServiceTuple(Capabilities.FEATURE_CHATBOT_STANDALONE_MSG, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.sa", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_EXTENDED_MSG), new ServiceTuple(Capabilities.FEATURE_CHATBOT_EXTENDED_MSG, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.xbotmessage", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_ROLE), new ServiceTuple(Capabilities.FEATURE_CHATBOT_ROLE, "org.gsma.rcs.isbot", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_PLUG_IN), new ServiceTuple(Capabilities.FEATURE_PLUG_IN, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.plugin", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_ENRICHED_CALL_COMPOSER), new ServiceTuple(Capabilities.FEATURE_ENRICHED_CALL_COMPOSER, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_ENRICHED_POST_CALL), new ServiceTuple(Capabilities.FEATURE_ENRICHED_POST_CALL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callunanswered", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_MMTEL_CALL_COMPOSER), new ServiceTuple(Capabilities.FEATURE_MMTEL_CALL_COMPOSER, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer", KnoxVpnPolicyConstants.NEW_FW));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_CANCEL_MESSAGE), new ServiceTuple(Capabilities.FEATURE_CANCEL_MESSAGE, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.cancelmessage", "1.0"));
-        hashMap2.put(Long.valueOf(Capabilities.FEATURE_EXTENDED_MESSAGING), new ServiceTuple(Capabilities.FEATURE_EXTENDED_MESSAGING, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.msg.extended", "1.0"));
+        HashMap map2 = new HashMap();
+        sServiceTuples = map2;
+        map2.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG_V1), new ServiceTuple(Capabilities.FEATURE_STANDALONE_MSG_V1, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.sm", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_STANDALONE_MSG), new ServiceTuple(Capabilities.FEATURE_STANDALONE_MSG, "org.openmobilealliance:StandaloneMsg", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHAT_SIMPLE_IM), new ServiceTuple(Capabilities.FEATURE_CHAT_SIMPLE_IM, "org.openmobilealliance:IM-session", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHAT_CPM), new ServiceTuple(Capabilities.FEATURE_CHAT_CPM, "org.openmobilealliance:ChatSession", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_SF_GROUP_CHAT), new ServiceTuple(Capabilities.FEATURE_SF_GROUP_CHAT, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.fullsfgroupchat", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT), new ServiceTuple(Capabilities.FEATURE_FT, "org.openmobilealliance:File-Transfer", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_THUMBNAIL_V1), new ServiceTuple(Capabilities.FEATURE_FT_THUMBNAIL_V1, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftthumb", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_THUMBNAIL), new ServiceTuple(Capabilities.FEATURE_FT_THUMBNAIL, "org.openmobilealliance:File-Transfer-thumb", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_STORE), new ServiceTuple(Capabilities.FEATURE_FT_STORE, "org.openmobilealliance:File-Transfer", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_HTTP), new ServiceTuple(Capabilities.FEATURE_FT_HTTP, "org.openmobilealliance:File-Transfer-HTTP", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_HTTP_EXTRA), new ServiceTuple(Capabilities.FEATURE_FT_HTTP_EXTRA, "org.openmobilealliance:File-Transfer-HTTP-EXTRA", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_ISH), new ServiceTuple(Capabilities.FEATURE_ISH, "org.gsma.imageshare", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_VSH), new ServiceTuple(Capabilities.FEATURE_VSH, "org.gsma.videoshare", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_VSH_OUTSIDE_CALL), new ServiceTuple(Capabilities.FEATURE_VSH_OUTSIDE_CALL, "org.gsma.videoshare", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_SOCIAL_PRESENCE), new ServiceTuple(Capabilities.FEATURE_SOCIAL_PRESENCE, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.sp", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_PRESENCE_DISCOVERY), new ServiceTuple(Capabilities.FEATURE_PRESENCE_DISCOVERY, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.dp", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_MMTEL), new ServiceTuple(Capabilities.FEATURE_MMTEL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_FULL_DUPLEX));
+        map2.put(Long.valueOf(Capabilities.FEATURE_MMTEL_VIDEO), new ServiceTuple(Capabilities.FEATURE_MMTEL_VIDEO, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
+        map2.put(Long.valueOf(Capabilities.FEATURE_IPCALL), new ServiceTuple(Capabilities.FEATURE_IPCALL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_FULL_DUPLEX));
+        map2.put(Long.valueOf(Capabilities.FEATURE_IPCALL_VIDEO), new ServiceTuple(Capabilities.FEATURE_IPCALL_VIDEO, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
+        map2.put(Long.valueOf(Capabilities.FEATURE_IPCALL_VIDEO_ONLY), new ServiceTuple(Capabilities.FEATURE_IPCALL_VIDEO_ONLY, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel.gsma.ipcall.ipvideocallonly", "1.0", MEDIA_CAP_AUDIO, MEDIA_CAP_VIDEO, MEDIA_CAP_FULL_DUPLEX));
+        map2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PULL), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PULL, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopull", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PULL_FT), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PULL_FT, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopullft", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_GEOLOCATION_PUSH), new ServiceTuple(Capabilities.FEATURE_GEOLOCATION_PUSH, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopush", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_STICKER), new ServiceTuple(Capabilities.FEATURE_STICKER, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.sticker", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_FT_VIA_SMS), new ServiceTuple(Capabilities.FEATURE_FT_VIA_SMS, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftsms", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_GEO_VIA_SMS), new ServiceTuple(Capabilities.FEATURE_GEO_VIA_SMS, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geosms", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_CHAT_SESSION), new ServiceTuple(Capabilities.FEATURE_CHATBOT_CHAT_SESSION, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_STANDALONE_MSG), new ServiceTuple(Capabilities.FEATURE_CHATBOT_STANDALONE_MSG, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.sa", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_EXTENDED_MSG), new ServiceTuple(Capabilities.FEATURE_CHATBOT_EXTENDED_MSG, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.xbotmessage", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CHATBOT_ROLE), new ServiceTuple(Capabilities.FEATURE_CHATBOT_ROLE, "org.gsma.rcs.isbot", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_PLUG_IN), new ServiceTuple(Capabilities.FEATURE_PLUG_IN, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.plugin", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_ENRICHED_CALL_COMPOSER), new ServiceTuple(Capabilities.FEATURE_ENRICHED_CALL_COMPOSER, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_ENRICHED_POST_CALL), new ServiceTuple(Capabilities.FEATURE_ENRICHED_POST_CALL, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callunanswered", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_MMTEL_CALL_COMPOSER), new ServiceTuple(Capabilities.FEATURE_MMTEL_CALL_COMPOSER, "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer", KnoxVpnPolicyConstants.NEW_FW));
+        map2.put(Long.valueOf(Capabilities.FEATURE_CANCEL_MESSAGE), new ServiceTuple(Capabilities.FEATURE_CANCEL_MESSAGE, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.cancelmessage", "1.0"));
+        map2.put(Long.valueOf(Capabilities.FEATURE_EXTENDED_MESSAGING), new ServiceTuple(Capabilities.FEATURE_EXTENDED_MESSAGING, "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.msg.extended", "1.0"));
     }
 
     public ServiceTuple(long j, String str, String str2) {
@@ -205,9 +204,9 @@ public class ServiceTuple {
 
     public int hashCode() {
         String str = this.serviceId;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         String str2 = this.version;
-        return hashCode + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode + (str2 != null ? str2.hashCode() : 0);
     }
 
     public String toString() {

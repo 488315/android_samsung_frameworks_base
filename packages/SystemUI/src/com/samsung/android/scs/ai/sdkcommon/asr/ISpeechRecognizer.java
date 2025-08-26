@@ -10,12 +10,10 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import com.samsung.android.scs.ai.sdkcommon.asr.IRecognitionListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ISpeechRecognizer extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* JADX INFO: Access modifiers changed from: private */
         public static <T> T readTypedObject(Parcel parcel, Parcelable.Creator<T> creator) {
@@ -44,7 +42,6 @@ public interface ISpeechRecognizer extends IInterface {
 
     boolean write(ParcelFileDescriptor parcelFileDescriptor, IRecognitionListener iRecognitionListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ISpeechRecognizer {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -71,14 +68,12 @@ public interface ISpeechRecognizer extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISpeechRecognizer {
         static final int TRANSACTION_cancel = 3;
         static final int TRANSACTION_prepare = 1;
         static final int TRANSACTION_release = 4;
         static final int TRANSACTION_write = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ISpeechRecognizer {
             private IBinder mRemote;
 
@@ -93,15 +88,15 @@ public interface ISpeechRecognizer extends IInterface {
 
             @Override // com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer
             public void cancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -111,49 +106,49 @@ public interface ISpeechRecognizer extends IInterface {
 
             @Override // com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer
             public boolean prepare(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer
             public boolean release() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.scs.ai.sdkcommon.asr.ISpeechRecognizer
             public boolean write(ParcelFileDescriptor parcelFileDescriptor, IRecognitionListener iRecognitionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iRecognitionListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ISpeechRecognizer.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iRecognitionListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -166,8 +161,8 @@ public interface ISpeechRecognizer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpeechRecognizer.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ISpeechRecognizer)) ? new Proxy(iBinder) : (ISpeechRecognizer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpeechRecognizer.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISpeechRecognizer)) ? new Proxy(iBinder) : (ISpeechRecognizer) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -180,13 +175,13 @@ public interface ISpeechRecognizer extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean prepare = prepare((Bundle) _Parcel.readTypedObject(parcel, Bundle.CREATOR));
+                boolean zPrepare = prepare((Bundle) _Parcel.readTypedObject(parcel, Bundle.CREATOR));
                 parcel2.writeNoException();
-                parcel2.writeInt(prepare ? 1 : 0);
+                parcel2.writeInt(zPrepare ? 1 : 0);
             } else if (i == 2) {
-                boolean write = write((ParcelFileDescriptor) _Parcel.readTypedObject(parcel, ParcelFileDescriptor.CREATOR), IRecognitionListener.Stub.asInterface(parcel.readStrongBinder()));
+                boolean zWrite = write((ParcelFileDescriptor) _Parcel.readTypedObject(parcel, ParcelFileDescriptor.CREATOR), IRecognitionListener.Stub.asInterface(parcel.readStrongBinder()));
                 parcel2.writeNoException();
-                parcel2.writeInt(write ? 1 : 0);
+                parcel2.writeInt(zWrite ? 1 : 0);
             } else if (i == 3) {
                 cancel();
                 parcel2.writeNoException();
@@ -194,9 +189,9 @@ public interface ISpeechRecognizer extends IInterface {
                 if (i != 4) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                boolean release = release();
+                boolean zRelease = release();
                 parcel2.writeNoException();
-                parcel2.writeInt(release ? 1 : 0);
+                parcel2.writeInt(zRelease ? 1 : 0);
             }
             return true;
         }

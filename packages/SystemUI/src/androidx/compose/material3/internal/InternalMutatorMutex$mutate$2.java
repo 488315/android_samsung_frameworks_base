@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.sync.Mutex;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class InternalMutatorMutex$mutate$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $block;
@@ -123,10 +122,10 @@ final class InternalMutatorMutex$mutate$2 extends SuspendLambda implements Funct
                 this.L$2 = internalMutatorMutex;
                 this.L$3 = null;
                 this.label = 2;
-                Object mo779invoke = function1.mo779invoke(this);
-                if (mo779invoke != coroutineSingletons) {
+                Object objMo781invoke = function1.mo781invoke(this);
+                if (objMo781invoke != coroutineSingletons) {
                     internalMutatorMutex2 = internalMutatorMutex;
-                    obj = mo779invoke;
+                    obj = objMo781invoke;
                     mutator3 = mutator;
                     mutex2 = mutex;
                     internalMutatorMutex2.currentMutator.compareAndSet(mutator3, null);

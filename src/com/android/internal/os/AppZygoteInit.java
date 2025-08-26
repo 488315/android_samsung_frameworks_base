@@ -5,6 +5,7 @@ import android.app.ZygotePreload;
 import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.net.LocalSocket;
+import android.system.ErrnoException;
 import android.util.Log;
 import java.io.IOException;
 
@@ -55,9 +56,9 @@ class AppZygoteInit {
         /* JADX WARN: Type inference failed for: r10v7 */
         /* JADX WARN: Type inference failed for: r10v8 */
         /* JADX WARN: Type inference failed for: r4v3, types: [java.lang.String] */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0080 -> B:4:0x0099). Please report as a decompilation issue!!! */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:10:0x0080 -> B:22:0x0099). Please report as a decompilation issue!!! */
         @Override // com.android.internal.os.ZygoteConnection
-        protected void handlePreloadApp(ApplicationInfo applicationInfo) {
+        protected void handlePreloadApp(ApplicationInfo applicationInfo) throws IOException, ClassNotFoundException {
             ?? r10;
             Log.i(AppZygoteInit.TAG, "Beginning application preload for " + applicationInfo.packageName);
             ApplicationInfo applicationInfo2 = applicationInfo;
@@ -66,10 +67,10 @@ class AppZygoteInit {
             int i = 1;
             if (applicationInfo2.zygotePreloadName != null) {
                 try {
-                    ComponentName createRelative = ComponentName.createRelative(applicationInfo2.packageName, applicationInfo2.zygotePreloadName);
-                    Class<?> cls = Class.forName(createRelative.getClassName(), true, classLoader);
+                    ComponentName componentNameCreateRelative = ComponentName.createRelative(applicationInfo2.packageName, applicationInfo2.zygotePreloadName);
+                    Class<?> cls = Class.forName(componentNameCreateRelative.getClassName(), true, classLoader);
                     if (!ZygotePreload.class.isAssignableFrom(cls)) {
-                        Log.e(AppZygoteInit.TAG, createRelative.getClassName() + " does not implement " + ZygotePreload.class.getName());
+                        Log.e(AppZygoteInit.TAG, componentNameCreateRelative.getClassName() + " does not implement " + ZygotePreload.class.getName());
                         applicationInfo2 = applicationInfo2;
                         this = this;
                     } else {
@@ -105,7 +106,7 @@ class AppZygoteInit {
         }
     }
 
-    public static void main(String[] strArr) {
+    public static void main(String[] strArr) throws NumberFormatException, ErrnoException {
         ChildZygoteInit.runZygoteServer(new AppZygoteServer(), strArr);
     }
 }

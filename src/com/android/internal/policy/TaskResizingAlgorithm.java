@@ -1,5 +1,7 @@
 package com.android.internal.policy;
 
+import android.graphics.Point;
+import android.graphics.Rect;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,26 +18,112 @@ public class TaskResizingAlgorithm {
     public @interface CtrlType {
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x0082, code lost:
-    
-        if (r13 > 0.8333333002196431d) goto L27;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0141  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0144  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x014e  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0155  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x015a  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0147  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x013a  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x0141  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0144  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0147  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Rect resizeDrag(float r18, float r19, float r20, float r21, android.graphics.Rect r22, int r23, int r24, int r25, android.graphics.Point r26, boolean r27, boolean r28) {
-        /*
-            Method dump skipped, instructions count: 354
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.policy.TaskResizingAlgorithm.resizeDrag(float, float, float, float, android.graphics.Rect, int, int, int, android.graphics.Point, boolean, boolean):android.graphics.Rect");
+    public static Rect resizeDrag(float f, float f2, float f3, float f4, Rect rect, int i, int i2, int i3, Point point, boolean z, boolean z2) {
+        int iMax;
+        int iMax2;
+        int i4;
+        int i5;
+        float f5;
+        int iMin;
+        int iMax3;
+        int iMax4;
+        int iMin2;
+        int iRound = Math.round(f - f3);
+        int iRound2 = Math.round(f2 - f4);
+        int i6 = rect.left;
+        int i7 = rect.top;
+        int i8 = rect.right;
+        int i9 = rect.bottom;
+        int i10 = i8 - i6;
+        int i11 = i9 - i7;
+        int i12 = i & 1;
+        if (i12 != 0) {
+            iMax = Math.max(i2, Math.min(i10 - iRound, point.x));
+        } else {
+            iMax = (i & 2) != 0 ? Math.max(i2, Math.min(iRound + i10, point.x)) : i10;
+        }
+        int i13 = i & 4;
+        if (i13 != 0) {
+            iMax2 = Math.max(i3, Math.min(i11 - iRound2, point.y));
+        } else {
+            iMax2 = (i & 8) != 0 ? Math.max(i3, Math.min(iRound2 + i11, point.y)) : i11;
+        }
+        float f6 = iMax / iMax2;
+        if (z) {
+            if (!z2 || f6 >= 1.2f) {
+                if (!z2) {
+                    f5 = 1.2f;
+                    if (f6 > 0.8333333002196431d) {
+                    }
+                }
+                i4 = i9;
+            } else {
+                f5 = 1.2f;
+            }
+            if (z2) {
+                iMax3 = Math.max(i2, Math.min(point.x, iMax));
+                iMin = Math.min(iMax2, Math.round(iMax3 / f5));
+                if (iMin < i3) {
+                    iMax3 = Math.max(i2, Math.min(point.x, Math.round(i3 * f5)));
+                    iMin = i3;
+                }
+                iMax4 = Math.max(i3, Math.min(point.y, iMax2));
+                i4 = i9;
+                iMin2 = Math.max(iMax, Math.round(iMax4 * f5));
+                if (iMin2 < i2) {
+                    iMax4 = Math.max(i3, Math.min(point.y, Math.round(i2 / f5)));
+                    iMin2 = i2;
+                }
+                if ((iMax <= i10 || iMax2 > i11) != (iMax3 * iMin > iMin2 * iMax4)) {
+                    iMax = iMax3;
+                    iMax2 = iMin;
+                } else {
+                    iMax = iMin2;
+                    iMax2 = iMax4;
+                }
+            } else {
+                i4 = i9;
+                int iMax5 = Math.max(i2, Math.min(point.x, iMax));
+                int iMax6 = Math.max(iMax2, Math.round(iMax5 * f5));
+                if (iMax6 < i3) {
+                    iMax5 = Math.max(i2, Math.min(point.x, Math.round(i3 / f5)));
+                    iMin = i3;
+                } else {
+                    iMin = iMax6;
+                }
+                iMax3 = iMax5;
+                iMax4 = Math.max(i3, Math.min(point.y, iMax2));
+                iMin2 = Math.min(iMax, Math.round(iMax4 / f5));
+                if (iMin2 < i2) {
+                    iMax4 = Math.max(i3, Math.min(point.y, Math.round(i2 * f5)));
+                    iMin2 = i2;
+                }
+                if (iMax <= i10) {
+                    if ((iMax <= i10 || iMax2 > i11) != (iMax3 * iMin > iMin2 * iMax4)) {
+                    }
+                }
+            }
+        } else {
+            i4 = i9;
+        }
+        if (i12 != 0) {
+            i6 = i8 - iMax;
+        } else {
+            i8 = i6 + iMax;
+        }
+        if (i13 != 0) {
+            i7 = i4 - iMax2;
+            i5 = i4;
+        } else {
+            i5 = i7 + iMax2;
+        }
+        return new Rect(i6, i7, i8, i5);
     }
 }

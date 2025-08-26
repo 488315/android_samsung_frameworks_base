@@ -3,7 +3,6 @@ package com.samsung.android.knox.keystore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public class CSRProfile implements Parcelable {
@@ -33,20 +32,17 @@ public class CSRProfile implements Parcelable {
     public String state;
     public String templateName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum CSRFormat {
         PKCS10,
         CRMF,
         PROPRIETARY
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum KeyAlgorithm {
         RSA,
         ECC
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ProfileType {
         SCEP,
         CMP,

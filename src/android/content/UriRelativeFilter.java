@@ -71,11 +71,11 @@ public final class UriRelativeFilter {
 
     private boolean matchQuery(PatternMatcher patternMatcher, String str) {
         if (str != null) {
-            String[] split = str.split("&");
-            if (split.length == 1) {
-                split = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+            String[] strArrSplit = str.split("&");
+            if (strArrSplit.length == 1) {
+                strArrSplit = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
             }
-            for (String str2 : split) {
+            for (String str2 : strArrSplit) {
                 if (patternMatcher.match(str2)) {
                     return true;
                 }
@@ -85,11 +85,11 @@ public final class UriRelativeFilter {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.mUriPart);
         protoOutputStream.write(1120986464258L, this.mPatternType);
         protoOutputStream.write(1138166333443L, this.mFilter);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void writeToXml(XmlSerializer xmlSerializer) throws IOException {

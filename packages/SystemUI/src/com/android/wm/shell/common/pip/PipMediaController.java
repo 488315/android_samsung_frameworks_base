@@ -29,7 +29,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PipMediaController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -50,12 +49,10 @@ public final class PipMediaController {
     public final PipMediaController$mSessionsChangedListener$1 mSessionsChangedListener;
     public final ArrayList mTokenListeners;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ActionListener {
         void onMediaActionsChanged(List list);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,13 +85,13 @@ public final class PipMediaController {
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 String action;
-                if (PipMediaController.this.mMediaController == null || (action = intent.getAction()) == null) {
+                if (this.this$0.mMediaController == null || (action = intent.getAction()) == null) {
                     return;
                 }
                 switch (action.hashCode()) {
                     case 40376596:
                         if (action.equals("com.android.wm.shell.pip.NEXT")) {
-                            MediaController mediaController = PipMediaController.this.mMediaController;
+                            MediaController mediaController = this.this$0.mMediaController;
                             mediaController.getClass();
                             mediaController.getTransportControls().skipToNext();
                             break;
@@ -102,7 +99,7 @@ public final class PipMediaController {
                         break;
                     case 40442197:
                         if (action.equals("com.android.wm.shell.pip.PLAY")) {
-                            MediaController mediaController2 = PipMediaController.this.mMediaController;
+                            MediaController mediaController2 = this.this$0.mMediaController;
                             mediaController2.getClass();
                             mediaController2.getTransportControls().play();
                             break;
@@ -110,7 +107,7 @@ public final class PipMediaController {
                         break;
                     case 40448084:
                         if (action.equals("com.android.wm.shell.pip.PREV")) {
-                            MediaController mediaController3 = PipMediaController.this.mMediaController;
+                            MediaController mediaController3 = this.this$0.mMediaController;
                             mediaController3.getClass();
                             mediaController3.getTransportControls().skipToPrevious();
                             break;
@@ -118,7 +115,7 @@ public final class PipMediaController {
                         break;
                     case 1253399509:
                         if (action.equals("com.android.wm.shell.pip.PAUSE")) {
-                            MediaController mediaController4 = PipMediaController.this.mMediaController;
+                            MediaController mediaController4 = this.this$0.mMediaController;
                             mediaController4.getClass();
                             mediaController4.getTransportControls().pause();
                             break;
@@ -131,7 +128,7 @@ public final class PipMediaController {
         this.mPlaybackChangedListener = new MediaController.Callback() { // from class: com.android.wm.shell.common.pip.PipMediaController$mPlaybackChangedListener$1
             @Override // android.media.session.MediaController.Callback
             public final void onMetadataChanged(MediaMetadata mediaMetadata) {
-                PipMediaController pipMediaController = PipMediaController.this;
+                PipMediaController pipMediaController = this.this$0;
                 int i = PipMediaController.$r8$clinit;
                 if (pipMediaController.mMetadataListeners.isEmpty()) {
                     return;
@@ -141,7 +138,7 @@ public final class PipMediaController {
 
             @Override // android.media.session.MediaController.Callback
             public final void onPlaybackStateChanged(PlaybackState playbackState) {
-                PipMediaController pipMediaController = PipMediaController.this;
+                PipMediaController pipMediaController = this.this$0;
                 int i = PipMediaController.$r8$clinit;
                 if (pipMediaController.mActionListeners.isEmpty()) {
                     return;
@@ -152,7 +149,7 @@ public final class PipMediaController {
         this.mSessionsChangedListener = new MediaSessionManager.OnActiveSessionsChangedListener() { // from class: com.android.wm.shell.common.pip.PipMediaController$mSessionsChangedListener$1
             @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
             public final void onActiveSessionsChanged(List list) {
-                PipMediaController pipMediaController = PipMediaController.this;
+                PipMediaController pipMediaController = this.this$0;
                 int i = PipMediaController.$r8$clinit;
                 pipMediaController.resolveActiveMediaController(list);
             }
@@ -194,10 +191,10 @@ public final class PipMediaController {
             return EmptyList.INSTANCE;
         }
         ArrayList arrayList = new ArrayList();
-        boolean isActive = playbackState.isActive();
+        boolean zIsActive = playbackState.isActive();
         long actions = playbackState.getActions();
         int i2 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-        Log.d("PipTaskOrganizer", "[PipMediaController] getMediaActions , isPlaying=" + isActive + " actions=" + actions);
+        Log.d("PipTaskOrganizer", "[PipMediaController] getMediaActions , isPlaying=" + zIsActive + " actions=" + actions);
         Locale locale = Locale.getDefault();
         if (!Intrinsics.areEqual(locale, this.mLastLocale)) {
             Log.d("PipTaskOrganizer", "[PipMediaController] recreate default actions last=" + this.mLastLocale + "cur=" + locale);
@@ -209,9 +206,9 @@ public final class PipMediaController {
         }
         this.mPrevAction.setEnabled((16 & actions) != 0);
         arrayList.add(this.mPrevAction);
-        if (!isActive && (4 & actions) != 0) {
+        if (!zIsActive && (4 & actions) != 0) {
             arrayList.add(this.mPlayAction);
-        } else if (isActive && (2 & actions) != 0) {
+        } else if (zIsActive && (2 & actions) != 0) {
             arrayList.add(this.mPauseAction);
         }
         this.mNextAction.setEnabled((actions & 32) != 0);

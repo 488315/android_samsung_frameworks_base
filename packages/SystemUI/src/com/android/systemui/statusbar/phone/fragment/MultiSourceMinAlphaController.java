@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiSourceMinAlphaController {
     public final Map alphas;
@@ -27,33 +26,33 @@ public final class MultiSourceMinAlphaController {
         if (valueAnimator != null) {
             valueAnimator.cancel();
         }
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(getMinAlpha(), f);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(j2);
-        ofFloat.setInterpolator(pathInterpolator);
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.MultiSourceMinAlphaController$animateToAlpha$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(getMinAlpha(), f);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setStartDelay(j2);
+        valueAnimatorOfFloat.setInterpolator(pathInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.MultiSourceMinAlphaController.animateToAlpha.1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                MultiSourceMinAlphaController.this.updateAlpha(((Float) ofFloat.getAnimatedValue()).floatValue(), i);
+                MultiSourceMinAlphaController.this.updateAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue(), i);
             }
         });
-        ofFloat.start(false);
-        this.animators.put(2, ofFloat);
+        valueAnimatorOfFloat.start(false);
+        this.animators.put(2, valueAnimatorOfFloat);
     }
 
     public final float getMinAlpha() {
-        Float valueOf;
+        Float fValueOf;
         Iterator it = ((LinkedHashMap) this.alphas).entrySet().iterator();
         if (it.hasNext()) {
-            float floatValue = ((Number) ((Map.Entry) it.next()).getValue()).floatValue();
+            float fFloatValue = ((Number) ((Map.Entry) it.next()).getValue()).floatValue();
             while (it.hasNext()) {
-                floatValue = Math.min(floatValue, ((Number) ((Map.Entry) it.next()).getValue()).floatValue());
+                fFloatValue = Math.min(fFloatValue, ((Number) ((Map.Entry) it.next()).getValue()).floatValue());
             }
-            valueOf = Float.valueOf(floatValue);
+            fValueOf = Float.valueOf(fFloatValue);
         } else {
-            valueOf = null;
+            fValueOf = null;
         }
-        return valueOf != null ? valueOf.floatValue() : this.initialAlpha;
+        return fValueOf != null ? fValueOf.floatValue() : this.initialAlpha;
     }
 
     public final void updateAlpha(float f, int i) {

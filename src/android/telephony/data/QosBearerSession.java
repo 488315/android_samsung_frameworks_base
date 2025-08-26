@@ -2,6 +2,7 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +39,7 @@ public final class QosBearerSession implements Parcelable {
         arrayList.addAll(list);
     }
 
-    private QosBearerSession(Parcel parcel) {
+    private QosBearerSession(Parcel parcel) throws ClassNotFoundException, IOException {
         this.qosBearerSessionId = parcel.readInt();
         this.qos = (Qos) parcel.readParcelable(Qos.class.getClassLoader(), Qos.class);
         ArrayList arrayList = new ArrayList();

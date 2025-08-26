@@ -59,7 +59,7 @@ class X509CRLObject extends X509CRLImpl {
     }
 
     private X509CRLInternal getInternalCRL() {
-        byte[] bArr;
+        byte[] encoded;
         X509CRLException x509CRLException;
         X509CRLInternal x509CRLInternal;
         synchronized (this.cacheLock) {
@@ -68,13 +68,13 @@ class X509CRLObject extends X509CRLImpl {
                 return x509CRLInternal2;
             }
             try {
-                bArr = this.c.getEncoded(ASN1Encoding.DER);
+                encoded = this.c.getEncoded(ASN1Encoding.DER);
                 x509CRLException = null;
             } catch (IOException e) {
-                bArr = null;
+                encoded = null;
                 x509CRLException = new X509CRLException(e);
             }
-            X509CRLInternal x509CRLInternal3 = new X509CRLInternal(this.bcHelper, this.c, this.sigAlgName, this.sigAlgParams, this.isIndirect, bArr, x509CRLException);
+            X509CRLInternal x509CRLInternal3 = new X509CRLInternal(this.bcHelper, this.c, this.sigAlgName, this.sigAlgParams, this.isIndirect, encoded, x509CRLException);
             synchronized (this.cacheLock) {
                 if (this.internalCRLValue == null) {
                     this.internalCRLValue = x509CRLInternal3;

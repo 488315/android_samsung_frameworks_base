@@ -44,9 +44,9 @@ public interface ISmartFaceClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmartFaceClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISmartFaceClient)) {
-                return (ISmartFaceClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmartFaceClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISmartFaceClient)) {
+                return (ISmartFaceClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface ISmartFaceClient extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 FaceInfo faceInfo = (FaceInfo) parcel.readTypedObject(FaceInfo.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onInfo(readInt, faceInfo, readInt2);
+                onInfo(i3, faceInfo, i4);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface ISmartFaceClient extends IInterface {
 
             @Override // com.samsung.android.smartface.ISmartFaceClient
             public void onInfo(int i, FaceInfo faceInfo, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceClient.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(faceInfo, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartFaceClient.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(faceInfo, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

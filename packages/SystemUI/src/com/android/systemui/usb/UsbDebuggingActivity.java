@@ -24,7 +24,6 @@ import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UsbDebuggingActivity extends AlertActivity implements DialogInterface.OnClickListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public class UsbDebuggingActivity extends AlertActivity implements DialogInterfa
     public String mKey;
     public boolean mServiceNotified;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UsbDisconnectedReceiver extends BroadcastReceiver {
         public final Activity mActivity;
 
@@ -61,11 +59,11 @@ public class UsbDebuggingActivity extends AlertActivity implements DialogInterfa
 
     public final void notifyService(boolean z, boolean z2) {
         try {
-            IAdbManager asInterface = IAdbManager.Stub.asInterface(ServiceManager.getService("adb"));
+            IAdbManager iAdbManagerAsInterface = IAdbManager.Stub.asInterface(ServiceManager.getService("adb"));
             if (z) {
-                asInterface.allowDebugging(z2, this.mKey);
+                iAdbManagerAsInterface.allowDebugging(z2, this.mKey);
             } else {
-                asInterface.denyDebugging();
+                iAdbManagerAsInterface.denyDebugging();
             }
             this.mServiceNotified = true;
         } catch (Exception e) {
@@ -109,9 +107,9 @@ public class UsbDebuggingActivity extends AlertActivity implements DialogInterfa
         alertParams.mNegativeButtonText = getString(android.R.string.cancel);
         alertParams.mPositiveButtonListener = this;
         alertParams.mNegativeButtonListener = this;
-        View inflate = LayoutInflater.from(alertParams.mContext).inflate(android.R.layout.web_text_view_dropdown, (ViewGroup) null);
-        this.mAlwaysAllow = (CheckBox) inflate.findViewById(android.R.id.to_org);
-        TextView textView = (TextView) inflate.findViewById(android.R.id.to_org_header);
+        View viewInflate = LayoutInflater.from(alertParams.mContext).inflate(android.R.layout.web_text_view_dropdown, (ViewGroup) null);
+        this.mAlwaysAllow = (CheckBox) viewInflate.findViewById(android.R.id.to_org_header);
+        TextView textView = (TextView) viewInflate.findViewById(android.R.id.to_org_unit);
         this.mCheckBoxText = textView;
         textView.setText(R.string.usb_debugging_always);
         this.mCheckBoxText.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.usb.UsbDebuggingActivity.1
@@ -121,7 +119,7 @@ public class UsbDebuggingActivity extends AlertActivity implements DialogInterfa
                 Log.d("UsbDebuggingActivity", "mAlwaysAllow=" + UsbDebuggingActivity.this.mAlwaysAllow.isChecked());
             }
         });
-        alertParams.mView = inflate;
+        alertParams.mView = viewInflate;
         window.setCloseOnTouchOutside(false);
         getWindow().setGravity(80);
         setupAlert();

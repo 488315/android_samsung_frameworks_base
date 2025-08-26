@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SnapshotViewBinding implements View.OnAttachStateChangeListener {
     public final Function1 onError;
@@ -21,20 +20,20 @@ public final class SnapshotViewBinding implements View.OnAttachStateChangeListen
     @Override // android.view.View.OnAttachStateChangeListener
     public final void onViewAttachedToWindow(View view) {
         Snapshot.Companion.getClass();
-        MutableSnapshot takeMutableSnapshot = Snapshot.Companion.takeMutableSnapshot(null, null);
+        MutableSnapshot mutableSnapshotTakeMutableSnapshot = Snapshot.Companion.takeMutableSnapshot(null, null);
         try {
-            Snapshot makeCurrent = takeMutableSnapshot.makeCurrent();
+            Snapshot snapshotMakeCurrent = mutableSnapshotTakeMutableSnapshot.makeCurrent();
             try {
-                SnapshotViewBindingRoot access$getBindingRoot = SnapshotViewBindingKt.access$getBindingRoot(view.getRootView());
+                SnapshotViewBindingRoot snapshotViewBindingRootAccess$getBindingRoot = SnapshotViewBindingKt.access$getBindingRoot(view.getRootView());
                 try {
-                    access$getBindingRoot.observer.observeReads(this, access$getBindingRoot.onBindingChanged, this.performBind);
+                    snapshotViewBindingRootAccess$getBindingRoot.observer.observeReads(this, snapshotViewBindingRootAccess$getBindingRoot.onBindingChanged, this.performBind);
                 } catch (Throwable th) {
-                    this.onError.mo779invoke(th);
+                    this.onError.mo781invoke(th);
                 }
                 Unit unit = Unit.INSTANCE;
-                takeMutableSnapshot.apply().check();
+                mutableSnapshotTakeMutableSnapshot.apply().check();
             } finally {
-                Snapshot.restoreCurrent(makeCurrent);
+                Snapshot.restoreCurrent(snapshotMakeCurrent);
             }
         } finally {
         }
@@ -42,8 +41,8 @@ public final class SnapshotViewBinding implements View.OnAttachStateChangeListen
 
     @Override // android.view.View.OnAttachStateChangeListener
     public final void onViewDetachedFromWindow(View view) {
-        SnapshotViewBindingRoot access$getBindingRoot = SnapshotViewBindingKt.access$getBindingRoot(view.getRootView());
-        access$getBindingRoot.observer.clear(this);
-        access$getBindingRoot.invalidatedBindings.remove(this);
+        SnapshotViewBindingRoot snapshotViewBindingRootAccess$getBindingRoot = SnapshotViewBindingKt.access$getBindingRoot(view.getRootView());
+        snapshotViewBindingRootAccess$getBindingRoot.observer.clear(this);
+        snapshotViewBindingRootAccess$getBindingRoot.invalidatedBindings.remove(this);
     }
 }

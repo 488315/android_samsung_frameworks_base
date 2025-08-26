@@ -9,6 +9,7 @@ import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;
 import com.android.internal.R;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /* loaded from: classes6.dex */
@@ -33,25 +35,25 @@ public class TypefaceFinder {
     private static final String TAG = "TypefaceFinder";
     private final List<SemTypeface> mTypefaces = new ArrayList();
 
-    private void findTypefacesWithCR(Context context, String str) {
+    private void findTypefacesWithCR(Context context, String str) throws IOException {
         try {
             String type = context.getContentResolver().getType(Uri.parse(SecContentProviderURI.CONTENT + str + "/fonts"));
-            String[] split = (type == null || type.isEmpty()) ? null : type.split(ShaderAssembler.NEWLINE);
-            if (split == null) {
+            String[] strArrSplit = (type == null || type.isEmpty()) ? null : type.split(ShaderAssembler.NEWLINE);
+            if (strArrSplit == null) {
                 return;
             }
-            for (String str2 : split) {
+            for (String str2 : strArrSplit) {
                 try {
-                    InputStream openInputStream = context.getContentResolver().openInputStream(Uri.parse(SecContentProviderURI.CONTENT + str + "/xml/" + str2));
+                    InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(Uri.parse(SecContentProviderURI.CONTENT + str + "/xml/" + str2));
                     try {
-                        parseTypefaceXml(str2, openInputStream, str);
-                        if (openInputStream != null) {
-                            openInputStream.close();
+                        parseTypefaceXml(str2, inputStreamOpenInputStream, str);
+                        if (inputStreamOpenInputStream != null) {
+                            inputStreamOpenInputStream.close();
                         }
                     } catch (Throwable th) {
-                        if (openInputStream != null) {
+                        if (inputStreamOpenInputStream != null) {
                             try {
-                                openInputStream.close();
+                                inputStreamOpenInputStream.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
@@ -66,7 +68,7 @@ public class TypefaceFinder {
         }
     }
 
-    public void findTypefaces(Context context, AssetManager assetManager, String str) {
+    public void findTypefaces(Context context, AssetManager assetManager, String str) throws IOException {
         try {
             String[] list = assetManager.list("xml");
             if (list == null || list.length == 0) {
@@ -75,16 +77,16 @@ public class TypefaceFinder {
             }
             for (String str2 : list) {
                 try {
-                    InputStream open = assetManager.open("xml/" + str2);
+                    InputStream inputStreamOpen = assetManager.open("xml/" + str2);
                     try {
-                        parseTypefaceXml(str2, open, str);
-                        if (open != null) {
-                            open.close();
+                        parseTypefaceXml(str2, inputStreamOpen, str);
+                        if (inputStreamOpen != null) {
+                            inputStreamOpen.close();
                         }
                     } catch (Throwable th) {
-                        if (open != null) {
+                        if (inputStreamOpen != null) {
                             try {
-                                open.close();
+                                inputStreamOpen.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
@@ -99,7 +101,7 @@ public class TypefaceFinder {
         }
     }
 
-    private void parseTypefaceXml(String str, InputStream inputStream, String str2) {
+    private void parseTypefaceXml(String str, InputStream inputStream, String str2) throws SAXException, IOException {
         try {
             XMLReader xMLReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
             TypefaceParser typefaceParser = new TypefaceParser();
@@ -130,22 +132,22 @@ public class TypefaceFinder {
         boolean z3 = false;
         boolean z4 = false;
         boolean z5 = false;
+        String strReplaceAll = null;
+        String typefaceFilename = null;
         String str = null;
-        String str2 = null;
-        String str3 = null;
         boolean z6 = false;
         while (it2.hasNext()) {
             SemTypeface next = it2.next();
             String sansName = next.getSansName();
             if (sansName != null) {
-                String typefaceFilename = next.getTypefaceFilename();
-                int lastIndexOf = typefaceFilename.lastIndexOf(47);
-                int lastIndexOf2 = typefaceFilename.lastIndexOf(46);
-                if (lastIndexOf2 < 0) {
-                    lastIndexOf2 = typefaceFilename.length();
+                String typefaceFilename2 = next.getTypefaceFilename();
+                int iLastIndexOf = typefaceFilename2.lastIndexOf(47);
+                int iLastIndexOf2 = typefaceFilename2.lastIndexOf(46);
+                if (iLastIndexOf2 < 0) {
+                    iLastIndexOf2 = typefaceFilename2.length();
                 }
                 it = it2;
-                String replaceAll = typefaceFilename.substring(lastIndexOf + 1, lastIndexOf2).replaceAll(" ", "");
+                String strReplaceAll2 = typefaceFilename2.substring(iLastIndexOf + 1, iLastIndexOf2).replaceAll(" ", "");
                 String fontPackageName = next.getFontPackageName();
                 z = z6;
                 try {
@@ -157,15 +159,15 @@ public class TypefaceFinder {
                 if (fontPackageName != null) {
                     if (fontPackageName.equals(FONT_SAMSUNGONE_DOWNLOAD)) {
                         try {
-                            str = sansName.replaceAll(" ", "");
-                            str2 = next.getTypefaceFilename();
+                            strReplaceAll = sansName.replaceAll(" ", "");
+                            typefaceFilename = next.getTypefaceFilename();
                             it2 = it;
-                            str3 = fontPackageName;
+                            str = fontPackageName;
                             z6 = true;
                         } catch (Exception e2) {
                             e = e2;
                             z6 = true;
-                            Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + replaceAll + FONT_EXTENSION);
+                            Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + strReplaceAll2 + FONT_EXTENSION);
                             e.printStackTrace();
                             it2 = it;
                         }
@@ -181,7 +183,7 @@ public class TypefaceFinder {
                                     e = e3;
                                     z6 = z;
                                     z4 = true;
-                                    Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + replaceAll + FONT_EXTENSION);
+                                    Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + strReplaceAll2 + FONT_EXTENSION);
                                     e.printStackTrace();
                                     it2 = it;
                                 }
@@ -190,22 +192,22 @@ public class TypefaceFinder {
                             if (!z3) {
                                 try {
                                     z2 = true;
-                                    try {
-                                        arrayList.add(1, sansName.replaceAll(" ", ""));
-                                        arrayList2.add(1, next.getTypefaceFilename());
-                                        arrayList3.add(1, fontPackageName);
-                                        z3 = true;
-                                    } catch (Exception e4) {
-                                        e = e4;
-                                        z3 = z2;
-                                        z6 = z;
-                                        Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + replaceAll + FONT_EXTENSION);
-                                        e.printStackTrace();
-                                        it2 = it;
-                                    }
+                                } catch (Exception e4) {
+                                    e = e4;
+                                    z2 = true;
+                                }
+                                try {
+                                    arrayList.add(1, sansName.replaceAll(" ", ""));
+                                    arrayList2.add(1, next.getTypefaceFilename());
+                                    arrayList3.add(1, fontPackageName);
+                                    z3 = true;
                                 } catch (Exception e5) {
                                     e = e5;
-                                    z2 = true;
+                                    z3 = z2;
+                                    z6 = z;
+                                    Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + strReplaceAll2 + FONT_EXTENSION);
+                                    e.printStackTrace();
+                                    it2 = it;
                                 }
                             }
                         } else if (fontPackageName.equals(FONT_ROBOTO_PRELOAD)) {
@@ -219,7 +221,7 @@ public class TypefaceFinder {
                                     e = e6;
                                     z5 = true;
                                     z6 = z;
-                                    Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + replaceAll + FONT_EXTENSION);
+                                    Log.d(TAG, "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + strReplaceAll2 + FONT_EXTENSION);
                                     e.printStackTrace();
                                     it2 = it;
                                 }
@@ -228,6 +230,7 @@ public class TypefaceFinder {
                         it2 = it;
                         z6 = z;
                     }
+                    it2 = it;
                 }
                 arrayList.add(sansName.replaceAll(" ", ""));
                 arrayList2.add(next.getTypefaceFilename());
@@ -242,9 +245,9 @@ public class TypefaceFinder {
         if (!z6 || z3) {
             return;
         }
-        arrayList.add(str);
-        arrayList2.add(str2);
-        arrayList3.add(str3);
+        arrayList.add(strReplaceAll);
+        arrayList2.add(typefaceFilename);
+        arrayList3.add(str);
     }
 
     public SemTypeface findMatchingTypeface(String str) {

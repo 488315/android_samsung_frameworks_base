@@ -15,7 +15,6 @@ import com.google.android.setupdesign.R$styleable;
 import java.io.IOException;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IllustrationVideoView extends TextureView implements Animatable, TextureView.SurfaceTextureListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnInfoListener, MediaPlayer.OnErrorListener {
     public float aspectRatio;
@@ -28,7 +27,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     public final String videoResPackageName;
     public int visibility;
 
-    public IllustrationVideoView(Context context, AttributeSet attributeSet) {
+    public IllustrationVideoView(Context context, AttributeSet attributeSet) throws IllegalStateException, IOException, SecurityException, IllegalArgumentException {
         super(context, attributeSet);
         this.aspectRatio = 1.0f;
         this.videoResId = 0;
@@ -38,10 +37,10 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIllustrationVideoView);
-        int resourceId = obtainStyledAttributes.getResourceId(1, 0);
-        this.shouldPauseVideoWhenFinished = obtainStyledAttributes.getBoolean(0, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIllustrationVideoView);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        this.shouldPauseVideoWhenFinished = typedArrayObtainStyledAttributes.getBoolean(0, true);
+        typedArrayObtainStyledAttributes.recycle();
         String packageName = getContext().getPackageName();
         if (resourceId != this.videoResId || (packageName != null && !packageName.equals(this.videoResPackageName))) {
             this.videoResId = resourceId;
@@ -53,7 +52,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
         setSurfaceTextureListener(this);
     }
 
-    public final void createMediaPlayer() {
+    public final void createMediaPlayer() throws IllegalStateException, IOException, SecurityException, IllegalArgumentException {
         MediaPlayer mediaPlayer = this.mediaPlayer;
         if (mediaPlayer != null) {
             mediaPlayer.release();
@@ -81,7 +80,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
         return this.mediaPlayer;
     }
 
-    public final void initVideo() {
+    public final void initVideo() throws IllegalStateException, IOException, SecurityException, IllegalArgumentException {
         if (getWindowVisibility() != 0) {
             return;
         }
@@ -140,18 +139,18 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.media.MediaPlayer.OnPreparedListener
-    public final void onPrepared(MediaPlayer mediaPlayer) {
-        float f;
+    public final void onPrepared(MediaPlayer mediaPlayer) throws IllegalStateException {
+        float videoHeight;
         this.prepared = true;
         mediaPlayer.setLooping(true);
         if (mediaPlayer.getVideoWidth() <= 0 || mediaPlayer.getVideoHeight() <= 0) {
             Log.w("IllustrationVideoView", "Unexpected video size=" + mediaPlayer.getVideoWidth() + "x" + mediaPlayer.getVideoHeight());
-            f = 0.0f;
+            videoHeight = 0.0f;
         } else {
-            f = mediaPlayer.getVideoHeight() / mediaPlayer.getVideoWidth();
+            videoHeight = mediaPlayer.getVideoHeight() / mediaPlayer.getVideoWidth();
         }
-        if (Float.compare(this.aspectRatio, f) != 0) {
-            this.aspectRatio = f;
+        if (Float.compare(this.aspectRatio, videoHeight) != 0) {
+            this.aspectRatio = videoHeight;
             requestLayout();
         }
         if (getWindowVisibility() == 0) {
@@ -160,7 +159,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.media.MediaPlayer.OnSeekCompleteListener
-    public final void onSeekComplete(MediaPlayer mediaPlayer) {
+    public final void onSeekComplete(MediaPlayer mediaPlayer) throws IllegalStateException {
         if (this.prepared) {
             mediaPlayer.start();
         } else {
@@ -169,7 +168,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.view.TextureView.SurfaceTextureListener
-    public final void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i2) {
+    public final void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i2) throws IllegalStateException, IOException, SecurityException, IllegalArgumentException {
         this.isMediaPlayerLoading = true;
         setVisibility(this.visibility);
         initVideo();
@@ -193,7 +192,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.view.View
-    public final void onWindowFocusChanged(boolean z) {
+    public final void onWindowFocusChanged(boolean z) throws IllegalStateException {
         super.onWindowFocusChanged(z);
         if (z) {
             start();
@@ -203,7 +202,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.view.View
-    public final void onWindowVisibilityChanged(int i) {
+    public final void onWindowVisibilityChanged(int i) throws IllegalStateException, IOException, SecurityException, IllegalArgumentException {
         super.onWindowVisibilityChanged(i);
         if (i == 0) {
             if (this.surface == null) {
@@ -235,7 +234,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.graphics.drawable.Animatable
-    public final void start() {
+    public final void start() throws IllegalStateException {
         MediaPlayer mediaPlayer;
         if (!this.prepared || (mediaPlayer = this.mediaPlayer) == null || mediaPlayer.isPlaying()) {
             return;
@@ -244,7 +243,7 @@ public class IllustrationVideoView extends TextureView implements Animatable, Te
     }
 
     @Override // android.graphics.drawable.Animatable
-    public final void stop() {
+    public final void stop() throws IllegalStateException {
         MediaPlayer mediaPlayer;
         if (this.shouldPauseVideoWhenFinished && this.prepared && (mediaPlayer = this.mediaPlayer) != null) {
             mediaPlayer.pause();

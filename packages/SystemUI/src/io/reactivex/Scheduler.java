@@ -5,11 +5,9 @@ import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.internal.schedulers.NewThreadWorker;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class Scheduler {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisposeTask implements Disposable, Runnable {
         public final Runnable decoratedRun;
         public Thread runner;
@@ -49,7 +47,6 @@ public abstract class Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Worker implements Disposable {
         public abstract Disposable schedule(Runnable runnable, long j, TimeUnit timeUnit);
 
@@ -65,10 +62,10 @@ public abstract class Scheduler {
     public abstract Worker createWorker();
 
     public Disposable scheduleDirect(Runnable runnable, long j, TimeUnit timeUnit) {
-        Worker createWorker = createWorker();
+        Worker workerCreateWorker = createWorker();
         int i = ObjectHelper.$r8$clinit;
-        DisposeTask disposeTask = new DisposeTask(runnable, createWorker);
-        createWorker.schedule(disposeTask, j, timeUnit);
+        DisposeTask disposeTask = new DisposeTask(runnable, workerCreateWorker);
+        workerCreateWorker.schedule(disposeTask, j, timeUnit);
         return disposeTask;
     }
 }

@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NoRemeasureMotionLayout extends MotionLayout {
     public static final int $stable = 8;
@@ -37,8 +36,8 @@ public final class NoRemeasureMotionLayout extends MotionLayout {
                 return;
             }
         }
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             com.android.app.tracing.TraceUtilsKt.beginSlice("NoRemeasureMotionLayout - measure");
         }
         try {
@@ -48,11 +47,11 @@ public final class NoRemeasureMotionLayout extends MotionLayout {
             Choreographer mainThreadInstance2 = Choreographer.getMainThreadInstance();
             this.lastFrame = mainThreadInstance2 != null ? Long.valueOf(mainThreadInstance2.getFrameTime()) : null;
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 com.android.app.tracing.TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 com.android.app.tracing.TraceUtilsKt.endSlice();
             }
             throw th;

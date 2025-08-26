@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HidProfile implements LocalBluetoothProfile {
     public final CachedBluetoothDeviceManager mDeviceManager;
@@ -20,7 +19,6 @@ public final class HidProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothHidHost mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HidHostServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ HidHostServiceListener(HidProfile hidProfile, int i) {
             this();
@@ -33,17 +31,17 @@ public final class HidProfile implements LocalBluetoothProfile {
             List<BluetoothDevice> connectedDevices = bluetoothHidHost.getConnectedDevices();
             if (!connectedDevices.isEmpty()) {
                 for (BluetoothDevice bluetoothDevice : connectedDevices) {
-                    CachedBluetoothDevice findDevice = HidProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                    if (findDevice == null) {
+                    CachedBluetoothDevice cachedBluetoothDeviceFindDevice = HidProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                    if (cachedBluetoothDeviceFindDevice == null) {
                         Log.w("HidProfile", "HidProfile found new device: " + bluetoothDevice);
                         HidProfile hidProfile = HidProfile.this;
-                        findDevice = hidProfile.mDeviceManager.addDevice(hidProfile.mProfileManager, bluetoothDevice);
+                        cachedBluetoothDeviceFindDevice = hidProfile.mDeviceManager.addDevice(hidProfile.mProfileManager, bluetoothDevice);
                     }
-                    if (findDevice != null) {
+                    if (cachedBluetoothDeviceFindDevice != null) {
                         try {
-                            Log.d("HidProfile", "Update cached device : " + findDevice.getNameForLog());
-                            findDevice.onProfileStateChanged(HidProfile.this, 2);
-                            findDevice.refresh();
+                            Log.d("HidProfile", "Update cached device : " + cachedBluetoothDeviceFindDevice.getNameForLog());
+                            cachedBluetoothDeviceFindDevice.onProfileStateChanged(HidProfile.this, 2);
+                            cachedBluetoothDeviceFindDevice.refresh();
                         } catch (NullPointerException unused) {
                             Log.d("HidProfile", "Handle NullPointerException!!!");
                         }

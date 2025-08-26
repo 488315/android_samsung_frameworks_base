@@ -23,13 +23,13 @@ public class ListPreference extends DialogPreference {
 
     public ListPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListPreference, i, i2);
-        this.mEntries = obtainStyledAttributes.getTextArray(0);
-        this.mEntryValues = obtainStyledAttributes.getTextArray(1);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
-        this.mSummary = obtainStyledAttributes2.getString(7);
-        obtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListPreference, i, i2);
+        this.mEntries = typedArrayObtainStyledAttributes.getTextArray(0);
+        this.mEntryValues = typedArrayObtainStyledAttributes.getTextArray(1);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
+        this.mSummary = typedArrayObtainStyledAttributes2.getString(7);
+        typedArrayObtainStyledAttributes2.recycle();
     }
 
     public ListPreference(Context context, AttributeSet attributeSet, int i) {
@@ -69,14 +69,14 @@ public class ListPreference extends DialogPreference {
     }
 
     public void setValue(String str) {
-        boolean equals = TextUtils.equals(this.mValue, str);
-        if (equals && this.mValueSet) {
+        boolean zEquals = TextUtils.equals(this.mValue, str);
+        if (zEquals && this.mValueSet) {
             return;
         }
         this.mValue = str;
         this.mValueSet = true;
         persistString(str);
-        if (equals) {
+        if (zEquals) {
             return;
         }
         notifyChanged();
@@ -172,9 +172,9 @@ public class ListPreference extends DialogPreference {
         if (!z || (i = this.mClickedDialogEntryIndex) < 0 || (charSequenceArr = this.mEntryValues) == null) {
             return;
         }
-        String charSequence = charSequenceArr[i].toString();
-        if (callChangeListener(charSequence)) {
-            setValue(charSequence);
+        String string = charSequenceArr[i].toString();
+        if (callChangeListener(string)) {
+            setValue(string);
         }
     }
 
@@ -190,11 +190,11 @@ public class ListPreference extends DialogPreference {
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.value = getValue();
         return savedState;
     }

@@ -59,9 +59,9 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
     public BCECPublicKey(String str, com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec eCPublicKeySpec, ProviderConfiguration providerConfiguration) {
         this.algorithm = str;
         if (eCPublicKeySpec.getParams() != null) {
-            EllipticCurve convertCurve = EC5Util.convertCurve(eCPublicKeySpec.getParams().getCurve(), eCPublicKeySpec.getParams().getSeed());
+            EllipticCurve ellipticCurveConvertCurve = EC5Util.convertCurve(eCPublicKeySpec.getParams().getCurve(), eCPublicKeySpec.getParams().getSeed());
             this.ecPublicKey = new ECPublicKeyParameters(eCPublicKeySpec.getQ(), ECUtil.getDomainParameters(providerConfiguration, eCPublicKeySpec.getParams()));
-            this.ecSpec = EC5Util.convertSpec(convertCurve, eCPublicKeySpec.getParams());
+            this.ecSpec = EC5Util.convertSpec(ellipticCurveConvertCurve, eCPublicKeySpec.getParams());
         } else {
             this.ecPublicKey = new ECPublicKeyParameters(providerConfiguration.getEcImplicitlyCa().getCurve().createPoint(eCPublicKeySpec.getQ().getAffineXCoord().toBigInteger(), eCPublicKeySpec.getQ().getAffineYCoord().toBigInteger()), EC5Util.getDomainParameters(providerConfiguration, null));
             this.ecSpec = null;
@@ -149,11 +149,11 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
 
     @Override // java.security.Key
     public byte[] getEncoded() {
-        boolean isOverrideSet = Properties.isOverrideSet("com.android.internal.org.bouncycastle.ec.enable_pc");
-        if (this.encoding == null || this.oldPcSet != isOverrideSet) {
-            boolean z = this.withCompression || isOverrideSet;
+        boolean zIsOverrideSet = Properties.isOverrideSet("com.android.internal.org.bouncycastle.ec.enable_pc");
+        if (this.encoding == null || this.oldPcSet != zIsOverrideSet) {
+            boolean z = this.withCompression || zIsOverrideSet;
             this.encoding = KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, ECUtils.getDomainParametersFromName(this.ecSpec, z)), this.ecPublicKey.getQ().getEncoded(z));
-            this.oldPcSet = isOverrideSet;
+            this.oldPcSet = zIsOverrideSet;
         }
         return Arrays.clone(this.encoding);
     }
@@ -220,7 +220,7 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
         return engineGetSpec().hashCode() ^ this.ecPublicKey.getQ().hashCode();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         byte[] bArr = (byte[]) objectInputStream.readObject();
         this.configuration = BouncyCastleProvider.CONFIGURATION;

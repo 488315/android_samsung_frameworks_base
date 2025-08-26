@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Ref$FloatRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SheetState$animateTo$2 extends SuspendLambda implements Function4 {
     final /* synthetic */ FiniteAnimationSpec<Float> $animationSpec;
@@ -51,8 +50,8 @@ final class SheetState$animateTo$2 extends SuspendLambda implements Function4 {
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final AnchoredDragScope anchoredDragScope = (AnchoredDragScope) this.L$0;
-            float positionOf = ((DraggableAnchors) this.L$1).positionOf((SheetValue) this.L$2);
-            if (!Float.isNaN(positionOf)) {
+            float fPositionOf = ((DraggableAnchors) this.L$1).positionOf((SheetValue) this.L$2);
+            if (!Float.isNaN(fPositionOf)) {
                 final Ref$FloatRef ref$FloatRef = new Ref$FloatRef();
                 float floatValue = Float.isNaN(((SnapshotMutableFloatStateImpl) this.this$0.anchoredDraggableState.offset$delegate).getFloatValue()) ? 0.0f : ((SnapshotMutableFloatStateImpl) this.this$0.anchoredDraggableState.offset$delegate).getFloatValue();
                 ref$FloatRef.element = floatValue;
@@ -66,22 +65,22 @@ final class SheetState$animateTo$2 extends SuspendLambda implements Function4 {
 
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj2, Object obj3) {
-                        float floatValue2 = ((Number) obj2).floatValue();
-                        float floatValue3 = ((Number) obj3).floatValue();
-                        AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = (AnchoredDraggableState$anchoredDragScope$1) AnchoredDragScope.this;
+                        float fFloatValue = ((Number) obj2).floatValue();
+                        float fFloatValue2 = ((Number) obj3).floatValue();
+                        AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = (AnchoredDraggableState$anchoredDragScope$1) anchoredDragScope;
                         anchoredDraggableState$anchoredDragScope$1.getClass();
                         int i2 = AnchoredDraggableState.$r8$clinit;
                         AnchoredDraggableState anchoredDraggableState = anchoredDraggableState$anchoredDragScope$1.this$0;
-                        ((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).setFloatValue(floatValue2);
-                        ((SnapshotMutableFloatStateImpl) anchoredDraggableState.lastVelocity$delegate).setFloatValue(floatValue3);
-                        ref$FloatRef.element = floatValue2;
+                        ((SnapshotMutableFloatStateImpl) anchoredDraggableState.offset$delegate).setFloatValue(fFloatValue);
+                        ((SnapshotMutableFloatStateImpl) anchoredDraggableState.lastVelocity$delegate).setFloatValue(fFloatValue2);
+                        ref$FloatRef.element = fFloatValue;
                         return Unit.INSTANCE;
                     }
                 };
                 this.L$0 = null;
                 this.L$1 = null;
                 this.label = 1;
-                if (SuspendAnimationKt.animate(floatValue, positionOf, f, finiteAnimationSpec, function2, this) == coroutineSingletons) {
+                if (SuspendAnimationKt.animate(floatValue, fPositionOf, f, finiteAnimationSpec, function2, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             }

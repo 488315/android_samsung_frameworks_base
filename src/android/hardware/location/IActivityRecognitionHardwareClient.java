@@ -45,9 +45,9 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActivityRecognitionHardwareClient)) {
-                return (IActivityRecognitionHardwareClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActivityRecognitionHardwareClient)) {
+                return (IActivityRecognitionHardwareClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                IActivityRecognitionHardware asInterface = IActivityRecognitionHardware.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
+                IActivityRecognitionHardware iActivityRecognitionHardwareAsInterface = IActivityRecognitionHardware.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onAvailabilityChanged(readBoolean, asInterface);
+                onAvailabilityChanged(z, iActivityRecognitionHardwareAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
 
             @Override // android.hardware.location.IActivityRecognitionHardwareClient
             public void onAvailabilityChanged(boolean z, IActivityRecognitionHardware iActivityRecognitionHardware) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iActivityRecognitionHardware);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iActivityRecognitionHardware);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

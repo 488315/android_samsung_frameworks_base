@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ManagedProfileControllerImpl implements ManagedProfileController {
     public final Context mContext;
@@ -35,7 +34,6 @@ public class ManagedProfileControllerImpl implements ManagedProfileController {
     public final UserTrackerCallback mUserTrackerCallback = new UserTrackerCallback(this, 0);
     public final LinkedList mProfiles = new LinkedList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UserTrackerCallback implements UserTracker.Callback {
         public /* synthetic */ UserTrackerCallback(ManagedProfileControllerImpl managedProfileControllerImpl, int i) {
             this();
@@ -145,7 +143,7 @@ public class ManagedProfileControllerImpl implements ManagedProfileController {
                     this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.phone.ManagedProfileControllerImpl$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ManagedProfileControllerImpl managedProfileControllerImpl = ManagedProfileControllerImpl.this;
+                            ManagedProfileControllerImpl managedProfileControllerImpl = this.f$0;
                             managedProfileControllerImpl.getClass();
                             managedProfileControllerImpl.notifyCallbacks$1(new ManagedProfileControllerImpl$$ExternalSyntheticLambda1(0));
                         }

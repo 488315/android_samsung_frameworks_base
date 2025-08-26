@@ -172,18 +172,18 @@ public class SContextManager extends SemContextManager {
 
     @Deprecated
     public void unregisterListener(SContextListener sContextListener) {
-        HashMap<Integer, Integer> hashMap;
-        if (sContextListener == null || (hashMap = this.mAvailableServiceMap) == null) {
+        HashMap<Integer, Integer> map;
+        if (sContextListener == null || (map = this.mAvailableServiceMap) == null) {
             return;
         }
-        Iterator<Integer> it = hashMap.keySet().iterator();
+        Iterator<Integer> it = map.keySet().iterator();
         if (it.hasNext()) {
-            int intValue = it.next().intValue();
+            int iIntValue = it.next().intValue();
             SContextListenerDelegate listenerDelegate = getListenerDelegate(sContextListener);
             if (listenerDelegate == null) {
                 return;
             }
-            super.unregisterListener(listenerDelegate, intValue);
+            super.unregisterListener(listenerDelegate, iIntValue);
             listenerDelegate.clear();
             this.mListenerDelegates.remove(listenerDelegate);
             Log.d(TAG, "  .unregisterListener : listener = " + sContextListener);
@@ -408,72 +408,24 @@ public class SContextManager extends SemContextManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0068, code lost:
-    
-        if (r4.getPedometerContext().getMode() == 2) goto L22;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean checkHistoryMode(android.hardware.scontext.SContextEvent r4) {
-        /*
-            r3 = this;
-            java.lang.StringBuffer r3 = new java.lang.StringBuffer
-            r3.<init>()
-            android.hardware.scontext.SContext r0 = r4.scontext
-            int r0 = r0.getType()
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "onSContextChanged() : event = "
-            r1.<init>(r2)
-            java.lang.String r2 = android.hardware.scontext.SContext.getServiceName(r0)
-            r1.append(r2)
-            java.lang.String r1 = r1.toString()
-            r3.append(r1)
-            r1 = 2
-            r2 = 1
-            if (r0 == r1) goto L60
-            r1 = 6
-            if (r0 == r1) goto L46
-            r1 = 26
-            if (r0 == r1) goto L3b
-            r1 = 33
-            if (r0 == r1) goto L30
-            goto L6b
-        L30:
-            android.hardware.scontext.SContextStepLevelMonitor r4 = r4.getStepLevelMonitorContext()
-            int r4 = r4.getMode()
-            if (r4 != r2) goto L6b
-            goto L6c
-        L3b:
-            android.hardware.scontext.SContextActivityBatch r4 = r4.getActivityBatchContext()
-            int r4 = r4.getMode()
-            if (r4 != r2) goto L6b
-            goto L6c
-        L46:
-            android.hardware.scontext.SContextAutoRotation r4 = r4.getAutoRotationContext()
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = " Angle : "
-            r0.<init>(r1)
-            int r4 = r4.getAngle()
-            r0.append(r4)
-            java.lang.String r4 = r0.toString()
-            r3.append(r4)
-            goto L6b
-        L60:
-            android.hardware.scontext.SContextPedometer r4 = r4.getPedometerContext()
-            int r4 = r4.getMode()
-            if (r4 != r1) goto L6b
-            goto L6c
-        L6b:
-            r2 = 0
-        L6c:
-            java.lang.String r4 = "SContextManager"
-            java.lang.String r3 = r3.toString()
-            android.util.Log.d(r4, r3)
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.scontext.SContextManager.checkHistoryMode(android.hardware.scontext.SContextEvent):boolean");
+    public boolean checkHistoryMode(SContextEvent sContextEvent) {
+        StringBuffer stringBuffer = new StringBuffer();
+        int type = sContextEvent.scontext.getType();
+        stringBuffer.append("onSContextChanged() : event = " + SContext.getServiceName(type));
+        boolean z = true;
+        if (type != 2) {
+            if (type != 6) {
+                if (type == 26 ? sContextEvent.getActivityBatchContext().getMode() != 1 : type != 33 || sContextEvent.getStepLevelMonitorContext().getMode() != 1) {
+                }
+            } else {
+                stringBuffer.append(" Angle : " + sContextEvent.getAutoRotationContext().getAngle());
+            }
+            z = false;
+        } else if (sContextEvent.getPedometerContext().getMode() != 2) {
+            z = false;
+        }
+        Log.d(TAG, stringBuffer.toString());
+        return z;
     }
 
     private class SContextListenerDelegate implements SemContextListener {

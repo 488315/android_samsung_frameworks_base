@@ -16,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
     public static final List TABLE_HEADERS;
@@ -48,7 +47,6 @@ public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
     public boolean userDoesNotHaveTrust;
     public int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Buffer {
         public final RingBuffer buffer = new RingBuffer(20, new KeyguardFingerprintListenModel$Buffer$$ExternalSyntheticLambda1());
 
@@ -57,7 +55,6 @@ public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -132,7 +129,7 @@ public final class KeyguardFingerprintListenModel extends KeyguardListenModel {
             public final Object invoke() {
                 List list = KeyguardFingerprintListenModel.TABLE_HEADERS;
                 SimpleDateFormat simpleDateFormat = KeyguardListenModelKt.DATE_FORMAT;
-                KeyguardFingerprintListenModel keyguardFingerprintListenModel = KeyguardFingerprintListenModel.this;
+                KeyguardFingerprintListenModel keyguardFingerprintListenModel = this.f$0;
                 return Arrays.asList(simpleDateFormat.format(Long.valueOf(keyguardFingerprintListenModel.timeMillis)), String.valueOf(keyguardFingerprintListenModel.timeMillis), String.valueOf(keyguardFingerprintListenModel.userId), String.valueOf(keyguardFingerprintListenModel.listening), String.valueOf(keyguardFingerprintListenModel.allowOnCurrentOccludingActivity), String.valueOf(keyguardFingerprintListenModel.alternateBouncerShowing), String.valueOf(keyguardFingerprintListenModel.biometricEnabledForUser), String.valueOf(keyguardFingerprintListenModel.biometricPromptShowing), String.valueOf(keyguardFingerprintListenModel.bouncerIsOrWillShow), String.valueOf(keyguardFingerprintListenModel.canSkipBouncer), String.valueOf(keyguardFingerprintListenModel.credentialAttempted), String.valueOf(keyguardFingerprintListenModel.deviceInteractive), String.valueOf(keyguardFingerprintListenModel.dreaming), String.valueOf(keyguardFingerprintListenModel.fingerprintDisabled), String.valueOf(keyguardFingerprintListenModel.fingerprintLockedOut), String.valueOf(keyguardFingerprintListenModel.goingToSleep), String.valueOf(keyguardFingerprintListenModel.keyguardGoingAway), String.valueOf(keyguardFingerprintListenModel.keyguardIsVisible), String.valueOf(keyguardFingerprintListenModel.keyguardOccluded), String.valueOf(keyguardFingerprintListenModel.occludingAppRequestingFp), String.valueOf(keyguardFingerprintListenModel.shouldListenForFingerprintAssistant), String.valueOf(keyguardFingerprintListenModel.strongerAuthRequired), String.valueOf(keyguardFingerprintListenModel.switchingUser), String.valueOf(keyguardFingerprintListenModel.systemUser), String.valueOf(keyguardFingerprintListenModel.udfps), String.valueOf(keyguardFingerprintListenModel.userDoesNotHaveTrust), String.valueOf(keyguardFingerprintListenModel.communalShowing));
             }
         });

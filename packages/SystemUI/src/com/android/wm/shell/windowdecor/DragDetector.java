@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragDetector {
     public boolean mDidHoldForMinDuration;
@@ -19,7 +18,6 @@ public class DragDetector {
     public boolean mResultOfDownAction;
     public int mTouchSlop;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MotionEventHandler {
         boolean handleMotionEvent(View view, MotionEvent motionEvent);
     }
@@ -54,9 +52,9 @@ public class DragDetector {
         if (actionMasked == 0) {
             this.mDragPointerId = motionEvent.getPointerId(0);
             this.mInputDownPoint.set(motionEvent.getRawX(0), motionEvent.getRawY(0));
-            boolean handleMotionEvent = motionEventHandler.handleMotionEvent(view, motionEvent);
-            this.mResultOfDownAction = handleMotionEvent;
-            return handleMotionEvent;
+            boolean zHandleMotionEvent = motionEventHandler.handleMotionEvent(view, motionEvent);
+            this.mResultOfDownAction = zHandleMotionEvent;
+            return zHandleMotionEvent;
         }
         if (actionMasked != 1) {
             if (actionMasked == 2) {
@@ -64,14 +62,14 @@ public class DragDetector {
                 if (i == -1) {
                     return this.mResultOfDownAction;
                 }
-                int findPointerIndex = motionEvent.findPointerIndex(i);
-                if (findPointerIndex == -1) {
+                int iFindPointerIndex = motionEvent.findPointerIndex(i);
+                if (iFindPointerIndex == -1) {
                     Log.w("DragDetector", "Invalid pointer index on ACTION_MOVE. Drag pointer id: " + this.mDragPointerId);
                     return this.mResultOfDownAction;
                 }
                 if (!this.mIsDragEvent) {
-                    float rawX = motionEvent.getRawX(findPointerIndex) - this.mInputDownPoint.x;
-                    float rawY = motionEvent.getRawY(findPointerIndex) - this.mInputDownPoint.y;
+                    float rawX = motionEvent.getRawX(iFindPointerIndex) - this.mInputDownPoint.x;
+                    float rawY = motionEvent.getRawY(iFindPointerIndex) - this.mInputDownPoint.y;
                     float eventTime = motionEvent.getEventTime() - motionEvent.getDownTime();
                     boolean z2 = Math.hypot((double) rawX, (double) rawY) > ((double) this.mTouchSlop);
                     long j = this.mHoldToDragMinDurationMs;

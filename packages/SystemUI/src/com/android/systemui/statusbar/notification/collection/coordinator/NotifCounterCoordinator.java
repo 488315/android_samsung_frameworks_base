@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class NotifCounterCoordinator implements Coordinator {
@@ -57,19 +56,19 @@ public class NotifCounterCoordinator implements Coordinator {
         refreshMaxCount();
         if (this.mMaxCount < list.size()) {
             this.mMaxCount = list.size();
-            Message obtain = Message.obtain();
-            obtain.what = 0;
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 0;
             if (this.mMoreCountHandler.hasMessages(0)) {
                 this.mMoreCountHandler.removeMessages(0);
             }
-            this.mMoreCountHandler.sendMessage(obtain);
+            this.mMoreCountHandler.sendMessage(messageObtain);
         }
     }
 
     private void refreshMaxCount() {
-        long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis - this.mLastUpdateTime > MINIMUM_STATUS_UPDATE_PERIOD_MS) {
-            this.mLastUpdateTime = currentTimeMillis;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (jCurrentTimeMillis - this.mLastUpdateTime > MINIMUM_STATUS_UPDATE_PERIOD_MS) {
+            this.mLastUpdateTime = jCurrentTimeMillis;
             this.mMaxCount = 0;
         }
     }
@@ -78,22 +77,22 @@ public class NotifCounterCoordinator implements Coordinator {
     public void updateMaxCount() {
         SharedPreferences sharedPreferences = this.mNotifCounterPrefs;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            this.mEditor = edit;
-            edit.putInt(SystemUIAnalytics.STID_NOTIFICATION_TOTAL_COUNT, this.mMaxCount);
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            this.mEditor = editorEdit;
+            editorEdit.putInt(SystemUIAnalytics.STID_NOTIFICATION_TOTAL_COUNT, this.mMaxCount);
             this.mEditor.commit();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void updateMoreCount(List<PipelineEntry> list) {
-        int i;
+        int size;
         List list2;
         if (this.mNotifCounterPrefs != null) {
             if (!((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantPromotion() && !((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantBgActivities() && !((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantMinimized() && !((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantOld()) {
-                SharedPreferences.Editor edit = this.mNotifCounterPrefs.edit();
-                this.mEditor = edit;
-                edit.putString(SystemUIAnalytics.STID_FILTERED_NOTIFICATION_COUNT, "OFF");
+                SharedPreferences.Editor editorEdit = this.mNotifCounterPrefs.edit();
+                this.mEditor = editorEdit;
+                editorEdit.putString(SystemUIAnalytics.STID_FILTERED_NOTIFICATION_COUNT, "OFF");
                 this.mEditor.commit();
                 return;
             }
@@ -105,15 +104,17 @@ public class NotifCounterCoordinator implements Coordinator {
                 NotificationEntry representativeEntry = it.next().getRepresentativeEntry();
                 if (representativeEntry != null && representativeEntry.isInsignificant()) {
                     ExpandableNotificationRow expandableNotificationRow = representativeEntry.row;
-                    if (expandableNotificationRow != null && (list2 = expandableNotificationRow.mInsigificantChildrenList) != null) {
-                        i = ((ArrayList) list2).size();
+                    if (expandableNotificationRow == null || (list2 = expandableNotificationRow.mInsigificantChildrenList) == null) {
+                        break;
+                    } else {
+                        size = ((ArrayList) list2).size();
                     }
                 }
             }
-            i = 0;
-            SharedPreferences.Editor edit2 = this.mNotifCounterPrefs.edit();
-            this.mEditor = edit2;
-            edit2.putInt(SystemUIAnalytics.STID_FILTERED_NOTIFICATION_COUNT, i);
+            size = 0;
+            SharedPreferences.Editor editorEdit2 = this.mNotifCounterPrefs.edit();
+            this.mEditor = editorEdit2;
+            editorEdit2.putInt(SystemUIAnalytics.STID_FILTERED_NOTIFICATION_COUNT, size);
             this.mEditor.commit();
         }
     }
@@ -123,7 +124,7 @@ public class NotifCounterCoordinator implements Coordinator {
         notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotifCounterCoordinator$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener
             public final void onAfterRenderList(List list) {
-                NotifCounterCoordinator.this.onAfterRenderList(list);
+                this.f$0.onAfterRenderList(list);
             }
         });
     }

@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockConfig {
     public static final int $stable = 0;
@@ -111,12 +110,12 @@ public final class ClockConfig {
         String str3 = this.description;
         boolean z = this.useAlternateSmartspaceAODTransition;
         boolean z2 = this.useCustomClockScene;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ClockConfig(id=", str, ", name=", str2, ", description=");
-        m.append(str3);
-        m.append(", useAlternateSmartspaceAODTransition=");
-        m.append(z);
-        m.append(", useCustomClockScene=");
-        return MoveResult$$ExternalSyntheticOutline0.m(m, z2, ")");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ClockConfig(id=", str, ", name=", str2, ", description=");
+        sbM.append(str3);
+        sbM.append(", useAlternateSmartspaceAODTransition=");
+        sbM.append(z);
+        sbM.append(", useCustomClockScene=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sbM, z2, ")");
     }
 
     public /* synthetic */ ClockConfig(String str, String str2, String str3, boolean z, boolean z2, int i, DefaultConstructorMarker defaultConstructorMarker) {

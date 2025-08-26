@@ -44,69 +44,69 @@ public class SecP521R1Point extends ECPoint.AbstractFp {
         SecP521R1FieldElement secP521R1FieldElement4 = (SecP521R1FieldElement) eCPoint.getYCoord();
         SecP521R1FieldElement secP521R1FieldElement5 = (SecP521R1FieldElement) this.zs[0];
         SecP521R1FieldElement secP521R1FieldElement6 = (SecP521R1FieldElement) eCPoint.getZCoord(0);
-        int[] create = Nat.create(33);
-        int[] create2 = Nat.create(17);
-        int[] create3 = Nat.create(17);
-        int[] create4 = Nat.create(17);
-        int[] create5 = Nat.create(17);
-        boolean isOne = secP521R1FieldElement5.isOne();
-        if (isOne) {
+        int[] iArrCreate = Nat.create(33);
+        int[] iArrCreate2 = Nat.create(17);
+        int[] iArrCreate3 = Nat.create(17);
+        int[] iArrCreate4 = Nat.create(17);
+        int[] iArrCreate5 = Nat.create(17);
+        boolean zIsOne = secP521R1FieldElement5.isOne();
+        if (zIsOne) {
             iArr = secP521R1FieldElement3.x;
             iArr2 = secP521R1FieldElement4.x;
             c = 0;
         } else {
             c = 0;
-            SecP521R1Field.square(secP521R1FieldElement5.x, create4, create);
-            SecP521R1Field.multiply(create4, secP521R1FieldElement3.x, create3, create);
-            SecP521R1Field.multiply(create4, secP521R1FieldElement5.x, create4, create);
-            SecP521R1Field.multiply(create4, secP521R1FieldElement4.x, create4, create);
-            iArr = create3;
-            iArr2 = create4;
+            SecP521R1Field.square(secP521R1FieldElement5.x, iArrCreate4, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate4, secP521R1FieldElement3.x, iArrCreate3, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate4, secP521R1FieldElement5.x, iArrCreate4, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate4, secP521R1FieldElement4.x, iArrCreate4, iArrCreate);
+            iArr = iArrCreate3;
+            iArr2 = iArrCreate4;
         }
-        boolean isOne2 = secP521R1FieldElement6.isOne();
-        if (isOne2) {
+        boolean zIsOne2 = secP521R1FieldElement6.isOne();
+        if (zIsOne2) {
             iArr3 = secP521R1FieldElement.x;
             iArr4 = secP521R1FieldElement2.x;
             i = 17;
         } else {
             i = 17;
-            SecP521R1Field.square(secP521R1FieldElement6.x, create5, create);
-            SecP521R1Field.multiply(create5, secP521R1FieldElement.x, create2, create);
-            SecP521R1Field.multiply(create5, secP521R1FieldElement6.x, create5, create);
-            SecP521R1Field.multiply(create5, secP521R1FieldElement2.x, create5, create);
-            iArr3 = create2;
-            iArr4 = create5;
+            SecP521R1Field.square(secP521R1FieldElement6.x, iArrCreate5, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate5, secP521R1FieldElement.x, iArrCreate2, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate5, secP521R1FieldElement6.x, iArrCreate5, iArrCreate);
+            SecP521R1Field.multiply(iArrCreate5, secP521R1FieldElement2.x, iArrCreate5, iArrCreate);
+            iArr3 = iArrCreate2;
+            iArr4 = iArrCreate5;
         }
-        int[] create6 = Nat.create(i);
-        SecP521R1Field.subtract(iArr3, iArr, create6);
-        SecP521R1Field.subtract(iArr4, iArr2, create3);
+        int[] iArrCreate6 = Nat.create(i);
+        SecP521R1Field.subtract(iArr3, iArr, iArrCreate6);
+        SecP521R1Field.subtract(iArr4, iArr2, iArrCreate3);
         int i2 = i;
-        if (Nat.isZero(i2, create6)) {
-            if (Nat.isZero(i2, create3)) {
+        if (Nat.isZero(i2, iArrCreate6)) {
+            if (Nat.isZero(i2, iArrCreate3)) {
                 return twice();
             }
             return curve.getInfinity();
         }
-        SecP521R1Field.square(create6, create4, create);
-        int[] create7 = Nat.create(i2);
-        SecP521R1Field.multiply(create4, create6, create7, create);
-        SecP521R1Field.multiply(create4, iArr3, create4, create);
-        SecP521R1Field.multiply(iArr4, create7, create2, create);
-        SecP521R1FieldElement secP521R1FieldElement7 = new SecP521R1FieldElement(create5);
-        SecP521R1Field.square(create3, secP521R1FieldElement7.x, create);
-        SecP521R1Field.add(secP521R1FieldElement7.x, create7, secP521R1FieldElement7.x);
-        SecP521R1Field.subtract(secP521R1FieldElement7.x, create4, secP521R1FieldElement7.x);
-        SecP521R1Field.subtract(secP521R1FieldElement7.x, create4, secP521R1FieldElement7.x);
-        SecP521R1FieldElement secP521R1FieldElement8 = new SecP521R1FieldElement(create7);
-        SecP521R1Field.subtract(create4, secP521R1FieldElement7.x, secP521R1FieldElement8.x);
-        SecP521R1Field.multiply(secP521R1FieldElement8.x, create3, create3, create);
-        SecP521R1Field.subtract(create3, create2, secP521R1FieldElement8.x);
-        SecP521R1FieldElement secP521R1FieldElement9 = new SecP521R1FieldElement(create6);
-        if (!isOne) {
-            SecP521R1Field.multiply(secP521R1FieldElement9.x, secP521R1FieldElement5.x, secP521R1FieldElement9.x, create);
+        SecP521R1Field.square(iArrCreate6, iArrCreate4, iArrCreate);
+        int[] iArrCreate7 = Nat.create(i2);
+        SecP521R1Field.multiply(iArrCreate4, iArrCreate6, iArrCreate7, iArrCreate);
+        SecP521R1Field.multiply(iArrCreate4, iArr3, iArrCreate4, iArrCreate);
+        SecP521R1Field.multiply(iArr4, iArrCreate7, iArrCreate2, iArrCreate);
+        SecP521R1FieldElement secP521R1FieldElement7 = new SecP521R1FieldElement(iArrCreate5);
+        SecP521R1Field.square(iArrCreate3, secP521R1FieldElement7.x, iArrCreate);
+        SecP521R1Field.add(secP521R1FieldElement7.x, iArrCreate7, secP521R1FieldElement7.x);
+        SecP521R1Field.subtract(secP521R1FieldElement7.x, iArrCreate4, secP521R1FieldElement7.x);
+        SecP521R1Field.subtract(secP521R1FieldElement7.x, iArrCreate4, secP521R1FieldElement7.x);
+        SecP521R1FieldElement secP521R1FieldElement8 = new SecP521R1FieldElement(iArrCreate7);
+        SecP521R1Field.subtract(iArrCreate4, secP521R1FieldElement7.x, secP521R1FieldElement8.x);
+        SecP521R1Field.multiply(secP521R1FieldElement8.x, iArrCreate3, iArrCreate3, iArrCreate);
+        SecP521R1Field.subtract(iArrCreate3, iArrCreate2, secP521R1FieldElement8.x);
+        SecP521R1FieldElement secP521R1FieldElement9 = new SecP521R1FieldElement(iArrCreate6);
+        if (!zIsOne) {
+            SecP521R1Field.multiply(secP521R1FieldElement9.x, secP521R1FieldElement5.x, secP521R1FieldElement9.x, iArrCreate);
         }
-        if (!isOne2) {
-            SecP521R1Field.multiply(secP521R1FieldElement9.x, secP521R1FieldElement6.x, secP521R1FieldElement9.x, create);
+        if (!zIsOne2) {
+            SecP521R1Field.multiply(secP521R1FieldElement9.x, secP521R1FieldElement6.x, secP521R1FieldElement9.x, iArrCreate);
         }
         ECFieldElement[] eCFieldElementArr = new ECFieldElement[1];
         eCFieldElementArr[c] = secP521R1FieldElement9;
@@ -125,41 +125,41 @@ public class SecP521R1Point extends ECPoint.AbstractFp {
         }
         SecP521R1FieldElement secP521R1FieldElement2 = (SecP521R1FieldElement) this.x;
         SecP521R1FieldElement secP521R1FieldElement3 = (SecP521R1FieldElement) this.zs[0];
-        int[] create = Nat.create(33);
-        int[] create2 = Nat.create(17);
-        int[] create3 = Nat.create(17);
-        int[] create4 = Nat.create(17);
-        SecP521R1Field.square(secP521R1FieldElement.x, create4, create);
-        int[] create5 = Nat.create(17);
-        SecP521R1Field.square(create4, create5, create);
-        boolean isOne = secP521R1FieldElement3.isOne();
+        int[] iArrCreate = Nat.create(33);
+        int[] iArrCreate2 = Nat.create(17);
+        int[] iArrCreate3 = Nat.create(17);
+        int[] iArrCreate4 = Nat.create(17);
+        SecP521R1Field.square(secP521R1FieldElement.x, iArrCreate4, iArrCreate);
+        int[] iArrCreate5 = Nat.create(17);
+        SecP521R1Field.square(iArrCreate4, iArrCreate5, iArrCreate);
+        boolean zIsOne = secP521R1FieldElement3.isOne();
         int[] iArr = secP521R1FieldElement3.x;
-        if (!isOne) {
-            SecP521R1Field.square(secP521R1FieldElement3.x, create3, create);
-            iArr = create3;
+        if (!zIsOne) {
+            SecP521R1Field.square(secP521R1FieldElement3.x, iArrCreate3, iArrCreate);
+            iArr = iArrCreate3;
         }
-        SecP521R1Field.subtract(secP521R1FieldElement2.x, iArr, create2);
-        SecP521R1Field.add(secP521R1FieldElement2.x, iArr, create3);
-        SecP521R1Field.multiply(create3, create2, create3, create);
-        Nat.addBothTo(17, create3, create3, create3);
-        SecP521R1Field.reduce23(create3);
-        SecP521R1Field.multiply(create4, secP521R1FieldElement2.x, create4, create);
-        Nat.shiftUpBits(17, create4, 2, 0);
-        SecP521R1Field.reduce23(create4);
-        Nat.shiftUpBits(17, create5, 3, 0, create2);
-        SecP521R1Field.reduce23(create2);
-        SecP521R1FieldElement secP521R1FieldElement4 = new SecP521R1FieldElement(create5);
-        SecP521R1Field.square(create3, secP521R1FieldElement4.x, create);
-        SecP521R1Field.subtract(secP521R1FieldElement4.x, create4, secP521R1FieldElement4.x);
-        SecP521R1Field.subtract(secP521R1FieldElement4.x, create4, secP521R1FieldElement4.x);
-        SecP521R1FieldElement secP521R1FieldElement5 = new SecP521R1FieldElement(create4);
-        SecP521R1Field.subtract(create4, secP521R1FieldElement4.x, secP521R1FieldElement5.x);
-        SecP521R1Field.multiply(secP521R1FieldElement5.x, create3, secP521R1FieldElement5.x, create);
-        SecP521R1Field.subtract(secP521R1FieldElement5.x, create2, secP521R1FieldElement5.x);
-        SecP521R1FieldElement secP521R1FieldElement6 = new SecP521R1FieldElement(create3);
+        SecP521R1Field.subtract(secP521R1FieldElement2.x, iArr, iArrCreate2);
+        SecP521R1Field.add(secP521R1FieldElement2.x, iArr, iArrCreate3);
+        SecP521R1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3, iArrCreate);
+        Nat.addBothTo(17, iArrCreate3, iArrCreate3, iArrCreate3);
+        SecP521R1Field.reduce23(iArrCreate3);
+        SecP521R1Field.multiply(iArrCreate4, secP521R1FieldElement2.x, iArrCreate4, iArrCreate);
+        Nat.shiftUpBits(17, iArrCreate4, 2, 0);
+        SecP521R1Field.reduce23(iArrCreate4);
+        Nat.shiftUpBits(17, iArrCreate5, 3, 0, iArrCreate2);
+        SecP521R1Field.reduce23(iArrCreate2);
+        SecP521R1FieldElement secP521R1FieldElement4 = new SecP521R1FieldElement(iArrCreate5);
+        SecP521R1Field.square(iArrCreate3, secP521R1FieldElement4.x, iArrCreate);
+        SecP521R1Field.subtract(secP521R1FieldElement4.x, iArrCreate4, secP521R1FieldElement4.x);
+        SecP521R1Field.subtract(secP521R1FieldElement4.x, iArrCreate4, secP521R1FieldElement4.x);
+        SecP521R1FieldElement secP521R1FieldElement5 = new SecP521R1FieldElement(iArrCreate4);
+        SecP521R1Field.subtract(iArrCreate4, secP521R1FieldElement4.x, secP521R1FieldElement5.x);
+        SecP521R1Field.multiply(secP521R1FieldElement5.x, iArrCreate3, secP521R1FieldElement5.x, iArrCreate);
+        SecP521R1Field.subtract(secP521R1FieldElement5.x, iArrCreate2, secP521R1FieldElement5.x);
+        SecP521R1FieldElement secP521R1FieldElement6 = new SecP521R1FieldElement(iArrCreate3);
         SecP521R1Field.twice(secP521R1FieldElement.x, secP521R1FieldElement6.x);
-        if (!isOne) {
-            SecP521R1Field.multiply(secP521R1FieldElement6.x, secP521R1FieldElement3.x, secP521R1FieldElement6.x, create);
+        if (!zIsOne) {
+            SecP521R1Field.multiply(secP521R1FieldElement6.x, secP521R1FieldElement3.x, secP521R1FieldElement6.x, iArrCreate);
         }
         return new SecP521R1Point(curve, secP521R1FieldElement4, secP521R1FieldElement5, new ECFieldElement[]{secP521R1FieldElement6});
     }

@@ -20,7 +20,6 @@ import android.service.resolver.ResolverTarget;
 import android.util.Log;
 import com.android.internal.app.AbstractResolverComparator;
 import com.android.internal.app.ResolverActivity;
-import com.android.internal.app.ResolverRankerServiceResolverComparator;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.internal.logging.MetricsLogger;
 import com.google.android.collect.Lists;
@@ -70,9 +69,9 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
         this.mCollator = Collator.getInstance(context.getResources().getConfiguration().locale);
         this.mReferrerPackage = str;
         this.mContext = context;
-        long currentTimeMillis = System.currentTimeMillis();
-        this.mCurrentTime = currentTimeMillis;
-        this.mSinceTime = currentTimeMillis - 604800000;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        this.mCurrentTime = jCurrentTimeMillis;
+        this.mSinceTime = jCurrentTimeMillis - 604800000;
         this.mStatsPerUser = new HashMap();
         this.mTargetsDictPerUser = new HashMap();
         for (UserHandle userHandle : list) {
@@ -117,13 +116,13 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
     }
 
     @Override // com.android.internal.app.AbstractResolverComparator
-    public void doCompute(List<ResolverActivity.ResolvedComponentInfo> list) {
-        float f;
+    public void doCompute(List<ResolverActivity.ResolvedComponentInfo> list) throws InterruptedException {
+        float fIntValue;
         long j = this.mCurrentTime - 43200000;
+        float f = 1.0f;
         float f2 = 1.0f;
         float f3 = 1.0f;
         float f4 = 1.0f;
-        float f5 = 1.0f;
         for (ResolverActivity.ResolvedComponentInfo resolvedComponentInfo : list) {
             ResolverTarget resolverTarget = new ResolverTarget();
             int i = 0;
@@ -134,38 +133,38 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
                 UsageStats usageStats = map.get(resolvedComponentInfo.name.getPackageName());
                 if (usageStats != null) {
                     if (!resolvedComponentInfo.name.getPackageName().equals(this.mReferrerPackage) && !isPersistentProcess(resolvedComponentInfo)) {
-                        float max = Math.max(usageStats.getLastTimeUsed() - j, 0L);
-                        resolverTarget.setRecencyScore(max);
-                        if (max > f2) {
-                            f2 = max;
+                        float fMax = Math.max(usageStats.getLastTimeUsed() - j, 0L);
+                        resolverTarget.setRecencyScore(fMax);
+                        if (fMax > f) {
+                            f = fMax;
                         }
                     }
                     float totalTimeInForeground = usageStats.getTotalTimeInForeground();
                     resolverTarget.setTimeSpentScore(totalTimeInForeground);
-                    if (totalTimeInForeground > f3) {
-                        f3 = totalTimeInForeground;
+                    if (totalTimeInForeground > f2) {
+                        f2 = totalTimeInForeground;
                     }
-                    float f6 = usageStats.mLaunchCount;
-                    resolverTarget.setLaunchScore(f6);
-                    if (f6 > f4) {
-                        f4 = f6;
+                    float f5 = usageStats.mLaunchCount;
+                    resolverTarget.setLaunchScore(f5);
+                    if (f5 > f3) {
+                        f3 = f5;
                     }
                     if (usageStats.mChooserCounts == null || this.mAction == null || usageStats.mChooserCounts.get(this.mAction) == null) {
-                        f = 0.0f;
+                        fIntValue = 0.0f;
                     } else {
-                        f = usageStats.mChooserCounts.get(this.mAction).getOrDefault(this.mContentType, 0).intValue();
+                        fIntValue = usageStats.mChooserCounts.get(this.mAction).getOrDefault(this.mContentType, 0).intValue();
                         if (this.mAnnotations != null) {
                             int i2 = 0;
                             while (i2 < this.mAnnotations.length) {
-                                f += usageStats.mChooserCounts.get(this.mAction).getOrDefault(this.mAnnotations[i2], Integer.valueOf(r17)).intValue();
+                                fIntValue += usageStats.mChooserCounts.get(this.mAction).getOrDefault(this.mAnnotations[i2], Integer.valueOf(r17)).intValue();
                                 i2++;
                                 i = i;
                             }
                         }
                     }
-                    resolverTarget.setChooserScore(f);
-                    if (f > f5) {
-                        f5 = f;
+                    resolverTarget.setChooserScore(fIntValue);
+                    if (fIntValue > f4) {
+                        f4 = fIntValue;
                     }
                 }
             }
@@ -178,8 +177,8 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
         Iterator<ResolverTarget> it2 = this.mTargets.iterator();
         while (it2.hasNext()) {
             ResolverTarget next = it2.next();
-            float recencyScore = next.getRecencyScore() / f2;
-            setFeatures(next, recencyScore * recencyScore * 2.0f, next.getLaunchScore() / f4, next.getTimeSpentScore() / f3, next.getChooserScore() / f5);
+            float recencyScore = next.getRecencyScore() / f;
+            setFeatures(next, recencyScore * recencyScore * 2.0f, next.getLaunchScore() / f3, next.getTimeSpentScore() / f2, next.getChooserScore() / f4);
             addDefaultSelectProbability(next);
         }
         predictSelectProbabilities(this.mTargets);
@@ -218,14 +217,14 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
     private void initRanker(Context context) {
         synchronized (this.mLock) {
             if (this.mConnection == null || this.mRanker == null) {
-                Intent resolveRankerService = resolveRankerService();
-                if (resolveRankerService == null) {
+                Intent intentResolveRankerService = resolveRankerService();
+                if (intentResolveRankerService == null) {
                     return;
                 }
                 this.mConnectSignal = new CountDownLatch(1);
                 ResolverRankerServiceConnection resolverRankerServiceConnection = new ResolverRankerServiceConnection(this.mConnectSignal);
                 this.mConnection = resolverRankerServiceConnection;
-                context.bindServiceAsUser(resolveRankerService, resolverRankerServiceConnection, 1, UserHandle.SYSTEM);
+                context.bindServiceAsUser(intentResolveRankerService, resolverRankerServiceConnection, 1, UserHandle.SYSTEM);
             }
         }
     }
@@ -260,10 +259,10 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
             @Override // android.service.resolver.IResolverRankerResult
             public void sendResult(List<ResolverTarget> list) throws RemoteException {
                 synchronized (ResolverRankerServiceResolverComparator.this.mLock) {
-                    Message obtain = Message.obtain();
-                    obtain.what = 0;
-                    obtain.obj = list;
-                    ResolverRankerServiceResolverComparator.this.mHandler.sendMessage(obtain);
+                    Message messageObtain = Message.obtain();
+                    messageObtain.what = 0;
+                    messageObtain.obj = list;
+                    ResolverRankerServiceResolverComparator.this.mHandler.sendMessage(messageObtain);
                 }
             }
         };
@@ -312,7 +311,7 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
         initRanker(this.mContext);
     }
 
-    private void predictSelectProbabilities(List<ResolverTarget> list) {
+    private void predictSelectProbabilities(List<ResolverTarget> list) throws InterruptedException {
         if (this.mConnection != null) {
             try {
                 this.mConnectSignal.await(200L, TimeUnit.MILLISECONDS);
@@ -378,30 +377,28 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
             return new Comparator() { // from class: com.android.internal.app.ResolverRankerServiceResolverComparator$ResolverRankerServiceComparatorModel$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int lambda$getComparator$0;
-                    lambda$getComparator$0 = ResolverRankerServiceResolverComparator.ResolverRankerServiceComparatorModel.this.lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
-                    return lambda$getComparator$0;
+                    return this.f$0.lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
                 }
             };
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getComparator$0(ResolveInfo resolveInfo, ResolveInfo resolveInfo2) {
-            int compare;
+            int iCompare;
             ResolverTarget activityResolverTargetForUser = getActivityResolverTargetForUser(resolveInfo.activityInfo, resolveInfo.userHandle);
             ResolverTarget activityResolverTargetForUser2 = getActivityResolverTargetForUser(resolveInfo2.activityInfo, resolveInfo2.userHandle);
-            if (activityResolverTargetForUser != null && activityResolverTargetForUser2 != null && (compare = Float.compare(activityResolverTargetForUser2.getSelectProbability(), activityResolverTargetForUser.getSelectProbability())) != 0) {
-                return compare > 0 ? 1 : -1;
+            if (activityResolverTargetForUser != null && activityResolverTargetForUser2 != null && (iCompare = Float.compare(activityResolverTargetForUser2.getSelectProbability(), activityResolverTargetForUser.getSelectProbability())) != 0) {
+                return iCompare > 0 ? 1 : -1;
             }
-            CharSequence loadLabel = this.mPmMap.containsKey(resolveInfo.userHandle) ? resolveInfo.loadLabel(this.mPmMap.get(resolveInfo.userHandle)) : null;
-            if (loadLabel == null) {
-                loadLabel = resolveInfo.activityInfo.name;
+            CharSequence charSequenceLoadLabel = this.mPmMap.containsKey(resolveInfo.userHandle) ? resolveInfo.loadLabel(this.mPmMap.get(resolveInfo.userHandle)) : null;
+            if (charSequenceLoadLabel == null) {
+                charSequenceLoadLabel = resolveInfo.activityInfo.name;
             }
-            CharSequence loadLabel2 = this.mPmMap.containsKey(resolveInfo2.userHandle) ? resolveInfo2.loadLabel(this.mPmMap.get(resolveInfo2.userHandle)) : null;
-            if (loadLabel2 == null) {
-                loadLabel2 = resolveInfo2.activityInfo.name;
+            CharSequence charSequenceLoadLabel2 = this.mPmMap.containsKey(resolveInfo2.userHandle) ? resolveInfo2.loadLabel(this.mPmMap.get(resolveInfo2.userHandle)) : null;
+            if (charSequenceLoadLabel2 == null) {
+                charSequenceLoadLabel2 = resolveInfo2.activityInfo.name;
             }
-            return this.mCollator.compare(loadLabel.toString().trim(), loadLabel2.toString().trim());
+            return this.mCollator.compare(charSequenceLoadLabel.toString().trim(), charSequenceLoadLabel2.toString().trim());
         }
 
         @Override // com.android.internal.app.ResolverComparatorModel
@@ -416,8 +413,8 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
         public void notifyOnTargetSelected(TargetInfo targetInfo) {
             if (this.mRanker != null) {
                 try {
-                    int indexOf = this.mTargetsDictPerUser.containsKey(targetInfo.getResolveInfo().userHandle) ? new ArrayList(this.mTargetsDictPerUser.get(targetInfo.getResolveInfo().userHandle).keySet()).indexOf(targetInfo.getResolvedComponentName()) : -1;
-                    if (indexOf < 0 || this.mTargets == null) {
+                    int iIndexOf = this.mTargetsDictPerUser.containsKey(targetInfo.getResolveInfo().userHandle) ? new ArrayList(this.mTargetsDictPerUser.get(targetInfo.getResolveInfo().userHandle).keySet()).indexOf(targetInfo.getResolvedComponentName()) : -1;
+                    if (iIndexOf < 0 || this.mTargets == null) {
                         return;
                     }
                     float score = getScore(targetInfo);
@@ -429,7 +426,7 @@ class ResolverRankerServiceResolverComparator extends AbstractResolverComparator
                         }
                     }
                     logMetrics(i);
-                    this.mRanker.train(this.mTargets, indexOf);
+                    this.mRanker.train(this.mTargets, iIndexOf);
                 } catch (RemoteException e) {
                     Log.e(ResolverRankerServiceResolverComparator.TAG, "Error in Train: " + e);
                 }

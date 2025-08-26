@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.resources.MaterialAttributes;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ElevationOverlayProvider {
     public static final int OVERLAY_ACCENT_COLOR_ALPHA = (int) Math.round(5.1000000000000005d);
@@ -26,13 +25,13 @@ public class ElevationOverlayProvider {
         if (!this.elevationOverlayEnabled || ColorUtils.setAlphaComponent(i, 255) != this.colorSurface) {
             return i;
         }
-        float min = (this.displayDensity <= 0.0f || f <= 0.0f) ? 0.0f : Math.min(((((float) Math.log1p(f / r1)) * 4.5f) + 2.0f) / 100.0f, 1.0f);
-        int alpha = Color.alpha(i);
-        int layer = MaterialColors.layer(min, ColorUtils.setAlphaComponent(i, 255), this.elevationOverlayColor);
-        if (min > 0.0f && (i2 = this.elevationOverlayAccentColor) != 0) {
-            layer = ColorUtils.compositeColors(ColorUtils.setAlphaComponent(i2, OVERLAY_ACCENT_COLOR_ALPHA), layer);
+        float fMin = (this.displayDensity <= 0.0f || f <= 0.0f) ? 0.0f : Math.min(((((float) Math.log1p(f / r1)) * 4.5f) + 2.0f) / 100.0f, 1.0f);
+        int iAlpha = Color.alpha(i);
+        int iLayer = MaterialColors.layer(fMin, ColorUtils.setAlphaComponent(i, 255), this.elevationOverlayColor);
+        if (fMin > 0.0f && (i2 = this.elevationOverlayAccentColor) != 0) {
+            iLayer = ColorUtils.compositeColors(ColorUtils.setAlphaComponent(i2, OVERLAY_ACCENT_COLOR_ALPHA), iLayer);
         }
-        return ColorUtils.setAlphaComponent(layer, alpha);
+        return ColorUtils.setAlphaComponent(iLayer, iAlpha);
     }
 
     public ElevationOverlayProvider(boolean z, int i, int i2, int i3, float f) {

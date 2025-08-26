@@ -75,9 +75,9 @@ public interface ITrustListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITrustListener)) {
-                return (ITrustListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITrustListener)) {
+                return (ITrustListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -116,31 +116,31 @@ public interface ITrustListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onEnabledTrustAgentsChanged(readInt);
+                onEnabledTrustAgentsChanged(i3);
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                onTrustChanged(readBoolean, readBoolean2, readInt2, readInt3, createStringArrayList);
+                onTrustChanged(z, z2, i4, i5, arrayListCreateStringArrayList);
             } else if (i == 3) {
-                boolean readBoolean3 = parcel.readBoolean();
-                int readInt4 = parcel.readInt();
+                boolean z3 = parcel.readBoolean();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTrustManagedChanged(readBoolean3, readInt4);
+                onTrustManagedChanged(z3, i6);
             } else if (i == 4) {
                 CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 parcel.enforceNoDataAvail();
                 onTrustError(charSequence);
             } else if (i == 5) {
-                boolean readBoolean4 = parcel.readBoolean();
-                int readInt5 = parcel.readInt();
+                boolean z4 = parcel.readBoolean();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onIsActiveUnlockRunningChanged(readBoolean4, readInt5);
+                onIsActiveUnlockRunningChanged(z4, i7);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -165,72 +165,72 @@ public interface ITrustListener extends IInterface {
 
             @Override // android.app.trust.ITrustListener
             public void onEnabledTrustAgentsChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.trust.ITrustListener
             public void onTrustChanged(boolean z, boolean z2, int i, int i2, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.trust.ITrustListener
             public void onTrustManagedChanged(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.trust.ITrustListener
             public void onTrustError(CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(4, obtain, null, 1);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.trust.ITrustListener
             public void onIsActiveUnlockRunningChanged(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

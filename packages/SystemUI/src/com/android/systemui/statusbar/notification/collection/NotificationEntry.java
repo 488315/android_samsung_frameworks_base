@@ -34,8 +34,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import kotlinx.coroutines.flow.StateFlowImpl;
+import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationEntry extends ListEntry {
     public EditedSuggestionInfo editedSuggestionInfo;
@@ -94,14 +94,12 @@ public final class NotificationEntry extends ListEntry {
     public ExpandableNotificationRow row;
     public int targetSdk;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DismissState {
         NOT_DISMISSED,
         DISMISSED,
         PARENT_DISMISSED
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EditedSuggestionInfo {
         public final int index;
         public final CharSequence originalText;
@@ -112,94 +110,52 @@ public final class NotificationEntry extends ListEntry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnHideRawValueChangedListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSensitivityChangedListener {
         void onSensitivityChanged(NotificationEntry notificationEntry);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public NotificationEntry(android.service.notification.StatusBarNotification r6, android.service.notification.NotificationListenerService.Ranking r7, long r8) {
-        /*
-            r5 = this;
-            java.util.Objects.requireNonNull(r6)
-            java.lang.String r0 = r6.getKey()
-            java.util.Objects.requireNonNull(r0)
-            r5.<init>(r0, r8)
-            java.util.ArrayList r8 = new java.util.ArrayList
-            r8.<init>()
-            r5.mLifetimeExtenders = r8
-            java.util.ArrayList r8 = new java.util.ArrayList
-            r8.<init>()
-            r5.mDismissInterceptors = r8
-            r8 = -1
-            r5.mCancellationReason = r8
-            com.android.systemui.statusbar.notification.collection.NotificationEntry$DismissState r9 = com.android.systemui.statusbar.notification.collection.NotificationEntry.DismissState.NOT_DISMISSED
-            r5.mDismissState = r9
-            r9 = 0
-            com.android.systemui.statusbar.notification.icon.IconPack r0 = com.android.systemui.statusbar.notification.icon.IconPack.buildEmptyPack(r9)
-            r5.mIcons = r0
-            r0 = -2000(0xfffffffffffff830, double:NaN)
-            r5.lastFullScreenIntentLaunchTime = r0
-            r2 = 1
-            r5.mCachedContrastColor = r2
-            r5.mCachedContrastColorIsFor = r2
-            r5.mRunningTask = r9
-            r5.lastRemoteInputSent = r0
-            kotlinx.coroutines.flow.StateFlowImpl r0 = kotlinx.coroutines.flow.StateFlowKt.MutableStateFlow(r9)
-            r5.mHeadsUpStatusBarText = r0
-            kotlinx.coroutines.flow.StateFlowImpl r0 = kotlinx.coroutines.flow.StateFlowKt.MutableStateFlow(r9)
-            r5.mHeadsUpStatusBarTextPublic = r0
-            r0 = -1
-            r5.initializationTime = r0
-            java.lang.Boolean r0 = java.lang.Boolean.TRUE
-            kotlinx.coroutines.flow.StateFlowImpl r0 = kotlinx.coroutines.flow.StateFlowKt.MutableStateFlow(r0)
-            r5.mSensitive = r0
-            com.android.systemui.util.ListenerSet r0 = new com.android.systemui.util.ListenerSet
-            r0.<init>()
-            r5.mOnSensitivityChangedListeners = r0
-            com.android.systemui.util.ListenerSet r0 = new com.android.systemui.util.ListenerSet
-            r0.<init>()
-            r5.mOnHideRawValueChangedListeners = r0
-            r0 = 0
-            r5.mIsDemoted = r0
-            r5.mIsHeadsUpByBriefExpanding = r0
-            r3 = 0
-            r5.mFullscreenPopUpStartTime = r3
-            r5.mIsPromoted = r9
-            r5.mPromotedOngoingView = r9
-            java.lang.Boolean r9 = java.lang.Boolean.FALSE
-            r5.mIsLockscreenSecret = r9
-            r5.mIsRon = r9
-            r5.mIsPlayingMediaOngoingActivity = r9
-            r5.mIsBindCutOff = r9
-            r5.mWillBeHUN = r0
-            java.util.Objects.requireNonNull(r7)
-            boolean r9 = r7.isOngoingActivityTurnedOn()
-            java.lang.Boolean r9 = java.lang.Boolean.valueOf(r9)
-            r5.mIsPromoted = r9
-            int r9 = r7.getLockscreenVisibilityOverride()
-            if (r9 != r8) goto L89
-            goto L8a
-        L89:
-            r2 = r0
-        L8a:
-            java.lang.Boolean r8 = java.lang.Boolean.valueOf(r2)
-            r5.mIsLockscreenSecret = r8
-            java.lang.String r8 = r6.getKey()
-            r5.mKey = r8
-            r5.setSbn(r6)
-            r5.setRanking(r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.NotificationEntry.<init>(android.service.notification.StatusBarNotification, android.service.notification.NotificationListenerService$Ranking, long):void");
+    public NotificationEntry(StatusBarNotification statusBarNotification, NotificationListenerService.Ranking ranking, long j) {
+        Objects.requireNonNull(statusBarNotification);
+        String key = statusBarNotification.getKey();
+        Objects.requireNonNull(key);
+        super(key, j);
+        this.mLifetimeExtenders = new ArrayList();
+        this.mDismissInterceptors = new ArrayList();
+        this.mCancellationReason = -1;
+        this.mDismissState = DismissState.NOT_DISMISSED;
+        this.mIcons = IconPack.buildEmptyPack(null);
+        this.lastFullScreenIntentLaunchTime = -2000L;
+        this.mCachedContrastColor = 1;
+        this.mCachedContrastColorIsFor = 1;
+        this.mRunningTask = null;
+        this.lastRemoteInputSent = -2000L;
+        this.mHeadsUpStatusBarText = StateFlowKt.MutableStateFlow(null);
+        this.mHeadsUpStatusBarTextPublic = StateFlowKt.MutableStateFlow(null);
+        this.initializationTime = -1L;
+        this.mSensitive = StateFlowKt.MutableStateFlow(Boolean.TRUE);
+        this.mOnSensitivityChangedListeners = new ListenerSet();
+        this.mOnHideRawValueChangedListeners = new ListenerSet();
+        this.mIsDemoted = false;
+        this.mIsHeadsUpByBriefExpanding = false;
+        this.mFullscreenPopUpStartTime = 0L;
+        this.mIsPromoted = null;
+        this.mPromotedOngoingView = null;
+        Boolean bool = Boolean.FALSE;
+        this.mIsLockscreenSecret = bool;
+        this.mIsRon = bool;
+        this.mIsPlayingMediaOngoingActivity = bool;
+        this.mIsBindCutOff = bool;
+        this.mWillBeHUN = false;
+        Objects.requireNonNull(ranking);
+        this.mIsPromoted = Boolean.valueOf(ranking.isOngoingActivityTurnedOn());
+        this.mIsLockscreenSecret = Boolean.valueOf(ranking.getLockscreenVisibilityOverride() == -1);
+        this.mKey = statusBarNotification.getKey();
+        setSbn(statusBarNotification);
+        setRanking(ranking);
     }
 
     public final boolean abortTask() {
@@ -403,7 +359,7 @@ public final class NotificationEntry extends ListEntry {
     public final void setHeadsUp(boolean z) {
         ExpandableNotificationRow expandableNotificationRow = this.row;
         if (expandableNotificationRow != null) {
-            boolean isAboveShelf = expandableNotificationRow.isAboveShelf();
+            boolean zIsAboveShelf = expandableNotificationRow.isAboveShelf();
             int intrinsicHeight = expandableNotificationRow.getIntrinsicHeight();
             expandableNotificationRow.mIsHeadsUp = z;
             NotificationContentView notificationContentView = expandableNotificationRow.mPrivateLayout;
@@ -419,8 +375,8 @@ public final class NotificationEntry extends ListEntry {
             if (z) {
                 expandableNotificationRow.mMustStayOnScreen = true;
                 expandableNotificationRow.setAboveShelf(true);
-            } else if (expandableNotificationRow.isAboveShelf() != isAboveShelf) {
-                expandableNotificationRow.mAboveShelfChangedListener.onAboveShelfStateChanged(!isAboveShelf);
+            } else if (expandableNotificationRow.isAboveShelf() != zIsAboveShelf) {
+                expandableNotificationRow.mAboveShelfChangedListener.onAboveShelfStateChanged(!zIsAboveShelf);
             }
             this.mWillBeHUN = false;
         }
@@ -453,9 +409,9 @@ public final class NotificationEntry extends ListEntry {
         if (!key.equals(str)) {
             throw new IllegalArgumentException("New key " + ranking.getKey() + " doesn't match existing key " + str);
         }
-        NotificationListenerService.Ranking withAudiblyAlertedInfo = ranking.withAudiblyAlertedInfo(this.mRanking);
-        this.mRanking = withAudiblyAlertedInfo;
-        if (withAudiblyAlertedInfo.getChannel() == null) {
+        NotificationListenerService.Ranking rankingWithAudiblyAlertedInfo = ranking.withAudiblyAlertedInfo(this.mRanking);
+        this.mRanking = rankingWithAudiblyAlertedInfo;
+        if (rankingWithAudiblyAlertedInfo.getChannel() == null) {
             this.mBlockable = false;
         } else if (!this.mRanking.getChannel().isImportanceLockedByCriticalDeviceFunction() || this.mRanking.getChannel().isBlockable()) {
             this.mBlockable = true;
@@ -466,9 +422,9 @@ public final class NotificationEntry extends ListEntry {
             return;
         }
         this.row.mViewState.hasGradient = false;
-        boolean isOngoingActivityTurnedOn = this.mRanking.isOngoingActivityTurnedOn();
-        if (this.mIsPromoted.booleanValue() != isOngoingActivityTurnedOn) {
-            this.mIsPromoted = Boolean.valueOf(isOngoingActivityTurnedOn);
+        boolean zIsOngoingActivityTurnedOn = this.mRanking.isOngoingActivityTurnedOn();
+        if (this.mIsPromoted.booleanValue() != zIsOngoingActivityTurnedOn) {
+            this.mIsPromoted = Boolean.valueOf(zIsOngoingActivityTurnedOn);
             OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
             NotificationLockscreenUserManager notificationLockscreenUserManager = (NotificationLockscreenUserManager) Dependency.sDependency.getDependencyInner(NotificationLockscreenUserManager.class);
             ongoingActivityDataHelper.getClass();
@@ -496,15 +452,15 @@ public final class NotificationEntry extends ListEntry {
         this.mBubbleMetadata = statusBarNotification.getNotification().getBubbleMetadata();
         AllowedOngoingActivityListManager allowedOngoingActivityListManager = (AllowedOngoingActivityListManager) Dependency.sDependency.getDependencyInner(AllowedOngoingActivityListManager.class);
         String packageName = this.mSbn.getPackageName();
-        boolean z = true;
+        boolean zContains = true;
         if (Settings.Secure.getInt(allowedOngoingActivityListManager.context.getContentResolver(), SettingsHelper.INDEX_DEVELOP_RON_TEST, 0) != 1) {
             List list = allowedOngoingActivityListManager.allowedList;
             if (list == null) {
                 list = null;
             }
-            z = list.contains(packageName);
+            zContains = list.contains(packageName);
         }
-        if (z || ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isDevelopRonTestAllowed()) {
+        if (zContains || ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isDevelopRonTestAllowed()) {
             this.mIsRon = Boolean.valueOf(statusBarNotification.getNotification().hasPromotableCharacteristics());
         }
     }

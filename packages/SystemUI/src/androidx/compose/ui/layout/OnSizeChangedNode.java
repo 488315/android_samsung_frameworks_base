@@ -5,7 +5,6 @@ import androidx.compose.ui.node.LayoutAwareModifierNode;
 import androidx.compose.ui.unit.IntSize;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OnSizeChangedNode extends Modifier.Node implements LayoutAwareModifierNode {
     public Function1 onSizeChanged;
@@ -26,11 +25,11 @@ final class OnSizeChangedNode extends Modifier.Node implements LayoutAwareModifi
 
     @Override // androidx.compose.ui.node.LayoutAwareModifierNode
     /* renamed from: onRemeasured-ozmzZPI */
-    public final void mo49onRemeasuredozmzZPI(long j) {
-        if (IntSize.m861equalsimpl0(this.previousSize, j)) {
+    public final void mo50onRemeasuredozmzZPI(long j) {
+        if (IntSize.m863equalsimpl0(this.previousSize, j)) {
             return;
         }
-        this.onSizeChanged.mo779invoke(IntSize.m859boximpl(j));
+        this.onSizeChanged.mo781invoke(IntSize.m861boximpl(j));
         this.previousSize = j;
     }
 }

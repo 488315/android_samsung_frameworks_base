@@ -47,6 +47,7 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.Utils;
 import com.samsung.android.media.SemSoundAssistantManager;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
@@ -54,9 +55,11 @@ import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.stream.IntStream;
 import javax.inject.Provider;
+import kotlin.Pair;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecMediaHost implements StatusBarStateController.StateListener, ConfigurationController.ConfigurationListener {
     public int mBarState;
@@ -68,6 +71,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
     public Context mCoverContext;
     public SubScreenQuickPanelWindowController$$ExternalSyntheticLambda15 mCoverQSClickConsumer;
     public MediaDataFormat mCurrentMediaData;
+    public int mCurrentScreenLayout;
     public int mIsRTL;
     public boolean mLocalListening;
     public final MediaLogger mLogger;
@@ -92,7 +96,6 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
     public final WakefulnessLifecycle mWakefulnessLifeCycle;
     public CoverMusicWidgetController mWidgetController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.SecMediaHost$1, reason: invalid class name */
     public class AnonymousClass1 {
         public final /* synthetic */ SecMediaPlayerData val$playerData;
@@ -102,7 +105,6 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.SecMediaHost$2, reason: invalid class name */
     public class AnonymousClass2 implements MediaDataManager.Listener {
         public AnonymousClass2() {
@@ -135,11 +137,11 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
             LogLevel logLevel = LogLevel.DEBUG;
             MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda0 = new MediaLogWriter$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = mediaLogWriter.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaLogger", logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaLogger", logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.str2 = callers;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             Log.d("MediaLogger", "Media data removed [" + str + "]");
             secMediaHost.mMediaPlayerData.forEach(new BiConsumer() { // from class: com.android.systemui.media.SecMediaHost$2$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
@@ -149,7 +151,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                     QSCoverPlayLastSongHelper qSCoverPlayLastSongHelper;
                     MediaDataFormat mediaDataFormat2;
                     PlayLastSongHelper playLastSongHelper;
-                    SecMediaHost.AnonymousClass2 anonymousClass2 = SecMediaHost.AnonymousClass2.this;
+                    SecMediaHost.AnonymousClass2 anonymousClass2 = this.f$0;
                     String str2 = str;
                     MediaType mediaType = (MediaType) obj;
                     SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) obj2;
@@ -162,9 +164,9 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                     if (mediaType.getSupportPlayLastSong() && (mediaDataFormat = secMediaHost2.mCurrentMediaData) != null && (qSCoverPlayLastSongHelper = secMediaHost2.mQSCoverPlayLastSongHelper) != null) {
                         qSCoverPlayLastSongHelper.lastMediaPlayerKey = mediaDataFormat.data.packageName;
                     }
-                    secMediaPlayerData.m2612getMediaData().remove(str2);
+                    secMediaPlayerData.m2629getMediaData().remove(str2);
                     secMediaHost2.removePlayer(str2, mediaType);
-                    int size = secMediaPlayerData.m2612getMediaData().size();
+                    int size = secMediaPlayerData.m2629getMediaData().size();
                     if (size == 0) {
                         secMediaHost2.onMediaVisibilityChanged(Boolean.FALSE);
                     } else {
@@ -208,7 +210,6 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MediaPanelVisibilityListener {
         void onMediaVisibilityChanged(boolean z);
     }
@@ -338,7 +339,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
             str = null;
         } else {
             str = secMediaPlayerData.getMediaPlayerFromSortedMediaPlayers(0).mPlayerKey;
-            mediaData = str != null ? (MediaData) secMediaPlayerData.m2612getMediaData().get(str) : null;
+            mediaData = str != null ? (MediaData) secMediaPlayerData.m2629getMediaData().get(str) : null;
         }
         if (str == null || mediaData == null) {
             Log.d("SecMediaHost", "addMediaFrame. There is no current media data on QS, exit");
@@ -413,7 +414,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                     secMediaControlPanel.mBudsButtonExpanded.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.media.SecMediaControlPanel$$ExternalSyntheticLambda4
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view) {
-                            SecMediaControlPanel.this.mBudsDetailOpenRunnable.run();
+                            secMediaControlPanel.mBudsDetailOpenRunnable.run();
                             SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_MEDIA_BUDS_BUTTON);
                         }
                     });
@@ -428,10 +429,27 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
             secMediaControlPanel.bind(mediaData, str);
             secMediaControlPanel.setListening(this.mLocalListening);
             secMediaPlayerData.getMediaPlayers().put(str, secMediaControlPanel);
-            if (secMediaControlPanel.isPlaying()) {
+            if (secMediaControlPanel.isPlaying() || secMediaPlayerData.getSortedMediaPlayersSize() == 0) {
                 secMediaPlayerData.getSortedMediaPlayers().add(0, secMediaControlPanel);
-            } else if (secMediaPlayerData.getSortedMediaPlayersSize() == 0) {
-                secMediaPlayerData.getSortedMediaPlayers().add(0, secMediaControlPanel);
+                z = true;
+                viewPager = viewPagerHelper.getViewPager(mediaType2);
+                if (viewPager != null) {
+                    adapter2.notifyDataSetChanged();
+                }
+                String strName = mediaType2.name();
+                boolean zIsPlaying = secMediaControlPanel.isPlaying();
+                MediaLogWriter mediaLogWriter = ((MediaLoggerImpl) mediaLogger).writer;
+                mediaLogWriter.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda0 = new MediaLogWriter$$ExternalSyntheticLambda0(1);
+                LogBuffer logBuffer = mediaLogWriter.buffer;
+                String str6 = str5;
+                LogMessage logMessageObtain = logBuffer.obtain(str6, logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = str;
+                logMessageImpl.bool1 = zIsPlaying;
+                logBuffer.commit(logMessageObtain);
+                Log.d(str6, str4 + strName + "] Media player added [" + str + str3 + zIsPlaying + "]");
             } else {
                 secMediaPlayerData.getSortedMediaPlayers().add(secMediaControlPanel);
                 z = false;
@@ -439,40 +457,21 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                 if (viewPager != null && (adapter2 = viewPager.getAdapter()) != null) {
                     adapter2.notifyDataSetChanged();
                 }
-                String name = mediaType2.name();
-                boolean isPlaying = secMediaControlPanel.isPlaying();
-                MediaLogWriter mediaLogWriter = ((MediaLoggerImpl) mediaLogger).writer;
-                mediaLogWriter.getClass();
-                LogLevel logLevel = LogLevel.DEBUG;
-                MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda0 = new MediaLogWriter$$ExternalSyntheticLambda0(1);
-                LogBuffer logBuffer = mediaLogWriter.buffer;
-                String str6 = str5;
-                LogMessage obtain = logBuffer.obtain(str6, logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                logMessageImpl.str1 = str;
-                logMessageImpl.bool1 = isPlaying;
-                logBuffer.commit(obtain);
-                Log.d(str6, str4 + name + "] Media player added [" + str + str3 + isPlaying + "]");
+                String strName2 = mediaType2.name();
+                boolean zIsPlaying2 = secMediaControlPanel.isPlaying();
+                MediaLogWriter mediaLogWriter2 = ((MediaLoggerImpl) mediaLogger).writer;
+                mediaLogWriter2.getClass();
+                LogLevel logLevel2 = LogLevel.DEBUG;
+                MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda02 = new MediaLogWriter$$ExternalSyntheticLambda0(1);
+                LogBuffer logBuffer2 = mediaLogWriter2.buffer;
+                String str62 = str5;
+                LogMessage logMessageObtain2 = logBuffer2.obtain(str62, logLevel2, mediaLogWriter$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                logMessageImpl2.str1 = str;
+                logMessageImpl2.bool1 = zIsPlaying2;
+                logBuffer2.commit(logMessageObtain2);
+                Log.d(str62, str4 + strName2 + "] Media player added [" + str + str3 + zIsPlaying2 + "]");
             }
-            z = true;
-            viewPager = viewPagerHelper.getViewPager(mediaType2);
-            if (viewPager != null) {
-                adapter2.notifyDataSetChanged();
-            }
-            String name2 = mediaType2.name();
-            boolean isPlaying2 = secMediaControlPanel.isPlaying();
-            MediaLogWriter mediaLogWriter2 = ((MediaLoggerImpl) mediaLogger).writer;
-            mediaLogWriter2.getClass();
-            LogLevel logLevel2 = LogLevel.DEBUG;
-            MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda02 = new MediaLogWriter$$ExternalSyntheticLambda0(1);
-            LogBuffer logBuffer2 = mediaLogWriter2.buffer;
-            String str62 = str5;
-            LogMessage obtain2 = logBuffer2.obtain(str62, logLevel2, mediaLogWriter$$ExternalSyntheticLambda02, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
-            logMessageImpl2.str1 = str;
-            logMessageImpl2.bool1 = isPlaying2;
-            logBuffer2.commit(obtain2);
-            Log.d(str62, str4 + name2 + "] Media player added [" + str + str3 + isPlaying2 + "]");
         } else {
             secMediaControlPanel3.bind(mediaData, str);
             if (!Objects.equals(secMediaControlPanel3.mPlayerKey, str)) {
@@ -485,19 +484,19 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                 secMediaPlayerData.getSortedMediaPlayers().add(0, secMediaControlPanel3);
                 z = true;
             }
-            String name3 = mediaType2.name();
-            boolean isPlaying3 = secMediaControlPanel3.isPlaying();
+            String strName3 = mediaType2.name();
+            boolean zIsPlaying3 = secMediaControlPanel3.isPlaying();
             MediaLogWriter mediaLogWriter3 = ((MediaLoggerImpl) mediaLogger2).writer;
             mediaLogWriter3.getClass();
             LogLevel logLevel3 = LogLevel.DEBUG;
             MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda03 = new MediaLogWriter$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer3 = mediaLogWriter3.buffer;
-            LogMessage obtain3 = logBuffer3.obtain("MediaLogger", logLevel3, mediaLogWriter$$ExternalSyntheticLambda03, null);
-            LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain3;
+            LogMessage logMessageObtain3 = logBuffer3.obtain("MediaLogger", logLevel3, mediaLogWriter$$ExternalSyntheticLambda03, null);
+            LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain3;
             logMessageImpl3.str1 = str;
-            logMessageImpl3.bool1 = isPlaying3;
-            logBuffer3.commit(obtain3);
-            Log.d("MediaLogger", "[" + name3 + "] Media player updated [" + str + "] isPlaying[" + isPlaying3 + "]");
+            logMessageImpl3.bool1 = zIsPlaying3;
+            logBuffer3.commit(logMessageObtain3);
+            Log.d("MediaLogger", "[" + strName3 + "] Media player updated [" + str + "] isPlaying[" + zIsPlaying3 + "]");
             secMediaControlPanel = secMediaControlPanel3;
         }
         boolean z2 = z;
@@ -538,34 +537,120 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onConfigChanged(final Configuration configuration) {
         final boolean z;
-        final int i = configuration.orientation;
-        int layoutDirection = configuration.getLayoutDirection();
-        if (this.mIsRTL != layoutDirection) {
-            this.mIsRTL = layoutDirection;
+        final boolean z2;
+        final boolean z3;
+        int i = configuration.orientation;
+        if (this.mOrientation != i) {
+            this.mOrientation = i;
             z = true;
         } else {
             z = false;
         }
-        this.mMediaFrames.forEach(new BiConsumer() { // from class: com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda12
-            /* JADX WARN: Removed duplicated region for block: B:17:0x00fc  */
+        int i2 = configuration.screenLayout;
+        if (this.mCurrentScreenLayout != i2) {
+            this.mCurrentScreenLayout = i2;
+            z2 = true;
+        } else {
+            z2 = false;
+        }
+        int layoutDirection = configuration.getLayoutDirection();
+        if (this.mIsRTL != layoutDirection) {
+            this.mIsRTL = layoutDirection;
+            z3 = true;
+        } else {
+            z3 = false;
+        }
+        this.mMediaFrames.forEach(new BiConsumer(z, z2, configuration, z3) { // from class: com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda12
+            public final /* synthetic */ boolean f$1;
+            public final /* synthetic */ Configuration f$3;
+            public final /* synthetic */ boolean f$4;
+
+            {
+                this.f$3 = configuration;
+                this.f$4 = z3;
+            }
+
+            /* JADX WARN: Removed duplicated region for block: B:14:0x0088  */
             @Override // java.util.function.BiConsumer
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void accept(java.lang.Object r17, java.lang.Object r18) {
-                /*
-                    Method dump skipped, instructions count: 291
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda12.accept(java.lang.Object, java.lang.Object):void");
+            public final void accept(Object obj, Object obj2) {
+                boolean z4;
+                SecMediaHost secMediaHost = this.f$0;
+                boolean z5 = this.f$1;
+                Configuration configuration2 = this.f$3;
+                boolean z6 = this.f$4;
+                MediaType mediaType = (MediaType) obj;
+                View view = (View) obj2;
+                ViewPagerHelper viewPagerHelper = secMediaHost.mViewPagerHelper;
+                ViewPager viewPager = viewPagerHelper.getViewPager(mediaType);
+                if (viewPager == null) {
+                    return;
+                }
+                SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(mediaType);
+                int mediaPlayerSize$1 = secMediaPlayerData != null ? secMediaPlayerData.getMediaPlayerSize$1() : 0;
+                if (mediaPlayerSize$1 <= 0) {
+                    secMediaHost.onMediaVisibilityChanged(Boolean.FALSE);
+                }
+                String strName = mediaType.name();
+                MediaLogWriter mediaLogWriter = ((MediaLoggerImpl) secMediaHost.mLogger).writer;
+                mediaLogWriter.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda0 = new MediaLogWriter$$ExternalSyntheticLambda0(5);
+                LogBuffer logBuffer = mediaLogWriter.buffer;
+                LogMessage logMessageObtain = logBuffer.obtain("MediaLogger", logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).int1 = mediaPlayerSize$1;
+                logBuffer.commit(logMessageObtain);
+                StringBuilder sb = new StringBuilder("[");
+                sb.append(strName);
+                sb.append("] Media config changed data size is [");
+                EmergencyButtonController$$ExternalSyntheticOutline0.m(sb, mediaPlayerSize$1, "]", "MediaLogger");
+                secMediaHost.mPagerMargin = secMediaHost.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_media_side_padding);
+                view.invalidateOutline();
+                int currentItem = viewPager.getCurrentItem();
+                if (secMediaHost.mPlayerNeedForceUpdate || z5) {
+                    SecMediaPlayerData secMediaPlayerData2 = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(mediaType);
+                    SecMediaHost$$ExternalSyntheticLambda13 secMediaHost$$ExternalSyntheticLambda13 = new SecMediaHost$$ExternalSyntheticLambda13(secMediaHost, mediaType, 1);
+                    if (secMediaPlayerData2 == null) {
+                        z4 = z6;
+                    } else {
+                        ArrayList sortedMediaPlayers = secMediaPlayerData2.getSortedMediaPlayers();
+                        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(sortedMediaPlayers, 10));
+                        if (iMapCapacity < 16) {
+                            iMapCapacity = 16;
+                        }
+                        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+                        int size = sortedMediaPlayers.size();
+                        int i3 = 0;
+                        while (i3 < size) {
+                            Object obj3 = sortedMediaPlayers.get(i3);
+                            i3++;
+                            SecMediaControlPanel secMediaControlPanel = (SecMediaControlPanel) obj3;
+                            Pair pair = new Pair(secMediaControlPanel.mPlayerKey, secMediaPlayerData2.m2629getMediaData().get(secMediaControlPanel.mPlayerKey));
+                            linkedHashMap.put(pair.getFirst(), pair.getSecond());
+                            z6 = z6;
+                        }
+                        z4 = z6;
+                        linkedHashMap.entrySet().forEach(secMediaHost$$ExternalSyntheticLambda13);
+                    }
+                }
+                SecMediaHost.iteratePlayers(secMediaPlayerData, new SecMediaHost$$ExternalSyntheticLambda17(configuration2, 0));
+                if (z4) {
+                    if (mediaType.getSupportCarousel()) {
+                        CarouselHelper carouselHelper = secMediaHost.mCarouselHelper;
+                        carouselHelper.indicator.setLayoutDirection(carouselHelper.isRTLSupplier.getAsInt());
+                    }
+                    viewPager.setAdapter(new ViewPagerHelper$createPageAdapter$1(viewPagerHelper, mediaType));
+                    currentItem = (secMediaHost.getMediaPlayerNum(mediaType) - 1) - currentItem;
+                }
+                viewPager.setCurrentItem(currentItem);
             }
         });
-        this.mOrientation = i;
     }
 
     public final void onMediaVisibilityChanged(Boolean bool) {
-        this.mVisibilityListeners.forEach(new SecMediaHost$$ExternalSyntheticLambda15(bool));
+        this.mVisibilityListeners.forEach(new SecMediaHost$$ExternalSyntheticLambda17(bool));
     }
 
     @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
@@ -650,17 +735,17 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         }
         MediaLogger mediaLogger = this.mLogger;
         if (secMediaControlPanel == null) {
-            String name = mediaType.name();
+            String strName = mediaType.name();
             MediaLogWriter mediaLogWriter = ((MediaLoggerImpl) mediaLogger).writer;
             mediaLogWriter.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda0 = new MediaLogWriter$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = mediaLogWriter.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaLogger", logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = str;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("MediaLogger", logLevel, mediaLogWriter$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = str;
+            logBuffer.commit(logMessageObtain);
             StringBuilder sb = new StringBuilder("[");
-            sb.append(name);
+            sb.append(strName);
             sb.append("] Media player removed error [");
             ExifInterface$$ExternalSyntheticOutline0.m(sb, str, "]", "MediaLogger");
             return;
@@ -674,70 +759,50 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         if (mediaType.getSupportCarousel()) {
             this.mCarouselHelper.updatePageIndicatorNumberPages();
         }
-        String name2 = mediaType.name();
+        String strName2 = mediaType.name();
         MediaLogWriter mediaLogWriter2 = ((MediaLoggerImpl) mediaLogger).writer;
         mediaLogWriter2.getClass();
         LogLevel logLevel2 = LogLevel.DEBUG;
         MediaLogWriter$$ExternalSyntheticLambda0 mediaLogWriter$$ExternalSyntheticLambda02 = new MediaLogWriter$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer2 = mediaLogWriter2.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("MediaLogger", logLevel2, mediaLogWriter$$ExternalSyntheticLambda02, null);
-        ((LogMessageImpl) obtain2).str1 = str;
-        logBuffer2.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer2.obtain("MediaLogger", logLevel2, mediaLogWriter$$ExternalSyntheticLambda02, null);
+        ((LogMessageImpl) logMessageObtain2).str1 = str;
+        logBuffer2.commit(logMessageObtain2);
         StringBuilder sb2 = new StringBuilder("[");
-        sb2.append(name2);
+        sb2.append(strName2);
         sb2.append("] Media player removed [");
         ExifInterface$$ExternalSyntheticOutline0.m(sb2, str, "]", "MediaLogger");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001a, code lost:
-    
-        if (r4.mStatusBarStateController.getState() != 1) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setListening(boolean r5, com.android.systemui.media.MediaType r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6.getSupportExpandable()
-            if (r0 != 0) goto L7
-            goto L3f
-        L7:
-            com.android.systemui.media.MediaType r0 = com.android.systemui.media.MediaType.QS
-            if (r6 != r0) goto L10
-            boolean r1 = r4.mLocalListening
-            if (r1 != r5) goto L10
-            goto L3f
-        L10:
-            r1 = 0
-            if (r5 == 0) goto L1d
-            com.android.systemui.plugins.statusbar.StatusBarStateController r5 = r4.mStatusBarStateController
-            int r5 = r5.getState()
-            r2 = 1
-            if (r5 == r2) goto L1d
-            goto L1e
-        L1d:
-            r2 = r1
-        L1e:
-            int r5 = r4.getMediaPlayerNum(r6)
-            if (r5 <= 0) goto L3b
-            java.util.concurrent.ConcurrentHashMap r5 = r4.mMediaPlayerData
-            java.lang.Object r5 = r5.get(r6)
-            com.android.systemui.media.SecMediaPlayerData r5 = (com.android.systemui.media.SecMediaPlayerData) r5
-            com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda9 r3 = new com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda9
-            r3.<init>()
-            iteratePlayers(r5, r3)
-            if (r2 != 0) goto L3b
-            com.android.systemui.media.ViewPagerHelper r5 = r4.mViewPagerHelper
-            r5.setCurrentPage(r1, r1, r6)
-        L3b:
-            if (r6 != r0) goto L3f
-            r4.mLocalListening = r2
-        L3f:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.SecMediaHost.setListening(boolean, com.android.systemui.media.MediaType):void");
+    public final void setListening(boolean z, MediaType mediaType) {
+        final boolean z2;
+        if (mediaType.getSupportExpandable()) {
+            MediaType mediaType2 = MediaType.QS;
+            if (mediaType == mediaType2 && this.mLocalListening == z) {
+                return;
+            }
+            if (z) {
+                z2 = this.mStatusBarStateController.getState() != 1;
+            }
+            if (getMediaPlayerNum(mediaType) > 0) {
+                iteratePlayers((SecMediaPlayerData) this.mMediaPlayerData.get(mediaType), new Consumer() { // from class: com.android.systemui.media.SecMediaHost$$ExternalSyntheticLambda9
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((SecMediaControlPanel) obj).setListening(z2);
+                    }
+                });
+                if (!z2) {
+                    this.mViewPagerHelper.setCurrentPage(0, false, mediaType);
+                }
+            }
+            if (mediaType == mediaType2) {
+                this.mLocalListening = z2;
+            }
+        }
     }
 
     public final void updateCapsule(boolean z, SecMediaControlPanel secMediaControlPanel) {
@@ -756,22 +821,26 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0135  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateMediaPlayer(String str, String str2, MediaData mediaData, MediaType mediaType) {
-        String str3;
+        String string;
         BarController.AnonymousClass3 anonymousClass3;
         Boolean bool;
-        CharSequence charSequence = mediaData.song;
-        if (charSequence != null && charSequence.length() > 5) {
-            charSequence = charSequence.subSequence(0, 4);
+        CharSequence charSequenceSubSequence = mediaData.song;
+        if (charSequenceSubSequence != null && charSequenceSubSequence.length() > 5) {
+            charSequenceSubSequence = charSequenceSubSequence.subSequence(0, 4);
         }
         boolean z = mediaData.active;
         final String callers = Debug.getCallers(8, "  ");
         MediaLoggerImpl mediaLoggerImpl = (MediaLoggerImpl) this.mLogger;
-        if (charSequence != null) {
+        if (charSequenceSubSequence != null) {
             mediaLoggerImpl.getClass();
-            str3 = charSequence.toString();
+            string = charSequenceSubSequence.toString();
         } else {
-            str3 = null;
+            string = null;
         }
         MediaLogWriter mediaLogWriter = mediaLoggerImpl.writer;
         mediaLogWriter.getClass();
@@ -779,36 +848,36 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         Function1 function1 = new Function1() { // from class: com.android.systemui.log.MediaLogWriter$$ExternalSyntheticLambda4
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 String str1 = logMessage.getStr1();
                 String str22 = logMessage.getStr2();
-                String str32 = logMessage.getStr3();
+                String str3 = logMessage.getStr3();
                 boolean bool1 = logMessage.getBool1();
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" Media data loaded key[", str1, "] oldKey[", str22, "] title[");
-                m.append(str32);
-                m.append("] active?[");
-                m.append(bool1);
-                m.append("]\n callStack[");
-                return TransitionKt$$ExternalSyntheticOutline0.m(m, callers, "]");
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" Media data loaded key[", str1, "] oldKey[", str22, "] title[");
+                sbM.append(str3);
+                sbM.append("] active?[");
+                sbM.append(bool1);
+                sbM.append("]\n callStack[");
+                return TransitionKt$$ExternalSyntheticOutline0.m(sbM, callers, "]");
             }
         };
         LogBuffer logBuffer = mediaLogWriter.buffer;
-        LogMessage obtain = logBuffer.obtain("MediaLogger", logLevel, function1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MediaLogger", logLevel, function1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = str2;
-        logMessageImpl.str3 = str3;
+        logMessageImpl.str3 = string;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
-        Log.d("MediaLogger", "Media data loaded key[" + str + "] oldKey[" + str2 + "] title[" + ((Object) charSequence) + "] isActive[" + z + "]");
+        logBuffer.commit(logMessageObtain);
+        Log.d("MediaLogger", "Media data loaded key[" + str + "] oldKey[" + str2 + "] title[" + ((Object) charSequenceSubSequence) + "] isActive[" + z + "]");
         SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) this.mMediaPlayerData.get(mediaType);
         if (secMediaPlayerData != null && str2 != null) {
-            secMediaPlayerData.m2612getMediaData().remove(str2);
+            secMediaPlayerData.m2629getMediaData().remove(str2);
         }
         if (mediaData.active || Utils.useMediaResumption(this.mContext)) {
             if (secMediaPlayerData != null) {
-                secMediaPlayerData.m2612getMediaData().put(str, mediaData);
+                secMediaPlayerData.m2629getMediaData().put(str, mediaData);
             }
             addOrUpdatePlayer(str, str2, mediaData, mediaType);
         } else {
@@ -826,23 +895,22 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         }
         if (mediaType.getSupportWidgetTimer() && (bool = mediaData.isPlaying) != null) {
             CoverMusicWidgetController coverMusicWidgetController = this.mWidgetController;
-            boolean booleanValue = bool.booleanValue();
+            boolean zBooleanValue = bool.booleanValue();
             Handler handler = coverMusicWidgetController.mediaPauseTimerHandler;
-            if (booleanValue) {
+            if (zBooleanValue) {
                 Log.d("CoverMusicWidgetController", "callback has been removed");
                 coverMusicWidgetController.enableWidget(true);
                 coverMusicWidgetController.pauseTimerStartedTime = 0L;
                 handler.removeCallbacksAndMessages(null);
-            } else {
-                if (!booleanValue) {
-                    CoverMusicWidgetController$widgetDisableRunnable$1 coverMusicWidgetController$widgetDisableRunnable$1 = coverMusicWidgetController.widgetDisableRunnable;
-                    if (!handler.hasCallbacks(coverMusicWidgetController$widgetDisableRunnable$1)) {
-                        Log.d("CoverMusicWidgetController", "callback has been added");
-                        coverMusicWidgetController.pauseTimerStartedTime = System.currentTimeMillis();
-                        handler.postDelayed(coverMusicWidgetController$widgetDisableRunnable$1, 120000L);
-                    }
+            } else if (!zBooleanValue) {
+                CoverMusicWidgetController$widgetDisableRunnable$1 coverMusicWidgetController$widgetDisableRunnable$1 = coverMusicWidgetController.widgetDisableRunnable;
+                if (handler.hasCallbacks(coverMusicWidgetController$widgetDisableRunnable$1)) {
+                    Log.d("CoverMusicWidgetController", "is not playing but already has callback");
+                } else {
+                    Log.d("CoverMusicWidgetController", "callback has been added");
+                    coverMusicWidgetController.pauseTimerStartedTime = System.currentTimeMillis();
+                    handler.postDelayed(coverMusicWidgetController$widgetDisableRunnable$1, 120000L);
                 }
-                Log.d("CoverMusicWidgetController", "is not playing but already has callback");
             }
         }
         BarController.AnonymousClass4 anonymousClass4 = this.mMediaBarCallback;

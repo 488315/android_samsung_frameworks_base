@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BoxWithConstraintsScopeImpl implements BoxWithConstraintsScope, BoxScope {
     public final /* synthetic */ BoxScopeInstance $$delegate_0;
@@ -32,15 +31,15 @@ final class BoxWithConstraintsScopeImpl implements BoxWithConstraintsScope, BoxS
             return false;
         }
         BoxWithConstraintsScopeImpl boxWithConstraintsScopeImpl = (BoxWithConstraintsScopeImpl) obj;
-        return Intrinsics.areEqual(this.density, boxWithConstraintsScopeImpl.density) && Constraints.m815equalsimpl0(this.constraints, boxWithConstraintsScopeImpl.constraints);
+        return Intrinsics.areEqual(this.density, boxWithConstraintsScopeImpl.density) && Constraints.m817equalsimpl0(this.constraints, boxWithConstraintsScopeImpl.constraints);
     }
 
     @Override // androidx.compose.foundation.layout.BoxWithConstraintsScope
     /* renamed from: getMaxHeight-D9Ej5fM */
-    public final float mo100getMaxHeightD9Ej5fM() {
+    public final float mo101getMaxHeightD9Ej5fM() {
         long j = this.constraints;
-        if (Constraints.m816getHasBoundedHeightimpl(j)) {
-            return this.density.mo54toDpu2uoSUM(Constraints.m820getMaxHeightimpl(j));
+        if (Constraints.m818getHasBoundedHeightimpl(j)) {
+            return this.density.mo55toDpu2uoSUM(Constraints.m822getMaxHeightimpl(j));
         }
         Dp.Companion.getClass();
         return Dp.Infinity;
@@ -48,19 +47,19 @@ final class BoxWithConstraintsScopeImpl implements BoxWithConstraintsScope, BoxS
 
     @Override // androidx.compose.foundation.layout.BoxWithConstraintsScope
     /* renamed from: getMaxWidth-D9Ej5fM */
-    public final float mo101getMaxWidthD9Ej5fM() {
+    public final float mo102getMaxWidthD9Ej5fM() {
         long j = this.constraints;
-        if (Constraints.m817getHasBoundedWidthimpl(j)) {
-            return this.density.mo54toDpu2uoSUM(Constraints.m821getMaxWidthimpl(j));
+        if (Constraints.m819getHasBoundedWidthimpl(j)) {
+            return this.density.mo55toDpu2uoSUM(Constraints.m823getMaxWidthimpl(j));
         }
         Dp.Companion.getClass();
         return Dp.Infinity;
     }
 
     public final int hashCode() {
-        int hashCode = this.density.hashCode() * 31;
+        int iHashCode = this.density.hashCode() * 31;
         Constraints.Companion companion = Constraints.Companion;
-        return Long.hashCode(this.constraints) + hashCode;
+        return Long.hashCode(this.constraints) + iHashCode;
     }
 
     @Override // androidx.compose.foundation.layout.BoxScope
@@ -69,7 +68,7 @@ final class BoxWithConstraintsScopeImpl implements BoxWithConstraintsScope, BoxS
     }
 
     public final String toString() {
-        return "BoxWithConstraintsScopeImpl(density=" + this.density + ", constraints=" + ((Object) Constraints.m824toStringimpl(this.constraints)) + ')';
+        return "BoxWithConstraintsScopeImpl(density=" + this.density + ", constraints=" + ((Object) Constraints.m826toStringimpl(this.constraints)) + ')';
     }
 
     private BoxWithConstraintsScopeImpl(Density density, long j) {

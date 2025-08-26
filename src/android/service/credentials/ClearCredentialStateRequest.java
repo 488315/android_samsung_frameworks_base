@@ -55,8 +55,8 @@ public final class ClearCredentialStateRequest implements Parcelable {
 
     private ClearCredentialStateRequest(Parcel parcel) {
         this.mCallingAppInfo = (CallingAppInfo) parcel.readTypedObject(CallingAppInfo.CREATOR);
-        Bundle readBundle = parcel.readBundle();
-        this.mData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        Bundle bundle = parcel.readBundle();
+        this.mData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 }

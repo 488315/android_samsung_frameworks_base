@@ -4,13 +4,23 @@ import android.animation.ValueAnimator;
 import android.app.DreamManager;
 import com.android.app.animation.Interpolators;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.compose.animation.scene.SceneKey;
 import com.android.systemui.communal.domain.interactor.CommunalInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSceneInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor;
+import com.android.systemui.communal.shared.model.CommunalScenes;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryInteractor;
 import com.android.systemui.keyguard.data.repository.KeyguardTransitionRepository;
 import com.android.systemui.keyguard.shared.model.KeyguardState;
+import com.android.systemui.keyguard.shared.model.TransitionStep;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
+import com.android.systemui.power.shared.model.WakefulnessModel;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.time.Duration;
 import kotlin.time.DurationKt;
@@ -18,7 +28,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FromDreamingTransitionInteractor extends TransitionInteractor {
     public static final Companion Companion = new Companion(null);
@@ -36,7 +45,6 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
     public final CoroutineScope scope;
     public final KeyguardTransitionRepository transitionRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +54,6 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -61,6 +68,60 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
             } catch (NoSuchFieldError unused2) {
             }
             $EnumSwitchMapping$0 = iArr;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$startToLockscreenOrGlanceableHubTransition$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $openHub;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$openHub = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return FromDreamingTransitionInteractor.this.new AnonymousClass1(this.$openHub, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                if (((TransitionStep) FromDreamingTransitionInteractor.this.transitionInteractor.startedKeyguardTransitionStep.$$delegate_0.getValue()).to == KeyguardState.DREAMING && ((WakefulnessModel) FromDreamingTransitionInteractor.this.powerInteractor.detailedWakefulness.$$delegate_0.getValue()).isAwake()) {
+                    if (this.$openHub) {
+                        FromDreamingTransitionInteractor fromDreamingTransitionInteractor = FromDreamingTransitionInteractor.this;
+                        CommunalSceneInteractor communalSceneInteractor = fromDreamingTransitionInteractor.communalSceneInteractor;
+                        SceneKey sceneKey = CommunalScenes.Communal;
+                        fromDreamingTransitionInteractor.communalSettingsInteractor.isV2FlagEnabled();
+                        CommunalSceneInteractor.changeScene$default(communalSceneInteractor, sceneKey, "FromDreamingTransitionInteractor", null, null, 8);
+                        Unit unit = Unit.INSTANCE;
+                    } else {
+                        FromDreamingTransitionInteractor fromDreamingTransitionInteractor2 = FromDreamingTransitionInteractor.this;
+                        KeyguardState keyguardState = KeyguardState.LOCKSCREEN;
+                        this.label = 1;
+                        if (TransitionInteractor.startTransitionTo$default(fromDreamingTransitionInteractor2, keyguardState, null, null, "Dream has ended and device is awake", this, 6) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    }
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -92,7 +153,7 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
         ValueAnimator valueAnimator = new ValueAnimator();
         valueAnimator.setInterpolator(Interpolators.LINEAR);
         int i = WhenMappings.$EnumSwitchMapping$0[keyguardState.ordinal()];
-        valueAnimator.setDuration(Duration.m3437getInWholeMillisecondsimpl(i != 1 ? i != 2 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_LOCKSCREEN_DURATION));
+        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(i != 1 ? i != 2 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_LOCKSCREEN_DURATION));
         return valueAnimator;
     }
 
@@ -123,6 +184,6 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
     }
 
     public final void startToLockscreenOrGlanceableHubTransition(boolean z) {
-        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new FromDreamingTransitionInteractor$startToLockscreenOrGlanceableHubTransition$1(this, z, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AnonymousClass1(z, null), 7);
     }
 }

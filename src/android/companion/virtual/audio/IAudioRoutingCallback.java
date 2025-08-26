@@ -44,9 +44,9 @@ public interface IAudioRoutingCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAudioRoutingCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioRoutingCallback)) {
-                return (IAudioRoutingCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAudioRoutingCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioRoutingCallback)) {
+                return (IAudioRoutingCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IAudioRoutingCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int[] createIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                onAppsNeedingAudioRoutingChanged(createIntArray);
+                onAppsNeedingAudioRoutingChanged(iArrCreateIntArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IAudioRoutingCallback extends IInterface {
 
             @Override // android.companion.virtual.audio.IAudioRoutingCallback
             public void onAppsNeedingAudioRoutingChanged(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioRoutingCallback.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioRoutingCallback.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -3,7 +3,6 @@ package androidx.compose.ui.input.nestedscroll;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class NestedScrollNode$onPostFling$1 extends ContinuationImpl {
     long J$0;
@@ -23,6 +22,6 @@ final class NestedScrollNode$onPostFling$1 extends ContinuationImpl {
     public final Object invokeSuspend(Object obj) {
         this.result = obj;
         this.label |= Integer.MIN_VALUE;
-        return this.this$0.mo77onPostFlingRZ2iAVY(0L, 0L, this);
+        return this.this$0.mo78onPostFlingRZ2iAVY(0L, 0L, this);
     }
 }

@@ -20,10 +20,10 @@ public final class ActionsDialog extends Dialog implements DialogInterface {
         super(context, getDialogTheme(context));
         Context context2 = getContext();
         this.mContext = context2;
-        AlertController create = AlertController.create(context2, this, getWindow());
-        this.mAlert = create;
+        AlertController alertControllerCreate = AlertController.create(context2, this, getWindow());
+        this.mAlert = alertControllerCreate;
         this.mAdapter = (ActionsAdapter) alertParams.mAdapter;
-        alertParams.apply(create);
+        alertParams.apply(alertControllerCreate);
     }
 
     private static int getDialogTheme(Context context) {

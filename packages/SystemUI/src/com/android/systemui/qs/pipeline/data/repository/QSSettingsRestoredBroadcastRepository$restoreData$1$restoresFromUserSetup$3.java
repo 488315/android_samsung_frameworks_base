@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ QSPipelineLogger $logger;
@@ -53,9 +52,9 @@ final class QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUser
         LogLevel logLevel = LogLevel.DEBUG;
         QSPipelineLogger$$ExternalSyntheticLambda0 qSPipelineLogger$$ExternalSyntheticLambda0 = new QSPipelineLogger$$ExternalSyntheticLambda0(22);
         LogBuffer logBuffer = qSPipelineLogger.restoreLogBuffer;
-        LogMessage obtain = logBuffer.obtain("QSRestoreLog", logLevel, qSPipelineLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("QSRestoreLog", logLevel, qSPipelineLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

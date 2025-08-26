@@ -11,12 +11,10 @@ import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ConcurrentHashMapK implements MutableMapK, Map, KMutableMap {
     public final ConcurrentNullableHashMap storage;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements MutableMapK.Factory {
         @Override // com.android.systemui.kairos.internal.store.MutableMapK.Factory
         public final MutableMapK create(Integer num) {
@@ -90,7 +88,7 @@ public final class ConcurrentHashMapK implements MutableMapK, Map, KMutableMap {
             Pair pair = new Pair(key, value);
             linkedHashMap.put(pair.getFirst(), pair.getSecond());
         }
-        return MapHolder.m2569boximpl(linkedHashMap);
+        return MapHolder.m2586boximpl(linkedHashMap);
     }
 
     @Override // java.util.Map

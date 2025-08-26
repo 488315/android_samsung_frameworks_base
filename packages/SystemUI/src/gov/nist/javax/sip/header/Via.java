@@ -4,7 +4,6 @@ import gov.nist.core.Host;
 import gov.nist.core.HostPort;
 import javax.sip.header.ViaHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Via extends ParametersHeader implements ViaHeader {
     private static final long serialVersionUID = 5281728373401351378L;
@@ -31,13 +30,13 @@ public class Via extends ParametersHeader implements ViaHeader {
             via.sentBy = (HostPort) hostPort.clone();
         }
         String parameter = getParameter("rport");
-        int i = -1;
+        int iIntValue = -1;
         if (((parameter == null || parameter.equals("")) ? -1 : Integer.valueOf(parameter).intValue()) != -1) {
             String parameter2 = getParameter("rport");
             if (parameter2 != null && !parameter2.equals("")) {
-                i = Integer.valueOf(parameter2).intValue();
+                iIntValue = Integer.valueOf(parameter2).intValue();
             }
-            via.parameters.set(Integer.valueOf(i), "rport");
+            via.parameters.set(Integer.valueOf(iIntValue), "rport");
         }
         return via;
     }
@@ -64,19 +63,19 @@ public class Via extends ParametersHeader implements ViaHeader {
             return false;
         }
         Protocol protocol = this.sentProtocol;
-        String str = null;
-        String str2 = protocol == null ? null : protocol.transport;
+        String hostname = null;
+        String str = protocol == null ? null : protocol.transport;
         Protocol protocol2 = via.sentProtocol;
-        if (!str2.equalsIgnoreCase(protocol2 == null ? null : protocol2.transport)) {
+        if (!str.equalsIgnoreCase(protocol2 == null ? null : protocol2.transport)) {
             return false;
         }
         HostPort hostPort = this.sentBy;
-        String hostname = (hostPort == null || (host2 = hostPort.getHost()) == null) ? null : host2.getHostname();
+        String hostname2 = (hostPort == null || (host2 = hostPort.getHost()) == null) ? null : host2.getHostname();
         HostPort hostPort2 = via.sentBy;
         if (hostPort2 != null && (host = hostPort2.getHost()) != null) {
-            str = host.getHostname();
+            hostname = host.getHostname();
         }
-        if (!hostname.equalsIgnoreCase(str)) {
+        if (!hostname2.equalsIgnoreCase(hostname)) {
             return false;
         }
         HostPort hostPort3 = this.sentBy;

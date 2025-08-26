@@ -12,6 +12,7 @@ import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.slimindicator.SlimIndicatorViewMediator;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
+import com.android.systemui.statusbar.phone.IndicatorCutoutUtil;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
@@ -21,7 +22,6 @@ import com.android.systemui.util.ViewController;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class QSClockIndicatorViewController extends ViewController implements Dumpable, ConfigurationController.ConfigurationListener, TunerService.Tunable {
     public final ConfigurationController configurationController;
@@ -34,7 +34,6 @@ public final class QSClockIndicatorViewController extends ViewController impleme
     public final TunerService tunerService;
     public final QSClockIndicatorView view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +47,7 @@ public final class QSClockIndicatorViewController extends ViewController impleme
         new Companion(null);
     }
 
-    public QSClockIndicatorViewController(QSClockIndicatorView qSClockIndicatorView, DarkIconDispatcher darkIconDispatcher, DumpManager dumpManager, ConfigurationController configurationController, TunerService tunerService, IndicatorScaleGardener indicatorScaleGardener, SlimIndicatorViewMediator slimIndicatorViewMediator, SettingsHelper settingsHelper, QSClockBellTower qSClockBellTower) {
+    public QSClockIndicatorViewController(QSClockIndicatorView qSClockIndicatorView, DarkIconDispatcher darkIconDispatcher, DumpManager dumpManager, ConfigurationController configurationController, TunerService tunerService, IndicatorScaleGardener indicatorScaleGardener, SlimIndicatorViewMediator slimIndicatorViewMediator, SettingsHelper settingsHelper, QSClockBellTower qSClockBellTower, IndicatorCutoutUtil indicatorCutoutUtil) {
         super(qSClockIndicatorView);
         this.view = qSClockIndicatorView;
         this.darkIconDispatcher = darkIconDispatcher;
@@ -60,14 +59,14 @@ public final class QSClockIndicatorViewController extends ViewController impleme
         this.dateClockStateCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.policy.QSClockIndicatorViewController$dateClockStateCallback$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                QSClockIndicatorViewController.this.qsClockBellTower.ringBellOfTower();
+                this.this$0.qsClockBellTower.ringBellOfTower();
             }
         };
         this.timeFormatChangedListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.policy.QSClockIndicatorViewController$timeFormatChangedListener$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
                 Log.d("QSClockIndicatorView", "12-24 format changed");
-                QSClockIndicatorViewController.this.qsClockBellTower.ringBellOfTower();
+                this.this$0.qsClockBellTower.ringBellOfTower();
             }
         };
         qSClockIndicatorView.setDependencies(slimIndicatorViewMediator, settingsHelper);

@@ -10,12 +10,10 @@ import com.android.compose.animation.scene.SwipeSource;
 import com.android.compose.animation.scene.SwipeSourceDetector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalSwipeDetector implements SwipeSourceDetector, SwipeDetector {
     public SwipeSource.Resolved lastDirection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,6 +27,7 @@ public final class CommunalSwipeDetector implements SwipeSourceDetector, SwipeDe
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public CommunalSwipeDetector() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -45,7 +44,7 @@ public final class CommunalSwipeDetector implements SwipeSourceDetector, SwipeDe
 
     @Override // com.android.compose.animation.scene.SwipeSourceDetector
     /* renamed from: source-NDhlJko */
-    public final SwipeSource.Resolved mo924sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
+    public final SwipeSource.Resolved mo926sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
         return this.lastDirection;
     }
 

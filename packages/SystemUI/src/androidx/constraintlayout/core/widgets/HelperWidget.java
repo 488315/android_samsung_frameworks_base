@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HelperWidget extends ConstraintWidget implements Helper {
     public ConstraintWidget[] mWidgets = new ConstraintWidget[4];
@@ -40,13 +39,13 @@ public class HelperWidget extends ConstraintWidget implements Helper {
     }
 
     @Override // androidx.constraintlayout.core.widgets.ConstraintWidget
-    public void copy(ConstraintWidget constraintWidget, HashMap hashMap) {
-        super.copy(constraintWidget, hashMap);
+    public void copy(ConstraintWidget constraintWidget, HashMap map) {
+        super.copy(constraintWidget, map);
         HelperWidget helperWidget = (HelperWidget) constraintWidget;
         this.mWidgetsCount = 0;
         int i = helperWidget.mWidgetsCount;
         for (int i2 = 0; i2 < i; i2++) {
-            add((ConstraintWidget) hashMap.get(helperWidget.mWidgets[i2]));
+            add((ConstraintWidget) map.get(helperWidget.mWidgets[i2]));
         }
     }
 

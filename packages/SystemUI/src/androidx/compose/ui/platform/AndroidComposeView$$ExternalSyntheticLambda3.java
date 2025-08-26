@@ -3,7 +3,6 @@ package androidx.compose.ui.platform;
 import android.view.MotionEvent;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AndroidComposeView$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -27,7 +26,7 @@ public final /* synthetic */ class AndroidComposeView$$ExternalSyntheticLambda3 
                 if (motionEvent.getActionMasked() != 10) {
                     throw new IllegalStateException("The ACTION_HOVER_EXIT event was not cleared.");
                 }
-                androidComposeView.m697sendMotionEvent8iAsVTc(motionEvent);
+                androidComposeView.m699sendMotionEvent8iAsVTc(motionEvent);
                 return;
             default:
                 ((Function0) obj).invoke();

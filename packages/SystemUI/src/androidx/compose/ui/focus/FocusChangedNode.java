@@ -4,7 +4,6 @@ import androidx.compose.ui.Modifier;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FocusChangedNode extends Modifier.Node implements FocusEventModifierNode {
     public FocusStateImpl focusState;
@@ -20,6 +19,6 @@ final class FocusChangedNode extends Modifier.Node implements FocusEventModifier
             return;
         }
         this.focusState = focusStateImpl;
-        this.onFocusChanged.mo779invoke(focusStateImpl);
+        this.onFocusChanged.mo781invoke(focusStateImpl);
     }
 }

@@ -2,11 +2,9 @@ package com.android.systemui.touchpad.tutorial.ui.gesture;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface GestureState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Error implements GestureState {
         public static final Error INSTANCE = new Error();
 
@@ -26,7 +24,6 @@ public interface GestureState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Finished implements GestureState {
         public static final Finished INSTANCE = new Finished();
 
@@ -46,11 +43,11 @@ public interface GestureState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InProgress implements GestureState {
         public final GestureDirection direction;
         public final float progress;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public InProgress() {
             this(0.0f, null, 3, 0 == true ? 1 : 0);
         }
@@ -67,9 +64,9 @@ public interface GestureState {
         }
 
         public final int hashCode() {
-            int hashCode = Float.hashCode(this.progress) * 31;
+            int iHashCode = Float.hashCode(this.progress) * 31;
             GestureDirection gestureDirection = this.direction;
-            return hashCode + (gestureDirection == null ? 0 : gestureDirection.hashCode());
+            return iHashCode + (gestureDirection == null ? 0 : gestureDirection.hashCode());
         }
 
         public final String toString() {
@@ -86,7 +83,6 @@ public interface GestureState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotStarted implements GestureState {
         public static final NotStarted INSTANCE = new NotStarted();
 

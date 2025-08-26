@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.core.graphics.drawable.IconCompat;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Person {
     public final IconCompat mIcon;
@@ -17,7 +16,6 @@ public class Person {
     public final CharSequence mName;
     public final String mUri;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public IconCompat mIcon;
         public boolean mIsBot;
@@ -46,17 +44,17 @@ public class Person {
     }
 
     public static Person fromAndroidPerson(android.app.Person person) {
-        IconCompat iconCompat;
+        IconCompat iconCompatCreateFromIconInner;
         Builder builder = new Builder();
         builder.mName = person.getName();
         if (person.getIcon() != null) {
             Icon icon = person.getIcon();
             PorterDuff.Mode mode = IconCompat.DEFAULT_TINT_MODE;
-            iconCompat = IconCompat.Api23Impl.createFromIconInner(icon);
+            iconCompatCreateFromIconInner = IconCompat.Api23Impl.createFromIconInner(icon);
         } else {
-            iconCompat = null;
+            iconCompatCreateFromIconInner = null;
         }
-        builder.mIcon = iconCompat;
+        builder.mIcon = iconCompatCreateFromIconInner;
         builder.mUri = person.getUri();
         builder.mKey = person.getKey();
         builder.mIsBot = person.isBot();

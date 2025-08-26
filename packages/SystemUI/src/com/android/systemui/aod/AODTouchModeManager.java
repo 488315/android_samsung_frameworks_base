@@ -27,7 +27,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AODTouchModeManager implements KeyguardFoldController.StateListener {
     public final AODManagerWrapper aodManagerWrapper;
@@ -41,7 +40,6 @@ public final class AODTouchModeManager implements KeyguardFoldController.StateLi
     public final LsRuneWrapper lsRuneWrapper;
     public String touchNodePath = "/sys/class/sec/tsp/input/enabled";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,7 +51,6 @@ public final class AODTouchModeManager implements KeyguardFoldController.StateLi
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TouchMode {
         public static final /* synthetic */ TouchMode[] $VALUES;
         public static final TouchMode DOUBLE;
@@ -90,7 +87,6 @@ public final class AODTouchModeManager implements KeyguardFoldController.StateLi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -135,7 +131,7 @@ public final class AODTouchModeManager implements KeyguardFoldController.StateLi
         wakefulnessLifecycle.addObserver(new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.aod.AODTouchModeManager$registerObservers$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedWakingUp() {
-                AODTouchModeManager aODTouchModeManager = AODTouchModeManager.this;
+                AODTouchModeManager aODTouchModeManager = this.this$0;
                 if (aODTouchModeManager.currentTouchMode == AODTouchModeManager.TouchMode.DOUBLE) {
                     aODTouchModeManager.logWrapper.i("onStartedWakingUp: set single touch mode");
                     aODTouchModeManager.setTouchMode(AODTouchModeManager.TouchMode.SINGLE);
@@ -146,14 +142,14 @@ public final class AODTouchModeManager implements KeyguardFoldController.StateLi
         displayManager.registerDisplayListener(new DisplayManager.DisplayListener() { // from class: com.android.systemui.aod.AODTouchModeManager$registerDisplayListener$1
             @Override // android.hardware.display.DisplayManager.DisplayListener
             public final void onDisplayChanged(int i) {
-                AODTouchModeManager aODTouchModeManager = AODTouchModeManager.this;
+                AODTouchModeManager aODTouchModeManager = this.this$0;
                 Display display = aODTouchModeManager.displayManager.getDisplay(i);
                 if (display == null || display.getState() == aODTouchModeManager.currentDisplayState || !Intrinsics.areEqual(Process.myUserHandle(), UserHandle.SYSTEM)) {
                     return;
                 }
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(display.getState(), aODTouchModeManager.currentDisplayState, "onDisplayChanged newDisplayState=", ", currentDisplayState=", ", displayId=");
-                m.append(i);
-                aODTouchModeManager.logWrapper.i(m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(display.getState(), aODTouchModeManager.currentDisplayState, "onDisplayChanged newDisplayState=", ", currentDisplayState=", ", displayId=");
+                sbM.append(i);
+                aODTouchModeManager.logWrapper.i(sbM.toString());
                 int state = display.getState();
                 if (state == 3 || state == 4) {
                     if (ArraysKt___ArraysKt.indexOf(new Integer[]{2, 1}, Integer.valueOf(aODTouchModeManager.currentDisplayState)) >= 0) {

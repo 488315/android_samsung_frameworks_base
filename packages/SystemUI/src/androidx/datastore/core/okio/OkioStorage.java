@@ -13,7 +13,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import okio.FileSystem;
 import okio.Path;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OkioStorage implements Storage {
     public static final Set activeFiles;
@@ -24,7 +23,6 @@ public final class OkioStorage implements Storage {
     public final Function0 producePath;
     public final OkioSerializer serializer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,13 +48,13 @@ public final class OkioStorage implements Storage {
 
     @Override // androidx.datastore.core.Storage
     public final StorageConnection createConnection() {
-        String utf8 = ((Path) this.canonicalPath$delegate.getValue()).bytes.utf8();
+        String strUtf8 = ((Path) this.canonicalPath$delegate.getValue()).bytes.utf8();
         synchronized (activeFilesLock) {
             Set set = activeFiles;
-            if (set.contains(utf8)) {
-                throw new IllegalStateException(("There are multiple DataStores active for the same file: " + utf8 + ". You should either maintain your DataStore as a singleton or confirm that there is no two DataStore's active on the same file (by confirming that the scope is cancelled).").toString());
+            if (set.contains(strUtf8)) {
+                throw new IllegalStateException(("There are multiple DataStores active for the same file: " + strUtf8 + ". You should either maintain your DataStore as a singleton or confirm that there is no two DataStore's active on the same file (by confirming that the scope is cancelled).").toString());
             }
-            set.add(utf8);
+            set.add(strUtf8);
         }
         return new OkioStorageConnection(this.fileSystem, (Path) this.canonicalPath$delegate.getValue(), this.serializer, (InterProcessCoordinator) this.coordinatorProducer.invoke((Path) this.canonicalPath$delegate.getValue(), this.fileSystem), new OkioStorage$$ExternalSyntheticLambda0(this, 0));
     }

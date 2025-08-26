@@ -10,18 +10,17 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeAnimationInteractorSceneContainerImpl extends ShadeAnimationInteractor {
     public final ReadonlyStateFlow isAnyCloseAnimationRunning;
 
     public ShadeAnimationInteractorSceneContainerImpl(CoroutineScope coroutineScope, ShadeAnimationRepository shadeAnimationRepository, SceneInteractor sceneInteractor) {
         super(shadeAnimationRepository);
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.transformLatest(sceneInteractor.transitionState, new ShadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$1(null)));
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.transformLatest(sceneInteractor.transitionState, new ShadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$1(null)));
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
         Boolean bool = Boolean.FALSE;
-        this.isAnyCloseAnimationRunning = FlowKt.stateIn(distinctUntilChanged, coroutineScope, startedEagerly, bool);
+        this.isAnyCloseAnimationRunning = FlowKt.stateIn(flowDistinctUntilChanged, coroutineScope, startedEagerly, bool);
         FlowKt.stateIn(FlowKt.distinctUntilChanged(FlowKt.transformLatest(sceneInteractor.transitionState, new ShadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$2(null))), coroutineScope, startedEagerly, bool);
     }
 

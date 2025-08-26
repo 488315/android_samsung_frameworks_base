@@ -12,7 +12,6 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 import com.android.systemui.plugins.statusbar.NotificationSwipeActionHelper;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Dependencies({@DependsOn(target = OnMenuEventListener.class), @DependsOn(target = MenuItem.class), @DependsOn(target = NotificationSwipeActionHelper.class), @DependsOn(target = NotificationSwipeActionHelper.SnoozeOption.class)})
 @ProvidesInterface(action = NotificationMenuRowPlugin.ACTION, version = 5)
 /* loaded from: classes2.dex */
@@ -20,7 +19,6 @@ public interface NotificationMenuRowPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_NOTIFICATION_MENU_ROW";
     public static final int VERSION = 5;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 1)
     public interface MenuItem {
         public static final int VERSION = 1;
@@ -32,7 +30,6 @@ public interface NotificationMenuRowPlugin extends Plugin {
         View getMenuView();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 1)
     public interface OnMenuEventListener {
         public static final int VERSION = 1;

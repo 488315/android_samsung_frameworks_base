@@ -8,12 +8,10 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SessionMutex<T> {
     public final AtomicReference currentSessionHolder;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Session<T> {
         public final Job job;
         public final Object value;
@@ -25,7 +23,7 @@ public final class SessionMutex<T> {
     }
 
     /* renamed from: getCurrentSession-impl, reason: not valid java name */
-    public static final Object m353getCurrentSessionimpl(AtomicReference atomicReference) {
+    public static final Object m354getCurrentSessionimpl(AtomicReference atomicReference) {
         Session session = (Session) atomicReference.get();
         if (session != null) {
             return session.value;
@@ -34,7 +32,7 @@ public final class SessionMutex<T> {
     }
 
     /* renamed from: withSessionCancellingPrevious-impl, reason: not valid java name */
-    public static final Object m354withSessionCancellingPreviousimpl(AtomicReference atomicReference, Function1 function1, Function2 function2, ContinuationImpl continuationImpl) {
+    public static final Object m355withSessionCancellingPreviousimpl(AtomicReference atomicReference, Function1 function1, Function2 function2, ContinuationImpl continuationImpl) {
         return CoroutineScopeKt.coroutineScope(new SessionMutex$withSessionCancellingPrevious$2(function1, atomicReference, function2, null), continuationImpl);
     }
 

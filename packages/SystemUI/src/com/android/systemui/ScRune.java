@@ -8,7 +8,6 @@ import com.android.systemui.util.LogUtil;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ScRune extends Rune {
     public static final boolean ENHANCEMENT_DEBUG_MEMORY_LOG;

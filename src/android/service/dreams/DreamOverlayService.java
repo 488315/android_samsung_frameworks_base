@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.dreams.DreamOverlayService;
 import android.service.dreams.IDreamOverlay;
 import android.service.dreams.IDreamOverlayClient;
 import android.util.Log;
@@ -65,7 +64,7 @@ public abstract class DreamOverlayService extends Service {
             applyToDream(new Consumer() { // from class: android.service.dreams.DreamOverlayService$OverlayClient$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamOverlayService.OverlayClient.this.lambda$startDream$0(layoutParams, (DreamOverlayService) obj);
+                    this.f$0.lambda$startDream$0(layoutParams, (DreamOverlayService) obj);
                 }
             });
         }
@@ -85,7 +84,7 @@ public abstract class DreamOverlayService extends Service {
             applyToDream(new Consumer() { // from class: android.service.dreams.DreamOverlayService$OverlayClient$$ExternalSyntheticLambda4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamOverlayService.OverlayClient.this.lambda$wakeUp$1((DreamOverlayService) obj);
+                    this.f$0.lambda$wakeUp$1((DreamOverlayService) obj);
                 }
             });
         }
@@ -100,7 +99,7 @@ public abstract class DreamOverlayService extends Service {
             applyToDream(new Consumer() { // from class: android.service.dreams.DreamOverlayService$OverlayClient$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamOverlayService.OverlayClient.this.lambda$endDream$2((DreamOverlayService) obj);
+                    this.f$0.lambda$endDream$2((DreamOverlayService) obj);
                 }
             });
         }
@@ -115,7 +114,7 @@ public abstract class DreamOverlayService extends Service {
             applyToDream(new Consumer() { // from class: android.service.dreams.DreamOverlayService$OverlayClient$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamOverlayService.OverlayClient.this.lambda$comeToFront$3((DreamOverlayService) obj);
+                    this.f$0.lambda$comeToFront$3((DreamOverlayService) obj);
                 }
             });
         }
@@ -171,7 +170,7 @@ public abstract class DreamOverlayService extends Service {
         this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                DreamOverlayService.this.lambda$startDream$0(overlayClient, layoutParams);
+                this.f$0.lambda$startDream$0(overlayClient, layoutParams);
             }
         });
     }
@@ -192,7 +191,7 @@ public abstract class DreamOverlayService extends Service {
         this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                DreamOverlayService.this.lambda$endDream$1(overlayClient);
+                this.f$0.lambda$endDream$1(overlayClient);
             }
         });
     }
@@ -212,7 +211,7 @@ public abstract class DreamOverlayService extends Service {
         this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DreamOverlayService.this.lambda$wakeUp$2(overlayClient);
+                this.f$0.lambda$wakeUp$2(overlayClient);
             }
         });
     }
@@ -230,7 +229,7 @@ public abstract class DreamOverlayService extends Service {
         this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                DreamOverlayService.this.lambda$comeToFront$3(overlayClient);
+                this.f$0.lambda$comeToFront$3(overlayClient);
             }
         });
     }

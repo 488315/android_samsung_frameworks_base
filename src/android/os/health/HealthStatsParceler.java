@@ -46,11 +46,11 @@ public class HealthStatsParceler implements Parcelable {
 
     public HealthStats getHealthStats() {
         if (this.mWriter != null) {
-            Parcel obtain = Parcel.obtain();
-            this.mWriter.flattenToParcel(obtain);
-            obtain.setDataPosition(0);
-            this.mHealthStats = new HealthStats(obtain);
-            obtain.recycle();
+            Parcel parcelObtain = Parcel.obtain();
+            this.mWriter.flattenToParcel(parcelObtain);
+            parcelObtain.setDataPosition(0);
+            this.mHealthStats = new HealthStats(parcelObtain);
+            parcelObtain.recycle();
         }
         return this.mHealthStats;
     }

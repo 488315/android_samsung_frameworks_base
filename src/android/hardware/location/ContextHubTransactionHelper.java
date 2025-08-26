@@ -15,13 +15,13 @@ public class ContextHubTransactionHelper {
         return new IContextHubTransactionCallback.Stub() { // from class: android.hardware.location.ContextHubTransactionHelper.1
             @Override // android.hardware.location.IContextHubTransactionCallback
             public void onQueryResponse(int i, List<NanoAppState> list) {
-                ContextHubTransaction.this.setResponse(new ContextHubTransaction.Response(i, list));
+                contextHubTransaction.setResponse(new ContextHubTransaction.Response(i, list));
             }
 
             @Override // android.hardware.location.IContextHubTransactionCallback
             public void onTransactionComplete(int i) {
                 Log.e(ContextHubTransactionHelper.TAG, "Received a non-query callback on a query request");
-                ContextHubTransaction.this.setResponse(new ContextHubTransaction.Response(7, null));
+                contextHubTransaction.setResponse(new ContextHubTransaction.Response(7, null));
             }
         };
     }
@@ -32,12 +32,12 @@ public class ContextHubTransactionHelper {
             @Override // android.hardware.location.IContextHubTransactionCallback
             public void onQueryResponse(int i, List<NanoAppState> list) {
                 Log.e(ContextHubTransactionHelper.TAG, "Received a query callback on a non-query request");
-                ContextHubTransaction.this.setResponse(new ContextHubTransaction.Response(7, null));
+                contextHubTransaction.setResponse(new ContextHubTransaction.Response(7, null));
             }
 
             @Override // android.hardware.location.IContextHubTransactionCallback
             public void onTransactionComplete(int i) {
-                ContextHubTransaction.this.setResponse(new ContextHubTransaction.Response(i, null));
+                contextHubTransaction.setResponse(new ContextHubTransaction.Response(i, null));
             }
         };
     }

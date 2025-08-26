@@ -1,6 +1,7 @@
 package android.media;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.SubtitleTrack;
 import android.util.AttributeSet;
 import android.view.View;
@@ -57,9 +58,9 @@ abstract class ClosedCaptionWidget extends ViewGroup implements SubtitleTrack.Re
         CaptioningManager captioningManager = (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
         this.mManager = captioningManager;
         this.mCaptionStyle = DEFAULT_CAPTION_STYLE.applyStyle(captioningManager.getUserStyle());
-        ClosedCaptionLayout createCaptionLayout = createCaptionLayout(context);
-        this.mClosedCaptionLayout = createCaptionLayout;
-        createCaptionLayout.setCaptionStyle(this.mCaptionStyle);
+        ClosedCaptionLayout closedCaptionLayoutCreateCaptionLayout = createCaptionLayout(context);
+        this.mClosedCaptionLayout = closedCaptionLayoutCreateCaptionLayout;
+        closedCaptionLayoutCreateCaptionLayout.setCaptionStyle(this.mCaptionStyle);
         this.mClosedCaptionLayout.setFontScale(captioningManager.getFontScale());
         addView((ViewGroup) this.mClosedCaptionLayout, -1, -1);
         requestLayout();
@@ -105,7 +106,7 @@ abstract class ClosedCaptionWidget extends ViewGroup implements SubtitleTrack.Re
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         ((ViewGroup) this.mClosedCaptionLayout).layout(i, i2, i3, i4);
     }
 

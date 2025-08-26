@@ -124,7 +124,7 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
         return this.mSourceInfo;
     }
 
-    public boolean loadIcon() {
+    public boolean loadIcon() throws Throwable {
         ShortcutInfo shortcutInfo;
         Drawable drawable;
         synchronized (this) {
@@ -143,7 +143,7 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
         return z;
     }
 
-    private Drawable getChooserTargetIconDrawable(ChooserTarget chooserTarget, ShortcutInfo shortcutInfo) {
+    private Drawable getChooserTargetIconDrawable(ChooserTarget chooserTarget, ShortcutInfo shortcutInfo) throws Throwable {
         Drawable shortcutIconDrawable;
         ActivityInfo activityInfo;
         Icon icon = chooserTarget.getIcon();
@@ -165,10 +165,10 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
             return null;
         }
         Bitmap iconBitmap = this.mSelectableTargetInfoCommunicator.makePresentationGetter(activityInfo).getIconBitmap(null);
-        SimpleIconFactory obtain = SimpleIconFactory.obtain(this.mContext);
-        Bitmap createAppBadgedIconBitmap = obtain.createAppBadgedIconBitmap(shortcutIconDrawable, iconBitmap);
-        obtain.recycle();
-        return new BitmapDrawable(this.mContext.getResources(), createAppBadgedIconBitmap);
+        SimpleIconFactory simpleIconFactoryObtain = SimpleIconFactory.obtain(this.mContext);
+        Bitmap bitmapCreateAppBadgedIconBitmap = simpleIconFactoryObtain.createAppBadgedIconBitmap(shortcutIconDrawable, iconBitmap);
+        simpleIconFactoryObtain.recycle();
+        return new BitmapDrawable(this.mContext.getResources(), bitmapCreateAppBadgedIconBitmap);
     }
 
     @Override // com.android.internal.app.chooser.ChooserTargetInfo

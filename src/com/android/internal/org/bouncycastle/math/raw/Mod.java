@@ -29,8 +29,8 @@ public abstract class Mod {
 
     public static int modOddInverse(int[] iArr, int[] iArr2, int[] iArr3) {
         int length = iArr.length;
-        int numberOfLeadingZeros = (length << 5) - Integers.numberOfLeadingZeros(iArr[length - 1]);
-        int i = (numberOfLeadingZeros + 29) / 30;
+        int iNumberOfLeadingZeros = (length << 5) - Integers.numberOfLeadingZeros(iArr[length - 1]);
+        int i = (iNumberOfLeadingZeros + 29) / 30;
         int[] iArr4 = new int[4];
         int[] iArr5 = new int[i];
         int[] iArr6 = new int[i];
@@ -38,21 +38,21 @@ public abstract class Mod {
         int[] iArr8 = new int[i];
         int[] iArr9 = new int[i];
         iArr6[0] = 1;
-        encode30(numberOfLeadingZeros, iArr2, 0, iArr8, 0);
-        encode30(numberOfLeadingZeros, iArr, 0, iArr9, 0);
+        encode30(iNumberOfLeadingZeros, iArr2, 0, iArr8, 0);
+        encode30(iNumberOfLeadingZeros, iArr, 0, iArr9, 0);
         System.arraycopy(iArr9, 0, iArr7, 0, i);
-        int inverse32 = inverse32(iArr9[0]);
-        int maximumDivsteps = getMaximumDivsteps(numberOfLeadingZeros);
-        int i2 = 0;
-        for (int i3 = 0; i3 < maximumDivsteps; i3 += 30) {
-            i2 = divsteps30(i2, iArr7[0], iArr8[0], iArr4);
-            updateDE30(i, iArr5, iArr6, iArr4, inverse32, iArr9);
+        int iInverse32 = inverse32(iArr9[0]);
+        int maximumDivsteps = getMaximumDivsteps(iNumberOfLeadingZeros);
+        int iDivsteps30 = 0;
+        for (int i2 = 0; i2 < maximumDivsteps; i2 += 30) {
+            iDivsteps30 = divsteps30(iDivsteps30, iArr7[0], iArr8[0], iArr4);
+            updateDE30(i, iArr5, iArr6, iArr4, iInverse32, iArr9);
             updateFG30(i, iArr7, iArr8, iArr4);
         }
-        int i4 = iArr7[i - 1] >> 31;
-        cnegate30(i, i4, iArr7);
-        cnormalize30(i, i4, iArr5, iArr9);
-        decode30(numberOfLeadingZeros, iArr5, 0, iArr3, 0);
+        int i3 = iArr7[i - 1] >> 31;
+        cnegate30(i, i3, iArr7);
+        cnormalize30(i, i3, iArr5, iArr9);
+        decode30(iNumberOfLeadingZeros, iArr5, 0, iArr3, 0);
         return Nat.equalTo(i, iArr7, 1) & Nat.equalToZero(i, iArr8);
     }
 
@@ -64,8 +64,8 @@ public abstract class Mod {
     public static boolean modOddInverseVar(int[] iArr, int[] iArr2, int[] iArr3) {
         int length = iArr.length;
         boolean z = true;
-        int numberOfLeadingZeros = (length << 5) - Integers.numberOfLeadingZeros(iArr[length - 1]);
-        int i = (numberOfLeadingZeros + 29) / 30;
+        int iNumberOfLeadingZeros = (length << 5) - Integers.numberOfLeadingZeros(iArr[length - 1]);
+        int i = (iNumberOfLeadingZeros + 29) / 30;
         int[] iArr4 = new int[4];
         int[] iArr5 = new int[i];
         int[] iArr6 = new int[i];
@@ -74,13 +74,13 @@ public abstract class Mod {
         int[] iArr9 = new int[i];
         ?? r11 = 0;
         iArr6[0] = 1;
-        encode30(numberOfLeadingZeros, iArr2, 0, iArr8, 0);
-        encode30(numberOfLeadingZeros, iArr, 0, iArr9, 0);
+        encode30(iNumberOfLeadingZeros, iArr2, 0, iArr8, 0);
+        encode30(iNumberOfLeadingZeros, iArr, 0, iArr9, 0);
         System.arraycopy(iArr9, 0, iArr7, 0, i);
         int i2 = i - 1;
-        int numberOfLeadingZeros2 = (-1) - (Integers.numberOfLeadingZeros(iArr8[i2] | 1) - (((i * 30) + 2) - numberOfLeadingZeros));
-        int inverse32 = inverse32(iArr9[0]);
-        int maximumDivsteps = getMaximumDivsteps(numberOfLeadingZeros);
+        int iNumberOfLeadingZeros2 = (-1) - (Integers.numberOfLeadingZeros(iArr8[i2] | 1) - (((i * 30) + 2) - iNumberOfLeadingZeros));
+        int iInverse32 = inverse32(iArr9[0]);
+        int maximumDivsteps = getMaximumDivsteps(iNumberOfLeadingZeros);
         int i3 = i;
         int i4 = 0;
         while (!Nat.isZero(i3, iArr8)) {
@@ -90,8 +90,8 @@ public abstract class Mod {
             i4 += 30;
             boolean z2 = z;
             ?? r17 = r11;
-            int divsteps30Var = divsteps30Var(numberOfLeadingZeros2, iArr7[r11], iArr8[r17], iArr4);
-            int i5 = inverse32;
+            int iDivsteps30Var = divsteps30Var(iNumberOfLeadingZeros2, iArr7[r11], iArr8[r17], iArr4);
+            int i5 = iInverse32;
             updateDE30(i, iArr5, iArr6, iArr4, i5, iArr9);
             updateFG30(i3, iArr7, iArr8, iArr4);
             int i6 = i3 - 1;
@@ -103,36 +103,36 @@ public abstract class Mod {
                 iArr8[i9] = (i8 << 30) | iArr8[i9];
                 i3--;
             }
-            inverse32 = i5;
+            iInverse32 = i5;
             r11 = r17;
-            numberOfLeadingZeros2 = divsteps30Var;
+            iNumberOfLeadingZeros2 = iDivsteps30Var;
             z = z2;
         }
         boolean z3 = z;
         boolean z4 = r11;
         int i10 = iArr7[i3 - 1] >> 31;
-        int i11 = iArr5[i2] >> 31;
-        if (i11 < 0) {
-            i11 = add30(i, iArr5, iArr9);
+        int iNegate30 = iArr5[i2] >> 31;
+        if (iNegate30 < 0) {
+            iNegate30 = add30(i, iArr5, iArr9);
         }
         if (i10 < 0) {
-            i11 = negate30(i, iArr5);
+            iNegate30 = negate30(i, iArr5);
             negate30(i3, iArr7);
         }
         if (!Nat.isOne(i3, iArr7)) {
             return z4;
         }
-        if (i11 < 0) {
+        if (iNegate30 < 0) {
             add30(i, iArr5, iArr9);
         }
-        decode30(numberOfLeadingZeros, iArr5, z4 ? 1 : 0, iArr3, z4 ? 1 : 0);
+        decode30(iNumberOfLeadingZeros, iArr5, z4 ? 1 : 0, iArr3, z4 ? 1 : 0);
         return z3;
     }
 
     public static int[] random(int[] iArr) {
         int length = iArr.length;
         Random random = new Random();
-        int[] create = Nat.create(length);
+        int[] iArrCreate = Nat.create(length);
         int i = length - 1;
         int i2 = iArr[i];
         int i3 = i2 | (i2 >>> 1);
@@ -142,11 +142,11 @@ public abstract class Mod {
         int i7 = i6 | (i6 >>> 16);
         do {
             for (int i8 = 0; i8 != length; i8++) {
-                create[i8] = random.nextInt();
+                iArrCreate[i8] = random.nextInt();
             }
-            create[i] = create[i] & i7;
-        } while (Nat.gte(length, create, iArr));
-        return create;
+            iArrCreate[i] = iArrCreate[i] & i7;
+        } while (Nat.gte(length, iArrCreate, iArr));
+        return iArrCreate;
     }
 
     private static int add30(int i, int[] iArr, int[] iArr2) {
@@ -246,12 +246,12 @@ public abstract class Mod {
         int i8 = 0;
         int i9 = 0;
         while (true) {
-            int numberOfTrailingZeros = Integers.numberOfTrailingZeros(((-1) << i5) | i3);
-            int i10 = i3 >> numberOfTrailingZeros;
-            i6 <<= numberOfTrailingZeros;
-            i8 <<= numberOfTrailingZeros;
-            i -= numberOfTrailingZeros;
-            i5 -= numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = Integers.numberOfTrailingZeros(((-1) << i5) | i3);
+            int i10 = i3 >> iNumberOfTrailingZeros;
+            i6 <<= iNumberOfTrailingZeros;
+            i8 <<= iNumberOfTrailingZeros;
+            i -= iNumberOfTrailingZeros;
+            i5 -= iNumberOfTrailingZeros;
             if (i5 <= 0) {
                 iArr[0] = i6;
                 iArr[1] = i8;

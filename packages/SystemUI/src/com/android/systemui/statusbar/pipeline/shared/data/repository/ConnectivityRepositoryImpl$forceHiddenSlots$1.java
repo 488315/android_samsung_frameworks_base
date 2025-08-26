@@ -22,7 +22,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConnectivityInputLogger $logger;
@@ -63,22 +62,22 @@ final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda 
             TunerService.Tunable tunable = new TunerService.Tunable() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl$forceHiddenSlots$1$callback$1
                 @Override // com.android.systemui.tuner.TunerService.Tunable
                 public final void onTuningChanged(String str, String str2) {
-                    Set set;
-                    List split$default;
+                    Set setAccess$toSlotSet;
+                    List listSplit$default;
                     if (Intrinsics.areEqual(str, "icon_blacklist")) {
-                        ConnectivityInputLogger connectivityInputLogger2 = ConnectivityInputLogger.this;
+                        ConnectivityInputLogger connectivityInputLogger2 = connectivityInputLogger;
                         connectivityInputLogger2.getClass();
                         LogLevel logLevel = LogLevel.DEBUG;
                         ConnectivityInputLogger$$ExternalSyntheticLambda0 connectivityInputLogger$$ExternalSyntheticLambda0 = new ConnectivityInputLogger$$ExternalSyntheticLambda0(1);
                         LogBuffer logBuffer = connectivityInputLogger2.buffer;
-                        LogMessage obtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, connectivityInputLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).str1 = str2;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, connectivityInputLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = str2;
+                        logBuffer.commit(logMessageObtain);
                         ConnectivityRepositoryImpl connectivityRepositoryImpl2 = connectivityRepositoryImpl;
-                        if (str2 == null || (split$default = StringsKt__StringsKt.split$default(str2, new String[]{","}, 0, 6)) == null || (set = ConnectivityRepositoryImpl.Companion.access$toSlotSet(ConnectivityRepositoryImpl.Companion, split$default, connectivityRepositoryImpl2.connectivitySlots)) == null) {
-                            set = connectivityRepositoryImpl2.defaultHiddenIcons;
+                        if (str2 == null || (listSplit$default = StringsKt__StringsKt.split$default(str2, new String[]{","}, 0, 6)) == null || (setAccess$toSlotSet = ConnectivityRepositoryImpl.Companion.access$toSlotSet(ConnectivityRepositoryImpl.Companion, listSplit$default, connectivityRepositoryImpl2.connectivitySlots)) == null) {
+                            setAccess$toSlotSet = connectivityRepositoryImpl2.defaultHiddenIcons;
                         }
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(set);
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(setAccess$toSlotSet);
                     }
                 }
             };

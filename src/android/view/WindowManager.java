@@ -34,6 +34,7 @@ import android.window.TaskFpsCallback;
 import android.window.TrustedPresentationThresholds;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.samsung.android.rune.CoreRune;
+import java.io.IOException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -112,6 +113,7 @@ public interface WindowManager extends ViewManager {
     public static final int TRANSIT_FLAG_AOD_APPEARING = 32768;
     public static final int TRANSIT_FLAG_APP_CRASHED = 16;
     public static final int TRANSIT_FLAG_AVOID_MOVE_TO_FRONT = 65536;
+    public static final int TRANSIT_FLAG_DESKTOP_FULLSCREEN_LAUNCH = 2097152;
     public static final int TRANSIT_FLAG_FREEFORM_LAUNCH_OPT = 1048576;
     public static final int TRANSIT_FLAG_INVISIBLE = 1024;
     public static final int TRANSIT_FLAG_IS_RECENTS = 128;
@@ -335,14 +337,14 @@ public interface WindowManager extends ViewManager {
             return false;
         }
         try {
-            Application currentApplication = ActivityThread.currentApplication();
-            if (currentApplication.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            if (applicationCurrentApplication.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
                 return false;
             }
             if (CoreRune.MW_EMBED_ACTIVITY) {
-                return ActivityTaskManager.deviceSupportsMultiWindow(currentApplication);
+                return ActivityTaskManager.deviceSupportsMultiWindow(applicationCurrentApplication);
             }
-            return ActivityTaskManager.supportsMultiWindow(currentApplication);
+            return ActivityTaskManager.supportsMultiWindow(applicationCurrentApplication);
         } catch (Exception e) {
             Log.e("WindowManager", "Unable to read if the device supports multi window", e);
             return false;
@@ -1233,12 +1235,12 @@ public interface WindowManager extends ViewManager {
         }
 
         public final void setSurfaceInsets(View view, boolean z, boolean z2) {
-            int ceil = (int) Math.ceil(view.getZ() * (view.getResources().getConfiguration().windowConfiguration.isPopOver() ? 3.0f : 2.0f));
-            if (ceil == 0) {
+            int iCeil = (int) Math.ceil(view.getZ() * (view.getResources().getConfiguration().windowConfiguration.isPopOver() ? 3.0f : 2.0f));
+            if (iCeil == 0) {
                 this.surfaceInsets.set(0, 0, 0, 0);
             } else {
                 Rect rect = this.surfaceInsets;
-                rect.set(Math.max(ceil, rect.left), Math.max(ceil, this.surfaceInsets.top), Math.max(ceil, this.surfaceInsets.right), Math.max(ceil, this.surfaceInsets.bottom));
+                rect.set(Math.max(iCeil, rect.left), Math.max(iCeil, this.surfaceInsets.top), Math.max(iCeil, this.surfaceInsets.right), Math.max(iCeil, this.surfaceInsets.bottom));
             }
             this.hasManualSurfaceInsets = z;
             this.preservePreviousSurfaceInsets = z2;
@@ -1847,14 +1849,16 @@ public interface WindowManager extends ViewManager {
             LayoutParams[] layoutParamsArr2 = layoutParams.paramsForRotation;
             if (layoutParamsArr != layoutParamsArr2) {
                 if ((i & 1) == 0) {
-                    if (layoutParamsArr != null && layoutParamsArr2 != null && layoutParamsArr.length == layoutParamsArr2.length) {
-                        for (int length = layoutParamsArr.length - 1; length >= 0; length--) {
-                            if (!hasLayoutDiff(this.paramsForRotation[length], layoutParams.paramsForRotation[length])) {
-                            }
+                    if (layoutParamsArr == null || layoutParamsArr2 == null || layoutParamsArr.length != layoutParamsArr2.length) {
+                        i |= 1;
+                        break;
+                    }
+                    for (int length = layoutParamsArr.length - 1; length >= 0; length--) {
+                        if (hasLayoutDiff(this.paramsForRotation[length], layoutParams.paramsForRotation[length])) {
+                            i |= 1;
+                            break;
                         }
                     }
-                    i |= 1;
-                    break;
                 }
                 this.paramsForRotation = layoutParams.paramsForRotation;
                 checkNonRecursiveParams();
@@ -1938,26 +1942,26 @@ public interface WindowManager extends ViewManager {
         }
 
         public void dumpDimensions(StringBuilder sb) {
-            String valueOf;
+            String strValueOf;
             sb.append('(');
             sb.append(this.x);
             sb.append(',');
             sb.append(this.y);
             sb.append(")(");
-            String str = "wrap";
+            String strValueOf2 = "wrap";
             if (this.width == -1) {
-                valueOf = "fill";
+                strValueOf = "fill";
             } else {
-                valueOf = this.width == -2 ? "wrap" : String.valueOf(this.width);
+                strValueOf = this.width == -2 ? "wrap" : String.valueOf(this.width);
             }
-            sb.append(valueOf);
+            sb.append(strValueOf);
             sb.append(EpicenterTranslateClipReveal.StateProperty.TARGET_X);
             if (this.height == -1) {
-                str = "fill";
+                strValueOf2 = "fill";
             } else if (this.height != -2) {
-                str = String.valueOf(this.height);
+                strValueOf2 = String.valueOf(this.height);
             }
-            sb.append(str);
+            sb.append(strValueOf2);
             sb.append(NavigationBarInflaterView.KEY_CODE_END);
         }
 
@@ -2213,7 +2217,7 @@ public interface WindowManager extends ViewManager {
         }
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             protoOutputStream.write(1120986464257L, this.type);
             protoOutputStream.write(1120986464258L, this.x);
             protoOutputStream.write(1120986464259L, this.y);
@@ -2244,7 +2248,7 @@ public interface WindowManager extends ViewManager {
             protoOutputStream.write(WindowLayoutParamsProto.FIT_INSETS_TYPES, this.mFitInsetsTypes);
             protoOutputStream.write(WindowLayoutParamsProto.FIT_INSETS_SIDES, this.mFitInsetsSides);
             protoOutputStream.write(WindowLayoutParamsProto.FIT_IGNORE_VISIBILITY, this.mFitInsetsIgnoringVisibility);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
 
         public void scale(float f) {
@@ -2281,7 +2285,7 @@ public interface WindowManager extends ViewManager {
         }
 
         @Override // android.view.ViewGroup.LayoutParams
-        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
             super.encodeProperties(viewHierarchyEncoder);
             viewHierarchyEncoder.addProperty("x", this.x);
             viewHierarchyEncoder.addProperty("y", this.y);

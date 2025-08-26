@@ -7,6 +7,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
@@ -65,7 +66,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SearchView extends FrameLayout implements CoordinatorLayout.AttachedBehavior, MaterialBackHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -97,13 +97,12 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
     public final FrameLayout toolbarContainer;
     public final Set transitionListeners;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Behavior extends CoordinatorLayout.Behavior {
         public Behavior() {
         }
 
         @Override // androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
-        public final boolean onDependentViewChanged(CoordinatorLayout coordinatorLayout, View view, View view2) {
+        public final boolean onDependentViewChanged(CoordinatorLayout coordinatorLayout, View view, View view2) throws Resources.NotFoundException {
             SearchView searchView = (SearchView) view;
             if (searchView.searchBar != null || !(view2 instanceof SearchBar)) {
                 return false;
@@ -125,12 +124,12 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
                     MaterialToolbar materialToolbar2 = searchView.toolbar;
                     materialToolbar2.setNavigationIcon(AppCompatResources.getDrawable(R.drawable.ic_arrow_back_black_24, materialToolbar2.getContext()));
                 } else {
-                    Drawable mutate = AppCompatResources.getDrawable(R.drawable.ic_arrow_back_black_24, searchView.getContext()).mutate();
+                    Drawable drawableMutate = AppCompatResources.getDrawable(R.drawable.ic_arrow_back_black_24, searchView.getContext()).mutate();
                     Integer num = searchView.toolbar.navigationIconTint;
                     if (num != null) {
-                        mutate.setTint(num.intValue());
+                        drawableMutate.setTint(num.intValue());
                     }
-                    searchView.toolbar.setNavigationIcon(new FadeThroughDrawable(searchView.searchBar.getNavigationIcon(), mutate));
+                    searchView.toolbar.setNavigationIcon(new FadeThroughDrawable(searchView.searchBar.getNavigationIcon(), drawableMutate));
                     searchView.updateNavigationIconProgressIfNeeded();
                 }
             }
@@ -144,7 +143,6 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends AbsSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.ClassLoaderCreator() { // from class: com.google.android.material.search.SearchView.SavedState.1
             @Override // android.os.Parcelable.ClassLoaderCreator
@@ -187,7 +185,6 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum TransitionState {
         HIDING,
         HIDDEN,
@@ -217,21 +214,21 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         SearchBar searchBar = searchViewAnimationHelper.searchBar;
         MaterialMainContainerBackHelper materialMainContainerBackHelper = searchViewAnimationHelper.backHelper;
         if (materialMainContainerBackHelper.onCancelBackProgress() != null) {
-            AnimatorSet createResetScaleAndTranslationAnimator = materialMainContainerBackHelper.createResetScaleAndTranslationAnimator(searchBar);
+            AnimatorSet animatorSetCreateResetScaleAndTranslationAnimator = materialMainContainerBackHelper.createResetScaleAndTranslationAnimator(searchBar);
             View view = materialMainContainerBackHelper.view;
             if (view instanceof ClippableRoundedCornerLayout) {
                 final ClippableRoundedCornerLayout clippableRoundedCornerLayout = (ClippableRoundedCornerLayout) view;
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(clippableRoundedCornerLayout.cornerRadius, materialMainContainerBackHelper.getExpandedCornerSize());
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.motion.MaterialMainContainerBackHelper$$ExternalSyntheticLambda0
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(clippableRoundedCornerLayout.cornerRadius, materialMainContainerBackHelper.getExpandedCornerSize());
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.motion.MaterialMainContainerBackHelper$$ExternalSyntheticLambda0
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        ClippableRoundedCornerLayout.this.updateClipBoundsAndCornerRadius(r0.getLeft(), r0.getTop(), r0.getRight(), r0.getBottom(), ((Float) valueAnimator.getAnimatedValue()).floatValue());
+                        clippableRoundedCornerLayout.updateClipBoundsAndCornerRadius(r0.getLeft(), r0.getTop(), r0.getRight(), r0.getBottom(), ((Float) valueAnimator.getAnimatedValue()).floatValue());
                     }
                 });
-                createResetScaleAndTranslationAnimator.playTogether(ofFloat);
+                animatorSetCreateResetScaleAndTranslationAnimator.playTogether(valueAnimatorOfFloat);
             }
-            createResetScaleAndTranslationAnimator.setDuration(materialMainContainerBackHelper.cancelDuration);
-            createResetScaleAndTranslationAnimator.start();
+            animatorSetCreateResetScaleAndTranslationAnimator.setDuration(materialMainContainerBackHelper.cancelDuration);
+            animatorSetCreateResetScaleAndTranslationAnimator.start();
             materialMainContainerBackHelper.initialTouchY = 0.0f;
             materialMainContainerBackHelper.initialHideToClipBounds = null;
             materialMainContainerBackHelper.initialHideFromClipBounds = null;
@@ -275,9 +272,9 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         long totalDuration = searchViewAnimationHelper.hide().getTotalDuration();
         SearchBar searchBar = searchViewAnimationHelper.searchBar;
         MaterialMainContainerBackHelper materialMainContainerBackHelper2 = searchViewAnimationHelper.backHelper;
-        AnimatorSet createResetScaleAndTranslationAnimator = materialMainContainerBackHelper2.createResetScaleAndTranslationAnimator(searchBar);
-        createResetScaleAndTranslationAnimator.setDuration(totalDuration);
-        createResetScaleAndTranslationAnimator.start();
+        AnimatorSet animatorSetCreateResetScaleAndTranslationAnimator = materialMainContainerBackHelper2.createResetScaleAndTranslationAnimator(searchBar);
+        animatorSetCreateResetScaleAndTranslationAnimator.setDuration(totalDuration);
+        animatorSetCreateResetScaleAndTranslationAnimator.start();
         materialMainContainerBackHelper2.initialTouchY = 0.0f;
         materialMainContainerBackHelper2.initialHideToClipBounds = null;
         materialMainContainerBackHelper2.initialHideFromClipBounds = null;
@@ -388,7 +385,7 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         updateListeningForBackCallbacks(transitionState);
     }
 
-    public final void setUpBackgroundViewElevationOverlay() {
+    public final void setUpBackgroundViewElevationOverlay() throws Resources.NotFoundException {
         float dimension;
         SearchBar searchBar = this.searchBar;
         if (searchBar != null) {
@@ -724,9 +721,9 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
                 } else {
                     Map map = this.childImportantForAccessibilityMap;
                     if (map != null && ((HashMap) map).containsKey(childAt)) {
-                        int intValue = ((Integer) ((HashMap) this.childImportantForAccessibilityMap).get(childAt)).intValue();
+                        int iIntValue = ((Integer) ((HashMap) this.childImportantForAccessibilityMap).get(childAt)).intValue();
                         WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-                        childAt.setImportantForAccessibility(intValue);
+                        childAt.setImportantForAccessibility(iIntValue);
                     }
                 }
             }
@@ -759,17 +756,17 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
             return;
         }
         int i = this.rootView.getVisibility() == 0 ? 1 : 0;
-        Drawable unwrap = DrawableCompat.unwrap(navigationIconButton.getDrawable());
-        if (unwrap instanceof DrawerArrowDrawable) {
-            DrawerArrowDrawable drawerArrowDrawable = (DrawerArrowDrawable) unwrap;
+        Drawable drawableUnwrap = DrawableCompat.unwrap(navigationIconButton.getDrawable());
+        if (drawableUnwrap instanceof DrawerArrowDrawable) {
+            DrawerArrowDrawable drawerArrowDrawable = (DrawerArrowDrawable) drawableUnwrap;
             float f = i;
             if (drawerArrowDrawable.mProgress != f) {
                 drawerArrowDrawable.mProgress = f;
                 drawerArrowDrawable.invalidateSelf();
             }
         }
-        if (unwrap instanceof FadeThroughDrawable) {
-            ((FadeThroughDrawable) unwrap).setProgress(i);
+        if (drawableUnwrap instanceof FadeThroughDrawable) {
+            ((FadeThroughDrawable) drawableUnwrap).setProgress(i);
         }
     }
 
@@ -777,36 +774,36 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         this(context, attributeSet, R.attr.materialSearchViewStyle);
     }
 
-    public SearchView(Context context, AttributeSet attributeSet, int i) {
-        super(MaterialThemeOverlay.wrap(context, attributeSet, i, R.style.Widget_Material3_SearchView), attributeSet, i);
+    public SearchView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         int i2;
+        super(MaterialThemeOverlay.wrap(context, attributeSet, i, R.style.Widget_Material3_SearchView), attributeSet, i);
         this.backOrchestrator = new MaterialBackOrchestrator(this);
         this.transitionListeners = new LinkedHashSet();
         this.softInputMode = 16;
         this.currentTransitionState = TransitionState.HIDDEN;
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.SearchView, i, R.style.Widget_Material3_SearchView, new int[0]);
-        this.backgroundColor = obtainStyledAttributes.getColor(11, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(16, -1);
-        int resourceId2 = obtainStyledAttributes.getResourceId(0, -1);
-        String string = obtainStyledAttributes.getString(3);
-        String string2 = obtainStyledAttributes.getString(4);
-        String string3 = obtainStyledAttributes.getString(24);
-        boolean z = obtainStyledAttributes.getBoolean(27, false);
-        this.animatedNavigationIcon = obtainStyledAttributes.getBoolean(8, true);
-        this.animatedMenuItems = obtainStyledAttributes.getBoolean(7, true);
-        boolean z2 = obtainStyledAttributes.getBoolean(17, false);
-        this.autoShowKeyboard = obtainStyledAttributes.getBoolean(9, true);
-        this.backHandlingEnabled = obtainStyledAttributes.getBoolean(10, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.SearchView, i, R.style.Widget_Material3_SearchView, new int[0]);
+        this.backgroundColor = typedArrayObtainStyledAttributes.getColor(11, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(16, -1);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        String string = typedArrayObtainStyledAttributes.getString(3);
+        String string2 = typedArrayObtainStyledAttributes.getString(4);
+        String string3 = typedArrayObtainStyledAttributes.getString(24);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(27, false);
+        this.animatedNavigationIcon = typedArrayObtainStyledAttributes.getBoolean(8, true);
+        this.animatedMenuItems = typedArrayObtainStyledAttributes.getBoolean(7, true);
+        boolean z2 = typedArrayObtainStyledAttributes.getBoolean(17, false);
+        this.autoShowKeyboard = typedArrayObtainStyledAttributes.getBoolean(9, true);
+        this.backHandlingEnabled = typedArrayObtainStyledAttributes.getBoolean(10, true);
+        typedArrayObtainStyledAttributes.recycle();
         LayoutInflater.from(context2).inflate(R.layout.mtrl_search_view, this);
         this.layoutInflated = true;
         this.scrim = findViewById(R.id.open_search_view_scrim);
         ClippableRoundedCornerLayout clippableRoundedCornerLayout = (ClippableRoundedCornerLayout) findViewById(R.id.open_search_view_root);
         this.rootView = clippableRoundedCornerLayout;
         this.backgroundView = findViewById(R.id.open_search_view_background);
-        View findViewById = findViewById(R.id.open_search_view_status_bar_spacer);
-        this.statusBarSpacer = findViewById;
+        View viewFindViewById = findViewById(R.id.open_search_view_status_bar_spacer);
+        this.statusBarSpacer = viewFindViewById;
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.open_search_view_header_container);
         this.headerContainer = frameLayout;
         this.toolbarContainer = (FrameLayout) findViewById(R.id.open_search_view_toolbar_container);
@@ -819,8 +816,8 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         this.editText = editText;
         ImageButton imageButton = (ImageButton) findViewById(R.id.open_search_view_clear_button);
         this.clearButton = imageButton;
-        View findViewById2 = findViewById(R.id.open_search_view_divider);
-        this.divider = findViewById2;
+        View viewFindViewById2 = findViewById(R.id.open_search_view_divider);
+        this.divider = viewFindViewById2;
         TouchObserverFrameLayout touchObserverFrameLayout = (TouchObserverFrameLayout) findViewById(R.id.open_search_view_content_container);
         this.contentContainer = touchObserverFrameLayout;
         this.searchViewAnimationHelper = new SearchViewAnimationHelper(this);
@@ -873,7 +870,7 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
         touchObserverFrameLayout.onTouchListener = new View.OnTouchListener() { // from class: com.google.android.material.search.SearchView$$ExternalSyntheticLambda6
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                SearchView searchView = SearchView.this;
+                SearchView searchView = this.f$0;
                 int i3 = SearchView.$r8$clinit;
                 if (!searchView.isAdjustNothingSoftInputMode()) {
                     return false;
@@ -883,7 +880,7 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
             }
         };
         ViewUtils.doOnApplyWindowInsets(materialToolbar, new SearchView$$ExternalSyntheticLambda1(this));
-        final ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) findViewById2.getLayoutParams();
+        final ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) viewFindViewById2.getLayoutParams();
         final int i3 = marginLayoutParams.leftMargin;
         final int i4 = marginLayoutParams.rightMargin;
         OnApplyWindowInsetsListener onApplyWindowInsetsListener = new OnApplyWindowInsetsListener() { // from class: com.google.android.material.search.SearchView$$ExternalSyntheticLambda0
@@ -897,13 +894,13 @@ public class SearchView extends FrameLayout implements CoordinatorLayout.Attache
             }
         };
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById2, onApplyWindowInsetsListener);
+        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(viewFindViewById2, onApplyWindowInsetsListener);
         int identifier = getResources().getIdentifier("status_bar_height", "dimen", "android");
         int dimensionPixelSize = identifier > 0 ? getResources().getDimensionPixelSize(identifier) : i2;
-        if (findViewById.getLayoutParams().height != dimensionPixelSize) {
-            findViewById.getLayoutParams().height = dimensionPixelSize;
-            findViewById.requestLayout();
+        if (viewFindViewById.getLayoutParams().height != dimensionPixelSize) {
+            viewFindViewById.getLayoutParams().height = dimensionPixelSize;
+            viewFindViewById.requestLayout();
         }
-        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById, new SearchView$$ExternalSyntheticLambda1(this));
+        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(viewFindViewById, new SearchView$$ExternalSyntheticLambda1(this));
     }
 }

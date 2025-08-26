@@ -45,9 +45,9 @@ public interface IBackAnimationHandoffHandler extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBackAnimationHandoffHandler.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackAnimationHandoffHandler)) {
-                return (IBackAnimationHandoffHandler) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBackAnimationHandoffHandler.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackAnimationHandoffHandler)) {
+                return (IBackAnimationHandoffHandler) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,14 +101,14 @@ public interface IBackAnimationHandoffHandler extends IInterface {
 
             @Override // android.window.IBackAnimationHandoffHandler
             public void handOffAnimation(RemoteAnimationTarget[] remoteAnimationTargetArr, WindowAnimationState[] windowAnimationStateArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBackAnimationHandoffHandler.DESCRIPTOR);
-                    obtain.writeTypedArray(remoteAnimationTargetArr, 0);
-                    obtain.writeTypedArray(windowAnimationStateArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBackAnimationHandoffHandler.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(remoteAnimationTargetArr, 0);
+                    parcelObtain.writeTypedArray(windowAnimationStateArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

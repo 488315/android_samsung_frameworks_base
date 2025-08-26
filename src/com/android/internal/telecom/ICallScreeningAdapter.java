@@ -46,9 +46,9 @@ public interface ICallScreeningAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallScreeningAdapter)) {
-                return (ICallScreeningAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallScreeningAdapter)) {
+                return (ICallScreeningAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,11 +75,11 @@ public interface ICallScreeningAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 CallScreeningService.ParcelableCallResponse parcelableCallResponse = (CallScreeningService.ParcelableCallResponse) parcel.readTypedObject(CallScreeningService.ParcelableCallResponse.CREATOR);
                 parcel.enforceNoDataAvail();
-                onScreeningResponse(readString, componentName, parcelableCallResponse);
+                onScreeningResponse(string, componentName, parcelableCallResponse);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,15 +103,15 @@ public interface ICallScreeningAdapter extends IInterface {
 
             @Override // com.android.internal.telecom.ICallScreeningAdapter
             public void onScreeningResponse(String str, ComponentName componentName, CallScreeningService.ParcelableCallResponse parcelableCallResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(parcelableCallResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(parcelableCallResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

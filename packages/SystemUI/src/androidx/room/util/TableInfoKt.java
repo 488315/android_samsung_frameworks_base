@@ -9,7 +9,6 @@ import kotlin.text.StringsKt__IndentKt$$ExternalSyntheticLambda0;
 import kotlin.text.StringsKt__StringsKt;
 import kotlin.text.StringsKt__StringsKt$lineSequence$$inlined$Sequence$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TableInfoKt {
     public static final boolean defaultValueEqualsCommon(String str, String str2) {
@@ -22,14 +21,14 @@ public abstract class TableInfoKt {
             int i3 = 0;
             while (true) {
                 if (i < str.length()) {
-                    char charAt = str.charAt(i);
+                    char cCharAt = str.charAt(i);
                     int i4 = i3 + 1;
-                    if (i3 == 0 && charAt != '(') {
+                    if (i3 == 0 && cCharAt != '(') {
                         break;
                     }
-                    if (charAt == '(') {
+                    if (cCharAt == '(') {
                         i2++;
-                    } else if (charAt == ')' && i2 - 1 == 0 && i3 != str.length() - 1) {
+                    } else if (cCharAt == ')' && i2 - 1 == 0 && i3 != str.length() - 1) {
                         break;
                     }
                     i++;
@@ -43,14 +42,9 @@ public abstract class TableInfoKt {
     }
 
     public static final String formatString(Collection collection) {
-        String joinToString$default;
         if (collection.isEmpty()) {
             return " }";
         }
-        StringBuilder sb = new StringBuilder();
-        joinToString$default = SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(CollectionsKt___CollectionsKt.joinToString$default(collection, ",\n", "\n", "\n", null, 56)), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
-        sb.append(joinToString$default);
-        sb.append("},");
-        return sb.toString();
+        return SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(CollectionsKt___CollectionsKt.joinToString$default(collection, ",\n", "\n", "\n", null, 56)), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62) + "},";
     }
 }

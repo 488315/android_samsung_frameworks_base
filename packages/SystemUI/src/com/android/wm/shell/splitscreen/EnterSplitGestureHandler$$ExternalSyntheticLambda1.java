@@ -1,14 +1,8 @@
 package com.android.wm.shell.splitscreen;
 
 import android.app.ActivityTaskManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -16,12 +10,8 @@ import android.provider.Settings;
 import android.util.Slog;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.systemui.util.SettingsHelper;
-import com.android.wm.shell.common.DisplayController;
-import com.android.wm.shell.controlpanel.utils.ControlPanelUtils;
-import com.samsung.android.rune.CoreRune;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -34,7 +24,7 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
 
     /* JADX WARN: Type inference failed for: r2v7, types: [com.android.wm.shell.splitscreen.EnterSplitGestureHandler$5] */
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws NumberFormatException {
         int i;
         switch (this.$r8$classId) {
             case 0:
@@ -73,7 +63,7 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
                 Set enabledServicesFromSettings = AccessibilityUtils.getEnabledServicesFromSettings(enterSplitGestureHandler.mContext, 0);
                 ComponentName talkbackComponent = enterSplitGestureHandler.getTalkbackComponent();
                 if (talkbackComponent == null) {
-                    talkbackComponent = new ComponentName("com.samsung.android.accessibility.talkback", ControlPanelUtils.TALKBACK_SERVICE);
+                    talkbackComponent = new ComponentName("com.samsung.android.accessibility.talkback", "com.samsung.android.marvin.talkback.TalkBackService");
                 }
                 enterSplitGestureHandler.mIsTalkbackEnabled = enabledServicesFromSettings.contains(talkbackComponent);
                 if (z) {
@@ -88,185 +78,61 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
                 final Uri uriFor7 = Settings.Secure.getUriFor(SettingsHelper.INDEX_ENABLED_ACCESSIBILITY_SERVICES);
                 final ContentResolver contentResolver2 = enterSplitGestureHandler.mContext.getContentResolver();
                 final Handler handler = enterSplitGestureHandler.mHandler;
-                enterSplitGestureHandler.mObserver = new ContentObserver(handler) { // from class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.5
-                    public final /* synthetic */ Uri val$accessibilityServiceUri;
-                    public final /* synthetic */ ContentResolver val$cr;
-                    public final /* synthetic */ Uri val$deviceProvisionedUri;
-                    public final /* synthetic */ Uri val$navigationModeUri;
-                    public final /* synthetic */ Uri val$splitGestureUri;
-                    public final /* synthetic */ Uri val$testFlagsUri;
-                    public final /* synthetic */ Uri val$testTouchSlopUri;
-                    public final /* synthetic */ Uri val$userSetupCompleteUri;
-
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                    public AnonymousClass5(final Handler handler2, final Uri uriFor8, final ContentResolver contentResolver22, final Uri uriFor22, final Uri uriFor32, final Uri uriFor42, final Uri uriFor52, final Uri uriFor62, final Uri uriFor72) {
-                        super(handler2);
-                        r3 = uriFor8;
-                        r4 = contentResolver22;
-                        r5 = uriFor22;
-                        r6 = uriFor32;
-                        r7 = uriFor42;
-                        r8 = uriFor52;
-                        r9 = uriFor62;
-                        r10 = uriFor72;
-                    }
-
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z3, Uri uri) {
-                        boolean z4;
-                        boolean z5 = EnterSplitGestureHandler.DEBUG;
-                        if (z5) {
-                            Slog.d(EnterSplitGestureHandler.TAG, "onChange: " + uri);
-                        }
-                        if (r3.equals(uri)) {
-                            z4 = Settings.Global.getInt(r4, SettingsHelper.INDEX_MW_ENTER_SPLIT_USING_GESTURE, 0) == 1;
-                            EnterSplitGestureHandler enterSplitGestureHandler2 = EnterSplitGestureHandler.this;
-                            if (enterSplitGestureHandler2.mIsSettingEnabled == z4) {
-                                return;
-                            } else {
-                                enterSplitGestureHandler2.mIsSettingEnabled = z4;
-                            }
-                        } else {
-                            if (r5.equals(uri)) {
-                                float parseFloat = Float.parseFloat(Settings.Secure.getString(r4, "MultiWindow_twoFingerSplitGesture_TestTouchSlop"));
-                                EnterSplitGestureHandler.this.mGestureDetector.setTouchSlopForTest(parseFloat);
-                                if (z5) {
-                                    Slog.d(EnterSplitGestureHandler.TAG, String.format("test touch slop=%f", Float.valueOf(parseFloat)));
-                                    return;
-                                }
-                                return;
-                            }
-                            if (r6.equals(uri)) {
-                                Integer decode = Integer.decode(Settings.Secure.getString(r4, "MultiWindow_twoFingerSplitGesture_TestFlag"));
-                                int intValue = decode.intValue();
-                                EnterSplitGestureHandler.this.mGestureDetector.setDebug((intValue & 1) != 0);
-                                EnterSplitGestureHandler.this.mGestureDetector.setDebugNoise((intValue & 2) != 0);
-                                EnterSplitGestureHandler.this.mIsTalkbackEnabled = (intValue & 4) != 0;
-                                if (z5) {
-                                    Slog.d(EnterSplitGestureHandler.TAG, String.format("test flags=%x", decode));
-                                    return;
-                                }
-                                return;
-                            }
-                            if (r7.equals(uri)) {
-                                int i2 = Settings.Secure.getInt(r4, SettingsHelper.INDEX_NAVIGATION_MODE, 0);
-                                EnterSplitGestureHandler enterSplitGestureHandler3 = EnterSplitGestureHandler.this;
-                                if (enterSplitGestureHandler3.mNavMode == i2) {
-                                    return;
-                                } else {
-                                    enterSplitGestureHandler3.mNavMode = i2;
-                                }
-                            } else if (r8.equals(uri)) {
-                                z4 = Settings.Global.getInt(r4, "device_provisioned", 0) != 0;
-                                EnterSplitGestureHandler enterSplitGestureHandler4 = EnterSplitGestureHandler.this;
-                                if (enterSplitGestureHandler4.mIsDeviceProvisioned == z4) {
-                                    return;
-                                } else {
-                                    enterSplitGestureHandler4.mIsDeviceProvisioned = z4;
-                                }
-                            } else {
-                                if (!r9.equals(uri)) {
-                                    if (r10.equals(uri)) {
-                                        Set enabledServicesFromSettings2 = AccessibilityUtils.getEnabledServicesFromSettings(EnterSplitGestureHandler.this.mContext, 0);
-                                        ComponentName talkbackComponent2 = EnterSplitGestureHandler.this.getTalkbackComponent();
-                                        z4 = talkbackComponent2 != null && enabledServicesFromSettings2.contains(talkbackComponent2);
-                                        EnterSplitGestureHandler enterSplitGestureHandler5 = EnterSplitGestureHandler.this;
-                                        if (enterSplitGestureHandler5.mIsTalkbackEnabled != z4) {
-                                            enterSplitGestureHandler5.mIsTalkbackEnabled = z4;
-                                            return;
-                                        }
-                                        return;
-                                    }
-                                    return;
-                                }
-                                z4 = Settings.Secure.getIntForUser(r4, SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0, -2) != 0;
-                                EnterSplitGestureHandler enterSplitGestureHandler6 = EnterSplitGestureHandler.this;
-                                if (enterSplitGestureHandler6.mIsUserSetupComplete == z4) {
-                                    return;
-                                } else {
-                                    enterSplitGestureHandler6.mIsUserSetupComplete = z4;
-                                }
-                            }
-                        }
-                        EnterSplitGestureHandler.this.updateEnableState("changed " + uri.toSafeString());
-                    }
-                };
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor8, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor22, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor32, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor42, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor52, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor62, false, enterSplitGestureHandler.mObserver, 0);
-                enterSplitGestureHandler.mContext.getContentResolver().registerContentObserver(uriFor72, false, enterSplitGestureHandler.mObserver, 0);
-                if (z) {
-                    Slog.d(str, "register broadcast");
-                }
-                enterSplitGestureHandler.mContext.registerReceiver(new BroadcastReceiver() { // from class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.4
-                    public AnonymousClass4() {
-                    }
-
-                    @Override // android.content.BroadcastReceiver
-                    public final void onReceive(Context context, Intent intent) {
-                        if ("com.samsung.android.action.LOCK_TASK_MODE".equals(intent.getAction())) {
-                            EnterSplitGestureHandler.this.mIsLockTaskMode = intent.getBooleanExtra("enable", false);
-                            EnterSplitGestureHandler.this.updateEnableState("lock task mode changed");
-                        }
-                    }
-                }, new IntentFilter("com.samsung.android.action.LOCK_TASK_MODE"), "com.samsung.android.permission.LOCK_TASK_MODE", enterSplitGestureHandler.mHandler, 2);
-                Configuration configuration = enterSplitGestureHandler.mContext.getResources().getConfiguration();
-                if (CoreRune.MD_DEX_SUPPORT_STANDALONE && configuration.dexMode == 1) {
-                    z2 = true;
-                }
-                enterSplitGestureHandler.mIsStandAlone = z2;
-                enterSplitGestureHandler.mDisplayController.addDisplayWindowListener(new DisplayController.OnDisplaysChangedListener() { // from class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.3
-                    public AnonymousClass3() {
-                    }
-
-                    /* JADX WARN: Code restructure failed: missing block: B:5:0x0009, code lost:
-                    
-                        if (r4.dexMode == 1) goto L25;
-                     */
-                    @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                enterSplitGestureHandler.mObserver = 
+                /*  JADX ERROR: Method code generation error
+                    jadx.core.utils.exceptions.CodegenException: Error generate insn: 0x00ec: IPUT 
+                      (wrap:??:0x00e9: CONSTRUCTOR 
+                      (r3v0 'enterSplitGestureHandler' com.android.wm.shell.splitscreen.EnterSplitGestureHandler A[DONT_INLINE])
+                      (r4v3 'handler' android.os.Handler A[DONT_INLINE])
+                      (r0v21 'uriFor' android.net.Uri A[DONT_INLINE])
+                      (r6v3 'contentResolver2' android.content.ContentResolver A[DONT_INLINE])
+                      (r2v6 'uriFor2' android.net.Uri A[DONT_INLINE])
+                      (r4v2 'uriFor3' android.net.Uri A[DONT_INLINE])
+                      (r9v2 'uriFor4' android.net.Uri A[DONT_INLINE])
+                      (r10v1 'uriFor5' android.net.Uri A[DONT_INLINE])
+                      (r11v0 'uriFor6' android.net.Uri A[DONT_INLINE])
+                      (r12v0 'uriFor7' android.net.Uri A[DONT_INLINE])
+                     A[MD:(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void (m), WRAPPED] (LINE:234) call: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.5.<init>(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void type: CONSTRUCTOR)
+                      (r3v0 'enterSplitGestureHandler' com.android.wm.shell.splitscreen.EnterSplitGestureHandler)
+                     (LINE:237) com.android.wm.shell.splitscreen.EnterSplitGestureHandler.mObserver com.android.wm.shell.splitscreen.EnterSplitGestureHandler$5 in method: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1.run():void, file: classes3.dex
+                    	at jadx.core.codegen.InsnGen.makeInsn(InsnGen.java:310)
+                    	at jadx.core.codegen.InsnGen.makeInsn(InsnGen.java:273)
+                    	at jadx.core.codegen.RegionGen.makeSimpleBlock(RegionGen.java:94)
+                    	at jadx.core.dex.nodes.IBlock.generate(IBlock.java:15)
+                    	at jadx.core.codegen.RegionGen.makeRegion(RegionGen.java:66)
+                    	at jadx.core.dex.regions.Region.generate(Region.java:35)
+                    	at jadx.core.codegen.RegionGen.makeRegion(RegionGen.java:66)
+                    	at jadx.core.codegen.RegionGen.makeRegionIndent(RegionGen.java:83)
+                    	at jadx.core.codegen.RegionGen.makeSwitch(RegionGen.java:267)
+                    	at jadx.core.dex.regions.SwitchRegion.generate(SwitchRegion.java:84)
+                    	at jadx.core.codegen.RegionGen.makeRegion(RegionGen.java:66)
+                    	at jadx.core.dex.regions.Region.generate(Region.java:35)
+                    	at jadx.core.codegen.RegionGen.makeRegion(RegionGen.java:66)
+                    	at jadx.core.codegen.MethodGen.addRegionInsns(MethodGen.java:298)
+                    	at jadx.core.codegen.MethodGen.addInstructions(MethodGen.java:277)
+                    	at jadx.core.codegen.ClassGen.addMethodCode(ClassGen.java:410)
+                    	at jadx.core.codegen.ClassGen.addMethod(ClassGen.java:335)
+                    	at jadx.core.codegen.ClassGen.lambda$addInnerClsAndMethods$3(ClassGen.java:301)
+                    	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+                    	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+                    	at java.base/java.util.stream.SortedOps$RefSortingSink.end(SortedOps.java:395)
+                    	at java.base/java.util.stream.Sink$ChainedReference.end(Sink.java:261)
+                    Caused by: jadx.core.utils.exceptions.JadxRuntimeException: Expected class to be processed at this point, class: com.android.wm.shell.splitscreen.EnterSplitGestureHandler, state: NOT_LOADED
+                    	at jadx.core.dex.nodes.ClassNode.ensureProcessed(ClassNode.java:304)
+                    	at jadx.core.codegen.InsnGen.inlineAnonymousConstructor(InsnGen.java:807)
+                    	at jadx.core.codegen.InsnGen.makeConstructor(InsnGen.java:730)
+                    	at jadx.core.codegen.InsnGen.makeInsnBody(InsnGen.java:418)
+                    	at jadx.core.codegen.InsnGen.addWrappedArg(InsnGen.java:145)
+                    	at jadx.core.codegen.InsnGen.addArg(InsnGen.java:121)
+                    	at jadx.core.codegen.InsnGen.addArg(InsnGen.java:108)
+                    	at jadx.core.codegen.InsnGen.makeInsnBody(InsnGen.java:487)
+                    	at jadx.core.codegen.InsnGen.makeInsn(InsnGen.java:303)
+                    	... 21 more
                     */
-                    public final void onDisplayConfigurationChanged(int r3, android.content.res.Configuration r4) {
-                        /*
-                            r2 = this;
-                            boolean r0 = com.samsung.android.rune.CoreRune.MD_DEX_SUPPORT_STANDALONE
-                            if (r0 == 0) goto Lc
-                            if (r3 != 0) goto Lc
-                            int r0 = r4.dexMode
-                            r1 = 1
-                            if (r0 != r1) goto Lc
-                            goto Ld
-                        Lc:
-                            r1 = 0
-                        Ld:
-                            com.android.wm.shell.splitscreen.EnterSplitGestureHandler r2 = com.android.wm.shell.splitscreen.EnterSplitGestureHandler.this
-                            boolean r0 = r2.mIsStandAlone
-                            if (r0 == r1) goto L1b
-                            r2.mIsStandAlone = r1
-                            java.lang.String r0 = "standAlone"
-                            r2.updateEnableState(r0)
-                        L1b:
-                            if (r3 != 0) goto L21
-                            int r3 = r4.semDisplayDeviceType
-                            r2.mDisplayDeviceType = r3
-                        L21:
-                            return
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.AnonymousClass3.onDisplayConfigurationChanged(int, android.content.res.Configuration):void");
-                    }
-                }, -1);
-                enterSplitGestureHandler.updateEnableState("init");
-                break;
-            default:
-                EnterSplitGestureHandler enterSplitGestureHandler2 = this.f$0;
-                boolean z3 = EnterSplitGestureHandler.DEBUG;
-                enterSplitGestureHandler2.updateEnableState("onSystemUiStateChanged");
-                break;
+                /*
+                    Method dump skipped, instructions count: 388
+                    To view this dump add '--comments-level debug' option
+                */
+                throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1.run():void");
+            }
         }
-    }
-}

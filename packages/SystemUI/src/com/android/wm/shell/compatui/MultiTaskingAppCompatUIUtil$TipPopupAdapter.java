@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import com.android.systemui.R;
 import com.samsung.android.widget.SemTipPopup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
     INSTANCE;
@@ -24,7 +23,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
             String str = MultiTaskingAppCompatUIUtil$TipPopupAdapter.TAG;
             Log.d(str, "onViewAttachedToWindow: v=" + view);
             if (view.equals(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this.mViewHost)) {
-                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3226$$Nest$mshowTipPopup(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this);
+                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3243$$Nest$mshowTipPopup(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this);
                 return;
             }
             Log.e(str, "HostView is not matched with the view attached, hostView=" + MultiTaskingAppCompatUIUtil$TipPopupAdapter.this.mViewHost);
@@ -43,7 +42,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
     private WindowManager mWindowManager;
 
     /* renamed from: -$$Nest$mbuild, reason: not valid java name */
-    public static MultiTaskingAppCompatUIUtil$TipPopupAdapter m3225$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter, MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder) {
+    public static MultiTaskingAppCompatUIUtil$TipPopupAdapter m3242$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter, MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder) {
         multiTaskingAppCompatUIUtil$TipPopupAdapter.getClass();
         String str = TAG;
         MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUIUtil$TipPopupBuilder.mMultiTaskingAppCompatUILayout;
@@ -64,14 +63,14 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
             Log.d(str, "build: removed remained host, " + multiTaskingAppCompatUIUtil$TipPopupAdapter.mViewHost);
             multiTaskingAppCompatUIUtil$TipPopupAdapter.mWindowManager.removeViewImmediate(multiTaskingAppCompatUIUtil$TipPopupAdapter.mViewHost);
         }
-        View inflate = LayoutInflater.from(multiTaskingAppCompatUIUtil$TipPopupAdapter.mMultiTaskingAppCompatUILayout.getContext()).inflate(R.layout.mt_app_compat_ui_tip, (ViewGroup) null);
-        multiTaskingAppCompatUIUtil$TipPopupAdapter.mViewHost = inflate;
-        inflate.addOnAttachStateChangeListener(multiTaskingAppCompatUIUtil$TipPopupAdapter.mAttachStateChangeListener);
+        View viewInflate = LayoutInflater.from(multiTaskingAppCompatUIUtil$TipPopupAdapter.mMultiTaskingAppCompatUILayout.getContext()).inflate(R.layout.mt_app_compat_ui_tip, (ViewGroup) null);
+        multiTaskingAppCompatUIUtil$TipPopupAdapter.mViewHost = viewInflate;
+        viewInflate.addOnAttachStateChangeListener(multiTaskingAppCompatUIUtil$TipPopupAdapter.mAttachStateChangeListener);
         return multiTaskingAppCompatUIUtil$TipPopupAdapter2;
     }
 
     /* renamed from: -$$Nest$mshowTipPopup, reason: not valid java name */
-    public static void m3226$$Nest$mshowTipPopup(final MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter) {
+    public static void m3243$$Nest$mshowTipPopup(final MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter) {
         MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUIUtil$TipPopupAdapter.mMultiTaskingAppCompatUILayout;
         FrameLayout frameLayout = multiTaskingAppCompatUILayout != null ? multiTaskingAppCompatUILayout.mSwitchableButtonContainer : null;
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) (frameLayout != null ? frameLayout.getLayoutParams() : null);
@@ -87,7 +86,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
         multiTaskingAppCompatUIUtil$TipPopupAdapter.mSemTipPopup.setOutsideTouchEnabled(true);
         multiTaskingAppCompatUIUtil$TipPopupAdapter.mSemTipPopup.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUIUtil$TipPopupAdapter$$ExternalSyntheticLambda0
             public final void onStateChanged(int i) {
-                MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter2 = MultiTaskingAppCompatUIUtil$TipPopupAdapter.this;
+                MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter2 = this.f$0;
                 MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter3 = MultiTaskingAppCompatUIUtil$TipPopupAdapter.INSTANCE;
                 if (i == 0) {
                     multiTaskingAppCompatUIUtil$TipPopupAdapter2.dismissTipPopup();

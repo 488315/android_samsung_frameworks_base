@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ViewTransition {
     public final ConstraintSet.Constraint mConstraintDelta;
@@ -52,7 +51,6 @@ public class ViewTransition {
     public int mSharedValueID = -1;
     public int mSharedValueCurrent = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Animate {
         public final int mClearsTag;
         public float mDpositionDt;
@@ -94,16 +92,16 @@ public class ViewTransition {
             int i = this.mClearsTag;
             int i2 = this.mSetsTag;
             if (z) {
-                long nanoTime = System.nanoTime();
-                long j = nanoTime - this.mLastRender;
-                this.mLastRender = nanoTime;
+                long jNanoTime = System.nanoTime();
+                long j = jNanoTime - this.mLastRender;
+                this.mLastRender = jNanoTime;
                 float f = this.mPosition - (((float) (j * 1.0E-6d)) * this.mDpositionDt);
                 this.mPosition = f;
                 if (f < 0.0f) {
                     this.mPosition = 0.0f;
                 }
                 Interpolator interpolator = this.mInterpolator;
-                boolean interpolate = motionController.interpolate(interpolator == null ? this.mPosition : interpolator.getInterpolation(this.mPosition), nanoTime, motionController.mView, this.mCache);
+                boolean zInterpolate = motionController.interpolate(interpolator == null ? this.mPosition : interpolator.getInterpolation(this.mPosition), jNanoTime, motionController.mView, this.mCache);
                 if (this.mPosition <= 0.0f) {
                     if (i2 != -1) {
                         motionController.mView.setTag(i2, Long.valueOf(System.nanoTime()));
@@ -113,22 +111,22 @@ public class ViewTransition {
                     }
                     viewTransitionController.mRemoveList.add(this);
                 }
-                if (this.mPosition > 0.0f || interpolate) {
+                if (this.mPosition > 0.0f || zInterpolate) {
                     viewTransitionController.mMotionLayout.invalidate();
                     return;
                 }
                 return;
             }
-            long nanoTime2 = System.nanoTime();
-            long j2 = nanoTime2 - this.mLastRender;
-            this.mLastRender = nanoTime2;
+            long jNanoTime2 = System.nanoTime();
+            long j2 = jNanoTime2 - this.mLastRender;
+            this.mLastRender = jNanoTime2;
             float f2 = (((float) (j2 * 1.0E-6d)) * this.mDpositionDt) + this.mPosition;
             this.mPosition = f2;
             if (f2 >= 1.0f) {
                 this.mPosition = 1.0f;
             }
             Interpolator interpolator2 = this.mInterpolator;
-            boolean interpolate2 = motionController.interpolate(interpolator2 == null ? this.mPosition : interpolator2.getInterpolation(this.mPosition), nanoTime2, motionController.mView, this.mCache);
+            boolean zInterpolate2 = motionController.interpolate(interpolator2 == null ? this.mPosition : interpolator2.getInterpolation(this.mPosition), jNanoTime2, motionController.mView, this.mCache);
             if (this.mPosition >= 1.0f) {
                 if (i2 != -1) {
                     motionController.mView.setTag(i2, Long.valueOf(System.nanoTime()));
@@ -140,7 +138,7 @@ public class ViewTransition {
                     viewTransitionController.mRemoveList.add(this);
                 }
             }
-            if (this.mPosition < 1.0f || interpolate2) {
+            if (this.mPosition < 1.0f || zInterpolate2) {
                 viewTransitionController.mMotionLayout.invalidate();
             }
         }
@@ -156,7 +154,11 @@ public class ViewTransition {
         }
     }
 
-    public ViewTransition(Context context, XmlPullParser xmlPullParser) {
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0088  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public ViewTransition(Context context, XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         char c;
         this.mContext = context;
         try {
@@ -166,39 +168,36 @@ public class ViewTransition {
                     String name = xmlPullParser.getName();
                     switch (name.hashCode()) {
                         case -1962203927:
-                            if (name.equals("ConstraintOverride")) {
+                            if (!name.equals("ConstraintOverride")) {
+                                c = 65535;
+                                break;
+                            } else {
                                 c = 2;
                                 break;
                             }
-                            c = 65535;
-                            break;
                         case -1239391468:
                             if (name.equals("KeyFrameSet")) {
                                 c = 1;
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 61998586:
                             if (name.equals("ViewTransition")) {
                                 c = 0;
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 366511058:
                             if (name.equals("CustomMethod")) {
                                 c = 4;
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 1791837707:
                             if (name.equals("CustomAttribute")) {
                                 c = 3;
                                 break;
                             }
-                            c = 65535;
                             break;
                         default:
                             c = 65535;
@@ -232,7 +231,7 @@ public class ViewTransition {
     }
 
     public final void applyTransition(ViewTransitionController viewTransitionController, MotionLayout motionLayout, int i, ConstraintSet constraintSet, final View... viewArr) {
-        Interpolator loadInterpolator;
+        Interpolator interpolatorLoadInterpolator;
         Interpolator interpolator;
         if (this.mDisabled) {
             return;
@@ -273,7 +272,7 @@ public class ViewTransition {
             Context context = motionLayout.getContext();
             int i6 = this.mDefaultInterpolator;
             if (i6 == -2) {
-                loadInterpolator = AnimationUtils.loadInterpolator(context, this.mDefaultInterpolatorID);
+                interpolatorLoadInterpolator = AnimationUtils.loadInterpolator(context, this.mDefaultInterpolatorID);
             } else {
                 if (i6 == -1) {
                     final Easing interpolator2 = Easing.getInterpolator(this.mDefaultInterpolatorString);
@@ -286,9 +285,9 @@ public class ViewTransition {
                     new Animate(viewTransitionController, motionController, i3, i4, i5, interpolator, this.mSetsTag, this.mClearsTag);
                     return;
                 }
-                loadInterpolator = i6 != 0 ? i6 != 1 ? i6 != 2 ? i6 != 4 ? i6 != 5 ? i6 != 6 ? null : new AnticipateInterpolator() : new OvershootInterpolator() : new BounceInterpolator() : new DecelerateInterpolator() : new AccelerateInterpolator() : new AccelerateDecelerateInterpolator();
+                interpolatorLoadInterpolator = i6 != 0 ? i6 != 1 ? i6 != 2 ? i6 != 4 ? i6 != 5 ? i6 != 6 ? null : new AnticipateInterpolator() : new OvershootInterpolator() : new BounceInterpolator() : new DecelerateInterpolator() : new AccelerateInterpolator() : new AccelerateDecelerateInterpolator();
             }
-            interpolator = loadInterpolator;
+            interpolator = interpolatorLoadInterpolator;
             new Animate(viewTransitionController, motionController, i3, i4, i5, interpolator, this.mSetsTag, this.mClearsTag);
             return;
         }
@@ -342,9 +341,9 @@ public class ViewTransition {
                 while (i12 < size) {
                     Object obj = arrayList2.get(i12);
                     i12++;
-                    Key mo886clone = ((Key) obj).mo886clone();
-                    mo886clone.mTargetId = id;
-                    keyFrames2.addKey(mo886clone);
+                    Key keyMo888clone = ((Key) obj).mo888clone();
+                    keyMo888clone.mTargetId = id;
+                    keyFrames2.addKey(keyMo888clone);
                 }
                 transition.mKeyFramesList.add(keyFrames2);
             }
@@ -353,7 +352,7 @@ public class ViewTransition {
         motionLayout.transitionToEnd(new Runnable() { // from class: androidx.constraintlayout.motion.widget.ViewTransition$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ViewTransition viewTransition = ViewTransition.this;
+                ViewTransition viewTransition = this.f$0;
                 View[] viewArr2 = viewArr;
                 if (viewTransition.mSetsTag != -1) {
                     for (View view5 : viewArr2) {
@@ -391,71 +390,71 @@ public class ViewTransition {
     }
 
     public final void parseViewTransitionTags(Context context, XmlPullParser xmlPullParser) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.ViewTransition);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.ViewTransition);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             if (index == R.styleable.ViewTransition_android_id) {
-                this.mId = obtainStyledAttributes.getResourceId(index, this.mId);
+                this.mId = typedArrayObtainStyledAttributes.getResourceId(index, this.mId);
             } else if (index == R.styleable.ViewTransition_motionTarget) {
                 if (MotionLayout.IS_IN_EDIT_MODE) {
-                    int resourceId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                    int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                     this.mTargetId = resourceId;
                     if (resourceId == -1) {
-                        this.mTargetString = obtainStyledAttributes.getString(index);
+                        this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                     }
-                } else if (obtainStyledAttributes.peekValue(index).type == 3) {
-                    this.mTargetString = obtainStyledAttributes.getString(index);
+                } else if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                    this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                 } else {
-                    this.mTargetId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                    this.mTargetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                 }
             } else if (index == R.styleable.ViewTransition_onStateTransition) {
-                this.mOnStateTransition = obtainStyledAttributes.getInt(index, this.mOnStateTransition);
+                this.mOnStateTransition = typedArrayObtainStyledAttributes.getInt(index, this.mOnStateTransition);
             } else if (index == R.styleable.ViewTransition_transitionDisable) {
-                this.mDisabled = obtainStyledAttributes.getBoolean(index, this.mDisabled);
+                this.mDisabled = typedArrayObtainStyledAttributes.getBoolean(index, this.mDisabled);
             } else if (index == R.styleable.ViewTransition_pathMotionArc) {
-                this.mPathMotionArc = obtainStyledAttributes.getInt(index, this.mPathMotionArc);
+                this.mPathMotionArc = typedArrayObtainStyledAttributes.getInt(index, this.mPathMotionArc);
             } else if (index == R.styleable.ViewTransition_duration) {
-                this.mDuration = obtainStyledAttributes.getInt(index, this.mDuration);
+                this.mDuration = typedArrayObtainStyledAttributes.getInt(index, this.mDuration);
             } else if (index == R.styleable.ViewTransition_upDuration) {
-                this.mUpDuration = obtainStyledAttributes.getInt(index, this.mUpDuration);
+                this.mUpDuration = typedArrayObtainStyledAttributes.getInt(index, this.mUpDuration);
             } else if (index == R.styleable.ViewTransition_viewTransitionMode) {
-                this.mViewTransitionMode = obtainStyledAttributes.getInt(index, this.mViewTransitionMode);
+                this.mViewTransitionMode = typedArrayObtainStyledAttributes.getInt(index, this.mViewTransitionMode);
             } else if (index == R.styleable.ViewTransition_motionInterpolator) {
-                int i2 = obtainStyledAttributes.peekValue(index).type;
+                int i2 = typedArrayObtainStyledAttributes.peekValue(index).type;
                 if (i2 == 1) {
-                    int resourceId2 = obtainStyledAttributes.getResourceId(index, -1);
+                    int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(index, -1);
                     this.mDefaultInterpolatorID = resourceId2;
                     if (resourceId2 != -1) {
                         this.mDefaultInterpolator = -2;
                     }
                 } else if (i2 == 3) {
-                    String string = obtainStyledAttributes.getString(index);
+                    String string = typedArrayObtainStyledAttributes.getString(index);
                     this.mDefaultInterpolatorString = string;
                     if (string == null || string.indexOf("/") <= 0) {
                         this.mDefaultInterpolator = -1;
                     } else {
-                        this.mDefaultInterpolatorID = obtainStyledAttributes.getResourceId(index, -1);
+                        this.mDefaultInterpolatorID = typedArrayObtainStyledAttributes.getResourceId(index, -1);
                         this.mDefaultInterpolator = -2;
                     }
                 } else {
-                    this.mDefaultInterpolator = obtainStyledAttributes.getInteger(index, this.mDefaultInterpolator);
+                    this.mDefaultInterpolator = typedArrayObtainStyledAttributes.getInteger(index, this.mDefaultInterpolator);
                 }
             } else if (index == R.styleable.ViewTransition_setsTag) {
-                this.mSetsTag = obtainStyledAttributes.getResourceId(index, this.mSetsTag);
+                this.mSetsTag = typedArrayObtainStyledAttributes.getResourceId(index, this.mSetsTag);
             } else if (index == R.styleable.ViewTransition_clearsTag) {
-                this.mClearsTag = obtainStyledAttributes.getResourceId(index, this.mClearsTag);
+                this.mClearsTag = typedArrayObtainStyledAttributes.getResourceId(index, this.mClearsTag);
             } else if (index == R.styleable.ViewTransition_ifTagSet) {
-                this.mIfTagSet = obtainStyledAttributes.getResourceId(index, this.mIfTagSet);
+                this.mIfTagSet = typedArrayObtainStyledAttributes.getResourceId(index, this.mIfTagSet);
             } else if (index == R.styleable.ViewTransition_ifTagNotSet) {
-                this.mIfTagNotSet = obtainStyledAttributes.getResourceId(index, this.mIfTagNotSet);
+                this.mIfTagNotSet = typedArrayObtainStyledAttributes.getResourceId(index, this.mIfTagNotSet);
             } else if (index == R.styleable.ViewTransition_SharedValueId) {
-                this.mSharedValueID = obtainStyledAttributes.getResourceId(index, this.mSharedValueID);
+                this.mSharedValueID = typedArrayObtainStyledAttributes.getResourceId(index, this.mSharedValueID);
             } else if (index == R.styleable.ViewTransition_SharedValue) {
-                this.mSharedValueTarget = obtainStyledAttributes.getInteger(index, this.mSharedValueTarget);
+                this.mSharedValueTarget = typedArrayObtainStyledAttributes.getInteger(index, this.mSharedValueTarget);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final String toString() {

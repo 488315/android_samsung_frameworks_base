@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import com.android.systemui.audio.soundcraft.view.routine.RoutineTestView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoutineTestViewBinding {
     public final RoutineTestView root;
@@ -17,12 +16,12 @@ public final class RoutineTestViewBinding {
     public final View view;
 
     public RoutineTestViewBinding(ViewStub viewStub) {
-        View inflate = viewStub.inflate();
-        this.view = inflate;
-        this.root = (RoutineTestView) inflate.requireViewById(R.id.routine_test_root);
-        this.startButton = inflate.requireViewById(R.id.routine_test_start_button);
-        this.updateButton = inflate.requireViewById(R.id.routine_test_update_button);
-        this.stopButton = inflate.requireViewById(R.id.routine_test_stop_button);
-        this.routineCountText = (TextView) inflate.requireViewById(R.id.routine_test_routine_count_text);
+        View viewInflate = viewStub.inflate();
+        this.view = viewInflate;
+        this.root = (RoutineTestView) viewInflate.requireViewById(R.id.routine_test_root);
+        this.startButton = viewInflate.requireViewById(R.id.routine_test_start_button);
+        this.updateButton = viewInflate.requireViewById(R.id.routine_test_update_button);
+        this.stopButton = viewInflate.requireViewById(R.id.routine_test_stop_button);
+        this.routineCountText = (TextView) viewInflate.requireViewById(R.id.routine_test_routine_count_text);
     }
 }

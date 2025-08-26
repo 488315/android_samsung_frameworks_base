@@ -57,16 +57,16 @@ public abstract class SegmentFinder {
             if (i < i3) {
                 return z ? i3 : iArr[1];
             }
-            int binarySearch = Arrays.binarySearch(iArr, i);
-            if (binarySearch >= 0) {
-                int i4 = binarySearch + 1;
+            int iBinarySearch = Arrays.binarySearch(iArr, i);
+            if (iBinarySearch >= 0) {
+                int i4 = iBinarySearch + 1;
                 int[] iArr2 = this.mSegments;
                 if (i4 < iArr2.length && iArr2[i4] == i) {
-                    binarySearch = i4;
+                    iBinarySearch = i4;
                 }
-                i2 = binarySearch + 1;
+                i2 = iBinarySearch + 1;
             } else {
-                i2 = -(binarySearch + 1);
+                i2 = -(iBinarySearch + 1);
             }
             int[] iArr3 = this.mSegments;
             if (i2 >= iArr3.length) {
@@ -91,17 +91,17 @@ public abstract class SegmentFinder {
                         int length = iArr.length;
                         return z ? iArr[length - 2] : iArr[length - 1];
                     }
-                    int binarySearch = Arrays.binarySearch(iArr, i);
-                    if (binarySearch >= 0) {
-                        if (binarySearch > 0) {
-                            int i3 = binarySearch - 1;
+                    int iBinarySearch = Arrays.binarySearch(iArr, i);
+                    if (iBinarySearch >= 0) {
+                        if (iBinarySearch > 0) {
+                            int i3 = iBinarySearch - 1;
                             if (this.mSegments[i3] == i) {
-                                binarySearch = i3;
+                                iBinarySearch = i3;
                             }
                         }
-                        i2 = binarySearch - 1;
+                        i2 = iBinarySearch - 1;
                     } else {
-                        i2 = (-(binarySearch + 1)) - 1;
+                        i2 = (-(iBinarySearch + 1)) - 1;
                     }
                     if (i2 < 0) {
                         return -1;

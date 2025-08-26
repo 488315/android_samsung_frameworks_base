@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ControlPanelUtils {
     public static final boolean IS_WIDE_WIDTH_TYPE;
@@ -44,13 +43,13 @@ public class ControlPanelUtils {
     }
 
     public static void eventLogging(String str, String str2, Map map) {
-        HashMap hashMap = (HashMap) map;
-        hashMap.put("det", str2);
-        Log.d("FlexPanelSALogging", "eventName : " + str + ", detail : " + str2 + ", customDimen : " + hashMap);
+        HashMap map2 = (HashMap) map;
+        map2.put("det", str2);
+        Log.d("FlexPanelSALogging", "eventName : " + str + ", detail : " + str2 + ", customDimen : " + map2);
         SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();
         LogBuilders$EventBuilder logBuilders$EventBuilder = new LogBuilders$EventBuilder();
         logBuilders$EventBuilder.setEventName(str);
-        logBuilders$EventBuilder.setDimension(hashMap);
+        logBuilders$EventBuilder.setDimension(map2);
         samsungAnalytics.sendLog(logBuilders$EventBuilder.build());
     }
 
@@ -121,7 +120,7 @@ public class ControlPanelUtils {
         if (string == null) {
             return false;
         }
-        return string.contains(TALKBACK_SERVICE) || string.contains(UNIVERSAL_SWITCH_SERVICE);
+        return string.contains("com.samsung.android.marvin.talkback.TalkBackService") || string.contains(UNIVERSAL_SWITCH_SERVICE);
     }
 
     public static boolean isClockActivity(Context context) {
@@ -150,13 +149,13 @@ public class ControlPanelUtils {
     }
 
     public static boolean makeGridButton(Context context, RelativeLayout relativeLayout, int i, int i2, boolean z, boolean z2) {
-        String str;
+        String className;
         ImageButton imageButton = (ImageButton) relativeLayout.findViewById(R.id.menubutton);
         ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.menubutton_icon);
         RelativeLayout relativeLayout2 = (RelativeLayout) relativeLayout.findViewById(R.id.grid_button);
-        boolean isTypeFold = isTypeFold();
+        boolean zIsTypeFold = isTypeFold();
         boolean z3 = IS_WIDE_WIDTH_TYPE;
-        RelativeLayout.LayoutParams ratioRelativeLayoutParams = isTypeFold ? z3 ? getRatioRelativeLayoutParams(context, 3.37d, 3.71d) : getRatioRelativeLayoutParams(context, 3.37d, 4.1d) : getRatioRelativeLayoutParams(context, 8.88d, 3.64d);
+        RelativeLayout.LayoutParams ratioRelativeLayoutParams = zIsTypeFold ? z3 ? getRatioRelativeLayoutParams(context, 3.37d, 3.71d) : getRatioRelativeLayoutParams(context, 3.37d, 4.1d) : getRatioRelativeLayoutParams(context, 8.88d, 3.64d);
         ratioRelativeLayoutParams.addRule(13);
         imageView.setLayoutParams(ratioRelativeLayoutParams);
         relativeLayout.findViewById(R.id.button_focus).setLayoutParams(ratioRelativeLayoutParams);
@@ -173,12 +172,12 @@ public class ControlPanelUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SystemUIAnalytics.FLEX_PANEL_PREF_NAME, 0);
         if (i == ControlPanelAction.Action.QuickPanel.getValue()) {
             try {
-                str = getTopActivity(context).getClassName();
+                className = getTopActivity(context).getClassName();
             } catch (NullPointerException e) {
                 Log.e("ControlPanelUtils", e.toString(), e);
-                str = "";
+                className = "";
             }
-            if (!isQuickPanelPressAvailable(context, str)) {
+            if (!isQuickPanelPressAvailable(context, className)) {
                 relativeLayout.setEnabled(false);
                 relativeLayout.setAlpha(0.4f);
                 z4 = false;

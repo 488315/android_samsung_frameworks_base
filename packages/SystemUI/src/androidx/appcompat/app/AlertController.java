@@ -25,7 +25,6 @@ import androidx.preference.MultiSelectListPreferenceDialogFragmentCompat;
 import com.android.systemui.R;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AlertController {
     public ListAdapter mAdapter;
@@ -71,16 +70,15 @@ public class AlertController {
             Message message2;
             Message message3;
             AlertController alertController = AlertController.this;
-            Message obtain = (view != alertController.mButtonPositive || (message3 = alertController.mButtonPositiveMessage) == null) ? (view != alertController.mButtonNegative || (message2 = alertController.mButtonNegativeMessage) == null) ? (view != alertController.mButtonNeutral || (message = alertController.mButtonNeutralMessage) == null) ? null : Message.obtain(message) : Message.obtain(message2) : Message.obtain(message3);
-            if (obtain != null) {
-                obtain.sendToTarget();
+            Message messageObtain = (view != alertController.mButtonPositive || (message3 = alertController.mButtonPositiveMessage) == null) ? (view != alertController.mButtonNegative || (message2 = alertController.mButtonNegativeMessage) == null) ? (view != alertController.mButtonNeutral || (message = alertController.mButtonNeutralMessage) == null) ? null : Message.obtain(message) : Message.obtain(message2) : Message.obtain(message3);
+            if (messageObtain != null) {
+                messageObtain.sendToTarget();
             }
             AlertController alertController2 = AlertController.this;
             alertController2.mHandler.obtainMessage(1, alertController2.mDialog).sendToTarget();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AlertParams {
         public ListAdapter mAdapter;
         public boolean[] mCheckedItems;
@@ -112,7 +110,6 @@ public class AlertController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ButtonHandler extends Handler {
         public final WeakReference mDialog;
 
@@ -134,7 +131,6 @@ public class AlertController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CheckedItemAdapter extends ArrayAdapter {
         public CheckedItemAdapter(Context context, int i, int i2, CharSequence[] charSequenceArr) {
             super(context, i, i2, charSequenceArr);
@@ -151,7 +147,6 @@ public class AlertController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RecycleListView extends ListView {
         public final int mPaddingBottomNoButtons;
         public final int mPaddingTopNoTitle;
@@ -162,9 +157,9 @@ public class AlertController {
 
         public RecycleListView(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RecycleListView);
-            this.mPaddingBottomNoButtons = obtainStyledAttributes.getDimensionPixelOffset(0, -1);
-            this.mPaddingTopNoTitle = obtainStyledAttributes.getDimensionPixelOffset(1, -1);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RecycleListView);
+            this.mPaddingBottomNoButtons = typedArrayObtainStyledAttributes.getDimensionPixelOffset(0, -1);
+            this.mPaddingTopNoTitle = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, -1);
         }
     }
 
@@ -174,16 +169,16 @@ public class AlertController {
         this.mDialog = appCompatDialog;
         this.mWindow = window;
         this.mHandler = new ButtonHandler(appCompatDialog);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R$styleable.AlertDialog, R.attr.alertDialogStyle, 0);
-        this.mAlertDialogLayout = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.getResourceId(2, 0);
-        this.mListLayout = obtainStyledAttributes.getResourceId(5, 0);
-        this.mMultiChoiceItemLayout = obtainStyledAttributes.getResourceId(6, 0);
-        this.mSingleChoiceItemLayout = obtainStyledAttributes.getResourceId(9, 0);
-        this.mListItemLayout = obtainStyledAttributes.getResourceId(4, 0);
-        this.mShowTitle = obtainStyledAttributes.getBoolean(8, true);
-        obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R$styleable.AlertDialog, R.attr.alertDialogStyle, 0);
+        this.mAlertDialogLayout = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.getResourceId(2, 0);
+        this.mListLayout = typedArrayObtainStyledAttributes.getResourceId(5, 0);
+        this.mMultiChoiceItemLayout = typedArrayObtainStyledAttributes.getResourceId(6, 0);
+        this.mSingleChoiceItemLayout = typedArrayObtainStyledAttributes.getResourceId(9, 0);
+        this.mListItemLayout = typedArrayObtainStyledAttributes.getResourceId(4, 0);
+        this.mShowTitle = typedArrayObtainStyledAttributes.getBoolean(8, true);
+        typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         appCompatDialog.getDelegate().requestWindowFeature(1);
     }
 
@@ -232,19 +227,19 @@ public class AlertController {
     }
 
     public final void setButton(int i, CharSequence charSequence, DialogInterface.OnClickListener onClickListener) {
-        Message obtainMessage = onClickListener != null ? this.mHandler.obtainMessage(i, onClickListener) : null;
+        Message messageObtainMessage = onClickListener != null ? this.mHandler.obtainMessage(i, onClickListener) : null;
         if (i == -3) {
             this.mButtonNeutralText = charSequence;
-            this.mButtonNeutralMessage = obtainMessage;
+            this.mButtonNeutralMessage = messageObtainMessage;
         } else if (i == -2) {
             this.mButtonNegativeText = charSequence;
-            this.mButtonNegativeMessage = obtainMessage;
+            this.mButtonNegativeMessage = messageObtainMessage;
         } else {
             if (i != -1) {
                 throw new IllegalArgumentException("Button does not exist");
             }
             this.mButtonPositiveText = charSequence;
-            this.mButtonPositiveMessage = obtainMessage;
+            this.mButtonPositiveMessage = messageObtainMessage;
         }
     }
 }

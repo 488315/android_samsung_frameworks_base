@@ -297,9 +297,9 @@ public interface IRemoteAppMode extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteAppMode.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteAppMode)) {
-                return (IRemoteAppMode) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteAppMode.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteAppMode)) {
+                return (IRemoteAppMode) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -393,128 +393,128 @@ public interface IRemoteAppMode extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
-                    IVirtualDisplayAliveChecker asInterface = IVirtualDisplayAliveChecker.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDisplayAliveChecker iVirtualDisplayAliveCheckerAsInterface = IVirtualDisplayAliveChecker.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int createVirtualDisplay = createVirtualDisplay(readString, readInt, readInt2, readInt3, surface, asInterface);
+                    int iCreateVirtualDisplay = createVirtualDisplay(string, i3, i4, i5, surface, iVirtualDisplayAliveCheckerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createVirtualDisplay);
+                    parcel2.writeInt(iCreateVirtualDisplay);
                     return true;
                 case 2:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    releaseVirtualDisplay(readInt4);
+                    releaseVirtualDisplay(i6);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     Surface surface2 = (Surface) parcel.readTypedObject(Surface.CREATOR);
                     parcel.enforceNoDataAvail();
-                    resizeVirtualDisplay(readInt5, readInt6, readInt7, readInt8, surface2);
+                    resizeVirtualDisplay(i7, i8, i9, i10, surface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    moveDisplayToTop(readInt9);
+                    moveDisplayToTop(i11);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt10 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    String string2 = parcel.readString();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    launchApplication(readInt10, readString2, intent, bundle);
+                    launchApplication(i12, string2, intent, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    boolean isAllowed = isAllowed();
+                    boolean zIsAllowed = isAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAllowed);
+                    parcel2.writeBoolean(zIsAllowed);
                     return true;
                 case 7:
-                    ISecureAppChangedListener asInterface2 = ISecureAppChangedListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString3 = parcel.readString();
+                    ISecureAppChangedListener iSecureAppChangedListenerAsInterface = ISecureAppChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerSecureAppChangedListener = registerSecureAppChangedListener(asInterface2, readString3);
+                    boolean zRegisterSecureAppChangedListener = registerSecureAppChangedListener(iSecureAppChangedListenerAsInterface, string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerSecureAppChangedListener);
+                    parcel2.writeBoolean(zRegisterSecureAppChangedListener);
                     return true;
                 case 8:
-                    ISecureAppChangedListener asInterface3 = ISecureAppChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISecureAppChangedListener iSecureAppChangedListenerAsInterface2 = ISecureAppChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterSecureAppChangedListener = unregisterSecureAppChangedListener(asInterface3);
+                    boolean zUnregisterSecureAppChangedListener = unregisterSecureAppChangedListener(iSecureAppChangedListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterSecureAppChangedListener);
+                    parcel2.writeBoolean(zUnregisterSecureAppChangedListener);
                     return true;
                 case 9:
-                    ITaskChangeListener asInterface4 = ITaskChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString4 = parcel.readString();
+                    ITaskChangeListener iTaskChangeListenerAsInterface = ITaskChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerTaskChangeListener = registerTaskChangeListener(asInterface4, readString4);
+                    boolean zRegisterTaskChangeListener = registerTaskChangeListener(iTaskChangeListenerAsInterface, string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerTaskChangeListener);
+                    parcel2.writeBoolean(zRegisterTaskChangeListener);
                     return true;
                 case 10:
-                    ITaskChangeListener asInterface5 = ITaskChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskChangeListener iTaskChangeListenerAsInterface2 = ITaskChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterTaskChangeListener = unregisterTaskChangeListener(asInterface5);
+                    boolean zUnregisterTaskChangeListener = unregisterTaskChangeListener(iTaskChangeListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterTaskChangeListener);
+                    parcel2.writeBoolean(zUnregisterTaskChangeListener);
                     return true;
                 case 11:
-                    IRotationChangeListener asInterface6 = IRotationChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    IRotationChangeListener iRotationChangeListenerAsInterface = IRotationChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean registerRotationChangeListener = registerRotationChangeListener(asInterface6, readString5, readInt11);
+                    boolean zRegisterRotationChangeListener = registerRotationChangeListener(iRotationChangeListenerAsInterface, string5, i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerRotationChangeListener);
+                    parcel2.writeBoolean(zRegisterRotationChangeListener);
                     return true;
                 case 12:
-                    IRotationChangeListener asInterface7 = IRotationChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IRotationChangeListener iRotationChangeListenerAsInterface2 = IRotationChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterRotationChangeListener = unregisterRotationChangeListener(asInterface7);
+                    boolean zUnregisterRotationChangeListener = unregisterRotationChangeListener(iRotationChangeListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterRotationChangeListener);
+                    parcel2.writeBoolean(zUnregisterRotationChangeListener);
                     return true;
                 case 13:
-                    IStartActivityInterceptListener asInterface8 = IStartActivityInterceptListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString6 = parcel.readString();
+                    IStartActivityInterceptListener iStartActivityInterceptListenerAsInterface = IStartActivityInterceptListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerStartActivityInterceptListener = registerStartActivityInterceptListener(asInterface8, readString6);
+                    boolean zRegisterStartActivityInterceptListener = registerStartActivityInterceptListener(iStartActivityInterceptListenerAsInterface, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerStartActivityInterceptListener);
+                    parcel2.writeBoolean(zRegisterStartActivityInterceptListener);
                     return true;
                 case 14:
-                    IStartActivityInterceptListener asInterface9 = IStartActivityInterceptListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStartActivityInterceptListener iStartActivityInterceptListenerAsInterface2 = IStartActivityInterceptListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterStartActivityInterceptListener = unregisterStartActivityInterceptListener(asInterface9);
+                    boolean zUnregisterStartActivityInterceptListener = unregisterStartActivityInterceptListener(iStartActivityInterceptListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterStartActivityInterceptListener);
+                    parcel2.writeBoolean(zUnregisterStartActivityInterceptListener);
                     return true;
                 case 15:
-                    IRemoteAppModeListener asInterface10 = IRemoteAppModeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString7 = parcel.readString();
+                    IRemoteAppModeListener iRemoteAppModeListenerAsInterface = IRemoteAppModeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerRemoteAppModeListener = registerRemoteAppModeListener(asInterface10, readString7);
+                    boolean zRegisterRemoteAppModeListener = registerRemoteAppModeListener(iRemoteAppModeListenerAsInterface, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerRemoteAppModeListener);
+                    parcel2.writeBoolean(zRegisterRemoteAppModeListener);
                     return true;
                 case 16:
-                    IRemoteAppModeListener asInterface11 = IRemoteAppModeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteAppModeListener iRemoteAppModeListenerAsInterface2 = IRemoteAppModeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterRemoteAppModeListener = unregisterRemoteAppModeListener(asInterface11);
+                    boolean zUnregisterRemoteAppModeListener = unregisterRemoteAppModeListener(iRemoteAppModeListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterRemoteAppModeListener);
+                    parcel2.writeBoolean(zUnregisterRemoteAppModeListener);
                     return true;
                 case 17:
                     clearAll();
@@ -534,37 +534,37 @@ public interface IRemoteAppMode extends IInterface {
                 case 20:
                     StatusBarNotification statusBarNotification = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendNotificationContent = sendNotificationContent(statusBarNotification);
+                    boolean zSendNotificationContent = sendNotificationContent(statusBarNotification);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendNotificationContent);
+                    parcel2.writeBoolean(zSendNotificationContent);
                     return true;
                 case 21:
                     StatusBarNotification statusBarNotification2 = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendNotificationAction = sendNotificationAction(statusBarNotification2, readInt12, intent2);
+                    boolean zSendNotificationAction = sendNotificationAction(statusBarNotification2, i14, intent2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendNotificationAction);
+                    parcel2.writeBoolean(zSendNotificationAction);
                     return true;
                 case 22:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    forceStopPackage(readString8);
+                    forceStopPackage(string8);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    transferTaskWithoutIntercept(readInt13, readInt14, bundle2);
+                    transferTaskWithoutIntercept(i15, i16, bundle2);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLTWProtocolVersion(readInt15);
+                    setLTWProtocolVersion(i17);
                     parcel2.writeNoException();
                     return true;
                 case 25:
@@ -576,16 +576,16 @@ public interface IRemoteAppMode extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getLastAnr(readString9, parcelFileDescriptor);
+                    getLastAnr(string9, parcelFileDescriptor);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    enableSendingUserPresentIntent(readString10);
+                    enableSendingUserPresentIntent(string10);
                     parcel2.writeNoException();
                     return true;
                 case 29:
@@ -593,14 +593,14 @@ public interface IRemoteAppMode extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    boolean isSendingUserPresentEnabled = isSendingUserPresentEnabled();
+                    boolean zIsSendingUserPresentEnabled = isSendingUserPresentEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSendingUserPresentEnabled);
+                    parcel2.writeBoolean(zIsSendingUserPresentEnabled);
                     return true;
                 case 31:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setSendingUserPresentExpiredTime(readLong);
+                    setSendingUserPresentExpiredTime(j);
                     parcel2.writeNoException();
                     return true;
                 case 32:
@@ -610,11 +610,11 @@ public interface IRemoteAppMode extends IInterface {
                     return true;
                 case 33:
                     Intent intent3 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    transferTaskUsingIntent(intent3, readInt16, readInt17, bundle3);
+                    transferTaskUsingIntent(intent3, i18, i19, bundle3);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -640,531 +640,531 @@ public interface IRemoteAppMode extends IInterface {
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public int createVirtualDisplay(String str, int i, int i2, int i3, Surface surface, IVirtualDisplayAliveChecker iVirtualDisplayAliveChecker) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(surface, 0);
-                    obtain.writeStrongInterface(iVirtualDisplayAliveChecker);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    parcelObtain.writeStrongInterface(iVirtualDisplayAliveChecker);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void releaseVirtualDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void resizeVirtualDisplay(int i, int i2, int i3, int i4, Surface surface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeTypedObject(surface, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void moveDisplayToTop(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void launchApplication(int i, String str, Intent intent, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean isAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean registerSecureAppChangedListener(ISecureAppChangedListener iSecureAppChangedListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSecureAppChangedListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSecureAppChangedListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean unregisterSecureAppChangedListener(ISecureAppChangedListener iSecureAppChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSecureAppChangedListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSecureAppChangedListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean registerTaskChangeListener(ITaskChangeListener iTaskChangeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskChangeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskChangeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean unregisterTaskChangeListener(ITaskChangeListener iTaskChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskChangeListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskChangeListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean registerRotationChangeListener(IRotationChangeListener iRotationChangeListener, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRotationChangeListener);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRotationChangeListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean unregisterRotationChangeListener(IRotationChangeListener iRotationChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRotationChangeListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRotationChangeListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean registerStartActivityInterceptListener(IStartActivityInterceptListener iStartActivityInterceptListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStartActivityInterceptListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStartActivityInterceptListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean unregisterStartActivityInterceptListener(IStartActivityInterceptListener iStartActivityInterceptListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStartActivityInterceptListener);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStartActivityInterceptListener);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean registerRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteAppModeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteAppModeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean unregisterRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteAppModeListener);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteAppModeListener);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void clearAll() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void sendPendingIntent(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public int getProtocolVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean sendNotificationContent(StatusBarNotification statusBarNotification) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean sendNotificationAction(StatusBarNotification statusBarNotification, int i, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void forceStopPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void transferTaskWithoutIntercept(int i, int i2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void setLTWProtocolVersion(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void startRFCommService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void stopRFCommService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void getLastAnr(String str, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void enableSendingUserPresentIntent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void disableSendingUserPresentIntent() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public boolean isSendingUserPresentEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void setSendingUserPresentExpiredTime(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public long getSendingUserPresentExpiredTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
             public void transferTaskUsingIntent(Intent intent, int i, int i2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteAppMode.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

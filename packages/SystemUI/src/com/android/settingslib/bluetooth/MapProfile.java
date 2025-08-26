@@ -13,7 +13,6 @@ import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MapProfile implements LocalBluetoothProfile {
     public final CachedBluetoothDeviceManager mDeviceManager;
@@ -21,7 +20,6 @@ public final class MapProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothMap mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MapServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ MapServiceListener(MapProfile mapProfile, int i) {
             this();
@@ -34,16 +32,16 @@ public final class MapProfile implements LocalBluetoothProfile {
             List<BluetoothDevice> connectedDevices = bluetoothMap.getConnectedDevices();
             if (!connectedDevices.isEmpty()) {
                 for (BluetoothDevice bluetoothDevice : connectedDevices) {
-                    CachedBluetoothDevice findDevice = MapProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                    if (findDevice == null) {
+                    CachedBluetoothDevice cachedBluetoothDeviceFindDevice = MapProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                    if (cachedBluetoothDeviceFindDevice == null) {
                         Log.w("MapProfile", "MapProfile found new device: " + bluetoothDevice);
                         MapProfile mapProfile = MapProfile.this;
-                        findDevice = mapProfile.mDeviceManager.addDevice(mapProfile.mProfileManager, bluetoothDevice);
+                        cachedBluetoothDeviceFindDevice = mapProfile.mDeviceManager.addDevice(mapProfile.mProfileManager, bluetoothDevice);
                     }
-                    if (findDevice != null) {
-                        Log.d("MapProfile", "Update cached device : " + findDevice.getNameForLog());
-                        findDevice.onProfileStateChanged(MapProfile.this, 2);
-                        findDevice.refresh();
+                    if (cachedBluetoothDeviceFindDevice != null) {
+                        Log.d("MapProfile", "Update cached device : " + cachedBluetoothDeviceFindDevice.getNameForLog());
+                        cachedBluetoothDeviceFindDevice.onProfileStateChanged(MapProfile.this, 2);
+                        cachedBluetoothDeviceFindDevice.refresh();
                     } else {
                         Log.d("MapProfile", "Bluetooth device is null");
                     }

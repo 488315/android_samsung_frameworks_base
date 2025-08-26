@@ -25,9 +25,9 @@ public final class SQLiteUserDataRecovery {
     private boolean doRecoveryInner(String str, byte[] bArr, String str2) {
         String str3 = str + RECOVERY_POSTFIX;
         try {
-            int nativeDoRecovery = nativeDoRecovery(str, str3, bArr, str2);
-            if (nativeDoRecovery != 0) {
-                if (nativeDoRecovery != 768) {
+            int iNativeDoRecovery = nativeDoRecovery(str, str3, bArr, str2);
+            if (iNativeDoRecovery != 0) {
+                if (iNativeDoRecovery != 768) {
                     return false;
                 }
                 this.mDbDump.logAndDump(TAG, "Another udr is worked.");
@@ -56,11 +56,11 @@ public final class SQLiteUserDataRecovery {
             }
             this.isWorking = true;
             try {
-                boolean doRecoveryInner = doRecoveryInner(str, bArr, str2);
+                boolean zDoRecoveryInner = doRecoveryInner(str, bArr, str2);
                 synchronized (this.mLock) {
                     this.isWorking = false;
                 }
-                return doRecoveryInner;
+                return zDoRecoveryInner;
             } catch (Throwable th) {
                 synchronized (this.mLock) {
                     this.isWorking = false;

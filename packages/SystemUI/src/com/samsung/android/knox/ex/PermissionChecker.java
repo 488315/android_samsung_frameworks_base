@@ -9,7 +9,6 @@ import android.os.UserManager;
 import android.util.Log;
 import com.samsung.android.knox.IEnterpriseDeviceManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PermissionChecker {
     public static final String TAG = "PermissionChecker";
@@ -68,10 +67,10 @@ public class PermissionChecker {
         return getDevicePolicyManager(context).isOrganizationOwnedDeviceWithManagedProfile();
     }
 
-    public static void enforceKnoxAccessPermission(Context context, int i, int i2, String str, String str2) throws SecurityException, RemoteException {
+    public static void enforceKnoxAccessPermission(Context context, int i, int i2, String str, String str2) throws RemoteException, SecurityException {
         if (getService() != null) {
             try {
-                boolean enforceKnoxV2VerifyCaller = mService.enforceKnoxV2VerifyCaller(i2);
+                boolean zEnforceKnoxV2VerifyCaller = mService.enforceKnoxV2VerifyCaller(i2);
                 if (!checkPermission(context, i, i2, str)) {
                     if (UserHandle.getUserId(i2) != 0) {
                         if (!isOrganizationOwnedDeviceWithManagedProfile(context)) {
@@ -83,7 +82,7 @@ public class PermissionChecker {
                         throw new SecurityException("This API is works only with managed device(DO)");
                     }
                 }
-                if (enforceKnoxV2VerifyCaller || checkPermission(context, i, i2, str2)) {
+                if (zEnforceKnoxV2VerifyCaller || checkPermission(context, i, i2, str2)) {
                     return;
                 }
                 String str3 = "Application doesn't have this permission:" + str2;

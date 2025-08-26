@@ -3,6 +3,7 @@ package com.android.systemui;
 import android.content.ComponentCallbacks;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
@@ -20,16 +21,19 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.util.DisplayMetrics;
 import android.util.DisplayUtils;
 import android.util.Log;
 import android.util.Size;
 import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.DisplayInfo;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import com.android.internal.util.Preconditions;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.settingslib.Utils;
@@ -56,9 +60,11 @@ import com.android.systemui.log.ScreenDecorationsLogger;
 import com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
+import com.android.systemui.qs.UserSettingObserver;
 import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.settings.DisplayTrackerImpl;
 import com.android.systemui.settings.UserTracker;
+import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.commandline.CommandRegistry;
 import com.android.systemui.statusbar.events.PrivacyDotViewController;
 import com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl;
@@ -88,9 +94,10 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.Pair;
 import kotlin.Unit;
+import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ScreenDecorations implements ConfigurationController.ConfigurationListener, Dumpable {
     private SettingsHelper.OnChangedCallback mAODStateSettingsCallback;
@@ -156,7 +163,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
     public final ScreenDecorations$$ExternalSyntheticLambda2 mFoldCallback = new FoldProvider.FoldCallback() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda2
         @Override // com.android.systemui.unfold.updates.FoldProvider.FoldCallback
         public final void onFoldUpdated(boolean z) {
-            PrivacyDotViewController privacyDotViewController = ScreenDecorations.this.mDotViewController;
+            PrivacyDotViewController privacyDotViewController = this.f$0.mDotViewController;
             if (privacyDotViewController != null) {
                 for (View view : ((PrivacyDotViewControllerImpl) privacyDotViewController).getViews()) {
                     view.clearAnimation();
@@ -174,16 +181,15 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
             LogLevel logLevel = LogLevel.DEBUG;
             ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(9);
             LogBuffer logBuffer = screenDecorationsLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             screenDecorations.mColorInversionSetting.setUserId(i);
             screenDecorations.updateColorInversion(screenDecorations.mColorInversionSetting.getValue());
         }
     };
     public final int mFaceScanningViewId = R.id.face_scanning_anim;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ScreenDecorations$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
@@ -217,14 +223,12 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ScreenDecorations$3, reason: invalid class name */
     public class AnonymousClass3 implements PrivacyDotViewController.CreateListener {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayCutoutView extends DisplayCutoutBaseView {
         public final Rect mBoundingRect;
         public final List mBounds;
@@ -304,22 +308,121 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
             invalidate();
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:44:0x008a  */
+        /* JADX WARN: Removed duplicated region for block: B:25:0x008a  */
+        /* JADX WARN: Removed duplicated region for block: B:47:0x0114  */
         @Override // com.android.systemui.DisplayCutoutBaseView
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public void updateCutout() {
-            /*
-                Method dump skipped, instructions count: 415
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.ScreenDecorations.DisplayCutoutView.updateCutout():void");
+            boolean zIsEmpty;
+            boolean z;
+            if (!isAttachedToWindow() || this.pendingConfigChange) {
+                return;
+            }
+            this.mPosition = ScreenDecorations.getBoundPositionFromRotation(this.mInitialPosition, this.mRotation);
+            requestLayout();
+            getDisplay().getDisplayInfo(this.displayInfo);
+            ((ArrayList) this.mBounds).clear();
+            this.mBoundingRect.setEmpty();
+            this.cutoutPath.reset();
+            Context context = getContext();
+            int i = 0;
+            boolean z2 = true;
+            if (DisplayCutout.getFillBuiltInDisplayCutout(context.getResources(), context.getDisplay().getUniqueId()) || this.isCameraProtectionEnabled) {
+                DisplayCutout displayCutout = this.displayInfo.displayCutout;
+                if (displayCutout != null) {
+                    int i2 = this.mPosition;
+                    if (i2 == 0) {
+                        zIsEmpty = displayCutout.getBoundingRectLeft().isEmpty();
+                    } else if (i2 == 1) {
+                        zIsEmpty = displayCutout.getBoundingRectTop().isEmpty();
+                    } else if (i2 == 3) {
+                        zIsEmpty = displayCutout.getBoundingRectBottom().isEmpty();
+                    } else {
+                        if (i2 == 2) {
+                            zIsEmpty = displayCutout.getBoundingRectRight().isEmpty();
+                        }
+                        z = false;
+                        if (z) {
+                            ((ArrayList) this.mBounds).addAll(this.displayInfo.displayCutout.getBoundingRects());
+                            Rect rect = this.mBoundingRect;
+                            DisplayCutout displayCutout2 = this.displayInfo.displayCutout;
+                            boundsFromDirection(getGravity(displayCutout2), rect, displayCutout2);
+                            if (this.isCameraProtectionEnabled) {
+                                int iCeil = (int) Math.ceil(this.cameraProtectionStrokeWidth / 2.0d);
+                                int i3 = this.mPosition;
+                                if (i3 == 0) {
+                                    this.mBoundingRect.right += iCeil;
+                                } else if (i3 == 1) {
+                                    this.mBoundingRect.bottom += iCeil;
+                                } else if (i3 == 2) {
+                                    this.mBoundingRect.left -= iCeil;
+                                } else if (i3 == 3) {
+                                    this.mBoundingRect.top -= iCeil;
+                                }
+                            }
+                            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+                            if (layoutParams instanceof FrameLayout.LayoutParams) {
+                                FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) layoutParams;
+                                int gravity = getGravity(this.displayInfo.displayCutout);
+                                if (layoutParams2.gravity != gravity) {
+                                    layoutParams2.gravity = gravity;
+                                    setLayoutParams(layoutParams2);
+                                }
+                            }
+                            Path cutoutPath = this.displayInfo.displayCutout.getCutoutPath();
+                            if (cutoutPath != null) {
+                                this.cutoutPath.set(cutoutPath);
+                            } else {
+                                this.cutoutPath.reset();
+                            }
+                            invalidate();
+                        } else {
+                            if (this.cutoutUtil.isUDCMainDisplay() && this.settingsHelper.isFillUDCDisplayCutoutEnabled()) {
+                                Path path = this.protectionPathOrig;
+                                Resources resources = getResources();
+                                DisplayInfo displayInfo = this.displayInfo;
+                                int i4 = this.initialDisplayWidth;
+                                int i5 = this.initialDisplayDensity;
+                                int i6 = displayInfo.logicalWidth;
+                                int i7 = displayInfo.logicalHeight;
+                                int i8 = displayInfo.rotation;
+                                if (i8 != 1 && i8 != 3) {
+                                    z2 = false;
+                                }
+                                int i9 = z2 ? i7 : i6;
+                                if (!z2) {
+                                    i6 = i7;
+                                }
+                                path.set(DisplayCutout.pathFromResourcesForUDC(resources, displayInfo.uniqueId, i9, i6, i4 <= 0 ? DisplayMetrics.DENSITY_DEVICE_STABLE : (i5 * i9) / i4, false));
+                                RectF rectF = this.protectionRectOrig;
+                                Path path2 = this.protectionPathOrig;
+                                RectF rectF2 = new RectF();
+                                path2.computeBounds(rectF2, false);
+                                rectF.set(new Rect(MathKt__MathJVMKt.roundToInt(rectF2.left), MathKt__MathJVMKt.roundToInt(rectF2.top), MathKt__MathJVMKt.roundToInt(rectF2.right), MathKt__MathJVMKt.roundToInt(rectF2.bottom)));
+                                invalidate();
+                            } else {
+                                i = 8;
+                            }
+                        }
+                    }
+                    z = !zIsEmpty;
+                    if (z) {
+                    }
+                } else {
+                    z = false;
+                    if (z) {
+                    }
+                }
+            }
+            if ((this instanceof FaceScanningOverlay) || i == getVisibility()) {
+                return;
+            }
+            setVisibility(i);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RestartingPreDrawListener implements ViewTreeObserver.OnPreDrawListener {
         public final Point mTargetDisplaySize;
         public final int mTargetRotation;
@@ -330,7 +433,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
 
         @Override // android.view.ViewTreeObserver.OnPreDrawListener
-        public final boolean onPreDraw() {
+        public final boolean onPreDraw() throws Throwable {
             this.mView.getViewTreeObserver().removeOnPreDrawListener(this);
             int i = this.mTargetRotation;
             ScreenDecorations screenDecorations = ScreenDecorations.this;
@@ -351,7 +454,6 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ValidatingPreDrawListener implements ViewTreeObserver.OnPreDrawListener {
         public final View mView;
 
@@ -379,9 +481,9 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         if (!uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE)) || !screenDecorations.hasOverlays() || !screenDecorations.mRoundedCornerFactory.getHasProviders() || (overlayWindowArr = screenDecorations.mOverlays) == null || (overlayWindow = overlayWindowArr[1]) == null || (view = overlayWindow.getView(R.id.rounded_corner_cover)) == null) {
             return;
         }
-        boolean isAODShown = screenDecorations.mSettingsHelper.isAODShown();
+        boolean zIsAODShown = screenDecorations.mSettingsHelper.isAODShown();
         DelayableExecutor delayableExecutor = screenDecorations.mExecutor;
-        if (isAODShown && screenDecorations.mTintColor == -1) {
+        if (zIsAODShown && screenDecorations.mTintColor == -1) {
             final int i = 0;
             delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
@@ -423,7 +525,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
     }
 
     /* renamed from: $r8$lambda$Ko-NSRBrMuoZsUyWIX90PQvGYvA, reason: not valid java name */
-    public static void m997$r8$lambda$KoNSRBrMuoZsUyWIX90PQvGYvA(ScreenDecorations screenDecorations) {
+    public static void m999$r8$lambda$KoNSRBrMuoZsUyWIX90PQvGYvA(ScreenDecorations screenDecorations) throws Throwable {
         Trace.beginSection("ScreenDecorations#onConfigurationChanged");
         screenDecorations.mContext.getDisplay().getDisplayInfo(screenDecorations.mDisplayInfo);
         if (!(screenDecorations.mIndicatorCutoutUtil.isUDCModel && screenDecorations.mSettingsHelper.isFillUDCDisplayCutoutEnabled()) && displaySizeChanged(screenDecorations.mDisplaySize, screenDecorations.mDisplayInfo)) {
@@ -440,11 +542,11 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
             LogLevel logLevel = LogLevel.INFO;
             ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(8);
             LogBuffer logBuffer = screenDecorationsLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
             logMessageImpl.int2 = i2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         screenDecorations.setupDecorations();
         if (screenDecorations.mOverlays != null) {
@@ -575,73 +677,70 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "unknown bound position: "));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x00af  */
     @Override // com.android.systemui.Dumpable
     @NeverCompile
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        boolean z;
         printWriter.println("ScreenDecorations state:");
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        printWriterAsIndenting.increaseIndent();
         StringBuilder sb = new StringBuilder("DEBUG_DISABLE_SCREEN_DECORATIONS:");
-        boolean z2 = DEBUG_DISABLE_SCREEN_DECORATIONS;
-        sb.append(z2);
-        asIndenting.println(sb.toString());
-        if (z2) {
+        boolean z = DEBUG_DISABLE_SCREEN_DECORATIONS;
+        sb.append(z);
+        printWriterAsIndenting.println(sb.toString());
+        if (z) {
             return;
         }
-        asIndenting.println("mDebug:" + this.mDebug);
-        asIndenting.println("mIsPrivacyDotEnabled:" + this.mDotFactory.getHasProviders());
-        asIndenting.println("shouldOptimizeOverlayVisibility:false");
+        printWriterAsIndenting.println("mDebug:" + this.mDebug);
+        printWriterAsIndenting.println("mIsPrivacyDotEnabled:" + this.mDotFactory.getHasProviders());
+        printWriterAsIndenting.println("shouldOptimizeOverlayVisibility:false");
         FaceScanningProviderFactoryImpl faceScanningProviderFactoryImpl = (FaceScanningProviderFactoryImpl) this.mFaceScanningFactory;
         boolean hasProviders = faceScanningProviderFactoryImpl.getHasProviders();
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("supportsShowingFaceScanningAnim:", hasProviders, asIndenting);
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("supportsShowingFaceScanningAnim:", hasProviders, printWriterAsIndenting);
         if (hasProviders) {
-            asIndenting.increaseIndent();
+            printWriterAsIndenting.increaseIndent();
             StringBuilder sb2 = new StringBuilder("canShowFaceScanningAnim:");
             sb2.append(faceScanningProviderFactoryImpl.getHasProviders() && faceScanningProviderFactoryImpl.keyguardUpdateMonitor.isFaceEnabledAndEnrolled());
-            asIndenting.println(sb2.toString());
+            printWriterAsIndenting.println(sb2.toString());
             StringBuilder sb3 = new StringBuilder("shouldShowFaceScanningAnim (at time dump was taken):");
             if (faceScanningProviderFactoryImpl.getHasProviders()) {
                 KeyguardUpdateMonitor keyguardUpdateMonitor = faceScanningProviderFactoryImpl.keyguardUpdateMonitor;
-                if (keyguardUpdateMonitor.isFaceEnabledAndEnrolled() && (keyguardUpdateMonitor.isFaceDetectionRunning() || faceScanningProviderFactoryImpl.authController.isShowing())) {
-                    z = true;
-                    sb3.append(z);
-                    asIndenting.println(sb3.toString());
-                    asIndenting.decreaseIndent();
-                }
+                boolean z2 = keyguardUpdateMonitor.isFaceEnabledAndEnrolled() && (keyguardUpdateMonitor.isFaceDetectionRunning() || faceScanningProviderFactoryImpl.authController.isShowing());
+                sb3.append(z2);
+                printWriterAsIndenting.println(sb3.toString());
+                printWriterAsIndenting.decreaseIndent();
             }
-            z = false;
-            sb3.append(z);
-            asIndenting.println(sb3.toString());
-            asIndenting.decreaseIndent();
         }
         FaceScanningOverlay faceScanningOverlay = (FaceScanningOverlay) getOverlayView(this.mFaceScanningViewId);
         if (faceScanningOverlay != null) {
-            faceScanningOverlay.dump(asIndenting);
+            faceScanningOverlay.dump(printWriterAsIndenting);
         }
-        asIndenting.println("mPendingConfigChange:" + this.mPendingConfigChange);
+        printWriterAsIndenting.println("mPendingConfigChange:" + this.mPendingConfigChange);
         if (this.mHwcScreenDecorationSupport != null) {
-            asIndenting.increaseIndent();
-            asIndenting.println("mHwcScreenDecorationSupport:");
-            asIndenting.increaseIndent();
-            asIndenting.println("format=" + PixelFormat.formatToString(this.mHwcScreenDecorationSupport.format));
+            printWriterAsIndenting.increaseIndent();
+            printWriterAsIndenting.println("mHwcScreenDecorationSupport:");
+            printWriterAsIndenting.increaseIndent();
+            printWriterAsIndenting.println("format=" + PixelFormat.formatToString(this.mHwcScreenDecorationSupport.format));
             StringBuilder sb4 = new StringBuilder("alphaInterpretation=");
             int i = this.mHwcScreenDecorationSupport.alphaInterpretation;
             sb4.append(i != 0 ? i != 1 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown: ") : "MASK" : "COVERAGE");
-            asIndenting.println(sb4.toString());
-            asIndenting.decreaseIndent();
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.println(sb4.toString());
+            printWriterAsIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
         } else {
-            asIndenting.increaseIndent();
+            printWriterAsIndenting.increaseIndent();
             printWriter.println("mHwcScreenDecorationSupport: null");
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
         }
         if (this.mScreenDecorHwcLayer != null) {
-            asIndenting.increaseIndent();
-            this.mScreenDecorHwcLayer.dump(asIndenting);
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.increaseIndent();
+            this.mScreenDecorHwcLayer.dump(printWriterAsIndenting);
+            printWriterAsIndenting.decreaseIndent();
         } else {
-            asIndenting.println("mScreenDecorHwcLayer: null");
+            printWriterAsIndenting.println("mScreenDecorHwcLayer: null");
         }
         if (this.mOverlays != null) {
             StringBuilder sb5 = new StringBuilder("mOverlays(left,top,right,bottom)=(");
@@ -653,7 +752,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
             sb5.append(",");
             sb5.append(this.mOverlays[3] != null);
             sb5.append(")");
-            asIndenting.println(sb5.toString());
+            printWriterAsIndenting.println(sb5.toString());
             for (int i2 = 0; i2 < 4; i2++) {
                 OverlayWindow overlayWindow = this.mOverlays[i2];
                 if (overlayWindow != null) {
@@ -834,42 +933,68 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
 
     public final void initOverlay(final OverlayWindow overlayWindow, List list) {
         overlayWindow.getClass();
-        if (list.size() == overlayWindow.viewProviderMap.size()) {
-            List list2 = list;
-            if (!(list2 instanceof Collection) || !list2.isEmpty()) {
-                Iterator it = list2.iterator();
-                while (it.hasNext()) {
-                    if (overlayWindow.getView(((DecorProvider) it.next()).getViewId()) != null) {
+        if (list.size() != overlayWindow.viewProviderMap.size()) {
+            list.forEach(new Consumer() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda12
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) {
+                    View view;
+                    ScreenDecorations screenDecorations = this.f$0;
+                    OverlayWindow overlayWindow2 = overlayWindow;
+                    DecorProvider decorProvider = (DecorProvider) obj;
+                    boolean z = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
+                    screenDecorations.getClass();
+                    if (overlayWindow2.getView(decorProvider.getViewId()) != null) {
+                        return;
                     }
-                }
-            }
-            overlayWindow.rootView.setVisibility(0);
-        }
-        list.forEach(new Consumer() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda12
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                View view;
-                ScreenDecorations screenDecorations = ScreenDecorations.this;
-                OverlayWindow overlayWindow2 = overlayWindow;
-                DecorProvider decorProvider = (DecorProvider) obj;
-                boolean z = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
-                screenDecorations.getClass();
-                if (overlayWindow2.getView(decorProvider.getViewId()) != null) {
-                    return;
-                }
-                int viewId = decorProvider.getViewId();
-                OverlayWindow[] overlayWindowArr = screenDecorations.mOverlays;
-                if (overlayWindowArr != null) {
-                    for (OverlayWindow overlayWindow3 : overlayWindowArr) {
-                        if (overlayWindow3 != null && (view = overlayWindow3.getView(viewId)) != null) {
-                            overlayWindow3.rootView.removeView(view);
-                            overlayWindow3.viewProviderMap.remove(Integer.valueOf(viewId));
+                    int viewId = decorProvider.getViewId();
+                    OverlayWindow[] overlayWindowArr = screenDecorations.mOverlays;
+                    if (overlayWindowArr != null) {
+                        for (OverlayWindow overlayWindow3 : overlayWindowArr) {
+                            if (overlayWindow3 != null && (view = overlayWindow3.getView(viewId)) != null) {
+                                overlayWindow3.rootView.removeView(view);
+                                overlayWindow3.viewProviderMap.remove(Integer.valueOf(viewId));
+                            }
                         }
                     }
+                    overlayWindow2.viewProviderMap.put(Integer.valueOf(decorProvider.getViewId()), new Pair(decorProvider.inflateView(overlayWindow2.context, overlayWindow2.rootView, screenDecorations.mRotation, screenDecorations.mTintColor), decorProvider));
                 }
-                overlayWindow2.viewProviderMap.put(Integer.valueOf(decorProvider.getViewId()), new Pair(decorProvider.inflateView(overlayWindow2.context, overlayWindow2.rootView, screenDecorations.mRotation, screenDecorations.mTintColor), decorProvider));
+            });
+            break;
+        }
+        List list2 = list;
+        if (!(list2 instanceof Collection) || !list2.isEmpty()) {
+            Iterator it = list2.iterator();
+            while (it.hasNext()) {
+                if (overlayWindow.getView(((DecorProvider) it.next()).getViewId()) == null) {
+                    list.forEach(new Consumer() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda12
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            View view;
+                            ScreenDecorations screenDecorations = this.f$0;
+                            OverlayWindow overlayWindow2 = overlayWindow;
+                            DecorProvider decorProvider = (DecorProvider) obj;
+                            boolean z = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
+                            screenDecorations.getClass();
+                            if (overlayWindow2.getView(decorProvider.getViewId()) != null) {
+                                return;
+                            }
+                            int viewId = decorProvider.getViewId();
+                            OverlayWindow[] overlayWindowArr = screenDecorations.mOverlays;
+                            if (overlayWindowArr != null) {
+                                for (OverlayWindow overlayWindow3 : overlayWindowArr) {
+                                    if (overlayWindow3 != null && (view = overlayWindow3.getView(viewId)) != null) {
+                                        overlayWindow3.rootView.removeView(view);
+                                        overlayWindow3.viewProviderMap.remove(Integer.valueOf(viewId));
+                                    }
+                                }
+                            }
+                            overlayWindow2.viewProviderMap.put(Integer.valueOf(decorProvider.getViewId()), new Pair(decorProvider.inflateView(overlayWindow2.context, overlayWindow2.rootView, screenDecorations.mRotation, screenDecorations.mTintColor), decorProvider));
+                        }
+                    });
+                    break;
+                }
             }
-        });
+        }
         overlayWindow.rootView.setVisibility(0);
     }
 
@@ -972,162 +1097,312 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:140:0x0286, code lost:
-    
-        if (r14.mHwcScreenDecorationSupport == null) goto L136;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:142:0x028b, code lost:
-    
-        if (r14.mIsDotViewVisible == false) goto L205;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:144:0x0291, code lost:
-    
-        if (r2.getHasProviders() == false) goto L206;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:150:0x0280, code lost:
-    
-        if (r11.shouldFillUDCDisplayCutout == false) goto L132;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:151:0x0282, code lost:
-    
-        if (r10 != 1) goto L132;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x02a7  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x02e1  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02e5  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x0284  */
+    /* JADX WARN: Removed duplicated region for block: B:132:0x0289  */
+    /* JADX WARN: Removed duplicated region for block: B:136:0x0293  */
     /* JADX WARN: Type inference failed for: r5v6, types: [com.android.systemui.ScreenDecorations$7] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void setupDecorations() {
-        /*
-            Method dump skipped, instructions count: 996
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.ScreenDecorations.setupDecorations():void");
+        Object next;
+        Integer num;
+        PrivacyDotViewController privacyDotViewController;
+        View overlayView;
+        View overlayView2;
+        View overlayView3;
+        OverlayWindow[] overlayWindowArr;
+        OverlayWindow overlayWindow;
+        ScreenDecorHwcLayer screenDecorHwcLayer;
+        ScreenDecorations screenDecorations;
+        Trace.beginSection("ScreenDecorations#setupDecorations");
+        boolean zHasRoundedCorners = hasRoundedCorners();
+        PrivacyDotDecorProviderFactory privacyDotDecorProviderFactory = this.mDotFactory;
+        if (zHasRoundedCorners || shouldDrawCutout() || privacyDotDecorProviderFactory.getHasProviders() || ((FaceScanningProviderFactoryImpl) this.mFaceScanningFactory).getHasProviders()) {
+            List<DecorProvider> providers = getProviders(this.mHwcScreenDecorationSupport != null);
+            if (this.mOverlays != null) {
+                int[] array = providers.stream().mapToInt(new ScreenDecorations$$ExternalSyntheticLambda15()).toArray();
+                for (OverlayWindow overlayWindow2 : this.mOverlays) {
+                    if (overlayWindow2 != null) {
+                        Iterator it = CollectionsKt___CollectionsKt.toList(((LinkedHashMap) overlayWindow2.viewProviderMap).keySet()).iterator();
+                        while (it.hasNext()) {
+                            int iIntValue = ((Number) it.next()).intValue();
+                            if (array == null || ArraysKt___ArraysKt.indexOf(iIntValue, array) < 0) {
+                                View view = overlayWindow2.getView(iIntValue);
+                                if (view != null) {
+                                    overlayWindow2.rootView.removeView(view);
+                                    overlayWindow2.viewProviderMap.remove(Integer.valueOf(iIntValue));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.mHwcScreenDecorationSupport == null || DeviceType.isFactoryBinary() || this.mIsSmartViewFitToActiveDisplay || !(hasRoundedCorners() || shouldDrawCutout())) {
+                removeHwcOverlay();
+            } else if (this.mScreenDecorHwcWindow == null) {
+                this.mScreenDecorHwcWindow = (ViewGroup) LayoutInflater.from(this.mContext).inflate(R.layout.screen_decor_hwc_layer, (ViewGroup) null);
+                if (isCoverDisplay().booleanValue()) {
+                    this.mScreenDecorHwcLayer = new CoverScreenDecorHwcLayer(this.mContext, this.mHwcScreenDecorationSupport, this.mDebug);
+                } else {
+                    this.mScreenDecorHwcLayer = new ScreenDecorHwcLayer(this.mContext, this.mHwcScreenDecorationSupport, this.mDebug);
+                }
+                this.mScreenDecorHwcWindow.addView(this.mScreenDecorHwcLayer, new FrameLayout.LayoutParams(-1, -1, 8388659));
+                WindowManager windowManager = this.mWindowManager;
+                if (windowManager != null) {
+                    windowManager.addView(this.mScreenDecorHwcWindow, getHwcWindowLayoutParams());
+                }
+                updateHwLayerRoundedCornerExistAndSize();
+                updateHwLayerRoundedCornerDrawable();
+                boolean z = this.mDebug;
+                if (z && (screenDecorHwcLayer = this.mScreenDecorHwcLayer) != null && z) {
+                    screenDecorHwcLayer.isCameraProtectionEnabled = this.mDebugCutoutFactory.isCameraProtectionEnabled;
+                    screenDecorHwcLayer.updateCutout();
+                    ScreenDecorHwcLayer screenDecorHwcLayer2 = this.mScreenDecorHwcLayer;
+                    int i = this.mDebugCutoutFactory.cameraProtectionStrokeWidth;
+                    screenDecorHwcLayer2.cameraProtectionStrokeWidth = i;
+                    screenDecorHwcLayer2.paintForCameraProtection.setStrokeWidth(i);
+                    screenDecorHwcLayer2.updateCutout();
+                }
+                this.mScreenDecorHwcWindow.getViewTreeObserver().addOnPreDrawListener(new ValidatingPreDrawListener(this.mScreenDecorHwcWindow));
+            }
+            boolean[] zArr = new boolean[4];
+            while (true) {
+                if (providers.isEmpty()) {
+                    num = null;
+                } else {
+                    Iterator<T> it2 = providers.iterator();
+                    while (true) {
+                        if (it2.hasNext()) {
+                            next = it2.next();
+                            if (((DecorProvider) next).getAlignedBounds().size() == 1) {
+                                break;
+                            }
+                        } else {
+                            next = null;
+                            break;
+                        }
+                    }
+                    DecorProvider decorProvider = (DecorProvider) next;
+                    if (decorProvider != null) {
+                        num = (Integer) decorProvider.getAlignedBounds().get(0);
+                    } else {
+                        int[] iArr = new int[4];
+                        iArr[0] = 0;
+                        iArr[1] = 0;
+                        iArr[2] = 0;
+                        iArr[3] = 0;
+                        Iterator<DecorProvider> it3 = providers.iterator();
+                        while (it3.hasNext()) {
+                            Iterator it4 = it3.next().getAlignedBounds().iterator();
+                            while (it4.hasNext()) {
+                                int iIntValue2 = ((Number) it4.next()).intValue();
+                                iArr[iIntValue2] = iArr[iIntValue2] + 1;
+                            }
+                        }
+                        Integer[] numArr = {1, 3, 0, 2};
+                        int i2 = 0;
+                        Integer num2 = null;
+                        for (int i3 = 0; i3 < 4; i3++) {
+                            Integer num3 = numArr[i3];
+                            int i4 = iArr[num3.intValue()];
+                            if (i4 > i2) {
+                                num2 = num3;
+                                i2 = i4;
+                            }
+                        }
+                        num = num2;
+                    }
+                }
+                privacyDotViewController = this.mDotViewController;
+                if (num == null) {
+                    break;
+                }
+                ArrayList arrayList = new ArrayList();
+                ArrayList arrayList2 = new ArrayList();
+                for (Object obj : providers) {
+                    if (((DecorProvider) obj).getAlignedBounds().contains(num)) {
+                        arrayList.add(obj);
+                    } else {
+                        arrayList2.add(obj);
+                    }
+                }
+                Pair pair = new Pair(arrayList, arrayList2);
+                List<DecorProvider> list = (List) pair.getSecond();
+                int iIntValue3 = num.intValue();
+                if (isCoverDisplay().booleanValue()) {
+                    if (iIntValue3 == 1 && (this.mRoundedCornerFactory.getHasProviders() || privacyDotDecorProviderFactory.getHasProviders())) {
+                        zArr[num.intValue()] = true;
+                        int iIntValue4 = num.intValue();
+                        List list2 = (List) pair.getFirst();
+                        if (this.mOverlays == null) {
+                            this.mOverlays = new OverlayWindow[4];
+                            this.mContext.getDisplay().getDisplayInfo(this.mDisplayInfo);
+                            DisplayInfo displayInfo = this.mDisplayInfo;
+                            this.mRotation = displayInfo.rotation;
+                            this.mDisplaySize.x = displayInfo.getNaturalWidth();
+                            this.mDisplaySize.y = this.mDisplayInfo.getNaturalHeight();
+                            this.mDisplayCutout = this.mDisplayInfo.displayCutout;
+                            ((PrivacyDotViewControllerImpl) privacyDotViewController).setNewRotation(this.mRotation);
+                        }
+                        OverlayWindow[] overlayWindowArr2 = this.mOverlays;
+                        OverlayWindow overlayWindow3 = overlayWindowArr2[iIntValue4];
+                        if (overlayWindow3 != null) {
+                            initOverlay(overlayWindow3, list2);
+                        } else {
+                            overlayWindowArr2[iIntValue4] = new OverlayWindow(this.mContext);
+                            initOverlay(this.mOverlays[iIntValue4], list2);
+                            RegionInterceptingFrameLayout regionInterceptingFrameLayout = this.mOverlays[iIntValue4].rootView;
+                            regionInterceptingFrameLayout.setSystemUiVisibility(256);
+                            regionInterceptingFrameLayout.setForceDarkAllowed(false);
+                            WindowManager windowManager2 = this.mWindowManager;
+                            if (windowManager2 != null) {
+                                windowManager2.addView(regionInterceptingFrameLayout, getWindowLayoutParams(iIntValue4));
+                            }
+                            regionInterceptingFrameLayout.getRootView().getViewTreeObserver().addOnPreDrawListener(new ValidatingPreDrawListener(regionInterceptingFrameLayout.getRootView()));
+                        }
+                    }
+                } else if (!hasRoundedCorners() || this.mHwcScreenDecorationSupport != null) {
+                    DisplayCutout displayCutout = this.mDisplayCutout;
+                    Rect[] boundingRectsAll = displayCutout == null ? null : displayCutout.getBoundingRectsAll();
+                    int boundPositionFromRotation = getBoundPositionFromRotation(iIntValue3, this.mRotation);
+                    if (!shouldDrawCutout() || boundingRectsAll == null || boundingRectsAll[boundPositionFromRotation].isEmpty()) {
+                        CutoutDecorProviderFactory cutoutDecorProviderFactory = this.mCutoutFactory;
+                        if ((cutoutDecorProviderFactory.isCameraProtectionVisible || cutoutDecorProviderFactory.shouldFillUDCDisplayCutout) && iIntValue3 == 1) {
+                            if (this.mHwcScreenDecorationSupport != null) {
+                                if (!this.mIsDotViewVisible || !privacyDotDecorProviderFactory.getHasProviders()) {
+                                }
+                            }
+                        }
+                    }
+                }
+                providers = list;
+            }
+            for (int i5 = 0; i5 < 4; i5++) {
+                if (!zArr[i5] && (overlayWindowArr = this.mOverlays) != null && (overlayWindow = overlayWindowArr[i5]) != null) {
+                    WindowManager windowManager3 = this.mWindowManager;
+                    if (windowManager3 != null) {
+                        windowManager3.removeViewImmediate(overlayWindow.rootView);
+                    }
+                    this.mOverlays[i5] = null;
+                }
+            }
+            ((PrivacyDotViewControllerImpl) privacyDotViewController).getClass();
+            View overlayView4 = getOverlayView(R.id.privacy_dot_top_left_container);
+            if (overlayView4 != null && (overlayView = getOverlayView(R.id.privacy_dot_top_right_container)) != null && (overlayView2 = getOverlayView(R.id.privacy_dot_bottom_left_container)) != null && (overlayView3 = getOverlayView(R.id.privacy_dot_bottom_right_container)) != null) {
+                privacyDotViewController.initialize(overlayView4, overlayView, overlayView2, overlayView3);
+            }
+        } else {
+            removeAllOverlays();
+            removeHwcOverlay();
+        }
+        boolean zHasOverlays = hasOverlays();
+        UserTracker.Callback callback = this.mUserChangedCallback;
+        UserTracker userTracker = this.mUserTracker;
+        if (!zHasOverlays && this.mScreenDecorHwcWindow == null) {
+            AnonymousClass7 anonymousClass7 = this.mColorInversionSetting;
+            if (anonymousClass7 != null) {
+                anonymousClass7.setListening(false);
+            }
+            ((UserTrackerImpl) userTracker).removeCallback(callback);
+            this.mIsRegistered = false;
+        } else if (!this.mIsRegistered) {
+            AnonymousClass7 anonymousClass72 = this.mColorInversionSetting;
+            if (anonymousClass72 == null) {
+                screenDecorations = this;
+                screenDecorations.mColorInversionSetting = new UserSettingObserver(this.mSecureSettings, this.mHandler, SettingsHelper.INDEX_ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, ((UserTrackerImpl) userTracker).getUserId()) { // from class: com.android.systemui.ScreenDecorations.7
+                    @Override // com.android.systemui.qs.UserSettingObserver
+                    public final void handleValueChanged(int i6, boolean z2) {
+                        ScreenDecorations screenDecorations2 = ScreenDecorations.this;
+                        boolean z3 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
+                        screenDecorations2.updateColorInversion(i6);
+                    }
+                };
+            } else {
+                screenDecorations = this;
+                int i6 = anonymousClass72.mUserId;
+                UserTrackerImpl userTrackerImpl = (UserTrackerImpl) userTracker;
+                if (i6 != userTrackerImpl.getUserId()) {
+                    screenDecorations.mColorInversionSetting.setUserId(userTrackerImpl.getUserId());
+                }
+            }
+            screenDecorations.mColorInversionSetting.setListening(true);
+            screenDecorations.mColorInversionSetting.onChange(false);
+            screenDecorations.updateColorInversion(screenDecorations.mColorInversionSetting.getValue());
+            ((UserTrackerImpl) userTracker).addCallback(callback, screenDecorations.mExecutor);
+            screenDecorations.mIsRegistered = true;
+        }
+        Trace.endSection();
     }
 
     public final boolean shouldDrawCutout() {
         return this.mDebug ? this.mHwcScreenDecorationSupport != null ? this.mDebugCutoutFactory.getHasProviders() || this.mDebugCutoutFactory.isCameraProtectionEnabled : this.mDebugCutoutFactory.getHasProviders() : this.mCutoutFactory.getHasProviders();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0028, code lost:
-    
-        if (r14.authController.isShowing() != false) goto L12;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0083  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x002a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void showCameraProtection(android.graphics.Path r14, android.graphics.Rect r15) {
-        /*
-            r13 = this;
-            boolean r14 = r13.mDebug
-            java.lang.String r0 = "ScreenDecorationsLog"
-            r1 = 0
-            com.android.systemui.log.ScreenDecorationsLogger r2 = r13.mLogger
-            r3 = 1
-            if (r14 != 0) goto L2a
-            com.android.systemui.decor.FaceScanningProviderFactory r14 = r13.mFaceScanningFactory
-            com.android.systemui.decor.FaceScanningProviderFactoryImpl r14 = (com.android.systemui.decor.FaceScanningProviderFactoryImpl) r14
-            boolean r4 = r14.getHasProviders()
-            if (r4 == 0) goto L5c
-            com.android.keyguard.KeyguardUpdateMonitor r4 = r14.keyguardUpdateMonitor
-            boolean r5 = r4.isFaceEnabledAndEnrolled()
-            if (r5 == 0) goto L5c
-            boolean r4 = r4.isFaceDetectionRunning()
-            if (r4 != 0) goto L2a
-            com.android.systemui.biometrics.AuthController r14 = r14.authController
-            boolean r14 = r14.isShowing()
-            if (r14 == 0) goto L5c
-        L2a:
-            int r14 = r13.mFaceScanningViewId
-            android.view.View r4 = r13.getOverlayView(r14)
-            com.android.systemui.ScreenDecorations$DisplayCutoutView r4 = (com.android.systemui.ScreenDecorations.DisplayCutoutView) r4
-            if (r4 == 0) goto L5c
-            r2.getClass()
-            com.android.systemui.log.core.LogLevel r5 = com.android.systemui.log.core.LogLevel.DEBUG
-            com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0 r6 = new com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0
-            r7 = 2
-            r6.<init>(r7)
-            com.android.systemui.log.LogBuffer r2 = r2.logBuffer
-            com.android.systemui.log.core.LogMessage r0 = r2.obtain(r0, r5, r6, r1)
-            java.lang.String r15 = r15.toShortString()
-            r1 = r0
-            com.android.systemui.log.LogMessageImpl r1 = (com.android.systemui.log.LogMessageImpl) r1
-            r1.str1 = r15
-            r2.commit(r0)
-            r4.enableShowProtection(r3)
-            android.view.View r14 = r4.findViewById(r14)
-            r13.updateOverlayWindowVisibilityIfViewExists(r14)
-            return
-        L5c:
-            com.android.systemui.ScreenDecorHwcLayer r14 = r13.mScreenDecorHwcLayer
-            if (r14 == 0) goto L83
-            r2.getClass()
-            com.android.systemui.log.core.LogLevel r14 = com.android.systemui.log.core.LogLevel.DEBUG
-            com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0 r4 = new com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0
-            r5 = 0
-            r4.<init>(r5)
-            com.android.systemui.log.LogBuffer r2 = r2.logBuffer
-            com.android.systemui.log.core.LogMessage r14 = r2.obtain(r0, r14, r4, r1)
-            java.lang.String r15 = r15.toShortString()
-            r0 = r14
-            com.android.systemui.log.LogMessageImpl r0 = (com.android.systemui.log.LogMessageImpl) r0
-            r0.str1 = r15
-            r2.commit(r14)
-            com.android.systemui.ScreenDecorHwcLayer r13 = r13.mScreenDecorHwcLayer
-            r13.enableShowProtection(r3)
-            return
-        L83:
-            int[] r14 = com.android.systemui.ScreenDecorations.DISPLAY_CUTOUT_IDS
-            int r4 = r14.length
-            r5 = 0
-            r6 = r5
-        L88:
-            if (r5 >= r4) goto Lbe
-            r7 = r14[r5]
-            android.view.View r8 = r13.getOverlayView(r7)
-            boolean r9 = r8 instanceof com.android.systemui.ScreenDecorations.DisplayCutoutView
-            if (r9 != 0) goto L95
-            goto Lbb
-        L95:
-            int r6 = r6 + 1
-            com.android.systemui.ScreenDecorations$DisplayCutoutView r8 = (com.android.systemui.ScreenDecorations.DisplayCutoutView) r8
-            r2.getClass()
-            com.android.systemui.log.core.LogLevel r9 = com.android.systemui.log.core.LogLevel.DEBUG
-            com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0 r10 = new com.android.systemui.log.ScreenDecorationsLogger$$ExternalSyntheticLambda0
-            r11 = 5
-            r10.<init>(r11)
-            com.android.systemui.log.LogBuffer r11 = r2.logBuffer
-            com.android.systemui.log.core.LogMessage r9 = r11.obtain(r0, r9, r10, r1)
-            java.lang.String r10 = r15.toShortString()
-            r12 = r9
-            com.android.systemui.log.LogMessageImpl r12 = (com.android.systemui.log.LogMessageImpl) r12
-            r12.str1 = r10
-            r12.int1 = r7
-            r11.commit(r9)
-            r8.enableShowProtection(r3)
-        Lbb:
-            int r5 = r5 + 1
-            goto L88
-        Lbe:
-            if (r6 != 0) goto Lcc
-            r2.getClass()
-            com.android.systemui.log.core.LogLevel r13 = com.android.systemui.log.core.LogLevel.ERROR
-            java.lang.String r14 = "CutoutView not initialized showCameraProtection"
-            com.android.systemui.log.LogBuffer r15 = r2.logBuffer
-            com.android.systemui.log.LogBuffer.log$default(r15, r0, r13, r14)
-        Lcc:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.ScreenDecorations.showCameraProtection(android.graphics.Path, android.graphics.Rect):void");
+    public void showCameraProtection(Path path, Rect rect) {
+        boolean z = this.mDebug;
+        ScreenDecorationsLogger screenDecorationsLogger = this.mLogger;
+        if (!z) {
+            FaceScanningProviderFactoryImpl faceScanningProviderFactoryImpl = (FaceScanningProviderFactoryImpl) this.mFaceScanningFactory;
+            if (faceScanningProviderFactoryImpl.getHasProviders()) {
+                KeyguardUpdateMonitor keyguardUpdateMonitor = faceScanningProviderFactoryImpl.keyguardUpdateMonitor;
+                if (keyguardUpdateMonitor.isFaceEnabledAndEnrolled() && (keyguardUpdateMonitor.isFaceDetectionRunning() || faceScanningProviderFactoryImpl.authController.isShowing())) {
+                    int i = this.mFaceScanningViewId;
+                    DisplayCutoutView displayCutoutView = (DisplayCutoutView) getOverlayView(i);
+                    if (displayCutoutView != null) {
+                        screenDecorationsLogger.getClass();
+                        LogLevel logLevel = LogLevel.DEBUG;
+                        ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(2);
+                        LogBuffer logBuffer = screenDecorationsLogger.logBuffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = rect.toShortString();
+                        logBuffer.commit(logMessageObtain);
+                        displayCutoutView.enableShowProtection(true);
+                        updateOverlayWindowVisibilityIfViewExists(displayCutoutView.findViewById(i));
+                        return;
+                    }
+                }
+            }
+        }
+        if (this.mScreenDecorHwcLayer != null) {
+            screenDecorationsLogger.getClass();
+            LogLevel logLevel2 = LogLevel.DEBUG;
+            ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda02 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(0);
+            LogBuffer logBuffer2 = screenDecorationsLogger.logBuffer;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("ScreenDecorationsLog", logLevel2, screenDecorationsLogger$$ExternalSyntheticLambda02, null);
+            ((LogMessageImpl) logMessageObtain2).str1 = rect.toShortString();
+            logBuffer2.commit(logMessageObtain2);
+            this.mScreenDecorHwcLayer.enableShowProtection(true);
+            return;
+        }
+        int i2 = 0;
+        for (int i3 : DISPLAY_CUTOUT_IDS) {
+            View overlayView = getOverlayView(i3);
+            if (overlayView instanceof DisplayCutoutView) {
+                i2++;
+                screenDecorationsLogger.getClass();
+                LogLevel logLevel3 = LogLevel.DEBUG;
+                ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda03 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(5);
+                LogBuffer logBuffer3 = screenDecorationsLogger.logBuffer;
+                LogMessage logMessageObtain3 = logBuffer3.obtain("ScreenDecorationsLog", logLevel3, screenDecorationsLogger$$ExternalSyntheticLambda03, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain3;
+                logMessageImpl.str1 = rect.toShortString();
+                logMessageImpl.int1 = i3;
+                logBuffer3.commit(logMessageObtain3);
+                ((DisplayCutoutView) overlayView).enableShowProtection(true);
+            }
+        }
+        if (i2 == 0) {
+            screenDecorationsLogger.getClass();
+            LogBuffer.log$default(screenDecorationsLogger.logBuffer, "ScreenDecorationsLog", LogLevel.ERROR, "CutoutView not initialized showCameraProtection");
+        }
     }
 
-    public final void startOnScreenDecorationsThread() {
+    public final void startOnScreenDecorationsThread() throws Throwable {
         Trace.beginSection("ScreenDecorations#startOnScreenDecorationsThread");
         this.mWindowManager = (WindowManager) this.mContext.getSystemService(WindowManager.class);
         this.mContext.getDisplay().getDisplayInfo(this.mDisplayInfo);
@@ -1166,7 +1441,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         privacyDotViewControllerImpl.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.events.PrivacyDotViewControllerImpl$addSystemAnimationCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = PrivacyDotViewControllerImpl.this;
+                PrivacyDotViewControllerImpl privacyDotViewControllerImpl2 = privacyDotViewControllerImpl;
                 ((SystemStatusAnimationSchedulerImpl) privacyDotViewControllerImpl2.animationScheduler).addCallback(privacyDotViewControllerImpl2.systemStatusAnimationCallback);
             }
         });
@@ -1196,11 +1471,11 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
                         LogLevel logLevel = LogLevel.INFO;
                         ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda0 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(10);
                         LogBuffer logBuffer = screenDecorationsLogger.logBuffer;
-                        LogMessage obtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("ScreenDecorationsLog", logLevel, screenDecorationsLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.int1 = i3;
                         logMessageImpl.int2 = i2;
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                     }
                     if (!screenDecorations.mDisplaySize.equals(point)) {
                         Point point2 = screenDecorations.mDisplaySize;
@@ -1208,11 +1483,11 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
                         LogLevel logLevel2 = LogLevel.INFO;
                         ScreenDecorationsLogger$$ExternalSyntheticLambda0 screenDecorationsLogger$$ExternalSyntheticLambda02 = new ScreenDecorationsLogger$$ExternalSyntheticLambda0(1);
                         LogBuffer logBuffer2 = screenDecorationsLogger.logBuffer;
-                        LogMessage obtain2 = logBuffer2.obtain("ScreenDecorationsLog", logLevel2, screenDecorationsLogger$$ExternalSyntheticLambda02, null);
-                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("ScreenDecorationsLog", logLevel2, screenDecorationsLogger$$ExternalSyntheticLambda02, null);
+                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                         logMessageImpl2.str1 = point2.flattenToString();
                         logMessageImpl2.str2 = point.flattenToString();
-                        logBuffer2.commit(obtain2);
+                        logBuffer2.commit(logMessageObtain2);
                     }
                     if (screenDecorations.mOverlays != null) {
                         for (int i4 = 0; i4 < 4; i4++) {
@@ -1253,11 +1528,11 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
                     screenDecorations.setupDecorations();
                     return;
                 }
-                boolean semIsFitToActiveDisplay = screenDecorations.mDisplayManager.semIsFitToActiveDisplay();
-                if (screenDecorations.mIsSmartViewFitToActiveDisplay == semIsFitToActiveDisplay || screenDecorations.isCoverDisplay().booleanValue()) {
+                boolean zSemIsFitToActiveDisplay = screenDecorations.mDisplayManager.semIsFitToActiveDisplay();
+                if (screenDecorations.mIsSmartViewFitToActiveDisplay == zSemIsFitToActiveDisplay || screenDecorations.isCoverDisplay().booleanValue()) {
                     return;
                 }
-                screenDecorations.mIsSmartViewFitToActiveDisplay = semIsFitToActiveDisplay;
+                screenDecorations.mIsSmartViewFitToActiveDisplay = zSemIsFitToActiveDisplay;
                 screenDecorations.removeAllOverlays();
                 screenDecorations.setupDecorations();
             }
@@ -1268,7 +1543,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         this.mJavaAdapter.alwaysCollectFlow(((FacePropertyRepositoryImpl) this.mFacePropertyRepository).sensorLocation, new Consumer() { // from class: com.android.systemui.ScreenDecorations$$ExternalSyntheticLambda13
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ScreenDecorations.this.onFaceSensorLocationChanged((Point) obj);
+                this.f$0.onFaceSensorLocationChanged((Point) obj);
             }
         });
         if (isCoverDisplay().booleanValue()) {
@@ -1300,7 +1575,7 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
     }
 
-    public void updateConfiguration() {
+    public void updateConfiguration() throws Throwable {
         Object obj;
         Preconditions.checkState(this.mHandler.getLooper().getThread() == Thread.currentThread(), "must call on " + this.mHandler.getLooper().getThread() + ", but was " + Thread.currentThread());
         this.mContext.getDisplay().getDisplayInfo(this.mDisplayInfo);
@@ -1317,16 +1592,16 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
             synchronized (obj2) {
                 try {
                     obj = obj2;
-                } catch (Throwable th) {
-                    th = th;
-                    obj = obj2;
-                }
-                try {
-                    privacyDotViewControllerImpl.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, point, 524287));
-                    Unit unit = Unit.INSTANCE;
+                    try {
+                        privacyDotViewControllerImpl.setNextViewState(ViewState.copy$default(privacyDotViewControllerImpl.nextViewState, false, false, false, null, null, null, null, false, 0, 0, null, null, null, 0, 0, 0, 0, point, 524287));
+                        Unit unit = Unit.INSTANCE;
+                    } catch (Throwable th) {
+                        th = th;
+                        throw th;
+                    }
                 } catch (Throwable th2) {
                     th = th2;
-                    throw th;
+                    obj = obj2;
                 }
             }
         }
@@ -1470,7 +1745,6 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         this.mExecutor.execute(new ScreenDecorations$$ExternalSyntheticLambda4(this, view));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ScreenDecorations$4, reason: invalid class name */
     public class AnonymousClass4 implements ComponentCallbacks {
         public AnonymousClass4() {
@@ -1491,7 +1765,6 @@ public class ScreenDecorations implements ConfigurationController.ConfigurationL
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ScreenDecorations$6, reason: invalid class name */
     public class AnonymousClass6 implements ComponentCallbacks {
         public AnonymousClass6() {

@@ -9,7 +9,6 @@ import com.android.systemui.log.core.LogMessage;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +19,7 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -31,9 +30,9 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 int int1 = logMessage.getInt1();
                 boolean bool1 = logMessage.getBool1();
                 boolean bool2 = logMessage.getBool2();
-                StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onTrustChanged[user=", int1, "] wasTrusted=", bool1, " isNowTrusted=");
-                m.append(bool2);
-                return m.toString();
+                StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onTrustChanged[user=", int1, "] wasTrusted=", bool1, " isNowTrusted=");
+                sbM.append(bool2);
+                return sbM.toString();
             case 3:
                 return BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "stopListeningForFace(): currentFaceRunningState: ", ", reason: ", logMessage.getStr1());
             case 4:
@@ -49,11 +48,11 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 boolean bool12 = logMessage.getBool1();
                 boolean bool22 = logMessage.getBool2();
                 String str1 = logMessage.getStr1();
-                StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("trustUsuallyManaged changed for userId: ", int12, " old: ", bool12, ", new: ");
-                m2.append(bool22);
-                m2.append(" context: ");
-                m2.append(str1);
-                return m2.toString();
+                StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("trustUsuallyManaged changed for userId: ", int12, " old: ", bool12, ", new: ");
+                sbM2.append(bool22);
+                sbM2.append(" context: ");
+                sbM2.append(str1);
+                return sbM2.toString();
             case 9:
                 return KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("keepUnlockedOnFold changed to: ", logMessage.getBool1());
             case 10:
@@ -67,11 +66,11 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 boolean bool13 = logMessage.getBool1();
                 TrustGrantFlags trustGrantFlags = new TrustGrantFlags(logMessage.getInt1());
                 String str13 = logMessage.getStr1();
-                StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("trustGrantedWithFlags[user=", int2, "] newlyUnlocked=", bool13, " flags=");
-                m3.append(trustGrantFlags);
-                m3.append(" message=");
-                m3.append(str13);
-                return m3.toString();
+                StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("trustGrantedWithFlags[user=", int2, "] newlyUnlocked=", bool13, " flags=");
+                sbM3.append(trustGrantFlags);
+                sbM3.append(" message=");
+                sbM3.append(str13);
+                return sbM3.toString();
             case 13:
                 return MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "faceRunningState: ");
             case 14:

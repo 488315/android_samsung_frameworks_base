@@ -16,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubWidgetManager implements ServiceWatcher.ServiceListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class GlanceableHubWidgetManager implements ServiceWatcher.ServiceL
     public final Lazy serviceWatcher$delegate;
     public final Flow widgets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,25 +56,25 @@ public final class GlanceableHubWidgetManager implements ServiceWatcher.ServiceL
     }
 
     public final void runOnService(final Function1 function1) {
-        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManager$runOnService$1
+        this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManager.runOnService.1
             @Override // java.lang.Runnable
             public final void run() {
                 GlanceableHubWidgetManager glanceableHubWidgetManager = GlanceableHubWidgetManager.this;
                 int i = GlanceableHubWidgetManager.$r8$clinit;
                 ServiceWatcher serviceWatcher = (ServiceWatcher) glanceableHubWidgetManager.serviceWatcher$delegate.getValue();
                 final Function1 function12 = function1;
-                serviceWatcher.runOnBinder(new ServiceWatcher.BinderOperation() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManager$runOnService$1.1
+                serviceWatcher.runOnBinder(new ServiceWatcher.BinderOperation() { // from class: com.android.systemui.communal.widgets.GlanceableHubWidgetManager.runOnService.1.1
                     public final void run(IBinder iBinder) {
                         IGlanceableHubWidgetManagerService proxy;
-                        Function1 function13 = Function1.this;
+                        Function1 function13 = function12;
                         int i2 = IGlanceableHubWidgetManagerService.Stub.$r8$clinit;
                         if (iBinder == null) {
                             proxy = null;
                         } else {
-                            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
-                            proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IGlanceableHubWidgetManagerService)) ? new IGlanceableHubWidgetManagerService.Stub.Proxy(iBinder) : (IGlanceableHubWidgetManagerService) queryLocalInterface;
+                            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService");
+                            proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IGlanceableHubWidgetManagerService)) ? new IGlanceableHubWidgetManagerService.Stub.Proxy(iBinder) : (IGlanceableHubWidgetManagerService) iInterfaceQueryLocalInterface;
                         }
-                        function13.mo779invoke(proxy);
+                        function13.mo781invoke(proxy);
                     }
 
                     public final void onError(Throwable th) {

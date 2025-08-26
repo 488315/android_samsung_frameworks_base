@@ -352,41 +352,41 @@ public abstract class ForegroundServiceTypePolicy {
         @Override // android.app.ForegroundServiceTypePolicy.ForegroundServiceTypePermission
         public int checkPermission(Context context, int i, int i2, String str, boolean z) {
             VirtualDeviceManager virtualDeviceManager;
-            int checkPermission = checkPermission(context, this.mName, i, i2, str, z, 0);
-            if (checkPermission != 0 && PermissionManager.DEVICE_AWARE_PERMISSIONS.contains(this.mName) && (virtualDeviceManager = (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class)) != null) {
+            int iCheckPermission = checkPermission(context, this.mName, i, i2, str, z, 0);
+            if (iCheckPermission != 0 && PermissionManager.DEVICE_AWARE_PERMISSIONS.contains(this.mName) && (virtualDeviceManager = (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class)) != null) {
                 List<VirtualDevice> virtualDevices = virtualDeviceManager.getVirtualDevices();
                 int size = virtualDevices.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    int resolveDeviceIdForPermissionCheck = PermissionManager.resolveDeviceIdForPermissionCheck(context, virtualDevices.get(i3).getDeviceId(), this.mName);
-                    if (resolveDeviceIdForPermissionCheck != 0 && (checkPermission = checkPermission(context, this.mName, i, i2, str, z, resolveDeviceIdForPermissionCheck)) == 0) {
-                        return checkPermission;
+                    int iResolveDeviceIdForPermissionCheck = PermissionManager.resolveDeviceIdForPermissionCheck(context, virtualDevices.get(i3).getDeviceId(), this.mName);
+                    if (iResolveDeviceIdForPermissionCheck != 0 && (iCheckPermission = checkPermission(context, this.mName, i, i2, str, z, iResolveDeviceIdForPermissionCheck)) == 0) {
+                        return iCheckPermission;
                     }
                 }
             }
-            return checkPermission;
+            return iCheckPermission;
         }
 
         int checkPermission(Context context, String str, int i, int i2, String str2, boolean z, int i3) {
             AttributionSource attributionSource = new AttributionSource(i, str2, (String) null, i3);
-            int checkPermissionForPreflight = PermissionChecker.checkPermissionForPreflight(context, str, attributionSource);
-            if (checkPermissionForPreflight == 2) {
+            int iCheckPermissionForPreflight = PermissionChecker.checkPermissionForPreflight(context, str, attributionSource);
+            if (iCheckPermissionForPreflight == 2) {
                 return -1;
             }
-            int permissionToOpCode = AppOpsManager.permissionToOpCode(str);
-            if (permissionToOpCode == -1) {
-                return checkPermissionForPreflight == 0 ? 0 : -1;
+            int iPermissionToOpCode = AppOpsManager.permissionToOpCode(str);
+            if (iPermissionToOpCode == -1) {
+                return iCheckPermissionForPreflight == 0 ? 0 : -1;
             }
-            int unsafeCheckOpRawNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).unsafeCheckOpRawNoThrow(permissionToOpCode, attributionSource);
-            if (unsafeCheckOpRawNoThrow == 0) {
+            int iUnsafeCheckOpRawNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).unsafeCheckOpRawNoThrow(iPermissionToOpCode, attributionSource);
+            if (iUnsafeCheckOpRawNoThrow == 0) {
                 return 0;
             }
-            if (unsafeCheckOpRawNoThrow == 1) {
-                return (z && checkPermissionForPreflight == 1) ? 0 : -1;
+            if (iUnsafeCheckOpRawNoThrow == 1) {
+                return (z && iCheckPermissionForPreflight == 1) ? 0 : -1;
             }
-            if (unsafeCheckOpRawNoThrow == 3) {
-                return checkPermissionForPreflight == 0 ? 0 : -1;
+            if (iUnsafeCheckOpRawNoThrow == 3) {
+                return iCheckPermissionForPreflight == 0 ? 0 : -1;
             }
-            if (unsafeCheckOpRawNoThrow != 4) {
+            if (iUnsafeCheckOpRawNoThrow != 4) {
                 return -1;
             }
             return (!ForegroundServiceTypePolicy.isFgsTypeFgPermissionEnforcementEnabled() || z) ? 0 : -1;
@@ -403,9 +403,9 @@ public abstract class ForegroundServiceTypePolicy {
 
         @Override // android.app.ForegroundServiceTypePolicy.ForegroundServiceTypePermission
         public int checkPermission(Context context, int i, int i2, String str, boolean z) {
-            int unsafeCheckOpRawNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).unsafeCheckOpRawNoThrow(this.mOpCode, i, str);
-            if (unsafeCheckOpRawNoThrow != 0) {
-                return (z && unsafeCheckOpRawNoThrow == 4) ? 0 : -1;
+            int iUnsafeCheckOpRawNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).unsafeCheckOpRawNoThrow(this.mOpCode, i, str);
+            if (iUnsafeCheckOpRawNoThrow != 0) {
+                return (z && iUnsafeCheckOpRawNoThrow == 4) ? 0 : -1;
             }
             return 0;
         }
@@ -495,8 +495,8 @@ public abstract class ForegroundServiceTypePolicy {
             sparseArray.put(1073741824, FGS_TYPE_POLICY_SPECIAL_USE);
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                ForegroundServiceTypePolicyInfo valueAt = this.mForegroundServiceTypePolicies.valueAt(i);
-                this.mPermissionEnforcementToPolicyInfoMap.put(valueAt.mPermissionEnforcementFlag, valueAt);
+                ForegroundServiceTypePolicyInfo foregroundServiceTypePolicyInfoValueAt = this.mForegroundServiceTypePolicies.valueAt(i);
+                this.mPermissionEnforcementToPolicyInfoMap.put(foregroundServiceTypePolicyInfoValueAt.mPermissionEnforcementFlag, foregroundServiceTypePolicyInfoValueAt);
             }
         }
 
@@ -520,7 +520,7 @@ public abstract class ForegroundServiceTypePolicy {
             int i3;
             int i4;
             boolean z2;
-            int i5;
+            int iCheckPermission;
             if (foregroundServiceTypePolicyInfo.isTypeDisabled(i)) {
                 return 3;
             }
@@ -530,21 +530,21 @@ public abstract class ForegroundServiceTypePolicy {
                 i3 = i;
                 i4 = i2;
                 z2 = z;
-                i5 = foregroundServiceTypePolicyInfo.mAllOfPermissions.checkPermissions(context2, i3, i4, str2, z2);
+                iCheckPermission = foregroundServiceTypePolicyInfo.mAllOfPermissions.checkPermissions(context2, i3, i4, str2, z2);
             } else {
                 context2 = context;
                 str2 = str;
                 i3 = i;
                 i4 = i2;
                 z2 = z;
-                i5 = 0;
+                iCheckPermission = 0;
             }
-            if (i5 == 0) {
-                if ((foregroundServiceTypePolicyInfo.mAnyOfPermissions == null || (i5 = foregroundServiceTypePolicyInfo.mAnyOfPermissions.checkPermissions(context2, i3, i4, str2, z2)) != 0) && foregroundServiceTypePolicyInfo.mCustomPermission != null) {
-                    i5 = foregroundServiceTypePolicyInfo.mCustomPermission.checkPermission(context2, i3, i4, str2, z2);
+            if (iCheckPermission == 0) {
+                if ((foregroundServiceTypePolicyInfo.mAnyOfPermissions == null || (iCheckPermission = foregroundServiceTypePolicyInfo.mAnyOfPermissions.checkPermissions(context2, i3, i4, str2, z2)) != 0) && foregroundServiceTypePolicyInfo.mCustomPermission != null) {
+                    iCheckPermission = foregroundServiceTypePolicyInfo.mCustomPermission.checkPermission(context2, i3, i4, str2, z2);
                 }
             }
-            return i5 != 0 ? (foregroundServiceTypePolicyInfo.mPermissionEnforcementFlagValue && CompatChanges.isChangeEnabled(ForegroundServiceTypePolicy.FGS_TYPE_PERMISSION_CHANGE_ID, i3)) ? 5 : 4 : foregroundServiceTypePolicyInfo.isTypeDeprecated(i3) ? 2 : 1;
+            return iCheckPermission != 0 ? (foregroundServiceTypePolicyInfo.mPermissionEnforcementFlagValue && CompatChanges.isChangeEnabled(ForegroundServiceTypePolicy.FGS_TYPE_PERMISSION_CHANGE_ID, i3)) ? 5 : 4 : foregroundServiceTypePolicyInfo.isTypeDeprecated(i3) ? 2 : 1;
         }
 
         @Override // android.app.ForegroundServiceTypePolicy

@@ -1,13 +1,14 @@
 package androidx.recyclerview.widget;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DiffUtil {
     public static final AnonymousClass1 DIAGONAL_COMPARATOR = new Comparator() { // from class: androidx.recyclerview.widget.DiffUtil.1
@@ -17,7 +18,6 @@ public class DiffUtil {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CenteredArray {
         public final int[] mData;
         public final int mMid;
@@ -33,7 +33,6 @@ public class DiffUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Diagonal {
         public final int size;
         public final int x;
@@ -46,7 +45,6 @@ public class DiffUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DiffResult {
         public final Callback mCallback;
         public final boolean mDetectMoves;
@@ -81,11 +79,11 @@ public class DiffUtil {
             list.add(new Diagonal(oldListSize, newListSize, 0));
             Iterator<Diagonal> it = list.iterator();
             while (true) {
-                boolean hasNext = it.hasNext();
+                boolean zHasNext = it.hasNext();
                 iArr3 = this.mNewItemStatuses;
                 iArr4 = this.mOldItemStatuses;
                 callback2 = this.mCallback;
-                if (!hasNext) {
+                if (!zHasNext) {
                     break;
                 }
                 Diagonal next = it.next();
@@ -255,7 +253,6 @@ public class DiffUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PostponedUpdate {
         public int currentPos;
         public final int posInOwnerList;
@@ -268,7 +265,6 @@ public class DiffUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Range {
         public int newListEnd;
         public int newListStart;
@@ -294,7 +290,6 @@ public class DiffUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Snake {
         public int endX;
         public int endY;
@@ -310,25 +305,284 @@ public class DiffUtil {
     private DiffUtil() {
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x00ad, code lost:
-    
-        if (r5.get(r19 + 1) > r5.get(r19 - 1)) goto L27;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:120:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x010a  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00d9 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00e5  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x010a  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x012f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static androidx.recyclerview.widget.DiffUtil.DiffResult calculateDiff(androidx.recyclerview.widget.DiffUtil.Callback r26) {
-        /*
-            Method dump skipped, instructions count: 705
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.recyclerview.widget.DiffUtil.calculateDiff(androidx.recyclerview.widget.DiffUtil$Callback):androidx.recyclerview.widget.DiffUtil$DiffResult");
+    public static DiffResult calculateDiff(Callback callback) {
+        CenteredArray centeredArray;
+        Snake snake;
+        int i;
+        Range range;
+        int[] iArr;
+        int[] iArr2;
+        int i2;
+        int i3;
+        boolean z;
+        Snake snake2;
+        Snake snake3;
+        int i4;
+        int i5;
+        int i6;
+        int i7;
+        int i8;
+        int i9;
+        int i10;
+        int i11;
+        int i12;
+        int i13;
+        int i14;
+        int i15;
+        int i16;
+        int i17;
+        int oldListSize = callback.getOldListSize();
+        int newListSize = callback.getNewListSize();
+        ArrayList arrayList = new ArrayList();
+        ArrayList arrayList2 = new ArrayList();
+        int i18 = 0;
+        arrayList2.add(new Range(0, oldListSize, 0, newListSize));
+        int i19 = oldListSize + newListSize;
+        int i20 = 1;
+        int i21 = (((i19 + 1) / 2) * 2) + 1;
+        CenteredArray centeredArray2 = new CenteredArray(i21);
+        CenteredArray centeredArray3 = new CenteredArray(i21);
+        ArrayList arrayList3 = new ArrayList();
+        while (true) {
+            boolean zIsEmpty = arrayList2.isEmpty();
+            int[] iArr3 = centeredArray2.mData;
+            int[] iArr4 = centeredArray3.mData;
+            if (zIsEmpty) {
+                Collections.sort(arrayList, DIAGONAL_COMPARATOR);
+                return new DiffResult(callback, arrayList, iArr3, iArr4, true);
+            }
+            Range range2 = (Range) arrayList2.remove(arrayList2.size() - i20);
+            if (range2.oldSize() < i20 || range2.newSize() < i20) {
+                centeredArray = centeredArray3;
+                snake = null;
+            } else {
+                int iNewSize = ((range2.newSize() + range2.oldSize()) + i20) / 2;
+                int i22 = range2.oldListStart;
+                int i23 = centeredArray2.mMid;
+                iArr3[i20 + i23] = i22;
+                int i24 = range2.oldListEnd;
+                int i25 = centeredArray3.mMid;
+                iArr4[i20 + i25] = i24;
+                int i26 = i18;
+                while (i26 < iNewSize) {
+                    int i27 = Math.abs(range2.oldSize() - range2.newSize()) % 2 == i20 ? i20 : i18;
+                    int iOldSize = range2.oldSize() - range2.newSize();
+                    int i28 = -i26;
+                    int i29 = i28;
+                    while (true) {
+                        if (i29 > i26) {
+                            iArr = iArr3;
+                            iArr2 = iArr4;
+                            i2 = iNewSize;
+                            i3 = i23;
+                            z = false;
+                            snake2 = null;
+                            break;
+                        }
+                        if (i29 != i28) {
+                            if (i29 != i26) {
+                                i9 = i29;
+                                iArr = iArr3;
+                                if (centeredArray2.get(i9 + 1) > centeredArray2.get(i9 - 1)) {
+                                }
+                                iArr2 = iArr4;
+                                i12 = ((i11 - range2.oldListStart) + range2.newListStart) - i9;
+                                if (i26 == 0 || i11 != i10) {
+                                    i13 = i11;
+                                    i14 = i12;
+                                } else {
+                                    i13 = i11;
+                                    i14 = i12 - 1;
+                                }
+                                i15 = i27;
+                                i16 = i12;
+                                i17 = i13;
+                                i2 = iNewSize;
+                                while (i17 < range2.oldListEnd && i16 < range2.newListEnd && callback.areItemsTheSame(i17, i16)) {
+                                    i17++;
+                                    i16++;
+                                }
+                                iArr[i9 + i23] = i17;
+                                if (i15 == 0) {
+                                    int i30 = iOldSize - i9;
+                                    i3 = i23;
+                                    if (i30 >= i28 + 1 && i30 <= i26 - 1 && centeredArray3.get(i30) <= i17) {
+                                        snake2 = new Snake();
+                                        snake2.startX = i10;
+                                        snake2.startY = i14;
+                                        snake2.endX = i17;
+                                        snake2.endY = i16;
+                                        z = false;
+                                        snake2.reverse = false;
+                                        break;
+                                    }
+                                } else {
+                                    i3 = i23;
+                                }
+                                i29 = i9 + 2;
+                                iArr3 = iArr;
+                                iArr4 = iArr2;
+                                i27 = i15;
+                                iNewSize = i2;
+                                i23 = i3;
+                            } else {
+                                i9 = i29;
+                                iArr = iArr3;
+                            }
+                            i10 = centeredArray2.get(i9 - 1);
+                            i11 = i10 + 1;
+                            iArr2 = iArr4;
+                            i12 = ((i11 - range2.oldListStart) + range2.newListStart) - i9;
+                            if (i26 == 0) {
+                                i13 = i11;
+                                i14 = i12;
+                                i15 = i27;
+                                i16 = i12;
+                                i17 = i13;
+                                i2 = iNewSize;
+                                while (i17 < range2.oldListEnd) {
+                                    i17++;
+                                    i16++;
+                                }
+                                iArr[i9 + i23] = i17;
+                                if (i15 == 0) {
+                                }
+                                i29 = i9 + 2;
+                                iArr3 = iArr;
+                                iArr4 = iArr2;
+                                i27 = i15;
+                                iNewSize = i2;
+                                i23 = i3;
+                            }
+                        } else {
+                            i9 = i29;
+                            iArr = iArr3;
+                        }
+                        i10 = centeredArray2.get(i9 + 1);
+                        i11 = i10;
+                        iArr2 = iArr4;
+                        i12 = ((i11 - range2.oldListStart) + range2.newListStart) - i9;
+                        if (i26 == 0) {
+                        }
+                    }
+                    if (snake2 != null) {
+                        centeredArray = centeredArray3;
+                        snake = snake2;
+                        break;
+                    }
+                    boolean z2 = (range2.oldSize() - range2.newSize()) % 2 == 0 ? true : z;
+                    int iOldSize2 = range2.oldSize() - range2.newSize();
+                    int i31 = i28;
+                    while (true) {
+                        if (i31 > i26) {
+                            centeredArray = centeredArray3;
+                            snake3 = null;
+                            break;
+                        }
+                        if (i31 == i28 || (i31 != i26 && centeredArray3.get(i31 + 1) < centeredArray3.get(i31 - 1))) {
+                            i4 = centeredArray3.get(i31 + 1);
+                            i5 = i4;
+                        } else {
+                            i4 = centeredArray3.get(i31 - 1);
+                            i5 = i4 - 1;
+                        }
+                        int i32 = range2.newListEnd - ((range2.oldListEnd - i5) - i31);
+                        if (i26 == 0 || i5 != i4) {
+                            i6 = i32;
+                        } else {
+                            i6 = i32;
+                            i32++;
+                        }
+                        int i33 = i6;
+                        centeredArray = centeredArray3;
+                        int i34 = i5;
+                        int i35 = i33;
+                        boolean z3 = z2;
+                        while (i34 > range2.oldListStart && i35 > range2.newListStart) {
+                            i7 = iOldSize2;
+                            if (!callback.areItemsTheSame(i34 - 1, i35 - 1)) {
+                                break;
+                            }
+                            i34--;
+                            i35--;
+                            iOldSize2 = i7;
+                        }
+                        i7 = iOldSize2;
+                        iArr2[i31 + i25] = i34;
+                        if (z3 && (i8 = i7 - i31) >= i28 && i8 <= i26 && centeredArray2.get(i8) >= i34) {
+                            snake3 = new Snake();
+                            snake3.startX = i34;
+                            snake3.startY = i35;
+                            snake3.endX = i4;
+                            snake3.endY = i32;
+                            snake3.reverse = true;
+                            break;
+                        }
+                        i31 += 2;
+                        centeredArray3 = centeredArray;
+                        z2 = z3;
+                        iOldSize2 = i7;
+                    }
+                    if (snake3 != null) {
+                        snake = snake3;
+                        break;
+                    }
+                    i26++;
+                    centeredArray3 = centeredArray;
+                    iArr3 = iArr;
+                    iArr4 = iArr2;
+                    iNewSize = i2;
+                    i23 = i3;
+                    i20 = 1;
+                    i18 = 0;
+                }
+                centeredArray = centeredArray3;
+                snake = null;
+            }
+            if (snake != null) {
+                if (snake.diagonalSize() > 0) {
+                    int i36 = snake.endY;
+                    int i37 = snake.startY;
+                    int i38 = i36 - i37;
+                    int i39 = snake.endX;
+                    int i40 = snake.startX;
+                    int i41 = i39 - i40;
+                    arrayList.add(i38 != i41 ? snake.reverse ? new Diagonal(i40, i37, snake.diagonalSize()) : i38 > i41 ? new Diagonal(i40, i37 + 1, snake.diagonalSize()) : new Diagonal(i40 + 1, i37, snake.diagonalSize()) : new Diagonal(i40, i37, i41));
+                }
+                if (arrayList3.isEmpty()) {
+                    range = new Range();
+                    i = 1;
+                } else {
+                    i = 1;
+                    range = (Range) arrayList3.remove(arrayList3.size() - 1);
+                }
+                range.oldListStart = range2.oldListStart;
+                range.newListStart = range2.newListStart;
+                range.oldListEnd = snake.startX;
+                range.newListEnd = snake.startY;
+                arrayList2.add(range);
+                range2.oldListEnd = range2.oldListEnd;
+                range2.newListEnd = range2.newListEnd;
+                range2.oldListStart = snake.endX;
+                range2.newListStart = snake.endY;
+                arrayList2.add(range2);
+            } else {
+                i = 1;
+                arrayList3.add(range2);
+            }
+            centeredArray3 = centeredArray;
+            i20 = i;
+            i18 = 0;
+        }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback {
         public abstract boolean areContentsTheSame(int i, int i2);
 

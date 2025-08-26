@@ -5,16 +5,13 @@ import android.view.Window;
 import android.view.WindowInsetsController;
 import androidx.collection.SimpleArrayMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowInsetsControllerCompat {
     public final Impl35 mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl31 extends Impl30 {
         public Impl31(Window window, WindowInsetsControllerCompat windowInsetsControllerCompat, SoftwareKeyboardControllerCompat softwareKeyboardControllerCompat) {
             super(window, windowInsetsControllerCompat, softwareKeyboardControllerCompat);
@@ -25,7 +22,6 @@ public final class WindowInsetsControllerCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl35 extends Impl31 {
         public Impl35(Window window, WindowInsetsControllerCompat windowInsetsControllerCompat, SoftwareKeyboardControllerCompat softwareKeyboardControllerCompat) {
             super(window, windowInsetsControllerCompat, softwareKeyboardControllerCompat);
@@ -79,7 +75,6 @@ public final class WindowInsetsControllerCompat {
         impl35.mInsetsController.setSystemBarsAppearance(0, 8);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl30 extends Impl {
         public final WindowInsetsController mInsetsController;
         public final SoftwareKeyboardControllerCompat mSoftwareKeyboardControllerCompat;

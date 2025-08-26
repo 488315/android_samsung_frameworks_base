@@ -2,7 +2,6 @@ package com.android.systemui.qs.tiles.impl.location.domain.model;
 
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LocationTileModel {
     public final boolean isEnabled;
@@ -12,7 +11,7 @@ public final class LocationTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ LocationTileModel m2915boximpl(boolean z) {
+    public static final /* synthetic */ LocationTileModel m2932boximpl(boolean z) {
         return new LocationTileModel(z);
     }
 

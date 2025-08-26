@@ -9,6 +9,7 @@ import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.Parcelling;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Set;
@@ -205,32 +206,32 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
         parcel.writeInt(this.nativeHeapZeroInitialized);
     }
 
-    protected ParsedProcessImpl(Parcel parcel) {
+    protected ParsedProcessImpl(Parcel parcel) throws ClassNotFoundException, IOException {
         this.appClassNamesByPackage = ArrayMap.EMPTY;
         this.deniedPermissions = Collections.EMPTY_SET;
         this.gwpAsanMode = -1;
         this.memtagMode = -1;
         this.nativeHeapZeroInitialized = -1;
         boolean z = (parcel.readByte() & 64) != 0;
-        String readString = parcel.readString();
+        String string = parcel.readString();
         ArrayMap<String, String> arrayMap = new ArrayMap<>();
         parcel.readMap(arrayMap, String.class.getClassLoader());
-        Set<String> unparcel = sParcellingForDeniedPermissions.unparcel(parcel);
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        this.name = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        Set<String> setUnparcel = sParcellingForDeniedPermissions.unparcel(parcel);
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        this.name = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.appClassNamesByPackage = arrayMap;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayMap);
-        this.deniedPermissions = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.gwpAsanMode = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, readInt);
-        this.memtagMode = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, readInt2);
-        this.nativeHeapZeroInitialized = readInt3;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, readInt3);
+        this.deniedPermissions = setUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcel);
+        this.gwpAsanMode = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, i);
+        this.memtagMode = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, i2);
+        this.nativeHeapZeroInitialized = i3;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, i3);
         this.useEmbeddedDex = z;
     }
 }

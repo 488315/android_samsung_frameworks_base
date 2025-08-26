@@ -12,9 +12,9 @@ public final class RuntimePermissionPresentationInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RuntimePermissionPresentationInfo createFromParcel(Parcel parcel) {
-            CharSequence readCharSequence = parcel.readCharSequence();
-            int readInt = parcel.readInt();
-            return new RuntimePermissionPresentationInfo(readCharSequence, (readInt & 1) != 0, (readInt & 2) != 0);
+            CharSequence charSequence = parcel.readCharSequence();
+            int i = parcel.readInt();
+            return new RuntimePermissionPresentationInfo(charSequence, (i & 1) != 0, (i & 2) != 0);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

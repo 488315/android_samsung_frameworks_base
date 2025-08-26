@@ -23,11 +23,11 @@ public class QuotedPrintable {
                             i = i2;
                         }
                     }
-                    int digit = Character.digit((char) b2, 16);
+                    int iDigit = Character.digit((char) b2, 16);
                     i += 2;
-                    int digit2 = Character.digit((char) bArr[i], 16);
-                    if (digit != -1 && digit2 != -1) {
-                        byteArrayOutputStream.write((char) ((digit << 4) + digit2));
+                    int iDigit2 = Character.digit((char) bArr[i], 16);
+                    if (iDigit != -1 && iDigit2 != -1) {
+                        byteArrayOutputStream.write((char) ((iDigit << 4) + iDigit2));
                     }
                 } catch (ArrayIndexOutOfBoundsException unused) {
                 }

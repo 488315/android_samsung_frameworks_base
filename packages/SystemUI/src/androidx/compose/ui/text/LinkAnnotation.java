@@ -5,11 +5,9 @@ import androidx.compose.ui.text.AnnotatedString;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LinkAnnotation implements AnnotatedString.Annotation {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Clickable extends LinkAnnotation {
         public final TextLinkStyles styles;
         public final String tag;
@@ -42,9 +40,9 @@ public abstract class LinkAnnotation implements AnnotatedString.Annotation {
         }
 
         public final int hashCode() {
-            int hashCode = this.tag.hashCode() * 31;
+            int iHashCode = this.tag.hashCode() * 31;
             TextLinkStyles textLinkStyles = this.styles;
-            return (hashCode + (textLinkStyles != null ? textLinkStyles.hashCode() : 0)) * 31;
+            return (iHashCode + (textLinkStyles != null ? textLinkStyles.hashCode() : 0)) * 31;
         }
 
         public final String toString() {
@@ -58,7 +56,6 @@ public abstract class LinkAnnotation implements AnnotatedString.Annotation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Url extends LinkAnnotation {
         public final TextLinkStyles styles;
         public final String url;
@@ -91,9 +88,9 @@ public abstract class LinkAnnotation implements AnnotatedString.Annotation {
         }
 
         public final int hashCode() {
-            int hashCode = this.url.hashCode() * 31;
+            int iHashCode = this.url.hashCode() * 31;
             TextLinkStyles textLinkStyles = this.styles;
-            return (hashCode + (textLinkStyles != null ? textLinkStyles.hashCode() : 0)) * 31;
+            return (iHashCode + (textLinkStyles != null ? textLinkStyles.hashCode() : 0)) * 31;
         }
 
         public final String toString() {

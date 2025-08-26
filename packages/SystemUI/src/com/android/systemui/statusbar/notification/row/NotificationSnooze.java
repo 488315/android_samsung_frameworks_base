@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationSnooze extends LinearLayout implements NotificationGuts.GutsContent, View.OnClickListener {
     public int mCollapsedHeight;
@@ -61,7 +60,6 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
     public static final LogMaker UNDO_LOG = new LogMaker(1141).setType(4);
     public static final int[] sAccessibilityActions = {R.id.action_snooze_shorter, R.id.action_snooze_short, R.id.action_snooze_long, R.id.action_snooze_longer};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationSnoozeOption implements NotificationSwipeActionHelper.SnoozeOption {
         public final AccessibilityNodeInfo.AccessibilityAction mAction;
         public final CharSequence mConfirmation;
@@ -160,18 +158,18 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
             int i4 = iArr[i2];
             Resources resources2 = this.getResources();
             boolean z = i3 >= 60;
-            String icuMessageFormat = PluralMessageFormaterKt.icuMessageFormat(resources2, z ? R.string.snoozeHourOptions : R.string.snoozeMinuteOptions, z ? i3 / 60 : i3);
-            String format = String.format(resources2.getString(R.string.snoozed_for_time), icuMessageFormat);
-            AccessibilityNodeInfo.AccessibilityAction accessibilityAction = new AccessibilityNodeInfo.AccessibilityAction(i4, icuMessageFormat);
-            int indexOf = format.indexOf(icuMessageFormat);
-            if (indexOf == -1) {
+            String strIcuMessageFormat = PluralMessageFormaterKt.icuMessageFormat(resources2, z ? R.string.snoozeHourOptions : R.string.snoozeMinuteOptions, z ? i3 / 60 : i3);
+            String str = String.format(resources2.getString(R.string.snoozed_for_time), strIcuMessageFormat);
+            AccessibilityNodeInfo.AccessibilityAction accessibilityAction = new AccessibilityNodeInfo.AccessibilityAction(i4, strIcuMessageFormat);
+            int iIndexOf = str.indexOf(strIcuMessageFormat);
+            if (iIndexOf == -1) {
                 notificationSnooze = this;
-                notificationSnoozeOption = new NotificationSnoozeOption(notificationSnooze, null, i3, icuMessageFormat, format, accessibilityAction);
+                notificationSnoozeOption = new NotificationSnoozeOption(notificationSnooze, null, i3, strIcuMessageFormat, str, accessibilityAction);
             } else {
-                SpannableString spannableString = new SpannableString(format);
-                spannableString.setSpan(new StyleSpan(1, resources2.getConfiguration().fontWeightAdjustment), indexOf, icuMessageFormat.length() + indexOf, 0);
+                SpannableString spannableString = new SpannableString(str);
+                spannableString.setSpan(new StyleSpan(1, resources2.getConfiguration().fontWeightAdjustment), iIndexOf, strIcuMessageFormat.length() + iIndexOf, 0);
                 notificationSnooze = this;
-                notificationSnoozeOption = new NotificationSnoozeOption(notificationSnooze, null, i3, icuMessageFormat, spannableString, accessibilityAction);
+                notificationSnoozeOption = new NotificationSnoozeOption(notificationSnooze, null, i3, strIcuMessageFormat, spannableString, accessibilityAction);
             }
             if (i2 == 0 || i3 == i) {
                 notificationSnooze.mDefaultOption = notificationSnoozeOption;
@@ -184,7 +182,7 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
     }
 
     public final String getExpandActionString() {
-        return ((LinearLayout) this).mContext.getString(this.mExpanded ? android.R.string.keyguard_password_enter_puk_code : android.R.string.keyguard_password_enter_pin_prompt);
+        return ((LinearLayout) this).mContext.getString(this.mExpanded ? android.R.string.keyguard_password_entry_touch_hint : android.R.string.keyguard_password_enter_puk_prompt);
     }
 
     @Override // com.android.systemui.statusbar.notification.row.NotificationGuts.GutsContent
@@ -258,18 +256,18 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mCollapsedHeight = getResources().getDimensionPixelSize(R.dimen.snooze_snackbar_min_height);
-        View findViewById = findViewById(R.id.notification_snooze);
-        this.mSnoozeView = findViewById;
-        findViewById.setOnClickListener(this);
+        View viewFindViewById = findViewById(R.id.notification_snooze);
+        this.mSnoozeView = viewFindViewById;
+        viewFindViewById.setOnClickListener(this);
         this.mSelectedOptionText = (TextView) findViewById(R.id.snooze_option_default);
         TextView textView = (TextView) findViewById(R.id.undo);
         this.mUndoButton = textView;
         textView.setOnClickListener(this);
         this.mUndoButton.setContentDescription(getContext().getString(R.string.snooze_undo_content_description));
         this.mExpandButton = (ImageView) findViewById(R.id.expand_button);
-        View findViewById2 = findViewById(R.id.divider);
-        this.mDivider = findViewById2;
-        findViewById2.setAlpha(0.0f);
+        View viewFindViewById2 = findViewById(R.id.divider);
+        this.mDivider = viewFindViewById2;
+        viewFindViewById2.setAlpha(0.0f);
         ViewGroup viewGroup = (ViewGroup) findViewById(R.id.snooze_options);
         this.mSnoozeOptionContainer = viewGroup;
         viewGroup.setVisibility(4);
@@ -385,13 +383,13 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
             }
             View view = this.mDivider;
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), z ? 1.0f : 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), z ? 1.0f : 0.0f);
             ViewGroup viewGroup = this.mSnoozeOptionContainer;
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(viewGroup, (Property<ViewGroup, Float>) property, viewGroup.getAlpha(), z ? 1.0f : 0.0f);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(viewGroup, (Property<ViewGroup, Float>) property, viewGroup.getAlpha(), z ? 1.0f : 0.0f);
             this.mSnoozeOptionContainer.setVisibility(0);
             AnimatorSet animatorSet2 = new AnimatorSet();
             this.mExpandAnimation = animatorSet2;
-            animatorSet2.playTogether(ofFloat, ofFloat2);
+            animatorSet2.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
             this.mExpandAnimation.setDuration(150L);
             this.mExpandAnimation.setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT);
             this.mExpandAnimation.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.row.NotificationSnooze.2
@@ -423,7 +421,7 @@ public class NotificationSnooze extends LinearLayout implements NotificationGuts
     public final void updateContentDescription() {
         View view = this.mSnoozeView;
         StringBuilder sb = new StringBuilder();
-        sb.append(((LinearLayout) this).mContext.getString(this.mExpanded ? android.R.string.fingerprint_error_no_space : android.R.string.fingerprint_error_no_fingerprints));
+        sb.append(((LinearLayout) this).mContext.getString(this.mExpanded ? android.R.string.fingerprint_error_power_pressed : android.R.string.fingerprint_error_not_match));
         sb.append("\u2029");
         sb.append((Object) this.mSelectedOptionText.getText());
         view.setContentDescription(sb.toString());

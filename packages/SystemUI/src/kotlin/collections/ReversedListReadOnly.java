@@ -4,12 +4,76 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ReversedListReadOnly extends AbstractList {
     public final List delegate;
+
+    /* renamed from: kotlin.collections.ReversedListReadOnly$listIterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements ListIterator, KMappedMarker {
+        public final ListIterator delegateIterator;
+
+        public AnonymousClass1(int i) {
+            List list = ReversedListReadOnly.this.delegate;
+            if (i >= 0 && i <= ReversedListReadOnly.this.size()) {
+                this.delegateIterator = list.listIterator(ReversedListReadOnly.this.size() - i);
+                return;
+            }
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Position index ", " must be in range [");
+            sbM.append(new IntRange(0, ReversedListReadOnly.this.size()));
+            sbM.append("].");
+            throw new IndexOutOfBoundsException(sbM.toString());
+        }
+
+        @Override // java.util.ListIterator
+        public final void add(Object obj) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final boolean hasNext() {
+            return this.delegateIterator.hasPrevious();
+        }
+
+        @Override // java.util.ListIterator
+        public final boolean hasPrevious() {
+            return this.delegateIterator.hasNext();
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final Object next() {
+            return this.delegateIterator.previous();
+        }
+
+        @Override // java.util.ListIterator
+        public final int nextIndex() {
+            ReversedListReadOnly reversedListReadOnly = ReversedListReadOnly.this;
+            return CollectionsKt__CollectionsKt.getLastIndex(reversedListReadOnly) - this.delegateIterator.previousIndex();
+        }
+
+        @Override // java.util.ListIterator
+        public final Object previous() {
+            return this.delegateIterator.next();
+        }
+
+        @Override // java.util.ListIterator
+        public final int previousIndex() {
+            ReversedListReadOnly reversedListReadOnly = ReversedListReadOnly.this;
+            return CollectionsKt__CollectionsKt.getLastIndex(reversedListReadOnly) - this.delegateIterator.nextIndex();
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final void remove() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.ListIterator
+        public final void set(Object obj) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+    }
 
     public ReversedListReadOnly(List<Object> list) {
         this.delegate = list;
@@ -21,10 +85,10 @@ public class ReversedListReadOnly extends AbstractList {
         if (i >= 0 && i <= CollectionsKt__CollectionsKt.getLastIndex(this)) {
             return list.get(CollectionsKt__CollectionsKt.getLastIndex(this) - i);
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Element index ", " must be in range [");
-        m.append(new IntRange(0, CollectionsKt__CollectionsKt.getLastIndex(this)));
-        m.append("].");
-        throw new IndexOutOfBoundsException(m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Element index ", " must be in range [");
+        sbM.append(new IntRange(0, CollectionsKt__CollectionsKt.getLastIndex(this)));
+        sbM.append("].");
+        throw new IndexOutOfBoundsException(sbM.toString());
     }
 
     @Override // kotlin.collections.AbstractCollection
@@ -34,16 +98,16 @@ public class ReversedListReadOnly extends AbstractList {
 
     @Override // kotlin.collections.AbstractList, java.util.Collection, java.lang.Iterable, java.util.List
     public final Iterator iterator() {
-        return new ReversedListReadOnly$listIterator$1(this, 0);
+        return new AnonymousClass1(0);
     }
 
     @Override // kotlin.collections.AbstractList, java.util.List
     public final ListIterator listIterator() {
-        return new ReversedListReadOnly$listIterator$1(this, 0);
+        return new AnonymousClass1(0);
     }
 
     @Override // kotlin.collections.AbstractList, java.util.List
     public final ListIterator listIterator(int i) {
-        return new ReversedListReadOnly$listIterator$1(this, i);
+        return new AnonymousClass1(i);
     }
 }

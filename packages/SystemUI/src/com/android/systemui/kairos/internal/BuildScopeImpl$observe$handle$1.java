@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BuildScopeImpl$observe$handle$1 implements DisposableHandle {
     public final /* synthetic */ Ref$ObjectRef $cancelHandle;

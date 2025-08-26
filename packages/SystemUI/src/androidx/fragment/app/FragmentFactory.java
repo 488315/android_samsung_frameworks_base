@@ -5,12 +5,11 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import androidx.fragment.app.Fragment;
 import java.lang.reflect.InvocationTargetException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentFactory {
     public static final SimpleArrayMap sClassCacheMap = new SimpleArrayMap();
 
-    public static Class loadClass(ClassLoader classLoader, String str) {
+    public static Class loadClass(ClassLoader classLoader, String str) throws ClassNotFoundException {
         SimpleArrayMap simpleArrayMap = sClassCacheMap;
         SimpleArrayMap simpleArrayMap2 = (SimpleArrayMap) simpleArrayMap.get(classLoader);
         if (simpleArrayMap2 == null) {

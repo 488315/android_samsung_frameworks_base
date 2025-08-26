@@ -18,7 +18,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ AuthKeyguardMessageArea $view;
@@ -26,7 +25,6 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerMessageAreaViewBinder$bind$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ AuthKeyguardMessageArea $view;
@@ -34,15 +32,14 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerMessageAreaViewBinder$bind$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01241 extends SuspendLambda implements Function2 {
+        final class C02301 extends SuspendLambda implements Function2 {
             final /* synthetic */ AuthKeyguardMessageArea $view;
             final /* synthetic */ AlternateBouncerMessageAreaViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01241(AlternateBouncerMessageAreaViewModel alternateBouncerMessageAreaViewModel, AuthKeyguardMessageArea authKeyguardMessageArea, Continuation continuation) {
+            public C02301(AlternateBouncerMessageAreaViewModel alternateBouncerMessageAreaViewModel, AuthKeyguardMessageArea authKeyguardMessageArea, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = alternateBouncerMessageAreaViewModel;
                 this.$view = authKeyguardMessageArea;
@@ -50,12 +47,12 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01241(this.$viewModel, this.$view, continuation);
+                return new C02301(this.$viewModel, this.$view, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01241) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02301) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -70,7 +67,7 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             BiometricMessage biometricMessage = (BiometricMessage) obj2;
-                            AuthKeyguardMessageArea authKeyguardMessageArea2 = AuthKeyguardMessageArea.this;
+                            AuthKeyguardMessageArea authKeyguardMessageArea2 = authKeyguardMessageArea;
                             if (biometricMessage == null) {
                                 authKeyguardMessageArea2.setMessage("", true);
                             } else {
@@ -119,7 +116,7 @@ final class AlternateBouncerMessageAreaViewBinder$bind$1 extends SuspendLambda i
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            CoroutineTracingKt.launchTraced$default((CoroutineScope) this.L$0, null, null, new C01241(this.$viewModel, this.$view, null), 6);
+            CoroutineTracingKt.launchTraced$default((CoroutineScope) this.L$0, null, null, new C02301(this.$viewModel, this.$view, null), 6);
             return Unit.INSTANCE;
         }
     }

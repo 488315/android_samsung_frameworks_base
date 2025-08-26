@@ -8,12 +8,10 @@ import com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2$$Ex
 import com.android.systemui.R;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class YearGridAdapter extends RecyclerView.Adapter {
     public final MaterialCalendar materialCalendar;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView textView;
 

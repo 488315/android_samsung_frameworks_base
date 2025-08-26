@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BootAnimationFinishedCacheImpl implements BootAnimationFinishedCache, BootAnimationFinishedTrigger, Dumpable {
     public final AtomicBoolean bootAnimationFinished;
@@ -20,7 +19,6 @@ public final class BootAnimationFinishedCacheImpl implements BootAnimationFinish
     public final List frontQueueListeners;
     public final List postlisteners;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -109,7 +107,7 @@ public final class BootAnimationFinishedCacheImpl implements BootAnimationFinish
                         new Handler().post(new Runnable() { // from class: com.android.systemui.BootAnimationFinishedCacheImpl$setBootAnimationFinished$1$2$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BootAnimationFinishedCache.BootAnimationFinishedListener.this.onBootAnimationFinished();
+                                bootAnimationFinishedListener.onBootAnimationFinished();
                             }
                         });
                     }
@@ -122,7 +120,7 @@ public final class BootAnimationFinishedCacheImpl implements BootAnimationFinish
                         new Handler().postAtFrontOfQueue(new Runnable() { // from class: com.android.systemui.BootAnimationFinishedCacheImpl$setBootAnimationFinished$1$3$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BootAnimationFinishedCache.BootAnimationFinishedListener.this.onBootAnimationFinished();
+                                bootAnimationFinishedListener2.onBootAnimationFinished();
                             }
                         });
                     }

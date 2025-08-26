@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 extends SuspendLambda implements Function4 {
     final /* synthetic */ DeviceEntryIconLogger $logger;
@@ -30,13 +29,13 @@ final class DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 extends 
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
         DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 = new DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1(this.$logger, (Continuation) obj4);
-        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$0 = booleanValue;
-        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$1 = booleanValue2;
-        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$2 = booleanValue3;
+        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$0 = zBooleanValue;
+        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$1 = zBooleanValue2;
+        deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.Z$2 = zBooleanValue3;
         return deviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -56,13 +55,13 @@ final class DeviceEntryUdfpsTouchOverlayViewModel$shouldHandleTouches$1 extends 
         LogLevel logLevel = LogLevel.DEBUG;
         DeviceEntryIconLogger$$ExternalSyntheticLambda0 deviceEntryIconLogger$$ExternalSyntheticLambda0 = new DeviceEntryIconLogger$$ExternalSyntheticLambda0();
         LogBuffer logBuffer = deviceEntryIconLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DeviceEntryUdfpsTouchOverlay", logLevel, deviceEntryIconLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryUdfpsTouchOverlay", logLevel, deviceEntryIconLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
         logMessageImpl.bool3 = z3;
         logMessageImpl.bool4 = z4;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Boolean.valueOf(z4);
     }
 }

@@ -13,6 +13,7 @@ import java.security.Key;
 import java.security.KeyPair;
 import java.security.PublicKey;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -46,18 +47,18 @@ public final class KeyStoreManager {
         return keyStoreManager;
     }
 
-    public long grantKeyAccess(String str, int i) throws KeyStoreException, UnrecoverableKeyException {
+    public long grantKeyAccess(String str, int i) throws UnrecoverableKeyException, KeyStoreException {
         try {
-            KeyDescriptor grant = this.mKeyStore2.grant(createKeyDescriptorFromAlias(str), i, 260);
-            if (grant == null) {
+            KeyDescriptor keyDescriptorGrant = this.mKeyStore2.grant(createKeyDescriptorFromAlias(str), i, 260);
+            if (keyDescriptorGrant == null) {
                 Log.e(TAG, "Received a null KeyDescriptor from grant");
                 throw new KeyStoreException(4, "No ID was returned for the grant request for alias " + str + " to uid " + i);
             }
-            if (grant.domain != 1) {
-                Log.e(TAG, "Received a result outside the grant domain: " + grant.domain);
+            if (keyDescriptorGrant.domain != 1) {
+                Log.e(TAG, "Received a result outside the grant domain: " + keyDescriptorGrant.domain);
                 throw new KeyStoreException(4, "Unable to obtain a grant ID for alias " + str + " to uid " + i);
             }
-            return grant.nspace;
+            return keyDescriptorGrant.nspace;
         } catch (KeyStoreException e) {
             if (e.getNumericErrorCode() == 6) {
                 throw new UnrecoverableKeyException("No key found by the given alias");
@@ -66,7 +67,7 @@ public final class KeyStoreManager {
         }
     }
 
-    public void revokeKeyAccess(String str, int i) throws KeyStoreException, UnrecoverableKeyException {
+    public void revokeKeyAccess(String str, int i) throws InterruptedException, UnrecoverableKeyException, KeyStoreException {
         try {
             this.mKeyStore2.ungrant(createKeyDescriptorFromAlias(str), i);
         } catch (KeyStoreException e) {
@@ -77,19 +78,19 @@ public final class KeyStoreManager {
         }
     }
 
-    public Key getGrantedKeyFromId(long j) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
-        AndroidKeyStoreKey loadAndroidKeyStoreKeyFromKeystore = android.security.keystore2.AndroidKeyStoreProvider.loadAndroidKeyStoreKeyFromKeystore(this.mKeyStore2, null, j, 1);
-        if (loadAndroidKeyStoreKeyFromKeystore != null) {
-            return loadAndroidKeyStoreKeyFromKeystore;
+    public Key getGrantedKeyFromId(long j) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
+        AndroidKeyStoreKey androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore = android.security.keystore2.AndroidKeyStoreProvider.loadAndroidKeyStoreKeyFromKeystore(this.mKeyStore2, null, j, 1);
+        if (androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore != null) {
+            return androidKeyStoreKeyLoadAndroidKeyStoreKeyFromKeystore;
         }
         throw new UnrecoverableKeyException("No key found by the given alias");
     }
 
-    public KeyPair getGrantedKeyPairFromId(long j) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
+    public KeyPair getGrantedKeyPairFromId(long j) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
         return android.security.keystore2.AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(this.mKeyStore2, createKeyDescriptorFromId(j, 1));
     }
 
-    public List<X509Certificate> getGrantedCertificateChainFromId(long j) throws UnrecoverableKeyException, KeyPermanentlyInvalidatedException {
+    public List<X509Certificate> getGrantedCertificateChainFromId(long j) throws KeyPermanentlyInvalidatedException, UnrecoverableKeyException {
         PublicKey publicKey = android.security.keystore2.AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(this.mKeyStore2, createKeyDescriptorFromId(j, 1)).getPublic();
         if (publicKey instanceof AndroidKeyStorePublicKey) {
             AndroidKeyStorePublicKey androidKeyStorePublicKey = (AndroidKeyStorePublicKey) publicKey;
@@ -118,12 +119,12 @@ public final class KeyStoreManager {
         }
     }
 
-    private static Collection<X509Certificate> getCertificates(byte[] bArr) {
+    private static Collection<X509Certificate> getCertificates(byte[] bArr) throws CertificateException {
         if (bArr != null) {
             try {
-                Collection generateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(bArr));
-                if (generateCertificates != null) {
-                    return generateCertificates;
+                Collection collectionGenerateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(bArr));
+                if (collectionGenerateCertificates != null) {
+                    return collectionGenerateCertificates;
                 }
                 Log.e(TAG, "Received null certificates from a non-null certificateChain");
                 return Collections.EMPTY_LIST;

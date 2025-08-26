@@ -28,7 +28,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class SeslColorSwatchView extends View {
     public final int ROUNDED_CORNER_RADIUS_IN_Px;
@@ -57,7 +56,6 @@ class SeslColorSwatchView extends View {
     public final SeslColorSwatchViewTouchHelper mTouchHelper;
     public final Paint shadow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeslColorSwatchViewTouchHelper extends ExploreByTouchHelper {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String[][] mColorDescription;
@@ -105,14 +103,9 @@ class SeslColorSwatchView extends View {
                     }
                 }
                 int i7 = this.mVirtualCursorIndexX;
-                if (i7 != 3 || this.mVirtualCursorIndexY != 3) {
-                    if (i7 == 0 && this.mVirtualCursorIndexY == 4) {
-                        sb.append(", ");
-                        sb.append(seslColorSwatchView.mColorBrightness[this.mVirtualCursorIndexX][this.mVirtualCursorIndexY]);
-                    } else if (this.mVirtualCursorIndexY != 4) {
-                        sb.append(", ");
-                        sb.append(seslColorSwatchView.mColorBrightness[this.mVirtualCursorIndexX][this.mVirtualCursorIndexY]);
-                    }
+                if ((i7 != 3 || this.mVirtualCursorIndexY != 3) && ((i7 == 0 && this.mVirtualCursorIndexY == 4) || this.mVirtualCursorIndexY != 4)) {
+                    sb.append(", ");
+                    sb.append(seslColorSwatchView.mColorBrightness[this.mVirtualCursorIndexX][this.mVirtualCursorIndexY]);
                 }
                 seslColorSwatchView.mColorSwatchDescription[this.mVirtualCursorIndexX][this.mVirtualCursorIndexY] = sb;
             }
@@ -214,12 +207,12 @@ class SeslColorSwatchView extends View {
     }
 
     public final Point getCursorIndexAt(int i) {
-        int argb = Color.argb(255, (i >> 16) & 255, (i >> 8) & 255, i & 255);
+        int iArgb = Color.argb(255, (i >> 16) & 255, (i >> 8) & 255, i & 255);
         Point point = new Point(-1, -1);
         this.mFromUser = false;
         for (int i2 = 0; i2 < 11; i2++) {
             for (int i3 = 0; i3 < 10; i3++) {
-                if (this.mColorSwatch[i2][i3] == argb) {
+                if (this.mColorSwatch[i2][i3] == iArgb) {
                     point.set(i2, i3);
                     this.mFromUser = true;
                 }
@@ -276,14 +269,14 @@ class SeslColorSwatchView extends View {
                     Path path = new Path();
                     float f3 = this.mStartMargin;
                     c = c6;
-                    float m = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f3, 4.5f);
+                    float fM = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f3, 4.5f);
                     c2 = c7;
                     float f4 = this.mTopMargin;
                     c3 = c8;
                     float f5 = this.mSwatchItemHeight;
                     c4 = c9;
                     c5 = c10;
-                    path.addRoundRect(m, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f5, i6, f4, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f3, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f5, i6 + 1, f4, 4.5f), this.corners, Path.Direction.CW);
+                    path.addRoundRect(fM, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f5, i6, f4, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f3, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f5, i6 + 1, f4, 4.5f), this.corners, Path.Direction.CW);
                     canvas.drawPath(path, paint);
                 } else {
                     c = c6;
@@ -305,10 +298,10 @@ class SeslColorSwatchView extends View {
                         this.corners = fArr2;
                         Path path2 = new Path();
                         float f7 = this.mStartMargin;
-                        float m2 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f7, 4.5f);
+                        float fM2 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f7, 4.5f);
                         float f8 = this.mTopMargin;
                         float f9 = this.mSwatchItemHeight;
-                        path2.addRoundRect(m2, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f9, i6, f8, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f7, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f9, i6 + 1, f8, 4.5f), this.corners, Path.Direction.CW);
+                        path2.addRoundRect(fM2, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f9, i6, f8, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f7, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f9, i6 + 1, f8, 4.5f), this.corners, Path.Direction.CW);
                         canvas.drawPath(path2, paint);
                     } else if (i4 == 10 && i6 == 0) {
                         float f10 = this.ROUNDED_CORNER_RADIUS_IN_Px;
@@ -324,10 +317,10 @@ class SeslColorSwatchView extends View {
                         this.corners = fArr3;
                         Path path3 = new Path();
                         float f11 = this.mStartMargin;
-                        float m3 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f11, 4.5f);
+                        float fM3 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f11, 4.5f);
                         float f12 = this.mTopMargin;
                         float f13 = this.mSwatchItemHeight;
-                        path3.addRoundRect(m3, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f13, i6, f12, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f11, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f13, i6 + 1, f12, 4.5f), this.corners, Path.Direction.CW);
+                        path3.addRoundRect(fM3, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f13, i6, f12, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f11, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f13, i6 + 1, f12, 4.5f), this.corners, Path.Direction.CW);
                         canvas.drawPath(path3, paint);
                     } else if (i4 == 10 && i6 == i5) {
                         float f14 = this.ROUNDED_CORNER_RADIUS_IN_Px;
@@ -343,20 +336,20 @@ class SeslColorSwatchView extends View {
                         this.corners = fArr4;
                         Path path4 = new Path();
                         float f15 = this.mStartMargin;
-                        float m4 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f15, 4.5f);
+                        float fM4 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f15, 4.5f);
                         float f16 = this.mTopMargin;
                         float f17 = this.mSwatchItemHeight;
-                        path4.addRoundRect(m4, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f17, i6, f16, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f15, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f17, i6 + 1, f16, 4.5f), this.corners, Path.Direction.CW);
+                        path4.addRoundRect(fM4, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f17, i6, f16, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f15, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f17, i6 + 1, f16, 4.5f), this.corners, Path.Direction.CW);
                         canvas.drawPath(path4, paint);
                     } else {
                         float f18 = this.mStartMargin;
-                        float m5 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f18, 4.5f);
+                        float fM5 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mSwatchItemWidth, i4, f18, 4.5f);
                         float f19 = this.mTopMargin;
                         float f20 = this.mSwatchItemHeight;
                         i = i5;
                         i2 = i4;
                         i3 = i6;
-                        canvas.drawRect(m5, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f20, i6, f19, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f18, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f20, i6 + 1, f19, 4.5f), paint);
+                        canvas.drawRect(fM5, (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f20, i6, f19, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(r8, i4 + 1, f18, 4.5f), (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f20, i6 + 1, f19, 4.5f), paint);
                         i6 = i3 + 1;
                         i4 = i2;
                         i5 = i;
@@ -471,7 +464,7 @@ class SeslColorSwatchView extends View {
         this(context, attributeSet, i, 0);
     }
 
-    public SeslColorSwatchView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public SeslColorSwatchView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.ROUNDED_CORNER_RADIUS_IN_Px = 0;
         this.mSelectedVirtualViewId = -1;

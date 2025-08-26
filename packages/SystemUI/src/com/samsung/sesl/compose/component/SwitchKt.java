@@ -39,10 +39,12 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt;
 import androidx.compose.ui.platform.CompositionLocalsKt;
 import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.Dp;
+import com.android.systemui.R;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.sesl.compose.component.tokens.SeslSwitchColorSchemeKeyTokens;
 import com.samsung.sesl.compose.foundation.BasicSwitchKt;
 import com.samsung.sesl.compose.foundation.theme.BasicColorSchemeKt;
+import com.samsung.sesl.compose.phone.resources.DrawableResourcesKt;
 import com.samsung.sesl.compose.phone.resources.EmptyPainter;
 import com.samsung.sesl.compose.theme.SeslColorScheme;
 import com.samsung.sesl.compose.theme.SeslTheme;
@@ -55,7 +57,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SwitchKt {
     public static final void SeslDefaultSwitchThumb(float f, SeslSwitchColors seslSwitchColors, InteractionSource interactionSource, Modifier modifier, boolean z, Composer composer, int i) {
@@ -84,29 +85,29 @@ public abstract class SwitchKt {
             composerImpl.skipToGroupEnd();
         } else {
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslDefaultSwitchThumb (Switch.kt:245)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslDefaultSwitchThumb (Switch.kt:244)");
             }
-            MutableState collectIsHighlightedAsState = HighlightedInteractionKt.collectIsHighlightedAsState(interactionSource, composerImpl, (i2 >> 6) & 14);
+            MutableState mutableStateCollectIsHighlightedAsState = HighlightedInteractionKt.collectIsHighlightedAsState(interactionSource, composerImpl, (i2 >> 6) & 14);
             SeslSwitchDefaults.INSTANCE.getClass();
             float f3 = SeslSwitchDefaults.ThumbDiameter;
-            if (((Boolean) collectIsHighlightedAsState.getValue()).booleanValue()) {
+            if (((Boolean) mutableStateCollectIsHighlightedAsState.getValue()).booleanValue()) {
                 Dp.Companion companion = Dp.Companion;
                 f2 = 0.8f * f3;
             } else {
                 f2 = f3;
             }
-            State m8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(f2, null, "", composerImpl, 384, 10);
+            State stateM8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(f2, null, "", composerImpl, 384, 10);
             long j = z ? seslSwitchColors.uncheckedThumbColor : seslSwitchColors.disabledUncheckedThumbColor;
             long j2 = z ? seslSwitchColors.checkedThumbColor : seslSwitchColors.disabledCheckedThumbColor;
             Color.Companion companion2 = Color.Companion;
-            State m7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(ColorUtilKt.m3341lerpIbeAmgk(j, j2, f), null, "", composerImpl, 384, 10);
+            State stateM7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(ColorUtilKt.m3359lerpIbeAmgk(j, j2, f), null, "", composerImpl, 384, 10);
             composerImpl = composerImpl;
-            Modifier m135requiredSize3ABfNKs = SizeKt.m135requiredSize3ABfNKs(modifier, f3);
+            Modifier modifierM136requiredSize3ABfNKs = SizeKt.m136requiredSize3ABfNKs(modifier, f3);
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, m135requiredSize3ABfNKs);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierM136requiredSize3ABfNKs);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -119,23 +120,23 @@ public abstract class SwitchKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
-            BoxKt.Box(BackgroundKt.m26backgroundbw27NRU(PaddingKt.m124padding3ABfNKs(SizeKt.m135requiredSize3ABfNKs(Modifier.Companion, ((Dp) m8animateDpAsStateAjpBEmI.getValue()).value), SeslSwitchDefaults.ThumbPadding), ((Color) m7animateColorAsStateeuL9pac.getValue()).value, SeslSwitchDefaults.ThumbShape), composerImpl, 0);
+            BoxKt.Box(BackgroundKt.m26backgroundbw27NRU(PaddingKt.m125padding3ABfNKs(SizeKt.m136requiredSize3ABfNKs(Modifier.Companion, ((Dp) stateM8animateDpAsStateAjpBEmI.getValue()).value), SeslSwitchDefaults.ThumbPadding), ((Color) stateM7animateColorAsStateeuL9pac.getValue()).value, SeslSwitchDefaults.ThumbShape), composerImpl, 0);
             composerImpl.end(true);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda1(f, seslSwitchColors, interactionSource, modifier, z, i, 1);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda1(f, seslSwitchColors, interactionSource, modifier, z, i, 1);
         }
     }
 
@@ -161,27 +162,27 @@ public abstract class SwitchKt {
             composerImpl.skipToGroupEnd();
         } else {
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslDefaultSwitchTrack (Switch.kt:212)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslDefaultSwitchTrack (Switch.kt:211)");
             }
             long j = z ? seslSwitchColors.checkedTrackColor : seslSwitchColors.disabledCheckedTrackColor;
             long j2 = z ? seslSwitchColors.uncheckedTrackColor : seslSwitchColors.disabledUncheckedTrackColor;
             Color.Companion companion = Color.Companion;
-            long m3341lerpIbeAmgk = ColorUtilKt.m3341lerpIbeAmgk(j2, j, f);
+            long jM3359lerpIbeAmgk = ColorUtilKt.m3359lerpIbeAmgk(j2, j, f);
             if (z) {
-                j = m3341lerpIbeAmgk;
+                j = jM3359lerpIbeAmgk;
             } else if (f < 0.5f) {
                 j = j2;
             }
-            State m7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(j, null, "", composerImpl, 384, 10);
+            State stateM7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(j, null, "", composerImpl, 384, 10);
             SeslSwitchDefaults.INSTANCE.getClass();
-            BoxKt.Box(BackgroundKt.m26backgroundbw27NRU(SizeKt.m136requiredSizeVpY3zN4(modifier, SeslSwitchDefaults.TrackWidth, SeslSwitchDefaults.TrackHeight), ((Color) m7animateColorAsStateeuL9pac.getValue()).value, SeslSwitchDefaults.TrackShape), composerImpl, 0);
+            BoxKt.Box(BackgroundKt.m26backgroundbw27NRU(SizeKt.m137requiredSizeVpY3zN4(modifier, SeslSwitchDefaults.TrackWidth, SeslSwitchDefaults.TrackHeight), ((Color) stateM7animateColorAsStateeuL9pac.getValue()).value, SeslSwitchDefaults.TrackShape), composerImpl, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda0(f, seslSwitchColors, modifier, z, i, 1);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda0(f, seslSwitchColors, modifier, z, i, 1);
         }
     }
 
@@ -212,19 +213,19 @@ public abstract class SwitchKt {
             composerImpl = composerImpl2;
         } else {
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslOpenThemeSwitchThumb (Switch.kt:385)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslOpenThemeSwitchThumb (Switch.kt:384)");
             }
-            SeslSwitchOpenThemeTokens rememberSwitchOpenThemeTokens = rememberSwitchOpenThemeTokens((Context) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalContext), composerImpl2);
-            Painter painter = rememberSwitchOpenThemeTokens.thumb;
-            Painter painter2 = z ? rememberSwitchOpenThemeTokens.thumbOn : rememberSwitchOpenThemeTokens.thumbDisabledOn;
-            Painter painter3 = z ? rememberSwitchOpenThemeTokens.thumbOff : rememberSwitchOpenThemeTokens.thumbDisabledOff;
+            SeslSwitchOpenThemeTokens seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens = rememberSwitchOpenThemeTokens((Context) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalContext), composerImpl2);
+            Painter painter = seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumb;
+            Painter painter2 = z ? seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumbOn : seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumbDisabledOn;
+            Painter painter3 = z ? seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumbOff : seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumbDisabledOff;
             if (Intrinsics.areEqual(painter, EmptyPainter.INSTANCE)) {
-                composerImpl2.startReplaceGroup(-1148148744);
+                composerImpl2.startReplaceGroup(-1148006888);
                 composerImpl = composerImpl2;
                 SeslDefaultSwitchThumb(f, seslSwitchColors, interactionSource, modifier, z, composerImpl, i2 & 65534);
                 composerImpl.end(false);
             } else {
-                composerImpl2.startReplaceGroup(-1148361931);
+                composerImpl2.startReplaceGroup(-1148220075);
                 BoxKt.Box(PainterModifierKt.paint$default(PainterModifierKt.paint$default(PainterModifierKt.paint$default(modifier, painter, null, null, 0.0f, null, 62), painter2, null, null, f, null, 46), painter3, null, null, 1 - f, null, 46), composerImpl2, 0);
                 composerImpl2.end(false);
                 composerImpl = composerImpl2;
@@ -233,9 +234,9 @@ public abstract class SwitchKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda1(f, seslSwitchColors, interactionSource, modifier, z, i, 0);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda1(f, seslSwitchColors, interactionSource, modifier, z, i, 0);
         }
     }
 
@@ -263,46 +264,46 @@ public abstract class SwitchKt {
             composerImpl = composerImpl2;
         } else {
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslOpenThemeSwitchTrack (Switch.kt:280)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslOpenThemeSwitchTrack (Switch.kt:279)");
             }
-            SeslSwitchOpenThemeTokens rememberSwitchOpenThemeTokens = rememberSwitchOpenThemeTokens((Context) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalContext), composerImpl2);
-            Painter painter = z ? rememberSwitchOpenThemeTokens.trackOn : rememberSwitchOpenThemeTokens.trackDisabledOn;
-            Painter painter2 = z ? rememberSwitchOpenThemeTokens.trackOff : rememberSwitchOpenThemeTokens.trackDisabledOff;
-            Painter painter3 = rememberSwitchOpenThemeTokens.thumb;
+            SeslSwitchOpenThemeTokens seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens = rememberSwitchOpenThemeTokens((Context) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalContext), composerImpl2);
+            Painter painter = z ? seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.trackOn : seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.trackDisabledOn;
+            Painter painter2 = z ? seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.trackOff : seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.trackDisabledOff;
+            Painter painter3 = seslSwitchOpenThemeTokensRememberSwitchOpenThemeTokens.thumb;
             EmptyPainter emptyPainter = EmptyPainter.INSTANCE;
             if (Intrinsics.areEqual(painter, emptyPainter) || Intrinsics.areEqual(painter2, emptyPainter)) {
-                composerImpl2.startReplaceGroup(-1448417418);
+                composerImpl2.startReplaceGroup(-1448445194);
                 composerImpl = composerImpl2;
                 SeslDefaultSwitchTrack(f, seslSwitchColors, modifier, z, composerImpl, i2 & 8190);
                 composerImpl.end(false);
             } else {
-                composerImpl2.startReplaceGroup(-1448186499);
+                composerImpl2.startReplaceGroup(-1448214275);
                 Density density = (Density) composerImpl2.consume(CompositionLocalsKt.LocalDensity);
-                float mo53toDpu2uoSUM = density.mo53toDpu2uoSUM(Size.m417getWidthimpl(painter3.mo561getIntrinsicSizeNHjbRc()));
+                float fMo54toDpu2uoSUM = density.mo54toDpu2uoSUM(Size.m419getWidthimpl(painter3.mo563getIntrinsicSizeNHjbRc()));
                 SeslSwitchDefaults.INSTANCE.getClass();
-                Dp m835boximpl = Dp.m835boximpl((SeslSwitchDefaults.TrackWidth / SeslSwitchDefaults.ThumbWidth) * mo53toDpu2uoSUM);
-                Dp m835boximpl2 = Dp.m835boximpl(density.mo53toDpu2uoSUM(Size.m417getWidthimpl(painter.mo561getIntrinsicSizeNHjbRc())));
-                if (m835boximpl.compareTo(m835boximpl2) < 0) {
-                    m835boximpl = m835boximpl2;
+                Dp dpM837boximpl = Dp.m837boximpl((SeslSwitchDefaults.TrackWidth / SeslSwitchDefaults.ThumbWidth) * fMo54toDpu2uoSUM);
+                Dp dpM837boximpl2 = Dp.m837boximpl(density.mo54toDpu2uoSUM(Size.m419getWidthimpl(painter.mo563getIntrinsicSizeNHjbRc())));
+                if (dpM837boximpl.compareTo(dpM837boximpl2) < 0) {
+                    dpM837boximpl = dpM837boximpl2;
                 }
-                Dp m835boximpl3 = Dp.m835boximpl(density.mo53toDpu2uoSUM(Size.m417getWidthimpl(painter2.mo561getIntrinsicSizeNHjbRc())));
-                if (m835boximpl.compareTo(m835boximpl3) < 0) {
-                    m835boximpl = m835boximpl3;
+                Dp dpM837boximpl3 = Dp.m837boximpl(density.mo54toDpu2uoSUM(Size.m419getWidthimpl(painter2.mo563getIntrinsicSizeNHjbRc())));
+                if (dpM837boximpl.compareTo(dpM837boximpl3) < 0) {
+                    dpM837boximpl = dpM837boximpl3;
                 }
-                float f2 = m835boximpl.value;
-                Dp m835boximpl4 = Dp.m835boximpl(SeslSwitchDefaults.TrackHeight);
-                Dp m835boximpl5 = Dp.m835boximpl(density.mo53toDpu2uoSUM(Size.m415getHeightimpl(painter.mo561getIntrinsicSizeNHjbRc())));
-                if (m835boximpl4.compareTo(m835boximpl5) < 0) {
-                    m835boximpl4 = m835boximpl5;
+                float f2 = dpM837boximpl.value;
+                Dp dpM837boximpl4 = Dp.m837boximpl(SeslSwitchDefaults.TrackHeight);
+                Dp dpM837boximpl5 = Dp.m837boximpl(density.mo54toDpu2uoSUM(Size.m417getHeightimpl(painter.mo563getIntrinsicSizeNHjbRc())));
+                if (dpM837boximpl4.compareTo(dpM837boximpl5) < 0) {
+                    dpM837boximpl4 = dpM837boximpl5;
                 }
-                Dp m835boximpl6 = Dp.m835boximpl(density.mo53toDpu2uoSUM(Size.m415getHeightimpl(painter2.mo561getIntrinsicSizeNHjbRc())));
-                if (m835boximpl4.compareTo(m835boximpl6) < 0) {
-                    m835boximpl4 = m835boximpl6;
+                Dp dpM837boximpl6 = Dp.m837boximpl(density.mo54toDpu2uoSUM(Size.m417getHeightimpl(painter2.mo563getIntrinsicSizeNHjbRc())));
+                if (dpM837boximpl4.compareTo(dpM837boximpl6) < 0) {
+                    dpM837boximpl4 = dpM837boximpl6;
                 }
-                Modifier m136requiredSizeVpY3zN4 = SizeKt.m136requiredSizeVpY3zN4(PaddingKt.m124padding3ABfNKs(modifier, SeslSwitchDefaults.ThumbPadding), f2, m835boximpl4.value);
+                Modifier modifierM137requiredSizeVpY3zN4 = SizeKt.m137requiredSizeVpY3zN4(PaddingKt.m125padding3ABfNKs(modifier, SeslSwitchDefaults.ThumbPadding), f2, dpM837boximpl4.value);
                 ContentScale.Companion.getClass();
                 ContentScale$Companion$FillBounds$1 contentScale$Companion$FillBounds$1 = ContentScale.Companion.FillBounds;
-                BoxKt.Box(PainterModifierKt.paint$default(PainterModifierKt.paint$default(m136requiredSizeVpY3zN4, painter, null, contentScale$Companion$FillBounds$1, f, null, 38), painter2, null, contentScale$Companion$FillBounds$1, 1 - f, null, 38), composerImpl2, 0);
+                BoxKt.Box(PainterModifierKt.paint$default(PainterModifierKt.paint$default(modifierM137requiredSizeVpY3zN4, painter, null, contentScale$Companion$FillBounds$1, f, null, 38), painter2, null, contentScale$Companion$FillBounds$1, 1 - f, null, 38), composerImpl2, 0);
                 composerImpl2.end(false);
                 composerImpl = composerImpl2;
             }
@@ -310,9 +311,9 @@ public abstract class SwitchKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda0(f, seslSwitchColors, modifier, z, i, 0);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SwitchKt$$ExternalSyntheticLambda0(f, seslSwitchColors, modifier, z, i, 0);
         }
     }
 
@@ -325,14 +326,9 @@ public abstract class SwitchKt {
         int i4;
         boolean z4;
         SeslSwitchColors seslSwitchColors3;
-        long Color;
-        long Color2;
-        long Color3;
-        long Color4;
         final Modifier.Companion companion3;
         final boolean z5;
         final MutableInteractionSource mutableInteractionSource3;
-        int i5;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1960604926);
         if ((i & 6) == 0) {
@@ -343,23 +339,20 @@ public abstract class SwitchKt {
         if ((i & 48) == 0) {
             i3 |= composerImpl.changedInstance(function1) ? 32 : 16;
         }
-        int i6 = i3 | 3456;
+        int i5 = i3 | 3456;
         if ((i & 24576) == 0) {
             if ((i2 & 16) == 0) {
                 seslSwitchColors2 = seslSwitchColors;
-                if (composerImpl.changed(seslSwitchColors2)) {
-                    i5 = NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT;
-                    i6 |= i5;
-                }
+                int i6 = composerImpl.changed(seslSwitchColors2) ? NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT : 8192;
+                i5 |= i6;
             } else {
                 seslSwitchColors2 = seslSwitchColors;
             }
-            i5 = 8192;
-            i6 |= i5;
+            i5 |= i6;
         } else {
             seslSwitchColors2 = seslSwitchColors;
         }
-        int i7 = i6 | 196608;
+        int i7 = i5 | 196608;
         if ((74899 & i7) == 74898 && composerImpl.getSkipping()) {
             composerImpl.skipToGroupEnd();
             companion3 = companion;
@@ -373,13 +366,13 @@ public abstract class SwitchKt {
                     SeslSwitchDefaults.INSTANCE.getClass();
                     composerImpl.startReplaceGroup(-1848188967);
                     if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefaults.colors (Switch.kt:524)");
+                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefaults.colors (Switch.kt:523)");
                     }
                     SeslTheme.INSTANCE.getClass();
                     SeslColorScheme colorScheme = SeslTheme.getColorScheme(composerImpl);
                     composerImpl.startReplaceGroup(739932881);
                     if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefaults.defaultSwitchColors (Switch.kt:566)");
+                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefaults.defaultSwitchColors (Switch.kt:565)");
                     }
                     SeslSwitchColors seslSwitchColors4 = colorScheme.defaultSwitchColorsCached;
                     if (seslSwitchColors4 == null) {
@@ -388,11 +381,7 @@ public abstract class SwitchKt {
                         i4 = -57345;
                         long color3 = BasicColorSchemeKt.toColor(SeslSwitchColorSchemeKeyTokens.ThumbOnColor, composerImpl);
                         long color4 = BasicColorSchemeKt.toColor(SeslSwitchColorSchemeKeyTokens.ThumbOffColor, composerImpl);
-                        Color = ColorKt.Color(Color.m461getRedimpl(color3), Color.m460getGreenimpl(color3), Color.m458getBlueimpl(color3), 0.4f, Color.m459getColorSpaceimpl(color3));
-                        Color2 = ColorKt.Color(Color.m461getRedimpl(color4), Color.m460getGreenimpl(color4), Color.m458getBlueimpl(color4), 0.4f, Color.m459getColorSpaceimpl(color4));
-                        Color3 = ColorKt.Color(Color.m461getRedimpl(color), Color.m460getGreenimpl(color), Color.m458getBlueimpl(color), 0.4f, Color.m459getColorSpaceimpl(color));
-                        Color4 = ColorKt.Color(Color.m461getRedimpl(color2), Color.m460getGreenimpl(color2), Color.m458getBlueimpl(color2), 0.4f, Color.m459getColorSpaceimpl(color2));
-                        seslSwitchColors3 = new SeslSwitchColors(color3, color4, Color, Color2, color, color2, Color3, Color4, null);
+                        seslSwitchColors3 = new SeslSwitchColors(color3, color4, ColorKt.Color(Color.m463getRedimpl(color3), Color.m462getGreenimpl(color3), Color.m460getBlueimpl(color3), 0.4f, Color.m461getColorSpaceimpl(color3)), ColorKt.Color(Color.m463getRedimpl(color4), Color.m462getGreenimpl(color4), Color.m460getBlueimpl(color4), 0.4f, Color.m461getColorSpaceimpl(color4)), color, color2, ColorKt.Color(Color.m463getRedimpl(color), Color.m462getGreenimpl(color), Color.m460getBlueimpl(color), 0.4f, Color.m461getColorSpaceimpl(color)), ColorKt.Color(Color.m463getRedimpl(color2), Color.m462getGreenimpl(color2), Color.m460getBlueimpl(color2), 0.4f, Color.m461getColorSpaceimpl(color2)), null);
                         colorScheme.defaultSwitchColorsCached = seslSwitchColors3;
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
@@ -415,16 +404,16 @@ public abstract class SwitchKt {
                     i7 &= i4;
                     seslSwitchColors2 = seslSwitchColors3;
                 }
-                composerImpl.startReplaceGroup(345878357);
-                Object rememberedValue = composerImpl.rememberedValue();
+                composerImpl.startReplaceGroup(345877461);
+                Object objRememberedValue = composerImpl.rememberedValue();
                 Composer.Companion.getClass();
-                if (rememberedValue == Composer.Companion.Empty) {
-                    rememberedValue = InteractionSourceKt.MutableInteractionSource();
-                    composerImpl.updateRememberedValue(rememberedValue);
+                if (objRememberedValue == Composer.Companion.Empty) {
+                    objRememberedValue = InteractionSourceKt.MutableInteractionSource();
+                    composerImpl.updateRememberedValue(objRememberedValue);
                 }
                 composerImpl.end(false);
                 companion2 = companion4;
-                mutableInteractionSource2 = (MutableInteractionSource) rememberedValue;
+                mutableInteractionSource2 = (MutableInteractionSource) objRememberedValue;
                 z3 = true;
             } else {
                 composerImpl.skipToGroupEnd();
@@ -437,55 +426,63 @@ public abstract class SwitchKt {
             }
             composerImpl.endDefaults();
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch (Switch.kt:123)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch (Switch.kt:122)");
             }
-            BasicSwitchKt.SeslBasicSwitch(z, function1, companion2, ComposableLambdaKt.rememberComposableLambda(766207923, new Function3() { // from class: com.samsung.sesl.compose.component.SwitchKt$SeslSwitch$4
+            BasicSwitchKt.SeslBasicSwitch(z, function1, companion2, ComposableLambdaKt.rememberComposableLambda(766207923, new Function3() { // from class: com.samsung.sesl.compose.component.SwitchKt.SeslSwitch.4
+                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
-                    float floatValue = ((Number) obj).floatValue();
+                    float fFloatValue = ((Number) obj).floatValue();
                     Composer composer2 = (Composer) obj2;
-                    int intValue = ((Number) obj3).intValue();
-                    if ((intValue & 6) == 0) {
-                        intValue |= ((ComposerImpl) composer2).changed(floatValue) ? 4 : 2;
+                    int iIntValue = ((Number) obj3).intValue();
+                    if ((iIntValue & 6) == 0) {
+                        iIntValue |= ((ComposerImpl) composer2).changed(fFloatValue) ? 4 : 2;
                     }
-                    if ((intValue & 19) == 18) {
+                    if ((iIntValue & 19) == 18) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch.<anonymous> (Switch.kt:130)");
+                            }
+                            SeslSwitchDefault.INSTANCE.Thumb(fFloatValue, seslSwitchColors2, mutableInteractionSource2, null, z3, composer2, iIntValue & 14);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch.<anonymous> (Switch.kt:131)");
-                    }
-                    SeslSwitchDefault.INSTANCE.Thumb(floatValue, SeslSwitchColors.this, mutableInteractionSource2, null, z3, composer2, intValue & 14);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
-            }, composerImpl), ComposableLambdaKt.rememberComposableLambda(1029904948, new Function3() { // from class: com.samsung.sesl.compose.component.SwitchKt$SeslSwitch$5
+            }, composerImpl), ComposableLambdaKt.rememberComposableLambda(1029904948, new Function3() { // from class: com.samsung.sesl.compose.component.SwitchKt.SeslSwitch.5
+                /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
-                    float floatValue = ((Number) obj).floatValue();
+                    float fFloatValue = ((Number) obj).floatValue();
                     Composer composer2 = (Composer) obj2;
-                    int intValue = ((Number) obj3).intValue();
-                    if ((intValue & 6) == 0) {
-                        intValue |= ((ComposerImpl) composer2).changed(floatValue) ? 4 : 2;
+                    int iIntValue = ((Number) obj3).intValue();
+                    if ((iIntValue & 6) == 0) {
+                        iIntValue |= ((ComposerImpl) composer2).changed(fFloatValue) ? 4 : 2;
                     }
-                    if ((intValue & 19) == 18) {
+                    if ((iIntValue & 19) == 18) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch.<anonymous> (Switch.kt:140)");
+                            }
+                            SeslSwitchDefault.INSTANCE.Track(fFloatValue, seslSwitchColors2, null, z3, composer2, iIntValue & 14);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitch.<anonymous> (Switch.kt:141)");
-                    }
-                    SeslSwitchDefault.INSTANCE.Track(floatValue, SeslSwitchColors.this, null, z3, composer2, intValue & 14);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -498,82 +495,48 @@ public abstract class SwitchKt {
             mutableInteractionSource3 = mutableInteractionSource2;
         }
         final SeslSwitchColors seslSwitchColors5 = seslSwitchColors2;
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SwitchKt$$ExternalSyntheticLambda4
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SwitchKt$$ExternalSyntheticLambda4
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     MutableInteractionSource mutableInteractionSource4 = mutableInteractionSource3;
-                    SwitchKt.SeslSwitch(z, function1, companion3, z5, seslSwitchColors5, mutableInteractionSource4, (Composer) obj, updateChangedFlags, i2);
+                    SwitchKt.SeslSwitch(z, function1, companion3, z5, seslSwitchColors5, mutableInteractionSource4, (Composer) obj, iUpdateChangedFlags, i2);
                     return Unit.INSTANCE;
                 }
             };
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x002a, code lost:
-    
-        if (r1 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x002c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens rememberSwitchOpenThemeTokens(android.content.Context r12, androidx.compose.runtime.Composer r13) {
-        /*
-            androidx.compose.runtime.ComposerImpl r13 = (androidx.compose.runtime.ComposerImpl) r13
-            r0 = 157505492(0x96357d4, float:2.7365428E-33)
-            r13.startReplaceGroup(r0)
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto L13
-            java.lang.String r0 = "com.samsung.sesl.compose.component.rememberSwitchOpenThemeTokens (Switch.kt:343)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r0)
-        L13:
-            r0 = -474900220(0xffffffffe3b19904, float:-6.552199E21)
-            r13.startReplaceGroup(r0)
-            boolean r0 = r13.changed(r12)
-            java.lang.Object r1 = r13.rememberedValue()
-            if (r0 != 0) goto L2c
-            androidx.compose.runtime.Composer$Companion r0 = androidx.compose.runtime.Composer.Companion
-            r0.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r0 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r1 != r0) goto L74
-        L2c:
-            com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens r2 = new com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens
-            r0 = 2131235522(0x7f0812c2, float:1.808724E38)
-            androidx.compose.ui.graphics.painter.Painter r3 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235520(0x7f0812c0, float:1.8087236E38)
-            androidx.compose.ui.graphics.painter.Painter r4 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235521(0x7f0812c1, float:1.8087238E38)
-            androidx.compose.ui.graphics.painter.Painter r5 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235519(0x7f0812bf, float:1.8087234E38)
-            androidx.compose.ui.graphics.painter.Painter r6 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235512(0x7f0812b8, float:1.808722E38)
-            androidx.compose.ui.graphics.painter.Painter r7 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235510(0x7f0812b6, float:1.8087216E38)
-            androidx.compose.ui.graphics.painter.Painter r8 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235511(0x7f0812b7, float:1.8087218E38)
-            androidx.compose.ui.graphics.painter.Painter r9 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235509(0x7f0812b5, float:1.8087214E38)
-            androidx.compose.ui.graphics.painter.Painter r10 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r0 = 2131235526(0x7f0812c6, float:1.8087248E38)
-            androidx.compose.ui.graphics.painter.Painter r11 = com.samsung.sesl.compose.phone.resources.DrawableResourcesKt.seslDrawablePainter(r0, r12)
-            r2.<init>(r3, r4, r5, r6, r7, r8, r9, r10, r11)
-            r13.updateRememberedValue(r2)
-            r1 = r2
-        L74:
-            com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens r1 = (com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens) r1
-            r12 = 0
-            r13.end(r12)
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto L83
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        L83:
-            r13.end(r12)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.sesl.compose.component.SwitchKt.rememberSwitchOpenThemeTokens(android.content.Context, androidx.compose.runtime.Composer):com.samsung.sesl.compose.component.SeslSwitchOpenThemeTokens");
+    public static final SeslSwitchOpenThemeTokens rememberSwitchOpenThemeTokens(Context context, Composer composer) {
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startReplaceGroup(157505492);
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("com.samsung.sesl.compose.component.rememberSwitchOpenThemeTokens (Switch.kt:342)");
+        }
+        composerImpl.startReplaceGroup(-474900945);
+        boolean zChanged = composerImpl.changed(context);
+        Object objRememberedValue = composerImpl.rememberedValue();
+        if (!zChanged) {
+            Composer.Companion.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                SeslSwitchOpenThemeTokens seslSwitchOpenThemeTokens = new SeslSwitchOpenThemeTokens(DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_track_on, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_track_disabled_on, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_track_off, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_track_disabled_off, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_thumb_on, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_thumb_disabled_on, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_thumb_off, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switch_thumb_disabled_off, context), DrawableResourcesKt.seslDrawablePainter(R.drawable.sesl_switchthumb, context));
+                composerImpl.updateRememberedValue(seslSwitchOpenThemeTokens);
+                objRememberedValue = seslSwitchOpenThemeTokens;
+            }
+        }
+        SeslSwitchOpenThemeTokens seslSwitchOpenThemeTokens2 = (SeslSwitchOpenThemeTokens) objRememberedValue;
+        composerImpl.end(false);
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        composerImpl.end(false);
+        return seslSwitchOpenThemeTokens2;
     }
 }

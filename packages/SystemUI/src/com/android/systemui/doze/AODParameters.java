@@ -10,7 +10,6 @@ import com.android.systemui.util.SettingsHelper;
 import dagger.Lazy;
 import java.util.Calendar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AODParameters {
     private final SettingsHelper.OnChangedCallback mAODSettingStateCallback;
@@ -26,7 +25,7 @@ public class AODParameters {
         SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.doze.AODParameters$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                AODParameters aODParameters = AODParameters.this;
+                AODParameters aODParameters = this.f$0;
                 if (!aODParameters.mIsSystemUser) {
                     Log.d("AODParameters", "onAODSettingStateChanged: return not System user");
                 } else {
@@ -58,14 +57,14 @@ public class AODParameters {
     }
 
     public final void updateDozeAlwaysOn() {
-        boolean isAODEnabled = this.mSettingsHelper.isAODEnabled();
-        boolean isAODTapToShowModeEnabled = this.mSettingsHelper.isAODTapToShowModeEnabled();
-        boolean isAODShowForNewNotiModeEnabled = this.mSettingsHelper.isAODShowForNewNotiModeEnabled();
-        if (!isAODEnabled) {
+        boolean zIsAODEnabled = this.mSettingsHelper.isAODEnabled();
+        boolean zIsAODTapToShowModeEnabled = this.mSettingsHelper.isAODTapToShowModeEnabled();
+        boolean zIsAODShowForNewNotiModeEnabled = this.mSettingsHelper.isAODShowForNewNotiModeEnabled();
+        if (!zIsAODEnabled) {
             this.mDozeAlwaysOn = false;
             return;
         }
-        if (isAODTapToShowModeEnabled || isAODShowForNewNotiModeEnabled) {
+        if (zIsAODTapToShowModeEnabled || zIsAODShowForNewNotiModeEnabled) {
             this.mDozeAlwaysOn = false;
             return;
         }

@@ -16,7 +16,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SceneInteractor$transitionState$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -54,22 +53,22 @@ final class SceneInteractor$transitionState$1 extends SuspendLambda implements F
         boolean z = observableTransitionState instanceof ObservableTransitionState.Transition;
         LogBuffer logBuffer = sceneLogger.logBuffer;
         if (z) {
-            LogMessage obtain = logBuffer.obtain("SceneFramework", LogLevel.INFO, new SceneLogger$$ExternalSyntheticLambda0(0), null);
+            LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", LogLevel.INFO, new SceneLogger$$ExternalSyntheticLambda0(0), null);
             ObservableTransitionState.Transition transition = (ObservableTransitionState.Transition) observableTransitionState;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = transition.fromContent.toString();
             logMessageImpl.str2 = transition.toContent.toString();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         } else {
             if (!(observableTransitionState instanceof ObservableTransitionState.Idle)) {
                 throw new NoWhenBranchMatchedException();
             }
-            LogMessage obtain2 = logBuffer.obtain("SceneFramework", LogLevel.INFO, new SceneLogger$$ExternalSyntheticLambda0(1), null);
+            LogMessage logMessageObtain2 = logBuffer.obtain("SceneFramework", LogLevel.INFO, new SceneLogger$$ExternalSyntheticLambda0(1), null);
             ObservableTransitionState.Idle idle = (ObservableTransitionState.Idle) observableTransitionState;
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
             logMessageImpl2.str1 = idle.currentScene.toString();
             logMessageImpl2.str2 = CollectionsKt___CollectionsKt.joinToString$default(idle.currentOverlays, null, null, null, null, 63);
-            logBuffer.commit(obtain2);
+            logBuffer.commit(logMessageObtain2);
         }
         return Unit.INSTANCE;
     }

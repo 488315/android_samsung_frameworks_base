@@ -8,7 +8,6 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionInfo;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenCapturePopupActionViewModel implements ActionViewModel {
     public ActionInfo mInfo;
@@ -26,15 +25,15 @@ public class ScreenCapturePopupActionViewModel implements ActionViewModel {
         ScreenCapturePopupController screenCapturePopupController = this.mPopupController;
         int i = screenCapturePopupController.mPrefrerences.getInt(SystemUIAnalytics.QPNE_KEY_COUNT, 0);
         LogWrapper logWrapper = screenCapturePopupController.mLogWrapper;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "current count : ", ", diff : ");
-        m.append(Long.valueOf(System.currentTimeMillis() - screenCapturePopupController.mPrefrerences.getLong("dismissTime", 0L)));
-        logWrapper.logDebug("ScreenCapturePopupController", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "current count : ", ", diff : ");
+        sbM.append(Long.valueOf(System.currentTimeMillis() - screenCapturePopupController.mPrefrerences.getLong("dismissTime", 0L)));
+        logWrapper.logDebug("ScreenCapturePopupController", sbM.toString());
         if (i >= 1 || System.currentTimeMillis() - screenCapturePopupController.mPrefrerences.getLong("dismissTime", 0L) > 10000) {
             return false;
         }
-        SharedPreferences.Editor edit = screenCapturePopupController.mPrefrerences.edit();
-        edit.putInt(SystemUIAnalytics.QPNE_KEY_COUNT, screenCapturePopupController.mPrefrerences.getInt(SystemUIAnalytics.QPNE_KEY_COUNT, 0) + 1);
-        edit.apply();
+        SharedPreferences.Editor editorEdit = screenCapturePopupController.mPrefrerences.edit();
+        editorEdit.putInt(SystemUIAnalytics.QPNE_KEY_COUNT, screenCapturePopupController.mPrefrerences.getInt(SystemUIAnalytics.QPNE_KEY_COUNT, 0) + 1);
+        editorEdit.apply();
         return true;
     }
 

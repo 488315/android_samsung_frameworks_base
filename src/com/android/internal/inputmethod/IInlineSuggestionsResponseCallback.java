@@ -46,9 +46,9 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionsResponseCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineSuggestionsResponseCallback)) {
-                return (IInlineSuggestionsResponseCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionsResponseCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineSuggestionsResponseCallback)) {
+                return (IInlineSuggestionsResponseCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -102,14 +102,14 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsResponseCallback
             public void onInlineSuggestionsResponse(AutofillId autofillId, InlineSuggestionsResponse inlineSuggestionsResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionsResponseCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeTypedObject(inlineSuggestionsResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionsResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeTypedObject(inlineSuggestionsResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

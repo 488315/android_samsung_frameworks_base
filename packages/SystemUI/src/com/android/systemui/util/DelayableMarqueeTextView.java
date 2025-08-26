@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import com.android.systemui.res.R$styleable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DelayableMarqueeTextView extends SafeMarqueeTextView {
     public static final long DEFAULT_MARQUEE_DELAY = 2000;
@@ -18,7 +17,6 @@ public class DelayableMarqueeTextView extends SafeMarqueeTextView {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,16 +84,14 @@ public class DelayableMarqueeTextView extends SafeMarqueeTextView {
         this.enableMarquee = new Runnable() { // from class: com.android.systemui.util.DelayableMarqueeTextView$enableMarquee$1
             @Override // java.lang.Runnable
             public final void run() {
-                boolean z;
-                z = DelayableMarqueeTextView.this.wantsMarquee;
-                if (z) {
-                    DelayableMarqueeTextView.this.marqueeBlocked = false;
-                    DelayableMarqueeTextView.this.startMarquee();
+                if (this.this$0.wantsMarquee) {
+                    this.this$0.marqueeBlocked = false;
+                    this.this$0.startMarquee();
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.DelayableMarqueeTextView, i, i2);
-        this.marqueeDelay = obtainStyledAttributes.getInteger(0, 2000);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.DelayableMarqueeTextView, i, i2);
+        this.marqueeDelay = typedArrayObtainStyledAttributes.getInteger(0, 2000);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

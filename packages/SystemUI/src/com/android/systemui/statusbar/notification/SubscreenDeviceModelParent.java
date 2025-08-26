@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -43,6 +44,7 @@ import androidx.appcompat.app.AlertController$$ExternalSyntheticOutline0;
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,11 +63,15 @@ import com.android.systemui.R;
 import com.android.systemui.bixby2.controller.NotificationController;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.settings.UserContextProvider;
 import com.android.systemui.statusbar.notification.ConversationNotificationManager;
 import com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter;
 import com.android.systemui.statusbar.notification.SubscreenNotificationGroupAdapter;
 import com.android.systemui.statusbar.notification.SubscreenNotificationInfo;
+import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotifCollection;
 import com.android.systemui.statusbar.notification.collection.NotifCollection$$ExternalSyntheticLambda9;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
@@ -74,6 +80,7 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.Co
 import com.android.systemui.statusbar.notification.collection.render.GroupMembershipManager;
 import com.android.systemui.statusbar.notification.collection.render.NotificationVisibilityProvider;
 import com.android.systemui.statusbar.notification.interruption.NotificationInterruptStateProvider;
+import com.android.systemui.statusbar.notification.interruption.NotificationInterruptStateProviderImpl;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData;
@@ -98,7 +105,6 @@ import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenDeviceModelParent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -165,7 +171,7 @@ public class SubscreenDeviceModelParent {
         @Override // java.lang.Runnable
         public final void run() {
             TextView textView;
-            SubscreenNotificationDetail subscreenNotificationDetail = SubscreenDeviceModelParent.this.popupViewNotiTemplate;
+            SubscreenNotificationDetail subscreenNotificationDetail = this.this$0.popupViewNotiTemplate;
             if (subscreenNotificationDetail == null || (textView = subscreenNotificationDetail.mMarqueeText) == null) {
                 return;
             }
@@ -175,18 +181,18 @@ public class SubscreenDeviceModelParent {
     public final SubscreenDeviceModelParent$topPopupAnimationListener$1 topPopupAnimationListener = new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$topPopupAnimationListener$1
         @Override // android.animation.Animator.AnimatorListener
         public final void onAnimationEnd(Animator animator) {
-            SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
             Log.d("S.S.N.", " topPopupAnimationListener - onAnimationEnd , mNotiPopupView : " + subscreenDeviceModelParent.mNotiPopupView + ", popupViewNotiTemplate : " + subscreenDeviceModelParent.popupViewNotiTemplate);
-            View view = SubscreenDeviceModelParent.this.mNotiPopupView;
+            View view = this.this$0.mNotiPopupView;
             if (view != null) {
                 view.setVisibility(4);
-                SubscreenDeviceModelParent subscreenDeviceModelParent2 = SubscreenDeviceModelParent.this;
+                SubscreenDeviceModelParent subscreenDeviceModelParent2 = this.this$0;
                 WindowManager windowManager = subscreenDeviceModelParent2.mWindowManager;
                 if (windowManager != null) {
                     windowManager.removeViewImmediate(subscreenDeviceModelParent2.mNotiPopupView);
                 }
             }
-            SubscreenDeviceModelParent subscreenDeviceModelParent3 = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent3 = this.this$0;
             subscreenDeviceModelParent3.mNotiPopupView = null;
             subscreenDeviceModelParent3.popupViewNotiTemplate = null;
             subscreenDeviceModelParent3.currentPopupViewEntry = null;
@@ -210,7 +216,7 @@ public class SubscreenDeviceModelParent {
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onFinishedGoingToSleep() {
             Log.d("S.S.N.", " onFinishedGoingToSleep");
-            SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
             if (subscreenDeviceModelParent.popupViewShowing) {
                 Log.d("S.S.N.", " onFinishedGoingToSleep and HUN is showing, so dismiss it");
                 subscreenDeviceModelParent.dismissImmediately(2);
@@ -231,7 +237,7 @@ public class SubscreenDeviceModelParent {
             SubscreenNotificationGroupAdapter subscreenNotificationGroupAdapter;
             SubscreenNotificationInfo subscreenNotificationInfo;
             ExpandableNotificationRow expandableNotificationRow;
-            SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
             if (subscreenDeviceModelParent.isSubScreen()) {
                 Log.d("S.S.N.", " onStartedGoingToSleep");
                 if (subscreenDeviceModelParent.isShownDetail()) {
@@ -253,7 +259,7 @@ public class SubscreenDeviceModelParent {
             int i = ((WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class)).mLastWakeReason;
             ListPopupWindow$$ExternalSyntheticOutline0.m(i, " onStartedWakingUp - why: ", "S.S.N.");
             if (i == 6 || i == 15 || i == 113) {
-                SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+                SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
                 if (subscreenDeviceModelParent.mPresentation == null || subscreenDeviceModelParent.useTopPresentation()) {
                     return;
                 }
@@ -269,7 +275,7 @@ public class SubscreenDeviceModelParent {
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onUserSwitchComplete(int i) {
             ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onUserSwitchComplete : ", "S.S.N.");
-            SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
             subscreenDeviceModelParent.updateNotiShowBlocked();
             subscreenDeviceModelParent.currentUserId = i;
             subscreenDeviceModelParent.updateBModeStatus();
@@ -281,25 +287,24 @@ public class SubscreenDeviceModelParent {
         public final void run() {
             WakeLock wakeLock;
             Log.d("S.S.N.", " drawWalkLockReleaseRunnable - releaseInflationWakeLock");
-            NotificationEntry notificationEntry = SubscreenDeviceModelParent.this.currentPresentationEntry;
+            NotificationEntry notificationEntry = this.this$0.currentPresentationEntry;
             if (notificationEntry != null && (wakeLock = notificationEntry.mInflationWakeLock) != null) {
                 wakeLock.release(notificationEntry.mKey);
                 notificationEntry.mInflationWakeLock = null;
             }
-            SubscreenDeviceModelParent.this.currentPresentationEntry = null;
+            this.this$0.currentPresentationEntry = null;
         }
     };
     public final SubscreenDeviceModelParent$updateSubscreenListRunnable$1 updateSubscreenListRunnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$updateSubscreenListRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+            SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
             int i = SubscreenDeviceModelParent.$r8$clinit;
             subscreenDeviceModelParent.clearMainList();
             subscreenDeviceModelParent.mController.notifPipeline.mShadeListBuilder.buildList();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -309,7 +314,6 @@ public class SubscreenDeviceModelParent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MainListHashMapItem {
         public NotificationEntry mEntry;
         public SubscreenNotificationInfo mInfo;
@@ -401,10 +405,10 @@ public class SubscreenDeviceModelParent {
             return false;
         }
         SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
-        SubscreenNotificationInfo createItemsData = (subscreenSubRoomNotification == null || (subscreenNotificationInfoManager = subscreenSubRoomNotification.mNotificationInfoManager) == null) ? null : subscreenNotificationInfoManager.createItemsData(notificationEntry.row);
-        ArrayList arrayList = createItemsData != null ? createItemsData.mMessageingStyleInfoArray : null;
+        SubscreenNotificationInfo subscreenNotificationInfoCreateItemsData = (subscreenSubRoomNotification == null || (subscreenNotificationInfoManager = subscreenSubRoomNotification.mNotificationInfoManager) == null) ? null : subscreenNotificationInfoManager.createItemsData(notificationEntry.row);
+        ArrayList arrayList = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mMessageingStyleInfoArray : null;
         arrayList.getClass();
-        return !this.mController.useHistory(notificationEntry) || (arrayList.size() > 0 && ((SubscreenNotificationInfo.MessagingStyleInfo) AlertController$$ExternalSyntheticOutline0.m(arrayList, 1)).mIsReply);
+        return !this.mController.useHistory(notificationEntry) || (arrayList.size() > 0 && ((SubscreenNotificationInfo.MessagingStyleInfo) AlertController$$ExternalSyntheticOutline0.m(1, arrayList)).mIsReply);
     }
 
     public final boolean checkEntryConditionsForNonAddition(NotificationEntry notificationEntry, String str) {
@@ -419,17 +423,17 @@ public class SubscreenDeviceModelParent {
         } else {
             z = false;
         }
-        boolean isBubbleNotificationSuppressed$1 = isBubbleNotificationSuppressed$1(notificationEntry);
+        boolean zIsBubbleNotificationSuppressed$1 = isBubbleNotificationSuppressed$1(notificationEntry);
         String str2 = notificationEntry.mKey;
-        if (isBubbleNotificationSuppressed$1) {
+        if (zIsBubbleNotificationSuppressed$1) {
             MediaSessions$H$$ExternalSyntheticOutline0.m("updateMainListArray ", str, " skip - isBubbleNotificationSuppressed: ", str2, "S.S.N.");
             z = true;
         }
         if (this.mIsNotificationRemoved) {
             NotificationEntry notificationEntry2 = (NotificationEntry) this.mMainListRemoveEntryHashMap.get(str2);
-            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("updateMainListArray ", str, " skip - mIsNotificationRemoved - key :", str2, " ,entry :");
-            m.append(notificationEntry2);
-            Log.d("S.S.N.", m.toString());
+            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("updateMainListArray ", str, " skip - mIsNotificationRemoved - key :", str2, " ,entry :");
+            sbM.append(notificationEntry2);
+            Log.d("S.S.N.", sbM.toString());
             if (notificationEntry2 != null) {
                 MediaSessions$H$$ExternalSyntheticOutline0.m("updateMainListArray ", str, " skip - mIsNotificationRemoved: ", str2, "S.S.N.");
                 this.mMainListRemoveEntryHashMap.remove(str2);
@@ -454,6 +458,10 @@ public class SubscreenDeviceModelParent {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:35:0x005b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void detailClicked(final NotificationEntry notificationEntry) {
         SubscreenRecyclerView subscreenRecyclerView;
         View childAt;
@@ -464,9 +472,9 @@ public class SubscreenDeviceModelParent {
             return;
         }
         if (notificationEntry != null) {
-            boolean isShownDetail = isShownDetail();
+            boolean zIsShownDetail = isShownDetail();
             Lazy lazy = this.mSubScreenManagerLazy;
-            if (isShownDetail) {
+            if (zIsShownDetail) {
                 SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
                 if (((subscreenSubRoomNotification == null || (subscreenNotificationDetailAdapter2 = subscreenSubRoomNotification.mNotificationDetailAdapter) == null) ? null : subscreenNotificationDetailAdapter2.mSelectNotificationInfo) != null) {
                     if (notificationEntry.mKey.equals((subscreenSubRoomNotification == null || (subscreenNotificationDetailAdapter = subscreenSubRoomNotification.mNotificationDetailAdapter) == null || (subscreenNotificationInfo = subscreenNotificationDetailAdapter.mSelectNotificationInfo) == null) ? null : subscreenNotificationInfo.mKey)) {
@@ -481,24 +489,25 @@ public class SubscreenDeviceModelParent {
                         }
                     }
                 }
-            }
-            SubscreenSubRoomNotification subscreenSubRoomNotification4 = this.mSubRoomNotification;
-            SubscreenNotificationInfo createItemsData = subscreenSubRoomNotification4 != null ? subscreenSubRoomNotification4.mNotificationInfoManager.createItemsData(notificationEntry.row) : null;
-            SubscreenSubRoomNotification subscreenSubRoomNotification5 = this.mSubRoomNotification;
-            if (subscreenSubRoomNotification5 != null) {
-                subscreenSubRoomNotification5.notifyNotificationSubRoomRequest();
-            }
-            ((SubScreenManager) lazy.get()).startSubHomeActivity();
-            SubscreenSubRoomNotification subscreenSubRoomNotification6 = this.mSubRoomNotification;
-            if (subscreenSubRoomNotification6 != null) {
-                subscreenSubRoomNotification6.showDetailNotification(createItemsData);
+            } else {
+                SubscreenSubRoomNotification subscreenSubRoomNotification4 = this.mSubRoomNotification;
+                SubscreenNotificationInfo subscreenNotificationInfoCreateItemsData = subscreenSubRoomNotification4 != null ? subscreenSubRoomNotification4.mNotificationInfoManager.createItemsData(notificationEntry.row) : null;
+                SubscreenSubRoomNotification subscreenSubRoomNotification5 = this.mSubRoomNotification;
+                if (subscreenSubRoomNotification5 != null) {
+                    subscreenSubRoomNotification5.notifyNotificationSubRoomRequest();
+                }
+                ((SubScreenManager) lazy.get()).startSubHomeActivity();
+                SubscreenSubRoomNotification subscreenSubRoomNotification6 = this.mSubRoomNotification;
+                if (subscreenSubRoomNotification6 != null) {
+                    subscreenSubRoomNotification6.showDetailNotification(subscreenNotificationInfoCreateItemsData);
+                }
             }
         }
         if (isCoverBriefAllowed(notificationEntry)) {
             return;
         }
         Handler handler = this.mHandler;
-        Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$detailClicked$2
+        Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent.detailClicked.2
             @Override // java.lang.Runnable
             public final void run() {
                 SubscreenDeviceModelParent.this.dismissImmediately(notificationEntry);
@@ -516,12 +525,12 @@ public class SubscreenDeviceModelParent {
         boolean z2 = this.presentationShowing;
         View view2 = this.mNotiPopupView;
         SubscreenNotificationPresentation subscreenNotificationPresentation = this.mPresentation;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m(" DISMISS IMMEDIATELY(popupType) - popupViewShowing : ", ", presentationShowing : ", ", mNotiPopupView : ", z, z2);
-        m.append(view2);
-        m.append(", mPresentation : ");
-        m.append(subscreenNotificationPresentation);
-        m.append(", popupType : ");
-        RecyclerView$$ExternalSyntheticOutline0.m(i, "S.S.N.", m);
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m(" DISMISS IMMEDIATELY(popupType) - popupViewShowing : ", ", presentationShowing : ", ", mNotiPopupView : ", z, z2);
+        sbM.append(view2);
+        sbM.append(", mPresentation : ");
+        sbM.append(subscreenNotificationPresentation);
+        sbM.append(", popupType : ");
+        RecyclerView$$ExternalSyntheticOutline0.m(i, "S.S.N.", sbM);
         Handler handler = this.mHandler;
         handler.removeCallbacks(this.marqueeStartRunnable);
         if (i == 2) {
@@ -777,7 +786,7 @@ public class SubscreenDeviceModelParent {
     }
 
     public final void hideDetailNotificationAnimated(int i, boolean z) {
-        Animator animator;
+        Animator animatorAlphaAnimatedMainView;
         if (z) {
             this.mIsUpdatedAllMainList = true;
         }
@@ -786,19 +795,19 @@ public class SubscreenDeviceModelParent {
             Log.d("S.S.N.", "hideDetailNotificationAnimated start animtion");
             final SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
             if (subscreenSubRoomNotification != null) {
-                animator = subscreenSubRoomNotification.mNotificationAnimatorManager.alphaAnimatedMainView(i, subscreenSubRoomNotification.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$hideDetailNotificationAnimated$1$1
+                animatorAlphaAnimatedMainView = subscreenSubRoomNotification.mNotificationAnimatorManager.alphaAnimatedMainView(i, subscreenSubRoomNotification.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$hideDetailNotificationAnimated$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
                         if (NotiRune.NOTI_SUBSCREEN_GHOST_NOTIFICATION) {
-                            SubscreenDeviceModelParent.this.mController.hideDetailNotif();
+                            this.this$0.mController.hideDetailNotif();
                         }
                         subscreenSubRoomNotification.hideDetailNotification();
                     }
                 });
             } else {
-                animator = null;
+                animatorAlphaAnimatedMainView = null;
             }
-            this.mMainViewAnimator = animator;
+            this.mMainViewAnimator = animatorAlphaAnimatedMainView;
         } else {
             Log.d("S.S.N.", "hideDetailNotificationAnimated already animtion");
             if (NotiRune.NOTI_SUBSCREEN_GHOST_NOTIFICATION) {
@@ -813,7 +822,7 @@ public class SubscreenDeviceModelParent {
     }
 
     public final void hideGroupNotification() {
-        Animator animator;
+        Animator animatorAlphaAnimatedMainView;
         this.mIsUpdatedAllMainList = true;
         if (this.mMainViewAnimator != null) {
             Log.d("S.S.N.", "hideGroupNotificationAnimated already animtion");
@@ -828,16 +837,16 @@ public class SubscreenDeviceModelParent {
         final SubscreenSubRoomNotification subscreenSubRoomNotification2 = this.mSubRoomNotification;
         if (subscreenSubRoomNotification2 != null) {
             subscreenSubRoomNotification2.mIsShownGroup = false;
-            animator = subscreenSubRoomNotification2.mNotificationAnimatorManager.alphaAnimatedMainView(300, subscreenSubRoomNotification2.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$hideGroupNotificationAnimated$1$1
+            animatorAlphaAnimatedMainView = subscreenSubRoomNotification2.mNotificationAnimatorManager.alphaAnimatedMainView(300, subscreenSubRoomNotification2.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$hideGroupNotificationAnimated$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SubscreenSubRoomNotification.this.hideGroupNotification();
+                    subscreenSubRoomNotification2.hideGroupNotification();
                 }
             });
         } else {
-            animator = null;
+            animatorAlphaAnimatedMainView = null;
         }
-        this.mMainViewAnimator = animator;
+        this.mMainViewAnimator = animatorAlphaAnimatedMainView;
     }
 
     public ImageView initDetailAdapterBackButton(View view) {
@@ -846,18 +855,18 @@ public class SubscreenDeviceModelParent {
 
     public void initDetailAdapterItemViewHolder(Context context, final SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, final SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) {
         itemViewHolder.mAdapter = subscreenNotificationDetailAdapter;
-        itemViewHolder.mOpenAppButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initDetailAdapterItemViewHolder$1
+        itemViewHolder.mOpenAppButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent.initDetailAdapterItemViewHolder.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubscreenNotificationInfo subscreenNotificationInfo = SubscreenNotificationDetailAdapter.ItemViewHolder.this.mInfo;
+                SubscreenNotificationInfo subscreenNotificationInfo = itemViewHolder.mInfo;
                 String str = subscreenNotificationInfo.mKey;
                 String str2 = subscreenNotificationInfo.mPkg;
                 String str3 = subscreenNotificationInfo.mAppName;
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Click BodyLayout Key: ", str, ", mInfo.getPkg()", str2, ", mInfo.getAppName() ");
-                m.append(str3);
-                Log.e("SubscreenNotificationDetailAdapter", m.toString());
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Click BodyLayout Key: ", str, ", mInfo.getPkg()", str2, ", mInfo.getAppName() ");
+                sbM.append(str3);
+                Log.e("SubscreenNotificationDetailAdapter", sbM.toString());
                 subscreenNotificationDetailAdapter.getClass();
-                SubscreenParentDetailItemViewHolder subscreenParentDetailItemViewHolder = SubscreenNotificationDetailAdapter.ItemViewHolder.this;
+                SubscreenParentDetailItemViewHolder subscreenParentDetailItemViewHolder = itemViewHolder;
                 subscreenParentDetailItemViewHolder.startWaitState(subscreenNotificationDetailAdapter, subscreenParentDetailItemViewHolder);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.EID_QPNE_COVER_SCREEN_ID_DETAIL, SystemUIAnalytics.EID_QPNE_COVER_OPEN_IN_MAIN_SCREEN);
             }
@@ -902,34 +911,34 @@ public class SubscreenDeviceModelParent {
         this.presentationTimeoutRunnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initTimeoutRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+                SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
                 NotificationEntry notificationEntry = subscreenDeviceModelParent.currentPresentationEntry;
                 String str = notificationEntry != null ? notificationEntry.mKey : null;
                 boolean z = subscreenDeviceModelParent.presentationShowing;
                 SubscreenNotificationPresentation subscreenNotificationPresentation = subscreenDeviceModelParent.mPresentation;
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m(" TIMEOUT Run Parent PRESENTATION - RELEASE DOZE STATE - TIMEOUT : ", str, " , presentationShowing : ", ", mPresentation : ", z);
-                m.append(subscreenNotificationPresentation);
-                Log.d("S.S.N.", m.toString());
-                SubscreenDeviceModelParent subscreenDeviceModelParent2 = SubscreenDeviceModelParent.this;
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m(" TIMEOUT Run Parent PRESENTATION - RELEASE DOZE STATE - TIMEOUT : ", str, " , presentationShowing : ", ", mPresentation : ", z);
+                sbM.append(subscreenNotificationPresentation);
+                Log.d("S.S.N.", sbM.toString());
+                SubscreenDeviceModelParent subscreenDeviceModelParent2 = this.this$0;
                 subscreenDeviceModelParent2.mIsRemoving = true;
                 subscreenDeviceModelParent2.updateWakeLock(false, false);
-                final SubscreenDeviceModelParent subscreenDeviceModelParent3 = SubscreenDeviceModelParent.this;
+                final SubscreenDeviceModelParent subscreenDeviceModelParent3 = this.this$0;
                 subscreenDeviceModelParent3.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initTimeoutRunnable$1.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         SubscreenNotificationPresentation subscreenNotificationPresentation2;
-                        SubscreenDeviceModelParent subscreenDeviceModelParent4 = SubscreenDeviceModelParent.this;
+                        SubscreenDeviceModelParent subscreenDeviceModelParent4 = subscreenDeviceModelParent3;
                         Log.d("S.S.N.", " DISMISS Run - isRemoving: " + subscreenDeviceModelParent4.mIsRemoving + ", presentation: " + subscreenDeviceModelParent4.mPresentation);
-                        SubscreenDeviceModelParent subscreenDeviceModelParent5 = SubscreenDeviceModelParent.this;
+                        SubscreenDeviceModelParent subscreenDeviceModelParent5 = subscreenDeviceModelParent3;
                         if (!subscreenDeviceModelParent5.mIsRemoving || (subscreenNotificationPresentation2 = subscreenDeviceModelParent5.mPresentation) == null) {
                             return;
                         }
                         subscreenNotificationPresentation2.dismiss();
-                        SubscreenDeviceModelParent.this.mIsRemoving = false;
+                        subscreenDeviceModelParent3.mIsRemoving = false;
                         Log.d("S.S.N.", "updateWakeLock false in timeoutRunnable");
                     }
                 }, 300L);
-                SubscreenDeviceModelParent.this.mNotiPopupType = 0;
+                this.this$0.mNotiPopupType = 0;
             }
         };
         this.popupViewTimeoutRunnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$initTimeoutRunnable$2
@@ -937,24 +946,24 @@ public class SubscreenDeviceModelParent {
             public final void run() {
                 View view;
                 Animator popUpViewDismissAnimator;
-                SubscreenDeviceModelParent subscreenDeviceModelParent = SubscreenDeviceModelParent.this;
+                SubscreenDeviceModelParent subscreenDeviceModelParent = this.this$0;
                 NotificationEntry notificationEntry = subscreenDeviceModelParent.currentPopupViewEntry;
                 String str = notificationEntry != null ? notificationEntry.mKey : null;
                 boolean z = subscreenDeviceModelParent.popupViewShowing;
                 View view2 = subscreenDeviceModelParent.mNotiPopupView;
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m(" TIMEOUT Run Parent POPUPVIEW - RELEASE DOZE STATE - TIMEOUT : ", str, " ,popupViewShowing : ", " , mNotiPopupView : ", z);
-                m.append(view2);
-                Log.d("S.S.N.", m.toString());
-                SubscreenDeviceModelParent subscreenDeviceModelParent2 = SubscreenDeviceModelParent.this;
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m(" TIMEOUT Run Parent POPUPVIEW - RELEASE DOZE STATE - TIMEOUT : ", str, " ,popupViewShowing : ", " , mNotiPopupView : ", z);
+                sbM.append(view2);
+                Log.d("S.S.N.", sbM.toString());
+                SubscreenDeviceModelParent subscreenDeviceModelParent2 = this.this$0;
                 if (subscreenDeviceModelParent2.popupViewShowing && (view = subscreenDeviceModelParent2.mNotiPopupView) != null && (popUpViewDismissAnimator = subscreenDeviceModelParent2.getPopUpViewDismissAnimator(view)) != null) {
                     popUpViewDismissAnimator.start();
                 }
-                SubscreenDeviceModelParent subscreenDeviceModelParent3 = SubscreenDeviceModelParent.this;
+                SubscreenDeviceModelParent subscreenDeviceModelParent3 = this.this$0;
                 boolean z2 = subscreenDeviceModelParent3.presentationShowing;
                 LinkedHashMap linkedHashMap = subscreenDeviceModelParent3.mFullScreenIntentEntries;
                 NotificationEntry notificationEntry2 = subscreenDeviceModelParent3.currentPresentationEntry;
                 subscreenDeviceModelParent3.updateWakeLock(z2, linkedHashMap.containsKey(notificationEntry2 != null ? notificationEntry2.mKey : null));
-                SubscreenDeviceModelParent.this.mNotiPopupType = 0;
+                this.this$0.mNotiPopupType = 0;
             }
         };
         updateNotiShowBlocked();
@@ -1016,28 +1025,89 @@ public class SubscreenDeviceModelParent {
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:84:0x00a3, code lost:
-    
-        if ((r12.flags & 8) != 0) goto L41;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x015d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00e5  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x00c7  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0093  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0095  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean isProper(com.android.systemui.statusbar.notification.collection.NotificationEntry r11, boolean r12) {
-        /*
-            Method dump skipped, instructions count: 359
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent.isProper(com.android.systemui.statusbar.notification.collection.NotificationEntry, boolean):boolean");
+    public boolean isProper(NotificationEntry notificationEntry, boolean z) {
+        boolean z2;
+        GroupEntry groupEntry;
+        NotificationEntry notificationEntry2;
+        NotificationInterruptStateProviderImpl notificationInterruptStateProviderImpl = (NotificationInterruptStateProviderImpl) this.mInterruptionStateProvider;
+        boolean zCanHeadsUpCommonForFrontCoverScreen = notificationInterruptStateProviderImpl.canHeadsUpCommonForFrontCoverScreen(notificationEntry);
+        String str = notificationEntry.mKey;
+        if (zCanHeadsUpCommonForFrontCoverScreen) {
+            if (!panelsEnabled()) {
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("No heads up: disabled panel : ", str, "S.S.N.");
+            } else if (!this.mController.shouldFilterOut(notificationEntry)) {
+                if (NotiRune.NOTI_SUBSCREEN_CHILD_TO_RECEIVE_PARENT_ALERT) {
+                    if (notificationEntry.mSbn.getNotification().getGroupAlertBehavior() == 1 && (groupEntry = notificationEntry.mGroupEntry) != null && (notificationEntry2 = groupEntry.mLogicalSummary) != null && notificationInterruptStateProviderImpl.canHeadsUpCommonForFrontCoverScreen(notificationEntry2) && (notificationEntry2.mSbn.getNotification().getGroupAlertBehavior() == 1 || notificationEntry2.mSbn.getNotification().getGroupAlertBehavior() == 0)) {
+                        Log.d("S.S.N.", "alertOverride : summary - " + notificationEntry2.mKey + " child - " + str);
+                        if (NotiRune.NOTI_SUBSCREEN_GHOST_NOTIFICATION) {
+                        }
+                        z2 = true;
+                    } else {
+                        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("can't be alert because suppressAlertingDueToGrouping", str, "S.S.N.");
+                        if (notificationEntry.mSbn.isGroup()) {
+                            if (!z) {
+                            }
+                        }
+                    }
+                } else if (notificationEntry.mSbn.isGroup() || !notificationEntry.mSbn.getNotification().suppressAlertingDueToGrouping()) {
+                    if (!z) {
+                        Notification notification2 = notificationEntry.mSbn.getNotification();
+                        if (!notificationEntry.interruption || (notification2.flags & 8) == 0) {
+                            if (NotiRune.NOTI_SUBSCREEN_GHOST_NOTIFICATION || !notificationEntry.mIsGhost) {
+                                z2 = true;
+                            }
+                        }
+                    }
+                }
+            }
+            z2 = false;
+        } else {
+            z2 = false;
+        }
+        boolean zIsGroupSummary = notificationEntry.mSbn.getNotification().isGroupSummary();
+        boolean z3 = notificationEntry.mSbn.getNotification().visibility == -1;
+        boolean z4 = (notificationEntry.mSbn.getNotification().semFlags & 256) != 0;
+        boolean z5 = (notificationEntry.mSbn.getNotification().semFlags & 8) != 0;
+        if (notificationEntry.mRanking.getImportance() >= 4) {
+            String strM = !z2 ? ":!needsAlert:" : "";
+            if (zIsGroupSummary) {
+                strM = strM.concat(":!isNotSummary:");
+            }
+            if (z3) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":isSecret:");
+            }
+            if (z4) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":isDisabledByApp:");
+            }
+            if (z5) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":isDisableHeadsUP:");
+            }
+            if (!this.mIsFolded) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":!isFolded:");
+            }
+            if (!this.mIsCovered) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":!isCovered:");
+            }
+            if (NotiRune.NOTI_SUBSCREEN_GHOST_NOTIFICATION && notificationEntry.mIsGhost) {
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ":isGhost:");
+            }
+            if (strM.length() != 0) {
+                String strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, " - ", strM);
+                LogLevel logLevel = LogLevel.DEBUG;
+                SubscreenDeviceModelParent$$ExternalSyntheticLambda0 subscreenDeviceModelParent$$ExternalSyntheticLambda0 = new SubscreenDeviceModelParent$$ExternalSyntheticLambda0();
+                LogBuffer logBuffer = this.mBuffer;
+                LogMessage logMessageObtain = logBuffer.obtain("S.S.N.", logLevel, subscreenDeviceModelParent$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = strM2;
+                logBuffer.commit(logMessageObtain);
+            }
+        }
+        return (z4 || !z2 || zIsGroupSummary || z3 || z5) ? false : true;
     }
 
     public boolean isRunOnCoverAvailable() {
@@ -1096,24 +1166,24 @@ public class SubscreenDeviceModelParent {
         FrameLayout frameLayout;
         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
         boolean z = expandableNotificationRow != null && (expandableNotificationRow.mIsCustomNotification || expandableNotificationRow.mIsCustomBigNotification || expandableNotificationRow.mIsCustomHeadsUpNotification || expandableNotificationRow.mIsCustomPublicNotification);
-        boolean needsRedaction = expandableNotificationRow.needsRedaction();
+        boolean zNeedsRedaction = expandableNotificationRow.needsRedaction();
         boolean z2 = notificationEntry.mSbn.getNotification().publicVersion != null;
         NotificationEntry notificationEntry2 = this.currentPopupViewEntry;
         String str = notificationEntry2 != null ? notificationEntry2.mKey : null;
         NotificationEntry notificationEntry3 = this.currentPresentationEntry;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" MAKE DETAIL : exist Parent- PopupView: ", str, " Presentation: ", notificationEntry3 != null ? notificationEntry3.mKey : null, " entry key - ");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" MAKE DETAIL : exist Parent- PopupView: ", str, " Presentation: ", notificationEntry3 != null ? notificationEntry3.mKey : null, " entry key - ");
         String str2 = notificationEntry.mKey;
-        m.append(str2);
-        m.append(" isCustom - ");
-        m.append(z);
-        m.append(" needsRedaction - ");
-        CarrierTextManager$$ExternalSyntheticOutline0.m(m, needsRedaction, " hasPublic - ", z2, "S.S.N.");
+        sbM.append(str2);
+        sbM.append(" isCustom - ");
+        sbM.append(z);
+        sbM.append(" needsRedaction - ");
+        CarrierTextManager$$ExternalSyntheticOutline0.m(sbM, zNeedsRedaction, " hasPublic - ", z2, "S.S.N.");
         PowerManager powerManager = this.mPowerManager;
-        Boolean valueOf = powerManager != null ? Boolean.valueOf(powerManager.isInteractive()) : null;
-        valueOf.getClass();
-        boolean booleanValue = valueOf.booleanValue();
+        Boolean boolValueOf = powerManager != null ? Boolean.valueOf(powerManager.isInteractive()) : null;
+        boolValueOf.getClass();
+        boolean zBooleanValue = boolValueOf.booleanValue();
         boolean z3 = this.mFullScreenIntentEntries.get(str2) != null;
-        if (!booleanValue || z3) {
+        if (!zBooleanValue || z3) {
             this.mNotiPopupType = 1;
             this.currentPresentationEntry = notificationEntry;
         } else {
@@ -1146,7 +1216,7 @@ public class SubscreenDeviceModelParent {
         String str4 = notificationEntry5 != null ? notificationEntry5.mKey : null;
         int i = this.mNotiPopupType;
         StringBuilder sb = new StringBuilder(" MAKE DETAIL : isInteractive - ");
-        sb.append(booleanValue);
+        sb.append(zBooleanValue);
         sb.append(" currentPopupViewEntry - ");
         sb.append(str3);
         sb.append(" currentPresentationEntry - ");
@@ -1193,32 +1263,32 @@ public class SubscreenDeviceModelParent {
             return -1;
         }
         SubscreenSubRoomNotification subscreenSubRoomNotification2 = this.mSubRoomNotification;
-        Integer num = null;
-        Integer valueOf = (subscreenSubRoomNotification2 == null || (subscreenNotificationInfoManager2 = subscreenSubRoomNotification2.mNotificationInfoManager) == null) ? null : Integer.valueOf(subscreenNotificationInfoManager2.removeGroupDataArrayItem(notificationEntry));
-        valueOf.getClass();
-        int intValue = valueOf.intValue();
-        if (intValue > -1 && (subscreenSubRoomNotification = this.mSubRoomNotification) != null && (subscreenNotificationGroupAdapter = subscreenSubRoomNotification.mNotificationGroupAdapter) != null) {
-            subscreenNotificationGroupAdapter.notifyItemRemoved(intValue);
+        Integer numValueOf = null;
+        Integer numValueOf2 = (subscreenSubRoomNotification2 == null || (subscreenNotificationInfoManager2 = subscreenSubRoomNotification2.mNotificationInfoManager) == null) ? null : Integer.valueOf(subscreenNotificationInfoManager2.removeGroupDataArrayItem(notificationEntry));
+        numValueOf2.getClass();
+        int iIntValue = numValueOf2.intValue();
+        if (iIntValue > -1 && (subscreenSubRoomNotification = this.mSubRoomNotification) != null && (subscreenNotificationGroupAdapter = subscreenSubRoomNotification.mNotificationGroupAdapter) != null) {
+            subscreenNotificationGroupAdapter.notifyItemRemoved(iIntValue);
         }
-        boolean isLaunchApp = isLaunchApp(notificationEntry);
+        boolean zIsLaunchApp = isLaunchApp(notificationEntry);
         String str = notificationEntry.mKey;
         Animator animator = this.mMainViewAnimator;
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(intValue, "notifyGroupAdapterItemRemoved parent - Entry  : ", str, ", index :", ", isLaunchApp :");
-        m888m.append(isLaunchApp);
-        m888m.append(", mMainViewAnimator :");
-        m888m.append(animator);
-        Log.d("S.S.N.", m888m.toString());
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(iIntValue, "notifyGroupAdapterItemRemoved parent - Entry  : ", str, ", index :", ", isLaunchApp :");
+        sbM890m.append(zIsLaunchApp);
+        sbM890m.append(", mMainViewAnimator :");
+        sbM890m.append(animator);
+        Log.d("S.S.N.", sbM890m.toString());
         if (!isShownDetail()) {
             SubscreenSubRoomNotification subscreenSubRoomNotification3 = this.mSubRoomNotification;
             if (subscreenSubRoomNotification3 != null && (subscreenNotificationInfoManager = subscreenSubRoomNotification3.mNotificationInfoManager) != null) {
-                num = Integer.valueOf(subscreenNotificationInfoManager.mGroupDataArray.size());
+                numValueOf = Integer.valueOf(subscreenNotificationInfoManager.mGroupDataArray.size());
             }
-            num.getClass();
-            if (num.intValue() <= 1 && !notificationEntry.isInsignificant()) {
+            numValueOf.getClass();
+            if (numValueOf.intValue() <= 1 && !notificationEntry.isInsignificant()) {
                 hideGroupNotification();
             }
         }
-        return intValue;
+        return iIntValue;
     }
 
     public final void notifyListAdapterItemChanged(int i) {
@@ -1233,17 +1303,17 @@ public class SubscreenDeviceModelParent {
     public final int notifyListAdapterItemRemoved(NotificationEntry notificationEntry) {
         SubscreenNotificationListAdapter subscreenNotificationListAdapter;
         SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
-        Integer valueOf = (subscreenSubRoomNotification == null || subscreenSubRoomNotification.mNotificationInfoManager == null) ? null : Integer.valueOf(SubscreenNotificationInfoManager.removeSubscreenNotificationInfoItem(notificationEntry));
-        Log.d("S.S.N.", "notifyListAdapterItemRemoved parent - Entry  : " + notificationEntry.mKey + ", index :" + valueOf);
-        if (valueOf == null || valueOf.intValue() <= -1) {
+        Integer numValueOf = (subscreenSubRoomNotification == null || subscreenSubRoomNotification.mNotificationInfoManager == null) ? null : Integer.valueOf(SubscreenNotificationInfoManager.removeSubscreenNotificationInfoItem(notificationEntry));
+        Log.d("S.S.N.", "notifyListAdapterItemRemoved parent - Entry  : " + notificationEntry.mKey + ", index :" + numValueOf);
+        if (numValueOf == null || numValueOf.intValue() <= -1) {
             return -1;
         }
-        int intValue = valueOf.intValue();
+        int iIntValue = numValueOf.intValue();
         SubscreenSubRoomNotification subscreenSubRoomNotification2 = this.mSubRoomNotification;
         if (subscreenSubRoomNotification2 != null && (subscreenNotificationListAdapter = subscreenSubRoomNotification2.mNotificationListAdapter) != null) {
-            subscreenNotificationListAdapter.notifyItemRemoved(convertInfoIndexToAdapterPosition(intValue));
+            subscreenNotificationListAdapter.notifyItemRemoved(convertInfoIndexToAdapterPosition(iIntValue));
         }
-        return valueOf.intValue();
+        return numValueOf.intValue();
     }
 
     public boolean panelsEnabled() {
@@ -1260,9 +1330,13 @@ public class SubscreenDeviceModelParent {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00db A[Catch: SecurityException -> 0x00d7, TRY_LEAVE, TryCatch #0 {SecurityException -> 0x00d7, blocks: (B:29:0x00cb, B:33:0x00db), top: B:109:0x00cb }] */
     /* JADX WARN: Type inference failed for: r11v0 */
     /* JADX WARN: Type inference failed for: r11v1, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r11v2 */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setContentViewItem(Context context, SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) {
         CharSequence charSequence;
         int detailAdapterContentViewResource = getDetailAdapterContentViewResource();
@@ -1273,10 +1347,10 @@ public class SubscreenDeviceModelParent {
         int i3 = R.id.detail_content_text;
         ?? r11 = 0;
         if (!z) {
-            View inflate = LayoutInflater.from(context).inflate(detailAdapterContentViewResource, (ViewGroup) itemViewHolder.mContentLayout, false);
-            TextView textView = (TextView) inflate.findViewById(R.id.detail_content_text);
-            ImageView imageView = (ImageView) inflate.findViewById(R.id.detail_content_image);
-            DateTimeView findViewById = inflate.findViewById(R.id.detail_clock);
+            View viewInflate = LayoutInflater.from(context).inflate(detailAdapterContentViewResource, (ViewGroup) itemViewHolder.mContentLayout, false);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.detail_content_text);
+            ImageView imageView = (ImageView) viewInflate.findViewById(R.id.detail_content_image);
+            DateTimeView dateTimeViewFindViewById = viewInflate.findViewById(R.id.detail_clock);
             SubscreenNotificationInfo subscreenNotificationInfo2 = itemViewHolder.mInfo;
             String str = subscreenNotificationInfo2.mBigText;
             if (str == null) {
@@ -1305,28 +1379,28 @@ public class SubscreenDeviceModelParent {
             }
             SubscreenNotificationInfo subscreenNotificationInfo3 = itemViewHolder.mInfo;
             if (subscreenNotificationInfo3.mWhen > 0 && subscreenNotificationInfo3.mShowWhen) {
-                if (findViewById != null) {
-                    findViewById.setVisibility(0);
+                if (dateTimeViewFindViewById != null) {
+                    dateTimeViewFindViewById.setVisibility(0);
                 }
-                if (findViewById != null) {
-                    findViewById.setTime(itemViewHolder.mInfo.mWhen);
+                if (dateTimeViewFindViewById != null) {
+                    dateTimeViewFindViewById.setTime(itemViewHolder.mInfo.mWhen);
                 }
-            } else if (findViewById != null) {
-                findViewById.setVisibility(8);
+            } else if (dateTimeViewFindViewById != null) {
+                dateTimeViewFindViewById.setVisibility(8);
             }
-            itemViewHolder.mContentLayout.addView(inflate);
-            itemViewHolder.mBodyLayoutString = itemViewHolder.mBodyLayoutString + ((Object) (textView != null ? textView.getText() : null)) + ((Object) (findViewById != null ? findViewById.getText() : null));
+            itemViewHolder.mContentLayout.addView(viewInflate);
+            itemViewHolder.mBodyLayoutString = itemViewHolder.mBodyLayoutString + ((Object) (textView != null ? textView.getText() : null)) + ((Object) (dateTimeViewFindViewById != null ? dateTimeViewFindViewById.getText() : null));
             return;
         }
         ArrayList arrayList = subscreenNotificationInfo.mMessageingStyleInfoArray;
         int size = arrayList.size();
         int i4 = 0;
         while (i4 < size) {
-            View inflate2 = LayoutInflater.from(context).inflate(detailAdapterContentViewResource, itemViewHolder.mContentLayout, (boolean) r11);
-            TextView textView2 = (TextView) inflate2.findViewById(R.id.detail_sender_text);
-            TextView textView3 = (TextView) inflate2.findViewById(i3);
-            ImageView imageView2 = (ImageView) inflate2.findViewById(i2);
-            DateTimeView findViewById2 = inflate2.findViewById(i);
+            View viewInflate2 = LayoutInflater.from(context).inflate(detailAdapterContentViewResource, itemViewHolder.mContentLayout, (boolean) r11);
+            TextView textView2 = (TextView) viewInflate2.findViewById(R.id.detail_sender_text);
+            TextView textView3 = (TextView) viewInflate2.findViewById(i3);
+            ImageView imageView2 = (ImageView) viewInflate2.findViewById(i2);
+            DateTimeView dateTimeViewFindViewById2 = viewInflate2.findViewById(i);
             if (itemViewHolder.mInfo.mIsGroupConversation) {
                 if (textView2 != 0) {
                     textView2.setVisibility(r11);
@@ -1352,48 +1426,50 @@ public class SubscreenDeviceModelParent {
             if (textView3 != null) {
                 textView3.setText(((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mContentText);
             }
-            if (((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mUriImage != null) {
-                if (imageView2 != 0) {
-                    try {
-                        imageView2.setImageDrawable(((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mUriImage);
-                    } catch (SecurityException e) {
-                        SubscreenNotificationInfo subscreenNotificationInfo4 = itemViewHolder.mInfo;
-                        Log.w("SubscreenNotificationDetailAdapter", "SecurityException: " + e + "appName : " + subscreenNotificationInfo4.mAppName + "packageName : " + subscreenNotificationInfo4.mSbn.getPackageName());
-                        charSequence = null;
-                        if (imageView2 != 0) {
-                            imageView2.setImageURI(null);
-                        }
-                        if (imageView2 != 0) {
-                            imageView2.setVisibility(8);
-                        }
-                    }
-                }
-                if (imageView2 != 0) {
-                    imageView2.setVisibility(r11);
-                }
-                charSequence = null;
-            } else {
+            if (((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mUriImage == null) {
                 charSequence = null;
                 if (imageView2 != 0) {
                     imageView2.setVisibility(8);
                 }
+            } else if (imageView2 != 0) {
+                try {
+                    imageView2.setImageDrawable(((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mUriImage);
+                    if (imageView2 != 0) {
+                        imageView2.setVisibility(r11);
+                    }
+                    charSequence = null;
+                } catch (SecurityException e) {
+                    SubscreenNotificationInfo subscreenNotificationInfo4 = itemViewHolder.mInfo;
+                    Log.w("SubscreenNotificationDetailAdapter", "SecurityException: " + e + "appName : " + subscreenNotificationInfo4.mAppName + "packageName : " + subscreenNotificationInfo4.mSbn.getPackageName());
+                    charSequence = null;
+                    if (imageView2 != 0) {
+                        imageView2.setImageURI(null);
+                    }
+                    if (imageView2 != 0) {
+                        imageView2.setVisibility(8);
+                    }
+                }
+            } else {
+                if (imageView2 != 0) {
+                }
+                charSequence = null;
             }
             long j = ((SubscreenNotificationInfo.MessagingStyleInfo) arrayList.get(i4)).mTimeStamp;
             if (j > 0 && itemViewHolder.mInfo.mShowWhen) {
-                if (findViewById2 != null) {
-                    findViewById2.setVisibility(0);
+                if (dateTimeViewFindViewById2 != null) {
+                    dateTimeViewFindViewById2.setVisibility(0);
                 }
-                if (findViewById2 != null) {
-                    findViewById2.setTime(j);
+                if (dateTimeViewFindViewById2 != null) {
+                    dateTimeViewFindViewById2.setTime(j);
                 }
-            } else if (findViewById2 != null) {
-                findViewById2.setVisibility(8);
+            } else if (dateTimeViewFindViewById2 != null) {
+                dateTimeViewFindViewById2.setVisibility(8);
             }
-            itemViewHolder.mContentLayout.addView(inflate2);
+            itemViewHolder.mContentLayout.addView(viewInflate2);
             if (textView2 != 0 && textView2.getVisibility() == 0) {
                 itemViewHolder.mBodyLayoutString = itemViewHolder.mBodyLayoutString + ((Object) textView2.getText());
             }
-            itemViewHolder.mBodyLayoutString = itemViewHolder.mBodyLayoutString + ((Object) (textView3 != null ? textView3.getText() : charSequence)) + ((Object) (findViewById2 != null ? findViewById2.getText() : charSequence));
+            itemViewHolder.mBodyLayoutString = itemViewHolder.mBodyLayoutString + ((Object) (textView3 != null ? textView3.getText() : charSequence)) + ((Object) (dateTimeViewFindViewById2 != null ? dateTimeViewFindViewById2.getText() : charSequence));
             i4++;
             i = R.id.detail_clock;
             i2 = R.id.detail_content_image;
@@ -1402,7 +1478,7 @@ public class SubscreenDeviceModelParent {
         }
     }
 
-    public void setDetailAdapterItemHolderButtonContentDescription(SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) {
+    public void setDetailAdapterItemHolderButtonContentDescription(SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter, SubscreenNotificationDetailAdapter.ItemViewHolder itemViewHolder) throws Resources.NotFoundException {
         String string = subscreenNotificationDetailAdapter.mContext.getResources().getString(R.string.subscreen_detail_adapter_open_app_button_text);
         String string2 = subscreenNotificationDetailAdapter.mContext.getResources().getString(R.string.clear_all_text);
         itemViewHolder.mOpenAppButton.setContentDescription(string);
@@ -1410,7 +1486,7 @@ public class SubscreenDeviceModelParent {
         itemViewHolder.mBodyLayout.setContentDescription(itemViewHolder.mBodyLayoutString);
     }
 
-    public void setDetailAdapterTextHolderButtonContentDescription(SubscreenNotificationDetailAdapter.TextViewHolder textViewHolder, SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter) {
+    public void setDetailAdapterTextHolderButtonContentDescription(SubscreenNotificationDetailAdapter.TextViewHolder textViewHolder, SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter) throws Resources.NotFoundException {
         textViewHolder.mOpenAppButton.setContentDescription(subscreenNotificationDetailAdapter.mContext.getResources().getString(R.string.subscreen_detail_adapter_open_app_button_text));
     }
 
@@ -1527,9 +1603,9 @@ public class SubscreenDeviceModelParent {
                     StringBuilder sb = new StringBuilder("Subscreen:DRAW_WAKE_LOCK: ");
                     String str = notificationEntry6.mKey;
                     sb.append(str);
-                    WakeLock build = maxTimeout.setTag(sb.toString()).build();
-                    notificationEntry6.mInflationWakeLock = build;
-                    build.acquire(str);
+                    WakeLock wakeLockBuild = maxTimeout.setTag(sb.toString()).build();
+                    notificationEntry6.mInflationWakeLock = wakeLockBuild;
+                    wakeLockBuild.acquire(str);
                 }
             }
             if (this.mPresentation == null) {
@@ -1544,7 +1620,7 @@ public class SubscreenDeviceModelParent {
                 SubscreenNotificationPresentation subscreenNotificationPresentation = new SubscreenNotificationPresentation(context, display, subscreenNotificationDetail2 != null ? subscreenNotificationDetail2.mLayout : null, this);
                 this.mPresentation = subscreenNotificationPresentation;
                 try {
-                    subscreenNotificationPresentation.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent$showSubscreenNotification$3
+                    subscreenNotificationPresentation.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelParent.showSubscreenNotification.3
                         @Override // android.content.DialogInterface.OnShowListener
                         public final void onShow(DialogInterface dialogInterface) {
                             StatusBarNotificationActivityStarter statusBarNotificationActivityStarter;
@@ -1594,12 +1670,12 @@ public class SubscreenDeviceModelParent {
                         @Override // java.lang.Runnable
                         public final void run() {
                             ViewGroup viewGroup;
-                            SubscreenNotificationPresentation subscreenNotificationPresentation4 = SubscreenDeviceModelParent.this.mPresentation;
+                            SubscreenNotificationPresentation subscreenNotificationPresentation4 = this.this$0.mPresentation;
                             ViewGroup viewGroup2 = subscreenNotificationPresentation4 != null ? subscreenNotificationPresentation4.contents : null;
                             if (viewGroup2 != null && viewGroup2.getChildCount() > 0) {
                                 viewGroup2.removeAllViews();
                             }
-                            SubscreenNotificationPresentation subscreenNotificationPresentation5 = SubscreenDeviceModelParent.this.mPresentation;
+                            SubscreenNotificationPresentation subscreenNotificationPresentation5 = this.this$0.mPresentation;
                             if (subscreenNotificationPresentation5 == null || (viewGroup = subscreenNotificationPresentation5.contents) == null) {
                                 return;
                             }
@@ -1619,21 +1695,21 @@ public class SubscreenDeviceModelParent {
             handler.postDelayed(subscreenDeviceModelParent$marqueeStartRunnable$1, 1000L);
             LinkedHashMap linkedHashMap2 = this.mFullScreenIntentEntries;
             String str2 = notificationEntry.mKey;
-            long j = 300000;
+            long jCurrentTimeMillis = 300000;
             if (linkedHashMap2.get(str2) != null) {
                 if (notificationEntry.mFullscreenPopUpStartTime != 0) {
-                    j = 300000 - (System.currentTimeMillis() - notificationEntry.mFullscreenPopUpStartTime);
+                    jCurrentTimeMillis = 300000 - (System.currentTimeMillis() - notificationEntry.mFullscreenPopUpStartTime);
                 } else {
                     notificationEntry.mFullscreenPopUpStartTime = System.currentTimeMillis();
                 }
             }
             runnable.getClass();
             handler.removeCallbacks(runnable);
-            handler.postDelayed(runnable, this.mFullScreenIntentEntries.get(str2) != null ? j : 3000L);
+            handler.postDelayed(runnable, this.mFullScreenIntentEntries.get(str2) != null ? jCurrentTimeMillis : 3000L);
             if (this.mFullScreenIntentEntries.get(str2) == null) {
-                j = 3000;
+                jCurrentTimeMillis = 3000;
             }
-            Log.d("S.S.N.", "  showSubscreenNotification - " + str2 + ", " + j);
+            Log.d("S.S.N.", "  showSubscreenNotification - " + str2 + ", " + jCurrentTimeMillis);
         }
     }
 
@@ -1685,7 +1761,7 @@ public class SubscreenDeviceModelParent {
     }
 
     public final void updateIconColor(ImageView imageView, NotificationEntry notificationEntry) {
-        boolean isGrayscale;
+        boolean zIsGrayscale;
         StatusBarNotification statusBarNotification;
         Notification notification2;
         StatusBarNotification statusBarNotification2;
@@ -1693,17 +1769,17 @@ public class SubscreenDeviceModelParent {
         ExpandableNotificationRow expandableNotificationRow;
         int appPrimaryColor = (notificationEntry == null || (expandableNotificationRow = notificationEntry.row) == null) ? 0 : ((NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class)).getAppPrimaryColor(expandableNotificationRow);
         if (notificationEntry == null) {
-            isGrayscale = false;
+            zIsGrayscale = false;
         } else if (notificationEntry.mRanking.getChannel().isImportantConversation()) {
             ImageView imageView2 = new ImageView(this.mContext);
             imageView2.setImageIcon(notificationEntry.mSbn.getNotification().getSmallIcon());
-            isGrayscale = NotificationUtils.isGrayscale(imageView2, ContrastColorUtil.getInstance(this.mContext));
+            zIsGrayscale = NotificationUtils.isGrayscale(imageView2, ContrastColorUtil.getInstance(this.mContext));
         } else {
-            isGrayscale = NotificationUtils.isGrayscale(notificationEntry.mIcons.mStatusBarIcon, ContrastColorUtil.getInstance(this.mContext));
+            zIsGrayscale = NotificationUtils.isGrayscale(notificationEntry.mIcons.mStatusBarIcon, ContrastColorUtil.getInstance(this.mContext));
         }
-        Log.d("S.S.N.", "updateIconColor() isGrayScale = " + isGrayscale + ", " + (notificationEntry != null ? notificationEntry.mKey : null));
+        Log.d("S.S.N.", "updateIconColor() isGrayScale = " + zIsGrayscale + ", " + (notificationEntry != null ? notificationEntry.mKey : null));
         if (imageView != null) {
-            if (!isGrayscale) {
+            if (!zIsGrayscale) {
                 imageView.setColorFilter(0);
                 if (imageView.getBackground() != null) {
                     int color = this.mContext.getColor(R.color.notification_non_grayscale_border_color);
@@ -1759,10 +1835,10 @@ public class SubscreenDeviceModelParent {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(0);
         gradientDrawable.setCornerRadius(squircleRadius(z, z2));
-        int smallIconPadding = smallIconPadding(z, z2, false);
+        int iSmallIconPadding = smallIconPadding(z, z2, false);
         if (imageView != null) {
             imageView.setBackground(gradientDrawable);
-            imageView.setPadding(smallIconPadding, smallIconPadding, smallIconPadding, smallIconPadding);
+            imageView.setPadding(iSmallIconPadding, iSmallIconPadding, iSmallIconPadding, iSmallIconPadding);
         }
     }
 
@@ -1906,9 +1982,9 @@ public class SubscreenDeviceModelParent {
         NotificationEntry notificationEntry3 = this.currentPresentationEntry;
         String str2 = notificationEntry3 != null ? notificationEntry3.mKey : null;
         String str3 = notificationEntry != null ? notificationEntry.mKey : null;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m(" DISMISS IMMEDIATELY(entry) - popupViewShowing : ", ", presentationShowing : ", ", currentPopupViewEntry : ", z, z2);
-        MoveResult$$ExternalSyntheticOutline0.m(m, str, ", currentPresentationEntry : ", str2, ", key : ");
-        ExifInterface$$ExternalSyntheticOutline0.m(m, str3, "S.S.N.");
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m(" DISMISS IMMEDIATELY(entry) - popupViewShowing : ", ", presentationShowing : ", ", currentPopupViewEntry : ", z, z2);
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, str, ", currentPresentationEntry : ", str2, ", key : ");
+        ExifInterface$$ExternalSyntheticOutline0.m(sbM, str3, "S.S.N.");
         if (notificationEntry == null) {
             return;
         }

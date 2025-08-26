@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.ArrayIterator;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLambda1 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -30,8 +29,8 @@ public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLamb
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
-        SQLiteStatement prepare;
+    public final Object mo781invoke(Object obj) throws Exception {
+        SQLiteStatement sQLiteStatementPrepare;
         CommunalWidgetDao_Impl communalWidgetDao_Impl = this.f$0;
         Object obj2 = this.f$1;
         switch (this.$r8$classId) {
@@ -43,23 +42,23 @@ public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLamb
                 DBUtil.performBlocking(roomDatabase, false, true, new CommunalWidgetDao_Impl$$ExternalSyntheticLambda0(3));
                 for (CommunalHubState.CommunalWidgetItem communalWidgetItem : ((CommunalHubState) obj2).widgets) {
                     int i = communalWidgetItem.spanYNew;
-                    SpanValue m1076boximpl = i != 0 ? SpanValue.Responsive.m1076boximpl(i) : null;
-                    if (m1076boximpl == null) {
-                        m1076boximpl = SpanValue.Fixed.m1075boximpl(RangesKt___RangesKt.coerceIn(communalWidgetItem.spanY, 3, 6));
+                    SpanValue spanValueM1078boximpl = i != 0 ? SpanValue.Responsive.m1078boximpl(i) : null;
+                    if (spanValueM1078boximpl == null) {
+                        spanValueM1078boximpl = SpanValue.Fixed.m1077boximpl(RangesKt___RangesKt.coerceIn(communalWidgetItem.spanY, 3, 6));
                     }
-                    communalWidgetDao_Impl2.addWidget(communalWidgetItem.widgetId, communalWidgetItem.componentName, Integer.valueOf(communalWidgetItem.rank), communalWidgetItem.userSerialNumber, m1076boximpl);
+                    communalWidgetDao_Impl2.addWidget(communalWidgetItem.widgetId, communalWidgetItem.componentName, Integer.valueOf(communalWidgetItem.rank), communalWidgetItem.userSerialNumber, spanValueM1078boximpl);
                 }
                 return Unit.INSTANCE;
             case 1:
                 communalWidgetDao_Impl.getClass();
                 for (Map.Entry entry : ((Map) obj2).entrySet()) {
-                    int intValue = ((Number) entry.getKey()).intValue();
-                    int intValue2 = ((Number) entry.getValue()).intValue();
-                    CommunalWidgetDao_Impl$$ExternalSyntheticLambda10 communalWidgetDao_Impl$$ExternalSyntheticLambda10 = new CommunalWidgetDao_Impl$$ExternalSyntheticLambda10(intValue, 1);
+                    int iIntValue = ((Number) entry.getKey()).intValue();
+                    int iIntValue2 = ((Number) entry.getValue()).intValue();
+                    CommunalWidgetDao_Impl$$ExternalSyntheticLambda10 communalWidgetDao_Impl$$ExternalSyntheticLambda10 = new CommunalWidgetDao_Impl$$ExternalSyntheticLambda10(iIntValue, 1);
                     RoomDatabase roomDatabase2 = communalWidgetDao_Impl.__db;
                     CommunalWidgetItem communalWidgetItem2 = (CommunalWidgetItem) DBUtil.performBlocking(roomDatabase2, true, false, communalWidgetDao_Impl$$ExternalSyntheticLambda10);
                     if (communalWidgetItem2 != null) {
-                        DBUtil.performBlocking(roomDatabase2, false, true, new CommunalWidgetDao_Impl$$ExternalSyntheticLambda15(intValue2, communalWidgetItem2.itemId));
+                        DBUtil.performBlocking(roomDatabase2, false, true, new CommunalWidgetDao_Impl$$ExternalSyntheticLambda15(iIntValue2, communalWidgetItem2.itemId));
                     }
                 }
                 return Unit.INSTANCE;
@@ -68,21 +67,21 @@ public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLamb
                 CommunalWidgetDao_Impl.AnonymousClass1 anonymousClass1 = communalWidgetDao_Impl.__deleteAdapterOfCommunalWidgetItem;
                 CommunalWidgetItem[] communalWidgetItemArr = (CommunalWidgetItem[]) obj2;
                 anonymousClass1.getClass();
-                prepare = sQLiteConnection.prepare("DELETE FROM `communal_widget_table` WHERE `uid` = ?");
+                sQLiteStatementPrepare = sQLiteConnection.prepare("DELETE FROM `communal_widget_table` WHERE `uid` = ?");
                 try {
                     ArrayIterator arrayIterator = new ArrayIterator(communalWidgetItemArr);
                     while (arrayIterator.hasNext()) {
                         Object next = arrayIterator.next();
                         if (next != null) {
                             anonymousClass1.getClass();
-                            prepare.bindLong(1, ((CommunalWidgetItem) next).uid);
-                            prepare.step();
-                            prepare.reset();
+                            sQLiteStatementPrepare.bindLong(1, ((CommunalWidgetItem) next).uid);
+                            sQLiteStatementPrepare.step();
+                            sQLiteStatementPrepare.reset();
                             SQLiteConnectionUtil.getTotalChangedRows(sQLiteConnection);
                         }
                     }
                     Unit unit = Unit.INSTANCE;
-                    AutoCloseableKt.closeFinally(prepare, null);
+                    AutoCloseableKt.closeFinally(sQLiteStatementPrepare, null);
                     return null;
                 } finally {
                 }
@@ -91,11 +90,11 @@ public final /* synthetic */ class CommunalWidgetDao_Impl$$ExternalSyntheticLamb
                 CommunalWidgetDao_Impl.AnonymousClass2 anonymousClass2 = communalWidgetDao_Impl.__updateAdapterOfCommunalWidgetItem;
                 CommunalWidgetItem communalWidgetItem3 = (CommunalWidgetItem) obj2;
                 anonymousClass2.getClass();
-                prepare = sQLiteConnection2.prepare("UPDATE OR ABORT `communal_widget_table` SET `uid` = ?,`widget_id` = ?,`component_name` = ?,`item_id` = ?,`user_serial_number` = ?,`span_y` = ?,`span_y_new` = ? WHERE `uid` = ?");
+                sQLiteStatementPrepare = sQLiteConnection2.prepare("UPDATE OR ABORT `communal_widget_table` SET `uid` = ?,`widget_id` = ?,`component_name` = ?,`item_id` = ?,`user_serial_number` = ?,`span_y` = ?,`span_y_new` = ? WHERE `uid` = ?");
                 try {
-                    anonymousClass2.bind(prepare, communalWidgetItem3);
-                    prepare.step();
-                    prepare.close();
+                    anonymousClass2.bind(sQLiteStatementPrepare, communalWidgetItem3);
+                    sQLiteStatementPrepare.step();
+                    sQLiteStatementPrepare.close();
                     SQLiteConnectionUtil.getTotalChangedRows(sQLiteConnection2);
                     return null;
                 } finally {

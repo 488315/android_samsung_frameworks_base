@@ -38,40 +38,40 @@ public class SQLitePragma {
     private void checkAndSetSpecialPragma() {
         Matcher matcher = mPragmaPattern.matcher(this.mSql);
         if (matcher.matches()) {
-            String group = matcher.group(2);
-            String group2 = matcher.group(4);
-            if (group2 == null || group2.length() == 0) {
+            String strGroup = matcher.group(2);
+            String strGroup2 = matcher.group(4);
+            if (strGroup2 == null || strGroup2.length() == 0) {
                 return;
             }
-            if ("automatic_index".equalsIgnoreCase(group)) {
-                updateAutomaticIndex(group2);
+            if ("automatic_index".equalsIgnoreCase(strGroup)) {
+                updateAutomaticIndex(strGroup2);
                 return;
             }
-            if ("case_sensitive_like".equalsIgnoreCase(group)) {
-                updateCaseSensitveLike(group2);
+            if ("case_sensitive_like".equalsIgnoreCase(strGroup)) {
+                updateCaseSensitveLike(strGroup2);
                 return;
             }
-            if ("cache_size".equalsIgnoreCase(group)) {
-                updateCacheSize(group2);
-            } else if ("busy_timeout".equalsIgnoreCase(group)) {
-                updateBusyTimeout(group2);
-            } else if ("journal_mode".equalsIgnoreCase(group)) {
-                updateJournalMode(group2);
+            if ("cache_size".equalsIgnoreCase(strGroup)) {
+                updateCacheSize(strGroup2);
+            } else if ("busy_timeout".equalsIgnoreCase(strGroup)) {
+                updateBusyTimeout(strGroup2);
+            } else if ("journal_mode".equalsIgnoreCase(strGroup)) {
+                updateJournalMode(strGroup2);
             }
         }
     }
 
-    private int extractIntFromValue(String str) {
+    private int extractIntFromValue(String str) throws NumberFormatException {
         Matcher matcher = mNumberPattern.matcher(str);
         if (!matcher.matches()) {
             throw new IllegalStateException("Could not extract int value");
         }
-        String group = matcher.group(1);
-        Integer valueOf = Integer.valueOf(matcher.group(3), matcher.group(2) != null ? 16 : 10);
-        if (group != null && NativeLibraryHelper.CLEAR_ABI_OVERRIDE.equalsIgnoreCase(group)) {
-            valueOf = Integer.valueOf(-valueOf.intValue());
+        String strGroup = matcher.group(1);
+        Integer numValueOf = Integer.valueOf(matcher.group(3), matcher.group(2) != null ? 16 : 10);
+        if (strGroup != null && NativeLibraryHelper.CLEAR_ABI_OVERRIDE.equalsIgnoreCase(strGroup)) {
+            numValueOf = Integer.valueOf(-numValueOf.intValue());
         }
-        return valueOf.intValue();
+        return numValueOf.intValue();
     }
 
     private String extractJournalModeFromValue(String str) {
@@ -100,12 +100,12 @@ public class SQLitePragma {
 
     private void updateCacheSize(String str) {
         try {
-            int extractIntFromValue = extractIntFromValue(str);
-            if (extractIntFromValue < 0 || extractIntFromValue >= 10) {
-                this.mDatabase.setCacheSize(extractIntFromValue);
+            int iExtractIntFromValue = extractIntFromValue(str);
+            if (iExtractIntFromValue < 0 || iExtractIntFromValue >= 10) {
+                this.mDatabase.setCacheSize(iExtractIntFromValue);
                 return;
             }
-            Log.e(TAG, "Invalied cache size (under 10) '" + extractIntFromValue + "', ignore sql : " + this.mSql);
+            Log.e(TAG, "Invalied cache size (under 10) '" + iExtractIntFromValue + "', ignore sql : " + this.mSql);
         } catch (Exception e) {
             Log.w(TAG, "failed to get cache_size value from this sql : " + this.mSql, e);
         }
@@ -120,18 +120,18 @@ public class SQLitePragma {
     }
 
     private void updateJournalMode(String str) {
-        String str2;
+        String strExtractJournalModeFromValue;
         try {
-            str2 = extractJournalModeFromValue(str);
+            strExtractJournalModeFromValue = extractJournalModeFromValue(str);
         } catch (Exception e) {
             Log.w(TAG, "failed to get journal_mode value from this sql : " + this.mSql, e);
-            str2 = null;
+            strExtractJournalModeFromValue = null;
         }
-        if (str2 == null || str2.length() == 0) {
+        if (strExtractJournalModeFromValue == null || strExtractJournalModeFromValue.length() == 0) {
             return;
         }
-        Log.i(TAG, "PRAGMA journal_mode = " + str2 + " is executed, and it is not recommended");
-        if ("wal".equalsIgnoreCase(str2)) {
+        Log.i(TAG, "PRAGMA journal_mode = " + strExtractJournalModeFromValue + " is executed, and it is not recommended");
+        if ("wal".equalsIgnoreCase(strExtractJournalModeFromValue)) {
             return;
         }
         try {

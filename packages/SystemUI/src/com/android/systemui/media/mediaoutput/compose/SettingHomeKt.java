@@ -42,7 +42,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SettingHomeKt {
     public static final void SettingHome(final Function0 function0, final Function1 function1, SettingViewModel settingViewModel, LabsViewModel labsViewModel, Composer composer, final int i) {
@@ -77,18 +76,18 @@ public abstract class SettingHomeKt {
                     int i5 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
-                    m3422exceptionOrNullimpl.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    thM3442exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;
                 }
-                ViewModelProvider.Factory factory = (ViewModelProvider.Factory) failure;
-                if (factory == null) {
-                    factory = ViewModelKt.createDaggerViewModelFactory(current);
+                ViewModelProvider.Factory factoryCreateDaggerViewModelFactory = (ViewModelProvider.Factory) failure;
+                if (factoryCreateDaggerViewModelFactory == null) {
+                    factoryCreateDaggerViewModelFactory = ViewModelKt.createDaggerViewModelFactory(current);
                 }
-                ViewModel viewModel = ViewModelKt.get(current, SettingViewModel.class, factory, defaultViewModelCreationExtras);
+                ViewModel viewModel = ViewModelKt.get(current, SettingViewModel.class, factoryCreateDaggerViewModelFactory, defaultViewModelCreationExtras);
                 composerImpl.end(false);
                 SettingViewModel settingViewModel4 = (SettingViewModel) viewModel;
                 composerImpl.startReplaceGroup(1487631618);
@@ -104,15 +103,15 @@ public abstract class SettingHomeKt {
                     int i6 = Result.$r8$clinit;
                     failure2 = new Result.Failure(th2);
                 }
-                Throwable m3422exceptionOrNullimpl2 = Result.m3422exceptionOrNullimpl(failure2);
-                if (m3422exceptionOrNullimpl2 != null) {
-                    m3422exceptionOrNullimpl2.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
+                if (thM3442exceptionOrNullimpl2 != null) {
+                    thM3442exceptionOrNullimpl2.printStackTrace();
                 }
-                ViewModelProvider.Factory factory2 = (ViewModelProvider.Factory) (failure2 instanceof Result.Failure ? null : failure2);
-                if (factory2 == null) {
-                    factory2 = ViewModelKt.createDaggerViewModelFactory(current2);
+                ViewModelProvider.Factory factoryCreateDaggerViewModelFactory2 = (ViewModelProvider.Factory) (failure2 instanceof Result.Failure ? null : failure2);
+                if (factoryCreateDaggerViewModelFactory2 == null) {
+                    factoryCreateDaggerViewModelFactory2 = ViewModelKt.createDaggerViewModelFactory(current2);
                 }
-                ViewModel viewModel2 = ViewModelKt.get(current2, LabsViewModel.class, factory2, defaultViewModelCreationExtras2);
+                ViewModel viewModel2 = ViewModelKt.get(current2, LabsViewModel.class, factoryCreateDaggerViewModelFactory2, defaultViewModelCreationExtras2);
                 composerImpl.end(false);
                 i2 = i3 & (-8065);
                 labsViewModel2 = (LabsViewModel) viewModel2;
@@ -125,73 +124,77 @@ public abstract class SettingHomeKt {
             }
             composerImpl.endDefaults();
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.SettingHome (SettingHome.kt:47)");
+                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.SettingHome (SettingHome.kt:48)");
             }
-            ActionBarKt.SecTitle(function0, StringResources_androidKt.stringResource(R.string.settings, new Object[]{StringResources_androidKt.stringResource(R.string.media_output, composerImpl)}, composerImpl), null, ComposableLambdaKt.rememberComposableLambda(679383207, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt$SettingHome$1
+            ActionBarKt.SecTitle(function0, StringResources_androidKt.stringResource(R.string.settings, new Object[]{StringResources_androidKt.stringResource(R.string.media_output, composerImpl)}, composerImpl), null, ComposableLambdaKt.rememberComposableLambda(679383207, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt.SettingHome.1
+                /* JADX WARN: Removed duplicated region for block: B:15:0x0039  */
                 @Override // kotlin.jvm.functions.Function3
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     PaddingValues paddingValues = (PaddingValues) obj;
                     Composer composer2 = (Composer) obj2;
-                    int intValue = ((Number) obj3).intValue();
-                    if ((intValue & 6) == 0) {
-                        intValue |= ((ComposerImpl) composer2).changed(paddingValues) ? 4 : 2;
+                    int iIntValue = ((Number) obj3).intValue();
+                    if ((iIntValue & 6) == 0) {
+                        iIntValue |= ((ComposerImpl) composer2).changed(paddingValues) ? 4 : 2;
                     }
-                    if ((intValue & 19) == 18) {
+                    if ((iIntValue & 19) == 18) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
-                        }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.SettingHome.<anonymous> (SettingHome.kt:52)");
-                    }
-                    LayoutDirection layoutDirection = LayoutDirection.Ltr;
-                    PaddingValuesImpl m123PaddingValuesa9UjIt4$default = PaddingKt.m123PaddingValuesa9UjIt4$default(PaddingKt.calculateStartPadding(paddingValues, layoutDirection), 0.0f, PaddingKt.calculateEndPadding(paddingValues, layoutDirection), paddingValues.mo109calculateBottomPaddingD9Ej5fM(), 2);
-                    final LabsViewModel labsViewModel4 = LabsViewModel.this;
-                    MutableState collectAsState = SnapshotStateKt.collectAsState(labsViewModel4.isShowLabsMenu, Boolean.FALSE, null, composer2, 48, 2);
-                    ComposerImpl composerImpl3 = (ComposerImpl) composer2;
-                    composerImpl3.startReplaceGroup(44290307);
-                    Object rememberedValue = composerImpl3.rememberedValue();
-                    Composer.Companion.getClass();
-                    Object obj4 = Composer.Companion.Empty;
-                    if (rememberedValue == obj4) {
-                        rememberedValue = SnapshotStateKt.mutableStateOf$default(new Pair(0, 0));
-                        composerImpl3.updateRememberedValue(rememberedValue);
-                    }
-                    final MutableState mutableState = (MutableState) rememberedValue;
-                    composerImpl3.end(false);
-                    Modifier m128paddingqDBjuR0$default = PaddingKt.m128paddingqDBjuR0$default(SizeKt.fillMaxSize(Modifier.Companion, 1.0f), 0.0f, paddingValues.mo112calculateTopPaddingD9Ej5fM(), 0.0f, 0.0f, 13);
-                    Unit unit = Unit.INSTANCE;
-                    composerImpl3.startReplaceGroup(44298347);
-                    boolean changedInstance = composerImpl3.changedInstance(labsViewModel4);
-                    Object rememberedValue2 = composerImpl3.rememberedValue();
-                    if (changedInstance || rememberedValue2 == obj4) {
-                        rememberedValue2 = new PointerInputEventHandler() { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt$SettingHome$1$1$1
-                            @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
-                            public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
-                                Object detectTapGestures$default = TapGestureDetectorKt.detectTapGestures$default(pointerInputScope, null, null, null, new SettingHomeKt$SettingHome$1$$ExternalSyntheticLambda0(LabsViewModel.this, mutableState, pointerInputScope), continuation, 7);
-                                return detectTapGestures$default == CoroutineSingletons.COROUTINE_SUSPENDED ? detectTapGestures$default : Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.SettingHome.<anonymous> (SettingHome.kt:53)");
                             }
-                        };
-                        composerImpl3.updateRememberedValue(rememberedValue2);
-                    }
-                    composerImpl3.end(false);
-                    Modifier pointerInput = SuspendingPointerInputFilterKt.pointerInput(m128paddingqDBjuR0$default, unit, (PointerInputEventHandler) rememberedValue2);
-                    composerImpl3.startReplaceGroup(44330138);
-                    SettingViewModel settingViewModel5 = settingViewModel2;
-                    boolean changedInstance2 = composerImpl3.changedInstance(settingViewModel5);
-                    Function1 function12 = function1;
-                    boolean changed = changedInstance2 | composerImpl3.changed(function12) | composerImpl3.changed(collectAsState);
-                    Object rememberedValue3 = composerImpl3.rememberedValue();
-                    if (changed || rememberedValue3 == obj4) {
-                        rememberedValue3 = new SettingHomeKt$SettingHome$1$$ExternalSyntheticLambda0(settingViewModel5, function12, collectAsState);
-                        composerImpl3.updateRememberedValue(rememberedValue3);
-                    }
-                    composerImpl3.end(false);
-                    LazyDslKt.LazyColumn(pointerInput, null, m123PaddingValuesa9UjIt4$default, false, null, null, null, false, null, (Function1) rememberedValue3, composerImpl3, 0, 506);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
+                            LayoutDirection layoutDirection = LayoutDirection.Ltr;
+                            PaddingValuesImpl paddingValuesImplM124PaddingValuesa9UjIt4$default = PaddingKt.m124PaddingValuesa9UjIt4$default(PaddingKt.calculateStartPadding(paddingValues, layoutDirection), 0.0f, PaddingKt.calculateEndPadding(paddingValues, layoutDirection), paddingValues.mo110calculateBottomPaddingD9Ej5fM(), 2);
+                            final LabsViewModel labsViewModel4 = labsViewModel2;
+                            MutableState mutableStateCollectAsState = SnapshotStateKt.collectAsState(labsViewModel4.isShowLabsMenu, Boolean.FALSE, null, composer2, 48, 2);
+                            ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                            composerImpl3.startReplaceGroup(44292291);
+                            Object objRememberedValue = composerImpl3.rememberedValue();
+                            Composer.Companion.getClass();
+                            Object obj4 = Composer.Companion.Empty;
+                            if (objRememberedValue == obj4) {
+                                objRememberedValue = SnapshotStateKt.mutableStateOf$default(new Pair(0, 0));
+                                composerImpl3.updateRememberedValue(objRememberedValue);
+                            }
+                            final MutableState mutableState = (MutableState) objRememberedValue;
+                            composerImpl3.end(false);
+                            Modifier modifierM129paddingqDBjuR0$default = PaddingKt.m129paddingqDBjuR0$default(SizeKt.fillMaxSize(Modifier.Companion, 1.0f), 0.0f, paddingValues.mo113calculateTopPaddingD9Ej5fM(), 0.0f, 0.0f, 13);
+                            Unit unit = Unit.INSTANCE;
+                            composerImpl3.startReplaceGroup(44300331);
+                            boolean zChangedInstance = composerImpl3.changedInstance(labsViewModel4);
+                            Object objRememberedValue2 = composerImpl3.rememberedValue();
+                            if (zChangedInstance || objRememberedValue2 == obj4) {
+                                objRememberedValue2 = new PointerInputEventHandler() { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt$SettingHome$1$1$1
+                                    @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
+                                    public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
+                                        Object objDetectTapGestures$default = TapGestureDetectorKt.detectTapGestures$default(pointerInputScope, null, null, null, new SettingHomeKt$SettingHome$1$$ExternalSyntheticLambda0(labsViewModel4, mutableState, pointerInputScope), continuation, 7);
+                                        return objDetectTapGestures$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objDetectTapGestures$default : Unit.INSTANCE;
+                                    }
+                                };
+                                composerImpl3.updateRememberedValue(objRememberedValue2);
+                            }
+                            composerImpl3.end(false);
+                            Modifier modifierPointerInput = SuspendingPointerInputFilterKt.pointerInput(modifierM129paddingqDBjuR0$default, unit, (PointerInputEventHandler) objRememberedValue2);
+                            composerImpl3.startReplaceGroup(44332305);
+                            SettingViewModel settingViewModel5 = settingViewModel2;
+                            boolean zChangedInstance2 = composerImpl3.changedInstance(settingViewModel5);
+                            Function1 function12 = function1;
+                            boolean zChanged = zChangedInstance2 | composerImpl3.changed(function12) | composerImpl3.changed(mutableStateCollectAsState);
+                            Object objRememberedValue3 = composerImpl3.rememberedValue();
+                            if (zChanged || objRememberedValue3 == obj4) {
+                                objRememberedValue3 = new SettingHomeKt$SettingHome$1$$ExternalSyntheticLambda0(settingViewModel5, function12, mutableStateCollectAsState);
+                                composerImpl3.updateRememberedValue(objRememberedValue3);
+                            }
+                            composerImpl3.end(false);
+                            LazyDslKt.LazyColumn(modifierPointerInput, null, paddingValuesImplM124PaddingValuesa9UjIt4$default, false, null, null, null, false, null, (Function1) objRememberedValue3, composerImpl3, 0, 506);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
+                        }
                     }
                     return Unit.INSTANCE;
                 }
@@ -202,9 +205,9 @@ public abstract class SettingHomeKt {
             settingViewModel3 = settingViewModel2;
             labsViewModel3 = labsViewModel2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(function1, settingViewModel3, labsViewModel3, i) { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(function1, settingViewModel3, labsViewModel3, i) { // from class: com.android.systemui.media.mediaoutput.compose.SettingHomeKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ Function1 f$1;
                 public final /* synthetic */ SettingViewModel f$2;
                 public final /* synthetic */ LabsViewModel f$3;
@@ -212,10 +215,10 @@ public abstract class SettingHomeKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     SettingViewModel settingViewModel5 = this.f$2;
                     LabsViewModel labsViewModel4 = this.f$3;
-                    SettingHomeKt.SettingHome(Function0.this, this.f$1, settingViewModel5, labsViewModel4, (Composer) obj, updateChangedFlags);
+                    SettingHomeKt.SettingHome(this.f$0, this.f$1, settingViewModel5, labsViewModel4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

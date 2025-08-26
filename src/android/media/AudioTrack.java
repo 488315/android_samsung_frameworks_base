@@ -8,7 +8,6 @@ import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioMetadata;
 import android.media.AudioRouting;
-import android.media.AudioTrack;
 import android.media.Utils;
 import android.media.VolumeShaper;
 import android.media.audiopolicy.AudioMix;
@@ -319,11 +318,11 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
     }
 
     private AudioTrack(Context context, AudioAttributes audioAttributes, AudioFormat audioFormat, int i, int i2, int i3, boolean z, int i4, TunerConfiguration tunerConfiguration) throws IllegalArgumentException {
-        super(audioAttributes, 1);
+        int channelMask;
         int i5;
         int i6;
-        int i7;
-        int i8;
+        int encoding;
+        super(audioAttributes, 1);
         this.mState = 0;
         this.mPlayState = 1;
         this.mOffloadEosPending = false;
@@ -356,27 +355,27 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (shouldEnablePowerSaving(this.mAttributes, audioFormat, i, i2)) {
             this.mAttributes = new AudioAttributes.Builder(this.mAttributes).replaceFlags((this.mAttributes.getAllFlags() | 512) & (-257)).build();
         }
-        Looper myLooper = Looper.myLooper();
-        Looper mainLooper = myLooper == null ? Looper.getMainLooper() : myLooper;
+        Looper looperMyLooper = Looper.myLooper();
+        Looper mainLooper = looperMyLooper == null ? Looper.getMainLooper() : looperMyLooper;
         int sampleRate = audioFormat.getSampleRate();
         sampleRate = sampleRate == 0 ? 0 : sampleRate;
         int channelIndexMask = (audioFormat.getPropertySetMask() & 8) != 0 ? audioFormat.getChannelIndexMask() : 0;
         if ((4 & audioFormat.getPropertySetMask()) != 0) {
-            i5 = audioFormat.getChannelMask();
+            channelMask = audioFormat.getChannelMask();
         } else {
-            i5 = channelIndexMask == 0 ? 12 : 0;
+            channelMask = channelIndexMask == 0 ? 12 : 0;
         }
         if ((audioFormat.getPropertySetMask() & 1) != 0) {
-            int i9 = channelIndexMask;
-            i8 = audioFormat.getEncoding();
-            i6 = i5;
-            i7 = i9;
+            int i7 = channelIndexMask;
+            encoding = audioFormat.getEncoding();
+            i5 = channelMask;
+            i6 = i7;
         } else {
-            i6 = i5;
-            i7 = channelIndexMask;
-            i8 = 1;
+            i5 = channelMask;
+            i6 = channelIndexMask;
+            encoding = 1;
         }
-        audioParamCheck(sampleRate, i6, i7, i8, i2);
+        audioParamCheck(sampleRate, i5, i6, encoding, i2);
         this.mOffloaded = z;
         this.mStreamType = -1;
         audioBuffSizeCheck(i);
@@ -386,19 +385,19 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
         int[] iArr = {this.mSampleRate};
         int[] iArr2 = {resolvePlaybackSessionId(context, i3)};
-        AttributionSource.ScopedParcelState asScopedParcelState = (context == null ? AttributionSource.myAttributionSource() : context.getAttributionSource()).asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = (context == null ? AttributionSource.myAttributionSource() : context.getAttributionSource()).asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), this.mAttributes, iArr, this.mChannelMask, this.mChannelIndexMask, this.mAudioFormat, this.mNativeBufferSizeInBytes, this.mDataLoadMode, iArr2, asScopedParcelState.getParcel(), 0L, z, i4, tunerConfiguration, getCurrentOpPackageName());
-            if (native_setup != 0) {
-                loge("Error code " + native_setup + " when initializing AudioTrack.");
-                if (asScopedParcelState != null) {
-                    asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), this.mAttributes, iArr, this.mChannelMask, this.mChannelIndexMask, this.mAudioFormat, this.mNativeBufferSizeInBytes, this.mDataLoadMode, iArr2, scopedParcelStateAsScopedParcelState.getParcel(), 0L, z, i4, tunerConfiguration, getCurrentOpPackageName());
+            if (iNative_setup != 0) {
+                loge("Error code " + iNative_setup + " when initializing AudioTrack.");
+                if (scopedParcelStateAsScopedParcelState != null) {
+                    scopedParcelStateAsScopedParcelState.close();
                     return;
                 }
                 return;
             }
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
             this.mSampleRate = iArr[0];
             this.mSessionId = iArr2[0];
@@ -445,8 +444,8 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         this.mStreamEventCbInfoList = new LinkedList<>();
         this.mNativeTrackInJavaObj = 0L;
         this.mJniData = 0L;
-        Looper myLooper = Looper.myLooper();
-        this.mInitializationLooper = myLooper == null ? Looper.getMainLooper() : myLooper;
+        Looper looperMyLooper = Looper.myLooper();
+        this.mInitializationLooper = looperMyLooper == null ? Looper.getMainLooper() : looperMyLooper;
         if (j != 0) {
             baseRegisterPlayer(0);
             deferred_connect(j);
@@ -461,19 +460,19 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
         int[] iArr = {0};
         int[] iArr2 = {0};
-        AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), null, iArr2, 0, 0, 0, 0, 0, iArr, asScopedParcelState.getParcel(), j, false, 0, null, "");
-            if (native_setup != 0) {
-                loge("Error code " + native_setup + " when initializing AudioTrack.");
-                if (asScopedParcelState != null) {
-                    asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), null, iArr2, 0, 0, 0, 0, 0, iArr, scopedParcelStateAsScopedParcelState.getParcel(), j, false, 0, null, "");
+            if (iNative_setup != 0) {
+                loge("Error code " + iNative_setup + " when initializing AudioTrack.");
+                if (scopedParcelStateAsScopedParcelState != null) {
+                    scopedParcelStateAsScopedParcelState.close();
                     return;
                 }
                 return;
             }
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
             this.mSessionId = iArr[0];
             this.mState = 1;
@@ -603,42 +602,74 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             throw new IllegalArgumentException("Invalid call redirection mode " + i);
         }
 
-        private AudioTrack buildCallInjectionTrack() {
-            android.media.audiopolicy.AudioMix build = new AudioMix.Builder(new AudioMixingRule.Builder().addMixRule(2, new AudioAttributes.Builder().setCapturePreset(7).setForCallRedirection().build()).setTargetMixRole(1).build()).setFormat(this.mFormat).setRouteFlags(2).build();
-            AudioPolicy build2 = new AudioPolicy.Builder(this.mContext).addMix(build).build();
-            if (AudioManager.registerAudioPolicyStatic(build2) != 0) {
+        private AudioTrack buildCallInjectionTrack() throws IllegalArgumentException {
+            android.media.audiopolicy.AudioMix audioMixBuild = new AudioMix.Builder(new AudioMixingRule.Builder().addMixRule(2, new AudioAttributes.Builder().setCapturePreset(7).setForCallRedirection().build()).setTargetMixRole(1).build()).setFormat(this.mFormat).setRouteFlags(2).build();
+            AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this.mContext).addMix(audioMixBuild).build();
+            if (AudioManager.registerAudioPolicyStatic(audioPolicyBuild) != 0) {
                 throw new UnsupportedOperationException("Error: could not register audio policy");
             }
-            AudioTrack createAudioTrackSource = build2.createAudioTrackSource(build);
-            if (createAudioTrackSource == null) {
+            AudioTrack audioTrackCreateAudioTrackSource = audioPolicyBuild.createAudioTrackSource(audioMixBuild);
+            if (audioTrackCreateAudioTrackSource == null) {
                 throw new UnsupportedOperationException("Cannot create injection AudioTrack");
             }
-            createAudioTrackSource.unregisterAudioPolicyOnRelease(build2);
-            return createAudioTrackSource;
+            audioTrackCreateAudioTrackSource.unregisterAudioPolicyOnRelease(audioPolicyBuild);
+            return audioTrackCreateAudioTrackSource;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:52:0x0046, code lost:
-        
-            if (android.media.AudioTrack.shouldEnablePowerSaving(r12.mAttributes, r12.mFormat, r12.mBufferSizeInBytes, r12.mMode) == false) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:7:0x001b, code lost:
-        
-            if (r0 != 2) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:8:0x0049, code lost:
-        
-            r12.mAttributes = new android.media.AudioAttributes.Builder(r12.mAttributes).replaceFlags((r12.mAttributes.getAllFlags() | 512) & (-257)).build();
-         */
+        /* JADX WARN: Removed duplicated region for block: B:14:0x0049  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.media.AudioTrack build() throws java.lang.UnsupportedOperationException {
-            /*
-                Method dump skipped, instructions count: 278
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.AudioTrack.Builder.build():android.media.AudioTrack");
+        public AudioTrack build() throws UnsupportedOperationException {
+            int bytesPerSample = 1;
+            if (this.mAttributes == null) {
+                this.mAttributes = new AudioAttributes.Builder().setUsage(1).build();
+            }
+            int i = this.mPerformanceMode;
+            if (i != 0) {
+                if (i == 1) {
+                    this.mAttributes = new AudioAttributes.Builder(this.mAttributes).replaceFlags((this.mAttributes.getAllFlags() | 256) & (-513)).build();
+                } else if (i == 2) {
+                    this.mAttributes = new AudioAttributes.Builder(this.mAttributes).replaceFlags((this.mAttributes.getAllFlags() | 512) & (-257)).build();
+                }
+            } else if (AudioTrack.shouldEnablePowerSaving(this.mAttributes, this.mFormat, this.mBufferSizeInBytes, this.mMode)) {
+            }
+            if (this.mFormat == null) {
+                this.mFormat = new AudioFormat.Builder().setChannelMask(12).setEncoding(1).build();
+            }
+            int i2 = this.mCallRedirectionMode;
+            if (i2 == 2) {
+                return buildCallInjectionTrack();
+            }
+            if (i2 == 1) {
+                this.mAttributes = new AudioAttributes.Builder(this.mAttributes).setForCallRedirection().build();
+            }
+            if (this.mOffload) {
+                if (this.mPerformanceMode == 1) {
+                    throw new UnsupportedOperationException("Offload and low latency modes are incompatible");
+                }
+                if (AudioSystem.getDirectPlaybackSupport(this.mFormat, this.mAttributes) == 0) {
+                    throw new UnsupportedOperationException("Cannot create AudioTrack, offload format / attributes not supported");
+                }
+            }
+            if (this.mMode == 1 && this.mBufferSizeInBytes == 0) {
+                if (AudioFormat.isEncodingLinearFrames(this.mFormat.getEncoding())) {
+                    try {
+                        bytesPerSample = AudioFormat.getBytesPerSample(this.mFormat.getEncoding());
+                    } catch (IllegalArgumentException unused) {
+                    }
+                }
+                this.mBufferSizeInBytes = this.mFormat.getChannelCount() * bytesPerSample;
+            }
+            try {
+                AudioTrack audioTrack = new AudioTrack(this.mContext, this.mAttributes, this.mFormat, this.mBufferSizeInBytes, this.mMode, this.mSessionId, this.mOffload, this.mEncapsulationMode, this.mTunerConfiguration);
+                if (audioTrack.getState() != 0) {
+                    return audioTrack;
+                }
+                throw new UnsupportedOperationException("Cannot create AudioTrack");
+            } catch (IllegalArgumentException e) {
+                throw new UnsupportedOperationException(e.getMessage());
+            }
         }
     }
 
@@ -775,20 +806,63 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00e6  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0077  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void audioParamCheck(int r6, int r7, int r8, int r9, int r10) {
-        /*
-            Method dump skipped, instructions count: 261
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.AudioTrack.audioParamCheck(int, int, int, int, int):void");
+    private void audioParamCheck(int i, int i2, int i3, int i4, int i5) {
+        if ((i < AudioFormat.SAMPLE_RATE_HZ_MIN || i > AudioFormat.SAMPLE_RATE_HZ_MAX) && i != 0) {
+            throw new IllegalArgumentException(i + "Hz is not a supported sample rate.");
+        }
+        this.mSampleRate = i;
+        if (i4 == 13 && i2 != 12 && AudioFormat.channelCountFromOutChannelMask(i2) != 8) {
+            Log.w(TAG, "ENCODING_IEC61937 is configured with channel mask as " + i2 + ", which is not 2 or 8 channels");
+        }
+        this.mChannelConfiguration = i2;
+        if (i2 == 1 || i2 == 2) {
+            this.mChannelCount = 1;
+            this.mChannelMask = 4;
+        } else if (i2 == 3) {
+            this.mChannelCount = 2;
+            this.mChannelMask = 12;
+        } else if (i2 != 4) {
+            if (i2 != 12) {
+                if (i2 == 0 && i3 != 0) {
+                    this.mChannelCount = 0;
+                } else {
+                    if (!isMultichannelConfigSupported(i2, i4)) {
+                        throw new IllegalArgumentException("Unsupported channel mask configuration " + i2 + " for encoding " + i4);
+                    }
+                    this.mChannelMask = i2;
+                    this.mChannelCount = AudioFormat.channelCountFromOutChannelMask(i2);
+                }
+            }
+        }
+        this.mChannelIndexMask = i3;
+        if (i3 != 0) {
+            int iBitCount = Integer.bitCount(i3);
+            if (((-16777216) & i3) != 0 || (AudioFormat.isEncodingLinearFrames(i4) && iBitCount > AudioSystem.OUT_CHANNEL_COUNT_MAX)) {
+                throw new IllegalArgumentException("Unsupported channel index mask configuration " + i3 + " for encoding " + i4);
+            }
+            int i6 = this.mChannelCount;
+            if (i6 == 0) {
+                this.mChannelCount = iBitCount;
+            } else if (i6 != iBitCount) {
+                throw new IllegalArgumentException("Channel count must match");
+            }
+        }
+        if (i4 == 1) {
+            i4 = 2;
+        }
+        if (!AudioFormat.isPublicEncoding(i4)) {
+            throw new IllegalArgumentException("Unsupported audio encoding.");
+        }
+        this.mAudioFormat = i4;
+        if ((i5 != 1 && i5 != 0) || (i5 != 1 && !AudioFormat.isEncodingLinearPcm(i4))) {
+            throw new IllegalArgumentException("Invalid mode.");
+        }
+        this.mDataLoadMode = i5;
     }
 
     private static boolean isMultichannelConfigSupported(int i, int i2) {
@@ -796,11 +870,11 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             loge("Channel configuration features unsupported channels");
             return false;
         }
-        int channelCountFromOutChannelMask = AudioFormat.channelCountFromOutChannelMask(i);
+        int iChannelCountFromOutChannelMask = AudioFormat.channelCountFromOutChannelMask(i);
         try {
             int i3 = AudioFormat.isEncodingLinearFrames(i2) ? AudioSystem.OUT_CHANNEL_COUNT_MAX : 24;
-            if (channelCountFromOutChannelMask > i3) {
-                loge("Channel configuration contains too many channels for encoding " + i2 + NavigationBarInflaterView.KEY_CODE_START + channelCountFromOutChannelMask + " > " + i3 + NavigationBarInflaterView.KEY_CODE_END);
+            if (iChannelCountFromOutChannelMask > i3) {
+                loge("Channel configuration contains too many channels for encoding " + i2 + NavigationBarInflaterView.KEY_CODE_START + iChannelCountFromOutChannelMask + " > " + i3 + NavigationBarInflaterView.KEY_CODE_END);
                 return false;
             }
             if ((i & 12) != 12) {
@@ -808,9 +882,9 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
                 return false;
             }
             for (Map.Entry<String, Integer> entry : CHANNEL_PAIR_MAP.entrySet()) {
-                int intValue = entry.getValue().intValue();
-                int i4 = i & intValue;
-                if (i4 != 0 && i4 != intValue) {
+                int iIntValue = entry.getValue().intValue();
+                int i4 = i & iIntValue;
+                if (i4 != 0 && i4 != iIntValue) {
                     loge("Channel pair (" + entry.getKey() + ") cannot be used independently");
                     return false;
                 }
@@ -891,7 +965,7 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         return this.mChannelConfiguration;
     }
 
-    public AudioFormat getFormat() {
+    public AudioFormat getFormat() throws IllegalArgumentException {
         AudioFormat.Builder encoding = new AudioFormat.Builder().setSampleRate(this.mSampleRate).setEncoding(this.mAudioFormat);
         int i = this.mChannelConfiguration;
         if (i != 0) {
@@ -992,76 +1066,50 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
     }
 
     public int getPerformanceMode() {
-        int native_get_flags = native_get_flags();
-        if ((native_get_flags & 4) != 0) {
+        int iNative_get_flags = native_get_flags();
+        if ((iNative_get_flags & 4) != 0) {
             return 1;
         }
-        return (native_get_flags & 8) != 0 ? 2 : 0;
+        return (iNative_get_flags & 8) != 0 ? 2 : 0;
     }
 
     public static int getNativeOutputSampleRate(int i) {
         return native_get_output_sample_rate(i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0026  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x002c  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x001f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int getMinBufferSize(int r3, int r4, int r5) {
-        /*
-            r0 = 2
-            r1 = -2
-            if (r4 == r0) goto L1f
-            r2 = 3
-            if (r4 == r2) goto L20
-            r2 = 4
-            if (r4 == r2) goto L1f
-            r2 = 12
-            if (r4 == r2) goto L20
-            boolean r0 = isMultichannelConfigSupported(r4, r5)
-            if (r0 != 0) goto L1a
-            java.lang.String r3 = "getMinBufferSize(): Invalid channel configuration."
-            loge(r3)
-            return r1
-        L1a:
-            int r0 = android.media.AudioFormat.channelCountFromOutChannelMask(r4)
-            goto L20
-        L1f:
-            r0 = 1
-        L20:
-            boolean r4 = android.media.AudioFormat.isPublicEncoding(r5)
-            if (r4 != 0) goto L2c
-            java.lang.String r3 = "getMinBufferSize(): Invalid audio format."
-            loge(r3)
-            return r1
-        L2c:
-            int r4 = android.media.AudioFormat.SAMPLE_RATE_HZ_MIN
-            if (r3 < r4) goto L42
-            int r4 = android.media.AudioFormat.SAMPLE_RATE_HZ_MAX
-            if (r3 <= r4) goto L35
-            goto L42
-        L35:
-            int r3 = native_get_min_buff_size(r3, r0, r5)
-            if (r3 > 0) goto L41
-            java.lang.String r3 = "getMinBufferSize(): error querying hardware"
-            loge(r3)
-            r3 = -1
-        L41:
-            return r3
-        L42:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "getMinBufferSize(): "
-            r4.<init>(r5)
-            r4.append(r3)
-            java.lang.String r3 = " Hz is not a supported sample rate."
-            r4.append(r3)
-            java.lang.String r3 = r4.toString()
-            loge(r3)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.AudioTrack.getMinBufferSize(int, int, int):int");
+    public static int getMinBufferSize(int i, int i2, int i3) {
+        int iChannelCountFromOutChannelMask = 2;
+        if (i2 == 2) {
+            iChannelCountFromOutChannelMask = 1;
+        } else if (i2 != 3) {
+            if (i2 != 4) {
+                if (i2 != 12) {
+                    if (!isMultichannelConfigSupported(i2, i3)) {
+                        loge("getMinBufferSize(): Invalid channel configuration.");
+                        return -2;
+                    }
+                    iChannelCountFromOutChannelMask = AudioFormat.channelCountFromOutChannelMask(i2);
+                }
+            }
+        }
+        if (!AudioFormat.isPublicEncoding(i3)) {
+            loge("getMinBufferSize(): Invalid audio format.");
+            return -2;
+        }
+        if (i < AudioFormat.SAMPLE_RATE_HZ_MIN || i > AudioFormat.SAMPLE_RATE_HZ_MAX) {
+            loge("getMinBufferSize(): " + i + " Hz is not a supported sample rate.");
+            return -2;
+        }
+        int iNative_get_min_buff_size = native_get_min_buff_size(i, iChannelCountFromOutChannelMask, i3);
+        if (iNative_get_min_buff_size > 0) {
+            return iNative_get_min_buff_size;
+        }
+        loge("getMinBufferSize(): error querying hardware");
+        return -1;
     }
 
     public int getAudioSessionId() {
@@ -1086,10 +1134,10 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             throw new IllegalArgumentException();
         }
         long[] jArr = new long[2];
-        int native_get_timestamp = native_get_timestamp(jArr);
+        int iNative_get_timestamp = native_get_timestamp(jArr);
         audioTimestamp.framePosition = jArr[0];
         audioTimestamp.nanoTime = jArr[1];
-        return native_get_timestamp;
+        return iNative_get_timestamp;
     }
 
     public PersistableBundle getMetrics() {
@@ -1135,11 +1183,11 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (z) {
             f = 0.0f;
         }
-        float clampGainOrLevel = clampGainOrLevel(f);
+        float fClampGainOrLevel = clampGainOrLevel(f);
         if (z) {
             f2 = 0.0f;
         }
-        native_setVolume(clampGainOrLevel, clampGainOrLevel(f2));
+        native_setVolume(fClampGainOrLevel, clampGainOrLevel(f2));
     }
 
     public int setVolume(float f) {
@@ -1236,7 +1284,7 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         } else {
             new Thread() { // from class: android.media.AudioTrack.1
                 @Override // java.lang.Thread, java.lang.Runnable
-                public void run() {
+                public void run() throws InterruptedException {
                     try {
                         Thread.sleep(startDelayMs);
                     } catch (InterruptedException e) {
@@ -1333,11 +1381,11 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (!blockUntilOffloadDrain(i3)) {
             return 0;
         }
-        int native_write_byte = native_write_byte(bArr, i, i2, this.mAudioFormat, i3 == 0);
-        if (this.mDataLoadMode == 0 && this.mState == 2 && native_write_byte > 0) {
+        int iNative_write_byte = native_write_byte(bArr, i, i2, this.mAudioFormat, i3 == 0);
+        if (this.mDataLoadMode == 0 && this.mState == 2 && iNative_write_byte > 0) {
             this.mState = 1;
         }
-        return native_write_byte;
+        return iNative_write_byte;
     }
 
     public int write(short[] sArr, int i, int i2) {
@@ -1360,11 +1408,11 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (!blockUntilOffloadDrain(i3)) {
             return 0;
         }
-        int native_write_short = native_write_short(sArr, i, i2, this.mAudioFormat, i3 == 0);
-        if (this.mDataLoadMode == 0 && this.mState == 2 && native_write_short > 0) {
+        int iNative_write_short = native_write_short(sArr, i, i2, this.mAudioFormat, i3 == 0);
+        if (this.mDataLoadMode == 0 && this.mState == 2 && iNative_write_short > 0) {
             this.mState = 1;
         }
-        return native_write_short;
+        return iNative_write_short;
     }
 
     public int write(float[] fArr, int i, int i2, int i3) {
@@ -1388,16 +1436,16 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (!blockUntilOffloadDrain(i3)) {
             return 0;
         }
-        int native_write_float = native_write_float(fArr, i, i2, this.mAudioFormat, i3 == 0);
-        if (this.mDataLoadMode == 0 && this.mState == 2 && native_write_float > 0) {
+        int iNative_write_float = native_write_float(fArr, i, i2, this.mAudioFormat, i3 == 0);
+        if (this.mDataLoadMode == 0 && this.mState == 2 && iNative_write_float > 0) {
             this.mState = 1;
         }
-        return native_write_float;
+        return iNative_write_float;
     }
 
     public int write(ByteBuffer byteBuffer, int i, int i2) {
         AudioTrack audioTrack;
-        int native_write_byte;
+        int iNative_write_byte;
         if (this.mState == 0) {
             Log.e(TAG, "AudioTrack.write() called in invalid state STATE_UNINITIALIZED");
             return -3;
@@ -1415,19 +1463,19 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
         if (byteBuffer.isDirect()) {
             audioTrack = this;
-            native_write_byte = audioTrack.native_write_native_bytes(byteBuffer, byteBuffer.position(), i, this.mAudioFormat, i2 == 0);
+            iNative_write_byte = audioTrack.native_write_native_bytes(byteBuffer, byteBuffer.position(), i, this.mAudioFormat, i2 == 0);
             byteBuffer = byteBuffer;
         } else {
             audioTrack = this;
-            native_write_byte = audioTrack.native_write_byte(NioUtils.unsafeArray(byteBuffer), NioUtils.unsafeArrayOffset(byteBuffer) + byteBuffer.position(), i, audioTrack.mAudioFormat, i2 == 0);
+            iNative_write_byte = audioTrack.native_write_byte(NioUtils.unsafeArray(byteBuffer), NioUtils.unsafeArrayOffset(byteBuffer) + byteBuffer.position(), i, audioTrack.mAudioFormat, i2 == 0);
         }
-        if (audioTrack.mDataLoadMode == 0 && audioTrack.mState == 2 && native_write_byte > 0) {
+        if (audioTrack.mDataLoadMode == 0 && audioTrack.mState == 2 && iNative_write_byte > 0) {
             audioTrack.mState = 1;
         }
-        if (native_write_byte > 0) {
-            byteBuffer.position(byteBuffer.position() + native_write_byte);
+        if (iNative_write_byte > 0) {
+            byteBuffer.position(byteBuffer.position() + iNative_write_byte);
         }
-        return native_write_byte;
+        return iNative_write_byte;
     }
 
     public int write(ByteBuffer byteBuffer, int i, int i2, long j) {
@@ -1455,9 +1503,9 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             return 0;
         }
         if (this.mAvSyncHeader == null) {
-            ByteBuffer allocate = ByteBuffer.allocate(this.mOffset);
-            this.mAvSyncHeader = allocate;
-            allocate.order(ByteOrder.BIG_ENDIAN);
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(this.mOffset);
+            this.mAvSyncHeader = byteBufferAllocate;
+            byteBufferAllocate.order(ByteOrder.BIG_ENDIAN);
             this.mAvSyncHeader.putInt(1431633922);
         }
         if (this.mAvSyncBytesRemaining == 0) {
@@ -1469,27 +1517,27 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         }
         if (this.mAvSyncHeader.remaining() != 0) {
             ByteBuffer byteBuffer2 = this.mAvSyncHeader;
-            int write = write(byteBuffer2, byteBuffer2.remaining(), i2);
-            if (write < 0) {
+            int iWrite = write(byteBuffer2, byteBuffer2.remaining(), i2);
+            if (iWrite < 0) {
                 Log.e(TAG, "AudioTrack.write() could not write timestamp header!");
                 this.mAvSyncHeader = null;
                 this.mAvSyncBytesRemaining = 0;
-                return write;
+                return iWrite;
             }
             if (this.mAvSyncHeader.remaining() > 0) {
                 Log.v(TAG, "AudioTrack.write() partial timestamp header written.");
                 return 0;
             }
         }
-        int write2 = write(byteBuffer, Math.min(this.mAvSyncBytesRemaining, i), i2);
-        if (write2 < 0) {
+        int iWrite2 = write(byteBuffer, Math.min(this.mAvSyncBytesRemaining, i), i2);
+        if (iWrite2 < 0) {
             Log.e(TAG, "AudioTrack.write() could not write audio data!");
             this.mAvSyncHeader = null;
             this.mAvSyncBytesRemaining = 0;
-            return write2;
+            return iWrite2;
         }
-        this.mAvSyncBytesRemaining -= write2;
-        return write2;
+        this.mAvSyncBytesRemaining -= iWrite2;
+        return iWrite2;
     }
 
     public int reloadStaticData() {
@@ -1499,45 +1547,22 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         return native_reload_static();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0012, code lost:
-    
-        return false;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private boolean blockUntilOffloadDrain(int r5) {
-        /*
-            r4 = this;
-            java.lang.Object r0 = r4.mPlayStateLock
-            monitor-enter(r0)
-        L3:
-            int r1 = r4.mPlayState     // Catch: java.lang.Throwable -> L1a
-            r2 = 4
-            r3 = 1
-            if (r1 == r2) goto Lf
-            r2 = 5
-            if (r1 != r2) goto Ld
-            goto Lf
-        Ld:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L1a
-            return r3
-        Lf:
-            if (r5 != r3) goto L14
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L1a
-            r4 = 0
-            return r4
-        L14:
-            java.lang.Object r1 = r4.mPlayStateLock     // Catch: java.lang.InterruptedException -> L3 java.lang.Throwable -> L1a
-            r1.wait()     // Catch: java.lang.InterruptedException -> L3 java.lang.Throwable -> L1a
-            goto L3
-        L1a:
-            r4 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L1a
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.AudioTrack.blockUntilOffloadDrain(int):boolean");
+    private boolean blockUntilOffloadDrain(int i) {
+        synchronized (this.mPlayStateLock) {
+            while (true) {
+                int i2 = this.mPlayState;
+                if (i2 != 4 && i2 != 5) {
+                    return true;
+                }
+                if (i == 1) {
+                    return false;
+                }
+                try {
+                    this.mPlayStateLock.wait();
+                } catch (InterruptedException unused) {
+                }
+            }
+        }
     }
 
     public int attachAuxEffect(int i) {
@@ -1567,14 +1592,14 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         if (audioDeviceInfo != null && !audioDeviceInfo.isSink()) {
             return false;
         }
-        boolean native_setOutputDevice = native_setOutputDevice(audioDeviceInfo != null ? audioDeviceInfo.getId() : 0);
-        if (!native_setOutputDevice) {
-            return native_setOutputDevice;
+        boolean zNative_setOutputDevice = native_setOutputDevice(audioDeviceInfo != null ? audioDeviceInfo.getId() : 0);
+        if (!zNative_setOutputDevice) {
+            return zNative_setOutputDevice;
         }
         synchronized (this) {
             this.mPreferredDevice = audioDeviceInfo;
         }
-        return native_setOutputDevice;
+        return zNative_setOutputDevice;
     }
 
     @Override // android.media.AudioRouting
@@ -1588,9 +1613,9 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
 
     private List<AudioDeviceInfo> getRoutedDevicesInternal() {
         ArrayList arrayList = new ArrayList();
-        int[] native_getRoutedDeviceIds = native_getRoutedDeviceIds();
-        if (native_getRoutedDeviceIds != null && native_getRoutedDeviceIds.length != 0) {
-            for (int i : native_getRoutedDeviceIds) {
+        int[] iArrNative_getRoutedDeviceIds = native_getRoutedDeviceIds();
+        if (iArrNative_getRoutedDeviceIds != null && iArrNative_getRoutedDeviceIds.length != 0) {
+            for (int i : iArrNative_getRoutedDeviceIds) {
                 AudioDeviceInfo deviceForPortId = AudioManager.getDeviceForPortId(i, 2);
                 if (deviceForPortId != null) {
                     arrayList.add(deviceForPortId);
@@ -1712,7 +1737,7 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
         this.mCodecFormatChangedListeners.add(onCodecFormatChangedListener, executor, new Utils.ListenerList.Listener() { // from class: android.media.AudioTrack$$ExternalSyntheticLambda0
             @Override // android.media.Utils.ListenerList.Listener
             public final void onEvent(int i, Object obj) {
-                AudioTrack.this.lambda$addOnCodecFormatChangedListener$0(onCodecFormatChangedListener, i, (AudioMetadataReadMap) obj);
+                this.f$0.lambda$addOnCodecFormatChangedListener$0(onCodecFormatChangedListener, i, (AudioMetadataReadMap) obj);
             }
         });
     }
@@ -1829,7 +1854,7 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
                     return;
                 }
                 LinkedList linkedList = new LinkedList(AudioTrack.this.mStreamEventCbInfoList);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     Iterator it = linkedList.iterator();
                     while (it.hasNext()) {
@@ -1839,27 +1864,27 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
                             streamEventCbInfo.mStreamEventExec.execute(new Runnable() { // from class: android.media.AudioTrack$StreamEventHandler$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    AudioTrack.StreamEventHandler.this.lambda$handleMessage$1(streamEventCbInfo);
+                                    this.f$0.lambda$handleMessage$1(streamEventCbInfo);
                                 }
                             });
                         } else if (i == 7) {
                             streamEventCbInfo.mStreamEventExec.execute(new Runnable() { // from class: android.media.AudioTrack$StreamEventHandler$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    AudioTrack.StreamEventHandler.this.lambda$handleMessage$2(streamEventCbInfo);
+                                    this.f$0.lambda$handleMessage$2(streamEventCbInfo);
                                 }
                             });
                         } else if (i == 9) {
                             streamEventCbInfo.mStreamEventExec.execute(new Runnable() { // from class: android.media.AudioTrack$StreamEventHandler$$ExternalSyntheticLambda0
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    AudioTrack.StreamEventHandler.this.lambda$handleMessage$0(streamEventCbInfo, message);
+                                    this.f$0.lambda$handleMessage$0(streamEventCbInfo, message);
                                 }
                             });
                         }
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -1962,17 +1987,17 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
     }
 
     @Override // android.media.PlayerBase
-    void playerStart() {
+    void playerStart() throws IllegalStateException {
         play();
     }
 
     @Override // android.media.PlayerBase
-    void playerPause() {
+    void playerPause() throws IllegalStateException {
         pause();
     }
 
     @Override // android.media.PlayerBase
-    void playerStop() {
+    void playerStop() throws IllegalStateException {
         stop();
     }
 
@@ -1990,12 +2015,12 @@ public class AudioTrack extends PlayerBase implements AudioRouting, VolumeAutoma
             ByteBuffer byteBuffer = (ByteBuffer) obj2;
             byteBuffer.order(ByteOrder.nativeOrder());
             byteBuffer.rewind();
-            AudioMetadata.BaseMap fromByteBuffer = AudioMetadata.fromByteBuffer(byteBuffer);
-            if (fromByteBuffer == null) {
+            AudioMetadata.BaseMap baseMapFromByteBuffer = AudioMetadata.fromByteBuffer(byteBuffer);
+            if (baseMapFromByteBuffer == null) {
                 Log.e(TAG, "Unable to get audio metadata from byte buffer");
                 return;
             } else {
-                audioTrack.mCodecFormatChangedListeners.notify(0, fromByteBuffer);
+                audioTrack.mCodecFormatChangedListeners.notify(0, baseMapFromByteBuffer);
                 return;
             }
         }

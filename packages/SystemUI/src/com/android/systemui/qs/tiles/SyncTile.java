@@ -49,7 +49,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SyncTile extends SQSTileImpl {
     public SystemUIDialog mAlertDialog;
@@ -61,7 +60,6 @@ public class SyncTile extends SQSTileImpl {
     public final AnonymousClass1 mReceiver;
     private final SettingsHelper mSettingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SyncDetailAdapter implements DetailAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
         public TextView mSummary;
@@ -76,11 +74,11 @@ public class SyncTile extends SQSTileImpl {
             if (syncTile.hasUserRestriction()) {
                 return null;
             }
-            View inflate = LayoutInflater.from(syncTile.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
-            TextView textView = (TextView) inflate.findViewById(R.id.message);
+            View viewInflate = LayoutInflater.from(syncTile.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.message);
             this.mSummary = textView;
             textView.setText(getToggleState().booleanValue() ? R.string.data_usage_auto_sync_on_dialog : R.string.data_usage_auto_sync_off_dialog);
-            return inflate;
+            return viewInflate;
         }
 
         @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -122,7 +120,7 @@ public class SyncTile extends SQSTileImpl {
                 syncTile.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.SyncTile$SyncDetailAdapter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SyncTile.SyncDetailAdapter syncDetailAdapter = SyncTile.SyncDetailAdapter.this;
+                        SyncTile.SyncDetailAdapter syncDetailAdapter = this.f$0;
                         int i = SyncTile.SyncDetailAdapter.$r8$clinit;
                         syncDetailAdapter.setToggleState(!syncDetailAdapter.getToggleState().booleanValue());
                     }
@@ -174,18 +172,18 @@ public class SyncTile extends SQSTileImpl {
     }
 
     public static int getEnterprisePolicyEnabled(Context context, String str, String str2, String[] strArr) {
-        Cursor query;
-        Uri parse = Uri.parse(str);
-        if (context == null || (query = context.getContentResolver().query(parse, null, str2, strArr, null)) == null) {
+        Cursor cursorQuery;
+        Uri uri = Uri.parse(str);
+        if (context == null || (cursorQuery = context.getContentResolver().query(uri, null, str2, strArr, null)) == null) {
             return -1;
         }
         try {
-            query.moveToFirst();
-            return query.getString(query.getColumnIndex(str2)).equals("true") ? 1 : 0;
+            cursorQuery.moveToFirst();
+            return cursorQuery.getString(cursorQuery.getColumnIndex(str2)).equals("true") ? 1 : 0;
         } catch (Exception unused) {
             return -1;
         } finally {
-            query.close();
+            cursorQuery.close();
         }
     }
 
@@ -231,7 +229,7 @@ public class SyncTile extends SQSTileImpl {
             this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.SyncTile$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SyncTile.this.handleClick(expandable);
+                    this.f$0.handleClick(expandable);
                 }
             });
             return;
@@ -248,7 +246,7 @@ public class SyncTile extends SQSTileImpl {
             this.mAlertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.SyncTile$$ExternalSyntheticLambda1
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i) {
-                    SyncTile syncTile = SyncTile.this;
+                    SyncTile syncTile = this.f$0;
                     boolean z3 = z2;
                     syncTile.getClass();
                     ContentResolver.setMasterSyncAutomaticallyAsUser(z3, ActivityManager.getCurrentUser());
@@ -259,13 +257,13 @@ public class SyncTile extends SQSTileImpl {
             this.mAlertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.SyncTile$$ExternalSyntheticLambda2
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i) {
-                    SyncTile.this.mAlertDialog.dismiss();
+                    this.f$0.mAlertDialog.dismiss();
                 }
             });
             this.mAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.SyncTile$$ExternalSyntheticLambda3
                 @Override // android.content.DialogInterface.OnDismissListener
                 public final void onDismiss(DialogInterface dialogInterface) {
-                    SyncTile.this.refreshState(null);
+                    this.f$0.refreshState(null);
                 }
             });
             SystemUIDialog.setWindowOnTop(this.mAlertDialog, keyguardStateControllerImpl.mShowing);
@@ -313,9 +311,9 @@ public class SyncTile extends SQSTileImpl {
     }
 
     public final boolean hasUserRestriction() {
-        boolean hasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(this.mContext, "no_modify_accounts", UserHandle.myUserId());
-        Log.d(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("hasUserRestriction: ", hasBaseUserRestriction));
-        return hasBaseUserRestriction;
+        boolean zHasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(this.mContext, "no_modify_accounts", UserHandle.myUserId());
+        Log.d(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("hasUserRestriction: ", zHasBaseUserRestriction));
+        return zHasBaseUserRestriction;
     }
 
     public final boolean isBlockedEdmSettingsChange$2() {
@@ -324,16 +322,16 @@ public class SyncTile extends SQSTileImpl {
         int enterprisePolicyEnabled = getEnterprisePolicyEnabled(this.mContext, "content://com.sec.knox.provider/RestrictionPolicy3", "isSettingsChangesAllowed", strArr);
         boolean z = false;
         boolean z2 = getEnterprisePolicyEnabled(this.mContext, "content://com.sec.knox.provider/RoamingPolicy", "isRoamingSyncEnabled", strArr) == 0;
-        boolean isNetworkRoaming = telephonyManager.isNetworkRoaming();
+        boolean zIsNetworkRoaming = telephonyManager.isNetworkRoaming();
         String str = SemSystemProperties.get("persist.radio.multisim.config");
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("isMultiSim : ", str);
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("isMultiSim : ", str);
         String str2 = this.TAG;
-        Log.d(str2, m);
+        Log.d(str2, strM);
         if ("dsds".equals(str) || "tsts".equals(str) || "dsda".equals(str)) {
-            String semGetTelephonyProperty = TelephonyManager.semGetTelephonyProperty(SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId()), "gsm.operator.isroaming", "false");
-            isNetworkRoaming = !TextUtils.isEmpty(semGetTelephonyProperty) && semGetTelephonyProperty.equals("true");
+            String strSemGetTelephonyProperty = TelephonyManager.semGetTelephonyProperty(SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId()), "gsm.operator.isroaming", "false");
+            zIsNetworkRoaming = !TextUtils.isEmpty(strSemGetTelephonyProperty) && strSemGetTelephonyProperty.equals("true");
         }
-        if (enterprisePolicyEnabled == 0 || (z2 && isNetworkRoaming)) {
+        if (enterprisePolicyEnabled == 0 || (z2 && zIsNetworkRoaming)) {
             z = true;
         }
         EmergencyButtonController$$ExternalSyntheticOutline0.m("isBlockedEdmSettingsChange: ", str2, z);

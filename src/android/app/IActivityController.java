@@ -86,9 +86,9 @@ public interface IActivityController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActivityController)) {
-                return (IActivityController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActivityController)) {
+                return (IActivityController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -129,55 +129,55 @@ public interface IActivityController extends IInterface {
             switch (i) {
                 case 1:
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean activityStarting = activityStarting(intent, readString);
+                    boolean zActivityStarting = activityStarting(intent, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(activityStarting);
+                    parcel2.writeBoolean(zActivityStarting);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean activityResuming = activityResuming(readString2);
+                    boolean zActivityResuming = activityResuming(string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(activityResuming);
+                    parcel2.writeBoolean(zActivityResuming);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    String readString6 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    long j = parcel.readLong();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean appCrashed = appCrashed(readString3, readInt, readString4, readString5, readLong, readString6);
+                    boolean zAppCrashed = appCrashed(string3, i3, string4, string5, j, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(appCrashed);
+                    parcel2.writeBoolean(zAppCrashed);
                     return true;
                 case 4:
-                    String readString7 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int appEarlyNotResponding = appEarlyNotResponding(readString7, readInt2, readString8);
+                    int iAppEarlyNotResponding = appEarlyNotResponding(string7, i4, string8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(appEarlyNotResponding);
+                    parcel2.writeInt(iAppEarlyNotResponding);
                     return true;
                 case 5:
-                    String readString9 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int appNotResponding = appNotResponding(readString9, readInt3, readString10);
+                    int iAppNotResponding = appNotResponding(string9, i5, string10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(appNotResponding);
+                    parcel2.writeInt(iAppNotResponding);
                     return true;
                 case 6:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int systemNotResponding = systemNotResponding(readString11);
+                    int iSystemNotResponding = systemNotResponding(string11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(systemNotResponding);
+                    parcel2.writeInt(iSystemNotResponding);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -202,107 +202,107 @@ public interface IActivityController extends IInterface {
 
             @Override // android.app.IActivityController
             public boolean activityStarting(Intent intent, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityController
             public boolean activityResuming(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityController
             public boolean appCrashed(String str, int i, String str2, String str3, long j, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeLong(j);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityController
             public int appEarlyNotResponding(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityController
             public int appNotResponding(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityController
             public int systemNotResponding(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

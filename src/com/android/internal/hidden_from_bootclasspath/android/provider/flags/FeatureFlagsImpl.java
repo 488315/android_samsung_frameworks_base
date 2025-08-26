@@ -16,13 +16,13 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("android.provider.flags");
-            dumpImprovements = load.getBooleanFlagValue("dump_improvements", false);
-            mmdDeviceConfig = load.getBooleanFlagValue("mmd_device_config", false);
-            newStoragePublicApi = load.getBooleanFlagValue("new_storage_public_api", false);
-            newStorageWriterSystemApi = load.getBooleanFlagValue("new_storage_writer_system_api", false);
-            stageFlagsForBuild = load.getBooleanFlagValue("stage_flags_for_build", false);
-            deviceConfigWritableNamespacesApi = load.getBooleanFlagValue("device_config_writable_namespaces_api", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("android.provider.flags");
+            dumpImprovements = aconfigPackageLoad.getBooleanFlagValue("dump_improvements", false);
+            mmdDeviceConfig = aconfigPackageLoad.getBooleanFlagValue("mmd_device_config", false);
+            newStoragePublicApi = aconfigPackageLoad.getBooleanFlagValue("new_storage_public_api", false);
+            newStorageWriterSystemApi = aconfigPackageLoad.getBooleanFlagValue("new_storage_writer_system_api", false);
+            stageFlagsForBuild = aconfigPackageLoad.getBooleanFlagValue("stage_flags_for_build", false);
+            deviceConfigWritableNamespacesApi = aconfigPackageLoad.getBooleanFlagValue("device_config_writable_namespaces_api", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

@@ -2,20 +2,19 @@ package androidx.compose.runtime.snapshots;
 
 import androidx.compose.runtime.internal.AtomicInt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class StateObjectImpl implements StateObject {
     public final AtomicInt readerKind = new AtomicInt(0);
 
     /* renamed from: isReadIn-h_f27i8$runtime_release, reason: not valid java name */
-    public final boolean m350isReadInh_f27i8$runtime_release(int i) {
+    public final boolean m351isReadInh_f27i8$runtime_release(int i) {
         int i2 = this.readerKind.get();
         int i3 = ReaderKind.$r8$clinit;
         return (i2 & i) != 0;
     }
 
     /* renamed from: recordReadIn-h_f27i8$runtime_release, reason: not valid java name */
-    public final void m351recordReadInh_f27i8$runtime_release(int i) {
+    public final void m352recordReadInh_f27i8$runtime_release(int i) {
         AtomicInt atomicInt;
         int i2;
         do {

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.collection.SimpleArrayMap;
 import androidx.customview.view.AbsSavedState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExtendableSavedState extends AbsSavedState {
     public static final Parcelable.Creator<ExtendableSavedState> CREATOR = new Parcelable.ClassLoaderCreator() { // from class: com.google.android.material.stateful.ExtendableSavedState.1
@@ -20,6 +19,7 @@ public class ExtendableSavedState extends AbsSavedState {
             return new ExtendableSavedState[i];
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             return new ExtendableSavedState(parcel, null);
@@ -53,14 +53,14 @@ public class ExtendableSavedState extends AbsSavedState {
 
     private ExtendableSavedState(Parcel parcel, ClassLoader classLoader) {
         super(parcel, classLoader);
-        int readInt = parcel.readInt();
-        String[] strArr = new String[readInt];
+        int i = parcel.readInt();
+        String[] strArr = new String[i];
         parcel.readStringArray(strArr);
-        Bundle[] bundleArr = new Bundle[readInt];
+        Bundle[] bundleArr = new Bundle[i];
         parcel.readTypedArray(bundleArr, Bundle.CREATOR);
-        this.extendableStates = new SimpleArrayMap(readInt);
-        for (int i = 0; i < readInt; i++) {
-            this.extendableStates.put(strArr[i], bundleArr[i]);
+        this.extendableStates = new SimpleArrayMap(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            this.extendableStates.put(strArr[i2], bundleArr[i2]);
         }
     }
 }

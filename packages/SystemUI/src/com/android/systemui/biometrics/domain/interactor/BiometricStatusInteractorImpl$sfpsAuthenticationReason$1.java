@@ -1,13 +1,19 @@
 package com.android.systemui.biometrics.domain.interactor;
 
+import android.app.ActivityManager;
+import android.app.ActivityTaskManager;
+import android.content.ComponentName;
 import com.android.systemui.biometrics.shared.model.AuthenticationReason;
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BiometricStatusInteractorImpl$sfpsAuthenticationReason$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -29,68 +35,36 @@ final class BiometricStatusInteractorImpl$sfpsAuthenticationReason$1 extends Sus
         return biometricStatusInteractorImpl$sfpsAuthenticationReason$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0051, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0051, code lost:
     
         if (r2.equals("com.android.settings.biometrics.fingerprint.FingerprintSettings") != false) goto L22;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r3) {
-        /*
-            r2 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r0 = r2.label
-            if (r0 != 0) goto L58
-            kotlin.ResultKt.throwOnFailure(r3)
-            java.lang.Object r3 = r2.L$0
-            com.android.systemui.biometrics.shared.model.AuthenticationReason r3 = (com.android.systemui.biometrics.shared.model.AuthenticationReason) r3
-            java.lang.Object r0 = r2.L$1
-            com.android.systemui.biometrics.shared.model.FingerprintSensorType r0 = (com.android.systemui.biometrics.shared.model.FingerprintSensorType) r0
-            r0.getClass()
-            com.android.systemui.biometrics.shared.model.FingerprintSensorType r1 = com.android.systemui.biometrics.shared.model.FingerprintSensorType.POWER_BUTTON
-            if (r0 != r1) goto L55
-            com.android.systemui.biometrics.domain.interactor.BiometricStatusInteractorImpl r2 = r2.this$0
-            android.app.ActivityTaskManager r2 = r2.activityTaskManager
-            com.android.systemui.biometrics.shared.model.AuthenticationReason$DeviceEntryAuthentication r0 = com.android.systemui.biometrics.shared.model.AuthenticationReason.DeviceEntryAuthentication.INSTANCE
-            boolean r0 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r0)
-            if (r0 == 0) goto L25
-            goto L55
-        L25:
-            com.android.systemui.biometrics.shared.model.AuthenticationReason$SettingsAuthentication r0 = new com.android.systemui.biometrics.shared.model.AuthenticationReason$SettingsAuthentication
-            com.android.systemui.biometrics.shared.model.AuthenticationReason$SettingsOperations r1 = com.android.systemui.biometrics.shared.model.AuthenticationReason.SettingsOperations.OTHER
-            r0.<init>(r1)
-            boolean r0 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r0)
-            if (r0 == 0) goto L54
-            r0 = 1
-            java.util.List r2 = r2.getTasks(r0)
-            java.lang.Object r2 = kotlin.collections.CollectionsKt___CollectionsKt.firstOrNull(r2)
-            android.app.ActivityManager$RunningTaskInfo r2 = (android.app.ActivityManager.RunningTaskInfo) r2
-            if (r2 == 0) goto L49
-            android.content.ComponentName r2 = r2.topActivity
-            if (r2 == 0) goto L49
-            java.lang.String r2 = r2.getClassName()
-            if (r2 != 0) goto L4b
-        L49:
-            java.lang.String r2 = ""
-        L4b:
-            java.lang.String r0 = "com.android.settings.biometrics.fingerprint.FingerprintSettings"
-            boolean r2 = r2.equals(r0)
-            if (r2 == 0) goto L54
-            goto L55
-        L54:
-            return r3
-        L55:
-            com.android.systemui.biometrics.shared.model.AuthenticationReason$NotRunning r2 = com.android.systemui.biometrics.shared.model.AuthenticationReason.NotRunning.INSTANCE
-            return r2
-        L58:
-            java.lang.IllegalStateException r2 = new java.lang.IllegalStateException
-            java.lang.String r3 = "call to 'resume' before 'invoke' with coroutine"
-            r2.<init>(r3)
-            throw r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.BiometricStatusInteractorImpl$sfpsAuthenticationReason$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        ComponentName componentName;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        if (this.label != 0) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(obj);
+        AuthenticationReason authenticationReason = (AuthenticationReason) this.L$0;
+        FingerprintSensorType fingerprintSensorType = (FingerprintSensorType) this.L$1;
+        fingerprintSensorType.getClass();
+        if (fingerprintSensorType == FingerprintSensorType.POWER_BUTTON) {
+            ActivityTaskManager activityTaskManager = this.this$0.activityTaskManager;
+            if (!Intrinsics.areEqual(authenticationReason, AuthenticationReason.DeviceEntryAuthentication.INSTANCE)) {
+                if (Intrinsics.areEqual(authenticationReason, new AuthenticationReason.SettingsAuthentication(AuthenticationReason.SettingsOperations.OTHER))) {
+                    ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull(activityTaskManager.getTasks(1));
+                    if (runningTaskInfo == null || (componentName = runningTaskInfo.topActivity) == null || (className = componentName.getClassName()) == null) {
+                        String className = "";
+                    }
+                }
+                return authenticationReason;
+            }
+        }
+        return AuthenticationReason.NotRunning.INSTANCE;
     }
 }

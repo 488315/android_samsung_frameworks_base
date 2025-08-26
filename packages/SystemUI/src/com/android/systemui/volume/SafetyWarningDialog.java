@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class SafetyWarningDialog extends SystemUIDialog implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
     public static final String TAG = Util.logTag(SafetyWarningDialog.class);
@@ -48,7 +47,7 @@ public abstract class SafetyWarningDialog extends SystemUIDialog implements Dial
         }
         getWindow().setType(2010);
         SystemUIDialog.setShowForAllUsers(this);
-        setMessage(this.mContext.getString(17042778));
+        setMessage(this.mContext.getString(17042782));
         setButton(-1, this.mContext.getString(R.string.yes), this);
         setButton(-2, this.mContext.getString(R.string.no), (DialogInterface.OnClickListener) null);
         setOnDismissListener(this);

@@ -9,7 +9,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SelectionAdjustmentKt {
     public static final Selection access$adjustToBoundaries(SelectionLayout selectionLayout, BoundaryFunction boundaryFunction) {
@@ -35,7 +34,7 @@ public abstract class SelectionAdjustmentKt {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                TextLayoutResult textLayoutResult = SelectableInfo.this.textLayoutResult;
+                TextLayoutResult textLayoutResult = selectableInfo.textLayoutResult;
                 return Integer.valueOf(textLayoutResult.multiParagraph.getLineForOffset(i));
             }
         });
@@ -50,38 +49,38 @@ public abstract class SelectionAdjustmentKt {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                SelectableInfo selectableInfo2 = SelectableInfo.this;
-                int intValue = ((Number) lazy.getValue()).intValue();
+                SelectableInfo selectableInfo2 = selectableInfo;
+                int iIntValue = ((Number) lazy.getValue()).intValue();
                 int i5 = i;
                 int i6 = i4;
                 SingleSelectionLayout singleSelectionLayout2 = (SingleSelectionLayout) selectionLayout;
                 boolean z2 = singleSelectionLayout2.isStartHandle;
                 boolean z3 = singleSelectionLayout2.getCrossStatus() == CrossStatus.CROSSED;
-                long m744getWordBoundaryjx7JFs = selectableInfo2.textLayoutResult.m744getWordBoundaryjx7JFs(i5);
+                long jM746getWordBoundaryjx7JFs = selectableInfo2.textLayoutResult.m746getWordBoundaryjx7JFs(i5);
                 TextRange.Companion companion = TextRange.Companion;
-                int i7 = (int) (m744getWordBoundaryjx7JFs >> 32);
+                int lineStart = (int) (jM746getWordBoundaryjx7JFs >> 32);
                 TextLayoutResult textLayoutResult = selectableInfo2.textLayoutResult;
-                int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(i7);
+                int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(lineStart);
                 MultiParagraph multiParagraph = textLayoutResult.multiParagraph;
-                if (lineForOffset != intValue) {
+                if (lineForOffset != iIntValue) {
+                    int i7 = multiParagraph.lineCount;
+                    lineStart = iIntValue >= i7 ? textLayoutResult.getLineStart(i7 - 1) : textLayoutResult.getLineStart(iIntValue);
+                }
+                int lineEnd = (int) (jM746getWordBoundaryjx7JFs & 4294967295L);
+                if (multiParagraph.getLineForOffset(lineEnd) != iIntValue) {
                     int i8 = multiParagraph.lineCount;
-                    i7 = intValue >= i8 ? textLayoutResult.getLineStart(i8 - 1) : textLayoutResult.getLineStart(intValue);
+                    lineEnd = iIntValue >= i8 ? multiParagraph.getLineEnd(i8 - 1, false) : multiParagraph.getLineEnd(iIntValue, false);
                 }
-                int i9 = (int) (m744getWordBoundaryjx7JFs & 4294967295L);
-                if (multiParagraph.getLineForOffset(i9) != intValue) {
-                    int i10 = multiParagraph.lineCount;
-                    i9 = intValue >= i10 ? multiParagraph.getLineEnd(i10 - 1, false) : multiParagraph.getLineEnd(intValue, false);
+                if (lineStart == i6) {
+                    return selectableInfo2.anchorForOffset(lineEnd);
                 }
-                if (i7 == i6) {
-                    return selectableInfo2.anchorForOffset(i9);
+                if (lineEnd == i6) {
+                    return selectableInfo2.anchorForOffset(lineStart);
                 }
-                if (i9 == i6) {
-                    return selectableInfo2.anchorForOffset(i7);
+                if (!(z3 ^ z2) ? i5 >= lineStart : i5 > lineEnd) {
+                    lineStart = lineEnd;
                 }
-                if (!(z3 ^ z2) ? i5 >= i7 : i5 > i9) {
-                    i7 = i9;
-                }
-                return selectableInfo2.anchorForOffset(i7);
+                return selectableInfo2.anchorForOffset(lineStart);
             }
         });
         if (selectableInfo.selectableId != anchorInfo.selectableId) {
@@ -96,7 +95,7 @@ public abstract class SelectionAdjustmentKt {
             return (Selection.AnchorInfo) lazy2.getValue();
         }
         int i6 = anchorInfo.offset;
-        long m744getWordBoundaryjx7JFs = textLayoutResult.m744getWordBoundaryjx7JFs(i6);
+        long jM746getWordBoundaryjx7JFs = textLayoutResult.m746getWordBoundaryjx7JFs(i6);
         if (i5 != -1) {
             if (i != i5) {
                 if (!(((i2 < i3 ? CrossStatus.NOT_CROSSED : i2 > i3 ? CrossStatus.CROSSED : CrossStatus.COLLAPSED) == CrossStatus.CROSSED) ^ z)) {
@@ -105,7 +104,7 @@ public abstract class SelectionAdjustmentKt {
             return selectableInfo.anchorForOffset(i);
         }
         TextRange.Companion companion = TextRange.Companion;
-        return (i6 == ((int) (m744getWordBoundaryjx7JFs >> 32)) || i6 == ((int) (4294967295L & m744getWordBoundaryjx7JFs))) ? (Selection.AnchorInfo) lazy2.getValue() : selectableInfo.anchorForOffset(i);
+        return (i6 == ((int) (jM746getWordBoundaryjx7JFs >> 32)) || i6 == ((int) (4294967295L & jM746getWordBoundaryjx7JFs))) ? (Selection.AnchorInfo) lazy2.getValue() : selectableInfo.anchorForOffset(i);
     }
 
     public static final Selection.AnchorInfo anchorOnBoundary(SelectableInfo selectableInfo, boolean z, boolean z2, int i, BoundaryFunction boundaryFunction) {
@@ -114,13 +113,13 @@ public abstract class SelectionAdjustmentKt {
         if (i != selectableInfo.slot) {
             return selectableInfo.anchorForOffset(i2);
         }
-        long mo233getBoundaryfzxv0v0 = boundaryFunction.mo233getBoundaryfzxv0v0(selectableInfo, i2);
+        long jMo234getBoundaryfzxv0v0 = boundaryFunction.mo234getBoundaryfzxv0v0(selectableInfo, i2);
         if (z ^ z2) {
             TextRange.Companion companion = TextRange.Companion;
-            j = mo233getBoundaryfzxv0v0 >> 32;
+            j = jMo234getBoundaryfzxv0v0 >> 32;
         } else {
             TextRange.Companion companion2 = TextRange.Companion;
-            j = 4294967295L & mo233getBoundaryfzxv0v0;
+            j = 4294967295L & jMo234getBoundaryfzxv0v0;
         }
         return selectableInfo.anchorForOffset((int) j);
     }

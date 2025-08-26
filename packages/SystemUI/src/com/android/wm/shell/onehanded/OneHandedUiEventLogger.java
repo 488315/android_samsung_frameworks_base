@@ -2,12 +2,10 @@ package com.android.wm.shell.onehanded;
 
 import com.android.internal.logging.UiEventLogger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedUiEventLogger {
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum OneHandedSettingsTogglesEvent implements UiEventLogger.UiEventEnum {
         /* JADX INFO: Fake field, exist only in values array */
         INVALID(0),
@@ -37,7 +35,6 @@ public class OneHandedUiEventLogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum OneHandedTriggerEvent implements UiEventLogger.UiEventEnum {
         /* JADX INFO: Fake field, exist only in values array */
         INVALID(0),

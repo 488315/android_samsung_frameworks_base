@@ -3,11 +3,9 @@ package com.android.systemui.volume.dialog.shared.model;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface VolumeDialogVisibilityModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Dismissed implements Invisible {
         public final int reason;
 
@@ -31,11 +29,9 @@ public interface VolumeDialogVisibilityModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Invisible extends VolumeDialogVisibilityModel {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion implements Invisible {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -44,7 +40,6 @@ public interface VolumeDialogVisibilityModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Visible implements VolumeDialogVisibilityModel {
         public final boolean keyguardLocked;
         public final int lockTaskModeState;

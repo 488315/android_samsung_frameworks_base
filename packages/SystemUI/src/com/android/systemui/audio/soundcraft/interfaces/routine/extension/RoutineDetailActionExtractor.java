@@ -7,7 +7,6 @@ import com.samsung.android.sdk.routines.automationservice.data.RoutineDetail;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoutineDetailActionExtractor {
     public static final RoutineDetailActionExtractor INSTANCE = new RoutineDetailActionExtractor();
@@ -16,40 +15,40 @@ public final class RoutineDetailActionExtractor {
     }
 
     public static String getBudsActionValue(RoutineDetail routineDetail, String str, String str2) {
-        Object obj;
+        Object next;
         ParameterValues parameterValues;
         String string;
         Iterator it = routineDetail.actions.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((ActionStatus) obj).tag, str)) {
+            next = it.next();
+            if (Intrinsics.areEqual(((ActionStatus) next).tag, str)) {
                 break;
             }
         }
-        ActionStatus actionStatus = (ActionStatus) obj;
+        ActionStatus actionStatus = (ActionStatus) next;
         return (actionStatus == null || (parameterValues = actionStatus.parameterValues) == null || (string = parameterValues.getString("v2IntentParam", str2)) == null) ? str2 : string;
     }
 
     public static String getPhoneActionValue(RoutineDetail routineDetail, PhoneActionType phoneActionType, String str) {
-        Object obj;
+        Object next;
         ParameterValues parameterValues;
         String string;
         Iterator it = routineDetail.actions.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((ActionStatus) obj).tag, phoneActionType.getActionTag())) {
+            next = it.next();
+            if (Intrinsics.areEqual(((ActionStatus) next).tag, phoneActionType.getActionTag())) {
                 break;
             }
         }
-        ActionStatus actionStatus = (ActionStatus) obj;
+        ActionStatus actionStatus = (ActionStatus) next;
         return (actionStatus == null || (parameterValues = actionStatus.parameterValues) == null || (string = parameterValues.getString(phoneActionType.getParamTag(), str)) == null) ? str : string;
     }
 }

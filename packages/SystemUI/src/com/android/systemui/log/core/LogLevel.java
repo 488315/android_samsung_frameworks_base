@@ -6,7 +6,6 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogLevel {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -25,9 +24,9 @@ public final class LogLevel {
     }
 
     static {
-        LogLevel[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        LogLevel[] logLevelArr$values = $values();
+        $VALUES = logLevelArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(logLevelArr$values);
     }
 
     private LogLevel(String str, int i, int i2, String str2) {

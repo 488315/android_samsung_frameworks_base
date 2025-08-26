@@ -1,6 +1,7 @@
 package androidx.compose.foundation.lazy;
 
 import androidx.compose.foundation.MutatePriority;
+import androidx.compose.foundation.gestures.ScrollScope;
 import androidx.compose.foundation.gestures.ScrollableState;
 import androidx.compose.foundation.gestures.ScrollableStateKt;
 import androidx.compose.foundation.interaction.InteractionSourceKt;
@@ -25,15 +26,16 @@ import androidx.compose.ui.layout.RemeasurementModifier;
 import androidx.compose.ui.node.LayoutNode;
 import java.util.Arrays;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyListState implements ScrollableState {
     public static final Companion Companion = new Companion(null);
@@ -46,7 +48,7 @@ public final class LazyListState implements ScrollableState {
     }, new Function1() { // from class: androidx.compose.foundation.lazy.LazyListState$Companion$Saver$2
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             List list = (List) obj;
             return new LazyListState(((Number) list.get(0)).intValue(), ((Number) list.get(1)).intValue());
         }
@@ -74,7 +76,6 @@ public final class LazyListState implements ScrollableState {
     public float scrollToBeConsumed;
     public final ScrollableState scrollableState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -84,14 +85,69 @@ public final class LazyListState implements ScrollableState {
         }
     }
 
+    /* renamed from: androidx.compose.foundation.lazy.LazyListState$scroll$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return LazyListState.this.scroll(null, null, this);
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.lazy.LazyListState$scrollToItem$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $index;
+        final /* synthetic */ int $scrollOffset;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(int i, int i2, Continuation continuation) {
+            super(2, continuation);
+            this.$index = i;
+            this.$scrollOffset = i2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return LazyListState.this.new AnonymousClass2(this.$index, this.$scrollOffset, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((ScrollScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            LazyListState.this.snapToItemIndexInternal$foundation_release(this.$index, this.$scrollOffset);
+            return Unit.INSTANCE;
+        }
+    }
+
     public LazyListState() {
         this(0, 0, null, 7, null);
     }
 
     public static Object animateScrollToItem$default(LazyListState lazyListState, Continuation continuation) {
         lazyListState.getClass();
-        Object scroll = lazyListState.scroll(MutatePriority.Default, new LazyListState$animateScrollToItem$2(lazyListState, 0, 0, null), continuation);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = lazyListState.scroll(MutatePriority.Default, new LazyListState$animateScrollToItem$2(lazyListState, 0, 0, null), continuation);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
     public final void applyMeasureResult$foundation_release(LazyListMeasureResult lazyListMeasureResult, boolean z, boolean z2) {
@@ -159,100 +215,60 @@ public final class LazyListState implements ScrollableState {
         return this.scrollableState.isScrollInProgress();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0067, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0067, code lost:
     
-        if (r5.scroll(r6, r7, r0) != r1) goto L22;
+        if (r5.scroll(r6, r7, r0) == r1) goto L21;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0069, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0055, code lost:
-    
-        if (r5.awaitLayoutModifier.waitForFirstLayout(r0) == r1) goto L21;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0044  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // androidx.compose.foundation.gestures.ScrollableState
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object scroll(androidx.compose.foundation.MutatePriority r6, kotlin.jvm.functions.Function2 r7, kotlin.coroutines.Continuation r8) {
-        /*
-            r5 = this;
-            boolean r0 = r8 instanceof androidx.compose.foundation.lazy.LazyListState$scroll$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            androidx.compose.foundation.lazy.LazyListState$scroll$1 r0 = (androidx.compose.foundation.lazy.LazyListState$scroll$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.lazy.LazyListState$scroll$1 r0 = new androidx.compose.foundation.lazy.LazyListState$scroll$1
-            r0.<init>(r5, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L44
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L6a
-        L2a:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L32:
-            java.lang.Object r5 = r0.L$2
-            r7 = r5
-            kotlin.jvm.functions.Function2 r7 = (kotlin.jvm.functions.Function2) r7
-            java.lang.Object r5 = r0.L$1
-            r6 = r5
-            androidx.compose.foundation.MutatePriority r6 = (androidx.compose.foundation.MutatePriority) r6
-            java.lang.Object r5 = r0.L$0
-            androidx.compose.foundation.lazy.LazyListState r5 = (androidx.compose.foundation.lazy.LazyListState) r5
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L58
-        L44:
-            kotlin.ResultKt.throwOnFailure(r8)
-            r0.L$0 = r5
-            r0.L$1 = r6
-            r0.L$2 = r7
-            r0.label = r4
-            androidx.compose.foundation.lazy.layout.AwaitFirstLayoutModifier r8 = r5.awaitLayoutModifier
-            java.lang.Object r8 = r8.waitForFirstLayout(r0)
-            if (r8 != r1) goto L58
-            goto L69
-        L58:
-            androidx.compose.foundation.gestures.ScrollableState r5 = r5.scrollableState
-            r8 = 0
-            r0.L$0 = r8
-            r0.L$1 = r8
-            r0.L$2 = r8
-            r0.label = r3
-            java.lang.Object r5 = r5.scroll(r6, r7, r0)
-            if (r5 != r1) goto L6a
-        L69:
-            return r1
-        L6a:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.LazyListState.scroll(androidx.compose.foundation.MutatePriority, kotlin.jvm.functions.Function2, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object scroll(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = mutatePriority;
+            anonymousClass1.L$2 = function2;
+            anonymousClass1.label = 1;
+            if (this.awaitLayoutModifier.waitForFirstLayout(anonymousClass1) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        function2 = (Function2) anonymousClass1.L$2;
+        mutatePriority = (MutatePriority) anonymousClass1.L$1;
+        this = (LazyListState) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        ScrollableState scrollableState = this.scrollableState;
+        anonymousClass1.L$0 = null;
+        anonymousClass1.L$1 = null;
+        anonymousClass1.L$2 = null;
+        anonymousClass1.label = 2;
     }
 
     public final Object scrollToItem(int i, int i2, SuspendLambda suspendLambda) {
-        Object scroll = scroll(MutatePriority.Default, new LazyListState$scrollToItem$2(this, i, i2, null), suspendLambda);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = scroll(MutatePriority.Default, new AnonymousClass2(i, i2, null), suspendLambda);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
     public final void snapToItemIndexInternal$foundation_release(int i, int i2) {
@@ -277,8 +293,6 @@ public final class LazyListState implements ScrollableState {
 
     /* JADX WARN: Type inference failed for: r3v7, types: [androidx.compose.foundation.lazy.LazyListState$remeasurementModifier$1] */
     public LazyListState(final int i, int i2, LazyListPrefetchStrategy lazyListPrefetchStrategy) {
-        MutableState mutableStateOf;
-        MutableState mutableStateOf2;
         this.prefetchStrategy = lazyListPrefetchStrategy;
         this.scrollPosition = new LazyListScrollPosition(i, i2);
         this.layoutInfoState = SnapshotStateKt.mutableStateOf(LazyListStateKt.EmptyLazyListMeasureResult, SnapshotStateKt.neverEqualPolicy());
@@ -290,11 +304,11 @@ public final class LazyListState implements ScrollableState {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LazyListMeasureResult lazyListMeasureResult;
-                float floatValue = ((Number) obj).floatValue();
-                LazyListState lazyListState = LazyListState.this;
-                float f = -floatValue;
+                float fFloatValue = ((Number) obj).floatValue();
+                LazyListState lazyListState = this.this$0;
+                float f = -fFloatValue;
                 if ((f >= 0.0f || lazyListState.getCanScrollForward()) && (f <= 0.0f || lazyListState.getCanScrollBackward())) {
                     if (Math.abs(lazyListState.scrollToBeConsumed) > 0.5f) {
                         InlineClassHelperKt.throwIllegalStateException("entered drag with non-zero pending scroll");
@@ -303,24 +317,24 @@ public final class LazyListState implements ScrollableState {
                     lazyListState.scrollToBeConsumed = f2;
                     if (Math.abs(f2) > 0.5f) {
                         float f3 = lazyListState.scrollToBeConsumed;
-                        int round = Math.round(f3);
-                        LazyListMeasureResult copyWithScrollDeltaWithoutRemeasure = ((LazyListMeasureResult) ((SnapshotMutableStateImpl) lazyListState.layoutInfoState).getValue()).copyWithScrollDeltaWithoutRemeasure(round, !lazyListState.hasLookaheadOccurred);
-                        if (copyWithScrollDeltaWithoutRemeasure != null && (lazyListMeasureResult = lazyListState.approachLayoutInfo) != null) {
-                            LazyListMeasureResult copyWithScrollDeltaWithoutRemeasure2 = lazyListMeasureResult.copyWithScrollDeltaWithoutRemeasure(round, true);
-                            if (copyWithScrollDeltaWithoutRemeasure2 != null) {
-                                lazyListState.approachLayoutInfo = copyWithScrollDeltaWithoutRemeasure2;
+                        int iRound = Math.round(f3);
+                        LazyListMeasureResult lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure = ((LazyListMeasureResult) ((SnapshotMutableStateImpl) lazyListState.layoutInfoState).getValue()).copyWithScrollDeltaWithoutRemeasure(iRound, !lazyListState.hasLookaheadOccurred);
+                        if (lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure != null && (lazyListMeasureResult = lazyListState.approachLayoutInfo) != null) {
+                            LazyListMeasureResult lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure2 = lazyListMeasureResult.copyWithScrollDeltaWithoutRemeasure(iRound, true);
+                            if (lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure2 != null) {
+                                lazyListState.approachLayoutInfo = lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure2;
                             } else {
-                                copyWithScrollDeltaWithoutRemeasure = null;
+                                lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure = null;
                             }
                         }
                         LazyListPrefetchStrategy lazyListPrefetchStrategy2 = lazyListState.prefetchStrategy;
                         LazyListState$prefetchScope$1 lazyListState$prefetchScope$1 = lazyListState.prefetchScope;
-                        if (copyWithScrollDeltaWithoutRemeasure != null) {
-                            lazyListState.applyMeasureResult$foundation_release(copyWithScrollDeltaWithoutRemeasure, lazyListState.hasLookaheadOccurred, true);
-                            ObservableScopeInvalidator.m173invalidateScopeimpl(lazyListState.placementScopeInvalidator);
+                        if (lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure != null) {
+                            lazyListState.applyMeasureResult$foundation_release(lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure, lazyListState.hasLookaheadOccurred, true);
+                            ObservableScopeInvalidator.m174invalidateScopeimpl(lazyListState.placementScopeInvalidator);
                             float f4 = f3 - lazyListState.scrollToBeConsumed;
                             if (lazyListState.prefetchingEnabled) {
-                                lazyListPrefetchStrategy2.onScroll(lazyListState$prefetchScope$1, f4, copyWithScrollDeltaWithoutRemeasure);
+                                lazyListPrefetchStrategy2.onScroll(lazyListState$prefetchScope$1, f4, lazyListMeasureResultCopyWithScrollDeltaWithoutRemeasure);
                             }
                         } else {
                             LayoutNode layoutNode = lazyListState.remeasurement;
@@ -348,7 +362,7 @@ public final class LazyListState implements ScrollableState {
         this.remeasurementModifier = new RemeasurementModifier() { // from class: androidx.compose.foundation.lazy.LazyListState$remeasurementModifier$1
             @Override // androidx.compose.ui.layout.RemeasurementModifier
             public final void onRemeasurementAvailable(LayoutNode layoutNode) {
-                LazyListState.this.remeasurement = layoutNode;
+                this.this$0.remeasurement = layoutNode;
             }
         };
         this.awaitLayoutModifier = new AwaitFirstLayoutModifier();
@@ -362,9 +376,9 @@ public final class LazyListState implements ScrollableState {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NestedPrefetchScope nestedPrefetchScope = (NestedPrefetchScope) obj;
-                LazyListPrefetchStrategy lazyListPrefetchStrategy2 = LazyListState.this.prefetchStrategy;
+                LazyListPrefetchStrategy lazyListPrefetchStrategy2 = this.this$0.prefetchStrategy;
                 int i3 = i;
                 Snapshot.Companion.getClass();
                 Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
@@ -375,13 +389,11 @@ public final class LazyListState implements ScrollableState {
         });
         this.prefetchScope = new LazyListState$prefetchScope$1(this);
         this.pinnedItems = new LazyLayoutPinnedItemList();
-        mutableStateOf = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
-        this.measurementScopeInvalidator = mutableStateOf;
+        this.measurementScopeInvalidator = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
         Boolean bool = Boolean.FALSE;
         this.canScrollForward$delegate = SnapshotStateKt.mutableStateOf$default(bool);
         this.canScrollBackward$delegate = SnapshotStateKt.mutableStateOf$default(bool);
-        mutableStateOf2 = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
-        this.placementScopeInvalidator = mutableStateOf2;
+        this.placementScopeInvalidator = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
         this._lazyLayoutScrollDeltaBetweenPasses = new LazyLayoutScrollDeltaBetweenPasses();
     }
 

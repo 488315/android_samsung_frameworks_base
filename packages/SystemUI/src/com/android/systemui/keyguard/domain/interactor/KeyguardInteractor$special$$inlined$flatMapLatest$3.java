@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardInteractor$special$$inlined$flatMapLatest$3 extends SuspendLambda implements Function3 {
     final /* synthetic */ ShadeRepository $shadeRepository$inlined;
@@ -45,10 +44,10 @@ public final class KeyguardInteractor$special$$inlined$flatMapLatest$3 extends S
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            int intValue = ((Number) this.L$1).intValue();
-            SafeFlow combineTransform = FlowKt.combineTransform(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardInteractor$keyguardTranslationY$1$1(null), ((ShadeRepositoryImpl) this.$shadeRepository$inlined).legacyShadeExpansion), new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardInteractor$keyguardTranslationY$1$2(null), this.this$0.keyguardTransitionInteractor.getTransitionValueFlow(KeyguardState.GONE)), new KeyguardInteractor$keyguardTranslationY$1$3(intValue, null));
+            int iIntValue = ((Number) this.L$1).intValue();
+            SafeFlow safeFlowCombineTransform = FlowKt.combineTransform(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardInteractor$keyguardTranslationY$1$1(null), ((ShadeRepositoryImpl) this.$shadeRepository$inlined).legacyShadeExpansion), new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardInteractor$keyguardTranslationY$1$2(null), this.this$0.keyguardTransitionInteractor.getTransitionValueFlow(KeyguardState.GONE)), new KeyguardInteractor$keyguardTranslationY$1$3(iIntValue, null));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combineTransform, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, safeFlowCombineTransform, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

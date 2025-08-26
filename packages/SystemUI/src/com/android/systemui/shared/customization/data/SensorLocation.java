@@ -4,7 +4,6 @@ import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SensorLocation {
     public final int naturalCenterX;
@@ -12,7 +11,6 @@ public final class SensorLocation {
     public final int naturalRadius;
     public final float scale;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

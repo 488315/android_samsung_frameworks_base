@@ -40,28 +40,28 @@ public class TimeUtils {
     }
 
     private static android.icu.util.TimeZone getIcuTimeZone(int i, boolean z, long j, String str) {
-        CountryTimeZones.OffsetResult lookupByOffsetWithBias;
+        CountryTimeZones.OffsetResult offsetResultLookupByOffsetWithBias;
         if (str == null) {
             return null;
         }
         android.icu.util.TimeZone timeZone = android.icu.util.TimeZone.getDefault();
-        CountryTimeZones lookupCountryTimeZones = TimeZoneFinder.getInstance().lookupCountryTimeZones(str);
-        if (lookupCountryTimeZones == null || (lookupByOffsetWithBias = lookupCountryTimeZones.lookupByOffsetWithBias(j, timeZone, i, z)) == null) {
+        CountryTimeZones countryTimeZonesLookupCountryTimeZones = TimeZoneFinder.getInstance().lookupCountryTimeZones(str);
+        if (countryTimeZonesLookupCountryTimeZones == null || (offsetResultLookupByOffsetWithBias = countryTimeZonesLookupCountryTimeZones.lookupByOffsetWithBias(j, timeZone, i, z)) == null) {
             return null;
         }
-        return lookupByOffsetWithBias.getTimeZone();
+        return offsetResultLookupByOffsetWithBias.getTimeZone();
     }
 
     public static List<String> getTimeZoneIdsForCountryCode(String str) {
         if (str == null) {
             throw new NullPointerException("countryCode == null");
         }
-        CountryTimeZones lookupCountryTimeZones = TimeZoneFinder.getInstance().lookupCountryTimeZones(str.toLowerCase());
-        if (lookupCountryTimeZones == null) {
+        CountryTimeZones countryTimeZonesLookupCountryTimeZones = TimeZoneFinder.getInstance().lookupCountryTimeZones(str.toLowerCase());
+        if (countryTimeZonesLookupCountryTimeZones == null) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        for (CountryTimeZones.TimeZoneMapping timeZoneMapping : lookupCountryTimeZones.getTimeZoneMappings()) {
+        for (CountryTimeZones.TimeZoneMapping timeZoneMapping : countryTimeZonesLookupCountryTimeZones.getTimeZoneMappings()) {
             if (timeZoneMapping.isShownInPickerAt(MIN_USE_DATE_OF_TIMEZONE)) {
                 arrayList.add(timeZoneMapping.getTimeZoneId());
             }
@@ -168,33 +168,33 @@ public class TimeUtils {
             c = '-';
         }
         int i8 = (int) (j2 % 1000);
-        int floor = (int) Math.floor(j2 / 1000);
-        if (floor >= SECONDS_PER_DAY) {
-            i2 = floor / SECONDS_PER_DAY;
-            floor -= SECONDS_PER_DAY * i2;
+        int iFloor = (int) Math.floor(j2 / 1000);
+        if (iFloor >= SECONDS_PER_DAY) {
+            i2 = iFloor / SECONDS_PER_DAY;
+            iFloor -= SECONDS_PER_DAY * i2;
         } else {
             i2 = 0;
         }
-        if (floor >= 3600) {
-            i3 = floor / 3600;
-            floor -= i3 * 3600;
+        if (iFloor >= 3600) {
+            i3 = iFloor / 3600;
+            iFloor -= i3 * 3600;
         } else {
             i3 = 0;
         }
-        if (floor >= 60) {
-            int i9 = floor / 60;
-            floor -= i9 * 60;
+        if (iFloor >= 60) {
+            int i9 = iFloor / 60;
+            iFloor -= i9 * 60;
             i4 = i9;
         } else {
             i4 = 0;
         }
         if (i != 0) {
-            int accumField = accumField(i2, 1, false, 0);
-            int accumField2 = accumField + accumField(i3, 1, accumField > 0, 2);
-            int accumField3 = accumField2 + accumField(i4, 1, accumField2 > 0, 2);
-            int accumField4 = accumField3 + accumField(floor, 1, accumField3 > 0, 2);
+            int iAccumField = accumField(i2, 1, false, 0);
+            int iAccumField2 = iAccumField + accumField(i3, 1, iAccumField > 0, 2);
+            int iAccumField3 = iAccumField2 + accumField(i4, 1, iAccumField2 > 0, 2);
+            int iAccumField4 = iAccumField3 + accumField(iFloor, 1, iAccumField3 > 0, 2);
             i5 = 0;
-            for (int accumField5 = accumField4 + accumField(i8, 2, true, accumField4 > 0 ? 3 : 0) + 1; accumField5 < i; accumField5++) {
+            for (int iAccumField5 = iAccumField4 + accumField(i8, 2, true, iAccumField4 > 0 ? 3 : 0) + 1; iAccumField5 < i; iAccumField5++) {
                 cArr[i5] = ' ';
                 i5++;
             }
@@ -204,13 +204,13 @@ public class TimeUtils {
         cArr[i5] = c;
         int i10 = i5 + 1;
         boolean z = i != 0;
-        int printFieldLocked = printFieldLocked(cArr, i2, DateFormat.DATE, i10, false, 0);
-        int printFieldLocked2 = printFieldLocked(cArr, i3, DateFormat.HOUR, printFieldLocked, printFieldLocked != i10, z ? 2 : 0);
-        int printFieldLocked3 = printFieldLocked(cArr, i4, DateFormat.MINUTE, printFieldLocked2, printFieldLocked2 != i10, z ? 2 : 0);
-        int printFieldLocked4 = printFieldLocked(cArr, floor, 's', printFieldLocked3, printFieldLocked3 != i10, z ? 2 : 0);
-        int printFieldLocked5 = printFieldLocked(cArr, i8, DateFormat.MINUTE, printFieldLocked4, true, (!z || printFieldLocked4 == i10) ? 0 : 3);
-        cArr[printFieldLocked5] = 's';
-        return printFieldLocked5 + 1;
+        int iPrintFieldLocked = printFieldLocked(cArr, i2, DateFormat.DATE, i10, false, 0);
+        int iPrintFieldLocked2 = printFieldLocked(cArr, i3, DateFormat.HOUR, iPrintFieldLocked, iPrintFieldLocked != i10, z ? 2 : 0);
+        int iPrintFieldLocked3 = printFieldLocked(cArr, i4, DateFormat.MINUTE, iPrintFieldLocked2, iPrintFieldLocked2 != i10, z ? 2 : 0);
+        int iPrintFieldLocked4 = printFieldLocked(cArr, iFloor, 's', iPrintFieldLocked3, iPrintFieldLocked3 != i10, z ? 2 : 0);
+        int iPrintFieldLocked5 = printFieldLocked(cArr, i8, DateFormat.MINUTE, iPrintFieldLocked4, true, (!z || iPrintFieldLocked4 == i10) ? 0 : 3);
+        cArr[iPrintFieldLocked5] = 's';
+        return iPrintFieldLocked5 + 1;
     }
 
     public static void formatDuration(long j, StringBuilder sb) {

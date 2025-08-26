@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat;
 import com.android.systemui.R;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslDropDownItemTextView extends SeslCheckedTextView {
     public SeslDropDownItemTextView(Context context) {
@@ -19,7 +18,7 @@ public class SeslDropDownItemTextView extends SeslCheckedTextView {
     }
 
     @Override // androidx.appcompat.widget.SeslCheckedTextView, android.widget.Checkable
-    public final void setChecked(boolean z) {
+    public final void setChecked(boolean z) throws Resources.NotFoundException {
         Context context;
         super.setChecked(z);
         setTypeface(Typeface.create(Typeface.create("sec", 0), z ? VolteConstants.ErrorCode.BUSY_EVERYWHERE : 400, false));
@@ -38,7 +37,7 @@ public class SeslDropDownItemTextView extends SeslCheckedTextView {
         this(context, attributeSet, android.R.attr.textViewStyle);
     }
 
-    public SeslDropDownItemTextView(Context context, AttributeSet attributeSet, int i) {
+    public SeslDropDownItemTextView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         Resources resources = context.getResources();
         setMaxWidth(resources.getDisplayMetrics().widthPixels - (resources.getDimensionPixelSize(R.dimen.sesl_menu_popup_offset_horizontal) * 2));

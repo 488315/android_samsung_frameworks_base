@@ -1,12 +1,20 @@
 package com.android.internal.app;
 
 import android.app.prediction.AppPredictor;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Trace;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.DeviceConfig;
 import android.service.chooser.ChooserTarget;
 import android.text.Layout;
 import android.util.Log;
@@ -22,6 +30,7 @@ import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.MultiDisplayResolveInfo;
 import com.android.internal.app.chooser.SelectableTargetInfo;
 import com.android.internal.app.chooser.TargetInfo;
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.internal.hidden_from_bootclasspath.android.service.chooser.Flags;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -95,11 +104,11 @@ public class ChooserListAdapter extends ResolverListAdapter {
             final TextView textView = (TextView) view;
             Layout layout = textView.getLayout();
             if (layout != null) {
-                int i9 = 0;
-                for (int i10 = 0; i10 < layout.getLineCount(); i10++) {
-                    i9 = Math.max((int) Math.ceil(layout.getLineMax(i10)), i9);
+                int iMax = 0;
+                for (int i9 = 0; i9 < layout.getLineCount(); i9++) {
+                    iMax = Math.max((int) Math.ceil(layout.getLineMax(i9)), iMax);
                 }
-                int paddingLeft = i9 + textView.getPaddingLeft() + textView.getPaddingRight();
+                int paddingLeft = iMax + textView.getPaddingLeft() + textView.getPaddingRight();
                 if (textView.getWidth() > paddingLeft) {
                     ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
                     layoutParams.width = paddingLeft;
@@ -107,7 +116,7 @@ public class ChooserListAdapter extends ResolverListAdapter {
                     textView.post(new Runnable() { // from class: com.android.internal.app.ChooserListAdapter$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TextView.this.requestLayout();
+                            textView.requestLayout();
                         }
                     });
                 }
@@ -116,19 +125,86 @@ public class ChooserListAdapter extends ResolverListAdapter {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0091  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ChooserListAdapter(android.content.Context r12, java.util.List<android.content.Intent> r13, android.content.Intent[] r14, java.util.List<android.content.pm.ResolveInfo> r15, boolean r16, com.android.internal.app.ResolverListController r17, com.android.internal.app.ChooserListAdapter.ChooserListCommunicator r18, com.android.internal.app.chooser.SelectableTargetInfo.SelectableTargetInfoCommunicator r19, android.content.pm.PackageManager r20, com.android.internal.app.ChooserActivityLogger r21, android.os.UserHandle r22) {
-        /*
-            Method dump skipped, instructions count: 291
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.ChooserListAdapter.<init>(android.content.Context, java.util.List, android.content.Intent[], java.util.List, boolean, com.android.internal.app.ResolverListController, com.android.internal.app.ChooserListAdapter$ChooserListCommunicator, com.android.internal.app.chooser.SelectableTargetInfo$SelectableTargetInfoCommunicator, android.content.pm.PackageManager, com.android.internal.app.ChooserActivityLogger, android.os.UserHandle):void");
+    public ChooserListAdapter(Context context, List<Intent> list, Intent[] intentArr, List<ResolveInfo> list2, boolean z, ResolverListController resolverListController, ChooserListCommunicator chooserListCommunicator, SelectableTargetInfo.SelectableTargetInfoCommunicator selectableTargetInfoCommunicator, PackageManager packageManager, ChooserActivityLogger chooserActivityLogger, UserHandle userHandle) {
+        ActivityInfo activityInfo;
+        ResolveInfo resolveInfo;
+        super(context, list, null, list2, z, resolverListController, chooserListCommunicator, false, userHandle);
+        this.mEnableStackedApps = true;
+        this.mNumShortcutResults = 0;
+        this.mIconLoaders = new HashMap();
+        this.mPlaceHolderTargetInfo = new ChooserActivity.PlaceHolderTargetInfo();
+        this.mServiceTargets = new ArrayList();
+        this.mCallerTargets = new ArrayList();
+        this.mBaseTargetComparator = new ChooserActivity.BaseChooserTargetComparator();
+        this.mListViewDataChanged = false;
+        this.mSortedList = new ArrayList();
+        this.mPinTextSpacingListener = new AnonymousClass1(this);
+        this.mMaxShortcutTargetsPerApp = context.getResources().getInteger(R.integer.config_maxShortcutTargetsPerApp);
+        this.mChooserListCommunicator = chooserListCommunicator;
+        createPlaceHolders();
+        this.mSelectableTargetInfoCommunicator = selectableTargetInfoCommunicator;
+        this.mChooserActivityLogger = chooserActivityLogger;
+        this.mInitialIntentsUserSpace = userHandle;
+        if (intentArr != null) {
+            for (Intent intent : intentArr) {
+                if (intent != null) {
+                    if (intent.getComponent() != null) {
+                        try {
+                            activityInfo = packageManager.getActivityInfo(intent.getComponent(), 0);
+                            try {
+                                resolveInfo = new ResolveInfo();
+                                try {
+                                    resolveInfo.activityInfo = activityInfo;
+                                } catch (PackageManager.NameNotFoundException unused) {
+                                }
+                            } catch (PackageManager.NameNotFoundException unused2) {
+                                resolveInfo = null;
+                            }
+                        } catch (PackageManager.NameNotFoundException unused3) {
+                        }
+                        if (activityInfo == null) {
+                            resolveInfo = packageManager.resolveActivity(intent.getClass() == Intent.class ? intent : new Intent(intent), 65536);
+                            activityInfo = resolveInfo != null ? resolveInfo.activityInfo : null;
+                        }
+                        if (activityInfo == null) {
+                            UserManager userManager = (UserManager) context.getSystemService("user");
+                            if (intent instanceof LabeledIntent) {
+                                LabeledIntent labeledIntent = (LabeledIntent) intent;
+                                resolveInfo.resolvePackageName = labeledIntent.getSourcePackage();
+                                resolveInfo.labelRes = labeledIntent.getLabelResource();
+                                resolveInfo.nonLocalizedLabel = labeledIntent.getNonLocalizedLabel();
+                                resolveInfo.icon = labeledIntent.getIconResource();
+                                resolveInfo.iconResourceId = resolveInfo.icon;
+                            }
+                            if (userManager.isManagedProfile()) {
+                                resolveInfo.noResourceId = true;
+                                resolveInfo.icon = 0;
+                            }
+                            resolveInfo.userHandle = this.mInitialIntentsUserSpace;
+                            this.mCallerTargets.add(new DisplayResolveInfo(intent, resolveInfo, intent, makePresentationGetter(resolveInfo)));
+                            if (this.mCallerTargets.size() == 4) {
+                                break;
+                            }
+                        } else {
+                            Log.w(TAG, "No activity found for " + intent);
+                        }
+                    }
+                    activityInfo = null;
+                    resolveInfo = null;
+                    if (activityInfo == null) {
+                    }
+                    if (activityInfo == null) {
+                    }
+                }
+            }
+        }
+        this.mApplySharingAppLimits = DeviceConfig.getBoolean("systemui", SystemUiDeviceConfigFlags.APPLY_SHARING_APP_LIMITS_IN_SYSUI, true);
     }
 
     public void setOnIconLoadedListener(Consumer<DisplayResolveInfo> consumer) {
@@ -175,10 +251,10 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     @Override // com.android.internal.app.ResolverListAdapter
-    protected void onBindView(View view, TargetInfo targetInfo, int i) {
+    protected void onBindView(View view, TargetInfo targetInfo, int i) throws Resources.NotFoundException {
         ResolverListAdapter.ViewHolder viewHolder = (ResolverListAdapter.ViewHolder) view.getTag();
         if (targetInfo == null) {
-            viewHolder.icon.lambda$setImageURIAsync$0(this.mContext.getDrawable(R.drawable.resolver_icon_placeholder));
+            viewHolder.icon.lambda$setImageURIAsync$2(this.mContext.getDrawable(R.drawable.resolver_icon_placeholder));
             return;
         }
         viewHolder.bindLabel(targetInfo.getDisplayLabel(), targetInfo.getExtendedInfo(), alwaysShowSubLabel());
@@ -241,9 +317,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
 
     private void loadDirectShareIcon(SelectableTargetInfo selectableTargetInfo) {
         if (this.mIconLoaders.get(selectableTargetInfo) == null) {
-            LoadDirectShareIconTask createLoadDirectShareIconTask = createLoadDirectShareIconTask(selectableTargetInfo);
-            this.mIconLoaders.put(selectableTargetInfo, createLoadDirectShareIconTask);
-            createLoadDirectShareIconTask.loadIcon();
+            LoadDirectShareIconTask loadDirectShareIconTaskCreateLoadDirectShareIconTask = createLoadDirectShareIconTask(selectableTargetInfo);
+            this.mIconLoaders.put(selectableTargetInfo, loadDirectShareIconTaskCreateLoadDirectShareIconTask);
+            loadDirectShareIconTaskCreateLoadDirectShareIconTask.loadIcon();
         }
     }
 
@@ -262,25 +338,25 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 if (!ChooserListAdapter.this.mEnableStackedApps) {
                     return arrayList;
                 }
-                HashMap hashMap = new HashMap();
+                HashMap map = new HashMap();
                 for (DisplayResolveInfo displayResolveInfo : arrayList) {
                     if (displayResolveInfo.getResolveInfo().userHandle == null) {
                         Log.e(ChooserListAdapter.TAG, "ResolveInfo with null UserHandle found: " + displayResolveInfo.getResolveInfo());
                     }
                     String str = displayResolveInfo.getResolvedComponentName().getPackageName() + '#' + ((Object) displayResolveInfo.getDisplayLabel()) + '#' + displayResolveInfo.getResolveInfo().userHandle.getIdentifier();
-                    DisplayResolveInfo displayResolveInfo2 = (DisplayResolveInfo) hashMap.get(str);
+                    DisplayResolveInfo displayResolveInfo2 = (DisplayResolveInfo) map.get(str);
                     if (displayResolveInfo2 == null) {
-                        hashMap.put(str, displayResolveInfo);
+                        map.put(str, displayResolveInfo);
                     } else if (displayResolveInfo2 instanceof MultiDisplayResolveInfo) {
                         ((MultiDisplayResolveInfo) displayResolveInfo2).addTarget(displayResolveInfo);
                     } else {
                         MultiDisplayResolveInfo multiDisplayResolveInfo = new MultiDisplayResolveInfo(str, displayResolveInfo2);
                         multiDisplayResolveInfo.addTarget(displayResolveInfo);
-                        hashMap.put(str, multiDisplayResolveInfo);
+                        map.put(str, multiDisplayResolveInfo);
                     }
                 }
                 ArrayList arrayList2 = new ArrayList();
-                arrayList2.addAll(hashMap.values());
+                arrayList2.addAll(map.values());
                 Collections.sort(arrayList2, new ChooserActivity.AzInfoComparator(ChooserListAdapter.this.mContext));
                 return arrayList2;
             }
@@ -422,11 +498,11 @@ public class ChooserListAdapter extends ResolverListAdapter {
         float baseScore = getBaseScore(displayResolveInfo2, i);
         Collections.sort(list, this.mBaseTargetComparator);
         boolean z = i == 2 || i == 3;
-        int min = this.mApplySharingAppLimits ? Math.min(list.size(), z ? this.mMaxShortcutTargetsPerApp : 2) : list.size();
+        int iMin = this.mApplySharingAppLimits ? Math.min(list.size(), z ? this.mMaxShortcutTargetsPerApp : 2) : list.size();
         float f = 0.0f;
         int i2 = 0;
         boolean z2 = false;
-        while (i2 < min) {
+        while (i2 < iMin) {
             ChooserTarget chooserTarget = list.get(i2);
             float score = chooserTarget.getScore();
             if (this.mApplySharingAppLimits) {
@@ -440,11 +516,11 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 score += 1000.0f;
             }
             float f2 = score;
-            boolean insertServiceTarget = insertServiceTarget(new SelectableTargetInfo(this.mContext.createContextAsUser(getUserHandle(), 0), displayResolveInfo2, chooserTarget, f2, this.mSelectableTargetInfoCommunicator, shortcutInfo));
-            if (insertServiceTarget && z) {
+            boolean zInsertServiceTarget = insertServiceTarget(new SelectableTargetInfo(this.mContext.createContextAsUser(getUserHandle(), 0), displayResolveInfo2, chooserTarget, f2, this.mSelectableTargetInfoCommunicator, shortcutInfo));
+            if (zInsertServiceTarget && z) {
                 this.mNumShortcutResults++;
             }
-            z2 |= insertServiceTarget;
+            z2 |= zInsertServiceTarget;
             i2++;
             displayResolveInfo2 = displayResolveInfo;
             f = f2;

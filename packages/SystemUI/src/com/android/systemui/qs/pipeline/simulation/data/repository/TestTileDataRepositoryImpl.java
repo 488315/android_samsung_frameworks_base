@@ -22,7 +22,6 @@ import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TestTileDataRepositoryImpl implements TestTileDataRepository {
     public static final String COMMAND;
@@ -33,7 +32,6 @@ public final class TestTileDataRepositoryImpl implements TestTileDataRepository 
     public final SharedPreferences prefs;
     public final TileDataSource tileDataSource;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,15 +41,14 @@ public final class TestTileDataRepositoryImpl implements TestTileDataRepository 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TileSimulationCommand implements Command {
         public TileSimulationCommand() {
         }
 
         @Override // com.android.systemui.statusbar.commandline.Command
         public final void execute(PrintWriter printWriter, List list) {
-            SharedPreferences.Editor edit;
-            SharedPreferences.Editor putBoolean;
+            SharedPreferences.Editor editorEdit;
+            SharedPreferences.Editor editorPutBoolean;
             String str = TestTileDataRepositoryImpl.TAG;
             Log.i(str, TestTileDataRepositoryImpl.COMMAND + " command was called with args: " + list);
             if (ScRune.QUICK_MANAGE_TILE_LIST_TEST) {
@@ -60,17 +57,17 @@ public final class TestTileDataRepositoryImpl implements TestTileDataRepository 
                     return;
                 }
                 String str2 = (String) list.get(0);
-                int hashCode = str2.hashCode();
+                int iHashCode = str2.hashCode();
                 TestTileDataRepositoryImpl testTileDataRepositoryImpl = TestTileDataRepositoryImpl.this;
-                if (hashCode != 97702) {
-                    if (hashCode == 3149046 && str2.equals("fota")) {
+                if (iHashCode != 97702) {
+                    if (iHashCode == 3149046 && str2.equals("fota")) {
                         Log.d(str, "do fota  " + list.get(1));
-                        boolean parseBoolean = Boolean.parseBoolean((String) list.get(1));
+                        boolean z = Boolean.parseBoolean((String) list.get(1));
                         SharedPreferences sharedPreferences = testTileDataRepositoryImpl.prefs;
-                        if (sharedPreferences == null || (edit = sharedPreferences.edit()) == null || (putBoolean = edit.putBoolean(TestTileDataRepositoryImpl.PROPERTY_NAME, parseBoolean)) == null) {
+                        if (sharedPreferences == null || (editorEdit = sharedPreferences.edit()) == null || (editorPutBoolean = editorEdit.putBoolean(TestTileDataRepositoryImpl.PROPERTY_NAME, z)) == null) {
                             return;
                         }
-                        putBoolean.apply();
+                        editorPutBoolean.apply();
                         return;
                     }
                 } else if (str2.equals("bnr")) {
@@ -105,7 +102,7 @@ public final class TestTileDataRepositoryImpl implements TestTileDataRepository 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     String str = TestTileDataRepositoryImpl.TAG;
-                    return TestTileDataRepositoryImpl.this.new TileSimulationCommand();
+                    return this.f$0.new TileSimulationCommand();
                 }
             });
             TileDataSource.Companion.getClass();

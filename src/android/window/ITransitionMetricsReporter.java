@@ -44,9 +44,9 @@ public interface ITransitionMetricsReporter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITransitionMetricsReporter.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITransitionMetricsReporter)) {
-                return (ITransitionMetricsReporter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITransitionMetricsReporter.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITransitionMetricsReporter)) {
+                return (ITransitionMetricsReporter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface ITransitionMetricsReporter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                long readLong = parcel.readLong();
+                IBinder strongBinder = parcel.readStrongBinder();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                reportAnimationStart(readStrongBinder, readLong);
+                reportAnimationStart(strongBinder, j);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface ITransitionMetricsReporter extends IInterface {
 
             @Override // android.window.ITransitionMetricsReporter
             public void reportAnimationStart(IBinder iBinder, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransitionMetricsReporter.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransitionMetricsReporter.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

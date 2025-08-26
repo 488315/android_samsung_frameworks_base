@@ -1070,9 +1070,9 @@ public interface IInputManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputManager)) {
-                return (IInputManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputManager)) {
+                return (IInputManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -1367,9 +1367,9 @@ public interface IInputManager extends IInterface {
                     parcel2.writeString(velocityTrackerStrategy);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputDevice inputDevice = getInputDevice(readInt);
+                    InputDevice inputDevice = getInputDevice(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(inputDevice, 1);
                     return true;
@@ -1379,51 +1379,51 @@ public interface IInputManager extends IInterface {
                     parcel2.writeIntArray(inputDeviceIds);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableInputDevice(readInt2);
+                    enableInputDevice(i4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableInputDevice(readInt3);
+                    disableInputDevice(i5);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    controlSpenWithToken(readStrongBinder, readBoolean);
+                    controlSpenWithToken(strongBinder, z);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
-                    int readInt6 = parcel.readInt();
-                    if (readInt6 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt6);
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int i8 = parcel.readInt();
+                    if (i8 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i8);
                     }
-                    boolean[] zArr = readInt6 < 0 ? null : new boolean[readInt6];
+                    boolean[] zArr = i8 < 0 ? null : new boolean[i8];
                     parcel.enforceNoDataAvail();
-                    boolean hasKeys = hasKeys(readInt4, readInt5, createIntArray, zArr);
+                    boolean zHasKeys = hasKeys(i6, i7, iArrCreateIntArray, zArr);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasKeys);
+                    parcel2.writeBoolean(zHasKeys);
                     parcel2.writeBooleanArray(zArr);
                     return true;
                 case 8:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int keyCodeForKeyLocation = getKeyCodeForKeyLocation(readInt7, readInt8);
+                    int keyCodeForKeyLocation = getKeyCodeForKeyLocation(i9, i10);
                     parcel2.writeNoException();
                     parcel2.writeInt(keyCodeForKeyLocation);
                     return true;
                 case 9:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    KeyCharacterMap keyCharacterMap = getKeyCharacterMap(readString);
+                    KeyCharacterMap keyCharacterMap = getKeyCharacterMap(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyCharacterMap, 1);
                     return true;
@@ -1433,49 +1433,49 @@ public interface IInputManager extends IInterface {
                     parcel2.writeInt(mousePointerSpeed);
                     return true;
                 case 11:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    tryPointerSpeed(readInt9);
+                    tryPointerSpeed(i11);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     InputEvent inputEvent = (InputEvent) parcel.readTypedObject(InputEvent.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean injectInputEvent = injectInputEvent(inputEvent, readInt10);
+                    boolean zInjectInputEvent = injectInputEvent(inputEvent, i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(injectInputEvent);
+                    parcel2.writeBoolean(zInjectInputEvent);
                     return true;
                 case 13:
                     InputEvent inputEvent2 = (InputEvent) parcel.readTypedObject(InputEvent.CREATOR);
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean injectInputEventToTarget = injectInputEventToTarget(inputEvent2, readInt11, readInt12);
+                    boolean zInjectInputEventToTarget = injectInputEventToTarget(inputEvent2, i13, i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(injectInputEventToTarget);
+                    parcel2.writeBoolean(zInjectInputEventToTarget);
                     return true;
                 case 14:
                     InputEvent inputEvent3 = (InputEvent) parcel.readTypedObject(InputEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    VerifiedInputEvent verifyInputEvent = verifyInputEvent(inputEvent3);
+                    VerifiedInputEvent verifiedInputEventVerifyInputEvent = verifyInputEvent(inputEvent3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyInputEvent, 1);
+                    parcel2.writeTypedObject(verifiedInputEventVerifyInputEvent, 1);
                     return true;
                 case 15:
-                    String readString2 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    TouchCalibration touchCalibrationForInputDevice = getTouchCalibrationForInputDevice(readString2, readInt13);
+                    TouchCalibration touchCalibrationForInputDevice = getTouchCalibrationForInputDevice(string2, i15);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(touchCalibrationForInputDevice, 1);
                     return true;
                 case 16:
-                    String readString3 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i16 = parcel.readInt();
                     TouchCalibration touchCalibration = (TouchCalibration) parcel.readTypedObject(TouchCalibration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setTouchCalibrationForInputDevice(readString3, readInt14, touchCalibration);
+                    setTouchCalibrationForInputDevice(string3, i16, touchCalibration);
                     parcel2.writeNoException();
                     return true;
                 case 17:
@@ -1484,54 +1484,54 @@ public interface IInputManager extends IInterface {
                     parcel2.writeTypedArray(keyboardLayouts, 1);
                     return true;
                 case 18:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    KeyboardLayout keyboardLayout = getKeyboardLayout(readString4);
+                    KeyboardLayout keyboardLayout = getKeyboardLayout(string4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyboardLayout, 1);
                     return true;
                 case 19:
                     InputDeviceIdentifier inputDeviceIdentifier = (InputDeviceIdentifier) parcel.readTypedObject(InputDeviceIdentifier.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     InputMethodInfo inputMethodInfo = (InputMethodInfo) parcel.readTypedObject(InputMethodInfo.CREATOR);
                     InputMethodSubtype inputMethodSubtype = (InputMethodSubtype) parcel.readTypedObject(InputMethodSubtype.CREATOR);
                     parcel.enforceNoDataAvail();
-                    KeyboardLayoutSelectionResult keyboardLayoutForInputDevice = getKeyboardLayoutForInputDevice(inputDeviceIdentifier, readInt15, inputMethodInfo, inputMethodSubtype);
+                    KeyboardLayoutSelectionResult keyboardLayoutForInputDevice = getKeyboardLayoutForInputDevice(inputDeviceIdentifier, i17, inputMethodInfo, inputMethodSubtype);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyboardLayoutForInputDevice, 1);
                     return true;
                 case 20:
                     InputDeviceIdentifier inputDeviceIdentifier2 = (InputDeviceIdentifier) parcel.readTypedObject(InputDeviceIdentifier.CREATOR);
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setKeyboardLayoutOverrideForInputDevice(inputDeviceIdentifier2, readString5);
+                    setKeyboardLayoutOverrideForInputDevice(inputDeviceIdentifier2, string5);
                     parcel2.writeNoException();
                     return true;
                 case 21:
                     InputDeviceIdentifier inputDeviceIdentifier3 = (InputDeviceIdentifier) parcel.readTypedObject(InputDeviceIdentifier.CREATOR);
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     InputMethodInfo inputMethodInfo2 = (InputMethodInfo) parcel.readTypedObject(InputMethodInfo.CREATOR);
                     InputMethodSubtype inputMethodSubtype2 = (InputMethodSubtype) parcel.readTypedObject(InputMethodSubtype.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setKeyboardLayoutForInputDevice(inputDeviceIdentifier3, readInt16, inputMethodInfo2, inputMethodSubtype2, readString6);
+                    setKeyboardLayoutForInputDevice(inputDeviceIdentifier3, i18, inputMethodInfo2, inputMethodSubtype2, string6);
                     parcel2.writeNoException();
                     return true;
                 case 22:
                     InputDeviceIdentifier inputDeviceIdentifier4 = (InputDeviceIdentifier) parcel.readTypedObject(InputDeviceIdentifier.CREATOR);
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     InputMethodInfo inputMethodInfo3 = (InputMethodInfo) parcel.readTypedObject(InputMethodInfo.CREATOR);
                     InputMethodSubtype inputMethodSubtype3 = (InputMethodSubtype) parcel.readTypedObject(InputMethodSubtype.CREATOR);
                     parcel.enforceNoDataAvail();
-                    KeyboardLayout[] keyboardLayoutListForInputDevice = getKeyboardLayoutListForInputDevice(inputDeviceIdentifier4, readInt17, inputMethodInfo3, inputMethodSubtype3);
+                    KeyboardLayout[] keyboardLayoutListForInputDevice = getKeyboardLayoutListForInputDevice(inputDeviceIdentifier4, i19, inputMethodInfo3, inputMethodSubtype3);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(keyboardLayoutListForInputDevice, 1);
                     return true;
                 case 23:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    remapModifierKey(readInt18, readInt19);
+                    remapModifierKey(i20, i21);
                     parcel2.writeNoException();
                     return true;
                 case 24:
@@ -1544,9 +1544,9 @@ public interface IInputManager extends IInterface {
                     parcel2.writeMap(modifierKeyRemapping);
                     return true;
                 case 26:
-                    IInputDevicesChangedListener asInterface = IInputDevicesChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputDevicesChangedListener iInputDevicesChangedListenerAsInterface = IInputDevicesChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerInputDevicesChangedListener(asInterface);
+                    registerInputDevicesChangedListener(iInputDevicesChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 27:
@@ -1555,9 +1555,9 @@ public interface IInputManager extends IInterface {
                     parcel2.writeInt(lidState);
                     return true;
                 case 28:
-                    ISemLidStateChangedListener asInterface2 = ISemLidStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISemLidStateChangedListener iSemLidStateChangedListenerAsInterface = ISemLidStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerLidStateChangedListener(asInterface2);
+                    registerLidStateChangedListener(iSemLidStateChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 29:
@@ -1566,130 +1566,130 @@ public interface IInputManager extends IInterface {
                     parcel2.writeLong(lastLidEventTimeNanos);
                     return true;
                 case 30:
-                    ISwitchEventChangedListener asInterface3 = ISwitchEventChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISwitchEventChangedListener iSwitchEventChangedListenerAsInterface = ISwitchEventChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSwitchEventChangedListener(asInterface3);
+                    registerSwitchEventChangedListener(iSwitchEventChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    int readInt20 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i22 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int currentSwitchEventState = getCurrentSwitchEventState(readInt20, readBoolean2);
+                    int currentSwitchEventState = getCurrentSwitchEventState(i22, z2);
                     parcel2.writeNoException();
                     parcel2.writeInt(currentSwitchEventState);
                     return true;
                 case 32:
-                    boolean supportPogoDevice = supportPogoDevice();
+                    boolean zSupportPogoDevice = supportPogoDevice();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supportPogoDevice);
+                    parcel2.writeBoolean(zSupportPogoDevice);
                     return true;
                 case 33:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String inputDevicePath = getInputDevicePath(readInt21);
+                    String inputDevicePath = getInputDevicePath(i23);
                     parcel2.writeNoException();
                     parcel2.writeString(inputDevicePath);
                     return true;
                 case 34:
-                    IMultiFingerGestureListener asInterface4 = IMultiFingerGestureListener.Stub.asInterface(parcel.readStrongBinder());
+                    IMultiFingerGestureListener iMultiFingerGestureListenerAsInterface = IMultiFingerGestureListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerMultiFingerGestureListener(asInterface4);
+                    registerMultiFingerGestureListener(iMultiFingerGestureListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    int isInTabletMode = isInTabletMode();
+                    int iIsInTabletMode = isInTabletMode();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isInTabletMode);
+                    parcel2.writeInt(iIsInTabletMode);
                     return true;
                 case 36:
-                    ITabletModeChangedListener asInterface5 = ITabletModeChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITabletModeChangedListener iTabletModeChangedListenerAsInterface = ITabletModeChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerTabletModeChangedListener(asInterface5);
+                    registerTabletModeChangedListener(iTabletModeChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    int isMicMuted = isMicMuted();
+                    int iIsMicMuted = isMicMuted();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isMicMuted);
+                    parcel2.writeInt(iIsMicMuted);
                     return true;
                 case 38:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     VibrationEffect vibrationEffect = (VibrationEffect) parcel.readTypedObject(VibrationEffect.CREATOR);
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    vibrate(readInt22, vibrationEffect, readStrongBinder2);
+                    vibrate(i24, vibrationEffect, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     CombinedVibration combinedVibration = (CombinedVibration) parcel.readTypedObject(CombinedVibration.CREATOR);
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    vibrateCombined(readInt23, combinedVibration, readStrongBinder3);
+                    vibrateCombined(i25, combinedVibration, strongBinder3);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    int readInt24 = parcel.readInt();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    int i26 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    cancelVibrate(readInt24, readStrongBinder4);
+                    cancelVibrate(i26, strongBinder4);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] vibratorIds = getVibratorIds(readInt25);
+                    int[] vibratorIds = getVibratorIds(i27);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(vibratorIds);
                     return true;
                 case 42:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVibrating = isVibrating(readInt26);
+                    boolean zIsVibrating = isVibrating(i28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVibrating);
+                    parcel2.writeBoolean(zIsVibrating);
                     return true;
                 case 43:
-                    int readInt27 = parcel.readInt();
-                    IVibratorStateListener asInterface6 = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i29 = parcel.readInt();
+                    IVibratorStateListener iVibratorStateListenerAsInterface = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerVibratorStateListener = registerVibratorStateListener(readInt27, asInterface6);
+                    boolean zRegisterVibratorStateListener = registerVibratorStateListener(i29, iVibratorStateListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerVibratorStateListener);
+                    parcel2.writeBoolean(zRegisterVibratorStateListener);
                     return true;
                 case 44:
-                    int readInt28 = parcel.readInt();
-                    IVibratorStateListener asInterface7 = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i30 = parcel.readInt();
+                    IVibratorStateListener iVibratorStateListenerAsInterface2 = IVibratorStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterVibratorStateListener = unregisterVibratorStateListener(readInt28, asInterface7);
+                    boolean zUnregisterVibratorStateListener = unregisterVibratorStateListener(i30, iVibratorStateListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterVibratorStateListener);
+                    parcel2.writeBoolean(zUnregisterVibratorStateListener);
                     return true;
                 case 45:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IInputDeviceBatteryState batteryState = getBatteryState(readInt29);
+                    IInputDeviceBatteryState batteryState = getBatteryState(i31);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(batteryState, 1);
                     return true;
                 case 46:
                     PointerIcon pointerIcon = (PointerIcon) parcel.readTypedObject(PointerIcon.CREATOR);
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
-                    int readInt32 = parcel.readInt();
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    int i34 = parcel.readInt();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean pointerIcon2 = setPointerIcon(pointerIcon, readInt30, readInt31, readInt32, readStrongBinder5);
+                    boolean pointerIcon2 = setPointerIcon(pointerIcon, i32, i33, i34, strongBinder5);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(pointerIcon2);
                     return true;
                 case 47:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     PointerIcon pointerIcon3 = (PointerIcon) parcel.readTypedObject(PointerIcon.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDefaultPointerIcon(readInt33, pointerIcon3, readBoolean3);
+                    setDefaultPointerIcon(i35, pointerIcon3, z3);
                     parcel2.writeNoException();
                     return true;
                 case 48:
@@ -1703,9 +1703,9 @@ public interface IInputManager extends IInterface {
                     parcel2.writeTypedObject(forcedDefaultPointerIcon, 1);
                     return true;
                 case 50:
-                    boolean isDefaultPointerIconChanged = isDefaultPointerIconChanged();
+                    boolean zIsDefaultPointerIconChanged = isDefaultPointerIconChanged();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDefaultPointerIconChanged);
+                    parcel2.writeBoolean(zIsDefaultPointerIconChanged);
                     return true;
                 case 51:
                     int toolTypeForDefaultPointerIcon = getToolTypeForDefaultPointerIcon();
@@ -1713,15 +1713,15 @@ public interface IInputManager extends IInterface {
                     parcel2.writeInt(toolTypeForDefaultPointerIcon);
                     return true;
                 case 52:
-                    IPointerIconChangedListener asInterface8 = IPointerIconChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IPointerIconChangedListener iPointerIconChangedListenerAsInterface = IPointerIconChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerPointerIconChangedListener(asInterface8);
+                    registerPointerIconChangedListener(iPointerIconChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 53:
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDisplayIdForPointerIcon(readInt34);
+                    setDisplayIdForPointerIcon(i36);
                     parcel2.writeNoException();
                     return true;
                 case 54:
@@ -1735,22 +1735,22 @@ public interface IInputManager extends IInterface {
                     parcel2.writeInt(pointerIconType);
                     return true;
                 case 56:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setShowAllTouches(readBoolean4);
+                    setShowAllTouches(z4);
                     parcel2.writeNoException();
                     return true;
                 case 57:
-                    String readString7 = parcel.readString();
-                    int readInt35 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateDeviceToGamepadProfile(readString7, readInt35);
+                    updateDeviceToGamepadProfile(string7, i37);
                     parcel2.writeNoException();
                     return true;
                 case 58:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeDeviceToGamepadProfile(readString8);
+                    removeDeviceToGamepadProfile(string8);
                     parcel2.writeNoException();
                     return true;
                 case 59:
@@ -1762,37 +1762,37 @@ public interface IInputManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 61:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeGamepadProfile(readInt36);
+                    removeGamepadProfile(i38);
                     parcel2.writeNoException();
                     return true;
                 case 62:
-                    int readInt37 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    int i39 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean gamepadProfileName = setGamepadProfileName(readInt37, readString9);
+                    boolean gamepadProfileName = setGamepadProfileName(i39, string9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(gamepadProfileName);
                     return true;
                 case 63:
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
-                    int readInt40 = parcel.readInt();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean remapGamepadButton = setRemapGamepadButton(readInt38, readInt39, readInt40);
+                    boolean remapGamepadButton = setRemapGamepadButton(i40, i41, i42);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(remapGamepadButton);
                     return true;
                 case 64:
-                    int readInt41 = parcel.readInt();
-                    int readInt42 = parcel.readInt();
-                    int readInt43 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i43 = parcel.readInt();
+                    int i44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean remapGamepadStick = setRemapGamepadStick(readInt41, readInt42, readInt43, readBoolean5, readBoolean6, readBoolean7);
+                    boolean remapGamepadStick = setRemapGamepadStick(i43, i44, i45, z5, z6, z7);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(remapGamepadStick);
                     return true;
@@ -1802,9 +1802,9 @@ public interface IInputManager extends IInterface {
                     parcel2.writeString(supportButtonNStick);
                     return true;
                 case 66:
-                    int readInt44 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String gamepadProfile = getGamepadProfile(readInt44);
+                    String gamepadProfile = getGamepadProfile(i46);
                     parcel2.writeNoException();
                     parcel2.writeString(gamepadProfile);
                     return true;
@@ -1814,44 +1814,44 @@ public interface IInputManager extends IInterface {
                     parcel2.writeIntArray(gamepadProfileIds);
                     return true;
                 case 68:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    requestPointerCapture(readStrongBinder6, readBoolean8);
+                    requestPointerCapture(strongBinder6, z8);
                     return true;
                 case 69:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    String readString10 = parcel.readString();
-                    int readInt45 = parcel.readInt();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    String string10 = parcel.readString();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMonitor monitorGestureInput = monitorGestureInput(readStrongBinder7, readString10, readInt45);
+                    InputMonitor inputMonitorMonitorGestureInput = monitorGestureInput(strongBinder7, string10, i47);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(monitorGestureInput, 1);
+                    parcel2.writeTypedObject(inputMonitorMonitorGestureInput, 1);
                     return true;
                 case 70:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
-                    String readString11 = parcel.readString();
-                    int readInt46 = parcel.readInt();
-                    int readInt47 = parcel.readInt();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
+                    String string11 = parcel.readString();
+                    int i48 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMonitor monitorGestureInputFiltered = monitorGestureInputFiltered(readStrongBinder8, readString11, readInt46, readInt47);
+                    InputMonitor inputMonitorMonitorGestureInputFiltered = monitorGestureInputFiltered(strongBinder8, string11, i48, i49);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(monitorGestureInputFiltered, 1);
+                    parcel2.writeTypedObject(inputMonitorMonitorGestureInputFiltered, 1);
                     return true;
                 case 71:
-                    String readString12 = parcel.readString();
-                    int readInt48 = parcel.readInt();
-                    int readInt49 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i50 = parcel.readInt();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputChannel monitorInputForBinder = monitorInputForBinder(readString12, readInt48, readInt49);
+                    InputChannel inputChannelMonitorInputForBinder = monitorInputForBinder(string12, i50, i51);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(monitorInputForBinder, 1);
+                    parcel2.writeTypedObject(inputChannelMonitorInputForBinder, 1);
                     return true;
                 case 72:
-                    int readInt50 = parcel.readInt();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    int i52 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean tspEnabled = setTspEnabled(readInt50, readBoolean9);
+                    boolean tspEnabled = setTspEnabled(i52, z9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(tspEnabled);
                     return true;
@@ -1861,72 +1861,72 @@ public interface IInputManager extends IInterface {
                     parcel2.writeInt(inboundQueueLength);
                     return true;
                 case 74:
-                    int checkInputFeature = checkInputFeature();
+                    int iCheckInputFeature = checkInputFeature();
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkInputFeature);
+                    parcel2.writeInt(iCheckInputFeature);
                     return true;
                 case 75:
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setStartedShutdown(readBoolean10);
+                    setStartedShutdown(z10);
                     parcel2.writeNoException();
                     return true;
                 case 76:
-                    int readInt51 = parcel.readInt();
-                    int readInt52 = parcel.readInt();
-                    int readInt53 = parcel.readInt();
+                    int i53 = parcel.readInt();
+                    int i54 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int scanCodeState = getScanCodeState(readInt51, readInt52, readInt53);
+                    int scanCodeState = getScanCodeState(i53, i54, i55);
                     parcel2.writeNoException();
                     parcel2.writeInt(scanCodeState);
                     return true;
                 case 77:
-                    String readString13 = parcel.readString();
-                    boolean readBoolean11 = parcel.readBoolean();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    boolean z11 = parcel.readBoolean();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setWakeKeyDynamically(readString13, readBoolean11, readString14);
+                    setWakeKeyDynamically(string13, z11, string14);
                     parcel2.writeNoException();
                     return true;
                 case 78:
-                    int readInt54 = parcel.readInt();
+                    int i56 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int globalMetaState = getGlobalMetaState(readInt54);
+                    int globalMetaState = getGlobalMetaState(i56);
                     parcel2.writeNoException();
                     parcel2.writeInt(globalMetaState);
                     return true;
                 case 79:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    long semGetMotionIdleTimeMillis = semGetMotionIdleTimeMillis(readBoolean12);
+                    long jSemGetMotionIdleTimeMillis = semGetMotionIdleTimeMillis(z12);
                     parcel2.writeNoException();
-                    parcel2.writeLong(semGetMotionIdleTimeMillis);
+                    parcel2.writeLong(jSemGetMotionIdleTimeMillis);
                     return true;
                 case 80:
-                    int readInt55 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isUidTouched = isUidTouched(readInt55);
+                    boolean zIsUidTouched = isUidTouched(i57);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUidTouched);
+                    parcel2.writeBoolean(zIsUidTouched);
                     return true;
                 case 81:
-                    int readInt56 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    forceFadeIcon(readInt56);
+                    forceFadeIcon(i58);
                     parcel2.writeNoException();
                     return true;
                 case 82:
-                    int readInt57 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
+                    int i59 = parcel.readInt();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    notifyQuickAccess(readInt57, readFloat, readFloat2);
+                    notifyQuickAccess(i59, f, f2);
                     parcel2.writeNoException();
                     return true;
                 case 83:
-                    IWirelessKeyboardShareChangedListener asInterface9 = IWirelessKeyboardShareChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListenerAsInterface = IWirelessKeyboardShareChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerWirelessKeyboardShareChangedListener(asInterface9);
+                    registerWirelessKeyboardShareChangedListener(iWirelessKeyboardShareChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 84:
@@ -1934,33 +1934,33 @@ public interface IInputManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 85:
-                    String readString15 = parcel.readString();
-                    int readInt58 = parcel.readInt();
+                    String string15 = parcel.readString();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeDeviceWirelessKeyboardShare(readString15, readInt58);
+                    removeDeviceWirelessKeyboardShare(string15, i60);
                     parcel2.writeNoException();
                     return true;
                 case 86:
-                    String readString16 = parcel.readString();
-                    int readInt59 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    int i61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeDeviceWirelessKeyboardShare(readString16, readInt59);
+                    changeDeviceWirelessKeyboardShare(string16, i61);
                     parcel2.writeNoException();
                     return true;
                 case 87:
-                    int readInt60 = parcel.readInt();
+                    int i62 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean addDeviceWirelessKeyboardShare = addDeviceWirelessKeyboardShare(readInt60);
+                    boolean zAddDeviceWirelessKeyboardShare = addDeviceWirelessKeyboardShare(i62);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addDeviceWirelessKeyboardShare);
+                    parcel2.writeBoolean(zAddDeviceWirelessKeyboardShare);
                     return true;
                 case 88:
-                    String readString17 = parcel.readString();
-                    int readInt61 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean switchDeviceWirelessKeyboardShare = switchDeviceWirelessKeyboardShare(readString17, readInt61);
+                    boolean zSwitchDeviceWirelessKeyboardShare = switchDeviceWirelessKeyboardShare(string17, i63);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(switchDeviceWirelessKeyboardShare);
+                    parcel2.writeBoolean(zSwitchDeviceWirelessKeyboardShare);
                     return true;
                 case 89:
                     setHostRoleWirelessKeyboardShare();
@@ -1973,126 +1973,126 @@ public interface IInputManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 91:
-                    String readString18 = parcel.readString();
-                    int readInt62 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i64 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPortAssociation(readString18, readInt62);
+                    addPortAssociation(string18, i64);
                     parcel2.writeNoException();
                     return true;
                 case 92:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removePortAssociation(readString19);
+                    removePortAssociation(string19);
                     parcel2.writeNoException();
                     return true;
                 case 93:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addUniqueIdAssociationByDescriptor(readString20, readString21);
+                    addUniqueIdAssociationByDescriptor(string20, string21);
                     parcel2.writeNoException();
                     return true;
                 case 94:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeUniqueIdAssociationByDescriptor(readString22);
+                    removeUniqueIdAssociationByDescriptor(string22);
                     parcel2.writeNoException();
                     return true;
                 case 95:
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addUniqueIdAssociationByPort(readString23, readString24);
+                    addUniqueIdAssociationByPort(string23, string24);
                     parcel2.writeNoException();
                     return true;
                 case 96:
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeUniqueIdAssociationByPort(readString25);
+                    removeUniqueIdAssociationByPort(string25);
                     parcel2.writeNoException();
                     return true;
                 case 97:
-                    int readInt63 = parcel.readInt();
+                    int i65 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputSensorInfo[] sensorList = getSensorList(readInt63);
+                    InputSensorInfo[] sensorList = getSensorList(i65);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(sensorList, 1);
                     return true;
                 case 98:
-                    IInputSensorEventListener asInterface10 = IInputSensorEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputSensorEventListener iInputSensorEventListenerAsInterface = IInputSensorEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerSensorListener = registerSensorListener(asInterface10);
+                    boolean zRegisterSensorListener = registerSensorListener(iInputSensorEventListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerSensorListener);
+                    parcel2.writeBoolean(zRegisterSensorListener);
                     return true;
                 case 99:
-                    IInputSensorEventListener asInterface11 = IInputSensorEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputSensorEventListener iInputSensorEventListenerAsInterface2 = IInputSensorEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSensorListener(asInterface11);
+                    unregisterSensorListener(iInputSensorEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 100:
-                    int readInt64 = parcel.readInt();
-                    int readInt65 = parcel.readInt();
-                    int readInt66 = parcel.readInt();
-                    int readInt67 = parcel.readInt();
+                    int i66 = parcel.readInt();
+                    int i67 = parcel.readInt();
+                    int i68 = parcel.readInt();
+                    int i69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean enableSensor = enableSensor(readInt64, readInt65, readInt66, readInt67);
+                    boolean zEnableSensor = enableSensor(i66, i67, i68, i69);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableSensor);
+                    parcel2.writeBoolean(zEnableSensor);
                     return true;
                 case 101:
-                    int readInt68 = parcel.readInt();
-                    int readInt69 = parcel.readInt();
+                    int i70 = parcel.readInt();
+                    int i71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableSensor(readInt68, readInt69);
+                    disableSensor(i70, i71);
                     parcel2.writeNoException();
                     return true;
                 case 102:
-                    int readInt70 = parcel.readInt();
-                    int readInt71 = parcel.readInt();
+                    int i72 = parcel.readInt();
+                    int i73 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean flushSensor = flushSensor(readInt70, readInt71);
+                    boolean zFlushSensor = flushSensor(i72, i73);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(flushSensor);
+                    parcel2.writeBoolean(zFlushSensor);
                     return true;
                 case 103:
-                    int readInt72 = parcel.readInt();
+                    int i74 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<Light> lights = getLights(readInt72);
+                    List<Light> lights = getLights(i74);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(lights, 1);
                     return true;
                 case 104:
-                    int readInt73 = parcel.readInt();
-                    int readInt74 = parcel.readInt();
+                    int i75 = parcel.readInt();
+                    int i76 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    LightState lightState = getLightState(readInt73, readInt74);
+                    LightState lightState = getLightState(i75, i76);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(lightState, 1);
                     return true;
                 case 105:
-                    int readInt75 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
+                    int i77 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
                     LightState[] lightStateArr = (LightState[]) parcel.createTypedArray(LightState.CREATOR);
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    setLightStates(readInt75, createIntArray2, lightStateArr, readStrongBinder9);
+                    setLightStates(i77, iArrCreateIntArray2, lightStateArr, strongBinder9);
                     parcel2.writeNoException();
                     return true;
                 case 106:
-                    int readInt76 = parcel.readInt();
-                    String readString26 = parcel.readString();
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
+                    int i78 = parcel.readInt();
+                    String string26 = parcel.readString();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    openLightSession(readInt76, readString26, readStrongBinder10);
+                    openLightSession(i78, string26, strongBinder10);
                     parcel2.writeNoException();
                     return true;
                 case 107:
-                    int readInt77 = parcel.readInt();
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
+                    int i79 = parcel.readInt();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    closeLightSession(readInt77, readStrongBinder11);
+                    closeLightSession(i79, strongBinder11);
                     parcel2.writeNoException();
                     return true;
                 case 108:
@@ -2100,145 +2100,145 @@ public interface IInputManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 109:
-                    int readInt78 = parcel.readInt();
-                    IInputDeviceBatteryListener asInterface12 = IInputDeviceBatteryListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i80 = parcel.readInt();
+                    IInputDeviceBatteryListener iInputDeviceBatteryListenerAsInterface = IInputDeviceBatteryListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerBatteryListener(readInt78, asInterface12);
+                    registerBatteryListener(i80, iInputDeviceBatteryListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 110:
-                    int readInt79 = parcel.readInt();
-                    IInputDeviceBatteryListener asInterface13 = IInputDeviceBatteryListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i81 = parcel.readInt();
+                    IInputDeviceBatteryListener iInputDeviceBatteryListenerAsInterface2 = IInputDeviceBatteryListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterBatteryListener(readInt79, asInterface13);
+                    unregisterBatteryListener(i81, iInputDeviceBatteryListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 111:
-                    IKeyEventActivityListener asInterface14 = IKeyEventActivityListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyEventActivityListener iKeyEventActivityListenerAsInterface = IKeyEventActivityListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerKeyEventActivityListener = registerKeyEventActivityListener(asInterface14);
+                    boolean zRegisterKeyEventActivityListener = registerKeyEventActivityListener(iKeyEventActivityListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerKeyEventActivityListener);
+                    parcel2.writeBoolean(zRegisterKeyEventActivityListener);
                     return true;
                 case 112:
-                    IKeyEventActivityListener asInterface15 = IKeyEventActivityListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyEventActivityListener iKeyEventActivityListenerAsInterface2 = IKeyEventActivityListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterKeyEventActivityListener = unregisterKeyEventActivityListener(asInterface15);
+                    boolean zUnregisterKeyEventActivityListener = unregisterKeyEventActivityListener(iKeyEventActivityListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterKeyEventActivityListener);
+                    parcel2.writeBoolean(zUnregisterKeyEventActivityListener);
                     return true;
                 case 113:
-                    int readInt80 = parcel.readInt();
+                    int i82 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String inputDeviceBluetoothAddress = getInputDeviceBluetoothAddress(readInt80);
+                    String inputDeviceBluetoothAddress = getInputDeviceBluetoothAddress(i82);
                     parcel2.writeNoException();
                     parcel2.writeString(inputDeviceBluetoothAddress);
                     return true;
                 case 114:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    pilferPointers(readStrongBinder12);
+                    pilferPointers(strongBinder12);
                     parcel2.writeNoException();
                     return true;
                 case 115:
-                    IKeyboardBacklightListener asInterface16 = IKeyboardBacklightListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyboardBacklightListener iKeyboardBacklightListenerAsInterface = IKeyboardBacklightListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerKeyboardBacklightListener(asInterface16);
+                    registerKeyboardBacklightListener(iKeyboardBacklightListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 116:
-                    IKeyboardBacklightListener asInterface17 = IKeyboardBacklightListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyboardBacklightListener iKeyboardBacklightListenerAsInterface2 = IKeyboardBacklightListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterKeyboardBacklightListener(asInterface17);
+                    unregisterKeyboardBacklightListener(iKeyboardBacklightListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 117:
-                    int readInt81 = parcel.readInt();
+                    int i83 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    HostUsiVersion hostUsiVersionFromDisplayConfig = getHostUsiVersionFromDisplayConfig(readInt81);
+                    HostUsiVersion hostUsiVersionFromDisplayConfig = getHostUsiVersionFromDisplayConfig(i83);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(hostUsiVersionFromDisplayConfig, 1);
                     return true;
                 case 118:
-                    IStickyModifierStateListener asInterface18 = IStickyModifierStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStickyModifierStateListener iStickyModifierStateListenerAsInterface = IStickyModifierStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerStickyModifierStateListener(asInterface18);
+                    registerStickyModifierStateListener(iStickyModifierStateListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 119:
-                    IStickyModifierStateListener asInterface19 = IStickyModifierStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStickyModifierStateListener iStickyModifierStateListenerAsInterface2 = IStickyModifierStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterStickyModifierStateListener(asInterface19);
+                    unregisterStickyModifierStateListener(iStickyModifierStateListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 120:
-                    int readInt82 = parcel.readInt();
+                    int i84 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    KeyGlyphMap keyGlyphMap = getKeyGlyphMap(readInt82);
+                    KeyGlyphMap keyGlyphMap = getKeyGlyphMap(i84);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyGlyphMap, 1);
                     return true;
                 case 121:
-                    IKeyGestureEventListener asInterface20 = IKeyGestureEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyGestureEventListener iKeyGestureEventListenerAsInterface = IKeyGestureEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerKeyGestureEventListener(asInterface20);
+                    registerKeyGestureEventListener(iKeyGestureEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 122:
-                    IKeyGestureEventListener asInterface21 = IKeyGestureEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyGestureEventListener iKeyGestureEventListenerAsInterface2 = IKeyGestureEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterKeyGestureEventListener(asInterface21);
+                    unregisterKeyGestureEventListener(iKeyGestureEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 123:
-                    int[] createIntArray3 = parcel.createIntArray();
-                    IKeyGestureHandler asInterface22 = IKeyGestureHandler.Stub.asInterface(parcel.readStrongBinder());
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
+                    IKeyGestureHandler iKeyGestureHandlerAsInterface = IKeyGestureHandler.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerKeyGestureHandler(createIntArray3, asInterface22);
+                    registerKeyGestureHandler(iArrCreateIntArray3, iKeyGestureHandlerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 124:
-                    IKeyGestureHandler asInterface23 = IKeyGestureHandler.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyGestureHandler iKeyGestureHandlerAsInterface2 = IKeyGestureHandler.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterKeyGestureHandler(asInterface23);
+                    unregisterKeyGestureHandler(iKeyGestureHandlerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 125:
-                    int readInt83 = parcel.readInt();
+                    int i85 = parcel.readInt();
                     AidlInputGestureData.Trigger trigger = (AidlInputGestureData.Trigger) parcel.readTypedObject(AidlInputGestureData.Trigger.CREATOR);
                     parcel.enforceNoDataAvail();
-                    AidlInputGestureData inputGesture = getInputGesture(readInt83, trigger);
+                    AidlInputGestureData inputGesture = getInputGesture(i85, trigger);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(inputGesture, 1);
                     return true;
                 case 126:
-                    int readInt84 = parcel.readInt();
+                    int i86 = parcel.readInt();
                     AidlInputGestureData aidlInputGestureData = (AidlInputGestureData) parcel.readTypedObject(AidlInputGestureData.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addCustomInputGesture = addCustomInputGesture(readInt84, aidlInputGestureData);
+                    int iAddCustomInputGesture = addCustomInputGesture(i86, aidlInputGestureData);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addCustomInputGesture);
+                    parcel2.writeInt(iAddCustomInputGesture);
                     return true;
                 case 127:
-                    int readInt85 = parcel.readInt();
+                    int i87 = parcel.readInt();
                     AidlInputGestureData aidlInputGestureData2 = (AidlInputGestureData) parcel.readTypedObject(AidlInputGestureData.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int removeCustomInputGesture = removeCustomInputGesture(readInt85, aidlInputGestureData2);
+                    int iRemoveCustomInputGesture = removeCustomInputGesture(i87, aidlInputGestureData2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeCustomInputGesture);
+                    parcel2.writeInt(iRemoveCustomInputGesture);
                     return true;
                 case 128:
-                    int readInt86 = parcel.readInt();
-                    int readInt87 = parcel.readInt();
+                    int i88 = parcel.readInt();
+                    int i89 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeAllCustomInputGestures(readInt86, readInt87);
+                    removeAllCustomInputGestures(i88, i89);
                     parcel2.writeNoException();
                     return true;
                 case 129:
-                    int readInt88 = parcel.readInt();
-                    int readInt89 = parcel.readInt();
+                    int i90 = parcel.readInt();
+                    int i91 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    AidlInputGestureData[] customInputGestures = getCustomInputGestures(readInt88, readInt89);
+                    AidlInputGestureData[] customInputGestures = getCustomInputGestures(i90, i91);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(customInputGestures, 1);
                     return true;
@@ -2274,2093 +2274,2093 @@ public interface IInputManager extends IInterface {
 
             @Override // android.hardware.input.IInputManager
             public String getVelocityTrackerStrategy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public InputDevice getInputDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputDevice) obtain2.readTypedObject(InputDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputDevice) parcelObtain2.readTypedObject(InputDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int[] getInputDeviceIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void enableInputDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void disableInputDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void controlSpenWithToken(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean hasKeys(int i, int i2, int[] iArr, boolean[] zArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(zArr.length);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    boolean readBoolean = obtain2.readBoolean();
-                    obtain2.readBooleanArray(zArr);
-                    return readBoolean;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(zArr.length);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    boolean z = parcelObtain2.readBoolean();
+                    parcelObtain2.readBooleanArray(zArr);
+                    return z;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getKeyCodeForKeyLocation(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyCharacterMap getKeyCharacterMap(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyCharacterMap) obtain2.readTypedObject(KeyCharacterMap.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyCharacterMap) parcelObtain2.readTypedObject(KeyCharacterMap.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getMousePointerSpeed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void tryPointerSpeed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean injectInputEvent(InputEvent inputEvent, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputEvent, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputEvent, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean injectInputEventToTarget(InputEvent inputEvent, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputEvent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputEvent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public VerifiedInputEvent verifyInputEvent(InputEvent inputEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputEvent, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifiedInputEvent) obtain2.readTypedObject(VerifiedInputEvent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputEvent, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifiedInputEvent) parcelObtain2.readTypedObject(VerifiedInputEvent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public TouchCalibration getTouchCalibrationForInputDevice(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TouchCalibration) obtain2.readTypedObject(TouchCalibration.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TouchCalibration) parcelObtain2.readTypedObject(TouchCalibration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setTouchCalibrationForInputDevice(String str, int i, TouchCalibration touchCalibration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(touchCalibration, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(touchCalibration, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyboardLayout[] getKeyboardLayouts() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyboardLayout[]) obtain2.createTypedArray(KeyboardLayout.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyboardLayout[]) parcelObtain2.createTypedArray(KeyboardLayout.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyboardLayout getKeyboardLayout(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyboardLayout) obtain2.readTypedObject(KeyboardLayout.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyboardLayout) parcelObtain2.readTypedObject(KeyboardLayout.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputDeviceIdentifier, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(inputMethodInfo, 0);
-                    obtain.writeTypedObject(inputMethodSubtype, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyboardLayoutSelectionResult) obtain2.readTypedObject(KeyboardLayoutSelectionResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputDeviceIdentifier, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(inputMethodInfo, 0);
+                    parcelObtain.writeTypedObject(inputMethodSubtype, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyboardLayoutSelectionResult) parcelObtain2.readTypedObject(KeyboardLayoutSelectionResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setKeyboardLayoutOverrideForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputDeviceIdentifier, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputDeviceIdentifier, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputDeviceIdentifier, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(inputMethodInfo, 0);
-                    obtain.writeTypedObject(inputMethodSubtype, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputDeviceIdentifier, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(inputMethodInfo, 0);
+                    parcelObtain.writeTypedObject(inputMethodSubtype, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyboardLayout[] getKeyboardLayoutListForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputDeviceIdentifier, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(inputMethodInfo, 0);
-                    obtain.writeTypedObject(inputMethodSubtype, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyboardLayout[]) obtain2.createTypedArray(KeyboardLayout.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputDeviceIdentifier, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(inputMethodInfo, 0);
+                    parcelObtain.writeTypedObject(inputMethodSubtype, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyboardLayout[]) parcelObtain2.createTypedArray(KeyboardLayout.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void remapModifierKey(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void clearAllModifierKeyRemappings() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public Map getModifierKeyRemapping() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerInputDevicesChangedListener(IInputDevicesChangedListener iInputDevicesChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputDevicesChangedListener);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputDevicesChangedListener);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getLidState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerLidStateChangedListener(ISemLidStateChangedListener iSemLidStateChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemLidStateChangedListener);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemLidStateChangedListener);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public long getLastLidEventTimeNanos() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerSwitchEventChangedListener(ISwitchEventChangedListener iSwitchEventChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSwitchEventChangedListener);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSwitchEventChangedListener);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getCurrentSwitchEventState(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean supportPogoDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public String getInputDevicePath(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerMultiFingerGestureListener(IMultiFingerGestureListener iMultiFingerGestureListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMultiFingerGestureListener);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMultiFingerGestureListener);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int isInTabletMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerTabletModeChangedListener(ITabletModeChangedListener iTabletModeChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTabletModeChangedListener);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTabletModeChangedListener);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int isMicMuted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void vibrate(int i, VibrationEffect vibrationEffect, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(vibrationEffect, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(vibrationEffect, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void vibrateCombined(int i, CombinedVibration combinedVibration, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(combinedVibration, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(combinedVibration, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void cancelVibrate(int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int[] getVibratorIds(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean isVibrating(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVibratorStateListener);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVibratorStateListener);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVibratorStateListener);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVibratorStateListener);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public IInputDeviceBatteryState getBatteryState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IInputDeviceBatteryState) obtain2.readTypedObject(IInputDeviceBatteryState.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IInputDeviceBatteryState) parcelObtain2.readTypedObject(IInputDeviceBatteryState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean setPointerIcon(PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(pointerIcon, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pointerIcon, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setDefaultPointerIcon(int i, PointerIcon pointerIcon, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pointerIcon, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pointerIcon, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public PointerIcon getDefaultPointerIcon() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PointerIcon) obtain2.readTypedObject(PointerIcon.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PointerIcon) parcelObtain2.readTypedObject(PointerIcon.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public PointerIcon getForcedDefaultPointerIcon() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PointerIcon) obtain2.readTypedObject(PointerIcon.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PointerIcon) parcelObtain2.readTypedObject(PointerIcon.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean isDefaultPointerIconChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getToolTypeForDefaultPointerIcon() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerPointerIconChangedListener(IPointerIconChangedListener iPointerIconChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPointerIconChangedListener);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPointerIconChangedListener);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setDisplayIdForPointerIcon(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getDisplayIdForPointerIcon() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getPointerIconType() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setShowAllTouches(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void updateDeviceToGamepadProfile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeDeviceToGamepadProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeAllDeviceToGamepadProfile() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeAllGamepadProfiles() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeGamepadProfile(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean setGamepadProfileName(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean setRemapGamepadButton(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean setRemapGamepadStick(int i, int i2, int i3, boolean z, boolean z2, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public String getSupportButtonNStick() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public String getGamepadProfile(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int[] getGamepadProfileIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void requestPointerCapture(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(68, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(68, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public InputMonitor monitorGestureInput(IBinder iBinder, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMonitor) obtain2.readTypedObject(InputMonitor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMonitor) parcelObtain2.readTypedObject(InputMonitor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public InputMonitor monitorGestureInputFiltered(IBinder iBinder, String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMonitor) obtain2.readTypedObject(InputMonitor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMonitor) parcelObtain2.readTypedObject(InputMonitor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public InputChannel monitorInputForBinder(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputChannel) obtain2.readTypedObject(InputChannel.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputChannel) parcelObtain2.readTypedObject(InputChannel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean setTspEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getInboundQueueLength() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int checkInputFeature() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setStartedShutdown(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getScanCodeState(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setWakeKeyDynamically(String str, boolean z, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int getGlobalMetaState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public long semGetMotionIdleTimeMillis(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean isUidTouched(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void forceFadeIcon(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void notifyQuickAccess(int i, float f, float f2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerWirelessKeyboardShareChangedListener(IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWirelessKeyboardShareChangedListener);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWirelessKeyboardShareChangedListener);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void updateWirelessKeyboardShareStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeDeviceWirelessKeyboardShare(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void changeDeviceWirelessKeyboardShare(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean addDeviceWirelessKeyboardShare(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean switchDeviceWirelessKeyboardShare(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setHostRoleWirelessKeyboardShare() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void connectByBtDevice(BluetoothDevice bluetoothDevice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothDevice, 0);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothDevice, 0);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void addPortAssociation(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removePortAssociation(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void addUniqueIdAssociationByDescriptor(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeUniqueIdAssociationByDescriptor(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void addUniqueIdAssociationByPort(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeUniqueIdAssociationByPort(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public InputSensorInfo[] getSensorList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputSensorInfo[]) obtain2.createTypedArray(InputSensorInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputSensorInfo[]) parcelObtain2.createTypedArray(InputSensorInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean registerSensorListener(IInputSensorEventListener iInputSensorEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputSensorEventListener);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputSensorEventListener);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterSensorListener(IInputSensorEventListener iInputSensorEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputSensorEventListener);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputSensorEventListener);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean enableSensor(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void disableSensor(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean flushSensor(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public List<Light> getLights(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Light.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Light.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public LightState getLightState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LightState) obtain2.readTypedObject(LightState.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LightState) parcelObtain2.readTypedObject(LightState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void setLightStates(int i, int[] iArr, LightState[] lightStateArr, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedArray(lightStateArr, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedArray(lightStateArr, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void openLightSession(int i, String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(106, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(106, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void closeLightSession(int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void cancelCurrentTouch() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iInputDeviceBatteryListener);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iInputDeviceBatteryListener);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iInputDeviceBatteryListener);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iInputDeviceBatteryListener);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean registerKeyEventActivityListener(IKeyEventActivityListener iKeyEventActivityListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyEventActivityListener);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyEventActivityListener);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public boolean unregisterKeyEventActivityListener(IKeyEventActivityListener iKeyEventActivityListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyEventActivityListener);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyEventActivityListener);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public String getInputDeviceBluetoothAddress(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void pilferPointers(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(114, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(114, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyboardBacklightListener);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyboardBacklightListener);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyboardBacklightListener);
-                    this.mRemote.transact(116, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyboardBacklightListener);
+                    this.mRemote.transact(116, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public HostUsiVersion getHostUsiVersionFromDisplayConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(117, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (HostUsiVersion) obtain2.readTypedObject(HostUsiVersion.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(117, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (HostUsiVersion) parcelObtain2.readTypedObject(HostUsiVersion.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStickyModifierStateListener);
-                    this.mRemote.transact(118, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStickyModifierStateListener);
+                    this.mRemote.transact(118, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStickyModifierStateListener);
-                    this.mRemote.transact(119, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStickyModifierStateListener);
+                    this.mRemote.transact(119, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public KeyGlyphMap getKeyGlyphMap(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(120, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyGlyphMap) obtain2.readTypedObject(KeyGlyphMap.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(120, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyGlyphMap) parcelObtain2.readTypedObject(KeyGlyphMap.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerKeyGestureEventListener(IKeyGestureEventListener iKeyGestureEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyGestureEventListener);
-                    this.mRemote.transact(121, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyGestureEventListener);
+                    this.mRemote.transact(121, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterKeyGestureEventListener(IKeyGestureEventListener iKeyGestureEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyGestureEventListener);
-                    this.mRemote.transact(122, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyGestureEventListener);
+                    this.mRemote.transact(122, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void registerKeyGestureHandler(int[] iArr, IKeyGestureHandler iKeyGestureHandler) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStrongInterface(iKeyGestureHandler);
-                    this.mRemote.transact(123, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStrongInterface(iKeyGestureHandler);
+                    this.mRemote.transact(123, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void unregisterKeyGestureHandler(IKeyGestureHandler iKeyGestureHandler) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyGestureHandler);
-                    this.mRemote.transact(124, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyGestureHandler);
+                    this.mRemote.transact(124, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public AidlInputGestureData getInputGesture(int i, AidlInputGestureData.Trigger trigger) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(trigger, 0);
-                    this.mRemote.transact(125, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AidlInputGestureData) obtain2.readTypedObject(AidlInputGestureData.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(trigger, 0);
+                    this.mRemote.transact(125, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AidlInputGestureData) parcelObtain2.readTypedObject(AidlInputGestureData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int addCustomInputGesture(int i, AidlInputGestureData aidlInputGestureData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(aidlInputGestureData, 0);
-                    this.mRemote.transact(126, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(aidlInputGestureData, 0);
+                    this.mRemote.transact(126, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public int removeCustomInputGesture(int i, AidlInputGestureData aidlInputGestureData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(aidlInputGestureData, 0);
-                    this.mRemote.transact(127, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(aidlInputGestureData, 0);
+                    this.mRemote.transact(127, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void removeAllCustomInputGestures(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(128, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(128, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public AidlInputGestureData[] getCustomInputGestures(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(129, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AidlInputGestureData[]) obtain2.createTypedArray(AidlInputGestureData.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(129, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AidlInputGestureData[]) parcelObtain2.createTypedArray(AidlInputGestureData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public AidlInputGestureData[] getAppLaunchBookmarks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(130, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AidlInputGestureData[]) obtain2.createTypedArray(AidlInputGestureData.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(130, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AidlInputGestureData[]) parcelObtain2.createTypedArray(AidlInputGestureData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.input.IInputManager
             public void resetLockedModifierState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(131, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(131, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

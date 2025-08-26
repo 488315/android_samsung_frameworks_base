@@ -40,9 +40,9 @@ public interface IVDCObserverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVDCObserverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVDCObserverService)) {
-                return (IVDCObserverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVDCObserverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVDCObserverService)) {
+                return (IVDCObserverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

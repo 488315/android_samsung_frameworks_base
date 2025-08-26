@@ -73,14 +73,14 @@ public class Movie {
         }
     }
 
-    private static Movie decodeTempStream(InputStream inputStream) {
+    private static Movie decodeTempStream(InputStream inputStream) throws IOException {
         try {
-            Movie decodeStream = decodeStream(inputStream);
+            Movie movieDecodeStream = decodeStream(inputStream);
             try {
                 inputStream.close();
-                return decodeStream;
+                return movieDecodeStream;
             } catch (IOException unused) {
-                return decodeStream;
+                return movieDecodeStream;
             }
         } catch (IOException unused2) {
             return null;

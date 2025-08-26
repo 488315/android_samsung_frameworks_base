@@ -164,9 +164,9 @@ public interface IPower extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPower)) {
-                return (IPower) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPower)) {
+                return (IPower) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -240,40 +240,40 @@ public interface IPower extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMode(readInt, readBoolean);
+                    setMode(i3, z);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isModeSupported = isModeSupported(readInt2);
+                    boolean zIsModeSupported = isModeSupported(i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isModeSupported);
+                    parcel2.writeBoolean(zIsModeSupported);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBoost(readInt3, readInt4);
+                    setBoost(i5, i6);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isBoostSupported = isBoostSupported(readInt5);
+                    boolean zIsBoostSupported = isBoostSupported(i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBoostSupported);
+                    parcel2.writeBoolean(zIsBoostSupported);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
-                    long readLong = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    IPowerHintSession createHintSession = createHintSession(readInt6, readInt7, createIntArray, readLong);
+                    IPowerHintSession iPowerHintSessionCreateHintSession = createHintSession(i8, i9, iArrCreateIntArray, j);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createHintSession);
+                    parcel2.writeStrongInterface(iPowerHintSessionCreateHintSession);
                     return true;
                 case 6:
                     long hintSessionPreferredRate = getHintSessionPreferredRate();
@@ -281,31 +281,31 @@ public interface IPower extends IInterface {
                     parcel2.writeLong(hintSessionPreferredRate);
                     return true;
                 case 7:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    long readLong2 = parcel.readLong();
-                    int readInt10 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    long j2 = parcel.readLong();
+                    int i12 = parcel.readInt();
                     SessionConfig sessionConfig = new SessionConfig();
                     parcel.enforceNoDataAvail();
-                    IPowerHintSession createHintSessionWithConfig = createHintSessionWithConfig(readInt8, readInt9, createIntArray2, readLong2, readInt10, sessionConfig);
+                    IPowerHintSession iPowerHintSessionCreateHintSessionWithConfig = createHintSessionWithConfig(i10, i11, iArrCreateIntArray2, j2, i12, sessionConfig);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createHintSessionWithConfig);
+                    parcel2.writeStrongInterface(iPowerHintSessionCreateHintSessionWithConfig);
                     parcel2.writeTypedObject(sessionConfig, 1);
                     return true;
                 case 8:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ChannelConfig sessionChannel = getSessionChannel(readInt11, readInt12);
+                    ChannelConfig sessionChannel = getSessionChannel(i13, i14);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sessionChannel, 1);
                     return true;
                 case 9:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    closeSessionChannel(readInt13, readInt14);
+                    closeSessionChannel(i15, i16);
                     return true;
                 case 10:
                     SupportInfo supportInfo = getSupportInfo();
@@ -361,267 +361,267 @@ public interface IPower extends IInterface {
 
             @Override // android.hardware.power.IPower
             public void setMode(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public boolean isModeSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isModeSupported is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public void setBoost(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setBoost is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public boolean isBoostSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isBoostSupported is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public IPowerHintSession createHintSession(int i, int i2, int[] iArr, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeLong(j);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeLong(j);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method createHintSession is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IPowerHintSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IPowerHintSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public long getHintSessionPreferredRate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getHintSessionPreferredRate is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public IPowerHintSession createHintSessionWithConfig(int i, int i2, int[] iArr, long j, int i3, SessionConfig sessionConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i3);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i3);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method createHintSessionWithConfig is unimplemented.");
                     }
-                    obtain2.readException();
-                    IPowerHintSession asInterface = IPowerHintSession.Stub.asInterface(obtain2.readStrongBinder());
-                    if (obtain2.readInt() != 0) {
-                        sessionConfig.readFromParcel(obtain2);
+                    parcelObtain2.readException();
+                    IPowerHintSession iPowerHintSessionAsInterface = IPowerHintSession.Stub.asInterface(parcelObtain2.readStrongBinder());
+                    if (parcelObtain2.readInt() != 0) {
+                        sessionConfig.readFromParcel(parcelObtain2);
                     }
-                    return asInterface;
+                    return iPowerHintSessionAsInterface;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public ChannelConfig getSessionChannel(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSessionChannel is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (ChannelConfig) obtain2.readTypedObject(ChannelConfig.CREATOR);
+                    parcelObtain2.readException();
+                    return (ChannelConfig) parcelObtain2.readTypedObject(ChannelConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public void closeSessionChannel(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method closeSessionChannel is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public SupportInfo getSupportInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getSupportInfo is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (SupportInfo) obtain2.readTypedObject(SupportInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return (SupportInfo) parcelObtain2.readTypedObject(SupportInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public CpuHeadroomResult getCpuHeadroom(CpuHeadroomParams cpuHeadroomParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(cpuHeadroomParams, 0);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cpuHeadroomParams, 0);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCpuHeadroom is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (CpuHeadroomResult) obtain2.readTypedObject(CpuHeadroomResult.CREATOR);
+                    parcelObtain2.readException();
+                    return (CpuHeadroomResult) parcelObtain2.readTypedObject(CpuHeadroomResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public GpuHeadroomResult getGpuHeadroom(GpuHeadroomParams gpuHeadroomParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(gpuHeadroomParams, 0);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gpuHeadroomParams, 0);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getGpuHeadroom is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (GpuHeadroomResult) obtain2.readTypedObject(GpuHeadroomResult.CREATOR);
+                    parcelObtain2.readException();
+                    return (GpuHeadroomResult) parcelObtain2.readTypedObject(GpuHeadroomResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public void sendCompositionData(CompositionData[] compositionDataArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedArray(compositionDataArr, 0);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedArray(compositionDataArr, 0);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCompositionData is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public void sendCompositionUpdate(CompositionUpdate compositionUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(compositionUpdate, 0);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compositionUpdate, 0);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCompositionUpdate is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.power.IPower
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -630,18 +630,18 @@ public interface IPower extends IInterface {
             @Override // android.hardware.power.IPower
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

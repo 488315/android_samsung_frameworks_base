@@ -132,7 +132,7 @@ public final class InCallAdapter {
         @Override // android.os.ResultReceiver
         protected void onReceiveResult(int i, final Bundle bundle) {
             super.onReceiveResult(i, bundle);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (i == 0) {
                     Executor executor = this.val$executor;
@@ -140,7 +140,7 @@ public final class InCallAdapter {
                     executor.execute(new Runnable() { // from class: android.telecom.InCallAdapter$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onResult(null);
+                            outcomeReceiver.onResult(null);
                         }
                     });
                 } else {
@@ -149,12 +149,12 @@ public final class InCallAdapter {
                     executor2.execute(new Runnable() { // from class: android.telecom.InCallAdapter$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onError((CallEndpointException) bundle.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
+                            outcomeReceiver2.onError((CallEndpointException) bundle.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
                         }
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

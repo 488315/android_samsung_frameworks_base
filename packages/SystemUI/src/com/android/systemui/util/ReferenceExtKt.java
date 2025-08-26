@@ -6,11 +6,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import kotlin.properties.ReadWriteProperty;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ReferenceExtKt {
-    public static final <T> ReadWriteProperty nullableAtomicReference(final T t) {
-        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt$nullableAtomicReference$1
+    public static final <T> ReadWriteProperty nullableAtomicReference(T t) {
+        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt.nullableAtomicReference.1
             private final AtomicReference<Object> t;
 
             {
@@ -40,8 +39,8 @@ public final class ReferenceExtKt {
         return nullableAtomicReference(obj);
     }
 
-    public static final <T> ReadWriteProperty softReference(final T t) {
-        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt$softReference$1
+    public static final <T> ReadWriteProperty softReference(T t) {
+        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt.softReference.1
             private SoftReference<Object> softRef;
 
             {
@@ -75,8 +74,8 @@ public final class ReferenceExtKt {
         return softReference(obj);
     }
 
-    public static final <T> ReadWriteProperty weakReference(final T t) {
-        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt$weakReference$1
+    public static final <T> ReadWriteProperty weakReference(T t) {
+        return new ReadWriteProperty(t) { // from class: com.android.systemui.util.ReferenceExtKt.weakReference.1
             private WeakReference<Object> weakRef;
 
             {

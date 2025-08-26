@@ -3,7 +3,6 @@ package androidx.emoji2.viewsintegration;
 import android.text.Editable;
 import androidx.emoji2.text.SpannableBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiEditableFactory extends Editable.Factory {
     public static final Object INSTANCE_LOCK = new Object();

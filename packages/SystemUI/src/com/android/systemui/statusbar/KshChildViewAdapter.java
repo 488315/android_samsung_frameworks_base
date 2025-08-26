@@ -2,7 +2,11 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.util.Log;
+import android.util.SparseArray;
+import android.view.KeyboardShortcutInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.model.KshData;
 import com.android.systemui.statusbar.model.KshDataUtils;
+import com.android.systemui.statusbar.model.StringDrawableContainer;
+import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KshChildViewAdapter extends RecyclerView.Adapter {
     public List mData;
@@ -24,7 +29,6 @@ public class KshChildViewAdapter extends RecyclerView.Adapter {
     public KshData mKshData;
     public final KshDataUtils mKshDataUtils;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView iconView;
         public final TextView keywordView;
@@ -53,21 +57,99 @@ public class KshChildViewAdapter extends RecyclerView.Adapter {
         return this.mData.size();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x00c6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:36:0x00c6, code lost:
     
         if (r15 == null) goto L39;
      */
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 294
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KshChildViewAdapter.onBindViewHolder(androidx.recyclerview.widget.RecyclerView$ViewHolder, int):void");
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        ViewHolder viewHolder2 = (ViewHolder) viewHolder;
+        KeyboardShortcutInfo keyboardShortcutInfo = (KeyboardShortcutInfo) this.mData.get(i);
+        ImageView imageView = viewHolder2.iconView;
+        Icon icon = keyboardShortcutInfo.getIcon();
+        if (icon != null) {
+            imageView.setImageIcon(icon);
+            if (this.mKshData.mDefaultIcons.containsKey(icon)) {
+                imageView.setBackgroundResource(R.drawable.ksh_no_default_app_background);
+            }
+            imageView.setVisibility(0);
+        }
+        viewHolder2.keywordView.setText(keyboardShortcutInfo.getLabel());
+        LinearLayout linearLayout = viewHolder2.shortcutKeysContainer;
+        linearLayout.removeAllViews();
+        KshData kshData = this.mKshData;
+        KshDataUtils kshDataUtils = this.mKshDataUtils;
+        kshDataUtils.getClass();
+        ArrayList arrayList = new ArrayList();
+        int modifiers = keyboardShortcutInfo.getModifiers();
+        ArrayList arrayList2 = null;
+        if (modifiers != 0) {
+            SparseArray sparseArray = kshData.mModifierNames;
+            SparseArray sparseArray2 = kshData.mModifierDrawables;
+            int i2 = 0;
+            while (true) {
+                int[] iArr = kshDataUtils.mModifierList;
+                if (i2 >= iArr.length) {
+                    break;
+                }
+                int i3 = iArr[i2];
+                if ((modifiers & i3) != 0) {
+                    arrayList.add(new StringDrawableContainer((String) sparseArray.get(i3), (Drawable) sparseArray2.get(i3), null));
+                    modifiers &= ~i3;
+                }
+                i2++;
+            }
+            if (modifiers != 0) {
+                arrayList = null;
+            }
+        }
+        if (arrayList != null) {
+            int keycode = keyboardShortcutInfo.getKeycode();
+            Drawable drawable = (Drawable) kshData.mSpecialCharacterDrawables.get(keycode);
+            String str = (String) kshData.mSpecialCharacterDrawableDescriptions.get(keycode);
+            String strValueOf = keyboardShortcutInfo.getBaseCharacter() > 0 ? String.valueOf(keyboardShortcutInfo.getBaseCharacter()) : (String) kshData.mSpecialCharacterNames.get(keycode);
+            if (strValueOf != null) {
+                arrayList.add(new StringDrawableContainer(strValueOf, drawable, str));
+                arrayList2 = arrayList;
+            } else if (keycode != 0) {
+                char displayLabel = kshData.mKeyCharacterMap.getDisplayLabel(keycode);
+                if (displayLabel != 0) {
+                    strValueOf = String.valueOf(displayLabel);
+                } else {
+                    char displayLabel2 = kshData.mBackupKeyCharacterMap.getDisplayLabel(keycode);
+                    strValueOf = displayLabel2 != 0 ? String.valueOf(displayLabel2) : null;
+                }
+            } else {
+                arrayList2 = arrayList;
+            }
+        }
+        if (arrayList2 == null) {
+            Log.w("KshChildViewAdapter", "Keyboard Shortcut contains unsupported keys, skipping.");
+            return;
+        }
+        for (int i4 = 0; i4 < arrayList2.size(); i4++) {
+            StringDrawableContainer stringDrawableContainer = (StringDrawableContainer) arrayList2.get(i4);
+            if (stringDrawableContainer.mDrawable != null) {
+                ImageView imageView2 = (ImageView) this.mInflater.inflate(R.layout.samsung_keyboard_shortcuts_key_icon_view, (ViewGroup) linearLayout, false);
+                imageView2.setImageDrawable(stringDrawableContainer.mDrawable);
+                imageView2.setContentDescription(stringDrawableContainer.mDrawableDescription);
+                linearLayout.addView(imageView2);
+            } else {
+                String str2 = stringDrawableContainer.mString;
+                if (str2 != null) {
+                    TextView textView = (TextView) this.mInflater.inflate(R.layout.samsung_keyboard_shortcuts_key_view, (ViewGroup) linearLayout, false);
+                    Typeface typeface = this.mDefaultFont;
+                    if (typeface != null) {
+                        textView.setTypeface(typeface);
+                    }
+                    textView.setText(str2);
+                    linearLayout.addView(textView);
+                }
+            }
+        }
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

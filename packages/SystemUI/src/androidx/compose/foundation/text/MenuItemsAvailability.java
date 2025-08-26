@@ -3,13 +3,11 @@ package androidx.compose.foundation.text;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MenuItemsAvailability {
     public static final Companion Companion = new Companion(null);
     public final int value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,7 +22,7 @@ public final class MenuItemsAvailability {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ MenuItemsAvailability m199boximpl(int i) {
+    public static final /* synthetic */ MenuItemsAvailability m200boximpl(int i) {
         return new MenuItemsAvailability(i);
     }
 

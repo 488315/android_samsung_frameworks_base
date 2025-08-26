@@ -105,17 +105,17 @@ public abstract class SoundTriggerDetectionService extends Service {
 
         @Override // android.media.soundtrigger.ISoundTriggerDetectionService
         public void removeClient(ParcelUuid parcelUuid) {
-            Bundle remove;
+            Bundle bundleRemove;
             UUID uuid = parcelUuid.getUuid();
             synchronized (this.mBinderLock) {
-                remove = this.mParams.remove(uuid);
+                bundleRemove = this.mParams.remove(uuid);
             }
             SoundTriggerDetectionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.media.soundtrigger.SoundTriggerDetectionService$1$$ExternalSyntheticLambda3
                 @Override // com.android.internal.util.function.TriConsumer
                 public final void accept(Object obj, Object obj2, Object obj3) {
                     ((SoundTriggerDetectionService) obj).removeClient((UUID) obj2, (Bundle) obj3);
                 }
-            }, SoundTriggerDetectionService.this, uuid, remove));
+            }, SoundTriggerDetectionService.this, uuid, bundleRemove));
         }
 
         @Override // android.media.soundtrigger.ISoundTriggerDetectionService

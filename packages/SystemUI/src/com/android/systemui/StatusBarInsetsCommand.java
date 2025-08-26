@@ -11,18 +11,15 @@ import kotlin.jvm.internal.PropertyReference1Impl;
 import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class StatusBarInsetsCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public final OptionalSubCommand bottomMargin$delegate;
     public final Callback callback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,6 +36,7 @@ public final class StatusBarInsetsCommand extends ParseableCommand {
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public StatusBarInsetsCommand(Callback callback) {
         super("status-bar-insets", null, 2, 0 == true ? 1 : 0);
         this.callback = callback;
@@ -65,9 +63,9 @@ public final class StatusBarInsetsCommand extends ParseableCommand {
                 printWriter.println("Margin bottom not set.");
                 return;
             }
-            float floatValue = f.floatValue();
+            float fFloatValue = f.floatValue();
             statusBarContentInsetsProviderImpl.insetsCache.evictAll();
-            statusBarContentInsetsProviderImpl.marginBottomOverrides.put(num, Integer.valueOf((int) (floatValue * statusBarContentInsetsProviderImpl.context.getResources().getDisplayMetrics().density)));
+            statusBarContentInsetsProviderImpl.marginBottomOverrides.put(num, Integer.valueOf((int) (fFloatValue * statusBarContentInsetsProviderImpl.context.getResources().getDisplayMetrics().density)));
             statusBarContentInsetsProviderImpl.notifyInsetsChanged();
         }
     }

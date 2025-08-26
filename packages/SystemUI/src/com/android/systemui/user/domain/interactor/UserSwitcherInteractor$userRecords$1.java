@@ -2,13 +2,21 @@ package com.android.systemui.user.domain.interactor;
 
 import android.content.pm.UserInfo;
 import com.android.systemui.user.data.model.UserSwitcherSettingsModel;
+import com.android.systemui.user.data.source.UserRecord;
+import com.android.systemui.user.shared.model.UserActionModel;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherInteractor$userRecords$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -37,22 +45,123 @@ final class UserSwitcherInteractor$userRecords$1 extends SuspendLambda implement
         return userSwitcherInteractor$userRecords$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0108  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00ce  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x0100 -> B:6:0x0101). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:34:0x00a5 -> B:29:0x00a6). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x00ce  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0108  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x00a5 -> B:17:0x00a6). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:34:0x0100 -> B:35:0x0101). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r12) {
-        /*
-            Method dump skipped, instructions count: 278
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.domain.interactor.UserSwitcherInteractor$userRecords$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        UserSwitcherInteractor userSwitcherInteractor;
+        UserInfo userInfo;
+        List list;
+        Collection arrayList;
+        Iterator it;
+        UserSwitcherSettingsModel userSwitcherSettingsModel;
+        Collection collection;
+        Collection arrayList2;
+        Iterator it2;
+        UserSwitcherInteractor userSwitcherInteractor2;
+        UserInfo userInfo2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            List list2 = (List) this.L$0;
+            UserInfo userInfo3 = (UserInfo) this.L$1;
+            List list3 = (List) this.L$2;
+            UserSwitcherSettingsModel userSwitcherSettingsModel2 = (UserSwitcherSettingsModel) this.L$3;
+            List list4 = list2;
+            userSwitcherInteractor = this.this$0;
+            userInfo = userInfo3;
+            list = list3;
+            arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list4, 10));
+            it = list4.iterator();
+            userSwitcherSettingsModel = userSwitcherSettingsModel2;
+            if (it.hasNext()) {
+            }
+        } else if (i == 1) {
+            arrayList = (Collection) this.L$6;
+            it = (Iterator) this.L$5;
+            Collection collection2 = (Collection) this.L$4;
+            userSwitcherInteractor = (UserSwitcherInteractor) this.L$3;
+            userSwitcherSettingsModel = (UserSwitcherSettingsModel) this.L$2;
+            list = (List) this.L$1;
+            userInfo = (UserInfo) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            arrayList.add((UserRecord) obj);
+            arrayList = collection2;
+            if (it.hasNext()) {
+                UserInfo userInfo4 = (UserInfo) it.next();
+                int i2 = userInfo.id;
+                this.L$0 = userInfo;
+                this.L$1 = list;
+                this.L$2 = userSwitcherSettingsModel;
+                this.L$3 = userSwitcherInteractor;
+                this.L$4 = arrayList;
+                this.L$5 = it;
+                this.L$6 = arrayList;
+                this.label = 1;
+                obj = UserSwitcherInteractor.access$toRecord(userSwitcherInteractor, userInfo4, i2, this);
+                if (obj != coroutineSingletons) {
+                    collection2 = arrayList;
+                    arrayList.add((UserRecord) obj);
+                    arrayList = collection2;
+                    if (it.hasNext()) {
+                        List list5 = list;
+                        UserSwitcherInteractor userSwitcherInteractor3 = this.this$0;
+                        collection = (List) arrayList;
+                        arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list5, 10));
+                        it2 = list5.iterator();
+                        userSwitcherInteractor2 = userSwitcherInteractor3;
+                        userInfo2 = userInfo;
+                        if (it2.hasNext()) {
+                        }
+                    }
+                }
+                return coroutineSingletons;
+            }
+        } else {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            arrayList2 = (Collection) this.L$6;
+            collection = (Collection) this.L$5;
+            it2 = (Iterator) this.L$4;
+            Collection collection3 = (Collection) this.L$3;
+            userSwitcherInteractor2 = (UserSwitcherInteractor) this.L$2;
+            userSwitcherSettingsModel = (UserSwitcherSettingsModel) this.L$1;
+            userInfo2 = (UserInfo) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            arrayList2.add((UserRecord) obj);
+            arrayList2 = collection3;
+            if (it2.hasNext()) {
+                UserActionModel userActionModel = (UserActionModel) it2.next();
+                int i3 = userInfo2.id;
+                boolean z = (userActionModel == UserActionModel.SIGN_OUT || userActionModel == UserActionModel.ENTER_GUEST_MODE || userActionModel == UserActionModel.NAVIGATE_TO_USER_MANAGEMENT || userSwitcherSettingsModel.isAddUsersFromLockscreen) ? false : true;
+                this.L$0 = userInfo2;
+                this.L$1 = userSwitcherSettingsModel;
+                this.L$2 = userSwitcherInteractor2;
+                this.L$3 = arrayList2;
+                this.L$4 = it2;
+                this.L$5 = collection;
+                this.L$6 = arrayList2;
+                this.label = 2;
+                obj = UserSwitcherInteractor.access$toRecord(userSwitcherInteractor2, userActionModel, i3, z, this);
+                if (obj != coroutineSingletons) {
+                    collection3 = arrayList2;
+                    arrayList2.add((UserRecord) obj);
+                    arrayList2 = collection3;
+                    if (it2.hasNext()) {
+                        return new ArrayList(CollectionsKt___CollectionsKt.plus(arrayList2, collection));
+                    }
+                }
+                return coroutineSingletons;
+            }
+        }
     }
 }

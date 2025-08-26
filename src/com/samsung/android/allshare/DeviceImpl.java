@@ -27,12 +27,12 @@ final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
                 DLog.w_api(DeviceImpl.TAG, "handleResponseMessage : actionID == null || resBundle == null");
                 return;
             }
-            ERROR error = ERROR.FAIL;
+            ERROR errorStringToEnum = ERROR.FAIL;
             String string = bundle.getString("BUNDLE_ENUM_ERROR");
             if (string != null) {
-                error = ERROR.stringToEnum(string);
+                errorStringToEnum = ERROR.stringToEnum(string);
             }
-            if (actionID.equals(AllShareAction.ACTION_REQUEST_MOBILE_TO_TV) && error.equals(ERROR.SUCCESS)) {
+            if (actionID.equals(AllShareAction.ACTION_REQUEST_MOBILE_TO_TV) && errorStringToEnum.equals(ERROR.SUCCESS)) {
                 DLog.w_api(DeviceImpl.TAG, "handleResponseMessage : actionID :ACTION_REQUEST_MOBILE_TO_TV response SUCCESS");
             }
         }
@@ -97,8 +97,8 @@ final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
 
     @Override // com.samsung.android.allshare.Device
     public Device.DeviceType getDeviceType() {
-        Device.DeviceType stringToEnum = Device.DeviceType.stringToEnum(this.mDeviceBundle.getString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE));
-        return stringToEnum == null ? Device.DeviceType.UNKNOWN : stringToEnum;
+        Device.DeviceType deviceTypeStringToEnum = Device.DeviceType.stringToEnum(this.mDeviceBundle.getString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE));
+        return deviceTypeStringToEnum == null ? Device.DeviceType.UNKNOWN : deviceTypeStringToEnum;
     }
 
     @Override // com.samsung.android.allshare.Device
@@ -109,8 +109,8 @@ final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
 
     @Override // com.samsung.android.allshare.Device
     public Device.DeviceDomain getDeviceDomain() {
-        Device.DeviceDomain stringToEnum = Device.DeviceDomain.stringToEnum(this.mDeviceBundle.getString(AllShareKey.BUNDLE_ENUM_DEVICE_DOMAIN));
-        return stringToEnum == null ? Device.DeviceDomain.UNKNOWN : stringToEnum;
+        Device.DeviceDomain deviceDomainStringToEnum = Device.DeviceDomain.stringToEnum(this.mDeviceBundle.getString(AllShareKey.BUNDLE_ENUM_DEVICE_DOMAIN));
+        return deviceDomainStringToEnum == null ? Device.DeviceDomain.UNKNOWN : deviceDomainStringToEnum;
     }
 
     @Override // com.sec.android.allshare.iface.IBundleHolder
@@ -197,8 +197,8 @@ final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
             return "";
         }
         String lowerCase = string.toLowerCase();
-        int indexOf = lowerCase.indexOf("ScreenMirroringP2PMAC=".toLowerCase());
-        return lowerCase.substring(indexOf + 22, indexOf + 39);
+        int iIndexOf = lowerCase.indexOf("ScreenMirroringP2PMAC=".toLowerCase());
+        return lowerCase.substring(iIndexOf + 22, iIndexOf + 39);
     }
 
     /* renamed from: com.samsung.android.allshare.DeviceImpl$2, reason: invalid class name */
@@ -234,10 +234,10 @@ final class DeviceImpl extends Device implements IBundleHolder, IHandlerHolder {
             return "";
         }
         String lowerCase = string.toLowerCase();
-        int indexOf = lowerCase.indexOf("p2pDeviceAddress:".toLowerCase());
-        String substring = lowerCase.substring(indexOf + 17, indexOf + 34);
-        DLog.w_api(TAG, "getScreenSharingInfo macAddress : " + substring);
-        return substring;
+        int iIndexOf = lowerCase.indexOf("p2pDeviceAddress:".toLowerCase());
+        String strSubstring = lowerCase.substring(iIndexOf + 17, iIndexOf + 34);
+        DLog.w_api(TAG, "getScreenSharingInfo macAddress : " + strSubstring);
+        return strSubstring;
     }
 
     @Override // com.samsung.android.allshare.Device

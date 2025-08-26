@@ -6,6 +6,7 @@ import android.util.Printer;
 import android.util.Slog;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -31,12 +32,12 @@ public class InputMethodSubtypeArray {
     }
 
     public InputMethodSubtypeArray(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mCount = readInt;
-        if (readInt < 0) {
+        int i = parcel.readInt();
+        this.mCount = i;
+        if (i < 0) {
             throw new BadParcelableException("mCount must be non-negative.");
         }
-        if (readInt > 0) {
+        if (i > 0) {
             this.mDecompressedSize = parcel.readInt();
             this.mCompressedData = parcel.createByteArray();
         }
@@ -56,18 +57,18 @@ public class InputMethodSubtypeArray {
                 bArr = this.mCompressedData;
                 i2 = this.mDecompressedSize;
                 if (bArr == null && i2 == 0) {
-                    byte[] marshall = marshall(this.mInstance);
-                    byte[] compress = compress(marshall);
-                    if (compress == null) {
+                    byte[] bArrMarshall = marshall(this.mInstance);
+                    byte[] bArrCompress = compress(bArrMarshall);
+                    if (bArrCompress == null) {
                         Slog.i(TAG, "Failed to compress data.");
                         length = -1;
                     } else {
-                        length = marshall.length;
+                        length = bArrMarshall.length;
                     }
                     this.mDecompressedSize = length;
-                    this.mCompressedData = compress;
+                    this.mCompressedData = bArrCompress;
                     i2 = length;
-                    bArr = compress;
+                    bArr = bArrCompress;
                 }
             }
         }
@@ -85,25 +86,25 @@ public class InputMethodSubtypeArray {
         if (i < 0 || this.mCount <= i) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        InputMethodSubtype[] inputMethodSubtypeArr = this.mInstance;
-        if (inputMethodSubtypeArr == null) {
+        InputMethodSubtype[] inputMethodSubtypeArrUnmarshall = this.mInstance;
+        if (inputMethodSubtypeArrUnmarshall == null) {
             synchronized (this.mLockObject) {
-                inputMethodSubtypeArr = this.mInstance;
-                if (inputMethodSubtypeArr == null) {
-                    byte[] decompress = decompress(this.mCompressedData, this.mDecompressedSize);
+                inputMethodSubtypeArrUnmarshall = this.mInstance;
+                if (inputMethodSubtypeArrUnmarshall == null) {
+                    byte[] bArrDecompress = decompress(this.mCompressedData, this.mDecompressedSize);
                     this.mCompressedData = null;
                     this.mDecompressedSize = 0;
-                    if (decompress != null) {
-                        inputMethodSubtypeArr = unmarshall(decompress);
+                    if (bArrDecompress != null) {
+                        inputMethodSubtypeArrUnmarshall = unmarshall(bArrDecompress);
                     } else {
                         Slog.e(TAG, "Failed to decompress data. Returns null as fallback.");
-                        inputMethodSubtypeArr = new InputMethodSubtype[this.mCount];
+                        inputMethodSubtypeArrUnmarshall = new InputMethodSubtype[this.mCount];
                     }
-                    this.mInstance = inputMethodSubtypeArr;
+                    this.mInstance = inputMethodSubtypeArrUnmarshall;
                 }
             }
         }
-        return inputMethodSubtypeArr[i];
+        return inputMethodSubtypeArrUnmarshall[i];
     }
 
     public ArrayList<InputMethodSubtype> toList() {
@@ -131,56 +132,56 @@ public class InputMethodSubtypeArray {
         }
     }
 
-    private static byte[] marshall(InputMethodSubtype[] inputMethodSubtypeArr) {
-        Parcel parcel;
+    private static byte[] marshall(InputMethodSubtype[] inputMethodSubtypeArr) throws Throwable {
+        Parcel parcelObtain;
         try {
-            parcel = Parcel.obtain();
-        } catch (Throwable th) {
-            th = th;
-            parcel = null;
-        }
-        try {
-            parcel.writeTypedArray(inputMethodSubtypeArr, 0);
-            byte[] marshall = parcel.marshall();
-            if (parcel != null) {
-                parcel.recycle();
+            parcelObtain = Parcel.obtain();
+            try {
+                parcelObtain.writeTypedArray(inputMethodSubtypeArr, 0);
+                byte[] bArrMarshall = parcelObtain.marshall();
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                return bArrMarshall;
+            } catch (Throwable th) {
+                th = th;
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                throw th;
             }
-            return marshall;
         } catch (Throwable th2) {
             th = th2;
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            throw th;
+            parcelObtain = null;
         }
     }
 
-    private static InputMethodSubtype[] unmarshall(byte[] bArr) {
-        Parcel parcel;
+    private static InputMethodSubtype[] unmarshall(byte[] bArr) throws Throwable {
+        Parcel parcelObtain;
         try {
-            parcel = Parcel.obtain();
-        } catch (Throwable th) {
-            th = th;
-            parcel = null;
-        }
-        try {
-            parcel.unmarshall(bArr, 0, bArr.length);
-            parcel.setDataPosition(0);
-            InputMethodSubtype[] inputMethodSubtypeArr = (InputMethodSubtype[]) parcel.createTypedArray(InputMethodSubtype.CREATOR);
-            if (parcel != null) {
-                parcel.recycle();
+            parcelObtain = Parcel.obtain();
+            try {
+                parcelObtain.unmarshall(bArr, 0, bArr.length);
+                parcelObtain.setDataPosition(0);
+                InputMethodSubtype[] inputMethodSubtypeArr = (InputMethodSubtype[]) parcelObtain.createTypedArray(InputMethodSubtype.CREATOR);
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                return inputMethodSubtypeArr;
+            } catch (Throwable th) {
+                th = th;
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                throw th;
             }
-            return inputMethodSubtypeArr;
         } catch (Throwable th2) {
             th = th2;
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            throw th;
+            parcelObtain = null;
         }
     }
 
-    private static byte[] compress(byte[] bArr) {
+    private static byte[] compress(byte[] bArr) throws IOException {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             try {
@@ -202,7 +203,7 @@ public class InputMethodSubtypeArray {
         }
     }
 
-    private static byte[] decompress(byte[] bArr, int i) {
+    private static byte[] decompress(byte[] bArr, int i) throws IOException {
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             try {
@@ -211,11 +212,11 @@ public class InputMethodSubtypeArray {
                     byte[] bArr2 = new byte[i];
                     int i2 = 0;
                     while (i2 < i) {
-                        int read = gZIPInputStream.read(bArr2, i2, i - i2);
-                        if (read < 0) {
+                        int i3 = gZIPInputStream.read(bArr2, i2, i - i2);
+                        if (i3 < 0) {
                             break;
                         }
-                        i2 += read;
+                        i2 += i3;
                     }
                     if (i != i2) {
                         gZIPInputStream.close();

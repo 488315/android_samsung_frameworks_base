@@ -9,7 +9,6 @@ import java.lang.reflect.TypeVariable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TypeToken<T> {
     final int hashCode;
@@ -129,10 +128,10 @@ public class TypeToken<T> {
     }
 
     public TypeToken(Type type) {
-        Type canonicalize = C$Gson$Types.canonicalize((Type) C$Gson$Preconditions.checkNotNull(type));
-        this.type = canonicalize;
-        this.rawType = (Class<? super T>) C$Gson$Types.getRawType(canonicalize);
-        this.hashCode = canonicalize.hashCode();
+        Type typeCanonicalize = C$Gson$Types.canonicalize((Type) C$Gson$Preconditions.checkNotNull(type));
+        this.type = typeCanonicalize;
+        this.rawType = (Class<? super T>) C$Gson$Types.getRawType(typeCanonicalize);
+        this.hashCode = typeCanonicalize.hashCode();
     }
 
     @Deprecated

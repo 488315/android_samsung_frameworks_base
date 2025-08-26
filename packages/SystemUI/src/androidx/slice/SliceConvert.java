@@ -12,7 +12,6 @@ import androidx.slice.Slice;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceConvert {
     private SliceConvert() {
@@ -22,9 +21,9 @@ public class SliceConvert {
         if (slice == null || Uri.parse(slice.mUri) == null) {
             return null;
         }
-        Uri parse = Uri.parse(slice.mUri);
+        Uri uri = Uri.parse(slice.mUri);
         SliceSpec sliceSpec = slice.mSpec;
-        Slice.Builder builder = new Slice.Builder(parse, sliceSpec != null ? new android.app.slice.SliceSpec(sliceSpec.mType, sliceSpec.mRevision) : null);
+        Slice.Builder builder = new Slice.Builder(uri, sliceSpec != null ? new android.app.slice.SliceSpec(sliceSpec.mType, sliceSpec.mRevision) : null);
         builder.addHints(Arrays.asList(slice.mHints));
         for (SliceItem sliceItem : slice.mItems) {
             String str = sliceItem.mFormat;
@@ -98,11 +97,11 @@ public class SliceConvert {
                     break;
                 case "image":
                     try {
-                        IconCompat createFromIcon = IconCompat.createFromIcon(context, sliceItem.getIcon());
+                        IconCompat iconCompatCreateFromIcon = IconCompat.createFromIcon(context, sliceItem.getIcon());
                         String subType4 = sliceItem.getSubType();
                         List<String> hints5 = sliceItem.getHints();
-                        if (Slice.isValidIcon(createFromIcon)) {
-                            builder.addIcon(createFromIcon, subType4, (String[]) hints5.toArray(new String[hints5.size()]));
+                        if (Slice.isValidIcon(iconCompatCreateFromIcon)) {
+                            builder.addIcon(iconCompatCreateFromIcon, subType4, (String[]) hints5.toArray(new String[hints5.size()]));
                             break;
                         } else {
                             break;

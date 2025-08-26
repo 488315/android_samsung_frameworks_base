@@ -67,39 +67,39 @@ public final class AudioInjection {
     }
 
     public int write(byte[] bArr, int i, int i2, int i3) {
-        int write;
+        int iWrite;
         synchronized (this.mLock) {
             AudioTrack audioTrack = this.mAudioTrack;
-            write = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(bArr, i, i2, i3);
+            iWrite = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(bArr, i, i2, i3);
         }
-        return write;
+        return iWrite;
     }
 
     public int write(ByteBuffer byteBuffer, int i, int i2) {
-        int write;
+        int iWrite;
         synchronized (this.mLock) {
             AudioTrack audioTrack = this.mAudioTrack;
-            write = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(byteBuffer, i, i2);
+            iWrite = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(byteBuffer, i, i2);
         }
-        return write;
+        return iWrite;
     }
 
     public int write(ByteBuffer byteBuffer, int i, int i2, long j) {
-        int write;
+        int iWrite;
         synchronized (this.mLock) {
             AudioTrack audioTrack = this.mAudioTrack;
-            write = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(byteBuffer, i, i2, j);
+            iWrite = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(byteBuffer, i, i2, j);
         }
-        return write;
+        return iWrite;
     }
 
     public int write(float[] fArr, int i, int i2, int i3) {
-        int write;
+        int iWrite;
         synchronized (this.mLock) {
             AudioTrack audioTrack = this.mAudioTrack;
-            write = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(fArr, i, i2, i3);
+            iWrite = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(fArr, i, i2, i3);
         }
-        return write;
+        return iWrite;
     }
 
     public int write(short[] sArr, int i, int i2) {
@@ -107,12 +107,12 @@ public final class AudioInjection {
     }
 
     public int write(short[] sArr, int i, int i2, int i3) {
-        int write;
+        int iWrite;
         synchronized (this.mLock) {
             AudioTrack audioTrack = this.mAudioTrack;
-            write = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(sArr, i, i2, i3);
+            iWrite = (audioTrack == null || this.mIsSilent) ? 0 : audioTrack.write(sArr, i, i2, i3);
         }
-        return write;
+        return iWrite;
     }
 
     public void play() {

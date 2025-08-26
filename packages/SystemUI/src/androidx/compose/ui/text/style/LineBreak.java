@@ -2,14 +2,12 @@ package androidx.compose.ui.text.style;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LineBreak {
     public static final Companion Companion = new Companion(null);
     public static final int Simple;
     public final int mask;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -19,7 +17,6 @@ public final class LineBreak {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Strategy {
         public final int value;
         public static final Companion Companion = new Companion(null);
@@ -27,7 +24,6 @@ public final class LineBreak {
         public static final int HighQuality = 2;
         public static final int Balanced = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -38,7 +34,7 @@ public final class LineBreak {
         }
 
         /* renamed from: toString-impl, reason: not valid java name */
-        public static String m797toStringimpl(int i) {
+        public static String m799toStringimpl(int i) {
             return i == Simple ? "Strategy.Simple" : i == HighQuality ? "Strategy.HighQuality" : i == Balanced ? "Strategy.Balanced" : i == 0 ? "Strategy.Unspecified" : "Invalid";
         }
 
@@ -54,11 +50,10 @@ public final class LineBreak {
         }
 
         public final String toString() {
-            return m797toStringimpl(this.value);
+            return m799toStringimpl(this.value);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Strictness {
         public static final Companion Companion = new Companion(null);
         public static final int Default = 1;
@@ -67,7 +62,6 @@ public final class LineBreak {
         public static final int Strict = 4;
         public final int value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -78,7 +72,7 @@ public final class LineBreak {
         }
 
         /* renamed from: toString-impl, reason: not valid java name */
-        public static String m798toStringimpl(int i) {
+        public static String m800toStringimpl(int i) {
             return i == Default ? "Strictness.None" : i == Loose ? "Strictness.Loose" : i == Normal ? "Strictness.Normal" : i == Strict ? "Strictness.Strict" : i == 0 ? "Strictness.Unspecified" : "Invalid";
         }
 
@@ -94,18 +88,16 @@ public final class LineBreak {
         }
 
         public final String toString() {
-            return m798toStringimpl(this.value);
+            return m800toStringimpl(this.value);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WordBreak {
         public static final Companion Companion = new Companion(null);
         public static final int Default = 1;
         public static final int Phrase = 2;
         public final int value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -147,16 +139,16 @@ public final class LineBreak {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ LineBreak m795boximpl(int i) {
+    public static final /* synthetic */ LineBreak m797boximpl(int i) {
         return new LineBreak(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m796toStringimpl(int i) {
+    public static String m798toStringimpl(int i) {
         StringBuilder sb = new StringBuilder("LineBreak(strategy=");
-        sb.append((Object) Strategy.m797toStringimpl(i & 255));
+        sb.append((Object) Strategy.m799toStringimpl(i & 255));
         sb.append(", strictness=");
-        sb.append((Object) Strictness.m798toStringimpl((i >> 8) & 255));
+        sb.append((Object) Strictness.m800toStringimpl((i >> 8) & 255));
         sb.append(", wordBreak=");
         int i2 = (i >> 16) & 255;
         sb.append((Object) (i2 == WordBreak.Default ? "WordBreak.None" : i2 == WordBreak.Phrase ? "WordBreak.Phrase" : i2 == 0 ? "WordBreak.Unspecified" : "Invalid"));
@@ -176,6 +168,6 @@ public final class LineBreak {
     }
 
     public final String toString() {
-        return m796toStringimpl(this.mask);
+        return m798toStringimpl(this.mask);
     }
 }

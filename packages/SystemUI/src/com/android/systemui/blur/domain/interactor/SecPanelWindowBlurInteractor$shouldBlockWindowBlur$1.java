@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecPanelWindowBlurInteractor$shouldBlockWindowBlur$1 extends SuspendLambda implements Function4 {
     /* synthetic */ float F$0;
@@ -22,13 +21,13 @@ final class SecPanelWindowBlurInteractor$shouldBlockWindowBlur$1 extends Suspend
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        float floatValue = ((Number) obj).floatValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
         SecPanelWindowBlurInteractor$shouldBlockWindowBlur$1 secPanelWindowBlurInteractor$shouldBlockWindowBlur$1 = new SecPanelWindowBlurInteractor$shouldBlockWindowBlur$1((Continuation) obj4);
-        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.F$0 = floatValue;
-        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.Z$0 = booleanValue;
-        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.Z$1 = booleanValue2;
+        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.F$0 = fFloatValue;
+        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.Z$0 = zBooleanValue;
+        secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.Z$1 = zBooleanValue2;
         return secPanelWindowBlurInteractor$shouldBlockWindowBlur$1.invokeSuspend(Unit.INSTANCE);
     }
 

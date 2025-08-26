@@ -23,15 +23,15 @@ public class FlagTable {
         }
         ByteBufferReader byteBufferReader = new ByteBufferReader(this.mBuffer);
         byteBufferReader.position(bucketIndex);
-        int readInt = byteBufferReader.readInt();
-        if (readInt >= this.mHeader.mNodeOffset && readInt < this.mHeader.mFileSize) {
-            while (readInt != -1) {
-                byteBufferReader.position(readInt);
-                Node fromBytes = Node.fromBytes(byteBufferReader);
-                if (Objects.equals(str, fromBytes.mFlagName) && i == fromBytes.mPackageId) {
-                    return fromBytes;
+        int i2 = byteBufferReader.readInt();
+        if (i2 >= this.mHeader.mNodeOffset && i2 < this.mHeader.mFileSize) {
+            while (i2 != -1) {
+                byteBufferReader.position(i2);
+                Node nodeFromBytes = Node.fromBytes(byteBufferReader);
+                if (Objects.equals(str, nodeFromBytes.mFlagName) && i == nodeFromBytes.mPackageId) {
+                    return nodeFromBytes;
                 }
-                readInt = fromBytes.mNextOffset;
+                i2 = nodeFromBytes.mNextOffset;
             }
         }
         return null;
@@ -111,12 +111,12 @@ public class FlagTable {
             node.mFlagName = byteBufferReader.readString();
             node.mFlagType = FlagType.fromInt(byteBufferReader.readShort());
             node.mFlagIndex = byteBufferReader.readShort();
-            int readInt = byteBufferReader.readInt();
-            node.mNextOffset = readInt;
-            if (readInt == 0) {
-                readInt = -1;
+            int i = byteBufferReader.readInt();
+            node.mNextOffset = i;
+            if (i == 0) {
+                i = -1;
             }
-            node.mNextOffset = readInt;
+            node.mNextOffset = i;
             return node;
         }
 

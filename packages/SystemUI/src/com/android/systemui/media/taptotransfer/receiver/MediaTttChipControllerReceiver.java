@@ -55,7 +55,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaTttChipControllerReceiver extends TemporaryViewDisplayController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -73,7 +72,6 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
     public final ViewUtil viewUtil;
     public final WindowManager.LayoutParams windowLayoutParams;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,29 +104,29 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
         layoutParams.layoutInDisplayCutoutMode = 3;
         layoutParams.setFitInsetsTypes(0);
         this.windowLayoutParams = layoutParams;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setRepeatCount(-1);
-        ofFloat.setRepeatMode(2);
-        ofFloat.setDuration(750L);
-        this.bounceAnimator = ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setRepeatCount(-1);
+        valueAnimatorOfFloat.setRepeatMode(2);
+        valueAnimatorOfFloat.setDuration(750L);
+        this.bounceAnimator = valueAnimatorOfFloat;
         this.commandQueueCallbacks = new CommandQueue.Callbacks() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$commandQueueCallbacks$1
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
-            public final void updateMediaTapToTransferReceiverDisplay(int i, final MediaRoute2Info mediaRoute2Info, Icon icon, final CharSequence charSequence) {
-                String str;
+            public final void updateMediaTapToTransferReceiverDisplay(int i, final MediaRoute2Info mediaRoute2Info, Icon icon, final CharSequence charSequence) throws Throwable {
+                String strName;
                 int i2;
                 int i3 = MediaTttChipControllerReceiver.$r8$clinit;
-                final MediaTttChipControllerReceiver mediaTttChipControllerReceiver = MediaTttChipControllerReceiver.this;
+                final MediaTttChipControllerReceiver mediaTttChipControllerReceiver = this.this$0;
                 mediaTttChipControllerReceiver.getClass();
                 ChipStateReceiver.Companion.getClass();
                 try {
                 } catch (NoSuchElementException e) {
                     Log.e("ChipStateReceiver", "Could not find requested state " + i, e);
-                    r8 = null;
+                    chipStateReceiver = null;
                 }
                 for (ChipStateReceiver chipStateReceiver : ChipStateReceiver.values()) {
                     if (chipStateReceiver.getStateInt() == i) {
-                        if (chipStateReceiver == null || (str = chipStateReceiver.name()) == null) {
-                            str = "Invalid";
+                        if (chipStateReceiver == null || (strName = chipStateReceiver.name()) == null) {
+                            strName = "Invalid";
                         }
                         MediaTttReceiverLogger mediaTttReceiverLogger2 = (MediaTttReceiverLogger) mediaTttChipControllerReceiver.logger;
                         String id = mediaRoute2Info.getId();
@@ -138,38 +136,38 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
                         LogLevel logLevel = LogLevel.DEBUG;
                         MediaTttLoggerUtils$$ExternalSyntheticLambda0 mediaTttLoggerUtils$$ExternalSyntheticLambda0 = new MediaTttLoggerUtils$$ExternalSyntheticLambda0(2);
                         LogBuffer logBuffer = mediaTttReceiverLogger2.buffer;
-                        LogMessage obtain = logBuffer.obtain("MediaTttReceiver", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                        logMessageImpl.str1 = str;
+                        LogMessage logMessageObtain = logBuffer.obtain("MediaTttReceiver", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.str1 = strName;
                         logMessageImpl.str2 = id;
                         logMessageImpl.str3 = clientPackageName;
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                         if (chipStateReceiver == null) {
-                            LogMessage obtain2 = logBuffer.obtain("MediaTttReceiver", LogLevel.ERROR, new MediaTttLoggerUtils$$ExternalSyntheticLambda0(0), null);
-                            ((LogMessageImpl) obtain2).int1 = i;
-                            logBuffer.commit(obtain2);
+                            LogMessage logMessageObtain2 = logBuffer.obtain("MediaTttReceiver", LogLevel.ERROR, new MediaTttLoggerUtils$$ExternalSyntheticLambda0(0), null);
+                            ((LogMessageImpl) logMessageObtain2).int1 = i;
+                            logBuffer.commit(logMessageObtain2);
                             return;
                         }
-                        final InstanceId instanceId = (InstanceId) ((LinkedHashMap) mediaTttChipControllerReceiver.instanceMap).get(mediaRoute2Info.getId());
-                        if (instanceId == null) {
-                            instanceId = mediaTttChipControllerReceiver.temporaryViewUiEventLogger.instanceIdSequence.newInstanceId();
+                        final InstanceId instanceIdNewInstanceId = (InstanceId) ((LinkedHashMap) mediaTttChipControllerReceiver.instanceMap).get(mediaRoute2Info.getId());
+                        if (instanceIdNewInstanceId == null) {
+                            instanceIdNewInstanceId = mediaTttChipControllerReceiver.temporaryViewUiEventLogger.instanceIdSequence.newInstanceId();
                         }
-                        mediaTttChipControllerReceiver.uiEventLogger.logger.log(chipStateReceiver.getUiEvent(), instanceId);
+                        mediaTttChipControllerReceiver.uiEventLogger.logger.log(chipStateReceiver.getUiEvent(), instanceIdNewInstanceId);
                         if (chipStateReceiver != ChipStateReceiver.CLOSE_TO_SENDER) {
                             mediaTttChipControllerReceiver.removeView(mediaRoute2Info.getId(), chipStateReceiver.name());
                             return;
                         }
-                        mediaTttChipControllerReceiver.instanceMap.put(mediaRoute2Info.getId(), instanceId);
+                        mediaTttChipControllerReceiver.instanceMap.put(mediaRoute2Info.getId(), instanceIdNewInstanceId);
                         if (icon == null) {
-                            mediaTttChipControllerReceiver.displayView(new ChipReceiverInfo(mediaRoute2Info, null, charSequence, null, null, mediaRoute2Info.getId(), null, instanceId, 88, null));
+                            mediaTttChipControllerReceiver.displayView(new ChipReceiverInfo(mediaRoute2Info, null, charSequence, null, null, mediaRoute2Info.getId(), null, instanceIdNewInstanceId, 88, null));
                             return;
                         } else {
                             icon.loadDrawableAsync(mediaTttChipControllerReceiver.context, new Icon.OnDrawableLoadedListener() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$updateMediaTapToTransferReceiverDisplay$1
                                 @Override // android.graphics.drawable.Icon.OnDrawableLoadedListener
-                                public final void onDrawableLoaded(Drawable drawable) {
-                                    MediaTttChipControllerReceiver mediaTttChipControllerReceiver2 = MediaTttChipControllerReceiver.this;
+                                public final void onDrawableLoaded(Drawable drawable) throws Throwable {
+                                    MediaTttChipControllerReceiver mediaTttChipControllerReceiver2 = mediaTttChipControllerReceiver;
                                     MediaRoute2Info mediaRoute2Info2 = mediaRoute2Info;
-                                    mediaTttChipControllerReceiver2.displayView(new ChipReceiverInfo(mediaRoute2Info2, drawable, charSequence, null, null, mediaRoute2Info2.getId(), null, instanceId, 88, null));
+                                    mediaTttChipControllerReceiver2.displayView(new ChipReceiverInfo(mediaRoute2Info2, drawable, charSequence, null, null, mediaRoute2Info2.getId(), null, instanceIdNewInstanceId, 88, null));
                                 }
                             }, mediaTttChipControllerReceiver.mainHandler);
                             return;
@@ -183,7 +181,7 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
         this.displayListener = new TemporaryViewDisplayController.Listener() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$displayListener$1
             @Override // com.android.systemui.temporarydisplay.TemporaryViewDisplayController.Listener
             public final void onInfoPermanentlyRemoved(String str, String str2) {
-                MediaTttChipControllerReceiver.this.instanceMap.remove(str);
+                this.this$0.instanceMap.remove(str);
             }
         };
     }
@@ -257,7 +255,7 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
                     receiverChipRippleView3.startRipple(new Runnable() { // from class: com.android.systemui.media.taptotransfer.receiver.ReceiverChipRippleView$expandRipple$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaTttReceiverLogger.this.logRippleAnimationEnd(receiverChipRippleView3.getId(), "expand");
+                            mediaTttReceiverLogger.logRippleAnimationEnd(receiverChipRippleView3.getId(), "expand");
                             Runnable runnable2 = runnable;
                             if (runnable2 != null) {
                                 runnable2.run();
@@ -312,7 +310,7 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
                     receiverChipRippleView3.startRipple(new Runnable() { // from class: com.android.systemui.media.taptotransfer.receiver.ReceiverChipRippleView$expandRipple$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaTttReceiverLogger.this.logRippleAnimationEnd(receiverChipRippleView3.getId(), "expand");
+                            mediaTttReceiverLogger.logRippleAnimationEnd(receiverChipRippleView3.getId(), "expand");
                             Runnable runnable2 = runnable;
                             if (runnable2 != null) {
                                 runnable2.run();
@@ -333,7 +331,7 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
         animateViewTranslationAndFade$default(this, viewGroup2, (-1) * receiverIconSize$frameworks__base__packages__SystemUI__android_common__SystemUI_core, 1.0f, Interpolators.EMPHASIZED_DECELERATE, new Runnable() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$animateViewIn$1
             @Override // java.lang.Runnable
             public final void run() {
-                MediaTttChipControllerReceiver mediaTttChipControllerReceiver = MediaTttChipControllerReceiver.this;
+                MediaTttChipControllerReceiver mediaTttChipControllerReceiver = this.this$0;
                 final ViewGroup viewGroup3 = viewGroup2;
                 final float f = receiverIconSize$frameworks__base__packages__SystemUI__android_common__SystemUI_core * 0.15f;
                 if (mediaTttChipControllerReceiver.bounceAnimator.isStarted()) {
@@ -343,8 +341,8 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
                 mediaTttChipControllerReceiver.bounceAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.taptotransfer.receiver.MediaTttChipControllerReceiver$addViewToBounceAnimation$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                        viewGroup3.setTranslationY((f * floatValue) + translationY);
+                        float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                        viewGroup3.setTranslationY((f * fFloatValue) + translationY);
                     }
                 });
                 viewGroup3.setAccessibilityLiveRegion(0);
@@ -419,37 +417,37 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
             if (rippleShader == null) {
                 rippleShader = null;
             }
-            final float pow = 1 - ((float) Math.pow(r12 - (rippleShader.rippleSize.currentHeight / f), 0.3333333333333333d));
+            final float fPow = 1 - ((float) Math.pow(r12 - (rippleShader.rippleSize.currentHeight / f), 0.3333333333333333d));
             receiverChipRippleView.animator.setDuration(1000L);
             receiverChipRippleView.animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.taptotransfer.receiver.ReceiverChipRippleView$expandToFull$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                     long currentPlayTime = valueAnimator2.getCurrentPlayTime();
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                    ReceiverChipRippleView receiverChipRippleView2 = ReceiverChipRippleView.this;
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    ReceiverChipRippleView receiverChipRippleView2 = receiverChipRippleView;
                     int i = ReceiverChipRippleView.$r8$clinit;
                     RippleShader rippleShader3 = receiverChipRippleView2.rippleShader;
                     if (rippleShader3 == null) {
                         rippleShader3 = null;
                     }
-                    float f2 = pow;
+                    float f2 = fPow;
                     float f3 = 1;
-                    rippleShader3.setRawProgress(((f3 - f2) * floatValue) + f2);
-                    RippleShader rippleShader4 = ReceiverChipRippleView.this.rippleShader;
+                    rippleShader3.setRawProgress(((f3 - f2) * fFloatValue) + f2);
+                    RippleShader rippleShader4 = receiverChipRippleView.rippleShader;
                     RippleShader rippleShader5 = rippleShader4 != null ? rippleShader4 : null;
                     if (rippleShader4 == null) {
                         rippleShader4 = null;
                     }
                     rippleShader5.setDistortionStrength(f3 - rippleShader4.rawProgress);
-                    RippleShader rippleShader6 = ReceiverChipRippleView.this.rippleShader;
+                    RippleShader rippleShader6 = receiverChipRippleView.rippleShader;
                     RippleShader rippleShader7 = rippleShader6 != null ? rippleShader6 : null;
                     if (rippleShader6 == null) {
                         rippleShader6 = null;
                     }
                     rippleShader7.setPixelDensity(f3 - rippleShader6.rawProgress);
-                    RippleShader rippleShader8 = ReceiverChipRippleView.this.rippleShader;
+                    RippleShader rippleShader8 = receiverChipRippleView.rippleShader;
                     (rippleShader8 != null ? rippleShader8 : null).setFloatUniform("in_time", currentPlayTime);
-                    ReceiverChipRippleView.this.invalidate();
+                    receiverChipRippleView.invalidate();
                 }
             });
             ValueAnimator valueAnimator2 = receiverChipRippleView.animator;
@@ -514,9 +512,9 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
                     LogLevel logLevel = LogLevel.DEBUG;
                     MediaTttLoggerUtils$$ExternalSyntheticLambda0 mediaTttLoggerUtils$$ExternalSyntheticLambda0 = new MediaTttLoggerUtils$$ExternalSyntheticLambda0(1);
                     LogBuffer logBuffer = mediaTttReceiverLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("MediaTttReceiver", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).str1 = str;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("MediaTttReceiver", logLevel, mediaTttLoggerUtils$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).str1 = str;
+                    logBuffer.commit(logMessageObtain);
                 }
                 return Unit.INSTANCE;
             }
@@ -531,15 +529,15 @@ public class MediaTttChipControllerReceiver extends TemporaryViewDisplayControll
             iconInfoFromPackageName = IconInfo.copy$default(iconInfoFromPackageName, null, new MediaTttIcon.Loaded(drawable), 5);
         }
         int dimensionPixelSize = iconInfoFromPackageName.isAppIcon ? 0 : this.context.getResources().getDimensionPixelSize(R.dimen.media_ttt_generic_icon_padding);
-        CachingIconView requireViewById = viewGroup.requireViewById(R.id.app_icon);
-        requireViewById.setPadding(dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
+        CachingIconView cachingIconViewRequireViewById = viewGroup.requireViewById(R.id.app_icon);
+        cachingIconViewRequireViewById.setPadding(dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
         TintedIconViewBinder tintedIconViewBinder = TintedIconViewBinder.INSTANCE;
         TintedIcon tintedIcon = iconInfoFromPackageName.toTintedIcon();
         tintedIconViewBinder.getClass();
         IconViewBinder.INSTANCE.getClass();
-        IconViewBinder.bind(tintedIcon.icon, requireViewById);
+        IconViewBinder.bind(tintedIcon.icon, cachingIconViewRequireViewById);
         Integer num = tintedIcon.tint;
-        requireViewById.setImageTintList(num != null ? Utils.getColorAttr(num.intValue(), requireViewById.getContext()) : null);
+        cachingIconViewRequireViewById.setImageTintList(num != null ? Utils.getColorAttr(num.intValue(), cachingIconViewRequireViewById.getContext()) : null);
         ((ViewGroup) viewGroup.requireViewById(R.id.icon_container_view)).setAccessibilityLiveRegion(2);
     }
 }

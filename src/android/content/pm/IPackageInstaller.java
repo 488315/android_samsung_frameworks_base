@@ -272,9 +272,9 @@ public interface IPackageInstaller extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPackageInstaller)) {
-                return (IPackageInstaller) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPackageInstaller)) {
+                return (IPackageInstaller) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -361,60 +361,60 @@ public interface IPackageInstaller extends IInterface {
             switch (i) {
                 case 1:
                     PackageInstaller.SessionParams sessionParams = (PackageInstaller.SessionParams) parcel.readTypedObject(PackageInstaller.SessionParams.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int createSession = createSession(sessionParams, readString, readString2, readInt);
+                    int iCreateSession = createSession(sessionParams, string, string2, i3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createSession);
+                    parcel2.writeInt(iCreateSession);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     Bitmap bitmap = (Bitmap) parcel.readTypedObject(Bitmap.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateSessionAppIcon(readInt2, bitmap);
+                    updateSessionAppIcon(i4, bitmap);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateSessionAppLabel(readInt3, readString3);
+                    updateSessionAppLabel(i5, string3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    abandonSession(readInt4);
+                    abandonSession(i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IPackageInstallerSession openSession = openSession(readInt5);
+                    IPackageInstallerSession iPackageInstallerSessionOpenSession = openSession(i7);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openSession);
+                    parcel2.writeStrongInterface(iPackageInstallerSessionOpenSession);
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PackageInstaller.SessionInfo sessionInfo = getSessionInfo(readInt6);
+                    PackageInstaller.SessionInfo sessionInfo = getSessionInfo(i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sessionInfo, 1);
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice allSessions = getAllSessions(readInt7);
+                    ParceledListSlice allSessions = getAllSessions(i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(allSessions, 1);
                     return true;
                 case 8:
-                    String readString4 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice mySessions = getMySessions(readString4, readInt8);
+                    ParceledListSlice mySessions = getMySessions(string4, i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(mySessions, 1);
                     return true;
@@ -424,165 +424,165 @@ public interface IPackageInstaller extends IInterface {
                     parcel2.writeTypedObject(stagedSessions, 1);
                     return true;
                 case 10:
-                    IPackageInstallerCallback asInterface = IPackageInstallerCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt9 = parcel.readInt();
+                    IPackageInstallerCallback iPackageInstallerCallbackAsInterface = IPackageInstallerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface, readInt9);
+                    registerCallback(iPackageInstallerCallbackAsInterface, i11);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IPackageInstallerCallback asInterface2 = IPackageInstallerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IPackageInstallerCallback iPackageInstallerCallbackAsInterface2 = IPackageInstallerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(asInterface2);
+                    unregisterCallback(iPackageInstallerCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     VersionedPackage versionedPackage = (VersionedPackage) parcel.readTypedObject(VersionedPackage.CREATOR);
-                    String readString5 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i12 = parcel.readInt();
                     IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    uninstall(versionedPackage, readString5, readInt10, intentSender, readInt11);
+                    uninstall(versionedPackage, string5, i12, intentSender, i13);
                     parcel2.writeNoException();
                     return true;
                 case 13:
                     VersionedPackage versionedPackage2 = (VersionedPackage) parcel.readTypedObject(VersionedPackage.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     IntentSender intentSender2 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    uninstallExistingPackage(versionedPackage2, readString6, intentSender2, readInt12);
+                    uninstallExistingPackage(versionedPackage2, string6, intentSender2, i14);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString7 = parcel.readString();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     IntentSender intentSender3 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    int readInt15 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    int i17 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    installExistingPackage(readString7, readInt13, readInt14, intentSender3, readInt15, createStringArrayList);
+                    installExistingPackage(string7, i15, i16, intentSender3, i17, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt16 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i18 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPermissionsResult(readInt16, readBoolean);
+                    setPermissionsResult(i18, z);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    bypassNextStagedInstallerCheck(readBoolean2);
+                    bypassNextStagedInstallerCheck(z2);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    bypassNextAllowedApexUpdateCheck(readBoolean3);
+                    bypassNextAllowedApexUpdateCheck(z3);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableVerificationForUid(readInt17);
+                    disableVerificationForUid(i19);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setAllowUnlimitedSilentUpdates(readString8);
+                    setAllowUnlimitedSilentUpdates(string8);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setSilentUpdatesThrottleTime(readLong);
+                    setSilentUpdatesThrottleTime(j);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    String readString9 = parcel.readString();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    String string9 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     PackageInstaller.InstallConstraints installConstraints = (PackageInstaller.InstallConstraints) parcel.readTypedObject(PackageInstaller.InstallConstraints.CREATOR);
                     RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    checkInstallConstraints(readString9, createStringArrayList2, installConstraints, remoteCallback);
+                    checkInstallConstraints(string9, arrayListCreateStringArrayList2, installConstraints, remoteCallback);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    String readString10 = parcel.readString();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    String string10 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     PackageInstaller.InstallConstraints installConstraints2 = (PackageInstaller.InstallConstraints) parcel.readTypedObject(PackageInstaller.InstallConstraints.CREATOR);
                     IntentSender intentSender4 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    waitForInstallConstraints(readString10, createStringArrayList3, installConstraints2, intentSender4, readLong2);
+                    waitForInstallConstraints(string10, arrayListCreateStringArrayList3, installConstraints2, intentSender4, j2);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    int readInt18 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    int i20 = parcel.readInt();
                     IntentSender intentSender5 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestArchive(readString11, readString12, readInt18, intentSender5, userHandle);
+                    requestArchive(string11, string12, i20, intentSender5, userHandle);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     IntentSender intentSender6 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestUnarchive(readString13, readString14, intentSender6, userHandle2);
+                    requestUnarchive(string13, string14, intentSender6, userHandle2);
                     parcel2.writeNoException();
                     return true;
                 case 25:
                     ArchivedPackageParcel archivedPackageParcel = (ArchivedPackageParcel) parcel.readTypedObject(ArchivedPackageParcel.CREATOR);
                     PackageInstaller.SessionParams sessionParams2 = (PackageInstaller.SessionParams) parcel.readTypedObject(PackageInstaller.SessionParams.CREATOR);
                     IntentSender intentSender7 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    installPackageArchived(archivedPackageParcel, sessionParams2, intentSender7, readString15, userHandle3);
+                    installPackageArchived(archivedPackageParcel, sessionParams2, intentSender7, string15, userHandle3);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    long j3 = parcel.readLong();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     UserHandle userHandle4 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reportUnarchivalStatus(readInt19, readInt20, readLong3, pendingIntent, userHandle4);
+                    reportUnarchivalStatus(i21, i22, j3, pendingIntent, userHandle4);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    int readInt21 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i23 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setUnknownSourceConfirmResult(readInt21, readBoolean4);
+                    setUnknownSourceConfirmResult(i23, z4);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString16 = parcel.readString();
-                    long readLong4 = parcel.readLong();
+                    String string16 = parcel.readString();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor requestCopy = requestCopy(readString16, readLong4);
+                    ParcelFileDescriptor parcelFileDescriptorRequestCopy = requestCopy(string16, j4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(requestCopy, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorRequestCopy, 1);
                     return true;
                 case 29:
-                    int readInt22 = parcel.readInt();
-                    String readString17 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IPackageInstallerSession openSessionQuick = openSessionQuick(readInt22, readString17);
+                    IPackageInstallerSession iPackageInstallerSessionOpenSessionQuick = openSessionQuick(i24, string17);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openSessionQuick);
+                    parcel2.writeStrongInterface(iPackageInstallerSessionOpenSessionQuick);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -607,488 +607,488 @@ public interface IPackageInstaller extends IInterface {
 
             @Override // android.content.pm.IPackageInstaller
             public int createSession(PackageInstaller.SessionParams sessionParams, String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(sessionParams, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sessionParams, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void updateSessionAppIcon(int i, Bitmap bitmap) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bitmap, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bitmap, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void updateSessionAppLabel(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void abandonSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public IPackageInstallerSession openSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IPackageInstallerSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IPackageInstallerSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public PackageInstaller.SessionInfo getSessionInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PackageInstaller.SessionInfo) obtain2.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PackageInstaller.SessionInfo) parcelObtain2.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public ParceledListSlice getAllSessions(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public ParceledListSlice getMySessions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public ParceledListSlice getStagedSessions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void registerCallback(IPackageInstallerCallback iPackageInstallerCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPackageInstallerCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPackageInstallerCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void unregisterCallback(IPackageInstallerCallback iPackageInstallerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPackageInstallerCallback);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPackageInstallerCallback);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void uninstall(VersionedPackage versionedPackage, String str, int i, IntentSender intentSender, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(versionedPackage, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(versionedPackage, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void uninstallExistingPackage(VersionedPackage versionedPackage, String str, IntentSender intentSender, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(versionedPackage, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(versionedPackage, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void installExistingPackage(String str, int i, int i2, IntentSender intentSender, int i3, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeInt(i3);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void setPermissionsResult(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void bypassNextStagedInstallerCheck(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void bypassNextAllowedApexUpdateCheck(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void disableVerificationForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void setAllowUnlimitedSilentUpdates(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void setSilentUpdatesThrottleTime(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void checkInstallConstraints(String str, List<String> list, PackageInstaller.InstallConstraints installConstraints, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeTypedObject(installConstraints, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeTypedObject(installConstraints, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void waitForInstallConstraints(String str, List<String> list, PackageInstaller.InstallConstraints installConstraints, IntentSender intentSender, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeTypedObject(installConstraints, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeTypedObject(installConstraints, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void requestArchive(String str, String str2, int i, IntentSender intentSender, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void requestUnarchive(String str, String str2, IntentSender intentSender, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void installPackageArchived(ArchivedPackageParcel archivedPackageParcel, PackageInstaller.SessionParams sessionParams, IntentSender intentSender, String str, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(archivedPackageParcel, 0);
-                    obtain.writeTypedObject(sessionParams, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(archivedPackageParcel, 0);
+                    parcelObtain.writeTypedObject(sessionParams, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void reportUnarchivalStatus(int i, int i2, long j, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public void setUnknownSourceConfirmResult(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public ParcelFileDescriptor requestCopy(String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstaller
             public IPackageInstallerSession openSessionQuick(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IPackageInstallerSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IPackageInstallerSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

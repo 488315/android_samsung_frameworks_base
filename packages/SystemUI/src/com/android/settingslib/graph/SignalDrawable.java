@@ -19,7 +19,6 @@ import android.util.PathParser;
 import com.android.settingslib.Utils;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SignalDrawable extends DrawableWrapper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public class SignalDrawable extends DrawableWrapper {
     public final Path mScaledAttributionPath;
     public final Paint mTransparentPaint;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.graph.SignalDrawable$1, reason: invalid class name */
     public class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
@@ -69,24 +67,24 @@ public class SignalDrawable extends DrawableWrapper {
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
         canvas.saveLayer(null, null);
-        float width = getBounds().width();
-        float height = getBounds().height();
+        float fWidth = getBounds().width();
+        float fHeight = getBounds().height();
         boolean z = getLayoutDirection() == 1;
         if (z) {
             canvas.save();
-            canvas.translate(width, 0.0f);
+            canvas.translate(fWidth, 0.0f);
             canvas.scale(-1.0f, 1.0f);
         }
         super.draw(canvas);
         this.mCutoutPath.reset();
         this.mCutoutPath.setFillType(Path.FillType.WINDING);
-        float round = Math.round(0.083333336f * width);
+        float fRound = Math.round(0.083333336f * fWidth);
         if (isInState(3)) {
-            float f = height * 0.125f;
-            float f2 = height * 0.0625f;
+            float f = fHeight * 0.125f;
+            float f2 = fHeight * 0.0625f;
             float f3 = f2 + f;
-            float f4 = (width - round) - f;
-            float f5 = (height - round) - f;
+            float f4 = (fWidth - fRound) - f;
+            float f5 = (fHeight - fRound) - f;
             this.mForegroundPath.reset();
             drawDotAndPadding(f4, f5, f2, f, 2);
             drawDotAndPadding(f4 - f3, f5, f2, f, 1);
@@ -94,9 +92,9 @@ public class SignalDrawable extends DrawableWrapper {
             canvas.drawPath(this.mCutoutPath, this.mTransparentPaint);
             canvas.drawPath(this.mForegroundPath, this.mForegroundPaint);
         } else if (isInState(2)) {
-            float f6 = (this.mCutoutWidthFraction * width) / 24.0f;
-            float f7 = (this.mCutoutHeightFraction * height) / 24.0f;
-            this.mCutoutPath.moveTo(width, height);
+            float f6 = (this.mCutoutWidthFraction * fWidth) / 24.0f;
+            float f7 = (this.mCutoutHeightFraction * fHeight) / 24.0f;
+            this.mCutoutPath.moveTo(fWidth, fHeight);
             this.mCutoutPath.rLineTo(-f6, 0.0f);
             this.mCutoutPath.rLineTo(0.0f, -f7);
             this.mCutoutPath.rLineTo(f6, 0.0f);
@@ -222,7 +220,7 @@ public class SignalDrawable extends DrawableWrapper {
         this.mAttributionScaleMatrix = new Matrix();
         this.mScaledAttributionPath = new Path();
         this.mChangeDot = new AnonymousClass1();
-        path.set(PathParser.createPathFromPathData(context.getString(R.string.face_error_unable_to_process)));
+        path.set(PathParser.createPathFromPathData(context.getString(R.string.face_error_vendor_unknown)));
         updateScaledAttributionPath();
         this.mCutoutWidthFraction = context.getResources().getFloat(R.dimen.datepicker_list_year_label_size);
         this.mCutoutHeightFraction = context.getResources().getFloat(R.dimen.datepicker_list_year_activated_label_size);

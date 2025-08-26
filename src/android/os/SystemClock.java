@@ -44,18 +44,18 @@ public final class SystemClock {
     private SystemClock() {
     }
 
-    public static void sleep(long j) {
-        long uptimeMillis = uptimeMillis();
+    public static void sleep(long j) throws InterruptedException {
+        long jUptimeMillis = uptimeMillis();
         boolean z = false;
-        long j2 = j;
+        long jUptimeMillis2 = j;
         do {
             try {
-                Thread.sleep(j2);
+                Thread.sleep(jUptimeMillis2);
             } catch (InterruptedException unused) {
                 z = true;
             }
-            j2 = (uptimeMillis + j) - uptimeMillis();
-        } while (j2 > 0);
+            jUptimeMillis2 = (jUptimeMillis + j) - uptimeMillis();
+        } while (jUptimeMillis2 > 0);
         if (z) {
             Thread.currentThread().interrupt();
         }
@@ -130,7 +130,7 @@ public final class SystemClock {
         return System.nanoTime() / 1000;
     }
 
-    public static long currentNetworkTimeMillis() {
+    public static long currentNetworkTimeMillis() throws Throwable {
         if (Flags.applicationSharedMemoryEnabled() && com.android.internal.hidden_from_bootclasspath.android.os.Flags.networkTimeUsesSharedMemory()) {
             return ApplicationSharedMemory.getInstance().getLatestNetworkTimeUnixEpochMillisAtZeroElapsedRealtimeMillis() + elapsedRealtime();
         }
@@ -139,11 +139,11 @@ public final class SystemClock {
             throw new RuntimeException(new DeadSystemException());
         }
         try {
-            UnixEpochTime latestNetworkTime = iTimeDetectorService.latestNetworkTime();
-            if (latestNetworkTime == null) {
+            UnixEpochTime unixEpochTimeLatestNetworkTime = iTimeDetectorService.latestNetworkTime();
+            if (unixEpochTimeLatestNetworkTime == null) {
                 throw new DateTimeException("Network based time is not available.");
             }
-            return latestNetworkTime.getUnixEpochTimeMillis() + (elapsedRealtime() - latestNetworkTime.getElapsedRealtimeMillis());
+            return unixEpochTimeLatestNetworkTime.getUnixEpochTimeMillis() + (elapsedRealtime() - unixEpochTimeLatestNetworkTime.getElapsedRealtimeMillis());
         } catch (ParcelableException e) {
             e.maybeRethrow(DateTimeException.class);
             throw new RuntimeException(e);

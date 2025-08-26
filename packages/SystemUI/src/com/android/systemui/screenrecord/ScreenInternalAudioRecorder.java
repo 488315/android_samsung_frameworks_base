@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenInternalAudioRecorder {
     public final AudioRecord mAudioRecord;
@@ -32,7 +31,6 @@ public class ScreenInternalAudioRecorder {
     public final Config mConfig = new Config();
     public int mTrackId = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Config {
         public final String toString() {
             return "channelMask=4\n   encoding=2\n sampleRate=44100\n bufferSize=131072\n privileged=true\n legacy app looback=false";
@@ -50,121 +48,121 @@ public class ScreenInternalAudioRecorder {
             this.mAudioRecordMic = new AudioRecord(7, 44100, 16, 2, minBufferSize);
         }
         this.mCodec = MediaCodec.createEncoderByType("audio/mp4a-latm");
-        MediaFormat createAudioFormat = MediaFormat.createAudioFormat("audio/mp4a-latm", 44100, 1);
-        createAudioFormat.setInteger("aac-profile", 2);
-        createAudioFormat.setInteger("bitrate", 196000);
-        createAudioFormat.setInteger("pcm-encoding", 2);
-        this.mCodec.configure(createAudioFormat, (Surface) null, (MediaCrypto) null, 1);
+        MediaFormat mediaFormatCreateAudioFormat = MediaFormat.createAudioFormat("audio/mp4a-latm", 44100, 1);
+        mediaFormatCreateAudioFormat.setInteger("aac-profile", 2);
+        mediaFormatCreateAudioFormat.setInteger("bitrate", 196000);
+        mediaFormatCreateAudioFormat.setInteger("pcm-encoding", 2);
+        this.mCodec.configure(mediaFormatCreateAudioFormat, (Surface) null, (MediaCrypto) null, 1);
         this.mThread = new Thread(new Runnable() { // from class: com.android.systemui.screenrecord.ScreenInternalAudioRecorder$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws MediaCodec.CryptoException {
                 short[] sArr;
                 short[] sArr2;
                 int i;
-                int read;
+                int i2;
                 boolean z2;
                 short[] sArr3;
-                int i2;
-                ScreenInternalAudioRecorder screenInternalAudioRecorder = ScreenInternalAudioRecorder.this;
-                int i3 = minBufferSize;
-                byte[] bArr = new byte[i3];
+                int i3;
+                ScreenInternalAudioRecorder screenInternalAudioRecorder = this.f$0;
+                int i4 = minBufferSize;
+                byte[] bArr = new byte[i4];
                 boolean z3 = screenInternalAudioRecorder.mMic;
                 if (z3) {
-                    int i4 = i3 / 2;
-                    sArr = new short[i4];
-                    sArr2 = new short[i4];
+                    int i5 = i4 / 2;
+                    sArr = new short[i5];
+                    sArr2 = new short[i5];
                 } else {
                     sArr = null;
                     sArr2 = null;
                 }
                 short s = 0;
-                int i5 = 0;
                 int i6 = 0;
                 int i7 = 0;
                 int i8 = 0;
+                int i9 = 0;
                 while (true) {
                     if (z3) {
-                        int read2 = screenInternalAudioRecorder.mAudioRecord.read(sArr, i5, sArr.length - i5);
-                        int read3 = screenInternalAudioRecorder.mAudioRecordMic.read(sArr2, i6, sArr2.length - i6);
-                        if (read2 < 0 && read3 < 0) {
+                        int i10 = screenInternalAudioRecorder.mAudioRecord.read(sArr, i6, sArr.length - i6);
+                        int i11 = screenInternalAudioRecorder.mAudioRecordMic.read(sArr2, i7, sArr2.length - i7);
+                        if (i10 < 0 && i11 < 0) {
                             break;
                         }
-                        if (read2 < 0) {
+                        if (i10 < 0) {
                             Arrays.fill(sArr, s);
-                            i5 = i6;
-                            read2 = read3;
+                            i6 = i7;
+                            i10 = i11;
                         }
-                        if (read3 < 0) {
+                        if (i11 < 0) {
                             Arrays.fill(sArr2, s);
-                            i6 = i5;
-                            read3 = read2;
+                            i7 = i6;
+                            i11 = i10;
                         }
-                        i7 = read2 + i5;
-                        i8 = read3 + i6;
-                        int min = Math.min(i7, i8);
-                        read = min * 2;
-                        int i9 = s;
+                        i8 = i10 + i6;
+                        i9 = i11 + i7;
+                        int iMin = Math.min(i8, i9);
+                        i2 = iMin * 2;
+                        int i12 = s;
                         while (true) {
-                            i2 = 32767;
-                            if (i9 >= min) {
+                            i3 = 32767;
+                            if (i12 >= iMin) {
                                 break;
                             }
-                            sArr2[i9] = (short) MathUtils.constrain((int) (sArr2[i9] * 1.4f), -32768, 32767);
-                            i9++;
+                            sArr2[i12] = (short) MathUtils.constrain((int) (sArr2[i12] * 1.4f), -32768, 32767);
+                            i12++;
                         }
-                        int i10 = 0;
-                        while (i10 < min) {
-                            short constrain = (short) MathUtils.constrain(sArr[i10] + sArr2[i10], -32768, i2);
-                            int i11 = i10 * 2;
-                            bArr[i11] = (byte) (constrain & 255);
-                            bArr[i11 + 1] = (byte) ((constrain >> 8) & 255);
-                            i10++;
-                            i2 = 32767;
+                        int i13 = 0;
+                        while (i13 < iMin) {
+                            short sConstrain = (short) MathUtils.constrain(sArr[i13] + sArr2[i13], -32768, i3);
+                            int i14 = i13 * 2;
+                            bArr[i14] = (byte) (sConstrain & 255);
+                            bArr[i14 + 1] = (byte) ((sConstrain >> 8) & 255);
+                            i13++;
+                            i3 = 32767;
                         }
-                        for (int i12 = 0; i12 < i5 - min; i12++) {
-                            sArr[i12] = sArr[min + i12];
+                        for (int i15 = 0; i15 < i6 - iMin; i15++) {
+                            sArr[i15] = sArr[iMin + i15];
                         }
-                        for (int i13 = 0; i13 < i6 - min; i13++) {
-                            sArr2[i13] = sArr2[min + i13];
+                        for (int i16 = 0; i16 < i7 - iMin; i16++) {
+                            sArr2[i16] = sArr2[iMin + i16];
                         }
-                        i5 = i7 - min;
-                        i6 = i8 - min;
+                        i6 = i8 - iMin;
+                        i7 = i9 - iMin;
                         i = 0;
                     } else {
                         i = 0;
-                        read = screenInternalAudioRecorder.mAudioRecord.read(bArr, 0, i3);
+                        i2 = screenInternalAudioRecorder.mAudioRecord.read(bArr, 0, i4);
                     }
-                    if (read < 0) {
-                        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(read, i7, "read error ", ", shorts internal: ", ", shorts mic: ");
-                        m.append(i8);
-                        Log.e("ScreenAudioRecorder", m.toString());
+                    if (i2 < 0) {
+                        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i8, "read error ", ", shorts internal: ", ", shorts mic: ");
+                        sbM.append(i9);
+                        Log.e("ScreenAudioRecorder", sbM.toString());
                         break;
                     }
-                    int i14 = i;
+                    int i17 = i;
                     while (true) {
-                        if (read <= 0) {
+                        if (i2 <= 0) {
                             z2 = z3;
                             sArr3 = sArr2;
                             break;
                         }
                         z2 = z3;
                         sArr3 = sArr2;
-                        int dequeueInputBuffer = screenInternalAudioRecorder.mCodec.dequeueInputBuffer(500L);
-                        if (dequeueInputBuffer < 0) {
+                        int iDequeueInputBuffer = screenInternalAudioRecorder.mCodec.dequeueInputBuffer(500L);
+                        if (iDequeueInputBuffer < 0) {
                             screenInternalAudioRecorder.writeOutput();
                             break;
                         }
-                        ByteBuffer inputBuffer = screenInternalAudioRecorder.mCodec.getInputBuffer(dequeueInputBuffer);
+                        ByteBuffer inputBuffer = screenInternalAudioRecorder.mCodec.getInputBuffer(iDequeueInputBuffer);
                         inputBuffer.clear();
-                        int capacity = inputBuffer.capacity();
-                        if (read <= capacity) {
-                            capacity = read;
+                        int iCapacity = inputBuffer.capacity();
+                        if (i2 <= iCapacity) {
+                            iCapacity = i2;
                         }
-                        read -= capacity;
-                        inputBuffer.put(bArr, i14, capacity);
-                        i14 += capacity;
-                        screenInternalAudioRecorder.mCodec.queueInputBuffer(dequeueInputBuffer, 0, capacity, screenInternalAudioRecorder.mPresentationTime, 0);
-                        long j = screenInternalAudioRecorder.mTotalBytes + capacity;
+                        i2 -= iCapacity;
+                        inputBuffer.put(bArr, i17, iCapacity);
+                        i17 += iCapacity;
+                        screenInternalAudioRecorder.mCodec.queueInputBuffer(iDequeueInputBuffer, 0, iCapacity, screenInternalAudioRecorder.mPresentationTime, 0);
+                        long j = screenInternalAudioRecorder.mTotalBytes + iCapacity;
                         screenInternalAudioRecorder.mTotalBytes = j;
                         screenInternalAudioRecorder.mConfig.getClass();
                         screenInternalAudioRecorder.mPresentationTime = ((j / 2) * 1000000) / 44100;
@@ -185,19 +183,19 @@ public class ScreenInternalAudioRecorder {
     public final void writeOutput() {
         while (true) {
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-            int dequeueOutputBuffer = this.mCodec.dequeueOutputBuffer(bufferInfo, 500L);
-            if (dequeueOutputBuffer == -2) {
+            int iDequeueOutputBuffer = this.mCodec.dequeueOutputBuffer(bufferInfo, 500L);
+            if (iDequeueOutputBuffer == -2) {
                 this.mTrackId = this.mMuxer.addTrack(this.mCodec.getOutputFormat());
                 this.mMuxer.start();
             } else {
-                if (dequeueOutputBuffer == -1 || this.mTrackId < 0) {
+                if (iDequeueOutputBuffer == -1 || this.mTrackId < 0) {
                     return;
                 }
-                ByteBuffer outputBuffer = this.mCodec.getOutputBuffer(dequeueOutputBuffer);
+                ByteBuffer outputBuffer = this.mCodec.getOutputBuffer(iDequeueOutputBuffer);
                 if ((bufferInfo.flags & 2) == 0 || bufferInfo.size == 0) {
                     this.mMuxer.writeSampleData(this.mTrackId, outputBuffer, bufferInfo);
                 }
-                this.mCodec.releaseOutputBuffer(dequeueOutputBuffer, false);
+                this.mCodec.releaseOutputBuffer(iDequeueOutputBuffer, false);
             }
         }
     }

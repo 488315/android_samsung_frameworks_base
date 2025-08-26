@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ListDumper {
     public static void dumpEntry(PipelineEntry pipelineEntry, String str, String str2, StringBuilder sb, boolean z, boolean z2) {
@@ -92,11 +91,11 @@ public class ListDumper {
         if (z2) {
             sb2.append("interacted=yes ");
         }
-        String sb3 = sb2.toString();
-        if (!sb3.isEmpty()) {
+        String string = sb2.toString();
+        if (!string.isEmpty()) {
             sb.append("\n\t");
             sb.append(str2);
-            sb.append(sb3);
+            sb.append(string);
         }
         sb.append("\n");
     }

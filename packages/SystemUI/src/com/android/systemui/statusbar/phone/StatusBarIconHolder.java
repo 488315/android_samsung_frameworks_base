@@ -7,7 +7,6 @@ import com.android.systemui.statusbar.pipeline.icons.shared.model.ModernStatusBa
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarIconHolder {
     public static final Companion Companion = new Companion(null);
@@ -15,7 +14,6 @@ public class StatusBarIconHolder {
     public int tag;
     public int type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BindableIconHolder extends StatusBarIconHolder {
         public final ModernStatusBarViewCreator initializer;
         public boolean isVisible;
@@ -51,7 +49,6 @@ public class StatusBarIconHolder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,7 +86,7 @@ public class StatusBarIconHolder {
     public String toString() {
         int type = getType();
         Companion.getClass();
-        return MoveResult$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(this.tag, "StatusBarIconHolder(type=", type != 0 ? type != 3 ? type != 4 ? "UNKNOWN" : "WIFI_NEW" : "MOBILE_NEW" : "ICON", " tag=", " visible="), isVisible(), ")");
+        return MoveResult$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(this.tag, "StatusBarIconHolder(type=", type != 0 ? type != 3 ? type != 4 ? "UNKNOWN" : "WIFI_NEW" : "MOBILE_NEW" : "ICON", " tag=", " visible="), isVisible(), ")");
     }
 
     private StatusBarIconHolder() {

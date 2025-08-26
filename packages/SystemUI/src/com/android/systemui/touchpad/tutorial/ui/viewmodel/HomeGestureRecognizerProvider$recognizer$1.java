@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HomeGestureRecognizerProvider$recognizer$1 extends SuspendLambda implements Function3 {
     /* synthetic */ float F$0;
@@ -21,11 +20,11 @@ final class HomeGestureRecognizerProvider$recognizer$1 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj).intValue();
-        float floatValue = ((Number) obj2).floatValue();
+        int iIntValue = ((Number) obj).intValue();
+        float fFloatValue = ((Number) obj2).floatValue();
         HomeGestureRecognizerProvider$recognizer$1 homeGestureRecognizerProvider$recognizer$1 = new HomeGestureRecognizerProvider$recognizer$1((Continuation) obj3);
-        homeGestureRecognizerProvider$recognizer$1.I$0 = intValue;
-        homeGestureRecognizerProvider$recognizer$1.F$0 = floatValue;
+        homeGestureRecognizerProvider$recognizer$1.I$0 = iIntValue;
+        homeGestureRecognizerProvider$recognizer$1.F$0 = fFloatValue;
         return homeGestureRecognizerProvider$recognizer$1.invokeSuspend(Unit.INSTANCE);
     }
 

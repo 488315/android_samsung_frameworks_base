@@ -1,13 +1,15 @@
 package androidx.compose.ui.graphics.colorspace;
 
+import androidx.appcompat.animation.SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0;
 import androidx.compose.material3.internal.colorUtil.Frame$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.ColorKt;
+import androidx.compose.ui.graphics.colorspace.Rgb;
 import java.util.Arrays;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Rgb extends ColorSpace {
     public static final Companion Companion = new Companion(null);
@@ -27,7 +29,6 @@ public final class Rgb extends ColorSpace {
     public final float[] transform;
     public final WhitePoint whitePoint;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,10 +36,10 @@ public final class Rgb extends ColorSpace {
 
         public static final WhitePoint access$computeWhitePoint(Companion companion, float[] fArr) {
             companion.getClass();
-            float[] mul3x3Float3 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{1.0f, 1.0f, 1.0f});
-            float f = mul3x3Float3[0];
-            float f2 = mul3x3Float3[1];
-            float f3 = f + f2 + mul3x3Float3[2];
+            float[] fArrMul3x3Float3 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{1.0f, 1.0f, 1.0f});
+            float f = fArrMul3x3Float3[0];
+            float f2 = fArrMul3x3Float3[1];
+            float f3 = f + f2 + fArrMul3x3Float3[2];
             return new WhitePoint(f / f3, f2 / f3);
         }
 
@@ -52,23 +53,23 @@ public final class Rgb extends ColorSpace {
             float f4 = fArr[3];
             float f5 = fArr[4];
             float f6 = fArr[5];
-            float m = Frame$$ExternalSyntheticOutline0.m(f, f6, (((f3 * f6) + ((f2 * f5) + (f * f4))) - (f4 * f5)) - (f2 * f3), 0.5f);
-            return m < 0.0f ? -m : m;
+            float fM = Frame$$ExternalSyntheticOutline0.m(f, f6, (((f3 * f6) + ((f2 * f5) + (f * f4))) - (f4 * f5)) - (f2 * f3), 0.5f);
+            return fM < 0.0f ? -fM : fM;
         }
 
         public static float[] computePrimaries$ui_graphics_release(float[] fArr) {
-            float[] mul3x3Float3 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{1.0f, 0.0f, 0.0f});
-            float[] mul3x3Float32 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{0.0f, 1.0f, 0.0f});
-            float[] mul3x3Float33 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{0.0f, 0.0f, 1.0f});
-            float f = mul3x3Float3[0];
-            float f2 = mul3x3Float3[1];
-            float f3 = f + f2 + mul3x3Float3[2];
-            float f4 = mul3x3Float32[0];
-            float f5 = mul3x3Float32[1];
-            float f6 = f4 + f5 + mul3x3Float32[2];
-            float f7 = mul3x3Float33[0];
-            float f8 = mul3x3Float33[1];
-            float f9 = f7 + f8 + mul3x3Float33[2];
+            float[] fArrMul3x3Float3 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{1.0f, 0.0f, 0.0f});
+            float[] fArrMul3x3Float32 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{0.0f, 1.0f, 0.0f});
+            float[] fArrMul3x3Float33 = ColorSpaceKt.mul3x3Float3(fArr, new float[]{0.0f, 0.0f, 1.0f});
+            float f = fArrMul3x3Float3[0];
+            float f2 = fArrMul3x3Float3[1];
+            float f3 = f + f2 + fArrMul3x3Float3[2];
+            float f4 = fArrMul3x3Float32[0];
+            float f5 = fArrMul3x3Float32[1];
+            float f6 = f4 + f5 + fArrMul3x3Float32[2];
+            float f7 = fArrMul3x3Float33[0];
+            float f8 = fArrMul3x3Float33[1];
+            float f9 = f7 + f8 + fArrMul3x3Float33[2];
             return new float[]{f / f3, f2 / f3, f4 / f6, f5 / f6, f7 / f9, f8 / f9};
         }
 
@@ -132,17 +133,17 @@ public final class Rgb extends ColorSpace {
 
     @Override // androidx.compose.ui.graphics.colorspace.ColorSpace
     public final int hashCode() {
-        int hashCode = (Arrays.hashCode(this.primaries) + ((this.whitePoint.hashCode() + (super.hashCode() * 31)) * 31)) * 31;
+        int iHashCode = (Arrays.hashCode(this.primaries) + ((this.whitePoint.hashCode() + (super.hashCode() * 31)) * 31)) * 31;
         float f = this.min;
-        int floatToIntBits = (hashCode + (f == 0.0f ? 0 : Float.floatToIntBits(f))) * 31;
+        int iFloatToIntBits = (iHashCode + (f == 0.0f ? 0 : Float.floatToIntBits(f))) * 31;
         float f2 = this.max;
-        int floatToIntBits2 = (floatToIntBits + (f2 == 0.0f ? 0 : Float.floatToIntBits(f2))) * 31;
+        int iFloatToIntBits2 = (iFloatToIntBits + (f2 == 0.0f ? 0 : Float.floatToIntBits(f2))) * 31;
         TransferParameters transferParameters = this.transferParameters;
-        int hashCode2 = floatToIntBits2 + (transferParameters != null ? transferParameters.hashCode() : 0);
+        int iHashCode2 = iFloatToIntBits2 + (transferParameters != null ? transferParameters.hashCode() : 0);
         if (transferParameters != null) {
-            return hashCode2;
+            return iHashCode2;
         }
-        return this.eotfOrig.hashCode() + ((this.oetfOrig.hashCode() + (hashCode2 * 31)) * 31);
+        return this.eotfOrig.hashCode() + ((this.oetfOrig.hashCode() + (iHashCode2 * 31)) * 31);
     }
 
     @Override // androidx.compose.ui.graphics.colorspace.ColorSpace
@@ -154,15 +155,15 @@ public final class Rgb extends ColorSpace {
     public final long toXy$ui_graphics_release(float f, float f2, float f3) {
         double d = f;
         Rgb$$ExternalSyntheticLambda0 rgb$$ExternalSyntheticLambda0 = this.eotfFunc;
-        float invoke = (float) rgb$$ExternalSyntheticLambda0.invoke(d);
-        float invoke2 = (float) rgb$$ExternalSyntheticLambda0.invoke(f2);
-        float invoke3 = (float) rgb$$ExternalSyntheticLambda0.invoke(f3);
+        float fInvoke = (float) rgb$$ExternalSyntheticLambda0.invoke(d);
+        float fInvoke2 = (float) rgb$$ExternalSyntheticLambda0.invoke(f2);
+        float fInvoke3 = (float) rgb$$ExternalSyntheticLambda0.invoke(f3);
         float[] fArr = this.transform;
         if (fArr.length < 9) {
             return 0L;
         }
-        float f4 = (fArr[6] * invoke3) + (fArr[3] * invoke2) + (fArr[0] * invoke);
-        float f5 = (fArr[7] * invoke3) + (fArr[4] * invoke2) + (fArr[1] * invoke);
+        float f4 = (fArr[6] * fInvoke3) + (fArr[3] * fInvoke2) + (fArr[0] * fInvoke);
+        float f5 = (fArr[7] * fInvoke3) + (fArr[4] * fInvoke2) + (fArr[1] * fInvoke);
         return (Float.floatToRawIntBits(f4) << 32) | (4294967295L & Float.floatToRawIntBits(f5));
     }
 
@@ -183,16 +184,16 @@ public final class Rgb extends ColorSpace {
     public final float toZ$ui_graphics_release(float f, float f2, float f3) {
         double d = f;
         Rgb$$ExternalSyntheticLambda0 rgb$$ExternalSyntheticLambda0 = this.eotfFunc;
-        float invoke = (float) rgb$$ExternalSyntheticLambda0.invoke(d);
-        float invoke2 = (float) rgb$$ExternalSyntheticLambda0.invoke(f2);
-        float invoke3 = (float) rgb$$ExternalSyntheticLambda0.invoke(f3);
+        float fInvoke = (float) rgb$$ExternalSyntheticLambda0.invoke(d);
+        float fInvoke2 = (float) rgb$$ExternalSyntheticLambda0.invoke(f2);
+        float fInvoke3 = (float) rgb$$ExternalSyntheticLambda0.invoke(f3);
         float[] fArr = this.transform;
-        return (fArr[8] * invoke3) + (fArr[5] * invoke2) + (fArr[2] * invoke);
+        return (fArr[8] * fInvoke3) + (fArr[5] * fInvoke2) + (fArr[2] * fInvoke);
     }
 
     @Override // androidx.compose.ui.graphics.colorspace.ColorSpace
     /* renamed from: xyzaToColor-JlNiLsg$ui_graphics_release */
-    public final long mo510xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
+    public final long mo512xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
         float[] fArr = this.inverseTransform;
         float f5 = (fArr[6] * f3) + (fArr[3] * f2) + (fArr[0] * f);
         float f6 = (fArr[7] * f3) + (fArr[4] * f2) + (fArr[1] * f);
@@ -202,11 +203,10 @@ public final class Rgb extends ColorSpace {
     }
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x01e9, code lost:
-    
-        if ((((r22 - r5) * r2) - ((r2 - r8) * r3)) >= 0.0f) goto L40;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x01f4  */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x0241  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x0273  */
     /* JADX WARN: Type inference failed for: r24v0 */
     /* JADX WARN: Type inference failed for: r24v1 */
     /* JADX WARN: Type inference failed for: r24v2 */
@@ -215,98 +215,307 @@ public final class Rgb extends ColorSpace {
     /* JADX WARN: Type inference failed for: r28v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public Rgb(java.lang.String r33, float[] r34, androidx.compose.ui.graphics.colorspace.WhitePoint r35, float[] r36, androidx.compose.ui.graphics.colorspace.DoubleFunction r37, androidx.compose.ui.graphics.colorspace.DoubleFunction r38, float r39, float r40, androidx.compose.ui.graphics.colorspace.TransferParameters r41, int r42) {
-        /*
-            Method dump skipped, instructions count: 689
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], androidx.compose.ui.graphics.colorspace.WhitePoint, float[], androidx.compose.ui.graphics.colorspace.DoubleFunction, androidx.compose.ui.graphics.colorspace.DoubleFunction, float, float, androidx.compose.ui.graphics.colorspace.TransferParameters, int):void");
+    public Rgb(String str, float[] fArr, WhitePoint whitePoint, float[] fArr2, DoubleFunction doubleFunction, DoubleFunction doubleFunction2, float f, float f2, TransferParameters transferParameters, int i) {
+        ?? r24;
+        ?? r28;
+        int i2;
+        float f3;
+        float f4;
+        boolean z;
+        double d;
+        super(str, ColorModel.Rgb, i, null);
+        ColorModel.Companion.getClass();
+        this.whitePoint = whitePoint;
+        this.min = f;
+        this.max = f2;
+        this.transferParameters = transferParameters;
+        this.oetfOrig = doubleFunction;
+        this.oetf = new Function1() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$oetf$1
+            {
+                super(1);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                double dInvoke = this.this$0.oetfOrig.invoke(((Number) obj).doubleValue());
+                Rgb rgb = this.this$0;
+                return Double.valueOf(RangesKt___RangesKt.coerceIn(dInvoke, rgb.min, rgb.max));
+            }
+        };
+        this.oetfFunc = new Rgb$$ExternalSyntheticLambda0(this, 0);
+        this.eotfOrig = doubleFunction2;
+        this.eotf = new Function1() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$eotf$1
+            {
+                super(1);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                double dDoubleValue = ((Number) obj).doubleValue();
+                return Double.valueOf(this.this$0.eotfOrig.invoke(RangesKt___RangesKt.coerceIn(dDoubleValue, r6.min, r6.max)));
+            }
+        };
+        this.eotfFunc = new Rgb$$ExternalSyntheticLambda0(this, 1);
+        if (fArr.length != 6 && fArr.length != 9) {
+            throw new IllegalArgumentException("The color space's primaries must be defined as an array of 6 floats in xyY or 9 floats in XYZ");
+        }
+        if (f < f2) {
+            Companion.getClass();
+            float[] fArr3 = new float[6];
+            if (fArr.length != 9) {
+                System.arraycopy(fArr, 0, fArr3, 0, (6 & 8) != 0 ? fArr.length : 6);
+            } else {
+                float f5 = fArr[0];
+                float f6 = fArr[1];
+                float f7 = f5 + f6 + fArr[2];
+                fArr3[0] = f5 / f7;
+                fArr3[1] = f6 / f7;
+                float f8 = fArr[3];
+                float f9 = fArr[4];
+                float f10 = f8 + f9 + fArr[5];
+                fArr3[2] = f8 / f10;
+                fArr3[3] = f9 / f10;
+                float f11 = fArr[6];
+                float f12 = fArr[7];
+                float f13 = f11 + f12 + fArr[8];
+                fArr3[4] = f11 / f13;
+                fArr3[5] = f12 / f13;
+            }
+            this.primaries = fArr3;
+            if (fArr2 == null) {
+                float f14 = fArr3[0];
+                float f15 = fArr3[1];
+                float f16 = fArr3[2];
+                float f17 = fArr3[3];
+                float f18 = fArr3[4];
+                float f19 = fArr3[5];
+                f3 = 1.0f;
+                float f20 = whitePoint.x;
+                r24 = 0;
+                float f21 = 1;
+                float f22 = (f21 - f14) / f15;
+                float f23 = (f21 - f16) / f17;
+                float f24 = (f21 - f18) / f19;
+                r28 = 1;
+                float f25 = whitePoint.y;
+                float f26 = (f21 - f20) / f25;
+                float f27 = f14 / f15;
+                float f28 = f20 / f25;
+                float f29 = (f16 / f17) - f27;
+                float f30 = f28 - f27;
+                float f31 = f23 - f22;
+                float f32 = ((f26 - f22) * f29) - (f30 * f31);
+                float f33 = (f24 - f22) * f29;
+                i2 = 6;
+                float f34 = (f18 / f19) - f27;
+                float f35 = f32 / (f33 - (f31 * f34));
+                float fM = SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f35, f34, f30, f29);
+                float f36 = (1.0f - fM) - f35;
+                float f37 = f36 / f15;
+                float f38 = fM / f17;
+                float f39 = f35 / f19;
+                this.transform = new float[]{f37 * f14, f36, ((1.0f - f14) - f15) * f37, f38 * f16, fM, ((1.0f - f16) - f17) * f38, f39 * f18, f35, ((1.0f - f18) - f19) * f39};
+            } else {
+                r24 = 0;
+                r28 = 1;
+                i2 = 6;
+                f3 = 1.0f;
+                if (fArr2.length == 9) {
+                    this.transform = fArr2;
+                } else {
+                    throw new IllegalArgumentException("Transform must have 9 entries! Has " + fArr2.length);
+                }
+            }
+            this.inverseTransform = ColorSpaceKt.inverse3x3(this.transform);
+            float fArea = Companion.area(fArr3);
+            ColorSpaces.INSTANCE.getClass();
+            if (fArea / Companion.area(ColorSpaces.Ntsc1953Primaries) > 0.9f) {
+                float[] fArr4 = ColorSpaces.SrgbPrimaries;
+                float f40 = fArr3[r24];
+                float f41 = fArr4[r24];
+                float f42 = fArr3[r28];
+                float f43 = fArr4[r28];
+                float f44 = fArr3[2];
+                float f45 = fArr4[2];
+                float f46 = fArr3[3];
+                float f47 = fArr4[3];
+                float f48 = fArr3[4];
+                float f49 = fArr4[4];
+                float f50 = fArr3[5];
+                float f51 = fArr4[5];
+                float f52 = f50 - f51;
+                f4 = 0.0f;
+                float[] fArr5 = new float[i2];
+                fArr5[r24] = f40 - f41;
+                fArr5[r28] = f42 - f43;
+                fArr5[2] = f44 - f45;
+                fArr5[3] = f46 - f47;
+                fArr5[4] = f48 - f49;
+                fArr5[5] = f52;
+                float f53 = fArr5[r24];
+                float f54 = fArr5[r28];
+                if (((f43 - f51) * f53) - ((f41 - f49) * f54) >= 0.0f && ((f41 - f45) * f54) - ((f43 - f47) * f53) >= 0.0f) {
+                    float f55 = fArr5[2];
+                    float f56 = fArr5[3];
+                    if (((f47 - f43) * f55) - ((f45 - f41) * f56) >= 0.0f && ((f45 - f49) * f56) - ((f47 - f51) * f55) >= 0.0f) {
+                        float f57 = fArr5[4];
+                        float f58 = fArr5[5];
+                        if (((f51 - f47) * f57) - ((f49 - f45) * f58) < 0.0f || ((f49 - f41) * f58) - ((f51 - f43) * f57) < 0.0f) {
+                        }
+                    }
+                }
+                if (i != 0) {
+                    float[] fArr6 = ColorSpaces.SrgbPrimaries;
+                    if (fArr3 == fArr6) {
+                        Illuminant.INSTANCE.getClass();
+                        if (ColorSpaceKt.compare(whitePoint, Illuminant.D65) && f == f4 && f2 == f3) {
+                            ColorSpaces.INSTANCE.getClass();
+                            Rgb rgb = ColorSpaces.Srgb;
+                            for (d = 0.0d; d <= 1.0d; d += 0.00392156862745098d) {
+                                if (Math.abs(doubleFunction.invoke(d) - rgb.oetfOrig.invoke(d)) <= 0.001d && Math.abs(doubleFunction2.invoke(d) - rgb.eotfOrig.invoke(d)) <= 0.001d) {
+                                }
+                            }
+                            z = r28;
+                        }
+                        z = r24;
+                        break;
+                    }
+                    for (int i3 = r24; i3 < 6; i3++) {
+                        if (Float.compare(fArr3[i3], fArr6[i3]) != 0 && Math.abs(fArr3[i3] - fArr6[i3]) > 0.001f) {
+                            break;
+                        }
+                    }
+                    Illuminant.INSTANCE.getClass();
+                    if (ColorSpaceKt.compare(whitePoint, Illuminant.D65)) {
+                        ColorSpaces.INSTANCE.getClass();
+                        Rgb rgb2 = ColorSpaces.Srgb;
+                        while (d <= 1.0d) {
+                        }
+                        z = r28;
+                    }
+                    z = r24;
+                    break;
+                }
+                z = r28;
+                this.isSrgb = z;
+                return;
+            }
+            f4 = 0.0f;
+            int i4 = (f > f4 ? 1 : (f == f4 ? 0 : -1));
+            if (i != 0) {
+            }
+            this.isSrgb = z;
+            return;
+        }
+        throw new IllegalArgumentException("Invalid range: min=" + f + ", max=" + f2 + "; min must be strictly < max");
+    }
+
+    public Rgb(String str, float[] fArr, final Function1 function1, final Function1 function12) {
+        Companion companion = Companion;
+        companion.getClass();
+        float[] fArrComputePrimaries$ui_graphics_release = Companion.computePrimaries$ui_graphics_release(fArr);
+        WhitePoint whitePointAccess$computeWhitePoint = Companion.access$computeWhitePoint(companion, fArr);
+        final int i = 0;
+        DoubleFunction doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
+            @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+            public final double invoke(double d) {
+                Function1 function13 = function1;
+                switch (i) {
+                    case 0:
+                        Rgb.Companion companion2 = Rgb.Companion;
+                        break;
+                    case 1:
+                        Rgb.Companion companion3 = Rgb.Companion;
+                        break;
+                    case 2:
+                        Rgb.Companion companion4 = Rgb.Companion;
+                        break;
+                    default:
+                        Rgb.Companion companion5 = Rgb.Companion;
+                        break;
+                }
+                return ((Number) function13.mo781invoke(Double.valueOf(d))).doubleValue();
+            }
+        };
+        final int i2 = 1;
+        this(str, fArrComputePrimaries$ui_graphics_release, whitePointAccess$computeWhitePoint, null, doubleFunction, new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
+            @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+            public final double invoke(double d) {
+                Function1 function13 = function12;
+                switch (i2) {
+                    case 0:
+                        Rgb.Companion companion2 = Rgb.Companion;
+                        break;
+                    case 1:
+                        Rgb.Companion companion3 = Rgb.Companion;
+                        break;
+                    case 2:
+                        Rgb.Companion companion4 = Rgb.Companion;
+                        break;
+                    default:
+                        Rgb.Companion companion5 = Rgb.Companion;
+                        break;
+                }
+                return ((Number) function13.mo781invoke(Double.valueOf(d))).doubleValue();
+            }
+        }, 0.0f, 1.0f, null, -1);
+    }
+
+    public Rgb(String str, float[] fArr, WhitePoint whitePoint, final Function1 function1, final Function1 function12, float f, float f2) {
+        final int i = 2;
+        DoubleFunction doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
+            @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+            public final double invoke(double d) {
+                Function1 function13 = function1;
+                switch (i) {
+                    case 0:
+                        Rgb.Companion companion2 = Rgb.Companion;
+                        break;
+                    case 1:
+                        Rgb.Companion companion3 = Rgb.Companion;
+                        break;
+                    case 2:
+                        Rgb.Companion companion4 = Rgb.Companion;
+                        break;
+                    default:
+                        Rgb.Companion companion5 = Rgb.Companion;
+                        break;
+                }
+                return ((Number) function13.mo781invoke(Double.valueOf(d))).doubleValue();
+            }
+        };
+        final int i2 = 3;
+        this(str, fArr, whitePoint, null, doubleFunction, new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
+            @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+            public final double invoke(double d) {
+                Function1 function13 = function12;
+                switch (i2) {
+                    case 0:
+                        Rgb.Companion companion2 = Rgb.Companion;
+                        break;
+                    case 1:
+                        Rgb.Companion companion3 = Rgb.Companion;
+                        break;
+                    case 2:
+                        Rgb.Companion companion4 = Rgb.Companion;
+                        break;
+                    default:
+                        Rgb.Companion companion5 = Rgb.Companion;
+                        break;
+                }
+                return ((Number) function13.mo781invoke(Double.valueOf(d))).doubleValue();
+            }
+        }, f, f2, null, -1);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r13, float[] r14, final kotlin.jvm.functions.Function1 r15, final kotlin.jvm.functions.Function1 r16) {
-        /*
-            r12 = this;
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion r0 = androidx.compose.ui.graphics.colorspace.Rgb.Companion
-            r0.getClass()
-            float[] r3 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.computePrimaries$ui_graphics_release(r14)
-            androidx.compose.ui.graphics.colorspace.WhitePoint r4 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.access$computeWhitePoint(r0, r14)
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3 r6 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
-            r14 = 0
-            r6.<init>()
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3 r7 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
-            r14 = 1
-            r15 = r16
-            r7.<init>()
-            r8 = 0
-            r9 = 1065353216(0x3f800000, float:1.0)
-            r5 = 0
-            r10 = 0
-            r11 = -1
-            r1 = r12
-            r2 = r13
-            r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1):void");
-    }
-
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r12, float[] r13, androidx.compose.ui.graphics.colorspace.WhitePoint r14, final kotlin.jvm.functions.Function1 r15, final kotlin.jvm.functions.Function1 r16, float r17, float r18) {
-        /*
-            r11 = this;
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3 r5 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
-            r0 = 2
-            r5.<init>()
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3 r6 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda3
-            r15 = 3
-            r0 = r16
-            r6.<init>()
-            r10 = -1
-            r4 = 0
-            r9 = 0
-            r0 = r11
-            r1 = r12
-            r2 = r13
-            r3 = r14
-            r7 = r17
-            r8 = r18
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], androidx.compose.ui.graphics.colorspace.WhitePoint, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, float, float):void");
-    }
-
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r8, float[] r9, androidx.compose.ui.graphics.colorspace.TransferParameters r10) {
-        /*
-            r7 = this;
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion r0 = androidx.compose.ui.graphics.colorspace.Rgb.Companion
-            r0.getClass()
-            float[] r3 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.computePrimaries$ui_graphics_release(r9)
-            androidx.compose.ui.graphics.colorspace.WhitePoint r4 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.access$computeWhitePoint(r0, r9)
-            r6 = -1
-            r1 = r7
-            r2 = r8
-            r5 = r10
-            r1.<init>(r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], androidx.compose.ui.graphics.colorspace.TransferParameters):void");
+    public Rgb(String str, float[] fArr, TransferParameters transferParameters) {
+        Companion companion = Companion;
+        companion.getClass();
+        this(str, Companion.computePrimaries$ui_graphics_release(fArr), Companion.access$computeWhitePoint(companion, fArr), transferParameters, -1);
     }
 
     public Rgb(String str, float[] fArr, WhitePoint whitePoint, TransferParameters transferParameters) {
@@ -314,27 +523,10 @@ public final class Rgb extends ColorSpace {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r11, float[] r12, double r13) {
-        /*
-            r10 = this;
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion r0 = androidx.compose.ui.graphics.colorspace.Rgb.Companion
-            r0.getClass()
-            float[] r3 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.computePrimaries$ui_graphics_release(r12)
-            androidx.compose.ui.graphics.colorspace.WhitePoint r4 = androidx.compose.ui.graphics.colorspace.Rgb.Companion.access$computeWhitePoint(r0, r12)
-            r9 = -1
-            r7 = 0
-            r8 = 1065353216(0x3f800000, float:1.0)
-            r1 = r10
-            r2 = r11
-            r5 = r13
-            r1.<init>(r2, r3, r4, r5, r7, r8, r9)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], double):void");
+    public Rgb(String str, float[] fArr, double d) {
+        Companion companion = Companion;
+        companion.getClass();
+        this(str, Companion.computePrimaries$ui_graphics_release(fArr), Companion.access$computeWhitePoint(companion, fArr), d, 0.0f, 1.0f, -1);
     }
 
     public Rgb(String str, float[] fArr, WhitePoint whitePoint, double d) {
@@ -342,156 +534,438 @@ public final class Rgb extends ColorSpace {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r20, float[] r21, androidx.compose.ui.graphics.colorspace.WhitePoint r22, final double r23, float r25, float r26, int r27) {
-        /*
-            r19 = this;
-            r1 = r23
-            r3 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-            int r0 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda2 r3 = androidx.compose.ui.graphics.colorspace.Rgb.DoubleIdentity
-            if (r0 != 0) goto Ld
-            r17 = r3
-            goto L15
-        Ld:
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5 r4 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5
-            r5 = 0
-            r4.<init>()
-            r17 = r4
-        L15:
-            if (r0 != 0) goto L1a
-        L17:
-            r18 = r3
-            goto L21
-        L1a:
-            androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5 r3 = new androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5
-            r0 = 1
-            r3.<init>()
-            goto L17
-        L21:
-            androidx.compose.ui.graphics.colorspace.TransferParameters r15 = new androidx.compose.ui.graphics.colorspace.TransferParameters
-            r11 = 0
-            r13 = 0
-            r3 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-            r5 = 0
-            r7 = 0
-            r9 = 0
-            r0 = r15
-            r15 = 96
-            r16 = 0
-            r0.<init>(r1, r3, r5, r7, r9, r11, r13, r15, r16)
-            r10 = 0
-            r6 = r19
-            r7 = r20
-            r8 = r21
-            r9 = r22
-            r13 = r25
-            r14 = r26
-            r16 = r27
-            r15 = r0
-            r11 = r17
-            r12 = r18
-            r6.<init>(r7, r8, r9, r10, r11, r12, r13, r14, r15, r16)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], androidx.compose.ui.graphics.colorspace.WhitePoint, double, float, float, int):void");
+    public Rgb(String str, float[] fArr, WhitePoint whitePoint, final double d, float f, float f2, int i) {
+        DoubleFunction doubleFunction;
+        DoubleFunction doubleFunction2 = DoubleIdentity;
+        if (d == 1.0d) {
+            doubleFunction = doubleFunction2;
+        } else {
+            final int i2 = 0;
+            doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d2) {
+                    double d3 = d;
+                    switch (i2) {
+                        case 0:
+                            Rgb.Companion companion = Rgb.Companion;
+                            if (d2 < 0.0d) {
+                                d2 = 0.0d;
+                            }
+                            return Math.pow(d2, 1.0d / d3);
+                        default:
+                            Rgb.Companion companion2 = Rgb.Companion;
+                            if (d2 < 0.0d) {
+                                d2 = 0.0d;
+                            }
+                            return Math.pow(d2, d3);
+                    }
+                }
+            };
+        }
+        if (d != 1.0d) {
+            final int i3 = 1;
+            doubleFunction2 = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$$ExternalSyntheticLambda5
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d2) {
+                    double d3 = d;
+                    switch (i3) {
+                        case 0:
+                            Rgb.Companion companion = Rgb.Companion;
+                            if (d2 < 0.0d) {
+                                d2 = 0.0d;
+                            }
+                            return Math.pow(d2, 1.0d / d3);
+                        default:
+                            Rgb.Companion companion2 = Rgb.Companion;
+                            if (d2 < 0.0d) {
+                                d2 = 0.0d;
+                            }
+                            return Math.pow(d2, d3);
+                    }
+                }
+            };
+        }
+        this(str, fArr, whitePoint, null, doubleFunction, doubleFunction2, f, f2, new TransferParameters(d, 1.0d, 0.0d, 0.0d, 0.0d, 0.0d, 0.0d, 96, null), i);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rgb(java.lang.String r16, float[] r17, androidx.compose.ui.graphics.colorspace.WhitePoint r18, final androidx.compose.ui.graphics.colorspace.TransferParameters r19, int r20) {
-        /*
-            r15 = this;
-            r9 = r19
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion r0 = androidx.compose.ui.graphics.colorspace.Rgb.Companion
-            r0.getClass()
-            double r0 = r9.gamma
-            r2 = -4609434218613702656(0xc008000000000000, double:-3.0)
-            int r4 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r4 != 0) goto L11
-            r4 = 1
-            goto L12
-        L11:
-            r4 = 0
-        L12:
-            r5 = -4611686018427387904(0xc000000000000000, double:-2.0)
-            r7 = 0
-            double r10 = r9.f
-            double r12 = r9.e
-            if (r4 == 0) goto L23
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r4 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r14 = 4
-            r4.<init>()
-            goto L43
-        L23:
-            int r4 = (r0 > r5 ? 1 : (r0 == r5 ? 0 : -1))
-            if (r4 != 0) goto L2e
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r4 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r14 = 5
-            r4.<init>()
-            goto L43
-        L2e:
-            int r4 = (r12 > r7 ? 1 : (r12 == r7 ? 0 : -1))
-            if (r4 != 0) goto L3d
-            int r4 = (r10 > r7 ? 1 : (r10 == r7 ? 0 : -1))
-            if (r4 != 0) goto L3d
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r4 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r14 = 6
-            r4.<init>()
-            goto L43
-        L3d:
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r4 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r14 = 7
-            r4.<init>()
-        L43:
-            int r2 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r2 != 0) goto L4f
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r0 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r1 = 0
-            r0.<init>()
-        L4d:
-            r6 = r0
-            goto L70
-        L4f:
-            int r0 = (r0 > r5 ? 1 : (r0 == r5 ? 0 : -1))
-            if (r0 != 0) goto L5a
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r0 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r1 = 1
-            r0.<init>()
-            goto L4d
-        L5a:
-            int r0 = (r12 > r7 ? 1 : (r12 == r7 ? 0 : -1))
-            if (r0 != 0) goto L69
-            int r0 = (r10 > r7 ? 1 : (r10 == r7 ? 0 : -1))
-            if (r0 != 0) goto L69
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r0 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r1 = 2
-            r0.<init>()
-            goto L4d
-        L69:
-            androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0 r0 = new androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
-            r1 = 3
-            r0.<init>()
-            goto L4d
-        L70:
-            r8 = 1065353216(0x3f800000, float:1.0)
-            r5 = r4
-            r4 = 0
-            r7 = 0
-            r0 = r15
-            r1 = r16
-            r2 = r17
-            r3 = r18
-            r10 = r20
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.colorspace.Rgb.<init>(java.lang.String, float[], androidx.compose.ui.graphics.colorspace.WhitePoint, androidx.compose.ui.graphics.colorspace.TransferParameters, int):void");
+    public Rgb(String str, float[] fArr, WhitePoint whitePoint, final TransferParameters transferParameters, int i) {
+        DoubleFunction doubleFunction;
+        DoubleFunction doubleFunction2;
+        Companion.getClass();
+        double d = transferParameters.gamma;
+        boolean z = d == -3.0d;
+        double d2 = transferParameters.f;
+        double d3 = transferParameters.e;
+        if (z) {
+            final int i2 = 4;
+            doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i2) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else if (d == -2.0d) {
+            final int i3 = 5;
+            doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i3) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else if (d3 == 0.0d && d2 == 0.0d) {
+            final int i4 = 6;
+            doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i4) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else {
+            final int i5 = 7;
+            doubleFunction = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i5) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        }
+        if (d == -3.0d) {
+            final int i6 = 0;
+            doubleFunction2 = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i6) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else if (d == -2.0d) {
+            final int i7 = 1;
+            doubleFunction2 = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i7) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else if (d3 == 0.0d && d2 == 0.0d) {
+            final int i8 = 2;
+            doubleFunction2 = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i8) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        } else {
+            final int i9 = 3;
+            doubleFunction2 = new DoubleFunction() { // from class: androidx.compose.ui.graphics.colorspace.Rgb$Companion$$ExternalSyntheticLambda0
+                @Override // androidx.compose.ui.graphics.colorspace.DoubleFunction
+                public final double invoke(double d4) {
+                    switch (i9) {
+                        case 0:
+                            ColorSpaces colorSpaces = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters2 = transferParameters;
+                            colorSpaces.getClass();
+                            return ColorSpaces.transferHlgEotf$ui_graphics_release(transferParameters2, d4);
+                        case 1:
+                            ColorSpaces colorSpaces2 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters3 = transferParameters;
+                            colorSpaces2.getClass();
+                            return ColorSpaces.transferSt2048Eotf$ui_graphics_release(transferParameters3, d4);
+                        case 2:
+                            TransferParameters transferParameters4 = transferParameters;
+                            return d4 >= transferParameters4.d ? Math.pow((transferParameters4.a * d4) + transferParameters4.b, transferParameters4.gamma) : transferParameters4.c * d4;
+                        case 3:
+                            TransferParameters transferParameters5 = transferParameters;
+                            return d4 >= transferParameters5.d ? Math.pow((transferParameters5.a * d4) + transferParameters5.b, transferParameters5.gamma) + transferParameters5.e : (transferParameters5.c * d4) + transferParameters5.f;
+                        case 4:
+                            ColorSpaces colorSpaces3 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters6 = transferParameters;
+                            colorSpaces3.getClass();
+                            return ColorSpaces.transferHlgOetf$ui_graphics_release(transferParameters6, d4);
+                        case 5:
+                            ColorSpaces colorSpaces4 = ColorSpaces.INSTANCE;
+                            TransferParameters transferParameters7 = transferParameters;
+                            colorSpaces4.getClass();
+                            return ColorSpaces.transferSt2048Oetf$ui_graphics_release(transferParameters7, d4);
+                        case 6:
+                            TransferParameters transferParameters8 = transferParameters;
+                            double d5 = transferParameters8.d;
+                            double d6 = transferParameters8.c;
+                            return d4 >= d5 * d6 ? (Math.pow(d4, 1.0d / transferParameters8.gamma) - transferParameters8.b) / transferParameters8.a : d4 / d6;
+                        default:
+                            TransferParameters transferParameters9 = transferParameters;
+                            double d7 = transferParameters9.a;
+                            double d8 = transferParameters9.d;
+                            double d9 = transferParameters9.c;
+                            return d4 >= d8 * d9 ? (Math.pow(d4 - transferParameters9.e, 1.0d / transferParameters9.gamma) - transferParameters9.b) / d7 : (d4 - transferParameters9.f) / d9;
+                    }
+                }
+            };
+        }
+        this(str, fArr, whitePoint, null, doubleFunction, doubleFunction2, 0.0f, 1.0f, transferParameters, i);
     }
 }

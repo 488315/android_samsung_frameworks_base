@@ -5,7 +5,6 @@ import androidx.compose.ui.layout.Measurable;
 import androidx.compose.ui.node.LookaheadCapablePlaceable;
 import androidx.compose.ui.unit.Constraints;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class IntrinsicWidthNode extends IntrinsicSizeModifier {
     public boolean enforceIncoming;
@@ -18,13 +17,13 @@ final class IntrinsicWidthNode extends IntrinsicSizeModifier {
 
     @Override // androidx.compose.foundation.layout.IntrinsicSizeModifier
     /* renamed from: calculateContentConstraints-l58MMJ0 */
-    public final long mo113calculateContentConstraintsl58MMJ0(Measurable measurable, long j) {
-        int minIntrinsicWidth = this.width == IntrinsicSize.Min ? measurable.minIntrinsicWidth(Constraints.m820getMaxHeightimpl(j)) : measurable.maxIntrinsicWidth(Constraints.m820getMaxHeightimpl(j));
-        if (minIntrinsicWidth < 0) {
-            minIntrinsicWidth = 0;
+    public final long mo114calculateContentConstraintsl58MMJ0(Measurable measurable, long j) {
+        int iMinIntrinsicWidth = this.width == IntrinsicSize.Min ? measurable.minIntrinsicWidth(Constraints.m822getMaxHeightimpl(j)) : measurable.maxIntrinsicWidth(Constraints.m822getMaxHeightimpl(j));
+        if (iMinIntrinsicWidth < 0) {
+            iMinIntrinsicWidth = 0;
         }
         Constraints.Companion.getClass();
-        return Constraints.Companion.m828fixedWidthOenEA2s(minIntrinsicWidth);
+        return Constraints.Companion.m830fixedWidthOenEA2s(iMinIntrinsicWidth);
     }
 
     @Override // androidx.compose.foundation.layout.IntrinsicSizeModifier

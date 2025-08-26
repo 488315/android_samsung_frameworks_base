@@ -23,7 +23,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardSecAffordanceHelper {
     public final Callback callback;
@@ -41,11 +40,9 @@ public final class KeyguardSecAffordanceHelper {
     public final int mTouchTargetHeight;
     public final int mTouchTargetWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -91,9 +88,9 @@ public final class KeyguardSecAffordanceHelper {
         }
         this.mIndicationArea = (LinearLayout) ((ViewGroup) keyguardSecBottomAreaView.indicationArea$delegate.getValue());
         this.mIndicationText = (KeyguardIndicationTextView) ((TextView) keyguardSecBottomAreaView.indicationText$delegate.getValue());
-        List<KeyguardSecAffordanceView> asList = Arrays.asList(this.mLeftIcon, this.mRightIcon);
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-        for (KeyguardSecAffordanceView keyguardSecAffordanceView : asList) {
+        List<KeyguardSecAffordanceView> listAsList = Arrays.asList(this.mLeftIcon, this.mRightIcon);
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+        for (KeyguardSecAffordanceView keyguardSecAffordanceView : listAsList) {
             if (keyguardSecAffordanceView != null) {
                 keyguardSecAffordanceView.mHelperCallback = this.callback;
             }
@@ -102,9 +99,9 @@ public final class KeyguardSecAffordanceHelper {
                 if (frameLayout3 != null) {
                     keyguardSecAffordanceView.mBlurPanelRoot = frameLayout3;
                     keyguardSecAffordanceView.mPanelBackground = frameLayout3.findViewById(R.id.panel_background);
-                    View findViewById = frameLayout3.findViewById(R.id.panel_blur);
-                    keyguardSecAffordanceView.mBlurPanelView = findViewById;
-                    findViewById.setClipToOutline(false);
+                    View viewFindViewById = frameLayout3.findViewById(R.id.panel_blur);
+                    keyguardSecAffordanceView.mBlurPanelView = viewFindViewById;
+                    viewFindViewById.setClipToOutline(false);
                     keyguardSecAffordanceView.mPanelDimView = frameLayout3.findViewById(R.id.panel_dim_layer);
                     keyguardSecAffordanceView.mPanelIcon = (ImageView) frameLayout3.findViewById(R.id.panel_icon);
                     keyguardSecAffordanceView.mPanelBackgroundDrawable = new PaintDrawable(keyguardSecAffordanceView.mRectangleColor);

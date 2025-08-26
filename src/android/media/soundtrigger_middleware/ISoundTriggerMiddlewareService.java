@@ -75,9 +75,9 @@ public interface ISoundTriggerMiddlewareService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerMiddlewareService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerMiddlewareService)) {
-                return (ISoundTriggerMiddlewareService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerMiddlewareService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundTriggerMiddlewareService)) {
+                return (ISoundTriggerMiddlewareService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,38 +94,38 @@ public interface ISoundTriggerMiddlewareService extends IInterface {
             if (i == 1) {
                 Identity identity = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 parcel.enforceNoDataAvail();
-                SoundTriggerModuleDescriptor[] listModulesAsOriginator = listModulesAsOriginator(identity);
+                SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArrListModulesAsOriginator = listModulesAsOriginator(identity);
                 parcel2.writeNoException();
-                parcel2.writeTypedArray(listModulesAsOriginator, 1);
+                parcel2.writeTypedArray(soundTriggerModuleDescriptorArrListModulesAsOriginator, 1);
             } else if (i == 2) {
                 Identity identity2 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 Identity identity3 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 parcel.enforceNoDataAvail();
-                SoundTriggerModuleDescriptor[] listModulesAsMiddleman = listModulesAsMiddleman(identity2, identity3);
+                SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArrListModulesAsMiddleman = listModulesAsMiddleman(identity2, identity3);
                 parcel2.writeNoException();
-                parcel2.writeTypedArray(listModulesAsMiddleman, 1);
+                parcel2.writeTypedArray(soundTriggerModuleDescriptorArrListModulesAsMiddleman, 1);
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Identity identity4 = (Identity) parcel.readTypedObject(Identity.CREATOR);
-                ISoundTriggerCallback asInterface = ISoundTriggerCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISoundTriggerCallback iSoundTriggerCallbackAsInterface = ISoundTriggerCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ISoundTriggerModule attachAsOriginator = attachAsOriginator(readInt, identity4, asInterface);
+                ISoundTriggerModule iSoundTriggerModuleAttachAsOriginator = attachAsOriginator(i3, identity4, iSoundTriggerCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(attachAsOriginator);
+                parcel2.writeStrongInterface(iSoundTriggerModuleAttachAsOriginator);
             } else if (i == 4) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 Identity identity5 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 Identity identity6 = (Identity) parcel.readTypedObject(Identity.CREATOR);
-                ISoundTriggerCallback asInterface2 = ISoundTriggerCallback.Stub.asInterface(parcel.readStrongBinder());
-                boolean readBoolean = parcel.readBoolean();
+                ISoundTriggerCallback iSoundTriggerCallbackAsInterface2 = ISoundTriggerCallback.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                ISoundTriggerModule attachAsMiddleman = attachAsMiddleman(readInt2, identity5, identity6, asInterface2, readBoolean);
+                ISoundTriggerModule iSoundTriggerModuleAttachAsMiddleman = attachAsMiddleman(i4, identity5, identity6, iSoundTriggerCallbackAsInterface2, z);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(attachAsMiddleman);
+                parcel2.writeStrongInterface(iSoundTriggerModuleAttachAsMiddleman);
             } else if (i == 5) {
-                ISoundTriggerInjection asInterface3 = ISoundTriggerInjection.Stub.asInterface(parcel.readStrongBinder());
+                ISoundTriggerInjection iSoundTriggerInjectionAsInterface = ISoundTriggerInjection.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                attachFakeHalInjection(asInterface3);
+                attachFakeHalInjection(iSoundTriggerInjectionAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -151,87 +151,87 @@ public interface ISoundTriggerMiddlewareService extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService
             public SoundTriggerModuleDescriptor[] listModulesAsOriginator(Identity identity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SoundTriggerModuleDescriptor[]) obtain2.createTypedArray(SoundTriggerModuleDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SoundTriggerModuleDescriptor[]) parcelObtain2.createTypedArray(SoundTriggerModuleDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService
             public SoundTriggerModuleDescriptor[] listModulesAsMiddleman(Identity identity, Identity identity2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeTypedObject(identity2, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SoundTriggerModuleDescriptor[]) obtain2.createTypedArray(SoundTriggerModuleDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeTypedObject(identity2, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SoundTriggerModuleDescriptor[]) parcelObtain2.createTypedArray(SoundTriggerModuleDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService
             public ISoundTriggerModule attachAsOriginator(int i, Identity identity, ISoundTriggerCallback iSoundTriggerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeStrongInterface(iSoundTriggerCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISoundTriggerModule.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeStrongInterface(iSoundTriggerCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISoundTriggerModule.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService
             public ISoundTriggerModule attachAsMiddleman(int i, Identity identity, Identity identity2, ISoundTriggerCallback iSoundTriggerCallback, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeTypedObject(identity2, 0);
-                    obtain.writeStrongInterface(iSoundTriggerCallback);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISoundTriggerModule.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeTypedObject(identity2, 0);
+                    parcelObtain.writeStrongInterface(iSoundTriggerCallback);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISoundTriggerModule.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService
             public void attachFakeHalInjection(ISoundTriggerInjection iSoundTriggerInjection) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSoundTriggerInjection);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerMiddlewareService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSoundTriggerInjection);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

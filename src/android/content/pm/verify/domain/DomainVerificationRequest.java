@@ -83,8 +83,8 @@ public final class DomainVerificationRequest implements Parcelable {
     }
 
     DomainVerificationRequest(Parcel parcel) {
-        Set<String> unparcelPackageNames = unparcelPackageNames(parcel);
-        this.mPackageNames = unparcelPackageNames;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelPackageNames);
+        Set<String> setUnparcelPackageNames = unparcelPackageNames(parcel);
+        this.mPackageNames = setUnparcelPackageNames;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcelPackageNames);
     }
 }

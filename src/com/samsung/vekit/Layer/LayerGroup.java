@@ -55,14 +55,14 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
                     }
                 }
             } else {
-                long j = 0;
+                long duration = 0;
                 for (Item item2 : next.getChildren()) {
                     if (!item2.getItemType().equals(ItemType.FRAGMENT_AUDIO) || !((FragmentAudioItem) item2).isEnableAutoDuration()) {
-                        j += item2.getDuration() + item2.getPadding();
+                        duration += item2.getDuration() + item2.getPadding();
                     }
                 }
-                Log.i(this.TAG, "total duration : " + this.totalDuration + "layerDuration : " + j);
-                this.totalDuration = Math.max(this.totalDuration, j);
+                Log.i(this.TAG, "total duration : " + this.totalDuration + "layerDuration : " + duration);
+                this.totalDuration = Math.max(this.totalDuration, duration);
             }
         }
         Log.i(this.TAG, "Final total duration : " + this.totalDuration + ", FrameworkMode : " + this.context.getFrameworkType().toString());
@@ -98,7 +98,7 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
     }
 
     public LayerGroup setPanel(Panel panel) {
-        this.panel = panel.m9809clone();
+        this.panel = panel.m9822clone();
         return this;
     }
 
@@ -175,10 +175,10 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
 
     @Override // com.samsung.vekit.Interface.HierarchyInterface
     public void swap(Layer layer, Layer layer2) {
-        int indexOf = this.layerList.indexOf(layer);
-        int indexOf2 = this.layerList.indexOf(layer2);
-        Collections.swap(this.layerList, indexOf, indexOf2);
-        this.context.getNativeInterface().swap(this, indexOf, indexOf2);
+        int iIndexOf = this.layerList.indexOf(layer);
+        int iIndexOf2 = this.layerList.indexOf(layer2);
+        Collections.swap(this.layerList, iIndexOf, iIndexOf2);
+        this.context.getNativeInterface().swap(this, iIndexOf, iIndexOf2);
     }
 
     @Override // com.samsung.vekit.Interface.HierarchyInterface

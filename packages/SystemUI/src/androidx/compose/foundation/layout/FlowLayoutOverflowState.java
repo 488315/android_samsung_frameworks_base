@@ -10,7 +10,6 @@ import androidx.compose.ui.unit.Constraints;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FlowLayoutOverflowState {
     public Measurable collapseMeasurable;
@@ -23,7 +22,6 @@ public final class FlowLayoutOverflowState {
     public IntIntPair seeMoreSize;
     public final FlowLayoutOverflow.OverflowType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -56,7 +54,7 @@ public final class FlowLayoutOverflowState {
     }
 
     /* renamed from: ellipsisSize-F35zm-w$foundation_layout, reason: not valid java name */
-    public final IntIntPair m105ellipsisSizeF35zmw$foundation_layout(int i, int i2, boolean z) {
+    public final IntIntPair m106ellipsisSizeF35zmw$foundation_layout(int i, int i2, boolean z) {
         int i3 = WhenMappings.$EnumSwitchMapping$0[this.type.ordinal()];
         if (i3 != 1 && i3 != 2) {
             if (i3 != 3) {
@@ -94,21 +92,21 @@ public final class FlowLayoutOverflowState {
     }
 
     /* renamed from: setOverflowMeasurables--hBUhpc$foundation_layout, reason: not valid java name */
-    public final void m106setOverflowMeasurableshBUhpc$foundation_layout(IntrinsicMeasurable intrinsicMeasurable, IntrinsicMeasurable intrinsicMeasurable2, boolean z, long j) {
-        long m116constructorimpl = OrientationIndependentConstraints.m116constructorimpl(j, z ? LayoutOrientation.Horizontal : LayoutOrientation.Vertical);
+    public final void m107setOverflowMeasurableshBUhpc$foundation_layout(IntrinsicMeasurable intrinsicMeasurable, IntrinsicMeasurable intrinsicMeasurable2, boolean z, long j) {
+        long jM117constructorimpl = OrientationIndependentConstraints.m117constructorimpl(j, z ? LayoutOrientation.Horizontal : LayoutOrientation.Vertical);
         if (intrinsicMeasurable != null) {
-            int m820getMaxHeightimpl = Constraints.m820getMaxHeightimpl(m116constructorimpl);
+            int iM822getMaxHeightimpl = Constraints.m822getMaxHeightimpl(jM117constructorimpl);
             int i = FlowLayoutKt.$r8$clinit;
-            int minIntrinsicWidth = z ? intrinsicMeasurable.minIntrinsicWidth(m820getMaxHeightimpl) : intrinsicMeasurable.minIntrinsicHeight(m820getMaxHeightimpl);
-            this.seeMoreSize = IntIntPair.m0boximpl(IntIntPair.m1constructorimpl(minIntrinsicWidth, z ? intrinsicMeasurable.minIntrinsicHeight(minIntrinsicWidth) : intrinsicMeasurable.minIntrinsicWidth(minIntrinsicWidth)));
+            int iMinIntrinsicWidth = z ? intrinsicMeasurable.minIntrinsicWidth(iM822getMaxHeightimpl) : intrinsicMeasurable.minIntrinsicHeight(iM822getMaxHeightimpl);
+            this.seeMoreSize = IntIntPair.m0boximpl(IntIntPair.m1constructorimpl(iMinIntrinsicWidth, z ? intrinsicMeasurable.minIntrinsicHeight(iMinIntrinsicWidth) : intrinsicMeasurable.minIntrinsicWidth(iMinIntrinsicWidth)));
             this.seeMoreMeasurable = intrinsicMeasurable instanceof Measurable ? (Measurable) intrinsicMeasurable : null;
             this.seeMorePlaceable = null;
         }
         if (intrinsicMeasurable2 != null) {
-            int m820getMaxHeightimpl2 = Constraints.m820getMaxHeightimpl(m116constructorimpl);
+            int iM822getMaxHeightimpl2 = Constraints.m822getMaxHeightimpl(jM117constructorimpl);
             int i2 = FlowLayoutKt.$r8$clinit;
-            int minIntrinsicWidth2 = z ? intrinsicMeasurable2.minIntrinsicWidth(m820getMaxHeightimpl2) : intrinsicMeasurable2.minIntrinsicHeight(m820getMaxHeightimpl2);
-            this.collapseSize = IntIntPair.m0boximpl(IntIntPair.m1constructorimpl(minIntrinsicWidth2, z ? intrinsicMeasurable2.minIntrinsicHeight(minIntrinsicWidth2) : intrinsicMeasurable2.minIntrinsicWidth(minIntrinsicWidth2)));
+            int iMinIntrinsicWidth2 = z ? intrinsicMeasurable2.minIntrinsicWidth(iM822getMaxHeightimpl2) : intrinsicMeasurable2.minIntrinsicHeight(iM822getMaxHeightimpl2);
+            this.collapseSize = IntIntPair.m0boximpl(IntIntPair.m1constructorimpl(iMinIntrinsicWidth2, z ? intrinsicMeasurable2.minIntrinsicHeight(iMinIntrinsicWidth2) : intrinsicMeasurable2.minIntrinsicWidth(iMinIntrinsicWidth2)));
             this.collapseMeasurable = intrinsicMeasurable2 instanceof Measurable ? (Measurable) intrinsicMeasurable2 : null;
             this.collapsePlaceable = null;
         }

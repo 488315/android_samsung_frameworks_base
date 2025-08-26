@@ -67,15 +67,15 @@ class CredstoreIdentityCredential extends IdentityCredential {
         this.mFeatureVersion = i2;
     }
 
-    private void ensureEphemeralKeyPair() {
+    private void ensureEphemeralKeyPair() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         if (this.mEphemeralKeyPair != null) {
             return;
         }
         try {
-            byte[] createEphemeralKeyPair = this.mBinder.createEphemeralKeyPair();
+            byte[] bArrCreateEphemeralKeyPair = this.mBinder.createEphemeralKeyPair();
             char[] cArr = new char[0];
             KeyStore keyStore = KeyStore.getInstance(KeyChain.EXTRA_PKCS12);
-            keyStore.load(new ByteArrayInputStream(createEphemeralKeyPair), cArr);
+            keyStore.load(new ByteArrayInputStream(bArrCreateEphemeralKeyPair), cArr);
             this.mEphemeralKeyPair = new KeyPair(keyStore.getCertificate("ephemeralKey").getPublicKey(), (PrivateKey) keyStore.getKey("ephemeralKey", cArr));
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
@@ -87,13 +87,13 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public KeyPair createEphemeralKeyPair() {
+    public KeyPair createEphemeralKeyPair() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         ensureEphemeralKeyPair();
         return this.mEphemeralKeyPair;
     }
 
     @Override // android.security.identity.IdentityCredential
-    public void setReaderEphemeralPublicKey(PublicKey publicKey) throws InvalidKeyException {
+    public void setReaderEphemeralPublicKey(PublicKey publicKey) throws IllegalStateException, NoSuchAlgorithmException, IOException, InvalidKeyException, KeyStoreException, CertificateException {
         try {
             this.mBinder.setReaderEphemeralPublicKey(Util.publicKeyEncodeUncompressedForm(publicKey));
             ensureEphemeralKeyPair();
@@ -101,12 +101,12 @@ class CredstoreIdentityCredential extends IdentityCredential {
                 KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH");
                 keyAgreement.init(this.mEphemeralKeyPair.getPrivate());
                 keyAgreement.doPhase(publicKey, true);
-                byte[] generateSecret = keyAgreement.generateSecret();
+                byte[] bArrGenerateSecret = keyAgreement.generateSecret();
                 byte[] bArr = new byte[0];
                 byte[] bArr2 = {1};
-                this.mSecretKey = new SecretKeySpec(Util.computeHkdf("HmacSha256", generateSecret, bArr2, bArr, 32), "AES");
+                this.mSecretKey = new SecretKeySpec(Util.computeHkdf("HmacSha256", bArrGenerateSecret, bArr2, bArr, 32), "AES");
                 bArr2[0] = 0;
-                this.mReaderSecretKey = new SecretKeySpec(Util.computeHkdf("HmacSha256", generateSecret, bArr2, bArr, 32), "AES");
+                this.mReaderSecretKey = new SecretKeySpec(Util.computeHkdf("HmacSha256", bArrGenerateSecret, bArr2, bArr, 32), "AES");
                 this.mEphemeralCounter = 1;
                 this.mReadersExpectedEphemeralCounter = 1;
             } catch (NoSuchAlgorithmException e) {
@@ -120,46 +120,46 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public byte[] encryptMessageToReader(byte[] bArr) {
+    public byte[] encryptMessageToReader(byte[] bArr) throws BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         try {
-            ByteBuffer allocate = ByteBuffer.allocate(12);
-            allocate.putInt(0, 0);
-            allocate.putInt(4, 1);
-            allocate.putInt(8, this.mEphemeralCounter);
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(12);
+            byteBufferAllocate.putInt(0, 0);
+            byteBufferAllocate.putInt(4, 1);
+            byteBufferAllocate.putInt(8, this.mEphemeralCounter);
             Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
-            cipher.init(1, this.mSecretKey, new GCMParameterSpec(128, allocate.array()));
-            byte[] doFinal = cipher.doFinal(bArr);
+            cipher.init(1, this.mSecretKey, new GCMParameterSpec(128, byteBufferAllocate.array()));
+            byte[] bArrDoFinal = cipher.doFinal(bArr);
             this.mEphemeralCounter++;
-            return doFinal;
+            return bArrDoFinal;
         } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             throw new RuntimeException("Error encrypting message", e);
         }
     }
 
     @Override // android.security.identity.IdentityCredential
-    public byte[] decryptMessageFromReader(byte[] bArr) throws MessageDecryptionException {
-        ByteBuffer allocate = ByteBuffer.allocate(12);
-        allocate.putInt(0, 0);
-        allocate.putInt(4, 0);
-        allocate.putInt(8, this.mReadersExpectedEphemeralCounter);
+    public byte[] decryptMessageFromReader(byte[] bArr) throws BadPaddingException, NoSuchPaddingException, MessageDecryptionException, IllegalBlockSizeException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(12);
+        byteBufferAllocate.putInt(0, 0);
+        byteBufferAllocate.putInt(4, 0);
+        byteBufferAllocate.putInt(8, this.mReadersExpectedEphemeralCounter);
         try {
             Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
-            cipher.init(2, this.mReaderSecretKey, new GCMParameterSpec(128, allocate.array()));
-            byte[] doFinal = cipher.doFinal(bArr);
+            cipher.init(2, this.mReaderSecretKey, new GCMParameterSpec(128, byteBufferAllocate.array()));
+            byte[] bArrDoFinal = cipher.doFinal(bArr);
             this.mReadersExpectedEphemeralCounter++;
-            return doFinal;
+            return bArrDoFinal;
         } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             throw new MessageDecryptionException("Error decrypting message", e);
         }
     }
 
     @Override // android.security.identity.IdentityCredential
-    public Collection<X509Certificate> getCredentialKeyCertificateChain() {
+    public Collection<X509Certificate> getCredentialKeyCertificateChain() throws CertificateException {
         try {
             try {
-                Collection<? extends Certificate> generateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(this.mBinder.getCredentialKeyCertificateChain()));
+                Collection<? extends Certificate> collectionGenerateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(this.mBinder.getCredentialKeyCertificateChain()));
                 ArrayList arrayList = new ArrayList();
-                Iterator<? extends Certificate> it = generateCertificates.iterator();
+                Iterator<? extends Certificate> it = collectionGenerateCertificates.iterator();
                 while (it.hasNext()) {
                     arrayList.add((X509Certificate) it.next());
                 }
@@ -206,7 +206,7 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public ResultData getEntries(byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3) throws SessionTranscriptMismatchException, NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException {
+    public ResultData getEntries(byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3) throws InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, SessionTranscriptMismatchException, InvalidRequestMessageException, NoAuthenticationKeyAvailableException {
         RequestNamespaceParcel[] requestNamespaceParcelArr = new RequestNamespaceParcel[map.size()];
         int i = 0;
         for (String str : map.keySet()) {
@@ -290,17 +290,17 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public Collection<X509Certificate> getAuthKeysNeedingCertification() {
+    public Collection<X509Certificate> getAuthKeysNeedingCertification() throws CertificateException {
         try {
             AuthKeyParcel[] authKeysNeedingCertification = this.mBinder.getAuthKeysNeedingCertification();
             ArrayList arrayList = new ArrayList();
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
             for (AuthKeyParcel authKeyParcel : authKeysNeedingCertification) {
-                Collection<? extends Certificate> generateCertificates = certificateFactory.generateCertificates(new ByteArrayInputStream(authKeyParcel.x509cert));
-                if (generateCertificates.size() != 1) {
+                Collection<? extends Certificate> collectionGenerateCertificates = certificateFactory.generateCertificates(new ByteArrayInputStream(authKeyParcel.x509cert));
+                if (collectionGenerateCertificates.size() != 1) {
                     throw new RuntimeException("Returned blob yields more than one X509 cert");
                 }
-                arrayList.add((X509Certificate) generateCertificates.iterator().next());
+                arrayList.add((X509Certificate) collectionGenerateCertificates.iterator().next());
             }
             return arrayList;
         } catch (RemoteException e) {

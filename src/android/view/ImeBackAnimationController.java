@@ -153,7 +153,7 @@ public class ImeBackAnimationController implements OnBackAnimationCallback {
         this.mPostCommitAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.view.ImeBackAnimationController$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                ImeBackAnimationController.this.lambda$startPostCommitAnim$0(valueAnimator);
+                this.f$0.lambda$startPostCommitAnim$0(valueAnimator);
             }
         });
         this.mPostCommitAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.view.ImeBackAnimationController.2

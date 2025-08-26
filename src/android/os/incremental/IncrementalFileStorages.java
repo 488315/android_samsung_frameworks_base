@@ -5,6 +5,7 @@ import android.content.pm.DataLoaderParams;
 import android.content.pm.IDataLoaderStatusListener;
 import android.content.pm.IPackageLoadingProgressCallback;
 import android.content.pm.InstallationFileParcel;
+import android.system.ErrnoException;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -43,28 +44,28 @@ public final class IncrementalFileStorages {
         return incrementalFileStorages;
     }
 
-    private IncrementalFileStorages(File file, File file2, IncrementalManager incrementalManager, DataLoaderParams dataLoaderParams) throws IOException {
+    private IncrementalFileStorages(File file, File file2, IncrementalManager incrementalManager, DataLoaderParams dataLoaderParams) throws IOException, ErrnoException {
         try {
             this.mStageDir = file;
             this.mIncrementalManager = incrementalManager;
             if (file2 != null && IncrementalManager.isIncrementalPath(file2.getAbsolutePath())) {
-                IncrementalStorage openStorage = incrementalManager.openStorage(file2.getAbsolutePath());
-                this.mInheritedStorage = openStorage;
-                if (openStorage != null) {
+                IncrementalStorage incrementalStorageOpenStorage = incrementalManager.openStorage(file2.getAbsolutePath());
+                this.mInheritedStorage = incrementalStorageOpenStorage;
+                if (incrementalStorageOpenStorage != null) {
                     if ("android".equals(dataLoaderParams.getComponentName().getPackageName()) && !this.mInheritedStorage.isFullyLoaded()) {
                         throw new IOException("Inherited storage has missing pages.");
                     }
-                    IncrementalStorage createStorage = incrementalManager.createStorage(file.getAbsolutePath(), this.mInheritedStorage, 5);
-                    this.mDefaultStorage = createStorage;
-                    if (createStorage != null) {
+                    IncrementalStorage incrementalStorageCreateStorage = incrementalManager.createStorage(file.getAbsolutePath(), this.mInheritedStorage, 5);
+                    this.mDefaultStorage = incrementalStorageCreateStorage;
+                    if (incrementalStorageCreateStorage != null) {
                         return;
                     }
                     throw new IOException("Couldn't create linked incremental storage at " + file);
                 }
             }
-            IncrementalStorage createStorage2 = incrementalManager.createStorage(file.getAbsolutePath(), dataLoaderParams, 5);
-            this.mDefaultStorage = createStorage2;
-            if (createStorage2 != null) {
+            IncrementalStorage incrementalStorageCreateStorage2 = incrementalManager.createStorage(file.getAbsolutePath(), dataLoaderParams, 5);
+            this.mDefaultStorage = incrementalStorageCreateStorage2;
+            if (incrementalStorageCreateStorage2 != null) {
                 return;
             }
             throw new IOException("Couldn't create incremental storage at " + file);
@@ -105,9 +106,9 @@ public final class IncrementalFileStorages {
     }
 
     public void cleanUpAndMarkComplete() {
-        IncrementalStorage cleanUp = cleanUp();
-        if (cleanUp != null) {
-            cleanUp.onInstallationComplete();
+        IncrementalStorage incrementalStorageCleanUp = cleanUp();
+        if (incrementalStorageCleanUp != null) {
+            incrementalStorageCleanUp.onInstallationComplete();
         }
     }
 

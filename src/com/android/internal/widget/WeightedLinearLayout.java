@@ -21,12 +21,12 @@ public class WeightedLinearLayout extends LinearLayout {
 
     public WeightedLinearLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.WeightedLinearLayout);
-        this.mMajorWeightMin = obtainStyledAttributes.getFloat(1, 0.0f);
-        this.mMinorWeightMin = obtainStyledAttributes.getFloat(3, 0.0f);
-        this.mMajorWeightMax = obtainStyledAttributes.getFloat(0, 0.0f);
-        this.mMinorWeightMax = obtainStyledAttributes.getFloat(2, 0.0f);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.WeightedLinearLayout);
+        this.mMajorWeightMin = typedArrayObtainStyledAttributes.getFloat(1, 0.0f);
+        this.mMinorWeightMin = typedArrayObtainStyledAttributes.getFloat(3, 0.0f);
+        this.mMajorWeightMax = typedArrayObtainStyledAttributes.getFloat(0, 0.0f);
+        this.mMinorWeightMax = typedArrayObtainStyledAttributes.getFloat(2, 0.0f);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.widget.LinearLayout, android.view.View
@@ -38,20 +38,20 @@ public class WeightedLinearLayout extends LinearLayout {
         int mode = View.MeasureSpec.getMode(i);
         super.onMeasure(i, i2);
         int measuredWidth = getMeasuredWidth();
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth, 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth, 1073741824);
         float f = z2 ? this.mMinorWeightMin : this.mMajorWeightMin;
         float f2 = z2 ? this.mMinorWeightMax : this.mMajorWeightMax;
         if (mode == Integer.MIN_VALUE) {
             int i4 = (int) (i3 * f);
             if (f > 0.0f && measuredWidth < i4) {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i4, 1073741824);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i4, 1073741824);
             } else if (f2 > 0.0f && measuredWidth > i4) {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i4, 1073741824);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i4, 1073741824);
             }
             z = true;
         }
         if (z) {
-            super.onMeasure(makeMeasureSpec, i2);
+            super.onMeasure(iMakeMeasureSpec, i2);
         }
     }
 }

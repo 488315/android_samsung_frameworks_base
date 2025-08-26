@@ -47,9 +47,9 @@ public interface IAppFunctionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppFunctionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppFunctionService)) {
-                return (IAppFunctionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppFunctionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppFunctionService)) {
+                return (IAppFunctionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,12 +77,12 @@ public interface IAppFunctionService extends IInterface {
             }
             if (i == 1) {
                 ExecuteAppFunctionRequest executeAppFunctionRequest = (ExecuteAppFunctionRequest) parcel.readTypedObject(ExecuteAppFunctionRequest.CREATOR);
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 SigningInfo signingInfo = (SigningInfo) parcel.readTypedObject(SigningInfo.CREATOR);
-                ICancellationCallback asInterface = ICancellationCallback.Stub.asInterface(parcel.readStrongBinder());
-                IExecuteAppFunctionCallback asInterface2 = IExecuteAppFunctionCallback.Stub.asInterface(parcel.readStrongBinder());
+                ICancellationCallback iCancellationCallbackAsInterface = ICancellationCallback.Stub.asInterface(parcel.readStrongBinder());
+                IExecuteAppFunctionCallback iExecuteAppFunctionCallbackAsInterface = IExecuteAppFunctionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                executeAppFunction(executeAppFunctionRequest, readString, signingInfo, asInterface, asInterface2);
+                executeAppFunction(executeAppFunctionRequest, string, signingInfo, iCancellationCallbackAsInterface, iExecuteAppFunctionCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -106,17 +106,17 @@ public interface IAppFunctionService extends IInterface {
 
             @Override // android.app.appfunctions.IAppFunctionService
             public void executeAppFunction(ExecuteAppFunctionRequest executeAppFunctionRequest, String str, SigningInfo signingInfo, ICancellationCallback iCancellationCallback, IExecuteAppFunctionCallback iExecuteAppFunctionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAppFunctionService.DESCRIPTOR);
-                    obtain.writeTypedObject(executeAppFunctionRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(signingInfo, 0);
-                    obtain.writeStrongInterface(iCancellationCallback);
-                    obtain.writeStrongInterface(iExecuteAppFunctionCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAppFunctionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(executeAppFunctionRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(signingInfo, 0);
+                    parcelObtain.writeStrongInterface(iCancellationCallback);
+                    parcelObtain.writeStrongInterface(iExecuteAppFunctionCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

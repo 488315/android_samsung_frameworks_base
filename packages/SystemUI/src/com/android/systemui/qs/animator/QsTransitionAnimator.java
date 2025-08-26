@@ -38,10 +38,10 @@ import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements SettingsHelper.OnChangedCallback {
     public static final Interpolator INTERPOLATOR;
+    public static final Interpolator LINEAR_INTERPOLATOR;
     public SecQSImplAnimatorManager.AnonymousClass2 animStateCallback;
     public final QsTransitionAnimator$detailAnimListener$1 detailAnimListener;
     public DetailCallback detailCallback;
@@ -75,7 +75,6 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
     private final SettingsHelper settingsHelper;
     public final QSAnimViewProvider viewProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -85,7 +84,6 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DetailCallback {
         void hideDetailAnimEnd();
 
@@ -95,6 +93,7 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
     static {
         new Companion(null);
         INTERPOLATOR = new PathInterpolator(0.37f, 0.3f, 0.14f, 1.34f);
+        LINEAR_INTERPOLATOR = new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f);
     }
 
     /* JADX WARN: Type inference failed for: r5v12, types: [com.android.systemui.qs.animator.QsTransitionAnimator$onHeadsUpChangedListener$1] */
@@ -119,7 +118,7 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
             @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
             public final void onHeadsUpPinnedModeChanged(boolean z) {
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onHeadsUpPinnedModeChanged: ", "QsTransitionAnimator", z);
-                QsTransitionAnimator.this.inPinnedMode = z;
+                this.this$0.inPinnedMode = z;
             }
         };
         this.panelAnimListener = new Animator.AnimatorListener() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator$panelAnimListener$1
@@ -132,25 +131,25 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
 
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                QsTransitionAnimator.this.getClass();
+                this.this$0.getClass();
                 if (SecQSImplAnimatorBase.isDetailVisible()) {
-                    if (QsTransitionAnimator.this.animStateCallback != null) {
+                    if (this.this$0.animStateCallback != null) {
                         SecQSImplAnimatorManager.AnonymousClass2.setDetailClosing(false);
-                        SecQSImplAnimatorManager.AnonymousClass2 anonymousClass2 = QsTransitionAnimator.this.animStateCallback;
+                        SecQSImplAnimatorManager.AnonymousClass2 anonymousClass2 = this.this$0.animStateCallback;
                         if (anonymousClass2 != null) {
                             SecQSImplAnimatorManager.this.executeConsumer(new SecQSImplAnimatorManager$$ExternalSyntheticLambda6(6));
                         }
                     }
-                    QsTransitionAnimator.this.clearDetailView();
-                    ((View) QsTransitionAnimator.this.qsPanelController.mTileLayout).setVisibility(0);
+                    this.this$0.clearDetailView();
+                    ((View) this.this$0.qsPanelController.mTileLayout).setVisibility(0);
                 }
                 if (!this.isCanceled) {
-                    QsTransitionAnimator.this.getClass();
+                    this.this$0.getClass();
                     if (QsAnimatorState.isCustomizerShowing) {
-                        if (QsTransitionAnimator.this.animStateCallback != null) {
+                        if (this.this$0.animStateCallback != null) {
                             SecQSImplAnimatorManager.AnonymousClass2.setDetailClosing(false);
                         }
-                        QsTransitionAnimator.this.clearCustomizerView();
+                        this.this$0.clearCustomizerView();
                     }
                 }
                 this.isCanceled = false;
@@ -158,7 +157,7 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
 
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
-                QSAnimView qSAnimView = QsTransitionAnimator.this.viewProvider.get(QSAnimViewProvider.ViewType.NSSL);
+                QSAnimView qSAnimView = this.this$0.viewProvider.get(QSAnimViewProvider.ViewType.NSSL);
                 SecPanelSplitHelper.Companion.getClass();
                 if (SecPanelSplitHelper.isEnabled || qSAnimView == null || qSAnimView.getVisibility() != 4) {
                     return;
@@ -182,7 +181,7 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
             public final void onAnimationEnd(Animator animator) {
                 QSAnimView qSAnimView;
                 if (QsAnimatorState.panelExpanded) {
-                    ArrayList arrayList = QsTransitionAnimator.this.detailContents;
+                    ArrayList arrayList = this.this$0.detailContents;
                     int size = arrayList.size();
                     int i = 0;
                     while (i < size) {
@@ -193,19 +192,19 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
                             qSAnimView2.setAlpha(1.0f);
                         }
                     }
-                    QsTransitionAnimator.DetailCallback detailCallback = QsTransitionAnimator.this.detailCallback;
+                    QsTransitionAnimator.DetailCallback detailCallback = this.this$0.detailCallback;
                     if (detailCallback != null) {
                         detailCallback.showDetailAnimEnd();
                     }
-                    if (QsTransitionAnimator.this.animStateCallback != null) {
+                    if (this.this$0.animStateCallback != null) {
                         SecQSImplAnimatorManager.AnonymousClass2.setDetailOpening(false);
                         QsAnimatorState.setDetailShowing(true);
                     }
                     SecPanelSplitHelper.Companion.getClass();
-                    if (!SecPanelSplitHelper.isEnabled && !QsAnimatorState.qsExpanded && !this.isCanceled && (qSAnimView = QsTransitionAnimator.this.nssl) != null) {
+                    if (!SecPanelSplitHelper.isEnabled && !QsAnimatorState.qsExpanded && !this.isCanceled && (qSAnimView = this.this$0.nssl) != null) {
                         qSAnimView.setVisibility(4);
                     }
-                } else if (QsTransitionAnimator.this.animStateCallback != null) {
+                } else if (this.this$0.animStateCallback != null) {
                     SecQSImplAnimatorManager.AnonymousClass2.setDetailClosing(false);
                     QsAnimatorState.setDetailShowing(false);
                 }
@@ -224,6 +223,10 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         this.headerIcons = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER);
         this.plmn = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PLMN);
         this.inPinnedMode = ((HeadsUpManagerImpl) headsUpManager).mHasPinnedNotification;
+    }
+
+    public static boolean isTablet$1() {
+        return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
     public final void clearCustomizerView() {
@@ -299,11 +302,11 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
             f2 = 1.0f;
         }
         propertyValuesHolderArr[2] = PropertyValuesHolder.ofFloat("scaleY", f2);
-        ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(qSAnimView, propertyValuesHolderArr);
-        ofPropertyValuesHolder.setDuration(j);
-        ofPropertyValuesHolder.setStartDelay(0L);
-        ofPropertyValuesHolder.setInterpolator(INTERPOLATOR);
-        return ofPropertyValuesHolder;
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(qSAnimView, propertyValuesHolderArr);
+        objectAnimatorOfPropertyValuesHolder.setDuration(j);
+        objectAnimatorOfPropertyValuesHolder.setStartDelay(0L);
+        objectAnimatorOfPropertyValuesHolder.setInterpolator(INTERPOLATOR);
+        return objectAnimatorOfPropertyValuesHolder;
     }
 
     @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
@@ -317,12 +320,15 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
     public final void onConfigurationChanged(Configuration configuration) {
         ConfigurationState configurationState = this.lastConfigurationState;
         if (configurationState.needToUpdate(configuration)) {
-            this.mQs.getView().post(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator$onConfigurationChanged$1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    QsTransitionAnimator.this.updateAnimators();
-                }
-            });
+            QSImpl qSImpl = this.mQs;
+            if (qSImpl != null) {
+                qSImpl.getView().post(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator.onConfigurationChanged.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        QsTransitionAnimator.this.updateAnimators();
+                    }
+                });
+            }
             configurationState.update(configuration);
         }
     }
@@ -416,9 +422,14 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         if (isThereNoView()) {
             return;
         }
-        PanelPopOverManager panelPopOverManager = this.panelPopOverManager;
+        Handler handler = this.handler;
         if (z) {
-            panelPopOverManager.transitionBlurAnim(false);
+            handler.post(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator.showQsPanel.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    QsTransitionAnimator.this.panelPopOverManager.transitionBlurAnim(false);
+                }
+            });
             AnimatorSet animatorSet = this.panelHideAnimSet;
             if (animatorSet != null) {
                 animatorSet.cancel();
@@ -429,7 +440,12 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
                 animatorSet2.start();
             }
         } else {
-            panelPopOverManager.transitionBlurAnim(true);
+            handler.post(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator.showQsPanel.3
+                @Override // java.lang.Runnable
+                public final void run() {
+                    QsTransitionAnimator.this.panelPopOverManager.transitionBlurAnim(true);
+                }
+            });
             AnimatorSet animatorSet3 = this.panelShowAnimSet;
             if (animatorSet3 != null) {
                 animatorSet3.cancel();
@@ -449,56 +465,47 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
     }
 
     public final void showQsPanelForCustomizer(final boolean z) {
+        final QsTransitionAnimator qsTransitionAnimator;
         Handler handler = this.handler;
         handler.removeCallbacksAndMessages(null);
-        makeTransitionAnimator(this.headerIcons, 350L, z ? 1.0f : 0.0f, true).start();
-        handler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator$showQsPanelForCustomizer$1
-            /* JADX WARN: Code restructure failed: missing block: B:4:0x0008, code lost:
-            
-                if (com.android.systemui.qs.animator.QsAnimatorState.state != 1) goto L8;
-             */
+        if (isTablet$1()) {
+            qsTransitionAnimator = this;
+        } else {
+            qsTransitionAnimator = this;
+            qsTransitionAnimator.makeTransitionAnimator(this.headerIcons, 350L, z ? 1.0f : 0.0f, true).start();
+        }
+        handler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.animator.QsTransitionAnimator.showQsPanelForCustomizer.1
+            /* JADX WARN: Removed duplicated region for block: B:7:0x000b  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
             public final void run() {
-                /*
-                    r3 = this;
-                    boolean r0 = r1
-                    r1 = 0
-                    if (r0 == 0) goto Lb
-                    int r0 = com.android.systemui.qs.animator.QsAnimatorState.state
-                    r2 = 1
-                    if (r0 == r2) goto Lb
-                    goto Lc
-                Lb:
-                    r2 = r1
-                Lc:
-                    com.android.systemui.qs.animator.QsTransitionAnimator r0 = r2
-                    com.android.systemui.qs.SecQSPanelController r0 = r0.qsPanelController
-                    r0.setGridContentVisibility(r2)
-                    com.android.systemui.qs.animator.QsTransitionAnimator r3 = r2
-                    com.android.systemui.qs.animator.QSAnimView r3 = r3.headerIcons
-                    if (r3 == 0) goto L20
-                    if (r2 == 0) goto L1c
-                    goto L1d
-                L1c:
-                    r1 = 4
-                L1d:
-                    r3.setVisibility(r1)
-                L20:
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.animator.QsTransitionAnimator$showQsPanelForCustomizer$1.run():void");
+                boolean z2;
+                int i = 0;
+                if (z) {
+                    z2 = QsAnimatorState.state != 1;
+                }
+                qsTransitionAnimator.qsPanelController.setGridContentVisibility(z2);
+                QSAnimView qSAnimView = qsTransitionAnimator.headerIcons;
+                if (qSAnimView != null) {
+                    if (!z2 && !QsTransitionAnimator.isTablet$1()) {
+                        i = 4;
+                    }
+                    qSAnimView.setVisibility(i);
+                }
             }
         }, z ? 0L : 350L);
-        showQsPanel(z);
+        qsTransitionAnimator.showQsPanel(z);
     }
 
     public final void transitionDetail(boolean z) {
         if (isThereNoView() || !this.mAnimatorsInitialiezed) {
             return;
+        }
+        PanelPopOverManager panelPopOverManager = this.panelPopOverManager;
+        if (panelPopOverManager.getNeedToPopOver() && panelPopOverManager.isPopOverAreaListenerAdded) {
+            panelPopOverManager.isAnimating = true;
         }
         if (!z) {
             if (this.animStateCallback != null) {
@@ -506,6 +513,9 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
                 SecQSImplAnimatorManager.AnonymousClass2.setDetailClosing(true);
             }
             if (!QsAnimatorState.panelExpanded) {
+                if (panelPopOverManager.getNeedToPopOver() && panelPopOverManager.isPopOverAreaListenerAdded) {
+                    panelPopOverManager.isAnimating = false;
+                }
                 if (isThereNoView()) {
                     return;
                 }
@@ -519,11 +529,11 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
                 }
                 Iterator it = this.panelContents.iterator();
                 while (it.hasNext()) {
-                    ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder((QSAnimView) it.next(), PropertyValuesHolder.ofFloat("alpha", 1.0f), PropertyValuesHolder.ofFloat("scaleX", 1.0f), PropertyValuesHolder.ofFloat("scaleY", 1.0f));
-                    ofPropertyValuesHolder.setDuration(100L);
-                    ofPropertyValuesHolder.setInterpolator(INTERPOLATOR);
-                    ofPropertyValuesHolder.setStartDelay(0L);
-                    ofPropertyValuesHolder.start();
+                    ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder((QSAnimView) it.next(), PropertyValuesHolder.ofFloat("alpha", 1.0f), PropertyValuesHolder.ofFloat("scaleX", 1.0f), PropertyValuesHolder.ofFloat("scaleY", 1.0f));
+                    objectAnimatorOfPropertyValuesHolder.setDuration(100L);
+                    objectAnimatorOfPropertyValuesHolder.setInterpolator(INTERPOLATOR);
+                    objectAnimatorOfPropertyValuesHolder.setStartDelay(0L);
+                    objectAnimatorOfPropertyValuesHolder.start();
                 }
                 ArrayList arrayList = this.detailContents;
                 int size = arrayList.size();
@@ -531,11 +541,11 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
                 while (i < size) {
                     Object obj = arrayList.get(i);
                     i++;
-                    ObjectAnimator ofPropertyValuesHolder2 = ObjectAnimator.ofPropertyValuesHolder((QSAnimView) obj, PropertyValuesHolder.ofFloat("alpha", 0.0f));
-                    ofPropertyValuesHolder2.setDuration(50L);
-                    ofPropertyValuesHolder2.setInterpolator(INTERPOLATOR);
-                    ofPropertyValuesHolder2.setStartDelay(0L);
-                    ofPropertyValuesHolder2.start();
+                    ObjectAnimator objectAnimatorOfPropertyValuesHolder2 = ObjectAnimator.ofPropertyValuesHolder((QSAnimView) obj, PropertyValuesHolder.ofFloat("alpha", 0.0f));
+                    objectAnimatorOfPropertyValuesHolder2.setDuration(50L);
+                    objectAnimatorOfPropertyValuesHolder2.setInterpolator(INTERPOLATOR);
+                    objectAnimatorOfPropertyValuesHolder2.setStartDelay(0L);
+                    objectAnimatorOfPropertyValuesHolder2.start();
                 }
                 DetailCallback detailCallback = this.detailCallback;
                 if (detailCallback != null) {
@@ -586,33 +596,39 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
     public final void updateAnimators() {
         View view;
-        if (isThereNoView()) {
+        QSAnimView qSAnimView;
+        View view2;
+        QSAnimView qSAnimView2;
+        View view3;
+        if (super.isThereNoView()) {
             return;
         }
-        if (isThereNoView()) {
+        if (super.isThereNoView()) {
             destroyQSViews();
         } else {
             this.panelContents.clear();
             this.detailContents.clear();
             QSAnimViewProvider.ViewType viewType = QSAnimViewProvider.ViewType.QS_HEADER;
             QSAnimViewProvider qSAnimViewProvider = this.viewProvider;
-            QSAnimView qSAnimView = qSAnimViewProvider.get(viewType);
-            if (qSAnimView != null) {
+            QSAnimView qSAnimView3 = qSAnimViewProvider.get(viewType);
+            if (qSAnimView3 != null) {
                 this.quickQsPanel = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_QQS);
                 this.panelContents.add(qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QQS_HEADER_BUTTON_CONTAINER));
                 this.panelContents.add(this.quickQsPanel);
             } else {
-                qSAnimView = null;
+                qSAnimView3 = null;
             }
-            this.headerView = qSAnimView;
+            this.headerView = qSAnimView3;
             this.qsPanel = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.ROOT_VIEW);
             this.nssl = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.NSSL);
             this.panelContents.add(this.qsPanel);
             this.panelContents.add(this.nssl);
-            this.panelContents.add(this.plmn);
-            QSAnimView qSAnimView2 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.DETAIL);
-            this.detailView = qSAnimView2;
-            this.detailContents.add(qSAnimView2);
+            if (!isTablet$1()) {
+                this.panelContents.add(this.plmn);
+            }
+            QSAnimView qSAnimView4 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.DETAIL);
+            this.detailView = qSAnimView4;
+            this.detailContents.add(qSAnimView4);
         }
         this.panelHideAnimSet = new AnimatorSet();
         this.panelHideAnimators.clear();
@@ -622,9 +638,9 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            QSAnimView qSAnimView3 = (QSAnimView) obj;
+            QSAnimView qSAnimView5 = (QSAnimView) obj;
             QsTransitionAnimator qsTransitionAnimator = this;
-            this.panelHideAnimators.add(qsTransitionAnimator.makeTransitionAnimator(qSAnimView3, 350L, 0.0f, qSAnimView3 == this.quickQsPanel || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()));
+            this.panelHideAnimators.add(qsTransitionAnimator.makeTransitionAnimator(qSAnimView5, 350L, 0.0f, qSAnimView5 == this.quickQsPanel || isTablet$1()));
             this = qsTransitionAnimator;
         }
         QsTransitionAnimator qsTransitionAnimator2 = this;
@@ -655,7 +671,16 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         while (i3 < size3) {
             Object obj3 = arrayList3.get(i3);
             i3++;
-            qsTransitionAnimator2.detailShowAnimators.add(qsTransitionAnimator2.makeTransitionAnimator((QSAnimView) obj3, 480L, 1.0f, true));
+            QSAnimView qSAnimView6 = (QSAnimView) obj3;
+            if (isTablet$1() && (qSAnimView2 = qsTransitionAnimator2.qsPanel) != null && (view3 = qSAnimView2.getView()) != null) {
+                if (qSAnimView6 != null) {
+                    qSAnimView6.setPivotX(view3.getWidth() / 2.0f);
+                }
+                if (qSAnimView6 != null) {
+                    qSAnimView6.setPivotY(view3.getHeight() / 2.0f);
+                }
+            }
+            qsTransitionAnimator2.detailShowAnimators.add(qsTransitionAnimator2.makeTransitionAnimator(qSAnimView6, 480L, 1.0f, true));
         }
         AnimatorSet animatorSet3 = qsTransitionAnimator2.detailShowAnimSet;
         if (animatorSet3 != null) {
@@ -670,18 +695,40 @@ public final class QsTransitionAnimator extends SecQSImplAnimatorBase implements
         while (i4 < size4) {
             Object obj4 = arrayList4.get(i4);
             i4++;
-            qsTransitionAnimator2.detailHideAnimators.add(qsTransitionAnimator2.makeTransitionAnimator((QSAnimView) obj4, 300L, 0.0f, false));
+            QSAnimView qSAnimView7 = (QSAnimView) obj4;
+            if (isTablet$1() && (qSAnimView = qsTransitionAnimator2.qsPanel) != null && (view2 = qSAnimView.getView()) != null) {
+                if (qSAnimView7 != null) {
+                    qSAnimView7.setPivotX(view2.getWidth() / 2.0f);
+                }
+                if (qSAnimView7 != null) {
+                    qSAnimView7.setPivotY(view2.getHeight() / 2.0f);
+                }
+            }
+            ArrayList arrayList5 = qsTransitionAnimator2.detailHideAnimators;
+            ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(qSAnimView7, PropertyValuesHolder.ofFloat("alpha", 0.0f));
+            objectAnimatorOfPropertyValuesHolder.setDuration(100L);
+            objectAnimatorOfPropertyValuesHolder.setStartDelay(0L);
+            objectAnimatorOfPropertyValuesHolder.setInterpolator(LINEAR_INTERPOLATOR);
+            arrayList5.add(objectAnimatorOfPropertyValuesHolder);
+            float f = qsTransitionAnimator2.SCALE_DOWN_RATIO;
+            ObjectAnimator objectAnimatorOfPropertyValuesHolder2 = ObjectAnimator.ofPropertyValuesHolder(qSAnimView7, PropertyValuesHolder.ofFloat("scaleX", f), PropertyValuesHolder.ofFloat("scaleY", f));
+            objectAnimatorOfPropertyValuesHolder2.setDuration(300L);
+            objectAnimatorOfPropertyValuesHolder2.setStartDelay(0L);
+            objectAnimatorOfPropertyValuesHolder2.setInterpolator(INTERPOLATOR);
+            arrayList5.add(objectAnimatorOfPropertyValuesHolder2);
         }
         AnimatorSet animatorSet4 = qsTransitionAnimator2.detailHideAnimSet;
         if (animatorSet4 != null) {
             animatorSet4.playTogether(qsTransitionAnimator2.detailHideAnimators);
         }
-        TouchAnimator.Builder builder = new TouchAnimator.Builder();
-        builder.addFloat(qsTransitionAnimator2.detailView, "alpha", 0.0f, 1.0f);
-        QSAnimView qSAnimView4 = qsTransitionAnimator2.detailView;
-        QSAnimView qSAnimView5 = qsTransitionAnimator2.headerView;
-        builder.addFloat(qSAnimView4, "translationY", (-((qSAnimView5 == null || (view = qSAnimView5.getView()) == null) ? 0 : view.getHeight())) * 0.2f, 0.0f);
-        qsTransitionAnimator2.detailCollapseAnimator = builder.build();
+        QSAnimView qSAnimView8 = qsTransitionAnimator2.detailView;
+        if (qSAnimView8 != null) {
+            TouchAnimator.Builder builder = new TouchAnimator.Builder();
+            builder.addFloat(qSAnimView8, "alpha", 0.0f, 1.0f);
+            QSAnimView qSAnimView9 = qsTransitionAnimator2.headerView;
+            builder.addFloat(qSAnimView8, "translationY", (-((qSAnimView9 == null || (view = qSAnimView9.getView()) == null) ? 0 : view.getHeight())) * 0.2f, 0.0f);
+            qsTransitionAnimator2.detailCollapseAnimator = builder.build();
+        }
         qsTransitionAnimator2.mAnimatorsInitialiezed = true;
     }
 }

@@ -1,6 +1,5 @@
 package com.google.ux.material.libmonet.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ColorUtils {
     public static final double[][] SRGB_TO_XYZ = {new double[]{0.41233895d, 0.35762064d, 0.18051042d}, new double[]{0.2126d, 0.7152d, 0.0722d}, new double[]{0.01932141d, 0.11916382d, 0.95034478d}};
@@ -11,14 +10,14 @@ public class ColorUtils {
 
     public static int delinearized(double d) {
         double d2 = d / 100.0d;
-        int round = (int) Math.round((d2 <= 0.0031308d ? d2 * 12.92d : (Math.pow(d2, 0.4166666666666667d) * 1.055d) - 0.055d) * 255.0d);
-        if (round < 0) {
+        int iRound = (int) Math.round((d2 <= 0.0031308d ? d2 * 12.92d : (Math.pow(d2, 0.4166666666666667d) * 1.055d) - 0.055d) * 255.0d);
+        if (iRound < 0) {
             return 0;
         }
-        if (round > 255) {
+        if (iRound > 255) {
             return 255;
         }
-        return round;
+        return iRound;
     }
 
     public static double labF(double d) {

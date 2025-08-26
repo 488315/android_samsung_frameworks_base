@@ -3,7 +3,6 @@ package com.google.android.setupcompat.internal;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.template.FooterButton;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FooterButtonPartnerConfig {
     public final PartnerConfig buttonBackgroundConfig;
@@ -22,7 +21,6 @@ public class FooterButtonPartnerConfig {
     public final PartnerConfig buttonTextWeightConfig;
     public final int partnerTheme;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public int partnerTheme;
         public PartnerConfig buttonBackgroundConfig = null;

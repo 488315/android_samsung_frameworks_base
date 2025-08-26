@@ -2,6 +2,7 @@ package com.android.internal.view.inline;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.provider.DeviceConfig;
@@ -77,7 +78,7 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
         setFocusable(false);
     }
 
-    public void setTooltipView(InlineContentView inlineContentView) {
+    public void setTooltipView(InlineContentView inlineContentView) throws Resources.NotFoundException {
         this.mContentContainer.removeAllViews();
         this.mContentContainer.addView(inlineContentView);
         this.mContentContainer.setVisibility(0);
@@ -108,12 +109,12 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
             if (this.mDelayShowTooltip == null) {
                 this.mDelayShowTooltip = new DelayShowRunnable(view);
             }
-            int i = this.mShowDelayConfigMs;
+            int iFixScale = this.mShowDelayConfigMs;
             try {
-                i = (int) (i * WindowManager.fixScale(Settings.Global.getFloat(view.getContext().getContentResolver(), "animator_duration_scale")));
+                iFixScale = (int) (iFixScale * WindowManager.fixScale(Settings.Global.getFloat(view.getContext().getContentResolver(), "animator_duration_scale")));
             } catch (Settings.SettingNotFoundException unused) {
             }
-            view.postDelayed(this.mDelayShowTooltip, i);
+            view.postDelayed(this.mDelayShowTooltip, iFixScale);
             return;
         }
         if (this.mDelaying) {
@@ -153,18 +154,18 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
 
     @Override // android.widget.PopupWindow
     protected boolean findDropDownPosition(View view, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, boolean z) {
-        boolean findDropDownPosition = super.findDropDownPosition(view, layoutParams, i, i2, i3, i4, i5, z);
+        boolean zFindDropDownPosition = super.findDropDownPosition(view, layoutParams, i, i2, i3, i4, i5, z);
         Object parent = view.getParent();
         if (parent instanceof View) {
             Rect rect = this.mTmpRect;
             ((View) parent).getGlobalVisibleRect(rect);
-            if (findDropDownPosition) {
+            if (zFindDropDownPosition) {
                 layoutParams.y = rect.top - getPreferHeight(view);
-                return findDropDownPosition;
+                return zFindDropDownPosition;
             }
             layoutParams.y = rect.bottom + 1;
         }
-        return findDropDownPosition;
+        return zFindDropDownPosition;
     }
 
     @Override // android.widget.PopupWindow
@@ -184,12 +185,12 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
         setShowing(true);
         setDropDown(true);
         attachToAnchor(view, i, i2, i3);
-        WindowManager.LayoutParams createPopupLayoutParams = createPopupLayoutParams(view.getWindowToken());
-        this.mWindowLayoutParams = createPopupLayoutParams;
-        updateAboveAnchor(findDropDownPosition(view, createPopupLayoutParams, i, i2, createPopupLayoutParams.width, createPopupLayoutParams.height, i3, getAllowScrollingAnchorParent()));
-        createPopupLayoutParams.accessibilityIdOfAnchor = view.getAccessibilityViewId();
-        createPopupLayoutParams.packageName = view.getContext().getPackageName();
-        show(createPopupLayoutParams);
+        WindowManager.LayoutParams layoutParamsCreatePopupLayoutParams = createPopupLayoutParams(view.getWindowToken());
+        this.mWindowLayoutParams = layoutParamsCreatePopupLayoutParams;
+        updateAboveAnchor(findDropDownPosition(view, layoutParamsCreatePopupLayoutParams, i, i2, layoutParamsCreatePopupLayoutParams.width, layoutParamsCreatePopupLayoutParams.height, i3, getAllowScrollingAnchorParent()));
+        layoutParamsCreatePopupLayoutParams.accessibilityIdOfAnchor = view.getAccessibilityViewId();
+        layoutParamsCreatePopupLayoutParams.packageName = view.getContext().getPackageName();
+        show(layoutParamsCreatePopupLayoutParams);
     }
 
     @Override // android.widget.PopupWindow

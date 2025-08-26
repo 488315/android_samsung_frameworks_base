@@ -85,18 +85,18 @@ public final class ManualTimeZoneSuggestion implements Parcelable {
     }
 
     public static ManualTimeZoneSuggestion parseCommandLineArg(ShellCommand shellCommand) {
-        String str = null;
+        String nextArgRequired = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg != null) {
                 nextArg.hashCode();
                 if (nextArg.equals("--zone_id")) {
-                    str = shellCommand.getNextArgRequired();
+                    nextArgRequired = shellCommand.getNextArgRequired();
                 } else {
                     throw new IllegalArgumentException("Unknown option: " + nextArg);
                 }
             } else {
-                ManualTimeZoneSuggestion manualTimeZoneSuggestion = new ManualTimeZoneSuggestion(str);
+                ManualTimeZoneSuggestion manualTimeZoneSuggestion = new ManualTimeZoneSuggestion(nextArgRequired);
                 manualTimeZoneSuggestion.addDebugInfo("Command line injection");
                 return manualTimeZoneSuggestion;
             }

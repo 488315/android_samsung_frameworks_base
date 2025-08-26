@@ -48,7 +48,7 @@ public class UcmKeyStoreKeyAgreementSpi extends KeyAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    public Key engineDoPhase(Key key, boolean z) throws InvalidKeyException, IllegalStateException {
+    public Key engineDoPhase(Key key, boolean z) throws IllegalStateException, InvalidKeyException {
         if (key == null) {
             throw new InvalidKeyException("key == null");
         }
@@ -79,15 +79,15 @@ public class UcmKeyStoreKeyAgreementSpi extends KeyAgreementSpi {
 
     @Override // javax.crypto.KeyAgreementSpi
     public int engineGenerateSecret(byte[] bArr, int i) throws IllegalStateException, ShortBufferException {
-        byte[] engineGenerateSecret = engineGenerateSecret();
-        if (engineGenerateSecret == null) {
+        byte[] bArrEngineGenerateSecret = engineGenerateSecret();
+        if (bArrEngineGenerateSecret == null) {
             throw new IllegalStateException("Failed to generate secret");
         }
-        if (engineGenerateSecret.length > bArr.length - i) {
-            throw new ShortBufferException("Needed: " + engineGenerateSecret.length);
+        if (bArrEngineGenerateSecret.length > bArr.length - i) {
+            throw new ShortBufferException("Needed: " + bArrEngineGenerateSecret.length);
         }
-        System.arraycopy(engineGenerateSecret, 0, bArr, i, engineGenerateSecret.length);
-        return engineGenerateSecret.length;
+        System.arraycopy(bArrEngineGenerateSecret, 0, bArr, i, bArrEngineGenerateSecret.length);
+        return bArrEngineGenerateSecret.length;
     }
 
     @Override // javax.crypto.KeyAgreementSpi

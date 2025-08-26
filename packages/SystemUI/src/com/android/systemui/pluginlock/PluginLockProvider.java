@@ -14,7 +14,6 @@ import com.android.systemui.util.LogUtil;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import com.samsung.systemui.splugins.pluginlock.PluginLockBasicManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockProvider extends ContentProvider {
     public static final String AUTHORITY = "com.android.systemui.pluginlock.provider";
@@ -51,76 +50,32 @@ public class PluginLockProvider extends ContentProvider {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x0038  */
     @Override // android.content.ContentProvider
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public Bundle call(String str, String str2, Bundle bundle) {
-        char c;
         Bundle bundle2 = new Bundle();
         PluginLockManager pluginLockManager = (PluginLockManager) Dependency.sDependency.getDependencyInner(PluginLockManager.class);
         MediaSessions$H$$ExternalSyntheticOutline0.m("call: method ", str, ", arg:", str2, TAG);
         if (pluginLockManager != null) {
             str.getClass();
-            switch (str.hashCode()) {
-                case -1950545556:
-                    if (str.equals(GET_WALLPAPER_INDEX)) {
-                        c = 0;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case -1344377341:
-                    if (str.equals(FILL_WALLPAPER_DATA)) {
-                        c = 1;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case -222035686:
-                    if (str.equals(REMOVE_LOCKSTAR_TASK_SHORTCUT_LISTENER)) {
-                        c = 2;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 98718662:
-                    if (str.equals(UPDATE_LOCKSTAR_TASK_SHORTCUT_STATE)) {
-                        c = 3;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 541279321:
-                    if (str.equals("get_lockstar_task_shortcut_state")) {
-                        c = 4;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 1008599367:
-                    if (str.equals(GET_DLS_DATA)) {
-                        c = 5;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                default:
-                    c = 65535;
-                    break;
-            }
-            switch (c) {
-                case 0:
+            switch (str) {
+                case "get_wallpaper_index":
                     bundle2.putInt(KEY_WALLPAPER_INDEX, (LsRune.SUBSCREEN_WATCHFACE && !TextUtils.isEmpty(str2) && Integer.parseInt(str2) == 1) ? ((PluginWallpaperManager) Dependency.sDependency.getDependencyInner(PluginWallpaperManager.class)).getWallpaperIndex(1, bundle) : ((PluginWallpaperManager) Dependency.sDependency.getDependencyInner(PluginWallpaperManager.class)).getWallpaperIndex());
                     break;
-                case 1:
+                case "fill_wallpaper_data":
                     ((PluginWallpaperManager) Dependency.sDependency.getDependencyInner(PluginWallpaperManager.class)).fillWallpaperData(bundle.getInt("screen"), bundle.getInt(WALLPAPER_TYPE), bundle.getInt(SOURCE_TYPE), bundle.getString(SOURCE));
                     return bundle2;
-                case 2:
+                case "remove_lockstar_task_shortcut_listener":
                     LogUtil.d(TAG, "call method:".concat(str), new Object[0]);
                     pluginLockManager.removeShortcutTaskListener();
                     return bundle2;
-                case 3:
+                case "update_lockstar_task_shortcut_state":
                     pluginLockManager.updateShortcutTaskState(str2);
                     return bundle2;
-                case 4:
+                case "get_lockstar_task_shortcut_state":
                     boolean shortcutTaskState = pluginLockManager.getShortcutTaskState(str2);
                     Bundle bundle3 = new Bundle();
                     bundle3.putBoolean("isEnable", shortcutTaskState);
@@ -129,7 +84,7 @@ public class PluginLockProvider extends ContentProvider {
                     bundle2.putBundle("extras", bundle3);
                     onEventReceived(pluginLockManager, bundle2);
                     return bundle2;
-                case 5:
+                case "get_dls_data":
                     Log.d(TAG, "call: GET_DLS_DATA");
                     bundle2.putString("dynamicLockData", ((PluginLockManager) Dependency.sDependency.getDependencyInner(PluginLockManager.class)).getDynamicLockData());
                     return bundle2;

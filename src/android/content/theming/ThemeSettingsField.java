@@ -136,20 +136,20 @@ public abstract class ThemeSettingsField<T, J> {
         this.mSetter.accept(themeSettingsUpdater, fallbackParse(jSONObject.opt(this.key), getDefaultValue()));
     }
 
-    public void toJSON(ThemeSettings themeSettings, JSONObject jSONObject) {
-        J j;
-        T apply = this.mGetter.apply(themeSettings);
-        Preconditions.checkState(apply.getClass() == getFieldType());
-        if (validate(apply)) {
-            j = serialize(apply);
+    public void toJSON(ThemeSettings themeSettings, JSONObject jSONObject) throws JSONException {
+        J jSerialize;
+        T tApply = this.mGetter.apply(themeSettings);
+        Preconditions.checkState(tApply.getClass() == getFieldType());
+        if (validate(tApply)) {
+            jSerialize = serialize(tApply);
         } else {
             T defaultValue = getDefaultValue();
-            J serialize = serialize(defaultValue);
-            Log.w(TAG, "Invalid value `" + apply + "` for key `" + this.key + "`, defaulting to '" + defaultValue);
-            j = serialize;
+            J jSerialize2 = serialize(defaultValue);
+            Log.w(TAG, "Invalid value `" + tApply + "` for key `" + this.key + "`, defaulting to '" + defaultValue);
+            jSerialize = jSerialize2;
         }
         try {
-            jSONObject.put(this.key, j);
+            jSONObject.put(this.key, jSerialize);
         } catch (JSONException e) {
             Log.d(TAG, "Error writing JSON primitive, skipping field " + this.key + ", " + e.getMessage());
         }

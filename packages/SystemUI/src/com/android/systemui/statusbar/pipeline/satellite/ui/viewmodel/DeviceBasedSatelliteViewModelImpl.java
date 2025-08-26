@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteViewModelImpl implements DeviceBasedSatelliteViewModel {
     public static final long DELAY_DURATION;
@@ -29,7 +28,6 @@ public final class DeviceBasedSatelliteViewModelImpl implements DeviceBasedSatel
     public final ReadonlyStateFlow shouldShowIconForOosAfterHysteresis;
     public final ReadonlyStateFlow showIcon;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,18 +44,18 @@ public final class DeviceBasedSatelliteViewModelImpl implements DeviceBasedSatel
     }
 
     public DeviceBasedSatelliteViewModelImpl(Context context, DeviceBasedSatelliteInteractor deviceBasedSatelliteInteractor, CoroutineScope coroutineScope, AirplaneModeRepository airplaneModeRepository, LogBuffer logBuffer, TableLogBuffer tableLogBuffer) {
-        Flow logDiffsForTable = deviceBasedSatelliteInteractor.isOpportunisticSatelliteIconEnabled ? DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(deviceBasedSatelliteInteractor.areAllConnectionsOutOfService, new DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$1(null, logBuffer))), tableLogBuffer, "vm", "visibleForOos", false) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+        Flow flowLogDiffsForTable = deviceBasedSatelliteInteractor.isOpportunisticSatelliteIconEnabled ? DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(deviceBasedSatelliteInteractor.areAllConnectionsOutOfService, new DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$1(null, logBuffer))), tableLogBuffer, "vm", "visibleForOos", false) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        this.shouldShowIconForOosAfterHysteresis = FlowKt.stateIn(logDiffsForTable, coroutineScope, WhileSubscribed$default, bool);
+        this.shouldShowIconForOosAfterHysteresis = FlowKt.stateIn(flowLogDiffsForTable, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(deviceBasedSatelliteInteractor.isSatelliteAllowed, deviceBasedSatelliteInteractor.isSatelliteProvisioned, new DeviceBasedSatelliteViewModelImpl$canShowIcon$1(null));
         this.canShowIcon = flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(deviceBasedSatelliteInteractor.isOpportunisticSatelliteIconEnabled ? DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$2(null, this, deviceBasedSatelliteInteractor, airplaneModeRepository))), tableLogBuffer, "vm", "visible", false) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.showIcon = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(deviceBasedSatelliteInteractor.isOpportunisticSatelliteIconEnabled ? DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$2(null, this, deviceBasedSatelliteInteractor, airplaneModeRepository))), tableLogBuffer, "vm", "visible", false) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.showIcon = readonlyStateFlowStateIn;
         DeviceBasedSatelliteViewModelImpl$icon$1 deviceBasedSatelliteViewModelImpl$icon$1 = new DeviceBasedSatelliteViewModelImpl$icon$1(null);
         ReadonlyStateFlow readonlyStateFlow = deviceBasedSatelliteInteractor.connectionState;
-        this.icon = FlowKt.stateIn(FlowKt.combine(stateIn, readonlyStateFlow, deviceBasedSatelliteInteractor.signalStrength, deviceBasedSatelliteViewModelImpl$icon$1), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.carrierText = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateIn, readonlyStateFlow, new DeviceBasedSatelliteViewModelImpl$carrierText$1(logBuffer, context, null))), tableLogBuffer, "vm", "carrierText", (String) null), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.icon = FlowKt.stateIn(FlowKt.combine(readonlyStateFlowStateIn, readonlyStateFlow, deviceBasedSatelliteInteractor.signalStrength, deviceBasedSatelliteViewModelImpl$icon$1), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.carrierText = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn, readonlyStateFlow, new DeviceBasedSatelliteViewModelImpl$carrierText$1(logBuffer, context, null))), tableLogBuffer, "vm", "carrierText", (String) null), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
     }
 }

@@ -2,6 +2,7 @@ package com.android.systemui.blur.domain.interactor;
 
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -9,27 +10,29 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecMassivePanelBackgroundDisplayInteractor$shouldShow$1 extends SuspendLambda implements Function4 {
+    final /* synthetic */ SecQsUiDisplayModeInteractor $secQsUiDisplayModeInteractor;
     /* synthetic */ boolean Z$0;
     /* synthetic */ boolean Z$1;
     /* synthetic */ boolean Z$2;
     int label;
 
-    public SecMassivePanelBackgroundDisplayInteractor$shouldShow$1(Continuation continuation) {
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public SecMassivePanelBackgroundDisplayInteractor$shouldShow$1(SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor, Continuation continuation) {
         super(4, continuation);
+        this.$secQsUiDisplayModeInteractor = secQsUiDisplayModeInteractor;
     }
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj3).booleanValue();
-        SecMassivePanelBackgroundDisplayInteractor$shouldShow$1 secMassivePanelBackgroundDisplayInteractor$shouldShow$1 = new SecMassivePanelBackgroundDisplayInteractor$shouldShow$1((Continuation) obj4);
-        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$0 = booleanValue;
-        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$1 = booleanValue2;
-        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$2 = booleanValue3;
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+        SecMassivePanelBackgroundDisplayInteractor$shouldShow$1 secMassivePanelBackgroundDisplayInteractor$shouldShow$1 = new SecMassivePanelBackgroundDisplayInteractor$shouldShow$1(this.$secQsUiDisplayModeInteractor, (Continuation) obj4);
+        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$0 = zBooleanValue;
+        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$1 = zBooleanValue2;
+        secMassivePanelBackgroundDisplayInteractor$shouldShow$1.Z$2 = zBooleanValue3;
         return secMassivePanelBackgroundDisplayInteractor$shouldShow$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -44,6 +47,6 @@ final class SecMassivePanelBackgroundDisplayInteractor$shouldShow$1 extends Susp
         boolean z2 = this.Z$1;
         boolean z3 = this.Z$2;
         ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("blurReduced = ", " , minimalBatteryUse = ", " , hasCustomColorApplied = ", z, z2), z3, "SecMassivePanelBackgroundDisplayInteractor");
-        return Boolean.valueOf(z || z2 || z3);
+        return Boolean.valueOf(z || z2 || z3 || this.$secQsUiDisplayModeInteractor.isTablet());
     }
 }

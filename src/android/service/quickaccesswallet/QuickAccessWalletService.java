@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.service.quickaccesswallet.IQuickAccessWalletService;
-import android.service.quickaccesswallet.QuickAccessWalletService;
 import android.util.Log;
 import com.android.internal.hidden_from_bootclasspath.android.service.quickaccesswallet.Flags;
 
@@ -54,7 +53,7 @@ public abstract class QuickAccessWalletService extends Service {
             QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.AnonymousClass1.this.lambda$onWalletCardsRequested$0(getWalletCardsRequest, iQuickAccessWalletServiceCallbacks);
+                    this.f$0.lambda$onWalletCardsRequested$0(getWalletCardsRequest, iQuickAccessWalletServiceCallbacks);
                 }
             });
         }
@@ -69,7 +68,7 @@ public abstract class QuickAccessWalletService extends Service {
             QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.AnonymousClass1.this.lambda$onWalletCardSelected$1(selectWalletCardRequest);
+                    this.f$0.lambda$onWalletCardSelected$1(selectWalletCardRequest);
                 }
             });
         }
@@ -81,7 +80,7 @@ public abstract class QuickAccessWalletService extends Service {
             handler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.this.onWalletDismissed();
+                    quickAccessWalletService.onWalletDismissed();
                 }
             });
         }
@@ -91,7 +90,7 @@ public abstract class QuickAccessWalletService extends Service {
             QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.AnonymousClass1.this.lambda$onTargetActivityIntentRequested$2(iQuickAccessWalletServiceCallbacks);
+                    this.f$0.lambda$onTargetActivityIntentRequested$2(iQuickAccessWalletServiceCallbacks);
                 }
             });
         }
@@ -107,7 +106,7 @@ public abstract class QuickAccessWalletService extends Service {
                 QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        QuickAccessWalletService.AnonymousClass1.this.lambda$onGestureTargetActivityIntentRequested$3(iQuickAccessWalletServiceCallbacks);
+                        this.f$0.lambda$onGestureTargetActivityIntentRequested$3(iQuickAccessWalletServiceCallbacks);
                     }
                 });
             }
@@ -128,7 +127,7 @@ public abstract class QuickAccessWalletService extends Service {
             QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.AnonymousClass1.this.lambda$registerWalletServiceEventListener$4(walletServiceEventListenerRequest, iQuickAccessWalletServiceCallbacks);
+                    this.f$0.lambda$registerWalletServiceEventListener$4(walletServiceEventListenerRequest, iQuickAccessWalletServiceCallbacks);
                 }
             });
         }
@@ -143,7 +142,7 @@ public abstract class QuickAccessWalletService extends Service {
             QuickAccessWalletService.this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$1$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletService.AnonymousClass1.this.lambda$unregisterWalletServiceEventListener$5(walletServiceEventListenerRequest);
+                    this.f$0.lambda$unregisterWalletServiceEventListener$5(walletServiceEventListenerRequest);
                 }
             });
         }
@@ -187,7 +186,7 @@ public abstract class QuickAccessWalletService extends Service {
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletService.this.lambda$sendWalletServiceEvent$0(walletServiceEvent);
+                this.f$0.lambda$sendWalletServiceEvent$0(walletServiceEvent);
             }
         });
     }

@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.UserHandle;
@@ -24,7 +25,7 @@ public class EmergencyAffordanceManager {
         performEmergencyCall(this.mContext);
     }
 
-    private static Uri getPhoneUri(Context context) {
+    private static Uri getPhoneUri(Context context) throws Resources.NotFoundException {
         String string;
         String string2 = context.getResources().getString(R.string.config_emergency_call_number);
         if (Build.IS_DEBUGGABLE && (string = Settings.Global.getString(context.getContentResolver(), EMERGENCY_CALL_NUMBER_SETTING)) != null) {

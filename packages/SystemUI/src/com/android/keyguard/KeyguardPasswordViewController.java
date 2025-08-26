@@ -38,7 +38,6 @@ import com.android.systemui.vibrate.VibrationUtil;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewController {
     public final InputMethodManager mInputMethodManager;
@@ -56,7 +55,7 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
     public final AnonymousClass1 mTextWatcher;
 
     /* renamed from: $r8$lambda$1k-SdfXqdHUZhOkcOYn3WW-APZw, reason: not valid java name */
-    public static /* synthetic */ void m954$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(KeyguardPasswordViewController keyguardPasswordViewController) {
+    public static /* synthetic */ void m956$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(KeyguardPasswordViewController keyguardPasswordViewController) {
         keyguardPasswordViewController.mKeyguardSecurityCallback.userActivity();
         keyguardPasswordViewController.mInputMethodManager.showInputMethodPickerFromSystem(false, ((KeyguardPasswordView) keyguardPasswordViewController.mView).getContext().getDisplayId());
     }
@@ -70,18 +69,18 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
     /* JADX WARN: Type inference failed for: r1v2, types: [com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda2] */
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda3] */
     /* JADX WARN: Type inference failed for: r1v4, types: [com.android.keyguard.KeyguardPasswordViewController$1] */
-    public KeyguardPasswordViewController(KeyguardPasswordView keyguardPasswordView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, InputMethodManager inputMethodManager, EmergencyButtonController emergencyButtonController, DelayableExecutor delayableExecutor, Resources resources, FalsingCollector falsingCollector, KeyguardViewController keyguardViewController, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier) {
+    public KeyguardPasswordViewController(KeyguardPasswordView keyguardPasswordView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, InputMethodManager inputMethodManager, EmergencyButtonController emergencyButtonController, DelayableExecutor delayableExecutor, Resources resources, FalsingCollector falsingCollector, KeyguardViewController keyguardViewController, DevicePostureController devicePostureController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier) throws Resources.NotFoundException {
         super(keyguardPasswordView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor, bouncerHapticPlayer, userActivityNotifier);
         this.mPostureCallback = new DevicePostureController.Callback() { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
             public final void onPostureChanged(int i) {
-                ((KeyguardPasswordView) KeyguardPasswordViewController.this.mView).onDevicePostureChanged(i);
+                ((KeyguardPasswordView) this.f$0.mView).onDevicePostureChanged(i);
             }
         };
         this.mOnEditorActionListener = new TextView.OnEditorActionListener() { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda2
             @Override // android.widget.TextView.OnEditorActionListener
             public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                KeyguardPasswordViewController keyguardPasswordViewController = KeyguardPasswordViewController.this;
+                KeyguardPasswordViewController keyguardPasswordViewController = this.f$0;
                 if (keyEvent != null) {
                     return false;
                 }
@@ -95,7 +94,7 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
         this.mKeyListener = new View.OnKeyListener() { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda3
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                KeyguardPasswordViewController keyguardPasswordViewController = KeyguardPasswordViewController.this;
+                KeyguardPasswordViewController keyguardPasswordViewController = this.f$0;
                 if (keyEvent == null || !KeyEvent.isConfirmKey(i) || i == 62 || keyEvent.getAction() != 0) {
                     return false;
                 }
@@ -267,7 +266,7 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
                 KeyguardPasswordViewController keyguardPasswordViewController = this.f$0;
                 switch (i2) {
                     case 0:
-                        KeyguardPasswordViewController.m954$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(keyguardPasswordViewController);
+                        KeyguardPasswordViewController.m956$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(keyguardPasswordViewController);
                         break;
                     default:
                         KeyguardSecurityCallback keyguardSecurityCallback = keyguardPasswordViewController.mKeyguardSecurityCallback;
@@ -277,10 +276,10 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
                 }
             }
         });
-        View findViewById = ((KeyguardPasswordView) this.mView).findViewById(R.id.cancel_button);
-        if (findViewById != null) {
+        View viewFindViewById = ((KeyguardPasswordView) this.mView).findViewById(R.id.cancel_button);
+        if (viewFindViewById != null) {
             final int i2 = 1;
-            findViewById.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda4
+            viewFindViewById.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPasswordViewController$$ExternalSyntheticLambda4
                 public final /* synthetic */ KeyguardPasswordViewController f$0;
 
                 {
@@ -293,7 +292,7 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
                     KeyguardPasswordViewController keyguardPasswordViewController = this.f$0;
                     switch (i22) {
                         case 0:
-                            KeyguardPasswordViewController.m954$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(keyguardPasswordViewController);
+                            KeyguardPasswordViewController.m956$r8$lambda$1kSdfXqdHUZhOkcOYn3WWAPZw(keyguardPasswordViewController);
                             break;
                         default:
                             KeyguardSecurityCallback keyguardSecurityCallback = keyguardPasswordViewController.mKeyguardSecurityCallback;
@@ -318,10 +317,10 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
     public void resetState() {
         this.mPasswordEntry.setTextOperationUser(UserHandle.of(this.mSelectedUserInteractor.getSelectedUserId()));
         this.mMessageAreaController.setMessage(getInitialMessageResId());
-        boolean isEnabled = this.mPasswordEntry.isEnabled();
+        boolean zIsEnabled = this.mPasswordEntry.isEnabled();
         ((KeyguardPasswordView) this.mView).setPasswordEntryEnabled(true);
         ((KeyguardPasswordView) this.mView).setPasswordEntryInputEnabled(true);
-        if (this.mResumed && this.mPasswordEntry.isVisibleToUser() && isEnabled) {
+        if (this.mResumed && this.mPasswordEntry.isVisibleToUser() && zIsEnabled) {
             showInput();
         }
     }
@@ -334,9 +333,9 @@ public class KeyguardPasswordViewController extends KeyguardSecAbsKeyInputViewCo
 
     public void updateSwitchImeButton() {
         boolean z = this.mSwitchImeButton.getVisibility() == 0;
-        boolean hasMultipleEnabledIMEsOrSubtypes = hasMultipleEnabledIMEsOrSubtypes(this.mInputMethodManager);
-        if (z != hasMultipleEnabledIMEsOrSubtypes) {
-            this.mSwitchImeButton.setVisibility(hasMultipleEnabledIMEsOrSubtypes ? 0 : 8);
+        boolean zHasMultipleEnabledIMEsOrSubtypes = hasMultipleEnabledIMEsOrSubtypes(this.mInputMethodManager);
+        if (z != zHasMultipleEnabledIMEsOrSubtypes) {
+            this.mSwitchImeButton.setVisibility(zHasMultipleEnabledIMEsOrSubtypes ? 0 : 8);
         }
         if (this.mSwitchImeButton.getVisibility() != 0) {
             ViewGroup.LayoutParams layoutParams = this.mPasswordEntry.getLayoutParams();

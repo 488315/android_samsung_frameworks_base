@@ -384,9 +384,9 @@ public interface IAccountManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccountManager)) {
-                return (IAccountManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccountManager)) {
+                return (IAccountManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -514,137 +514,137 @@ public interface IAccountManager extends IInterface {
                     return true;
                 case 2:
                     Account account2 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String userData = getUserData(account2, readString);
+                    String userData = getUserData(account2, string);
                     parcel2.writeNoException();
                     parcel2.writeString(userData);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    AuthenticatorDescription[] authenticatorTypes = getAuthenticatorTypes(readInt);
+                    AuthenticatorDescription[] authenticatorTypes = getAuthenticatorTypes(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(authenticatorTypes, 1);
                     return true;
                 case 4:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Account[] accountsForPackage = getAccountsForPackage(readString2, readInt2, readString3);
+                    Account[] accountsForPackage = getAccountsForPackage(string2, i4, string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(accountsForPackage, 1);
                     return true;
                 case 5:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Account[] accountsByTypeForPackage = getAccountsByTypeForPackage(readString4, readString5, readString6);
+                    Account[] accountsByTypeForPackage = getAccountsByTypeForPackage(string4, string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(accountsByTypeForPackage, 1);
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Account[] accountsAsUser = getAccountsAsUser(readString7, readInt3, readString8);
+                    Account[] accountsAsUser = getAccountsAsUser(string7, i5, string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(accountsAsUser, 1);
                     return true;
                 case 7:
-                    IAccountManagerResponse asInterface = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account3 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt4 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i6 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    hasFeatures(asInterface, account3, createStringArray, readInt4, readString9);
+                    hasFeatures(iAccountManagerResponseAsInterface, account3, strArrCreateStringArray, i6, string9);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IAccountManagerResponse asInterface2 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString10 = parcel.readString();
-                    String[] createStringArray2 = parcel.createStringArray();
-                    String readString11 = parcel.readString();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface2 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string10 = parcel.readString();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getAccountByTypeAndFeatures(asInterface2, readString10, createStringArray2, readString11);
+                    getAccountByTypeAndFeatures(iAccountManagerResponseAsInterface2, string10, strArrCreateStringArray2, string11);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IAccountManagerResponse asInterface3 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString12 = parcel.readString();
-                    String[] createStringArray3 = parcel.createStringArray();
-                    String readString13 = parcel.readString();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface3 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string12 = parcel.readString();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getAccountsByFeatures(asInterface3, readString12, createStringArray3, readString13);
+                    getAccountsByFeatures(iAccountManagerResponseAsInterface3, string12, strArrCreateStringArray3, string13);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     Account account4 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountExplicitly = addAccountExplicitly(account4, readString14, bundle, readString15);
+                    boolean zAddAccountExplicitly = addAccountExplicitly(account4, string14, bundle, string15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountExplicitly);
+                    parcel2.writeBoolean(zAddAccountExplicitly);
                     return true;
                 case 11:
-                    IAccountManagerResponse asInterface4 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface4 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account5 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt5 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeAccountAsUser(asInterface4, account5, readBoolean, readInt5);
+                    removeAccountAsUser(iAccountManagerResponseAsInterface4, account5, z, i7);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     Account account6 = (Account) parcel.readTypedObject(Account.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean removeAccountExplicitly = removeAccountExplicitly(account6);
+                    boolean zRemoveAccountExplicitly = removeAccountExplicitly(account6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAccountExplicitly);
+                    parcel2.writeBoolean(zRemoveAccountExplicitly);
                     return true;
                 case 13:
-                    IAccountManagerResponse asInterface5 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface5 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account7 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    copyAccountToUser(asInterface5, account7, readInt6, readInt7);
+                    copyAccountToUser(iAccountManagerResponseAsInterface5, account7, i8, i9);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    invalidateAuthToken(readString16, readString17);
+                    invalidateAuthToken(string16, string17);
                     parcel2.writeNoException();
                     return true;
                 case 15:
                     Account account8 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String peekAuthToken = peekAuthToken(account8, readString18);
+                    String strPeekAuthToken = peekAuthToken(account8, string18);
                     parcel2.writeNoException();
-                    parcel2.writeString(peekAuthToken);
+                    parcel2.writeString(strPeekAuthToken);
                     return true;
                 case 16:
                     Account account9 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setAuthToken(account9, readString19, readString20);
+                    setAuthToken(account9, string19, string20);
                     parcel2.writeNoException();
                     return true;
                 case 17:
                     Account account10 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setPassword(account10, readString21);
+                    setPassword(account10, string21);
                     parcel2.writeNoException();
                     return true;
                 case 18:
@@ -655,112 +655,112 @@ public interface IAccountManager extends IInterface {
                     return true;
                 case 19:
                     Account account12 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString22 = parcel.readString();
-                    String readString23 = parcel.readString();
+                    String string22 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setUserData(account12, readString22, readString23);
+                    setUserData(account12, string22, string23);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     Account account13 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString24 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string24 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    updateAppPermission(account13, readString24, readInt8, readBoolean2);
+                    updateAppPermission(account13, string24, i10, z2);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    IAccountManagerResponse asInterface6 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface6 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account14 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString25 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    String string25 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getAuthToken(asInterface6, account14, readString25, readBoolean3, readBoolean4, bundle2);
+                    getAuthToken(iAccountManagerResponseAsInterface6, account14, string25, z3, z4, bundle2);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    IAccountManagerResponse asInterface7 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString26 = parcel.readString();
-                    String readString27 = parcel.readString();
-                    String[] createStringArray4 = parcel.createStringArray();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface7 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string26 = parcel.readString();
+                    String string27 = parcel.readString();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
+                    boolean z5 = parcel.readBoolean();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addAccount(asInterface7, readString26, readString27, createStringArray4, readBoolean5, bundle3);
+                    addAccount(iAccountManagerResponseAsInterface7, string26, string27, strArrCreateStringArray4, z5, bundle3);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    IAccountManagerResponse asInterface8 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
-                    String[] createStringArray5 = parcel.createStringArray();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface8 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String[] strArrCreateStringArray5 = parcel.createStringArray();
+                    boolean z6 = parcel.readBoolean();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addAccountAsUser(asInterface8, readString28, readString29, createStringArray5, readBoolean6, bundle4, readInt9);
+                    addAccountAsUser(iAccountManagerResponseAsInterface8, string28, string29, strArrCreateStringArray5, z6, bundle4, i11);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    IAccountManagerResponse asInterface9 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface9 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account15 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString30 = parcel.readString();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    String string30 = parcel.readString();
+                    boolean z7 = parcel.readBoolean();
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateCredentials(asInterface9, account15, readString30, readBoolean7, bundle5);
+                    updateCredentials(iAccountManagerResponseAsInterface9, account15, string30, z7, bundle5);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    IAccountManagerResponse asInterface10 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString31 = parcel.readString();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface10 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string31 = parcel.readString();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    editProperties(asInterface10, readString31, readBoolean8);
+                    editProperties(iAccountManagerResponseAsInterface10, string31, z8);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    IAccountManagerResponse asInterface11 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface11 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account16 = (Account) parcel.readTypedObject(Account.CREATOR);
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
-                    int readInt10 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    confirmCredentialsAsUser(asInterface11, account16, bundle6, readBoolean9, readInt10);
+                    confirmCredentialsAsUser(iAccountManagerResponseAsInterface11, account16, bundle6, z9, i12);
                     parcel2.writeNoException();
                     return true;
                 case 27:
                     Account account17 = (Account) parcel.readTypedObject(Account.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean accountAuthenticated = accountAuthenticated(account17);
+                    boolean zAccountAuthenticated = accountAuthenticated(account17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(accountAuthenticated);
+                    parcel2.writeBoolean(zAccountAuthenticated);
                     return true;
                 case 28:
-                    IAccountManagerResponse asInterface12 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface12 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getAuthTokenLabel(asInterface12, readString32, readString33);
+                    getAuthTokenLabel(iAccountManagerResponseAsInterface12, string32, string33);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    String readString34 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addSharedAccountsFromParentUser(readInt11, readInt12, readString34);
+                    addSharedAccountsFromParentUser(i13, i14, string34);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    IAccountManagerResponse asInterface13 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface13 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account18 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString35 = parcel.readString();
+                    String string35 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    renameAccount(asInterface13, account18, readString35);
+                    renameAccount(iAccountManagerResponseAsInterface13, account18, string35);
                     parcel2.writeNoException();
                     return true;
                 case 31:
@@ -771,49 +771,49 @@ public interface IAccountManager extends IInterface {
                     parcel2.writeString(previousName);
                     return true;
                 case 32:
-                    IAccountManagerResponse asInterface14 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString36 = parcel.readString();
-                    String readString37 = parcel.readString();
-                    String[] createStringArray6 = parcel.createStringArray();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    IAccountManagerResponse iAccountManagerResponseAsInterface14 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string36 = parcel.readString();
+                    String string37 = parcel.readString();
+                    String[] strArrCreateStringArray6 = parcel.createStringArray();
+                    boolean z10 = parcel.readBoolean();
                     Bundle bundle7 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startAddAccountSession(asInterface14, readString36, readString37, createStringArray6, readBoolean10, bundle7);
+                    startAddAccountSession(iAccountManagerResponseAsInterface14, string36, string37, strArrCreateStringArray6, z10, bundle7);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    IAccountManagerResponse asInterface15 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface15 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account20 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString38 = parcel.readString();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    String string38 = parcel.readString();
+                    boolean z11 = parcel.readBoolean();
                     Bundle bundle8 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startUpdateCredentialsSession(asInterface15, account20, readString38, readBoolean11, bundle8);
+                    startUpdateCredentialsSession(iAccountManagerResponseAsInterface15, account20, string38, z11, bundle8);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    IAccountManagerResponse asInterface16 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface16 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Bundle bundle9 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     Bundle bundle10 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    finishSessionAsUser(asInterface16, bundle9, readBoolean12, bundle10, readInt13);
+                    finishSessionAsUser(iAccountManagerResponseAsInterface16, bundle9, z12, bundle10, i15);
                     parcel2.writeNoException();
                     return true;
                 case 35:
                     Account account21 = (Account) parcel.readTypedObject(Account.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean someUserHasAccount = someUserHasAccount(account21);
+                    boolean zSomeUserHasAccount = someUserHasAccount(account21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(someUserHasAccount);
+                    parcel2.writeBoolean(zSomeUserHasAccount);
                     return true;
                 case 36:
-                    IAccountManagerResponse asInterface17 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountManagerResponse iAccountManagerResponseAsInterface17 = IAccountManagerResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account22 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString39 = parcel.readString();
+                    String string39 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    isCredentialsUpdateSuggested(asInterface17, account22, readString39);
+                    isCredentialsUpdateSuggested(iAccountManagerResponseAsInterface17, account22, string39);
                     parcel2.writeNoException();
                     return true;
                 case 37:
@@ -825,76 +825,76 @@ public interface IAccountManager extends IInterface {
                     return true;
                 case 38:
                     Account account24 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString40 = parcel.readString();
+                    String string40 = parcel.readString();
                     Bundle bundle11 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    HashMap readHashMap = parcel.readHashMap(getClass().getClassLoader());
-                    String readString41 = parcel.readString();
+                    HashMap hashMap = parcel.readHashMap(getClass().getClassLoader());
+                    String string41 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAccountExplicitlyWithVisibility = addAccountExplicitlyWithVisibility(account24, readString40, bundle11, readHashMap, readString41);
+                    boolean zAddAccountExplicitlyWithVisibility = addAccountExplicitlyWithVisibility(account24, string40, bundle11, hashMap, string41);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAccountExplicitlyWithVisibility);
+                    parcel2.writeBoolean(zAddAccountExplicitlyWithVisibility);
                     return true;
                 case 39:
                     Account account25 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString42 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string42 = parcel.readString();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean accountVisibility = setAccountVisibility(account25, readString42, readInt14);
+                    boolean accountVisibility = setAccountVisibility(account25, string42, i16);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(accountVisibility);
                     return true;
                 case 40:
                     Account account26 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString43 = parcel.readString();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int accountVisibility2 = getAccountVisibility(account26, readString43);
+                    int accountVisibility2 = getAccountVisibility(account26, string43);
                     parcel2.writeNoException();
                     parcel2.writeInt(accountVisibility2);
                     return true;
                 case 41:
-                    String readString44 = parcel.readString();
-                    String readString45 = parcel.readString();
+                    String string44 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Map accountsAndVisibilityForPackage = getAccountsAndVisibilityForPackage(readString44, readString45);
+                    Map accountsAndVisibilityForPackage = getAccountsAndVisibilityForPackage(string44, string45);
                     parcel2.writeNoException();
                     parcel2.writeMap(accountsAndVisibilityForPackage);
                     return true;
                 case 42:
-                    String[] createStringArray7 = parcel.createStringArray();
-                    String readString46 = parcel.readString();
+                    String[] strArrCreateStringArray7 = parcel.createStringArray();
+                    String string46 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerAccountListener(createStringArray7, readString46);
+                    registerAccountListener(strArrCreateStringArray7, string46);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    String[] createStringArray8 = parcel.createStringArray();
-                    String readString47 = parcel.readString();
+                    String[] strArrCreateStringArray8 = parcel.createStringArray();
+                    String string47 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterAccountListener(createStringArray8, readString47);
+                    unregisterAccountListener(strArrCreateStringArray8, string47);
                     parcel2.writeNoException();
                     return true;
                 case 44:
                     Account account27 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString48 = parcel.readString();
+                    String string48 = parcel.readString();
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasAccountAccess = hasAccountAccess(account27, readString48, userHandle);
+                    boolean zHasAccountAccess = hasAccountAccess(account27, string48, userHandle);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasAccountAccess);
+                    parcel2.writeBoolean(zHasAccountAccess);
                     return true;
                 case 45:
                     Account account28 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString49 = parcel.readString();
+                    String string49 = parcel.readString();
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IntentSender createRequestAccountAccessIntentSenderAsUser = createRequestAccountAccessIntentSenderAsUser(account28, readString49, userHandle2);
+                    IntentSender intentSenderCreateRequestAccountAccessIntentSenderAsUser = createRequestAccountAccessIntentSenderAsUser(account28, string49, userHandle2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createRequestAccountAccessIntentSenderAsUser, 1);
+                    parcel2.writeTypedObject(intentSenderCreateRequestAccountAccessIntentSenderAsUser, 1);
                     return true;
                 case 46:
-                    String readString50 = parcel.readString();
+                    String string50 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onAccountAccessed(readString50);
+                    onAccountAccessed(string50);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -920,807 +920,807 @@ public interface IAccountManager extends IInterface {
 
             @Override // android.accounts.IAccountManager
             public String getPassword(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public String getUserData(Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public AuthenticatorDescription[] getAuthenticatorTypes(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AuthenticatorDescription[]) obtain2.createTypedArray(AuthenticatorDescription.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AuthenticatorDescription[]) parcelObtain2.createTypedArray(AuthenticatorDescription.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public Account[] getAccountsForPackage(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Account[]) obtain2.createTypedArray(Account.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Account[]) parcelObtain2.createTypedArray(Account.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public Account[] getAccountsByTypeForPackage(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Account[]) obtain2.createTypedArray(Account.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Account[]) parcelObtain2.createTypedArray(Account.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public Account[] getAccountsAsUser(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Account[]) obtain2.createTypedArray(Account.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Account[]) parcelObtain2.createTypedArray(Account.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void hasFeatures(IAccountManagerResponse iAccountManagerResponse, Account account, String[] strArr, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void getAccountByTypeAndFeatures(IAccountManagerResponse iAccountManagerResponse, String str, String[] strArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void getAccountsByFeatures(IAccountManagerResponse iAccountManagerResponse, String str, String[] strArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean addAccountExplicitly(Account account, String str, Bundle bundle, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void removeAccountAsUser(IAccountManagerResponse iAccountManagerResponse, Account account, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean removeAccountExplicitly(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void copyAccountToUser(IAccountManagerResponse iAccountManagerResponse, Account account, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void invalidateAuthToken(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public String peekAuthToken(Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void setAuthToken(Account account, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void setPassword(Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void clearPassword(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void setUserData(Account account, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void updateAppPermission(Account account, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void getAuthToken(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, boolean z2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void addAccount(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void addAccountAsUser(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void updateCredentials(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void editProperties(IAccountManagerResponse iAccountManagerResponse, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void confirmCredentialsAsUser(IAccountManagerResponse iAccountManagerResponse, Account account, Bundle bundle, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean accountAuthenticated(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void getAuthTokenLabel(IAccountManagerResponse iAccountManagerResponse, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void addSharedAccountsFromParentUser(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void renameAccount(IAccountManagerResponse iAccountManagerResponse, Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public String getPreviousName(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void startAddAccountSession(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void startUpdateCredentialsSession(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void finishSessionAsUser(IAccountManagerResponse iAccountManagerResponse, Bundle bundle, boolean z, Bundle bundle2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle2, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle2, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean someUserHasAccount(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void isCredentialsUpdateSuggested(IAccountManagerResponse iAccountManagerResponse, Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountManagerResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountManagerResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public Map getPackagesAndVisibilityForAccount(Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean addAccountExplicitlyWithVisibility(Account account, String str, Bundle bundle, Map map, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeMap(map);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeMap(map);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean setAccountVisibility(Account account, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public int getAccountVisibility(Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public Map getAccountsAndVisibilityForPackage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void registerAccountListener(String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void unregisterAccountListener(String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public boolean hasAccountAccess(Account account, String str, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public IntentSender createRequestAccountAccessIntentSenderAsUser(Account account, String str, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IntentSender) obtain2.readTypedObject(IntentSender.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IntentSender) parcelObtain2.readTypedObject(IntentSender.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountManager
             public void onAccountAccessed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

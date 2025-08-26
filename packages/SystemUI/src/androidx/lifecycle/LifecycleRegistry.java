@@ -12,11 +12,11 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LifecycleRegistry extends Lifecycle {
     public static final Companion Companion = new Companion(null);
@@ -30,7 +30,6 @@ public class LifecycleRegistry extends Lifecycle {
     public final ArrayList parentStates;
     public Lifecycle.State state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,7 +39,6 @@ public class LifecycleRegistry extends Lifecycle {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ObserverWithState {
         public final LifecycleEventObserver lifecycleObserver;
         public Lifecycle.State state;
@@ -119,9 +117,9 @@ public class LifecycleRegistry extends Lifecycle {
         ObserverWithState observerWithState = new ObserverWithState(lifecycleObserver, state2);
         if (((ObserverWithState) this.observerMap.putIfAbsent(lifecycleObserver, observerWithState)) == null && (lifecycleOwner = (LifecycleOwner) this.lifecycleOwner.get()) != null) {
             boolean z = this.addingObserverCounter != 0 || this.handlingEvent;
-            Lifecycle.State calculateTargetState = calculateTargetState(lifecycleObserver);
+            Lifecycle.State stateCalculateTargetState = calculateTargetState(lifecycleObserver);
             this.addingObserverCounter++;
-            while (observerWithState.state.compareTo(calculateTargetState) < 0 && this.observerMap.mHashMap.containsKey(lifecycleObserver)) {
+            while (observerWithState.state.compareTo(stateCalculateTargetState) < 0 && this.observerMap.mHashMap.containsKey(lifecycleObserver)) {
                 this.parentStates.add(observerWithState.state);
                 Lifecycle.Event.Companion companion = Lifecycle.Event.Companion;
                 Lifecycle.State state3 = observerWithState.state;
@@ -134,7 +132,7 @@ public class LifecycleRegistry extends Lifecycle {
                 observerWithState.dispatchEvent(lifecycleOwner, event);
                 ArrayList arrayList = this.parentStates;
                 arrayList.remove(arrayList.size() - 1);
-                calculateTargetState = calculateTargetState(lifecycleObserver);
+                stateCalculateTargetState = calculateTargetState(lifecycleObserver);
             }
             if (!z) {
                 sync();
@@ -148,7 +146,7 @@ public class LifecycleRegistry extends Lifecycle {
         FastSafeIterableMap fastSafeIterableMap = this.observerMap;
         SafeIterableMap.Entry entry = fastSafeIterableMap.mHashMap.containsKey(lifecycleObserver) ? ((SafeIterableMap.Entry) fastSafeIterableMap.mHashMap.get(lifecycleObserver)).mPrevious : null;
         Lifecycle.State state = (entry == null || (observerWithState = (ObserverWithState) entry.getValue()) == null) ? null : observerWithState.state;
-        Lifecycle.State state2 = this.parentStates.isEmpty() ? null : (Lifecycle.State) AlertController$$ExternalSyntheticOutline0.m(this.parentStates, 1);
+        Lifecycle.State state2 = this.parentStates.isEmpty() ? null : (Lifecycle.State) AlertController$$ExternalSyntheticOutline0.m(1, this.parentStates);
         Lifecycle.State state3 = this.state;
         Companion.getClass();
         if (state == null || state.compareTo(state3) >= 0) {
@@ -208,25 +206,94 @@ public class LifecycleRegistry extends Lifecycle {
         moveToState(state);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0034, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0034, code lost:
     
         r10.newEventOccurred = false;
         r10._currentStateFlow.setValue(r10.state);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x003d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:12:0x003d, code lost:
     
         return;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void sync() {
-        /*
-            Method dump skipped, instructions count: 422
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.lifecycle.LifecycleRegistry.sync():void");
+        LifecycleOwner lifecycleOwner = (LifecycleOwner) this.lifecycleOwner.get();
+        if (lifecycleOwner == null) {
+            throw new IllegalStateException("LifecycleOwner of this LifecycleRegistry is already garbage collected. It is too late to change lifecycle state.");
+        }
+        while (true) {
+            FastSafeIterableMap fastSafeIterableMap = this.observerMap;
+            if (fastSafeIterableMap.mSize != 0) {
+                SafeIterableMap.Entry entry = fastSafeIterableMap.mStart;
+                entry.getClass();
+                Lifecycle.State state = ((ObserverWithState) entry.getValue()).state;
+                SafeIterableMap.Entry entry2 = this.observerMap.mEnd;
+                entry2.getClass();
+                Lifecycle.State state2 = ((ObserverWithState) entry2.getValue()).state;
+                if (state == state2 && this.state == state2) {
+                    break;
+                }
+                this.newEventOccurred = false;
+                Lifecycle.State state3 = this.state;
+                SafeIterableMap.Entry entry3 = this.observerMap.mStart;
+                entry3.getClass();
+                if (state3.compareTo(((ObserverWithState) entry3.getValue()).state) < 0) {
+                    FastSafeIterableMap fastSafeIterableMap2 = this.observerMap;
+                    fastSafeIterableMap2.getClass();
+                    SafeIterableMap.DescendingIterator descendingIterator = new SafeIterableMap.DescendingIterator(fastSafeIterableMap2.mEnd, fastSafeIterableMap2.mStart);
+                    fastSafeIterableMap2.mIterators.put(descendingIterator, Boolean.FALSE);
+                    while (descendingIterator.hasNext() && !this.newEventOccurred) {
+                        Map.Entry entry4 = (Map.Entry) descendingIterator.next();
+                        LifecycleObserver lifecycleObserver = (LifecycleObserver) entry4.getKey();
+                        ObserverWithState observerWithState = (ObserverWithState) entry4.getValue();
+                        while (observerWithState.state.compareTo(this.state) > 0 && !this.newEventOccurred && this.observerMap.mHashMap.containsKey(lifecycleObserver)) {
+                            Lifecycle.Event.Companion companion = Lifecycle.Event.Companion;
+                            Lifecycle.State state4 = observerWithState.state;
+                            companion.getClass();
+                            int i = Lifecycle.Event.Companion.WhenMappings.$EnumSwitchMapping$0[state4.ordinal()];
+                            Lifecycle.Event event = i != 1 ? i != 2 ? i != 3 ? null : Lifecycle.Event.ON_PAUSE : Lifecycle.Event.ON_STOP : Lifecycle.Event.ON_DESTROY;
+                            if (event == null) {
+                                throw new IllegalStateException("no event down from " + observerWithState.state);
+                            }
+                            this.parentStates.add(event.getTargetState());
+                            observerWithState.dispatchEvent(lifecycleOwner, event);
+                            ArrayList arrayList = this.parentStates;
+                            arrayList.remove(arrayList.size() - 1);
+                        }
+                    }
+                }
+                SafeIterableMap.Entry entry5 = this.observerMap.mEnd;
+                if (!this.newEventOccurred && entry5 != null && this.state.compareTo(((ObserverWithState) entry5.getValue()).state) > 0) {
+                    FastSafeIterableMap fastSafeIterableMap3 = this.observerMap;
+                    fastSafeIterableMap3.getClass();
+                    SafeIterableMap.IteratorWithAdditions iteratorWithAdditions = new SafeIterableMap.IteratorWithAdditions();
+                    fastSafeIterableMap3.mIterators.put(iteratorWithAdditions, Boolean.FALSE);
+                    while (iteratorWithAdditions.hasNext() && !this.newEventOccurred) {
+                        Map.Entry entry6 = (Map.Entry) iteratorWithAdditions.next();
+                        LifecycleObserver lifecycleObserver2 = (LifecycleObserver) entry6.getKey();
+                        ObserverWithState observerWithState2 = (ObserverWithState) entry6.getValue();
+                        while (observerWithState2.state.compareTo(this.state) < 0 && !this.newEventOccurred && this.observerMap.mHashMap.containsKey(lifecycleObserver2)) {
+                            this.parentStates.add(observerWithState2.state);
+                            Lifecycle.Event.Companion companion2 = Lifecycle.Event.Companion;
+                            Lifecycle.State state5 = observerWithState2.state;
+                            companion2.getClass();
+                            int i2 = Lifecycle.Event.Companion.WhenMappings.$EnumSwitchMapping$0[state5.ordinal()];
+                            Lifecycle.Event event2 = i2 != 1 ? i2 != 2 ? i2 != 5 ? null : Lifecycle.Event.ON_CREATE : Lifecycle.Event.ON_RESUME : Lifecycle.Event.ON_START;
+                            if (event2 == null) {
+                                throw new IllegalStateException("no event up from " + observerWithState2.state);
+                            }
+                            observerWithState2.dispatchEvent(lifecycleOwner, event2);
+                            ArrayList arrayList2 = this.parentStates;
+                            arrayList2.remove(arrayList2.size() - 1);
+                        }
+                    }
+                }
+            } else {
+                break;
+            }
+        }
     }
 
     private LifecycleRegistry(LifecycleOwner lifecycleOwner, boolean z) {

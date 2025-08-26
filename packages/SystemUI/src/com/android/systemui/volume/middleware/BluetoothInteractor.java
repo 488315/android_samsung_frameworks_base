@@ -16,13 +16,11 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BluetoothInteractor implements VolumeMiddleware {
     public final VolumeInfraMediator infraMediator;
     public boolean isPanelShowing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -55,58 +53,60 @@ public final class BluetoothInteractor implements VolumeMiddleware {
     public final Object apply(Object obj) {
         VolumePanelAction volumePanelAction = (VolumePanelAction) obj;
         int i = WhenMappings.$EnumSwitchMapping$0[volumePanelAction.getActionType().ordinal()];
-        String str = null;
+        String dualBtDeviceName = null;
         boolean z = true;
         if (i == 1) {
             VolumeState volumeState = volumePanelAction.getVolumeState();
             if (volumeState != null) {
                 List<VolumeStreamState> streamStates = volumeState.getStreamStates();
-                if (!(streamStates instanceof Collection) || !streamStates.isEmpty()) {
+                if ((streamStates instanceof Collection) && streamStates.isEmpty()) {
+                    z = false;
+                } else {
                     Iterator<T> it = streamStates.iterator();
                     while (it.hasNext()) {
                         if (((VolumeStreamState) it.next()).isEnabled(VolumeStreamState.BooleanStateKey.ROUTED_TO_BT)) {
                             break;
                         }
                     }
+                    z = false;
                 }
-                z = false;
-                List<Integer> mutableListOf = CollectionsKt__CollectionsKt.mutableListOf(22);
+                List<Integer> listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(22);
                 if (!z) {
-                    ((ArrayList) mutableListOf).addAll(volumePanelAction.getUnImportantStreamList());
-                    return new VolumePanelAction.Builder(volumePanelAction).setUnImportantStreamList(mutableListOf).build();
+                    ((ArrayList) listMutableListOf).addAll(volumePanelAction.getUnImportantStreamList());
+                    return new VolumePanelAction.Builder(volumePanelAction).setUnImportantStreamList(listMutableListOf).build();
                 }
                 VolumePanelAction.Builder builder = new VolumePanelAction.Builder(volumePanelAction);
                 VolumeState volumeState2 = volumePanelAction.getVolumeState();
                 if (volumeState2 != null) {
                     VolumeStreamState volumeStreamState = (VolumeStreamState) CollectionsKt___CollectionsKt.getOrNull(StreamUtil.getMusicStream(volumePanelAction.isMultiSoundBt()), volumeState2.getStreamStates());
                     if (volumeStreamState != null) {
-                        str = volumeStreamState.getDualBtDeviceName();
+                        dualBtDeviceName = volumeStreamState.getDualBtDeviceName();
                     }
                 }
-                if (str != null) {
-                    builder.activeBtDeviceName(str);
+                if (dualBtDeviceName != null) {
+                    builder.activeBtDeviceName(dualBtDeviceName);
                 }
                 if (volumeState.isDualAudio()) {
-                    ((ArrayList) mutableListOf).addAll(volumePanelAction.getImportantStreamList());
-                    return builder.setImportantStreamList(mutableListOf).build();
+                    ((ArrayList) listMutableListOf).addAll(volumePanelAction.getImportantStreamList());
+                    return builder.setImportantStreamList(listMutableListOf).build();
                 }
-                ((ArrayList) mutableListOf).addAll(volumePanelAction.getUnImportantStreamList());
-                return builder.setUnImportantStreamList(mutableListOf).build();
+                ((ArrayList) listMutableListOf).addAll(volumePanelAction.getUnImportantStreamList());
+                return builder.setUnImportantStreamList(listMutableListOf).build();
             }
         } else if (i == 2 && !this.isPanelShowing) {
             this.isPanelShowing = true;
             VolumeInfraMediator volumeInfraMediator = this.infraMediator;
-            boolean isBudsTogetherEnabled = volumeInfraMediator.isBudsTogetherEnabled();
+            boolean zIsBudsTogetherEnabled = volumeInfraMediator.isBudsTogetherEnabled();
             List<Integer> importantStreamList = volumePanelAction.getImportantStreamList();
             List<Integer> unImportantStreamList = volumePanelAction.getUnImportantStreamList();
-            List mutableListOf2 = CollectionsKt__CollectionsKt.mutableListOf(23);
-            if (isBudsTogetherEnabled) {
-                importantStreamList.addAll(mutableListOf2);
-                str = volumeInfraMediator.getAudioCastDeviceName();
+            List listMutableListOf2 = CollectionsKt__CollectionsKt.mutableListOf(23);
+            if (zIsBudsTogetherEnabled) {
+                importantStreamList.addAll(listMutableListOf2);
+                dualBtDeviceName = volumeInfraMediator.getAudioCastDeviceName();
             } else {
-                unImportantStreamList.addAll(mutableListOf2);
+                unImportantStreamList.addAll(listMutableListOf2);
             }
-            return new VolumePanelAction.Builder(volumePanelAction).setImportantStreamList(importantStreamList).setUnImportantStreamList(unImportantStreamList).setStringValue(VolumePanelAction.StringStateKey.AUDIO_SHARING_DEVICE_NAME, str).build();
+            return new VolumePanelAction.Builder(volumePanelAction).setImportantStreamList(importantStreamList).setUnImportantStreamList(unImportantStreamList).setStringValue(VolumePanelAction.StringStateKey.AUDIO_SHARING_DEVICE_NAME, dualBtDeviceName).build();
         }
         return volumePanelAction;
     }

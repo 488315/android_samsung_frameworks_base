@@ -40,9 +40,9 @@ public interface IBRReceiverAgent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBRReceiverAgent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBRReceiverAgent)) {
-                return (IBRReceiverAgent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBRReceiverAgent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBRReceiverAgent)) {
+                return (IBRReceiverAgent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

@@ -63,11 +63,11 @@ public final class SemDesktopModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemDesktopModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -95,11 +95,11 @@ public final class SemDesktopModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemDesktopModeManager.sLock) {
-                valueOf = String.valueOf(this.mBlocker);
+                strValueOf = String.valueOf(this.mBlocker);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutBlockerLocked() {
@@ -155,8 +155,8 @@ public final class SemDesktopModeManager {
             if (map == null) {
                 return;
             }
-            DesktopModeListenerDelegate remove = map.remove(desktopModeListener);
-            if (remove == null) {
+            DesktopModeListenerDelegate desktopModeListenerDelegateRemove = map.remove(desktopModeListener);
+            if (desktopModeListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterListener: " + desktopModeListener + " already unregistered");
                 return;
             }
@@ -164,12 +164,12 @@ public final class SemDesktopModeManager {
                 this.mDesktopModeListeners = null;
             }
             try {
-                this.mService.unregisterDesktopModeListener(remove);
+                this.mService.unregisterDesktopModeListener(desktopModeListenerDelegateRemove);
                 Log.i(TAG, "unregisterListener: " + desktopModeListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            desktopModeListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 
@@ -300,8 +300,8 @@ public final class SemDesktopModeManager {
             if (map == null) {
                 return;
             }
-            DesktopModeBlockerDelegate remove = map.remove(desktopModeBlocker);
-            if (remove == null) {
+            DesktopModeBlockerDelegate desktopModeBlockerDelegateRemove = map.remove(desktopModeBlocker);
+            if (desktopModeBlockerDelegateRemove == null) {
                 Log.w(TAG, "unregisterBlocker: " + desktopModeBlocker + " already unregistered");
                 return;
             }
@@ -309,12 +309,12 @@ public final class SemDesktopModeManager {
                 this.mBlockers = null;
             }
             try {
-                this.mService.unregisterBlocker(remove);
+                this.mService.unregisterBlocker(desktopModeBlockerDelegateRemove);
                 Log.i(TAG, "unregisterBlocker: " + desktopModeBlocker);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutBlockerLocked();
+            desktopModeBlockerDelegateRemove.nullOutBlockerLocked();
         }
     }
 

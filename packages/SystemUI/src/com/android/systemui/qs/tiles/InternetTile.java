@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.telephony.SubscriptionManager;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.DataUsageController;
 import com.android.systemui.R;
 import com.android.systemui.animation.Expandable;
@@ -50,7 +53,6 @@ import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.connectivity.WifiIndicators;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InternetTile extends QSTileImpl {
     public static final Intent WIFI_SETTINGS = new Intent("android.settings.WIFI_SETTINGS");
@@ -63,7 +65,6 @@ public class InternetTile extends QSTileImpl {
     public final InternetSignalCallback mSignalCallback;
     public final WifiStateWorker mWifiStateWorker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CellularCallbackInfo {
         public boolean mAirplaneModeEnabled;
         public CharSequence mDataContentDescription;
@@ -124,7 +125,6 @@ public class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EthernetCallbackInfo {
         public boolean mConnected;
         public String mEthernetContentDescription;
@@ -147,7 +147,6 @@ public class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InternetSignalCallback implements SignalCallback {
         public final CellularCallbackInfo mCellularInfo;
         public final EthernetCallbackInfo mEthernetInfo;
@@ -338,7 +337,6 @@ public class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SignalIcon extends QSTile.Icon {
         public final int mState;
 
@@ -359,7 +357,6 @@ public class InternetTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiCallbackInfo {
         public boolean mAirplaneModeEnabled;
         public boolean mConnected;
@@ -473,7 +470,7 @@ public class InternetTile extends QSTileImpl {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.InternetTile$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                InternetTile internetTile = InternetTile.this;
+                InternetTile internetTile = this.f$0;
                 Expandable expandable2 = expandable;
                 AccessPointControllerImpl accessPointControllerImpl = (AccessPointControllerImpl) internetTile.mAccessPointController;
                 internetTile.mInternetDialogManager.create(accessPointControllerImpl.canConfigMobileData(), accessPointControllerImpl.canConfigWifi(), expandable2);
@@ -487,20 +484,69 @@ public class InternetTile extends QSTileImpl {
         wifiStateWorker.mBackgroundExecutor.execute(new WifiStateWorker$$ExternalSyntheticLambda1(wifiStateWorker, !wifiStateWorker.isWifiEnabled()));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x013a  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0134  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0071  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleUpdateCellularState(com.android.systemui.plugins.qs.QSTile.BooleanState r10, com.android.systemui.qs.tiles.InternetTile.CellularCallbackInfo r11) {
-        /*
-            Method dump skipped, instructions count: 336
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.InternetTile.handleUpdateCellularState(com.android.systemui.plugins.qs.QSTile$BooleanState, com.android.systemui.qs.tiles.InternetTile$CellularCallbackInfo):void");
+    public final void handleUpdateCellularState(QSTile.BooleanState booleanState, CellularCallbackInfo cellularCallbackInfo) {
+        CharSequence string;
+        Spanned spannedFromHtml;
+        String str = this.TAG;
+        boolean z = this.DEBUG;
+        if (z) {
+            Log.d(str, "handleUpdateCellularState: CellularCallbackInfo = " + cellularCallbackInfo.toString());
+        }
+        Resources resources = this.mContext.getResources();
+        booleanState.label = resources.getString(R.string.quick_settings_internet_label);
+        booleanState.state = 2;
+        DataUsageController dataUsageController = this.mDataController;
+        booleanState.value = dataUsageController.isMobileDataSupported() && dataUsageController.isMobileDataEnabled();
+        booleanState.expandedAccessibilityClassName = Button.class.getName();
+        if (cellularCallbackInfo.mAirplaneModeEnabled) {
+            int i = cellularCallbackInfo.mQsTypeIcon;
+            int[] iArr = TelephonyIcons.MOBILE_DATA_ACTIVITY_ICONS;
+            if (i != R.drawable.ic_carrier_wifi) {
+                booleanState.state = 1;
+                int i2 = QsInCompose.$r8$clinit;
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_no_internet_unavailable);
+                booleanState.secondaryLabel = resources.getString(R.string.status_bar_airplane);
+            } else if (!cellularCallbackInfo.mNoDefaultNetwork) {
+                booleanState.icon = new SignalIcon(cellularCallbackInfo.mMobileSignalIconId);
+                CharSequence charSequence = cellularCallbackInfo.mDataSubscriptionName;
+                if (!cellularCallbackInfo.mRoaming || TextUtils.isEmpty(cellularCallbackInfo.mDataContentDescription)) {
+                    string = cellularCallbackInfo.mRoaming ? this.mContext.getString(R.string.data_connection_roaming) : cellularCallbackInfo.mDataContentDescription;
+                } else {
+                    String string2 = this.mContext.getString(R.string.data_connection_roaming);
+                    CharSequence charSequence2 = cellularCallbackInfo.mDataContentDescription;
+                    string = this.mContext.getString(R.string.mobile_data_text_format, string2, charSequence2 == null ? "" : charSequence2.toString());
+                }
+                if (TextUtils.isEmpty(string)) {
+                    spannedFromHtml = Html.fromHtml(charSequence == null ? "" : charSequence.toString(), 0);
+                } else if (TextUtils.isEmpty(charSequence)) {
+                    spannedFromHtml = Html.fromHtml(string == null ? "" : string.toString(), 0);
+                } else {
+                    spannedFromHtml = Html.fromHtml(this.mContext.getString(R.string.mobile_carrier_text_format, charSequence, string), 0);
+                }
+                booleanState.secondaryLabel = spannedFromHtml;
+            } else if (cellularCallbackInfo.mNoNetworksAvailable || !this.mSignalCallback.mWifiInfo.mEnabled) {
+                int i3 = QsInCompose.$r8$clinit;
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_no_internet_unavailable);
+                booleanState.secondaryLabel = resources.getString(R.string.quick_settings_networks_unavailable);
+            } else {
+                int i4 = QsInCompose.$r8$clinit;
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_no_internet_available);
+                booleanState.secondaryLabel = resources.getString(R.string.quick_settings_networks_available);
+            }
+        }
+        booleanState.contentDescription = booleanState.label;
+        if (booleanState.state == 1) {
+            booleanState.stateDescription = "";
+        } else {
+            booleanState.stateDescription = booleanState.secondaryLabel;
+        }
+        if (z) {
+            Log.d(str, "handleUpdateCellularState: BooleanState = " + booleanState.toString());
+        }
     }
 
     public final void handleUpdateEthernetState(QSTile.BooleanState booleanState, EthernetCallbackInfo ethernetCallbackInfo) {
@@ -528,17 +574,17 @@ public class InternetTile extends QSTileImpl {
         QSLogger qSLogger = this.mQSLogger;
         String str = this.mTileSpec;
         int i = this.mLastTileState;
-        String obj2 = obj == null ? "null" : obj.toString();
+        String string = obj == null ? "null" : obj.toString();
         qSLogger.getClass();
         LogLevel logLevel = LogLevel.VERBOSE;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
-        logMessageImpl.str2 = obj2;
-        logBuffer.commit(obtain);
+        logMessageImpl.str2 = string;
+        logBuffer.commit(logMessageObtain);
         int i2 = 0;
         if (obj instanceof CellularCallbackInfo) {
             this.mLastTileState = 0;
@@ -613,11 +659,11 @@ public class InternetTile extends QSTileImpl {
             z2 = true;
         }
         boolean z4 = wifiCallbackInfo.mIsTransient;
-        String removeDoubleQuotes = removeDoubleQuotes(wifiCallbackInfo.mSsid);
+        String strRemoveDoubleQuotes = removeDoubleQuotes(wifiCallbackInfo.mSsid);
         if (z4) {
-            removeDoubleQuotes = this.mContext.getString(R.string.quick_settings_wifi_secondary_label_transient);
+            strRemoveDoubleQuotes = this.mContext.getString(R.string.quick_settings_wifi_secondary_label_transient);
         }
-        booleanState.secondaryLabel = removeDoubleQuotes;
+        booleanState.secondaryLabel = strRemoveDoubleQuotes;
         booleanState.state = 2;
         booleanState.dualTarget = true;
         booleanState.value = wifiCallbackInfo.mEnabled;

@@ -17,7 +17,6 @@ import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SeslTabRoundRectIndicator extends SeslAbsIndicatorView {
     public final Interpolator LINEAR_INTERPOLATOR;

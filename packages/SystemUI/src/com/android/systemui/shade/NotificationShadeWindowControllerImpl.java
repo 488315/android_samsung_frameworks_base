@@ -2,22 +2,27 @@ package com.android.systemui.shade;
 
 import android.R;
 import android.app.IActivityManager;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.IBinder;
 import android.os.Process;
-import android.os.RemoteException;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.view.Display;
 import android.view.RemoteAnimationTarget;
 import android.view.SurfaceControl;
+import android.view.WindowInsets;
 import android.view.WindowManager;
-import android.view.WindowManagerGlobal;
+import android.view.accessibility.AccessibilityManager;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
 import com.android.keyguard.CarrierTextController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
@@ -27,20 +32,26 @@ import com.android.systemui.accessibility.MagnificationImpl$$ExternalSyntheticOu
 import com.android.systemui.biometrics.AuthController;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
 import com.android.systemui.common.buffer.RingBuffer;
-import com.android.systemui.common.buffer.RingBuffer$iterator$1;
+import com.android.systemui.common.buffer.RingBuffer.AnonymousClass1;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.dump.DumpsysTableLogger;
+import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.KeyguardSurfaceControllerImpl;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl;
 import com.android.systemui.keyguard.KeyguardViewMediatorHelperImplKt;
+import com.android.systemui.keyguard.KeyguardVisibilityMonitor;
 import com.android.systemui.keyguard.Log;
 import com.android.systemui.keyguard.VisibilityController;
+import com.android.systemui.lockstar.PluginLockStarManager;
+import com.android.systemui.log.ConstantStringsLoggerImpl;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
+import com.android.systemui.pluginlock.PluginLockMediator;
+import com.android.systemui.plugins.OverlayPlugin;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.scene.ui.view.WindowRootView;
@@ -49,13 +60,16 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shade.NotificationShadeWindowState;
 import com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl;
+import com.android.systemui.shade.data.repository.SecNotificationShadeWindowStateRepository;
 import com.android.systemui.shade.domain.interactor.SecNotificationShadeWindowStateInteractor;
 import com.android.systemui.shade.ui.viewmodel.NotificationShadeWindowModel;
+import com.android.systemui.statusbar.NotificationRemoteInputManager;
 import com.android.systemui.statusbar.NotificationShadeDepthController;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
 import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda23;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda24;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.phone.IndicatorCutoutUtil;
@@ -65,8 +79,11 @@ import com.android.systemui.statusbar.phone.StatusBarWindowCallback;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DeviceState;
+import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.LogUtil;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import dagger.Lazy;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
@@ -74,7 +91,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -84,7 +103,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationShadeWindowControllerImpl implements NotificationShadeWindowController, Dumpable, ConfigurationController.ConfigurationListener {
     public final IActivityManager mActivityManager;
@@ -106,7 +124,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
     public final KeyguardStateController mKeyguardStateController;
     public final KeyguardViewMediator mKeyguardViewMediator;
     public boolean mLastKeyguardRotationAllowed;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda23 mListener;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda24 mListener;
     public final ShadeWindowLogger mLogger;
     public WindowManager.LayoutParams mLp;
     public final WindowManager.LayoutParams mLpChanged;
@@ -128,7 +146,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r5v3, types: [com.android.systemui.plugins.statusbar.StatusBarStateController$StateListener, com.android.systemui.shade.NotificationShadeWindowControllerImpl$1] */
-    public NotificationShadeWindowControllerImpl(Context context, SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl, WindowRootViewComponent.Factory factory, WindowManager windowManager, IActivityManager iActivityManager, DozeParameters dozeParameters, StatusBarStateController statusBarStateController, ConfigurationController configurationController, KeyguardViewMediator keyguardViewMediator, KeyguardBypassController keyguardBypassController, Executor executor, Executor executor2, SysuiColorExtractor sysuiColorExtractor, DumpManager dumpManager, KeyguardStateController keyguardStateController, AuthController authController, IndicatorCutoutUtil indicatorCutoutUtil, Lazy lazy, ShadeWindowLogger shadeWindowLogger, Lazy lazy2, UserTracker userTracker, NotificationShadeWindowModel notificationShadeWindowModel, Lazy lazy3, WindowManager.LayoutParams layoutParams) {
+    public NotificationShadeWindowControllerImpl(Context context, SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl, WindowRootViewComponent.Factory factory, WindowManager windowManager, IActivityManager iActivityManager, DozeParameters dozeParameters, StatusBarStateController statusBarStateController, ConfigurationController configurationController, KeyguardViewMediator keyguardViewMediator, KeyguardBypassController keyguardBypassController, Executor executor, Executor executor2, SysuiColorExtractor sysuiColorExtractor, DumpManager dumpManager, KeyguardStateController keyguardStateController, AuthController authController, IndicatorCutoutUtil indicatorCutoutUtil, Lazy lazy, ShadeWindowLogger shadeWindowLogger, Lazy lazy2, UserTracker userTracker, NotificationShadeWindowModel notificationShadeWindowModel, Lazy lazy3, WindowManager.LayoutParams layoutParams) throws Resources.NotFoundException {
         final int i = 1;
         final int i2 = 0;
         ?? r5 = new StatusBarStateController.StateListener() { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl.1
@@ -204,7 +222,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         };
         this.mUserTrackerCallback = callback;
         final int i3 = 2;
-        secNotificationShadeWindowControllerHelperImpl.provider = new SecNotificationShadeWindowControllerHelperImpl.Provider(new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda2
+        secNotificationShadeWindowControllerHelperImpl.provider = new SecNotificationShadeWindowControllerHelperImpl.Provider(new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda3
             public final /* synthetic */ NotificationShadeWindowControllerImpl f$0;
 
             {
@@ -224,7 +242,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
                         return notificationShadeWindowControllerImpl.mLp;
                 }
             }
-        }, new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda2
+        }, new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda3
             public final /* synthetic */ NotificationShadeWindowControllerImpl f$0;
 
             {
@@ -244,7 +262,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
                         return notificationShadeWindowControllerImpl.mLp;
                 }
             }
-        }, new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda2
+        }, new Supplier(this) { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda3
             public final /* synthetic */ NotificationShadeWindowControllerImpl f$0;
 
             {
@@ -264,13 +282,13 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
                         return notificationShadeWindowControllerImpl.mLp;
                 }
             }
-        }, new Predicate() { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda5
+        }, new Predicate() { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda6
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = NotificationShadeWindowControllerImpl.this;
+                NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = this.f$0;
                 return notificationShadeWindowControllerImpl.isExpanded(notificationShadeWindowControllerImpl.mCurrentState, ((Boolean) obj).booleanValue());
             }
-        }, new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda6(this, i2));
+        }, new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda7(this, i2));
         secNotificationShadeWindowControllerHelperImpl.isSystemUser = Intrinsics.areEqual(Process.myUserHandle(), UserHandle.SYSTEM);
         this.mHelper = secNotificationShadeWindowControllerHelperImpl;
         this.mContext = context;
@@ -301,7 +319,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         }
         ((ConfigurationControllerImpl) configurationController).addCallback(this);
         ((UserTrackerImpl) userTracker).addCallback(callback, executor);
-        float f = -1.0f;
+        float refreshRate = -1.0f;
         if (context.getResources().getInteger(com.android.systemui.R.integer.config_keyguardRefreshRate) > -1.0f) {
             Display.Mode[] systemSupportedModes = context.getDisplay().getSystemSupportedModes();
             int length = systemSupportedModes.length;
@@ -311,13 +329,13 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
                 }
                 Display.Mode mode = systemSupportedModes[i2];
                 if (Math.abs(mode.getRefreshRate() - r0) <= 0.1d) {
-                    f = mode.getRefreshRate();
+                    refreshRate = mode.getRefreshRate();
                     break;
                 }
                 i2++;
             }
         }
-        this.mKeyguardPreferredRefreshRate = f;
+        this.mKeyguardPreferredRefreshRate = refreshRate;
         this.mKeyguardMaxRefreshRate = context.getResources().getInteger(com.android.systemui.R.integer.config_keyguardMaxRefreshRate);
         SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl2 = this.mHelper;
         Objects.requireNonNull(secNotificationShadeWindowControllerHelperImpl2);
@@ -327,53 +345,411 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         this.mSecNotificationShadeWindowStateInteractor = (SecNotificationShadeWindowStateInteractor) Dependency.sDependency.getDependencyInner(SecNotificationShadeWindowStateInteractor.class);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:162:0x0405, code lost:
-    
-        if (r8 < 10000) goto L220;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:163:0x0407, code lost:
-    
-        r8 = r10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:168:0x041b, code lost:
-    
-        if (r8 < r10) goto L220;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:172:0x042a, code lost:
-    
-        if (r8 < r10) goto L220;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:202:0x0319, code lost:
-    
-        if (r2.rotation == 2) goto L160;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x043e  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0463  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x0477  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x048c  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x04a1  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x04b3  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x04ca  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x0509  */
-    /* JADX WARN: Removed duplicated region for block: B:146:0x04d4  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x04bc  */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x0493  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x0480  */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x036e  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x034c  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0385  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0391  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x03aa  */
+    /* JADX WARN: Removed duplicated region for block: B:135:0x02d7  */
+    /* JADX WARN: Removed duplicated region for block: B:156:0x031c  */
+    /* JADX WARN: Removed duplicated region for block: B:178:0x0391  */
+    /* JADX WARN: Removed duplicated region for block: B:187:0x03aa  */
+    /* JADX WARN: Removed duplicated region for block: B:192:0x03b7  */
+    /* JADX WARN: Removed duplicated region for block: B:220:0x0407 A[PHI: r10
+      0x0407: PHI (r10v8 long) = (r10v6 long), (r10v7 long), (r10v9 long) binds: [B:229:0x042a, B:224:0x041b, B:219:0x0405] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:226:0x041e  */
+    /* JADX WARN: Removed duplicated region for block: B:243:0x0452  */
+    /* JADX WARN: Removed duplicated region for block: B:251:0x0477  */
+    /* JADX WARN: Removed duplicated region for block: B:252:0x0480  */
+    /* JADX WARN: Removed duplicated region for block: B:255:0x048c  */
+    /* JADX WARN: Removed duplicated region for block: B:256:0x0493  */
+    /* JADX WARN: Removed duplicated region for block: B:267:0x04b3  */
+    /* JADX WARN: Removed duplicated region for block: B:268:0x04bc  */
+    /* JADX WARN: Removed duplicated region for block: B:271:0x04ca  */
+    /* JADX WARN: Removed duplicated region for block: B:272:0x04d4  */
+    /* JADX WARN: Removed duplicated region for block: B:275:0x0509  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x01a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void apply(com.android.systemui.shade.NotificationShadeWindowState r37) {
-        /*
-            Method dump skipped, instructions count: 1309
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationShadeWindowControllerImpl.apply(com.android.systemui.shade.NotificationShadeWindowState):void");
+    public final void apply(NotificationShadeWindowState notificationShadeWindowState) {
+        KeyguardVisibilityMonitor keyguardVisibilityMonitor;
+        WindowRootView windowRootView;
+        int i;
+        boolean z;
+        WindowRootView windowRootView2;
+        boolean z2;
+        boolean z3;
+        KeyguardUpdateMonitor keyguardUpdateMonitor;
+        long j;
+        long j2;
+        List list;
+        boolean z4 = notificationShadeWindowState.keyguardShowing;
+        boolean z5 = notificationShadeWindowState.keyguardOccluded;
+        boolean z6 = notificationShadeWindowState.keyguardNeedsInput;
+        boolean z7 = notificationShadeWindowState.panelVisible;
+        boolean z8 = notificationShadeWindowState.shadeOrQsExpanded;
+        boolean z9 = notificationShadeWindowState.notificationShadeFocusable;
+        boolean z10 = notificationShadeWindowState.glanceableHubShowing;
+        boolean z11 = notificationShadeWindowState.glanceableHubOrientationAware;
+        boolean z12 = notificationShadeWindowState.bouncerShowing;
+        boolean z13 = notificationShadeWindowState.keyguardFadingAway;
+        boolean z14 = notificationShadeWindowState.keyguardGoingAway;
+        boolean z15 = notificationShadeWindowState.qsExpanded;
+        boolean z16 = notificationShadeWindowState.headsUpNotificationShowing;
+        boolean z17 = notificationShadeWindowState.lightRevealScrimOpaque;
+        boolean z18 = notificationShadeWindowState.isSwitchingUsers;
+        boolean z19 = notificationShadeWindowState.forceWindowCollapsed;
+        boolean z20 = notificationShadeWindowState.forceDozeBrightness;
+        boolean z21 = notificationShadeWindowState.forceUserActivity;
+        boolean z22 = notificationShadeWindowState.launchingActivityFromNotification;
+        boolean z23 = notificationShadeWindowState.mediaBackdropShowing;
+        boolean z24 = notificationShadeWindowState.windowNotTouchable;
+        Set set = notificationShadeWindowState.componentsForcingTopUi;
+        Set set2 = notificationShadeWindowState.forceOpenTokens;
+        int i2 = notificationShadeWindowState.statusBarState;
+        boolean z25 = notificationShadeWindowState.remoteInputActive;
+        boolean z26 = notificationShadeWindowState.forcePluginOpen;
+        boolean z27 = notificationShadeWindowState.dozing;
+        int i3 = notificationShadeWindowState.scrimsVisibility;
+        int i4 = notificationShadeWindowState.backgroundBlurRadius;
+        boolean z28 = notificationShadeWindowState.communalVisible;
+        long j3 = notificationShadeWindowState.keyguardUserActivityTimeout;
+        boolean z29 = notificationShadeWindowState.searchGridTileShowing;
+        NotificationShadeWindowState notificationShadeWindowState2 = (NotificationShadeWindowState) this.mStateBuffer.buffer.advance();
+        notificationShadeWindowState2.keyguardShowing = z4;
+        notificationShadeWindowState2.keyguardOccluded = z5;
+        notificationShadeWindowState2.keyguardNeedsInput = z6;
+        notificationShadeWindowState2.panelVisible = z7;
+        notificationShadeWindowState2.shadeOrQsExpanded = z8;
+        notificationShadeWindowState2.notificationShadeFocusable = z9;
+        notificationShadeWindowState2.glanceableHubShowing = z10;
+        notificationShadeWindowState2.glanceableHubOrientationAware = z11;
+        notificationShadeWindowState2.bouncerShowing = z12;
+        notificationShadeWindowState2.keyguardFadingAway = z13;
+        notificationShadeWindowState2.keyguardGoingAway = z14;
+        notificationShadeWindowState2.qsExpanded = z15;
+        notificationShadeWindowState2.headsUpNotificationShowing = z16;
+        notificationShadeWindowState2.lightRevealScrimOpaque = z17;
+        notificationShadeWindowState2.isSwitchingUsers = z18;
+        notificationShadeWindowState2.forceWindowCollapsed = z19;
+        notificationShadeWindowState2.forceDozeBrightness = z20;
+        notificationShadeWindowState2.forceUserActivity = z21;
+        notificationShadeWindowState2.launchingActivityFromNotification = z22;
+        notificationShadeWindowState2.mediaBackdropShowing = z23;
+        notificationShadeWindowState2.windowNotTouchable = z24;
+        notificationShadeWindowState2.componentsForcingTopUi.clear();
+        notificationShadeWindowState2.componentsForcingTopUi.addAll(set);
+        notificationShadeWindowState2.forceOpenTokens.clear();
+        notificationShadeWindowState2.forceOpenTokens.addAll(set2);
+        notificationShadeWindowState2.statusBarState = i2;
+        notificationShadeWindowState2.remoteInputActive = z25;
+        notificationShadeWindowState2.forcePluginOpen = z26;
+        notificationShadeWindowState2.dozing = z27;
+        notificationShadeWindowState2.scrimsVisibility = i3;
+        notificationShadeWindowState2.backgroundBlurRadius = i4;
+        notificationShadeWindowState2.communalVisible = z28;
+        notificationShadeWindowState2.keyguardUserActivityTimeout = j3;
+        notificationShadeWindowState2.searchGridTileShowing = z29;
+        boolean z30 = notificationShadeWindowState.keyguardShowing;
+        ShadeWindowLogger shadeWindowLogger = this.mLogger;
+        if ((!z30 && (!notificationShadeWindowState.dozing || !this.mDozeParameters.getAlwaysOn())) || notificationShadeWindowState.mediaBackdropShowing || notificationShadeWindowState.lightRevealScrimOpaque) {
+            this.mLpChanged.flags &= -1048577;
+        } else {
+            this.mLpChanged.flags |= 1048576;
+            WindowRootView windowRootView3 = this.mWindowRootView;
+            if (windowRootView3 == null || windowRootView3.getWindowToken() == null) {
+                ConstantStringsLoggerImpl constantStringsLoggerImpl = shadeWindowLogger.$$delegate_0;
+                constantStringsLoggerImpl.getClass();
+                LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, "Cannot set wallpaper offset. mWindowRootView or it's token is null");
+            } else {
+                ((WallpaperManager) this.mContext.getSystemService("wallpaper")).setWallpaperOffsets(this.mWindowRootView.getWindowToken(), 0.5f, 0.5f);
+            }
+        }
+        if (notificationShadeWindowState.dozing) {
+            this.mLpChanged.privateFlags |= NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME;
+        } else {
+            this.mLpChanged.privateFlags &= -524289;
+        }
+        float f = this.mKeyguardPreferredRefreshRate;
+        boolean z31 = true;
+        if (f <= 0.0f) {
+            float f2 = this.mKeyguardMaxRefreshRate;
+            if (f2 > 0.0f) {
+                boolean z32 = this.mKeyguardBypassController.getBypassEnabled() && notificationShadeWindowState.statusBarState == 1 && !notificationShadeWindowState.keyguardFadingAway && !notificationShadeWindowState.keyguardGoingAway;
+                if (notificationShadeWindowState.dozing || z32) {
+                    this.mLpChanged.preferredMaxDisplayRefreshRate = f2;
+                } else {
+                    this.mLpChanged.preferredMaxDisplayRefreshRate = 0.0f;
+                }
+                Trace.setCounter("display_max_refresh_rate", (long) this.mLpChanged.preferredMaxDisplayRefreshRate);
+            }
+        } else if (notificationShadeWindowState.statusBarState != 1 || notificationShadeWindowState.keyguardFadingAway || notificationShadeWindowState.keyguardGoingAway) {
+            WindowManager.LayoutParams layoutParams = this.mLpChanged;
+            layoutParams.preferredMaxDisplayRefreshRate = 0.0f;
+            layoutParams.preferredMinDisplayRefreshRate = 0.0f;
+            Trace.setCounter("display_set_preferred_refresh_rate", (long) this.mLpChanged.preferredMaxDisplayRefreshRate);
+        } else {
+            int selectedUserId = ((SelectedUserInteractor) this.mUserInteractor.get()).getSelectedUserId();
+            AuthController authController = this.mAuthController;
+            if (authController.isUdfpsEnrolled(selectedUserId) && (list = authController.mUdfpsProps) != null && ((FingerprintSensorPropertiesInternal) list.get(0)).sensorType == 3) {
+                WindowManager.LayoutParams layoutParams2 = this.mLpChanged;
+                layoutParams2.preferredMaxDisplayRefreshRate = f;
+                layoutParams2.preferredMinDisplayRefreshRate = f;
+            }
+            Trace.setCounter("display_set_preferred_refresh_rate", (long) this.mLpChanged.preferredMaxDisplayRefreshRate);
+        }
+        SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.mHelper;
+        WindowManager.LayoutParams layoutParamsChanged = secNotificationShadeWindowControllerHelperImpl.getLayoutParamsChanged();
+        boolean z33 = notificationShadeWindowState.bouncerShowing;
+        if ((z33 || notificationShadeWindowState.securedWindow) && !(LsRune.KEYGUARD_EM_TOKEN_CAPTURE_WINDOW && secNotificationShadeWindowControllerHelperImpl.engineerModeManager.isCaptureEnabled)) {
+            layoutParamsChanged.flags |= 8192;
+        } else {
+            layoutParamsChanged.flags &= -8193;
+        }
+        boolean z34 = notificationShadeWindowState.notificationShadeFocusable && notificationShadeWindowState.shadeOrQsExpanded;
+        int i5 = 8;
+        if ((z33 && (notificationShadeWindowState.keyguardOccluded || notificationShadeWindowState.keyguardNeedsInput)) || ((NotificationRemoteInputManager.ENABLE_REMOTE_INPUT && notificationShadeWindowState.remoteInputActive) || notificationShadeWindowState.glanceableHubShowing)) {
+            this.mLpChanged.flags &= -131081;
+        } else if (notificationShadeWindowState.isKeyguardShowingAndNotOccluded() || z34) {
+            WindowManager.LayoutParams layoutParams3 = this.mLpChanged;
+            int i6 = layoutParams3.flags & (-9);
+            layoutParams3.flags = i6;
+            if (LsRune.SECURITY_BOUNCER_WINDOW) {
+                layoutParams3.flags = i6 | 131072;
+            } else if (notificationShadeWindowState.keyguardNeedsInput && notificationShadeWindowState.isKeyguardShowingAndNotOccluded()) {
+                this.mLpChanged.flags &= -131073;
+            } else {
+                this.mLpChanged.flags |= 131072;
+            }
+        } else {
+            WindowManager.LayoutParams layoutParams4 = this.mLpChanged;
+            layoutParams4.flags = (layoutParams4.flags | 8) & (-131073);
+        }
+        boolean z35 = LsRune.SECURITY_BOUNCER_WINDOW;
+        if (!z35) {
+            if (notificationShadeWindowState.bouncerShowing || (NotificationRemoteInputManager.ENABLE_REMOTE_INPUT && notificationShadeWindowState.remoteInputActive)) {
+                this.mLpChanged.forciblyShownTypes |= WindowInsets.Type.navigationBars();
+            } else {
+                this.mLpChanged.forciblyShownTypes &= ~WindowInsets.Type.navigationBars();
+            }
+        }
+        WindowManager.LayoutParams layoutParamsChanged2 = secNotificationShadeWindowControllerHelperImpl.getLayoutParamsChanged();
+        int i7 = 5;
+        if (notificationShadeWindowState.bouncerShowing || notificationShadeWindowState.isKeyguardShowingAndNotOccluded()) {
+            if (secNotificationShadeWindowControllerHelperImpl.isKeyguardScreenRotation && !notificationShadeWindowState.screenOrientationNoSensor) {
+                if (!DeviceType.isTablet()) {
+                    int i8 = secNotificationShadeWindowControllerHelperImpl.rotation;
+                    DisplayLifecycle displayLifecycle = secNotificationShadeWindowControllerHelperImpl.displayLifecycle;
+                    if (displayLifecycle.getDisplay(0) == null) {
+                        displayLifecycle.addDisplay(0);
+                    }
+                    if (i8 != displayLifecycle.mDisplayRotationHash.get(0)) {
+                        if (displayLifecycle.getDisplay(0) == null) {
+                            displayLifecycle.addDisplay(0);
+                        }
+                        int i9 = displayLifecycle.mDisplayRotationHash.get(0);
+                        secNotificationShadeWindowControllerHelperImpl.rotation = i9;
+                        ListPopupWindow$$ExternalSyntheticOutline0.m(i9, "adjustScreenOrientation: rotation=", "NotificationShadeWindowController");
+                    }
+                    if (secNotificationShadeWindowControllerHelperImpl.rotation != 2) {
+                        i7 = 2;
+                    }
+                }
+            } else if (LsRune.KEYGUARD_FIX_ROTATION_FOR_FACTORY) {
+                i7 = 1;
+            }
+        } else {
+            if (!((LsRune.COVER_SUPPORTED && notificationShadeWindowState.isCoverClosed) ? false : notificationShadeWindowState.dozing)) {
+                if (z35 || secNotificationShadeWindowControllerHelperImpl.isKeyguardScreenRotation || !notificationShadeWindowState.bouncerShowing) {
+                    i7 = -1;
+                }
+            }
+        }
+        layoutParamsChanged2.screenOrientation = i7;
+        final boolean zIsExpanded = isExpanded(notificationShadeWindowState);
+        shadeWindowLogger.getClass();
+        LogLevel logLevel = LogLevel.DEBUG;
+        ShadeWindowLogger$$ExternalSyntheticLambda0 shadeWindowLogger$$ExternalSyntheticLambda0 = new ShadeWindowLogger$$ExternalSyntheticLambda0(2);
+        LogBuffer logBuffer = shadeWindowLogger.buffer;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shadewindow", logLevel, shadeWindowLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = zIsExpanded;
+        logBuffer.commit(logMessageObtain);
+        boolean z36 = notificationShadeWindowState.forcePluginOpen;
+        ConstantStringsLoggerImpl constantStringsLoggerImpl2 = shadeWindowLogger.$$delegate_0;
+        if (!z36) {
+            if (notificationShadeWindowState.communalVisible) {
+                constantStringsLoggerImpl2.getClass();
+                LogBuffer.log$default(constantStringsLoggerImpl2.buffer, constantStringsLoggerImpl2.tag, logLevel, "Visibility forced to be true by communal");
+            }
+            keyguardVisibilityMonitor = secNotificationShadeWindowControllerHelperImpl.visibilityMonitor;
+            if (keyguardVisibilityMonitor.cancelExecToken != null && zIsExpanded == keyguardVisibilityMonitor.needsExpand) {
+                keyguardVisibilityMonitor.cancelExecToken(true);
+            }
+            windowRootView = secNotificationShadeWindowControllerHelperImpl.notificationShadeView;
+            if (windowRootView != null) {
+                if (zIsExpanded) {
+                    i5 = 0;
+                } else if (!notificationShadeWindowState.forceInvisible) {
+                    i5 = 4;
+                }
+                windowRootView.setVisibility(i5);
+            }
+            WindowManager.LayoutParams layoutParamsChanged3 = secNotificationShadeWindowControllerHelperImpl.getLayoutParamsChanged();
+            if (!notificationShadeWindowState.isKeyguardShowingAndNotOccluded()) {
+                int i10 = notificationShadeWindowState.statusBarState;
+                KeyguardUpdateMonitor keyguardUpdateMonitor2 = secNotificationShadeWindowControllerHelperImpl.keyguardUpdateMonitor;
+                if ((i10 == 1 || keyguardUpdateMonitor2.isFullscreenBouncer()) && !notificationShadeWindowState.qsExpanded) {
+                    PluginLockStarManager pluginLockStarManager = (PluginLockStarManager) secNotificationShadeWindowControllerHelperImpl.pluginLockStarManagerLazy.get();
+                    if (pluginLockStarManager != null && pluginLockStarManager.isLockStarEnabled()) {
+                        i = 2;
+                        keyguardUpdateMonitor = keyguardUpdateMonitor2;
+                        if (notificationShadeWindowState.lockStarTimeOutValue > 0) {
+                            layoutParamsChanged3.userActivityTimeout = -1L;
+                            layoutParamsChanged3.screenDimDuration = -1L;
+                        }
+                    } else {
+                        i = 2;
+                        keyguardUpdateMonitor = keyguardUpdateMonitor2;
+                    }
+                    PluginLockMediator pluginLockMediator = secNotificationShadeWindowControllerHelperImpl.pluginLockMediator;
+                    if ((pluginLockMediator != null ? pluginLockMediator.isDynamicLockEnabled() : false) && notificationShadeWindowState.userScreenTimeOut) {
+                        layoutParamsChanged3.userActivityTimeout = -1L;
+                        layoutParamsChanged3.screenDimDuration = -1L;
+                    } else if (!z35 && notificationShadeWindowState.bouncerShowing) {
+                        j = notificationShadeWindowState.keyguardUserActivityTimeout;
+                        j2 = 10000;
+                        if (j < 10000) {
+                        }
+                        layoutParamsChanged3.userActivityTimeout = j;
+                        layoutParamsChanged3.screenDimDuration = 0L;
+                    } else if (AccessibilityManager.getInstance(secNotificationShadeWindowControllerHelperImpl.context).isTouchExplorationEnabled()) {
+                        long j4 = notificationShadeWindowState.keyguardUserActivityTimeout;
+                        j2 = SecNotificationShadeWindowControllerHelperImpl.AWAKE_INTERVAL_DEFAULT_MS_WITH_ACCESSIBILITY;
+                        if (j4 < j2) {
+                            j = j2;
+                            layoutParamsChanged3.userActivityTimeout = j;
+                            layoutParamsChanged3.screenDimDuration = 0L;
+                        } else {
+                            if (keyguardUpdateMonitor.isFaceOptionEnabled()) {
+                                long j5 = notificationShadeWindowState.keyguardUserActivityTimeout;
+                                j2 = SecNotificationShadeWindowControllerHelperImpl.AWAKE_INTERVAL_DEFAULT_MS_WITH_FACE;
+                                if (j5 < j2) {
+                                }
+                                layoutParamsChanged3.userActivityTimeout = j;
+                                layoutParamsChanged3.screenDimDuration = 0L;
+                            }
+                            j = notificationShadeWindowState.keyguardUserActivityTimeout;
+                            layoutParamsChanged3.userActivityTimeout = j;
+                            layoutParamsChanged3.screenDimDuration = 0L;
+                        }
+                    }
+                } else {
+                    i = 2;
+                    layoutParamsChanged3.userActivityTimeout = -1L;
+                    layoutParamsChanged3.screenDimDuration = -1L;
+                }
+            }
+            if (notificationShadeWindowState.isKeyguardShowingAndNotOccluded() || notificationShadeWindowState.statusBarState != 1 || notificationShadeWindowState.qsExpanded || notificationShadeWindowState.forceUserActivity) {
+                this.mLpChanged.inputFeatures &= -3;
+            } else {
+                this.mLpChanged.inputFeatures |= i;
+            }
+            z = !notificationShadeWindowState.isKeyguardShowingAndNotOccluded();
+            windowRootView2 = this.mWindowRootView;
+            if (windowRootView2 != null && windowRootView2.getFitsSystemWindows() != z) {
+                this.mWindowRootView.setFitsSystemWindows(z);
+                this.mWindowRootView.requestApplyInsets();
+            }
+            if (notificationShadeWindowState.headsUpNotificationShowing) {
+                this.mLpChanged.flags &= -33;
+            } else {
+                this.mLpChanged.flags |= 32;
+            }
+            if (notificationShadeWindowState.forceDozeBrightness) {
+                this.mLpChanged.screenBrightness = -1.0f;
+            } else {
+                this.mLpChanged.screenBrightness = this.mScreenBrightnessDoze;
+            }
+            if (notificationShadeWindowState.componentsForcingTopUi.isEmpty() && !isExpanded(notificationShadeWindowState) && !notificationShadeWindowState.isSwitchingUsers) {
+                z31 = false;
+            }
+            this.mHasTopUiChanged = z31;
+            if (notificationShadeWindowState.windowNotTouchable) {
+                this.mLpChanged.flags &= -17;
+            } else {
+                this.mLpChanged.flags |= 16;
+            }
+            if (isExpanded(notificationShadeWindowState)) {
+                this.mLpChanged.privateFlags |= 16777216;
+            } else {
+                this.mLpChanged.privateFlags &= -16777217;
+            }
+            secNotificationShadeWindowControllerHelperImpl.applyHelper(notificationShadeWindowState);
+            SecNotificationShadeWindowStateRepository secNotificationShadeWindowStateRepository = this.mSecNotificationShadeWindowStateInteractor.repository;
+            secNotificationShadeWindowStateRepository._state.setValue(notificationShadeWindowState);
+            secNotificationShadeWindowStateRepository._shadeOrQsExpanded.updateState(null, Boolean.valueOf(notificationShadeWindowState.shadeOrQsExpanded));
+            secNotificationShadeWindowStateRepository._statusBarState.updateState(null, Integer.valueOf(notificationShadeWindowState.statusBarState));
+            applyWindowLayoutParams();
+            z2 = this.mHasTopUi;
+            z3 = this.mHasTopUiChanged;
+            if (z2 != z3) {
+                this.mHasTopUi = z3;
+                this.mBackgroundExecutor.execute(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda1(this, 0));
+            }
+            notifyStateChangedCallbacks();
+            new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda0(1, this, notificationShadeWindowState).run();
+        }
+        CentralSurfacesImpl$$ExternalSyntheticLambda24 centralSurfacesImpl$$ExternalSyntheticLambda24 = this.mListener;
+        if (centralSurfacesImpl$$ExternalSyntheticLambda24 != null) {
+            CentralSurfacesImpl.AnonymousClass3.this.mOverlays.forEach(new Consumer() { // from class: com.android.systemui.statusbar.phone.CentralSurfacesImpl$3$Callback$$ExternalSyntheticLambda2
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) {
+                    ((OverlayPlugin) obj).setCollapseDesired(zIsExpanded);
+                }
+            });
+        }
+        constantStringsLoggerImpl2.getClass();
+        LogBuffer.log$default(constantStringsLoggerImpl2.buffer, constantStringsLoggerImpl2.tag, logLevel, "Visibility forced to be true");
+        zIsExpanded = true;
+        keyguardVisibilityMonitor = secNotificationShadeWindowControllerHelperImpl.visibilityMonitor;
+        if (keyguardVisibilityMonitor.cancelExecToken != null) {
+            keyguardVisibilityMonitor.cancelExecToken(true);
+        }
+        windowRootView = secNotificationShadeWindowControllerHelperImpl.notificationShadeView;
+        if (windowRootView != null) {
+        }
+        WindowManager.LayoutParams layoutParamsChanged32 = secNotificationShadeWindowControllerHelperImpl.getLayoutParamsChanged();
+        if (!notificationShadeWindowState.isKeyguardShowingAndNotOccluded()) {
+        }
+        if (notificationShadeWindowState.isKeyguardShowingAndNotOccluded()) {
+            this.mLpChanged.inputFeatures &= -3;
+        }
+        z = !notificationShadeWindowState.isKeyguardShowingAndNotOccluded();
+        windowRootView2 = this.mWindowRootView;
+        if (windowRootView2 != null) {
+            this.mWindowRootView.setFitsSystemWindows(z);
+            this.mWindowRootView.requestApplyInsets();
+        }
+        if (notificationShadeWindowState.headsUpNotificationShowing) {
+        }
+        if (notificationShadeWindowState.forceDozeBrightness) {
+        }
+        if (notificationShadeWindowState.componentsForcingTopUi.isEmpty()) {
+            z31 = false;
+        }
+        this.mHasTopUiChanged = z31;
+        if (notificationShadeWindowState.windowNotTouchable) {
+        }
+        if (isExpanded(notificationShadeWindowState)) {
+        }
+        secNotificationShadeWindowControllerHelperImpl.applyHelper(notificationShadeWindowState);
+        SecNotificationShadeWindowStateRepository secNotificationShadeWindowStateRepository2 = this.mSecNotificationShadeWindowStateInteractor.repository;
+        secNotificationShadeWindowStateRepository2._state.setValue(notificationShadeWindowState);
+        secNotificationShadeWindowStateRepository2._shadeOrQsExpanded.updateState(null, Boolean.valueOf(notificationShadeWindowState.shadeOrQsExpanded));
+        secNotificationShadeWindowStateRepository2._statusBarState.updateState(null, Integer.valueOf(notificationShadeWindowState.statusBarState));
+        applyWindowLayoutParams();
+        z2 = this.mHasTopUi;
+        z3 = this.mHasTopUiChanged;
+        if (z2 != z3) {
+        }
+        notifyStateChangedCallbacks();
+        new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda0(1, this, notificationShadeWindowState).run();
     }
 
     public final void applyWindowLayoutParams() {
@@ -416,9 +792,9 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         RingBuffer ringBuffer = buffer.buffer;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(ringBuffer, 10));
         ringBuffer.getClass();
-        RingBuffer$iterator$1 ringBuffer$iterator$1 = new RingBuffer$iterator$1(ringBuffer);
-        while (ringBuffer$iterator$1.hasNext()) {
-            arrayList.add((List) ((NotificationShadeWindowState) ringBuffer$iterator$1.next()).asStringList$delegate.getValue());
+        RingBuffer.AnonymousClass1 anonymousClass1 = ringBuffer.new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            arrayList.add((List) ((NotificationShadeWindowState) anonymousClass1.next()).asStringList$delegate.getValue());
         }
         new DumpsysTableLogger("NotificationShadeWindowController", list, arrayList).printTableData(printWriter);
         Trace.endSection();
@@ -430,26 +806,26 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
     }
 
     public final void notifyStateChangedCallbacks() {
-        for (StatusBarWindowCallback statusBarWindowCallback : (List) this.mCallbacks.stream().map(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda7()).filter(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda8()).collect(Collectors.toList())) {
+        for (StatusBarWindowCallback statusBarWindowCallback : (List) this.mCallbacks.stream().map(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda8()).filter(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda9()).collect(Collectors.toList())) {
             NotificationShadeWindowState notificationShadeWindowState = this.mCurrentState;
             statusBarWindowCallback.onStateChanged(notificationShadeWindowState.keyguardShowing, notificationShadeWindowState.keyguardOccluded, notificationShadeWindowState.keyguardGoingAway, notificationShadeWindowState.bouncerShowing, notificationShadeWindowState.dozing, notificationShadeWindowState.shadeOrQsExpanded, notificationShadeWindowState.dreaming, notificationShadeWindowState.communalVisible);
         }
     }
 
     public void onCommunalVisibleChanged(Boolean bool) {
-        boolean booleanValue = bool.booleanValue();
+        boolean zBooleanValue = bool.booleanValue();
         NotificationShadeWindowState notificationShadeWindowState = this.mCurrentState;
-        notificationShadeWindowState.communalVisible = booleanValue;
+        notificationShadeWindowState.communalVisible = zBooleanValue;
         apply(notificationShadeWindowState);
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onConfigChanged(Configuration configuration) {
         int i = SceneContainerFlag.$r8$clinit;
-        boolean shouldEnableKeyguardScreenRotation = DeviceState.shouldEnableKeyguardScreenRotation(((KeyguardStateControllerImpl) this.mKeyguardStateController).mContext);
-        if (this.mLastKeyguardRotationAllowed != shouldEnableKeyguardScreenRotation) {
+        boolean zShouldEnableKeyguardScreenRotation = DeviceState.shouldEnableKeyguardScreenRotation(((KeyguardStateControllerImpl) this.mKeyguardStateController).mContext);
+        if (this.mLastKeyguardRotationAllowed != zShouldEnableKeyguardScreenRotation) {
             apply(this.mCurrentState);
-            this.mLastKeyguardRotationAllowed = shouldEnableKeyguardScreenRotation;
+            this.mLastKeyguardRotationAllowed = zShouldEnableKeyguardScreenRotation;
         }
     }
 
@@ -460,23 +836,14 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         apply(notificationShadeWindowState);
     }
 
-    public void onShadeOrQsExpanded(final Boolean bool) {
+    public void onShadeOrQsExpanded(Boolean bool) {
         NotificationShadeWindowState notificationShadeWindowState = this.mCurrentState;
         if (notificationShadeWindowState.shadeOrQsExpanded != bool.booleanValue()) {
             notificationShadeWindowState.shadeOrQsExpanded = bool.booleanValue();
             apply(notificationShadeWindowState);
-            final IBinder windowToken = this.mWindowRootView.getWindowToken();
+            IBinder windowToken = this.mWindowRootView.getWindowToken();
             if (windowToken != null) {
-                this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.shade.NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        try {
-                            WindowManagerGlobal.getWindowManagerService().onNotificationShadeExpanded(windowToken, bool.booleanValue());
-                        } catch (RemoteException e) {
-                            android.util.Log.e("NotificationShadeWindowController", "Failed to call onNotificationShadeExpanded", e);
-                        }
-                    }
-                });
+                this.mBackgroundExecutor.execute(new NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda0(0, windowToken, bool));
             }
         }
     }
@@ -486,9 +853,9 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         if (this.mWindowRootView == null) {
             return;
         }
-        boolean supportsDarkText = this.mColorExtractor.mNeutralColorsLock.supportsDarkText();
+        boolean zSupportsDarkText = this.mColorExtractor.mNeutralColorsLock.supportsDarkText();
         int systemUiVisibility = this.mWindowRootView.getSystemUiVisibility();
-        this.mWindowRootView.setSystemUiVisibility(supportsDarkText ? systemUiVisibility | 8208 : systemUiVisibility & (-8209));
+        this.mWindowRootView.setSystemUiVisibility(zSupportsDarkText ? systemUiVisibility | 8208 : systemUiVisibility & (-8209));
     }
 
     public final void registerCallback(StatusBarWindowCallback statusBarWindowCallback) {
@@ -543,9 +910,9 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         LogLevel logLevel = LogLevel.DEBUG;
         ShadeWindowLogger$$ExternalSyntheticLambda0 shadeWindowLogger$$ExternalSyntheticLambda0 = new ShadeWindowLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = shadeWindowLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shadewindow", logLevel, shadeWindowLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shadewindow", logLevel, shadeWindowLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         NotificationShadeWindowState notificationShadeWindowState = this.mCurrentState;
         notificationShadeWindowState.notificationShadeFocusable = z;
         apply(notificationShadeWindowState);
@@ -561,9 +928,9 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         LogLevel logLevel = LogLevel.DEBUG;
         ShadeWindowLogger$$ExternalSyntheticLambda0 shadeWindowLogger$$ExternalSyntheticLambda0 = new ShadeWindowLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = shadeWindowLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shadewindow", logLevel, shadeWindowLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shadewindow", logLevel, shadeWindowLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         notificationShadeWindowState.panelVisible = z;
         notificationShadeWindowState.notificationShadeFocusable = z;
         apply(notificationShadeWindowState);
@@ -631,17 +998,17 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
             int i13 = LogUtil.getInt(notificationShadeWindowState.isCoverClosed);
             int i14 = LogUtil.getInt(notificationShadeWindowState.coverAppShowing);
             int i15 = notificationShadeWindowState.coverType;
-            StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("isExpanded=", i, "\n!forceCollapsed=", z2, ", keyguard=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i2, ", panel=", i3, ", fadingAway=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i4, ", bouncer=", i5, ", headsUp=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i6, ", scrim=", i7, ", blur=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i8, ", launchingActivity=", i9, ", dozing=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i10, ", forceInvisible=", i11, ", forceVisibleForUnlockAnimation=");
-            ViewPager$$ExternalSyntheticOutline0.m(m, i12, ", coverClosed=", i13, ", coverApp=");
-            m.append(i14);
-            m.append(", coverType=");
-            m.append(i15);
-            Log.d(SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG, m.toString());
+            StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("isExpanded=", i, "\n!forceCollapsed=", z2, ", keyguard=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i2, ", panel=", i3, ", fadingAway=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i4, ", bouncer=", i5, ", headsUp=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i6, ", scrim=", i7, ", blur=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i8, ", launchingActivity=", i9, ", dozing=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i10, ", forceInvisible=", i11, ", forceVisibleForUnlockAnimation=");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i12, ", coverClosed=", i13, ", coverApp=");
+            sbM.append(i14);
+            sbM.append(", coverType=");
+            sbM.append(i15);
+            Log.d(SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG, sbM.toString());
             secNotificationShadeWindowControllerHelperImpl = secNotificationShadeWindowControllerHelperImpl2;
         } else {
             secNotificationShadeWindowControllerHelperImpl = secNotificationShadeWindowControllerHelperImpl2;
@@ -649,7 +1016,7 @@ public class NotificationShadeWindowControllerImpl implements NotificationShadeW
         if (secNotificationShadeWindowControllerHelperImpl.isLastExpanded != z2) {
             Iterator it = CollectionsKt___CollectionsKt.toList(secNotificationShadeWindowControllerHelperImpl.visibilityMonitor.isExpandedChangedListeners).iterator();
             while (it.hasNext()) {
-                ((Function1) it.next()).mo779invoke(Boolean.valueOf(z2));
+                ((Function1) it.next()).mo781invoke(Boolean.valueOf(z2));
             }
         }
         secNotificationShadeWindowControllerHelperImpl.isLastExpanded = z2;

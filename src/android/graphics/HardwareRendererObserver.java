@@ -40,7 +40,7 @@ public final class HardwareRendererObserver {
         this.mHandler.post(new Runnable() { // from class: android.graphics.HardwareRendererObserver$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                HardwareRendererObserver.this.lambda$notifyDataAvailable$0();
+                this.f$0.lambda$notifyDataAvailable$0();
             }
         });
     }
@@ -49,9 +49,9 @@ public final class HardwareRendererObserver {
     public /* synthetic */ void lambda$notifyDataAvailable$0() {
         boolean z = true;
         while (z) {
-            int nGetNextBuffer = nGetNextBuffer(this.mNativePtr.get(), this.mFrameMetrics);
-            if (nGetNextBuffer >= 0) {
-                this.mListener.onFrameMetricsAvailable(nGetNextBuffer);
+            int iNGetNextBuffer = nGetNextBuffer(this.mNativePtr.get(), this.mFrameMetrics);
+            if (iNGetNextBuffer >= 0) {
+                this.mListener.onFrameMetricsAvailable(iNGetNextBuffer);
             } else {
                 z = false;
             }

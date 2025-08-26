@@ -15,7 +15,6 @@ import com.android.systemui.controls.util.ControlsUtil;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecStructureHolder extends SecHolder {
     public CharSequence displayName;
@@ -82,7 +81,7 @@ public final class SecStructureHolder extends SecHolder {
         CheckBox checkBox = this.structureAll;
         CharSequence charSequence2 = this.displayName;
         checkBox.setContentDescription(this.selectAllItems + ", " + ((Object) (charSequence2 != null ? charSequence2 : null)));
-        this.structureAllLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.adapter.SecStructureHolder$bindData$2
+        this.structureAllLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.management.adapter.SecStructureHolder.bindData.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
                 boolean z = !SecStructureHolder.this.structureAll.isChecked();

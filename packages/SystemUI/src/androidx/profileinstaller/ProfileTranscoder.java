@@ -4,6 +4,7 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
@@ -15,7 +16,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ProfileTranscoder {
     public static final byte[] MAGIC_PROF = {112, 114, 111, 0};
@@ -24,16 +24,16 @@ public class ProfileTranscoder {
     private ProfileTranscoder() {
     }
 
-    public static byte[] createCompressibleBody(DexProfileData[] dexProfileDataArr, byte[] bArr) {
+    public static byte[] createCompressibleBody(DexProfileData[] dexProfileDataArr, byte[] bArr) throws IOException {
         int i = 0;
-        int i2 = 0;
+        int length = 0;
         for (DexProfileData dexProfileData : dexProfileDataArr) {
-            i2 += ((((dexProfileData.numMethodIds * 2) + 7) & (-8)) / 8) + (dexProfileData.classSetSize * 2) + generateDexKey(dexProfileData.apkName, dexProfileData.dexName, bArr).getBytes(StandardCharsets.UTF_8).length + 16 + dexProfileData.hotMethodRegionSize;
+            length += ((((dexProfileData.numMethodIds * 2) + 7) & (-8)) / 8) + (dexProfileData.classSetSize * 2) + generateDexKey(dexProfileData.apkName, dexProfileData.dexName, bArr).getBytes(StandardCharsets.UTF_8).length + 16 + dexProfileData.hotMethodRegionSize;
         }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(i2);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(length);
         if (Arrays.equals(bArr, ProfileVersion.V009_O_MR1)) {
-            int length = dexProfileDataArr.length;
-            while (i < length) {
+            int length2 = dexProfileDataArr.length;
+            while (i < length2) {
                 DexProfileData dexProfileData2 = dexProfileDataArr[i];
                 writeLineHeader(byteArrayOutputStream, dexProfileData2, generateDexKey(dexProfileData2.apkName, dexProfileData2.dexName, bArr));
                 writeLineData(byteArrayOutputStream, dexProfileData2);
@@ -43,23 +43,23 @@ public class ProfileTranscoder {
             for (DexProfileData dexProfileData3 : dexProfileDataArr) {
                 writeLineHeader(byteArrayOutputStream, dexProfileData3, generateDexKey(dexProfileData3.apkName, dexProfileData3.dexName, bArr));
             }
-            int length2 = dexProfileDataArr.length;
-            while (i < length2) {
+            int length3 = dexProfileDataArr.length;
+            while (i < length3) {
                 writeLineData(byteArrayOutputStream, dexProfileDataArr[i]);
                 i++;
             }
         }
-        if (byteArrayOutputStream.size() == i2) {
+        if (byteArrayOutputStream.size() == length) {
             return byteArrayOutputStream.toByteArray();
         }
-        throw new IllegalStateException("The bytes saved do not match expectation. actual=" + byteArrayOutputStream.size() + " expected=" + i2);
+        throw new IllegalStateException("The bytes saved do not match expectation. actual=" + byteArrayOutputStream.size() + " expected=" + length);
     }
 
     public static String generateDexKey(String str, String str2, byte[] bArr) {
         byte[] bArr2 = ProfileVersion.V001_N;
-        boolean equals = Arrays.equals(bArr, bArr2);
+        boolean zEquals = Arrays.equals(bArr, bArr2);
         byte[] bArr3 = ProfileVersion.V005_O;
-        String str3 = (equals || Arrays.equals(bArr, bArr3)) ? ":" : "!";
+        String str3 = (zEquals || Arrays.equals(bArr, bArr3)) ? ":" : "!";
         if (str.length() <= 0) {
             return "!".equals(str3) ? str2.replace(":", "!") : ":".equals(str3) ? str2.replace("!", ":") : str2;
         }
@@ -81,30 +81,30 @@ public class ProfileTranscoder {
 
     public static int[] readClasses(InputStream inputStream, int i) {
         int[] iArr = new int[i];
-        int i2 = 0;
-        for (int i3 = 0; i3 < i; i3++) {
-            i2 += (int) Encoding.readUInt(inputStream, 2);
-            iArr[i3] = i2;
+        int uInt = 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            uInt += (int) Encoding.readUInt(inputStream, 2);
+            iArr[i2] = uInt;
         }
         return iArr;
     }
 
-    public static DexProfileData[] readMeta(InputStream inputStream, byte[] bArr, byte[] bArr2, DexProfileData[] dexProfileDataArr) {
+    public static DexProfileData[] readMeta(InputStream inputStream, byte[] bArr, byte[] bArr2, DexProfileData[] dexProfileDataArr) throws IOException {
         byte[] bArr3 = ProfileVersion.METADATA_V001_N;
         if (!Arrays.equals(bArr, bArr3)) {
             if (!Arrays.equals(bArr, ProfileVersion.METADATA_V002)) {
                 throw new IllegalStateException("Unsupported meta version");
             }
-            int readUInt = (int) Encoding.readUInt(inputStream, 2);
-            byte[] readCompressed = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
+            int uInt = (int) Encoding.readUInt(inputStream, 2);
+            byte[] compressed = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
             if (inputStream.read() > 0) {
                 throw new IllegalStateException("Content found after the end of file");
             }
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(readCompressed);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(compressed);
             try {
-                DexProfileData[] readMetadataV002Body = readMetadataV002Body(byteArrayInputStream, bArr2, readUInt, dexProfileDataArr);
+                DexProfileData[] metadataV002Body = readMetadataV002Body(byteArrayInputStream, bArr2, uInt, dexProfileDataArr);
                 byteArrayInputStream.close();
-                return readMetadataV002Body;
+                return metadataV002Body;
             } catch (Throwable th) {
                 try {
                     byteArrayInputStream.close();
@@ -120,16 +120,16 @@ public class ProfileTranscoder {
         if (!Arrays.equals(bArr, bArr3)) {
             throw new IllegalStateException("Unsupported meta version");
         }
-        int readUInt2 = (int) Encoding.readUInt(inputStream, 1);
-        byte[] readCompressed2 = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
+        int uInt2 = (int) Encoding.readUInt(inputStream, 1);
+        byte[] compressed2 = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
         if (inputStream.read() > 0) {
             throw new IllegalStateException("Content found after the end of file");
         }
-        ByteArrayInputStream byteArrayInputStream2 = new ByteArrayInputStream(readCompressed2);
+        ByteArrayInputStream byteArrayInputStream2 = new ByteArrayInputStream(compressed2);
         try {
-            DexProfileData[] readMetadataForNBody = readMetadataForNBody(byteArrayInputStream2, readUInt2, dexProfileDataArr);
+            DexProfileData[] metadataForNBody = readMetadataForNBody(byteArrayInputStream2, uInt2, dexProfileDataArr);
             byteArrayInputStream2.close();
-            return readMetadataForNBody;
+            return metadataForNBody;
         } catch (Throwable th3) {
             try {
                 byteArrayInputStream2.close();
@@ -150,9 +150,9 @@ public class ProfileTranscoder {
         String[] strArr = new String[i];
         int[] iArr = new int[i];
         for (int i2 = 0; i2 < i; i2++) {
-            int readUInt = (int) Encoding.readUInt(inputStream, 2);
+            int uInt = (int) Encoding.readUInt(inputStream, 2);
             iArr[i2] = (int) Encoding.readUInt(inputStream, 2);
-            strArr[i2] = new String(Encoding.read(inputStream, readUInt), StandardCharsets.UTF_8);
+            strArr[i2] = new String(Encoding.read(inputStream, uInt), StandardCharsets.UTF_8);
         }
         for (int i3 = 0; i3 < i; i3++) {
             DexProfileData dexProfileData = dexProfileDataArr[i3];
@@ -166,7 +166,7 @@ public class ProfileTranscoder {
         return dexProfileDataArr;
     }
 
-    public static DexProfileData[] readMetadataV002Body(InputStream inputStream, byte[] bArr, int i, DexProfileData[] dexProfileDataArr) {
+    public static DexProfileData[] readMetadataV002Body(InputStream inputStream, byte[] bArr, int i, DexProfileData[] dexProfileDataArr) throws IOException {
         if (inputStream.available() == 0) {
             return new DexProfileData[0];
         }
@@ -176,21 +176,21 @@ public class ProfileTranscoder {
         for (int i2 = 0; i2 < i; i2++) {
             Encoding.readUInt(inputStream, 2);
             String str = new String(Encoding.read(inputStream, (int) Encoding.readUInt(inputStream, 2)), StandardCharsets.UTF_8);
-            long readUInt = Encoding.readUInt(inputStream, 4);
-            int readUInt2 = (int) Encoding.readUInt(inputStream, 2);
+            long uInt = Encoding.readUInt(inputStream, 4);
+            int uInt2 = (int) Encoding.readUInt(inputStream, 2);
             DexProfileData dexProfileData = null;
             if (dexProfileDataArr.length > 0) {
-                int indexOf = str.indexOf("!");
-                if (indexOf < 0) {
-                    indexOf = str.indexOf(":");
+                int iIndexOf = str.indexOf("!");
+                if (iIndexOf < 0) {
+                    iIndexOf = str.indexOf(":");
                 }
-                String substring = indexOf > 0 ? str.substring(indexOf + 1) : str;
+                String strSubstring = iIndexOf > 0 ? str.substring(iIndexOf + 1) : str;
                 int i3 = 0;
                 while (true) {
                     if (i3 >= dexProfileDataArr.length) {
                         break;
                     }
-                    if (dexProfileDataArr[i3].dexName.equals(substring)) {
+                    if (dexProfileDataArr[i3].dexName.equals(strSubstring)) {
                         dexProfileData = dexProfileDataArr[i3];
                         break;
                     }
@@ -200,30 +200,30 @@ public class ProfileTranscoder {
             if (dexProfileData == null) {
                 throw new IllegalStateException("Missing profile key: ".concat(str));
             }
-            dexProfileData.mTypeIdCount = readUInt;
-            int[] readClasses = readClasses(inputStream, readUInt2);
+            dexProfileData.mTypeIdCount = uInt;
+            int[] classes = readClasses(inputStream, uInt2);
             if (Arrays.equals(bArr, ProfileVersion.V001_N)) {
-                dexProfileData.classSetSize = readUInt2;
-                dexProfileData.classes = readClasses;
+                dexProfileData.classSetSize = uInt2;
+                dexProfileData.classes = classes;
             }
         }
         return dexProfileDataArr;
     }
 
-    public static DexProfileData[] readProfile(InputStream inputStream, byte[] bArr, String str) {
+    public static DexProfileData[] readProfile(InputStream inputStream, byte[] bArr, String str) throws IOException {
         if (!Arrays.equals(bArr, ProfileVersion.V010_P)) {
             throw new IllegalStateException("Unsupported version");
         }
-        int readUInt = (int) Encoding.readUInt(inputStream, 1);
-        byte[] readCompressed = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
+        int uInt = (int) Encoding.readUInt(inputStream, 1);
+        byte[] compressed = Encoding.readCompressed(inputStream, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4));
         if (inputStream.read() > 0) {
             throw new IllegalStateException("Content found after the end of file");
         }
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(readCompressed);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(compressed);
         try {
-            DexProfileData[] readUncompressedBody = readUncompressedBody(byteArrayInputStream, str, readUInt);
+            DexProfileData[] uncompressedBody = readUncompressedBody(byteArrayInputStream, str, uInt);
             byteArrayInputStream.close();
-            return readUncompressedBody;
+            return uncompressedBody;
         } catch (Throwable th) {
             try {
                 byteArrayInputStream.close();
@@ -234,54 +234,54 @@ public class ProfileTranscoder {
         }
     }
 
-    public static DexProfileData[] readUncompressedBody(InputStream inputStream, String str, int i) {
+    public static DexProfileData[] readUncompressedBody(InputStream inputStream, String str, int i) throws IOException {
         if (inputStream.available() == 0) {
             return new DexProfileData[0];
         }
         DexProfileData[] dexProfileDataArr = new DexProfileData[i];
         for (int i2 = 0; i2 < i; i2++) {
-            int readUInt = (int) Encoding.readUInt(inputStream, 2);
-            int readUInt2 = (int) Encoding.readUInt(inputStream, 2);
-            dexProfileDataArr[i2] = new DexProfileData(str, new String(Encoding.read(inputStream, readUInt), StandardCharsets.UTF_8), Encoding.readUInt(inputStream, 4), 0L, readUInt2, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4), new int[readUInt2], new TreeMap());
+            int uInt = (int) Encoding.readUInt(inputStream, 2);
+            int uInt2 = (int) Encoding.readUInt(inputStream, 2);
+            dexProfileDataArr[i2] = new DexProfileData(str, new String(Encoding.read(inputStream, uInt), StandardCharsets.UTF_8), Encoding.readUInt(inputStream, 4), 0L, uInt2, (int) Encoding.readUInt(inputStream, 4), (int) Encoding.readUInt(inputStream, 4), new int[uInt2], new TreeMap());
         }
         for (int i3 = 0; i3 < i; i3++) {
             DexProfileData dexProfileData = dexProfileDataArr[i3];
-            int available = inputStream.available() - dexProfileData.hotMethodRegionSize;
-            int i4 = 0;
-            while (inputStream.available() > available) {
-                i4 += (int) Encoding.readUInt(inputStream, 2);
-                dexProfileData.methods.put(Integer.valueOf(i4), 1);
-                for (int readUInt3 = (int) Encoding.readUInt(inputStream, 2); readUInt3 > 0; readUInt3--) {
+            int iAvailable = inputStream.available() - dexProfileData.hotMethodRegionSize;
+            int uInt3 = 0;
+            while (inputStream.available() > iAvailable) {
+                uInt3 += (int) Encoding.readUInt(inputStream, 2);
+                dexProfileData.methods.put(Integer.valueOf(uInt3), 1);
+                for (int uInt4 = (int) Encoding.readUInt(inputStream, 2); uInt4 > 0; uInt4--) {
                     Encoding.readUInt(inputStream, 2);
-                    int readUInt4 = (int) Encoding.readUInt(inputStream, 1);
-                    if (readUInt4 != 6 && readUInt4 != 7) {
-                        while (readUInt4 > 0) {
+                    int uInt5 = (int) Encoding.readUInt(inputStream, 1);
+                    if (uInt5 != 6 && uInt5 != 7) {
+                        while (uInt5 > 0) {
                             Encoding.readUInt(inputStream, 1);
-                            for (int readUInt5 = (int) Encoding.readUInt(inputStream, 1); readUInt5 > 0; readUInt5--) {
+                            for (int uInt6 = (int) Encoding.readUInt(inputStream, 1); uInt6 > 0; uInt6--) {
                                 Encoding.readUInt(inputStream, 2);
                             }
-                            readUInt4--;
+                            uInt5--;
                         }
                     }
                 }
             }
-            if (inputStream.available() != available) {
+            if (inputStream.available() != iAvailable) {
                 throw new IllegalStateException("Read too much data during profile line parse");
             }
             dexProfileData.classes = readClasses(inputStream, dexProfileData.classSetSize);
-            int i5 = dexProfileData.numMethodIds;
-            BitSet valueOf = BitSet.valueOf(Encoding.read(inputStream, (((i5 * 2) + 7) & (-8)) / 8));
-            for (int i6 = 0; i6 < i5; i6++) {
-                int i7 = valueOf.get(i6) ? 2 : 0;
-                if (valueOf.get(i6 + i5)) {
-                    i7 |= 4;
+            int i4 = dexProfileData.numMethodIds;
+            BitSet bitSetValueOf = BitSet.valueOf(Encoding.read(inputStream, (((i4 * 2) + 7) & (-8)) / 8));
+            for (int i5 = 0; i5 < i4; i5++) {
+                int i6 = bitSetValueOf.get(i5) ? 2 : 0;
+                if (bitSetValueOf.get(i5 + i4)) {
+                    i6 |= 4;
                 }
-                if (i7 != 0) {
-                    Integer num = (Integer) dexProfileData.methods.get(Integer.valueOf(i6));
+                if (i6 != 0) {
+                    Integer num = (Integer) dexProfileData.methods.get(Integer.valueOf(i5));
                     if (num == null) {
                         num = 0;
                     }
-                    dexProfileData.methods.put(Integer.valueOf(i6), Integer.valueOf(i7 | num.intValue()));
+                    dexProfileData.methods.put(Integer.valueOf(i5), Integer.valueOf(i6 | num.intValue()));
                 }
             }
         }
@@ -289,7 +289,7 @@ public class ProfileTranscoder {
     }
 
     /* JADX WARN: Finally extract failed */
-    public static boolean transcodeAndWriteBody(OutputStream outputStream, byte[] bArr, DexProfileData[] dexProfileDataArr) {
+    public static boolean transcodeAndWriteBody(OutputStream outputStream, byte[] bArr, DexProfileData[] dexProfileDataArr) throws IOException {
         ArrayList arrayList;
         int length;
         byte[] bArr2 = ProfileVersion.V015_S;
@@ -297,12 +297,12 @@ public class ProfileTranscoder {
         if (!Arrays.equals(bArr, bArr2)) {
             byte[] bArr3 = ProfileVersion.V010_P;
             if (Arrays.equals(bArr, bArr3)) {
-                byte[] createCompressibleBody = createCompressibleBody(dexProfileDataArr, bArr3);
+                byte[] bArrCreateCompressibleBody = createCompressibleBody(dexProfileDataArr, bArr3);
                 Encoding.writeUInt(outputStream, dexProfileDataArr.length, 1);
-                Encoding.writeUInt(outputStream, createCompressibleBody.length, 4);
-                byte[] compress = Encoding.compress(createCompressibleBody);
-                Encoding.writeUInt(outputStream, compress.length, 4);
-                outputStream.write(compress);
+                Encoding.writeUInt(outputStream, bArrCreateCompressibleBody.length, 4);
+                byte[] bArrCompress = Encoding.compress(bArrCreateCompressibleBody);
+                Encoding.writeUInt(outputStream, bArrCompress.length, 4);
+                outputStream.write(bArrCompress);
                 return true;
             }
             byte[] bArr4 = ProfileVersion.V005_O;
@@ -310,13 +310,13 @@ public class ProfileTranscoder {
                 Encoding.writeUInt(outputStream, dexProfileDataArr.length, 1);
                 for (DexProfileData dexProfileData : dexProfileDataArr) {
                     int size = dexProfileData.methods.size() * 4;
-                    String generateDexKey = generateDexKey(dexProfileData.apkName, dexProfileData.dexName, bArr4);
+                    String strGenerateDexKey = generateDexKey(dexProfileData.apkName, dexProfileData.dexName, bArr4);
                     Charset charset = StandardCharsets.UTF_8;
-                    Encoding.writeUInt16(outputStream, generateDexKey.getBytes(charset).length);
+                    Encoding.writeUInt16(outputStream, strGenerateDexKey.getBytes(charset).length);
                     Encoding.writeUInt16(outputStream, dexProfileData.classes.length);
                     Encoding.writeUInt(outputStream, size, 4);
                     Encoding.writeUInt(outputStream, dexProfileData.dexChecksum, 4);
-                    outputStream.write(generateDexKey.getBytes(charset));
+                    outputStream.write(strGenerateDexKey.getBytes(charset));
                     Iterator it = dexProfileData.methods.keySet().iterator();
                     while (it.hasNext()) {
                         Encoding.writeUInt16(outputStream, ((Integer) it.next()).intValue());
@@ -330,12 +330,12 @@ public class ProfileTranscoder {
             }
             byte[] bArr5 = ProfileVersion.V009_O_MR1;
             if (Arrays.equals(bArr, bArr5)) {
-                byte[] createCompressibleBody2 = createCompressibleBody(dexProfileDataArr, bArr5);
+                byte[] bArrCreateCompressibleBody2 = createCompressibleBody(dexProfileDataArr, bArr5);
                 Encoding.writeUInt(outputStream, dexProfileDataArr.length, 1);
-                Encoding.writeUInt(outputStream, createCompressibleBody2.length, 4);
-                byte[] compress2 = Encoding.compress(createCompressibleBody2);
-                Encoding.writeUInt(outputStream, compress2.length, 4);
-                outputStream.write(compress2);
+                Encoding.writeUInt(outputStream, bArrCreateCompressibleBody2.length, 4);
+                byte[] bArrCompress2 = Encoding.compress(bArrCreateCompressibleBody2);
+                Encoding.writeUInt(outputStream, bArrCompress2.length, 4);
+                outputStream.write(bArrCompress2);
                 return true;
             }
             byte[] bArr6 = ProfileVersion.V001_N;
@@ -344,13 +344,13 @@ public class ProfileTranscoder {
             }
             Encoding.writeUInt16(outputStream, dexProfileDataArr.length);
             for (DexProfileData dexProfileData2 : dexProfileDataArr) {
-                String generateDexKey2 = generateDexKey(dexProfileData2.apkName, dexProfileData2.dexName, bArr6);
+                String strGenerateDexKey2 = generateDexKey(dexProfileData2.apkName, dexProfileData2.dexName, bArr6);
                 Charset charset2 = StandardCharsets.UTF_8;
-                Encoding.writeUInt16(outputStream, generateDexKey2.getBytes(charset2).length);
+                Encoding.writeUInt16(outputStream, strGenerateDexKey2.getBytes(charset2).length);
                 Encoding.writeUInt16(outputStream, dexProfileData2.methods.size());
                 Encoding.writeUInt16(outputStream, dexProfileData2.classes.length);
                 Encoding.writeUInt(outputStream, dexProfileData2.dexChecksum, 4);
-                outputStream.write(generateDexKey2.getBytes(charset2));
+                outputStream.write(strGenerateDexKey2.getBytes(charset2));
                 Iterator it2 = dexProfileData2.methods.keySet().iterator();
                 while (it2.hasNext()) {
                     Encoding.writeUInt16(outputStream, ((Integer) it2.next()).intValue());
@@ -372,12 +372,12 @@ public class ProfileTranscoder {
                 Encoding.writeUInt(byteArrayOutputStream, dexProfileData3.dexChecksum, 4);
                 Encoding.writeUInt(byteArrayOutputStream, dexProfileData3.mTypeIdCount, 4);
                 Encoding.writeUInt(byteArrayOutputStream, dexProfileData3.numMethodIds, 4);
-                String generateDexKey3 = generateDexKey(dexProfileData3.apkName, dexProfileData3.dexName, bArr2);
+                String strGenerateDexKey3 = generateDexKey(dexProfileData3.apkName, dexProfileData3.dexName, bArr2);
                 Charset charset3 = StandardCharsets.UTF_8;
-                int length2 = generateDexKey3.getBytes(charset3).length;
+                int length2 = strGenerateDexKey3.getBytes(charset3).length;
                 Encoding.writeUInt16(byteArrayOutputStream, length2);
                 i5 = i5 + 14 + length2;
-                byteArrayOutputStream.write(generateDexKey3.getBytes(charset3));
+                byteArrayOutputStream.write(strGenerateDexKey3.getBytes(charset3));
             }
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             if (i5 != byteArray.length) {
@@ -422,13 +422,13 @@ public class ProfileTranscoder {
                 try {
                     DexProfileData dexProfileData5 = dexProfileDataArr[i11];
                     Iterator it3 = dexProfileData5.methods.entrySet().iterator();
-                    int i13 = i;
+                    int iIntValue = i;
                     while (it3.hasNext()) {
-                        i13 |= ((Integer) ((Map.Entry) it3.next()).getValue()).intValue();
+                        iIntValue |= ((Integer) ((Map.Entry) it3.next()).getValue()).intValue();
                     }
                     ByteArrayOutputStream byteArrayOutputStream3 = new ByteArrayOutputStream();
                     try {
-                        writeMethodBitmapForS(byteArrayOutputStream3, i13, dexProfileData5);
+                        writeMethodBitmapForS(byteArrayOutputStream3, iIntValue, dexProfileData5);
                         byte[] byteArray3 = byteArrayOutputStream3.toByteArray();
                         byteArrayOutputStream3.close();
                         byteArrayOutputStream3 = new ByteArrayOutputStream();
@@ -438,13 +438,13 @@ public class ProfileTranscoder {
                             byteArrayOutputStream3.close();
                             Encoding.writeUInt16(byteArrayOutputStream2, i11);
                             int length4 = byteArray3.length + 2 + byteArray4.length;
-                            int i14 = i12 + 6;
+                            int i13 = i12 + 6;
                             ArrayList arrayList4 = arrayList3;
                             Encoding.writeUInt(byteArrayOutputStream2, length4, 4);
-                            Encoding.writeUInt16(byteArrayOutputStream2, i13);
+                            Encoding.writeUInt16(byteArrayOutputStream2, iIntValue);
                             byteArrayOutputStream2.write(byteArray3);
                             byteArrayOutputStream2.write(byteArray4);
-                            i12 = i14 + length4;
+                            i12 = i13 + length4;
                             i11++;
                             arrayList3 = arrayList4;
                             i = 0;
@@ -472,21 +472,21 @@ public class ProfileTranscoder {
             long j = 4;
             long size2 = j + j + 4 + (arrayList2.size() * 16);
             Encoding.writeUInt(outputStream, arrayList2.size(), 4);
-            int i15 = 0;
-            while (i15 < arrayList2.size()) {
-                WritableFileSection writableFileSection4 = (WritableFileSection) arrayList2.get(i15);
+            int i14 = 0;
+            while (i14 < arrayList2.size()) {
+                WritableFileSection writableFileSection4 = (WritableFileSection) arrayList2.get(i14);
                 Encoding.writeUInt(outputStream, writableFileSection4.mType.getValue(), 4);
                 Encoding.writeUInt(outputStream, size2, 4);
                 boolean z = writableFileSection4.mNeedsCompression;
                 byte[] bArr7 = writableFileSection4.mContents;
                 if (z) {
                     long length5 = bArr7.length;
-                    byte[] compress3 = Encoding.compress(bArr7);
+                    byte[] bArrCompress3 = Encoding.compress(bArr7);
                     arrayList = arrayList5;
-                    arrayList.add(compress3);
-                    Encoding.writeUInt(outputStream, compress3.length, 4);
+                    arrayList.add(bArrCompress3);
+                    Encoding.writeUInt(outputStream, bArrCompress3.length, 4);
                     Encoding.writeUInt(outputStream, length5, 4);
-                    length = compress3.length;
+                    length = bArrCompress3.length;
                 } else {
                     arrayList = arrayList5;
                     arrayList.add(bArr7);
@@ -495,12 +495,12 @@ public class ProfileTranscoder {
                     length = bArr7.length;
                 }
                 size2 += length;
-                i15++;
+                i14++;
                 arrayList5 = arrayList;
             }
             ArrayList arrayList6 = arrayList5;
-            for (int i16 = 0; i16 < arrayList6.size(); i16++) {
-                outputStream.write((byte[]) arrayList6.get(i16));
+            for (int i15 = 0; i15 < arrayList6.size(); i15++) {
+                outputStream.write((byte[]) arrayList6.get(i15));
             }
             return true;
         } catch (Throwable th3) {
@@ -514,7 +514,7 @@ public class ProfileTranscoder {
         }
     }
 
-    public static void writeLineData(OutputStream outputStream, DexProfileData dexProfileData) {
+    public static void writeLineData(OutputStream outputStream, DexProfileData dexProfileData) throws IOException {
         writeMethodsWithInlineCaches(outputStream, dexProfileData);
         int[] iArr = dexProfileData.classes;
         int length = iArr.length;
@@ -529,14 +529,14 @@ public class ProfileTranscoder {
         int i4 = dexProfileData.numMethodIds;
         byte[] bArr = new byte[(((i4 * 2) + 7) & (-8)) / 8];
         for (Map.Entry entry : dexProfileData.methods.entrySet()) {
-            int intValue = ((Integer) entry.getKey()).intValue();
-            int intValue2 = ((Integer) entry.getValue()).intValue();
-            if ((intValue2 & 2) != 0) {
-                int i5 = intValue / 8;
-                bArr[i5] = (byte) (bArr[i5] | (1 << (intValue % 8)));
+            int iIntValue = ((Integer) entry.getKey()).intValue();
+            int iIntValue2 = ((Integer) entry.getValue()).intValue();
+            if ((iIntValue2 & 2) != 0) {
+                int i5 = iIntValue / 8;
+                bArr[i5] = (byte) (bArr[i5] | (1 << (iIntValue % 8)));
             }
-            if ((intValue2 & 4) != 0) {
-                int i6 = intValue + i4;
+            if ((iIntValue2 & 4) != 0) {
+                int i6 = iIntValue + i4;
                 int i7 = i6 / 8;
                 bArr[i7] = (byte) ((1 << (i6 % 8)) | bArr[i7]);
             }
@@ -544,7 +544,7 @@ public class ProfileTranscoder {
         outputStream.write(bArr);
     }
 
-    public static void writeLineHeader(OutputStream outputStream, DexProfileData dexProfileData, String str) {
+    public static void writeLineHeader(OutputStream outputStream, DexProfileData dexProfileData, String str) throws IOException {
         Charset charset = StandardCharsets.UTF_8;
         Encoding.writeUInt16(outputStream, str.getBytes(charset).length);
         Encoding.writeUInt16(outputStream, dexProfileData.classSetSize);
@@ -554,18 +554,18 @@ public class ProfileTranscoder {
         outputStream.write(str.getBytes(charset));
     }
 
-    public static void writeMethodBitmapForS(OutputStream outputStream, int i, DexProfileData dexProfileData) {
-        int bitCount = Integer.bitCount(i & (-2));
+    public static void writeMethodBitmapForS(OutputStream outputStream, int i, DexProfileData dexProfileData) throws IOException {
+        int iBitCount = Integer.bitCount(i & (-2));
         int i2 = dexProfileData.numMethodIds;
-        byte[] bArr = new byte[(((bitCount * i2) + 7) & (-8)) / 8];
+        byte[] bArr = new byte[(((iBitCount * i2) + 7) & (-8)) / 8];
         for (Map.Entry entry : dexProfileData.methods.entrySet()) {
-            int intValue = ((Integer) entry.getKey()).intValue();
-            int intValue2 = ((Integer) entry.getValue()).intValue();
+            int iIntValue = ((Integer) entry.getKey()).intValue();
+            int iIntValue2 = ((Integer) entry.getValue()).intValue();
             int i3 = 0;
             for (int i4 = 1; i4 <= 4; i4 <<= 1) {
                 if (i4 != 1 && (i4 & i) != 0) {
-                    if ((i4 & intValue2) == i4) {
-                        int i5 = (i3 * i2) + intValue;
+                    if ((i4 & iIntValue2) == i4) {
+                        int i5 = (i3 * i2) + iIntValue;
                         int i6 = i5 / 8;
                         bArr[i6] = (byte) ((1 << (i5 % 8)) | bArr[i6]);
                     }
@@ -576,14 +576,14 @@ public class ProfileTranscoder {
         outputStream.write(bArr);
     }
 
-    public static void writeMethodsWithInlineCaches(OutputStream outputStream, DexProfileData dexProfileData) {
+    public static void writeMethodsWithInlineCaches(OutputStream outputStream, DexProfileData dexProfileData) throws IOException {
         int i = 0;
         for (Map.Entry entry : dexProfileData.methods.entrySet()) {
-            int intValue = ((Integer) entry.getKey()).intValue();
+            int iIntValue = ((Integer) entry.getKey()).intValue();
             if ((((Integer) entry.getValue()).intValue() & 1) != 0) {
-                Encoding.writeUInt16(outputStream, intValue - i);
+                Encoding.writeUInt16(outputStream, iIntValue - i);
                 Encoding.writeUInt16(outputStream, 0);
-                i = intValue;
+                i = iIntValue;
             }
         }
     }

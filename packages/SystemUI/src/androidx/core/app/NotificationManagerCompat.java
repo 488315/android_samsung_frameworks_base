@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NotificationManagerCompat {
     public static String sEnabledNotificationListeners;
@@ -40,7 +39,6 @@ public final class NotificationManagerCompat {
     public static Set sEnabledNotificationListenerPackages = new HashSet();
     public static final Object sLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotifyTask {
         public final int id;
         public final Notification notif;
@@ -64,7 +62,6 @@ public final class NotificationManagerCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ServiceConnectedEvent {
         public final ComponentName componentName;
         public final IBinder iBinder;
@@ -75,14 +72,12 @@ public final class NotificationManagerCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SideChannelManager implements Handler.Callback, ServiceConnection {
         public final Context mContext;
         public final Handler mHandler;
         public final Map mRecordMap = new HashMap();
         public Set mCachedEnabledPackages = new HashSet();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ListenerRecord {
             public final ComponentName componentName;
             public INotificationSideChannel service;
@@ -106,7 +101,7 @@ public final class NotificationManagerCompat {
         public final boolean handleMessage(Message message) {
             Set set;
             int i = message.what;
-            INotificationSideChannel iNotificationSideChannel = null;
+            INotificationSideChannel proxy = null;
             if (i == 0) {
                 NotifyTask notifyTask = (NotifyTask) message.obj;
                 Context context = this.mContext;
@@ -116,12 +111,12 @@ public final class NotificationManagerCompat {
                     if (string != null) {
                         try {
                             if (!string.equals(NotificationManagerCompat.sEnabledNotificationListeners)) {
-                                String[] split = string.split(":", -1);
-                                HashSet hashSet = new HashSet(split.length);
-                                for (String str : split) {
-                                    ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-                                    if (unflattenFromString != null) {
-                                        hashSet.add(unflattenFromString.getPackageName());
+                                String[] strArrSplit = string.split(":", -1);
+                                HashSet hashSet = new HashSet(strArrSplit.length);
+                                for (String str : strArrSplit) {
+                                    ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+                                    if (componentNameUnflattenFromString != null) {
+                                        hashSet.add(componentNameUnflattenFromString.getPackageName());
                                     }
                                 }
                                 NotificationManagerCompat.sEnabledNotificationListenerPackages = hashSet;
@@ -135,9 +130,9 @@ public final class NotificationManagerCompat {
                 }
                 if (!set.equals(this.mCachedEnabledPackages)) {
                     this.mCachedEnabledPackages = set;
-                    List<ResolveInfo> queryIntentServices = this.mContext.getPackageManager().queryIntentServices(new Intent().setAction("android.support.BIND_NOTIFICATION_SIDE_CHANNEL"), 0);
+                    List<ResolveInfo> listQueryIntentServices = this.mContext.getPackageManager().queryIntentServices(new Intent().setAction("android.support.BIND_NOTIFICATION_SIDE_CHANNEL"), 0);
                     HashSet hashSet2 = new HashSet();
-                    for (ResolveInfo resolveInfo : queryIntentServices) {
+                    for (ResolveInfo resolveInfo : listQueryIntentServices) {
                         if (((HashSet) set).contains(resolveInfo.serviceInfo.packageName)) {
                             ServiceInfo serviceInfo = resolveInfo.serviceInfo;
                             ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
@@ -187,10 +182,10 @@ public final class NotificationManagerCompat {
                 if (listenerRecord3 != null) {
                     int i2 = INotificationSideChannel.Stub.$r8$clinit;
                     if (iBinder != null) {
-                        IInterface queryLocalInterface = iBinder.queryLocalInterface(INotificationSideChannel.DESCRIPTOR);
-                        iNotificationSideChannel = (queryLocalInterface == null || !(queryLocalInterface instanceof INotificationSideChannel)) ? new INotificationSideChannel.Stub.Proxy(iBinder) : (INotificationSideChannel) queryLocalInterface;
+                        IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INotificationSideChannel.DESCRIPTOR);
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof INotificationSideChannel)) ? new INotificationSideChannel.Stub.Proxy(iBinder) : (INotificationSideChannel) iInterfaceQueryLocalInterface;
                     }
-                    listenerRecord3.service = iNotificationSideChannel;
+                    listenerRecord3.service = proxy;
                     listenerRecord3.retryCount = 0;
                     processListenerQueue(listenerRecord3);
                     return true;
@@ -245,9 +240,9 @@ public final class NotificationManagerCompat {
             if (listenerRecord.bound) {
                 z = true;
             } else {
-                boolean bindService = this.mContext.bindService(new Intent("android.support.BIND_NOTIFICATION_SIDE_CHANNEL").setComponent(listenerRecord.componentName), this, 33);
-                listenerRecord.bound = bindService;
-                if (bindService) {
+                boolean zBindService = this.mContext.bindService(new Intent("android.support.BIND_NOTIFICATION_SIDE_CHANNEL").setComponent(listenerRecord.componentName), this, 33);
+                listenerRecord.bound = zBindService;
+                if (zBindService) {
                     listenerRecord.retryCount = 0;
                 } else {
                     Log.w("NotifManCompat", "Unable to bind to listener " + listenerRecord.componentName);

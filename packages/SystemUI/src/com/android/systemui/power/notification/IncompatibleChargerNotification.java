@@ -9,7 +9,6 @@ import com.android.systemui.SystemUIApplication;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.NotificationChannels;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class IncompatibleChargerNotification extends PowerUiNotification {
     public IncompatibleChargerNotification(Context context) {
@@ -30,12 +29,12 @@ public class IncompatibleChargerNotification extends PowerUiNotification {
 
     @Override // com.android.systemui.power.notification.PowerUiNotification
     public final void showNotification() {
-        Notification build = getBuilder().build();
-        RemoteViews remoteViews = build.headsUpContentView;
+        Notification notificationBuild = getBuilder().build();
+        RemoteViews remoteViews = notificationBuild.headsUpContentView;
         if (remoteViews != null) {
-            remoteViews.setViewVisibility(android.R.id.tag_top_animator, 8);
+            remoteViews.setViewVisibility(android.R.id.tag_top_override, 8);
         }
-        this.mNotificationManager.notifyAsUser("incompatible_charger_state", R.id.notification_power, build, UserHandle.ALL);
+        this.mNotificationManager.notifyAsUser("incompatible_charger_state", R.id.notification_power, notificationBuild, UserHandle.ALL);
     }
 
     @Override // com.android.systemui.power.notification.PowerUiNotification

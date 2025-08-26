@@ -2,7 +2,6 @@ package androidx.compose.ui.spatial;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RectList {
     public int itemsSize;
@@ -16,9 +15,9 @@ public final class RectList {
         rectList.itemsSize = i8;
         int length = jArr.length;
         if (length <= i8) {
-            int max = Math.max(length * 2, i8);
-            rectList.items = Arrays.copyOf(jArr, max);
-            rectList.stack = Arrays.copyOf(rectList.stack, max);
+            int iMax = Math.max(length * 2, i8);
+            rectList.items = Arrays.copyOf(jArr, iMax);
+            rectList.stack = Arrays.copyOf(rectList.stack, iMax);
         }
         long[] jArr2 = rectList.items;
         jArr2[i7] = (i2 << 32) | (i3 & 4294967295L);

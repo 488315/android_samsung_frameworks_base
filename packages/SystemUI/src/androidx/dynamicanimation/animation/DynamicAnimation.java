@@ -9,7 +9,6 @@ import androidx.dynamicanimation.animation.AnimationHandler.DurationScaleChangeL
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DynamicAnimation implements AnimationHandler.AnimationFrameCallback {
     public static final AnonymousClass12 ALPHA;
@@ -141,23 +140,19 @@ public abstract class DynamicAnimation implements AnimationHandler.AnimationFram
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MassState {
         public float mValue;
         public float mVelocity;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnAnimationEndListener {
         void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnAnimationUpdateListener {
         void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ViewProperty extends FloatPropertyCompat {
         private ViewProperty(String str) {
             super(str);
@@ -279,9 +274,9 @@ public abstract class DynamicAnimation implements AnimationHandler.AnimationFram
         this.mRunning = false;
         AnimationHandler animationHandler = getAnimationHandler();
         animationHandler.mDelayedCallbackStartTime.remove(this);
-        int indexOf = animationHandler.mAnimationCallbacks.indexOf(this);
-        if (indexOf >= 0) {
-            animationHandler.mAnimationCallbacks.set(indexOf, null);
+        int iIndexOf = animationHandler.mAnimationCallbacks.indexOf(this);
+        if (iIndexOf >= 0) {
+            animationHandler.mAnimationCallbacks.set(iIndexOf, null);
             animationHandler.mListDirty = true;
         }
         this.mLastFrameTime = 0L;
@@ -313,9 +308,9 @@ public abstract class DynamicAnimation implements AnimationHandler.AnimationFram
 
     public final void removeEndListener(OnAnimationEndListener onAnimationEndListener) {
         ArrayList arrayList = this.mEndListeners;
-        int indexOf = arrayList.indexOf(onAnimationEndListener);
-        if (indexOf >= 0) {
-            arrayList.set(indexOf, null);
+        int iIndexOf = arrayList.indexOf(onAnimationEndListener);
+        if (iIndexOf >= 0) {
+            arrayList.set(iIndexOf, null);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.android.systemui.bixby2.interactor;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,9 +27,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationControlActionInteractor implements ActionInteractor {
     static final String CATEGORY_APP_NOTIFICATION_NOT_RECEIVED = "APP_NOTIFICATION_NOT_RECEIVED";
@@ -64,7 +65,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
     private boolean DEBUG = DeviceType.isEngOrUTBinary();
     private Gson mGson = new Gson();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Action {
         read_notification_withid,
         delete_notification,
@@ -77,7 +77,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         query_notification_settings
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayContent {
 
         @SerializedName("appName")
@@ -108,7 +107,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationList {
 
         @SerializedName("appName")
@@ -195,7 +193,6 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Result {
 
         @SerializedName("contentForDisplay")
@@ -281,9 +278,7 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         return Arrays.stream(Action.values()).map(new NotificationControlActionInteractor$$ExternalSyntheticLambda0()).anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.interactor.NotificationControlActionInteractor$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$matchAction$0;
-                lambda$matchAction$0 = NotificationControlActionInteractor.lambda$matchAction$0(str, (String) obj);
-                return lambda$matchAction$0;
+                return NotificationControlActionInteractor.lambda$matchAction$0(str, (String) obj);
             }
         });
     }
@@ -302,12 +297,12 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         UnformattedTemplate unformattedTemplate;
         if (matchAction(str)) {
             if (Action.read_notification_withid.toString().equals(str)) {
-                Bundle readNotificationWithID = this.mNotificationController.readNotificationWithID(null);
-                CommandActionResponse respondCompleted = respondCompleted(readNotificationWithID.getInt("result"), readNotificationWithID);
+                Bundle notificationWithID = this.mNotificationController.readNotificationWithID(null);
+                CommandActionResponse commandActionResponseRespondCompleted = respondCompleted(notificationWithID.getInt("result"), notificationWithID);
                 if (this.DEBUG) {
-                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("responseMessage: "), respondCompleted.responseMessage, "NotificationControlActionInteractor");
+                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("responseMessage: "), commandActionResponseRespondCompleted.responseMessage, "NotificationControlActionInteractor");
                 }
-                UnformattedTemplate unformattedTemplate2 = new UnformattedTemplate(respondCompleted.responseMessage);
+                UnformattedTemplate unformattedTemplate2 = new UnformattedTemplate(commandActionResponseRespondCompleted.responseMessage);
                 Command.StatefulBuilder statefulBuilder = new Command.StatefulBuilder(command.mCommandId);
                 statefulBuilder.mStatus = 1;
                 statefulBuilder.mTemplate = unformattedTemplate2;
@@ -369,7 +364,7 @@ public class NotificationControlActionInteractor implements ActionInteractor {
     }
 
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
-    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) {
+    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) throws JSONException, PackageManager.NameNotFoundException, NumberFormatException {
         if (matchAction(str)) {
             Log.d("NotificationControlActionInteractor", "commandAction.getActionType() = " + commandAction.getActionType());
             CommandActionResponse commandActionResponse = null;
@@ -389,17 +384,17 @@ public class NotificationControlActionInteractor implements ActionInteractor {
                     if (packageInfoFromJson.PackageName == null) {
                         packageInfoFromJson.PackageName = this.mNotificationController.getFocusedPackageName();
                     }
-                    int checkNotificationStatusForPackage = this.mNotificationController.checkNotificationStatusForPackage(packageInfoFromJson.PackageName);
-                    ListPopupWindow$$ExternalSyntheticOutline0.m(checkNotificationStatusForPackage, "checkNotificationStatusForPackage() result = ", "NotificationControlActionInteractor");
-                    commandActionResponse = checkNotificationStatusForPackage == 2 ? new CommandActionResponse(1, ActionResults.RESULT_NO_CATEGORY_NOTIFICATION) : (checkNotificationStatusForPackage == 4 || checkNotificationStatusForPackage == 32) ? new CommandActionResponse(1, ActionResults.RESULT_ALREADY_ON_SETTING_NOTIFICATION) : checkNotificationStatusForPackage == 8 ? new CommandActionResponse(1, ActionResults.RESULT_SET_ON_SETTING_NOTIFICATION) : checkNotificationStatusForPackage == 16 ? new CommandActionResponse(1, "SetOnSoundNotification") : new CommandActionResponse(2, ActionResults.RESULT_FAIL);
+                    int iCheckNotificationStatusForPackage = this.mNotificationController.checkNotificationStatusForPackage(packageInfoFromJson.PackageName);
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(iCheckNotificationStatusForPackage, "checkNotificationStatusForPackage() result = ", "NotificationControlActionInteractor");
+                    commandActionResponse = iCheckNotificationStatusForPackage == 2 ? new CommandActionResponse(1, ActionResults.RESULT_NO_CATEGORY_NOTIFICATION) : (iCheckNotificationStatusForPackage == 4 || iCheckNotificationStatusForPackage == 32) ? new CommandActionResponse(1, ActionResults.RESULT_ALREADY_ON_SETTING_NOTIFICATION) : iCheckNotificationStatusForPackage == 8 ? new CommandActionResponse(1, ActionResults.RESULT_SET_ON_SETTING_NOTIFICATION) : iCheckNotificationStatusForPackage == 16 ? new CommandActionResponse(1, "SetOnSoundNotification") : new CommandActionResponse(2, ActionResults.RESULT_FAIL);
                 } else if (Action.set_notification_sound.toString().equals(str)) {
                     Log.d("NotificationControlActionInteractor", "-- set_notification_sound --");
                     if (packageInfoFromJson.PackageName == null) {
                         packageInfoFromJson.PackageName = this.mNotificationController.getFocusedPackageName();
                     }
-                    int checkNotificationSoundStatus = this.mNotificationController.checkNotificationSoundStatus(packageInfoFromJson.PackageName);
-                    Log.d("NotificationControlActionInteractor", "checkNotificationSoundStatus() result = " + Integer.toHexString(checkNotificationSoundStatus));
-                    commandActionResponse = (checkNotificationSoundStatus & 8192) != 0 ? new CommandActionResponse(1, "SetOnSoundNotification") : (checkNotificationSoundStatus & 4096) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_SET_OFF_DND_NOTIFICATION) : ((32768 & checkNotificationSoundStatus) == 0 && (checkNotificationSoundStatus & 16384) == 0) ? (65536 & checkNotificationSoundStatus) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_SET_IMPORTANCE_NOTIFICATION) : (checkNotificationSoundStatus & 131072) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_ALEADY_ON_SOUND_NOTIFICATION) : new CommandActionResponse(2, ActionResults.RESULT_FAIL) : new CommandActionResponse(1, ActionResults.RESULT_SET_ON_SOUND_APP_NOTIFICATION);
+                    int iCheckNotificationSoundStatus = this.mNotificationController.checkNotificationSoundStatus(packageInfoFromJson.PackageName);
+                    Log.d("NotificationControlActionInteractor", "checkNotificationSoundStatus() result = " + Integer.toHexString(iCheckNotificationSoundStatus));
+                    commandActionResponse = (iCheckNotificationSoundStatus & 8192) != 0 ? new CommandActionResponse(1, "SetOnSoundNotification") : (iCheckNotificationSoundStatus & 4096) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_SET_OFF_DND_NOTIFICATION) : ((32768 & iCheckNotificationSoundStatus) == 0 && (iCheckNotificationSoundStatus & 16384) == 0) ? (65536 & iCheckNotificationSoundStatus) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_SET_IMPORTANCE_NOTIFICATION) : (iCheckNotificationSoundStatus & 131072) != 0 ? new CommandActionResponse(1, ActionResults.RESULT_ALEADY_ON_SOUND_NOTIFICATION) : new CommandActionResponse(2, ActionResults.RESULT_FAIL) : new CommandActionResponse(1, ActionResults.RESULT_SET_ON_SOUND_APP_NOTIFICATION);
                 } else if (Action.setoff_notification_permission.toString().equals(str)) {
                     Log.d("NotificationControlActionInteractor", "-- setoff_notification_permission --");
                     if (packageInfoFromJson.PackageName == null) {
@@ -519,12 +514,12 @@ public class NotificationControlActionInteractor implements ActionInteractor {
         if (!Action.read_notification_withid.toString().equals(str)) {
             return null;
         }
-        Bundle readNotificationWithID = this.mNotificationController.readNotificationWithID(ParamsParser.getPackageInfoFromJson(commandAction.getActionType() == 5 ? ((JSONStringAction) commandAction).mNewValue : null).PackageName);
-        CommandActionResponse respondCompleted = respondCompleted(readNotificationWithID.getInt("result"), readNotificationWithID);
+        Bundle notificationWithID = this.mNotificationController.readNotificationWithID(ParamsParser.getPackageInfoFromJson(commandAction.getActionType() == 5 ? ((JSONStringAction) commandAction).mNewValue : null).PackageName);
+        CommandActionResponse commandActionResponseRespondCompleted = respondCompleted(notificationWithID.getInt("result"), notificationWithID);
         if (this.DEBUG) {
-            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("responseMessage: "), respondCompleted.responseMessage, "NotificationControlActionInteractor");
+            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("responseMessage: "), commandActionResponseRespondCompleted.responseMessage, "NotificationControlActionInteractor");
         }
-        UnformattedTemplate unformattedTemplate = new UnformattedTemplate(respondCompleted.responseMessage);
+        UnformattedTemplate unformattedTemplate = new UnformattedTemplate(commandActionResponseRespondCompleted.responseMessage);
         Command.StatefulBuilder statefulBuilder = new Command.StatefulBuilder(command.mCommandId);
         statefulBuilder.mStatus = 1;
         statefulBuilder.mTemplate = unformattedTemplate;

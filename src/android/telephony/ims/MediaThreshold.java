@@ -124,10 +124,10 @@ public final class MediaThreshold implements Parcelable {
                 TreeSet treeSet = new TreeSet();
                 int i = 0;
                 for (int i2 : iArr) {
-                    Integer valueOf = Integer.valueOf(i2);
-                    valueOf.getClass();
+                    Integer numValueOf = Integer.valueOf(i2);
+                    numValueOf.getClass();
                     if (MediaThreshold.isValidRtpPacketLossRate(i2)) {
-                        treeSet.add(valueOf);
+                        treeSet.add(numValueOf);
                     }
                 }
                 int[] iArr2 = new int[treeSet.size()];
@@ -148,10 +148,10 @@ public final class MediaThreshold implements Parcelable {
                 TreeSet treeSet = new TreeSet();
                 int i = 0;
                 for (int i2 : iArr) {
-                    Integer valueOf = Integer.valueOf(i2);
-                    valueOf.getClass();
+                    Integer numValueOf = Integer.valueOf(i2);
+                    numValueOf.getClass();
                     if (MediaThreshold.isValidJitterMillis(i2)) {
-                        treeSet.add(valueOf);
+                        treeSet.add(numValueOf);
                     }
                 }
                 int[] iArr2 = new int[treeSet.size()];
@@ -172,10 +172,10 @@ public final class MediaThreshold implements Parcelable {
                 TreeSet treeSet = new TreeSet();
                 int i = 0;
                 for (long j : jArr) {
-                    Long valueOf = Long.valueOf(j);
-                    valueOf.getClass();
+                    Long lValueOf = Long.valueOf(j);
+                    lValueOf.getClass();
                     if (MediaThreshold.isValidRtpInactivityTimeMillis(j)) {
-                        treeSet.add(valueOf);
+                        treeSet.add(lValueOf);
                     }
                 }
                 long[] jArr2 = new long[treeSet.size()];

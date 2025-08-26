@@ -28,7 +28,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenCaptureTile extends SQSTileImpl {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -53,7 +52,7 @@ public class ScreenCaptureTile extends SQSTileImpl {
                         intent2.putExtra("capturedOrigin", 3);
                         new Thread(str) { // from class: com.android.systemui.qs.tiles.ScreenCaptureTile.2
                             @Override // java.lang.Thread, java.lang.Runnable
-                            public final void run() {
+                            public final void run() throws InterruptedException {
                                 try {
                                     DisplayMetrics displayMetrics = ScreenCaptureTile.this.mContext.getResources().getDisplayMetrics();
                                     Thread.sleep(((float) displayMetrics.widthPixels) / displayMetrics.density > 457.0f ? 370 : 100);
@@ -76,7 +75,7 @@ public class ScreenCaptureTile extends SQSTileImpl {
                     intent3.putExtra("capturedOrigin", 3);
                     new Thread(str) { // from class: com.android.systemui.qs.tiles.ScreenCaptureTile.2
                         @Override // java.lang.Thread, java.lang.Runnable
-                        public final void run() {
+                        public final void run() throws InterruptedException {
                             try {
                                 DisplayMetrics displayMetrics = ScreenCaptureTile.this.mContext.getResources().getDisplayMetrics();
                                 Thread.sleep(((float) displayMetrics.widthPixels) / displayMetrics.density > 457.0f ? 370 : 100);

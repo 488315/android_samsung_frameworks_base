@@ -1,7 +1,21 @@
 package com.android.systemui.volume.domain.interactor;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.graphics.drawable.Drawable;
+import android.media.AudioDeviceInfo;
+import android.provider.DeviceConfig;
+import android.util.Log;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.media.BluetoothMediaDevice;
+import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.media.PhoneMediaDevice;
 import com.android.settingslib.volume.data.repository.AudioRepository;
 import com.android.settingslib.volume.data.repository.AudioRepositoryImpl;
+import com.android.systemui.R;
+import com.android.systemui.volume.domain.model.AudioOutputDevice;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -14,7 +28,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioOutputInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ AudioRepository $audioRepository$inlined;
@@ -51,7 +64,6 @@ public final class AudioOutputInteractor$special$$inlined$flatMapLatest$1 extend
                 final AudioOutputInteractor audioOutputInteractor = this.this$0;
                 flow = new Flow() { // from class: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -80,26 +92,81 @@ public final class AudioOutputInteractor$special$$inlined$flatMapLatest$1 extend
                             this.this$0 = audioOutputInteractor;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:32:0x00a3  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r9, kotlin.coroutines.Continuation r10) {
-                            /*
-                                Method dump skipped, instructions count: 248
-                                To view this dump change 'Code comments level' option to 'DEBUG'
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            Object wired;
+                            LocalBluetoothManager localBluetoothManager;
+                            BluetoothAdapter bluetoothAdapter;
+                            Drawable drawable;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                AudioDeviceInfo audioDeviceInfo = (AudioDeviceInfo) obj;
+                                if (audioDeviceInfo != null) {
+                                    AudioOutputInteractor audioOutputInteractor = this.this$0;
+                                    audioOutputInteractor.getClass();
+                                    boolean zCheckBluetoothAddress = BluetoothAdapter.checkBluetoothAddress(audioDeviceInfo.getAddress());
+                                    DeviceIconInteractor deviceIconInteractor = audioOutputInteractor.deviceIconInteractor;
+                                    if (!zCheckBluetoothAddress || (localBluetoothManager = audioOutputInteractor.localBluetoothManager) == null || (bluetoothAdapter = audioOutputInteractor.bluetoothAdapter) == null) {
+                                        wired = audioDeviceInfo.getAddress().length() > 0 ? new AudioOutputDevice.Wired(audioDeviceInfo.getProductName().toString(), deviceIconInteractor.context.getDrawable(deviceIconInteractor.iconUtil.getIconResIdFromAudioDeviceType(audioDeviceInfo.getType()))) : new AudioOutputDevice.BuiltIn(PhoneMediaDevice.getMediaTransferThisDeviceName(audioOutputInteractor.context), deviceIconInteractor.context.getDrawable(deviceIconInteractor.iconUtil.getIconResIdFromAudioDeviceType(audioDeviceInfo.getType())));
+                                    } else {
+                                        CachedBluetoothDevice cachedBluetoothDeviceFindDevice = localBluetoothManager.mCachedDeviceManager.findDevice(bluetoothAdapter.getRemoteDevice(audioDeviceInfo.getAddress()));
+                                        if (cachedBluetoothDeviceFindDevice != null) {
+                                            String name = cachedBluetoothDeviceFindDevice.getName();
+                                            deviceIconInteractor.getClass();
+                                            BluetoothDevice bluetoothDevice = cachedBluetoothDeviceFindDevice.mDevice;
+                                            boolean z = BluetoothUtils.DEBUG;
+                                            if (DeviceConfig.getBoolean("settings_ui", "bt_advanced_header_enabled", true)) {
+                                                if (BluetoothUtils.getBooleanMetaData(bluetoothDevice)) {
+                                                    Log.d("BluetoothUtils", "isAdvancedDetailsHeader: untetheredHeadset is true");
+                                                    drawable = deviceIconInteractor.context.getDrawable(R.drawable.ic_earbuds_advanced);
+                                                }
+                                                wired = new AudioOutputDevice.Bluetooth(name, drawable, cachedBluetoothDeviceFindDevice);
+                                            } else {
+                                                Log.d("BluetoothUtils", "isAdvancedDetailsHeader: advancedEnabled is false");
+                                            }
+                                            drawable = (Drawable) BluetoothUtils.getBtClassDrawableWithDescription(deviceIconInteractor.context, cachedBluetoothDeviceFindDevice).first;
+                                            wired = new AudioOutputDevice.Bluetooth(name, drawable, cachedBluetoothDeviceFindDevice);
+                                        }
+                                    }
+                                } else {
+                                    wired = null;
+                                }
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(wired, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector2, audioOutputInteractor), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = communicationDevice.collect(new AnonymousClass2(flowCollector2, audioOutputInteractor), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };
             } else {
@@ -107,7 +174,6 @@ public final class AudioOutputInteractor$special$$inlined$flatMapLatest$1 extend
                 final Flow flow2 = audioOutputInteractor2.mediaOutputInteractor.currentConnectedDevice;
                 flow = new Flow() { // from class: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -136,109 +202,58 @@ public final class AudioOutputInteractor$special$$inlined$flatMapLatest$1 extend
                             this.this$0 = audioOutputInteractor;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                            /*
-                                r5 = this;
-                                boolean r0 = r7 instanceof com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                                if (r0 == 0) goto L13
-                                r0 = r7
-                                com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2$2$1 r0 = (com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                                int r1 = r0.label
-                                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r3 = r1 & r2
-                                if (r3 == 0) goto L13
-                                int r1 = r1 - r2
-                                r0.label = r1
-                                goto L18
-                            L13:
-                                com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2$2$1 r0 = new com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2$2$1
-                                r0.<init>(r7)
-                            L18:
-                                java.lang.Object r7 = r0.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r0.label
-                                r3 = 1
-                                if (r2 == 0) goto L30
-                                if (r2 != r3) goto L28
-                                kotlin.ResultKt.throwOnFailure(r7)
-                                goto La0
-                            L28:
-                                java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                                java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                                r5.<init>(r6)
-                                throw r5
-                            L30:
-                                kotlin.ResultKt.throwOnFailure(r7)
-                                com.android.settingslib.media.MediaDevice r6 = (com.android.settingslib.media.MediaDevice) r6
-                                if (r6 == 0) goto L94
-                                com.android.systemui.volume.domain.interactor.AudioOutputInteractor r7 = r5.this$0
-                                r7.getClass()
-                                boolean r7 = r6 instanceof com.android.settingslib.media.BluetoothMediaDevice
-                                if (r7 == 0) goto L54
-                                com.android.systemui.volume.domain.model.AudioOutputDevice$Bluetooth r7 = new com.android.systemui.volume.domain.model.AudioOutputDevice$Bluetooth
-                                com.android.settingslib.media.BluetoothMediaDevice r6 = (com.android.settingslib.media.BluetoothMediaDevice) r6
-                                com.android.settingslib.bluetooth.CachedBluetoothDevice r2 = r6.mCachedDevice
-                                java.lang.String r2 = r2.getName()
-                                android.graphics.drawable.Drawable r4 = r6.getIcon()
-                                com.android.settingslib.bluetooth.CachedBluetoothDevice r6 = r6.mCachedDevice
-                                r7.<init>(r2, r4, r6)
-                                goto L95
-                            L54:
-                                int r7 = r6.getDeviceType()
-                                r2 = 3
-                                if (r7 == r2) goto L86
-                                int r7 = r6.getDeviceType()
-                                r2 = 2
-                                if (r7 != r2) goto L63
-                                goto L86
-                            L63:
-                                int r7 = r6.getDeviceType()
-                                r2 = 6
-                                if (r7 != r2) goto L78
-                                com.android.systemui.volume.domain.model.AudioOutputDevice$Remote r7 = new com.android.systemui.volume.domain.model.AudioOutputDevice$Remote
-                                java.lang.String r2 = r6.getName()
-                                android.graphics.drawable.Drawable r6 = r6.getIcon()
-                                r7.<init>(r2, r6)
-                                goto L95
-                            L78:
-                                com.android.systemui.volume.domain.model.AudioOutputDevice$BuiltIn r7 = new com.android.systemui.volume.domain.model.AudioOutputDevice$BuiltIn
-                                java.lang.String r2 = r6.getName()
-                                android.graphics.drawable.Drawable r6 = r6.getIcon()
-                                r7.<init>(r2, r6)
-                                goto L95
-                            L86:
-                                com.android.systemui.volume.domain.model.AudioOutputDevice$Wired r7 = new com.android.systemui.volume.domain.model.AudioOutputDevice$Wired
-                                java.lang.String r2 = r6.getName()
-                                android.graphics.drawable.Drawable r6 = r6.getIcon()
-                                r7.<init>(r2, r6)
-                                goto L95
-                            L94:
-                                r7 = 0
-                            L95:
-                                r0.label = r3
-                                kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                                java.lang.Object r5 = r5.emit(r7, r0)
-                                if (r5 != r1) goto La0
-                                return r1
-                            La0:
-                                kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                                return r5
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.domain.interactor.AudioOutputInteractor$currentAudioDevice$lambda$2$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            Object wired;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                MediaDevice mediaDevice = (MediaDevice) obj;
+                                if (mediaDevice != null) {
+                                    this.this$0.getClass();
+                                    if (mediaDevice instanceof BluetoothMediaDevice) {
+                                        BluetoothMediaDevice bluetoothMediaDevice = (BluetoothMediaDevice) mediaDevice;
+                                        wired = new AudioOutputDevice.Bluetooth(bluetoothMediaDevice.mCachedDevice.getName(), bluetoothMediaDevice.getIcon(), bluetoothMediaDevice.mCachedDevice);
+                                    } else {
+                                        wired = (mediaDevice.getDeviceType() == 3 || mediaDevice.getDeviceType() == 2) ? new AudioOutputDevice.Wired(mediaDevice.getName(), mediaDevice.getIcon()) : mediaDevice.getDeviceType() == 6 ? new AudioOutputDevice.Remote(mediaDevice.getName(), mediaDevice.getIcon()) : new AudioOutputDevice.BuiltIn(mediaDevice.getName(), mediaDevice.getIcon());
+                                    }
+                                } else {
+                                    wired = null;
+                                }
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(wired, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector2, audioOutputInteractor2), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = flow2.collect(new AnonymousClass2(flowCollector2, audioOutputInteractor2), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };
             }

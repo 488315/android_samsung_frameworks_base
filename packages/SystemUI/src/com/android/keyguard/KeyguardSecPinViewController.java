@@ -39,7 +39,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.samsung.android.graphics.spr.animation.interpolator.SineInOut90;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecPinViewController extends KeyguardPinViewController {
     public final LinearLayout mBottomView;
@@ -60,8 +59,8 @@ public class KeyguardSecPinViewController extends KeyguardPinViewController {
         this.mHandler = new Handler(Looper.getMainLooper());
         this.mVerifyNDigitsPINRunnable = new Runnable() { // from class: com.android.keyguard.KeyguardSecPinViewController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                KeyguardSecPinViewController.this.verifyPasswordAndUnlock();
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.verifyPasswordAndUnlock();
             }
         };
         this.mClickCallback = new KeyguardSecPinViewController$$ExternalSyntheticLambda1(this);
@@ -257,10 +256,10 @@ public class KeyguardSecPinViewController extends KeyguardPinViewController {
         springAnimation2.mValue = 0.7f;
         springAnimation2.mStartValueIsSet = true;
         springAnimation2.start();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mBottomView, (Property<LinearLayout, Float>) View.ALPHA, 0.0f, 1.0f);
-        ofFloat.setInterpolator(this.mInterpolator);
-        ofFloat.setDuration(300L);
-        ofFloat.start();
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mBottomView, (Property<LinearLayout, Float>) View.ALPHA, 0.0f, 1.0f);
+        objectAnimatorOfFloat.setInterpolator(this.mInterpolator);
+        objectAnimatorOfFloat.setDuration(300L);
+        objectAnimatorOfFloat.start();
     }
 
     @Override // com.android.keyguard.KeyguardPinViewController, com.android.keyguard.KeyguardInputViewController

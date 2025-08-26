@@ -44,9 +44,9 @@ public interface IResourceManagerObserverClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IResourceManagerObserverClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResourceManagerObserverClient)) {
-                return (IResourceManagerObserverClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IResourceManagerObserverClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResourceManagerObserverClient)) {
+                return (IResourceManagerObserverClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface IResourceManagerObserverClient extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 MediaResourceNotifyInfoParcel mediaResourceNotifyInfoParcel = (MediaResourceNotifyInfoParcel) parcel.readTypedObject(MediaResourceNotifyInfoParcel.CREATOR);
                 parcel.enforceNoDataAvail();
-                notify(readInt, readInt2, readInt3, mediaResourceNotifyInfoParcel);
+                notify(i3, i4, i5, mediaResourceNotifyInfoParcel);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,16 +102,16 @@ public interface IResourceManagerObserverClient extends IInterface {
 
             @Override // com.samsung.android.media.IResourceManagerObserverClient
             public void notify(int i, int i2, int i3, MediaResourceNotifyInfoParcel mediaResourceNotifyInfoParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerObserverClient.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(mediaResourceNotifyInfoParcel, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IResourceManagerObserverClient.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(mediaResourceNotifyInfoParcel, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

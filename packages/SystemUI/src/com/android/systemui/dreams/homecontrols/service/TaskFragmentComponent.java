@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TaskFragmentComponent {
     public final Activity activity;
@@ -26,12 +25,10 @@ public final class TaskFragmentComponent {
     public final Function1 onInfoChangedCallback;
     public final Organizer organizer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         TaskFragmentComponent create(Activity activity, Function1 function1, Function1 function12, Function0 function0);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Organizer extends TaskFragmentOrganizer {
         public final WeakReference component;
 
@@ -52,10 +49,10 @@ public final class TaskFragmentComponent {
                         switch (type) {
                             case 1:
                                 windowContainerTransaction.addTaskFragmentOperation(taskFragmentComponent.fragmentToken, new TaskFragmentOperation.Builder(1002).build());
-                                taskFragmentComponent.onCreateCallback.mo779invoke(taskFragmentInfo);
+                                taskFragmentComponent.onCreateCallback.mo781invoke(taskFragmentInfo);
                                 break;
                             case 2:
-                                taskFragmentComponent.onInfoChangedCallback.mo779invoke(taskFragmentInfo);
+                                taskFragmentComponent.onInfoChangedCallback.mo781invoke(taskFragmentInfo);
                                 break;
                             case 3:
                                 function0.invoke();

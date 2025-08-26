@@ -62,9 +62,9 @@ public interface IRcsUceControllerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRcsUceControllerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRcsUceControllerCallback)) {
-                return (IRcsUceControllerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRcsUceControllerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRcsUceControllerCallback)) {
+                return (IRcsUceControllerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,19 +97,19 @@ public interface IRcsUceControllerCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(RcsContactUceCapability.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(RcsContactUceCapability.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCapabilitiesReceived(createTypedArrayList);
+                onCapabilitiesReceived(arrayListCreateTypedArrayList);
             } else if (i == 2) {
                 SipDetails sipDetails = (SipDetails) parcel.readTypedObject(SipDetails.CREATOR);
                 parcel.enforceNoDataAvail();
                 onComplete(sipDetails);
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                long readLong = parcel.readLong();
+                int i3 = parcel.readInt();
+                long j = parcel.readLong();
                 SipDetails sipDetails2 = (SipDetails) parcel.readTypedObject(SipDetails.CREATOR);
                 parcel.enforceNoDataAvail();
-                onError(readInt, readLong, sipDetails2);
+                onError(i3, j, sipDetails2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -134,39 +134,39 @@ public interface IRcsUceControllerCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
             public void onCapabilitiesReceived(List<RcsContactUceCapability> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
             public void onComplete(SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
             public void onError(int i, long j, SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

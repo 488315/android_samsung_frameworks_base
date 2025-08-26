@@ -20,38 +20,38 @@ public class BcDefaultDigestProvider implements BcDigestProvider {
     public static final BcDigestProvider INSTANCE = new BcDefaultDigestProvider();
 
     private static Map createTable() {
-        HashMap hashMap = new HashMap();
-        hashMap.put(OIWObjectIdentifiers.idSHA1, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.1
+        HashMap map = new HashMap();
+        map.put(OIWObjectIdentifiers.idSHA1, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.1
             @Override // com.android.internal.org.bouncycastle.operator.bc.BcDigestProvider
             public ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) {
                 return new SHA1Digest();
             }
         });
-        hashMap.put(NISTObjectIdentifiers.id_sha224, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.2
+        map.put(NISTObjectIdentifiers.id_sha224, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.2
             @Override // com.android.internal.org.bouncycastle.operator.bc.BcDigestProvider
             public ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) {
                 return new SHA224Digest();
             }
         });
-        hashMap.put(NISTObjectIdentifiers.id_sha256, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.3
+        map.put(NISTObjectIdentifiers.id_sha256, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.3
             @Override // com.android.internal.org.bouncycastle.operator.bc.BcDigestProvider
             public ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) {
                 return new SHA256Digest();
             }
         });
-        hashMap.put(NISTObjectIdentifiers.id_sha384, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.4
+        map.put(NISTObjectIdentifiers.id_sha384, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.4
             @Override // com.android.internal.org.bouncycastle.operator.bc.BcDigestProvider
             public ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) {
                 return new SHA384Digest();
             }
         });
-        hashMap.put(NISTObjectIdentifiers.id_sha512, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.5
+        map.put(NISTObjectIdentifiers.id_sha512, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.5
             @Override // com.android.internal.org.bouncycastle.operator.bc.BcDigestProvider
             public ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) {
                 return new SHA512Digest();
             }
         });
-        return Collections.unmodifiableMap(hashMap);
+        return Collections.unmodifiableMap(map);
     }
 
     private BcDefaultDigestProvider() {

@@ -5,11 +5,9 @@ import com.google.android.setupcompat.template.Mixin;
 import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupdesign.GlifLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IllustrationProgressMixin implements Mixin {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ProgressConfig {
         /* JADX INFO: Fake field, exist only in values array */
         CONFIG_DEFAULT(PartnerConfig.CONFIG_PROGRESS_ILLUSTRATION_DEFAULT),

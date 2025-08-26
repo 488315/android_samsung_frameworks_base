@@ -14,7 +14,6 @@ import com.google.android.material.search.SearchBar;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior {
     public int overlayTop;
@@ -40,16 +39,16 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior {
 
     @Override // com.google.android.material.appbar.ViewOffsetBehavior
     public final void layoutChild(CoordinatorLayout coordinatorLayout, View view, int i) {
-        AppBarLayout findFirstDependency$1 = findFirstDependency$1(coordinatorLayout.getDependencies(view));
-        int i2 = 0;
-        if (findFirstDependency$1 == null) {
+        AppBarLayout appBarLayoutFindFirstDependency$1 = findFirstDependency$1(coordinatorLayout.getDependencies(view));
+        int iClamp = 0;
+        if (appBarLayoutFindFirstDependency$1 == null) {
             coordinatorLayout.onLayoutChild(view, i);
             this.verticalLayoutGap = 0;
             return;
         }
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) view.getLayoutParams();
         Rect rect = this.tempRect1;
-        rect.set(coordinatorLayout.getPaddingLeft() + ((ViewGroup.MarginLayoutParams) layoutParams).leftMargin, findFirstDependency$1.getBottom() + ((ViewGroup.MarginLayoutParams) layoutParams).topMargin, (coordinatorLayout.getWidth() - coordinatorLayout.getPaddingRight()) - ((ViewGroup.MarginLayoutParams) layoutParams).rightMargin, ((findFirstDependency$1.getBottom() + coordinatorLayout.getHeight()) - coordinatorLayout.getPaddingBottom()) - ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin);
+        rect.set(coordinatorLayout.getPaddingLeft() + ((ViewGroup.MarginLayoutParams) layoutParams).leftMargin, appBarLayoutFindFirstDependency$1.getBottom() + ((ViewGroup.MarginLayoutParams) layoutParams).topMargin, (coordinatorLayout.getWidth() - coordinatorLayout.getPaddingRight()) - ((ViewGroup.MarginLayoutParams) layoutParams).rightMargin, ((appBarLayoutFindFirstDependency$1.getBottom() + coordinatorLayout.getHeight()) - coordinatorLayout.getPaddingBottom()) - ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin);
         WindowInsetsCompat windowInsetsCompat = coordinatorLayout.mLastInsets;
         if (windowInsetsCompat != null) {
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
@@ -59,39 +58,39 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior {
             }
         }
         Rect rect2 = this.tempRect2;
-        int i3 = layoutParams.gravity;
-        if (i3 == 0) {
-            i3 = 8388659;
+        int i2 = layoutParams.gravity;
+        if (i2 == 0) {
+            i2 = 8388659;
         }
-        Gravity.apply(i3, view.getMeasuredWidth(), view.getMeasuredHeight(), rect, rect2, i);
+        Gravity.apply(i2, view.getMeasuredWidth(), view.getMeasuredHeight(), rect, rect2, i);
         if (this.overlayTop != 0) {
-            float overlapRatioForOffset = getOverlapRatioForOffset(findFirstDependency$1);
-            int i4 = this.overlayTop;
-            i2 = MathUtils.clamp((int) (overlapRatioForOffset * i4), 0, i4);
+            float overlapRatioForOffset = getOverlapRatioForOffset(appBarLayoutFindFirstDependency$1);
+            int i3 = this.overlayTop;
+            iClamp = MathUtils.clamp((int) (overlapRatioForOffset * i3), 0, i3);
         }
-        view.layout(rect2.left, rect2.top - i2, rect2.right, rect2.bottom - i2);
-        this.verticalLayoutGap = rect2.top - findFirstDependency$1.getBottom();
+        view.layout(rect2.left, rect2.top - iClamp, rect2.right, rect2.bottom - iClamp);
+        this.verticalLayoutGap = rect2.top - appBarLayoutFindFirstDependency$1.getBottom();
     }
 
     @Override // androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
     public final boolean onMeasureChild(CoordinatorLayout coordinatorLayout, View view, int i, int i2, int i3) {
-        AppBarLayout findFirstDependency$1;
+        AppBarLayout appBarLayoutFindFirstDependency$1;
         WindowInsetsCompat windowInsetsCompat;
         int i4 = view.getLayoutParams().height;
-        if ((i4 != -1 && i4 != -2) || (findFirstDependency$1 = findFirstDependency$1(coordinatorLayout.getDependencies(view))) == null) {
+        if ((i4 != -1 && i4 != -2) || (appBarLayoutFindFirstDependency$1 = findFirstDependency$1(coordinatorLayout.getDependencies(view))) == null) {
             return false;
         }
         int size = View.MeasureSpec.getSize(i3);
         if (size > 0) {
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            if (findFirstDependency$1.getFitsSystemWindows() && (windowInsetsCompat = coordinatorLayout.mLastInsets) != null) {
+            if (appBarLayoutFindFirstDependency$1.getFitsSystemWindows() && (windowInsetsCompat = coordinatorLayout.mLastInsets) != null) {
                 size += windowInsetsCompat.getSystemWindowInsetBottom() + windowInsetsCompat.getSystemWindowInsetTop();
             }
         } else {
             size = coordinatorLayout.getHeight();
         }
-        int scrollRange = getScrollRange(findFirstDependency$1) + size;
-        int measuredHeight = findFirstDependency$1.getMeasuredHeight();
+        int scrollRange = getScrollRange(appBarLayoutFindFirstDependency$1) + size;
+        int measuredHeight = appBarLayoutFindFirstDependency$1.getMeasuredHeight();
         if (this instanceof SearchBar.ScrollingViewBehavior) {
             view.setTranslationY(-measuredHeight);
         } else {

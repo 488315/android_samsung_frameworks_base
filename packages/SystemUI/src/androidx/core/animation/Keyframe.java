@@ -1,6 +1,5 @@
 package androidx.core.animation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Keyframe implements Cloneable {
     public float mFraction;
@@ -9,13 +8,12 @@ public abstract class Keyframe implements Cloneable {
 
     @Override // 
     /* renamed from: clone */
-    public abstract Keyframe mo893clone();
+    public abstract Keyframe mo895clone();
 
     public abstract Object getValue();
 
     public abstract void setValue(Object obj);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FloatKeyframe extends Keyframe {
         public float mValue;
 
@@ -42,7 +40,7 @@ public abstract class Keyframe implements Cloneable {
 
         @Override // androidx.core.animation.Keyframe
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public final FloatKeyframe mo893clone() {
+        public final FloatKeyframe mo895clone() {
             FloatKeyframe floatKeyframe;
             if (this.mHasValue) {
                 floatKeyframe = new FloatKeyframe(this.mFraction, this.mValue);
@@ -58,7 +56,6 @@ public abstract class Keyframe implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntKeyframe extends Keyframe {
         public int mValue;
 
@@ -85,7 +82,7 @@ public abstract class Keyframe implements Cloneable {
 
         @Override // androidx.core.animation.Keyframe
         /* renamed from: clone */
-        public final IntKeyframe mo893clone() {
+        public final IntKeyframe mo895clone() {
             IntKeyframe intKeyframe;
             if (this.mHasValue) {
                 intKeyframe = new IntKeyframe(this.mFraction, this.mValue);

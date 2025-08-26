@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalSmartspaceController {
     public final Execution execution;
@@ -33,7 +32,6 @@ public final class CommunalSmartspaceController {
     public SmartspaceManager userSmartspaceManager;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,14 +76,14 @@ public final class CommunalSmartspaceController {
         };
         this.sessionListener = new SmartspaceSession.OnTargetsAvailableListener() { // from class: com.android.systemui.communal.smartspace.CommunalSmartspaceController$sessionListener$1
             public final void onTargetsAvailable(List list) {
-                CommunalSmartspaceController.this.execution.assertIsMainThread();
-                CommunalSmartspaceController communalSmartspaceController2 = CommunalSmartspaceController.this;
+                this.this$0.execution.assertIsMainThread();
+                CommunalSmartspaceController communalSmartspaceController2 = this.this$0;
                 ArrayList arrayList = new ArrayList();
                 for (Object obj : list) {
                     communalSmartspaceController2.getClass();
                     arrayList.add(obj);
                 }
-                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = CommunalSmartspaceController.this.plugin;
+                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.this$0.plugin;
                 if (bcSmartspaceDataPlugin != null) {
                     bcSmartspaceDataPlugin.onTargetsAvailable(arrayList);
                 }
@@ -107,13 +105,13 @@ public final class CommunalSmartspaceController {
         lockscreenPrecondition.execution.assertIsMainThread();
         if (lockscreenPrecondition.deviceReady) {
             SmartspaceManager smartspaceManager2 = this.userSmartspaceManager;
-            SmartspaceSession createSmartspaceSession = smartspaceManager2 != null ? smartspaceManager2.createSmartspaceSession(new SmartspaceConfig.Builder(((UserTrackerImpl) userTracker).getUserContext(), BcSmartspaceDataPlugin.UI_SURFACE_GLANCEABLE_HUB).build()) : null;
+            SmartspaceSession smartspaceSessionCreateSmartspaceSession = smartspaceManager2 != null ? smartspaceManager2.createSmartspaceSession(new SmartspaceConfig.Builder(((UserTrackerImpl) userTracker).getUserContext(), BcSmartspaceDataPlugin.UI_SURFACE_GLANCEABLE_HUB).build()) : null;
             Log.d("CommunalSmartspaceCtrlr", "Starting smartspace session for communal");
-            if (createSmartspaceSession != null) {
-                createSmartspaceSession.addOnTargetsAvailableListener(this.uiExecutor, this.sessionListener);
+            if (smartspaceSessionCreateSmartspaceSession != null) {
+                smartspaceSessionCreateSmartspaceSession.addOnTargetsAvailableListener(this.uiExecutor, this.sessionListener);
             }
-            this.session = createSmartspaceSession;
-            bcSmartspaceDataPlugin.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.communal.smartspace.CommunalSmartspaceController$connectSession$1
+            this.session = smartspaceSessionCreateSmartspaceSession;
+            bcSmartspaceDataPlugin.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.communal.smartspace.CommunalSmartspaceController.connectSession.1
                 @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier
                 public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
                     SmartspaceSession smartspaceSession = CommunalSmartspaceController.this.session;

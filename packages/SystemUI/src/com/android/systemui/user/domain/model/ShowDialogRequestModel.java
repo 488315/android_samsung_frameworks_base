@@ -10,17 +10,16 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ShowDialogRequestModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowAddUserDialog extends ShowDialogRequestModel {
         public final UserSwitchDialogController$DialogShower dialogShower;
         public final boolean isKeyguardShowing;
         public final boolean showEphemeralMessage;
         public final UserHandle userHandle;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowAddUserDialog(UserHandle userHandle, boolean z, boolean z2, UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower) {
             super(userSwitchDialogController$DialogShower, null, 2, 0 == true ? 1 : 0);
             this.userHandle = userHandle;
@@ -41,9 +40,9 @@ public abstract class ShowDialogRequestModel {
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.userHandle.hashCode() * 31, 31, this.isKeyguardShowing), 31, this.showEphemeralMessage);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.userHandle.hashCode() * 31, 31, this.isKeyguardShowing), 31, this.showEphemeralMessage);
             UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower = this.dialogShower;
-            return m + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
+            return iM + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
         }
 
         public final String toString() {
@@ -51,7 +50,6 @@ public abstract class ShowDialogRequestModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowExitGuestDialog extends ShowDialogRequestModel {
         public final UserSwitchDialogController$DialogShower dialogShower;
         public final int guestUserId;
@@ -60,6 +58,7 @@ public abstract class ShowDialogRequestModel {
         public final Function3 onExitGuestUser;
         public final int targetUserId;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowExitGuestDialog(int i, int i2, boolean z, boolean z2, Function3 function3, UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower) {
             super(userSwitchDialogController$DialogShower, null, 2, 0 == true ? 1 : 0);
             this.guestUserId = i;
@@ -82,9 +81,9 @@ public abstract class ShowDialogRequestModel {
         }
 
         public final int hashCode() {
-            int hashCode = (this.onExitGuestUser.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.targetUserId, Integer.hashCode(this.guestUserId) * 31, 31), 31, this.isGuestEphemeral), 31, this.isKeyguardShowing)) * 31;
+            int iHashCode = (this.onExitGuestUser.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.targetUserId, Integer.hashCode(this.guestUserId) * 31, 31), 31, this.isGuestEphemeral), 31, this.isKeyguardShowing)) * 31;
             UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower = this.dialogShower;
-            return hashCode + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
+            return iHashCode + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
         }
 
         public final String toString() {
@@ -92,10 +91,10 @@ public abstract class ShowDialogRequestModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowUserCreationDialog extends ShowDialogRequestModel {
         public final boolean isGuest;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowUserCreationDialog(boolean z) {
             super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
             this.isGuest = z;
@@ -117,10 +116,10 @@ public abstract class ShowDialogRequestModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowUserSwitcherDialog extends ShowDialogRequestModel {
         public final Expandable expandable;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowUserSwitcherDialog(Expandable expandable) {
             super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
             this.expandable = expandable;
@@ -146,10 +145,10 @@ public abstract class ShowDialogRequestModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowUserSwitcherFullscreenDialog extends ShowDialogRequestModel {
         public final Expandable expandable;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowUserSwitcherFullscreenDialog(Expandable expandable) {
             super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
             this.expandable = expandable;

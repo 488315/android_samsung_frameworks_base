@@ -80,7 +80,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecPowerNotificationWarnings implements SecWarningsUI {
     public final AudioManager mAudioManager;
@@ -144,14 +143,13 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
     public WindowManager mWindowManager;
     public AlertDialog mWirelessFodAlertDialog;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Receiver extends BroadcastReceiver {
         public /* synthetic */ Receiver(SecPowerNotificationWarnings secPowerNotificationWarnings, int i) {
             this();
         }
 
         @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
+        public final void onReceive(Context context, Intent intent) throws NumberFormatException {
             String action = intent.getAction();
             Log.d("PowerUI.Notification", "Received " + action);
             if ("PNW.batteryInfo".equals(action)) {
@@ -186,9 +184,9 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
                 SharedPreferences sharedPreferences = secPowerNotificationWarnings5.mContext.getSharedPreferences("com.android.systemui.abnormal_pad", 0);
                 if (sharedPreferences != null) {
                     Log.i("PowerUI.Notification", "User clicked Do_not_show_again, so we set preference.");
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.putBoolean("DoNotShowAbnormalPadNoti", true);
-                    edit.commit();
+                    SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                    editorEdit.putBoolean("DoNotShowAbnormalPadNoti", true);
+                    editorEdit.commit();
                     return;
                 }
                 return;
@@ -338,9 +336,9 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
             public final void run() {
                 SharedPreferences sharedPreferences = SecPowerNotificationWarnings.this.mContext.getSharedPreferences("com.android.systemui.power_overheat_shutdown_happened", 0);
                 if (sharedPreferences != null) {
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.putBoolean("OverheatShutdownHappened", true);
-                    edit.commit();
+                    SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                    editorEdit.putBoolean("OverheatShutdownHappened", true);
+                    editorEdit.commit();
                 }
                 Log.d("PowerUI.Notification", "overheat shutdown - productType = in_house");
                 SecPowerNotificationWarnings.this.mContext.sendBroadcast(new Intent("com.android.systemui.power.action.ACTION_REQUEST_SHUTDOWN"));
@@ -379,10 +377,10 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         contentResolver.registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_LOW_POWER_MODE), false, new ContentObserver(handler) { // from class: com.android.systemui.power.SecPowerNotificationWarnings.1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                int globalGetInt = SettingsUtils.globalGetInt(SecPowerNotificationWarnings.this.mContext, SettingsHelper.INDEX_LOW_POWER_MODE, 0);
+                int iGlobalGetInt = SettingsUtils.globalGetInt(SecPowerNotificationWarnings.this.mContext, SettingsHelper.INDEX_LOW_POWER_MODE, 0);
                 SecPowerNotificationWarnings secPowerNotificationWarnings2 = SecPowerNotificationWarnings.this;
                 int i = secPowerNotificationWarnings2.mCurrentBatteryMode;
-                if (globalGetInt != 0) {
+                if (iGlobalGetInt != 0) {
                     secPowerNotificationWarnings2.mCurrentBatteryMode = 1;
                 } else {
                     secPowerNotificationWarnings2.mCurrentBatteryMode = 0;
@@ -532,21 +530,21 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         powerUiSoundBuilder.build().playSoundAndVibration();
     }
 
-    public final void restoreScreenTimeOutIfNeeded() {
+    public final void restoreScreenTimeOutIfNeeded() throws NumberFormatException {
         PowerManager powerManager;
         SharedPreferences sharedPreferences = this.mContext.getSharedPreferences("powerui_prefs", 0);
         if (sharedPreferences != null) {
             String string = sharedPreferences.getString("ScreenTimeOut", ":");
             try {
-                String[] split = string.split(":");
-                if (split.length >= 2) {
-                    int parseInt = Integer.parseInt(split[0]);
+                String[] strArrSplit = string.split(":");
+                if (strArrSplit.length >= 2) {
+                    int i = Integer.parseInt(strArrSplit[0]);
                     boolean z = true;
-                    int parseInt2 = Integer.parseInt(split[1]);
-                    Log.d("PowerUI.Notification", "restoreScreenTimeOut : saved value = " + string + ", screenTimeOut = " + parseInt + " userId = " + parseInt2);
-                    if (parseInt > 30000) {
-                        Log.i("PowerUI.Notification", "restoreScreenTimeOut - restore user value to : " + parseInt);
-                        Settings.System.putIntForUser(this.mContext.getContentResolver(), "screen_off_timeout", parseInt, parseInt2);
+                    int i2 = Integer.parseInt(strArrSplit[1]);
+                    Log.d("PowerUI.Notification", "restoreScreenTimeOut : saved value = " + string + ", screenTimeOut = " + i + " userId = " + i2);
+                    if (i > 30000) {
+                        Log.i("PowerUI.Notification", "restoreScreenTimeOut - restore user value to : " + i);
+                        Settings.System.putIntForUser(this.mContext.getContentResolver(), "screen_off_timeout", i, i2);
                         if (SettingsUtils.globalGetInt(this.mContext, "auto_dim_screen", 1) != 0) {
                             z = false;
                         }
@@ -564,20 +562,14 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
     }
 
     public final void showAdaptiveProtectionNotification(String str) {
-        String str2;
-        Date parse;
+        Date date;
         Context context = this.mContext;
         try {
-            parse = new SimpleDateFormat("HH:mm", Locale.getDefault()).parse(str);
+            date = new SimpleDateFormat("HH:mm", Locale.getDefault()).parse(str);
         } catch (ParseException e) {
             Log.w("PowerUI.DateTimeUtils", "ParseException", e);
         }
-        if (parse != null) {
-            str2 = DateFormat.getTimeFormat(context).format(Long.valueOf(parse.getTime()));
-            this.mOptimizationChargingFinishTime = str2;
-            showNotification(10);
-        }
-        str2 = "";
+        String str2 = date != null ? DateFormat.getTimeFormat(context).format(Long.valueOf(date.getTime())) : "";
         this.mOptimizationChargingFinishTime = str2;
         showNotification(10);
     }
@@ -661,18 +653,18 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         int i;
         AlertDialog alertDialog;
         AlertDialog alertDialog2;
-        Intent registerReceiver;
+        Intent intentRegisterReceiver;
         boolean z = this.mIsMaximumProtectionEnabled;
         int i2 = this.mMaximumThresholdValue;
         long j = this.mChargingTime;
         this.mIsMaximumProtectionEnabled = BatteryProtectionUtils.isMaximumProtectionEnabled(this.mContext);
         this.mMaximumThresholdValue = SettingsUtils.globalGetInt(this.mContext, "battery_protection_threshold", Settings.Global.BATTERY_PROTECTION_THRESHOLD_DEFAULT_VALUE);
         Context context = this.mContext;
-        long j2 = 0;
-        if (PowerUiRune.BATTERY_CHARGING_ESTIMATE_TIME && (registerReceiver = context.registerReceiver(null, new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_REMAINING_CHARGING_TIME_CHANGED"))) != null) {
-            j2 = registerReceiver.getLongExtra("remaining_charging_time", 0L);
+        long longExtra = 0;
+        if (PowerUiRune.BATTERY_CHARGING_ESTIMATE_TIME && (intentRegisterReceiver = context.registerReceiver(null, new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_REMAINING_CHARGING_TIME_CHANGED"))) != null) {
+            longExtra = intentRegisterReceiver.getLongExtra("remaining_charging_time", 0L);
         }
-        this.mChargingTime = j2;
+        this.mChargingTime = longExtra;
         if (this.mOldChargingType == 9 && this.mChargingType != 9 && (alertDialog2 = this.mSlowByChargerConnectionInfoDialog) != null) {
             alertDialog2.dismiss();
             this.mSlowByChargerConnectionInfoDialog = null;
@@ -740,7 +732,7 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         this.mDoNotShowChargingNotice = false;
     }
 
-    public final void showIncompatibleChargerNotice() {
+    public final void showIncompatibleChargerNotice() throws NumberFormatException {
         if (PowerUtils.isShutdownOn(this.mContext)) {
             Log.d("PowerUI.Notification", "don't show Incompatible charging warning while Shutdown is ON");
             return;
@@ -795,9 +787,9 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
             if (sharedPreferences != null) {
                 String str = intForUser + ":" + ActivityManager.semGetCurrentUser();
                 KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(intForUser, "1.backupAndResetScreenTimeOut backup screen timeout : ", " value : ", str, "PowerUI.Notification");
-                SharedPreferences.Editor edit = sharedPreferences.edit();
-                edit.putString("ScreenTimeOut", str);
-                edit.commit();
+                SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                editorEdit.putString("ScreenTimeOut", str);
+                editorEdit.commit();
                 Log.d("PowerUI.Notification", "2.backupAndResetScreenTimeOut set default timeout!!");
                 Settings.System.putIntForUser(this.mContext.getContentResolver(), "screen_off_timeout", PluginLockInstancePolicy.DISABLED_BY_SUB_USER, -2);
                 if (SettingsUtils.globalGetInt(this.mContext, "auto_dim_screen", 1) != 0 || (powerManager = this.mPowerManager) == null) {
@@ -877,9 +869,9 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         Handler handler = this.mHandler;
         handler.removeCallbacks(this.mUsbDamageProtectionAlertTask);
         if (this.mUsbDamageProtectionPartialWakeLock == null) {
-            PowerManager.WakeLock newWakeLock = this.mPowerManager.newWakeLock(1, "PowerUI.Notification USB damage");
-            this.mUsbDamageProtectionPartialWakeLock = newWakeLock;
-            newWakeLock.acquire();
+            PowerManager.WakeLock wakeLockNewWakeLock = this.mPowerManager.newWakeLock(1, "PowerUI.Notification USB damage");
+            this.mUsbDamageProtectionPartialWakeLock = wakeLockNewWakeLock;
+            wakeLockNewWakeLock.acquire();
         }
         if (this.mUsbDamageProtectionAlertDialog == null) {
             AlertDialog popupDialog = getPopupDialog(13);
@@ -897,20 +889,20 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
     }
 
     public final void showWaterProtectionAlertDialog(boolean z) {
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("show WaterProtectionAlertDialog - isWaterDetected = ", " mIsWaterDetected = ", z);
-        m.append(this.mIsWaterDetected);
-        m.append(" mIsHiccupState = ");
-        m.append(this.mIsHiccupState);
-        m.append("mWaterProtectionAlertDialog : ");
-        m.append(this.mWaterProtectionAlertDialog);
-        Log.d("PowerUI.Notification", m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("show WaterProtectionAlertDialog - isWaterDetected = ", " mIsWaterDetected = ", z);
+        sbM.append(this.mIsWaterDetected);
+        sbM.append(" mIsHiccupState = ");
+        sbM.append(this.mIsHiccupState);
+        sbM.append("mWaterProtectionAlertDialog : ");
+        sbM.append(this.mWaterProtectionAlertDialog);
+        Log.d("PowerUI.Notification", sbM.toString());
         this.mIsWaterDetected = z;
         Handler handler = this.mHandler;
         handler.removeCallbacks(this.mWaterProtectionAlertTask);
         if (this.mWaterProtectionPartialWakeLock == null) {
-            PowerManager.WakeLock newWakeLock = this.mPowerManager.newWakeLock(1, "PowerUI.Notification");
-            this.mWaterProtectionPartialWakeLock = newWakeLock;
-            newWakeLock.acquire();
+            PowerManager.WakeLock wakeLockNewWakeLock = this.mPowerManager.newWakeLock(1, "PowerUI.Notification");
+            this.mWaterProtectionPartialWakeLock = wakeLockNewWakeLock;
+            wakeLockNewWakeLock.acquire();
         }
         if (this.mWaterProtectionAlertDialog == null) {
             if (!z && !this.mIsHiccupState) {
@@ -989,12 +981,12 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         PowerUiSoundBuilder powerUiSoundBuilder = new PowerUiSoundBuilder(this.mContext, i);
         powerUiSoundBuilder.notificationPlayer = this.mNotificationPlayer;
         powerUiSoundBuilder.vibrator = this.mVibrator;
-        PowerUiSound build = powerUiSoundBuilder.build();
-        NotificationPlayer notificationPlayer = build.mNotificationPlayer;
+        PowerUiSound powerUiSoundBuild = powerUiSoundBuilder.build();
+        NotificationPlayer notificationPlayer = powerUiSoundBuild.mNotificationPlayer;
         if (notificationPlayer != null) {
             notificationPlayer.stop();
         }
-        Vibrator vibrator = build.mVibrator;
+        Vibrator vibrator = powerUiSoundBuild.mVibrator;
         if (vibrator != null) {
             vibrator.cancel();
         }
@@ -1039,10 +1031,10 @@ public class SecPowerNotificationWarnings implements SecWarningsUI {
         }
         builder.setOnlyAlertOnce(!this.mPlaySound);
         this.mPlaySound = false;
-        Notification build = builder.build();
+        Notification notificationBuild = builder.build();
         NotificationManager notificationManager = this.mNotificationManager;
         UserHandle userHandle = UserHandle.ALL;
         notificationManager.cancelAsUser("low_battery", 2, userHandle);
-        this.mNotificationManager.notifyAsUser("low_battery", 3, build, userHandle);
+        this.mNotificationManager.notifyAsUser("low_battery", 3, notificationBuild, userHandle);
     }
 }

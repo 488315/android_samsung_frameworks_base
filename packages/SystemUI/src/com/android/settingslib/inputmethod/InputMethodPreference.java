@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,7 +22,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.PrimarySwitchPreference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class InputMethodPreference extends PrimarySwitchPreference implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,7 +29,6 @@ public class InputMethodPreference extends PrimarySwitchPreference implements Pr
     public final InputMethodInfo mImi;
     public final int mUserId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSavePreferenceListener {
     }
 
@@ -42,14 +41,14 @@ public class InputMethodPreference extends PrimarySwitchPreference implements Pr
     }
 
     @Override // com.android.settingslib.PrimarySwitchPreference, com.android.settingslib.RestrictedPreference, com.android.settingslib.widget.TwoTargetPreference, androidx.preference.Preference
-    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
+    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) throws Resources.NotFoundException {
         super.onBindViewHolder(preferenceViewHolder);
         final CompoundButton compoundButton = this.mSwitch;
         if (compoundButton != null) {
             compoundButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.inputmethod.InputMethodPreference$$ExternalSyntheticLambda5
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    InputMethodPreference inputMethodPreference = InputMethodPreference.this;
+                    InputMethodPreference inputMethodPreference = this.f$0;
                     CompoundButton compoundButton2 = compoundButton;
                     int i = InputMethodPreference.$r8$clinit;
                     inputMethodPreference.getClass();
@@ -107,15 +106,15 @@ public class InputMethodPreference extends PrimarySwitchPreference implements Pr
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.settingslib.inputmethod.InputMethodPreference$$ExternalSyntheticLambda4
             @Override // android.content.DialogInterface.OnCancelListener
             public final void onCancel(DialogInterface dialogInterface) {
-                InputMethodPreference inputMethodPreference = InputMethodPreference.this;
+                InputMethodPreference inputMethodPreference = this.f$0;
                 int i = InputMethodPreference.$r8$clinit;
                 inputMethodPreference.setChecked(false);
                 throw null;
             }
         });
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.show();
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.show();
         return false;
     }
 
@@ -144,9 +143,9 @@ public class InputMethodPreference extends PrimarySwitchPreference implements Pr
         builder.setMessage(context.getText(com.android.systemui.R.string.direct_boot_unaware_dialog_message));
         builder.setPositiveButton(R.string.ok, new InputMethodPreference$$ExternalSyntheticLambda0(this, 0));
         builder.setNegativeButton(R.string.cancel, new InputMethodPreference$$ExternalSyntheticLambda0(this, 1));
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.show();
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.show();
     }
 
     public InputMethodPreference(Context context, InputMethodInfo inputMethodInfo, CharSequence charSequence, boolean z, OnSavePreferenceListener onSavePreferenceListener, int i) {

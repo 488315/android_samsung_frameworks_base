@@ -18,14 +18,12 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SingleBindableStatusBarComposeIconView extends ModernStatusBarView {
     public static final Companion Companion = new Companion(null);
     public ComposeView composeView;
     public StatusBarIconView dotView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,15 +31,15 @@ public final class SingleBindableStatusBarComposeIconView extends ModernStatusBa
 
         /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarComposeIconView$Companion$withDefaultBinding$2] */
         public static SingleBindableStatusBarComposeIconView$Companion$withDefaultBinding$2 withDefaultBinding(SingleBindableStatusBarComposeIconView singleBindableStatusBarComposeIconView, final StackedMobileIconBinder$$ExternalSyntheticLambda0 stackedMobileIconBinder$$ExternalSyntheticLambda0, Function4 function4) {
-            final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(2);
-            final StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(-1);
-            final StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(-1);
+            final StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(2);
+            final StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(-1);
+            final StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(-1);
             final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
-            RepeatWhenAttachedKt.repeatWhenAttached(singleBindableStatusBarComposeIconView, EmptyCoroutineContext.INSTANCE, new SingleBindableStatusBarComposeIconView$Companion$withDefaultBinding$1(function4, singleBindableStatusBarComposeIconView, MutableStateFlow2, ref$BooleanRef, MutableStateFlow, MutableStateFlow3, null));
+            RepeatWhenAttachedKt.repeatWhenAttached(singleBindableStatusBarComposeIconView, EmptyCoroutineContext.INSTANCE, new SingleBindableStatusBarComposeIconView$Companion$withDefaultBinding$1(function4, singleBindableStatusBarComposeIconView, stateFlowImplMutableStateFlow2, ref$BooleanRef, stateFlowImplMutableStateFlow, stateFlowImplMutableStateFlow3, null));
             return new ModernStatusBarViewBinding() { // from class: com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarComposeIconView$Companion$withDefaultBinding$2
                 @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
                 public final boolean getShouldIconBeVisible() {
-                    return ((Boolean) Function0.this.invoke()).booleanValue();
+                    return ((Boolean) stackedMobileIconBinder$$ExternalSyntheticLambda0.invoke()).booleanValue();
                 }
 
                 @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
@@ -51,17 +49,17 @@ public final class SingleBindableStatusBarComposeIconView extends ModernStatusBa
 
                 @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
                 public final void onDecorTintChanged(int i) {
-                    MutableStateFlow3.setValue(Integer.valueOf(i));
+                    stateFlowImplMutableStateFlow3.setValue(Integer.valueOf(i));
                 }
 
                 @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
                 public final void onIconTintChanged(int i, int i2) {
-                    MutableStateFlow2.setValue(Integer.valueOf(i));
+                    stateFlowImplMutableStateFlow2.setValue(Integer.valueOf(i));
                 }
 
                 @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
                 public final void onVisibilityStateChanged(int i) {
-                    MutableStateFlow.setValue(Integer.valueOf(i));
+                    stateFlowImplMutableStateFlow.setValue(Integer.valueOf(i));
                 }
             };
         }

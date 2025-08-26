@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UsbResolverActivity extends ResolverActivity {
     public UsbAccessory mAccessory;
@@ -36,7 +35,7 @@ public class UsbResolverActivity extends ResolverActivity {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final void onCreate(Bundle bundle) {
-        boolean z;
+        boolean hasAudioCapture;
         getWindow().addSystemFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
         Intent intent = getIntent();
         Parcelable parcelableExtra = intent.getParcelableExtra("android.intent.extra.INTENT");
@@ -62,10 +61,10 @@ public class UsbResolverActivity extends ResolverActivity {
         }
         UsbDevice usbDevice = (UsbDevice) intent2.getParcelableExtra("device");
         this.mDevice = usbDevice;
-        boolean z2 = false;
+        boolean z = false;
         if (usbDevice != null) {
             this.mDisconnectedReceiver = new UsbDisconnectedReceiver((Activity) this, this.mDevice);
-            z = this.mDevice.getHasAudioCapture();
+            hasAudioCapture = this.mDevice.getHasAudioCapture();
         } else {
             UsbAccessory usbAccessory = (UsbAccessory) intent2.getParcelableExtra("accessory");
             this.mAccessory = usbAccessory;
@@ -76,7 +75,7 @@ public class UsbResolverActivity extends ResolverActivity {
                 return;
             }
             this.mDisconnectedReceiver = new UsbDisconnectedReceiver((Activity) this, this.mAccessory);
-            z = false;
+            hasAudioCapture = false;
         }
         if (this.mForwardResolveInfo != null) {
             if (arrayList2.size() > 1) {
@@ -86,7 +85,7 @@ public class UsbResolverActivity extends ResolverActivity {
             } else {
                 Intent intent4 = new Intent();
                 this.mOtherProfileIntent = intent4;
-                intent4.setComponent(ComponentName.unflattenFromString(getResources().getString(R.string.factorytest_failed)));
+                intent4.setComponent(ComponentName.unflattenFromString(getResources().getString(R.string.factorytest_not_system)));
                 this.mOtherProfileIntent.putExtra("rinfo", (Parcelable) arrayList2.get(0));
                 UsbDevice usbDevice2 = this.mDevice;
                 if (usbDevice2 != null) {
@@ -98,7 +97,7 @@ public class UsbResolverActivity extends ResolverActivity {
                 }
             }
         }
-        getIntent().putExtra("is_audio_capture_device", z);
+        getIntent().putExtra("is_audio_capture_device", hasAudioCapture);
         Collections.sort(arrayList, new Comparator(this) { // from class: com.android.systemui.usb.UsbResolverActivity.1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
@@ -109,13 +108,13 @@ public class UsbResolverActivity extends ResolverActivity {
         while (it2.hasNext()) {
             String str = ((ResolveInfo) it2.next()).getComponentInfo().packageName;
             if (str.equals("com.sec.android.easyMover")) {
-                z2 = true;
-            } else if (z2 && str.equals("com.sec.android.easyMover.Agent")) {
+                z = true;
+            } else if (z && str.equals("com.sec.android.easyMover.Agent")) {
                 Log.d("UsbResolverActivity", "Remove package from list=".concat(str));
                 it2.remove();
             }
         }
-        super.onCreate(bundle, intent2, getResources().getText(R.string.config_systemImageEditor), (Intent[]) null, arrayList, true);
+        super.onCreate(bundle, intent2, getResources().getText(R.string.config_systemTelevisionRemoteService), (Intent[]) null, arrayList, true);
         CheckBox checkBox = (CheckBox) findViewById(R.id.autofill_save_no);
         if (checkBox != null) {
             if (this.mDevice == null) {
@@ -143,30 +142,30 @@ public class UsbResolverActivity extends ResolverActivity {
             return true;
         }
         try {
-            IUsbManager asInterface = IUsbManager.Stub.asInterface(ServiceManager.getService("usb"));
+            IUsbManager iUsbManagerAsInterface = IUsbManager.Stub.asInterface(ServiceManager.getService("usb"));
             int i = resolveInfo.activityInfo.applicationInfo.uid;
-            int myUserId = UserHandle.myUserId();
+            int iMyUserId = UserHandle.myUserId();
             UsbDevice usbDevice = this.mDevice;
             if (usbDevice != null) {
-                asInterface.grantDevicePermission(usbDevice, i);
+                iUsbManagerAsInterface.grantDevicePermission(usbDevice, i);
                 if (z) {
-                    asInterface.setDevicePackage(this.mDevice, resolveInfo.activityInfo.packageName, myUserId);
+                    iUsbManagerAsInterface.setDevicePackage(this.mDevice, resolveInfo.activityInfo.packageName, iMyUserId);
                 } else {
-                    asInterface.setDevicePackage(this.mDevice, (String) null, myUserId);
+                    iUsbManagerAsInterface.setDevicePackage(this.mDevice, (String) null, iMyUserId);
                 }
             } else {
                 UsbAccessory usbAccessory = this.mAccessory;
                 if (usbAccessory != null) {
-                    asInterface.grantAccessoryPermission(usbAccessory, i);
+                    iUsbManagerAsInterface.grantAccessoryPermission(usbAccessory, i);
                     if (z) {
-                        asInterface.setAccessoryPackage(this.mAccessory, resolveInfo.activityInfo.packageName, myUserId);
+                        iUsbManagerAsInterface.setAccessoryPackage(this.mAccessory, resolveInfo.activityInfo.packageName, iMyUserId);
                     } else {
-                        asInterface.setAccessoryPackage(this.mAccessory, (String) null, myUserId);
+                        iUsbManagerAsInterface.setAccessoryPackage(this.mAccessory, (String) null, iMyUserId);
                     }
                 }
             }
             try {
-                targetInfo.startAsUser(this, (Bundle) null, UserHandle.of(myUserId));
+                targetInfo.startAsUser(this, (Bundle) null, UserHandle.of(iMyUserId));
             } catch (ActivityNotFoundException e) {
                 Log.e("UsbResolverActivity", "startActivity failed", e);
             }

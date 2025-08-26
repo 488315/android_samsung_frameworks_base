@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final PreferencesProto$PreferenceMap DEFAULT_INSTANCE;
@@ -24,7 +23,6 @@ public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite i
     public static final int PREFERENCES_FIELD_NUMBER = 1;
     private MapFieldLite<String, PreferencesProto$Value> preferences_ = MapFieldLite.EMPTY_MAP_FIELD;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(PreferencesProto$1 preferencesProto$1) {
             this();
@@ -35,7 +33,6 @@ public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite i
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PreferencesDefaultEntryHolder {
         public static final MapEntryLite defaultEntry = MapEntryLite.newDefaultInstance(WireFormat$FieldType.STRING, WireFormat$FieldType.MESSAGE, PreferencesProto$Value.getDefaultInstance());
 
@@ -65,7 +62,7 @@ public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite i
         return (Builder) ((GeneratedMessageLite.Builder) preferencesProto$PreferenceMap.dynamicMethod(GeneratedMessageLite.MethodToInvoke.NEW_BUILDER));
     }
 
-    public static PreferencesProto$PreferenceMap parseFrom(InputStream inputStream) {
+    public static PreferencesProto$PreferenceMap parseFrom(InputStream inputStream) throws InvalidProtocolBufferException {
         CodedInputStream streamDecoder;
         PreferencesProto$PreferenceMap preferencesProto$PreferenceMap = DEFAULT_INSTANCE;
         if (inputStream == null) {
@@ -74,18 +71,18 @@ public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite i
         } else {
             streamDecoder = new CodedInputStream.StreamDecoder(inputStream, 4096);
         }
-        GeneratedMessageLite parsePartialFrom = GeneratedMessageLite.parsePartialFrom(preferencesProto$PreferenceMap, streamDecoder, ExtensionRegistryLite.getEmptyRegistry());
-        if (GeneratedMessageLite.isInitialized(parsePartialFrom, true)) {
-            return (PreferencesProto$PreferenceMap) parsePartialFrom;
+        GeneratedMessageLite partialFrom = GeneratedMessageLite.parsePartialFrom(preferencesProto$PreferenceMap, streamDecoder, ExtensionRegistryLite.getEmptyRegistry());
+        if (GeneratedMessageLite.isInitialized(partialFrom, true)) {
+            return (PreferencesProto$PreferenceMap) partialFrom;
         }
-        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(parsePartialFrom).getMessage());
-        invalidProtocolBufferException.setUnfinishedMessage(parsePartialFrom);
+        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(partialFrom).getMessage());
+        invalidProtocolBufferException.setUnfinishedMessage(partialFrom);
         throw invalidProtocolBufferException;
     }
 
     @Override // androidx.datastore.preferences.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         int i = PreferencesProto$1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
         PreferencesProto$1 preferencesProto$1 = null;
         switch (i) {
@@ -98,22 +95,22 @@ public final class PreferencesProto$PreferenceMap extends GeneratedMessageLite i
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (PreferencesProto$PreferenceMap.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

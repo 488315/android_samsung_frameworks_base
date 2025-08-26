@@ -39,7 +39,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskViewTransitions implements Transitions.TransitionHandler, TaskViewController {
     public SurfaceControl.Transaction mFinishTransaction;
@@ -56,7 +55,6 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
     public final Transitions mTransitions;
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PendingTransition {
         public IBinder mClaimed;
         public BubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda0 mExternalTransition;
@@ -74,7 +72,6 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TaskViewTransitionObserver implements Transitions.TransitionObserver {
         public /* synthetic */ TaskViewTransitionObserver(TaskViewTransitions taskViewTransitions, int i) {
             this();
@@ -90,8 +87,8 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
             transitionInfo.getChanges().forEach(new Consumer() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$TaskViewTransitionObserver$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    TaskViewTaskController findTaskView;
-                    TaskViewTransitions.TaskViewTransitionObserver taskViewTransitionObserver = TaskViewTransitions.TaskViewTransitionObserver.this;
+                    TaskViewTaskController taskViewTaskControllerFindTaskView;
+                    TaskViewTransitions.TaskViewTransitionObserver taskViewTransitionObserver = this.f$0;
                     SurfaceControl.Transaction transaction3 = transaction;
                     SurfaceControl.Transaction transaction4 = transaction2;
                     TransitionInfo.Change change = (TransitionInfo.Change) obj;
@@ -99,8 +96,8 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
                     ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
                     TaskViewTransitions taskViewTransitions = TaskViewTransitions.this;
                     TaskViewTaskController taskViewTaskController = null;
-                    if (taskInfo != null && (findTaskView = taskViewTransitions.findTaskView(change.getTaskInfo())) != null && findTaskView.mSurfaceControl != null && ((WeakHashMap) taskViewTransitions.mTaskViews).get(findTaskView) != null) {
-                        taskViewTaskController = findTaskView;
+                    if (taskInfo != null && (taskViewTaskControllerFindTaskView = taskViewTransitions.findTaskView(change.getTaskInfo())) != null && taskViewTaskControllerFindTaskView.mSurfaceControl != null && ((WeakHashMap) taskViewTransitions.mTaskViews).get(taskViewTaskControllerFindTaskView) != null) {
+                        taskViewTaskController = taskViewTaskControllerFindTaskView;
                     }
                     if (taskViewTaskController != null) {
                         SurfaceControl surfaceControl = taskViewTaskController.mSurfaceControl;
@@ -181,12 +178,12 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final WindowContainerTransaction handleRequest(IBinder iBinder, TransitionRequestInfo transitionRequestInfo) {
-        TaskViewTaskController findTaskView;
+        TaskViewTaskController taskViewTaskControllerFindTaskView;
         ActivityManager.RunningTaskInfo triggerTask = transitionRequestInfo.getTriggerTask();
-        if (triggerTask == null || (findTaskView = findTaskView(triggerTask)) == null || !TransitionUtil.isClosingType(transitionRequestInfo.getType())) {
+        if (triggerTask == null || (taskViewTaskControllerFindTaskView = findTaskView(triggerTask)) == null || !TransitionUtil.isClosingType(transitionRequestInfo.getType())) {
             return null;
         }
-        PendingTransition pendingTransition = new PendingTransition(transitionRequestInfo.getType(), null, findTaskView, null);
+        PendingTransition pendingTransition = new PendingTransition(transitionRequestInfo.getType(), null, taskViewTaskControllerFindTaskView, null);
         pendingTransition.mClaimed = iBinder;
         this.mPending.add(pendingTransition);
         return new WindowContainerTransaction();
@@ -209,7 +206,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         this.mShellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                TaskViewTransitions taskViewTransitions = TaskViewTransitions.this;
+                TaskViewTransitions taskViewTransitions = this.f$0;
                 WindowContainerToken windowContainerToken2 = windowContainerToken;
                 WindowContainerTransaction windowContainerTransaction2 = windowContainerTransaction;
                 TaskViewTaskController taskViewTaskController2 = taskViewTaskController;
@@ -222,19 +219,19 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
     }
 
     public final void onExternalDone(IBinder iBinder) {
-        PendingTransition findPending = findPending(iBinder);
-        if (findPending == null) {
+        PendingTransition pendingTransitionFindPending = findPending(iBinder);
+        if (pendingTransitionFindPending == null) {
             return;
         }
-        this.mPending.remove(findPending);
+        this.mPending.remove(pendingTransitionFindPending);
         startNextTransition();
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final void onTransitionConsumed(IBinder iBinder, boolean z, SurfaceControl.Transaction transaction) {
-        PendingTransition findPending;
-        if (z && (findPending = findPending(iBinder)) != null) {
-            this.mPending.remove(findPending);
+        PendingTransition pendingTransitionFindPending;
+        if (z && (pendingTransitionFindPending = findPending(iBinder)) != null) {
+            this.mPending.remove(pendingTransitionFindPending);
             startNextTransition();
         }
     }
@@ -268,6 +265,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
             windowContainerTransaction2 = windowContainerTransaction;
             windowContainerTransaction2.setHidden(runningTaskInfo.token, true);
             updateVisibilityState(taskViewTaskController, false);
+            Slog.d("TaskViewTransitions", "prepareOpenAnimation: force hidden, tid=" + runningTaskInfo.taskId + ", tv=" + taskViewTaskController + ", leash=" + surfaceControl);
         }
         if (z) {
             this.mTaskOrganizer.setInterceptBackPressedOnTaskRoot(runningTaskInfo.token, true);
@@ -287,7 +285,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
                 taskView2.runOnViewThread(new Runnable() { // from class: com.android.wm.shell.taskview.TaskView$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TaskView taskView3 = TaskView.this;
+                        TaskView taskView3 = taskView2;
                         SurfaceControl.Transaction transaction3 = transaction;
                         int i = backgroundColor;
                         int i2 = TaskView.$r8$clinit;
@@ -316,7 +314,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
             taskViewTaskController.mListenerExecutor.execute(new Runnable() { // from class: com.android.wm.shell.taskview.TaskViewTaskController$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskViewTaskController taskViewTaskController2 = TaskViewTaskController.this;
+                    TaskViewTaskController taskViewTaskController2 = taskViewTaskController;
                     boolean z2 = z;
                     int i2 = i;
                     ComponentName componentName2 = componentName;
@@ -436,8 +434,8 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         int i3;
         TaskViewTaskController taskViewTaskController;
         boolean z;
-        final PendingTransition findPending = findPending(iBinder);
-        if (findPending == null) {
+        final PendingTransition pendingTransitionFindPending = findPending(iBinder);
+        if (pendingTransitionFindPending == null) {
             transitionInfo2 = transitionInfo;
             transaction3 = transaction;
             transaction4 = transaction2;
@@ -445,51 +443,60 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
             if ((transitionInfo.getFlags() & 8256) == 8256 && !((WeakHashMap) this.mTaskViews).isEmpty() && this.mMixedHandler != null) {
                 Slog.d("TaskViewTransitions", "startAnimation: Keyguard unoccluding with taskView, " + this.mTaskViews);
                 DefaultMixedHandler defaultMixedHandler = this.mMixedHandler;
-                DefaultMixedTransition createDefaultMixedTransition = defaultMixedHandler.createDefaultMixedTransition(iBinder, 101);
-                createDefaultMixedTransition.mTaskViewTransitions = defaultMixedHandler.mTaskViewTransitions;
-                defaultMixedHandler.mActiveTransitions.add(createDefaultMixedTransition);
-                createDefaultMixedTransition.startAnimation(iBinder, transitionInfo, transaction, transaction2, new DefaultMixedHandler$$ExternalSyntheticLambda4(defaultMixedHandler, createDefaultMixedTransition, transitionFinishCallback, 4));
+                DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition = defaultMixedHandler.createDefaultMixedTransition(iBinder, 101);
+                defaultMixedTransitionCreateDefaultMixedTransition.mTaskViewTransitions = defaultMixedHandler.mTaskViewTransitions;
+                defaultMixedHandler.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition);
+                defaultMixedTransitionCreateDefaultMixedTransition.startAnimation(iBinder, transitionInfo, transaction, transaction2, new DefaultMixedHandler$$ExternalSyntheticLambda4(defaultMixedHandler, defaultMixedTransitionCreateDefaultMixedTransition, transitionFinishCallback, 4));
                 return true;
             }
             transitionInfo2 = transitionInfo;
             transaction3 = transaction;
             transaction4 = transaction2;
-            this.mPending.remove(findPending);
+            this.mPending.remove(pendingTransitionFindPending);
+        }
+        if (pendingTransitionFindPending != null && pendingTransitionFindPending.mRemoveTaskViewRequested) {
+            StringBuilder sb = new StringBuilder("startAnimation: TaskView is already removed, pending=");
+            sb.append(pendingTransitionFindPending);
+            sb.append(", tv=");
+            TaskViewTaskController taskViewTaskController2 = pendingTransitionFindPending.mTaskView;
+            sb.append(taskViewTaskController2);
+            sb.append(", list=");
+            sb.append(this.mTaskViews);
+            Slog.w("TaskViewTransitions", sb.toString());
+            if (pendingTransitionFindPending.mRemoveTaskViewRequested) {
+                final int i4 = 0;
+                TransitionInfo.Change changeFindChange = transitionInfo2.findChange(new Predicate() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        int i5 = i4;
+                        Object obj2 = pendingTransitionFindPending;
+                        switch (i5) {
+                            case 0:
+                                TransitionInfo.Change change = (TransitionInfo.Change) obj;
+                                return change.getMode() == 1 && change.getTaskInfo() != null && change.getTaskInfo().containsLaunchCookie(((TaskViewTransitions.PendingTransition) obj2).mLaunchCookie);
+                            default:
+                                TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
+                                return change2.getEndDisplayId() == ((TransitionInfo.Change) obj2).getEndDisplayId() && change2.getStartRotation() != change2.getEndRotation() && change2.hasFlags(32) && change2.getSnapshot() != null;
+                        }
+                    }
+                });
+                if (changeFindChange != null) {
+                    Slog.e("TaskViewTransitions", "cleanUpTaskViewTaskIfNeeded: failed to handle open transition, reason=task_view_removed, clean up " + changeFindChange + ", pending=" + pendingTransitionFindPending + ", tv=" + taskViewTaskController2);
+                    WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+                    windowContainerTransaction.removeTask(changeFindChange.getTaskInfo().token);
+                    this.mTaskOrganizer.applyTransaction(windowContainerTransaction);
+                    return false;
+                }
+            }
         }
         if (((WeakHashMap) this.mTaskViews).isEmpty()) {
-            if (findPending == null) {
+            if (pendingTransitionFindPending == null) {
                 return false;
             }
             Slog.e("TaskViewTransitions", "Pending taskview transition but no task-views");
-            if (!findPending.mRemoveTaskViewRequested) {
-                return false;
-            }
-            final int i4 = 0;
-            TransitionInfo.Change findChange = transitionInfo2.findChange(new Predicate() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda8
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    int i5 = i4;
-                    Object obj2 = findPending;
-                    switch (i5) {
-                        case 0:
-                            TransitionInfo.Change change = (TransitionInfo.Change) obj;
-                            return change.getMode() == 1 && change.getTaskInfo() != null && change.getTaskInfo().containsLaunchCookie(((TaskViewTransitions.PendingTransition) obj2).mLaunchCookie);
-                        default:
-                            TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
-                            return change2.getEndDisplayId() == ((TransitionInfo.Change) obj2).getEndDisplayId() && change2.getStartRotation() != change2.getEndRotation() && change2.hasFlags(32) && change2.getSnapshot() != null;
-                    }
-                }
-            });
-            if (findChange == null) {
-                return false;
-            }
-            Slog.e("TaskViewTransitions", "cleanUpTaskViewTaskIfNeeded: failed to handle open transition, reason=task_view_removed, clean up " + findChange + ", pending=" + findPending);
-            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-            windowContainerTransaction.removeTask(findChange.getTaskInfo().token);
-            this.mTaskOrganizer.applyTransaction(windowContainerTransaction);
             return false;
         }
-        boolean z2 = (findPending == null || findPending.mLaunchCookie == null) ? false : true;
+        boolean z2 = (pendingTransitionFindPending == null || pendingTransitionFindPending.mLaunchCookie == null) ? false : true;
         int i5 = 0;
         int i6 = 0;
         WindowContainerTransaction windowContainerTransaction2 = null;
@@ -500,172 +507,175 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
             if (taskInfo != null) {
                 if (TransitionUtil.isClosingType(change.getMode())) {
                     boolean z3 = change.getMode() == 4;
-                    TaskViewTaskController findTaskView = findTaskView(taskInfo);
-                    if (findTaskView == null && !z3) {
-                        if (findPending == null) {
+                    TaskViewTaskController taskViewTaskControllerFindTaskView = findTaskView(taskInfo);
+                    if (taskViewTaskControllerFindTaskView == null && !z3) {
+                        if (pendingTransitionFindPending == null) {
                             Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. And non-pending transition. Is it real taskView? " + change.getTaskInfo().taskId);
+                            i = i5;
+                            i2 = i7;
                         }
                         i6 = i7 + 1;
                         i = i5;
-                        i5 = i + 1;
-                    } else if (findTaskView != null) {
-                        if (z3) {
-                            if (findPending != null && findPending.mType == 4) {
-                                transaction3.hide(change.getLeash());
-                            }
-                            if (findTaskView.mTaskToken != null) {
-                                transaction4.reparent(findTaskView.mTaskLeash, null);
-                                TaskView.Listener listener = findTaskView.mListener;
-                                if (listener != null) {
-                                    listener.onTaskVisibilityChanged(findTaskView.mTaskInfo.taskId, findTaskView.mSurfaceCreated);
-                                }
-                            }
-                        } else {
-                            ActivityManager.RunningTaskInfo runningTaskInfo = findTaskView.mTaskInfo;
-                            if (runningTaskInfo != null) {
-                                findTaskView.notifyTaskRemovalStarted(runningTaskInfo);
-                                findTaskView.mTaskViewBase.getClass();
-                            }
-                            findTaskView.resetTaskInfo();
+                    } else if (taskViewTaskControllerFindTaskView == null) {
+                        if (pendingTransitionFindPending != null) {
+                            Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
                         }
-                        i6 = i7 + 1;
-                        i = i5;
-                        i5 = i + 1;
-                    } else if (findPending != null) {
-                        Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
-                    }
-                } else {
-                    if (TransitionUtil.isOpeningType(change.getMode())) {
-                        if (change.getMode() != 1) {
-                            TaskViewTaskController findTaskView2 = findTaskView(taskInfo);
-                            if (findTaskView2 == null && findPending != null) {
-                                Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
-                            }
-                            if (findTaskView2 == null) {
-                                i = i5;
-                                i6 = i7;
-                            } else {
-                                i3 = i5;
-                                taskViewTaskController = findTaskView2;
-                                z = false;
-                            }
-                        } else if (findPending == null || !taskInfo.containsLaunchCookie(findPending.mLaunchCookie)) {
-                            Slog.e("TaskViewTransitions", "Found a launching TaskView in the wrong transition. All TaskView launches should be initiated by shell and in their own transition: " + taskInfo.taskId);
-                        } else {
-                            i3 = i5;
-                            taskViewTaskController = findPending.mTaskView;
-                            z = true;
-                            z2 = false;
-                        }
-                        if (windowContainerTransaction2 == null) {
-                            windowContainerTransaction2 = new WindowContainerTransaction();
-                        }
-                        WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction2;
-                        i = i3;
-                        prepareOpenAnimation(taskViewTaskController, z, transaction3, transaction4, taskInfo, change.getLeash(), windowContainerTransaction3);
-                        i6 = i7 + 1;
-                        transaction3 = transaction;
-                        transaction4 = transaction2;
-                        windowContainerTransaction2 = windowContainerTransaction3;
-                    } else {
                         i = i5;
                         i2 = i7;
-                        if (change.getMode() == 6) {
-                            TaskViewTaskController findTaskView3 = findTaskView(taskInfo);
-                            if (findTaskView3 != null) {
-                                ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
-                                SurfaceControl leash = change.getLeash();
-                                findTaskView3.mPendingInfo = null;
-                                findTaskView3.mTaskInfo = taskInfo2;
-                                findTaskView3.mTaskToken = taskInfo2.token;
-                                findTaskView3.mTaskLeash = leash;
-                                if (findTaskView3.mSurfaceCreated) {
-                                    TaskView taskView = findTaskView3.mTaskViewBase;
-                                    taskView.getBoundsOnScreen(taskView.mTmpRect);
-                                    rect = taskView.mTmpRect;
-                                } else {
+                    } else {
+                        if (z3) {
+                            if (pendingTransitionFindPending != null && pendingTransitionFindPending.mType == 4) {
+                                transaction3.hide(change.getLeash());
+                            }
+                            if (taskViewTaskControllerFindTaskView.mTaskToken != null) {
+                                transaction4.reparent(taskViewTaskControllerFindTaskView.mTaskLeash, null);
+                                TaskView.Listener listener = taskViewTaskControllerFindTaskView.mListener;
+                                if (listener != null) {
+                                    listener.onTaskVisibilityChanged(taskViewTaskControllerFindTaskView.mTaskInfo.taskId, taskViewTaskControllerFindTaskView.mSurfaceCreated);
+                                }
+                            }
+                        } else {
+                            ActivityManager.RunningTaskInfo runningTaskInfo = taskViewTaskControllerFindTaskView.mTaskInfo;
+                            if (runningTaskInfo != null) {
+                                taskViewTaskControllerFindTaskView.notifyTaskRemovalStarted(runningTaskInfo);
+                                taskViewTaskControllerFindTaskView.mTaskViewBase.getClass();
+                            }
+                            taskViewTaskControllerFindTaskView.resetTaskInfo();
+                        }
+                        i6 = i7 + 1;
+                        i = i5;
+                    }
+                } else if (TransitionUtil.isOpeningType(change.getMode())) {
+                    if (change.getMode() != 1) {
+                        TaskViewTaskController taskViewTaskControllerFindTaskView2 = findTaskView(taskInfo);
+                        if (taskViewTaskControllerFindTaskView2 == null && pendingTransitionFindPending != null) {
+                            Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
+                        }
+                        if (taskViewTaskControllerFindTaskView2 == null) {
+                            i = i5;
+                            i6 = i7;
+                        } else {
+                            i3 = i5;
+                            taskViewTaskController = taskViewTaskControllerFindTaskView2;
+                            z = false;
+                        }
+                    } else if (pendingTransitionFindPending == null || !taskInfo.containsLaunchCookie(pendingTransitionFindPending.mLaunchCookie)) {
+                        Slog.e("TaskViewTransitions", "Found a launching TaskView in the wrong transition. All TaskView launches should be initiated by shell and in their own transition: " + taskInfo.taskId);
+                        i = i5;
+                        i2 = i7;
+                    } else {
+                        i3 = i5;
+                        taskViewTaskController = pendingTransitionFindPending.mTaskView;
+                        z = true;
+                        z2 = false;
+                    }
+                    if (windowContainerTransaction2 == null) {
+                        windowContainerTransaction2 = new WindowContainerTransaction();
+                    }
+                    WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction2;
+                    i = i3;
+                    prepareOpenAnimation(taskViewTaskController, z, transaction3, transaction4, taskInfo, change.getLeash(), windowContainerTransaction3);
+                    i6 = i7 + 1;
+                    transaction3 = transaction;
+                    transaction4 = transaction2;
+                    windowContainerTransaction2 = windowContainerTransaction3;
+                } else {
+                    i = i5;
+                    i2 = i7;
+                    if (change.getMode() == 6) {
+                        TaskViewTaskController taskViewTaskControllerFindTaskView3 = findTaskView(taskInfo);
+                        if (taskViewTaskControllerFindTaskView3 != null) {
+                            ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
+                            SurfaceControl leash = change.getLeash();
+                            taskViewTaskControllerFindTaskView3.mPendingInfo = null;
+                            taskViewTaskControllerFindTaskView3.mTaskInfo = taskInfo2;
+                            taskViewTaskControllerFindTaskView3.mTaskToken = taskInfo2.token;
+                            taskViewTaskControllerFindTaskView3.mTaskLeash = leash;
+                            if (taskViewTaskControllerFindTaskView3.mSurfaceCreated) {
+                                TaskView taskView = taskViewTaskControllerFindTaskView3.mTaskViewBase;
+                                taskView.getBoundsOnScreen(taskView.mTmpRect);
+                                rect = taskView.mTmpRect;
+                            } else {
+                                rect = null;
+                            }
+                            if (rect != null) {
+                                final int i8 = 1;
+                                if (transitionInfo2.findChange(new Predicate() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda8
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        int i52 = i8;
+                                        Object obj2 = change;
+                                        switch (i52) {
+                                            case 0:
+                                                TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
+                                                return change2.getMode() == 1 && change2.getTaskInfo() != null && change2.getTaskInfo().containsLaunchCookie(((TaskViewTransitions.PendingTransition) obj2).mLaunchCookie);
+                                            default:
+                                                TransitionInfo.Change change22 = (TransitionInfo.Change) obj;
+                                                return change22.getEndDisplayId() == ((TransitionInfo.Change) obj2).getEndDisplayId() && change22.getStartRotation() != change22.getEndRotation() && change22.hasFlags(32) && change22.getSnapshot() != null;
+                                        }
+                                    }
+                                }) != null) {
+                                    Slog.d("TaskViewTransitions", "startAnimation: clear boundsOnScreen=" + rect + ", tv=" + taskViewTaskControllerFindTaskView3);
                                     rect = null;
                                 }
-                                if (rect != null) {
-                                    final int i8 = 1;
-                                    if (transitionInfo2.findChange(new Predicate() { // from class: com.android.wm.shell.taskview.TaskViewTransitions$$ExternalSyntheticLambda8
-                                        @Override // java.util.function.Predicate
-                                        public final boolean test(Object obj) {
-                                            int i52 = i8;
-                                            Object obj2 = change;
-                                            switch (i52) {
-                                                case 0:
-                                                    TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
-                                                    return change2.getMode() == 1 && change2.getTaskInfo() != null && change2.getTaskInfo().containsLaunchCookie(((TaskViewTransitions.PendingTransition) obj2).mLaunchCookie);
-                                                default:
-                                                    TransitionInfo.Change change22 = (TransitionInfo.Change) obj;
-                                                    return change22.getEndDisplayId() == ((TransitionInfo.Change) obj2).getEndDisplayId() && change22.getStartRotation() != change22.getEndRotation() && change22.hasFlags(32) && change22.getSnapshot() != null;
-                                            }
-                                        }
-                                    }) != null) {
-                                        Slog.d("TaskViewTransitions", "startAnimation: clear boundsOnScreen=" + rect + ", tv=" + findTaskView3);
-                                        rect = null;
-                                    }
-                                }
-                                if (rect != null) {
-                                    if (windowContainerTransaction2 == null) {
-                                        windowContainerTransaction2 = new WindowContainerTransaction();
-                                    }
-                                    WindowContainerTransaction windowContainerTransaction4 = windowContainerTransaction2;
-                                    transaction4 = transaction2;
-                                    Rect rect2 = rect;
-                                    transaction3 = transaction;
-                                    updateBounds(findTaskView3, rect2, transaction3, transaction4, change.getTaskInfo(), change.getLeash(), windowContainerTransaction4);
-                                    windowContainerTransaction2 = windowContainerTransaction4;
-                                } else {
-                                    transaction3 = transaction;
-                                    transaction4 = transaction2;
-                                    transaction3.reparent(change.getLeash(), findTaskView3.mSurfaceControl);
-                                    if (((WeakHashMap) this.mTaskViews).get(findTaskView3) != null) {
-                                        Rect rect3 = new Rect(((TaskViewRepository.TaskViewState) ((WeakHashMap) this.mTaskViews).get(findTaskView3)).mBounds);
-                                        rect3.offsetTo(0, 0);
-                                        transaction3.setPosition(change.getLeash(), 0.0f, 0.0f).setCrop(change.getLeash(), rect3);
-                                        transaction4.setPosition(change.getLeash(), 0.0f, 0.0f).setCrop(change.getLeash(), rect3);
-                                        setFinishTransaction(transaction4);
-                                        change.setSkipDefaultTransition(true);
-                                    }
-                                    transaction4.reparent(change.getLeash(), findTaskView3.mSurfaceControl).setPosition(change.getLeash(), 0.0f, 0.0f);
-                                }
-                                i6 = i2 + 1;
-                            } else if (findPending != null) {
-                                Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
                             }
+                            if (rect != null) {
+                                if (windowContainerTransaction2 == null) {
+                                    windowContainerTransaction2 = new WindowContainerTransaction();
+                                }
+                                WindowContainerTransaction windowContainerTransaction4 = windowContainerTransaction2;
+                                transaction4 = transaction2;
+                                Rect rect2 = rect;
+                                transaction3 = transaction;
+                                updateBounds(taskViewTaskControllerFindTaskView3, rect2, transaction3, transaction4, change.getTaskInfo(), change.getLeash(), windowContainerTransaction4);
+                                windowContainerTransaction2 = windowContainerTransaction4;
+                            } else {
+                                transaction3 = transaction;
+                                transaction4 = transaction2;
+                                transaction3.reparent(change.getLeash(), taskViewTaskControllerFindTaskView3.mSurfaceControl);
+                                if (((WeakHashMap) this.mTaskViews).get(taskViewTaskControllerFindTaskView3) != null) {
+                                    Rect rect3 = new Rect(((TaskViewRepository.TaskViewState) ((WeakHashMap) this.mTaskViews).get(taskViewTaskControllerFindTaskView3)).mBounds);
+                                    rect3.offsetTo(0, 0);
+                                    transaction3.setPosition(change.getLeash(), 0.0f, 0.0f).setCrop(change.getLeash(), rect3);
+                                    transaction4.setPosition(change.getLeash(), 0.0f, 0.0f).setCrop(change.getLeash(), rect3);
+                                    setFinishTransaction(transaction4);
+                                    change.setSkipDefaultTransition(true);
+                                }
+                                transaction4.reparent(change.getLeash(), taskViewTaskControllerFindTaskView3.mSurfaceControl).setPosition(change.getLeash(), 0.0f, 0.0f);
+                            }
+                            i6 = i2 + 1;
+                        } else if (pendingTransitionFindPending != null) {
+                            Slog.w("TaskViewTransitions", "Found a non-TaskView task in a TaskView Transition. This shouldn't happen, so there may be a visual artifact: " + taskInfo.taskId);
                         }
-                        transaction3 = transaction;
-                        transaction4 = transaction2;
                     }
-                    i5 = i + 1;
+                    transaction3 = transaction;
+                    transaction4 = transaction2;
                 }
                 i6 = i2;
-                i5 = i + 1;
+            } else {
+                i = i5;
+                i2 = i7;
+                i6 = i2;
             }
-            i = i5;
-            i2 = i7;
-            i6 = i2;
             i5 = i + 1;
         }
         int i9 = i6;
         if (z2) {
             Slog.w("TaskViewTransitions", "Expected a TaskView launch in this transition but didn't get one, cleaning up the task view");
-            TaskViewTaskController taskViewTaskController2 = findPending.mTaskView;
-            taskViewTaskController2.mTaskNotFound = true;
-            ActivityManager.RunningTaskInfo runningTaskInfo2 = taskViewTaskController2.mPendingInfo;
+            TaskViewTaskController taskViewTaskController3 = pendingTransitionFindPending.mTaskView;
+            taskViewTaskController3.mTaskNotFound = true;
+            ActivityManager.RunningTaskInfo runningTaskInfo2 = taskViewTaskController3.mPendingInfo;
             if (runningTaskInfo2 != null) {
-                taskViewTaskController2.notifyTaskRemovalStarted(runningTaskInfo2);
-                taskViewTaskController2.mTaskViewBase.getClass();
-                taskViewTaskController2.mTaskViewController.removeTaskView(taskViewTaskController2, runningTaskInfo2.token);
-                taskViewTaskController2.resetTaskInfo();
+                taskViewTaskController3.notifyTaskRemovalStarted(runningTaskInfo2);
+                taskViewTaskController3.mTaskViewBase.getClass();
+                taskViewTaskController3.mTaskViewController.removeTaskView(taskViewTaskController3, runningTaskInfo2.token);
+                taskViewTaskController3.resetTaskInfo();
             }
         } else {
-            if (windowContainerTransaction2 == null && findPending == null && i9 != transitionInfo2.getChanges().size()) {
+            if (windowContainerTransaction2 == null && pendingTransitionFindPending == null && i9 != transitionInfo2.getChanges().size()) {
                 return false;
             }
-            if (windowContainerTransaction2 == null && findPending == null && i9 == 0) {
+            if (windowContainerTransaction2 == null && pendingTransitionFindPending == null && i9 == 0) {
                 Slog.e("TaskViewTransitions", "startAnimation: failed, taskViews=" + this.mTaskViews);
                 return false;
             }
@@ -717,11 +727,11 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
     @Override // com.android.wm.shell.taskview.TaskViewController
     public final void unregisterTaskView(TaskViewTaskController taskViewTaskController) {
         ((WeakHashMap) this.mTaskViews).remove(taskViewTaskController);
-        PendingTransition findPending = findPending(taskViewTaskController, 1);
-        if (findPending != null) {
-            findPending.mRemoveTaskViewRequested = true;
+        PendingTransition pendingTransitionFindPending = findPending(taskViewTaskController, 1);
+        if (pendingTransitionFindPending != null) {
+            pendingTransitionFindPending.mRemoveTaskViewRequested = true;
         }
-        Slog.d("TaskViewTransitions", "unregisterTaskView: " + taskViewTaskController + ", pendingTransit=" + findPending + ", Callers=" + Debug.getCallers(5));
+        Slog.d("TaskViewTransitions", "unregisterTaskView: " + taskViewTaskController + ", pendingTransit=" + pendingTransitionFindPending + ", Callers=" + Debug.getCallers(5));
         StringBuilder sb = new StringBuilder("[Remove] ");
         sb.append(taskViewTaskController);
         recordLogHistory(sb.toString());

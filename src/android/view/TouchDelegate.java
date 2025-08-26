@@ -28,31 +28,32 @@ public class TouchDelegate {
         this.mDelegateView = view;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0027  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean contains;
+        boolean zContains;
         int x = (int) motionEvent.getX();
         int y = (int) motionEvent.getY();
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
-            contains = this.mBounds.contains(x, y);
-            this.mDelegateTargeted = contains;
-        } else {
-            if (actionMasked != 1 && actionMasked != 2) {
-                if (actionMasked == 3) {
-                    contains = this.mDelegateTargeted;
-                    this.mDelegateTargeted = false;
-                } else if (actionMasked != 5 && actionMasked != 6) {
-                    contains = false;
-                }
-            }
+            zContains = this.mBounds.contains(x, y);
+            this.mDelegateTargeted = zContains;
+        } else if (actionMasked == 1 || actionMasked == 2) {
             boolean z = this.mDelegateTargeted;
-            r5 = z ? this.mSlopBounds.contains(x, y) : true;
-            contains = z;
+            zContains = z ? this.mSlopBounds.contains(x, y) : true;
+            zContains = z;
+        } else if (actionMasked == 3) {
+            zContains = this.mDelegateTargeted;
+            this.mDelegateTargeted = false;
+        } else if (actionMasked != 5 && actionMasked != 6) {
+            zContains = false;
         }
-        if (!contains) {
+        if (!zContains) {
             return false;
         }
-        if (r5) {
+        if (zContains) {
             motionEvent.setLocation(this.mDelegateView.getWidth() / 2, this.mDelegateView.getHeight() / 2);
         } else {
             float f = -(this.mSlop * 2);
@@ -67,16 +68,16 @@ public class TouchDelegate {
         }
         int x = (int) motionEvent.getX();
         int y = (int) motionEvent.getY();
-        boolean contains = this.mBounds.contains(x, y);
+        boolean zContains = this.mBounds.contains(x, y);
         int actionMasked = motionEvent.getActionMasked();
         boolean z = true;
         if (actionMasked != 7) {
             if (actionMasked == 9) {
-                this.mDelegateTargeted = contains;
+                this.mDelegateTargeted = zContains;
             } else if (actionMasked == 10) {
                 this.mDelegateTargeted = true;
             }
-        } else if (contains) {
+        } else if (zContains) {
             this.mDelegateTargeted = true;
         } else if (this.mDelegateTargeted && !this.mSlopBounds.contains(x, y)) {
             z = false;

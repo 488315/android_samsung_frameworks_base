@@ -161,9 +161,9 @@ public interface ICredential extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICredential.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICredential)) {
-                return (ICredential) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICredential.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICredential)) {
+                return (ICredential) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -221,34 +221,34 @@ public interface ICredential extends IInterface {
             }
             switch (i) {
                 case 1:
-                    byte[] createEphemeralKeyPair = createEphemeralKeyPair();
+                    byte[] bArrCreateEphemeralKeyPair = createEphemeralKeyPair();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(createEphemeralKeyPair);
+                    parcel2.writeByteArray(bArrCreateEphemeralKeyPair);
                     return true;
                 case 2:
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setReaderEphemeralPublicKey(createByteArray);
+                    setReaderEphemeralPublicKey(bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    byte[] deleteCredential = deleteCredential();
+                    byte[] bArrDeleteCredential = deleteCredential();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(deleteCredential);
+                    parcel2.writeByteArray(bArrDeleteCredential);
                     return true;
                 case 4:
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] deleteWithChallenge = deleteWithChallenge(createByteArray2);
+                    byte[] bArrDeleteWithChallenge = deleteWithChallenge(bArrCreateByteArray2);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(deleteWithChallenge);
+                    parcel2.writeByteArray(bArrDeleteWithChallenge);
                     return true;
                 case 5:
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] proveOwnership = proveOwnership(createByteArray3);
+                    byte[] bArrProveOwnership = proveOwnership(bArrCreateByteArray3);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(proveOwnership);
+                    parcel2.writeByteArray(bArrProveOwnership);
                     return true;
                 case 6:
                     byte[] credentialKeyCertificateChain = getCredentialKeyCertificateChain();
@@ -256,33 +256,33 @@ public interface ICredential extends IInterface {
                     parcel2.writeByteArray(credentialKeyCertificateChain);
                     return true;
                 case 7:
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    long selectAuthKey = selectAuthKey(readBoolean, readBoolean2, readBoolean3);
+                    long jSelectAuthKey = selectAuthKey(z, z2, z3);
                     parcel2.writeNoException();
-                    parcel2.writeLong(selectAuthKey);
+                    parcel2.writeLong(jSelectAuthKey);
                     return true;
                 case 8:
-                    byte[] createByteArray4 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
                     RequestNamespaceParcel[] requestNamespaceParcelArr = (RequestNamespaceParcel[]) parcel.createTypedArray(RequestNamespaceParcel.CREATOR);
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    boolean z4 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    GetEntriesResultParcel entries = getEntries(createByteArray4, requestNamespaceParcelArr, createByteArray5, createByteArray6, readBoolean4, readBoolean5, readBoolean6);
+                    GetEntriesResultParcel entries = getEntries(bArrCreateByteArray4, requestNamespaceParcelArr, bArrCreateByteArray5, bArrCreateByteArray6, z4, z5, z6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(entries, 1);
                     return true;
                 case 9:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setAvailableAuthenticationKeys(readInt, readInt2, readLong);
+                    setAvailableAuthenticationKeys(i3, i4, j);
                     parcel2.writeNoException();
                     return true;
                 case 10:
@@ -292,17 +292,17 @@ public interface ICredential extends IInterface {
                     return true;
                 case 11:
                     AuthKeyParcel authKeyParcel = (AuthKeyParcel) parcel.readTypedObject(AuthKeyParcel.CREATOR);
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    storeStaticAuthenticationData(authKeyParcel, createByteArray7);
+                    storeStaticAuthenticationData(authKeyParcel, bArrCreateByteArray7);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     AuthKeyParcel authKeyParcel2 = (AuthKeyParcel) parcel.readTypedObject(AuthKeyParcel.CREATOR);
-                    long readLong2 = parcel.readLong();
-                    byte[] createByteArray8 = parcel.createByteArray();
+                    long j2 = parcel.readLong();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    storeStaticAuthenticationDataWithExpiration(authKeyParcel2, readLong2, createByteArray8);
+                    storeStaticAuthenticationDataWithExpiration(authKeyParcel2, j2, bArrCreateByteArray8);
                     parcel2.writeNoException();
                     return true;
                 case 13:
@@ -316,9 +316,9 @@ public interface ICredential extends IInterface {
                     parcel2.writeLongArray(authenticationDataExpirations);
                     return true;
                 case 15:
-                    IWritableCredential update = update();
+                    IWritableCredential iWritableCredentialUpdate = update();
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(update);
+                    parcel2.writeStrongInterface(iWritableCredentialUpdate);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -343,243 +343,243 @@ public interface ICredential extends IInterface {
 
             @Override // android.security.identity.ICredential
             public byte[] createEphemeralKeyPair() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public void setReaderEphemeralPublicKey(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public byte[] deleteCredential() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public byte[] deleteWithChallenge(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public byte[] proveOwnership(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public byte[] getCredentialKeyCertificateChain() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public long selectAuthKey(boolean z, boolean z2, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public GetEntriesResultParcel getEntries(byte[] bArr, RequestNamespaceParcel[] requestNamespaceParcelArr, byte[] bArr2, byte[] bArr3, boolean z, boolean z2, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedArray(requestNamespaceParcelArr, 0);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (GetEntriesResultParcel) obtain2.readTypedObject(GetEntriesResultParcel.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedArray(requestNamespaceParcelArr, 0);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (GetEntriesResultParcel) parcelObtain2.readTypedObject(GetEntriesResultParcel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public void setAvailableAuthenticationKeys(int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public AuthKeyParcel[] getAuthKeysNeedingCertification() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AuthKeyParcel[]) obtain2.createTypedArray(AuthKeyParcel.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AuthKeyParcel[]) parcelObtain2.createTypedArray(AuthKeyParcel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public void storeStaticAuthenticationData(AuthKeyParcel authKeyParcel, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeTypedObject(authKeyParcel, 0);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authKeyParcel, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public void storeStaticAuthenticationDataWithExpiration(AuthKeyParcel authKeyParcel, long j, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    obtain.writeTypedObject(authKeyParcel, 0);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(authKeyParcel, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public int[] getAuthenticationDataUsageCount() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public long[] getAuthenticationDataExpirations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredential
             public IWritableCredential update() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredential.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IWritableCredential.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredential.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IWritableCredential.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

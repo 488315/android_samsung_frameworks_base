@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class WallpaperEngine {
     public final WallpaperEngineCallback mCallback;
@@ -56,12 +55,10 @@ public abstract class WallpaperEngine {
     }
 
     public final boolean isVisible() {
-        boolean isVisible;
-        isVisible = super/*android.service.wallpaper.WallpaperService.Engine*/.isVisible();
-        return isVisible;
+        return super/*android.service.wallpaper.WallpaperService.Engine*/.isVisible();
     }
 
-    public final boolean isWindowVisible() {
+    public final boolean isWindowVisible() throws NoSuchFieldException {
         ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass2 = (ImageWallpaper.IntegratedEngine.AnonymousClass2) this.mCallback;
         anonymousClass2.getClass();
         int i = ImageWallpaper.IntegratedEngine.$r8$clinit;
@@ -85,7 +82,7 @@ public abstract class WallpaperEngine {
         BLASTBufferQueue bLASTBufferQueue;
         final ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass2 = (ImageWallpaper.IntegratedEngine.AnonymousClass2) this.mCallback;
         anonymousClass2.getClass();
-        final long elapsedRealtime = SystemClock.elapsedRealtime();
+        final long jElapsedRealtime = SystemClock.elapsedRealtime();
         ImageWallpaper.IntegratedEngine integratedEngine = ImageWallpaper.IntegratedEngine.this;
         final Rect surfaceFrame = integratedEngine.getSurfaceHolder().getSurfaceFrame();
         Log.i(integratedEngine.TAG, "setVisibleRectOfSurface: frame=" + surfaceFrame + ", visibleRect=" + rect);
@@ -109,17 +106,17 @@ public abstract class WallpaperEngine {
         anonymousClass2.mBbqOfPendingTransactionRequest = bLASTBufferQueue2;
         bLASTBufferQueue2.syncNextTransaction(new Consumer() { // from class: com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$2$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass22 = ImageWallpaper.IntegratedEngine.AnonymousClass2.this;
-                long j = elapsedRealtime;
+            public final void accept(Object obj) throws NoSuchFieldException {
+                ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass22 = anonymousClass2;
+                long j = jElapsedRealtime;
                 Rect rect2 = surfaceFrame;
                 Rect rect3 = rect;
                 SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) obj;
                 ImageWallpaper.IntegratedEngine integratedEngine2 = ImageWallpaper.IntegratedEngine.this;
                 ReentrantLock reentrantLock = integratedEngine2.mSurfaceHolder.mSurfaceLock;
                 reentrantLock.lock();
-                long elapsedRealtime2 = SystemClock.elapsedRealtime() - j;
-                Log.i(integratedEngine2.TAG, "setVisibleRectOfSurface: frame=" + rect2 + ", transaction ready. delay=" + elapsedRealtime2);
+                long jElapsedRealtime2 = SystemClock.elapsedRealtime() - j;
+                Log.i(integratedEngine2.TAG, "setVisibleRectOfSurface: frame=" + rect2 + ", transaction ready. delay=" + jElapsedRealtime2);
                 anonymousClass22.mBbqOfPendingTransactionRequest = null;
                 SurfaceControl surfaceControl = anonymousClass22.getSurfaceControl();
                 if (surfaceControl == null || !surfaceControl.isValid()) {

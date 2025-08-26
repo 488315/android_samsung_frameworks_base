@@ -11,14 +11,12 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BroadcastReceiverManager {
     public final BroadcastDispatcher broadcastDispatcher;
     public final Map broadcastReceiverItemMap;
     public final LogWrapper logWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,6 +30,7 @@ public final class BroadcastReceiverManager {
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BroadcastReceiverManager(Context context, LogWrapper logWrapper, BroadcastDispatcher broadcastDispatcher) {
         this.logWrapper = logWrapper;
         this.broadcastDispatcher = broadcastDispatcher;
@@ -61,7 +60,6 @@ public final class BroadcastReceiverManager {
         this.broadcastReceiverItemMap = MapsKt__MapsKt.mapOf(pair, pair2, pair3, pair4, pair5, pair6, pair7, pair8, pair9, pair10, new Pair(broadcastReceiverType11, new BroadcastReceiverItem(BroadcastReceiverIntentFilterFactory.create(broadcastReceiverType11), 0 == true ? 1 : 0, i, 0 == true ? 1 : 0)));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BroadcastReceiverItem {
         public final IntentFilter intentFilter;
         public BroadcastReceiver receiver;
@@ -83,9 +81,9 @@ public final class BroadcastReceiverManager {
         }
 
         public final int hashCode() {
-            int hashCode = this.intentFilter.hashCode() * 31;
+            int iHashCode = this.intentFilter.hashCode() * 31;
             BroadcastReceiver broadcastReceiver = this.receiver;
-            return hashCode + (broadcastReceiver == null ? 0 : broadcastReceiver.hashCode());
+            return iHashCode + (broadcastReceiver == null ? 0 : broadcastReceiver.hashCode());
         }
 
         public final String toString() {

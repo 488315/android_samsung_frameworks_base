@@ -3,18 +3,24 @@ package com.android.systemui.wallpaper;
 import android.app.SemWallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseArray;
+import android.view.Display;
+import android.view.WindowManager;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.keyguard.CarrierTextManager$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
@@ -36,7 +42,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PluginWallpaperController implements PluginWallpaper, PluginWallpaperCallback {
     public final Context mContext;
@@ -49,7 +54,6 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
     public final WallpaperLogger mWallpaperLogger;
     public final WallpaperManager mWallpaperManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.PluginWallpaperController$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1(PluginWallpaperController pluginWallpaperController) {
@@ -61,7 +65,7 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
     }
 
     public PluginWallpaperController(Context context, WallpaperManager wallpaperManager, WallpaperLogger wallpaperLogger, PluginWallpaperManager pluginWallpaperManager, PluginLockUtils pluginLockUtils, SelectedUserInteractor selectedUserInteractor, WallpaperChangeNotifier wallpaperChangeNotifier) {
-        int i = -1;
+        int iSemGetWallpaperType = -1;
         int[] iArr = {-1, -1};
         this.mWallpaperId = iArr;
         this.mContext = context;
@@ -76,11 +80,11 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
         if (z && !LsRune.WALLPAPER_SUB_WATCHFACE) {
             iArr[1] = wallpaperManager.getWallpaperId(18);
         }
-        int semGetWallpaperType = wallpaperManager.semGetWallpaperType(6);
+        int iSemGetWallpaperType2 = wallpaperManager.semGetWallpaperType(6);
         if (z && !LsRune.WALLPAPER_SUB_WATCHFACE) {
-            i = wallpaperManager.semGetWallpaperType(6);
+            iSemGetWallpaperType = wallpaperManager.semGetWallpaperType(6);
         }
-        if ((semGetWallpaperType == 3 || semGetWallpaperType == 1000 || i == 3 || i == 1000) && !MultiPackDispatcher.enableDlsIfDisabled(context)) {
+        if ((iSemGetWallpaperType2 == 3 || iSemGetWallpaperType2 == 1000 || iSemGetWallpaperType == 3 || iSemGetWallpaperType == 1000) && !MultiPackDispatcher.enableDlsIfDisabled(context)) {
             Log.e("PluginWallpaperController", "Failed to enable DLS.");
         }
     }
@@ -89,28 +93,28 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
         return (!WhichChecker.isFlagEnabled(i, 16) || LsRune.WALLPAPER_SUB_WATCHFACE) ? 0 : 1;
     }
 
-    public final boolean containsVideo(int i) {
-        String str;
+    public final boolean containsVideo(int i) throws IOException {
+        String strProbeContentType;
         if (this.mWallpaperManager.semGetWallpaperType(i) != 3) {
             return false;
         }
-        Uri semGetUri = this.mWallpaperManager.semGetUri(i);
-        File[] listFiles = new File("/data/overlays/homewallpaper/" + semGetUri.getHost() + semGetUri.getPath()).listFiles();
-        if (listFiles != null && listFiles.length > 0) {
-            for (File file : listFiles) {
+        Uri uriSemGetUri = this.mWallpaperManager.semGetUri(i);
+        File[] fileArrListFiles = new File("/data/overlays/homewallpaper/" + uriSemGetUri.getHost() + uriSemGetUri.getPath()).listFiles();
+        if (fileArrListFiles != null && fileArrListFiles.length > 0) {
+            for (File file : fileArrListFiles) {
                 String path = file.getPath();
                 boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
                 try {
-                    str = URLConnection.guessContentTypeFromName(path);
+                    strProbeContentType = URLConnection.guessContentTypeFromName(path);
                 } catch (Exception unused) {
                     try {
-                        str = Files.probeContentType(Paths.get(path, new String[0]));
+                        strProbeContentType = Files.probeContentType(Paths.get(path, new String[0]));
                     } catch (IOException e) {
                         e.printStackTrace();
-                        str = null;
+                        strProbeContentType = null;
                     }
                 }
-                if (str != null && str.startsWith(ServiceTuple.MEDIA_CAP_VIDEO)) {
+                if (strProbeContentType != null && strProbeContentType.startsWith(ServiceTuple.MEDIA_CAP_VIDEO)) {
                     return true;
                 }
             }
@@ -137,7 +141,7 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
     }
 
     public final Bitmap getWallpaperBitmap(int i) {
-        int semGetWallpaperType;
+        int iSemGetWallpaperType;
         int screen = getScreen(i);
         boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
         boolean z2 = LsRune.WALLPAPER_SUB_DISPLAY_MODE && !LsRune.WALLPAPER_SUB_WATCHFACE;
@@ -146,41 +150,41 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
             screen = 0;
         }
         SuggestionsAdapter$$ExternalSyntheticOutline0.m(i, screen, "getWallpaperBitmap: which = ", ", screen = ", "PluginWallpaperController");
-        boolean hasIntelligentCrops = hasIntelligentCrops(screen, false);
-        boolean hasIntelligentCrops2 = hasIntelligentCrops(screen, true);
-        Bitmap fbeWallpaper = getFbeWallpaper(i, false, hasIntelligentCrops2);
-        boolean isValidBitmap = WallpaperUtils.isValidBitmap(fbeWallpaper);
-        boolean isWallpaperSrcBitmap = pluginWallpaperManager.isWallpaperSrcBitmap(screen);
-        if (!isValidBitmap && pluginWallpaperManager.isDynamicWallpaperEnabled(screen)) {
-            if (isWallpaperSrcBitmap) {
+        boolean zHasIntelligentCrops = hasIntelligentCrops(screen, false);
+        boolean zHasIntelligentCrops2 = hasIntelligentCrops(screen, true);
+        Bitmap fbeWallpaper = getFbeWallpaper(i, false, zHasIntelligentCrops2);
+        boolean zIsValidBitmap = WallpaperUtils.isValidBitmap(fbeWallpaper);
+        boolean zIsWallpaperSrcBitmap = pluginWallpaperManager.isWallpaperSrcBitmap(screen);
+        if (!zIsValidBitmap && pluginWallpaperManager.isDynamicWallpaperEnabled(screen)) {
+            if (zIsWallpaperSrcBitmap) {
                 fbeWallpaper = pluginWallpaperManager.getWallpaperBitmap(screen);
                 if (WallpaperUtils.isValidBitmap(fbeWallpaper)) {
-                    Bitmap copy = fbeWallpaper.copy(fbeWallpaper.getConfig(), false);
-                    Log.d("PluginWallpaperController", "getWallpaperBitmap: copiedBitmap = " + copy + ", hasICrops = " + hasIntelligentCrops);
-                    return copy;
+                    Bitmap bitmapCopy = fbeWallpaper.copy(fbeWallpaper.getConfig(), false);
+                    Log.d("PluginWallpaperController", "getWallpaperBitmap: copiedBitmap = " + bitmapCopy + ", hasICrops = " + zHasIntelligentCrops);
+                    return bitmapCopy;
                 }
             } else if (pluginWallpaperManager.isWallpaperSrcPath(screen)) {
                 String wallpaperPath = pluginWallpaperManager.getWallpaperPath(screen);
                 MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getWallpaperBitmap: path = ", wallpaperPath, "PluginWallpaperController");
-                fbeWallpaper = pluginWallpaperManager.getBitmapFromPath(wallpaperPath, hasIntelligentCrops);
+                fbeWallpaper = pluginWallpaperManager.getBitmapFromPath(wallpaperPath, zHasIntelligentCrops);
             } else if (pluginWallpaperManager.isWallpaperSrcUri(screen)) {
                 Uri wallpaperUri = pluginWallpaperManager.getWallpaperUri(screen);
                 Log.d("PluginWallpaperController", "getWallpaperBitmap: uri = " + wallpaperUri);
-                fbeWallpaper = pluginWallpaperManager.getBitmapFromUri(wallpaperUri, hasIntelligentCrops);
+                fbeWallpaper = pluginWallpaperManager.getBitmapFromUri(wallpaperUri, zHasIntelligentCrops);
             } else {
                 Log.e("PluginWallpaperController", "getWallpaperBitmap: source is not identified.");
             }
         }
-        if (!WallpaperUtils.isValidBitmap(fbeWallpaper) && ((semGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(i)) == 3 || semGetWallpaperType == 1000)) {
+        if (!WallpaperUtils.isValidBitmap(fbeWallpaper) && ((iSemGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(i)) == 3 || iSemGetWallpaperType == 1000)) {
             Log.d("PluginWallpaperController", "getWallpaperBitmap: bitmap is null. Trying to get fbe wallpaper.");
-            fbeWallpaper = getFbeWallpaper(i, true, hasIntelligentCrops2);
+            fbeWallpaper = getFbeWallpaper(i, true, zHasIntelligentCrops2);
         }
         StringBuilder sb = new StringBuilder("getWallpaperBitmap: bitmap = ");
         sb.append(fbeWallpaper);
         sb.append(", hasICrops = ");
-        sb.append(hasIntelligentCrops);
+        sb.append(zHasIntelligentCrops);
         sb.append(", hasICropsForFbe = ");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(sb, hasIntelligentCrops2, "PluginWallpaperController");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sb, zHasIntelligentCrops2, "PluginWallpaperController");
         return fbeWallpaper;
     }
 
@@ -193,20 +197,51 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
     public final boolean hasIntelligentCrops(int i, boolean z) {
         PluginWallpaperManager pluginWallpaperManager = this.mPluginWallpaperManager;
         String fbeWallpaperIntelligentCrop = z ? pluginWallpaperManager.getFbeWallpaperIntelligentCrop(i) : pluginWallpaperManager.getWallpaperIntelligentCrop(i);
-        Size logicalDisplaySize = WallpaperUtils.getLogicalDisplaySize(this.mContext);
-        Rect nearestCropHint = !TextUtils.isEmpty(fbeWallpaperIntelligentCrop) ? IntelligentCropHelper.getNearestCropHint(new Point(logicalDisplaySize.getWidth(), logicalDisplaySize.getHeight()), IntelligentCropHelper.parseCropHints(fbeWallpaperIntelligentCrop)) : null;
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("hasIntelligentCrops: screen = ", i, ", isFbe = ", z, ", iCrops = ");
-        m.append(fbeWallpaperIntelligentCrop);
-        m.append(", displaySize = ");
-        m.append(logicalDisplaySize);
-        m.append(", src = ");
-        m.append(nearestCropHint);
-        Log.d("PluginWallpaperController", m.toString());
+        Context context = this.mContext;
+        boolean z2 = WallpaperUtils.mIsExternalLiveWallpaper;
+        Configuration configuration = context.getResources().getConfiguration();
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int i2 = configuration.orientation;
+        Display defaultDisplay = ((WindowManager) context.getSystemService("window")).getDefaultDisplay();
+        Point point = new Point();
+        defaultDisplay.getRealSize(point);
+        int i3 = point.x;
+        int i4 = point.y;
+        boolean z3 = configuration.semMobileKeyboardCovered == 1;
+        int i5 = z3 ? displayMetrics.widthPixels : i2 == 1 ? i3 : i4;
+        if (z3) {
+            i3 = displayMetrics.heightPixels;
+        } else if (i2 == 1) {
+            i3 = i4;
+        }
+        PackageManager packageManager = context.getPackageManager();
+        if (packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet") && i5 < i3 && i2 == 2) {
+            Log.d("WallpaperUtils", "getLogicalDisplaySize: Adjust width and height for landscape tablet.");
+            int i6 = i5;
+            i5 = i3;
+            i3 = i6;
+        }
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i3, "getLogicalDisplaySize: ", " x ", " dm ");
+        sbM.append(displayMetrics.widthPixels);
+        sbM.append(" x ");
+        sbM.append(displayMetrics.heightPixels);
+        sbM.append(" orientation:");
+        sbM.append(i2);
+        Log.d("WallpaperUtils", sbM.toString());
+        Size size = new Size(i5, i3);
+        Rect nearestCropHint = !TextUtils.isEmpty(fbeWallpaperIntelligentCrop) ? IntelligentCropHelper.getNearestCropHint(new Point(size.getWidth(), size.getHeight()), IntelligentCropHelper.parseCropHints(fbeWallpaperIntelligentCrop)) : null;
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("hasIntelligentCrops: screen = ", i, ", isFbe = ", z, ", iCrops = ");
+        sbM2.append(fbeWallpaperIntelligentCrop);
+        sbM2.append(", displaySize = ");
+        sbM2.append(size);
+        sbM2.append(", src = ");
+        sbM2.append(nearestCropHint);
+        Log.d("PluginWallpaperController", sbM2.toString());
         return (nearestCropHint == null || nearestCropHint.isEmpty()) ? false : true;
     }
 
     public final boolean isPluginWallpaperRequired(int i) {
-        int semGetWallpaperType;
+        int iSemGetWallpaperType;
         int screen = getScreen(i);
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
         if (selectedUserId > 0) {
@@ -214,28 +249,28 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
             return false;
         }
         PluginWallpaperManager pluginWallpaperManager = this.mPluginWallpaperManager;
-        boolean isDynamicWallpaperEnabled = pluginWallpaperManager.isDynamicWallpaperEnabled(screen);
-        boolean isFbeAvailable = pluginWallpaperManager.isFbeAvailable(screen);
-        boolean z = isDynamicWallpaperEnabled || isFbeAvailable;
-        CarrierTextManager$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("isPluginWallpaperRequired: which = ", i, ", isRequired = ", z, ", isPluginWallpaper = "), isDynamicWallpaperEnabled, ", isFbeCondition = ", isFbeAvailable, "PluginWallpaperController");
-        if (z || !((semGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(i)) == 3 || semGetWallpaperType == 1000)) {
+        boolean zIsDynamicWallpaperEnabled = pluginWallpaperManager.isDynamicWallpaperEnabled(screen);
+        boolean zIsFbeAvailable = pluginWallpaperManager.isFbeAvailable(screen);
+        boolean z = zIsDynamicWallpaperEnabled || zIsFbeAvailable;
+        CarrierTextManager$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("isPluginWallpaperRequired: which = ", i, ", isRequired = ", z, ", isPluginWallpaper = "), zIsDynamicWallpaperEnabled, ", isFbeCondition = ", zIsFbeAvailable, "PluginWallpaperController");
+        if (z || !((iSemGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(i)) == 3 || iSemGetWallpaperType == 1000)) {
             return z;
         }
-        boolean isFbeWallpaperAvailable = pluginWallpaperManager.isFbeWallpaperAvailable(screen);
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("isPluginWallpaperRequired: PluginWallpaper is not ready yet. isFbeAvailable = ", "PluginWallpaperController", isFbeWallpaperAvailable);
-        return isFbeWallpaperAvailable;
+        boolean zIsFbeWallpaperAvailable = pluginWallpaperManager.isFbeWallpaperAvailable(screen);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("isPluginWallpaperRequired: PluginWallpaper is not ready yet. isFbeAvailable = ", "PluginWallpaperController", zIsFbeWallpaperAvailable);
+        return zIsFbeWallpaperAvailable;
     }
 
     @Override // com.android.systemui.pluginlock.component.PluginWallpaperCallback
     public final void onDataCleared() {
-        int semGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(6);
+        int iSemGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(6);
         if (LsRune.WALLPAPER_SUB_DISPLAY_MODE && !LsRune.WALLPAPER_SUB_WATCHFACE) {
             this.mWallpaperManager.semGetWallpaperType(18);
         }
-        if (semGetWallpaperType == 3) {
+        if (iSemGetWallpaperType == 3) {
             startMultiPack(6);
         }
-        if (semGetWallpaperType == 3) {
+        if (iSemGetWallpaperType == 3) {
             startMultiPack(18);
         }
     }
@@ -265,9 +300,9 @@ public class PluginWallpaperController implements PluginWallpaper, PluginWallpap
         if (z) {
             int screen = getScreen(WallpaperUtils.sCurrentWhich);
             int wallpaperId = this.mWallpaperManager.getWallpaperId(WallpaperUtils.sCurrentWhich);
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(screen, "onWallpaperUpdate: mWallpaperId[", "] = ");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(screen, "onWallpaperUpdate: mWallpaperId[", "] = ");
             int[] iArr = this.mWallpaperId;
-            KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(m, iArr[screen], ", wallpaperId = ", wallpaperId, "PluginWallpaperController");
+            KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(sbM, iArr[screen], ", wallpaperId = ", wallpaperId, "PluginWallpaperController");
             iArr[screen] = wallpaperId;
         }
         sendUpdate(z);

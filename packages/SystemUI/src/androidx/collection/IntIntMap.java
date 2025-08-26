@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import java.util.NoSuchElementException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class IntIntMap {
     public int _capacity;
@@ -17,6 +16,14 @@ public abstract class IntIntMap {
         this();
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x005b, code lost:
+    
+        return false;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0062  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -43,8 +50,8 @@ public abstract class IntIntMap {
                             int i4 = (i << 3) + i3;
                             int i5 = iArr[i4];
                             int i6 = iArr2[i4];
-                            int findKeyIndex = intIntMap.findKeyIndex(i5);
-                            if (findKeyIndex < 0 || i6 != intIntMap.values[findKeyIndex]) {
+                            int iFindKeyIndex = intIntMap.findKeyIndex(i5);
+                            if (iFindKeyIndex < 0 || i6 != intIntMap.values[iFindKeyIndex]) {
                                 break loop0;
                             }
                         }
@@ -53,20 +60,19 @@ public abstract class IntIntMap {
                     if (i2 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
-            return false;
         }
         return true;
     }
 
     public final int findKeyIndex(int i) {
-        int hashCode = Integer.hashCode(i) * (-862048943);
-        int i2 = hashCode ^ (hashCode << 16);
+        int iHashCode = Integer.hashCode(i) * (-862048943);
+        int i2 = iHashCode ^ (iHashCode << 16);
         int i3 = i2 & 127;
         int i4 = this._capacity;
         int i5 = (i2 >>> 7) & i4;
@@ -78,9 +84,9 @@ public abstract class IntIntMap {
             long j = ((jArr[i7 + 1] << (64 - i8)) & ((-i8) >> 63)) | (jArr[i7] >>> i8);
             long j2 = (i3 * 72340172838076673L) ^ j;
             for (long j3 = (~j2) & (j2 - 72340172838076673L) & (-9187201950435737472L); j3 != 0; j3 &= j3 - 1) {
-                int numberOfTrailingZeros = ((Long.numberOfTrailingZeros(j3) >> 3) + i5) & i4;
-                if (this.keys[numberOfTrailingZeros] == i) {
-                    return numberOfTrailingZeros;
+                int iNumberOfTrailingZeros = ((Long.numberOfTrailingZeros(j3) >> 3) + i5) & i4;
+                if (this.keys[iNumberOfTrailingZeros] == i) {
+                    return iNumberOfTrailingZeros;
                 }
             }
             if ((j & ((~j) << 6) & (-9187201950435737472L)) != 0) {
@@ -92,17 +98,17 @@ public abstract class IntIntMap {
     }
 
     public final int get(int i) {
-        int findKeyIndex = findKeyIndex(i);
-        if (findKeyIndex >= 0) {
-            return this.values[findKeyIndex];
+        int iFindKeyIndex = findKeyIndex(i);
+        if (iFindKeyIndex >= 0) {
+            return this.values[iFindKeyIndex];
         }
         throw new NoSuchElementException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Cannot find value for key "));
     }
 
     public final int getOrDefault(int i) {
-        int findKeyIndex = findKeyIndex(i);
-        if (findKeyIndex >= 0) {
-            return this.values[findKeyIndex];
+        int iFindKeyIndex = findKeyIndex(i);
+        if (iFindKeyIndex >= 0) {
+            return this.values[iFindKeyIndex];
         }
         return -1;
     }
@@ -116,30 +122,35 @@ public abstract class IntIntMap {
             return 0;
         }
         int i = 0;
-        int i2 = 0;
+        int iHashCode = 0;
         while (true) {
             long j = jArr[i];
             if ((((~j) << 7) & j & (-9187201950435737472L)) != -9187201950435737472L) {
-                int i3 = 8 - ((~(i - length)) >>> 31);
-                for (int i4 = 0; i4 < i3; i4++) {
+                int i2 = 8 - ((~(i - length)) >>> 31);
+                for (int i3 = 0; i3 < i2; i3++) {
                     if ((255 & j) < 128) {
-                        int i5 = (i << 3) + i4;
-                        int i6 = iArr[i5];
-                        i2 += Integer.hashCode(iArr2[i5]) ^ Integer.hashCode(i6);
+                        int i4 = (i << 3) + i3;
+                        int i5 = iArr[i4];
+                        iHashCode += Integer.hashCode(iArr2[i4]) ^ Integer.hashCode(i5);
                     }
                     j >>= 8;
                 }
-                if (i3 != 8) {
-                    return i2;
+                if (i2 != 8) {
+                    return iHashCode;
                 }
             }
             if (i == length) {
-                return i2;
+                return iHashCode;
             }
             i++;
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0068 A[PHI: r8
+      0x0068: PHI (r8v2 int) = (r8v1 int), (r8v3 int) binds: [B:10:0x002e, B:19:0x0066] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final String toString() {
         if (this._size == 0) {
             return "{}";
@@ -174,11 +185,11 @@ public abstract class IntIntMap {
                     if (i3 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
         }
         sb.append('}');

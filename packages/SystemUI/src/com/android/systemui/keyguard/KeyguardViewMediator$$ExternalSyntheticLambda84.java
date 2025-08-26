@@ -6,7 +6,6 @@ import android.view.RemoteAnimationTarget;
 import android.view.SyncRtSurfaceTransactionApplier;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda84 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -39,12 +38,12 @@ public final /* synthetic */ class KeyguardViewMediator$$ExternalSyntheticLambda
                 SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier3 = this.f$1;
                 int i2 = KeyguardViewMediator.AnonymousClass10.$r8$clinit;
                 anonymousClass10.getClass();
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                float height = KeyguardViewMediator.this.mRemoteAnimationTarget.screenSpaceBounds.height();
-                SyncRtSurfaceTransactionApplier.SurfaceParams.Builder withAlpha = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(KeyguardViewMediator.this.mRemoteAnimationTarget.leash).withAlpha(floatValue);
-                anonymousClass10.mUnoccludeMatrix.setTranslate(0.0f, (1.0f - floatValue) * height * 0.1f);
-                withAlpha.withMatrix(anonymousClass10.mUnoccludeMatrix).withCornerRadius(KeyguardViewMediator.this.mWindowCornerRadius);
-                syncRtSurfaceTransactionApplier3.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{withAlpha.build()});
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fHeight = KeyguardViewMediator.this.mRemoteAnimationTarget.screenSpaceBounds.height();
+                SyncRtSurfaceTransactionApplier.SurfaceParams.Builder builderWithAlpha = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(KeyguardViewMediator.this.mRemoteAnimationTarget.leash).withAlpha(fFloatValue);
+                anonymousClass10.mUnoccludeMatrix.setTranslate(0.0f, (1.0f - fFloatValue) * fHeight * 0.1f);
+                builderWithAlpha.withMatrix(anonymousClass10.mUnoccludeMatrix).withCornerRadius(KeyguardViewMediator.this.mWindowCornerRadius);
+                syncRtSurfaceTransactionApplier3.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{builderWithAlpha.build()});
                 break;
         }
     }

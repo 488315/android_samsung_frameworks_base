@@ -79,26 +79,26 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
         ClickableSpan[] clickableSpanArr = (ClickableSpan[]) spannable.getSpans(lineStart, lineEnd, ClickableSpan.class);
         int selectionStart = Selection.getSelectionStart(spannable);
         int selectionEnd = Selection.getSelectionEnd(spannable);
-        int min = Math.min(selectionStart, selectionEnd);
-        int max = Math.max(selectionStart, selectionEnd);
-        if (min < 0 && spannable.getSpanStart(FROM_BELOW) >= 0) {
-            min = spannable.length();
-            max = min;
+        int iMin = Math.min(selectionStart, selectionEnd);
+        int iMax = Math.max(selectionStart, selectionEnd);
+        if (iMin < 0 && spannable.getSpanStart(FROM_BELOW) >= 0) {
+            iMin = spannable.length();
+            iMax = iMin;
         }
-        if (min > lineEnd) {
-            max = Integer.MAX_VALUE;
-            min = Integer.MAX_VALUE;
+        if (iMin > lineEnd) {
+            iMax = Integer.MAX_VALUE;
+            iMin = Integer.MAX_VALUE;
         }
-        int i2 = -1;
-        if (max < lineStart) {
-            max = -1;
-            min = -1;
+        int spanStart = -1;
+        if (iMax < lineStart) {
+            iMax = -1;
+            iMin = -1;
         }
         if (i == 1) {
-            if (min == max) {
+            if (iMin == iMax) {
                 return false;
             }
-            ClickableSpan[] clickableSpanArr2 = (ClickableSpan[]) spannable.getSpans(min, max, ClickableSpan.class);
+            ClickableSpan[] clickableSpanArr2 = (ClickableSpan[]) spannable.getSpans(iMin, iMax, ClickableSpan.class);
             if (clickableSpanArr2.length != 1) {
                 return false;
             }
@@ -109,30 +109,30 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
                 clickableSpan.onClick(textView);
             }
         } else if (i == 2) {
-            int i3 = -1;
-            for (int i4 = 0; i4 < clickableSpanArr.length; i4++) {
-                int spanEnd = spannable.getSpanEnd(clickableSpanArr[i4]);
-                if ((spanEnd < max || min == max) && spanEnd > i3) {
-                    i2 = spannable.getSpanStart(clickableSpanArr[i4]);
-                    i3 = spanEnd;
+            int i2 = -1;
+            for (int i3 = 0; i3 < clickableSpanArr.length; i3++) {
+                int spanEnd = spannable.getSpanEnd(clickableSpanArr[i3]);
+                if ((spanEnd < iMax || iMin == iMax) && spanEnd > i2) {
+                    spanStart = spannable.getSpanStart(clickableSpanArr[i3]);
+                    i2 = spanEnd;
                 }
             }
-            if (i2 >= 0) {
-                Selection.setSelection(spannable, i3, i2);
+            if (spanStart >= 0) {
+                Selection.setSelection(spannable, i2, spanStart);
                 return true;
             }
         } else if (i == 3) {
-            int i5 = Integer.MAX_VALUE;
-            int i6 = Integer.MAX_VALUE;
-            for (int i7 = 0; i7 < clickableSpanArr.length; i7++) {
-                int spanStart = spannable.getSpanStart(clickableSpanArr[i7]);
-                if ((spanStart > min || min == max) && spanStart < i6) {
-                    i5 = spannable.getSpanEnd(clickableSpanArr[i7]);
-                    i6 = spanStart;
+            int spanEnd2 = Integer.MAX_VALUE;
+            int i4 = Integer.MAX_VALUE;
+            for (int i5 = 0; i5 < clickableSpanArr.length; i5++) {
+                int spanStart2 = spannable.getSpanStart(clickableSpanArr[i5]);
+                if ((spanStart2 > iMin || iMin == iMax) && spanStart2 < i4) {
+                    spanEnd2 = spannable.getSpanEnd(clickableSpanArr[i5]);
+                    i4 = spanStart2;
                 }
             }
-            if (i5 < Integer.MAX_VALUE) {
-                Selection.setSelection(spannable, i6, i5);
+            if (spanEnd2 < Integer.MAX_VALUE) {
+                Selection.setSelection(spannable, i4, spanEnd2);
                 return true;
             }
         }

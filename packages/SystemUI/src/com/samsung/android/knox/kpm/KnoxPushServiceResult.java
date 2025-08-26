@@ -3,7 +3,6 @@ package com.samsung.android.knox.kpm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxPushServiceResult implements Parcelable {
     public static final Parcelable.Creator<KnoxPushServiceResult> CREATOR = new Parcelable.Creator<KnoxPushServiceResult>() { // from class: com.samsung.android.knox.kpm.KnoxPushServiceResult.1

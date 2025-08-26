@@ -19,7 +19,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -58,14 +57,14 @@ final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends Susp
             ?? r1 = new NtnSignalStrengthCallback() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1$cb$1
                 public final void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) {
                     DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
-                    LogBuffer logBuffer = DeviceBasedSatelliteRepositoryImpl.this.verboseLogBuffer;
+                    LogBuffer logBuffer = deviceBasedSatelliteRepositoryImpl.verboseLogBuffer;
                     DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 = new DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0(10);
                     companion.getClass();
-                    LogMessage obtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
-                    obtain.setInt1(ntnSignalStrength.getLevel());
+                    LogMessage logMessageObtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
+                    logMessageObtain.setInt1(ntnSignalStrength.getLevel());
                     Unit unit = Unit.INSTANCE;
-                    logBuffer.commit(obtain);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Integer.valueOf(ntnSignalStrength.getLevel()));
+                    logBuffer.commit(logMessageObtain);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(ntnSignalStrength.getLevel()));
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

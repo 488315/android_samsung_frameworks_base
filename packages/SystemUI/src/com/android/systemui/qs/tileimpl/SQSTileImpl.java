@@ -22,14 +22,12 @@ import com.android.systemui.qs.QsEventLoggerImpl;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SQSTileImpl extends QSTileImpl implements SQSTile {
     public static final Object ARG_SHOW_TRANSIENT_ENABLING = new Object();
     public final SHandler mHandler;
     public final LifecycleRegistry mLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SHandler extends QSTileImpl.H {
         protected static final int STALE = 11;
 
@@ -120,7 +118,7 @@ public abstract class SQSTileImpl extends QSTileImpl implements SQSTile {
         this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.SQSTileImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SQSTileImpl.this.mLifecycle.setCurrentState(Lifecycle.State.CREATED);
+                this.f$0.mLifecycle.setCurrentState(Lifecycle.State.CREATED);
             }
         });
     }

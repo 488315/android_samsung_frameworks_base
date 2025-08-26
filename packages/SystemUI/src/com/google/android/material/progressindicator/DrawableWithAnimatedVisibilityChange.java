@@ -17,7 +17,6 @@ import com.google.android.material.animation.AnimationUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class DrawableWithAnimatedVisibilityChange extends Drawable implements Animatable2Compat {
     public static final AnonymousClass3 GROW_FRACTION = new Property(Float.class, "growFraction") { // from class: com.google.android.material.progressindicator.DrawableWithAnimatedVisibilityChange.3
@@ -29,9 +28,9 @@ public abstract class DrawableWithAnimatedVisibilityChange extends Drawable impl
         @Override // android.util.Property
         public final void set(Object obj, Object obj2) {
             DrawableWithAnimatedVisibilityChange drawableWithAnimatedVisibilityChange = (DrawableWithAnimatedVisibilityChange) obj;
-            float floatValue = ((Float) obj2).floatValue();
-            if (drawableWithAnimatedVisibilityChange.growFraction != floatValue) {
-                drawableWithAnimatedVisibilityChange.growFraction = floatValue;
+            float fFloatValue = ((Float) obj2).floatValue();
+            if (drawableWithAnimatedVisibilityChange.growFraction != fFloatValue) {
+                drawableWithAnimatedVisibilityChange.growFraction = fFloatValue;
                 drawableWithAnimatedVisibilityChange.invalidateSelf();
             }
         }
@@ -135,9 +134,9 @@ public abstract class DrawableWithAnimatedVisibilityChange extends Drawable impl
 
     public boolean setVisibleInternal(boolean z, boolean z2, boolean z3) {
         if (this.showAnimator == null) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, GROW_FRACTION, 0.0f, 1.0f);
-            this.showAnimator = ofFloat;
-            ofFloat.setDuration(500L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, GROW_FRACTION, 0.0f, 1.0f);
+            this.showAnimator = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.setDuration(500L);
             this.showAnimator.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
             ValueAnimator valueAnimator = this.showAnimator;
             if (valueAnimator != null && valueAnimator.isRunning()) {
@@ -165,9 +164,9 @@ public abstract class DrawableWithAnimatedVisibilityChange extends Drawable impl
             });
         }
         if (this.hideAnimator == null) {
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, GROW_FRACTION, 1.0f, 0.0f);
-            this.hideAnimator = ofFloat2;
-            ofFloat2.setDuration(500L);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, GROW_FRACTION, 1.0f, 0.0f);
+            this.hideAnimator = objectAnimatorOfFloat2;
+            objectAnimatorOfFloat2.setDuration(500L);
             this.hideAnimator.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
             ValueAnimator valueAnimator2 = this.hideAnimator;
             if (valueAnimator2 != null && valueAnimator2.isRunning()) {

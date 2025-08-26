@@ -133,9 +133,9 @@ public interface IContentCaptureManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentCaptureManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentCaptureManager)) {
-                return (IContentCaptureManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentCaptureManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentCaptureManager)) {
+                return (IContentCaptureManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -189,24 +189,24 @@ public interface IContentCaptureManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IResultReceiver asInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startSession(readStrongBinder, readStrongBinder2, componentName, readInt, readInt2, asInterface);
+                    startSession(strongBinder, strongBinder2, componentName, i3, i4, iResultReceiverAsInterface);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    finishSession(readInt3);
+                    finishSession(i5);
                     return true;
                 case 3:
-                    IResultReceiver asInterface2 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IResultReceiver iResultReceiverAsInterface2 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getServiceComponentName(asInterface2);
+                    getServiceComponentName(iResultReceiverAsInterface2);
                     return true;
                 case 4:
                     DataRemovalRequest dataRemovalRequest = (DataRemovalRequest) parcel.readTypedObject(DataRemovalRequest.CREATOR);
@@ -215,49 +215,49 @@ public interface IContentCaptureManager extends IInterface {
                     return true;
                 case 5:
                     DataShareRequest dataShareRequest = (DataShareRequest) parcel.readTypedObject(DataShareRequest.CREATOR);
-                    IDataShareWriteAdapter asInterface3 = IDataShareWriteAdapter.Stub.asInterface(parcel.readStrongBinder());
+                    IDataShareWriteAdapter iDataShareWriteAdapterAsInterface = IDataShareWriteAdapter.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    shareData(dataShareRequest, asInterface3);
+                    shareData(dataShareRequest, iDataShareWriteAdapterAsInterface);
                     return true;
                 case 6:
-                    IResultReceiver asInterface4 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IResultReceiver iResultReceiverAsInterface3 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    isContentCaptureFeatureEnabled(asInterface4);
+                    isContentCaptureFeatureEnabled(iResultReceiverAsInterface3);
                     return true;
                 case 7:
-                    IResultReceiver asInterface5 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IResultReceiver iResultReceiverAsInterface4 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getServiceSettingsActivity(asInterface5);
+                    getServiceSettingsActivity(iResultReceiverAsInterface4);
                     return true;
                 case 8:
-                    String readString = parcel.readString();
-                    IResultReceiver asInterface6 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    IResultReceiver iResultReceiverAsInterface5 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getContentCaptureConditions(readString, asInterface6);
+                    getContentCaptureConditions(string, iResultReceiverAsInterface5);
                     return true;
                 case 9:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetTemporaryService(readInt4);
+                    resetTemporaryService(i6);
                     return true;
                 case 10:
-                    int readInt5 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTemporaryService(readInt5, readString2, readInt6);
+                    setTemporaryService(i7, string2, i8);
                     return true;
                 case 11:
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i9 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDefaultServiceEnabled(readInt7, readBoolean);
+                    setDefaultServiceEnabled(i9, z);
                     return true;
                 case 12:
-                    String readString3 = parcel.readString();
-                    IContentCaptureOptionsCallback asInterface7 = IContentCaptureOptionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
+                    IContentCaptureOptionsCallback iContentCaptureOptionsCallbackAsInterface = IContentCaptureOptionsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerContentCaptureOptionsCallback(readString3, asInterface7);
+                    registerContentCaptureOptionsCallback(string3, iContentCaptureOptionsCallbackAsInterface);
                     return true;
                 case 13:
                     ParceledListSlice<ContentCaptureEvent> parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
@@ -287,168 +287,168 @@ public interface IContentCaptureManager extends IInterface {
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void startSession(IBinder iBinder, IBinder iBinder2, ComponentName componentName, int i, int i2, IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void finishSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void getServiceComponentName(IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void removeData(DataRemovalRequest dataRemovalRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeTypedObject(dataRemovalRequest, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dataRemovalRequest, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void shareData(DataShareRequest dataShareRequest, IDataShareWriteAdapter iDataShareWriteAdapter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeTypedObject(dataShareRequest, 0);
-                    obtain.writeStrongInterface(iDataShareWriteAdapter);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dataShareRequest, 0);
+                    parcelObtain.writeStrongInterface(iDataShareWriteAdapter);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void isContentCaptureFeatureEnabled(IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void getServiceSettingsActivity(IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void getContentCaptureConditions(String str, IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void resetTemporaryService(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void setTemporaryService(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void setDefaultServiceEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void registerContentCaptureOptionsCallback(String str, IContentCaptureOptionsCallback iContentCaptureOptionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iContentCaptureOptionsCallback);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iContentCaptureOptionsCallback);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
             public void onLoginDetected(ParceledListSlice<ContentCaptureEvent> parceledListSlice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

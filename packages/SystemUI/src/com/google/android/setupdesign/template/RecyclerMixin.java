@@ -1,6 +1,7 @@
 package com.google.android.setupdesign.template;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.util.TypedValue;
@@ -16,7 +17,6 @@ import com.google.android.setupdesign.DividerItemDecoration;
 import com.google.android.setupdesign.util.PartnerStyleHelper;
 import com.google.android.setupdesign.view.HeaderRecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RecyclerMixin implements Mixin {
     public Drawable defaultDivider;
@@ -29,7 +29,7 @@ public class RecyclerMixin implements Mixin {
     public final RecyclerView recyclerView;
     public final TemplateLayout templateLayout;
 
-    public RecyclerMixin(TemplateLayout templateLayout, RecyclerView recyclerView) {
+    public RecyclerMixin(TemplateLayout templateLayout, RecyclerView recyclerView) throws Resources.NotFoundException {
         this.isDividerDisplay = true;
         this.templateLayout = templateLayout;
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(templateLayout.getContext());

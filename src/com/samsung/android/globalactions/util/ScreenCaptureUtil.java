@@ -40,11 +40,11 @@ public class ScreenCaptureUtil {
         Display defaultDisplay = this.mWindowManager.getDefaultDisplay();
         int displayId = defaultDisplay.getDisplayId();
         defaultDisplay.getRealMetrics(displayMetrics);
-        Bitmap screenshot = this.mSemWindowManager.screenshot(displayId, WindowManager.LayoutParams.TYPE_GLOBAL_ACTION, false, new Rect(), Math.abs(displayMetrics.widthPixels) / 5, Math.abs(displayMetrics.heightPixels) / 5, false, 0, true);
-        if (screenshot == null) {
+        Bitmap bitmapScreenshot = this.mSemWindowManager.screenshot(displayId, WindowManager.LayoutParams.TYPE_GLOBAL_ACTION, false, new Rect(), Math.abs(displayMetrics.widthPixels) / 5, Math.abs(displayMetrics.heightPixels) / 5, false, 0, true);
+        if (bitmapScreenshot == null) {
             this.mLogWrapper.v(TAG, "bitmap is null !!!!");
         } else {
-            this.mCapture = screenshot;
+            this.mCapture = bitmapScreenshot;
         }
     }
 

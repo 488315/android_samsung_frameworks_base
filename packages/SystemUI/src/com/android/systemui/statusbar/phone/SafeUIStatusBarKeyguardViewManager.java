@@ -83,7 +83,6 @@ import kotlin.Unit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewManager {
     public final ActivityStarter mActivityStarter;
@@ -146,7 +145,6 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
     public final ViewMediatorCallback mViewMediatorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DismissWithActionRequest {
         public final boolean afterKeyguardGone;
         public final Runnable cancelAction;
@@ -272,12 +270,12 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
             public final void onTrustGrantedForCurrentUser(boolean z, boolean z2, TrustGrantFlags trustGrantFlags, String str) {
                 SafeUIStatusBarKeyguardViewManager safeUIStatusBarKeyguardViewManager = SafeUIStatusBarKeyguardViewManager.this;
                 AlternateBouncerInteractor alternateBouncerInteractor2 = safeUIStatusBarKeyguardViewManager.mAlternateBouncerInteractor;
-                boolean hide = alternateBouncerInteractor2.isVisibleState() ? alternateBouncerInteractor2.hide() : false;
+                boolean zHide = alternateBouncerInteractor2.isVisibleState() ? alternateBouncerInteractor2.hide() : false;
                 if (safeUIStatusBarKeyguardViewManager.mCentralSurfacesRegistered) {
-                    boolean isVisibleState = safeUIStatusBarKeyguardViewManager.mAlternateBouncerInteractor.isVisibleState();
+                    boolean zIsVisibleState = safeUIStatusBarKeyguardViewManager.mAlternateBouncerInteractor.isVisibleState();
                     int i = SceneContainerFlag.$r8$clinit;
-                    safeUIStatusBarKeyguardViewManager.mKeyguardUpdateManager.setAlternateBouncerShowing(isVisibleState);
-                    if (hide) {
+                    safeUIStatusBarKeyguardViewManager.mKeyguardUpdateManager.setAlternateBouncerShowing(zIsVisibleState);
+                    if (zHide) {
                         safeUIStatusBarKeyguardViewManager.mCentralSurfaces.updateScrimController();
                     }
                 }
@@ -383,9 +381,9 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
 
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusBarKeyguardViewManager:", "  mRemoteInputActive: "), this.mRemoteInputActive, printWriter, "  mDozing: "), this.mDozing, printWriter, "  mAfterKeyguardGoneAction: ");
-        m.append(this.mAfterKeyguardGoneAction);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusBarKeyguardViewManager:", "  mRemoteInputActive: "), this.mRemoteInputActive, printWriter, "  mDozing: "), this.mDozing, printWriter, "  mAfterKeyguardGoneAction: ");
+        sbM.append(this.mAfterKeyguardGoneAction);
+        printWriter.println(sbM.toString());
         printWriter.println("  mAfterKeyguardGoneRunnables: " + this.mAfterKeyguardGoneRunnables);
         printWriter.println("  mPendingWakeupAction: " + this.mPendingWakeupAction);
         printWriter.println("  isBouncerShowing(): " + isBouncerShowing());
@@ -462,9 +460,9 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
         AlternateBouncerInteractor alternateBouncerInteractor = this.mAlternateBouncerInteractor;
         boolean z2 = alternateBouncerInteractor.hide() && z;
         if (this.mCentralSurfacesRegistered) {
-            boolean isVisibleState = alternateBouncerInteractor.isVisibleState();
+            boolean zIsVisibleState = alternateBouncerInteractor.isVisibleState();
             int i = SceneContainerFlag.$r8$clinit;
-            this.mKeyguardUpdateManager.setAlternateBouncerShowing(isVisibleState);
+            this.mKeyguardUpdateManager.setAlternateBouncerShowing(zIsVisibleState);
             if (z2) {
                 this.mCentralSurfaces.updateScrimController();
             }
@@ -511,9 +509,9 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
     public final boolean isNavBarVisible() {
         BiometricUnlockController biometricUnlockController = this.mBiometricUnlockController;
         boolean z = biometricUnlockController != null && biometricUnlockController.mMode == 2;
-        boolean isVisible = this.mKeyguardStateController.isVisible();
+        boolean zIsVisible = this.mKeyguardStateController.isVisible();
         boolean z2 = this.mDozing;
-        return !(isVisible || (z2 && !z) || this.mScreenOffAnimationPlaying) || this.mPrimaryBouncerInteractor.isFullyShowing() || this.mRemoteInputActive || (((isVisible && !z2 && !this.mScreenOffAnimationPlaying) || this.mPulsing) && this.mGesturalNav) || this.mGlobalActionsVisible;
+        return !(zIsVisible || (z2 && !z) || this.mScreenOffAnimationPlaying) || this.mPrimaryBouncerInteractor.isFullyShowing() || this.mRemoteInputActive || (((zIsVisible && !z2 && !this.mScreenOffAnimationPlaying) || this.mPulsing) && this.mGesturalNav) || this.mGlobalActionsVisible;
     }
 
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager
@@ -615,9 +613,9 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
 
     @Override // com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager, com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
     public final void onNavigationModeChanged(int i) {
-        boolean isGesturalMode = QuickStepContract.isGesturalMode(i);
-        if (isGesturalMode != this.mGesturalNav) {
-            this.mGesturalNav = isGesturalMode;
+        boolean zIsGesturalMode = QuickStepContract.isGesturalMode(i);
+        if (zIsGesturalMode != this.mGesturalNav) {
+            this.mGesturalNav = zIsGesturalMode;
             updateStates();
         }
     }
@@ -727,7 +725,7 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
         this.mListenForCanShowAlternateBouncer = this.mJavaAdapter.alwaysCollectFlow(this.mAlternateBouncerInteractor.canShowAlternateBouncer, new Consumer() { // from class: com.android.systemui.statusbar.phone.SafeUIStatusBarKeyguardViewManager$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SafeUIStatusBarKeyguardViewManager safeUIStatusBarKeyguardViewManager = SafeUIStatusBarKeyguardViewManager.this;
+                SafeUIStatusBarKeyguardViewManager safeUIStatusBarKeyguardViewManager = this.f$0;
                 ((Boolean) obj).booleanValue();
                 safeUIStatusBarKeyguardViewManager.getClass();
             }
@@ -906,13 +904,13 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
         boolean z = keyguardStateControllerImpl.mShowing;
         boolean z2 = keyguardStateControllerImpl.mOccluded;
         PrimaryBouncerInteractor primaryBouncerInteractor = this.mPrimaryBouncerInteractor;
-        boolean isFullyShowing = primaryBouncerInteractor.isFullyShowing();
-        boolean primaryBouncerIsOrWillBeShowing = primaryBouncerIsOrWillBeShowing();
-        boolean isFullscreenBouncer = isFullscreenBouncer();
-        boolean z3 = !isFullscreenBouncer;
+        boolean zIsFullyShowing = primaryBouncerInteractor.isFullyShowing();
+        boolean zPrimaryBouncerIsOrWillBeShowing = primaryBouncerIsOrWillBeShowing();
+        boolean zIsFullscreenBouncer = isFullscreenBouncer();
+        boolean z3 = !zIsFullscreenBouncer;
         boolean z4 = this.mRemoteInputActive;
-        if (((isFullscreenBouncer && z && !z4) ? false : true) != (this.mLastBouncerDismissible || !this.mLastShowing || this.mLastRemoteInputActive) || this.mFirstUpdate) {
-            if (isFullscreenBouncer && z && !z4) {
+        if (((zIsFullscreenBouncer && z && !z4) ? false : true) != (this.mLastBouncerDismissible || !this.mLastShowing || this.mLastRemoteInputActive) || this.mFirstUpdate) {
+            if (zIsFullscreenBouncer && z && !z4) {
                 primaryBouncerInteractor.setBackButtonEnabled(false);
             } else {
                 primaryBouncerInteractor.setBackButtonEnabled(true);
@@ -921,22 +919,22 @@ public class SafeUIStatusBarKeyguardViewManager extends StatusBarKeyguardViewMan
         if (isNavBarVisible() == getLastNavBarVisible()) {
             boolean z5 = this.mFirstUpdate;
         }
-        boolean z6 = isFullyShowing != this.mLastPrimaryBouncerShowing;
-        this.mLastPrimaryBouncerShowing = isFullyShowing;
+        boolean z6 = zIsFullyShowing != this.mLastPrimaryBouncerShowing;
+        this.mLastPrimaryBouncerShowing = zIsFullyShowing;
         if (z6 || this.mFirstUpdate) {
             NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = (NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController;
             NotificationShadeWindowState notificationShadeWindowState = notificationShadeWindowControllerImpl.mCurrentState;
-            notificationShadeWindowState.bouncerShowing = isFullyShowing;
+            notificationShadeWindowState.bouncerShowing = zIsFullyShowing;
             notificationShadeWindowControllerImpl.apply(notificationShadeWindowState);
         }
-        if (primaryBouncerIsOrWillBeShowing != this.mLastPrimaryBouncerIsOrWillBeShowing || this.mFirstUpdate || z6) {
-            this.mKeyguardUpdateManager.sendPrimaryBouncerChanged(primaryBouncerIsOrWillBeShowing, isFullyShowing);
+        if (zPrimaryBouncerIsOrWillBeShowing != this.mLastPrimaryBouncerIsOrWillBeShowing || this.mFirstUpdate || z6) {
+            this.mKeyguardUpdateManager.sendPrimaryBouncerChanged(zPrimaryBouncerIsOrWillBeShowing, zIsFullyShowing);
         }
         this.mFirstUpdate = false;
         this.mLastShowing = z;
         this.mLastGlobalActionsVisible = this.mGlobalActionsVisible;
         this.mLastOccluded = z2;
-        this.mLastPrimaryBouncerIsOrWillBeShowing = primaryBouncerIsOrWillBeShowing;
+        this.mLastPrimaryBouncerIsOrWillBeShowing = zPrimaryBouncerIsOrWillBeShowing;
         this.mLastBouncerDismissible = z3;
         this.mLastRemoteInputActive = z4;
         this.mLastDozing = this.mDozing;

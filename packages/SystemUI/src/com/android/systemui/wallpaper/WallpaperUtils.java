@@ -3,9 +3,8 @@ package com.android.systemui.wallpaper;
 import android.app.SemWallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -14,9 +13,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Size;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.WindowManager;
@@ -31,9 +28,12 @@ import com.android.systemui.widget.SystemUIWidgetUtil;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.view.SemWindowManager;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WallpaperUtils {
     public static boolean mIsAdaptiveColorMode = false;
@@ -49,96 +49,63 @@ public class WallpaperUtils {
     public static final SparseArray sCachedWallpaperColors = new SparseArray();
     public static int sWallpaperType = -1;
 
-    /* JADX WARN: Can't wrap try/catch for region: R(12:0|1|2|3|4|(7:8|9|10|(3:12|13|(1:15))|20|21|22)|34|(1:38)|20|21|22|(1:(0))) */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0086, code lost:
-    
-        r10 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0087, code lost:
-    
-        r10.printStackTrace();
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static android.graphics.Bitmap decodeStreamConsiderQMG(java.io.InputStream r10, android.graphics.Rect r11, android.graphics.BitmapFactory.Options r12) {
-        /*
-            java.lang.String r0 = "decodeStream() bitmap is null"
-            java.lang.String r1 = "WallpaperUtils"
-            java.io.BufferedInputStream r2 = new java.io.BufferedInputStream
-            r2.<init>(r10)
-            r3 = 2
-            r2.mark(r3)
-            int r4 = r2.read()     // Catch: java.io.IOException -> L6e
-            int r5 = r2.read()     // Catch: java.io.IOException -> L6e
-            r2.reset()     // Catch: java.io.IOException -> L6e
-            r6 = 81
-            if (r4 != r6) goto L72
-            r4 = 71
-            if (r5 != r4) goto L72
-            r4 = 0
-            java.lang.String r5 = "android.graphics.BitmapFactory"
-            java.lang.Class r5 = java.lang.Class.forName(r5)     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.String r6 = "decodeStreamQMG"
-            r7 = 3
-            java.lang.Class[] r7 = new java.lang.Class[r7]     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.Class<java.io.InputStream> r8 = java.io.InputStream.class
-            r9 = 0
-            r7[r9] = r8     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.Class<android.graphics.Rect> r8 = android.graphics.Rect.class
-            r9 = 1
-            r7[r9] = r8     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.Class<android.graphics.BitmapFactory$Options> r8 = android.graphics.BitmapFactory.Options.class
-            r7[r3] = r8     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.reflect.Method r3 = r5.getMethod(r6, r7)     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            r3.setAccessible(r9)     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.Object[] r5 = new java.lang.Object[]{r2, r11, r12}     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            java.lang.Object r3 = r3.invoke(r4, r5)     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            android.graphics.Bitmap r3 = (android.graphics.Bitmap) r3     // Catch: java.lang.Exception -> L5a java.lang.NoSuchMethodException -> L60
-            if (r3 != 0) goto L7f
-            boolean r4 = r12.inJustDecodeBounds     // Catch: java.lang.Exception -> L57 java.lang.NoSuchMethodException -> L60
-            if (r4 != 0) goto L7f
-            java.lang.String r4 = "decodeStreamQMG() bitmap is null"
-            android.util.Log.w(r1, r4)     // Catch: java.lang.Exception -> L57 java.lang.NoSuchMethodException -> L60
-            goto L7f
-        L57:
-            r11 = move-exception
-            r4 = r3
-            goto L5b
-        L5a:
-            r11 = move-exception
-        L5b:
-            r11.printStackTrace()
-            r3 = r4
-            goto L7f
-        L60:
-            android.graphics.Bitmap r3 = android.graphics.BitmapFactory.decodeStream(r2, r11, r12)
-            if (r3 != 0) goto L7f
-            boolean r11 = r12.inJustDecodeBounds
-            if (r11 != 0) goto L7f
-            android.util.Log.w(r1, r0)
-            goto L7f
-        L6e:
-            r3 = move-exception
-            r3.printStackTrace()
-        L72:
-            android.graphics.Bitmap r3 = android.graphics.BitmapFactory.decodeStream(r2, r11, r12)
-            if (r3 != 0) goto L7f
-            boolean r11 = r12.inJustDecodeBounds
-            if (r11 != 0) goto L7f
-            android.util.Log.w(r1, r0)
-        L7f:
-            r2.close()     // Catch: java.lang.Exception -> L86
-            r10.close()     // Catch: java.lang.Exception -> L86
-            goto L8a
-        L86:
-            r10 = move-exception
-            r10.printStackTrace()
-        L8a:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.WallpaperUtils.decodeStreamConsiderQMG(java.io.InputStream, android.graphics.Rect, android.graphics.BitmapFactory$Options):android.graphics.Bitmap");
+    public static Bitmap decodeStreamConsiderQMG(InputStream inputStream, Rect rect, BitmapFactory.Options options) throws NoSuchMethodException, IOException, SecurityException {
+        Bitmap bitmapDecodeStream;
+        int i;
+        int i2;
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        bufferedInputStream.mark(2);
+        try {
+            i = bufferedInputStream.read();
+            i2 = bufferedInputStream.read();
+            bufferedInputStream.reset();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (i == 81 && i2 == 71) {
+            Bitmap bitmap = null;
+            try {
+                try {
+                    Method method = Class.forName("android.graphics.BitmapFactory").getMethod("decodeStreamQMG", InputStream.class, Rect.class, BitmapFactory.Options.class);
+                    method.setAccessible(true);
+                    bitmapDecodeStream = (Bitmap) method.invoke(null, bufferedInputStream, rect, options);
+                    if (bitmapDecodeStream == null) {
+                        try {
+                            if (!options.inJustDecodeBounds) {
+                                Log.w("WallpaperUtils", "decodeStreamQMG() bitmap is null");
+                            }
+                        } catch (Exception e2) {
+                            e = e2;
+                            bitmap = bitmapDecodeStream;
+                            e.printStackTrace();
+                            bitmapDecodeStream = bitmap;
+                            bufferedInputStream.close();
+                            inputStream.close();
+                            return bitmapDecodeStream;
+                        }
+                    }
+                } catch (Exception e3) {
+                    e = e3;
+                }
+            } catch (NoSuchMethodException unused) {
+                bitmapDecodeStream = BitmapFactory.decodeStream(bufferedInputStream, rect, options);
+                if (bitmapDecodeStream == null && !options.inJustDecodeBounds) {
+                    Log.w("WallpaperUtils", "decodeStream() bitmap is null");
+                }
+            }
+        } else {
+            bitmapDecodeStream = BitmapFactory.decodeStream(bufferedInputStream, rect, options);
+            if (bitmapDecodeStream == null && !options.inJustDecodeBounds) {
+                Log.w("WallpaperUtils", "decodeStream() bitmap is null");
+            }
+        }
+        try {
+            bufferedInputStream.close();
+            inputStream.close();
+        } catch (Exception e4) {
+            e4.printStackTrace();
+        }
+        return bitmapDecodeStream;
     }
 
     public static void dump(Context context, PrintWriter printWriter) {
@@ -179,39 +146,6 @@ public class WallpaperUtils {
         return SemWallpaperColors.getBlankWallpaperColors();
     }
 
-    public static Size getLogicalDisplaySize(Context context) {
-        Configuration configuration = context.getResources().getConfiguration();
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int i = configuration.orientation;
-        Display defaultDisplay = ((WindowManager) context.getSystemService("window")).getDefaultDisplay();
-        Point point = new Point();
-        defaultDisplay.getRealSize(point);
-        int i2 = point.x;
-        int i3 = point.y;
-        boolean z = configuration.semMobileKeyboardCovered == 1;
-        int i4 = z ? displayMetrics.widthPixels : i == 1 ? i2 : i3;
-        if (z) {
-            i2 = displayMetrics.heightPixels;
-        } else if (i == 1) {
-            i2 = i3;
-        }
-        PackageManager packageManager = context.getPackageManager();
-        if (packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet") && i4 < i2 && i == 2) {
-            Log.d("WallpaperUtils", "getLogicalDisplaySize: Adjust width and height for landscape tablet.");
-            int i5 = i4;
-            i4 = i2;
-            i2 = i5;
-        }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i4, i2, "getLogicalDisplaySize: ", " x ", " dm ");
-        m.append(displayMetrics.widthPixels);
-        m.append(" x ");
-        m.append(displayMetrics.heightPixels);
-        m.append(" orientation:");
-        m.append(i);
-        Log.d("WallpaperUtils", m.toString());
-        return new Size(i4, i2);
-    }
-
     public static Point getRealScreenSize(Context context, boolean z) {
         DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
         Point point = new Point();
@@ -244,16 +178,16 @@ public class WallpaperUtils {
     public static Bitmap getScreenShot(Context context, int i, int i2, int i3) {
         WindowManager windowManager = (WindowManager) context.getSystemService("window");
         SemWindowManager semWindowManager = SemWindowManager.getInstance();
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getScreenShot: start, width = ", " , height = ", " , mRotation = ");
-        m.append(i3);
-        Log.i("WallpaperUtils", m.toString());
-        Bitmap screenshot = semWindowManager.screenshot(windowManager.getDefaultDisplay().getDisplayId(), 2000, false, new Rect(0, 0, 0, 0), Math.min(i, i2), Math.max(i, i2), true, 0, true);
-        Log.i("WallpaperUtils", "getScreenShot: end bitmap = " + screenshot);
-        if (i3 == 0 || screenshot == null) {
-            return screenshot;
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "getScreenShot: start, width = ", " , height = ", " , mRotation = ");
+        sbM.append(i3);
+        Log.i("WallpaperUtils", sbM.toString());
+        Bitmap bitmapScreenshot = semWindowManager.screenshot(windowManager.getDefaultDisplay().getDisplayId(), 2000, false, new Rect(0, 0, 0, 0), Math.min(i, i2), Math.max(i, i2), true, 0, true);
+        Log.i("WallpaperUtils", "getScreenShot: end bitmap = " + bitmapScreenshot);
+        if (i3 == 0 || bitmapScreenshot == null) {
+            return bitmapScreenshot;
         }
-        Bitmap rotatedBitmap = getRotatedBitmap(screenshot, i3);
-        screenshot.recycle();
+        Bitmap rotatedBitmap = getRotatedBitmap(bitmapScreenshot, i3);
+        bitmapScreenshot.recycle();
         return rotatedBitmap;
     }
 
@@ -363,9 +297,9 @@ public class WallpaperUtils {
         if (!LsRune.WALLPAPER_VIDEO_WALLPAPER) {
             return false;
         }
-        int semGetWallpaperType = WallpaperManager.getInstance(context).semGetWallpaperType(sCurrentWhich);
-        if (semGetWallpaperType != 8) {
-            return semGetWallpaperType == 3 && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).isPluginWallpaperRequired(sCurrentWhich) && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).containsVideo(sCurrentWhich);
+        int iSemGetWallpaperType = WallpaperManager.getInstance(context).semGetWallpaperType(sCurrentWhich);
+        if (iSemGetWallpaperType != 8) {
+            return iSemGetWallpaperType == 3 && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).isPluginWallpaperRequired(sCurrentWhich) && ((PluginWallpaperController) Dependency.sDependency.getDependencyInner(PluginWallpaperController.class)).containsVideo(sCurrentWhich);
         }
         return true;
     }
@@ -381,9 +315,9 @@ public class WallpaperUtils {
         boolean z = LsRune.WALLPAPER_SUB_DISPLAY_MODE;
         if (z && !LsRune.WALLPAPER_SUB_WATCHFACE) {
             sCurrentWhich = z ? WallpaperManager.getInstance(context).getLidState() == 0 ? 18 : 6 : 2;
-            SemWallpaperColors semGetWallpaperColors = wallpaperManager.semGetWallpaperColors(6);
+            SemWallpaperColors semWallpaperColorsSemGetWallpaperColors = wallpaperManager.semGetWallpaperColors(6);
             SparseArray sparseArray = sCachedWallpaperColors;
-            sparseArray.put(4, semGetWallpaperColors);
+            sparseArray.put(4, semWallpaperColorsSemGetWallpaperColors);
             sparseArray.put(16, wallpaperManager.semGetWallpaperColors(18));
         }
         mIsEmergencyMode = Settings.System.getIntForUser(context.getContentResolver(), SettingsHelper.INDEX_EMERGENCY_MODE, 0, i) == 1;
@@ -438,10 +372,10 @@ public class WallpaperUtils {
     }
 
     public static boolean isWhiteKeyguardWallpaper(String str) {
-        long convertFlag = SystemUIWidgetUtil.convertFlag(str);
-        if (convertFlag < 0) {
+        long jConvertFlag = SystemUIWidgetUtil.convertFlag(str);
+        if (jConvertFlag < 0) {
             return false;
         }
-        return isWhiteKeyguardWallpaper(convertFlag, false);
+        return isWhiteKeyguardWallpaper(jConvertFlag, false);
     }
 }

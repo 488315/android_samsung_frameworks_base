@@ -23,33 +23,32 @@ public class KernelCpuThreadReaderDiff {
         this.mMinimumTotalCpuUsageMillis = i;
     }
 
-    public ArrayList<KernelCpuThreadReader.ProcessCpuUsage> getProcessCpuUsageDiffed() {
-        Map<ThreadKey, int[]> map;
+    public ArrayList<KernelCpuThreadReader.ProcessCpuUsage> getProcessCpuUsageDiffed() throws Throwable {
+        Map<ThreadKey, int[]> mapCreateCpuUsageMap;
         Throwable th;
-        ArrayList<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsage;
         try {
-            processCpuUsage = this.mReader.getProcessCpuUsage();
-            map = createCpuUsageMap(processCpuUsage);
-        } catch (Throwable th2) {
-            map = null;
-            th = th2;
-        }
-        try {
-            if (this.mPreviousCpuUsage != null) {
-                for (int i = 0; i < processCpuUsage.size(); i++) {
-                    KernelCpuThreadReader.ProcessCpuUsage processCpuUsage2 = processCpuUsage.get(i);
-                    changeToDiffs(this.mPreviousCpuUsage, processCpuUsage2);
-                    applyThresholding(processCpuUsage2);
+            ArrayList<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsage = this.mReader.getProcessCpuUsage();
+            mapCreateCpuUsageMap = createCpuUsageMap(processCpuUsage);
+            try {
+                if (this.mPreviousCpuUsage != null) {
+                    for (int i = 0; i < processCpuUsage.size(); i++) {
+                        KernelCpuThreadReader.ProcessCpuUsage processCpuUsage2 = processCpuUsage.get(i);
+                        changeToDiffs(this.mPreviousCpuUsage, processCpuUsage2);
+                        applyThresholding(processCpuUsage2);
+                    }
+                    this.mPreviousCpuUsage = mapCreateCpuUsageMap;
+                    return processCpuUsage;
                 }
-                this.mPreviousCpuUsage = map;
-                return processCpuUsage;
+                this.mPreviousCpuUsage = mapCreateCpuUsageMap;
+                return null;
+            } catch (Throwable th2) {
+                th = th2;
+                this.mPreviousCpuUsage = mapCreateCpuUsageMap;
+                throw th;
             }
-            this.mPreviousCpuUsage = map;
-            return null;
         } catch (Throwable th3) {
+            mapCreateCpuUsageMap = null;
             th = th3;
-            this.mPreviousCpuUsage = map;
-            throw th;
         }
     }
 

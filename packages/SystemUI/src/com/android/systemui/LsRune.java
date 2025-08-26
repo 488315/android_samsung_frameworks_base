@@ -9,7 +9,6 @@ import com.android.systemui.util.SafeUIState;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LsRune extends Rune {
     public static final boolean AOD_BRIGHTNESS_CONTROL;
@@ -105,14 +104,14 @@ public class LsRune extends Rune {
         boolean z = true;
         String string = ("user".equals(Build.TYPE) || (SystemProperties.getInt("persist.debug.subdisplay_test_mode", 0) & 1) == 0) ? SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY") : "";
         String string2 = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_POLICY_LIST");
-        boolean contains = string.contains("LOCKSCREEN");
-        KEYGUARD_SUB_DISPLAY_LOCK = contains;
+        boolean zContains = string.contains("LOCKSCREEN");
+        KEYGUARD_SUB_DISPLAY_LOCK = zContains;
         KEYGUARD_SUB_DISPLAY_COVER = string.contains("COVER");
         KEYGUARD_SUB_DISPLAY_ROTATIONAL = string.contains("ROTATIONAL");
         KEYGUARD_FBE = DeviceType.isFbeSupported();
         KEYGUARD_LOCK_SITUATION_VOLUME = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_SITUATION_EXTENSION", "TRUE");
         KEYGUARD_EXTRA_USER_PRESENT = SystemProperties.get("ro.csc.sales_code").equals("VZW") || SystemProperties.get("ro.csc.sales_code").equals("VPP");
-        KEYGUARD_DELAY_NOTIFY_DRAWN_PREMIUM_WATCH = contains && SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
+        KEYGUARD_DELAY_NOTIFY_DRAWN_PREMIUM_WATCH = zContains && SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
         KEYGUARD_ADJUST_REFRESH_RATE_USER_ACTIVITY = Integer.parseInt("3") > 1;
         KEYGUARD_HOMEHUB = DeviceType.isHomeHubDevice();
         KEYGUARD_ALLOW_ROTATION = !string2.contains("DISALLOW_DEFAULT_ROTATION") && DeviceType.isTablet();
@@ -132,11 +131,11 @@ public class LsRune extends Rune {
         SECURITY_BOUNCER_WINDOW = z5;
         SECURITY_COLOR_CURVE_BLUR = z5;
         SECURITY_SWIPE_BOUNCER = "US".equals(SystemProperties.get("ro.csc.countryiso_code", ""));
-        boolean contains2 = string.contains("LOCKSCREEN");
-        SECURITY_SUB_DISPLAY_LOCK = contains2;
+        boolean zContains2 = string.contains("LOCKSCREEN");
+        SECURITY_SUB_DISPLAY_LOCK = zContains2;
         SECURITY_SUB_DISPLAY_COVER = string.contains("COVER");
-        SECURITY_ARROW_VIEW = contains2 || DeviceType.isTablet();
-        SECURITY_DEAD_ZONE = (!DeviceType.isDeadzoneSupported() || DeviceType.isTablet() || contains2) ? false : true;
+        SECURITY_ARROW_VIEW = zContains2 || DeviceType.isTablet();
+        SECURITY_DEAD_ZONE = (!DeviceType.isDeadzoneSupported() || DeviceType.isTablet() || zContains2) ? false : true;
         SECURITY_DEFAULT_LANDSCAPE = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_COMMON_CONFIG_PREFERRED_USER_ROTATION", 0) == 1;
         SECURITY_NAVBAR_ENABLED = BasicRune.NAVBAR_ENABLED;
         SECURITY_HAPTIC_FEEDBACK_ON_DC_MOTOR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_DC_MOTOR_HAPTIC_FEEDBACK");
@@ -145,24 +144,24 @@ public class LsRune extends Rune {
         SECURITY_FINGERPRINT_HOME = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_BIOAUTH_CONFIG_FINGERPRINT_FEATURES", "capacitive_home_tablet");
         SECURITY_BACKGROUND_AUTHENTICATION = false;
         SECURITY_PUNCH_HOLE_FACE_VI = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_PUNCHHOLE_VI", "face");
-        boolean isTablet = DeviceType.isTablet();
-        SECURITY_BIOMETRICS_TABLET = isTablet;
+        boolean zIsTablet = DeviceType.isTablet();
+        SECURITY_BIOMETRICS_TABLET = zIsTablet;
         SECURITY_SIM_PERSO_LOCK = TelephonyFeatures.isCountrySpecific(0, new String[]{"KOR"});
         SECURITY_ESIM = DeviceType.isSupportESim();
         SECURITY_BLOCK_CARRIER_TEXT_WHEN_SIM_NOT_READY = string2.contains("BlockCarrierTextWhenSimNotReady") || DeviceType.isWiFiOnlyDevice();
-        SECURITY_FINGERPRINT_GUIDE_POPUP = isTablet;
-        SECURITY_CONTINUITY_LOCKSCREEN_VI = contains2;
+        SECURITY_FINGERPRINT_GUIDE_POPUP = zIsTablet;
+        SECURITY_CONTINUITY_LOCKSCREEN_VI = zContains2;
         COVER_SUPPORTED = DeviceType.isCoverSupported();
         COVER_SAFEMODE = SafeUIState.isSysUiSafeModeEnabled();
-        boolean contains3 = string.contains("VIRTUAL_DISPLAY");
-        COVER_VIRTUAL_DISPLAY = contains3;
-        COVER_ADJUST_REFRESH_RATE = contains3 && Integer.parseInt("3") > 0;
+        boolean zContains3 = string.contains("VIRTUAL_DISPLAY");
+        COVER_VIRTUAL_DISPLAY = zContains3;
+        COVER_ADJUST_REFRESH_RATE = zContains3 && Integer.parseInt("3") > 0;
         COVER_DEBUG_CAMERA_COVER_ON_SIDE_COVER = z2 && SystemProperties.getBoolean("debug.camera_cover_on_side_cover", false);
-        boolean contains4 = string.contains("COVER");
-        SUBSCREEN_UI = contains4;
-        boolean z6 = contains4 && string.contains("WATCHFACE");
+        boolean zContains4 = string.contains("COVER");
+        SUBSCREEN_UI = zContains4;
+        boolean z6 = zContains4 && string.contains("WATCHFACE");
         SUBSCREEN_WATCHFACE = z6;
-        boolean z7 = contains4 && string.contains("LARGESCREEN");
+        boolean z7 = zContains4 && string.contains("LARGESCREEN");
         SUBSCREEN_LARGE_FRONT_SUB_DISPLAY = z7;
         SUBSCREEN_DEBUG_ACTIVITY_ON_MAIN = z6 && z2 && SystemProperties.getBoolean("debug.subscreen_activity_on_main", false);
         SUBSCREEN_REMOTE_TRANSITION = SystemProperties.getBoolean("persist.subscreen_remote_transition", false) && z7;
@@ -202,16 +201,16 @@ public class LsRune extends Rune {
         WALLPAPER_ROTATABLE_WALLPAPER = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "ROTATABLE") || DeviceType.isTablet();
         WALLPAPER_SUB_DISPLAY_MODE = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "LID");
         WALLPAPER_FESTIVAL_WALLPAPER = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "FESTIVAL");
-        boolean contains5 = string.contains("WATCHFACE");
-        WALLPAPER_SUB_WATCHFACE = contains5;
-        boolean contains6 = string.contains("VIRTUAL_DISPLAY");
-        WALLPAPER_VIRTUAL_DISPLAY = contains6;
-        boolean contains7 = string.contains("LARGESCREEN");
-        WALLPAPER_PLAY_GIF = contains5 || contains6;
+        boolean zContains5 = string.contains("WATCHFACE");
+        WALLPAPER_SUB_WATCHFACE = zContains5;
+        boolean zContains6 = string.contains("VIRTUAL_DISPLAY");
+        WALLPAPER_VIRTUAL_DISPLAY = zContains6;
+        boolean zContains7 = string.contains("LARGESCREEN");
+        WALLPAPER_PLAY_GIF = zContains5 || zContains6;
         WALLPAPER_DESKTOP_STANDALONE_MODE_WALLPAPER = SystemProperties.getInt("ro.build.version.oneui", 0) < 50100;
-        WALLPAPER_SUPPORT_SUIT_CASE = contains7 || z9;
+        WALLPAPER_SUPPORT_SUIT_CASE = zContains7 || z9;
         SemCscFeature.getInstance().getString("CscFeature_Common_ConfigSpecialEdition").contains("MaisonMargiela");
-        if (!contains5 && !contains6) {
+        if (!zContains5 && !zContains6) {
             z = false;
         }
         PLUGIN_LOCK_MULTIPLE_ACTIVATION = z;

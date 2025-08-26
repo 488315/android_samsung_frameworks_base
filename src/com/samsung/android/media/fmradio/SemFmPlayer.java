@@ -38,12 +38,12 @@ public class SemFmPlayer {
     }
 
     public boolean enableRadio() throws SemFmPlayerException {
-        boolean equalsIgnoreCase = "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", LsConstants.TAG_UNKNOWN));
-        if (isAirPlaneMode() && !equalsIgnoreCase) {
+        boolean zEqualsIgnoreCase = "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", LsConstants.TAG_UNKNOWN));
+        if (isAirPlaneMode() && !zEqualsIgnoreCase) {
             throw new SemAirPlaneModeEnabledException("AirPlane mode is on.", new Throwable("AirPlane mode is on."));
         }
-        boolean z = false;
-        if (equalsIgnoreCase) {
+        boolean zOn = false;
+        if (zEqualsIgnoreCase) {
             try {
                 return this.mPlayer.on_in_testmode();
             } catch (RemoteException e) {
@@ -58,14 +58,14 @@ public class SemFmPlayer {
             throw new SemHeadsetNotConnectedException("Headset is not presents.", new Throwable("Headset is not presents."));
         }
         try {
-            z = this.mPlayer.on();
+            zOn = this.mPlayer.on();
         } catch (RemoteException e2) {
             remoteError(e2);
         }
         if (isBatteryLow()) {
             throw new SemLowBatteryException("Battery is low.", new Throwable("Batterys is low."));
         }
-        return z;
+        return zOn;
     }
 
     public boolean isHeadsetPlugged() throws SemFmPlayerException {
@@ -400,14 +400,14 @@ public class SemFmPlayer {
     }
 
     private void checkBusy() throws SemFmPlayerException {
-        int i;
+        int iIsBusy;
         try {
-            i = this.mPlayer.isBusy();
+            iIsBusy = this.mPlayer.isBusy();
         } catch (RemoteException e) {
             this.remoteError(e);
-            i = 0;
+            iIsBusy = 0;
         }
-        if (i == 1) {
+        if (iIsBusy == 1) {
             throw new SemFmPlayerScanningException("Player is scanning channel", new Throwable("Player is busy in scanning. Use cancelScan to stop scanning"));
         }
     }

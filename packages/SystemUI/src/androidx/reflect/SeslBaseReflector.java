@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslBaseReflector {
     private SeslBaseReflector() {
@@ -34,38 +33,38 @@ public class SeslBaseReflector {
     }
 
     public static Field getDeclaredField(Class cls, String str) {
-        Field field;
+        Field declaredField;
         try {
-            field = cls.getDeclaredField(str);
-            if (field != null) {
+            declaredField = cls.getDeclaredField(str);
+            if (declaredField != null) {
                 try {
-                    field.setAccessible(true);
+                    declaredField.setAccessible(true);
                 } catch (NoSuchFieldException unused) {
                     Log.w("SeslBaseReflector", "Reflector did not find field = ".concat(str));
-                    return field;
+                    return declaredField;
                 }
             }
-            return field;
+            return declaredField;
         } catch (NoSuchFieldException unused2) {
-            field = null;
+            declaredField = null;
         }
     }
 
-    public static Method getDeclaredMethod(String str, String str2, Class... clsArr) {
+    public static Method getDeclaredMethod(String str, String str2, Class... clsArr) throws NoSuchMethodException, SecurityException {
         Class cls = getClass(str);
-        Method method = null;
+        Method declaredMethod = null;
         if (cls != null) {
             try {
-                method = cls.getDeclaredMethod(str2, clsArr);
-                if (method != null) {
-                    method.setAccessible(true);
+                declaredMethod = cls.getDeclaredMethod(str2, clsArr);
+                if (declaredMethod != null) {
+                    declaredMethod.setAccessible(true);
                 }
-                return method;
+                return declaredMethod;
             } catch (NoSuchMethodException unused) {
                 Log.w("SeslBaseReflector", "Reflector did not find method = ".concat(str2));
             }
         }
-        return method;
+        return declaredMethod;
     }
 
     public static Method getMethod(String str, String str2, Class... clsArr) {
@@ -116,17 +115,17 @@ public class SeslBaseReflector {
     }
 
     public static Method getDeclaredMethod(Class cls, String str, Class... clsArr) {
-        Method method = null;
+        Method declaredMethod = null;
         if (cls != null) {
             try {
-                method = cls.getDeclaredMethod(str, clsArr);
-                if (method != null) {
-                    method.setAccessible(true);
+                declaredMethod = cls.getDeclaredMethod(str, clsArr);
+                if (declaredMethod != null) {
+                    declaredMethod.setAccessible(true);
                 }
-                return method;
+                return declaredMethod;
             } catch (NoSuchMethodException unused) {
                 Log.w("SeslBaseReflector", "Reflector did not find method = ".concat(str));
-                return method;
+                return declaredMethod;
             }
         }
         Log.d("SeslBaseReflector", "classT = " + cls + ", methodName = " + str);

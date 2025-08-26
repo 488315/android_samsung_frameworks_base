@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SpringAnimatorSet {
     public int animationsRunning;
@@ -80,7 +79,7 @@ public final class SpringAnimatorSet {
             Object obj = arrayList.get(i2);
             i2++;
             Animator animator = (Animator) obj;
-            animator.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet$start$1
+            animator.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet.start.1
                 @Override // androidx.core.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator2) {
                     SpringAnimatorSet.access$checkIfAllAnimationsEnded(SpringAnimatorSet.this);
@@ -108,7 +107,7 @@ public final class SpringAnimatorSet {
             Object obj2 = arrayList2.get(i3);
             i3++;
             DynamicAnimation dynamicAnimation = (DynamicAnimation) obj2;
-            dynamicAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet$start$2
+            dynamicAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet.start.2
                 @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
                 public final void onAnimationEnd(DynamicAnimation dynamicAnimation2, boolean z, float f, float f2) {
                     SpringAnimatorSet.access$checkIfAllAnimationsEnded(SpringAnimatorSet.this);
@@ -122,7 +121,7 @@ public final class SpringAnimatorSet {
             Object obj3 = arrayList3.get(i);
             i++;
             SpringAnimatorSet springAnimatorSet = (SpringAnimatorSet) obj3;
-            springAnimatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet$start$3
+            springAnimatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SpringAnimatorSet.start.3
                 @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator2) {
                     SpringAnimatorSet.access$checkIfAllAnimationsEnded(SpringAnimatorSet.this);

@@ -27,7 +27,6 @@ import com.samsung.android.util.SemLog;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SamsungSearchProvider extends ContentProvider {
     private static final String API_VERSION = "2.0.0";
@@ -49,12 +48,12 @@ public abstract class SamsungSearchProvider extends ContentProvider {
         if (this.mInfo.icon != 0) {
             return Icon.createWithResource(getContext(), this.mInfo.icon);
         }
-        Intent makeAppLaunchIntent = makeAppLaunchIntent();
-        if (makeAppLaunchIntent != null) {
+        Intent intentMakeAppLaunchIntent = makeAppLaunchIntent();
+        if (intentMakeAppLaunchIntent != null) {
             try {
-                ResolveInfo resolveActivity = getContext().getPackageManager().resolveActivity(makeAppLaunchIntent, 0);
-                if (resolveActivity != null) {
-                    return Icon.createWithResource(getContext(), resolveActivity.getIconResource());
+                ResolveInfo resolveInfoResolveActivity = getContext().getPackageManager().resolveActivity(intentMakeAppLaunchIntent, 0);
+                if (resolveInfoResolveActivity != null) {
+                    return Icon.createWithResource(getContext(), resolveInfoResolveActivity.getIconResource());
                 }
             } catch (Exception e) {
                 try {
@@ -75,12 +74,12 @@ public abstract class SamsungSearchProvider extends ContentProvider {
         if (providerInfo.labelRes != 0) {
             return (String) providerInfo.loadLabel(getContext().getPackageManager());
         }
-        Intent makeAppLaunchIntent = makeAppLaunchIntent();
-        if (makeAppLaunchIntent != null) {
+        Intent intentMakeAppLaunchIntent = makeAppLaunchIntent();
+        if (intentMakeAppLaunchIntent != null) {
             try {
-                ResolveInfo resolveActivity = getContext().getPackageManager().resolveActivity(makeAppLaunchIntent, 0);
-                if (resolveActivity != null) {
-                    return (String) resolveActivity.loadLabel(getContext().getPackageManager());
+                ResolveInfo resolveInfoResolveActivity = getContext().getPackageManager().resolveActivity(intentMakeAppLaunchIntent, 0);
+                if (resolveInfoResolveActivity != null) {
+                    return (String) resolveInfoResolveActivity.loadLabel(getContext().getPackageManager());
                 }
             } catch (Exception e) {
                 try {
@@ -193,8 +192,8 @@ public abstract class SamsungSearchProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public final Cursor query(Uri uri, String[] strArr, String str, String[] strArr2, String str2, CancellationSignal cancellationSignal) {
-        String str3;
+    public final Cursor query(Uri uri, String[] strArr, String str, String[] strArr2, String str2, CancellationSignal cancellationSignal) throws NumberFormatException {
+        String strDecode;
         int i;
         if (this.mMatcher.match(uri) != 1) {
             throw new UnsupportedOperationException("Unknown Uri " + uri);
@@ -203,9 +202,9 @@ public abstract class SamsungSearchProvider extends ContentProvider {
             throw new UnsupportedOperationException("Unsupported Uri " + uri);
         }
         try {
-            str3 = Uri.decode(uri.getQueryParameter("query"));
+            strDecode = Uri.decode(uri.getQueryParameter("query"));
         } catch (Exception unused) {
-            str3 = null;
+            strDecode = null;
         }
         String queryParameter = uri.getQueryParameter(KnoxContainerManager.CONTAINER_CREATION_REQUEST_ID);
         try {
@@ -213,20 +212,20 @@ public abstract class SamsungSearchProvider extends ContentProvider {
         } catch (Exception unused2) {
             i = -1;
         }
-        if (!TextUtils.isEmpty(str3) && !TextUtils.isEmpty(queryParameter)) {
+        if (!TextUtils.isEmpty(strDecode) && !TextUtils.isEmpty(queryParameter)) {
             try {
-                SearchResult searchResult = getSearchResult(str3, i, cancellationSignal);
+                SearchResult searchResult = getSearchResult(strDecode, i, cancellationSignal);
                 if (searchResult == null) {
                     try {
                         Log.d("SamSearch_SamsungSearchProvider", "SearchResult is NULL");
                     } catch (Exception unused3) {
                     }
-                    searchResult = new SimpleSearchResult(str3);
+                    searchResult = new SimpleSearchResult(strDecode);
                 }
                 String[] itemColumns = searchResult.getItemColumns();
-                Object[] copyOf = Arrays.copyOf(new String[]{"key", "icon", "text", "text2", "group", "view_payload", "action1_label", "action1_payload", "action2_label", "action2_payload", "action3_label", "action3_payload"}, itemColumns.length + 12);
-                System.arraycopy(itemColumns, 0, copyOf, 12, itemColumns.length);
-                String[] strArr3 = (String[]) copyOf;
+                Object[] objArrCopyOf = Arrays.copyOf(new String[]{"key", "icon", "text", "text2", "group", "view_payload", "action1_label", "action1_payload", "action2_label", "action2_payload", "action3_label", "action3_payload"}, itemColumns.length + 12);
+                System.arraycopy(itemColumns, 0, objArrCopyOf, 12, itemColumns.length);
+                String[] strArr3 = (String[]) objArrCopyOf;
                 String[] strArr4 = (String[]) Arrays.copyOf(new String[]{API_VERSION, searchResult.query, searchResult.getResultType(), "1", String.valueOf(searchResult.totalCount)}, strArr3.length);
                 MatrixCursor matrixCursor = new MatrixCursor(strArr3);
                 matrixCursor.addRow(strArr4);
@@ -237,16 +236,16 @@ public abstract class SamsungSearchProvider extends ContentProvider {
                     Object obj = arrayList.get(i2);
                     i2++;
                     SearchResultItem searchResultItem = (SearchResultItem) obj;
-                    String str4 = searchResultItem.itemKey;
+                    String str3 = searchResultItem.itemKey;
                     Uri uri2 = searchResultItem.icon;
-                    String uri3 = uri2 != null ? uri2.toString() : null;
+                    String string = uri2 != null ? uri2.toString() : null;
                     String group = searchResultItem.getGroup();
                     IntentResultItemPayload intentResultItemPayload = searchResultItem.payload;
-                    String[] strArr5 = {str4, uri3, searchResultItem.text, searchResultItem.text2, group, intentResultItemPayload != null ? intentResultItemPayload.getStringFromPayload() : null, searchResultItem.getActionLabel(0), searchResultItem.getActionPayloadStr(0), searchResultItem.getActionLabel(1), searchResultItem.getActionPayloadStr(1), searchResultItem.getActionLabel(2), searchResultItem.getActionPayloadStr(2)};
-                    Object[] transformCursorRaw = searchResult.transformCursorRaw(searchResultItem);
-                    Object[] copyOf2 = Arrays.copyOf(strArr5, transformCursorRaw.length + 12);
-                    System.arraycopy(transformCursorRaw, 0, copyOf2, 12, transformCursorRaw.length);
-                    matrixCursor.addRow(copyOf2);
+                    String[] strArr5 = {str3, string, searchResultItem.text, searchResultItem.text2, group, intentResultItemPayload != null ? intentResultItemPayload.getStringFromPayload() : null, searchResultItem.getActionLabel(0), searchResultItem.getActionPayloadStr(0), searchResultItem.getActionLabel(1), searchResultItem.getActionPayloadStr(1), searchResultItem.getActionLabel(2), searchResultItem.getActionPayloadStr(2)};
+                    Object[] objArrTransformCursorRaw = searchResult.transformCursorRaw(searchResultItem);
+                    Object[] objArrCopyOf2 = Arrays.copyOf(strArr5, objArrTransformCursorRaw.length + 12);
+                    System.arraycopy(objArrTransformCursorRaw, 0, objArrCopyOf2, 12, objArrTransformCursorRaw.length);
+                    matrixCursor.addRow(objArrCopyOf2);
                 }
                 return matrixCursor;
             } catch (Exception e) {

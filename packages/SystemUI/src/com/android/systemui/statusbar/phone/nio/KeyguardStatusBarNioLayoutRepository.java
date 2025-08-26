@@ -23,12 +23,12 @@ import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardStatusBarNioLayoutRepository implements BootAnimationFinishedCache.BootAnimationFinishedListener, ConfigurationController.ConfigurationListener, IndicatorGardenPresenter.GardenListener, View.OnLayoutChangeListener, SettingsHelper.OnChangedCallback, OngoingCallListener {
     public final BootAnimationFinishedCache bootAnimationFinishedCache;
@@ -43,7 +43,6 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
     public final OngoingCallController ongoingCallController;
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
@@ -79,7 +78,6 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
             printLog(" SKIP notifyNioUpdated() - isBootAnimationFinished not yet ");
             return;
         }
-        printLog(" * notifyNioUpdated() !!!  size[" + this.listeners.size() + "]  ");
         for (PluginFaceWidgetManager$$ExternalSyntheticLambda0 pluginFaceWidgetManager$$ExternalSyntheticLambda0 : this.listeners) {
             if (this.listeners.contains(pluginFaceWidgetManager$$ExternalSyntheticLambda0)) {
                 pluginFaceWidgetManager$$ExternalSyntheticLambda0.onNioLayoutUpdated(this.nioLayoutModel);
@@ -99,26 +97,26 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
 
     @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
     public final void onChanged(Uri uri) {
-        final boolean isShowNotificationOnKeyguard = this.settingsHelper.isShowNotificationOnKeyguard();
-        boolean isNotificationAsDot = this.settingsHelper.isNotificationAsDot();
-        final boolean isNotificationIconsOnlyOn = this.settingsHelper.isNotificationIconsOnlyOn();
-        boolean isNotificationAsCard = this.settingsHelper.isNotificationAsCard();
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("SettingsHelper.onChanged() showOnKeyguard:", ", dot?", ", icon?", isShowNotificationOnKeyguard, isNotificationAsDot);
-        m.append(isNotificationIconsOnlyOn);
-        m.append(", card?");
-        m.append(isNotificationAsCard);
-        printLog(m.toString());
+        final boolean zIsShowNotificationOnKeyguard = this.settingsHelper.isShowNotificationOnKeyguard();
+        boolean zIsNotificationAsDot = this.settingsHelper.isNotificationAsDot();
+        final boolean zIsNotificationIconsOnlyOn = this.settingsHelper.isNotificationIconsOnlyOn();
+        boolean zIsNotificationAsCard = this.settingsHelper.isNotificationAsCard();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("SettingsHelper.onChanged() showOnKeyguard:", ", dot?", ", icon?", zIsShowNotificationOnKeyguard, zIsNotificationAsDot);
+        sbM.append(zIsNotificationIconsOnlyOn);
+        sbM.append(", card?");
+        sbM.append(zIsNotificationAsCard);
+        printLog(sbM.toString());
         final KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel = this.nioLayoutModel;
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onChanged$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
-                boolean z = isShowNotificationOnKeyguard;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
+                boolean z = zIsShowNotificationOnKeyguard;
                 if (keyguardStatusBarNioLayoutModel2.isShowNotificationOnKeyguard != z) {
                     keyguardStatusBarNioLayoutModel2.isShowNotificationOnKeyguard = z;
                     keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
                 }
-                boolean z2 = isNotificationIconsOnlyOn;
+                boolean z2 = zIsNotificationIconsOnlyOn;
                 if (keyguardStatusBarNioLayoutModel2.isNotificationIconsOnlyOn != z2) {
                     keyguardStatusBarNioLayoutModel2.isNotificationIconsOnlyOn = z2;
                     keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
@@ -129,7 +127,7 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onDensityOrFontScaleChanged() {
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onDensityOrFontScaleChanged$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository.onDensityOrFontScaleChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 KeyguardStatusBarNioLayoutRepository.this.printLog("onDensityOrFontScaleChanged()");
@@ -138,14 +136,14 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
                 keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onDensityOrFontScaleChanged$1$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository2 = keyguardStatusBarNioLayoutRepository;
                         int i = keyguardStatusBarNioLayoutRepository2.gardenScale.getLatestScaleModel(keyguardStatusBarNioLayoutRepository2.context).iconSize;
                         if (keyguardStatusBarNioLayoutModel2.iconSize != i) {
                             keyguardStatusBarNioLayoutModel2.iconSize = i;
                             keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
                         }
-                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel3 = KeyguardStatusBarNioLayoutModel.this;
+                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel3 = keyguardStatusBarNioLayoutModel;
                         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository3 = keyguardStatusBarNioLayoutRepository;
                         float f = keyguardStatusBarNioLayoutRepository3.gardenScale.getLatestScaleModel(keyguardStatusBarNioLayoutRepository3.context).ratio;
                         if (keyguardStatusBarNioLayoutModel3.iconScaleRatio == f) {
@@ -166,7 +164,7 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onGardenChanged$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                 IndicatorGardenModel indicatorGardenModel2 = indicatorGardenModel;
                 int i = indicatorGardenModel2.paddingLeft;
                 if (keyguardStatusBarNioLayoutModel2.paddingLeft != i) {
@@ -208,15 +206,15 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onLayoutChange$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                int m;
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                int iM;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                 if (keyguardStatusBarNioLayoutModel2.isRtl) {
-                    m = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.keyguard_carrier_text_nio_default_margin, i3) - i;
+                    iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.keyguard_carrier_text_nio_default_margin, i3) - i;
                 } else {
-                    m = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.keyguard_carrier_text_nio_default_margin, i3);
+                    iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.keyguard_carrier_text_nio_default_margin, i3);
                 }
-                if (keyguardStatusBarNioLayoutModel2.containerStartX != m) {
-                    keyguardStatusBarNioLayoutModel2.containerStartX = m;
+                if (keyguardStatusBarNioLayoutModel2.containerStartX != iM) {
+                    keyguardStatusBarNioLayoutModel2.containerStartX = iM;
                     keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
                 }
             }
@@ -230,7 +228,7 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onLayoutDirectionChanged$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                 boolean z2 = z;
                 if (keyguardStatusBarNioLayoutModel2.isRtl != z2) {
                     keyguardStatusBarNioLayoutModel2.isRtl = z2;
@@ -242,14 +240,14 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
 
     @Override // com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener
     public final void onOngoingCallStateChanged() {
-        final boolean hasOngoingCall = this.ongoingCallController.hasOngoingCall();
-        printLog("onOngoingCallStateChanged(" + hasOngoingCall + ")");
+        final boolean zHasOngoingCall = this.ongoingCallController.hasOngoingCall();
+        printLog("onOngoingCallStateChanged(" + zHasOngoingCall + ")");
         final KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel = this.nioLayoutModel;
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onOngoingCallStateChanged$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
-                boolean z = hasOngoingCall;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
+                boolean z = zHasOngoingCall;
                 if (keyguardStatusBarNioLayoutModel2.visibleCallChip != z) {
                     keyguardStatusBarNioLayoutModel2.visibleCallChip = z;
                     keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
@@ -260,7 +258,7 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onSmallestScreenWidthChanged() {
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onSmallestScreenWidthChanged$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository.onSmallestScreenWidthChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 KeyguardStatusBarNioLayoutRepository.this.printLog("onSmallestScreenWidthChanged()");
@@ -269,14 +267,14 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
                 keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$onSmallestScreenWidthChanged$1$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository2 = keyguardStatusBarNioLayoutRepository;
                         int i = keyguardStatusBarNioLayoutRepository2.gardenScale.getLatestScaleModel(keyguardStatusBarNioLayoutRepository2.context).iconSize;
                         if (keyguardStatusBarNioLayoutModel2.iconSize != i) {
                             keyguardStatusBarNioLayoutModel2.iconSize = i;
                             keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
                         }
-                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel3 = KeyguardStatusBarNioLayoutModel.this;
+                        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel3 = keyguardStatusBarNioLayoutModel;
                         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository3 = keyguardStatusBarNioLayoutRepository;
                         float f = keyguardStatusBarNioLayoutRepository3.gardenScale.getLatestScaleModel(keyguardStatusBarNioLayoutRepository3.context).ratio;
                         if (keyguardStatusBarNioLayoutModel3.iconScaleRatio == f) {
@@ -291,48 +289,50 @@ public final class KeyguardStatusBarNioLayoutRepository implements BootAnimation
     }
 
     public final void printLog(String str) {
-        KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel = this.nioLayoutModel;
-        keyguardStatusBarNioLayoutModel.getClass();
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        int i = keyguardStatusBarNioLayoutModel.paddingLeft;
-        int i2 = keyguardStatusBarNioLayoutModel.paddingRight;
-        int i3 = keyguardStatusBarNioLayoutModel.totalHeight;
-        int i4 = keyguardStatusBarNioLayoutModel.topMargin;
-        int i5 = keyguardStatusBarNioLayoutModel.bottomMargin;
-        int endMargin = keyguardStatusBarNioLayoutModel.getEndMargin();
-        boolean z = keyguardStatusBarNioLayoutModel.isRtl;
-        int i6 = keyguardStatusBarNioLayoutModel.containerEndX;
-        int i7 = keyguardStatusBarNioLayoutModel.containerStartX;
-        int i8 = keyguardStatusBarNioLayoutModel.iconSize;
-        String format = decimalFormat.format(Float.valueOf(keyguardStatusBarNioLayoutModel.iconScaleRatio));
-        boolean z2 = keyguardStatusBarNioLayoutModel.visibleCallChip;
-        boolean z3 = keyguardStatusBarNioLayoutModel.isShowNotificationOnKeyguard;
-        boolean z4 = keyguardStatusBarNioLayoutModel.isNotificationIconsOnlyOn;
-        int i9 = keyguardStatusBarNioLayoutModel.numberOfNio;
-        String format2 = decimalFormat.format(Float.valueOf(keyguardStatusBarNioLayoutModel.keyguardStatusBarViewAlpha));
-        int i10 = keyguardStatusBarNioLayoutModel.keyguardStatusBarViewVisibility;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "[pL:", ", pR:", ", H:");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", mT:", i4, ", mB:");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i5, ", mR:", endMargin, ", rtl?");
-        m.append(z);
-        m.append(", (x2:");
-        m.append(i6);
-        m.append(" - x1:");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i7, " = avW:", i6 - i7, "), iconSize:");
-        m.append(i8);
-        m.append(", ratio:");
-        m.append(format);
-        m.append(", callChip?");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z2, ", settingsShow?", z3, ", settingNio?");
-        m.append(z4);
-        m.append(", numberOfNio?");
-        m.append(i9);
-        m.append(", KSBV(a:");
-        m.append(format2);
-        m.append("-v:");
-        m.append(i10);
-        m.append(")] ");
-        MediaSessions$H$$ExternalSyntheticOutline0.m(" ", str, "     ", m.toString(), "KeyguardStatusBarNioLayoutRepository");
+        if (DeviceType.isEngOrUTBinary()) {
+            KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel = this.nioLayoutModel;
+            keyguardStatusBarNioLayoutModel.getClass();
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            int i = keyguardStatusBarNioLayoutModel.paddingLeft;
+            int i2 = keyguardStatusBarNioLayoutModel.paddingRight;
+            int i3 = keyguardStatusBarNioLayoutModel.totalHeight;
+            int i4 = keyguardStatusBarNioLayoutModel.topMargin;
+            int i5 = keyguardStatusBarNioLayoutModel.bottomMargin;
+            int endMargin = keyguardStatusBarNioLayoutModel.getEndMargin();
+            boolean z = keyguardStatusBarNioLayoutModel.isRtl;
+            int i6 = keyguardStatusBarNioLayoutModel.containerEndX;
+            int i7 = keyguardStatusBarNioLayoutModel.containerStartX;
+            int i8 = keyguardStatusBarNioLayoutModel.iconSize;
+            String str2 = decimalFormat.format(Float.valueOf(keyguardStatusBarNioLayoutModel.iconScaleRatio));
+            boolean z2 = keyguardStatusBarNioLayoutModel.visibleCallChip;
+            boolean z3 = keyguardStatusBarNioLayoutModel.isShowNotificationOnKeyguard;
+            boolean z4 = keyguardStatusBarNioLayoutModel.isNotificationIconsOnlyOn;
+            int i9 = keyguardStatusBarNioLayoutModel.numberOfNio;
+            String str3 = decimalFormat.format(Float.valueOf(keyguardStatusBarNioLayoutModel.keyguardStatusBarViewAlpha));
+            int i10 = keyguardStatusBarNioLayoutModel.keyguardStatusBarViewVisibility;
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "[pL:", ", pR:", ", H:");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", mT:", i4, ", mB:");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i5, ", mR:", endMargin, ", rtl?");
+            sbM.append(z);
+            sbM.append(", (x2:");
+            sbM.append(i6);
+            sbM.append(" - x1:");
+            ViewPager$$ExternalSyntheticOutline0.m(sbM, i7, " = avW:", i6 - i7, "), iconSize:");
+            sbM.append(i8);
+            sbM.append(", ratio:");
+            sbM.append(str2);
+            sbM.append(", callChip?");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z2, ", settingsShow?", z3, ", settingNio?");
+            sbM.append(z4);
+            sbM.append(", numberOfNio?");
+            sbM.append(i9);
+            sbM.append(", KSBV(a:");
+            sbM.append(str3);
+            sbM.append("-v:");
+            sbM.append(i10);
+            sbM.append(")] ");
+            MediaSessions$H$$ExternalSyntheticOutline0.m(" ", str, "     ", sbM.toString(), "KeyguardStatusBarNioLayoutRepository");
+        }
     }
 
     public final boolean updateNioLayoutMargin() {

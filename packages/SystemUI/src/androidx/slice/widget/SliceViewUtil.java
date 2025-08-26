@@ -12,15 +12,14 @@ import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
 import java.util.Calendar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceViewUtil {
     private SliceViewUtil() {
     }
 
     public static Bitmap getCircularBitmap(Bitmap bitmap) {
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint();
         Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         paint.setAntiAlias(true);
@@ -28,20 +27,20 @@ public class SliceViewUtil {
         canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static int getColorAttr(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
-        int color = obtainStyledAttributes.getColor(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
+        int color = typedArrayObtainStyledAttributes.getColor(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         return color;
     }
 
     public static Drawable getDrawable(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
+        typedArrayObtainStyledAttributes.recycle();
         return drawable;
     }
 

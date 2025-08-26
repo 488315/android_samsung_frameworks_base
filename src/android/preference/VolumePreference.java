@@ -2,6 +2,7 @@ package android.preference;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -39,9 +40,9 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
 
     public VolumePreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.VolumePreference, i, i2);
-        this.mStreamType = obtainStyledAttributes.getInt(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.VolumePreference, i, i2);
+        this.mStreamType = typedArrayObtainStyledAttributes.getInt(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public VolumePreference(Context context, AttributeSet attributeSet, int i) {
@@ -61,7 +62,7 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
     }
 
     @Override // android.preference.SeekBarDialogPreference, android.preference.DialogPreference
-    protected void onBindDialogView(View view) {
+    protected void onBindDialogView(View view) throws Resources.NotFoundException {
         super.onBindDialogView(view);
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
         SeekBarVolumizer seekBarVolumizer = new SeekBarVolumizer(getContext(), this.mStreamType, null, this);
@@ -124,9 +125,9 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
         if (this.mSeekBarVolumizer != null) {
             Dialog dialog = getDialog();
             if (dialog != null && dialog.isShowing()) {
-                View findViewById = dialog.getWindow().getDecorView().findViewById(R.id.seekbar);
-                if (findViewById != null) {
-                    findViewById.setOnKeyListener(null);
+                View viewFindViewById = dialog.getWindow().getDecorView().findViewById(R.id.seekbar);
+                if (viewFindViewById != null) {
+                    viewFindViewById.setOnKeyListener(null);
                 }
                 this.mSeekBarVolumizer.revertVolume();
             }
@@ -146,11 +147,11 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         SeekBarVolumizer seekBarVolumizer = this.mSeekBarVolumizer;
         if (seekBarVolumizer != null) {
             seekBarVolumizer.onSaveInstanceState(savedState.getVolumeStore());

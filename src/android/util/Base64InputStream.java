@@ -68,9 +68,9 @@ public class Base64InputStream extends FilterInputStream {
         if (this.outputStart >= this.outputEnd) {
             return 0L;
         }
-        long min = Math.min(j, r1 - r0);
-        this.outputStart = (int) (this.outputStart + min);
-        return min;
+        long jMin = Math.min(j, r1 - r0);
+        this.outputStart = (int) (this.outputStart + jMin);
+        return jMin;
     }
 
     @Override // java.io.FilterInputStream, java.io.InputStream
@@ -97,25 +97,25 @@ public class Base64InputStream extends FilterInputStream {
         if (i3 >= i4) {
             return -1;
         }
-        int min = Math.min(i2, i4 - i3);
-        System.arraycopy(this.coder.output, this.outputStart, bArr, i, min);
-        this.outputStart += min;
-        return min;
+        int iMin = Math.min(i2, i4 - i3);
+        System.arraycopy(this.coder.output, this.outputStart, bArr, i, iMin);
+        this.outputStart += iMin;
+        return iMin;
     }
 
     private void refill() throws IOException {
-        boolean process;
+        boolean zProcess;
         if (this.eof) {
             return;
         }
-        int read = this.in.read(this.inputBuffer);
-        if (read == -1) {
+        int i = this.in.read(this.inputBuffer);
+        if (i == -1) {
             this.eof = true;
-            process = this.coder.process(EMPTY, 0, 0, true);
+            zProcess = this.coder.process(EMPTY, 0, 0, true);
         } else {
-            process = this.coder.process(this.inputBuffer, 0, read, false);
+            zProcess = this.coder.process(this.inputBuffer, 0, i, false);
         }
-        if (!process) {
+        if (!zProcess) {
             throw new Base64DataException("bad base-64");
         }
         this.outputEnd = this.coder.op;

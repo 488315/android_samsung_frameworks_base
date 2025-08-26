@@ -23,11 +23,11 @@ public interface InputFilter {
         public CharSequence filter(CharSequence charSequence, int i, int i2, Spanned spanned, int i3, int i4) {
             CharSequenceWrapper charSequenceWrapper = new CharSequenceWrapper(charSequence, i, i2);
             int i5 = i2 - i;
-            int i6 = 0;
-            while (i6 < i5) {
-                int codePointAt = Character.codePointAt(charSequenceWrapper, i6);
-                if (!Character.isLowerCase(codePointAt) && !Character.isTitleCase(codePointAt)) {
-                    i6 += Character.charCount(codePointAt);
+            int iCharCount = 0;
+            while (iCharCount < i5) {
+                int iCodePointAt = Character.codePointAt(charSequenceWrapper, iCharCount);
+                if (!Character.isLowerCase(iCodePointAt) && !Character.isTitleCase(iCodePointAt)) {
+                    iCharCount += Character.charCount(iCodePointAt);
                 } else {
                     boolean z = charSequence instanceof Spanned;
                     CharSequence upperCase = TextUtils.toUpperCase(this.mLocale, charSequenceWrapper, z);

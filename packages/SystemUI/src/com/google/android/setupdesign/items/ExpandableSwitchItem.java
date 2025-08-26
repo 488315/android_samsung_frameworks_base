@@ -20,7 +20,6 @@ import com.google.android.setupdesign.util.LayoutStyler;
 import com.google.android.setupdesign.view.CheckableLinearLayout;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     public final AnonymousClass1 accessibilityDelegate;
@@ -82,32 +81,32 @@ public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.O
         super.onBindView(view);
         view.setClickable(false);
         if (PartnerConfigHelper.isGlifExpressiveEnabled(view.getContext())) {
-            View findViewById = view.findViewById(R.id.sud_items_more_info);
-            if (findViewById != null) {
+            View viewFindViewById = view.findViewById(R.id.sud_items_more_info);
+            if (viewFindViewById != null) {
                 if (this.canExpanded) {
-                    findViewById.setOnClickListener(this);
+                    viewFindViewById.setOnClickListener(this);
                 } else {
-                    findViewById.setVisibility(8);
+                    viewFindViewById.setVisibility(8);
                 }
             }
-            View findViewById2 = view.findViewById(R.id.sud_items_switch);
-            if (!this.isSwitchItem && findViewById2 != null) {
-                findViewById2.setVisibility(8);
+            View viewFindViewById2 = view.findViewById(R.id.sud_items_switch);
+            if (!this.isSwitchItem && viewFindViewById2 != null) {
+                viewFindViewById2.setVisibility(8);
             }
         } else {
-            View findViewById3 = view.findViewById(R.id.sud_items_expandable_switch_content);
-            findViewById3.setOnClickListener(this);
-            if (findViewById3 instanceof CheckableLinearLayout) {
-                CheckableLinearLayout checkableLinearLayout = (CheckableLinearLayout) findViewById3;
+            View viewFindViewById3 = view.findViewById(R.id.sud_items_expandable_switch_content);
+            viewFindViewById3.setOnClickListener(this);
+            if (viewFindViewById3 instanceof CheckableLinearLayout) {
+                CheckableLinearLayout checkableLinearLayout = (CheckableLinearLayout) viewFindViewById3;
                 checkableLinearLayout.setChecked(this.isExpanded);
                 checkableLinearLayout.setAccessibilityLiveRegion(this.isExpanded ? 1 : 0);
                 ViewCompat.setAccessibilityDelegate(checkableLinearLayout, this.accessibilityDelegate);
             }
-            LayoutStyler.applyPartnerCustomizationLayoutPaddingStyle(findViewById3);
+            LayoutStyler.applyPartnerCustomizationLayoutPaddingStyle(viewFindViewById3);
         }
-        TypedArray obtainStyledAttributes = view.getContext().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = view.getContext().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(0);
+        typedArrayObtainStyledAttributes.recycle();
         if (colorStateList != null) {
             TextView textView = (TextView) view.findViewById(R.id.sud_items_title);
             for (Drawable drawable : textView.getCompoundDrawables()) {
@@ -261,11 +260,11 @@ public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.O
                 return true;
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudExpandableSwitchItem);
-        this.collapsedSummary = obtainStyledAttributes.getText(0);
-        this.expandedSummary = obtainStyledAttributes.getText(1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudExpandableSwitchItem);
+        this.collapsedSummary = typedArrayObtainStyledAttributes.getText(0);
+        this.expandedSummary = typedArrayObtainStyledAttributes.getText(1);
         if (!PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
-            this.iconGravity = obtainStyledAttributes.getInt(7, 48);
+            this.iconGravity = typedArrayObtainStyledAttributes.getInt(7, 48);
         } else {
             this.layoutRes = R.layout.sud_items_expandable_switch_expressive;
             ArrayList arrayList = this.observers;
@@ -276,9 +275,9 @@ public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.O
                 i++;
                 ((RecyclerItemAdapter) obj).mObservable.notifyItemRangeChanged(0, 1, null);
             }
-            this.iconGravity = obtainStyledAttributes.getInt(7, 16);
+            this.iconGravity = typedArrayObtainStyledAttributes.getInt(7, 16);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX WARN: Type inference failed for: r2v0, types: [com.google.android.setupdesign.items.ExpandableSwitchItem$1] */
@@ -316,11 +315,11 @@ public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.O
                 return true;
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudExpandableSwitchItem);
-        this.collapsedSummary = obtainStyledAttributes.getText(0);
-        this.expandedSummary = obtainStyledAttributes.getText(1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudExpandableSwitchItem);
+        this.collapsedSummary = typedArrayObtainStyledAttributes.getText(0);
+        this.expandedSummary = typedArrayObtainStyledAttributes.getText(1);
         if (!PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
-            this.iconGravity = obtainStyledAttributes.getInt(7, 48);
+            this.iconGravity = typedArrayObtainStyledAttributes.getInt(7, 48);
         } else {
             this.layoutRes = R.layout.sud_items_expandable_switch_expressive;
             ArrayList arrayList = this.observers;
@@ -331,9 +330,9 @@ public class ExpandableSwitchItem extends SwitchItem implements CompoundButton.O
                 i++;
                 ((RecyclerItemAdapter) obj).mObservable.notifyItemRangeChanged(0, 1, null);
             }
-            this.iconGravity = obtainStyledAttributes.getInt(7, 16);
+            this.iconGravity = typedArrayObtainStyledAttributes.getInt(7, 16);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.isSwitchItem = z;
         this.canExpanded = z2;
     }

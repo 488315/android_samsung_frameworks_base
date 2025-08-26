@@ -52,9 +52,9 @@ public final class OverlayManagerTransaction implements Parcelable {
     }
 
     private OverlayManagerTransaction(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mRequests = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mRequests = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mRequests.add(new Request(parcel.readInt(), (OverlayIdentifier) parcel.readParcelable(null, OverlayIdentifier.class), parcel.readInt(), parcel.readBundle(null), Arrays.asList((OverlayConstraint[]) parcel.createTypedArray(OverlayConstraint.CREATOR))));
         }
         this.mSelfTargeting = false;

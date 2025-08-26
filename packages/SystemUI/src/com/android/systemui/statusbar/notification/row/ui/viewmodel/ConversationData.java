@@ -2,7 +2,6 @@ package com.android.systemui.statusbar.notification.row.ui.viewmodel;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConversationData {
     public final ConversationAvatar avatar;
@@ -28,9 +27,9 @@ public final class ConversationData {
 
     public final int hashCode() {
         CharSequence charSequence = this.conversationSenderName;
-        int hashCode = (this.avatar.hashCode() + ((charSequence == null ? 0 : charSequence.hashCode()) * 31)) * 31;
+        int iHashCode = (this.avatar.hashCode() + ((charSequence == null ? 0 : charSequence.hashCode()) * 31)) * 31;
         CharSequence charSequence2 = this.summarization;
-        return hashCode + (charSequence2 != null ? charSequence2.hashCode() : 0);
+        return iHashCode + (charSequence2 != null ? charSequence2.hashCode() : 0);
     }
 
     public final String toString() {

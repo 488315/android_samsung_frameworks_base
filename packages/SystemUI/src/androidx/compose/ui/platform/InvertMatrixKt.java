@@ -2,11 +2,10 @@ package androidx.compose.ui.platform;
 
 import androidx.compose.material3.internal.colorUtil.Frame$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class InvertMatrixKt {
     /* renamed from: invertTo-JiSxe2E, reason: not valid java name */
-    public static final boolean m704invertToJiSxe2E(float[] fArr, float[] fArr2) {
+    public static final boolean m706invertToJiSxe2E(float[] fArr, float[] fArr2) {
         if (fArr.length < 16 || fArr2.length < 16) {
             return false;
         }

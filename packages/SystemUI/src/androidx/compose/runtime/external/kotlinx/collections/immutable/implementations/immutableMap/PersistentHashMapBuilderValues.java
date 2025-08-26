@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import kotlin.collections.AbstractMutableCollection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PersistentHashMapBuilderValues<K, V> extends AbstractMutableCollection implements Collection<V> {
     public final PersistentHashMapBuilder builder;

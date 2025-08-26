@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class OutputMediaItemListProxy {
     public final Context mContext;
@@ -115,22 +114,22 @@ public class OutputMediaItemListProxy {
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         ArrayList arrayList3 = new ArrayList();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         Iterator it = list.iterator();
         while (it.hasNext()) {
             MediaDevice mediaDevice2 = (MediaDevice) it.next();
             String id = mediaDevice2.getId();
-            MediaItem createDeviceMediaItem = MediaItem.createDeviceMediaItem(mediaDevice2);
+            MediaItem mediaItemCreateDeviceMediaItem = MediaItem.createDeviceMediaItem(mediaDevice2);
             if (z && mediaDevice2.isMutingExpectedDevice()) {
-                arrayList.add(0, createDeviceMediaItem);
+                arrayList.add(0, mediaItemCreateDeviceMediaItem);
             } else if (!z && set.contains(mediaDevice2.getId())) {
-                arrayList.add(createDeviceMediaItem);
+                arrayList.add(mediaItemCreateDeviceMediaItem);
             } else if (mediaDevice2.isSuggestedDevice()) {
-                arrayList2.add(createDeviceMediaItem);
+                arrayList2.add(mediaItemCreateDeviceMediaItem);
             } else {
-                arrayList3.add(createDeviceMediaItem);
+                arrayList3.add(mediaItemCreateDeviceMediaItem);
             }
-            hashMap.put(id, createDeviceMediaItem);
+            map.put(id, mediaItemCreateDeviceMediaItem);
         }
         CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
         CopyOnWriteArrayList copyOnWriteArrayList2 = new CopyOnWriteArrayList();
@@ -141,9 +140,9 @@ public class OutputMediaItemListProxy {
             copyOnWriteArrayList3.addAll(arrayList3);
         } else {
             HashSet hashSet = new HashSet();
-            updateMediaItems(this.mSelectedMediaItems, copyOnWriteArrayList, hashMap, hashSet);
-            updateMediaItems(this.mSuggestedMediaItems, copyOnWriteArrayList2, hashMap, hashSet);
-            updateMediaItems(this.mSpeakersAndDisplaysMediaItems, copyOnWriteArrayList3, hashMap, hashSet);
+            updateMediaItems(this.mSelectedMediaItems, copyOnWriteArrayList, map, hashSet);
+            updateMediaItems(this.mSuggestedMediaItems, copyOnWriteArrayList2, map, hashSet);
+            updateMediaItems(this.mSpeakersAndDisplaysMediaItems, copyOnWriteArrayList3, map, hashSet);
             ArrayList arrayList4 = new ArrayList();
             arrayList4.addAll(getRemainingMediaItems(arrayList, hashSet));
             arrayList4.addAll(getRemainingMediaItems(arrayList2, hashSet));
@@ -153,9 +152,9 @@ public class OutputMediaItemListProxy {
         if (!copyOnWriteArrayList.isEmpty()) {
             Optional optional = ((MediaItem) copyOnWriteArrayList.get(0)).mMediaDeviceOptional;
             if (optional.isPresent()) {
-                MediaItem createDeviceMediaItem2 = MediaItem.createDeviceMediaItem((MediaDevice) optional.get(), true);
+                MediaItem mediaItemCreateDeviceMediaItem2 = MediaItem.createDeviceMediaItem((MediaDevice) optional.get(), true);
                 copyOnWriteArrayList.remove(0);
-                copyOnWriteArrayList.add(0, createDeviceMediaItem2);
+                copyOnWriteArrayList.add(0, mediaItemCreateDeviceMediaItem2);
             }
         }
         ((CopyOnWriteArrayList) this.mSelectedMediaItems).clear();

@@ -46,9 +46,9 @@ public interface IAnalogAudioInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAnalogAudioInfo");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAnalogAudioInfo)) {
-                return (IAnalogAudioInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAnalogAudioInfo");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAnalogAudioInfo)) {
+                return (IAnalogAudioInfo) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IAnalogAudioInfo extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle analogAudioInfo = getAnalogAudioInfo(readString);
+                Bundle analogAudioInfo = getAnalogAudioInfo(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(analogAudioInfo, 1);
                 return true;
@@ -103,17 +103,17 @@ public interface IAnalogAudioInfo extends IInterface {
 
             @Override // android.media.tv.extension.signal.IAnalogAudioInfo
             public Bundle getAnalogAudioInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAnalogAudioInfo");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAnalogAudioInfo");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

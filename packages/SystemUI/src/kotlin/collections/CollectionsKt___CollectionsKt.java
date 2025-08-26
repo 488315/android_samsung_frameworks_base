@@ -2,6 +2,7 @@ package kotlin.collections;
 
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.preference.PreferenceGroupAdapter$$ExternalSyntheticOutline0;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,19 +22,18 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt;
 import kotlin.text.StringsKt__AppendableKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJvmKt {
     public static double averageOfDouble(Iterable iterable) {
         ArrayList arrayList = (ArrayList) iterable;
         int size = arrayList.size();
         int i = 0;
-        double d = 0.0d;
+        double dDoubleValue = 0.0d;
         int i2 = 0;
         while (i2 < size) {
             Object obj = arrayList.get(i2);
             i2++;
-            d += ((Number) obj).doubleValue();
+            dDoubleValue += ((Number) obj).doubleValue();
             i++;
             if (i < 0) {
                 CollectionsKt__CollectionsKt.throwCountOverflow();
@@ -43,15 +43,15 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
         if (i == 0) {
             return Double.NaN;
         }
-        return d / i;
+        return dDoubleValue / i;
     }
 
     public static double averageOfFloat(Iterable iterable) {
         Iterator it = iterable.iterator();
-        double d = 0.0d;
+        double dFloatValue = 0.0d;
         int i = 0;
         while (it.hasNext()) {
-            d += ((Number) it.next()).floatValue();
+            dFloatValue += ((Number) it.next()).floatValue();
             i++;
             if (i < 0) {
                 CollectionsKt__CollectionsKt.throwCountOverflow();
@@ -61,7 +61,7 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
         if (i == 0) {
             return Double.NaN;
         }
-        return d / i;
+        return dFloatValue / i;
     }
 
     public static List chunked(Iterable iterable, int i) {
@@ -106,7 +106,7 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
 
     public static List drop(Iterable iterable, int i) {
         ArrayList arrayList;
-        Object obj;
+        Object objLast;
         if (i < 0) {
             throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "Requested element count ", " is less than zero.").toString());
         }
@@ -120,7 +120,7 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
             }
             if (size == 1) {
                 if (iterable instanceof List) {
-                    obj = last((List) iterable);
+                    objLast = last((List) iterable);
                 } else {
                     Iterator it = iterable.iterator();
                     if (!it.hasNext()) {
@@ -130,9 +130,9 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
                     while (it.hasNext()) {
                         next = it.next();
                     }
-                    obj = next;
+                    objLast = next;
                 }
-                return Collections.singletonList(obj);
+                return Collections.singletonList(objLast);
             }
             arrayList = new ArrayList(size);
             if (iterable instanceof List) {
@@ -155,9 +155,9 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
             arrayList = new ArrayList();
         }
         int i2 = 0;
-        for (Object obj2 : iterable) {
+        for (Object obj : iterable) {
             if (i2 >= i) {
-                arrayList.add(obj2);
+                arrayList.add(obj);
             } else {
                 i2++;
             }
@@ -250,7 +250,7 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
         return mutableSet;
     }
 
-    public static final void joinTo(Iterable iterable, Appendable appendable, CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, Function1 function1) {
+    public static final void joinTo(Iterable iterable, Appendable appendable, CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, Function1 function1) throws IOException {
         appendable.append(charSequence2);
         int i = 0;
         for (Object obj : iterable) {
@@ -263,14 +263,14 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
         appendable.append(charSequence3);
     }
 
-    public static /* synthetic */ void joinTo$default(Iterable iterable, Appendable appendable, CharSequence charSequence, Function1 function1, int i) {
+    public static /* synthetic */ void joinTo$default(Iterable iterable, Appendable appendable, CharSequence charSequence, Function1 function1, int i) throws IOException {
         if ((i & 64) != 0) {
             function1 = null;
         }
         joinTo(iterable, appendable, charSequence, "", "", function1);
     }
 
-    public static String joinToString$default(Iterable iterable, CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, Function1 function1, int i) {
+    public static String joinToString$default(Iterable iterable, CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, Function1 function1, int i) throws IOException {
         if ((i & 1) != 0) {
             charSequence = ", ";
         }
@@ -300,16 +300,16 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
     }
 
     /* renamed from: maxOrNull, reason: collision with other method in class */
-    public static Float m3430maxOrNull(Iterable iterable) {
+    public static Float m3450maxOrNull(Iterable iterable) {
         Iterator it = iterable.iterator();
         if (!it.hasNext()) {
             return null;
         }
-        float floatValue = ((Number) it.next()).floatValue();
+        float fFloatValue = ((Number) it.next()).floatValue();
         while (it.hasNext()) {
-            floatValue = Math.max(floatValue, ((Number) it.next()).floatValue());
+            fFloatValue = Math.max(fFloatValue, ((Number) it.next()).floatValue());
         }
-        return Float.valueOf(floatValue);
+        return Float.valueOf(fFloatValue);
     }
 
     public static Comparable minOrNull(Iterable iterable) {
@@ -417,11 +417,11 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
 
     public static int sumOfInt(Iterable iterable) {
         Iterator it = iterable.iterator();
-        int i = 0;
+        int iIntValue = 0;
         while (it.hasNext()) {
-            i += ((Number) it.next()).intValue();
+            iIntValue += ((Number) it.next()).intValue();
         }
-        return i;
+        return iIntValue;
     }
 
     public static List take(Iterable iterable, int i) {
@@ -603,13 +603,13 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
     }
 
     public static List minus(Iterable iterable, Iterable iterable2) {
-        Collection convertToListIfNotCollection = CollectionsKt__MutableCollectionsKt.convertToListIfNotCollection(iterable2);
-        if (convertToListIfNotCollection.isEmpty()) {
+        Collection collectionConvertToListIfNotCollection = CollectionsKt__MutableCollectionsKt.convertToListIfNotCollection(iterable2);
+        if (collectionConvertToListIfNotCollection.isEmpty()) {
             return toList(iterable);
         }
         ArrayList arrayList = new ArrayList();
         for (Object obj : iterable) {
-            if (!convertToListIfNotCollection.contains(obj)) {
+            if (!collectionConvertToListIfNotCollection.contains(obj)) {
                 arrayList.add(obj);
             }
         }

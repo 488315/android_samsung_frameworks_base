@@ -45,9 +45,9 @@ public interface IPassChecker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPassChecker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPassChecker)) {
-                return (IPassChecker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPassChecker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPassChecker)) {
+                return (IPassChecker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface IPassChecker extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String hasPermission = hasPermission(readString);
+                String strHasPermission = hasPermission(string);
                 parcel2.writeNoException();
-                parcel2.writeString(hasPermission);
+                parcel2.writeString(strHasPermission);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,17 +102,17 @@ public interface IPassChecker extends IInterface {
 
             @Override // com.samsung.android.pass.IPassChecker
             public String hasPermission(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPassChecker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IPassChecker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

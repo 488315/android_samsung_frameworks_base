@@ -55,17 +55,17 @@ public class WakeupMessage implements AlarmManager.OnAlarmListener {
         return (AlarmManager) context.getSystemService("alarm");
     }
 
-    public synchronized void schedule(long j) {
+    public synchronized void schedule(long j) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            this.mAlarmManager.setExact(2, j, this.mCmdName, this, this.mHandler);
-            this.mScheduled = true;
+            try {
+                this.mAlarmManager.setExact(2, j, this.mCmdName, this, this.mHandler);
+                this.mScheduled = true;
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -79,7 +79,7 @@ public class WakeupMessage implements AlarmManager.OnAlarmListener {
     @Override // android.app.AlarmManager.OnAlarmListener
     public void onAlarm() {
         boolean z;
-        Message obtain;
+        Message messageObtain;
         synchronized (this) {
             z = this.mScheduled;
             this.mScheduled = false;
@@ -87,12 +87,12 @@ public class WakeupMessage implements AlarmManager.OnAlarmListener {
         if (z) {
             Runnable runnable = this.mRunnable;
             if (runnable == null) {
-                obtain = this.mHandler.obtainMessage(this.mCmd, this.mArg1, this.mArg2, this.mObj);
+                messageObtain = this.mHandler.obtainMessage(this.mCmd, this.mArg1, this.mArg2, this.mObj);
             } else {
-                obtain = Message.obtain(this.mHandler, runnable);
+                messageObtain = Message.obtain(this.mHandler, runnable);
             }
-            this.mHandler.dispatchMessage(obtain);
-            obtain.recycle();
+            this.mHandler.dispatchMessage(messageObtain);
+            messageObtain.recycle();
         }
     }
 }

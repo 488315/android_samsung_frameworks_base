@@ -15,7 +15,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteViewModelImpl$carrierText$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Context $context;
@@ -24,7 +23,6 @@ final class DeviceBasedSatelliteViewModelImpl$carrierText$1 extends SuspendLambd
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -59,9 +57,9 @@ final class DeviceBasedSatelliteViewModelImpl$carrierText$1 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         DeviceBasedSatelliteViewModelImpl$carrierText$1 deviceBasedSatelliteViewModelImpl$carrierText$1 = new DeviceBasedSatelliteViewModelImpl$carrierText$1(this.$logBuffer, this.$context, (Continuation) obj3);
-        deviceBasedSatelliteViewModelImpl$carrierText$1.Z$0 = booleanValue;
+        deviceBasedSatelliteViewModelImpl$carrierText$1.Z$0 = zBooleanValue;
         deviceBasedSatelliteViewModelImpl$carrierText$1.L$0 = (SatelliteConnectionState) obj2;
         return deviceBasedSatelliteViewModelImpl$carrierText$1.invokeSuspend(Unit.INSTANCE);
     }
@@ -76,10 +74,10 @@ final class DeviceBasedSatelliteViewModelImpl$carrierText$1 extends SuspendLambd
         boolean z = this.Z$0;
         SatelliteConnectionState satelliteConnectionState = (SatelliteConnectionState) this.L$0;
         LogBuffer logBuffer = this.$logBuffer;
-        LogMessage obtain = logBuffer.obtain("DeviceBasedSatelliteViewModel", LogLevel.INFO, new DeviceBasedSatelliteViewModelImpl$carrierText$1$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        ((LogMessageImpl) obtain).str1 = satelliteConnectionState.name();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DeviceBasedSatelliteViewModel", LogLevel.INFO, new DeviceBasedSatelliteViewModelImpl$carrierText$1$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        ((LogMessageImpl) logMessageObtain).str1 = satelliteConnectionState.name();
+        logBuffer.commit(logMessageObtain);
         if (!z) {
             return null;
         }

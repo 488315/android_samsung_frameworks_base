@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class SharedNotificationContainerViewModel$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -39,9 +38,9 @@ public final /* synthetic */ class SharedNotificationContainerViewModel$$Externa
                 StateFlow stateFlow = (StateFlow) sharedNotificationContainerViewModel.keyguardInteractor.notificationContainerBounds$delegate.getValue();
                 FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new SharedNotificationContainerViewModel$bounds$2$1(null), Utils.Companion.sample(sharedNotificationContainerViewModel.interactor.topPosition, sharedNotificationContainerViewModel.keyguardTransitionInteractor.isInTransition, ((ShadeInteractorImpl) sharedNotificationContainerViewModel.shadeInteractor).baseShadeInteractor.getQsExpansion()));
                 SharedNotificationContainerViewModel$bounds$2$2 sharedNotificationContainerViewModel$bounds$2$2 = new SharedNotificationContainerViewModel$bounds$2$2(sharedNotificationContainerViewModel, null);
-                FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 combine = FlowKt.combine(sharedNotificationContainerViewModel.isOnLockscreenWithoutShade, stateFlow, sharedNotificationContainerViewModel.paddingTopDimen, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, sharedNotificationContainerViewModel$bounds$2$2);
+                FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine = FlowKt.combine(sharedNotificationContainerViewModel.isOnLockscreenWithoutShade, stateFlow, sharedNotificationContainerViewModel.paddingTopDimen, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, sharedNotificationContainerViewModel$bounds$2$2);
                 SharingStarted.Companion.getClass();
-                return sharedNotificationContainerViewModel.dumpValue(FlowKt.stateIn(combine, (CoroutineScope) obj, SharingStarted.Companion.Lazily, new NotificationContainerBounds(0.0f, 0.0f, false, 7, null)), "bounds");
+                return sharedNotificationContainerViewModel.dumpValue(FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine, (CoroutineScope) obj, SharingStarted.Companion.Lazily, new NotificationContainerBounds(0.0f, 0.0f, false, 7, null)), "bounds");
             default:
                 CommunalSceneInteractor communalSceneInteractor = sharedNotificationContainerViewModel.communalSceneInteractor;
                 communalSceneInteractor.getClass();
